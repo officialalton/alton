@@ -1,20 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import { submitConsultRequest } from "./consult-actions";
+import { useRef, useState } from "react";
+import { submitHomepageConsultRequest } from "./consult-actions";
+import { trackEvent } from "@/lib/analytics/track";
+
+// M1 — 홈페이지 상담 신청 폼.
+// 2026-09-22(컨설턴트 스펙 Phase 2b, 사용자 승인 "지금 바로 랜딩 폼도 스펙대로
+// 고침") — 슬롯 선택 UI를 없앴다. 신청은 접수만 되고(status='requested',
+// starts_at=null), 관리자가 어드미션 컨설턴트를 배정하면 그 사람 전용
+// 스케줄링 링크가 담긴 안내 메일로 고객이 직접 시간을 고른다(더 이상 회사
+// 공용 캘린더를 홈페이지에 노출하지 않는다).
 
 export default function ConsultForm() {
   const [parentName, setParentName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [studentName, setStudentName] = useState("");
   const [studentGrade, setStudentGrade] = useState("");
-  const [location, setLocation] = useState("");
   const [concerns, setConcerns] = useState("");
   const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const submissionNonceRef = useRef<string | null>(null);
+  if (submissionNonceRef.current === null) {
+    submissionNonceRef.current = crypto.randomUUID();
+  }
+
+  function handleFormFocus() {
+    // 제품 분석 P0(2026-09-25) — 폼을 처음 열거나 작성을 시작한 시점(첫 입력 포커스)에
+    // 1회만 발생. submissionNonceRef는 이 폼 인스턴스마다 한 번만 만들어지므로
+    // onceKey로 쓰면 리렌더·재포커스로 중복 집계되지 않는다.
+    trackEvent("consultation_started", { entry_point: "landing_form" }, { onceKey: submissionNonceRef.current! });
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,16 +42,21 @@ export default function ConsultForm() {
     }
     setSubmitting(true);
     try {
-      await submitConsultRequest({
+      await submitHomepageConsultRequest({
         parentName,
         email,
         phone,
-        studentName,
         studentGrade,
-        location,
         concerns,
+        idempotencyKey: `${email.trim().toLowerCase()}-${submissionNonceRef.current}`,
       });
       setSubmitted(true);
+      // 서버 저장이 성공한 뒤에만 발생 — 실패 시(catch)에는 절대 보내지 않는다.
+      trackEvent(
+        "consultation_submitted",
+        { entry_point: "landing_form", consultation_type: "homepage" },
+        { onceKey: submissionNonceRef.current! }
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "신청에 실패했습니다.");
     } finally {
@@ -49,7 +71,8 @@ export default function ConsultForm() {
           상담 신청이 접수되었습니다.
         </p>
         <p className="text-[14px] text-grey-500">
-          영업일 기준 1~2일 내에 입력하신 연락처로 안내드리겠습니다.
+          담당 컨설턴트가 배정되면 예약 링크를 이메일로 보내드립니다. 그 링크에서
+          직접 편한 시간을 고르시면 상담이 확정됩니다.
         </p>
       </div>
     );
@@ -58,6 +81,7 @@ export default function ConsultForm() {
   return (
     <form
       onSubmit={handleSubmit}
+      onFocusCapture={handleFormFocus}
       className="rounded-2xl border-[1.5px] border-grey-200 bg-white px-6 py-8 sm:px-10 sm:py-10"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
@@ -86,26 +110,11 @@ export default function ConsultForm() {
             className={INPUT_CLASS}
           />
         </Field>
-        <Field label="학생 이름">
-          <input
-            value={studentName}
-            onChange={(e) => setStudentName(e.target.value)}
-            className={INPUT_CLASS}
-          />
-        </Field>
         <Field label="학년">
           <input
             value={studentGrade}
             onChange={(e) => setStudentGrade(e.target.value)}
             placeholder="예: 10학년"
-            className={INPUT_CLASS}
-          />
-        </Field>
-        <Field label="거주 지역">
-          <input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="예: 캘리포니아 서니베일"
             className={INPUT_CLASS}
           />
         </Field>

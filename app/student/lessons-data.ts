@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import type { LessonBookingData } from "./lesson-booking-data";
 
 export type LessonItem = {
   sessionId: string;
@@ -6,7 +7,12 @@ export type LessonItem = {
   subjectId: string;
   subjectName: string;
   teacherName: string;
-  sessionNumber: number;
+  // v3 예약(sessions/reservations)에는 회차 개념이 없어 null일 수 있다
+  // (2026-09-11 — "수업" 탭 예정 수업 목록이 legacy_sessions만 조회해 v3
+  // 전용 배정 자녀의 예정 수업이 학부모/학생 "수업" 탭에서 누락되던 문제
+  // 수정. app/student/dashboard-data.ts가 "홈" 탭에서 이미 쓰던 것과 동일한
+  // 패턴).
+  sessionNumber: number | null;
   unitTitle: string | null;
   status: string;
   scheduledAt: string | null;
@@ -20,7 +26,11 @@ function extractName(rel: unknown): string {
 
 export async function loadLessons(
   supabase: SupabaseClient,
-  studentId: string
+  studentId: string,
+  // v3 예약 데이터 — 호출자가 이미 loadLessonBookingData()로 가져온 결과를
+  // 그대로 넘긴다(같은 화면에서 두 번 조회하지 않기 위함). 넘기지 않으면
+  // 레거시만으로 동작(하위 호환).
+  lessonBooking?: LessonBookingData
 ): Promise<{ upcoming: LessonItem[]; past: LessonItem[] }> {
   const { data: enrollments } = await supabase
     .from("enrollments")
@@ -53,7 +63,7 @@ export async function loadLessons(
 
   const { data: sessions } = enrollmentIds.length
     ? await supabase
-        .from("sessions")
+        .from("legacy_sessions")
         .select(
           "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
         )
@@ -79,6 +89,48 @@ export async function loadLessons(
     };
     if (s.status === "upcoming") upcoming.push(item);
     else past.push(item);
+  }
+
+  // v3 예약(sessions/reservations) 병합 — dashboard-data.ts의 "홈" 탭과
+  // 동일하게 upcomingBookings를 그대로 재사용한다(중복 판정 로직을 새로
+  // 만들지 않음).
+  for (const b of lessonBooking?.upcomingBookings ?? []) {
+    const durationMinutes = Math.round(
+      (new Date(b.endsAt).getTime() - new Date(b.startsAt).getTime()) / 60_000
+    );
+    upcoming.push({
+      sessionId: b.sessionId,
+      enrollmentId: b.subjectEnrollmentId ?? "",
+      subjectId: "",
+      subjectName: b.subjectName,
+      teacherName: b.teacherName,
+      sessionNumber: null,
+      unitTitle: null,
+      status: "upcoming",
+      scheduledAt: b.startsAt,
+      durationMinutes,
+    });
+  }
+
+  // 2026-09-16(실사용 중 발견) — v3 지난 세션이 "지난 수업" 탭에서 전부
+  // 누락돼 있었다. 위 upcomingBookings 병합만 있고 지난 세션 병합이 없어,
+  // 완료된 v3 수업(체험 포함)이 학생/학부모 "레슨" 탭 어디에도 보이지 않았다.
+  // 이미 loadLessonBookingData()가 계산해둔 pastSessionsForReport(최근 14일,
+  // 확정 예약만)를 그대로 재사용한다(신고 대상 목록과 동일 기준 — 새 판정
+  // 로직을 만들지 않음).
+  for (const p of lessonBooking?.pastSessionsForReport ?? []) {
+    past.push({
+      sessionId: p.sessionId,
+      enrollmentId: "",
+      subjectId: "",
+      subjectName: p.subjectName,
+      teacherName: p.teacherName,
+      sessionNumber: null,
+      unitTitle: null,
+      status: "completed",
+      scheduledAt: p.startsAt,
+      durationMinutes: 0,
+    });
   }
 
   upcoming.sort(

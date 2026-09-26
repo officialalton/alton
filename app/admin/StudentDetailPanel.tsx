@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { setStudentStatus, adjustStudentCredit } from "./users-actions";
+import Link from "next/link";
+import { setStudentStatus, adjustStudentCredit, verifyStudentDateOfBirth } from "./users-actions";
 import type { CreditTransaction, StudentListItem } from "./users-data";
+import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
+import type { AdminSubject } from "./subject-data";
 
 const STATUS_LABEL: Record<string, string> = {
   active: "활성",
   pending: "매칭 대기",
   suspended: "일시정지",
+  inactive: "비활성(장기 휴면)",
 };
 
 const TX_TYPE_LABEL: Record<string, string> = {
@@ -21,11 +25,13 @@ const TX_TYPE_LABEL: Record<string, string> = {
 export default function StudentDetailPanel({
   student,
   history,
+  subjects,
   onBack,
   onUpdated,
 }: {
   student: StudentListItem;
   history: CreditTransaction[];
+  subjects: AdminSubject[];
   onBack: () => void;
   onUpdated: (patch: Partial<StudentListItem>, newTx?: CreditTransaction) => void;
 }) {
@@ -35,11 +41,43 @@ export default function StudentDetailPanel({
   const [reason, setReason] = useState("");
   const [adjusting, setAdjusting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [dobVerifiedAt, setDobVerifiedAt] = useState(student.dateOfBirthVerifiedAt);
+  const [verifying, setVerifying] = useState(false);
+  const [verifyError, setVerifyError] = useState<string | null>(null);
+  const [statusError, setStatusError] = useState<string | null>(null);
 
   async function handleStatusChange(next: string) {
+    // 2026-09-24(Section 2) — transition_account_status()는 허용된 전이만
+    // 통과시키는데(예: 'inactive'에서는 'active'로만 되돌릴 수 있음) 이
+    // 핸들러가 실패를 전혀 처리하지 않아, 거부돼도 드롭다운은 이미 새
+    // 값으로 낙관적 갱신된 채 남아 있었다(실제로는 안 바뀐 상태를 바뀐
+    // 것처럼 계속 보여주는 버그). TeacherDetailPanel과 같은 패턴으로 맞춘다.
+    const previous = status;
     setStatus(next);
-    await setStudentStatus(student.id, next as "active" | "pending" | "suspended");
-    onUpdated({ status: next });
+    setStatusError(null);
+    try {
+      await setStudentStatus(student.id, next as "active" | "pending" | "suspended" | "inactive");
+      onUpdated({ status: next });
+    } catch (e) {
+      setStatus(previous);
+      setStatusError(e instanceof Error ? e.message : "상태 전환에 실패했습니다.");
+    }
+  }
+
+  async function handleVerifyDateOfBirth() {
+    if (verifying || dobVerifiedAt) return;
+    setVerifyError(null);
+    setVerifying(true);
+    try {
+      await verifyStudentDateOfBirth(student.id);
+      const now = new Date().toISOString();
+      setDobVerifiedAt(now);
+      onUpdated({ dateOfBirthVerifiedAt: now });
+    } catch (e) {
+      setVerifyError(e instanceof Error ? e.message : "확인 처리에 실패했습니다.");
+    } finally {
+      setVerifying(false);
+    }
   }
 
   async function handleAdjust() {
@@ -68,7 +106,7 @@ export default function StudentDetailPanel({
 
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+      <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
         ← 뒤로
       </button>
       <h1 className="text-[20px] font-extrabold text-ink mb-1.5">{student.name}</h1>
@@ -91,18 +129,87 @@ export default function StudentDetailPanel({
             </option>
           ))}
         </select>
+        {statusError && <p className="text-[12px] text-red mt-1.5">{statusError}</p>}
+      </div>
+
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">
+            프로필 정보
+          </div>
+          <span
+            className={
+              "text-[11px] font-bold px-2 py-0.5 rounded-full " +
+              (student.profileCompletedAt ? "bg-green/10 text-green" : "bg-red/10 text-red")
+            }
+          >
+            {student.profileCompletedAt ? "완료" : "미완료"}
+          </span>
+        </div>
+        <p className="text-[13px] text-ink">
+          생년월일 {student.dateOfBirth ?? "미입력"} · 학교 {student.schoolName ?? "미입력"}
+        </p>
+        <div className="flex items-center gap-2 mt-1.5">
+          <span
+            className={
+              "text-[11px] font-bold px-2 py-0.5 rounded-full " +
+              (dobVerifiedAt ? "bg-green/10 text-green" : "bg-grey-200 text-grey-500")
+            }
+          >
+            생년월일 {dobVerifiedAt ? "확인 완료" : "미확인"}
+          </span>
+          {!dobVerifiedAt && (
+            <button
+              onClick={handleVerifyDateOfBirth}
+              disabled={verifying || !student.dateOfBirth}
+              title={!student.dateOfBirth ? "생년월일이 아직 입력되지 않았습니다." : undefined}
+              className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg bg-ink text-white disabled:opacity-50"
+            >
+              {verifying ? "확인 처리 중..." : "생년월일 확인 완료"}
+            </button>
+          )}
+        </div>
+        {verifyError && <p className="text-[12px] text-red mt-1">{verifyError}</p>}
+        <p className="text-[13px] text-ink mt-1">
+          SAT {student.satScore ?? "미입력"}
+          {student.satScore != null ? "점" : ""} · GPA{" "}
+          {student.gpa != null ? `${student.gpa}${student.gpaScale ? ` / ${student.gpaScale}` : ""}` : "미입력"}
+        </p>
+        <p className="text-[13px] text-ink mt-1">
+          목표 대학{" "}
+          {student.targetColleges.length ? student.targetColleges.join(", ") : "미입력"}
+        </p>
+        <p className="text-[13px] text-ink mt-1">
+          관심 전공{" "}
+          {student.intendedMajors.length ? student.intendedMajors.join(", ") : "미입력"}
+        </p>
+        <p className="text-[13px] text-grey-500 mt-1">
+          AP 이수 {student.apCourseCount}건 · 비교과 활동 {student.extracurricularCount}건
+        </p>
+        <Link
+          href={`/admin/students/${student.id}/roadmap`}
+          className="inline-block mt-2 text-[11.5px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white"
+        >
+          프로필·로드맵 전체 열람/수정
+        </Link>
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-          학부모 / 담당 과목
+          학부모
         </div>
         <p className="text-[13px] text-ink">
           {student.parentNames.length ? student.parentNames.join(", ") : "연결된 학부모 없음"}
         </p>
-        <p className="text-[13px] text-ink mt-1">
-          {student.subjectNames.length ? student.subjectNames.join(", ") : "매칭된 과목 없음"}
-        </p>
+      </div>
+
+      {/* 2026-09-11(제품 오너 지시 — 정보 구조 재편) — "매칭 관리"(과목별
+          수강 상태·현재 선생님·매칭 이력, "+ 과목 매칭", 선생님 변경·매칭
+          종료)를 관리자 "매칭" 화면에서 이 학생 프로필로 옮겼다. 처리 로직은
+          SubjectEnrollmentPanel(공통 처리 경로) 그대로 재사용 — 화면
+          위치만 이동. */}
+      <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <SubjectEnrollmentPanel childId={student.id} subjects={subjects} />
       </div>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">

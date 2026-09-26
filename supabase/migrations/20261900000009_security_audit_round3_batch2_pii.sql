@@ -1,0 +1,21 @@
+-- 2026-09-24(Section 2 — SECURITY DEFINER 3차 감사, 위험도 2순위: 개인정보
+-- 조회·변경 그룹) — 보호자 동의/생년월일/프로필/계정 병합·익명화/Workspace
+-- 신원 연결 22개를 실측 재현·호출부 대조로 개별 검증.
+--
+-- 21개는 전부 제대로 인가돼 있었다(is_admin()/capability, 본인 auth.uid() 일치,
+-- 실제 household guardian 관계 확인 등 — 각각 대상 파라미터와 호출자 신원을
+-- 정확히 대조하는 것까지 확인함, 단순히 "패턴이 있다"가 아니라 "그 패턴이
+-- 맞는 사람을 가리키는지"까지 읽음).
+--
+-- **실제 결함 1건 확인**: assert_guardian_consent_ok(p_student_id, p_context) —
+-- 원래 정의(20260913000000)에서 이미 "revoke ... from public; grant ... to
+-- authenticated"로 올바르게 좁혀져 있었는데도 지금 anon 실행권한이 붙어
+-- 있었다(이후 어느 시점의 광범위한 재부여로 원복된 것으로 보임 — 이 함수를
+-- 재정의한 마이그레이션은 없음). trial_sessions/contracts의 BEFORE INSERT
+-- 트리거로만 쓰이고(perform으로 호출, 앱 RPC 호출부 없음), 캐치되는 예외
+-- 메시지가 "만 13세 미만 학생은 유효한 보호자 동의가 있어야..."로 구분돼
+-- anon이 임의 student_id를 넣어 직접 호출하면 그 학생이 13세 미만이면서
+-- 동의가 없는지 여부를 정보 노출로 알아낼 수 있었다(트리거 컨텍스트 밖
+-- 직접 호출이라 NEW/OLD 접근이 없어 에러 없이 그냥 빠져나간다 — 재현 확인).
+-- 원래 의도대로 authenticated만 남긴다.
+revoke execute on function public.assert_guardian_consent_ok(uuid, text) from public, anon;

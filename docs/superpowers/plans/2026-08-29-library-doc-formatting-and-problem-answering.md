@@ -1,5 +1,7 @@
 # 교재 라이브러리 서식 보존 + 문제풀이 인터랙션 Implementation Plan
 
+> **문서 상태: 과거 구현 이력·직접 재실행 금지.** 현재 결과를 이해할 때만 참고하고 신규 작업은 v3 문서를 따른다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** (1) 구글독스에서 붙여넣은 서식(색상/배경/표 테두리)이 저장 시 사라지지 않게 하고, (2) 교재 라이브러리 화면(`/materials/[id]`)의 문제를 세션뷰와 동일한 실제 풀이 UI(객관식 클릭채점/서술형 타이핑/수학 캔버스)로 교체하면서 학생에게 정답·해설이 유출되던 버그를 고치고, (3) 서술형 입력창을 자동 확장되게 하고, (4) 목차 마지막 섹션 스크롤 버그를 고친다.

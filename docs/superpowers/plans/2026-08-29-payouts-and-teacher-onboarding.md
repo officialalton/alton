@@ -1,5 +1,7 @@
 # 정산 탭 + 선생님 셀프 온보딩 + 초대 화면 수정 Implementation Plan
 
+> **문서 상태: 과거 구현 이력·실행 금지.** Calendly 온보딩과 기존 정산 구조는 v3 교체 대상이다. 신규 구현은 시급·통화·분 단위 payout item 정책을 따른다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** (1) `/set-password`의 추천인 코드 입력을 학부모에게만 보이게 고치고, (2) 선생님 초대 시 시급을 필수로 받아 관리자 "정산" 탭에서 시급×완료 수업시간으로 정산 금액을 계산·수기 완료 처리할 수 있게 하고, (3) 선생님이 로그인 후 스스로 Calendly 링크를 등록하면 자동으로 승인(active)되도록 온보딩 흐름을 만든다.

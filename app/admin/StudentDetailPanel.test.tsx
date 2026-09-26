@@ -7,6 +7,13 @@ import type { StudentListItem } from "./users-data";
 vi.mock("./users-actions", () => ({
   setStudentStatus: vi.fn(),
   adjustStudentCredit: vi.fn(),
+  verifyStudentDateOfBirth: vi.fn(),
+}));
+// 2026-09-11(매칭 관리를 학생 프로필로 이전) — SubjectEnrollmentPanel은
+// 자체 서버 액션 호출·상태를 가진 별도 컴포넌트라 이 파일에서는 목으로
+// 대체한다(전용 테스트는 SubjectEnrollmentPanel.test.tsx에서 다룸).
+vi.mock("./SubjectEnrollmentPanel", () => ({
+  default: () => null,
 }));
 
 const student: StudentListItem = {
@@ -18,11 +25,22 @@ const student: StudentListItem = {
   creditBalance: 14,
   parentNames: ["김민지"],
   subjectNames: ["SAT Math"],
+  dateOfBirth: null,
+  dateOfBirthVerifiedAt: null,
+  schoolName: null,
+  satScore: 0,
+  gpa: null,
+  gpaScale: null,
+  targetColleges: [],
+  intendedMajors: [],
+  profileCompletedAt: null,
+  apCourseCount: 0,
+  extracurricularCount: 0,
 };
 
 describe("StudentDetailPanel", () => {
   it("학생 정보와 수업권 잔액을 보여준다", () => {
-    render(<StudentDetailPanel student={student} history={[]} onBack={vi.fn()} onUpdated={vi.fn()} />);
+    render(<StudentDetailPanel subjects={[]} student={student} history={[]} onBack={vi.fn()} onUpdated={vi.fn()} />);
     expect(screen.getByText("지훈")).toBeInTheDocument();
     expect(screen.getByText("14장")).toBeInTheDocument();
   });
@@ -31,7 +49,7 @@ describe("StudentDetailPanel", () => {
     vi.mocked(actions.setStudentStatus).mockResolvedValue(undefined);
     const onUpdated = vi.fn();
     render(
-      <StudentDetailPanel student={student} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
+      <StudentDetailPanel subjects={[]} student={student} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
     );
     fireEvent.change(screen.getByDisplayValue("활성"), { target: { value: "suspended" } });
     await waitFor(() => expect(actions.setStudentStatus).toHaveBeenCalledWith("s1", "suspended"));
@@ -39,7 +57,7 @@ describe("StudentDetailPanel", () => {
   });
 
   it("사유 없이는 조정 적용 버튼이 비활성화된다", () => {
-    render(<StudentDetailPanel student={student} history={[]} onBack={vi.fn()} onUpdated={vi.fn()} />);
+    render(<StudentDetailPanel subjects={[]} student={student} history={[]} onBack={vi.fn()} onUpdated={vi.fn()} />);
     expect(screen.getByText("조정 적용")).toBeDisabled();
   });
 
@@ -50,7 +68,7 @@ describe("StudentDetailPanel", () => {
     });
     const onUpdated = vi.fn();
     render(
-      <StudentDetailPanel student={student} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
+      <StudentDetailPanel subjects={[]} student={student} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
     );
     fireEvent.change(screen.getByPlaceholderText("+/- 장수"), { target: { value: "2" } });
     fireEvent.change(screen.getByPlaceholderText("조정 사유 (필수)"), {
@@ -73,9 +91,30 @@ describe("StudentDetailPanel", () => {
     );
   });
 
+  it("생년월일 확인 완료 버튼을 누르면 verifyStudentDateOfBirth가 호출되고 배지가 바뀐다", async () => {
+    vi.mocked(actions.verifyStudentDateOfBirth).mockResolvedValue(undefined);
+    const onUpdated = vi.fn();
+    const studentWithDob = { ...student, dateOfBirth: "2010-05-01" };
+    render(
+      <StudentDetailPanel subjects={[]} student={studentWithDob} history={[]} onBack={vi.fn()} onUpdated={onUpdated} />
+    );
+    expect(screen.getByText("생년월일 미확인")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("생년월일 확인 완료"));
+    await waitFor(() => expect(actions.verifyStudentDateOfBirth).toHaveBeenCalledWith("s1"));
+    await waitFor(() => expect(screen.getByText("생년월일 확인 완료")).toBeInTheDocument());
+    expect(onUpdated).toHaveBeenCalledWith(
+      expect.objectContaining({ dateOfBirthVerifiedAt: expect.any(String) })
+    );
+  });
+
+  it("생년월일이 없으면 확인 완료 버튼이 비활성화된다", () => {
+    render(<StudentDetailPanel subjects={[]} student={student} history={[]} onBack={vi.fn()} onUpdated={vi.fn()} />);
+    expect(screen.getByText("생년월일 확인 완료")).toBeDisabled();
+  });
+
   it("기존 조정 내역을 보여준다", () => {
     render(
-      <StudentDetailPanel
+      <StudentDetailPanel subjects={[]}
         student={student}
         history={[
           { id: "tx0", type: "refund", amount: -3, reason: "중복 결제", createdAt: "2026-08-01T00:00:00.000Z" },

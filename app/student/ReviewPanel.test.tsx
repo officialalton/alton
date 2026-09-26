@@ -15,7 +15,7 @@ const review: ReviewData = {
   improve: "실수 유형에 취약합니다.",
   nextPlan: "실전 문제를 더 풀어봅니다.",
   submittedAt: "2026-08-01T05:00:00.000Z",
-  categories: [{ category: "concept", finalText: "개념 이해도가 높습니다." }],
+  categories: [{ category: "concept", finalText: "개념 이해도가 높습니다.", rating: "excellent" }],
 };
 
 describe("ReviewPanel", () => {

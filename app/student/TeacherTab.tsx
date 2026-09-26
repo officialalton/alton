@@ -9,6 +9,7 @@ import type {
 } from "./teacher-data";
 import type { ChatMessage } from "./chat-data";
 import ChatPanel from "./ChatPanel";
+import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
 
 type SubView =
   | { type: "list" }
@@ -55,9 +56,7 @@ export default function TeacherTab({
   }
 
   return (
-    <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">선생님</h1>
-
+    <div className="max-w-[640px]">
       {teachers.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
           매칭된 선생님이 없습니다.
@@ -80,14 +79,21 @@ export default function TeacherTab({
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-1.5 mb-3.5">
+            <div className="flex flex-col gap-1 mb-3.5">
               {t.subjects.map((s) => (
-                <span
-                  key={s.subjectName}
-                  className="text-[12px] font-semibold px-3 py-1 rounded-full bg-grey-100 text-ink"
-                >
-                  {s.subjectName} · {s.currentSession}/{s.totalSessions}회차
-                </span>
+                <div key={s.subjectName} className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[12px] font-semibold px-3 py-1 rounded-full bg-grey-100 text-ink">
+                    {s.subjectName} ·{" "}
+                    {formatCurriculumProgressLabel({
+                      totalUnits: s.totalSessions,
+                      doneUnits: s.currentSession,
+                      sourceLabel: null,
+                    })}
+                  </span>
+                  {s.curriculumSourceLabel && (
+                    <span className="text-[11px] text-grey-400">{s.curriculumSourceLabel}</span>
+                  )}
+                </div>
               ))}
             </div>
 
@@ -126,7 +132,7 @@ function ProfileView({
 
   return (
     <div className="max-w-[560px] px-8 py-8">
-      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+      <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
         ← 뒤로
       </button>
 

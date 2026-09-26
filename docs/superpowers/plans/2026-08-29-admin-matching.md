@@ -1,5 +1,7 @@
 # 관리자 매칭 탭 Implementation Plan
 
+> **문서 상태: 과거 구현 이력·직접 재실행 금지.** 현재 결과를 이해할 때만 참고하고 신규 작업은 v3 문서를 따른다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 관리자 포털 "매칭" 탭(083 티켓)을 인앱으로 구현한다 — Airtable 대신, 매칭 대기(`students.status = 'pending'`) 학생을 과목별로 그 과목을 가르치는 선생님과 매칭(`enrollments` 생성)하고 학생 상태를 `active`로 바꾼다.

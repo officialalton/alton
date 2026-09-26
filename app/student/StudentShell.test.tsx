@@ -2,9 +2,14 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import StudentShell from "./StudentShell";
 import type { DashboardData } from "./dashboard-data";
+import type { RoadmapData } from "@/lib/roadmap/types";
 
+const pushMock = vi.fn();
+vi.mock("./mock-exam-tab-actions", () => ({
+  loadMyMockExamAttemptsAction: vi.fn(async () => []),
+}));
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: vi.fn(), replace: vi.fn() }),
+  useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),
 }));
 
 vi.mock("@/app/login/actions", () => ({
@@ -30,6 +35,7 @@ vi.mock("./memo-actions", () => ({
 
 vi.mock("./review-actions", () => ({
   submitStudentFeedback: vi.fn(),
+  getMyLessonReviewsAction: vi.fn(async () => []),
 }));
 
 vi.mock("@/app/session/[id]/homework-actions", () => ({
@@ -42,6 +48,13 @@ vi.mock("./credits-actions", () => ({
 
 vi.mock("./chat-actions", () => ({
   sendChatMessage: vi.fn(),
+}));
+
+vi.mock("./board-actions", () => ({
+  loadMyBoardCardsAction: vi.fn(async () => []),
+  createMyManualTaskAction: vi.fn(),
+  updateMyManualTaskStatusAction: vi.fn(),
+  deleteMyManualTaskAction: vi.fn(),
 }));
 
 vi.mock("@/utils/supabase/client", () => ({
@@ -67,7 +80,66 @@ const dashboard: DashboardData = {
   attendanceRate: null,
 };
 
+const roadmap: RoadmapData = {
+  studentId: "student-1",
+  studentName: "지훈",
+  grade: null,
+  schoolName: null,
+  gpa: null,
+  gpaScale: null,
+  classRank: null,
+  classSize: null,
+  academicProfile: {
+    graduationYear: null,
+    curriculumType: null,
+    currentSubjects: [],
+    honorsCount: null,
+    apCount: null,
+    collegeCoursesCount: null,
+    ibHlCount: null,
+    ibSlCount: null,
+    schoolApIbOfferedCount: null,
+    targetGpa: null,
+    targetSat: null,
+    targetApCount: null,
+    targetExtracurricular: null,
+  },
+  testRecords: [],
+  apExams: [],
+  courses: [],
+  demographics: {
+    homeCountry: null,
+    zipCode: null,
+    residencyStatus: null,
+    gender: null,
+    raceEthnicity: null,
+    financialAidIntent: null,
+    maxAnnualBudget: null,
+    householdIncomeRange: null,
+    firstGeneration: null,
+    legacySchools: [],
+    religiousAffiliation: null,
+    recruitedAthlete: null,
+    specialSchoolInterests: [],
+  },
+  collegeInterests: {
+    intendedMajors: [],
+    careerInterests: [],
+    targetCountries: [],
+    targetCollegeTypes: [],
+    targetColleges: [],
+    targetApplicationTiming: null,
+  },
+  activities: [],
+  awards: [],
+  prepItems: [],
+  milestones: [],
+  latestMonthlyReview: null,
+  completeness: { filledSections: 0, totalSections: 5 },
+};
+
 const lessonsProps = {
+  roadmap,
   upcoming: [],
   past: [],
   curricula: [],
@@ -75,32 +147,72 @@ const lessonsProps = {
   reviews: {},
   myFeedback: {},
   bookableEnrollments: [],
-  homeworkTodo: [],
-  homeworkDone: [],
-  materialsLibrary: [],
-  credits: { balance: 0, guardianName: null },
+  studentId: "student-1",
+  homeworkBatches: [],
+  materialsLibraryTree: [],
+  myVocabWords: [],
+  vocabLibraryBooks: [],
+  vocabQuizzes: [],
+  vocabFolders: [],
+  credits: { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null },
   stats: { attendanceRate: null, satisfactionAvg: null, bySubject: [] },
   teacherList: [],
   teacherProfiles: {},
   teacherSessionHistory: {},
   chatThreads: {},
+  subjectEnrollments: [],
+  lessonBooking: {
+    bookableEnrollments: [],
+    upcomingBookings: [],
+    pastSessionsForReport: [],
+    regularLessonTypeId: null,
+    lessonDurationMinutes: 120,
+    timezone: "America/Los_Angeles",
+  },
 };
 
 describe("StudentShell", () => {
-  it("사이드바 9개 항목을 보여주고, 기본 탭은 홈이다", () => {
+  it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    ["홈", "레슨", "선생님", "과제", "문제", "단어장", "교재", "수업권", "통계"].forEach(
-      (label) => expect(screen.getByText(label)).toBeInTheDocument()
+    // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 제거(Home에서
+    // 이미 보임). Mock Exams가 Assignments 위로 옮겨졌다. Planner는 별도 nav 없이
+    // Home 탭 서브탭(Overview/TODO/Done)으로 흡수됐다. 캘린더·예정 수업은 Classes의
+    // "수업 일정" 서브탭으로 옮겨졌다.
+    ["Home", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
+      (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
+    expect(screen.queryByText("Performance")).toBeNull();
+    expect(screen.queryByText("Planner")).toBeNull();
+    expect(screen.queryByText("레슨")).toBeNull();
+    expect(screen.queryByText("예약")).toBeNull();
     expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
+  });
+
+  // 2026-09-22(사용자 지시, 재지시로 Done 서브탭 제거) — Home 탭 안에서
+  // Overview/TODO/Review 서브탭으로 전환된다(별도 Planner nav 없음). 완료
+  // 항목은 별도 탭이 아니라 TODO의 보드 완료 칼럼에 있다. 캘린더·예정 수업은
+  // Classes 탭으로 옮겨졌다.
+  it("Home 탭 서브탭(Overview/TODO/Review)을 오갈 수 있다", async () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        problemHistory={[]}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getByText("Overview")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("TODO"));
+    expect(await screen.findByPlaceholderText("+ 할 일 추가")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Review"));
+    expect(await screen.findByText("수업 리뷰")).toBeInTheDocument();
   });
 
   it("선생님 탭을 누르면 TeacherTab이 렌더링된다", () => {
@@ -108,71 +220,71 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("선생님"));
+    fireEvent.click(screen.getAllByText("My Teacher")[0]);
     expect(screen.getByText("매칭된 선생님이 없습니다.")).toBeInTheDocument();
   });
 
-  it("수업권 탭을 누르면 CreditsTab이 렌더링된다", () => {
+  it("계정 메뉴의 '수강권(Credits)'을 누르면 CreditsTab이 팝업으로 렌더링된다(2026-09-22: 탭에서 계정 팝업으로 이동)", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("수업권"));
+    fireEvent.click(screen.getAllByText(/지훈 학생님/)[0]);
+    fireEvent.click(screen.getAllByText("수강권(Credits)")[0]);
     expect(screen.getByText("장 보유")).toBeInTheDocument();
   });
 
-  it("단어장 탭을 누르면 VocabTab이 렌더링된다", () => {
+  it("단어장 탭을 누르면 VocabLibraryTab이 렌더링된다", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("단어장"));
+    fireEvent.click(screen.getAllByText("Vocabulary")[0]);
     expect(
-      screen.getByText("아직 저장한 단어가 없습니다. 교재에서 모르는 단어를 클릭해보세요.")
+      screen.getByText("아직 추가한 단어가 없어요. '+ 단어 추가'를 눌러보세요.")
     ).toBeInTheDocument();
   });
 
-  it("문제 탭을 누르면 ProblemLogTab이 렌더링된다", () => {
+  it("문제 탭을 누르면 문제 기록(v3)이 렌더링된다", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("문제"));
+    fireEvent.click(screen.getAllByText("Practice")[0]);
     expect(screen.getByText("조건에 맞는 문제 기록이 없습니다.")).toBeInTheDocument();
   });
 
-  it("레슨 탭을 누르면 LessonsTab이 렌더링된다", () => {
+  it("수업 탭을 누르면 ClassesTab이 렌더링되고, 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보인다(레거시 '레슨'/'예약' 탭 제거)", () => {
     render(
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("레슨"));
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Classes")[0]);
+    expect(screen.getByText("예정 수업")).toBeInTheDocument();
+    expect(screen.getByText("지난 수업")).toBeInTheDocument();
+    expect(
+      screen.getByText("아직 선생님 배정이 완료되지 않았어요. 배정이 끝나면 이 화면에서 바로 예약할 수 있어요.")
+    ).toBeInTheDocument();
   });
 
   it("과제 탭을 누르면 StudentHomeworkTab이 렌더링된다", () => {
@@ -180,13 +292,14 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("과제"));
-    expect(screen.getByText("작성이 필요한 과제가 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Assignments")[0]);
+    expect(
+      screen.getByText(/아직 발급된 과제가 없습니다/)
+    ).toBeInTheDocument();
   });
 
   it("교재 탭을 누르면 MaterialsLibraryTab이 렌더링된다", () => {
@@ -194,27 +307,14 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("교재"));
-    expect(screen.getByText("열람할 수 있는 교재가 없습니다.")).toBeInTheDocument();
-  });
-
-  it("통계 탭을 누르면 StatsTab이 렌더링된다", () => {
-    render(
-      <StudentShell
-        studentName="지훈"
-        dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
-        {...lessonsProps}
-      />
-    );
-    fireEvent.click(screen.getByText("통계"));
-    expect(screen.getByText("과목별 참여율")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Materials")[0]);
+    expect(
+      screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
+    ).toBeInTheDocument();
   });
 
   it("계정 메뉴를 열면 로그아웃 버튼이 보인다", () => {
@@ -222,12 +322,56 @@ describe("StudentShell", () => {
       <StudentShell
         studentName="지훈"
         dashboard={dashboard}
-        vocabWords={[]}
-        problemLog={[]}
+        problemHistory={[]}
         {...lessonsProps}
       />
     );
     fireEvent.click(screen.getByText("지훈 학생님 ▾"));
-    expect(screen.getByText("로그아웃")).toBeInTheDocument();
+    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
+  });
+
+  // 2026-09-18(고정형 모의고사 V1 내비 연결) — /student/mock-exam은 StudentShell
+  // 탭이 아니라 독립 라우트라, 사이드바 클릭 시 router.push로 그 라우트로
+  // 이동해야 한다.
+  it("사이드바 '모의고사'를 누르면 /student/mock-exam으로 이동한다", () => {
+    pushMock.mockClear();
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        problemHistory={[]}
+        {...lessonsProps}
+      />
+    );
+    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
+    // 2026-09-21 — 모의고사는 이제 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
+    expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
+  });
+
+  it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
+    render(
+      <StudentShell
+        studentName="지훈"
+        dashboard={dashboard}
+        problemHistory={[]}
+        {...lessonsProps}
+      />
+    );
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Assignments") })[0]
+    ).not.toHaveAttribute("aria-current");
+
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("Assignments") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("Assignments") })[0]).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
+    ).not.toHaveAttribute("aria-current");
   });
 });

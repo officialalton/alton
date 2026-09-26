@@ -34,3 +34,17 @@ export function extractInviteAcceptUrl(html: string): string {
   if (!match) throw new Error("메일 본문에서 초대 수락 링크를 찾지 못했습니다.");
   return match[0];
 }
+
+// M4 (6/N) — 체험 온보딩 안내 메일 본문에서 redeem 링크를 추출.
+export function extractTrialOnboardingRedeemUrl(html: string): string {
+  const match = html.match(/https?:\/\/[^\s"<]+\/api\/trial-onboarding\/redeem\?token=[^\s"<]+/);
+  if (!match) throw new Error("메일 본문에서 체험 온보딩 링크를 찾지 못했습니다.");
+  return match[0];
+}
+
+// M4 (6/N) — 로그인 이메일 변경 확인 메일 본문에서 confirm-email-change 링크를 추출.
+export function extractLoginEmailChangeConfirmUrl(html: string): string {
+  const match = html.match(/https?:\/\/[^\s"<]+\/api\/trial-onboarding\/confirm-email-change\?token=[^\s"<]+/);
+  if (!match) throw new Error("메일 본문에서 로그인 이메일 확인 링크를 찾지 못했습니다.");
+  return match[0];
+}

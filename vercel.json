@@ -1,8 +1,27 @@
 {
+  "regions": [
+    "pdx1"
+  ],
   "crons": [
     {
-      "path": "/api/cron/generate-payouts",
-      "schedule": "0 0 1 * *"
+      "path": "/api/cron/close-payout-month",
+      "schedule": "0 3 1 * *"
+    },
+    {
+      "path": "/api/cron/dispatch-approved-payouts",
+      "schedule": "0 3 10 * *"
+    },
+    {
+      "path": "/api/cron/mark-expired-invites",
+      "schedule": "0 17 * * *"
+    },
+    {
+      "path": "/api/cron/close-pending-accounts",
+      "schedule": "30 17 * * *"
+    },
+    {
+      "path": "/api/cron/data-retention-batch",
+      "schedule": "0 18 * * *"
     }
   ]
 }

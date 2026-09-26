@@ -1,3 +1,7 @@
+/* P2/P3 5단계 — 교재·문제 본문의 수식 렌더링(KaTeX). 네트워크 없이 동작하도록
+   패키지의 스타일시트를 그대로 가져온다. */
+@import "katex/dist/katex.min.css";
+
 @import "tailwindcss";
 
 /*
@@ -27,6 +31,18 @@
   --green: #1e8e5a;
   --green-bg: #e9f7ef;
   --white: #ffffff;
+
+  /* 2026-09-25 — 신규 브랜드 팔레트(랜딩 페이지 디자인 목업 기준).
+     기존 ink, grey 계열, red 토큰은 세션뷰가 단일 진실 소스라 그대로 두고,
+     학생/학부모/선생님/관리자 포털 리디자인에서 쓸 색만 추가한다.
+     기존 화면은 이 토큰을 아직 쓰지 않으므로 여기 추가만으로는 다른 화면에 영향 없다. */
+  --cream: #f8f5ef;
+  --navy: #142240;
+  --navy-d: #0c1628;
+  --brand-red: #c8102e;
+  --brand-red-d: #8f0b20;
+  --brand-body: #4f5a6b;
+  --brand-border: #e6e1d8;
 }
 
 @theme inline {
@@ -51,6 +67,14 @@
   --color-green: var(--green);
   --color-green-bg: var(--green-bg);
   --color-white: var(--white);
+
+  --color-cream: var(--cream);
+  --color-navy: var(--navy);
+  --color-navy-d: var(--navy-d);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-d: var(--brand-red-d);
+  --color-brand-body: var(--brand-body);
+  --color-brand-border: var(--brand-border);
 }
 
 body {
@@ -70,4 +94,109 @@ body {
   border: 1px solid var(--grey-200, #e5e5e5);
   padding: 6px 10px;
   min-width: 60px;
+}
+
+/* 학습 화면(교재 본문·문제 지문)의 읽기 영역.
+   긴 지문·표·그림·수식이 잘리거나 겹치지 않게 하는 최소 규칙만 둔다. */
+.learning-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 8px;
+}
+.learning-body figure {
+  margin: 1rem 0;
+}
+.learning-body figcaption {
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 0.35rem;
+}
+/* 넓은 표는 본문을 밀어내지 않고 자기 영역 안에서 가로로 스크롤한다. */
+.learning-body table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 14px;
+}
+.learning-body th,
+.learning-body td {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 0.85rem;
+  text-align: left;
+  white-space: nowrap;
+}
+.learning-body th {
+  background: #f9fafb;
+  font-weight: 700;
+}
+.learning-body p {
+  margin: 0.85rem 0;
+}
+.learning-body p:first-child {
+  margin-top: 0;
+}
+.learning-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0;
+}
+/* 본문 어디서도 가로 스크롤이 페이지 전체로 새지 않게 한다. */
+.learning-body {
+  overflow-wrap: anywhere;
+}
+
+/* 모의고사 하이라이터(2026-09-21) — CSS Custom Highlight API.
+   드래그 선택한 Range를 CSS.highlights에 등록해서 표시한다(DOM을 건드리지 않으므로
+   React 리렌더와 충돌하지 않는다). 문항을 벗어나면 등록을 지워 세션/화면 단위로만 유지된다. */
+::highlight(exam-highlight) {
+  background-color: #fde68a;
+}
+
+/* PDF 교재 텍스트 레이어(2026-09-21 사용자 지시) — 캔버스에 이미지로만 그려지던 PDF
+   위에 pdf.js TextLayer로 투명한 실제 텍스트를 겹쳐, 단어 클릭 저장·드래그 선택·복사가
+   되게 한다(pdfjs-dist 공식 최소 스타일, web/pdf_viewer.css 기반). */
+.pdf-text-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  opacity: 1;
+  line-height: 1;
+  text-align: initial;
+  transform-origin: 0 0;
+  z-index: 2;
+  pointer-events: auto;
+  /* 2026-09-22(버그 수정) — 처음엔 글자 크기·회전 계산(font-size, transform)을
+     빠뜨려서 모든 글자가 브라우저 기본 크기·위치로 나가 클릭이 실제 단어와
+     전혀 안 맞았다. pdf.js 공식 규칙(web/pdf_viewer.css)에서 그대로 가져온다 —
+     --total-scale-factor 등 변수는 PdfMaterialViewer가 렌더 시 직접 지정한다. */
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor, 1) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+.pdf-text-layer span,
+.pdf-text-layer br {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+.pdf-text-layer > :not(.markedContent),
+.pdf-text-layer .markedContent span:not(.markedContent) {
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  --rotate: 0deg;
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+.pdf-text-layer .markedContent {
+  display: contents;
+}
+.pdf-text-layer ::selection {
+  background: rgba(37, 99, 235, 0.25);
 }

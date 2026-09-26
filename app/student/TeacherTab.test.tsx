@@ -30,7 +30,9 @@ const teachers: TeacherListItem[] = [
     teacherId: "t1",
     name: "박서연 선생님",
     school: "서울대학교 수리과학부 재학 · SAT Math 전담",
-    subjects: [{ subjectName: "SAT Math", currentSession: 8, totalSessions: 12 }],
+    subjects: [
+      { subjectName: "SAT Math", currentSession: 8, totalSessions: 12, curriculumSourceLabel: "교사 운영 커리큘럼 기준" },
+    ],
   },
 ];
 
@@ -55,7 +57,7 @@ const chatThreads = {
 };
 
 describe("TeacherTab", () => {
-  it("선생님 카드에 이름/학교/과목·회차를 보여준다", () => {
+  it("선생님 카드에 이름/학교/과목·진도(curriculum_overlay_units 기준)·출처를 보여준다", () => {
     render(
       <TeacherTab
         teachers={teachers}
@@ -65,7 +67,8 @@ describe("TeacherTab", () => {
       />
     );
     expect(screen.getByText("박서연 선생님")).toBeInTheDocument();
-    expect(screen.getByText(/SAT Math · 8\/12회차/)).toBeInTheDocument();
+    expect(screen.getByText(/SAT Math · 진행 8 \/ 전체 12회차/)).toBeInTheDocument();
+    expect(screen.getByText("교사 운영 커리큘럼 기준")).toBeInTheDocument();
   });
 
   it("프로필 보기를 누르면 학교/자기소개를 보여준다", () => {

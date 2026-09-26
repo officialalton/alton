@@ -9,7 +9,7 @@ export type TeacherPick = {
 export type ProblemLogEntry = {
   attemptId: string;
   problemId: string;
-  format: "mc" | "essay" | "math";
+  format: "mc" | "spr" | "essay" | "math";
   passage: string;
   options: string[] | null;
   correctIndex: number | null;
@@ -67,7 +67,7 @@ export async function loadProblemLog(
     } | null;
 
     const p = problem as {
-      format: "mc" | "essay" | "math";
+      format: "mc" | "spr" | "essay" | "math";
       passage: string;
       options: string[] | null;
       correct_index: number | null;

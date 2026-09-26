@@ -1,42 +1,731 @@
-# ALTON — 현재 상태 (2026-09-01 기준)
+# ALTON — 현재 상태 (2026-09-25 기준)
 
-이 문서는 매 R 단계 종료 시 갱신되는 "지금 상태" 요약이다. 장문의 조사·실행 내역은 여기 복사하지 않는다 — `docs/2026-08-29-r2-migration-execution-log.md`(R0~R2 실행 로그)와 `docs/2026-08-29-master-roadmap-v3.md`(전체 R 계획)에 있다.
+> 새 세션은 `CLAUDE.md` → 이 문서 → `docs/BRANCH-WORKFLOW.md` 순으로 읽고 시작한다.
+> 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
+> [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md)에 원문 그대로 있다 — 필요할 때만 검색한다.
 
-## 완료된 단계
+## 1. 한눈에
 
-- **Gate A·B·C** — 전부 완료(2026-08-30). Gate C 검증 중 앱이 없어 검증 못 한 3개 워크플로우(GW-10/12/14)는 R8/R9/R12 필수 인수 기준으로 이관됨.
-- **R1** — 데이터 기반 재설계, 완료.
-- **R2** — 계정·가족·권한 수명주기, **완료(2026-09-01)**. Task 1~9 전부 완료. 상세는 실행 로그 참고.
+| 항목 | 값 |
+|---|---|
+| 브랜치 / Preview | `preview/m4-integration-verification`(2026-09-25 기준 HEAD `bb9b33e` — 이번 세션 반영분: 계정 상태·closed 게이트·보존 자동화, ParentDetailPanel, 대학 정보 피어 병합, figure_choice·문제은행 자료유형 9종 병합, 제품 분석 P0 등, 6절 참고). 최신 Preview **https://alton-culeivzsy-alton7.vercel.app**. 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
+| 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261900000016`까지 local=remote 확인**(2026-09-25). `20261900000012`~`20261900000016`은 이번 세션분 — 계정 병합 FK 디커플, SECURITY DEFINER fail-open 수정 2건(`mark_expired_invites`/`close_expired_pending_accounts`), closure_pending 자동 폐쇄·closed 접근 감사, 보존기간 자동 배치(notifications/consult_requests/session_access_events). Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
+| Production | Vercel production 도메인 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음). Stripe/DocuSign 등 외부 키는 샌드박스. cron 3개(정산 2개, 초대만료 1개, 보존배치 1개)는 스케줄만 등록되고 `CRON_SECRET`/`PAYOUT_CRON_ENABLED`/`RETENTION_BATCH_ENABLED` 전부 미설정으로 비활성 유지 중(사용자 결정 대기). |
+| 테스트 | 2026-09-25: `tsc`/`eslint` 클린. `vitest run --exclude "**/*.integration.test.ts"`: 2695/2708 통과(12 skip) — 남은 1건(`circles.test.ts` 랜덤 지오메트리 스트레스)은 단독 재실행 시 항상 통과하는 기존 flaky 이슈, 코드 결함 아님. |
+| 실제 외부 연동 | 교재 Drive 읽기·고정 사본 공개, Smart Notes Drive reader 권한 부여(웹훅 멱등성 적용), Google Calendar/Meet 실제 이벤트 생성(상담 일정 확정). Preview `CURRICULUM_DRIVE_ENABLED/ID/ALLOW_REAL_WRITES=true`. AI 생성은 Anthropic 키. 유료 서비스 추가 없음. |
+| 대학 데이터 수집 표준 | 대학 학업지표·학비·전공을 다루는 모든 세션은 [`2026-09-23-cds-first-data-collection-standard.md`](2026-09-23-cds-first-data-collection-standard.md)를 먼저 읽고 따른다(CDS 원문 우선 수집, cohort 정확 구분, 출처·검증상태 명시 — 프린스턴 10차 세션 방식이 표준화됨). 진행 이력은 [`2026-09-23-university-info-sources-and-reports.md`](2026-09-23-university-info-sources-and-reports.md) 11차 세션 참고. |
+| 상태 | 문제생성 파이프라인 Step 6 + College Board 840문항 커버리지 매핑 완료. **고정형 모의고사 V1 구현 완료**(`2026-09-17-fixed-mock-exam-v1-spec.md`; 4개 포털 탭 통합, 학생/교사/학부모 목록은 Shell 탭 안, 응시·결과 화면만 독립 라우트). UI 통일화(Acely 레퍼런스, `docs/2026-09-19-ui-unification-spec.md`) 3차까지 병합. 대학 DB Part 5 + 관리자 전체 필드 편집 반영. **남은 UX 지적**: 수업 준비 UI 개선안(제품 오너 결정 대기). |
+| **2026-09-21 보안·리뷰 반영(기획자 코드 리뷰)** | **P0 차단 완료** — 학생이 모의고사 답안/응시 상태·과제 JSON(정답·성적)을 REST API 로 직접 읽거나 바꿀 수 있던 RLS 구멍을 막았다(`20261429000000`: 학생·학부모 읽기/쓰기는 SECURITY DEFINER RPC 만, 채점 확정 전 정답·해설·정오 DB 마스킹). P1: 결제→수업권 grant+ledger 원자화 RPC(`20261430000000`), 모의고사 교사 권한 `teaches_student()` 통일(v3 매칭 학생 누락 해결), `start_problem_work` 끝난 수업·미배정 문제 거절. P2: Stripe/DocuSign 웹훅 DB 오류는 500(재전송), Smart Notes 큐 적재 실패 시 claim 되돌림, `/student` 홈 목록 로더 실패 격리. **남은 리뷰 항목**: 전체 통합 테스트 green 복구(로컬 DB 격리, 순수 테스트 인프라 문제), 로컬 webpack 빌드 PDF worker ESM 실패(non-blocking). **lint 정리는 2026-09-23 완료**(아래 4절 및 테스트 행 참고). |
+| 알려진 버그 | `/student` 홈 500(React #418/#441)은 이후 커밋으로 수정됨 + 2026-09-21 로더 실패 격리 추가. 재발 시 `docs/2026-09-18-real-student-teacher-uat.md` 5절 재현 절차 참고. |
 
-## 스키마·외부 서비스 현재 구조
+## 2. 지금 유효한 확정 정책 (바꾸려면 제품 오너 결정)
 
-- **DB**: Supabase Postgres. 계정 상태는 역할별 테이블(`students`/`teachers`/`parents`)의 `status` 컬럼 + `transition_account_status()`(SECURITY DEFINER, 역할별 유효 전이 강제 + 선생님은 7조건 게이트) 하나로 통일 관리. `households`/`household_members`가 가족 관계의 원본(레거시 `guardian_students`는 동결, 쓰기 트리거로 차단). 계정 초대는 `account_invites` 자체 토큰 상태 머신. 권한은 `is_admin() OR current_user_has_capability('...')` 패턴(capability는 `supervisor_capabilities`, 자유 텍스트) — Task 4/5/6/7의 신규 함수는 이 패턴 적용됨(레거시 함수 전체 전환은 R12).
-- **선생님 계정**: `@alton.education` Google Workspace 계정 필수, `teacher_workspace_provisioning` staging 테이블 → 실제 Google OAuth 최초 로그인으로 연결. 인증 체인은 Vercel OIDC → GCP WIF → 서비스 계정 impersonation → signJwt(DWD) → Directory API(서비스 계정 키·장기 토큰 없음). 쓰기(계정 생성/정지/재활성화)는 `WORKSPACE_PROVISIONING_ALLOW_REAL_CALLS`, 읽기 전용 점검은 `WORKSPACE_PREFLIGHT_ALLOW_REAL_READS` — **둘 다 Production에서 기본값 `false`**, 필요할 때만 일시적으로 `true`로 전환 후 반드시 복원.
-- **배포**: Vercel, Production 도메인 `https://app.alton.education`. `git push origin main` → Vercel 자동 배포(GitHub 연동, Production Branch = `main`).
-- **테스트**: Vitest(유닛, 94개 파일/422건) + Playwright(E2E, `e2e/`, 27건 — `--workers=1` 순차 실행 기준, 기본 병렬 설정은 알려진 파일 간 레이스 있음, 아래 blocker 참고).
+**커리큘럼·수업 준비**
+- 세 층: 관리자 기준본(`subject_template_units`) → 교사 기본 구성(`teacher_curriculum_template_units`) → 학생 회차(`curriculum_overlay_units`, 준비안 `curriculum_unit_preps/_items`). 상위 변경은 자동 반영하지 않는다 — `업데이트 있음` → `기본 구성 업데이트`(미리보기 → 적용, 지문 불일치 시 `ALT02` 거절). 최초 생성·최초 상속만 자동. 내려온 행은 `inherited`·`inherited_position`, 목표는 `inherited_goal`; 사람이 손댄 것은 덮지 않는다. 뺀 것은 제외 기록(`…_exclusions`)으로 되살아나지 않는다.
+- **수업 시작이 곧 고정**(매니페스트). 진입·저장·연결은 고정하지 않는다. 쓸 수 없는 항목이 하나라도 있으면 시작 자체를 막는다. 시작한(live) 수업은 예약 시각 전이어도 화면에 '진행 중'. 진행 중 수업의 구성 변경은 교사가 **`수업 구성 변경`**을 눌러야만 반영(`repin_live_session_content`, 학생이 사용한 항목은 남김). 종료 수업 불가.
+- 교사 포털의 모든 `수업 준비`는 **수업 화면(`/session/[id]?tab=prep`)**으로 들어간다. 학생·보호자의 `수업 준비`는 예약 수업이 있으면 그 수업 화면, 없으면 `/unit-preview`(읽기 전용, 정답·해설·teaching_tip 은 응답에 없음).
+- 수업 화면 탭: 교재 · 문제 · 단어장 · 과제 · (교사)수업 준비. 연습장·문제 기록 탭은 없음(문제 기록은 학생 포털만).
 
-## 다음 작업에 필요한 확정 정책만
+**교재(Drive)**
+- Drive 구조 **과목 → 키워드 → 파일**. 단원은 폴더를 만들지 않는다. 교재는 대표 키워드 하나에 속하고 그 키워드가 붙은 여러 단원에 들어간다(N:M).
+- 교재는 **Drive 동기화로만** 들어온다(관리자 `Drive 자료 › 과목 자료 동기화`: 모든 키워드 폴더 → 미등록 등록 → 미공개 고정 사본 공개, 이미 공개는 건너뜀). 새 HTML 교재 만들기는 막았다. 영상도 같은 자료(kind=video)로 회차 구성에 담는다.
+- 공개 = 그 시점 파일의 **고정 사본**(`curriculum-assets` 버킷, `curriculum_doc_versions.snapshot.asset`). 원본이 바뀌어도 공개 버전·과거 수업은 그대로. 원 파일명(`source_drive_name`)은 그대로 두고 표시 이름(`title`)은 관리자가 따로 적는다.
+- 관리자 `교재` 탭 하나(라이브러리 통합): 과목 › 키워드(기본) / 과목 › 단원 / 목록. `Drive 원본 없는 교재 보관`(과목 미선택 시 전체).
+- PDF 규격 v1(페이지 수 제한 없음): [`2026-09-14-lesson-pdf-spec.md`](2026-09-14-lesson-pdf-spec.md).
 
-- 계정 상태: `pending→active↔suspended`(가역적), `active/suspended↔inactive`(일반 서비스 중단, 복귀 가능), `active/suspended→closure_pending→closed`(명시적 폐쇄, 30일 유예, 복원 없음). 선생님의 `active` 전환(어떤 전이든)은 7조건(workspace_issued/first_login/identity_linked/valid_rate/onboarding_complete/contract_signed/admin_base_info) 전부 충족해야 함.
-- `teacher_rate_history`/`account_status_events`는 **하드 immutable**(DELETE·UPDATE 전면 차단, bypass 플래그 없음, service_role도 EXECUTE revoke) — 테스트 데이터라도 물리 삭제 불가, 정리는 `suspended`/`closed` 같은 정상 상태 전이로만.
-- 초대: 관리자가 보호자 초대 → 가입한 보호자가 자녀 추가 초대(§4.19). 보호자가 다른 보호자(공동 보호자)를 초대하는 것도 이제 가능하지만 관리자 전용(자기서비스 아님).
-- 시간대: 개인 설정 → household 기본값 → `America/Los_Angeles`(`lib/timezone.ts`). 브라우저 감지 UI는 R6까지 의도적 보류.
+**문제·풀이·채점**
+- 형식: `mc` 객관식(클릭이 곧 답, 채점 전 재선택), **`spr` 숫자 입력**(SAT Math 직접 입력, 정답 목록 정규화 비교, 채점 전 재입력), `essay` 서술형(AP용, **글 상자에 타이핑 — 쓰는 대로 저장**, 화이트보드 아님), `math` 풀이형(풀이판 → `풀이 제출`). **연습장은 없다** — 문제 화면 전체 필기가 그 자리(2026-09-14).
+- 문제 분류 = **SAT 영역 + 세부 기술 코드**(`problem_skill_codes`). 문제은행 찾기/만들기, 회차 자동 구성 조건(`skill_codes`), 수업 준비 배정, 학생 성취 기록이 같은 코드를 쓴다(2026-09-14).
+- 키워드 자동 문제 구성은 **회차당 자동분 기본 20개**(`target_count` 정하면 그 수). 직접 담은 것은 세지 않고, 이미 넘게 담긴 회차는 줄이지 않는다(2026-09-14).
+- 자동 채점(mc·spr)은 서버가 계산하되 **교사가 `채점 완료`를 눌러야 확정**. 정답·해설은 **채점 뒤에만** 학생에게 열린다(payload 에서 제외). 목차엔 정답/부분 정답/오답, 점수는 정답만 센다.
+- **과제 = 수업 문제와 같은 흐름**(v3 한 갈래). 교사가 회차 키워드 풀에서 골라 발급(`issue_homework_items`, 시작 전 회수), 학생은 수업 화면 과제 탭 또는 학생 포털 과제 탭(수업별 탭 → 같은 패널)에서 푼다. 답·채점·연습장·문제 위 필기는 **수업 것과 분리**(`session_problem_work.source`, `problem_context`). 레거시 `homework_items`는 읽기만.
+- 문제은행: 초안 → 검수 → 공개(공개된 문제만 회차 후보). 난이도 필수 선택, `전체 공개`(보이는 초안 일괄). AI 생성은 초안으로만.
+- 문제 템플릿(설계 [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md)): 수식 KaTeX(`$…$`), 표는 마크다운 파이프 표, 메모 목록 `- `, 밑줄 `__문장__`. **도형·그래프는 데이터(figure spec)**로 받아 우리가 SVG 로 그린다(`lib/problem-figures`); 그림 파일은 비공개 버킷 `problem-assets` + 서명 URL. **그림이 있는 문제는 관리자가 `그림 확인함`을 켜야 공개된다**(그림이 바뀌면 확인 해제). 유형 코드(`lib/problem-skills.ts`: SAT RW 11종·SAT Math 4영역+SPR·AP FRQ)를 고르면 실제 시험 문항 말투 규칙이 프롬프트에 들어간다. 문항은 영어, 해설은 한국어.
 
-## 최신 마이그레이션
+**필기**
+- PDF 페이지 필기: 대상 (수업, 공개 버전, 자료, 페이지). 교사 공유·학생 공유 두 레이어(각자 캔버스, 상대 것은 못 지움), `eventId` 중복 방지, 대기·전송 중 획 보존, 창 크기 변화에 좌표 추종. 도구: 펜·지우개·**텍스트(클릭한 자리 글 상자)**·**전체 지우기(내 레이어·이 페이지, `clear_all`)**. 실시간 채널.
+- 문제 한 장 위 공유 필기: 대상 (수업, 문제, lesson|homework). 같은 컴포넌트. 문제 풀이판(`problem_student`/`problem_teacher_feedback`)과는 별개.
 
-`supabase/migrations/20260910000000_r2_multi_guardian.sql` (로컬·원격 개발 DB 적용 완료, 원격 = `worpsqwqgnspddnrtnvq.supabase.co`).
+## 3. 스키마·구조 요점(2026-09-14 추가분)
 
-## 남은 blocker·후속 작업
+- `session_problem_work`: `source`(lesson|homework, 고유키 포함), `auto_correct`·`grade`·`grade_comment`·`graded_at/by`, `submitted_text`(spr). RPC `start_problem_work(…, p_source)`, `submit_problem_attempt`(자동 채점·채점 전 재선택), `grade_problem_attempt`.
+- `session_homework_items.problem_version_id`(발급 시 고정). RPC `issue_homework_items`, `withdraw_homework_item`, `session_problem_formats`(수업+과제).
+- `problem_versions`: `answers`(spr 동치 정답), `figure`·`figure_checked`. RPC `save/create_problem_draft_version`(10인수), `mark_problem_figure_checked`, `confirm_and_publish_problem_version`(spr 정답·mc 선택지·그림 확인 검사). `problem_format` enum + `spr`. 함수 `spr_to_numeric`, `spr_answer_matches`.
+- `session_annotation_events`: `curriculum_doc_version_id`·`page_number`·`client_event_id`(페이지 필기), `problem_context`(문제 위 필기). 모양 제약: teacher_shared/student_shared 에 `problem_id` 허용. RPC `append_page_stroke_events`(tool clear/text), `append_problem_page_stroke_events`.
+- `curriculum_docs`: `kind`(html|pdf|video)·`source_drive_*`·`primary_keyword_id`; `curriculum_drive_folders`(scope subject|keyword, unit 은 retired). 버킷 `curriculum-assets`, `problem-assets`(비공개).
+- `repin_live_session_content`(진행 중 재고정), `unit_composition_counts`(수업 준비 1.4초로 만든 정의자 함수), `overlay_unit_parent`(호출자 권한 — 정의자로 두면 남의 회차 존재가 새어 나간다).
+- Vercel 함수 지역 `pdx1`(`vercel.json`), pdf.js 서버 워커 고정(`serverExternalPackages`·tracing).
 
-- **(R12로 이관, 2026-09-01 확정)** 이미 active인 계정의 로그인 이메일 정정 절차 — 본인확인·Workspace/Auth identity 재연결·중복 계정 충돌·감사 이력을 함께 다뤄야 하는 별도 계정관리 정책이라 R2 범위에 포함하지 않음. `master-roadmap-v3.md` R12에 등록됨. PENDING 초대 오타는 기존 revoke+재초대로 충분(이 항목과 무관).
-- **(R13, 정식 오픈 전)** `e2e/account-lifecycle.spec.ts`/`account-merge.spec.ts`가 전역 시드 계정을 공유해 `fullyParallel:true` 기본 설정에서 다른 스펙과 레이스 가능 — 전용 픽스처로 리팩터링 필요.
-- **(R12)** SECURITY DEFINER 함수 전체 anon EXECUTE 권한 감사(레거시 9개 + 이번 세션에서 확인된 다른 함수들), Workspace 위임 관리자를 `official@alton.education`에서 전용 자동화 계정으로 분리, 테스트 데이터 안전 정리 절차 설계.
-- **(R11 또는 R13)** `mark_expired_invites()` 스케줄러(cron) 연결.
-- Gate C 이관 3건(GW-10/12/14, R8/R9/R12 인수 기준) — 여전히 해당 R에서 반드시 통과.
+## 4. 2026-09-14 진행 내역(압축, 시간순)
 
-## 다음 R 착수 시 읽을 문서
+1. **P2 9~11차** — 준비안 유지·다시 구성·수업 시작 고정, 학생별 자동 상속, 수업 준비 화면 통합, 학생·보호자 사전 열람. 결함 5건(시딩 `source_unit_id`, 문제은행 RLS, 버전 스탬프 정의자 등).
+2. **P2 12·13차** — 상위 변경의 완전한 반영(`inherited`·제외 기록·순서·목표), 학생·보호자 회차별 `수업 준비`, **Drive 기반 PDF·영상 자료 최소 구현**(고정 사본 공개·페이지 필기·뷰어). Drive 구조 정정(과목 → 키워드). 실제 Drive 첫 공개 성공(15,343KB·99쪽).
+3. **P2 14차** — UAT 수정 5건(카탈로그 업데이트, 시딩 폴백, 보관 교재 건너뛰기, `수업 시작` 열 이름, **수업 준비 15~30초 → 1.4초**), PDF 뷰어(썸네일·fit-page·레티나·반투명 도구), 문제 슬라이드·교사 정답 토글, 객관식 지문 끝 A)~D) 중복 제거.
+4. **P3 5차** — 문제 풀이·채점 흐름 재정리(객관식 클릭·서술형 연습장·풀이형 제출, 정답은 채점 뒤), 교사 채점 UI, PDF 텍스트·전체 지우기, 연습장·문제 기록 탭 제거.
+5. **P3 6차** — 관리자 교재 정리(키워드 폴더, 과목 전체 Drive 동기화, Drive 원본 없는 교재 보관), 시작한 수업 '진행 중' 표시 + `수업 구성 변경`(재고정), 잔손질.
+6. **P3 7차** — **과제 v3 한 갈래 통일**, 학생 포털 과제 = 수업별 탭 + 같은 패널, 커리큘럼 회차 키워드 칩, 연습장 실시간, PDF 필기 크기 추종·저장 후 사라짐 수정, 교사 수업 준비 → 수업 화면.
+7. **P3 8차** — 과제 답안·채점·문제 위 필기를 수업과 **분리**(source/context), **문제 화면 전체 필기 레이어**(수업·과제 공통), 채점 결과·점수 표시, 관리자 교재 탭 통합·새 교재 차단·노출용 이름·목차 접기.
+8. **P3 9차** — 문제 템플릿 ①~⑤(SPR / 표·수식 / 도형·그래프 데이터 렌더 + 그림 확인 게이트 / 그림 파일 첨부 / 유형 코드·문항 말투·메모·밑줄), 문제은행 난이도·`전체 공개`·자동 확장 칸. **실제 모델 호출 표본 10문항** 렌더 확인 → 영어 규칙·응답 정규화·라벨 위치 수정. AI 내용 오류(변 라벨 오기) 실례 확인 — 그림 확인 게이트가 필요한 이유.
 
-1. `CLAUDE.md`
-2. `docs/CURRENT.md`(이 문서)
-3. `docs/2026-08-29-master-roadmap-v3.md`의 해당 R 섹션
-4. 그 작업에 직접 필요한 설계 문서만 선택적으로(예: `product-architecture-v3.md`의 관련 절, 해당 Gate 문서) — 전체 실행 로그·과거 계획·prompts는 문제 해결에 필요할 때만 검색.
+24. **P3 25차 — 유형별 문제 품질 계약·독립 품질 검사**(2026-09-15, migration 20261371): 세부 기술 30개마다 질문 대상/자료 근거/표시 방식/정답 근거/답안 형식 다섯 연결을 정의·검사(`lib/problem-quality-contract.ts`), 생성 모델과 별도의 독립 검사(정답 일치·오답 근거·추정 난이도, `lib/problem-generation/review.ts`), 파이프라인(생성→자료→계약→검사→사유 재생성→부족분, `pipeline.ts`)을 서버 액션과 표본 배치(`scripts/problem-quality-batch.ts`)가 공유. `problem_versions.quality`(추정 난이도·근거·오답 근거·검토 필요), `problem_response_stats` 뷰(보정 재료). 관리자에는 난이도 근거·검토 필요·응답 통계만 표시. 선택지는 A)~D). 문서 `docs/2026-09-15-problem-type-conditions.md`.
+23. **P3 24차 — 생성 게이트·템플릿 확장·제한 정리**(2026-09-15): 생성 결과는 공개 게이트와 같은 검사(자료 참조·렌더·내용)를 통과해야 초안 저장, 실패 시 사유 피드백으로 1회 자동 재생성 + 부족분 재생성. 평행선·횡단선 템플릿에 횡단선 교점·삼각형(crossing)과 수직 횡단선·직각 표시(perpendicular) 추가. 제한 조건은 네 분류(범위 밖/관례·정확성/구현 대기/임시 제거)로 전수 조사(`docs/2026-09-15-problem-bank-restructure.md` 6절), 구현 대기 4건은 scene 부품 조합 렌더러(6-6)로 다음 단위. 자료 포함 여부·유형은 생성 전에 선택(권장은 자료 포함 기본/텍스트형).
+22. **P3 23차 — 문제은행 생성·편집 재구성**(2026-09-15, migration 20261369·20261370): 관리 과목과 문항 체계(sat_rw/sat_math/ap, `problems.exam_system`·`ap_subject`) 분리, 생성 탭에 문항 체계 탭 + 7단계 흐름, 체계·유형별 항목만 표시(`editorVisibility`), 자료 필요성 자동 판정(`lib/problem-material-need.ts`, R&W 정량 근거 포함, 필수면 저장·공개 차단), 질문 분리 저장(`problem_versions.question`)과 복수 생성 계약 검증(질문 없는 결과는 저장 안 함, 사유 분리), 질문 없는 문제는 자동 구성 후보 제외 + 집계·'질문 보완 필요' 표시, AP 는 과목 선택·준비 중 자리만. 문서 `docs/2026-09-15-problem-bank-restructure.md`.
+21. **P3 22차 — RW 구조화 자료 블록**: 기존 11개 유형에 Text 1/Text 2 구역·메모 목록+목표·빈칸/밑줄 대상(정확히 하나)·질문 분리·정량 근거 figure(data) 를 저장 시 해석·검증(`lib/rw-stimulus.ts` → `render_check` → 공개 게이트, DB 변경 없음). 학생·관리자 같은 `RwStimulusView`. 레거시 passage 그대로 읽힘, 코드 없는 옛 문제는 검사 안 함. 로컬 E2E 13건(결정적 7 + AI 6) 통과. 문서 `docs/2026-09-14-rw-structured-blocks.md`. 다음: 분류 후속 UI(criteria skill_codes 편집·일괄 지정), Preview UI UAT.
+20. **P3 21차 — SAT Math 마무리**: 부분 3건 해소 + E2E 없던 표현 5건 + 템플릿 8 복합 도형(음영) → 19개 기술 코드 전부 검증됨, "SAT Math 범위 완료(로컬 E2E 기준)". 3D 좌표는 범위 밖 판정. 다음: Reading & Writing 기존 11개 유형의 구조화 자료 블록(Text 1/2·메모·표/그래프 근거·밑줄/빈칸) 보완.
+19. **P3 20차 — SAT Math 커버리지 매트릭스**(`docs/2026-09-14-sat-math-coverage-matrix.md`: 기술 코드 19 × 표현 × 상태 — 검증됨 16·부분 3), figure_choice 정답 자리 자동 배치·정답 불일치 거부, E2E 그래프 선택지 통과.
+18. **P3 19차 — 좌표기하·복합 도형(polygon·circle·midpoint·intersection·transform, 값 계산 대조), figure_choice/figure_set, 수식·선택지 블록(KaTeX 조판 검증·로마숫자 진술 `statements` `20261368`·선택지 정합·SPR 형식) → 내용 검증도 `render_check` 게이트.** 로컬 E2E(진술 블록) 통과. 다음: SAT Math 커버리지 매트릭스 문서 → 분류 후속 UI.
+17. **P3 18차 — 템플릿 6 사각형·다각형, 템플릿 7 입체 2.5D**(직육면체·정육면체·원기둥·원뿔·구·사각뿔). 대표 10문항씩·거부 사례·로컬 E2E(사다리꼴·원기둥) 통과. 다음: 좌표기하·복합 도형 → 그래프/도형 선택지(figure choice) → 수식·로마숫자 선택지 Block.
+16. **P3 17차 — SAT 6~11 대조 보완 + 템플릿 5 원**: 점도표·양방향 표·문장형 자료, 음영 부등식·조각함수·유리함수·점근선, 선택지 부등호 대조·좌표 노출 거부, 원 템플릿(중심·반지름·현·호·부채꼴·접선·중심각·원주각). 로컬 E2E(원·부등식) 통과.
+15. **P3 16차 — 문제 분류 모델**(`20261367`): `problem_skill_codes`(SAT 영역 8 · 세부 기술 30, College Board 분류), `problems.sat_domain/skill_code`(코드→영역 트리거, 옛 유형에서 영역 백필), 문제은행 필터·새 문제(영역→기술 선택 시 유형·형식·그림 요구 자동)·분류 편집, AI 생성 프롬프트에 영역·기술 힌트, 자동 구성 후보 뷰·회차 조건 `skill_codes` 필터, 수업 준비 후보 기술 필터·배지, 학생 문제 기록 기술별 성취(채점 기준). 로컬 통합·컴포넌트 테스트 통과.
+14. **P3 15차 — 템플릿 4 표·데이터 그래프**(표·숫자 목록·막대·선·히스토그램·산점도+추세선·상자그림, 한 원본 데이터, 값·항목·단위 참조 lint, `require_data`). 로컬 E2E 통과, Preview DB 게이트 실측. 다음: SAT 영역·세부 기술 코드 분류 모델(문제은행·자동 구성·성취 기록 공통) → 원 → 사각형·다각형·입체 → 좌표기하·복합 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
+13. **P3 14차 — 템플릿 3 좌표평면(객체 id)**: 점·직선·함수·선분·산점도+추세선, 라벨 후보 자리 배치(없으면 거부), 지문 좌표·이름·식 일치 lint, 옛 `coordinate_plane` 레거시화(`20261366`), 템플릿 1 → 공통 `Sheet` 이관. 로컬 E2E 통과. 제품 오너 확정: 수학 템플릿 전 범위(표·데이터 그래프, 원·사각형·좌표기하, 그래프/도형 선택지·복합 도형)를 이 로드맵에서 완결.
+12. **P3 13차 — 템플릿 2 삼각형·직각삼각형·합동/닮음**(관계형 스키마·표준형 배치·변/각/직각/높이/두 번째 삼각형·참조 lint·라벨 충돌), 공통 조판 `_layout.ts`. 로컬 E2E 통과. Preview 는 DB 게이트만 실측(UI 는 UAT 계정 필요).
+11. **P3 12차 — 표준 렌더링 엔진 템플릿 1(평행선·횡단선·각)** 끝까지: AI 는 관계만(`parallel_transversal`), 렌더러가 좌표·호·라벨 자리(충돌 시 거부), 검증 계층 `checkFigure`(지문 참조·중복·충돌·잘림·방위 표현·레거시·alt) → `render_check` 저장, 공개 게이트(`20261365`: ok + 그림 해시 일치 + 미리보기 확인, 좌표형 geometry 공개 불가=재생성 필요, 업로드 alt 필수). 관리자 편집기: 렌더 미리보기 우선, JSON 접힘. 로컬 E2E(실제 모델) 통과.
+10. **P3 11차** — 과제 발급 = 키워드별 개수·무작위(`20261364`), 학생 포털 문제 기록 v3 재구성, v3 과제 탭 역할 수정(답 선택·필기 불가 결함), 교재 목차 이름 = 현재 노출용 이름, 교사 해설 보기 전 형식, 그림 라벨 평문화, 렌더링 엔진 설계안.
+9. **P3 10차** — 그림 SAT 지면 스타일(격자·화살표 축·원점 O·축 설명·각 호 표시), UAT 수정: 문제 화면 필기 레이어가 **클릭을 먹던 결함**(선택지·버튼 클릭 불가) 수정, 서술형 = 글 상자 타이핑, 연습장 제거, PDF T 상자 기본 크기(가로 2배·5줄), 수업 준비 `담을 수 있는 문제` 클릭 미리보기(지문·선택지·그림), **키워드 자동 문제 기본 캡 20**(`20261363`).
+
+25. **P3 26차 — SAT Math 19개 기술 코드 전부 결정적 컴파일러로 전환**(AI 호출 0회, 2026-09-16~17): 식·함수 공통 엔진(A) 8종(`linear_equations_two_var`·`systems_linear`은 같은 엔진 재사용·`linear_inequalities`·`linear_equations_one_var`·`linear_functions`·`equivalent_expressions`·`nonlinear_equations_systems`·`nonlinear_functions`), 통계·확률 공통 엔진(B) 7종(`ratios_rates_units`·`percentages`·`one_variable_data`·`two_variable_data`·`probability`·`inference_margin_error`·`evaluating_statistical_claims`), 도형 공통 엔진(C) 4종(`area_volume`·`lines_angles_triangles`·`right_triangles_trigonometry`·`circles`). 해설 이중언어(`explanation`/`explanationEn`, DB 컬럼 `problem_versions.explanation_en`, 관리자 UI 토글)도 이 배치에서 완성. 커밋 `e3b687d`~`0428b05`(중간 UAT 수정 다수 포함, `git log` 참고). 다음: Preview UI UAT(로컬·non-prod DB 검증만 완료, 아직 Preview 화면 확인 안 됨).
+26. **P3 27차 — R&W 5개 세부 기술에 얇은 근거 모델(Evidence Model) 추가**(2026-09-17, migration `20261403000000`): `words_in_context`·`central_ideas_details`·`inferences`·`command_of_evidence_text`·`cross_text_connections`에 구조화된 `target`/`evidence_span`/`answer_rationale`/`distractor_error_types` 필드를 기존 생성과 함께 산출, 저장 전 결정적 검사(지문 내 축어 일치 evidence_span + enum 검증)를 초안 채택 게이트로 추가, 관리자 화면에만 노출(학생·학부모는 안 보임). `cross_text_connections`의 `target`이 질문 재진술이 아니라 두 지문을 합성한 명제를 내도록 후속 수정. 커밋 `f106784`, `1e47505`. 다음: Preview UI UAT.
+27. **P5 — 언어 전환 이전 문제 아카이브**(migration `20261402000000`): 문제 지문·질문·선택지가 영어로 통일되기 전 시기(한국어 혼용)의 기존 문제를 전부 보관 상태로 전환(`problems`/`problem_versions` 공개 후보에서 제외), 삭제 없음.
+
+마이그레이션: `20261346`~`20261403`(전부 additive, 공유 non-prod 적용). 배치별 상세는 아카이브의 각 블록.
+
+> 아래 28~30번은 `git log` 재구성(2026-09-23, 커밋 메시지 원문 기준 — 그 세션의 실시간 맥락은 없어 UAT 세부 스크린샷 등 부가 정보는 생략했다).
+
+28. **학생 성공 플래너 Board(2026-09-21) + 컨설턴트 role/포털 Phase 1~2(2026-09-22, migration `20261444000000`~`20261459000000`)**:
+    - `2de9d94` **Student Success Planner Board MVP**: 과제·모의고사·단어시험·수동 할 일을 한 보드(칸반)에서 관리하는 화면을 학생 포털에 신설 — 이후 컨설턴트 담당 학생 패널의 Board 탭이 이 컴포넌트를 그대로 재사용.
+    - `24e2389`/`7422284`(docs) — 컨설턴트 인테이크 role 모델·관리자 핸드오프 설계 확정(`docs/superpowers/specs/2026-09-22-consultant-role-and-intake-design.md`).
+    - `d3043dc` **컨설턴트 role/포털 Phase 1**: `consultations`에 `intake_owner_id`/`admissions_consultant_id`/`contacted_at` 추가, `assign_consultation_owner()`/`mark_consultation_contacted()` RPC로 배정·연락 상태를 감사 이력과 함께 변경. `manage_consultation_intake`/`manage_admissions_students` capability 도입. 관리자 "Consultants" 탭에 미배정 상담 요청 큐, 컨설턴트 포털에 "신규 배정" 화면 신설.
+    - `e204f76`/`32ed1b2`/`4bfea5a` — 실제 UAT 컨설턴트 계정(이메일이 여러 번 바뀌며 재백필) role/capability 부여.
+    - `b16dfe4` **컨설턴트별 가능시간**: 기존 회사 공용 가용시간 규칙을 컨설턴트 개인 단위로도 가능하게 확장(`consultant_id` nullable — null=공용, 값 있음=개인).
+    - `05a6e96` **랜딩 폼 "신청만" + 컨설턴트 전용 스케줄링 링크**: 홈페이지 상담 신청에서 슬롯 선택 UI 제거(신청만 접수). 관리자가 어드미션 컨설턴트를 배정하면 "링크 보내기"로 서명된 스케줄링 링크(`/schedule/[token]`)를 수동 발송(자동 발송 아님, 실제 이메일 발송 지점이라 확인 게이트). 고객은 로그인 없이 배정된 컨설턴트의 개인 가능시간만 보고 직접 확정.
+    - `c80ac70` **컨설턴트 전용 Google 로그인**: 캘린더 접근이 필요해 비밀번호 로그인이 아닌 Google 로그인 전용 계정 연결(선생님 콜백과 동일 패턴, 사전 등록 이메일만 최초 로그인 시 자동 연결).
+    - `6637c51`/`a376aa4` — 스케줄링 이메일 CTA 버튼 스타일 적용, 확정 시 동의 버전 누락 버그 수정(기존 UAT 데이터 백필 포함).
+    - `ee4a91e` **컨설턴트별 Calendar organizer + 자동배정**: 배정된 어드미션 컨설턴트가 있으면 그 사람의 실제 Google Workspace 계정을 Calendar/Meet organizer로 사용(R6 선생님별 패턴과 동일). 전역 자동배정 토글(관리자) + 컨설턴트 개인 "신규 배정 받기" 토글, 켜져 있으면 신청 접수 즉시 가용 컨설턴트 중 무작위 배정. `42addae`는 그 토글 RPC의 WHERE절 누락 버그 수정.
+
+29. **컨설턴트 담당 학생 패널(Overview/Board/Roadmap) + 칸반화 + Board/Roadmap 공통 기능 확장**(2026-09-22, migration `20261460000000`~`20261463000000`):
+    - `b53c431` **담당 학생 Overview/Board(수정 권한)/Roadmap 탭**: 로드맵만 보이던 학생 카드 클릭 화면을 세 서브탭으로 확장, Board는 컨설턴트가 학생 본인처럼 직접 할 일을 추가·이동·삭제 가능(RLS에 `is_assigned_consultant_of()` 반영). `a9e6387`은 두 탭이 같은 데이터를 중복 조회하던 성능 결함과 이름 중복 표기(예: "학생 학생") 정정.
+    - `f53e088` **"신규 배정"을 칸반으로**: 컨설턴트 본인에게 배정된 상담 요청만 연락 필요/일정 조율 중/일정 확정 3칼럼 칸반으로 표시(관리자 화면은 반대로 전체 노출).
+    - `a1790e6` **Board 개선**: 카드마다 마감일 항상 노출(수동 할 일은 시작~마감 기간 입력 가능), 작성자(선생님/컨설턴트/학생 본인/관리자) 표시, 학생·학부모 Board 아래에 예정 수업 리스트 추가.
+    - `ced35f4` **로드맵 개선**: 저장 성공 배너, 수강과목을 개별 CRUD 가능한 리스트로 교체, "목표 설정" 서브서브탭(목표 GPA/SAT/AP 과목수/Extracurricular) 신설.
+    - `602fdae` **프로필 IA 재구성 + 타임라인뷰**: 프로필을 요약/인구통계/학업정보/대학 관심사/활동·수상/준비 현황 서브서브탭으로 재편, Board에 보드/타임라인 전환 토글 추가(마감일 기준 월별 묶음).
+    - `f356dc4` **간트 타임라인 + Board 구조 정리**: 타임라인뷰를 실제 간트 차트로 재작업, 학생 Home의 별도 "Done" 탭을 없애고 4칼럼 Board로 복귀(학부모 포털과 동일 구성), 학생 Home에 학부모와 동일한 "Review"(수업 리뷰) 탭 추가.
+    - `224cee7` **학부모 Home 서브탭 정리**: 종합/수업/상담 리뷰를 "Review" 하나로 통합, "Done"을 별도 탭 대신 Board 안 칼럼으로 재통합, 모의고사를 좌측 독립 nav로 이동.
+
+30. **로그인 화면 통합 — 역할별 버튼 3개 → "직원" 버튼 하나**(2026-09-22): `0349cdb` — 선생님/관리자/컨설턴트 개별 Google 로그인 버튼을 하나로 합치고, 첫 로그인 시 선생님→컨설턴트 순으로 사전 등록 여부를 확인해 자동 연결(재로그인은 기존 role로 바로 라우팅, 관리자 콜드 스타트는 미지원 — 기존 설계 유지). 개별 콜백 라우트는 삭제. `348a6b5`는 버튼 라벨을 "Staff - Google Login"으로 확정.
+
+31. **컨설턴트 포털 — 가구/학생 메신저 + 개인 일정 잡기 + 교사 재조정 요청**(2026-09-22~23, migration `20261464000000`~`20261472000000`, non-prod 반영 완료):
+    - **가구 메신저 컨설턴트 접근**: 담당 학생의 household 메신저(보호자↔컨설턴트)를 읽고 답장할 수 있게 함. `household_id_for_assigned_student()` SECURITY DEFINER RPC로 `household_members` 원본 행을 넓게 노출하지 않고 household_id만 반환하는 패턴 사용.
+    - **학생↔컨설턴트 개인 메신저**를 신설(보호자와 별도 채널). 프로필/모의고사 열람 RLS도 담당 컨설턴트까지 확장(`is_assigned_consultant_of()`).
+    - **학생-컨설턴트 개인 일정 잡기(신청→확정)**: 수업 예약과 같은 UI 패턴이되, 학생 개인 단위로 진행 가능(보호자 동반 불필요) — 컨설턴트가 요청을 확인하고 확정/변경/거절하는 request→confirm 흐름(수업 예약 자체의 즉시 확정 방식과는 분리해 새로 설계, 기존 예약 상태 머신은 건드리지 않음).
+    - **선생님 수업 재조정 요청**: 기존 즉시 확정 예약 시스템(약 54개 연관 테스트)은 그대로 두고, 교사가 확정된 예약에 대해 변경을 요청하면 학생/보호자가 확인 후 확정·변경·거절할 수 있는 별도 레이어를 추가.
+    - **버그 수정**(실사용 UAT로 발견): 컨설턴트 담당 학생 목록이 전부 "이름 없음"으로 뜨던 문제(프로필 가시성 RLS 누락), Overview/Board가 500으로 멈추던 문제(모의고사 권한 함수가 컨설턴트 관계를 모름), 일정 확정 시각이 신청 시각과 어긋나던 타임존 버그(`toISOString()`이 항상 UTC를 반환해 `datetime-local` input에 잘못 채워짐 — `lib/calendar-date-utils.ts`에 DST-안전 `zonedDateTimeToUtcIso()` 유틸 신설), 학생 쪽 "일정 잡기"가 배정된 컨설턴트가 있는데도 없다고 뜨던 RLS 누락.
+    - **메신저 안읽음 배지**: 학생·컨설턴트 포털 데스크톱/모바일 내비에 실제 안읽음 수 배지 추가. 버그 수정 — 보호자가 보낸 메시지가 학생 쪽 배지에 안 잡히던 필터 누락.
+
+32. **ESLint 실제 이슈 161개 전량 정리 + 죽은 기능 2건 삭제(사용자 승인)**(2026-09-23):
+    - **근본 원인 2건**: (a) `.claude/worktrees/**`(다른 세션들의 전체 git worktree 사본, 각자 `.next` 빌드 산출물 포함)가 lint 대상에서 빠지지 않아 `npx eslint .`가 실제 161개가 아니라 766개로 부풀려 보고되고 있었음 — `eslint.config.mjs`에 ignore 패턴 추가. (b) 코드베이스 전반에 이미 퍼져 있던 "`_` 접두사로 의도적 미사용 표시" 관례를 ESLint 설정이 인식하지 못해, 그 관례를 따른 곳들까지 전부 에러로 잡히고 있었음(`no-unused-vars` 71개 중 23개) — `argsIgnorePattern`/`varsIgnorePattern: '^_'` 규칙 추가.
+    - 나머지는 카테고리별 수작업 정리: 미사용 import·타입·함수·상수 삭제, 한국어 따옴표 `&ldquo;/&rdquo;` 치환(30건), `react/no-children-prop`(데이터 prop 이름이 우연히 `children`과 겹치던 곳을 JSX children 형태로 전환, 동작 동일), `exhaustive-deps` 실제 버그 1건 수정(관리자 통합 일정 화면이 시간대 비동기 로드 후 재계산 안 되던 문제), `set-state-in-effect` 28건(전부 "마운트 시 데이터 로드" 관용 패턴 확인 후 의도 명시), 렌더 중 `Date.now()`/ref 직접 조작 2건을 effect로 이동.
+    - **기획 참고 — 기능 2건 완전 삭제(코드베이스에서 더 이상 존재하지 않음)**:
+      1. **"제안서(Proposal)" 생성/발송 UI**(`ProposalSection`, admin `ConsultationTab`) — 2026-09-10 서브탭 재편으로 진입 경로 자체가 이미 없어졌던 채 방치돼 있던 기능. `제안서 생성 → 발송 → 학부모 수락/거절 관리자 기록` 흐름 전체와 백엔드 액션(`createProposal`/`sendProposal`/`respondToProposal`)을 삭제. **`proposals`/`proposal_subjects` DB 테이블 자체는 남아있음**(삭제하지 않음, 데이터 손실 없음). 이 기능이 다시 필요해지면 재설계가 필요함(코드 없음).
+      2. **개인 이메일 기반 선생님/학부모 초대 폼**(`InviteForm`, admin `UsersTab`) — Google Workspace 프로비저닝(R2 Task 7)으로 이미 대체된 뒤 호출부 없이 방치돼 있던 폼. 삭제.
+    - 검증: `tsc` 클린, `vitest run` 2530/2531 통과(1건은 무관한 기존 flaky), `npm run build` 성공, Preview 배포 확인.
+
+33. **컨설턴트 포털 확장 Phase B/C + 관리자 포털 정리(2026-09-23, 사용자 업무지시서 전체 완료, migration `20261550000000`~`20261568000000`)**:
+    - **Phase B — 컨설턴트 포털**: Students 탭을 배정 중/배정 종료 서브탭으로 분리(종료는 기록 조회 전용) + Roadmap 상단 중복 요약 제거. Documents 메인 탭 신설(담당 학생 계약 문서·서명 상태, 다른 컨설턴트 담당 건 접근 불가). Schedule 메인 탭으로 통합(예정 일정/일정 오픈/휴무 3서브탭 — 휴무 등록 시 기존 확정 일정과 충돌 검사). Profile(성별·이력·시간대 자기수정, 입사일 등 회사기준정보는 관리자 전용 — `protect_hire_date` 트리거로 강제). Settlement(계좌 등록 + 관리자가 확정한 지급 예정/완료 내역 조회 — 상담 건수 기반 자동계산·자동지급 없음, 확정 전후 상태 구분).
+    - **Phase A 마무리**: 보호자가 자녀별 담당 컨설턴트에게 직접 상담 신청(그 컨설턴트의 가능 시간만 노출). 관리자<->컨설턴트/선생님 내부 메신저 신설(고객에게 노출 안 됨). 선생님 배정 요청 수락/거절 결과가 내부 메신저에 시스템 메시지로 반영.
+    - **Phase C — 상담 세션 화면**: 컨설턴트가 확정된 일정에서 "상담 시작"으로 진입, 관리자가 등록한 상담 자료를 열람(다운로드 기록 남김), 상담 메모·다음 행동 저장.
+    - **버그 2건(전부 실사용 UAT로 발견, mock 테스트는 못 잡음)**: (a) 보호자→담당 컨설턴트 상담 신청이 처음부터 전혀 동작하지 않았음 — `consultant_assignments`/`profiles`에 guardian용 SELECT RLS 정책 자체가 없어 조용히 빈 배열만 반환(예외 없음). (b) `consultation_materials` RLS가 `profiles` role 확인을 일반 서브쿼리로 써서 `profiles`의 무거운 RLS가 재귀 평가돼 `statement timeout` 발생 — `is_admin()`과 같은 SECURITY DEFINER 헬퍼(`is_consultant()`)로 교체. **패턴 노트**: 다른 테이블 값을 확인하는 새 RLS 정책은 반드시 SECURITY DEFINER 헬퍼를 쓸 것(인라인 서브쿼리는 침묵 실패 또는 타임아웃 위험).
+    - **관리자 포털 정리(5항목 전체 완료)**: (1) Users에 Consultants 서브탭 추가(담당 학생·이력·프로필, 매칭 변경은 기존 Consultants 운영 탭과 같은 RPC 재사용). (2) Messenger 메인 탭 신설, Teachers/Consultants 내부 문의 분리(향후 학생·보호자 채널 확장 가능한 구조). (3) Inquiries 면담 목록에서 담당 컨설턴트가 있는 요청은 "처리 중" 배지로 표시하고 상태변경 버튼 기본 숨김("관리자 개입"으로 예외 처리, 전체 조회는 유지). (4) Entitlements/Schedule/Bookings/Payouts/Onboarding 장문 설명 축약, 내부 용어(hold/payout_batches/batch 등) 순화, **Bookings 화면을 서브탭 없는 7섹션 나열 구조에서 4개 서브탭(동기화 실패·재처리/외부 변경 감지/지각·노쇼·세션 판정/메이크업·정산 조정)으로 재구성**. (5) Users/Onboarding 성능 실측(컨설턴트 데이터 추가로 인한 불필요한 전체 조회 없음 확인 — 서브탭 열 때만 lazy fetch).
+    - 검증: 매 슬라이스마다 `tsc`/`eslint`/관련 vitest 통과 확인, 세션 종료 시점 `vitest run --exclude "**/*.integration.test.ts"` 334개 파일 2595개 전부 통과, `npm run build` 성공. 매 슬라이스 실제 Preview 배포 + 실제 Google/이메일 계정으로 라이브 UAT(관리자 `official@alton.education`, 컨설턴트 `jiman@alton.education`, 선생님 `teacher1@alton.education`, 보호자/학생 `matchbox512+alton-uat-p16@gmail.com` 계열 실제 비밀번호 로그인) — UAT 테스트 데이터·메시지는 세션 중 즉시 정리(단, `document_access_events` 등 append-only 감사 테이블은 정책대로 보존).
+    - **남은 것**: (a) 컨설턴트 시간대 설정이 앱 전역 날짜 표시에 아직 일관 적용되지 않음(저장·조회만 구현, Profile 화면 자체에서 명시적으로 알린 한계). (b) 상담 자료 화면 캡처 등 완전한 유출 차단은 구현 범위 밖(다운로드/공개링크 제한 + 접근 기록만). (c) Bookings 서브탭 재구성 이후 UAT는 이번 세션에서 기능별로만 확인 — 마일스톤 종료 폴리싱 라운드에서 화면 전체 한 번 더 훑어볼 것.
+
+34. **`feature/university-info-sources` 병합 + 실데이터 non-prod 반영(2026-09-23, 조정 세션 수행, 사용자 승인)**: 대학 정보 수집·신고 브랜치를 통합 브랜치로 merge(커밋 `3015727`, 충돌 없음). 새 마이그레이션은 `20261600000000`(college_db_p10_cds_metric_keys — CDS 세부 지표 metric_key 화이트리스트 확장, additive) 하나뿐, 그 이전 `20261480000000`~`20261540000000`은 이미 이전에 적용돼 있었다. `db push --linked`로 non-prod 반영(local=remote 확인), `tsc`/`eslint`/`vitest`(334 files·2595 tests)/`npm run build` 전부 통과.
+    - **실데이터 동기화**: 해당 브랜치는 200개교 CDS 실데이터를 로컬 supabase(`127.0.0.1:54422`)에만 psql로 직접 입력해왔다(non-prod에는 없었음). `pg_dump --data-only`로 받은 export를 검토한 결과 **`universities.id`가 로컬/non-prod 간 서로 다른 UUID**임을 발견(seed 마이그레이션이 환경마다 `gen_random_uuid()`로 새로 생성 — 애초에 `(name, country)` unique key로 dedup하는 구조) — non-prod에서 200개교를 `(name, country)`로 매칭해 id를 재매핑한 뒤 적용. `university_update_proposals`(341행, local-only `refresh_job_id` 참조라 FK 위반)는 내부 봇 로그성 데이터로 판단해 이번엔 제외. 결과(non-prod에서 직접 확인): `data_collection_status` verified_pilot 142/sources_pending_review 55/unconfirmed 3, `university_admission_metrics` 3378행, `university_majors` 3924행, `university_source_urls` 398행 — 원 세션 보고 수치와 일치. Preview 컨설턴트 포털 College Explore(Princeton University 상세)에서 실제 CDS 수치(SAT 1510–1580, ACT 34–35, 합격률 4.4% 등) 정상 표시 확인.
+    - **패턴 노트**: 여러 세션이 각자 로컬 DB에 데이터를 채운 뒤 병합할 때, id가 `gen_random_uuid()` 기반이면 환경마다 다르다는 것을 항상 가정하고 자연키(name/email 등)로 재매핑해야 한다 — 그대로 INSERT하면 FK가 로컬 전용 id를 가리켜 전부 실패하거나(참조 있는 테이블) 중복 행이 생긴다(참조 없는 테이블).
+
+마이그레이션(2026-09-14 배치): `20261346`~`20261403`. 이후 배치는 위 각 항목 참고, 최신은 `20261600000000`(1절 표 참고).
+
+35. **SAT Math 그래프 선택지 필수 정책 버그 수정(2026-09-24)**: `nonlinear_functions`는 일반 AI 파이프라인이 아니라 결정적 Math 컴파일러로 생성되며, 컴파일러가 `require_figure_choice`를 무시해 텍스트 문항을 채택하던 것이 실제 원인. 이차함수의 동일 축 그래프 선택지 4개를 계산해 만들고 정답 자리·오답 근거를 함께 맞췄다. 컴파일러와 일반 파이프라인 양쪽에서 관리자 `require_*` 정책의 자료 누락을 거부하도록 검사하고, 관리자 읽기 전용 검수 화면에도 그래프 4개를 표시한다. DB 변경 없음. 로컬 관리자 브라우저에서 7문항 생성·7건 모두 `figure_choice` 4개·실제 SVG 4개 확인.
+36. **문제은행 유형별 생성 품질 UAT(2026-09-24, 진행 중, 브랜치 `uat/problem-bank-generation-quality`)**: 위 35번 수정이 실제로 전 세부 기술·전 자료 유형에서 안전한지 SAT Math 19개(35행, 자료 유형별 분기 포함)·SAT R&W 11개(11행)를 코드로 유도한 매트릭스로 전수 점검. Math 19개는 전부 AI 없는 결정적 컴파일러 경로(`runMathCompilerBatch`)라 비용 없이 자동화(`lib/problem-generation/uat-matrix.test.ts`, vitest, 결과는 `docs/assets/2026-09-24-problem-bank-uat/matrix-result.json`) — **완료**: 35행 모두 "자료 필수인데 자료 없이 통과" 재발은 없음. 1차 실행에서 9개 조합(35번 수정이 `materialBlocker`를 전 컴파일러 공통 경로에 걸면서, 애초에 그 자료 유형을 그려본 적 없던 컴파일러가 0/2건으로 막힘 — `linear_functions` plane·data, `systems_linear` figure_choice, `nonlinear_equations_systems` plane, `ratios_rates_units`/`percentages`/`inference_margin_error`/`evaluating_statistical_claims` data, `circles` plane)이 드러났고, 제품 오너 지시로 **전부 실제 자료 생성기 구현으로 해결**(옵션 제거 아님) — `linear_functions`에 직선 그래프·함수표, `systems_linear`에 그래프 선택지 4개(코드로 계산한 4개 직선쌍 중 하나만 일치), `nonlinear_equations_systems`에 이차함수+직선 좌표평면(linear_quadratic_intersection 세부 패턴 고정), `circles`에 좌표평면 원(circle_equation_transform 고정), 통계·비율 4종에 표 자료 추가. 지원 안 하는 세부 패턴을 강제로 고르면 조용히 대체하지 않고 명시적으로 거절한다. **재실행 결과: 35행 전부 2/2(70/70 문항) 통과, 8회 반복 실행으로 무작위성 불안정 없음 확인**(커밋 `0642099`). tsc·eslint·관련 vitest(504건) 전부 통과, circles 컴파일러의 기존 무작위 스트레스 테스트 1건은 이번 변경과 무관한 사전 존재 flaky 테스트로 별도 격리 확인. SAT R&W 11개 행은 실제 AI 파이프라인이 필요해 이 세션 환경에 `ANTHROPIC_API_KEY`가 없어 미실행(테스트는 자동 skip, 키만 넣으면 그대로 돈다) — `vercel env pull`로 Preview 시크릿을 시도했으나 CLI는 Secret 타입 값을 복호화해 주지 않아 확보 불가(로그·저장소에 키 값 남기지 않음). **브라우저 UAT 완료**: 로컬 dev 서버 + 로컬 Supabase로 신고된 시나리오(SAT Math > Advanced Math > Nonlinear functions > "자료 포함 · 그래프/도형 선택지 4개", 7문항)를 실제 관리자 화면에서 재현 — "자동 통과 7/7" 확인, DB 조회로 7건 전부 `figure.type='figure_choice'`·`choices` 4개 확인. **별도 관찰(이번 수정과 무관, 조사 안 함)**: 검수 탭에서 AI/컴파일러 생성 미공개 초안 행을 펼쳐도 "지문/자료" 미리보기 영역이 비어 보임(목록 제목도 "(아직 내용이 없는 문제)") — DB에는 내용이 정상 저장돼 있어 표시 전용 문제로 보이나, 이번 수정 파일과 무관한 영역이라 원인 조사는 하지 않음. 제품 오너 확인 필요하면 별도 티켓으로.
+
+## 5. 검증 구분
+
+- **자동 테스트(로컬 DB)**: 위 전부. 통합 — 부모 변경 반영 25, Drive 자료 15, 채점·재고정·과제·문제 필기·출처 분리·SPR·그림 게이트 21 등. 컴포넌트 — ProblemsPanel 32, ProblemBankTab 28, PDF 레이어 9, HomeworkTab 7, StudentHomeworkTab 3, CurriculumDocsTab 13, Drive 패널 6, 셸 18, figures 4, blocks 4.
+- **실제 Drive·Preview·제품 오너 계정**: Drive 읽기 → 폴더 생성 → 가져오기 → 고정 사본 공개 → 카탈로그 편입 → 학생 회차 → 수업 준비 → 수업 시작 → PDF 렌더·필기 저장/복원 → 문제 슬라이드 → 객관식 채점.
+- **실제 모델 호출**: 표본 10문항(로컬).
+- **미확인**: 2026-09-14 야간 배치(P3 5차 이후)의 Preview UAT — 진행 중 / 두 계정 동시 필기·상대 레이어 지우개 / 영상 재생 / 모바일·iPad·Pencil / 원본 교체·재공개 후 필기 유지(RPC 테스트만) / 시험 데이터: 옛 과제 UI 답안(`session_homework_attempts`)은 옮기지 않음.
+
+## 6. 미결·다음 작업 단위
+
+- **제품 분석 P0 — Vercel Web Analytics/Speed Insights + 상담 전환 이벤트 3종
+  (2026-09-25, 완료, `docs/2026-09-25-product-analytics-prd.md` 기준)**:
+  랜딩·상담 신청 전환을 측정할 최소 분석 기반. 대학 탐색은 이번 범위에서
+  명시적으로 제외.
+  - **연결**: `@vercel/analytics`/`@vercel/speed-insights`를
+    `app/layout.tsx`에 `AnalyticsScripts`(서버 컴포넌트)로 연결. 이
+    컴포넌트는 `process.env.NEXT_PUBLIC_VERCEL_ENV === "production"`일
+    때만 `<Analytics/>`/`<SpeedInsights/>`를 렌더링한다 — `next.config.ts`가
+    `VERCEL_ENV`(Vercel 시스템 환경변수, 기본적으로 클라이언트 미노출)를
+    `NEXT_PUBLIC_VERCEL_ENV`로 명시 복사해, 프로젝트의 "Automatically
+    expose System Environment Variables" 설정 여부와 무관하게 항상 동작한다.
+    local/test/Preview는 이 값이 없거나 `"preview"`라 스크립트 자체가
+    내려가지 않는다(별도 활성화 필요 없음, 설정 하나로 충분).
+  - **공통 이벤트 모듈**: `lib/analytics/`
+    (`events.ts`=이벤트별 허용 속성 화이트리스트 단일 진실 소스,
+    `track.ts`=`trackEvent()`, `config.ts`=환경 판정,
+    `AnalyticsScripts.tsx`). 화면 코드는 `trackEvent(eventName, props)`만
+    호출 — 도구 종류·허용 속성은 전부 이 모듈이 결정한다.
+  - **이벤트 3종**(P0, PRD 축소판 — 대학 탐색 이벤트 2종은 제외):
+    `landing_cta_clicked`(`cta_name`, `section`) — 랜딩 헤더 "상담 신청"
+    링크 클릭(`app/LandingCtaLink.tsx`). `consultation_started`
+    (`entry_point`) — 상담 폼 첫 포커스, 폼 인스턴스당 1회(`onceKey`).
+    `consultation_submitted`(`entry_point`, `consultation_type`) — 서버
+    저장 성공 직후에만, 실패(catch)에는 보내지 않음 — 전부
+    `app/ConsultForm.tsx`.
+  - **개인정보 방어**: `trackEvent()`가 이벤트별 화이트리스트에 없는 속성은
+    무조건 버린다(블랙리스트가 아니라 화이트리스트라 실수로 넣은 새 필드가
+    기본적으로 새어나가지 않는다). `page_path`는 호출부 입력을 쓰지 않고
+    `window.location.pathname`에서 직접 읽어 쿼리스트링·fragment를 원천
+    차단한다.
+  - **중복 방지**: `onceKey`(폼당 1회성 이벤트)와 짧은 시간창 디바운스
+    (연타 방지) 두 가지 메커니즘. 분석 전송 예외는 항상 삼켜 실제 기능
+    (로그인·상담 제출)에 영향 없음.
+  - **검증**: tsc/eslint 클린. 신규 유닛 테스트 24건(환경 게이팅, 화이트
+    리스트, PII 미포함, 중복 방지, 실패 시 미발생 등) 전부 통과. 전체 회귀
+    2694/2708(12 skip) 통과(무관한 기존 flaky 지오메트리 테스트 1건 제외).
+  - **Preview 확인**: 랜딩 CTA 클릭·상담 폼 작성·제출 성공 흐름을 실제
+    브라우저로 확인(아래 최종 보고 참고) — Preview에서는 분석 스크립트
+    자체가 로드되지 않아 네트워크 전송이 없음을 확인.
+  - **운영 전 필요 작업(코드 변경 아님, 사람이 해야 함)**: Vercel
+    프로젝트 설정에서 Web Analytics와 Speed Insights를 활성화해야
+    실제 프로덕션 배포에서 대시보드에 데이터가 쌓인다(Project → Analytics
+    / Speed Insights 탭에서 Enable). 코드는 이미 조건부로 스크립트를
+    내려주므로, 이 활성화 전에는 프로덕션에서도 대시보드가 비어 있을 뿐
+    기능·성능에는 영향 없다.
+  - **남은 것**: P1(대학 탐색 이벤트 2종, PostHog/GA4)은 이번 범위 밖 —
+    별도 지시 대기.
+- **R12 보존 자동화 1차 슬라이스 — closure_pending 자동 폐쇄 + closed 계정
+  접근통제(2026-09-24, 완료, `20261900000013`~`20261900000015`)**: §4.13/§4.19의
+  `closure_pending`(30일 철회 유예) → `closed` 자동 전환과, `closed` 계정
+  제한 보관("사유 입력 후에만 접근, 조회는 감사 로그에 남긴다")을 구현.
+  `close_expired_pending_accounts()`(cron 대상, `/api/cron/close-pending-accounts`,
+  다른 크론과 동일 fail-closed — 지금은 CRON_SECRET 미설정으로 비활성),
+  `record_closed_account_access()` + `account_closure_access_events`(append-only
+  감사), 관리자 Users 화면의 `ClosedAccountAccessGate`(사유 입력 전엔
+  StudentDetailPanel/TeacherDetailPanel을 렌더하지 않음). non-prod에서 실제
+  계정으로 30일 경과 backdate → 자동 폐쇄 → 사유 입력 열람 → 감사 기록까지
+  end-to-end 확인 후 테스트 계정 정리(auth.users만 삭제, profiles/
+  account_status_events/account_closure_access_events는 정책대로 보존).
+  **버그 2건 발견·수정**: (1) `is_admin() or auth.role() = 'service_role'`
+  패턴이 `auth.role()`이 NULL일 때(일반 authenticated 세션이 jwt role claim을
+  안 가진 경우) `false or NULL` = NULL → plpgsql이 NULL을 false로 취급해
+  관리자/서비스 게이트를 그냥 통과시키는 fail-open이었다 — `mark_expired_invites()`
+  (`20261900000007`)에도 같은 결함이 있어서 함께 고침(`20261900000014`).
+  (2) `close_expired_pending_accounts()` 초안이 `status_transition_tokens`
+  없이 바로 UPDATE해서 `protect_account_status()` 트리거가 항상 거부.
+  **남은 것**: 자료유형별 보관기간 실제 자동 삭제/비식별화 배치, GW-14
+  (Smart Notes 미검토 원본 1년/확정 리뷰 3년 이중 만료 — Google Drive
+  API 연동 필요, 별도 슬라이스), 정기 스케줄러 연결(현재는 cron 등록만
+  하고 CRON_SECRET 미설정으로 전부 비활성 유지 — 사용자가 활성화 시점 결정).
+- **ParentDetailPanel 신설(2026-09-24, 완료)**: 관리자 Users > 학부모 카드가
+  이제 클릭 가능하며, 상세 화면에서 상태 전환(Student/TeacherDetailPanel과
+  동일 패턴, closed는 ClosedAccountAccessGate로 보호), 연결 자녀와 자녀별
+  담당 컨설턴트(배정 변경은 ConsultantDetailPanel과 같은
+  `setStudentConsultantAction()` 재사용), 가구의 계약·진행 현황
+  (`contracts`, `v3_contract_status` 11개 값 전부 라벨링), 가구 연락 이력
+  (`household_messages` 최근 20건)을 확인·관리할 수 있다. `ParentListItem`에
+  `status` 필드가 그동안 아예 없었던 것도 함께 추가(`loadParents`).
+  non-prod 실제 계정으로 브라우저 검증 완료. `setParentStatus`는 이제 실제
+  UI 호출부가 생겼다(이전까지 액션만 있고 화면이 없던 유일한 갭이었음).
+  **부수 발견**: `ConsultantDetailPanel`의 보호자 이름 조회가 존재하지 않는
+  컬럼(`member_id`)·값(`role='student'`)을 써서 항상 빈 결과만 받아 "보호자:
+  없음"으로 조용히 폴백되는 버그를 발견 — 별도 세션으로 이관(task_83cdc1d7).
+- **R12 자료 유형별 보존기간 자동 삭제·비식별화 배치 1차 슬라이스(2026-09-24,
+  완료, `20261900000016`)**: §4.13 처리 방식 4가지 중 3가지를 대표 테이블로
+  구현(4번째 "접근 차단 후 보존"은 위 closed 게이트 재사용, 신규 코드 없음).
+
+  | 처리 방식 | 대표 테이블 | 기준 | 함수 |
+  |---|---|---|---|
+  | 완전 삭제(즉시/단기) | `notifications` | 생성 90일 후 | `retention_delete_expired_notifications` |
+  | PII 비식별화(통계 유지) | `consult_requests` | completed 후 2년 | `retention_anonymize_expired_consult_requests` |
+  | 별도 보존기간 뒤 삭제(보안 로그) | `session_access_events` | 1년 | `retention_delete_expired_access_logs` |
+  | 접근 차단 후 보존(계정 폐쇄) | `students`/`teachers`/`parents` | closed 전환 즉시 | (기존) `ClosedAccountAccessGate` |
+
+  오케스트레이터 `run_data_retention_batch()` + cron `/api/cron/data-retention-batch`는
+  `CRON_SECRET`과 `RETENTION_BATCH_ENABLED` 둘 다 있어야 실행(정산 크론과
+  동일 fail-closed 패턴) — 둘 다 미설정으로 유지. 배치당 LIMIT 500, WHERE절
+  재평가로 재실행 안전. 실행 기록은 `retention_batch_runs`(append-only)에
+  남긴다. non-prod에서 세 유형 모두 실제 계정/문서로 검증 완료(테스트 데이터
+  정리, 감사 행만 보존).
+
+  **남은 정책 결정 사항**:
+  1. `document_access_events`(계약·정산 자료 접근 이력) — 자체 트리거로
+     UPDATE/DELETE가 bypass 없이 영구 차단돼 있어 이번 배치에서 제외했다.
+     "1년 후 삭제"를 그대로 적용할지, 계약·정산과 같은 7년으로 볼지, 아예
+     영구 보존할지 법무 검토 후 결정 필요.
+  2. 이번 슬라이스는 ~250개 테이블 중 4개 대표 테이블만 다룬다. 나머지
+     테이블(예: `chat_messages`/`household_messages`(2년 채팅), 계약·결제·
+     정산 7년 대상(`contracts`/`purchase_receipts`/`teacher_payouts` 등),
+     `session_smart_notes`(GW-14, Drive 연동 필요))은 각각 별도 슬라이스로
+     남아있다 — 정책표의 나머지 카테고리는 문서화만 됐고 배치는 미구현.
+  3. cron 활성화(스케줄은 등록됐으나 `CRON_SECRET`/`RETENTION_BATCH_ENABLED`
+     둘 다 미설정으로 비활성) 시점은 사용자 결정 대기.
+- **선생님 학습 플래너 "보드" 탭 연결(2026-09-24, 완료)**: `2026-09-21`에
+  만든 Student Success Planner Board(학부모 포털엔 연결됨)가 선생님 화면에는
+  한 번도 연결되지 않아 항상 "준비 중" placeholder만 보이던 버그를 실사용
+  중 발견·수정(`app/teacher/board-actions.ts` + `TeacherPlannerBoard`,
+  학부모 board-actions와 동일한 읽기 전용/RLS 의존 패턴). "일정"·"오버뷰"
+  탭은 여전히 미구현.
+- **[출시 전 재확인 필요] Question Bank AI 생성 — `require_figure_choice`
+  선택 시 그래프/도형이 실제로 하나도 포함되지 않는 버그(2026-09-24, 발견,
+  별도 세션(`task_119ff183`)에 이관, 수정 미완료)**: 관리자가 SAT Math
+  생성 화면에서 "자료 포함 · 그래프/도형 선택지 4개"를 선택해도 생성된
+  문항에 도형이 붙지 않는다. 코드 추적 결과 `lib/problem-generation/pipeline.ts`의
+  `makeFigure()`가 실패해도 조용히 넘어가고(`console.error`만), 품질 게이트
+  `materialBlocker`가 관리자가 강제한 `figurePolicy`가 아니라 문항 텍스트
+  기준 자체 판정(`judgeMaterialNeed`)만 봐서 무자료 문항도 그냥 통과시키는
+  것으로 추정(확정 아님, 별도 세션에서 실제 로그로 검증 중).
+- **계정 병합·개인정보 삭제 실제 운영 경로 검증 + 관리자 UI 신설(2026-09-24,
+  완료, `20261900000012`)**: Section 2 지시("실제 운영 경로를 점검")에 따라
+  `merge_accounts()`/`anonymize_merged_account()`(R2 Task 5, 2026-08-31)를
+  실제로 처음 end-to-end 실행해보니 — 지금까지 이 두 함수의 단위 테스트가
+  `admin.auth.admin.deleteUser()`를 mock해왔기 때문에 실제 DB로는 한 번도
+  검증된 적이 없었다 — **PII 스크럽은 정상 동작하지만 그다음 실제 Auth
+  계정(로그인 자격증명) 삭제가 구조적으로 항상 실패**하는 버그를 발견했다.
+  원인: `profiles.id`가 `auth.users.id`를 `ON DELETE CASCADE`로 참조해,
+  Auth 계정을 지우면 profiles 행까지 지우려다가 merge_accounts()가 의도적으로
+  재배정하지 않는 감사·정산 기록(INSERT-only `account_status_events`, 7년
+  보관 `account_merges` 등, 원래 UUID로 "누가 했는지" 영구 보존해야 함)의
+  NO ACTION 제약 ~203개 중 하나에 막혔다. **수정**: `profiles_id_fkey`
+  CASCADE 제약 자체를 제거(ON DELETE 동작만 바꾸면 오히려 삭제 자체가
+  막힘, PK라 SET NULL도 불가) — 이미 PII가 스크럽된 profiles 행은 그
+  자체로 "PII 없는 영구 주체"이므로 auth.users 생사와 분리해도 되고,
+  이렇게 하면 203개 참조 테이블 전부 손댈 필요가 없다(전부 그대로 같은
+  UUID를 계속 참조). **검증**: 브라우저로 실제 계정 2쌍 생성→UI로 병합→
+  30일 유예 경과로 backdate→"익명화 실행" 클릭까지 실제 API 경로로 수행,
+  DB 직접 조회로 auth.users 실제 삭제(0행)·profiles/account_merges/
+  account_status_events 전부 원래 UUID 그대로 보존 확인. 전체 비통합
+  테스트 2610개 + 병합 전용 테스트 32개 통과. **잔여 위험(별도 조치
+  필요)**: auth.users를 profiles 거치지 않고 직접 참조하는 컬럼 8개
+  (`contract_company_approvals.approved_by`, `university_*` 검토자 컬럼
+  7개, 전부 NO ACTION) — 병합·삭제 대상이 이 컬럼에 실제로 등장하는
+  관리자 계정이면 여전히 삭제가 막힘(학생·학부모·교사 병합에서는 해당
+  없음 확인). 관리자 계정 삭제가 실제로 필요해지면 이 8개도 같은 방식으로
+  다시 다뤄야 함. **관리자 UI 신설**: Users 탭에 "계정 병합" 서브탭 추가
+  (이메일 검색·확인·사유 입력·실행, 30일 유예 대기 목록+실행 버튼) —
+  master-roadmap-v3.md가 명시했던 "실행 화면 자체가 없다"는 미완료 항목
+  해소. `inactive` 상태 머신·복귀 UI·자료 유형별 보관기간 자동화·GW-14
+  Smart Notes 만료 자동화·정기 스케줄러 연결은 이번 범위 밖(별도 항목,
+  아래 계속).
+
+- **[출시 전 재확인 필요] figure_choice 실제 AI E2E 공개 성공 토스트 미출현
+  (2026-09-24, 미완료·원인 미확인)**: `e2e/figure-template-1.spec.ts` "그래프
+  선택지: 지문 → AI 그래프 4개 → 편향 검증 → 공개 → 학생 화면(선택지 안 그림)"
+  테스트가 실제 AI(`E2E_REAL_AI=1`) 실행에서 "공개하기" 클릭 뒤 공개 성공 토스트
+  (`/공개했습니다|공개됐습니다|공개되었습니다/`)가 20초 안에 뜨지 않아 실패(같은
+  라운드에서 확인한 다른 3개 버그 — 선택자 모호성/문구 드리프트/컴파일러-전용
+  스킬 오인 — 와는 별개, 그것들은 전부 수정·재검증 완료). 이 실패 하나는 원인
+  미확인 상태로 남겨둠 — 반복 실행으로 재현·진단 비용(실제 API 호출)을 더
+  쓰지 않기로 함(2026-09-24 사용자 지시). 테스트 프로세스 종료 시 `afterAll`이
+  이 실행이 만든 문제 행을 정리해 DB 증거는 남아있지 않다 — 재조사 시 이
+  테스트만 다시 `E2E_REAL_AI=1`로 단독 실행해 재현부터 할 것(`figure_choice`
+  타입 AI 생성 경로: `app/admin/ProblemDraftEditor.tsx`의 `makeFigure("figure_choice")`
+  → 서버 액션 → 실제 Anthropic 호출). **출시 전 반드시 재확인**(다른 3가지
+  E2E_REAL_AI 스펙 유형 중 유일하게 미검증 상태로 남은 것).
+
+- **College Board 커버리지 전수 매핑 완료 + Math SPR 아키텍처 결론(2026-09-17, 완료)**:
+  `2026-09-17-collegeboard-coverage-map.md` — 실전 시험지 7종(test4·6·7·8·9·10·11)
+  840문항(R&W 462 + Math 378) 전수 분류 완료(test5는 결번). **최종 결론**: "생성
+  가능+결정론적 검증 있음" 331건(39.4%), 상위 스킬은 있으나 하위 패턴 불가 209건
+  (24.9%), 생성 가능하나 검증 없음(R&W 위주) 273건(32.5%), 완전 불가 27건(3.2%).
+  **화면 렌더링 검증은 840건 전부 미확인이었으나 2026-09-18 uat20260918로 4건
+  (Math MC/SPR, R&W 근거모델/정량모델) 실제 학생·교사 세션까지 검증 완료**(아래
+  참고). SPR은 특정 스킬 추가로 해결 안 됨 — `math-compilers/batch.ts`의
+  `format="mc"` 고정 출력을 SPR 분기 가능하도록 재설계해야 하는 아키텍처
+  작업(로드맵 Step 3, 아직 미착수). 완전 불가 갭 랭킹 1순위(산점도 회귀/최적선)는
+  Step 4에서 이미 구현 완료.
+- **문제은행 전수 감사 + 역할별/실사용자 UAT(2026-09-18, 완료)**: 활성(보관 안 된)
+  160문항 전수 감사(`2026-09-18-problem-bank-full-audit.md`) → 결함 8건(원시
+  LaTeX·빈 초안·내부 필드명 노출·완전 중복) 발견해 마이그레이션 `20261413000000`
+  으로 보관 처리(non-prod 반영 완료). 관리자 역할 UAT(`2026-09-18-problem-bank-role-uat.md`)
+  전부 PASS. 공개 문항이 0건이라 학생/교사 실사용 흐름은 별도로 Math MC·SPR,
+  R&W 근거모델·정량모델 각 1문항씩 실제 공개해 `uat20260918`(정리 안 함, 회귀
+  재현용으로 보존) 계정으로 실 세션 풀이·자동채점·교사 채점 확정까지 끝까지
+  검증(`2026-09-18-real-student-teacher-uat.md`) — 전부 정상. 이 UAT에서
+  `/student` 홈 500 에러(1절 참고)와 `ProblemLogTab.tsx`가 어떤 화면에서도
+  import되지 않는 죽은 코드로 보인다는 점을 발견(둘 다 미수정, 판단만 보류).
+- **고정형 SAT 모의고사 V1(정책 확정, 구현 대기 — 2026-09-17)**: 모의고사는 과제와
+  별도 원본·응시 기록을 가진다. 수업 화면에 `모의고사` 탭을 추가해 교사가 배정하고 학생이
+  시작·재개할 수 있으며, 학생 포털의 독립 모의고사 탭에서도 같은 응시를 연다. V1은
+  기본·표준·상위 난이도의 고정 세트를 여러 개 운영하고 적응형 모듈은 V2로 미룬다. Math
+  문제·과제·모의고사에는 공통 계산기와 ALTON용으로 재구성한 참조표를 제공하며 R&W에는
+  보이지 않는다. 상세 사양: [`2026-09-17-fixed-mock-exam-v1-spec.md`](2026-09-17-fixed-mock-exam-v1-spec.md).
+
+- **학부모 포털 IA 재구성 + 상담 신청·메신저(2026-09-17~18, 완료 — R12/R12.1 전체 반영, non-prod 배포·UAT 완료)**:
+  - **메인 nav 최종 순서**: 홈 → 수업권 → 수강 과목 → 수업 → 상담 → 단어장 → 과제.
+    **제거된 탭과 새 위치**: 가족(신규 자녀 상담 신청 흐름 자체를 폐기, `ConsultRequestTab.tsx`/
+    `consult-request-actions.ts`/`consult-request-data.ts` 삭제 — 학부모는 이제 기존 자녀든
+    신규든 상담 신청은 `상담 신청` 서브탭 하나로만 함) · 문의(구 `household_messages` 대화
+    화면 → `상담` 탭의 `메신저` 서브탭으로 통합) · 예약(독립 탭 제거 → `수업` 탭 안
+    "예정 수업 예약하기" 버튼으로 `LessonBookingTab`(학생 포털과 공유, 동작 변경 없음)을
+    모달로 연다) · 교재(관리자 전용 라이브러리 탭 제거, 기존 세션·수강 과목 화면의
+    `/materials/[id]` 진입점은 그대로 유지) · 독립 `통계` 탭(죽은 placeholder였음 →
+    `홈`의 `통계` 서브탭으로 이동, 학생 포털 `stats-data.ts`의 `loadStats` 재사용).
+    `지인 추천`(`CreditsTab`)·`동의`(`ConsentTab`)는 메인 nav에서 제거해 프로필
+    드롭다운(학부모님 ▾) 메뉴로 이동 — `동의`는 자녀별 미해결 동의/정규 진행 선택
+    건수를 숫자 배지로 표시.
+  - **상담(`consult`) 탭**: 서브탭 3개 — `상담 신청`(`ConsultationRequestTab.tsx`, `상담
+    사유` 단일 입력만, `submitMeetingRequest({ reason })`), `상담 내역`
+    (`ConsultationHistoryTab.tsx`, 상태별 목록 + 완료 건의 확정 리뷰·미팅록 조건부
+    노출), `메신저`(`MessengerTab.tsx`, 기존 그대로, 안읽음 배지). 상담 신청 내부
+    메시지 스레드(`meeting_request_messages`)는 더 이상 UI로 노출하지 않음(테이블
+    자체는 additive-only 원칙으로 유지, 대화는 메신저로만).
+  - **스키마(R11 `meeting_requests`/`household_messages` 확장, 신규 테이블 만들지
+    않음)**: `meeting_requests`(5단계 상태 requested→confirming→scheduling→
+    scheduled→completed, cancelled는 레거시 조회용; content/contact_preference/
+    preferred_contact_time; Calendar 동기화 컬럼 `google_event_id`/
+    `google_meeting_code`/`google_sync_status`/`google_sync_retry_count`,
+    `google_meet_link`는 R11부터 있던 컬럼), `meeting_request_reviews`(draft/final
+    상태, `save_meeting_request_review_draft`/`finalize_meeting_request_review`
+    RPC로만 씀), `meeting_request_review_edits`(확정 후 관리자 수정 시마다 이전
+    `final_text`를 스냅샷 — `admin_edit_meeting_request_review` RPC가 원자적으로
+    처리, `lesson_reviews`와 달리 이번 상담 리뷰는 확정 후 수정도 이력을 남기는
+    것이 요구사항이었음), `meeting_request_review_drive_access`(미팅록 Drive 문서
+    권한 부여 상태 `pending/granted/failed` — `status='granted'`일 때만 학부모에게
+    링크 노출, `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` 게이트로 실제 Drive 호출 차단
+    가능), `meeting_request_messages`(유지, UI 미노출), `household_message_reads`
+    (메신저 안읽음 추적).
+  - **RLS 요약**: `meeting_request_reviews`는 `status='final'`인 행만 그 household의
+    guardian이 조회 가능(draft는 관리자만), 쓰기는 위 SECURITY DEFINER RPC로만
+    허용(직접 insert/update 정책 없음 — `lesson_reviews` 패턴과 동일). `meeting_
+    request_review_drive_access`는 관리자 전체 조회, guardian은 자기 household의
+    확정된 리뷰에 연결된 행만 조회 가능(쓰기는 서비스 롤/서버 액션에서만). 다른
+    household의 `meeting_requests`/리뷰/미팅록은 어느 화면에서도 조회 불가(Preview
+    UAT에서 실제 두 household 계정으로 교차 열람 차단 확인).
+  - **Calendar/Meet 연동**: 관리자가 `일정 확정`을 누르면(인라인 `datetime-local`
+    입력, `window.prompt` 아님) `app/admin/inquiry-and-meeting-actions.ts`의
+    `scheduleMeetingRequest()`가 (1) 시작/종료 시간 유효성(둘 다 필요, 종료>시작)
+    검사 후 거부, (2) `google_event_id`가 이미 있으면 `patchCalendarEventTime`만
+    호출(멱등, 재생성 안 함), 없으면 `createCalendarEventWithMeet` 호출, (3) Calendar
+    API 호출이 실패하면 DB를 전혀 쓰지 않아 상태가 조용히 `scheduled`로 넘어가지
+    않는다. 참석자 이메일은 `profiles`가 아니라(email 컬럼 없음) `auth.admin.
+    getUserById()`로 조회(기존 `consultation-kanban-actions.ts` 패턴과 동일).
+    관리자 리뷰 UI(`MeetingRequestReviewPanel.tsx` + `meeting-request-review-
+    actions.ts`)는 완료된 상담에 draft 저장/확정/확정 후 수정 버튼을 제공하고,
+    미팅록 Drive 문서 연결 시 `grantSmartNotesReaderPermission`(세션 Smart Notes와
+    동일 헬퍼)으로 그 household 보호자에게 reader 권한 부여를 시도한다.
+  - **홈(`activeTab==="home"`) 재설계**: 서브탭 4개 — `종합 리뷰`(수업/상담 리뷰를
+    합친 목록이 **아니다** — 향후 AI OS가 월 단위로 생성할 "월간 종합 리뷰" 전용
+    빈 자리, 이번 범위에서는 생성 로직·데이터 모델 없이 "아직 생성된 월간 종합
+    리뷰가 없습니다. 준비 중입니다." 정적 문구만), `수업 리뷰`(`lesson-review-
+    family-actions.ts`의 `getLessonReviewsForFamily`를 자녀의 모든 수강 과목에
+    병렬 호출해 합친 것 — 확정 리뷰+확정 미팅록이 있는 것만, 시간순), `상담
+    리뷰`(`home-reviews-actions.ts`의 `getHomeConsultationReviews` — household
+    범위 확정된 `meeting_request_reviews`만, 최신순, 미팅록 없으면 "미팅록이
+    없습니다."만 표시), `통계`(`home-stats-actions.ts`가 학생 포털 `stats-data.ts`
+    의 `loadStats` 재사용). 상단 동의 배너(구 `ChildrenStatusRow`)와 캘린더·예정
+    수업(구 `HomeDashboard` 사용)은 제거 — 동의 긴급도는 프로필 드롭다운 배지로만.
+  - **마이그레이션·배포**: `supabase/migrations/20261406000000`(R12 V1)~
+    `20261412000000`(스마트노트 권한 상태 조회 함수) 전부 non-prod(`worpsqwqgnspddnrtnvq`)
+    반영 완료(`migration list --linked` local=remote 확인). 최신 Preview:
+    **https://alton-ilrqy8v1j-alton7.vercel.app**(커밋 `e5b1042`).
+  - **Preview UAT 실제 확인(2026-09-18, 실행 ID `r13-0918c`, 정리 완료)**: 태그된
+    household 2개 + 관리자 계정으로 상담 신청 제출→관리자 일정 확정(실제 Calendar
+    이벤트+Meet 링크 생성, `google_event_id`/`google_sync_status='succeeded'` DB
+    확인)→완료 처리→리뷰 draft→확정→학부모 계정으로 홈 `상담 리뷰`·`상담 내역`
+    양쪽에서 확정 리뷰 실제 열람 확인→다른 household 계정으로는 전혀 보이지 않음
+    확인. UAT로 만든 DB 데이터·Auth 계정·실제 생성된 Calendar 이벤트(`v7rjj2epr9g4
+    csroidibopjm1c`) 전부 삭제 확인 완료(재조회 시 `status="cancelled"`).
+  - **남은 blocker**:
+    (a) ~~미팅록 Drive 원본 링크 실제 클릭 검증 미완료~~ — **2026-09-23 해소.**
+    R3(계약서 업로드, `lib/drive-preview-verify-auth.ts`)와 동일한 Preview 전용
+    최소권한 서비스 계정 경로를 `lib/drive-session-tasks.ts`의
+    `processOneSessionDriveTask`에 임시로 분기 추가해, 실제
+    `grantSmartNotesReaderPermission` 코드 경로로 UAT 계정(`matchbox512@gmail.com`)에
+    Google Drive 테스트 문서 reader 권한 부여 → Drive API `permissions.list`로
+    `role: "reader"` 실제 부여 확인(서버 응답 직접 확인, 클릭 자체는 미실시했지만
+    권한 부여 메커니즘 자체는 실측 검증됨). 검증 중 실제 버그 1건 발견·수정
+    (Drive 파일 생성 시 `drive/v3` 대신 `upload/drive/v3` 엔드포인트를 써야
+    multipart 업로드가 성공함 — 기존 `lib/drive-artifacts.ts`의 `uploadArtifactToDrive`
+    는 정상 경로를 쓰고 있었으나 이번에 새로 짠 임시 라우트에서 처음엔 잘못 씀).
+    검증 후 임시 라우트·코드 분기·테스트 Drive 파일·DB 테스트 행·
+    `DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` env var 전부 원복·삭제 완료(커밋 `5b50dd0`→
+    `e5c9767`). `session_drive_tasks` 워커 자체는 여전히 Preview에서
+    `assertNotPreview()`로 프로덕션 체인을 못 쓰므로, Preview에서 실제로
+    자동 처리되게 하려면 R3처럼 상시 preview-safe 분기를 정식으로 유지할지는
+    별도 정책 결정 필요(이번엔 검증 1회성 임시 조치로만 사용).
+    (b) ~~`supabase/migrations/20261413000000_p6_problem_bank_full_audit_archive.sql`
+    non-prod 미반영~~ — **2026-09-23 재확인 결과 이미 non-prod에 적용되어 있었음**
+    (`migration list --linked`에 버전 기록 존재, 대상 8개 문항 전부 `archived_at`
+    설정 확인). 이 항목은 오기재였던 것으로 보임 — 실제로 남은 액션 없음.
+
+- **예약·수업 준비·진도 단일 흐름(2026-09-17, 완료)**: 예약 확정 시 다음 미완료 회차
+  (`curriculum_overlay_units.status`)를 자동 연결하고 그 시점 교재·문제·키워드를
+  세션 전용 사본으로 즉시 복사(`_stage_unit_for_session`, 기존 P2 자동연결 트리거
+  `auto_link_next_unit_to_session` 확장 — 이전에는 연결 기록만 남기고 구성을 복사하지
+  않아 "연동됐지만 교재는 비어있음" 결함이 있었다). 정상 완료 시 회차를 진도상
+  completed로 전진(`finalize_lesson_session`). 체험/정규 동일 코드 경로(`confirm_lesson_booking`
+  →`sessions` insert→같은 트리거). 마이그레이션 `20261390`~`20261393`(재조정 가드,
+  회차 연결 시 자동 상속, 자동배정+진도전진, `session_drive_tasks` RLS) 비프로덕션
+  반영 완료. 실제 화면 데이터 로더(`loadPlannedMaterialData`/`unit_preview_for_viewer`/
+  `loadSessionSelection`/`loadLessonBookingData`) 직접 호출로 학생·학부모·교사 화면
+  단위 검증 완료(`lib/booking/curriculum-unit-screen-verification.integration.test.ts`).
+  **주의**: 이 자동화는 이 시점 이후 새로 확정되는 예약부터만 적용된다. **2026-09-17
+  이전에 만들어진 세션(회차가 비었거나 "아직 배정된 교재가 없습니다"로 보이는 것들)
+  은 소급 보정하지 않았다** — 옛 수동 연결 방식으로 만들어졌기 때문이며, 확인하려면
+  같은 학생·과목으로 새 예약을 하나 만들어 자동 연결·구성 복사가 되는지 보면 된다.
+  체험 전용 커리큘럼(체험 관리 과목 + 1회차)은 코드 경로만 준비돼 있고, 실제 과목·
+  회차 콘텐츠는 관리자가 아직 만들어야 한다. 과제는 이 자동 구성에서 의도적으로
+  제외(정책 확정: 예약만으로 자동 발급하지 않음 — 회차에 기본 과제 계획/추천 문제
+  구성은 둘 수 있으나 실제 발급은 교사가 명시적으로 함, 필요 시 회차별 자동 발급
+  규칙은 별도 설계).
+- **지금**: 제품 오너 Preview UAT(문제은행 AI 생성 → 그림 확인 → 전체 공개 → 수업 준비에 담기 → SPR 풀이·채점 / 과제 발급·풀이 / 문제 위 필기 / 관리자 교재 탭).
+- **분류 후속 UI(criteria `skill_codes` 일괄 편집)는 2026-09-17 제품 오너 지시로 폐기** — 스펙이 백로그 한 줄뿐이고 대상·진입화면·권한이 전혀 정해지지 않아 로드맵에서 제외.
+- **SAT Math 19종 + R&W 근거모델 5종 Preview UAT(2026-09-17 지시 → 2026-09-23 완료)**: 관리자 문제은행 화면에서 19개 Math 기술 코드 전부(Algebra 5·Advanced Math 3·PSDA 7·Geo/Trig 4)를 결정형 컴파일러("AI 생성" 버튼, 실제 AI 호출 0회·비용 $0)로 1개씩 생성→"자동 통과" 확인→저장, R&W 근거모델 5종(words_in_context/central_ideas_details/inferences/command_of_evidence_text/cross_text_connections)은 실제 AI 생성(평가모델 검증 통과까지 개당 40~90초, 2회 재시도로 통과한 경우 포함 5/5 전부 성공)으로 생성. Math 19개 스킬 결과물 25개 초안 중 24개 전체 공개 완료(1개는 발행 게이트가 정답 선택지 표기 불일치를 정상적으로 거부 — `x = 3` vs `3`, 버그 아님), R&W 5개 스킬 결과물 6개 초안 중 5개 공개(구조·정답 근거 표기 육안 확인 포함). **발견한 실제 버그**: 관리자 문제은행 "전체 공개" 버튼이 `window.confirm()` 네이티브 다이얼로그를 쓰는데, 이게 브라우저 자동화 도구의 CDP 입력 파이프를 블로킹시켜 타임아웃 발생(사람이 클릭할 땐 문제없음 — 자동화 환경에서만 드러난 이슈, 코드 결함 아님). 미완료: 모바일 뷰포트 화면 확인은 이번에도 브라우저 자동화 환경 한계(`resize_window`가 실제 `window.innerWidth`를 바꾸지 못함)로 불가.
+- **단어장(2026-09-15~16, 완료 — 최종 8권 구성)**: ALTON SAT 공용 단어장. 원래 10권 계획 중 8·9·10권(추상·개념/저빈도 정밀/최상급)은 후보 어휘 풀이 좁아 중복률이 급증해 각각 200개를 못 채웠다(제품 오너 지시로 세 권의 목표를 8권 하나로 병합, `scripts/vocab-library-seed.ts`의 `VOLUME_PLAN`에서 9·10권 제거·8권 난이도 3~5로 확장). **1~8권 전부 완료(1,800단어)**, 마이그레이션 `20261378`+`20261383`+`20261384` non-prod 반영 완료. 내 단어장 폴더(기본 "오답 노트"), 별표 저장, 시험 선택지 영어화, UI 개편(가리기 개별 공개·A-Z 필터·랜덤 순서·페이지네이션) 전부 구현·테스트·Preview 배포 완료(마이그레이션 `20261376`~`20261380`). 기존 지문 클릭 저장(`VocabClickLayer.tsx`)은 손대지 않음.
+- **과제(2026-09-16, 완료, 제품 오너 2차 정정 최종안)**: 과제를 수업(세션)과 완전히 분리 — 발급 시 수업 선택 없음, 배치명 = 발급 날짜, 발급할 때마다 새 배치(`homework_batches`, 단어장 `vocab_quizzes`와 같은 패턴: 세션 비의존 자기완결 레코드). 교사↔학생 쌍 단위로만 저장·노출(RLS + 쿼리 이중 격리, 다른 교사·다른 학생 노출 불가). 학생 포털 과제 탭·교사 포털 "과제 내역"·세션뷰 과제 탭 전부 동일한 공통 컴포넌트(`HomeworkBatchPanel`)로 배치를 눌러 열면 기존 목차/슬라이드 UI 그대로 정답·해설·채점. RPC `issue_homework_batch_v2`(마이그레이션 `20261382`, non-prod 반영 완료). **마이그레이션 `20261381`(`issue_homework_batch`, 회차 연동 1차안)은 이 최종안으로 대체되어 앱에서 더 이상 호출되지 않음 — DB 컬럼/RPC는 삭제하지 않고 방치.** 검증: 통합 테스트 6/6(발급 권한·배치 분리·문제 중복 방지·RLS 격리), 컴포넌트 테스트 전부 통과.
+- **SAT Math 생성 품질(2026-09-16, 1단계 완료 + 실측 파일럿 완료)**: 코드 검토([`2026-09-16-sat-math-generation-code-review-and-proposal.md`](2026-09-16-sat-math-generation-code-review-and-proposal.md))에서 지목한 A(검사·저장 문항 분리)/B(필수 검사 미실행이 통과 처리)/C(해설 따라 정답 자동 변경)/G(오답 수정 후 재검증 누락) 결함을 Math 한정으로 수정·모의 검증(`lib/problem-generation/pipeline.test.ts`). R&W는 기존 동작 유지. **실측 파일럿(2026-09-16, `scripts/problem-quality-pilot.ts`, 승인된 소액 예산)**: 5개 유형×5문항 실제 API 호출 → 22/25 저장(88%), 총 $1.55(문항당 $0.07). 실패는 대부분 "정답-해설 불일치라 자동 정정 안 함" 정책이 정상 작동한 케이스. 저장은 admin 문제은행에 초안까지만 — 공개는 관리자 확인 후. **미완료**: 계산 기반 검증 확장(좌표평면·연립방정식 target 명시화 등, 검토 문서 3~4절), 유형 확대 배치(남은 예산 $28.45), Preview 로그인 확인(테스트 계정 없어 미실시).
+- **Smart Notes 학생 열람 정책 반전(2026-09-16, 제품 오너 지시)**: 기존 정책("고객에게 원본을 직접 보여주지 않는다", `20261025000000`)을 뒤집어 **정규 수업(계정 생성 이후)에 한해 학생·보호자가 회의록 원본을 열람(view-only)** 할 수 있게 함(마이그레이션 `20261388`). 첫 상담(consultations)은 계속 관리자 전용 — 이 반전 대상이 아님. `session_smart_notes`에 학생·보호자 SELECT RLS 추가, 실제 Drive 문서 reader 권한 부여는 기존 `session_drive_tasks` 큐(`DRIVE_ARTIFACTS_ALLOW_REAL_WRITES` 게이트 재사용)로 비동기 처리(`grantSmartNotesReaderPermission`). **주의**: 이 웹훅(`app/api/webhooks/workspace-events/route.ts`)은 아직 실제 Pub/Sub 구독이 없어(코드 상단 주석 참고) 실제 트래픽으로 발동한 적이 없다 — 큐에 넣는 로직만 완성, 실제 동작은 구독 생성 후 확인 필요. **미완료**: 학생/보호자 포털에 "미팅록 보기" 링크 UI(백엔드 권한만 구현), 동의서 정책 갱신(제품 오너가 계약 문안은 직접 수정 예정 — 콘센트 UI 구조는 아직 손대지 않음), 수업 리뷰 화면 자체의 재설계(5단계 버튼+선택적 텍스트, 교사 본인 리뷰 열람, AI 요약 제거)는 별도 착수 필요.
+- 미결(제품 오너): 학생이 푼 것 실시간 배지 / 선택지 자체가 그래프 4개인 문항(선택지 figure) / 이미지가 있는 문항의 AI 생성(현재 AI는 데이터 도형만) / 기한·알림·AI 과제 생성(후속).
+- 다듬을 것: ~~`CompositionPanel` 전체 새로고침~~ ~~PDF 교재 행 키워드 이름~~ ~~SessionShell·ProblemBankTab lint 오류~~(완료 2026-09-15). 열린 항목: 통합 테스트 병렬 격리(예약 fixture·append-only 전역 count — 테스트 인프라 결함, 제품 결함 아님) / `session_homework_attempts`는 삭제·마이그레이션 없이 읽기 전용 보존, 보존·삭제 정책은 v3 과제 흐름 안정화 뒤 별도 결정.
+- **SECURITY DEFINER·anon 권한 감사(2026-09-23, 1차 완료)**: `pg_proc`에서 SECURITY
+  DEFINER 함수 311개 전수 조회 → anon 실행권한(PUBLIC 포함) + 내부 인가검사
+  부재 조합으로 51개 후보 도출 → 실제 앱 호출부(`app/**`) 대조로 압축한 결과
+  **실제 결함 2건 확인**(둘 다 anon role로 직접 재현해 exploit 성립 확인):
+  (1) `find_possible_duplicate_consultations(p_email, p_phone, p_exclude_id)` —
+  anon이 임의 이메일/전화번호로 호출하면 `consultations` 테이블 전체 컬럼(연락처·
+  상담 내용 등 PII)을 그대로 반환. 유일한 앱 호출부(`app/admin/consultation-actions.ts`
+  `findDuplicateConsultationCandidates`)는 `requireAdmin()` 이후 service_role로만
+  호출하므로 anon/authenticated 권한은 순수 과잉이었음.
+  (2) `hold_entitlement(...)` — 내부에 호출자 인가 검사가 전혀 없어 child_id/
+  reservation_id만 알면 타인의 수업권을 소모시킬 수 있었음. 시그니처 변경 이력
+  때문에 **오버로드 2개**(4-인자 레거시 + 5-인자 현재)가 각각 별도 ACL을 갖고
+  있었고 둘 다 PUBLIC(=X) 포함 과잉 권한 보유. 유일한 호출부(`app/admin/entitlement-actions.ts`
+  `holdEntitlementForReservation`)도 `requireAdmin()`+service_role만 사용.
+  추가로 `mark_expired_invites()`(is_admin() 내부검사는 있으나 아직 앱에서 미호출)의
+  불필요한 anon/authenticated 권한도 함께 제거(방어 심층화).
+  **수정**: `supabase/migrations/20261900000001~3` 3건으로 anon/authenticated/PUBLIC
+  EXECUTE 권한 회수, service_role/postgres만 유지. **검증**: 수정 전 anon role로
+  직접 SQL 실행해 exploit 재현(전체 PII 행 실제로 받아옴) → 수정 후 동일 호출이
+  `permission denied for function`으로 차단됨을 재확인, `has_function_privilege()`로
+  anon=false/authenticated=false(hold_entitlement)/service_role=true 3중 확인,
+  관련 단위 테스트(`consultation-actions.test.ts`/`entitlement-actions.test.ts`)
+  63개 전부 통과 확인. **영향받은 사용자 흐름**: 없음(관리자 전용 기능이었고
+  실제 호출 경로는 이미 service_role만 썼음 — 이번 수정은 "의도한 대로만 되게"
+  좁힌 것이지 기존 정상 흐름을 바꾼 것이 아님).
+  **미완료(2차 필요)**: 같은 전수 조회에서 PUBLIC(=X) 권한을 가진 SECURITY
+  DEFINER 함수가 85개 더 발견됨(대부분 `is_admin()`/`is_master_admin()`/`auth.uid()`
+  등 내부 인가검사가 있어 anon이 호출해도 예외로 막히는 것으로 확인했으나,
+  하나하나 실측 재현은 이번 1차 범위에서 다 못함) — 다음 라운드에서 나머지도
+  같은 방식(전수 실측 → 앱 호출부 대조 → PUBLIC/anon 권한 회수)으로 좁혀야 함.
+  또한 이번에 실제로 겪은 함정(시그니처를 바꾸며 CREATE OR REPLACE하면 새
+  오버로드가 별도 함수 객체·별도 ACL로 남고, 이미 적용된 마이그레이션 파일을
+  고쳐도 반영 안 되는 문제가 겹쳐 한 번에 안 끝나고 세 번에 나눠 고쳐야 했음)를
+  체크리스트화해 다음 라운드에 반영할 것.
+
+- **SECURITY DEFINER·anon 권한 감사 2차(2026-09-24, 완료, `20261900000006`)**: 1차가
+  남긴 85개 후보 중 anon 실행권한을 가진 SECURITY DEFINER 139개를 전수 조회해
+  함수 본문에 `auth.uid()`/`is_admin()`/`raise exception`/trigger 등 내부 인가
+  패턴이 없는 21개를 추출, 앱 실제 호출부(`app/**`, `lib/**`) 대조로 좁혔다.
+  **실제 결함 1건 확인(exploit 성립)**: `issue_consult_consent_token(consultation_id,
+  token_plain, ttl_hours)` — 내부 인가 검사가 전혀 없고 호출자가 consultation_id와
+  평문 토큰을 둘 다 직접 지정한다. anon이 임의 consultation_id로 직접 호출하면
+  자기가 고른 토큰으로 그 상담의 동의 확인 토큰을 새로 발급받아(기존 토큰도
+  무효화 안 됨) 남의 상담 동의를 대신 확인 처리할 수 있었다. `set role anon`으로
+  직접 재현(수정 전 성공 → 수정 후 `permission denied` 확인). 유일한 실제 호출부
+  (`lib/consultation/calendar-sync.ts`)는 admin(service_role) 클라이언트만 씀 —
+  anon/authenticated/PUBLIC 권한 회수, service_role만 유지.
+  **나머지 20개**: 전부 anon 직접 호출 경로 없음(session 클라이언트 또는 admin
+  클라이언트로만 호출) — anon/PUBLIC 회수(6개는 admin 전용이라 authenticated도
+  회수: `find_consultant_provisioning_for_identity`/`find_teacher_provisioning_for_identity`/
+  `log_workspace_link_rejected`/`get_teacher_activation_checklist`/
+  `cancel_reservation_notifications`/`refresh_teacher_onboarding_completed_at`/
+  `record_pending_guardian_account`/`release_trial_onboarding_link_finalize_claim`,
+  나머지 `has_valid_guardian_consent`/`is_under_13`/`student_date_of_birth_known`/
+  `list_open_consult_slots`/`list_open_consultant_meeting_slots`/`list_open_meeting_slots`/
+  `student_already_has_homework_problem`/`current_curriculum_doc_version_id`/
+  `session_student_id`/`session_teacher_id`/`current_account_active`는 authenticated
+  유지 — 세션 클라이언트로 실사용 중이거나, RLS USING절에 직접 인라인될 가능성이
+  있어 잘못 회수하면 정상 조회가 정책 평가 단계에서 깨질 수 있음). `resolve_consult_consent_token`/
+  `confirm_consult_consent_by_token`은 토큰 소지 자체가 인가 수단인 설계(주석에
+  명시)라 그대로 둠. **검증**: `has_function_privilege()`로 anon=false 19건 전부
+  확인, service_role=true 확인, 관련 단위 테스트(consent-data/workspace-actions/
+  trial-onboarding-finalize/consult-actions/consultant-schedule-actions/
+  inquiry-actions/calendar-sync) 53개 전부 통과. **영향받은 정상 흐름**: 없음(전부
+  server action이 admin 또는 session 클라이언트로만 부르던 것을 그대로 유지 —
+  브라우저가 anon 키로 이 RPC들을 직접 부르는 코드 경로는 원래도 없었음).
+  **미완료(→ 3차에서 완료, 아래 참고)**: 나머지 118개는 이번엔 정규식 1차
+  스크리닝만 했음.
+
+- **SECURITY DEFINER 권한 감사 3차·최종 완료(2026-09-24, `20261900000008~11`)**:
+  2차가 남긴 118개(정규식으로 "인가 패턴 있음"까지만 확인됨)를 위험도 순으로
+  4개 배치 나눠 전부 개별 실측·호출부 대조 완료 — 1차(2개)·2차(1개)까지 합쳐
+  이제 anon/PUBLIC 실행권한을 가진 SECURITY DEFINER 함수 전수(139개)가 개별
+  검증 끝났다.
+  - **batch1 토큰/초대 14개** — **실제 결함 1건**: `finalize_account_invite(invite_id,
+    auth_user_id)`에 `auth.uid()` 검사가 전혀 없고 호출자가 auth_user_id를 직접
+    지정 — anon이 accepted 상태(claim 직후~finalize 전 실존 경합구간)인 임의
+    초대에 자기 auth_user_id를 넣어 남의 household/학생 프로필을 가로챌 수
+    있었다. `set role anon`으로 재현(수정 전 성공 → 수정 후 permission denied),
+    유일한 호출부(`app/api/invite/accept/route.ts`)는 admin 클라이언트+서버
+    생성 auth_user_id만 써서 service_role만 남겨도 영향 없음. `claim_account_invite`는
+    기존 통합테스트 6개가 "anon 접근이 계약"이라고 명시해(토큰 해시 검증 자체가
+    인가 근거) 그대로 둠 — 처음에 같이 좁혔다가 테스트 실패로 원복.
+  - **batch2 개인정보 22개** — **실제 결함 1건**: `assert_guardian_consent_ok`가
+    원래(20260913000000) 생성 시점부터 anon 회수·authenticated만 부여였는데
+    지금 anon이 붙어 있었음(재정의한 마이그레이션 없음 — 원인 불명 드리프트,
+    이런 "원래 좁혀놨는데 나중에 풀린" 사례가 또 있을 수 있어 정기 재감사
+    필요). anon으로 임의 student_id를 넣으면 "13세 미만+동의 없음" 여부를
+    예외 메시지로 알아낼 수 있었다 — 재현 확인 후 원복.
+  - **batch3 결제·상태변경 25개** — **실제 결함 2건**: `finalize_trial_onboarding_students`
+    (auth.uid() 미검사, guardian_auth_user_id 직접 지정 — 같은 클래스의 결함이나
+    link_id+claim_id 검증이 1차 방어선), `schedule_reservation_notifications`
+    (앱 호출부 자체가 없음 — 다른 SECURITY DEFINER 함수 안에서만 PERFORM으로
+    쓰여 애초에 anon/authenticated 권한이 불필요했는데, anon이 임의 reservation_id로
+    직접 불러 "정규수업이 예약되었습니다" 알림을 그 가족에게 반복 주입할 수
+    있었음 — 스팸/사회공학 벡터). 둘 다 service_role만 남김.
+  - **batch4 문의·모의고사·순수 헬퍼 57개** — 55개는 문제 없음(전부 `auth.uid()`를
+    본인 또는 정확한 대상 관계로 대조하는 구조 확인), 2개(`submit_homepage_consult_request`,
+    `list_consultant_open_slots`)는 취약점은 아니었으나(각각 idempotency key,
+    만료·소진 토큰 검사가 있어 anon 직접 호출도 안전) 앱이 admin 클라이언트로만
+    부르므로 잉여 권한 회수.
+  - **검증 방식(전 배치 공통)**: 각 함수를 "패턴이 있다"가 아니라 "그 패턴이
+    실제로 호출자 자신 또는 대상과 일치를 확인하는가"까지 본문을 읽어 판단,
+    `has_function_privilege()`로 anon=false/service_role 또는 authenticated=true
+    확인, 관련 unit/integration 테스트 재실행(총 150개 이상 통과), 실제 exploit
+    가능성이 있던 4건은 수정 전 `set role anon`으로 직접 재현 후 수정 확인.
+  - **정상 흐름 영향**: 없음 — 전부 앱이 admin 또는 session 클라이언트로만
+    부르던 것을 그대로 유지, `claim_account_invite`만 예외적으로 anon 접근이
+    설계상 필요해 그대로 둠.
+  - **후속 필요**: (1) 이번에 발견한 "원래 좁혀놨는데 나중에 anon이 재부여된"
+    드리프트(`assert_guardian_consent_ok`)의 원인을 아직 못 찾음 — 같은 드리프트가
+    다른 함수에도 있을 수 있어 주기적 재감사 권장. (2) 이번 4개 배치도 "인가
+    패턴이 있는가"를 사람이 읽고 판단한 것이라, 조건 분기가 미묘하게 틀린
+    경우(예: OR 조건 중 하나가 항상 true가 되는 버그)는 여전히 놓쳤을 수 있다 —
+    완벽한 전수 검증이 아니라 "이번 세션이 실제로 읽고 판단한 결과"임을
+    출시 전 재확인 시 감안할 것.
+
+- **모바일 사이드바 반응형(2026-09-23, 완료)**: 컨설턴트 포털에서 모바일 폭에서도
+  사이드바가 항상 풀사이즈로 떠 있어 본문이 가로 스크롤되던 문제 — `app/consultant/ConsultantShell.tsx`에
+  `md:` 브레이크포인트로 사이드바를 드로어화(햄버거 버튼+오버레이+탭 시 자동
+  닫힘). 실제 375px 뷰포트로 재현 검증 완료. 다른 포털(관리자/선생님/학부모)
+  셸은 아직 손대지 않음 — 같은 패턴이면 각각 별도로 필요.
+
+- **university_source_urls 중복 정리(2026-09-23, 완료)**: 모바일 UAT 중 발견 —
+  non-prod에 `(university_id, url, source_type, cycle_year)` 완전 일치 중복
+  408건(858→450행) 적재돼 있던 것을 가장 이른 id만 남기고 정리. 데이터 수집
+  세션 쪽 로컬 DB도 같은 패턴 12건 확인·정리됨(595→583행).
+
+- **E2E 전용 fixture 분리(2026-09-23~24, 완료)**:
+  `e2e/minor-consent.spec.ts`가 공용 계정(`ACCOUNTS.student`=지훈)의 생년월일을
+  13세 미만으로 바꿨다 되돌리는 식으로 테스트해, fullyParallel 아래 다른
+  스펙(`auth-roles.spec.ts` 등)과 같은 계정 상태를 두고 경합하던 것을 이 스펙
+  전용 학생/학부모 fixture(`supabase/seed.sql` §13, `e2e-minor-consent-*@example.com`)로
+  이전. 옮기는 과정에서 이 스펙 자체의 드리프트 3건도 함께 발견·수정(제품
+  코드 변경 없음, 전부 테스트 쪽 문제): (1) "동의 철회" 버튼이 `ConsentTab.tsx`에
+  실제로 연결 안 돼 있음(백엔드 함수는 있음 — 제품 오너 확인 결과 UI는 의도적
+  보류, 테스트만 관리자 직접 호출 경로로 수정), (2) 로그아웃 헬퍼가 찾던
+  "OOO님 ▾" 버튼이 모바일 전용(`md:hidden`) 상단바에만 있어 데스크톱 기본
+  뷰포트에서 영원히 타임아웃, (3) 로그아웃(form action) 리다이렉트를 안
+  기다리고 바로 다음 로그인을 시도해 실제 경합 재현.
+  뒤이어 `complete-profile-flow.spec.ts`/`r4-purchase-flow.spec.ts`도 같은
+  패턴으로 이전.
+
+  **2026-09-24 — 나머지 8개 파일 완료**: `r5-subject-enrollment-flow`,
+  `r5-subject-enrollment-teacher-assignment`, `m3-teacher-assignment-termination-flow`,
+  `r6-lesson-booking-flow`, `problem-bank-flow`, `figure-template-1`,
+  `rw-structured-blocks`가 공용 지훈/이서아/공용 household/공용 선생님
+  커리큘럼 템플릿을 더 이상 건드리지 않도록 전용 fixture로 옮김. 생성·정리
+  로직은 새 공통 헬퍼 `e2e/fixtures.ts`(`createFamily`/`cleanupFamily`/
+  `createFixtureTeacher`/`cleanupFixtureTeacher`/`grantOperatingCurriculum`/
+  `startedSessionWith` 등)로 통합 — 실행마다 `randomUUID`+타임스탬프로
+  태깅된 계정을 만들고, `entitlement_ledger`/`teacher_rate_history`처럼
+  설계상 삭제 불가한(INSERT-only 트리거) 테이블이 걸린 경우에만
+  `r4-purchase-flow.spec.ts`와 동일하게 완전 삭제 대신 contract만 void하고
+  남긴다(다음 실행과 충돌하지 않음 — 실행마다 새 계정이므로). `fullyParallel`
+  설정은 그대로 유지.
+
+  `teacher_curriculum_templates(teacher_id, subject_id)` UNIQUE 제약을
+  `r5-subject-enrollment-flow`와 `r5-subject-enrollment-teacher-assignment`가
+  둘 다 공용 이도현+SAT Math 조합에 동시에 쓰면 병렬 실행 시 충돌하는 것을
+  발견 — `r5-subject-enrollment-flow`는 이 스펙 전용 임시 선생님으로
+  옮겨 해결(`r6`의 `teacher_availability_rules`는 다른 파일이 안 건드려 충돌
+  없음, 공용 선생님 자체를 여러 파일이 assignment 대상으로 재사용하는 것은
+  exclusion 제약이 enrollment 단위라 안전).
+
+  `r5-subject-enrollment-flow`/`m3-teacher-assignment-termination-flow`는
+  2026-09-11 정보구조 개편(관리자 매칭 화면이 "매칭" 탭에서 "사용자 > 학생 >
+  학생 프로필"로 이동, 수강 계획 생성→활성화→배정 3단계가 매칭 확인 한
+  번으로 통합)으로 기존 테스트가 이미 존재하지 않는 화면을 찾고 있던 것도
+  함께 발견·재작성(순수 테스트 드리프트, 제품 결함 아님). `r6-lesson-booking-flow`도
+  2026-09-19 UAT 반영(예약이 독립 "Bookings" 탭으로 이동)에 맞춰 갱신.
+
+  **검증**: DB 레벨 4개 파일(`r5-subject-enrollment-flow`/
+  `r5-subject-enrollment-teacher-assignment`/`m3`/`r6`, 총 17개 테스트)을
+  기본 병렬 설정으로 두 번 연속 실행해 모두 통과, 재실행 계약 중복 충돌
+  없음 확인. 공용 시드 계정(지훈/이서아)에 남은 contracts 없음 확인.
+  나머지 3개 파일(`problem-bank-flow`/`figure-template-1`/`rw-structured-blocks`)은
+  실제 AI 생성을 포함해 fixture 전환 자체는 끝났지만, 검증 중 이 작업과
+  무관한 별개의 사전 존재 UI 드리프트를 발견해 별도 작업으로 분리했다
+  (아래 항목 참고) — 이번 라운드에서는 8개 파일 전체가 아니라 5개 파일만
+  실제 통과까지 확인됨.
+
+- **문제은행 E2E 3개 파일 UI 드리프트(2026-09-24 발견, 미해결 — 별도 작업)**:
+  `problem-bank-flow`/`figure-template-1`/`rw-structured-blocks` 3개 파일이
+  `/admin?tab=problem-bank`으로 이동한 뒤 실제 AI 생성까지 검증하는 흐름인데,
+  fixture 격리 검증 중 이 파일들이 2026-09-17 제품 개편("생성/검수/공개/보관"
+  4개 버킷 분리, 버킷 기본값이 이제 "검수") 이후 한 번도 갱신되지 않았음을
+  발견했다. 확인된 것:
+  1. `page.goto("/admin?tab=problem-bank")` 직후 곧바로 "SAT Math"/"AP" 등
+     체계 탭을 찾던 12곳 전부 — 그 탭은 "생성" 버킷 안에만 있는데 기본
+     버킷이 "검수"라 전부 타임아웃. **이건 이번에 고쳤다**("생성" 버킷 버튼
+     클릭을 12곳 모두 추가, `npx tsc --noEmit` 통과).
+  2. 위 수정 후 재검증하니 또 다른 문제 발견: `problem-bank-flow.spec.ts`의
+     "AP 탭" 테스트가 `getByLabel("SAT 영역", { exact: true })).toHaveCount(1)`을
+     기대하는데, 그 라벨을 가진 select는 버킷 분리 이전에 "생성" 화면에
+     같이 있던 필터 줄(`FilterBar`, `aria-label="SAT 영역"`, 검수/공개/보관
+     버킷에만 있음)과 SAT R&W 생성 폼 자신(`aria-label="SAT 영역"`, AP
+     선택 시엔 렌더 안 됨) 둘을 가정한 것 — 버킷 분리 이후 "생성" 화면에는
+     필터 줄이 없어져 AP 탭에서는 0개가 정상이다. 같은 이유로 CASES 루프
+     테스트들이 쓰는 `getByLabel("SAT 영역", {exact:true}).nth(1)`도 필터
+     줄이 사라져 `.nth(1)`이 범위를 벗어날 가능성이 높다(직접 하나하나
+     재검증 필요 — 실제 AI 호출이 걸려 비용·시간이 크다).
+  **사용자 결정(2026-09-24)**: 이번 fixture 격리 작업 범위에서 제외하고
+  별도 티켓으로 분리. 다음 세션에서 실제 AI 생성까지 포함해 3개 파일
+  전체를 현재 화면 기준으로 재검증·수정할 것 — 위 두 항목이 출발점.
+
+- **`mark_expired_invites` cron 연결(2026-09-24, 완료)**: `app/api/cron/mark-expired-invites/route.ts`
+  신설(기존 payout 크론과 동일 fail-closed 패턴, `vercel.json`에 매시간 등록).
+  RPC가 `is_admin()`만 통과시켜(서비스 롤 호출은 `auth.uid()`가 null이라 항상
+  실패) 크론이 원래 못 돌았을 것 — `is_admin() OR auth.role() = 'service_role'`로
+  조건만 넓혀 사람 관리자 세션 경로는 그대로 두고 서비스 롤도 허용
+  (`20261900000007`). 검증: `set role service_role`로 직접 호출 성공, `set role
+  anon`은 여전히 차단, 기존 통합 테스트 18개 전부 통과, 새 라우트 테스트 4개
+  추가. **주의**: Vercel에 `CRON_SECRET` 환경변수가 아직 없으면 이 크론은
+  503으로 비활성 상태 그대로다(다른 두 payout 크론과 같은 안전장치) — 실제
+  활성화하려면 `CRON_SECRET`을 설정해야 하고, 이는 다른 크론까지 동시에
+  활성화시키는 스위치이므로 사용자 승인 필요.
+
+- **Workspace 위임 계정 분리(2026-09-24, 재확인 — 코드 작업 아님, 외부 실제
+  계정 작업 필요)**: `docs/2026-08-29-master-roadmap-v3.md:1014`에 명시된 원래
+  요구사항은 domain-wide delegation의 위임 대상을 `official@alton.education`
+  (Gate C 검증 때 임시로 쓴 실제 회사 최고관리자 계정)에서 **사용자 관리
+  권한만 가진 전용 자동화 관리자 계정**으로 바꾸는 것. 코드는 이미
+  `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL` 환경변수로 위임 대상 이메일을
+  주입받게 돼 있어(`lib/google-workspace-auth.ts:149`) 코드 변경은 필요 없다 —
+  남은 작업은 전부 실제 Google Workspace Admin Console에서 사람이 해야 하는
+  일이라 이 세션이 대신 할 수 없다: (1) `alton.education` 도메인에 사용자
+  관리(만) 권한을 가진 커스텀 관리자 역할 생성, (2) 그 역할로 새 계정(예:
+  `automation@alton.education`) 생성, (3) domain-wide delegation의 승인 대상
+  주체(subject)를 그 계정 이메일로 변경, (4) Vercel
+  `GOOGLE_WORKSPACE_DELEGATED_ADMIN_EMAIL`을 새 이메일로 갱신, (5) 기존
+  `official@alton.education` 위임을 그대로 둘지 회수할지 결정. 실제 회사
+  Google Workspace 관리자 콘솔 접근·계정 생성은 사용자(또는 IT 담당)가 직접
+  진행해야 하며, 완료되면 이 세션(또는 다음 세션)이 env 값 갱신·재검증만
+  이어받는다.
+
+## 7. 관련 문서
+- **표준 렌더링 엔진**(승인됨, 템플릿 1 구현): `docs/2026-09-14-standard-rendering-engine-design.md` + 표본 `docs/assets/2026-09-14-render-samples/`. AI=의미 데이터만, ALTON 렌더러=조판, 검증 계층=거부. 좌표형 `geometry` 는 레거시(표시만, 공개 불가). 템플릿 1~7 완료(평행선·삼각형·좌표평면·표/데이터·원·사각형/다각형·입체) + 분류 모델. 다음: 좌표기하·복합 도형 → 그래프/도형 선택지 → 수식·로마숫자 선택지 Block.
+
+- **남은 작업 전체 목록**: [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md)(A 지금 UAT → B 콘텐츠·수업 → C 상담·결제·정산·문서 → D 운영·소통 → E 보안·데이터 수명 → F 출시 게이트).
+- 문제 템플릿 설계: [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md) · 과제 통일: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md) · 문제 풀이·채점·PDF 텍스트: [`2026-09-14-problem-answer-grading-and-pdf-text-notes.md`](2026-09-14-problem-answer-grading-and-pdf-text-notes.md) · Drive 자료 설계: [`2026-09-14-drive-material-assets-design.md`](2026-09-14-drive-material-assets-design.md) · PDF 규격: [`2026-09-14-lesson-pdf-spec.md`](2026-09-14-lesson-pdf-spec.md) · 로드맵: [`2026-08-29-master-roadmap-v3.md`](2026-08-29-master-roadmap-v3.md) · 이전 이력 전체: [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md).

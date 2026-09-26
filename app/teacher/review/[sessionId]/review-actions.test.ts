@@ -15,7 +15,7 @@ const supabaseMock = {
     if (table === "session_review_categories") {
       return { upsert: categoryUpsertMock };
     }
-    if (table === "sessions") {
+    if (table === "legacy_sessions") {
       return {
         select: () => ({ eq: () => ({ maybeSingle: sessionMaybeSingleMock }) }),
       };
@@ -48,8 +48,8 @@ vi.mock("@/lib/supabase-admin", () => ({
     from: (table: string) => {
       if (table === "household_members") {
         return {
-          select: (cols: string) => ({
-            eq: (col1: string) => ({
+          select: (_cols: string) => ({
+            eq: (_col1: string) => ({
               eq: (col2: string, val2: unknown) => {
                 if (col2 === "role" && val2 === "child") {
                   return { maybeSingle: childMembershipMaybeSingleMock };
@@ -76,12 +76,6 @@ vi.mock("@/lib/supabase-admin", () => ({
 const sendEmailMock = vi.fn().mockResolvedValue(undefined);
 vi.mock("@/lib/email", () => ({
   sendEmail: sendEmailMock,
-}));
-
-vi.mock("@anthropic-ai/sdk", () => ({
-  default: class {
-    messages = { create: vi.fn() };
-  },
 }));
 
 describe("submitReview -> notifyGuardiansOfReview", () => {
@@ -116,14 +110,12 @@ describe("submitReview -> notifyGuardiansOfReview", () => {
     const { submitReview } = await import("./review-actions");
     await submitReview("session1", {
       teacherSummary: "요약",
-      strength: "강점",
-      improve: "개선",
       nextPlan: "다음 계획",
       categories: {
-        concept: { text: "", reviewed: true },
-        problemsolving: { text: "", reviewed: true },
-        participation: { text: "", reviewed: true },
-        homework: { text: "", reviewed: true },
+        concept: { text: "", reviewed: true, rating: "average" },
+        problemsolving: { text: "", reviewed: true, rating: "average" },
+        participation: { text: "", reviewed: true, rating: "average" },
+        homework: { text: "", reviewed: true, rating: "average" },
       },
     });
 
@@ -144,14 +136,12 @@ describe("submitReview -> notifyGuardiansOfReview", () => {
     const { submitReview } = await import("./review-actions");
     await submitReview("session1", {
       teacherSummary: "요약",
-      strength: "강점",
-      improve: "개선",
       nextPlan: "다음 계획",
       categories: {
-        concept: { text: "", reviewed: true },
-        problemsolving: { text: "", reviewed: true },
-        participation: { text: "", reviewed: true },
-        homework: { text: "", reviewed: true },
+        concept: { text: "", reviewed: true, rating: "average" },
+        problemsolving: { text: "", reviewed: true, rating: "average" },
+        participation: { text: "", reviewed: true, rating: "average" },
+        homework: { text: "", reviewed: true, rating: "average" },
       },
     });
 
@@ -167,14 +157,12 @@ describe("submitReview -> notifyGuardiansOfReview", () => {
     const { submitReview } = await import("./review-actions");
     await submitReview("session1", {
       teacherSummary: "요약",
-      strength: "강점",
-      improve: "개선",
       nextPlan: "다음 계획",
       categories: {
-        concept: { text: "", reviewed: true },
-        problemsolving: { text: "", reviewed: true },
-        participation: { text: "", reviewed: true },
-        homework: { text: "", reviewed: true },
+        concept: { text: "", reviewed: true, rating: "average" },
+        problemsolving: { text: "", reviewed: true, rating: "average" },
+        participation: { text: "", reviewed: true, rating: "average" },
+        homework: { text: "", reviewed: true, rating: "average" },
       },
     });
 

@@ -87,6 +87,23 @@ insert into students (id, grade, status, credit_balance) values
   ('cccccccc-0000-0000-0000-000000000002', '11학년', 'active', 8),
   ('88888888-0000-0000-0000-000000000001', '9학년', 'pending', 0);
 
+-- M4(2026-09-05) 프로필 완성 게이트 추가 — 기존 e2e/시드 시나리오가 로그인 직후
+-- /complete-profile로 새로 리다이렉트되는 회귀를 막기 위해, 이미 활성 상태인 시드
+-- 학생들은 프로필을 완성된 것으로 미리 채워둔다(9학년 pending 학생은 계정 상태
+-- 게이트가 먼저 걸려 이 화면에 도달하지 않으므로 그대로 둔다).
+update students set
+  school_name = '서울국제학교',
+  sat_score = 1350,
+  gpa = 3.7,
+  gpa_scale = '4.0',
+  target_colleges = array['Stanford University'],
+  intended_majors = array['Computer Science'],
+  profile_completed_at = now()
+where id in (
+  'cccccccc-0000-0000-0000-000000000001',
+  'cccccccc-0000-0000-0000-000000000002'
+);
+
 -- (2026-08-30 R2 추가) teachers.status='active'로 바로 INSERT하면 R1의
 -- teachers_enforce_active_requires_rate 트리거가 유효한 현재 시급 이력
 -- (teacher_rate_history)을 요구한다 — teacher_rate_history.teacher_id는
@@ -177,7 +194,7 @@ insert into enrollments (id, student_id, teacher_id, subject_id, status, total_s
   ('22222222-0000-0000-0000-000000000003', 'cccccccc-0000-0000-0000-000000000001', 'dddddddd-0000-0000-0000-000000000001',
     'eeeeeeee-0000-0000-0000-000000000005', 'active', 12, 1);
 
-insert into sessions (
+insert into legacy_sessions (
   id, enrollment_id, session_number, unit_title, source_template_unit_id, teacher_comment, status, scheduled_at
 ) values
   ('44444444-0000-0000-0000-000000000001', '22222222-0000-0000-0000-000000000001', 1, '함수의 기초와 그래프 해석', '11111111-0000-0000-0000-000000000001', null, 'completed', now() - interval '5 weeks'),
@@ -211,7 +228,7 @@ insert into problems (id, format, passage, options, correct_index, explanation, 
     'confirmed', 'dddddddd-0000-0000-0000-000000000001');
 
 -- 8회차 세션에 이 교재를 배정
-update sessions set curriculum_doc_id = '33333333-0000-0000-0000-000000000001'
+update legacy_sessions set curriculum_doc_id = '33333333-0000-0000-0000-000000000001'
   where id = '44444444-0000-0000-0000-000000000008';
 
 -- 세션에 배정되지 않은 교재도 하나 더 시드 — 023(교재 라이브러리)에서
@@ -253,3 +270,134 @@ insert into teacher_qc_warnings (teacher_id, student_id, type, detail, occurred_
     '수업 10분 지각', now() - interval '10 days'),
   ('dddddddd-0000-0000-0000-000000000001', 'cccccccc-0000-0000-0000-000000000001', 'no_homework_review',
     '전 회차 과제 피드백 누락', now() - interval '3 days');
+
+-- =========================================================================
+-- 13. E2E 전용 fixture(2026-09-23) — 공용 계정(ACCOUNTS.student=지훈 등)을
+-- 변경하는 e2e 스펙을 여기로 옮긴다. 지훈은 e2e/auth-roles.spec.ts 등 다른
+-- 여러 스펙이 "정상 로그인 가능한 학생"으로 가정하는데, minor-consent.spec.ts는
+-- 그 학생의 생년월일을 13세 미만으로 바꿨다가 되돌리는 식으로 테스트해서
+-- fullyParallel(다중 워커) 아래서는 두 스펙이 같은 계정 상태를 두고 경합해
+-- 플레이키했다(account-lifecycle.spec.ts 옆 주석에도 동일 패턴이 이미 기록돼
+-- 있음: "기본 병렬 실행에서 5개 실패, --workers=1에서는 전부 통과"). 이 학생/
+-- 학부모 쌍은 이 fixture 전용으로만 쓰고 다른 어떤 스펙에서도 로그인하지 않는다.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change,
+  email_change_token_current, phone_change, phone_change_token, reauthentication_token
+) values
+  ('00000000-0000-0000-0000-000000000000', 'eeee1111-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'e2e-minor-consent-student@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'eeee1111-0000-0000-0000-000000000002', 'authenticated', 'authenticated',
+    'e2e-minor-consent-parent@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
+
+insert into auth.identities (
+  id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+)
+select gen_random_uuid(), u.id::text, u.id, jsonb_build_object('sub', u.id::text, 'email', u.email), 'email', now(), now(), now()
+from auth.users u
+where u.id in ('eeee1111-0000-0000-0000-000000000001', 'eeee1111-0000-0000-0000-000000000002');
+
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('eeee1111-0000-0000-0000-000000000001', 'student', 'E2E 동의테스트 학생', null, (now() - interval '16 years')::date);
+
+insert into profiles (id, role, name, phone) values
+  ('eeee1111-0000-0000-0000-000000000002', 'parent', 'E2E 동의테스트 학부모', null);
+
+insert into parents (id, referral_code, location) values
+  ('eeee1111-0000-0000-0000-000000000002', 'ALTON-E2ECONSENT', 'E2E fixture');
+
+insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
+  ('eeee1111-0000-0000-0000-000000000001', '10학년', 'active', 14,
+    '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now());
+
+insert into households (id, primary_guardian_id, billing_currency) values
+  ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000002', 'USD');
+
+insert into household_members (household_id, profile_id, role, relation, is_primary) values
+  ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000002', 'guardian', '모', true);
+
+insert into household_members (household_id, profile_id, role, is_primary) values
+  ('eeee1111-0000-0000-0000-000000000099', 'eeee1111-0000-0000-0000-000000000001', 'child', true);
+
+-- e2e/complete-profile-flow.spec.ts 전용 — 이 스펙도 ACCOUNTS.student(지훈)의
+-- profile_completed_at을 null로 됐다 복원하는 식으로 테스트해서 같은 이유로
+-- 공용 계정과 경합했다. 부모/household는 이 테스트에서 안 쓰므로 학생만.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change,
+  email_change_token_current, phone_change, phone_change_token, reauthentication_token
+) values
+  ('00000000-0000-0000-0000-000000000000', 'eeee2222-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'e2e-complete-profile-student@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
+
+insert into auth.identities (
+  id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+)
+select gen_random_uuid(), u.id::text, u.id, jsonb_build_object('sub', u.id::text, 'email', u.email), 'email', now(), now(), now()
+from auth.users u where u.id = 'eeee2222-0000-0000-0000-000000000001';
+
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('eeee2222-0000-0000-0000-000000000001', 'student', 'E2E 프로필완성테스트 학생', null, (now() - interval '16 years')::date);
+
+insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
+  ('eeee2222-0000-0000-0000-000000000001', '10학년', 'active', 14,
+    '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now());
+
+-- e2e/r4-purchase-flow.spec.ts 전용 — 이 스펙은 지훈/이서아(ACCOUNTS.student
+-- 계열)의 contracts 행을 직접 만들었다 지웠다 해서(active 계약 유무로 구매
+-- 자격을 가른다) r5-subject-enrollment-flow.spec.ts/m4-trial-to-regular-golden-path.spec.ts
+-- 등 같은 학생의 계약 상태를 가정하는 다른 스펙과 경합할 수 있었다.
+-- 부모 1 + 자녀 2(자격 있음/없음)로 완전히 분리한다.
+insert into auth.users (
+  instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+  raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+  confirmation_token, recovery_token, email_change_token_new, email_change,
+  email_change_token_current, phone_change, phone_change_token, reauthentication_token
+) values
+  ('00000000-0000-0000-0000-000000000000', 'eeee3333-0000-0000-0000-000000000001', 'authenticated', 'authenticated',
+    'e2e-purchase-parent@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'eeee3333-0000-0000-0000-000000000002', 'authenticated', 'authenticated',
+    'e2e-purchase-eligible-child@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''),
+  ('00000000-0000-0000-0000-000000000000', 'eeee3333-0000-0000-0000-000000000003', 'authenticated', 'authenticated',
+    'e2e-purchase-ineligible-child@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+    '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '');
+
+insert into auth.identities (
+  id, provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+)
+select gen_random_uuid(), u.id::text, u.id, jsonb_build_object('sub', u.id::text, 'email', u.email), 'email', now(), now(), now()
+from auth.users u
+where u.id in ('eeee3333-0000-0000-0000-000000000001', 'eeee3333-0000-0000-0000-000000000002', 'eeee3333-0000-0000-0000-000000000003');
+
+insert into profiles (id, role, name, phone, date_of_birth) values
+  ('eeee3333-0000-0000-0000-000000000002', 'student', 'E2E 구매테스트 자녀(자격O)', null, (now() - interval '16 years')::date),
+  ('eeee3333-0000-0000-0000-000000000003', 'student', 'E2E 구매테스트 자녀(자격X)', null, (now() - interval '17 years')::date);
+
+insert into profiles (id, role, name, phone) values
+  ('eeee3333-0000-0000-0000-000000000001', 'parent', 'E2E 구매테스트 학부모', null);
+
+insert into parents (id, referral_code, location) values
+  ('eeee3333-0000-0000-0000-000000000001', 'ALTON-E2EPURCHASE', 'E2E fixture');
+
+insert into students (id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at) values
+  ('eeee3333-0000-0000-0000-000000000002', '10학년', 'active', 14,
+    '서울국제학교', 1350, 3.7, '4.0', array['Stanford University'], array['Computer Science'], now()),
+  ('eeee3333-0000-0000-0000-000000000003', '11학년', 'active', 8,
+    '서울국제학교', 1400, 3.8, '4.0', array['MIT'], array['Physics'], now());
+
+insert into households (id, primary_guardian_id, billing_currency) values
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000001', 'USD');
+
+insert into household_members (household_id, profile_id, role, relation, is_primary) values
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000001', 'guardian', '모', true);
+
+insert into household_members (household_id, profile_id, role, is_primary) values
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000002', 'child', true),
+  ('eeee3333-0000-0000-0000-000000000099', 'eeee3333-0000-0000-0000-000000000003', 'child', false);

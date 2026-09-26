@@ -32,7 +32,17 @@ export async function resolveAccountDestination(
   supabase: SupabaseServerClient,
   role?: string | null
 ): Promise<string> {
-  const { data: status } = await supabase.rpc("current_account_status");
+  // 2026-09-21(UAT 지적: 탭 전환마다 체감 지연) — 아래 세 RPC는 전부 auth.uid() 하나로만
+  // 판정하는 순수 조회라 서로 결과를 참조하지 않는다(직렬로 기다릴 이유가 없었다). requireUser()가
+  // 페이지 로드뿐 아니라 서버 액션 하나하나(예: 모의고사 탭 목록 조회)마다도 매번 이 함수를 거치므로,
+  // 3번의 순차 왕복이 매 클릭마다 반복되고 있었다 — Preview처럼 리전 간 왕복 지연이 큰 환경에서는
+  // 이게 누적돼 눈에 띄게 느려진다. 아래에서 병렬로 한 번에 받아온 뒤 기존과 같은 분기 로직을 그대로
+  // 적용한다(호출 여부·순서 조건은 바뀌지 않는다 — 항상 셋 다 물어보고 필요한 값만 쓴다).
+  const [{ data: status }, { data: profileCompleted }, { data: accessAllowed }] = await Promise.all([
+    supabase.rpc("current_account_status"),
+    supabase.rpc("current_student_profile_completed"),
+    supabase.rpc("current_account_access_allowed"),
+  ]);
 
   if (status === "closure_pending" || status === "closed") {
     await supabase.auth.signOut();
@@ -45,6 +55,27 @@ export async function resolveAccountDestination(
       encodeURIComponent("계정 정보를 확인할 수 없습니다. 관리자에게 문의해주세요.")
     );
   }
+  // M4 UAT #2(2026-09-05): 학생 프로필 완성(생년월일/학교명/학년 등) 강제
+  // 게이트 — 완료 전에는 학생 포털의 다른 어떤 기능도 쓸 수 없어야 하고,
+  // 건너뛰기 불가, 로그인마다 재확인해야 한다는 확정 UX를 이 함수 하나에
+  // 추가해 모든 requireUser() 호출부(= 학생 포털의 모든 페이지/서버 액션)에
+  // 자동 전파한다. current_student_profile_completed()는 학생이 아니면
+  // 항상 true라 다른 role에는 영향이 없다.
+  //
+  // P0(2026-09-10, 2차 수정): 이 게이트는 반드시 아래 pending/suspended,
+  // current_account_access_allowed() 체크보다 먼저 와야 한다. 신규 학생
+  // 계정(특히 상담 없이 계정만 만든 직접생성 경로)은 students.status가
+  // 항상 'pending'으로 시작해 관리자가 매칭 등으로 active 전환하기 전까지는
+  // 이 함수 앞부분의 pending 체크가 먼저 리턴해버린다 — 그 뒤에 프로필
+  // 완성 게이트를 두면 비밀번호를 막 설정한 학생이 /complete-profile에
+  // 영원히 도달하지 못하고 /account-pending에 갇힌다(1차 수정 때 고쳤던
+  // "생년월일 입력 전 동의 화면에 갇히는" 문제와 같은 유형의 순서 버그가
+  // pending 게이트에도 있었음). 프로필 완성은 계정 lifecycle 상태와 무관하게
+  // 항상 최우선으로 확인한다.
+  if (role === "student" && profileCompleted === false) {
+    return "/complete-profile";
+  }
+
   if (status === "suspended") {
     return "/account-suspended";
   }
@@ -52,10 +83,10 @@ export async function resolveAccountDestination(
     return "/account-pending";
   }
 
-  const { data: accessAllowed } = await supabase.rpc("current_account_access_allowed");
   if (accessAllowed === false) {
     return "/consent-pending";
   }
+
   return getRoleHomePath(role);
 }
 

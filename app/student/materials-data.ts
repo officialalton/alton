@@ -14,7 +14,7 @@ export type LibrarySubject = {
 
 export type LibraryProblem = {
   id: string;
-  format: "mc" | "essay" | "math";
+  format: "mc" | "spr" | "essay" | "math";
   passage: string;
   options: string[] | null;
   correctIndex: number | null;
@@ -38,25 +38,59 @@ export type LibrarySection = {
 export type LibraryDocDetail = {
   id: string;
   title: string;
+  /** 2026-09-15 — 과목별 전체 교재 보기의 이전/다음 탐색에 쓴다. */
+  subjectId: string;
   sections: LibrarySection[];
+  /** html = 섹션 본문. pdf/video = 파일 자료 — 지금 공개본(asset)을 뷰어가 연다(2026-09-14). */
+  kind: "html" | "pdf" | "video";
+  asset: {
+    versionId: string;
+    pageCount: number | null;
+    mimeType: string;
+  } | null;
 };
+
+/** 학생이 수강 중인(active) 과목 id 집합 — 레거시 enrollments + v3 subject_enrollments 합. */
+export async function studentEnrolledSubjectIds(
+  supabase: SupabaseClient,
+  studentId: string
+): Promise<Map<string, string>> {
+  // 2026-09-09(UAT 지적, 제품 오너 승인): 레거시 enrollments만 보면 v3
+  // subject_enrollments로만 수강 중인 학생은 공개된 교재가 있어도 라이브러리가
+  // 항상 비어 보인다. 두 소스를 함께 조회해 합친다(신규 v3 흐름의 권한 원본은
+  // subject_enrollments — RLS도 20261267000000에서 동일하게 확장됨).
+  const [{ data: enrollments }, { data: subjectEnrollments }] = await Promise.all([
+    supabase
+      .from("enrollments")
+      .select("subject_id, subject:subjects(name)")
+      .eq("student_id", studentId)
+      .eq("status", "active"),
+    supabase
+      .from("subject_enrollments")
+      .select("subject_id, subject:subjects(name)")
+      .eq("child_id", studentId)
+      .eq("status", "active"),
+  ]);
+
+  const subjects = new Map<string, string>();
+  for (const e of [...(enrollments ?? []), ...(subjectEnrollments ?? [])]) {
+    const row = Array.isArray(e.subject) ? e.subject[0] : e.subject;
+    subjects.set(e.subject_id, (row as { name?: string } | null)?.name ?? "");
+  }
+  return subjects;
+}
+
+export async function loadMaterialsLibraryTree(supabase: SupabaseClient, studentId: string) {
+  const subjects = await studentEnrolledSubjectIds(supabase, studentId);
+  const { buildSubjectMaterialTree } = await import("@/lib/subject-material-library");
+  return buildSubjectMaterialTree(supabase, Array.from(subjects.keys()));
+}
 
 export async function loadMaterialsLibrary(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<LibrarySubject[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("subject_id, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("status", "active");
-
-  const subjects = new Map<string, string>();
-  for (const e of enrollments ?? []) {
-    const row = Array.isArray(e.subject) ? e.subject[0] : e.subject;
-    subjects.set(e.subject_id, (row as { name?: string } | null)?.name ?? "");
-  }
-
+  const subjects = await studentEnrolledSubjectIds(supabase, studentId);
   const subjectIds = Array.from(subjects.keys());
   if (subjectIds.length === 0) return [];
 
@@ -105,11 +139,41 @@ export async function loadLibraryDoc(
 ): Promise<LibraryDocDetail | null> {
   const { data: doc } = await supabase
     .from("curriculum_docs")
-    .select("id, title")
+    .select("id, title, kind, subject_id")
     .eq("id", docId)
     .eq("status", "published")
     .maybeSingle();
   if (!doc) return null;
+
+  const kind = ((doc as { kind?: string }).kind === "pdf" || (doc as { kind?: string }).kind === "video"
+    ? (doc as { kind: "pdf" | "video" }).kind
+    : "html") as "html" | "pdf" | "video";
+
+  // 파일 자료 — 과목 전체 보기는 **지금 공개본**을 쓴다(과거 수업은 당시 고정본).
+  if (kind !== "html") {
+    const { data: version } = await supabase
+      .from("curriculum_doc_versions")
+      .select("id, snapshot")
+      .eq("curriculum_doc_id", docId)
+      .order("version_number", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const snap = version?.snapshot as { asset?: { pageCount?: number; mimeType?: string } } | null;
+    return {
+      id: doc.id,
+      title: doc.title,
+      subjectId: doc.subject_id as string,
+      sections: [],
+      kind,
+      asset: version
+        ? {
+            versionId: version.id as string,
+            pageCount: typeof snap?.asset?.pageCount === "number" ? snap.asset.pageCount : null,
+            mimeType: snap?.asset?.mimeType ?? (kind === "pdf" ? "application/pdf" : "video/mp4"),
+          }
+        : null,
+    };
+  }
 
   const { data: sections } = await supabase
     .from("curriculum_doc_sections")
@@ -176,6 +240,9 @@ export async function loadLibraryDoc(
   return {
     id: doc.id,
     title: doc.title,
+    subjectId: doc.subject_id as string,
+    kind,
+    asset: null,
     sections: (sections ?? []).map((s) => ({
       id: s.id,
       title: s.title,

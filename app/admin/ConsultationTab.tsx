@@ -1,0 +1,623 @@
+"use client";
+
+import { useState } from "react";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { useTabCachedData } from "./use-tab-cached-data";
+import { listConsentGapsAction } from "./consent-actions";
+import { CONSENT_GAPS_CACHE_KEY, CONSENT_CACHE_TTL_MS } from "./consent-cache";
+import { useRouter } from "next/navigation";
+import {
+  createTrialSessionFromConsultation,
+  completeTrialSession,
+  approveTrialException,
+  cancelTrialSession,
+  markTrialNoShow,
+  retryFailedDriveArtifacts,
+  reconcileDocusignStatus,
+  retryContractActivation,
+} from "./consultation-actions";
+import type { ContractActivationRetryItem } from "./consultation-actions";
+import ConsultationSchedulingPanel from "./ConsultationSchedulingPanel";
+import ConsultationKanbanBoard from "./ConsultationKanbanBoard";
+import RegularContractTab from "./RegularContractTab";
+import AccountCreationTab from "./AccountCreationTab";
+import type { KanbanCard } from "./consultation-kanban-actions";
+import ClosedConsultationsSection from "./ClosedConsultationsSection";
+import type {
+  ConsultationListItem,
+  TrialSessionListItem,
+  ConsentGapItem,
+  DriveArtifactIssue,
+  StaleEnvelopeContract,
+} from "./consultation-data";
+import type { AdminSubject } from "./subject-data";
+import type { MatchingTeacherCandidate } from "./matching-data";
+
+type SubTab = "consult" | "contracts" | "accounts" | "scheduling" | "trial" | "consent" | "errors" | "past";
+
+// 2026-09-10(P1-B 신규 통합 보드) — "상담 현황"을 "신규 현황"으로 개칭하고
+// (상담 유입 + 계정 생성 유입을 한 보드에 합침), 매칭 탭 하단에 있던 "정규
+// 계약 발송 대기"를 "정규 계약 발송" 탭으로, 사용자 > 학부모 탭에 있던
+// 계정 생성 폼/발송 내역을 "계정 생성" 탭으로 이관했다. 탭 순서는 "신규
+// 현황 → 정규 계약 발송 → 계정 생성" 순. 나머지 서브탭(상담 운영/체험
+// 관리/보호자 동의 대기/지난 상담/오류 재처리)은 이번 배치 범위 밖 —
+// 변경 없음.
+const SUB_NAV: { id: SubTab; label: string }[] = [
+  { id: "consult", label: "신규 현황" },
+  { id: "contracts", label: "정규 계약 발송" },
+  { id: "accounts", label: "계정 생성" },
+  { id: "scheduling", label: "상담 운영(신청·수락·캘린더)" },
+  { id: "trial", label: "체험 관리" },
+  { id: "past", label: "지난 건" },
+  { id: "errors", label: "오류/재처리 현황판" },
+];
+
+const btnPrimary =
+  "text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50";
+const btnSecondary =
+  "text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50";
+const card = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3";
+const errText = "text-[12px] text-red mb-2";
+
+export default function ConsultationTab({
+  consultations,
+  trials,
+  driveIssues,
+  staleEnvelopes,
+  contractActivationRetries,
+  subjects,
+  teacherCandidatesBySubject,
+  initialKanbanCards,
+}: {
+  consultations: ConsultationListItem[];
+  trials: TrialSessionListItem[];
+  driveIssues: DriveArtifactIssue[];
+  staleEnvelopes: StaleEnvelopeContract[];
+  contractActivationRetries: ContractActivationRetryItem[];
+  subjects: AdminSubject[];
+  teacherCandidatesBySubject: Record<string, MatchingTeacherCandidate[]>;
+  // 2026-09-10(P1-3) — admin/page.tsx가 상담 탭 SSR 시 내려주는 칸반 초기
+  // 데이터. ConsultationKanbanBoard로 그대로 전달해 마운트 후 중복 조회를
+  // 없앤다.
+  initialKanbanCards?: KanbanCard[];
+}) {
+  const [sub, setSub] = useState<SubTab>("consult");
+
+  return (
+    <div>
+      <UnderlineSubTabs items={SUB_NAV} activeId={sub} onSelect={setSub} className="mb-6 flex-wrap" />
+
+      {sub === "consult" && (
+        <ConsultationKanbanBoard
+          subjects={subjects}
+          teacherCandidatesBySubject={teacherCandidatesBySubject}
+          initialCards={initialKanbanCards}
+        />
+      )}
+      {sub === "contracts" && <RegularContractTab />}
+      {sub === "accounts" && <AccountCreationTab />}
+      {sub === "scheduling" && <ConsultationSchedulingPanel />}
+      {sub === "trial" && <TrialSection trials={trials} consultations={consultations} />}
+      {sub === "past" && <ClosedConsultationsSection />}
+      {sub === "errors" && (
+        <ErrorDashboardSection
+          driveIssues={driveIssues}
+          staleEnvelopes={staleEnvelopes}
+          duplicateCandidates={consultations.filter((c) => c.duplicateOfConsultationId)}
+          contractActivationRetries={contractActivationRetries}
+        />
+      )}
+    </div>
+  );
+}
+
+
+function TrialSection({
+  trials,
+  consultations,
+}: {
+  trials: TrialSessionListItem[];
+  consultations: ConsultationListItem[];
+}) {
+  const [creating, setCreating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const trialSectionRouter = useRouter();
+  void trialSectionRouter;
+
+  return (
+    <div>
+      <div className="flex justify-end mb-4">
+        <button className={btnPrimary} onClick={() => setCreating((v) => !v)}>
+          {creating ? "취소" : "체험 생성"}
+        </button>
+      </div>
+      {error && <p className={errText}>{error}</p>}
+      {creating && (
+        <NewTrialForm
+          consultations={consultations}
+          onDone={() => setCreating(false)}
+          onError={setError}
+        />
+      )}
+
+      {trials.length === 0 && <p className="text-[13px] text-grey-500">등록된 체험이 없습니다.</p>}
+
+      {trials.map((t) => {
+        const open = openId === t.id;
+        return (
+          <div key={t.id} className={card} data-testid={`trial-card-${t.id}`}>
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-[14px] font-bold text-ink">
+                  {t.childName ?? t.childId} · {t.subjectName ?? t.subjectId}{" "}
+                  <span className="text-[11px] font-semibold text-grey-500">({t.status})</span>
+                </div>
+                <div className="text-[12px] text-grey-500">
+                  선생님: {t.teacherName ?? t.teacherId} · {new Date(t.scheduledAt).toLocaleString("ko-KR")}
+                </div>
+                {t.exceptionApprovedBy && (
+                  <div className="text-[11px] text-grey-500">예외 승인됨: {t.exceptionReason}</div>
+                )}
+              </div>
+              <button className={btnSecondary} onClick={() => setOpenId(open ? null : t.id)}>
+                {open ? "닫기" : "관리"}
+              </button>
+            </div>
+
+            {open && (
+              <TrialDetail
+                trial={t}
+                busy={busyId === t.id}
+                onBusy={(b) => setBusyId(b ? t.id : null)}
+                onError={setError}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function NewTrialForm({
+  consultations,
+  onDone,
+  onError,
+}: {
+  consultations: ConsultationListItem[];
+  onDone: () => void;
+  onError: (e: string | null) => void;
+}) {
+  const [consultationId, setConsultationId] = useState("");
+  const [childId, setChildId] = useState("");
+  const [subjectId, setSubjectId] = useState("");
+  const [teacherId, setTeacherId] = useState("");
+  const [scheduledAt, setScheduledAt] = useState("");
+  const [goal, setGoal] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [needsException, setNeedsException] = useState(false);
+  const [exceptionReason, setExceptionReason] = useState("");
+
+  async function submit() {
+    if (!consultationId || !childId || !subjectId || !teacherId || !scheduledAt) {
+      onError("상담/학생/과목/선생님/일시는 필수입니다.");
+      return;
+    }
+    setSubmitting(true);
+    onError(null);
+    try {
+      await createTrialSessionFromConsultation({
+        consultationId,
+        childId,
+        subjectId,
+        teacherId,
+        scheduledAt: new Date(scheduledAt).toISOString(),
+        goal: goal || undefined,
+        exceptionApprovedBy: needsException ? "self" : undefined,
+        exceptionReason: needsException ? exceptionReason : undefined,
+      });
+      onDone();
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "체험 생성에 실패했습니다.";
+      if (msg.includes("이미 진행 중이거나 완료된 체험")) {
+        setNeedsException(true);
+      }
+      onError(msg);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className={card}>
+      <div className="text-[12px] font-bold text-ink mb-2">체험 계획(사전)</div>
+      <div className="grid grid-cols-2 gap-2 mb-2">
+        <select
+          value={consultationId}
+          onChange={(e) => setConsultationId(e.target.value)}
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
+        >
+          <option value="">상담 선택</option>
+          {consultations.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.contactName} ({c.contactEmail})
+            </option>
+          ))}
+        </select>
+        <input
+          value={childId}
+          onChange={(e) => setChildId(e.target.value)}
+          placeholder="학생(child) ID"
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
+        />
+        <input
+          value={subjectId}
+          onChange={(e) => setSubjectId(e.target.value)}
+          placeholder="과목 ID"
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
+        />
+        <input
+          value={teacherId}
+          onChange={(e) => setTeacherId(e.target.value)}
+          placeholder="선생님 ID"
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
+        />
+        <input
+          type="datetime-local"
+          value={scheduledAt}
+          onChange={(e) => setScheduledAt(e.target.value)}
+          className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px]"
+        />
+      </div>
+      <textarea
+        value={goal}
+        onChange={(e) => setGoal(e.target.value)}
+        placeholder="체험 목표(goal) — 체험 전 사전 계획"
+        className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12.5px] mb-2"
+      />
+
+      {needsException && (
+        <div className="mb-2 p-2.5 bg-grey-100 rounded-lg">
+          <p className="text-[11.5px] text-ink mb-1.5">
+            이 학생은 이미 활성 체험이 있습니다. 관리자 예외 승인 사유를 입력하면 추가 체험을 생성할 수 있습니다.
+          </p>
+          <input
+            value={exceptionReason}
+            onChange={(e) => setExceptionReason(e.target.value)}
+            placeholder="예외 승인 사유"
+            className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px]"
+          />
+        </div>
+      )}
+
+      <button className={btnPrimary} disabled={submitting} onClick={submit}>
+        {submitting ? "생성 중…" : "체험 생성"}
+      </button>
+    </div>
+  );
+}
+
+function TrialDetail({
+  trial,
+  busy,
+  onBusy,
+  onError,
+}: {
+  trial: TrialSessionListItem;
+  busy: boolean;
+  onBusy: (b: boolean) => void;
+  onError: (e: string | null) => void;
+}) {
+  const [resultNotes, setResultNotes] = useState(trial.resultNotes ?? "");
+  const [recommendation, setRecommendation] = useState(trial.recommendation ?? "");
+  const [exceptionReason, setExceptionReason] = useState("");
+  const [reason, setReason] = useState("");
+
+  async function run(fn: () => Promise<void>) {
+    onBusy(true);
+    onError(null);
+    try {
+      await fn();
+    } catch (e) {
+      onError(e instanceof Error ? e.message : "처리에 실패했습니다.");
+    } finally {
+      onBusy(false);
+    }
+  }
+
+  return (
+    <div className="mt-3 pt-3 border-t border-grey-200 space-y-3">
+      <div>
+        <div className="text-[12px] font-bold text-ink mb-1">체험 계획(사전)</div>
+        <p className="text-[12px] text-grey-500">{trial.goal || "목표 미입력"}</p>
+      </div>
+
+      <div>
+        <div className="text-[12px] font-bold text-ink mb-1">체험 결과(사후) — 실제 수업 완료 후 입력</div>
+        {trial.status !== "completed" && (
+          <p className="text-[11px] text-grey-500 mb-1.5">
+            선생님이 실제 체험 수업을 시작·종료(완료 확정)해야 결과를 기록할 수 있습니다 — 이 화면에서 임의로
+            완료 처리할 수 없습니다.
+          </p>
+        )}
+        <textarea
+          value={resultNotes}
+          onChange={(e) => setResultNotes(e.target.value)}
+          placeholder="결과 노트"
+          disabled={trial.status !== "completed"}
+          className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] mb-1.5 disabled:opacity-50"
+        />
+        <textarea
+          value={recommendation}
+          onChange={(e) => setRecommendation(e.target.value)}
+          placeholder="추천 사항"
+          disabled={trial.status !== "completed"}
+          className="w-full border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[12px] mb-1.5 disabled:opacity-50"
+        />
+        <button
+          disabled={busy || trial.status !== "completed"}
+          className={btnSecondary}
+          onClick={() =>
+            run(() =>
+              completeTrialSession({
+                trialSessionId: trial.id,
+                resultNotes: resultNotes || undefined,
+                recommendation: recommendation || undefined,
+              })
+            )
+          }
+        >
+          체험 결과 기록
+        </button>
+      </div>
+
+      <div className="flex items-center gap-2 flex-wrap">
+        <input
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          placeholder="사유(취소/노쇼)"
+          className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px] w-32"
+        />
+        <button
+          disabled={busy}
+          className={btnSecondary}
+          onClick={() =>
+            run(() =>
+              cancelTrialSession({ trialSessionId: trial.id, cancelledBy: "student", reason })
+            )
+          }
+        >
+          학생 취소
+        </button>
+        <button
+          disabled={busy}
+          className={btnSecondary}
+          onClick={() =>
+            run(() =>
+              cancelTrialSession({ trialSessionId: trial.id, cancelledBy: "teacher", reason })
+            )
+          }
+        >
+          선생님 취소
+        </button>
+        <button
+          disabled={busy}
+          className={btnSecondary}
+          onClick={() =>
+            run(() => markTrialNoShow({ trialSessionId: trial.id, party: "student", reason }))
+          }
+        >
+          학생 노쇼
+        </button>
+        <button
+          disabled={busy}
+          className={btnSecondary}
+          onClick={() =>
+            run(() => markTrialNoShow({ trialSessionId: trial.id, party: "teacher", reason }))
+          }
+        >
+          선생님 노쇼
+        </button>
+      </div>
+
+      {!trial.exceptionApprovedBy && (
+        <div className="flex items-center gap-2">
+          <input
+            value={exceptionReason}
+            onChange={(e) => setExceptionReason(e.target.value)}
+            placeholder="예외 승인 사유"
+            className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px] flex-1"
+          />
+          <button
+            disabled={busy || !exceptionReason}
+            className={btnSecondary}
+            onClick={() =>
+              run(() => approveTrialException({ trialSessionId: trial.id, reason: exceptionReason }))
+            }
+          >
+            예외 승인
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+function ErrorDashboardSection({
+  driveIssues,
+  staleEnvelopes,
+  duplicateCandidates,
+  contractActivationRetries,
+}: {
+  driveIssues: DriveArtifactIssue[];
+  staleEnvelopes: StaleEnvelopeContract[];
+  duplicateCandidates: ConsultationListItem[];
+  contractActivationRetries: ContractActivationRetryItem[];
+}) {
+  // P4-3 1단계 — 동의 현황은 `문서 > 동의서`와 같은 캐시 키를 쓴다. 두 화면이
+  // 공통 부모 없이 같은 데이터를 보고, TTL 안에서는 한 번만 조회한다.
+  const consentGapsCache = useTabCachedData<ConsentGapItem[]>({
+    cacheKey: CONSENT_GAPS_CACHE_KEY,
+    ttlMs: CONSENT_CACHE_TTL_MS,
+    fetcher: listConsentGapsAction,
+  });
+  const consentGaps = consentGapsCache.data ?? [];
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [retrySummary, setRetrySummary] = useState<{ attempted: number; stillFailing: number } | null>(
+    null
+  );
+  const [activationRetries, setActivationRetries] = useState(contractActivationRetries);
+
+  return (
+    <div>
+      {error && <p className={errText}>{error}</p>}
+
+      <div className="mb-6">
+        <h2 className="text-[14px] font-bold text-ink mb-2">Drive 저장 실패 (재시도 가능)</h2>
+        {driveIssues.length === 0 ? (
+          <p className="text-[13px] text-grey-500">실패한 Drive 저장이 없습니다.</p>
+        ) : (
+          <>
+            {driveIssues.map((d) => (
+              <div key={d.id} className={card + " flex items-center justify-between"}>
+                <span className="text-[12.5px] text-ink">
+                  계약 {d.contractId} · {d.artifactType} · {d.syncStatus}
+                </span>
+              </div>
+            ))}
+            <button
+              disabled={busy === "drive"}
+              className={btnSecondary}
+              onClick={async () => {
+                setBusy("drive");
+                setError(null);
+                try {
+                  setRetrySummary(await retryFailedDriveArtifacts());
+                } catch (e) {
+                  setError(e instanceof Error ? e.message : "재시도에 실패했습니다.");
+                } finally {
+                  setBusy(null);
+                }
+              }}
+            >
+              전체 재시도
+            </button>
+            {retrySummary && (
+              <p className="text-[12px] text-grey-500 mt-1.5">
+                재시도 {retrySummary.attempted}건 중 {retrySummary.stillFailing}건 여전히 실패
+              </p>
+            )}
+          </>
+        )}
+      </div>
+
+      <div className="mb-6">
+        <h2 className="text-[14px] font-bold text-ink mb-2">DocuSign 상태 대조 필요 (재시도 가능)</h2>
+        {staleEnvelopes.length === 0 ? (
+          <p className="text-[13px] text-grey-500">상태 대조가 필요한 계약이 없습니다.</p>
+        ) : (
+          staleEnvelopes.map((s) => (
+            <div key={s.contractVersionId} className={card + " flex items-center justify-between"}>
+              <span className="text-[12.5px] text-ink">
+                계약 {s.contractId} · envelope {s.docusignEnvelopeStatus ?? "미확인"}
+              </span>
+              <button
+                disabled={busy === s.contractVersionId}
+                className={btnSecondary}
+                onClick={async () => {
+                  setBusy(s.contractVersionId);
+                  setError(null);
+                  try {
+                    await reconcileDocusignStatus(s.contractVersionId);
+                  } catch (e) {
+                    setError(e instanceof Error ? e.message : "상태 대조에 실패했습니다.");
+                  } finally {
+                    setBusy(null);
+                  }
+                }}
+              >
+                상태 새로고침
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="mb-6">
+        <h2 className="text-[14px] font-bold text-ink mb-2">계약 활성화 재처리 대기 (재시도 가능)</h2>
+        {activationRetries.length === 0 ? (
+          <p className="text-[13px] text-grey-500">활성화 재처리 대기 중인 계약이 없습니다.</p>
+        ) : (
+          activationRetries.map((r) => (
+            <div key={r.id} className={card + " flex items-center justify-between"}>
+              <span className="text-[12.5px] text-ink">
+                {r.childName ?? r.childId ?? "학생 미확인"} · 계약 {r.contractId} ·{" "}
+                {new Date(r.createdAt).toLocaleString("ko-KR")}
+                <span className="text-[11px] text-grey-500 ml-2">{r.failureReason}</span>
+              </span>
+              <button
+                disabled={busy === r.id}
+                className={btnSecondary}
+                onClick={async () => {
+                  setBusy(r.id);
+                  setError(null);
+                  try {
+                    const result = await retryContractActivation(r.id);
+                    if (result.status === "activated" || result.status === "already_active") {
+                      setActivationRetries((prev) => prev.filter((x) => x.id !== r.id));
+                    } else if (result.status === "still_failing") {
+                      setActivationRetries((prev) =>
+                        prev.map((x) =>
+                          x.id === r.id ? { ...x, failureReason: result.failureReason ?? x.failureReason } : x
+                        )
+                      );
+                    }
+                  } catch (e) {
+                    setError(e instanceof Error ? e.message : "활성화 재시도에 실패했습니다.");
+                  } finally {
+                    setBusy(null);
+                  }
+                }}
+              >
+                활성화 재시도
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="mb-6">
+        <h2 className="text-[14px] font-bold text-ink mb-2">보호자 동의 차단 (재시도 불가 — 가족 조치 필요)</h2>
+        {consentGaps.length === 0 ? (
+          <p className="text-[13px] text-grey-500">동의로 막힌 학생이 없습니다.</p>
+        ) : (
+          consentGaps.map((g) => (
+            <div key={g.childId} className={card}>
+              <span className="text-[12.5px] text-ink">{g.childName ?? g.childId}</span>
+              <span className="text-[11px] text-grey-500 ml-2">
+                {!g.hasDob ? "생년월일 미입력" : "동의 없음"} — 관리자가 재시도할 수 없으며 가족의 조치가 필요합니다.
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div>
+        <h2 className="text-[14px] font-bold text-ink mb-2">중복 상담 후보 (관리자 확인 필요)</h2>
+        {duplicateCandidates.length === 0 ? (
+          <p className="text-[13px] text-grey-500">확인이 필요한 중복 상담이 없습니다.</p>
+        ) : (
+          duplicateCandidates.map((c) => (
+            <div key={c.id} className={card}>
+              <span className="text-[12.5px] text-ink">{c.contactName} ({c.contactEmail})</span>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}

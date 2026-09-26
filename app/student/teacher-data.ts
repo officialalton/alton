@@ -1,9 +1,18 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadCurriculumOverlayProgressByEnrollment, getCurriculumOverlayProgress } from "@/lib/curriculum-overlay-progress";
+
+// M4 골든패스 실사용 버그 #1 — 이 파일은 원래 legacy `enrollments`/`teachers` 테이블
+// (정규 전환 후에만 채워짐)을 조회했다. 체험 수업만 진행 중인 학생은 `subject_enrollments`
+// + `teacher_assignments`(v3, R1/R5)만 있고 `enrollments` 행이 없어 "매칭된 선생님이
+// 없습니다"로 잘못 표시됐다. v3 배정 테이블 기준으로 재작성.
+// (관련 RLS 갭은 20261212000000_m4_teacher_student_v3_visibility_fix.sql에서 함께 수정.)
 
 export type TeacherSubject = {
   subjectName: string;
   currentSession: number;
   totalSessions: number;
+  // C-1(2026-09-10) — "교사 운영 커리큘럼 기준"/"공통 커리큘럼 기준" 표시용.
+  curriculumSourceLabel: string | null;
 };
 
 export type TeacherListItem = {
@@ -33,40 +42,93 @@ function extractName(rel: unknown): string {
   return (row as { name?: string } | null)?.name ?? "";
 }
 
+type ActiveAssignment = {
+  teacherId: string;
+  subjectEnrollmentId: string;
+  subjectName: string;
+};
+
+// 학생의 v3 배정(현재 활성/예정) 목록을 (subject_enrollments + teacher_assignments)로
+// 조회한다. 여러 화면에서 재사용.
+async function loadActiveAssignments(
+  supabase: SupabaseClient,
+  studentId: string
+): Promise<ActiveAssignment[]> {
+  const { data: enrollments } = await supabase
+    .from("subject_enrollments")
+    .select("id, subject:subjects(name)")
+    .eq("child_id", studentId);
+  const enrollmentIds = (enrollments ?? []).map((e) => e.id);
+  if (enrollmentIds.length === 0) return [];
+
+  const subjectNameByEnrollment = new Map(
+    (enrollments ?? []).map((e) => [e.id, extractName(e.subject)])
+  );
+
+  const { data: assignments } = await supabase
+    .from("teacher_assignments")
+    .select("teacher_id, subject_enrollment_id")
+    .in("subject_enrollment_id", enrollmentIds)
+    .in("status", ["planned", "active"]);
+
+  return (assignments ?? []).map((a) => ({
+    teacherId: a.teacher_id,
+    subjectEnrollmentId: a.subject_enrollment_id,
+    subjectName: subjectNameByEnrollment.get(a.subject_enrollment_id) ?? "",
+  }));
+}
+
 export async function loadTeacherList(
   supabase: SupabaseClient,
   studentId: string
 ): Promise<TeacherListItem[]> {
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("teacher_id, current_session, total_sessions, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("status", "active");
-
-  const teacherIds = Array.from(new Set((enrollments ?? []).map((e) => e.teacher_id)));
-  if (teacherIds.length === 0) return [];
+  const rawAssignments = await loadActiveAssignments(supabase, studentId);
+  const rawTeacherIds = Array.from(new Set(rawAssignments.map((a) => a.teacherId)));
+  if (rawTeacherIds.length === 0) return [];
 
   const { data: profiles } = await supabase
     .from("profiles")
     .select("id, name")
-    .in("id", teacherIds);
+    .in("id", rawTeacherIds);
   const { data: teacherRows } = await supabase
     .from("teachers")
     .select("id, school")
-    .in("id", teacherIds);
+    .in("id", rawTeacherIds);
 
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const schoolById = new Map((teacherRows ?? []).map((t) => [t.id, t.school]));
 
+  // 2026-09-18(학생 홈 크래시 수정) — teacher_assignments가 가리키는 프로필이
+  // profiles에는 있어도 teachers 테이블에는 아직 없는 경우(온보딩 미완료·
+  // 데이터 정합성 결함)가 있을 수 있다. 이런 teacherId를 그대로 내려보내면
+  // 이후 ensureThreadAndLoadMessages()의 chat_threads insert가
+  // chat_threads_teacher_id_fkey(teachers 참조) 위반으로 던지는 예외를
+  // page.tsx가 잡지 못해 /student 홈 전체가 크래시한다(실사용 UAT
+  // 2026-09-18 재현: docs/2026-09-18-real-student-teacher-uat.md 5절).
+  // teachers 행이 실제로 있는 teacherId만 통과시킨다.
+  const validTeacherIdSet = new Set((teacherRows ?? []).map((t) => t.id));
+  const assignments = rawAssignments.filter((a) => validTeacherIdSet.has(a.teacherId));
+  const teacherIds = rawTeacherIds.filter((id) => validTeacherIdSet.has(id));
+  if (teacherIds.length === 0) return [];
+
+  // C-1(2026-09-10) — 진도는 세션 실적이 아니라 curriculum_overlay_units
+  // 기준으로 통일한다(다른 화면과 동일 기준).
+  const enrollmentIds = Array.from(
+    new Set(assignments.map((a) => a.subjectEnrollmentId))
+  );
+  const progressByEnrollment = await loadCurriculumOverlayProgressByEnrollment(supabase, enrollmentIds);
+
   const bySubjectMap = new Map<string, TeacherSubject[]>();
-  for (const e of enrollments ?? []) {
-    const list = bySubjectMap.get(e.teacher_id) ?? [];
+  for (const a of assignments) {
+    const list = bySubjectMap.get(a.teacherId) ?? [];
+    const progress = getCurriculumOverlayProgress(progressByEnrollment, a.subjectEnrollmentId);
     list.push({
-      subjectName: extractName(e.subject),
-      currentSession: e.current_session,
-      totalSessions: e.total_sessions,
+      subjectName: a.subjectName,
+      currentSession: progress.doneUnits,
+      totalSessions: progress.totalUnits,
+      curriculumSourceLabel: progress.sourceLabel,
     });
-    bySubjectMap.set(e.teacher_id, list);
+    bySubjectMap.set(a.teacherId, list);
   }
 
   return teacherIds.map((teacherId) => ({
@@ -95,19 +157,16 @@ export async function loadTeacherProfile(
     .eq("id", teacherId)
     .maybeSingle();
 
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("teacher_id", teacherId)
-    .eq("status", "active");
+  const assignments = await loadActiveAssignments(supabase, studentId);
 
   return {
     teacherId,
     name: profile.name,
     school: teacherRow?.school ?? null,
     bio: teacherRow?.bio ?? null,
-    subjects: (enrollments ?? []).map((e) => extractName(e.subject)),
+    subjects: assignments
+      .filter((a) => a.teacherId === teacherId)
+      .map((a) => a.subjectName),
   };
 }
 
@@ -117,29 +176,45 @@ export async function loadTeacherSessionHistory(
   teacherId: string
 ): Promise<TeacherSessionHistoryItem[]> {
   const { data: enrollments } = await supabase
-    .from("enrollments")
+    .from("subject_enrollments")
     .select("id, subject:subjects(name)")
-    .eq("student_id", studentId)
-    .eq("teacher_id", teacherId);
-
+    .eq("child_id", studentId);
   const enrollmentIds = (enrollments ?? []).map((e) => e.id);
+  if (enrollmentIds.length === 0) return [];
+
   const subjectByEnrollment = new Map(
     (enrollments ?? []).map((e) => [e.id, extractName(e.subject)])
   );
 
-  const { data: sessions } = enrollmentIds.length
-    ? await supabase
-        .from("sessions")
-        .select("id, enrollment_id, session_number, scheduled_at, status")
-        .in("enrollment_id", enrollmentIds)
-        .in("status", ["completed", "no_show"])
-        .order("scheduled_at", { ascending: false })
-    : { data: [] as never[] };
+  const { data: assignments } = await supabase
+    .from("teacher_assignments")
+    .select("subject_enrollment_id")
+    .eq("teacher_id", teacherId)
+    .in("subject_enrollment_id", enrollmentIds);
+  const relevantEnrollmentIds = new Set(
+    (assignments ?? []).map((a) => a.subject_enrollment_id)
+  );
+  if (relevantEnrollmentIds.size === 0) return [];
 
-  return (sessions ?? []).map((s) => ({
-    sessionId: s.id,
-    subjectName: subjectByEnrollment.get(s.enrollment_id) ?? "",
-    sessionNumber: s.session_number,
-    scheduledAt: s.scheduled_at,
-  }));
+  const { data: sessions } = await supabase
+    .from("sessions")
+    .select("id, subject_enrollment_id, final_status, reservation:reservations!sessions_reservation_id_fkey(starts_at)")
+    .eq("teacher_id", teacherId)
+    .in("subject_enrollment_id", Array.from(relevantEnrollmentIds))
+    .in("final_status", ["completed", "no_show"])
+    .order("id", { ascending: false });
+
+  function one<T>(rel: T | T[] | null | undefined): T | null {
+    return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
+  }
+
+  return (sessions ?? []).map((s, idx) => {
+    const reservation = one(s.reservation as unknown) as { starts_at?: string } | null;
+    return {
+      sessionId: s.id,
+      subjectName: subjectByEnrollment.get(s.subject_enrollment_id) ?? "",
+      sessionNumber: (sessions?.length ?? 0) - idx,
+      scheduledAt: reservation?.starts_at ?? null,
+    };
+  });
 }

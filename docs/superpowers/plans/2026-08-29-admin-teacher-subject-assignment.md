@@ -1,5 +1,7 @@
 # 관리자 선생님 담당 과목 배정 Implementation Plan
 
+> **문서 상태: 과거 구현 이력·직접 재실행 금지.** 현재 결과를 이해할 때만 참고하고 신규 teacher assignment는 v3 기간 이력 모델을 따른다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 관리자가 선생님 상세 화면에서 그 선생님이 가르칠 과목(`teacher_curriculum_templates`)을 직접 등록/제거할 수 있게 하고, "담당 과목(등록)"과 "매칭된 학생(수강 중)"을 화면에서 분리해 보여준다.
