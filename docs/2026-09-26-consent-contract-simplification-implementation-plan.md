@@ -17,9 +17,46 @@
    **`lib/regular-contract-send.ts:23`** 에 있다.
 3. 나머지 PRD 서술(계약 게이트, RPC 존재 여부, transcript 미처리 등)은 전부
    현재 코드와 정확히 일치 — 별도 재확인 불필요.
-4. **연령(만 13세) 검증은 현재 코드베이스 어디에도 없다.** "게이트 제거"가
-   아니라 신규로 만들어야 하는 유일한 항목(PRD 4번/E). `complete_student_profile`
-   (생년월일 필수 수집)은 이미 있지만 나이 계산·기준 검사가 없다.
+
+4. **(정정, 최초 조사 오류) "만 13세 이상" 검증은 신규 항목이 아니라 기존
+   시스템을 교체하는 항목이다.** 최초 조사에서 "연령 검증이 코드베이스에
+   전혀 없다"고 잘못 보고했다 — 실제로는 **2026-08-31에 만든 완결된
+   "13세 미만 보호자 동의" 시스템이 이미 운영 중**이며, 다만 지금 PRD가
+   요구하는 "13세 미만은 무조건 차단"과는 **반대 방향의 정책**(13세 미만도
+   검증된 보호자 동의가 있으면 이용 허용)을 구현하고 있어서 최초 조사가
+   "연령 검증"이라는 키워드로 찾지 못했다.
+
+   기존 시스템(`supabase/migrations/20260904000000_r2_minor_consent.sql`,
+   R2 Task 6):
+   - `is_under_13(student_id)` — `profiles.date_of_birth` 기준 UTC로 만 13세
+     여부 판정. DOB 없으면 fail-closed(13세 미만으로 취급).
+   - `has_valid_guardian_consent(student_id)` — `guardian_consents` 테이블에
+     유효(미철회, 정책 재동의 불필요)한 동의가 있는지.
+   - `current_account_access_allowed()` — `current_account_active() AND
+     (not is_under_13() OR has_valid_guardian_consent())`. 26개 자기서비스
+     RLS 정책이 이 함수로 최종 방어선을 건다.
+   - `transition_account_status()` — 학생을 `active`로 전환할 때 13세 미만이면
+     유효한 보호자 동의 없이는 전환 자체를 막는다(`20260904000000_...sql:401-403`).
+   - `consent_as_guardian()` / `record_manual_guardian_consent()` — 보호자
+     본인(household 검증) 또는 관리자(증빙 필수)가 동의를 기록하는 두 경로.
+   - `revoke_guardian_consent()` — 동의 철회 시 `privacy_review_tasks` 자동 생성.
+   - `set_student_date_of_birth()` — 생년월일은 학생 본인이 못 고치고 보호자/
+     관리자만 변경 가능.
+   - UI: `app/parent/ConsentTab.tsx` + `app/parent/consent-data.ts`/
+     `consent-actions.ts`(보호자가 직접 동의), `app/admin/ConsentGapPanel.tsx` +
+     `ConsentGapSection.tsx` + `consultation-data.ts`의 `loadConsentGaps()`(관리자가
+     "생년월일 미입력 또는 유효한 동의 없어 막힌 학생" 목록을 보는 "문서 > 동의서"
+     탭), `app/admin/consent-actions.ts`(관리자의 수동 동의 기록 action).
+   - `e2e/minor-consent.spec.ts`에 골든패스 E2E 존재.
+
+   **이것은 PRD 3번(4번? 문서 §3-E) "미성년 동의·이용약관 체크 게이트"가
+   가리키는 바로 그 대상이다** — PRD도 `guardian_consents`,
+   `consent_policy_versions`, `ConsentTab`, `consent-pending`을 명시적으로
+   언급하고 있으니(§3-E) PRD 자체는 이 시스템의 존재를 전제하고 있었다.
+   최초 조사가 "정책이 반대 방향이라 못 찾았다"는 것만 정정하면 되고,
+   **PRD의 작업 지시(§3-E, "정상 신규 고객 흐름에서는 별도 보호자 AI 동의를
+   차단 조건으로 쓰지 않는다", "기존 동의 테이블은 파기하지 않는다")는 그대로
+   유효**하다. 아래 2단계-A를 이 사실에 맞춰 다시 썼다.
 
 ## 1. 단계별 실행 순서 (PRD §7 그대로, 각 단계에 구체 파일/함수 매핑)
 
@@ -39,17 +76,53 @@
 `drop trigger if exists` 패턴 — CLAUDE.md 규칙대로 이미 적용된 번호는 고치지
 않고 새 번호로 얹는다):
 
-**A. 연령·학년 서버 검증 (신규 함수)**
-- 위치 후보: 상담 신청 RPC, `create_direct_onboarding_link_multi`
-  (`supabase/migrations/20261473000000_r_consultant_assignment_from_onboarding.sql:159`),
-  `complete_student_profile`
-  (`supabase/migrations/20261124000000_m5c_final_reconciliation_integrity_gaps.sql:311`).
-- 공통 헬퍼 SQL 함수(예: `is_eligible_age_and_grade(p_date_of_birth date, p_grade text)`)를
-  만들어 세 진입점에서 동일 기준으로 재사용한다. 클라이언트 검증만으로 처리 금지(PRD 10번).
-- `create_direct_onboarding_link_multi`는 현재 생년월일을 아예 안 받는다 —
-  파라미터 추가 필요(breaking 변경이므로 새 버전 함수로 얹거나 nullable로
-  추가 후 애플리케이션에서 필수화).
-- 만 13세 미만이면 상담/체험/계정생성/계약 전부 차단하고 접수 불가 안내 반환.
+**A. 연령·학년 서버 검증 — 기존 "13세 미만 허용(보호자 동의)" 모델을
+   "13세 미만 전면 차단" 모델로 교체 (신규 코드 + 기존 시스템 정리, 둘 다 필요)**
+
+이 항목은 처음에 "완전 신규"로 잘못 정리했었다 — 정정: 기존
+`is_under_13`/`has_valid_guardian_consent`/`current_account_access_allowed`/
+`transition_account_status`(0-4 참고)가 이미 있고, **방향만 반대**(13세 미만도
+동의 있으면 허용 → 이제 13세 미만은 예외 없이 차단)다. 할 일은 두 갈래다.
+
+1. **신규 진입 지점에 하드 차단 추가(진짜 신규 코드)**: 상담 신청, 체험 신청,
+   `create_direct_onboarding_link_multi`
+   (`supabase/migrations/20261473000000_r_consultant_assignment_from_onboarding.sql:159`,
+   현재 생년월일 파라미터 자체가 없어 추가 필요), `complete_student_profile`
+   (`supabase/migrations/20261124000000_m5c_final_reconciliation_integrity_gaps.sql:311`,
+   생년월일은 이미 필수로 받지만 나이 계산·기준 검사가 없음) 네 곳 모두에서
+   생년월일+학년을 받아 `is_under_13()`과 같은 계산 방식(UTC 기준, DOB 없으면
+   fail-closed)을 재사용하는 새 헬퍼(`is_eligible_age_and_grade(dob, grade)`
+   또는 `is_under_13()` 자체를 재사용)로 **만 13세 미만이면 그 자리에서 즉시
+   거절**(상담·체험·계정·계약 전부 생성 안 함). 클라이언트 검증만으로 처리 금지.
+2. **기존 "13세 미만+동의 있으면 허용" 경로의 운명 결정(정리 작업)**:
+   - `is_under_13`/`has_valid_guardian_consent`/`current_account_access_allowed`/
+     `transition_account_status`의 DB 로직 자체는 **삭제하지 않는다** — 1번이
+     신규 유입을 원천 차단하면 이 경로는 자연히 도달 불가능해지고, 혹시 이미
+     활성화된(과거에 동의받아 active인) 13세 미만 기존 고객이 있다면 이 로직이
+     없어지는 순간 오히려 그 계정들의 서비스 접근이 깨진다("기존 고객 데이터·
+     접근 유지" 원칙과 충돌). **즉 이 함수들은 그대로 두고 방어선(defense-in-depth)
+     으로만 남긴다.**
+   - `app/parent/ConsentTab.tsx`, `consent-data.ts`, `consent-actions.ts`(보호자가
+     새로 동의를 "기록"하는 UI)는 PRD §3-E 지시대로 **신규 고객 흐름에서 제거**한다.
+     단, 이미 13세 미만 상태로 활성 이용 중인 기존 가구가 있다면 그 가구의 동의
+     철회·재확인 UI가 완전히 사라지는 게 맞는지 제품 결정 필요(운영상 아예 없는
+     케이스면 통째로 제거, 있다면 관리자 전용 화면으로 이관 검토).
+   - `app/admin/ConsentGapPanel.tsx`/`ConsentGapSection.tsx`/
+     `consultation-data.ts`의 `loadConsentGaps()`(만 13세 미만·동의 없어 막힌
+     기존 학생을 보여주는 관리자 뷰)는 **신규 유입 차단 이후에는 이론상 0건이
+     계속 나와야 정상**이다 — 즉시 삭제하기보다는 "레거시 확인용" 이라는
+     문구를 붙여 남겨두고, 실제로 몇 마일스톤 지나 0건이 유지되면 그때
+     제거하는 편이 안전(PRD "기존 감사 데이터 보존" 원칙과 일치).
+   - `app/admin/consent-actions.ts`(`record_manual_guardian_consent()` 호출,
+     관리자의 수동 동의 기록)는 신규 고객에게는 이제 쓸 일이 없어야 정상이지만,
+     함수 자체는 감사·예외처리용으로 유지.
+   - `e2e/minor-consent.spec.ts`는 "기존 시스템이 여전히 정상 동작"을 검증하는
+     회귀 테스트로 남긴다(삭제하지 않음) — 새로 추가하는 "13세 미만 신규 유입
+     차단" 테스트는 별도 스펙으로 추가.
+3. **배포 전 결정 필요(신규 항목)**: 실제 운영 데이터에 13세 미만으로 이미
+   active인 학생이 몇 명이나 있는지 non-prod/운영 DB에서 먼저 확인해야
+   위 2번의 세부 처리(제거 vs 유지)를 확정할 수 있다 — 착수 시 가장 먼저
+   할 조사.
 
 **B. `confirm_lesson_booking` 수정**
 - 최신 정의: `supabase/migrations/20261125000000_m5d_session_completion_integrity.sql:182-268`.
@@ -167,6 +240,11 @@ PRD §7 그대로. 3~5단계 완료 후 마지막에 진행.
 3. "9–12학년" 판정 시점 — **아직 미정**.
 4. Google Meet transcript API 실제 제어 가능 여부 — **아직 미검증**, 5단계
    착수 직전 sandbox에서 먼저 확인.
+5. **(신규) 기존 13세 미만 보호자 동의 시스템 처리** — non-prod/운영 DB에
+   현재 13세 미만으로 `active`인 학생이 실제로 있는지 먼저 확인. 0명이면
+   `ConsentTab`/`ConsentGapPanel` 등 UI를 바로 제거해도 안전하고, 1명이라도
+   있으면 그 가구를 어떻게 처리할지(계속 서비스 제공? 개별 안내 후 종료?)
+   제품·법률 결정이 먼저 필요하다 — 착수 시 가장 먼저 할 조사(2단계-A-3 참고).
 
 ## 3. 테스트 계획 (PRD §8 요약, 실행 시 그대로 따름)
 
