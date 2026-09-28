@@ -150,6 +150,11 @@ afterAll(() => {
 describe("Smart Notes 상태가 pending/failed여도 세션 종료·리뷰·정규 전환이 막히지 않는다", () => {
   it("smart_notes_status='pending'이어도 mark_lesson_session_started/finalize_lesson_session이 성공한다", () => {
     const sessionId = bookSession(41, 60);
+    // 2026-09-28(초기 고객 절차 단순화): confirm_lesson_booking()이 체험 예약은
+    // smart_notes_status='not_applicable'로 만들도록 바뀌었다(체험엔 AI 기록
+    // 자체를 안 씀) — 이 테스트의 목적은 "pending이어도 안 막힌다"이므로 나머지
+    // 테스트들과 같은 패턴으로 명시적으로 pending을 만들어준다.
+    psql(`update sessions set smart_notes_status = 'pending' where id = '${sessionId}';`);
     const statusBefore = psql(`select smart_notes_status from sessions where id = '${sessionId}';`);
     expect(statusBefore).toBe("pending");
 
