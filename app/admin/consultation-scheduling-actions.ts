@@ -65,40 +65,25 @@ export type ConsultationListItem = {
   /** 2026-09-06 — 보호자 포털 "새 자녀 상담 신청"에서 입력한 자녀별 정보 배열.
    * source='guardian_portal' 카드에서만 채워진다(칸반 카드 배지·상세에 표시). */
   requested_children?: { name: string; grade?: string; subjectInterest?: string; concerns?: string }[] | null;
-  /** M1 요구사항 3(2026-09-03, 2026-09-03 조건부 승인 보완으로 두 단계로 분리) —
-   * "상담 진행 가능"(동의 확인 + Smart Notes ON)과 "상담 완료 가능"(그 위에 Smart Notes
-   * 원본 자동 연결 + 비어있지 않은 관리자 검토 요약)은 서로 다른 시점의 서로 다른 기준이다
-   * — 상담 시작 전에는 원본 연결·검토 요약이 존재할 수 없으므로 같은 게이트로 묶을 수 없다.
-   * 서버(admin_record_consultation_outcome)가 "완료 가능" 4개 조건을 전부 다시 검사하므로,
-   * 이 필드는 어디까지나 UI 안내용이다. */
-  consultReadiness: "ready" | "consent_pending" | "smart_notes_pending" | "not_applicable";
-  completionReadiness: "ready" | "consult_not_ready" | "smart_notes_not_linked" | "summary_missing" | "not_applicable";
+  /** 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록(동의·Smart Notes)을
+   * 아예 쓰지 않으므로 "상담 진행 가능"에는 더 이상 검사할 조건이 없다(상태만 확인).
+   * "상담 완료 가능"은 비어있지 않은 관리자 검토 요약 하나만 본다. 서버
+   * (admin_record_consultation_outcome)가 동일 조건을 다시 검사하므로 이 필드는
+   * 어디까지나 UI 안내용이다. */
+  consultReadiness: "ready" | "not_applicable";
+  completionReadiness: "ready" | "summary_missing" | "not_applicable";
 };
 
-function computeConsultReadiness(row: {
-  status: string;
-  consent_confirmed_at: string | null;
-  smart_notes_config_status: string;
-}): ConsultationListItem["consultReadiness"] {
+function computeConsultReadiness(row: { status: string }): ConsultationListItem["consultReadiness"] {
   if (row.status !== "scheduled" && row.status !== "completed") return "not_applicable";
-  if (!row.consent_confirmed_at) return "consent_pending";
-  if (row.smart_notes_config_status !== "applied") return "smart_notes_pending";
   return "ready";
 }
 
 function computeCompletionReadiness(row: {
   status: string;
-  consent_confirmed_at: string | null;
-  smart_notes_config_status: string;
-  smart_notes_drive_file_id: string | null;
   admin_review_summary: string | null;
 }): ConsultationListItem["completionReadiness"] {
-  // 2026-09-06 완화(2차): Smart Notes 원본 실제 연결(smart_notes_drive_file_id)에 이어
-  // Smart Notes 활성화 상태(smart_notes_config_status)도 결과 기록 가능 여부에서
-  // 제외한다(서버 admin_record_consultation_outcome도 동일하게 완화, 제품 오너 확정
-  // — 기록 생성 자체는 항상 일어남). 동의 확인·검토 요약만 남긴다.
   if (row.status !== "scheduled" && row.status !== "completed") return "not_applicable";
-  if (!row.consent_confirmed_at) return "consult_not_ready";
   if (!row.admin_review_summary || row.admin_review_summary.trim() === "") return "summary_missing";
   return "ready";
 }

@@ -71,12 +71,10 @@ const OUTCOME_LABEL: Record<string, string> = {
   closed: "종료",
 };
 
-// M1 요구사항 3(2026-09-03 조건부 승인 보완) — "상담 진행 가능"과 "상담 완료 가능"은
-// 서로 다른 시점의 서로 다른 기준이라 별도로 표시한다.
+// 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록(동의·Smart Notes)을
+// 쓰지 않으므로 "상담 진행 가능"에는 더 이상 별도 조건이 없다.
 const CONSULT_READINESS_LABEL: Record<string, string> = {
-  ready: "상담 진행 준비 완료(동의 확인 + Smart Notes ON)",
-  consent_pending: "상담 진행 불가 — 동의 확인 대기",
-  smart_notes_pending: "상담 진행 불가 — Smart Notes 활성화 확인 필요",
+  ready: "상담 진행 준비 완료",
   not_applicable: "-",
 };
 // M2 — 체험수업권 지급 상태(요구사항 7). "체험 진행 권장"으로 결과가 기록된 순간
@@ -90,8 +88,6 @@ const TRIAL_GRANT_STATUS_LABEL: Record<string, string> = {
 
 const COMPLETION_READINESS_LABEL: Record<string, string> = {
   ready: "상담 완료 처리 가능",
-  consult_not_ready: "완료 불가 — 상담 진행 조건(동의+Smart Notes) 미충족",
-  smart_notes_not_linked: "완료 불가 — Smart Notes 원본이 아직 자동 연결되지 않음(재처리 대상)",
   summary_missing: "완료 불가 — 관리자 검토 요약 미작성",
   not_applicable: "-",
 };

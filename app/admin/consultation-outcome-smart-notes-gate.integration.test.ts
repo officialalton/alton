@@ -4,8 +4,11 @@ import { describe, expect, it } from "vitest";
 // M4 후속(2026-09-06, 2차 완화) — admin_record_consultation_outcome()이 Smart Notes
 // 원본 실제 연결(smart_notes_drive_file_id)과 Smart Notes 활성화 상태
 // (smart_notes_config_status) 둘 다와 무관하게 결과 기록을 허용하는지 로컬
-// Postgres에 직접 psql로 검증한다(둘 다 제품 오너 확정으로 제거). 동의 확인·
-// 검토 요약만 여전히 강제돼야 한다.
+// Postgres에 직접 psql로 검증한다(둘 다 제품 오너 확정으로 제거).
+//
+// 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 아예 안 쓰므로
+// 동의 확인(consent_confirmed_at) 게이트도 제거됐다. 이제 남은 조건은 관리자
+// 검토 요약(admin_review_summary) 하나뿐이다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
@@ -60,11 +63,12 @@ describe("admin_record_consultation_outcome() — Smart Notes 상태와 무관�
     expect(summary).toBe("전화로 충분히 상담 완료, 원본 도착 전 기록");
   });
 
-  it("동의 확인이 없으면 여전히 거부된다", () => {
+  it("2026-09-28(초기 고객 절차 단순화): 동의 확인이 없어도 더 이상 거부되지 않는다", () => {
     const consultationId = createConsultation("gate-relax-no-consent", { consent: false, smartNotesApplied: true });
-    expect(() =>
-      psqlAsAdmin(`select admin_record_consultation_outcome('${consultationId}', 'closed', null, '요약');`)
-    ).toThrow(/동의 확인이 완료되지 않아/);
+    psqlAsAdmin(`select admin_record_consultation_outcome('${consultationId}', 'closed', null, '요약');`);
+    const [status, outcome] = psql(`select status, outcome from consultations where id = '${consultationId}';`).split("|");
+    expect(status).toBe("completed");
+    expect(outcome).toBe("closed");
   });
 
   it("2026-09-06(2차 완화): Smart Notes가 활성화(applied)되지 않았어도 더 이상 거부되지 않는다", () => {
@@ -79,7 +83,7 @@ describe("admin_record_consultation_outcome() — Smart Notes 상태와 무관�
     const consultationId = createConsultation("gate-relax-no-summary", { consent: true, smartNotesApplied: true });
     expect(() =>
       psqlAsAdmin(`select admin_record_consultation_outcome('${consultationId}', 'closed', null, '');`)
-    ).toThrow(/관리자 검토 요약을 작성해야/);
+    ).toThrow(/검토 요약을 작성해야/);
   });
 
   it("원본이 나중에 도착해 자동 연결되면(smart_notes_drive_file_id) 상담 행에서 그대로 조회 가능하다", () => {

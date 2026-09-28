@@ -115,10 +115,10 @@ describe("ConsultationSchedulingPanel — 상담 결과 기록 버튼 회귀(요
     expect(await screen.findByRole("button", { name: "기록 저장" })).toBeInTheDocument();
   });
 
-  it("아무 조건도 안 맞으면(예: Smart Notes 미연결) 버튼은 여전히 비활성화된다", async () => {
+  it("아무 조건도 안 맞으면(예: not_applicable) 버튼은 여전히 비활성화된다", async () => {
     vi.mocked(consultActions.listPendingConsultationRequests).mockResolvedValue([]);
     vi.mocked(consultActions.listConsultationsForAdmin).mockResolvedValue([
-      { ...BASE_CONSULTATION, completionReadiness: "smart_notes_not_linked" },
+      { ...BASE_CONSULTATION, completionReadiness: "not_applicable" },
     ]);
     vi.mocked(consultActions.listConsultAvailabilityRules).mockResolvedValue([]);
     vi.mocked(consultActions.listConsultAvailabilityExceptions).mockResolvedValue([]);
