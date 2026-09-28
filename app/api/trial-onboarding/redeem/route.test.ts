@@ -37,13 +37,11 @@ describe("GET /api/trial-onboarding/redeem", () => {
     );
   });
 
-  it("실제 로그인 세션이 있으면 기존 보호자 경로 화면으로 보낸다", async () => {
+  it("2026-09-28(초기 고객 절차 단순화): 실제 로그인 세션이 있으면 본인 홈(/parent)으로 보낸다", async () => {
     getUserMock.mockResolvedValue({ data: { user: { id: "guardian1" } } });
     const { GET } = await import("./route");
     const res = await GET(new Request("https://app.example.com/api/trial-onboarding/redeem?token=abc"));
-    expect(res.headers.get("location")).toBe(
-      "https://app.example.com/consult/trial-onboarding?token=abc&existing=1"
-    );
+    expect(res.headers.get("location")).toBe("https://app.example.com/parent");
   });
 
   it("토큰이 없으면 오류와 함께 /login으로 보낸다", async () => {

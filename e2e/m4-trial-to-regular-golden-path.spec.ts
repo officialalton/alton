@@ -218,13 +218,18 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     expect(initialAssignmentId).toMatch(/^[0-9a-f-]{36}$/);
   });
 
-  test("4. 보호자: Smart Notes 동의 → 체험수업권 자동 지급 (+ 부정 테스트)", async ({ page }) => {
+  // TODO(2026-09-28, 초기 고객 절차 단순화, task_aab5c4d1): 체험 Smart Notes
+  // 동의 화면(app/consult/trial-onboarding/page.tsx, TrialConsentButton.tsx)을
+  // 없애면서 이 단계가 가리키던 동의 UI 자체가 사라졌다. 체험수업권은 이제
+  // 동의 없이 자동 지급되지만, 정확히 어느 시점에 자동 지급되는지(관리자가
+  // outcome='trial_recommended'를 기록하는 시점 vs child_id가 실제로 연결되는
+  // 시점)가 별도 세션(task_aab5c4d1)에서 재검토 중이다 — 그 결과가 나오면 이
+  // 테스트를 "동의 화면 없이, 과목·선생님 배정 완료 시점에 자동 지급됨을
+  // 확인"하는 내용으로 다시 써야 한다. 지금은 삭제된 라우트로 이동하던 코드만
+  // 제거해 스펙이 깨지지 않게 해뒀다 — 아래 assertion은 그 세션이 실제로
+  // 자동 지급 트리거를 완성한 뒤에만 통과한다.
+  test.fixme("4. 체험수업권이 동의 없이 자동 지급된다 (+ 부정 테스트)", async () => {
     test.setTimeout(60000);
-    await loginAs(page, guardianEmail);
-    await page.goto("/consult/trial-onboarding");
-    await expect(page.getByText("M4 골든패스 학생")).toBeVisible({ timeout: 15000 });
-    await page.getByRole("button", { name: "Smart Notes 이용에 동의합니다" }).click();
-    await expect(page.getByText(/동의 완료/)).toBeVisible({ timeout: 15000 });
 
     const trialGrantCount = psql(
       `select count(*) from entitlement_grants eg join entitlement_products ep on ep.id = eg.entitlement_product_id
@@ -286,13 +291,13 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     await expect(reviewPanel).toHaveCount(0, { timeout: 15000 });
   });
 
-  test("7. 보호자: 확정 리뷰 확인 → 정규 진행 희망", async ({ page }) => {
+  // TODO(2026-09-28, 초기 고객 절차 단순화): "정규 진행 희망" 버튼(TrialConversionPanel)을
+  // 없앴다 — 계약 발송은 이제 학부모 클릭이 아니라 체험 completed 이벤트
+  // 기준 outbox(contract_dispatch_jobs, 이번 작업에서 구현 중)로 트리거된다.
+  // outbox가 완성되면 이 단계는 "체험 수업이 completed로 종료되면 계약 발송
+  // 작업이 자동으로 큐에 쌓인다"로 다시 써야 한다.
+  test.fixme("7. 체험 수업 완료 시 계약 발송 작업이 자동으로 큐에 쌓인다", async () => {
     test.setTimeout(60000);
-    await loginAs(page, guardianEmail);
-    await page.goto("/parent?tab=enrollment");
-    await expect(page.getByText(/기초 개념 이해도 우수/)).toBeVisible({ timeout: 15000 });
-    await page.getByRole("button", { name: "정규 진행 희망합니다" }).click();
-    await expect(page.getByText(/접수 완료/)).toBeVisible({ timeout: 15000 });
   });
 
   test("8. 관리자: 원클릭 정규 계약 발송(mock 실패 경로)", async ({ page }) => {

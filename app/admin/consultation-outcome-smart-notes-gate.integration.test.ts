@@ -97,3 +97,65 @@ describe("admin_record_consultation_outcome() — Smart Notes 상태와 무관�
     expect(driveFileId).toBe("drive-file-123");
   });
 });
+
+// 2026-09-28(초기 고객 절차 단순화) — 체험 Smart Notes 동의 화면(및 그 화면의
+// "동의 버튼 클릭 시 지급 시도" 트리거)을 없앴으므로, admin_record_consultation_outcome()
+// 이 outcome='trial_recommended'를 기록하는 시점에 자동으로 체험수업권 지급을
+// 시도하도록 바꿨다(20261900000025). 그 연결고리가 실제로 동작하는지 검증한다.
+describe("admin_record_consultation_outcome() — outcome='trial_recommended' 기록 시 체험수업권 자동 지급", () => {
+  function createChildAuthProfile(label: string): string {
+    const id = psql(
+      `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+       values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', '${label}-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
+       returning id;`
+    );
+    psql(`insert into profiles (id, role, name) values ('${id}', 'student', '${label}');`);
+    psql(`insert into students (id, grade, status) values ('${id}', '10학년', 'active');`);
+    return id;
+  }
+
+  it("child_id가 연결된 상담에 outcome='trial_recommended'를 기록하면 별도 동의 없이 체험수업권이 즉시 지급된다", () => {
+    const childId = createChildAuthProfile("auto-grant-child");
+    const consultationId = psql(
+      `insert into consultations (source, status, contact_name, contact_email, child_id, scheduled_at)
+       values ('homepage', 'scheduled', '자동지급 테스트', 'auto-grant-${Date.now()}@example.com', '${childId}', now() - interval '1 hour')
+       returning id;`
+    );
+
+    psqlAsAdmin(
+      `select admin_record_consultation_outcome('${consultationId}', 'trial_recommended', null, '전화 상담 완료, 체험 진행 권장');`
+    );
+    const [status, hasGrant] = psql(
+      `select trial_entitlement_grant_status, (trial_entitlement_grant_id is not null) from consultations where id = '${consultationId}';`
+    ).split("|");
+    expect(status).toBe("granted");
+    expect(hasGrant).toBe("t");
+
+    const grantCount = psql(
+      `select count(*) from entitlement_grants eg join entitlement_products ep on ep.id = eg.entitlement_product_id
+       where eg.child_id = '${childId}' and ep.code = 'trial_lesson_grant';`
+    );
+    expect(grantCount).toBe("1");
+  });
+
+  it("이미 체험수업권이 지급된 상담을 다시 기록해도 중복 지급하지 않는다(멱등)", () => {
+    const childId = createChildAuthProfile("auto-grant-idempotent-child");
+    const consultationId = psql(
+      `insert into consultations (source, status, contact_name, contact_email, child_id, scheduled_at)
+       values ('homepage', 'scheduled', '멱등 테스트', 'auto-grant-idem-${Date.now()}@example.com', '${childId}', now() - interval '1 hour')
+       returning id;`
+    );
+    psqlAsAdmin(
+      `select admin_record_consultation_outcome('${consultationId}', 'trial_recommended', null, '1차 기록');`
+    );
+    psqlAsAdmin(
+      `select admin_record_consultation_outcome('${consultationId}', 'trial_recommended', null, '2차 기록(재확정)');`
+    );
+
+    const grantCount = psql(
+      `select count(*) from entitlement_grants eg join entitlement_products ep on ep.id = eg.entitlement_product_id
+       where eg.child_id = '${childId}' and ep.code = 'trial_lesson_grant';`
+    );
+    expect(grantCount).toBe("1");
+  });
+});

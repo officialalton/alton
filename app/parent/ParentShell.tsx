@@ -28,8 +28,7 @@ import type { ParentCreditsData } from "./credits-data";
 import EntitlementsTab from "./EntitlementsTab";
 import type { ParentEntitlementsData } from "./entitlements-data";
 import ConsentTab from "./ConsentTab";
-import type { ChildConsentStatus, ConsentPolicyOption, TrialSmartNotesConsentStatus } from "./consent-data";
-import type { PendingRegularIntentChoice } from "./regular-intent-data";
+import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import ConsultationRequestTab from "./ConsultationRequestTab";
 import ConsultationHistoryTab from "./ConsultationHistoryTab";
 import MessengerTab from "./MessengerTab";
@@ -113,24 +112,15 @@ export default function ParentShell({
   purchaseStatus,
   consentChildren,
   activeConsentPolicy,
-  trialSmartNotesChildren,
-  pendingRegularIntentChoices,
   childrenSubjectEnrollments,
   vocabData,
   homeworkByChild,
-  progressedTrialEnrollmentIds,
   lessonBooking,
-  focusSubjectEnrollmentId,
 }: {
   parentName: string;
   childrenList: Child[];
   currentChildId: string;
   initialTab?: string;
-  // 2026-09-10(P0-5) — 부모 홈 알림에서 특정 자녀·수강 정규 진행 동의로
-  // 정확히 이동하기 위한 식별값. URL(`?focus=`)에서 그대로 온다 — 새로고침·
-  // 뒤로가기·앞으로가기에도 유지되도록 로컬 state가 아니라 이 prop(서버가
-  // searchParams에서 읽어 내려줌)을 그대로 ConsentTab까지 전달한다.
-  focusSubjectEnrollmentId?: string;
   dashboard: DashboardData;
   upcoming: LessonItem[];
   past: LessonItem[];
@@ -143,12 +133,9 @@ export default function ParentShell({
   purchaseStatus?: "success" | "cancelled";
   consentChildren: ChildConsentStatus[];
   activeConsentPolicy: ConsentPolicyOption | null;
-  trialSmartNotesChildren: TrialSmartNotesConsentStatus[];
-  pendingRegularIntentChoices: PendingRegularIntentChoice[];
   childrenSubjectEnrollments: ChildSubjectEnrollments[];
   vocabData: ParentVocabData;
   homeworkByChild: ParentChildHomework[];
-  progressedTrialEnrollmentIds: string[];
   lessonBooking: LessonBookingData;
 }) {
   const router = useRouter();
@@ -251,18 +238,16 @@ export default function ParentShell({
 
   const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
 
-  // 자녀별 동의/정규진행 필요 여부 — 프로필 드롭다운 "동의" 배지에 쓴다.
-  // 기존 ChildrenStatusRow가 쓰던 것과 동일한 계산이며 새 쿼리는 추가하지 않는다.
+  // 자녀별 동의 필요 여부(13세 미만 보호자 동의만) — 프로필 드롭다운 "동의" 배지에
+  // 쓴다. 2026-09-28: 체험 Smart Notes 동의·정규 진행 희망은 제거돼 더 이상
+  // 이 배지 조건이 아니다(초기 고객 절차 단순화).
   const childrenNeedingAction = useMemo(() => {
-    return childrenList.filter((child) => {
-      const needsConsent =
-        consentChildren.some(
-          (c) => c.studentId === child.studentId && c.isUnder13 && c.dobKnown && !c.hasValidConsent
-        ) || trialSmartNotesChildren.some((c) => c.studentId === child.studentId && !c.hasConsented);
-      const needsRegularIntent = pendingRegularIntentChoices.some((p) => p.childId === child.studentId);
-      return needsConsent || needsRegularIntent;
-    });
-  }, [childrenList, consentChildren, trialSmartNotesChildren, pendingRegularIntentChoices]);
+    return childrenList.filter((child) =>
+      consentChildren.some(
+        (c) => c.studentId === child.studentId && c.isUnder13 && c.dobKnown && !c.hasValidConsent
+      )
+    );
+  }, [childrenList, consentChildren]);
   const consentBadgeCount = childrenNeedingAction.length;
 
   // 2026-09-17 — 모바일 하단 탭 1차: 홈·수업·상담. "예약"은 더 이상 독립
@@ -696,13 +681,7 @@ export default function ParentShell({
           ) : activeTab === "entitlements" ? (
             <EntitlementsTab data={entitlements} purchaseStatus={purchaseStatus} />
           ) : activeTab === "consent" ? (
-            <ConsentTab
-              activePolicy={activeConsentPolicy}
-              trialSmartNotesChildren={trialSmartNotesChildren}
-              childrenSubjectEnrollments={childrenSubjectEnrollments}
-              progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
-              focusSubjectEnrollmentId={focusSubjectEnrollmentId}
-            >
+            <ConsentTab activePolicy={activeConsentPolicy}>
               {consentChildren}
             </ConsentTab>
           ) : activeTab === "credits" ? (

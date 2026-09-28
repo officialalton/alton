@@ -7,9 +7,8 @@ import { loadMemos } from "@/app/student/memo-data";
 import { loadReviews, loadStudentFeedback } from "@/app/student/review-data";
 import { loadParentCreditsData } from "./credits-data";
 import { loadParentEntitlementsData } from "./entitlements-data";
-import { loadChildrenConsentStatus, loadActiveConsentPolicy, loadTrialSmartNotesConsentStatus } from "./consent-data";
-import { loadPendingRegularIntentChoices } from "./regular-intent-data";
-import { loadChildrenSubjectEnrollments, loadProgressedTrialEnrollmentIds } from "./enrollment-data";
+import { loadChildrenConsentStatus, loadActiveConsentPolicy } from "./consent-data";
+import { loadChildrenSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "@/app/student/lesson-booking-data";
 import { loadParentVocabData } from "./vocab-data";
 import { loadParentHomeworkData } from "./homework-data";
@@ -18,10 +17,10 @@ import ParentShell from "./ParentShell";
 export default async function ParentHomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ child?: string; tab?: string; purchase?: string; focus?: string }>;
+  searchParams: Promise<{ child?: string; tab?: string; purchase?: string }>;
 }) {
   const { user, profile, supabase } = await requireUser();
-  const { child, tab, purchase, focus } = await searchParams;
+  const { child, tab, purchase } = await searchParams;
 
   const children = await loadChildren(supabase, user.id);
 
@@ -61,8 +60,6 @@ export default async function ParentHomePage({
     entitlements,
     consentChildren,
     activeConsentPolicy,
-    trialSmartNotesChildren,
-    pendingRegularIntentChoices,
     childrenSubjectEnrollments,
     vocabData,
     homeworkByChild,
@@ -75,8 +72,6 @@ export default async function ParentHomePage({
     loadParentEntitlementsData(supabase, user.id, children),
     loadChildrenConsentStatus(supabase, user.id),
     loadActiveConsentPolicy(supabase),
-    loadTrialSmartNotesConsentStatus(supabase, user.id),
-    loadPendingRegularIntentChoices(supabase, user.id),
     loadChildrenSubjectEnrollments(supabase, children),
     loadParentVocabData(supabase, user.id),
     loadParentHomeworkData(supabase, user.id),
@@ -84,17 +79,15 @@ export default async function ParentHomePage({
 
   const pastSessionIds = past.map((l) => l.sessionId);
 
-  const [memosEntries, reviews, myFeedback, progressedTrialEnrollmentIds] =
-    await Promise.all([
-      Promise.all(
-        curricula.map(
-          async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
-        )
-      ),
-      loadReviews(supabase, pastSessionIds),
-      loadStudentFeedback(supabase, currentChildId, pastSessionIds),
-      loadProgressedTrialEnrollmentIds(supabase, childrenSubjectEnrollments),
-    ]);
+  const [memosEntries, reviews, myFeedback] = await Promise.all([
+    Promise.all(
+      curricula.map(
+        async (c) => [c.enrollmentId, await loadMemos(supabase, c.enrollmentId)] as const
+      )
+    ),
+    loadReviews(supabase, pastSessionIds),
+    loadStudentFeedback(supabase, currentChildId, pastSessionIds),
+  ]);
   const memosByEnrollment = Object.fromEntries(memosEntries) as Record<
     string,
     Awaited<ReturnType<typeof loadMemos>>
@@ -118,14 +111,10 @@ export default async function ParentHomePage({
       purchaseStatus={purchase === "success" || purchase === "cancelled" ? purchase : undefined}
       consentChildren={consentChildren}
       activeConsentPolicy={activeConsentPolicy}
-      trialSmartNotesChildren={trialSmartNotesChildren}
-      pendingRegularIntentChoices={pendingRegularIntentChoices}
       childrenSubjectEnrollments={childrenSubjectEnrollments}
       vocabData={vocabData}
       homeworkByChild={homeworkByChild}
-      progressedTrialEnrollmentIds={progressedTrialEnrollmentIds}
       lessonBooking={lessonBooking}
-      focusSubjectEnrollmentId={focus}
     />
   );
 }

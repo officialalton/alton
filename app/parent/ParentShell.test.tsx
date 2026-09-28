@@ -80,12 +80,9 @@ const lessonsProps = {
   entitlements: { prices: [], children: [] },
   consentChildren: [],
   activeConsentPolicy: null,
-  trialSmartNotesChildren: [],
-  pendingRegularIntentChoices: [],
   childrenSubjectEnrollments: [],
   vocabData: { children: [], books: [] },
   homeworkByChild: [],
-  progressedTrialEnrollmentIds: [],
   lessonBooking: {
     bookableEnrollments: [],
     upcomingBookings: [],
@@ -151,7 +148,6 @@ describe("ParentShell", () => {
         consentChildren={[
           { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
         ]}
-        trialSmartNotesChildren={[{ studentId: "s1", name: "지훈", hasConsented: false }]}
       />
     );
     expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
@@ -372,7 +368,6 @@ describe("ParentShell", () => {
         consentChildren={[
           { studentId: "s1", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
         ]}
-        trialSmartNotesChildren={[{ studentId: "s1", name: "지훈", hasConsented: false }]}
       />
     );
     fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
@@ -411,7 +406,7 @@ describe("ParentShell", () => {
   });
 
   it("동명이인이어도 childId 기준으로 조치가 필요한 자녀 수만 배지에 센다(중복 카운트 방지)", () => {
-    // s1과 s3는 이름이 같지만("지훈") id가 다르다. s3에게만 정규 진행 선택이
+    // s1과 s3는 이름이 같지만("지훈") id가 다르다. s3만 13세 미만 동의가
     // 필요하면 배지는 1이어야 한다(이름 매칭 시 잘못 부풀려질 수 있음).
     const duplicateNameChildren: Child[] = [
       { studentId: "s1", name: "지훈", isPrimary: true },
@@ -424,8 +419,8 @@ describe("ParentShell", () => {
         currentChildId="s1"
         dashboard={dashboard}
         {...lessonsProps}
-        pendingRegularIntentChoices={[
-          { subjectEnrollmentId: "se1", childId: "s3", childName: "지훈", subjectName: "AP Calculus AB" },
+        consentChildren={[
+          { studentId: "s3", name: "지훈", isUnder13: true, dobKnown: true, hasValidConsent: false, latestConsent: null },
         ]}
       />
     );
