@@ -90,15 +90,9 @@ beforeEach(() => {
 });
 
 describe("Calendar 네이티브 초대(2026-09-03 정책 전환 — 요구사항 2·6)", () => {
-  it("최초 확정 시 attendeeEmail·sendUpdates=all로 Calendar 이벤트를 만들고, 별개 채널로 동의 요청 메일도 무조건 보낸다", async () => {
-    // 2026-09-07(정정) — 관리자 수동 재발송 버튼을 없애고, 상담이 최초로
-    // 확정될 때 동의 요청 메일을 Calendar 초대와 별개로 무조건 보내도록
-    // 정책을 바꿨다(Calendar 초대 description의 기존 링크는 그대로 유지).
-    ensureMeetSpaceSmartNotesOnMock.mockResolvedValue(true);
-    const statusEventInsertMock = vi.fn().mockResolvedValue({ error: null });
+  it("2026-09-28(초기 고객 절차 단순화): 최초 확정 시 attendeeEmail·sendUpdates=all로 Calendar 이벤트만 만들고, 동의 URL·별도 동의 메일·Smart Notes 활성화는 전혀 시도하지 않는다", async () => {
     fromMock.mockImplementation((table: string) => {
       if (table === "consultations") return buildConsultationsTable();
-      if (table === "consultation_status_events") return { insert: statusEventInsertMock };
       throw new Error(`unexpected table ${table}`);
     });
 
@@ -106,30 +100,16 @@ describe("Calendar 네이티브 초대(2026-09-03 정책 전환 — 요구사항
     await syncOneConsultationCalendarEvent("consult-1");
 
     expect(createCalendarEventWithMeetMock).toHaveBeenCalledWith(
-      expect.objectContaining({ attendeeEmail: "minji@example.com", sendUpdates: "all", description: expect.stringContaining("consent?token=") })
+      expect.objectContaining({
+        attendeeEmail: "minji@example.com",
+        sendUpdates: "all",
+        description: expect.not.stringContaining("consent?token="),
+      })
     );
-    expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    const emailArgs = sendEmailMock.mock.calls[0][0] as { to: string; subject: string; html: string };
-    expect(emailArgs.to).toBe("minji@example.com");
-    expect(emailArgs.html).toContain("/consult/consent?token=");
-    expect(statusEventInsertMock).toHaveBeenCalledWith(
-      expect.objectContaining({ consultation_id: "consult-1" })
-    );
-  });
-
-  it("Smart Notes 확인·보정이 실패해도 Calendar 이벤트 생성 자체는 막히지 않는다(요구사항 3 정책)", async () => {
-    ensureMeetSpaceSmartNotesOnMock.mockRejectedValue(new Error("Meet API 403"));
-    fromMock.mockImplementation((table: string) => {
-      if (table === "consultations") return buildConsultationsTable();
-      throw new Error(`unexpected table ${table}`);
-    });
-
-    const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
-    await syncOneConsultationCalendarEvent("consult-1");
-
-    expect(createCalendarEventWithMeetMock).toHaveBeenCalled();
-    const smartNotesFailedUpdate = consultationsUpdatePayloads.find((p) => p.smart_notes_config_status === "failed");
-    expect(smartNotesFailedUpdate).toBeTruthy();
+    // 첫 상담에는 AI 기록을 쓰지 않으므로 동의 요청 메일도, Smart Notes 확인·보정도 없다.
+    expect(sendEmailMock).not.toHaveBeenCalled();
+    expect(issueTokenMock).not.toHaveBeenCalled();
+    expect(ensureMeetSpaceSmartNotesOnMock).not.toHaveBeenCalled();
   });
 
   it("시간 변경은 같은 이벤트를 sendUpdates=all로 patch하고, 커스텀 이메일은 추가로 보내지 않는다", async () => {

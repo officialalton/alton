@@ -1,11 +1,9 @@
-import { randomBytes, createHash } from "node:crypto";
+import { createHash } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime, deleteCalendarEvent } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink, ensureMeetSpaceSmartNotesOn } from "@/lib/google-meet";
 import { sendEmail } from "@/lib/email";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
-import { currentRequestOrigin } from "@/lib/request-origin";
-import { ensureSubscriptionForOrganizer } from "@/lib/workspace-events/subscription-lifecycle";
 
 // M1 — 상담 확정 시 Calendar 이벤트+Meet 생성. R6 lib/booking/calendar-sync.ts와 같은
 // 원칙을 그대로 따르되, subject는 원래 회사 상담 관리자 계정(official@alton.education)
@@ -95,49 +93,6 @@ function computeConfirmationContentHash(startsAtIso: string, meetLink: string): 
 }
 
 /**
- * 동의 확인 토큰을 발급하고 절대 URL을 만든다(요구사항 5) — Calendar 이벤트
- * description과 이메일(정상/fallback 둘 다) 어디에도 상담 UUID 자체를 노출하지 않는다.
- */
-async function issueConsentUrl(admin: ReturnType<typeof createAdminClient>, consultationId: string): Promise<string> {
-  const tokenPlain = randomBytes(32).toString("hex");
-  const { error: issueError } = await admin.rpc("issue_consult_consent_token", {
-    p_consultation_id: consultationId,
-    p_token_plain: tokenPlain,
-  });
-  if (issueError) throw new Error(`동의 확인 토큰 발급 실패: ${issueError.message}`);
-  const origin = await currentRequestOrigin();
-  return `${origin}/consult/consent?token=${tokenPlain}`;
-}
-
-/**
- * 상담이 최초로 확정될 때 Calendar 초대와 별개 채널(이메일)로 동의 확인
- * 링크를 무조건 한 번 더 보낸다(2026-09-07). Calendar description에 실린
- * 기존 링크는 건드리지 않는다 — 같은 토큰 발급 RPC로 만든 별도 링크다.
- */
-async function sendStandaloneConsentRequestEmail(params: {
-  admin: ReturnType<typeof createAdminClient>;
-  consultationId: string;
-  contactName: string;
-  contactEmail: string;
-  consentUrl: string;
-}): Promise<void> {
-  const html = `
-    <p>${params.contactName}님, 안녕하세요.</p>
-    <p>상담 진행을 위해 아래 안내·동의 확인 페이지에서 1회 확인해 주세요.</p>
-    <p><a href="${params.consentUrl}">${params.consentUrl}</a></p>
-    <p>이미 캘린더 초대 메일로 같은 안내를 받으셨다면 다시 확인하지 않으셔도 됩니다.</p>
-    <p>감사합니다.<br/>Alton Education</p>
-  `;
-  await sendEmail({ to: params.contactEmail, subject: "[Alton Education] 상담 전 동의 확인 안내", html });
-  await params.admin.from("consultation_status_events").insert({
-    consultation_id: params.consultationId,
-    previous_status: "scheduled",
-    new_status: "scheduled",
-    reason: "동의 요청 메일 자동 발송(상담 확정 시, 캘린더 초대와 별개 채널)",
-  });
-}
-
-/**
  * **(2026-09-03 정책 전환, 요구사항 6)** Calendar 네이티브 초대가 확정 일정의 기본
  * 전달 수단이 된 뒤에는, 그 초대가 성공적으로 나갔다면 같은 정보를 담은 커스텀 SMTP
  * 확인 메일을 또 보내지 않는다 — 이 함수는 Calendar 초대 자체가 반복 실패해
@@ -152,10 +107,11 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
   const contentHash = `fallback:${params.errorMessage}`;
   if (params.row.confirmation_email_content_hash === contentHash) return; // 같은 실패로 중복 발송 안 함
 
-  const consentUrl = await issueConsentUrl(params.admin, params.row.id);
   const startsAt = new Date(params.row.starts_at);
   const formatted = startsAt.toLocaleString("ko-KR", { timeZone: DEFAULT_TIMEZONE, dateStyle: "full", timeStyle: "short" });
 
+  // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
+  // 동의 확인 안내 문구·링크를 뺐다.
   await sendEmail({
     to: params.row.contact_email,
     subject: "[Alton Education] 상담 일정 안내 (Google 캘린더 초대 발송 실패)",
@@ -165,8 +121,6 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
       문제가 있어 이메일로 대신 안내드립니다. 담당자가 곧 다시 시도합니다.</p>
       <p><b>상담 일시:</b> ${formatted} (${DEFAULT_TIMEZONE})</p>
       <p>Meet 링크는 준비되는 대로 별도로 안내드리겠습니다.</p>
-      <p><b>AI 회의록(Smart Notes) 안내:</b> 이 상담은 AI 회의록 기능을 사용합니다. 상담 전 아래
-      안내·동의 확인 페이지에서 1회 확인해 주세요: <a href="${consentUrl}">${consentUrl}</a></p>
       <p>감사합니다.<br/>Alton Education</p>
     `,
   });
@@ -192,9 +146,12 @@ async function processOneConsultation(
     // 요구사항 2(2026-09-03 정책 전환, 2026-09-22 컨설턴트 스펙 개정): 배정된
     // 컨설턴트가 있으면 그 사람이, 없으면 official@alton.education이 organizer.
     // 신청 이메일이 유일한 외부 attendee. sendUpdates="all"로 Google 네이티브
-    // 초대 메일이 나간다 — 동의 확인 링크는 상담 UUID가 아니라 만료형 토큰으로만
-    // 이벤트 설명에 싣는다(요구사항 5와 동일한 원칙, Calendar description도 예외 없음).
-    const consentUrl = await issueConsentUrl(admin, row.id);
+    // 초대 메일이 나간다.
+    //
+    // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 회의록(Smart Notes)을
+    // 쓰지 않으므로 동의 확인 URL 발급·description 삽입을 제거했다. 별도 AI
+    // 처리 동의 자체가 불필요해짐(docs/2026-09-26-consent-contract-
+    // simplification-implementation-plan.md 3단계).
     const created = await createCalendarEventWithMeet({
       teacherWorkspaceEmail: organizerEmail,
       reservationId: `consult-${row.id}`,
@@ -202,8 +159,7 @@ async function processOneConsultation(
       endsAt,
       summary: `[Alton Education 상담] ${row.contact_name}`,
       description:
-        `Alton Education 1:1 상담입니다. 이 상담은 AI 회의록(Smart Notes) 기능을 사용합니다. ` +
-        `상담 전 아래 안내·동의 확인 페이지에서 1회 확인해 주세요: ${consentUrl}\n\n` +
+        `Alton Education 1:1 상담입니다. ` +
         `일정 변경·취소는 담당자에게 문의해 주세요 — 변경 시 이 캘린더 일정이 자동으로 갱신됩니다.`,
       timezone: DEFAULT_TIMEZONE,
       attendeeEmail: row.contact_email,
@@ -211,21 +167,6 @@ async function processOneConsultation(
     });
     googleEventId = created.googleEventId;
     meetLink = created.meetLink;
-
-    // 2026-09-07(제품 오너 지시 정정) — "재발송 버튼" 형태가 아니라, 상담이
-    // 최초로 확정될 때 동의 확인 안내 메일이 Calendar 초대와 별개로 무조건
-    // 나가도록 한다(Calendar 초대 description의 기존 링크는 그대로 둔다).
-    // Calendar 초대 발송 성패와 무관하게 시도하고, 실패해도 상담 확정 자체를
-    // 막지 않는다(다른 best-effort 후속 처리와 동일한 원칙) — 실패 시
-    // 관리자는 기존 admin/consultation-kanban-actions.ts의 수동 재발송
-    // 액션으로 여전히 대응할 수 있다.
-    try {
-      await sendStandaloneConsentRequestEmail({ admin, consultationId: row.id, contactName: row.contact_name, contactEmail: row.contact_email, consentUrl });
-    } catch (e) {
-      console.error(
-        JSON.stringify({ type: "m1_consult_consent_request_email_failed", consultationId: row.id, error: e instanceof Error ? e.message : String(e) })
-      );
-    }
   } else {
     // 요구사항 2: 시간 변경도 같은 이벤트를 PATCH하고 sendUpdates="all"로 Google
     // 네이티브 변경 알림을 보낸다 — 별도 커스텀 이메일을 추가로 보내지 않는다.
@@ -256,22 +197,9 @@ async function processOneConsultation(
     })
     .eq("id", row.id);
 
-  if (meetLink) {
-    // Smart Notes 확인·보정은 Calendar 초대 성공 여부와 무관하게 항상 시도한다.
-    await applySmartNotesBestEffort({ admin, consultationId: row.id, meetLink, organizerEmail });
-
-    // 요구사항 1 — Smart Notes 원본 자동 연결이 Workspace Events 웹훅에 의존하므로,
-    // 이 organizer의 구독이 없거나 만료됐으면 여기서 best-effort로 보장한다. 실패해도
-    // 상담 확정 자체는 이미 끝난 뒤라 영향 없음 — 다음 배치 재처리(renewExpiringSubscriptions)
-    // 나 사후 대조(reconcileMissedSmartNotesEvents)가 뒤를 받친다.
-    try {
-      await ensureSubscriptionForOrganizer(organizerEmail, "consult_organizer");
-    } catch (e) {
-      console.error(
-        JSON.stringify({ type: "m1_consult_workspace_events_subscription_ensure_failed", consultationId: row.id, error: e instanceof Error ? e.message : String(e) })
-      );
-    }
-  }
+  // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
+  // Smart Notes 활성화(applySmartNotesBestEffort)와 Workspace Events 구독
+  // (ensureSubscriptionForOrganizer)을 더 이상 시도하지 않는다.
 }
 
 /** 확정된(scheduled) 상담 하나를 즉시 동기화한다 — 관리자 수락/시간변경 직후 호출. */
