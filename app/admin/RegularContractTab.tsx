@@ -15,6 +15,7 @@ import {
 } from "./trial-onboarding-actions";
 import { createNewContractVersionForResend } from "./consultation-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
+import ContractDispatchQueueSection from "./ContractDispatchQueueSection";
 
 // "신규"와 마찬가지로 상태 변화가 잦은 화면으로 분류해 TTL 10초를 쓴다.
 const REGULAR_CONTRACT_TTL_MS = 10_000;
@@ -53,8 +54,10 @@ export default function RegularContractTab() {
         </button>
       </div>
       <p className="text-[13px] text-grey-500 mb-5">
-        보호자가 정규 진행을 희망한 과목입니다. 계약 발송·재발송·발송 상태·계약 완료를 여기서 관리합니다.
+        정규 진행 대상 과목입니다. 계약 발송·재발송·발송 상태·계약 완료를 여기서 관리합니다.
       </p>
+
+      <ContractDispatchQueueSection />
 
       {error && (
         <div
