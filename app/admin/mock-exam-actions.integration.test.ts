@@ -204,7 +204,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(() =>
       psql(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('cccccccc-0000-0000-0000-000000000001', '${result.examSetId}', 'assigned');`),
     ).toThrow(/배정할 수 없습니다/);
-  });
+  }, 180_000); // 문항 100여 개를 psql로 하나씩 심는 시딩이 기본 5초를 넘긴다
 
   it("MST 조립: 풀이 충분하면 ready가 되고 공개·배정이 허용된다", async () => {
     // R&W 풀을 54문항 이상으로 보강(기존 36 + 24). 같은 tier 공개 세트가 쓴 문항은 회피 대상일 뿐 부족 시 재사용된다.
@@ -234,7 +234,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     }
     expect(err).toContain("문항 구성이 완료되지 않아 시작할 수 없습니다");
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("assigned");
-  });
+  }, 180_000); // 문항 100여 개를 psql로 하나씩 심는 시딩이 기본 5초를 넘긴다
 
   it("draft 세트를 공개하면 status가 published로 바뀐다", async () => {
     const { assembleMockExamSet, publishMockExamSet, listMockExamSets } = await import("./mock-exam-actions");
