@@ -1,5 +1,6 @@
 "use client";
 
+import { useHighlightSupported } from "@/lib/use-highlight-supported";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
@@ -150,7 +151,7 @@ export default function ProblemsPanel({
   const [eliminateMode, setEliminateMode] = useState(false);
   const [eliminated, setEliminated] = useState<Record<string, Set<number>>>({});
   const [highlightMode, setHighlightMode] = useState(false);
-  const highlightSupported = typeof window !== "undefined" && "highlights" in CSS;
+  const highlightSupported = useHighlightSupported();
   const highlightObjRef = useRef<Highlight | null>(null);
   const passageRef = useRef<HTMLDivElement | null>(null);
   const [savedIds, setSavedIds] = useState<Record<string, boolean>>({});

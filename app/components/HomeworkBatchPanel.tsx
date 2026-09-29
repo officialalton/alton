@@ -1,5 +1,6 @@
 "use client";
 
+import { useHighlightSupported } from "@/lib/use-highlight-supported";
 import { useEffect, useRef, useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
 import { submitHomeworkAnswerAction, gradeHomeworkBatchAction, toggleHomeworkItemSavedToPracticeAction } from "@/lib/homework-batch-actions";
@@ -199,7 +200,7 @@ function BatchRunner({
   const [eliminateMode, setEliminateMode] = useState(false);
   const [eliminated, setEliminated] = useState<Record<string, Set<number>>>({});
   const [highlightMode, setHighlightMode] = useState(false);
-  const highlightSupported = typeof window !== "undefined" && "highlights" in CSS;
+  const highlightSupported = useHighlightSupported();
   const highlightObjRef = useRef<Highlight | null>(null);
   const passageRef = useRef<HTMLDivElement | null>(null);
   const [saved, setSaved] = useState(batch.items[0]?.savedToPractice ?? false);
