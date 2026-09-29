@@ -5,6 +5,7 @@ import {
   assembleMockExamSet,
   archiveMockExamSetAction,
   getMockExamSetContentAction,
+  getMockExamSetItems,
   listMockExamSets,
   publishMockExamSet,
   assignMockExamAsAdminAction,
@@ -15,6 +16,7 @@ import {
   type MockExamStudentOption,
   type MockExamAttemptHistoryRow,
   type MstReadinessReport,
+  type MockExamSetItemDetail,
 } from "../mock-exam-actions";
 import type { DifficultyTier } from "@/lib/mock-exam/assemble";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
@@ -210,10 +212,66 @@ const MODULE_LABEL: Record<string, string> = {
   math_m2: "Math Module 2",
 };
 
+/** 4모듈 세트 검수: 문항별 M1 / M2(higher·lower) 배정 가능 플래그(난이도 라벨에서 파생). */
+function MstModuleFlags({ examSetId }: { examSetId: string }) {
+  const [rows, setRows] = useState<MockExamSetItemDetail[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getMockExamSetItems(examSetId)
+      .then((r) => alive && setRows(r))
+      .catch((e) => alive && setError(e instanceof Error ? e.message : "배정 플래그를 불러오지 못했습니다."));
+    return () => {
+      alive = false;
+    };
+  }, [examSetId]);
+  if (error) return <p className="mb-2 text-sm text-red">{error}</p>;
+  if (rows === null) return <p className="mb-2 text-xs text-grey-400">배정 플래그 불러오는 중…</p>;
+  const mark = (v: boolean) => (v ? "O" : "-");
+  return (
+    <details className="mb-3 rounded-lg border border-grey-200 p-3" data-testid="mst-module-flags">
+      <summary className="cursor-pointer text-xs font-semibold text-ink">모듈 배정 플래그 ({rows.length}문항)</summary>
+      <table className="mt-2 w-full text-left text-[11.5px]">
+        <thead>
+          <tr className="text-grey-500">
+            <th className="py-1">모듈</th>
+            <th>영역</th>
+            <th>skill</th>
+            <th>난이도</th>
+            <th>M1</th>
+            <th>M2 higher</th>
+            <th>M2 lower</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.id} className="border-t border-grey-100">
+              <td className="py-1">{MODULE_LABEL[r.moduleKey ?? ""] ?? "-"}</td>
+              <td>{r.satDomain}</td>
+              <td>{r.skillCode ?? "-"}</td>
+              <td>{r.difficulty}</td>
+              <td>{mark(r.m1Eligible)}</td>
+              <td>{mark(r.m2HigherEligible)}</td>
+              <td>{mark(r.m2LowerEligible)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </details>
+  );
+}
+
 function readinessSummary(r: MstReadinessReport): string {
   const mods = r.modules.filter((m) => !m.ok).map((m) => `${MODULE_LABEL[m.moduleKey] ?? m.moduleKey}${m.route ? `(${m.route})` : ""} ${m.found}/${m.needed}`);
   const cells = r.shortfalls.map((s) => `${MODULE_LABEL[s.moduleKey ?? ""] ?? s.section}/${s.satDomain}/${s.difficulty}${s.format ? `/${s.format}` : ""} (필요 ${s.needed}, 확보 ${s.found})`);
-  return `모듈 정원 미달: ${mods.join(", ") || "없음"}${cells.length ? ` · 부족 셀: ${cells.join(", ")}` : ""}${r.duplicateCount ? ` · 중복 문항 ${r.duplicateCount}` : ""}`;
+  const skills = (r.skillViolations ?? []).map((v) => `${MODULE_LABEL[v.moduleKey] ?? v.moduleKey}/${v.satDomain}/${v.skillCode} ${v.count}개(상한 ${v.cap})`);
+  const extra = [
+    skills.length ? ` · skill 쏠림: ${skills.join(", ")}` : "",
+    (r.eligibilityViolations ?? []).length ? ` · Module 1 배정 불가 문항 ${r.eligibilityViolations.length}` : "",
+    (r.similarityViolations ?? []).length ? ` · 유사문항 그룹 중복 ${r.similarityViolations.length}` : "",
+    r.missingSnapshotCount ? ` · 스냅샷 누락 ${r.missingSnapshotCount}` : "",
+  ].join("");
+  return `모듈 정원 미달: ${mods.join(", ") || "없음"}${cells.length ? ` · 부족 셀: ${cells.join(", ")}` : ""}${r.duplicateCount ? ` · 중복 문항 ${r.duplicateCount}` : ""}${extra}`;
 }
 
 function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyLabel: string }) {
@@ -398,6 +456,7 @@ function ReviewTab() {
                 ) : null;
               })()}
               {publishError && <p className="mb-2 text-sm text-red">{publishError}</p>}
+              {sets?.find((s) => s.id === selectedId)?.format === "mst" && <MstModuleFlags examSetId={selectedId} />}
               <MockExamSetContentViewer items={items} />
             </>
           )}

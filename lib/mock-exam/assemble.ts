@@ -24,6 +24,10 @@ export type EligibleProblem = {
   /** 문항 형식(객관식/SPR) — 조립 시 형식 비중을 걸 때만 쓴다(현재는 Math 섹션, 사양 미정의였던
    * 간극을 2026-09-21 UAT 지적으로 메운다). 없으면 형식 무관하게 셀을 채운다(R&W는 전부 mc). */
   format?: ProblemFormat;
+  /** 유사문항 그룹 키(problems.similarity_group). 같은 그룹은 한 세트에 하나만 뽑는다. */
+  similarityGroup?: string | null;
+  /** 노출 이력(다른 세트에 들어간 횟수 + 응답 저장 횟수). 작을수록 우선한다. */
+  exposureCount?: number;
 };
 
 export type AssembledItem = EligibleProblem & { section: ExamSection; position: number };
@@ -107,41 +111,93 @@ export type SelectionResult = {
  * - `excludeProblemIds` 로 다른 세트에서 이미 쓴 문항을 우선 피한다(가능하면 — 부족하면 재사용 허용).
  * - 결정적 결과를 위해 후보는 problemId 로 정렬한 뒤 앞에서부터 뽑는다(무작위 배정 아님 — 재현 가능한 조립).
  */
+export type SelectionContext = {
+  /** `${satDomain}|${skillCode}` -> 이 컨텍스트(보통 한 모듈)에서 이미 고른 수. 호출자가 모듈마다 새로 만든다. */
+  skillUse?: Map<string, number>;
+  /** 이미 세트에 들어간 유사문항 그룹 키. 호출자가 세트 전체에 걸쳐 공유한다. */
+  usedGroups?: Set<string>;
+};
+
 export function selectForCells(
   candidates: EligibleProblem[],
   targetCells: { satDomain: string; difficulty: ProblemDifficulty; format?: ProblemFormat; targetCount: number }[],
   excludeProblemIds: Set<string> = new Set(),
+  ctx: SelectionContext = {},
 ): SelectionResult {
   const used = new Set<string>();
+  const skillUse = ctx.skillUse ?? new Map<string, number>();
+  const usedGroups = ctx.usedGroups ?? new Set<string>();
   const items: EligibleProblem[] = [];
   const shortfalls: SelectionResult["shortfalls"] = [];
 
-  for (const cell of targetCells) {
+  // 후보 skill 종류가 적은(제약이 큰) 셀을 먼저 채워야, 선택지가 많은 셀이 뒤에서 skill 균형을 보정할 수 있다.
+  const poolOf = (cell: (typeof targetCells)[number]) =>
+    candidates.filter((c) => c.satDomain === cell.satDomain && c.difficulty === cell.difficulty && (!cell.format || c.format === cell.format));
+  const ordered = targetCells
+    .map((cell, index) => ({ cell, index, skills: new Set(poolOf(cell).map((c) => c.skillCode ?? "")).size }))
+    .sort((x, y) => x.skills - y.skills || x.index - y.index);
+  const shortfallByIndex = new Map<number, SelectionResult["shortfalls"][number]>();
+
+  for (const { cell, index } of ordered) {
     if (cell.targetCount <= 0) continue;
-    const pool = candidates
-      .filter(
-        (c) =>
-          c.satDomain === cell.satDomain &&
-          c.difficulty === cell.difficulty &&
-          (!cell.format || c.format === cell.format) &&
-          !used.has(c.problemId),
-      )
-      .sort((a, b) => a.problemId.localeCompare(b.problemId));
+    const pool = candidates.filter(
+      (c) =>
+        c.satDomain === cell.satDomain &&
+        c.difficulty === cell.difficulty &&
+        (!cell.format || c.format === cell.format) &&
+        !used.has(c.problemId),
+    );
 
-    // 1순위: 다른 세트에서 안 쓴 문항. 2순위(부족 시): 이미 쓴 문항도 허용.
-    const fresh = pool.filter((c) => !excludeProblemIds.has(c.problemId));
-    const reused = pool.filter((c) => excludeProblemIds.has(c.problemId));
-    const chosen = [...fresh, ...reused].slice(0, cell.targetCount);
-
-    for (const c of chosen) {
-      used.add(c.problemId);
-      items.push(c);
+    // 한 개씩 고른다. 우선순위: (1) 이 모듈에서 덜 쓴 skill(skill 균형 — 출시 게이트라 재사용 회피보다 앞선다) (2) 다른 세트에서 안 쓴 문항
+    // (3) 노출 이력이 적은 문항 (4) problemId(결정적). 유사문항 그룹은 세트 안에서 한 번만 허용.
+    let chosenCount = 0;
+    while (chosenCount < cell.targetCount) {
+      let best: EligibleProblem | null = null;
+      let bestKey: [number, number, number, string] | null = null;
+      for (const c of pool) {
+        if (used.has(c.problemId)) continue;
+        if (c.similarityGroup && usedGroups.has(c.similarityGroup)) continue;
+        const key: [number, number, number, string] = [
+          skillUse.get(`${c.satDomain}|${c.skillCode ?? ""}`) ?? 0, // skill 없는 문항도 하나의 버킷으로 센다
+          excludeProblemIds.has(c.problemId) ? 1 : 0,
+          c.exposureCount ?? 0,
+          c.problemId,
+        ];
+        if (!bestKey || compareKey(key, bestKey) < 0) {
+          best = c;
+          bestKey = key;
+        }
+      }
+      if (!best) break;
+      used.add(best.problemId);
+      if (best.similarityGroup) usedGroups.add(best.similarityGroup);
+      const skillKey = `${best.satDomain}|${best.skillCode ?? ""}`;
+      skillUse.set(skillKey, (skillUse.get(skillKey) ?? 0) + 1);
+      items.push(best);
+      chosenCount += 1;
     }
-    if (chosen.length < cell.targetCount) {
-      shortfalls.push({ satDomain: cell.satDomain, difficulty: cell.difficulty, needed: cell.targetCount, found: chosen.length });
+    if (chosenCount < cell.targetCount) {
+      shortfallByIndex.set(index, { satDomain: cell.satDomain, difficulty: cell.difficulty, needed: cell.targetCount, found: chosenCount });
     }
   }
+  for (const index of [...shortfallByIndex.keys()].sort((x, y) => x - y)) shortfalls.push(shortfallByIndex.get(index)!);
   return { items, shortfalls };
+}
+
+function compareKey(a: [number, number, number, string], b: [number, number, number, string]): number {
+  for (let i = 0; i < 3; i++) if (a[i] !== b[i]) return (a[i] as number) - (b[i] as number);
+  return a[3].localeCompare(b[3]);
+}
+
+// --- MST 모듈 배정 가능 플래그(계획 §2, Phase 2 초기 규칙) -----------------------------------------
+// DB의 mock_exam_set_items generated column(m1_eligible/m2_lower_eligible/m2_higher_eligible)과 같은 규칙이다.
+// easy·medium -> Module 1 / M2 lower, medium·hard -> M2 higher. 규칙을 바꾸면 마이그레이션도 함께 바꾼다.
+export function moduleEligibility(difficulty: ProblemDifficulty): { m1: boolean; m2Lower: boolean; m2Higher: boolean } {
+  return {
+    m1: difficulty === "easy" || difficulty === "medium",
+    m2Lower: difficulty === "easy" || difficulty === "medium",
+    m2Higher: difficulty === "medium" || difficulty === "hard",
+  };
 }
 
 /**
@@ -167,6 +223,8 @@ export type AssembleSectionInput = {
   excludeProblemIds?: Set<string>;
   /** 지정하면 (영역×난이도) 셀을 형식(mc/spr)별로 다시 나눠 채운다 — 미지정 시 형식 무관(R&W). */
   formatWeights?: FormatWeight[];
+  /** skill 균형·유사문항 그룹 컨텍스트(MST 조립). */
+  selection?: SelectionContext;
 };
 
 export type AssembleSectionResult = {
@@ -177,6 +235,6 @@ export type AssembleSectionResult = {
 /** 한 섹션(RW 또는 Math)을 통째로 조립한다 — 목표 셀 계산 → 후보 선택 → 순서 부여. */
 export function assembleSection(input: AssembleSectionInput): AssembleSectionResult {
   const cells = buildTargetCells(input.domainWeights, input.difficultyWeights, input.totalCount, input.formatWeights);
-  const { items, shortfalls } = selectForCells(input.candidates, cells, input.excludeProblemIds);
+  const { items, shortfalls } = selectForCells(input.candidates, cells, input.excludeProblemIds, input.selection);
   return { items: orderSectionItems(items, input.section), shortfalls };
 }
