@@ -30,4 +30,11 @@ describe("toSchedulingLinkFailure", () => {
   it("P0001 사유는 그대로", () => {
     expect(toSchedulingLinkFailure({ code: "P0001", message: "마감" }, "x")).toEqual({ ok: false, reason: "unavailable", error: "마감" });
   });
+  it("23P01(같은 컨설턴트 동시 확정 레이스)은 친절한 '이미 다른 상담' 문구", () => {
+    expect(toSchedulingLinkFailure({ code: "23P01", message: "conflicting key value violates exclusion constraint" }, "x")).toEqual({
+      ok: false,
+      reason: "unavailable",
+      error: "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.",
+    });
+  });
 });

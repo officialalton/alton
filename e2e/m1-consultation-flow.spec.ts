@@ -139,7 +139,8 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
     }
     await expect(dayWithSlot).toBeVisible();
     // 다른 실행·스펙의 상담과 시간이 겹치지 않도록 첫 슬롯이 아니라 무작위 날짜·시간을 고른다
-    // (consultations_no_overlap은 컨설턴트와 무관하게 전사 단위 배타 제약이다 — 아래 보고 참고).
+    // (홈페이지 신청은 미배정 시간 행이라 consultations_unassigned_no_overlap이 전사 단위로 막는다;
+    // 배정된 상담은 컨설턴트별 consultations_no_overlap 이다 — 20261908000000).
     const badgedDays = calendar.locator("button:has(span.rounded-full)");
     await badgedDays.nth(Math.floor(Math.random() * (await badgedDays.count()))).click();
     const timeButtons = customer.getByRole("group", { name: "상담 희망 시간 선택" }).locator("button");
