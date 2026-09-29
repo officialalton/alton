@@ -9,7 +9,8 @@ import MockExamResultView from "@/app/student/mock-exam/[attemptId]/MockExamResu
 export default async function ParentMockExamResultPage({ params }: { params: Promise<{ studentId: string; attemptId: string }> }) {
   const { studentId, attemptId } = await params;
   const { supabase } = await requireUser();
-  const attempt = await loadMockExamAttemptDetail(supabase, attemptId);
+  // RPC 가 권한 없음·잘못된 id 로 오류를 던지면 500 대신 404 (남의 응시 URL 을 직접 열 때).
+  const attempt = await loadMockExamAttemptDetail(supabase, attemptId).catch(() => null);
   if (!attempt || attempt.studentId !== studentId || attempt.status !== "graded") notFound();
 
   return (
