@@ -47,7 +47,8 @@ const cleanupUnitIds: string[] = [];
 const cleanupContractIds: string[] = [];
 // 필기를 남긴 수업은 정리되지 않고 남으므로(위 관례), 실행마다 다른 날짜 대역을 쓴다 —
 // 같은 대역을 다시 쓰면 reservations_no_overlap 에 걸린다.
-let reservationOffsetDays = 9000 + Math.floor(Math.random() * 40000);
+// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
+let reservationOffsetDays = 10000 + Math.floor(Math.random() * 9000);
 
 afterEach(() => {
   // session_annotation_events 는 어떤 역할로도 지울 수 없다(append-only, 20261239000000).

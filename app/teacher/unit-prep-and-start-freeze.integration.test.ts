@@ -60,7 +60,8 @@ const cleanupContractIds: string[] = [];
 // 통합 테스트 파일마다 예약 시각이 겹치지 않도록 서로 다른 '날짜 구간'을 쓴다.
 // 같은 선생님 소유 예약은 시간대가 겹칠 수 없고(reservations_no_overlap), 파일들이
 // 모두 '지금 시각 + N일'로 심기 때문에 구간이 겹치면 실행 순서에 따라 깨진다.
-let reservationOffsetDays = 3000 + Math.floor(Math.random() * 300) * 2;
+// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
+let reservationOffsetDays = 4000 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
   SUBJECT_ID = psql(

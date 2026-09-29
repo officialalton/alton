@@ -184,7 +184,9 @@ describe.skipIf(!process.env.ANTHROPIC_API_KEY)("UAT 매트릭스 — SAT R&W (�
 
 // ---------------------------------------------------------------------------- 매트릭스 산출물
 
-describe("UAT 매트릭스 산출물", () => {
+// 커밋된 산출물을 평소 테스트 실행마다 덮어쓰지 않도록, 결과 갱신은 명시적으로 켰을 때만 한다:
+// `UAT_MATRIX_WRITE=1 npx vitest run lib/problem-generation/uat-matrix.test.ts`
+describe.skipIf(!process.env.UAT_MATRIX_WRITE)("UAT 매트릭스 산출물", () => {
   it("결과를 docs/assets 에 기록한다", async () => {
     if (MATRIX.length === 0) return; // 위 describe들이 이 파일 안에서 순서대로 먼저 돈다(vitest 파일 단위 순차).
     const fs = await import("node:fs");
