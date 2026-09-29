@@ -18,6 +18,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
 import { assertNoConsultantMeetingOverlap } from "@/lib/consultation/meeting-scheduling";
+import { cancelMeetingRequestWithCalendar } from "@/lib/consultation/meeting-calendar-sync";
 
 export type AssignedMeetingRequest = {
   id: string;
@@ -62,12 +63,16 @@ export async function listMyAssignedMeetingRequestsAction(): Promise<AssignedMee
 
 export async function cancelMyMeetingRequestAction(meetingRequestId: string): Promise<void> {
   const { userId, supabase } = await requireConsultant();
-  const { error } = await supabase
+  // 본인 담당 미팅인지 RLS 세션 클라이언트로 먼저 확인한 뒤, 공통 취소 경로(Calendar 이벤트 삭제 포함)를 거친다.
+  const { data, error } = await supabase
     .from("meeting_requests")
-    .update({ status: "cancelled", updated_at: new Date().toISOString() })
+    .select("id")
     .eq("id", meetingRequestId)
-    .eq("consultant_id", userId);
+    .eq("consultant_id", userId)
+    .maybeSingle();
   if (error) throw new Error(error.message);
+  if (!data) throw new Error("본인이 담당하는 미팅만 취소할 수 있습니다.");
+  await cancelMeetingRequestWithCalendar({ meetingRequestId, actorId: userId });
 }
 
 async function resolveOrganizerEmail(admin: ReturnType<typeof createAdminClient>, consultantId: string): Promise<string> {

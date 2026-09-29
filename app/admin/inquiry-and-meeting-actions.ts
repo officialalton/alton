@@ -14,6 +14,12 @@ import {
   isCalendarRealCallsDisabledError,
   resolveMeetingOrganizerEmail,
 } from "@/lib/consultation/meeting-scheduling";
+import {
+  adminForceResyncMeetingCalendar,
+  cancelMeetingRequestWithCalendar,
+  scheduleMeetingCalendarResync,
+  type MeetingSyncOutcome,
+} from "@/lib/consultation/meeting-calendar-sync";
 
 // 2026-09-22(사용자 지시) — household 전체가 공유하는 끝없는 대화 대신 "문의" 단위
 // 스레드로 바꿨다. 카드 하나 = 문의 하나(householdId가 아니라 inquiryId가 기본 키다).
@@ -151,6 +157,10 @@ export type AdminMeetingRequest = {
   startsAt: string | null;
   endsAt: string | null;
   googleMeetLink: string | null;
+  googleSyncStatus: "pending" | "succeeded" | "failed" | "reconciliation_needed" | null;
+  googleSyncRetryCount: number;
+  googleSyncLastError: string | null;
+  rescheduledFromId: string | null;
   createdAt: string;
 };
 
@@ -166,7 +176,7 @@ async function loadMeetingRequestsForAdmin(
   const { data, error } = await admin
     .from("meeting_requests")
     .select(
-      "id, household_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, consultant_id, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name), consultant:profiles!meeting_requests_consultant_id_fkey(name)"
+      "id, household_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, consultant_id, google_sync_status, google_sync_retry_count, google_sync_last_error, rescheduled_from_id, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name), consultant:profiles!meeting_requests_consultant_id_fkey(name)"
     )
     .order("created_at", { ascending: false })
     // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한. 최신순 정렬이라 최근 건이
@@ -222,6 +232,10 @@ async function loadMeetingRequestsForAdmin(
       startsAt: r.starts_at,
       endsAt: r.ends_at,
       googleMeetLink: r.google_meet_link,
+      googleSyncStatus: r.google_sync_status,
+      googleSyncRetryCount: r.google_sync_retry_count ?? 0,
+      googleSyncLastError: r.google_sync_last_error,
+      rescheduledFromId: r.rescheduled_from_id,
       createdAt: r.created_at,
     };
   });
@@ -233,12 +247,34 @@ export async function updateMeetingRequestStatus(
   // 전제라 이 함수로는 만들 수 없다. scheduleMeetingRequest()를 거쳐야 한다.
   status: "confirming" | "scheduling" | "completed" | "cancelled"
 ): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase, adminUserId } = await requireAdmin();
+  if (status === "cancelled") {
+    // 2026-09-29 — 취소는 Calendar 이벤트 삭제까지 하는 단일 경로를 거친다.
+    await cancelMeetingRequestWithCalendar({ meetingRequestId, actorId: adminUserId });
+    return;
+  }
   const { error } = await supabase
     .from("meeting_requests")
     .update({ status, updated_at: new Date().toISOString() })
     .eq("id", meetingRequestId);
   if (error) throw new Error(error.message);
+}
+
+// 2026-09-29 오너 결정 — 확정된 미팅의 컨설턴트 변경은 수정이 아니라 "취소 → 다른 컨설턴트 배정 → 다시 확정"이다.
+// 이 액션은 취소(Calendar 이벤트 삭제 포함) + 같은 가족·자녀·주제·내용의 새 요청(시간·컨설턴트 없음)을 한 번에 만든다.
+export async function cancelAndRerequestMeetingRequest(
+  meetingRequestId: string
+): Promise<{ newRequestId: string; calendar: "none" | "deleted" | "pending" }> {
+  const { adminUserId } = await requireAdmin();
+  const r = await cancelMeetingRequestWithCalendar({ meetingRequestId, actorId: adminUserId, rerequest: true });
+  if (!r.newRequestId) throw new Error("재신청 요청을 만들지 못했습니다.");
+  return { newRequestId: r.newRequestId, calendar: r.calendar };
+}
+
+// Calendar 동기화 실패(failed/reconciliation_needed) 행을 관리자가 수동으로 다시 시도한다(횟수 초기화).
+export async function resyncMeetingRequestCalendar(meetingRequestId: string): Promise<MeetingSyncOutcome> {
+  await requireAdmin();
+  return adminForceResyncMeetingCalendar(meetingRequestId);
 }
 
 // 2026-09-17(상담 마일스톤) — meeting_requests를 'scheduled'로 전이할 때 반드시
@@ -358,11 +394,19 @@ export async function scheduleMeetingRequest(params: {
       google_meet_link: googleMeetLink,
       google_meeting_code: meetingCode,
       google_sync_status: syncStatus,
+      google_sync_retry_count: 0,
+      google_sync_last_error: syncError,
+      google_sync_last_attempt_at: new Date().toISOString(),
+      google_sync_claimed_at: null,
       updated_at: new Date().toISOString(),
     })
     .eq("id", params.meetingRequestId);
   if (updateError) throw new Error(updateError.message);
-  if (syncError) console.error(JSON.stringify({ type: "meeting_calendar_sync_failed", meetingRequestId: params.meetingRequestId, error: syncError }));
+  if (syncError) {
+    console.error(JSON.stringify({ type: "meeting_calendar_sync_failed", meetingRequestId: params.meetingRequestId, error: syncError }));
+    // 즉시 재시도(응답 뒤 after) — 실제 Google 호출이 꺼져 있으면 아무것도 하지 않고 일 1회 크론·관리자 버튼이 회수한다.
+    scheduleMeetingCalendarResync(params.meetingRequestId);
+  }
 
   return { googleMeetLink, googleSyncStatus: syncStatus };
 }
