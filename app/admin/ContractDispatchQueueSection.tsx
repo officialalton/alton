@@ -26,6 +26,7 @@ const STATUS_LABEL: Record<ContractDispatchJobListItem["status"], string> = {
 const TRIGGER_LABEL: Record<ContractDispatchJobListItem["trigger_type"], string> = {
   completed_trial: "체험 수업 완료",
   direct_account_created: "직접 계정 생성",
+  regular_recommended: "정규 바로 진행",
 };
 
 export default function ContractDispatchQueueSection() {
