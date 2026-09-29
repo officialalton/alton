@@ -31,7 +31,7 @@ const STATUS_LABEL: Record<string, string> = { draft: "초안", published: "공�
 // 2026-09-21(UAT 지적) — 관리자 모의고사 관리 화면을 생성/검토/공개/보관/배정/내역 6개
 // 서브탭으로 재구성한다. 기존엔 한 화면에 조립·목록·메타데이터만 있는 "검토" 테이블뿐이라
 // 실제 문항 내용을 볼 수 없었고, 보관·전체 배정·전체 응시 내역을 볼 방법도 없었다.
-const SUB_TABS = ["생성", "검토", "배정", "내역", "공개", "보관"] as const;
+const SUB_TABS = ["생성", "문항 풀", "검토", "배정", "내역", "공개", "보관"] as const;
 type SubTab = (typeof SUB_TABS)[number];
 
 export default function MockExamSetsPanel({ initialSets }: { initialSets: MockExamSetSummary[] }) {
@@ -57,6 +57,7 @@ export default function MockExamSetsPanel({ initialSets }: { initialSets: MockEx
       </div>
 
       {subTab === "생성" && <CreateTab initialSets={initialSets} />}
+      {subTab === "문항 풀" && <PoolTab />}
       {subTab === "검토" && <ReviewTab />}
       {subTab === "공개" && <PublishTab />}
       {subTab === "보관" && <ArchiveTab />}
@@ -67,10 +68,11 @@ export default function MockExamSetsPanel({ initialSets }: { initialSets: MockEx
 }
 
 /**
- * 영역·세부 기술별 모의고사 풀(2026-09-29). 모의고사 조립은 모의고사용 + 기존(미분류) 공개 문항만 쓴다 —
- * 일반용은 후보가 아니다. 풀이 모자라면 조립이 부족분과 함께 실패한다.
+ * 문항 풀(2026-09-29). 영역·세부 기술별로 모의고사에 쓸 수 있는 공개 문항(풀 = 모의고사용 + 기존)이 몇 개이고,
+ * 그중 몇 개가 세트에 배정됐고 몇 개가 남았는지 본다. 일반용은 후보가 아니라 참고로만 보인다.
+ * 배정은 서로 다른 문항 수 — 여러 세트에 있어도 1회, 공개·초안 세트에 모두 있으면 공개로만 센다, 보관 세트는 제외.
  */
-function PoolSummary() {
+function PoolTab() {
   const [rows, setRows] = useState<MockExamPoolRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   useEffect(() => {
@@ -80,40 +82,75 @@ function PoolSummary() {
       .catch(() => { if (!cancelled) setError("문항 풀 현황을 불러오지 못했습니다."); });
     return () => { cancelled = true; };
   }, []);
-  const totals = (rows ?? []).reduce((a, r) => ({ mock: a.mock + r.mockExam, both: a.both + r.both, general: a.general + r.general }), { mock: 0, both: 0, general: 0 });
+  const t = (rows ?? []).reduce(
+    (a, r) => ({
+      pool: a.pool + r.mockExam + r.both, both: a.both + r.both, pub: a.pub + r.assignedPublished,
+      draft: a.draft + r.assignedDraft, general: a.general + r.general,
+    }),
+    { pool: 0, both: 0, pub: 0, draft: 0, general: 0 },
+  );
+  const remaining = t.pool - t.pub - t.draft;
   return (
-    <details className="rounded-xl border border-grey-200 bg-white p-5" data-testid="mock-pool-summary">
-      <summary className="cursor-pointer text-sm font-semibold text-ink">
-        모의고사 문항 풀 {rows ? `— 모의고사용 ${totals.mock} · 기존(양쪽) ${totals.both} · 일반용(제외) ${totals.general}` : ""}
-      </summary>
+    <section className="rounded-xl border border-grey-200 bg-white p-5" data-testid="mock-pool-summary">
+      <h2 className="text-sm font-semibold text-ink">모의고사 문항 풀</h2>
+      {rows && (
+        <p className="mt-1 text-xs text-grey-500" data-testid="mock-pool-header">
+          풀 {t.pool} · 배정 {t.pub + t.draft} · 남음 {remaining} · 일반용(제외) {t.general}
+        </p>
+      )}
       {error && <p className="mt-2 text-xs text-red">{error}</p>}
       {!rows && !error && <p className="mt-2 text-xs text-grey-500">불러오는 중...</p>}
-      {rows && (
-        <table className="mt-3 w-full text-xs">
-          <thead>
-            <tr className="text-left text-grey-500">
-              <th className="py-1 pr-2">영역</th>
-              <th className="py-1 pr-2">세부 기술</th>
-              <th className="py-1 pr-2 text-right">모의고사용</th>
-              <th className="py-1 pr-2 text-right">기존(양쪽)</th>
-              <th className="py-1 text-right">일반용(제외)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => (
-              <tr key={`${r.satDomain}|${r.skillCode ?? ""}`} className="border-t border-grey-100">
-                <td className="py-1 pr-2">{domainShort(r.satDomain)}</td>
-                <td className="py-1 pr-2">{r.skillCode ? skillLabel(r.skillCode) : "(기술 미지정)"}</td>
-                <td className="py-1 pr-2 text-right">{r.mockExam}</td>
-                <td className="py-1 pr-2 text-right">{r.both}</td>
-                <td className="py-1 text-right text-grey-500">{r.general}</td>
+      {rows && rows.length === 0 && <p className="mt-2 text-sm text-grey-400">공개된 문항이 없습니다.</p>}
+      {rows && rows.length > 0 && (
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[620px] text-xs">
+            <thead>
+              <tr className="text-left text-grey-500">
+                <th className="py-1 pr-2">영역</th>
+                <th className="py-1 pr-2">세부 기술</th>
+                <th className="py-1 pr-2 text-right">풀</th>
+                <th className="py-1 pr-2 text-right">공개 세트 배정</th>
+                <th className="py-1 pr-2 text-right">초안·검토 배정</th>
+                <th className="py-1 pr-2 text-right">남음</th>
+                <th className="py-1 text-right">일반용(제외)</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rows.map((r) => {
+                const pool = r.mockExam + r.both;
+                const rest = pool - r.assignedPublished - r.assignedDraft;
+                return (
+                  <tr key={`${r.satDomain}|${r.skillCode ?? ""}`} className="border-t border-grey-100">
+                    <td className="py-1 pr-2">{domainShort(r.satDomain)}</td>
+                    <td className="py-1 pr-2">{r.skillCode ? skillLabel(r.skillCode) : "(기술 미지정)"}</td>
+                    <td className="py-1 pr-2 text-right">
+                      {pool}
+                      {r.both > 0 && <span className="ml-1 whitespace-nowrap text-grey-400">(기존 {r.both})</span>}
+                    </td>
+                    <td className="py-1 pr-2 text-right">{r.assignedPublished}</td>
+                    <td className="py-1 pr-2 text-right">{r.assignedDraft}</td>
+                    <td className={"py-1 pr-2 text-right font-medium " + (rest === 0 ? "text-red" : "text-ink")}>{rest}</td>
+                    <td className="py-1 text-right text-grey-500">{r.general}</td>
+                  </tr>
+                );
+              })}
+              <tr className="border-t border-grey-300 font-semibold" data-testid="mock-pool-total">
+                <td className="py-1 pr-2" colSpan={2}>합계</td>
+                <td className="py-1 pr-2 text-right">{t.pool}</td>
+                <td className="py-1 pr-2 text-right">{t.pub}</td>
+                <td className="py-1 pr-2 text-right">{t.draft}</td>
+                <td className="py-1 pr-2 text-right">{remaining}</td>
+                <td className="py-1 text-right text-grey-500">{t.general}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       )}
-      <p className="mt-2 text-[11.5px] text-grey-500">공개된 문항 기준입니다. 조립에는 모의고사용과 기존(양쪽) 문항만 쓰입니다.</p>
-    </details>
+      <p className="mt-2 text-[11.5px] text-grey-500">
+        공개된 문항 기준입니다. 풀은 모의고사용과 기존(양쪽) 문항이며 일반용은 조립에 쓰이지 않습니다. 배정은 서로 다른 문항 수이고
+        (여러 세트에 있어도 1회, 보관된 세트 제외) 남음 = 풀 − 배정입니다.
+      </p>
+    </section>
   );
 }
 
@@ -161,7 +198,6 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
 
   return (
     <div className="space-y-6">
-      <PoolSummary />
       <section className="rounded-xl border border-grey-200 bg-white p-5">
         <h2 className="text-sm font-semibold text-ink">새 세트 조립</h2>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
