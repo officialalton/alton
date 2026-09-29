@@ -341,11 +341,14 @@ export type MockExamStudentOption = { id: string; name: string | null };
 export async function listAllActiveStudentsForMockExamAction(): Promise<MockExamStudentOption[]> {
   await requireAdmin();
   const db = createAdminClient();
-  const { data: activeStudents, error: studentsErr } = await db.from("students").select("id").eq("status", "active");
-  if (studentsErr) throw new Error(studentsErr.message);
-  const activeIds = (activeStudents ?? []).map((s) => s.id);
-  if (activeIds.length === 0) return [];
-  const { data, error } = await db.from("profiles").select("id, name").in("id", activeIds).order("name");
+  // 2026-09-28: 활성 학생 id를 모아 .in("id", [...])으로 다시 조회하던 방식은 학생 수가
+  // 수백 명이 되면 PostgREST GET URL이 한도를 넘어 "URI too long"으로 실패했다 —
+  // students(id → profiles.id FK) inner embed 한 번으로 같은 결과를 얻는다.
+  const { data, error } = await db
+    .from("profiles")
+    .select("id, name, students!inner(status)")
+    .eq("students.status", "active")
+    .order("name");
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => ({ id: r.id, name: r.name }));
 }

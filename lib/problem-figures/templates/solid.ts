@@ -53,9 +53,11 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
   };
   const dimLabel = (x: number, y: number, t: string | undefined, what: string) => { if (t) sheet.label(x, y, t, what); };
   /** 세로 선 옆 라벨 — 오른쪽·왼쪽 후보 중 겹치지 않는 자리(규칙). */
-  const sideLabel = (mid: Pt, t: string, what: string) => {
+  const sideLabel = (mid: Pt, t: string, what: string, fallbackMids: Pt[] = []) => {
     const off = halfDiag(t) + 5;
-    const spot = sheet.firstFree([[mid[0] + off, mid[1]], [mid[0] - off, mid[1]], [mid[0] + off + 8, mid[1] - 10], [mid[0] - off - 8, mid[1] - 10], [mid[0] + off + 16, mid[1] + 12], [mid[0] - off - 16, mid[1] + 12], [mid[0] + off + 6, mid[1] + 26], [mid[0] - off - 6, mid[1] + 26]], t);
+    // fallbackMids: 첫 세로 선 주변이 전부 막혔을 때 차례로 시도할 다른(같은 길이의) 세로 선 중점 — 각 선의 좌우 한 자리씩.
+    const fallback: Pt[] = fallbackMids.flatMap((m): Pt[] => [[m[0] + off, m[1]], [m[0] - off, m[1]]]);
+    const spot = sheet.firstFree([[mid[0] + off, mid[1]], [mid[0] - off, mid[1]], [mid[0] + off + 8, mid[1] - 10], [mid[0] - off - 8, mid[1] - 10], [mid[0] + off + 16, mid[1] + 12], [mid[0] - off - 16, mid[1] + 12], [mid[0] + off + 6, mid[1] + 26], [mid[0] - off - 6, mid[1] + 26], ...fallback], t);
     if (spot) sheet.label(spot[0], spot[1], t, what); else issues.push({ code: "label_collision", message: `${what} '${t}' 을 놓을 자리가 없습니다.` });
   };
   // 2026-09-19(제품 오너 발견) — 입체도형이 실제 치수 라벨(길이/반지름/높이 등) 값과 무관하게 항상
@@ -105,6 +107,17 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
           const OUTER_MAX = 260;
           const maxPx = Math.max(...known.map((k) => k.val * pxPerUnit));
           if (maxPx > OUTER_MAX) pxPerUnit *= OUTER_MAX / maxPx;
+          // 2026-09-28(area-volume.test 간헐 실패) — 위 두 단계는 변마다의 캡(MAX_DEP 등)을 다시
+          // 보지 않아서, 예: 9×9×2(너비=깊이 9)는 MIN_SIDE 끌어올림 뒤 깊이가 180px이 돼 오른쪽이
+          // 캔버스(360px) 밖으로 나갔다. 전면 너비+깊이, 전면 높이+깊이 기울기가 캔버스 안에
+          // 들어가도록 한 번 더 균일하게 줄인다(비율 유지).
+          // 미지수 변(null)은 스케일 대상이 아니라 고정 크기(w/h/depMag 초깃값)로 그려지므로 그 값을 쓴다.
+          const scaled = (v: number | null, fixed: number) => (v === null ? fixed : v * pxPerUnit);
+          const spanX = scaled(L0, w) + scaled(W0, depMag);
+          const spanY = scaled(H0, h) + scaled(W0, depMag) * DEP_RATIO;
+          // 한도는 캡을 그대로 지킨 기존 최대 크기(MAX_W+MAX_DEP, MAX_H+MAX_DEP 기울기)와 같다 — 정상 비율 그림은 바뀌지 않는다.
+          const fit = Math.min(1, (MAX_W + MAX_DEP) / Math.max(spanX, 1), (MAX_H + MAX_DEP * DEP_RATIO) / Math.max(spanY, 1));
+          pxPerUnit *= fit;
           for (const k of known) k.set(Math.max(MIN_SIDE, Math.round(k.val * pxPerUnit)));
         }
       }
@@ -118,7 +131,9 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       const L = spec.kind === "cube" ? d.edge : d.length, Wd = spec.kind === "cube" ? undefined : d.width, Hd = spec.kind === "cube" ? undefined : d.height;
       dimLabel((A[0] + B[0]) / 2, A[1] + 16, L, "길이 라벨");
       dimLabel((B[0] + B2[0]) / 2 + 14, (B[1] + B2[1]) / 2 + 10, Wd, "너비 라벨");
-      if (Hd) sideLabel([B[0], (B[1] + C[1]) / 2], Hd, "높이 라벨");
+      // 높이가 작고(MIN_SIDE 부근) 깊이도 작으면 BC 주변을 숨은 모서리 점선(A2B2)이 가로질러 자리가
+      // 없을 수 있다(9×2×2 사례) — 뒤쪽 세로 모서리 B2C2, 왼쪽 세로 모서리 AD 옆을 차례로 시도한다.
+      if (Hd) sideLabel([B[0], (B[1] + C[1]) / 2], Hd, "높이 라벨", [[B2[0], (B2[1] + C2[1]) / 2], [A[0], (A[1] + D[1]) / 2]]);
       parts.push(spec.kind === "cube" ? `정육면체, 모서리 ${d.edge ?? "?"}` : `직육면체, 길이 ${d.length ?? "?"}, 너비 ${d.width ?? "?"}, 높이 ${d.height ?? "?"}`);
       break;
     }
