@@ -67,7 +67,7 @@ export default function HomeworkBatchPanel({
 
   return (
     <div>
-      <div className="flex gap-1 border-b border-grey-200 mb-4">
+      <div className="flex gap-1 border-b border-grey-200 mb-4 overflow-x-auto">
         {(["upcoming", "past"] as const).map((t) => (
           <button
             key={t}

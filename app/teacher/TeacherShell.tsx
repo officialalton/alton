@@ -237,7 +237,7 @@ export default function TeacherShell({
 
       <MobileBottomNav primary={mobilePrimary} more={mobileMore} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
 
-      <div className="flex-1 flex flex-col pb-16 md:pb-0">
+      <div className="flex-1 min-w-0 flex flex-col pb-16 md:pb-0">
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
             옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 계정
             메뉴만 담은 얇은 바를 여기 남긴다. */}
