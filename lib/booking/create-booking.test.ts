@@ -270,3 +270,22 @@ describe("cancelLessonBooking", () => {
     errorSpy.mockRestore();
   });
 });
+
+describe("toBookingActionOutcomeError — 겹침 안내(2026-09-29)", () => {
+  it("학생 동시간 수업은 친절한 한국어 slot_conflict로 바꾼다", async () => {
+    const { toBookingActionOutcomeError } = await import("./create-booking");
+    const r = toBookingActionOutcomeError(new Error("student_time_overlap: 이미 같은 시간에 다른 수업이 있습니다."));
+    expect(r.errorCode).toBe("slot_conflict");
+    expect(r.message).toContain("이미 같은 시간에 다른 수업이 있습니다");
+  });
+
+  it("선생님 겹침(teacher_buffer_violation/reservations_no_overlap)은 버퍼 언급 없이 겹침으로 안내한다", async () => {
+    const { toBookingActionOutcomeError } = await import("./create-booking");
+    for (const raw of ["teacher_buffer_violation", "conflicting key value violates exclusion constraint \"reservations_no_overlap\""]) {
+      const r = toBookingActionOutcomeError(new Error(raw));
+      expect(r.errorCode).toBe("slot_conflict");
+      expect(r.message).toContain("겹칩니다");
+      expect(r.message).not.toContain("버퍼");
+    }
+  });
+});

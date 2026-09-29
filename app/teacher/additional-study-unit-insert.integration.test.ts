@@ -194,12 +194,18 @@ function makeThreeUnitCurriculum(): { contractId: string; enrollmentId: string; 
 // 날짜 조건에 걸린다). 정오 UTC는 어떤 타임존으로 봐도 자정 근처가 아니라 항상
 // 안전하다.
 function bookSession(enrollmentId: string): { reservationId: string; sessionId: string } {
-  reservationOffsetDays += 2;
-  const startsAtDate = new Date();
-  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + reservationOffsetDays);
-  startsAtDate.setUTCHours(12, 0, 0, 0);
-  const startsAt = startsAtDate.toISOString();
-  const endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
+  // 2026-09-29: 같은 학생은 같은 시간에 수업 2건 불가(시드 학생을 재실행이 공유) — 학생이 비는 날까지 건너뛴다.
+  let startsAtDate: Date;
+  let startsAt: string;
+  let endsAt: string;
+  do {
+    reservationOffsetDays += 2;
+    startsAtDate = new Date();
+    startsAtDate.setUTCDate(startsAtDate.getUTCDate() + reservationOffsetDays);
+    startsAtDate.setUTCHours(12 + Math.floor(Math.random() * 10), 0, 0, 0); // 12~21시 UTC(자정 경계 회피)
+    startsAt = startsAtDate.toISOString();
+    endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
+  } while (psql(`select violates_student_overlap('${STUDENT_ID}', '${startsAt}', '${endsAt}');`) === "t");
   const row = psql(
     `select reservation_id, session_id from confirm_lesson_booking(
        '${STUDENT_ID}', '${enrollmentId}', '${teacherId}', '${regularLessonTypeId}',

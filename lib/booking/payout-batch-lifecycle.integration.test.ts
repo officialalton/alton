@@ -47,7 +47,7 @@ function grantRegularEntitlement(): string {
 }
 
 const SESSION_MINUTES = 120;
-const BUFFER_MINUTES = 15; // violates_teacher_buffer()의 booking_buffer_minutes()와 동일
+const BUFFER_MINUTES = 0; // booking_buffer_minutes()와 동일(2026-09-29 오너 결정으로 버퍼 제거)
 
 // 제품 오너 리뷰(2026-09-07): 이 파일의 예약 시각은 예전엔 daysAgo(1~11)로 결정되는
 // 고정 시각(17:00) 하나뿐이었다. entitlement_ledger는 INSERT-only(reject_ledger_mutation
