@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { RESERVATION_DAY_BANDS, findFreeTeacherSlot } from "@/test/reservation-slots";
 import { loadNormalizedSession } from "./session-source-data";
 import { createClient } from "@supabase/supabase-js";
 
@@ -52,13 +53,21 @@ function cleanup() {
 describe("R8 cutover: v3 sessions <-> /session/[id]", () => {
   beforeAll(() => {
     cleanup();
+    // 고정 RESERVATION_ID로 정리하므로 insertReservationInBand 대신 파일 구간의 빈 슬롯만 찾는다
+    // (같은 시드 선생님을 쓰는 다른 파일의 잔여 예약과 reservations_no_overlap 충돌 방지).
+    const [fromDay, toDay] = RESERVATION_DAY_BANDS["r8-cutover"];
+    const startsAt = findFreeTeacherSlot((sql) => psql(sql).trim(), {
+      teacherId: TEACHER_ID,
+      fromHours: fromDay * 24,
+      toHours: (toDay + 1) * 24,
+    });
     psql(`
       insert into contracts (id, household_id, child_id, status)
       values ('${CONTRACT_ID}', '${HOUSEHOLD_ID}', '${STUDENT_ID}', 'active');
       insert into subject_enrollments (id, child_id, subject_id, contract_id, status)
       values ('${ENROLLMENT_ID}', '${STUDENT_ID}', '${SUBJECT_ID}', '${CONTRACT_ID}', 'active');
       insert into reservations (id, kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-      values ('${RESERVATION_ID}', 'lesson', '${ENROLLMENT_ID}', '${TEACHER_ID}', now() - interval '10 minutes', now() + interval '50 minutes', 'confirmed');
+      values ('${RESERVATION_ID}', 'lesson', '${ENROLLMENT_ID}', '${TEACHER_ID}', '${startsAt}'::timestamptz, '${startsAt}'::timestamptz + interval '1 hour', 'confirmed');
       insert into sessions (id, reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes, final_status)
       select '${SESSION_ID}', '${RESERVATION_ID}', '${ENROLLMENT_ID}', '${TEACHER_ID}', id, 60, 'live'
       from lesson_types where code = 'regular';

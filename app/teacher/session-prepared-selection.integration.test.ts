@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // R9(레슨 준비 Task 1) — session_prepared_selections/_units/_unit_keywords/
 // _content_items(supabase/migrations/20261232000000_r9_session_prepared_selection.sql)를
@@ -100,14 +101,6 @@ afterEach(() => {
   }
 });
 
-// 예약 시간대가 서로 겹치지 않도록 호출마다 증가하는 오프셋을 쓴다(같은 선생님
-// 소유자 배타 제약 reservations_no_overlap 회피).
-let reservationOffsetDays = 300;
-function nextReservationOffsetDays(): number {
-  reservationOffsetDays += 2;
-  return reservationOffsetDays;
-}
-
 // 준비된 선택은 subject_enrollment/세션 단위로 만들어지므로, 테스트마다 독립된
 // enrollment(+세션)를 새로 만들어 서로 간섭하지 않게 한다.
 function makeEnrollmentWithSession(): {
@@ -128,11 +121,7 @@ function makeEnrollmentWithSession(): {
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
   );
-  const offset = nextReservationOffsetDays();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "session-prepared-selection", enrollmentId, teacherId: TEACHER_ID });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)
@@ -671,11 +660,7 @@ describe("pin 시점 기록 — 회차 연결과 문제 버전 고정", () => {
     asUser(TEACHER_ID, `select pin_session_selection('${sessionId}');`);
 
     // 같은 등록의 두 번째 수업에서 같은 회차를 다시 다룬다.
-    const offset = nextReservationOffsetDays();
-    const secondReservationId = psql(
-      `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-       values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-    );
+    const secondReservationId = insertReservationInBand(psql, { band: "session-prepared-selection", enrollmentId, teacherId: TEACHER_ID });
     const secondSessionId = psql(
       `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
        values ('${secondReservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

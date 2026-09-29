@@ -8,13 +8,11 @@ import { beforeAll, afterAll, describe, expect, it } from "vitest";
 // shell-out 패턴 재사용.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-// 다른 통합 테스트 파일(lib/booking/trial-entitlement-and-cancellation.integration.test.ts 등)이
-// TEACHER_ID=dddddddd-...-001을 공유하고, 같은 selector(teacher_id+created_by)로
-// teacher_availability_rules를 afterAll에서 지운다 — vitest가 파일을 병렬 워커로 실행하면
-// 서로의 가용시간 규칙을 지워 teacher_slot_not_open 레이스가 난다(실측 확인). 이 파일은
-// 어떤 기존 통합/E2E 테스트도 쓰지 않는 전용 선생님(정하나, 77777777-...-001)을 써서
-// 그 레이스 자체를 원천 차단한다.
-const TEACHER_ID = "77777777-0000-0000-0000-000000000001"; // 정하나 — 이 파일 전용
+// 공유 seed 선생님(dddddddd-...-001 등)은 다른 통합 테스트 파일도 쓰고, 고정 선생님은
+// 이전 실행이 남긴 예약(INSERT-only 원장이 참조해 지울 수 없음)과 고정 날짜 오프셋
+// (N일 뒤 17:00 UTC, "365일 전으로 이동")이 겹친다. 실행마다 이 파일 전용 선생님을
+// 새로 만들어(beforeAll) 다른 파일·이전 실행의 예약·가용시간 규칙과 절대 겹치지 않게 한다.
+let TEACHER_ID: string;
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -77,22 +75,18 @@ beforeAll(() => {
   regularProductId = psql(`select id from entitlement_products where code = 'lesson_pack_10';`);
   trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
 
-  // 사전 점검: 이 파일은 고정 선생님 + 고정 날짜 오프셋(N일 뒤 17:00 UTC)과
-  // "365일 전으로 이동"을 쓰므로, db reset 없이 두 번째로 실행하면 이전 실행이
-  // 남긴 confirmed 예약과 겹쳐 teacher_buffer_violation(예약 생성) 또는
-  // reservations_no_overlap(365일 이동 update)으로 결정적으로 실패한다.
-  // 이 파일이 만든 학생(m5a-integration-*)의 활성 예약만 cancelled로 풀어
-  // 재실행을 멱등하게 만든다 — 다른 스펙/seed의 예약은 건드리지 않는다.
-  psql(
-    `update reservations r set status = 'cancelled'
-       from subject_enrollments se join auth.users u on u.id = se.child_id
-      where se.id = r.subject_enrollment_id
-        and r.owner_profile_id = '${TEACHER_ID}'
-        and r.status in ('holding', 'confirmed')
-        and u.email like 'm5a-integration-%@example.com';`
-  );
-
   const now = Date.now();
+  TEACHER_ID = psql(
+    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'm5a-teacher-${now}@example.com', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
+  );
+  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', 'M5a 통합테스트 선생님');`);
+  // 새로 만든 선생님은 시급 이력이 없다 — teacher_assignments insert
+  // 트리거(enforce_teacher_assignment_requires_rate)와 sessions insert 트리거
+  // (enforce_and_snapshot_teacher_rate) 둘 다 이를 요구하므로 배정 전에 먼저 만든다.
+  psql(`select set_teacher_rate('${TEACHER_ID}', 3000000, 'KRW', now() - interval '1 day');`);
+  psql(`insert into teachers (id, status) values ('${TEACHER_ID}', 'active');`);
   const authEmail = `m5a-integration-${now}@example.com`;
   childId = psql(
     `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
@@ -116,10 +110,6 @@ beforeAll(() => {
     `insert into subject_enrollments (child_id, subject_id, contract_id, status)
      values ('${childId}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`
   );
-  // 이 선생님(정하나)은 seed 데이터에 시급 이력이 없다 — teacher_assignments insert
-  // 트리거(enforce_teacher_assignment_requires_rate)와 sessions insert 트리거
-  // (enforce_and_snapshot_teacher_rate) 둘 다 이를 요구하므로 배정 전에 먼저 만든다.
-  psql(`select set_teacher_rate('${TEACHER_ID}', 3000000, 'KRW', now() - interval '1 day');`);
   psql(
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from, source)
      values ('${subjectEnrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day', 'app');`

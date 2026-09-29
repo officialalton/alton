@@ -28,10 +28,19 @@ function psqlAsAdmin(sql: string): string {
   `);
 }
 
-function createConsultation(label: string, opts: { consent: boolean; smartNotesApplied: boolean }): string {
+// 재실행 안전: version_label·contact_email은 고유 제약/조회 키이므로 실행마다
+// 고유 접미사를 붙인다.
+const RUN_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+
+function createConsultation(baseLabel: string, opts: { consent: boolean; smartNotesApplied: boolean }): string {
+  const label = `${baseLabel}-${RUN_ID}`;
+  // is_active=false: 앱·DB는 "is_active=true 중 최신 created_at"을 현재 상담 동의
+  // 문안으로 쓴다(admin_accept_consultation 등). 이 테스트가 넣는 문안이 그
+  // "현재 문안"을 가로채지 않도록 비활성으로 둔다 — 결과 기록 게이트는 동의
+  // 문안의 활성 여부를 보지 않으므로 검증 내용은 같다.
   const policyId = psql(
     `insert into consult_consent_versions (version_label, title, body_markdown, is_placeholder, is_active, effective_at)
-     values ('${label}-v1', 'ALTON 개인정보 처리방침 ${label}', '테스트용 본문', false, true, now() - interval '1 day')
+     values ('${label}-v1', 'ALTON 개인정보 처리방침 ${label}', '테스트용 본문', false, false, now() - interval '1 day')
      returning id;`
   );
   const consultationId = psql(

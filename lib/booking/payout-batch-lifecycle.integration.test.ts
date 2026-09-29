@@ -16,7 +16,10 @@ import { beforeAll, afterAll, describe, expect, it } from "vitest";
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const RUN_ID = "r10-batch-uat-2026-09-07";
-const TEACHER_ID = "77777777-0000-0000-0000-000000000002"; // 이 파일 전용(final-judgment 테스트의 ...001과 겹치지 않음)
+// 실행마다 새로 만드는 이 파일 전용 선생님(beforeAll). 예전엔 고정 UUID(77777777-...-002)를
+// 재사용했는데, 이전 실행이 남긴 예약(INSERT-only 원장이 참조해 지울 수 없음)이 쌓여
+// 같은 날 여러 번 돌리면 그날 후보 슬롯이 소진됐다.
+let TEACHER_ID: string;
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math (기존 통합 테스트와 공유하는 seed subject, 읽기만 함)
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -126,13 +129,12 @@ beforeAll(() => {
   regularLessonTypeId = psql(`select id from lesson_types where code = 'regular';`);
   regularProductId = psql(`select id from entitlement_products where code = 'lesson_pack_10';`);
 
-  // 이 파일 전용 선생님(77777777-...-002)은 seed에 없으므로 profiles/auth.users를 직접 만든다.
-  psql(
+  TEACHER_ID = psql(
     `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
-     values ('00000000-0000-0000-0000-000000000000', '${TEACHER_ID}', 'authenticated', 'authenticated', '${RUN_ID}-teacher-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
-     on conflict (id) do nothing;`
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', '${RUN_ID}-teacher-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
   );
-  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', '${RUN_ID} 선생님') on conflict (id) do nothing;`);
+  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', '${RUN_ID} 선생님');`);
 
   const authEmail = `${RUN_ID}-${Date.now()}@example.com`;
   childId = psql(

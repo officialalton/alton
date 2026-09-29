@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P2 9차 — 준비안 유지 → 다시 구성 → 수업 시작 고정.
 //
@@ -40,9 +41,6 @@ const uniq = () => `${Date.now()}_${Math.random()}`;
 const cleanupContracts: string[] = [];
 const cleanupProblems: string[] = [];
 const cleanupKeywords: string[] = [];
-
-// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
-let reservationOffsetDays = 6000;
 
 afterEach(() => {
   for (const id of cleanupContracts.splice(0)) {
@@ -160,11 +158,7 @@ function makeUnitWithPrep(keywordId: string, problemId: string) {
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
   );
-  reservationOffsetDays += 2;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${reservationOffsetDays} days', now() + interval '${reservationOffsetDays} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "prep-version-through-lesson", enrollmentId, teacherId: TEACHER_ID });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

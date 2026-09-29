@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 import { loadSessionProblems } from "./session-problem-data";
 
 // P2 3단계 — 제품 오너 피드백 3: 버전을 저장하는 것으로 끝내지 않고, 수업·복습
@@ -37,8 +38,6 @@ function asUser(userId: string, sql: string): string {
 const admin = createClient(API_URL, SERVICE_ROLE_KEY, { auth: { persistSession: false } });
 
 let baseUnitId: string;
-// 다른 통합 테스트 파일과 겹치지 않는 날짜 구간.
-let offset = 7000 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
   baseUnitId = psql(
@@ -109,11 +108,7 @@ function startedSessionWithTwoProblems(): {
      ('${prepId}', 'problem', '${secondProblemId}', 2);`
   );
 
-  offset += 2;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "pinned-problem-version-read", enrollmentId: enrollmentId, teacherId: TEACHER_ID });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

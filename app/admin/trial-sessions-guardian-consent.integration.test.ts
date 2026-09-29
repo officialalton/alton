@@ -39,6 +39,16 @@ function resetState() {
   `);
 }
 
+// 재실행 안전: has_valid_guardian_consent()는 "동의한 버전보다 나중에 시행된
+// requires_reconsent 버전이 없을 것"을 요구한다. 다른 테스트가 실행마다 새 정책
+// 버전을 넣으므로 고정 POLICY_ID(e2e-v1)에 동의하면 재실행 시 무효가 된다 —
+// 동의 시점의 최신 시행 버전에 동의한다(POLICY_ID는 resetState가 빈 DB 대비로 보장).
+function latestPolicyId(): string {
+  return psql(
+    `select id from consent_policy_versions order by effective_from desc, created_at desc limit 1;`
+  ).trim().split("\n")[0].trim();
+}
+
 function insertConsultation(): string {
   const out = psql(
     `insert into consultations (contact_name, contact_email, child_id) values ('테스트', 'trial-consent-test@example.com', '${CHILD_ID}') returning id;`
@@ -113,7 +123,7 @@ describe("assert_guardian_consent_ok() — trial_sessions insert 트리거 (실�
       reset role;
       set role authenticated;
       select set_config('request.jwt.claim.sub', '${GUARDIAN_ID}', false);
-      select consent_as_guardian('${CHILD_ID}'::uuid, '${POLICY_ID}'::uuid, now());
+      select consent_as_guardian('${CHILD_ID}'::uuid, '${latestPolicyId()}'::uuid, now());
       reset role;
     `);
     const consultationId = insertConsultation();

@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P3 — 필기 범위 4분할의 권한을 실제 DB(RLS)로 검증한다.
 // 확정 정책(2026-09-12):
@@ -61,11 +62,6 @@ let problemId2: string;
 let enrollmentId: string;
 
 beforeAll(() => {
-  // 같은 선생님으로 반복 실행할 때 이전 실행이 남긴 예약과 겹치지 않도록 먼 미래의
-  // 임의 슬롯을 쓴다(reservations_no_overlap 배타 제약).
-  // 다른 통합 테스트 파일과 겹치지 않는 날짜 구간(위 unit-prep 주석 참고).
-  // 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
-const slotOffsetDays = 8000 + Math.floor(Math.random() * 300);
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
   );
@@ -73,12 +69,11 @@ const slotOffsetDays = 8000 + Math.floor(Math.random() * 300);
     `insert into subject_enrollments (child_id, subject_id, contract_id, status)
      values ('${STUDENT_ID}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`
   );
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}',
-             now() + interval '${slotOffsetDays} days', now() + interval '${slotOffsetDays} days 1 hour', 'confirmed')
-     returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, {
+    band: "annotation-scopes",
+    enrollmentId,
+    teacherId: TEACHER_ID,
+  });
   sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

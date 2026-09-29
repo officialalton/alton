@@ -11,7 +11,12 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const RUN_ID = "r6-incident-report-identity-2026-09-09";
-const TEACHER_ID = "77777777-0000-0000-0000-000000000003"; // 이 파일 전용(다른 통합 테스트와 겹치지 않음)
+// 재실행 안전: 예전에는 고정 id(77777777-...03) 선생님에 "오늘+10일 15시" 고정
+// 슬롯을 예약했는데, afterAll이 예약 행은 남기므로 같은 날 다시 돌리면 이전
+// 실행의 예약과 reservations_no_overlap으로 충돌해 beforeAll이 깨지고 모든
+// 테스트가 skip됐다. 이 파일은 예약 슬롯을 검증하지 않으므로 실행마다 전용
+// 선생님을 새로 만든다(beforeAll에서 생성).
+let TEACHER_ID: string;
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // 기존 seed subject, 읽기만 함
 
 function psql(sql: string): string {
@@ -67,12 +72,8 @@ let sessionId: string;
 let strangerId: string; // 세션과 아무 관계 없는 제3자(다른 가족)
 
 beforeAll(() => {
-  psql(
-    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
-     values ('00000000-0000-0000-0000-000000000000', '${TEACHER_ID}', 'authenticated', 'authenticated', '${RUN_ID}-teacher-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
-     on conflict (id) do nothing;`
-  );
-  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', '${RUN_ID} 선생님') on conflict (id) do nothing;`);
+  TEACHER_ID = createAuthUser("teacher", "teacher");
+  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', '${RUN_ID} 선생님');`);
 
   guardianId = createAuthUser("guardian", "parent");
   psql(`insert into profiles (id, role, name) values ('${guardianId}', 'parent', '${RUN_ID} 보호자');`);
@@ -138,9 +139,12 @@ function psqlBestEffort(sql: string): void {
 }
 
 afterAll(() => {
-  psqlBestEffort(`delete from session_incident_reports where session_id = '${sessionId}';`);
-  psqlBestEffort(`delete from session_status_events where session_id = '${sessionId}';`);
-  psqlBestEffort(`delete from sessions where id = '${sessionId}';`);
+  if (!TEACHER_ID) return;
+  if (sessionId) {
+    psqlBestEffort(`delete from session_incident_reports where session_id = '${sessionId}';`);
+    psqlBestEffort(`delete from session_status_events where session_id = '${sessionId}';`);
+    psqlBestEffort(`delete from sessions where id = '${sessionId}';`);
+  }
   psqlBestEffort(`delete from subject_threads where teacher_assignment_id in (select id from teacher_assignments where teacher_id = '${TEACHER_ID}');`);
   psqlBestEffort(`delete from teacher_assignments where teacher_id = '${TEACHER_ID}';`);
   psqlBestEffort(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}';`);

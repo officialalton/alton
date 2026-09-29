@@ -9,11 +9,17 @@ import { beforeAll, afterAll, describe, expect, it } from "vitest";
 // 패턴은 lib/booking/session-final-judgment.integration.test.ts와 동일 —
 // bookSession()/reopen_session()/recomplete_session() 조합으로 pending 대사
 // 작업을 만든다. 다른 통합 테스트 파일과의 teacher_availability_rules 레이스를
-// 피하기 위해 이 파일 전용 신규 선생님(99999999-...-001)을 쓴다(기존 파일들의
+// 피하기 위해 이 파일 전용 신규 선생님(실행마다 새로 생성)을 쓴다(기존 파일들의
 // 코멘트에 문서화된 것과 동일한 원칙).
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "99999999-0000-0000-0000-000000000001"; // 이 파일 전용
+// 재실행 안전: 예전엔 고정 id(99999999-...-001) 선생님에 "오늘+N일 17시" 고정
+// 슬롯을 예약한 뒤 365일 과거로 옮겼다. db reset 없이 다시 돌리면 (a) 같은 날
+// 미래 슬롯이 이전 실행의 예약과, (b) 365일 과거로 옮기는 UPDATE가 이전 실행이
+// 옮겨 둔 예약과 reservations_no_overlap/teacher_buffer_violation으로 충돌했다.
+// 이 파일은 가능시간·버퍼를 검증하지 않으므로 실행마다 전용 선생님을 새로
+// 만든다(beforeAll에서 생성) — 다른 실행·다른 파일의 예약과 겹칠 수 없다.
+let TEACHER_ID: string;
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -119,14 +125,14 @@ beforeAll(() => {
      values ('${childId}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`
   );
 
-  psql(
+  TEACHER_ID = psql(
     `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
-     values ('00000000-0000-0000-0000-000000000000', '${TEACHER_ID}', 'authenticated', 'authenticated', 'reconc-lock-teacher-${now}@example.com', 'x', now(), '{}', '{}', now(), now())
-     on conflict (id) do nothing;`
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'reconc-lock-teacher-${now}-${Math.random().toString(36).slice(2)}@example.com', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
   );
-  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', '대사토큰 통합테스트 선생님') on conflict (id) do nothing;`);
+  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', '대사토큰 통합테스트 선생님');`);
   psql(`select set_teacher_rate('${TEACHER_ID}', 3000000, 'KRW', now() - interval '1 day');`);
-  psql(`insert into teachers (id, status) values ('${TEACHER_ID}', 'active') on conflict (id) do nothing;`);
+  psql(`insert into teachers (id, status) values ('${TEACHER_ID}', 'active');`);
   psql(
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from, source)
      values ('${subjectEnrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day', 'app');`
@@ -138,6 +144,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
+  if (!TEACHER_ID) return;
   psql(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}' and created_by = '${ADMIN_ID}';`);
 });
 
@@ -381,7 +388,7 @@ describe("reconciliation_task_update_guard() — status_transition_tokens 1회�
       create or replace function delay_reconciliation_supersede_for_test()
       returns trigger language plpgsql as $$
       begin
-        if new.status = 'superseded' then
+        if new.status = 'superseded' and new.id = '${taskId}' then
           perform pg_sleep(0.6);
         end if;
         return new;
@@ -472,7 +479,7 @@ describe("reconciliation_task_update_guard() — status_transition_tokens 1회�
       create or replace function delay_reconciliation_resolve_for_test()
       returns trigger language plpgsql as $$
       begin
-        if new.status = 'resolved' then
+        if new.status = 'resolved' and new.id = '${taskId}' then
           perform pg_sleep(0.6);
         end if;
         return new;
@@ -588,7 +595,7 @@ describe("reconciliation_task_update_guard() — status_transition_tokens 1회�
       create or replace function delay_reconciliation_resolve_order_check_for_test()
       returns trigger language plpgsql as $$
       begin
-        if new.status = 'resolved' then
+        if new.status = 'resolved' and new.id = '${taskId}' then
           perform pg_sleep(1.0);
         end if;
         return new;

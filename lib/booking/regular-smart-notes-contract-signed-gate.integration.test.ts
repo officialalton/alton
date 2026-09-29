@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
+import { findFreeBookableSlot } from "@/test/reservation-slots";
 
 // 2026-09-28 — 정규 수업 AI 기록(Smart Notes)은 가족계약 서명(contracts.status=
 // 'active') 완료 후에만 적용된다(docs/2026-09-28-post-signature-smart-notes-transcription-plan.md,
@@ -21,23 +22,11 @@ function psql(sql: string): string {
 let regularLessonTypeId: string;
 let lessonPackProductId: string;
 
-// 같은 시드 선생님(박서연)을 다른 통합 테스트도 같은 날짜 17~18시 UTC 부근에 예약하므로
-// 무작위 분만으로는 teacher_buffer_violation을 피하지 못한다. 후보 시간 중
-// violates_teacher_buffer()가 false인 첫 슬롯을 고른다(검증 대상과 무관한 충돌만 제거).
-const CANDIDATE_HOURS_UTC = [18, 15, 16, 19, 20, 21, 22];
-function futureSlot(daysFromNow: number, durationMinutes = 60): { startsAt: string; endsAt: string } {
-  for (const hour of CANDIDATE_HOURS_UTC) {
-    const startsAtDate = new Date();
-    startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
-    startsAtDate.setUTCHours(hour, Math.floor(Math.random() * 50), 0, 0);
-    const startsAt = startsAtDate.toISOString();
-    const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
-    const busy = psql(`select violates_teacher_buffer('${TEACHER_ID}', '${startsAt}', '${endsAt}');`);
-    if (busy === "f") return { startsAt, endsAt };
-  }
-  throw new Error(`futureSlot: ${daysFromNow}일 뒤 선생님 빈 슬롯을 찾지 못함`);
-}
-
+// 같은 시드 선생님(박서연)을 다른 통합 테스트·이전 실행도 예약하므로(예약은 정리되지 않고
+// 남는다), 예약 가능 기간(24시간~8주) 안에서 violates_teacher_buffer()가 false인 첫 슬롯을
+// 고른다(검증 대상과 무관한 충돌만 제거). 시간대는 기본 15~22시 UTC — 아래 가능 시간
+// 규칙(LA 00:00~23:59) 안이다.
+const futureSlot = (minDays: number) => findFreeBookableSlot(psql, { teacherId: TEACHER_ID, minDays });
 
 function makeChildWithEnrollment(contractStatus: "draft" | "active"): {
   childId: string;

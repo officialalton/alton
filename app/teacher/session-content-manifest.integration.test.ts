@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // R9(레슨 준비 Task 2) — session_content_manifest/pin_session_selection()
 // (supabase/migrations/20261233000000_r9_session_content_manifest.sql)을
@@ -79,12 +80,6 @@ afterEach(() => {
   }
 });
 
-let reservationOffsetDays = 2000;
-function nextReservationOffsetDays(): number {
-  reservationOffsetDays += 2;
-  return reservationOffsetDays;
-}
-
 function makeEnrollmentWithSession(): {
   enrollmentId: string;
   sessionId: string;
@@ -102,11 +97,7 @@ function makeEnrollmentWithSession(): {
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
   );
-  const offset = nextReservationOffsetDays();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "session-content-manifest", enrollmentId, teacherId: TEACHER_ID });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)
