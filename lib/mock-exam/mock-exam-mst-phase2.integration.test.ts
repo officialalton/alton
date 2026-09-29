@@ -105,16 +105,27 @@ describe("스냅샷", () => {
 });
 
 describe("mock_exam_validate_mst_set 확장", () => {
-  it("skill 쏠림: 한 영역 4문항이 전부 같은 skill이면 위반·ready=false", () => {
+  it("skill 쏠림: 한 영역 4문항이 전부 같은 skill이어도 경고만(ready 유지), skillHardGate=true면 위반·ready=false", () => {
     const setId = newSet("skill-bad", RULES);
     for (let i = 0; i < 4; i++) {
       const p = problem(300 + i, { domain: "rw_craft_structure", skill: skillA });
       addItem(setId, p, { domain: "rw_craft_structure", skill: skillA });
     }
     const v = validate(setId);
-    expect(v.ready).toBe(false);
-    expect(v.skillViolations).toHaveLength(1);
-    expect(v.skillViolations[0]).toMatchObject({ moduleKey: "rw_m1", skillCode: skillA, count: 4, cap: 2 });
+    expect(v.ready).toBe(true);
+    expect(v.skillViolations).toEqual([]);
+    expect(v.skillWarnings).toHaveLength(1);
+    expect(v.skillWarnings[0]).toMatchObject({ moduleKey: "rw_m1", skillCode: skillA, count: 4, cap: 2 });
+
+    const hardId = newSet("skill-hard", '{"skillMaxSharePct":50,"skillHardGate":true}');
+    for (let i = 0; i < 4; i++) {
+      const p = problem(340 + i, { domain: "rw_craft_structure", skill: skillA });
+      addItem(hardId, p, { domain: "rw_craft_structure", skill: skillA });
+    }
+    const h = validate(hardId);
+    expect(h.ready).toBe(false);
+    expect(h.skillViolations).toHaveLength(1);
+    expect(h.skillWarnings).toEqual([]);
   });
 
   it("skill 균형: 2+2로 나뉘면 skill 위반 없음", () => {
@@ -125,6 +136,7 @@ describe("mock_exam_validate_mst_set 확장", () => {
     });
     const v = validate(setId);
     expect(v.skillViolations).toEqual([]);
+    expect(v.skillWarnings).toEqual([]);
     expect(v.ready).toBe(true);
   });
 

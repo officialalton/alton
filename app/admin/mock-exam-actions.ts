@@ -238,6 +238,8 @@ export type MstReadinessReport = {
   /** Phase 2 검증(세트에 assembly_rules가 있을 때만 강제). 없으면 빈 배열/0. */
   missingSnapshotCount: number;
   skillViolations: { moduleKey: string; route: string | null; satDomain: string; skillCode: string; count: number; cap: number }[];
+  /** skill 쏠림 경고(출시 차단 아님, 2026-09-29 오너 결정). skillHardGate 규칙이 켜진 세트만 skillViolations로 나온다. */
+  skillWarnings: { moduleKey: string; route: string | null; satDomain: string; skillCode: string; count: number; cap: number }[];
   eligibilityViolations: { moduleKey: string; setItemId: string; difficulty: string }[];
   similarityViolations: { similarityGroup: string; count: number }[];
   checkedAt: string;
@@ -251,7 +253,8 @@ export type AssembleMockExamSetResult = {
 };
 
 // 조립 규칙(세트 assembly_rules에 저장돼 DB 검증이 같은 규칙을 강제한다).
-// skillMaxSharePct: 모듈·영역 안에서 한 skill이 차지할 수 있는 최대 비율(%).
+// skillMaxSharePct: 모듈·영역 안에서 한 skill이 차지할 수 있는 최대 비율(%) — 경고 기준. 2026-09-29 오너 결정으로 하드 게이트는 꺼져 있고
+// (skillHardGate 미설정), 다시 켜려면 skillHardGate: true를 넣는다.
 const MST_ASSEMBLY_RULES = { skillMaxSharePct: 50, enforceM1Eligibility: true, noSimilarGroupRepeat: true };
 const MST_ITEM_COUNTS = { rw_m1: 27, rw_m2: 27, math_m1: 22, math_m2: 22 };
 
@@ -271,6 +274,7 @@ async function recordMstReadiness(
     modules: v.modules ?? [],
     missingSnapshotCount: v.missingSnapshotCount ?? 0,
     skillViolations: v.skillViolations ?? [],
+    skillWarnings: v.skillWarnings ?? [],
     eligibilityViolations: v.eligibilityViolations ?? [],
     similarityViolations: v.similarityViolations ?? [],
     shortfalls,

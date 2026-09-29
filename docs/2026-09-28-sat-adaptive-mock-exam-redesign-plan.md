@@ -112,3 +112,11 @@
 1. 계산기: Digital SAT와 동일 — R&W 없음, Math 두 모듈에서 내장 Desmos(`MockExamMathTools` 재사용).
 2. 교사 열람: 완료된 리포트 전체·모듈·문항 단위 약점까지.
 3. SPR 채점: 공백·쉼표·분수↔소수·앞자리 0 정규화, 수학적 동치는 정답, 문항이 명시하지 않는 한 범위 채점 없음.
+
+### 9.1 skill 균형 하드 게이트 OFF (제품 오너 2026-09-29)
+
+- skill 쏠림·영역별 skill 종류 부족은 **출시·배정 차단 사유가 아니다.** `mock_exam_validate_mst_set`(마이그레이션 `20261905000000_mock_exam_skill_gate_off.sql`)은 쏠림을 `skillWarnings`로만 반환하고 `ready`에 반영하지 않는다. 관리자 패널은 이를 "skill 분포 경고(출시에는 영향 없음)"로 표시한다.
+- 조립기는 skill을 고르게 뽑는 것을 소프트 선호로만 유지한다(정원을 비우거나 실패시키지 않음). 다른 게이트(모듈 정원·중복·유사문항 반복·스냅샷·M1 배정 가능=easy/medium만)는 그대로다.
+- 다시 켜기: 세트 `assembly_rules`에 `skillHardGate: true`를 넣으면 `skillMaxSharePct`(기본 50) 초과가 다시 `skillViolations`+`ready=false`가 된다. 신규 세트 기본 규칙(`MST_ASSEMBLY_RULES`)에 넣으면 이후 세트에 적용된다.
+- 롤백: 20261901000002의 `mock_exam_validate_mst_set` 본문을 새 번호 마이그레이션으로 재적용.
+

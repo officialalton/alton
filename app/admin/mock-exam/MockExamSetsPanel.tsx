@@ -88,6 +88,8 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
         const result = await assembleMockExamSet({ name, difficultyTier: tier, rwCount, mathCount, format });
         if (result.readiness && !result.readiness.ready) {
           setShortfallNotice(`이 4모듈 세트는 아직 공개·배정할 수 없습니다 — ${readinessSummary(result.readiness)}`);
+        } else if (result.readiness && skillWarningText(result.readiness)) {
+          setShortfallNotice(skillWarningText(result.readiness));
         } else if (result.shortfalls.length > 0) {
           setShortfallNotice(
             `일부 영역·난이도 셀에서 목표 문항 수를 채우지 못했습니다: ${result.shortfalls
@@ -259,6 +261,12 @@ function MstModuleFlags({ examSetId }: { examSetId: string }) {
       </table>
     </details>
   );
+}
+
+/** skill 쏠림은 차단 사유가 아니라 참고용 경고다(2026-09-29). */
+function skillWarningText(r: MstReadinessReport): string {
+  const w = (r.skillWarnings ?? []).map((v) => `${MODULE_LABEL[v.moduleKey] ?? v.moduleKey}/${v.satDomain}/${v.skillCode} ${v.count}개(권장 상한 ${v.cap})`);
+  return w.length ? `skill 분포 경고(출시에는 영향 없음): ${w.join(", ")}` : "";
 }
 
 function readinessSummary(r: MstReadinessReport): string {
@@ -449,11 +457,22 @@ function ReviewTab() {
               </div>
               {(() => {
                 const r = sets?.find((s) => s.id === selectedId)?.readinessReport;
-                return r && !r.ready ? (
-                  <p className="mb-2 text-sm text-red" data-testid="readiness-detail">
-                    공개 불가 — {readinessSummary(r)}
-                  </p>
-                ) : null;
+                if (!r) return null;
+                const warn = skillWarningText(r);
+                return (
+                  <>
+                    {!r.ready && (
+                      <p className="mb-2 text-sm text-red" data-testid="readiness-detail">
+                        공개 불가 — {readinessSummary(r)}
+                      </p>
+                    )}
+                    {warn && (
+                      <p className="mb-2 text-sm text-grey-500" data-testid="skill-warning">
+                        {warn}
+                      </p>
+                    )}
+                  </>
+                );
               })()}
               {publishError && <p className="mb-2 text-sm text-red">{publishError}</p>}
               {sets?.find((s) => s.id === selectedId)?.format === "mst" && <MstModuleFlags examSetId={selectedId} />}

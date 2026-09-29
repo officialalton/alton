@@ -148,7 +148,7 @@ export function selectForCells(
         !used.has(c.problemId),
     );
 
-    // 한 개씩 고른다. 우선순위: (1) 이 모듈에서 덜 쓴 skill(skill 균형 — 출시 게이트라 재사용 회피보다 앞선다) (2) 다른 세트에서 안 쓴 문항
+    // 한 개씩 고른다. 우선순위: (1) 이 모듈에서 덜 쓴 skill(skill 균형 — 소프트 선호일 뿐 정원을 비우거나 실패시키는 사유가 아니다. 재사용 회피보다는 앞선다) (2) 다른 세트에서 안 쓴 문항
     // (3) 노출 이력이 적은 문항 (4) problemId(결정적). 유사문항 그룹은 세트 안에서 한 번만 허용.
     let chosenCount = 0;
     while (chosenCount < cell.targetCount) {

@@ -229,6 +229,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${result.examSetId}' and module_key in ('rw_m1','math_m1') and not m1_eligible;`)).toBe("0");
     expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${result.examSetId}' and content_snapshot is null;`)).toBe("0");
     expect(result.readiness?.skillViolations).toEqual([]);
+    expect(result.readiness?.skillWarnings ?? []).toBeInstanceOf(Array);
     expect(result.readiness?.eligibilityViolations).toEqual([]);
     expect(result.readiness?.similarityViolations).toEqual([]);
     expect(result.readiness?.missingSnapshotCount).toBe(0);
