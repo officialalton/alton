@@ -348,8 +348,8 @@ export default function LessonBookingTab({
       <p className="text-[13px] text-grey-500 mb-5">
         최소 24시간 이후부터 최대 8주 이내로 예약할 수 있습니다.
         {selectedEnrollment
-          ? ` 수업은 ${selectedEnrollment.lessonDurationMinutes}분, 앞뒤 15분 버퍼가 자동 적용됩니다.`
-          : " 수업은 120분(체험은 60분), 앞뒤 15분 버퍼가 자동 적용됩니다."}
+          ? ` 수업은 ${selectedEnrollment.lessonDurationMinutes}분입니다.`
+          : " 수업은 120분(체험은 60분)입니다."}
       </p>
         </>
       )}

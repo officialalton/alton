@@ -105,29 +105,28 @@ describe("computeAvailableSlots", () => {
     expect(result.some((d) => new Intl.DateTimeFormat("en-CA", { timeZone: TZ }).format(d) === dateStr)).toBe(true);
   });
 
-  it("기존 예약 + 버퍼(15분)와 겹치는 슬롯은 제외한다", () => {
+  it("기존 예약과 겹치는 슬롯만 제외하고, 끝==시작 인접 슬롯은 허용한다(버퍼 0)", () => {
     const now = new Date("2026-10-01T00:00:00Z");
     const rules: AvailabilityRule[] = [
       { dayOfWeek: 5, startTimeLocal: "09:00", endTimeLocal: "17:00", timezone: TZ, effectiveFrom: "2026-01-01", effectiveUntil: null },
     ];
-    const noConflict = computeAvailableSlots({
-      rules, exceptions: [], existingReservations: [], durationMinutes: 120, bufferMinutes: 15,
+    const base = {
+      rules, exceptions: [], durationMinutes: 60, bufferMinutes: 0,
       windowStart: now, windowEnd: daysFromNow(now, 14), now, stepMinutes: 60,
-    });
-    expect(noConflict.length).toBeGreaterThan(0);
-    const target = noConflict[2] ?? noConflict[0];
+    };
+    const noConflict = computeAvailableSlots({ ...base, existingReservations: [] });
+    expect(noConflict.length).toBeGreaterThan(2);
+    const target = noConflict[1];
 
     const withConflict = computeAvailableSlots({
-      rules,
-      exceptions: [],
-      existingReservations: [{ startsAt: target, endsAt: new Date(target.getTime() + 120 * 60_000) }],
-      durationMinutes: 120, bufferMinutes: 15,
-      windowStart: now, windowEnd: daysFromNow(now, 14), now, stepMinutes: 60,
+      ...base,
+      existingReservations: [{ startsAt: target, endsAt: new Date(target.getTime() + 60 * 60_000) }],
     });
-    expect(withConflict.some((d) => d.getTime() === target.getTime())).toBe(false);
-    // buffer 15min: 슬롯 시작 10분 전에 걸치는 슬롯도 막혀야 함
-    const tenMinBefore = new Date(target.getTime() - 10 * 60_000);
-    expect(withConflict.some((d) => d.getTime() === tenMinBefore.getTime())).toBe(false);
+    const has = (d: Date) => withConflict.some((x) => x.getTime() === d.getTime());
+    expect(has(target)).toBe(false); // 정확히 같은 슬롯 거부
+    expect(has(new Date(target.getTime() - 30 * 60_000))).toBe(false); // 부분 겹침 거부(시작 30분 전 → 끝이 겹침)
+    expect(has(new Date(target.getTime() - 60 * 60_000))).toBe(true); // 바로 앞 인접 허용
+    expect(has(new Date(target.getTime() + 60 * 60_000))).toBe(true); // 바로 뒤 인접 허용
   });
 
   it("DST 전환 경계(America/Los_Angeles 2026년 3월 8일 spring-forward)에서도 로컬 09:00 슬롯을 정확히 UTC로 변환한다", () => {

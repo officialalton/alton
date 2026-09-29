@@ -596,7 +596,7 @@ export default function BookingReconciliationPanel({
                   </p>
                 ) : (
                   <p className="text-[11px] text-grey-500 mb-2">
-                    &ldquo;Google 시간 반영&rdquo;은 가용성·버퍼·중복예약·수업권을 재검증한 뒤 ALTON DB를 Google 시간으로
+                    &ldquo;Google 시간 반영&rdquo;은 가용성·겹침·중복예약·수업권을 재검증한 뒤 ALTON DB를 Google 시간으로
                     맞춥니다. &ldquo;ALTON 시간 유지&rdquo;는 ALTON 시간은 그대로 두고 Google 이벤트만 되돌립니다. 두 처리
                     모두 감사 이력(`reservation_reschedules`)에 남습니다.
                   </p>

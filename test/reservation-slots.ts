@@ -3,7 +3,7 @@
 // 통합 테스트는 같은 로컬 Supabase를 공유하고, 수업권 원장·pin된 선택·append-only
 // 이벤트 때문에 이전 실행의 예약 행이 정리되지 않고 남는다. 고정 날짜나 무작위 날짜로
 // 예약을 넣으면 재실행 때 reservations_no_overlap / teacher_buffer_violation이 난다.
-// 여기서는 violates_teacher_buffer()(겹침 + 앞뒤 버퍼)가 false인 첫 슬롯을 DB에 물어서
+// 여기서는 violates_teacher_buffer()(겹침, 2026-09-29부터 버퍼 0)가 false인 첫 슬롯을 DB에 물어서
 // 고르고, 동시에 같은 슬롯을 잡은 경우에만 다음 슬롯으로 재시도한다.
 //
 // 권장 패턴: 파일마다 전용 선생님을 새로 만든다(test/per-run-teacher.ts의
@@ -50,9 +50,19 @@ export const RESERVATION_DAY_BANDS = {
 
 const cursors = new Map<string, number>();
 
+// 2026-09-29: 같은 학생은 같은 시간에 수업 2건 불가(reservations 트리거). 학생을 공유하는 테스트
+// (시드 학생 등)는 childId를 넘겨 학생도 비어 있는 슬롯만 고른다.
+function studentFree(childId: string | undefined, startExpr: string, endExpr: string): string {
+  return childId ? `and not violates_student_overlap('${childId}', ${startExpr}, ${endExpr})` : "";
+}
+
 function isOverlapError(err: unknown): boolean {
   const detail = `${(err as { stderr?: unknown })?.stderr ?? ""}${String(err)}`;
-  return detail.includes("reservations_no_overlap") || detail.includes("teacher_buffer_violation");
+  return (
+    detail.includes("reservations_no_overlap") ||
+    detail.includes("teacher_buffer_violation") ||
+    detail.includes("student_time_overlap")
+  );
 }
 
 /**
@@ -62,7 +72,7 @@ function isOverlapError(err: unknown): boolean {
  */
 export function findFreeTeacherSlot(
   psql: Psql,
-  opts: { teacherId: string; fromHours: number; toHours: number; stepHours?: number; durationMinutes?: number; key?: string },
+  opts: { teacherId: string; childId?: string; fromHours: number; toHours: number; stepHours?: number; durationMinutes?: number; key?: string },
 ): string {
   const step = opts.stepHours ?? 2;
   const duration = opts.durationMinutes ?? 60;
@@ -80,6 +90,7 @@ export function findFreeTeacherSlot(
        where not violates_teacher_buffer('${opts.teacherId}',
          date_trunc('hour', now()) + make_interval(hours => h),
          date_trunc('hour', now()) + make_interval(hours => h) + make_interval(mins => ${duration}))
+       ${studentFree(opts.childId, "date_trunc('hour', now()) + make_interval(hours => h)", `date_trunc('hour', now()) + make_interval(hours => h) + make_interval(mins => ${duration})`)}
        order by h limit 1;`,
     );
   }
@@ -105,9 +116,11 @@ export function insertReservationInBand(
 ): string {
   const [fromDay, toDay] = RESERVATION_DAY_BANDS[opts.band];
   const duration = opts.durationMinutes ?? 60;
+  const childId = psql(`select child_id from subject_enrollments where id = '${opts.enrollmentId}';`) || undefined;
   for (let attempt = 0; attempt < 20; attempt++) {
     const startsAt = findFreeTeacherSlot(psql, {
       teacherId: opts.teacherId,
+      childId,
       fromHours: fromDay * 24,
       toHours: (toDay + 1) * 24,
       durationMinutes: duration,
@@ -133,7 +146,7 @@ export function insertReservationInBand(
  */
 export function findFreeBookableSlot(
   psql: Psql,
-  opts: { teacherId: string; minDays?: number; maxDays?: number; hoursUtc?: readonly number[]; durationMinutes?: number },
+  opts: { teacherId: string; childId?: string; minDays?: number; maxDays?: number; hoursUtc?: readonly number[]; durationMinutes?: number },
 ): { startsAt: string; endsAt: string } {
   const minDays = opts.minDays ?? 2;
   const maxDays = opts.maxDays ?? 50;
@@ -146,6 +159,7 @@ export function findFreeBookableSlot(
      cross join lateral (select date_trunc('day', now() at time zone 'utc') at time zone 'utc'
                                 + make_interval(days => d, hours => h) as s) x
      where not violates_teacher_buffer('${opts.teacherId}', s, s + make_interval(mins => ${duration}))
+       ${studentFree(opts.childId, "s", `s + make_interval(mins => ${duration})`)}
      order by d, h limit 1;`,
   );
   if (!row) throw new Error(`예약 가능 기간 안에 빈 슬롯 없음: teacher=${opts.teacherId}`);

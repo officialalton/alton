@@ -60,7 +60,7 @@ export async function listAvailableSlotsForBooking(query: AvailableSlotsQuery): 
     exceptions,
     existingReservations,
     durationMinutes: query.durationMinutes,
-    bufferMinutes: 15,
+    bufferMinutes: 0, // 2026-09-29 오너 결정: 15분 버퍼 제거(DB booking_buffer_minutes()와 동일)
     windowStart: now,
     windowEnd: new Date(now.getTime() + windowDays * 24 * 60 * 60_000),
     now,

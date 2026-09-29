@@ -160,7 +160,7 @@ export type UnifiedScheduleLessonRow = {
  * R6 11/N — 관리자 통합 일정 화면용: `official` 관리자 계정에 선생님 개인 Google
  * Calendar를 직접 공유하지 않고, 전체 선생님의 확정 예약을 ALTON DB에서 중앙 조회한다.
  * 취소·변경은 기존 `adminCancelLessonBooking()`/`adminCreateLessonBooking()`이 이미
- * 타는 전체 재검증 체인(가용성·FreeBusy·버퍼·중복예약·수업권·알림)을 그대로 재사용한다 —
+ * 타는 전체 재검증 체인(가용성·FreeBusy·겹침·중복예약·수업권·알림)을 그대로 재사용한다 —
  * 이 함수는 조회 전용.
  */
 // 2026-09-10(P1-2) — 이전엔 날짜 범위 없이 전체 예약/세션을 조회해 클라이언트에서만
@@ -332,7 +332,7 @@ export type ExternalChangeResolution =
  * "kept_alton_time"(ALTON 시간 유지, Google 쪽을 다시 덮어쓰기) 처리는 호출부가
  * syncOneReservationCalendarEvent 등으로 Google을 ALTON 상태에 맞게 재동기화한 뒤에만
  * 호출해야 하고, "accepted_google_time"(Google 시간을 ALTON에 반영) 처리는 호출부가
- * 가용성·FreeBusy·버퍼·중복예약·수업권·알림 영향을 전부 재검사해 통과시킨 뒤에만
+ * 가용성·FreeBusy·겹침·중복예약·수업권·알림 영향을 전부 재검사해 통과시킨 뒤에만
  * 호출해야 한다 — 이 함수는 그 검사를 통과했다고 가정하고 external_change_status만
  * 정리하는 "확정 기록" 단계다(다른 R6 확정 함수와 동일한 계층 분리).
  */
@@ -354,7 +354,7 @@ export async function resolveExternalCalendarChange(params: {
 
 /**
  * "Google 시간 반영" — external_change_detail에 저장된 Google 쪽 새 시간을 재검증(가용성·
- * 버퍼·중복예약·수업권) 후 ALTON DB에 반영한다. 재검증 실패 시 예외를 던지고
+ * 겹침·중복예약·수업권) 후 ALTON DB에 반영한다. 재검증 실패 시 예외를 던지고
  * external_change_status는 그대로 남는다(어중간하게 확정 처리되지 않음).
  */
 export async function resolveExternalChangeAcceptGoogleTime(params: { reservationId: string; reason: string }): Promise<void> {

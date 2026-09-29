@@ -59,6 +59,21 @@ export function toBookingActionOutcomeError(e: unknown): {
       message: "선택한 시간이 방금 다른 일정과 겹치게 됐습니다. 다른 시간을 선택해주세요.",
     };
   }
+  if (raw.includes("student_time_overlap") || raw.includes("이미 같은 시간에 다른 수업")) {
+    return {
+      errorCode: "slot_conflict",
+      message: "이미 같은 시간에 다른 수업이 있습니다. 다른 시간을 선택해주세요.",
+    };
+  }
+  if (
+    raw.includes("teacher_buffer_violation") ||
+    raw.includes("reservations_no_overlap")
+  ) {
+    return {
+      errorCode: "slot_conflict",
+      message: "선택한 시간이 선생님의 다른 수업과 겹칩니다. 다른 시간을 선택해주세요.",
+    };
+  }
   if (raw.includes("배정") || raw.includes("assignment")) {
     return {
       errorCode: "no_assignment",
