@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { loadAutoCorrect } from "@/lib/problem-auto-correct";
 import { composeProblemText } from "@/lib/problem-question";
 import { selectInChunks } from "@/lib/select-in-chunks";
 
@@ -230,11 +231,12 @@ async function buildSessionProblems(
   if (viewer.studentId) {
     const { data: work } = await supabase
       .from("session_problem_work")
-      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, submitted_text, auto_correct, grade, grade_comment, graded_at")
+      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, submitted_text, grade, grade_comment, graded_at")
       .eq("session_id", sessionId)
       .eq("student_id", viewer.studentId)
       // 과제 답안은 수업 답안과 따로 — 같은 문제라도 섞이지 않는다(2026-09-14).
       .eq("source", source);
+    const autoByWork = await loadAutoCorrect(supabase, (work ?? []).map((w) => w.id as string));
     for (const w of work ?? []) {
       const key = w.problem_id as string;
       const prev = attemptsByProblemId.get(key) ?? emptyState();
@@ -246,7 +248,7 @@ async function buildSessionProblems(
               workId: w.id as string,
               choice: (w.submitted_choice_index as number | null) ?? null,
               text: (w.submitted_text as string | null) ?? null,
-              autoCorrect: (w.auto_correct as boolean | null) ?? null,
+              autoCorrect: autoByWork.get(w.id as string) ?? null,
               grade: (w.grade as ProblemGrade | null) ?? null,
               gradeComment: (w.grade_comment as string | null) ?? null,
               gradedAt: (w.graded_at as string | null) ?? null,

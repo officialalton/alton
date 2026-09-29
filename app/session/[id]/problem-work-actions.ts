@@ -1,5 +1,6 @@
 "use server";
 
+import { loadAutoCorrect } from "@/lib/problem-auto-correct";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import type { StrokePayload } from "./annotation-events-types";
@@ -41,7 +42,7 @@ export type ProblemWorkBoard = {
 };
 
 const WORK_COLUMNS =
-  "id, attempt_no, submitted_at, submitted_choice_index, submitted_text, submitted_stroke_seq, auto_correct, grade, grade_comment, graded_at";
+  "id, attempt_no, submitted_at, submitted_choice_index, submitted_text, submitted_stroke_seq, grade, grade_comment, graded_at";
 
 type WorkRow = {
   id: string;
@@ -50,14 +51,13 @@ type WorkRow = {
   submitted_choice_index: number | null;
   submitted_text: string | null;
   submitted_stroke_seq: string | null;
-  auto_correct: boolean | null;
   grade: string | null;
   grade_comment: string | null;
   graded_at: string | null;
 };
 
 /** 풀이판 행의 메타 — 필기는 따로 붙인다. 채점 전 학생에게 자동 채점 결과가 새지 않게 한다. */
-function boardMeta(row: WorkRow, revealAuto: boolean): Omit<ProblemWorkBoard, "studentStrokes" | "strokesAfterSubmit" | "feedbackStrokes"> {
+function boardMeta(row: WorkRow & { auto_correct?: boolean | null }, revealAuto: boolean): Omit<ProblemWorkBoard, "studentStrokes" | "strokesAfterSubmit" | "feedbackStrokes"> {
   const graded = Boolean(row.graded_at);
   return {
     workId: row.id,
@@ -145,8 +145,9 @@ export async function openProblemWork(params: {
       .maybeSingle();
     if (!existing) return EMPTY_BOARD;
     const row = existing as unknown as WorkRow;
+    const auto = await loadAutoCorrect(supabase, [row.id]);
     return {
-      ...boardMeta(row, isTeacher),
+      ...boardMeta({ ...row, auto_correct: auto.get(row.id) ?? null }, isTeacher),
       ...(await loadBoardStrokes(supabase, row.id, row.submitted_stroke_seq ?? null)),
     };
   }
@@ -167,10 +168,11 @@ export async function openProblemWork(params: {
     .maybeSingle();
 
   const row = (work as unknown as WorkRow | null) ?? null;
+  const auto = row ? await loadAutoCorrect(supabase, [row.id]) : new Map<string, boolean | null>();
   const boundary = row?.submitted_stroke_seq ?? null;
   return {
     ...(row
-      ? boardMeta(row, false)
+      ? boardMeta({ ...row, auto_correct: auto.get(row.id) ?? null }, false)
       : { ...EMPTY_BOARD, workId: workId as string, attemptNo: 1 }),
     workId: workId as string,
     ...(await loadBoardStrokes(supabase, workId as string, boundary)),
@@ -243,8 +245,9 @@ export async function loadProblemWorkBoard(workId: string): Promise<ProblemWorkB
   if (!work) return null;
   const row = work as unknown as WorkRow & { student_id: string };
   // 학생 본인이 아니면(교사·관리자 조회) 자동 채점 결과를 보여도 된다.
+  const auto = await loadAutoCorrect(supabase, [row.id]);
   return {
-    ...boardMeta(row, row.student_id !== user.id),
+    ...boardMeta({ ...row, auto_correct: auto.get(row.id) ?? null }, row.student_id !== user.id),
     ...(await loadBoardStrokes(supabase, workId, row.submitted_stroke_seq ?? null)),
   };
 }
