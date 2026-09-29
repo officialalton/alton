@@ -6,8 +6,15 @@
 // 여기서는 violates_teacher_buffer()(겹침 + 앞뒤 버퍼)가 false인 첫 슬롯을 DB에 물어서
 // 고르고, 동시에 같은 슬롯을 잡은 경우에만 다음 슬롯으로 재시도한다.
 //
-// 파일마다 날짜 구간을 나눠 쓴다(같은 시드 선생님을 쓰는 파일끼리 서로의 슬롯을 먹지
-// 않도록). 구간 목록은 RESERVATION_DAY_BANDS 참고.
+// 권장 패턴: 파일마다 전용 선생님을 새로 만든다(test/per-run-teacher.ts의
+// createPerRunTeacher). 예약이 그 선생님에만 쌓이므로 시드 선생님의 예약 가능 창과 날짜
+// 구간이 재실행으로 소모되지 않는다. 이 파일의 헬퍼(findFreeBookableSlot,
+// findFreeTeacherSlot, insertReservationInBand)는 전용 선생님 위에서도 그대로 쓴다.
+//
+// 아래 RESERVATION_DAY_BANDS는 시드 선생님 하나를 여러 파일이 공유하던 시절의 날짜 구간이다.
+// 시드 선생님에 예약을 두어야 하는 파일(시드 배정·권한 경계 자체가 검증 대상)만 겹치지 않는
+// 구간을 추가해 쓴다. 전용 선생님을 쓰는 파일도 band 키는 남아 있어야 insertReservationInBand가
+// 동작한다(선생님이 파일 전용이라 구간 충돌은 없음).
 
 type Psql = (sql: string) => string;
 

@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // 2026-09-28 — 초기 고객 절차 단순화 4단계: contract_dispatch_jobs outbox.
@@ -11,7 +12,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 //      지급하는 순간 direct_account_created 작업이 큐잉된다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -83,6 +84,7 @@ function createSession(subjectEnrollmentId: string, lessonTypeCode: "trial" | "r
 }
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "contract-dispatch-outbox" });
   // regular_lesson_type이 seed에 있는지만 확인(테스트 전용 셋업 아님).
   const regularId = psql(`select id from lesson_types where code = 'regular';`);
   expect(regularId).toMatch(/^[0-9a-f-]{36}$/);

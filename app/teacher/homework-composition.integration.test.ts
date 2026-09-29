@@ -1,6 +1,7 @@
 import { execFile, execFileSync } from "node:child_process";
 import { promisify } from "node:util";
-import { afterEach, describe, expect, it } from "vitest";
+import { beforeAll, afterEach, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 const execFileAsync = promisify(execFile);
@@ -18,7 +19,7 @@ const execFileAsync = promisify(execFile);
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 (seed, 지훈 담당)
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 (seed, 무관한 제3자)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
@@ -29,6 +30,10 @@ function psql(sql: string): string {
     encoding: "utf-8",
   }).trim();
 }
+
+beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "homework-composition" });
+});
 
 function psqlExpectError(sql: string): string {
   try {

@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { findFreeBookableSlot } from "@/test/reservation-slots";
 
 // 2026-09-28 — 정규 수업 AI 기록(Smart Notes)은 가족계약 서명(contracts.status=
@@ -9,7 +10,7 @@ import { findFreeBookableSlot } from "@/test/reservation-slots";
 // lib/booking/trial-entitlement-and-cancellation.integration.test.ts와 동일.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -70,6 +71,7 @@ function makeChildWithEnrollment(contractStatus: "draft" | "active"): {
 }
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "regular-smart-notes-contract-signed-gate" });
   regularLessonTypeId = psql(`select id from lesson_types where code = 'regular';`);
   lessonPackProductId = psql(`select id from entitlement_products where code = 'lesson_pack_10';`);
   psql(
@@ -83,6 +85,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
+  if (!TEACHER_ID) return; // setup 실패 시 정리할 것이 없다
   psql(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}' and created_by = '${ADMIN_ID}';`);
 });
 

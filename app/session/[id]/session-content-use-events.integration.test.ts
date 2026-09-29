@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // R9(레슨 준비 Task 3) — session_content_use_events(append-only 이벤트 로그,
@@ -12,7 +13,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001"; // 관리자 (seed)
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 선생님 (seed, 지훈 담당)
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 선생님 (seed, 무관한 제3자)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001"; // 지훈 household (seed)
@@ -70,6 +71,7 @@ function excludeFromCleanup(contractId: string): void {
 }
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "session-content-use-events" });
   baseUnitId = psql(
     `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
   );

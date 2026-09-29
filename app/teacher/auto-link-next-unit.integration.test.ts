@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
-import { afterEach, describe, expect, it } from "vitest";
+import { beforeAll, afterEach, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P2 4차 — 예약이 잡히면 다음 회차가 자동으로 연결된다.
@@ -8,7 +9,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 // 선생님이 다른 회차로 바꾸는 길을 막지 않는다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
@@ -18,6 +19,10 @@ function psql(sql: string): string {
     encoding: "utf-8",
   }).trim();
 }
+
+beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "auto-link-next-unit" });
+});
 
 const uniq = () => `${Date.now()}_${Math.random()}`;
 const cleanupContractIds: string[] = [];

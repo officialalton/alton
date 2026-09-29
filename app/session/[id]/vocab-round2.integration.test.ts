@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // 2026-09-15 제품 오너 2차 지시 — 단어장 상시 학습 자산화 검증.
@@ -8,7 +9,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
@@ -39,6 +40,7 @@ let libraryWordId: string;
 let libraryWordId2: string;
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "vocab-round2" });
   // unrelatedTeacherId 고정 fixture는 다른 테스트 파일들이 이 STUDENT_ID의 진짜 담당 교사로
   // 만들어 둔 채 남아 있을 수 있어(공유 로컬 DB), "담당 아님" 부정 테스트에는 매번 새로
   // 만드는 교사를 쓴다 — 이 학생과 어떤 관계도 없다고 보장할 수 있다.
@@ -106,6 +108,9 @@ describe("assign_vocab_quiz — teaches_student() 로만 권한 확인, due_at �
 
 describe("assign_library_words_to_student — 공용 단어를 학생 개인 단어장에 배정 복사(폴더 지정)", () => {
   it("담당 교사가 배정하면 학생 vocab_words에 assigned_by·folder_id와 함께 들어가고, 같은 단어 재배정은 폴더만 옮긴다", () => {
+    // 공용 단어장 실제 단어를 쓰므로 이전 실행이 같은 학생에게 이미 배정해 둔 행(assigned_by가 이전 실행의
+    // 선생님)이 있으면 지운 뒤 이번 실행 선생님으로 새로 배정되는지 본다.
+    psql(`delete from vocab_words where student_id = '${STUDENT_ID}' and word = (select word from vocab_library_words where id = '${libraryWordId2}');`);
     const folderId = asUser(STUDENT_ID, `select ensure_default_vocab_folder('${STUDENT_ID}');`);
     asUser(TEACHER_ID, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId2}']::uuid[], '${folderId}');`);
     asUser(TEACHER_ID, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId2}']::uuid[], null);`);
