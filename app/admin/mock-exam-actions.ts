@@ -476,22 +476,33 @@ export type MockExamPoolRow = {
   both: number;
   /** 일반용 공개 문항 수 — 모의고사 후보가 아님(참고). */
   general: number;
+  /** 풀(모의고사용 + 기존) 중 공개된 세트에 배정된 서로 다른 문항 수. */
+  assignedPublished: number;
+  /** 풀 중 초안(검토 중) 세트에만 배정된 서로 다른 문항 수(공개 세트에도 있으면 위에서만 센다). */
+  assignedDraft: number;
 };
 
 /** 영역·세부 기술별 용도 풀 크기(공개 문항 기준, 보관 제외) — 모의고사 풀이 충분한지 보는 용도. */
 export async function getMockExamPoolSummaryAction(): Promise<MockExamPoolRow[]> {
   await requireAdmin();
   const db = createAdminClient();
-  const { data, error } = await db.rpc("problem_pool_by_scope");
+  const { data, error } = await db.rpc("mock_exam_pool_usage");
   if (error) throw new Error(error.message);
   const byKey = new Map<string, MockExamPoolRow>();
-  for (const r of (data ?? []) as { sat_domain: string; skill_code: string | null; usage_scope: string; published: number | string }[]) {
+  for (const r of (data ?? []) as {
+    sat_domain: string; skill_code: string | null; usage_scope: string;
+    published: number | string; assigned_published: number | string; assigned_draft: number | string;
+  }[]) {
     const key = `${r.sat_domain}|${r.skill_code ?? ""}`;
-    const row = byKey.get(key) ?? { satDomain: r.sat_domain, skillCode: r.skill_code, mockExam: 0, both: 0, general: 0 };
+    const row = byKey.get(key) ?? { satDomain: r.sat_domain, skillCode: r.skill_code, mockExam: 0, both: 0, general: 0, assignedPublished: 0, assignedDraft: 0 };
     const n = Number(r.published);
-    if (r.usage_scope === "mock_exam") row.mockExam += n;
-    else if (r.usage_scope === "both") row.both += n;
-    else row.general += n;
+    if (r.usage_scope === "general") row.general += n; // 일반용은 후보가 아니므로 배정 수는 세지 않는다.
+    else {
+      if (r.usage_scope === "mock_exam") row.mockExam += n;
+      else row.both += n;
+      row.assignedPublished += Number(r.assigned_published);
+      row.assignedDraft += Number(r.assigned_draft);
+    }
     byKey.set(key, row);
   }
   return Array.from(byKey.values()).sort((a, b) => a.satDomain.localeCompare(b.satDomain) || (a.skillCode ?? "").localeCompare(b.skillCode ?? ""));
