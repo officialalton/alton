@@ -1,5 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { loadLibraryDoc, loadMaterialsLibrary } from "./materials-data";
+
+// 정답·해설은 컬럼 권한이 회수돼 서버 admin 으로만 읽는다 — 로더 단위 테스트에서는 그 조회만 대체한다.
+vi.mock("@/lib/legacy-problem-answers", () => ({
+  loadLegacyProblemAnswers: async (ids: string[]) => new Map(ids.map((id) => [id, { correctIndex: 1, explanation: "해설" }])),
+}));
 
 function makeSupabaseMock(attempts: { problem_id: string; correct: boolean | null; response: unknown }[]) {
   const tables: Record<string, unknown> = {

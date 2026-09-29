@@ -428,7 +428,7 @@ export async function confirmSectionProblems(
         status: "confirmed",
         created_by: user.id,
       })
-      .select("id, format, passage, options, correct_index, explanation, difficulty")
+      .select("id, format, passage, options, difficulty")
       .single();
     if (error) throw new Error(error.message);
     created.push({
@@ -436,8 +436,9 @@ export async function confirmSectionProblems(
       format: data.format,
       passage: data.passage,
       options: data.options,
-      correctIndex: data.correct_index,
-      explanation: data.explanation,
+      // 방금 입력한 값 그대로 — 정답·해설 컬럼은 읽기 권한이 회수돼 RETURNING 으로 받지 않는다.
+      correctIndex: draft.correctIndex,
+      explanation: draft.explanation,
       difficulty: data.difficulty,
       keywords: [],
     });

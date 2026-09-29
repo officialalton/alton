@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { SubjectKeyword } from "./subject-data";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
+import { loadLegacyProblemAnswers } from "@/lib/legacy-problem-answers";
 
 export type DocProblem = {
   id: string;
@@ -113,12 +114,14 @@ export async function loadCurriculumDocsByIds(
     ? await selectInChunks(sectionIds, (chunk) => supabase
         .from("problems")
         .select(
-          "id, section_id, format, passage, options, correct_index, explanation, difficulty"
+          "id, section_id, format, passage, options, difficulty"
         )
         .in("section_id", chunk))
     : { data: [] as never[] };
 
   const problemIds = (problems ?? []).map((p) => p.id);
+  // 정답·해설 컬럼은 authenticated SELECT 가 회수됐다 — 서버 admin 으로 읽는다(20261904000000).
+  const answers = await loadLegacyProblemAnswers(problemIds);
   const subjectIds = Array.from(new Set(docs.map((d) => d.subject_id)));
 
   // R9(Task 2) N+1 방지: 문서마다/섹션마다/문제마다 따로 조회하지 않고,
@@ -209,8 +212,8 @@ export async function loadCurriculumDocsByIds(
       format: p.format,
       passage: p.passage,
       options: p.options,
-      correctIndex: p.correct_index,
-      explanation: p.explanation,
+      correctIndex: answers.get(p.id)?.correctIndex ?? null,
+      explanation: answers.get(p.id)?.explanation ?? "",
       difficulty: p.difficulty,
       keywords: keywordsByProblem.get(p.id) ?? [],
     });
