@@ -59,7 +59,12 @@ test.afterEach(() => {
 
 // 매번 독립된 enrollment+assignment+reservation+session을 만들어 테스트끼리
 // 간섭하지 않게 한다(reservations_no_overlap 배타 제약 때문에도 필요).
-function makeFixture(sessionFinalStatus: string, hourFromNow: number) {
+// 예약 시각이 고정(now+500h…)이면 같은 선생님(박서연)에게 남은 이전 실행·다른 스펙의 예약과
+// reservations_no_overlap이 겹쳐 한 시간 안에 두 번 실행하면 실패한다 — 실행마다
+// 먼 미래의 무작위 구간으로 옮긴다(예약은 ledger FK 때문에 지울 수 없어 남는다).
+const RUN_HOUR_OFFSET = 2000 + Math.floor(Math.random() * 6000);
+function makeFixture(sessionFinalStatus: string, baseHourFromNow: number) {
+  const hourFromNow = baseHourFromNow + RUN_HOUR_OFFSET;
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${CHILD_ID}', 'draft') returning id;`
   );

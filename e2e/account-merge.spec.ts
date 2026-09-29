@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import { test, expect } from "@playwright/test";
 import { DEV_PASSWORD } from "./helpers";
 
@@ -10,8 +11,11 @@ import { DEV_PASSWORD } from "./helpers";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const DUP_EMAIL = "dup-e2e@example.com";
-const DUP_ID = "e1111111-0000-0000-0000-000000000001";
+// 병합은 되돌릴 수 없고(원본 계정이 closed로 남는다) 감사 이력도 지울 수 없으므로,
+// 실행마다 새 중복 계정(UUID·이메일)을 만든다 — 고정 ID를 쓰면 두 번째 실행부터
+// "이미 병합된 계정입니다"로 실패한다.
+const DUP_ID = randomUUID();
+const DUP_EMAIL = `dup-e2e-${DUP_ID}@example.com`;
 const SURVIVOR_ID = "dddddddd-0000-0000-0000-000000000001";
 
 function setupDuplicateTeacher() {
