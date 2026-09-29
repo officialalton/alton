@@ -173,3 +173,76 @@ describe("contract_dispatch_jobs — 직접생성 경로 체험수업권 지급 
     expect(jobCount).toBe("1");
   });
 });
+
+function createConsultation(childId: string | null, outcome: string | null): string {
+  return psql(
+    `insert into consultations (contact_name, contact_email, child_id, outcome)
+     values ('outbox-상담', 'outbox-consult-${Date.now()}-${Math.random().toString(36).slice(2)}@example.com',
+       ${childId ? `'${childId}'` : "null"}, ${outcome ? `'${outcome}'::consult_outcome` : "null"}) returning id;`
+  );
+}
+
+function jobCount(childId: string, triggerType: string): string {
+  return psql(
+    `select count(*) from contract_dispatch_jobs where child_id = '${childId}' and trigger_type = '${triggerType}';`
+  );
+}
+
+describe("contract_dispatch_jobs — 상담사 '바로 정규로 진행'(regular_recommended) 큐잉", () => {
+  it("자녀가 이미 연결된 상담에 결과를 기록하면 즉시 1건 큐잉된다", () => {
+    const childId = createChildAuthProfile("outbox-정규즉시");
+    const consultationId = createConsultation(childId, null);
+    expect(jobCount(childId, "regular_recommended")).toBe("0");
+    psql(`update consultations set outcome = 'regular_recommended' where id = '${consultationId}';`);
+    expect(jobCount(childId, "regular_recommended")).toBe("1");
+  });
+
+  it("자녀 미확정이면 큐잉하지 않고, 나중에 자녀가 연결되는 순간 큐잉된다", () => {
+    const childId = createChildAuthProfile("outbox-정규지연");
+    const consultationId = createConsultation(null, "regular_recommended");
+    expect(jobCount(childId, "regular_recommended")).toBe("0");
+    psql(`update consultations set child_id = '${childId}' where id = '${consultationId}';`);
+    expect(jobCount(childId, "regular_recommended")).toBe("1");
+  });
+
+  it("outcome을 물려받은 자녀 카드가 insert되면 큐잉된다", () => {
+    const childId = createChildAuthProfile("outbox-정규카드");
+    createConsultation(childId, "regular_recommended");
+    expect(jobCount(childId, "regular_recommended")).toBe("1");
+  });
+
+  it("중복 이벤트(같은 값 재기록·다른 상담 카드·재연결)는 no-op이다(자녀당 1건)", () => {
+    const childId = createChildAuthProfile("outbox-정규중복");
+    const c1 = createConsultation(childId, "regular_recommended");
+    psql(`update consultations set outcome = 'regular_recommended', child_id = '${childId}' where id = '${c1}';`);
+    createConsultation(childId, "regular_recommended");
+    expect(jobCount(childId, "regular_recommended")).toBe("1");
+  });
+
+  it("체험 권장 등 다른 결과는 큐잉하지 않는다", () => {
+    const childId = createChildAuthProfile("outbox-체험권장");
+    createConsultation(childId, "trial_recommended");
+    createConsultation(childId, "on_hold");
+    expect(psql(`select count(*) from contract_dispatch_jobs where child_id = '${childId}';`)).toBe("0");
+  });
+});
+
+describe("claim_contract_dispatch_jobs — 원자적 claim", () => {
+  it("claim한 작업은 processing이 되어 두 번째 claim에 나오지 않는다", () => {
+    const childId = createChildAuthProfile("outbox-claim");
+    psql(`select enqueue_contract_dispatch_job('${childId}', 'direct_account_created');`);
+    const claimed = psql(`select id from claim_contract_dispatch_jobs(1000) where child_id = '${childId}';`);
+    expect(claimed).toMatch(/^[0-9a-f-]{36}$/);
+    expect(psql(`select status from contract_dispatch_jobs where child_id = '${childId}';`)).toBe("processing");
+    expect(psql(`select count(*) from claim_contract_dispatch_jobs(1000) where child_id = '${childId}';`)).toBe("0");
+  });
+
+  it("15분 넘게 processing인 작업은 다시 claim된다", () => {
+    const childId = createChildAuthProfile("outbox-claim-stale");
+    psql(`select enqueue_contract_dispatch_job('${childId}', 'direct_account_created');`);
+    psql(
+      `update contract_dispatch_jobs set status = 'processing', updated_at = now() - interval '20 minutes' where child_id = '${childId}';`
+    );
+    expect(psql(`select count(*) from claim_contract_dispatch_jobs(1000) where child_id = '${childId}';`)).toBe("1");
+  });
+});

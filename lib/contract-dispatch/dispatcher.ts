@@ -25,7 +25,7 @@ export type ContractDispatchJobRow = {
   id: string;
   child_id: string;
   subject_enrollment_id: string | null;
-  trigger_type: "completed_trial" | "direct_account_created";
+  trigger_type: "completed_trial" | "direct_account_created" | "regular_recommended";
   status: "queued" | "processing" | "sent" | "retryable_failed" | "permanent_failed";
   attempt_count: number;
   last_error: string | null;
@@ -181,11 +181,9 @@ export async function processContractDispatchQueue(
     return { enabled: false, processed: 0, sent: 0, failed: 0 };
   }
 
-  const { data: jobs } = await admin
-    .from("contract_dispatch_jobs")
-    .select("id, child_id, subject_enrollment_id")
-    .in("status", ["queued", "retryable_failed"])
-    .limit(50);
+  // 원자적 claim(for update skip locked) — 크론·관리자 버튼이 동시에 돌아도 같은 작업을 두 번 집지 않는다.
+  const { data: jobs, error } = await admin.rpc("claim_contract_dispatch_jobs", { p_limit: 50 });
+  if (error) throw new Error(error.message);
 
   let sent = 0;
   let failed = 0;
