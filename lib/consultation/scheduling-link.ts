@@ -7,6 +7,8 @@ import { createAdminClient } from "@/lib/supabase-admin";
 export const SCHEDULING_LINK_INVALID_MESSAGE = "유효하지 않거나 만료된 예약 링크입니다.";
 export const SCHEDULING_LINK_UNAVAILABLE_MESSAGE = "예약 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
 
+export const SCHEDULING_LINK_SLOT_TAKEN_MESSAGE = "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.";
+
 export type SchedulingLinkFailure = { ok: false; reason: "invalid_link" | "unavailable"; error: string };
 
 type RpcError = { code?: string; message?: string } | null;
@@ -18,6 +20,8 @@ export function toSchedulingLinkFailure(error: NonNullable<RpcError>, context: s
   if (message.includes("유효하지 않거나 만료된")) {
     return { ok: false, reason: "invalid_link", error: SCHEDULING_LINK_INVALID_MESSAGE };
   }
+  // 동시 확정 레이스: 사전 검사를 통과한 뒤 같은 컨설턴트의 시간이 먼저 잡히면 consultations_no_overlap(23P01).
+  if (error.code === "23P01") return { ok: false, reason: "unavailable", error: SCHEDULING_LINK_SLOT_TAKEN_MESSAGE };
   if (error.code === "P0001" && message) return { ok: false, reason: "unavailable", error: message };
   console.error(JSON.stringify({ type: "consultant_scheduling_link_rpc_failed", context, code: error.code ?? null, error: message }));
   return { ok: false, reason: "unavailable", error: SCHEDULING_LINK_UNAVAILABLE_MESSAGE };

@@ -153,7 +153,10 @@ export async function assignConsultationToConsultantAction(consultationId: strin
     p_field: "admissions_consultant",
     p_new_owner_id: consultantId,
   });
-  if (consultantError) throw new Error(consultantError.message);
+  if (consultantError) {
+    if (consultantError.code === "23P01") throw new Error("해당 컨설턴트에게 이미 같은 시간의 다른 상담이 있어 배정할 수 없습니다.");
+    throw new Error(consultantError.message);
+  }
 }
 
 /**

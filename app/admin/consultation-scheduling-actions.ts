@@ -217,7 +217,11 @@ export async function rescheduleConsultationRequest(consultationId: string, newS
     p_new_starts_at: newStartsAtIso,
     p_reason: reason || null,
   });
-  if (error) throw new Error(error.message);
+  if (error) {
+    // 사전 검사 이후 레이스로 같은 컨설턴트의 시간이 먼저 잡힌 경우(consultations_no_overlap).
+    if (error.code === "23P01") throw new Error("이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.");
+    throw new Error(error.message);
+  }
 
   // ALTON과 Google Calendar가 최종 일치하도록 처리(요구사항 3) — 이미 Calendar
   // 이벤트가 있으면 patch, 없으면(아직 미확정 requested 건의 시간 변경 등) 스킵.
