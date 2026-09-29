@@ -15,6 +15,8 @@ import {
   updateMeetingRequestStatus,
   scheduleMeetingRequest,
   assignMeetingRequestConsultant,
+  cancelAndRerequestMeetingRequest,
+  resyncMeetingRequestCalendar,
   addMeetingAvailabilityRule,
   deactivateMeetingAvailabilityRule,
   addMeetingAvailabilityException,
@@ -335,6 +337,26 @@ function MeetingOperations() {
                 {m.preferredContactTime ? ` · ${m.preferredContactTime}` : ""}
               </p>
             )}
+            {m.rescheduledFromId && (
+              <p className="text-[11.5px] text-grey-500 mt-0.5">이전 미팅을 취소하고 다시 신청한 요청입니다. 담당 컨설턴트를 배정한 뒤 일정을 다시 확정하세요.</p>
+            )}
+            {(m.googleSyncStatus === "failed" || m.googleSyncStatus === "reconciliation_needed") && (
+              <div className="flex items-center gap-2 mt-2 bg-grey-100 rounded-lg px-3 py-1.5" data-testid={`sync-status-${m.id}`}>
+                <span className="text-[11.5px] text-red">
+                  {m.googleSyncStatus === "reconciliation_needed"
+                    ? `Google 동기화 실패 — 자동 재시도 중단(${m.googleSyncRetryCount}/5회), 확인이 필요합니다.`
+                    : `Google 동기화 실패 — 자동 재시도 대기(${m.googleSyncRetryCount}/5회).`}
+                  {m.googleSyncLastError ? ` 사유: ${m.googleSyncLastError}` : ""}
+                </span>
+                <button
+                  disabled={busyId === m.id}
+                  onClick={() => withBusy(m.id, async () => { await resyncMeetingRequestCalendar(m.id); })}
+                  className="text-[11px] font-bold text-ink underline shrink-0 disabled:opacity-50"
+                >
+                  Google 재동기화
+                </button>
+              </div>
+            )}
             {isDelegated && (
               <div className="flex items-center gap-2 mt-2 bg-grey-100 rounded-lg px-3 py-1.5">
                 <span className="text-[11.5px] text-grey-500">담당 컨설턴트 {m.consultantName ?? "미상"}님이 처리 중입니다.</span>
@@ -468,6 +490,16 @@ function MeetingOperations() {
                   </>
                 )
               ) : null}
+              {m.status === "scheduled" && (
+                <button
+                  disabled={busyId === m.id}
+                  title="일정을 취소(Google 일정 삭제)하고, 담당 컨설턴트·시간이 비어 있는 새 요청을 만듭니다"
+                  className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
+                  onClick={() => withBusy(m.id, async () => { await cancelAndRerequestMeetingRequest(m.id); })}
+                >
+                  취소 후 재신청
+                </button>
+              )}
               {m.status !== "completed" && m.status !== "cancelled" && (
                 <button
                   disabled={busyId === m.id}

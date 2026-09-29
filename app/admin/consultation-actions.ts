@@ -7,6 +7,7 @@ import type { CompanyApprovalForTemplate } from "@/lib/contracts/family-contract
 import { companySignOffContractVersionInternal, sendContractForSignatureInternal } from "@/lib/contract-send-internal";
 import { processOneDriveArtifact, MAX_RETRY_COUNT, type DriveArtifactRow } from "@/lib/drive-artifacts";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { cancelSyncedConsultationCalendarEvent } from "@/lib/consultation/calendar-sync";
 
 // R3: 상담(consultation) → 체험(trial) → 제안서(proposal) → 계약(contract) 최소
 // 동작 흐름. 스키마 소스 오브 트루스는 supabase/migrations/20260912000000_r3_...sql.
@@ -90,6 +91,8 @@ export async function cancelConsultation(consultationId: string, reason?: string
     })
     .eq("id", consultationId);
   if (error) throw new Error(error.message);
+  // 2026-09-29 — 취소된 상담의 Google 이벤트도 지운다(cancelConsultationRequest 와 같은 공유 함수).
+  await cancelSyncedConsultationCalendarEvent(consultationId);
 }
 
 /** 상담 노쇼 처리(예약된 상담에 연락 두절/미참석). */
