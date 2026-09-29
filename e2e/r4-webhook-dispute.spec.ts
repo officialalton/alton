@@ -127,6 +127,10 @@ function disputePayload(opts: {
   };
 }
 
+// 테스트들이 순서에 의존한다(created가 만든 분쟁 행을 updated/closed가 갱신) — 병렬
+// 워커로 나뉘면 beforeAll의 고정 CHILD_ID 삽입이 중복되거나 행이 아직 없어 실패한다.
+test.describe.configure({ mode: "serial" });
+
 test.describe("R4 후속 — Stripe 분쟁 웹훅(payment_disputes upsert)", () => {
   test.skip(!WEBHOOK_SECRET, "STRIPE_WEBHOOK_SECRET이 로컬 env에 없어 웹훅 서명 시뮬레이션을 할 수 없습니다.");
 

@@ -38,23 +38,24 @@ test.describe("R4 — 관리자 수업권 원장: 상품·가격 버전 생성",
   });
 
   test.afterAll(() => {
-    if (createdVersionId) {
-      // 새 버전 생성 시 30일 고지 아웃박스(price_change_notices)에 관련 행이
-      // 자동으로 생겨 FK로 물려있어 먼저 지운다.
-      psql(`delete from price_change_notices where product_version_id = '${createdVersionId}';`);
-      psql(`delete from entitlement_product_versions where id = '${createdVersionId}';`);
-    }
+    // 테스트가 중간에 실패해 createdVersionId를 못 받았어도 2099년 이후 구간에 이 스펙이
+    // 만든 버전이 남지 않도록 구간으로 정리한다(현재 유효 버전과는 겹치지 않는 먼 미래 구간).
+    // 새 버전 생성 시 30일 고지 아웃박스(price_change_notices)에 관련 행이 자동으로 생겨
+    // FK로 물려있어 먼저 지운다.
+    const staleFilter = `entitlement_product_id = '${productId}' and effective_from >= '${FAR_FUTURE_BOUNDARY}'`;
+    psql(`delete from price_change_notices where product_version_id in (select id from entitlement_product_versions where ${staleFilter});`);
+    psql(`delete from entitlement_product_versions where ${staleFilter};`);
     psql(
       `update entitlement_product_versions set effective_until = null where id = '${originalVersionId}';`
     );
   });
 
   test("새 가격 버전 생성 폼 제출 → 목록에 새 버전이 나타난다", async ({ page }) => {
-    test.setTimeout(60000);
+    test.setTimeout(90000);
 
     await loginAs(page, ACCOUNTS.admin);
     await page.goto("/admin?tab=entitlements");
-    await expect(page.getByRole("heading", { name: "수업권 원장" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Entitlements", level: 1 })).toBeVisible();
 
     // 기본 서브탭이 "상품·가격 버전"이지만 명시적으로 클릭해 상태를 확실히 한다.
     await page.getByRole("button", { name: "상품·가격 버전" }).click();
@@ -66,12 +67,19 @@ test.describe("R4 — 관리자 수업권 원장: 상품·가격 버전 생성",
     await page.locator('input[type="datetime-local"]').first().fill(NEW_VERSION_EFFECTIVE_FROM);
 
     await page.getByRole("button", { name: "가격 버전 생성" }).last().click();
-    await page.waitForTimeout(2500);
-
+    // 서버 액션 완료를 고정 대기 대신 DB 폴링으로 기다린다(dev 서버 부하에 견디도록).
+    await expect
+      .poll(
+        () =>
+          psql(
+            `select id from entitlement_product_versions where entitlement_product_id = '${productId}' and id != '${originalVersionId}' order by version_number desc limit 1;`
+          ).trim(),
+        { timeout: 30000, message: "새 가격 버전이 DB에 생성되지 않았습니다" }
+      )
+      .toMatch(/^[0-9a-f-]{36}$/);
     createdVersionId = psql(
       `select id from entitlement_product_versions where entitlement_product_id = '${productId}' and id != '${originalVersionId}' order by version_number desc limit 1;`
     ).trim();
-    expect(createdVersionId, "새 가격 버전이 DB에 생성되지 않았습니다").toMatch(/^[0-9a-f-]{36}$/);
     const versionNumber = psql(
       `select version_number from entitlement_product_versions where id = '${createdVersionId}';`
     ).trim();

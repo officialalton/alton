@@ -42,6 +42,11 @@ const STUDENT_ID = "eeee1111-0000-0000-0000-000000000001"; // E2E 동의테스�
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const POLICY_ID = "e2222222-0000-0000-0000-000000000001";
+// 동의 버튼 문구는 "지금 활성인(retired_at is null 중 effective_from이 가장 최신인)
+// 정책 제목 + 에 동의"다. 같은 로컬 DB에서 다른 통합 테스트(vitest)가 더 최신
+// 정책 행을 남길 수 있어 e2e-v1 제목을 고정하지 않고, 어떤 활성 정책이든 그 정책에
+// 동의하는 버튼을 누른다(setup()이 최소 하나의 활성 정책이 있도록 보장한다).
+const CONSENT_BUTTON = /에 동의$/;
 
 function setup() {
   const sql = `
@@ -126,7 +131,7 @@ test.describe("R2 Task 6 — 13세 미만 보호자 동의 — 실제 브라우�
 
     const studentCard = page.getByTestId(`consent-card-${STUDENT_ID}`);
     await studentCard
-      .getByRole("button", { name: /ALTON 개인정보 처리방침 e2e-v1에 동의/ })
+      .getByRole("button", { name: CONSENT_BUTTON })
       .click();
     await expect(studentCard.getByText("동의 완료").first()).toBeVisible();
 
@@ -146,7 +151,7 @@ test.describe("R2 Task 6 — 13세 미만 보호자 동의 — 실제 브라우�
     await page.goto("/parent?tab=consent");
     const studentCard = page.getByTestId(`consent-card-${STUDENT_ID}`);
     await studentCard
-      .getByRole("button", { name: /ALTON 개인정보 처리방침 e2e-v1에 동의/ })
+      .getByRole("button", { name: CONSENT_BUTTON })
       .click();
     await expect(studentCard.getByText("동의 완료").first()).toBeVisible();
 
