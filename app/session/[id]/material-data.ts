@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
+import { loadLegacyProblemAnswers } from "@/lib/legacy-problem-answers";
 
 export type MaterialProblem = {
   id: string;
@@ -98,13 +99,15 @@ export async function loadMaterialData(
     ? await selectInChunks(sectionIds, (chunk) => supabase
         .from("problems")
         .select(
-          "id, format, passage, options, correct_index, explanation, difficulty, skill_type, section_id"
+          "id, format, passage, options, difficulty, skill_type, section_id"
         )
         .in("section_id", chunk)
         .eq("status", "confirmed"))
     : { data: [] as never[] };
 
   const problemIds = (problems ?? []).map((p) => p.id);
+  // 정답·해설은 컬럼 권한이 회수돼 서버 admin 으로만 읽는다. 화면 노출은 호출부가 기존 규칙으로 가린다.
+  const answers = await loadLegacyProblemAnswers(problemIds);
 
   const { data: attempts } = problemIds.length
     ? await selectInChunks(problemIds, (chunk) => supabase
@@ -133,8 +136,8 @@ export async function loadMaterialData(
       format: p.format,
       passage: p.passage,
       options: p.options,
-      correctIndex: p.correct_index,
-      explanation: p.explanation,
+      correctIndex: answers.get(p.id)?.correctIndex ?? null,
+      explanation: answers.get(p.id)?.explanation ?? "",
       difficulty: p.difficulty,
       skillType: p.skill_type,
       priorWrongCount: wrongCount,

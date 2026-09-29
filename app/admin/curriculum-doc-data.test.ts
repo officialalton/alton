@@ -1,5 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { loadAllCurriculumDocs } from "./curriculum-doc-data";
+
+// 정답·해설은 컬럼 권한이 회수돼 서버 admin 으로 읽는다(별도 조회) — 이 테스트의 조회 횟수는 사용자 클라이언트 기준.
+vi.mock("@/lib/legacy-problem-answers", () => ({
+  loadLegacyProblemAnswers: async () => new Map(),
+}));
 
 function makeSupabaseMock(opts?: { docCount?: number; sectionsPerDoc?: number; problemsPerSection?: number }) {
   const docCount = opts?.docCount ?? 1;
