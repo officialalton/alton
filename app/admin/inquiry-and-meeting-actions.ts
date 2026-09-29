@@ -141,6 +141,8 @@ export type AdminMeetingRequest = {
   // 전체 조회 자체는 계속 이 목록에서 가능하다(숨기지 않음).
   consultantId: string | null;
   consultantName: string | null;
+  // 배정 제안 — 가족 자녀의 담당 컨설턴트(consultant_assignments). 관리자는 어떤 활성 컨설턴트든 고를 수 있다.
+  suggestedConsultantId: string | null;
   subject: string | null;
   content: string | null;
   contactPreference: "phone" | "message" | "either" | null;
@@ -171,6 +173,30 @@ async function loadMeetingRequestsForAdmin(
     // 먼저 나온다.
     .limit(500);
   if (error) throw new Error(error.message);
+  // 배정 제안(미배정 행만): 가족 자녀 → 담당 컨설턴트. 쿼리 2개(배치).
+  const suggestions = new Map<string, string>();
+  const unassignedHouseholds = [...new Set((data ?? []).filter((r) => !r.consultant_id).map((r) => r.household_id as string))];
+  if (unassignedHouseholds.length > 0) {
+    const { data: kids, error: kidsError } = await admin
+      .from("household_members")
+      .select("household_id, profile_id")
+      .eq("role", "child")
+      .in("household_id", unassignedHouseholds);
+    if (kidsError) throw new Error(kidsError.message);
+    const kidIds = (kids ?? []).map((k) => k.profile_id as string);
+    if (kidIds.length > 0) {
+      const { data: assigns, error: assignsError } = await admin
+        .from("consultant_assignments")
+        .select("student_id, consultant_id")
+        .in("student_id", kidIds);
+      if (assignsError) throw new Error(assignsError.message);
+      const byStudent = new Map((assigns ?? []).map((a) => [a.student_id as string, a.consultant_id as string]));
+      for (const k of kids ?? []) {
+        const c = byStudent.get(k.profile_id as string);
+        if (c && !suggestions.has(k.household_id as string)) suggestions.set(k.household_id as string, c);
+      }
+    }
+  }
   return (data ?? []).map((r) => {
     const householdRel = r.household as { guardian?: { name?: string } | { name?: string }[] } | { guardian?: { name?: string } | { name?: string }[] }[] | null;
     const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
@@ -187,6 +213,7 @@ async function loadMeetingRequestsForAdmin(
       childName: child?.name ?? null,
       consultantId: r.consultant_id,
       consultantName: consultant?.name ?? null,
+      suggestedConsultantId: r.consultant_id ? null : (suggestions.get(r.household_id as string) ?? null),
       subject: r.subject,
       content: r.content,
       contactPreference: r.contact_preference,
@@ -406,8 +433,11 @@ async function loadMeetingAvailabilityExceptions(
   return (data ?? []) as MeetingAvailabilityException[];
 }
 
+export type MeetingConsultantOption = { id: string; name: string | null };
+
 export type MeetingOperationsDashboard = {
   requests: AdminMeetingRequest[];
+  consultants: MeetingConsultantOption[];
   rules: MeetingAvailabilityRule[];
   exceptions: MeetingAvailabilityException[];
 };
@@ -419,12 +449,34 @@ export type MeetingOperationsDashboard = {
 export async function loadMeetingOperationsDashboardAction(): Promise<MeetingOperationsDashboard> {
   await requireAdmin();
   const admin = createAdminClient();
-  const [requests, rules, exceptions] = await Promise.all([
+  const [requests, consultants, rules, exceptions] = await Promise.all([
     loadMeetingRequestsForAdmin(admin),
+    loadConsultantOptions(admin),
     loadMeetingAvailabilityRules(admin),
     loadMeetingAvailabilityExceptions(admin),
   ]);
-  return { requests, rules, exceptions };
+  return { requests, consultants, rules, exceptions };
+}
+
+async function loadConsultantOptions(admin: ReturnType<typeof createAdminClient>): Promise<MeetingConsultantOption[]> {
+  const { data, error } = await admin.from("profiles").select("id, name").eq("role", "consultant").order("name", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []) as MeetingConsultantOption[];
+}
+
+// 2026-09-29 오너 규칙 — 미팅은 배정된 컨설턴트와만. 관리자만 배정·변경(확정 전까지)한다.
+// 배정만으로는 시간·Calendar 이벤트를 만들지 않는다. 시간이 있는 옛 미팅이면 DB 트리거가 겹침을 거절한다.
+export async function assignMeetingRequestConsultant(params: { meetingRequestId: string; consultantId: string }): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("admin_assign_meeting_consultant", {
+    p_meeting_request_id: params.meetingRequestId,
+    p_consultant_id: params.consultantId,
+    p_reason: null,
+  });
+  if (error) {
+    if (error.code === "23P01") throw new Error(`해당 컨설턴트에게 이미 같은 시간의 일정이 있어 배정할 수 없습니다. (${error.message})`);
+    throw new Error(error.message);
+  }
 }
 
 export async function addMeetingAvailabilityException(params: {

@@ -21,7 +21,10 @@ export function toSchedulingLinkFailure(error: NonNullable<RpcError>, context: s
     return { ok: false, reason: "invalid_link", error: SCHEDULING_LINK_INVALID_MESSAGE };
   }
   // 동시 확정 레이스: 사전 검사를 통과한 뒤 같은 컨설턴트의 시간이 먼저 잡히면 consultations_no_overlap(23P01).
-  if (error.code === "23P01") return { ok: false, reason: "unavailable", error: SCHEDULING_LINK_SLOT_TAKEN_MESSAGE };
+  // 미팅과 겹친 경우(consultations_no_meeting_overlap, 20261913000000)는 DB 문구를 그대로 쓴다.
+  if (error.code === "23P01") {
+    return { ok: false, reason: "unavailable", error: message.includes("미팅") ? message : SCHEDULING_LINK_SLOT_TAKEN_MESSAGE };
+  }
   if (error.code === "P0001" && message) return { ok: false, reason: "unavailable", error: message };
   console.error(JSON.stringify({ type: "consultant_scheduling_link_rpc_failed", context, code: error.code ?? null, error: message }));
   return { ok: false, reason: "unavailable", error: SCHEDULING_LINK_UNAVAILABLE_MESSAGE };

@@ -14,6 +14,7 @@ import {
   loadMeetingOperationsDashboardAction,
   updateMeetingRequestStatus,
   scheduleMeetingRequest,
+  assignMeetingRequestConsultant,
   addMeetingAvailabilityRule,
   deactivateMeetingAvailabilityRule,
   addMeetingAvailabilityException,
@@ -262,6 +263,9 @@ function MeetingOperations() {
   const meetings = dashboard?.requests ?? null;
   const rules = dashboard?.rules ?? [];
   const exceptions = dashboard?.exceptions ?? [];
+  const consultants = dashboard?.consultants ?? [];
+  // 미팅별 담당 컨설턴트 선택값(미선택이면 제안값 → 현재 담당자 순으로 표시).
+  const [assignPick, setAssignPick] = useState<Record<string, string>>({});
   const [mutationError, setMutationError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [ruleFormOpen, setRuleFormOpen] = useState(false);
@@ -342,6 +346,37 @@ function MeetingOperations() {
                     관리자 개입
                   </button>
                 )}
+              </div>
+            )}
+            {(m.status === "requested" || m.status === "confirming" || m.status === "scheduling") && (
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
+                <label htmlFor={`assign-${m.id}`} className="text-[11.5px] font-bold text-grey-500">담당 컨설턴트</label>
+                <select
+                  id={`assign-${m.id}`}
+                  value={assignPick[m.id] ?? m.consultantId ?? m.suggestedConsultantId ?? ""}
+                  onChange={(e) => setAssignPick((prev) => ({ ...prev, [m.id]: e.target.value }))}
+                  disabled={busyId === m.id}
+                  className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
+                >
+                  <option value="">선택</option>
+                  {consultants.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name ?? c.id.slice(0, 8)}{c.id === m.suggestedConsultantId ? " (가족 담당)" : ""}
+                    </option>
+                  ))}
+                </select>
+                {(() => {
+                  const picked = assignPick[m.id] ?? m.consultantId ?? m.suggestedConsultantId ?? "";
+                  return (
+                    <button
+                      disabled={busyId === m.id || !picked || picked === m.consultantId}
+                      className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                      onClick={() => withBusy(m.id, () => assignMeetingRequestConsultant({ meetingRequestId: m.id, consultantId: picked }))}
+                    >
+                      {m.consultantId ? "담당자 변경" : "담당자 배정"}
+                    </button>
+                  );
+                })()}
               </div>
             )}
             {showActions && (
