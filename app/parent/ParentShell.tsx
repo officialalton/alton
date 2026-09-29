@@ -404,7 +404,7 @@ export default function ParentShell({
         badgeCounts={{ consult: messengerUnread }}
       />
 
-      <div className="flex-1 flex flex-col pb-16 md:pb-0">
+      <div className="flex-1 min-w-0 flex flex-col pb-16 md:pb-0">
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴·자녀 전환이 사이드바로
             옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 자녀
             전환·계정 메뉴만 담은 얇은 바를 여기 남긴다. */}

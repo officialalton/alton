@@ -16,7 +16,8 @@ import MockExamResultView from "./MockExamResultView";
 export default async function StudentMockExamAttemptPage({ params }: { params: Promise<{ attemptId: string }> }) {
   const { attemptId } = await params;
   const { user, supabase } = await requireUser();
-  const attempt = await loadMockExamAttemptDetail(supabase, attemptId);
+  // RPC 가 권한 없음·잘못된 id 로 오류를 던지면 500 대신 404 (남의 응시 URL 을 직접 열 때).
+  const attempt = await loadMockExamAttemptDetail(supabase, attemptId).catch(() => null);
   if (!attempt || attempt.studentId !== user.id) notFound();
 
   // 2026-09-21(UAT 지적) — 이 라우트는 AdminShell/StudentShell 밖 독립 진입점이라 왼쪽

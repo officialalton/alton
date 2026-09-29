@@ -90,6 +90,29 @@ export async function loadEmailById(userIds: string[]): Promise<Map<string, stri
   return emailById;
 }
 
+// 2026-09-29(QA 포털 점검) — `.in(col, ids)` 는 id 가 ~200개를 넘으면 PostgREST GET URL 이
+// 너무 길어져("URI too long") 실패한다. 학부모 379명인 로컬 DB 에서 관리자 Users 탭이
+// "불러오지 못했습니다"로 죽었고, 오류를 확인하지 않는 학생·교사 조회는 관계·과목 열이
+// 조용히 비었다. id 목록을 나눠 조회하고 합친다(청크 안에서 정렬은 유지되고, 한 id 의
+// 행은 한 청크에만 있으므로 id 별 순서도 그대로다).
+const IN_CHUNK_SIZE = 100;
+
+type ChunkResult<T> = PromiseLike<{ data: T[] | null; error: { code?: string; message?: string } | null }>;
+
+export async function selectInChunks<T>(
+  ids: string[],
+  run: (chunk: string[]) => ChunkResult<T>,
+  size: number = IN_CHUNK_SIZE
+): Promise<{ data: T[]; error: { code?: string; message?: string } | null }> {
+  const rows: T[] = [];
+  for (let i = 0; i < ids.length; i += size) {
+    const { data, error } = await run(ids.slice(i, i + size));
+    if (error) return { data: rows, error };
+    if (data) rows.push(...data);
+  }
+  return { data: rows, error: null };
+}
+
 // P4-1(B) — 아카이브된 가구 id 집합. 관리자 목록에서 그 가구의 보호자·자녀를
 // 제외하기 위해 목록당 왕복 1회만 추가한다(아카이브된 가구만 읽으므로 보통 0~수십 행).
 export async function loadArchivedHouseholdIds(supabase: SupabaseClient): Promise<Set<string>> {
@@ -124,11 +147,9 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
   // (2026-08-30 R2 Task 3) 가족 관계는 households/household_members가 원본이다
   // (guardian_students는 동결). 계정 정보(parents)는 그대로 두고 관계 조인만 교체.
   t = Date.now();
-  const { data: guardianLinks, error: guardianError } = await supabase
-    .from("household_members")
-    .select("profile_id, household_id")
-    .eq("role", "guardian")
-    .in("profile_id", parentIds);
+  const { data: guardianLinks, error: guardianError } = await selectInChunks<{ profile_id: string; household_id: string }>(parentIds, (chunk) =>
+    supabase.from("household_members").select("profile_id, household_id").eq("role", "guardian").in("profile_id", chunk)
+  );
   logUsersTabStage("users_tab.parents.guardian_links", t, {
     count: guardianLinks?.length ?? 0,
     errorCode: guardianError?.code ?? null,
@@ -144,11 +165,9 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
 
   const householdIds = Array.from(new Set((guardianLinks ?? []).map((l) => l.household_id)));
   t = Date.now();
-  const { data: childLinks, error: childError } = await supabase
-    .from("household_members")
-    .select("household_id, child:profiles(name)")
-    .eq("role", "child")
-    .in("household_id", householdIds.length > 0 ? householdIds : [""]);
+  const { data: childLinks, error: childError } = await selectInChunks<{ household_id: string; child: unknown }>(householdIds, (chunk) =>
+    supabase.from("household_members").select("household_id, child:profiles(name)").eq("role", "child").in("household_id", chunk)
+  );
   logUsersTabStage("users_tab.parents.child_links", t, {
     count: childLinks?.length ?? 0,
     errorCode: childError?.code ?? null,
@@ -218,11 +237,9 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   const studentIds = students.map((s) => s.id);
 
   // (2026-08-30 R2 Task 3) household_members가 관계 원본이다(guardian_students는 동결).
-  const { data: childLinks } = await supabase
-    .from("household_members")
-    .select("profile_id, household_id")
-    .eq("role", "child")
-    .in("profile_id", studentIds);
+  const { data: childLinks } = await selectInChunks<{ profile_id: string; household_id: string }>(studentIds, (chunk) =>
+    supabase.from("household_members").select("profile_id, household_id").eq("role", "child").in("profile_id", chunk)
+  );
 
   const householdIdByStudent = new Map<string, string>();
   for (const l of childLinks ?? []) {
@@ -238,11 +255,9 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   if (activeStudents.length === 0) return [];
 
   const householdIds = Array.from(new Set(Array.from(householdIdByStudent.values())));
-  const { data: guardianLinks } = await supabase
-    .from("household_members")
-    .select("household_id, guardian:profiles(name)")
-    .eq("role", "guardian")
-    .in("household_id", householdIds.length > 0 ? householdIds : [""]);
+  const { data: guardianLinks } = await selectInChunks<{ household_id: string; guardian: unknown }>(householdIds, (chunk) =>
+    supabase.from("household_members").select("household_id, guardian:profiles(name)").eq("role", "guardian").in("household_id", chunk)
+  );
 
   const guardianNamesByHousehold = new Map<string, string[]>();
   for (const l of guardianLinks ?? []) {
@@ -260,11 +275,9 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
     );
   }
 
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("student_id, subject:subjects(name)")
-    .in("student_id", studentIds)
-    .eq("status", "active");
+  const { data: enrollments } = await selectInChunks<{ student_id: string; subject: unknown }>(studentIds, (chunk) =>
+    supabase.from("enrollments").select("student_id, subject:subjects(name)").in("student_id", chunk).eq("status", "active")
+  );
   const subjectsByStudent = new Map<string, string[]>();
   for (const e of enrollments ?? []) {
     const list = subjectsByStudent.get(e.student_id) ?? [];
@@ -274,19 +287,17 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
 
   const emailById = await loadEmailById(studentIds);
 
-  const { data: apCourses } = await supabase
-    .from("student_ap_courses")
-    .select("student_id")
-    .in("student_id", studentIds);
+  const { data: apCourses } = await selectInChunks<{ student_id: string }>(studentIds, (chunk) =>
+    supabase.from("student_ap_courses").select("student_id").in("student_id", chunk)
+  );
   const apCourseCountByStudent = new Map<string, number>();
   for (const row of apCourses ?? []) {
     apCourseCountByStudent.set(row.student_id, (apCourseCountByStudent.get(row.student_id) ?? 0) + 1);
   }
 
-  const { data: activities } = await supabase
-    .from("student_extracurricular_activities")
-    .select("student_id")
-    .in("student_id", studentIds);
+  const { data: activities } = await selectInChunks<{ student_id: string }>(studentIds, (chunk) =>
+    supabase.from("student_extracurricular_activities").select("student_id").in("student_id", chunk)
+  );
   const extracurricularCountByStudent = new Map<string, number>();
   for (const row of activities ?? []) {
     extracurricularCountByStudent.set(
@@ -331,11 +342,9 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
   if (!teachers || teachers.length === 0) return [];
 
   const teacherIds = teachers.map((t) => t.id);
-  const { data: enrollments } = await supabase
-    .from("enrollments")
-    .select("teacher_id, subject:subjects(name)")
-    .in("teacher_id", teacherIds)
-    .eq("status", "active");
+  const { data: enrollments } = await selectInChunks<{ teacher_id: string; subject: unknown }>(teacherIds, (chunk) =>
+    supabase.from("enrollments").select("teacher_id, subject:subjects(name)").in("teacher_id", chunk).eq("status", "active")
+  );
   const subjectsByTeacher = new Map<string, string[]>();
   for (const e of enrollments ?? []) {
     const list = subjectsByTeacher.get(e.teacher_id) ?? [];
@@ -344,19 +353,17 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     subjectsByTeacher.set(e.teacher_id, list);
   }
 
-  const { data: warnings } = await supabase
-    .from("teacher_qc_warnings")
-    .select("teacher_id")
-    .in("teacher_id", teacherIds);
+  const { data: warnings } = await selectInChunks<{ teacher_id: string }>(teacherIds, (chunk) =>
+    supabase.from("teacher_qc_warnings").select("teacher_id").in("teacher_id", chunk)
+  );
   const warningCountByTeacher = new Map<string, number>();
   for (const w of warnings ?? []) {
     warningCountByTeacher.set(w.teacher_id, (warningCountByTeacher.get(w.teacher_id) ?? 0) + 1);
   }
 
-  const { data: templates } = await supabase
-    .from("teacher_curriculum_templates")
-    .select("teacher_id, subject_id")
-    .in("teacher_id", teacherIds);
+  const { data: templates } = await selectInChunks<{ teacher_id: string; subject_id: string }>(teacherIds, (chunk) =>
+    supabase.from("teacher_curriculum_templates").select("teacher_id, subject_id").in("teacher_id", chunk)
+  );
   const assignedSubjectIdsByTeacher = new Map<string, string[]>();
   for (const t of templates ?? []) {
     const list = assignedSubjectIdsByTeacher.get(t.teacher_id) ?? [];
@@ -395,11 +402,9 @@ export async function loadStudentCreditHistoryBatch(
   for (const id of studentIds) result[id] = [];
   if (studentIds.length === 0) return result;
 
-  const { data } = await supabase
-    .from("credit_transactions")
-    .select("id, student_id, type, amount, reason, created_at")
-    .in("student_id", studentIds)
-    .order("created_at", { ascending: false });
+  const { data } = await selectInChunks<{ id: string; student_id: string; type: CreditTransaction["type"]; amount: number; reason: string | null; created_at: string }>(studentIds, (chunk) =>
+    supabase.from("credit_transactions").select("id, student_id, type, amount, reason, created_at").in("student_id", chunk).order("created_at", { ascending: false })
+  );
 
   for (const t of data ?? []) {
     (result[t.student_id] ??= []).push({
@@ -421,11 +426,9 @@ export async function loadTeacherQcWarningsBatch(
   for (const id of teacherIds) result[id] = [];
   if (teacherIds.length === 0) return result;
 
-  const { data } = await supabase
-    .from("teacher_qc_warnings")
-    .select("id, teacher_id, type, detail, occurred_at, student:students(profile:profiles(name))")
-    .in("teacher_id", teacherIds)
-    .order("occurred_at", { ascending: false });
+  const { data } = await selectInChunks<{ id: string; teacher_id: string; type: QcWarning["type"]; detail: string | null; occurred_at: string; student: unknown }>(teacherIds, (chunk) =>
+    supabase.from("teacher_qc_warnings").select("id, teacher_id, type, detail, occurred_at, student:students(profile:profiles(name))").in("teacher_id", chunk).order("occurred_at", { ascending: false })
+  );
 
   for (const w of data ?? []) {
     (result[w.teacher_id] ??= []).push({

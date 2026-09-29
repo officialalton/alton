@@ -1,5 +1,6 @@
 "use client";
 
+import { useHighlightSupported } from "@/lib/use-highlight-supported";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
@@ -88,7 +89,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
   // 충돌하지 않는다. Range는 실제 DOM 노드를 참조하므로 문항이 바뀌어 내용이 다시
   // 그려지면 자연히 무효화된다 — 서버에 저장하지 않는 화면 단위 기능이다.
   const [highlightMode, setHighlightMode] = useState(false);
-  const highlightSupported = typeof window !== "undefined" && "highlights" in CSS;
+  const highlightSupported = useHighlightSupported();
   const highlightObjRef = useRef<Highlight | null>(null);
   const passageRef = useRef<HTMLDivElement | null>(null);
 
