@@ -10,6 +10,7 @@ import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import {
   assembleSection,
+  moduleEligibility,
   type AssembledItem,
   type DifficultyTier,
   type EligibleProblem,
@@ -63,13 +64,12 @@ export async function listMockExamSets(
   const { data: sets, error } = await query;
   if (error) throw new Error(error.message);
 
-  const { data: itemCounts } = await db.from("mock_exam_set_items").select("exam_set_id, section");
+  // 문항 수는 DB에서 집계한다 — 전체 행을 읽어 세면 PostgREST 기본 1,000행 상한에 걸려 최신 세트가 0으로 보인다.
+  const { data: itemCounts, error: countsErr } = await db.rpc("mock_exam_set_item_counts");
+  if (countsErr) throw new Error(countsErr.message);
   const countsBySet = new Map<string, { rw: number; math: number }>();
-  for (const row of itemCounts ?? []) {
-    const entry = countsBySet.get(row.exam_set_id) ?? { rw: 0, math: 0 };
-    if (row.section === "rw") entry.rw += 1;
-    else entry.math += 1;
-    countsBySet.set(row.exam_set_id, entry);
+  for (const row of (itemCounts ?? []) as { exam_set_id: string; rw_count: number; math_count: number }[]) {
+    countsBySet.set(row.exam_set_id, { rw: row.rw_count, math: row.math_count });
   }
 
   return (sets ?? []).map((s) => ({
@@ -89,19 +89,32 @@ export async function listMockExamSets(
   }));
 }
 
-async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, domains: string[]): Promise<EligibleProblem[]> {
-  // 공개 문항만: problems.status='confirmed', archived_at is null, 공개된(published) 버전 존재.
-  const { data, error } = await db
+function fetchEligiblePage(db: ReturnType<typeof createAdminClient>, domains: string[], from: number, to: number) {
+  return db
     .from("problems")
     .select(
-      `id, sat_domain, skill_code, format,
+      `id, sat_domain, skill_code, format, similarity_group,
        problem_versions!problem_versions_problem_id_fkey!inner(id, status, difficulty)`,
     )
     .in("sat_domain", domains)
     .eq("status", "confirmed")
     .is("archived_at", null)
-    .eq("problem_versions.status", "published");
-  if (error) throw new Error(error.message);
+    .eq("problem_versions.status", "published")
+    .order("id", { ascending: true })
+    .range(from, to);
+}
+
+async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, domains: string[]): Promise<EligibleProblem[]> {
+  // 공개 문항만: problems.status='confirmed', archived_at is null, 공개된(published) 버전 존재.
+  // PostgREST 기본 1,000행 상한: 문제은행이 커지면 후보가 조용히 잘려 skill·난이도 셀이 비므로 페이지를 돌며 전부 읽는다.
+  const PAGE = 1000;
+  const data: NonNullable<Awaited<ReturnType<typeof fetchEligiblePage>>["data"]> = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data: page, error } = await fetchEligiblePage(db, domains, from, from + PAGE - 1);
+    if (error) throw new Error(error.message);
+    data.push(...(page ?? []));
+    if (!page || page.length < PAGE) break;
+  }
 
   const eligible: EligibleProblem[] = [];
   for (const row of data ?? []) {
@@ -120,6 +133,7 @@ async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, d
       skillCode: row.skill_code,
       difficulty,
       format: row.format,
+      similarityGroup: row.similarity_group ?? null,
     });
   }
   return eligible;
@@ -151,8 +165,32 @@ async function fetchAlreadyUsedProblemIds(db: ReturnType<typeof createAdminClien
   if (error) throw new Error(error.message);
   const setIds = (publishedSets ?? []).map((s) => s.id);
   if (setIds.length === 0) return new Set();
-  const { data: items } = await db.from("mock_exam_set_items").select("problem_id").in("exam_set_id", setIds);
-  return new Set((items ?? []).map((i) => i.problem_id));
+  const ids = new Set<string>();
+  for (let from = 0; ; from += 1000) {
+    const { data: page, error: pageErr } = await db
+      .from("mock_exam_set_items")
+      .select("problem_id")
+      .in("exam_set_id", setIds)
+      .order("id", { ascending: true })
+      .range(from, from + 999);
+    if (pageErr) throw new Error(pageErr.message);
+    for (const i of page ?? []) ids.add(i.problem_id);
+    if (!page || page.length < 1000) break;
+  }
+  return ids;
+}
+
+/** 노출 이력(세트 포함 횟수 + 응답 저장 횟수) — 조립 시 덜 노출된 문항을 우선한다. */
+async function fetchExposureCounts(db: ReturnType<typeof createAdminClient>): Promise<Map<string, number>> {
+  const map = new Map<string, number>();
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await db.rpc("mock_exam_problem_exposure_counts").range(from, from + 999);
+    if (error) throw new Error(error.message);
+    const rows = (data ?? []) as { problem_id: string; set_count: number; attempt_count: number }[];
+    for (const r of rows) map.set(r.problem_id, r.set_count + r.attempt_count);
+    if (rows.length < 1000) break;
+  }
+  return map;
 }
 
 export type AssembleMockExamSetInput = {
@@ -196,6 +234,11 @@ export type MstReadinessReport = {
   duplicateCount: number;
   modules: { moduleKey: string; route: string | null; needed: number; found: number; ok: boolean }[];
   shortfalls: AssembleShortfall[];
+  /** Phase 2 검증(세트에 assembly_rules가 있을 때만 강제). 없으면 빈 배열/0. */
+  missingSnapshotCount: number;
+  skillViolations: { moduleKey: string; route: string | null; satDomain: string; skillCode: string; count: number; cap: number }[];
+  eligibilityViolations: { moduleKey: string; setItemId: string; difficulty: string }[];
+  similarityViolations: { similarityGroup: string; count: number }[];
   checkedAt: string;
 };
 
@@ -206,6 +249,9 @@ export type AssembleMockExamSetResult = {
   readiness: MstReadinessReport | null;
 };
 
+// 조립 규칙(세트 assembly_rules에 저장돼 DB 검증이 같은 규칙을 강제한다).
+// skillMaxSharePct: 모듈·영역 안에서 한 skill이 차지할 수 있는 최대 비율(%).
+const MST_ASSEMBLY_RULES = { skillMaxSharePct: 50, enforceM1Eligibility: true, noSimilarGroupRepeat: true };
 const MST_ITEM_COUNTS = { rw_m1: 27, rw_m2: 27, math_m1: 22, math_m2: 22 };
 
 /** 세트의 모듈·경로별 정원 충족을 DB 함수로 검증하고 결과를 세트 행에 기록한다. 배정·공개 게이트(트리거)와
@@ -217,11 +263,15 @@ async function recordMstReadiness(
 ): Promise<MstReadinessReport> {
   const { data, error } = await db.rpc("mock_exam_validate_mst_set", { p_exam_set_id: examSetId });
   if (error) throw new Error(error.message);
-  const v = data as { ready: boolean; duplicateCount: number; modules: MstReadinessReport["modules"] };
+  const v = data as Partial<MstReadinessReport> & { ready: boolean };
   const report: MstReadinessReport = {
     ready: v.ready,
     duplicateCount: v.duplicateCount ?? 0,
     modules: v.modules ?? [],
+    missingSnapshotCount: v.missingSnapshotCount ?? 0,
+    skillViolations: v.skillViolations ?? [],
+    eligibilityViolations: v.eligibilityViolations ?? [],
+    similarityViolations: v.similarityViolations ?? [],
     shortfalls,
     checkedAt: new Date().toISOString(),
   };
@@ -243,13 +293,17 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
     throw new Error("R&W·Math 문항 수는 1 이상이어야 합니다.");
   }
 
-  const [rwCandidates, mathCandidates, rwWeights, mathWeights, excludeIds] = await Promise.all([
+  const [rwCandidatesRaw, mathCandidatesRaw, rwWeights, mathWeights, excludeIds, exposure] = await Promise.all([
     fetchEligibleProblems(db, RW_DOMAINS),
     fetchEligibleProblems(db, MATH_DOMAINS),
     fetchWeights(db, input.difficultyTier, "rw"),
     fetchWeights(db, input.difficultyTier, "math"),
     fetchAlreadyUsedProblemIds(db, input.difficultyTier),
+    fetchExposureCounts(db),
   ]);
+  const withExposure = (list: EligibleProblem[]) => list.map((c) => ({ ...c, exposureCount: exposure.get(c.problemId) ?? 0 }));
+  const rwCandidates = withExposure(rwCandidatesRaw);
+  const mathCandidates = withExposure(mathCandidatesRaw);
 
   const format = input.format ?? "fixed";
   type ModuleItem = AssembledItem & { moduleKey: string | null };
@@ -261,17 +315,27 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
     // 모듈 간 중복을 원천 차단한다(assembleSection의 excludeProblemIds는 부족하면 재사용하므로
     // 그 경로에 맡기지 않는다). DB unique(exam_set_id, problem_id)가 최종 방어선.
     const usedInSet = new Set<string>();
+    const usedGroups = new Set<string>(); // 유사문항 그룹은 세트 전체에서 하나만
     const offsets: Record<ExamSection, number> = { rw: 0, math: 0 };
     for (const mod of MST_MODULES) {
       const isRw = mod.section === "rw";
+      // Module 1은 m1 배정 가능 난이도(easy·medium)만 쓰고, 난이도 비중도 그 범위로 좁혀 다시 배분한다.
+      // Module 2는 Phase 3(라우팅)에서 higher/lower 변형으로 나뉘므로 여기서는 제한하지 않는다.
+      const isM1 = mod.key === "rw_m1" || mod.key === "math_m1";
+      const weights = isRw ? rwWeights : mathWeights;
+      const difficultyWeights = isM1 ? weights.difficultyWeights.filter((d) => moduleEligibility(d.difficulty).m1) : weights.difficultyWeights;
+      if (difficultyWeights.length === 0) throw new Error(`${mod.key}: 배정 가능한 난이도 비중이 없습니다.`);
       const result = assembleSection({
         section: mod.section,
         totalCount: mod.count,
-        domainWeights: (isRw ? rwWeights : mathWeights).domainWeights,
-        difficultyWeights: (isRw ? rwWeights : mathWeights).difficultyWeights,
-        candidates: (isRw ? rwCandidates : mathCandidates).filter((c) => !usedInSet.has(c.problemId)),
+        domainWeights: weights.domainWeights,
+        difficultyWeights,
+        candidates: (isRw ? rwCandidates : mathCandidates).filter(
+          (c) => !usedInSet.has(c.problemId) && (!isM1 || moduleEligibility(c.difficulty).m1),
+        ),
         excludeProblemIds: excludeIds,
         formatWeights: isRw ? undefined : MATH_FORMAT_WEIGHTS,
+        selection: { skillUse: new Map(), usedGroups },
       });
       for (const item of result.items) {
         usedInSet.add(item.problemId);
@@ -315,6 +379,7 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
       format,
       module_time_limits: format === "mst" ? MST_TIME_LIMITS : null,
       module_item_counts: format === "mst" ? MST_ITEM_COUNTS : null,
+      assembly_rules: format === "mst" ? MST_ASSEMBLY_RULES : null,
       rw_time_limit_minutes: input.rwTimeLimitMinutes ?? 64,
       math_time_limit_minutes: input.mathTimeLimitMinutes ?? 70,
       created_by: adminUserId,
@@ -356,6 +421,12 @@ export type MockExamSetItemDetail = {
   satDomain: string;
   skillCode: string | null;
   difficulty: string;
+  /** mst 세트만(고정형은 null). */
+  moduleKey: string | null;
+  /** M1/M2(higher/lower) 배정 가능 플래그 — difficulty에서 파생(DB generated column). */
+  m1Eligible: boolean;
+  m2LowerEligible: boolean;
+  m2HigherEligible: boolean;
 };
 
 /** 관리자 흐름 2단계: 조립된 세트를 검토한다(사양 3절 2~3의 "확인 후 공개"). */
@@ -364,7 +435,7 @@ export async function getMockExamSetItems(examSetId: string): Promise<MockExamSe
   const db = createAdminClient();
   const { data, error } = await db
     .from("mock_exam_set_items")
-    .select("id, section, position, problem_id, sat_domain, skill_code, difficulty")
+    .select("id, section, position, problem_id, sat_domain, skill_code, difficulty, module_key, m1_eligible, m2_lower_eligible, m2_higher_eligible")
     .eq("exam_set_id", examSetId)
     .order("section", { ascending: true })
     .order("position", { ascending: true });
@@ -377,6 +448,10 @@ export async function getMockExamSetItems(examSetId: string): Promise<MockExamSe
     satDomain: r.sat_domain,
     skillCode: r.skill_code,
     difficulty: r.difficulty,
+    moduleKey: r.module_key,
+    m1Eligible: r.m1_eligible,
+    m2LowerEligible: r.m2_lower_eligible,
+    m2HigherEligible: r.m2_higher_eligible,
   }));
 }
 

@@ -5,6 +5,7 @@ import {
   selectForCells,
   orderSectionItems,
   assembleSection,
+  moduleEligibility,
   AssemblyError,
   type EligibleProblem,
 } from "./assemble";
@@ -164,5 +165,52 @@ describe("assembleSection (통합 — 셀 계산+선택+정렬)", () => {
     });
     expect(result.items).toEqual([]);
     expect(result.shortfalls).toEqual([]);
+  });
+});
+
+describe("Phase 2 조립 강화", () => {
+  const mk = (id: string, skill: string, extra: Partial<EligibleProblem> = {}): EligibleProblem => ({
+    problemId: id,
+    problemVersionId: `v-${id}`,
+    satDomain: "algebra",
+    skillCode: skill,
+    difficulty: "medium",
+    ...extra,
+  });
+  const cell = [{ satDomain: "algebra", difficulty: "medium" as const, targetCount: 4 }];
+
+  it("skill 균형: 한 skill이 많아도 skill별로 고르게 뽑는다(2+2)", () => {
+    const pool = [mk("a1", "S1"), mk("a2", "S1"), mk("a3", "S1"), mk("a4", "S1"), mk("b1", "S2"), mk("b2", "S2")];
+    const { items } = selectForCells(pool, cell);
+    expect(items.filter((i) => i.skillCode === "S1")).toHaveLength(2);
+    expect(items.filter((i) => i.skillCode === "S2")).toHaveLength(2);
+  });
+
+  it("skill 균형은 셀·호출을 넘어 컨텍스트(모듈)에서 누적된다", () => {
+    const ctx = { skillUse: new Map<string, number>() };
+    selectForCells([mk("a1", "S1"), mk("b1", "S2")], [{ ...cell[0], targetCount: 1 }], new Set(), ctx);
+    const second = selectForCells([mk("a2", "S1"), mk("b2", "S2")], [{ ...cell[0], targetCount: 1 }], new Set(), ctx);
+    expect(second.items[0].skillCode).toBe("S2");
+  });
+
+  it("유사문항 그룹은 세트(컨텍스트)에서 한 번만, 대체 후보가 없으면 부족분으로 보고", () => {
+    const usedGroups = new Set<string>();
+    const pool = [mk("a1", "S1", { similarityGroup: "G" }), mk("a2", "S2", { similarityGroup: "G" }), mk("a3", "S3")];
+    const { items, shortfalls } = selectForCells(pool, cell, new Set(), { usedGroups });
+    expect(items.map((i) => i.problemId).sort()).toEqual(["a1", "a3"]);
+    expect(shortfalls).toEqual([{ satDomain: "algebra", difficulty: "medium", needed: 4, found: 2 }]);
+  });
+
+  it("노출 이력이 적은 문항을 우선하되 다른 세트 사용 문항은 마지막", () => {
+    const pool = [mk("a1", "S1", { exposureCount: 5 }), mk("a2", "S1", { exposureCount: 0 }), mk("a3", "S1", { exposureCount: 1 })];
+    const two = [{ ...cell[0], targetCount: 2 }];
+    expect(selectForCells(pool, two).items.map((i) => i.problemId)).toEqual(["a2", "a3"]);
+    expect(selectForCells(pool, two, new Set(["a2"])).items.map((i) => i.problemId)).toEqual(["a3", "a1"]);
+  });
+
+  it("배정 가능 플래그 규칙: easy·medium→M1/lower, medium·hard→higher", () => {
+    expect(moduleEligibility("easy")).toEqual({ m1: true, m2Lower: true, m2Higher: false });
+    expect(moduleEligibility("medium")).toEqual({ m1: true, m2Lower: true, m2Higher: true });
+    expect(moduleEligibility("hard")).toEqual({ m1: false, m2Lower: false, m2Higher: true });
   });
 });

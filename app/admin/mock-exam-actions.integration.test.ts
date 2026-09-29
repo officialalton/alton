@@ -32,6 +32,8 @@ const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
 const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 
+let seedSkillCounter = 0;
+
 async function seedConfirmedProblem(
   domain: string,
   difficulty: (typeof DIFFICULTIES)[number],
@@ -41,7 +43,11 @@ async function seedConfirmedProblem(
   // problems 에 status='confirmed'로 바로 넣으면 트리거(problems_create_initial_version,
   // 20261293000000)가 1번 버전을 자동으로 만들고 즉시 published 로 올린다 — 별도 버전
   // insert가 필요 없다(오히려 중복 unique 제약 위반이 난다).
-  const skillCode = psql(`select code from problem_skill_codes where domain = '${domain}' limit 1;`);
+  // Phase 2(skill 균형 검증): 영역의 skill 코드를 돌려가며 배정해 한 skill 쏠림 없이 풀을 만든다.
+  seedSkillCounter += 1;
+  const skillCode = psql(
+    `select code from problem_skill_codes where domain = '${domain}' order by code offset (${seedSkillCounter} % (select count(*) from problem_skill_codes where domain = '${domain}')) limit 1;`,
+  );
   if (format === "mc") {
     const problemId = psql(`
       insert into problems (format, passage, options, correct_index, explanation, status, difficulty, skill_code, created_by)
@@ -218,6 +224,14 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(result.readiness?.ready).toBe(true);
     expect(result.readiness?.modules.every((m) => m.ok)).toBe(true);
     expect(psql(`select count(*) || '|' || count(distinct problem_id) from mock_exam_set_items where exam_set_id = '${result.examSetId}';`)).toBe("98|98");
+    // Phase 2: 조립 규칙 저장, Module 1에는 hard 없음(M1 배정 가능 규칙), 스냅샷 전량 저장, skill 쏠림·유사문항 위반 없음.
+    expect(psql(`select assembly_rules->>'skillMaxSharePct' from mock_exam_sets where id = '${result.examSetId}';`)).toBe("50");
+    expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${result.examSetId}' and module_key in ('rw_m1','math_m1') and not m1_eligible;`)).toBe("0");
+    expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${result.examSetId}' and content_snapshot is null;`)).toBe("0");
+    expect(result.readiness?.skillViolations).toEqual([]);
+    expect(result.readiness?.eligibilityViolations).toEqual([]);
+    expect(result.readiness?.similarityViolations).toEqual([]);
+    expect(result.readiness?.missingSnapshotCount).toBe(0);
     await publishMockExamSet(result.examSetId);
     expect(psql(`select status || '|' || readiness_status from mock_exam_sets where id = '${result.examSetId}';`)).toBe("published|ready");
     const attemptId = psql(
