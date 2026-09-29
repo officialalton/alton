@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type Memo = {
   id: string;
@@ -35,11 +36,11 @@ export async function loadMemosByEnrollmentIds(
   enrollmentIds: string[]
 ): Promise<Record<string, Memo[]>> {
   if (enrollmentIds.length === 0) return {};
-  const { data } = await supabase
+  const { data } = await selectInChunks(enrollmentIds, (chunk) => supabase
     .from("session_memos")
     .select("id, enrollment_id, author_role, text, created_at")
-    .in("enrollment_id", enrollmentIds)
-    .order("created_at", { ascending: true });
+    .in("enrollment_id", chunk)
+    .order("created_at", { ascending: true }), { sort: orderComparator(["created_at", true]) });
 
   const result: Record<string, Memo[]> = {};
   for (const m of data ?? []) {

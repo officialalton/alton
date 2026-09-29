@@ -11,7 +11,7 @@ import { requireUser } from "@/lib/auth";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
 
-async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: string): Promise<string> {
+async function findStudentHouseholdId(supabase: SupabaseClient, studentId: string): Promise<string | null> {
   const { data } = await supabase
     .from("household_members")
     .select("household_id")
@@ -19,8 +19,13 @@ async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: st
     .eq("role", "child")
     .limit(1)
     .maybeSingle();
-  if (!data) throw new Error("소속된 household가 없습니다. 관리자에게 문의해주세요.");
-  return data.household_id as string;
+  return data ? (data.household_id as string) : null;
+}
+
+async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: string): Promise<string> {
+  const householdId = await findStudentHouseholdId(supabase, studentId);
+  if (!householdId) throw new Error("소속된 household가 없습니다. 관리자에게 문의해주세요.");
+  return householdId;
 }
 
 async function requireStudent(): Promise<{ supabase: SupabaseClient; userId: string }> {
@@ -105,9 +110,12 @@ export async function sendMyHouseholdInquiryMessageAction(inquiryId: string, bod
   if (error) throw new Error(error.message.includes("household_inquiries") ? "종료된 문의입니다. 새 문의를 시작해주세요." : error.message);
 }
 
+// 가구가 아직 없는 학생 계정은 읽지 않은 메시지가 없다 — 셸이 매 페이지 부르는 배지 조회라
+// throw(500 로그, QA #13) 대신 0 을 돌려준다. 메시지를 읽고 쓰는 액션은 그대로 가구를 요구한다.
 export async function getMyHouseholdMessengerUnreadCountAction(): Promise<number> {
   const { supabase, userId } = await requireStudent();
-  const householdId = await requireStudentHouseholdId(supabase, userId);
+  const householdId = await findStudentHouseholdId(supabase, userId);
+  if (!householdId) return 0;
   const { data: readRow } = await supabase
     .from("household_message_reads")
     .select("last_read_at")

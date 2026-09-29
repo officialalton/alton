@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { SubjectKeyword } from "./subject-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type DocProblem = {
   id: string;
@@ -86,31 +87,35 @@ export async function loadCurriculumDocsByIds(
   filterDocIds: string[] | null
 ): Promise<DocEditorData[]> {
   if (filterDocIds && filterDocIds.length === 0) return [];
-  let query = supabase
-    .from("curriculum_docs")
-    .select(
-      "id, title, status, subject_id, unit_id, primary_keyword_id, primary_keyword_position, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
-    )
-    .order("title", { ascending: true });
-  if (filterDocIds) query = query.in("id", filterDocIds);
-  const { data: docs } = await query;
+  const baseQuery = () =>
+    supabase
+      .from("curriculum_docs")
+      .select(
+        "id, title, status, subject_id, unit_id, primary_keyword_id, primary_keyword_position, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title)"
+      )
+      .order("title", { ascending: true });
+  const { data: docs } = filterDocIds
+    ? await selectInChunks(filterDocIds, (chunk) => baseQuery().in("id", chunk), {
+        sort: orderComparator(["title", true]),
+      })
+    : await baseQuery();
   if (!docs || docs.length === 0) return [];
 
   const docIds = docs.map((d) => d.id);
-  const { data: sections } = await supabase
+  const { data: sections } = await selectInChunks(docIds, (chunk) => supabase
     .from("curriculum_doc_sections")
     .select("id, curriculum_doc_id, position, title, body, teaching_tip, section_type")
-    .in("curriculum_doc_id", docIds)
-    .order("position", { ascending: true });
+    .in("curriculum_doc_id", chunk)
+    .order("position", { ascending: true }), { sort: orderComparator(["position", true]) });
 
   const sectionIds = (sections ?? []).map((s) => s.id);
   const { data: problems } = sectionIds.length
-    ? await supabase
+    ? await selectInChunks(sectionIds, (chunk) => supabase
         .from("problems")
         .select(
           "id, section_id, format, passage, options, correct_index, explanation, difficulty"
         )
-        .in("section_id", sectionIds)
+        .in("section_id", chunk))
     : { data: [] as never[] };
 
   const problemIds = (problems ?? []).map((p) => p.id);
@@ -125,30 +130,30 @@ export async function loadCurriculumDocsByIds(
     { data: subjectUnitRows },
   ] = await Promise.all([
       subjectIds.length
-        ? supabase
+        ? selectInChunks(subjectIds, (chunk) => supabase
             .from("subject_keywords")
             .select("id, subject_id, label, status")
-            .in("subject_id", subjectIds)
-            .order("label", { ascending: true })
+            .in("subject_id", chunk)
+            .order("label", { ascending: true }), { sort: orderComparator(["label", true]) })
         : Promise.resolve({ data: [] as never[] }),
       sectionIds.length
-        ? supabase
+        ? selectInChunks(sectionIds, (chunk) => supabase
             .from("curriculum_doc_section_keywords")
             .select("section_id, keyword:subject_keywords(id, label, status)")
-            .in("section_id", sectionIds)
+            .in("section_id", chunk))
         : Promise.resolve({ data: [] as never[] }),
       problemIds.length
-        ? supabase
+        ? selectInChunks(problemIds, (chunk) => supabase
             .from("problem_keywords")
             .select("problem_id, keyword:subject_keywords(id, label, status)")
-            .in("problem_id", problemIds)
+            .in("problem_id", chunk))
         : Promise.resolve({ data: [] as never[] }),
       subjectIds.length
-        ? supabase
+        ? selectInChunks(subjectIds, (chunk) => supabase
             .from("subject_template_units")
             .select("id, subject_id, unit_title, position")
-            .in("subject_id", subjectIds)
-            .order("position", { ascending: true })
+            .in("subject_id", chunk)
+            .order("position", { ascending: true }), { sort: orderComparator(["position", true]) })
         : Promise.resolve({ data: [] as never[] }),
     ]);
 
@@ -292,10 +297,10 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
   if (!docs || docs.length === 0) return [];
 
   const docIds = docs.map((d) => d.id);
-  const { data: sectionRows } = await supabase
+  const { data: sectionRows } = await selectInChunks(docIds, (chunk) => supabase
     .from("curriculum_doc_sections")
     .select("curriculum_doc_id")
-    .in("curriculum_doc_id", docIds);
+    .in("curriculum_doc_id", chunk));
 
   const sectionCountByDoc = new Map<string, number>();
   for (const s of sectionRows ?? []) {

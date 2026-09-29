@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type MaterialProblem = {
   id: string;
@@ -94,25 +95,25 @@ export async function loadMaterialData(
   const sectionIds = (sections ?? []).map((s) => s.id);
 
   const { data: problems } = sectionIds.length
-    ? await supabase
+    ? await selectInChunks(sectionIds, (chunk) => supabase
         .from("problems")
         .select(
           "id, format, passage, options, correct_index, explanation, difficulty, skill_type, section_id"
         )
-        .in("section_id", sectionIds)
-        .eq("status", "confirmed")
+        .in("section_id", chunk)
+        .eq("status", "confirmed"))
     : { data: [] as never[] };
 
   const problemIds = (problems ?? []).map((p) => p.id);
 
   const { data: attempts } = problemIds.length
-    ? await supabase
+    ? await selectInChunks(problemIds, (chunk) => supabase
         .from("session_problem_attempts")
         .select("problem_id, correct, response, attempted_at")
         .eq("session_id", sessionId)
         .eq("student_id", studentId)
-        .in("problem_id", problemIds)
-        .order("attempted_at", { ascending: true })
+        .in("problem_id", chunk)
+        .order("attempted_at", { ascending: true }), { sort: orderComparator(["attempted_at", true]) })
     : { data: [] as never[] };
 
   function buildProblem(p: NonNullable<typeof problems>[number]): MaterialProblem {
@@ -229,10 +230,10 @@ export async function loadPinnedMaterialData(
     };
   }
 
-  const { data: versions } = await supabase
+  const { data: versions } = await selectInChunks(versionIds, (chunk) => supabase
     .from("curriculum_doc_versions")
     .select("id, curriculum_doc_id, snapshot")
-    .in("id", versionIds);
+    .in("id", chunk));
 
   const snapshotById = new Map(
     (versions ?? []).map((v) => [v.id as string, v.snapshot as DocSnapshot | null])
@@ -266,10 +267,10 @@ export async function loadPinnedMaterialData(
   // 2026-09-14 UAT: "교재 이름을 다 바꿨는데 반영이 안 됐네" — 고정되는 것은 **내용**(고정 사본)이고,
   // 노출용 이름은 표시 문제라 지금 이름을 따른다. 읽지 못하면(권한·삭제) 고정 당시 이름으로 둔다.
   if (assets.length > 0) {
-    const { data: docs } = await supabase
+    const { data: docs } = await selectInChunks(assets.map((a) => a.docId), (chunk) => supabase
       .from("curriculum_docs")
       .select("id, title")
-      .in("id", assets.map((a) => a.docId));
+      .in("id", chunk));
     const titleById = new Map((docs ?? []).map((d) => [d.id as string, (d.title as string | null)?.trim() || null]));
     for (const a of assets) {
       const now = titleById.get(a.docId);
@@ -379,12 +380,12 @@ export async function loadPlannedMaterialData(
 
   const docIds = materials.map((m) => m.curriculum_doc_id as string);
   // 배포됐고 보관되지 않은 교재만 — 학생에게 갈 수 없는 것을 미리 보여주지 않는다.
-  const { data: docs } = await supabase
+  const { data: docs } = await selectInChunks(docIds, (chunk) => supabase
     .from("curriculum_docs")
     .select("id, title, kind")
-    .in("id", docIds)
+    .in("id", chunk)
     .eq("status", "published")
-    .is("archived_at", null);
+    .is("archived_at", null));
   if (!docs?.length) return null;
 
   const visibleIds = docIds.filter((id) => docs.some((d) => d.id === id));
@@ -394,11 +395,11 @@ export async function loadPlannedMaterialData(
   // 파일 자료 — 준비안이 담을 때 고른 버전, 없으면 지금 공개본. 시작 전이므로 바뀔 수 있다.
   const assets: MaterialAsset[] = [];
   if (assetIds.length) {
-    const { data: versions } = await supabase
+    const { data: versions } = await selectInChunks(assetIds, (chunk) => supabase
       .from("curriculum_doc_versions")
       .select("id, curriculum_doc_id, version_number, snapshot")
-      .in("curriculum_doc_id", assetIds)
-      .order("version_number", { ascending: false });
+      .in("curriculum_doc_id", chunk)
+      .order("version_number", { ascending: false }), { sort: orderComparator(["version_number", false]) });
     for (const docId of assetIds) {
       const picked = materials.find((m) => m.curriculum_doc_id === docId)?.curriculum_doc_version_id as string | null;
       const v =
@@ -412,11 +413,11 @@ export async function loadPlannedMaterialData(
   }
 
   const { data: sections } = htmlIds.length
-    ? await supabase
+    ? await selectInChunks(htmlIds, (chunk) => supabase
         .from("curriculum_doc_sections")
         .select("id, title, body, teaching_tip, curriculum_doc_id, position")
-        .in("curriculum_doc_id", htmlIds)
-        .order("position", { ascending: true })
+        .in("curriculum_doc_id", chunk)
+        .order("position", { ascending: true }), { sort: orderComparator(["position", true]) })
     : { data: [] as { id: string; title: string; body: string | null; teaching_tip: string | null; curriculum_doc_id: string; position: number }[] };
 
   // 교재 순서를 지키고, 각 교재 안에서는 조각 순서를 지킨다.

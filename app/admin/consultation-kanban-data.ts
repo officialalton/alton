@@ -12,6 +12,7 @@ import {
   type ConsultationListItem,
 } from "./consultation-scheduling-actions";
 import type { KanbanStage } from "./consultation-kanban-constants";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 2026-09-06(UAT 지적): 다자녀 온보딩의 원 상담(가족) 카드는 정책상 이력으로
 // 계속 칸반에 남아있는 게 맞다(별도 보드 분리 금지 — 기존 확정 정책). 다만
@@ -53,11 +54,11 @@ async function loadTrialProgressByChild(
   const result = new Map<string, TrialProgress>();
   if (childIds.length === 0) return result;
 
-  const { data: enrollments } = await admin
+  const { data: enrollments } = await selectInChunks(childIds, (chunk) => admin
     .from("subject_enrollments")
     .select("id, child_id, created_at")
-    .in("child_id", childIds)
-    .order("created_at", { ascending: false });
+    .in("child_id", chunk)
+    .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) });
 
   const latestEnrollmentByChild = new Map<string, string>();
   for (const e of enrollments ?? []) {
@@ -67,11 +68,11 @@ async function loadTrialProgressByChild(
   if (enrollmentIds.length === 0) return result;
 
   const [{ data: sessionRows }, { data: intentRows }] = await Promise.all([
-    admin.from("sessions").select("subject_enrollment_id").in("subject_enrollment_id", enrollmentIds),
-    admin
+    selectInChunks(enrollmentIds, (chunk) => admin.from("sessions").select("subject_enrollment_id").in("subject_enrollment_id", chunk)),
+    selectInChunks(enrollmentIds, (chunk) => admin
       .from("trial_regular_progress_selections")
       .select("subject_enrollment_id")
-      .in("subject_enrollment_id", enrollmentIds),
+      .in("subject_enrollment_id", chunk)),
   ]);
   const enrollmentsWithSession = new Set((sessionRows ?? []).map((r) => r.subject_enrollment_id as string));
   const enrollmentsWithIntent = new Set((intentRows ?? []).map((r) => r.subject_enrollment_id as string));
@@ -160,13 +161,15 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
   if (!linkRows || linkRows.length === 0) return [];
 
   const linkById = new Map(linkRows.map((l) => [l.id, l]));
-  const { data: studentRows } = await admin
+  // 청크마다 최신 N개를 받아 합친 뒤 전체 최신 N개만 남긴다(전역 limit 유지).
+  const { data: studentRowsAll } = await selectInChunks(linkRows.map((l) => l.id), (chunk) => admin
     .from("trial_onboarding_link_students")
     .select("id, link_id, student_name, student_grade, child_auth_user_id, created_at")
-    .in("link_id", linkRows.map((l) => l.id))
+    .in("link_id", chunk)
     .eq("status", "created")
     .order("created_at", { ascending: false })
-    .limit(ACCOUNT_CREATION_CARD_LIMIT);
+    .limit(ACCOUNT_CREATION_CARD_LIMIT), { sort: orderComparator(["created_at", false]) });
+  const studentRows = studentRowsAll.slice(0, ACCOUNT_CREATION_CARD_LIMIT);
 
   const childIds = (studentRows ?? [])
     .map((s) => s.child_auth_user_id)
@@ -177,7 +180,7 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
   // 합성해, 보호자가 실제로 동의를 마쳐도 "보호자 동의 확인 대기 중" 배지가 절대
   // 안 풀리는 결함이 있었다.
   const { data: consentRows } = childIds.length
-    ? await admin.from("trial_smart_notes_consents").select("child_id, confirmed_at").in("child_id", childIds)
+    ? await selectInChunks(childIds, (chunk) => admin.from("trial_smart_notes_consents").select("child_id, confirmed_at").in("child_id", chunk))
     : { data: [] as { child_id: string; confirmed_at: string }[] };
   const consentByChildId = new Map((consentRows ?? []).map((c) => [c.child_id, c.confirmed_at]));
 
@@ -209,7 +212,7 @@ export async function loadChildIdsWithActiveContract(
   childIds: string[]
 ): Promise<Set<string>> {
   if (childIds.length === 0) return new Set();
-  const { data } = await admin.from("contracts").select("child_id").eq("status", "active").in("child_id", childIds);
+  const { data } = await selectInChunks(childIds, (chunk) => admin.from("contracts").select("child_id").eq("status", "active").in("child_id", chunk));
   return new Set((data ?? []).map((r) => r.child_id as string));
 }
 

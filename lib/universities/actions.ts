@@ -15,6 +15,7 @@ import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createClient } from "@/utils/supabase/server";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type UniversitySummary = {
   id: string;
@@ -70,11 +71,11 @@ export async function listUniversities(filter: UniversityListFilter = {}): Promi
   const ids = (data ?? []).map((u) => u.id);
   const latestYearByUniversity = new Map<string, number>();
   if (ids.length > 0) {
-    const { data: cycles } = await db
+    const { data: cycles } = await selectInChunks(ids, (chunk) => db
       .from("university_admission_cycles")
       .select("university_id, cycle_year")
-      .in("university_id", ids)
-      .order("cycle_year", { ascending: false });
+      .in("university_id", chunk)
+      .order("cycle_year", { ascending: false }), { sort: orderComparator(["cycle_year", false]) });
     for (const c of cycles ?? []) {
       if (!latestYearByUniversity.has(c.university_id)) latestYearByUniversity.set(c.university_id, c.cycle_year);
     }

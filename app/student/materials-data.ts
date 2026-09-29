@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type LibraryDocSummary = {
   id: string;
@@ -94,21 +95,21 @@ export async function loadMaterialsLibrary(
   const subjectIds = Array.from(subjects.keys());
   if (subjectIds.length === 0) return [];
 
-  const { data: docs } = await supabase
+  const { data: docs } = await selectInChunks(subjectIds, (chunk) => supabase
     .from("curriculum_docs")
     .select("id, title, subject_id, unit_id")
-    .in("subject_id", subjectIds)
+    .in("subject_id", chunk)
     .eq("status", "published")
-    .order("title", { ascending: true });
+    .order("title", { ascending: true }), { sort: orderComparator(["title", true]) });
 
   const unitIds = Array.from(
     new Set((docs ?? []).map((d) => d.unit_id).filter((id): id is string => !!id))
   );
   const { data: units } = unitIds.length
-    ? await supabase
+    ? await selectInChunks(unitIds, (chunk) => supabase
         .from("subject_template_units")
         .select("id, unit_title")
-        .in("id", unitIds)
+        .in("id", chunk))
     : { data: [] as { id: string; unit_title: string }[] };
   const unitTitleById = new Map((units ?? []).map((u) => [u.id, u.unit_title]));
 
@@ -183,24 +184,24 @@ export async function loadLibraryDoc(
 
   const sectionIds = (sections ?? []).map((s) => s.id);
   const { data: problems } = sectionIds.length
-    ? await supabase
+    ? await selectInChunks(sectionIds, (chunk) => supabase
         .from("problems")
         .select(
           "id, format, passage, options, correct_index, explanation, difficulty, skill_type, section_id"
         )
-        .in("section_id", sectionIds)
-        .eq("status", "confirmed")
+        .in("section_id", chunk)
+        .eq("status", "confirmed"))
     : { data: [] as never[] };
 
   const problemIds = (problems ?? []).map((p) => p.id);
 
   const { data: attempts } = studentId && problemIds.length
-    ? await supabase
+    ? await selectInChunks(problemIds, (chunk) => supabase
         .from("session_problem_attempts")
         .select("problem_id, correct, response")
         .is("session_id", null)
         .eq("student_id", studentId)
-        .in("problem_id", problemIds)
+        .in("problem_id", chunk))
     : { data: [] as { problem_id: string; correct: boolean | null; response: unknown }[] };
 
   function buildProblem(p: NonNullable<typeof problems>[number]): LibraryProblem {

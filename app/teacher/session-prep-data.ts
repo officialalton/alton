@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // R9(레슨 준비 Task 1) — 준비된 선택(session_prepared_selections, 임시보관함/
 // 세션 부착) 읽기 전용 로더. RLS(20261232000000_r9_session_prepared_selection.sql)가
@@ -66,24 +67,24 @@ async function attachChildren(
   if (selectionIds.length === 0) return [];
 
   const [{ data: unitRows }, { data: contentRows }] = await Promise.all([
-    supabase
+    selectInChunks(selectionIds, (chunk) => supabase
       .from("session_prepared_selection_units")
       .select("id, prepared_selection_id, overlay_unit_id, position")
-      .in("prepared_selection_id", selectionIds)
-      .order("position", { ascending: true }),
-    supabase
+      .in("prepared_selection_id", chunk)
+      .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
+    selectInChunks(selectionIds, (chunk) => supabase
       .from("session_prepared_selection_content_items")
       .select("id, prepared_selection_id, prepared_selection_unit_id, content_type, content_id, position, included")
-      .in("prepared_selection_id", selectionIds)
-      .order("position", { ascending: true }),
+      .in("prepared_selection_id", chunk)
+      .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
   ]);
 
   const unitIds = (unitRows ?? []).map((u: { id: string }) => u.id);
   const { data: keywordRows } = unitIds.length
-    ? await supabase
+    ? await selectInChunks(unitIds, (chunk) => supabase
         .from("session_prepared_selection_unit_keywords")
         .select("prepared_selection_unit_id, keyword_id")
-        .in("prepared_selection_unit_id", unitIds)
+        .in("prepared_selection_unit_id", chunk))
     : { data: [] as { prepared_selection_unit_id: string; keyword_id: string }[] };
 
   const keywordIdsByUnit = new Map<string, string[]>();
@@ -199,10 +200,10 @@ export async function loadEligibleContentForSelection(
   const unitIds = (units ?? []).map((u: { id: string }) => u.id);
   if (unitIds.length === 0) return { materialSections: [], problems: [] };
 
-  const { data: keywordRows } = await supabase
+  const { data: keywordRows } = await selectInChunks(unitIds, (chunk) => supabase
     .from("session_prepared_selection_unit_keywords")
     .select("keyword_id")
-    .in("prepared_selection_unit_id", unitIds);
+    .in("prepared_selection_unit_id", chunk));
   const keywordIds = Array.from(new Set((keywordRows ?? []).map((k: { keyword_id: string }) => k.keyword_id)));
   if (keywordIds.length === 0) return { materialSections: [], problems: [] };
 
@@ -211,15 +212,15 @@ export async function loadEligibleContentForSelection(
   // (Supabase 임베드 타입 추론이 FK 방향에 따라 배열/단일을 다르게 잡는 문제를
   // 피하고, 뷰가 여전히 유일한 selectable 판정 지점이라는 점도 그대로 유지한다).
   const [{ data: sectionKeywordRows }, { data: problemKeywordRows }] = await Promise.all([
-    supabase
+    selectInChunks(keywordIds, (chunk) => supabase
       .from("curriculum_doc_section_keywords_selectable")
       .select("section_id, keyword_id")
-      .in("keyword_id", keywordIds),
+      .in("keyword_id", chunk)),
     // 신규 선택 후보는 공개된 버전이 있는 문제만(2026-09-13 정정).
-    supabase
+    selectInChunks(keywordIds, (chunk) => supabase
       .from("problem_auto_composition_candidates")
       .select("problem_id, keyword_id")
-      .in("keyword_id", keywordIds),
+      .in("keyword_id", chunk)),
   ]);
 
   const sectionIds = Array.from(
@@ -231,10 +232,10 @@ export async function loadEligibleContentForSelection(
 
   const [{ data: sectionDetails }, { data: problemDetails }] = await Promise.all([
     sectionIds.length
-      ? supabase.from("curriculum_doc_sections").select("id, title, curriculum_doc_id").in("id", sectionIds)
+      ? selectInChunks(sectionIds, (chunk) => supabase.from("curriculum_doc_sections").select("id, title, curriculum_doc_id").in("id", chunk))
       : Promise.resolve({ data: [] as { id: string; title: string; curriculum_doc_id: string }[] }),
     problemIds.length
-      ? supabase.from("problems").select("id, passage").in("id", problemIds)
+      ? selectInChunks(problemIds, (chunk) => supabase.from("problems").select("id, passage").in("id", chunk))
       : Promise.resolve({ data: [] as { id: string; passage: string | null }[] }),
   ]);
 

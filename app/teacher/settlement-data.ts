@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // P4-2 — 교사 본인 정산 조회 데이터 계층.
 // 착수 정리: docs/2026-09-12-p4-2-teacher-settlement-plan.md
@@ -193,36 +194,36 @@ export async function loadTeacherSettlement(
   const [{ data: batches }, { data: sessions }, { data: adjustmentRows }, { data: dateChangeRows }, { data: externalRows }] =
     await Promise.all([
     batchIds.length
-      ? supabase
+      ? selectInChunks(batchIds, (chunk) => supabase
           .from("payout_batches")
           .select("id, status, paid_at, scheduled_payout_date, auto_dispatch_enabled")
-          .in("id", batchIds)
+          .in("id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     sessionIds.length
-      ? supabase.from("sessions").select("id, reservation_id, subject_enrollment_id").in("id", sessionIds)
+      ? selectInChunks(sessionIds, (chunk) => supabase.from("sessions").select("id, reservation_id, subject_enrollment_id").in("id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     // 관리자 조정 내역(사유·시각). RLS가 본인 묶음만 보여준다.
     batchIds.length
-      ? supabase
+      ? selectInChunks(batchIds, (chunk) => supabase
           .from("payout_batch_adjustments")
           .select("id, batch_id, amount_minor, currency, reason, created_at")
-          .in("batch_id", batchIds)
-          .order("created_at", { ascending: false })
+          .in("batch_id", chunk)
+          .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     // 지급 예정일 변경 이력 — 교사도 "왜 날짜가 바뀌었는지" 알 수 있어야 한다.
     batchIds.length
-      ? supabase
+      ? selectInChunks(batchIds, (chunk) => supabase
           .from("payout_scheduled_date_events")
           .select("id, batch_id, previous_date, new_date, reason, created_at")
-          .in("batch_id", batchIds)
-          .order("created_at", { ascending: false })
+          .in("batch_id", chunk)
+          .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     // 외부 송금(은행 직접 송금) 완료 기록. 은행 참조값·메모는 교사에게 내리지 않는다.
     batchIds.length
-      ? supabase
+      ? selectInChunks(batchIds, (chunk) => supabase
           .from("payout_external_transfers")
           .select("batch_id, transferred_on, amount_minor, currency")
-          .in("batch_id", batchIds)
+          .in("batch_id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
   ]);
 
@@ -272,13 +273,13 @@ export async function loadTeacherSettlement(
 
   const [{ data: reservations }, { data: enrollments }] = await Promise.all([
     reservationIds.length
-      ? supabase.from("reservations").select("id, starts_at").in("id", reservationIds)
+      ? selectInChunks(reservationIds, (chunk) => supabase.from("reservations").select("id, starts_at").in("id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
     enrollmentIds.length
-      ? supabase
+      ? selectInChunks(enrollmentIds, (chunk) => supabase
           .from("subject_enrollments")
           .select("id, child:profiles!subject_enrollments_child_id_fkey(name), subject:subjects(name)")
-          .in("id", enrollmentIds)
+          .in("id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
   ]);
 

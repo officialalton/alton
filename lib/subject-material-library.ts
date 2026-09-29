@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 2026-09-15 — 과목별 전체 교재 보기(docs/2026-09-15-subject-material-library.md).
 //   과목 → 단원(순서) → 키워드 → 공개된 자료 트리를 만든다. 접근 가능한 subjectId 목록은
@@ -44,17 +45,17 @@ export async function buildSubjectMaterialTree(
 
   const [{ data: subjects }, { data: units }, { data: unitKeywords }, { data: keywords }, { data: docs }] =
     await Promise.all([
-      supabase.from("subjects").select("id, name").in("id", subjectIds).is("archived_at", null).order("name", { ascending: true }),
-      supabase.from("subject_template_units").select("id, subject_id, position, unit_title").in("subject_id", subjectIds).order("position", { ascending: true }),
+      selectInChunks(subjectIds, (chunk) => supabase.from("subjects").select("id, name").in("id", chunk).is("archived_at", null).order("name", { ascending: true }), { sort: orderComparator(["name", true]) }),
+      selectInChunks(subjectIds, (chunk) => supabase.from("subject_template_units").select("id, subject_id, position, unit_title").in("subject_id", chunk).order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
       supabase.from("subject_template_unit_keywords").select("unit_id, keyword_id"),
-      supabase.from("subject_keywords").select("id, subject_id, label").in("subject_id", subjectIds).eq("status", "active"),
-      supabase
+      selectInChunks(subjectIds, (chunk) => supabase.from("subject_keywords").select("id, subject_id, label").in("subject_id", chunk).eq("status", "active")),
+      selectInChunks(subjectIds, (chunk) => supabase
         .from("curriculum_docs")
         .select("id, title, kind, subject_id, primary_keyword_id")
-        .in("subject_id", subjectIds)
+        .in("subject_id", chunk)
         .eq("status", "published")
         .is("archived_at", null)
-        .order("title", { ascending: true }),
+        .order("title", { ascending: true }), { sort: orderComparator(["title", true]) }),
     ]);
 
   type UnitRow = { id: string; subject_id: string; position: number; unit_title: string };

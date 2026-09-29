@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { CurriculumData, CurriculumUnit, CurriculumUnitStatus } from "@/app/student/curriculum-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type TeacherCurriculumData = CurriculumData & {
   studentId: string;
@@ -29,11 +30,11 @@ export async function loadAllStudentCurricula(
   const studentIds = students.map((s) => s.studentId);
   const studentNameById = new Map(students.map((s) => [s.studentId, s.studentName]));
 
-  const { data: enrollments } = await supabase
+  const { data: enrollments } = await selectInChunks(studentIds, (chunk) => supabase
     .from("enrollments")
     .select("id, student_id, teacher_id, subject_id, subject:subjects(name)")
-    .in("student_id", studentIds)
-    .eq("status", "active");
+    .in("student_id", chunk)
+    .eq("status", "active"));
   if (!enrollments || enrollments.length === 0) return [];
 
   const teacherIds = Array.from(new Set(enrollments.map((e) => e.teacher_id)));
@@ -43,7 +44,7 @@ export async function loadAllStudentCurricula(
   );
 
   const [{ data: teacherProfiles }, { data: templates }] = await Promise.all([
-    supabase.from("profiles").select("id, name").in("id", teacherIds),
+    selectInChunks(teacherIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk)),
     supabase
       .from("teacher_curriculum_templates")
       .select("id, teacher_id, subject_id")
@@ -57,16 +58,16 @@ export async function loadAllStudentCurricula(
   const templateIds = Array.from(new Set((templates ?? []).map((t) => t.id)));
   const [{ data: units }, { data: sessions }] = await Promise.all([
     templateIds.length
-      ? supabase
+      ? selectInChunks(templateIds, (chunk) => supabase
           .from("teacher_curriculum_template_units")
           .select("id, template_id, position, unit_title, note, teacher_comment")
-          .in("template_id", templateIds)
-          .order("position", { ascending: true })
+          .in("template_id", chunk)
+          .order("position", { ascending: true }), { sort: orderComparator(["position", true]) })
       : Promise.resolve({ data: [] as never[] }),
-    supabase
+    selectInChunks(enrollmentIds, (chunk) => supabase
       .from("legacy_sessions")
       .select("id, status, scheduled_at, source_template_unit_id, enrollment_id")
-      .in("enrollment_id", enrollmentIds),
+      .in("enrollment_id", chunk)),
   ]);
 
   const unitsByTemplateId = new Map<string, typeof units>();

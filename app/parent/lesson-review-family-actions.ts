@@ -20,6 +20,7 @@
 // 나갈 경로 자체가 없다.
 
 import { requireUser } from "@/lib/auth";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type FamilyLessonReview = {
   reviewId: string;
@@ -55,7 +56,7 @@ export async function getLessonReviewsForFamily(subjectEnrollmentId: string): Pr
   const sessionIds = Array.from(new Set(rows.map((r) => r.session_id)));
 
   const [{ data: smartNotes }, { data: grantStatuses, error: grantStatusError }] = await Promise.all([
-    supabase.from("session_smart_notes").select("session_id, drive_file_id").in("session_id", sessionIds),
+    selectInChunks(sessionIds, (chunk) => supabase.from("session_smart_notes").select("session_id, drive_file_id").in("session_id", chunk)),
     supabase.rpc("get_smart_notes_reader_grant_statuses", { p_session_ids: sessionIds }),
   ]);
   if (grantStatusError) throw new Error(grantStatusError.message);

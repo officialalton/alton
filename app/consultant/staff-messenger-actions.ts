@@ -6,6 +6,7 @@
 // 볼 수 없다(RLS에 그 role용 정책 자체가 없음).
 
 import { requireConsultant } from "@/lib/admin-auth";
+import { IN_CHUNK_SIZE } from "@/lib/select-in-chunks";
 
 export type ConsultantAdminInquiry = {
   id: string;
@@ -96,14 +97,19 @@ export async function getMyStaffMessengerUnreadCountAction(): Promise<number> {
   const { data: inquiries } = await supabase.from("consultant_admin_inquiries").select("id").eq("consultant_id", user.id);
   const inquiryIds = (inquiries ?? []).map((i) => i.id);
   if (inquiryIds.length === 0) return 0;
-  const { count, error } = await supabase
-    .from("consultant_admin_messages")
-    .select("id", { count: "exact", head: true })
-    .in("inquiry_id", inquiryIds)
-    .eq("sender_role", "admin")
-    .gt("created_at", since);
-  if (error) throw new Error(error.message);
-  return count ?? 0;
+  // 문의 id 가 많으면 URL 이 길어지므로 청크별 count 를 합산한다(id 는 중복 없이 나뉜다).
+  let total = 0;
+  for (let i = 0; i < inquiryIds.length; i += IN_CHUNK_SIZE) {
+    const { count, error } = await supabase
+      .from("consultant_admin_messages")
+      .select("id", { count: "exact", head: true })
+      .in("inquiry_id", inquiryIds.slice(i, i + IN_CHUNK_SIZE))
+      .eq("sender_role", "admin")
+      .gt("created_at", since);
+    if (error) throw new Error(error.message);
+    total += count ?? 0;
+  }
+  return total;
 }
 
 export async function markMyStaffMessengerReadAction(): Promise<void> {

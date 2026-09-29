@@ -3,15 +3,26 @@
 import { useRef, useState } from "react";
 import ConsultSlotPicker, { type ConsultSlotPickerHandle } from "@/app/components/ConsultSlotPicker";
 import { listOpenSlotsForTokenAction, redeemSchedulingLinkAction } from "@/app/schedule-actions";
+import SchedulingLinkInvalid from "./SchedulingLinkInvalid";
 
 export default function ScheduleForm({ token }: { token: string }) {
   const [selectedSlot, setSelectedSlot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
+  const [linkInvalid, setLinkInvalid] = useState(false);
   const pickerRef = useRef<ConsultSlotPickerHandle>(null);
 
-  const fetchSlots = (fromIso: string, toIso: string) => listOpenSlotsForTokenAction(token, fromIso, toIso);
+  // 서버 액션은 무효 토큰을 throw 하지 않고 결과값으로 돌려준다(프로덕션에서 문구가 가려지지 않도록).
+  const fetchSlots = async (fromIso: string, toIso: string) => {
+    const r = await listOpenSlotsForTokenAction(token, fromIso, toIso);
+    if (r.ok) return r.slots;
+    if (r.reason === "invalid_link") {
+      setLinkInvalid(true);
+      return [];
+    }
+    throw new Error(r.error);
+  };
 
   async function handleConfirm() {
     if (!selectedSlot) {
@@ -21,8 +32,16 @@ export default function ScheduleForm({ token }: { token: string }) {
     setSubmitting(true);
     setError(null);
     try {
-      await redeemSchedulingLinkAction(token, selectedSlot);
-      setConfirmed(true);
+      const r = await redeemSchedulingLinkAction(token, selectedSlot);
+      if (r.ok) {
+        setConfirmed(true);
+      } else if (r.reason === "invalid_link") {
+        setLinkInvalid(true);
+      } else {
+        setError(r.error);
+        setSelectedSlot("");
+        pickerRef.current?.refetch();
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "예약하지 못했습니다.");
       setSelectedSlot("");
@@ -31,6 +50,8 @@ export default function ScheduleForm({ token }: { token: string }) {
       setSubmitting(false);
     }
   }
+
+  if (linkInvalid) return <SchedulingLinkInvalid />;
 
   if (confirmed) {
     return (

@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import type { LessonBookingData } from "./lesson-booking-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type UpcomingLesson = {
   sessionId: string;
@@ -71,16 +72,16 @@ export async function loadDashboardData(
 
   const [{ data: teacherProfiles }, { data: sessions }] = await Promise.all([
     teacherIds.length
-      ? supabase.from("profiles").select("id, name").in("id", teacherIds)
+      ? selectInChunks(teacherIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk))
       : Promise.resolve({ data: [] as { id: string; name: string }[] }),
     enrollmentIds.length
-      ? supabase
+      ? selectInChunks(enrollmentIds, (chunk) => supabase
           .from("legacy_sessions")
           .select(
             "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
           )
-          .in("enrollment_id", enrollmentIds)
-          .order("scheduled_at", { ascending: true })
+          .in("enrollment_id", chunk)
+          .order("scheduled_at", { ascending: true }), { sort: orderComparator(["scheduled_at", true]) })
       : Promise.resolve({ data: [] as never[] }),
   ]);
 

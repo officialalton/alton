@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type ChildConsentStatus = {
   studentId: string;
@@ -37,11 +38,11 @@ export async function loadChildrenConsentStatus(
   const householdIds = (guardianLinks ?? []).map((l) => l.household_id);
   if (householdIds.length === 0) return [];
 
-  const { data: childLinks } = await supabase
+  const { data: childLinks } = await selectInChunks(householdIds, (chunk) => supabase
     .from("household_members")
     .select("profile_id, profile:profiles(name)")
-    .in("household_id", householdIds)
-    .eq("role", "child");
+    .in("household_id", chunk)
+    .eq("role", "child"));
 
   const children = (childLinks ?? []).map((c) => ({
     studentId: c.profile_id as string,

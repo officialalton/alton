@@ -2,6 +2,7 @@
 
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const CAPABILITY = "manage_account_merges";
 
@@ -111,11 +112,11 @@ export async function listMergeCandidates(role: "student" | "teacher" | "parent"
   const ids = (data ?? []).map((p) => p.id);
   if (ids.length === 0) return [];
 
-  const { data: merged } = await supabase.from("account_merges").select("merged_id").in("merged_id", ids);
+  const { data: merged } = await selectInChunks(ids, (chunk) => supabase.from("account_merges").select("merged_id").in("merged_id", chunk));
   const mergedIds = new Set((merged ?? []).map((m) => m.merged_id));
 
   const statusTable = role === "student" ? "students" : role === "teacher" ? "teachers" : "parents";
-  const { data: statusRows } = await supabase.from(statusTable).select("id, status").in("id", ids);
+  const { data: statusRows } = await selectInChunks(ids, (chunk) => supabase.from(statusTable).select("id, status").in("id", chunk));
   const statusById = new Map((statusRows ?? []).map((r) => [r.id, r.status as string]));
 
   return (data ?? [])

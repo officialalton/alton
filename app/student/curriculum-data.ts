@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type CurriculumUnitStatus = "done" | "in_progress" | "upcoming";
 
@@ -46,7 +47,7 @@ export async function loadCurricula(
   // 계획 문서 5절 P0. teacher_curriculum_templates는 (teacher_id, subject_id)
   // 조합이 enrollment마다 다를 수 있어 or() 조건으로 한 번에 조회한다.
   const [{ data: teacherProfiles }, { data: templates }] = await Promise.all([
-    supabase.from("profiles").select("id, name").in("id", teacherIds),
+    selectInChunks(teacherIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk)),
     supabase
       .from("teacher_curriculum_templates")
       .select("id, teacher_id, subject_id")
@@ -66,16 +67,16 @@ export async function loadCurricula(
   const templateIds = Array.from(new Set((templates ?? []).map((t) => t.id)));
   const [{ data: units }, { data: sessions }] = await Promise.all([
     templateIds.length
-      ? supabase
+      ? selectInChunks(templateIds, (chunk) => supabase
           .from("teacher_curriculum_template_units")
           .select("id, template_id, position, unit_title, note, teacher_comment")
-          .in("template_id", templateIds)
-          .order("position", { ascending: true })
+          .in("template_id", chunk)
+          .order("position", { ascending: true }), { sort: orderComparator(["position", true]) })
       : Promise.resolve({ data: [] as never[] }),
-    supabase
+    selectInChunks(enrollmentIds, (chunk) => supabase
       .from("legacy_sessions")
       .select("id, status, scheduled_at, source_template_unit_id, enrollment_id")
-      .in("enrollment_id", enrollmentIds),
+      .in("enrollment_id", chunk)),
   ]);
 
   const unitsByTemplateId = new Map<string, typeof units>();

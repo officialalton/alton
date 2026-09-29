@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 import { loadTeacherAssignments } from "./assignments-data";
 import { loadLibraryBooks, type LibraryBook } from "@/app/student/vocab-library-data";
 
@@ -26,15 +27,17 @@ export async function loadTeacherVocabOverview(supabase: SupabaseClient, teacher
   const books = await loadLibraryBooks(supabase);
 
   const studentIds = students.map((s) => s.id);
-  const { data: quizzes } = studentIds.length
-    ? await supabase
+  // 청크마다 최신 100개를 받아 합친 뒤 전체 최신 100개만 남긴다(전역 limit 유지).
+  const { data: quizzesAll } = studentIds.length
+    ? await selectInChunks(studentIds, (chunk) => supabase
         .from("vocab_quizzes")
         .select("id, owner_id, items, status, score, total, due_at, created_at, created_by, session_id")
         .eq("created_by", teacherId)
-        .in("owner_id", studentIds)
+        .in("owner_id", chunk)
         .order("created_at", { ascending: false })
-        .limit(100)
+        .limit(100), { sort: orderComparator(["created_at", false]) })
     : { data: [] as never[] };
+  const quizzes = quizzesAll.slice(0, 100);
 
   const recentQuizzes: TeacherVocabQuizRow[] = (quizzes ?? []).map((q) => ({
     id: q.id as string,

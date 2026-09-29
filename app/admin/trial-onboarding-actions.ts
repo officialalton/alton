@@ -18,6 +18,7 @@ import { loadTrialPipelinesBatch } from "./trial-pipeline-data";
 import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
 import { autoActivateReadySubjectEnrollments } from "@/lib/enrollment/auto-activate";
 import { autoCloseConsultationOnContractSigned } from "@/lib/enrollment/auto-close-consultation";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -485,11 +486,11 @@ export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboar
 
   const consultationIds = (data ?? []).map((c) => c.id);
   const { data: links } = consultationIds.length
-    ? await admin
+    ? await selectInChunks(consultationIds, (chunk) => admin
         .from("trial_onboarding_links")
         .select("id, consultation_id, status, created_at")
-        .in("consultation_id", consultationIds)
-        .order("created_at", { ascending: false })
+        .in("consultation_id", chunk)
+        .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
     : { data: [] as { id: string; consultation_id: string; status: string; created_at: string }[] };
   const latestLinkStatusByConsultation = new Map<string, string>();
   const latestLinkIdByConsultation = new Map<string, string>();
@@ -504,12 +505,12 @@ export async function listTrialOnboardingCandidatesAction(): Promise<TrialOnboar
   // 형제자매 카드를 만든다(이전에 revoked된 링크의 학생은 표시하지 않음).
   const latestLinkIds = Array.from(latestLinkIdByConsultation.values());
   const { data: createdStudents } = latestLinkIds.length
-    ? await admin
+    ? await selectInChunks(latestLinkIds, (chunk) => admin
         .from("trial_onboarding_link_students")
-        .select("link_id, student_name, child_auth_user_id")
-        .in("link_id", latestLinkIds)
+        .select("link_id, student_name, child_auth_user_id, created_at")
+        .in("link_id", chunk)
         .eq("status", "created")
-        .order("created_at", { ascending: true })
+        .order("created_at", { ascending: true }), { sort: orderComparator(["created_at", true]) })
     : { data: [] as { link_id: string; student_name: string; child_auth_user_id: string | null }[] };
   const linkIdToConsultationId = new Map<string, string>();
   for (const [cId, lId] of latestLinkIdByConsultation.entries()) linkIdToConsultationId.set(lId, cId);
@@ -611,15 +612,15 @@ export async function listRegularConversionCandidatesAction(): Promise<RegularCo
   const ids = (selections ?? []).map((s) => s.subject_enrollment_id);
   if (ids.length === 0) return [];
 
-  const { data: enrollments, error: enrollError } = await admin
+  const { data: enrollments, error: enrollError } = await selectInChunks(ids, (chunk) => admin
     .from("subject_enrollments")
     .select("id, child_id, contract_id, subject:subjects(name)")
-    .in("id", ids);
+    .in("id", chunk));
   if (enrollError) throw new Error(enrollError.message);
 
   const childIds = Array.from(new Set((enrollments ?? []).map((e) => e.child_id)));
   const { data: children } = childIds.length
-    ? await admin.from("profiles").select("id, name").in("id", childIds)
+    ? await selectInChunks(childIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk))
     : { data: [] as { id: string; name: string }[] };
   const childNameById = new Map((children ?? []).map((c) => [c.id, c.name]));
 
@@ -657,19 +658,19 @@ export async function listRegularConversionCandidatesAction(): Promise<RegularCo
 
   const contractIds = Array.from(new Set((enrollments ?? []).map((e) => e.contract_id)));
   const { data: contracts } = contractIds.length
-    ? await admin.from("contracts").select("id, status").in("id", contractIds)
+    ? await selectInChunks(contractIds, (chunk) => admin.from("contracts").select("id, status").in("id", chunk))
     : { data: [] as { id: string; status: string }[] };
   const contractStatusById = new Map((contracts ?? []).map((c) => [c.id, c.status]));
 
   // 계약당 최신 active 버전 하나만 필요 — 여러 버전이 있어도 발송 대상은
   // 항상 이 최신 버전이다(sendRegularContractOneClickAction과 동일 조건).
   const { data: latestVersions } = contractIds.length
-    ? await admin
+    ? await selectInChunks(contractIds, (chunk) => admin
         .from("contract_versions")
         .select("contract_id, version_number, docusign_envelope_id")
-        .in("contract_id", contractIds)
+        .in("contract_id", chunk)
         .eq("version_status", "active")
-        .order("version_number", { ascending: false })
+        .order("version_number", { ascending: false }), { sort: orderComparator(["version_number", false]) })
     : { data: [] as { contract_id: string; version_number: number; docusign_envelope_id: string | null }[] };
   const latestVersionHasEnvelopeByContractId = new Map<string, boolean>();
   for (const v of latestVersions ?? []) {

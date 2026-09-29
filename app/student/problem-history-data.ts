@@ -1,4 +1,5 @@
 import { createAdminClient } from "@/lib/supabase-admin";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // 2026-09-14 UAT: "문제 기록은 레거시로 남아있는 거 같은데" — 학생 포털 문제 기록을 v3 답안(session_problem_work)으로
 // 다시 만든다. 수업 문제·과제 문제 모두, 답을 저장(제출)했거나 채점된 것만. 정답·해설·자동 채점은 **교사 채점 뒤에만**
@@ -53,9 +54,9 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
   const problemIds = Array.from(new Set(answers.map((a) => one(a.item)?.problem_id as string).filter(Boolean)));
   const [{ data: versions }, { data: problems }] = await Promise.all([
     versionIds.length
-      ? admin.from("problem_versions").select("id, passage, question, options, correct_index, explanation, answers, figure").in("id", versionIds)
+      ? selectInChunks(versionIds, (chunk) => admin.from("problem_versions").select("id, passage, question, options, correct_index, explanation, answers, figure").in("id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
-    problemIds.length ? admin.from("problems").select("id, format").in("id", problemIds) : Promise.resolve({ data: [] as Record<string, unknown>[] }),
+    problemIds.length ? selectInChunks(problemIds, (chunk) => admin.from("problems").select("id, format").in("id", chunk)) : Promise.resolve({ data: [] as Record<string, unknown>[] }),
   ]);
   const versionById = new Map((versions ?? []).map((v) => [v.id as string, v]));
   const formatById = new Map((problems ?? []).map((p) => [p.id as string, p.format as string]));
@@ -191,21 +192,21 @@ export async function loadProblemHistory(studentId: string): Promise<ProblemHist
   const versionIds = Array.from(new Set(rows.map((r) => r.problem_version_id as string).filter(Boolean)));
   const problemIds = Array.from(new Set(rows.map((r) => r.problem_id as string)));
   const [{ data: sessions }, { data: units }, { data: versions }, { data: problems }] = await Promise.all([
-    admin
+    selectInChunks(sessionIds, (chunk) => admin
       .from("sessions")
       .select(
         "id, reservation:reservations!sessions_reservation_id_fkey(starts_at), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
       )
-      .in("id", sessionIds),
-    admin
+      .in("id", chunk)),
+    selectInChunks(sessionIds, (chunk) => admin
       .from("session_curriculum_units")
       .select("session_id, unit:curriculum_overlay_units(unit_title)")
       .eq("role", "primary")
-      .in("session_id", sessionIds),
+      .in("session_id", chunk)),
     versionIds.length
-      ? admin.from("problem_versions").select("id, passage, options, correct_index, explanation, answers, figure").in("id", versionIds)
+      ? selectInChunks(versionIds, (chunk) => admin.from("problem_versions").select("id, passage, options, correct_index, explanation, answers, figure").in("id", chunk))
       : Promise.resolve({ data: [] as Record<string, unknown>[] }),
-    admin.from("problems").select("id, format, sat_domain, skill_code").in("id", problemIds),
+    selectInChunks(problemIds, (chunk) => admin.from("problems").select("id, format, sat_domain, skill_code").in("id", chunk)),
   ]);
 
   const sessionById = new Map(

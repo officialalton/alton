@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type StudentHomeworkItem = {
   id: string;
@@ -33,10 +34,10 @@ export async function loadStudentHomework(
   );
 
   const { data: sessions } = enrollmentIds.length
-    ? await supabase
+    ? await selectInChunks(enrollmentIds, (chunk) => supabase
         .from("legacy_sessions")
         .select("id, enrollment_id, session_number")
-        .in("enrollment_id", enrollmentIds)
+        .in("enrollment_id", chunk))
     : { data: [] as never[] };
 
   const sessionIds = (sessions ?? []).map((s) => s.id);
@@ -51,13 +52,13 @@ export async function loadStudentHomework(
   );
 
   const { data: items } = sessionIds.length
-    ? await supabase
+    ? await selectInChunks(sessionIds, (chunk) => supabase
         .from("homework_items")
         .select(
           "id, session_id, title, description, student_answer, graded, score, created_at"
         )
-        .in("session_id", sessionIds)
-        .order("created_at", { ascending: false })
+        .in("session_id", chunk)
+        .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
     : { data: [] as never[] };
 
   const todo: StudentHomeworkItem[] = [];

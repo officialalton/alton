@@ -6,6 +6,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { loadUnassignedConsultations, loadAssignedAwaitingSchedule, type IntakeConsultation } from "@/app/consultant/intake-data";
 import { sendConsultationSchedulingLinkEmail } from "@/lib/consultation/notifications";
 import { currentRequestOrigin } from "@/lib/request-origin";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // 컨설턴트 포지션(2026-09-22, 가볍게 시작) — 신규 auth 계정 발급은 범위 밖.
 // 기존 계정(이메일로 찾음)의 role을 consultant로 바꾸고, 담당 학생을
@@ -248,24 +249,24 @@ export async function getConsultantDetailAction(consultantId: string): Promise<C
   const studentIds = (assignments ?? []).map((a) => a.student_id as string);
   const guardianByStudent = new Map<string, { householdId: string | null; names: string[] }>();
   if (studentIds.length > 0) {
-    const { data: studentMemberships } = await supabase
+    const { data: studentMemberships } = await selectInChunks(studentIds, (chunk) => supabase
       .from("household_members")
       .select("household_id, profile_id")
-      .in("profile_id", studentIds)
-      .eq("role", "child");
+      .in("profile_id", chunk)
+      .eq("role", "child"));
     const householdOfStudent = new Map<string, string>(
       (studentMemberships ?? []).map((m) => [m.profile_id as string, m.household_id as string])
     );
     const householdIds = [...new Set(householdOfStudent.values())];
 
     if (householdIds.length > 0) {
-      const { data: guardianMemberships } = await supabase
+      const { data: guardianMemberships } = await selectInChunks(householdIds, (chunk) => supabase
         .from("household_members")
         .select("household_id, profile_id")
-        .in("household_id", householdIds)
-        .eq("role", "guardian");
+        .in("household_id", chunk)
+        .eq("role", "guardian"));
       const guardianIds = [...new Set((guardianMemberships ?? []).map((m) => m.profile_id as string))];
-      const { data: guardianProfiles } = await supabase.from("profiles").select("id, name").in("id", guardianIds);
+      const { data: guardianProfiles } = await selectInChunks(guardianIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk));
       const nameById = new Map((guardianProfiles ?? []).map((g) => [g.id as string, g.name as string | null]));
 
       const guardiansByHousehold = new Map<string, string[]>();

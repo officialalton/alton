@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type Child = {
   studentId: string;
@@ -54,12 +55,12 @@ export async function loadChildren(
   const householdIds = (guardianLinks ?? []).map((l) => l.household_id);
   if (householdIds.length === 0) return [];
 
-  const { data: childLinks } = await supabase
+  const { data: childLinks } = await selectInChunks(householdIds, (chunk) => supabase
     .from("household_members")
     .select("profile_id, is_primary, profile:profiles(name)")
-    .in("household_id", householdIds)
+    .in("household_id", chunk)
     .eq("role", "child")
-    .order("is_primary", { ascending: false });
+    .order("is_primary", { ascending: false }), { sort: orderComparator(["is_primary", false]) });
 
   const children = (childLinks ?? []).map((c) => ({
     studentId: c.profile_id as string,

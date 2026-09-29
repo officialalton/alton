@@ -3,6 +3,7 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { recordDocumentAccess } from "@/lib/document-access-audit";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // P4-3 3단계 — `문서 > 교사 서류` 보관함.
 //
@@ -66,10 +67,10 @@ export async function listTeacherDocumentSummariesAction(): Promise<TeacherDocum
     else existing.count += 1;
   }
 
-  const { data: profiles } = await admin
+  const { data: profiles } = await selectInChunks(Array.from(byTeacher.keys()), (chunk) => admin
     .from("profiles")
     .select("id, name")
-    .in("id", Array.from(byTeacher.keys()));
+    .in("id", chunk));
   const nameById = new Map((profiles ?? []).map((p) => [p.id as string, p.name as string]));
 
   return Array.from(byTeacher.entries())

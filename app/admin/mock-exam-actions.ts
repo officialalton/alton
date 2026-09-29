@@ -18,6 +18,7 @@ import {
   type FormatWeight,
 } from "@/lib/mock-exam/assemble";
 import { loadMockExamSetContentForStaff, type MockExamSetContentItem } from "@/lib/mock-exam/set-content";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression_ideas", "rw_standard_english"];
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
@@ -653,13 +654,10 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
   const studentIds = Array.from(new Set(attempts.map((a) => a.student_id)));
   const examSetIds = Array.from(new Set(attempts.map((a) => a.exam_set_id)));
   const [{ data: profiles }, { data: sets }, { data: itemCounts }, { data: answers }] = await Promise.all([
-    db.from("profiles").select("id, name").in("id", studentIds),
-    db.from("mock_exam_sets").select("id, name").in("id", examSetIds),
-    db.from("mock_exam_set_items").select("exam_set_id").in("exam_set_id", examSetIds),
-    db.from("mock_exam_answers").select("attempt_id, correct").in(
-      "attempt_id",
-      attempts.map((a) => a.id),
-    ),
+    selectInChunks(studentIds, (chunk) => db.from("profiles").select("id, name").in("id", chunk)),
+    selectInChunks(examSetIds, (chunk) => db.from("mock_exam_sets").select("id, name").in("id", chunk)),
+    selectInChunks(examSetIds, (chunk) => db.from("mock_exam_set_items").select("exam_set_id").in("exam_set_id", chunk)),
+    selectInChunks(attempts.map((a) => a.id), (chunk) => db.from("mock_exam_answers").select("attempt_id, correct").in("attempt_id", chunk)),
   ]);
   const nameByStudent = new Map((profiles ?? []).map((p) => [p.id, p.name as string | null]));
   const nameBySet = new Map((sets ?? []).map((s) => [s.id, s.name as string]));

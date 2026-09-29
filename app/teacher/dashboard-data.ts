@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import { isPastLesson, type TeacherLessonScheduleItem } from "./lesson-schedule-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type TeacherLesson = {
   sessionId: string;
@@ -68,7 +69,7 @@ export async function loadTeacherDashboard(
   const studentIds = Array.from(new Set((enrollments ?? []).map((e) => e.student_id)));
 
   const { data: studentProfiles } = studentIds.length
-    ? await supabase.from("profiles").select("id, name").in("id", studentIds)
+    ? await selectInChunks(studentIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk))
     : { data: [] as { id: string; name: string }[] };
   const studentNameById = new Map((studentProfiles ?? []).map((p) => [p.id, p.name]));
 
@@ -84,12 +85,12 @@ export async function loadTeacherDashboard(
   );
 
   const { data: sessions } = enrollmentIds.length
-    ? await supabase
+    ? await selectInChunks(enrollmentIds, (chunk) => supabase
         .from("legacy_sessions")
         .select(
           "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
         )
-        .in("enrollment_id", enrollmentIds)
+        .in("enrollment_id", chunk))
     : { data: [] as never[] };
 
   // 시간대 기준 통일(2026-09-10 P0-4) — "수업" 탭(TeacherLessonScheduleTab.tsx)이

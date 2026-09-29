@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // P4-3 2단계 — `문서 > 계약` 아카이브 리더.
 //
@@ -65,18 +66,18 @@ export async function loadContractArchive(
 
   // 최신 버전과 서명본을 한 번씩 배치로 읽는다.
   const [{ data: versions }, { data: artifacts }] = await Promise.all([
-    supabase
+    selectInChunks(contractIds, (chunk) => supabase
       .from("contract_versions")
       .select(
         "id, contract_id, version_number, version_status, docusign_envelope_status, docusign_status_updated_at, company_signed_at"
       )
-      .in("contract_id", contractIds)
-      .order("version_number", { ascending: false }),
-    supabase
+      .in("contract_id", chunk)
+      .order("version_number", { ascending: false }), { sort: orderComparator(["version_number", false]) }),
+    selectInChunks(contractIds, (chunk) => supabase
       .from("drive_artifacts")
       .select("id, contract_id, artifact_type, sync_status, drive_file_id")
-      .in("contract_id", contractIds)
-      .eq("artifact_type", "signed_document"),
+      .in("contract_id", chunk)
+      .eq("artifact_type", "signed_document")),
   ]);
 
   // version_number 내림차순으로 읽었으므로 계약별 첫 행이 최신이다. active 버전이

@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // R4 — 보호자 "수업권 구매/현황" 화면 데이터 로더(읽기 전용).
 //
@@ -110,11 +111,11 @@ export async function loadParentEntitlementsData(
     return { prices: [], children: [] };
   }
 
-  const { data: childLinks } = await supabase
+  const { data: childLinks } = await selectInChunks(householdIds, (chunk) => supabase
     .from("household_members")
     .select("profile_id")
-    .in("household_id", householdIds)
-    .eq("role", "child");
+    .in("household_id", chunk)
+    .eq("role", "child"));
   const verifiedChildIds = new Set((childLinks ?? []).map((c) => c.profile_id as string));
   const scopedChildren = children.filter((c) => verifiedChildIds.has(c.studentId));
   if (scopedChildren.length === 0) {
@@ -136,27 +137,27 @@ export async function loadParentEntitlementsData(
         .select("id, code, quantity")
         .in("code", ["lesson_pack_1", "lesson_pack_10", "lesson_pack_20"]),
       // 3) 계약 결제 가능 자격(active) — purchase-actions.ts와 동일 조건.
-      admin
+      selectInChunks(childIds, (chunk) => admin
         .from("contracts")
         .select("child_id, status")
-        .in("child_id", childIds)
-        .eq("status", "active"),
+        .in("child_id", chunk)
+        .eq("status", "active")),
       // 4) 자녀별 수업권 잔액. M2부터 정규(120분)/체험(60분) grant가 공존할 수 있어
       // entitlement_grant_details 뷰(grant + 상품 + 수업유형 + 잔액 합산, 20261012000000
       // §2)로 lesson_type_code별로 갈라 조회한다 — 예전처럼 entitlement_grants를 통째로
       // 합산하면 체험 1회가 "정규 수업권 잔여"에 섞여 보이는 실제 버그가 생긴다.
-      admin
+      selectInChunks(childIds, (chunk) => admin
         .from("entitlement_grant_details")
         .select("grant_id, child_id, expires_at, remaining, lesson_type_code, source_consultation_id")
-        .in("child_id", childIds),
+        .in("child_id", chunk)),
       // 5) 자녀별 구매 내역(purchase_receipts).
-      admin
+      selectInChunks(childIds, (chunk) => admin
         .from("purchase_receipts")
         .select(
           "purchase_id, child_id, contract_id, contract_version_number, product_code, lesson_type_label, lesson_duration_minutes, quantity, unit_price_minor, package_price_minor, discount_minor, discount_percent, tax_minor, total_minor, currency, validity_months, expires_at, price_policy_version, refund_policy_version, terms_version, status, stripe_checkout_session_id, stripe_payment_intent_id, created_at, confirmed_at, dispute_status"
         )
-        .in("child_id", childIds)
-        .order("created_at", { ascending: false }),
+        .in("child_id", chunk)
+        .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) }),
     ]);
 
   const activeChildIds = new Set((contracts ?? []).map((c) => c.child_id as string));

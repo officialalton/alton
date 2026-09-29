@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type ReviewData = {
   sessionId: string;
@@ -21,20 +22,20 @@ export async function loadReviews(
 ): Promise<Record<string, ReviewData>> {
   if (sessionIds.length === 0) return {};
 
-  const { data: reviews } = await supabase
+  const { data: reviews } = await selectInChunks(sessionIds, (chunk) => supabase
     .from("session_reviews")
     .select(
       "id, session_id, teacher_summary, strength, improve, next_plan, submitted_at"
     )
-    .in("session_id", sessionIds)
-    .not("submitted_at", "is", null);
+    .in("session_id", chunk)
+    .not("submitted_at", "is", null));
 
   const reviewIds = (reviews ?? []).map((r) => r.id);
   const { data: categories } = reviewIds.length
-    ? await supabase
+    ? await selectInChunks(reviewIds, (chunk) => supabase
         .from("session_review_categories")
         .select("review_id, category, final_text, rating")
-        .in("review_id", reviewIds)
+        .in("review_id", chunk))
     : { data: [] as never[] };
 
   const categoriesByReview = new Map<
@@ -70,11 +71,11 @@ export async function loadStudentFeedback(
 ): Promise<Record<string, StudentFeedback>> {
   if (sessionIds.length === 0) return {};
 
-  const { data } = await supabase
+  const { data } = await selectInChunks(sessionIds, (chunk) => supabase
     .from("session_student_feedback")
     .select("session_id, rating, comment")
     .eq("student_id", studentId)
-    .in("session_id", sessionIds);
+    .in("session_id", chunk));
 
   const result: Record<string, StudentFeedback> = {};
   for (const f of data ?? []) {
@@ -96,11 +97,13 @@ export async function loadStudentFeedbackForStudents(
 ): Promise<Record<string, StudentFeedback>> {
   if (studentIds.length === 0 || sessionIds.length === 0) return {};
 
-  const { data } = await supabase
-    .from("session_student_feedback")
-    .select("session_id, rating, comment")
-    .in("student_id", studentIds)
-    .in("session_id", sessionIds);
+  const { data } = await selectInChunks(sessionIds, (chunk) =>
+    supabase
+      .from("session_student_feedback")
+      .select("session_id, rating, comment")
+      .in("student_id", studentIds)
+      .in("session_id", chunk)
+  );
 
   const result: Record<string, StudentFeedback> = {};
   for (const f of data ?? []) {

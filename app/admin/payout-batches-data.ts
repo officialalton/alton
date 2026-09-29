@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // R10 Task C — v3 payout_batches 관리자 화면 데이터 계층.
 // 레거시 teacher_payouts(payouts-data.ts)와 달리 batch/item/audit-log
@@ -71,16 +72,16 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
   const teacherIds = Array.from(new Set(batches.map((b) => b.teacher_id)));
 
   const [{ data: profiles }, { data: items }, { data: auditRows }] = await Promise.all([
-    supabase.from("profiles").select("id, name").in("id", teacherIds),
-    supabase
+    selectInChunks(teacherIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk)),
+    selectInChunks(batchIds, (chunk) => supabase
       .from("payout_items")
       .select("id, batch_id, item_type, amount_minor, currency, payable_minutes, status, adjustment_reason")
-      .in("batch_id", batchIds),
-    supabase
+      .in("batch_id", chunk)),
+    selectInChunks(batchIds, (chunk) => supabase
       .from("payout_batch_audit_log")
       .select("id, batch_id, action, actor_id, note, created_at")
-      .in("batch_id", batchIds)
-      .order("created_at", { ascending: true }),
+      .in("batch_id", chunk)
+      .order("created_at", { ascending: true }), { sort: orderComparator(["created_at", true]) }),
   ]);
 
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name as string]));
@@ -106,7 +107,7 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
   ).filter((id) => !nameById.has(id));
   const actorNameById = new Map(nameById);
   if (auditActorIds.length > 0) {
-    const { data: actorProfiles } = await supabase.from("profiles").select("id, name").in("id", auditActorIds);
+    const { data: actorProfiles } = await selectInChunks(auditActorIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk));
     for (const p of actorProfiles ?? []) actorNameById.set(p.id as string, (p.name as string) ?? "");
   }
   const auditByBatch = new Map<string, PayoutBatchAuditEntry[]>();

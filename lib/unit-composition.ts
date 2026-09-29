@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { composeProblemText } from "./problem-question";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 세 계층의 회차 구성을 같은 모양으로 다룬다.
 //
@@ -91,13 +92,10 @@ async function loadUnitProblems(
 
   if (rows.length === 0) return [];
 
-  const { data: problems } = await supabase
+  const { data: problems } = await selectInChunks(rows.map((r) => r.problem_id), (chunk) => supabase
     .from("problems")
     .select("id, passage, skill_type, difficulty")
-    .in(
-      "id",
-      rows.map((r) => r.problem_id)
-    );
+    .in("id", chunk));
   const byId = new Map((problems ?? []).map((p) => [p.id as string, p]));
 
   return rows.map((r) => {
@@ -378,7 +376,7 @@ export async function loadComposition(
   const docIds = (materialRows ?? []).map((m) => m.curriculum_doc_id as string);
   const { data: docs } = await timed("docTitles", timing, async () =>
     docIds.length
-      ? await supabase.from("curriculum_docs").select("id, title").in("id", docIds)
+      ? await selectInChunks(docIds, (chunk) => supabase.from("curriculum_docs").select("id, title").in("id", chunk))
       : { data: [] as { id: string; title: string }[] }
   );
   const titleById = new Map((docs ?? []).map((d) => [d.id as string, d.title as string]));
@@ -461,7 +459,7 @@ export async function loadPickableMaterials(
     new Set((docs ?? []).map((d) => d.primary_keyword_id as string | null).filter(Boolean))
   ) as string[];
   const { data: keywords } = keywordIds.length
-    ? await supabase.from("subject_keywords").select("id, label").in("id", keywordIds)
+    ? await selectInChunks(keywordIds, (chunk) => supabase.from("subject_keywords").select("id, label").in("id", chunk))
     : { data: [] as { id: string; label: string }[] };
   const labelById = new Map((keywords ?? []).map((k) => [k.id as string, k.label as string]));
 
@@ -518,26 +516,26 @@ export async function loadKeywordProblems(
 ): Promise<KeywordProblem[]> {
   if (keywordIds.length === 0) return [];
 
-  const { data: links } = await supabase
+  const { data: links } = await selectInChunks(keywordIds, (chunk) => supabase
     .from("problem_auto_composition_candidates")
     .select("problem_id")
-    .in("keyword_id", keywordIds);
+    .in("keyword_id", chunk));
 
   const problemIds = Array.from(new Set((links ?? []).map((l) => l.problem_id as string)));
   if (problemIds.length === 0) return [];
 
   const [{ data: problems }, { data: versions }] = await Promise.all([
-    supabase
+    selectInChunks(problemIds, (chunk) => supabase
       .from("problems")
-      .select("id, format, passage, skill_type, difficulty, sat_domain, skill_code, exam_system")
-      .in("id", problemIds)
-      .order("created_at", { ascending: true }),
+      .select("id, created_at, format, passage, skill_type, difficulty, sat_domain, skill_code, exam_system")
+      .in("id", chunk)
+      .order("created_at", { ascending: true }), { sort: orderComparator(["created_at", true]) }),
     // 미리보기는 **공개 버전** 기준 — 학생이 실제로 볼 내용이다(초안·검수본이 아니다).
-    supabase
+    selectInChunks(problemIds, (chunk) => supabase
       .from("problem_versions")
       .select("problem_id, passage, question, options, figure")
-      .in("problem_id", problemIds)
-      .eq("status", "published"),
+      .in("problem_id", chunk)
+      .eq("status", "published")),
   ]);
   const versionByProblem = new Map<string, { passage: string; options: string[]; figure: unknown | null }>();
   for (const v of versions ?? []) {

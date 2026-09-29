@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type SubjectKeyword = { id: string; label: string };
 
@@ -96,11 +97,11 @@ export async function loadMySubjects(
   if (subjectNameById.size === 0) return [];
 
   const subjectIds = Array.from(subjectNameById.keys());
-  const { data: templates } = await supabase
+  const { data: templates } = await selectInChunks(subjectIds, (chunk) => supabase
     .from("teacher_curriculum_templates")
     .select("id, subject_id")
     .eq("teacher_id", teacherId)
-    .in("subject_id", subjectIds);
+    .in("subject_id", chunk));
 
   const templateBySubject = new Map(
     (templates ?? []).map((t) => [t.subject_id, t.id])
@@ -111,26 +112,26 @@ export async function loadMySubjects(
   // (관리자 쪽 loadSubjects와 같은 방식).
   const [{ data: units }, { data: keywords }] = await Promise.all([
     templateIds.length
-      ? supabase
+      ? selectInChunks(templateIds, (chunk) => supabase
           .from("teacher_curriculum_template_units")
           .select("id, template_id, position, unit_title, note, teacher_comment, source_unit_id")
-          .in("template_id", templateIds)
-          .order("position", { ascending: true })
+          .in("template_id", chunk)
+          .order("position", { ascending: true }), { sort: orderComparator(["position", true]) })
       : Promise.resolve({ data: [] as never[] }),
-    supabase
+    selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_keywords")
       .select("id, subject_id, label")
-      .in("subject_id", subjectIds)
+      .in("subject_id", chunk)
       .eq("status", "active")
-      .order("label", { ascending: true }),
+      .order("label", { ascending: true }), { sort: orderComparator(["label", true]) }),
   ]);
 
   const unitIds = (units ?? []).map((u) => u.id);
   const { data: unitKeywordRows } = unitIds.length
-    ? await supabase
+    ? await selectInChunks(unitIds, (chunk) => supabase
         .from("teacher_curriculum_template_unit_keywords")
         .select("unit_id, keyword_id")
-        .in("unit_id", unitIds)
+        .in("unit_id", chunk))
     : { data: [] as { unit_id: string; keyword_id: string }[] };
 
   const keywordIdsByUnit = new Map<string, string[]>();

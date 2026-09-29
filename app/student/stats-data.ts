@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type SubjectAttendance = {
   subjectName: string;
@@ -32,10 +33,10 @@ export async function loadStats(
   );
 
   const { data: sessions } = enrollmentIds.length
-    ? await supabase
+    ? await selectInChunks(enrollmentIds, (chunk) => supabase
         .from("legacy_sessions")
         .select("enrollment_id, status")
-        .in("enrollment_id", enrollmentIds)
+        .in("enrollment_id", chunk))
     : { data: [] as never[] };
 
   const countsBySubject = new Map<string, { completed: number; noShow: number }>();
@@ -74,17 +75,17 @@ export async function loadStats(
 
   const sessionIds = enrollmentIds.length
     ? (
-        await supabase.from("legacy_sessions").select("id").in("enrollment_id", enrollmentIds)
+        await selectInChunks(enrollmentIds, (chunk) => supabase.from("legacy_sessions").select("id").in("enrollment_id", chunk))
       ).data?.map((s) => s.id) ?? []
     : [];
 
   const { data: feedback } = sessionIds.length
-    ? await supabase
+    ? await selectInChunks(sessionIds, (chunk) => supabase
         .from("session_student_feedback")
         .select("rating")
         .eq("student_id", studentId)
-        .in("session_id", sessionIds)
-        .not("rating", "is", null)
+        .in("session_id", chunk)
+        .not("rating", "is", null))
     : { data: [] as { rating: number }[] };
 
   const ratings = (feedback ?? []).map((f) => f.rating).filter((r): r is number => r !== null);

@@ -3,6 +3,7 @@ import type {
   TrialPipelineStepKey,
   TrialOnboardingPipeline,
 } from "./trial-onboarding-actions";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 2026-09-10(P1 성능 배치 — 매칭 하단 "상담 → 체험 → 정규 전환" 현황표)
 // — 이전에는 후보 카드마다 getTrialOnboardingPipelineAction()을 호출해
@@ -125,9 +126,9 @@ export async function loadTrialPipelinesBatch(
   const childIds = Array.from(new Set(candidates.map((c) => c.childId).filter((id): id is string => !!id)));
 
   const [{ data: consultationRows }, { data: enrollmentRows }] = await Promise.all([
-    admin.from("consultations").select("id, trial_entitlement_grant_status, trial_entitlement_grant_error").in("id", consultationIds),
+    selectInChunks(consultationIds, (chunk) => admin.from("consultations").select("id, trial_entitlement_grant_status, trial_entitlement_grant_error").in("id", chunk)),
     childIds.length
-      ? admin.from("subject_enrollments").select("id, child_id, status, created_at").in("child_id", childIds).order("created_at", { ascending: false })
+      ? selectInChunks(childIds, (chunk) => admin.from("subject_enrollments").select("id, child_id, status, created_at").in("child_id", chunk).order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
       : Promise.resolve({ data: [] as { id: string; child_id: string; status: string; created_at: string }[] }),
   ]);
 
@@ -152,25 +153,25 @@ export async function loadTrialPipelinesBatch(
     { data: contractRows },
   ] = await Promise.all([
     enrollmentIds.length
-      ? admin.from("teacher_assignments").select("subject_enrollment_id").in("subject_enrollment_id", enrollmentIds).eq("status", "active")
+      ? selectInChunks(enrollmentIds, (chunk) => admin.from("teacher_assignments").select("subject_enrollment_id").in("subject_enrollment_id", chunk).eq("status", "active"))
       : Promise.resolve({ data: [] as { subject_enrollment_id: string }[] }),
     childIds.length
-      ? admin.from("trial_smart_notes_consents").select("child_id").in("child_id", childIds)
+      ? selectInChunks(childIds, (chunk) => admin.from("trial_smart_notes_consents").select("child_id").in("child_id", chunk))
       : Promise.resolve({ data: [] as { child_id: string }[] }),
     childIds.length
-      ? admin.from("entitlement_grants").select("child_id, entitlement_products!inner(code)").in("child_id", childIds).eq("entitlement_products.code", "trial_lesson_grant")
+      ? selectInChunks(childIds, (chunk) => admin.from("entitlement_grants").select("child_id, entitlement_products!inner(code)").in("child_id", chunk).eq("entitlement_products.code", "trial_lesson_grant"))
       : Promise.resolve({ data: [] as { child_id: string }[] }),
     enrollmentIds.length
-      ? admin.from("sessions").select("subject_enrollment_id, smart_notes_status, created_at").in("subject_enrollment_id", enrollmentIds).order("created_at", { ascending: false })
+      ? selectInChunks(enrollmentIds, (chunk) => admin.from("sessions").select("subject_enrollment_id, smart_notes_status, created_at").in("subject_enrollment_id", chunk).order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
       : Promise.resolve({ data: [] as { subject_enrollment_id: string; smart_notes_status: string | null; created_at: string }[] }),
     enrollmentIds.length
-      ? admin.from("lesson_reviews").select("subject_enrollment_id").in("subject_enrollment_id", enrollmentIds).eq("lesson_type", "trial").eq("status", "final")
+      ? selectInChunks(enrollmentIds, (chunk) => admin.from("lesson_reviews").select("subject_enrollment_id").in("subject_enrollment_id", chunk).eq("lesson_type", "trial").eq("status", "final"))
       : Promise.resolve({ data: [] as { subject_enrollment_id: string }[] }),
     enrollmentIds.length
-      ? admin.from("trial_regular_progress_selections").select("subject_enrollment_id").in("subject_enrollment_id", enrollmentIds)
+      ? selectInChunks(enrollmentIds, (chunk) => admin.from("trial_regular_progress_selections").select("subject_enrollment_id").in("subject_enrollment_id", chunk))
       : Promise.resolve({ data: [] as { subject_enrollment_id: string }[] }),
     childIds.length
-      ? admin.from("contracts").select("id, child_id, status, created_at").in("child_id", childIds).order("created_at", { ascending: false })
+      ? selectInChunks(childIds, (chunk) => admin.from("contracts").select("id, child_id, status, created_at").in("child_id", chunk).order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
       : Promise.resolve({ data: [] as { id: string; child_id: string; status: string | null; created_at: string }[] }),
   ]);
 
@@ -202,10 +203,10 @@ export async function loadTrialPipelinesBatch(
 
   const [{ data: contractVersionRows }, { data: purchaseRows }] = await Promise.all([
     contractIds.length
-      ? admin.from("contract_versions").select("contract_id, docusign_envelope_id, version_number").in("contract_id", contractIds).order("version_number", { ascending: false })
+      ? selectInChunks(contractIds, (chunk) => admin.from("contract_versions").select("contract_id, docusign_envelope_id, version_number").in("contract_id", chunk).order("version_number", { ascending: false }), { sort: orderComparator(["version_number", false]) })
       : Promise.resolve({ data: [] as { contract_id: string; docusign_envelope_id: string | null; version_number: number }[] }),
     contractIds.length
-      ? admin.from("purchases").select("contract_id").in("contract_id", contractIds).eq("status", "succeeded")
+      ? selectInChunks(contractIds, (chunk) => admin.from("purchases").select("contract_id").in("contract_id", chunk).eq("status", "succeeded"))
       : Promise.resolve({ data: [] as { contract_id: string }[] }),
   ]);
 

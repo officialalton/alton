@@ -16,6 +16,7 @@ import { currentRequestOrigin } from "@/lib/request-origin";
 import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "@/lib/onboarding-email-guard";
 import { loadEmailById } from "./users-data";
 import { archivedHouseholdProfileIds } from "@/lib/household/household-archive";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -306,10 +307,10 @@ export async function listDirectOnboardingLinksAction(): Promise<DirectOnboardin
   if (!links?.length) return [];
 
   const linkIds = links.map((l) => l.id);
-  const { data: students, error: studentsError } = await admin
+  const { data: students, error: studentsError } = await selectInChunks(linkIds, (chunk) => admin
     .from("trial_onboarding_link_students")
     .select("link_id, status, child_auth_user_id")
-    .in("link_id", linkIds);
+    .in("link_id", chunk));
   if (studentsError) throw new Error(studentsError.message);
 
   // P4-1(B) — 아카이브된 가구의 발송 건은 이 목록에서 뺀다(아카이브됨 서브탭에서만
@@ -428,11 +429,11 @@ export async function searchPrimaryGuardiansAction(query: string): Promise<Prima
   if (candidateIds.size === 0) return [];
 
   // 주 보호자만 남긴다(= 이 계정이 primary_guardian_id인 household가 있는 경우).
-  const { data: households, error: householdsError } = await admin
+  const { data: households, error: householdsError } = await selectInChunks(Array.from(candidateIds), (chunk) => admin
     .from("households")
     .select("id, primary_guardian_id, created_at")
-    .in("primary_guardian_id", Array.from(candidateIds))
-    .order("created_at", { ascending: true });
+    .in("primary_guardian_id", chunk)
+    .order("created_at", { ascending: true }), { sort: orderComparator(["created_at", true]) });
   if (householdsError) throw new Error(householdsError.message);
   if (!households?.length) return [];
 
@@ -447,11 +448,11 @@ export async function searchPrimaryGuardiansAction(query: string): Promise<Prima
   const guardianIds = Array.from(householdByGuardian.keys()).slice(0, 20);
   const householdIds = guardianIds.map((g) => householdByGuardian.get(g)!);
 
-  const { data: childLinks, error: childError } = await admin
+  const { data: childLinks, error: childError } = await selectInChunks(householdIds, (chunk) => admin
     .from("household_members")
     .select("household_id, child:profiles(name)")
     .eq("role", "child")
-    .in("household_id", householdIds);
+    .in("household_id", chunk));
   if (childError) throw new Error(childError.message);
 
   const childrenByHousehold = new Map<string, string[]>();
@@ -466,10 +467,10 @@ export async function searchPrimaryGuardiansAction(query: string): Promise<Prima
   const nameById = new Map((byName ?? []).map((p) => [p.id, p.name ?? ""]));
   const missingNameIds = guardianIds.filter((id) => !nameById.has(id));
   if (missingNameIds.length > 0) {
-    const { data: extraProfiles, error: extraError } = await admin
+    const { data: extraProfiles, error: extraError } = await selectInChunks(missingNameIds, (chunk) => admin
       .from("profiles")
       .select("id, name, role")
-      .in("id", missingNameIds);
+      .in("id", chunk));
     if (extraError) throw new Error(extraError.message);
     for (const p of extraProfiles ?? []) {
       if (p.role === "parent") nameById.set(p.id, p.name ?? "");

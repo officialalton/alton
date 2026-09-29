@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R5 — 선생님 "내 배정 학생/과목" 화면 데이터 로더(읽기 전용).
 // teacher_assignments 조회는 RLS가 teacher_id = auth.uid()로 범위를 제한한다
@@ -43,10 +44,10 @@ export async function loadTeacherAssignments(
   const enrollmentIds = Array.from(
     new Set(assignments.map((a) => a.subject_enrollment_id))
   );
-  const { data: enrollments } = await supabase
+  const { data: enrollments } = await selectInChunks(enrollmentIds, (chunk) => supabase
     .from("subject_enrollments")
     .select("id, child_id, subject_id, subject:subjects(name)")
-    .in("id", enrollmentIds);
+    .in("id", chunk));
 
   const enrollmentById = new Map((enrollments ?? []).map((e) => [e.id, e]));
 
@@ -54,10 +55,10 @@ export async function loadTeacherAssignments(
     new Set((enrollments ?? []).map((e) => e.child_id))
   );
   const { data: students } = childIds.length
-    ? await supabase.from("profiles").select("id, name, phone").in("id", childIds)
+    ? await selectInChunks(childIds, (chunk) => supabase.from("profiles").select("id, name, phone").in("id", chunk))
     : { data: [] as { id: string; name: string; phone: string | null }[] };
   const { data: studentRows } = childIds.length
-    ? await supabase.from("students").select("id, grade").in("id", childIds)
+    ? await selectInChunks(childIds, (chunk) => supabase.from("students").select("id, grade").in("id", chunk))
     : { data: [] as { id: string; grade: string | null }[] };
   const studentNameById = new Map((students ?? []).map((s) => [s.id, s.name]));
   const studentPhoneById = new Map((students ?? []).map((s) => [s.id, s.phone]));
@@ -67,11 +68,11 @@ export async function loadTeacherAssignments(
   // 있는 조합에서만 보여주기 위해, 이 교사의 레거시 enrollments를 (student_id,
   // subject_id) 키로 조회해둔다(roster-data.ts::loadRoster()의 동일 패턴).
   const { data: legacyEnrollments } = childIds.length
-    ? await supabase
+    ? await selectInChunks(childIds, (chunk) => supabase
         .from("enrollments")
         .select("student_id, subject_id")
         .eq("teacher_id", teacherId)
-        .in("student_id", childIds)
+        .in("student_id", chunk))
     : { data: [] as { student_id: string; subject_id: string }[] };
   const legacyKeys = new Set(
     (legacyEnrollments ?? []).map((e) => `${e.student_id}:${e.subject_id}`)

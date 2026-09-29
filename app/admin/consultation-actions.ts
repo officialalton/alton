@@ -6,6 +6,7 @@ import { getEnvelopeStatus } from "@/lib/docusign";
 import type { CompanyApprovalForTemplate } from "@/lib/contracts/family-contract-template";
 import { companySignOffContractVersionInternal, sendContractForSignatureInternal } from "@/lib/contract-send-internal";
 import { processOneDriveArtifact, MAX_RETRY_COUNT, type DriveArtifactRow } from "@/lib/drive-artifacts";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R3: 상담(consultation) → 체험(trial) → 제안서(proposal) → 계약(contract) 최소
 // 동작 흐름. 스키마 소스 오브 트루스는 supabase/migrations/20260912000000_r3_...sql.
@@ -836,18 +837,15 @@ export async function listOpenContractActivationRetries(): Promise<ContractActiv
   if (error) throw new Error(error.message);
   if (!data || data.length === 0) return [];
 
-  const { data: contracts } = await admin
+  const { data: contracts } = await selectInChunks(data.map((row) => row.contract_id), (chunk) => admin
     .from("contracts")
     .select("id, child_id")
-    .in(
-      "id",
-      data.map((row) => row.contract_id)
-    );
+    .in("id", chunk));
   const childIdByContract = new Map((contracts ?? []).map((c) => [c.id, c.child_id as string | null]));
   const childIds = Array.from(new Set(Array.from(childIdByContract.values()).filter((id): id is string => !!id)));
 
   const { data: profiles } =
-    childIds.length > 0 ? await admin.from("profiles").select("id, name").in("id", childIds) : { data: [] };
+    childIds.length > 0 ? await selectInChunks(childIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk)) : { data: [] };
   const nameByChildId = new Map((profiles ?? []).map((p) => [p.id, p.name as string | null]));
 
   return data.map((row) => {
