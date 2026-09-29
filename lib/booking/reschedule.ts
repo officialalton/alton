@@ -9,6 +9,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { patchCalendarEventTime } from "@/lib/google-calendar";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 export async function respondToLessonRescheduleRequest(
   supabase: SupabaseClient,
@@ -19,7 +20,7 @@ export async function respondToLessonRescheduleRequest(
     p_request_id: requestId,
     p_accept: accept,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   if (!accept) return;
 
   const admin = createAdminClient();

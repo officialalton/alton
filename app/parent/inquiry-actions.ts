@@ -16,6 +16,7 @@
 import { requireUser } from "@/lib/auth";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 export type HouseholdMessage = {
   id: string;
@@ -337,7 +338,7 @@ export async function submitMeetingRequest(params: {
       ends_at: endsAtIso,
       source_message_id: null,
     });
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(friendlyDbMessage(error));
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "상담 신청에 실패했습니다." };

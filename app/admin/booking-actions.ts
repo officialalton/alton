@@ -16,6 +16,7 @@ import {
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 const BOOKING_CAPABILITY = "예약관리권한";
 
@@ -77,7 +78,7 @@ async function loadReconciliationNeededBookings(
     // (지금은 대상 자체가 몇 건 안 되지만, 그건 이 화면이 빠른 이유가 아니라 아직
     // 데이터가 적을 뿐이라 상한이 필요하다는 결론이었다).
     .limit(200);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return (data ?? []).map((r) => ({
     reservationId: r.id as string,
     teacherId: r.owner_profile_id as string,
@@ -129,7 +130,7 @@ async function loadNotificationOutboxSummary(
   const { data, error } = await admin
     .from("booking_notification_outbox")
     .select("notification_type, status");
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   const counts = new Map<string, number>();
   for (const row of data ?? []) {
@@ -186,7 +187,7 @@ export async function listAllTeacherLessons(range?: { from: string; to: string }
     .lte("reservation.starts_at", until)
     .order("id", { ascending: true })
     .limit(2000);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   function one<T>(rel: T | T[] | null | undefined): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
@@ -254,7 +255,7 @@ async function loadRecentIncidentReports(
     )
     .order("reported_at", { ascending: false })
     .limit(100);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   function one<T>(rel: T | T[] | null): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : rel;
@@ -309,7 +310,7 @@ async function loadExternalCalendarChanges(
     .order("external_change_detected_at", { ascending: true })
     // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한.
     .limit(200);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return (data ?? []).map((r) => ({
     reservationId: r.id as string,
     teacherName: ((r.teacher as { name?: string } | null)?.name) ?? null,
@@ -349,7 +350,7 @@ export async function resolveExternalCalendarChange(params: {
     p_resolution: params.resolution,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -365,7 +366,7 @@ export async function resolveExternalChangeAcceptGoogleTime(params: { reservatio
     .select("external_change_detail")
     .eq("id", params.reservationId)
     .maybeSingle();
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   const detail = reservation?.external_change_detail as { google_starts_at?: string; google_ends_at?: string } | null;
   if (!detail?.google_starts_at || !detail?.google_ends_at) {
     throw new Error("Google 쪽 새 시간 정보가 없습니다(감지 데이터 누락).");
@@ -394,7 +395,7 @@ export async function resolveExternalChangeKeepAltonTime(params: { reservationId
     .select("starts_at, ends_at, google_event_id, owner_profile_id")
     .eq("id", params.reservationId)
     .maybeSingle();
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   if (!reservation?.google_event_id) {
     throw new Error("Google 이벤트 정보가 없어 복원할 수 없습니다.");
   }
@@ -403,7 +404,7 @@ export async function resolveExternalChangeKeepAltonTime(params: { reservationId
     .select("workspace_email")
     .eq("id", reservation.owner_profile_id as string)
     .maybeSingle();
-  if (teacherError) throw new Error(teacherError.message);
+  if (teacherError) throw new Error(friendlyDbMessage(teacherError));
   if (!teacher?.workspace_email) {
     throw new Error(`선생님(${reservation.owner_profile_id})의 workspace_email이 없어 복원할 수 없습니다.`);
   }
@@ -476,7 +477,7 @@ export async function retryExternalCalendarReconciliationNow(): Promise<TeacherR
     .from("teachers")
     .select("id, profile:profiles!teachers_id_fkey(name)")
     .not("workspace_email", "is", null);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   function one<T>(rel: T | T[] | null | undefined): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
@@ -611,7 +612,7 @@ async function loadSessionsNeedingFinalJudgment(
     .in("final_status", ["scheduled", "live"])
     .order("id", { ascending: true })
     .limit(200);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   const preRows = toSessionJudgmentRows(data as unknown as Array<Record<string, unknown>>, new Map());
   const ended = preRows.filter((r) => r.endsAt && new Date(r.endsAt).getTime() < Date.now());
@@ -642,7 +643,7 @@ async function loadRecentlyFinalizedSessions(
     .not("final_status", "in", "(scheduled,live)")
     .order("finalized_at", { ascending: false })
     .limit(50);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   const rows = toSessionJudgmentRows(data as unknown as Array<Record<string, unknown>>, new Map());
   const counts = await incidentReportCounts(admin, rows.map((r) => r.sessionId));
   return rows.map((r) => ({ ...r, incidentReportCount: counts.get(r.sessionId) ?? 0 }));
@@ -682,7 +683,7 @@ export async function adminFinalizeLessonSession(params: {
       p_new_final_status: params.outcome,
       p_reason: params.reason,
     });
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(friendlyDbMessage(error));
     if (params.outcome === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
     return;
   }
@@ -695,7 +696,7 @@ export async function adminFinalizeLessonSession(params: {
     p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
     p_early_end_reason: params.earlyEndReason ?? null,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   if (params.outcome === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
 }
 
@@ -717,7 +718,7 @@ export async function adminFinalizeSessionAsInfraIncident(params: {
     p_reason: params.reason,
     p_provided_minutes: params.providedMinutes ?? 0,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -740,7 +741,7 @@ export async function adminResolveTeacherPartialInterruption(params: {
     p_actor_id: actorUserId,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 export type MakeupObligationRow = {
@@ -782,8 +783,8 @@ async function loadOutstandingMakeupObligations(
       .limit(200),
     admin.from("makeup_balances").select("obligation_id, remaining_minutes"),
   ]);
-  if (error) throw new Error(error.message);
-  if (balanceError) throw new Error(balanceError.message);
+  if (error) throw new Error(friendlyDbMessage(error));
+  if (balanceError) throw new Error(friendlyDbMessage(balanceError));
   const remainingByObligation = new Map((balances ?? []).map((b) => [b.obligation_id as string, b.remaining_minutes as number]));
   function one<T>(rel: T | T[] | null | undefined): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);
@@ -822,7 +823,7 @@ export async function adminApplyMakeupTimeToBooking(params: {
     p_minutes: params.minutes,
     p_actor_id: actorUserId,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -835,7 +836,7 @@ export async function adminReopenSession(params: { sessionId: string; reason: st
   // auth.uid()가 비어 항상 거부되므로, 반드시 RLS-scoped(로그인 세션) 클라이언트로 호출한다.
   const { supabase } = await requireAdminOrCapability(BOOKING_CAPABILITY);
   const { error } = await supabase.rpc("reopen_session", { p_session_id: params.sessionId, p_reason: params.reason });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -855,7 +856,7 @@ export async function adminRecompleteSession(params: {
     p_new_final_status: params.newFinalStatus,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   if (params.newFinalStatus === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
 }
 
@@ -898,7 +899,7 @@ async function loadSessionJudgmentReconciliationTasks(
     )
     .order("created_at", { ascending: false })
     .limit(200);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return (data ?? []).map((row) => ({
     taskId: row.id as string,
     sessionId: row.session_id as string,
@@ -987,7 +988,7 @@ export async function setReconciliationTaskStudentCancelledDisposition(params: {
     p_disposition: params.disposition,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -1009,6 +1010,6 @@ export async function resolveSessionJudgmentReconciliationTask(params: {
     p_task_id: params.taskId,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return { result: (data as "resolved" | "needs_review") ?? "resolved" };
 }

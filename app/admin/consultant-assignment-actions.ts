@@ -7,6 +7,7 @@ import { loadUnassignedConsultations, loadAssignedAwaitingSchedule, type IntakeC
 import { sendConsultationSchedulingLinkEmail } from "@/lib/consultation/notifications";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 // 컨설턴트 포지션(2026-09-22, 가볍게 시작) — 신규 auth 계정 발급은 범위 밖.
 // 기존 계정(이메일로 찾음)의 role을 consultant로 바꾸고, 담당 학생을
@@ -147,7 +148,7 @@ export async function assignConsultationToConsultantAction(consultationId: strin
     p_field: "intake_owner",
     p_new_owner_id: consultantId,
   });
-  if (intakeError) throw new Error(intakeError.message);
+  if (intakeError) throw new Error(friendlyDbMessage(intakeError));
   const { error: consultantError } = await supabase.rpc("assign_consultation_owner", {
     p_consultation_id: consultationId,
     p_field: "admissions_consultant",
@@ -161,7 +162,7 @@ export async function assignConsultationToConsultantAction(consultationId: strin
           : "해당 컨설턴트에게 이미 같은 시간의 다른 상담이 있어 배정할 수 없습니다."
       );
     }
-    throw new Error(consultantError.message);
+    throw new Error(friendlyDbMessage(consultantError));
   }
 }
 

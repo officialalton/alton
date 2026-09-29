@@ -9,6 +9,7 @@
 
 import { requireUser } from "@/lib/auth";
 import type { MeetingRequest, GuardianMeetingRequestReview } from "@/app/parent/inquiry-actions";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 export type MyAssignedConsultant = { id: string; name: string | null };
 
@@ -81,7 +82,7 @@ export async function submitMyConsultantMeetingRequestAction(params: {
       ends_at: endsAt.toISOString(),
       source_message_id: null,
     });
-    if (error) throw new Error(error.message);
+    if (error) throw new Error(friendlyDbMessage(error));
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "신청에 실패했습니다." };

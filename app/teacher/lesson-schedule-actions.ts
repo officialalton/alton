@@ -12,6 +12,7 @@ import { loadTeacherLessonSchedule, type TeacherLessonScheduleItem } from "./les
 import { cancelLessonBooking } from "@/lib/booking/create-booking";
 import { listTeacherExternalBusyBlocks, type ExternalBusyBlock } from "@/lib/booking/external-busy";
 import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 export type { TeacherLessonScheduleItem, ExternalBusyBlock };
 
@@ -79,7 +80,7 @@ export async function requestMyLessonRescheduleAction(params: {
       p_proposed_ends_at: params.proposedEndsAt,
       p_reason: params.reason,
     });
-    if (error) return { ok: false, error: error.message };
+    if (error) return { ok: false, error: friendlyDbMessage(error) };
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
@@ -90,7 +91,7 @@ export async function cancelMyRescheduleRequestAction(requestId: string): Promis
   try {
     const { supabase } = await requireUser();
     const { error } = await supabase.rpc("cancel_my_reservation_reschedule_request", { p_request_id: requestId });
-    if (error) return { ok: false, error: error.message };
+    if (error) return { ok: false, error: friendlyDbMessage(error) };
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
@@ -103,7 +104,7 @@ export async function listMyRescheduleRequestsAction(): Promise<MyRescheduleRequ
     .from("reservation_reschedule_requests")
     .select("id, reservation_id, status, proposed_starts_at, proposed_ends_at, reason, created_at")
     .order("created_at", { ascending: false });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return (data ?? []).map((r) => ({
     id: r.id,
     reservationId: r.reservation_id,
@@ -153,7 +154,7 @@ export async function startMyLessonSession(sessionId: string): Promise<ActionRes
       return { ok: false, error: "본인 수업만 시작할 수 있습니다." };
     }
     const { error } = await admin.rpc("mark_lesson_session_started", { p_session_id: sessionId, p_actor_id: user.id });
-    if (error) return { ok: false, error: error.message };
+    if (error) return { ok: false, error: friendlyDbMessage(error) };
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };
@@ -216,7 +217,7 @@ export async function finalizeMyLessonSession(params: {
       p_teacher_fault_provided_minutes: params.teacherFaultProvidedMinutes ?? null,
       p_early_end_reason: params.earlyEndReason ?? null,
     });
-    if (error) return { ok: false, error: error.message };
+    if (error) return { ok: false, error: friendlyDbMessage(error) };
     if (params.outcome === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
     return { ok: true };
   } catch (e) {
@@ -250,7 +251,7 @@ export async function resolveMyLessonLateness(params: {
       p_actor_id: user.id,
       p_reason: params.reason,
     });
-    if (error) return { ok: false, error: error.message };
+    if (error) return { ok: false, error: friendlyDbMessage(error) };
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };

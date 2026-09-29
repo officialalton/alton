@@ -10,6 +10,7 @@
 
 import { createAdminClient } from "@/lib/supabase-admin";
 import { cancelLessonBooking } from "@/lib/booking/create-booking";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 export type TerminationRequestedByRole = "guardian" | "teacher" | "admin";
 export type TerminationResolution = "reassign" | "end_enrollment";
@@ -128,7 +129,7 @@ export async function processTeacherAssignmentTermination(
     .in("status", ["requested", "failed"])
     .select("id")
     .maybeSingle();
-  if (claimError) throw new Error(claimError.message);
+  if (claimError) throw new Error(friendlyDbMessage(claimError));
   if (!claimed) {
     // 이미 다른 처리 흐름이 선점했거나 그 사이 완료됨 — 최신 상태 재조회로 반환.
     const { data: latest } = await admin
@@ -222,7 +223,7 @@ export async function processTeacherAssignmentTermination(
       "assert_teacher_assignment_ready_for_closure",
       { p_teacher_assignment_id: request.teacher_assignment_id }
     );
-    if (gateError) throw new Error(gateError.message);
+    if (gateError) throw new Error(friendlyDbMessage(gateError));
 
     let newAssignmentId: string | undefined;
     if (params.resolution === "reassign") {
@@ -236,7 +237,7 @@ export async function processTeacherAssignmentTermination(
         p_reason: request.reason,
         p_changed_by: params.processedBy,
       });
-      if (rpcError) throw new Error(rpcError.message);
+      if (rpcError) throw new Error(friendlyDbMessage(rpcError));
       newAssignmentId = rpcData as string;
     } else {
       const nowIso = new Date().toISOString();
@@ -245,7 +246,7 @@ export async function processTeacherAssignmentTermination(
         .update({ status: "ended", effective_until: nowIso })
         .eq("id", request.teacher_assignment_id)
         .eq("status", "active");
-      if (endAssignError) throw new Error(endAssignError.message);
+      if (endAssignError) throw new Error(friendlyDbMessage(endAssignError));
 
       const { error: endEnrollError } = await admin
         .from("subject_enrollments")
@@ -254,7 +255,7 @@ export async function processTeacherAssignmentTermination(
         // terminated — "ended"가 아니라 "terminated").
         .update({ status: "terminated" })
         .eq("id", request.subject_enrollment_id);
-      if (endEnrollError) throw new Error(endEnrollError.message);
+      if (endEnrollError) throw new Error(friendlyDbMessage(endEnrollError));
     }
 
     await admin
@@ -269,7 +270,7 @@ export async function processTeacherAssignmentTermination(
 
     return { status: "completed", newAssignmentId };
   } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
+    const message = friendlyDbMessage(e);
     await admin
       .from("teacher_assignment_termination_requests")
       .update({ status: "failed", error: message, updated_at: new Date().toISOString() })

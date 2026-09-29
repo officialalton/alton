@@ -6,6 +6,7 @@ import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent
 import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 // M1 — 관리자 상담 운영(요구사항 1·3·6). 홈페이지 신청은 app/consult-actions.ts,
 // 슬롯/hold/상태전이의 소스오브트루스는 20261009000000_m1_consultation_unification.sql의
@@ -121,7 +122,7 @@ export async function queryConsultationsInRange(
     .gte("starts_at", params.from)
     .lt("starts_at", params.to)
     .order("starts_at", { ascending: true });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   const rows = (data ?? []) as Array<Omit<ConsultationListItem, "consultReadiness" | "completionReadiness" | "trial_entitlement_grant_expires_at">>;
   const expiryByGrantId = await attachTrialGrantExpiry(admin, rows);
   return rows.map((row) => ({
@@ -149,7 +150,7 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
     )
     .eq("status", "requested")
     .order("starts_at", { ascending: true });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   const rows = (data ?? []) as Array<Omit<ConsultationListItem, "consultReadiness" | "completionReadiness" | "trial_entitlement_grant_expires_at">>;
   const expiryByGrantId = await attachTrialGrantExpiry(admin, rows);
   return rows.map((row) => ({
@@ -182,7 +183,7 @@ export async function acceptConsultationRequest(consultationId: string): Promise
     p_consultation_id: consultationId,
     p_consent_version_id: activeConsent?.id ?? null,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   // 요구사항 3: 수락 시 Calendar·Meet 생성. 실패해도 위 RPC의 status='scheduled'
   // 전환 자체는 이미 커밋됐다 — google_sync_status만 재처리 대상으로 남는다.
@@ -195,7 +196,7 @@ export async function rejectConsultationRequest(consultationId: string, reason: 
     p_consultation_id: consultationId,
     p_reason: reason || null,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   // 요구사항 2: 거절은 Calendar가 담당하지 않는 알림이므로(수락 전에는 애초에 Calendar
   // 이벤트가 없다) ALTON 커스텀 이메일 경로로만 안내한다. 이메일 발송 실패가 거절 처리
@@ -222,7 +223,7 @@ export async function rescheduleConsultationRequest(consultationId: string, newS
     if (error.code === "23P01") {
       throw new Error(error.message.includes("미팅") ? error.message : "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.");
     }
-    throw new Error(error.message);
+    throw new Error(friendlyDbMessage(error));
   }
 
   // ALTON과 Google Calendar가 최종 일치하도록 처리(요구사항 3) — 이미 Calendar
@@ -236,7 +237,7 @@ export async function cancelConsultationRequest(consultationId: string, reason: 
     p_consultation_id: consultationId,
     p_reason: reason || null,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 
   await cancelSyncedConsultationCalendarEvent(consultationId);
 }
@@ -263,7 +264,7 @@ export async function recordConsultationOutcome(params: {
       p_notes: params.notes || null,
       p_admin_review_summary: params.adminReviewSummary || null,
     });
-    if (error) return { ok: false, error: error.message };
+    if (error) return { ok: false, error: friendlyDbMessage(error) };
     if (params.outcome === "regular_recommended") scheduleContractDispatch({ consultationId: params.consultationId });
     return { ok: true };
   } catch (e) {
@@ -280,7 +281,7 @@ export async function retryTrialEntitlementGrant(consultationId: string): Promis
   const { error } = await supabase.rpc("admin_retry_trial_entitlement_grant", {
     p_consultation_id: consultationId,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 export async function retryFailedConsultationCalendarSyncs(): Promise<{ processed: number }> {
@@ -313,7 +314,7 @@ export async function listConsultAvailabilityRules(): Promise<ConsultAvailabilit
     .from("consult_availability_rules")
     .select("id, weekday, start_time, end_time, active")
     .order("weekday", { ascending: true });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return (data ?? []) as ConsultAvailabilityRule[];
 }
 
@@ -331,14 +332,14 @@ export async function addConsultAvailabilityRule(params: { weekday: number; star
     if (error.code === "23P01") {
       throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
     }
-    throw new Error(error.message);
+    throw new Error(friendlyDbMessage(error));
   }
 }
 
 export async function deactivateConsultAvailabilityRule(ruleId: string): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("consult_availability_rules").update({ active: false }).eq("id", ruleId);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 export type ConsultAvailabilityException = {
@@ -357,7 +358,7 @@ export async function listConsultAvailabilityExceptions(): Promise<ConsultAvaila
     .from("consult_availability_exceptions")
     .select("id, exception_date, is_closed, start_time, end_time, reason")
     .order("exception_date", { ascending: true });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
   return (data ?? []) as ConsultAvailabilityException[];
 }
 
@@ -381,11 +382,11 @@ export async function addConsultAvailabilityException(params: {
     reason: params.reason || null,
     created_by: adminUserId,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 export async function removeConsultAvailabilityException(exceptionId: string): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("consult_availability_exceptions").delete().eq("id", exceptionId);
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }

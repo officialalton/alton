@@ -1,6 +1,7 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { patchCalendarEventTime } from "@/lib/google-calendar";
 import { syncOneReservationCalendarEvent } from "@/lib/booking/calendar-sync";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 // R6 11/N — "ALTON 시간 유지"/"Google 시간 반영" 실제 처리. 감지(external-change-detection.ts)
 // 와 분리 — 이 파일은 관리자가 확인 버튼을 눌렀을 때만 호출된다. 두 경로 모두 마지막에
@@ -29,7 +30,7 @@ export async function acceptGoogleTimeForReservation(params: {
     p_admin_id: params.adminId,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -63,7 +64,7 @@ export async function restoreGoogleEventToAltonTime(params: {
     p_admin_id: params.adminId,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }
 
 /**
@@ -85,7 +86,7 @@ export async function recreateCalendarEventAfterDeletion(params: {
     .from("reservations")
     .update({ google_sync_status: "pending", google_event_id: null, google_meet_link: null, google_meeting_code: null })
     .eq("id", params.reservationId);
-  if (resetError) throw new Error(resetError.message);
+  if (resetError) throw new Error(friendlyDbMessage(resetError));
 
   const result = await syncOneReservationCalendarEvent(params.reservationId);
   if (result.outcome !== "synced") {
@@ -101,5 +102,5 @@ export async function recreateCalendarEventAfterDeletion(params: {
     p_admin_id: params.adminId,
     p_reason: params.reason,
   });
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(friendlyDbMessage(error));
 }

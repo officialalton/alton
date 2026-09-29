@@ -49,7 +49,7 @@ describe("acceptGoogleTimeForReservation", () => {
     });
   });
 
-  it("RPC가 실패하면(재검증 실패 포함) 에러를 그대로 던진다", async () => {
+  it("RPC가 실패하면(재검증 실패 포함) 에러를 던진다(겹침은 친절한 문구)", async () => {
     rpcMock.mockResolvedValue({ error: { message: "teacher_buffer_violation" } });
     const { acceptGoogleTimeForReservation } = await import("./external-change-resolution");
     await expect(
@@ -57,7 +57,7 @@ describe("acceptGoogleTimeForReservation", () => {
         reservationId: "r1", googleStartsAt: "2026-10-01T20:00:00Z", googleEndsAt: "2026-10-01T22:00:00Z",
         adminId: "admin1", reason: "x",
       })
-    ).rejects.toThrow("teacher_buffer_violation");
+    ).rejects.toThrow("선생님의 다른 수업과 겹칩니다");
   });
 });
 
