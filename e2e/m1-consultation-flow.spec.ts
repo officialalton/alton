@@ -146,8 +146,7 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
     await timeButtons.nth(Math.floor(Math.random() * (await timeButtons.count()))).click();
     await expect(customer.getByTestId("consult-slot-confirmation")).toBeVisible();
     await customer.getByRole("button", { name: "이 시간으로 확정하기" }).click();
-    // 확정 자체는 DB 상태로 확인한다. "확정되었습니다" 성공 화면은 아래 별도 테스트(test.fail)가
-    // 다룬다 — 현재 앱은 예약 성공 직후 그 화면 대신 "유효하지 않거나 만료된 예약 링크"를 보여준다.
+    // 확정 자체는 DB 상태로 확인한다. "확정되었습니다" 성공 화면은 아래 별도 테스트가 다룬다.
     await expect
       .poll(() => psql(`select status from consultations where id = '${consultationId}';`), { timeout: 15000 })
       .toBe("scheduled");
@@ -162,17 +161,8 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
     expect(["pending", "failed", "reconciliation_needed"]).toContain(syncStatus);
   });
 
-  // REAL APP BUG(2026-09-29 발견, app/schedule/[token]/ScheduleForm.tsx +
-  // app/components/ConsultSlotPicker.tsx): ScheduleForm이 fetchSlots를 렌더마다 새로 만든
-  // 인라인 함수로 넘기고, ConsultSlotPicker의 load()가 그 함수에 의존하는 useEffect라
-  // 부모가 다시 렌더될 때마다(슬롯 선택·제출 중·제출 완료) 슬롯을 다시 조회한다. 예약이
-  // 성공한 직후의 재조회는 이미 사용된 토큰이라 invalid_link → linkInvalid=true가 되는데,
-  // ScheduleForm은 `if (linkInvalid)`를 `if (confirmed)`보다 먼저 검사하므로 고객이
-  // "상담 일정이 확정되었습니다" 대신 "유효하지 않거나 만료된 예약 링크입니다"를 보게 된다
-  // (DB에는 정상 확정됨). 앱을 고치면 이 test.fail()이 "예상 밖 통과"로 알려 주니 그때
-  // test.fail()을 제거한다.
+  // 2026-09-29 회귀 방지: 예전에는 ScheduleForm 재조회로 성공 직후 '유효하지 않거나 만료된 링크'가 떴다(수정됨).
   test("예약 성공 직후 고객 화면은 확정 안내를 보여준다", async ({ browser }) => {
-    test.fail(true, "REAL BUG: 예약 성공 직후 성공 화면 대신 '유효하지 않거나 만료된 예약 링크' 표시(ScheduleForm 재조회)");
     test.skip(autoAssignOn, "자동배정이 켜져 있어 이 스펙 전용 컨설턴트를 만들지 않았다.");
 
     const email = `m1-e2e-direct-${RUN_ID}@example.com`;

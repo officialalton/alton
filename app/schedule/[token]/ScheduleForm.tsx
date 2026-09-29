@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import ConsultSlotPicker, { type ConsultSlotPickerHandle } from "@/app/components/ConsultSlotPicker";
 import { listOpenSlotsForTokenAction, redeemSchedulingLinkAction } from "@/app/schedule-actions";
 import SchedulingLinkInvalid from "./SchedulingLinkInvalid";
@@ -14,15 +14,21 @@ export default function ScheduleForm({ token }: { token: string }) {
   const pickerRef = useRef<ConsultSlotPickerHandle>(null);
 
   // 서버 액션은 무효 토큰을 throw 하지 않고 결과값으로 돌려준다(프로덕션에서 문구가 가려지지 않도록).
-  const fetchSlots = async (fromIso: string, toIso: string) => {
-    const r = await listOpenSlotsForTokenAction(token, fromIso, toIso);
-    if (r.ok) return r.slots;
-    if (r.reason === "invalid_link") {
-      setLinkInvalid(true);
-      return [];
-    }
-    throw new Error(r.error);
-  };
+  // useCallback 으로 고정한다: 렌더마다 새 함수를 넘기면 ConsultSlotPicker 의 useEffect 가 부모가 다시
+  // 그려질 때마다(슬롯 선택·제출 중·제출 완료) 슬롯을 재조회하고, 예약 직후의 재조회는 이미 사용된
+  // 토큰이라 invalid_link 가 되어 확정 화면을 덮어 버렸다(2026-09-29 e2e 발견).
+  const fetchSlots = useCallback(
+    async (fromIso: string, toIso: string) => {
+      const r = await listOpenSlotsForTokenAction(token, fromIso, toIso);
+      if (r.ok) return r.slots;
+      if (r.reason === "invalid_link") {
+        setLinkInvalid(true);
+        return [];
+      }
+      throw new Error(r.error);
+    },
+    [token],
+  );
 
   async function handleConfirm() {
     if (!selectedSlot) {
@@ -51,7 +57,8 @@ export default function ScheduleForm({ token }: { token: string }) {
     }
   }
 
-  if (linkInvalid) return <SchedulingLinkInvalid />;
+  // 확정된 뒤에는 무엇이 와도 확정 화면이 우선한다(토큰은 확정과 동시에 소진된다).
+  if (linkInvalid && !confirmed) return <SchedulingLinkInvalid />;
 
   if (confirmed) {
     return (
