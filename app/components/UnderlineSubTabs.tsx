@@ -22,7 +22,7 @@ export default function UnderlineSubTabs<T extends string>({
   badgeCounts?: Partial<Record<T, number>>;
 }) {
   return (
-    <div className={"flex items-center gap-5 border-b border-brand-border" + (className ? ` ${className}` : "")}>
+    <div className={"flex items-center gap-5 border-b border-brand-border overflow-x-auto whitespace-nowrap" + (className ? ` ${className}` : "")}>
       {items.map((item) => {
         const count = badgeCounts?.[item.id] ?? 0;
         const active = activeId === item.id;
@@ -32,7 +32,7 @@ export default function UnderlineSubTabs<T extends string>({
             type="button"
             onClick={() => onSelect(item.id)}
             className={
-              "relative pb-2.5 -mb-px text-[13.5px] font-semibold border-b-2 transition-colors " +
+              "relative shrink-0 pb-2.5 -mb-px text-[13.5px] font-semibold border-b-2 transition-colors " +
               (active ? "border-navy text-navy" : "border-transparent text-grey-400")
             }
           >

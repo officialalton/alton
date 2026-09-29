@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ConsultantSettlementPanel from "./ConsultantSettlementPanel";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
@@ -92,7 +93,7 @@ export default function PayoutBatchesTab({
   initialBatches: PayoutBatchListItem[];
 }) {
   // P4-2(2026-09-12) — 관리자 정산 화면에 `수취 계좌` 서브탭을 추가한다.
-  const [subtab, setSubtab] = useState<"batches" | "accounts">("batches");
+  const [subtab, setSubtab] = useState<PayoutSubTab>("batches");
   // P4-2(2차) — 최종 송금액 가감 조정 입력. 자동 산정 항목을 고치는 것이 아니라
   // 별도 조정 항목을 추가하는 것이므로 금액·사유만 받는다.
   const [adjustDraft, setAdjustDraft] = useState<Record<string, { amount: string; reason: string }>>({});
@@ -309,6 +310,15 @@ export default function PayoutBatchesTab({
       setMessage(e instanceof Error ? e.message : "실패 처리 실패");
       setBusyId(null);
     }
+  }
+
+  if (subtab === "consultant-settlement") {
+    return (
+      <div className="max-w-[900px]">
+        <SettlementSubtabs subtab={subtab} onChange={setSubtab} />
+        <ConsultantSettlementPanel />
+      </div>
+    );
   }
 
   if (subtab === "accounts") {
@@ -788,16 +798,19 @@ export default function PayoutBatchesTab({
 }
 
 // P4-2 — 정산 탭 서브탭(배치 / 수취 계좌).
+type PayoutSubTab = "batches" | "accounts" | "consultant-settlement";
+
 function SettlementSubtabs({
   subtab,
   onChange,
 }: {
-  subtab: "batches" | "accounts";
-  onChange: (v: "batches" | "accounts") => void;
+  subtab: PayoutSubTab;
+  onChange: (v: PayoutSubTab) => void;
 }) {
-  const tabs: { id: "batches" | "accounts"; label: string }[] = [
+  const tabs: { id: PayoutSubTab; label: string }[] = [
     { id: "batches", label: "정산 배치" },
     { id: "accounts", label: "수취 계좌" },
+    { id: "consultant-settlement", label: "컨설턴트 정산" },
   ];
   return <UnderlineSubTabs items={tabs} activeId={subtab} onSelect={onChange} className="mb-4" />;
 }
