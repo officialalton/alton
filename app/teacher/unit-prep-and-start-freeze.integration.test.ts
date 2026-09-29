@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P2/P3 3단계 — 제품 오너 피드백 1·2·5.
 //   (1) 예약 없이 회차를 준비하고, 수업이 잡히면 그 준비를 연결한다.
@@ -57,11 +58,6 @@ function asUserExpectError(userId: string, sql: string): string {
 
 let baseUnitId: string;
 const cleanupContractIds: string[] = [];
-// 통합 테스트 파일마다 예약 시각이 겹치지 않도록 서로 다른 '날짜 구간'을 쓴다.
-// 같은 선생님 소유 예약은 시간대가 겹칠 수 없고(reservations_no_overlap), 파일들이
-// 모두 '지금 시각 + N일'로 심기 때문에 구간이 겹치면 실행 순서에 따라 깨진다.
-// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
-let reservationOffsetDays = 4000 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
   SUBJECT_ID = psql(
@@ -140,11 +136,7 @@ function makeUnitWithoutReservation(): {
 
 /** 나중에 예약이 잡혔을 때의 수업 하나. */
 function addSessionFor(enrollmentId: string): string {
-  reservationOffsetDays += 2;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${reservationOffsetDays} days', now() + interval '${reservationOffsetDays} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "unit-prep-and-start-freeze", enrollmentId, teacherId: TEACHER_ID });
   return psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

@@ -1,5 +1,6 @@
 import { execFileSync, spawn } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // 배치 2-4 corrective(20261261000000, 마지막 항목) — bypass_session_lock GUC를
 // 전용 테이블 session_invariant_unlock_tokens 1회용 토큰으로 교체한 뒤의 회귀
@@ -65,15 +66,13 @@ type SessionFixture = {
   reservationId: string;
 };
 
-// reservations_no_overlap 제약 때문에 매 fixture마다 서로 겹치지 않는 시간대를
-// 써야 한다 — 호출 순서대로 1시간씩 뒤로 미룬 슬롯을 배정한다.
-let nextSlotOffsetHours = 0;
-
 function createSessionFixture(finalStatus: string, materialVersionId?: string): SessionFixture {
-  const ids = psql(`select gen_random_uuid() || '|' || gen_random_uuid();`).split("|");
-  const [reservationId, sessionId] = ids;
-  const offset = nextSlotOffsetHours;
-  nextSlotOffsetHours += 1;
+  const sessionId = psql(`select gen_random_uuid();`);
+  const reservationId = insertReservationInBand(psql, {
+    band: "session-invariant-unlock-token",
+    enrollmentId: SHARED_ENROLLMENT_ID,
+    teacherId: TEACHER_ID,
+  });
 
   // material_version_id는 INSERT 컬럼 목록에 넣는다 — prevent_material_version_reassignment()
   // 트리거는 `before update of material_version_id`에만 걸려 있으므로(최초
@@ -83,8 +82,6 @@ function createSessionFixture(finalStatus: string, materialVersionId?: string): 
   const materialVersionValue = materialVersionId ? `, '${materialVersionId}'` : "";
 
   psql(`
-    insert into reservations (id, kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-    values ('${reservationId}', 'lesson', '${SHARED_ENROLLMENT_ID}', '${TEACHER_ID}', now() + interval '${offset} hours' - interval '10 minutes', now() + interval '${offset} hours' + interval '50 minutes', 'confirmed');
     insert into sessions (id, reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes, final_status${materialVersionColumn})
     select '${sessionId}', '${reservationId}', '${SHARED_ENROLLMENT_ID}', '${TEACHER_ID}', id, 60, '${finalStatus}'${materialVersionValue}
     from lesson_types where code = 'regular';

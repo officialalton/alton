@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
+import { findFreeBookableSlot, findFreeTeacherSlot } from "@/test/reservation-slots";
 
 // M4 인수 기준 13번 — 아직 전용 테스트로 확인되지 않았던 3가지를 로컬 Postgres에
 // 직접 psql로 명시적으로 못박는다(새 기능 구현 아님, 기존 R6/M2 메커니즘 고정):
@@ -32,33 +33,22 @@ let trialProductId: string;
 // is_teacher_slot_open()은 자정을 넘기는 슬롯을 "시작/종료가 같은 로컬 날짜"여야
 // 통과시키므로, 테스트를 실행한 실제 시각이 America/Los_Angeles 자정 부근이면
 // N일 뒤도 똑같이 자정 부근이 되어 teacher_slot_not_open으로 실패했다 — 요일이
-// 아니라 "실행 시각의 시:분"에 좌우되는 버그였다. lib/booking/session-final-judgment
-// 등 다른 통합 테스트가 이미 쓰는 FIXED_BOOKING_HOUR_UTC=17(PDT 10:00/PST 09:00,
-// 항상 현지 낮) 패턴을 그대로 재사용해 어떤 실제 "오늘"에도 안전하게 만든다.
-// 시(時)는 항상 17시 UTC 고정(위 이유), 분(分)만 0~49 사이에서 무작위로 흩뿌린다 —
-// 같은 파일을 db reset 없이 다시 실행했을 때 이전 실행이 남긴 예약(entitlement_ledger가
-// INSERT-only라 지워지지 않음, payout-batch-lifecycle.integration.test.ts와 동일한
-// 근본 원인)과 정확히 같은 분에 겹쳐 violates_teacher_buffer(전후 15분)에 걸리는
-// 것을 피하기 위함이지, "오늘이 언제든 안전"이라는 이 fix의 본 목적과는 무관하다
-// (시가 고정이라 날짜 경계 근처로 갈 일은 없다 — 무작위인 건 분뿐).
-// 2026-09-28: 같은 시드 선생님(박서연)을 다른 통합 테스트(smart-notes-gate 등)도
-// 같은 날짜의 17~18시 UTC 부근에 예약하므로, db reset 직후 한 번에 전체를 돌려도
-// 무작위 분만으로는 teacher_buffer_violation을 피하지 못했다. 현지 낮 시간대(15~22시
-// UTC = PDT 08~15시, 같은 로컬 날짜) 후보 중 violates_teacher_buffer()가 false인
-// 첫 슬롯을 고른다 — 검증 대상(만료/24시간 분기)과 무관한 슬롯 충돌만 제거한다.
-const FIXED_BOOKING_HOUR_UTC = 17;
-const CANDIDATE_HOURS_UTC = [FIXED_BOOKING_HOUR_UTC, 15, 16, 19, 20, 21, 22];
-function futureSlot(daysFromNow: number, durationMinutes = 60): { startsAt: string; endsAt: string } {
-  for (const hour of CANDIDATE_HOURS_UTC) {
-    const startsAtDate = new Date();
-    startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
-    startsAtDate.setUTCHours(hour, Math.floor(Math.random() * 50), 0, 0);
-    const startsAt = startsAtDate.toISOString();
-    const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
-    const busy = psql(`select violates_teacher_buffer('${TEACHER_ID}', '${startsAt}', '${endsAt}');`);
-    if (busy === "f") return { startsAt, endsAt };
-  }
-  throw new Error(`futureSlot: ${daysFromNow}일 뒤 선생님 빈 슬롯을 찾지 못함`);
+// 아니라 "실행 시각의 시:분"에 좌우되는 버그였다 — 그래서 시각은 항상 현지 낮 시간대만 쓴다.
+// 2026-09-28: 같은 시드 선생님(박서연)을 다른 통합 테스트(smart-notes-gate 등)와 이전
+// 실행(정리되지 않는 예약)도 쓰므로, 예약 가능 기간(24시간~8주) 안의 현지 낮 시간대
+// (15~22시 UTC = PDT 08~15시, 같은 로컬 날짜) 중 violates_teacher_buffer()가 false인
+// 첫 슬롯을 고른다(test/reservation-slots.ts) — 검증 대상(만료/24시간 분기)과 무관한
+// 슬롯 충돌만 제거한다.
+const futureSlot = (minDays: number) => findFreeBookableSlot(psql, { teacherId: TEACHER_ID, minDays });
+
+// 24시간 미만 분기용: 지금부터 [minHours, 23)시간 사이(정각 정렬)의 빈 시작 시각.
+// 원래 고정값(10시간/5시간 뒤)이 이전 실행·다른 파일의 예약과 겹칠 때만 뒤로 밀리고,
+// 항상 24시간 미만이라 검증하는 분기는 같다.
+function nearFreeSlot(minHours: number): { startsAt: string; endsAt: string } {
+  const startsAt = new Date(
+    findFreeTeacherSlot(psql, { teacherId: TEACHER_ID, fromHours: minHours + 1, toHours: 23, stepHours: 1 })
+  ).toISOString();
+  return { startsAt, endsAt: new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString() };
 }
 
 beforeAll(() => {
@@ -192,8 +182,7 @@ describe("24시간 기준 취소 처리(release vs 소진)", () => {
     );
     const reservationId = reservationSessionRow.split("|")[0];
 
-    const nearStartsAt = new Date(Date.now() + 10 * 60 * 60 * 1000).toISOString(); // 10시간 뒤
-    const nearEndsAt = new Date(new Date(nearStartsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt: nearStartsAt, endsAt: nearEndsAt } = nearFreeSlot(10); // 10~22시간 뒤(24시간 미만)
     psql(`update reservations set starts_at = '${nearStartsAt}', ends_at = '${nearEndsAt}' where id = '${reservationId}';`);
 
     psql(`select cancel_lesson_booking('${reservationId}', 'student', '${childId}', '통합테스트 — 24시간 미만 전 취소');`);
@@ -210,8 +199,7 @@ describe("24시간 기준 취소 처리(release vs 소진)", () => {
     );
     const reservationId = reservationSessionRow.split("|")[0];
 
-    const nearStartsAt = new Date(Date.now() + 5 * 60 * 60 * 1000).toISOString(); // 5시간 뒤(24시간 미만)
-    const nearEndsAt = new Date(new Date(nearStartsAt).getTime() + 60 * 60000).toISOString();
+    const { startsAt: nearStartsAt, endsAt: nearEndsAt } = nearFreeSlot(5); // 5~22시간 뒤(24시간 미만)
     psql(`update reservations set starts_at = '${nearStartsAt}', ends_at = '${nearEndsAt}' where id = '${reservationId}';`);
 
     psql(`select cancel_lesson_booking('${reservationId}', 'teacher', '${TEACHER_ID}', '통합테스트 — 선생님 취소는 시점 무관 release');`);

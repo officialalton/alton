@@ -12,7 +12,6 @@ import { describe, expect, it } from "vitest";
 //  (4) households.archived_at 해제(복귀)는 예약·매칭을 건드리지 않는다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -30,6 +29,19 @@ function createAuthUser(label: string): string {
      returning id;`
   );
 }
+
+// 재실행 안전: 공용 seed 선생님(dddddddd-...01)에 날짜·시각이 고정된 예약을 심으면
+// 같은 날 다시 돌렸을 때 이전 실행이 남긴 예약과 reservations_no_overlap /
+// teacher_buffer_violation으로 충돌한다. 이 파일은 예약 가능시간·버퍼를 검증하지
+// 않으므로, 실행마다 이 파일 전용 선생님 프로필을 새로 만들어 다른 실행·다른
+// 파일의 예약과 절대 겹치지 않게 한다.
+const TEACHER_ID = (() => {
+  const id = createAuthUser("teacher");
+  psql(`insert into profiles (id, role, name) values ('${id}', 'teacher', '아카이브스펙선생님');`);
+  // 매칭·세션 생성 가드가 요구하는 현재 시급 이력.
+  psql(`select set_teacher_rate('${id}', 3000000, 'KRW', now() - interval '10 day');`);
+  return id;
+})();
 
 type Fixture = { guardianId: string; childId: string; householdId: string; enrollmentId: string };
 

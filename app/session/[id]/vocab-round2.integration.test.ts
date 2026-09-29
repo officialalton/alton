@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // 2026-09-15 제품 오너 2차 지시 — 단어장 상시 학습 자산화 검증.
 //   assign_vocab_quiz(due_at 포함 새 시그니처)/assign_library_words_to_student 가 teaches_student()
@@ -53,11 +54,7 @@ beforeAll(() => {
     `insert into subject_enrollments (child_id, subject_id, contract_id, status) values ('${STUDENT_ID}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`
   );
   psql(`insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from) values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`);
-  const offset = 9200 + Math.floor(Math.random() * 5000) * 3;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "vocab-round2", enrollmentId: enrollmentId, teacherId: TEACHER_ID });
   sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60) returning id;`

@@ -1,6 +1,7 @@
 import { execFileSync, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 const execFileAsync = promisify(execFile);
 
@@ -58,16 +59,13 @@ function createSession(): string {
      values ('${childId}', '${SUBJECT_ID}', '${contractId}', 'active') returning id;`
   );
   // booking window/entitlement 규칙과 무관하게 세션 존재만 필요하므로
-  // confirm_lesson_booking을 거치지 않는다 — 다른 통합 테스트의 예약 fixture와
-  // 시간대 충돌을 피하려고 아주 먼 미래+무작위 오프셋 슬롯을 쓴다.
-  const startsAtDate = new Date(now + (365 + Math.floor(Math.random() * 3000)) * 24 * 60 * 60 * 1000);
-  const startsAt = startsAtDate.toISOString();
-  const endsAt = new Date(startsAtDate.getTime() + 60 * 60000).toISOString();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${subjectEnrollmentId}', '${TEACHER_ID}', '${startsAt}', '${endsAt}', 'confirmed')
-     returning id;`
-  );
+  // confirm_lesson_booking을 거치지 않고, 파일 전용 날짜 구간의 빈 슬롯에 직접 넣는다
+  // (재실행 시 이전 실행이 남긴 예약과 겹치지 않도록).
+  const reservationId = insertReservationInBand(psql, {
+    band: "workspace-events-idempotency",
+    enrollmentId: subjectEnrollmentId,
+    teacherId: TEACHER_ID,
+  });
   return psql(
     `insert into sessions (reservation_id, teacher_id, subject_enrollment_id, lesson_type_id, final_status, scheduled_duration_minutes)
      values ('${reservationId}', '${TEACHER_ID}', '${subjectEnrollmentId}', '${regularLessonTypeId}', 'completed', 60)

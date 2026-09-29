@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // R8 follow-up (2026-09-07) — session_annotation_events(append-only 이벤트 로그,
 // supabase/migrations/20261223000000_r8_session_annotation_events.sql)를 로컬
@@ -46,12 +47,7 @@ beforeAll(() => {
   enrollmentId = psql(
     `insert into subject_enrollments (child_id, subject_id, contract_id, status) values ('${STUDENT_ID}', '${SUBJECT_ID}', '${contractId}', 'planned') returning id;`
   );
-  // 같은 선생님으로 반복 실행할 때 실제 예약과 겹치지 않도록 먼 미래 슬롯을 쓴다
-  // (reservations_no_overlap 배타 제약).
-  reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '500 days', now() + interval '500 days 1 hour', 'confirmed') returning id;`
-  );
+  reservationId = insertReservationInBand(psql, { band: "session-annotation-events", enrollmentId, teacherId: TEACHER_ID });
   sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

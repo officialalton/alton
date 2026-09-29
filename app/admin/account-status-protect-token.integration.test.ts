@@ -89,6 +89,10 @@ function createMinorStudent(label: string): string {
   return id;
 }
 
+// 재실행 안전: has_valid_guardian_consent()는 "동의한 버전보다 나중에 시행된
+// requires_reconsent 버전이 없을 것"을 요구한다. 다른 테스트가 실행마다 새 정책
+// 버전을 넣으므로 고정 버전('v-status-token-test')에 동의하면 재실행 시 무효가
+// 된다 — 그 시점의 최신 시행 버전에 동의한다(빈 DB 대비용 버전만 1회 보장).
 function grantGuardianConsent(studentId: string): void {
   psql(`
     insert into consent_policy_versions (id, version, title, content_hash, effective_from, requires_reconsent)
@@ -96,7 +100,7 @@ function grantGuardianConsent(studentId: string): void {
     where not exists (select 1 from consent_policy_versions where version = 'v-status-token-test');
     insert into guardian_consents (student_id, policy_version_id, consented_by, verification_method)
     select '${studentId}', id, '${ADMIN_ID}', 'test'
-    from consent_policy_versions where version = 'v-status-token-test';
+    from consent_policy_versions order by effective_from desc, created_at desc limit 1;
   `);
 }
 

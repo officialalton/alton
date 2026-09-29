@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P2 4차 — 예약이 잡히면 다음 회차가 자동으로 연결된다.
 //
@@ -20,7 +21,6 @@ function psql(sql: string): string {
 
 const uniq = () => `${Date.now()}_${Math.random()}`;
 const cleanupContractIds: string[] = [];
-let offsetDays = 7000 + Math.floor(Math.random() * 300) * 2;
 
 afterEach(() => {
   for (const id of cleanupContractIds.splice(0)) {
@@ -71,11 +71,7 @@ function makeEnrollmentWithUnits(unitCount: number): { enrollmentId: string; uni
 }
 
 function addSession(enrollmentId: string): string {
-  offsetDays += 2;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offsetDays} days', now() + interval '${offsetDays} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "auto-link-next-unit", enrollmentId, teacherId: TEACHER_ID });
   return psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

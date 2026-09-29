@@ -13,6 +13,9 @@ const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const PAYOUT_CAPABILITY = "정산권한";
+// 재실행 안전: storage_path는 고유 제약이 있고 file_name은 조회 키로 쓰므로
+// 실행마다 고유 접미사를 붙인다.
+const RUN_ID = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
@@ -50,7 +53,7 @@ describe("DB 조회 경계", () => {
   it("관리자는 교사 서류를 조회한다", () => {
     const docId = psql(
       `insert into teacher_documents (teacher_id, file_name, storage_path, uploaded_by)
-       values ('${TEACHER_ID}', 'admin-visible.pdf', '${TEACHER_ID}/admin-visible.pdf', '${TEACHER_ID}') returning id;`
+       values ('${TEACHER_ID}', 'admin-visible-${RUN_ID}.pdf', '${TEACHER_ID}/admin-visible-${RUN_ID}.pdf', '${TEACHER_ID}') returning id;`
     );
     expect(asUser(ADMIN_ID, `select count(*) from teacher_documents where id = '${docId}';`)).toBe("1");
   });
@@ -64,7 +67,7 @@ describe("DB 조회 경계", () => {
   it("학생·보호자는 교사 서류를 조회할 수 없다", () => {
     const docId = psql(
       `insert into teacher_documents (teacher_id, file_name, storage_path, uploaded_by)
-       values ('${TEACHER_ID}', 'secret.pdf', '${TEACHER_ID}/secret.pdf', '${TEACHER_ID}') returning id;`
+       values ('${TEACHER_ID}', 'secret-${RUN_ID}.pdf', '${TEACHER_ID}/secret-${RUN_ID}.pdf', '${TEACHER_ID}') returning id;`
     );
     expect(asUser(STUDENT_ID, `select count(*) from teacher_documents where id = '${docId}';`)).toBe("0");
     const guardianId = psql(
@@ -80,7 +83,7 @@ describe("교사 본인 경로는 그대로 동작한다", () => {
   it("교사는 자기 서류를 계속 조회한다", () => {
     const docId = psql(
       `insert into teacher_documents (teacher_id, file_name, storage_path, uploaded_by)
-       values ('${TEACHER_ID}', 'w9.pdf', '${TEACHER_ID}/w9.pdf', '${TEACHER_ID}') returning id;`
+       values ('${TEACHER_ID}', 'w9-${RUN_ID}.pdf', '${TEACHER_ID}/w9-${RUN_ID}.pdf', '${TEACHER_ID}') returning id;`
     );
     expect(
       asUser(TEACHER_ID, `select count(*) from teacher_documents where id = '${docId}';`)
@@ -111,18 +114,18 @@ describe("승인·검토 상태를 만들지 않는다(게이트가 될 수 없�
 describe("교사 업로드 → 관리자 보관함 연결", () => {
   it("교사가 올린 서류가 그 교사 아래에 나타난다", () => {
     const before = psql(
-      `select count(*) from teacher_documents where teacher_id = '${TEACHER_ID}';`
+      `select count(*) from teacher_documents where teacher_id = '${TEACHER_ID}' and storage_path like '%-${RUN_ID}.pdf';`
     );
 
     // 교사 포털의 업로드 경로가 남기는 것과 같은 행(P4-2 uploadMyDocumentAction).
     psql(
       `insert into teacher_documents (teacher_id, file_name, storage_path, content_type, size_bytes, note, uploaded_by)
-       values ('${TEACHER_ID}', 'w9-2026.pdf', '${TEACHER_ID}/w9-2026.pdf', 'application/pdf', 12345, '2026년 W-9', '${TEACHER_ID}')
+       values ('${TEACHER_ID}', 'w9-2026-${RUN_ID}.pdf', '${TEACHER_ID}/w9-2026-${RUN_ID}.pdf', 'application/pdf', 12345, '2026년 W-9', '${TEACHER_ID}')
        returning id;`
     );
 
     const after = psql(
-      `select count(*) from teacher_documents where teacher_id = '${TEACHER_ID}';`
+      `select count(*) from teacher_documents where teacher_id = '${TEACHER_ID}' and storage_path like '%-${RUN_ID}.pdf';`
     );
     expect(Number(after)).toBe(Number(before) + 1);
 
@@ -130,15 +133,15 @@ describe("교사 업로드 → 관리자 보관함 연결", () => {
     expect(
       asUser(
         ADMIN_ID,
-        `select file_name from teacher_documents where teacher_id = '${TEACHER_ID}' and file_name = 'w9-2026.pdf';`
+        `select file_name from teacher_documents where teacher_id = '${TEACHER_ID}' and file_name = 'w9-2026-${RUN_ID}.pdf';`
       )
-    ).toBe("w9-2026.pdf");
+    ).toBe(`w9-2026-${RUN_ID}.pdf`);
 
     // 다른 교사 아래에는 섞이지 않는다.
     expect(
       asUser(
         ADMIN_ID,
-        `select count(*) from teacher_documents where teacher_id = '${OTHER_TEACHER_ID}' and file_name = 'w9-2026.pdf';`
+        `select count(*) from teacher_documents where teacher_id = '${OTHER_TEACHER_ID}' and file_name = 'w9-2026-${RUN_ID}.pdf';`
       )
     ).toBe("0");
   });
@@ -146,7 +149,7 @@ describe("교사 업로드 → 관리자 보관함 연결", () => {
   it("교사 본인의 조회 경로는 그대로 살아 있다", () => {
     const docId = psql(
       `insert into teacher_documents (teacher_id, file_name, storage_path, uploaded_by)
-       values ('${TEACHER_ID}', 'mine.pdf', '${TEACHER_ID}/mine.pdf', '${TEACHER_ID}') returning id;`
+       values ('${TEACHER_ID}', 'mine-${RUN_ID}.pdf', '${TEACHER_ID}/mine-${RUN_ID}.pdf', '${TEACHER_ID}') returning id;`
     );
     expect(asUser(TEACHER_ID, `select count(*) from teacher_documents where id = '${docId}';`)).toBe("1");
   });

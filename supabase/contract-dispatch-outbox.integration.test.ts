@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // 2026-09-28 — 초기 고객 절차 단순화 4단계: contract_dispatch_jobs outbox.
 // (docs/2026-09-26-consent-contract-simplification-implementation-plan.md)
@@ -60,13 +61,15 @@ function createSubjectEnrollment(householdId: string, childId: string): string {
 
 function createSession(subjectEnrollmentId: string, lessonTypeCode: "trial" | "regular", finalStatus: string): string {
   const lessonTypeId = psql(`select id from lesson_types where code = '${lessonTypeCode}';`);
-  const randomDaysOut = 400 + Math.floor(Math.random() * 100000);
-  const startsAt = new Date(Date.now() + randomDaysOut * 60 * 60 * 1000).toISOString();
-  const endsAt = new Date(new Date(startsAt).getTime() + 60 * 60000).toISOString();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${subjectEnrollmentId}', '${TEACHER_ID}', '${startsAt}', '${endsAt}', 'confirmed') returning id;`
-  );
+  // 재실행 안전: 공용 seed 선생님이므로 파일 전용 날짜 구간의 빈 슬롯에 넣는다.
+  const reservationId = insertReservationInBand(psql, {
+    band: "contract-dispatch-outbox",
+    enrollmentId: subjectEnrollmentId,
+    teacherId: TEACHER_ID,
+  });
+  const [startsAt, endsAt] = psql(
+    `select starts_at::text || '|' || ends_at::text from reservations where id = '${reservationId}';`
+  ).split("|");
   return psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes, final_status, actual_start_at, actual_end_at, finalized_at, final_actor_id)
      values ('${reservationId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${lessonTypeId}', 60,

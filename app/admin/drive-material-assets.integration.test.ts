@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P2 13차 — Drive 기반 PDF·영상 자료의 DB 규칙(20261348000000).
 //   키워드 → 단원 하나 / 폴더 큐 / 파일 자료 공개는 고정 사본이 있어야 / 페이지 필기 검증
@@ -45,10 +46,8 @@ const cleanupDocIds: string[] = [];
 const cleanupKeywordIds: string[] = [];
 const cleanupUnitIds: string[] = [];
 const cleanupContractIds: string[] = [];
-// 필기를 남긴 수업은 정리되지 않고 남으므로(위 관례), 실행마다 다른 날짜 대역을 쓴다 —
-// 같은 대역을 다시 쓰면 reservations_no_overlap 에 걸린다.
-// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
-let reservationOffsetDays = 10000 + Math.floor(Math.random() * 9000);
+// 필기를 남긴 수업은 정리되지 않고 남으므로(위 관례), 예약은 파일 전용 날짜 구간
+// (test/reservation-slots.ts RESERVATION_DAY_BANDS)의 빈 슬롯에 넣는다.
 
 afterEach(() => {
   // session_annotation_events 는 어떤 역할로도 지울 수 없다(append-only, 20261239000000).
@@ -202,11 +201,11 @@ function makeSessionWithPlannedDoc(docId: string, keep = false) {
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
   );
-  reservationOffsetDays += 2;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${reservationOffsetDays} days', now() + interval '${reservationOffsetDays} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, {
+    band: "drive-material-assets",
+    enrollmentId,
+    teacherId: TEACHER_ID,
+  });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60) returning id;`

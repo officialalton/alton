@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // R9(레슨 준비 Task 3) — session_content_use_events(append-only 이벤트 로그,
 // supabase/migrations/20261234000000_r9_session_content_use_events.sql)를
@@ -92,16 +93,6 @@ afterEach(() => {
   }
 });
 
-// 큰 임의 베이스에서 시작해, 이전 실행에서 excludeFromCleanup으로 남겨진(정리되지
-// 않은) pinned fixture의 예약 슬롯과 겹치지 않게 한다(reservations_no_overlap
-// 배타 제약).
-// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
-let reservationOffsetDays = 20000 + Math.floor(Math.random() * 30000);
-function nextReservationOffsetDays(): number {
-  reservationOffsetDays += 2;
-  return reservationOffsetDays;
-}
-
 function makeEnrollmentWithSession(): {
   enrollmentId: string;
   sessionId: string;
@@ -119,11 +110,7 @@ function makeEnrollmentWithSession(): {
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
   );
-  const offset = nextReservationOffsetDays();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "session-content-use-events", enrollmentId, teacherId: TEACHER_ID });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

@@ -8,7 +8,13 @@ import { beforeAll, afterAll, describe, expect, it } from "vitest";
 // app/admin/trial-sessions-guardian-consent.integration.test.ts와 동일 패턴).
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연
+// 재실행 안전: 예전엔 공용 seed 선생님(dddddddd-...01, 박서연)에 +40~42일 17시대
+// 슬롯을 예약했다. 예약 창(8주) 안이라 날짜를 크게 밀 수 없고, 분만 무작위로
+// 바꿔도 60분 수업 + 15분 버퍼라 이전 실행이 남긴 예약(수업권 원장이
+// INSERT-only라 지우지 않음)이나 다른 파일의 같은 선생님 예약과
+// teacher_buffer_violation으로 자주 충돌했다. 이 파일은 선생님 가능시간·버퍼를
+// 검증하지 않으므로 실행마다 전용 선생님을 새로 만든다(beforeAll에서 생성).
+let TEACHER_ID: string;
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현(담당 아님 검증용)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
@@ -66,6 +72,14 @@ beforeAll(() => {
   const trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
 
   const now = Date.now();
+  TEACHER_ID = psql(
+    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'm4-lesson-review-teacher-${now}-${Math.random().toString(36).slice(2)}@example.com', 'x', now(), '{}', '{}', now(), now())
+     returning id;`
+  );
+  psql(`insert into profiles (id, role, name) values ('${TEACHER_ID}', 'teacher', 'M4 리뷰 통합테스트 선생님');`);
+  psql(`select set_teacher_rate('${TEACHER_ID}', 3000000, 'KRW', now() - interval '10 day');`);
+
   const authEmail = `m4-lesson-review-${now}@example.com`;
   childId = psql(
     `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
@@ -146,6 +160,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
+  if (!TEACHER_ID) return;
   psql(`delete from teacher_availability_rules where teacher_id = '${TEACHER_ID}' and created_by = '${ADMIN_ID}';`);
 });
 

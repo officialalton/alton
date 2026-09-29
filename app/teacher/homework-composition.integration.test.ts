@@ -1,6 +1,7 @@
 import { execFile, execFileSync } from "node:child_process";
 import { promisify } from "node:util";
 import { afterEach, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 const execFileAsync = promisify(execFile);
 
@@ -76,12 +77,6 @@ afterEach(() => {
   }
 });
 
-let reservationOffsetDays = 3000;
-function nextReservationOffsetDays(): number {
-  reservationOffsetDays += 2;
-  return reservationOffsetDays;
-}
-
 function makeEnrollmentWithSession(teacherId = TEACHER_ID): { enrollmentId: string; sessionId: string; contractId: string } {
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
@@ -95,11 +90,7 @@ function makeEnrollmentWithSession(teacherId = TEACHER_ID): { enrollmentId: stri
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${teacherId}', 'active', now() - interval '1 day');`
   );
-  const offset = nextReservationOffsetDays();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${teacherId}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "homework-composition", enrollmentId, teacherId: teacherId });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${teacherId}', (select id from lesson_types where code = 'regular'), 60)

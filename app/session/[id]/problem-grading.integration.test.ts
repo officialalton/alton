@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 import { loadSessionProblems } from "./session-problem-data";
 
 // 2026-09-14 UAT(학생 포털 문제 화면) — docs/2026-09-14-problem-answer-grading-and-pdf-text-notes.md
@@ -48,7 +49,6 @@ const admin = createClient(API_URL, SERVICE_ROLE_KEY, { auth: { persistSession: 
 
 let baseUnitId: string;
 let hasOtherTeacher = false;
-let offset = 8200 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
   baseUnitId = psql(`select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`);
@@ -105,21 +105,7 @@ function startedSession(): { sessionId: string; mcId: string; essayId: string } 
     `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position) values
      ('${prepId}', 'problem', '${mcId}', 1), ('${prepId}', 'problem', '${essayId}', 2);`
   );
-  // 같은 로컬 DB에서 여러 번 돌리면 이전 실행의 예약이 남아 있다(reservations_no_overlap).
-  // 겹치면 다음 슬롯으로 넘긴다.
-  let reservationId = "";
-  for (let attempt = 0; ; attempt++) {
-    offset += 2;
-    try {
-      reservationId = psql(
-        `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-         values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-      );
-      break;
-    } catch (e) {
-      if (attempt >= 50 || !/no_overlap|exclusion|overlap/i.test(String((e as { stderr?: string }).stderr ?? e))) throw e;
-    }
-  }
+  const reservationId = insertReservationInBand(psql, { band: "problem-grading", enrollmentId: enrollmentId, teacherId: TEACHER_ID });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)

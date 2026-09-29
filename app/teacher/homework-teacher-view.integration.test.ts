@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // Gap 2 (2026-09-08, 제품 오너 리뷰) — 교사/관리자 읽기전용 과제 제출 현황 뷰가
 // 실제로 의존하는 RLS(20261245000000 problems 정책 + 기존 20261235000000/
@@ -54,12 +55,6 @@ afterEach(() => {
   }
 });
 
-let reservationOffsetDays = 7000;
-function nextReservationOffsetDays(): number {
-  reservationOffsetDays += 2;
-  return reservationOffsetDays;
-}
-
 function makeEnrollmentWithSession(
   studentId = STUDENT_ID,
   teacherId = TEACHER_ID
@@ -76,11 +71,7 @@ function makeEnrollmentWithSession(
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${teacherId}', 'active', now() - interval '1 day');`
   );
-  const offset = nextReservationOffsetDays();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${teacherId}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "homework-teacher-view", enrollmentId, teacherId: teacherId });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${teacherId}', (select id from lesson_types where code = 'regular'), 60)

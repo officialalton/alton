@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { afterEach, describe, expect, it } from "vitest";
+import { insertReservationInBand } from "@/test/reservation-slots";
 
 // R9 corrective(20261240000000) — Task 4가 놓친 학생 read/write 접근을 psql
 // 직접 검증으로 확인한다. app/teacher/homework-composition.integration.test.ts와
@@ -72,13 +73,6 @@ afterEach(() => {
   }
 });
 
-// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
-let reservationOffsetDays = 5000;
-function nextReservationOffsetDays(): number {
-  reservationOffsetDays += 2;
-  return reservationOffsetDays;
-}
-
 function makeEnrollmentWithSession(
   studentId = STUDENT_ID,
   teacherId = TEACHER_ID
@@ -95,11 +89,7 @@ function makeEnrollmentWithSession(
     `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
      values ('${enrollmentId}', '${teacherId}', 'active', now() - interval '1 day');`
   );
-  const offset = nextReservationOffsetDays();
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${teacherId}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  const reservationId = insertReservationInBand(psql, { band: "homework-v3", enrollmentId, teacherId: teacherId });
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${teacherId}', (select id from lesson_types where code = 'regular'), 60)
