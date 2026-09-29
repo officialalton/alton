@@ -14,4 +14,9 @@ describe("resolveAdminTab (2026-09-10, P1-3 — AdminShell·admin/page.tsx 공�
     expect(resolveAdminTab("")).toBe("home");
     expect(resolveAdminTab("not-a-real-tab")).toBe("home");
   });
+
+  it("Inquiries 탭은 사라졌고 옛 ?tab=inquiry는 messenger로 매핑된다(2026-09-29)", () => {
+    expect((ADMIN_TAB_IDS as readonly string[]).includes("inquiry")).toBe(false);
+    expect(resolveAdminTab("inquiry")).toBe("messenger");
+  });
 });

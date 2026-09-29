@@ -412,79 +412,11 @@ export async function scheduleMeetingRequest(params: {
   return { googleMeetLink, googleSyncStatus: syncStatus };
 }
 
-// 면담 전용 가용시간 CRUD — consult_availability_rules/exceptions와 동일 패턴,
-// 별도 테이블(meeting_availability_rules/exceptions)만 다룬다.
-export type MeetingAvailabilityRule = { id: string; weekday: number; start_time: string; end_time: string; active: boolean };
-export type MeetingAvailabilityException = {
-  id: string;
-  exception_date: string;
-  is_closed: boolean;
-  start_time: string | null;
-  end_time: string | null;
-  reason: string | null;
-};
-
-export async function listMeetingAvailabilityRules(): Promise<MeetingAvailabilityRule[]> {
-  await requireAdmin();
-  const admin = createAdminClient();
-  return loadMeetingAvailabilityRules(admin);
-}
-
-async function loadMeetingAvailabilityRules(
-  admin: ReturnType<typeof createAdminClient>
-): Promise<MeetingAvailabilityRule[]> {
-  const { data, error } = await admin
-    .from("meeting_availability_rules")
-    .select("id, weekday, start_time, end_time, active")
-    .order("weekday", { ascending: true });
-  if (error) throw new Error(error.message);
-  return (data ?? []) as MeetingAvailabilityRule[];
-}
-
-export async function addMeetingAvailabilityRule(params: { weekday: number; startTime: string; endTime: string }): Promise<void> {
-  const { adminUserId, supabase } = await requireAdmin();
-  const { error } = await supabase.from("meeting_availability_rules").insert({
-    weekday: params.weekday,
-    start_time: params.startTime,
-    end_time: params.endTime,
-    created_by: adminUserId,
-  });
-  if (error) {
-    if (error.code === "23P01") throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
-    throw new Error(error.message);
-  }
-}
-
-export async function deactivateMeetingAvailabilityRule(ruleId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
-  const { error } = await supabase.from("meeting_availability_rules").update({ active: false }).eq("id", ruleId);
-  if (error) throw new Error(error.message);
-}
-
-export async function listMeetingAvailabilityExceptions(): Promise<MeetingAvailabilityException[]> {
-  await requireAdmin();
-  const admin = createAdminClient();
-  return loadMeetingAvailabilityExceptions(admin);
-}
-
-async function loadMeetingAvailabilityExceptions(
-  admin: ReturnType<typeof createAdminClient>
-): Promise<MeetingAvailabilityException[]> {
-  const { data, error } = await admin
-    .from("meeting_availability_exceptions")
-    .select("id, exception_date, is_closed, start_time, end_time, reason")
-    .order("exception_date", { ascending: true });
-  if (error) throw new Error(error.message);
-  return (data ?? []) as MeetingAvailabilityException[];
-}
-
 export type MeetingConsultantOption = { id: string; name: string | null };
 
 export type MeetingOperationsDashboard = {
   requests: AdminMeetingRequest[];
   consultants: MeetingConsultantOption[];
-  rules: MeetingAvailabilityRule[];
-  exceptions: MeetingAvailabilityException[];
 };
 
 /**
@@ -494,13 +426,11 @@ export type MeetingOperationsDashboard = {
 export async function loadMeetingOperationsDashboardAction(): Promise<MeetingOperationsDashboard> {
   await requireAdmin();
   const admin = createAdminClient();
-  const [requests, consultants, rules, exceptions] = await Promise.all([
+  const [requests, consultants] = await Promise.all([
     loadMeetingRequestsForAdmin(admin),
     loadConsultantOptions(admin),
-    loadMeetingAvailabilityRules(admin),
-    loadMeetingAvailabilityExceptions(admin),
   ]);
-  return { requests, consultants, rules, exceptions };
+  return { requests, consultants };
 }
 
 async function loadConsultantOptions(admin: ReturnType<typeof createAdminClient>): Promise<MeetingConsultantOption[]> {
@@ -522,31 +452,6 @@ export async function assignMeetingRequestConsultant(params: { meetingRequestId:
     if (error.code === "23P01") throw new Error(`해당 컨설턴트에게 이미 같은 시간의 일정이 있어 배정할 수 없습니다. (${error.message})`);
     throw new Error(error.message);
   }
-}
-
-export async function addMeetingAvailabilityException(params: {
-  date: string;
-  isClosed: boolean;
-  startTime?: string;
-  endTime?: string;
-  reason?: string;
-}): Promise<void> {
-  const { adminUserId, supabase } = await requireAdmin();
-  const { error } = await supabase.from("meeting_availability_exceptions").insert({
-    exception_date: params.date,
-    is_closed: params.isClosed,
-    start_time: params.isClosed ? null : params.startTime,
-    end_time: params.isClosed ? null : params.endTime,
-    reason: params.reason ?? null,
-    created_by: adminUserId,
-  });
-  if (error) throw new Error(error.message);
-}
-
-export async function removeMeetingAvailabilityException(exceptionId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
-  const { error } = await supabase.from("meeting_availability_exceptions").delete().eq("id", exceptionId);
-  if (error) throw new Error(error.message);
 }
 
 // R12.1: meeting_request_messages 스레드는 더 이상 관리자 UI에도 노출하지

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import MeetingOperationsPanel from "./MeetingOperationsPanel";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import type { ConsultantWithStudents } from "./consultant-assignment-actions";
 import type { IntakeConsultation } from "@/app/consultant/intake-data";
@@ -30,12 +31,13 @@ import {
 
 // 2026-09-29 — 한 화면이 길어져 카테고리별 서브탭으로 나눴다(UnderlineSubTabs).
 // 기능·권한 변경 없음. `정산`은 Payouts 탭의 `컨설턴트 정산` 서브탭으로 이동.
-type SubTab = "assign" | "accounts" | "requests" | "materials";
+type SubTab = "assign" | "accounts" | "requests" | "meetings" | "materials";
 
 const SUB_NAV: { id: SubTab; label: string }[] = [
   { id: "assign", label: "배정" },
   { id: "accounts", label: "계정" },
   { id: "requests", label: "선생님 배정 요청" },
+  { id: "meetings", label: "면담" },
   { id: "materials", label: "상담 자료" },
 ];
 
@@ -53,11 +55,14 @@ export default function ConsultantAssignmentsTab({
   initialUnassignedConsultations,
   initialAssignedAwaitingSchedule,
   initialAutoAssignEnabled,
+  initialMeetingActionCount = 0,
 }: {
   initialConsultants: ConsultantWithStudents[];
   initialUnassignedConsultations: IntakeConsultation[];
   initialAssignedAwaitingSchedule: IntakeConsultation[];
   initialAutoAssignEnabled: boolean;
+  /** 조치가 필요한 면담 요청 수(SSR 가벼운 count). 면담 서브탭을 열면 실제 목록 기준으로 갱신된다. */
+  initialMeetingActionCount?: number;
 }) {
   const [consultants, setConsultants] = useState(initialConsultants);
   const [unassigned, setUnassigned] = useState(initialUnassignedConsultations);
@@ -69,6 +74,7 @@ export default function ConsultantAssignmentsTab({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sub, setSub] = useState<SubTab>(DEFAULT_SUB);
+  const [meetingActionCount, setMeetingActionCount] = useState(initialMeetingActionCount);
   // 선생님 배정 요청은 서브탭 라벨의 대기 건수 배지를 위해 이 컴포넌트가 읽는다.
   const [requests, setRequests] = useState<TeacherAssignmentRequestRow[] | null>(null);
   const [requestsError, setRequestsError] = useState<string | null>(null);
@@ -91,6 +97,7 @@ export default function ConsultantAssignmentsTab({
   const badgeCounts: Partial<Record<SubTab, number>> = {
     assign: unassigned.length + awaitingSchedule.length,
     requests: requestsNeedingAttention.length,
+    meetings: meetingActionCount,
   };
 
   async function handleToggleAutoAssign() {
@@ -386,6 +393,7 @@ export default function ConsultantAssignmentsTab({
           reload={loadRequests}
         />
       )}
+      {sub === "meetings" && <MeetingOperationsPanel onNeedsActionCount={setMeetingActionCount} />}
       {/* 컨설턴트 내부 문의(StaffMessagesAdminSection)는 관리자 포털 정리
           항목 2(2026-09-23)에서 Messenger 메인 탭(MessengerTab.tsx)의
           Consultants 서브탭으로 옮겼다 — 여기서는 더 이상 렌더링하지 않는다. */}

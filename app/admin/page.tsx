@@ -109,6 +109,7 @@ export default async function AdminHomePage({
     unassignedConsultations,
     assignedAwaitingSchedule,
     autoAssignEnabled,
+    meetingActionCount,
   ] = await Promise.all([
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching", "problem-bank") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
@@ -120,7 +121,7 @@ export default async function AdminHomePage({
     need("consult") ? loadStaleEnvelopeVersions(supabase) : Promise.resolve([]),
     need("consult") ? listOpenContractActivationRetries() : Promise.resolve([]),
     need("consult") ? loadKanbanBoard(createAdminClient()) : Promise.resolve(undefined),
-    need("inquiry") ? listInquiryThreadsForAdmin() : Promise.resolve(undefined),
+    need("messenger") ? listInquiryThreadsForAdmin() : Promise.resolve(undefined),
     need("unified-schedule")
       ? listAllTeacherLessons({ from: unifiedScheduleRangeFrom, to: unifiedScheduleRangeTo })
       : Promise.resolve(undefined),
@@ -140,6 +141,14 @@ export default async function AdminHomePage({
     need("consultants") ? listUnassignedConsultationsAction() : Promise.resolve([]),
     need("consultants") ? listAssignedAwaitingScheduleAction() : Promise.resolve([]),
     need("consultants") ? loadAutoAssignEnabledAction() : Promise.resolve(false),
+    // 2026-09-29 — Consultants > 면담 서브탭 배지용 가벼운 head count 1건.
+    need("consultants")
+      ? supabase
+          .from("meeting_requests")
+          .select("id", { count: "exact", head: true })
+          .in("status", ["requested", "confirming", "scheduling"])
+          .then((r) => r.count ?? 0)
+      : Promise.resolve(0),
   ]);
 
   // 성능 corrective(2026-09-09, 2026-09-10 갱신): "사용자" 탭의 학생/선생님
@@ -183,6 +192,7 @@ export default async function AdminHomePage({
       unassignedConsultations={unassignedConsultations}
       assignedAwaitingSchedule={assignedAwaitingSchedule}
       autoAssignEnabled={autoAssignEnabled}
+      initialMeetingActionCount={meetingActionCount}
     />
   );
 }

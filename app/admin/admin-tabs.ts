@@ -9,7 +9,6 @@ export const ADMIN_NAV_TAB_IDS = [
   "users",
   "matching",
   "consult",
-  "inquiry",
   "catalog",
   // P2 3차 — 문제은행. 교재와 독립된 진입점이라 커리큘럼 바로 옆 콘텐츠 그룹에 둔다.
   "problem-bank",
@@ -47,7 +46,12 @@ export type AdminTabId = (typeof ADMIN_TAB_IDS)[number];
 
 const VALID_TAB_ID_SET: ReadonlySet<string> = new Set(ADMIN_TAB_IDS);
 
+// 2026-09-29 — Inquiries 탭은 Messenger(가족 채널)로 통합됐다. 옛 북마크·알림 링크
+// (?tab=inquiry)는 Messenger로 보낸다(AdminShell이 raw 값으로 '가족' 서브탭을 연다).
+export const LEGACY_INQUIRY_TAB_ID = "inquiry";
+
 /** 알 수 없거나 없는 tab 값은 항상 "home"으로 정규화한다. */
 export function resolveAdminTab(tab: string | undefined | null): AdminTabId {
+  if (tab === LEGACY_INQUIRY_TAB_ID) return "messenger";
   return tab && VALID_TAB_ID_SET.has(tab) ? (tab as AdminTabId) : "home";
 }

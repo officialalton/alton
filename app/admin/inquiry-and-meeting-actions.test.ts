@@ -38,7 +38,6 @@ import {
   sendAdminInquiryMessage,
   closeHouseholdInquiry,
   updateMeetingRequestStatus,
-  addMeetingAvailabilityRule,
 } from "./inquiry-and-meeting-actions";
 
 describe("sendAdminInquiryMessage", () => {
@@ -90,15 +89,4 @@ describe("updateMeetingRequestStatus", () => {
   // 2026-09-17 — "scheduled"는 이 함수로 만들 수 없다(유효한 시간 없이 조용히
   // scheduled로 넘어가는 회귀 방지). scheduleMeetingRequest()의 가드는
   // schedule-meeting-request.test.ts에서 별도로 검증한다.
-});
-
-describe("addMeetingAvailabilityRule", () => {
-  beforeEach(() => vi.clearAllMocks());
-
-  it("겹치는 시간대(23P01) 에러를 이해 가능한 문구로 바꾼다", async () => {
-    insertMock = vi.fn().mockResolvedValue({ error: { code: "23P01", message: "exclusion violation" } });
-    await expect(addMeetingAvailabilityRule({ weekday: 1, startTime: "09:00", endTime: "10:00" })).rejects.toThrow(
-      "같은 요일에 겹치는 시간대가 이미 등록되어 있습니다."
-    );
-  });
 });

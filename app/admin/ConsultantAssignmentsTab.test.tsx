@@ -3,7 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import ConsultantAssignmentsTab from "./ConsultantAssignmentsTab";
 import type { IntakeConsultation } from "@/app/consultant/intake-data";
 
-const { listRequestsMock } = vi.hoisted(() => ({ listRequestsMock: vi.fn() }));
+const { listRequestsMock, loadMeetingsMock } = vi.hoisted(() => ({ listRequestsMock: vi.fn(), loadMeetingsMock: vi.fn() }));
 
 vi.mock("./consultant-assignment-actions", () => ({
   listConsultantsAction: vi.fn().mockResolvedValue([]),
@@ -15,6 +15,14 @@ vi.mock("./consultant-assignment-actions", () => ({
   listAssignedAwaitingScheduleAction: vi.fn().mockResolvedValue([]),
   sendConsultationSchedulingLinkAction: vi.fn(),
   setAutoAssignEnabledAction: vi.fn(),
+}));
+vi.mock("./inquiry-and-meeting-actions", () => ({
+  loadMeetingOperationsDashboardAction: loadMeetingsMock,
+  updateMeetingRequestStatus: vi.fn(),
+  scheduleMeetingRequest: vi.fn(),
+  assignMeetingRequestConsultant: vi.fn(),
+  cancelAndRerequestMeetingRequest: vi.fn(),
+  resyncMeetingRequestCalendar: vi.fn(),
 }));
 vi.mock("./teacher-assignment-requests-actions", () => ({
   listAllTeacherAssignmentRequestsAction: listRequestsMock,
@@ -31,6 +39,7 @@ const consult = (id: string) => ({ id, contactName: "학부모", contactEmail: "
 
 beforeEach(() => {
   vi.clearAllMocks();
+  loadMeetingsMock.mockResolvedValue({ requests: [], consultants: [] });
   listRequestsMock.mockResolvedValue([
     { id: "r1", studentId: "s1", studentName: "김학생", status: "pending", needsReprocessing: false, reprocessingError: null },
   ]);
@@ -76,5 +85,21 @@ describe("ConsultantAssignmentsTab 서브탭", () => {
     fireEvent.click(screen.getByRole("button", { name: /^선생님 배정 요청/ }));
     expect(await screen.findByText("선생님 배정 요청 — 전체(1)")).toBeInTheDocument();
     expect(screen.queryByText("정산")).not.toBeInTheDocument();
+  });
+
+  it("면담 서브탭은 열 때만 로드하고 초기 건수 배지를 보인다", async () => {
+    render(
+      <ConsultantAssignmentsTab
+        initialConsultants={[]}
+        initialUnassignedConsultations={[]}
+        initialAssignedAwaitingSchedule={[]}
+        initialAutoAssignEnabled={false}
+        initialMeetingActionCount={2}
+      />,
+    );
+    expect(loadMeetingsMock).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: /^면담\s*2$/ }));
+    await waitFor(() => expect(loadMeetingsMock).toHaveBeenCalled());
+    expect(await screen.findByText("면담 요청이 없습니다.")).toBeInTheDocument();
   });
 });

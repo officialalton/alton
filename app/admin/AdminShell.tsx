@@ -6,7 +6,7 @@ import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileDrawerNav from "@/app/components/MobileDrawerNav";
 import { linkAdminGoogleAccount } from "./google-link-actions";
-import { resolveAdminTab, type AdminTabId } from "./admin-tabs";
+import { resolveAdminTab, LEGACY_INQUIRY_TAB_ID, type AdminTabId } from "./admin-tabs";
 import { setActiveAdminUser, clearAdminTabCache } from "./tab-data-cache";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
@@ -21,7 +21,6 @@ import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import ConsultationTab from "./ConsultationTab";
 import type { KanbanCard } from "./consultation-kanban-actions";
-import InquiryAndMeetingTab from "./InquiryAndMeetingTab";
 import type { AdminInquiryThread } from "./inquiry-and-meeting-actions";
 import type { UnifiedScheduleLessonRow, BookingReconciliationDashboard } from "./booking-actions";
 import type {
@@ -63,7 +62,6 @@ const NAV_ITEMS = [
   { id: "users", label: "Users", icon: "users" },
   { id: "matching", label: "Matching", icon: "matching" },
   { id: "consult", label: "Onboarding", icon: "onboarding" },
-  { id: "inquiry", label: "Inquiries", icon: "inquiries" },
   { id: "catalog", label: "Curriculum", icon: "curriculum" },
   { id: "problem-bank", label: "Question Bank", icon: "questionBank" },
   { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
@@ -132,6 +130,7 @@ export default function AdminShell({
   unassignedConsultations,
   assignedAwaitingSchedule,
   autoAssignEnabled,
+  initialMeetingActionCount,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -185,6 +184,7 @@ export default function AdminShell({
   unassignedConsultations: IntakeConsultation[];
   assignedAwaitingSchedule: IntakeConsultation[];
   autoAssignEnabled: boolean;
+  initialMeetingActionCount?: number;
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -228,7 +228,6 @@ export default function AdminShell({
     "users",
     "matching",
     "consult",
-    "inquiry",
     "unified-schedule",
     "booking",
     // P4-3 — 여기 넣지 않으면 아래 mobileGroups의 기본 분류(그 외 = 정산)로
@@ -341,7 +340,7 @@ export default function AdminShell({
 
       <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 min-w-0 flex flex-col">
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
             옮겨져 상단 헤더바가 없다. 모바일은 사이드바가 숨겨지므로 계정
             메뉴만 담은 얇은 바를 여기 남긴다. */}
@@ -442,8 +441,6 @@ export default function AdminShell({
               teacherCandidatesBySubject={teacherCandidatesBySubject}
               initialKanbanCards={initialKanbanCards}
             />
-          ) : activeTab === "inquiry" ? (
-            <InquiryAndMeetingTab initialThreads={initialInquiryThreads} />
           ) : activeTab === "devlog" ? (
             <DevLogTab content={devLogContent} />
           ) : activeTab === "payouts" ? (
@@ -470,9 +467,10 @@ export default function AdminShell({
               initialUnassignedConsultations={unassignedConsultations}
               initialAssignedAwaitingSchedule={assignedAwaitingSchedule}
               initialAutoAssignEnabled={autoAssignEnabled}
+              initialMeetingActionCount={initialMeetingActionCount}
             />
           ) : activeTab === "messenger" ? (
-            <MessengerTab />
+            <MessengerTab initialInquiryThreads={initialInquiryThreads} initialSubtab={initialTab === LEGACY_INQUIRY_TAB_ID ? "family" : undefined} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

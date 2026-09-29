@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { FamilyMessengerPanel, useFamilyInquiryThreads } from "./FamilyMessengerPanel";
+import type { AdminInquiryThread } from "./inquiry-and-meeting-actions";
 import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import { listTeachersForUsersTabAction } from "./users-actions";
 import type { TeacherListItem } from "./users-data";
@@ -24,6 +26,8 @@ import {
   type TeacherStaffMessage,
 } from "./teacher-staff-messenger-actions";
 
+// 2026-09-29 — Inquiries 메인 탭을 없애고 문의함(household_messages)을 세 번째
+// 채널 '가족'으로 옮겼다(보호자·컨설턴트·학생 ↔ 관리자 가족 스레드, 동작 동일).
 // 관리자 포털 정리 항목 2(2026-09-23) — "관리자 Messenger는 먼저 Teachers /
 // Consultants로 구분하고, 향후 학생·보호자 채널을 추가할 수 있게 구성합니다."
 // 지금까지 컨설턴트 내부 문의(StaffMessagesAdminSection)는 Consultants 탭
@@ -34,19 +38,29 @@ import {
 const SUBTABS = [
   { id: "teachers", label: "Teachers" },
   { id: "consultants", label: "Consultants" },
+  { id: "family", label: "가족" },
 ] as const;
 type SubtabId = (typeof SUBTABS)[number]["id"];
 
-export default function MessengerTab() {
-  const [subtab, setSubtab] = useState<SubtabId>("consultants");
+export default function MessengerTab({
+  initialInquiryThreads,
+  initialSubtab = "consultants",
+}: {
+  initialInquiryThreads?: AdminInquiryThread[];
+  initialSubtab?: SubtabId;
+}) {
+  const [subtab, setSubtab] = useState<SubtabId>(initialSubtab);
+  const family = useFamilyInquiryThreads(initialInquiryThreads);
+  const familyUnread = (family.data ?? []).filter((t) => t.status === "open" && t.unreadForAdmin).length;
 
   return (
     <div className="max-w-[720px]">
       <div className="border-b border-grey-200 mb-5">
-        <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="border-b-0" />
+        <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="border-b-0" badgeCounts={{ family: familyUnread }} />
       </div>
       {subtab === "teachers" && <TeacherMessengerPanel />}
       {subtab === "consultants" && <ConsultantMessengerPanel />}
+      {subtab === "family" && <FamilyMessengerPanel {...family} />}
     </div>
   );
 }
