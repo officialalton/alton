@@ -17,6 +17,7 @@ import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 import { assertNoConsultantMeetingOverlap } from "@/lib/consultation/meeting-scheduling";
 import { cancelMeetingRequestWithCalendar } from "@/lib/consultation/meeting-calendar-sync";
 
@@ -169,7 +170,7 @@ export async function scheduleMyMeetingRequestAction(params: {
     })
     .eq("id", params.meetingRequestId)
     .eq("consultant_id", userId);
-  if (updateError) throw new Error(updateError.message);
+  if (updateError) throw new Error(friendlyDbMessage(updateError));
 
   return { googleMeetLink: googleMeetLink as string };
 }

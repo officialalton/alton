@@ -8,6 +8,7 @@ import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 import {
   MEETING_NEEDS_CONSULTANT_MESSAGE,
   assertNoConsultantMeetingOverlap,
@@ -401,7 +402,7 @@ export async function scheduleMeetingRequest(params: {
       updated_at: new Date().toISOString(),
     })
     .eq("id", params.meetingRequestId);
-  if (updateError) throw new Error(updateError.message);
+  if (updateError) throw new Error(friendlyDbMessage(updateError));
   if (syncError) {
     console.error(JSON.stringify({ type: "meeting_calendar_sync_failed", meetingRequestId: params.meetingRequestId, error: syncError }));
     // 즉시 재시도(응답 뒤 after) — 실제 Google 호출이 꺼져 있으면 아무것도 하지 않고 일 1회 크론·관리자 버튼이 회수한다.
