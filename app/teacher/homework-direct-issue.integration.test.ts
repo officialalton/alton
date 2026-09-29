@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // 2026-09-16 제품 오너 지시 — 과제를 회차 키워드 풀에 묶지 않고, 교사 포털에서 학생별로 키워드를
@@ -7,7 +8,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 // docs/2026-09-16-homework-direct-issue-plan.md 참고.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
@@ -51,6 +52,7 @@ function problem(passage: string): string {
 }
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "homework-direct-issue" });
   unrelatedTeacherId = psql(
     `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
      values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'hw-direct-unrelated-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())

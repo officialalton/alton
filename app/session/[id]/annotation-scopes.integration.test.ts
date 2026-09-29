@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // P3 — 필기 범위 4분할의 권한을 실제 DB(RLS)로 검증한다.
@@ -11,7 +12,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 // 화면 규칙이 아니라 데이터 규칙이어야 하므로 RLS로 강제하고 여기서 못박는다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const OTHER_STUDENT_ID = "cccccccc-0000-0000-0000-000000000002"; // 다른 학생(seed)
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이 수업 담당이 아닌 교사(seed)
@@ -62,6 +63,7 @@ let problemId2: string;
 let enrollmentId: string;
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "annotation-scopes" });
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
   );

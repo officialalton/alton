@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { findFreeBookableSlot, findFreeTeacherSlot } from "@/test/reservation-slots";
 
 // M4 인수 기준 13번 — 아직 전용 테스트로 확인되지 않았던 3가지를 로컬 Postgres에
@@ -12,7 +13,7 @@ import { findFreeBookableSlot, findFreeTeacherSlot } from "@/test/reservation-sl
 // 동일한 psql shell-out 패턴을 그대로 재사용한다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
@@ -52,6 +53,7 @@ function nearFreeSlot(minHours: number): { startsAt: string; endsAt: string } {
 }
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "trial-entitlement-and-cancellation" });
   trialLessonTypeId = psql(`select id from lesson_types where code = 'trial';`);
   trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
 
@@ -92,6 +94,7 @@ beforeAll(() => {
 });
 
 afterAll(() => {
+  if (!TEACHER_ID) return; // setup 실패 시 정리할 것이 없다
   // entitlement_ledger는 INSERT-only(불변) 트리거로 보호되고, 그 FK가 grant_id/
   // reservation_id 양쪽 다 ON DELETE NO ACTION이라 이 스펙이 만든 entitlement_
   // grants/reservations/sessions는 정리할 수 없다 — 다른 R6/M2 통합 테스트와

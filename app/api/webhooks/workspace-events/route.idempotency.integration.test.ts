@@ -1,6 +1,7 @@
 import { execFileSync, execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 const execFileAsync = promisify(execFile);
@@ -26,6 +27,10 @@ function psql(sql: string): string {
   }).trim();
 }
 
+beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "route.idempotency" });
+});
+
 async function psqlAsync(sql: string): Promise<string> {
   const { stdout } = await execFileAsync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
     encoding: "utf-8",
@@ -33,7 +38,7 @@ async function psqlAsync(sql: string): Promise<string> {
   return stdout.trim();
 }
 
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
 
 function createSession(): string {

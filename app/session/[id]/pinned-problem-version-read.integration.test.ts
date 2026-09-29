@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 import { loadSessionProblems } from "./session-problem-data";
 
@@ -15,7 +16,7 @@ const SERVICE_ROLE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
@@ -40,6 +41,7 @@ const admin = createClient(API_URL, SERVICE_ROLE_KEY, { auth: { persistSession: 
 let baseUnitId: string;
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "pinned-problem-version-read" });
   baseUnitId = psql(
     `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
   );

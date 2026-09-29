@@ -2,6 +2,7 @@ import { createHmac } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 import { loadSessionProblems } from "./session-problem-data";
 
@@ -15,7 +16,7 @@ const API_URL = "http://127.0.0.1:54421";
 const JWT_SECRET = "super-secret-jwt-token-with-at-least-32-characters-long";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const PARENT_ID = "bbbbbbbb-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
@@ -64,6 +65,7 @@ let draftVersionId: string;
 let workId: string;
 
 beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "problem-answer-leak" });
   const baseUnitId = psql(`select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`);
   const contractId = psql(`insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`);
   const enrollmentId = psql(

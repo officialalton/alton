@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
-import { afterEach, describe, expect, it } from "vitest";
+import { beforeAll, afterEach, describe, expect, it } from "vitest";
+import { createPerRunTeacher } from "@/test/per-run-teacher";
 import { insertReservationInBand } from "@/test/reservation-slots";
 
 // Gap 2 (2026-09-08, 제품 오너 리뷰) — 교사/관리자 읽기전용 과제 제출 현황 뷰가
@@ -13,7 +14,7 @@ import { insertReservationInBand } from "@/test/reservation-slots";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
-const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001"; // 박서연 (seed, 지훈 담당)
+let TEACHER_ID: string; // 실행마다 새로 만드는 전용 선생님(test/per-run-teacher.ts)
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 (무관)
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
 const OTHER_STUDENT_ID = "cccccccc-0000-0000-0000-000000000002"; // 이서아 (seed, 무관)
@@ -25,6 +26,10 @@ function psql(sql: string): string {
     encoding: "utf-8",
   }).trim();
 }
+
+beforeAll(() => {
+  TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "homework-teacher-view" });
+});
 
 function asUser(userId: string, sql: string): string {
   return psql(`
