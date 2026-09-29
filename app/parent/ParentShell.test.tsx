@@ -40,7 +40,6 @@ vi.mock("./inquiry-actions", () => ({
   listGuardianMeetingRequests: vi.fn().mockResolvedValue([]),
   submitMeetingRequest: vi.fn(),
   getGuardianMeetingRequestReview: vi.fn().mockResolvedValue(null),
-  listOpenGuardianMeetingSlots: vi.fn().mockResolvedValue([]),
   getMyHouseholdConsultantsAction: vi.fn().mockResolvedValue([]),
   listOpenSlotsForConsultantAction: vi.fn().mockResolvedValue([]),
 }));

@@ -8,13 +8,12 @@
 // 안내를 수정합니다. 다자녀 가족은 대상 자녀를 명시합니다." 자녀 중 하나라도
 // 담당 컨설턴트가 배정돼 있으면 그 컨설턴트(들) 중 하나를 골라 그 사람의
 // 실제 가용시간만 보여준다 — 관리자 일반 슬롯은 더 이상 섞지 않는다.
-// 아직 아무도 배정되지 않은 신규 가족만 기존 관리자 슬롯 흐름을 그대로 쓴다
-// (배정 전이라 특정 담당자가 없음 — 정상적인 케이스).
+// 2026-09-29 오너 규칙 — 회사 공용 슬롯은 없다. 아직 아무도 배정되지 않은 가족은
+// 시간 선택 없이 사유만 접수하고(관리자 배정 큐), 배정 후 일정을 안내받는다.
 
 import { useEffect, useState } from "react";
 import ConsultSlotPicker from "@/app/components/ConsultSlotPicker";
 import {
-  listOpenGuardianMeetingSlots,
   listOpenSlotsForConsultantAction,
   getMyHouseholdConsultantsAction,
   submitMeetingRequest,
@@ -40,10 +39,11 @@ export default function ConsultationRequestTab() {
   }, []);
 
   const selected = consultants?.find((c) => c.childId === selectedChildId) ?? null;
+  const hasAssignedConsultant = (consultants?.length ?? 0) > 0;
 
   async function handleSubmit() {
     setError(null);
-    if (!slotStartsAt) {
+    if (hasAssignedConsultant && !slotStartsAt) {
       setError("상담 희망 시간을 먼저 선택해주세요.");
       return;
     }
@@ -54,7 +54,7 @@ export default function ConsultationRequestTab() {
     setSubmitting(true);
     const result = await submitMeetingRequest({
       reason,
-      slotStartsAtIso: slotStartsAt,
+      slotStartsAtIso: hasAssignedConsultant ? (slotStartsAt ?? undefined) : undefined,
       childId: selected?.childId,
       consultantId: selected?.consultantId,
     });
@@ -72,8 +72,6 @@ export default function ConsultationRequestTab() {
     return <div className="max-w-[720px] px-5 py-6 text-[13px] text-grey-500">불러오는 중…</div>;
   }
 
-  const hasAssignedConsultant = consultants.length > 0;
-
   return (
     <div className="max-w-[720px] px-5 py-6">
       <h2 className="text-[16px] font-bold text-ink mb-1">상담 신청</h2>
@@ -84,7 +82,7 @@ export default function ConsultationRequestTab() {
             사유를 입력해 신청할 수 있습니다.
           </>
         ) : (
-          "상담 가능 시간을 선택하고, 상담 사유를 입력해 신청할 수 있습니다."
+          "상담 사유를 입력해 신청하면 관리자가 담당 컨설턴트를 배정하고 일정을 안내드립니다."
         )}{" "}
         신청 진행 상황과 대화는 각각 &quot;상담 내역&quot;·&quot;메신저&quot;에서 확인해주세요.
       </p>
@@ -125,14 +123,10 @@ export default function ConsultationRequestTab() {
             />
           )
         ) : (
-          <ConsultSlotPicker
-            fetchSlots={listOpenGuardianMeetingSlots}
-            selectedStartsAt={slotStartsAt}
-            onSelect={(iso) => {
-              setSlotStartsAt(iso);
-              setSubmitted(false);
-            }}
-          />
+          <p className="text-[12.5px] text-grey-700">
+            아직 담당 컨설턴트가 배정되지 않아 상담 시간을 고를 수 없습니다. 상담 사유를 남겨 주시면 관리자가 담당
+            컨설턴트를 배정한 뒤 상담 일정을 안내드립니다.
+          </p>
         )}
       </section>
 

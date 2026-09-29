@@ -3,19 +3,16 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 
 const {
   submitMeetingRequestMock,
-  listOpenGuardianMeetingSlotsMock,
   getMyHouseholdConsultantsActionMock,
   listOpenSlotsForConsultantActionMock,
 } = vi.hoisted(() => ({
   submitMeetingRequestMock: vi.fn(),
-  listOpenGuardianMeetingSlotsMock: vi.fn(),
   getMyHouseholdConsultantsActionMock: vi.fn(),
   listOpenSlotsForConsultantActionMock: vi.fn(),
 }));
 
 vi.mock("./inquiry-actions", () => ({
   submitMeetingRequest: submitMeetingRequestMock,
-  listOpenGuardianMeetingSlots: listOpenGuardianMeetingSlotsMock,
   getMyHouseholdConsultantsAction: getMyHouseholdConsultantsActionMock,
   listOpenSlotsForConsultantAction: listOpenSlotsForConsultantActionMock,
 }));
@@ -38,58 +35,67 @@ import ConsultationRequestTab from "./ConsultationRequestTab";
 describe("ConsultationRequestTab", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    listOpenGuardianMeetingSlotsMock.mockResolvedValue([]);
-    // 담당 컨설턴트가 아직 없는(신규) 가족 기본 케이스 — 기존 관리자 슬롯 흐름을 유지.
+    // 담당 컨설턴트가 아직 없는(신규) 가족 기본 케이스 — 시간 선택 없이 사유만 접수(공용 슬롯 없음).
     getMyHouseholdConsultantsActionMock.mockResolvedValue([]);
     listOpenSlotsForConsultantActionMock.mockResolvedValue([]);
   });
 
-  it("슬롯 미선택 시 제출을 막고 에러를 보여준다", async () => {
+  it("담당 컨설턴트가 없으면 시간 선택기 없이 안내 문구만 보이고 슬롯을 조회하지 않는다", async () => {
     render(<ConsultationRequestTab />);
-    fireEvent.click(await screen.findByText("상담 신청하기"));
-    await waitFor(() => expect(screen.getByText("상담 희망 시간을 먼저 선택해주세요.")).toBeInTheDocument());
-    expect(submitMeetingRequestMock).not.toHaveBeenCalled();
+    await screen.findByText("상담 신청하기");
+    expect(screen.queryByText("테스트용 슬롯 선택")).not.toBeInTheDocument();
+    expect(screen.getByText(/담당 컨설턴트가 배정되지 않아 상담 시간을 고를 수 없습니다/)).toBeInTheDocument();
+    expect(listOpenSlotsForConsultantActionMock).not.toHaveBeenCalled();
   });
 
-  it("슬롯을 골랐지만 사유 없이 제출하면 에러를 보여주고 submitMeetingRequest는 호출되지 않는다", async () => {
-    render(<ConsultationRequestTab />);
-    fireEvent.click(await screen.findByText("테스트용 슬롯 선택"));
-    fireEvent.click(screen.getByText("상담 신청하기"));
-    await waitFor(() => expect(screen.getByText("상담 사유를 입력해주세요.")).toBeInTheDocument());
-    expect(submitMeetingRequestMock).not.toHaveBeenCalled();
-  });
-
-  it("슬롯 선택 + 사유 입력 후 제출하면 submitMeetingRequest가 { reason, slotStartsAtIso }로 호출된다", async () => {
+  it("담당 컨설턴트가 없으면 사유만 입력해도 시간 없이 접수된다", async () => {
     submitMeetingRequestMock.mockResolvedValue({ ok: true });
     render(<ConsultationRequestTab />);
-    fireEvent.click(await screen.findByText("테스트용 슬롯 선택"));
-    fireEvent.change(screen.getByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
+    fireEvent.change(await screen.findByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
     fireEvent.click(screen.getByText("상담 신청하기"));
     await waitFor(() =>
       expect(submitMeetingRequestMock).toHaveBeenCalledWith({
         reason: "상담 사유입니다",
-        slotStartsAtIso: "2027-01-01T09:00:00.000Z",
+        slotStartsAtIso: undefined,
+        childId: undefined,
+        consultantId: undefined,
       })
     );
     await waitFor(() => expect(screen.getByText("상담 신청이 접수되었습니다.")).toBeInTheDocument());
   });
 
+  it("사유 없이 제출하면 에러를 보여주고 submitMeetingRequest는 호출되지 않는다", async () => {
+    render(<ConsultationRequestTab />);
+    fireEvent.click(await screen.findByText("상담 신청하기"));
+    await waitFor(() => expect(screen.getByText("상담 사유를 입력해주세요.")).toBeInTheDocument());
+    expect(submitMeetingRequestMock).not.toHaveBeenCalled();
+  });
+
   it("제출 실패 시 서버가 반환한 에러 메시지를 보여준다", async () => {
     submitMeetingRequestMock.mockResolvedValue({ ok: false, error: "이미 진행 중인 상담이 있습니다." });
     render(<ConsultationRequestTab />);
-    fireEvent.click(await screen.findByText("테스트용 슬롯 선택"));
-    fireEvent.change(screen.getByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
+    fireEvent.change(await screen.findByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
     fireEvent.click(screen.getByText("상담 신청하기"));
     await waitFor(() => expect(screen.getByText("이미 진행 중인 상담이 있습니다.")).toBeInTheDocument());
   });
 
-  it("담당 컨설턴트가 있으면 그 이름을 보여주고 관리자 슬롯 대신 그 사람 슬롯을 조회한다(Phase A 마무리)", async () => {
+  it("담당 컨설턴트가 있는데 시간을 고르지 않으면 제출을 막는다", async () => {
+    getMyHouseholdConsultantsActionMock.mockResolvedValue([
+      { childId: "child1", childName: "테스트 자녀", consultantId: "consultant1", consultantName: "지만" },
+    ]);
+    render(<ConsultationRequestTab />);
+    fireEvent.change(await screen.findByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
+    fireEvent.click(screen.getByText("상담 신청하기"));
+    await waitFor(() => expect(screen.getByText("상담 희망 시간을 먼저 선택해주세요.")).toBeInTheDocument());
+    expect(submitMeetingRequestMock).not.toHaveBeenCalled();
+  });
+
+  it("담당 컨설턴트가 있으면 그 이름을 보여주고 그 사람 슬롯만 조회한다(Phase A 마무리)", async () => {
     getMyHouseholdConsultantsActionMock.mockResolvedValue([
       { childId: "child1", childName: "테스트 자녀", consultantId: "consultant1", consultantName: "지만" },
     ]);
     render(<ConsultationRequestTab />);
     await waitFor(() => expect(screen.getByText("지만", { exact: false })).toBeInTheDocument());
-    expect(listOpenGuardianMeetingSlotsMock).not.toHaveBeenCalled();
     fireEvent.click(await screen.findByText("테스트용 슬롯 선택"));
     fireEvent.change(screen.getByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
     fireEvent.click(screen.getByText("상담 신청하기"));

@@ -104,6 +104,16 @@ describe("submitMeetingRequest — 담당 컨설턴트 지정 경로", () => {
     expect(supabase._insertMock).not.toHaveBeenCalled();
   });
 
+  it("담당 컨설턴트가 있는데 시간이 없으면 거부한다", async () => {
+    const supabase = makeSupabase({ singleAssignment: { consultant_id: "real-consultant" } });
+    requireUserMock.mockResolvedValue({ user: { id: "guardian1" }, profile: { role: "parent" }, supabase });
+
+    const result = await submitMeetingRequest({ reason: "상담 요청", childId: "child1", consultantId: "real-consultant" });
+
+    expect(result).toEqual({ ok: false, error: "상담 희망 시간을 선택해주세요." });
+    expect(supabase._insertMock).not.toHaveBeenCalled();
+  });
+
   it("실제 담당 컨설턴트를 지정하면 정상 접수된다", async () => {
     const supabase = makeSupabase({ singleAssignment: { consultant_id: "real-consultant" } });
     requireUserMock.mockResolvedValue({ user: { id: "guardian1" }, profile: { role: "parent" }, supabase });

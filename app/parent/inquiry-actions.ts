@@ -213,13 +213,6 @@ export async function listGuardianChildrenForMeeting(): Promise<{ id: string; na
 
 export type OpenMeetingSlot = { startsAt: string };
 
-export async function listOpenGuardianMeetingSlots(fromIso: string, toIso: string): Promise<OpenMeetingSlot[]> {
-  const { supabase } = await requireUser();
-  const { data, error } = await supabase.rpc("list_open_meeting_slots", { p_from: fromIso, p_to: toIso });
-  if (error) throw new Error(error.message);
-  return ((data ?? []) as Array<{ slot_starts_at: string }>).map((r) => ({ startsAt: r.slot_starts_at }));
-}
-
 export type HouseholdChildConsultant = {
   childId: string;
   childName: string | null;
@@ -291,18 +284,18 @@ export type SubmitMeetingRequestResult =
   | { ok: false; error: string };
 
 /** 예외를 던지지 않고 { ok, error }로 반환한다(Next.js Server Action의 production
- * 예외 마스킹 재발 방지 — app/admin/trial-onboarding-actions.ts와 동일 규칙). */
-/** R12.1: 상담 신청 폼은 관리자가 열어둔 상담 가능 시간(list_open_meeting_slots)
- * 중 하나를 먼저 고르고, 그 아래 "상담 사유"를 적어 신청한다(2026-09-18 지시 —
- * 수업 예약과 동일한 캘린더 UI). child_id/subject/contact_preference 컬럼은
- * DB에 그대로 두지만(추가 전용 마이그레이션 원칙), 이 폼에서는 값을 넣지 않고
- * null로 남긴다. */
+ * 예외 마스킹 재발 방지 — app/admin/trial-onboarding-actions.ts와 동일 규칙).
+ *
+ * 2026-09-29 오너 규칙 — 상담 시간은 고객과 "배정된 컨설턴트" 사이에만 존재한다.
+ * 회사 공용 슬롯 풀은 없다:
+ *  - 자녀 중 담당 컨설턴트가 있으면: 그 컨설턴트의 가능 시간 중에서 고른 시간을 넣어
+ *    신청한다(시간 필수, 컨설턴트는 서버가 DB의 담당 관계로 확정한다).
+ *  - 담당 컨설턴트가 없으면: 시간 없이 사유만 접수한다(관리자가 컨설턴트를 배정한 뒤
+ *    일정을 안내). 시간을 보내도 무시하지 않고 거절한다. */
 export async function submitMeetingRequest(params: {
   reason: string;
-  slotStartsAtIso: string;
-  /** Phase A 마무리(2026-09-23) — 담당 컨설턴트에게 신청하는 경우 그 자녀·
-   * 컨설턴트를 지정한다. 미지정이면 기존처럼 관리자 큐로 간다(신규 상담,
-   * 아직 담당자가 없는 가족). */
+  /** 담당 컨설턴트가 있는 자녀에 대해서만 허용된다. */
+  slotStartsAtIso?: string;
   childId?: string;
   consultantId?: string;
 }): Promise<SubmitMeetingRequestResult> {
@@ -310,9 +303,9 @@ export async function submitMeetingRequest(params: {
     const { user, profile, supabase } = await requireUser();
     if (profile?.role !== "parent") throw new Error("보호자만 상담을 신청할 수 있습니다.");
     if (!params.reason?.trim()) throw new Error("상담 사유를 입력해주세요.");
-    if (!params.slotStartsAtIso) throw new Error("상담 희망 시간을 선택해주세요.");
     const householdId = await requireGuardianHouseholdId(supabase, user.id);
 
+    let startsAtIso: string | null = null;
     if (params.consultantId) {
       if (!params.childId) throw new Error("대상 자녀를 선택해주세요.");
       const { data: assignment, error: assignmentError } = await supabase
@@ -324,10 +317,12 @@ export async function submitMeetingRequest(params: {
       if (assignment?.consultant_id !== params.consultantId) {
         throw new Error("선택한 자녀의 담당 컨설턴트가 아닙니다.");
       }
+      if (!params.slotStartsAtIso) throw new Error("상담 희망 시간을 선택해주세요.");
+      startsAtIso = new Date(params.slotStartsAtIso).toISOString();
+    } else if (params.slotStartsAtIso) {
+      throw new Error("담당 컨설턴트가 배정되기 전에는 상담 시간을 선택할 수 없습니다.");
     }
-
-    const startsAt = new Date(params.slotStartsAtIso);
-    const endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
+    const endsAtIso = startsAtIso ? new Date(new Date(startsAtIso).getTime() + 60 * 60 * 1000).toISOString() : null;
 
     const { error } = await supabase.from("meeting_requests").insert({
       household_id: householdId,
@@ -338,8 +333,8 @@ export async function submitMeetingRequest(params: {
       contact_preference: null,
       preferred_contact_time: null,
       requested_by: user.id,
-      starts_at: startsAt.toISOString(),
-      ends_at: endsAt.toISOString(),
+      starts_at: startsAtIso,
+      ends_at: endsAtIso,
       source_message_id: null,
     });
     if (error) throw new Error(error.message);

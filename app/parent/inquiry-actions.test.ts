@@ -64,7 +64,6 @@ import {
   startGuardianInquiry,
   sendGuardianInquiryMessage,
   submitMeetingRequest,
-  listOpenGuardianMeetingSlots,
 } from "./inquiry-actions";
 
 describe("startGuardianInquiry", () => {
@@ -136,17 +135,18 @@ describe("submitMeetingRequest", () => {
   const SLOT_ISO = "2027-01-01T09:00:00.000Z";
 
   it("사유 미입력 시 예외를 던지지 않고 ok:false를 반환한다", async () => {
-    const result = await submitMeetingRequest({ reason: "", slotStartsAtIso: SLOT_ISO });
+    const result = await submitMeetingRequest({ reason: "" });
     expect(result).toEqual({ ok: false, error: "상담 사유를 입력해주세요." });
   });
 
-  it("슬롯 미선택 시 예외를 던지지 않고 ok:false를 반환한다", async () => {
-    const result = await submitMeetingRequest({ reason: "다음 학기 진도 상담을 요청합니다.", slotStartsAtIso: "" });
-    expect(result).toEqual({ ok: false, error: "상담 희망 시간을 선택해주세요." });
+  it("담당 컨설턴트 없이 시간을 보내면 거절한다(공용 슬롯 없음, 2026-09-29)", async () => {
+    const result = await submitMeetingRequest({ reason: "다음 학기 진도 상담을 요청합니다.", slotStartsAtIso: SLOT_ISO });
+    expect(result).toEqual({ ok: false, error: "담당 컨설턴트가 배정되기 전에는 상담 시간을 선택할 수 없습니다." });
+    expect(insertMock).not.toHaveBeenCalled();
   });
 
-  it("정상 신청 시 meeting_requests에 content·starts_at/ends_at만 채우고 나머지 컬럼은 null로 insert한다(R12.1)", async () => {
-    const result = await submitMeetingRequest({ reason: "다음 학기 진도 상담을 요청합니다.", slotStartsAtIso: SLOT_ISO });
+  it("담당 컨설턴트가 없으면 시간 없이 사유만 접수한다(관리자 배정 큐)", async () => {
+    const result = await submitMeetingRequest({ reason: "다음 학기 진도 상담을 요청합니다." });
     expect(result).toEqual({ ok: true });
     expect(insertMock).toHaveBeenCalledWith({
       household_id: "household1",
@@ -157,27 +157,15 @@ describe("submitMeetingRequest", () => {
       contact_preference: null,
       preferred_contact_time: null,
       requested_by: "guardian1",
-      starts_at: SLOT_ISO,
-      ends_at: "2027-01-01T10:00:00.000Z",
+      starts_at: null,
+      ends_at: null,
       source_message_id: null,
     });
   });
 
   it("insert 실패 시 예외를 던지지 않고 ok:false로 반환한다(Minified React error #441 재발 방지)", async () => {
     insertMock = vi.fn().mockResolvedValue({ error: { message: "DB 오류" } });
-    const result = await submitMeetingRequest({ reason: "상담 요청", slotStartsAtIso: SLOT_ISO });
+    const result = await submitMeetingRequest({ reason: "상담 요청" });
     expect(result).toEqual({ ok: false, error: "DB 오류" });
-  });
-});
-
-describe("listOpenGuardianMeetingSlots", () => {
-  it("list_open_meeting_slots RPC를 호출한다(list_open_consult_slots와 별개)", async () => {
-    rpcMock = vi.fn().mockResolvedValue({ data: [{ slot_starts_at: "2027-01-01T09:00:00.000Z" }], error: null });
-    const result = await listOpenGuardianMeetingSlots("2027-01-01T00:00:00.000Z", "2027-01-02T00:00:00.000Z");
-    expect(rpcMock).toHaveBeenCalledWith("list_open_meeting_slots", {
-      p_from: "2027-01-01T00:00:00.000Z",
-      p_to: "2027-01-02T00:00:00.000Z",
-    });
-    expect(result).toEqual([{ startsAt: "2027-01-01T09:00:00.000Z" }]);
   });
 });

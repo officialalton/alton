@@ -10,8 +10,8 @@ import { timezoneLabel } from "@/lib/timezone";
 // 시간 버튼 목록 → 선택 확인" 흐름을 강제한다(요구사항: 월간 캘린더+버튼, 드롭다운 금지).
 //
 // 데이터·가용시간은 이 컴포넌트 자체가 알지 못한다 — 호출부가 넘겨주는 fetchSlots만이
-// 유일한 원본이다(랜딩은 listOpenHomepageConsultSlots를 그대로 넘긴다, 관리자 화면이
-// 보는 것과 동일한 list_open_consult_slots() RPC). 수업 예약(reservations)이나 R11
+// 유일한 원본이다(2026-09-29 이후 공용 슬롯은 없다 — 스케줄링 링크·보호자·학생 화면 모두
+// 배정된 컨설턴트 개인 가능시간 조회 함수를 넘긴다). 수업 예약(reservations)이나 R11
 // 면담 가용시간과는 절대 섞지 않는다 — 그쪽은 별도의 fetchSlots 구현을 넘기면 되므로
 // 이 컴포넌트는 UI/UX만 공유하고 데이터 원본은 강제하지 않는다.
 //
@@ -26,7 +26,7 @@ export type ConsultSlotPickerHandle = {
 };
 
 export type ConsultSlotPickerProps = {
-  /** 상담 전용 가용시간 원본 조회 함수(단일 원본) — 예: listOpenHomepageConsultSlots. */
+  /** 상담 전용 가용시간 원본 조회 함수(단일 원본) — 예: 배정된 컨설턴트 슬롯 조회(listOpenSlotsForConsultantAction 등). */
   fetchSlots: (fromIso: string, toIso: string) => Promise<ConsultSlot[]>;
   selectedStartsAt: string | null;
   onSelect: (startsAtIso: string) => void;

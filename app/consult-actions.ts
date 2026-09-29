@@ -15,15 +15,9 @@ import { createAdminClient } from "@/lib/supabase-admin";
 // 달리, 아직 관리자가 승인하지 않은 슬롯이라 "확정" 톤의 메일을 보낼 수 없다 —
 // 홈페이지 화면 자체가 "승인 대기" 상태를 즉시 안내한다).
 
-export type OpenConsultSlot = { startsAt: string };
-
-export async function listOpenHomepageConsultSlots(fromIso: string, toIso: string): Promise<OpenConsultSlot[]> {
-  const admin = createAdminClient();
-  const { data, error } = await admin.rpc("list_open_consult_slots", { p_from: fromIso, p_to: toIso });
-  if (error) throw new Error(error.message);
-  return ((data ?? []) as Array<{ slot_starts_at: string }>).map((r) => ({ startsAt: r.slot_starts_at }));
-}
-
+// 2026-09-29 오너 규칙 — 상담 시간은 고객과 "배정된 컨설턴트" 사이에만 존재한다.
+// 공용 슬롯 목록(list_open_consult_slots)은 제거됐고, DB(submit_homepage_consult_request)도
+// 시간을 받으면 거절한다.
 // 2026-09-22(컨설턴트 스펙 Phase 2b, 사용자 승인) — 홈페이지는 이제 "신청만"
 // 받는다. 슬롯은 어드미션 컨설턴트 배정 후 그 사람 전용 스케줄링 링크
 // (app/schedule-actions.ts)로 고객이 직접 고른다. slotStartsAtIso는 더 이상

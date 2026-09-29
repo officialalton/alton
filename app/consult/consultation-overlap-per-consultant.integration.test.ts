@@ -79,10 +79,9 @@ describe("consultations_no_overlap — 컨설턴트별", () => {
     expect(err).toContain("consultations_no_overlap");
   });
 
-  it("컨설턴트 미배정 시간 행끼리는 전사 단위로 막고, 배정 행과는 충돌하지 않는다", () => {
-    insertConsultation("t3a", null, 20);
+  it("컨설턴트 미배정 시간 행은 만들 수 없다(20261910000000 — 미배정 전사 겹침 제약은 제거됨)", () => {
     expect(psqlErr(`insert into consultations (contact_name, contact_email, status, starts_at, ends_at)
-      values ('overlap-${RUN}', '${EMAIL("t3b")}', 'requested', '${slot(20)}', '${slot(21)}')`)).toContain("consultations_unassigned_no_overlap");
+      values ('overlap-${RUN}', '${EMAIL("t3b")}', 'requested', '${slot(20)}', '${slot(21)}')`)).toContain("담당 컨설턴트가 배정되지 않은 상담에는 시간을 지정할 수 없습니다");
     expect(() => insertConsultation("t3c", CONSULTANT_A, 20)).not.toThrow();
   });
 
@@ -121,8 +120,8 @@ describe("재배정·시간 변경", () => {
     const moving = insertConsultation("t6b", CONSULTANT_B, 50, "scheduled");
     const err = psqlErr(asAdmin(`select assign_consultation_owner('${moving}', 'admissions_consultant', '${CONSULTANT_A}', 'test');`));
     expect(err).toContain("이미 같은 시간의 다른 상담이 있어");
-    const free = insertConsultation("t6c", null, 60);
-    expect(() => psql(asAdmin(`select assign_consultation_owner('${free}', 'admissions_consultant', '${CONSULTANT_B}', 'test');`))).not.toThrow();
+    const free = insertConsultation("t6c", CONSULTANT_B, 60, "scheduled");
+    expect(() => psql(asAdmin(`select assign_consultation_owner('${free}', 'admissions_consultant', '${CONSULTANT_A}', 'test');`))).not.toThrow();
   });
 
   it("관리자 시간 변경: 같은 컨설턴트와 겹치면 거절, 다른 컨설턴트와는 허용", () => {

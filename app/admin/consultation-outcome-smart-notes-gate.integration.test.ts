@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
 // M4 후속(2026-09-06, 2차 완화) — admin_record_consultation_outcome()이 Smart Notes
 // 원본 실제 연결(smart_notes_drive_file_id)과 Smart Notes 활성화 상태
@@ -13,11 +13,28 @@ import { describe, expect, it } from "vitest";
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 
+// 2026-09-29(20261910000000) — 컨설턴트 없이는 scheduled 상담을 만들 수 없다. 이 테스트 전용
+// 고정 컨설턴트를 한 번 만들어 두고(멱등) 모든 scheduled 상담에 붙인다.
+const CONSULTANT_ID = "cccccccc-0000-0000-0000-00000000a0b1";
+
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
     encoding: "utf-8",
   }).trim();
 }
+
+beforeAll(() => {
+  psql(`
+    insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+      raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, recovery_token,
+      email_change_token_new, email_change, email_change_token_current, phone_change, phone_change_token, reauthentication_token)
+    values ('00000000-0000-0000-0000-000000000000', '${CONSULTANT_ID}', 'authenticated', 'authenticated', 'outcome-gate-consultant@example.com',
+      crypt('x', gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', '')
+    on conflict (id) do nothing;
+    insert into profiles (id, role, name) values ('${CONSULTANT_ID}', 'consultant', 'outcome-gate-consultant')
+    on conflict (id) do nothing;
+  `);
+});
 
 function psqlAsAdmin(sql: string): string {
   return psql(`
@@ -44,9 +61,9 @@ function createConsultation(baseLabel: string, opts: { consent: boolean; smartNo
      returning id;`
   );
   const consultationId = psql(
-    `insert into consultations (contact_name, contact_email, status, scheduled_at,
+    `insert into consultations (contact_name, contact_email, status, admissions_consultant_id, scheduled_at,
        consent_version_id, consent_confirmed_at, smart_notes_config_status)
-     values ('테스트 ${label}', '${label}@example.com', 'scheduled', now() - interval '1 hour',
+     values ('테스트 ${label}', '${label}@example.com', 'scheduled', '${CONSULTANT_ID}', now() - interval '1 hour',
        ${opts.consent ? `'${policyId}'` : "null"}, ${opts.consent ? "now()" : "null"},
        '${opts.smartNotesApplied ? "applied" : "pending"}')
      returning id;`
@@ -126,8 +143,8 @@ describe("admin_record_consultation_outcome() — outcome='trial_recommended' �
   it("child_id가 연결된 상담에 outcome='trial_recommended'를 기록하면 별도 동의 없이 체험수업권이 즉시 지급된다", () => {
     const childId = createChildAuthProfile("auto-grant-child");
     const consultationId = psql(
-      `insert into consultations (source, status, contact_name, contact_email, child_id, scheduled_at)
-       values ('homepage', 'scheduled', '자동지급 테스트', 'auto-grant-${Date.now()}@example.com', '${childId}', now() - interval '1 hour')
+      `insert into consultations (source, status, contact_name, contact_email, child_id, admissions_consultant_id, scheduled_at)
+       values ('homepage', 'scheduled', '자동지급 테스트', 'auto-grant-${Date.now()}@example.com', '${childId}', '${CONSULTANT_ID}', now() - interval '1 hour')
        returning id;`
     );
 
@@ -150,8 +167,8 @@ describe("admin_record_consultation_outcome() — outcome='trial_recommended' �
   it("이미 체험수업권이 지급된 상담을 다시 기록해도 중복 지급하지 않는다(멱등)", () => {
     const childId = createChildAuthProfile("auto-grant-idempotent-child");
     const consultationId = psql(
-      `insert into consultations (source, status, contact_name, contact_email, child_id, scheduled_at)
-       values ('homepage', 'scheduled', '멱등 테스트', 'auto-grant-idem-${Date.now()}@example.com', '${childId}', now() - interval '1 hour')
+      `insert into consultations (source, status, contact_name, contact_email, child_id, admissions_consultant_id, scheduled_at)
+       values ('homepage', 'scheduled', '멱등 테스트', 'auto-grant-idem-${Date.now()}@example.com', '${childId}', '${CONSULTANT_ID}', now() - interval '1 hour')
        returning id;`
     );
     psqlAsAdmin(

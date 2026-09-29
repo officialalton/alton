@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
 
-// R11(문의·면담) — household_messages/meeting_requests RLS + list_open_meeting_slots()
+// R11(문의·면담) — household_messages/meeting_requests RLS
 // RPC를 로컬 Postgres에 직접 psql로 검증한다(app/consult/existing-guardian-reconsult.
 // integration.test.ts와 동일한 패턴). auth.uid()는 request.jwt.claims 세션 변수에서
 // 읽으므로(2026-09-06 실제 버그 수정 세션에서 확인한 정의 그대로), `set local role
@@ -119,8 +119,8 @@ describe("meeting_requests — consultations와 완전 분리", () => {
 
     const meetingId = psqlAsUser(
       a.guardianId,
-      `insert into meeting_requests (household_id, child_id, subject, requested_by, starts_at, ends_at)
-       values ('${a.householdId}', '${a.childId}', '성적 상담', '${a.guardianId}', now() + interval '1 day', now() + interval '1 day 1 hour')
+      `insert into meeting_requests (household_id, child_id, subject, requested_by)
+       values ('${a.householdId}', '${a.childId}', '성적 상담', '${a.guardianId}')
        returning id;`
     );
     expect(meetingId.length).toBeGreaterThan(0);
@@ -146,51 +146,9 @@ describe("meeting_requests — consultations와 완전 분리", () => {
     const b = setupHousehold("meeting-b2");
     psqlAsUser(
       a.guardianId,
-      `insert into meeting_requests (household_id, requested_by, starts_at, ends_at) values ('${a.householdId}', '${a.guardianId}', now() + interval '1 day', now() + interval '1 day 1 hour');`
+      `insert into meeting_requests (household_id, requested_by, starts_at, ends_at) values ('${a.householdId}', '${a.guardianId}', null, null);`
     );
     const visibleToOther = psqlAsUser(b.guardianId, `select count(*) from meeting_requests where household_id = '${a.householdId}';`);
     expect(visibleToOther).toBe("0");
-  });
-});
-
-describe("list_open_meeting_slots() — 면담 전용 가용시간(상담 slots와 분리)", () => {
-  it("면담 전용 반복 가능시간만 반영하고, 상담(list_open_consult_slots)과 결과가 섞이지 않는다", () => {
-    // 상담 쪽에만 규칙을 등록(비교군) — 면담 슬롯 계산에 영향을 주면 안 된다.
-    psqlAsSuperuser(`delete from consult_availability_rules;`);
-    psqlAsSuperuser(`insert into consult_availability_rules (weekday, start_time, end_time) select generate_series(0,6), '08:00', '09:00';`);
-
-    psqlAsSuperuser(`delete from meeting_availability_rules;`);
-    psqlAsSuperuser(`insert into meeting_availability_rules (weekday, start_time, end_time) select generate_series(0,6), '14:00', '15:00';`);
-
-    const from = new Date();
-    const to = new Date(from.getTime() + 3 * 24 * 60 * 60 * 1000);
-    const meetingSlots = psqlAsSuperuser(
-      `select count(*) from list_open_meeting_slots('${from.toISOString()}', '${to.toISOString()}');`
-    );
-    expect(Number(meetingSlots)).toBeGreaterThan(0);
-
-    // 면담 규칙 시간대(14:00~15:00 PT)와 상담 규칙 시간대(08:00~09:00 PT)가
-    // 겹치지 않으므로, 면담 슬롯 목록에 상담 슬롯 시간대가 섞여 나오면 안 된다.
-    const overlapCount = psqlAsSuperuser(
-      `select count(*) from list_open_meeting_slots('${from.toISOString()}', '${to.toISOString()}') m
-       join list_open_consult_slots('${from.toISOString()}', '${to.toISOString()}') c on m.slot_starts_at = c.slot_starts_at;`
-    );
-    expect(overlapCount).toBe("0");
-  });
-
-  it("면담 예외(휴무)로 등록한 날짜는 슬롯에서 제외된다", () => {
-    psqlAsSuperuser(`delete from meeting_availability_rules;`);
-    psqlAsSuperuser(`insert into meeting_availability_rules (weekday, start_time, end_time) select generate_series(0,6), '14:00', '15:00';`);
-    psqlAsSuperuser(`delete from meeting_availability_exceptions;`);
-    const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    const tomorrowDate = tomorrow.toISOString().slice(0, 10);
-    psqlAsSuperuser(`insert into meeting_availability_exceptions (exception_date, is_closed) values ('${tomorrowDate}', true);`);
-
-    const from = new Date();
-    const to = new Date(from.getTime() + 2 * 24 * 60 * 60 * 1000);
-    const slotsOnClosedDay = psqlAsSuperuser(
-      `select count(*) from list_open_meeting_slots('${from.toISOString()}', '${to.toISOString()}') where slot_starts_at::date = '${tomorrowDate}';`
-    );
-    expect(slotsOnClosedDay).toBe("0");
   });
 });
