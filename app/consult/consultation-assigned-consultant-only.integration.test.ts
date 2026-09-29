@@ -199,7 +199,7 @@ describe("보호자 포털: 배정된 컨설턴트의 슬롯만", () => {
            values ('${HOUSEHOLD_WITHOUT}', '${GUARDIAN_WITHOUT}', '${TAG}', now() + interval '3 days', now() + interval '3 days 1 hour');`
         )
       )
-    ).toContain("row-level security");
+    ).toMatch(/row-level security|먼저 담당 컨설턴트를 배정해 주세요/); // 20261912000000 트리거가 RLS 보다 먼저 거절
     psql(
       asUser(
         GUARDIAN_WITHOUT,
