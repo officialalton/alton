@@ -164,12 +164,25 @@ async function buildSessionProblems(
   const pinnedVersionIds = rows.map((r) => r.versionId).filter((v): v is string => Boolean(v));
   const versionById = new Map<string, Record<string, unknown>>();
   if (pinnedVersionIds.length) {
-    const { data, error: versionError } = await supabase
-      .from("problem_versions")
-      .select("id, problem_id, passage, question, options, correct_index, explanation, difficulty, answers, figure, statements")
-      .in("id", pinnedVersionIds);
+    // 2026-09-29: 학생·학부모는 problem_versions 를 직접 읽지 못한다(정답·해설 유출 차단).
+    // 수업 관계자용 함수가 정답 계열 컬럼을 **채점된 문제에만** 채워 돌려준다.
+    const { data, error: versionError } = await supabase.rpc("session_problem_versions", {
+      p_session_id: sessionId,
+      p_version_ids: pinnedVersionIds,
+      p_source: source,
+    });
     if (versionError) throw new Error(versionError.message);
-    for (const v of data ?? []) versionById.set(v.id as string, v);
+    for (const v of (data ?? []) as Record<string, unknown>[]) versionById.set(v.id as string, v);
+    // 함수가 비워 돌려준 버전(서비스 롤처럼 auth.uid 가 없는 호출)은 테이블을 직접 읽어 본다 —
+    // 학생·학부모는 RLS 로 비어 그대로 남는다.
+    const missingIds = pinnedVersionIds.filter((id) => !versionById.has(id));
+    if (missingIds.length) {
+      const { data: direct } = await supabase
+        .from("problem_versions")
+        .select("id, problem_id, passage, question, options, correct_index, explanation, difficulty, answers, figure, statements")
+        .in("id", missingIds);
+      for (const v of direct ?? []) versionById.set(v.id as string, v);
+    }
   }
 
 

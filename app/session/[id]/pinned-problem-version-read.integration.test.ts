@@ -174,9 +174,14 @@ describe("고정된 문제 버전을 화면이 실제로 읽는다", () => {
     expect(psql(`select status from problem_versions where id = '${pinnedVersionId}';`)).toBe("archived");
 
     // 학생·교사 모두 보관된 그 버전을 여전히 읽는다.
-    expect(asUser(STUDENT_ID, `select passage from problem_versions where id = '${pinnedVersionId}';`)).toBe(
-      "첫 번째 문제의 지문"
-    );
+    // 학생은 테이블을 직접 읽지 못하고(정답 유출 차단, 2026-09-29) 수업 관계자용 함수로 읽는다.
+    expect(asUser(STUDENT_ID, `select passage from problem_versions where id = '${pinnedVersionId}';`)).toBe("");
+    expect(
+      asUser(
+        STUDENT_ID,
+        `select passage from session_problem_versions('${sessionId}', array['${pinnedVersionId}']::uuid[], 'lesson');`
+      )
+    ).toBe("첫 번째 문제의 지문");
     expect(asUser(TEACHER_ID, `select passage from problem_versions where id = '${pinnedVersionId}';`)).toBe(
       "첫 번째 문제의 지문"
     );
