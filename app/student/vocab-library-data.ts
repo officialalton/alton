@@ -86,6 +86,16 @@ export type VocabQuizItem = {
   antonymWords?: string[] | null;
 };
 export type VocabQuizSource = { customWords: boolean; bookIds: string[]; folderIds: string[] };
+
+/** DB 의 source 는 `{}`·일부 키 누락 행이 있다(다른 경로로 만든 시험). 화면은 세 필드를 전제하므로 기본값을 채운다. */
+export function normalizeVocabQuizSource(raw: unknown): VocabQuizSource {
+  const r = (raw && typeof raw === "object" ? raw : {}) as Partial<VocabQuizSource>;
+  return {
+    customWords: r.customWords === true,
+    bookIds: Array.isArray(r.bookIds) ? r.bookIds : [],
+    folderIds: Array.isArray(r.folderIds) ? r.folderIds : [],
+  };
+}
 export type VocabQuiz = {
   id: string;
   status: "pending" | "in_progress" | "completed";
@@ -118,7 +128,7 @@ export async function loadVocabQuizzes(supabase: SupabaseClient, studentId: stri
     score: q.score as number | null,
     total: q.total as number | null,
     answers: q.answers as (number | null)[] | null,
-    source: (q.source as VocabQuizSource) ?? { customWords: false, bookIds: [], folderIds: [] },
+    source: normalizeVocabQuizSource(q.source),
     createdAt: q.created_at as string,
     dueAt: q.due_at as string | null,
     sessionId: q.session_id as string | null,
