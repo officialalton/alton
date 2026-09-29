@@ -5,6 +5,7 @@
 // 실행: npx tsx scripts/problem-quality-pilot.ts
 import { readFileSync, existsSync, appendFileSync } from "node:fs";
 import path from "node:path";
+import { requireScriptUsageScope } from "../lib/problem-usage-scope";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -101,7 +102,7 @@ async function main() {
       const { data: problemId, error: createErr } = await admin.rpc("create_bank_problem", {
         p_subject_id: SAT_MATH_SUBJECT_ID, p_format: format, p_skill_type: legacy?.label ?? skill.label,
         p_topic: "", p_skill_code: skill.code, p_exam_system: system, p_ap_subject: null,
-        p_difficulty: "medium", p_actor_id: actorId,
+        p_difficulty: "medium", p_actor_id: actorId, p_usage_scope: requireScriptUsageScope(),
       });
       if (createErr || !problemId) { saveFailed += 1; failures.push(`문제 생성 실패: ${createErr?.message}`); continue; }
 

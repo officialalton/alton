@@ -9,6 +9,7 @@
 // 실행: npx tsx scripts/evidence-model-verify.ts --only=inferences,central_ideas_details --count=6
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { requireScriptUsageScope } from "../lib/problem-usage-scope";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -61,7 +62,7 @@ async function main() {
     for (const { problem: g, quality } of result.accepted) {
       const { data: row, error: insErr } = await admin
         .from("problems")
-        .insert({ subject_id: subjectId, format: "mc", skill_type: skillCode, skill_code: skillCode, exam_system: "sat_rw", difficulty: "medium", created_via: "ai_generated" })
+        .insert({ subject_id: subjectId, format: "mc", skill_type: skillCode, skill_code: skillCode, exam_system: "sat_rw", difficulty: "medium", created_via: "ai_generated", usage_scope: requireScriptUsageScope() })
         .select("id")
         .single();
       if (insErr) { console.error("문제 행 생성 실패:", insErr.message); continue; }

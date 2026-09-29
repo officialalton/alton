@@ -12,12 +12,17 @@ import {
   updateProblemMetaAction,
   generateBankProblemsAction,
   problemQuestionAuditAction,
+  retagProblemsUsageScopeAction,
+  countRetagCandidatesAction,
+  setProblemSimilarityGroupAction,
   type BankProblem,
+  type SelectableUsageScope,
+  type UsageScope,
   type ProblemBankFilter,
 } from "./problem-bank-actions";
 import { listSubjectCatalogAction } from "./subject-actions";
 import ProblemDraftEditor, { FieldTitle, PublishedContentView } from "./ProblemDraftEditor";
-import { compatibilityPreview, formatsForExamSystem, FORMAT_LABEL } from "./problem-bank-ui";
+import { compatibilityPreview, formatsForExamSystem, FORMAT_LABEL, USAGE_SCOPE_LABEL } from "./problem-bank-ui";
 import { findProblemSkill } from "@/lib/problem-skills";
 import { getMathSkillKinds, getMathKindLabel } from "@/lib/problem-generation/math-compilers/kind-catalog";
 import {
@@ -251,6 +256,43 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     if (failed.length) setError(failed.join(" / "));
   }
 
+  // 2026-09-29 — 용도 재분류. 선택한 문제 또는 필터에 맞는 미분류(기존) 전체. 확인창에 개수를 보이고, 실행은 서버가 개수를 다시 대조한다.
+  const visibleLegacy = visible.filter((p) => p.usageScope === "both");
+
+  function retagSelected(scope: SelectableUsageScope) {
+    const targets = selectedVisible.filter((p) => p.usageScope !== scope);
+    if (targets.length === 0) return;
+    setPendingConfirm({
+      message: `선택한 ${targets.length}개를 ${USAGE_SCOPE_LABEL[scope]}으로 바꿀까요? 이미 배정·고정된 수업·모의고사는 그대로이고, 이후 후보에서만 달라집니다.`,
+      onConfirm: () => void retagImpl({ problemIds: targets.map((p) => p.id), scope, expectedCount: targets.length }),
+    });
+  }
+
+  async function retagLegacyByFilter(scope: SelectableUsageScope) {
+    setBulkBusy(true);
+    setError(null);
+    const counted = await countRetagCandidatesAction({ ...filter, archived: archived || undefined });
+    setBulkBusy(false);
+    if (!counted.ok) { setError(counted.error); return; }
+    if (counted.value.count === 0) { setNotice("이 필터에 미분류(기존) 문제가 없습니다."); return; }
+    setPendingConfirm({
+      message: `이 필터의 미분류(기존) 문제 ${counted.value.count}개를 모두 ${USAGE_SCOPE_LABEL[scope]}으로 바꿀까요? 이미 배정·고정된 수업·모의고사는 그대로이고, 이후 후보에서만 달라집니다.`,
+      onConfirm: () => void retagImpl({ filter: { ...filter, archived: archived || undefined, onlyLegacy: true }, scope, expectedCount: counted.value.count }),
+    });
+  }
+
+  async function retagImpl(params: Parameters<typeof retagProblemsUsageScopeAction>[0]) {
+    setBulkBusy(true);
+    setError(null);
+    setNotice(null);
+    const result = await retagProblemsUsageScopeAction(params);
+    await reload();
+    setSelectedIds(new Set());
+    setBulkBusy(false);
+    if (!result.ok) setError(result.error);
+    else setNotice(`${result.value.changed}개를 ${USAGE_SCOPE_LABEL[params.scope]}으로 바꿨습니다.`);
+  }
+
   function publishSelected() {
     if (selectedPublishable.length === 0) return;
     setPendingConfirm({
@@ -462,6 +504,19 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </div>
       )}
 
+      {/* 2026-09-29 — 기존(미분류) 문제 일괄 재분류. 같은 문제가 수업·과제와 모의고사에 함께 나오지 않게 나눈다. */}
+      {bucket !== "create" && visibleLegacy.length > 0 && (
+        <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5" data-testid="legacy-scope-bar">
+          <span className="text-[12.5px] text-ink">용도 미분류(기존) <b>{visibleLegacy.length}</b>개</span>
+          <button type="button" disabled={busy || bulkBusy} onClick={() => void retagLegacyByFilter("general")} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
+            필터 전체를 일반용으로
+          </button>
+          <button type="button" disabled={busy || bulkBusy} onClick={() => void retagLegacyByFilter("mock_exam")} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
+            필터 전체를 모의고사용으로
+          </button>
+        </div>
+      )}
+
       {/* 2026-09-19(제품 오너 지시) — 체크박스로 고른 문제만 골라 공개·보관. */}
       {selectedIds.size > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-ink rounded-xl px-4 py-2.5">
@@ -475,6 +530,16 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
             <button type="button" disabled={busy || bulkBusy} onClick={() => void archiveSelected()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
               {bulkBusy ? "처리 중…" : `선택 보관 (${selectedArchivable.length})`}
             </button>
+          )}
+          {selectedVisible.length > 0 && (
+            <>
+              <button type="button" disabled={busy || bulkBusy} onClick={() => retagSelected("general")} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
+                일반용으로 ({selectedVisible.filter((p) => p.usageScope !== "general").length})
+              </button>
+              <button type="button" disabled={busy || bulkBusy} onClick={() => retagSelected("mock_exam")} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
+                모의고사용으로 ({selectedVisible.filter((p) => p.usageScope !== "mock_exam").length})
+              </button>
+            </>
           )}
           {bulkKeywordOptions.length > 0 && (
             <span className="flex items-center gap-1.5">
@@ -677,8 +742,14 @@ function Filters({
         )}
       </div>
 
-      {/* 3행: 형식 · 난이도 버튼 그룹 */}
+      {/* 3행: 용도 · 형식 · 난이도 버튼 그룹 */}
       <div className="flex flex-wrap gap-3 items-center">
+        <select aria-label="용도 필터" value={filter.usageScope ?? ""} onChange={(e) => onChange({ usageScope: (e.target.value || undefined) as UsageScope | undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5">
+          <option value="">모든 용도</option>
+          <option value="general">일반용</option>
+          <option value="mock_exam">모의고사용</option>
+          <option value="both">기존(미분류)</option>
+        </select>
         <ToggleGroup ariaLabel="형식" options={FORMAT_FILTER_OPTIONS} value={filter.format ?? ""} onChange={(v) => onChange({ format: v || undefined })} />
         <ToggleGroup ariaLabel="난이도 필터" options={DIFFICULTY_FILTER_OPTIONS} value={filter.difficulty ?? ""} onChange={(v) => onChange({ difficulty: v || undefined })} />
       </div>
@@ -700,10 +771,12 @@ function NewProblemPanel({
   subjects: AdminSubject[];
   keywordsBySubject: Map<string, SubjectKeyword[]>;
   busy: boolean;
-  onCreate: (p: { subjectId: string; format: string; skillType?: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty?: string; keywordIds?: string[] }) => void | Promise<void>;
-  onGenerate: (p: { subjectId: string; skillType: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty: string; format: string; count: number; keywordIds?: string[]; figurePolicy?: string; kind?: string }) => void | Promise<void>;
+  onCreate: (p: { usageScope: SelectableUsageScope; subjectId: string; format: string; skillType?: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty?: string; keywordIds?: string[] }) => void | Promise<void>;
+  onGenerate: (p: { usageScope: SelectableUsageScope; subjectId: string; skillType: string; skillCode?: string; examSystem?: string; apSubject?: string; topic?: string; difficulty: string; format: string; count: number; keywordIds?: string[]; figurePolicy?: string; kind?: string }) => void | Promise<void>;
 }) {
   const [system, setSystem] = useState<ExamSystem>("sat_rw");
+  // 2026-09-29 — 용도는 필수 선택이다. 기본값이 없어 고르기 전에는 만들 수 없다(같은 문제가 수업과 모의고사에 함께 나오지 않게).
+  const [usageScope, setUsageScope] = useState<SelectableUsageScope | "">("");
   const [subjectId, setSubjectId] = useState("");
   const [keywordIds, setKeywordIds] = useState<string[]>([]);
   const [apSubject, setApSubject] = useState("");
@@ -754,7 +827,7 @@ function NewProblemPanel({
   }
 
   const specOk = system === "ap" ? Boolean(apSubject) : true;
-  const canCreate = Boolean(subjectId) && specOk && apReady && !busy;
+  const canCreate = Boolean(subjectId) && Boolean(usageScope) && specOk && apReady && !busy;
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5" data-testid="new-problem-panel">
@@ -770,6 +843,24 @@ function NewProblemPanel({
             {e.label}
           </button>
         ))}
+      </div>
+
+      {/* 0. 용도(필수) — 같은 문제가 수업·과제와 모의고사에 함께 나오지 않도록 만들 때 정한다. */}
+      <FieldTitle>0. 용도 (필수)</FieldTitle>
+      <div className="flex flex-wrap items-center gap-2 mb-3" role="radiogroup" aria-label="문제 용도">
+        {(["general", "mock_exam"] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            role="radio"
+            aria-checked={usageScope === v}
+            onClick={() => setUsageScope(v)}
+            className={"text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (usageScope === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink bg-white")}
+          >
+            {USAGE_SCOPE_LABEL[v]}
+          </button>
+        ))}
+        <span className="text-[11.5px] text-grey-500">{usageScope === "mock_exam" ? "모의고사에만 쓰이고 수업·과제 후보에서는 빠집니다." : usageScope === "general" ? "수업·과제에만 쓰이고 모의고사 후보에서는 빠집니다." : "먼저 용도를 고르세요."}</span>
       </div>
 
       {/* 1. 관리 과목과 키워드 */}
@@ -914,7 +1005,7 @@ function NewProblemPanel({
         <div className="flex flex-wrap gap-2 items-center">
           <button
             disabled={!canCreate}
-            onClick={() => void onCreate({ subjectId, format, skillType: skillType.trim() || undefined, skillCode: skillCode || undefined, examSystem: system, apSubject: system === "ap" ? apSubject || undefined : undefined, topic: topic.trim() || undefined, difficulty, keywordIds: keywordIds.length ? keywordIds : undefined })}
+            onClick={() => usageScope && void onCreate({ usageScope, subjectId, format, skillType: skillType.trim() || undefined, skillCode: skillCode || undefined, examSystem: system, apSubject: system === "ap" ? apSubject || undefined : undefined, topic: topic.trim() || undefined, difficulty, keywordIds: keywordIds.length ? keywordIds : undefined })}
             className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink bg-white disabled:opacity-50"
           >
             직접 생성
@@ -922,7 +1013,7 @@ function NewProblemPanel({
           {system !== "ap" && (
             <button
               disabled={!canCreate || !skillType.trim()}
-              onClick={() => void onGenerate({ subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, Number(count) || 1)), keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy, kind: kind || undefined })}
+              onClick={() => usageScope && void onGenerate({ usageScope, subjectId, skillType: skillType.trim(), skillCode: skillCode || undefined, examSystem: system, topic: topic.trim() || undefined, difficulty, format, count: Math.max(1, Math.min(MAX_SAFE_GENERATE_COUNT, Number(count) || 1)), keywordIds: keywordIds.length ? keywordIds : undefined, figurePolicy, kind: kind || undefined })}
               className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink bg-white disabled:opacity-50"
             >
               AI 생성
@@ -988,7 +1079,10 @@ function ProblemRow({
           className="mt-1 shrink-0"
         />
         <button onClick={onToggle} className="text-left min-w-0 flex-1">
-          <div className="text-[13.5px] font-bold text-ink truncate" data-testid="bank-row-title">{title}</div>
+          <div className="text-[13.5px] font-bold text-ink truncate" data-testid="bank-row-title">
+            <span data-testid="usage-scope-badge" className={"mr-2 align-middle text-[10.5px] font-bold px-1.5 py-0.5 rounded " + (problem.usageScope === "both" ? "bg-grey-100 text-grey-500" : "bg-ink text-white")}>{USAGE_SCOPE_LABEL[problem.usageScope]}</span>
+            {title}
+          </div>
           <div className="text-[12px] text-grey-500 mt-0.5">
             {problem.subjectName} · {examSystemLabel(problem.examSystem)}{problem.apSubject ? ` › ${AP_SUBJECTS.find((a) => a.code === problem.apSubject)?.label ?? problem.apSubject}` : ""} · {FORMAT_LABEL[problem.format] ?? problem.format} · {WORK_STATE_LABEL[problem.workState]}
             {problem.skillCode ? ` · ${domainShort(problem.satDomain)} › ${skillLabel(problem.skillCode)}` : problem.satDomain ? ` · ${domainShort(problem.satDomain)} › 기술 미지정` : ""}
@@ -1031,6 +1125,7 @@ function ProblemRow({
 
       {open && (
         <div className="mt-3 border-t-[1.5px] border-grey-200 pt-3">
+          <ScopeAndGroupPanel problem={problem} busy={busy} onRun={onRun} />
           {problem.published && <PublishedView problem={problem} busy={busy} onRun={onRun} onNotice={onNotice} />}
           {autoGenerated ? (
             <>
@@ -1058,6 +1153,65 @@ function ProblemRow({
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * 용도 · 유사문항 그룹(2026-09-29). 용도는 일반용/모의고사용으로만 바꿀 수 있다(기존 both 는 되돌릴 수 없다).
+ * 바꿔도 이미 고정된 수업·과제·모의고사는 그대로이고 이후 후보에서만 달라진다.
+ * 그룹은 만들 때 자동 부여되며, 직접 정하면 그 값으로 잠기고 비우면 자동 규칙으로 돌아간다.
+ */
+function ScopeAndGroupPanel({ problem, busy, onRun }: { problem: BankProblem; busy: boolean; onRun: (job: Job, done?: string) => Promise<void> }) {
+  const [group, setGroup] = useState(problem.similarityGroup ?? "");
+  return (
+    <div className="mb-4 flex flex-col gap-2" data-testid="scope-group-panel">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-[11.5px] font-bold text-grey-500">용도</span>
+        {(["general", "mock_exam"] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            role="radio"
+            aria-checked={problem.usageScope === v}
+            disabled={busy || problem.usageScope === v}
+            onClick={() => void onRun(() => retagProblemsUsageScopeAction({ problemIds: [problem.id], scope: v }), `${USAGE_SCOPE_LABEL[v]}으로 바꿨습니다. 이미 고정된 수업·모의고사는 그대로입니다.`)}
+            className={"text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] " + (problem.usageScope === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink bg-white disabled:opacity-50")}
+          >
+            {USAGE_SCOPE_LABEL[v]}
+          </button>
+        ))}
+        {problem.usageScope === "both" && <span className="text-[11.5px] text-grey-500">기존(미분류) 문제 — 수업·과제와 모의고사 양쪽에서 쓰입니다.</span>}
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-[11.5px] font-bold text-grey-500">유사문항 그룹</span>
+        <input
+          aria-label="유사문항 그룹"
+          value={group}
+          onChange={(e) => setGroup(e.target.value)}
+          placeholder="(그룹 없음)"
+          className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1 w-[260px] max-w-full"
+        />
+        <button
+          type="button"
+          disabled={busy || group.trim() === (problem.similarityGroup ?? "")}
+          onClick={() => void onRun(() => setProblemSimilarityGroupAction(problem.id, group), "유사문항 그룹을 저장했습니다.")}
+          className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+        >
+          그룹 저장
+        </button>
+        {problem.similarityGroupManual && (
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => void onRun(() => setProblemSimilarityGroupAction(problem.id, null), "자동 규칙으로 되돌렸습니다.")}
+            className="text-[12px] font-bold text-grey-500"
+          >
+            자동으로 되돌리기
+          </button>
+        )}
+        <span className="text-[11.5px] text-grey-500">{problem.similarityGroupManual ? "직접 지정됨" : "자동 부여"} · 같은 그룹은 한 모의고사에 하나만 들어갑니다.</span>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@
 // 실행: npx tsx scripts/math-compiler-validate-spr.ts <skillCode>
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { requireScriptUsageScope } from "../lib/problem-usage-scope";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -57,7 +58,7 @@ async function main() {
         const { data: problemId, error: pErr } = await admin.rpc("create_bank_problem", {
           p_subject_id: SAT_MATH_SUBJECT_ID, p_format: "spr", p_skill_type: SKILL_LABEL[SKILL_CODE],
           p_topic: "", p_skill_code: SKILL_CODE, p_exam_system: "sat_math", p_ap_subject: null,
-          p_difficulty: difficulty, p_actor_id: actorId,
+          p_difficulty: difficulty, p_actor_id: actorId, p_usage_scope: requireScriptUsageScope(),
         });
         if (pErr || !problemId) { failures.push(`create_bank_problem: ${pErr?.message}`); return; }
         const { data: versionId, error: vErr } = await admin.rpc("save_problem_draft_version", {

@@ -122,7 +122,7 @@ afterEach(() => {
 /** 키워드가 붙고 v1 이 공개된 문제 하나. */
 function publishedProblem(keywordId: string): { problemId: string; v1: string } {
   const problemId = psql(
-    `select create_bank_problem('${SUBJECT_ID}', 'mc', '', '', 'medium', '${ADMIN_ID}');`
+    `select create_bank_problem('${SUBJECT_ID}', 'mc', '', '', 'medium', '${ADMIN_ID}', null, null, null, 'general');`
   );
   cleanupProblems.push(problemId);
   psql(`insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}');`);

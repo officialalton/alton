@@ -31,10 +31,13 @@ function fails(fn: () => unknown): string {
 let skillA: string;
 let skillB: string;
 
+// 자동 유사문항 그룹은 숫자를 지운 본문으로 계산한다 — 숫자만 다른 픽스처가 한 그룹으로 묶이지 않게 글자를 섞는다.
+const alphaOf = (n: number) => String(n).replace(/\d/g, (d) => String.fromCharCode(97 + Number(d)).repeat(2));
+
 function problem(n: number, opts: { domain: string; skill: string; difficulty?: string; group?: string; correctIndex?: number }) {
   const problemId = psql(
     `insert into problems (format, passage, subject_id, status, created_by, sat_domain, skill_code, similarity_group)
-     values ('mc', 'P2 ${RUN} ${n}', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}', '${opts.domain}', '${opts.skill}', ${opts.group ? `'${opts.group}'` : "null"}) returning id;`,
+     values ('mc', 'P2 ${RUN} ${n} ${alphaOf(n)}', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}', '${opts.domain}', '${opts.skill}', ${opts.group ? `'${opts.group}'` : "null"}) returning id;`,
   );
   psql(
     `update problem_versions set options = '["a","b","c","d"]'::jsonb, correct_index = ${opts.correctIndex ?? 0}, explanation = '해설',
@@ -85,7 +88,7 @@ describe("스냅샷", () => {
     const setId = newSet("snapshot", "{}");
     const p = problem(200, { domain: "rw_craft_structure", skill: skillA, correctIndex: 0 });
     const itemId = addItem(setId, p, { domain: "rw_craft_structure", skill: skillA });
-    expect(psql(`select content_snapshot->>'correct_index' || '|' || (content_snapshot->>'passage') from mock_exam_set_items where id = '${itemId}';`)).toBe(`0|P2 ${RUN} 200`);
+    expect(psql(`select content_snapshot->>'correct_index' || '|' || (content_snapshot->>'passage') from mock_exam_set_items where id = '${itemId}';`)).toBe(`0|P2 ${RUN} 200 ${alphaOf(200)}`);
     expect(fails(() => psql(`update mock_exam_set_items set content_snapshot = '{}'::jsonb where id = '${itemId}';`))).toContain("스냅샷");
     expect(fails(() => psql(`update mock_exam_set_items set problem_version_id = '${p.versionId}' where id = '${itemId}';`))).toBe("");
 
@@ -98,7 +101,7 @@ describe("스냅샷", () => {
     const attemptId = psql(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('${STUDENT_ID}', '${setId}', 'assigned') returning id;`);
     asUser(STUDENT_ID, `select mock_exam_start_mst('${attemptId}');`);
     const st = asUser(STUDENT_ID, `select (s->'items'->0->>'passage') from mock_exam_mst_state('${attemptId}') s;`);
-    expect(st).toBe(`P2 ${RUN} 200`);
+    expect(st).toBe(`P2 ${RUN} 200 ${alphaOf(200)}`);
     asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${itemId}', '0', null);`);
     expect(psql(`select correct from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${itemId}';`)).toBe("t");
   });

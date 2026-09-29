@@ -15,6 +15,7 @@
 // 실행: npx tsx scripts/problem-bank-full-reset-generate.ts [--skills=code1,code2] [--progress=path.jsonl]
 import { readFileSync, existsSync, appendFileSync } from "node:fs";
 import path from "node:path";
+import { requireScriptUsageScope } from "../lib/problem-usage-scope";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -101,7 +102,7 @@ async function main() {
           .from("problems")
           .insert({
             subject_id: subjectId, format: g.format ?? format, skill_type: legacy?.label ?? k.label,
-            skill_code: k.code, exam_system: system, difficulty, created_via: isCompiler ? "compiler" : "ai_generated",
+            skill_code: k.code, exam_system: system, difficulty, created_via: isCompiler ? "compiler" : "ai_generated", usage_scope: requireScriptUsageScope(),
           })
           .select("id").single();
         if (insErr) { row.failures.push({ stage: "db_insert_problem", reason: insErr.message, resolved: false }); return; }

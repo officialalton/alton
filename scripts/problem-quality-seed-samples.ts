@@ -5,6 +5,7 @@
 // 실행: npx tsx scripts/problem-quality-seed-samples.ts
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { requireScriptUsageScope } from "../lib/problem-usage-scope";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -73,7 +74,7 @@ async function main() {
     const insertOne = async (g: (typeof result.accepted)[number]["problem"], quality: unknown, repairStatus: "none" | "needs_distractor_repair") => {
       const { data: problemId, error: pErr } = await admin.rpc("create_bank_problem", {
         p_subject_id: subjectId, p_format: format, p_skill_type: legacy?.label ?? skill.label, p_topic: "",
-        p_skill_code: skill.code, p_exam_system: examSystem, p_ap_subject: null, p_difficulty: plan.difficulty, p_actor_id: actorId,
+        p_skill_code: skill.code, p_exam_system: examSystem, p_ap_subject: null, p_difficulty: plan.difficulty, p_actor_id: actorId, p_usage_scope: requireScriptUsageScope(),
       });
       if (pErr || !problemId) { console.error("[seed] 문제 생성 실패:", pErr?.message); return false; }
       const { data: versionId, error: vErr } = await admin.rpc("save_problem_draft_version", {

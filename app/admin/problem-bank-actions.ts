@@ -29,6 +29,15 @@ import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 // 오류는 던지지 않고 { ok, error }로 돌려준다 — 던진 예외는 Production에서
 // 내부 오류 코드로 마스킹된다(2026-09-12 teacher-subjects-actions와 같은 부류).
 
+/** 용도(2026-09-29): general=수업·과제, mock_exam=모의고사, both=기존 문제(레거시, 새 문제로는 고를 수 없다). */
+export type UsageScope = "general" | "mock_exam" | "both";
+/** 새 문제·재분류로 고를 수 있는 용도. */
+export type SelectableUsageScope = Exclude<UsageScope, "both">;
+
+function isSelectableScope(v: unknown): v is SelectableUsageScope {
+  return v === "general" || v === "mock_exam";
+}
+
 export type BankProblemStatus = "draft" | "in_review" | "published" | "archived_problem";
 
 export type BankProblem = {
@@ -43,6 +52,12 @@ export type BankProblem = {
   subpattern: string | null;
   /** 문항 체계(2026-09-14): sat_rw | sat_math | ap. 관리 과목과 독립. */
   examSystem: string | null;
+  /** 용도(2026-09-29). both 는 재분류 전 기존 문제. */
+  usageScope: UsageScope;
+  /** 유사문항 그룹 키(자동 부여, 관리자가 고칠 수 있다). 같은 그룹은 한 모의고사에 하나만 들어간다. */
+  similarityGroup: string | null;
+  /** 관리자가 직접 정한 그룹이면 true — 자동 계산이 덮지 않는다. */
+  similarityGroupManual: boolean;
   /** AP 과목 코드(exam_system = ap). */
   apSubject: string | null;
   /** 최신 내용(공개본 우선)에 질문이 있는가 — 없으면 '질문 보완 필요', 자동 구성 후보에서 빠진다. */
@@ -128,6 +143,8 @@ export type ProblemBankFilter = {
   satDomain?: string;
   skillCode?: string;
   examSystem?: string;
+  /** 용도 필터(2026-09-29). */
+  usageScope?: UsageScope;
   difficulty?: string;
   /** 2026-09-15: 지정하지 않으면 'needs_distractor_repair' 초안은 기본 목록에서 숨는다. */
   repairStatus?: "none" | "needs_distractor_repair";
@@ -142,7 +159,7 @@ export async function listBankProblemsAction(
   let q = admin
     .from("problems")
     .select(
-      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via, subpattern"
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via, subpattern, usage_scope, similarity_group, similarity_group_manual"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -154,6 +171,7 @@ export async function listBankProblemsAction(
   if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
   if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
   if (filter.examSystem) q = q.eq("exam_system", filter.examSystem);
+  if (filter.usageScope) q = q.eq("usage_scope", filter.usageScope);
   if (filter.difficulty) q = q.eq("difficulty", filter.difficulty);
   if (filter.query?.trim()) {
     const term = filter.query.trim().replace(/[%,]/g, "");
@@ -266,6 +284,9 @@ export async function listBankProblemsAction(
     skillCode: (r.skill_code as string | null) ?? null,
     subpattern: (r.subpattern as string | null) ?? null,
     examSystem: (r.exam_system as string | null) ?? null,
+    usageScope: ((r as { usage_scope?: string }).usage_scope as UsageScope | undefined) ?? "both",
+    similarityGroup: ((r as { similarity_group?: string | null }).similarity_group) ?? null,
+    similarityGroupManual: Boolean((r as { similarity_group_manual?: boolean }).similarity_group_manual),
     apSubject: (r.ap_subject as string | null) ?? null,
     hasQuestion: (() => {
       const c = publishedByProblem.get(r.id as string) ?? draftByProblem.get(r.id as string);
@@ -361,12 +382,16 @@ export async function createBankProblemAction(params: {
    * 내용 편집을 막는다(공개/보관만). 기본은 관리자가 직접 쓰는 'manual'.
    */
   createdVia?: "manual" | "ai_generated" | "compiler";
+  /** 용도(2026-09-29) — 필수. 일반용(수업·과제) 또는 모의고사용. 기존(both)은 새 문제로 고를 수 없다. */
+  usageScope: SelectableUsageScope;
   /** 2026-09-18: Math 계산형 컴파일러가 실제로 쓴 세부 패턴(questionKind/kind). 수동 작성·R&W는 생략. */
   subpattern?: string | null;
 }): Promise<BankResult<string>> {
   const { adminUserId } = await requireAdmin();
+  if (!isSelectableScope(params.usageScope)) return { ok: false, error: "용도(일반용 또는 모의고사용)를 골라 주세요." };
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("create_bank_problem", {
+    p_usage_scope: params.usageScope,
     p_subject_id: params.subjectId,
     p_format: params.format,
     p_skill_type: params.skillType ?? "",
@@ -719,6 +744,82 @@ export async function updateProblemMetaAction(
   return { ok: true };
 }
 
+/**
+ * 용도 재분류(2026-09-29). 기존(both) 문제를 일반용/모의고사용으로 나누거나 다시 옮긴다.
+ * 이미 고정된 수업·과제·모의고사에는 영향이 없다(후보에서만 빠진다). 변경은 DB 트리거가 감사 테이블에 남긴다.
+ * `expectedCount` 를 주면 확인창에서 본 개수와 실제 대상이 다를 때 실행하지 않는다.
+ */
+export async function retagProblemsUsageScopeAction(params: {
+  problemIds?: string[];
+  /** problemIds 대신 필터 결과 전체(최대 2000개). 기본은 아직 분류되지 않은(both) 문제만. */
+  filter?: ProblemBankFilter & { onlyLegacy?: boolean };
+  scope: SelectableUsageScope;
+  expectedCount?: number;
+  reason?: string;
+}): Promise<BankResult<{ changed: number }>> {
+  const { adminUserId } = await requireAdmin();
+  if (!isSelectableScope(params.scope)) return { ok: false, error: "용도는 일반용 또는 모의고사용 중에서 골라야 합니다." };
+  const admin = createAdminClient();
+  let ids = Array.from(new Set(params.problemIds ?? []));
+  if (params.filter && ids.length === 0) {
+    const resolved = await resolveRetagTargets(params.filter);
+    if (!resolved.ok) return resolved;
+    ids = resolved.value;
+  }
+  if (ids.length === 0) return { ok: false, error: "바꿀 문제가 없습니다." };
+  if (ids.length > 2000) return { ok: false, error: "한 번에 2000개까지만 바꿀 수 있습니다. 필터를 좁혀 주세요." };
+  if (params.expectedCount !== undefined && params.expectedCount !== ids.length) {
+    return { ok: false, error: `대상이 ${params.expectedCount}개에서 ${ids.length}개로 달라졌습니다. 목록을 새로 고친 뒤 다시 시도해 주세요.` };
+  }
+  const { data, error } = await admin.rpc("retag_problem_usage_scope", {
+    p_problem_ids: ids, p_scope: params.scope, p_actor_id: adminUserId, p_reason: params.reason ?? null,
+  });
+  if (error) return { ok: false, error: readable(error.message, "용도를 바꾸지 못했습니다.") };
+  return { ok: true, value: { changed: Number(data ?? 0) } };
+}
+
+async function resolveRetagTargets(filter: ProblemBankFilter & { onlyLegacy?: boolean }): Promise<BankResult<string[]>> {
+  const admin = createAdminClient();
+  let q = admin.from("problems").select("id").limit(2001);
+  q = filter.archived ? q.not("archived_at", "is", null) : q.is("archived_at", null);
+  if (filter.onlyLegacy !== false) q = q.eq("usage_scope", "both");
+  else if (filter.usageScope) q = q.eq("usage_scope", filter.usageScope);
+  if (filter.subjectId) q = q.eq("subject_id", filter.subjectId);
+  if (filter.format) q = q.eq("format", filter.format);
+  if (filter.satDomain) q = q.eq("sat_domain", filter.satDomain);
+  if (filter.skillCode) q = q.eq("skill_code", filter.skillCode);
+  if (filter.examSystem) q = q.eq("exam_system", filter.examSystem);
+  if (filter.difficulty) q = q.eq("difficulty", filter.difficulty);
+  const { data, error } = await q;
+  if (error) return { ok: false, error: "대상 문제를 읽지 못했습니다." };
+  return { ok: true, value: (data ?? []).map((r) => r.id as string) };
+}
+
+/** 재분류 확인창용 — 필터에 맞는 기존(both) 문제 수. */
+export async function countRetagCandidatesAction(filter: ProblemBankFilter = {}): Promise<BankResult<{ count: number; ids: string[] }>> {
+  await requireAdmin();
+  const resolved = await resolveRetagTargets({ ...filter, onlyLegacy: true });
+  if (!resolved.ok) return resolved;
+  return { ok: true, value: { count: resolved.value.length, ids: resolved.value.slice(0, 2000) } };
+}
+
+/**
+ * 유사문항 그룹 수동 지정(2026-09-29). 값을 넣으면 그 값으로 잠기고(자동 계산이 덮지 않음),
+ * 비우면 잠금을 풀고 자동 규칙으로 다시 계산한다.
+ */
+export async function setProblemSimilarityGroupAction(problemId: string, group: string | null): Promise<BankResult<{ group: string | null }>> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const value = group?.trim() || null;
+  if (value && value.length > 120) return { ok: false, error: "그룹 이름은 120자 이하여야 합니다." };
+  const patch = value
+    ? { similarity_group: value, similarity_group_manual: true }
+    : { similarity_group_manual: false };
+  const { data, error } = await admin.from("problems").update(patch).eq("id", problemId).select("similarity_group").maybeSingle();
+  if (error || !data) return { ok: false, error: "유사문항 그룹을 저장하지 못했습니다." };
+  return { ok: true, value: { group: (data.similarity_group as string | null) ?? null } };
+}
+
 /** 문제 보관·해제. 삭제가 아니다 — 과거 기록은 그대로 남는다. */
 export async function setProblemArchivedAction(
   problemId: string,
@@ -765,6 +866,8 @@ export async function generateBankProblemsAction(params: {
   difficulty: string;
   format: string;
   count: number;
+  /** 용도(2026-09-29) — 필수. 이 배치로 만들어지는 모든 문제에 같은 용도가 붙는다. */
+  usageScope: SelectableUsageScope;
   keywordIds?: string[];
   /** 그림 요구: none | optional | require_plane | require_geometry (2026-09-14). */
   figurePolicy?: string;
@@ -775,6 +878,7 @@ export async function generateBankProblemsAction(params: {
   kind?: string;
 }): Promise<BankResult<{ created: number; failures: string[]; requested: number; shortfall: number; stoppedReason: string }>> {
   await requireAdmin();
+  if (!isSelectableScope(params.usageScope)) return { ok: false, error: "용도(일반용 또는 모의고사용)를 골라 주세요." };
   const admin = createAdminClient();
 
   const { data: subject } = await admin
@@ -823,7 +927,7 @@ export async function generateBankProblemsAction(params: {
         const problem = await createBankProblemAction({
           subjectId: params.subjectId, format: g.format, skillType: params.skillType, skillCode: params.skillCode,
           examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
-          createdVia: "compiler",
+          createdVia: "compiler", usageScope: params.usageScope,
           // 2026-09-18 — 실제로 쓰인 세부 패턴(요청한 kind든 무작위로 뽑힌 값이든)을 그대로 태깅한다.
           subpattern: (g as { subpattern?: string | null }).subpattern ?? null,
         });
@@ -888,7 +992,7 @@ export async function generateBankProblemsAction(params: {
     const problem = await createBankProblemAction({
       subjectId: params.subjectId, format: params.format, skillType: params.skillType, skillCode: params.skillCode,
       examSystem: params.examSystem, apSubject: params.apSubject, topic: params.topic, difficulty: params.difficulty, keywordIds: params.keywordIds,
-      createdVia: "ai_generated",
+      createdVia: "ai_generated", usageScope: params.usageScope,
     });
     if (!problem.ok) { failures.push(problem.error); return; }
     const draft = await createDraftVersionAction({

@@ -49,7 +49,7 @@ afterEach(() => {
 /** 유형과 주제를 따로 받는 생성 경로. 둘 다 선택 항목이다. */
 function newProblem(opts: { skillType?: string; topic?: string } = {}): string {
   const id = psql(
-    `select create_bank_problem('${SUBJECT_ID}', 'mc', '${opts.skillType ?? ""}', '${opts.topic ?? ""}', 'medium', '${ADMIN_ID}');`
+    `select create_bank_problem('${SUBJECT_ID}', 'mc', '${opts.skillType ?? ""}', '${opts.topic ?? ""}', 'medium', '${ADMIN_ID}', null, null, null, 'general');`
   );
   cleanup.push(id);
   return id;

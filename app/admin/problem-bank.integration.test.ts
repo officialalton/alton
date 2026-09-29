@@ -43,7 +43,7 @@ afterEach(() => {
 
 function newProblem(): string {
   const id = psql(
-    `select create_bank_problem('${SUBJECT_ID}', 'mc', '판별식 ${uniq()}', 'medium', '${ADMIN_ID}');`
+    `select create_bank_problem('${SUBJECT_ID}', 'mc', '판별식 ${uniq()}', '', 'medium', '${ADMIN_ID}', null, null, null, 'general');`
   );
   cleanup.push(id);
   return id;
@@ -69,7 +69,7 @@ describe("문제은행 — 교재 섹션 없이 문제를 만든다", () => {
       `insert into subjects (name, archived_at) values ('보관과목 ${uniq()}', now()) returning id;`
     );
     const stderr = psqlExpectError(
-      `select create_bank_problem('${archivedSubject}', 'mc', 'x', 'medium', '${ADMIN_ID}');`
+      `select create_bank_problem('${archivedSubject}', 'mc', 'x', '', 'medium', '${ADMIN_ID}', null, null, null, 'general');`
     );
     expect(stderr).toContain("보관되지 않은 과목");
     psql(`delete from subjects where id = '${archivedSubject}';`);

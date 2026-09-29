@@ -24,6 +24,9 @@ vi.mock("./problem-bank-actions", () => ({
   generateBankProblemsAction: (...a: unknown[]) => generateBankProblemsAction(...a),
   problemQuestionAuditAction: (...a: unknown[]) => problemQuestionAuditAction(...a),
   reassignProblemSubjectAction: (...a: unknown[]) => reassignProblemSubjectAction(...a),
+  retagProblemsUsageScopeAction: (...a: unknown[]) => retagProblemsUsageScopeAction(...a),
+  countRetagCandidatesAction: (...a: unknown[]) => countRetagCandidatesAction(...a),
+  setProblemSimilarityGroupAction: (...a: unknown[]) => setProblemSimilarityGroupAction(...a),
 }));
 
 const listBankProblemsAction = vi.fn();
@@ -43,6 +46,9 @@ const updateProblemMetaAction = vi.fn();
 const generateBankProblemsAction = vi.fn();
 const problemQuestionAuditAction = vi.fn(async (..._a: unknown[]) => ({ ok: true, value: { withQuestion: 1, draftWithout: 0, publishedWithout: 0 } }));
 const reassignProblemSubjectAction = vi.fn();
+const retagProblemsUsageScopeAction = vi.fn();
+const countRetagCandidatesAction = vi.fn();
+const setProblemSimilarityGroupAction = vi.fn();
 
 const subjects: AdminSubject[] = [
   {
@@ -71,6 +77,9 @@ const base = {
   updatedAt: "2026-09-12T00:00:00Z",
   readiness: "ok" as const,
   createdVia: "manual" as const,
+  usageScope: "both" as const,
+  similarityGroup: null,
+  similarityGroupManual: false,
 };
 
 const draftProblem = {
@@ -116,6 +125,9 @@ beforeEach(() => {
   updateProblemMetaAction.mockResolvedValue({ ok: true });
   generateBankProblemsAction.mockResolvedValue({ ok: true, value: { created: 3, failures: [], requested: 3, shortfall: 0, stoppedReason: "target_met" } });
   reassignProblemSubjectAction.mockResolvedValue({ ok: true, value: { subjectId: "sub2", subjectName: "SAT R&W" } });
+  retagProblemsUsageScopeAction.mockResolvedValue({ ok: true, value: { changed: 1 } });
+  countRetagCandidatesAction.mockResolvedValue({ ok: true, value: { count: 7, ids: ["p1"] } });
+  setProblemSimilarityGroupAction.mockResolvedValue({ ok: true, value: { group: "g1" } });
 });
 
 /** 공개 탭으로 옮겨 첫 문제를 편다. 공개된 문제는 생성 탭에 없다. */
@@ -312,6 +324,7 @@ describe("유형과 주제는 별도 항목이다", () => {
     fireEvent.change(screen.getByLabelText("SAT 영역"), { target: { value: "rw_craft_structure" } });
     fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "words_in_context" } });
     fireEvent.change(screen.getByLabelText("주제"), { target: { value: "생태계" } });
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("직접 생성"));
 
     await waitFor(() =>
@@ -334,6 +347,7 @@ describe("유형과 주제는 별도 항목이다", () => {
       expect(screen.getByRole("button", { name: "판별식" })).toBeInTheDocument()
     );
     fireEvent.click(screen.getByRole("button", { name: "판별식" }));
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("직접 생성"));
 
     await waitFor(() =>
@@ -348,6 +362,7 @@ describe("유형과 주제는 별도 항목이다", () => {
     fireEvent.click(screen.getByText("생성"));
     await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("직접 생성"));
 
     await waitFor(() =>
@@ -432,6 +447,7 @@ describe("공개는 내용을 본 뒤에만 — 검수 요청 단계는 없다",
     fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
     fireEvent.change(screen.getByLabelText("SAT 영역"), { target: { value: "rw_craft_structure" } });
     fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "words_in_context" } });
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("AI 생성"));
 
     await waitFor(() =>
@@ -554,6 +570,7 @@ describe("보관은 삭제가 아니다", () => {
     fireEvent.change(screen.getByLabelText("SAT 영역"), { target: { value: "rw_craft_structure" } });
     fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "words_in_context" } });
     fireEvent.change(screen.getByLabelText("난이도"), { target: { value: "hard" } });
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("AI 생성"));
     await waitFor(() =>
       expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ difficulty: "hard" }))
@@ -600,6 +617,7 @@ describe("보관은 삭제가 아니다", () => {
     expect(screen.getByTestId("new-material-need")).toHaveTextContent(/도형/);
     // 관리자가 고르는 '그림' 선택은 없다.
     expect(screen.queryByLabelText("그림")).toBeNull();
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("AI 생성"));
     await waitFor(() =>
       expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ figurePolicy: "require_geometry", examSystem: "sat_math", skillCode: "lines_angles_triangles" }))
@@ -616,10 +634,12 @@ describe("보관은 삭제가 아니다", () => {
     fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "linear_equations_two_var" } });
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-level", "recommended");
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-choice", "with");
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("AI 생성"));
     await waitFor(() => expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ figurePolicy: "require_plane" })));
     fireEvent.click(screen.getByLabelText(/^텍스트형/));
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-choice", "text");
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("AI 생성"));
     await waitFor(() => expect(generateBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ figurePolicy: "none" })));
     // 자료 유형이 둘 이상인 기술(Linear functions: 좌표평면 / 함수표)은 유형까지 고른다.
@@ -627,6 +647,7 @@ describe("보관은 삭제가 아니다", () => {
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-kind", "plane");
     fireEvent.click(screen.getByLabelText(/자료 포함 · 표·그래프/));
     expect(screen.getByTestId("new-material-need")).toHaveAttribute("data-kind", "data");
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
     fireEvent.click(screen.getByText("AI 생성"));
     await waitFor(() => expect(generateBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ figurePolicy: "require_data" })));
   });
@@ -735,5 +756,70 @@ describe("과목 재배정", () => {
     const select = await screen.findByLabelText("문제 과목");
     fireEvent.change(select, { target: { value: "sub2" } });
     await waitFor(() => expect(reassignProblemSubjectAction).toHaveBeenCalledWith("p1", "sub2"));
+  });
+});
+
+
+describe("문제 용도(2026-09-29)", () => {
+  it("용도를 고르기 전에는 만들 수 없고, 고른 용도가 생성 호출에 실린다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    expect(screen.getByText("직접 생성")).toBeDisabled();
+    fireEvent.click(screen.getByRole("radio", { name: "모의고사용" }));
+    expect(screen.getByText("직접 생성")).not.toBeDisabled();
+    fireEvent.click(screen.getByText("직접 생성"));
+    await waitFor(() => expect(createBankProblemAction).toHaveBeenCalledWith(expect.objectContaining({ usageScope: "mock_exam" })));
+  });
+
+  it("AI 생성에도 같은 용도가 실린다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    fireEvent.click(screen.getByText("생성"));
+    await waitFor(() => expect(screen.getByLabelText("새 문제 과목")).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText("새 문제 과목"), { target: { value: "sub1" } });
+    fireEvent.change(screen.getByLabelText("SAT 영역"), { target: { value: "rw_craft_structure" } });
+    fireEvent.change(screen.getByLabelText("세부 기술"), { target: { value: "words_in_context" } });
+    fireEvent.click(screen.getByRole("radio", { name: "일반용" }));
+    fireEvent.click(screen.getByText("AI 생성"));
+    await waitFor(() => expect(generateBankProblemsAction).toHaveBeenCalledWith(expect.objectContaining({ usageScope: "general" })));
+  });
+
+  it("목록 행에 용도 배지가 보이고, 미분류 전체 재분류는 개수를 확인창에 보인 뒤 실행한다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByTestId("usage-scope-badge")).toHaveTextContent("기존(미분류)"));
+    fireEvent.click(screen.getByText("필터 전체를 모의고사용으로"));
+    await waitFor(() => expect(screen.getByText(/미분류\(기존\) 문제 7개를 모두 모의고사용으로/)).toBeInTheDocument());
+    expect(retagProblemsUsageScopeAction).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByText("확인"));
+    await waitFor(() =>
+      expect(retagProblemsUsageScopeAction).toHaveBeenCalledWith(expect.objectContaining({ scope: "mock_exam", expectedCount: 7 })),
+    );
+  });
+
+  it("선택한 문제를 일반용으로 재분류한다(확인창 개수 포함)", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByText("판별식이 0일 때")).toBeInTheDocument());
+    fireEvent.click(screen.getByLabelText("문제 선택"));
+    fireEvent.click(screen.getByText("일반용으로 (1)"));
+    await waitFor(() => expect(screen.getByText(/선택한 1개를 일반용으로 바꿀까요/)).toBeInTheDocument());
+    fireEvent.click(screen.getByText("확인"));
+    await waitFor(() =>
+      expect(retagProblemsUsageScopeAction).toHaveBeenCalledWith({ problemIds: ["p1"], scope: "general", expectedCount: 1 }),
+    );
+  });
+
+  it("상세에서 유사문항 그룹을 직접 지정할 수 있다", async () => {
+    await openFirstProblem();
+    fireEvent.change(screen.getByLabelText("유사문항 그룹"), { target: { value: "g1" } });
+    fireEvent.click(screen.getByText("그룹 저장"));
+    await waitFor(() => expect(setProblemSimilarityGroupAction).toHaveBeenCalledWith("p1", "g1"));
+  });
+
+  it("용도 필터를 바꾸면 목록을 그 용도로 다시 읽는다", async () => {
+    render(<ProblemBankTab subjects={subjects} />);
+    await waitFor(() => expect(screen.getByLabelText("용도 필터")).toBeInTheDocument());
+    fireEvent.change(screen.getByLabelText("용도 필터"), { target: { value: "mock_exam" } });
+    await waitFor(() => expect(listBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ usageScope: "mock_exam" })));
   });
 });

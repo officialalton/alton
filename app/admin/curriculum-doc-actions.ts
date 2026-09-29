@@ -425,6 +425,8 @@ export async function confirmSectionProblems(
         difficulty: draft.difficulty,
         subject_id: subjectId,
         section_id: sectionId,
+        // 교재 섹션에서 만든 문제는 수업 교재용이다(2026-09-29 용도 분류).
+        usage_scope: "general",
         status: "confirmed",
         created_by: user.id,
       })

@@ -33,6 +33,8 @@ const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geome
 const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 
 let seedSkillCounter = 0;
+// 자동 유사문항 그룹(2026-09-29)은 숫자를 지운 본문으로 계산한다 — 숫자만 다른 픽스처가 한 그룹으로 묶이지 않게 글자를 섞는다.
+const alphaOf = (n: number) => String(n).replace(/\d/g, (d) => String.fromCharCode(97 + Number(d)).repeat(2));
 
 async function seedConfirmedProblem(
   domain: string,
@@ -51,7 +53,7 @@ async function seedConfirmedProblem(
   if (format === "mc") {
     const problemId = psql(`
       insert into problems (format, passage, options, correct_index, explanation, status, difficulty, skill_code, created_by)
-      values ('mc', '${label} passage', '["A","B","C","D"]'::jsonb, 0, 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
+      values ('mc', '${label} ${alphaOf(seedSkillCounter)} passage', '["A","B","C","D"]'::jsonb, 0, 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
       returning id;
     `);
     return { problemId };
@@ -61,7 +63,7 @@ async function seedConfirmedProblem(
   // publishedProblem 헬퍼와 같은 패턴).
   const problemId = psql(`
     insert into problems (format, passage, explanation, status, difficulty, skill_code, created_by)
-    values ('spr', '${label} passage', 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
+    values ('spr', '${label} ${alphaOf(seedSkillCounter)} passage', 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
     returning id;
   `);
   psql(`update problem_versions set answers = '["5"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);

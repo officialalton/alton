@@ -3,6 +3,9 @@
 import { AP_SUBJECT_BY_CODE, type ExamSystem } from "@/lib/problem-taxonomy";
 import type { MaterialNeed } from "@/lib/problem-material-need";
 
+/** 용도 표시(2026-09-29). both 는 재분류 전 기존 문제. */
+export const USAGE_SCOPE_LABEL: Record<"general" | "mock_exam" | "both", string> = { general: "일반용", mock_exam: "모의고사용", both: "기존(미분류)" };
+
 export const FORMAT_LABEL: Record<string, string> = { mc: "객관식", spr: "숫자 입력(SPR)", essay: "서술형", math: "풀이형" };
 
 /** 문항 체계별로 고를 수 있는 답안 형식. AP 는 과목별(지원 과목이 없어 지금은 비어 있다). */

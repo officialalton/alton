@@ -12,6 +12,8 @@ import {
   assignMockExamToAllActiveStudentsAction,
   listAllActiveStudentsForMockExamAction,
   listAllMockExamAttemptsAction,
+  getMockExamPoolSummaryAction,
+  type MockExamPoolRow,
   type MockExamSetSummary,
   type MockExamStudentOption,
   type MockExamAttemptHistoryRow,
@@ -20,6 +22,7 @@ import {
 } from "../mock-exam-actions";
 import type { DifficultyTier } from "@/lib/mock-exam/assemble";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
+import { domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import MockExamSetContentViewer from "@/app/components/MockExamSetContentViewer";
 
 const TIER_LABEL: Record<DifficultyTier, string> = { foundation: "기본", standard: "표준", advanced: "상위" };
@@ -60,6 +63,57 @@ export default function MockExamSetsPanel({ initialSets }: { initialSets: MockEx
       {subTab === "배정" && <AssignTab />}
       {subTab === "내역" && <HistoryTab />}
     </div>
+  );
+}
+
+/**
+ * 영역·세부 기술별 모의고사 풀(2026-09-29). 모의고사 조립은 모의고사용 + 기존(미분류) 공개 문항만 쓴다 —
+ * 일반용은 후보가 아니다. 풀이 모자라면 조립이 부족분과 함께 실패한다.
+ */
+function PoolSummary() {
+  const [rows, setRows] = useState<MockExamPoolRow[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    getMockExamPoolSummaryAction()
+      .then((r) => { if (!cancelled) setRows(r); })
+      .catch(() => { if (!cancelled) setError("문항 풀 현황을 불러오지 못했습니다."); });
+    return () => { cancelled = true; };
+  }, []);
+  const totals = (rows ?? []).reduce((a, r) => ({ mock: a.mock + r.mockExam, both: a.both + r.both, general: a.general + r.general }), { mock: 0, both: 0, general: 0 });
+  return (
+    <details className="rounded-xl border border-grey-200 bg-white p-5" data-testid="mock-pool-summary">
+      <summary className="cursor-pointer text-sm font-semibold text-ink">
+        모의고사 문항 풀 {rows ? `— 모의고사용 ${totals.mock} · 기존(양쪽) ${totals.both} · 일반용(제외) ${totals.general}` : ""}
+      </summary>
+      {error && <p className="mt-2 text-xs text-red">{error}</p>}
+      {!rows && !error && <p className="mt-2 text-xs text-grey-500">불러오는 중...</p>}
+      {rows && (
+        <table className="mt-3 w-full text-xs">
+          <thead>
+            <tr className="text-left text-grey-500">
+              <th className="py-1 pr-2">영역</th>
+              <th className="py-1 pr-2">세부 기술</th>
+              <th className="py-1 pr-2 text-right">모의고사용</th>
+              <th className="py-1 pr-2 text-right">기존(양쪽)</th>
+              <th className="py-1 text-right">일반용(제외)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={`${r.satDomain}|${r.skillCode ?? ""}`} className="border-t border-grey-100">
+                <td className="py-1 pr-2">{domainShort(r.satDomain)}</td>
+                <td className="py-1 pr-2">{r.skillCode ? skillLabel(r.skillCode) : "(기술 미지정)"}</td>
+                <td className="py-1 pr-2 text-right">{r.mockExam}</td>
+                <td className="py-1 pr-2 text-right">{r.both}</td>
+                <td className="py-1 text-right text-grey-500">{r.general}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <p className="mt-2 text-[11.5px] text-grey-500">공개된 문항 기준입니다. 조립에는 모의고사용과 기존(양쪽) 문항만 쓰입니다.</p>
+    </details>
   );
 }
 
@@ -107,6 +161,7 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
 
   return (
     <div className="space-y-6">
+      <PoolSummary />
       <section className="rounded-xl border border-grey-200 bg-white p-5">
         <h2 className="text-sm font-semibold text-ink">새 세트 조립</h2>
         <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">

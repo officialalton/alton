@@ -99,6 +99,8 @@ function fetchEligiblePage(db: ReturnType<typeof createAdminClient>, domains: st
     )
     .in("sat_domain", domains)
     .eq("status", "confirmed")
+    // 용도(2026-09-29): 모의고사용·기존(both)만. 일반용은 수업·과제 전용이라 조립 후보가 아니다(DB 트리거도 막는다).
+    .in("usage_scope", ["mock_exam", "both"])
     .is("archived_at", null)
     .eq("problem_versions.status", "published")
     .order("id", { ascending: true })
@@ -465,6 +467,36 @@ export async function getMockExamSetItems(examSetId: string): Promise<MockExamSe
  * 새 버전으로 교체한다(archived로 내림) — DB의 부분 유니크 인덱스(mock_exam_sets_one_published_per_group)를
  * 어기지 않도록 트랜잭션 순서를 지킨다: 기존 공개본 archive → 새 버전 publish.
  */
+export type MockExamPoolRow = {
+  satDomain: string;
+  skillCode: string | null;
+  /** 모의고사용 공개 문항 수. */
+  mockExam: number;
+  /** 기존(용도 미분류) 공개 문항 수 — 수업·모의고사 양쪽 후보. */
+  both: number;
+  /** 일반용 공개 문항 수 — 모의고사 후보가 아님(참고). */
+  general: number;
+};
+
+/** 영역·세부 기술별 용도 풀 크기(공개 문항 기준, 보관 제외) — 모의고사 풀이 충분한지 보는 용도. */
+export async function getMockExamPoolSummaryAction(): Promise<MockExamPoolRow[]> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { data, error } = await db.rpc("problem_pool_by_scope");
+  if (error) throw new Error(error.message);
+  const byKey = new Map<string, MockExamPoolRow>();
+  for (const r of (data ?? []) as { sat_domain: string; skill_code: string | null; usage_scope: string; published: number | string }[]) {
+    const key = `${r.sat_domain}|${r.skill_code ?? ""}`;
+    const row = byKey.get(key) ?? { satDomain: r.sat_domain, skillCode: r.skill_code, mockExam: 0, both: 0, general: 0 };
+    const n = Number(r.published);
+    if (r.usage_scope === "mock_exam") row.mockExam += n;
+    else if (r.usage_scope === "both") row.both += n;
+    else row.general += n;
+    byKey.set(key, row);
+  }
+  return Array.from(byKey.values()).sort((a, b) => a.satDomain.localeCompare(b.satDomain) || (a.skillCode ?? "").localeCompare(b.skillCode ?? ""));
+}
+
 export async function publishMockExamSet(examSetId: string): Promise<void> {
   const { adminUserId } = await requireAdmin();
   const db = createAdminClient();
