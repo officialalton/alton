@@ -16,6 +16,11 @@ vi.mock("@/lib/auth", () => ({
 }));
 
 const sessionMaybeSingleMock = vi.fn();
+
+const scheduleDispatchMock = vi.fn();
+vi.mock("@/lib/contract-dispatch/immediate", () => ({
+  scheduleContractDispatch: (...a: unknown[]) => scheduleDispatchMock(...a),
+}));
 const rpcMock = vi.fn();
 const adminFromMock = vi.fn((table: string) => {
   if (table === "sessions") {
@@ -145,5 +150,24 @@ describe("resolveMyLessonLateness", () => {
       reason: "지각 합의 연장",
     });
     expect(result).toEqual({ ok: false, error: "live 상태의 세션만 지각 처리를 연장할 수 있습니다." });
+  });
+});
+
+describe("finalizeMyLessonSession — 계약 즉시 발송 훅", () => {
+  it("completed 성공 후 세션 기준으로 즉시 발송을 예약하고 결과는 그대로다", async () => {
+    scheduleDispatchMock.mockClear();
+    const { finalizeMyLessonSession } = await import("./lesson-schedule-actions");
+    const r = await finalizeMyLessonSession({ sessionId: "s1", outcome: "completed", reason: "ok" });
+    expect(r).toEqual({ ok: true });
+    expect(scheduleDispatchMock).toHaveBeenCalledWith({ sessionId: "s1" });
+  });
+  it("노쇼이거나 RPC가 실패하면 예약하지 않는다", async () => {
+    scheduleDispatchMock.mockClear();
+    const { finalizeMyLessonSession } = await import("./lesson-schedule-actions");
+    await finalizeMyLessonSession({ sessionId: "s1", outcome: "student_no_show", reason: "x" });
+    rpcMock.mockResolvedValueOnce({ error: { message: "boom" } });
+    const r = await finalizeMyLessonSession({ sessionId: "s1", outcome: "completed", reason: "x" });
+    expect(r.ok).toBe(false);
+    expect(scheduleDispatchMock).not.toHaveBeenCalled();
   });
 });

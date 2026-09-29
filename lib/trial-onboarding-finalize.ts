@@ -1,6 +1,7 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { sendEmail, escapeHtml } from "@/lib/email";
 import { currentRequestOrigin } from "@/lib/request-origin";
+import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
 
 // M4 (6/N) — 신규 보호자 계정 실제 생성 + finalize + /set-password 리다이렉트를
 // 공통 헬퍼로 뺐다. "prospect 이메일 그대로 유지"와 "다른 이메일로 변경 후 확인
@@ -338,6 +339,8 @@ async function finalizeWithGuardian(
     return redirectWithError("계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
   }
   const finalizeRow = finalizeData?.[0];
+  // 직접생성 계정 완료 → direct_account_created(DB가 큐잉) 계약을 응답 뒤에서 바로 발송.
+  scheduleContractDispatch({ childIds: finalizeItems.map((i) => i.child_auth_user_id) });
 
   // 학생별 비밀번호 설정 초대는 실제로 이번에 created 처리된 학생에게만 보낸다
   // (finalize 단계에서 개별 실패한 학생은 초대 보내지 않음 — 관리자 재시도 대상).

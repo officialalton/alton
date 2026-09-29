@@ -19,6 +19,7 @@ import { findExistingAuthEmailCollisions, type OnboardingEmailCollision } from "
 import { autoActivateReadySubjectEnrollments } from "@/lib/enrollment/auto-activate";
 import { autoCloseConsultationOnContractSigned } from "@/lib/enrollment/auto-close-consultation";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
+import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
 
 // 기존 상담 관리 액션(app/admin/consultation-actions.ts)과 동일한 capability를
 // 재사용한다 — 새 권한 이름을 따로 만들지 않는다.
@@ -1004,6 +1005,7 @@ export async function retryFailedTrialOnboardingStudentAction(
     return { status: "failed", error: retryError.message };
   }
 
+  scheduleContractDispatch({ childIds: [childAuthUserId] });
   return { status: "created", childId: childAuthUserId };
 }
 

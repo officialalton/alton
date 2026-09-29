@@ -8,6 +8,11 @@ import { describe, expect, it, vi } from "vitest";
 
 const rpcMock = vi.fn();
 
+const scheduleDispatchMock = vi.fn();
+vi.mock("@/lib/contract-dispatch/immediate", () => ({
+  scheduleContractDispatch: (...a: unknown[]) => scheduleDispatchMock(...a),
+}));
+
 vi.mock("@/lib/admin-auth", () => ({
   requireAdmin: vi.fn().mockResolvedValue({ supabase: { rpc: rpcMock }, actorUserId: "admin1" }),
   requireAdminOrCapability: vi.fn().mockResolvedValue({ supabase: { rpc: rpcMock }, actorUserId: "admin1" }),
@@ -118,5 +123,27 @@ describe("recordConsultationOutcome", () => {
     });
 
     expect(result).toEqual({ ok: false, error: "관리자만 사용할 수 있습니다." });
+  });
+});
+
+describe("recordConsultationOutcome — 계약 즉시 발송 훅", () => {
+  const base = { consultationId: "consult-9", notes: "", adminReviewSummary: "" };
+  it("regular_recommended 성공 후 상담 기준으로 즉시 발송을 예약한다", async () => {
+    scheduleDispatchMock.mockClear();
+    rpcMock.mockResolvedValueOnce({ data: null, error: null });
+    const { recordConsultationOutcome } = await import("./consultation-scheduling-actions");
+    const r = await recordConsultationOutcome({ ...base, outcome: "regular_recommended" });
+    expect(r).toEqual({ ok: true });
+    expect(scheduleDispatchMock).toHaveBeenCalledWith({ consultationId: "consult-9" });
+  });
+  it("다른 outcome이나 RPC 실패에서는 예약하지 않는다", async () => {
+    scheduleDispatchMock.mockClear();
+    const { recordConsultationOutcome } = await import("./consultation-scheduling-actions");
+    rpcMock.mockResolvedValueOnce({ data: null, error: null });
+    await recordConsultationOutcome({ ...base, outcome: "on_hold" });
+    rpcMock.mockResolvedValueOnce({ data: null, error: { message: "x" } });
+    const r = await recordConsultationOutcome({ ...base, outcome: "regular_recommended" });
+    expect(r.ok).toBe(false);
+    expect(scheduleDispatchMock).not.toHaveBeenCalled();
   });
 });

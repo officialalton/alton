@@ -1,6 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const createUserMock = vi.fn();
+
+const scheduleDispatchMock = vi.fn();
+vi.mock("@/lib/contract-dispatch/immediate", () => ({
+  scheduleContractDispatch: (...a: unknown[]) => scheduleDispatchMock(...a),
+}));
 const generateLinkMock = vi.fn();
 const deleteUserMock = vi.fn().mockResolvedValue({ error: null });
 const getUserByIdMock = vi.fn();
@@ -545,5 +550,23 @@ describe("createGuardianAndStudentThenRedirect — 이미 완료된 링크를 �
     const notice = decodeURIComponent(res.redirectPath);
     expect(notice).toContain("이미 등록된 계정입니다");
     expect(notice).not.toContain("추가로 연결됐습니다");
+  });
+});
+
+describe("createGuardianAndStudentThenRedirect — 계약 즉시 발송 훅", () => {
+  it("finalize 성공 후 생성된 학생 id로 즉시 발송을 예약한다", async () => {
+    scheduleDispatchMock.mockClear();
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+    expect(scheduleDispatchMock).toHaveBeenCalledWith({ childIds: ["student-id"] });
+  });
+  it("finalize RPC가 실패하면 예약하지 않는다", async () => {
+    scheduleDispatchMock.mockClear();
+    rpcMock.mockImplementation((fn: string) =>
+      fn === "finalize_trial_onboarding_students"
+        ? Promise.resolve({ data: null, error: { message: "boom" } })
+        : defaultRpcImpl(fn)
+    );
+    await createGuardianAndStudentThenRedirect(BASE_PARAMS);
+    expect(scheduleDispatchMock).not.toHaveBeenCalled();
   });
 });
