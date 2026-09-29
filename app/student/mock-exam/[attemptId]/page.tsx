@@ -2,12 +2,17 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { loadMockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
+import { loadMstAttemptStateAction } from "@/lib/mock-exam/mst-actions";
 import MockExamTakeClient from "./MockExamTakeClient";
+import MockExamMstTakeClient from "./MockExamMstTakeClient";
 import MockExamResultView from "./MockExamResultView";
 
 // 고정형 SAT 모의고사 V1 — 독립 진입점(사양 4절 "학생 포털의 독립 모의고사 탭에서도 재개").
 // 수업 화면 안 진입(세션 탭)은 이번 패스에서 배선하지 않았다(최종 보고 "미완료" 참고) — 이
 // 라우트가 사양 4절이 말하는 "같은 응시 기록"의 유일한 진입점 역할을 한다.
+//
+// MST(4모듈) 세트는 별도 응시 클라이언트로 분기한다 — 상태(모듈·서버 기준 남은 시간·현재 모듈 문항)는
+// mock_exam_mst_state RPC가 복구해 준다(새로고침·재접속 포함). 채점 완료 후 결과 화면은 공용.
 export default async function StudentMockExamAttemptPage({ params }: { params: Promise<{ attemptId: string }> }) {
   const { attemptId } = await params;
   const { user, supabase } = await requireUser();
@@ -19,6 +24,20 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
   // 그대로 두지만, 채점 완료된 결과 화면은 다 본 뒤 나갈 방법이 없어 학생이 갇힌 것처럼
   // 보였다 — 결과 화면에만 명시적 뒤로가기를 붙인다.
   const isGraded = attempt.status === "graded";
+
+  if (!isGraded && attempt.format === "mst") {
+    const state = await loadMstAttemptStateAction(attemptId);
+    if (!state.ok) throw new Error(state.error);
+    return (
+      <MockExamMstTakeClient
+        initialState={state.value}
+        examSetName={attempt.examSetName}
+        mathCalculatorAllowed={attempt.mathCalculatorAllowed}
+        mathReferenceSheetAllowed={attempt.mathReferenceSheetAllowed}
+      />
+    );
+  }
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-6">
       {isGraded && (

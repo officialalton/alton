@@ -8,11 +8,11 @@ import { describe, expect, it, vi, beforeAll } from "vitest";
 // 다른 통합 테스트(app/admin/confirm-student-teacher-subject-match.integration.test.ts)와
 // 같은 패턴으로 admin-auth만 목으로 대체하고, DB는 실제 로컬 인스턴스를 그대로 쓴다.
 
-const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
+const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const SERVICE_ROLE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU";
 
-const admin = createClient("http://127.0.0.1:54421", SERVICE_ROLE_KEY);
+const admin = createClient(process.env.SUPABASE_TEST_API_URL ?? "http://127.0.0.1:54421", SERVICE_ROLE_KEY);
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
@@ -129,6 +129,109 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     `).split("\n");
     expect(formats).toContain("mc");
     expect(formats).toContain("spr");
+  });
+
+  // MST는 모듈마다 정원(27/27/22/22)을 영역×난이도(×형식) 셀로 채우고 M2는 M1이 쓴 문항을 제외하므로,
+  // beforeAll의 셀당 3문항 풀로는 M1조차 못 채운다(fallback 없음 — 의도된 동작). 두 MST 테스트가 새 DB에서도
+  // 결정적으로 돌도록 셀당 넉넉히 보강한다(R&W mc 6, Math mc 6 + spr 3 추가).
+  async function seedMstPool(tag: string) {
+    for (const domain of RW_DOMAINS) {
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < 6; i++) await seedConfirmedProblem(domain, difficulty, `${domain}-${difficulty}-${tag}-${i}`);
+      }
+    }
+    for (const domain of MATH_DOMAINS) {
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < 6; i++) await seedConfirmedProblem(domain, difficulty, `${domain}-${difficulty}-${tag}-mc-${i}`);
+        for (let i = 0; i < 3; i++) await seedConfirmedProblem(domain, difficulty, `${domain}-${difficulty}-${tag}-spr-${i}`, "spr");
+      }
+    }
+  }
+
+  it("MST(4모듈) 조립: 모듈 키·시간 제한 저장, 모듈 간 문항 중복 없음, 섹션 내 연속 position(2026-09-28)", async () => {
+    await seedMstPool("mst1");
+    const { assembleMockExamSet } = await import("./mock-exam-actions");
+    const result = await assembleMockExamSet({
+      name: `MST 세트 ${Date.now()}`,
+      difficultyTier: "standard",
+      rwCount: 0,
+      mathCount: 0,
+      format: "mst",
+    });
+    expect(psql(`select format || '|' || (module_time_limits->>'rw_m1') || '|' || (module_time_limits->>'break') from mock_exam_sets where id = '${result.examSetId}';`)).toBe(
+      "mst|1920|600",
+    );
+    const rows = psql(`
+      select module_key || '|' || section || '|' || position || '|' || problem_id
+      from mock_exam_set_items where exam_set_id = '${result.examSetId}' order by section, position;
+    `)
+      .split("\n")
+      .filter(Boolean)
+      .map((r) => {
+        const [moduleKey, section, position, problemId] = r.split("|");
+        return { moduleKey, section, position: Number(position), problemId };
+      });
+    // 모든 문항이 모듈에 귀속되고, 세트 전체(모듈 간 포함)에 같은 문항이 없다.
+    expect(rows.every((r) => r.moduleKey && r.moduleKey !== "")).toBe(true);
+    expect(new Set(rows.map((r) => r.problemId)).size).toBe(rows.length);
+    // M1이 먼저 정원을 채우고, 풀이 모자라면 M2에 부족분이 보고된다(풀 크기는 이전 실행 잔여 데이터에 따라 달라
+    // 여기서는 M1 정원과 상한만 고정 확인). Math 풀(72)은 22+22를 항상 채운다.
+    const count = (k: string) => rows.filter((r) => r.moduleKey === k).length;
+    expect(count("rw_m1")).toBe(27);
+    expect(count("rw_m2")).toBeGreaterThan(0);
+    expect(count("rw_m2")).toBeLessThanOrEqual(27);
+    expect(count("math_m1")).toBe(22);
+    expect(count("math_m2")).toBe(22);
+    expect(result.shortfalls.some((s) => s.section === "math")).toBe(false);
+    // V1 unique(exam_set_id, section, position)에 맞춘 섹션 내 연속 번호: rw_m2는 28부터, math_m2는 23부터.
+    const positions = (section: string) => rows.filter((r) => r.section === section).map((r) => r.position);
+    expect(positions("rw")).toEqual(Array.from({ length: positions("rw").length }, (_, i) => i + 1));
+    expect(Math.min(...rows.filter((r) => r.moduleKey === "rw_m2").map((r) => r.position))).toBe(28);
+    expect(Math.min(...rows.filter((r) => r.moduleKey === "math_m2").map((r) => r.position))).toBe(23);
+    expect(result.readiness?.modules.find((m) => m.moduleKey === "rw_m2")?.ok).toBe(count("rw_m2") === 27);
+    expect(result.readiness?.modules.find((m) => m.moduleKey === "math_m2")?.ok).toBe(true);
+
+    // 출시 조건(2026-09-28): R&W M2가 정원 미달이면(여기서는 결정적으로 문항 3개를 빼서 재현) ready가 아니고,
+    // 관리자에게 모듈·정원이 보이며, 공개·배정은 앱과 DB 양쪽에서 거부된다(학생이 Module 2에서 막히는 상황 원천 차단).
+    psql(`delete from mock_exam_set_items where id in (select id from mock_exam_set_items where exam_set_id = '${result.examSetId}' and module_key = 'rw_m2' order by position desc limit 3);`);
+    const { publishMockExamSet } = await import("./mock-exam-actions");
+    await expect(publishMockExamSet(result.examSetId)).rejects.toThrow(/문항 구성이 완료되지 않아 공개할 수 없습니다: rw_m2 \d+\/27/);
+    expect(psql(`select readiness_status || '|' || (readiness_report->'modules'->1->>'ok') from mock_exam_sets where id = '${result.examSetId}';`)).toBe("incomplete|false");
+    // 트리거 직접 확인: 서비스 롤로 status를 강제로 바꿔도, 학생에게 배정해도 거부
+    expect(() => psql(`update mock_exam_sets set status = 'published' where id = '${result.examSetId}';`)).toThrow(/공개할 수 없습니다/);
+    expect(() =>
+      psql(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('cccccccc-0000-0000-0000-000000000001', '${result.examSetId}', 'assigned');`),
+    ).toThrow(/배정할 수 없습니다/);
+  });
+
+  it("MST 조립: 풀이 충분하면 ready가 되고 공개·배정이 허용된다", async () => {
+    // R&W 풀을 54문항 이상으로 보강(기존 36 + 24). 같은 tier 공개 세트가 쓴 문항은 회피 대상일 뿐 부족 시 재사용된다.
+    for (const domain of RW_DOMAINS) {
+      for (const difficulty of DIFFICULTIES) {
+        for (let i = 0; i < 2; i++) await seedConfirmedProblem(domain, difficulty, `${domain}-${difficulty}-extra-${i}`);
+      }
+    }
+    const { assembleMockExamSet, publishMockExamSet } = await import("./mock-exam-actions");
+    const result = await assembleMockExamSet({ name: `MST 완성 세트 ${Date.now()}`, difficultyTier: "standard", rwCount: 0, mathCount: 0, format: "mst" });
+    expect(result.readiness?.ready).toBe(true);
+    expect(result.readiness?.modules.every((m) => m.ok)).toBe(true);
+    expect(psql(`select count(*) || '|' || count(distinct problem_id) from mock_exam_set_items where exam_set_id = '${result.examSetId}';`)).toBe("98|98");
+    await publishMockExamSet(result.examSetId);
+    expect(psql(`select status || '|' || readiness_status from mock_exam_sets where id = '${result.examSetId}';`)).toBe("published|ready");
+    const attemptId = psql(
+      `insert into mock_exam_attempts (student_id, exam_set_id, status) values ('cccccccc-0000-0000-0000-000000000002', '${result.examSetId}', 'assigned') returning id;`,
+    );
+    expect(attemptId).toMatch(/[0-9a-f-]{36}/);
+    // 배정 뒤 세트가 훼손되면(문항 삭제) Module 1 시작 자체가 관리자 오류로 거부된다 — 학생이 중간에 막히지 않는다.
+    psql(`delete from mock_exam_set_items where id = (select id from mock_exam_set_items where exam_set_id = '${result.examSetId}' and module_key = 'rw_m2' limit 1);`);
+    let err = "";
+    try {
+      psql(`set role authenticated; do $$ begin perform set_config('request.jwt.claim.sub', 'cccccccc-0000-0000-0000-000000000002', false); end $$; select mock_exam_start_mst('${attemptId}'); reset role;`);
+    } catch (e) {
+      err = String((e as { stderr?: string }).stderr ?? e);
+    }
+    expect(err).toContain("문항 구성이 완료되지 않아 시작할 수 없습니다");
+    expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("assigned");
   });
 
   it("draft 세트를 공개하면 status가 published로 바뀐다", async () => {

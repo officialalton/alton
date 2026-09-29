@@ -38,6 +38,9 @@ export type MockExamSetSummary = {
   name: string;
   difficultyTier: DifficultyTier;
   status: "draft" | "published" | "archived";
+  format: "fixed" | "mst";
+  readinessStatus: "not_applicable" | "ready" | "incomplete";
+  readinessReport: MstReadinessReport | null;
   rwCount: number;
   mathCount: number;
   createdAt: string;
@@ -53,7 +56,7 @@ export async function listMockExamSets(
   const db = createAdminClient();
   let query = db
     .from("mock_exam_sets")
-    .select("id, set_group_id, version_no, name, difficulty_tier, status, created_at, published_at")
+    .select("id, set_group_id, version_no, name, difficulty_tier, status, format, readiness_status, readiness_report, created_at, published_at")
     .order("created_at", { ascending: false });
   if (opts.archivedOnly) query = query.not("archived_at", "is", null);
   else if (!opts.includeArchived) query = query.is("archived_at", null);
@@ -80,6 +83,9 @@ export async function listMockExamSets(
     mathCount: countsBySet.get(s.id)?.math ?? 0,
     createdAt: s.created_at,
     publishedAt: s.published_at,
+    format: (s.format ?? "fixed") as "fixed" | "mst",
+    readinessStatus: (s.readiness_status ?? "not_applicable") as MockExamSetSummary["readinessStatus"],
+    readinessReport: (s.readiness_report as MstReadinessReport | null) ?? null,
   }));
 }
 
@@ -157,12 +163,75 @@ export type AssembleMockExamSetInput = {
   mathCount: number;
   rwTimeLimitMinutes?: number;
   mathTimeLimitMinutes?: number;
+  /** 'mst'면 Digital SAT 4모듈(R&W 27+27, Math 22+22)로 조립하고 rwCount/mathCount는 무시한다. */
+  format?: "fixed" | "mst";
+};
+
+// MST 청사진 — lib/mock-exam/mst.ts MST_BLUEPRINT와 같은 값(서버 액션은 "use server" 파일이라
+// 상수 re-export를 피하고 여기 복제). 모듈 position은 V1 unique(exam_set_id, section, position)
+// 때문에 섹션 안에서 연속 번호를 쓴다(rw 1..54, math 1..44).
+const MST_MODULES: { key: "rw_m1" | "rw_m2" | "math_m1" | "math_m2"; section: ExamSection; count: number }[] = [
+  { key: "rw_m1", section: "rw", count: 27 },
+  { key: "rw_m2", section: "rw", count: 27 },
+  { key: "math_m1", section: "math", count: 22 },
+  { key: "math_m2", section: "math", count: 22 },
+];
+const MST_TIME_LIMITS = { rw_m1: 1920, rw_m2: 1920, break: 600, math_m1: 2100, math_m2: 2100 };
+
+export type AssembleShortfall = {
+  section: ExamSection;
+  /** mst 조립에서만 채워진다(고정형은 null). */
+  moduleKey: string | null;
+  satDomain: string;
+  difficulty: string;
+  format?: string;
+  needed: number;
+  found: number;
+};
+
+/** 4모듈 세트의 출시 가능 여부. modules는 모듈·경로(Phase 3 higher/lower)별 정원 충족 여부,
+ * shortfalls는 조립이 못 채운 영역·난이도·형식 셀(관리자에게 그대로 보여준다). */
+export type MstReadinessReport = {
+  ready: boolean;
+  duplicateCount: number;
+  modules: { moduleKey: string; route: string | null; needed: number; found: number; ok: boolean }[];
+  shortfalls: AssembleShortfall[];
+  checkedAt: string;
 };
 
 export type AssembleMockExamSetResult = {
   examSetId: string;
-  shortfalls: { section: ExamSection; satDomain: string; difficulty: string; needed: number; found: number }[];
+  shortfalls: AssembleShortfall[];
+  /** mst 세트만. 고정형은 null. */
+  readiness: MstReadinessReport | null;
 };
+
+const MST_ITEM_COUNTS = { rw_m1: 27, rw_m2: 27, math_m1: 22, math_m2: 22 };
+
+/** 세트의 모듈·경로별 정원 충족을 DB 함수로 검증하고 결과를 세트 행에 기록한다. 배정·공개 게이트(트리거)와
+ * mock_exam_start_mst()가 같은 함수를 다시 호출하므로, 여기 기록은 관리자 표시용이고 최종 방어는 DB다. */
+async function recordMstReadiness(
+  db: ReturnType<typeof createAdminClient>,
+  examSetId: string,
+  shortfalls: AssembleShortfall[],
+): Promise<MstReadinessReport> {
+  const { data, error } = await db.rpc("mock_exam_validate_mst_set", { p_exam_set_id: examSetId });
+  if (error) throw new Error(error.message);
+  const v = data as { ready: boolean; duplicateCount: number; modules: MstReadinessReport["modules"] };
+  const report: MstReadinessReport = {
+    ready: v.ready,
+    duplicateCount: v.duplicateCount ?? 0,
+    modules: v.modules ?? [],
+    shortfalls,
+    checkedAt: new Date().toISOString(),
+  };
+  const { error: updErr } = await db
+    .from("mock_exam_sets")
+    .update({ readiness_status: report.ready ? "ready" : "incomplete", readiness_report: report, readiness_checked_at: report.checkedAt })
+    .eq("id", examSetId);
+  if (updErr) throw new Error(updErr.message);
+  return report;
+}
 
 /** 관리자 흐름 1단계: 후보 문항 풀에서 비중대로 세트를 조립하고 draft로 저장한다(사양 3절 1~2). */
 export async function assembleMockExamSet(input: AssembleMockExamSetInput): Promise<AssembleMockExamSetResult> {
@@ -170,7 +239,9 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
   const db = createAdminClient();
 
   if (!input.name.trim()) throw new Error("세트 이름을 입력하세요.");
-  if (input.rwCount <= 0 || input.mathCount <= 0) throw new Error("R&W·Math 문항 수는 1 이상이어야 합니다.");
+  if ((input.format ?? "fixed") === "fixed" && (input.rwCount <= 0 || input.mathCount <= 0)) {
+    throw new Error("R&W·Math 문항 수는 1 이상이어야 합니다.");
+  }
 
   const [rwCandidates, mathCandidates, rwWeights, mathWeights, excludeIds] = await Promise.all([
     fetchEligibleProblems(db, RW_DOMAINS),
@@ -180,23 +251,59 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
     fetchAlreadyUsedProblemIds(db, input.difficultyTier),
   ]);
 
-  const rwResult = assembleSection({
-    section: "rw",
-    totalCount: input.rwCount,
-    domainWeights: rwWeights.domainWeights,
-    difficultyWeights: rwWeights.difficultyWeights,
-    candidates: rwCandidates,
-    excludeProblemIds: excludeIds,
-  });
-  const mathResult = assembleSection({
-    section: "math",
-    totalCount: input.mathCount,
-    domainWeights: mathWeights.domainWeights,
-    difficultyWeights: mathWeights.difficultyWeights,
-    candidates: mathCandidates,
-    excludeProblemIds: excludeIds,
-    formatWeights: MATH_FORMAT_WEIGHTS,
-  });
+  const format = input.format ?? "fixed";
+  type ModuleItem = AssembledItem & { moduleKey: string | null };
+  const allItems: ModuleItem[] = [];
+  const shortfalls: AssembleMockExamSetResult["shortfalls"] = [];
+
+  if (format === "mst") {
+    // 모듈마다 같은 tier 가중치로 조립하되, 세트 안에서 이미 뽑힌 문항은 후보에서 아예 빼서
+    // 모듈 간 중복을 원천 차단한다(assembleSection의 excludeProblemIds는 부족하면 재사용하므로
+    // 그 경로에 맡기지 않는다). DB unique(exam_set_id, problem_id)가 최종 방어선.
+    const usedInSet = new Set<string>();
+    const offsets: Record<ExamSection, number> = { rw: 0, math: 0 };
+    for (const mod of MST_MODULES) {
+      const isRw = mod.section === "rw";
+      const result = assembleSection({
+        section: mod.section,
+        totalCount: mod.count,
+        domainWeights: (isRw ? rwWeights : mathWeights).domainWeights,
+        difficultyWeights: (isRw ? rwWeights : mathWeights).difficultyWeights,
+        candidates: (isRw ? rwCandidates : mathCandidates).filter((c) => !usedInSet.has(c.problemId)),
+        excludeProblemIds: excludeIds,
+        formatWeights: isRw ? undefined : MATH_FORMAT_WEIGHTS,
+      });
+      for (const item of result.items) {
+        usedInSet.add(item.problemId);
+        allItems.push({ ...item, position: item.position + offsets[mod.section], moduleKey: mod.key });
+      }
+      offsets[mod.section] += result.items.length;
+      shortfalls.push(...result.shortfalls.map((s) => ({ section: mod.section, moduleKey: mod.key, ...s })));
+    }
+  } else {
+    const rwResult = assembleSection({
+      section: "rw",
+      totalCount: input.rwCount,
+      domainWeights: rwWeights.domainWeights,
+      difficultyWeights: rwWeights.difficultyWeights,
+      candidates: rwCandidates,
+      excludeProblemIds: excludeIds,
+    });
+    const mathResult = assembleSection({
+      section: "math",
+      totalCount: input.mathCount,
+      domainWeights: mathWeights.domainWeights,
+      difficultyWeights: mathWeights.difficultyWeights,
+      candidates: mathCandidates,
+      excludeProblemIds: excludeIds,
+      formatWeights: MATH_FORMAT_WEIGHTS,
+    });
+    allItems.push(...[...rwResult.items, ...mathResult.items].map((i) => ({ ...i, moduleKey: null })));
+    shortfalls.push(
+      ...rwResult.shortfalls.map((s) => ({ section: "rw" as const, moduleKey: null, ...s })),
+      ...mathResult.shortfalls.map((s) => ({ section: "math" as const, moduleKey: null, ...s })),
+    );
+  }
 
   const { data: setRow, error: setErr } = await db
     .from("mock_exam_sets")
@@ -205,6 +312,9 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
       description: input.description ?? null,
       difficulty_tier: input.difficultyTier,
       status: "draft",
+      format,
+      module_time_limits: format === "mst" ? MST_TIME_LIMITS : null,
+      module_item_counts: format === "mst" ? MST_ITEM_COUNTS : null,
       rw_time_limit_minutes: input.rwTimeLimitMinutes ?? 64,
       math_time_limit_minutes: input.mathTimeLimitMinutes ?? 70,
       created_by: adminUserId,
@@ -213,7 +323,6 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
     .single();
   if (setErr) throw new Error(setErr.message);
 
-  const allItems: AssembledItem[] = [...rwResult.items, ...mathResult.items];
   if (allItems.length > 0) {
     const { error: itemsErr } = await db.from("mock_exam_set_items").insert(
       allItems.map((item) => ({
@@ -225,19 +334,18 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
         sat_domain: item.satDomain,
         skill_code: item.skillCode,
         difficulty: item.difficulty,
+        module_key: item.moduleKey,
       })),
     );
     if (itemsErr) throw new Error(itemsErr.message);
   }
 
+  // 출시 조건(2026-09-28): mst 세트는 조립 직후 모듈·경로별 정원 충족을 검증해 ready/incomplete를 기록한다.
+  // incomplete면 공개·배정이 DB 트리거에서 거부되고, 학생은 Module 2에서 막히는 일 없이 애초에 시작할 수 없다.
+  const readiness = format === "mst" ? await recordMstReadiness(db, setRow.id, shortfalls) : null;
+
   revalidatePath("/admin");
-  return {
-    examSetId: setRow.id,
-    shortfalls: [
-      ...rwResult.shortfalls.map((s) => ({ section: "rw" as const, ...s })),
-      ...mathResult.shortfalls.map((s) => ({ section: "math" as const, ...s })),
-    ],
-  };
+  return { examSetId: setRow.id, shortfalls, readiness };
 }
 
 export type MockExamSetItemDetail = {
@@ -288,6 +396,17 @@ export async function publishMockExamSet(examSetId: string): Promise<void> {
     .single();
   if (targetErr) throw new Error(targetErr.message);
   if (target.status !== "draft") throw new Error("draft 상태의 세트만 공개할 수 있습니다.");
+  // mst 출시 조건: 공개 직전에 최신 상태로 다시 검증한다(DB 트리거가 최종 방어선이지만, 관리자에게는
+  // 부족한 모듈·영역·난이도를 구체적으로 보여주기 위해 여기서 먼저 잡는다).
+  const { data: fmtRow } = await db.from("mock_exam_sets").select("format, readiness_report").eq("id", examSetId).single();
+  if (fmtRow?.format === "mst") {
+    const prev = (fmtRow.readiness_report as MstReadinessReport | null) ?? null;
+    const report = await recordMstReadiness(db, examSetId, prev?.shortfalls ?? []);
+    if (!report.ready) {
+      const missing = report.modules.filter((m) => !m.ok).map((m) => `${m.moduleKey}${m.route ? `/${m.route}` : ""} ${m.found}/${m.needed}`);
+      throw new Error(`문항 구성이 완료되지 않아 공개할 수 없습니다: ${missing.join(", ")}`);
+    }
+  }
 
   const { count: itemCount, error: countErr } = await db
     .from("mock_exam_set_items")

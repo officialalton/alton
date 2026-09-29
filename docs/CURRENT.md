@@ -8,6 +8,8 @@
 
 | 항목 | 값 |
 |---|---|
+| **작업 위치(2026-09-28 이전)** | 정본 clone `~/Developer/ALTON`, 기능 worktree `~/Developer/ALTON-worktrees/<기능명>`. **iCloud 경로는 폐기·삭제**(pack 파일 evict로 git 손상). 상세·격리 Supabase 스택 절차는 `CLAUDE.md` "작업 위치" 절. |
+| 모의고사 MST(4모듈) 재설계 | Phase 1 구현·검증 완료, 브랜치 `feat/sat-adaptive-mock-exam`(마이그레이션 `20261901000000`/`20261901000001`, **non-prod 미적용** — 영향·되돌리기 보고는 `docs/2026-09-28-sat-adaptive-mock-exam-redesign-plan.md` §8.2). 다음: Phase 2(메타데이터·조립 강화). |
 | 브랜치 / Preview | `preview/m4-integration-verification`(2026-09-25 기준 HEAD `bb9b33e` — 이번 세션 반영분: 계정 상태·closed 게이트·보존 자동화, ParentDetailPanel, 대학 정보 피어 병합, figure_choice·문제은행 자료유형 9종 병합, 제품 분석 P0 등, 6절 참고). 최신 Preview **https://alton-culeivzsy-alton7.vercel.app**. 배포 주의: 이 Vercel 프로젝트는 GitHub 연동이라 **커밋과 완전히 일치하는 깨끗한 작업 트리**에서 `vercel deploy`하면 커밋 작성자 검증(TEAM_ACCESS_REQUIRED)에 걸려 빌드가 조용히 BLOCKED 된다 — 메인 워크트리(미커밋 docs 변경이 늘 있음)에서 배포하거나, git 없는 임시 복사본에서 배포한다(2026-09-20 확인). |
 | 공유 non-prod(`worpsqwqgnspddnrtnvq`) | 마이그레이션 **`20261900000016`까지 local=remote 확인**(2026-09-25). `20261900000012`~`20261900000016`은 이번 세션분 — 계정 병합 FK 디커플, SECURITY DEFINER fail-open 수정 2건(`mark_expired_invites`/`close_expired_pending_accounts`), closure_pending 자동 폐쇄·closed 접근 감사, 보존기간 자동 배치(notifications/consult_requests/session_access_events). Supabase 프로젝트는 이 하나뿐(별도 프로덕션 DB 없음). 새 마이그레이션 작성 시 `docs/BRANCH-WORKFLOW.md` 동기화 체크리스트를 통합/배포 직전 매번 실행할 것. |
 | Production | Vercel production 도메인 배포·마이그레이션 없음(오픈 전, 실제 고객 데이터 없음). Stripe/DocuSign 등 외부 키는 샌드박스. cron 3개(정산 2개, 초대만료 1개, 보존배치 1개)는 스케줄만 등록되고 `CRON_SECRET`/`PAYOUT_CRON_ENABLED`/`RETENTION_BATCH_ENABLED` 전부 미설정으로 비활성 유지 중(사용자 결정 대기). |

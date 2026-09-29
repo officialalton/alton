@@ -76,6 +76,9 @@ export type MockExamAttemptDetail = {
   mathReferenceSheetAllowed: boolean;
   timeRemainingSeconds: { rw?: number; math?: number } | null;
   entryCount: number;
+  /** 'fixed'(V1 고정형) | 'mst'(4모듈). MST 진행 중엔 학생·보호자에게 현재 모듈 문항만 내려온다. */
+  format: "fixed" | "mst";
+  currentModule: "rw_m1" | "rw_m2" | "break" | "math_m1" | "math_m2" | null;
   items: MockExamAttemptItem[];
 };
 

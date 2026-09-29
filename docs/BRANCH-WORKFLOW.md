@@ -32,6 +32,14 @@
 순서로 시작한 뒤 필요할 때만(특정 정책의 원문 근거를 찾을 때 등) 검색한다.
 세션 시작 시 통째로 읽지 않는다.
 
+## 작업 위치 규칙 (2026-09-28 추가)
+
+- 정본 clone `~/Developer/ALTON`(통합 브랜치, 조정 세션 전용) + 기능 worktree
+  `~/Developer/ALTON-worktrees/<기능명>`. iCloud 경로의 옛 저장소·`.claude/worktrees/*`는
+  폐기됐고 삭제된다(사유·격리 Supabase 스택 절차는 `CLAUDE.md` "작업 위치" 절).
+- 로컬 Supabase 컨테이너는 worktree 간 공유되므로 `supabase db reset`은 **조정 세션만**
+  실행한다. 기능 세션은 격리 스택(`CLAUDE.md` 참고)에서 DB 검증한다.
+
 ## 기능 세션(브랜치 담당)이 지켜야 하는 것
 
 (a) **작업 시작 전 항상 확인**: `git branch --show-current`로 배정받은 기능

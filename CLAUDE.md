@@ -2,6 +2,13 @@
 
 이 파일은 Claude Code가 세션을 시작할 때 자동으로 읽는 파일입니다. 새 세션마다 이 내용을 다시 설명할 필요가 없도록 여기 유지하세요.
 
+## 작업 위치 (2026-09-28 이전 완료 — 반드시 지킬 것)
+
+- 저장소 정본: **`~/Developer/ALTON`** (`preview/m4-integration-verification` 체크아웃, 조정/배포 세션 전용).
+- 기능 세션 worktree: **`~/Developer/ALTON-worktrees/<기능명>`** (`git worktree add -b <branch> ~/Developer/ALTON-worktrees/<기능명> origin/preview/m4-integration-verification`). worktree마다 `npm ci`와 `.env.local` 복사(`~/Developer/ALTON/.env.local`)가 필요하다 — Turbopack은 `node_modules` 심볼릭 링크를 거부한다.
+- **iCloud 경로(`~/Library/Mobile Documents/com~apple~CloudDocs/Claude/ALTON`)는 폐기됐다.** iCloud가 `.git/objects/pack` 파일을 dataless로 evict해 fetch/checkout이 깨지고, `.claude/worktrees/*`의 이름 충돌 파일(`… 2`)이 ref를 오염시켰다. 그 경로에서는 어떤 git·supabase·테스트 명령도 실행하지 않는다(삭제 예정).
+- 로컬 Supabase 컨테이너(`supabase_db_ALTON`, 54422)는 **모든 worktree가 공유**한다. 다른 세션이 `supabase db reset`을 돌리면 내 마이그레이션·테스트 데이터가 사라진다. DB 검증이 필요하면 (a) 조정 세션에 reset 일정을 알리거나, (b) `supabase/config.toml`의 `project_id`와 포트(54421→54521, 54422→54522, 54420→54520, 54429→54529, 54423→54523, 54424→54524, 54427→54527, smtp 54325→54525)를 **임시로** 바꿔 격리 스택을 띄우고(`npx supabase start`), 테스트는 `SUPABASE_TEST_DB_URL`/`SUPABASE_TEST_API_URL`로 대상 DB를 지정한다. 검증 후 `npx supabase stop`, `config.toml`은 커밋 전에 반드시 원복.
+
 ## 현재 작업 기준 — 반드시 먼저 읽기
 
 서비스는 아직 오픈 전이며 운영 고객 데이터는 없다. 기존 구현은 검증용 개발본이다.

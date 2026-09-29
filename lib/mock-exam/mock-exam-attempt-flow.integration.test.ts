@@ -6,7 +6,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 // lib/homework-batch.integration.test.ts 와 같은 방식으로 psql + `set role authenticated` +
 // `request.jwt.claim.sub` 로 실제 로컬 DB에 대해 RLS를 그대로 태운다(모킹 없음).
 
-const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
+const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
@@ -21,7 +21,7 @@ const GUARDIAN_ID = "bbbbbbbb-0000-0000-0000-000000000001";
 // FK 제약을 참조해 렌더링이 전부 깨짐) — 그 회귀를 잡으려면 아래처럼 실제 REST API를 호출해야 한다.
 const SERVICE_ROLE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU";
-const restClient = createClient("http://127.0.0.1:54421", SERVICE_ROLE_KEY);
+const restClient = createClient(process.env.SUPABASE_TEST_API_URL ?? "http://127.0.0.1:54421", SERVICE_ROLE_KEY);
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();

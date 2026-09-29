@@ -14,6 +14,7 @@ import {
   type MockExamSetSummary,
   type MockExamStudentOption,
   type MockExamAttemptHistoryRow,
+  type MstReadinessReport,
 } from "../mock-exam-actions";
 import type { DifficultyTier } from "@/lib/mock-exam/assemble";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
@@ -66,6 +67,7 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
   const [tier, setTier] = useState<DifficultyTier>("standard");
   const [rwCount, setRwCount] = useState(27);
   const [mathCount, setMathCount] = useState(22);
+  const [format, setFormat] = useState<"fixed" | "mst">("fixed");
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [shortfallNotice, setShortfallNotice] = useState<string | null>(null);
@@ -81,8 +83,10 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
     setShortfallNotice(null);
     startTransition(async () => {
       try {
-        const result = await assembleMockExamSet({ name, difficultyTier: tier, rwCount, mathCount });
-        if (result.shortfalls.length > 0) {
+        const result = await assembleMockExamSet({ name, difficultyTier: tier, rwCount, mathCount, format });
+        if (result.readiness && !result.readiness.ready) {
+          setShortfallNotice(`이 4모듈 세트는 아직 공개·배정할 수 없습니다 — ${readinessSummary(result.readiness)}`);
+        } else if (result.shortfalls.length > 0) {
           setShortfallNotice(
             `일부 영역·난이도 셀에서 목표 문항 수를 채우지 못했습니다: ${result.shortfalls
               .map((s) => `${s.section}/${s.satDomain}/${s.difficulty} (필요 ${s.needed}, 확보 ${s.found})`)
@@ -126,26 +130,47 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
             </select>
           </label>
           <label className="flex flex-col gap-1 text-xs text-grey-500">
-            R&W 문항 수
-            <input
-              type="number"
-              min={1}
+            형식
+            <select
               className="rounded border border-grey-200 px-2 py-1.5 text-sm text-ink"
-              value={rwCount}
-              onChange={(e) => setRwCount(Number(e.target.value))}
-            />
+              value={format}
+              onChange={(e) => setFormat(e.target.value as "fixed" | "mst")}
+              data-testid="set-format"
+            >
+              <option value="fixed">고정형 (섹션별 타이머)</option>
+              <option value="mst">Digital SAT 4모듈 (27·27 / 휴식 / 22·22)</option>
+            </select>
           </label>
-          <label className="flex flex-col gap-1 text-xs text-grey-500">
-            Math 문항 수
-            <input
-              type="number"
-              min={1}
-              className="rounded border border-grey-200 px-2 py-1.5 text-sm text-ink"
-              value={mathCount}
-              onChange={(e) => setMathCount(Number(e.target.value))}
-            />
-          </label>
+          {format === "fixed" && (
+            <>
+              <label className="flex flex-col gap-1 text-xs text-grey-500">
+                R&W 문항 수
+                <input
+                  type="number"
+                  min={1}
+                  className="rounded border border-grey-200 px-2 py-1.5 text-sm text-ink"
+                  value={rwCount}
+                  onChange={(e) => setRwCount(Number(e.target.value))}
+                />
+              </label>
+              <label className="flex flex-col gap-1 text-xs text-grey-500">
+                Math 문항 수
+                <input
+                  type="number"
+                  min={1}
+                  className="rounded border border-grey-200 px-2 py-1.5 text-sm text-ink"
+                  value={mathCount}
+                  onChange={(e) => setMathCount(Number(e.target.value))}
+                />
+              </label>
+            </>
+          )}
         </div>
+        {format === "mst" && (
+          <p className="mt-2 text-xs text-grey-500">
+            R&W Module 1·2 각 27문항(32분), 10분 휴식, Math Module 1·2 각 22문항(35분). 모듈 간 문항이 겹치지 않게 조립합니다.
+          </p>
+        )}
         <button
           type="button"
           disabled={isPending || !name.trim()}
@@ -161,6 +186,34 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
       <SetListTable sets={sets} emptyLabel="아직 조립된 세트가 없습니다." />
     </div>
   );
+}
+
+/** 4모듈(mst) 세트의 출시 가능 여부. incomplete면 공개·배정이 DB에서 거부되므로 관리자가 먼저 알 수 있게 표시한다. */
+function ReadinessBadge({ set }: { set: MockExamSetSummary }) {
+  if (set.format !== "mst") return null;
+  const missing = set.readinessReport?.modules.filter((m) => !m.ok) ?? [];
+  return (
+    <span
+      className={`ml-1.5 rounded px-1.5 py-0.5 text-[10.5px] font-bold ${set.readinessStatus === "ready" ? "bg-green-bg text-green" : "bg-red-bg text-red"}`}
+      title={missing.map((m) => `${MODULE_LABEL[m.moduleKey] ?? m.moduleKey}${m.route ? ` (${m.route})` : ""}: ${m.found}/${m.needed}`).join("\n")}
+      data-testid="readiness-badge"
+    >
+      {set.readinessStatus === "ready" ? "4모듈 · 준비 완료" : "4모듈 · 문항 부족"}
+    </span>
+  );
+}
+
+const MODULE_LABEL: Record<string, string> = {
+  rw_m1: "R&W Module 1",
+  rw_m2: "R&W Module 2",
+  math_m1: "Math Module 1",
+  math_m2: "Math Module 2",
+};
+
+function readinessSummary(r: MstReadinessReport): string {
+  const mods = r.modules.filter((m) => !m.ok).map((m) => `${MODULE_LABEL[m.moduleKey] ?? m.moduleKey}${m.route ? `(${m.route})` : ""} ${m.found}/${m.needed}`);
+  const cells = r.shortfalls.map((s) => `${MODULE_LABEL[s.moduleKey ?? ""] ?? s.section}/${s.satDomain}/${s.difficulty}${s.format ? `/${s.format}` : ""} (필요 ${s.needed}, 확보 ${s.found})`);
+  return `모듈 정원 미달: ${mods.join(", ") || "없음"}${cells.length ? ` · 부족 셀: ${cells.join(", ")}` : ""}${r.duplicateCount ? ` · 중복 문항 ${r.duplicateCount}` : ""}`;
 }
 
 function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyLabel: string }) {
@@ -188,6 +241,7 @@ function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyL
                 <span className={s.status === "published" ? "text-green" : s.status === "draft" ? "text-grey-500" : "text-grey-300"}>
                   {STATUS_LABEL[s.status]}
                 </span>
+                <ReadinessBadge set={s} />
               </td>
               <td>{s.rwCount}</td>
               <td>{s.mathCount}</td>
@@ -326,14 +380,23 @@ function ReviewTab() {
                   )}
                   <button
                     type="button"
-                    disabled={publishBusy}
+                    disabled={publishBusy || sets?.find((s) => s.id === selectedId)?.readinessStatus === "incomplete"}
                     onClick={() => handlePublish(selectedId)}
                     className="rounded bg-ink px-4 py-1.5 text-xs font-bold text-white disabled:opacity-40"
+                    data-testid="publish-set"
                   >
                     {publishBusy ? "공개 중..." : "이 세트 공개하기"}
                   </button>
                 </div>
               </div>
+              {(() => {
+                const r = sets?.find((s) => s.id === selectedId)?.readinessReport;
+                return r && !r.ready ? (
+                  <p className="mb-2 text-sm text-red" data-testid="readiness-detail">
+                    공개 불가 — {readinessSummary(r)}
+                  </p>
+                ) : null;
+              })()}
               {publishError && <p className="mb-2 text-sm text-red">{publishError}</p>}
               <MockExamSetContentViewer items={items} />
             </>

@@ -1,0 +1,151 @@
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { MstAttemptState, MstItem, MstModuleState } from "@/lib/mock-exam/mst-actions";
+
+const saveMock = vi.fn();
+const flagMock = vi.fn();
+const startMock = vi.fn();
+const submitMock = vi.fn();
+const loadMock = vi.fn();
+const refreshMock = vi.fn();
+vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: refreshMock }) }));
+vi.mock("@/lib/mock-exam/attempt-actions", () => ({
+  saveMockExamAnswerAction: (...a: unknown[]) => saveMock(...a),
+  toggleMockExamFlagAction: (...a: unknown[]) => flagMock(...a),
+}));
+vi.mock("@/lib/mock-exam/mst-actions", () => ({
+  startMstAttemptAction: (a: unknown) => startMock(a),
+  submitMstModuleAction: (a: unknown, m: unknown) => submitMock(a, m),
+  loadMstAttemptStateAction: (a: unknown) => loadMock(a),
+}));
+vi.mock("@/app/session/[id]/MockExamMathTools", () => ({
+  default: ({ open }: { open: string | null }) => (open ? <div data-testid="math-tools-panel">{open}</div> : null),
+  MockExamToolButtons: ({ onToggle }: { onToggle: (w: "calculator" | "reference") => void }) => (
+    <button type="button" onClick={() => onToggle("calculator")}>
+      계산기
+    </button>
+  ),
+}));
+vi.mock("@/app/session/[id]/LearningText", () => ({ default: ({ text }: { text: string }) => <span>{text}</span> }));
+vi.mock("@/app/session/[id]/RwStimulusView", () => ({ default: ({ passage }: { passage: string }) => <p>{passage}</p> }));
+vi.mock("@/app/session/[id]/ProblemFigure", () => ({ default: () => null }));
+
+function mod(moduleKey: MstModuleState["moduleKey"], remainingSeconds: number | null, position = 1): MstModuleState {
+  return { moduleKey, position, timeLimitSeconds: 1920, itemCount: 2, startedAt: "x", endsAt: "y", locked: false, remainingSeconds };
+}
+function item(id: string, seq: number, moduleKey: MstItem["moduleKey"], format: "mc" | "spr" = "mc"): MstItem {
+  return {
+    setItemId: id, section: moduleKey.startsWith("rw") ? "rw" : "math", position: seq, moduleKey, moduleSeq: seq, problemId: "p" + id,
+    satDomain: "algebra", skillCode: null, difficulty: "medium", format, passage: null, question: `Q${seq}?`,
+    options: format === "mc" ? ["A1", "B1", "C1", "D1"] : null, figure: null, correctIndex: null, answers: null, explanation: null,
+    response: null, correct: null, flagged: false, savedToPractice: false, timeSpentSeconds: null,
+  };
+}
+function state(over: Partial<MstAttemptState> = {}): MstAttemptState {
+  return {
+    attemptId: "att1", status: "in_progress", currentModule: "rw_m1", serverNow: new Date().toISOString(),
+    modules: [mod("rw_m1", 1900), mod("rw_m2", null, 2)],
+    items: [item("i1", 1, "rw_m1"), item("i2", 2, "rw_m1", "spr")],
+    ...over,
+  };
+}
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  saveMock.mockResolvedValue({ ok: true });
+  flagMock.mockResolvedValue({ ok: true });
+  submitMock.mockResolvedValue({ ok: true, value: state({ currentModule: "rw_m2", modules: [ { ...mod("rw_m1", 0), locked: true }, mod("rw_m2", 1920, 2)], items: [item("i3", 1, "rw_m2")] }) });
+});
+afterEach(() => vi.useRealTimers());
+
+async function renderClient(s = state()) {
+  const m = await import("./MockExamMstTakeClient");
+  return render(<m.default initialState={s} examSetName="세트" mathCalculatorAllowed mathReferenceSheetAllowed={false} />);
+}
+
+describe("MockExamMstTakeClient", () => {
+  it("시작 화면 → 시험 시작 → 첫 모듈", async () => {
+    startMock.mockResolvedValue({ ok: true, value: state() });
+    await renderClient(state({ status: "assigned", currentModule: null, modules: [], items: [] }));
+    expect(screen.getAllByText(/27문항/).length).toBe(2);
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-start"));
+    });
+    expect(startMock).toHaveBeenCalledWith("att1");
+    expect(screen.getByTestId("mst-module-label")).toHaveTextContent("Reading and Writing · Module 1");
+  });
+
+  it("문항 이동·답 저장·검토 표시·번호 네비", async () => {
+    await renderClient();
+    expect(screen.getByText("Q1?")).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("radio", { name: /B1/ }));
+    });
+    expect(saveMock).toHaveBeenCalledWith("att1", "i1", "1");
+    expect(screen.getByLabelText("1번 답변함")).toBeInTheDocument();
+    await act(async () => {
+      fireEvent.click(screen.getByText("검토 표시"));
+    });
+    expect(flagMock).toHaveBeenCalledWith("att1", "i1", true);
+    fireEvent.click(screen.getByText("다음"));
+    expect(screen.getByText("Q2?")).toBeInTheDocument();
+    expect(screen.getByTestId("mst-spr-input")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("이전"));
+    expect(screen.getByText("Q1?")).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText(/^2번/));
+    expect(screen.getByText("Q2?")).toBeInTheDocument();
+  });
+
+  it("R&W에는 계산기가 없고 Math에는 있다", async () => {
+    const { unmount } = await renderClient();
+    expect(screen.queryByText("계산기")).not.toBeInTheDocument();
+    unmount();
+    await renderClient(state({ currentModule: "math_m1", modules: [mod("math_m1", 2000, 4)], items: [item("m1", 1, "math_m1")] }));
+    fireEvent.click(screen.getByText("계산기"));
+    expect(screen.getByTestId("math-tools-panel")).toHaveTextContent("calculator");
+  });
+
+  it("모듈 제출은 확인 모달을 거치고 현재 모듈 키를 서버에 보낸다", async () => {
+    await renderClient();
+    fireEvent.click(screen.getByTestId("mst-submit-module"));
+    expect(screen.getByRole("dialog")).toHaveTextContent("0/2문항에 답했습니다");
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-submit-confirm"));
+    });
+    expect(submitMock).toHaveBeenCalledWith("att1", "rw_m1");
+    expect(screen.getByTestId("mst-module-label")).toHaveTextContent("Module 2");
+  });
+
+  it("타이머가 0이 되면 한 번만 자동 제출한다", async () => {
+    vi.useFakeTimers();
+    await renderClient(state({ modules: [mod("rw_m1", 2)] }));
+    expect(screen.getByTestId("mst-timer")).toHaveTextContent("0:02");
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(3500);
+    });
+    expect(submitMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("잠긴 모듈 저장 거부 시 서버 상태로 복구한다", async () => {
+    saveMock.mockResolvedValue({ ok: false, error: "이미 제출된 모듈에는 답안을 저장할 수 없습니다." });
+    loadMock.mockResolvedValue({ ok: true, value: state({ currentModule: "rw_m2", modules: [mod("rw_m2", 1000, 2)], items: [item("i3", 1, "rw_m2")] }) });
+    await renderClient();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("radio", { name: /A1/ }));
+    });
+    expect(loadMock).toHaveBeenCalledWith("att1");
+    expect(screen.getByTestId("mst-module-label")).toHaveTextContent("Module 2");
+  });
+
+  it("휴식 화면: 카운트다운 + 시험 재개 → break 제출; 완료(graded)면 refresh", async () => {
+    submitMock.mockResolvedValue({ ok: true, value: state({ status: "graded", currentModule: "math_m2", items: [] }) });
+    await renderClient(state({ currentModule: "break", modules: [mod("break", 600, 3)], items: [] }));
+    expect(screen.getByTestId("mst-timer")).toHaveTextContent("10:00");
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-resume"));
+    });
+    expect(submitMock).toHaveBeenCalledWith("att1", "break");
+    expect(refreshMock).toHaveBeenCalled();
+    expect(document.body.textContent).not.toMatch(/higher|lower|고난도/i);
+  });
+});
