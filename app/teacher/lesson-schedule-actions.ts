@@ -11,6 +11,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { loadTeacherLessonSchedule, type TeacherLessonScheduleItem } from "./lesson-schedule-data";
 import { cancelLessonBooking } from "@/lib/booking/create-booking";
 import { listTeacherExternalBusyBlocks, type ExternalBusyBlock } from "@/lib/booking/external-busy";
+import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
 
 export type { TeacherLessonScheduleItem, ExternalBusyBlock };
 
@@ -216,6 +217,7 @@ export async function finalizeMyLessonSession(params: {
       p_early_end_reason: params.earlyEndReason ?? null,
     });
     if (error) return { ok: false, error: error.message };
+    if (params.outcome === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : String(e) };

@@ -15,6 +15,7 @@ import {
 } from "@/lib/booking/external-change-resolution";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
 
 const BOOKING_CAPABILITY = "예약관리권한";
 
@@ -682,6 +683,7 @@ export async function adminFinalizeLessonSession(params: {
       p_reason: params.reason,
     });
     if (error) throw new Error(error.message);
+    if (params.outcome === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
     return;
   }
 
@@ -694,6 +696,7 @@ export async function adminFinalizeLessonSession(params: {
     p_early_end_reason: params.earlyEndReason ?? null,
   });
   if (error) throw new Error(error.message);
+  if (params.outcome === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
 }
 
 /**
@@ -853,6 +856,7 @@ export async function adminRecompleteSession(params: {
     p_reason: params.reason,
   });
   if (error) throw new Error(error.message);
+  if (params.newFinalStatus === "completed") scheduleContractDispatch({ sessionId: params.sessionId });
 }
 
 export type ReconciliationTaskRow = {

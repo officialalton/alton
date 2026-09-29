@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
 import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
 
 // M1 — 관리자 상담 운영(요구사항 1·3·6). 홈페이지 신청은 app/consult-actions.ts,
 // 슬롯/hold/상태전이의 소스오브트루스는 20261009000000_m1_consultation_unification.sql의
@@ -257,6 +258,7 @@ export async function recordConsultationOutcome(params: {
       p_admin_review_summary: params.adminReviewSummary || null,
     });
     if (error) return { ok: false, error: error.message };
+    if (params.outcome === "regular_recommended") scheduleContractDispatch({ consultationId: params.consultationId });
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "상담 결과 기록에 실패했습니다." };

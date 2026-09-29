@@ -172,26 +172,50 @@ export async function dispatchOneContractJob(
   }
 }
 
-/** 배치 워커 — 관리자 "발송 실행" 버튼 또는 향후 cron이 호출. 비활성 상태면
- * 아무 것도 처리하지 않고 그 사실만 반환한다(큐는 계속 쌓이게 둔다). */
+/** 특정 자녀들의 대기 작업만 원자적으로 집는다 — 이벤트 직후 즉시 발송(immediate.ts)용.
+ * 전역 claim RPC와 같은 원칙: 단일 UPDATE ... WHERE status in (queued, retryable_failed)라
+ * 동시에 도는 크론·다른 즉시 호출이 같은 행을 두 번 집을 수 없다(READ COMMITTED에서
+ * 이미 processing으로 바뀐 행은 재평가에서 제외된다). */
+async function claimJobsForChildren(admin: SupabaseClient, childIds: string[]): Promise<ContractDispatchJobRow[]> {
+  const { data, error } = await admin
+    .from("contract_dispatch_jobs")
+    .update({ status: "processing", updated_at: new Date().toISOString() })
+    .in("child_id", childIds)
+    .in("status", ["queued", "retryable_failed"])
+    .select("*");
+  if (error) throw new Error(error.message);
+  return (data ?? []) as ContractDispatchJobRow[];
+}
+
+/** 배치 워커 — 관리자 "발송 실행" 버튼·일 1회 크론(재시도 백스톱)·이벤트 직후 즉시 호출이
+ * 공유한다. 비활성 상태면 아무 것도 처리하지 않고 그 사실만 반환한다(큐는 계속 쌓이게 둔다).
+ * opts.childIds가 있으면 그 자녀들의 작업만 집는다. */
 export async function processContractDispatchQueue(
-  admin: SupabaseClient
+  admin: SupabaseClient,
+  opts?: { childIds?: string[] }
 ): Promise<{ enabled: boolean; processed: number; sent: number; failed: number }> {
   if (!isContractAutoDispatchEnabled()) {
     return { enabled: false, processed: 0, sent: 0, failed: 0 };
   }
 
-  // 원자적 claim(for update skip locked) — 크론·관리자 버튼이 동시에 돌아도 같은 작업을 두 번 집지 않는다.
-  const { data: jobs, error } = await admin.rpc("claim_contract_dispatch_jobs", { p_limit: 50 });
-  if (error) throw new Error(error.message);
+  let jobs: ContractDispatchJobRow[];
+  if (opts?.childIds) {
+    if (opts.childIds.length === 0) return { enabled: true, processed: 0, sent: 0, failed: 0 };
+    jobs = await claimJobsForChildren(admin, opts.childIds);
+  } else {
+    // 원자적 claim(for update skip locked) — 크론·관리자 버튼이 동시에 돌아도 같은 작업을 두 번 집지 않는다.
+    const { data, error } = await admin.rpc("claim_contract_dispatch_jobs", { p_limit: 50 });
+    if (error) throw new Error(error.message);
+    jobs = (data ?? []) as ContractDispatchJobRow[];
+  }
 
   let sent = 0;
   let failed = 0;
-  for (const job of jobs ?? []) {
+  for (const job of jobs) {
     const result = await dispatchOneContractJob(admin, job);
     if (result.outcome === "sent" || result.outcome === "already_sent") sent += 1;
     else if (result.outcome === "failed" || result.outcome === "skipped_no_guardian") failed += 1;
   }
 
-  return { enabled: true, processed: (jobs ?? []).length, sent, failed };
+  return { enabled: true, processed: jobs.length, sent, failed };
 }

@@ -37,6 +37,7 @@ export const RESERVATION_DAY_BANDS = {
   "contract-dispatch-outbox": [71000, 71999],
   "household-archive": [72000, 72999],
   "problem-answer-leak": [73000, 73999],
+  "contract-dispatch-immediate": [76000, 76999],
 } as const satisfies Record<string, readonly [number, number]>;
 
 const cursors = new Map<string, number>();
