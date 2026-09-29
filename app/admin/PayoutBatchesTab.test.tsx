@@ -16,6 +16,10 @@ const { listMock, deleteMock, closeMonthMock, loadSettingsMock, ensureDateMock, 
   externalMock: vi.fn(),
 }));
 
+vi.mock("./ConsultantSettlementPanel", () => ({
+  default: () => <div data-testid="consultant-settlement-panel">컨설턴트 정산 패널</div>,
+}));
+
 vi.mock("./payout-batches-actions", () => ({
   generatePayoutBatches: vi.fn(),
   submitPayoutBatchForReview: vi.fn(),
@@ -339,5 +343,14 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
     expect(screen.getByText(/송금 승인 · 김관리/)).toBeInTheDocument();
     expect(screen.getByText(/월 마감\(자동\) · 시스템\(자동\)/)).toBeInTheDocument();
     expect(screen.queryByText(/알 수 없음/)).not.toBeInTheDocument();
+  });
+});
+
+describe("PayoutBatchesTab — 컨설턴트 정산 서브탭(2026-09-29 이동)", () => {
+  it("컨설턴트 정산 서브탭을 누르면 정산 패널이 보인다", () => {
+    render(<PayoutBatchesTab initialBatches={[]} />);
+    expect(screen.queryByTestId("consultant-settlement-panel")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "컨설턴트 정산" }));
+    expect(screen.getByTestId("consultant-settlement-panel")).toBeInTheDocument();
   });
 });

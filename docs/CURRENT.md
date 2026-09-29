@@ -731,3 +731,5 @@
 
 - **남은 작업 전체 목록**: [`2026-09-14-remaining-work.md`](2026-09-14-remaining-work.md)(A 지금 UAT → B 콘텐츠·수업 → C 상담·결제·정산·문서 → D 운영·소통 → E 보안·데이터 수명 → F 출시 게이트).
 - 문제 템플릿 설계: [`2026-09-14-problem-template-design.md`](2026-09-14-problem-template-design.md) · 과제 통일: [`2026-09-14-homework-v3-unification.md`](2026-09-14-homework-v3-unification.md) · 문제 풀이·채점·PDF 텍스트: [`2026-09-14-problem-answer-grading-and-pdf-text-notes.md`](2026-09-14-problem-answer-grading-and-pdf-text-notes.md) · Drive 자료 설계: [`2026-09-14-drive-material-assets-design.md`](2026-09-14-drive-material-assets-design.md) · PDF 규격: [`2026-09-14-lesson-pdf-spec.md`](2026-09-14-lesson-pdf-spec.md) · 로드맵: [`2026-08-29-master-roadmap-v3.md`](2026-08-29-master-roadmap-v3.md) · 이전 이력 전체: [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md).
+
+- 2026-09-29 관리자 Consultants 탭 서브탭화: 배정(자동배정·미배정·일정 대기)/계정/선생님 배정 요청/상담 자료, 대기 건수 배지. `정산`은 Payouts의 `컨설턴트 정산` 서브탭(`ConsultantSettlementPanel.tsx`)으로 이동(동작 변경 없음). 스크린샷: `docs/assets/2026-09-29-admin-consultants-subtabs/`.
