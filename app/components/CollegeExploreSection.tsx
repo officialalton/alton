@@ -10,6 +10,9 @@ import {
   getUniversityDetailForStudent,
   loadAdmissionMetrics,
   loadUniversityEssayPrompts,
+  loadUniversityDemographics,
+  loadUniversityFinancialAidPrograms,
+  loadUniversityAffiliations,
   type UniversitySummary,
   type UniversityDetail,
   type AdmissionCycle,
@@ -20,6 +23,9 @@ import {
   type UniversityEssayPrompt,
   type EssayPrompt as LegacyEssayPrompt,
   type UniversitySourceUrl,
+  type UniversityDemographic,
+  type UniversityFinancialAidProgram,
+  type UniversityAffiliation,
 } from "@/lib/universities/actions";
 import { listMySubmittedSourceUrls, proposeUniversitySourceUrl, reportUniversityDataIssue } from "@/lib/universities/user-actions";
 import { requestUniversityRefresh } from "@/lib/universities/refresh-actions";
@@ -115,6 +121,9 @@ function CollegeDetail({
   const [metrics, setMetrics] = useState<AdmissionMetric[] | null>(null);
   const [essayCycleYear, setEssayCycleYear] = useState<number | null>(null);
   const [essays, setEssays] = useState<UniversityEssayPrompt[] | null>(null);
+  const [demographics, setDemographics] = useState<UniversityDemographic[] | null>(null);
+  const [financialAidPrograms, setFinancialAidPrograms] = useState<UniversityFinancialAidProgram[] | null>(null);
+  const [affiliations, setAffiliations] = useState<UniversityAffiliation[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -142,6 +151,27 @@ function CollegeDetail({
       })
       .catch(() => {
         if (!cancelled) setEssays([]);
+      });
+    loadUniversityDemographics(universityId)
+      .then((rows) => {
+        if (!cancelled) setDemographics(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setDemographics([]);
+      });
+    loadUniversityFinancialAidPrograms(universityId)
+      .then((rows) => {
+        if (!cancelled) setFinancialAidPrograms(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setFinancialAidPrograms([]);
+      });
+    loadUniversityAffiliations(universityId)
+      .then((rows) => {
+        if (!cancelled) setAffiliations(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setAffiliations([]);
       });
     return () => {
       cancelled = true;
@@ -183,6 +213,10 @@ function CollegeDetail({
                 .filter(Boolean)
                 .join(" · ")}
             </div>
+            <div className="text-[12px] text-grey-500 mt-1">
+              {detail.university.officialAddress ? `${detail.university.officialAddress}` : "주소 확인 필요"}
+              {detail.university.officialPhone ? ` · ${detail.university.officialPhone}` : ""}
+            </div>
             <div className="flex gap-3 mt-2 text-[11.5px]">
               {detail.university.admissionsHomepageUrl && (
                 <a href={detail.university.admissionsHomepageUrl} target="_blank" rel="noreferrer" className="text-ink underline">
@@ -204,6 +238,14 @@ function CollegeDetail({
           {essays && essays.length > 0 && (
             <EssaysSection essays={essays} cycleYear={essayCycleYear} onChangeCycleYear={setEssayCycleYear} />
           )}
+
+          {demographics && demographics.length > 0 && <DemographicsCard demographics={demographics} />}
+
+          {financialAidPrograms && financialAidPrograms.length > 0 && (
+            <FinancialAidProgramsCard programs={financialAidPrograms} />
+          )}
+
+          {affiliations && affiliations.length > 0 && <AffiliationsCard affiliations={affiliations} />}
 
           {detail.majors.length > 0 && (
             <div className={cardClass}>
@@ -312,9 +354,9 @@ function EssaysSection({
       return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-green-100 text-green-700">올해 문항 확인완료</span>;
     }
     if (e.promptStatus === "prior_year_reference") {
-      return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-grey-200 text-grey-600">작년 문항 — 참고용, 올해 문항 아님</span>;
+      return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-grey-200 text-grey-600">참고용</span>;
     }
-    return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-700">확인 중</span>;
+    return <span className="ml-1.5 rounded px-1.5 py-0.5 text-[10px] bg-yellow-100 text-yellow-700">출처 확인 필요</span>;
   }
 
   return (
@@ -607,6 +649,121 @@ function ReportIssueForm({ universityId }: { universityId: string }) {
   );
 }
 
+const DEMOGRAPHIC_LABEL: Record<string, string> = {
+  gender_male: "남학생",
+  gender_female: "여학생",
+  gender_other: "기타 성별",
+  race_white: "백인",
+  race_black: "흑인/아프리카계",
+  race_hispanic: "히스패닉/라티노",
+  race_asian_pacific_islander: "아시아/태평양계",
+  race_native_american: "아메리카 원주민",
+  race_two_or_more: "2개 이상 인종",
+  race_unknown: "미상",
+  race_international: "국제학생",
+};
+
+const VALUE_STATUS_LABEL: Record<string, string> = {
+  not_applicable: "해당 없음",
+  not_disclosed_by_school: "학교 비공개",
+};
+
+/** 재학생 인구통계(성별/인종 구성) — 최신 연도만 고정 표시, 값 없음은 명시적으로 표기. */
+function DemographicsCard({ demographics }: { demographics: UniversityDemographic[] }) {
+  const latestYear = demographics.reduce((max, d) => Math.max(max, d.cycleYear), 0);
+  const rows = demographics.filter((d) => d.cycleYear === latestYear);
+  const genderRows = rows.filter((d) => d.category.startsWith("gender_"));
+  const raceRows = rows.filter((d) => d.category.startsWith("race_"));
+
+  function renderRow(d: UniversityDemographic) {
+    const label = DEMOGRAPHIC_LABEL[d.category] ?? d.category;
+    const value =
+      d.valueStatus !== "reported"
+        ? (VALUE_STATUS_LABEL[d.valueStatus] ?? "확인 필요")
+        : d.pct != null
+          ? `${d.pct}%`
+          : "확인 필요";
+    return (
+      <div key={d.id}>
+        <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
+        <div className="font-bold text-ink text-[12.5px]">{value}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>재학생 현황 ({latestYear} 기준)</div>
+      {genderRows.length > 0 && (
+        <div className="grid grid-cols-2 gap-3 mb-3">{genderRows.map(renderRow)}</div>
+      )}
+      {raceRows.length > 0 && <div className="grid grid-cols-2 gap-3">{raceRows.map(renderRow)}</div>}
+    </div>
+  );
+}
+
+const FINANCIAL_AID_PROGRAM_TYPE_LABEL: Record<string, string> = {
+  need_based_grant: "재정 기반 그랜트(Need-based)",
+  merit_scholarship: "성적 장학금(Merit)",
+  federal_loan: "연방 학자금 대출",
+  work_study: "근로 장학(Work-Study)",
+};
+
+/** 재정지원 프로그램 4종(need-based/merit/federal loan/work-study) — 대학이 제공하는 항목만 표시. */
+function FinancialAidProgramsCard({ programs }: { programs: UniversityFinancialAidProgram[] }) {
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>재정지원 프로그램</div>
+      {programs.map((p) => (
+        <div key={p.id} className="mb-2 text-[12.5px]">
+          <div className="font-bold text-ink">
+            {FINANCIAL_AID_PROGRAM_TYPE_LABEL[p.programType] ?? p.programType} — {p.name}
+          </div>
+          <div className="text-[11px] text-grey-500">
+            {p.valueStatus !== "reported"
+              ? (VALUE_STATUS_LABEL[p.valueStatus] ?? "확인 필요")
+              : [
+                  p.recipientPct != null ? `수혜율 ${p.recipientPct}%` : null,
+                  p.avgAwardAmount != null ? `평균 $${p.avgAwardAmount.toLocaleString()}` : null,
+                  p.awardAmountMin != null && p.awardAmountMax != null
+                    ? `$${p.awardAmountMin.toLocaleString()}~$${p.awardAmountMax.toLocaleString()}`
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ") || "확인 필요"}
+          </div>
+          {p.description && <div className="text-[11.5px] text-grey-600 mt-0.5">{p.description}</div>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const AFFILIATION_KIND_LABEL: Record<string, string> = {
+  ncaa_sport: "NCAA 종목",
+  athletic_conference: "athletic 컨퍼런스",
+  ivy_league: "Ivy League",
+  consortium: "컨소시엄",
+  other: "기타",
+};
+
+/** NCAA/Ivy League/컨소시엄 등 소속 정보. */
+function AffiliationsCard({ affiliations }: { affiliations: UniversityAffiliation[] }) {
+  return (
+    <div className={cardClass}>
+      <div className={cardTitleClass}>소속 정보</div>
+      <div className="flex flex-wrap gap-1.5">
+        {affiliations.map((a) => (
+          <span key={a.id} className="text-[11.5px] px-2.5 py-1 bg-grey-100 rounded-full text-ink">
+            {AFFILIATION_KIND_LABEL[a.kind] ?? a.kind}: {a.label}
+            {a.division ? ` (${a.division})` : ""}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function stat(label: string, value: string | number | null | undefined) {
   if (value === null || value === undefined || value === "") return null;
   return (
@@ -754,6 +911,13 @@ const ADMISSION_METRIC_DETAIL_LABEL: Record<string, string> = {
   tuition_total: "연간 등록금+기숙사+식비",
 };
 
+/** DB에 저장된 단위 코드를 화면 표기로 변환한다("pct" → "%" 등 붙여쓰기 처리). */
+function formatMetricUnit(value: number, unit: string | null | undefined): string {
+  if (!unit) return `${value}`;
+  if (unit === "pct" || unit === "%") return `${value}%`;
+  return `${value} ${unit}`;
+}
+
 /**
  * 합격·등록 학생 학업 지표(Admitted Student Profile, P7 2026-09-23). 가장 최신 연도 하나만
  * 골라 고정된 순서·대상집단으로 표시한다 — 다른 연도 값을 섞어 빈칸을 채우지 않는다(정책상 금지).
@@ -781,7 +945,7 @@ function AdmittedStudentProfileCard({ metrics }: { metrics: AdmissionMetric[] })
               </div>
             );
           }
-          const displayValue = found.value != null ? `${found.value}${found.unit ? ` ${found.unit}` : ""}` : (found.valueText ?? "확인 필요");
+          const displayValue = found.value != null ? formatMetricUnit(found.value, found.unit) : (found.valueText ?? "확인 필요");
           return (
             <div key={metricKey}>
               <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
@@ -841,7 +1005,7 @@ function AdmissionMetricDetailSection({ metrics }: { metrics: AdmissionMetric[] 
           {rows.map(({ metricKey, found }) => {
             if (!found) return null;
             const label = ADMISSION_METRIC_DETAIL_LABEL[metricKey] ?? metricKey;
-            const displayValue = found.value != null ? `${found.value}${found.unit ? ` ${found.unit}` : ""}` : (found.valueText ?? "확인 필요");
+            const displayValue = found.value != null ? formatMetricUnit(found.value, found.unit) : (found.valueText ?? "확인 필요");
             return (
               <div key={metricKey}>
                 <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">{label}</div>
@@ -897,6 +1061,7 @@ function AdmissionCycleCard({ cycle }: { cycle: AdmissionCycle }) {
         {stat("재적 유지율", cycle.retentionRate != null ? `${cycle.retentionRate}%` : null)}
         {stat("국제학생 비율", cycle.internationalPct != null ? `${cycle.internationalPct}%` : null)}
         {stat("Pell Grant 수혜율", cycle.pellGrantPct != null ? `${cycle.pellGrantPct}%` : null)}
+        {stat("지원접수 시작일", cycle.applicationOpensDate)}
         {stat(
           "지원 마감(ED/EA/RD)",
           [

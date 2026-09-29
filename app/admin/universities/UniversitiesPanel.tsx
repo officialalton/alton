@@ -5,10 +5,16 @@ import {
   addUniversitySourceUrl,
   addUniversityUpdate,
   deleteAdmissionMetric,
+  deleteUniversityAffiliation,
+  deleteUniversityDemographic,
   deleteUniversityEssayPrompt,
+  deleteUniversityFinancialAidProgram,
   getUniversityDetail,
   listAdmissionMetrics,
+  listUniversityAffiliationsAdmin,
+  listUniversityDemographicsAdmin,
   listUniversityEssayPrompts,
+  listUniversityFinancialAidProgramsAdmin,
   listUniversities,
   listUniversityDataReports,
   listUniversitySourceUrls,
@@ -18,15 +24,24 @@ import {
   updateUniversityBasics,
   upsertAdmissionCycle,
   upsertAdmissionMetric,
+  upsertUniversityAffiliation,
+  upsertUniversityDemographic,
   upsertUniversityEssayPrompt,
+  upsertUniversityFinancialAidProgram,
   type AdmissionCycle,
   type AdmissionMetric,
   type AdmissionMetricCohort,
   type AdmissionMetricKey,
   type AdmissionMetricVerificationStatus,
+  type UniversityAffiliationAdminRow,
+  type UniversityAffiliationKind,
+  type UniversityDemographicAdminRow,
+  type UniversityDemographicCategory,
   type UniversityEssayPrompt,
   type UniversityEssayPromptStatus,
   type UniversityEssayPromptType,
+  type UniversityFinancialAidProgramAdminRow,
+  type UniversityFinancialAidProgramType,
   type SourceUrlType,
   type UniversityDataReport,
   type UniversityDetail,
@@ -358,7 +373,13 @@ function UniversityDetailPanel({
   const existing = cycles.find((c) => c.cycleYear === CURRENT_CYCLE_YEAR);
   const [testPolicy, setTestPolicy] = useState(existing?.testPolicy ?? "optional");
   const [gpaAverage, setGpaAverage] = useState(existing?.gpaAverage?.toString() ?? "");
+  const [edDeadline, setEdDeadline] = useState(existing?.edDeadline ?? "");
+  const [eaDeadline, setEaDeadline] = useState(existing?.eaDeadline ?? "");
   const [rdDeadline, setRdDeadline] = useState(existing?.rdDeadline ?? "");
+  const [edDecisionDate, setEdDecisionDate] = useState(existing?.edDecisionDate ?? "");
+  const [eaDecisionDate, setEaDecisionDate] = useState(existing?.eaDecisionDate ?? "");
+  const [rdDecisionDate, setRdDecisionDate] = useState(existing?.rdDecisionDate ?? "");
+  const [applicationOpensDate, setApplicationOpensDate] = useState(existing?.applicationOpensDate ?? "");
   const [essayCount, setEssayCount] = useState(existing?.essayCount?.toString() ?? "");
   const [acceptanceRate, setAcceptanceRate] = useState(existing?.acceptanceRate?.toString() ?? "");
   // Part 3 — 재학생/입시 통계.
@@ -380,6 +401,7 @@ function UniversityDetailPanel({
   const [avgAidAward, setAvgAidAward] = useState(existing?.avgAidAward?.toString() ?? "");
   const [eaRestrictive, setEaRestrictive] = useState(existing?.eaRestrictive ?? false);
   const [ed2Deadline, setEd2Deadline] = useState(existing?.ed2Deadline ?? "");
+  const [ed2DecisionDate, setEd2DecisionDate] = useState(existing?.ed2DecisionDate ?? "");
   const [classSizeUnder20Pct, setClassSizeUnder20Pct] = useState(existing?.classSizeUnder20Pct?.toString() ?? "");
   const [classSizeOver50Pct, setClassSizeOver50Pct] = useState(existing?.classSizeOver50Pct?.toString() ?? "");
   const [studyAbroadPct, setStudyAbroadPct] = useState(existing?.studyAbroadPct?.toString() ?? "");
@@ -401,6 +423,8 @@ function UniversityDetailPanel({
   const [calendarSystem, setCalendarSystem] = useState(detail.calendarSystem ?? "");
   const [honorsCollege, setHonorsCollege] = useState(detail.honorsCollege ?? false);
   const [strengthsPrograms, setStrengthsPrograms] = useState(detail.strengthsPrograms.join(", "));
+  const [officialAddress, setOfficialAddress] = useState(detail.officialAddress ?? "");
+  const [officialPhone, setOfficialPhone] = useState(detail.officialPhone ?? "");
 
   function saveBasics() {
     setError(null);
@@ -417,6 +441,8 @@ function UniversityDetailPanel({
           calendarSystem: calendarSystem || null,
           honorsCollege,
           strengthsPrograms: strengthsPrograms.split(",").map((s) => s.trim()).filter(Boolean),
+          officialAddress: officialAddress || null,
+          officialPhone: officialPhone || null,
         });
         onSaved();
       } catch (e) {
@@ -434,7 +460,13 @@ function UniversityDetailPanel({
           cycleYear: CURRENT_CYCLE_YEAR,
           testPolicy,
           gpaAverage: gpaAverage ? Number(gpaAverage) : null,
+          edDeadline: edDeadline || null,
+          eaDeadline: eaDeadline || null,
           rdDeadline: rdDeadline || null,
+          edDecisionDate: edDecisionDate || null,
+          eaDecisionDate: eaDecisionDate || null,
+          rdDecisionDate: rdDecisionDate || null,
+          applicationOpensDate: applicationOpensDate || null,
           essayCount: essayCount ? Number(essayCount) : null,
           acceptanceRate: acceptanceRate ? Number(acceptanceRate) : null,
           pellGrantPct: pellGrantPct ? Number(pellGrantPct) : null,
@@ -454,6 +486,7 @@ function UniversityDetailPanel({
           avgAidAward: avgAidAward ? Number(avgAidAward) : null,
           eaRestrictive,
           ed2Deadline: ed2Deadline || null,
+          ed2DecisionDate: ed2DecisionDate || null,
           classSizeUnder20Pct: classSizeUnder20Pct ? Number(classSizeUnder20Pct) : null,
           classSizeOver50Pct: classSizeOver50Pct ? Number(classSizeOver50Pct) : null,
           studyAbroadPct: studyAbroadPct ? Number(studyAbroadPct) : null,
@@ -534,6 +567,8 @@ function UniversityDetailPanel({
         <Field label="캠퍼스 크기(acre)" type="number" value={campusSizeAcres} onChange={setCampusSizeAcres} />
         <Field label="NCAA 디비전" value={ncaaDivision} onChange={setNcaaDivision} />
         <Field label="종교 계열" value={religiousAffiliation} onChange={setReligiousAffiliation} />
+        <Field label="공식 주소" value={officialAddress} onChange={setOfficialAddress} />
+        <Field label="공식 전화번호" value={officialPhone} onChange={setOfficialPhone} />
         <label className="text-xs text-grey-600">
           학사력
           <select value={calendarSystem} onChange={(e) => setCalendarSystem(e.target.value)} className="mt-1 w-full rounded border border-grey-300 px-2 py-1 text-sm">
@@ -575,8 +610,15 @@ function UniversityDetailPanel({
           </select>
         </label>
         <Field label="GPA 평균" type="number" value={gpaAverage} onChange={setGpaAverage} />
-        <Field label="RD 마감일" type="date" value={rdDeadline} onChange={setRdDeadline} />
+        <Field label="지원접수 시작일" type="date" value={applicationOpensDate} onChange={setApplicationOpensDate} />
+        <Field label="조기전형(ED) 마감일" type="date" value={edDeadline} onChange={setEdDeadline} />
+        <Field label="조기전형(ED) 결과발표일" type="date" value={edDecisionDate} onChange={setEdDecisionDate} />
+        <Field label="얼리액션(EA) 마감일" type="date" value={eaDeadline} onChange={setEaDeadline} />
+        <Field label="얼리액션(EA) 결과발표일" type="date" value={eaDecisionDate} onChange={setEaDecisionDate} />
+        <Field label="정시(RD) 마감일" type="date" value={rdDeadline} onChange={setRdDeadline} />
+        <Field label="정시(RD) 결과발표일" type="date" value={rdDecisionDate} onChange={setRdDecisionDate} />
         <Field label="ED2 마감일" type="date" value={ed2Deadline} onChange={setEd2Deadline} />
+        <Field label="ED2 결과발표일" type="date" value={ed2DecisionDate} onChange={setEd2DecisionDate} />
         <Field label="필수 에세이 개수" type="number" value={essayCount} onChange={setEssayCount} />
         <Field label="합격률(%) — 과거 실적 참고용" type="number" value={acceptanceRate} onChange={setAcceptanceRate} />
         <Field label="지원자 수" type="number" value={totalApplicants} onChange={setTotalApplicants} />
@@ -675,6 +717,9 @@ function UniversityDetailPanel({
 
       <AdmissionMetricsSection universityId={detail.id} setError={setError} />
       <EssayPromptsSection universityId={detail.id} setError={setError} />
+      <DemographicsSection universityId={detail.id} setError={setError} />
+      <FinancialAidProgramsSection universityId={detail.id} setError={setError} />
+      <AffiliationsSection universityId={detail.id} setError={setError} />
       <SourceUrlsSection universityId={detail.id} setError={setError} />
       <ReportsInboxSection universityId={detail.id} setError={setError} />
       <RefreshAndProposalsSection universityId={detail.id} setError={setError} />
@@ -1523,6 +1568,669 @@ function EssayPromptsSection({
         className="mt-2 rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
       >
         에세이 문항 저장
+      </button>
+    </div>
+  );
+}
+
+const DEMOGRAPHIC_CATEGORY_OPTIONS: { value: UniversityDemographicCategory; label: string }[] = [
+  { value: "gender_male", label: "성별: 남" },
+  { value: "gender_female", label: "성별: 여" },
+  { value: "gender_other", label: "성별: 기타" },
+  { value: "race_white", label: "인종: 백인" },
+  { value: "race_black", label: "인종: 흑인" },
+  { value: "race_hispanic", label: "인종: 히스패닉" },
+  { value: "race_asian_pacific_islander", label: "인종: 아시안/태평양계" },
+  { value: "race_native_american", label: "인종: 아메리카 원주민" },
+  { value: "race_two_or_more", label: "인종: 2개 이상" },
+  { value: "race_unknown", label: "인종: 미상" },
+  { value: "race_international", label: "인종: 국제학생" },
+];
+
+const VERIFICATION_STATUS_OPTIONS: { value: AdmissionMetricVerificationStatus; label: string }[] = [
+  { value: "official", label: "공식 출처 확인" },
+  { value: "secondary", label: "2차 출처 확인" },
+  { value: "unverified", label: "미확인" },
+];
+
+const VALUE_STATUS_OPTIONS: { value: "reported" | "not_applicable" | "not_disclosed_by_school"; label: string }[] = [
+  { value: "reported", label: "보고됨" },
+  { value: "not_applicable", label: "해당없음" },
+  { value: "not_disclosed_by_school", label: "학교 미공개" },
+];
+
+/** 대학 상세 화면의 "재학생 인구통계" 섹션 — 성별/인종 비율 등록/수정/삭제. */
+function DemographicsSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [items, setItems] = useState<UniversityDemographicAdminRow[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [cycleYear, setCycleYear] = useState(String(CURRENT_CYCLE_YEAR));
+  const [category, setCategory] = useState<UniversityDemographicCategory>("gender_male");
+  const [populationScope, setPopulationScope] = useState<"all_students" | "us_students_only">("all_students");
+  const [pct, setPct] = useState("");
+  const [valueStatus, setValueStatus] = useState<"reported" | "not_applicable" | "not_disclosed_by_school">("reported");
+  const [verificationStatus, setVerificationStatus] = useState<AdmissionMetricVerificationStatus>("unverified");
+  const [notes, setNotes] = useState("");
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        setItems(await listUniversityDemographicsAdmin(universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "인구통계 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function save() {
+    if (!cycleYear.trim()) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await upsertUniversityDemographic({
+          universityId,
+          cycleYear: Number(cycleYear),
+          category,
+          populationScope,
+          pct: pct.trim() ? Number(pct) : null,
+          valueStatus,
+          verificationStatus,
+          notes: notes.trim() || null,
+        });
+        setPct("");
+        setNotes("");
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "인구통계 저장 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function remove(id: string) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await deleteUniversityDemographic(id);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "인구통계 삭제 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const categoryLabel = Object.fromEntries(DEMOGRAPHIC_CATEGORY_OPTIONS.map((o) => [o.value, o.label])) as Record<
+    UniversityDemographicCategory,
+    string
+  >;
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">재학생 인구통계</h3>
+      {loading && <p className="text-xs text-grey-400">불러오는 중…</p>}
+      <table className="mt-2 w-full text-xs text-grey-600">
+        <thead>
+          <tr className="text-left text-grey-400">
+            <th className="pr-2">연도</th>
+            <th className="pr-2">구분</th>
+            <th className="pr-2">범위</th>
+            <th className="pr-2">비율</th>
+            <th className="pr-2">확인상태</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {!loading && items.length === 0 && (
+            <tr>
+              <td colSpan={6} className="text-grey-400">
+                등록된 인구통계가 없습니다.
+              </td>
+            </tr>
+          )}
+          {items.map((d) => (
+            <tr key={d.id} className="border-t border-grey-100">
+              <td className="pr-2 py-1">{d.cycleYear}</td>
+              <td className="pr-2 py-1">{categoryLabel[d.category]}</td>
+              <td className="pr-2 py-1">{d.populationScope === "all_students" ? "전체" : "미국 학생만"}</td>
+              <td className="pr-2 py-1">{d.pct != null ? `${d.pct}%` : d.valueStatus !== "reported" ? "-" : "-"}</td>
+              <td className="pr-2 py-1">{d.verificationStatus}</td>
+              <td className="py-1">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => remove(d.id)}
+                  className="rounded border border-grey-300 px-2 py-0.5 text-[11px] text-grey-700 disabled:opacity-50"
+                >
+                  삭제
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <input
+          type="number"
+          placeholder="연도"
+          value={cycleYear}
+          onChange={(e) => setCycleYear(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value as UniversityDemographicCategory)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {DEMOGRAPHIC_CATEGORY_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <select
+          value={populationScope}
+          onChange={(e) => setPopulationScope(e.target.value as "all_students" | "us_students_only")}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          <option value="all_students">전체 학생</option>
+          <option value="us_students_only">미국 학생만</option>
+        </select>
+        <input
+          type="number"
+          step="0.1"
+          placeholder="비율(%)"
+          value={pct}
+          onChange={(e) => setPct(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select
+          value={valueStatus}
+          onChange={(e) => setValueStatus(e.target.value as "reported" | "not_applicable" | "not_disclosed_by_school")}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {VALUE_STATUS_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <select
+          value={verificationStatus}
+          onChange={(e) => setVerificationStatus(e.target.value as AdmissionMetricVerificationStatus)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {VERIFICATION_STATUS_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="비고(출처/메모)"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="col-span-2 rounded border border-grey-300 px-2 py-1 text-sm sm:col-span-4"
+        />
+      </div>
+      <button
+        type="button"
+        disabled={isPending}
+        onClick={save}
+        className="mt-2 rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
+      >
+        인구통계 저장
+      </button>
+    </div>
+  );
+}
+
+const FINANCIAL_AID_PROGRAM_TYPE_OPTIONS: { value: UniversityFinancialAidProgramType; label: string }[] = [
+  { value: "need_based_grant", label: "재정필요 기반 그랜트" },
+  { value: "merit_scholarship", label: "성적 우수 장학금" },
+  { value: "federal_loan", label: "연방 학자금 대출" },
+  { value: "work_study", label: "근로 장학(Work-Study)" },
+];
+
+const FINANCIAL_AID_ELIGIBILITY_OPTIONS: { value: "us_citizen_permanent_resident" | "all_students" | "other"; label: string }[] = [
+  { value: "us_citizen_permanent_resident", label: "미국 시민권/영주권자" },
+  { value: "all_students", label: "전체 학생" },
+  { value: "other", label: "기타" },
+];
+
+/** 대학 상세 화면의 "재정지원 프로그램" 섹션 — need-based/merit/loan/work-study 등록/수정/삭제. */
+function FinancialAidProgramsSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [items, setItems] = useState<UniversityFinancialAidProgramAdminRow[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [programType, setProgramType] = useState<UniversityFinancialAidProgramType>("need_based_grant");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [eligibilityScope, setEligibilityScope] = useState<"us_citizen_permanent_resident" | "all_students" | "other">(
+    "all_students",
+  );
+  const [recipientPct, setRecipientPct] = useState("");
+  const [avgAwardAmount, setAvgAwardAmount] = useState("");
+  const [cycleYear, setCycleYear] = useState(String(CURRENT_CYCLE_YEAR));
+  const [valueStatus, setValueStatus] = useState<"reported" | "not_applicable" | "not_disclosed_by_school">("reported");
+  const [verificationStatus, setVerificationStatus] = useState<AdmissionMetricVerificationStatus>("unverified");
+  const [notes, setNotes] = useState("");
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        setItems(await listUniversityFinancialAidProgramsAdmin(universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "재정지원 프로그램 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function save() {
+    if (!name.trim()) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await upsertUniversityFinancialAidProgram({
+          universityId,
+          programType,
+          name: name.trim(),
+          description: description.trim() || null,
+          eligibilityScope,
+          recipientPct: recipientPct.trim() ? Number(recipientPct) : null,
+          avgAwardAmount: avgAwardAmount.trim() ? Number(avgAwardAmount) : null,
+          cycleYear: cycleYear.trim() ? Number(cycleYear) : null,
+          valueStatus,
+          verificationStatus,
+          notes: notes.trim() || null,
+        });
+        setName("");
+        setDescription("");
+        setRecipientPct("");
+        setAvgAwardAmount("");
+        setNotes("");
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "재정지원 프로그램 저장 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function remove(id: string) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await deleteUniversityFinancialAidProgram(id);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "재정지원 프로그램 삭제 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const typeLabel = Object.fromEntries(FINANCIAL_AID_PROGRAM_TYPE_OPTIONS.map((o) => [o.value, o.label])) as Record<
+    UniversityFinancialAidProgramType,
+    string
+  >;
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">재정지원 프로그램</h3>
+      {loading && <p className="text-xs text-grey-400">불러오는 중…</p>}
+      <table className="mt-2 w-full text-xs text-grey-600">
+        <thead>
+          <tr className="text-left text-grey-400">
+            <th className="pr-2">유형</th>
+            <th className="pr-2">이름</th>
+            <th className="pr-2">연도</th>
+            <th className="pr-2">수혜율</th>
+            <th className="pr-2">확인상태</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {!loading && items.length === 0 && (
+            <tr>
+              <td colSpan={6} className="text-grey-400">
+                등록된 재정지원 프로그램이 없습니다.
+              </td>
+            </tr>
+          )}
+          {items.map((p) => (
+            <tr key={p.id} className="border-t border-grey-100">
+              <td className="pr-2 py-1">{typeLabel[p.programType]}</td>
+              <td className="pr-2 py-1 max-w-[220px] truncate" title={p.name}>
+                {p.name}
+              </td>
+              <td className="pr-2 py-1">{p.cycleYear ?? "-"}</td>
+              <td className="pr-2 py-1">{p.recipientPct != null ? `${p.recipientPct}%` : "-"}</td>
+              <td className="pr-2 py-1">{p.verificationStatus}</td>
+              <td className="py-1">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => remove(p.id)}
+                  className="rounded border border-grey-300 px-2 py-0.5 text-[11px] text-grey-700 disabled:opacity-50"
+                >
+                  삭제
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <select
+          value={programType}
+          onChange={(e) => setProgramType(e.target.value as UniversityFinancialAidProgramType)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {FINANCIAL_AID_PROGRAM_TYPE_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="프로그램 이름"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select
+          value={eligibilityScope}
+          onChange={(e) =>
+            setEligibilityScope(e.target.value as "us_citizen_permanent_resident" | "all_students" | "other")
+          }
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {FINANCIAL_AID_ELIGIBILITY_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="number"
+          placeholder="연도"
+          value={cycleYear}
+          onChange={(e) => setCycleYear(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <input
+          type="number"
+          step="0.1"
+          placeholder="수혜 비율(%)"
+          value={recipientPct}
+          onChange={(e) => setRecipientPct(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <input
+          type="number"
+          placeholder="평균 지원금($)"
+          value={avgAwardAmount}
+          onChange={(e) => setAvgAwardAmount(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select
+          value={valueStatus}
+          onChange={(e) => setValueStatus(e.target.value as "reported" | "not_applicable" | "not_disclosed_by_school")}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {VALUE_STATUS_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <select
+          value={verificationStatus}
+          onChange={(e) => setVerificationStatus(e.target.value as AdmissionMetricVerificationStatus)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {VERIFICATION_STATUS_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <textarea
+          placeholder="설명"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="col-span-2 rounded border border-grey-300 px-2 py-1 text-sm sm:col-span-4"
+          rows={2}
+        />
+        <input
+          type="text"
+          placeholder="비고(출처/메모)"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="col-span-2 rounded border border-grey-300 px-2 py-1 text-sm sm:col-span-4"
+        />
+      </div>
+      <button
+        type="button"
+        disabled={isPending}
+        onClick={save}
+        className="mt-2 rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
+      >
+        재정지원 프로그램 저장
+      </button>
+    </div>
+  );
+}
+
+const AFFILIATION_KIND_OPTIONS: { value: UniversityAffiliationKind; label: string }[] = [
+  { value: "ncaa_sport", label: "NCAA 종목" },
+  { value: "athletic_conference", label: "체육 컨퍼런스" },
+  { value: "ivy_league", label: "Ivy League" },
+  { value: "consortium", label: "컨소시엄" },
+  { value: "other", label: "기타" },
+];
+
+/** 대학 상세 화면의 "소속 정보" 섹션 — NCAA/Ivy League/컨소시엄 등 등록/수정/삭제. */
+function AffiliationsSection({
+  universityId,
+  setError,
+}: {
+  universityId: string;
+  setError: (msg: string | null) => void;
+}) {
+  const [items, setItems] = useState<UniversityAffiliationAdminRow[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const [kind, setKind] = useState<UniversityAffiliationKind>("ncaa_sport");
+  const [label, setLabel] = useState("");
+  const [division, setDivision] = useState("");
+  const [verificationStatus, setVerificationStatus] = useState<AdmissionMetricVerificationStatus>("unverified");
+  const [notes, setNotes] = useState("");
+
+  function refresh() {
+    setLoading(true);
+    startTransition(async () => {
+      try {
+        setItems(await listUniversityAffiliationsAdmin(universityId));
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "소속 정보 조회 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    });
+  }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [universityId]);
+
+  function save() {
+    if (!label.trim()) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        await upsertUniversityAffiliation({
+          universityId,
+          kind,
+          label: label.trim(),
+          division: division.trim() || null,
+          verificationStatus,
+          notes: notes.trim() || null,
+        });
+        setLabel("");
+        setDivision("");
+        setNotes("");
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "소속 정보 저장 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  function remove(id: string) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await deleteUniversityAffiliation(id);
+        refresh();
+      } catch (e) {
+        setError(e instanceof Error ? e.message : "소속 정보 삭제 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  const kindLabel = Object.fromEntries(AFFILIATION_KIND_OPTIONS.map((o) => [o.value, o.label])) as Record<
+    UniversityAffiliationKind,
+    string
+  >;
+
+  return (
+    <div className="mt-6 border-t border-grey-200 pt-4">
+      <h3 className="text-sm font-semibold text-ink">소속 정보(NCAA/Ivy League/컨소시엄)</h3>
+      {loading && <p className="text-xs text-grey-400">불러오는 중…</p>}
+      <table className="mt-2 w-full text-xs text-grey-600">
+        <thead>
+          <tr className="text-left text-grey-400">
+            <th className="pr-2">종류</th>
+            <th className="pr-2">라벨</th>
+            <th className="pr-2">디비전</th>
+            <th className="pr-2">확인상태</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {!loading && items.length === 0 && (
+            <tr>
+              <td colSpan={5} className="text-grey-400">
+                등록된 소속 정보가 없습니다.
+              </td>
+            </tr>
+          )}
+          {items.map((a) => (
+            <tr key={a.id} className="border-t border-grey-100">
+              <td className="pr-2 py-1">{kindLabel[a.kind]}</td>
+              <td className="pr-2 py-1">{a.label}</td>
+              <td className="pr-2 py-1">{a.division ?? "-"}</td>
+              <td className="pr-2 py-1">{a.verificationStatus}</td>
+              <td className="py-1">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => remove(a.id)}
+                  className="rounded border border-grey-300 px-2 py-0.5 text-[11px] text-grey-700 disabled:opacity-50"
+                >
+                  삭제
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <select value={kind} onChange={(e) => setKind(e.target.value as UniversityAffiliationKind)} className="rounded border border-grey-300 px-2 py-1 text-sm">
+          {AFFILIATION_KIND_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="라벨(예: Division I, Big Ten)"
+          value={label}
+          onChange={(e) => setLabel(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <input
+          type="text"
+          placeholder="디비전(선택)"
+          value={division}
+          onChange={(e) => setDivision(e.target.value)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        />
+        <select
+          value={verificationStatus}
+          onChange={(e) => setVerificationStatus(e.target.value as AdmissionMetricVerificationStatus)}
+          className="rounded border border-grey-300 px-2 py-1 text-sm"
+        >
+          {VERIFICATION_STATUS_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="비고(출처/메모)"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="col-span-2 rounded border border-grey-300 px-2 py-1 text-sm sm:col-span-4"
+        />
+      </div>
+      <button
+        type="button"
+        disabled={isPending}
+        onClick={save}
+        className="mt-2 rounded bg-ink px-3 py-1.5 text-sm text-white disabled:opacity-50"
+      >
+        소속 정보 저장
       </button>
     </div>
   );
