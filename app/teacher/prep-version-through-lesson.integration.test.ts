@@ -41,7 +41,8 @@ const cleanupContracts: string[] = [];
 const cleanupProblems: string[] = [];
 const cleanupKeywords: string[] = [];
 
-let reservationOffsetDays = 5000;
+// 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
+let reservationOffsetDays = 6000;
 
 afterEach(() => {
   for (const id of cleanupContracts.splice(0)) {

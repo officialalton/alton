@@ -191,7 +191,10 @@ export function renderCircle(spec: CircleSpec): { svg: string; alt: string; issu
     // 4자리만으로는 반지름 선을 피하지 못하는 각도 조합이 생겼다 — 상하좌우 4자리를 후보에
     // 더한다.
     const angles16 = Array.from({ length: 16 }, (_, i) => (i * Math.PI) / 8);
-    const radii2 = [halfDiag(centerName) + 6, halfDiag(centerName) + 18];
+    // 2026-09-28 — 원주각 꼭짓점 C(220°)에서 B로 가는 현이 중심 가까이(예: B=58°면 약 16px)
+    // 지나가면 안쪽 두 고리가 모두 막혀 라벨 자리를 못 찾았다(circles.test 간헐 실패) —
+    // 한 고리 더 바깥 후보를 둔다.
+    const radii2 = [halfDiag(centerName) + 6, halfDiag(centerName) + 18, halfDiag(centerName) + 30];
     const spot = sheet.firstFree(
       radii2.flatMap((d) => angles16.map((a): Pt => [c[0] + d * Math.cos(a), c[1] + d * Math.sin(a)])),
       centerName

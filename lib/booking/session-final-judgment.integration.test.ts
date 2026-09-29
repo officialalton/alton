@@ -77,6 +77,21 @@ beforeAll(() => {
   regularProductId = psql(`select id from entitlement_products where code = 'lesson_pack_10';`);
   trialProductId = psql(`select id from entitlement_products where code = 'trial_lesson_grant';`);
 
+  // 사전 점검: 이 파일은 고정 선생님 + 고정 날짜 오프셋(N일 뒤 17:00 UTC)과
+  // "365일 전으로 이동"을 쓰므로, db reset 없이 두 번째로 실행하면 이전 실행이
+  // 남긴 confirmed 예약과 겹쳐 teacher_buffer_violation(예약 생성) 또는
+  // reservations_no_overlap(365일 이동 update)으로 결정적으로 실패한다.
+  // 이 파일이 만든 학생(m5a-integration-*)의 활성 예약만 cancelled로 풀어
+  // 재실행을 멱등하게 만든다 — 다른 스펙/seed의 예약은 건드리지 않는다.
+  psql(
+    `update reservations r set status = 'cancelled'
+       from subject_enrollments se join auth.users u on u.id = se.child_id
+      where se.id = r.subject_enrollment_id
+        and r.owner_profile_id = '${TEACHER_ID}'
+        and r.status in ('holding', 'confirmed')
+        and u.email like 'm5a-integration-%@example.com';`
+  );
+
   const now = Date.now();
   const authEmail = `m5a-integration-${now}@example.com`;
   childId = psql(

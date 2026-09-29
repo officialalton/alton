@@ -41,15 +41,24 @@ let trialProductId: string;
 // 근본 원인)과 정확히 같은 분에 겹쳐 violates_teacher_buffer(전후 15분)에 걸리는
 // 것을 피하기 위함이지, "오늘이 언제든 안전"이라는 이 fix의 본 목적과는 무관하다
 // (시가 고정이라 날짜 경계 근처로 갈 일은 없다 — 무작위인 건 분뿐).
+// 2026-09-28: 같은 시드 선생님(박서연)을 다른 통합 테스트(smart-notes-gate 등)도
+// 같은 날짜의 17~18시 UTC 부근에 예약하므로, db reset 직후 한 번에 전체를 돌려도
+// 무작위 분만으로는 teacher_buffer_violation을 피하지 못했다. 현지 낮 시간대(15~22시
+// UTC = PDT 08~15시, 같은 로컬 날짜) 후보 중 violates_teacher_buffer()가 false인
+// 첫 슬롯을 고른다 — 검증 대상(만료/24시간 분기)과 무관한 슬롯 충돌만 제거한다.
 const FIXED_BOOKING_HOUR_UTC = 17;
+const CANDIDATE_HOURS_UTC = [FIXED_BOOKING_HOUR_UTC, 15, 16, 19, 20, 21, 22];
 function futureSlot(daysFromNow: number, durationMinutes = 60): { startsAt: string; endsAt: string } {
-  const startsAtDate = new Date();
-  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
-  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, Math.floor(Math.random() * 50), 0, 0);
-  return {
-    startsAt: startsAtDate.toISOString(),
-    endsAt: new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString(),
-  };
+  for (const hour of CANDIDATE_HOURS_UTC) {
+    const startsAtDate = new Date();
+    startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
+    startsAtDate.setUTCHours(hour, Math.floor(Math.random() * 50), 0, 0);
+    const startsAt = startsAtDate.toISOString();
+    const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
+    const busy = psql(`select violates_teacher_buffer('${TEACHER_ID}', '${startsAt}', '${endsAt}');`);
+    if (busy === "f") return { startsAt, endsAt };
+  }
+  throw new Error(`futureSlot: ${daysFromNow}일 뒤 선생님 빈 슬롯을 찾지 못함`);
 }
 
 beforeAll(() => {

@@ -74,15 +74,28 @@ function createTeacher(label: string): string {
 }
 
 describe("household_messages / meeting_requests — 학생·교사 권한 없음(R12 재확인)", () => {
-  it("학생 계정은 household_messages를 조회·작성할 수 없다", () => {
+  // 2026-09-22(20261468000000, 사용자 지시 "컨설턴트는 학생이랑도 메신저 필요") 이후
+  // 학생 본인은 자기 household 문의 스레드를 읽고 'student' 역할로 답장할 수 있다.
+  // 남은 경계: 다른 household 학생은 볼 수 없고, 학생이 보호자(guardian)로 사칭해
+  // 쓸 수 없다.
+  it("학생 계정은 본인 household 메시지만 조회하고, 보호자로 사칭해 작성할 수 없다", () => {
     const a = setupHousehold("hm-student");
+    const other = setupHousehold("hm-student-other");
     const inquiryId = createInquiry(a.householdId, a.guardianId);
     psqlAsUser(
       a.guardianId,
       `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${a.guardianId}', 'guardian', '메신저 메시지');`
     );
     const studentVisibleCount = psqlAsUser(a.childId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
-    expect(studentVisibleCount).toBe("0");
+    expect(studentVisibleCount).toBe("1");
+    const otherStudentVisibleCount = psqlAsUser(other.childId, `select count(*) from household_messages where household_id = '${a.householdId}';`);
+    expect(otherStudentVisibleCount).toBe("0");
+    expect(() =>
+      psqlAsUser(
+        other.childId,
+        `insert into household_messages (household_id, inquiry_id, sender_id, sender_role, body) values ('${a.householdId}', '${inquiryId}', '${other.childId}', 'student', '다른 집 학생 메시지');`
+      )
+    ).toThrow();
     expect(() =>
       psqlAsUser(
         a.childId,

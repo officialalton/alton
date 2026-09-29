@@ -158,12 +158,23 @@ describe("list_due_auto_dispatch_batches() — 자동 송금 대상 선별", () 
 
 describe("지급 경계가 닫혀 있으면 실제 송금이 일어나지 않는다", () => {
   it("게이트가 false인 동안 dispatch는 거부되고 상태·멱등키가 생기지 않는다", () => {
-    expect(psql(`select real_disbursement_enabled();`)).toBe("f");
     const { batchId } = createApprovedBatch("gate", "2026-11-10");
 
-    expect(() => psql(`select dispatch_payout_batch('${batchId}'::uuid, 'wise', '${ADMIN_ID}'::uuid);`)).toThrow(
-      /실제 지급이 활성화되지 않아/
-    );
+    // 2026-09-28 — payout-batch-lifecycle.integration.test.ts가 병렬 워커에서 전역
+    // payout_disbursement_gate를 잠깐 true로 켰다 끈다. 그 사이에 이 테스트가 돌면
+    // "기본값 f" 확인·dispatch 거부가 레이스로 깨졌다(전체 병렬 실행에서만 재현).
+    // 게이트를 한 트랜잭션 안에서 false로 고정한 뒤 dispatch를 호출하고 롤백해,
+    // "게이트가 닫혀 있으면 거부 + 부수효과 없음" 계약만 결정적으로 검증한다
+    // (다른 파일이 켠 게이트 값은 롤백으로 그대로 복원된다).
+    expect(() =>
+      psql(
+        `begin;
+         update payout_disbursement_gate set real_disbursement_enabled = false where id = true;
+         select real_disbursement_enabled();
+         select dispatch_payout_batch('${batchId}'::uuid, 'wise', '${ADMIN_ID}'::uuid);
+         rollback;`
+      )
+    ).toThrow(/실제 지급이 활성화되지 않아/);
     const row = psql(`select status, dispatch_idempotency_key is null from payout_batches where id = '${batchId}';`);
     expect(row).toBe("approved|t");
   });

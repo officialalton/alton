@@ -86,7 +86,9 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
         }
       }
     }
-  });
+    // 2026-09-28: 문제 108개를 psql로 하나씩 심느라 8~13초가 걸려 기본 hookTimeout(10초)에
+    // 간헐적으로 걸렸다(다른 통합 테스트와 동시 실행 시). 시딩 로직은 그대로 두고 시간만 늘린다.
+  }, 60_000);
 
   it("영역·난이도 비중대로 세트를 조립하고 부족분 없이 채운다", async () => {
     const { assembleMockExamSet, getMockExamSetItems } = await import("./mock-exam-actions");

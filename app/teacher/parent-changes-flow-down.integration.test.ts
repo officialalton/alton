@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, beforeAll, describe, expect, it } from "vitest";
 
 // P2 12차 — 상위 변경이 아래까지 온전히 내려간다.
 //
@@ -14,7 +14,12 @@ const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 이 파일 전용 과목 — 공유 seed 과목(SAT Math)을 쓰면 병렬로 도는 다른 통합테스트
+// 파일이 같은 과목의 기준본 회차·교재를 매칭 시딩(seed_curriculum_overlay_for_match,
+// ensure_active_curriculum_overlay)으로 끌어가 이 파일의 문제를 참조하게 되고(정리
+// 시 FK 위반), 반대로 이 파일의 '빈 템플릿' 테스트가 공유 선생님 템플릿을 비워
+// 다른 파일을 깨뜨린다. 과목을 분리하면 두 방향 간섭이 모두 사라진다.
+let SUBJECT_ID = "";
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
@@ -32,6 +37,23 @@ function asUser(userId: string, sql: string): string {
 }
 
 const uniq = () => `${Date.now()}_${Math.random()}`;
+
+beforeAll(() => {
+  SUBJECT_ID = psql(`insert into subjects (name) values ('상위변경 전파 검증 ${uniq()}') returning id;`);
+  // 선생님이 이 과목의 공개 교재를 볼 수 있으려면(curriculum_docs SELECT RLS) 이 과목을
+  // 실제로 담당하는 배정이 하나 있어야 한다 — seed 과목에서는 seed 수강이 이 역할을 했다.
+  const anchorContractId = psql(
+    `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
+  );
+  const anchorEnrollmentId = psql(
+    `insert into subject_enrollments (child_id, subject_id, contract_id, status)
+     values ('${STUDENT_ID}', '${SUBJECT_ID}', '${anchorContractId}', 'planned') returning id;`
+  );
+  psql(
+    `insert into teacher_assignments (subject_enrollment_id, teacher_id, status, effective_from)
+     values ('${anchorEnrollmentId}', '${TEACHER_ID}', 'active', now() - interval '1 day');`
+  );
+});
 
 const cleanupContractIds: string[] = [];
 const cleanupCatalogUnitIds: string[] = [];

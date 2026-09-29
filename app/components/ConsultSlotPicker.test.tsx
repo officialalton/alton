@@ -15,6 +15,15 @@ const SLOT_DAY_KST = String(
   )
 );
 
+// 월 그리드 앞뒤에 이웃 달 날짜도 같은 "N일" 이름으로 보인다(예: 9월 달력의 8월 30일).
+// 이름만으로 첫 버튼을 고르면 오늘 날짜에 따라 다른 달 칸을 누르게 되므로, 슬롯 배지(점)가
+// 있는 칸을 고른다.
+function slotDayButton(buttons: HTMLElement[]): HTMLElement {
+  const withBadge = buttons.find((b) => b.querySelector("span.rounded-full"));
+  if (!withBadge) throw new Error("슬롯 배지가 있는 날짜 버튼을 찾지 못함");
+  return withBadge;
+}
+
 describe("ConsultSlotPicker", () => {
   it("로딩 중에는 로딩 문구를 보여준다", () => {
     const fetchSlots = vi.fn(() => new Promise<never>(() => {}));
@@ -60,7 +69,7 @@ describe("ConsultSlotPicker", () => {
     );
 
     const dayButtons = await screen.findAllByRole("button", { name: `${SLOT_DAY_KST}일` });
-    fireEvent.click(dayButtons[0]);
+    fireEvent.click(slotDayButton(dayButtons));
 
     const timeGroup = await screen.findByRole("group", { name: "상담 희망 시간 선택" });
     const timeButton = timeGroup.querySelector("button")!;
@@ -77,7 +86,7 @@ describe("ConsultSlotPicker", () => {
     const fetchSlots = vi.fn().mockResolvedValue([{ startsAt: SLOT_ISO }]);
     render(<ConsultSlotPicker fetchSlots={fetchSlots} selectedStartsAt={SLOT_ISO} onSelect={() => {}} timezone={TZ} />);
     const dayButtons = await screen.findAllByRole("button", { name: `${SLOT_DAY_KST}일` });
-    fireEvent.click(dayButtons[0]);
+    fireEvent.click(slotDayButton(dayButtons));
     const timeGroup = await screen.findByRole("group", { name: "상담 희망 시간 선택" });
     const timeButton = timeGroup.querySelector("button")!;
     expect(timeButton.getAttribute("aria-pressed")).toBe("true");

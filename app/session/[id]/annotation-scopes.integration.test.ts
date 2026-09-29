@@ -64,7 +64,8 @@ beforeAll(() => {
   // 같은 선생님으로 반복 실행할 때 이전 실행이 남긴 예약과 겹치지 않도록 먼 미래의
   // 임의 슬롯을 쓴다(reservations_no_overlap 배타 제약).
   // 다른 통합 테스트 파일과 겹치지 않는 날짜 구간(위 unit-prep 주석 참고).
-  const slotOffsetDays = 5000 + Math.floor(Math.random() * 300);
+  // 예약 날짜 구간은 파일마다 겹치지 않게 나눈다(같은 시드 선생님을 쓰는 파일끼리 reservations_no_overlap 충돌 방지): session-prepared 300~, session-content-manifest 2000~, homework-composition 3000~, unit-prep 4000~, homework-v3 5000~, prep-version 6000~, homework-teacher-view 7000~, annotation-scopes 8000~, drive-material 10000~19000, session-content-use 20000~50000.
+const slotOffsetDays = 8000 + Math.floor(Math.random() * 300);
   const contractId = psql(
     `insert into contracts (household_id, child_id, status) values ('${HOUSEHOLD_ID}', '${STUDENT_ID}', 'draft') returning id;`
   );
@@ -200,6 +201,16 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
   }
 
   function work(problem: string, newAttempt = false): string {
+    // 2026-09-21(20261430): 수업 풀이판은 이 수업 manifest 에 실제로 배정된 문제만 만든다.
+    // 문제를 이 수업에 먼저 담는다(수업 시작 때 고정되는 공개본으로).
+    psql(
+      `insert into session_content_manifest (session_id, content_type, content_id, display_position, problem_version_id)
+       select '${sessionId}', 'problem', p.id,
+              (select coalesce(max(display_position), 0) + 1 from session_content_manifest where session_id = '${sessionId}'),
+              p.published_version_id
+       from problems p where p.id = '${problem}'
+       on conflict do nothing;`
+    );
     return psql(
       `select start_problem_work('${sessionId}'::uuid, '${STUDENT_ID}'::uuid, '${problem}'::uuid, ${newAttempt});`
     );
