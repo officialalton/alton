@@ -17,6 +17,7 @@ import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
+import { assertNoConsultantMeetingOverlap } from "@/lib/consultation/meeting-scheduling";
 
 export type AssignedMeetingRequest = {
   id: string;
@@ -100,6 +101,13 @@ export async function scheduleMyMeetingRequestAction(params: {
     .eq("consultant_id", userId)
     .single();
   if (loadError) throw new Error(loadError.message);
+
+  await assertNoConsultantMeetingOverlap(admin, {
+    consultantId: userId,
+    startsAt: startsAtDate,
+    endsAt: endsAtDate,
+    excludeMeetingRequestId: params.meetingRequestId,
+  });
 
   const childRel = row.child as { name?: string } | { name?: string }[] | null;
   const child = Array.isArray(childRel) ? childRel[0] : childRel;

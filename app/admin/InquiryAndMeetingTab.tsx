@@ -414,17 +414,23 @@ function MeetingOperations() {
                     </div>
                   </div>
                 ) : (
-                  <button
-                    disabled={busyId === m.id}
-                    className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                    onClick={() => {
-                      setScheduleStarts("");
-                      setScheduleEnds("");
-                      setScheduleFormOpenId(m.id);
-                    }}
-                  >
-                    일정 확정(Calendar+Meet 생성)
-                  </button>
+                  <>
+                    <button
+                      disabled={busyId === m.id || !m.consultantId}
+                      title={m.consultantId ? undefined : "먼저 담당 컨설턴트를 배정해 주세요"}
+                      className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                      onClick={() => {
+                        setScheduleStarts("");
+                        setScheduleEnds("");
+                        setScheduleFormOpenId(m.id);
+                      }}
+                    >
+                      일정 확정(Calendar+Meet 생성)
+                    </button>
+                    {!m.consultantId && (
+                      <span className="text-[11.5px] text-grey-500 self-center">먼저 담당 컨설턴트를 배정해 주세요</span>
+                    )}
+                  </>
                 )
               ) : null}
               {m.status !== "completed" && m.status !== "cancelled" && (

@@ -12,6 +12,14 @@ vi.mock("@/lib/google-calendar", () => ({
   patchCalendarEventTime: (...args: unknown[]) => patchCalendarEventTime(...args),
 }));
 
+const assertOverlap = vi.fn();
+const resolveOrganizer = vi.fn();
+vi.mock("@/lib/consultation/meeting-scheduling", async (orig) => ({
+  ...(await orig<typeof import("@/lib/consultation/meeting-scheduling")>()),
+  assertNoConsultantMeetingOverlap: (...a: unknown[]) => assertOverlap(...a),
+  resolveMeetingOrganizerEmail: (...a: unknown[]) => resolveOrganizer(...a),
+}));
+
 vi.mock("@/lib/google-meet", () => ({
   extractMeetingCodeFromLink: (link: string) => (link ? "abc-defg-hij" : null),
 }));
@@ -19,6 +27,7 @@ vi.mock("@/lib/google-meet", () => ({
 let meetingRequestRow: {
   id: string;
   subject: string | null;
+  consultant_id: string | null;
   google_event_id: string | null;
   google_meet_link: string | null;
   household: { primary_guardian_id: string; guardian: { name: string } };
@@ -72,11 +81,14 @@ describe("scheduleMeetingRequest", () => {
     meetingRequestRow = {
       id: "mr1",
       subject: "학습 상담",
+      consultant_id: "consultant1",
       google_event_id: null,
       google_meet_link: null,
       household: { primary_guardian_id: "guardian1", guardian: { name: "김민지" } },
     };
     guardianAuthEmail = "guardian@example.com";
+    assertOverlap.mockResolvedValue(undefined);
+    resolveOrganizer.mockResolvedValue("consultant1@alton.education");
     updateEqMock = vi.fn().mockResolvedValue({ error: null });
   });
 
@@ -143,5 +155,44 @@ describe("scheduleMeetingRequest", () => {
       })
     ).rejects.toThrow("Calendar API down");
     expect(updateMock).not.toHaveBeenCalled();
+  });
+
+  it("담당 컨설턴트가 없으면 거절하고 Calendar·DB를 건드리지 않는다", async () => {
+    meetingRequestRow.consultant_id = null;
+    await expect(
+      scheduleMeetingRequest({ meetingRequestId: "mr1", startsAt: "2026-09-20T14:00:00+09:00", endsAt: "2026-09-20T14:30:00+09:00" })
+    ).rejects.toThrow("먼저 담당 컨설턴트를 배정해 주세요");
+    expect(createCalendarEventWithMeet).not.toHaveBeenCalled();
+    expect(updateMock).not.toHaveBeenCalled();
+  });
+
+  it("organizer 는 회사 계정이 아니라 그 미팅의 컨설턴트 계정이다", async () => {
+    createCalendarEventWithMeet.mockResolvedValue({ googleEventId: "evt1", meetLink: "https://meet.google.com/abc-defg-hij" });
+    await scheduleMeetingRequest({ meetingRequestId: "mr1", startsAt: "2026-09-20T14:00:00+09:00", endsAt: "2026-09-20T14:30:00+09:00" });
+    expect(resolveOrganizer).toHaveBeenCalledWith(expect.anything(), "consultant1");
+    expect(createCalendarEventWithMeet).toHaveBeenCalledWith(expect.objectContaining({ teacherWorkspaceEmail: "consultant1@alton.education" }));
+  });
+
+  it("컨설턴트 계정 이메일이 없으면 Calendar 없이 저장하고 sync 를 failed 로 남긴다", async () => {
+    resolveOrganizer.mockResolvedValue(null);
+    const r = await scheduleMeetingRequest({ meetingRequestId: "mr1", startsAt: "2026-09-20T14:00:00+09:00", endsAt: "2026-09-20T14:30:00+09:00" });
+    expect(createCalendarEventWithMeet).not.toHaveBeenCalled();
+    expect(r.googleSyncStatus).toBe("failed");
+    expect(updateMock).toHaveBeenCalledWith(expect.objectContaining({ status: "scheduled", google_sync_status: "failed" }));
+  });
+
+  it("실제 Google 호출이 꺼져 있으면 미팅은 저장하고 sync 를 failed 로 남긴다", async () => {
+    createCalendarEventWithMeet.mockRejectedValue(new Error("not implemented: CALENDAR_SYNC_ALLOW_REAL_CALLS=true가 아니면 ..."));
+    const r = await scheduleMeetingRequest({ meetingRequestId: "mr1", startsAt: "2026-09-20T14:00:00+09:00", endsAt: "2026-09-20T14:30:00+09:00" });
+    expect(r.googleSyncStatus).toBe("failed");
+    expect(updateMock).toHaveBeenCalledWith(expect.objectContaining({ status: "scheduled", google_sync_status: "failed" }));
+  });
+
+  it("겹침이면 Calendar 호출 전에 거절한다", async () => {
+    assertOverlap.mockRejectedValue(new Error("같은 컨설턴트의 다른 미팅과 시간이 겹칩니다."));
+    await expect(
+      scheduleMeetingRequest({ meetingRequestId: "mr1", startsAt: "2026-09-20T14:00:00+09:00", endsAt: "2026-09-20T14:30:00+09:00" })
+    ).rejects.toThrow("겹칩니다");
+    expect(createCalendarEventWithMeet).not.toHaveBeenCalled();
   });
 });
