@@ -200,6 +200,16 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
   }
 
   function work(problem: string, newAttempt = false): string {
+    // 2026-09-21(20261430): 수업 풀이판은 이 수업 manifest 에 실제로 배정된 문제만 만든다.
+    // 문제를 이 수업에 먼저 담는다(수업 시작 때 고정되는 공개본으로).
+    psql(
+      `insert into session_content_manifest (session_id, content_type, content_id, display_position, problem_version_id)
+       select '${sessionId}', 'problem', p.id,
+              (select coalesce(max(display_position), 0) + 1 from session_content_manifest where session_id = '${sessionId}'),
+              p.published_version_id
+       from problems p where p.id = '${problem}'
+       on conflict do nothing;`
+    );
     return psql(
       `select start_problem_work('${sessionId}'::uuid, '${STUDENT_ID}'::uuid, '${problem}'::uuid, ${newAttempt});`
     );

@@ -21,16 +21,23 @@ function psql(sql: string): string {
 let regularLessonTypeId: string;
 let lessonPackProductId: string;
 
-const FIXED_BOOKING_HOUR_UTC = 18;
+// 같은 시드 선생님(박서연)을 다른 통합 테스트도 같은 날짜 17~18시 UTC 부근에 예약하므로
+// 무작위 분만으로는 teacher_buffer_violation을 피하지 못한다. 후보 시간 중
+// violates_teacher_buffer()가 false인 첫 슬롯을 고른다(검증 대상과 무관한 충돌만 제거).
+const CANDIDATE_HOURS_UTC = [18, 15, 16, 19, 20, 21, 22];
 function futureSlot(daysFromNow: number, durationMinutes = 60): { startsAt: string; endsAt: string } {
-  const startsAtDate = new Date();
-  startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
-  startsAtDate.setUTCHours(FIXED_BOOKING_HOUR_UTC, Math.floor(Math.random() * 50), 0, 0);
-  return {
-    startsAt: startsAtDate.toISOString(),
-    endsAt: new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString(),
-  };
+  for (const hour of CANDIDATE_HOURS_UTC) {
+    const startsAtDate = new Date();
+    startsAtDate.setUTCDate(startsAtDate.getUTCDate() + daysFromNow);
+    startsAtDate.setUTCHours(hour, Math.floor(Math.random() * 50), 0, 0);
+    const startsAt = startsAtDate.toISOString();
+    const endsAt = new Date(startsAtDate.getTime() + durationMinutes * 60000).toISOString();
+    const busy = psql(`select violates_teacher_buffer('${TEACHER_ID}', '${startsAt}', '${endsAt}');`);
+    if (busy === "f") return { startsAt, endsAt };
+  }
+  throw new Error(`futureSlot: ${daysFromNow}일 뒤 선생님 빈 슬롯을 찾지 못함`);
 }
+
 
 function makeChildWithEnrollment(contractStatus: "draft" | "active"): {
   childId: string;

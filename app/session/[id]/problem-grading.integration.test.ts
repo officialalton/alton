@@ -87,7 +87,8 @@ function startedSession(): { sessionId: string; mcId: string; essayId: string } 
     psql(`insert into problem_keywords (problem_id, keyword_id) values ('${id}', '${keywordId}');`);
     psql(
       `update problem_versions set options = ${format === "mc" ? `'["가","나","다","라"]'::jsonb` : "null"},
-       correct_index = ${correct === null ? "null" : correct}, explanation = '해설', difficulty = 'medium'
+       correct_index = ${correct === null ? "null" : correct}, explanation = '해설', difficulty = 'medium',
+       question = '다음 중 옳은 것은?'
        where problem_id = '${id}';`
     );
     return id;
@@ -104,11 +105,21 @@ function startedSession(): { sessionId: string; mcId: string; essayId: string } 
     `insert into curriculum_unit_prep_items (prep_id, content_type, content_id, position) values
      ('${prepId}', 'problem', '${mcId}', 1), ('${prepId}', 'problem', '${essayId}', 2);`
   );
-  offset += 2;
-  const reservationId = psql(
-    `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
-     values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
-  );
+  // 같은 로컬 DB에서 여러 번 돌리면 이전 실행의 예약이 남아 있다(reservations_no_overlap).
+  // 겹치면 다음 슬롯으로 넘긴다.
+  let reservationId = "";
+  for (let attempt = 0; ; attempt++) {
+    offset += 2;
+    try {
+      reservationId = psql(
+        `insert into reservations (kind, subject_enrollment_id, owner_profile_id, starts_at, ends_at, status)
+         values ('lesson', '${enrollmentId}', '${TEACHER_ID}', now() + interval '${offset} days', now() + interval '${offset} days 1 hour', 'confirmed') returning id;`
+      );
+      break;
+    } catch (e) {
+      if (attempt >= 50 || !/no_overlap|exclusion|overlap/i.test(String((e as { stderr?: string }).stderr ?? e))) throw e;
+    }
+  }
   const sessionId = psql(
     `insert into sessions (reservation_id, subject_enrollment_id, teacher_id, lesson_type_id, scheduled_duration_minutes)
      values ('${reservationId}', '${enrollmentId}', '${TEACHER_ID}', (select id from lesson_types where code = 'regular'), 60)
@@ -440,8 +451,7 @@ describe("표준 렌더링 검증 공개 게이트 (20261365) — 검증 통과 
     psql(`select set_problem_render_check('${v}', '{"ok":false,"renderer":"std-1","issues":[{"code":"ref_missing","message":"지문의 선 q 가 도형 데이터에 없습니다."}]}'::jsonb);`);
     expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("지문의 선 q");
     psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
-    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("미리보기에서 그림을 확인");
-    psql(`select mark_problem_figure_checked('${v}', true);`);
+    // 2026-09-15(20261374): 공개 전 수동 "그림 확인함" 게이트는 없어졌다 — 검증 통과면 공개된다.
     psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
     expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
   });
@@ -614,16 +624,17 @@ describe("spr — 숫자 답 자동 채점·재입력·공개 검사", () => {
 });
 
 // ------------------------------------------------------------ 그림 확인 게이트 (2026-09-14 ③)
-describe("figure — 그림이 있는 초안은 확인해야 공개된다", () => {
-  it("figure_checked 없이 공개 거절, 확인 뒤 공개, 그림을 바꾸면 확인이 풀린다", () => {
+// 2026-09-15(20261374) 제품 오너: 미리보기가 그림을 항상 그려 주므로 수동 "그림 확인함"
+// 공개 게이트는 뺐다. 그림을 바꾸면 확인 표시는 여전히 풀리고, 공개는 렌더링 검증 해시로 막힌다.
+describe("figure — 그림이 있는 초안은 렌더링 검증을 거쳐야 공개된다", () => {
+  it("검증 통과면 확인 표시 없이도 공개되고, 그림을 바꾸면 확인이 풀리고 검증을 다시 거쳐야 한다", () => {
     const id = psql(
       `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '그래프', '${SUBJECT_ID}', 'draft', '${TEACHER_ID}') returning id;`
     );
     const fig = `{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"l","kind":"line","slope":1,"intercept":0}]}`;
     const v = psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig}'::jsonb, false);`);
-    // 2026-09-14 표준 렌더링 검증(20261365): 검증 기록이 먼저다. 그 다음 미리보기 확인.
+    // 2026-09-14 표준 렌더링 검증(20261365): 검증 기록이 공개 게이트다.
     psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
-    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("그림을 확인해야");
     psql(`select mark_problem_figure_checked('${v}', true);`);
     // 그림 데이터를 바꾸면 확인이 풀리고, 검증 해시도 어긋난다.
     const fig2 = `{"type":"plane","axes":{"x":{"min":-2,"max":8},"y":{"min":-2,"max":8}},"objects":[{"id":"l","kind":"line","slope":2,"intercept":1}]}`;

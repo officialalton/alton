@@ -78,10 +78,12 @@ function makeProblem(
   psql(`insert into problem_keywords (problem_id, keyword_id) values ('${id}', '${keywordId}');`);
   // 문제를 만들면 1번 버전이 자동으로 생긴다(초안). 공개 상태만 바꾼다 —
   // 새 버전을 끼워 넣으면 "문제당 공개본 하나" 규칙과 부딪힌다.
+  // 2026-09-15(20261369): 질문이 없는 문제는 자동 구성 후보에서 빠진다 — 질문을 채운다.
   psql(
     `update problem_versions
      set status = '${opts.unpublished ? "in_review" : "published"}',
-         published_at = ${opts.unpublished ? "null" : "now()"}
+         published_at = ${opts.unpublished ? "null" : "now()"},
+         question = '다음 중 옳은 것은?'
      where problem_id = '${id}' and version_no = 1;`
   );
   return id;
@@ -522,7 +524,7 @@ describe("준비안이 버전을 못 박고, 상속이 그대로 이어받는다
     psql(`update problem_versions set status = 'archived' where problem_id = '${p}';`);
     psql(
       `insert into problem_versions (problem_id, version_no, passage, status, published_at)
-       values ('${p}', 2, '고친 본문 ${uniq()}', 'published', now());`
+       values ('${p}', 2, '고친 본문 ${uniq()}?', 'published', now());`
     );
     psql(
       `update problems set published_version_id =
@@ -544,7 +546,7 @@ describe("준비안이 버전을 못 박고, 상속이 그대로 이어받는다
     psql(`update problem_versions set status = 'archived' where problem_id = '${p}';`);
     psql(
       `insert into problem_versions (problem_id, version_no, passage, status, published_at)
-       values ('${p}', 2, '새 본문 ${uniq()}', 'published', now());`
+       values ('${p}', 2, '새 본문 ${uniq()}?', 'published', now());`
     );
     psql(
       `update problems set published_version_id =

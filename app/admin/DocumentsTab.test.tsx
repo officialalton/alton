@@ -48,7 +48,8 @@ describe("DocumentsTab", () => {
     for (const label of ["회사 문서", "계약", "동의서", "교사 서류"]) {
       expect(screen.getByText(label)).toBeInTheDocument();
     }
-    expect(screen.getByText("계약").className).toContain("border-ink");
+    // 2026-09-25(f5e75d9, 브랜드 스타일) 이후 UnderlineSubTabs 활성 탭은 border-navy.
+    expect(screen.getByText("계약").className).toContain("border-navy");
   });
 
   it("조회·다운로드만 하는 곳임을 알려준다(발송·무효화 진입점이 아니다)", () => {

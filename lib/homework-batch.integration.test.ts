@@ -67,7 +67,7 @@ beforeAll(() => {
   keywordId = psql(`insert into subject_keywords (subject_id, label, normalized_label) values ('${SUBJECT_ID}', '과제배치테스트 ${Date.now()}', 'hwbatch${Date.now()}') returning id;`);
   for (let i = 1; i <= 50; i++) problem(`문제${i} 지문. What is the answer?`);
   void HOUSEHOLD_ID;
-});
+}, 60_000); // 문제 50개를 psql로 순차 생성 — 전체 병렬 실행 중엔 기본 10초를 넘긴다
 
 describe("issue_homework_batch_v2 — 담당 교사가 학생·키워드만으로(수업 무관) 즉시 발급한다", () => {
   it("담당 교사는 발급할 수 있고, 라벨은 호출부가 넘긴 날짜 라벨 그대로 저장된다", () => {

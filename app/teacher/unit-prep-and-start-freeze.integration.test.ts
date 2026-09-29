@@ -13,7 +13,10 @@ const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 이 파일 전용 과목(beforeAll에서 생성). 공유 seed 과목(SAT Math)의 첫 기준본 단원은
+// 다른 파일들이 교재·키워드를 붙였다 떼는 대상이라, 거기서 갈라진 회차는 상속 트리거가
+// 병렬 실행 중에 간헐적으로 실패하거나 예상 밖의 자료를 물려받았다.
+let SUBJECT_ID = "";
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
@@ -60,8 +63,18 @@ const cleanupContractIds: string[] = [];
 let reservationOffsetDays = 3000 + Math.floor(Math.random() * 300) * 2;
 
 beforeAll(() => {
+  SUBJECT_ID = psql(
+    `insert into subjects (name) values ('회차준비 검증 ${Date.now()}_${Math.random()}') returning id;`
+  );
   baseUnitId = psql(
-    `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
+    `insert into subject_template_units (subject_id, position, unit_title)
+     values ('${SUBJECT_ID}', 1, '회차준비 기본 단원') returning id;`
+  );
+  // 문제은행 조회 RLS(is_teacher_of_subject)와 같은 조건 — 담당 선생님은 이 과목의
+  // 운영 커리큘럼을 갖고 있다(seed 과목에서는 seed가 이 행을 제공했다).
+  psql(
+    `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${TEACHER_ID}', '${SUBJECT_ID}')
+     on conflict (teacher_id, subject_id) do nothing;`
   );
 });
 

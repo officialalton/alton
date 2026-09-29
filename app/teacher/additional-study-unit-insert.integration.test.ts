@@ -20,7 +20,11 @@ const ADMIN_ID = "aaaaaaaa-0000-0000-0000-000000000001";
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 이 파일 전용 과목(beforeAll에서 생성). 공유 seed 과목(SAT Math)의 첫 기준본 단원은
+// 다른 파일들이 교재를 붙였다 떼는 대상이라, 그 단원에서 갈라진 회차를 만들면 상속
+// 트리거가 "존재하지 않는/공개되지 않은 교재"로 간헐적으로 실패했다. 문제도 공유
+// seed 문제를 고르지 않고 이 파일이 직접 만든다.
+let SUBJECT_ID = "";
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
@@ -96,8 +100,12 @@ function grantEntitlement(childId: string, productCode: string, quantity: number
 }
 
 beforeAll(() => {
+  SUBJECT_ID = psql(
+    `insert into subjects (name) values ('추가학습 검증 ${Date.now()}_${Math.random()}') returning id;`
+  );
   baseUnitId = psql(
-    `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
+    `insert into subject_template_units (subject_id, position, unit_title)
+     values ('${SUBJECT_ID}', 1, '추가학습검증 기본 단원') returning id;`
   );
   regularLessonTypeId = psql(`select id from lesson_types where code = 'regular';`);
 
@@ -117,6 +125,9 @@ beforeAll(() => {
     `insert into teacher_availability_rules (teacher_id, day_of_week, start_time_local, end_time_local, timezone, created_by)
      select '${teacherId}', d, '00:00', '23:59', 'America/Los_Angeles', '${ADMIN_ID}' from generate_series(0,6) d;`
   );
+  // 문제은행 문제 조회 RLS(is_teacher_of_subject)는 이 과목의 운영 커리큘럼을 가진
+  // 선생님에게만 문제를 보여준다 — 실제 담당 선생님과 같은 조건을 갖춘다.
+  psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${SUBJECT_ID}');`);
   grantEntitlement(STUDENT_ID, "lesson_pack_10", 10);
 });
 
@@ -160,10 +171,14 @@ function makeThreeUnitCurriculum(): { contractId: string; enrollmentId: string; 
   );
   asUser(teacherId, `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id, position) values ('${unitIds[0]}', '${docId}', 1);`);
 
+  // 확정 + 공개 버전이 있는 문제를 직접 만든다(그래야 준비안에 담길 수 있다).
   const problemId = psql(
-    `select id from problems where subject_id = '${SUBJECT_ID}' and status = 'confirmed' and archived_at is null
-       and exists (select 1 from problem_versions v where v.problem_id = problems.id and v.status = 'published')
-     limit 1;`
+    `insert into problems (format, passage, difficulty, subject_id, status)
+     values ('mc', '추가학습검증 문제 ${Date.now()}_${Math.random()}', 'medium', '${SUBJECT_ID}', 'confirmed') returning id;`
+  );
+  psql(
+    `update problem_versions set status = 'published', published_at = now()
+     where problem_id = '${problemId}' and version_no = 1;`
   );
   psql(`insert into problem_keywords (problem_id, keyword_id) values ('${problemId}', '${keywordId}') on conflict do nothing;`);
   const prepId = psql(`select id from curriculum_unit_preps where overlay_unit_id = '${unitIds[0]}';`);

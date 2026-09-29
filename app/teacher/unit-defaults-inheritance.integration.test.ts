@@ -13,7 +13,9 @@ const TEACHER_ID = "dddddddd-0000-0000-0000-000000000001";
 const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002";
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001";
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001";
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001";
+// 이 파일 전용 과목(beforeAll에서 생성) — 공유 seed 과목을 쓰면 병렬로 도는 다른 파일의
+// 기준본 단원·교재·키워드가 상속·자동 구성 결과에 섞인다.
+let SUBJECT_ID = "";
 const OTHER_SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000002";
 
 function psql(sql: string): string {
@@ -58,7 +60,17 @@ const uniq = () => `${Date.now()}_${Math.random()}`;
 // 교재"에 대해서만 물어야 한다.
 let preexistingDocIds: string[] = [];
 beforeAll(() => {
-  preexistingDocIds = psql(`select id from curriculum_docs;`).split("\n").filter(Boolean);
+  SUBJECT_ID = psql(`insert into subjects (name) values ('기본구성 상속 검증 ${uniq()}') returning id;`);
+  psql(
+    `insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${TEACHER_ID}', '${SUBJECT_ID}')
+     on conflict (teacher_id, subject_id) do nothing;`
+  );
+  // "원래 있던 교재" = 마이그레이션 이전부터 있던 seed 교재(고정 id 33333333-…).
+  // 예전에는 이 파일 시작 시점의 전체 교재를 기준선으로 삼았는데, 병렬로 도는 다른
+  // 파일이 막 심고 대표 키워드를 붙인 교재까지 기준선에 섞여 간헐적으로 실패했다.
+  preexistingDocIds = psql(`select id from curriculum_docs where id::text like '33333333-%';`)
+    .split("\n")
+    .filter(Boolean);
 });
 const cleanupContractIds: string[] = [];
 // 이 파일이 심는 교재도 치운다. 안 치우면 다음 실행에서 "원래 있던 교재"로

@@ -2,29 +2,42 @@ import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 
+// 2026-09-11 — 예전 패턴("node_modules")은 루트 node_modules만 매칭해서 .claude/worktrees/*
+// 안의 중첩 node_modules 테스트까지 흡수했다. 재귀 glob으로 항상 제외한다.
+const SHARED_EXCLUDE = ["**/node_modules/**", "**/.next/**", "**/e2e/**", "**/.claude/worktrees/**"];
+
 export default defineConfig({
   plugins: [react()],
   test: {
+    // 2026-09-28 — DB 통합 테스트(*.integration.test.ts)는 모두 같은 로컬 Supabase와
+    // 시드(선생님·과목·전역 게이트)를 공유한다. 파일 병렬로 돌리면 서로의 예약 슬롯·
+    // 시드 회차·전역 트리거를 건드려 실행마다 다른 파일이 몇 개씩 실패했다(실측: 초기화
+    // 직후 전체 실행 3회 1/6/12건, 매번 다른 파일). 단위 테스트는 기존대로 병렬, 통합
+    // 테스트만 파일 순차(fileParallelism: false) 프로젝트로 나눈다 — 순차 실행 시 87파일
+    // 884건 전부 통과(약 7분).
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          exclude: [...SHARED_EXCLUDE, "**/*.integration.test.ts"],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "integration",
+          include: ["**/*.integration.test.ts"],
+          // lib/universities 통합 테스트는 별도 설정(vitest.integration.config.ts,
+          // `npm run test:integration:universities`)으로만 돈다.
+          exclude: [...SHARED_EXCLUDE, "lib/universities/**/*.integration.test.ts"],
+          fileParallelism: false,
+        },
+      },
+    ],
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
     globals: true,
-    // 2026-09-11 수정 — 예전 패턴("node_modules")은 루트 node_modules만
-    // 매칭하고 .claude/worktrees/*/node_modules처럼 중첩된 경로는 걸러내지
-    // 못해서, 스테일 워크트리가 남아있으면 그 안의 패키지(tsconfig-paths 등)
-    // 번들 테스트까지 전체 스위트로 잘못 흡수돼 수백 개의 가짜 실패를
-    // 만들었다(2026-09-11 실측). 재귀 glob으로 바꿔 항상 제외되게 한다.
-    // lib/universities의 *.integration.test.ts만 별도 vitest.integration.config.ts
-    // (파일 병렬성 꺼짐, `npm run test:integration:universities`)로 옮긴다 — 이 디렉터리의
-    // 통합 테스트들만 university_refresh_jobs.status='running' 전역 카운트를 공유해서
-    // 병렬 실행 시 경합이 났기 때문(2026-09-23 마무리 세션). 다른 디렉터리의 통합 테스트는
-    // 그런 전역 공유 상태가 없으므로 기존대로 이 기본 설정(병렬)에 그대로 둔다.
-    exclude: [
-      "**/node_modules/**",
-      "**/.next/**",
-      "**/e2e/**",
-      "**/.claude/worktrees/**",
-      "lib/universities/**/*.integration.test.ts",
-    ],
   },
   resolve: {
     alias: {

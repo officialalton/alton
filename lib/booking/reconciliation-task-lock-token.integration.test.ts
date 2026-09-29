@@ -335,7 +335,9 @@ describe("reconciliation_task_update_guard() — status_transition_tokens 1회�
       create or replace function force_reconciliation_resolve_failure_for_test()
       returns trigger language plpgsql as $$
       begin
-        if new.status = 'resolved' then
+        -- 이 테스트의 행에만 반응한다 — 병렬로 도는 다른 파일(session-final-judgment 등)이
+        -- 같은 테이블을 resolved로 바꾸다 이 트리거에 걸리지 않게.
+        if new.status = 'resolved' and new.id = '${taskId}' then
           raise exception 'forced failure for reconciliation resolve atomicity test';
         end if;
         return new;

@@ -56,19 +56,29 @@ function createExistingHousehold(label: string): {
   return { guardianId: guardian.id, guardianEmail: guardian.email, householdId, firstChildId: firstChild.id };
 }
 
+// 2026-09-23(R15-A) 이후 create_direct_onboarding_link_multi()는 학생마다 담당
+// 컨설턴트(profiles.role='consultant')를 요구한다. 시드에 컨설턴트가 없으므로 만든다.
+function createConsultant(label: string): string {
+  const consultant = createAuthUser(`consultant-${label}`);
+  psql(`insert into profiles (id, role, name) values ('${consultant.id}', 'consultant', '자녀추가 컨설턴트');`);
+  return consultant.id;
+}
+
 function createAddChildLink(guardianEmail: string, guardianName: string, childEmail: string): {
   linkId: string;
   linkStudentId: string;
+  consultantId: string;
 } {
+  const consultantId = createConsultant(guardianName);
   const linkId = psql(`
     select link_id from create_direct_onboarding_link_multi(
       '${guardianEmail}', '${guardianName}',
-      jsonb_build_array(jsonb_build_object('name', '둘째', 'email', '${childEmail}', 'grade', '9학년')),
+      jsonb_build_array(jsonb_build_object('name', '둘째', 'email', '${childEmail}', 'grade', '9학년', 'consultantId', '${consultantId}')),
       '${ADMIN_ID}'::uuid
     );
   `);
   const linkStudentId = psql(`select id from trial_onboarding_link_students where link_id = '${linkId}'::uuid;`);
-  return { linkId, linkStudentId };
+  return { linkId, linkStudentId, consultantId };
 }
 
 describe("P4-1 자녀 추가 — 주 보호자 후보 조회", () => {
@@ -107,7 +117,7 @@ describe("P4-1 자녀 추가 — finalize(기존 보호자 분기)", () => {
     );
 
     const secondChild = createAuthUser("child2-add");
-    const { linkId, linkStudentId } = createAddChildLink(guardianEmail, `주보호자add`, secondChild.email);
+    const { linkId, linkStudentId, consultantId } = createAddChildLink(guardianEmail, `주보호자add`, secondChild.email);
 
     const result = psql(
       `select household_id, guardian_id, created_count, failed_count from finalize_trial_onboarding_students(
@@ -134,11 +144,16 @@ describe("P4-1 자녀 추가 — finalize(기존 보호자 분기)", () => {
     expect(psql(`select household_id, role, is_primary from household_members where profile_id = '${firstChildId}';`)).toBe(
       beforeFirstChild
     );
-    // 새 자녀는 pending 학생 + 체험 동의 대기(자녀 단위로 새로 시작).
+    // 새 자녀는 pending 학생. 2026-09-28(체험 동의 화면 제거, 20261900000033) 이후
+    // 직접생성 경로는 'awaiting_consent' 없이 체험수업권을 즉시 지급하고, 링크 단계의
+    // 담당 컨설턴트를 consultant_assignments로 이어 붙인다(R15-A).
     expect(psql(`select status from students where id = '${secondChild.id}';`)).toBe("pending");
     expect(
       psql(`select trial_entitlement_grant_status from trial_onboarding_link_students where id = '${linkStudentId}';`)
-    ).toBe("awaiting_consent");
+    ).toBe("granted");
+    expect(psql(`select consultant_id from consultant_assignments where student_id = '${secondChild.id}';`)).toBe(
+      consultantId
+    );
   });
 
   it("같은 자녀로 다시 finalize해도 가구·멤버가 중복되지 않는다(멱등)", () => {

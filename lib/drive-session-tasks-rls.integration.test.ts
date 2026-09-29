@@ -60,15 +60,24 @@ describe("session_drive_tasks — RLS 활성화(보안 결함 수정)", () => {
   });
 
   it("authenticated 키로는 UPDATE/DELETE도 아무 행에 영향을 주지 못한다", () => {
-    const result = psql(`
+    // 다른 테스트(워커·웹훅)가 정상적으로 succeeded로 만든 행이 공유 로컬 DB에 있을 수
+    // 있으므로, 이 테스트가 직접 만든 queued 행 하나만 기준으로 본다.
+    // session_id는 sessions FK인데 db reset 직후엔 세션이 없을 수 있다(세션 생성은 시급
+    // 이력 등 선행 조건이 많다). 여기서 보는 건 RLS뿐이므로 superuser로 FK 트리거만 끄고
+    // 테스트 행을 넣은 뒤, 끝에서 지운다.
+    const taskId = psql(`
+      set session_replication_role = replica;
+      insert into session_drive_tasks (session_id, task_type) values (gen_random_uuid(), 'folder_provision') returning id;
+    `);
+    psql(`
       set role authenticated;
-      update session_drive_tasks set status = 'succeeded';
+      update session_drive_tasks set status = 'succeeded' where id = '${taskId}';
+      delete from session_drive_tasks where id = '${taskId}';
       reset role;
     `);
-    // psql -t -A로 UPDATE 결과 자체는 안 나오지만, 이후 service_role로 봤을 때
-    // succeeded로 바뀐 행이 없어야 한다(=변경이 전혀 반영되지 않음).
-    void result;
-    const succeededCount = psql(`select count(*) from session_drive_tasks where status = 'succeeded';`);
-    expect(succeededCount).toBe("0");
+    // service_role로 봤을 때 행이 그대로 남아 있고 status도 바뀌지 않아야 한다.
+    const status = psql(`select status from session_drive_tasks where id = '${taskId}';`);
+    expect(status).toBe("queued");
+    psql(`delete from session_drive_tasks where id = '${taskId}';`);
   });
 });

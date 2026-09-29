@@ -18,15 +18,28 @@ function psql(sql: string): string {
   }).trim();
 }
 
+// 2026-09-23(R15-A) 이후 create_direct_onboarding_link_multi()는 학생마다 담당
+// 컨설턴트(profiles.role='consultant')를 요구한다. 시드에 컨설턴트가 없으므로 만든다.
+function createConsultant(label: string): string {
+  const id = psql(`
+    insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+    values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'm4-list-consultant-${label}-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
+    returning id;
+  `);
+  psql(`insert into profiles (id, role, name) values ('${id}', 'consultant', '목록테스트 컨설턴트');`);
+  return id;
+}
+
 function createDirectOnboardingLink(label: string): string {
   const now = Date.now();
+  const consultantId = createConsultant(label);
   const guardianEmail = `m4-list-guardian-${label}-${now}@example.com`;
   const studentEmail = `m4-list-student-${label}-${now}@example.com`;
   return psql(`
     select link_id from create_direct_onboarding_link_multi(
       '${guardianEmail}', '목록테스트 보호자 ${label}',
       jsonb_build_array(
-        jsonb_build_object('name', '학생${label}', 'email', '${studentEmail}', 'grade', '10학년')
+        jsonb_build_object('name', '학생${label}', 'email', '${studentEmail}', 'grade', '10학년', 'consultantId', '${consultantId}')
       ),
       '${ADMIN_ID}'::uuid
     );

@@ -1,4 +1,5 @@
 import { execFileSync } from "node:child_process";
+import { randomUUID } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import { beforeAll, describe, expect, it } from "vitest";
 
@@ -15,7 +16,10 @@ const OTHER_TEACHER_ID = "dddddddd-0000-0000-0000-000000000002"; // 이도현 �
 const STUDENT_ID = "cccccccc-0000-0000-0000-000000000001"; // 지훈 (seed)
 const OTHER_STUDENT_ID = "cccccccc-0000-0000-0000-000000000002"; // 이서아 (seed, 무관한 제3자 학생)
 const HOUSEHOLD_ID = "aabbccdd-0000-0000-0000-000000000001"; // 지훈 household (seed)
-const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math (seed)
+// 이 파일 전용 과목(beforeAll에서 생성). 공유 seed 과목(SAT Math)을 쓰면 병렬로 도는
+// 다른 파일이 같은 과목에 기준본 단원·교재를 넣고 빼는 동안 "과목 기본 단원 N개가
+// 그대로 시딩된다" 같은 정확한 개수 검증이 흔들린다.
+let SUBJECT_ID = "";
 
 function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], {
@@ -57,6 +61,14 @@ function asUserExpectError(userId: string, sql: string): string {
 let baseUnitId: string;
 
 beforeAll(() => {
+  SUBJECT_ID = psql(
+    `insert into subjects (name) values ('오버레이 검증 ${Date.now()}_${Math.random()}') returning id;`
+  );
+  // 베이스라인 시딩 개수 검증이 의미 있도록 기본 단원을 여러 개 둔다.
+  psql(
+    `insert into subject_template_units (subject_id, position, unit_title)
+     values ('${SUBJECT_ID}', 1, '기본 단원 1'), ('${SUBJECT_ID}', 2, '기본 단원 2'), ('${SUBJECT_ID}', 3, '기본 단원 3');`
+  );
   baseUnitId = psql(
     `select id from subject_template_units where subject_id = '${SUBJECT_ID}' order by position limit 1;`
   );
@@ -415,23 +427,40 @@ const CANONICAL_TABLES = [
   "problem_keywords",
 ] as const;
 
-function canonicalChecksums(): string {
-  const selects = CANONICAL_TABLES.map(
-    (t) => `select '${t}' as tbl, count(*) as n, coalesce(md5(string_agg(t.*::text, '' order by t.*::text)), '') as sum from ${t} t`
-  ).join(" union all ");
-  return psql(`${selects} order by tbl;`);
+const canonicalChecksumSql = `${CANONICAL_TABLES.map(
+  (t) => `select '${t}' as tbl, count(*) as n, coalesce(md5(string_agg(t.*::text, '' order by t.*::text)), '') as sum from ${t} t`
+).join(" union all ")} order by tbl;`;
+
+/**
+ * 정본 테이블 전체(과목 한정이 아님)의 체크섬을 오버레이 조작 **전후로 한 트랜잭션 안에서**
+ * 잰다. REPEATABLE READ 스냅샷은 첫 쿼리 시점에 고정되고 자기 트랜잭션의 쓰기만 보이므로,
+ * 병렬로 도는 다른 테스트 파일이 정본 테이블에 쓰더라도 before/after 차이는 오직
+ * `ops`가 만든 변경만 반영한다 — 전역 범위의 "0 diff" 검증을 그대로 유지하면서 경합을 없앤다.
+ */
+function canonicalChecksumsAround(userId: string, ops: string): { before: string; after: string } {
+  const n = CANONICAL_TABLES.length;
+  const lines = psql(`
+    begin isolation level repeatable read;
+    ${canonicalChecksumSql}
+    set local role authenticated;
+    select set_config('request.jwt.claim.sub', '${userId}', true) is null;
+    ${ops}
+    reset role;
+    ${canonicalChecksumSql}
+    commit;
+  `).split("\n");
+  return { before: lines.slice(0, n).join("\n"), after: lines.slice(-n).join("\n") };
 }
 
 describe("정본(canonical) 테이블 무변경 — 오버레이 조작은 원본을 절대 바꾸지 않는다", () => {
   it("공개 단원을 오버레이에 추가해도 모든 정본 테이블의 행수/체크섬이 그대로다", () => {
-    const before = canonicalChecksums();
     const overlayId = createOverlay();
-    asUser(
+    const { before, after } = canonicalChecksumsAround(
       TEACHER_ID,
       `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title)
        values ('${overlayId}', '${baseUnitId}', 1, '정본 무변경 확인용 단원') returning id;`
     );
-    const after = canonicalChecksums();
+    expect(before.split("\n")).toHaveLength(CANONICAL_TABLES.length);
     expect(after).toBe(before);
   });
 
@@ -444,24 +473,24 @@ describe("정본(canonical) 테이블 무변경 — 오버레이 조작은 원�
       `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '보강테스트키워드 ${Date.now()}') returning id;`
     );
 
-    const before = canonicalChecksums();
     const overlayId = createOverlay();
-    const supplementUnitId = asUser(
+    const supplementUnitId = randomUUID();
+    const { before, after } = canonicalChecksumsAround(
       TEACHER_ID,
-      `insert into curriculum_overlay_units (overlay_id, source_unit_id, position, unit_title, note)
-       values ('${overlayId}', null, 1, '보강 단원', '조합 테스트') returning id;`
-    );
-    asUser(
-      TEACHER_ID,
-      `insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id)
-       values ('${supplementUnitId}', '${docId}');`
-    );
-    asUser(
-      TEACHER_ID,
-      `insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
+      `insert into curriculum_overlay_units (id, overlay_id, source_unit_id, position, unit_title, note)
+       values ('${supplementUnitId}', '${overlayId}', null, 1, '보강 단원', '조합 테스트') returning id;
+       insert into curriculum_overlay_unit_materials (overlay_unit_id, curriculum_doc_id)
+       values ('${supplementUnitId}', '${docId}');
+       insert into curriculum_overlay_unit_keywords (overlay_unit_id, keyword_id)
        values ('${supplementUnitId}', '${keywordId}');`
     );
-    const after = canonicalChecksums();
+    // 조작이 실제로 커밋됐는지(체크섬 비교가 빈 조작을 잰 것이 아닌지) 확인한다.
+    expect(
+      psql(`select count(*) from curriculum_overlay_unit_materials where overlay_unit_id = '${supplementUnitId}';`)
+    ).toBe("1");
+    expect(
+      psql(`select count(*) from curriculum_overlay_unit_keywords where overlay_unit_id = '${supplementUnitId}';`)
+    ).toBe("1");
     expect(after).toBe(before);
   });
 });
@@ -885,8 +914,8 @@ describe("C-2 — 재배정에도 선생님 운영 커리큘럼 보유를 서버
       `select count(*) from document_permission_retries where subject_enrollment_id = '${enrollmentId}';`
     );
 
-    // OTHER_TEACHER_ID는 seed 기준 SUBJECT_ID(SAT Math)의 teacher_curriculum_templates
-    // 행이 아예 없다(TEACHER_ID만 있음) — 가드 거부의 자연스러운 대상.
+    // OTHER_TEACHER_ID는 이 파일 전용 SUBJECT_ID의 teacher_curriculum_templates
+    // 행이 아예 없다 — 가드 거부의 자연스러운 대상.
     const { error } = await adminClient.rpc("change_teacher_assignment", {
       p_subject_enrollment_id: enrollmentId,
       p_new_teacher_id: OTHER_TEACHER_ID,

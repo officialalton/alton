@@ -105,7 +105,7 @@ describe("regular_recommended(체험 생략) 온보딩 → 계약 draft 경로 �
     );
     expect(contractId).toMatch(/^[0-9a-f-]{36}$/);
 
-    const subjectId = psqlAsSuperuser(`select id from subjects limit 1;`);
+    const subjectId = psqlAsSuperuser(`select id from subjects where archived_at is null order by id limit 1;`);
     expect(subjectId.length).toBeGreaterThan(0);
     const subjectEnrollmentId = psqlAsSuperuser(
       `insert into subject_enrollments (child_id, subject_id, contract_id, status)

@@ -15,8 +15,23 @@ function psql(sql: string): string {
   }).trim();
 }
 
+// 2026-09-23(R15-A) 이후 create_direct_onboarding_link_multi()는 학생마다 담당
+// 컨설턴트(consultantId, profiles.role='consultant')가 없으면 발급을 거부한다
+// ("담당 컨설턴트를 지정해야 발송할 수 있습니다"). 시드에 컨설턴트가 없으므로
+// 이 스펙 전용 컨설턴트 계정을 만들어 넘긴다.
+function createConsultant(label: string): string {
+  const id = psql(`
+    insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+    values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'm4-cancel-consultant-${label}-${Date.now()}@example.com', 'x', now(), '{}', '{}', now(), now())
+    returning id;
+  `);
+  psql(`insert into profiles (id, role, name) values ('${id}', 'consultant', '취소테스트 컨설턴트');`);
+  return id;
+}
+
 function createDirectOnboardingLink(label: string): { linkId: string; studentIds: string[] } {
   const now = Date.now();
+  const consultantId = createConsultant(label);
   const guardianEmail = `m4-cancel-guardian-${label}-${now}@example.com`;
   const goodStudentEmail = `m4-cancel-good-${label}-${now}@example.com`;
   const badStudentEmail = `not-a-real-address-${label}-${now}`; // 형식은 유효(psql 레벨에서는 검증 없음)하지만 시나리오상 "잘못된 이메일"
@@ -24,8 +39,8 @@ function createDirectOnboardingLink(label: string): { linkId: string; studentIds
     select link_id from create_direct_onboarding_link_multi(
       '${guardianEmail}', '취소테스트 보호자',
       jsonb_build_array(
-        jsonb_build_object('name', '정상학생', 'email', '${goodStudentEmail}', 'grade', '10학년'),
-        jsonb_build_object('name', '오타학생', 'email', '${badStudentEmail}@example.com', 'grade', '9학년')
+        jsonb_build_object('name', '정상학생', 'email', '${goodStudentEmail}', 'grade', '10학년', 'consultantId', '${consultantId}'),
+        jsonb_build_object('name', '오타학생', 'email', '${badStudentEmail}@example.com', 'grade', '9학년', 'consultantId', '${consultantId}')
       ),
       '${ADMIN_ID}'::uuid
     );
