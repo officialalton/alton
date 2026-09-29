@@ -13,8 +13,10 @@ export default function TeacherPlannerBoard({ studentId }: { studentId: string }
   useEffect(() => {
     let cancelled = false;
     loadStudentBoardCardsForTeacherAction(studentId)
-      .then((data) => {
-        if (!cancelled) setCards(data);
+      .then((result) => {
+        if (cancelled) return;
+        if (result.ok) setCards(result.cards);
+        else setError(result.error);
       })
       .catch((e) => {
         if (!cancelled) setError(e instanceof Error ? e.message : "보드를 불러오지 못했습니다.");

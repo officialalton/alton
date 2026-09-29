@@ -9,6 +9,7 @@ import {
   type StudentCurriculum,
   type EligibleLibrary,
 } from "./student-curriculum-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
   const supabase = await createClient();
@@ -333,8 +334,8 @@ export async function previewBaseCurriculumUpdate(
   const allKwIds = [...new Set([...addedKwIds, ...removedKwIds])];
   const allDocIds = [...new Set([...addedMatIds, ...removedMatIds])];
   const [{ data: kwLabels }, { data: docTitles }] = await Promise.all([
-    allKwIds.length ? supabase.from("subject_keywords").select("id, label").in("id", allKwIds) : Promise.resolve({ data: [] as { id: string; label: string }[] }),
-    allDocIds.length ? supabase.from("curriculum_docs").select("id, title").in("id", allDocIds) : Promise.resolve({ data: [] as { id: string; title: string }[] }),
+    allKwIds.length ? selectInChunks(allKwIds, (chunk) => supabase.from("subject_keywords").select("id, label").in("id", chunk)) : Promise.resolve({ data: [] as { id: string; label: string }[] }),
+    allDocIds.length ? selectInChunks(allDocIds, (chunk) => supabase.from("curriculum_docs").select("id, title").in("id", chunk)) : Promise.resolve({ data: [] as { id: string; title: string }[] }),
   ]);
   const kwLabelById = new Map((kwLabels ?? []).map((k) => [k.id as string, k.label as string]));
   const docTitleById = new Map((docTitles ?? []).map((d) => [d.id as string, d.title as string]));

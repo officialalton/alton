@@ -5,6 +5,7 @@ import { toDocKind } from "@/lib/unit-composition";
 import { createClient } from "@/utils/supabase/server";
 import { createAdminClient } from "@/lib/supabase-admin";
 import type { EligibleSelectionContent } from "./session-prep-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // P2/P3 3단계(제품 오너 피드백 1) — 예약이 없어도 회차를 준비한다.
 // 지금까지 준비의 최소 단위는 "세션에 붙는 준비된 선택"이라, 예약이 있어야만
@@ -67,10 +68,10 @@ export async function loadUnitPrep(overlayUnitId: string): Promise<UnitPrep> {
 
   const lessons: UnitPrep["linkedLessons"] = [];
   if (sessionIds.length) {
-    const { data: sessions } = await supabase
+    const { data: sessions } = await selectInChunks(sessionIds, (chunk) => supabase
       .from("sessions")
       .select("id, final_status, reservation:reservations!sessions_reservation_id_fkey(starts_at)")
-      .in("id", sessionIds);
+      .in("id", chunk));
     for (const s of sessions ?? []) {
       const reservation = Array.isArray(s.reservation) ? s.reservation[0] : s.reservation;
       lessons.push({
@@ -151,19 +152,19 @@ export async function loadUnitEligibleContent(overlayUnitId: string): Promise<El
   if (!keywordIds.length) return { materialSections: [], problems: [], keywordCount: 0 };
 
   const [{ data: sectionKeywordRows }, { data: problemKeywordRows }] = await Promise.all([
-    supabase
+    selectInChunks(keywordIds, (chunk) => supabase
       .from("curriculum_doc_section_keywords_selectable")
       .select("section_id, keyword_id")
-      .in("keyword_id", keywordIds),
+      .in("keyword_id", chunk)),
     // 2026-09-13 정정: 신규 선택 후보는 **공개된 버전이 있는 문제**로 좁힌다.
     // problem_keywords_selectable 은 problems.status='confirmed' 만 보므로, 검수
     // 중이거나 AI가 만든 초안 — 내용을 읽을 수조차 없는 문제 — 도 후보로 잡혔다.
     // 이미 고정된 문제를 **읽는** 경로는 그대로 둔다(보관됐다고 과거 수업에서
     // 사라지면 안 된다).
-    supabase
+    selectInChunks(keywordIds, (chunk) => supabase
       .from("problem_auto_composition_candidates")
       .select("problem_id, keyword_id")
-      .in("keyword_id", keywordIds),
+      .in("keyword_id", chunk)),
   ]);
 
   const sectionIds = Array.from(new Set((sectionKeywordRows ?? []).map((r) => r.section_id as string)));
@@ -171,10 +172,10 @@ export async function loadUnitEligibleContent(overlayUnitId: string): Promise<El
 
   const [{ data: sectionDetails }, { data: problemDetails }] = await Promise.all([
     sectionIds.length
-      ? supabase.from("curriculum_doc_sections").select("id, title, curriculum_doc_id").in("id", sectionIds)
+      ? selectInChunks(sectionIds, (chunk) => supabase.from("curriculum_doc_sections").select("id, title, curriculum_doc_id").in("id", chunk))
       : Promise.resolve({ data: [] as { id: string; title: string; curriculum_doc_id: string }[] }),
     problemIds.length
-      ? supabase.from("problems").select("id, passage").in("id", problemIds)
+      ? selectInChunks(problemIds, (chunk) => supabase.from("problems").select("id, passage").in("id", chunk))
       : Promise.resolve({ data: [] as { id: string; passage: string | null }[] }),
   ]);
 
@@ -298,11 +299,11 @@ export async function loadUnitPrepSummaries(
   const { supabase } = await requireTeacherOrAdmin();
 
   const [{ data: preps }, { data: materialRows }] = await Promise.all([
-    supabase.from("curriculum_unit_preps").select("id, overlay_unit_id").in("overlay_unit_id", overlayUnitIds),
-    supabase
+    selectInChunks(overlayUnitIds, (chunk) => supabase.from("curriculum_unit_preps").select("id, overlay_unit_id").in("overlay_unit_id", chunk)),
+    selectInChunks(overlayUnitIds, (chunk) => supabase
       .from("curriculum_overlay_unit_materials")
       .select("overlay_unit_id")
-      .in("overlay_unit_id", overlayUnitIds),
+      .in("overlay_unit_id", chunk)),
   ]);
 
   const materialCountByUnit = new Map<string, number>();
@@ -314,22 +315,22 @@ export async function loadUnitPrepSummaries(
   const prepIds = (preps ?? []).map((p) => p.id as string);
   const problemCountByPrep = new Map<string, number>();
   if (prepIds.length) {
-    const { data: items } = await supabase
+    const { data: items } = await selectInChunks(prepIds, (chunk) => supabase
       .from("curriculum_unit_prep_items")
       .select("prep_id")
       .eq("content_type", "problem")
-      .in("prep_id", prepIds);
+      .in("prep_id", chunk));
     for (const item of items ?? []) {
       const key = item.prep_id as string;
       problemCountByPrep.set(key, (problemCountByPrep.get(key) ?? 0) + 1);
     }
   }
 
-  const { data: links } = await supabase
+  const { data: links } = await selectInChunks(overlayUnitIds, (chunk) => supabase
     .from("session_curriculum_units")
     .select("overlay_unit_id, session_id")
     .eq("role", "primary")
-    .in("overlay_unit_id", overlayUnitIds);
+    .in("overlay_unit_id", chunk));
   const sessionIds = Array.from(new Set((links ?? []).map((l) => l.session_id as string)));
   // 2026-09-17(UAT 지적) — 취소된 예약(final_status가 취소 계열)은 실제로 아무
   // 수업도 일어나지 않았다. "scheduled만 아니면 고정"으로 셌던 예전 판정은
@@ -338,10 +339,10 @@ export async function loadUnitPrepSummaries(
   const NOT_FROZEN = new Set(["scheduled", "student_cancelled", "teacher_cancelled", "company_cancelled"]);
   const sessionById = new Map<string, { finalStatus: string; startsAt: string | null }>();
   if (sessionIds.length) {
-    const { data: sessions } = await supabase
+    const { data: sessions } = await selectInChunks(sessionIds, (chunk) => supabase
       .from("sessions")
       .select("id, final_status, reservation:reservations(starts_at)")
-      .in("id", sessionIds);
+      .in("id", chunk));
     for (const s of sessions ?? []) {
       const reservation = Array.isArray(s.reservation) ? s.reservation[0] : s.reservation;
       sessionById.set(s.id as string, {
@@ -413,10 +414,10 @@ export async function composeUnitPrepProblems(
     .maybeSingle();
   if (!prep) return { ok: false, error: "이 회차의 준비를 찾을 수 없습니다." };
 
-  const { data: candidateRows } = await supabase
+  const { data: candidateRows } = await selectInChunks(keywordIds, (chunk) => supabase
     .from("problem_auto_composition_candidates")
     .select("problem_id, created_at")
-    .in("keyword_id", keywordIds);
+    .in("keyword_id", chunk));
 
   const byProblem = new Map<string, string>();
   for (const row of candidateRows ?? []) {
@@ -540,7 +541,7 @@ export async function loadUnitComposition(overlayUnitId: string): Promise<UnitCo
 
   const docIds = (materialRows ?? []).map((m) => m.curriculum_doc_id as string);
   const { data: docs } = docIds.length
-    ? await supabase.from("curriculum_docs").select("id, title").in("id", docIds)
+    ? await selectInChunks(docIds, (chunk) => supabase.from("curriculum_docs").select("id, title").in("id", chunk))
     : { data: [] as { id: string; title: string }[] };
   const titleById = new Map((docs ?? []).map((d) => [d.id as string, d.title as string]));
 
@@ -710,14 +711,14 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
   if (!keywordIds.length) return [];
 
   const [{ data: docs }, { data: picked }] = await Promise.all([
-    supabase
+    selectInChunks(keywordIds, (chunk) => supabase
       .from("curriculum_docs")
       .select("id, title, primary_keyword_id, kind")
       .eq("subject_id", enrollment.subject_id)
       .eq("status", "published")
       .is("archived_at", null)
-      .in("primary_keyword_id", keywordIds)
-      .order("title", { ascending: true }),
+      .in("primary_keyword_id", chunk)
+      .order("title", { ascending: true }), { sort: orderComparator(["title", true]) }),
     supabase
       .from("curriculum_overlay_unit_materials")
       .select("curriculum_doc_id")
@@ -728,7 +729,7 @@ export async function loadUnitMaterialCatalog(overlayUnitId: string): Promise<Ca
     new Set((docs ?? []).map((d) => d.primary_keyword_id as string | null).filter(Boolean) as string[])
   );
   const { data: keywords } = docKeywordIds.length
-    ? await supabase.from("subject_keywords").select("id, label").in("id", docKeywordIds)
+    ? await selectInChunks(docKeywordIds, (chunk) => supabase.from("subject_keywords").select("id, label").in("id", chunk))
     : { data: [] as { id: string; label: string }[] };
   const labelById = new Map((keywords ?? []).map((k) => [k.id as string, k.label as string]));
   const pickedIds = new Set((picked ?? []).map((p) => p.curriculum_doc_id as string));

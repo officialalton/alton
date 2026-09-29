@@ -18,18 +18,33 @@ import type { BoardCard } from "@/lib/board/types";
 // 옮기지도, 지우지도 않는다). 각 원본 로더가 이미 담당 교사 접근을 RLS/RPC
 // 게이트(teaches_student() 등)로 허용하므로, 추가 소유권 검증 없이 그대로
 // 합친다 — 담당이 아닌 학생을 넘기면 각 로더가 빈 배열을 돌려준다.
-export async function loadStudentBoardCardsForTeacherAction(studentId: string): Promise<BoardCard[]> {
+//
+// 2026-09-29(QA #13) — 담당이 아닌 학생이면 원본 RPC 가 "권한이 없습니다"를 raise 해서 서버
+// 액션이 throw(500 로그)했다. 권한 판정은 그대로 두고(RPC 가 여전히 거부한다) 그 거부만 결과값으로
+// 돌려준다. 그 밖의 오류는 예전처럼 throw 한다.
+export type StudentBoardForTeacherResult = { ok: true; cards: BoardCard[] } | { ok: false; error: string };
+
+export async function loadStudentBoardCardsForTeacherAction(studentId: string): Promise<StudentBoardForTeacherResult> {
   const { supabase } = await requireUser();
-  const [homework, mockExams, vocabQuizzes, manualTasks] = await Promise.all([
-    loadStudentHomeworkBatches(supabase, studentId),
-    loadTeacherMockExamAttemptsForStudent(supabase, studentId),
-    loadVocabQuizzes(supabase, studentId),
-    loadBoardManualTasks(supabase, studentId),
-  ]);
-  return [
-    ...homework.map(homeworkToBoardCard),
-    ...mockExams.map(mockExamToBoardCard),
-    ...vocabQuizzes.map(vocabQuizToBoardCard),
-    ...manualTasks.map(manualTaskToBoardCard),
-  ];
+  try {
+    const [homework, mockExams, vocabQuizzes, manualTasks] = await Promise.all([
+      loadStudentHomeworkBatches(supabase, studentId),
+      loadTeacherMockExamAttemptsForStudent(supabase, studentId),
+      loadVocabQuizzes(supabase, studentId),
+      loadBoardManualTasks(supabase, studentId),
+    ]);
+    return {
+      ok: true,
+      cards: [
+        ...homework.map(homeworkToBoardCard),
+        ...mockExams.map(mockExamToBoardCard),
+        ...vocabQuizzes.map(vocabQuizToBoardCard),
+        ...manualTasks.map(manualTaskToBoardCard),
+      ],
+    };
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "";
+    if (message.includes("볼 권한이 없습니다")) return { ok: false, error: "이 학생의 학습 보드를 볼 권한이 없습니다." };
+    throw e;
+  }
 }

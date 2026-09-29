@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { LessonBookingData } from "./lesson-booking-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type LessonItem = {
   sessionId: string;
@@ -44,7 +45,7 @@ export async function loadLessons(
   );
 
   const { data: teacherProfiles } = teacherIds.length
-    ? await supabase.from("profiles").select("id, name").in("id", teacherIds)
+    ? await selectInChunks(teacherIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk))
     : { data: [] as { id: string; name: string }[] };
 
   const enrollmentInfo = new Map(
@@ -62,12 +63,12 @@ export async function loadLessons(
   );
 
   const { data: sessions } = enrollmentIds.length
-    ? await supabase
+    ? await selectInChunks(enrollmentIds, (chunk) => supabase
         .from("legacy_sessions")
         .select(
           "id, enrollment_id, session_number, unit_title, status, scheduled_at, duration_minutes"
         )
-        .in("enrollment_id", enrollmentIds)
+        .in("enrollment_id", chunk))
     : { data: [] as never[] };
 
   const upcoming: LessonItem[] = [];

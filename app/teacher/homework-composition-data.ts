@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R9(레슨 준비 Task 4) — 과제 구성 UI가 키워드를 고를 때 보여줄 후보 목록.
 // 이 세션의 session_content_manifest(Task 2)에 찍힌 출처 오버레이 단원들의
@@ -23,19 +24,19 @@ export async function loadSessionKeywordOptions(
   ) as string[];
   if (unitIds.length === 0) return [];
 
-  const { data: keywordRows, error: keywordError } = await supabase
+  const { data: keywordRows, error: keywordError } = await selectInChunks(unitIds, (chunk) => supabase
     .from("curriculum_overlay_unit_keywords")
     .select("keyword_id")
-    .in("overlay_unit_id", unitIds);
+    .in("overlay_unit_id", chunk));
   if (keywordError) throw new Error(keywordError.message);
 
   const keywordIds = Array.from(new Set((keywordRows ?? []).map((r) => r.keyword_id as string)));
   if (keywordIds.length === 0) return [];
 
-  const { data: keywords, error: subjectKeywordError } = await supabase
+  const { data: keywords, error: subjectKeywordError } = await selectInChunks(keywordIds, (chunk) => supabase
     .from("subject_keywords")
     .select("id, label")
-    .in("id", keywordIds);
+    .in("id", chunk));
   if (subjectKeywordError) throw new Error(subjectKeywordError.message);
 
   return (keywords ?? []).map((k) => ({ id: k.id as string, label: k.label as string }));
@@ -76,18 +77,18 @@ export async function loadSessionHomeworkStatus(
   if (!items || items.length === 0) return [];
 
   const problemIds = items.map((i) => i.problem_id as string);
-  const { data: problems, error: problemsError } = await supabase
+  const { data: problems, error: problemsError } = await selectInChunks(problemIds, (chunk) => supabase
     .from("problems")
     .select("id, format, passage, options")
-    .in("id", problemIds);
+    .in("id", chunk));
   if (problemsError) throw new Error(problemsError.message);
   const problemById = new Map((problems ?? []).map((p) => [p.id as string, p]));
 
   const itemIds = items.map((i) => i.id as string);
-  const { data: attempts, error: attemptsError } = await supabase
+  const { data: attempts, error: attemptsError } = await selectInChunks(itemIds, (chunk) => supabase
     .from("session_homework_attempts")
     .select("homework_item_id, response, submitted")
-    .in("homework_item_id", itemIds);
+    .in("homework_item_id", chunk));
   if (attemptsError) throw new Error(attemptsError.message);
   const attemptByItemId = new Map(
     (attempts ?? []).map((a) => [a.homework_item_id as string, a])

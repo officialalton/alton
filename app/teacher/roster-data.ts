@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadCurriculumOverlayProgressByEnrollment, getCurriculumOverlayProgress } from "@/lib/curriculum-overlay-progress";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type RosterSubject = {
   enrollmentId: string;
@@ -75,27 +76,27 @@ export async function loadRoster(
   const legacySubjectIds = Array.from(new Set(legacyRows.map((e) => e.subject_id)));
   const [{ data: legacyTemplates }, { data: legacySessions }] = await Promise.all([
     legacySubjectIds.length
-      ? supabase
+      ? selectInChunks(legacySubjectIds, (chunk) => supabase
           .from("teacher_curriculum_templates")
           .select("id, subject_id")
           .eq("teacher_id", teacherId)
-          .in("subject_id", legacySubjectIds)
+          .in("subject_id", chunk))
       : Promise.resolve({ data: [] as { id: string; subject_id: string }[] }),
     legacyEnrollmentIds.length
-      ? supabase
+      ? selectInChunks(legacyEnrollmentIds, (chunk) => supabase
           .from("legacy_sessions")
           .select("enrollment_id, status, source_template_unit_id")
-          .in("enrollment_id", legacyEnrollmentIds)
+          .in("enrollment_id", chunk))
       : Promise.resolve({ data: [] as { enrollment_id: string; status: string; source_template_unit_id: string | null }[] }),
   ]);
 
   const templateIdBySubject = new Map((legacyTemplates ?? []).map((t) => [t.subject_id, t.id]));
   const templateIds = Array.from(new Set((legacyTemplates ?? []).map((t) => t.id)));
   const { data: legacyUnits } = templateIds.length
-    ? await supabase
+    ? await selectInChunks(templateIds, (chunk) => supabase
         .from("teacher_curriculum_template_units")
         .select("id, template_id")
-        .in("template_id", templateIds)
+        .in("template_id", chunk))
     : { data: [] as { id: string; template_id: string }[] };
   const unitIdsByTemplate = new Map<string, string[]>();
   for (const u of legacyUnits ?? []) {
@@ -132,10 +133,10 @@ export async function loadRoster(
   const studentIds = Array.from(
     new Set([...legacyRows.map((e) => e.student_id), ...v3Rows.map((r) => r.studentId)])
   );
-  const { data: studentRows } = await supabase
+  const { data: studentRows } = await selectInChunks(studentIds, (chunk) => supabase
     .from("students")
     .select("id, grade, profile:profiles(name)")
-    .in("id", studentIds);
+    .in("id", chunk));
 
   const studentById = new Map(
     (studentRows ?? []).map((s) => [

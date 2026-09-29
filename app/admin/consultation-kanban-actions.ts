@@ -17,6 +17,7 @@ import type { TrialOnboardingPipeline } from "./trial-onboarding-actions";
 import { loadTrialPipelinesBatch } from "./trial-pipeline-data";
 import type { ConsultationClosureType } from "./consultation-kanban-constants";
 import { loadKanbanBoard, loadMyKanbanBoard, type KanbanCard } from "./consultation-kanban-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const CONSULT_CAPABILITY = "manage_consultations";
 
@@ -365,7 +366,7 @@ async function loadConsultationCardDetail(
   if (childCardRows && childCardRows.length > 0) {
     const childIds = childCardRows.map((r) => r.child_id).filter((id): id is string => !!id);
     const { data: childProfiles } = childIds.length
-      ? await admin.from("profiles").select("id, name").in("id", childIds)
+      ? await selectInChunks(childIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk))
       : { data: [] as { id: string; name: string | null }[] };
     const nameById = new Map((childProfiles ?? []).map((p) => [p.id, p.name]));
     childCards = childCardRows.map((r) => ({
@@ -479,16 +480,16 @@ export async function listClosedConsultationsAction(): Promise<{
     .is("consultation_id", null);
   if (linkRows && linkRows.length > 0) {
     const linkById = new Map(linkRows.map((l) => [l.id, l]));
-    const { data: studentRows } = await admin
+    const { data: studentRows } = await selectInChunks(linkRows.map((l) => l.id), (chunk) => admin
       .from("trial_onboarding_link_students")
       .select("id, link_id, student_name, child_auth_user_id")
-      .in("link_id", linkRows.map((l) => l.id))
-      .eq("status", "created");
+      .in("link_id", chunk)
+      .eq("status", "created"));
     const childIds = (studentRows ?? [])
       .map((s) => s.child_auth_user_id)
       .filter((id): id is string => !!id);
     const { data: activeContracts } = childIds.length
-      ? await admin.from("contracts").select("child_id, updated_at").eq("status", "active").in("child_id", childIds)
+      ? await selectInChunks(childIds, (chunk) => admin.from("contracts").select("child_id, updated_at").eq("status", "active").in("child_id", chunk))
       : { data: [] as { child_id: string; updated_at: string }[] };
     const activeContractByChildId = new Map((activeContracts ?? []).map((c) => [c.child_id, c.updated_at]));
 

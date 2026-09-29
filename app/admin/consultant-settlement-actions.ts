@@ -9,6 +9,7 @@
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { maskAccountNumber } from "@/app/teacher/settlement-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const PAYOUT_CAPABILITY = "정산권한";
 
@@ -104,7 +105,7 @@ export async function listConsultantPayoutPeriodEventsAction(periodId: string): 
   if (error) throw new Error(error.message);
   const actorIds = Array.from(new Set((data ?? []).map((e) => e.actor_id).filter((id): id is string => Boolean(id))));
   const { data: actors } = actorIds.length
-    ? await admin.from("profiles").select("id, name").in("id", actorIds)
+    ? await selectInChunks(actorIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk))
     : { data: [] as { id: string; name: string | null }[] };
   const nameById = new Map((actors ?? []).map((a) => [a.id, a.name ?? ""]));
   return (data ?? []).map((e) => ({

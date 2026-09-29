@@ -8,6 +8,7 @@ import {
   processContractDispatchQueue,
   type ContractDispatchJobRow,
 } from "@/lib/contract-dispatch/dispatcher";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // 2026-09-28 — 초기 고객 절차 단순화 4단계: 관리자 화면용 outbox 조회·실행 액션.
 // 실제 DocuSign 발송은 CONTRACT_AUTO_DISPATCH_ENABLED=true일 때만 일어난다
@@ -34,7 +35,7 @@ export async function listContractDispatchJobs(): Promise<{
   const childIds = Array.from(new Set(rows.map((r) => r.child_id)));
   const childNameById = new Map<string, string>();
   if (childIds.length > 0) {
-    const { data: profiles } = await admin.from("profiles").select("id, name").in("id", childIds);
+    const { data: profiles } = await selectInChunks(childIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk));
     for (const p of profiles ?? []) childNameById.set(p.id, p.name);
   }
 

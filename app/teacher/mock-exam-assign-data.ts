@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // 고정형 SAT 모의고사 V1 — 교사 배정 화면 데이터.
 //
@@ -32,7 +33,7 @@ export async function loadTeacherMockExamStudents(supabase: SupabaseClient, teac
 
   // `students.id` 가 곧 `profiles.id`(1:1) — 이름은 profiles 에서 따로 붙인다(nested-select 는 FK 가
   // students 를 가리켜 PostgREST 스키마 캐시 오류가 난다. app/student/teacher-data.ts 와 동일 패턴).
-  const { data: profiles, error: profilesError } = await supabase.from("profiles").select("id, name").in("id", studentIds);
+  const { data: profiles, error: profilesError } = await selectInChunks(studentIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk));
   if (profilesError) throw new Error(profilesError.message);
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   return studentIds

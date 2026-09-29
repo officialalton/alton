@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type SubjectKeyword = {
   id: string;
@@ -46,24 +47,24 @@ export async function loadSubjectCatalog(
 
   // N+1 방지: 단원/키워드/단원-키워드 관계를 과목 목록 전체에 대해 각각 한 번씩만 조회한다.
   const [{ data: units }, { data: keywords }] = await Promise.all([
-    supabase
+    selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_template_units")
       .select("id, subject_id, position, unit_title, note")
-      .in("subject_id", subjectIds)
-      .order("position", { ascending: true }),
-    supabase
+      .in("subject_id", chunk)
+      .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
+    selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_keywords")
       .select("id, subject_id, label, status")
-      .in("subject_id", subjectIds)
-      .order("label", { ascending: true }),
+      .in("subject_id", chunk)
+      .order("label", { ascending: true }), { sort: orderComparator(["label", true]) }),
   ]);
 
   const unitIds = (units ?? []).map((u) => u.id);
   const { data: unitKeywordRows } = unitIds.length
-    ? await supabase
+    ? await selectInChunks(unitIds, (chunk) => supabase
         .from("subject_template_unit_keywords")
         .select("unit_id, keyword_id")
-        .in("unit_id", unitIds)
+        .in("unit_id", chunk))
     : { data: [] as { unit_id: string; keyword_id: string }[] };
 
   const keywordIdsByUnit = new Map<string, string[]>();

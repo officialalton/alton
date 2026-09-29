@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type ParentListItem = {
   id: string;
@@ -90,28 +91,7 @@ export async function loadEmailById(userIds: string[]): Promise<Map<string, stri
   return emailById;
 }
 
-// 2026-09-29(QA 포털 점검) — `.in(col, ids)` 는 id 가 ~200개를 넘으면 PostgREST GET URL 이
-// 너무 길어져("URI too long") 실패한다. 학부모 379명인 로컬 DB 에서 관리자 Users 탭이
-// "불러오지 못했습니다"로 죽었고, 오류를 확인하지 않는 학생·교사 조회는 관계·과목 열이
-// 조용히 비었다. id 목록을 나눠 조회하고 합친다(청크 안에서 정렬은 유지되고, 한 id 의
-// 행은 한 청크에만 있으므로 id 별 순서도 그대로다).
-const IN_CHUNK_SIZE = 100;
-
-type ChunkResult<T> = PromiseLike<{ data: T[] | null; error: { code?: string; message?: string } | null }>;
-
-export async function selectInChunks<T>(
-  ids: string[],
-  run: (chunk: string[]) => ChunkResult<T>,
-  size: number = IN_CHUNK_SIZE
-): Promise<{ data: T[]; error: { code?: string; message?: string } | null }> {
-  const rows: T[] = [];
-  for (let i = 0; i < ids.length; i += size) {
-    const { data, error } = await run(ids.slice(i, i + size));
-    if (error) return { data: rows, error };
-    if (data) rows.push(...data);
-  }
-  return { data: rows, error: null };
-}
+export { selectInChunks };
 
 // P4-1(B) — 아카이브된 가구 id 집합. 관리자 목록에서 그 가구의 보호자·자녀를
 // 제외하기 위해 목록당 왕복 1회만 추가한다(아카이브된 가구만 읽으므로 보통 0~수십 행).

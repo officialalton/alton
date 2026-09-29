@@ -14,6 +14,7 @@ import {
   recreateCalendarEventAfterDeletion,
 } from "@/lib/booking/external-change-resolution";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const BOOKING_CAPABILITY = "예약관리권한";
 
@@ -565,11 +566,11 @@ function toSessionJudgmentRows(
 
 async function reopenedSessionIdSet(admin: ReturnType<typeof createAdminClient>, sessionIds: string[]): Promise<Set<string>> {
   if (sessionIds.length === 0) return new Set();
-  const { data } = await admin
+  const { data } = await selectInChunks(sessionIds, (chunk) => admin
     .from("session_status_events")
     .select("session_id")
     .eq("event_type", "reopened")
-    .in("session_id", sessionIds);
+    .in("session_id", chunk));
   return new Set((data ?? []).map((r) => r.session_id as string));
 }
 
@@ -580,7 +581,7 @@ const SESSION_JUDGMENT_SELECT =
 
 async function incidentReportCounts(admin: ReturnType<typeof createAdminClient>, sessionIds: string[]): Promise<Map<string, number>> {
   if (sessionIds.length === 0) return new Map();
-  const { data } = await admin.from("session_incident_reports").select("session_id").in("session_id", sessionIds);
+  const { data } = await selectInChunks(sessionIds, (chunk) => admin.from("session_incident_reports").select("session_id").in("session_id", chunk));
   const counts = new Map<string, number>();
   for (const r of data ?? []) {
     const id = r.session_id as string;

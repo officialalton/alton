@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadArchivedHouseholdIds } from "./users-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type MatchingTeacherCandidate = {
   id: string;
@@ -38,21 +39,21 @@ export async function loadStudentsForMatching(supabase: SupabaseClient): Promise
   if (!students || students.length === 0) return [];
 
   const studentIds = students.map((s) => s.id);
-  const { data: childLinks } = await supabase
+  const { data: childLinks } = await selectInChunks(studentIds, (chunk) => supabase
     .from("household_members")
     .select("profile_id, household_id")
     .eq("role", "child")
-    .in("profile_id", studentIds);
+    .in("profile_id", chunk));
 
   const householdIdByStudent = new Map<string, string>();
   for (const l of childLinks ?? []) householdIdByStudent.set(l.profile_id, l.household_id);
 
   const householdIds = Array.from(new Set(Array.from(householdIdByStudent.values())));
-  const { data: guardianLinks } = await supabase
+  const { data: guardianLinks } = await selectInChunks(householdIds.length > 0 ? householdIds : [""], (chunk) => supabase
     .from("household_members")
     .select("household_id, guardian:profiles(name)")
     .eq("role", "guardian")
-    .in("household_id", householdIds.length > 0 ? householdIds : [""]);
+    .in("household_id", chunk));
 
   const guardianNamesByHousehold = new Map<string, string[]>();
   for (const l of guardianLinks ?? []) {
@@ -94,10 +95,10 @@ export async function loadTeacherCandidatesBySubject(
   // 요구하므로, 여기서 걸러두지 않으면 UI에서 고를 수 있는데 실제 배정
   // 시점에는 거부되는 불일치가 생긴다.
   const templateIds = links.map((l) => l.id as string);
-  const { data: unitRows } = await supabase
+  const { data: unitRows } = await selectInChunks(templateIds, (chunk) => supabase
     .from("teacher_curriculum_template_units")
     .select("template_id")
-    .in("template_id", templateIds);
+    .in("template_id", chunk));
   const templateIdsWithUnits = new Set((unitRows ?? []).map((u) => u.template_id as string));
 
   const bySubject: Record<string, MatchingTeacherCandidate[]> = {};

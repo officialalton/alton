@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // P2/P3 5단계 — 수업 화면 맨 위에 "지금 어디에 있는가"를 보여주기 위한 조회.
 // 커리큘럼 → 회차 준비 → 수업 → 복습이 한 줄기로 읽히려면, 수업 화면에서도
@@ -26,10 +27,10 @@ export async function loadSessionLessonContext(
     return { unitTitle: null, goal: null, supplementTitles: [], primaryUnitId: null };
 
   const unitIds = links.map((l) => l.overlay_unit_id as string);
-  const { data: units } = await supabase
+  const { data: units } = await selectInChunks(unitIds, (chunk) => supabase
     .from("curriculum_overlay_units")
     .select("id, unit_title")
-    .in("id", unitIds);
+    .in("id", chunk));
   const titleById = new Map((units ?? []).map((u) => [u.id as string, u.unit_title as string]));
 
   const primaryId = links.find((l) => l.role === "primary")?.overlay_unit_id as string | undefined;

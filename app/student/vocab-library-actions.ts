@@ -1,5 +1,6 @@
 "use server";
 
+import { selectInChunks } from "@/lib/select-in-chunks";
 import { requireUser } from "@/lib/auth";
 import type { VocabQuizItem } from "./vocab-library-data";
 
@@ -104,12 +105,15 @@ async function collectWordPool(
 ): Promise<WordPoolEntry[]> {
   const pool: WordPoolEntry[] = [];
   if (source.customWords || (source.folderIds && source.folderIds.length)) {
-    let query = supabase
-      .from("vocab_words")
-      .select("word, example, example2, similar_words, antonym_words, folder_id")
-      .eq("student_id", studentId);
-    if (source.folderIds && source.folderIds.length) query = query.in("folder_id", source.folderIds);
-    const { data } = await query;
+    const wordsQuery = () =>
+      supabase
+        .from("vocab_words")
+        .select("word, example, example2, similar_words, antonym_words, folder_id")
+        .eq("student_id", studentId);
+    const { data } =
+      source.folderIds && source.folderIds.length
+        ? await selectInChunks(source.folderIds, (chunk) => wordsQuery().in("folder_id", chunk))
+        : await wordsQuery();
     for (const w of data ?? []) {
       const synonyms = w.similar_words as string[] | null;
       if (!synonyms || synonyms.length === 0) continue;
@@ -121,13 +125,15 @@ async function collectWordPool(
     }
   }
   if (source.bookIds.length) {
-    let query = supabase
-      .from("vocab_library_words")
-      .select("word, example1, example2, synonym_words, antonym_words, difficulty")
-      .in("book_id", source.bookIds);
-    if (source.difficultyMin != null) query = query.gte("difficulty", source.difficultyMin);
-    if (source.difficultyMax != null) query = query.lte("difficulty", source.difficultyMax);
-    const { data } = await query;
+    const { data } = await selectInChunks(source.bookIds, (chunk) => {
+      let query = supabase
+        .from("vocab_library_words")
+        .select("word, example1, example2, synonym_words, antonym_words, difficulty")
+        .in("book_id", chunk);
+      if (source.difficultyMin != null) query = query.gte("difficulty", source.difficultyMin);
+      if (source.difficultyMax != null) query = query.lte("difficulty", source.difficultyMax);
+      return query;
+    });
     for (const w of data ?? []) {
       const synonyms = w.synonym_words as string[] | null;
       if (!synonyms || synonyms.length === 0) continue;

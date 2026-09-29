@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R9(Task 3) — 학생별 운영 커리큘럼(오버레이) 읽기 전용 로더. RLS
 // (20261229000000_r9_student_curriculum_overlay.sql,
@@ -66,7 +67,7 @@ export async function loadStudentCurriculum(
     new Set((units ?? []).map((u) => u.source_unit_id).filter((id): id is string => Boolean(id)))
   );
   const { data: sourceUnitRows } = sourceUnitIds.length
-    ? await supabase.from("subject_template_units").select("id, updated_at").in("id", sourceUnitIds)
+    ? await selectInChunks(sourceUnitIds, (chunk) => supabase.from("subject_template_units").select("id, updated_at").in("id", chunk))
     : { data: [] as { id: string; updated_at: string }[] };
   const sourceUpdatedAtById = new Map((sourceUnitRows ?? []).map((r) => [r.id as string, r.updated_at as string]));
 
@@ -74,16 +75,16 @@ export async function loadStudentCurriculum(
   // 대해 키워드/자료 관계를 각각 한 번씩만 조회한다.
   const [{ data: keywordRows }, { data: materialRows }] = await Promise.all([
     unitIds.length
-      ? supabase
+      ? selectInChunks(unitIds, (chunk) => supabase
           .from("curriculum_overlay_unit_keywords")
           .select("overlay_unit_id, keyword_id")
-          .in("overlay_unit_id", unitIds)
+          .in("overlay_unit_id", chunk))
       : Promise.resolve({ data: [] as { overlay_unit_id: string; keyword_id: string }[] }),
     unitIds.length
-      ? supabase
+      ? selectInChunks(unitIds, (chunk) => supabase
           .from("curriculum_overlay_unit_materials")
           .select("overlay_unit_id, curriculum_doc_id")
-          .in("overlay_unit_id", unitIds)
+          .in("overlay_unit_id", chunk))
       : Promise.resolve({ data: [] as { overlay_unit_id: string; curriculum_doc_id: string }[] }),
   ]);
 
@@ -95,7 +96,7 @@ export async function loadStudentCurriculum(
   }
   const allKeywordIds = Array.from(new Set((keywordRows ?? []).map((r) => r.keyword_id)));
   const { data: keywordLabelRows } = allKeywordIds.length
-    ? await supabase.from("subject_keywords").select("id, label").in("id", allKeywordIds)
+    ? await selectInChunks(allKeywordIds, (chunk) => supabase.from("subject_keywords").select("id, label").in("id", chunk))
     : { data: [] as { id: string; label: string }[] };
   const labelById = new Map((keywordLabelRows ?? []).map((k) => [k.id as string, k.label as string]));
   const materialIdsByUnit = new Map<string, string[]>();

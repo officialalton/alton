@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadArchivedHouseholdIds } from "./users-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type PendingConsult = {
   id: string;
@@ -70,11 +71,11 @@ export async function loadAdminDashboard(
 
   const enrollmentIds = (openEnrollments ?? []).map((e) => e.id as string);
   const { data: activeAssignments } = enrollmentIds.length
-    ? await supabase
+    ? await selectInChunks(enrollmentIds, (chunk) => supabase
         .from("teacher_assignments")
         .select("subject_enrollment_id")
         .eq("status", "active")
-        .in("subject_enrollment_id", enrollmentIds)
+        .in("subject_enrollment_id", chunk))
     : { data: [] as { subject_enrollment_id: string }[] };
 
   const matchedEnrollmentIds = new Set(
@@ -91,11 +92,11 @@ export async function loadAdminDashboard(
   // 아카이브된 가구의 자녀는 매칭 대상이 아니다(매칭 탭과 같은 기준).
   const archivedHouseholdIds = await loadArchivedHouseholdIds(supabase);
   const { data: childLinks } = waitingChildIds.length
-    ? await supabase
+    ? await selectInChunks(waitingChildIds, (chunk) => supabase
         .from("household_members")
         .select("profile_id, household_id")
         .eq("role", "child")
-        .in("profile_id", waitingChildIds)
+        .in("profile_id", chunk))
     : { data: [] as { profile_id: string; household_id: string }[] };
   const householdByChild = new Map(
     (childLinks ?? []).map((l) => [l.profile_id as string, l.household_id as string])
@@ -107,7 +108,7 @@ export async function loadAdminDashboard(
   });
 
   const { data: pendingStudentRows } = visibleChildIds.length
-    ? await supabase.from("students").select("id, profile:profiles(name)").in("id", visibleChildIds)
+    ? await selectInChunks(visibleChildIds, (chunk) => supabase.from("students").select("id, profile:profiles(name)").in("id", chunk))
     : { data: [] as { id: string; profile: unknown }[] };
 
   const { data: pendingTeacherRows } = await supabase

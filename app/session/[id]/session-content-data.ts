@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R9(레슨 준비 Task 2) — session_content_manifest 리더. 이 파일은 절대
 // 키워드/단원을 조인해 후보를 다시 계산하지 않는다(그건 pin 이전 스테이징
@@ -56,10 +57,10 @@ export async function loadSessionContentManifest(
   // "지금도 여전히 선택 가능"의 증거다).
   const visibleSectionIds = new Set<string>();
   if (sectionIds.length > 0) {
-    const { data: visibleSections, error: sectionError } = await supabase
+    const { data: visibleSections, error: sectionError } = await selectInChunks(sectionIds, (chunk) => supabase
       .from("curriculum_doc_section_keywords_selectable")
       .select("section_id")
-      .in("section_id", sectionIds);
+      .in("section_id", chunk));
     if (sectionError) throw new Error(sectionError.message);
     for (const row of visibleSections ?? []) visibleSectionIds.add(row.section_id as string);
   }
@@ -68,20 +69,20 @@ export async function loadSessionContentManifest(
   // 떨어졌다고 이미 고정된 교재가 사라지면 안 된다.
   const visibleDocIds = new Set<string>();
   if (docIds.length > 0) {
-    const { data: visibleDocs, error: docError } = await supabase
+    const { data: visibleDocs, error: docError } = await selectInChunks(docIds, (chunk) => supabase
       .from("curriculum_docs_selectable")
       .select("curriculum_doc_id")
-      .in("curriculum_doc_id", docIds);
+      .in("curriculum_doc_id", chunk));
     if (docError) throw new Error(docError.message);
     for (const row of visibleDocs ?? []) visibleDocIds.add(row.curriculum_doc_id as string);
   }
 
   const visibleProblemIds = new Set<string>();
   if (problemIds.length > 0) {
-    const { data: visibleProblems, error: problemError } = await supabase
+    const { data: visibleProblems, error: problemError } = await selectInChunks(problemIds, (chunk) => supabase
       .from("problem_keywords_selectable")
       .select("problem_id")
-      .in("problem_id", problemIds);
+      .in("problem_id", chunk));
     if (problemError) throw new Error(problemError.message);
     for (const row of visibleProblems ?? []) visibleProblemIds.add(row.problem_id as string);
   }

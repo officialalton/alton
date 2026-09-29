@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { LibrarySubject } from "@/app/student/materials-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 function extractName(rel: unknown): string {
   const row = Array.isArray(rel) ? rel[0] : rel;
@@ -69,18 +70,18 @@ export async function loadTeacherMaterialsLibrary(
   const subjectIds = Array.from(subjects.keys());
   if (subjectIds.length === 0) return [];
 
-  const { data: docs } = await supabase
+  const { data: docs } = await selectInChunks(subjectIds, (chunk) => supabase
     .from("curriculum_docs")
     .select("id, title, subject_id, unit_id")
-    .in("subject_id", subjectIds)
+    .in("subject_id", chunk)
     .eq("status", "published")
-    .order("title", { ascending: true });
+    .order("title", { ascending: true }), { sort: orderComparator(["title", true]) });
 
   const unitIds = Array.from(
     new Set((docs ?? []).map((d) => d.unit_id).filter((id): id is string => !!id))
   );
   const { data: units } = unitIds.length
-    ? await supabase.from("subject_template_units").select("id, unit_title").in("id", unitIds)
+    ? await selectInChunks(unitIds, (chunk) => supabase.from("subject_template_units").select("id, unit_title").in("id", chunk))
     : { data: [] as { id: string; unit_title: string }[] };
   const unitTitleById = new Map((units ?? []).map((u) => [u.id, u.unit_title]));
 

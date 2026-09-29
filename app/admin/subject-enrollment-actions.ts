@@ -20,6 +20,7 @@ import {
 } from "@/lib/enrollment/subject-enrollment-decision";
 import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
 import { assertTeacherHasOperatingCurriculum } from "@/lib/enrollment/teacher-curriculum-check";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const MATCHING_CAPABILITY = "매칭권한";
 
@@ -57,11 +58,11 @@ export async function listSubjectEnrollmentsForChild(
   if (!data || data.length === 0) return [];
 
   const enrollmentIds = data.map((r) => r.id);
-  const { data: activeAssignments } = await admin
+  const { data: activeAssignments } = await selectInChunks(enrollmentIds, (chunk) => admin
     .from("teacher_assignments")
     .select("id, subject_enrollment_id, teacher_id, teacher:profiles!teacher_assignments_teacher_id_fkey(name)")
-    .in("subject_enrollment_id", enrollmentIds)
-    .eq("status", "active");
+    .in("subject_enrollment_id", chunk)
+    .eq("status", "active"));
 
   const teacherByEnrollment = new Map(
     (activeAssignments ?? []).map((a) => [

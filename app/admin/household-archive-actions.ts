@@ -15,6 +15,7 @@ import {
   type HouseholdArchiveResult,
 } from "@/lib/household/household-archive";
 import { loadEmailById } from "./users-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 const ARCHIVE_CAPABILITY = "매칭권한";
 
@@ -87,20 +88,20 @@ export async function listArchivedHouseholdsAction(): Promise<ArchivedHouseholdL
 
   const [{ data: members, error: membersError }, { data: profiles, error: profilesError }, { data: events, error: eventsError }] =
     await Promise.all([
-      admin
+      selectInChunks(householdIds, (chunk) => admin
         .from("household_members")
         .select("household_id, profile_id, role, child:profiles(name)")
         .eq("role", "child")
-        .in("household_id", householdIds),
+        .in("household_id", chunk)),
       profileIds.length
-        ? admin.from("profiles").select("id, name").in("id", profileIds)
+        ? selectInChunks(profileIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk))
         : Promise.resolve({ data: [], error: null }),
-      admin
+      selectInChunks(householdIds, (chunk) => admin
         .from("household_archive_events")
         .select("household_id, action, detail, created_at")
         .eq("action", "archived")
-        .in("household_id", householdIds)
-        .order("created_at", { ascending: false }),
+        .in("household_id", chunk)
+        .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) }),
     ]);
   if (membersError) throw new Error(membersError.message);
   if (profilesError) throw new Error(profilesError.message);

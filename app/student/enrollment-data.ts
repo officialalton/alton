@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // R5 — 학생/보호자 "과목 수강 현황" 화면 데이터 로더(읽기 전용).
 //
@@ -50,13 +51,13 @@ export async function loadStudentSubjectEnrollments(
   if (!enrollments || enrollments.length === 0) return [];
 
   const enrollmentIds = enrollments.map((e) => e.id);
-  const { data: assignments } = await supabase
+  const { data: assignments } = await selectInChunks(enrollmentIds, (chunk) => supabase
     .from("teacher_assignments")
     .select(
       "id, subject_enrollment_id, teacher_id, status, effective_from, effective_until, reason, teacher:profiles!teacher_assignments_teacher_id_fkey(name)"
     )
-    .in("subject_enrollment_id", enrollmentIds)
-    .order("effective_from", { ascending: true });
+    .in("subject_enrollment_id", chunk)
+    .order("effective_from", { ascending: true }), { sort: orderComparator(["effective_from", true]) });
 
   const byEnrollment = new Map<string, TeacherAssignmentRecord[]>();
   for (const a of assignments ?? []) {

@@ -15,6 +15,7 @@
 
 import { requireUser } from "@/lib/auth";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type HouseholdMessage = {
   id: string;
@@ -244,10 +245,10 @@ export async function getMyHouseholdConsultantsAction(): Promise<HouseholdChildC
   const childIds = (children ?? []).map((c) => c.profile_id as string);
   if (childIds.length === 0) return [];
 
-  const { data: assignments, error: assignmentsError } = await supabase
+  const { data: assignments, error: assignmentsError } = await selectInChunks(childIds, (chunk) => supabase
     .from("consultant_assignments")
     .select("student_id, consultant_id, consultant:profiles!consultant_assignments_consultant_id_fkey(id, name)")
-    .in("student_id", childIds);
+    .in("student_id", chunk));
   if (assignmentsError) throw new Error(assignmentsError.message);
 
   const nameByChild = new Map(

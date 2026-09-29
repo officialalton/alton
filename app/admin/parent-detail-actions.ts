@@ -2,6 +2,7 @@
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { setStudentConsultantAction } from "./consultant-assignment-actions";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 관리자 Users > 학부모 상세(2026-09-24, R12 후속). 연결 자녀·담당 컨설턴트·
 // 계약 현황·연락 이력을 한 화면에서 보고, 자녀별 컨설턴트 배정을 바꿀 수
@@ -66,11 +67,11 @@ export async function getParentDetailAction(parentId: string): Promise<ParentDet
       ? supabase.from("household_members").select("profile_id").eq("household_id", householdId).eq("role", "child")
       : Promise.resolve({ data: [] as { profile_id: string }[] }),
     householdIds.length > 0
-      ? supabase
+      ? selectInChunks(householdIds, (chunk) => supabase
           .from("contracts")
           .select("id, status, created_at, voided_at, void_reason, child:profiles!contracts_child_id_fkey(name)")
-          .in("household_id", householdIds)
-          .order("created_at", { ascending: false })
+          .in("household_id", chunk)
+          .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) })
       : Promise.resolve({ data: [] as never[] }),
     householdId
       ? supabase
@@ -86,13 +87,13 @@ export async function getParentDetailAction(parentId: string): Promise<ParentDet
 
   const [{ data: childProfiles }, { data: consultantLinks }] = await Promise.all([
     childIds.length > 0
-      ? supabase.from("students").select("id, status, profile:profiles(name)").in("id", childIds)
+      ? selectInChunks(childIds, (chunk) => supabase.from("students").select("id, status, profile:profiles(name)").in("id", chunk))
       : Promise.resolve({ data: [] as never[] }),
     childIds.length > 0
-      ? supabase
+      ? selectInChunks(childIds, (chunk) => supabase
           .from("consultant_assignments")
           .select("student_id, consultant_id, consultant:profiles!consultant_assignments_consultant_id_fkey(name)")
-          .in("student_id", childIds)
+          .in("student_id", chunk))
       : Promise.resolve({ data: [] as never[] }),
   ]);
 

@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { composeProblemText } from "@/lib/problem-question";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // P2 3단계 — 수업·복습 화면이 "고정된 문제 버전"을 실제로 읽는 경로.
 // session_content_manifest는 어떤 문제를 썼는지와 그 시점의 버전만 담는다.
@@ -133,7 +134,7 @@ export async function loadHomeworkProblems(
   const missing = rows.filter((r) => !r.problem_version_id).map((r) => r.problem_id as string);
   const publishedByProblem = new Map<string, string>();
   if (missing.length) {
-    const { data } = await supabase.from("problems").select("id, published_version_id").in("id", missing);
+    const { data } = await selectInChunks(missing, (chunk) => supabase.from("problems").select("id, published_version_id").in("id", chunk));
     for (const p of data ?? []) if (p.published_version_id) publishedByProblem.set(p.id as string, p.published_version_id as string);
   }
   return buildSessionProblems(
@@ -177,10 +178,10 @@ async function buildSessionProblems(
     // 학생·학부모는 RLS 로 비어 그대로 남는다.
     const missingIds = pinnedVersionIds.filter((id) => !versionById.has(id));
     if (missingIds.length) {
-      const { data: direct } = await supabase
+      const { data: direct } = await selectInChunks(missingIds, (chunk) => supabase
         .from("problem_versions")
         .select("id, problem_id, passage, question, options, correct_index, explanation, difficulty, answers, figure, statements")
-        .in("id", missingIds);
+        .in("id", chunk));
       for (const v of direct ?? []) versionById.set(v.id as string, v);
     }
   }
@@ -201,7 +202,7 @@ async function buildSessionProblems(
     // 학생은 RLS 로 비어 그대로 남고, 아래에서 선택지 유무로 추정한다.
     const missing = rows.map((r) => r.problemId).filter((id) => !formatByProblemId.has(id));
     if (missing.length) {
-      const { data: direct } = await supabase.from("problems").select("id, format, sat_domain").in("id", missing);
+      const { data: direct } = await selectInChunks(missing, (chunk) => supabase.from("problems").select("id, format, sat_domain").in("id", chunk));
       for (const p of direct ?? []) {
         formatByProblemId.set(p.id as string, toFormat(p.format as string));
         satDomainByProblemId.set(p.id as string, (p.sat_domain as string | null) ?? null);
@@ -374,7 +375,7 @@ export async function loadPlannedProblems(
   const problemIds = (preview?.problems ?? []).map((p) => p.problemId);
   const satDomainByProblemId = new Map<string, string | null>();
   if (problemIds.length) {
-    const { data: rows } = await supabase.from("problems").select("id, sat_domain").in("id", problemIds);
+    const { data: rows } = await selectInChunks(problemIds, (chunk) => supabase.from("problems").select("id, sat_domain").in("id", chunk));
     for (const r of rows ?? []) satDomainByProblemId.set(r.id as string, (r.sat_domain as string | null) ?? null);
   }
   return toPlannedSessionProblems(preview?.problems, satDomainByProblemId);

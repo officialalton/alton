@@ -13,6 +13,7 @@ import {
   type SyncOutcome,
 } from "@/lib/curriculum-drive/folder-sync";
 import { extensionForKind, kindForMime, probePdf, sha256Hex } from "@/lib/curriculum-assets/pdf";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // Drive 기반 PDF·영상 자료 — 관리자 서버 액션.
 //
@@ -101,13 +102,10 @@ export async function listKeywordDriveFilesAction(keywordId: string): Promise<Dr
     const files = data.files ?? [];
 
     const { data: registered } = files.length
-      ? await supabase
+      ? await selectInChunks(files.map((f) => f.id), (chunk) => supabase
           .from("curriculum_docs")
           .select("id, source_drive_file_id")
-          .in(
-            "source_drive_file_id",
-            files.map((f) => f.id)
-          )
+          .in("source_drive_file_id", chunk))
       : { data: [] as { id: string; source_drive_file_id: string }[] };
     const docByFile = new Map((registered ?? []).map((r) => [r.source_drive_file_id as string, r.id as string]));
 
@@ -549,12 +547,12 @@ export async function syncSubjectDriveMaterialsAction(subjectId: string): Promis
   const keywordRows = (keywords ?? []) as { id: string; label: string }[];
   if (keywordRows.length === 0) return { state: "no_folders", reason: "이 과목에 키워드가 없습니다." };
 
-  const { data: folders } = await supabase
+  const { data: folders } = await selectInChunks(keywordRows.map((k) => k.id), (chunk) => supabase
     .from("curriculum_drive_folders")
     .select("ref_id, drive_folder_id")
     .eq("scope", "keyword")
-    .in("ref_id", keywordRows.map((k) => k.id))
-    .not("drive_folder_id", "is", null);
+    .in("ref_id", chunk)
+    .not("drive_folder_id", "is", null));
   const folderByKeyword = new Map(
     ((folders ?? []) as { ref_id: string; drive_folder_id: string }[]).map((f) => [f.ref_id, f.drive_folder_id])
   );

@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R9 corrective — v3 과제(session_homework_items, 20261235000000/20261240000000)
 // 학생 조회 리더. 기존 app/student/homework-data.ts(legacy homework_items,
@@ -42,19 +43,19 @@ export async function loadStudentHomeworkV3(
   if (!items || items.length === 0) return [];
 
   const problemIds = items.map((i) => i.problem_id as string);
-  const { data: problems, error: problemsError } = await supabase
+  const { data: problems, error: problemsError } = await selectInChunks(problemIds, (chunk) => supabase
     .from("problems")
     .select("id, status, format, passage, options")
-    .in("id", problemIds);
+    .in("id", chunk));
   if (problemsError) throw new Error(problemsError.message);
   const problemById = new Map((problems ?? []).map((p) => [p.id as string, p]));
 
   const itemIds = items.map((i) => i.id as string);
-  const { data: attempts, error: attemptsError } = await supabase
+  const { data: attempts, error: attemptsError } = await selectInChunks(itemIds, (chunk) => supabase
     .from("session_homework_attempts")
     .select("id, homework_item_id, response, submitted")
-    .in("homework_item_id", itemIds)
-    .eq("student_id", studentId);
+    .in("homework_item_id", chunk)
+    .eq("student_id", studentId));
   if (attemptsError) throw new Error(attemptsError.message);
   const attemptByItemId = new Map(
     (attempts ?? []).map((a) => [a.homework_item_id as string, a])
@@ -117,18 +118,18 @@ export async function loadStudentHomeworkSets(
 
   const sessionIds = Array.from(new Set(items.map((i) => i.session_id as string)));
   const [{ data: sessions }, { data: work }] = await Promise.all([
-    supabase
+    selectInChunks(sessionIds, (chunk) => supabase
       .from("sessions")
       .select(
         "id, reservation:reservations!sessions_reservation_id_fkey(starts_at), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
       )
-      .in("id", sessionIds),
-    supabase
+      .in("id", chunk)),
+    selectInChunks(sessionIds, (chunk) => supabase
       .from("session_problem_work")
       .select("session_id, problem_id, submitted_at, graded_at")
       .eq("student_id", studentId)
       .eq("source", "homework")
-      .in("session_id", sessionIds),
+      .in("session_id", chunk)),
   ]);
   const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<string, unknown> | null | undefined;
   const sessionById = new Map(

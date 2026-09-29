@@ -13,6 +13,7 @@ import {
   type TerminationImpactReservation,
   type TerminationResolution,
 } from "@/lib/enrollment/teacher-assignment-termination";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 const MATCHING_CAPABILITY = "매칭권한";
 
@@ -67,14 +68,14 @@ export async function listTerminationRequests(): Promise<TerminationRequestListI
   const assignmentIds = Array.from(new Set(data.map((r) => r.teacher_assignment_id as string)));
 
   const [{ data: enrollmentRows }, { data: assignmentRows }] = await Promise.all([
-    admin
+    selectInChunks(enrollmentIds, (chunk) => admin
       .from("subject_enrollments")
       .select("id, subject_id, child:profiles!subject_enrollments_child_id_fkey(name), subject:subjects(name)")
-      .in("id", enrollmentIds),
-    admin
+      .in("id", chunk)),
+    selectInChunks(assignmentIds, (chunk) => admin
       .from("teacher_assignments")
       .select("id, teacher:profiles!teacher_assignments_teacher_id_fkey(name)")
-      .in("id", assignmentIds),
+      .in("id", chunk)),
   ]);
 
   const enrollmentById = new Map((enrollmentRows ?? []).map((e) => [e.id as string, e]));

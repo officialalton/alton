@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // 2026-09-16(제품 오너 2차 정정) — 과제는 수업(세션)과 무관하다. 발급 자체는
 // lib/homework-batch-actions.ts(issueHomeworkBatchAction)가 한다. 이 파일은 교사 포털
@@ -14,11 +15,11 @@ export async function loadStudentSubjectKeywords(supabase: SupabaseClient, stude
     .eq("child_id", studentId);
   const subjectIds = Array.from(new Set((enrollments ?? []).map((e) => e.subject_id as string)));
   if (subjectIds.length === 0) return [];
-  const { data: keywords } = await supabase
+  const { data: keywords } = await selectInChunks(subjectIds, (chunk) => supabase
     .from("subject_keywords")
     .select("id, label")
-    .in("subject_id", subjectIds)
+    .in("subject_id", chunk)
     .eq("status", "active")
-    .order("label", { ascending: true });
+    .order("label", { ascending: true }), { sort: orderComparator(["label", true]) });
   return (keywords ?? []).map((k) => ({ id: k.id as string, label: k.label as string }));
 }

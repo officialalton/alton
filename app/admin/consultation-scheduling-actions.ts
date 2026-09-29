@@ -4,6 +4,7 @@ import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
 import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // M1 — 관리자 상담 운영(요구사항 1·3·6). 홈페이지 신청은 app/consult-actions.ts,
 // 슬롯/hold/상태전이의 소스오브트루스는 20261009000000_m1_consultation_unification.sql의
@@ -96,7 +97,7 @@ async function attachTrialGrantExpiry(
 ): Promise<Map<string, string | null>> {
   const grantIds = rows.map((r) => r.trial_entitlement_grant_id).filter((id): id is string => Boolean(id));
   if (grantIds.length === 0) return new Map();
-  const { data } = await admin.from("entitlement_grants").select("id, expires_at").in("id", grantIds);
+  const { data } = await selectInChunks(grantIds, (chunk) => admin.from("entitlement_grants").select("id, expires_at").in("id", chunk));
   return new Map((data ?? []).map((g) => [g.id as string, g.expires_at as string | null]));
 }
 

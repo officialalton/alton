@@ -20,6 +20,7 @@ import {
   createTerminationRequest,
   processTeacherAssignmentTermination,
 } from "@/lib/enrollment/teacher-assignment-termination";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type HouseholdArchiveImpact = {
   childId: string;
@@ -207,7 +208,7 @@ async function failRequest(requestId: string, message: string): Promise<void> {
 async function loadEnrollmentIds(childIds: string[]): Promise<string[]> {
   if (childIds.length === 0) return [];
   const admin = createAdminClient();
-  const { data, error } = await admin.from("subject_enrollments").select("id").in("child_id", childIds);
+  const { data, error } = await selectInChunks(childIds, (chunk) => admin.from("subject_enrollments").select("id").in("child_id", chunk));
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => r.id as string);
 }
@@ -215,11 +216,11 @@ async function loadEnrollmentIds(childIds: string[]): Promise<string[]> {
 async function endActiveAssignments(enrollmentIds: string[], actorId: string): Promise<number> {
   if (enrollmentIds.length === 0) return 0;
   const admin = createAdminClient();
-  const { data: assignments, error } = await admin
+  const { data: assignments, error } = await selectInChunks(enrollmentIds, (chunk) => admin
     .from("teacher_assignments")
     .select("id, subject_enrollment_id")
     .eq("status", "active")
-    .in("subject_enrollment_id", enrollmentIds);
+    .in("subject_enrollment_id", chunk));
   if (error) throw new Error(error.message);
 
   let ended = 0;
@@ -277,21 +278,21 @@ async function cancelRemainingFutureReservations(enrollmentIds: string[], actorI
   if (enrollmentIds.length === 0) return 0;
   const admin = createAdminClient();
 
-  const { data: reservations, error } = await admin
+  const { data: reservations, error } = await selectInChunks(enrollmentIds, (chunk) => admin
     .from("reservations")
     .select("id")
     .eq("kind", "lesson")
     .eq("status", "confirmed")
     .gt("starts_at", new Date().toISOString())
-    .in("subject_enrollment_id", enrollmentIds);
+    .in("subject_enrollment_id", chunk));
   if (error) throw new Error(error.message);
   if (!reservations?.length) return 0;
 
   const reservationIds = reservations.map((r) => r.id as string);
-  const { data: sessions, error: sessionsError } = await admin
+  const { data: sessions, error: sessionsError } = await selectInChunks(reservationIds, (chunk) => admin
     .from("sessions")
     .select("reservation_id, final_status")
-    .in("reservation_id", reservationIds);
+    .in("reservation_id", chunk));
   if (sessionsError) throw new Error(sessionsError.message);
   const finalStatusByReservation = new Map(
     (sessions ?? []).map((s) => [s.reservation_id as string, s.final_status as string])

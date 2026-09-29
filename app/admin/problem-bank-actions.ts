@@ -10,6 +10,7 @@ import type { GeneratedProblem } from "@/lib/problem-generation/pipeline";
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // P2 3차 — 관리자 문제은행.
 //
@@ -168,13 +169,13 @@ export async function listBankProblemsAction(
   );
 
   const [{ data: versions }, { data: keywordRows }, { data: subjects }] = await Promise.all([
-    admin.from("problem_versions").select("problem_id, status").in("problem_id", ids),
-    admin
+    selectInChunks(ids, (chunk) => admin.from("problem_versions").select("problem_id, status").in("problem_id", chunk)),
+    selectInChunks(ids, (chunk) => admin
       .from("problem_keywords")
       .select("problem_id, keyword:subject_keywords(id, label)")
-      .in("problem_id", ids),
+      .in("problem_id", chunk)),
     subjectIds.length
-      ? admin.from("subjects").select("id, name").in("id", subjectIds)
+      ? selectInChunks(subjectIds, (chunk) => admin.from("subjects").select("id, name").in("id", chunk))
       : Promise.resolve({ data: [] as { id: string; name: string }[] }),
   ]);
 
@@ -206,12 +207,12 @@ export async function listBankProblemsAction(
 
   // 지금 공개돼 있는 내용. 목록의 problems.passage 는 오래된 칸이라 비어 있을 수
   // 있다 — 그래서 공개된 문제가 "(아직 내용이 없는 문제)"로 보였다.
-  const { data: contentRows } = await admin
+  const { data: contentRows } = await selectInChunks(problemIds, (chunk) => admin
     .from("problem_versions")
     .select("id, problem_id, status, version_no, passage, question, options, correct_index, explanation, explanation_en, answers, figure, figure_checked, render_check, statements, quality, repair_status, evidence_target, evidence_span, answer_rationale, distractor_error_types")
-    .in("problem_id", problemIds)
+    .in("problem_id", chunk)
     .in("status", ["published", "draft", "in_review"])
-    .order("version_no", { ascending: false });
+    .order("version_no", { ascending: false }), { sort: orderComparator(["version_no", false]) });
 
   const asContent = (v: Record<string, unknown>): ProblemContent => ({
     versionId: v.id as string,
@@ -246,12 +247,12 @@ export async function listBankProblemsAction(
     }
   }
 
-  const { data: statRows } = await admin.from("problem_response_stats").select("problem_id, problem_version_id, responses, correct_pct").in("problem_id", problemIds);
+  const { data: statRows } = await selectInChunks(problemIds, (chunk) => admin.from("problem_response_stats").select("problem_id, problem_version_id, responses, correct_pct").in("problem_id", chunk));
   const statsByVersion = new Map((statRows ?? []).map((r) => [r.problem_version_id as string, { responses: Number(r.responses ?? 0), correctPct: r.correct_pct === null || r.correct_pct === undefined ? null : Number(r.correct_pct) }]));
-  const { data: readinessRows } = await admin
+  const { data: readinessRows } = await selectInChunks(problemIds, (chunk) => admin
     .from("problem_composition_readiness")
     .select("problem_id, readiness")
-    .in("problem_id", problemIds);
+    .in("problem_id", chunk));
   const readinessByProblem = new Map(
     (readinessRows ?? []).map((r) => [r.problem_id as string, r.readiness as string])
   );
@@ -949,12 +950,12 @@ export async function problemQuestionAuditAction(subjectId?: string): Promise<Ba
   if (error) return { ok: false, error: "문제 목록을 읽지 못했습니다." };
   const ids = (rows ?? []).map((r) => r.id as string);
   if (!ids.length) return { ok: true, value: { withQuestion: 0, draftWithout: 0, publishedWithout: 0 } };
-  const { data: versions } = await admin
+  const { data: versions } = await selectInChunks(ids, (chunk) => admin
     .from("problem_versions")
     .select("problem_id, status, version_no, passage, question")
-    .in("problem_id", ids)
+    .in("problem_id", chunk)
     .in("status", ["published", "draft", "in_review"])
-    .order("version_no", { ascending: false });
+    .order("version_no", { ascending: false }), { sort: orderComparator(["version_no", false]) });
   const latest = new Map<string, { status: string; has: boolean }>();
   for (const v of versions ?? []) {
     const pid = v.problem_id as string;

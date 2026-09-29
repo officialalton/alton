@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadStudentSubjectEnrollments } from "./enrollment-data";
 import { resolveUserTimezone } from "@/lib/timezone";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // R6 6/N — 정규수업 예약 화면 데이터 로더(읽기 전용). subject_enrollments/
 // teacher_assignments 조회는 기존 R5 로더(loadStudentSubjectEnrollments)를 그대로
@@ -111,7 +112,7 @@ export async function loadLessonBookingData(
     .gt("expires_at", new Date().toISOString());
   const grantIds = (grantRows ?? []).map((g) => g.id as string);
   const { data: ledgerRows } = grantIds.length
-    ? await supabase.from("entitlement_ledger").select("grant_id, amount").in("grant_id", grantIds)
+    ? await selectInChunks(grantIds, (chunk) => supabase.from("entitlement_ledger").select("grant_id, amount").in("grant_id", chunk))
     : { data: [] as { grant_id: string; amount: number }[] };
   const remainingByGrant = new Map<string, number>();
   for (const l of ledgerRows ?? []) {
@@ -130,13 +131,13 @@ export async function loadLessonBookingData(
   let upcomingBookings: UpcomingBooking[] = [];
   let pastSessionsForReport: PastSessionForReport[] = [];
   if (enrollmentIds.length > 0) {
-    const { data: sessions } = await supabase
+    const { data: sessions } = await selectInChunks(enrollmentIds, (chunk) => supabase
       .from("sessions")
       .select(
-        "id, subject_enrollment_id, final_status, lesson_type:lesson_types(code), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status), teacher:profiles!sessions_teacher_id_fkey(name), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
+        "id, created_at, subject_enrollment_id, final_status, lesson_type:lesson_types(code), reservation:reservations!sessions_reservation_id_fkey(id, starts_at, ends_at, status, google_meet_link, google_sync_status), teacher:profiles!sessions_teacher_id_fkey(name), subject_enrollment:subject_enrollments!sessions_subject_enrollment_id_fkey(subject:subjects(name))"
       )
-      .in("subject_enrollment_id", enrollmentIds)
-      .order("created_at", { ascending: true });
+      .in("subject_enrollment_id", chunk)
+      .order("created_at", { ascending: true }), { sort: orderComparator(["created_at", true]) });
 
     type BookingRow = {
       reservationId: string | null;
@@ -190,7 +191,7 @@ export async function loadLessonBookingData(
     // 여부만 표시용(needsReview)으로 남긴다.
     const trialSessionIds = rows.filter((r) => r.isTrial).map((r) => r.sessionId);
     const { data: reviews } = trialSessionIds.length
-      ? await supabase.from("lesson_reviews").select("trial_session_id, status").in("trial_session_id", trialSessionIds)
+      ? await selectInChunks(trialSessionIds, (chunk) => supabase.from("lesson_reviews").select("trial_session_id, status").in("trial_session_id", chunk))
       : { data: [] as { trial_session_id: string; status: string }[] };
     const reviewStatusBySession = new Map((reviews ?? []).map((r) => [r.trial_session_id, r.status]));
 

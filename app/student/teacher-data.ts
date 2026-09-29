@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { loadCurriculumOverlayProgressByEnrollment, getCurriculumOverlayProgress } from "@/lib/curriculum-overlay-progress";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // M4 골든패스 실사용 버그 #1 — 이 파일은 원래 legacy `enrollments`/`teachers` 테이블
 // (정규 전환 후에만 채워짐)을 조회했다. 체험 수업만 진행 중인 학생은 `subject_enrollments`
@@ -65,11 +66,11 @@ async function loadActiveAssignments(
     (enrollments ?? []).map((e) => [e.id, extractName(e.subject)])
   );
 
-  const { data: assignments } = await supabase
+  const { data: assignments } = await selectInChunks(enrollmentIds, (chunk) => supabase
     .from("teacher_assignments")
     .select("teacher_id, subject_enrollment_id")
-    .in("subject_enrollment_id", enrollmentIds)
-    .in("status", ["planned", "active"]);
+    .in("subject_enrollment_id", chunk)
+    .in("status", ["planned", "active"]));
 
   return (assignments ?? []).map((a) => ({
     teacherId: a.teacher_id,
@@ -86,14 +87,14 @@ export async function loadTeacherList(
   const rawTeacherIds = Array.from(new Set(rawAssignments.map((a) => a.teacherId)));
   if (rawTeacherIds.length === 0) return [];
 
-  const { data: profiles } = await supabase
+  const { data: profiles } = await selectInChunks(rawTeacherIds, (chunk) => supabase
     .from("profiles")
     .select("id, name")
-    .in("id", rawTeacherIds);
-  const { data: teacherRows } = await supabase
+    .in("id", chunk));
+  const { data: teacherRows } = await selectInChunks(rawTeacherIds, (chunk) => supabase
     .from("teachers")
     .select("id, school")
-    .in("id", rawTeacherIds);
+    .in("id", chunk));
 
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const schoolById = new Map((teacherRows ?? []).map((t) => [t.id, t.school]));
@@ -186,23 +187,23 @@ export async function loadTeacherSessionHistory(
     (enrollments ?? []).map((e) => [e.id, extractName(e.subject)])
   );
 
-  const { data: assignments } = await supabase
+  const { data: assignments } = await selectInChunks(enrollmentIds, (chunk) => supabase
     .from("teacher_assignments")
     .select("subject_enrollment_id")
     .eq("teacher_id", teacherId)
-    .in("subject_enrollment_id", enrollmentIds);
+    .in("subject_enrollment_id", chunk));
   const relevantEnrollmentIds = new Set(
     (assignments ?? []).map((a) => a.subject_enrollment_id)
   );
   if (relevantEnrollmentIds.size === 0) return [];
 
-  const { data: sessions } = await supabase
+  const { data: sessions } = await selectInChunks(Array.from(relevantEnrollmentIds), (chunk) => supabase
     .from("sessions")
     .select("id, subject_enrollment_id, final_status, reservation:reservations!sessions_reservation_id_fkey(starts_at)")
     .eq("teacher_id", teacherId)
-    .in("subject_enrollment_id", Array.from(relevantEnrollmentIds))
+    .in("subject_enrollment_id", chunk)
     .in("final_status", ["completed", "no_show"])
-    .order("id", { ascending: false });
+    .order("id", { ascending: false }), { sort: orderComparator(["id", false]) });
 
   function one<T>(rel: T | T[] | null | undefined): T | null {
     return Array.isArray(rel) ? (rel[0] ?? null) : (rel ?? null);

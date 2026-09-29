@@ -5,6 +5,7 @@ import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { sendEmail } from "@/lib/email";
 import type { ReviewCategoryId, ReviewRating } from "./review-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 async function requireSessionTeacher(sessionId: string) {
   const { supabase, user, profile } = await requireUser();
@@ -120,11 +121,11 @@ async function notifyGuardiansOfReview(
   if (!guardianLinks || guardianLinks.length === 0) return;
 
   const guardianIds = guardianLinks.map((l) => l.profile_id);
-  const { data: activeParents } = await admin
+  const { data: activeParents } = await selectInChunks(guardianIds, (chunk) => admin
     .from("parents")
     .select("id")
-    .in("id", guardianIds)
-    .neq("status", "closed");
+    .in("id", chunk)
+    .neq("status", "closed"));
   const validGuardianIds = new Set((activeParents ?? []).map((p) => p.id));
 
   for (const guardianId of guardianIds.filter((id) => validGuardianIds.has(id))) {

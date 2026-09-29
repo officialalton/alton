@@ -2,6 +2,7 @@
 
 import { requireUser } from "@/lib/auth";
 import type { TemplateUnit } from "./mysubjects-data";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export async function createMyTemplate(subjectId: string): Promise<{
   templateId: string;
@@ -49,10 +50,10 @@ export async function createMyTemplate(subjectId: string): Promise<{
   // 하는 흐름"이 사라졌다는 것이 드러난다.
   const unitIds = (inserted ?? []).map((u) => u.id);
   const { data: keywordRows } = unitIds.length
-    ? await supabase
+    ? await selectInChunks(unitIds, (chunk) => supabase
         .from("teacher_curriculum_template_unit_keywords")
         .select("unit_id, keyword_id")
-        .in("unit_id", unitIds)
+        .in("unit_id", chunk))
     : { data: [] as { unit_id: string; keyword_id: string }[] };
   const keywordIdsByUnit = new Map<string, string[]>();
   for (const row of keywordRows ?? []) {
@@ -226,10 +227,10 @@ export async function inheritTemplateDefaults(
   const unitIds = (unitRows ?? []).map((u) => u.id as string);
 
   const { data: keywordRows } = unitIds.length
-    ? await supabase
+    ? await selectInChunks(unitIds, (chunk) => supabase
         .from("teacher_curriculum_template_unit_keywords")
         .select("unit_id, keyword_id")
-        .in("unit_id", unitIds)
+        .in("unit_id", chunk))
     : { data: [] as { unit_id: string; keyword_id: string }[] };
 
   const keywordIdsByUnit: Record<string, string[]> = {};

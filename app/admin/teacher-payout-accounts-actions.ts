@@ -12,6 +12,7 @@
 import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { maskAccountNumber } from "@/app/teacher/settlement-data";
+import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 const PAYOUT_CAPABILITY = "정산권한";
 
@@ -50,12 +51,12 @@ export async function listTeacherPayoutAccountsAction(): Promise<TeacherPayoutAc
 
   const teacherIds = accounts.map((a) => a.teacher_id as string);
   const [{ data: profiles, error: profilesError }, { data: events, error: eventsError }] = await Promise.all([
-    admin.from("profiles").select("id, name").in("id", teacherIds),
-    admin
+    selectInChunks(teacherIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk)),
+    selectInChunks(teacherIds, (chunk) => admin
       .from("teacher_payout_account_events")
       .select("id, teacher_id, action, changed_fields, previous_last4, new_last4, created_at")
-      .in("teacher_id", teacherIds)
-      .order("created_at", { ascending: false }),
+      .in("teacher_id", chunk)
+      .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) }),
   ]);
   if (profilesError) throw new Error(profilesError.message);
   if (eventsError) throw new Error(eventsError.message);

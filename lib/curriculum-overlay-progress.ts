@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // C-1(2026-09-10, 제품 오너 승인) — 교사 "담당 학생", 학생 포털, 관리자 상세
 // 세 화면의 진도 표시를 curriculum_overlay_units 하나로 통일한다. 그동안
@@ -36,20 +37,20 @@ export async function loadCurriculumOverlayProgressByEnrollment(
   const result = new Map<string, CurriculumOverlayProgress>();
   if (subjectEnrollmentIds.length === 0) return result;
 
-  const { data: overlays } = await supabase
+  const { data: overlays } = await selectInChunks(subjectEnrollmentIds, (chunk) => supabase
     .from("student_curriculum_overlays")
     .select("id, subject_enrollment_id")
-    .in("subject_enrollment_id", subjectEnrollmentIds)
-    .eq("status", "active");
+    .in("subject_enrollment_id", chunk)
+    .eq("status", "active"));
   if (!overlays || overlays.length === 0) return result;
 
   const enrollmentIdByOverlay = new Map(overlays.map((o) => [o.id as string, o.subject_enrollment_id as string]));
   const overlayIds = overlays.map((o) => o.id as string);
 
-  const { data: units } = await supabase
+  const { data: units } = await selectInChunks(overlayIds, (chunk) => supabase
     .from("curriculum_overlay_units")
     .select("overlay_id, status, source_kind")
-    .in("overlay_id", overlayIds);
+    .in("overlay_id", chunk));
 
   const totalByOverlay = new Map<string, number>();
   const doneByOverlay = new Map<string, number>();

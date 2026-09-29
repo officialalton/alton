@@ -10,6 +10,7 @@
 // 이 파일의 조회 쿼리만 체험으로 필터링돼 있었다.
 
 import { requireUser } from "@/lib/auth";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type ReviewCategoryOption = {
   key: string;
@@ -75,10 +76,10 @@ export async function listMySessionsNeedingReview(): Promise<SessionNeedingRevie
 
   const reviewIds = (reviews ?? []).map((r) => r.id);
   const { data: notes } = reviewIds.length
-    ? await supabase
+    ? await selectInChunks(reviewIds, (chunk) => supabase
         .from("lesson_review_category_notes")
         .select("review_id, note, category:review_categories(key)")
-        .in("review_id", reviewIds)
+        .in("review_id", chunk))
     : { data: [] as { review_id: string; note: string | null; category: { key: string } | { key: string }[] | null }[] };
   const notesByReview = new Map<string, Record<string, string | null>>();
   for (const n of notes ?? []) {
@@ -91,7 +92,7 @@ export async function listMySessionsNeedingReview(): Promise<SessionNeedingRevie
 
   const reservationIds = (sessions ?? []).map((s) => s.reservation_id);
   const { data: reservations } = reservationIds.length
-    ? await supabase.from("reservations").select("id, starts_at").in("id", reservationIds)
+    ? await selectInChunks(reservationIds, (chunk) => supabase.from("reservations").select("id, starts_at").in("id", chunk))
     : { data: [] as { id: string; starts_at: string }[] };
   const startsAtByReservation = new Map((reservations ?? []).map((r) => [r.id, r.starts_at]));
 

@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // 2026-09-14 과제 v3 통일 — 이 수업에 발급된 과제 항목(교사 발급 구역이 쓴다). 학생이 풀이판을 열었으면
 // 회수할 수 없다는 사실도 함께 준다.
@@ -18,12 +19,12 @@ export async function loadIssuedHomework(supabase: SupabaseClient, sessionId: st
     .eq("session_id", sessionId)
     .order("position", { ascending: true });
   if (!items?.length) return [];
-  const { data: work } = await supabase
+  const { data: work } = await selectInChunks(items.map((i) => i.problem_id as string), (chunk) => supabase
     .from("session_problem_work")
     .select("problem_id")
     .eq("session_id", sessionId)
     .eq("source", "homework")
-    .in("problem_id", items.map((i) => i.problem_id as string));
+    .in("problem_id", chunk));
   const started = new Set((work ?? []).map((w) => w.problem_id as string));
   return items.map((i) => ({
     itemId: i.id as string,

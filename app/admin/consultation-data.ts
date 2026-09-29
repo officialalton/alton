@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 // R3 관리자 UI용 읽기 전용 데이터 로더. 쓰기는 전부 consultation-actions.ts의
 // "use server" 액션을 클라이언트 컴포넌트에서 직접 호출한다(기존 ContractsTab/
@@ -34,13 +35,10 @@ export async function loadConsultations(supabase: SupabaseClient): Promise<Consu
     .order("requested_at", { ascending: false });
   if (!rows || rows.length === 0) return [];
 
-  const { data: tagJoins } = await supabase
+  const { data: tagJoins } = await selectInChunks(rows.map((r) => r.id), (chunk) => supabase
     .from("consultation_classification_tags")
     .select("consultation_id, classification_tags(label)")
-    .in(
-      "consultation_id",
-      rows.map((r) => r.id)
-    );
+    .in("consultation_id", chunk));
 
   const tagsByConsultation = new Map<string, string[]>();
   for (const j of tagJoins ?? []) {
@@ -106,8 +104,8 @@ export async function loadTrialSessions(supabase: SupabaseClient): Promise<Trial
   const subjectIds = Array.from(new Set(rows.map((r) => r.subject_id)));
 
   const [{ data: profiles }, { data: subjects }] = await Promise.all([
-    supabase.from("profiles").select("id, name").in("id", profileIds),
-    supabase.from("subjects").select("id, name").in("id", subjectIds),
+    selectInChunks(profileIds, (chunk) => supabase.from("profiles").select("id, name").in("id", chunk)),
+    selectInChunks(subjectIds, (chunk) => supabase.from("subjects").select("id, name").in("id", chunk)),
   ]);
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
   const subjectNameById = new Map((subjects ?? []).map((s) => [s.id, s.name]));
@@ -162,13 +160,10 @@ export async function loadConsentGaps(supabase: SupabaseClient): Promise<Consent
   });
   if (under13OrUnknown.length === 0) return [];
 
-  const { data: consents } = await supabase
+  const { data: consents } = await selectInChunks(under13OrUnknown.map((s) => s.id), (chunk) => supabase
     .from("guardian_consents")
     .select("student_id, revoked_at")
-    .in(
-      "student_id",
-      under13OrUnknown.map((s) => s.id)
-    );
+    .in("student_id", chunk));
   const activeConsentStudentIds = new Set(
     (consents ?? []).filter((c) => !c.revoked_at).map((c) => c.student_id)
   );
@@ -210,13 +205,10 @@ export async function loadCompletedConsents(supabase: SupabaseClient): Promise<C
   });
   if (under13OrUnknown.length === 0) return [];
 
-  const { data: consents } = await supabase
+  const { data: consents } = await selectInChunks(under13OrUnknown.map((s) => s.id), (chunk) => supabase
     .from("guardian_consents")
     .select("student_id, revoked_at")
-    .in(
-      "student_id",
-      under13OrUnknown.map((s) => s.id)
-    );
+    .in("student_id", chunk));
   const activeConsentStudentIds = new Set(
     (consents ?? []).filter((c) => !c.revoked_at).map((c) => c.student_id)
   );
