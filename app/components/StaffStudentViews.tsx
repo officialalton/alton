@@ -2,9 +2,8 @@
 
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
-import StatsTab from "@/app/student/StatsTab";
+import { StatsPanel } from "@/app/student/StatsTab";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
-import type { StatsData } from "@/app/student/stats-data";
 import type { BoardCard } from "@/lib/board/types";
 import type { StudentViewAccess } from "@/lib/staff-student-view";
 import {
@@ -111,19 +110,8 @@ export default function StaffStudentViews({
 }
 
 function StaffStudentStats({ studentId }: { studentId: string }) {
-  const [state, setState] = useState<{ data: StatsData | null; error: string | null }>({ data: null, error: null });
-  useEffect(() => {
-    let cancelled = false;
-    loadStaffViewStatsAction(studentId)
-      .then((data) => !cancelled && setState({ data, error: null }))
-      .catch((e) => !cancelled && setState({ data: null, error: e instanceof Error ? e.message : "통계를 불러오지 못했습니다." }));
-    return () => {
-      cancelled = true;
-    };
-  }, [studentId]);
-  if (state.error) return <p role="alert" className="py-8 text-[13px] text-red">{state.error}</p>;
-  if (!state.data) return <p className="py-8 text-[13px] text-grey-500">불러오는 중...</p>;
-  return <StatsTab data={state.data} />;
+  const load = useCallback(() => loadStaffViewStatsAction(studentId), [studentId]);
+  return <StatsPanel key={studentId} load={load} />;
 }
 
 function BoardPanel({

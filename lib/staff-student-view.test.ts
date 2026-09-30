@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { assertCanViewStudent, assertCanWriteStudentTask, StudentViewDeniedError } from "./staff-student-view";
+import { assertCanViewStudent, assertCanWriteStudentTask, statsTierFor, StudentViewDeniedError } from "./staff-student-view";
 
 function client(profile: Record<string, unknown> | null, rpcs: Record<string, boolean> = {}) {
   return {
@@ -32,10 +32,10 @@ describe("assertCanViewStudent — 역할 × 대상 학생 매트릭스", () => 
     expect(a.tabs).toEqual(["overview", "board"]);
     await expect(assertCanViewStudent(client({ role: "teacher" }), "u", "s")).rejects.toThrow("현재 담당 중인");
   });
-  it("학부모는 본인 자녀만(읽기 전용, 통계 없음, 열람 기록 없음), 타 가족 거절", async () => {
+  it("학부모는 본인 자녀만(읽기 전용, 통계는 학생 본인과 동일 범위, 열람 기록 없음), 타 가족 거절", async () => {
     const a = await assertCanViewStudent(client({ role: "parent" }, { is_guardian_of: true }), "u", "s");
     expect(a).toMatchObject({ role: "parent", actions: [], audit: false });
-    expect(a.tabs).toEqual(["overview", "board"]);
+    expect(a.tabs).toEqual(["overview", "board", "stats"]);
     await expect(assertCanViewStudent(client({ role: "parent" }), "u", "s")).rejects.toThrow("자녀만");
   });
   it("학생(본인 포함)·프로필 없음은 거절", async () => {
@@ -65,5 +65,13 @@ describe("assertCanWriteStudentTask — 읽기 전용 강제", () => {
   });
   it("종료된 배정의 선생님은 추가도 거절", async () => {
     await expect(assertCanWriteStudentTask(client({ role: "teacher" }), "u", "s", "create")).rejects.toThrow("현재 담당 중인");
+  });
+});
+
+describe("통계 노출 등급(statsTierFor) — 학생 본인 = 학부모", () => {
+  it("학부모는 family(학생 본인과 동일), 컨설턴트 staff, 관리자 admin", () => {
+    expect(statsTierFor("parent")).toBe("family");
+    expect(statsTierFor("consultant")).toBe("staff");
+    expect(statsTierFor("admin")).toBe("admin");
   });
 });

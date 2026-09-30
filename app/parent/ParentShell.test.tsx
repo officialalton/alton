@@ -126,7 +126,8 @@ describe("ParentShell", () => {
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
     // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로 합쳤다.
     expect(screen.getByText("Review")).toBeInTheDocument();
-    expect(screen.queryByText("통계")).not.toBeInTheDocument();
+    // 2026-09-30(오너 결정) — 통계 서브탭 복귀: 학생 본인과 같은 범위의 통계를 본다.
+    expect(screen.getByText("통계")).toBeInTheDocument();
     // 홈 기본 서브탭은 Overview — "Review" 탭 내용은 눌러야 보인다.
     fireEvent.click(screen.getByText("Review"));
     // 2026-09-18(사용자 결정 2차) — "종합 리뷰"는 수업/상담 리뷰를 합친 목록이
