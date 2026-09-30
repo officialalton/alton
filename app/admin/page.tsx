@@ -33,6 +33,7 @@ import {
 } from "./consultant-assignment-actions";
 import { resolveAdminTab } from "./admin-tabs";
 import { loadAdminAccounts, type AdminAccount } from "./admin-accounts-data";
+import { countAdminFamilyUnread } from "./messenger-unread-data";
 import AdminShell from "./AdminShell";
 
 const EMPTY_DASHBOARD: AdminDashboardData = {
@@ -110,6 +111,7 @@ export default async function AdminHomePage({
     assignedAwaitingSchedule,
     autoAssignEnabled,
     meetingActionCount,
+    otherTabMessengerUnread,
   ] = await Promise.all([
     need("home") ? loadAdminDashboard(supabase, user.id) : Promise.resolve(EMPTY_DASHBOARD),
     need("catalog", "users", "consult", "matching", "problem-bank") ? loadSubjectCatalog(supabase) : Promise.resolve([]),
@@ -149,7 +151,13 @@ export default async function AdminHomePage({
           .in("status", ["requested", "confirming", "scheduling"])
           .then((r) => r.count ?? 0)
       : Promise.resolve(0),
+    // 사이드바 Messenger 배지 — Messenger 탭은 이미 읽은 스레드로 계산하므로
+    // 그 외 탭에서만 가벼운 집계(쿼리 2건)를 한다.
+    need("messenger") ? Promise.resolve(0) : countAdminFamilyUnread(createAdminClient()).catch(() => 0),
   ]);
+  const initialMessengerUnread = need("messenger")
+    ? (initialInquiryThreads ?? []).filter((t) => t.status === "open" && t.unreadForAdmin).length
+    : otherTabMessengerUnread;
 
   // 성능 corrective(2026-09-09, 2026-09-10 갱신): "사용자" 탭의 학생/선생님
   // 목록·이력은 이제 UsersTab이 서브탭을 열 때 listStudentsForUsersTabAction/
@@ -193,6 +201,7 @@ export default async function AdminHomePage({
       assignedAwaitingSchedule={assignedAwaitingSchedule}
       autoAssignEnabled={autoAssignEnabled}
       initialMeetingActionCount={meetingActionCount}
+      initialMessengerUnread={initialMessengerUnread}
     />
   );
 }

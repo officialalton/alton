@@ -14,10 +14,13 @@ export default function MobileDrawerNav({
   groups,
   activeId,
   onSelect,
+  badgeCounts,
 }: {
   groups: MobileNavGroup[];
   activeId: string;
   onSelect: (id: string) => void;
+  /** 항목 id별 숫자 배지. 0이거나 없으면 표시 안 함, 9 초과는 9+. */
+  badgeCounts?: Record<string, number>;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -59,6 +62,14 @@ export default function MobileDrawerNav({
                   >
                     <NavIcon name={item.icon} className="w-4 h-4" />
                     {item.label}
+                    {(badgeCounts?.[item.id] ?? 0) > 0 && (
+                      <span
+                        data-testid={`drawer-badge-${item.id}`}
+                        className="ml-auto inline-flex min-w-[18px] h-[18px] px-1 rounded-full bg-brand-red text-white text-[10px] font-bold items-center justify-center"
+                      >
+                        {badgeCounts![item.id] > 9 ? "9+" : badgeCounts![item.id]}
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>
