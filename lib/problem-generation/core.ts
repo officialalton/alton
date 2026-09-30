@@ -2,7 +2,7 @@
 // 인증은 여기서 하지 않는다: 서버 액션이 requireAdmin 을 거친 뒤 호출하고, 표본 검증 스크립트(scripts/)도 같은 경로를 쓴다.
 // 내용은 그대로 옮겼다 — AI 는 관계·의미만 내고 좌표·라벨 자리는 표준 렌더러가 정한다.
 import Anthropic from "@anthropic-ai/sdk";
-import { generationModel } from "./models";
+import { generationModel, createToolMessage } from "./models";
 import { stripInlineOptions, stripOptionSelfLabels } from "@/lib/problem-text";
 import { composeProblemText, splitLegacyQuestion } from "@/lib/problem-question";
 import { GEOMETRY_TEMPLATE_TYPES, validateFigureSpec } from "@/lib/problem-figures/spec";
@@ -293,7 +293,7 @@ export async function generateSectionProblemsCore(params: {
   const perItemExtra = evidenceSkill ? 500 : 0;
   const tokenCap = evidenceSkill ? 12000 : 8000;
   const tokenBudget = Math.min(tokenCap, (difficulty === "hard" ? 2200 : 1400) * clampedCount + perItemExtra * clampedCount + 800);
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: tokenBudget,
     tools: [
@@ -544,7 +544,7 @@ export async function regenerateProblemCore(params: {
   const { sectionTitle, subjectName, skillType, difficulty, format, current, feedback } = params;
   const evidenceSkill: StructuredSkill | null = structuredSkillOf(params.skillCode);
 
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 2000,
     tools: [
@@ -657,7 +657,7 @@ export async function generateFigureForProblemCore(params: {
   correctIndex?: number | null;
 }): Promise<{ ok: true; figure: unknown } | { ok: false; error: string }> {
   if (!process.env.ANTHROPIC_API_KEY) return { ok: false, error: "이 환경에는 AI 생성이 설정되어 있지 않습니다." };
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 2000,
     tools: [
@@ -743,7 +743,7 @@ export async function repairDistractorsCore(params: {
   /** 고칠 자리와 그 사유(독립 검사가 낸 오답 근거 문장). */
   targets: { index: number; reason: string }[];
 }): Promise<{ ok: true; options: string[] } | { ok: false; error: string }> {
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 1200,
     tools: [
@@ -820,7 +820,7 @@ export async function repairOneDistractorCore(params: {
   | { ok: false; error: string }
 > {
   const otherOptions = params.options.map((o, i) => (i === params.index ? null : o)).filter((o): o is string => o !== null);
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     // 계획(plan) 필드가 5개나 되어 응답이 길어지면 예전엔 맨 뒤에 둔 text 가 토큰 예산에 잘려 빈 문자열로 왔다
     // (2026-09-15 재확인: 실패 사유 100%가 "새 선택지가 비어 있습니다"). text 를 먼저 받고 계획은 그 뒤로 미루며,
@@ -905,7 +905,7 @@ export async function repairFieldsCore(params: {
   /** 걸린 사유 문장들. */
   issues: string[];
 }): Promise<{ ok: true; passage: string; question: string; options: string[] | null; correctIndex: number | null; statements: string[] | null; explanation: string; changedFields: string[] } | { ok: false; error: string }> {
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 2000,
     tools: [
@@ -974,7 +974,7 @@ export async function resolveAnswerFromExplanationCore(params: {
   | { ok: true; concludedIndex: number; confidence: "high" | "low"; cleanExplanation: string }
   | { ok: false; error: string }
 > {
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 900,
     tools: [

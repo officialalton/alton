@@ -15,7 +15,7 @@
 // 구조적 실패로 분류하므로, 이 파일의 4단계 루프에서도 "1단계 재시도" 대상으로 자연스럽게 처리된다.
 
 import { getAnthropic, PLANE_DESC, TRIANGLE_DESC, CIRCLE_DESC, POLYGON_DESC, SOLID_DESC, COMPOSITE_DESC, type ProblemDifficulty } from "./core";
-import { generationModel } from "./models";
+import { generationModel, createToolMessage } from "./models";
 import { stripOptionSelfLabels } from "@/lib/problem-text";
 import { checkQualityContract } from "@/lib/problem-quality-contract";
 import { resolveAnswerFromExplanationCore } from "./core";
@@ -48,7 +48,7 @@ async function generateMathStemOnly(params: {
   subjectName: string; skillType: string; difficulty: ProblemDifficulty; figureKind: MathFigureKind; topic?: string;
 }): Promise<{ stimulus: string; question: string; figure: unknown; design: string }> {
   const figureDesc = FIGURE_DESC_BY_KIND[params.figureKind];
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 2000,
     tools: [
@@ -89,7 +89,7 @@ async function generateMathStemOnly(params: {
 async function solveMathStem(params: {
   stimulus: string; question: string; figure: unknown; difficulty: ProblemDifficulty;
 }): Promise<{ answerText: string; explanation: string }> {
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 1200,
     tools: [
@@ -129,7 +129,7 @@ async function solveMathStem(params: {
 async function generateOneDistractor(params: {
   stimulus: string; question: string; correctAnswerText: string; explanation: string; difficulty: ProblemDifficulty; avoid: string[];
 }): Promise<string> {
-  const message = await getAnthropic().messages.create({
+  const message = await createToolMessage(getAnthropic(), {
     model: generationModel(),
     max_tokens: 700,
     tools: [
