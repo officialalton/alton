@@ -15,6 +15,7 @@ import type { AdminDashboardData } from "./dashboard-data";
 import CatalogTab from "./CatalogTab";
 import ProblemBankTab from "./ProblemBankTab";
 import MockExamTab from "./MockExamTab";
+import ErrorReportsTab from "./ErrorReportsTab";
 import type { MockExamSetSummary } from "./mock-exam-actions";
 import UsersTab from "./UsersTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
@@ -65,6 +66,7 @@ const NAV_ITEMS = [
   { id: "catalog", label: "Curriculum", icon: "curriculum" },
   { id: "problem-bank", label: "Question Bank", icon: "questionBank" },
   { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
+  { id: "error-reports", label: "Error Reports", icon: "errorReport" },
   { id: "entitlements", label: "Entitlements", icon: "entitlements" },
   { id: "unified-schedule", label: "Schedule", icon: "schedule" },
   { id: "booking", label: "Bookings", icon: "bookings" },
@@ -242,7 +244,7 @@ export default function AdminShell({
     "workspace",
     "admin-accounts",
   ];
-  const CONTENT_IDS: TabId[] = ["catalog", "problem-bank", "mock-exam"];
+  const CONTENT_IDS: TabId[] = ["catalog", "problem-bank", "mock-exam", "error-reports"];
   // 2026-09-22(관리자 계정 구조) — "Admins"는 마스터(official@alton.education)만
   // 본다. isMasterAdmin은 admin_tier='master' 여부를 SSR에서 이미 확인한 값
   // (admin-accounts-data.ts의 서버 액션이 최종 방어선).
@@ -432,6 +434,8 @@ export default function AdminShell({
             <CatalogTab subjects={subjects} docs={docs} />
           ) : activeTab === "problem-bank" ? (
             <ProblemBankTab subjects={subjects} />
+          ) : activeTab === "error-reports" ? (
+            <ErrorReportsTab />
           ) : activeTab === "mock-exam" ? (
             <MockExamTab initialSets={mockExamSets} />
           ) : activeTab === "users" ? (

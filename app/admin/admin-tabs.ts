@@ -15,6 +15,8 @@ export const ADMIN_NAV_TAB_IDS = [
   // 2026-09-19 — 고정형 모의고사 V1. 문제은행 콘텐츠 그룹 바로 옆에 둔다(같은
   // 문제은행 공개 문항을 재료로 쓰는 화면이라 인접 배치).
   "mock-exam",
+  // 2026-09-30 — 문제 오류 신고 내역·통계(문제은행 '신고' 탭에서 이전).
+  "error-reports",
   "entitlements",
   "unified-schedule",
   "booking",

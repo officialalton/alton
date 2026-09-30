@@ -59,12 +59,18 @@ export type ReplacementNeedSummary = {
   replacements: { id: string; examSetId: string; examSetName: string | null; oldProblemId: string; newProblemId: string; moduleKey: string | null; route: string | null; difficulty: string | null; satDomain: string | null; skillCode: string | null; createdAt: string }[];
 };
 
-export async function listReportedProblemsAction(input: { status?: "open" | "all"; offset?: number; limit?: number } = {}): Promise<{ total: number; rows: ReportedProblemGroup[] }> {
+export type ReportFilter = { skill?: string | null; difficulty?: string | null; domain?: string | null; days?: number | null };
+
+export async function listReportedProblemsAction(input: { status?: "open" | "all"; offset?: number; limit?: number } & ReportFilter = {}): Promise<{ total: number; rows: ReportedProblemGroup[] }> {
   const { supabase } = await requireAdmin();
   const { data, error } = await supabase.rpc("problem_error_report_groups", {
     p_status: input.status ?? "open",
     p_limit: input.limit ?? 50,
     p_offset: input.offset ?? 0,
+    p_skill: input.skill ?? null,
+    p_difficulty: input.difficulty ?? null,
+    p_domain: input.domain ?? null,
+    p_days: input.days ?? null,
   });
   if (error) throw new Error(error.message);
   const d = data as { total: number; rows: ReportedProblemGroup[] };
@@ -109,4 +115,21 @@ export async function retryReplacementAction(): Promise<{ replaced: number; noSp
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
   return data as { replaced: number; noSpare: number; setStarted: number };
+}
+
+export type StatItem = { key: string; reports: number; reportedProblems: number; active: number | null; rate: number | null };
+export type ReportStats = {
+  days: number | null;
+  totals: { reports: number; reportedProblems: number; openReports: number; activeProblems: number; confirmed: number; notError: number };
+  axes: Partial<Record<"reportType" | "source" | "verdict" | "difficulty" | "domain" | "skill" | "format" | "batch", StatItem[]>>;
+  topCells: { skill: string; difficulty: string; reports: number; reportedProblems: number; active: number | null; rate: number | null }[];
+  weekly: { weekStart: string; reports: number }[];
+};
+
+/** 오류 신고 통계 — 관리자 전용 집계 RPC 1회(days 생략=전체). */
+export async function getReportStatsAction(days: number | null = null): Promise<ReportStats> {
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase.rpc("problem_error_report_stats", { p_days: days });
+  if (error) throw new Error(error.message);
+  return data as ReportStats;
 }
