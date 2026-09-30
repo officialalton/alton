@@ -29,7 +29,8 @@ vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({}) }));
 vi.mock("@/lib/homework-batch-data", () => ({ loadStudentHomeworkBatches: data.homework }));
 vi.mock("@/lib/mock-exam/attempt-data", () => ({ loadStudentMockExamAttempts: async () => [] }));
 vi.mock("@/app/student/vocab-library-data", () => ({ loadVocabQuizzes: async () => [] }));
-vi.mock("@/app/student/stats-data", () => ({ loadStats: async () => ({ attendanceRate: null, satisfactionAvg: null, bySubject: [] }) }));
+const statsCall = vi.hoisted(() => vi.fn());
+vi.mock("@/app/student/stats-data", () => ({ loadStudentStats: async (...a: unknown[]) => { statsCall(...a); return { attendanceRate: null, bySubject: [] }; } }));
 vi.mock("@/lib/board/data", () => ({
   loadBoardManualTasks: async () => [],
   createBoardManualTask: data.create,
@@ -82,15 +83,22 @@ describe("학생 열람 공통 서버 액션", () => {
     await expect(loadStaffViewBoardCardsAction("s1")).rejects.toThrow("db exploded");
   });
 
-  it("통계는 관리자·컨설턴트만 — 선생님·학부모는 거절(교사 전용 정보 차단)", async () => {
+  it("통계는 관리자·컨설턴트·학부모(본인 자녀) — 선생님은 거절, 등급은 역할로 서버가 정한다", async () => {
     as("admin");
     await expect(loadStaffViewStatsAction("s1")).resolves.toBeDefined();
+    expect(statsCall).toHaveBeenLastCalledWith(expect.anything(), "s1", "admin");
     as("consultant", { is_assigned_consultant_of: true });
     await expect(loadStaffViewStatsAction("s1")).resolves.toBeDefined();
+    expect(statsCall).toHaveBeenLastCalledWith(expect.anything(), "s1", "staff");
+    as("parent", { is_guardian_of: true });
+    await expect(loadStaffViewStatsAction("s1")).resolves.toBeDefined();
+    expect(statsCall).toHaveBeenLastCalledWith(expect.anything(), "s1", "family");
     as("teacher", { teaches_student: true });
     await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("통계");
-    as("parent", { is_guardian_of: true });
-    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("통계");
+    as("parent");
+    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("자녀만");
+    as("consultant");
+    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("담당 학생만");
   });
 
   it("할 일 추가: 선생님·컨설턴트 허용, 관리자·학부모 거절, 빈 제목 거절", async () => {

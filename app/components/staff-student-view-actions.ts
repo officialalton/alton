@@ -8,6 +8,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import {
   assertCanViewStudent,
   assertCanWriteStudentTask,
+  statsTierFor,
   StudentViewDeniedError,
   type StudentViewAccess,
   type StudentViewAction,
@@ -15,7 +16,7 @@ import {
 import { loadStudentHomeworkBatches } from "@/lib/homework-batch-data";
 import { loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
 import { loadVocabQuizzes } from "@/app/student/vocab-library-data";
-import { loadStats, type StatsData } from "@/app/student/stats-data";
+import { loadStudentStats, type StatsData } from "@/app/student/stats-data";
 import {
   loadBoardManualTasks,
   createBoardManualTask,
@@ -66,8 +67,9 @@ export async function loadStaffViewStatsAction(studentId: string): Promise<Stats
   const access = await assertCanViewStudent(supabase, user.id, studentId);
   if (!access.tabs.includes("stats")) throw new StudentViewDeniedError("통계는 열람할 수 없습니다.");
   // 권한 검사를 통과한 뒤의 읽기 전용 집계 — 수업·피드백 테이블의 RLS가 컨설턴트를
-  // 열어주지 않으므로 서비스 클라이언트로 읽는다(쓰기 없음). 통계 탭은 관리자·컨설턴트만.
-  return loadStats(createAdminClient(), studentId);
+  // 열어주지 않고 채점 컬럼 권한이 회수돼 있으므로 서비스 클라이언트(정의자 집계 RPC)로 읽는다(쓰기 없음).
+  // 통계 탭은 관리자·컨설턴트·학부모(본인 자녀) — 등급별로 필드를 서버에서 뺀다. 선생님은 탭이 없다.
+  return loadStudentStats(createAdminClient(), studentId, statsTierFor(access.role));
 }
 
 export type StaffViewKind = "overview" | "board" | "stats";

@@ -47,7 +47,7 @@ describe("StaffStudentViews", () => {
     expect(screen.queryByRole("button", { name: /삭제/ })).toBeNull();
   });
 
-  it("학부모: 읽기 전용, 통계 탭 없음, 열람 기록을 남기지 않는다", async () => {
+  it("학부모: 읽기 전용, 열람 기록을 남기지 않는다(통계 탭은 학부모 포털 자체 화면)", async () => {
     access.current = { role: "parent", actions: [], tabs: ["overview", "board"], audit: false };
     render(<StaffStudentViews studentId="s1" />);
     fireEvent.click(await screen.findByRole("tab", { name: "보드" }));
