@@ -1,0 +1,160 @@
+{
+ "A(Sonnet5.5/Sonnet5.5)": {
+  "sat_rw": {
+   "cand": 12,
+   "detPass": 9,
+   "reviewed": 8,
+   "correctOk": 7,
+   "complianceOk": 7,
+   "hardFitOk": 6,
+   "hardFitRateOfReviewed": 0.75,
+   "adopted": 6,
+   "yield": 0.5,
+   "costUsd": 0.168,
+   "costPerAdopted": 0.028,
+   "causes": {
+    "레시피미준수": 1,
+    "hard적합실패": 2,
+    "검수응답없음": 1,
+    "생성:계약:option_echo": 1,
+    "해설:불일치": 1,
+    "생성:계약:evidence": 2
+   }
+  },
+  "sat_math": {
+   "cand": 9,
+   "detPass": 7,
+   "reviewed": 7,
+   "correctOk": 7,
+   "complianceOk": 6,
+   "hardFitOk": 2,
+   "hardFitRateOfReviewed": 0.29,
+   "adopted": 2,
+   "yield": 0.222,
+   "costUsd": 0.146,
+   "costPerAdopted": 0.073,
+   "mathVerify": {
+    "pass": 7,
+    "fail": 0,
+    "skipped": 2
+   },
+   "causes": {
+    "생성:계약:math_unclosed": 2,
+    "생성:unbalanced_dollar_in_body": 1,
+    "레시피미준수": 1,
+    "hard적합실패": 5,
+    "생성:계약:math_parse": 1
+   }
+  }
+ },
+ "B(Opus5.5/Fable5.1)": {
+  "sat_rw": {
+   "cand": 12,
+   "detPass": 11,
+   "reviewed": 11,
+   "correctOk": 10,
+   "complianceOk": 11,
+   "hardFitOk": 11,
+   "hardFitRateOfReviewed": 1,
+   "adopted": 10,
+   "yield": 0.833,
+   "costUsd": 0.869,
+   "costPerAdopted": 0.087,
+   "causes": {
+    "해설:불일치": 1,
+    "형식결함": 1,
+    "생성:계약:evidence": 1
+   }
+  },
+  "sat_math": {
+   "cand": 9,
+   "detPass": 7,
+   "reviewed": 7,
+   "correctOk": 7,
+   "complianceOk": 6,
+   "hardFitOk": 5,
+   "hardFitRateOfReviewed": 0.71,
+   "adopted": 5,
+   "yield": 0.556,
+   "costUsd": 0.492,
+   "costPerAdopted": 0.098,
+   "mathVerify": {
+    "pass": 9,
+    "fail": 0,
+    "skipped": 0
+   },
+   "causes": {
+    "생성:계약:math_parse": 2,
+    "레시피미준수": 1,
+    "hard적합실패": 2,
+    "생성:계약:math_unclosed": 1,
+    "생성:unbalanced_dollar_in_body": 1
+   }
+  }
+ },
+ "C(Fable5.1/Opus5.5)": {
+  "sat_rw": {
+   "cand": 12,
+   "detPass": 11,
+   "reviewed": 11,
+   "correctOk": 11,
+   "complianceOk": 10,
+   "hardFitOk": 10,
+   "hardFitRateOfReviewed": 0.91,
+   "adopted": 10,
+   "yield": 0.833,
+   "costUsd": 1.489,
+   "costPerAdopted": 0.149,
+   "causes": {
+    "레시피미준수": 1,
+    "hard적합실패": 1,
+    "생성:계약:evidence": 1
+   }
+  },
+  "sat_math": {
+   "cand": 9,
+   "detPass": 7,
+   "reviewed": 7,
+   "correctOk": 7,
+   "complianceOk": 7,
+   "hardFitOk": 1,
+   "hardFitRateOfReviewed": 0.14,
+   "adopted": 1,
+   "yield": 0.111,
+   "costUsd": 0.795,
+   "costPerAdopted": 0.795,
+   "mathVerify": {
+    "pass": 7,
+    "fail": 0,
+    "skipped": 2
+   },
+   "causes": {
+    "생성:계약:math_parse": 3,
+    "생성:계약:math_unclosed": 1,
+    "생성:unbalanced_dollar_in_body": 1,
+    "hard적합실패": 6
+   }
+  }
+ },
+ "A-원형(Sonnet5.5)": {
+  "sat_rw": {
+   "cand": 12,
+   "detPass": 12,
+   "reviewed": 12,
+   "correctOk": 10,
+   "complianceOk": 12,
+   "hardFitOk": 4,
+   "hardFitRateOfReviewed": 0.33,
+   "adopted": 4,
+   "yield": 0.333,
+   "costUsd": 0.19,
+   "costPerAdopted": 0.047,
+   "causes": {
+    "hard적합실패": 8,
+    "정답:감사에서오답": 2,
+    "해설:불일치": 2,
+    "형식결함": 1
+   }
+  }
+ }
+}

@@ -132,6 +132,7 @@ const tok = (s: string) => Math.ceil(s.length / 3);
 async function main() {
   const cmd = process.argv[2];
   if (cmd === "report") return report();
+  if (cmd === "compare") return compare();
   if (cmd === "rereview") return rereview();
   const combo = arg("--combo")!, method = arg("--method") ?? "recipe";
   const cfg = { ...COMBOS[combo], gen: arg("--gen-model") ?? COMBOS[combo].gen, rev: arg("--review-model") ?? COMBOS[combo].rev };
@@ -181,7 +182,7 @@ function judge(dir: string) {
   const gen = read("gen"), rev = read("review");
   const genMap = new Map(gens.map((x) => [x.c.cid, x]));
   const rows = new Map<string, Row>();
-  const items: { cid: string; skill: string; adopted: boolean; causes: string[]; hardFitOk: boolean | null; }[] = [];
+  const items: { cid: string; skill: string; system: string; adopted: boolean; causes: string[]; hardFitOk: boolean | null; detOk?: boolean; correctOk?: boolean; complianceOk?: boolean; cost?: number; mathVerify?: string | null; idx?: number }[] = [];
   for (const c of cands) {
     const row = rows.get(c.skill) ?? { skill: c.skill, system: c.system, cand: 0, detPass: 0, correct: 0, compliance: 0, hardFit: 0, adopted: 0, causes: {}, cost: 0, calls: 0, mathVerifyFail: 0, mathVerifyPass: 0, mathVerifySkipped: 0, mathAnswerMismatch: 0, mathExplInconsistent: 0 };
     rows.set(c.skill, row);
@@ -189,13 +190,13 @@ function judge(dir: string) {
     const x = genMap.get(c.cid);
     const causes: string[] = [];
     const bump = (k: string) => { row.causes[k] = (row.causes[k] ?? 0) + 1; causes.push(k); };
-    if (!x) { bump("생성실패"); items.push({ cid: c.cid, skill: c.skill, adopted: false, causes, hardFitOk: null }); continue; }
+    if (!x) { bump("생성실패"); items.push({ cid: c.cid, skill: c.skill, system: c.system, idx: c.idx, adopted: false, causes, hardFitOk: null, cost: gen.get(c.cid)?.cost ?? 0 }); continue; }
     if (x.det.mathVerify === "pass") row.mathVerifyPass++; else if (x.det.mathVerify === "fail") row.mathVerifyFail++; else if (x.det.mathVerify === "skipped") row.mathVerifySkipped++;
-    if (x.det.issues.length) { for (const i of x.det.issues) bump(`생성:${i.replace(/^contract:contract_/, "계약:")}`); items.push({ cid: c.cid, skill: c.skill, adopted: false, causes, hardFitOk: null }); continue; }
+    if (x.det.issues.length) { for (const i of x.det.issues) bump(`생성:${i.replace(/^contract:contract_/, "계약:")}`); items.push({ cid: c.cid, skill: c.skill, system: c.system, idx: c.idx, adopted: false, causes, hardFitOk: null, detOk: false, cost: gen.get(c.cid)?.cost ?? 0, mathVerify: x.det.mathVerify }); continue; }
     row.detPass++;
     const b = rev.get(`b-${c.cid}`.slice(0, 64)), a = rev.get(`a-${c.cid}`.slice(0, 64));
     row.calls += 2; row.cost += (b?.cost ?? 0) + (a?.cost ?? 0);
-    if (!b?.in || !a?.in) { bump("검수응답없음"); items.push({ cid: c.cid, skill: c.skill, adopted: false, causes, hardFitOk: null }); continue; }
+    if (!b?.in || !a?.in) { bump("검수응답없음"); items.push({ cid: c.cid, skill: c.skill, system: c.system, idx: c.idx, adopted: false, causes, hardFitOk: null, detOk: true, cost: (gen.get(c.cid)?.cost ?? 0) + (b?.cost ?? 0) + (a?.cost ?? 0), mathVerify: x.det.mathVerify }); continue; }
     const recipe = c.recipeId ? recipesFor(c.skill).find((r) => r.id === c.recipeId) : null;
     const agree = b.in.picked_letter === x.g.correct_letter && !b.in.other_defensible;
     let correct = true;
@@ -213,10 +214,11 @@ function judge(dir: string) {
     if (fitOk) row.hardFit++; else bump("hard적합실패");
     const ok = correct && compOk && fitOk;
     if (ok) row.adopted++;
-    items.push({ cid: c.cid, skill: c.skill, adopted: ok, causes, hardFitOk: fitOk });
+    items.push({ cid: c.cid, skill: c.skill, system: c.system, idx: c.idx, adopted: ok, causes, hardFitOk: fitOk, detOk: true, correctOk: correct, complianceOk: compOk, cost: (gen.get(c.cid)?.cost ?? 0) + (b?.cost ?? 0) + (a?.cost ?? 0), mathVerify: x.det.mathVerify });
   }
   return { rows: [...rows.values()], items };
 }
+
 function report() {
   const combo = arg("--combo")!, method = arg("--method") ?? "recipe";
   const dir = path.join(RUN, "batch", `${combo}-${method}`);
@@ -255,3 +257,28 @@ async function rereview() {
   console.log(JSON.stringify({ n: out.length, correct: out.filter((x) => x.correctOk).length, compliance: out.filter((x) => x.complianceOk).length, hardFit: out.filter((x) => x.hardFitOk).length, hold: out.filter((x) => x.hold).length }));
 }
 main().catch((e) => { console.error(e); process.exit(1); });
+
+/** 조합 간 비교: 같은 후보 부분집합(RW·Math 각 idx < N)으로 A·B·C(+원형) 지표를 같은 식으로 집계. 실행: compare [--n-rw 3 --n-math 3] */
+function compare() {
+  const nRw = Number(arg("--n-rw") ?? 3), nMath = Number(arg("--n-math") ?? 3);
+  const out: Record<string, unknown> = {};
+  for (const [label, dir] of [["A(Sonnet5.5/Sonnet5.5)", "A-recipe"], ["B(Opus5.5/Fable5.1)", "B-recipe"], ["C(Fable5.1/Opus5.5)", "C-recipe"], ["A-원형(Sonnet5.5)", "A-archetype"]] as const) {
+    const d = path.join(RUN, "batch", dir);
+    if (!existsSync(path.join(d, "gens.json"))) continue;
+    const { items } = judge(d);
+    const res: Record<string, unknown> = {};
+    for (const sys of ["sat_rw", "sat_math"]) {
+      const sub = items.filter((i) => i.system === sys && (i.idx ?? 0) < (sys === "sat_rw" ? nRw : nMath));
+      if (!sub.length) continue;
+      const adopted = sub.filter((i) => i.adopted).length;
+      const cause: Record<string, number> = {};
+      for (const i of sub) for (const c of i.causes) cause[c] = (cause[c] ?? 0) + 1;
+      const judged = sub.filter((i) => i.hardFitOk !== null);
+      const mv = sub.filter((i) => i.mathVerify);
+      res[sys] = { cand: sub.length, detPass: sub.filter((i) => i.detOk !== false && !i.causes.some((c) => c.startsWith("생성"))).length, reviewed: judged.length, correctOk: sub.filter((i) => i.correctOk).length, complianceOk: sub.filter((i) => i.complianceOk).length, hardFitOk: sub.filter((i) => i.hardFitOk).length, hardFitRateOfReviewed: judged.length ? +(judged.filter((i) => i.hardFitOk).length / judged.length).toFixed(2) : null, adopted, yield: +(adopted / sub.length).toFixed(3), costUsd: +sub.reduce((a, i) => a + (i.cost ?? 0), 0).toFixed(3), costPerAdopted: adopted ? +(sub.reduce((a, i) => a + (i.cost ?? 0), 0) / adopted).toFixed(3) : null, mathVerify: sys === "sat_math" ? { pass: mv.filter((i) => i.mathVerify === "pass").length, fail: mv.filter((i) => i.mathVerify === "fail").length, skipped: mv.filter((i) => i.mathVerify === "skipped").length } : undefined, causes: cause };
+    }
+    out[label] = res;
+  }
+  writeFileSync(path.join(RUN, "batch", "compare.json"), JSON.stringify(out, null, 1));
+  console.log(JSON.stringify(out, null, 1));
+}

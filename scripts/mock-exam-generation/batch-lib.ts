@@ -71,7 +71,7 @@ export async function runBatch(opts: { dir: string; name: string; requests: Batc
     let cost = 0;
     let fatal = "";
     for await (const r of await getClient().messages.batches.results(state.batchId!)) {
-      const model = modelOf.get(r.custom_id) ?? "";
+      const model = modelOf.get(r.custom_id) ?? opts.requests[0].params.model;
       if (r.result.type === "succeeded") {
         const u = r.result.message.usage as Usage;
         const c = costOf(model, u);
