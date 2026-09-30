@@ -8,6 +8,7 @@ import { loadTeacherStudentRoadmapAction } from "./student-roadmap-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import TeacherPlannerBoard from "./TeacherPlannerBoard";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 // M4 UAT #5 — 체험 수업 리뷰 작성 UI는 배정 탭에서 제거됐다. 진입 위치는
 // "정규수업" 탭(TeacherLessonScheduleTab)의 "예정된 수업" 목록으로 이동했다 —
@@ -100,13 +101,13 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
   );
 }
 
-function formatDate(iso: string | null): string {
+function formatDate(iso: string | null, tz: string): string {
   if (!iso) return "-";
   return fmtDate(iso, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  });
+  }, tz);
 }
 
 const PLANNER_TABS = [
@@ -238,6 +239,7 @@ export default function AssignmentsTab({
   subtab?: "active" | "past";
   onSubtabChange?: (subtab: "active" | "past") => void;
 }) {
+  const tz = useViewerTimezone();
   // 2026-09-22(사용자 지시) — "현재/이전 배정 이력(펼침)" 대신 배정 중/배정 종료
   // 서브탭 두 개로 나눈다.
   const [localSubtab, setLocalSubtab] = useState<"active" | "past">("active");
@@ -299,7 +301,7 @@ export default function AssignmentsTab({
                   <div className="text-[13.5px] font-bold text-ink">{a.subjectName}</div>
                   <div className="text-[13px] text-grey-600">{a.studentName}</div>
                   <div className="text-[12px] text-grey-500 mt-0.5">
-                    {formatDate(a.effectiveFrom)}부터
+                    {formatDate(a.effectiveFrom, tz)}부터
                   </div>
                 </div>
                 <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500">
@@ -357,7 +359,7 @@ export default function AssignmentsTab({
               <div className="text-[13px] font-bold text-ink">{a.subjectName}</div>
               <div className="text-[12.5px] text-grey-600">{a.studentName}</div>
               <div className="text-[11.5px] text-grey-500 mt-0.5">
-                {formatDate(a.effectiveFrom)} ~ {formatDate(a.effectiveUntil)}
+                {formatDate(a.effectiveFrom, tz)} ~ {formatDate(a.effectiveUntil, tz)}
               </div>
             </div>
           ))}

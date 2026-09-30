@@ -23,6 +23,7 @@ import {
   type AdditionalStudyUnitPreview,
 } from "./student-curriculum-actions";
 import type { EligibleLibrary, OverlayUnit, StudentCurriculum } from "./student-curriculum-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtTime } from "@/lib/format-datetime";
 
 const STATUS_LABEL: Record<OverlayUnit["status"], string> = {
@@ -33,12 +34,12 @@ const STATUS_LABEL: Record<OverlayUnit["status"], string> = {
   skipped: "건너뜀",
 };
 
-function formatSessionTime(startsAt: string | null): string {
+function formatSessionTime(startsAt: string | null, tz: string): string {
   if (!startsAt) return "다음 예약 없음";
   const d = new Date(startsAt);
   if (Number.isNaN(d.getTime())) return "다음 예약 없음";
-  const date = fmtDate(d, { month: "long", day: "numeric" });
-  const time = fmtTime(d, { hour: "2-digit", minute: "2-digit" });
+  const date = fmtDate(d, { month: "long", day: "numeric" }, tz);
+  const time = fmtTime(d, { hour: "2-digit", minute: "2-digit" }, tz);
   return `${date} ${time} 수업`;
 }
 
@@ -64,6 +65,7 @@ export default function StudentCurriculumPanel({
   subjectName?: string;
   studentId?: string;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   // P2/P3 3단계 — 예약이 없어도 여기서 바로 회차를 준비한다.
   const [preparingUnit, setPreparingUnit] = useState<{ id: string; title: string } | null>(null);
@@ -388,7 +390,7 @@ export default function StudentCurriculumPanel({
                     (p.nearestSessionStartsAt ? "bg-green/10 text-green" : "bg-grey-100 text-grey-500")
                   }
                 >
-                  {formatSessionTime(p.nearestSessionStartsAt)}
+                  {formatSessionTime(p.nearestSessionStartsAt, tz)}
                 </span>
                 {p.hasFrozenLesson && (
                   <span className="text-[10.5px] font-bold rounded-full px-2 py-0.5 bg-ink text-white">
@@ -438,7 +440,7 @@ export default function StudentCurriculumPanel({
                     <ul className="text-[12px] text-ink mb-2 space-y-0.5">
                       {additionalStudyPreview.affectedFutureSessions.map((s) => (
                         <li key={s.sessionId}>
-                          {formatSessionTime(s.startsAt)} → {s.resultingUnitTitle}
+                          {formatSessionTime(s.startsAt, tz)} → {s.resultingUnitTitle}
                         </li>
                       ))}
                     </ul>

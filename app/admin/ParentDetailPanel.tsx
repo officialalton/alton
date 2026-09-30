@@ -7,6 +7,7 @@ import {
   type ParentDetail,
 } from "./parent-detail-actions";
 import { setParentStatus } from "./users-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -41,6 +42,7 @@ export default function ParentDetailPanel({
   parentEmail: string;
   onBack: () => void;
 }) {
+  const tz = useViewerTimezone();
   const [detail, setDetail] = useState<ParentDetail | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -127,7 +129,7 @@ export default function ParentDetailPanel({
             </select>
             {statusError && <p className="text-[12px] text-red mt-1.5">{statusError}</p>}
             <p className="text-[12px] text-grey-500 mt-2">
-              가입일 {detail.joinedAt ? fmtDate(detail.joinedAt) : "미입력"}
+              가입일 {detail.joinedAt ? fmtDate(detail.joinedAt, undefined, tz) : "미입력"}
               {detail.location ? ` · ${detail.location}` : ""}
               {detail.referralCode ? ` · 추천코드 ${detail.referralCode}` : ""}
             </p>
@@ -197,7 +199,7 @@ export default function ParentDetailPanel({
                 <span className="text-grey-500"> · {CONTRACT_STATUS_LABEL[c.status] ?? c.status}</span>
                 {c.voidedAt && <span className="text-red"> · 무효화됨({c.voidReason ?? "사유 없음"})</span>}
                 <div className="text-[11px] text-grey-400 mt-0.5">
-                  {fmtDate(c.createdAt)}
+                  {fmtDate(c.createdAt, undefined, tz)}
                 </div>
               </div>
             ))}
@@ -212,7 +214,7 @@ export default function ParentDetailPanel({
               <div key={m.id} className="border-b border-grey-100 last:border-0 py-2 text-[12.5px]">
                 <span className="font-bold text-ink">{m.senderName ?? m.senderRole}</span>
                 <span className="text-grey-400 text-[11px] ml-2">
-                  {fmtDateTime(m.createdAt)}
+                  {fmtDateTime(m.createdAt, undefined, tz)}
                 </span>
                 <p className="text-grey-600 mt-0.5 whitespace-pre-wrap">{m.body}</p>
               </div>

@@ -7,6 +7,7 @@ import {
   assignStudentToConsultantAction,
   type ConsultantDetail,
 } from "./consultant-assignment-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // Users > Consultants 프로필 상세(관리자 포털 정리 항목 1, 2026-09-23).
@@ -21,6 +22,7 @@ export default function ConsultantDetailPanel({
   consultantName: string | null;
   onBack: () => void;
 }) {
+  const tz = useViewerTimezone();
   const [detail, setDetail] = useState<ConsultantDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [unassigningId, setUnassigningId] = useState<string | null>(null);
@@ -147,7 +149,7 @@ export default function ConsultantDetailPanel({
                 {h.studentName ?? "학생"} · {h.priorConsultantName ?? "미배정"} → {h.newConsultantName ?? "미배정"}
               </div>
               <div className="text-grey-500 mt-0.5">
-                {fmtDateTime(h.changedAt)} {h.reason ? `· ${h.reason}` : ""}
+                {fmtDateTime(h.changedAt, undefined, tz)} {h.reason ? `· ${h.reason}` : ""}
               </div>
             </div>
           ))}

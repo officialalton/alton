@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { TeacherVocabOverview, TeacherVocabQuizRow } from "./vocab-assign-data";
 import VocabQuizIssueForm from "./VocabQuizIssueForm";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 /** 교사 포털 — 담당 학생에게 즉석 단어 시험을 내고, 발급 이력(학생별 상태·점수·마감)을 본다. */
@@ -39,12 +40,13 @@ export default function VocabAssignTab({ overview }: { overview: TeacherVocabOve
 }
 
 function QuizRow({ q }: { q: TeacherVocabQuizRow }) {
+  const tz = useViewerTimezone();
   return (
     <div className="border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between">
       <div>
         <span className="text-[13px] font-bold text-ink">{q.studentName}</span>
         <span className="text-[12.5px] text-grey-500 ml-2">{q.wordCount}문항</span>
-        {q.dueAt && <span className="text-[11px] text-red ml-2">마감 {fmtDateTime(q.dueAt, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>}
+        {q.dueAt && <span className="text-[11px] text-red ml-2">마감 {fmtDateTime(q.dueAt, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz)}</span>}
       </div>
       <span className="text-[12.5px] font-bold text-ink">
         {q.status === "completed" ? `${q.score}/${q.total}점` : "응시 대기"}

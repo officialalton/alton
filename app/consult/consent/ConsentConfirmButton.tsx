@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { confirmConsultConsent } from "@/app/consult-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 export default function ConsentConfirmButton({
@@ -11,6 +12,7 @@ export default function ConsentConfirmButton({
   token: string;
   alreadyConfirmedAt: string | null;
 }) {
+  const tz = useViewerTimezone();
   const [confirmedAt, setConfirmedAt] = useState<string | null>(alreadyConfirmedAt);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,7 +20,7 @@ export default function ConsentConfirmButton({
   if (confirmedAt) {
     return (
       <p className="text-[13.5px] font-bold text-ink">
-        확인 완료 ({fmtDateTime(confirmedAt)}) — 다시 확인하실 필요가 없습니다.
+        확인 완료 ({fmtDateTime(confirmedAt, undefined, tz)}) — 다시 확인하실 필요가 없습니다.
       </p>
     );
   }

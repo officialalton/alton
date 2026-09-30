@@ -14,6 +14,7 @@ import {
 } from "./mock-exam-tab-actions";
 import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 const SUB_TABS = ["배정", "현황", "열람", "내역"] as const;
@@ -202,6 +203,7 @@ function BrowseSubTab({ examSets }: { examSets: { id: string; name: string; diff
 }
 
 function HistorySubTab() {
+  const tz = useViewerTimezone();
   const [rows, setRows] = useState<TeacherAssignedMockExamRow[] | null>(null);
 
   useEffect(() => {
@@ -228,7 +230,7 @@ function HistorySubTab() {
             <td className="py-1.5">{r.studentName ?? r.studentId}</td>
             <td>{r.examSetName}</td>
             <td>{STATUS_LABEL[r.status] ?? r.status}</td>
-            <td>{r.dueAt ? fmtDate(r.dueAt) : "-"}</td>
+            <td>{r.dueAt ? fmtDate(r.dueAt, undefined, tz) : "-"}</td>
             <td>{r.correctCount !== null ? `${r.correctCount}/${r.totalCount}` : "-"}</td>
           </tr>
         ))}

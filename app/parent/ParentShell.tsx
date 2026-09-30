@@ -56,6 +56,7 @@ import {
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-17/18 — 학부모 포털 IA 재구성(R13 상담 마일스톤). 메인 내비는 아래
@@ -715,12 +716,13 @@ export default function ParentShell({
 // 동일 RLS)의 확정된 meeting_request_reviews만 다룬다 — 미팅록이 없으면
 // "미팅록이 없습니다"만 보여주고 링크를 지어내지 않는다.
 function ConsultationReviewCard({ review }: { review: HomeConsultationReview }) {
+  const tz = useViewerTimezone();
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
       <div className="flex items-center justify-between">
         <span className="text-[12px] font-bold text-ink">상담 리뷰</span>
         <span className="text-[11px] text-grey-500">
-          {review.startsAt ? fmtDateTime(review.startsAt, { dateStyle: "medium", timeStyle: "short" }) : "-"}
+          {review.startsAt ? fmtDateTime(review.startsAt, { dateStyle: "medium", timeStyle: "short" }, tz) : "-"}
         </span>
       </div>
       <p className="text-[12.5px] text-ink whitespace-pre-wrap mt-1.5">{review.finalText}</p>

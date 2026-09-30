@@ -28,6 +28,7 @@ import {
   archiveConsultationMaterialAction,
   type ConsultationMaterial,
 } from "./consultation-materials-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-29 — 한 화면이 길어져 카테고리별 서브탭으로 나눴다(UnderlineSubTabs).
@@ -65,6 +66,7 @@ export default function ConsultantAssignmentsTab({
   /** 조치가 필요한 면담 요청 수(SSR 가벼운 count). 면담 서브탭을 열면 실제 목록 기준으로 갱신된다. */
   initialMeetingActionCount?: number;
 }) {
+  const tz = useViewerTimezone();
   const [consultants, setConsultants] = useState(initialConsultants);
   const [unassigned, setUnassigned] = useState(initialUnassignedConsultations);
   const [awaitingSchedule, setAwaitingSchedule] = useState(initialAssignedAwaitingSchedule);
@@ -238,7 +240,7 @@ export default function ConsultantAssignmentsTab({
               <div className="text-[13px] font-bold text-ink">{c.contactName}</div>
               <div className="text-[12px] text-grey-500 mb-2">
                 {c.contactEmail}
-                {c.studentGrade ? ` · ${c.studentGrade}` : ""} · {fmtDate(c.requestedAt)}
+                {c.studentGrade ? ` · ${c.studentGrade}` : ""} · {fmtDate(c.requestedAt, undefined, tz)}
               </div>
               <div className="flex gap-2">
                 <select

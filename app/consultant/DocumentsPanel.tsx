@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { listMyContractDocumentsAction } from "./documents-actions";
 import type { ContractArchiveRow } from "@/app/admin/contract-archive-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // Phase B(2, 2026-09-23) — Documents 메인 탭. app/admin/ContractArchivePanel.tsx와
@@ -40,14 +41,15 @@ const ARTIFACT_LABEL: Record<string, string> = {
   manual_review: "보관 실패(확인 필요)",
 };
 
-function formatDate(value: string | null): string {
+function formatDate(value: string | null, tz: string): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" }, tz);
 }
 
 export default function DocumentsPanel() {
+  const tz = useViewerTimezone();
   const [rows, setRows] = useState<ContractArchiveRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
@@ -134,7 +136,7 @@ export default function DocumentsPanel() {
                 {CONTRACT_STATUS_LABEL[row.status] ?? row.status}
               </span>
               {row.latestVersionNumber !== null && <span className="text-[11px] text-grey-500">{row.latestVersionNumber}차</span>}
-              <span className="text-[11px] text-grey-500 ml-auto">{formatDate(row.createdAt)}</span>
+              <span className="text-[11px] text-grey-500 ml-auto">{formatDate(row.createdAt, tz)}</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-grey-500">
@@ -167,9 +169,9 @@ export default function DocumentsPanel() {
                 <dt className="font-bold">최신 버전</dt>
                 <dd>{row.latestVersionNumber !== null ? `${row.latestVersionNumber}차` : "아직 없음"}</dd>
                 <dt className="font-bold">서명 상태 갱신</dt>
-                <dd>{formatDate(row.envelopeStatusUpdatedAt)}</dd>
+                <dd>{formatDate(row.envelopeStatusUpdatedAt, tz)}</dd>
                 <dt className="font-bold">회사 서명일</dt>
-                <dd>{formatDate(row.companySignedAt)}</dd>
+                <dd>{formatDate(row.companySignedAt, tz)}</dd>
               </dl>
             )}
           </div>

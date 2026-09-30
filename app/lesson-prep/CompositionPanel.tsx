@@ -29,6 +29,7 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { SKILL_CODES, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import { materialStatusLines } from "@/lib/problem-material-need";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
@@ -581,6 +582,7 @@ function ProblemPreview({ problem }: { problem: KeywordProblem }) {
 }
 
 function LessonSection({ unitId }: { unitId: string }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [lessons, setLessons] = useState<PrepLesson[] | null>(null);
   const [busy, setBusy] = useState(false);
@@ -628,7 +630,7 @@ function LessonSection({ unitId }: { unitId: string }) {
         <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
           {lessons.map((l) => (
             <li key={l.sessionId} className="px-4 py-2.5 flex items-center gap-3">
-              <span className="text-[12.5px] text-ink flex-1">{formatLessonDate(l.startsAt)}</span>
+              <span className="text-[12.5px] text-ink flex-1">{formatLessonDate(l.startsAt, tz)}</span>
               {l.linked ? (
                 <button
                   disabled={busy}
@@ -662,7 +664,7 @@ function LessonSection({ unitId }: { unitId: string }) {
   );
 }
 
-function formatLessonDate(startsAt: string | null): string {
+function formatLessonDate(startsAt: string | null, tz: string): string {
   if (!startsAt) return "시간 미정";
   const d = new Date(startsAt);
   return fmtDateTime(d, {
@@ -671,5 +673,5 @@ function formatLessonDate(startsAt: string | null): string {
     weekday: "short",
     hour: "numeric",
     minute: "2-digit",
-  });
+  }, tz);
 }

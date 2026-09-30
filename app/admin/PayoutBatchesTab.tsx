@@ -23,6 +23,7 @@ import {
   dispatchPayoutBatchNow,
   recordExternalPayoutTransfer,
 } from "./payout-batches-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // R10 Task C — 레거시 PayoutsTab(teacher_payouts)을 대체하는 v3 payout_batches
@@ -93,6 +94,7 @@ export default function PayoutBatchesTab({
 }: {
   initialBatches: PayoutBatchListItem[];
 }) {
+  const tz = useViewerTimezone();
   // P4-2(2026-09-12) — 관리자 정산 화면에 `수취 계좌` 서브탭을 추가한다.
   const [subtab, setSubtab] = useState<PayoutSubTab>("batches");
   // P4-2(2차) — 최종 송금액 가감 조정 입력. 자동 산정 항목을 고치는 것이 아니라
@@ -487,7 +489,7 @@ export default function PayoutBatchesTab({
                   ) : (
                     b.auditLog.map((a) => (
                       <div key={a.id} className="text-[12px] text-grey-500 py-0.5">
-                        {fmtDateTime(a.createdAt)} ·{" "}
+                        {fmtDateTime(a.createdAt, undefined, tz)} ·{" "}
                         {AUDIT_ACTION_LABEL[a.action] ?? a.action} · {a.actorName ?? "시스템(자동)"}
                         {a.note ? ` · ${a.note}` : ""}
                       </div>

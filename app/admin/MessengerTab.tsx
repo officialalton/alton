@@ -25,6 +25,7 @@ import {
   type TeacherStaffInquiryListItem,
   type TeacherStaffMessage,
 } from "./teacher-staff-messenger-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-29 — Inquiries 메인 탭을 없애고 문의함(household_messages)을 세 번째
@@ -67,6 +68,7 @@ export default function MessengerTab({
 }
 
 function ConsultantMessengerPanel() {
+  const tz = useViewerTimezone();
   const [consultants, setConsultants] = useState<ConsultantWithStudents[] | null>(null);
   const [inquiries, setInquiries] = useState<StaffInquiryListItem[] | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -246,7 +248,7 @@ function ConsultantMessengerPanel() {
               </div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
-            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt)}</span>
+            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt, undefined, tz)}</span>
           </button>
         ))
       )}
@@ -255,6 +257,7 @@ function ConsultantMessengerPanel() {
 }
 
 function TeacherMessengerPanel() {
+  const tz = useViewerTimezone();
   const [teachers, setTeachers] = useState<TeacherListItem[] | null>(null);
   const [inquiries, setInquiries] = useState<TeacherStaffInquiryListItem[] | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -434,7 +437,7 @@ function TeacherMessengerPanel() {
               </div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
-            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt)}</span>
+            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt, undefined, tz)}</span>
           </button>
         ))
       )}

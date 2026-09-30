@@ -9,6 +9,7 @@ import {
   reactivateTeacher,
   getTeacherActivationChecklist,
 } from "./workspace-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -37,6 +38,7 @@ export default function WorkspaceTab({
 }: {
   provisionings: WorkspaceProvisioningItem[];
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -234,7 +236,7 @@ export default function WorkspaceTab({
                       {c.satisfied ? "✅" : "⬜"} {CONDITION_LABEL[c.condition] ?? c.condition}
                     </span>
                     <span className="text-grey-400">
-                      {c.evidence_at ? fmtDate(c.evidence_at) : "—"}
+                      {c.evidence_at ? fmtDate(c.evidence_at, undefined, tz) : "—"}
                     </span>
                   </li>
                 ))}

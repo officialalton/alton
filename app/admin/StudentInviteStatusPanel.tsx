@@ -7,9 +7,11 @@
 
 import { useEffect, useState } from "react";
 import { getStudentInviteStatusAction, resendStudentInviteAction, type StudentInviteStatus } from "./student-invite-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 export default function StudentInviteStatusPanel({ consultationId }: { consultationId: string }) {
+  const tz = useViewerTimezone();
   const [status, setStatus] = useState<StudentInviteStatus | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +47,7 @@ export default function StudentInviteStatusPanel({ consultationId }: { consultat
         </div>
       ) : status.inviteStatus === "sent" ? (
         <div className="text-[11.5px] text-grey-500 mt-1.5">
-          발송 완료{status.sentAt ? ` — ${fmtDateTime(status.sentAt)}` : ""} · 학생 응답 대기 중
+          발송 완료{status.sentAt ? ` — ${fmtDateTime(status.sentAt, undefined, tz)}` : ""} · 학생 응답 대기 중
         </div>
       ) : (
         <div className="text-[11.5px] text-grey-500 mt-1.5">발송 대기 중</div>

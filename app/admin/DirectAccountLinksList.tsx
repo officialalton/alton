@@ -18,6 +18,7 @@ import {
 } from "./direct-account-actions";
 import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 import { useTabCachedData } from "./use-tab-cached-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // "계정 생성"도 상태 변화가 잦은 화면으로 분류해 TTL 10초를 쓴다(신규
@@ -46,14 +47,15 @@ const NOTICE_STATUS_LABEL: Record<DirectOnboardingLinkSummary["noticeDeliverySta
   failed: "발송 실패",
 };
 
-function fmt(iso: string | null): string {
+function fmt(iso: string | null, tz: string): string {
   if (!iso) return "-";
-  return fmtDateTime(iso);
+  return fmtDateTime(iso, undefined, tz);
 }
 
 export type DirectAccountLinksListHandle = { refresh: () => void };
 
 const DirectAccountLinksList = forwardRef<DirectAccountLinksListHandle>(function DirectAccountLinksList(_props, ref) {
+  const tz = useViewerTimezone();
   const {
     data: links,
     error: loadError,
@@ -115,7 +117,7 @@ const DirectAccountLinksList = forwardRef<DirectAccountLinksListHandle>(function
                     {l.guardianName} <span className="font-normal text-grey-500">({l.guardianEmail})</span>
                   </div>
                   <div className="text-[11px] text-grey-500 mt-0.5">
-                    발송: {fmt(l.noticeSentAt ?? l.createdAt)} · 학생 {l.studentCount}명
+                    발송: {fmt(l.noticeSentAt ?? l.createdAt, tz)} · 학생 {l.studentCount}명
                     {l.studentsCreated > 0 && ` · 계정생성 ${l.studentsCreated}건`}
                     {l.studentsFailed > 0 && ` · 실패 ${l.studentsFailed}건`}
                     {l.studentsCancelled > 0 && ` · 취소 ${l.studentsCancelled}건`}

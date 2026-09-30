@@ -3,6 +3,7 @@ import { loadTeacherDashboard } from "./dashboard-data";
 import { loadRoster } from "./roster-data";
 import { loadMySubjects } from "./mysubjects-data";
 import { loadTeacherAssignments } from "./assignments-data";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
 import TeacherShell from "./TeacherShell";
 import { listMyAvailabilityRules, listTeacherAvailabilityExceptions } from "./availability-actions";
 import { listMyLessonSchedule } from "./lesson-schedule-actions";
@@ -88,6 +89,7 @@ export default async function TeacherHomePage({
     : undefined;
 
   return (
+    <ViewerTimezoneProvider timezone={availabilityTimezone}>
     <TeacherShell
       initialTab={tab}
       initialHomeworkStudentId={student}
@@ -104,5 +106,6 @@ export default async function TeacherHomePage({
       vocabOverview={vocabOverview}
       initialHomeworkKeywords={initialHomeworkKeywords}
     />
+    </ViewerTimezoneProvider>
   );
 }

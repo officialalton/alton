@@ -8,6 +8,7 @@ import {
   listTeacherPayoutAccountsAction,
   type TeacherPayoutAccountListItem,
 } from "./teacher-payout-accounts-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const FIELD_LABEL: Record<string, string> = {
@@ -20,6 +21,7 @@ const FIELD_LABEL: Record<string, string> = {
 };
 
 export default function TeacherPayoutAccountsPanel() {
+  const tz = useViewerTimezone();
   const [items, setItems] = useState<TeacherPayoutAccountListItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
@@ -69,7 +71,7 @@ export default function TeacherPayoutAccountsPanel() {
                 {a.country ? ` · ${a.country}` : ""}
               </div>
               <div className="text-[11.5px] text-grey-400 mt-1">
-                최종 수정 {fmtDateTime(a.updatedAt)}
+                최종 수정 {fmtDateTime(a.updatedAt, undefined, tz)}
               </div>
             </div>
             <button
@@ -88,7 +90,7 @@ export default function TeacherPayoutAccountsPanel() {
               ) : (
                 a.changes.map((c) => (
                   <li key={c.id} className="text-[11.5px] text-grey-500">
-                    {fmtDateTime(c.createdAt)} · {c.action === "created" ? "등록" : "수정"}
+                    {fmtDateTime(c.createdAt, undefined, tz)} · {c.action === "created" ? "등록" : "수정"}
                     {c.changedFields.length > 0
                       ? ` · ${c.changedFields.map((f) => FIELD_LABEL[f] ?? f).join(", ")}`
                       : ""}

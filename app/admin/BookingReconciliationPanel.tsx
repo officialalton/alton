@@ -28,6 +28,7 @@ import {
   type TeacherReconciliationResult,
   type BookingReconciliationDashboard,
 } from "./booking-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 const FINAL_STATUS_LABEL: Record<string, string> = {
@@ -57,10 +58,10 @@ const INCIDENT_REPORT_TYPE_LABEL: Record<string, string> = {
   teacher_no_show_reported: "선생님 노쇼",
 };
 
-function formatDateTime(iso: string): string {
+function formatDateTime(iso: string, tz: string): string {
   return fmtIntl(new Date(iso), {
     year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
-  });
+  }, tz);
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -109,6 +110,7 @@ export default function BookingReconciliationPanel({
 }: {
   initialDashboard?: BookingReconciliationDashboard;
 }) {
+  const tz = useViewerTimezone();
   const {
     data: dashboard,
     error: fetchError,
@@ -479,7 +481,7 @@ export default function BookingReconciliationPanel({
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[14px] font-bold text-ink">{r.teacherName ?? "(이름 없음)"} 선생님</div>
-                <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(r.startsAt)}</div>
+                <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(r.startsAt, tz)}</div>
               </div>
               <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-red/10 text-red">
                 {STATUS_LABEL[r.googleSyncStatus] ?? r.googleSyncStatus}
@@ -554,7 +556,7 @@ export default function BookingReconciliationPanel({
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[14px] font-bold text-ink">{c.teacherName ?? "(이름 없음)"} 선생님</div>
-                <div className="text-[13px] text-grey-500 mt-0.5">ALTON 기준: {formatDateTime(c.startsAt)}</div>
+                <div className="text-[13px] text-grey-500 mt-0.5">ALTON 기준: {formatDateTime(c.startsAt, tz)}</div>
               </div>
               <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-red/10 text-red">
                 {EXTERNAL_CHANGE_STATUS_LABEL[c.externalChangeStatus] ?? c.externalChangeStatus}
@@ -683,7 +685,7 @@ export default function BookingReconciliationPanel({
               </span>
             </div>
             <div className="text-[12px] text-grey-500 mt-1">
-              {formatDateTime(r.reportedAt)} · 신고자: {r.reportedByName ?? "(알 수 없음)"}
+              {formatDateTime(r.reportedAt, tz)} · 신고자: {r.reportedByName ?? "(알 수 없음)"}
               {r.minutesLate !== null ? ` · 지각 ${r.minutesLate}분` : ""}
             </div>
             {r.notes && <div className="mt-2 text-[12px] text-ink bg-grey-100 rounded-lg px-3 py-2">{r.notes}</div>}
@@ -715,7 +717,7 @@ export default function BookingReconciliationPanel({
               )}
             </div>
             <div className="text-[12px] text-grey-500 mt-1">
-              {formatDateTime(s.startsAt)} ~ {formatDateTime(s.endsAt)} · 현재 상태: {s.finalStatus}
+              {formatDateTime(s.startsAt, tz)} ~ {formatDateTime(s.endsAt, tz)} · 현재 상태: {s.finalStatus}
             </div>
             <div className="mt-2 flex gap-2 flex-wrap">
               <button
@@ -871,7 +873,7 @@ export default function BookingReconciliationPanel({
               </div>
               <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500">{s.finalStatus}</span>
             </div>
-            <div className="text-[12px] text-grey-500 mt-1">{formatDateTime(s.startsAt)} ~ {formatDateTime(s.endsAt)}</div>
+            <div className="text-[12px] text-grey-500 mt-1">{formatDateTime(s.startsAt, tz)} ~ {formatDateTime(s.endsAt, tz)}</div>
             {reopeningSessionId === s.sessionId ? (
               <div className="mt-2 border-t border-grey-200 pt-2">
                 <label className="block text-[11px] font-bold text-grey-500 mb-1">재개방 사유</label>
@@ -935,12 +937,12 @@ export default function BookingReconciliationPanel({
             </div>
             <div className="text-[12px] text-grey-500 mt-1">
               사유: {o.reason === "teacher_late" ? "선생님 지각" : o.reason === "company_meet_interruption" ? "회사·Meet 장애 중단" : o.reason}{" "}
-              · {formatDateTime(o.createdAt)}
+              · {formatDateTime(o.createdAt, tz)}
             </div>
             <div className={`text-[12px] mt-0.5 ${new Date(o.expiresAt) <= new Date() ? "text-red font-bold" : "text-grey-500"}`}>
               {new Date(o.expiresAt) <= new Date()
-                ? `만료됨(${formatDateTime(o.expiresAt)}) — 적용 불가, 필요하면 관리자가 새 보충시간을 등록하세요.`
-                : `사용 기한: ${formatDateTime(o.expiresAt)}까지(생성 후 30일)`}
+                ? `만료됨(${formatDateTime(o.expiresAt, tz)}) — 적용 불가, 필요하면 관리자가 새 보충시간을 등록하세요.`
+                : `사용 기한: ${formatDateTime(o.expiresAt, tz)}까지(생성 후 30일)`}
             </div>
             {applyingObligationId === o.obligationId ? (
               <div className="mt-3 border-t border-grey-200 pt-3">
@@ -1029,7 +1031,7 @@ export default function BookingReconciliationPanel({
               </span>
             </div>
             <div className="text-[12px] text-grey-500 mt-1">
-              정산 분: {t.priorPayableMinutes ?? "-"}분 → {t.newPayableMinutes ?? "-"}분 · {formatDateTime(t.createdAt)}
+              정산 분: {t.priorPayableMinutes ?? "-"}분 → {t.newPayableMinutes ?? "-"}분 · {formatDateTime(t.createdAt, tz)}
             </div>
             <div className="text-[12px] text-grey-500 mt-0.5">
               수업권 상태: 현재 {t.currentEntitlementDisposition ? ENTITLEMENT_DISPOSITION_LABEL[t.currentEntitlementDisposition] ?? t.currentEntitlementDisposition : "확인 불가"}

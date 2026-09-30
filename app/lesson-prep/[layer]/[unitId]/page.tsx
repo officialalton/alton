@@ -8,6 +8,8 @@ import {
   type PrepLayer,
 } from "@/lib/unit-composition";
 import CompositionPanel from "../../CompositionPanel";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
+import { resolveViewerTimezone } from "@/lib/timezone";
 
 // 2026-09-21(UAT 지적) — 이 화면은 AdminShell/TeacherShell 밖의 독립 라우트라 왼쪽
 // 사이드바가 사라지고, 뒤로 갈 방법도 없었다. 사이드바까지 통째로 다시 넣는 건(이
@@ -57,10 +59,11 @@ export default async function LessonPrepPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, timezone")
     .eq("id", user.id)
     .maybeSingle();
   const role = profile?.role as string | undefined;
+  const viewerTimezone = resolveViewerTimezone({ profileTimezone: profile?.timezone as string | null, role });
 
   // 앱 레벨 선인가. 실제 방어선은 RLS다 — 여기를 지나도 읽기 자체가 정책에서
   // 다시 걸리고, 그때는 아래 loadComposition이 null을 돌려준다.
@@ -144,6 +147,7 @@ export default async function LessonPrepPage({
           ← 뒤로
         </Link>
       </div>
+      <ViewerTimezoneProvider timezone={viewerTimezone}>
       <CompositionPanel
         composition={composition}
         pickable={pickable}
@@ -154,6 +158,7 @@ export default async function LessonPrepPage({
             : null
         }
       />
+      </ViewerTimezoneProvider>
     </div>
   );
 }

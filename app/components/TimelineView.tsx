@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { BoardCard } from "@/lib/board/types";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-22(사용자 지시, 재작업) — "이거 말한거야" 스크린샷(Notion 타임라인)처럼
@@ -28,6 +29,7 @@ export default function TimelineView({
   cards: BoardCard[];
   disableLinks?: boolean;
 }) {
+  const tz = useViewerTimezone();
   const dated = cards.filter((c) => c.dueAt);
   const undated = cards.filter((c) => !c.dueAt);
 
@@ -53,7 +55,7 @@ export default function TimelineView({
   const ticks: { left: number; label: string }[] = [];
   for (let i = 0; i < totalDays; i += 7) {
     const d = new Date(rangeStart + i * DAY_MS);
-    ticks.push({ left: i * DAY_WIDTH, label: fmtDate(d, { month: "short", day: "numeric" }) });
+    ticks.push({ left: i * DAY_WIDTH, label: fmtDate(d, { month: "short", day: "numeric" }, tz) });
   }
 
   const todayMs = startOfDay(new Date().toISOString());

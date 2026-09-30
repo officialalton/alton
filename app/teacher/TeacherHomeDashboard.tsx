@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { TeacherDashboardData } from "./dashboard-data";
 import type { TeacherAssignedSubject } from "./assignments-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { dateKey, fmtIntl } from "@/lib/format-datetime";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
@@ -84,15 +85,16 @@ function TodayLessonBanner({
   upcoming: TeacherDashboardData["upcoming"];
   onEnter: (sessionId: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const withTime = upcoming.filter((l): l is typeof l & { scheduledAt: string } => !!l.scheduledAt);
   if (withTime.length === 0) return null;
 
   const sorted = [...withTime].sort(
     (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
   );
-  const todayKey = dateKey(new Date());
+  const todayKey = dateKey(new Date(), tz);
   const todayLesson = sorted.find(
-    (l) => dateKey(new Date(l.scheduledAt)) === todayKey
+    (l) => dateKey(new Date(l.scheduledAt), tz) === todayKey
   );
   if (!todayLesson) return null;
 
@@ -101,7 +103,7 @@ function TodayLessonBanner({
       <div>
         <div className="text-[12px] font-semibold text-white/70 mb-0.5">오늘 수업</div>
         <div className="text-[14px] font-bold">
-          {formatKoreanDateTime(todayLesson.scheduledAt)} · {todayLesson.studentName} ·{" "}
+          {formatKoreanDateTime(todayLesson.scheduledAt, tz)} · {todayLesson.studentName} ·{" "}
           {todayLesson.subjectName}
         </div>
       </div>
@@ -229,6 +231,7 @@ function UpcomingWidget({
   upcoming: TeacherDashboardData["upcoming"];
   onShowAll: () => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const top = upcoming.slice(0, 5);
 
@@ -252,7 +255,7 @@ function UpcomingWidget({
             className="w-full text-left border-[1.5px] border-grey-200 rounded-lg px-3.5 py-3 mb-2 last:mb-0"
           >
             <div className="text-[12px] text-grey-500 mb-1">
-              {formatKoreanDateTime(lesson.scheduledAt)}
+              {formatKoreanDateTime(lesson.scheduledAt, tz)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
               {lesson.studentName} · {lesson.subjectName}
@@ -266,7 +269,7 @@ function UpcomingWidget({
   );
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
   return fmtIntl(new Date(iso), {
     month: "long",
@@ -274,5 +277,5 @@ function formatKoreanDateTime(iso: string | null) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }

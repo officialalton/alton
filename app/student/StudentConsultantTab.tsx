@@ -18,6 +18,7 @@ import {
   type MyAssignedConsultant,
 } from "./consultant-schedule-actions";
 import type { MeetingRequest, GuardianMeetingRequestReview } from "@/app/parent/inquiry-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
@@ -29,9 +30,9 @@ const MEETING_STATUS_LABEL: Record<string, string> = {
   cancelled: "취소됨",
 };
 
-function formatDateTime(iso: string | null): string {
+function formatDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 export default function StudentConsultantTab() {
@@ -158,6 +159,7 @@ function ScheduleRequestPanel({ consultant }: { consultant: MyAssignedConsultant
 }
 
 function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
+  const tz = useViewerTimezone();
   const [review, setReview] = useState<GuardianMeetingRequestReview | null | undefined>(undefined);
 
   useEffect(() => {
@@ -173,7 +175,7 @@ function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
     <div className="mt-2 border-t border-grey-200 pt-2">
       <h4 className="text-[12px] font-bold text-ink mb-1">상담 리뷰</h4>
       <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
-      {review.finalizedAt && <p className="text-[11px] text-grey-500 mt-1">확정일 {formatDateTime(review.finalizedAt)}</p>}
+      {review.finalizedAt && <p className="text-[11px] text-grey-500 mt-1">확정일 {formatDateTime(review.finalizedAt, tz)}</p>}
       {review.driveLink && (
         <a
           href={`https://drive.google.com/file/d/${review.driveLink.driveFileId}/view`}
@@ -189,6 +191,7 @@ function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
 }
 
 function MeetingHistoryPanel() {
+  const tz = useViewerTimezone();
   const [meetings, setMeetings] = useState<MeetingRequest[] | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -208,10 +211,10 @@ function MeetingHistoryPanel() {
             <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-bold text-ink">{MEETING_STATUS_LABEL[m.status] ?? m.status}</span>
-                <span className="text-[11px] text-grey-500">신청일 {formatDateTime(m.createdAt)}</span>
+                <span className="text-[11px] text-grey-500">신청일 {formatDateTime(m.createdAt, tz)}</span>
               </div>
               {m.content && <div className="text-[12px] text-grey-500 mt-0.5">사유: {m.content}</div>}
-              {m.startsAt && <div className="text-[12px] text-grey-500 mt-0.5">🗓 {formatDateTime(m.startsAt)}</div>}
+              {m.startsAt && <div className="text-[12px] text-grey-500 mt-0.5">🗓 {formatDateTime(m.startsAt, tz)}</div>}
               {m.googleMeetLink && (
                 <a
                   href={m.googleMeetLink}

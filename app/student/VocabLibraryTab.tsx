@@ -9,6 +9,7 @@ import {
   setMyVocabWordFolderAction, toggleLibraryWordInMyVocabAction,
   saveVocabQuizProgressAction, retakeVocabQuizAction,
 } from "./vocab-library-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 type SourceKey = "custom" | `book:${string}`;
@@ -477,6 +478,7 @@ function QuizPanel({
 }: {
   books: LibraryBook[]; folders: VocabFolder[]; initialQuizzes: VocabQuiz[]; readOnly?: boolean;
 }) {
+  const tz = useViewerTimezone();
   const [quizzes, setQuizzes] = useState(initialQuizzes);
   const [creating, setCreating] = useState(false);
   const [sources, setSources] = useState<Set<SourceKey>>(new Set(["custom"]));
@@ -586,7 +588,7 @@ function QuizPanel({
             <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[13px] font-bold text-ink">
-                  {fmtDate(q.createdAt, { month: "numeric", day: "numeric" })} · {q.wordCount}문항 · {sourceLabel(q)}
+                  {fmtDate(q.createdAt, { month: "numeric", day: "numeric" }, tz)} · {q.wordCount}문항 · {sourceLabel(q)}
                   {q.assignedByTeacher && <span className="text-[11px] text-grey-500 font-normal"> (선생님이 냄)</span>}
                 </span>
                 <span className="text-[12.5px] font-bold text-ink">
@@ -602,7 +604,7 @@ function QuizPanel({
               </div>
               <div className="flex items-center justify-between">
                 {q.dueAt && q.status !== "completed" && (
-                  <span className="text-[11px] text-red">마감 {fmtDateTime(q.dueAt, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+                  <span className="text-[11px] text-red">마감 {fmtDateTime(q.dueAt, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz)}</span>
                 )}
                 {!readOnly && (
                   <div className="ml-auto flex gap-2">

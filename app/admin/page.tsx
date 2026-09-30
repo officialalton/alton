@@ -33,6 +33,8 @@ import {
 } from "./consultant-assignment-actions";
 import { resolveAdminTab } from "./admin-tabs";
 import { loadAdminAccounts, type AdminAccount } from "./admin-accounts-data";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
+import { loadViewerTimezone } from "@/lib/viewer-timezone";
 import AdminShell from "./AdminShell";
 
 const EMPTY_DASHBOARD: AdminDashboardData = {
@@ -49,7 +51,7 @@ export default async function AdminHomePage({
 }: {
   searchParams: Promise<{ tab?: string; googleLinkError?: string; googleLinkSuccess?: string }>;
 }) {
-  const { user, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireUser();
   const { tab, googleLinkError, googleLinkSuccess } = await searchParams;
 
   // 2026-09-10(P1-3) — 탭별 SSR 로딩 분리. 이전엔 어느 탭에 있든 매 탭 전환(=이
@@ -155,7 +157,9 @@ export default async function AdminHomePage({
   // 목록·이력은 이제 UsersTab이 서브탭을 열 때 listStudentsForUsersTabAction/
   // listTeachersForUsersTabAction으로 지연 조회한다.
 
+  const viewerTimezone = await loadViewerTimezone(supabase, user.id, profile);
   return (
+    <ViewerTimezoneProvider timezone={viewerTimezone}>
     <AdminShell
       initialTab={tab}
       adminUserId={user.id}
@@ -194,5 +198,6 @@ export default async function AdminHomePage({
       autoAssignEnabled={autoAssignEnabled}
       initialMeetingActionCount={meetingActionCount}
     />
+    </ViewerTimezoneProvider>
   );
 }

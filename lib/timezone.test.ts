@@ -55,3 +55,15 @@ describe("TIMEZONE_OPTIONS", () => {
     expect(TIMEZONE_OPTIONS.some((o) => o.value === DEFAULT_TIMEZONE)).toBe(true);
   });
 });
+
+describe("resolveViewerTimezone", () => {
+  it("개인 설정 → household 기본값 → 역할별 fallback 순서", async () => {
+    const { resolveViewerTimezone } = await import("./timezone");
+    expect(resolveViewerTimezone({ profileTimezone: "Asia/Seoul", householdDefaultTimezone: "America/New_York", role: "student" })).toBe("Asia/Seoul");
+    expect(resolveViewerTimezone({ householdDefaultTimezone: "America/New_York", role: "parent" })).toBe("America/New_York");
+    expect(resolveViewerTimezone({ role: "student" })).toBe("America/Los_Angeles");
+    expect(resolveViewerTimezone({ role: "parent" })).toBe("America/Los_Angeles");
+    expect(resolveViewerTimezone({ role: "teacher" })).toBe("Asia/Seoul");
+    expect(resolveViewerTimezone({ role: "admin" })).toBe("Asia/Seoul");
+  });
+});

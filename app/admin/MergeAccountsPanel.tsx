@@ -9,6 +9,7 @@ import {
   type MergeSearchResult,
   type PendingAnonymization,
 } from "./merge-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 const ROLE_LABEL: Record<string, string> = {
@@ -26,6 +27,7 @@ const ROLE_LABEL: Record<string, string> = {
 // 목록까지 이 화면 하나로 묶는다. 실제 소유권 재배정·감사 이력·동시성
 // 방지는 전부 DB 함수가 하고, 여기는 얇은 UI일 뿐이다.
 export default function MergeAccountsPanel() {
+  const tz = useViewerTimezone();
   const [survivorEmail, setSurvivorEmail] = useState("");
   const [mergedEmail, setMergedEmail] = useState("");
   const [survivor, setSurvivor] = useState<MergeSearchResult>(null);
@@ -220,7 +222,7 @@ export default function MergeAccountsPanel() {
                 {p.mergedName ?? "이름 없음"} → {p.survivorName ?? "이름 없음"}
               </div>
               <div className="text-[11.5px] text-grey-500 mt-0.5">
-                병합일 {fmtDate(p.mergedAt)}
+                병합일 {fmtDate(p.mergedAt, undefined, tz)}
                 {p.reason && ` · ${p.reason}`}
                 {!p.eligibleNow && " · 아직 30일 유예 기간 중"}
               </div>

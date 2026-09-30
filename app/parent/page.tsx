@@ -12,6 +12,7 @@ import { loadChildrenSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "@/app/student/lesson-booking-data";
 import { loadParentVocabData } from "./vocab-data";
 import { loadParentHomeworkData } from "./homework-data";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
 import ParentShell from "./ParentShell";
 
 export default async function ParentHomePage({
@@ -94,6 +95,7 @@ export default async function ParentHomePage({
   >;
 
   return (
+    <ViewerTimezoneProvider timezone={profile?.timezone || lessonBooking.timezone}>
     <ParentShell
       parentName={profile?.name ?? "학부모"}
       childrenList={children}
@@ -116,5 +118,6 @@ export default async function ParentHomePage({
       homeworkByChild={homeworkByChild}
       lessonBooking={lessonBooking}
     />
+    </ViewerTimezoneProvider>
   );
 }

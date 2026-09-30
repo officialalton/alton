@@ -12,6 +12,7 @@ import {
   removeTeacherPick,
 } from "./problemlog-actions";
 import MathCanvas from "./MathCanvas";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 const REASONS = ["단어", "로직", "해석", "기타"];
@@ -319,6 +320,7 @@ function LogCard({
   onPickSaved: (pick: ProblemLogEntry["teacherPick"]) => void;
   onPickRemoved: () => void;
 }) {
+  const tz = useViewerTimezone();
   const preview = entry.passage.slice(0, 110);
 
   return (
@@ -337,7 +339,7 @@ function LogCard({
             )}
             {entry.teacherPick && <Badge tone="yellow">🏷 선생님 픽</Badge>}
             <span className="text-[11.5px] text-grey-500">
-              {formatKoreanDateTime(entry.attemptedAt)}
+              {formatKoreanDateTime(entry.attemptedAt, tz)}
             </span>
           </div>
           <p className="text-[13px] text-ink leading-[1.5]">
@@ -695,12 +697,12 @@ function TeacherPickPanel({
   );
 }
 
-function formatKoreanDateTime(iso: string) {
+function formatKoreanDateTime(iso: string, tz: string) {
   return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }

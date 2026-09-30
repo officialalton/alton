@@ -32,3 +32,14 @@ export const TIMEZONE_OPTIONS: { value: string; label: string }[] = [
 export function timezoneLabel(timezone: string): string {
   return TIMEZONE_OPTIONS.find((o) => o.value === timezone)?.label ?? timezone;
 }
+
+// 화면을 보는 사람(뷰어)의 표시 시간대. 개인 설정 → household 기본값 → 역할별 최종 fallback
+// (학생·학부모는 예약 화면과 같은 America/Los_Angeles, 운영진·선생님은 서비스 운영 기준 Asia/Seoul).
+export function resolveViewerTimezone(params: {
+  profileTimezone?: string | null;
+  householdDefaultTimezone?: string | null;
+  role?: string | null;
+}): string {
+  const roleFallback = params.role === "student" || params.role === "parent" ? DEFAULT_TIMEZONE : "Asia/Seoul";
+  return params.profileTimezone || params.householdDefaultTimezone || roleFallback;
+}

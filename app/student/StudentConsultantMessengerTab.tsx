@@ -14,14 +14,16 @@ import {
   markMyHouseholdMessengerReadAction,
 } from "./consultant-messenger-actions";
 import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
-function formatDateTime(iso: string | null): string {
+function formatDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 export default function StudentConsultantMessengerTab() {
+  const tz = useViewerTimezone();
   const [inquiries, setInquiries] = useState<HouseholdInquirySummary[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [subTab, setSubTab] = useState<"open" | "closed">("open");
@@ -136,7 +138,7 @@ export default function StudentConsultantMessengerTab() {
                 <div className="min-w-0">
                   <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
                   <p className="text-[11px] text-grey-500 mt-0.5">
-                    {i.status === "closed" ? `종료됨 · ${formatDateTime(i.closedAt)}` : `최근 메시지 ${formatDateTime(i.lastMessageAt)}`}
+                    {i.status === "closed" ? `종료됨 · ${formatDateTime(i.closedAt, tz)}` : `최근 메시지 ${formatDateTime(i.lastMessageAt, tz)}`}
                   </p>
                 </div>
                 <span className="text-[11px] font-bold text-grey-400 shrink-0">›</span>
@@ -150,6 +152,7 @@ export default function StudentConsultantMessengerTab() {
 }
 
 function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; onBack: () => void }) {
+  const tz = useViewerTimezone();
   const [messages, setMessages] = useState<HouseholdMessage[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
@@ -189,7 +192,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
       </button>
       {readOnly && (
         <p className="text-[12px] font-bold text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-3">
-          종료된 문의입니다({formatDateTime(inquiry.closedAt)}) — 읽기 전용이며, 이어서 문의하려면 목록에서 새 문의를 시작해주세요.
+          종료된 문의입니다({formatDateTime(inquiry.closedAt, tz)}) — 읽기 전용이며, 이어서 문의하려면 목록에서 새 문의를 시작해주세요.
         </p>
       )}
 
@@ -215,7 +218,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
                 >
                   <div>{m.body}</div>
                   <div className={"text-[10.5px] mt-1 " + (isMine ? "text-white/70" : "text-grey-500")}>
-                    {label} · {formatDateTime(m.createdAt)}
+                    {label} · {formatDateTime(m.createdAt, tz)}
                   </div>
                 </div>
               );

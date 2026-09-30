@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { boardColumnOf, type BoardCard, type BoardCardStatus, type BoardColumn } from "@/lib/board/types";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // Student Success Planner — Board 칼럼 렌더링(학생 포털·학부모 포털 공유).
@@ -22,16 +23,16 @@ export const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
   manual: "할 일",
 };
 
-export function formatDueAt(dueAt: string | null): string | null {
+export function formatDueAt(dueAt: string | null, tz: string): string | null {
   if (!dueAt) return null;
-  return fmtDate(dueAt, { month: "2-digit", day: "2-digit" });
+  return fmtDate(dueAt, { month: "2-digit", day: "2-digit" }, tz);
 }
 
 /** 2026-09-22(사용자 지시) — 항상 노출: 기간이 있으면 "MM/DD~MM/DD", 없으면 단일 마감일, 둘 다 없으면 "마감 없음". */
-export function formatDueRange(dueAt: string | null, dueStartAt: string | null): string {
-  const end = formatDueAt(dueAt);
+export function formatDueRange(dueAt: string | null, dueStartAt: string | null, tz: string): string {
+  const end = formatDueAt(dueAt, tz);
   if (!end) return "마감 없음";
-  const start = formatDueAt(dueStartAt);
+  const start = formatDueAt(dueStartAt, tz);
   return start ? `${start} ~ ${end}` : `마감 ${end}`;
 }
 
@@ -95,13 +96,14 @@ function BoardCardItem({
   onDelete?: (cardId: string) => void;
   disableLinks?: boolean;
 }) {
+  const tz = useViewerTimezone();
   const editable = card.sourceType === "manual" && onMove && onDelete;
   const body = (
     <div className="bg-white rounded-lg border border-grey-200 px-3 py-2">
       <div className="text-[11px] font-bold text-grey-400 mb-0.5">{SOURCE_LABEL[card.sourceType]}</div>
       <div className="text-[13px] font-semibold text-ink">{card.title}</div>
       {card.subtitle && <div className="text-[11px] text-grey-500">{card.subtitle}</div>}
-      <div className="text-[11px] text-grey-500 mt-1">{formatDueRange(card.dueAt, card.dueStartAt)}</div>
+      <div className="text-[11px] text-grey-500 mt-1">{formatDueRange(card.dueAt, card.dueStartAt, tz)}</div>
       <div className="text-[10.5px] text-grey-400 mt-0.5">{card.createdByLabel}</div>
       {editable && (
         <div className="flex items-center gap-1.5 mt-2">

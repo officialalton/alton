@@ -6,6 +6,7 @@ import {
   openCompanyDocumentAction,
   type CompanyDocumentEntry,
 } from "./company-documents-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // P4-3 4단계 — `문서 > 회사 문서`. 읽기 전용이다.
@@ -23,14 +24,15 @@ function formatBytes(size: number | null): string {
   return `${(size / (1024 * 1024)).toFixed(1)}MB`;
 }
 
-function formatDate(value: string | null): string {
+function formatDate(value: string | null, tz: string): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" }, tz);
 }
 
 export default function CompanyDocumentsPanel() {
+  const tz = useViewerTimezone();
   const [crumbs, setCrumbs] = useState<Crumb[]>([{ id: null, name: "회사 문서" }]);
   const [entries, setEntries] = useState<CompanyDocumentEntry[] | null>(null);
   const [state, setState] = useState<"loading" | "ok" | "not_configured" | "fetch_failed" | "denied">(
@@ -162,7 +164,7 @@ export default function CompanyDocumentsPanel() {
             <span className="text-[11.5px] text-grey-500">
               {entry.isFolder ? "" : formatBytes(entry.sizeBytes)}
             </span>
-            <span className="text-[11.5px] text-grey-500">{formatDate(entry.modifiedAt)}</span>
+            <span className="text-[11.5px] text-grey-500">{formatDate(entry.modifiedAt, tz)}</span>
             {!entry.isFolder && (
               <button
                 onClick={() => void openFile(entry)}

@@ -8,6 +8,7 @@ import {
   type TeacherDocumentSummary,
   type TeacherDocumentItem,
 } from "./teacher-documents-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // P4-3 3단계 — `문서 > 교사 서류`. 읽기 전용 보관함이다.
@@ -23,11 +24,11 @@ function formatBytes(size: number | null): string {
   return `${(size / (1024 * 1024)).toFixed(1)}MB`;
 }
 
-function formatDate(value: string | null): string {
+function formatDate(value: string | null, tz: string): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" }, tz);
 }
 
 function messageForReason(reason: string): string {
@@ -42,6 +43,7 @@ function messageForReason(reason: string): string {
 }
 
 export default function TeacherDocumentsPanel() {
+  const tz = useViewerTimezone();
   const [summaries, setSummaries] = useState<TeacherDocumentSummary[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [openTeacherId, setOpenTeacherId] = useState<string | null>(null);
@@ -120,7 +122,7 @@ export default function TeacherDocumentsPanel() {
               <span className="text-[14px] font-bold text-ink">{s.teacherName || "이름 없음"}</span>
               <span className="text-[12px] text-grey-500">{s.documentCount}건</span>
               <span className="text-[11.5px] text-grey-500">
-                최근 제출 {formatDate(s.lastUploadedAt)}
+                최근 제출 {formatDate(s.lastUploadedAt, tz)}
               </span>
               <button
                 onClick={() => void openTeacher(s.teacherId)}
@@ -144,7 +146,7 @@ export default function TeacherDocumentsPanel() {
                     >
                       <span className="text-ink truncate max-w-[320px]">{doc.fileName}</span>
                       <span className="text-[11.5px] text-grey-500">{formatBytes(doc.sizeBytes)}</span>
-                      <span className="text-[11.5px] text-grey-500">{formatDate(doc.uploadedAt)}</span>
+                      <span className="text-[11.5px] text-grey-500">{formatDate(doc.uploadedAt, tz)}</span>
                       {doc.note && (
                         <span className="text-[11.5px] text-grey-500">· {doc.note}</span>
                       )}

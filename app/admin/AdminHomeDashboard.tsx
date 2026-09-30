@@ -1,4 +1,5 @@
 import type { AdminDashboardData } from "./dashboard-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 type AdminNavTarget = "consult" | "matching" | "users";
@@ -17,6 +18,7 @@ export default function AdminHomeDashboard({
   data: AdminDashboardData;
   onNavigate: (tab: AdminNavTarget) => void;
 }) {
+  const tz = useViewerTimezone();
   const cards = [
     {
       key: "pendingConsults",
@@ -64,7 +66,7 @@ export default function AdminHomeDashboard({
       rows: data.upcomingConsults.map((c) => ({
         id: c.id,
         primary: c.personName,
-        secondary: formatKoreanDateTime(c.scheduledAt),
+        secondary: formatKoreanDateTime(c.scheduledAt, tz),
       })) as CardRow[],
     },
   ].sort((a, b) => b.count - a.count);
@@ -145,7 +147,7 @@ function Empty({ text }: { text: string }) {
   return <p className="text-[12.5px] text-grey-500">{text}</p>;
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
   return fmtIntl(new Date(iso), {
     month: "long",
@@ -153,5 +155,5 @@ function formatKoreanDateTime(iso: string | null) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }

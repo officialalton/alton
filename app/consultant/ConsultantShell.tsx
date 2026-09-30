@@ -86,6 +86,7 @@ import {
   type MeetingRequestReviewForConsultant,
   type MeetingRequestReviewEditForConsultant,
 } from "./meeting-request-review-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime, fmtTime } from "@/lib/format-datetime";
 
 type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "staff-messages" | "college-explore";
@@ -496,9 +497,9 @@ const MEETING_STATUS_LABEL: Record<string, string> = {
   cancelled: "거절됨",
 };
 
-function formatMeetingDateTime(iso: string | null): string {
+function formatMeetingDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 // Phase B(3, 2026-09-23) — 기존 "일정 요청"(meetings)과 "가능시간"(schedule)을
@@ -563,6 +564,7 @@ function sessionTimingLabel(startsAtIso: string): { label: string; canStart: boo
 }
 
 function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
+  const tz = useViewerTimezone();
   const confirmedConsultations = assignedConsultations
     .filter((c) => c.status === "scheduled" && c.startsAt)
     .sort((a, b) => (a.startsAt ?? "").localeCompare(b.startsAt ?? ""));
@@ -655,7 +657,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                     <span className="text-[11px] text-grey-500">{timing?.label ?? "상담"}</span>
                   </div>
                   {c.startsAt && (
-                    <div className="text-[12px] text-grey-500 mt-1">{formatMeetingDateTime(c.startsAt)}</div>
+                    <div className="text-[12px] text-grey-500 mt-1">{formatMeetingDateTime(c.startsAt, tz)}</div>
                   )}
                   {timing?.canStart && c.startsAt && (
                     <button
@@ -689,7 +691,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
               </div>
               {m.content && <div className="text-[12px] text-grey-600 mt-1">사유: {m.content}</div>}
               {m.startsAt && (
-                <div className="text-[12px] text-grey-500 mt-1">희망 시간: {formatMeetingDateTime(m.startsAt)}</div>
+                <div className="text-[12px] text-grey-500 mt-1">희망 시간: {formatMeetingDateTime(m.startsAt, tz)}</div>
               )}
               {m.googleMeetLink && (
                 <a href={m.googleMeetLink} target="_blank" rel="noreferrer" className="inline-block mt-1 text-[12px] font-semibold text-ink underline">
@@ -768,6 +770,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
 // 액션(meeting-request-review-actions.ts)을 쓴다. 미팅록(Drive) 링크 연결은
 // 범위 밖(관리자 전용 유지) — 이 패널은 리뷰 텍스트 draft/확정/수정만 한다.
 function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: string }) {
+  const tz = useViewerTimezone();
   const [review, setReview] = useState<MeetingRequestReviewForConsultant | null>(null);
   const [edits, setEdits] = useState<MeetingRequestReviewEditForConsultant[]>([]);
   const [text, setText] = useState("");
@@ -840,8 +843,8 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
       </div>
       {isFinal && (
         <p className="text-[11px] text-grey-500 mt-1">
-          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt) : "-"}
-          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt)}`}
+          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt, undefined, tz) : "-"}
+          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt, undefined, tz)}`}
         </p>
       )}
       {isFinal && (
@@ -861,7 +864,7 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
               {edits.length === 0 && <p className="text-[11px] text-grey-500">수정 이력이 없습니다(아직 확정 후 수정된 적 없음).</p>}
               {edits.map((e) => (
                 <div key={e.id} className="text-[11px] text-grey-500 border-l-2 border-grey-200 pl-2">
-                  {fmtDateTime(e.editedAt)} · {e.editedByName ?? "컨설턴트"}
+                  {fmtDateTime(e.editedAt, undefined, tz)} · {e.editedByName ?? "컨설턴트"}
                   {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">이전 내용: {e.previousFinalText}</div>}
                 </div>
               ))}
@@ -885,6 +888,7 @@ function ConsultationSessionView({
   session: { kind: "consultation" | "meeting_request"; id: string; label: string; startsAt: string };
   onExit: () => void;
 }) {
+  const tz = useViewerTimezone();
   const [materials, setMaterials] = useState<ConsultationMaterialForSession[] | null>(null);
   const [note, setNote] = useState("");
   const [nextAction, setNextAction] = useState("");
@@ -939,7 +943,7 @@ function ConsultationSessionView({
         ← Schedule로
       </button>
       <h1 className="text-[18px] font-extrabold text-ink mb-1">{session.label}님 상담 세션</h1>
-      <div className="text-[12px] text-grey-500 mb-6">{formatMeetingDateTime(session.startsAt)} · 진행 중</div>
+      <div className="text-[12px] text-grey-500 mb-6">{formatMeetingDateTime(session.startsAt, tz)} · 진행 중</div>
 
       <div className="grid grid-cols-2 gap-6">
         <div>
@@ -986,7 +990,7 @@ function ConsultationSessionView({
           <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
             저장
           </button>
-          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">{fmtDateTime(savedAt)} 저장됨</span>}
+          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">{fmtDateTime(savedAt, undefined, tz)} 저장됨</span>}
         </div>
       </div>
     </div>
@@ -1135,6 +1139,7 @@ function AvailabilityPanel() {
 // 등록 시도 시 서버(createMyTimeOffAction)가 기존 확정 일정과의 충돌을
 // 검사해, 충돌이 있으면 저장하지 않고 어떤 일정과 겹치는지 알려준다.
 function TimeOffPanel() {
+  const tz = useViewerTimezone();
   const [items, setItems] = useState<ConsultantTimeOff[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [conflicts, setConflicts] = useState<TimeOffConflict[] | null>(null);
@@ -1205,7 +1210,7 @@ function TimeOffPanel() {
             {conflicts.map((c, i) => (
               <li key={i}>
                 {c.label}
-                {c.startsAt ? ` · ${formatMeetingDateTime(c.startsAt)}` : ""}
+                {c.startsAt ? ` · ${formatMeetingDateTime(c.startsAt, tz)}` : ""}
               </li>
             ))}
           </ul>
@@ -1250,8 +1255,8 @@ function TimeOffPanel() {
             <div>
               <span className="text-[13px] font-semibold text-ink">
                 {t.allDay
-                  ? fmtDate(t.startsAt)
-                  : `${formatMeetingDateTime(t.startsAt)} ~ ${fmtTime(t.endsAt, { hour: "2-digit", minute: "2-digit" })}`}
+                  ? fmtDate(t.startsAt, undefined, tz)
+                  : `${formatMeetingDateTime(t.startsAt, tz)} ~ ${fmtTime(t.endsAt, { hour: "2-digit", minute: "2-digit" }, tz)}`}
               </span>
               {t.reason && <div className="text-[11.5px] text-grey-500 mt-0.5">{t.reason}</div>}
             </div>
@@ -1386,6 +1391,7 @@ function ProfilePanel() {
 // 업무 지침 대화가 가능한지") — 담당 가족 메신저와 완전히 별개인 관리자
 // 내부 채널. 학생·보호자 화면에는 이 탭 자체가 없다(RLS도 별도 테이블).
 function StaffMessagesPanel() {
+  const tz = useViewerTimezone();
   const [inquiries, setInquiries] = useState<ConsultantAdminInquiry[] | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [messages, setMessages] = useState<ConsultantAdminMessage[] | null>(null);
@@ -1534,7 +1540,7 @@ function StaffMessagesPanel() {
               <div className="text-[13px] font-bold text-ink">{i.subject ?? "제목 없음"}</div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
-            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt)}</span>
+            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt, undefined, tz)}</span>
           </button>
         ))
       )}
@@ -1611,6 +1617,7 @@ function EndedStudentList({
   students: EndedConsultantStudent[];
   onSelect: (id: string) => void;
 }) {
+  const tz = useViewerTimezone();
   if (students.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -1628,7 +1635,7 @@ function EndedStudentList({
         >
           <div className="flex items-center justify-between">
             <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
-            <span className="text-[11px] text-grey-500">{fmtDate(s.endedAt)} 종료</span>
+            <span className="text-[11px] text-grey-500">{fmtDate(s.endedAt, undefined, tz)} 종료</span>
           </div>
           {s.reason && <div className="text-[12px] text-grey-500 mt-1">{s.reason}</div>}
         </button>
@@ -1638,6 +1645,7 @@ function EndedStudentList({
 }
 
 function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStudent; onBack: () => void }) {
+  const tz = useViewerTimezone();
   return (
     <div className="max-w-[640px] px-8 py-8">
       <button
@@ -1648,7 +1656,7 @@ function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStuden
       </button>
       <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-1">{student.name ?? "이름 없음"}</h1>
       <div className="text-[12px] text-grey-500 mb-4">
-        {fmtDateTime(student.endedAt)}에 담당이 종료됨
+        {fmtDateTime(student.endedAt, undefined, tz)}에 담당이 종료됨
       </div>
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 bg-grey-100">
         <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">종료 사유</div>
@@ -1834,15 +1842,16 @@ function StudentRoadmapPanel({ studentId }: { studentId: string }) {
   return <RoadmapView data={state.data} canProposeSourceUrl />;
 }
 
-function formatMessengerDateTime(iso: string | null): string {
+function formatMessengerDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 // 2026-09-22 — 컨설턴트 household 메신저(읽기+답장 전용, 새 문의 열기는 없음).
 // app/parent/MessengerTab.tsx와 같은 데이터·같은 문의 단위 스레드를 다루지만,
 // studentId로 진입해 household를 서버 액션 안에서 알아낸다(RLS가 담당 확인).
 function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
+  const tz = useViewerTimezone();
   const [inquiries, setInquiries] = useState<HouseholdInquirySummary[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [subTab, setSubTab] = useState<"open" | "closed">("open");
@@ -1973,7 +1982,7 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
                   {i.subject && <p className="text-[12.5px] font-bold text-ink truncate">{i.subject}</p>}
                   <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
                   <p className="text-[11px] text-grey-500 mt-0.5">
-                    {i.status === "closed" ? `종료됨 · ${formatMessengerDateTime(i.closedAt)}` : `최근 메시지 ${formatMessengerDateTime(i.lastMessageAt)}`}
+                    {i.status === "closed" ? `종료됨 · ${formatMessengerDateTime(i.closedAt, tz)}` : `최근 메시지 ${formatMessengerDateTime(i.lastMessageAt, tz)}`}
                   </p>
                 </div>
                 <span className="text-[11px] font-bold text-grey-400 shrink-0">›</span>
@@ -1995,6 +2004,7 @@ function ConsultantInquiryDetail({
   inquiry: HouseholdInquirySummary;
   onBack: () => void;
 }) {
+  const tz = useViewerTimezone();
   const [messages, setMessages] = useState<HouseholdMessage[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
@@ -2038,7 +2048,7 @@ function ConsultantInquiryDetail({
       </button>
       {readOnly && (
         <p className="text-[12px] font-bold text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-3">
-          종료된 문의입니다({formatMessengerDateTime(inquiry.closedAt)}) — 읽기 전용입니다.
+          종료된 문의입니다({formatMessengerDateTime(inquiry.closedAt, tz)}) — 읽기 전용입니다.
         </p>
       )}
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
@@ -2063,7 +2073,7 @@ function ConsultantInquiryDetail({
                 >
                   <div>{m.body}</div>
                   <div className={"text-[10.5px] mt-1 " + (isMine ? "text-white/70" : "text-grey-500")}>
-                    {label} · {formatMessengerDateTime(m.createdAt)}
+                    {label} · {formatMessengerDateTime(m.createdAt, tz)}
                   </div>
                 </div>
               );

@@ -32,6 +32,7 @@ import type {
 } from "./consultation-data";
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 type SubTab = "consult" | "contracts" | "accounts" | "scheduling" | "trial" | "consent" | "errors" | "past";
@@ -120,6 +121,7 @@ function TrialSection({
   trials: TrialSessionListItem[];
   consultations: ConsultationListItem[];
 }) {
+  const tz = useViewerTimezone();
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
@@ -156,7 +158,7 @@ function TrialSection({
                   <span className="text-[11px] font-semibold text-grey-500">({t.status})</span>
                 </div>
                 <div className="text-[12px] text-grey-500">
-                  선생님: {t.teacherName ?? t.teacherId} · {fmtDateTime(t.scheduledAt)}
+                  선생님: {t.teacherName ?? t.teacherId} · {fmtDateTime(t.scheduledAt, undefined, tz)}
                 </div>
                 {t.exceptionApprovedBy && (
                   <div className="text-[11px] text-grey-500">예외 승인됨: {t.exceptionReason}</div>
@@ -458,6 +460,7 @@ function ErrorDashboardSection({
   duplicateCandidates: ConsultationListItem[];
   contractActivationRetries: ContractActivationRetryItem[];
 }) {
+  const tz = useViewerTimezone();
   // P4-3 1단계 — 동의 현황은 `문서 > 동의서`와 같은 캐시 키를 쓴다. 두 화면이
   // 공통 부모 없이 같은 데이터를 보고, TTL 안에서는 한 번만 조회한다.
   const consentGapsCache = useTabCachedData<ConsentGapItem[]>({
@@ -557,7 +560,7 @@ function ErrorDashboardSection({
             <div key={r.id} className={card + " flex items-center justify-between"}>
               <span className="text-[12.5px] text-ink">
                 {r.childName ?? r.childId ?? "학생 미확인"} · 계약 {r.contractId} ·{" "}
-                {fmtDateTime(r.createdAt)}
+                {fmtDateTime(r.createdAt, undefined, tz)}
                 <span className="text-[11px] text-grey-500 ml-2">{r.failureReason}</span>
               </span>
               <button

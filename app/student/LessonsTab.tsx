@@ -10,6 +10,7 @@ import type { ReviewData, StudentFeedback } from "./review-data";
 import CurriculumView from "./CurriculumView";
 import ReviewPanel from "./ReviewPanel";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 type SubView =
@@ -116,6 +117,7 @@ function UpcomingList({
   lessons: LessonItem[];
   onOpenCurriculum: (enrollmentId: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
 
   if (lessons.length === 0) {
@@ -142,7 +144,7 @@ function UpcomingList({
             className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3"
           >
             <div className="text-[12px] text-grey-500 mb-1.5">
-              {formatKoreanDateTime(lesson.scheduledAt)}
+              {formatKoreanDateTime(lesson.scheduledAt, tz)}
             </div>
             <div className="flex items-center gap-2 flex-wrap mb-1.5">
               <button
@@ -181,6 +183,7 @@ function PastList({
   onOpenCurriculum: (enrollmentId: string) => void;
   onReview: (sessionId: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
 
   if (lessons.length === 0) {
@@ -199,7 +202,7 @@ function PastList({
           className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3"
         >
           <div className="text-[12px] text-grey-500 mb-1.5">
-            {formatKoreanDateTime(lesson.scheduledAt)}
+            {formatKoreanDateTime(lesson.scheduledAt, tz)}
           </div>
           <div className="flex items-center gap-2 flex-wrap mb-1.5">
             <button
@@ -235,7 +238,7 @@ function PastList({
   );
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
   return fmtIntl(new Date(iso), {
     month: "long",
@@ -243,5 +246,5 @@ function formatKoreanDateTime(iso: string | null) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }

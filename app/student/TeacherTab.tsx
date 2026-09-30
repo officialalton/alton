@@ -10,6 +10,7 @@ import type {
 import type { ChatMessage } from "./chat-data";
 import ChatPanel from "./ChatPanel";
 import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 type SubView =
@@ -128,6 +129,7 @@ function ProfileView({
   history: TeacherSessionHistoryItem[];
   onBack: () => void;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [showHistory, setShowHistory] = useState(false);
 
@@ -183,7 +185,7 @@ function ProfileView({
             className="w-full text-left border-[1.5px] border-grey-200 rounded-lg px-4 py-3 mb-2"
           >
             <div className="text-[12px] text-grey-500">
-              {formatKoreanDateTime(h.scheduledAt)}
+              {formatKoreanDateTime(h.scheduledAt, tz)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
               {h.subjectName} · {h.sessionNumber}회차
@@ -195,7 +197,7 @@ function ProfileView({
   );
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
   return fmtIntl(new Date(iso), {
     month: "long",
@@ -203,5 +205,5 @@ function formatKoreanDateTime(iso: string | null) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }

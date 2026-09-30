@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { requestParentPayment } from "./credits-actions";
 import type { CreditsData } from "./credits-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
-function formatDate(iso: string | null): string {
+function formatDate(iso: string | null, tz: string): string {
   if (!iso) return "-";
-  return fmtIntl(new Date(iso), { year: "numeric", month: "long", day: "numeric" });
+  return fmtIntl(new Date(iso), { year: "numeric", month: "long", day: "numeric" }, tz);
 }
 
 export default function CreditsTab({ data }: { data: CreditsData }) {
+  const tz = useViewerTimezone();
   const [requesting, setRequesting] = useState(false);
   const [confirmedFor, setConfirmedFor] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +46,7 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
                 정규수업권 잔여 {data.regularRemaining}회
               </div>
               <div className="text-[12px] text-grey-500">
-                가장 빠른 만료일: {formatDate(data.regularNearestExpiry)}
+                가장 빠른 만료일: {formatDate(data.regularNearestExpiry, tz)}
               </div>
             </div>
           )}
@@ -55,7 +57,7 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
             <div className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
               <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
               <p className="text-[11.5px] text-grey-500 mt-0.5">
-                만료 {formatDate(data.trialEntitlement.expiresAt)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
+                만료 {formatDate(data.trialEntitlement.expiresAt, tz)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
                 예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
               </p>
             </div>

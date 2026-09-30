@@ -1,4 +1,5 @@
 import { requireUser } from "@/lib/auth";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
 import StudentShell from "./StudentShell";
 import { loadDashboardData } from "./dashboard-data";
 import { loadMyVocabWords, loadLibraryBooks, loadVocabQuizzes, loadVocabFolders } from "./vocab-library-data";
@@ -134,6 +135,7 @@ export default async function StudentHomePage({
   }
 
   return (
+    <ViewerTimezoneProvider timezone={lessonBooking.timezone}>
     <StudentShell
       studentName={dashboard.studentName}
       initialTab={tab}
@@ -162,5 +164,6 @@ export default async function StudentHomePage({
       roadmap={roadmap}
       mockExamAttempts={mockExamAttempts}
     />
+    </ViewerTimezoneProvider>
   );
 }

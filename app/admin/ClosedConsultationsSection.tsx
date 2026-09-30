@@ -8,6 +8,7 @@ import {
   type ClosedConsultationItem,
 } from "./consultation-kanban-actions";
 import { CLOSURE_TYPE_LABEL, type ConsultationClosureType } from "./consultation-kanban-constants";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const card = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3";
@@ -16,6 +17,7 @@ const errText = "text-[12px] text-red mb-2";
 const ALL_TYPES: ConsultationClosureType[] = ["no_trial", "trial_no_convert", "regular_in_progress", "contract_signed"];
 
 export default function ClosedConsultationsSection() {
+  const tz = useViewerTimezone();
   const [items, setItems] = useState<ClosedConsultationItem[] | null>(null);
   const [counts, setCounts] = useState<Record<ConsultationClosureType, number> | null>(null);
   const [filter, setFilter] = useState<ConsultationClosureType | "all">("all");
@@ -71,7 +73,7 @@ export default function ClosedConsultationsSection() {
                 <span className="text-[11px] font-semibold text-grey-500">({CLOSURE_TYPE_LABEL[i.closureType]})</span>
               </div>
               <div className="text-[12px] text-grey-500">
-                {i.contactEmail} · 종료일 {fmtDateTime(i.closedAt)}
+                {i.contactEmail} · 종료일 {fmtDateTime(i.closedAt, undefined, tz)}
               </div>
             </div>
           </div>

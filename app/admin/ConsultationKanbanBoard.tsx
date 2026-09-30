@@ -48,6 +48,7 @@ import TrialOnboardingStudentsForm from "./TrialOnboardingStudentsForm";
 import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const btnPrimary = "text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50";
@@ -60,9 +61,9 @@ const errText = "text-[12px] text-red mb-2";
  * 이미 조회돼 있었지만 화면에 렌더링되지 않고 있었다. 타임존은 명시하지 않아
  * ConsultForm과 동일하게 브라우저 로컬 시간대로 자동 표시된다.
  */
-function formatConsultTime(iso: string | null): string {
+function formatConsultTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 const CONSULT_KANBAN_CACHE_KEY = "consult-kanban";
@@ -93,6 +94,7 @@ export default function ConsultationKanbanBoard({
   // 숨기는 것만이 아니다).
   viewerRole?: "admin" | "consultant";
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [cards, setCards] = useState<KanbanCard[] | null>(
     () => initialCards ?? getCachedTabData<KanbanCard[]>(CONSULT_KANBAN_CACHE_KEY)?.data ?? null
@@ -259,7 +261,7 @@ export default function ConsultationKanbanBoard({
                     <div className="text-[11px] text-grey-500 truncate">{c.contact_email}</div>
                     {(c.scheduled_at ?? c.starts_at) && (
                       <div className="text-[10.5px] text-grey-500">
-                        🗓 {formatConsultTime(c.scheduled_at ?? c.starts_at)}
+                        🗓 {formatConsultTime(c.scheduled_at ?? c.starts_at, tz)}
                       </div>
                     )}
                     {c.student_grade && <div className="text-[10.5px] text-grey-400">{c.student_grade}</div>}
@@ -312,6 +314,7 @@ function ConsultationCardDetailPanel({
   onChanged: () => void;
   onNavigateToCard: (consultationId: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const isAdmin = viewerRole === "admin";
   const [detail, setDetail] = useState<ConsultationCardDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -405,7 +408,7 @@ function ConsultationCardDetailPanel({
           {(c.scheduled_at ?? c.starts_at) && (
             <>
               <br />
-              🗓 {c.scheduled_at ? "확정 시각" : "희망 시각"}: {formatConsultTime(c.scheduled_at ?? c.starts_at)}
+              🗓 {c.scheduled_at ? "확정 시각" : "희망 시각"}: {formatConsultTime(c.scheduled_at ?? c.starts_at, tz)}
             </>
           )}
         </div>
@@ -421,7 +424,7 @@ function ConsultationCardDetailPanel({
             <div className="font-bold text-red mb-1">🔁 재상담 후보 — 같은 이메일로 과거 상담 이력이 있습니다</div>
             {duplicateCandidates.map((d) => (
               <div key={d.id} className="text-[11.5px] text-grey-500">
-                {formatConsultTime(d.scheduled_at ?? d.created_at)} · 상태: {d.status}
+                {formatConsultTime(d.scheduled_at ?? d.created_at, tz)} · 상태: {d.status}
                 {d.outcome ? ` · 결과: ${d.outcome}` : ""}
                 {d.admin_review_summary ? ` · "${d.admin_review_summary}"` : ""}
               </div>

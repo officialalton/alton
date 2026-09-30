@@ -13,6 +13,7 @@ import {
   type ConsultantPayoutPeriodAdmin,
   type ConsultantPayoutPeriodEvent,
 } from "./consultant-settlement-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-29 — Consultants 탭에 있던 `정산` 섹션을 Payouts 탭의 `컨설턴트 정산`
@@ -23,6 +24,7 @@ import { fmtDateTime } from "@/lib/format-datetime";
 // 뜬다. 금액 수정·상태 변경 버튼을 누를 때마다 이력이 남는다(아래 "이력
 // 보기"에서 확인).
 export default function ConsultantSettlementPanel() {
+  const tz = useViewerTimezone();
   const [consultants, setConsultants] = useState<ConsultantWithStudents[]>([]);
   const [selectedConsultantId, setSelectedConsultantId] = useState("");
   const [account, setAccount] = useState<ConsultantPayoutAccountAdminView>(null);
@@ -248,7 +250,7 @@ export default function ConsultantSettlementPanel() {
                     ) : (
                       eventsByPeriod[p.id].map((ev) => (
                         <div key={ev.id}>
-                          {fmtDateTime(ev.createdAt)} · {ev.actorName ?? "알 수 없음"} ·{" "}
+                          {fmtDateTime(ev.createdAt, undefined, tz)} · {ev.actorName ?? "알 수 없음"} ·{" "}
                           {ev.eventType === "created" ? "생성" : ev.eventType === "amount_changed" ? "금액 변경" : "상태 변경"}
                           {ev.previousValue ? ` (${ev.previousValue} → ${ev.newValue})` : ` (${ev.newValue})`}
                         </div>

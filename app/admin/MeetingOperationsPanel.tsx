@@ -16,6 +16,7 @@ import {
 } from "./inquiry-and-meeting-actions";
 import MeetingRequestReviewPanel from "./MeetingRequestReviewPanel";
 import { useTabCachedData } from "./use-tab-cached-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 const INQUIRY_TTL_MS = 30_000;
@@ -52,9 +53,9 @@ function kstLocalToIso(value: string): string {
   return `${value}:00+09:00`;
 }
 
-function formatDateTime(iso: string | null): string {
+function formatDateTime(iso: string | null, tz: string): string {
   if (!iso) return "-";
-  return fmtIntl(new Date(iso), { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+  return fmtIntl(new Date(iso), { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }, tz);
 }
 
 function MeetingOperationsSkeleton() {
@@ -72,6 +73,7 @@ function MeetingOperationsSkeleton() {
 }
 
 export default function MeetingOperationsPanel({ onNeedsActionCount }: { onNeedsActionCount?: (n: number) => void }) {
+  const tz = useViewerTimezone();
   // 2026-09-10(P1 재진입 성능 배치) — "면담 운영" 서브탭은 SSR 시딩 없이
   // (기본 서브탭이 아니므로) 처음 열 때만 조회하되, 이후 재진입은 TTL
   // 캐시(30초)로 직전 데이터를 즉시 보여주고 백그라운드로 갱신한다.
@@ -147,7 +149,7 @@ export default function MeetingOperationsPanel({ onNeedsActionCount }: { onNeeds
               {m.householdLabel}{m.childName ? ` · ${m.childName}` : ""} — {MEETING_STATUS_LABEL[m.status] ?? m.status}
             </p>
             <p className="text-[12.5px] text-grey-500 mt-1">
-              {m.subject && `주제: ${m.subject} · `}희망 시간: {formatDateTime(m.startsAt)}
+              {m.subject && `주제: ${m.subject} · `}희망 시간: {formatDateTime(m.startsAt, tz)}
             </p>
             {m.content && <p className="text-[12.5px] text-grey-700 mt-1">내용: {m.content}</p>}
             {m.contactPreference && (

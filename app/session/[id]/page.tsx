@@ -4,6 +4,8 @@ import {
   getRoleHomePath,
   computeSessionViewState,
 } from "@/lib/auth";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
+import { loadViewerTimezone } from "@/lib/viewer-timezone";
 import SessionShell from "./SessionShell";
 import {
   loadMaterialData,
@@ -141,7 +143,9 @@ export default async function SessionPage({
     profile?.role === "student" && material?.docId ? loadMyLegacyPrivateMaterialStrokes(session.id, material.docId) : Promise.resolve([]),
   ]);
 
+  const viewerTimezone = await loadViewerTimezone(supabase, user.id, profile);
   return (
+    <ViewerTimezoneProvider timezone={viewerTimezone}>
     <SessionShell
       sessionId={session.id}
       studentId={session.studentId}
@@ -174,5 +178,6 @@ export default async function SessionPage({
       smartNotesUrl={smartNotesUrl}
       initialMockExamAttempts={mockExamAttempts}
     />
+    </ViewerTimezoneProvider>
   );
 }

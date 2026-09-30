@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ParentEntitlementsData, PurchaseReceipt } from "./entitlements-data";
 import { createEntitlementCheckoutSession } from "./purchase-actions";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 function formatMoney(minor: number, currency: string): string {
@@ -11,9 +12,9 @@ function formatMoney(minor: number, currency: string): string {
   return `${currency} ${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-function formatDate(iso: string | null): string {
+function formatDate(iso: string | null, tz: string): string {
   if (!iso) return "—";
-  return fmtDate(iso);
+  return fmtDate(iso, undefined, tz);
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -47,6 +48,7 @@ export default function EntitlementsTab({
   data: ParentEntitlementsData;
   purchaseStatus?: "success" | "cancelled";
 }) {
+  const tz = useViewerTimezone();
   const [selectedChildId, setSelectedChildId] = useState<string | null>(
     data.children.find((c) => c.eligibleForPurchase)?.childId ?? data.children[0]?.childId ?? null
   );
@@ -206,7 +208,7 @@ export default function EntitlementsTab({
               </div>
             </div>
             <div className="text-[12px] text-grey-500">
-              가장 빠른 만료일: {formatDate(c.nearestExpiry)}
+              가장 빠른 만료일: {formatDate(c.nearestExpiry, tz)}
             </div>
           </div>
 
@@ -217,7 +219,7 @@ export default function EntitlementsTab({
                 {c.balances.map((b) => (
                   <li key={b.grantId} className="flex justify-between">
                     <span>잔여 {b.remaining}회</span>
-                    <span>만료 {formatDate(b.expiresAt)}</span>
+                    <span>만료 {formatDate(b.expiresAt, tz)}</span>
                   </li>
                 ))}
               </ul>
@@ -230,7 +232,7 @@ export default function EntitlementsTab({
             <div className="mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
               <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
               <p className="text-[11.5px] text-grey-500 mt-0.5">
-                만료 {formatDate(c.trialEntitlement.expiresAt)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
+                만료 {formatDate(c.trialEntitlement.expiresAt, tz)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
                 예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
               </p>
             </div>
@@ -250,7 +252,7 @@ export default function EntitlementsTab({
                     className="w-full flex items-center justify-between px-3 py-2.5 text-left"
                   >
                     <span className="text-[12.5px] font-semibold text-ink">
-                      {r.productName} · {formatDate(r.createdAt)}
+                      {r.productName} · {formatDate(r.createdAt, tz)}
                     </span>
                     <span className="text-[12px] text-grey-500">
                       {STATUS_LABEL[r.status] ?? r.status}
@@ -273,6 +275,7 @@ export default function EntitlementsTab({
 }
 
 function ReceiptDetail({ receipt: r }: { receipt: PurchaseReceipt }) {
+  const tz = useViewerTimezone();
   const rows: [string, string][] = [
     ["주문/결제 ID", r.purchaseId],
     ["계약 ID", r.contractId],
@@ -291,14 +294,14 @@ function ReceiptDetail({ receipt: r }: { receipt: PurchaseReceipt }) {
     ["최종 결제금액", formatMoney(r.totalMinor, r.currency)],
     ["통화", r.currency],
     ["유효기간", `${r.validityMonths}개월`],
-    ["만료일", formatDate(r.expiresAt)],
+    ["만료일", formatDate(r.expiresAt, tz)],
     ["가격 정책 버전", r.pricePolicyVersion ?? "—"],
     ["환불 정책 버전", r.refundPolicyVersion ?? "—"],
     ["약관 버전", r.termsVersion ?? "—"],
     ["결제 상태", STATUS_LABEL[r.status] ?? r.status],
     ["분쟁 상태", r.disputeStatus ? (DISPUTE_STATUS_LABEL[r.disputeStatus] ?? r.disputeStatus) : "없음"],
     ["결제대행사 거래 ID", r.stripePaymentIntentId ?? r.stripeCheckoutSessionId ?? "—"],
-    ["구매 확인 시각", r.confirmedAt ? fmtDateTime(r.confirmedAt) : "미확인"],
+    ["구매 확인 시각", r.confirmedAt ? fmtDateTime(r.confirmedAt, undefined, tz) : "미확인"],
   ];
 
   return (

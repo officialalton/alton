@@ -16,6 +16,7 @@ import {
 import { createNewContractVersionForResend } from "./consultation-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
 import ContractDispatchQueueSection from "./ContractDispatchQueueSection";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 // "신규"와 마찬가지로 상태 변화가 잦은 화면으로 분류해 TTL 10초를 쓴다.
@@ -103,6 +104,7 @@ function RegularContractRow({
   item: RegularConversionCandidate;
   onSent: () => void;
 }) {
+  const tz = useViewerTimezone();
   const [confirming, setConfirming] = useState(false);
   const [approverTitle, setApproverTitle] = useState("CEO, Do Kyung Kim");
   const [busy, setBusy] = useState(false);
@@ -150,7 +152,7 @@ function RegularContractRow({
       {isSent && !manualDone && (
         <div className="text-[12px] text-ink mt-2 bg-grey-100 rounded-lg px-3 py-2">
           {result?.status === "sent"
-            ? `발송 완료 — 수신자 ${item.guardianEmail} · 발송 시각 ${fmtDateTime(result.at)} · 상태: 서명 대기`
+            ? `발송 완료 — 수신자 ${item.guardianEmail} · 발송 시각 ${fmtDateTime(result.at, undefined, tz)} · 상태: 서명 대기`
             : `이미 발송됨 — 수신자 ${item.guardianEmail} · 상태: 서명 대기`}
         </div>
       )}

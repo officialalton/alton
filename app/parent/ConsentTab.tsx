@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import { consentForChild } from "./consent-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-28(초기 고객 절차 단순화) — 체험 Smart Notes 동의 섹션과 "정규 진행
@@ -19,6 +20,7 @@ export default function ConsentTab({
   children: ChildConsentStatus[];
   activePolicy: ConsentPolicyOption | null;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [busyStudentId, setBusyStudentId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -85,7 +87,7 @@ export default function ConsentTab({
               {child.latestConsent && (
                 <p className="text-[12.5px] text-grey-500 mb-3">
                   최근 처리: {child.latestConsent.policyVersionTitle} ·{" "}
-                  {fmtDate(child.latestConsent.consentedAt)}
+                  {fmtDate(child.latestConsent.consentedAt, undefined, tz)}
                   {child.latestConsent.revokedAt && " (철회됨)"}
                 </p>
               )}

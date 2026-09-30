@@ -23,6 +23,7 @@ import {
 import { cancelDirectOnboardingLinkStudentAction } from "./direct-account-actions";
 import { listConsultantsAction, setStudentConsultantAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import { useToasts, ToastStack } from "./Toast";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingLinkDetail["status"], string> = {
@@ -39,12 +40,13 @@ const STUDENT_STATUS_LABEL: Record<TrialOnboardingLinkStudent["status"], string>
   cancelled: "취소됨(관리자가 링크에서 제외)",
 };
 
-function fmt(iso: string | null): string {
+function fmt(iso: string | null, tz: string): string {
   if (!iso) return "-";
-  return fmtDateTime(iso);
+  return fmtDateTime(iso, undefined, tz);
 }
 
 export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string }) {
+  const tz = useViewerTimezone();
   const [open, setOpen] = useState(false);
   const [detail, setDetail] = useState<TrialOnboardingLinkDetail | null>(null);
   const [students, setStudents] = useState<TrialOnboardingLinkStudent[] | null>(null);
@@ -117,16 +119,16 @@ export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string
               </div>
               <div className="text-[11px] text-grey-500 mt-0.5">
                 {detail.noticeDeliveryStatus === "sent"
-                  ? `안내 발송 완료 — ${fmt(detail.noticeSentAt)}`
+                  ? `안내 발송 완료 — ${fmt(detail.noticeSentAt, tz)}`
                   : detail.noticeDeliveryStatus === "failed"
                     ? `안내 발송 실패${detail.noticeSendError ? `: ${detail.noticeSendError}` : ""}`
                     : "안내 발송 대기"}
               </div>
               {detail.redeemedAt && (
-                <div className="text-[11px] text-grey-500 mt-0.5">보호자 확인: {fmt(detail.redeemedAt)}</div>
+                <div className="text-[11px] text-grey-500 mt-0.5">보호자 확인: {fmt(detail.redeemedAt, tz)}</div>
               )}
               <div className="text-[11px] text-grey-400 mt-0.5">
-                발급: {fmt(detail.createdAt)} · 만료: {fmt(detail.expiresAt)}
+                발급: {fmt(detail.createdAt, tz)} · 만료: {fmt(detail.expiresAt, tz)}
               </div>
 
               {detail.status === "pending" && !detail.redeemedAt && (

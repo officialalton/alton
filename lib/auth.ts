@@ -111,7 +111,7 @@ export async function requireUser() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role, name")
+    .select("role, name, timezone")
     .eq("id", user.id)
     .single();
 

@@ -16,6 +16,7 @@ import {
   type MeetingRequestReviewForAdmin,
   type MeetingRequestReviewEdit,
 } from "./meeting-request-review-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const DRIVE_STATUS_LABEL: Record<string, string> = {
@@ -25,6 +26,7 @@ const DRIVE_STATUS_LABEL: Record<string, string> = {
 };
 
 export default function MeetingRequestReviewPanel({ meetingRequestId }: { meetingRequestId: string }) {
+  const tz = useViewerTimezone();
   const [review, setReview] = useState<MeetingRequestReviewForAdmin | null>(null);
   const [edits, setEdits] = useState<MeetingRequestReviewEdit[]>([]);
   const [text, setText] = useState("");
@@ -99,8 +101,8 @@ export default function MeetingRequestReviewPanel({ meetingRequestId }: { meetin
       </div>
       {isFinal && (
         <p className="text-[11px] text-grey-500 mt-1">
-          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt) : "-"}
-          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt)}`}
+          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt, undefined, tz) : "-"}
+          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt, undefined, tz)}`}
         </p>
       )}
 
@@ -121,7 +123,7 @@ export default function MeetingRequestReviewPanel({ meetingRequestId }: { meetin
               {edits.length === 0 && <p className="text-[11px] text-grey-500">수정 이력이 없습니다(아직 확정 후 수정된 적 없음).</p>}
               {edits.map((e) => (
                 <div key={e.id} className="text-[11px] text-grey-500 border-l-2 border-grey-200 pl-2">
-                  {fmtDateTime(e.editedAt)} · {e.editedByName ?? "관리자"}
+                  {fmtDateTime(e.editedAt, undefined, tz)} · {e.editedByName ?? "관리자"}
                   {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">이전 내용: {e.previousFinalText}</div>}
                 </div>
               ))}

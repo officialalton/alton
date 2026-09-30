@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import UnitPrepPanel from "@/app/teacher/UnitPrepPanel";
 import type { SessionPrepContext } from "./prep-context-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtTime } from "@/lib/format-datetime";
 
 // P2/P3 — 예정 수업에서 들어오는 준비 화면.
@@ -12,8 +13,9 @@ import { fmtDate, fmtTime } from "@/lib/format-datetime";
 // 어긋남이 있었다. 이제 이 화면은 그 수업에 연결된 회차의 준비를 그대로 연다 —
 // 커리큘럼에서 열든 수업에서 열든 같은 상태를 본다.
 export default function LessonPrepScreen({ context }: { context: SessionPrepContext }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
-  const when = formatLessonTime(context.startsAt, context.endsAt);
+  const when = formatLessonTime(context.startsAt, context.endsAt, tz);
 
   if (!context.linkedUnitId) {
     return (
@@ -83,7 +85,7 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
 }
 
 // 수업 일시는 사람이 읽는 형태로만 보여준다.
-export function formatLessonTime(startsAt: string | null, endsAt: string | null): string {
+export function formatLessonTime(startsAt: string | null, endsAt: string | null, tz: string): string {
   if (!startsAt) return "";
   const start = new Date(startsAt);
   if (Number.isNaN(start.getTime())) return "";
@@ -91,11 +93,11 @@ export function formatLessonTime(startsAt: string | null, endsAt: string | null)
     month: "long",
     day: "numeric",
     weekday: "short",
-  });
-  const startTime = fmtTime(start, { hour: "2-digit", minute: "2-digit" });
+  }, tz);
+  const startTime = fmtTime(start, { hour: "2-digit", minute: "2-digit" }, tz);
   if (!endsAt) return `${date} ${startTime}`;
   const end = new Date(endsAt);
   if (Number.isNaN(end.getTime())) return `${date} ${startTime}`;
-  const endTime = fmtTime(end, { hour: "2-digit", minute: "2-digit" });
+  const endTime = fmtTime(end, { hour: "2-digit", minute: "2-digit" }, tz);
   return `${date} ${startTime}–${endTime}`;
 }

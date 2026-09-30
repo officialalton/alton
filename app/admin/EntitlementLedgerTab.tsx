@@ -23,6 +23,7 @@ import type {
   listPurchasesNeedingReconciliation,
   listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 type SubTab = "versions" | "notices" | "reconciliation" | "refunds" | "adjust" | "purchase";
@@ -99,6 +100,7 @@ function ProductVersionsSection({
   products: EntitlementProductListItem[];
   versions: ProductVersionListItem[];
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
@@ -234,8 +236,8 @@ function ProductVersionsSection({
                 유효 {v.validityMonths}개월 · 할인 {formatMinor(v.discountMinor, v.currency)}({v.discountPercent}%)
               </div>
               <div className="text-[11.5px] text-grey-500 mt-0.5">
-                적용: {fmtDateTime(v.effectiveFrom)} ~{" "}
-                {v.effectiveUntil ? fmtDateTime(v.effectiveUntil) : "종료일 없음"}
+                적용: {fmtDateTime(v.effectiveFrom, undefined, tz)} ~{" "}
+                {v.effectiveUntil ? fmtDateTime(v.effectiveUntil, undefined, tz) : "종료일 없음"}
               </div>
             </div>
             {!v.discontinuedAt && (
@@ -259,6 +261,7 @@ function ProductVersionsSection({
 // =========================================================================
 
 function NoticesSection({ notices }: { notices: OpenPriceChangeNotice[] }) {
+  const tz = useViewerTimezone();
   return (
     <div>
       <p className="text-[12px] text-grey-500 mb-3">
@@ -271,7 +274,7 @@ function NoticesSection({ notices }: { notices: OpenPriceChangeNotice[] }) {
           <div key={n.id} className={card}>
             <div className="text-[13.5px] font-bold text-ink">상품 버전: {n.productVersionId}</div>
             <div className="text-[12px] text-grey-500 mt-0.5">
-              고지 마감: {fmtDateTime(n.noticeRequiredBy)} · 상태: {n.status}
+              고지 마감: {fmtDateTime(n.noticeRequiredBy, undefined, tz)} · 상태: {n.status}
             </div>
           </div>
         ))
@@ -291,6 +294,7 @@ function ReconciliationSection({
   items: ReconciliationItem[];
   disputes: PaymentDisputeItem[];
 }) {
+  const tz = useViewerTimezone();
   return (
     <div>
       <p className="text-[12px] text-grey-500 mb-3">
@@ -305,7 +309,7 @@ function ReconciliationSection({
               <div className="text-[13.5px] font-bold text-ink">구매 ID: {it.purchaseId}</div>
               <div className="text-[12px] text-grey-500 mt-0.5">결제 시도 ID: {it.paymentAttemptId}</div>
               <div className="text-[12px] text-grey-500 mt-0.5">
-                실패 사유: {it.failureReason ?? "미기록"} · 생성: {fmtDateTime(it.createdAt)}
+                실패 사유: {it.failureReason ?? "미기록"} · 생성: {fmtDateTime(it.createdAt, undefined, tz)}
               </div>
             </div>
           ))}
@@ -334,8 +338,8 @@ function ReconciliationSection({
               {d.stripePaymentIntentId ? ` · payment_intent: ${d.stripePaymentIntentId}` : ""}
             </div>
             <div className="text-[12px] text-grey-500 mt-0.5">
-              최근 갱신: {d.stripeUpdatedAt ? fmtDateTime(d.stripeUpdatedAt) : "—"}
-              {d.closedAt ? ` · 종결: ${fmtDateTime(d.closedAt)}` : ""}
+              최근 갱신: {d.stripeUpdatedAt ? fmtDateTime(d.stripeUpdatedAt, undefined, tz) : "—"}
+              {d.closedAt ? ` · 종결: ${fmtDateTime(d.closedAt, undefined, tz)}` : ""}
             </div>
           </div>
         ))
@@ -553,6 +557,7 @@ function AdjustSection() {
 // =========================================================================
 
 function PurchaseLookupSection() {
+  const tz = useViewerTimezone();
   const [purchaseId, setPurchaseId] = useState("");
   const [detail, setDetail] = useState<PurchaseDetailItem | null>(null);
   const [busy, setBusy] = useState(false);
@@ -609,14 +614,14 @@ function PurchaseLookupSection() {
             </div>
             <div>세금: {formatMinor(detail.taxMinor, detail.currency)}</div>
             <div>유효기간: {detail.validityMonths}개월</div>
-            <div>만료일: {detail.expiresAt ? fmtDateTime(detail.expiresAt) : "-"}</div>
+            <div>만료일: {detail.expiresAt ? fmtDateTime(detail.expiresAt, undefined, tz) : "-"}</div>
             <div>가격 정책 버전: {detail.pricePolicyVersion ?? "-"}</div>
             <div>환불 정책 버전: {detail.refundPolicyVersion}</div>
             <div>약관 버전: {detail.termsVersion ?? "-"}</div>
             <div>Stripe 세션 ID: {detail.stripeCheckoutSessionId ?? "-"}</div>
             <div>Stripe 결제 ID: {detail.stripePaymentIntentId ?? "-"}</div>
-            <div>생성: {fmtDateTime(detail.createdAt)}</div>
-            <div>확정: {detail.confirmedAt ? fmtDateTime(detail.confirmedAt) : "-"}</div>
+            <div>생성: {fmtDateTime(detail.createdAt, undefined, tz)}</div>
+            <div>확정: {detail.confirmedAt ? fmtDateTime(detail.confirmedAt, undefined, tz) : "-"}</div>
           </div>
         </div>
       )}

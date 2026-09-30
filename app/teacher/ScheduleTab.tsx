@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { TeacherLesson } from "./dashboard-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 type ReportType = "teacher_late" | "student_no_show_reported";
@@ -81,6 +82,7 @@ function LessonList({
   reviewedSessionIds?: string[];
   onReportSessionIssue?: (params: ReportSessionIssueParams) => Promise<void>;
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const reviewedSet = new Set(reviewedSessionIds ?? []);
   const [reportingSessionId, setReportingSessionId] = useState<string | null>(null);
@@ -135,7 +137,7 @@ function LessonList({
           className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3"
         >
           <div className="text-[12px] text-grey-500 mb-1.5">
-            {formatKoreanDateTime(lesson.scheduledAt)}
+            {formatKoreanDateTime(lesson.scheduledAt, tz)}
           </div>
           <div className="text-[13px] font-bold text-ink mb-1.5">
             {lesson.studentName} · {lesson.subjectName} · {lesson.sessionNumber}회차
@@ -231,7 +233,7 @@ function LessonList({
   );
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
   return fmtIntl(new Date(iso), {
     month: "long",
@@ -239,5 +241,5 @@ function formatKoreanDateTime(iso: string | null) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }

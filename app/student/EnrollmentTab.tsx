@@ -5,6 +5,7 @@ import type { SubjectEnrollmentView } from "./enrollment-data";
 import { getLessonReviewsForFamily, type FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
 import CurriculumOverlayView from "./CurriculumOverlayView";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
 const LESSON_TYPE_LABEL: Record<FamilyLessonReview["lessonType"], string> = {
@@ -88,13 +89,13 @@ const STATUS_LABEL: Record<SubjectEnrollmentView["status"], string> = {
   terminated: "종료",
 };
 
-function formatDate(iso: string | null): string {
+function formatDate(iso: string | null, tz: string): string {
   if (!iso) return "-";
   return fmtDate(iso, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  });
+  }, tz);
 }
 
 // 종료 상태 — "수강 종료" 서브탭. 나머지(planned/active/paused)는 "수강중".
@@ -109,6 +110,7 @@ export default function EnrollmentTab({
    * 자녀를 표시하기 위한 값(학생 포털에서는 전달하지 않음 — 항상 본인이므로). */
   childName?: string;
 }) {
+  const tz = useViewerTimezone();
   // v3 커리큘럼 열람 결함 수정(2026-09-11) — 이 탭은 subject_enrollments(v3)만
   // 조회하므로(loadStudentSubjectEnrollments, enrollment-data.ts) 여기 뜨는
   // 과목은 전부 v3다. 레거시 전용 학생의 커리큘럼("수업" 탭 안 레거시 세션
@@ -183,7 +185,7 @@ export default function EnrollmentTab({
                   담당 선생님: <span className="font-semibold">{e.currentTeacher.teacherName}</span>
                 </div>
                 <div className="text-[12px] text-grey-500">
-                  {formatDate(e.currentTeacher.effectiveFrom)}부터
+                  {formatDate(e.currentTeacher.effectiveFrom, tz)}부터
                 </div>
               </>
             ) : e.history.length > 0 ? (
@@ -199,7 +201,7 @@ export default function EnrollmentTab({
 
             {e.upcomingTeacherChange && (
               <div className="mt-2 text-[12px] font-semibold text-red bg-red/5 rounded-lg px-3 py-2">
-                {formatDate(e.upcomingTeacherChange.effectiveFrom)}부터{" "}
+                {formatDate(e.upcomingTeacherChange.effectiveFrom, tz)}부터{" "}
                 {e.upcomingTeacherChange.teacherName} 선생님으로 변경 예정
               </div>
             )}
@@ -225,8 +227,8 @@ export default function EnrollmentTab({
                       key={h.id}
                       className="text-[12px] text-grey-500 border-l-2 border-grey-200 pl-2.5"
                     >
-                      {h.teacherName} — {formatDate(h.effectiveFrom)} ~{" "}
-                      {formatDate(h.effectiveUntil)}
+                      {h.teacherName} — {formatDate(h.effectiveFrom, tz)} ~{" "}
+                      {formatDate(h.effectiveUntil, tz)}
                       {h.reason ? ` (${h.reason})` : ""}
                     </div>
                   ))}

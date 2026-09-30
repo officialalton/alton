@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
+import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
+import { loadViewerTimezone } from "@/lib/viewer-timezone";
 import { loadSessionPrepContext } from "./prep-context-data";
 import LessonPrepScreen from "./LessonPrepScreen";
 
@@ -15,7 +17,7 @@ export default async function TeacherSessionPrepPage({
 }: {
   params: Promise<{ sessionId: string }>;
 }) {
-  const { supabase } = await requireUser();
+  const { user, profile, supabase } = await requireUser();
   const { sessionId } = await params;
 
   const context = await loadSessionPrepContext(supabase, sessionId);
@@ -35,5 +37,10 @@ export default async function TeacherSessionPrepPage({
     redirect(`/session/${sessionId}?tab=prep`);
   }
 
-  return <LessonPrepScreen context={context} />;
+  const viewerTimezone = await loadViewerTimezone(supabase, user.id, profile);
+  return (
+    <ViewerTimezoneProvider timezone={viewerTimezone}>
+      <LessonPrepScreen context={context} />
+    </ViewerTimezoneProvider>
+  );
 }

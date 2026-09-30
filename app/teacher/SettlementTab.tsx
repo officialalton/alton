@@ -21,6 +21,7 @@ import {
   type TeacherDocumentItem,
 } from "./settlement-actions";
 import { PAYOUT_DAY_OF_MONTH, type SettlementMonth, type TeacherSettlement } from "./settlement-data";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-12(제품 오너 확정 흐름) — 교사 화면은 아래 4단계로만 말한다.
@@ -78,11 +79,11 @@ function formatDateOnly(dateOnly: string): string {
 
 // 지급 예정일은 승인 시점에 묶음에 저장된다. **저장된 값이 있을 때만 구체적인
 // 날짜를 보여준다** — 승인 전에는 아직 정해지지 않았으므로 "매월 10일" 규칙만 안내한다.
-function payoutScheduleLabel(m: SettlementMonth): string {
+function payoutScheduleLabel(m: SettlementMonth, tz: string): string {
   if (m.status === "paid") {
     // 외부 송금일은 날짜만 있는 값, paid_at은 시각까지 있는 값이라 표기 방법이 다르다.
     if (m.externalTransfer) return `지급일 ${formatDateOnly(m.externalTransfer.transferredOn)}`;
-    return m.paidAt ? `지급일 ${fmtDate(m.paidAt)}` : "지급 완료";
+    return m.paidAt ? `지급일 ${fmtDate(m.paidAt, undefined, tz)}` : "지급 완료";
   }
   if (m.scheduledPayoutDate) {
     const dateLabel = formatDateOnly(m.scheduledPayoutDate);
@@ -110,6 +111,7 @@ function TotalsRow({ totals, emptyLabel }: { totals: Record<string, number>; emp
 }
 
 export default function SettlementTab() {
+  const tz = useViewerTimezone();
   const [settlement, setSettlement] = useState<TeacherSettlement | null>(null);
   const [account, setAccount] = useState<MaskedPayoutAccount | null>(null);
   const [documents, setDocuments] = useState<TeacherDocumentItem[] | null>(null);
@@ -189,7 +191,7 @@ export default function SettlementTab() {
             </b>{" "}
             (예: 9월 수업분 → 10월 {PAYOUT_DAY_OF_MONTH}일)
           </div>
-          <div>마지막 갱신: {fmtDateTime(settlement.refreshedAt)}</div>
+          <div>마지막 갱신: {fmtDateTime(settlement.refreshedAt, undefined, tz)}</div>
           <div>수업 판정·조정 결과에 따라 확정 전까지 금액이 변동될 수 있습니다.</div>
           <div>세금·수수료 등 공제를 반영하지 않은 총액입니다.</div>
         </div>
@@ -240,7 +242,7 @@ export default function SettlementTab() {
                         {formatMonth(m.settlementMonth)} 수업분
                       </div>
                       <div className="text-[12px] text-grey-500 mt-0.5">
-                        {payoutScheduleLabel(m)} · 수업 {m.lessonCount}건
+                        {payoutScheduleLabel(m, tz)} · 수업 {m.lessonCount}건
                       </div>
                     </div>
                     <div className="text-right shrink-0">
@@ -312,7 +314,7 @@ export default function SettlementTab() {
                       <ul className="text-[11px] text-grey-400 mb-2 space-y-0.5">
                         {m.adjustments.map((a) => (
                           <li key={a.id} data-testid={`adjust-reason-${a.id}`}>
-                            {fmtDate(a.createdAt)} ·{" "}
+                            {fmtDate(a.createdAt, undefined, tz)} ·{" "}
                             {a.amountMinor > 0 ? "+" : ""}
                             {formatAmount(a.amountMinor, a.currency)} — {a.reason}
                           </li>
@@ -336,7 +338,7 @@ export default function SettlementTab() {
                         {m.lines.map((l) => (
                           <tr key={l.payoutItemId} className="text-grey-500">
                             <td className="py-0.5">
-                              {l.sessionDate ? fmtDate(l.sessionDate) : "—"}
+                              {l.sessionDate ? fmtDate(l.sessionDate, undefined, tz) : "—"}
                             </td>
                             <td className="py-0.5">{l.studentName ?? "—"}</td>
                             <td className="py-0.5">{l.subjectName ?? "—"}</td>
@@ -403,6 +405,7 @@ function PayoutAccountCard({
   account: MaskedPayoutAccount | null;
   onSaved: (a: MaskedPayoutAccount) => void;
 }) {
+  const tz = useViewerTimezone();
   const [editing, setEditing] = useState(false);
   // P4-2(UAT 후속) — 통화가 미리 채워져 있으면 "이미 저장된 값"처럼 보인다는
   // 피드백에 따라, 입력은 라벨이 붙은 필드로 나누고 통화는 선택으로 바꾼다.
@@ -422,7 +425,7 @@ function PayoutAccountCard({
               <div data-testid="account-masked">계좌번호: {account.accountNumberMasked}</div>
               <div>통화: {account.currency}</div>
               <div className="text-[11.5px] text-grey-400">
-                최종 수정 {fmtDateTime(account.updatedAt)}
+                최종 수정 {fmtDateTime(account.updatedAt, undefined, tz)}
               </div>
             </div>
           ) : (
@@ -533,6 +536,7 @@ function DocumentsCard({
   onUploaded: (d: TeacherDocumentItem) => void;
   onDeleted: (id: string) => void;
 }) {
+  const tz = useViewerTimezone();
   const [busy, setBusy] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -555,7 +559,7 @@ function DocumentsCard({
             <li key={d.id} className="flex items-center justify-between gap-2 text-[12px]">
               <span className="text-ink truncate">{d.fileName}</span>
               <span className="text-[11.5px] text-grey-400 shrink-0">
-                {fmtDate(d.uploadedAt)}
+                {fmtDate(d.uploadedAt, undefined, tz)}
               </span>
               <button
                 type="button"

@@ -28,6 +28,7 @@ import type { HomeworkItem } from "./homework-data";
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtIntl } from "@/lib/format-datetime";
 
 // R9(Task 4) — 세션 중 신규 문제 생성 탭("문제 생성")은 여기서 제거됐다.
@@ -159,6 +160,7 @@ export default function SessionShell({
   /** 2026-09-22 — 모의고사 탭도 다른 탭처럼 SSR로 미리 받아 탭을 열 때 왕복 없이 바로 보이게 한다. */
   initialMockExamAttempts?: MockExamAttemptSummary[];
 }) {
+  const tz = useViewerTimezone();
   const router = useRouter();
   const isTeacher = viewerRole === "teacher";
   const contentViewerRole: SessionViewViewer = writesEnabled ? viewerRole : "admin";
@@ -297,16 +299,16 @@ export default function SessionShell({
   }
 
   const scheduledLabel = useMemo(
-    () => formatKoreanDateTime(scheduledAt),
-    [scheduledAt]
+    () => formatKoreanDateTime(scheduledAt, tz),
+    [scheduledAt, tz]
   );
   const endLabel = useMemo(() => {
     if (!scheduledAt) return null;
     const end = new Date(
       new Date(scheduledAt).getTime() + durationMinutes * 60_000
     );
-    return formatKoreanTime(end);
-  }, [scheduledAt, durationMinutes]);
+    return formatKoreanTime(end, tz);
+  }, [scheduledAt, durationMinutes, tz]);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -399,7 +401,7 @@ export default function SessionShell({
               <>
                 <div className="text-[15px] font-bold text-ink mb-2">수업을 종료할까요?</div>
                 <p className="text-[13px] text-grey-500 mb-4">
-                  {studentName} 학생과의 수업을 지금({formatKoreanTime(new Date())}) 종료 처리합니다.
+                  {studentName} 학생과의 수업을 지금({formatKoreanTime(new Date(), tz)}) 종료 처리합니다.
                   종료 후에는 이 수업을 다시 진행 중 상태로 되돌릴 수 없습니다.
                 </p>
                 {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
@@ -463,7 +465,7 @@ export default function SessionShell({
                 <div className="text-[15px] font-bold text-ink mb-2">학생 사유로 종료할까요?</div>
                 <p className="text-[13px] text-grey-500 mb-4">
                   {studentName} 학생과의 수업을 학생 사유(조퇴 등)로 지금(
-                  {formatKoreanTime(new Date())}) 종료 처리합니다. 원장에 조기 종료
+                  {formatKoreanTime(new Date(), tz)}) 종료 처리합니다. 원장에 조기 종료
                   사유가 &quot;학생 사유&quot;로 기록됩니다.
                 </p>
                 {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
@@ -691,7 +693,7 @@ function StatusBar({
   return null;
 }
 
-function formatKoreanDateTime(iso: string | null) {
+function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return null;
   return fmtIntl(new Date(iso), {
     month: "long",
@@ -699,13 +701,13 @@ function formatKoreanDateTime(iso: string | null) {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }
 
-function formatKoreanTime(date: Date) {
+function formatKoreanTime(date: Date, tz: string) {
   return fmtIntl(date, {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  });
+  }, tz);
 }
