@@ -35,3 +35,23 @@ describe("검수 결정론 검사", () => {
     expect(dups.has("c")).toBe(false);
   });
 });
+
+import { evalOne } from "./aggregate-lib";
+import type { ReviewResult } from "./review";
+const rev = (est: string, confidence = "high", elim: number[] = []): ReviewResult => ({ gid: "a", verdict: "pass", reasons: [], notes: [], reviewedAt: "", blind: { pickedIndex: 0, pickedAnswer: null, agrees: true, otherDefensible: false, confidence, estimatedDifficulty: est, easilyEliminated: elim } });
+describe("난이도 재라벨·오답 제거 판정", () => {
+  const base = { ...raw({}), difficulty: "hard" as const, quality: { estimatedDifficulty: "medium" } };
+  it("블라인드·파이프라인 추정이 일치하면 그 난이도로 재라벨", () => {
+    const e = evalOne(base, rev("medium"));
+    expect(e.finalDifficulty).toBe("medium"); expect(e.relabeled).toBe(true); expect(e.verdict).toBe("pass");
+  });
+  it("세 추정이 모두 다르면 중앙값, 확신 낮으면 보관", () => {
+    expect(evalOne(base, rev("easy")).finalDifficulty).toBe("medium");
+    expect(evalOne(base, rev("easy", "low")).reasons).toContain("difficulty_unstable");
+  });
+  it("난이도별 임계값으로 쉽게 지워지는 오답을 보관", () => {
+    const med = { ...raw({}), difficulty: "medium" as const, quality: { estimatedDifficulty: "medium" } };
+    expect(evalOne(med, rev("medium", "high", [1, 2, 3])).reasons).toContain("weak_distractors");
+    expect(evalOne(med, rev("medium", "high", [1, 2])).verdict).toBe("pass");
+  });
+});

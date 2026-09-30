@@ -38,10 +38,17 @@ const rows = plan.cells.filter((c) => c.target > 0).map((c) => {
   const finalCount = c.supply + p;
   return { ...c, required, generated: g, passed: p, archived: a, final: finalCount, spare: finalCount - c.target, missing: Math.max(0, required - finalCount) };
 });
+// hard 미달은 같은 skill 의 medium 여분(필요량 초과분)으로 대체 가능(M2 higher 는 medium·hard 모두 적격) — 대체 후 미달을 missingAdj 로 둔다.
+for (const sk of [...new Set(rows.map((r) => r.skill))]) {
+  const med = rows.find((r) => r.skill === sk && r.difficulty === "medium");
+  let surplus = med ? Math.max(0, med.final - med.required) : 0;
+  for (const h of rows.filter((r) => r.skill === sk && r.difficulty === "hard")) { const use = Math.min(surplus, h.missing); (h as { missingAdj?: number }).missingAdj = h.missing - use; surplus -= use; }
+  for (const r of rows.filter((r) => r.skill === sk && r.difficulty !== "hard")) (r as { missingAdj?: number }).missingAdj = r.missing;
+}
 const sum = (sys: string, f: (r: (typeof rows)[number]) => number) => rows.filter((r) => r.system === sys).reduce((x, r) => x + f(r), 0);
-const md: string[] = [`| 영역 | skill | 난이도 | 필요량(3세트 ${"+"}여분${SPARE}) | 기존 공개(가정) | 신규 생성(파이프라인 통과) | 신규 검수 통과 | 보관 후보 | 최종 | 여분(최종−3세트분) | 미달 |`, "|---|---|---|---|---|---|---|---|---|---|---|"];
-for (const r of rows) md.push(`| ${r.domain} | ${r.skill} | ${r.difficulty} | ${r.required} | ${r.supply} | ${r.generated} | ${r.passed} | ${r.archived} | ${r.final} | ${r.spare} | ${r.missing || ""} |`);
-for (const sys of ["sat_rw", "sat_math"]) md.push(`| **${sys} 합계** | | | ${sum(sys, (r) => r.required)} | ${sum(sys, (r) => r.supply)} | ${sum(sys, (r) => r.generated)} | ${sum(sys, (r) => r.passed)} | ${sum(sys, (r) => r.archived)} | ${sum(sys, (r) => r.final)} | ${sum(sys, (r) => r.spare)} | ${sum(sys, (r) => r.missing)} |`);
+const md: string[] = [`| 영역 | skill | 난이도 | 필요량(3세트 ${"+"}여분${SPARE}) | 기존 공개(가정) | 신규 생성(파이프라인 통과) | 신규 검수 통과 | 보관 후보 | 최종 | 여분(최종−3세트분) | 미달 | 미달(hard는 medium 여분 대체 후) |`, "|---|---|---|---|---|---|---|---|---|---|---|---|"];
+for (const r of rows) md.push(`| ${r.domain} | ${r.skill} | ${r.difficulty} | ${r.required} | ${r.supply} | ${r.generated} | ${r.passed} | ${r.archived} | ${r.final} | ${r.spare} | ${r.missing || ""} | ${(r as { missingAdj?: number }).missingAdj || ""} |`);
+for (const sys of ["sat_rw", "sat_math"]) md.push(`| **${sys} 합계** | | | ${sum(sys, (r) => r.required)} | ${sum(sys, (r) => r.supply)} | ${sum(sys, (r) => r.generated)} | ${sum(sys, (r) => r.passed)} | ${sum(sys, (r) => r.archived)} | ${sum(sys, (r) => r.final)} | ${sum(sys, (r) => r.spare)} | ${sum(sys, (r) => r.missing)} | ${sum(sys, (r) => (r as { missingAdj?: number }).missingAdj ?? 0)} |`);
 writeFileSync(path.join(base, "final/summary.md"), md.join("\n") + "\n\n보관 사유 집계: " + JSON.stringify(Object.fromEntries(reasonCount)) + "\n");
 writeFileSync(path.join(base, "final/summary.json"), JSON.stringify({ spare: SPARE, rows, reasonCount: Object.fromEntries(reasonCount), totals: { generated: final.length, passed: passed.length, archived: archived.length, unreviewed: final.filter((f) => f.verdict === "unreviewed").length } }, null, 1));
 console.log(md.join("\n"));
@@ -52,9 +59,9 @@ const next = arg("--next-round");
 if (next) {
   // 재생성량 = 미달분 / 통과율(칸 생성 4개 이상이면 칸 통과율, 아니면 skill 통과율; 하한 0.3) 올림 + 1. 칸당 상한 40.
   const skillRate = (skill: string) => { const g = rows.filter((r) => r.skill === skill).reduce((a, r) => a + r.generated, 0); const p = rows.filter((r) => r.skill === skill).reduce((a, r) => a + r.passed, 0); return g ? p / g : 0.5; };
-  const cells = rows.filter((r) => r.missing > 0).map((r) => {
+  const cells = rows.filter((r) => ((r as { missingAdj?: number }).missingAdj ?? r.missing) > 0).map((r) => {
     const rate = Math.max(0.3, r.generated >= 4 ? r.passed / r.generated : skillRate(r.skill));
-    return { system: r.system, domain: r.domain, skill: r.skill, difficulty: r.difficulty, target: r.target, supply: r.supply, shortfall: r.missing, generate: Math.min(40, Math.ceil(r.missing / rate) + 1) };
+    return { system: r.system, domain: r.domain, skill: r.skill, difficulty: r.difficulty, target: r.target, supply: r.supply, shortfall: (r as { missingAdj?: number }).missingAdj ?? r.missing, generate: Math.min(40, Math.ceil(((r as { missingAdj?: number }).missingAdj ?? r.missing) / rate) + 1) };
   });
   writeFileSync(path.join(base, `plan-round${next}.json`), JSON.stringify({ cells }, null, 1));
   console.log(`라운드 ${next} 계획: 셀 ${cells.length}개, 생성 ${cells.reduce((a, c) => a + c.generate, 0)}개`);

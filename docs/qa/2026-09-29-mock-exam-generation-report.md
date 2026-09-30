@@ -14,113 +14,131 @@
 - 보관 사유(중복 계상): 오답 쉽게 지워짐 500, 난이도 라벨 불일치 397, 해설 불일치 208, 정답 불일치 92, 사실 오류 52, 형식 결함 58, 정답 복수 36, 빈 해설 22, 원시 LaTeX 27, 생성분 간 중복 9, 저작권 의심 4. 원본 JSON은 삭제하지 않았고 보관 후보는 수정하지 않았다.
 - **미달 칸 13개, 전부 hard**(아래 표의 "미달" 열). 그중 3개는 세트 3개분(여분 제외)에도 못 미친다: central_ideas_details hard 1/2, words_in_context hard 1/3, transitions hard 2/3. 나머지 10개는 3세트분은 충족, 여분만 부족(예: inferences hard 3/4, nonlinear_functions hard 3/5). 재생성 상한(3회)에 도달해 멈췄다.
 
-## 3. 셀별 최종 수량
-"기존 공개(가정)" 주의: 원격 난이도 실측을 읽을 수 없어(이 세션은 원격 읽기 권한 없음) skill별 총량(분류 보고서 A)을 풀 난이도 비율로 나눈 **가정치**다. 총괄이 원격 실측(skill x 난이도)을 JSON으로 주면 `plan.ts --supply`/`aggregate.ts`가 같은 표를 다시 계산한다(형식 `{"<skill>": {"easy":n,"medium":n,"hard":n}}`).
+## 3. 2차 라운드(2026-09-30): 소량 시험 -> 점검 -> 확대 기록
+기준 플랜은 총괄이 원격 실측(활성 mock_exam 303)으로 갱신한 `data/mock-exam-generation/plan.json`. 기법마다 소량 표본 -> 기준 통과율 -> 계속/수정/폐기.
 
-| 영역 | skill | 난이도 | 필요량(3세트 +여분2) | 기존 공개(가정) | 신규 생성(파이프라인 통과) | 신규 검수 통과 | 보관 후보 | 최종 | 여분(최종−3세트분) | 미달 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| rw_information_ideas | central_ideas_details | easy | 6 | 0 | 6 | 6 | 0 | 6 | 2 |  |
-| rw_information_ideas | central_ideas_details | medium | 15 | 1 | 27 | 14 | 13 | 15 | 2 |  |
-| rw_information_ideas | central_ideas_details | hard | 4 | 0 | 31 | 1 | 30 | 1 | -1 | 3 |
-| rw_information_ideas | inferences | easy | 5 | 0 | 8 | 6 | 2 | 6 | 3 |  |
-| rw_information_ideas | inferences | medium | 13 | 1 | 47 | 13 | 34 | 14 | 3 |  |
-| rw_information_ideas | inferences | hard | 4 | 0 | 29 | 3 | 26 | 3 | 1 | 1 |
-| rw_information_ideas | command_of_evidence_text | easy | 5 | 0 | 14 | 7 | 7 | 7 | 4 |  |
-| rw_information_ideas | command_of_evidence_text | medium | 13 | 0 | 35 | 16 | 19 | 16 | 5 |  |
-| rw_information_ideas | command_of_evidence_text | hard | 4 | 0 | 20 | 6 | 14 | 6 | 4 |  |
-| rw_information_ideas | command_of_evidence_quant | easy | 5 | 0 | 8 | 7 | 1 | 7 | 4 |  |
-| rw_information_ideas | command_of_evidence_quant | medium | 10 | 2 | 19 | 10 | 9 | 12 | 4 |  |
-| rw_information_ideas | command_of_evidence_quant | hard | 3 | 0 | 20 | 3 | 17 | 3 | 2 |  |
-| rw_craft_structure | words_in_context | easy | 9 | 0 | 18 | 10 | 8 | 10 | 3 |  |
-| rw_craft_structure | words_in_context | medium | 23 | 0 | 80 | 25 | 55 | 25 | 4 |  |
-| rw_craft_structure | words_in_context | hard | 5 | 0 | 53 | 1 | 52 | 1 | -2 | 4 |
-| rw_craft_structure | text_structure_purpose | easy | 7 | 0 | 11 | 9 | 2 | 9 | 4 |  |
-| rw_craft_structure | text_structure_purpose | medium | 18 | 2 | 43 | 21 | 22 | 23 | 7 |  |
-| rw_craft_structure | text_structure_purpose | hard | 5 | 0 | 40 | 4 | 36 | 4 | 1 | 1 |
-| rw_craft_structure | cross_text_connections | easy | 5 | 0 | 5 | 5 | 0 | 5 | 2 |  |
-| rw_craft_structure | cross_text_connections | medium | 11 | 1 | 29 | 11 | 18 | 12 | 3 |  |
-| rw_craft_structure | cross_text_connections | hard | 4 | 0 | 28 | 6 | 22 | 6 | 4 |  |
-| rw_expression_ideas | rhetorical_synthesis | easy | 7 | 0 | 11 | 9 | 2 | 9 | 4 |  |
-| rw_expression_ideas | rhetorical_synthesis | medium | 18 | 1 | 37 | 22 | 15 | 23 | 7 |  |
-| rw_expression_ideas | rhetorical_synthesis | hard | 5 | 0 | 49 | 3 | 46 | 3 | 0 | 2 |
-| rw_expression_ideas | transitions | easy | 7 | 0 | 11 | 9 | 2 | 9 | 4 |  |
-| rw_expression_ideas | transitions | medium | 18 | 3 | 25 | 15 | 10 | 18 | 2 |  |
-| rw_expression_ideas | transitions | hard | 5 | 0 | 53 | 2 | 51 | 2 | -1 | 3 |
-| rw_standard_english | boundaries | easy | 9 | 0 | 18 | 11 | 7 | 11 | 4 |  |
-| rw_standard_english | boundaries | medium | 23 | 0 | 32 | 23 | 9 | 23 | 2 |  |
-| rw_standard_english | boundaries | hard | 6 | 0 | 43 | 4 | 39 | 4 | 0 | 2 |
-| rw_standard_english | form_structure_sense | easy | 9 | 0 | 16 | 12 | 4 | 12 | 5 |  |
-| rw_standard_english | form_structure_sense | medium | 23 | 0 | 37 | 23 | 14 | 23 | 2 |  |
-| rw_standard_english | form_structure_sense | hard | 5 | 0 | 20 | 7 | 13 | 7 | 4 |  |
-| algebra | linear_equations_one_var | easy | 5 | 2 | 5 | 4 | 1 | 6 | 3 |  |
-| algebra | linear_equations_one_var | medium | 11 | 10 | 3 | 1 | 2 | 11 | 2 |  |
-| algebra | linear_equations_one_var | hard | 4 | 1 | 22 | 2 | 20 | 3 | 1 | 1 |
-| algebra | linear_functions | easy | 5 | 4 | 3 | 2 | 1 | 6 | 3 |  |
-| algebra | linear_functions | medium | 11 | 16 | 0 | 0 | 0 | 16 | 7 |  |
-| algebra | linear_functions | hard | 4 | 2 | 10 | 2 | 8 | 4 | 2 |  |
-| algebra | linear_equations_two_var | easy | 5 | 0 | 8 | 6 | 2 | 6 | 3 |  |
-| algebra | linear_equations_two_var | medium | 11 | 1 | 15 | 12 | 3 | 13 | 4 |  |
-| algebra | linear_equations_two_var | hard | 4 | 0 | 22 | 3 | 19 | 3 | 1 | 1 |
-| algebra | systems_linear | easy | 5 | 1 | 6 | 6 | 0 | 7 | 4 |  |
-| algebra | systems_linear | medium | 11 | 4 | 13 | 8 | 5 | 12 | 3 |  |
-| algebra | systems_linear | hard | 4 | 0 | 37 | 2 | 35 | 2 | 0 | 2 |
-| algebra | linear_inequalities | easy | 5 | 2 | 7 | 4 | 3 | 6 | 3 |  |
-| algebra | linear_inequalities | medium | 11 | 7 | 8 | 5 | 3 | 12 | 3 |  |
-| algebra | linear_inequalities | hard | 3 | 1 | 13 | 2 | 11 | 3 | 2 |  |
-| advanced_math | equivalent_expressions | easy | 7 | 1 | 9 | 8 | 1 | 9 | 4 |  |
-| advanced_math | equivalent_expressions | medium | 17 | 7 | 15 | 10 | 5 | 17 | 2 |  |
-| advanced_math | equivalent_expressions | hard | 5 | 0 | 36 | 4 | 32 | 4 | 1 | 1 |
-| advanced_math | nonlinear_equations_systems | easy | 7 | 0 | 8 | 7 | 1 | 7 | 2 |  |
-| advanced_math | nonlinear_equations_systems | medium | 17 | 2 | 25 | 15 | 10 | 17 | 2 |  |
-| advanced_math | nonlinear_equations_systems | hard | 5 | 0 | 23 | 6 | 17 | 6 | 3 |  |
-| advanced_math | nonlinear_functions | easy | 7 | 3 | 7 | 6 | 1 | 9 | 4 |  |
-| advanced_math | nonlinear_functions | medium | 17 | 11 | 6 | 6 | 0 | 17 | 2 |  |
-| advanced_math | nonlinear_functions | hard | 5 | 1 | 36 | 2 | 34 | 3 | 0 | 2 |
-| problem_solving_data | ratios_rates_units | easy | 3 | 1 | 8 | 6 | 2 | 7 | 6 |  |
-| problem_solving_data | ratios_rates_units | medium | 5 | 5 | 0 | 0 | 0 | 5 | 2 |  |
-| problem_solving_data | ratios_rates_units | hard | 3 | 0 | 18 | 5 | 13 | 5 | 4 |  |
-| problem_solving_data | percentages | easy | 3 | 1 | 5 | 5 | 0 | 6 | 5 |  |
-| problem_solving_data | percentages | medium | 5 | 7 | 0 | 0 | 0 | 7 | 4 |  |
-| problem_solving_data | percentages | hard | 3 | 1 | 10 | 3 | 7 | 4 | 3 |  |
-| problem_solving_data | one_variable_data | easy | 3 | 2 | 3 | 3 | 0 | 5 | 4 |  |
-| problem_solving_data | one_variable_data | medium | 5 | 7 | 0 | 0 | 0 | 7 | 4 |  |
-| problem_solving_data | two_variable_data | easy | 3 | 1 | 5 | 3 | 2 | 4 | 3 |  |
-| problem_solving_data | two_variable_data | medium | 5 | 7 | 0 | 0 | 0 | 7 | 4 |  |
-| problem_solving_data | probability | easy | 3 | 1 | 5 | 5 | 0 | 6 | 5 |  |
-| problem_solving_data | probability | medium | 5 | 6 | 0 | 0 | 0 | 6 | 3 |  |
-| problem_solving_data | inference_margin_error | easy | 3 | 0 | 4 | 4 | 0 | 4 | 3 |  |
-| problem_solving_data | inference_margin_error | medium | 5 | 4 | 2 | 2 | 0 | 6 | 3 |  |
-| problem_solving_data | evaluating_statistical_claims | easy | 3 | 1 | 5 | 3 | 2 | 4 | 3 |  |
-| problem_solving_data | evaluating_statistical_claims | medium | 5 | 4 | 7 | 2 | 5 | 6 | 3 |  |
-| geometry_trig | area_volume | easy | 4 | 6 | 0 | 0 | 0 | 6 | 4 |  |
-| geometry_trig | area_volume | medium | 7 | 23 | 0 | 0 | 0 | 23 | 18 |  |
-| geometry_trig | area_volume | hard | 3 | 3 | 0 | 0 | 0 | 3 | 2 |  |
-| geometry_trig | lines_angles_triangles | easy | 4 | 0 | 6 | 6 | 0 | 6 | 4 |  |
-| geometry_trig | lines_angles_triangles | medium | 7 | 0 | 15 | 11 | 4 | 11 | 6 |  |
-| geometry_trig | lines_angles_triangles | hard | 3 | 0 | 19 | 2 | 17 | 2 | 1 | 1 |
-| geometry_trig | right_triangles_trigonometry | easy | 4 | 1 | 10 | 9 | 1 | 10 | 8 |  |
-| geometry_trig | right_triangles_trigonometry | medium | 7 | 7 | 0 | 0 | 0 | 7 | 2 |  |
-| geometry_trig | right_triangles_trigonometry | hard | 3 | 0 | 21 | 3 | 18 | 3 | 2 |  |
-| geometry_trig | circles | easy | 3 | 4 | 0 | 0 | 0 | 4 | 3 |  |
-| geometry_trig | circles | medium | 6 | 13 | 0 | 0 | 0 | 13 | 9 |  |
-| geometry_trig | circles | hard | 3 | 2 | 7 | 1 | 6 | 3 | 2 |  |
-| **sat_rw 합계** | | | 309 | 11 | 923 | 324 | 599 | 335 | 92 | 16 |
-| **sat_math 합계** | | | 302 | 183 | 487 | 196 | 291 | 379 | 181 | 8 |
+| 기법 | 표본·측정 | 기준 | 판단 |
+|---|---|---|---|
+| 난이도 재라벨(집계만, AI 재호출 0) | 기존 보관 890건 재판정 | 효과 확인 | **계속**. 원안(블라인드 추정으로 무조건 재라벨)은 풀이 모델이 거의 모두 easy로 봐 통과 1,003건이 easy 851/medium 152/hard 0으로 쏠려 medium·hard 칸이 더 비었다(미달 143). 그래서 **합의 방식**으로 조정: 블라인드·파이프라인 추정이 일치하면 그 난이도, 갈리고 라벨이 파이프라인 쪽이면 라벨 유지, 셋이 모두 다르면 중앙값, 블라인드 확신 낮음만 보관. 통과 520 -> 852. `RELABEL_MODE=literal`로 원안 재현 가능 |
+| 오답 보수(선지만 교체, 보수 후 블라인드·감사 재통과) | 1차 206건 시도: 유효 보수 76건에 그쳐 원인 조사 -> 모델이 선지 번호를 1부터 세는 인덱스 오류(0/1 기반) 발견, 알파벳 지정으로 수정 | 보수 후 통과 50% | 수정 후 재시험 32건(92·108건 누계): 통과 37~40/108 = **37%**. 프롬프트 v2(채점 기준 명시) 재시험 16건 6건 통과(38%), 개선 없음. 주 실패 = 여전히 weak_distractors(블라인드 채점자가 보수 선지도 지움) -> **기준 미달**이라 확대하지 않고 종료(총 통과 +40건). 이후 미달 칸이 없어 추가 보수 불필요 |
+| hard 승격 변형(통과 medium -> hard 새 문항) | RW 21건, Math 8건 | hard로 통과 40% | RW 76% 통과하나 hard 유지는 1/21(5%), 나머지는 medium·easy로 재라벨. Math 0/8(해설 계산 모순·정답 불일치 — 다단계 산술을 모델이 검산 없이 써서 깨짐). **hard 공급원으로는 폐기**(RW 변형은 medium 공급으로만 유효) |
+| 개선 hard 직접 생성 프롬프트(hard 정의·few-shot·검산 지시; `extraGuidance`는 스크립트 전용, 운영 경로 변화 없음) | RW 16건·Math 12건 | 기준선 대비 개선 | 기준선 hard 통과+hard 유지: RW 31/386(8%), Math 24/274(9%). 개선본: RW 1/16, Math 0/12. **개선 없음 -> 폐기**. 근본 원인은 프롬프트가 아니라 검수 모델이 SAT 문항을 대체로 easy/medium으로 판정하는 것 |
+| 보충 생성(미달 칸, 부족분/통과율) | Math easy 3칸(linear_functions, area_volume, circles) 24건 | - | 24/24 파이프라인 통과 후 검수 통과 20, 모든 칸 충족 |
 
-보관 사유 집계: {"format_defect":58,"answer_mismatch":92,"explanation_inconsistent":208,"weak_distractors":500,"difficulty_label_mismatch":397,"factual_error":52,"ambiguous_answer":36,"empty_explanation":22,"raw_latex_in_explanation":13,"near_duplicate_of":9,"raw_latex_in_body":14,"copyright_suspect":4}
+**hard 처리 결론**: hard 칸은 실제로는 M2 higher가 medium·hard 모두 적격이므로 같은 skill의 medium 여분(필요량 초과분)으로 대체했다(총괄 지시). hard로 직접 통과한 문항은 RW 33·Math 24. 대체 전 미달 21칸분(RW 16·Math 5)이 medium 여분으로 메워져 대체 후 미달 0이다.
 
+API 호출(개략, 이번 라운드): 생성 — hard 시험 약 615 + 보충(6차) 약 118 = 약 730(파이프라인 내부 호출 포함); 보수 — 시도 206+32+16 = 254 호출(실패 재시도 포함 최대 3배), 보수본 재검수 108건 x 2 = 216; 승격 변형 29 + 재검수 29 x 2 = 87; 신규 문항 재검수(hard 시험 28 + 보충 24 + 승격 29) x 2 = 162. 보관 890건 재집계와 재라벨은 AI 호출 0.
 
-## 4. 임포트 스크립트와 로컬 시험
+## 4. 최종 결과(2차 이후)
+- **최종 passed.json 938건**(RW 603 + Math 335; 기존 520 전부 포함, 중복 없음). 난이도: RW easy 196/medium 374/hard 33, Math easy 139/medium 172/hard 24. 보관 후보 553.
+- **기존 passed 520 중 107건은 난이도 라벨이 바뀌었다**(재라벨). 이미 원격에 넣었다면 임포트가 "같은 지문·질문 있음"으로 건너뛰므로 원격 라벨은 옛 값 그대로다 — 원하면 원격에서 해당 버전 난이도를 갱신해야 한다. `final/passed.json`의 `requestedDifficulty`(생성 때 라벨)·`relabeled`·`repaired` 필드로 구분.
+- 임포트 로컬 시험(태그 `full2`): 938건 생성, 937건 공개, 1건(gid eabd2b5b…, rw_question 렌더 검사 미통과)은 초안만, 재실행 938 전부 건너뜀, 정리 후 잔여 0.
+- 종료 조건: hard 미달은 medium 여분 대체 후 전 칸 충족(RW·Math 미달 0).
+
+### 칸별 수량표(필요량 = 3세트분 + 여분 2, 기존은 원격 실측)
+| 영역 | skill | 난이도 | 필요량(3세트 +여분2) | 기존 공개(가정) | 신규 생성(파이프라인 통과) | 신규 검수 통과 | 보관 후보 | 최종 | 여분(최종−3세트분) | 미달 | 미달(hard는 medium 여분 대체 후) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| rw_information_ideas | central_ideas_details | easy | 6 | 0 | 14 | 13 | 1 | 13 | 9 |  |  |
+| rw_information_ideas | central_ideas_details | medium | 15 | 1 | 47 | 37 | 10 | 38 | 25 |  |  |
+| rw_information_ideas | central_ideas_details | hard | 4 | 0 | 10 | 2 | 8 | 2 | 0 | 2 |  |
+| rw_information_ideas | inferences | easy | 5 | 0 | 15 | 10 | 5 | 10 | 7 |  |  |
+| rw_information_ideas | inferences | medium | 13 | 0 | 60 | 23 | 37 | 23 | 12 |  |  |
+| rw_information_ideas | inferences | hard | 4 | 1 | 12 | 1 | 11 | 2 | 0 | 2 |  |
+| rw_information_ideas | command_of_evidence_text | easy | 5 | 0 | 17 | 11 | 6 | 11 | 8 |  |  |
+| rw_information_ideas | command_of_evidence_text | medium | 13 | 0 | 40 | 22 | 18 | 22 | 11 |  |  |
+| rw_information_ideas | command_of_evidence_text | hard | 4 | 0 | 12 | 7 | 5 | 7 | 5 |  |  |
+| rw_information_ideas | command_of_evidence_quant | easy | 5 | 0 | 15 | 13 | 2 | 13 | 10 |  |  |
+| rw_information_ideas | command_of_evidence_quant | medium | 10 | 1 | 22 | 16 | 6 | 17 | 9 |  |  |
+| rw_information_ideas | command_of_evidence_quant | hard | 3 | 1 | 10 | 3 | 7 | 4 | 3 |  |  |
+| rw_craft_structure | words_in_context | easy | 9 | 0 | 74 | 49 | 25 | 49 | 42 |  |  |
+| rw_craft_structure | words_in_context | medium | 23 | 0 | 78 | 34 | 44 | 34 | 13 |  |  |
+| rw_craft_structure | words_in_context | hard | 5 | 0 | 6 | 0 | 6 | 0 | -3 | 5 |  |
+| rw_craft_structure | text_structure_purpose | easy | 7 | 0 | 21 | 19 | 2 | 19 | 14 |  |  |
+| rw_craft_structure | text_structure_purpose | medium | 18 | 0 | 58 | 34 | 24 | 34 | 18 |  |  |
+| rw_craft_structure | text_structure_purpose | hard | 5 | 2 | 18 | 3 | 15 | 5 | 2 |  |  |
+| rw_craft_structure | cross_text_connections | easy | 5 | 0 | 11 | 11 | 0 | 11 | 8 |  |  |
+| rw_craft_structure | cross_text_connections | medium | 11 | 0 | 37 | 25 | 12 | 25 | 16 |  |  |
+| rw_craft_structure | cross_text_connections | hard | 4 | 1 | 14 | 5 | 9 | 6 | 4 |  |  |
+| rw_expression_ideas | rhetorical_synthesis | easy | 7 | 0 | 22 | 19 | 3 | 19 | 14 |  |  |
+| rw_expression_ideas | rhetorical_synthesis | medium | 18 | 2 | 68 | 57 | 11 | 59 | 43 |  |  |
+| rw_expression_ideas | rhetorical_synthesis | hard | 5 | 1 | 7 | 4 | 3 | 5 | 2 |  |  |
+| rw_expression_ideas | transitions | easy | 7 | 0 | 16 | 14 | 2 | 14 | 9 |  |  |
+| rw_expression_ideas | transitions | medium | 18 | 2 | 71 | 56 | 15 | 58 | 42 |  |  |
+| rw_expression_ideas | transitions | hard | 5 | 1 | 9 | 0 | 9 | 1 | -2 | 4 |  |
+| rw_standard_english | boundaries | easy | 9 | 0 | 28 | 20 | 8 | 20 | 13 |  |  |
+| rw_standard_english | boundaries | medium | 23 | 0 | 61 | 41 | 20 | 41 | 20 |  |  |
+| rw_standard_english | boundaries | hard | 6 | 0 | 11 | 3 | 8 | 3 | -1 | 3 |  |
+| rw_standard_english | form_structure_sense | easy | 9 | 0 | 21 | 17 | 4 | 17 | 10 |  |  |
+| rw_standard_english | form_structure_sense | medium | 23 | 0 | 47 | 29 | 18 | 29 | 8 |  |  |
+| rw_standard_english | form_structure_sense | hard | 5 | 0 | 8 | 5 | 3 | 5 | 2 |  |  |
+| algebra | linear_equations_one_var | easy | 5 | 0 | 10 | 5 | 5 | 5 | 2 |  |  |
+| algebra | linear_equations_one_var | medium | 11 | 18 | 18 | 8 | 10 | 26 | 17 |  |  |
+| algebra | linear_equations_one_var | hard | 4 | 6 | 6 | 1 | 5 | 7 | 5 |  |  |
+| algebra | linear_functions | easy | 5 | 0 | 10 | 8 | 2 | 8 | 5 |  |  |
+| algebra | linear_functions | medium | 11 | 15 | 8 | 3 | 5 | 18 | 9 |  |  |
+| algebra | linear_functions | hard | 4 | 12 | 2 | 2 | 0 | 14 | 12 |  |  |
+| algebra | linear_equations_two_var | easy | 5 | 0 | 16 | 13 | 3 | 13 | 10 |  |  |
+| algebra | linear_equations_two_var | medium | 11 | 7 | 26 | 17 | 9 | 24 | 15 |  |  |
+| algebra | linear_equations_two_var | hard | 4 | 0 | 7 | 1 | 6 | 1 | -1 | 3 |  |
+| algebra | systems_linear | easy | 5 | 0 | 12 | 11 | 1 | 11 | 8 |  |  |
+| algebra | systems_linear | medium | 11 | 12 | 42 | 25 | 17 | 37 | 28 |  |  |
+| algebra | systems_linear | hard | 4 | 2 | 6 | 2 | 4 | 4 | 2 |  |  |
+| algebra | linear_inequalities | easy | 5 | 0 | 8 | 5 | 3 | 5 | 2 |  |  |
+| algebra | linear_inequalities | medium | 11 | 7 | 18 | 10 | 8 | 17 | 8 |  |  |
+| algebra | linear_inequalities | hard | 3 | 6 | 2 | 1 | 1 | 7 | 6 |  |  |
+| advanced_math | equivalent_expressions | easy | 7 | 0 | 11 | 8 | 3 | 8 | 3 |  |  |
+| advanced_math | equivalent_expressions | medium | 17 | 8 | 39 | 25 | 14 | 33 | 18 |  |  |
+| advanced_math | equivalent_expressions | hard | 5 | 8 | 18 | 2 | 16 | 10 | 7 |  |  |
+| advanced_math | nonlinear_equations_systems | easy | 7 | 0 | 21 | 19 | 2 | 19 | 14 |  |  |
+| advanced_math | nonlinear_equations_systems | medium | 17 | 6 | 28 | 18 | 10 | 24 | 9 |  |  |
+| advanced_math | nonlinear_equations_systems | hard | 5 | 4 | 7 | 2 | 5 | 6 | 3 |  |  |
+| advanced_math | nonlinear_functions | easy | 7 | 0 | 9 | 8 | 1 | 8 | 3 |  |  |
+| advanced_math | nonlinear_functions | medium | 17 | 22 | 35 | 22 | 13 | 44 | 29 |  |  |
+| advanced_math | nonlinear_functions | hard | 5 | 10 | 5 | 4 | 1 | 14 | 11 |  |  |
+| problem_solving_data | ratios_rates_units | easy | 3 | 0 | 8 | 6 | 2 | 6 | 5 |  |  |
+| problem_solving_data | ratios_rates_units | medium | 5 | 6 | 10 | 5 | 5 | 11 | 8 |  |  |
+| problem_solving_data | ratios_rates_units | hard | 3 | 4 | 8 | 4 | 4 | 8 | 7 |  |  |
+| problem_solving_data | percentages | easy | 3 | 0 | 5 | 5 | 0 | 5 | 4 |  |  |
+| problem_solving_data | percentages | medium | 5 | 9 | 5 | 5 | 0 | 14 | 11 |  |  |
+| problem_solving_data | percentages | hard | 3 | 4 | 5 | 3 | 2 | 7 | 6 |  |  |
+| problem_solving_data | one_variable_data | easy | 3 | 0 | 3 | 3 | 0 | 3 | 2 |  |  |
+| problem_solving_data | one_variable_data | medium | 5 | 10 | 0 | 0 | 0 | 10 | 7 |  |  |
+| problem_solving_data | two_variable_data | easy | 3 | 0 | 5 | 3 | 2 | 3 | 2 |  |  |
+| problem_solving_data | two_variable_data | medium | 5 | 7 | 0 | 0 | 0 | 7 | 4 |  |  |
+| problem_solving_data | probability | easy | 3 | 0 | 5 | 5 | 0 | 5 | 4 |  |  |
+| problem_solving_data | probability | medium | 5 | 8 | 0 | 0 | 0 | 8 | 5 |  |  |
+| problem_solving_data | inference_margin_error | easy | 3 | 0 | 5 | 5 | 0 | 5 | 4 |  |  |
+| problem_solving_data | inference_margin_error | medium | 5 | 7 | 1 | 1 | 0 | 8 | 5 |  |  |
+| problem_solving_data | evaluating_statistical_claims | easy | 3 | 0 | 5 | 3 | 2 | 3 | 2 |  |  |
+| problem_solving_data | evaluating_statistical_claims | medium | 5 | 7 | 7 | 2 | 5 | 9 | 6 |  |  |
+| geometry_trig | area_volume | easy | 4 | 0 | 9 | 8 | 1 | 8 | 6 |  |  |
+| geometry_trig | area_volume | medium | 7 | 22 | 0 | 0 | 0 | 22 | 17 |  |  |
+| geometry_trig | area_volume | hard | 3 | 14 | 0 | 0 | 0 | 14 | 13 |  |  |
+| geometry_trig | lines_angles_triangles | easy | 4 | 0 | 9 | 9 | 0 | 9 | 7 |  |  |
+| geometry_trig | lines_angles_triangles | medium | 7 | 4 | 27 | 16 | 11 | 20 | 15 |  |  |
+| geometry_trig | lines_angles_triangles | hard | 3 | 1 | 4 | 0 | 4 | 1 | 0 | 2 |  |
+| geometry_trig | right_triangles_trigonometry | easy | 4 | 0 | 10 | 9 | 1 | 9 | 7 |  |  |
+| geometry_trig | right_triangles_trigonometry | medium | 7 | 5 | 17 | 12 | 5 | 17 | 12 |  |  |
+| geometry_trig | right_triangles_trigonometry | hard | 3 | 4 | 4 | 2 | 2 | 6 | 5 |  |  |
+| geometry_trig | circles | easy | 3 | 0 | 8 | 6 | 2 | 6 | 5 |  |  |
+| geometry_trig | circles | medium | 6 | 11 | 7 | 3 | 4 | 14 | 10 |  |  |
+| geometry_trig | circles | hard | 3 | 10 | 0 | 0 | 0 | 10 | 9 |  |  |
+| **sat_rw 합계** | | | 309 | 13 | 960 | 603 | 357 | 616 | 373 | 16 | 0 |
+| **sat_math 합계** | | | 302 | 276 | 531 | 335 | 196 | 611 | 413 | 5 | 0 |
+
+보관 사유 집계: {"answer_mismatch":106,"format_defect":69,"explanation_inconsistent":231,"weak_distractors":189,"factual_error":62,"ambiguous_answer":39,"empty_explanation":23,"raw_latex_in_explanation":13,"near_duplicate_of":11,"raw_latex_in_body":14,"copyright_suspect":4,"difficulty_unstable":1}
+
+## 5. 임포트 스크립트와 로컬 시험
 - `scripts/mock-exam-generation/import.ts --file final/passed.json [--publish] [--tag T]`: `create_bank_problem(p_usage_scope=mock_exam)` -> `created_via=ai_generated` -> `save_problem_draft_version` -> `set_problem_render_check` -> `set_problem_quality`(검수 결과 포함) -> 선택 공개(`confirm_and_publish_problem_version`). 유사문항 그룹은 DB 트리거가 자동 부여.
 - **재실행 안전**: 같은 skill에 지문·질문이 같은 버전이 있으면 건너뜀, 기존 은행과 본문 유사도 0.6 이상이면 중복으로 건너뜀(`--no-dup-check`로 끔). 환경은 `.env.local` 대상 DB를 따르므로 원격 실행은 총괄이 환경을 지정한다.
 - **로컬 시험**(태그 `full1`): 520건 전부 생성·공개 성공(실패 0), 전부 `usage_scope=mock_exam`·`confirmed`·`published`, 유사문항 그룹 520개(null 0), 재실행 시 520건 전부 건너뜀, `--cleanup-tag`로 시험 데이터 520건 삭제(잔여 0).
 
-## 5. 결정·주의
+## 6. 결정·주의
 1. **hard 미달 13칸**: 선택지는 (a) 오너 승인 하에 hard 생성·검수를 추가 라운드 진행(통과율 12%라 칸당 수십 건 필요), (b) M2 higher가 medium·hard 모두 적격이므로 해당 칸을 medium 여분(대부분 칸에서 +2~7 여유)으로 대체 — 난이도 구성만 medium 쪽으로 기운다.
 2. 기존 공개 난이도 실측이 가정치다 — 실측이 다르면 칸별 미달이 달라지므로 위 JSON으로 재집계 필요.
 3. 해설의 `$...$`(KaTeX)는 모든 화면이 LearningText로 렌더하므로 결함으로 보지 않았다. 2026-09-29 분류 때 같은 형태 10건을 일관성으로 보관한 전례가 있어, 엄격 적용을 원하면 해설 `$` 포함 문항(Math 대부분)을 추가 보관해야 한다(이 경우 Math 통과 수가 크게 줄어 재생성이 필요).
 4. 오답 제거 용이성·난이도 라벨은 AI 판정이라 임계값에 민감하다(`--weak easy=4,medium=3,hard=2`). 더 엄격히 하면 통과 수가 줄어든다.
 5. 저작권 의심은 모델 자기 지식 기준의 1차 점검이며 법적 확인이 아니다.
 
-## 6. 외부 변경
+## 7. 외부 변경
 Anthropic API 호출(유료): 생성 파이프라인 367회 실행(후보당 내부 재생성·자료 생성·채점 호출 포함)과 검수 2회 x 약 1,400건. 그 외 원격 DB·Supabase 원격·배포·푸시 없음, 로컬 DB는 시험 임포트 후 정리 완료.

@@ -45,6 +45,17 @@ async function main() {
     if (spr > 0) jobs.push({ ...c, format: "spr", want: spr });
   }
 
+  // hard 개선 프롬프트(--hard-prompt): 정의 명시 + 이미 통과한 hard 문항 few-shot(같은 skill 우선, 없으면 같은 체계).
+  const hardPrompt = process.argv.includes("--hard-prompt");
+  const passedHard: { skill: string; examSystem: string; problem: { passage?: string | null; stimulus?: string | null; question?: string | null; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string } }[] =
+    hardPrompt && existsSync(path.resolve("data/mock-exam-generation", runId, "final/passed.json"))
+      ? (JSON.parse(readFileSync(path.resolve("data/mock-exam-generation", runId, "final/passed.json"), "utf-8")) as { difficulty: string; relabeled: boolean; repaired: boolean }[]).filter((x) => x.difficulty === "hard" && !x.relabeled) as never
+      : [];
+  const hardGuidance = (skill: string, system: string) => {
+    const ex = [...passedHard.filter((x) => x.skill === skill), ...passedHard.filter((x) => x.skill !== skill && x.examSystem === system)].slice(0, 2);
+    const shots = ex.map((x, i) => `[통과한 hard 예시 ${i + 1} — 유형 ${x.skill}]\n${x.problem.stimulus ?? x.problem.passage ?? ""}\n질문: ${x.problem.question ?? ""}\n${(x.problem.options ?? []).map((o, j) => `${String.fromCharCode(65 + j)}) ${o}${j === x.problem.correctIndex ? " (정답)" : ""}`).join("\n")}${x.problem.answers ? `\n정답: ${x.problem.answers.join(" / ")}` : ""}`).join("\n\n");
+    return `hard 강화 지침(독립 채점자 기준): 채점자는 (1) 풀이/추론이 3단계 이상이거나 여러 문장·조건을 종합해야 풀리고 (2) 오답 3개가 각각 서로 다른 실제 오개념·중간값·부분 일치에 기반하며 지문을 읽고도 근거를 따져야만 지워지고 (3) 지문이 군더더기 없이 적정 길이일 때 hard 로 본다. 어휘 난도·지문 길이·낯선 고유명사로 어렵게 만들지 않는다. 정답 선지는 오답보다 길거나 구체적이지 않게 한다. Math 는 모든 계산 결과를 생성 직전에 다시 검산해 해설·선지·정답이 일치해야 한다(해설 안에 '재계산' 같은 자기 수정 문구 금지).${shots ? `\n아래는 이미 모든 검수를 통과한 hard 문항이다. 수준과 오답 설계 방식만 참고하고 소재·문장·수치는 절대 재사용하지 않는다.\n${shots}` : ""}`;
+  };
   const runJob = async (job: Job) => {
     const prefix = `${job.skill}__${job.difficulty}__${job.format}__${tag}`;
     let have = countSaved(prefix);
@@ -62,6 +73,7 @@ async function main() {
         const result = await runGenerationPipeline({
           subjectName, skillType: legacy?.label ?? skill.label, skillCode: skill.code, examSystem: job.system,
           difficulty: job.difficulty, format: job.format, count: n, figurePolicy: figurePolicy as never,
+          ...(hardPrompt && job.difficulty === "hard" ? { extraGuidance: hardGuidance(job.skill, job.system) } : {}),
         });
         for (const a of result.accepted) {
           const gid = randomUUID();
