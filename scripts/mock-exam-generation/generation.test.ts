@@ -55,3 +55,16 @@ describe("난이도 재라벨·오답 제거 판정", () => {
     expect(evalOne(med, rev("medium", "high", [1, 2])).verdict).toBe("pass");
   });
 });
+
+import { hardTier } from "./aggregate-lib";
+describe("hard 판정 등급", () => {
+  const w = (acc: number, score: number, strongCorrect = 3, system = "sat_rw") => ({ gid: "a", system, acc, rubric: { score }, strong: { n: 3, correct: strongCorrect } });
+  it("강한 모델 다수 일치가 없으면 등급 없음(모호·오답 키 제외)", () => { expect(hardTier(w(0, 12, 2), true)).toBeNull(); });
+  it("A: 약한 모델 정답률 40% 이하", () => { expect(hardTier(w(0.2, 6), true)).toBe("A"); });
+  it("B: 정답률 80% 이하 + 루브릭 상위, C: 루브릭만", () => {
+    expect(hardTier(w(0.8, 11), true)).toBe("B");
+    expect(hardTier(w(1, 11), true)).toBe("C");
+    expect(hardTier(w(1, 9), true)).toBeNull();
+    expect(hardTier(w(1, 10, 3, "sat_math"), true)).toBe("C");
+  });
+});

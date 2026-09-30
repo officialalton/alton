@@ -4,8 +4,9 @@ import path from "node:path";
 import { findDuplicates, deterministicIssues, type Raw, type ReviewResult } from "./review";
 
 export type Diff = "easy" | "medium" | "hard";
-export type Run = { raws: Raw[]; reviews: Map<string, ReviewResult>; repairs: Map<string, { ok: boolean; after: { options: string[]; explanation: string } | null }>; repairedReviews: Map<string, ReviewResult> };
-export type Eval = { raw: Raw; verdict: "pass" | "archive" | "unreviewed"; reasons: string[]; finalDifficulty: Diff; relabeled: boolean; repaired: boolean; review: ReviewResult | null };
+export type Weak = { gid: string; system: string; acc: number; rubric: { score: number }; strong: { n: number; correct: number } | null };
+export type Run = { weak?: Map<string, Weak>; raws: Raw[]; reviews: Map<string, ReviewResult>; repairs: Map<string, { ok: boolean; after: { options: string[]; explanation: string } | null }>; repairedReviews: Map<string, ReviewResult> };
+export type Eval = { hardTier?: HardTier; raw: Raw; verdict: "pass" | "archive" | "unreviewed"; reasons: string[]; finalDifficulty: Diff; relabeled: boolean; repaired: boolean; review: ReviewResult | null };
 
 const readDir = <T>(dir: string, into: (o: T) => [string, unknown]) => { const m = new Map<string, unknown>(); if (existsSync(dir)) for (const f of readdirSync(dir)) if (f.endsWith(".json")) { const [k, v] = into(JSON.parse(readFileSync(path.join(dir, f), "utf-8")) as T); m.set(k, v); } return m; };
 export function loadRun(base: string): Run {
@@ -15,6 +16,7 @@ export function loadRun(base: string): Run {
     reviews: readDir<ReviewResult>(path.join(base, "review"), (r) => [r.gid, r]) as Map<string, ReviewResult>,
     repairs: readDir<{ gid: string; ok: boolean; after: { options: string[]; explanation: string } | null }>(path.join(base, "repair"), (r) => [r.gid, r]) as Run["repairs"],
     repairedReviews: readDir<ReviewResult>(path.join(base, "review-repaired"), (r) => [r.gid, r]) as Map<string, ReviewResult>,
+    weak: readDir<Weak>(path.join(base, "weak"), (r) => [r.gid, r]) as Map<string, Weak>,
   };
 }
 
@@ -24,7 +26,21 @@ export const DEFAULT_WEAK: Record<string, number> = { easy: 4, medium: 3, hard: 
 const DET = new Set(["weak_distractors", "difficulty_label_mismatch", "difficulty_unstable", "raw_latex_in_body", "unbalanced_dollar_in_body", "raw_latex_in_explanation", "unbalanced_dollar_in_explanation", "internal_field_name_exposed", "empty_explanation"]);
 
 /** 한 버전(원본 또는 보수본)을 현재 규칙으로 판정한다. 난이도: 블라인드 추정이 라벨과 다르면 추정으로 재라벨, 추정이 불안정하면 보관. */
-export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WEAK): Omit<Eval, "repaired"> {
+/** hard 판정 등급(2026-09-30). A: 강한 모델 다수 일치 + 약한 모델(haiku) 5회 정답률 <= 0.4(경험적). B: 강한 모델 일치 + 정답률 <= 0.8 + 구조 루브릭 상위.
+ *  C: 강한 모델 일치 + 구조 루브릭 상위만(경험적 근거 없음 — 잠정). 없음: null. 루브릭 상위 기준: RW 11점 / Math 10점. */
+export type HardTier = "A" | "B" | "C" | null;
+export function hardTier(w: Weak | undefined, blindOk: boolean): HardTier {
+  if (!w) return null;
+  const strongOk = w.strong ? w.strong.correct === w.strong.n : blindOk;
+  if (!strongOk) return null;
+  const top = w.rubric.score >= (w.system === "sat_rw" ? 11 : 10);
+  if (w.acc <= 0.4) return "A";
+  if (w.acc <= 0.8 && top) return "B";
+  return top ? "C" : null;
+}
+export const HARD_MIN_TIER: HardTier = "C";
+
+export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WEAK, w?: Weak): Omit<Eval, "repaired"> {
   if (!rev) return { raw: r, verdict: "unreviewed", reasons: ["not_reviewed"], finalDifficulty: r.difficulty, relabeled: false, review: null };
   const reasons = [...rev.reasons.filter((x) => !DET.has(x) && !x.startsWith("near_duplicate_of")), ...deterministicIssues(r)];
   if (!rev.blind) reasons.push(...rev.reasons.filter((x) => x.startsWith("near_duplicate_of")));
@@ -52,17 +68,25 @@ export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WE
     const elim = (rev.blind.easilyEliminated ?? []).filter((i) => i !== r.problem.correctIndex).length;
     if (r.format === "mc" && elim >= weak[finalDifficulty]) reasons.push("weak_distractors");
   }
-  return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, finalDifficulty, relabeled, review: rev };
+  // hard 는 판정 등급이 있어야 한다: A·B 는 라벨과 무관하게 hard 로 승격, C 는 이미 hard 로 분류된 문항만 유지, 그 밖은 medium 으로 내린다.
+  const tier = hardTier(w, Boolean(rev.blind?.agrees && !rev.blind?.otherDefensible));
+  let hardTierOut: HardTier = null;
+  if (tier === "A" || tier === "B") { if (finalDifficulty !== "hard") relabeled = true; finalDifficulty = "hard"; hardTierOut = tier; }
+  else if (finalDifficulty === "hard") { if (tier === "C") hardTierOut = "C"; else { finalDifficulty = "medium"; relabeled = r.difficulty !== "medium"; } }
+  return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, finalDifficulty, relabeled, review: rev, hardTier: hardTierOut };
 }
 
+/** 임포트 시험에서 렌더 검사(rw_question)를 통과하지 못한 문항 — 총괄 결정으로 passed 에서 제외. */
+export const EXCLUDED_GIDS = new Set(["eabd2b5b-8d5f-46a0-b1ce-732e5e4360b2"]);
 export function evaluateAll(run: Run, weak = DEFAULT_WEAK): Eval[] {
   const effective: Eval[] = run.raws.map((r) => {
-    const e0 = evalOne(r, run.reviews.get(r.gid), weak);
+    if (EXCLUDED_GIDS.has(r.gid)) return { raw: r, verdict: "archive" as const, reasons: ["render_check_failed"], finalDifficulty: r.difficulty, relabeled: false, repaired: false, review: run.reviews.get(r.gid) ?? null };
+    const e0 = evalOne(r, run.reviews.get(r.gid), weak, run.weak?.get(r.gid));
     const rp = run.repairs.get(r.gid);
     const rr = run.repairedReviews.get(r.gid);
     if (e0.verdict === "archive" && e0.reasons.length === 1 && e0.reasons[0] === "weak_distractors" && rp?.ok && rp.after) {
       const fixed: Raw = { ...r, problem: { ...r.problem, options: rp.after.options, explanation: rp.after.explanation } };
-      const e1 = evalOne(fixed, rr, weak);
+      const e1 = evalOne(fixed, rr, weak, run.weak?.get(r.gid));
       return { ...e1, repaired: true, reasons: e1.verdict === "archive" && e1.reasons.length === 0 ? ["repair_unreviewed"] : e1.reasons };
     }
     return { ...e0, repaired: false };

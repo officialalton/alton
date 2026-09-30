@@ -27,6 +27,9 @@ type Rec = {
   problem: { passage?: string | null; stimulus?: string | null; question?: string | null; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string; figure?: unknown; statements?: string[] | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null };
   quality: Record<string, unknown>;
   review?: unknown;
+  hardTier?: string | null;
+  createdVia?: string;
+  subpattern?: string | null;
 };
 
 const shingles = (t: string) => {
@@ -124,7 +127,7 @@ async function main() {
       p_difficulty: r.difficulty, p_actor_id: actorId, p_skill_code: r.skill, p_exam_system: r.examSystem, p_ap_subject: null, p_usage_scope: "mock_exam",
     });
     if (pErr || !problemId) { stats.failed += 1; failures.push(`${r.gid}: 문제 생성 실패 ${pErr?.message}`); continue; }
-    await admin.from("problems").update({ created_via: "ai_generated" }).eq("id", problemId as string);
+    await admin.from("problems").update({ created_via: r.createdVia === "compiler" ? "compiler" : "ai_generated", ...(r.subpattern ? { subpattern: r.subpattern } : {}) }).eq("id", problemId as string);
 
     const fullText = composeProblemText(stimulus, question);
     const contentIssues = checkContent({ format: r.format, passage: fullText, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation, answers: g.answers ?? null, statements: g.statements ?? null, skillCode: r.skill, figure: g.figure ?? null });
@@ -141,7 +144,7 @@ async function main() {
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }
     const { error: cErr } = await admin.rpc("set_problem_render_check", { p_version_id: versionId, p_check: check });
     if (cErr) { await cleanup1(`렌더 검사 기록 실패 ${cErr.message}`); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { runId: r.runId, gid: r.gid, review: r.review ?? null } } });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { runId: r.runId, gid: r.gid, hardTier: r.hardTier ?? null, review: r.review ?? null } } });
     if (qErr) failures.push(`${r.gid}: 품질 기록 실패 ${qErr.message}`);
     stats.created += 1;
     pool.push({ problemId: problemId as string, key, sh });
