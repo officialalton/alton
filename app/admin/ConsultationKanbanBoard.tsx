@@ -6,6 +6,7 @@
 // 체험 리뷰 확정 검수, 정규 계약 발송)을 처리하고, "상담 종료" 액션으로
 // 지난 상담 탭으로 이동시킨다.
 
+import OnboardingAttentionPanel from "./OnboardingAttentionPanel";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -204,6 +205,7 @@ export default function ConsultationKanbanBoard({
   return (
     <div>
       {headerBar}
+      {viewerRole === "admin" && <OnboardingAttentionPanel onOpenConsultation={setOpenId} />}
       <div className="grid grid-cols-5 gap-3" data-testid="consultation-kanban-board">
         {KANBAN_STAGE_ORDER.map((stage) => {
           const inStage = cards.filter((c) => c.stage === stage);
@@ -548,6 +550,23 @@ function ConsultationCardDetailPanel({
                   온보딩 안내 발송은 관리자가 처리합니다 — 아직 발송되지 않았습니다.
                 </p>
               ))
+            )}
+            {c.outcome === "trial_recommended" &&
+              (detail.trialEntitlementState === "exhausted" || detail.trialEntitlementState === "expired") && (
+                <p className="text-[12px] text-red font-semibold" data-testid="trial-entitlement-unavailable">
+                  체험권 {detail.trialEntitlementState === "exhausted" ? "소진" : "만료"} — 새로 지급되지 않았습니다.
+                  {isAdmin
+                    ? " 상단 처리 필요 목록에서 사유를 남기고 1회 수동 재지급할 수 있습니다."
+                    : " 관리자 재지급 검토 대기 중입니다."}
+                </p>
+              )}
+            {detail.contractPending && (
+              <p
+                className="text-[11.5px] font-bold text-ink bg-yellow-bg rounded-lg px-2.5 py-1 inline-block"
+                data-testid="contract-pending-badge"
+              >
+                계약 대기(자동 발송 준비 중)
+              </p>
             )}
             {c.trial_entitlement_grant_status === "failed" && isAdmin && (
               <button

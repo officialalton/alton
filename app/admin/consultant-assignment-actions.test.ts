@@ -47,6 +47,9 @@ vi.mock("@/utils/supabase/server", () => ({
           }),
         };
       }
+      if (table === "consultant_settings") {
+        return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: null }) }) }) };
+      }
       if (table === "consultant_assignment_history") {
         return {
           select: () => ({

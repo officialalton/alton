@@ -7,6 +7,7 @@ import {
   isContractAutoDispatchEnabled,
   processContractDispatchQueue,
   type ContractDispatchJobRow,
+  type DispatchOneResult,
 } from "@/lib/contract-dispatch/dispatcher";
 import { selectInChunks } from "@/lib/select-in-chunks";
 
@@ -53,7 +54,8 @@ export async function runContractDispatchQueueAction(): Promise<{ enabled: boole
 }
 
 /** 실패한 작업 하나를 다시 시도한다. */
-export async function retryContractDispatchJobAction(jobId: string): Promise<void> {
+// 2026-09-29(D7) — 결과를 돌려줘 화면이 "무엇이 일어났는지"(특히 게이트 OFF 로 아무 것도 안 한 경우)를 알린다.
+export async function retryContractDispatchJobAction(jobId: string): Promise<DispatchOneResult> {
   await requireAdmin();
   const admin = createAdminClient();
   const { data: job, error } = await admin
@@ -62,5 +64,5 @@ export async function retryContractDispatchJobAction(jobId: string): Promise<voi
     .eq("id", jobId)
     .single();
   if (error) throw new Error(error.message);
-  await dispatchOneContractJob(admin, job);
+  return dispatchOneContractJob(admin, job);
 }

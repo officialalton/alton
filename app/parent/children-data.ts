@@ -26,16 +26,11 @@ async function isHiddenForClosedConsultation(
     .limit(1);
   if (activeEnrollments && activeEnrollments.length > 0) return false;
 
-  const { data: consultations } = await supabase
-    .from("consultations")
-    .select("closure_type")
-    .eq("child_id", childId)
-    .order("closed_at", { ascending: false, nullsFirst: false })
-    .order("created_at", { ascending: false })
-    .limit(1);
-  const latest = (consultations ?? [])[0];
-  if (!latest || !latest.closure_type) return false;
-  return CLOSED_WITHOUT_PROGRESS.has(latest.closure_type as string);
+  // 2026-09-29(F1) — 가족은 consultations 를 직접 읽을 수 없다(내부 메모 노출 차단). 자녀의 최근
+  // 상담 종료 유형만 SECURITY DEFINER 함수로 받는다.
+  const { data: closureType } = await supabase.rpc("family_child_latest_closure_type", { p_child_id: childId });
+  if (!closureType) return false;
+  return CLOSED_WITHOUT_PROGRESS.has(closureType as string);
 }
 
 export async function loadChildren(

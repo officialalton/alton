@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
   getConsultantDetailAction,
   setStudentConsultantAction,
+  setConsultantActiveAction,
   assignStudentToConsultantAction,
   type ConsultantDetail,
 } from "./consultant-assignment-actions";
@@ -28,6 +29,8 @@ export default function ConsultantDetailPanel({
   const [unassigningId, setUnassigningId] = useState<string | null>(null);
   const [assignEmail, setAssignEmail] = useState("");
   const [assigning, setAssigning] = useState(false);
+  const [togglingActive, setTogglingActive] = useState(false);
+  const [activeNotice, setActiveNotice] = useState<string | null>(null);
 
   function reload() {
     getConsultantDetailAction(consultantId)
@@ -50,6 +53,34 @@ export default function ConsultantDetailPanel({
       setError(e instanceof Error ? e.message : "배정 해제에 실패했습니다.");
     } finally {
       setUnassigningId(null);
+    }
+  }
+
+  // 2026-09-29(B7) — 비활성화: 미확정 상담은 자동 미배정, 확정 상담은 취소 후 새 링크로 안내.
+  async function handleToggleActive(nextActive: boolean) {
+    if (
+      !nextActive &&
+      !window.confirm(
+        "이 컨설턴트를 비활성화할까요? 아직 확정되지 않은 상담은 자동으로 미배정되고 예약 링크가 회수됩니다. 이미 확정된 상담은 취소 후 새 링크로 다시 잡아야 합니다."
+      )
+    ) {
+      return;
+    }
+    setTogglingActive(true);
+    setError(null);
+    setActiveNotice(null);
+    try {
+      const r = await setConsultantActiveAction(consultantId, nextActive, nextActive ? undefined : "관리자 비활성화(Users > Consultants)");
+      setActiveNotice(
+        nextActive
+          ? "다시 활성화했습니다."
+          : `비활성화했습니다. 미확정 상담 ${r.unassigned}건을 미배정으로 돌렸고, 확정 상담 ${r.scheduled_remaining}건은 취소 후 새 링크가 필요합니다(신규 현황의 처리 필요 목록 참고).`
+      );
+      reload();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "변경에 실패했습니다.");
+    } finally {
+      setTogglingActive(false);
     }
   }
 
@@ -96,6 +127,22 @@ export default function ConsultantDetailPanel({
                 <div className="text-ink font-semibold">{detail.currentStudents.length}명</div>
               </div>
             </div>
+            <div className="flex items-center gap-2 mt-3">
+              <span
+                className={`text-[11.5px] font-bold px-2 py-0.5 rounded-full ${detail.deactivatedAt ? "bg-red/10 text-red" : "bg-grey-100 text-ink"}`}
+                data-testid="consultant-active-status"
+              >
+                {detail.deactivatedAt ? "비활성" : "활성"}
+              </span>
+              <button
+                onClick={() => handleToggleActive(!!detail.deactivatedAt)}
+                disabled={togglingActive}
+                className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+              >
+                {togglingActive ? "처리 중..." : detail.deactivatedAt ? "다시 활성화" : "비활성화"}
+              </button>
+            </div>
+            {activeNotice && <p className="text-[12px] text-ink mt-2" role="status">{activeNotice}</p>}
             {detail.careerBio && (
               <p className="text-[12px] text-grey-500 mt-2 whitespace-pre-wrap">{detail.careerBio}</p>
             )}
