@@ -31,6 +31,7 @@ import {
   loadStudentMaterialStrokes,
 } from "./annotation-events-actions";
 import { loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
+import { emptyOnPermissionDenied } from "@/lib/permission-denied";
 
 // R8 1/N — cutover connection: 이 화면은 원래 legacy_sessions만 조회했다.
 // `loadNormalizedSession`이 legacy_sessions(R6 이전 레거시 세션뷰 테스트 데이터)와
@@ -104,14 +105,16 @@ export default async function SessionPage({
       // 과제 배치 전체(어느 교사가 냈든, 이 교사가 낸 것만 — RLS/로더가 각 역할에 맞게 가른다)를 그대로 보여준다.
       profile?.role === "teacher"
         ? loadTeacherHomeworkBatchesForStudent(supabase, user.id, session.studentId)
-        : loadStudentHomeworkBatches(supabase, session.studentId),
+        : emptyOnPermissionDenied(loadStudentHomeworkBatches(supabase, session.studentId), []),
       // 2026-09-16(제품 오너 정정) — 정규 수업(v3)에 한해 학생·보호자에게 Smart Notes 회의록
       // 열람 링크를 보여준다(첫 상담은 대상 아님, RLS가 v3 sessions에 한정해 접근을 걸러준다).
       isV3 ? loadSmartNotesViewUrl(supabase, session.id) : Promise.resolve(null),
       // 2026-09-22(UAT "모의고사 탭만 유독 로딩이 길다") — 다른 탭(교재·문제·과제·
       // 단어장)은 전부 이렇게 SSR로 미리 받아 두는데 모의고사 탭만 클라이언트가
       // 탭을 열 때 따로 요청을 보내 그 왕복만큼 더 느렸다. 같은 배치에 합류시킨다.
-      loadStudentMockExamAttempts(supabase, session.studentId),
+      // 담당이 끝난 선생님의 과거 수업처럼, 세션 참가자지만 이 학생의 모의고사 기록은 볼 수 없는 경우
+      // RPC가 권한 거부를 던진다 — 페이지 전체를 죽이지 않고 빈 목록으로(권한은 넓히지 않는다).
+      emptyOnPermissionDenied(loadStudentMockExamAttempts(supabase, session.studentId), []),
     ]);
 
   const materialNotice = isV3 && freezeState ? frozenMaterialNotice(initialState, freezeState) : null;
