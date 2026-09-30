@@ -62,13 +62,15 @@ function buildCands(method: string, perRw: number, perMath: number): Cand[] {
 
 /** 신형 모델은 사고(thinking)를 끌 수 없고 max_tokens 를 사고 토큰이 같이 쓴다(1차 시도에서 55건 중 41건이 잘림). Sonnet 5.5 는 도구 호출 전 사고 없음(between_tools), Opus/Fable 은 adaptive + effort low 로 비용·잘림을 통제한다. 세 조합에 같은 원칙을 적용한다. */
 const think = (model: string) => ({ thinking: model.includes("sonnet") ? { type: "between_tools" } : { type: "adaptive" }, output_config: { effort: "low" } });
+let MATH_PROMPT: "v1" | "v2" = "v1";
+const MATH_NOTATION_V2 = "\n수식 표기 규칙(필수): 모든 수식은 $…$ 로 열고 반드시 닫는다(지문·선택지·해설 모두, 짝이 맞아야 함). 수식 안에는 영어·숫자·LaTeX 명령만 쓰고 한글을 넣지 않는다(한글 설명은 수식 밖). 금액 기호로 $ 를 쓰지 말고 'dollars' 같은 단어로 쓴다. 분수는 \\frac{a}{b}, 곱은 \\cdot, 수식 안에서 줄바꿈(\\\\)을 쓰지 않는다.";
 const SYS_CACHE = { type: "ephemeral", ttl: "1h" };
 const genSystem = (c: Cand) => `당신은 디지털 SAT(${c.system === "sat_rw" ? "Reading and Writing" : "Math"}) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **hard** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
 형식 규칙: ${QUESTION_RULE[c.skill]}
 ${c.system === "sat_rw" ? "지문·질문·선택지는 영어, 해설은 한국어. 정답이 지문·선택지 표면 일치로 드러나면 안 된다." : "질문·선택지는 영어, 해설은 한국어(단계별 계산). 모든 계산을 생성 직전에 다시 검산하고, 해설에 '재계산' 같은 자기 수정 문구를 쓰지 않는다."}
 오답 3개는 각각 서로 다른 실제 오개념·중간값·부분 일치에 기반해 그럴듯해야 하고 지문을 읽고도 근거를 따져야만 지워진다. 난이도는 긴 지문·복잡한 숫자·계산량이 아니라 아래 사고 구조로만 만든다.
 hard 지시${c.recipeId ? `(레시피 ${c.recipeId})` : "(원형)"}:
-${c.instruction}${c.system === "sat_math" ? "\n선택지가 숫자이면 option_values 에 4개 값을 숫자로, 아니면 null. verification_js 에는 문제의 주어진 수치로 정답 값을 독립적으로 다시 계산해 return 하는 JavaScript 함수 본문(예: 'const a=3; return a*2+1;')을 쓴다(외부 입력 없음)." : ""}`;
+${c.instruction}${c.system === "sat_math" && MATH_PROMPT === "v2" ? MATH_NOTATION_V2 : ""}${c.system === "sat_math" ? "\n선택지가 숫자이면 option_values 에 4개 값을 숫자로, 아니면 null. verification_js 에는 문제의 주어진 수치로 정답 값을 독립적으로 다시 계산해 return 하는 JavaScript 함수 본문(예: 'const a=3; return a*2+1;')을 쓴다(외부 입력 없음)." : ""}`;
 const genTool = (c: Cand) => ({ name: "problem", description: "hard 문항 1개", input_schema: { type: "object", properties: {
   passage: { type: "string", description: "지문/자료 본문(빈칸·밑줄 표기 포함, 질문 문장 제외)" },
   question: { type: "string" },
@@ -133,6 +135,7 @@ async function main() {
   const cmd = process.argv[2];
   if (cmd === "report") return report();
   if (cmd === "compare") return compare();
+  if (cmd === "cross") return cross();
   if (cmd === "rereview") return rereview();
   const combo = arg("--combo")!, method = arg("--method") ?? "recipe";
   const cfg = { ...COMBOS[combo], gen: arg("--gen-model") ?? COMBOS[combo].gen, rev: arg("--review-model") ?? COMBOS[combo].rev };
@@ -280,5 +283,75 @@ function compare() {
     out[label] = res;
   }
   writeFileSync(path.join(RUN, "batch", "compare.json"), JSON.stringify(out, null, 1));
+  console.log(JSON.stringify(out, null, 1));
+}
+
+const REVIEWERS = [{ key: "fable", model: "claude-fable-5-1" }, { key: "opus", model: "claude-opus-5-5" }] as const;
+const formatFail = (issues: string[]) => issues.some((i) => /math_|unbalanced_dollar|raw_latex/.test(i));
+/** 교차 채점 시험: 생성 Opus 5.5 고정(동기), 같은 후보를 검수 모델 2개(Fable 5.1·Opus 5.5)가 채점. 새 예산 구간 batch2/ledger.json. 실행: cross [--per 6] [--budget 6] [--dry] */
+async function cross() {
+  const per = Number(arg("--per") ?? 6), budget = Number(arg("--budget") ?? 6);
+  const genModel = arg("--gen-model") ?? "claude-opus-5-5";
+  MATH_PROMPT = (arg("--math-prompt") ?? "v2") as "v1" | "v2";
+  const dir = path.join(RUN, "batch2", "D-cross");
+  mkdirSync(dir, { recursive: true });
+  const cands = buildCands("recipe", per, Number(arg("--per-math") ?? per));
+  writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
+  const led = ledger(dir);
+  // 추정(동기 단가): 앞선 실측 — Opus 생성 약 $0.034/후보, Fable 검수 약 $0.105/후보, Opus 검수 약 $0.03/후보(결정론 통과 약 85%)
+  const est = cands.length * 0.034 + cands.length * 0.85 * (0.105 + 0.03);
+  console.log(`[D-cross] 후보 ${cands.length} · 생성 ${genModel} · 검수 fable+opus · 추정(동기) $${est.toFixed(2)} · 구간 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
+  if (led.spent() + est > budget * 1.15) throw new Error("추정이 상한을 크게 넘음 — 실행하지 않음");
+  if (flag("--dry")) return;
+  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: genModel, ...think(genModel), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라. 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
+  const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: cands.length * 0.017, sync: true });
+  const gens = new Map<string, { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }>();
+  for (const c of cands) {
+    const r = genRes.get(c.cid); const g = r ? (toolInput(r) as unknown as Gen | null) : null;
+    if (!g || !Array.isArray(g.options) || g.options.length !== 4 || !g.question) continue;
+    gens.set(c.cid, { c, g, det: await deterministic(c, g) });
+  }
+  writeFileSync(path.join(dir, "gens.json"), JSON.stringify([...gens.values()]));
+  const passDet = [...gens.values()].filter((x) => x.det.issues.length === 0);
+  for (const rv of REVIEWERS) {
+    const reqs = passDet.flatMap(({ c, g }) => [blindReq(rv.model, c.cid, c.skill, g), auditReq(rv.model, c, g, recipesFor(c.skill).find((r) => r.id === c.recipeId) ?? null)]);
+    await runBatch({ dir, name: `review-${rv.key}`, requests: reqs, budgetUsd: budget, estimateUsd: passDet.length * (rv.key === "fable" ? 0.0525 : 0.015), sync: true });
+  }
+  crossReport(dir);
+}
+function crossReport(dir: string) {
+  const cands = JSON.parse(readFileSync(path.join(dir, "candidates.json"), "utf-8")) as Cand[];
+  const gens = new Map((JSON.parse(readFileSync(path.join(dir, "gens.json"), "utf-8")) as { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }[]).map((x) => [x.c.cid, x]));
+  const read = (n: string) => { const m = new Map<string, { cost?: number; in: Record<string, unknown> | null }>(); const f = path.join(dir, `${n}.results.jsonl`); if (!existsSync(f)) return m; for (const l of readFileSync(f, "utf-8").split("\n").filter(Boolean)) { const r = JSON.parse(l); if (r.ok) m.set(r.custom_id, { cost: r.cost, in: toolInput(r) }); } return m; };
+  const gen = read("gen");
+  const rev = { fable: read("review-fable"), opus: read("review-opus") };
+  type V = { correct: boolean; comp: boolean; fit: boolean; which: string[]; note: string; issue: string };
+  const verdict = (key: "fable" | "opus", c: Cand, g: Gen): V | null => {
+    const b = rev[key].get(`b-${c.cid}`.slice(0, 64))?.in, a = rev[key].get(`a-${c.cid}`.slice(0, 64))?.in;
+    if (!a || !b) return null;
+    const recipe = recipesFor(c.skill).find((r) => r.id === c.recipeId);
+    const agree = b.picked_letter === g.correct_letter && !b.other_defensible;
+    const correct = agree && Boolean(a.answer_correct) && Boolean(a.explanation_consistent) && Boolean(a.format_ok) && !a.factual_error && !a.copyright_suspect;
+    const met = (a.met as boolean[]).filter(Boolean).length;
+    return { correct, comp: recipe ? met >= recipe.minMet : true, fit: Boolean(a.beyond_medium) && !a.only_complexity, which: (a.which as string[]) ?? [], note: String(a.note ?? ""), issue: String(a.explanation_issue ?? "") + (agree ? "" : ` [블라인드: ${String(b.picked_letter)} 선택${b.other_defensible ? ", 복수정답 가능" : ""}]`) };
+  };
+  const items = cands.map((c) => {
+    const x = gens.get(c.cid);
+    const cost = (gen.get(c.cid)?.cost ?? 0) + (["fable", "opus"] as const).reduce((s, k) => s + (rev[k].get(`b-${c.cid}`.slice(0, 64))?.cost ?? 0) + (rev[k].get(`a-${c.cid}`.slice(0, 64))?.cost ?? 0), 0);
+    if (!x) return { cid: c.cid, skill: c.skill, system: c.system, genFail: true, cost } as Record<string, unknown>;
+    const f = verdict("fable", c, x.g), o = verdict("opus", c, x.g);
+    return { cid: c.cid, skill: c.skill, system: c.system, recipeId: c.recipeId, detIssues: x.det.issues, formatFail: formatFail(x.det.issues), mathVerify: x.det.mathVerify, fable: f, opus: o, cost };
+  });
+  const out: Record<string, unknown> = {};
+  for (const sys of ["sat_rw", "sat_math"]) {
+    const sub = items.filter((i) => i.system === sys);
+    const both = sub.filter((i) => i.fable && i.opus) as { fable: V; opus: V; cost: number; cid: string; skill: string }[];
+    const dim = (k: "correct" | "comp" | "fit") => ({ agree: both.filter((i) => i.fable[k] === i.opus[k]).length, of: both.length, fablePass: both.filter((i) => i.fable[k]).length, opusPass: both.filter((i) => i.opus[k]).length });
+    const adopt = (i: { fable: V; opus: V }, k: "fable" | "opus") => i[k].correct && i[k].comp && i[k].fit;
+    const bothAdopt = both.filter((i) => adopt(i, "fable") && adopt(i, "opus")), one = both.filter((i) => adopt(i, "fable") !== adopt(i, "opus"));
+    const totalCost = sub.reduce((a, i) => a + ((i.cost as number) ?? 0), 0);
+    out[sys] = { cand: sub.length, genFail: sub.filter((i) => i.genFail).length, formatFail: sub.filter((i) => i.formatFail).length, detPass: sub.filter((i) => Array.isArray(i.detIssues) && (i.detIssues as string[]).length === 0).length, crossScored: both.length, correct: dim("correct"), compliance: dim("comp"), hardFit: dim("fit"), adoptedBoth: bothAdopt.length, adoptedOneOnly: one.length, yieldBoth: +(bothAdopt.length / Math.max(1, sub.length)).toFixed(3), costUsd: +totalCost.toFixed(3), costPerAdoptedBoth: bothAdopt.length ? +(totalCost / bothAdopt.length).toFixed(3) : null, fableOnlyPass: one.filter((i) => adopt(i, "fable")).length, opusOnlyPass: one.filter((i) => adopt(i, "opus")).length };
+  }
+  writeFileSync(path.join(dir, "cross.json"), JSON.stringify({ summary: out, items }, null, 1));
   console.log(JSON.stringify(out, null, 1));
 }
