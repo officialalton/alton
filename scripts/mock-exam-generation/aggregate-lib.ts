@@ -5,8 +5,9 @@ import { findDuplicates, deterministicIssues, type Raw, type ReviewResult } from
 
 export type Diff = "easy" | "medium" | "hard";
 export type Weak = { gid: string; system: string; acc: number; rubric: { score: number }; strong: { n: number; correct: number } | null };
-export type Run = { weak?: Map<string, Weak>; raws: Raw[]; reviews: Map<string, ReviewResult>; repairs: Map<string, { ok: boolean; after: { options: string[]; explanation: string } | null }>; repairedReviews: Map<string, ReviewResult> };
-export type Eval = { hardTier?: HardTier; raw: Raw; verdict: "pass" | "archive" | "unreviewed"; reasons: string[]; finalDifficulty: Diff; relabeled: boolean; repaired: boolean; review: ReviewResult | null };
+export type RecipeCheck = { gid: string; recipeId: string | null; adopted: boolean; compliance: { met: number | null; minMet: number; of: number; ok: boolean } | null; hardFit: { ok: boolean; which?: string[]; note?: string }; strong3: number };
+export type Run = { recipe?: Map<string, RecipeCheck>; weak?: Map<string, Weak>; raws: Raw[]; reviews: Map<string, ReviewResult>; repairs: Map<string, { ok: boolean; after: { options: string[]; explanation: string } | null }>; repairedReviews: Map<string, ReviewResult> };
+export type Eval = { hardTier?: HardTier; recipe?: RecipeCheck; raw: Raw; verdict: "pass" | "archive" | "unreviewed"; reasons: string[]; finalDifficulty: Diff; relabeled: boolean; repaired: boolean; review: ReviewResult | null };
 
 const readDir = <T>(dir: string, into: (o: T) => [string, unknown]) => { const m = new Map<string, unknown>(); if (existsSync(dir)) for (const f of readdirSync(dir)) if (f.endsWith(".json")) { const [k, v] = into(JSON.parse(readFileSync(path.join(dir, f), "utf-8")) as T); m.set(k, v); } return m; };
 export function loadRun(base: string): Run {
@@ -17,6 +18,7 @@ export function loadRun(base: string): Run {
     repairs: readDir<{ gid: string; ok: boolean; after: { options: string[]; explanation: string } | null }>(path.join(base, "repair"), (r) => [r.gid, r]) as Run["repairs"],
     repairedReviews: readDir<ReviewResult>(path.join(base, "review-repaired"), (r) => [r.gid, r]) as Map<string, ReviewResult>,
     weak: readDir<Weak>(path.join(base, "weak"), (r) => [r.gid, r]) as Map<string, Weak>,
+    recipe: readDir<RecipeCheck>(path.join(base, "recipe-check"), (r) => [r.gid, r]) as Map<string, RecipeCheck>,
   };
 }
 
@@ -40,7 +42,7 @@ export function hardTier(w: Weak | undefined, blindOk: boolean): HardTier {
 }
 export const HARD_MIN_TIER: HardTier = "C";
 
-export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WEAK, w?: Weak): Omit<Eval, "repaired"> {
+export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WEAK, recipe?: RecipeCheck): Omit<Eval, "repaired"> {
   if (!rev) return { raw: r, verdict: "unreviewed", reasons: ["not_reviewed"], finalDifficulty: r.difficulty, relabeled: false, review: null };
   const reasons = [...rev.reasons.filter((x) => !DET.has(x) && !x.startsWith("near_duplicate_of")), ...deterministicIssues(r)];
   if (!rev.blind) reasons.push(...rev.reasons.filter((x) => x.startsWith("near_duplicate_of")));
@@ -68,12 +70,11 @@ export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WE
     const elim = (rev.blind.easilyEliminated ?? []).filter((i) => i !== r.problem.correctIndex).length;
     if (r.format === "mc" && elim >= weak[finalDifficulty]) reasons.push("weak_distractors");
   }
-  // hard 는 판정 등급이 있어야 한다: A·B 는 라벨과 무관하게 hard 로 승격, C 는 이미 hard 로 분류된 문항만 유지, 그 밖은 medium 으로 내린다.
-  const tier = hardTier(w, Boolean(rev.blind?.agrees && !rev.blind?.otherDefensible));
-  let hardTierOut: HardTier = null;
-  if (tier === "A" || tier === "B") { if (finalDifficulty !== "hard") relabeled = true; finalDifficulty = "hard"; hardTierOut = tier; }
-  else if (finalDifficulty === "hard") { if (tier === "C") hardTierOut = "C"; else { finalDifficulty = "medium"; relabeled = r.difficulty !== "medium"; } }
-  return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, finalDifficulty, relabeled, review: rev, hardTier: hardTierOut };
+  // hard 는 '레시피 채택'(레시피 준수 + 정답 검수 + hard 적합성, recipe-check.ts)을 통과한 문항만 인정한다(2026-09-30 총괄·오너). 그 밖은 hard 로 두지 않는다.
+  // (약한 모델 정답률 기반 A/B/C 등급은 폐기 — hardTier 함수는 이력용으로만 남아 있고 쓰지 않는다.)
+  if (recipe?.adopted && reasons.length === 0) { if (finalDifficulty !== "hard") relabeled = true; finalDifficulty = "hard"; }
+  else if (finalDifficulty === "hard") { finalDifficulty = "medium"; relabeled = r.difficulty !== "medium"; }
+  return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, finalDifficulty, relabeled, review: rev, hardTier: null, recipe: recipe?.adopted ? recipe : undefined };
 }
 
 /** 임포트 시험에서 렌더 검사(rw_question)를 통과하지 못한 문항 — 총괄 결정으로 passed 에서 제외. */
@@ -81,12 +82,12 @@ export const EXCLUDED_GIDS = new Set(["eabd2b5b-8d5f-46a0-b1ce-732e5e4360b2"]);
 export function evaluateAll(run: Run, weak = DEFAULT_WEAK): Eval[] {
   const effective: Eval[] = run.raws.map((r) => {
     if (EXCLUDED_GIDS.has(r.gid)) return { raw: r, verdict: "archive" as const, reasons: ["render_check_failed"], finalDifficulty: r.difficulty, relabeled: false, repaired: false, review: run.reviews.get(r.gid) ?? null };
-    const e0 = evalOne(r, run.reviews.get(r.gid), weak, run.weak?.get(r.gid));
+    const e0 = evalOne(r, run.reviews.get(r.gid), weak, run.recipe?.get(r.gid));
     const rp = run.repairs.get(r.gid);
     const rr = run.repairedReviews.get(r.gid);
     if (e0.verdict === "archive" && e0.reasons.length === 1 && e0.reasons[0] === "weak_distractors" && rp?.ok && rp.after) {
       const fixed: Raw = { ...r, problem: { ...r.problem, options: rp.after.options, explanation: rp.after.explanation } };
-      const e1 = evalOne(fixed, rr, weak, run.weak?.get(r.gid));
+      const e1 = evalOne(fixed, rr, weak, run.recipe?.get(r.gid));
       return { ...e1, repaired: true, reasons: e1.verdict === "archive" && e1.reasons.length === 0 ? ["repair_unreviewed"] : e1.reasons };
     }
     return { ...e0, repaired: false };
