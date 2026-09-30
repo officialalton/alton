@@ -39,7 +39,7 @@ export function letterRefs(s: string): { index: number; letter: string }[] {
     const i = m.index!;
     if (mask[i]) continue;
     const after = s.slice(i + 1, i + 12);
-    if (/^\s+[a-z]{2,}/.test(after) && m[1] === "A") continue; // "A single boat" 류 관사
+    if (/^\s+[a-z]{2,}/.test(after) && m[1] === "A" && !/^\s+(?:is|was|are|were|and|or|but|nor|does|doesn't|has|would|could|also|correctly|incorrectly|fails|states|says|provides|gives)\b/.test(after)) continue; // "A single boat" 류 관사
     out.push({ index: i, letter: m[1] });
   }
   return out;
