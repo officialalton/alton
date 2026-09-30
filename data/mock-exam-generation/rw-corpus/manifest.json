@@ -14,13 +14,14 @@
    "estFiles": 150,
    "estSizeMB": 110,
    "estExcerptCandidates": 4000,
-   "delayMs": 2000,
-   "approved": false,
+   "delayMs": 2500,
+   "approved": true,
    "cautions": [
     "미국 밖에서는 아직 보호될 수 있음 → 한국 기준 교차 확인",
     "'Project Gutenberg' 상표 문구·헤더는 본문에서 제거(상업 이용 시 상표 사용 제한)"
    ],
-   "collectStatus": "진행 중단: 공식 오프라인 카탈로그(pg_catalog.csv 21MB)·RDF tarball(127MB)을 ~/Developer/ALTON-data/rw-corpus/catalog/ 에 내려받음(문서상 허용). 작품 선별 스크립트 실행·본문 rsync 는 자동 모드 권한 분류기가 차단해 **미실행** — 사용자 직접 승인 필요. 선별 기준·rsync 경로(rsync.ibiblio.org::gutenberg, 부분 미러 허용, 작품 간 2초)는 문서화 완료"
+   "collectStatus": "오너 승인됨(2026-10-01) — 오너가 run.sh 로 직접 실행. 상한 110MB. ",
+   "maxTotalMB": 105
   },
   {
    "id": "standard_ebooks",
@@ -87,14 +88,15 @@
    "accessPolicyUrl": "https://medlineplus.gov/xml.html",
    "selection": "정부 작성 건강 주제 요약만. **A.D.A.M. 백과·ASHP 약물 설명·일부 이미지는 저작권 보호라 제외**. 출처 표시 \"Courtesy of MedlinePlus from the National Library of Medicine\"",
    "estFiles": 1,
-   "estSizeMB": 60,
+   "estSizeMB": 30,
    "estExcerptCandidates": 1500,
    "delayMs": 1000,
-   "approved": false,
+   "approved": true,
    "cautions": [
     "제3자 콘텐츠 제외 필터 필수"
    ],
-   "collectStatus": "보류: 공식 XML 다운로드 제공·속도 제한 없음 확인(https://medlineplus.gov/xml.html, /xml/mplus_topics_YYYY-MM-DD.xml ~29MB, zip ~4.7MB). robots.txt 는 /feeds/topics/ 만 차단(XML 경로는 해당 없음). 실행은 분류기 차단으로 미실행"
+   "collectStatus": "오너 승인됨(2026-10-01) — 오너가 run.sh 로 직접 실행. 상한 35MB. ",
+   "maxTotalMB": 35
   },
   {
    "id": "noaa_nih_other_gov",
@@ -135,22 +137,23 @@
   {
    "id": "plos",
    "name": "PLOS (CC BY 4.0 오픈 액세스 — Author Summary 등 평이한 요약)",
-   "access": "공식 전체 덤프 https://allof.plos.org/allofplos.zip(약 5GB, JATS XML) 또는 공식 API. 공식 TDM 정책: 누구나 마이닝·재사용 가능",
+   "access": "공식 Search API(https://api.plos.org/search, 한도 분당 10·시간 300·일 7200·요청당 rows ≤ 100·IP당 동시 5 이하 → 동시 1·7초 간격). allofplos.zip(5GB) 전체 덤프 사용 금지. Solr 에 'Author Summary' 전용 필드가 없어 abstract 필드(평이한 서술 위주 저널)만 사용",
    "license": "cc_by",
    "licenseEvidenceUrl": "https://plos.org/text-and-data-mining/",
    "accessPolicyUrl": "https://plos.org/text-and-data-mining/",
-   "selection": "논문별 license 필드가 CC BY 인 것만, Author Summary·초록 중 평이한 문단, **출처 표시 의무(저자·논문·DOI·라이선스 링크)**, 변경 표시",
+   "selection": "PLOS Biology·PLOS ONE·PLOS Genetics·PLOS Pathogens·PLOS Computational Biology 연구 논문 초록(120~260단어), 출처 표시 필수(저자·제목·DOI·CC BY)",
    "estFiles": 2000,
-   "estSizeMB": 5200,
+   "estSizeMB": 8,
    "estExcerptCandidates": 2500,
-   "delayMs": 0,
-   "approved": false,
+   "delayMs": 7000,
+   "approved": true,
    "cautions": [
     "CC BY-SA 논문은 제외",
     "표·그림·제3자 자료 제외",
     "출처 표시 UI 구현 전 사용 금지"
    ],
-   "collectStatus": "보류: 공식 TDM 정책 확인(https://plos.org/text-and-data-mining/), Search API 한도 분당 10·시간 300·일 7200, 요청당 rows ≤ 100, IP 당 동시 5 이하, 'PLOS 출처 표시' 필요(https://api.plos.org/solr/faq/) → 동시 1·7초 간격으로 초록(abstract) 약 2,000건 계획. 실행은 분류기 차단으로 미실행"
+   "collectStatus": "오너 승인됨(2026-10-01) — 오너가 run.sh 로 직접 실행. 상한 15MB. ",
+   "maxTotalMB": 15
   },
   {
    "id": "elife",
@@ -225,5 +228,8 @@
    "collectStatus": "제외: CC BY-SA"
   }
  ],
- "_status": "2026-10-01: 매니페스트 작성, 공식 카탈로그 2개 다운로드만 완료. 본문 수집은 자동 모드 권한 분류기 차단으로 미실행 — 원문 본문은 아직 하나도 받지 않았다."
+ "_status": "2026-10-01: 매니페스트 작성, 공식 카탈로그 2개 다운로드만 완료. 본문 수집은 자동 모드 권한 분류기 차단으로 미실행 — 원문 본문은 아직 하나도 받지 않았다.",
+ "globalMaxMB": 150,
+ "minFreeDiskGB": 20,
+ "_approval": "2026-10-01 오너가 채팅에서 gutenberg·medlineplus·plos 3개 원천만 승인. 실행은 오너가 터미널에서 직접(`scripts/rw-corpus/run.sh`), 에이전트 실행 금지."
 }

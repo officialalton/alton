@@ -1,4 +1,27 @@
-# 2026-10-01 RW 원문 코퍼스 계획서 (문서 작성만 — 다운로드·크롤링·대량 API 호출 없음)
+# 2026-10-01 RW 원문 코퍼스 계획서
+
+## 실행 방법 (오너가 터미널에서 직접 — 에이전트는 이 명령을 실행하지 않는다)
+범위: 원천 3개만(매니페스트 `approved=true`: **Project Gutenberg**, **MedlinePlus 공식 XML**, **PLOS**), 전체 상한 **150MB**(Gutenberg 105·MedlinePlus 35·PLOS 15), 저장 위치 `~/Developer/ALTON-data/rw-corpus/`(저장소·iCloud 밖, 원문 본문은 커밋하지 않음). 나머지 원천은 `approved=false` 유지. 모든 요청은 공식 경로만(Gutenberg 공식 rsync 미러·공식 카탈로그, MedlinePlus 공식 XML, PLOS 공식 Search API — allofplos.zip 5GB 덤프는 쓰지 않음), 원천별 요청 간격(Gutenberg 2.5초·PLOS 7초·MedlinePlus 1초), User-Agent 에 연락처 명시, 디스크 여유 20GB 미만이면 중단.
+1. **dry-run(받을 목록·예상 용량·거부 사유·디스크 여유만 확인, 원문은 받지 않음)** — 저장소 루트에서:
+```
+CORPUS_CONTACT="본인이메일@example.com" scripts/rw-corpus/run.sh
+```
+   (목록 생성 중 MedlinePlus 최신 파일 확인용 HEAD 요청 몇 건만 나가고, Gutenberg 는 이미 받아 둔 카탈로그로 로컬 선별만 합니다. 카탈로그가 없으면 dry-run 은 받지 않고 안내만 합니다.)
+2. **실제 수집(승인된 3개 원천, 재개 가능·재실행 안전)**:
+```
+CORPUS_CONTACT="본인이메일@example.com" scripts/rw-corpus/run.sh --execute
+```
+   중간에 끊겨도 같은 명령을 다시 실행하면 이미 받은 항목(`.meta.json` 있는 것)은 건너뜁니다.
+3. **끝났을 때 확인 방법**:
+```
+cat ~/Developer/ALTON-data/rw-corpus/summary.json     # 원천별 항목 수·용량·제외 사유·라이선스 분포
+du -sh ~/Developer/ALTON-data/rw-corpus/*              # 원천별 디스크 사용(합계 150MB 이하)
+ls ~/Developer/ALTON-data/rw-corpus/items/*/ | head    # 항목 파일(.txt + .meta.json)
+```
+   각 항목의 `.meta.json` 에 라이선스·원문 URL·수집 시각·SHA-256·출처 표시 문구가 기록됩니다. 저장소에는 본문이 없습니다(`git status` 깨끗해야 함).
+
+---
+# (이전 내용) RW 원문 코퍼스 계획서 (문서 작성만 — 다운로드·크롤링·대량 API 호출 없음)
 
 **범위와 원칙**: 오너 확정 — RW 지문에 **저작권이 자유로운 원문 발췌**를 도입한다. 이 문서는 원천·기준·검증·메타데이터·승인 목록만 정한다. 원문 문장은 이 문서·저장소에 넣지 않는다(원천과 기준만). 아래 약관 요약은 **공식 페이지를 열람한 결과이며 법률 자문이 아니다.** 원천별로 실제 다운로드 전에 해당 페이지를 재확인하고 필요하면 법률 검토를 받는다.
 
