@@ -3,7 +3,8 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from "react";
 import MonthCalendar from "./MonthCalendar";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
-import { timezoneLabel } from "@/lib/timezone";
+import { TIMEZONE_OPTIONS, timezoneLabel } from "@/lib/timezone";
+import { useViewerTimezone } from "./ViewerTimezoneProvider";
 
 // 2026-09-06 — 랜딩 상담 신청과(향후) 보호자 포털 "자녀 추가 상담" 화면이 공유하는
 // 상담 전용 일정 선택 UI. 드롭다운 대신 "월간 캘린더 → 날짜 선택 → 그 날짜의 60분
@@ -32,18 +33,12 @@ export type ConsultSlotPickerProps = {
   onSelect: (startsAtIso: string) => void;
   /** 오늘부터 며칠치 슬롯을 조회할지(기본 21일). */
   rangeDays?: number;
-  /** 표시 timezone(기본: 브라우저 감지). 서버는 항상 UTC 고정 슬롯을 반환하고
-   * 여기서는 표시만 변환한다 — 슬롯을 중복 생성하지 않는다. */
+  /** 표시 timezone 초기값(기본: 뷰어 시간대 — 로그인 화면은 profiles.timezone). 서버는 항상 UTC 고정 슬롯을
+   * 반환하고 여기서는 표시만 변환한다 — 슬롯을 중복 생성하지 않는다. prop 이 바뀌면 그 값을 따른다. */
   timezone?: string;
+  /** 사용자가 위쪽 선택기에서 시간대를 바꿨을 때(저장 여부는 호출부 몫 — 기본은 화면 표시만 바뀐다). */
+  onTimezoneChange?: (timezone: string) => void;
 };
-
-function detectBrowserTimezone(): string {
-  try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-  } catch {
-    return "UTC";
-  }
-}
 
 function displayTimezoneLabel(tz: string): string {
   const known = timezoneLabel(tz);
@@ -51,10 +46,37 @@ function displayTimezoneLabel(tz: string): string {
 }
 
 const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerProps>(function ConsultSlotPicker(
-  { fetchSlots, selectedStartsAt, onSelect, rangeDays = 21, timezone },
+  { fetchSlots, selectedStartsAt, onSelect, rangeDays = 21, timezone, onTimezoneChange },
   ref
 ) {
-  const tz = timezone ?? detectBrowserTimezone();
+  const viewerTz = useViewerTimezone();
+  const [tzState, setTzState] = useState(timezone ?? viewerTz);
+  useEffect(() => {
+    if (timezone) setTzState(timezone);
+  }, [timezone]);
+  const tz = tzState;
+  function changeTimezone(next: string) {
+    setTzState(next);
+    onTimezoneChange?.(next);
+  }
+  const tzSelector = (
+    <label className="block mb-3">
+      <span className="block text-[12px] font-bold text-grey-500 mb-1">표시 시간대: {displayTimezoneLabel(tz)}</span>
+      <select
+        aria-label="표시 시간대"
+        value={tz}
+        onChange={(e) => changeTimezone(e.target.value)}
+        className="w-full rounded-lg border-[1.5px] border-grey-200 bg-white px-3 py-2 text-[13px] text-ink"
+      >
+        {!TIMEZONE_OPTIONS.some((o) => o.value === tz) && <option value={tz}>{tz}</option>}
+        {TIMEZONE_OPTIONS.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
   const [slots, setSlots] = useState<ConsultSlot[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -74,6 +96,11 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
   useEffect(() => {
     load();
   }, [load]);
+
+  // 시간대가 바뀌면 선택한 날짜 키(옛 시간대 기준)가 무효가 된다.
+  useEffect(() => {
+    setSelectedDateKey(null);
+  }, [tz]);
 
   useImperativeHandle(ref, () => ({ refetch: load }), [load]);
 
@@ -98,12 +125,18 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
   }
 
   if (loading) {
-    return <p className="text-[13px] text-grey-500" role="status">가능한 시간을 불러오는 중...</p>;
+    return (
+      <div>
+        {tzSelector}
+        <p className="text-[13px] text-grey-500" role="status">가능한 시간을 불러오는 중...</p>
+      </div>
+    );
   }
 
   if (error) {
     return (
       <div>
+        {tzSelector}
         <p className="text-[13px] text-red mb-2">{error}</p>
         <button
           type="button"
@@ -118,9 +151,7 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
 
   return (
     <div>
-      <p className="text-[11.5px] text-grey-500 mb-2">
-        표시된 시간은 {displayTimezoneLabel(tz)} 기준입니다.
-      </p>
+      {tzSelector}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" data-testid="consult-slot-picker">
         <div data-testid="consult-slot-calendar">
           <MonthCalendar

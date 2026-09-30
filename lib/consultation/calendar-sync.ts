@@ -3,7 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime, deleteCalendarEvent } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink, ensureMeetSpaceSmartNotesOn } from "@/lib/google-meet";
 import { sendEmail } from "@/lib/email";
-import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+import { DEFAULT_TIMEZONE, timezoneLabel } from "@/lib/timezone";
 import { CALENDAR_SYNC_MAX_ATTEMPTS, createCalendarResyncKit, type SyncOutcome } from "./calendar-resync-kit";
 
 // M1 — 상담 확정 시 Calendar 이벤트+Meet 생성. R6 lib/booking/calendar-sync.ts와 같은
@@ -41,6 +41,8 @@ type ConsultationRow = {
   consent_version_id: string | null;
   confirmation_email_content_hash: string | null;
   admissions_consultant_id: string | null;
+  /** 고객이 예약 링크에서 고른 표시 시간대(메모리 전용 — 즉시 동기화 경로에서만 채워진다). */
+  display_timezone?: string;
 };
 
 /** 배정된 컨설턴트가 있으면 그 사람의 실제 이메일을, 없으면 기존 회사 계정을 organizer로 쓴다. */
@@ -111,7 +113,8 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
   if (params.row.confirmation_email_content_hash === contentHash) return; // 같은 실패로 중복 발송 안 함
 
   const startsAt = new Date(params.row.starts_at);
-  const formatted = startsAt.toLocaleString("ko-KR", { timeZone: DEFAULT_TIMEZONE, dateStyle: "full", timeStyle: "short" });
+  const tz = params.row.display_timezone ?? DEFAULT_TIMEZONE;
+  const formatted = startsAt.toLocaleString("ko-KR", { timeZone: tz, dateStyle: "full", timeStyle: "short" });
 
   // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
   // 동의 확인 안내 문구·링크를 뺐다.
@@ -122,7 +125,7 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
       <p>${params.row.contact_name}님, 안녕하세요.</p>
       <p>신청하신 상담 일정이 아래와 같이 확정되었으나, Google 캘린더 초대 발송에 일시적인
       문제가 있어 이메일로 대신 안내드립니다. 담당자가 곧 다시 시도합니다.</p>
-      <p><b>상담 일시:</b> ${formatted} (${DEFAULT_TIMEZONE})</p>
+      <p><b>상담 일시:</b> ${formatted} (${timezoneLabel(tz)})</p>
       <p>Meet 링크는 준비되는 대로 별도로 안내드리겠습니다.</p>
       <p>감사합니다.<br/>Alton Education</p>
     `,
@@ -140,6 +143,7 @@ async function processOneConsultation(
 ): Promise<{ createdEventId: string | null }> {
   const startsAt = new Date(row.starts_at);
   const endsAt = new Date(row.ends_at);
+  const tz = row.display_timezone ?? DEFAULT_TIMEZONE;
 
   let googleEventId = row.google_event_id;
   let meetLink = row.google_meet_link;
@@ -164,8 +168,11 @@ async function processOneConsultation(
       summary: `[Alton Education 상담] ${row.contact_name}`,
       description:
         `Alton Education 1:1 상담입니다. ` +
-        `일정 변경·취소는 담당자에게 문의해 주세요 — 변경 시 이 캘린더 일정이 자동으로 갱신됩니다.`,
-      timezone: DEFAULT_TIMEZONE,
+        `일정 변경·취소는 담당자에게 문의해 주세요 — 변경 시 이 캘린더 일정이 자동으로 갱신됩니다.` +
+        (row.display_timezone
+          ? `\n상담 일시: ${startsAt.toLocaleString("ko-KR", { timeZone: tz, dateStyle: "full", timeStyle: "short" })} (${timezoneLabel(tz)})`
+          : ""),
+      timezone: tz,
       attendeeEmail: row.contact_email,
       sendUpdates: "all",
     });
@@ -180,7 +187,7 @@ async function processOneConsultation(
       googleEventId,
       startsAt,
       endsAt,
-      timezone: DEFAULT_TIMEZONE,
+      timezone: tz,
       sendUpdates: "all",
     });
   }
@@ -258,7 +265,7 @@ export const scheduleConsultationCalendarResync = (consultationId: string): void
 export const adminForceResyncConsultationCalendar = (consultationId: string): Promise<SyncOutcome> => kit.forceResync(consultationId);
 
 /** 확정된(scheduled) 상담 하나를 즉시 동기화한다 — 관리자 수락/시간변경 직후 호출. */
-export async function syncOneConsultationCalendarEvent(consultationId: string): Promise<void> {
+export async function syncOneConsultationCalendarEvent(consultationId: string, opts?: { timezone?: string }): Promise<void> {
   const admin = createAdminClient();
 
   // 조건부 UPDATE 낙관적 잠금 + 10분 임대 — 즉시 호출 경로·즉시 재시도·일 1회 크론이 동시에 같은 상담을 건드려도 하나만 처리한다.
@@ -274,7 +281,10 @@ export async function syncOneConsultationCalendarEvent(consultationId: string): 
     .maybeSingle();
 
   if (!claimed) return;
-  const outcome = await kit.processClaimed(admin, claimed as ConsultationRow);
+  const outcome = await kit.processClaimed(
+    admin,
+    { ...(claimed as ConsultationRow), ...(opts?.timezone ? { display_timezone: opts.timezone } : {}) },
+  );
   // 실패하면 응답을 막지 않고 곧바로 한 번 더 시도한다(일시 오류 회수). 5회에 이르면 멈춘다.
   if (outcome === "failed") scheduleConsultationCalendarResync(consultationId);
 }
