@@ -5,6 +5,7 @@
 //   2단계(감사): 정답·해설을 보여 주고 해설 정합성·형식·사실 오류·기존 시험 문항 재현(저작권) 여부를 본다.
 //   3단계(결정론): 원시 LaTeX, 해설 $…$, 금칙어, 생성분 간 유사도.
 import Anthropic from "@anthropic-ai/sdk";
+import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
 import path from "node:path";
 
@@ -16,7 +17,7 @@ if (existsSync(envPath)) {
   }
 }
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
-const MODEL = "claude-sonnet-5";
+const MODEL = reviewModel();
 // 클라이언트는 호출 시점에 만든다 — 모듈 로드만 하는 테스트(jsdom)에서 SDK 가 브라우저 환경으로 오해하지 않게.
 let clientInstance: Anthropic | null = null;
 const getClient = () => (clientInstance ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }));

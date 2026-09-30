@@ -21,7 +21,7 @@ mkdirSync(path.join(base, "final"), { recursive: true });
 const passed = final.filter((f) => f.verdict === "pass");
 const archived = final.filter((f) => f.verdict === "archive");
 // passed.json: 최종 라벨(finalDifficulty)을 difficulty 로 써서 임포트가 그대로 쓰게 한다(원래 라벨은 requestedDifficulty).
-writeFileSync(path.join(base, "final/passed.json"), JSON.stringify(passed.map((f) => ({ ...f.raw, requestedDifficulty: f.raw.difficulty, difficulty: f.finalDifficulty, relabeled: f.relabeled, repaired: f.repaired, hardTier: f.hardTier ?? null, problem: { ...f.raw.problem, difficulty: f.finalDifficulty }, review: f.review })), null, 1));
+writeFileSync(path.join(base, "final/passed.json"), JSON.stringify(passed.map((f) => ({ ...f.raw, requestedDifficulty: f.raw.difficulty, difficulty: f.finalDifficulty, relabeled: f.relabeled, repaired: f.repaired, recipeId: f.recipe?.recipeId ?? null, recipeCheck: f.recipe ?? null, problem: { ...f.raw.problem, difficulty: f.finalDifficulty }, review: f.review })), null, 1));
 writeFileSync(path.join(base, "final/archive-candidates.json"), JSON.stringify(archived.map((f) => ({ ...f.raw, archiveReasons: f.reasons, review: f.review })), null, 1));
 
 const key = (skill: string, d: string) => `${skill}|${d}`;

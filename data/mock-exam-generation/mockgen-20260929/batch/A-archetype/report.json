@@ -1,0 +1,160 @@
+{
+ "combo": "A",
+ "method": "archetype",
+ "models": {
+  "combo": "A",
+  "method": "archetype",
+  "gen": "claude-sonnet-5-5",
+  "rev": "claude-sonnet-5-5"
+ },
+ "rows": [
+  {
+   "skill": "transitions",
+   "system": "sat_rw",
+   "cand": 6,
+   "detPass": 4,
+   "correct": 3,
+   "compliance": 4,
+   "hardFit": 0,
+   "adopted": 0,
+   "causes": {
+    "hard적합실패": 4,
+    "생성실패": 2,
+    "정답:블라인드불일치": 1,
+    "해설:불일치": 1
+   },
+   "cost": 0.06203499999999999,
+   "calls": 14,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "cand": 6,
+   "detPass": 6,
+   "correct": 3,
+   "compliance": 6,
+   "hardFit": 0,
+   "adopted": 0,
+   "causes": {
+    "정답:감사에서오답": 2,
+    "해설:불일치": 3,
+    "hard적합실패": 6,
+    "형식결함": 1,
+    "정답:복수정답": 1
+   },
+   "cost": 0.10638519999999999,
+   "calls": 18,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "command_of_evidence_text",
+   "system": "sat_rw",
+   "cand": 6,
+   "detPass": 6,
+   "correct": 6,
+   "compliance": 6,
+   "hardFit": 6,
+   "adopted": 6,
+   "causes": {},
+   "cost": 0.10093079999999999,
+   "calls": 18,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  {
+   "skill": "text_structure_purpose",
+   "system": "sat_rw",
+   "cand": 6,
+   "detPass": 6,
+   "correct": 6,
+   "compliance": 6,
+   "hardFit": 2,
+   "adopted": 2,
+   "causes": {
+    "hard적합실패": 4
+   },
+   "cost": 0.0901106,
+   "calls": 18,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  }
+ ],
+ "totals": {
+  "all": {
+   "cand": 24,
+   "detPass": 22,
+   "correct": 18,
+   "compliance": 22,
+   "hardFit": 8,
+   "adopted": 8,
+   "yield": 0.333,
+   "calls": 68,
+   "costUsd": 0.3595,
+   "costPerAdopted": 0.0449,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  "rw": {
+   "cand": 24,
+   "detPass": 22,
+   "correct": 18,
+   "compliance": 22,
+   "hardFit": 8,
+   "adopted": 8,
+   "yield": 0.333,
+   "calls": 68,
+   "costUsd": 0.3595,
+   "costPerAdopted": 0.0449,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  },
+  "math": {
+   "cand": 0,
+   "detPass": 0,
+   "correct": 0,
+   "compliance": 0,
+   "hardFit": 0,
+   "adopted": 0,
+   "yield": 0,
+   "calls": 0,
+   "costUsd": 0,
+   "costPerAdopted": null,
+   "mathVerifyFail": 0,
+   "mathVerifyPass": 0,
+   "mathVerifySkipped": 0,
+   "mathAnswerMismatch": 0,
+   "mathExplInconsistent": 0
+  }
+ },
+ "adoptedIds": [
+  "archetype-command_of_evidence_text-00",
+  "archetype-command_of_evidence_text-01",
+  "archetype-command_of_evidence_text-02",
+  "archetype-command_of_evidence_text-03",
+  "archetype-command_of_evidence_text-04",
+  "archetype-command_of_evidence_text-05",
+  "archetype-text_structure_purpose-02",
+  "archetype-text_structure_purpose-03"
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "_readme": "Math 레시피 v2(2026-09-30): v1 레시피로 Math 수율 2%(hard 적합성 탈락 다수) — 생성 지시를 개념 서술에서 구체적 구조 골격으로 단순화. 요구하는 사고 수준(같은 skill medium 대비 추가 단계·조건 결합)과 채택 기준은 v1과 같다. v1(recipes.json)은 보존.",
+ "equivalent_expressions": [
+  {
+   "id": "equivalent_expressions_two_params_then_transform",
+   "instruction": "식(또는 표의 두 점)에서 미지 매개변수 두 개를 두 조건으로 먼저 각각 결정하고, 그 값을 넣은 식을 지수법칙·인수분해로 다른 동치 형태로 바꾼 결과를 묻는다. 오답은 매개변수 하나만 결정하고 멈춘 값, 지수를 더해야 할 곳에서 곱한 값 등으로 만든다.",
+   "beyondMedium": "매개변수 둘을 연쇄적으로 결정한 뒤 변환해야 한다(단일 대입으로 끝나지 않음)",
+   "checklist": [
+    "미지 매개변수가 둘 이상인가",
+    "매개변수를 각각 다른 조건에서 구해야 하는가",
+    "최종 질문이 결정된 식의 변환 결과인가",
+    "오답에 '한 단계 중간값'이 있는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test6-Math-M2-Q27"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  },
+  {
+   "id": "equivalent_expressions_substitute_then_match",
+   "instruction": "식 안의 묶음을 새 변수로 치환해 재배열한 뒤, 계수 일치 조건으로 미지수를 구하고 그 값으로 다른 식을 평가하게 한다.",
+   "beyondMedium": "치환·재배열과 계수 일치를 두 단계로 결합해야 한다",
+   "checklist": [
+    "치환 또는 재배열 단계가 필요한가",
+    "계수 비교로 미지수를 구하는가",
+    "구한 미지수를 다시 사용해 최종값을 묻는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test4-Math-M2-Q22"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  }
+ ],
+ "nonlinear_functions": [
+  {
+   "id": "nonlinear_functions_fix_then_derived_property",
+   "instruction": "이차함수의 꼭짓점(또는 두 근)과 지나는 한 점으로 계수를 결정한 뒤, 그 함수의 함숫값이 아니라 파생 성질(두 x절편 사이 거리, 최솟값, 대칭축에서 특정 점까지 거리)을 묻는다. 오답은 계수 결정 오류와 파생 성질의 혼동(최솟값 대신 x좌표 등)으로 만든다.",
+   "beyondMedium": "계수 결정 후 파생 성질을 한 번 더 추론해야 한다",
+   "checklist": [
+    "계수를 결정하는 단계가 있는가",
+    "최종 질문이 함숫값이 아닌 파생 성질인가",
+    "오답에 x좌표와 값을 혼동한 선지가 있는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test10-Math-M2-Q16"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  },
+  {
+   "id": "nonlinear_functions_context_two_times",
+   "instruction": "높이·이익 등 맥락에서 두 시점의 값으로 이차(또는 지수) 모델 계수를 결정한 뒤 최대/최소가 되는 시점과 그 값을 묻는다.",
+   "beyondMedium": "맥락 해석 + 두 조건 계수 결정 + 최적값 추론",
+   "checklist": [
+    "맥락 문장을 식으로 옮겨야 하는가",
+    "두 조건으로 계수를 결정하는가",
+    "최적값(또는 그 시점)을 묻는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test6-Math-M2-Q27"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  }
+ ],
+ "linear_equations_two_var": [
+  {
+   "id": "linear_equations_two_var_param_then_intersection",
+   "instruction": "두 직선의 평행 또는 수직 조건(기울기 관계)으로 미지 계수를 먼저 결정한 뒤 두 직선의 교점 좌표의 합(또는 차)을 묻는다. 오답은 계수만 구한 중간값, 기울기 관계를 반대로 적용한 값으로 만든다.",
+   "beyondMedium": "조건으로 계수 결정 후 연립해 교점을 구하는 두 단계",
+   "checklist": [
+    "기울기 관계(평행/수직) 조건이 있는가",
+    "미지 계수를 먼저 구해야 하는가",
+    "교점을 구해야 답이 나오는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test4-Math-M2-Q22"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  },
+  {
+   "id": "linear_equations_two_var_two_points_and_meet",
+   "instruction": "한 직선이 주어진 두 점을 지나고 다른 직선과 특정 조건에서 만나도록 계수를 결정한 뒤, 두 직선의 y절편의 차를 묻는다.",
+   "beyondMedium": "직선 결정 + 교점 조건 + 절편 비교의 결합",
+   "checklist": [
+    "두 점으로 직선을 결정하는가",
+    "교점 조건으로 다른 미지수를 구하는가",
+    "최종이 절편의 차인가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test10-Math-M2-Q16"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  }
+ ],
+ "linear_equations_one_var": [
+  {
+   "id": "linear_equations_one_var_two_stage_word",
+   "instruction": "문장제에서 첫째 조건으로 중간 미지수를 구하고 그 값을 둘째 조건에 넣어 최종 미지수를 구하게 한다. 오답은 중간 미지수 값, 둘째 조건을 첫째 조건과 섞은 값으로 만든다.",
+   "beyondMedium": "두 조건을 순서대로 연쇄 적용해야 한다",
+   "checklist": [
+    "조건이 두 개이고 순서 의존적인가",
+    "중간 미지수가 오답 선지로 나오는가",
+    "한 식으로 바로 풀 수 없는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test6-Math-M1-Q10"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  },
+  {
+   "id": "linear_equations_one_var_no_solution_param",
+   "instruction": "방정식이 해가 없거나 무수히 많을 조건으로 계수를 결정한 뒤 그 계수를 다른 식에 넣은 값을 묻는다.",
+   "beyondMedium": "해의 개수 조건을 계수 조건으로 번역한 뒤 재대입",
+   "checklist": [
+    "해의 개수 조건을 사용하는가",
+    "계수 결정 후 다른 식에 재대입하는가",
+    "오답에 계수만 구한 값이 있는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test4-Math-M1-Q12"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  }
+ ],
+ "lines_angles_triangles": [
+  {
+   "id": "lines_angles_triangles_chain_two_properties",
+   "instruction": "평행선의 각 관계와 이등변삼각형 성질을 연쇄로 적용하고, 각을 대수식(2x+a 등)으로 놓아 x를 구한 뒤 다른 각을 묻는다. 오답은 x만 구한 값, 성질 하나를 빠뜨린 각으로 만든다.",
+   "beyondMedium": "두 기하 성질을 연쇄 적용한 뒤 대수로 결정",
+   "checklist": [
+    "두 가지 다른 기하 성질이 필요한가",
+    "각이 식으로 주어져 x를 구해야 하는가",
+    "최종이 x가 아닌 다른 각인가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test6-Math-M1-Q20"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  },
+  {
+   "id": "lines_angles_triangles_similar_plus_pythagoras",
+   "instruction": "닮은 삼각형 비례로 한 변을 구한 뒤 피타고라스 정리로 다른 변을 구하게 한다.",
+   "beyondMedium": "닮음과 피타고라스의 결합 두 단계",
+   "checklist": [
+    "닮음 비례를 쓰는가",
+    "그 결과로 직각삼각형 변을 구하는가",
+    "오답에 닮음만 적용한 값이 있는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test8-Math-M2-Q14"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
+  }
+ ]
+}

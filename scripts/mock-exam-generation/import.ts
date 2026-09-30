@@ -27,7 +27,8 @@ type Rec = {
   problem: { passage?: string | null; stimulus?: string | null; question?: string | null; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string; figure?: unknown; statements?: string[] | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null };
   quality: Record<string, unknown>;
   review?: unknown;
-  hardTier?: string | null;
+  recipeId?: string | null;
+  recipeCheck?: unknown;
   createdVia?: string;
   subpattern?: string | null;
 };
@@ -144,7 +145,7 @@ async function main() {
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }
     const { error: cErr } = await admin.rpc("set_problem_render_check", { p_version_id: versionId, p_check: check });
     if (cErr) { await cleanup1(`렌더 검사 기록 실패 ${cErr.message}`); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { runId: r.runId, gid: r.gid, hardTier: r.hardTier ?? null, review: r.review ?? null } } });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { runId: r.runId, gid: r.gid, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? "recipe" : null, review: r.review ?? null } } });
     if (qErr) failures.push(`${r.gid}: 품질 기록 실패 ${qErr.message}`);
     stats.created += 1;
     pool.push({ problemId: problemId as string, key, sh });

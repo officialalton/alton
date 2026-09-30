@@ -6,6 +6,7 @@
 // 독립 검사의 정답이 지정 정답과 다르면 저장하지 않는다. 오답이 명백하거나 자료와 무관하면 재생성한다.
 // 학생 응답이 쌓이면 problem_response_stats 로 보정한다(calibrated=true 는 그때만).
 import Anthropic from "@anthropic-ai/sdk";
+import { reviewModel, createToolMessage } from "./models";
 import { figureAlt } from "@/lib/problem-figures/alt";
 import type { FigureSpec } from "@/lib/problem-figures/spec";
 
@@ -85,8 +86,8 @@ export async function reviewProblemIndependently(input: {
 }): Promise<IndependentReview> {
   const alt = input.figure ? (() => { try { return figureAlt(input.figure as FigureSpec) ?? ""; } catch { return ""; } })() : "";
   const isMc = input.format === "mc";
-  const message = await getAnthropic().messages.create({
-    model: "claude-sonnet-5",
+  const message = await createToolMessage(getAnthropic(), {
+    model: reviewModel(),
     max_tokens: 2500,
     tools: [
       {
