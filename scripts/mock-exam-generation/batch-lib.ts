@@ -67,6 +67,7 @@ export async function runBatch(opts: { dir: string; name: string; requests: Batc
       await sleep(opts.pollMs ?? 30000);
     }
     let cost = 0;
+    let fatal = "";
     for await (const r of await getClient().messages.batches.results(state.batchId!)) {
       const model = modelOf.get(r.custom_id) ?? "";
       if (r.result.type === "succeeded") {
@@ -76,9 +77,14 @@ export async function runBatch(opts: { dir: string; name: string; requests: Batc
         const rec: Result = { custom_id: r.custom_id, ok: true, model, message: r.result.message as never, usage: u, cost: c };
         appendFileSync(resF, JSON.stringify(rec) + "\n");
         done.set(r.custom_id, rec);
-      } else appendFileSync(resF, JSON.stringify({ custom_id: r.custom_id, ok: false, model, err: r.result.type }) + "\n");
+      } else {
+        const msg = r.result.type === "errored" ? JSON.stringify((r.result as { error?: unknown }).error).slice(0, 300) : r.result.type;
+        appendFileSync(resF, JSON.stringify({ custom_id: r.custom_id, ok: false, model, err: msg }) + "\n");
+        if (/invalid_request_error/.test(msg)) fatal = msg;
+      }
     }
     led.add(cost, `${opts.name} batch ${state.batchId}`);
+    if (fatal) { writeFileSync(stateF, JSON.stringify({ batchId: null, ids: [] })); throw new Error(`요청 형식 오류(재시도 안 함): ${fatal}`); }
     writeFileSync(stateF, JSON.stringify({ batchId: null, ids: [] }));
     process.stderr.write(`[batch ${opts.name}] 완료 성공 ${done.size}/${opts.requests.length}, 이번 비용 $${cost.toFixed(4)}, 누적 $${led.spent().toFixed(2)}\n`);
   }

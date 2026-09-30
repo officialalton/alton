@@ -58,6 +58,8 @@ function buildCands(method: string, perRw: number, perMath: number): Cand[] {
   return out;
 }
 
+/** 신형 모델은 사고(thinking)를 끌 수 없고 max_tokens 를 사고 토큰이 같이 쓴다(1차 시도에서 55건 중 41건이 잘림). Sonnet 5.5 는 도구 호출 전 사고 없음(between_tools), Opus/Fable 은 adaptive + effort low 로 비용·잘림을 통제한다. 세 조합에 같은 원칙을 적용한다. */
+const think = (model: string) => ({ thinking: model.includes("sonnet") ? { type: "between_tools" } : { type: "adaptive" }, output_config: { effort: "low" } });
 const SYS_CACHE = { type: "ephemeral", ttl: "1h" };
 const genSystem = (c: Cand) => `당신은 디지털 SAT(${c.system === "sat_rw" ? "Reading and Writing" : "Math"}) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **hard** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
 형식 규칙: ${QUESTION_RULE[c.skill]}
@@ -104,13 +106,13 @@ async function deterministic(c: Cand, g: Gen): Promise<{ issues: string[]; mathV
 }
 
 const optText = (g: Gen, key: boolean) => g.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}${key && String.fromCharCode(65 + i) === g.correct_letter ? "   <- 정답" : ""}`).join("\n");
-const blindReq = (model: string, cid: string, skill: string, g: Gen): BatchReq => ({ custom_id: `b-${cid}`.slice(0, 64), params: { model, max_tokens: 500,
+const blindReq = (model: string, cid: string, skill: string, g: Gen): BatchReq => ({ custom_id: `b-${cid}`.slice(0, 64), params: { model, ...think(model), max_tokens: 1500,
   tools: [{ name: "solve", description: "독립 풀이", input_schema: { type: "object", properties: {
     picked_letter: { type: "string", enum: ["A", "B", "C", "D"] }, other_defensible: { type: "boolean", description: "다른 선택지도 조건상 정답으로 방어 가능한가" }, confidence: { type: "string", enum: ["high", "medium", "low"] },
     easily_eliminated: { type: "array", items: { type: "string" }, description: "대충 읽어도 근거 없이 바로 지울 수 있는 오답 알파벳" }, note: { type: "string", description: "풀이 한 줄" } }, required: ["picked_letter", "other_defensible", "confidence", "easily_eliminated", "note"] } }],
-  tool_choice: { type: "tool", name: "solve" },
-  messages: [{ role: "user", content: `디지털 SAT 독립 채점자로서 정답 표시 없이 직접 풀어라. 유형: ${skill}\n\n${g.passage}\n\n${g.question}\n${optText(g, false)}` }] } });
-const auditReq = (model: string, c: Cand, g: Gen, recipe: Recipe | null): BatchReq => ({ custom_id: `a-${c.cid}`.slice(0, 64), params: { model, max_tokens: 900,
+  tool_choice: { type: "auto" },
+  messages: [{ role: "user", content: `디지털 SAT 독립 채점자로서 정답 표시 없이 직접 풀고, 반드시 solve 도구 호출로 결과를 제출하라. 유형: ${skill}\n\n${g.passage}\n\n${g.question}\n${optText(g, false)}` }] } });
+const auditReq = (model: string, c: Cand, g: Gen, recipe: Recipe | null): BatchReq => ({ custom_id: `a-${c.cid}`.slice(0, 64), params: { model, ...think(model), max_tokens: 2500,
   tools: [{ name: "audit", description: "정답·해설·형식·저작권·hard 적합성 감사", input_schema: { type: "object", properties: {
     explanation_consistent: { type: "boolean", description: "해설이 지정 정답을 논리적·수치적으로 정확히 뒷받침하고 해설 안에 모순·오계산이 없는가" },
     explanation_issue: { type: "string", description: "해설 문제 요약(없으면 빈 문자열)" },
@@ -121,8 +123,8 @@ const auditReq = (model: string, c: Cand, g: Gen, recipe: Recipe | null): BatchR
     only_complexity: { type: "boolean", description: "난이도가 길이·복잡한 숫자·계산량에서만 오는가" },
     which: { type: "array", items: { type: "string" }, description: "요구하는 추가 사고 이름" }, note: { type: "string" } },
     required: ["explanation_consistent", "explanation_issue", "answer_correct", "format_ok", "factual_error", "copyright_suspect", "met", "beyond_medium", "only_complexity", "which", "note"] } }],
-  tool_choice: { type: "tool", name: "audit" },
-  messages: [{ role: "user", content: `디지털 SAT 문항 감사관으로서 판정만 하라(고치지 않는다). 유형: ${c.skill}\n${recipe ? `[레시피 체크리스트]\n${recipe.checklist.map((x, i) => `${i + 1}. ${x}`).join("\n")}\n` : ""}[이 skill의 hard 특성]\n${(chars[c.skill]?.characteristics ?? []).map((x) => `- ${x.name}: ${x.description}`).join("\n")}\n\n${g.passage}\n\n${g.question}\n${optText(g, true)}\n\n[해설]\n${g.explanation}` }] } });
+  tool_choice: { type: "auto" },
+  messages: [{ role: "user", content: `디지털 SAT 문항 감사관으로서 판정만 하라(고치지 않는다). 반드시 audit 도구 호출로 제출하라. 유형: ${c.skill}\n${recipe ? `[레시피 체크리스트]\n${recipe.checklist.map((x, i) => `${i + 1}. ${x}`).join("\n")}\n` : ""}[이 skill의 hard 특성]\n${(chars[c.skill]?.characteristics ?? []).map((x) => `- ${x.name}: ${x.description}`).join("\n")}\n\n${g.passage}\n\n${g.question}\n${optText(g, true)}\n\n[해설]\n${g.explanation}` }] } });
 
 const tok = (s: string) => Math.ceil(s.length / 3);
 async function main() {
@@ -138,7 +140,7 @@ async function main() {
   writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
   const led = ledger(dir);
   // 1단계: 생성
-  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: cfg.gen, max_tokens: c.system === "sat_math" ? 2500 : 1800, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "tool", name: "problem" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라. 문항 1개를 problem 도구로 제출하라.` }] } }));
+  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: cfg.gen, ...think(cfg.gen), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라. 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
   const genEst = estimate(cfg.gen, cands.length, 1500, 1000);
   const revEst = estimate(cfg.rev, cands.length, 2800, 520);
   console.log(`[${combo}/${method}] 후보 ${cands.length} · 생성 ${cfg.gen} 추정 $${genEst.toFixed(2)} + 검수 ${cfg.rev} 추정 $${revEst.toFixed(2)} = $${(genEst + revEst).toFixed(2)} · 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
