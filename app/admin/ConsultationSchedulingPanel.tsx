@@ -250,13 +250,19 @@ export default function ConsultationSchedulingPanel() {
               </p>
               {c.concerns && <p className="text-[12.5px] text-grey-500 mt-1">문의: {c.concerns}</p>}
               <div className="flex gap-2 mt-3">
-                <button
-                  disabled={busyId === c.id}
-                  className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-                  onClick={() => withBusy(c.id, () => acceptConsultationRequest(c.id), "상담 수락")}
-                >
-                  수락(Calendar·Meet 생성)
-                </button>
+                {c.starts_at ? (
+                  <button
+                    disabled={busyId === c.id}
+                    className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => withBusy(c.id, () => acceptConsultationRequest(c.id), "상담 수락")}
+                  >
+                    수락(Calendar·Meet 생성)
+                  </button>
+                ) : (
+                  <span className="text-[12px] text-grey-500 self-center">
+                    고객이 예약 링크에서 시간을 고르면 자동으로 확정됩니다.
+                  </span>
+                )}
                 <button
                   disabled={busyId === c.id}
                   className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"

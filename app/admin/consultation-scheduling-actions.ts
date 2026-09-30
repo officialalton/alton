@@ -1,6 +1,6 @@
 "use server";
 
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdmin, requireAdminOrConsultant } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, adminForceResyncConsultationCalendar, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
 import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
@@ -162,7 +162,7 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
 }
 
 export async function acceptConsultationRequest(consultationId: string): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrConsultant();
   // 2026-09-29(6단계) — 첫 상담에는 동의 확인이 없으므로 상담 동의 문구 버전을
   // 조회·기록하지 않는다(RPC의 p_consent_version_id는 항상 null).
   const { error } = await supabase.rpc("admin_accept_consultation", {
@@ -177,12 +177,20 @@ export async function acceptConsultationRequest(consultationId: string): Promise
 }
 
 export async function rejectConsultationRequest(consultationId: string, reason: string): Promise<void> {
-  const { supabase } = await requireAdmin();
+  const { supabase } = await requireAdminOrConsultant();
   const { data, error } = await supabase.rpc("admin_reject_consultation", {
     p_consultation_id: consultationId,
     p_reason: reason || null,
   });
   if (error) throw new Error(friendlyDbMessage(error));
+
+  // 확정(scheduled)된 상담을 거절하면 이미 Google 일정이 있다 — 취소와 같이 바로 지운다(안 되면 재시도 대기).
+  // 2026-09-29 시나리오 감사: 예전에는 일 1회 크론까지 고객 캘린더에 일정이 남았다.
+  try {
+    await cancelSyncedConsultationCalendarEvent(consultationId);
+  } catch (e) {
+    console.error(JSON.stringify({ type: "m1_consult_reject_calendar_cleanup_failed", consultationId, error: e instanceof Error ? e.message : String(e) }));
+  }
 
   // 요구사항 2: 거절은 Calendar가 담당하지 않는 알림이므로(수락 전에는 애초에 Calendar
   // 이벤트가 없다) ALTON 커스텀 이메일 경로로만 안내한다. 이메일 발송 실패가 거절 처리
@@ -243,7 +251,8 @@ export async function recordConsultationOutcome(params: {
   adminReviewSummary: string;
 }): Promise<RecordConsultationOutcomeResult> {
   try {
-    const { supabase } = await requireAdmin();
+    // 배정 이후의 상담 진행은 담당 컨설턴트의 몫 — 담당 여부는 RPC가 판정한다.
+    const { supabase } = await requireAdminOrConsultant();
     const { error } = await supabase.rpc("admin_record_consultation_outcome", {
       p_consultation_id: params.consultationId,
       p_outcome: params.outcome,

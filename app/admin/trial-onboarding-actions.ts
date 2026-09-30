@@ -8,7 +8,7 @@
 // 로컬 검증(링크를 수동으로 열어보는 것)만 가능하게 한다.
 
 import { createHash } from "node:crypto";
-import { requireAdmin, requireAdminOrCapability } from "@/lib/admin-auth";
+import { requireAdmin, requireAdminCapabilityOrAssignedConsultant, requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { confirmStudentTeacherSubjectMatch } from "./matching-common-actions";
 import { sendEmail, escapeHtml } from "@/lib/email";
@@ -30,7 +30,8 @@ const CONSULT_CAPABILITY = "manage_consultations";
 const MATCHING_CAPABILITY = "매칭권한";
 
 export async function confirmTrialIntentAction(consultationId: string): Promise<void> {
-  const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
+  // 담당 컨설턴트도 자기 상담의 보호자 확인을 기록한다(2026-09-29 시나리오 감사 — 컨설턴트 칸반의 같은 버튼이 막혀 있었다).
+  const { actorUserId } = await requireAdminCapabilityOrAssignedConsultant(CONSULT_CAPABILITY, consultationId);
   const admin = createAdminClient();
   const { error } = await admin.rpc("confirm_trial_intent", {
     p_consultation_id: consultationId,
