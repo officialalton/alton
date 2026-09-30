@@ -78,7 +78,7 @@
 - 채택분 10건은 `batch3/pilot/adopted-hard.json`(`hardJudge`·`advisory`·`difficultyStatus=provisional_ai`·`recipeId` 포함, 원격 임포트 전)에 있다. 유사도(후보 간·기존 은행 대비)는 이 단계에서 점검하지 않았다(임포트 스크립트가 본문 유사도 0.6 기준으로 제외).
 
 ### ② 실행 전 재추정(선행 시험 반영)
-- 선행 채택 10건으로 `cross_text_connections`(부족 3)·`systems_linear`(부족 2)는 충족 → 대량 대상에서 제외. **남은 부족: RW 27 + Math 5 = 32**(이전 37 - 5... 위 표: RW central 4·inferences 3·command_of_evidence_quant 2·words_in_context 5·rhetorical_synthesis 4·transitions 3·boundaries 1·form_structure_sense 5 = 27, Math linear_equations_two_var 2·nonlinear_equations_systems 1·lines_angles_triangles 2 = 5).
+- 선행 채택 10건으로 `cross_text_connections`(부족 3)·`systems_linear`(부족 2)는 충족 → 대량 대상에서 제외. **남은 부족: RW 27 + Math 5 = 32**(RW central 4·inferences 3·command_of_evidence_quant 2·words_in_context 5·rhetorical_synthesis 4·transitions 3·boundaries 1·form_structure_sense 5 = 27, Math linear_equations_two_var 2·nonlinear_equations_systems 1·lines_angles_triangles 2 = 5).
 - 후보 수(안전계수 0.85 수율): 텍스트 전용 54건(RW 48 + Math 6), 자료 필요 8건(`command_of_evidence_quant` 4 + `lines_angles_triangles` 4). 합계 **62건**(이전 72건에서 선행 시험분 10건 감소).
 - 비용(후보당 $0.157 실측): 텍스트 전용 54건 약 $8.5, 자료 필요 8건(x1.5) 약 $1.9 → **약 $10.4**, 호출 약 290회. 단계 체크포인트에서 수율이 25% 미만이면 중단.
 - **실행 상한 재제안 US$12.5**(점추정 $10.4 + 약 20%; 앞선 제안 $16 에서 축소). 단계: ② 텍스트 전용 54건 상한 $9.5, ③ 자료 필요 8건 상한 $3.0(별도 승인).
