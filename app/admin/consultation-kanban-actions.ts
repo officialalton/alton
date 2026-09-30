@@ -72,6 +72,11 @@ export type ConsultationCardDetail = {
   // 목록. 비어있으면 아직 자녀 카드가 없다는 뜻 — 기존처럼 온보딩 발송 폼을
   // 그대로 보여준다.
   childCards: { consultationId: string; childName: string | null }[];
+  /** 2026-09-29(D4/D5) — 계약이 아직 안 나갔지만 자동 발송 대상인 카드("계약 대기(자동 발송 준비 중)" 배지).
+   * 게이트(CONTRACT_AUTO_DISPATCH_ENABLED) OFF 이거나 자녀·수강 계획이 없는 regular_recommended 카드도 포함한다. */
+  contractPending?: boolean;
+  /** 2026-09-29(E4) — 이 카드 자녀의 체험권 상태. 소진·만료면 "지급됨"으로 보이지 않게 화면이 정직하게 표시한다. */
+  trialEntitlementState?: "none" | "active" | "exhausted" | "expired" | null;
 };
 
 // 2026-09-10(P1-B 신규 통합 보드) — 카드 id가 "link:"로 시작하면 상담이
@@ -196,6 +201,8 @@ async function getAccountCreationCardDetail(
     // 계정 생성 링크의 다자녀 형제자매는 family_root_consultation_id가 아니라
     // 같은 link_id로 묶인다 — 이번 배치 범위 밖으로 보류(형제자매 배지 없음).
     childCards: [],
+    contractPending: false,
+    trialEntitlementState: null,
   };
 }
 
@@ -367,6 +374,26 @@ async function loadConsultationCardDetail(
     }));
   }
 
+  let jobPending = false;
+  let trialEntitlementState: ConsultationCardDetail["trialEntitlementState"] = null;
+  if (consultation.child_id) {
+    const { data: pendingJobs } = await admin
+      .from("contract_dispatch_jobs")
+      .select("id")
+      .eq("child_id", consultation.child_id)
+      .in("status", ["queued", "processing", "retryable_failed"])
+      .limit(1);
+    jobPending = (pendingJobs ?? []).length > 0;
+    if (consultation.outcome === "trial_recommended") {
+      const { data: state } = await admin.rpc("trial_entitlement_state", { p_child_id: consultation.child_id });
+      trialEntitlementState = (state as ConsultationCardDetail["trialEntitlementState"]) ?? null;
+    }
+  }
+  const contractPending =
+    !latestContractVersionHasEnvelope &&
+    contractStatus !== "active" &&
+    (jobPending || consultation.outcome === "regular_recommended");
+
   return {
     intakeSource: "consultation",
     consultation,
@@ -382,6 +409,8 @@ async function loadConsultationCardDetail(
     noticeSentAt,
     latestOnboardingLinkId,
     childCards,
+    contractPending,
+    trialEntitlementState,
   };
 }
 

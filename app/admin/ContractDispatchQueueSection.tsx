@@ -14,6 +14,25 @@ import {
   type ContractDispatchJobListItem,
 } from "./contract-dispatch-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
+import type { DispatchOneResult } from "@/lib/contract-dispatch/dispatcher";
+
+// 2026-09-29(D7) — 재시도 결과를 관리자에게 그대로 알린다(게이트 OFF 에서는 아무 것도 보내지 않았음을 명시).
+export function describeRetryOutcome(result: DispatchOneResult): string {
+  switch (result.outcome) {
+    case "disabled":
+      return "자동 발송이 꺼져 있어(CONTRACT_AUTO_DISPATCH_ENABLED) 아무 것도 보내지 않았습니다. 작업은 그대로 대기 중입니다.";
+    case "sent":
+      return "계약서를 발송했습니다.";
+    case "already_sent":
+      return "이미 발송된 계약입니다. 새로 보내지 않았습니다.";
+    case "skipped_no_guardian":
+      return "보호자 정보를 찾을 수 없어 발송하지 못했습니다(가구·보호자 연결 확인 필요).";
+    case "busy":
+      return "같은 자녀의 다른 발송이 진행 중이라 이번에는 보내지 않았습니다. 잠시 후 다시 시도해 주세요.";
+    case "failed":
+      return `발송에 실패했습니다: ${result.error}`;
+  }
+}
 
 const STATUS_LABEL: Record<ContractDispatchJobListItem["status"], string> = {
   queued: "대기 중",
@@ -41,6 +60,7 @@ export default function ContractDispatchQueueSection() {
   const [running, setRunning] = useState(false);
   const [retryingId, setRetryingId] = useState<string | null>(null);
   const [runResult, setRunResult] = useState<string | null>(null);
+  const [retryMessages, setRetryMessages] = useState<Record<string, string>>({});
 
   const jobs = data?.jobs ?? [];
   const autoDispatchEnabled = data?.autoDispatchEnabled ?? false;
@@ -115,6 +135,11 @@ export default function ContractDispatchQueueSection() {
                   {TRIGGER_LABEL[job.trigger_type]} · {STATUS_LABEL[job.status]}
                   {job.last_error ? ` · ${job.last_error}` : ""}
                 </span>
+                {retryMessages[job.id] && (
+                  <span className="text-[11.5px] font-semibold text-ink" role="status" data-testid={`contract-dispatch-retry-message-${job.id}`}>
+                    {retryMessages[job.id]}
+                  </span>
+                )}
               </div>
               {(job.status === "retryable_failed" || job.status === "permanent_failed") && (
                 <button
@@ -122,7 +147,8 @@ export default function ContractDispatchQueueSection() {
                   onClick={async () => {
                     setRetryingId(job.id);
                     try {
-                      await retryContractDispatchJobAction(job.id);
+                      const result = await retryContractDispatchJobAction(job.id);
+                      setRetryMessages((prev) => ({ ...prev, [job.id]: describeRetryOutcome(result) }));
                       await refresh();
                     } finally {
                       setRetryingId(null);

@@ -7,6 +7,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const sendRegularContractMock = vi.fn();
 vi.mock("@/lib/regular-contract-send", () => ({
+  CONTRACT_SEND_IN_PROGRESS_ERROR: "같은 자녀의 다른 계약 발송이 진행 중입니다. 잠시 후 다시 시도해 주세요.",
   sendRegularContractForSubjectEnrollment: (...args: unknown[]) => sendRegularContractMock(...args),
 }));
 

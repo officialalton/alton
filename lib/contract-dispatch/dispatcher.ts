@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { sendRegularContractForSubjectEnrollment } from "@/lib/regular-contract-send";
+import { CONTRACT_SEND_IN_PROGRESS_ERROR, sendRegularContractForSubjectEnrollment } from "@/lib/regular-contract-send";
 
 // 2026-09-28 — 초기 고객 절차 단순화 4단계: contract_dispatch_jobs 워커.
 // (docs/2026-09-26-consent-contract-simplification-implementation-plan.md)
@@ -80,6 +80,7 @@ export type DispatchOneResult =
   | { outcome: "skipped_no_guardian" }
   | { outcome: "sent" }
   | { outcome: "already_sent" }
+  | { outcome: "busy" }
   | { outcome: "failed"; error: string };
 
 /** 작업 하나를 처리한다 — 관리자 승인 실행(단건 재시도)과 배치 워커가 공유한다. */
@@ -121,6 +122,16 @@ export async function dispatchOneContractJob(
       approverTitle: AUTO_APPROVER_TITLE,
       triggeredByUserId: guardian.guardianUserId,
     });
+
+    if (result.status === "failed" && result.error === CONTRACT_SEND_IN_PROGRESS_ERROR) {
+      // 같은 자녀의 다른 발송이 진행 중 — 시도 횟수는 올리지 않고 다음 실행에서 다시 본다
+      // (그 발송이 끝나면 다음 호출은 already_sent 로 흡수된다).
+      await admin
+        .from("contract_dispatch_jobs")
+        .update({ status: "retryable_failed", last_error: result.error, updated_at: new Date().toISOString() })
+        .eq("id", job.id);
+      return { outcome: "busy" };
+    }
 
     if (result.status === "failed") {
       const { data: current } = await admin

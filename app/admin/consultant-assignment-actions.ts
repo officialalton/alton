@@ -232,6 +232,8 @@ export type ConsultantDetail = {
   gender: string | null;
   careerBio: string | null;
   hireDate: string | null;
+  /** 2026-09-29(B7) — 비활성화된 컨설턴트는 새 상담 배정·예약 링크 발송이 막힌다. */
+  deactivatedAt: string | null;
   currentStudents: { id: string; name: string | null; householdId: string | null; guardianNames: string[] }[];
   history: ConsultantAssignmentHistoryItem[];
 };
@@ -257,6 +259,11 @@ export async function getConsultantDetailAction(consultantId: string): Promise<C
 
   const admin = createAdminClient();
   const { data: authUser } = await admin.auth.admin.getUserById(consultantId);
+  const { data: settings } = await supabase
+    .from("consultant_settings")
+    .select("deactivated_at")
+    .eq("consultant_id", consultantId)
+    .maybeSingle();
 
   const studentIds = (assignments ?? []).map((a) => a.student_id as string);
   const guardianByStudent = new Map<string, { householdId: string | null; names: string[] }>();
@@ -302,6 +309,7 @@ export async function getConsultantDetailAction(consultantId: string): Promise<C
     gender: (profile?.gender as string | null) ?? null,
     careerBio: (profile?.career_bio as string | null) ?? null,
     hireDate: (profile?.hire_date as string | null) ?? null,
+    deactivatedAt: (settings?.deactivated_at as string | null) ?? null,
     currentStudents: (assignments ?? []).map((a) => {
       const student = Array.isArray(a.student) ? a.student[0] : a.student;
       const g = guardianByStudent.get(a.student_id as string);
@@ -327,4 +335,21 @@ export async function getConsultantDetailAction(consultantId: string): Promise<C
       };
     }),
   };
+}
+
+/** 2026-09-29(B7) — 컨설턴트 비활성화/재활성화. 비활성화하면 미확정 상담은 자동 미배정(관리자 큐에 표시),
+ * 확정 상담은 그대로 두고 "취소 후 새 링크"로 안내한다. */
+export async function setConsultantActiveAction(
+  consultantId: string,
+  active: boolean,
+  reason?: string
+): Promise<{ active: boolean; unassigned: number; scheduled_remaining: number }> {
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase.rpc("admin_set_consultant_active", {
+    p_consultant_id: consultantId,
+    p_active: active,
+    p_reason: reason ?? null,
+  });
+  if (error) throw new Error(friendlyDbMessage(error));
+  return data as { active: boolean; unassigned: number; scheduled_remaining: number };
 }

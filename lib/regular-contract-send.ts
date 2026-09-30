@@ -17,7 +17,31 @@ export type SendRegularContractResult =
   | { status: "sent"; contractVersionId: string; envelopeId: string }
   | { status: "failed"; contractVersionId: string; error: string };
 
+/** 같은 자녀의 다른 발송이 진행 중일 때 돌려주는 실패 사유(D3b) — 재시도 횟수에 세지 않는다. */
+export const CONTRACT_SEND_IN_PROGRESS_ERROR = "같은 자녀의 다른 계약 발송이 진행 중입니다. 잠시 후 다시 시도해 주세요.";
+
+// 2026-09-29(D3b) — 자녀 단위 배타 임대로 감싼다. 크론과 즉시 호출(또는 관리자 재발송)이 서로 다른 job 행을
+// 동시에 집어도 "기존 envelope 조회 → DocuSign 발송"이 자녀당 한 번에 하나씩만 돈다. 획득 못 하면 아무것도 보내지 않는다.
 export async function sendRegularContractForSubjectEnrollment(
+  admin: SupabaseClient,
+  params: Parameters<typeof sendRegularContractUnlocked>[1]
+): Promise<SendRegularContractResult> {
+  const { data: token, error: lockError } = await admin.rpc("try_acquire_child_contract_send_lock", {
+    p_child_id: params.childId,
+    p_ttl_seconds: 300,
+  });
+  if (lockError) throw new Error(lockError.message);
+  if (!token) {
+    return { status: "failed", contractVersionId: "", error: CONTRACT_SEND_IN_PROGRESS_ERROR };
+  }
+  try {
+    return await sendRegularContractUnlocked(admin, params);
+  } finally {
+    await admin.rpc("release_child_contract_send_lock", { p_child_id: params.childId, p_token: token });
+  }
+}
+
+async function sendRegularContractUnlocked(
   admin: SupabaseClient,
   params: {
     childId: string;

@@ -15,6 +15,11 @@ function makeSupabase(opts: {
   const latestClosureTypeByChild = opts.latestClosureTypeByChild ?? {};
 
   return {
+    // 2026-09-29(F1) — 가족은 consultations 를 직접 읽지 못하므로 종료 유형은 RPC 로 받는다.
+    rpc: vi.fn((name: string, args: { p_child_id: string }) => {
+      if (name !== "family_child_latest_closure_type") throw new Error(`unexpected rpc ${name}`);
+      return Promise.resolve({ data: latestClosureTypeByChild[args.p_child_id] ?? null });
+    }),
     from: vi.fn((table: string) => {
       if (table === "household_members") {
         return {
@@ -45,24 +50,6 @@ function makeSupabase(opts: {
                   Promise.resolve({
                     data: activeEnrollmentsByChild[childId] ? [{ id: "e1" }] : [],
                   }),
-              }),
-            }),
-          }),
-        };
-      }
-      if (table === "consultations") {
-        return {
-          select: () => ({
-            eq: (col: string, childId: string) => ({
-              order: () => ({
-                order: () => ({
-                  limit: () => {
-                    const closureType = latestClosureTypeByChild[childId];
-                    return Promise.resolve({
-                      data: closureType === undefined ? [] : [{ closure_type: closureType }],
-                    });
-                  },
-                }),
               }),
             }),
           }),
