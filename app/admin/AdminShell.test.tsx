@@ -97,10 +97,10 @@ vi.mock("./entitlement-actions", () => ({
 
 // Messenger 배지 테스트용 — 실제 MessengerTab 대신 안읽음 수를 올려 보내는 대역.
 vi.mock("./MessengerTab", () => ({
-  default: ({ onFamilyUnreadChange }: { onFamilyUnreadChange?: (n: number) => void }) => (
+  default: ({ onUnreadChange }: { onUnreadChange?: (n: number) => void }) => (
     <div>
-      <button onClick={() => onFamilyUnreadChange?.(0)}>읽음처리</button>
-      <button onClick={() => onFamilyUnreadChange?.(3)}>세건</button>
+      <button onClick={() => onUnreadChange?.(0)}>읽음처리</button>
+      <button onClick={() => onUnreadChange?.(3)}>세건</button>
     </div>
   ),
 }));

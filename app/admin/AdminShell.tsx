@@ -132,6 +132,7 @@ export default function AdminShell({
   autoAssignEnabled,
   initialMeetingActionCount,
   initialMessengerUnread = 0,
+  initialMessengerUnreadCounts,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -188,6 +189,8 @@ export default function AdminShell({
   initialMeetingActionCount?: number;
   /** 사이드바 Messenger 배지 초기값(서버 계산). 가족 채널 안읽음 문의 수. */
   initialMessengerUnread?: number;
+  /** 채널별 초기 안읽음(서브탭 배지 초기값). */
+  initialMessengerUnreadCounts?: { teachers: number; consultants: number; family: number };
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -489,7 +492,7 @@ export default function AdminShell({
               initialMeetingActionCount={initialMeetingActionCount}
             />
           ) : activeTab === "messenger" ? (
-            <MessengerTab initialInquiryThreads={initialInquiryThreads} onFamilyUnreadChange={(n) => setMessengerLive({ from: initialMessengerUnread, value: n })} initialSubtab={initialTab === LEGACY_INQUIRY_TAB_ID ? "family" : undefined} />
+            <MessengerTab initialInquiryThreads={initialInquiryThreads} initialUnreadCounts={initialMessengerUnreadCounts} onUnreadChange={(n) => setMessengerLive({ from: initialMessengerUnread, value: n })} initialSubtab={initialTab === LEGACY_INQUIRY_TAB_ID ? "family" : undefined} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

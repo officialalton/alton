@@ -1,20 +1,25 @@
-import { describe, expect, it } from "vitest";
-import { countUnreadInquiries } from "./messenger-unread-data";
+import { describe, expect, it, vi } from "vitest";
+import { getAdminMessengerUnreadCounts, totalMessengerUnread } from "./messenger-unread-data";
 
-describe("countUnreadInquiries", () => {
-  const lr = new Map([["h1", "2026-09-29T10:00:00Z"]]);
-  it("읽음 이후 보호자 메시지가 있는 문의만, 문의당 1회 센다", () => {
-    expect(
-      countUnreadInquiries(
-        [
-          { inquiryId: "i1", householdId: "h1", createdAt: "2026-09-29T11:00:00Z" },
-          { inquiryId: "i1", householdId: "h1", createdAt: "2026-09-29T12:00:00Z" },
-          { inquiryId: "i2", householdId: "h1", createdAt: "2026-09-29T09:00:00Z" },
-          { inquiryId: "i3", householdId: "h2", createdAt: "2026-01-01T00:00:00Z" },
-        ],
-        lr
-      )
-    ).toBe(2);
+const clientWith = (result: { data: unknown; error: { message: string } | null }) =>
+  ({ rpc: vi.fn().mockResolvedValue(result) }) as unknown as Parameters<typeof getAdminMessengerUnreadCounts>[0];
+
+describe("getAdminMessengerUnreadCounts", () => {
+  it("RPC 1회로 세 채널 수를 돌려준다(배열/객체 모두)", async () => {
+    const c = clientWith({ data: [{ teachers: 2, consultants: 3, family: 4 }], error: null });
+    expect(await getAdminMessengerUnreadCounts(c)).toEqual({ teachers: 2, consultants: 3, family: 4 });
+    expect((c as unknown as { rpc: ReturnType<typeof vi.fn> }).rpc).toHaveBeenCalledTimes(1);
+    expect(await getAdminMessengerUnreadCounts(clientWith({ data: { teachers: 1, consultants: 0, family: 0 }, error: null }))).toEqual({ teachers: 1, consultants: 0, family: 0 });
   });
-  it("메시지가 없으면 0", () => expect(countUnreadInquiries([], lr)).toBe(0));
+  it("결과가 비면 0, 오류면 던진다", async () => {
+    expect(await getAdminMessengerUnreadCounts(clientWith({ data: null, error: null }))).toEqual({ teachers: 0, consultants: 0, family: 0 });
+    await expect(getAdminMessengerUnreadCounts(clientWith({ data: null, error: { message: "boom" } }))).rejects.toThrow("boom");
+  });
+});
+
+describe("totalMessengerUnread", () => {
+  it("세 채널 합계(0이면 0, 9 초과 표기는 배지 컴포넌트가 담당)", () => {
+    expect(totalMessengerUnread({ teachers: 0, consultants: 0, family: 0 })).toBe(0);
+    expect(totalMessengerUnread({ teachers: 4, consultants: 5, family: 6 })).toBe(15);
+  });
 });
