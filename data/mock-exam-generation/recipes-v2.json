@@ -201,5 +201,44 @@
    "officialDifficulty": null,
    "difficultySource": "인접 skill(linear_equations_two_var v2) 레시피 변형 — 커버리지 맵에 systems_linear 라벨 문항이 없어 CB 대조 근거 없음(evidence 비어 있음), 내부 설계"
   }
+ ],
+ "nonlinear_equations_systems": [
+  {
+   "id": "nonlinear_equations_systems_tangent_then_point",
+   "instruction": "직선 y=mx+k 와 포물선 y=ax^2+bx+c 가 한 점에서만 만난다는 조건(판별식 0)으로 미지 계수 하나를 먼저 결정한 뒤, 그 접점의 좌표(또는 x좌표)를 묻는다. 오답은 계수만 구한 중간값, 판별식 부호를 잘못 세운 값, 접점 y좌표를 x좌표로 답한 값으로 만든다.",
+   "beyondMedium": "접점 조건을 판별식 방정식으로 번역해 계수를 결정하고 다시 교점을 구하는 두 단계",
+   "checklist": [
+    "교점이 한 개라는 조건(접함)을 쓰는가",
+    "미지 계수를 먼저 결정한 뒤 접점을 구해야 하는가",
+    "오답에 계수만 구한 값이 있는가",
+    "숫자와 계산이 medium 수준으로 단순한가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test4-Math-M1-Q24",
+    "test4-Math-M2-Q12",
+    "test4-Math-M2-Q21"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "인접 skill(nonlinear_equations_systems v1·linear_equations_two_var v2) 레시피를 구조 골격으로 변형 — v1 은 개념 서술형이라 Math 수율이 낮았음(내부 설계, 사고 수준 동일)"
+  },
+  {
+   "id": "nonlinear_equations_systems_root_relation_then_value",
+   "instruction": "이차방정식의 한 근이 주어지고 근과 계수의 관계(합·곱)로 미지 계수를 결정한 뒤, 다른 근이 들어간 식의 값(예: 다른 근의 제곱 + 1)을 묻는다. 오답은 계수만 구한 값, 주어진 근으로 식을 평가한 값, 합·곱을 혼동한 값으로 만든다.",
+   "beyondMedium": "근과 계수 관계로 계수 결정 후 다른 근을 구해 파생값을 계산하는 세 단계",
+   "checklist": [
+    "근과 계수의 관계를 써야 하는가",
+    "다른 근을 구한 뒤 식의 값을 묻는가",
+    "오답에 주어진 근으로 잘못 평가한 값이 있는가"
+   ],
+   "minMet": 3,
+   "evidence": [
+    "test4-Math-M1-Q24",
+    "test4-Math-M2-Q12",
+    "test4-Math-M2-Q21"
+   ],
+   "officialDifficulty": null,
+   "difficultySource": "인접 skill(nonlinear_equations_systems v1·linear_equations_two_var v2) 레시피를 구조 골격으로 변형 — v1 은 개념 서술형이라 Math 수율이 낮았음(내부 설계, 사고 수준 동일)"
+  }
  ]
 }
