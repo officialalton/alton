@@ -343,4 +343,33 @@ describe("풀 집계·자동 구성 후보·목록 일관", () => {
     expect(d2.judge.advisory).toBeNull();
     expect(d2.history).toEqual([]);
   });
+
+  it("본문 개정 공개: 새 버전 난이도가 다르면 문항 난이도를 맞추고 잠정으로 되돌리며 이력을 남긴다(거절 없음, 스냅샷 불변)", () => {
+    const id = problem({ difficulty: "hard" });
+    review([id], "hard"); // 확인됨
+    const setId = mstSet();
+    place(setId, id, "rw_m2", "higher", "hard");
+    const snap = () => psql(`select problem_version_id || difficulty from mock_exam_set_items where exam_set_id = '${setId}';`);
+    const before = snap();
+    psql(`insert into problem_versions (problem_id, version_no, passage, options, correct_index, explanation, difficulty, status, created_by)
+          values ('${id}', 2, 'v2 ${RUN}', '["가","나","다","라"]'::jsonb, 0, '해설', 'medium', 'draft', '${ADMIN_ID}');`);
+    psql(`update problem_versions set status = 'archived' where problem_id = '${id}' and version_no = 1;
+          update problem_versions set status = 'published', published_at = now(), published_by = '${ADMIN_ID}' where problem_id = '${id}' and version_no = 2;`);
+    expect(state(id)).toBe("medium|provisional|false");
+    expect(psql(`select from_difficulty || '>' || to_difficulty || '|' || to_status || '|' || changed_by || '|' || reason from problem_difficulty_changes where problem_id = '${id}' order by changed_at desc limit 1;`)).toBe(
+      `hard>medium|provisional|${ADMIN_ID}|본문 개정 공개에 의한 변경`,
+    );
+    expect(snap()).toBe(before);
+    // 같은 난이도 개정 공개는 이력·상태를 바꾸지 않는다.
+    const n = historyCount(id);
+    psql(`insert into problem_versions (problem_id, version_no, passage, difficulty, status) values ('${id}', 3, 'v3', 'medium', 'draft');
+          update problem_versions set status = 'archived' where problem_id = '${id}' and version_no = 2;
+          update problem_versions set status = 'published', published_at = now(), published_by = '${ADMIN_ID}' where problem_id = '${id}' and version_no = 3;`);
+    expect(historyCount(id)).toBe(n);
+    psql(`update problems set published_version_id = (select id from problem_versions where problem_id = '${id}' and version_no = 3) where id = '${id}';`);
+    // 점검 RPC 가 공개 버전 난이도를 바꾸는 것은 이 트리거를 타지 않는다(이력 1건만).
+    const m = historyCount(id);
+    review([id], "easy", "재조정");
+    expect(historyCount(id)).toBe(m + 1);
+  });
 });

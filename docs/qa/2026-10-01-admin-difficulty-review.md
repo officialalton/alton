@@ -37,3 +37,6 @@
 - 마이그레이션 `20261985000000_admin_difficulty_review.sql`(격리 스택 적용 통과, 원격·공유 로컬 미적용). 화면: 모의고사 › `난이도 점검` 서브탭.
 - 검증: 격리 스택에서 `lib/problem-difficulty-review.integration.test.ts` 12건 연속 2회 통과, 관련 통합(pool-usage·mst-flow·usage-scope) 통과, unit 프로젝트 3004 통과, 컴포넌트 7·액션 3건.
 - 근거 표시: quality JSON 의 `hardJudge`/`advisory`(없으면 `mockExamGeneration.recipeCheck.hardFit` 폴백, 모두 없으면 '근거 기록 없음').
+
+## 7. 본문 개정 공개 구멍 차단(`20261986000000_difficulty_sync_on_publish.sql`)
+- 방식 (a) 채택: 트리거가 새 버전 published 전환 시 난이도가 문항과 다르면 문항 난이도를 새 값으로 맞추고 provisional 로 되돌리며 이력('본문 개정 공개에 의한 변경', 행위자=공개한 관리자)을 남긴다. 거절(b)은 수정 초안 → 공개 흐름을 막고 난이도만 고치려면 별도 경로를 강제해 기존 흐름을 더 해치므로 택하지 않음. 점검 RPC 내부·같은 난이도 공개는 영향 없음.
