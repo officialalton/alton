@@ -853,7 +853,7 @@ describe("ConsultationKanbanBoard — 계정 생성 카드는 상담 라이프�
     expect(screen.queryByText(/상태: completed/)).not.toBeInTheDocument();
   });
 
-  it("실제 상담 카드는 기존처럼 상담 결과 기록·동의 안내가 그대로 동작한다(회귀 방지)", async () => {
+  it("실제 상담 카드도 첫 상담에는 동의 확인이 없으므로 '보호자 동의 확인 대기 중' 안내를 띄우지 않는다(2026-09-29 6단계)", async () => {
     listKanbanBoardActionMock.mockResolvedValue([cardRow()]);
     getConsultationCardDetailActionMock.mockResolvedValue(cardDetail());
 
@@ -862,6 +862,6 @@ describe("ConsultationKanbanBoard — 계정 생성 카드는 상담 라이프�
     fireEvent.click(await screen.findByText("김민지"));
     await screen.findByTestId("consultation-card-detail");
 
-    expect(screen.getByText(/보호자 동의 확인 대기 중/)).toBeInTheDocument();
+    expect(screen.queryByText(/보호자 동의 확인 대기 중/)).not.toBeInTheDocument();
   });
 });
