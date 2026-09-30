@@ -270,6 +270,8 @@ export async function generateSectionProblemsCore(params: {
   keepFigureless?: boolean;
   /** 같은 배치(pipeline 실행)에서 이미 나온 지문 소재 — 프롬프트에 넣어 같은 소재 재사용을 피한다(2026-09-18, 중복 지문 대응). */
   avoidTopics?: string[];
+  /** 호출자가 덧붙이는 추가 지침(예: 모의고사 hard 보강 지침·few-shot). 기본 경로는 쓰지 않는다. */
+  extraGuidance?: string;
 }): Promise<(Omit<DocProblem, "id" | "keywords"> & { stimulus?: string; question?: string | null; needsFigure?: boolean; explanationEn?: string | null; distractorRationales?: { index: number; plausible_because: string; matches: string; why_wrong: string; kind: string }[]; difficultyRationale?: string; design?: { key_relations?: string[]; answer_uses_relations?: string; distractor_design?: { index: number; relation: string; error_type: string }[]; target_difficulty_note?: string } | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null })[]> {
   const { sectionTitle, subjectName, skillType, difficulty, format, count } = params;
   const skillMeta = params.skillCode ? SKILL_BY_CODE.get(params.skillCode) ?? null : null;
@@ -435,7 +437,7 @@ Reading & Writing transitions(전환어) 전용 규칙: 4개 선택지는 모두
 ${difficulty === "hard" ? `어려움(hard) 전용 절차 — **지문을 쓰기 전에** design 을 먼저 채운다: (1) key_relations 에 학생이 종합해야 하는 핵심 관계 2~3개를 정한다. (2) answer_uses_relations 에 정답이 그 관계들을 어떻게 함께 만족하는지 적는다. (3) distractor_design 에 각 오답이 어느 관계를 부분적으로 맞추는지와 정확히 어디서 틀리는지(scope·causal·intensity·temporal·speaker·condition·partial_computation·unit·sign 중 하나)를 적는다. 그 다음에만 이 설계에 맞춰 지문·질문·선택지·해설을 쓴다. 설계와 실제 문항이 어긋나면(예: distractor_design 에 적은 오류가 실제 선택지 문장에 드러나지 않음) 안 된다.` : ""}
 ${evidenceSkill ? structuredFieldPromptNote(evidenceSkill) : ""}
 소재 다양성 규칙(2026-09-18, 지문 중복 대응): 이번 호출에서 만드는 ${clampedCount}개 문항은 서로 완전히 다른 분야·소재를 다뤄야 한다(예: 해양 생물학, 도시 교통 인프라, 미술사, 천문학, 경제사, 식물학처럼 겹치지 않는 영역). 같은 인물·기관·사건을 두 문항 이상에서 다시 쓰지 않는다.
-${params.avoidTopics && params.avoidTopics.length ? `다음 소재는 이미 같은 배치의 다른 문항에서 사용됐다 — **절대 재사용하지 말고**, 아래 목록과 겹치지 않는 완전히 다른 인물·기관·사건·분야를 새로 골라라:\n${params.avoidTopics.map((t) => `- ${t}`).join("\n")}` : ""}
+${params.extraGuidance ? `\n${params.extraGuidance}\n` : ""}${params.avoidTopics && params.avoidTopics.length ? `다음 소재는 이미 같은 배치의 다른 문항에서 사용됐다 — **절대 재사용하지 말고**, 아래 목록과 겹치지 않는 완전히 다른 인물·기관·사건·분야를 새로 골라라:\n${params.avoidTopics.map((t) => `- ${t}`).join("\n")}` : ""}
 이 문제들은 특정 학생이 아니라 이 교재를 배정받는 어떤 학생에게도 재사용될 문제
 은행에 들어갑니다. 실전 SAT/AP 시험에 나올 법한 퀄리티로 만들어주세요.`,
       },
