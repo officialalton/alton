@@ -303,7 +303,7 @@ describe("정책 값·버전 — 데이터로 바꾸고 새 응시에만 적용"
       submitModule(sA, aA, "rw_m1");
       submitModule(sB, aB, "rw_m1");
       submitModule(sC, aC, "rw_m1");
-      // A: 시작 때 고정된 기존 정책(0.65)로 3/4 → higher / B: 새 정책(4개 필요)로 3/4 → lower / C: 4/4 → 경계 이상 higher
+      // A: 시작 때 고정된 기존 활성 정책(0.70)으로 3/4 → higher / B: 새 정책(4개 필요)로 3/4 → lower / C: 4/4 → 경계 이상 higher
       expect(routes(aA)).toMatchObject({ rw: "higher", rwV: originalRwActive });
       expect(routes(aB)).toMatchObject({ rw: "lower", rwV: String(v2) });
       expect(routes(aC)).toMatchObject({ rw: "higher", rwV: String(v2) });

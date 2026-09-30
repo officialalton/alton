@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computeMockExamReport } from "./report";
+import { computeMockExamReport, weakSkills } from "./report";
 import type { MockExamAttemptItem } from "./attempt-data";
 
 function item(overrides: Partial<MockExamAttemptItem>): MockExamAttemptItem {
@@ -57,5 +57,17 @@ describe("computeMockExamReport", () => {
   it("응답 수(answeredCount)는 response 가 있는 문항만 센다", () => {
     const items = [item({ setItemId: "i1", response: "1" }), item({ setItemId: "i2", response: null })];
     expect(computeMockExamReport(items).answeredCount).toBe(1);
+  });
+});
+
+describe("weakSkills", () => {
+  it("2문항 이상·60% 미만만, 낮은 순", () => {
+    const rows = [
+      { key: "a", label: "a", total: 4, correct: 1 },
+      { key: "b", label: "b", total: 1, correct: 0 },
+      { key: "c", label: "c", total: 5, correct: 4 },
+      { key: "d", label: "d", total: 3, correct: 0 },
+    ];
+    expect(weakSkills(rows).map((r) => r.key)).toEqual(["d", "a"]);
   });
 });

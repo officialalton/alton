@@ -79,3 +79,11 @@ export function computeMockExamReport(items: MockExamAttemptItem[]): MockExamRep
     missedItems,
   };
 }
+
+/** 진단: 2문항 이상 출제됐고 정답률이 60% 미만인 세부기술을 낮은 순으로(최대 5개). 난이도·경로 정보는 쓰지 않는다. */
+export function weakSkills(bySkill: BreakdownRow[], limit = 5): BreakdownRow[] {
+  return bySkill
+    .filter((r) => r.total >= 2 && r.correct / r.total < 0.6)
+    .sort((a, b) => a.correct / a.total - b.correct / b.total || a.key.localeCompare(b.key))
+    .slice(0, limit);
+}

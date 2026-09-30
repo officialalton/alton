@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
-import { computeMockExamReport } from "@/lib/mock-exam/report";
+import { computeMockExamReport, weakSkills } from "@/lib/mock-exam/report";
+import { estimateScore, SCORE_DISCLAIMER } from "@/lib/mock-exam/score-estimate";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -135,6 +136,8 @@ export function ItemDetail({
 
 export default function MockExamResultView({ attempt, readOnly }: { attempt: MockExamAttemptDetail; readOnly: boolean }) {
   const report = computeMockExamReport(attempt.items);
+  // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 경로·난이도는 계산에 쓰지 않는다.
+  const scoreEstimate = attempt.format === "mst" ? estimateScore(report.bySection) : null;
   const itemsById = useMemo(() => new Map(attempt.items.map((i) => [i.setItemId, i])), [attempt.items]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = selectedId ? (itemsById.get(selectedId) ?? null) : null;
@@ -152,6 +155,27 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
           실제 SAT·College Board 점수와 동등하지 않은 학습 진단 결과입니다(사양 7절).
         </p>
       </div>
+
+      {scoreEstimate && (
+        <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate">
+          <h3 className="mb-2 text-[13px] font-bold">예상 점수 범위(내부 추정)</h3>
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="rounded-lg bg-grey-50 p-3">
+              <p className="text-[12px] font-bold text-grey-500">R&W</p>
+              <p className="text-[16px] font-extrabold">{scoreEstimate.rw.low}-{scoreEstimate.rw.high}</p>
+            </div>
+            <div className="rounded-lg bg-grey-50 p-3">
+              <p className="text-[12px] font-bold text-grey-500">Math</p>
+              <p className="text-[16px] font-extrabold">{scoreEstimate.math.low}-{scoreEstimate.math.high}</p>
+            </div>
+            <div className="rounded-lg bg-grey-50 p-3">
+              <p className="text-[12px] font-bold text-grey-500">총점</p>
+              <p className="text-[16px] font-extrabold">{scoreEstimate.total.low}-{scoreEstimate.total.high}</p>
+            </div>
+          </div>
+          <p className="mt-2 text-[11.5px] text-grey-400">{SCORE_DISCLAIMER}</p>
+        </div>
+      )}
 
       <div className="rounded-lg border border-grey-200 bg-white p-4">
         <h3 className="mb-2 text-[13px] font-bold">섹션별 결과</h3>
@@ -181,6 +205,20 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
           ))}
         </ul>
       </div>
+
+      {weakSkills(report.bySkill).length > 0 && (
+        <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-weak-skills">
+          <h3 className="mb-2 text-[13px] font-bold">우선 보완할 세부기술</h3>
+          <ul className="flex flex-col gap-1.5">
+            {weakSkills(report.bySkill).map((s) => (
+              <li key={s.key} className="flex items-center justify-between text-[13px]">
+                <span className="text-grey-600">{s.label}</span>
+                <span className="font-bold">{s.correct}/{s.total} ({pct(s.correct, s.total)})</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {report.bySkill.length > 0 && (
         <div className="rounded-lg border border-grey-200 bg-white p-4">

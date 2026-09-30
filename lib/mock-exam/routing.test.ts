@@ -14,6 +14,14 @@ describe("decideRoute — correct_ratio", () => {
     expect(decideRoute(ratio(0.65), 14, 22)).toBe("lower");
     expect(decideRoute(ratio(0.65), 15, 22)).toBe("higher");
   });
+  it("R&W 27문항, 0.70(오너 확정): 18개는 lower, 19개는 higher(18.9 이상)", () => {
+    expect(decideRoute(ratio(0.7), 18, 27)).toBe("lower");
+    expect(decideRoute(ratio(0.7), 19, 27)).toBe("higher");
+  });
+  it("Math 22문항, 0.70(오너 확정): 15개는 lower, 16개는 higher(15.4 이상)", () => {
+    expect(decideRoute(ratio(0.7), 15, 22)).toBe("lower");
+    expect(decideRoute(ratio(0.7), 16, 22)).toBe("higher");
+  });
   it("정확히 임계값과 같으면 higher(이상): 20문항에서 13개 = 0.65", () => {
     expect(decideRoute(ratio(0.65), 13, 20)).toBe("higher");
     expect(decideRoute(ratio(0.65), 12, 20)).toBe("lower");
