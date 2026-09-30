@@ -1,0 +1,1020 @@
+[
+ {
+  "gid": "recipe-central_ideas_details-00",
+  "runId": "batch2-D-cross",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_dual_stance_reaction",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Many historians of medieval Iceland have treated the family sagas as unreliable guides to the era they describe. Because the sagas were written down in the thirteenth century, roughly three hundred years after the settlement-era feuds they narrate, these scholars argue that the texts mainly reflect the political anxieties of their thirteenth-century authors, and that any resemblance to earlier events is largely coincidental.\n\nArchaeologist Hrefna Jónsdóttir has excavated several farmsteads named in the sagas. At a number of them, she found that the layout of buildings, the approximate dates of their construction, and even the positions of boundary walls match saga descriptions closely. At the same sites, however, she found no physical evidence of the large feasting halls or wealth that the sagas attribute to their owners, details Jónsdóttir attributes to later writers magnifying the status of their ancestors.\n\nBased on the texts, how would Jónsdóttir (second paragraph) most likely respond to the historians' view (first paragraph)?",
+   "stimulus": "Many historians of medieval Iceland have treated the family sagas as unreliable guides to the era they describe. Because the sagas were written down in the thirteenth century, roughly three hundred years after the settlement-era feuds they narrate, these scholars argue that the texts mainly reflect the political anxieties of their thirteenth-century authors, and that any resemblance to earlier events is largely coincidental.\n\nArchaeologist Hrefna Jónsdóttir has excavated several farmsteads named in the sagas. At a number of them, she found that the layout of buildings, the approximate dates of their construction, and even the positions of boundary walls match saga descriptions closely. At the same sites, however, she found no physical evidence of the large feasting halls or wealth that the sagas attribute to their owners, details Jónsdóttir attributes to later writers magnifying the status of their ancestors.",
+   "question": "Based on the texts, how would Jónsdóttir (second paragraph) most likely respond to the historians' view (first paragraph)?",
+   "options": [
+    "She would argue that the sagas preserve some accurate information about the settlement era, even though parts of them were embellished by later authors.",
+    "She would agree that the sagas chiefly reveal the concerns of thirteenth-century writers, since the texts exaggerate the prosperity of the farms they describe.",
+    "She would maintain that archaeological evidence confirms the sagas as reliable records, whereas the historians have overstated how much the texts were embellished.",
+    "She would contend that the sagas were probably composed much earlier than the thirteenth century, which would explain why they describe farm layouts accurately."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 역사가들은 사가가 주로 13세기 관심사를 반영하고 이전 사건과 닮은 점은 우연이라고 본다. 욘스도티르는 건물 배치·연대·경계벽이 사가와 밀접하게 일치함을 발견했으므로 '우연'이라는 주장에 반대하지만, 연회장·부의 과장은 후대 윤색으로 인정한다. 따라서 부분적으로 정확한 정보가 보존되었다고 반박할 것이다.\nB(한쪽 텍스트만 사용): 과장 증거만 보고 역사가에게 동의한다고 판단한 것으로, 정확히 일치하는 세부 사항이라는 핵심 발견을 무시한다.\nC(입장 뒤바꿈/과장): 욘스도티르를 전면적 신뢰론자로, 역사가를 윤색을 과대평가한 쪽으로 설정했으나 실제로 역사가는 사가를 불신하는 쪽이고, 욘스도티르 역시 윤색을 인정하므로 '신뢰할 만한 기록'이라는 주장은 과하다.\nD(제3의 입장): 작성 시기에 대한 이의는 두 텍스트 어디에도 없다. 욘스도티르는 13세기 기록이라는 점을 문제 삼지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dual_source_synthesis",
+     "evidence_weighting_under_partial_data"
+    ],
+    "note": "정답 A 검증: 역사가는 '닮은 점은 우연'이라 주장하나 욘스도티르는 배치·연대·경계벽의 밀접한 일치를 발견했고, 동시에 연회장·부는 후대 과장으로 봄 → 부분적 정확성 + 윤색 인정 = A. B는 과장 발견만 반영(한쪽만), C는 욘스도티르를 전면 신뢰론자로 과장하고 역사가 입장을 뒤바꿈, D는 작성 시기 문제 제기라는 텍스트 밖 제3 입장. 해설은 정답과 오답 논리를 정확히 뒷받침함. 체크리스트 1 미충족: Text 1/Text 2로 분리되지 않고 단일 지문의 두 문단으로 제시되며 질문이 '(second paragraph)/(first paragraph)'로 지칭함. 두 입장이 명확히 구분되어 있어 기능적으로는 답변 가능하고 실제 SAT에도 단일 지문 내 '어떻게 반응할 것인가' 문항이 존재하므로 형식 자체는 허용 범위로 판정하되, 레시피(두 텍스트 제시) 기준으로는 미충족. 실존 인물 Hrefna Jónsdóttir의 특정 발굴 주장이 사실인지 확인되지 않으나 가상의 연구 설정으로 보여 사실 오류로 처리하지 않음. 난이도: 두 입장을 통합하고 '부분적 일치+부분적 윤색'이라는 미묘한 위치를 추론해야 하므로 medium 이상."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dual_source_synthesis",
+     "evidence_weighting_under_partial_data"
+    ],
+    "note": "Text 1/Text 2 라벨 없이 두 문단으로 제시되고 질문은 'the texts'라고 부름. 사실상 두 입장이 짝을 이루는 구조라 수용 가능하지만, 실제 SAT 형식이라면 Text 1/Text 2로 표기하는 것이 좋음. A는 일치하는 부분(우연설 반박)과 윤색된 부분을 함께 통합해야 도출됨. B는 한쪽 증거만 반영한 오답, C는 입장을 뒤바꾸고 과장한 오답, D는 지문 밖 주장임.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-central_ideas_details-01",
+  "runId": "batch2-D-cross",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_underlying_implication",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "When the regional orchestra announced that its longtime principal oboist, Marguerite Okafor, would retire at the end of the season, the conductor, Tomas Wren, told reporters that her departure was \"a natural transition\" and that the ensemble \"has always been larger than any single player.\" Yet in the weeks that followed, Wren quietly postponed auditions for her replacement twice, rewrote the spring program to remove the two symphonies featuring the orchestra's most prominent oboe solos, and asked Okafor whether she might consider appearing as a guest soloist the following year.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "When the regional orchestra announced that its longtime principal oboist, Marguerite Okafor, would retire at the end of the season, the conductor, Tomas Wren, told reporters that her departure was \"a natural transition\" and that the ensemble \"has always been larger than any single player.\" Yet in the weeks that followed, Wren quietly postponed auditions for her replacement twice, rewrote the spring program to remove the two symphonies featuring the orchestra's most prominent oboe solos, and asked Okafor whether she might consider appearing as a guest soloist the following year.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Although Wren publicly downplayed the significance of Okafor's retirement, his actions suggest that he regarded her as difficult to replace.",
+    "Wren believed that the orchestra had always been larger than any single player, including Okafor.",
+    "Wren's decisions after the announcement show that he was relieved to have an opportunity to reshape the orchestra without Okafor.",
+    "Orchestras often struggle to maintain their quality when experienced musicians retire."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: Wren은 공개적으로 은퇴를 '자연스러운 전환'이라며 대수롭지 않게 말했지만, 후임 오디션을 두 번 미루고, 오보에 독주가 두드러진 곡을 빼고, 객원 독주자로 다시 서 달라고 요청했다. 말과 행동의 이런 어긋남은 그가 Okafor를 쉽게 대체할 수 없는 연주자로 여겼음을 보여 준다.\nB(명시된 문장을 그대로 옮긴 오답): Wren이 한 말을 그대로 가져왔지만, 지문의 핵심은 그의 행동이 이 말과 모순된다는 점이다. 그래서 이 말을 그의 진심으로 볼 수 없다.\nC(어긋남을 반대로 해석한 오답): 프로그램 변경을 오케스트라를 새로 꾸릴 기회로 반긴 것처럼 해석했다. 하지만 오보에 독주 곡을 빼고 Okafor에게 복귀를 요청한 것은 그녀의 공백을 메우기 어렵다는 뜻이지 안도했다는 뜻이 아니다.\nD(일반 상식 오답): 그럴듯한 일반론이지만, 지문은 오케스트라 전반이나 연주 수준 저하를 다루지 않는다. 한 지휘자의 숨은 태도를 다룰 뿐이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "paradox_and_implicit_inference",
+     "scope_calibration"
+    ],
+    "note": "지문은 Wren의 공개 발언(\"natural transition\", \"larger than any single player\")과 이후 행동(오디션 두 차례 연기, 오보에 독주곡 제외, 객원 독주 요청)을 병치하여 표면 진술과 실제 상황의 어긋남을 제시함. 정답 A는 명시 문장이 아닌 이 어긋남에서 추론되며, B는 발언을 그대로 옮긴 오답, C는 어긋남의 방향을 뒤집은 오답, D는 과잉일반화 오답으로 기능. 해설은 각 선지에 대해 지문 근거를 정확히 인용하며 모순 없음. 창작 시나리오로 저작권 우려 없음. 형식(4지선다, 단일 정답, SAT 스타일 질문) 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "paradox_and_implicit_inference"
+    ],
+    "note": "말과 행동이 어긋나는 구조가 분명하다. 정답은 세 가지 행동을 종합해 추론해야만 도출된다. 오답 설계도 적절하다: B는 지문 문장 인용, C는 어긋남의 방향을 뒤집은 해석, D는 과잉일반화다. 다만 행동 단서가 매우 노골적이라 hard 문항으로서는 쉬운 편이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-central_ideas_details-02",
+  "runId": "batch2-D-cross",
+  "skill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_right_size_claim",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, historians treated the medieval guilds of European cities mainly as cartels that restricted entry to trades and kept prices high. Economic historian Lena Marsh argues that this view overlooks how guilds also functioned as systems for certifying quality in markets where buyers could rarely judge goods before purchase. In fifteenth-century Bruges, for example, cloth inspected by the weavers' guild received a lead seal, and merchants from distant ports routinely paid more for sealed bolts than for unsealed ones of similar appearance. Marsh does not deny that guilds limited competition, but she contends that their reputation-guaranteeing role helps explain why long-distance traders, who had no local ties, often preferred to deal with guild members.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "For decades, historians treated the medieval guilds of European cities mainly as cartels that restricted entry to trades and kept prices high. Economic historian Lena Marsh argues that this view overlooks how guilds also functioned as systems for certifying quality in markets where buyers could rarely judge goods before purchase. In fifteenth-century Bruges, for example, cloth inspected by the weavers' guild received a lead seal, and merchants from distant ports routinely paid more for sealed bolts than for unsealed ones of similar appearance. Marsh does not deny that guilds limited competition, but she contends that their reputation-guaranteeing role helps explain why long-distance traders, who had no local ties, often preferred to deal with guild members.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Marsh maintains that medieval guilds, while restricting competition, also served to certify the quality of goods, which helps account for their appeal to distant traders.",
+    "In fifteenth-century Bruges, cloth bearing a weavers' guild seal sold for higher prices to foreign merchants than comparable unsealed cloth did.",
+    "Marsh demonstrates that guilds throughout premodern economies benefited consumers more than they harmed them by raising prices.",
+    "Marsh argues that guilds used lead seals mainly to keep outsiders from entering the cloth trade and thereby to protect members' prices."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 지문의 중심은 Marsh의 주장이다. 길드가 경쟁을 제한했다는 점은 인정하면서도(does not deny), 구매 전에 품질을 판단하기 어려운 시장에서 품질을 인증하는 역할을 했고, 이 역할 때문에 멀리서 온 상인들이 길드 회원과 거래하기를 선호했다는 것이다. A는 이 양보, 핵심 주장, 설명 범위를 모두 담고 있다.\nB(과잉축소): 브뤼헤의 봉인된 직물 사례는 지문에 나오지만, 주장을 뒷받침하는 근거 하나일 뿐 전체 요지가 아니다.\nC(과잉확장): 지문은 '전근대 경제 전체'를 다루지 않는다. 또한 이익이 해악보다 컸다는 비교 판단이나 '증명했다'는 표현도 지문 범위를 넘어선다. Marsh는 기존 견해가 한 측면을 놓쳤다고 말할 뿐이다.\nD(범위 혼합 및 왜곡): 봉인이라는 세부사실에 Marsh가 수정하려는 기존 카르텔 관점을 잘못 결합했다. 지문에서 봉인은 진입 제한 수단이 아니라 품질 인증 수단이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "scope_calibration",
+     "structural_sequence_integration"
+    ],
+    "note": "지문은 기존 견해(카르텔) → Marsh의 수정 주장(품질 인증) → 브뤼헤 봉인 사례 → 양보(경쟁 제한 인정)+설명적 결론(원거리 상인의 선호)이라는 4단 구조를 갖는다. 정답 A는 양보·핵심 주장·설명 대상을 모두 포괄하는 적절한 범위로 진술되어 있고, 직접 검산 결과 옳다. B는 사례만 취한 과잉축소, C는 '전근대 경제 전체'·'소비자 순이익'·'demonstrates'로 범위와 확실성을 넘어선 과잉확장, D는 봉인이라는 세부를 Marsh가 반박하는 관점과 잘못 결합한 왜곡으로, 세 오답 모두 기능이 분명하다. 해설은 정답과 논리적으로 일치하며 모순이 없다. 난이도 면에서는 양보 구조와 인과적 설명(왜 원거리 상인이 길드 회원을 선호했는가)을 통합해야 하고, D처럼 세부사실을 잘못된 논지에 붙인 매력적 오답이 있어 전형적 medium보다 추가 사고를 요구한다고 판단한다. 다만 hard 특성 중 dual_source나 역설적 함의는 없어 hard 상한선에서는 다소 보수적인 문항이다. Lena Marsh는 가상의 학자로 보이며 브뤼헤 직물 봉인 관행은 역사적으로 그럴듯하여 사실 오류로 볼 사항은 없다."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답과 해설은 정확하고 레시피 4개 항목을 모두 충족함. 다만 전형적인 '기존 견해 → 수정 주장 → 사례 → 양보' 구조라 요지를 찾기 쉬움. 오답도 B는 사례만 옮긴 과잉축소, C는 'throughout premodern'·'demonstrates'가 들어간 과잉확장, D는 기존 견해를 그대로 가져온 왜곡이라 표지가 뚜렷해 금방 걸러짐. 정답 A가 가장 길고 양보절까지 담고 있어 형태만 보고도 고를 수 있음. scope_calibration 수준은 medium 문항과 다르지 않고, 역설 인식·두 출처 종합·부분 근거 판단 같은 hard 특성은 없음. 난이도는 어휘와 문장 길이에서만 나옴.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-inferences-00",
+  "runId": "batch2-D-cross",
+  "skill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_theory_direction_reversal",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Ecologists studying seed dispersal have proposed that the distance a plant's seeds travel depends on how long those seeds remain inside the animals that eat them: the longer the gut retention time, the farther from the parent plant the seeds are likely to be deposited, because the animal has more time to move before excreting them. Gut retention time, in turn, tends to scale with body size, since larger frugivores have longer digestive tracts. On the island of Mauritius, a fruit tree once eaten mainly by a large, now-extinct tortoise is today eaten almost exclusively by a small introduced bird whose gut retention time is roughly one-tenth that of the tortoise, though the bird forages over a similar area each day. If the ecologists' proposal is correct, it follows that the tree's seeds today are likely ______\n\nWhich choice most logically completes the text?",
+   "stimulus": "Ecologists studying seed dispersal have proposed that the distance a plant's seeds travel depends on how long those seeds remain inside the animals that eat them: the longer the gut retention time, the farther from the parent plant the seeds are likely to be deposited, because the animal has more time to move before excreting them. Gut retention time, in turn, tends to scale with body size, since larger frugivores have longer digestive tracts. On the island of Mauritius, a fruit tree once eaten mainly by a large, now-extinct tortoise is today eaten almost exclusively by a small introduced bird whose gut retention time is roughly one-tenth that of the tortoise, though the bird forages over a similar area each day. If the ecologists' proposal is correct, it follows that the tree's seeds today are likely ______",
+   "question": "Which choice most logically completes the text?",
+   "options": [
+    "deposited closer to parent trees, on average, than they were when the tortoise was the tree's main consumer.",
+    "carried to more distant sites than before, since the bird's quicker digestion lets it eat and disperse more fruit each day.",
+    "responsible for shortening the gut retention time of the bird, since seeds that must travel less far pass through the gut more rapidly.",
+    "dispersed about as far as they were before, since the bird and the tortoise forage over areas of similar size."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 이론에 따르면 체내 체류 시간이 길수록 씨앗이 더 멀리 퍼진다. 지금 이 나무의 열매를 먹는 새는 체류 시간이 거북의 약 1/10이므로, 이론을 그대로 적용하면 씨앗은 예전보다 어미나무 가까이에 떨어질 것이다.\nB(방향 반전): 소화가 빠르다는 점을 오히려 더 멀리 퍼지는 근거로 삼아 관계의 방향을 뒤집었다. 하루에 먹는 열매의 양은 이론에 없는 요소이기도 하다.\nC(인과 전도): 이론에서는 체류 시간이 원인이고 분산 거리가 결과인데, C는 분산 거리가 체류 시간을 결정한다고 원인과 결과를 바꿨다.\nD(무관한 제3요인): 지문에 채식 범위가 비슷하다는 정보가 나오지만, 이론이 분산 거리를 설명하는 변수는 체내 체류 시간이다. 활동 범위가 같아도 체류 시간이 짧으면 씨앗이 배출되기 전까지 이동하는 시간이 줄어드므로 분산 거리가 같다고 결론 내릴 수 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "theory_to_case_application",
+     "evidence_sufficiency_evaluation"
+    ],
+    "note": "이론(체류 시간↑→분산 거리↑)이 명시되고, 새 사례(거북→새, 체류 시간 1/10)에 적용하는 구조가 명확함. A가 이론 방향을 그대로 유지한 유일한 결론. B는 방향 반전(+이론 외 요소인 섭취량 도입), C는 인과 전도, D는 지문에 제시된 '유사한 채식 범위'라는 제3 정보를 미끼로 사용해 이론의 핵심 변수를 무시하게 유도하는 함정으로, 단순 방향 확인 이상의 증거 적합성 판단을 요구함. 형식·길이·문체 모두 디지털 SAT 기준에 부합하며 해설도 정답을 정확히 뒷받침함."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "theory_to_case_application"
+    ],
+    "note": "이론 적용 방향이 명확하다. D의 '비슷한 채식 범위'라는 방해 요소 때문에, 새가 비슷한 범위를 돌아다녀도 배출 전 이동 시간이 줄어든다는 점을 생각해야 해서 medium보다 사고가 한 단계 더 필요하다. 다만 body size 문장은 쓰이지 않는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-words_in_context-01",
+  "runId": "batch2-D-cross",
+  "skill": "words_in_context",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "words_in_context_negation_polarity",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Earlier scholars treated the many scraped-out entries in the account books of fourteenth-century Florentine wool merchants as proof of sloppy bookkeeping. Historian Lucia Ferrante disagrees. Comparing the erasures with surviving shipping receipts, she found that nearly every correction brought a figure into line with a later, more accurate record of weight or price. The erasures, she concludes, are not a sign of negligence but rather evidence of the clerks' ______.\n\nWhich choice completes the text with the most logical and precise word or phrase?",
+   "stimulus": "Earlier scholars treated the many scraped-out entries in the account books of fourteenth-century Florentine wool merchants as proof of sloppy bookkeeping. Historian Lucia Ferrante disagrees. Comparing the erasures with surviving shipping receipts, she found that nearly every correction brought a figure into line with a later, more accurate record of weight or price. The erasures, she concludes, are not a sign of negligence but rather evidence of the clerks' ______.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "carelessness",
+    "duplicity",
+    "scurrility",
+    "scrupulousness"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "정답 D(scrupulousness, 꼼꼼함): 'not a sign of negligence but rather ~' 구조라서 빈칸에는 부정된 '부주의(negligence)'와 반대되는 말이 들어가야 한다. 지우고 고친 기록이 거의 모두 나중의 더 정확한 기록과 맞아떨어졌다는 근거와도 일치한다.\nA(carelessness, 부주의): 부정어 not을 무시하고 negligence와 같은 뜻의 단어를 고른 오답이다. 이는 초기 학자들의 견해이고, Ferrante는 바로 이 견해를 반박한다.\nB(duplicity, 속임수): 부정 구조를 한 번 더 뒤집어 읽은 오답이다. '부주의는 아니다 → 의도적이다 → 그렇다면 나쁜 의도'로 해석해 다시 부정적인 의미로 돌아간 것이다. 하지만 수정된 내용이 정확한 기록과 일치했다는 점을 보면 사기라는 해석은 성립하지 않는다.\nC(scurrility, 상스러운 욕설): 철자와 발음이 정답과 비슷할 뿐, 대조 구조나 문맥과는 관계없는 단어다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "reversed_relation_inference",
+     "negation_layer_processing",
+     "multi_evidence_integration"
+    ],
+    "note": "'not a sign of negligence but rather ~' 구조가 마지막 문장에 명확히 있고, 정답 scrupulousness는 negligence의 반대 극성으로 검산상 옳다. A(carelessness)는 부정어 무시 오답, B(duplicity)는 '부주의가 아니면 고의적 → 사기'로 이중 반전한 오답이며, 수정치가 더 정확한 기록과 일치했다는 증거로 배제되므로 증거 통합이 요구된다. C는 형태 유사 오답. 초기 학자 견해→Ferrante 반박 구조로 관계 역전 추론이 필요하고, 해설도 정답을 정확히 뒷받침하며 모순 없음. 가상의 역사가·사료 설정으로 사실 오류나 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "negation_layer_processing",
+     "reversed_relation_inference"
+    ],
+    "note": "초기 학자들의 통념(부주의)을 새 증거(선적 영수증과의 대조)가 뒤집는 구조와 not…but rather 구조가 함께 들어 있다. 정답 D는 부정된 개념과 반대 극성이고 증거와도 들어맞는다. A는 부정어를 무시한 오답, B는 극성을 이중으로 뒤집은 오답, C는 철자가 비슷한 함정이다. 빈칸이 있는 문장만으로도 극성을 판단할 수 있어 난이도가 hard 경계선에 있지만, 어휘 수준(scrupulousness, scurrility)과 B 함정 덕분에 medium보다는 어렵다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-words_in_context-02",
+  "runId": "batch2-D-cross",
+  "skill": "words_in_context",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "words_in_context_stage_shift",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, historians of medieval Iceland treated the sagas' accounts of regional legal assemblies as largely literary invention, pointing out that the stories were written down roughly two centuries after the events they describe. Archaeologist Hildur Magnúsdóttir, however, considers this skepticism ______: her excavations at several assembly sites have uncovered turf booth foundations whose number and arrangement closely match the sagas' descriptions, suggesting that the saga authors drew on genuine local knowledge.\n\nWhich choice completes the text with the most logical and precise word or phrase?",
+   "stimulus": "For decades, historians of medieval Iceland treated the sagas' accounts of regional legal assemblies as largely literary invention, pointing out that the stories were written down roughly two centuries after the events they describe. Archaeologist Hildur Magnúsdóttir, however, considers this skepticism ______: her excavations at several assembly sites have uncovered turf booth foundations whose number and arrangement closely match the sagas' descriptions, suggesting that the saga authors drew on genuine local knowledge.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "entrenched",
+    "familiar",
+    "unwarranted",
+    "baselessly"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "지문은 두 단계로 되어 있다. 앞 단계는 역사학자들의 기존 회의론을 소개하고, 'however' 뒤의 두 번째 단계는 Magnúsdóttir의 반박이다. 콜론 뒤의 근거를 보면, 발굴된 부스 유적의 수와 배치가 사가의 묘사와 일치한다. 따라서 그녀는 그 회의론이 '근거가 없다'고 판단한 것이므로 정답은 C(unwarranted)이다. A(entrenched, 뿌리 깊은)는 '수십 년 동안'이라는 첫 단계의 묘사에는 맞는다. 하지만 오래 이어진 견해라는 말일 뿐, 콜론 뒤의 근거가 뒷받침하는 반박의 뜻이 없다. B(familiar, 익숙한)는 중립적인 평가여서 반박이라는 기능도, 근거와의 연결도 드러내지 못한다. D(baselessly)는 '근거 없이'라는 비슷한 뜻을 담고 있지만 부사이다. 'considers this skepticism ___' 구조에서 목적격 보어 자리에는 형용사가 와야 하므로 문법적으로 들어갈 수 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "reversed_relation_inference",
+     "discourse_stage_structuring",
+     "multi_evidence_integration"
+    ],
+    "note": "지문이 '역사학자들의 회의론(수십 년, 2세기 후 기록)' → 'however + 고고학자의 반박(콜론 뒤 발굴 증거)'의 두 단계로 명확히 구분되며, 빈칸은 두 번째 단계 시작부의 'considers this skepticism ___' 목적격 보어 자리에 위치한다. 콜론 뒤 증거(부스 유적의 수·배치가 사가 묘사와 일치 → 사가 저자가 실제 지역 지식에 의거)를 종합하면 회의론이 '근거 없다(unwarranted)'는 판단이 논리적으로 도출되어 정답 C가 유일하게 성립한다. A entrenched는 'for decades'라는 첫 단계 단서에 끌리는 오답, B familiar는 중립적 평가로 반박 기능이 없음, D baselessly는 의미 유사하나 부사로 보어 자리에 부적합하여 체크리스트 4·5를 충족한다. 해설은 정답과 오답 배제 근거를 정확히 뒷받침하며 모순 없음. 가공의 인물·발굴이지만 중세 아이슬란드 사가·의회 유적·잔디 부스 등 배경은 사실과 충돌하지 않음. 난이도는 'however'로 인한 관계 역전 파악, 두 서술 단계 구조화, 콜론 뒤 증거와 첫 단계 논거의 종합에서 오므로 단순 복잡성이 아닌 hard 특성을 실제로 요구한다."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답은 명확하다. 다만 'however + 콜론 뒤 반증 근거'라는 전형적인 구조여서 medium 수준의 반박 인식만으로 풀린다. D는 품사 때문에 바로 소거되고, A와 B는 평가 기능이 약해 쉽게 걸러진다. 통념 역전 구조는 있지만 표면적인 대조 단서가 너무 뚜렷해서 hard 수준의 추가 추론이 필요하지 않다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-rhetorical_synthesis-00",
+  "runId": "batch2-D-cross",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "rhetorical_synthesis_dual_fact_merge",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Bioluminescence is light produced by a chemical reaction inside a living organism.\n- The firefly squid (Watasenia scintillans) lives off the coast of Japan.\n- It uses light-producing organs on its underside to match the faint sunlight coming from above, hiding its silhouette from predators below.\n- The anglerfish Melanocetus johnsonii lives in the deep ocean.\n- It uses a glowing lure dangling from its head to attract small prey toward its mouth.\n\nThe student wants to contrast the purposes for which the two animals use bioluminescence. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Bioluminescence is light produced by a chemical reaction inside a living organism.\n- The firefly squid (Watasenia scintillans) lives off the coast of Japan.\n- It uses light-producing organs on its underside to match the faint sunlight coming from above, hiding its silhouette from predators below.\n- The anglerfish Melanocetus johnsonii lives in the deep ocean.\n- It uses a glowing lure dangling from its head to attract small prey toward its mouth.",
+   "question": "The student wants to contrast the purposes for which the two animals use bioluminescence. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Whereas the firefly squid glows to conceal itself from predators, the anglerfish Melanocetus johnsonii glows to draw prey close.",
+    "The firefly squid, which lives off the coast of Japan, uses light-producing organs on its underside to hide its silhouette from predators below.",
+    "The firefly squid lives off the coast of Japan, while the anglerfish Melanocetus johnsonii lives in the deep ocean.",
+    "Whereas the firefly squid glows to conceal itself from predators, the anglerfish Melanocetus johnsonii glows both to draw prey close and to signal to potential mates."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 오징어는 포식자로부터 몸을 숨기려고, 아귀는 먹이를 끌어들이려고 빛을 낸다는 두 사실을 'Whereas'로 이어서 빛을 내는 목적을 대비한다.\nB: 오징어의 목적만 담고 아귀는 빠져 있어서 대비가 되지 않는다. 목표를 절반만 이룬 것이다.\nC: 두 동물을 함께 다루긴 하지만 사는 곳을 대비할 뿐, 목표인 발광의 목적은 비교하지 않는다.\nD: 겉모습은 A와 비슷하지만, 짝에게 신호를 보낸다는 내용은 노트에 없다. 노트에 없는 정보를 덧붙여 사실을 왜곡했다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "purpose_scope_calibration",
+     "multi_source_goal_integration"
+    ],
+    "note": "정답 A는 노트 3·5의 발광 목적(은신 vs 유인)을 'Whereas'로 정확히 대비하며 노트와 일치. B는 오징어만(한쪽), C는 두 동물을 다루지만 거주지를 대비하여 목표 차원 불일치, D는 '짝에게 신호'라는 노트 외 정보 추가로 오답. 해설은 각 선택지 판정과 정확히 부합. 사실 검증: 반딧불오징어(일본 연안, 하부 발광기관에 의한 counter-illumination) 및 Melanocetus johnsonii(심해, 발광 루어) 모두 실제 사실과 부합. hard 적합성: C(같은 '대비' 형식이나 잘못된 대비 차원)와 D(정답과 거의 동일하나 노트 외 정보 첨가)가 근접 오답으로 목표 범위 판별과 노트 대조를 동시에 요구하여 전형적 medium보다 다소 높은 변별을 요구하나, 구조 자체는 표준적이어서 hard 상한에 걸친 경계 수준으로 판단."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "전형적인 medium 수준 대비 문항이다. 정답은 'Whereas'로 목적을 대비하는 유일한 선택지라 바로 찾을 수 있다. 오답도 한쪽만 담기(B), 엉뚱한 속성 대비(C), 노트에 없는 정보 추가(D)로, 거짓 대비나 확실성 판별, 범위 조정 같은 hard 요소가 없다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-rhetorical_synthesis-02",
+  "runId": "batch2-D-cross",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "rhetorical_synthesis_certainty_level_choice",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Ecologist Mara Ellison studied Pacific tree frogs living in 14 ponds in Oregon.\n- Using DNA analysis, she confirmed that the frogs in all 14 ponds belong to a single interbreeding population.\n- She also found that, on average, ponds with denser cattail growth had higher tadpole survival rates.\n- Ellison cautions that this correlation may reflect other factors, such as water temperature, and does not show that cattails cause higher survival.\n- In an earlier, separate experiment, Ellison showed that removing invasive bullfrogs from ponds increased tree frog survival.\n\nThe student wants to present both findings of Ellison's 14-pond study, conveying an accurate level of certainty for each. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Ecologist Mara Ellison studied Pacific tree frogs living in 14 ponds in Oregon.\n- Using DNA analysis, she confirmed that the frogs in all 14 ponds belong to a single interbreeding population.\n- She also found that, on average, ponds with denser cattail growth had higher tadpole survival rates.\n- Ellison cautions that this correlation may reflect other factors, such as water temperature, and does not show that cattails cause higher survival.\n- In an earlier, separate experiment, Ellison showed that removing invasive bullfrogs from ponds increased tree frog survival.",
+   "question": "The student wants to present both findings of Ellison's 14-pond study, conveying an accurate level of certainty for each. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Ellison's DNA analysis confirmed that the frogs in all 14 ponds form a single population, and her data showed that dense cattail growth increases tadpole survival.",
+    "Ellison's research suggests that the frogs in the 14 ponds may form a single population and that dense cattail growth might be associated with higher tadpole survival.",
+    "Ellison's DNA analysis confirmed that the frogs in all 14 ponds form a single population, and her data suggest that removing invasive bullfrogs may be linked to higher tree frog survival.",
+    "Ellison's DNA analysis confirmed that the frogs in all 14 ponds form a single population, and her data indicate that ponds with dense cattails tend to have higher tadpole survival, though cattails may not be the cause."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "정답 D: DNA로 확인된 단일 개체군 사실은 확정적으로, 부들(cattail)과 올챙이 생존율의 관계는 인과가 아닌 상관으로 신중하게 제시해 두 결과의 확실성 수준을 모두 정확히 반영한다. A: 상관관계를 '증가시킨다(increases)'는 인과로 과장했다. 노트에서 Ellison은 인과를 보여 주지 않는다고 명시했다. B: 부들 결과의 신중한 표현은 맞지만, DNA로 '확인된' 단일 개체군 사실까지 'may'로 불필요하게 약화했다. C: 확실성 표현은 그럴듯하지만, 14개 연못 연구가 아닌 별도의 이전 실험(황소개구리 제거)과 혼동했다. 게다가 그 실험 결과는 원래 확정적인 것이었다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "노트에 DNA 확정 진술(confirmed)과 상관관계 잠정 진술(correlation, 인과 아님 경고)이 공존하며, 별도 실험(황소개구리)이 범위 외 정보로 기능한다. D는 확정 사실은 confirmed로, 상관은 tend to/may not be the cause로 정확히 반영. A는 increases로 인과 과장(과잉 일반화), B는 확정된 DNA 결과를 may로 과도 축소, C는 14개 연못 연구가 아닌 별도 실험을 끌어와 목표 범위 위반(추가로 확정적 실험 결과를 약화). 해설은 각 오답 사유를 정확히 짚고 모순 없음. 두 결과의 확실성 수준을 각각 판별하고 연구 범위를 걸러내야 하므로 medium 이상의 사고 요구."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "claim_certainty_discrimination",
+     "multi_source_goal_integration",
+     "purpose_scope_calibration"
+    ],
+    "note": "두 결과의 확실성 수준이 다르고, 선택지마다 과장(A), 과소(B), 범위 이탈(C) 오류가 하나씩 들어 있어 잘 구분된다. D가 유일하게 두 결과를 각각 알맞은 확실성으로 제시한다. 다만 오답의 확실성 오류가 표지어(increases/may)로 비교적 드러나 있어 hard 치고는 중간 이상 수준이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-rhetorical_synthesis-03",
+  "runId": "batch2-D-cross",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "rhetorical_synthesis_dual_fact_merge",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Tardigrades are microscopic animals found in mosses, lichens, and ocean sediments.\n- When their habitat dries out, tardigrades can enter a dormant state called a \"tun,\" losing nearly all their body water.\n- In the tun state, the tardigrade species Ramazzottius varieornatus has survived exposure to radiation doses of about 4,000 grays.\n- Rotifers of the class Bdelloidea are microscopic animals that live in freshwater ponds and damp soil.\n- Bdelloid rotifers can also survive complete drying, and one individual revived after being frozen in Siberian permafrost for roughly 24,000 years.\n\nThe student wants to emphasize a similarity between tardigrades and bdelloid rotifers. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Tardigrades are microscopic animals found in mosses, lichens, and ocean sediments.\n- When their habitat dries out, tardigrades can enter a dormant state called a \"tun,\" losing nearly all their body water.\n- In the tun state, the tardigrade species Ramazzottius varieornatus has survived exposure to radiation doses of about 4,000 grays.\n- Rotifers of the class Bdelloidea are microscopic animals that live in freshwater ponds and damp soil.\n- Bdelloid rotifers can also survive complete drying, and one individual revived after being frozen in Siberian permafrost for roughly 24,000 years.",
+   "question": "The student wants to emphasize a similarity between tardigrades and bdelloid rotifers. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Like tardigrades, which can lose nearly all their body water by entering a dormant \"tun\" state, bdelloid rotifers can survive complete drying.",
+    "Bdelloid rotifers can survive complete drying, and one individual revived after roughly 24,000 years frozen in Siberian permafrost.",
+    "While tardigrades live in mosses, lichens, and ocean sediments, bdelloid rotifers live in freshwater ponds and damp soil.",
+    "Both tardigrades and bdelloid rotifers can survive radiation doses of about 4,000 grays, an ability they share because of their dormant states."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답은 A입니다. 목표는 두 생물의 '공통점'을 강조하는 것입니다. A는 완보동물이 휴면 상태 '툰(tun)'에 들어가 체내 수분을 거의 다 잃고도 살아남는다는 사실과, 담륜충도 완전히 말라도 살아남는다는 사실을 'Like'로 이어서 건조에 견디는 능력이 같다는 점을 분명히 보여 줍니다.\nB(한쪽 사실만 담음): 담륜충에 관한 정보만 있고 완보동물은 나오지 않습니다. 2만 4천 년 만에 되살아났다는 인상적인 수치 때문에 끌리기 쉽지만, 비교 대상이 없으니 공통점을 강조할 수 없습니다.\nC(두 사실을 합쳤지만 목표와 맞지 않음): 두 동물을 모두 다루지만 'While'로 서식지가 다르다는 점을 대조합니다. 목표와 정반대인 차이점을 강조하는 문장입니다.\nD(노트에 없는 내용 추가): 노트에서 약 4,000그레이의 방사선을 견뎠다고 한 것은 완보동물의 한 종뿐입니다. 담륜충이 방사선을 견딘다는 내용도, 그 능력이 휴면 상태 때문이라는 인과관계도 노트에는 없습니다. 공통점 형식을 갖췄지만 사실을 왜곡한 문장입니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_source_goal_integration",
+     "relation_direction_judgment",
+     "claim_certainty_discrimination"
+    ],
+    "note": "노트 5개 사실 독립적. 정답 A는 완보동물의 툰 상태(체수분 상실)와 담륜충의 완전 건조 생존을 'Like'로 결합해 공통점을 정확히 강조. B는 담륜충 한쪽만(체크 4), C는 두 대상 모두 포함하나 'While'로 서식지 차이를 대조해 목표 방향과 반대(관계 방향 판별 요구), D는 담륜충의 방사선 내성과 휴면 상태 인과를 노트 밖에서 추가·과잉 일반화(체크 5). 해설이 각 오답 유형을 정확히 설명하며 모순 없음. R. varieornatus ~4,000 Gy 내성, 시베리아 영구동토 약 24,000년 담륜충 회생(2021 보고)은 사실과 부합. 유사 형식(C, D)의 오답이 목표 부합 여부와 사실 충실도를 동시에 검토하게 하므로 medium 이상의 사고를 요구함."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답은 타당하다. 다만 전형적인 medium 수준 구조다. B는 한쪽 사실만 담았고, C는 대조를 뜻하는 'While'이 쓰였으며, D는 노트에 없는 내용을 넣은 것이 한눈에 드러난다. 'Like'나 'Both' 같은 표지어만 보고도 정답을 고를 수 있다. 확실성 수준이나 범위를 따져야 하는 매력적인 오답이 없어서 hard의 추가 사고를 요구하지 않는다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-transitions-00",
+  "runId": "batch2-D-cross",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "transitions_purpose_filter_sentence",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In 2019, hydrologist Tomás Ferreira built dozens of low stone check dams across eroded gullies in northeastern Brazil. Within two years, the dams had trapped enough sediment for grasses to take root, and several local farmers began grazing cattle on the restored slopes. Ferreira, however, had designed the dams mainly to slow runoff so that more rainwater would soak into the aquifer below. ______ he judged the project's success not by how much vegetation returned but by changes in water levels in nearby wells.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "In 2019, hydrologist Tomás Ferreira built dozens of low stone check dams across eroded gullies in northeastern Brazil. Within two years, the dams had trapped enough sediment for grasses to take root, and several local farmers began grazing cattle on the restored slopes. Ferreira, however, had designed the dams mainly to slow runoff so that more rainwater would soak into the aquifer below. ______ he judged the project's success not by how much vegetation returned but by changes in water levels in nearby wells.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "In addition,",
+    "Nonetheless,",
+    "For example,",
+    "Accordingly,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "정답 D (Accordingly,): 셋째 문장은 Ferreira의 원래 의도(빗물을 대수층으로 스며들게 하는 것)를 밝힌다. 마지막 문장에서 그가 식생이 아니라 우물 수위로 성공을 판단한 것은 바로 이 의도에서 나온 결과이므로, '그에 따라'라는 결과 관계의 전환어가 맞다. 핵심은 눈에 보이는 결과(풀, 방목)가 아니라 의도라는 점이다.\nA (In addition,): 둘째 문장에 나열된 부수적 결과(풀의 성장, 소 방목)에 또 하나의 사실을 덧붙이는 것처럼 읽을 때 고르게 된다. 하지만 마지막 문장은 새로 추가된 정보가 아니라 의도에서 나온 결과다.\nB (Nonetheless,): 마지막 문장에 'not by vegetation'이라는 대조적 표현이 있어서 방향은 맞아 보인다. 그러나 대조는 이미 셋째 문장의 however가 처리했다. 셋째 문장(의도)과 마지막 문장(평가 기준)은 서로 이어지는 관계이므로 양보 관계는 틀리다.\nC (For example,): 마지막 문장은 앞 내용의 사례가 아니다. 예시 관계는 지문 흐름과 동떨어져 있다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "goal_vs_content_discrimination",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "지문은 부수적 결과(식생 회복·방목)와 설계 목적(대수층 충전)을 분리 제시하고, 마지막 문장은 목적에서 도출되는 평가 기준이므로 'Accordingly'가 유일하게 성립한다. 검산: 셋째 문장 however가 이미 대조를 처리했고, 마지막 문장은 그 목적의 논리적 귀결이므로 B(양보)는 방향 오류, A는 둘째 문장의 나열식 부수 결과에 이어 붙일 때 유혹되는 오답, C는 예시 관계 아님. 'not by … but by …' 표면 대조가 B를 유혹하게 만들어 표면 대조 이상의 인과 관계 식별을 요구하며, 목적 vs 가시적 결과의 구분이 필요해 medium 이상. 해설은 정답 및 각 오답 배제 근거를 정확히 뒷받침하며 모순 없음. 가상의 인물·사건이지만 사실 오류나 저작권 문제 없음. 문장 길이·어휘도 적정."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "goal_vs_content_discrimination"
+    ],
+    "note": "부수적 결과(풀, 방목)와 본래 목적(대수층 함양)을 구분해야 한다. 앞 문장의 however와 뒤 문장의 not-by 대조 표현이 B를 매력적인 오답으로 만든다. 정답은 유일하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-transitions-01",
+  "runId": "batch2-D-cross",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "transitions_contradictory_evidence_synthesis",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Field recordings show that great tits living in noisy city parks sing noticeably higher-pitched songs than great tits living in quiet forests, a difference some researchers initially took as evidence that urban and forest populations had begun to diverge genetically. However, when biologist Hans Slabbekoorn's team raised chicks from both kinds of populations in the same quiet aviary, the birds grew up singing songs that were indistinguishable in pitch. ______ these findings suggest that the higher pitch of city songs is not an inherited trait but an adjustment individual birds make in response to the noise around them.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Field recordings show that great tits living in noisy city parks sing noticeably higher-pitched songs than great tits living in quiet forests, a difference some researchers initially took as evidence that urban and forest populations had begun to diverge genetically. However, when biologist Hans Slabbekoorn's team raised chicks from both kinds of populations in the same quiet aviary, the birds grew up singing songs that were indistinguishable in pitch. ______ these findings suggest that the higher pitch of city songs is not an inherited trait but an adjustment individual birds make in response to the noise around them.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "By contrast,",
+    "Specifically,",
+    "Taken together,",
+    "Meanwhile,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "정답 C: 야외에서는 도시 새가 더 높은 음으로 노래한다는 관찰과, 같은 조용한 환경에서 키우면 음높이가 똑같아진다는 관찰은 언뜻 서로 맞지 않아 보인다. 두 관찰을 함께 놓고 봐야 '음높이 차이는 유전이 아니라 소음에 따라 조정하는 것'이라는 결론이 나온다. 그러므로 두 증거를 종합해 결론을 끌어낸다는 뜻의 'Taken together,'가 가장 논리적이다. \nA 'By contrast,'는 오답이다. 두 관찰이 상반돼 보인다는 점에만 반응해 단순 대조로 처리한 것이다. 마지막 문장은 앞 문장과 대조되는 내용이 아니라 두 관찰을 통합한 결론이다. \nB 'Specifically,'는 오답이다. 두 번째 관찰(사육장 실험)만 이어받아 그 내용을 구체화하는 전환어이다. 마지막 문장은 사육장 결과의 세부 내용이 아니라 야외 관찰과 실험 결과를 모두 반영한 일반 결론이다. \nD 'Meanwhile,'은 오답이다. 동시에 일어나는 별개의 사건이나 화제 전환을 나타내므로, 결론을 이끄는 문장의 역할과 관련이 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "정답 C 검증: 마지막 문장은 야외 관찰(도시 새가 고음)과 사육 실험(같은 환경에서는 동일 음높이)을 모두 전제로 '유전이 아닌 소음 적응'이라는 결론을 도출하므로 'Taken together,'가 유일하게 논리적. A는 'However'로 이미 대조가 처리된 뒤 결론 문장을 다시 대조로 오독하게 만드는 함정, B는 사육 실험만 구체화하는 것으로 오독하게 하는 함정으로 레시피 3·4 충족. 'these findings'가 정답 단서를 다소 강하게 제공하는 점은 있으나, 'However' 직후 대조 구조에 이끌려 A를 고를 유혹이 있어 표면적 대조와 종합 결론을 구별하는 추가 사고를 요구함. Slabbekoorn의 실제 연구(2003, 도시 박새 고음)는 사실이지만 동일 사육장 양육 실험은 실제 보고와 정확히 일치하지 않을 수 있음—SAT식 가상 시나리오로 허용 범위이나 참고 요망."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답 C는 옳다. 레시피 항목은 모두 충족한다. 다만 빈칸 뒤 'these findings'라는 복수 표현이 종합의 신호 역할을 해서 정답이 거의 바로 드러난다. 'However'로 두 관찰의 대립도 이미 문장에 표시되어 있어 수험자가 직접 여러 단계를 추론할 필요가 적다. 전형적인 medium 수준이다. 'Specifically'도 'these findings'(복수)와 맞지 않아 쉽게 걸러진다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-boundaries-00",
+  "runId": "batch2-D-cross",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "boundaries_dangling_modifier_subject_matching",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the 1950s, glaciologist Fritz Loewe spent months measuring snow accumulation on the Greenland ice sheet, often in temperatures far below freezing. Trained originally as a meteorologist rather than as a field surveyor, ______ a method for estimating yearly snowfall from the layered density of shallow snow pits, an approach later adopted by polar research teams across several continents.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1950s, glaciologist Fritz Loewe spent months measuring snow accumulation on the Greenland ice sheet, often in temperatures far below freezing. Trained originally as a meteorologist rather than as a field surveyor, ______ a method for estimating yearly snowfall from the layered density of shallow snow pits, an approach later adopted by polar research teams across several continents.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "Loewe devised",
+    "Loewe's fieldwork produced",
+    "the Greenland ice sheet yielded",
+    "the snow pits revealed"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 분사구 'Trained originally as a meteorologist rather than as a field surveyor'는 기상학자로 교육받은 사람, 곧 Loewe를 가리킵니다. 그러니 주절의 주어도 Loewe여야 수식 관계가 맞습니다. 'Loewe devised a method'는 주어와 동사, 목적어를 모두 갖춘 완전한 문장입니다.\nB 오답: Loewe's fieldwork는 사람이 아니라 그 사람의 활동이나 결과물입니다. Loewe와 관련된 명사라서 맞는 것처럼 보이지만 범주가 다릅니다. 현장 연구(fieldwork)가 기상학자로 교육받았을 수는 없으니 수식어가 허공에 뜬 현수 수식어가 됩니다.\nC 오답: the Greenland ice sheet는 지문에 나오는 명사이지만 분사구와는 관계가 없습니다. 빙상이 교육을 받을 수는 없습니다.\nD 오답: the snow pits는 복수 주어이고 동사 revealed와 쓰면 문법적으로 완전한 문장이 됩니다. 하지만 눈 구덩이는 기상학자로 교육받을 수 있는 대상이 아닙니다. 게다가 revealed a method에서 method를 만든 주체도 흐려집니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Trained originally as a meteorologist...'의 의미적 대상은 사람(Loewe)이며 A만 이에 부합. B는 Loewe의 소유격 명사(fieldwork)로 의미적 근접성을 이용한 매력적 오답, C·D는 사물 주어. 네 선택지 모두 과거시제·수일치 문제가 없어 수일치만으로는 판별 불가하며, 오답 3개 모두 문법적으로 완전한 문장. 해설은 정답 및 각 오답 이유를 정확히 뒷받침함. Fritz Loewe 관련 서술은 세부가 일부 일반화되어 있으나 SAT 지문 관례상 명백한 사실 오류로 보기 어려움."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "B(Loewe's fieldwork)는 사람과 관련된 소유격 명사를 쓴 함정 선택지로, 수식 대상의 범주가 사람이 아니라 활동이다. 네 선택지 모두 수일치에 문제가 없어 수일치만으로는 정답을 고를 수 없다. 사실관계 확인 필요: Loewe가 기상학자로 교육받은 점은 맞지만, '1950년대 그린란드'라는 시기·장소와 적설 구덩이 밀도법을 Loewe가 고안했다는 부분은 역사적으로 확실하지 않다. 적설 구덩이 층서 연구는 흔히 Benson의 업적으로 알려져 있다. 다만 확실한 오류로 단정할 수 없어 factual_error는 false로 두었다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-form_structure_sense-00",
+  "runId": "batch2-D-cross",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the 1950s, the Yoruba textile center of Abeokuta drew traders from across West Africa, many of whom sought the indigo-dyed cloth known as adire. Working with cassava-starch paste as a resist, ______ The resulting cloth, deep blue with pale geometric motifs, became one of the region's most recognizable exports.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1950s, the Yoruba textile center of Abeokuta drew traders from across West Africa, many of whom sought the indigo-dyed cloth known as adire. Working with cassava-starch paste as a resist, ______ The resulting cloth, deep blue with pale geometric motifs, became one of the region's most recognizable exports.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "the paste's patterns, which dyers painted onto the fabric by hand, blocked the indigo from reaching certain areas of the cloth.",
+    "Abeokuta's markets were filled with fabric that local dyers had painted by hand with patterns designed to block the indigo from certain areas of the cloth.",
+    "the traders who bought the fabric admired how local dyers had painted patterns by hand to block the indigo from certain areas of the cloth.",
+    "local dyers painted patterns onto the fabric by hand, blocking the indigo from reaching certain areas of the cloth."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "정답 D: 분사구 \"Working with cassava-starch paste as a resist\"(카사바 전분 풀을 방염제로 사용하여 작업하면서)의 의미상 주어는 실제로 작업을 한 사람, 즉 local dyers이다. D는 이 행위자를 주절의 주어 자리에 두므로 수식 관계가 정확하다.\nA(오답): 수식어구와 표면적으로 가장 가까운 무생물 명사(the paste's patterns)를 주어로 삼았다. 무늬가 풀을 가지고 작업할 수는 없으므로 현수 수식어(dangling modifier)가 된다. dyers가 관계절 안에 들어가 있어 맞는 것처럼 보이는 함정이다.\nB(오답): 앞 문장에 배경으로 나온 명사(Abeokuta의 시장)를 주어로 삼았다. 시장은 풀을 가지고 작업하는 행위자가 아니다.\nC(오답): 사람 주어(the traders)라서 문법적으로 그럴듯해 보이지만, 앞 문장에서 상인들은 천을 사러 온 사람들이지 풀로 작업한 사람이 아니다. 실제 행위자인 dyers는 종속절 안에 숨어 있다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구 \"Working with cassava-starch paste as a resist\"의 의미상 주어는 local dyers이며 D만이 이를 주절 주어로 둠. A는 인접 무생물 명사(the paste's patterns)+관계절에 dyers 삽입, B는 배경 명사(markets), C는 사람 주어(traders)이나 문맥상 행위자가 아님. 네 선택지 모두 'dyers'가 등장해 단순 명사 탐색으로 풀 수 없고 문맥상 행위자 추적을 요구함. adire·Abeokuta·카사바 전분 방염(adire eleko)은 사실과 부합. 해설은 정답을 정확히 뒷받침하고 오답 각 함정을 정확히 설명함."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "D는 행위자(dyers)를 주절 주어로 둔 유일한 선택지다. C는 사람 주어이지만 앞 문장을 보면 traders는 구매자일 뿐이므로 문맥으로 걸러야 한다. A는 수식어에서 가장 가까운 명사(paste)를 쓰고 dyers를 관계절 안에 숨긴 함정이다. B는 배경 명사(시장)를 주어로 삼았다. 전형적인 현수 수식어 문항보다는 약간 더 어렵지만 추가 사고의 폭은 크지 않다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-form_structure_sense-01",
+  "runId": "batch2-D-cross",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, archaeologists assumed that the massive carved stone spheres of Costa Rica's Diquís Delta had been scattered across the landscape with no particular plan______ recent mapping of the original sites indicates that several groups of spheres were deliberately arranged in lines pointing toward the sunrise at the solstices.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "For decades, archaeologists assumed that the massive carved stone spheres of Costa Rica's Diquís Delta had been scattered across the landscape with no particular plan______ recent mapping of the original sites indicates that several groups of spheres were deliberately arranged in lines pointing toward the sunrise at the solstices.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; however,",
+    ",",
+    "; therefore,",
+    ", and however,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답은 A예요. 앞 절은 \"아무 계획 없이 흩어져 있었다\"는 예전의 가정이고, 뒤 절은 \"의도적으로 배열되었다\"는 새로운 증거예요. 따라서 두 절은 대조 관계예요. 두 독립절은 세미콜론으로 연결할 수 있고, 뒤에 대조의 접속부사 however와 콤마를 붙이면 논리와 문법이 모두 맞아요.\nB(콤마만 사용): 두 독립절을 콤마 하나로만 이었으므로 콤마 스플라이스예요.\nC(; therefore,): 구두점 구조는 맞지만 therefore는 인과를 나타내요. 새로운 증거는 예전 가정의 결과가 아니라 그 가정을 뒤집는 내용이므로 논리 관계가 반대예요.\nD(, and however,): 등위접속사 and와 접속부사 however가 겹쳐 있어요. and는 단순 나열을 뜻하므로 대조의 의미와도 부딪혀요.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "두 독립절(과거의 가정 vs. 최근 지도화 결과)의 대조 관계가 'For decades... assumed' / 'recent mapping... indicates' 및 'no particular plan' / 'deliberately arranged'의 의미 대립으로 접속어 없이 파악 가능. A는 세미콜론+접속부사+콤마로 형식·논리 모두 충족. B 콤마 스플라이스, C는 형식은 맞으나 인과(반대 논리), D는 and+however 중복 및 나열 의미 충돌로 각각 레시피 오답 유형에 정확히 대응. 해설의 판단 근거도 정답과 일치하며 모순 없음. 구두점 판단 전에 절 간 의미 관계를 먼저 판별해야 C를 배제할 수 있어 medium 수준의 단순 형식 문항을 넘어선다. Diquís 석구의 솔스티스 정렬 서술은 지문 내 주장('indicates')으로 제시되어 사실 오류로 보기 어렵다."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "정답과 해설은 옳다. 다만 \"For decades, archaeologists assumed\"와 \"recent mapping... indicates\"가 대조를 노골적으로 드러낸다. 게다가 오답 B·D는 형식만 봐도 탈락하고, C도 한 번만 봐도 논리 오류가 보여서 전형적인 medium 수준의 세미콜론+접속부사 문항에 그친다. 대조 신호를 약하게 하거나 맞는 구두점 구조를 여러 개 두는 식으로 추가 판단을 요구하는 장치가 없다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-form_structure_sense-02",
+  "runId": "batch2-D-cross",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "form_structure_sense_tense_consistency_across_quote",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In a 2019 interview, glassblower Rosa Delgado described the year she spent as an apprentice at a small studio on the Venetian island of Murano. \"Each morning I swept the furnace floor, sorted the broken cullet into bins by color, and ______ the masters shape vessels I was not yet allowed to touch,\" she said. Delgado notes that the routine still shapes how she trains her own students today.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In a 2019 interview, glassblower Rosa Delgado described the year she spent as an apprentice at a small studio on the Venetian island of Murano. \"Each morning I swept the furnace floor, sorted the broken cullet into bins by color, and ______ the masters shape vessels I was not yet allowed to touch,\" she said. Delgado notes that the routine still shapes how she trains her own students today.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "watched",
+    "have watched",
+    "was watching",
+    "watch"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A(watched): 인용문은 과거 도제 시절의 반복된 일과를 말하며, 주어 I를 공유하는 동사들이 swept, sorted, ___로 병렬 나열되어 있다. 따라서 세 번째 동사도 같은 단순 과거형 watched여야 시제와 형태가 모두 맞는다.\nB(have watched): 현재완료는 '과거의 끝난 한 해'(the year she spent, Each morning ... swept)라는 인용문의 과거 시점과 맞지 않는다. 인용문의 시제와 어긋나는 선택이다.\nC(was watching): 과거라는 시점은 맞지만, 병렬 항목 가운데 이것만 진행형이라서 swept, sorted와 형태가 어긋난다. 병렬 구조 안에서 한 항목만 형태를 바꾼 오답이다.\nD(watch): 인용문을 감싸는 문장(notes, shapes, trains today)의 현재 시제와는 맞아 보인다. 하지만 빈칸은 인용문 안의 과거 일과를 나열하는 자리이므로 전체 문맥과 맞지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "인용문 내 swept, sorted, watched 병렬 + 바깥 문장의 현재 시제(notes, shapes, trains)가 D를 유혹적으로 만드는 구조. A가 유일한 정답이며 B(현재완료), C(진행형 병렬 파괴), D(외부 문맥 시제) 모두 체크리스트 오답 유형에 정확히 대응. 해설에 모순 없음. 가상 인물·인용문으로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "tense_agreement_across_context"
+    ],
+    "note": "정답은 A(watched)가 맞습니다. 해설도 일관되고 레시피 요건도 모두 충족합니다. 다만 swept, sorted가 빈칸 바로 앞에 나란히 있어 단순 과거형이라는 게 바로 드러납니다. 그래서 전형적인 medium 수준의 병렬 시제 문항에 가깝습니다. D의 현재 시제 틀(notes/trains today)로 유도하는 장치는 약하고, 문맥 전체를 추적할 필요가 거의 없습니다. 참고로 지문 자체에 described/said와 notes의 시제 전환이 있지만 허용 범위입니다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-form_structure_sense-04",
+  "runId": "batch2-D-cross",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, archaeologists assumed that the stone terraces covering the hillsides of Peru's Colca Valley had been abandoned after the Spanish conquest and left to crumble. Soil cores collected by geographer Liza Mendoa tell a different story: pollen of maize and quinoa appears in unbroken layers from the fifteenth century to the present ______ farmers kept cultivating many of the terraces throughout the colonial period, even as the surrounding population declined sharply.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "For decades, archaeologists assumed that the stone terraces covering the hillsides of Peru's Colca Valley had been abandoned after the Spanish conquest and left to crumble. Soil cores collected by geographer Liza Mendoa tell a different story: pollen of maize and quinoa appears in unbroken layers from the fifteenth century to the present ______ farmers kept cultivating many of the terraces throughout the colonial period, even as the surrounding population declined sharply.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "day; evidently,",
+    "day, evidently",
+    "day; nevertheless,",
+    "day, and, evidently, therefore"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A. 앞 절(꽃가루가 현재까지 끊김 없이 나타남)은 근거이고 뒤 절(농민이 식민지 시기 내내 계단식 밭을 계속 경작함)은 그 근거에서 끌어낸 결론이다. 즉 두 절은 인과·추론 관계이며, 둘 다 독립절이므로 세미콜론 뒤에 추론을 나타내는 접속부사 'evidently,'를 붙여 잇는 것이 올바르다.\nB: 'evidently'는 접속부사라서 독립절 두 개를 콤마만으로 이을 수 없다. 콤마 스플라이스이다.\nC: 세미콜론과 접속부사를 쓴 형식은 맞지만, 'nevertheless'는 대조를 나타낸다. 뒤 절은 앞 절을 뒤집는 내용이 아니라 앞 절에서 나오는 결론이므로 논리 관계가 맞지 않는다.\nD: 등위접속사 'and'에 추론 부사 'evidently'와 'therefore'까지 겹쳐 연결어가 중복된다. 같은 기능을 하는 연결어를 한꺼번에 쌓은 불필요한 중복이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "A는 세미콜론+접속부사 'evidently,'로 독립절 두 개를 올바르게 연결하며, 앞 절(끊김 없는 꽃가루 층=증거)→뒤 절(계속 경작=추론된 결론)의 인과·추론 관계와 부합한다. B는 콤마 스플라이스, C는 형식은 맞으나 대조 접속부사로 논리 불일치, D는 and+evidently+therefore가 겹친 연결어 중복(문장도 부자연스러움). 지문 전체가 '기존 가정을 뒤집는' 대조 서술이어서 C의 'nevertheless'가 강한 유인 오답으로 작동하며, 절 간 관계를 문장 수준에서 정확히 판별해야 하므로 medium 이상의 사고를 요구한다. 사소한 점: D의 오류 근거가 '중복'인데 'and therefore' 자체는 표준 영어에서 허용되므로 'evidently'와의 겹침 및 어색한 위치가 핵심임을 해설이 조금 더 명확히 하면 좋겠으나 판정에는 영향 없음. 'Mendoa'는 가상 인명으로 보이며 사실 오류 아님."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "정답은 A로 타당하다. B는 콤마 스플라이스, C는 대조 관계라 논리가 맞지 않는다. D는 'and'+부사 두 개를 쌓은 구조인데, 'and therefore'가 문법적으로 허용되므로 명확한 접속사 중복 오류가 아니다. 대표적인 중복 오류는 'although ... but' 같은 형태다. 앞 절이 근거이고 뒤 절이 추론이라는 관계는 쉽게 드러나서, 전형적인 medium 수준의 전환어·구두점 문제를 넘어서는 추가 사고를 요구하지 않는다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_two_var-00",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_two_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_two_var_param_then_intersection",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the $xy$-plane, line $\\ell$ has equation $2x - 5y = 10$, and line $m$ has equation $kx + 2y = 54$, where $k$ is a constant. Line $m$ is perpendicular to line $\\ell$. The lines intersect at the point $(a, b)$.\n\nWhat is the value of $a + b$?",
+   "stimulus": "In the $xy$-plane, line $\\ell$ has equation $2x - 5y = 10$, and line $m$ has equation $kx + 2y = 54$, where $k$ is a constant. Line $m$ is perpendicular to line $\\ell$. The lines intersect at the point $(a, b)$.",
+   "question": "What is the value of $a + b$?",
+   "options": [
+    "$5$",
+    "$8$",
+    "$10$",
+    "$12$"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "1단계: 직선 $\\ell$을 정리하면 $y=\\frac{2}{5}x-2$이므로 기울기는 $\\frac{2}{5}$이다.\n2단계: 직선 $m$은 $y=-\\frac{k}{2}x+27$이므로 기울기는 $-\\frac{k}{2}$이다. 두 직선이 수직이므로 $\\frac{2}{5}\\cdot\\left(-\\frac{k}{2}\\right)=-1$, 즉 $k=5$이다.\n3단계: $5x+2y=54$와 $2x-5y=10$을 연립한다. 첫 식에 5를, 둘째 식에 2를 곱해 더하면 $25x+4x=270+20$, $29x=290$, $x=10$이다. 이를 대입하면 $20-5y=10$, $y=2$이다.\n4단계: $a+b=10+2=12$이다.\n오답 분석: $5$는 계수 $k$의 값만 구하고 멈춘 중간값이다. $8$은 합 대신 차 $a-b$를 계산한 값이다. $10$은 교점의 $x$좌표 $a$만 답한 부분 일치이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "implicit_condition_derivation",
+     "parameter_based_reasoning",
+     "multi_step_synthesis"
+    ],
+    "note": "검산: ℓ 기울기 2/5, m 기울기 -k/2, 수직조건 -k/5=-1 → k=5. 연립 5x+2y=54, 2x-5y=10 → x=10, y=2 (검증 50+4=54, 20-10=10). a+b=12로 정답 D 옳음. 해설 계산 모두 정확, 오답 분석도 합리적(k=5, a-b=8, a=10). 레시피 3항목 모두 충족. 수직 조건을 스스로 기울기 곱 -1로 번역해 미지 계수 k를 결정한 뒤 교점을 구하는 다단계 구조로 medium 이상."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "검산: k=5, 교점 (10,2), 5·10+2·2=54와 2·10−5·2=10을 모두 만족하므로 a+b=12이고 정답이 맞다. 해설 계산도 정확하다. 다만 수직 조건으로 k를 구하고 연립방정식을 푸는 순차적 절차에 불과하다. 전형적 medium 문항의 단계를 이어 붙인 수준이며 숨은 조건 도출, 표현 간 대응, 매개변수 소거 같은 추가 사고가 없어 hard로는 부적합하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_two_var-01",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_two_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_two_var_two_points_and_meet",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the $xy$-plane, line $p$ passes through the points $(-2, 7)$ and $(4, -2)$. Line $q$ has the equation $2x + cy = 18$, where $c$ is a constant. Lines $p$ and $q$ intersect at a point whose $x$-coordinate is $6$.\n\nWhat is the $y$-intercept of line $p$ minus the $y$-intercept of line $q$?",
+   "stimulus": "In the $xy$-plane, line $p$ passes through the points $(-2, 7)$ and $(4, -2)$. Line $q$ has the equation $2x + cy = 18$, where $c$ is a constant. Lines $p$ and $q$ intersect at a point whose $x$-coordinate is $6$.",
+   "question": "What is the $y$-intercept of line $p$ minus the $y$-intercept of line $q$?",
+   "options": [
+    "$7$",
+    "$9$",
+    "$11$",
+    "$19$"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "1단계: 직선 $p$의 기울기는 $\\frac{-2-7}{4-(-2)}=-\\frac{3}{2}$이다. $y=-\\frac{3}{2}x+b$에 $(-2,7)$을 대입하면 $7=3+b$이므로 $b=4$이다.\n2단계: $x=6$일 때 직선 $p$ 위의 점은 $y=-9+4=-5$이므로 교점은 $(6,-5)$이다.\n3단계: 이 점을 $2x+cy=18$에 대입하면 $12-5c=18$이므로 $c=-\\frac{6}{5}$이다. 따라서 $q$는 $y=\\frac{5}{3}x-15$이고, $y$절편은 $-15$이다.\n4단계: 구하는 값은 $4-(-15)=19$이다.\n오답 분석: $7$은 $p$의 $y$절편을 구할 때 부호를 틀려 $b=10$으로 계산한 경우이다(이때 교점은 $(6,1)$, $c=6$, $q$의 절편은 $3$). $9$는 $q$의 절편 대신 교점의 $y$좌표 $-5$를 빼서 $4-(-5)$로 계산한 경우이다. $11$은 $q$의 $y$절편을 $15$로 보고 두 절편의 크기 차 $|4-15|$를 구한 경우이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "parameter_based_reasoning",
+     "multi_step_synthesis"
+    ],
+    "note": "검산: p 기울기 -3/2, y절편 4; 교점 (6,-5); c=-6/5; q의 y절편 -15; 차 19. 오답 분석의 수치도 모두 재현됨. 미지 상수 c를 교점 조건으로 결정한 뒤 절편으로 환원하는 다단계 종합이 필요하여 medium 이상."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "검산 결과: 기울기 -3/2, b=4, 교점 (6,-5), c=-6/5, q의 y절편 -15, 차 19로 정답이 맞다. 오답 7·9·11의 오류 경로도 해설 설명과 수치가 모두 일치한다. 다만 기울기→절편→대입→계수 결정의 표준 절차를 순서대로 이어 붙인 것일 뿐이다. 암묵적 조건 도출, 매개변수 소거, 표현 간 대응 같은 추가 사고는 요구하지 않으므로 hard보다 medium 수준이며, 난이도는 단계 수에서만 나온다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-nonlinear_equations_systems-00",
+  "runId": "batch2-D-cross",
+  "skill": "nonlinear_equations_systems",
+  "domain": "advanced_math",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "nonlinear_equations_systems_tangent_then_point",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the $xy$-plane, the graph of $y = x^2 + 6$ and the graph of $y = kx + 2$, where $k$ is a positive constant, intersect at exactly one point.\n\nWhat is the $x$-coordinate of the point of intersection?",
+   "stimulus": "In the $xy$-plane, the graph of $y = x^2 + 6$ and the graph of $y = kx + 2$, where $k$ is a positive constant, intersect at exactly one point.",
+   "question": "What is the $x$-coordinate of the point of intersection?",
+   "options": [
+    "$-2$",
+    "$2$",
+    "$4$",
+    "$10$"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "1단계: 두 식을 같게 놓으면 $x^2 + 6 = kx + 2$ 이므로 $x^2 - kx + 4 = 0$ 이다.\n2단계: 교점이 하나뿐이므로 판별식이 0이다. $(-k)^2 - 4 \\cdot 1 \\cdot 4 = 0$ 에서 $k^2 = 16$ 이고, $k>0$ 이므로 $k = 4$ 이다.\n3단계: $x^2 - 4x + 4 = 0$, 즉 $(x-2)^2 = 0$ 이므로 $x = 2$ 이다. (이때 $y = 2^2 + 6 = 10$ 이다.)\n오답 분석: $-2$ 는 $x^2 - kx + 4 = 0$ 에서 부호를 잘못 옮겨 $x^2 + 4x + 4 = 0$ 으로 풀었을 때의 값이다. $4$ 는 상수 $k$ 의 값일 뿐 교점의 좌표가 아니다. $10$ 은 교점의 $y$좌표로, 문제에서 묻는 $x$좌표가 아니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "implicit_condition_translation",
+     "multi_step_variable_isolation"
+    ],
+    "note": "검산: x²−kx+4=0, 판별식 k²−16=0 → k=4(k>0), (x−2)²=0 → x=2. 정답 B 옳음. 해설의 각 단계와 오답 분석(4=k, 10=y좌표, −2=부호 오류)이 모두 일치. 접함 조건을 스스로 판별식으로 번역하고, 계수 k를 먼저 결정한 후 접점을 구하는 2단계 구조로 medium 이상의 사고를 요구하며 계산 자체는 단순함."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "implicit_condition_translation",
+     "constraint_filtering_after_solution",
+     "multi_step_variable_isolation"
+    ],
+    "note": "x^2-kx+4=0, 판별식 k^2-16=0, k>0이므로 k=4, (x-2)^2=0에서 x=2로 검산 완료. 오답 4는 계수 k, 10은 y좌표, -2는 k=-4(부호 조건 무시)를 반영함.",
+    "passed": true
+   }
+  }
+ }
+]

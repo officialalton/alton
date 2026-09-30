@@ -82,3 +82,40 @@
 - 후보 수(안전계수 0.85 수율): 텍스트 전용 54건(RW 48 + Math 6), 자료 필요 8건(`command_of_evidence_quant` 4 + `lines_angles_triangles` 4). 합계 **62건**(이전 72건에서 선행 시험분 10건 감소).
 - 비용(후보당 $0.157 실측): 텍스트 전용 54건 약 $8.5, 자료 필요 8건(x1.5) 약 $1.9 → **약 $10.4**, 호출 약 290회. 단계 체크포인트에서 수율이 25% 미만이면 중단.
 - **실행 상한 재제안 US$12.5**(점추정 $10.4 + 약 20%; 앞선 제안 $16 에서 축소). 단계: ② 텍스트 전용 54건 상한 $9.5, ③ 자료 필요 8건 상한 $3.0(별도 승인).
+
+
+## 9. 단계 ② 텍스트 전용 hard 생성 결과(2026-09-30)
+생성 Opus 5.5(동기), hard 인정 = Fable 5.1 hard 적합 + 정답 정확성(Fable·Opus 둘 다) + 레시피 준수, Opus hard 의견은 `advisory` 기록만, 채택분 `difficultyStatus=provisional_ai`. 로컬 DB·원격 접근 없음(API 호출·파일 산출물만), 동시 호출 6. 단계 ② 소계 **$7.18**(`batch3/ledger.json` 누적 $8.85 중 기존 ①·레시피 마련 $1.67 제외, 상한 $9.5의 76%, 90% 도달 안 함).
+- **체크포인트**: 후보 28건(전반) 처리 후 채택 19건(68%) ≥ 25% → 계속. 후반은 전반 채택분을 반영해 남은 부족이 있는 skill만(18건, 채택 비율 낮은 skill는 더 많이) — 후보 수는 계획 54건에서 **46건으로 줄었다**(= 28 + 18, 이미 충족된 skill 생성을 생략해 비용 절약). 후반 6건 채택(33%).
+- 후보 전체 분모, 단계 ② 합계 **후보 46 → 채택 25 (54%)**, 비용 $7.18(생성 + Fable 검수 + Opus 참고 의견), 채택 1건당 **$0.29**.
+
+### skill별(전반 + 후반)
+| skill | 후보 | 채택 | 수율 | 비용 | 채택 1건당 | 탈락 원인(중복 계상) |
+|---|---|---|---|---|---|---|
+| central_ideas_details | 6 | 4 | 67% | $0.88 | $0.22 | {'정답 정확성(Opus)': 1, '생성 결정론(evidence)': 1} |
+| inferences | 7 | 1 | 14% | $1.04 | $1.04 | {'정답 정확성(Opus)': 3, '생성 결정론(evidence)': 1, 'hard 적합(Fable)': 2, '생성 결정론(rw_table)': 1, '정답 정확성(Fable)': 1} |
+| words_in_context | 11 | 5 | 45% | $1.79 | $0.36 | {'hard 적합(Fable)': 6, '정답 정확성(Opus)': 1} |
+| rhetorical_synthesis | 6 | 4 | 67% | $0.83 | $0.21 | {'hard 적합(Fable)': 1, '생성 결정론(evidence)': 1} |
+| transitions | 5 | 3 | 60% | $0.85 | $0.28 | {'정답 정확성(Opus)': 1, 'hard 적합(Fable)': 2, '레시피 미준수': 1} |
+| boundaries | 1 | 1 | 100% | $0.16 | $0.16 | {} |
+| form_structure_sense | 7 | 4 | 57% | $1.20 | $0.30 | {'정답 정확성(Opus)': 3, '정답 정확성(Fable)': 1} |
+| linear_equations_two_var | 2 | 2 | 100% | $0.30 | $0.15 | {} |
+| nonlinear_equations_systems | 1 | 1 | 100% | $0.14 | $0.14 | {} |
+
+- 탈락 원인 요약: 정답 정확성에서 Opus 가 Fable 보다 더 자주 탈락시켰고(선택지·해설의 세부 불일치), hard 적합은 words_in_context 가 가장 많이 탈락(6건), inferences 는 정답·hard·형식(표 사용·evidence) 이 섞여 수율이 가장 낮았다(1/7 = 14%, 25% 미만).
+- **inferences**: 25% 미만이지만 원격 hard 1 + 채택 1 로 3세트분(2)은 이미 충족이고 부족은 여분 2 뿐이라 **더 돌리지 않고 여분만 medium 대체 없이 '여분 미달'로 보고**한다(사고 수준·기준 완화 없음, 생성 지시 단순화 시도는 하지 않음 — 표본이 작아 원인을 단정하지 못함).
+
+### 채택분 병합(`merge-adopted.ts` → `final/adopted-hard-all.json`)
+입력 60건(① D-cross 25 + 선행 10 + 단계 ② 25) → **59건 유지**, 제외 1건(본문 유사도 0.90, `linear_equations_two_var` 단계 ② 전반 00번이 ① 25건 중 같은 번호와 동일 구조). 같은 skill 안 본문 3-gram(숫자 마스킹) 유사도 0.6 이상 검사를 adopted 간·기존 통과 문항(`final/passed.json`) 대비 모두 했고 기존 문항과의 유사 제외는 없었다. skill별 채택(중복 제거 후): transitions 4, boundaries 6, command_of_evidence_text 5, text_structure_purpose 5, linear_equations_one_var 3, linear_equations_two_var 3, equivalent_expressions 4, cross_text_connections 6, systems_linear 4, central_ideas_details 4, inferences 1, words_in_context 5, rhetorical_synthesis 4, form_structure_sense 4, nonlinear_equations_systems 1.
+**주의**: 모든 채택분 gid 는 출처별 접두어(`batch2-D-cross:`, `batch3-pilot:`, `batch3-stage2a:`, `batch3-stage2b:`)가 붙는다. `adopted-hard-all.json` 은 임포트 스크립트(`import.ts`)에 그대로 넣을 수 있는 형식(`quality.hardJudge/advisory`, `difficultyStatus`, `recipeId` 포함)이며 원격 임포트는 총괄이 한다.
+
+### 남은 hard 부족(3세트분 + 칸별 여분 2, `plan.json` 원격 hard + 신규 채택 59건 반영)
+**3세트분은 전 skill 충족.** 여분(+2) 기준 부족은 8건:
+| 체계 | skill | 3세트분 | +여분 2 | 원격 | 신규 채택 | 여분 포함 부족 | 비고 |
+|---|---|---|---|---|---|---|---|
+| RW | inferences | 2 | 4 | 1 | 1 | 2 | 수율 14% — 추가 시도 보류 |
+| RW | command_of_evidence_quant | 1 | 3 | 1 | 0 | 2 | 자료(표·그래프) 필요 — ③ 대상 |
+| RW | form_structure_sense | 3 | 5 | 0 | 4 | 1 | 텍스트 전용 |
+| Math | linear_equations_two_var | 2 | 4 | 0 | 3 | 1 | 텍스트 전용 |
+| Math | lines_angles_triangles | 1 | 3 | 1 | 0 | 2 | 도형 자료 필요 — ③ 대상 |
+(원격 hard 중 AI 생성분 구분 필드는 여전히 plan.json 에 없어 전부 충족 수량에 포함.) 텍스트 전용으로 더 채울 수 있는 것은 inferences 2·form_structure_sense 1·linear_equations_two_var 1(모두 여분분)뿐이며, 자료 필요 4건은 ③ 별도 승인 대상이다.
