@@ -136,6 +136,7 @@ async function main() {
   if (cmd === "report") return report();
   if (cmd === "compare") return compare();
   if (cmd === "cross") return cross();
+  if (cmd === "cross-report") return crossReport(path.join(RUN, "batch2", "D-cross"));
   if (cmd === "rereview") return rereview();
   const combo = arg("--combo")!, method = arg("--method") ?? "recipe";
   const cfg = { ...COMBOS[combo], gen: arg("--gen-model") ?? COMBOS[combo].gen, rev: arg("--review-model") ?? COMBOS[combo].rev };
@@ -259,7 +260,6 @@ async function rereview() {
   writeFileSync(path.join(dir, "rereview.json"), JSON.stringify(out, null, 1));
   console.log(JSON.stringify({ n: out.length, correct: out.filter((x) => x.correctOk).length, compliance: out.filter((x) => x.complianceOk).length, hardFit: out.filter((x) => x.hardFitOk).length, hold: out.filter((x) => x.hold).length }));
 }
-main().catch((e) => { console.error(e); process.exit(1); });
 
 /** 조합 간 비교: 같은 후보 부분집합(RW·Math 각 idx < N)으로 A·B·C(+원형) 지표를 같은 식으로 집계. 실행: compare [--n-rw 3 --n-math 3] */
 function compare() {
@@ -320,6 +320,7 @@ async function cross() {
   crossReport(dir);
 }
 function crossReport(dir: string) {
+  // crossReport 는 저장된 결과만 읽으므로 API 호출이 없다(`cross-report` 명령으로 재집계 가능).
   const cands = JSON.parse(readFileSync(path.join(dir, "candidates.json"), "utf-8")) as Cand[];
   const gens = new Map((JSON.parse(readFileSync(path.join(dir, "gens.json"), "utf-8")) as { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }[]).map((x) => [x.c.cid, x]));
   const read = (n: string) => { const m = new Map<string, { cost?: number; in: Record<string, unknown> | null }>(); const f = path.join(dir, `${n}.results.jsonl`); if (!existsSync(f)) return m; for (const l of readFileSync(f, "utf-8").split("\n").filter(Boolean)) { const r = JSON.parse(l); if (r.ok) m.set(r.custom_id, { cost: r.cost, in: toolInput(r) }); } return m; };
@@ -352,6 +353,20 @@ function crossReport(dir: string) {
     const totalCost = sub.reduce((a, i) => a + ((i.cost as number) ?? 0), 0);
     out[sys] = { cand: sub.length, genFail: sub.filter((i) => i.genFail).length, formatFail: sub.filter((i) => i.formatFail).length, detPass: sub.filter((i) => Array.isArray(i.detIssues) && (i.detIssues as string[]).length === 0).length, crossScored: both.length, correct: dim("correct"), compliance: dim("comp"), hardFit: dim("fit"), adoptedBoth: bothAdopt.length, adoptedOneOnly: one.length, yieldBoth: +(bothAdopt.length / Math.max(1, sub.length)).toFixed(3), costUsd: +totalCost.toFixed(3), costPerAdoptedBoth: bothAdopt.length ? +(totalCost / bothAdopt.length).toFixed(3) : null, fableOnlyPass: one.filter((i) => adopt(i, "fable")).length, opusOnlyPass: one.filter((i) => adopt(i, "opus")).length };
   }
+  // 채택 기준(2026-09-30 총괄·오너): hard 인정 = Fable 5.1 hard 적합 통과 + 정답 정확성·레시피 준수 통과. Opus 5.5 의견은 채택 조건이 아니라 advisory 로만 기록.
+  // 정답 정확성은 기본적으로 Fable·Opus 둘 다 통과를 요구한다(한쪽만 잡은 실제 결함 — 해설 자기 모순·형식 불일치 — 이 있었음). `--correct-fable-only` 로 Fable 만 요구.
+  const fableOnly = flag("--correct-fable-only");
+  const { SKILL_BY_CODE } = require("../../lib/problem-taxonomy") as typeof import("../../lib/problem-taxonomy");
+  const adoptedHard = items.filter((i) => i.fable && i.opus).filter((i) => { const f = i.fable as V, o = i.opus as V; return f.correct && f.comp && f.fit && (fableOnly || o.correct); }).map((i) => {
+    const x = gens.get(i.cid as string)!; const f = i.fable as V, o = i.opus as V; const meta = SKILL_BY_CODE.get(x.c.skill)!;
+    return { gid: x.c.cid, runId: "batch2-D-cross", skill: x.c.skill, domain: meta.domain, examSystem: x.c.system, difficulty: "hard", format: "mc", recipeId: x.c.recipeId, difficultyStatus: "provisional_ai",
+      problem: { passage: `${x.g.passage}\n\n${x.g.question}`, stimulus: x.g.passage, question: x.g.question, options: x.g.options, correctIndex: "ABCD".indexOf(x.g.correct_letter), answers: null, explanation: x.g.explanation, figure: null, statements: null },
+      quality: { generatedBy: "claude-opus-5-5", hardJudge: { model: "claude-fable-5-1", effort: "low", fit: f.fit, correctOk: f.correct, complianceOk: f.comp, which: f.which, note: f.note }, advisory: { model: "claude-opus-5-5", effort: "low", fit: o.fit, correctOk: o.correct, complianceOk: o.comp, which: o.which, note: o.note, passed: o.fit } } };
+  });
+  writeFileSync(path.join(dir, "adopted-hard.json"), JSON.stringify(adoptedHard, null, 1));
+  (out as Record<string, unknown>).adoptedHardFableRule = { total: adoptedHard.length, rw: adoptedHard.filter((a) => a.examSystem === "sat_rw").length, math: adoptedHard.filter((a) => a.examSystem === "sat_math").length, correctBothRequired: !fableOnly };
   writeFileSync(path.join(dir, "cross.json"), JSON.stringify({ summary: out, items }, null, 1));
   console.log(JSON.stringify(out, null, 1));
 }
+
+main().catch((e) => { console.error(e); process.exit(1); });
