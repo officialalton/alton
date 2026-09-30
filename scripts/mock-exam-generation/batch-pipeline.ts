@@ -52,7 +52,7 @@ const QUESTION_RULE: Record<string, string> = {
 };
 const SKILLS_LABEL: Record<string, string> = { words_in_context: "Words in Context", central_ideas_details: "Central Ideas and Details", inferences: "Inferences", rhetorical_synthesis: "Rhetorical Synthesis", form_structure_sense: "Form, Structure, and Sense", nonlinear_equations_systems: "Nonlinear equations and systems", cross_text_connections: "Cross-Text Connections", systems_linear: "Systems of two linear equations", transitions: "Transitions", boundaries: "Boundaries", command_of_evidence_text: "Command of Evidence (Textual)", text_structure_purpose: "Text Structure and Purpose", linear_equations_one_var: "Linear equations in one variable", linear_equations_two_var: "Linear equations in two variables", equivalent_expressions: "Equivalent expressions" };
 
-type Cand = { cid: string; skill: string; system: "sat_rw" | "sat_math"; method: string; recipeId: string | null; instruction: string; idx: number };
+type Cand = { cid: string; skill: string; system: "sat_rw" | "sat_math"; method: string; recipeId: string | null; instruction: string; idx: number; difficulty?: "easy" | "medium" | "hard"; seed?: string };
 function buildCands(method: string, perRw: number, perMath: number, spec?: Record<string, number>, offset = 0): Cand[] {
   const out: Cand[] = [];
   const skills = spec ? Object.keys(spec) : method === "archetype" ? RW_SKILLS : [...RW_SKILLS, ...MATH_SKILLS];
@@ -73,7 +73,7 @@ const think = (model: string) => ({ thinking: model.includes("sonnet") ? { type:
 let MATH_PROMPT: "v1" | "v2" = "v1";
 const MATH_NOTATION_V2 = "\n수식 표기 규칙(필수): 모든 수식은 $…$ 로 열고 반드시 닫는다(지문·선택지·해설 모두, 짝이 맞아야 함). 수식 안에는 영어·숫자·LaTeX 명령만 쓰고 한글을 넣지 않는다(한글 설명은 수식 밖). 금액 기호로 $ 를 쓰지 말고 'dollars' 같은 단어로 쓴다. 분수는 \\frac{a}{b}, 곱은 \\cdot, 수식 안에서 줄바꿈(\\\\)을 쓰지 않는다.";
 const SYS_CACHE = { type: "ephemeral", ttl: "1h" };
-const genSystem = (c: Cand) => `당신은 디지털 SAT(${c.system === "sat_rw" ? "Reading and Writing" : "Math"}) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **hard** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
+const genSystem = (c: Cand) => `당신은 디지털 SAT(${c.system === "sat_rw" ? "Reading and Writing" : "Math"}) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **${c.difficulty ?? "hard"}** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
 형식 규칙: ${QUESTION_RULE[c.skill]}
 ${c.system === "sat_rw" ? "지문·질문·선택지는 영어, 해설은 한국어. 정답이 지문·선택지 표면 일치로 드러나면 안 된다." : "질문·선택지는 영어, 해설은 한국어(단계별 계산). 모든 계산을 생성 직전에 다시 검산하고, 해설에 '재계산' 같은 자기 수정 문구를 쓰지 않는다."}
 오답 3개는 각각 서로 다른 실제 오개념·중간값·부분 일치에 기반해 그럴듯해야 하고 지문을 읽고도 근거를 따져야만 지워진다. 난이도는 긴 지문·복잡한 숫자·계산량이 아니라 아래 사고 구조로만 만든다.
@@ -144,6 +144,7 @@ async function main() {
   if (cmd === "report") return report();
   if (cmd === "compare") return compare();
   if (cmd === "cross") return cross();
+  if (cmd === "basic") return basic();
   if (cmd === "cross-report") return crossReport(path.join(RUN, arg("--dir") ?? "batch2/D-cross"));
   if (cmd === "rereview") return rereview();
   const combo = arg("--combo")!, method = arg("--method") ?? "recipe";
@@ -377,6 +378,60 @@ function crossReport(dir: string) {
   (out as Record<string, unknown>).adoptedHardFableRule = { total: adoptedHard.length, rw: adoptedHard.filter((a) => a.examSystem === "sat_rw").length, math: adoptedHard.filter((a) => a.examSystem === "sat_math").length, correctBothRequired: !fableOnly };
   writeFileSync(path.join(dir, "cross.json"), JSON.stringify({ summary: out, items }, null, 1));
   console.log(JSON.stringify(out, null, 1));
+}
+
+
+/** RW 일반 문항(easy/medium) — Sonnet 5.5 Message Batches 생성 + Sonnet 5.5 검수(블라인드 풀이 + 감사). 소재 씨앗을 주입한다. 실행: basic [--per 1] [--budget 1.5] [--dry] */
+const SEEDS = ["자연과학(생물·생태)", "자연과학(물리·천문)", "역사(근대 사회 변화)", "예술·건축 비평", "문학(19세기 소설 분위기의 현대 서술)", "사회과학(경제·행동)", "기술·공학 사례", "인물 소개(과학자·예술가)", "환경·지리", "언어·인류학"];
+async function basic() {
+  const per = Number(arg("--per") ?? 1), budget = Number(arg("--budget") ?? 1.5);
+  const dir = path.join(RUN, "batch4", "basic");
+  mkdirSync(dir, { recursive: true });
+  const RW_ALL = ["central_ideas_details", "inferences", "command_of_evidence_text", "words_in_context", "text_structure_purpose", "cross_text_connections", "rhetorical_synthesis", "transitions", "boundaries", "form_structure_sense"];
+  const cands: Cand[] = [];
+  for (const skill of RW_ALL) for (const difficulty of ["easy", "medium"] as const) for (let i = 0; i < per; i++) cands.push({ cid: `basic-${skill}-${difficulty}-${i}`.slice(0, 64), skill, system: "sat_rw", method: "basic", recipeId: null, instruction: "", idx: i, difficulty, seed: SEEDS[(cands.length + i) % SEEDS.length] });
+  writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
+  const gm = "claude-sonnet-5-5", led = ledger(dir);
+  const est = estimate(gm, cands.length, 1500, 1000) + estimate(gm, cands.length, 2800, 520);
+  console.log(`[basic] 후보 ${cands.length} · 생성/검수 ${gm}(Message Batches) · 추정 $${est.toFixed(2)} · 구간 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
+  if (led.spent() + est > budget) throw new Error("예산 초과 예상");
+  if (flag("--dry")) return;
+  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: gm, ...think(gm), max_tokens: 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
+  const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: estimate(gm, cands.length, 1500, 1000) });
+  const gens: { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }[] = [];
+  for (const c of cands) { const r = genRes.get(c.cid); const g = r ? (toolInput(r) as unknown as Gen | null) : null; if (!g || !Array.isArray(g.options) || g.options.length !== 4) continue; gens.push({ c, g, det: await deterministic(c, g) }); }
+  const passDet = gens.filter((x) => x.det.issues.length === 0);
+  const revReqs = passDet.flatMap(({ c, g }) => [blindReq(gm, c.cid, c.skill, g), auditReq(gm, c, g, null)]);
+  const revRes = await runBatch({ dir, name: "review", requests: revReqs, budgetUsd: budget, estimateUsd: estimate(gm, passDet.length, 2800, 520) });
+  const { SKILL_BY_CODE } = require("../../lib/problem-taxonomy") as typeof import("../../lib/problem-taxonomy");
+  const stats: Record<string, { cand: number; detPass: number; adopted: number; reasons: Record<string, number> }> = {};
+  const adopted: unknown[] = [];
+  for (const c of cands) {
+    const st = (stats[c.skill] ??= { cand: 0, detPass: 0, adopted: 0, reasons: {} });
+    st.cand++;
+    const x = gens.find((y) => y.c.cid === c.cid);
+    const why = (k: string) => (st.reasons[k] = (st.reasons[k] ?? 0) + 1);
+    if (!x) { why("생성실패"); continue; }
+    if (x.det.issues.length) { for (const i of x.det.issues) why(`생성:${i.replace(/^contract:contract_/, "")}`); continue; }
+    st.detPass++;
+    const b = revRes.get(`b-${c.cid}`.slice(0, 64)), a = revRes.get(`a-${c.cid}`.slice(0, 64));
+    const bi = b ? toolInput(b) : null, ai = a ? toolInput(a) : null;
+    if (!bi || !ai) { why("검수응답없음"); continue; }
+    let ok = true;
+    if (bi.picked_letter !== x.g.correct_letter || bi.other_defensible) { ok = false; why("정답:블라인드불일치"); }
+    if (!ai.answer_correct) { ok = false; why("정답:감사오답"); }
+    if (!ai.explanation_consistent) { ok = false; why("해설불일치"); }
+    if (!ai.format_ok) { ok = false; why("형식결함"); }
+    if (ai.factual_error) { ok = false; why("사실오류"); }
+    if (ai.copyright_suspect) { ok = false; why("저작권의심"); }
+    if (!ok) continue;
+    st.adopted++;
+    const meta = SKILL_BY_CODE.get(c.skill)!;
+    adopted.push({ gid: `basic:${c.cid}`, runId: "batch3-basic", skill: c.skill, domain: meta.domain, examSystem: "sat_rw", difficulty: c.difficulty, format: "mc", recipeId: null, problem: { passage: `${x.g.passage}\n\n${x.g.question}`, stimulus: x.g.passage, question: x.g.question, options: x.g.options, correctIndex: "ABCD".indexOf(x.g.correct_letter), answers: null, explanation: x.g.explanation, figure: null, statements: null }, quality: { generatedBy: gm, reviewedBy: gm, seed: c.seed, blind: { picked: bi.picked_letter, confidence: bi.confidence }, audit: { which: ai.which, note: ai.note } } });
+  }
+  writeFileSync(path.join(dir, "adopted-basic.json"), JSON.stringify(adopted, null, 1));
+  const cost = led.spent();
+  console.log(JSON.stringify({ stats, adopted: adopted.length, cand: cands.length, costUsd: cost }, null, 1));
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

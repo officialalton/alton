@@ -72,8 +72,9 @@ export function evalOne(r: Raw, rev: ReviewResult | undefined, weak = DEFAULT_WE
   }
   // hard 는 '레시피 채택'(레시피 준수 + 정답 검수 + hard 적합성, recipe-check.ts)을 통과한 문항만 인정한다(2026-09-30 총괄·오너). 그 밖은 hard 로 두지 않는다.
   // (약한 모델 정답률 기반 A/B/C 등급은 폐기 — hardTier 함수는 이력용으로만 남아 있고 쓰지 않는다.)
-  if (recipe?.adopted && reasons.length === 0) { if (finalDifficulty !== "hard") relabeled = true; finalDifficulty = "hard"; }
-  else if (finalDifficulty === "hard") { finalDifficulty = "medium"; relabeled = r.difficulty !== "medium"; }
+  // 2026-10-01 합격 검증 반영: 일반 통과 문항(passed.json)은 hard 를 만들지 않는다. hard 는 오직 Fable hard 적합 검수를 통과한 채택분(adopted-hard-all.json,
+  // quality.hardJudge/advisory 기록)만 인정한다(구 Sonnet 검수 기반 레시피 채택 hard 13건이 판정 기록 없이 잠정 hard 로 임포트되던 문제 수정).
+  if (finalDifficulty === "hard") { finalDifficulty = "medium"; relabeled = r.difficulty !== "medium"; }
   return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, finalDifficulty, relabeled, review: rev, hardTier: null, recipe: recipe?.adopted ? recipe : undefined };
 }
 
