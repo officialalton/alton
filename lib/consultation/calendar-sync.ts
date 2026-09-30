@@ -4,6 +4,7 @@ import { createCalendarEventWithMeet, patchCalendarEventTime, deleteCalendarEven
 import { extractMeetingCodeFromLink, ensureMeetSpaceSmartNotesOn } from "@/lib/google-meet";
 import { sendEmail } from "@/lib/email";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+import { CALENDAR_SYNC_MAX_ATTEMPTS, createCalendarResyncKit, type SyncOutcome } from "./calendar-resync-kit";
 
 // M1 — 상담 확정 시 Calendar 이벤트+Meet 생성. R6 lib/booking/calendar-sync.ts와 같은
 // 원칙을 그대로 따르되, subject는 원래 회사 상담 관리자 계정(official@alton.education)
@@ -22,11 +23,13 @@ import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 // 관리자가 재처리 대상으로 확인할 수 있게 한다(R3/R4/R6와 동일한 graceful
 // degradation 원칙).
 
-const MAX_RETRY_COUNT = 5;
+const MAX_RETRY_COUNT = CALENDAR_SYNC_MAX_ATTEMPTS;
 const CONSULT_ORGANIZER_EMAIL = process.env.CONSULT_ORGANIZER_EMAIL ?? "official@alton.education";
 
 type ConsultationRow = {
   id: string;
+  status?: string;
+  google_event_deleted_at?: string | null;
   contact_name: string;
   contact_email: string;
   starts_at: string;
@@ -134,12 +137,13 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
 async function processOneConsultation(
   admin: ReturnType<typeof createAdminClient>,
   row: ConsultationRow
-): Promise<void> {
+): Promise<{ createdEventId: string | null }> {
   const startsAt = new Date(row.starts_at);
   const endsAt = new Date(row.ends_at);
 
   let googleEventId = row.google_event_id;
   let meetLink = row.google_meet_link;
+  let createdEventId: string | null = null;
   const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
 
   if (!googleEventId) {
@@ -166,6 +170,7 @@ async function processOneConsultation(
       sendUpdates: "all",
     });
     googleEventId = created.googleEventId;
+    createdEventId = created.googleEventId;
     meetLink = created.meetLink;
   } else {
     // 요구사항 2: 시간 변경도 같은 이벤트를 PATCH하고 sendUpdates="all"로 Google
@@ -200,55 +205,78 @@ async function processOneConsultation(
   // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
   // Smart Notes 활성화(applySmartNotesBestEffort)와 Workspace Events 구독
   // (ensureSubscriptionForOrganizer)을 더 이상 시도하지 않는다.
+  return { createdEventId };
 }
+
+async function deleteConsultationEvent(admin: ReturnType<typeof createAdminClient>, row: ConsultationRow, eventId: string): Promise<void> {
+  const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
+  // 404/410(이미 없음)은 deleteCalendarEvent 가 성공으로 취급한다. 참석자에게 취소 알림(sendUpdates=all).
+  await deleteCalendarEvent({ teacherWorkspaceEmail: organizerEmail, googleEventId: eventId, sendUpdates: "all" });
+  await admin.from("consultations").update({ google_event_deleted_at: new Date().toISOString() }).eq("id", row.id);
+}
+
+/**
+ * 재시도 가능한 멱등 동기화(2026-09-29): 취소됨+이벤트 있음+미삭제→삭제 / 이벤트 없음→생성 / 있음→시간 PATCH.
+ * 저장된 google_event_id 로만 판단하므로 두 번 실행해도 이벤트가 두 개 생기지 않는다.
+ * 생성하는 사이 상담이 취소됐다면 방금 만든 이벤트를 바로 지운다(고아 이벤트 방지).
+ */
+async function syncOneConsultation(admin: ReturnType<typeof createAdminClient>, row: ConsultationRow): Promise<void> {
+  if (row.status === "cancelled") {
+    if (row.google_event_id && !row.google_event_deleted_at) await deleteConsultationEvent(admin, row, row.google_event_id);
+    return;
+  }
+  if (!row.starts_at || !row.ends_at) return; // 동기화할 일정 없음
+  const { createdEventId } = await processOneConsultation(admin, row);
+  if (!createdEventId) return;
+  const { data: fresh } = await admin.from("consultations").select("status").eq("id", row.id).maybeSingle();
+  if ((fresh as { status?: string } | null)?.status === "cancelled") {
+    await deleteConsultationEvent(admin, row, createdEventId);
+  }
+}
+
+const kit = createCalendarResyncKit<ConsultationRow>({
+  table: "consultations",
+  claimRpc: "claim_consultation_calendar_syncs",
+  claimIdParam: "p_consultation_id",
+  successStatus: "synced",
+  logPrefix: "consultation_calendar",
+  syncOne: syncOneConsultation,
+  // Calendar 초대가 재시도 한도까지 반복 실패했을 때만 ALTON 커스텀 이메일로 fallback 안내한다.
+  onPermanent: async (admin, row, message) => {
+    if (row.status === "cancelled") return; // 취소된 상담에 일정 안내 메일을 보내지 않는다
+    await sendConsultationCalendarFailureFallbackEmail({ admin, row, errorMessage: message.slice(0, 200) });
+  },
+});
+
+/** 특정 상담 하나를 지금 재시도(즉시 재시도·관리자 버튼). 실제 호출이 꺼져 있으면 아무것도 하지 않는다. */
+export const resyncConsultationCalendarNow = (consultationId: string): Promise<SyncOutcome> => kit.resyncNow(consultationId);
+/** 일 1회 크론 본체. */
+export const runConsultationCalendarResyncBatch = (limit = 20) => kit.runBatch(limit);
+/** 실패한 액션 직후 호출 — 응답을 막지 않고(after) 어떤 오류도 삼킨다. */
+export const scheduleConsultationCalendarResync = (consultationId: string): void => kit.schedule(consultationId);
+/** 관리자 수동 재동기화 — 자동 재시도 중단(5회)도 횟수를 0으로 되돌려 다시 시도한다. */
+export const adminForceResyncConsultationCalendar = (consultationId: string): Promise<SyncOutcome> => kit.forceResync(consultationId);
 
 /** 확정된(scheduled) 상담 하나를 즉시 동기화한다 — 관리자 수락/시간변경 직후 호출. */
 export async function syncOneConsultationCalendarEvent(consultationId: string): Promise<void> {
   const admin = createAdminClient();
 
-  // R3 drive-artifacts.ts/R6 calendar-sync.ts와 동일한 조건부 UPDATE 낙관적 잠금 —
-  // 즉시 호출 경로와 배치 재처리 워커가 동시에 같은 상담을 건드려도 하나만 처리한다.
+  // 조건부 UPDATE 낙관적 잠금 + 10분 임대 — 즉시 호출 경로·즉시 재시도·일 1회 크론이 동시에 같은 상담을 건드려도 하나만 처리한다.
+  const now = new Date();
+  const leaseExpired = new Date(now.getTime() - 10 * 60_000).toISOString();
   const { data: claimed } = await admin
     .from("consultations")
-    .update({ google_sync_status: "pending" })
+    .update({ google_sync_status: "pending", google_sync_claimed_at: now.toISOString() })
     .eq("id", consultationId)
     .in("google_sync_status", ["pending", "failed"])
-    .select("id, contact_name, contact_email, starts_at, ends_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, consent_version_id, confirmation_email_content_hash, admissions_consultant_id")
+    .or(`google_sync_claimed_at.is.null,google_sync_claimed_at.lt.${leaseExpired}`)
+    .select("*")
     .maybeSingle();
 
   if (!claimed) return;
-  const row = claimed as ConsultationRow;
-
-  try {
-    await processOneConsultation(admin, row);
-  } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    const nextRetryCount = (row.google_sync_retry_count ?? 0) + 1;
-    const nextStatus = nextRetryCount >= MAX_RETRY_COUNT ? "reconciliation_needed" : "failed";
-    await admin
-      .from("consultations")
-      .update({ google_sync_status: nextStatus, google_sync_retry_count: nextRetryCount, google_sync_last_error: message.slice(0, 500) })
-      .eq("id", consultationId);
-    console.error(JSON.stringify({ type: "m1_consult_calendar_sync_failed", consultationId, error: message, nextStatus }));
-
-    // 요구사항 2·6: Calendar 초대가 재시도 한도까지 반복 실패했을 때만 ALTON 커스텀
-    // 이메일로 fallback 안내한다("Google 초대 실패처럼 Calendar가 담당 못하는 알림만
-    // ALTON 이메일 경로로" 원칙) — 이 fallback 자체도 실패해도 상담 확정 상태는 건드리지
-    // 않는다.
-    if (nextStatus === "reconciliation_needed") {
-      try {
-        await sendConsultationCalendarFailureFallbackEmail({ admin, row, errorMessage: message.slice(0, 200) });
-      } catch (emailError) {
-        console.error(
-          JSON.stringify({
-            type: "m1_consult_calendar_failure_fallback_email_failed",
-            consultationId,
-            error: emailError instanceof Error ? emailError.message : String(emailError),
-          })
-        );
-      }
-    }
-  }
+  const outcome = await kit.processClaimed(admin, claimed as ConsultationRow);
+  // 실패하면 응답을 막지 않고 곧바로 한 번 더 시도한다(일시 오류 회수). 5회에 이르면 멈춘다.
+  if (outcome === "failed") scheduleConsultationCalendarResync(consultationId);
 }
 
 /** 배치 재처리 워커 — 관리자 화면 "재처리" 버튼 또는 향후 cron이 호출. */
@@ -283,25 +311,28 @@ export async function retrySmartNotesConfigForConsultation(consultationId: strin
   await applySmartNotesBestEffort({ admin, consultationId, meetLink: row.google_meet_link, organizerEmail });
 }
 
-/** 취소 시 Google 이벤트도 삭제한다(취소는 hold/DB 확정 이후에만 발생하므로 실패해도 상담 취소 자체는 막지 않는다). */
+/**
+ * 취소 시 Google 이벤트도 삭제한다(취소는 DB 확정 이후에만 발생하므로 실패해도 상담 취소 자체는 막지 않는다).
+ * DB 트리거(consultations_flag_cancel_event_cleanup)가 이미 'failed'(삭제 대기)로 표시했다 — 지금 바로 지워 보고,
+ * 안 되면 그대로 재시도 대기(즉시 after 재시도 → 일 1회 크론 → 관리자 버튼).
+ */
 export async function cancelSyncedConsultationCalendarEvent(consultationId: string): Promise<void> {
   const admin = createAdminClient();
   const { data: row } = await admin
     .from("consultations")
-    .select("id, google_event_id, admissions_consultant_id")
+    .select("id, google_event_id, google_event_deleted_at")
     .eq("id", consultationId)
     .maybeSingle();
-  if (!row?.google_event_id) return;
-  const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
+  if (!row?.google_event_id || row.google_event_deleted_at) return;
 
+  let outcome: SyncOutcome = "skipped";
   try {
-    await deleteCalendarEvent({ teacherWorkspaceEmail: organizerEmail, googleEventId: row.google_event_id, sendUpdates: "all" });
-    await admin.from("consultations").update({ google_sync_status: "synced", google_sync_last_error: null }).eq("id", consultationId);
+    // 최초 삭제 시도는 게이트와 무관하게 실행한다(기존 동작 유지) — 재시도만 CALENDAR_SYNC_ALLOW_REAL_CALLS 로 막는다.
+    outcome = await kit.resyncNow(consultationId, { skipGate: true });
   } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    await admin.from("consultations").update({ google_sync_status: "reconciliation_needed", google_sync_last_error: message.slice(0, 500) }).eq("id", consultationId);
-    console.error(JSON.stringify({ type: "m1_consult_calendar_delete_failed", consultationId, error: message }));
+    console.error(JSON.stringify({ type: "m1_consult_calendar_delete_failed", consultationId, error: e instanceof Error ? e.message : String(e) }));
   }
+  if (outcome === "failed") scheduleConsultationCalendarResync(consultationId);
 }
 
 type UnlinkedSmartNotesEventRow = {

@@ -26,6 +26,7 @@ vi.mock("@/lib/consultation/calendar-sync", () => ({
   syncOneConsultationCalendarEvent: vi.fn(),
   cancelSyncedConsultationCalendarEvent: vi.fn(),
   processPendingConsultationCalendarSyncs: vi.fn(),
+  adminForceResyncConsultationCalendar: vi.fn(),
   retrySmartNotesConfigForConsultation: vi.fn(),
   reprocessUnlinkedSmartNotesEvents: vi.fn(),
 }));
