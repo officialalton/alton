@@ -16,6 +16,8 @@ export type StaffInquiryListItem = {
   createdAt: string;
   lastMessageAt: string;
   closedAt: string | null;
+  /** 열린 문의 중 상대측 메시지가 관리자 읽음 시각보다 새로우면 true(스레드 단위). */
+  unreadForAdmin: boolean;
 };
 
 export type StaffMessage = {
@@ -33,6 +35,9 @@ export async function listAllStaffInquiriesAction(): Promise<StaffInquiryListIte
     .select("id, consultant_id, status, subject, created_at, last_message_at, closed_at, consultant:profiles!consultant_admin_inquiries_consultant_id_fkey(name)")
     .order("last_message_at", { ascending: false });
   if (error) throw new Error(error.message);
+  // 안읽음 스레드 id는 SQL 함수 1회(메시지 전체를 가져오지 않는다).
+  const { data: unreadIds } = await createAdminClient().rpc("admin_unread_staff_inquiry_ids", { p_kind: "consultants" });
+  const unread = new Set<string>((unreadIds as string[] | null) ?? []);
   return (data ?? []).map((r) => {
     const rel = r.consultant as { name: string | null } | { name: string | null }[] | null;
     const consultant = Array.isArray(rel) ? rel[0] : rel;
@@ -45,6 +50,7 @@ export async function listAllStaffInquiriesAction(): Promise<StaffInquiryListIte
       createdAt: r.created_at,
       lastMessageAt: r.last_message_at,
       closedAt: r.closed_at,
+      unreadForAdmin: r.status === "open" && unread.has(r.id),
     };
   });
 }
@@ -145,5 +151,14 @@ export async function postTeacherAssignmentResultSystemMessage(params: {
     sender_role: "admin",
     body: params.body,
   });
+  if (error) throw new Error(error.message);
+}
+
+/** 관리자가 스레드를 열 때 호출 — 그 스레드의 관리자 읽음 시각을 지금으로 갱신(관리자 공용). */
+export async function markStaffInquiryReadByAdminAction(inquiryId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("consultant_admin_inquiry_admin_reads")
+    .upsert({ inquiry_id: inquiryId, last_read_at: new Date().toISOString() }, { onConflict: "inquiry_id" });
   if (error) throw new Error(error.message);
 }

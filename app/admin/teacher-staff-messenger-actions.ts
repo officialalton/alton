@@ -5,6 +5,7 @@
 // (teacher_admin_inquiries/_messages)만 다룬다.
 
 import { requireAdmin } from "@/lib/admin-auth";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 export type TeacherStaffInquiryListItem = {
   id: string;
@@ -15,6 +16,8 @@ export type TeacherStaffInquiryListItem = {
   createdAt: string;
   lastMessageAt: string;
   closedAt: string | null;
+  /** 열린 문의 중 상대측 메시지가 관리자 읽음 시각보다 새로우면 true(스레드 단위). */
+  unreadForAdmin: boolean;
 };
 
 export type TeacherStaffMessage = {
@@ -32,6 +35,9 @@ export async function listAllTeacherStaffInquiriesAction(): Promise<TeacherStaff
     .select("id, teacher_id, status, subject, created_at, last_message_at, closed_at, teacher:profiles!teacher_admin_inquiries_teacher_id_fkey(name)")
     .order("last_message_at", { ascending: false });
   if (error) throw new Error(error.message);
+  // 안읽음 스레드 id는 SQL 함수 1회(메시지 전체를 가져오지 않는다).
+  const { data: unreadIds } = await createAdminClient().rpc("admin_unread_staff_inquiry_ids", { p_kind: "teachers" });
+  const unread = new Set<string>((unreadIds as string[] | null) ?? []);
   return (data ?? []).map((r) => {
     const rel = r.teacher as { name: string | null } | { name: string | null }[] | null;
     const teacher = Array.isArray(rel) ? rel[0] : rel;
@@ -44,6 +50,7 @@ export async function listAllTeacherStaffInquiriesAction(): Promise<TeacherStaff
       createdAt: r.created_at,
       lastMessageAt: r.last_message_at,
       closedAt: r.closed_at,
+      unreadForAdmin: r.status === "open" && unread.has(r.id),
     };
   });
 }
@@ -93,5 +100,14 @@ export async function sendAdminTeacherStaffMessageAction(inquiryId: string, body
 export async function closeTeacherStaffInquiryAction(inquiryId: string): Promise<void> {
   const { supabase } = await requireAdmin();
   const { error } = await supabase.rpc("close_teacher_admin_inquiry", { p_inquiry_id: inquiryId });
+  if (error) throw new Error(error.message);
+}
+
+/** 관리자가 스레드를 열 때 호출 — 그 스레드의 관리자 읽음 시각을 지금으로 갱신(관리자 공용). */
+export async function markTeacherStaffInquiryReadByAdminAction(inquiryId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("teacher_admin_inquiry_admin_reads")
+    .upsert({ inquiry_id: inquiryId, last_read_at: new Date().toISOString() }, { onConflict: "inquiry_id" });
   if (error) throw new Error(error.message);
 }

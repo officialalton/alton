@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { FamilyMessengerPanel, useFamilyInquiryThreads } from "./FamilyMessengerPanel";
 import type { AdminInquiryThread } from "./inquiry-and-meeting-actions";
@@ -13,6 +13,7 @@ import {
   listStaffMessagesAction,
   sendAdminStaffMessageAction,
   closeStaffInquiryAction,
+  markStaffInquiryReadByAdminAction,
   type StaffInquiryListItem,
   type StaffMessage,
 } from "./staff-messenger-actions";
@@ -22,6 +23,7 @@ import {
   listTeacherStaffMessagesAction,
   sendAdminTeacherStaffMessageAction,
   closeTeacherStaffInquiryAction,
+  markTeacherStaffInquiryReadByAdminAction,
   type TeacherStaffInquiryListItem,
   type TeacherStaffMessage,
 } from "./teacher-staff-messenger-actions";
@@ -47,36 +49,55 @@ type SubtabId = (typeof SUBTABS)[number]["id"];
 export default function MessengerTab({
   initialInquiryThreads,
   initialSubtab = "consultants",
-  onFamilyUnreadChange,
+  initialUnreadCounts,
+  onUnreadChange,
 }: {
   initialInquiryThreads?: AdminInquiryThread[];
   initialSubtab?: SubtabId;
-  /** 사이드바 배지 동기화용. 가족 안읽음 수가 바뀔 때마다 알린다. */
-  onFamilyUnreadChange?: (count: number) => void;
+  /** 채널별 서버 집계 초기값(선생님·컨설턴트는 해당 서브탭을 열기 전까지 이 값을 쓴다). */
+  initialUnreadCounts?: { teachers: number; consultants: number; family: number };
+  /** 사이드바 배지 동기화용. 세 채널 합계가 바뀔 때마다 알린다. */
+  onUnreadChange?: (total: number) => void;
 }) {
   const [subtab, setSubtab] = useState<SubtabId>(initialSubtab);
   const family = useFamilyInquiryThreads(initialInquiryThreads);
-  const familyUnread = (family.data ?? []).filter((t) => t.status === "open" && t.unreadForAdmin).length;
-
+  const [staffUnread, setStaffUnread] = useState({
+    teachers: initialUnreadCounts?.teachers ?? 0,
+    consultants: initialUnreadCounts?.consultants ?? 0,
+  });
   const loaded = family.data !== null;
+  const familyUnread = loaded ? (family.data ?? []).filter((t) => t.status === "open" && t.unreadForAdmin).length : (initialUnreadCounts?.family ?? 0);
+  const total = staffUnread.teachers + staffUnread.consultants + familyUnread;
+
   useEffect(() => {
-    if (loaded) onFamilyUnreadChange?.(familyUnread);
+    if (loaded) onUnreadChange?.(total);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loaded, familyUnread]);
+  }, [loaded, total]);
+
+  const setTeachersUnread = useCallback((n: number) => setStaffUnread((p) => (p.teachers === n ? p : { ...p, teachers: n })), []);
+  const setConsultantsUnread = useCallback((n: number) => setStaffUnread((p) => (p.consultants === n ? p : { ...p, consultants: n })), []);
 
   return (
     <div className="max-w-[720px]">
       <div className="border-b border-grey-200 mb-5">
-        <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="border-b-0" badgeCounts={{ family: familyUnread }} />
+        <UnderlineSubTabs
+          items={SUBTABS}
+          activeId={subtab}
+          onSelect={setSubtab}
+          className="border-b-0"
+          badgeCounts={{ teachers: staffUnread.teachers, consultants: staffUnread.consultants, family: familyUnread }}
+        />
       </div>
-      {subtab === "teachers" && <TeacherMessengerPanel />}
-      {subtab === "consultants" && <ConsultantMessengerPanel />}
+      {subtab === "teachers" && <TeacherMessengerPanel onUnreadCount={setTeachersUnread} />}
+      {subtab === "consultants" && <ConsultantMessengerPanel onUnreadCount={setConsultantsUnread} />}
       {subtab === "family" && <FamilyMessengerPanel {...family} />}
     </div>
   );
 }
 
-function ConsultantMessengerPanel() {
+const UNREAD_PILL = <span className="ml-1.5 text-[11px] font-bold text-white bg-red rounded-full px-1.5 py-0.5">안읽음</span>;
+
+function ConsultantMessengerPanel({ onUnreadCount }: { onUnreadCount: (n: number) => void }) {
   const tz = useViewerTimezone();
   const [consultants, setConsultants] = useState<ConsultantWithStudents[] | null>(null);
   const [inquiries, setInquiries] = useState<StaffInquiryListItem[] | null>(null);
@@ -89,6 +110,10 @@ function ConsultantMessengerPanel() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
+  useEffect(() => {
+    if (inquiries) onUnreadCount(inquiries.filter((i) => i.status === "open" && i.unreadForAdmin).length);
+  }, [inquiries, onUnreadCount]);
+
   function reload() {
     listAllStaffInquiriesAction()
       .then(setInquiries)
@@ -99,9 +124,16 @@ function ConsultantMessengerPanel() {
     reload();
   }, []);
 
+  // 열면 즉시 낙관적으로 읽음 표시(배지 바로 갱신) → 서버 기록 → 목록 재조회.
+  function markRead(id: string, action: (id: string) => Promise<void>) {
+    setInquiries((prev) => (prev ? prev.map((i) => (i.id === id ? { ...i, unreadForAdmin: false } : i)) : prev));
+    action(id).then(reload).catch(() => {});
+  }
+
   function openInquiry(id: string) {
     setSelectedId(id);
     setMessages(null);
+    markRead(id, markStaffInquiryReadByAdminAction);
     listStaffMessagesAction(id)
       .then(setMessages)
       .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
@@ -254,6 +286,7 @@ function ConsultantMessengerPanel() {
             <div>
               <div className="text-[13px] font-bold text-ink">
                 {i.consultantName} · {i.subject ?? "제목 없음"}
+                {i.unreadForAdmin && UNREAD_PILL}
               </div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
@@ -265,7 +298,7 @@ function ConsultantMessengerPanel() {
   );
 }
 
-function TeacherMessengerPanel() {
+function TeacherMessengerPanel({ onUnreadCount }: { onUnreadCount: (n: number) => void }) {
   const tz = useViewerTimezone();
   const [teachers, setTeachers] = useState<TeacherListItem[] | null>(null);
   const [inquiries, setInquiries] = useState<TeacherStaffInquiryListItem[] | null>(null);
@@ -278,6 +311,10 @@ function TeacherMessengerPanel() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
+  useEffect(() => {
+    if (inquiries) onUnreadCount(inquiries.filter((i) => i.status === "open" && i.unreadForAdmin).length);
+  }, [inquiries, onUnreadCount]);
+
   function reload() {
     listAllTeacherStaffInquiriesAction()
       .then(setInquiries)
@@ -288,9 +325,16 @@ function TeacherMessengerPanel() {
     reload();
   }, []);
 
+  // 열면 즉시 낙관적으로 읽음 표시(배지 바로 갱신) → 서버 기록 → 목록 재조회.
+  function markRead(id: string, action: (id: string) => Promise<void>) {
+    setInquiries((prev) => (prev ? prev.map((i) => (i.id === id ? { ...i, unreadForAdmin: false } : i)) : prev));
+    action(id).then(reload).catch(() => {});
+  }
+
   function openInquiry(id: string) {
     setSelectedId(id);
     setMessages(null);
+    markRead(id, markTeacherStaffInquiryReadByAdminAction);
     listTeacherStaffMessagesAction(id)
       .then(setMessages)
       .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
@@ -443,6 +487,7 @@ function TeacherMessengerPanel() {
             <div>
               <div className="text-[13px] font-bold text-ink">
                 {i.teacherName} · {i.subject ?? "제목 없음"}
+                {i.unreadForAdmin && UNREAD_PILL}
               </div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
