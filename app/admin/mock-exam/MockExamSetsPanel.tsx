@@ -32,6 +32,8 @@ import { fmtDate } from "@/lib/format-datetime";
 
 // 대체 문항 필요 표시는 문제 오류 신고 기능(별도 액션 모듈) — 기존 화면 첫 렌더에 영향이 없도록 lazy 로 불러온다.
 const ReplacementNeedsBlock = lazy(() => import("./ReplacementNeeds").then((m) => ({ default: m.ReplacementNeedsBlock })));
+// hard 난이도 점검(2026-10-01) — 별도 서브탭이라 lazy 로 불러온다.
+const DifficultyReviewPanel = lazy(() => import("./DifficultyReviewPanel"));
 const ReplacementBadge = lazy(() => import("./ReplacementNeeds").then((m) => ({ default: m.ReplacementBadge })));
 
 const TIER_LABEL: Record<DifficultyTier, string> = { foundation: "기본", standard: "표준", advanced: "상위" };
@@ -40,7 +42,7 @@ const STATUS_LABEL: Record<string, string> = { draft: "초안", published: "공�
 // 2026-09-21(UAT 지적) — 관리자 모의고사 관리 화면을 생성/검토/공개/보관/배정/내역 6개
 // 서브탭으로 재구성한다. 기존엔 한 화면에 조립·목록·메타데이터만 있는 "검토" 테이블뿐이라
 // 실제 문항 내용을 볼 수 없었고, 보관·전체 배정·전체 응시 내역을 볼 방법도 없었다.
-const SUB_TABS = ["생성", "문항 풀", "검토", "배정", "내역", "공개", "보관"] as const;
+const SUB_TABS = ["생성", "문항 풀", "난이도 점검", "검토", "배정", "내역", "공개", "보관"] as const;
 type SubTab = (typeof SUB_TABS)[number];
 
 export default function MockExamSetsPanel({ initialSets }: { initialSets: MockExamSetSummary[] }) {
@@ -67,6 +69,11 @@ export default function MockExamSetsPanel({ initialSets }: { initialSets: MockEx
 
       {subTab === "생성" && <CreateTab initialSets={initialSets} />}
       {subTab === "문항 풀" && <PoolTab />}
+      {subTab === "난이도 점검" && (
+        <Suspense fallback={<p className="text-sm text-grey-500">불러오는 중...</p>}>
+          <DifficultyReviewPanel />
+        </Suspense>
+      )}
       {subTab === "검토" && <ReviewTab />}
       {subTab === "공개" && <PublishTab />}
       {subTab === "보관" && <ArchiveTab />}
