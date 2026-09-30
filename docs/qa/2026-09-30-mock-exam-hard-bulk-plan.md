@@ -58,3 +58,27 @@
 - **상한 US$16**(점추정 $13.4 + 약 15% 여유, 수율이 표본보다 낮으면 자동 중단). 단계별 상한: ① 선행 레시피 시험 $2.5 ② 텍스트 전용 54건 $10.0 ③ 자료 필요 skill 8건 $3.5(별도 승인). 단계마다 채택 수율이 25% 미만이거나 누적이 단계 상한의 90%에 이르면 **즉시 중단·보고**.
 - 대량 전 확인 요청 사항: (a) plan.json 에 원격 hard 중 AI 생성분 구분 필드, (b) 정답 기준 '둘 다 통과' 기본값 승인, (c) 채택 hard 임포트 시 난이도 상태 '잠정(AI 판정)' 저장 방식(품질 JSON 의 `mockExamGeneration.difficultyStatus` = `provisional_ai` 로 기록해 두었으니 다른 세션 구현이 읽을 필드명 합의).
 - 임포트는 이 계획에 포함하지 않는다(원격 임포트는 총괄). 실행 승인은 총괄이 오너에게 받는다.
+
+
+## 8. 선행 레시피 시험 결과(2026-09-30, ① 단계만 실행 — ②③ 대량 생성·원격 접근·임포트 없음)
+구간 지출 **$1.57**(`batch3/ledger.json`, 상한 $2.5, 모두 동기 단가) + 레시피 마련용 합성·생성 호출 약 $0.1(장부 외 소액 추정 기록) = 약 **$1.67**. 모델: 생성 Opus 5.5, hard 적합 검수 Fable 5.1(effort low), 참고 의견 Opus 5.5(effort low), 정답 정확성은 Fable·Opus 둘 다 통과 필수.
+
+### 레시피 마련
+- **cross_text_connections**: 실전 시험 문항이 7개뿐이라 `cb-synth.ts --only cross_text_connections --min-n 7`(상·하위 각 2개 대조)로 특성 4개를 얻고(근거 문항 test10-RW-M1-Q10, test11-RW-M1-Q9), `cb-recipes.ts --only`로 레시피 3개(`..._unstated_rebuttal`, `..._weak_point_target`, `perspective_bound_evaluation_author_criterion`)를 만들었다. **근거가 문항 2개 수준으로 얇다**(표본 7, 대조 그룹 2) — 레시피 타당성은 이 표본으로 확인된 것이 아니므로 출시 후 재검토 대상.
+- **systems_linear**: 커버리지 맵에 해당 라벨 문항이 없어 CB 대조 근거 없음(`evidence` 비어 있음). `linear_equations_two_var` v2 구조를 변형해 레시피 2개(`systems_linear_condition_param_then_solve`, `systems_linear_word_two_constraints_one_hidden`)를 직접 설계해 `recipes-v2.json`에 넣었다(난이도 출처에 '내부 설계, CB 근거 없음' 명시).
+- 기존 `recipes.json`·`archetypes.json`은 보존(recipes.json 에 cross_text_connections 항목만 추가).
+
+### 시험 결과(후보 전체 분모)
+| skill | 후보 | 생성 실패 | 결정론 통과 | Fable hard 적합 | 정답(둘 다) | 레시피 준수 | **채택** | 수율 | 비용 | 채택 1건당 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| cross_text_connections | 6 | 0 | 6 | 6/6 | 6/6 | 6/6 | **6** | **100%** | $0.99 | $0.165 |
+| systems_linear | 4 | 0 | 4 | 4/4 | 4/4 | 4/4 | **4** | **100%** | $0.58 | $0.145 |
+- 탈락 원인: 없음(10건 전부 채택). **수율 기준(25%) 충족** — 둘 다 medium 대체 없이 hard 공급 가능으로 판단. 단 표본이 작고(6·4건) 레시피 근거가 얇아(cross_text: 문항 2개, systems_linear: 근거 없음) **수율이 과대 추정일 수 있다**.
+- Opus 참고 의견(advisory): cross_text 6건 중 2건(00·01)은 hard 적합 '불합'(참고 기록만, 채택엔 영향 없음), systems_linear 4건은 Opus 도 hard 적합. 이번 Math 4건은 Math 재계산 결과 4건 통과·0건 생략, 정답 오류 없음. 이전 표본에서 Opus 는 Math hard 적합에 매우 엄격했으나(1/12) `systems_linear` 는 4/4 통과 — 레시피 구조(해의 개수 조건 → 계수 결정 → 재풀이)가 '추가 사고'로 인정받은 것으로 보이며 skill별 편차가 크다.
+- 채택분 10건은 `batch3/pilot/adopted-hard.json`(`hardJudge`·`advisory`·`difficultyStatus=provisional_ai`·`recipeId` 포함, 원격 임포트 전)에 있다. 유사도(후보 간·기존 은행 대비)는 이 단계에서 점검하지 않았다(임포트 스크립트가 본문 유사도 0.6 기준으로 제외).
+
+### ② 실행 전 재추정(선행 시험 반영)
+- 선행 채택 10건으로 `cross_text_connections`(부족 3)·`systems_linear`(부족 2)는 충족 → 대량 대상에서 제외. **남은 부족: RW 27 + Math 5 = 32**(이전 37 - 5... 위 표: RW central 4·inferences 3·command_of_evidence_quant 2·words_in_context 5·rhetorical_synthesis 4·transitions 3·boundaries 1·form_structure_sense 5 = 27, Math linear_equations_two_var 2·nonlinear_equations_systems 1·lines_angles_triangles 2 = 5).
+- 후보 수(안전계수 0.85 수율): 텍스트 전용 54건(RW 48 + Math 6), 자료 필요 8건(`command_of_evidence_quant` 4 + `lines_angles_triangles` 4). 합계 **62건**(이전 72건에서 선행 시험분 10건 감소).
+- 비용(후보당 $0.157 실측): 텍스트 전용 54건 약 $8.5, 자료 필요 8건(x1.5) 약 $1.9 → **약 $10.4**, 호출 약 290회. 단계 체크포인트에서 수율이 25% 미만이면 중단.
+- **실행 상한 재제안 US$12.5**(점추정 $10.4 + 약 20%; 앞선 제안 $16 에서 축소). 단계: ② 텍스트 전용 54건 상한 $9.5, ③ 자료 필요 8건 상한 $3.0(별도 승인).
