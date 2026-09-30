@@ -47,13 +47,22 @@ type SubtabId = (typeof SUBTABS)[number]["id"];
 export default function MessengerTab({
   initialInquiryThreads,
   initialSubtab = "consultants",
+  onFamilyUnreadChange,
 }: {
   initialInquiryThreads?: AdminInquiryThread[];
   initialSubtab?: SubtabId;
+  /** 사이드바 배지 동기화용. 가족 안읽음 수가 바뀔 때마다 알린다. */
+  onFamilyUnreadChange?: (count: number) => void;
 }) {
   const [subtab, setSubtab] = useState<SubtabId>(initialSubtab);
   const family = useFamilyInquiryThreads(initialInquiryThreads);
   const familyUnread = (family.data ?? []).filter((t) => t.status === "open" && t.unreadForAdmin).length;
+
+  const loaded = family.data !== null;
+  useEffect(() => {
+    if (loaded) onFamilyUnreadChange?.(familyUnread);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loaded, familyUnread]);
 
   return (
     <div className="max-w-[720px]">

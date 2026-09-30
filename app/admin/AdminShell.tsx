@@ -131,6 +131,7 @@ export default function AdminShell({
   assignedAwaitingSchedule,
   autoAssignEnabled,
   initialMeetingActionCount,
+  initialMessengerUnread = 0,
 }: {
   initialTab?: string;
   // 2026-09-10(P1 재진입 성능 배치) — 탭 데이터 캐시(tab-data-cache.ts)를
@@ -185,6 +186,8 @@ export default function AdminShell({
   assignedAwaitingSchedule: IntakeConsultation[];
   autoAssignEnabled: boolean;
   initialMeetingActionCount?: number;
+  /** 사이드바 Messenger 배지 초기값(서버 계산). 가족 채널 안읽음 문의 수. */
+  initialMessengerUnread?: number;
 }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabId>(resolveAdminTab(initialTab));
@@ -240,6 +243,11 @@ export default function AdminShell({
   // 2026-09-22(관리자 계정 구조) — "Admins"는 마스터(official@alton.education)만
   // 본다. isMasterAdmin은 admin_tier='master' 여부를 SSR에서 이미 확인한 값
   // (admin-accounts-data.ts의 서버 액션이 최종 방어선).
+  // Messenger 배지: 서버 값(initialMessengerUnread)을 기준으로 하되, Messenger 탭이
+  // 열려 있는 동안 읽음 처리로 바뀐 실시간 값(live)은 같은 서버 값 위에서만 유효.
+  const [messengerLive, setMessengerLive] = useState<{ from: number; value: number } | null>(null);
+  const messengerUnread = messengerLive && messengerLive.from === initialMessengerUnread ? messengerLive.value : initialMessengerUnread;
+  const navBadgeCounts: Record<string, number> = { messenger: messengerUnread };
   const visibleNavItems = NAV_ITEMS.filter((n) => n.id !== "admin-accounts" || isMasterAdmin);
   const mobileGroups = [
     { label: "운영", items: visibleNavItems.filter((n) => OPERATIONS_IDS.includes(n.id)) },
@@ -276,6 +284,17 @@ export default function AdminShell({
           >
             <NavIcon name={item.icon} className="w-[18px] h-[18px] shrink-0" />
             {item.label}
+            {(navBadgeCounts[item.id] ?? 0) > 0 && (
+              <span
+                data-testid={`nav-badge-${item.id}`}
+                className={
+                  "ml-auto inline-flex min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-bold items-center justify-center " +
+                  (activeTab === item.id ? "bg-white text-brand-red" : "bg-brand-red text-white")
+                }
+              >
+                {navBadgeCounts[item.id] > 9 ? "9+" : navBadgeCounts[item.id]}
+              </span>
+            )}
           </button>
         ))}
 
@@ -338,7 +357,7 @@ export default function AdminShell({
         />
       )}
 
-      <MobileDrawerNav groups={mobileGroups} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
+      <MobileDrawerNav groups={mobileGroups} badgeCounts={navBadgeCounts} activeId={activeTab} onSelect={(id) => selectTab(id as TabId)} />
 
       <div className="flex-1 min-w-0 flex flex-col">
         {/* 2026-09-19(UAT 반영) — 데스크톱은 계정 메뉴가 사이드바 맨 아래로
@@ -470,7 +489,7 @@ export default function AdminShell({
               initialMeetingActionCount={initialMeetingActionCount}
             />
           ) : activeTab === "messenger" ? (
-            <MessengerTab initialInquiryThreads={initialInquiryThreads} initialSubtab={initialTab === LEGACY_INQUIRY_TAB_ID ? "family" : undefined} />
+            <MessengerTab initialInquiryThreads={initialInquiryThreads} onFamilyUnreadChange={(n) => setMessengerLive({ from: initialMessengerUnread, value: n })} initialSubtab={initialTab === LEGACY_INQUIRY_TAB_ID ? "family" : undefined} />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
               {activeLabel} 탭은 준비 중입니다.

@@ -95,6 +95,16 @@ vi.mock("./entitlement-actions", () => ({
   adminLookupPurchaseDetail: vi.fn(),
 }));
 
+// Messenger 배지 테스트용 — 실제 MessengerTab 대신 안읽음 수를 올려 보내는 대역.
+vi.mock("./MessengerTab", () => ({
+  default: ({ onFamilyUnreadChange }: { onFamilyUnreadChange?: (n: number) => void }) => (
+    <div>
+      <button onClick={() => onFamilyUnreadChange?.(0)}>읽음처리</button>
+      <button onClick={() => onFamilyUnreadChange?.(3)}>세건</button>
+    </div>
+  ),
+}));
+
 const dashboard: AdminDashboardData = {
   adminName: "관리자",
   pendingConsults: [],
@@ -273,5 +283,31 @@ describe("AdminShell", () => {
     fireEvent.click(payoutsNavButton);
     expect(payoutsNavButton).toHaveAttribute("aria-current", "page");
     expect(homeButton).not.toHaveAttribute("aria-current");
+  });
+
+  describe("Messenger 사이드바 배지", () => {
+    it("안읽음 합계를 표시하고 9 초과는 9+, 0이면 숨긴다", () => {
+      const { rerender } = render(<AdminShell {...baseProps} initialMessengerUnread={4} />);
+      expect(screen.getByTestId("nav-badge-messenger")).toHaveTextContent("4");
+      rerender(<AdminShell {...baseProps} initialMessengerUnread={27} />);
+      expect(screen.getByTestId("nav-badge-messenger")).toHaveTextContent("9+");
+      rerender(<AdminShell {...baseProps} initialMessengerUnread={0} />);
+      expect(screen.queryByTestId("nav-badge-messenger")).toBeNull();
+    });
+
+    it("모바일 드로어에도 같은 배지가 표시된다", () => {
+      render(<AdminShell {...baseProps} initialMessengerUnread={2} />);
+      fireEvent.click(screen.getByLabelText("메뉴 열기"));
+      expect(screen.getByTestId("drawer-badge-messenger")).toHaveTextContent("2");
+    });
+
+    it("Messenger 탭에서 읽음 처리로 수가 바뀌면 배지가 따라간다", () => {
+      render(<AdminShell {...baseProps} initialTab="messenger" initialMessengerUnread={3} />);
+      expect(screen.getByTestId("nav-badge-messenger")).toHaveTextContent("3");
+      fireEvent.click(screen.getByText("읽음처리"));
+      expect(screen.queryByTestId("nav-badge-messenger")).toBeNull();
+      fireEvent.click(screen.getByText("세건"));
+      expect(screen.getByTestId("nav-badge-messenger")).toHaveTextContent("3");
+    });
   });
 });
