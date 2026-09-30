@@ -17,6 +17,7 @@ import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import MockExamResultView from "./MockExamResultView";
+import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 
 // 고정형 SAT 모의고사 V1 — 학생 응시 화면(사양 3절 학생 흐름, 4절 수업 탭/독립 진입 공용).
@@ -469,6 +470,12 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 data-testid="mock-exam-spr-input"
               />
             )}
+            <ProblemErrorReportButton
+              key={current.setItemId}
+              className="mt-3"
+              role="student"
+              context={{ source: "mock_exam", attemptId: attempt.id, setItemId: current.setItemId, problemId: current.problemId }}
+            />
             <ProblemNoteCanvas context="mock_exam" targetId={attempt.id} itemId={current.setItemId} />
           </div>
         ) : null}

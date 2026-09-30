@@ -69,6 +69,8 @@ export type BankProblem = {
   subjectName: string;
   /** 문제 자체가 보관됐는가. 버전 상태와는 다른 축이다. */
   archived: boolean;
+  /** 문제 오류 신고가 열려 있어 검토가 필요하다(신고 1건부터). 신고 탭에서 판정한다. */
+  reviewNeeded?: boolean;
   /** 지금 이 문제가 어느 단계에 있는가 — 작업 중인 버전이 있으면 그 상태. */
   workState: "draft" | "in_review" | "published" | "none";
   keywords: { id: string; label: string }[];
@@ -159,7 +161,7 @@ export async function listBankProblemsAction(
   let q = admin
     .from("problems")
     .select(
-      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via, subpattern, usage_scope, similarity_group, similarity_group_manual"
+      "id, format, passage, skill_type, topic, difficulty, subject_id, status, archived_at, created_at, sat_domain, skill_code, exam_system, ap_subject, created_via, subpattern, usage_scope, similarity_group, similarity_group_manual, error_review_needed"
     )
     .order("created_at", { ascending: false })
     .limit(200);
@@ -300,6 +302,7 @@ export async function listBankProblemsAction(
     subjectId: (r.subject_id as string | null) ?? null,
     subjectName: r.subject_id ? nameById.get(r.subject_id as string) ?? "(과목 없음)" : "(과목 없음)",
     archived: Boolean(r.archived_at),
+    reviewNeeded: Boolean((r as { error_review_needed?: boolean }).error_review_needed),
     workState: stateByProblem.get(r.id as string) ?? "none",
     keywords: keywordsByProblem.get(r.id as string) ?? [],
     updatedAt: r.created_at as string,

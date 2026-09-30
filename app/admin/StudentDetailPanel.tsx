@@ -6,6 +6,7 @@ import { setStudentStatus, adjustStudentCredit, verifyStudentDateOfBirth } from 
 import type { CreditTransaction, StudentListItem } from "./users-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import type { AdminSubject } from "./subject-data";
+import StaffStudentViews from "@/app/components/StaffStudentViews";
 
 const STATUS_LABEL: Record<string, string> = {
   active: "활성",
@@ -193,6 +194,15 @@ export default function StudentDetailPanel({
           프로필·로드맵 전체 열람/수정
         </Link>
       </div>
+
+      <details className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <summary className="cursor-pointer text-[11px] font-bold text-grey-300 uppercase tracking-wide">
+          학생 화면 열람 (오버뷰·보드·통계, 읽기 전용)
+        </summary>
+        <div className="mt-3">
+          <StaffStudentViews studentId={student.id} />
+        </div>
+      </details>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">

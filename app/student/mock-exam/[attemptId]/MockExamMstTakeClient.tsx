@@ -4,6 +4,7 @@
 // RPC가 결정한다 — 0초가 되면 모듈 제출을 호출하고, 어떤 경로로든 서버 상태를 다시 받아 갱신한다.
 // 새로고침·재접속 시에도 page.tsx가 같은 상태 RPC로 복구한다. 적응형 경로명은 절대 표시하지 않는다.
 
+import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -347,6 +348,13 @@ export default function MockExamMstTakeClient({
                   />
                 </div>
               )}
+
+              <ProblemErrorReportButton
+                key={item.setItemId}
+                className="mt-6"
+                role="student"
+                context={{ source: "mock_exam", attemptId: state.attemptId, setItemId: item.setItemId, problemId: item.problemId }}
+              />
 
               <div className="mt-8 flex justify-between">
                 <button

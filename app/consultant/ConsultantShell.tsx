@@ -30,16 +30,8 @@ import {
   updateMyConsultantProfileAction,
   type ConsultantProfile,
 } from "./profile-actions";
-import PlannerOverviewView from "@/app/student/PlannerOverviewView";
-import BoardColumnsView from "@/app/components/BoardColumnsView";
+import StaffStudentViews from "@/app/components/StaffStudentViews";
 import type { ConsultantStudent, EndedConsultantStudent } from "./consultant-data";
-import {
-  loadStudentBoardCardsAction,
-  createStudentManualTaskAction,
-  updateStudentManualTaskStatusAction,
-  deleteStudentManualTaskAction,
-} from "./board-actions";
-import type { BoardCard } from "@/lib/board/types";
 import type { IntakeConsultation } from "./intake-data";
 import { loadMyPendingOnboardingStudentsAction, type PendingOnboardingStudent } from "./intake-actions";
 import ConsultationKanbanBoard from "@/app/admin/ConsultationKanbanBoard";
@@ -1670,11 +1662,8 @@ function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStuden
   );
 }
 
-type StudentSubView = "overview" | "board" | "roadmap" | "messenger";
-
-// 컨설턴트 Round A(2026-09-22 사용자 지시) — 담당 학생 진입 시 Overview/Board/
-// Roadmap 세 화면을 오갈 수 있게 하고, Board는 학생 본인처럼 직접 수정할 수
-// 있게 한다(RLS: 20261461000000, is_assigned_consultant_of()).
+// 담당 학생 진입 — 오버뷰·보드·통계는 역할 공통 화면(StaffStudentViews, 서버가 담당 여부와
+// 쓰기 권한을 검사)을 쓰고, 로드맵·메신저는 컨설턴트 고유 탭으로 같은 탭 줄에 붙인다.
 function StudentPanel({
   studentId,
   studentName,
@@ -1684,25 +1673,6 @@ function StudentPanel({
   studentName: string;
   onBack: () => void;
 }) {
-  const [subView, setSubView] = useState<StudentSubView>("overview");
-  // 2026-09-22(사용자 지적 — 탭 전환마다 로딩이 길다) — Overview/Board가
-  // 각자 loadStudentBoardCardsAction을 따로 호출해 학생을 열 때마다 최대
-  // 2번 같은 데이터를 중복 조회했다. 여기서 한 번만 불러와 두 탭이 공유한다.
-  const [cards, setCards] = useState<BoardCard[] | null>(null);
-  const [cardsError, setCardsError] = useState<string | null>(null);
-
-  function reloadCards() {
-    loadStudentBoardCardsAction(studentId)
-      .then(setCards)
-      .catch((e) => setCardsError(e instanceof Error ? e.message : "불러오지 못했습니다."));
-  }
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
-    setCards(null);
-    reloadCards();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentId]);
-
   return (
     <div className="max-w-[720px] px-8 py-8">
       <button
@@ -1712,106 +1682,13 @@ function StudentPanel({
         ← 담당 학생 목록
       </button>
       <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-4">{studentName}</h1>
-
-      <div className="flex gap-1 mb-5 border-b border-grey-200">
-        {(
-          [
-            { id: "overview", label: "Overview" },
-            { id: "board", label: "Board" },
-            { id: "roadmap", label: "Roadmap" },
-            { id: "messenger", label: "메신저" },
-          ] as const
-        ).map((t) => (
-          <button
-            key={t.id}
-            onClick={() => setSubView(t.id)}
-            className={
-              "px-3 py-2 text-[13px] font-bold border-b-2 -mb-px " +
-              (subView === t.id ? "border-ink text-ink" : "border-transparent text-grey-500")
-            }
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-
-      {subView === "overview" ? (
-        cards === null ? (
-          <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>
-        ) : (
-          <PlannerOverviewView cards={cards} />
-        )
-      ) : subView === "board" ? (
-        <StudentBoardPanel studentId={studentId} cards={cards} error={cardsError} onReload={reloadCards} />
-      ) : subView === "roadmap" ? (
-        <StudentRoadmapPanel studentId={studentId} />
-      ) : (
-        <ConsultantMessengerPanel key={studentId} studentId={studentId} />
-      )}
-    </div>
-  );
-}
-
-function StudentBoardPanel({
-  studentId,
-  cards,
-  error,
-  onReload,
-}: {
-  studentId: string;
-  cards: BoardCard[] | null;
-  error: string | null;
-  onReload: () => void;
-}) {
-  const [newTitle, setNewTitle] = useState("");
-  const [adding, setAdding] = useState(false);
-
-  async function handleAdd() {
-    const title = newTitle.trim();
-    if (!title) return;
-    setAdding(true);
-    try {
-      await createStudentManualTaskAction(studentId, title);
-      setNewTitle("");
-      onReload();
-    } finally {
-      setAdding(false);
-    }
-  }
-
-  async function handleMove(cardId: string, status: BoardCard["status"]) {
-    await updateStudentManualTaskStatusAction(cardId, status);
-    onReload();
-  }
-
-  async function handleDelete(cardId: string) {
-    await deleteStudentManualTaskAction(cardId);
-    onReload();
-  }
-
-  if (cards === null) return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
-
-  return (
-    <div>
-      {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
-      <form
-        className="flex gap-2 mb-5"
-        onSubmit={(e) => {
-          e.preventDefault();
-          void handleAdd();
-        }}
-      >
-        <input
-          value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
-          placeholder="+ 할 일 추가"
-          className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
-        />
-        <button type="submit" disabled={adding || !newTitle.trim()} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-          추가
-        </button>
-      </form>
-      <BoardColumnsView cards={cards} onMove={handleMove} onDelete={handleDelete} />
+      <StaffStudentViews
+        studentId={studentId}
+        extraTabs={[
+          { id: "roadmap", label: "Roadmap", render: () => <StudentRoadmapPanel studentId={studentId} /> },
+          { id: "messenger", label: "메신저", render: () => <ConsultantMessengerPanel key={studentId} studentId={studentId} /> },
+        ]}
+      />
     </div>
   );
 }
