@@ -25,11 +25,20 @@ const effective: Eff[] = raws.map((r) => {
   const rev = reviews.get(r.gid);
   if (!rev) return { raw: r, verdict: "unreviewed", reasons: ["not_reviewed"], review: null };
   // AI 판정 사유만 가져오고, 결정론 사유(원시 LaTeX 등)와 오답 제거 용이성은 여기서 현재 규칙으로 다시 계산한다.
-  const DET = new Set(["weak_distractors", "raw_latex_in_body", "unbalanced_dollar_in_body", "raw_latex_in_explanation", "unbalanced_dollar_in_explanation", "internal_field_name_exposed", "empty_explanation"]);
+  const DET = new Set(["weak_distractors", "difficulty_label_mismatch", "raw_latex_in_body", "unbalanced_dollar_in_body", "raw_latex_in_explanation", "unbalanced_dollar_in_explanation", "internal_field_name_exposed", "empty_explanation"]);
   const reasons = [...rev.reasons.filter((x) => !DET.has(x) && !x.startsWith("near_duplicate_of")), ...deterministicIssues(r)];
   if (!rev.blind) reasons.push(...rev.reasons.filter((x) => x.startsWith("near_duplicate_of")));
   const elim = (rev.blind?.easilyEliminated ?? []).filter((i) => i !== r.problem.correctIndex).length;
   if (r.format === "mc" && rev.blind && elim >= weak[r.difficulty]) reasons.push("weak_distractors");
+  // 난이도 라벨: 블라인드 풀이가 라벨과 두 단계 이상 어긋나면(hard↔easy) 보관 후보. 단, 라벨이 hard 이고 파이프라인(설계 정보를 본 추정)이
+  // hard 라고 본 문항은 두 추정이 갈리는 것이므로 통과시키고 difficulty_disputed 로 기록한다(풀이 모델은 대체로 SAT 문항을 쉽게 본다).
+  if (rev.blind) {
+    const ord = { easy: 0, medium: 1, hard: 2 } as Record<string, number>;
+    if (Math.abs(ord[r.difficulty] - ord[rev.blind.estimatedDifficulty]) >= 2) {
+      const pipeEst = (r.quality as { estimatedDifficulty?: string } | undefined)?.estimatedDifficulty;
+      if (!(r.difficulty === "hard" && pipeEst === "hard")) reasons.push("difficulty_label_mismatch");
+    }
+  }
   return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, review: rev };
 });
 // 통과 후보끼리 다시 한 번 유사도 제거(라운드가 섞여도 먼저 생성된 문항을 남긴다).

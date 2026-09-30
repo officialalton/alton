@@ -17,9 +17,12 @@ if (existsSync(envPath)) {
 }
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 const MODEL = "claude-sonnet-5";
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// 클라이언트는 호출 시점에 만든다 — 모듈 로드만 하는 테스트(jsdom)에서 SDK 가 브라우저 환경으로 오해하지 않게.
+let clientInstance: Anthropic | null = null;
+const getClient = () => (clientInstance ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }));
 
 export type Raw = {
+  quality?: { estimatedDifficulty?: string };
   gid: string; generatedAt?: string; runId: string; skill: string; domain: string; examSystem: string; difficulty: "easy" | "medium" | "hard"; format: "mc" | "spr";
   problem: { passage?: string | null; stimulus?: string | null; question?: string | null; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string; figure?: unknown; statements?: string[] | null };
 };
@@ -33,7 +36,7 @@ export type ReviewResult = {
 const ask = async (name: string, description: string, schema: Record<string, unknown>, prompt: string): Promise<Record<string, unknown>> => {
   for (let attempt = 0; attempt < 4; attempt++) {
     try {
-      const msg = await client.messages.create({
+      const msg = await getClient().messages.create({
         model: MODEL, max_tokens: 2000,
         tools: [{ name, description, input_schema: { type: "object", properties: schema, required: Object.keys(schema) } as never }],
         tool_choice: { type: "tool", name },
