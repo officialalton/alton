@@ -55,7 +55,7 @@ export default function TeacherMockExamAttemptViewer({ attempt }: { attempt: Moc
       </div>
       {current && (
         <div className="min-w-0 flex-1">
-          <ItemDetail item={current} attemptId={attempt.id} studentId={attempt.studentId} viewerIsOwner={false} />
+          <ItemDetail item={current} attemptId={attempt.id} studentId={attempt.studentId} viewerIsOwner={false} reportRole="teacher" />
         </div>
       )}
       </div>

@@ -61,6 +61,10 @@ export type SessionProblem = {
   autoCorrect: boolean | null;
   /** 가장 최근 풀이판 id — 교사 채점이 가리킬 대상. */
   latestWorkId: string | null;
+  /** 문항 오류 판정으로 이 풀이의 채점이 조정됐다(채점 뒤 학생·보호자 안내용). */
+  errorAdjusted?: boolean;
+  /** 선생님이 이미 채점한 풀이가 오류 판정(전원 정답)과 달라 확인이 필요하다 — 수동 채점은 덮어쓰지 않고 표시만 한다. */
+  errorAdjustmentPending?: boolean;
   /**
    * 이 수업이 쓴 문제 내용이 보존돼 있지 않다.
    *
@@ -224,6 +228,8 @@ async function buildSessionProblems(
       grade: ProblemGrade | null;
       gradeComment: string | null;
       gradedAt: string | null;
+      errorAdjustedAt: string | null;
+      errorAdjustmentPending: boolean;
     } | null;
   };
   const emptyState = (): WorkState => ({ attempts: 0, solved: false, latest: null });
@@ -231,7 +237,7 @@ async function buildSessionProblems(
   if (viewer.studentId) {
     const { data: work } = await supabase
       .from("session_problem_work")
-      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, submitted_text, grade, grade_comment, graded_at")
+      .select("id, problem_id, attempt_no, submitted_at, submitted_choice_index, submitted_text, grade, grade_comment, graded_at, error_adjusted_at, error_adjustment_pending")
       .eq("session_id", sessionId)
       .eq("student_id", viewer.studentId)
       // 과제 답안은 수업 답안과 따로 — 같은 문제라도 섞이지 않는다(2026-09-14).
@@ -252,6 +258,8 @@ async function buildSessionProblems(
               grade: (w.grade as ProblemGrade | null) ?? null,
               gradeComment: (w.grade_comment as string | null) ?? null,
               gradedAt: (w.graded_at as string | null) ?? null,
+              errorAdjustedAt: (w.error_adjusted_at as string | null) ?? null,
+              errorAdjustmentPending: Boolean(w.error_adjustment_pending),
             }
           : prev.latest;
       attemptsByProblemId.set(key, {
@@ -296,6 +304,8 @@ async function buildSessionProblems(
       // 자동 채점 결과는 정답과 같은 정보다 — 정답을 볼 자격이 있을 때만.
       autoCorrect: revealAnswers ? (state.latest?.autoCorrect ?? null) : null,
       latestWorkId: state.latest?.workId ?? null,
+      errorAdjusted: Boolean(state.latest?.errorAdjustedAt),
+      errorAdjustmentPending: Boolean(state.latest?.errorAdjustmentPending),
       ...(preservedUnavailable ? { preservedUnavailable: true } : {}),
     };
   });

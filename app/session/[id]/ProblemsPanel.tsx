@@ -28,6 +28,9 @@ import { renderFigureSvg } from "@/lib/problem-figures/render";
 import type { FigureSpec } from "@/lib/problem-figures/spec";
 import ProblemFigure from "./ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "./MockExamMathTools";
+import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
+import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
+import type { MyReportStatus } from "@/lib/problem-error-reports/labels";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -119,6 +122,22 @@ export default function ProblemsPanel({
   const isStudent = viewerRole === "student";
   const isTeacher = viewerRole === "teacher";
   const canDraw = isStudent || isTeacher;
+  // 문제 오류 신고는 학생·선생님만(학부모·관리자 제외). 내가 신고한 문항의 진행 상태는 패널당 한 번만 조회한다.
+  const canReport = isStudent || isTeacher;
+  const [myReports, setMyReports] = useState<Record<string, MyReportStatus>>({});
+  const reportIdsKey = canReport ? problems.filter((p) => !p.planned && !p.preservedUnavailable).map((p) => p.problemId).join(",") : "";
+  useEffect(() => {
+    if (!reportIdsKey) return;
+    let cancelled = false;
+    loadMyProblemErrorReportsAction(reportIdsKey.split(","))
+      .then((r) => {
+        if (!cancelled && r.ok) setMyReports(r.value);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [reportIdsKey]);
   // 교사·관리자의 정답·해설은 기본 **접힘** — 화면을 학생과 함께 보며 풀 때 답이 먼저 보이면 안 된다.
   const isTeacherLike = viewerRole === "teacher" || viewerRole === "admin";
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
@@ -552,6 +571,37 @@ export default function ProblemsPanel({
                   <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts}번 풀어봄</span>
                 )}
               </header>
+
+              {canReport && !p.planned && !p.preservedUnavailable && (
+                <div className="-mt-2 mb-3 flex justify-end">
+                  <ProblemErrorReportButton
+                    role={isTeacher ? "teacher" : "student"}
+                    initialStatus={myReports[p.problemId] ?? null}
+                    context={{ source: "session_assignment", sessionId, sessionSource: source, problemId: p.problemId }}
+                  />
+                </div>
+              )}
+
+              {/* 문항 오류 판정으로 채점이 조정된 풀이 — 학생·보호자는 채점 뒤에만, 선생님은 '조정 대상'으로 본다. */}
+              {p.graded && !isTeacherLike && p.errorAdjusted && (
+                <div role="note" data-testid="problem-error-adjusted" className="mb-4 rounded-xl border border-green bg-green/10 px-4 py-2.5 text-[12.5px] font-semibold text-green">
+                  {p.errorAdjustmentPending
+                    ? "문항 오류가 확인되어 선생님이 채점을 다시 확인하고 있어요."
+                    : "문항 오류로 채점이 조정되었습니다."}
+                </div>
+              )}
+              {isTeacher && p.errorAdjustmentPending && (
+                <div role="note" data-testid="problem-error-pending" className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-yellow bg-yellow-bg px-4 py-2.5 text-[12.5px] font-semibold text-ink">
+                  <span>조정 대상 — 문항 오류 판정으로 이 풀이의 자동 채점이 정답으로 바뀌었습니다. 직접 채점한 결과는 그대로이니 다시 채점해 주세요.</span>
+                  <button
+                    type="button"
+                    onClick={() => setRegrading((prev) => new Set(prev).add(p.problemId))}
+                    className="rounded-lg border-[1.5px] border-ink px-3 py-1 text-[12px] font-bold"
+                  >
+                    채점 다시 확인
+                  </button>
+                </div>
+              )}
 
               <div ref={p.problemId === currentProblem?.problemId ? passageRef : undefined} onMouseUp={handlePassageMouseUp}>
                 {p.passage ? (
