@@ -286,7 +286,7 @@ export default function ConsultationSchedulingPanel() {
         </div>
         {cancelledSyncIssues.map((c) => (
           <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-3 mb-3">
-            <p className="text-[12.5px] font-bold text-ink">{formatDateTime(c.starts_at)} · {c.contact_name} (취소됨)</p>
+            <p className="text-[12.5px] font-bold text-ink">{formatDateTime(c.starts_at, timezone)} · {c.contact_name} (취소됨)</p>
             <CalendarSyncFailure c={c} busy={busyId === c.id} onResync={() => withBusy(c.id, async () => { await resyncConsultationCalendar(c.id); }, "Google 재동기화")} />
           </div>
         ))}
