@@ -26,6 +26,9 @@ function mockRefs(): Raw[] {
       if (existsSync(f)) for (const r of JSON.parse(readFileSync(f, "utf-8")) as Raw[]) out.push({ ...r, generatedAt: "0000" });
     }
   }
+  // 같은 run 의 다른 stage 통과분도 비교 대상(stage 간 중복 방지).
+  const gg = path.resolve("data/general-generation", runId!);
+  if (existsSync(gg)) for (const st of readdirSync(gg)) { const f = path.join(gg, st, "final/passed.json"); if (st !== stage && existsSync(f)) for (const r of JSON.parse(readFileSync(f, "utf-8")) as Raw[]) out.push({ ...r, generatedAt: "0000" }); }
   return [...new Map(out.map((r) => [r.gid, r])).values()];
 }
 const pool = async <T>(items: T[], fn: (t: T) => Promise<void>) => { const q = [...items]; await Promise.all(Array.from({ length: concurrency }, async () => { while (q.length) await fn(q.shift()!); })); };
