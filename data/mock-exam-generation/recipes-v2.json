@@ -170,5 +170,36 @@
    "officialDifficulty": null,
    "difficultySource": "내부 추정: 7개 실전 시험 문항 내용 기반 사고 요구 상위 25% 대 하위 25% 대조(공식 난이도 표기 없음) (v2: Math 생성 지시를 구체적 구조 골격으로 단순화, 요구 사고 수준은 동일)"
   }
+ ],
+ "systems_linear": [
+  {
+   "id": "systems_linear_condition_param_then_solve",
+   "instruction": "연립일차방정식 두 식 중 한 식의 미지 계수를 '해가 없다' 또는 '해가 무수히 많다' 조건(기울기·상수항 비례)으로 먼저 결정한 뒤, 그 계수를 넣은 연립식의 다른 경우(계수를 바꾼 식)에서 해의 x+y 값을 묻는다. 오답은 계수만 구한 값, 비례 조건을 기울기만 맞추고 상수항을 무시한 값, 해 대신 교점 하나만 본 값으로 만든다.",
+   "beyondMedium": "해의 개수 조건을 계수 조건으로 번역한 뒤 그 계수로 다시 연립을 풀어야 한다(단일 대입으로 끝나지 않음)",
+   "checklist": [
+    "해의 개수(없음/무수히 많음) 조건으로 계수를 결정하는 단계가 있는가",
+    "결정된 계수를 사용해 연립식을 다시 풀어야 답이 나오는가",
+    "오답에 계수만 구한 중간값이 있는가",
+    "숫자와 계산이 medium 수준으로 단순한가"
+   ],
+   "minMet": 3,
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "인접 skill(linear_equations_two_var v2) 레시피 변형 — 커버리지 맵에 systems_linear 라벨 문항이 없어 CB 대조 근거 없음(evidence 비어 있음), 내부 설계"
+  },
+  {
+   "id": "systems_linear_word_two_constraints_one_hidden",
+   "instruction": "문장제에서 두 조건(개수 합·금액 합)으로 연립식을 세우되, 묻는 것은 두 미지수가 아니라 조건 변경 후(예: 한 종류 단가가 2 오를 때)의 총액 차이 같은 파생량으로 한다. 오답은 원래 미지수 값, 조건 변경을 한쪽에만 적용한 값, 합과 차를 혼동한 값으로 만든다.",
+   "beyondMedium": "연립식 세우기 + 풀이 + 조건 변경 후 파생량 추론의 세 단계",
+   "checklist": [
+    "두 조건으로 연립식을 세워야 하는가",
+    "최종 질문이 미지수 자체가 아니라 파생량인가",
+    "오답에 미지수 원래 값을 답한 선지가 있는가"
+   ],
+   "minMet": 3,
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "인접 skill(linear_equations_two_var v2) 레시피 변형 — 커버리지 맵에 systems_linear 라벨 문항이 없어 CB 대조 근거 없음(evidence 비어 있음), 내부 설계"
+  }
  ]
 }

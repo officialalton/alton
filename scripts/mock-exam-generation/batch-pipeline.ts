@@ -24,7 +24,7 @@ const COMBOS: Record<string, { gen: string; rev: string }> = {
 };
 const RUN = path.resolve("data/mock-exam-generation/mockgen-20260929");
 const RW_SKILLS = ["transitions", "boundaries", "command_of_evidence_text", "text_structure_purpose"];
-const MATH_SKILLS = ["linear_equations_one_var", "linear_equations_two_var", "equivalent_expressions"];
+const MATH_SKILLS = ["linear_equations_one_var", "linear_equations_two_var", "equivalent_expressions", "systems_linear"];
 type Recipe = { id: string; instruction: string; beyondMedium: string; checklist: string[]; minMet: number };
 const recipesAll = JSON.parse(readFileSync("data/mock-exam-generation/recipes.json", "utf-8")) as Record<string, Recipe[]>;
 const recipesV2 = JSON.parse(readFileSync("data/mock-exam-generation/recipes-v2.json", "utf-8")) as Record<string, Recipe[]>;
@@ -38,18 +38,20 @@ const QUESTION_RULE: Record<string, string> = {
   boundaries: "지문에 빈칸 `______` 을 정확히 1개 두고, 질문은 정확히 'Which choice completes the text so that it conforms to the conventions of Standard English?'. 선택지는 문장부호·접속 조합 4개. 빈칸 앞 단어를 선택지 첫 단어로 반복하지 않는다.",
   command_of_evidence_text: "지문은 주장(가설·견해)을 소개하고, 질문은 'Which finding, if true, would most directly support (또는 weaken) the ...?' 형식. 선택지는 발견 4개.",
   text_structure_purpose: "지문 안의 한 문장을 `__…__`(밑줄 표기)로 정확히 1곳 표시하고, 질문은 'Which choice best describes the function of the underlined sentence in the text as a whole?'. 선택지는 기능 설명 4개.",
+  cross_text_connections: "지문은 'Text 1' 제목 줄 + 본문(20단어 이상), 빈 줄, 'Text 2' 제목 줄 + 본문(20단어 이상) 형식. 질문은 Text 1/Text 2 를 가리키며 'Based on the texts, how would the author of Text 2 most likely respond to ... in Text 1?' 류의 완전한 의문문. 선택지는 반응·관계 4개.",
+  systems_linear: "자료 없는 텍스트 문항(그림 금지). 연립일차방정식을 문장·식으로 준다. 수식은 $…$ 만 사용.",
   linear_equations_one_var: "자료 없는 텍스트 문항. 질문은 값을 구하거나 식을 세우는 한 문장. 수식은 $…$ 만 사용.",
   linear_equations_two_var: "자료 없는 텍스트 문항(그림 금지). 직선·연립 조건을 문장과 식으로 준다. 수식은 $…$ 만 사용.",
   equivalent_expressions: "자료 없는 텍스트 문항. 식·표(마크다운 금지, 값은 문장으로)를 문장으로 준다. 수식은 $…$ 만 사용.",
 };
-const SKILLS_LABEL: Record<string, string> = { transitions: "Transitions", boundaries: "Boundaries", command_of_evidence_text: "Command of Evidence (Textual)", text_structure_purpose: "Text Structure and Purpose", linear_equations_one_var: "Linear equations in one variable", linear_equations_two_var: "Linear equations in two variables", equivalent_expressions: "Equivalent expressions" };
+const SKILLS_LABEL: Record<string, string> = { cross_text_connections: "Cross-Text Connections", systems_linear: "Systems of two linear equations", transitions: "Transitions", boundaries: "Boundaries", command_of_evidence_text: "Command of Evidence (Textual)", text_structure_purpose: "Text Structure and Purpose", linear_equations_one_var: "Linear equations in one variable", linear_equations_two_var: "Linear equations in two variables", equivalent_expressions: "Equivalent expressions" };
 
 type Cand = { cid: string; skill: string; system: "sat_rw" | "sat_math"; method: string; recipeId: string | null; instruction: string; idx: number };
-function buildCands(method: string, perRw: number, perMath: number): Cand[] {
+function buildCands(method: string, perRw: number, perMath: number, spec?: Record<string, number>): Cand[] {
   const out: Cand[] = [];
-  const skills = method === "archetype" ? RW_SKILLS : [...RW_SKILLS, ...MATH_SKILLS];
+  const skills = spec ? Object.keys(spec) : method === "archetype" ? RW_SKILLS : [...RW_SKILLS, ...MATH_SKILLS];
   for (const skill of skills) {
-    const n = isMath(skill) ? perMath : perRw;
+    const n = spec ? spec[skill] : isMath(skill) ? perMath : perRw;
     const rec = method === "archetype" ? null : recipesFor(skill);
     for (let i = 0; i < n; i++) {
       const r = rec ? rec[i % rec.length] : null;
@@ -136,7 +138,7 @@ async function main() {
   if (cmd === "report") return report();
   if (cmd === "compare") return compare();
   if (cmd === "cross") return cross();
-  if (cmd === "cross-report") return crossReport(path.join(RUN, "batch2", "D-cross"));
+  if (cmd === "cross-report") return crossReport(path.join(RUN, arg("--dir") ?? "batch2/D-cross"));
   if (cmd === "rereview") return rereview();
   const combo = arg("--combo")!, method = arg("--method") ?? "recipe";
   const cfg = { ...COMBOS[combo], gen: arg("--gen-model") ?? COMBOS[combo].gen, rev: arg("--review-model") ?? COMBOS[combo].rev };
@@ -293,9 +295,11 @@ async function cross() {
   const per = Number(arg("--per") ?? 6), budget = Number(arg("--budget") ?? 6);
   const genModel = arg("--gen-model") ?? "claude-opus-5-5";
   MATH_PROMPT = (arg("--math-prompt") ?? "v2") as "v1" | "v2";
-  const dir = path.join(RUN, "batch2", "D-cross");
+  const dir = path.join(RUN, arg("--dir") ?? "batch2/D-cross");
   mkdirSync(dir, { recursive: true });
-  const cands = buildCands("recipe", per, Number(arg("--per-math") ?? per));
+  const specArg = arg("--skills");
+  const spec = specArg ? Object.fromEntries(specArg.split(",").map((x) => { const [k, n] = x.split(":"); return [k, Number(n)]; })) : undefined;
+  const cands = buildCands("recipe", per, Number(arg("--per-math") ?? per), spec);
   writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
   const led = ledger(dir);
   // 추정(동기 단가): 앞선 실측 — Opus 생성 약 $0.034/후보, Fable 검수 약 $0.105/후보, Opus 검수 약 $0.03/후보(결정론 통과 약 85%)

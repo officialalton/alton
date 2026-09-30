@@ -5,7 +5,7 @@
 //   해설 중 교체된 선지를 설명하는 문장만 맞춘다. 보수본은 블라인드 풀이·감사(review.ts reviewOne)를 다시 통과해야 한다.
 //   출력: <run>/repair/<gid>.json (before/after diff 로그), <run>/review-repaired/<gid>.json (재검수 결과).
 import Anthropic from "@anthropic-ai/sdk";
-import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
+import { generationModel, createToolMessage } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { reviewOne, type Raw, type ReviewResult } from "./review";
@@ -24,7 +24,7 @@ async function repairOne(r: Raw, flagged: number[]): Promise<{ options: string[]
   const opts = p.options ?? [];
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const msg = await getClient().messages.create({
+      const msg = await createToolMessage(getClient(), {
         model: generationModel(), max_tokens: 2500,
         tools: [{ name: "repair_distractors", description: "쉽게 지워지는 오답 선지만 교체한다.", input_schema: { type: "object", properties: {
           replacements: { type: "array", items: { type: "object", properties: { letter: { type: "string", enum: ["A", "B", "C", "D"], description: "교체할 선지의 알파벳" }, text: { type: "string" }, misconception: { type: "string", description: "이 오답이 기반한 구체적 오개념·계산 실수(한국어 한 줄)" } }, required: ["letter", "text", "misconception"] } },

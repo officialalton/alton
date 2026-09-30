@@ -4,7 +4,7 @@
 //   변형 지시: Math — 풀이 단계 추가·개념 결합·오답을 풀이 중간값/오개념 기반으로 교체 / RW — 지문 논리를 더 미묘하게·비교 단서 추가.
 //   정답이 바뀌면 정답·해설 재작성. 변형본은 review.ts → repair.ts 를 원본 문항과 똑같이 거친다.
 import Anthropic from "@anthropic-ai/sdk";
-import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
+import { generationModel, createToolMessage } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
@@ -25,7 +25,7 @@ async function promoteOne(base: Raw): Promise<Raw | null> {
   const isMath = base.examSystem === "sat_math";
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const msg = await getClient().messages.create({
+      const msg = await createToolMessage(getClient(), {
         model: generationModel(), max_tokens: 3500,
         tools: [{ name: "promote", description: "기반 문항을 hard 난이도의 새 문항으로 변형한다.", input_schema: { type: "object", properties: {
           passage: { type: "string", description: "지문/자료 텍스트(빈칸 ______ 포함, Text 1/Text 2 구조는 원본 형식 유지)" },

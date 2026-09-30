@@ -2,7 +2,7 @@
 // 모듈 위치(앞/뒤)는 근거로 쓰지 않고 참고 상관만 기록한다. 공식 난이도(College Board 표기)는 이 자료에 없어 officialDifficulty=null.
 // 실행: npx tsx scripts/mock-exam-generation/cb-synth.ts  -> data/mock-exam-generation/cb-hard/hard-characteristics.json
 import Anthropic from "@anthropic-ai/sdk";
-import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
+import { generationModel, createToolMessage } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 const envPath = path.resolve(process.cwd(), ".env.local");
@@ -22,15 +22,21 @@ const mean = (a: number[]) => (a.length ? Math.round((a.reduce((x, y) => x + y, 
 const corr = (xs: number[], ys: number[]) => { const mx = mean(xs), my = mean(ys); const c = xs.reduce((a, x, i) => a + (x - mx) * (ys[i] - my), 0); const d = Math.sqrt(xs.reduce((a, x) => a + (x - mx) ** 2, 0) * ys.reduce((a, y) => a + (y - my) ** 2, 0)); return d ? Math.round((c / d) * 100) / 100 : 0; };
 const freq = (g: Rec[]) => { const m = new Map<string, number>(); for (const r of g) for (const t of r.traps) m.set(t, (m.get(t) ?? 0) + 1); return [...m.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6); };
 
+const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
+const ONLY = arg("--only")?.split(",");
+const MIN_N = Number(arg("--min-n") ?? 8);
 (async () => {
-  const result: Record<string, unknown> = {};
+  // --only 로 일부 skill 만 합성하면 기존 hard-characteristics.json 에 병합한다(임계값은 --min-n, 기본 8).
+  const outPath = path.resolve("data/mock-exam-generation/cb-hard/hard-characteristics.json");
+  const result: Record<string, unknown> = ONLY && existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf-8")) : {};
   for (const [skill, items] of [...bySkill.entries()].sort()) {
-    if (items.length < 8) { result[skill] = { skill, n: items.length, skipped: "표본 8 미만" }; continue; }
+    if (ONLY && !ONLY.includes(skill)) continue;
+    if (items.length < MIN_N) { result[skill] = { skill, n: items.length, skipped: "표본 8 미만" }; continue; }
     const sorted = [...items].sort((a, b) => b.score - a.score);
-    const k = Math.max(3, Math.round(items.length * 0.25));
+    const k = Math.max(ONLY ? 2 : 3, Math.round(items.length * 0.25));
     const hi = sorted.slice(0, k), lo = sorted.slice(-k);
     const stats = (g: Rec[]) => ({ steps: mean(g.map((r) => r.steps)), combine: mean(g.map((r) => r.combine)), shift: mean(g.map((r) => r.shift)), abstract: mean(g.map((r) => r.abstract)), subtle: mean(g.map((r) => r.subtle)), traps: freq(g) });
-    const m = await client.messages.create({
+    const m = await createToolMessage(client, {
       model: generationModel(), max_tokens: 2500,
       tools: [{ name: "characteristics", description: "hard 특성", input_schema: { type: "object", properties: { characteristics: { type: "array", minItems: 3, maxItems: 5, items: { type: "object", properties: {
         name: { type: "string", description: "특성 이름(짧은 영어 snake_case)" },
@@ -45,5 +51,5 @@ const freq = (g: Rec[]) => { const m = new Map<string, number>(); for (const r o
     result[skill] = { skill, n: items.length, groupSize: k, hiStats: stats(hi), loStats: stats(lo), positionCorrelation: corr(items.map((r) => r.pos), items.map((r) => r.score)), officialDifficulty: null, difficultySource: "내부 추정: 문항 내용 기반 사고 요구 점수 상위 25% 대 하위 25% 대조(College Board 공식 난이도 표기는 이 시험지 PDF에 없음)", characteristics: chars, hiRefs: hi.map((r) => r.ref) };
     process.stderr.write(`${skill}: ${items.length} -> ${(chars as unknown[]).length}\n`);
   }
-  writeFileSync(path.resolve("data/mock-exam-generation/cb-hard/hard-characteristics.json"), JSON.stringify(result, null, 1));
+  writeFileSync(outPath, JSON.stringify(result, null, 1));
 })();
