@@ -6,6 +6,8 @@ import {
   orderSectionItems,
   assembleSection,
   moduleEligibility,
+  mstModulePlans,
+  difficultyAllowedForModule,
   AssemblyError,
   type EligibleProblem,
 } from "./assemble";
@@ -212,5 +214,66 @@ describe("Phase 2 조립 강화", () => {
     expect(moduleEligibility("easy")).toEqual({ m1: true, m2Lower: true, m2Higher: false });
     expect(moduleEligibility("medium")).toEqual({ m1: true, m2Lower: true, m2Higher: true });
     expect(moduleEligibility("hard")).toEqual({ m1: false, m2Lower: false, m2Higher: true });
+  });
+});
+
+describe("MST 모듈 계획(Phase 3 라우팅)", () => {
+  it("라우팅이면 M2가 lower·higher 두 변형(같은 정원)으로 나뉘고 M1은 route 없음", () => {
+    const plans = mstModulePlans(true);
+    expect(plans.map((p) => `${p.key}:${p.route}`)).toEqual([
+      "rw_m1:null",
+      "rw_m2:lower",
+      "rw_m2:higher",
+      "math_m1:null",
+      "math_m2:lower",
+      "math_m2:higher",
+    ]);
+    expect(plans.filter((p) => p.key === "rw_m2").map((p) => p.count)).toEqual([27, 27]);
+    expect(plans.filter((p) => p.key === "math_m2").map((p) => p.count)).toEqual([22, 22]);
+  });
+  it("라우팅이 아니면 Phase 1/2와 같은 4모듈(route 전부 null)", () => {
+    const plans = mstModulePlans(false);
+    expect(plans.map((p) => p.key)).toEqual(["rw_m1", "rw_m2", "math_m1", "math_m2"]);
+    expect(plans.every((p) => p.route === null)).toBe(true);
+  });
+  it("난이도 허용 범위: M1·lower = easy·medium, higher = medium·hard, 레거시 M2 = 제한 없음", () => {
+    const plans = mstModulePlans(true);
+    const m1 = plans[0];
+    const lower = plans[1];
+    const higher = plans[2];
+    expect((["easy", "medium", "hard"] as const).map((d) => difficultyAllowedForModule(m1, d))).toEqual([true, true, false]);
+    expect((["easy", "medium", "hard"] as const).map((d) => difficultyAllowedForModule(lower, d))).toEqual([true, true, false]);
+    expect((["easy", "medium", "hard"] as const).map((d) => difficultyAllowedForModule(higher, d))).toEqual([false, true, true]);
+    const legacyM2 = mstModulePlans(false)[1];
+    expect((["easy", "medium", "hard"] as const).map((d) => difficultyAllowedForModule(legacyM2, d))).toEqual([true, true, true]);
+  });
+  it("두 변형을 순서대로 조립하면 문항이 겹치지 않는다(앞 모듈이 뽑은 문항은 뒤 후보에서 제외)", () => {
+    const candidates: EligibleProblem[] = [];
+    for (const d of ["easy", "medium", "hard"] as const) {
+      for (let i = 0; i < 12; i++) candidates.push({ problemId: `${d}-${i}`, problemVersionId: `v-${d}-${i}`, satDomain: "rw_craft_structure", skillCode: null, difficulty: d });
+    }
+    const used = new Set<string>();
+    const byModule: Record<string, string[]> = {};
+    for (const plan of mstModulePlans(true).filter((p) => p.section === "rw")) {
+      const weights = [
+        { difficulty: "easy" as const, weightPct: 25 },
+        { difficulty: "medium" as const, weightPct: 50 },
+        { difficulty: "hard" as const, weightPct: 25 },
+      ].filter((w) => difficultyAllowedForModule(plan, w.difficulty));
+      const r = assembleSection({
+        section: "rw",
+        totalCount: 8,
+        domainWeights: [{ satDomain: "rw_craft_structure", weightPct: 100 }],
+        difficultyWeights: weights,
+        candidates: candidates.filter((c) => !used.has(c.problemId) && difficultyAllowedForModule(plan, c.difficulty)),
+      });
+      r.items.forEach((i) => used.add(i.problemId));
+      byModule[`${plan.key}:${plan.route}`] = r.items.map((i) => i.problemId);
+    }
+    const all = Object.values(byModule).flat();
+    expect(new Set(all).size).toBe(all.length);
+    expect(byModule["rw_m2:lower"].every((id) => !id.startsWith("hard"))).toBe(true);
+    expect(byModule["rw_m2:higher"].every((id) => !id.startsWith("easy"))).toBe(true);
+    expect(byModule["rw_m1:null"].every((id) => !id.startsWith("hard"))).toBe(true);
   });
 });

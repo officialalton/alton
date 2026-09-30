@@ -13,6 +13,8 @@ import {
   listAllActiveStudentsForMockExamAction,
   listAllMockExamAttemptsAction,
   getMockExamPoolSummaryAction,
+  listMockExamRoutingPoliciesAction,
+  type MockExamRoutingPolicyRow,
   type MockExamPoolRow,
   type MockExamSetSummary,
   type MockExamStudentOption,
@@ -21,6 +23,7 @@ import {
   type MockExamSetItemDetail,
 } from "../mock-exam-actions";
 import type { DifficultyTier } from "@/lib/mock-exam/assemble";
+import { describePolicy } from "@/lib/mock-exam/routing";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import MockExamSetContentViewer from "@/app/components/MockExamSetContentViewer";
@@ -266,8 +269,10 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
         {format === "mst" && (
           <p className="mt-2 text-xs text-grey-500">
             R&W Module 1·2 각 27문항(32분), 10분 휴식, Math Module 1·2 각 22문항(35분). 모듈 간 문항이 겹치지 않게 조립합니다.
+            Module 2는 Module 1 성과에 따라 higher/lower 두 변형(각각 같은 정원)으로 조립되어 문항이 모듈당 최대 3배 필요합니다.
           </p>
         )}
+        {format === "mst" && <RoutingPolicyInfo />}
         <button
           type="button"
           disabled={isPending || !name.trim()}
@@ -281,6 +286,38 @@ function CreateTab({ initialSets }: { initialSets: MockExamSetSummary[] }) {
       </section>
 
       <SetListTable sets={sets} emptyLabel="아직 조립된 세트가 없습니다." />
+    </div>
+  );
+}
+
+/** 활성 라우팅 정책(읽기 전용). 값은 DB 데이터 — 제품 오너 조정은 새 정책 버전 발행으로 한다. */
+function RoutingPolicyInfo() {
+  const [rows, setRows] = useState<MockExamRoutingPolicyRow[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    listMockExamRoutingPoliciesAction()
+      .then((r) => alive && setRows(r))
+      .catch((e) => alive && setError(e instanceof Error ? e.message : "라우팅 정책을 불러오지 못했습니다."));
+    return () => {
+      alive = false;
+    };
+  }, []);
+  if (error) return <p className="mt-2 text-xs text-red">{error}</p>;
+  if (rows === null) return null;
+  const active = rows.filter((r) => r.active);
+  return (
+    <div className="mt-2 rounded border border-grey-200 p-2 text-xs text-grey-600" data-testid="routing-policy-info">
+      <p className="font-semibold text-ink">Module 2 라우팅 정책(활성, 직원 전용 정보)</p>
+      {active.length === 0 ? (
+        <p className="text-red">활성 정책이 없습니다 — 라우팅 세트는 공개·배정할 수 없습니다.</p>
+      ) : (
+        active.map((p) => (
+          <p key={p.section}>
+            {p.section === "rw" ? "R&W" : "Math"} v{p.version}: {describePolicy(p)}
+          </p>
+        ))
+      )}
     </div>
   );
 }
@@ -333,6 +370,7 @@ function MstModuleFlags({ examSetId }: { examSetId: string }) {
             <th>영역</th>
             <th>skill</th>
             <th>난이도</th>
+            <th>경로</th>
             <th>M1</th>
             <th>M2 higher</th>
             <th>M2 lower</th>
@@ -345,6 +383,7 @@ function MstModuleFlags({ examSetId }: { examSetId: string }) {
               <td>{r.satDomain}</td>
               <td>{r.skillCode ?? "-"}</td>
               <td>{r.difficulty}</td>
+              <td>{r.route ?? "-"}</td>
               <td>{mark(r.m1Eligible)}</td>
               <td>{mark(r.m2HigherEligible)}</td>
               <td>{mark(r.m2LowerEligible)}</td>
@@ -371,6 +410,9 @@ function readinessSummary(r: MstReadinessReport): string {
     (r.eligibilityViolations ?? []).length ? ` · Module 1 배정 불가 문항 ${r.eligibilityViolations.length}` : "",
     (r.similarityViolations ?? []).length ? ` · 유사문항 그룹 중복 ${r.similarityViolations.length}` : "",
     r.missingSnapshotCount ? ` · 스냅샷 누락 ${r.missingSnapshotCount}` : "",
+    r.routeShapeViolationCount ? ` · 경로 구성 오류 ${r.routeShapeViolationCount}` : "",
+    (r.variantEligibilityViolations ?? []).length ? ` · 변형 배정 불가 문항 ${r.variantEligibilityViolations.length}` : "",
+    (r.routingPolicyMissing ?? []).length ? ` · 라우팅 정책 없음(${r.routingPolicyMissing.join(", ")})` : "",
   ].join("");
   return `모듈 정원 미달: ${mods.join(", ") || "없음"}${cells.length ? ` · 부족 셀: ${cells.join(", ")}` : ""}${r.duplicateCount ? ` · 중복 문항 ${r.duplicateCount}` : ""}${extra}`;
 }
@@ -883,6 +925,7 @@ function HistoryTab() {
             <th>마감</th>
             <th>제출</th>
             <th>정답</th>
+            <th>M2 경로(직원 전용)</th>
           </tr>
         </thead>
         <tbody>
@@ -894,11 +937,16 @@ function HistoryTab() {
               <td>{r.dueAt ? fmtDate(r.dueAt, undefined, tz) : "-"}</td>
               <td>{r.submittedAt ? fmtDate(r.submittedAt, undefined, tz) : "-"}</td>
               <td>{r.correctCount !== null ? `${r.correctCount}/${r.totalCount}` : "-"}</td>
+              <td data-testid="history-route">
+                {r.rwRoute || r.mathRoute
+                  ? `R&W ${r.rwRoute ?? "-"}${r.rwPolicyVersion != null ? ` (정책 v${r.rwPolicyVersion})` : ""} · Math ${r.mathRoute ?? "-"}${r.mathPolicyVersion != null ? ` (정책 v${r.mathPolicyVersion})` : ""}`
+                  : "-"}
+              </td>
             </tr>
           ))}
           {rows.length === 0 && (
             <tr>
-              <td colSpan={6} className="py-4 text-center text-sm text-grey-400">
+              <td colSpan={7} className="py-4 text-center text-sm text-grey-400">
                 배정된 모의고사가 없습니다.
               </td>
             </tr>

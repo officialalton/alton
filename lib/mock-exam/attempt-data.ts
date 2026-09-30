@@ -80,6 +80,11 @@ export type MockExamAttemptDetail = {
   format: "fixed" | "mst";
   currentModule: "rw_m1" | "rw_m2" | "break" | "math_m1" | "math_m2" | null;
   items: MockExamAttemptItem[];
+  /** 직원(관리자·담당 교사·컨설턴트) 응답에만 있다. 학생·보호자 응답에는 이 키 자체가 없다(경로 비노출). */
+  routing?: {
+    rw: { route: "higher" | "lower" | null; policyVersion: number | null };
+    math: { route: "higher" | "lower" | null; policyVersion: number | null };
+  };
 };
 
 async function loadSummaries(supabase: SupabaseClient, studentId: string): Promise<MockExamAttemptSummary[]> {

@@ -200,6 +200,49 @@ export function moduleEligibility(difficulty: ProblemDifficulty): { m1: boolean;
   };
 }
 
+// --- MST 모듈 계획(Phase 3: 라우팅이면 M2를 higher/lower 두 변형으로) ---------------------------------
+export type MstRoute = "higher" | "lower";
+export type MstModulePlan = {
+  key: "rw_m1" | "rw_m2" | "math_m1" | "math_m2";
+  section: ExamSection;
+  count: number;
+  /** 라우팅 M2 변형만 값이 있다. M1과 비라우팅(레거시) 세트는 null. */
+  route: MstRoute | null;
+};
+
+const MST_BASE_MODULES: { key: MstModulePlan["key"]; section: ExamSection; count: number }[] = [
+  { key: "rw_m1", section: "rw", count: 27 },
+  { key: "rw_m2", section: "rw", count: 27 },
+  { key: "math_m1", section: "math", count: 22 },
+  { key: "math_m2", section: "math", count: 22 },
+];
+
+/**
+ * 조립할 모듈 목록. 라우팅이면 M2마다 lower -> higher 두 변형(같은 정원), 아니면 Phase 1/2와 같은 4모듈.
+ * 순서가 곧 조립 순서다(앞 모듈이 뽑은 문항은 뒤 모듈 후보에서 빠진다 — 세트 안 중복 0).
+ */
+export function mstModulePlans(routing: boolean): MstModulePlan[] {
+  const plans: MstModulePlan[] = [];
+  for (const m of MST_BASE_MODULES) {
+    const isM2 = m.key === "rw_m2" || m.key === "math_m2";
+    if (routing && isM2) {
+      plans.push({ ...m, route: "lower" }, { ...m, route: "higher" });
+    } else {
+      plans.push({ ...m, route: null });
+    }
+  }
+  return plans;
+}
+
+/** 모듈이 받을 수 있는 난이도(M1·lower: easy·medium, higher: medium·hard, 비라우팅 M2: 제한 없음). */
+export function difficultyAllowedForModule(plan: MstModulePlan, difficulty: ProblemDifficulty): boolean {
+  const e = moduleEligibility(difficulty);
+  if (plan.key === "rw_m1" || plan.key === "math_m1") return e.m1;
+  if (plan.route === "lower") return e.m2Lower;
+  if (plan.route === "higher") return e.m2Higher;
+  return true;
+}
+
 /**
  * 섹션(RW/Math) 안에서 문항 순서를 정한다 — 영역별로 묶지 않고 난이도 오름차순으로만
  * 정렬한다(실전 SAT처럼 쉬운 문항부터). 동일 난이도 안에서는 problemId 순(결정적).

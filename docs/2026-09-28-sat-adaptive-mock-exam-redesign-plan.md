@@ -120,3 +120,10 @@
 - 다시 켜기: 세트 `assembly_rules`에 `skillHardGate: true`를 넣으면 `skillMaxSharePct`(기본 50) 초과가 다시 `skillViolations`+`ready=false`가 된다. 신규 세트 기본 규칙(`MST_ASSEMBLY_RULES`)에 넣으면 이후 세트에 적용된다.
 - 롤백: 20261901000002의 `mock_exam_validate_mst_set` 본문을 새 번호 마이그레이션으로 재적용.
 
+
+## 10. Phase 3 — 라우팅 구현 결과 (2026-09-29, 로컬 검증 완료·원격 미적용)
+
+- 마이그레이션 `20261918000000`(정책 테이블·경로 정책 버전 컬럼·변조 방지 트리거·기본 정책 시드) → `20261918000001`(경로 결정·M2 변형 노출·검증 확장) → `20261918000002`(경로 비노출 컬럼 권한 회수). 순서대로 적용.
+- 정책은 데이터(`mock_exam_routing_policies`, 섹션당 활성 1개, 값 수정 불가·새 version 발행 `mock_exam_set_routing_policy`). 기본값: 두 섹션 모두 correct_ratio 0.65 이상 → higher(제품 오너 조정 대상). 응시 시작 시 활성 version을 응시에 고정하고 M1 잠금(제출·만료·자동제출 공통 `_mock_exam_lock_module`) 안에서 정확히 한 번 판정, 이후 불변.
+- 라우팅은 `assembly_rules.routing=true` 세트에서만 동작(신규 MST 조립 기본 ON, `routing:false`·기존 세트는 이전 동작). M2는 lower/higher 두 변형(각 27/22), 같은 문항은 두 변형에 넣지 않는다(DB unique). 풀 필요량: R&W 81·Math 66 서로 다른 문항.
+- 비노출: 학생·보호자는 경로 컬럼·정책 테이블·검증 RPC·`assembly_rules`·`readiness_report`를 읽을 수 없고, 응답의 난이도 라벨은 제거, position은 응시 경로 안 순번으로 재부여. 직원(관리자·담당 교사·컨설턴트)은 `mock_exam_attempt_detail.routing`으로 경로·정책 버전을 본다.

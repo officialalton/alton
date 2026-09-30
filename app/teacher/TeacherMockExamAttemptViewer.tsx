@@ -15,8 +15,17 @@ export default function TeacherMockExamAttemptViewer({ attempt }: { attempt: Moc
 
   if (attempt.items.length === 0) return <p className="text-[13px] text-grey-500">문항이 없습니다.</p>;
 
+  const routing = attempt.routing;
   return (
-    <div className="flex flex-col gap-3 md:flex-row">
+    <div className="flex flex-col gap-3">
+      {routing && (routing.rw.route || routing.math.route) && (
+        <p className="text-[12px] text-grey-600" data-testid="teacher-routing-info">
+          Module 2 경로(교사 전용): R&W {routing.rw.route ?? "-"}
+          {routing.rw.policyVersion != null ? ` (정책 v${routing.rw.policyVersion})` : ""} · Math {routing.math.route ?? "-"}
+          {routing.math.policyVersion != null ? ` (정책 v${routing.math.policyVersion})` : ""}
+        </p>
+      )}
+      <div className="flex flex-col gap-3 md:flex-row">
       <div className="flex flex-wrap gap-1 md:w-[200px] md:flex-shrink-0 md:flex-col md:flex-nowrap md:overflow-y-auto md:max-h-[70vh]">
         {attempt.items.map((it, i) => {
           // 2026-09-21(UAT 지적) — 응답했다는 사실만이 아니라 정오(맞음/틀림)를 왼쪽 목록에서도
@@ -49,6 +58,7 @@ export default function TeacherMockExamAttemptViewer({ attempt }: { attempt: Moc
           <ItemDetail item={current} attemptId={attempt.id} studentId={attempt.studentId} viewerIsOwner={false} />
         </div>
       )}
+      </div>
     </div>
   );
 }

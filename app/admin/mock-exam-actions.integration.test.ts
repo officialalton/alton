@@ -167,6 +167,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
       rwCount: 0,
       mathCount: 0,
       format: "mst",
+      routing: false, // 레거시(Phase 1/2) 4모듈 — 라우팅 조립은 mock-exam-routing-assemble.integration.test.ts
     });
     expect(psql(`select format || '|' || (module_time_limits->>'rw_m1') || '|' || (module_time_limits->>'break') from mock_exam_sets where id = '${result.examSetId}';`)).toBe(
       "mst|1920|600",
@@ -222,7 +223,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
       }
     }
     const { assembleMockExamSet, publishMockExamSet } = await import("./mock-exam-actions");
-    const result = await assembleMockExamSet({ name: `MST 완성 세트 ${Date.now()}`, difficultyTier: "standard", rwCount: 0, mathCount: 0, format: "mst" });
+    const result = await assembleMockExamSet({ name: `MST 완성 세트 ${Date.now()}`, difficultyTier: "standard", rwCount: 0, mathCount: 0, format: "mst", routing: false });
     expect(result.readiness?.ready).toBe(true);
     expect(result.readiness?.modules.every((m) => m.ok)).toBe(true);
     expect(psql(`select count(*) || '|' || count(distinct problem_id) from mock_exam_set_items where exam_set_id = '${result.examSetId}';`)).toBe("98|98");
