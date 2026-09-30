@@ -4,7 +4,7 @@
 //   --next-round N 이면 검수 통과 수가 부족한 셀만 모아 plan-roundN.json(생성량 = 부족분 × 1.5 올림)을 만든다.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
-import { findDuplicates, type Raw, type ReviewResult } from "./review";
+import { findDuplicates, deterministicIssues, type Raw, type ReviewResult } from "./review";
 
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 type Cell = { system: string; domain: string; skill: string; difficulty: "easy" | "medium" | "hard"; target: number; supply: number; shortfall: number; generate: number };
@@ -24,7 +24,10 @@ type Eff = { raw: Raw; verdict: "pass" | "archive" | "unreviewed"; reasons: stri
 const effective: Eff[] = raws.map((r) => {
   const rev = reviews.get(r.gid);
   if (!rev) return { raw: r, verdict: "unreviewed", reasons: ["not_reviewed"], review: null };
-  const reasons = rev.reasons.filter((x) => x !== "weak_distractors"); // 옛 판정의 weak 는 임계값으로 다시 본다
+  // AI 판정 사유만 가져오고, 결정론 사유(원시 LaTeX 등)와 오답 제거 용이성은 여기서 현재 규칙으로 다시 계산한다.
+  const DET = new Set(["weak_distractors", "raw_latex_in_body", "unbalanced_dollar_in_body", "raw_latex_in_explanation", "unbalanced_dollar_in_explanation", "internal_field_name_exposed", "empty_explanation"]);
+  const reasons = [...rev.reasons.filter((x) => !DET.has(x) && !x.startsWith("near_duplicate_of")), ...deterministicIssues(r)];
+  if (!rev.blind) reasons.push(...rev.reasons.filter((x) => x.startsWith("near_duplicate_of")));
   const elim = (rev.blind?.easilyEliminated ?? []).filter((i) => i !== r.problem.correctIndex).length;
   if (r.format === "mc" && rev.blind && elim >= weak[r.difficulty]) reasons.push("weak_distractors");
   return { raw: r, verdict: reasons.length ? "archive" : "pass", reasons, review: rev };
@@ -47,23 +50,32 @@ const gen = cnt(final), pass = cnt(passed), arch = cnt(archived);
 const reasonCount = new Map<string, number>();
 for (const f of archived) for (const r of f.reasons) { const k = r.replace(/:.*/, ""); reasonCount.set(k, (reasonCount.get(k) ?? 0) + 1); }
 
-const rows = plan.cells.map((c) => {
+// 종료 기준(총괄·오너 2026-09-29): 칸(skill×난이도)마다 최종 공개 가능 수 = 기존 공개 + 신규 검수 통과 ≥ 세트 3개 분량(target) + 여분 2.
+const SPARE = Number(arg("--spare") ?? 2);
+const rows = plan.cells.filter((c) => c.target > 0).map((c) => {
   const g = gen.get(key(c.skill, c.difficulty)) ?? 0, p = pass.get(key(c.skill, c.difficulty)) ?? 0, a = arch.get(key(c.skill, c.difficulty)) ?? 0;
-  return { ...c, generated: g, passed: p, archived: a, missing: Math.max(0, c.shortfall - p) };
+  const required = c.target + SPARE;
+  const finalCount = c.supply + p;
+  return { ...c, required, generated: g, passed: p, archived: a, final: finalCount, spare: finalCount - c.target, missing: Math.max(0, required - finalCount) };
 });
 const sum = (sys: string, f: (r: (typeof rows)[number]) => number) => rows.filter((r) => r.system === sys).reduce((x, r) => x + f(r), 0);
-const md: string[] = ["| 영역 | skill | 난이도 | 목표(3배 풀) | 기존 공개(가정) | 부족분 | 생성(파이프라인 통과) | 검수 통과 | 보관 후보 | 미충족 |", "|---|---|---|---|---|---|---|---|---|---|"];
-for (const r of rows.filter((r) => r.target > 0)) md.push(`| ${r.domain} | ${r.skill} | ${r.difficulty} | ${r.target} | ${r.supply} | ${r.shortfall} | ${r.generated} | ${r.passed} | ${r.archived} | ${r.missing} |`);
-for (const sys of ["sat_rw", "sat_math"]) md.push(`| **${sys} 합계** | | | ${sum(sys, (r) => r.target)} | ${sum(sys, (r) => r.supply)} | ${sum(sys, (r) => r.shortfall)} | ${sum(sys, (r) => r.generated)} | ${sum(sys, (r) => r.passed)} | ${sum(sys, (r) => r.archived)} | ${sum(sys, (r) => r.missing)} |`);
+const md: string[] = [`| 영역 | skill | 난이도 | 필요량(3세트 ${"+"}여분${SPARE}) | 기존 공개(가정) | 신규 생성(파이프라인 통과) | 신규 검수 통과 | 보관 후보 | 최종 | 여분(최종−3세트분) | 미달 |`, "|---|---|---|---|---|---|---|---|---|---|---|"];
+for (const r of rows) md.push(`| ${r.domain} | ${r.skill} | ${r.difficulty} | ${r.required} | ${r.supply} | ${r.generated} | ${r.passed} | ${r.archived} | ${r.final} | ${r.spare} | ${r.missing || ""} |`);
+for (const sys of ["sat_rw", "sat_math"]) md.push(`| **${sys} 합계** | | | ${sum(sys, (r) => r.required)} | ${sum(sys, (r) => r.supply)} | ${sum(sys, (r) => r.generated)} | ${sum(sys, (r) => r.passed)} | ${sum(sys, (r) => r.archived)} | ${sum(sys, (r) => r.final)} | ${sum(sys, (r) => r.spare)} | ${sum(sys, (r) => r.missing)} |`);
 writeFileSync(path.join(base, "final/summary.md"), md.join("\n") + "\n\n보관 사유 집계: " + JSON.stringify(Object.fromEntries(reasonCount)) + "\n");
-writeFileSync(path.join(base, "final/summary.json"), JSON.stringify({ rows, reasonCount: Object.fromEntries(reasonCount), totals: { generated: final.length, passed: passed.length, archived: archived.length, unreviewed: final.filter((f) => f.verdict === "unreviewed").length } }, null, 1));
+writeFileSync(path.join(base, "final/summary.json"), JSON.stringify({ spare: SPARE, rows, reasonCount: Object.fromEntries(reasonCount), totals: { generated: final.length, passed: passed.length, archived: archived.length, unreviewed: final.filter((f) => f.verdict === "unreviewed").length } }, null, 1));
 console.log(md.join("\n"));
 console.log("보관 사유:", Object.fromEntries(reasonCount));
 console.log("합계", { generated: final.length, passed: passed.length, archived: archived.length });
 
 const next = arg("--next-round");
 if (next) {
-  const cells = rows.filter((r) => r.missing > 0).map((r) => ({ system: r.system, domain: r.domain, skill: r.skill, difficulty: r.difficulty, target: r.target, supply: r.supply, shortfall: r.missing, generate: Math.ceil(r.missing * 1.5) }));
+  // 재생성량 = 미달분 / 통과율(칸 생성 4개 이상이면 칸 통과율, 아니면 skill 통과율; 하한 0.3) 올림 + 1. 칸당 상한 40.
+  const skillRate = (skill: string) => { const g = rows.filter((r) => r.skill === skill).reduce((a, r) => a + r.generated, 0); const p = rows.filter((r) => r.skill === skill).reduce((a, r) => a + r.passed, 0); return g ? p / g : 0.5; };
+  const cells = rows.filter((r) => r.missing > 0).map((r) => {
+    const rate = Math.max(0.3, r.generated >= 4 ? r.passed / r.generated : skillRate(r.skill));
+    return { system: r.system, domain: r.domain, skill: r.skill, difficulty: r.difficulty, target: r.target, supply: r.supply, shortfall: r.missing, generate: Math.min(40, Math.ceil(r.missing / rate) + 1) };
+  });
   writeFileSync(path.join(base, `plan-round${next}.json`), JSON.stringify({ cells }, null, 1));
   console.log(`라운드 ${next} 계획: 셀 ${cells.length}개, 생성 ${cells.reduce((a, c) => a + c.generate, 0)}개`);
 }

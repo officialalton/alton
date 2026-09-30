@@ -70,9 +70,13 @@ export function deterministicIssues(r: Raw): string[] {
   if (/\\(frac|sqrt|cdot|times|leq?|geq?|pi|theta|left|right|begin|end|text|over)\b|\\\(|\\\)|\\\[|\\\]/.test(stripped)) issues.push("raw_latex_in_body");
   if ((body.match(/\$/g) ?? []).length % 2 === 1) issues.push("unbalanced_dollar_in_body");
   // 해설에는 $…$ 를 쓰지 않는다(2026-09-29 오너 분류 기준과 동일 — 해설 원시 LaTeX 보관).
-  if (/\$|\\(frac|sqrt|cdot|times|leq?|geq?|pi|theta)\b/.test(p.explanation)) issues.push("raw_latex_in_explanation");
-  if (BANNED.test(body) || BANNED.test(p.explanation)) issues.push("internal_field_name_exposed");
-  if (!(p.explanation ?? "").trim()) issues.push("empty_explanation");
+  // (해설은 모든 화면에서 LearningText 로 렌더되므로 `$…$` 자체는 결함이 아니다 — `$` 밖의 LaTeX 명령과 `$` 짝 불일치만 결함.)
+  const exp = p.explanation ?? "";
+  const expStripped = exp.replace(/\$[^$]+\$/g, "");
+  if (/\\(frac|sqrt|cdot|times|leq?|geq?|pi|theta|left|right|begin|end|text|over)\b|\\\(|\\\)/.test(expStripped)) issues.push("raw_latex_in_explanation");
+  if ((exp.match(/\$/g) ?? []).length % 2 === 1) issues.push("unbalanced_dollar_in_explanation");
+  if (BANNED.test(body) || BANNED.test(exp)) issues.push("internal_field_name_exposed");
+  if (!exp.trim()) issues.push("empty_explanation");
   return issues;
 }
 
