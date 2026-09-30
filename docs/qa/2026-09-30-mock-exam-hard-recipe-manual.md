@@ -111,7 +111,7 @@ skill별 상세(탈락 원인·호출 수):
 | geometry_trig | right_triangles_trigonometry | 1 | 3 | 4 | 0 | 4 | O |
 | geometry_trig | circles | 1 | 3 | 10 | 0 | 10 | O |
 
-- 3세트분 미충족: RW 7칸, Math 1칸(`linear_equations_two_var`). Math는 기존 원격 공개 hard 공급(85)으로 나머지 칸이 충족된 상태라 신규 생성이 거의 필요 없다. RW는 레시피 대량 실행이 필요한 칸(`command_of_evidence_text`, `text_structure_purpose`, `cross_text_connections`(레시피 없음), `rhetorical_synthesis`, `transitions`(레시피 없음), `boundaries`(레시피 없음 — 표본 52인데 특성 합성은 했으나 이번 표본에서 생성하지 않음), `form_structure_sense`).
+- 3세트분 미충족: RW 7칸, Math 1칸(`linear_equations_two_var`). Math는 기존 원격 공개 hard 공급(85)으로 나머지 칸이 충족된 상태라 신규 생성이 거의 필요 없다. RW는 레시피 대량 실행이 필요한 칸(`command_of_evidence_text`, `text_structure_purpose`, `cross_text_connections`(레시피 없음 — 표본 7), `rhetorical_synthesis`·`form_structure_sense`(표본에서 채택됐으나 기존 품질 검수에서 일부 탈락), `transitions`·`boundaries`·`command_of_evidence_text`·`text_structure_purpose`(레시피는 있으나 이번 표본에서 생성하지 않음)).
 
 ## 6. 실행 순서(재사용)
 `cb-extract.ts` -> `cb-synth.ts` -> `cb-recipes.ts`(또는 수동 수정) -> `recipe-gen.ts --skills ... --per-recipe N --tag T` -> `review`는 `recipe-check.ts`가 포함 -> `recipe-check.ts --source T` -> `recipe-yield.ts --tag T` -> `aggregate.ts`(채택만 hard) -> `import.ts`(총괄). 기존 `archetypes.json`·`generate.ts --archetype`는 소량 비교 검증 후 교체하기로 해 보존 중이다.
