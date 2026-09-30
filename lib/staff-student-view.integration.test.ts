@@ -9,7 +9,9 @@ const RUN = `${Date.now()}`;
 const ids = {
   admin: randomUUID(), sup: randomUUID(), conA: randomUUID(), conB: randomUUID(),
   student: randomUUID(), otherStudent: randomUUID(), parent: randomUUID(),
+  tActive: randomUUID(), tEnded: randomUUID(), tOther: randomUUID(), guardian: randomUUID(),
 };
+const subjectId = randomUUID();
 const all = Object.values(ids);
 const list = (l: string[]) => l.map((i) => `'${i}'`).join(",");
 
@@ -33,6 +35,9 @@ function cleanup() {
   psql(`set session_replication_role = replica;
     delete from staff_student_view_log where viewer_id in (${list(all)}) or student_id in (${list(all)});
     delete from consultant_assignments where student_id in (${list(all)});
+    delete from enrollments where student_id in (${list(all)});
+    delete from guardian_students where student_id in (${list(all)});
+    delete from subjects where id = '${subjectId}';
     delete from profiles where id in (${list(all)});
     delete from auth.users where id in (${list(all)});
     set session_replication_role = origin;`);
@@ -46,7 +51,13 @@ beforeAll(() => {
     insert into auth.users (instance_id,id,aud,role,email,encrypted_password,email_confirmed_at,raw_app_meta_data,raw_user_meta_data,created_at,updated_at) values ${users};
     insert into profiles (id,role,name,admin_tier) values ${[
       p(ids.admin, "admin", "full"), p(ids.sup, "admin", "supervisor"), p(ids.conA, "consultant"), p(ids.conB, "consultant"),
-      p(ids.student, "student"), p(ids.otherStudent, "student"), p(ids.parent, "parent")].join(",")};
+      p(ids.student, "student"), p(ids.otherStudent, "student"), p(ids.parent, "parent"),
+      p(ids.tActive, "teacher"), p(ids.tEnded, "teacher"), p(ids.tOther, "teacher"), p(ids.guardian, "parent")].join(",")};
+    insert into subjects (id, name) values ('${subjectId}', '${RUN}-subj');
+    insert into enrollments (student_id, teacher_id, subject_id, status) values
+      ('${ids.student}','${ids.tActive}','${subjectId}','active'),
+      ('${ids.student}','${ids.tEnded}','${subjectId}','cancelled');
+    insert into guardian_students (parent_id, student_id, relation_type) values ('${ids.guardian}','${ids.student}','모');
     insert into consultant_assignments (consultant_id, student_id) values ('${ids.conA}','${ids.student}');
     set session_replication_role = origin;`);
 }, 60_000);
@@ -75,5 +86,25 @@ describe("record_staff_student_view", () => {
     const seen = (uid: string) => psql(`begin; set local role authenticated; do $$ begin perform set_config('request.jwt.claim.sub','${uid}',true); end $$; select count(*) from staff_student_view_log where student_id='${ids.student}'; commit;`).split("\n").pop();
     expect(Number(seen(ids.admin))).toBeGreaterThan(0);
     expect(Number(seen(ids.conA))).toBe(0);
+  });
+
+  it("선생님은 활성 배정 학생만 기록되고, 종료 배정·타 선생님·학부모는 거절된다", () => {
+    expect(record(ids.tActive, ids.student)).toBe("t");
+    expect(count(ids.tActive, ids.student, "board")).toBe(1);
+    expect(fails(() => record(ids.tEnded, ids.student))).toContain("현재 담당 중인 학생만");
+    expect(fails(() => record(ids.tOther, ids.student))).toContain("현재 담당 중인 학생만");
+    expect(fails(() => record(ids.tActive, ids.otherStudent))).toContain("현재 담당 중인 학생만");
+    expect(fails(() => record(ids.guardian, ids.student))).toContain("권한이 없습니다");
+    expect(count(ids.guardian, ids.student)).toBe(0);
+  });
+  it("공통 권한 판정이 쓰는 헬퍼 함수 결과(teaches_student·is_guardian_of·is_assigned_consultant_of)", () => {
+    const fn = (uid: string, f: string) => asUser(uid, `select public.${f}('${ids.student}')`);
+    expect(fn(ids.tActive, "teaches_student")).toBe("t");
+    expect(fn(ids.tEnded, "teaches_student")).toBe("f");
+    expect(fn(ids.tOther, "teaches_student")).toBe("f");
+    expect(fn(ids.guardian, "is_guardian_of")).toBe("t");
+    expect(fn(ids.parent, "is_guardian_of")).toBe("f");
+    expect(fn(ids.conA, "is_assigned_consultant_of")).toBe("t");
+    expect(fn(ids.conB, "is_assigned_consultant_of")).toBe("f");
   });
 });
