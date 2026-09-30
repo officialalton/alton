@@ -2,6 +2,7 @@
 
 import { createAdminClient } from "@/lib/supabase-admin";
 import { syncOneConsultationCalendarEvent } from "@/lib/consultation/calendar-sync";
+import { sanitizeTimezone } from "@/lib/schedule-timezone";
 import { toSchedulingLinkFailure, type SchedulingLinkFailure } from "@/lib/consultation/scheduling-link";
 
 // 컨설턴트 스펙 §Scheduling after Assignment — 배정된 컨설턴트 전용 예약 링크
@@ -28,7 +29,8 @@ export async function listOpenSlotsForTokenAction(
 
 export async function redeemSchedulingLinkAction(
   token: string,
-  startsAtIso: string
+  startsAtIso: string,
+  timezone?: string
 ): Promise<{ ok: true } | SchedulingLinkFailure> {
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("redeem_consultation_scheduling_link", {
@@ -42,7 +44,7 @@ export async function redeemSchedulingLinkAction(
   // (google_sync_status만 재처리 대상으로 남는 graceful degradation 원칙,
   // lib/consultation/calendar-sync.ts와 동일).
   try {
-    await syncOneConsultationCalendarEvent(consultationId);
+    await syncOneConsultationCalendarEvent(consultationId, { timezone: sanitizeTimezone(timezone) });
   } catch (e) {
     console.error(
       JSON.stringify({ type: "consultant_scheduling_link_calendar_sync_failed", consultationId, error: e instanceof Error ? e.message : String(e) })

@@ -101,4 +101,16 @@ describe("ConsultSlotPicker", () => {
     ref.current?.refetch();
     await waitFor(() => expect(fetchSlots).toHaveBeenCalledTimes(2));
   });
+
+  it("시간대 선택기: 초기값을 보여주고 바꾸면 라벨이 갱신되며 콜백을 부른다", async () => {
+    const fetchSlots = vi.fn().mockResolvedValue([{ startsAt: SLOT_ISO }]);
+    const onTz = vi.fn();
+    render(<ConsultSlotPicker fetchSlots={fetchSlots} selectedStartsAt={null} onSelect={() => {}} timezone={TZ} onTimezoneChange={onTz} />);
+    const select = (await screen.findByLabelText("표시 시간대")) as HTMLSelectElement;
+    expect(select.value).toBe("Asia/Seoul");
+    fireEvent.change(select, { target: { value: "America/New_York" } });
+    expect(onTz).toHaveBeenCalledWith("America/New_York");
+    expect(screen.getByText(/표시 시간대: 뉴욕/)).toBeInTheDocument();
+    expect(fetchSlots).toHaveBeenCalledTimes(1); // 시간대 변경은 재조회를 일으키지 않는다(절대 시각 그대로)
+  });
 });

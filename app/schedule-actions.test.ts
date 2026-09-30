@@ -42,8 +42,18 @@ describe("예약 링크 서버 액션 — throw 대신 결과값", () => {
     syncMock.mockImplementation(async () => { throw new Error("google down"); });
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     expect(await redeemSchedulingLinkAction("t", "2026-10-01T17:00:00Z")).toEqual({ ok: true });
-    expect(syncMock).toHaveBeenCalledWith("c1");
+    expect(syncMock).toHaveBeenCalledWith("c1", { timezone: undefined });
     spy.mockRestore();
+  });
+
+  it("예약 성공: 선택 시간대는 검증해서 동기화에 넘기고, 미지원 값은 무시한다", async () => {
+    rpcMock.mockResolvedValue({ data: { id: "c1" }, error: null });
+    syncMock.mockResolvedValue(undefined);
+    await redeemSchedulingLinkAction("t", "2026-10-01T17:00:00Z", "Asia/Seoul");
+    expect(syncMock).toHaveBeenLastCalledWith("c1", { timezone: "Asia/Seoul" });
+    await redeemSchedulingLinkAction("t", "2026-10-01T17:00:00Z", "Mars/Base");
+    expect(syncMock).toHaveBeenLastCalledWith("c1", { timezone: undefined });
+    expect(rpcMock).toHaveBeenLastCalledWith("redeem_consultation_scheduling_link", { p_token: "t", p_starts_at: "2026-10-01T17:00:00Z" });
   });
 
   it("DB 가 직접 raise 한 사유(이미 마감 등)는 그대로 전달한다", async () => {
