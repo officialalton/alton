@@ -111,6 +111,7 @@ function AssetLibraryDocView({
           ]}
           sessionId={null}
           role={viewerRole === "teacher" ? "teacher" : viewerRole === "student" ? "student" : "reader"}
+          tipAccess={viewerRole === "admin" ? "edit" : "none"}
         />
       ) : (
         <p className="px-8 py-10 text-[13px] text-grey-500">이 자료의 공개 버전이 기록되지 않았습니다.</p>

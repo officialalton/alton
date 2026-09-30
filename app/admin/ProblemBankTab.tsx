@@ -1,6 +1,7 @@
 "use client";
 
-import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import {
   listBankProblemsAction,
   createBankProblemAction,
@@ -48,10 +49,10 @@ import type { AdminSubject, SubjectKeyword } from "./subject-data";
 //   * 관리자가 데이터 구조를 판단하지 않는다 — 자료 필요성은 시스템이 판정해 이유와 함께 보인다.
 //   * 복수 AI 생성도 단건과 같은 계약(자료/지문·질문·답안·정답·해설)이고, 어긴 결과는 저장하지 않고 사유와 함께 분리한다.
 
-type Bucket = "create" | "working" | "published" | "archived" | "reports";
+type Bucket = "create" | "working" | "published" | "archived";
 
-// 문제 오류 신고 탭 — 신고 화면은 선택했을 때만 불러온다(목록 화면의 첫 렌더·기존 테스트에 영향 없음).
-const ReportedProblemsPanel = lazy(() => import("./ReportedProblemsPanel"));
+// 2026-09-30 — 문제 오류 신고 내역·판정·통계는 관리자 '오류 신고' 메인 탭(ErrorReportsTab)으로 옮겼다.
+// 여기에는 '신고 검토 필요' 칩과 그 탭으로 가는 링크만 남긴다.
 
 // 2026-09-17(제품 오너 지시) — 관리자는 AI 생성 문항의 오류를 고쳐 완성하지 않는다.
 // 자동 검사를 통과한 완성 후보만 이 목록에 들어오고, 관리자는 '공개하기' 또는
@@ -70,7 +71,6 @@ const BUCKETS: { key: Bucket; label: string }[] = [
   { key: "working", label: "검수" },
   { key: "published", label: "공개" },
   { key: "archived", label: "보관" },
-  { key: "reports", label: "신고" },
 ];
 
 const WORK_STATE_LABEL: Record<BankProblem["workState"], string> = {
@@ -423,11 +423,22 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
           </button>
         ))}
       </div>
+      {(() => {
+        const reviewNeededCount = (problems ?? []).filter((p) => p.reviewNeeded).length;
+        return (
+          <p className="mb-3 flex flex-wrap items-center gap-2 text-[12px]" data-testid="error-report-link">
+            {reviewNeededCount > 0 && (
+              <span data-testid="review-needed-chip" className="rounded-full bg-red-bg px-2 py-0.5 text-[11px] font-bold text-red">신고 검토 필요 {reviewNeededCount}</span>
+            )}
+            <Link href="/admin?tab=error-reports" className="font-bold text-grey-600 underline underline-offset-2">오류 신고 내역·통계 보기 →</Link>
+          </p>
+        );
+      })()}
       {catalog === null && !catalogError && <p className="text-[12.5px] text-grey-500 mb-3">과목을 불러오는 중...</p>}
       {catalogError && <p className="text-[12.5px] text-red mb-3">과목을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요.</p>}
       {catalog !== null && activeSubjects.length === 0 && <p className="text-[12.5px] text-grey-500 mb-3">먼저 커리큘럼에서 과목을 만들어야 문제를 추가할 수 있습니다.</p>}
 
-      {bucket !== "create" && bucket !== "reports" && (
+      {bucket !== "create" && (
         <Filters
           subjects={activeSubjects}
           keywords={filter.subjectId ? keywordsBySubject.get(filter.subjectId) ?? [] : []}
@@ -436,7 +447,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         />
       )}
 
-      {bucket !== "create" && bucket !== "reports" && audit && (
+      {bucket !== "create" && audit && (
         <p className="text-[12px] text-grey-500 mb-3" data-testid="question-audit">
           질문 집계{filter.subjectId ? "(이 과목)" : ""}: 질문 있음 <b className="text-ink">{audit.withQuestion}</b> · 질문 없는 초안 <b className="text-ink">{audit.draftWithout}</b> · 질문 없는 공개본{" "}
           <b className={audit.publishedWithout ? "text-red" : "text-ink"}>{audit.publishedWithout}</b>
@@ -444,11 +455,6 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </p>
       )}
 
-      {bucket === "reports" && (
-        <Suspense fallback={<p className="text-[13px] text-grey-500">불러오는 중...</p>}>
-          <ReportedProblemsPanel />
-        </Suspense>
-      )}
 
       {bucket === "create" && (
         <NewProblemPanel
@@ -505,7 +511,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </div>
       )}
 
-      {bucket !== "archived" && bucket !== "reports" && visible.length > 0 && (
+      {bucket !== "archived" && visible.length > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5">
           <span className="text-[12.5px] text-ink">지금 보이는 문제 <b>{visible.length}</b>개</span>
           <button type="button" disabled={busy || archivingAll} onClick={() => void archiveAllVisible()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50">
@@ -515,7 +521,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
       )}
 
       {/* 2026-09-29 — 기존(미분류) 문제 일괄 재분류. 같은 문제가 수업·과제와 모의고사에 함께 나오지 않게 나눈다. */}
-      {bucket !== "create" && bucket !== "reports" && visibleLegacy.length > 0 && (
+      {bucket !== "create" && visibleLegacy.length > 0 && (
         <div className="flex flex-wrap items-center gap-3 mb-3 border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5" data-testid="legacy-scope-bar">
           <span className="text-[12.5px] text-ink">용도 미분류(기존) <b>{visibleLegacy.length}</b>개</span>
           <button type="button" disabled={busy || bulkBusy} onClick={() => void retagLegacyByFilter("general")} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
@@ -578,7 +584,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         </div>
       )}
 
-      {bucket === "create" || bucket === "reports" ? null : problems === null ? (
+      {bucket === "create" ? null : problems === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중...</p>
       ) : visible.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
@@ -603,7 +609,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
         ))
       )}
 
-      {bucket !== "create" && bucket !== "reports" && visible.length > PAGE_SIZE && (
+      {bucket !== "create" && visible.length > PAGE_SIZE && (
         <div className="flex items-center justify-center gap-3 mt-4">
           <button
             type="button"

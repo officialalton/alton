@@ -1,18 +1,14 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import TeacherPlannerBoard from "@/app/teacher/TeacherPlannerBoard";
+import type { ViewId } from "@/app/components/StaffStudentViews";
 
 // Student Success Planner — 교사 진입점(2026-09-22 확정 스펙, My Students·수업
 // 세션뷰의 "오버뷰"/"로드맵"/"일정"/"커리큘럼" 진입 버튼 중 오버뷰·일정).
-// 보드(2026-09-24 연결, 학부모 홈 보드와 동일하게 읽기 전용)는 실제 데이터를
-// 보여준다. 오버뷰(학습 통계·점수·리뷰)·일정 탭은 아직 구현 전이라 자리만
-// 잡아 둔다(빈 화면 대신 "준비 중" 안내).
-const TABS = [
-  { id: "board", label: "보드" },
-  { id: "schedule", label: "일정" },
-  { id: "overview", label: "오버뷰" },
-] as const;
-type TabId = (typeof TABS)[number]["id"];
+// 2026-09-30(UAT) — 바깥 보드/일정/오버뷰 탭(오버뷰·일정은 '준비 중' 자리표시)을 없애고
+// 역할 공통 화면(StaffStudentViews: 오버뷰·보드, 보드에서 할 일 추가만 가능) 하나만 쓴다.
+// ?tab= 은 처음 열 안쪽 탭만 고른다(overview/board/stats, 그 외 값은 오버뷰).
+const VIEW_IDS: ViewId[] = ["overview", "board", "stats"];
 
 export default async function TeacherStudentPlannerPage({
   params,
@@ -33,7 +29,7 @@ export default async function TeacherStudentPlannerPage({
   }
 
   const { data: student } = await supabase.from("profiles").select("name").eq("id", studentId).maybeSingle();
-  const activeTab: TabId = TABS.some((t) => t.id === tab) ? (tab as TabId) : "board";
+  const initialTab: ViewId = VIEW_IDS.includes(tab as ViewId) ? (tab as ViewId) : "overview";
   const backHref = returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/teacher?tab=assignments";
 
   return (
@@ -47,28 +43,7 @@ export default async function TeacherStudentPlannerPage({
         </Link>
         <h1 className="text-[18px] font-extrabold text-ink mt-2">{student?.name ?? "학생"} 학습 플래너</h1>
 
-        <div className="flex gap-1.5 mt-4 border-b border-grey-200">
-          {TABS.map((t) => (
-            <Link
-              key={t.id}
-              href={`/teacher/student/${studentId}/planner?tab=${t.id}${returnTo ? `&returnTo=${encodeURIComponent(returnTo)}` : ""}`}
-              className={
-                "text-[13px] font-semibold px-3 py-2 -mb-px border-b-2 " +
-                (activeTab === t.id ? "border-ink text-ink" : "border-transparent text-grey-500")
-              }
-            >
-              {t.label}
-            </Link>
-          ))}
-        </div>
-
-        {activeTab === "board" && <TeacherPlannerBoard studentId={studentId} />}
-        {activeTab !== "board" && (
-          <div className="py-10 text-center text-[13px] text-grey-500">
-            {activeTab === "schedule" && "일정 탭은 준비 중입니다 — 곧 제공됩니다."}
-            {activeTab === "overview" && "오버뷰 탭은 준비 중입니다 — 곧 제공됩니다."}
-          </div>
-        )}
+        <TeacherPlannerBoard studentId={studentId} initialTab={initialTab} />
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import TimelineView from "@/app/components/TimelineView";
 import FamilyReviewCard from "@/app/components/FamilyReviewCard";
 import { StatsWidget, UpcomingWidget } from "./HomeDashboard";
 import PlannerOverviewView from "./PlannerOverviewView";
+import { StatsPanel } from "./StatsTab";
+import { loadMyStatsAction } from "./stats-actions";
 import type { DashboardData } from "./dashboard-data";
 import {
   loadMyBoardCardsAction,
@@ -33,7 +35,7 @@ export default function HomeTab({
   dashboard: DashboardData;
 }) {
   const router = useRouter();
-  const [subtab, setSubtab] = useState<"overview" | "todo" | "review">("overview");
+  const [subtab, setSubtab] = useState<"overview" | "todo" | "review" | "stats">("overview");
   const [boardView, setBoardView] = useState<"board" | "timeline">("board");
   const [cards, setCards] = useState<BoardCard[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -103,13 +105,16 @@ export default function HomeTab({
           { id: "overview", label: "Overview" },
           { id: "todo", label: "TODO" },
           { id: "review", label: "Review" },
+          { id: "stats", label: "통계" },
         ]}
         activeId={subtab}
         onSelect={setSubtab}
       />
 
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
-      {cards === null ? (
+      {subtab === "stats" ? (
+        <StatsPanel load={loadMyStatsAction} />
+      ) : cards === null ? (
         <p className="text-[13px] text-grey-500">불러오는 중…</p>
       ) : subtab === "overview" ? (
         <div>

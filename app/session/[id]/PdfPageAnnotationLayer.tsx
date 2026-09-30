@@ -10,7 +10,8 @@ import {
 } from "react";
 import type { RealtimeChannel } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
-import { annotationScale, pointerToCanvas } from "./annotation-scale";
+import { pointerToCanvas } from "./annotation-scale";
+import { TEXT_LINE_HEIGHT, TEXT_SIZE, drawPageSegment } from "./page-stroke-draw";
 import {
   appendPageStrokeEvents,
   loadPageStrokes,
@@ -48,9 +49,6 @@ import type { MaterialLayerRole } from "./MaterialAnnotationLayers";
 
 const COLORS = ["#1A1A1A", "#C8102E", "#1B6FB0"];
 const SAVE_DELAY_MS = 600;
-// 텍스트 상자 글자 크기(캔버스 px, 그릴 때 너비 기준) — 2026-09-14 UAT: PC 수업 교사의 타이핑 필기.
-const TEXT_SIZE = 18;
-const TEXT_LINE_HEIGHT = 1.3;
 
 export type PdfPageAnnotationHandle = {
   /** 대기 중 획을 지금 저장한다. 성공(또는 저장할 것이 없음)이면 true. */
@@ -114,38 +112,7 @@ export default forwardRef<
     scope === "teacher_shared" ? teacherCanvasRef.current : studentCanvasRef.current;
 
   const drawSegment = useCallback((scope: PageStrokeScope, seg: PageStrokePayload) => {
-    const canvas = canvasFor(scope);
-    const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) return;
-    const scale = annotationScale(canvas.width, seg.w);
-    if (seg.tool === "clear") {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      return;
-    }
-    if (seg.tool === "text") {
-      ctx.globalCompositeOperation = "source-over";
-      ctx.fillStyle = seg.color;
-      const size = (seg.size ?? TEXT_SIZE) * scale;
-      ctx.font = `600 ${size}px system-ui, -apple-system, sans-serif`;
-      ctx.textBaseline = "top";
-      (seg.text ?? "").split("\n").forEach((line, i) => {
-        ctx.fillText(line, seg.x0 * scale, seg.y0 * scale + i * size * TEXT_LINE_HEIGHT);
-      });
-      return;
-    }
-    ctx.lineCap = "round";
-    if (seg.tool === "eraser") {
-      ctx.globalCompositeOperation = "destination-out";
-      ctx.lineWidth = 22 * scale;
-    } else {
-      ctx.globalCompositeOperation = "source-over";
-      ctx.strokeStyle = seg.color;
-      ctx.lineWidth = (scope === "teacher_shared" ? 3.2 : 2.5) * scale;
-    }
-    ctx.beginPath();
-    ctx.moveTo(seg.x0 * scale, seg.y0 * scale);
-    ctx.lineTo(seg.x1 * scale, seg.y1 * scale);
-    ctx.stroke();
+    drawPageSegment(canvasFor(scope), seg, scope === "teacher_shared" ? 3.2 : 2.5);
   }, []);
 
   const redraw = useCallback(() => {

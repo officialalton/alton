@@ -27,13 +27,13 @@ export const VERDICT_LABEL: Record<Verdict, string> = {
 };
 
 export const VERDICT_EFFECT: Record<Verdict, string> = {
-  not_error: "문항 유지, 채점 변경 없음. 신고자에게는 '오류 아님'으로 안내됩니다.",
+  not_error: "문항 복귀(오류 확정으로 보관됐다면) · 대체 문항 필요 기록 닫기 · 이전 조정 원복. 이미 교체된 세트는 그대로입니다. 신고자에게는 '오류 아님'으로 안내됩니다.",
   key_wrong_confirmed: "문항 보관 + 이미 나간 응시·과제 전원 정답 처리(미응답 포함). 대체 문항 필요 기록·여분 자동 교체.",
   flawed_confirmed: "문항 보관 + 이미 나간 응시·과제 전원 정답 처리(미응답 포함). 대체 문항 필요 기록·여분 자동 교체.",
   explanation_confirmed: "문항 보관, 채점·점수 변경 없음. 대체 문항 필요 기록·여분 자동 교체.",
 };
 
-export const SOURCE_LABEL: Record<string, string> = { session_assignment: "수업·과제", mock_exam: "모의고사" };
+export const SOURCE_LABEL: Record<string, string> = { session_assignment: "수업·과제", mock_exam: "모의고사", homework_batch: "과제 묶음" };
 
 export const MEMO_MAX = 1000;
 
@@ -44,6 +44,7 @@ export function reportTypesFor(role: ReporterRole): ReportType[] {
 
 export type ReportContext =
   | { source: "session_assignment"; sessionId: string; sessionSource: "lesson" | "homework"; problemId: string }
+  | { source: "homework_batch"; batchId: string; problemId: string }
   | { source: "mock_exam"; attemptId: string; setItemId: string; problemId?: string };
 
 export type MyReportStatus = "reviewing" | "confirmed" | "not_error";

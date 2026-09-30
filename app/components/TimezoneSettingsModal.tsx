@@ -85,6 +85,8 @@ export default function TimezoneSettingsModal({
       }
       setDone(true);
       router.refresh();
+      // 저장이 끝나면 창을 닫는다(반영은 refresh로 바로 된다).
+      onClose();
     } catch (e) {
       setError(e instanceof Error ? e.message : "저장에 실패했습니다");
     } finally {
@@ -97,7 +99,14 @@ export default function TimezoneSettingsModal({
       <div className="bg-white rounded-xl border-[1.5px] border-grey-200 w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-[15px] font-bold text-ink">시간대 설정</h2>
-          <button onClick={onClose} className="text-grey-400 text-[13px]">닫기</button>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="닫기"
+            className="-mr-1 flex h-8 w-8 items-center justify-center rounded-lg text-[18px] leading-none text-grey-400 hover:bg-grey-50 hover:text-ink"
+          >
+            ✕
+          </button>
         </div>
 
         {loading ? (
@@ -160,13 +169,12 @@ export default function TimezoneSettingsModal({
             </div>
 
             {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
-            {done && !error && <p className="text-[12.5px] text-green mb-3">저장했습니다.</p>}
           </>
         )}
 
         <div className="flex justify-end gap-2">
-          <button onClick={onClose} className="px-4 py-2 text-[13px] font-semibold text-grey-500">
-            닫기
+          <button type="button" onClick={onClose} className="px-4 py-2 text-[13px] font-semibold text-grey-500">
+            취소
           </button>
           <button
             onClick={handleSave}

@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { StatsPanel } from "@/app/student/StatsTab";
+import { getParentChildStats } from "./home-stats-actions";
 import ParentMockExamTab from "./ParentMockExamTab";
 import { loadChildBoardCardsAction } from "./board-actions";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
@@ -162,7 +164,8 @@ export default function ParentShell({
   // 2026-09-18 — 홈 재설계: "일정 확인"에서 "리뷰 확인"으로 목적이 바뀌어
   // 종합 리뷰(기본)/수업 리뷰(시간순)/상담 리뷰/통계 4개 읽기 전용 서브탭으로
   // 구성한다. 상담 리뷰는 종합 리뷰에 합치지 않는다(사용자 결정, 2026-09-18).
-  const [homeSubTab, setHomeSubTab] = useState<"overview" | "todo" | "review">("overview");
+  const [homeSubTab, setHomeSubTab] = useState<"overview" | "todo" | "review" | "stats">("overview");
+  const loadChildStats = useCallback(() => getParentChildStats(currentChildId), [currentChildId]);
   const [homeBoardView, setHomeBoardView] = useState<"board" | "timeline">("board");
   const [familyReviews, setFamilyReviews] = useState<FamilyLessonReview[] | null>(null);
   const [consultReviews, setConsultReviews] = useState<HomeConsultationReview[] | null>(null);
@@ -499,6 +502,7 @@ export default function ParentShell({
                   { id: "overview", label: "Overview" },
                   { id: "todo", label: "Board" },
                   { id: "review", label: "Review" },
+                  { id: "stats", label: "통계" },
                 ]}
                 activeId={homeSubTab}
                 onSelect={(id) => setHomeSubTab(id as typeof homeSubTab)}
@@ -536,7 +540,11 @@ export default function ParentShell({
               때는 일정·캘린더로 되돌아가지 않고 빈 상태 문구만 보여준다(요구사항). */}
           {activeTab === "home" ? (
             <div>
-              {homeSubTab === "overview" ? (
+              {homeSubTab === "stats" ? (
+                <div className="px-6 py-5">
+                  <StatsPanel key={currentChildId} load={loadChildStats} />
+                </div>
+              ) : homeSubTab === "overview" ? (
                 childBoardCards === null ? (
                   <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
                 ) : (

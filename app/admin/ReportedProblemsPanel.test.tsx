@@ -67,6 +67,9 @@ describe("ReportedProblemsPanel", () => {
     await waitFor(() => screen.getByTestId("reported-problem-detail"));
     const go = screen.getByRole("button", { name: "판정 적용" });
     expect(go).toBeDisabled();
+    expect(screen.queryByTestId("verdict-step2")).toBeNull();
+    fireEvent.click(screen.getByLabelText(/오류 → 보관/));
+    expect(go).toBeDisabled(); // 유형 선택 전
     fireEvent.click(screen.getByLabelText(/문제 자체 오류 확정/));
     fireEvent.click(go);
     expect(apply).not.toHaveBeenCalled(); // 확인 단계
@@ -77,9 +80,20 @@ describe("ReportedProblemsPanel", () => {
 
     apply.mockClear();
     apply.mockResolvedValue({ ok: true, value: { alreadyApplied: false, verdictId: "y", decision: "not_error", resolvedReports: 3 } });
-    fireEvent.click(screen.getByLabelText(/오류 아님/));
+    fireEvent.click(screen.getByLabelText(/정상 → 복귀/));
     fireEvent.click(screen.getByRole("button", { name: "판정 적용" }));
     await waitFor(() => expect(apply).toHaveBeenCalledTimes(1));
+  });
+
+  it("필터가 있으면 칩을 보이고 조건을 목록 조회에 넘긴다", async () => {
+    list.mockResolvedValue({ total: 0, rows: [] });
+    const clear = vi.fn();
+    render(<ReportedProblemsPanel filter={{ skill: "linear_functions", difficulty: "hard", days: 7 }} onClearFilter={clear} />);
+    await waitFor(() => expect(list).toHaveBeenCalled());
+    expect(list.mock.calls[0][0]).toMatchObject({ skill: "linear_functions", difficulty: "hard", days: 7 });
+    expect(screen.getByTestId("report-filter-chip")).toHaveTextContent("최근 7일");
+    fireEvent.click(screen.getByRole("button", { name: "해제" }));
+    expect(clear).toHaveBeenCalled();
   });
 
   it("서버가 판정을 거절하면 사유를 보여준다", async () => {
@@ -90,7 +104,7 @@ describe("ReportedProblemsPanel", () => {
     await waitFor(() => screen.getByTestId("reported-problem-row"));
     fireEvent.click(screen.getByTestId("reported-problem-row"));
     await waitFor(() => screen.getByTestId("reported-problem-detail"));
-    fireEvent.click(screen.getByLabelText(/오류 아님/));
+    fireEvent.click(screen.getByLabelText(/정상 → 복귀/));
     fireEvent.click(screen.getByRole("button", { name: "판정 적용" }));
     await waitFor(() => expect(screen.getByRole("alert")).toHaveTextContent("관리자만 판정할 수 있습니다."));
   });

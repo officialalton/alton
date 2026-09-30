@@ -3,7 +3,10 @@
 import { useHighlightSupported } from "@/lib/use-highlight-supported";
 import { useEffect, useRef, useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
-import { submitHomeworkAnswerAction, gradeHomeworkBatchAction, toggleHomeworkItemSavedToPracticeAction } from "@/lib/homework-batch-actions";
+import { submitHomeworkAnswerAction, gradeHomeworkBatchAction, toggleHomeworkItemSavedToPracticeAction, regradeHomeworkItemAction } from "@/lib/homework-batch-actions";
+import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
+import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
+import type { MyReportStatus } from "@/lib/problem-error-reports/labels";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
@@ -35,14 +38,32 @@ function ChosenAnswer({ item }: { item: HomeworkBatchItem }) {
  * 학생 포털·교사 포털·세션뷰 어디서나 같은 화면을 쓴다. "예정 과제"(채점 전)와 "지난 과제"(채점
  * 완료, 과목별 필터 + 누적 리스트)로 나눈다(2026-09-16 제품 오너 지시). */
 export default function HomeworkBatchPanel({
-  batches: initialBatches, viewerRole, readOnly,
+  batches: initialBatches, viewerRole, readOnly, reportEnabled = true,
 }: {
   batches: HomeworkBatch[];
   viewerRole: "student" | "teacher";
   /** 보호자 등 읽기 전용 뷰어 — 답 제출·채점 버튼이 전부 숨는다(내용은 그대로 볼 수 있다). */
   readOnly?: boolean;
+  /** 문제 오류 신고 버튼 노출(기본 true). 관리자·학부모처럼 신고할 수 없는 뷰어는 false. */
+  reportEnabled?: boolean;
 }) {
   const [batches, setBatches] = useState(initialBatches);
+  // 문제 오류 신고는 학생·선생님만(학부모=readOnly·관리자 제외). 내가 신고한 문항의 진행 상태는 패널당 한 번만 조회한다.
+  const canReport = reportEnabled && !readOnly;
+  const [myReports, setMyReports] = useState<Record<string, MyReportStatus>>({});
+  const reportIdsKey = canReport ? [...new Set(batches.flatMap((b) => b.items.map((i) => i.problemId)))].join(",") : "";
+  useEffect(() => {
+    if (!reportIdsKey) return;
+    let cancelled = false;
+    loadMyProblemErrorReportsAction(reportIdsKey.split(","))
+      .then((r) => {
+        if (!cancelled && r.ok) setMyReports(r.value);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [reportIdsKey]);
   const [subTab, setSubTab] = useState<"upcoming" | "past">("upcoming");
   const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
   const toggleMathTools = (which: "calculator" | "reference") => setMathToolsOpen((cur) => (cur === which ? null : which));
@@ -111,7 +132,7 @@ export default function HomeworkBatchPanel({
                 <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
               </div>
             )}
-            {active && <BatchRunner batch={active} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />}
+            {active && <BatchRunner batch={active} viewerRole={viewerRole} readOnly={readOnly} canReport={canReport} myReports={myReports} onChange={updateBatch} />}
             {active && isMathBatch(active) && (
               <MockExamMathTools calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onClose={() => setMathToolsOpen(null)} />
             )}
@@ -125,7 +146,7 @@ export default function HomeworkBatchPanel({
               <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
             </div>
           )}
-          <BatchRunner batch={pastDetail} viewerRole={viewerRole} readOnly={readOnly} onChange={updateBatch} />
+          <BatchRunner batch={pastDetail} viewerRole={viewerRole} readOnly={readOnly} canReport={canReport} myReports={myReports} onChange={updateBatch} />
           {isMathBatch(pastDetail) && (
             <MockExamMathTools calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onClose={() => setMathToolsOpen(null)} />
           )}
@@ -185,9 +206,9 @@ function PastBatchList({ batches, onOpen }: { batches: HomeworkBatch[]; onOpen: 
 }
 
 function BatchRunner({
-  batch, viewerRole, readOnly, onChange,
+  batch, viewerRole, readOnly, canReport, myReports, onChange,
 }: {
-  batch: HomeworkBatch; viewerRole: "student" | "teacher"; readOnly?: boolean; onChange: (b: HomeworkBatch) => void;
+  batch: HomeworkBatch; viewerRole: "student" | "teacher"; readOnly?: boolean; canReport: boolean; myReports: Record<string, MyReportStatus>; onChange: (b: HomeworkBatch) => void;
 }) {
   const [i, setI] = useState(0);
   const [response, setResponse] = useState(batch.items[i]?.response ?? "");
@@ -195,6 +216,7 @@ function BatchRunner({
   const [error, setError] = useState<string | null>(null);
   const [overrides, setOverrides] = useState<Record<string, { grade: "correct" | "incorrect"; comment?: string }>>({});
   const [grading, setGrading] = useState(false);
+  const [regrading, setRegrading] = useState(false);
   // 2026-09-22(사용자 지시) — 모의고사와 같은 소거·하이라이트·"문제 저장" 도구를
   // 과제에도 둔다(MockExamTakeClient와 같은 패턴).
   const [eliminateMode, setEliminateMode] = useState(false);
@@ -278,6 +300,20 @@ function BatchRunner({
     });
   }
 
+  async function regrade(grade: "correct" | "incorrect") {
+    setRegrading(true);
+    setError(null);
+    const r = await regradeHomeworkItemAction(batch.id, item.problemId, grade);
+    setRegrading(false);
+    if (!r.ok) { setError(r.error); return; }
+    onChange({
+      ...batch,
+      items: batch.items.map((it) => (it.problemId === item.problemId
+        ? { ...it, grade, graded: true, gradedAt: new Date().toISOString(), errorAdjustmentPending: false, savedToPractice: grade === "incorrect" ? true : it.savedToPractice }
+        : it)),
+    });
+  }
+
   const showAnswer = item.graded;
   const currentOverride = overrides[item.problemId];
   const currentGrade = currentOverride?.grade ?? (item.autoCorrect === null ? null : item.autoCorrect ? "correct" : "incorrect");
@@ -346,6 +382,34 @@ function BatchRunner({
             <button disabled={i === batch.items.length - 1} onClick={() => goTo(i + 1)} className="text-[12px] font-semibold text-ink disabled:opacity-30">다음 과제</button>
           </div>
         </div>
+
+        {/* 문제 오류 신고 — 학생·선생님만. 카드 머리 아래 우측(수업 문제 카드와 같은 위치). 해설 오류는 선생님 UI 에만 나온다. */}
+        {canReport && (
+          <div className="-mt-1 mb-3 flex justify-end">
+            <ProblemErrorReportButton
+              key={item.problemId}
+              role={viewerRole}
+              initialStatus={myReports[item.problemId] ?? null}
+              context={{ source: "homework_batch", batchId: batch.id, problemId: item.problemId }}
+            />
+          </div>
+        )}
+
+        {/* 문항 오류 판정으로 채점이 조정된 문항 — 학생·보호자는 채점 뒤에만, 선생님은 '조정 대상'으로 본다. */}
+        {item.graded && viewerRole === "student" && item.errorAdjustedAt && (
+          <div role="note" data-testid="problem-error-adjusted" className="mb-3 rounded-xl border border-green bg-green/10 px-4 py-2.5 text-[12.5px] font-semibold text-green">
+            {item.errorAdjustmentPending ? "문항 오류가 확인되어 선생님이 채점을 다시 확인하고 있어요." : "문항 오류로 채점이 조정되었습니다."}
+          </div>
+        )}
+        {viewerRole === "teacher" && item.errorAdjustmentPending && (
+          <div role="note" data-testid="problem-error-pending" className="mb-3 rounded-xl border border-yellow bg-yellow-bg px-4 py-2.5 text-[12.5px] font-semibold text-ink">
+            <p>조정 대상 — 문항 오류 판정으로 이 문항은 전원 정답 처리 대상입니다. 직접 채점한 결과는 그대로이니 다시 채점해 주세요.</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <button type="button" disabled={regrading} onClick={() => void regrade("correct")} className="rounded-lg border-[1.5px] border-green px-3 py-1 text-[12px] font-bold text-green disabled:opacity-50">정답으로 다시 채점</button>
+              <button type="button" disabled={regrading} onClick={() => void regrade("incorrect")} className="rounded-lg border-[1.5px] border-red px-3 py-1 text-[12px] font-bold text-red disabled:opacity-50">오답 유지</button>
+            </div>
+          </div>
+        )}
 
         {/* 2026-09-21(UAT 지적) — 이 화면만 LearningText를 안 써서 마크다운 표·KaTeX 수식이
             원문 그대로("$y < -2x - 7$", "|x|y||---|---|..." 등) 노출되고 있었다. */}

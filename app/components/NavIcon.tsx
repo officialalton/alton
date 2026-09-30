@@ -20,6 +20,7 @@ export type NavIconName =
   | "inquiries"
   | "curriculum"
   | "questionBank"
+  | "errorReport"
   | "legacyCredits"
   | "entitlements"
   | "schedule"
@@ -51,6 +52,7 @@ const PATHS: Record<NavIconName, string> = {
   onboarding: "M12 3.5c-4.7 0-8.5 1.6-8.5 3.5v10c0 1.9 3.8 3.5 8.5 3.5s8.5-1.6 8.5-3.5V7c0-1.9-3.8-3.5-8.5-3.5ZM3.5 7c0 1.9 3.8 3.5 8.5 3.5S20.5 8.9 20.5 7M3.5 12c0 1.9 3.8 3.5 8.5 3.5s8.5-1.6 8.5-3.5",
   inquiries: "M4 5.5h16v11H9l-4 3.5v-3.5h-1v-11ZM8 9.5h8M8 12.5h5",
   curriculum: "M4 5.2A2.2 2.2 0 0 1 6.2 3H19v16.5H6.2A2.2 2.2 0 0 0 4 21.5V5.2ZM4 17.7A2.2 2.2 0 0 1 6.2 15.5H19M8 8h7M8 11h5",
+  errorReport: "M6 21V4M6 5h11l-2 4 2 4H6",
   questionBank: "M5 4.5h14v13l-4 3v-3H5v-13ZM10 9.2a2 2 0 1 1 3 1.7c-.8.5-1 .9-1 1.6M12 15.2h.01",
   legacyCredits: "M3.5 6.5h17v11h-17v-11ZM3.5 10h17M7 15h4",
   entitlements: "M4 8.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 3v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-3v-2ZM9 6.5v11",

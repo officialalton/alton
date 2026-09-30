@@ -110,30 +110,18 @@ function formatDate(iso: string | null, tz: string): string {
   }, tz);
 }
 
-const PLANNER_TABS = [
-  { id: "board", label: "보드" },
-  { id: "schedule", label: "일정" },
-  { id: "overview", label: "오버뷰" },
-] as const;
-type PlannerTabId = (typeof PLANNER_TABS)[number]["id"];
-
-// 2026-09-22(사용자 지시) — "오버뷰/로드맵/일정" 버튼이 별도 페이지로 나가버려
-// 좌측 네비게이션이 사라졌다. My Students 탭 안에서 그대로 전환되게 바꾼다
-// (2026-09-24 — 보드 탭은 TeacherPlannerBoard로 연결. 일정·오버뷰는 아직
-// 데이터 모델·서버 액션이 붙지 않아 자리만 남겨둔다).
+// 2026-09-22(사용자 지시) — "오버뷰/로드맵" 버튼이 별도 페이지로 나가버려 좌측 네비게이션이
+// 사라졌다. My Students 탭 안에서 그대로 전환되게 한다. 2026-09-30(UAT) — 바깥 보드/일정/오버뷰
+// 탭을 없애고 역할 공통 화면(StaffStudentViews: 오버뷰·보드, 보드에서 할 일 추가만 가능) 하나만 쓴다.
 function StudentPlannerPanel({
   studentId,
   studentName,
-  initialTab,
   onBack,
 }: {
   studentId: string;
   studentName: string;
-  initialTab: PlannerTabId;
   onBack: () => void;
 }) {
-  const [tab, setTab] = useState<PlannerTabId>(initialTab);
-
   return (
     <div className="max-w-[640px]">
       <button
@@ -143,21 +131,7 @@ function StudentPlannerPanel({
         ← 뒤로
       </button>
       <h1 className="text-[18px] font-extrabold text-ink mt-2">{studentName} 학습 플래너</h1>
-
-      <UnderlineSubTabs
-        className="mt-4"
-        items={PLANNER_TABS}
-        activeId={tab}
-        onSelect={setTab}
-      />
-
-      {tab === "board" && <TeacherPlannerBoard studentId={studentId} />}
-      {tab !== "board" && (
-        <div className="py-10 text-center text-[13px] text-grey-500">
-          {tab === "schedule" && "일정 탭은 준비 중입니다 — 곧 제공됩니다."}
-          {tab === "overview" && "오버뷰 탭은 준비 중입니다 — 곧 제공됩니다."}
-        </div>
-      )}
+      <TeacherPlannerBoard studentId={studentId} />
     </div>
   );
 }
@@ -216,7 +190,7 @@ function StudentRoadmapPanel({
 type View =
   | { type: "list" }
   | { type: "roadmap"; studentId: string; studentName: string }
-  | { type: "planner"; studentId: string; studentName: string; tab: PlannerTabId };
+  | { type: "planner"; studentId: string; studentName: string };
 
 export default function AssignmentsTab({
   current,
@@ -262,7 +236,6 @@ export default function AssignmentsTab({
       <StudentPlannerPanel
         studentId={view.studentId}
         studentName={view.studentName}
-        initialTab={view.tab}
         onBack={() => setView({ type: "list" })}
       />
     );
@@ -308,27 +281,19 @@ export default function AssignmentsTab({
                   {a.status === "active" ? "배정중" : "예정"}
                 </span>
               </div>
-              {/* 2026-09-22(사용자 지시) — 학생 프로필 보기/과거 수업 이력 보기 펼침을
-                  없애고, 학생 보드(오버뷰/일정 — 개발 중)·로드맵·커리큘럼 진입
-                  버튼으로 통일한다. */}
+              {/* 학생 플래너(오버뷰·보드)·로드맵·커리큘럼 진입 버튼. */}
               <div className="flex flex-wrap gap-2 mt-2">
                 <button
-                  onClick={() => setView({ type: "planner", studentId: a.studentId, studentName: a.studentName, tab: "overview" })}
+                  onClick={() => setView({ type: "planner", studentId: a.studentId, studentName: a.studentName })}
                   className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
                 >
-                  오버뷰
+                  학습 플래너
                 </button>
                 <button
                   onClick={() => setView({ type: "roadmap", studentId: a.studentId, studentName: a.studentName })}
                   className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
                 >
                   로드맵
-                </button>
-                <button
-                  onClick={() => setView({ type: "planner", studentId: a.studentId, studentName: a.studentName, tab: "schedule" })}
-                  className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
-                >
-                  일정
                 </button>
                 {onOpenOperatingCurriculum && (
                   <button

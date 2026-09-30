@@ -67,6 +67,8 @@ export default function MaterialTab({
   // 2026-09-22(버그 수정) — 세션 시작 전엔 viewerRole이 "admin"으로 강제돼(SessionShell의
   // contentViewerRole) 단어 저장 스위치가 하나도 안 보였다. 필기(annotationViewerRole)와
   // 같은 실제 역할 기준으로 판단해야 한다 — 단어 저장도 필기처럼 "쓰기"이기 때문이다.
+  // 교사용 팁(2026-10-01) — 선생님(과 관리자)만 본다. 학생·보호자에는 토글·레이어·요청이 없다.
+  const tipAccess = drawRole === "teacher" || drawRole === "admin" ? "view" : "none";
   const vocabEnabled = drawRole === "student" || drawRole === "teacher";
   const vocab = useVocabSaveController(studentId);
   const [activeSectionId, setActiveSectionId] = useState<string | null>(
@@ -116,6 +118,7 @@ export default function MaterialTab({
           sessionId={sessionSource === "v3" ? sessionId : null}
           role={layerRole}
           viewerUserId={viewerUserId}
+          tipAccess={tipAccess}
           extraControls={vocabEnabled ? <VocabSaveToggleBar controller={vocab} /> : undefined}
         />
       </VocabClickLayer>
@@ -250,6 +253,7 @@ export default function MaterialTab({
               sessionId={sessionSource === "v3" ? sessionId : null}
               role={layerRole}
               viewerUserId={viewerUserId}
+              tipAccess={tipAccess}
               extraControls={vocabEnabled ? <VocabSaveToggleBar controller={vocab} /> : undefined}
             />
           </VocabClickLayer>

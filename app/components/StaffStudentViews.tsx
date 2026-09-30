@@ -2,9 +2,8 @@
 
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
-import StatsTab from "@/app/student/StatsTab";
+import { StatsPanel } from "@/app/student/StatsTab";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
-import type { StatsData } from "@/app/student/stats-data";
 import type { BoardCard } from "@/lib/board/types";
 import type { StudentViewAccess } from "@/lib/staff-student-view";
 import {
@@ -16,7 +15,7 @@ import {
   deleteStudentViewTaskAction,
 } from "./staff-student-view-actions";
 
-type ViewId = "overview" | "board" | "stats";
+export type ViewId = "overview" | "board" | "stats";
 const TAB_LABEL: Record<ViewId, string> = { overview: "오버뷰", board: "보드", stats: "통계" };
 
 export type ExtraStudentViewTab = { id: string; label: string; render: () => ReactNode };
@@ -27,11 +26,14 @@ export type ExtraStudentViewTab = { id: string; label: string; render: () => Rea
 export default function StaffStudentViews({
   studentId,
   extraTabs = [],
+  initialTab = "overview",
 }: {
   studentId: string;
   extraTabs?: ExtraStudentViewTab[];
+  /** 처음 열 화면(기본 오버뷰). 서버가 허용하지 않는 탭이면 탭 줄에 없으므로 오버뷰로 본다. */
+  initialTab?: ViewId;
 }) {
-  const [tab, setTab] = useState<string>("overview");
+  const [tab, setTab] = useState<string>(initialTab);
   const [cards, setCards] = useState<BoardCard[] | null>(null);
   const [access, setAccess] = useState<StudentViewAccess | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -56,9 +58,9 @@ export default function StaffStudentViews({
     setCards(null);
     setAccess(null);
     setError(null);
-    setTab("overview");
+    setTab(initialTab);
     void reload();
-  }, [reload]);
+  }, [reload, initialTab]);
 
   // 열람 감사 — 직원 역할만(access.audit), 화면 종류가 바뀔 때마다. 기록 실패는 열람을 막지 않는다.
   useEffect(() => {
@@ -111,19 +113,8 @@ export default function StaffStudentViews({
 }
 
 function StaffStudentStats({ studentId }: { studentId: string }) {
-  const [state, setState] = useState<{ data: StatsData | null; error: string | null }>({ data: null, error: null });
-  useEffect(() => {
-    let cancelled = false;
-    loadStaffViewStatsAction(studentId)
-      .then((data) => !cancelled && setState({ data, error: null }))
-      .catch((e) => !cancelled && setState({ data: null, error: e instanceof Error ? e.message : "통계를 불러오지 못했습니다." }));
-    return () => {
-      cancelled = true;
-    };
-  }, [studentId]);
-  if (state.error) return <p role="alert" className="py-8 text-[13px] text-red">{state.error}</p>;
-  if (!state.data) return <p className="py-8 text-[13px] text-grey-500">불러오는 중...</p>;
-  return <StatsTab data={state.data} />;
+  const load = useCallback(() => loadStaffViewStatsAction(studentId), [studentId]);
+  return <StatsPanel key={studentId} load={load} />;
 }
 
 function BoardPanel({
