@@ -5,6 +5,7 @@
 // 실행: npx tsx scripts/mock-exam-generation/recipe-check.ts --run <id> --source rc1|r7 [--concurrency 8]
 //   출력: <run>/recipe-check/<gid>.json
 import Anthropic from "@anthropic-ai/sdk";
+import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { reviewOne, deterministicIssues, type Raw } from "./review";
@@ -18,7 +19,7 @@ type Recipe = { id: string; instruction: string; beyondMedium: string; checklist
 async function ask(name: string, schema: Record<string, unknown>, prompt: string): Promise<Record<string, unknown>> {
   for (let a = 0; a < 3; a++) {
     try {
-      const m = await client.messages.create({ model: "claude-sonnet-5", max_tokens: 1200, tools: [{ name, description: name, input_schema: { type: "object", properties: schema, required: Object.keys(schema) } as never }], tool_choice: { type: "tool", name }, messages: [{ role: "user", content: prompt }] });
+      const m = await client.messages.create({ model: reviewModel(), max_tokens: 1200, tools: [{ name, description: name, input_schema: { type: "object", properties: schema, required: Object.keys(schema) } as never }], tool_choice: { type: "tool", name }, messages: [{ role: "user", content: prompt }] });
       const tu = m.content.find((c) => c.type === "tool_use");
       if (tu && tu.type === "tool_use") return tu.input as Record<string, unknown>;
     } catch { await new Promise((r) => setTimeout(r, 3000)); }
@@ -46,7 +47,7 @@ const text = (r: Raw) => `${r.problem.stimulus ?? r.problem.passage ?? ""}\n\n�
         rec ? ask("compliance", { met: { type: "array", items: { type: "boolean" }, description: "체크리스트 항목 순서대로 충족 여부" }, note: { type: "string" } }, `다음 체크리스트를 이 SAT 문항이 충족하는지 항목별로 판정하라(엄격하게).\n${rec.checklist.map((c, i) => `${i + 1}. ${c}`).join("\n")}\n\n${text(r)}`) : Promise.resolve(null),
         ask("hardfit", { beyondMedium: { type: "boolean", description: "같은 skill의 전형적인 medium 문항보다 추가 사고(아래 특성 중 둘 이상 또는 그에 준하는 것)를 실제로 요구하는가" }, onlyComplexity: { type: "boolean", description: "난이도가 지문 길이·복잡한 숫자·계산량·어휘에서만 오는가" }, which: { type: "array", items: { type: "string" }, description: "요구하는 추가 사고 이름" }, note: { type: "string" } },
           `디지털 SAT '${r.skill}' 문항의 hard 적합성을 판정하라. 같은 skill의 전형적 medium 문항 대비 추가로 요구하는 사고가 있는지, 난이도가 단지 긴 문장·복잡한 숫자·계산량 증가에서만 오는지 본다.\n[이 skill의 hard 특성]\n${(chars[r.skill]?.characteristics ?? []).map((c) => `- ${c.name}: ${c.description}`).join("\n")}\n\n${text(r)}`),
-        weakSolve(r, 3, "claude-sonnet-5"),
+        weakSolve(r, 3, reviewModel()),
       ]);
       const met = compl ? (compl.met as boolean[]).filter(Boolean).length : null;
       const correctOk = rev.reasons.filter((x) => !["difficulty_label_mismatch"].includes(x)).length === 0;

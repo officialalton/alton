@@ -2,6 +2,7 @@
 // 모듈 위치(앞/뒤)는 근거로 쓰지 않고 참고 상관만 기록한다. 공식 난이도(College Board 표기)는 이 자료에 없어 officialDifficulty=null.
 // 실행: npx tsx scripts/mock-exam-generation/cb-synth.ts  -> data/mock-exam-generation/cb-hard/hard-characteristics.json
 import Anthropic from "@anthropic-ai/sdk";
+import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 const envPath = path.resolve(process.cwd(), ".env.local");
@@ -30,7 +31,7 @@ const freq = (g: Rec[]) => { const m = new Map<string, number>(); for (const r o
     const hi = sorted.slice(0, k), lo = sorted.slice(-k);
     const stats = (g: Rec[]) => ({ steps: mean(g.map((r) => r.steps)), combine: mean(g.map((r) => r.combine)), shift: mean(g.map((r) => r.shift)), abstract: mean(g.map((r) => r.abstract)), subtle: mean(g.map((r) => r.subtle)), traps: freq(g) });
     const m = await client.messages.create({
-      model: "claude-sonnet-5", max_tokens: 2500,
+      model: generationModel(), max_tokens: 2500,
       tools: [{ name: "characteristics", description: "hard 특성", input_schema: { type: "object", properties: { characteristics: { type: "array", minItems: 3, maxItems: 5, items: { type: "object", properties: {
         name: { type: "string", description: "특성 이름(짧은 영어 snake_case)" },
         description: { type: "string", description: "하위 그룹 대비 추가로 요구하는 사고를 한국어 1~2문장으로. 긴 문장·복잡한 숫자·계산량만으로 어려운 것은 특성이 아니다" },

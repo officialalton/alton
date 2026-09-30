@@ -3,6 +3,7 @@
 //   입력: /tmp/sat/r<N>.txt (pdftotext 본문), /tmp/sat/skillmap.json (커버리지 맵의 문항→skill)
 //   출력: data/mock-exam-generation/cb-hard/profiles/<test>-<sec>-<mod>.json  [{n, skill, steps, combine, shift, abstract, subtle, traps[], note}]
 import Anthropic from "@anthropic-ai/sdk";
+import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 const envPath = path.resolve(process.cwd(), ".env.local");
@@ -24,7 +25,7 @@ async function one(test: string, sec: "R&W" | "Math", mod: "M1" | "M2") {
   for (let a = 0; a < 3; a++) {
     try {
       const m = await client.messages.create({
-        model: "claude-sonnet-5", max_tokens: 9000,
+        model: generationModel(), max_tokens: 9000,
         tools: [{ name: "profiles", description: "문항별 사고 프로파일", input_schema: { type: "object", properties: { items: { type: "array", items: { type: "object", properties: {
           n: { type: "number", description: "모듈 안 문항 번호" },
           steps: { type: "number", description: "정답 도달에 필요한 독립 추론/풀이 단계 수 1~5" },

@@ -4,6 +4,7 @@
 //   calib: 최종 라벨별(easy/medium/hard)로 per 건씩 표본 → 정답률·루브릭이 라벨과 맞는지(타당성) 본다.
 //   pool : 통과 문항 전부(또는 --gids 목록)에 적용 → hard 후보 선별.
 import Anthropic from "@anthropic-ai/sdk";
+import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { evaluateAll, loadRun } from "./aggregate-lib";
@@ -14,8 +15,8 @@ if (existsSync(envPath)) for (const line of readFileSync(envPath, "utf-8").split
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 let client: Anthropic | null = null;
 const getClient = () => (client ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }));
-const WEAK = "claude-haiku-4-5";
-const STRONG = "claude-sonnet-5";
+const WEAK = weakModel();
+const STRONG = reviewModel();
 const normSpr = (s: string) => { const t = s.trim().replace(/,/g, "").replace(/\s+/g, ""); const f = t.match(/^(-?\d+)\/(\d+)$/); const n = f ? Number(f[1]) / Number(f[2]) : Number(t); return Number.isFinite(n) ? String(Math.round(n * 10000) / 10000) : t; };
 
 async function alt(figure: unknown): Promise<string> {

@@ -1,6 +1,7 @@
 // 2단계 A: hard 특성 -> skill당 레시피 2~3개 압축 (2026-09-30). 기존 archetypes.json 은 덮어쓰지 않고 recipes.json 을 새로 만든다.
 // 실행: npx tsx scripts/mock-exam-generation/cb-recipes.ts -> data/mock-exam-generation/recipes.json
 import Anthropic from "@anthropic-ai/sdk";
+import { generationModel, reviewModel, weakModel } from "../../lib/problem-generation/models";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
 const envPath = path.resolve(process.cwd(), ".env.local");
@@ -16,7 +17,7 @@ const chars = JSON.parse(readFileSync("data/mock-exam-generation/cb-hard/hard-ch
     let recipes: { evidence: string[] }[] = [];
     for (let attempt = 0; attempt < 3 && !recipes.length; attempt++) {
     const m = await client.messages.create({
-      model: "claude-sonnet-5", max_tokens: 3000,
+      model: generationModel(), max_tokens: 3000,
       tools: [{ name: "recipes", description: "레시피", input_schema: { type: "object", properties: { recipes: { type: "array", minItems: 2, maxItems: 3, items: { type: "object", properties: {
         id: { type: "string", description: `${skill} 접두어 + 짧은 이름(snake_case)` },
         instruction: { type: "string", description: "생성기에 그대로 넣는 지시 문단(한국어, 3문장 이내): 무엇을 묻고, 어떤 사고 구조로 만들고, 오답 3개를 어떤 실제 오개념으로 만드는가" },
