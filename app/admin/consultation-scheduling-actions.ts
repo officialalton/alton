@@ -2,7 +2,7 @@
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, adminForceResyncConsultationCalendar, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
+import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, adminForceResyncConsultationCalendar, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
 import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
@@ -161,27 +161,13 @@ export async function listPendingConsultationRequests(): Promise<ConsultationLis
   }));
 }
 
-/** M1 요구사항 3 — Smart Notes 확인·보정을 관리자가 수동으로 재시도(Meet space가 아직 없거나
- * 이전 시도가 실패했을 때). 성공 여부와 무관하게 readiness는 다음 listConsultationsForAdmin
- * 호출에서 다시 계산된다. */
-export async function retryConsultationSmartNotesConfig(consultationId: string): Promise<void> {
-  await requireAdmin();
-  await retrySmartNotesConfigForConsultation(consultationId);
-}
-
 export async function acceptConsultationRequest(consultationId: string): Promise<void> {
   const { supabase } = await requireAdmin();
-  const { data: activeConsent } = await supabase
-    .from("consult_consent_versions")
-    .select("id")
-    .eq("is_active", true)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-
+  // 2026-09-29(6단계) — 첫 상담에는 동의 확인이 없으므로 상담 동의 문구 버전을
+  // 조회·기록하지 않는다(RPC의 p_consent_version_id는 항상 null).
   const { error } = await supabase.rpc("admin_accept_consultation", {
     p_consultation_id: consultationId,
-    p_consent_version_id: activeConsent?.id ?? null,
+    p_consent_version_id: null,
   });
   if (error) throw new Error(friendlyDbMessage(error));
 

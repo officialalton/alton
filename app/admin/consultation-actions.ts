@@ -51,19 +51,6 @@ export async function createConsultation(params: {
   return { id: data.id };
 }
 
-export async function scheduleConsultation(
-  consultationId: string,
-  scheduledAt: string
-): Promise<void> {
-  await requireAdmin();
-  const admin = createAdminClient();
-  const { error } = await admin
-    .from("consultations")
-    .update({ status: "scheduled", scheduled_at: scheduledAt })
-    .eq("id", consultationId);
-  if (error) throw new Error(error.message);
-}
-
 export async function completeConsultation(consultationId: string): Promise<void> {
   await requireAdmin();
   const admin = createAdminClient();
@@ -105,30 +92,6 @@ export async function markConsultationNoShow(consultationId: string, reason?: st
       status: "no_show",
       no_show_at: new Date().toISOString(),
       cancellation_reason: reason ?? null,
-    })
-    .eq("id", consultationId);
-  if (error) throw new Error(error.message);
-}
-
-/**
- * 재예약 = 취소가 아니라 "새 scheduled_at으로 갱신"이다(정책: 예약 시스템의
- * reschedule이 아니라 consultations 레코드 자체의 단순 상태 전이). 기존
- * scheduled_at을 덮어쓰고 status를 다시 scheduled로 되돌린다 — 별도 레코드를
- * 만들지 않는다.
- */
-export async function rescheduleConsultation(
-  consultationId: string,
-  newScheduledAt: string
-): Promise<void> {
-  await requireAdmin();
-  const admin = createAdminClient();
-  const { error } = await admin
-    .from("consultations")
-    .update({
-      status: "scheduled",
-      scheduled_at: newScheduledAt,
-      cancelled_at: null,
-      no_show_at: null,
     })
     .eq("id", consultationId);
   if (error) throw new Error(error.message);

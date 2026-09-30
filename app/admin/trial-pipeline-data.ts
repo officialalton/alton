@@ -27,7 +27,7 @@ type PrefetchedMaps = {
   grantByConsultation: Map<string, { status: string | null; error: string | null }>;
   enrollmentByChild: Map<string, { id: string; status: string }>;
   activeAssignmentEnrollmentIds: Set<string>;
-  consentChildIds: Set<string>;
+  dispatchChildIds: Set<string>;
   entitlementGrantChildIds: Set<string>;
   smartNotesCompletedEnrollmentIds: Set<string>;
   sessionExistsEnrollmentIds: Set<string>;
@@ -50,15 +50,20 @@ function buildPipeline(input: TrialPipelineCandidateInput, maps: PrefetchedMaps)
     subjectEnrollmentId = enrollment?.id ?? null;
     done.assignment = subjectEnrollmentId ? maps.activeAssignmentEnrollmentIds.has(subjectEnrollmentId) : false;
     done.subject_active = enrollment?.status === "active";
-    done.trial_consent = maps.consentChildIds.has(input.childId);
     done.trial_entitlement = maps.entitlementGrantChildIds.has(input.childId);
 
     if (subjectEnrollmentId) {
       done.trial_booking = maps.sessionExistsEnrollmentIds.has(subjectEnrollmentId);
       done.smart_notes = maps.smartNotesCompletedEnrollmentIds.has(subjectEnrollmentId);
       done.review = maps.reviewEnrollmentIds.has(subjectEnrollmentId);
-      done.regular_intent = maps.regularIntentEnrollmentIds.has(subjectEnrollmentId);
     }
+
+    // 2026-09-29(6단계): "정규 진행"은 계약 자동 발송 큐에 이 자녀 행이 있거나
+    // (체험 종료·직접 계정 생성·정규 바로 진행), 과거 데이터의 정규 진행 희망 선택이
+    // 있을 때 완료로 본다.
+    done.regular_intent =
+      maps.dispatchChildIds.has(input.childId) ||
+      (subjectEnrollmentId ? maps.regularIntentEnrollmentIds.has(subjectEnrollmentId) : false);
 
     const contract = maps.latestContractByChild.get(input.childId) ?? null;
     if (contract) {
@@ -72,7 +77,6 @@ function buildPipeline(input: TrialPipelineCandidateInput, maps: PrefetchedMaps)
     "trial_intent",
     "account_linked",
     "assignment",
-    "trial_consent",
     "trial_entitlement",
     "trial_booking",
     "smart_notes",
@@ -103,12 +107,11 @@ const PIPELINE_STEP_LABELS: Record<TrialPipelineStepKey, string> = {
   trial_intent: "체험 희망 확정",
   account_linked: "보호자·학생 계정 연결",
   assignment: "과목·선생님 배정",
-  trial_consent: "체험 Smart Notes 동의",
   trial_entitlement: "체험수업권 지급",
   trial_booking: "체험 예약",
   smart_notes: "Smart Notes 연결",
   review: "선생님 리뷰 확정",
-  regular_intent: "정규 진행 희망",
+  regular_intent: "정규 진행(계약 자동 발송 대상)",
   contract_sent: "계약 발송",
   signed: "보호자 서명",
   purchase: "정규상품 구매",
@@ -145,7 +148,7 @@ export async function loadTrialPipelinesBatch(
 
   const [
     { data: assignmentRows },
-    { data: consentRows },
+    { data: dispatchRows },
     { data: grantRows },
     { data: sessionRows },
     { data: reviewRows },
@@ -156,7 +159,7 @@ export async function loadTrialPipelinesBatch(
       ? selectInChunks(enrollmentIds, (chunk) => admin.from("teacher_assignments").select("subject_enrollment_id").in("subject_enrollment_id", chunk).eq("status", "active"))
       : Promise.resolve({ data: [] as { subject_enrollment_id: string }[] }),
     childIds.length
-      ? selectInChunks(childIds, (chunk) => admin.from("trial_smart_notes_consents").select("child_id").in("child_id", chunk))
+      ? selectInChunks(childIds, (chunk) => admin.from("contract_dispatch_jobs").select("child_id").in("child_id", chunk))
       : Promise.resolve({ data: [] as { child_id: string }[] }),
     childIds.length
       ? selectInChunks(childIds, (chunk) => admin.from("entitlement_grants").select("child_id, entitlement_products!inner(code)").in("child_id", chunk).eq("entitlement_products.code", "trial_lesson_grant"))
@@ -176,7 +179,7 @@ export async function loadTrialPipelinesBatch(
   ]);
 
   const activeAssignmentEnrollmentIds = new Set((assignmentRows ?? []).map((r) => r.subject_enrollment_id));
-  const consentChildIds = new Set((consentRows ?? []).map((r) => r.child_id));
+  const dispatchChildIds = new Set((dispatchRows ?? []).map((r) => r.child_id));
   const entitlementGrantChildIds = new Set((grantRows ?? []).map((r) => r.child_id));
   const reviewEnrollmentIds = new Set((reviewRows ?? []).map((r) => r.subject_enrollment_id));
   const regularIntentEnrollmentIds = new Set((intentRows ?? []).map((r) => r.subject_enrollment_id));
@@ -225,7 +228,7 @@ export async function loadTrialPipelinesBatch(
     grantByConsultation,
     enrollmentByChild,
     activeAssignmentEnrollmentIds,
-    consentChildIds,
+    dispatchChildIds,
     entitlementGrantChildIds,
     smartNotesCompletedEnrollmentIds,
     sessionExistsEnrollmentIds,

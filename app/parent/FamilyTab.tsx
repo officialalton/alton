@@ -8,9 +8,8 @@
 // 발송할 수 없다. 자녀 추가는 이제 "새 자녀 상담 신청"(app/parent/ConsultRequestTab.tsx)을
 // 거쳐야 하고, 계정 초대는 상담 후 관리자가 발송하는 기존 온보딩 흐름
 // (app/admin/TrialOnboardingStudentsForm.tsx)의 몫이다. 아래 기존 발송 폼/버튼은
-// 비활성화만 하고 삭제하지 않는다 — inviteChild()/invite-actions.ts 서버 액션 자체는
-// 다른 곳(관리자 발송 온보딩 흐름)에서 재사용하지 않는 것으로 확인했지만, 향후
-// 필요할 수 있어 코드는 그대로 남겨둔다.
+// 화면에서 뺐다. 2026-09-29(6단계 정리) — 호출부가 없던 inviteChild() 서버 액션
+// (app/parent/invite-actions.ts)도 삭제했다.
 
 export default function FamilyTab({ onGoToConsultRequest }: { onGoToConsultRequest?: () => void }) {
   return (

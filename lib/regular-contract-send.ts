@@ -4,15 +4,12 @@ import { recordOrGetCompanyApproval } from "@/lib/contract-company-approval";
 import { currentRequestOrigin } from "@/lib/request-origin";
 import { appendVercelProtectionBypass } from "@/lib/vercel-protection-bypass";
 
-// 2026-09-06(제품 오너 정책 변경 — 정규 진행 희망 확인 시 자동 계약 발송)
 // app/admin/trial-onboarding-actions.ts의 sendRegularContractOneClickAction(9번)
-// 핵심 로직을 이 파일로 옮긴다. 승인자 직함이 "CEO, Do Kyung Kim" 하나로
-// 고정된 뒤로는 관리자가 매번 수동으로 버튼을 누를 필요가 없어졌다 — 보호자가
-// "정규 진행 희망"을 확인하는 서버 액션(app/parent/trial-conversion-actions.ts)
-// 안에서도 이 함수를 그대로 재사용해 자동으로 계약을 발송한다. 관리자 원클릭
-// 발송(요청자가 admin, requireAdminOrCapability 통과)과 보호자 확인 시 자동
-// 발송(요청자가 guardian, 관리자 권한 자체가 없음) 두 경로 모두 여기로 들어올
-// 때는 이미 각자의 "use server" 액션에서 인가를 끝낸 뒤다 — 이 함수는 인가를
+// 핵심 로직을 이 파일로 옮긴 것이다. 2026-09-29(6단계) 기준 호출부는 두 곳이다:
+// 관리자 원클릭 (재)발송(요청자가 admin, requireAdminOrCapability 통과)과 계약 자동
+// 발송 워커(lib/contract-dispatch/dispatcher.ts, 계정 생성·체험 종료·정규 바로
+// 진행 시 큐에서 호출). 보호자의 "정규 진행 희망" 클릭 경로는 없어졌다. 두 경로 모두
+// 여기로 들어올 때는 이미 각자의 인가를 끝낸 뒤다 — 이 함수는 인가를
 // 다시 검사하지 않고, 전달받은 admin(service_role) 클라이언트로 계약 발송
 // DB/외부 API 로직만 수행한다.
 export type SendRegularContractResult =

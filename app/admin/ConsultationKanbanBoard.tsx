@@ -469,27 +469,13 @@ function ConsultationCardDetailPanel({
           </div>
         )}
 
-        {/* 2026-09-07(제품 오너 실사용 중 발견 → 정정) — 상담 결과 기록은 보호자
-            동의 확인(consent_confirmed_at)이 선행조건이다. 지금까지 그 동의 확인
-            링크는 Calendar 초대 description에만 실려 있어, 보호자가 초대를
-            놓치면 관리자가 결과를 기록할 방법이 없었다. 관리자 수동 재발송
-            버튼 형태는 폐기하고, 상담이 최초로 확정될 때(lib/consultation/
-            calendar-sync.ts) 동의 요청 메일이 Calendar 초대와 별개 채널로
-            무조건 나가도록 정책을 바꿨다 — 이 화면에는 더 이상 별도 UI가
-            없다. 동의 미확인 카드는 상태 뱃지로만 안내한다. */}
-        {!isAccountCreation && !c.consent_confirmed_at && (c.status === "scheduled" || c.status === "completed") && (
-          <div className="mb-3 text-[11.5px] font-bold text-grey-500 border border-grey-200 rounded-lg p-3">
-            보호자 동의 확인 대기 중 — 상담 결과 기록 전에 필요합니다 (동의 요청 메일은 상담 확정 시 자동 발송됨)
-          </div>
-        )}
-
         {/* 2. 상담 일정 확정 단계 — 결과 기록 (실제 상담 카드만 — 계정 생성 카드는
             상담 자체가 없어 "결과"라는 개념이 없다) */}
         {!isAccountCreation && (c.status === "scheduled" || (c.status === "completed" && (!c.outcome || c.outcome === "on_hold"))) && (
           <OutcomeForm consultationId={c.id} onDone={() => run(async () => {})} />
         )}
 
-        {/* 3. 체험 신청 단계 — 체험 동의/온보딩 안내, 체험수업권 재처리.
+        {/* 3. 체험 신청 단계 — 온보딩 안내, 체험수업권 재처리.
             2026-09-06: 결과 기록 직후 이 다음 단계를 놓치기 쉽다는 지적(UAT)에 따라
             강조 박스 + 주요 버튼 스타일로 눈에 띄게 바꿨다(로직은 그대로). */}
         {/* 2026-09-06(정규 진행 권장 경로 완결) — outcome이 regular_recommended면
@@ -619,9 +605,8 @@ function ConsultationCardDetailPanel({
                 />
               ) : (
                 <div className="space-y-1.5">
-                  {/* 2026-09-06(정책 변경) — 보호자가 "정규 진행 희망"을 확인하면
-                      이제 관리자가 버튼을 누르지 않아도 자동으로 발송된다(승인자가
-                      "CEO, Do Kyung Kim"으로 고정된 이후). 이미 envelope가 있으면
+                  {/* 계약은 계정 생성·체험 종료·정규 바로 진행 시 자동 발송된다
+                      (관리자가 버튼을 누르지 않아도). 이미 envelope가 있으면
                       수동 클릭 없이도 도달할 수 있는 상태라, 자동 발송이었는지
                       수동이었는지 이 화면만으로는 구분하지 않지만 "이미 발송됨"
                       임은 분명히 보여준다 — 재발송(새 버전)은 여전히 필요할 때만

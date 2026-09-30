@@ -62,8 +62,6 @@ vi.mock("./teacher-subjects-actions", () => ({
 
 vi.mock("./consultation-actions", () => ({
   createConsultation: vi.fn(),
-  scheduleConsultation: vi.fn(),
-  rescheduleConsultation: vi.fn(),
   cancelConsultation: vi.fn(),
   markConsultationNoShow: vi.fn(),
   findDuplicateConsultationCandidates: vi.fn(),

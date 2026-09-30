@@ -51,7 +51,7 @@ describe("loadTrialPipelinesBatch", () => {
         { id: "se2", child_id: "child2", status: "planned", created_at: "2026-02-01" },
       ],
       teacher_assignments: [{ subject_enrollment_id: "se1" }],
-      trial_smart_notes_consents: [{ child_id: "child1" }],
+      contract_dispatch_jobs: [{ child_id: "child1" }],
       entitlement_grants: [{ child_id: "child1" }],
       sessions: [{ subject_enrollment_id: "se1", smart_notes_status: "completed", created_at: "2026-02-02" }],
       lesson_reviews: [{ subject_enrollment_id: "se1" }],
@@ -80,6 +80,8 @@ describe("loadTrialPipelinesBatch", () => {
     expect(p1.steps.find((s) => s.key === "smart_notes")?.done).toBe(true);
     expect(p1.steps.find((s) => s.key === "review")?.done).toBe(true);
     expect(p1.steps.find((s) => s.key === "regular_intent")?.done).toBe(true);
+    // 2026-09-29(6단계) — 삭제된 체험 Smart Notes 동의 단계는 더 이상 없다.
+    expect(p1.steps.find((s) => (s.key as string) === "trial_consent")).toBeUndefined();
     expect(p1.steps.find((s) => s.key === "contract_sent")?.done).toBe(true);
     expect(p1.steps.find((s) => s.key === "signed")?.done).toBe(true);
     expect(p1.steps.find((s) => s.key === "purchase")?.done).toBe(true);
@@ -92,6 +94,9 @@ describe("loadTrialPipelinesBatch", () => {
     expect(p2.steps.find((s) => s.key === "trial_booking")?.done).toBe(false);
     expect(p2.steps.find((s) => s.key === "contract_sent")?.done).toBe(false);
 
+    // 큐 행도 정규 진행 희망 선택도 없는 후보 2는 "정규 진행" 미완료.
+    expect(p2.steps.find((s) => s.key === "regular_intent")?.done).toBe(false);
+
     // 후보 3(childId 없음) — account_linked 등 자녀 연결 관련 단계가 전부 미완료.
     const p3 = result.get("c3")!;
     expect(p3.subjectEnrollmentId).toBeNull();
@@ -103,7 +108,7 @@ describe("loadTrialPipelinesBatch", () => {
       "consultations",
       "subject_enrollments",
       "teacher_assignments",
-      "trial_smart_notes_consents",
+      "contract_dispatch_jobs",
       "entitlement_grants",
       "sessions",
       "lesson_reviews",

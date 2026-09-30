@@ -356,11 +356,9 @@ export async function planTrialSubjectAndAssignTeacherAction(params: {
 // =========================================================================
 export type { SendRegularContractResult };
 
-// 2026-09-06(제품 오너 정책 변경) — 승인자 직함이 "CEO, Do Kyung Kim"으로
-// 고정된 뒤로 보호자가 "정규 진행 희망"을 확인하면 자동으로 계약이 발송된다
-// (app/parent/trial-conversion-actions.ts의 confirmRegularProgressIntent).
-// 이 버튼은 자동 발송이 실패했거나(Preview DocuSign 게이트 등) 재발송이
-// 필요한 경우를 위해 그대로 남긴다 — 핵심 로직은 lib/regular-contract-send.ts로
+// 계약은 계정 생성·체험 수업 종료·상담사의 "바로 정규 진행" 입력 때 자동 발송된다
+// (contract_dispatch_jobs 큐, lib/contract-dispatch). 이 버튼은 자동 발송이 실패했거나
+// 재발송이 필요한 경우를 위해 남긴다 — 핵심 로직은 lib/regular-contract-send.ts로
 // 옮겨 두 경로가 공유하므로, 이미 자동 발송된 건에 이 버튼을 눌러도(멱등)
 // 새 envelope가 만들어지지 않고 "already_sent"로 반환된다.
 export async function sendRegularContractOneClickAction(params: {
@@ -374,27 +372,26 @@ export async function sendRegularContractOneClickAction(params: {
   const { actorUserId } = await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
 
-  // 정규 진행 희망(8번)이 없으면 발송하지 않는다 — 별도 고객용 제안 승인
-  // 단계는 없지만, 보호자의 명시적 희망 표시는 최소 전제조건으로 유지한다.
-  //
-  // 2026-09-06(정규 진행 권장 경로 완결) — 상담 결과가 애초에
-  // outcome='regular_recommended'(체험 생략)인 학생은 체험을 거치지 않으므로
-  // trial_regular_progress_selections 행이 존재할 방법이 없다(그 행은 체험
-  // 리뷰 이후 보호자가 "정규 진행 희망"을 확인할 때만 생성된다). 이 학생의
-  // 칸반 카드(consultations.child_id = params.childId) outcome이
-  // regular_recommended면 이 존재 체크를 건너뛴다 — trial_recommended 경로의
-  // 기존 체크는 그대로 유지(회귀 없음).
-  const { data: childConsultation, error: childConsultationError } = await admin
-    .from("consultations")
-    .select("outcome")
-    .eq("child_id", params.childId)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  // 2026-09-29(6단계) — 예전에는 보호자의 "정규 진행 희망" 클릭(trial_regular_progress_
+  // selections)이 없으면 수동 발송을 막았다. 그 버튼이 사라져 새 체험 학생은 이 행이
+  // 생길 방법이 없으므로, 자동 발송 대상이 된 자녀만 수동 (재)발송을 허용한다:
+  // 계약 발송 큐에 이 자녀 행이 있거나, 상담 결과가 정규 진행 권장이거나, 과거 데이터의
+  // 정규 진행 희망 선택이 있는 경우.
+  const [{ data: childConsultation, error: childConsultationError }, { data: dispatchJob, error: dispatchJobError }] =
+    await Promise.all([
+      admin
+        .from("consultations")
+        .select("outcome")
+        .eq("child_id", params.childId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+      admin.from("contract_dispatch_jobs").select("id").eq("child_id", params.childId).limit(1).maybeSingle(),
+    ]);
   if (childConsultationError) throw new Error(childConsultationError.message);
-  const isRegularRecommendedPath = childConsultation?.outcome === "regular_recommended";
+  if (dispatchJobError) throw new Error(dispatchJobError.message);
 
-  if (!isRegularRecommendedPath) {
+  if (childConsultation?.outcome !== "regular_recommended" && !dispatchJob) {
     const { data: selection, error: selectionError } = await admin
       .from("trial_regular_progress_selections")
       .select("id")
@@ -402,7 +399,7 @@ export async function sendRegularContractOneClickAction(params: {
       .maybeSingle();
     if (selectionError) throw new Error(selectionError.message);
     if (!selection) {
-      throw new Error("보호자의 정규 진행 희망 표시가 아직 없습니다.");
+      throw new Error("이 학생은 아직 계약 발송 대상이 아닙니다(체험 수업 종료·계정 생성·정규 바로 진행 중 하나가 필요합니다).");
     }
   }
 
@@ -453,7 +450,6 @@ export type TrialPipelineStepKey =
   | "trial_intent"
   | "account_linked"
   | "assignment"
-  | "trial_consent"
   | "trial_entitlement"
   | "trial_booking"
   | "smart_notes"
@@ -605,12 +601,34 @@ export type RegularConversionCandidate = {
 export async function listRegularConversionCandidatesAction(): Promise<RegularConversionCandidate[]> {
   await requireAdminOrCapability(CONSULT_CAPABILITY);
   const admin = createAdminClient();
-  const { data: selections, error } = await admin
-    .from("trial_regular_progress_selections")
-    .select("subject_enrollment_id")
-    .order("confirmed_at", { ascending: false });
+  // 2026-09-29(6단계) — 목록 대상은 (1) 계약 자동 발송 큐에 오른 자녀의 과목 수강과
+  // (2) 과거 데이터의 "정규 진행 희망" 선택이다. 새 흐름에는 후자가 생기지 않는다.
+  const [{ data: selections, error }, { data: jobs, error: jobsError }] = await Promise.all([
+    admin.from("trial_regular_progress_selections").select("subject_enrollment_id").order("confirmed_at", { ascending: false }),
+    admin.from("contract_dispatch_jobs").select("child_id, subject_enrollment_id").order("created_at", { ascending: false }),
+  ]);
   if (error) throw new Error(error.message);
-  const ids = (selections ?? []).map((s) => s.subject_enrollment_id);
+  if (jobsError) throw new Error(jobsError.message);
+  const idSet = new Set((selections ?? []).map((s) => s.subject_enrollment_id as string));
+  const jobChildIdsWithoutEnrollment = new Set<string>();
+  for (const j of jobs ?? []) {
+    if (j.subject_enrollment_id) idSet.add(j.subject_enrollment_id);
+    else jobChildIdsWithoutEnrollment.add(j.child_id);
+  }
+  if (jobChildIdsWithoutEnrollment.size > 0) {
+    const { data: fallbackEnrollments } = await selectInChunks(Array.from(jobChildIdsWithoutEnrollment), (chunk) => admin
+      .from("subject_enrollments")
+      .select("id, child_id, created_at")
+      .in("child_id", chunk)
+      .order("created_at", { ascending: false }), { sort: orderComparator(["created_at", false]) });
+    const seenChild = new Set<string>();
+    for (const e of fallbackEnrollments ?? []) {
+      if (seenChild.has(e.child_id)) continue;
+      seenChild.add(e.child_id);
+      idSet.add(e.id);
+    }
+  }
+  const ids = Array.from(idSet);
   if (ids.length === 0) return [];
 
   const { data: enrollments, error: enrollError } = await selectInChunks(ids, (chunk) => admin

@@ -20,7 +20,6 @@ import {
   retryTrialEntitlementGrant,
   retryFailedConsultationCalendarSyncs,
   resyncConsultationCalendar,
-  retryConsultationSmartNotesConfig,
   reprocessUnlinkedConsultationSmartNotesEvents,
   type ConsultationListItem,
 } from "./consultation-scheduling-actions";
@@ -372,20 +371,6 @@ export default function ConsultationSchedulingPanel() {
                 >
                   취소
                 </button>
-                {/* 2026-09-06: Smart Notes 원본 연결 여부는 이제 결과 기록을 막지 않지만(비동기
-                    도착 산출물), 아직 연결 안 됐으면 수동 재처리 버튼은 그대로 노출한다 —
-                    completionReadiness가 아니라 원본 필드로 직접 판단(가능 여부와 무관). */}
-                {(c.status === "scheduled" || c.status === "completed") &&
-                  !c.smart_notes_drive_file_id &&
-                  c.smart_notes_config_status === "applied" && (
-                  <button
-                    disabled={busyId === c.id}
-                    className="text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
-                    onClick={() => withBusy(c.id, () => retryConsultationSmartNotesConfig(c.id), "Smart Notes 재처리")}
-                  >
-                    Smart Notes 재처리
-                  </button>
-                )}
                 {c.outcome === "trial_recommended" && c.trial_entitlement_grant_status === "failed" && (
                   <button
                     disabled={busyId === c.id}

@@ -21,7 +21,6 @@ vi.mock("./consultation-scheduling-actions", () => ({
   retryTrialEntitlementGrant: vi.fn(),
   retryFailedConsultationCalendarSyncs: vi.fn(),
   resyncConsultationCalendar: vi.fn(),
-  retryConsultationSmartNotesConfig: vi.fn(),
   reprocessUnlinkedConsultationSmartNotesEvents: vi.fn(),
   listConsultAvailabilityRules: vi.fn(),
   addConsultAvailabilityRule: vi.fn(),
