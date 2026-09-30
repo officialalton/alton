@@ -32,18 +32,22 @@ export type KanbanCard = ConsultationListItem & {
   intakeSource: "consultation" | "account_creation";
 };
 
-type TrialProgress = { trialBookingDone: boolean; regularIntentDone: boolean };
+// contractStageReached — 2026-09-29(6단계): 예전의 "보호자 정규 진행 희망" 클릭 대신
+// 계약 자동 발송 큐(contract_dispatch_jobs)에 이 자녀 행이 있거나(체험 종료·직접
+// 계정 생성·정규 바로 진행 어느 트리거든), 과거 데이터의 정규 진행 희망 선택이
+// 있으면 "계약" 단계로 본다.
+type TrialProgress = { trialBookingDone: boolean; contractStageReached: boolean };
 
 // 2026-09-10(P1 성능 배치) — 이전에는 카드마다 getTrialOnboardingPipelineAction()을
 // 호출해 카드당 인증 1회 + 순차 조회 최대 10회(subject_enrollments →
-// teacher_assignments → trial_smart_notes_consents → entitlement_grants →
+// teacher_assignments → entitlement_grants →
 // sessions → lesson_reviews → trial_regular_progress_selections → contracts →
 // contract_versions → purchases)가 반복됐다 — "체험 추천" 카드 수에 비례해
 // N+1이 그대로 커졌다. 칸반 카드 단계 판정에는 저 13개 파이프라인 스텝 중
-// 실제로 딱 2개(trial_booking, regular_intent)만 쓰이므로, 보드 전체에 대해
-// 이 두 사실만 배치 쿼리 3회(자녀별 최신 subject_enrollment 1회 + 그 위의
-// sessions 존재 여부 1회 + trial_regular_progress_selections 존재 여부 1회)로
-// 한 번에 읽는다. 카드 수가 늘어도 쿼리 수는 늘지 않는다(N+1 제거). 상세
+// 실제로 딱 2개(체험 예약 여부, 계약 단계 도달 여부)만 쓰이므로, 보드 전체에
+// 대해 이 두 사실만 배치 쿼리 4회(자녀별 최신 subject_enrollment 1회 + 그 위의
+// sessions 존재 여부 1회 + trial_regular_progress_selections(과거 데이터) 1회 +
+// contract_dispatch_jobs 1회)로 한 번에 읽는다. 카드 수가 늘어도 쿼리 수는 늘지 않는다(N+1 제거). 상세
 // 파이프라인(카드 상세 패널의 13단계 전체 표시)은 여전히
 // getTrialOnboardingPipelineAction()을 그대로 쓴다 — 그건 카드 1개를 열 때만
 // 호출되므로 N+1이 아니다.
@@ -65,22 +69,28 @@ async function loadTrialProgressByChild(
     if (!latestEnrollmentByChild.has(e.child_id)) latestEnrollmentByChild.set(e.child_id, e.id);
   }
   const enrollmentIds = Array.from(latestEnrollmentByChild.values());
-  if (enrollmentIds.length === 0) return result;
 
-  const [{ data: sessionRows }, { data: intentRows }] = await Promise.all([
-    selectInChunks(enrollmentIds, (chunk) => admin.from("sessions").select("subject_enrollment_id").in("subject_enrollment_id", chunk)),
-    selectInChunks(enrollmentIds, (chunk) => admin
-      .from("trial_regular_progress_selections")
-      .select("subject_enrollment_id")
-      .in("subject_enrollment_id", chunk)),
+  const [{ data: sessionRows }, { data: intentRows }, { data: jobRows }] = await Promise.all([
+    enrollmentIds.length
+      ? selectInChunks(enrollmentIds, (chunk) => admin.from("sessions").select("subject_enrollment_id").in("subject_enrollment_id", chunk))
+      : Promise.resolve({ data: [] as { subject_enrollment_id: string }[] }),
+    enrollmentIds.length
+      ? selectInChunks(enrollmentIds, (chunk) => admin
+        .from("trial_regular_progress_selections")
+        .select("subject_enrollment_id")
+        .in("subject_enrollment_id", chunk))
+      : Promise.resolve({ data: [] as { subject_enrollment_id: string }[] }),
+    selectInChunks(childIds, (chunk) => admin.from("contract_dispatch_jobs").select("child_id").in("child_id", chunk)),
   ]);
   const enrollmentsWithSession = new Set((sessionRows ?? []).map((r) => r.subject_enrollment_id as string));
   const enrollmentsWithIntent = new Set((intentRows ?? []).map((r) => r.subject_enrollment_id as string));
+  const childrenWithJob = new Set((jobRows ?? []).map((r) => r.child_id as string));
 
-  for (const [childId, enrollmentId] of latestEnrollmentByChild.entries()) {
+  for (const childId of childIds) {
+    const enrollmentId = latestEnrollmentByChild.get(childId);
     result.set(childId, {
-      trialBookingDone: enrollmentsWithSession.has(enrollmentId),
-      regularIntentDone: enrollmentsWithIntent.has(enrollmentId),
+      trialBookingDone: !!enrollmentId && enrollmentsWithSession.has(enrollmentId),
+      contractStageReached: childrenWithJob.has(childId) || (!!enrollmentId && enrollmentsWithIntent.has(enrollmentId)),
     });
   }
   return result;
@@ -96,8 +106,7 @@ const ACCOUNT_CREATION_CARD_LIMIT = 200;
 
 function buildAccountCreationCard(
   student: { id: string; student_name: string; student_grade: string | null; child_auth_user_id: string; created_at: string },
-  link: { guardian_name: string; guardian_email: string },
-  consentConfirmedAt: string | null
+  link: { guardian_name: string; guardian_email: string }
 ): ConsultationListItem {
   // 계정 생성 카드는 이미 계정이 만들어진 뒤라 "상담 신청/일정 확정"에
   // 해당하는 단계가 없다 — classifyStage()가 곧바로 체험 파이프라인 분기를
@@ -136,7 +145,7 @@ function buildAccountCreationCard(
     outcome_notes: null,
     prospect_contact_id: null,
     consent_version_id: null,
-    consent_confirmed_at: consentConfirmedAt,
+    consent_confirmed_at: null,
     child_id: student.child_auth_user_id,
     trial_intent_confirmed_at: student.created_at,
     trial_entitlement_grant_id: null,
@@ -174,16 +183,6 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
   const childIds = (studentRows ?? [])
     .map((s) => s.child_auth_user_id)
     .filter((id): id is string => !!id);
-  // 2026-09-16(실사용 중 발견) — 계정 생성 경로는 consultations.consent_confirmed_at을
-  // 애초에 안 쓰고 record_trial_smart_notes_consent()가 trial_smart_notes_consents에
-  // 실제 동의를 남긴다(20261272000000). 이 카드가 그 값을 확인하지 않고 항상 null로
-  // 합성해, 보호자가 실제로 동의를 마쳐도 "보호자 동의 확인 대기 중" 배지가 절대
-  // 안 풀리는 결함이 있었다.
-  const { data: consentRows } = childIds.length
-    ? await selectInChunks(childIds, (chunk) => admin.from("trial_smart_notes_consents").select("child_id, confirmed_at").in("child_id", chunk))
-    : { data: [] as { child_id: string; confirmed_at: string }[] };
-  const consentByChildId = new Map((consentRows ?? []).map((c) => [c.child_id, c.confirmed_at]));
-
   // 2026-09-16(재설계, 제품 오너 지시) — 계정 생성 카드는 상담 라이프사이클을
   // 흉내 내면 안 되고, "완료" 판정도 상담의 closure_type이 아니라 이 유입
   // 경로 고유의 기준이어야 한다. 유일한 정본 신호는 contracts.status다: 계약이
@@ -200,7 +199,7 @@ async function loadAccountCreationCards(admin: ReturnType<typeof createAdminClie
     .filter((s) => !activeContractChildIds.has(s.child_auth_user_id))
     .map((s) => {
       const link = linkById.get(s.link_id)!;
-      return buildAccountCreationCard(s, link, consentByChildId.get(s.child_auth_user_id) ?? null);
+      return buildAccountCreationCard(s, link);
     });
 }
 
@@ -229,16 +228,15 @@ function classifyStage(row: ConsultationListItem, trialProgressByChild: Map<stri
 
   // outcome === 'trial_recommended' — 파이프라인 단계로 세분화한다.
   const progress = row.child_id ? trialProgressByChild.get(row.child_id) : undefined;
+  // 2026-09-29(6단계): "계약" 단계는 보호자의 "정규 진행 희망" 클릭이 아니라 계약
+  // 자동 발송 큐에 이 자녀 행이 생긴 시점부터다(체험 종료·직접 계정 생성 어느 쪽이든
+  // 자동 발송 대상). 체험 예약 여부와 무관하게 먼저 본다 — 직접 생성 학생은 체험 없이도
+  // 계약이 나간다. 서명 완료(contract active) 시점에는 admin_close_consultation()이
+  // 자동으로 closure_type='contract_signed'를 채워 이 상담을 "지난 상담"으로 옮기므로
+  // (app/api/webhooks/docusign/route.ts) 그 이후 상태는 여기서 분기하지 않는다.
+  if (progress?.contractStageReached) return "contract_sent";
   if (!progress?.trialBookingDone) return "trial_requested";
-  // 2026-09-05 사용자 지시: "계약" 단계는 관리자의 실제 발송 여부가 아니라
-  // 보호자의 정규 진행 희망 표시(regular_intent) 시점부터 시작한다 — 관리자가
-  // 아직 발송 버튼을 누르지 않았어도 카드는 이미 "계약" 칸에 있어야 한다.
-  // 서명 완료(contract active) 시점에는 admin_close_consultation()이 자동으로
-  // closure_type='contract_signed'를 채워 이 상담을 "지난 상담"으로 옮기므로
-  // (app/api/webhooks/docusign/route.ts), 여기서는 그 이후 상태를 별도로 분기할
-  // 필요가 없다.
-  if (!progress.regularIntentDone) return "trial_scheduled";
-  return "contract_sent";
+  return "trial_scheduled";
 }
 
 /** 상담 현황 칸반 보드 — 종료(closure_type not null)/취소/노쇼 건은 제외한다

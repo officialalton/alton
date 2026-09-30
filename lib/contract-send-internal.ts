@@ -2,16 +2,17 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createEnvelope, assertDocusignSandboxBaseUri } from "@/lib/docusign";
 import { renderFamilyContractHtml, type CompanyApprovalForTemplate } from "@/lib/contracts/family-contract-template";
 
-// 2026-09-06(정규 진행 희망 확인 시 자동 계약 발송) — companySignOffContractVersion
+// (2026-09-29 6단계: 호출부는 관리자 원클릭 발송과 계약 자동 발송 워커다.)
+// companySignOffContractVersion
 // / sendContractForSignature(app/admin/consultation-actions.ts)의 실제 DB
 // 변경 로직만 이 파일로 옮긴다. 두 함수는 원래 requireAdmin()으로 게이트돼
 // 있는데, "use server" 파일에서 그 게이트 통과 로직 없이 이 내부 함수를
 // 직접 export하면(그리고 인자로 admin/service_role 클라이언트를 받으면)
 // 클라이언트가 서버 액션으로 오인해 호출을 시도할 여지가 생긴다 — 이 파일은
 // "use server"가 아닌 일반 서버 전용 모듈이라 클라이언트 번들에서 직접
-// import/호출이 불가능하다. 관리자 원클릭 발송(요청자가 admin)과 보호자의
-// "정규 진행 희망" 확인 시 자동 발송(요청자가 guardian, 관리자 권한 게이트를
-// 통과할 수 없음) 두 경로가 이 함수들을 공유한다 — 인가 판단은 항상 호출부
+// import/호출이 불가능하다. 관리자 원클릭 발송(요청자가 admin)과 계약 자동
+// 발송 워커(service_role, 관리자 권한 게이트를 통과할 수 없음) 두 경로가 이
+// 함수들을 공유한다 — 인가 판단은 항상 호출부
 // (각각의 "use server" 액션)에서 먼저 끝내고, 이 파일은 이미 인가된 호출만
 // 받는다는 전제로 순수 DB/외부 API 로직만 담당한다.
 

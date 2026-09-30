@@ -175,13 +175,14 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
     expect(admin.callCounts.trial_onboarding_link_students).toBe(1);
   });
 
-  it("2026-09-16(실사용 중 발견) — 실제 trial_smart_notes_consents 기록이 있으면 consent_confirmed_at을 채운다(항상 null이던 결함 수정)", async () => {
+  it("2026-09-29(6단계) — 체험 Smart Notes 동의는 폐지됐으므로 trial_smart_notes_consents를 조회하지 않고 consent_confirmed_at은 항상 null이다", async () => {
     listConsultationsMock.mockResolvedValue([]);
     const admin = makeAdminMock({
       trial_onboarding_links: [{ id: "link1", guardian_name: "박보호자", guardian_email: "parent@example.com" }],
       trial_onboarding_link_students: [
         { id: "student-row-1", link_id: "link1", student_name: "학생1", child_auth_user_id: "child1", created_at: "2026-01-01" },
       ],
+      // 과거 데이터가 남아 있어도 읽지 않는다.
       trial_smart_notes_consents: [{ child_id: "child1", confirmed_at: "2026-09-16T18:05:28.980397+00:00" }],
     });
 
@@ -189,22 +190,8 @@ describe("loadKanbanBoard — 계정 생성 유입 통합", () => {
     const cards = await loadKanbanBoard(admin as never);
 
     expect(cards).toHaveLength(1);
-    expect(cards[0].consent_confirmed_at).toBe("2026-09-16T18:05:28.980397+00:00");
-  });
-
-  it("동의 기록이 없으면 여전히 null이다(대기 배지가 정상적으로 유지됨)", async () => {
-    listConsultationsMock.mockResolvedValue([]);
-    const admin = makeAdminMock({
-      trial_onboarding_links: [{ id: "link1", guardian_name: "박보호자", guardian_email: "parent@example.com" }],
-      trial_onboarding_link_students: [
-        { id: "student-row-1", link_id: "link1", student_name: "학생1", child_auth_user_id: "child1", created_at: "2026-01-01" },
-      ],
-    });
-
-    const { loadKanbanBoard } = await import("./consultation-kanban-data");
-    const cards = await loadKanbanBoard(admin as never);
-
     expect(cards[0].consent_confirmed_at).toBeNull();
+    expect(admin.callCounts.trial_smart_notes_consents ?? 0).toBe(0);
   });
 
   // 2026-09-16(제품 오너 지시 — 재설계) — 계정 생성 카드의 "완료" 판정은 상담의

@@ -9,8 +9,6 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("./consultation-actions", () => ({
   createConsultation: vi.fn(),
-  scheduleConsultation: vi.fn(),
-  rescheduleConsultation: vi.fn(),
   completeConsultation: vi.fn(),
   cancelConsultation: vi.fn(),
   markConsultationNoShow: vi.fn(),

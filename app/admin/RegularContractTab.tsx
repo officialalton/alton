@@ -56,7 +56,7 @@ export default function RegularContractTab() {
         </button>
       </div>
       <p className="text-[13px] text-grey-500 mb-5">
-        정규 진행 대상 과목입니다. 계약 발송·재발송·발송 상태·계약 완료를 여기서 관리합니다.
+        계약 자동 발송 대상 과목입니다(계정 생성·체험 종료·정규 바로 진행 시 자동 발송). 재발송·발송 상태·계약 완료를 여기서 관리합니다.
       </p>
 
       <ContractDispatchQueueSection />
@@ -87,7 +87,7 @@ export default function RegularContractTab() {
       {conversions !== null && (
         conversions.length === 0 ? (
           <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-            정규 진행을 희망한 과목 수강이 없습니다.
+            계약 발송 대상 과목 수강이 없습니다.
           </div>
         ) : (
           conversions.map((v) => <RegularContractRow key={v.subjectEnrollmentId} item={v} onSent={refresh} />)

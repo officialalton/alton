@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime, deleteCalendarEvent } from "@/lib/google-calendar";
-import { extractMeetingCodeFromLink, ensureMeetSpaceSmartNotesOn } from "@/lib/google-meet";
+import { extractMeetingCodeFromLink } from "@/lib/google-meet";
 import { sendEmail } from "@/lib/email";
 import { DEFAULT_TIMEZONE, timezoneLabel } from "@/lib/timezone";
 import { CALENDAR_SYNC_MAX_ATTEMPTS, createCalendarResyncKit, type SyncOutcome } from "./calendar-resync-kit";
@@ -54,42 +54,6 @@ async function resolveConsultOrganizerEmail(
   const { data, error } = await admin.auth.admin.getUserById(admissionsConsultantId);
   if (error || !data.user?.email) return CONSULT_ORGANIZER_EMAIL;
   return data.user.email;
-}
-
-/**
- * 상담 Meet space의 Smart Notes 상태를 확인·보정한다(요구사항 3, 2026-09-03 정책 정정).
- * `official@alton.education` 조직 차원 자동 회의록 정책이 이미 켜져 있으면 그것으로
- * 충분하다 — ensureMeetSpaceSmartNotesOn()이 먼저 GET으로 확인하고, ON이 아닐 때만
- * 기존 canonical name PATCH 경로(enableMeetSpaceSmartNotes)로 보정을 시도한다.
- * 이 확인·보정이 실패해도 상담 확정 이메일 발송 자체는 막지 않는다(호출부가 이 함수의
- * 성공 여부와 무관하게 이메일을 보낸다) — 다만 smart_notes_config_status가 'applied'로
- * 확인되기 전까지는 admin_record_consultation_outcome()이 서버에서 완료 처리를 막는다
- * (readiness 게이트, 아래 3번 섹션 참고).
- */
-async function applySmartNotesBestEffort(params: {
-  admin: ReturnType<typeof createAdminClient>;
-  consultationId: string;
-  meetLink: string;
-  organizerEmail: string;
-}): Promise<void> {
-  const meetingCode = extractMeetingCodeFromLink(params.meetLink);
-  if (!meetingCode) return;
-  try {
-    await ensureMeetSpaceSmartNotesOn({ teacherWorkspaceEmail: params.organizerEmail, meetingCode });
-    await params.admin
-      .from("consultations")
-      .update({ smart_notes_config_status: "applied", smart_notes_config_error: null })
-      .eq("id", params.consultationId);
-  } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    await params.admin
-      .from("consultations")
-      .update({ smart_notes_config_status: "failed", smart_notes_config_error: message.slice(0, 500) })
-      .eq("id", params.consultationId);
-    console.error(
-      JSON.stringify({ type: "m1_consult_smart_notes_config_failed", consultationId: params.consultationId, error: message })
-    );
-  }
 }
 
 /** starts_at+meetLink 지문(요구사항 6) — 이 값이 이전과 같으면 이메일을 다시 보내지 않는다. */
@@ -210,8 +174,8 @@ async function processOneConsultation(
     .eq("id", row.id);
 
   // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
-  // Smart Notes 활성화(applySmartNotesBestEffort)와 Workspace Events 구독
-  // (ensureSubscriptionForOrganizer)을 더 이상 시도하지 않는다.
+  // Smart Notes 활성화와 Workspace Events 구독을 시도하지 않는다.
+  // (2026-09-29 6단계: 그 코드와 관리자 수동 재시도 경로를 삭제했다.)
   return { createdEventId };
 }
 
@@ -301,21 +265,6 @@ export async function processPendingConsultationCalendarSyncs(): Promise<{ proce
     await syncOneConsultationCalendarEvent(id);
   }
   return { processed: (pendingIds ?? []).length };
-}
-
-/** 관리자 수동 재시도(요구사항 3) — 이미 Meet 링크가 있는 상담의 Smart Notes 상태만 다시
- * 확인·보정한다. Calendar 이벤트 자체가 아직 없으면(google_meet_link null) 아무것도 하지
- * 않는다(먼저 Calendar 재처리가 필요하다는 뜻이므로 이 함수의 책임이 아니다). */
-export async function retrySmartNotesConfigForConsultation(consultationId: string): Promise<void> {
-  const admin = createAdminClient();
-  const { data: row } = await admin
-    .from("consultations")
-    .select("id, google_meet_link, admissions_consultant_id")
-    .eq("id", consultationId)
-    .maybeSingle();
-  if (!row?.google_meet_link) return;
-  const organizerEmail = await resolveConsultOrganizerEmail(admin, row.admissions_consultant_id);
-  await applySmartNotesBestEffort({ admin, consultationId, meetLink: row.google_meet_link, organizerEmail });
 }
 
 /**

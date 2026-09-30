@@ -74,7 +74,7 @@ function baseRow(overrides: Partial<Record<string, unknown>> = {}) {
 // trial_regular_progress_selections)로 바꿨다. 이 헬퍼는 테이블별로 다른
 // 응답을 주는 adminFromMock을 구성한다 — child1의 최신 subject_enrollment id를
 // "se1"로 고정하고, hasSession/hasRegularIntent로 그 두 배치 쿼리 결과를 조절한다.
-function mockTrialProgressTables(opts: { hasSession?: boolean; hasRegularIntent?: boolean } = {}) {
+function mockTrialProgressTables(opts: { hasSession?: boolean; hasRegularIntent?: boolean; hasDispatchJob?: boolean } = {}) {
   adminFromMock.mockImplementation((table: string) => {
     if (table === "subject_enrollments") {
       return {
@@ -97,6 +97,13 @@ function mockTrialProgressTables(opts: { hasSession?: boolean; hasRegularIntent?
       return {
         select: () => ({
           in: () => Promise.resolve({ data: opts.hasRegularIntent ? [{ subject_enrollment_id: "se1" }] : [] }),
+        }),
+      };
+    }
+    if (table === "contract_dispatch_jobs") {
+      return {
+        select: () => ({
+          in: () => Promise.resolve({ data: opts.hasDispatchJob ? [{ child_id: "child1" }] : [] }),
         }),
       };
     }
@@ -145,9 +152,16 @@ describe("listKanbanBoardAction — 5단계 stage 분류", () => {
     expect(cards[0].stage).toBe("trial_scheduled");
   });
 
-  it("체험 예약·계약 발송은 안 됐어도 보호자 정규 진행 희망(regular_intent)이 있으면 '계약' 컬럼으로 분류한다(2026-09-05 사용자 지시 3번)", async () => {
+  it("체험 예약·계약 발송은 안 됐어도 과거 데이터의 정규 진행 희망 선택이 있으면 '계약' 컬럼으로 분류한다(레거시 호환)", async () => {
     listConsultationsMock.mockResolvedValue([baseRow({ status: "completed", outcome: "trial_recommended", child_id: "child1" })]);
     mockTrialProgressTables({ hasSession: true, hasRegularIntent: true });
+    const cards = await listKanbanBoardAction();
+    expect(cards[0].stage).toBe("contract_sent");
+  });
+
+  it("계약 자동 발송 큐에 자녀 행이 있으면 체험 예약 여부와 무관하게 '계약' 컬럼으로 분류한다(2026-09-29)", async () => {
+    listConsultationsMock.mockResolvedValue([baseRow({ status: "completed", outcome: "trial_recommended", child_id: "child1" })]);
+    mockTrialProgressTables({ hasSession: false, hasRegularIntent: false, hasDispatchJob: true });
     const cards = await listKanbanBoardAction();
     expect(cards[0].stage).toBe("contract_sent");
   });

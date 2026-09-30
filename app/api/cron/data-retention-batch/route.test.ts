@@ -28,8 +28,8 @@ afterEach(() => {
   else process.env.RETENTION_BATCH_ENABLED = ORIGINAL_ENABLED;
 });
 
-function request(headers: Record<string, string> = {}): Request {
-  return new Request("https://example.com/api/cron/data-retention-batch", { headers });
+function request(headers: Record<string, string> = {}, query = ""): Request {
+  return new Request(`https://example.com/api/cron/data-retention-batch${query}`, { headers });
 }
 
 describe("GET /api/cron/data-retention-batch", () => {
@@ -61,9 +61,26 @@ describe("GET /api/cron/data-retention-batch", () => {
     expect(res.status).toBe(200);
     await expect(res.json()).resolves.toMatchObject({
       ok: true,
+      dryRun: false,
       result: { notifications: 3, consultRequests: 1, accessLogs: 2, errors: [] },
     });
     expect(rpcMock).toHaveBeenCalledWith("run_data_retention_batch", { p_limit: 500, p_dry_run: false });
+  });
+
+  it("?dryRun=true이면 지우지 않고 p_dry_run=true로 실행하며 응답에 dryRun을 표시한다", async () => {
+    process.env.CRON_SECRET = "s3cret";
+    const res = await GET(request({ authorization: "Bearer s3cret" }, "?dryRun=true"));
+    expect(res.status).toBe(200);
+    await expect(res.json()).resolves.toMatchObject({ ok: true, dryRun: true });
+    expect(rpcMock).toHaveBeenCalledWith("run_data_retention_batch", { p_limit: 500, p_dry_run: true });
+  });
+
+  it("dryRun 쿼리가 있어도 인증·활성화 게이트는 그대로다", async () => {
+    process.env.CRON_SECRET = "s3cret";
+    delete process.env.RETENTION_BATCH_ENABLED;
+    const res = await GET(request({ authorization: "Bearer s3cret" }, "?dryRun=true"));
+    expect(res.status).toBe(503);
+    expect(rpcMock).not.toHaveBeenCalled();
   });
 
   it("배치가 실패해도 예외를 흘리지 않고 500과 사유를 돌려준다", async () => {
