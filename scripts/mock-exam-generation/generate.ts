@@ -1,5 +1,5 @@
 // 모의고사용 문항 생성 실행기 (2026-09-29). DB 접근 없음 — 결과는 JSON 파일로만 남긴다.
-// 실행: npx tsx scripts/mock-exam-generation/generate.ts --run <run-id> [--plan plan.json] [--only skill[,skill]] [--concurrency 4]
+// 실행: npx tsx scripts/mock-exam-generation/generate.ts --run <run-id> [--plan plan.json] [--round N] [--only skill[,skill]] [--concurrency 4]
 //   기존 파이프라인(runGenerationPipeline: 생성 → 자료 → 품질 계약 → 독립 채점)을 그대로 쓴다. 통과분만 raw/ 에 저장.
 //   재실행 안전: 작업 단위(스킬·난이도·형식)마다 이미 저장된 수만큼 건너뛴다.
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from "node:fs";
@@ -31,7 +31,10 @@ async function main() {
 
   const dir = path.resolve("data/mock-exam-generation", runId, "raw");
   mkdirSync(dir, { recursive: true });
-  const countSaved = (prefix: string) => readdirSync(dir).filter((f) => f.startsWith(prefix) && f.endsWith(".json")).length;
+  // 라운드 태그: 1라운드 파일은 접두어만, 2라운드 이후는 `…__r<N>__<gid>.json`. 같은 작업의 저장 수는 자기 라운드 파일만 센다.
+  const round = Number(arg("--round") ?? 1);
+  const tag = round > 1 ? `r${round}__` : "";
+  const countSaved = (prefix: string) => readdirSync(dir).filter((f) => f.startsWith(prefix) && f.endsWith(".json") && (round > 1 || !/__r\d+__/.test(f))).length;
 
   type Job = { skill: string; domain: string; system: string; difficulty: "easy" | "medium" | "hard"; format: "mc" | "spr"; want: number };
   const jobs: Job[] = [];
@@ -43,7 +46,7 @@ async function main() {
   }
 
   const runJob = async (job: Job) => {
-    const prefix = `${job.skill}__${job.difficulty}__${job.format}__`;
+    const prefix = `${job.skill}__${job.difficulty}__${job.format}__${tag}`;
     let have = countSaved(prefix);
     const skill = SKILL_CODES.find((k) => k.code === job.skill)!;
     const legacy = findProblemSkill(skill.legacySkill);
