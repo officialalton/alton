@@ -40,3 +40,7 @@
 
 ## 7. 본문 개정 공개 구멍 차단(`20261986000000_difficulty_sync_on_publish.sql`)
 - 방식 (a) 채택: 트리거가 새 버전 published 전환 시 난이도가 문항과 다르면 문항 난이도를 새 값으로 맞추고 provisional 로 되돌리며 이력('본문 개정 공개에 의한 변경', 행위자=공개한 관리자)을 남긴다. 거절(b)은 수정 초안 → 공개 흐름을 막고 난이도만 고치려면 별도 경로를 강제해 기존 흐름을 더 해치므로 택하지 않음. 점검 RPC 내부·같은 난이도 공개는 영향 없음.
+
+## 8. 실제 공개 경로 회귀 정정(`20261987000000_difficulty_publish_path_fix.sql`)
+- 원인: publish_problem_version 이 problems 갱신 때 difficulty 를 같이 쓰는데, 문항 난이도가 null 이던 문항의 첫 설정을 난이도 가드가 막았다(20261986 테스트가 직접 SQL 공개라 놓침). publish_problem_version 본문은 그대로 두고 가드(기존 null 은 통과)와 동기화 트리거(null 이면 이력 없이 채움)만 고쳤다.
+- 회귀 테스트: 실제 경로(confirm_and_publish_problem_version)로 난이도 다른 개정본 공개 → 동기화·잠정 복귀·이력 1건, 같은 난이도 0건, null 첫 공개, 점검 RPC 이력 1건.

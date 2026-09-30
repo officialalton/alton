@@ -372,4 +372,60 @@ describe("풀 집계·자동 구성 후보·목록 일관", () => {
     review([id], "easy", "재조정");
     expect(historyCount(id)).toBe(m + 1);
   });
+
+  describe("실제 공개 경로(confirm_and_publish_problem_version → publish_problem_version)", () => {
+    const real = (difficulty: string) => {
+      seq += 1;
+      const id = psql(`select create_bank_problem('${SUBJECT_ID}', 'mc', '', '', '${difficulty}', '${ADMIN_ID}', null, null, null, 'mock_exam');`);
+      problems.push(id);
+      return id;
+    };
+    const draftAndPublish = (id: string, difficulty: string, tagText: string) => {
+      const v = psql(`select save_problem_draft_version('${id}', '${RUN} ${alpha(seq)}${tagText} real path', '["ㄱ","ㄴ","ㄷ","ㄹ"]'::jsonb, 2, '해설', '${difficulty}', '${ADMIN_ID}');`);
+      psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+      return v;
+    };
+
+    it("난이도가 다른 개정본 공개: 문항 난이도 동기화·잠정 복귀·이력 1건, 같은 난이도는 0건", () => {
+      const id = real("hard");
+      draftAndPublish(id, "hard", "a");
+      psql(`update problems set created_via = 'ai_generated' where id = '${id}';`);
+      expect(state(id)).toBe("hard|provisional|false");
+      review([id], "hard"); // 확인됨 + 이력 1건
+      expect(historyCount(id)).toBe(1);
+      const setId = mstSet();
+      place(setId, id, "rw_m2", "higher", "hard");
+      const snap = () => psql(`select problem_version_id || difficulty from mock_exam_set_items where exam_set_id = '${setId}';`);
+      const before = snap();
+
+      draftAndPublish(id, "medium", "b");
+      expect(state(id)).toBe("medium|provisional|false");
+      expect(vdiff(id)).toBe("medium");
+      expect(historyCount(id)).toBe(2);
+      expect(psql(`select from_difficulty || '>' || to_difficulty || '|' || to_status || '|' || changed_by || '|' || reason from problem_difficulty_changes where problem_id = '${id}' order by changed_at desc limit 1;`)).toBe(
+        `hard>medium|provisional|${ADMIN_ID}|본문 개정 공개에 의한 변경`,
+      );
+      expect(snap()).toBe(before);
+
+      draftAndPublish(id, "medium", "c"); // 같은 난이도 → 이력 0건 추가, 상태 유지
+      expect(historyCount(id)).toBe(2);
+      expect(state(id)).toBe("medium|provisional|false");
+    });
+
+    it("문항 난이도가 비어 있던 문항의 첫 공개는 조용히 채워지고 이력·상태는 그대로", () => {
+      const id = real("");
+      expect(psql(`select coalesce(difficulty::text, 'null') from problems where id = '${id}';`)).toBe("null");
+      draftAndPublish(id, "easy", "d");
+      expect(state(id)).toBe("easy|confirmed|false");
+      expect(historyCount(id)).toBe(0);
+    });
+
+    it("난이도 점검 RPC 는 공개 버전 난이도를 바꿔도 동기화 트리거를 타지 않는다(이력 1건)", () => {
+      const id = real("hard");
+      draftAndPublish(id, "hard", "e");
+      review([id], "easy", "강등");
+      expect(historyCount(id)).toBe(1);
+      expect(state(id)).toBe("easy|confirmed|true");
+    });
+  });
 });
