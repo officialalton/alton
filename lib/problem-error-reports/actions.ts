@@ -29,7 +29,8 @@ export async function submitProblemErrorReportAction(input: {
     p_memo: memo || null,
     p_session_id: c.source === "session_assignment" ? c.sessionId : null,
     p_session_source: c.source === "session_assignment" ? c.sessionSource : null,
-    p_problem_id: c.source === "session_assignment" ? c.problemId : null,
+    p_problem_id: c.source === "session_assignment" || c.source === "homework_batch" ? c.problemId : null,
+    p_homework_batch_id: c.source === "homework_batch" ? c.batchId : null,
     p_attempt_id: c.source === "mock_exam" ? c.attemptId : null,
     p_set_item_id: c.source === "mock_exam" ? c.setItemId : null,
   });

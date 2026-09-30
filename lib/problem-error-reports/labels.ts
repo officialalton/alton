@@ -33,7 +33,7 @@ export const VERDICT_EFFECT: Record<Verdict, string> = {
   explanation_confirmed: "문항 보관, 채점·점수 변경 없음. 대체 문항 필요 기록·여분 자동 교체.",
 };
 
-export const SOURCE_LABEL: Record<string, string> = { session_assignment: "수업·과제", mock_exam: "모의고사" };
+export const SOURCE_LABEL: Record<string, string> = { session_assignment: "수업·과제", mock_exam: "모의고사", homework_batch: "과제 묶음" };
 
 export const MEMO_MAX = 1000;
 
@@ -44,6 +44,7 @@ export function reportTypesFor(role: ReporterRole): ReportType[] {
 
 export type ReportContext =
   | { source: "session_assignment"; sessionId: string; sessionSource: "lesson" | "homework"; problemId: string }
+  | { source: "homework_batch"; batchId: string; problemId: string }
   | { source: "mock_exam"; attemptId: string; setItemId: string; problemId?: string };
 
 export type MyReportStatus = "reviewing" | "confirmed" | "not_error";

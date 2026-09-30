@@ -27,6 +27,11 @@ export type HomeworkBatchItem = {
   gradeComment: string | null;
   /** 2026-09-22(사용자 지시) — Practice 탭에 저장했는지(모의고사와 동일한 opt-in 구조). */
   savedToPractice?: boolean;
+  /** 2026-09-30(문제 오류 신고) — 오류 확정 판정으로 자동 채점이 조정된 시각(채점 뒤 학생·보호자 안내용). */
+  errorAdjustedAt?: string | null;
+  /** 선생님이 이미 채점했는데 오류 판정(전원 정답 처리)과 결과가 달라 확인이 필요한 문항 — 수동 채점은 덮어쓰지 않는다. 다시 채점하면 해제. */
+  errorAdjustmentPending?: boolean;
+  errorAdjustmentVerdictId?: string | null;
 };
 
 export type HomeworkBatch = {

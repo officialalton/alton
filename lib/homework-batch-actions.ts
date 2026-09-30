@@ -75,6 +75,7 @@ export async function gradeHomeworkBatchAction(
       gradeComment: override?.comment ?? i.gradeComment,
       // 2026-09-22(사용자 지시) — 오답이었던 과제 문항도 자동으로 Practice에 저장.
       savedToPractice: grade === "incorrect" ? true : i.savedToPractice,
+      ...(i.errorAdjustmentPending ? { errorAdjustmentPending: false } : {}),
     };
   });
   const { error } = await supabase.from("homework_batches").update({ items: nextItems }).eq("id", batchId);
@@ -89,5 +90,16 @@ export async function toggleHomeworkItemSavedToPracticeAction(batchId: string, p
   const { supabase } = await requireUser();
   const { error } = await supabase.rpc("toggle_homework_item_saved_to_practice", { p_batch_id: batchId, p_problem_id: problemId, p_saved: saved });
   if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "저장하지 못했습니다." };
+  return { ok: true, value: undefined };
+}
+
+/** 문항 오류 판정으로 '조정 대상'이 된(이미 채점된) 문항을 발급 교사가 다시 채점해 표시를 해제한다.
+ * grade 를 비우면 조정된 자동 채점 결과를 그대로 확정한다(homework_regrade_item RPC — 행 잠금·발급 교사 검사). */
+export async function regradeHomeworkItemAction(
+  batchId: string, problemId: string, grade: "correct" | "incorrect" | null, comment?: string
+): Promise<ActionResult> {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("homework_regrade_item", { p_batch_id: batchId, p_problem_id: problemId, p_grade: grade, p_comment: comment ?? null });
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "다시 채점하지 못했습니다." };
   return { ok: true, value: undefined };
 }

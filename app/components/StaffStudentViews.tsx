@@ -15,7 +15,7 @@ import {
   deleteStudentViewTaskAction,
 } from "./staff-student-view-actions";
 
-type ViewId = "overview" | "board" | "stats";
+export type ViewId = "overview" | "board" | "stats";
 const TAB_LABEL: Record<ViewId, string> = { overview: "오버뷰", board: "보드", stats: "통계" };
 
 export type ExtraStudentViewTab = { id: string; label: string; render: () => ReactNode };
@@ -26,11 +26,14 @@ export type ExtraStudentViewTab = { id: string; label: string; render: () => Rea
 export default function StaffStudentViews({
   studentId,
   extraTabs = [],
+  initialTab = "overview",
 }: {
   studentId: string;
   extraTabs?: ExtraStudentViewTab[];
+  /** 처음 열 화면(기본 오버뷰). 서버가 허용하지 않는 탭이면 탭 줄에 없으므로 오버뷰로 본다. */
+  initialTab?: ViewId;
 }) {
-  const [tab, setTab] = useState<string>("overview");
+  const [tab, setTab] = useState<string>(initialTab);
   const [cards, setCards] = useState<BoardCard[] | null>(null);
   const [access, setAccess] = useState<StudentViewAccess | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -55,9 +58,9 @@ export default function StaffStudentViews({
     setCards(null);
     setAccess(null);
     setError(null);
-    setTab("overview");
+    setTab(initialTab);
     void reload();
-  }, [reload]);
+  }, [reload, initialTab]);
 
   // 열람 감사 — 직원 역할만(access.audit), 화면 종류가 바뀔 때마다. 기록 실패는 열람을 막지 않는다.
   useEffect(() => {

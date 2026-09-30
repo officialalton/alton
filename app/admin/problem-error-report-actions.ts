@@ -18,7 +18,7 @@ export type ReportedProblemGroup = {
   reportCount: number;
   openCount: number;
   typeCounts: Record<ReportType, number>;
-  sourceCounts: { session_assignment: number; mock_exam: number };
+  sourceCounts: { session_assignment: number; mock_exam: number; homework_batch?: number };
   firstAt: string;
   lastAt: string;
   archived: boolean;
@@ -30,7 +30,7 @@ export type ReportedProblemDetail = {
   version: { id: string; versionNo: number; status: string; passage: string | null; question: string | null; options: string[] | null; correctIndex: number | null; answers: string[] | null; explanation: string | null; difficulty: string | null };
   reports: { id: string; source: string; sessionSource: string | null; reporterRole: string; reporterName: string | null; reportType: ReportType; memo: string | null; createdAt: string; resolved: boolean }[];
   reportTotal: number;
-  affected: { mockAttemptsGraded: number; mockAttemptsOpen: number; sessionWorks: number; mockAdjusted: number; sessionAdjusted: number; sessionPending: number };
+  affected: { mockAttemptsGraded: number; mockAttemptsOpen: number; sessionWorks: number; mockAdjusted: number; sessionAdjusted: number; sessionPending: number; homework?: { items: number; adjusted: number; pending: number } };
   verdicts: { id: string; decision: Verdict; note: string | null; decidedAt: string; decidedByName: string | null }[];
   replacementNeeds: { id: string; status: "open" | "linked"; moduleKey: string | null; route: string | null; difficulty: string | null; satDomain: string | null; skillCode: string | null; usageScope: string; inMockSet: boolean; openReason: string | null; replacementProblemId: string | null }[];
   replacements: { examSetId: string; examSetName: string | null; newProblemId: string; moduleKey: string | null; route: string | null; createdAt: string }[];
@@ -43,6 +43,7 @@ export type ApplyVerdictResult = {
   resolvedReports: number;
   mockAdjustedAnswers?: number;
   sessionWorksAdjusted?: number;
+  homeworkItemsAdjusted?: number;
   replacementNeedsCreated?: number;
   autoReplaced?: number;
   replacementNeedsOpen?: number;

@@ -14,6 +14,11 @@ vi.mock("./student-roadmap-actions", () => ({
   loadTeacherStudentRoadmapAction: vi.fn(),
 }));
 
+// 공통 플래너 화면은 자체 서버 액션을 쓰므로 여기서는 자리만 확인한다(동작은 StaffStudentViews.test).
+vi.mock("./TeacherPlannerBoard", () => ({
+  default: ({ studentId }: { studentId: string }) => <div data-testid="staff-student-views-mock" data-student={studentId} />,
+}));
+
 const current: TeacherAssignedSubject[] = [
   {
     assignmentId: "ta1",
@@ -76,17 +81,18 @@ describe("AssignmentsTab — M3 배정 종료 요청 / 2026-09-22 배정 중·�
     expect(screen.getByText("김학생")).toBeInTheDocument();
 
     fireEvent.click(screen.getByText(/^배정 종료 \(/));
-    // 배정 종료 목록엔 진입 버튼(오버뷰/로드맵/일정/커리큘럼)이 없다.
-    expect(screen.queryByText("오버뷰")).toBeNull();
+    // 배정 종료 목록엔 진입 버튼(학습 플래너/로드맵/커리큘럼)이 없다.
+    expect(screen.queryByText("학습 플래너")).toBeNull();
   });
 
-  it("배정 중 카드에 오버뷰/로드맵/일정/커리큘럼 진입 버튼이 있다(커리큘럼은 콜백이 있을 때만)", () => {
+  it("배정 중 카드에 학습 플래너/로드맵/커리큘럼 진입 버튼이 있고 준비 중 자리표시(오버뷰·일정)는 없다(커리큘럼은 콜백이 있을 때만)", () => {
     const onOpenOperatingCurriculum = vi.fn();
     render(<AssignmentsTab current={current} past={[]} onOpenOperatingCurriculum={onOpenOperatingCurriculum} />);
 
-    expect(screen.getByText("오버뷰")).toBeInTheDocument();
+    expect(screen.getByText("학습 플래너")).toBeInTheDocument();
     expect(screen.getByText("로드맵")).toBeInTheDocument();
-    expect(screen.getByText("일정")).toBeInTheDocument();
+    expect(screen.queryByText("오버뷰")).toBeNull();
+    expect(screen.queryByText("일정")).toBeNull();
 
     fireEvent.click(screen.getByText("커리큘럼"));
     expect(onOpenOperatingCurriculum).toHaveBeenCalledWith("se1", "sub1", "김학생", "SAT Math");
@@ -167,15 +173,17 @@ describe("AssignmentsTab — M3 배정 종료 요청 / 2026-09-22 배정 중·�
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
   });
 
-  it("'오버뷰'/'일정' 버튼을 누르면 페이지 이동 없이 플래너 탭이 보인다", () => {
+  it("'학습 플래너' 버튼을 누르면 페이지 이동 없이 공통 플래너 화면 하나만 보이고(바깥 탭·준비 중 안내 없음), '뒤로'로 돌아간다", () => {
     render(<AssignmentsTab current={current} past={[]} />);
 
-    fireEvent.click(screen.getByText("일정"));
+    fireEvent.click(screen.getByText("학습 플래너"));
     expect(screen.getByText("김학생 학습 플래너")).toBeInTheDocument();
-    expect(screen.getByText("일정 탭은 준비 중입니다 — 곧 제공됩니다.")).toBeInTheDocument();
+    expect(screen.getByTestId("staff-student-views-mock")).toHaveAttribute("data-student", "st1");
+    // 바깥 보드/일정/오버뷰 탭과 '준비 중' 자리표시가 없다.
+    expect(screen.queryByText(/준비 중입니다/)).toBeNull();
+    expect(screen.queryByRole("tab")).toBeNull();
 
     fireEvent.click(screen.getByText("← 뒤로"));
-    fireEvent.click(screen.getByText("오버뷰"));
-    expect(screen.getByText("오버뷰 탭은 준비 중입니다 — 곧 제공됩니다.")).toBeInTheDocument();
+    expect(screen.getByText("SAT Math")).toBeInTheDocument();
   });
 });

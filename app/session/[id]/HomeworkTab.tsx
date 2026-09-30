@@ -48,7 +48,7 @@ export default function HomeworkTab({
           )}
         </div>
       )}
-      <HomeworkBatchPanel batches={homeworkBatches} viewerRole={asTeacher ? "teacher" : "student"} />
+      <HomeworkBatchPanel batches={homeworkBatches} viewerRole={asTeacher ? "teacher" : "student"} reportEnabled={realViewerRole === "student" || realViewerRole === "teacher"} />
 
       {initialItems.length > 0 && (
         <section className="mt-6 border-t border-grey-200 pt-6">

@@ -36,6 +36,7 @@ function resultText(r: ApplyVerdictResult): string {
   if (r.archived) parts.push("문항 보관");
   if ((r.mockAdjustedAnswers ?? 0) > 0) parts.push(`모의고사 ${r.mockAdjustedAnswers}문항 조정 채점`);
   if ((r.sessionWorksAdjusted ?? 0) > 0) parts.push(`과제 ${r.sessionWorksAdjusted}건 조정`);
+  if ((r.homeworkItemsAdjusted ?? 0) > 0) parts.push(`과제 묶음 ${r.homeworkItemsAdjusted}문항 조정`);
   if ((r.autoReplaced ?? 0) > 0) parts.push(`여분 문항으로 ${r.autoReplaced}칸 자동 교체`);
   if ((r.replacementNeedsOpen ?? 0) > 0) parts.push(`대체 문항 필요 ${r.replacementNeedsOpen}건 남음`);
   return parts.join(" · ");
@@ -155,6 +156,7 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
                     ))}
                     {g.sourceCounts.mock_exam > 0 && <span className="rounded-full border border-grey-200 px-2 py-0.5 text-grey-600">모의고사 {g.sourceCounts.mock_exam}</span>}
                     {g.sourceCounts.session_assignment > 0 && <span className="rounded-full border border-grey-200 px-2 py-0.5 text-grey-600">수업·과제 {g.sourceCounts.session_assignment}</span>}
+                    {(g.sourceCounts.homework_batch ?? 0) > 0 && <span className="rounded-full border border-grey-200 px-2 py-0.5 text-grey-600">과제 묶음 {g.sourceCounts.homework_batch}</span>}
                     {g.archived && <span className="rounded-full bg-grey-100 px-2 py-0.5 text-grey-500">보관됨</span>}
                     {g.latestDecision && <span className="rounded-full bg-grey-100 px-2 py-0.5 text-grey-600">{VERDICT_LABEL[g.latestDecision]}</span>}
                   </div>
@@ -286,6 +288,13 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
           <div><dt className="text-grey-500">조정 채점된 모의고사 문항</dt><dd className="font-bold">{d.affected.mockAdjusted}</dd></div>
           <div><dt className="text-grey-500">조정된 과제 풀이</dt><dd className="font-bold">{d.affected.sessionAdjusted}</dd></div>
           <div><dt className="text-grey-500">선생님 확인 필요(조정 대상)</dt><dd className="font-bold">{d.affected.sessionPending}</dd></div>
+          {d.affected.homework && (
+            <>
+              <div><dt className="text-grey-500">제출된 과제 묶음 문항</dt><dd className="font-bold" data-testid="affected-homework-items">{d.affected.homework.items}</dd></div>
+              <div><dt className="text-grey-500">조정된 과제 묶음 문항</dt><dd className="font-bold">{d.affected.homework.adjusted}</dd></div>
+              <div><dt className="text-grey-500">과제 묶음 조정 대상(선생님 확인 필요)</dt><dd className="font-bold">{d.affected.homework.pending}</dd></div>
+            </>
+          )}
         </dl>
       </section>
 
