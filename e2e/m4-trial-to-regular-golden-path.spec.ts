@@ -7,11 +7,11 @@ import { findLatestEmailTo, extractTrialOnboardingRedeemUrl } from "./mailbox";
 // M4 — 상담→체험→정규 전환 통합 골든 패스(요구사항 13번). 실브라우저로:
 // 비로그인 상담(직접 seed, M1 자체 E2E가 별도로 커버) → 관리자 체험 진행
 // 확정 → 온보딩 링크 발급 → 신규 보호자 계정 생성(redeem 라우트, R2
-// invite/accept와 동일한 신뢰 경계) → 관리자 과목·선생님 배정 → 보호자 Smart
-// Notes 동의(+ 체험수업권 자동 지급) → 체험 예약(psql로 confirm_lesson_booking
+// invite/accept와 동일한 신뢰 경계; 이 시점에 체험수업권이 동의 없이 자동
+// 지급된다) → 관리자 과목·선생님 배정 → 체험 예약(psql로 confirm_lesson_booking
 // 직접 호출 — 예약 UI 자체는 R6 스펙이 이미 커버, 여기서는 M4 연결만 검증) →
-// 완료 처리 → 선생님 리뷰 확정 → 보호자 정규 진행 희망 → 관리자 원클릭 계약
-// 발송(DOCUSIGN_SANDBOX_ALLOW_REAL_CALLS 비활성 — mock 실패 경로만 검증) →
+// 완료 처리(→ 계약 자동 발송 outbox 'completed_trial' 큐잉 + 관리자 큐 화면 확인,
+// 발송 게이트 꺼짐 → 발송 없음) → 선생님 리뷰 확정 →
 // DocuSign 웹훅 시뮬레이션(r3-consultation-to-contract.spec.ts와 동일한 HMAC
 // 서명 same-origin POST 기법)으로 계약 active 전환 → 정규상품 구매 시뮬레이션 →
 // 과목 활성화 → 같은 teacher_assignment로 120분 정규 예약까지.
@@ -23,8 +23,12 @@ import { findLatestEmailTo, extractTrialOnboardingRedeemUrl } from "./mailbox";
 // test()로 처음 작성했을 때 admin 세션이 guardian 세션으로 바뀌는 문제를
 // 겪었음 — 원인 확정 대신 검증된 패턴으로 구조를 바꿔 해결).
 //
-// DocuSign 실제 발송·Stripe 실제 결제는 전혀 하지 않는다(요구사항: 이번엔
-// mock/Sandbox 비활성 경로만 검증).
+// DocuSign 실제 발송·Stripe 실제 결제는 전혀 하지 않는다. 계약 자동 발송은
+// CONTRACT_AUTO_DISPATCH_ENABLED 게이트가 꺼진 서버(기본값)를 전제로 큐 상태만
+// 검증한다 — 스펙이 관리자 화면의 "자동 발송이 비활성화" 배너를 확인해 게이트가
+// 꺼져 있지 않으면 "발송 실행" 클릭 전에 실패해 실발송을 막는다.
+// 둘째 describe는 나머지 두 큐잉 트리거(직접 계정 생성 / 상담사 '정규 진행 권장')를
+// 실제 화면 흐름으로 검증한다.
 
 const DB_URL = "postgresql://postgres:postgres@127.0.0.1:54422/postgres";
 const SUBJECT_ID = "eeeeeeee-0000-0000-0000-000000000001"; // SAT Math
@@ -64,6 +68,7 @@ let contractId: string;
 let contractVersionId: string;
 let purchaseId: string;
 let regularGrantId: string;
+let dispatchJobId: string;
 // 예약 가능 창은 24시간 후 ~ 8주 이내(is_within_booking_window)다. 공용 선생님(박서연)의
 // 다른 실행/스펙 예약과 teacher_buffer_violation·reservations_no_overlap이 겹칠 수
 // 있어, 무작위 시각으로 예약하되 충돌하면 다른 시각으로 다시 시도한다. 다른 스펙이 같은 선생님에게
@@ -89,7 +94,7 @@ function bookWithRetry(lessonTypeId: string, minutes: number, keyPrefix: string)
   }
   throw lastError;
 }
-// 4번 fixme(부정 테스트)에서만 쓰는 정규 예약 시각.
+// 4번(부정 테스트)에서만 쓰는 정규 예약 시각.
 const regularStartsAt = new Date(randomSlotStartMs()).toISOString();
 const regularEndsAt = new Date(new Date(regularStartsAt).getTime() + 120 * 60000).toISOString();
 
@@ -205,6 +210,8 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     expect(childCardId).toMatch(/^[0-9a-f-]{36}$/);
     childId = psql(`select child_id from consultations where id = '${childCardId}';`);
     expect(childId).toMatch(/^[0-9a-f-]{36}$/);
+    // 동의 화면이 없어졌으므로 체험수업권은 계정(자녀 카드) 생성과 동시에 자동 지급된다.
+    expect(psql(`select trial_entitlement_grant_status from consultations where id = '${childCardId}';`)).toBe("granted");
 
     // is_under_13()은 date_of_birth가 없으면 fail-closed(true)로 판정해 계약
     // 활성화(9번 단계)를 막는다 — 이 골든 패스는 만 13세 미만 동의 게이트 자체를
@@ -246,17 +253,11 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     expect(initialAssignmentId).toMatch(/^[0-9a-f-]{36}$/);
   });
 
-  // TODO(2026-09-28, 초기 고객 절차 단순화, task_aab5c4d1): 체험 Smart Notes
-  // 동의 화면(app/consult/trial-onboarding/page.tsx, TrialConsentButton.tsx)을
-  // 없애면서 이 단계가 가리키던 동의 UI 자체가 사라졌다. 체험수업권은 이제
-  // 동의 없이 자동 지급되지만, 정확히 어느 시점에 자동 지급되는지(관리자가
-  // outcome='trial_recommended'를 기록하는 시점 vs child_id가 실제로 연결되는
-  // 시점)가 별도 세션(task_aab5c4d1)에서 재검토 중이다 — 그 결과가 나오면 이
-  // 테스트를 "동의 화면 없이, 과목·선생님 배정 완료 시점에 자동 지급됨을
-  // 확인"하는 내용으로 다시 써야 한다. 지금은 삭제된 라우트로 이동하던 코드만
-  // 제거해 스펙이 깨지지 않게 해뒀다 — 아래 assertion은 그 세션이 실제로
-  // 자동 지급 트리거를 완성한 뒤에만 통과한다.
-  test.fixme("4. 체험수업권이 동의 없이 자동 지급된다 (+ 부정 테스트)", async () => {
+  // 2026-09-29 정책 확정: 체험수업권은 동의 없이, 계정/상담 결과가 허용하는 즉시
+  // 자동 지급된다. 상담 경로에서는 결과(trial_recommended)를 물려받은 자녀 카드가
+  // 생성되는 순간(=test 2의 계정 생성) grant_trial_entitlement_for_consultation이
+  // 실행된다 — 여기서는 그 결과를 RPC 수동 호출 없이 확인한다.
+  test("4. 체험수업권이 동의 없이 자동 지급된다 (+ 부정 테스트)", async () => {
     test.setTimeout(60000);
 
     const trialGrantCount = psql(
@@ -264,6 +265,15 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
        where eg.child_id = '${childId}' and ep.code = 'trial_lesson_grant';`
     );
     expect(trialGrantCount).toBe("1");
+    expect(
+      psql(
+        `select coalesce(sum(el.amount), 0) from entitlement_ledger el join entitlement_grants eg on eg.id = el.grant_id
+         join entitlement_products ep on ep.id = eg.entitlement_product_id
+         where eg.child_id = '${childId}' and ep.code = 'trial_lesson_grant';`
+      )
+    ).toBe("1");
+    // 상담 경로는 체험이 completed 되기 전에는 계약을 큐잉하지 않는다.
+    expect(psql(`select count(*) from contract_dispatch_jobs where child_id = '${childId}';`)).toBe("0");
 
     // 부정 테스트: 정규(120분) 예약은 아직 정규 수업권이 없으므로 거부돼야
     // 한다(체험/정규 수업권 상호 오사용 차단, M2 방어를 M4 흐름에서도 재확인).
@@ -275,10 +285,6 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
   });
 
   test("5. 체험 예약(60분) + 완료 처리", async () => {
-    // 체험수업권 자동 지급의 정확한 트리거 시점은 아직 별도 세션(task_aab5c4d1)에서
-    // 검토 중이라(위 4번 fixme) 여기서는 지급 함수를 직접 호출해 예약 이후 단계를
-    // 계속 검증한다. 트리거가 확정되면 이 호출과 4번을 함께 정리한다.
-    psql(`select grant_trial_entitlement_for_student('${childId}');`);
     const trial = bookWithRetry(TRIAL_LESSON_TYPE_ID, 60, "m4-e2e-trial");
     sessionId = trial.sessionId;
     expect(sessionId).toMatch(/^[0-9a-f-]{36}$/);
@@ -294,7 +300,8 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
   });
 
   test("6. 선생님: 체험 리뷰 작성 → 확정", async ({ page }) => {
-    test.setTimeout(60000);
+    // 공유 로컬 DB/dev 서버가 다른 세션 부하로 느릴 때 리뷰 모달 로딩(서버 액션)이 15초를 넘길 수 있다.
+    test.setTimeout(120000);
     await loginAs(page, "seoyeon@example.com");
     // 수업 리뷰(체험/정규 공용)는 배정 탭이 아니라 일정 탭 > 지난 수업 카드의
     // "수업 리뷰 작성" 모달에서 쓴다. 완료된 수업은 시각과 무관하게 지난 수업이다.
@@ -310,7 +317,7 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
       .first();
     await lessonCard.getByRole("button", { name: "수업 리뷰 작성" }).click();
     const modal = page.locator("div.fixed").filter({ has: page.getByRole("heading", { name: "수업 리뷰 작성" }) });
-    await expect(modal).toBeVisible({ timeout: 15000 });
+    await expect(modal).toBeVisible({ timeout: 60000 });
 
     await modal.getByLabel("고객에게 보여줄 종합 의견").fill("M4 골든패스 학생과의 체험 수업 — 기초 개념 이해도 우수, 정규 진행 추천.");
     // 확정하려면 먼저 초안이 저장돼 있어야 한다 — 초안 저장(비공개) → 공개 확정 →
@@ -328,23 +335,51 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     expect(reviewStatus).toBe("final");
   });
 
-  // TODO(2026-09-28, 초기 고객 절차 단순화): "정규 진행 희망" 버튼(TrialConversionPanel)을
-  // 없앴다 — 계약 발송은 이제 학부모 클릭이 아니라 체험 completed 이벤트
-  // 기준 outbox(contract_dispatch_jobs, 이번 작업에서 구현 중)로 트리거된다.
-  // outbox가 완성되면 이 단계는 "체험 수업이 completed로 종료되면 계약 발송
-  // 작업이 자동으로 큐에 쌓인다"로 다시 써야 한다.
-  test.fixme("7. 체험 수업 완료 시 계약 발송 작업이 자동으로 큐에 쌓인다", async () => {
+  // 계약 자동 발송 outbox — 체험 수업이 completed로 끝나면(test 5) DB 트리거가
+  // contract_dispatch_jobs에 'completed_trial' 작업을 큐잉한다. 발송은 별도
+  // 워커(CONTRACT_AUTO_DISPATCH_ENABLED 게이트)의 몫이라 여기서는 큐 상태와
+  // 관리자 큐 화면만 확인한다.
+  test("7. 체험 수업 완료 시 계약 발송 작업이 자동으로 큐에 쌓인다 (멱등)", async () => {
     test.setTimeout(60000);
+    const jobs = psql(
+      `select trigger_type || '|' || status || '|' || attempt_count || '|' || coalesce(subject_enrollment_id::text, '')
+       from contract_dispatch_jobs where child_id = '${childId}';`
+    );
+    expect(jobs).toBe(`completed_trial|queued|0|${subjectEnrollmentId}`);
+    dispatchJobId = psql(`select id from contract_dispatch_jobs where child_id = '${childId}' and trigger_type = 'completed_trial';`);
+
+    // 멱등: 이미 completed인 세션의 재기록 / 같은 작업의 재큐잉은 새 작업을 만들지 않는다.
+    psql(`update sessions set final_status = 'completed' where id = '${sessionId}';`);
+    psql(`select enqueue_contract_dispatch_job('${childId}', 'completed_trial', '${subjectEnrollmentId}');`);
+    expect(psql(`select count(*) from contract_dispatch_jobs where child_id = '${childId}';`)).toBe("1");
+    // 취소·노쇼 등 completed가 아닌 전이는 작업을 만들지 않는다(같은 자녀의 다른 유형은 0건 유지).
+    expect(
+      psql(`select count(*) from contract_dispatch_jobs where child_id = '${childId}' and trigger_type <> 'completed_trial';`)
+    ).toBe("0");
   });
 
-  // TODO(2026-09-29, e2e 갱신): 예전 "정규 계약 발송 대기" 표(정규 진행 희망 버튼이
-  // 만들던 trial_regular_progress_selections 기반 원클릭 발송)는 위 7번과 같은
-  // 이유로 더 이상 이 흐름의 진입점이 아니다 — 계약 발송은 체험 completed 이벤트
-  // 기준 contract_dispatch_jobs outbox(CONTRACT_AUTO_DISPATCH_ENABLED 게이트)가
-  // 맡는다. outbox 경로가 확정되면 7번과 함께 "발송 작업이 큐에 쌓이고 발송 실패
-  // 시 draft로 남는다"로 다시 쓴다. 9번 이후는 계약 버전을 직접 준비해 이어간다.
-  test.fixme("8. 계약 발송 outbox → 발송 실패 시 draft 유지", async () => {
+  test("8. 관리자 큐 화면 표시 + 발송 게이트 꺼짐이면 아무 것도 발송하지 않는다", async ({ page }) => {
     test.setTimeout(60000);
+    await loginAs(page, ACCOUNTS.admin);
+    await page.goto("/admin?tab=consult");
+    await page.getByRole("button", { name: "정규 계약 발송" }).click();
+    const queue = page.getByTestId("contract-dispatch-queue");
+    await expect(queue).toBeVisible({ timeout: 15000 });
+    // 게이트 가드: 서버가 자동 발송 비활성이어야만 아래 "발송 실행"을 누른다.
+    await expect(page.getByTestId("contract-dispatch-disabled-banner")).toBeVisible();
+
+    const row = page.getByTestId(`contract-dispatch-job-${dispatchJobId}`);
+    await expect(row).toBeVisible({ timeout: 15000 });
+    await expect(row).toContainText(studentName);
+    await expect(row).toContainText("체험 수업 완료 · 대기 중");
+
+    await queue.getByRole("button", { name: "발송 실행" }).click();
+    await expect(queue.getByText("자동 발송이 비활성화되어 있어 아무 것도 처리하지 않았습니다.")).toBeVisible({ timeout: 15000 });
+
+    // 게이트가 꺼져 있으므로 작업은 그대로 대기, 계약·DocuSign 봉투도 그대로다.
+    expect(psql(`select status || '|' || attempt_count from contract_dispatch_jobs where id = '${dispatchJobId}';`)).toBe("queued|0");
+    expect(psql(`select count(*) from contract_versions where contract_id = (select contract_id from subject_enrollments where id = '${subjectEnrollmentId}') and docusign_envelope_id is not null;`)).toBe("0");
+    expect(psql(`select status from contracts where id = (select contract_id from subject_enrollments where id = '${subjectEnrollmentId}');`)).toBe("draft");
   });
 
   test("8b. 준비: 회사 승인이 끝난 계약 버전(발송 전 draft)", async () => {
@@ -424,5 +459,209 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
       `select count(*) from entitlement_ledger where grant_id = '${regularGrantId}' and event_type = 'hold';`
     );
     expect(regularHoldExists).toBe("1");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// 계약 자동 발송 outbox의 나머지 두 트리거 — 직접 계정 생성 / 상담사 '정규 진행 권장'.
+// (체험 completed 트리거는 위 골든 패스 test 7·8.) 둘 다 실제 화면 흐름으로 큐잉을
+// 일으키고, 관리자 큐 화면 표시·멱등·발송 게이트 꺼짐을 확인한다. 실제 DocuSign·
+// 이메일(로컬 Mailpit 제외) 발송은 없다.
+// ---------------------------------------------------------------------------
+const RUN = `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+
+async function redeemAndCreateAccount(page: import("@playwright/test").Page, baseURL: string | undefined, token: string, expectedEmail: string) {
+  await page.goto(`${baseURL}/api/trial-onboarding/redeem?token=${token}`);
+  await expect(page).toHaveURL(/\/consult\/trial-onboarding\/confirm-email/, { timeout: 15000 });
+  await expect(page.getByLabel("로그인 이메일")).toHaveValue(expectedEmail);
+  await page.getByRole("button", { name: "이 이메일로 계속" }).click();
+  await expect(page).toHaveURL(/\/set-password/, { timeout: 15000 });
+  await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
+  await page.getByLabel("새 비밀번호 확인").fill(DEV_PASSWORD);
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "비밀번호 설정하고 계속하기" }).click();
+  await page.waitForURL((u) => !u.pathname.startsWith("/set-password"), { timeout: 15000 });
+}
+
+async function expectQueueRow(page: import("@playwright/test").Page, jobId: string, studentLabel: string, statusText: string) {
+  await loginAs(page, ACCOUNTS.admin);
+  await page.goto("/admin?tab=consult");
+  await page.getByRole("button", { name: "정규 계약 발송" }).click();
+  await expect(page.getByTestId("contract-dispatch-disabled-banner")).toBeVisible({ timeout: 15000 });
+  const row = page.getByTestId(`contract-dispatch-job-${jobId}`);
+  await expect(row).toBeVisible({ timeout: 15000 });
+  await expect(row).toContainText(studentLabel);
+  await expect(row).toContainText(statusText);
+}
+
+test.describe("M4 — 계약 자동 큐잉: 직접 계정 생성 · 정규 바로 진행 (실브라우저)", () => {
+  const consultantId = randomUUID();
+  const consultantName = `M4큐잉 컨설턴트 ${RUN}`;
+  const directGuardianEmail = `m4q-direct-guardian-${RUN}@example.com`;
+  const directStudentEmail = `m4q-direct-student-${RUN}@example.com`;
+  const directStudentName = `M4큐잉 직접생성 학생 ${RUN}`;
+  const regGuardianEmail = `m4q-reg-guardian-${RUN}@example.com`;
+  const regStudentEmail = `m4q-reg-student-${RUN}@example.com`;
+  const regStudentName = `M4큐잉 정규 학생 ${RUN}`;
+  let directChildId = "";
+  let directJobId = "";
+  let regConsultationId = "";
+  let regChildId = "";
+  let regJobId = "";
+  let regToken = "";
+
+  test.beforeAll(() => {
+    psql(`
+      insert into auth.users (
+        instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+        raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+        confirmation_token, recovery_token, email_change_token_new, email_change,
+        email_change_token_current, phone_change, phone_change_token, reauthentication_token
+      ) values (
+        '00000000-0000-0000-0000-000000000000', '${consultantId}', 'authenticated', 'authenticated',
+        'm4q-consultant-${RUN}@example.com', crypt('alton-dev-1234', gen_salt('bf')), now(),
+        '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', '', '', '', '', ''
+      );
+      insert into profiles (id, role, name) values ('${consultantId}', 'consultant', '${consultantName}');
+    `);
+    const prospect = psql(`insert into prospect_contacts (full_name, primary_email) values ('M4큐잉 정규 보호자 ${RUN}', '${regGuardianEmail}') returning id;`);
+    // 결과 미기록 상태의 완료 상담 — 관리자(상담사 역할)가 화면에서 '정규 진행 권장'을 기록한다.
+    regConsultationId = psql(
+      `insert into consultations (source, status, contact_name, contact_email, starts_at, ends_at, completed_at, prospect_contact_id)
+       values ('homepage', 'completed', 'M4큐잉 정규 보호자 ${RUN}', '${regGuardianEmail}', now() - interval '1 hour', now() - interval '30 minutes', now(), '${prospect}')
+       returning id;`
+    );
+  });
+
+  test.afterAll(() => {
+    // 계정·큐 작업은 자녀 프로필 FK가 있어 지우지 않는다(실행 ID로 구분됨).
+    // 이 스펙 전용 컨설턴트는 가능하면 정리하고, FK로 실패하면 실행 ID가 붙은 채 남는다.
+    try {
+      psql(`delete from consultant_assignments where consultant_id = '${consultantId}';`);
+      psql(`delete from profiles where id = '${consultantId}';`);
+      psql(`delete from auth.users where id = '${consultantId}';`);
+    } catch {
+      // ignore
+    }
+  });
+
+  test("A1. 관리자: 직접 계정 생성 안내 발송", async ({ page }) => {
+    test.setTimeout(60000);
+    await loginAs(page, ACCOUNTS.admin);
+    await page.goto("/admin?tab=consult");
+    await page.getByRole("button", { name: "계정 생성", exact: true }).click();
+    await page.getByRole("button", { name: "+ 부모 계정 생성" }).click();
+    await page.getByPlaceholder("보호자 이름").fill(`M4큐잉 직접 보호자 ${RUN}`);
+    await page.getByPlaceholder("보호자 이메일").fill(directGuardianEmail);
+    await page.getByPlaceholder("학생 이름").fill(directStudentName);
+    await page.getByPlaceholder("학생 이메일").fill(directStudentEmail);
+    await expect(page.locator("select option", { hasText: consultantName })).toHaveCount(1, { timeout: 15000 });
+    await page.locator("select").selectOption(consultantId);
+    await page.getByRole("button", { name: "계정 생성 안내 발송" }).click();
+    await expect(page.getByText("계정 생성 안내 발송 완료")).toBeVisible({ timeout: 15000 });
+  });
+
+  test("A2. 보호자 계정 생성 → 체험수업권 즉시 지급 + direct_account_created 큐잉", async ({ page, baseURL }) => {
+    test.setTimeout(60000);
+    const mail = await findLatestEmailTo(directGuardianEmail, "계정 생성 안내");
+    const token = new URL(extractTrialOnboardingRedeemUrl(mail.html)).searchParams.get("token")!;
+    await redeemAndCreateAccount(page, baseURL, token, directGuardianEmail);
+
+    directChildId = psql(
+      `select child_auth_user_id from trial_onboarding_link_students where student_email = '${directStudentEmail}' and status = 'created';`
+    );
+    expect(directChildId).toMatch(/^[0-9a-f-]{36}$/);
+    // 계정 생성과 동시에 체험수업권이 'granted' — 동의 단계 없음.
+    expect(
+      psql(`select trial_entitlement_grant_status from trial_onboarding_link_students where child_auth_user_id = '${directChildId}';`)
+    ).toBe("granted");
+    const grantCount = () =>
+      psql(
+        `select count(*) from entitlement_grants eg join entitlement_products ep on ep.id = eg.entitlement_product_id
+         where eg.child_id = '${directChildId}' and ep.code = 'trial_lesson_grant';`
+      );
+    expect(grantCount()).toBe("1");
+
+    expect(psql(`select trigger_type || '|' || status || '|' || attempt_count from contract_dispatch_jobs where child_id = '${directChildId}';`)).toBe(
+      "direct_account_created|queued|0"
+    );
+    directJobId = psql(`select id from contract_dispatch_jobs where child_id = '${directChildId}';`);
+    // 멱등: 같은 이벤트·수업권 재지급 시도는 작업/수업권을 늘리지 않는다.
+    psql(`select grant_trial_entitlement_for_student('${directChildId}');`);
+    psql(`select enqueue_contract_dispatch_job('${directChildId}', 'direct_account_created');`);
+    expect(psql(`select count(*) from contract_dispatch_jobs where child_id = '${directChildId}';`)).toBe("1");
+    expect(grantCount()).toBe("1");
+  });
+
+  test("A3. 관리자 큐 화면에 '직접 계정 생성 · 대기 중'으로 보이고 게이트가 꺼져 있으면 발송하지 않는다", async ({ page }) => {
+    test.setTimeout(60000);
+    await expectQueueRow(page, directJobId, directStudentName, "직접 계정 생성 · 대기 중");
+    await page.getByTestId("contract-dispatch-queue").getByRole("button", { name: "발송 실행" }).click();
+    await expect(page.getByText("자동 발송이 비활성화되어 있어 아무 것도 처리하지 않았습니다.")).toBeVisible({ timeout: 15000 });
+    expect(psql(`select status || '|' || attempt_count from contract_dispatch_jobs where id = '${directJobId}';`)).toBe("queued|0");
+    expect(psql(`select count(*) from contract_versions where contract_id in (select id from contracts where child_id = '${directChildId}') and docusign_envelope_id is not null;`)).toBe("0");
+  });
+
+  test("B1. 상담사(관리자): 상담 결과 '정규 진행 권장' 기록 → 자녀 미확정이라 아직 큐잉 없음", async ({ page }) => {
+    test.setTimeout(60000);
+    await loginAs(page, ACCOUNTS.admin);
+    await page.goto("/admin?tab=consult");
+    await page.getByTestId(`kanban-card-${regConsultationId}`).click();
+    const detail = page.getByTestId("consultation-card-detail");
+    await expect(detail).toBeVisible({ timeout: 15000 });
+    await detail.locator("select").selectOption("regular_recommended");
+    await detail.getByPlaceholder("관리자 검토 요약(필수)").fill("M4 큐잉 E2E — 바로 정규 진행 권장");
+    await detail.getByRole("button", { name: "기록", exact: true }).click();
+
+    const sendButton = detail.getByRole("button", { name: "정규 등록 온보딩 안내 발송" });
+    await expect(sendButton).toBeVisible({ timeout: 15000 });
+    expect(psql(`select outcome from consultations where id = '${regConsultationId}';`)).toBe("regular_recommended");
+    // 자녀가 아직 없으므로 큐잉이 지연된다.
+    expect(psql(`select count(*) from consultations where family_root_consultation_id = '${regConsultationId}';`)).toBe("0");
+
+    await detail.getByPlaceholder("보호자 이메일").fill(regGuardianEmail);
+    await detail.getByPlaceholder("보호자 이름").fill(`M4큐잉 정규 보호자 ${RUN}`);
+    await detail.getByPlaceholder("학생 이름").fill(regStudentName);
+    await detail.getByPlaceholder("학생 이메일").fill(regStudentEmail);
+    await sendButton.click();
+    await expect(detail.getByTestId("trial-onboarding-link-progress-toggle")).toBeVisible({ timeout: 30000 });
+    const mail = await findLatestEmailTo(regGuardianEmail, "온보딩 안내");
+    regToken = new URL(extractTrialOnboardingRedeemUrl(mail.html)).searchParams.get("token")!;
+    expect(regToken).toBeTruthy();
+  });
+
+  test("B2. 보호자 계정 생성 → 자녀 확정 시점에 regular_recommended 큐잉(체험수업권은 없음)", async ({ page, baseURL }) => {
+    test.setTimeout(60000);
+    await redeemAndCreateAccount(page, baseURL, regToken, regGuardianEmail);
+    const cardId = psql(
+      `select id from consultations where family_root_consultation_id = '${regConsultationId}' and is_child_onboarding_card;`
+    );
+    regChildId = psql(`select child_id from consultations where id = '${cardId}';`);
+    expect(regChildId).toMatch(/^[0-9a-f-]{36}$/);
+
+    expect(psql(`select trigger_type || '|' || status || '|' || attempt_count from contract_dispatch_jobs where child_id = '${regChildId}';`)).toBe(
+      "regular_recommended|queued|0"
+    );
+    regJobId = psql(`select id from contract_dispatch_jobs where child_id = '${regChildId}';`);
+    // 정규 바로 진행 경로는 체험을 거치지 않는다 — 체험수업권 미지급.
+    expect(
+      psql(
+        `select count(*) from entitlement_grants eg join entitlement_products ep on ep.id = eg.entitlement_product_id
+         where eg.child_id = '${regChildId}' and ep.code = 'trial_lesson_grant';`
+      )
+    ).toBe("0");
+    // 멱등: 같은 이벤트 재발생(결과·child_id 재기록, 재큐잉)은 no-op.
+    psql(`update consultations set outcome = 'regular_recommended', child_id = child_id where id = '${cardId}';`);
+    psql(`select enqueue_contract_dispatch_job('${regChildId}', 'regular_recommended');`);
+    expect(psql(`select count(*) from contract_dispatch_jobs where child_id = '${regChildId}';`)).toBe("1");
+  });
+
+  test("B3. 관리자 큐 화면에 '정규 바로 진행 · 대기 중'으로 보이고 발송은 없다", async ({ page }) => {
+    test.setTimeout(60000);
+    await expectQueueRow(page, regJobId, regStudentName, "정규 바로 진행 · 대기 중");
+    await page.getByTestId("contract-dispatch-queue").getByRole("button", { name: "발송 실행" }).click();
+    await expect(page.getByText("자동 발송이 비활성화되어 있어 아무 것도 처리하지 않았습니다.")).toBeVisible({ timeout: 15000 });
+    expect(psql(`select status || '|' || attempt_count from contract_dispatch_jobs where id = '${regJobId}';`)).toBe("queued|0");
+    expect(psql(`select count(*) from contract_versions where contract_id in (select id from contracts where child_id = '${regChildId}') and docusign_envelope_id is not null;`)).toBe("0");
   });
 });
