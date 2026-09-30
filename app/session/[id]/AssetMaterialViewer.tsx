@@ -8,6 +8,8 @@ import { nextPosition, pageCountOf, prevPosition, type AssetPosition } from "./a
 import PdfPageCanvas, { PdfPageThumbnail } from "./PdfMaterialViewer";
 import VideoMaterialPlayer from "./VideoMaterialPlayer";
 import PdfPageAnnotationLayer, { type PdfPageAnnotationHandle } from "./PdfPageAnnotationLayer";
+import PdfTipLayer, { type PdfTipLayerHandle } from "./PdfTipLayer";
+import PdfTipAdminPanel from "./PdfTipAdminPanel";
 
 // 파일 자료(PDF·영상)를 순서대로 보는 뷰어 — 수업 준비·수업·과목 전체 보기가 같이 쓴다.
 //
@@ -23,6 +25,16 @@ import PdfPageAnnotationLayer, { type PdfPageAnnotationHandle } from "./PdfPageA
 // pdf.js 문서 캐시(PdfMaterialViewer)도 그대로 맞는다. 99쪽짜리 목차 대신 자료 목록 + 페이지
 // 번호 입력으로 이동한다.
 
+// 교사용 팁 보기/숨기기 — 선생님 기기에 선택을 남긴다(저장소를 못 쓰는 환경이면 기본값 = 표시).
+const TIP_VISIBLE_KEY = "alton:pdf-tip-visible";
+function readTipVisible(): boolean {
+  try {
+    return window.localStorage.getItem(TIP_VISIBLE_KEY) !== "0";
+  } catch {
+    return true;
+  }
+}
+
 const signedUrlCache = new Map<string, { url: string; mimeType: string; expiresAt: number }>();
 const positionMemory = new Map<string, AssetPosition>();
 
@@ -34,6 +46,7 @@ export default function AssetMaterialViewer({
   viewerUserId,
   initialPosition,
   extraControls,
+  tipAccess = "none",
 }: {
   assets: MaterialAsset[];
   /** 없으면 읽기 전용(과목 전체 보기·미리보기) — 필기 레이어를 두지 않는다. */
@@ -44,6 +57,11 @@ export default function AssetMaterialViewer({
   initialPosition?: AssetPosition;
   /** 2026-09-22(사용자 지시) — PDF 필기 툴바("필기 시작") 옆에 끼워 넣을 컨트롤(단어 저장 등). */
   extraControls?: React.ReactNode;
+  /**
+   * 교사용 팁(2026-10-01) — view: 선생님·관리자가 팁을 겹쳐 본다(토글), edit: 관리자가 팁을 쓴다,
+   * none: 학생·보호자·그 밖 — 레이어·토글·요청이 아예 없다(서버도 읽기를 거절한다).
+   */
+  tipAccess?: "none" | "view" | "edit";
 }) {
   const memoryKey = `${sessionId ?? "library"}:${assets.map((a) => a.versionId).join(",")}`;
   const [pos, setPosState] = useState<AssetPosition>(
@@ -75,6 +93,29 @@ export default function AssetMaterialViewer({
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [collapsedAssets, setCollapsedAssets] = useState<Set<string>>(new Set());
   const layerRef = useRef<PdfPageAnnotationHandle | null>(null);
+  const tipLayerRef = useRef<PdfTipLayerHandle | null>(null);
+  // null = 아직 기기 선택을 읽지 않음 — 읽기 전에는 레이어를 올리지 않아 숨김 선택인 선생님에게 불필요한 조회가 나가지 않는다.
+  const [tipVisible, setTipVisibleState] = useState<boolean | null>(null);
+  const [tipEditing, setTipEditing] = useState(false);
+  const [tipRefresh, setTipRefresh] = useState(0);
+  const [tipReload, setTipReload] = useState(0);
+  const [tipSaveState, setTipSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  useEffect(() => {
+    if (tipAccess !== "view") return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTipVisibleState(readTipVisible());
+  }, [tipAccess]);
+  function toggleTips() {
+    setTipVisibleState((v) => {
+      const next = !(v ?? true);
+      try {
+        window.localStorage.setItem(TIP_VISIBLE_KEY, next ? "1" : "0");
+      } catch {
+        // 저장소를 못 써도 이번 화면에서는 동작한다.
+      }
+      return next;
+    });
+  }
   const frameRef = useRef<HTMLDivElement | null>(null);
 
   const asset = assets[pos.assetIndex];
@@ -135,12 +176,13 @@ export default function AssetMaterialViewer({
     async (next: AssetPosition | null) => {
       if (!next) return;
       setNavError(null);
-      const layer = layerRef.current;
-      if (layer && layer.hasUnsaved()) {
-        const ok = await layer.flush();
-        if (!ok) {
-          setNavError("저장되지 않은 필기가 있어 이동하지 않았습니다. 저장을 다시 시도한 뒤 이동하세요.");
-          return;
+      for (const layer of [layerRef.current, tipLayerRef.current]) {
+        if (layer && layer.hasUnsaved()) {
+          const ok = await layer.flush();
+          if (!ok) {
+            setNavError("저장되지 않은 필기가 있어 이동하지 않았습니다. 저장을 다시 시도한 뒤 이동하세요.");
+            return;
+          }
         }
       }
       setRendered({ width: 0, height: 0 });
@@ -154,6 +196,8 @@ export default function AssetMaterialViewer({
   const signed = urls[asset.versionId];
   const total = pageCountOf(asset);
   const docId = curriculumDocIdOf ? curriculumDocIdOf(asset) : asset.docId;
+  const showTipLayer =
+    asset.kind === "pdf" && ((tipAccess === "view" && tipVisible === true) || (tipAccess === "edit" && tipEditing));
   const canAnnotate = Boolean(sessionId) && asset.kind === "pdf" && (role === "teacher" || role === "student");
 
   return (
@@ -251,6 +295,33 @@ export default function AssetMaterialViewer({
           <p className="text-[12.5px] text-grey-500 mb-2">이 자료의 고정 사본이 기록되지 않아 표시할 수 없습니다.</p>
         )}
 
+        {asset.kind === "pdf" && tipAccess === "edit" && (
+          <div className="mb-2">
+            <button
+              type="button"
+              onClick={() => setTipEditing((v) => !v)}
+              aria-pressed={tipEditing}
+              data-testid="pdf-tip-edit-toggle"
+              className={"text-[12.5px] font-bold px-3 py-1.5 rounded border " + (tipEditing ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")}
+            >
+              {tipEditing ? "팁 편집 끝내기" : "팁 편집"}
+            </button>
+            {tipEditing && tipSaveState === "error" && (
+              <span className="ml-2 text-[12px] text-red">팁이 저장되지 않았습니다. 연결을 확인하고 다시 시도하세요.</span>
+            )}
+          </div>
+        )}
+        {asset.kind === "pdf" && tipAccess === "edit" && tipEditing && (
+          <PdfTipAdminPanel
+            docId={asset.docId}
+            versionId={asset.versionId}
+            page={pos.page}
+            pageCount={total}
+            refreshSignal={tipRefresh}
+            onChanged={() => setTipReload((n) => n + 1)}
+          />
+        )}
+
         <div ref={frameRef} className="relative w-full overflow-auto flex justify-center" style={{ minHeight: fitHeight || undefined }}>
           {asset.kind === "video" ? (
             signed ? <VideoMaterialPlayer url={signed.url} mimeType={signed.mimeType} title={asset.title} /> : <p className="text-[12.5px] text-grey-500">자료를 불러오는 중…</p>
@@ -265,6 +336,32 @@ export default function AssetMaterialViewer({
                 onRendered={onRendered}
                 onError={onError}
               />
+              {showTipLayer && (
+                <PdfTipLayer
+                  key={`tip:${asset.versionId}:${pos.page}:${tipReload}`}
+                  ref={tipLayerRef}
+                  versionId={asset.versionId}
+                  page={pos.page}
+                  mode={tipAccess === "edit" ? "edit" : "view"}
+                  viewerUserId={viewerUserId}
+                  width={rendered.width}
+                  height={rendered.height}
+                  onSaveStateChange={setTipSaveState}
+                  onSaved={() => setTipRefresh((n) => n + 1)}
+                />
+              )}
+              {tipAccess === "view" && asset.kind === "pdf" && tipVisible !== null && (
+                <button
+                  type="button"
+                  onClick={toggleTips}
+                  aria-pressed={tipVisible}
+                  data-testid="pdf-tip-toggle"
+                  className="absolute top-2 left-2 z-[8] text-[11.5px] font-bold px-2 py-1 rounded-lg bg-white/70 backdrop-blur-sm border shadow-sm"
+                  style={{ color: "#7B3FA0", borderColor: "rgba(123,63,160,0.4)" }}
+                >
+                  {tipVisible ? "교사용 팁 숨기기" : "교사용 팁 보기"}
+                </button>
+              )}
               {canAnnotate && sessionId && (
                 <PdfPageAnnotationLayer
                   key={`${asset.versionId}:${pos.page}`}
