@@ -1,7 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const rpcMock = vi.fn();
-vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock }) }));
+const tzEqMock = vi.fn();
+const tzUpdateMock = vi.fn((_payload: unknown) => ({ eq: (...a: unknown[]) => tzEqMock(...a) }));
+vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock, from: () => ({ update: tzUpdateMock }) }) }));
 const syncMock = vi.fn();
 vi.mock("@/lib/consultation/calendar-sync", () => ({ syncOneConsultationCalendarEvent: (...a: unknown[]) => syncMock(...a) }));
 
@@ -13,6 +15,9 @@ describe("예약 링크 서버 액션 — throw 대신 결과값", () => {
   beforeEach(() => {
     rpcMock.mockReset();
     syncMock.mockReset();
+    tzUpdateMock.mockClear();
+    tzEqMock.mockReset();
+    tzEqMock.mockResolvedValue({ error: null });
   });
 
   it("유효 토큰: 슬롯 목록을 그대로 돌려준다", async () => {
@@ -42,17 +47,22 @@ describe("예약 링크 서버 액션 — throw 대신 결과값", () => {
     syncMock.mockImplementation(async () => { throw new Error("google down"); });
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
     expect(await redeemSchedulingLinkAction("t", "2026-10-01T17:00:00Z")).toEqual({ ok: true });
-    expect(syncMock).toHaveBeenCalledWith("c1", { timezone: undefined });
+    expect(syncMock).toHaveBeenCalledWith("c1");
+    expect(tzUpdateMock).not.toHaveBeenCalled();
     spy.mockRestore();
   });
 
-  it("예약 성공: 선택 시간대는 검증해서 동기화에 넘기고, 미지원 값은 무시한다", async () => {
+  it("예약 성공: 선택 시간대는 검증해 행에 저장한 뒤 동기화하고, 미지원 값은 저장하지 않는다", async () => {
     rpcMock.mockResolvedValue({ data: { id: "c1" }, error: null });
     syncMock.mockResolvedValue(undefined);
     await redeemSchedulingLinkAction("t", "2026-10-01T17:00:00Z", "Asia/Seoul");
-    expect(syncMock).toHaveBeenLastCalledWith("c1", { timezone: "Asia/Seoul" });
+    expect(tzUpdateMock).toHaveBeenLastCalledWith({ customer_timezone: "Asia/Seoul" });
+    expect(tzEqMock).toHaveBeenLastCalledWith("id", "c1");
+    expect(syncMock).toHaveBeenLastCalledWith("c1");
+    tzUpdateMock.mockClear();
     await redeemSchedulingLinkAction("t", "2026-10-01T17:00:00Z", "Mars/Base");
-    expect(syncMock).toHaveBeenLastCalledWith("c1", { timezone: undefined });
+    expect(tzUpdateMock).not.toHaveBeenCalled();
+    expect(syncMock).toHaveBeenLastCalledWith("c1");
     expect(rpcMock).toHaveBeenLastCalledWith("redeem_consultation_scheduling_link", { p_token: "t", p_starts_at: "2026-10-01T17:00:00Z" });
   });
 

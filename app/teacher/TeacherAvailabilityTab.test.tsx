@@ -135,4 +135,23 @@ describe("TeacherAvailabilityTab", () => {
     fireEvent.click(screen.getByText("삭제"));
     await waitFor(() => expect(onRemoveException).toHaveBeenCalledWith("ex-partial"));
   });
+
+  it("시간대가 저장돼 있지 않으면 안내를 보이고, 저장 시도는 서버 호출 없이 안내 문구로 막는다", async () => {
+    const onAddRule = vi.fn().mockResolvedValue("rule1");
+    const onOpenTimezoneSettings = vi.fn();
+    render(<TeacherAvailabilityTab {...baseProps} timezoneSaved={false} onAddRule={onAddRule} onOpenTimezoneSettings={onOpenTimezoneSettings} />);
+    expect(screen.getByTestId("availability-timezone-required")).toHaveTextContent("먼저 내 시간대를 설정");
+    fireEvent.click(screen.getByText("시간대 설정하기"));
+    expect(onOpenTimezoneSettings).toHaveBeenCalled();
+    fireEvent.click(screen.getByText("휴무 일정 등록"));
+    fireEvent.click(screen.getByText("이 날짜 휴무로"));
+    await waitFor(() => expect(screen.getAllByText(/먼저 내 시간대를 설정/).length).toBeGreaterThan(1));
+    expect(baseProps.onAddException).not.toHaveBeenCalled();
+    expect(onAddRule).not.toHaveBeenCalled();
+  });
+
+  it("시간대가 저장돼 있으면 안내가 없다", () => {
+    render(<TeacherAvailabilityTab {...baseProps} timezoneSaved />);
+    expect(screen.queryByTestId("availability-timezone-required")).toBeNull();
+  });
 });

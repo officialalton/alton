@@ -101,6 +101,7 @@ export default async function TeacherHomePage({
       availabilityRules={availabilityRules}
       availabilityExceptions={availabilityExceptions}
       availabilityTimezone={availabilityTimezone}
+      timezoneSaved={Boolean(teacherProfile?.timezone)}
       lessonSchedule={lessonSchedule}
       materialsLibraryTree={materialsLibraryTree}
       vocabOverview={vocabOverview}

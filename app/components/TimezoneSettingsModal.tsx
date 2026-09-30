@@ -9,6 +9,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TIMEZONE_OPTIONS } from "@/lib/timezone";
+import { nearestSupportedTimezone } from "@/lib/schedule-timezone";
 import {
   getMyTimezoneSettings,
   updateMyTimezone,
@@ -18,10 +19,13 @@ import {
 export default function TimezoneSettingsModal({
   onClose,
   showHouseholdDefault,
+  suggestBrowserTimezone = false,
 }: {
   onClose: () => void;
   /** 학부모 포털에서만 "가족 기본 시간대" 섹션을 보여준다. */
   showHouseholdDefault: boolean;
+  /** 저장된 개인 시간대가 없을 때 브라우저 감지 값(지원 목록 중 가장 가까운 것)을 미리 선택하고, 해제 버튼을 숨긴다(선생님 온보딩). */
+  suggestBrowserTimezone?: boolean;
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -38,14 +42,28 @@ export default function TimezoneSettingsModal({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [suggested, setSuggested] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     getMyTimezoneSettings().then((s) => {
       if (cancelled) return;
       const resolvedHousehold = s.householdDefaultTimezone ?? "America/Los_Angeles";
-      setPersonal(s.profileTimezone ?? resolvedHousehold);
-      setHasOverride(s.profileTimezone != null);
+      if (suggestBrowserTimezone && s.profileTimezone == null) {
+        // 마운트 뒤(effect)에만 브라우저 값을 읽는다 — hydration 안전.
+        let browser: string | undefined;
+        try {
+          browser = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        } catch {
+          browser = undefined;
+        }
+        setPersonal(nearestSupportedTimezone(browser));
+        setHasOverride(true);
+        setSuggested(true);
+      } else {
+        setPersonal(s.profileTimezone ?? resolvedHousehold);
+        setHasOverride(s.profileTimezone != null);
+      }
       setHousehold(resolvedHousehold);
       setHouseholdId(s.householdId);
       setIsPrimaryGuardian(s.isPrimaryGuardian);
@@ -54,6 +72,7 @@ export default function TimezoneSettingsModal({
     return () => {
       cancelled = true;
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleSave() {
@@ -108,7 +127,9 @@ export default function TimezoneSettingsModal({
             <div className="mb-5">
               <p className="text-[12.5px] font-semibold text-ink mb-1">내 개인 시간대</p>
               <p className="text-[11.5px] text-grey-400 mb-2">
-                {hasOverride
+                {suggested && !done
+                  ? "브라우저에서 감지한 시간대를 미리 선택했습니다. 맞는지 확인하고 저장해 주세요."
+                  : hasOverride
                   ? "개인 시간대를 직접 고정했습니다. 가족 기본값이 바뀌어도 이 값이 유지됩니다."
                   : "현재 가족 기본값을 따르고 있습니다. 다른 시간대를 선택하면 개인 시간대로 고정됩니다."}
               </p>
@@ -124,7 +145,7 @@ export default function TimezoneSettingsModal({
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
-              {hasOverride && (
+              {hasOverride && !suggestBrowserTimezone && (
                 <button
                   type="button"
                   onClick={() => {

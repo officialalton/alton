@@ -41,8 +41,8 @@ type ConsultationRow = {
   consent_version_id: string | null;
   confirmation_email_content_hash: string | null;
   admissions_consultant_id: string | null;
-  /** 고객이 예약 링크에서 고른 표시 시간대(메모리 전용 — 즉시 동기화 경로에서만 채워진다). */
-  display_timezone?: string;
+  /** 고객이 예약 링크에서 고른 표시 시간대(consultations.customer_timezone, null = 기본값). 모든 동기화 경로가 행에서 읽는다. */
+  customer_timezone?: string | null;
 };
 
 /** 배정된 컨설턴트가 있으면 그 사람의 실제 이메일을, 없으면 기존 회사 계정을 organizer로 쓴다. */
@@ -113,7 +113,7 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
   if (params.row.confirmation_email_content_hash === contentHash) return; // 같은 실패로 중복 발송 안 함
 
   const startsAt = new Date(params.row.starts_at);
-  const tz = params.row.display_timezone ?? DEFAULT_TIMEZONE;
+  const tz = params.row.customer_timezone ?? DEFAULT_TIMEZONE;
   const formatted = startsAt.toLocaleString("ko-KR", { timeZone: tz, dateStyle: "full", timeStyle: "short" });
 
   // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
@@ -143,7 +143,7 @@ async function processOneConsultation(
 ): Promise<{ createdEventId: string | null }> {
   const startsAt = new Date(row.starts_at);
   const endsAt = new Date(row.ends_at);
-  const tz = row.display_timezone ?? DEFAULT_TIMEZONE;
+  const tz = row.customer_timezone ?? DEFAULT_TIMEZONE;
 
   let googleEventId = row.google_event_id;
   let meetLink = row.google_meet_link;
@@ -169,7 +169,7 @@ async function processOneConsultation(
       description:
         `Alton Education 1:1 상담입니다. ` +
         `일정 변경·취소는 담당자에게 문의해 주세요 — 변경 시 이 캘린더 일정이 자동으로 갱신됩니다.` +
-        (row.display_timezone
+        (row.customer_timezone
           ? `\n상담 일시: ${startsAt.toLocaleString("ko-KR", { timeZone: tz, dateStyle: "full", timeStyle: "short" })} (${timezoneLabel(tz)})`
           : ""),
       timezone: tz,
@@ -265,7 +265,7 @@ export const scheduleConsultationCalendarResync = (consultationId: string): void
 export const adminForceResyncConsultationCalendar = (consultationId: string): Promise<SyncOutcome> => kit.forceResync(consultationId);
 
 /** 확정된(scheduled) 상담 하나를 즉시 동기화한다 — 관리자 수락/시간변경 직후 호출. */
-export async function syncOneConsultationCalendarEvent(consultationId: string, opts?: { timezone?: string }): Promise<void> {
+export async function syncOneConsultationCalendarEvent(consultationId: string): Promise<void> {
   const admin = createAdminClient();
 
   // 조건부 UPDATE 낙관적 잠금 + 10분 임대 — 즉시 호출 경로·즉시 재시도·일 1회 크론이 동시에 같은 상담을 건드려도 하나만 처리한다.
@@ -281,10 +281,7 @@ export async function syncOneConsultationCalendarEvent(consultationId: string, o
     .maybeSingle();
 
   if (!claimed) return;
-  const outcome = await kit.processClaimed(
-    admin,
-    { ...(claimed as ConsultationRow), ...(opts?.timezone ? { display_timezone: opts.timezone } : {}) },
-  );
+  const outcome = await kit.processClaimed(admin, claimed as ConsultationRow);
   // 실패하면 응답을 막지 않고 곧바로 한 번 더 시도한다(일시 오류 회수). 5회에 이르면 멈춘다.
   if (outcome === "failed") scheduleConsultationCalendarResync(consultationId);
 }

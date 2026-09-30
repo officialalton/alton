@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
+import { TEACHER_TIMEZONE_BANNER_TEXT } from "@/lib/teacher-timezone";
 import TeacherHomeDashboard from "./TeacherHomeDashboard";
 import type { TeacherDashboardData } from "./dashboard-data";
 import CurriculumTab from "./CurriculumTab";
@@ -78,6 +79,7 @@ export default function TeacherShell({
   availabilityRules,
   availabilityExceptions,
   availabilityTimezone,
+  timezoneSaved = true,
   lessonSchedule,
   materialsLibraryTree,
   vocabOverview,
@@ -93,6 +95,8 @@ export default function TeacherShell({
   availabilityRules: TeacherAvailabilityRuleRow[];
   availabilityExceptions: AvailabilityExceptionRow[];
   availabilityTimezone: string;
+  /** profiles.timezone 이 저장돼 있는지 — false 면 온보딩 배너를 띄우고 가능 시간 저장을 막는다(보기·다른 탭은 그대로). */
+  timezoneSaved?: boolean;
   lessonSchedule: TeacherLessonScheduleItem[];
   materialsLibraryTree: LibrarySubjectTree[];
   vocabOverview: TeacherVocabOverview;
@@ -231,6 +235,7 @@ export default function TeacherShell({
       {timezoneModalOpen && (
         <TimezoneSettingsModal
           showHouseholdDefault={false}
+          suggestBrowserTimezone={!timezoneSaved}
           onClose={() => setTimezoneModalOpen(false)}
         />
       )}
@@ -273,6 +278,22 @@ export default function TeacherShell({
             전부 같은 프레임(영어 제목 + 가운데 정렬 고정폭 컬럼) 안에서
             렌더링된다. 제목 위치·컬럼 폭·서브탭 스타일만 통일한다. */}
         <div className="flex-1">
+        {!timezoneSaved && (
+          <div
+            role="alert"
+            data-testid="teacher-timezone-banner"
+            className="mx-4 md:mx-8 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border-[1.5px] border-red/40 bg-red/5 px-4 py-3"
+          >
+            <p className="text-[13px] font-semibold text-ink">{TEACHER_TIMEZONE_BANNER_TEXT}</p>
+            <button
+              type="button"
+              onClick={() => setTimezoneModalOpen(true)}
+              className="shrink-0 rounded-lg bg-red px-3.5 py-2 text-[13px] font-semibold text-white"
+            >
+              시간대 설정하기
+            </button>
+          </div>
+        )}
         {activeTab === "home" ? (
           <TeacherHomeDashboard
             data={dashboard}
@@ -337,6 +358,8 @@ export default function TeacherShell({
               initialRules={availabilityRules}
               initialExceptions={availabilityExceptions}
               timezone={availabilityTimezone}
+              timezoneSaved={timezoneSaved}
+              onOpenTimezoneSettings={() => setTimezoneModalOpen(true)}
               onAddRule={addTeacherAvailabilityRule}
               onRemoveRule={removeTeacherAvailabilityRule}
               onAddException={addTeacherAvailabilityException}

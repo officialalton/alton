@@ -1,5 +1,6 @@
 "use client";
 
+import { TEACHER_TIMEZONE_REQUIRED_MESSAGE } from "@/lib/teacher-timezone";
 import { useEffect, useMemo, useState } from "react";
 import type { TeacherAvailabilityRuleRow, AvailabilityExceptionRow } from "./availability-actions";
 import type { ExternalBusyBlock } from "./lesson-schedule-actions";
@@ -15,6 +16,9 @@ export type TeacherAvailabilityTabProps = {
   initialRules: TeacherAvailabilityRuleRow[];
   initialExceptions: AvailabilityExceptionRow[];
   timezone: string;
+  /** false 면(저장된 시간대 없음) 규칙·휴무 저장을 막고 안내한다. 기본 true. */
+  timezoneSaved?: boolean;
+  onOpenTimezoneSettings?: () => void;
   onAddRule: (input: { dayOfWeek: number; startTimeLocal: string; endTimeLocal: string; timezone: string; effectiveFrom: string }) => Promise<string>;
   onRemoveRule: (ruleId: string) => Promise<void>;
   onAddException: (input: {
@@ -45,12 +49,23 @@ export default function TeacherAvailabilityTab({
   initialRules,
   initialExceptions,
   timezone,
-  onAddRule,
+  timezoneSaved = true,
+  onOpenTimezoneSettings,
+  onAddRule: onAddRuleProp,
   onRemoveRule,
-  onAddException,
+  onAddException: onAddExceptionProp,
   onRemoveException,
   onLoadExternalBusy,
 }: TeacherAvailabilityTabProps) {
+  // 시간대가 저장돼 있지 않으면 서버 호출 전에 막는다(서버 액션도 같은 검사를 다시 한다).
+  const onAddRule: typeof onAddRuleProp = async (input) => {
+    if (!timezoneSaved) throw new Error(TEACHER_TIMEZONE_REQUIRED_MESSAGE);
+    return onAddRuleProp(input);
+  };
+  const onAddException: typeof onAddExceptionProp = async (input) => {
+    if (!timezoneSaved) throw new Error(TEACHER_TIMEZONE_REQUIRED_MESSAGE);
+    return onAddExceptionProp(input);
+  };
   const [rules, setRules] = useState(initialRules);
   const [exceptions, setExceptions] = useState(initialExceptions);
   const [dayOfWeek, setDayOfWeek] = useState(1);
@@ -364,6 +379,16 @@ export default function TeacherAvailabilityTab({
         onSelect={setSubtab}
       />
 
+      {!timezoneSaved && (
+        <div role="alert" data-testid="availability-timezone-required" className="mb-4 rounded-lg bg-red/5 px-4 py-3 text-[13px] font-semibold text-red">
+          {TEACHER_TIMEZONE_REQUIRED_MESSAGE}
+          {onOpenTimezoneSettings && (
+            <button type="button" onClick={onOpenTimezoneSettings} className="ml-2 underline">
+              시간대 설정하기
+            </button>
+          )}
+        </div>
+      )}
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
       {message && <div className="mb-4 text-[13px] font-semibold text-ink bg-green/10 rounded-lg px-4 py-3">{message}</div>}
 
