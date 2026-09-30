@@ -6,7 +6,15 @@
 // 여기서는 RLS-scoped 세션 클라이언트를 그대로 쓴다(admin 클라이언트 불필요 — R6 1/N
 // 마이그레이션의 다른 테이블들과 달리 이 두 테이블은 본인 쓰기가 정책으로 이미 허용됨).
 
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { requireUser } from "@/lib/auth";
+import { TEACHER_TIMEZONE_REQUIRED_MESSAGE } from "@/lib/teacher-timezone";
+
+/** 저장된 profiles.timezone 이 없으면 가능 시간·휴무 저장을 막는다(조회·다른 탭은 그대로). */
+async function assertTeacherTimezoneSaved(supabase: SupabaseClient, teacherId: string): Promise<void> {
+  const { data } = await supabase.from("profiles").select("timezone").eq("id", teacherId).maybeSingle();
+  if (!data?.timezone) throw new Error(TEACHER_TIMEZONE_REQUIRED_MESSAGE);
+}
 
 export type AvailabilityRuleInput = {
   dayOfWeek: number;
@@ -39,6 +47,7 @@ function periodsOverlap(
 
 export async function addTeacherAvailabilityRule(input: AvailabilityRuleInput): Promise<string> {
   const { user, supabase } = await requireUser();
+  await assertTeacherTimezoneSaved(supabase, user.id);
 
   // teacher_availability_rules에는 DB exclusion constraint가 없다(같은 선생님이 공유하는
   // 통합 테스트 픽스처와의 락 경합 문제로 서버 액션 검증을 택함 — 마이그레이션 주석 참고).
@@ -109,6 +118,7 @@ export type AvailabilityExceptionInput = {
 
 export async function addTeacherAvailabilityException(input: AvailabilityExceptionInput): Promise<string> {
   const { user, supabase } = await requireUser();
+  await assertTeacherTimezoneSaved(supabase, user.id);
   const { data, error } = await supabase
     .from("teacher_availability_exceptions")
     .insert({

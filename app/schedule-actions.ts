@@ -43,8 +43,14 @@ export async function redeemSchedulingLinkAction(
   // 요구사항: Calendar/Meet 생성 — 실패해도 일정 확정(DB) 자체는 이미 커밋됐다
   // (google_sync_status만 재처리 대상으로 남는 graceful degradation 원칙,
   // lib/consultation/calendar-sync.ts와 동일).
+  // 고객이 고른 시간대는 행에 남겨 재시도·크론·관리자 재동기화·시간 변경도 같은 값을 쓰게 한다(미지원 값은 무시=null 유지).
+  const customerTimezone = sanitizeTimezone(timezone);
+  if (customerTimezone) {
+    const { error: tzError } = await admin.from("consultations").update({ customer_timezone: customerTimezone }).eq("id", consultationId);
+    if (tzError) console.error(JSON.stringify({ type: "consultant_scheduling_link_timezone_save_failed", consultationId, error: tzError.message }));
+  }
   try {
-    await syncOneConsultationCalendarEvent(consultationId, { timezone: sanitizeTimezone(timezone) });
+    await syncOneConsultationCalendarEvent(consultationId);
   } catch (e) {
     console.error(
       JSON.stringify({ type: "consultant_scheduling_link_calendar_sync_failed", consultationId, error: e instanceof Error ? e.message : String(e) })

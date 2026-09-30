@@ -64,6 +64,31 @@ const baseProps = {
   vocabOverview: { students: [], books: [], recentQuizzes: [] },
 };
 
+vi.mock("@/lib/timezone-actions", () => ({
+  getMyTimezoneSettings: vi.fn(async () => ({ profileTimezone: null, householdId: null, householdDefaultTimezone: null, isPrimaryGuardian: false, resolvedTimezone: "America/Los_Angeles" })),
+  updateMyTimezone: vi.fn(async () => {}),
+  updateHouseholdDefaultTimezone: vi.fn(async () => {}),
+}));
+
+describe("TeacherShell — 시간대 온보딩", () => {
+  it("저장된 시간대가 없으면 배너를 보이고, 누르면 브라우저 감지값이 미리 선택된 시간대 모달이 열린다(다른 탭은 그대로 보임)", async () => {
+    const spy = vi.spyOn(Intl.DateTimeFormat.prototype, "resolvedOptions").mockReturnValue({ timeZone: "Asia/Seoul" } as Intl.ResolvedDateTimeFormatOptions);
+    render(<TeacherShell {...baseProps} timezoneSaved={false} />);
+    expect(screen.getByTestId("teacher-timezone-banner")).toBeInTheDocument();
+    expect(screen.getByText("박서연 선생님, 안녕하세요")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("시간대 설정하기"));
+    const select = (await screen.findByDisplayValue(/Asia\/Seoul/)) as HTMLSelectElement;
+    expect(select.value).toBe("Asia/Seoul");
+    expect(screen.queryByText(/개인 설정 해제/)).toBeNull();
+    spy.mockRestore();
+  });
+
+  it("이미 시간대가 있는 선생님(기본값)에게는 배너가 없다", () => {
+    render(<TeacherShell {...baseProps} />);
+    expect(screen.queryByTestId("teacher-timezone-banner")).toBeNull();
+  });
+});
+
 describe("TeacherShell", () => {
   // 2026-09-12(P4-2): '정산' 탭이 실제로 구현되어 사이드바에 노출된다 —
   // 이전(2026-09-10 UI/UX 정리 1차)에는 미구현이라 숨겨두고 이 스펙이 그 부재를

@@ -7,8 +7,14 @@ const deleteEqEqMock = vi.fn();
 // 만들어주되, eq/order 어느 쪽으로 이어지든 그 값을 반환하도록 구성한다.
 const selectResultMock = vi.fn();
 
+// 저장된 profiles.timezone (기본: 저장됨). 테스트가 null 로 바꿔 미설정 선생님을 흉내낸다.
+const profileTimezoneMock = vi.fn();
+
 const supabaseMock = {
   from: vi.fn((table: string) => {
+    if (table === "profiles") {
+      return { select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { timezone: profileTimezoneMock() }, error: null }) }) }) };
+    }
     if (table === "teacher_availability_rules" || table === "teacher_availability_exceptions") {
       return {
         insert: () => ({ select: () => ({ single: insertSelectSingleMock }) }),
@@ -35,6 +41,7 @@ vi.mock("@/lib/auth", () => ({
 
 beforeEach(() => {
   vi.clearAllMocks();
+  profileTimezoneMock.mockReturnValue("Asia/Seoul");
   insertSelectSingleMock.mockResolvedValue({ data: { id: "rule1" }, error: null });
   deleteEqEqMock.mockResolvedValue({ error: null });
   // 기본값: 겹침 검증에서 기존 규칙 없음(no overlap) — insert가 그대로 진행됨.
@@ -135,5 +142,20 @@ describe("listMyAvailabilityRules", () => {
     expect(rules).toEqual([
       { id: "rule1", dayOfWeek: 1, startTimeLocal: "09:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01", effectiveUntil: null },
     ]);
+  });
+});
+
+describe("시간대 미설정 선생님 — 가능 시간·휴무 저장 차단", () => {
+  it("저장된 시간대가 없으면 규칙·휴무 모두 안내 문구로 거절하고 아무것도 insert 하지 않는다", async () => {
+    profileTimezoneMock.mockReturnValue(null);
+    const { addTeacherAvailabilityRule, addTeacherAvailabilityException } = await import("./availability-actions");
+    const { TEACHER_TIMEZONE_REQUIRED_MESSAGE } = await import("@/lib/teacher-timezone");
+    await expect(
+      addTeacherAvailabilityRule({ dayOfWeek: 1, startTimeLocal: "09:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01" })
+    ).rejects.toThrow(TEACHER_TIMEZONE_REQUIRED_MESSAGE);
+    await expect(
+      addTeacherAvailabilityException({ exceptionDate: "2026-12-25", kind: "blocked", timezone: "America/Los_Angeles" })
+    ).rejects.toThrow("먼저 내 시간대를 설정");
+    expect(insertSelectSingleMock).not.toHaveBeenCalled();
   });
 });

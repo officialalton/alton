@@ -77,14 +77,14 @@ function createUser(id: string, label: string, role: string) {
     insert into profiles (id, role, name) values ('${id}', '${role}', '${TAG}-${label}');`);
 }
 
-type Opts = { consultant?: string; status?: string; event?: string | null; sync?: string; retries?: number };
+type Opts = { tz?: string; consultant?: string; status?: string; event?: string | null; sync?: string; retries?: number };
 function insertConsultation(o: Opts = {}): string {
   const t = nextSlot();
   const status = o.status ?? "scheduled";
   return psql(`insert into consultations (source, contact_name, contact_email, contact_phone, category, status, requested_at,
-      admissions_consultant_id, starts_at, ends_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count)
+      admissions_consultant_id, starts_at, ends_at, google_event_id, google_meet_link, google_sync_status, google_sync_retry_count, customer_timezone)
     values ('homepage','${TAG}','${TAG}-c@example.com','010','family','${status}',now(),'${o.consultant ?? CA}','${t.s}','${t.e}',
-      ${o.event ? `'${o.event}'` : "null"}, ${o.event ? `'https://meet.google.com/aaa-bbbb-ccc'` : "null"}, '${o.sync ?? "pending"}', ${o.retries ?? 0}) returning id;`).split("\n")[0];
+      ${o.event ? `'${o.event}'` : "null"}, ${o.event ? `'https://meet.google.com/aaa-bbbb-ccc'` : "null"}, '${o.sync ?? "pending"}', ${o.retries ?? 0}, ${o.tz ? `'${o.tz}'` : "null"}) returning id;`).split("\n")[0];
 }
 const row = (id: string) => JSON.parse(psql(`select row_to_json(c) from consultations c where id='${id}'`)) as Record<string, unknown>;
 const rowsCreated: string[] = [];
@@ -174,6 +174,53 @@ describe("첫 상담 Calendar 동기화 실패 → 즉시 재시도", () => {
     scheduleConsultationCalendarResync(id);
     expect(afterQueue).toHaveLength(0);
     expect((await runConsultationCalendarResyncBatch()).enabled).toBe(false);
+  });
+});
+
+describe("고객 시간대(customer_timezone) — 모든 동기화 경로가 행에서 읽는다", () => {
+  const SEOUL = "Asia/Seoul";
+  it("DB 가 지원 목록 밖 값을 거부하고 null 은 허용한다", () => {
+    const id = mk();
+    expect(() => psql(`update consultations set customer_timezone='Mars/Base' where id='${id}'`)).toThrow();
+    psql(`update consultations set customer_timezone='${SEOUL}' where id='${id}'`);
+    psql(`update consultations set customer_timezone=null where id='${id}'`);
+  });
+
+  it("첫 동기화·즉시 재시도(메모리 옵션 없이)·크론·관리자 재동기화·시간 변경 PATCH 모두 저장된 시간대를 쓴다", async () => {
+    const id = mk({ tz: SEOUL });
+    createMock.mockRejectedValueOnce(new Error("Calendar API 요청 실패 (status 500)"));
+    await syncOneConsultationCalendarEvent(id);
+    expect(createMock.mock.calls[0][0]).toMatchObject({ timezone: SEOUL });
+    await afterQueue[0](); // 즉시 재시도
+    expect(createMock.mock.calls[1][0]).toMatchObject({ timezone: SEOUL });
+    expect(row(id).google_sync_status).toBe("synced");
+
+    psql(`update consultations set google_sync_status='failed' where id='${id}'`);
+    await runConsultationCalendarResyncBatch(50); // 크론 — 이벤트가 있으니 PATCH
+    expect(patchMock.mock.calls.at(-1)![0]).toMatchObject({ timezone: SEOUL });
+
+    psql(`update consultations set google_sync_status='failed', google_sync_retry_count=5 where id='${id}'`);
+    await adminForceResyncConsultationCalendar(id);
+    expect(patchMock.mock.calls.at(-1)![0]).toMatchObject({ timezone: SEOUL });
+
+    const t = nextSlot();
+    psql(`update consultations set starts_at='${t.s}', ends_at='${t.e}', google_sync_status='failed' where id='${id}'`);
+    await resyncConsultationCalendarNow(id);
+    expect(patchMock.mock.calls.at(-1)![0]).toMatchObject({ timezone: SEOUL, startsAt: new Date(t.s) });
+  });
+
+  it("null 이면 기존 기본값(America/Los_Angeles)", async () => {
+    const id = mk();
+    await syncOneConsultationCalendarEvent(id);
+    expect(createMock.mock.calls[0][0]).toMatchObject({ timezone: "America/Los_Angeles" });
+  });
+
+  it("최종 실패 fallback 메일도 저장된 시간대로 표기한다", async () => {
+    const id = mk({ tz: SEOUL, sync: "failed", retries: 4 });
+    createMock.mockRejectedValue(new Error("Calendar API 요청 실패 (status 500)"));
+    await resyncConsultationCalendarNow(id);
+    expect(sendEmailMock).toHaveBeenCalledTimes(1);
+    expect(String(sendEmailMock.mock.calls[0][0].html)).toContain("서울");
   });
 });
 
