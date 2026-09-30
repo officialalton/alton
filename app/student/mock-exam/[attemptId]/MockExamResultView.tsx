@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport, weakSkills } from "@/lib/mock-exam/report";
-import { estimateScore, SCORE_DISCLAIMER } from "@/lib/mock-exam/score-estimate";
+import { SCORE_DISCLAIMER } from "@/lib/mock-exam/score-estimate";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
@@ -136,8 +136,8 @@ export function ItemDetail({
 
 export default function MockExamResultView({ attempt, readOnly }: { attempt: MockExamAttemptDetail; readOnly: boolean }) {
   const report = computeMockExamReport(attempt.items);
-  // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 경로·난이도는 계산에 쓰지 않는다.
-  const scoreEstimate = attempt.format === "mst" ? estimateScore(report.bySection) : null;
+  // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 서버가 계산해 범위만 내려준다(경로·난이도는 클라이언트에 없다).
+  const scoreEstimate = attempt.format === "mst" ? (attempt.scoreEstimate ?? null) : null;
   const itemsById = useMemo(() => new Map(attempt.items.map((i) => [i.setItemId, i])), [attempt.items]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selected = selectedId ? (itemsById.get(selectedId) ?? null) : null;
