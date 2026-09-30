@@ -28,6 +28,7 @@ import type { HomeworkItem } from "./homework-data";
 import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
+import { fmtIntl } from "@/lib/format-datetime";
 
 // R9(Task 4) — 세션 중 신규 문제 생성 탭("문제 생성")은 여기서 제거됐다.
 // AI 문제 생성은 이제 관리자 콘텐츠 에디터(app/admin/CurriculumDocEditor.tsx)
@@ -692,19 +693,19 @@ function StatusBar({
 
 function formatKoreanDateTime(iso: string | null) {
   if (!iso) return null;
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }
 
 function formatKoreanTime(date: Date) {
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(date, {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(date);
+  });
 }

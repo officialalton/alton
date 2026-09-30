@@ -8,6 +8,7 @@ import {
   listTeacherPayoutAccountsAction,
   type TeacherPayoutAccountListItem,
 } from "./teacher-payout-accounts-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const FIELD_LABEL: Record<string, string> = {
   account_holder_name: "예금주",
@@ -68,7 +69,7 @@ export default function TeacherPayoutAccountsPanel() {
                 {a.country ? ` · ${a.country}` : ""}
               </div>
               <div className="text-[11.5px] text-grey-400 mt-1">
-                최종 수정 {new Date(a.updatedAt).toLocaleString("ko-KR")}
+                최종 수정 {fmtDateTime(a.updatedAt)}
               </div>
             </div>
             <button
@@ -87,7 +88,7 @@ export default function TeacherPayoutAccountsPanel() {
               ) : (
                 a.changes.map((c) => (
                   <li key={c.id} className="text-[11.5px] text-grey-500">
-                    {new Date(c.createdAt).toLocaleString("ko-KR")} · {c.action === "created" ? "등록" : "수정"}
+                    {fmtDateTime(c.createdAt)} · {c.action === "created" ? "등록" : "수정"}
                     {c.changedFields.length > 0
                       ? ` · ${c.changedFields.map((f) => FIELD_LABEL[f] ?? f).join(", ")}`
                       : ""}

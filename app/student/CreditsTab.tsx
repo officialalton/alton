@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { requestParentPayment } from "./credits-actions";
 import type { CreditsData } from "./credits-data";
+import { fmtIntl } from "@/lib/format-datetime";
 
 function formatDate(iso: string | null): string {
   if (!iso) return "-";
-  return new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(new Date(iso));
+  return fmtIntl(new Date(iso), { year: "numeric", month: "long", day: "numeric" });
 }
 
 export default function CreditsTab({ data }: { data: CreditsData }) {

@@ -9,6 +9,7 @@ import {
   restoreHouseholdAction,
   type ArchivedHouseholdListItem,
 } from "./household-archive-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 export default function ArchivedHouseholdsList() {
   const [items, setItems] = useState<ArchivedHouseholdListItem[] | null>(null);
@@ -63,7 +64,7 @@ export default function ArchivedHouseholdsList() {
                 자녀: {h.childrenNames.length ? h.childrenNames.join(", ") : "없음"}
               </div>
               <div className="text-[11.5px] text-grey-400 mt-1">
-                {new Date(h.archivedAt).toLocaleString("ko-KR")} 아카이브
+                {fmtDateTime(h.archivedAt)} 아카이브
                 {h.archivedByName ? ` · 처리 ${h.archivedByName}` : ""}
               </div>
               <div className="text-[11.5px] text-grey-400">

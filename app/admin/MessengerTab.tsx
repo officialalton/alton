@@ -25,6 +25,7 @@ import {
   type TeacherStaffInquiryListItem,
   type TeacherStaffMessage,
 } from "./teacher-staff-messenger-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-29 — Inquiries 메인 탭을 없애고 문의함(household_messages)을 세 번째
 // 채널 '가족'으로 옮겼다(보호자·컨설턴트·학생 ↔ 관리자 가족 스레드, 동작 동일).
@@ -245,7 +246,7 @@ function ConsultantMessengerPanel() {
               </div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
-            <span className="text-[11px] text-grey-500">{new Date(i.lastMessageAt).toLocaleString("ko-KR")}</span>
+            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt)}</span>
           </button>
         ))
       )}
@@ -433,7 +434,7 @@ function TeacherMessengerPanel() {
               </div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
-            <span className="text-[11px] text-grey-500">{new Date(i.lastMessageAt).toLocaleString("ko-KR")}</span>
+            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt)}</span>
           </button>
         ))
       )}

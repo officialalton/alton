@@ -12,6 +12,7 @@ import {
   type MeetingRequest,
   type GuardianMeetingRequestReview,
 } from "./inquiry-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
   requested: "신청됨",
@@ -24,7 +25,7 @@ const MEETING_STATUS_LABEL: Record<string, string> = {
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
 }
 
 function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {

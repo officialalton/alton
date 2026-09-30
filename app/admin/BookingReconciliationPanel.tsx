@@ -28,6 +28,7 @@ import {
   type TeacherReconciliationResult,
   type BookingReconciliationDashboard,
 } from "./booking-actions";
+import { fmtIntl } from "@/lib/format-datetime";
 
 const FINAL_STATUS_LABEL: Record<string, string> = {
   completed: "정상 완료",
@@ -57,9 +58,9 @@ const INCIDENT_REPORT_TYPE_LABEL: Record<string, string> = {
 };
 
 function formatDateTime(iso: string): string {
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
-  }).format(new Date(iso));
+  });
 }
 
 const STATUS_LABEL: Record<string, string> = {

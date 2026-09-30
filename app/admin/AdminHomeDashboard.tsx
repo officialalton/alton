@@ -1,4 +1,5 @@
 import type { AdminDashboardData } from "./dashboard-data";
+import { fmtIntl } from "@/lib/format-datetime";
 
 type AdminNavTarget = "consult" | "matching" | "users";
 
@@ -146,11 +147,11 @@ function Empty({ text }: { text: string }) {
 
 function formatKoreanDateTime(iso: string | null) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }

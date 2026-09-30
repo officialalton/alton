@@ -1,6 +1,7 @@
 "use client";
 
 import type { FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-18 — 홈 "종합 리뷰"/"수업 리뷰" 서브탭 공용 카드. 확정된 텍스트만
 // 보여준다(초안은 애초에 이 데이터 소스에 없음 — home-reviews-actions.ts 참고).
@@ -13,7 +14,7 @@ export default function FamilyReviewCard({ review }: { review: FamilyLessonRevie
           {review.lessonType === "trial" ? "체험 수업" : "정규 수업"} 리뷰
         </span>
         <span className="text-[11px] text-grey-500">
-          {new Date(review.finalizedAt).toLocaleDateString("ko-KR")}
+          {fmtDate(review.finalizedAt)}
         </span>
       </div>
       <p className="text-[12.5px] text-ink whitespace-pre-wrap mt-1.5">{review.finalText}</p>

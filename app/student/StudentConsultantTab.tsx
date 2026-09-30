@@ -18,6 +18,7 @@ import {
   type MyAssignedConsultant,
 } from "./consultant-schedule-actions";
 import type { MeetingRequest, GuardianMeetingRequestReview } from "@/app/parent/inquiry-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
   requested: "신청됨",
@@ -30,7 +31,7 @@ const MEETING_STATUS_LABEL: Record<string, string> = {
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
 }
 
 export default function StudentConsultantTab() {

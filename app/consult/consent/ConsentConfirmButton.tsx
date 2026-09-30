@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { confirmConsultConsent } from "@/app/consult-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 export default function ConsentConfirmButton({
   token,
@@ -17,7 +18,7 @@ export default function ConsentConfirmButton({
   if (confirmedAt) {
     return (
       <p className="text-[13.5px] font-bold text-ink">
-        확인 완료 ({new Date(confirmedAt).toLocaleString("ko-KR")}) — 다시 확인하실 필요가 없습니다.
+        확인 완료 ({fmtDateTime(confirmedAt)}) — 다시 확인하실 필요가 없습니다.
       </p>
     );
   }

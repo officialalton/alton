@@ -18,6 +18,7 @@ import {
 } from "./direct-account-actions";
 import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 import { useTabCachedData } from "./use-tab-cached-data";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 // "계정 생성"도 상태 변화가 잦은 화면으로 분류해 TTL 10초를 쓴다(신규
 // 현황·정규 계약 발송과 동일).
@@ -47,7 +48,7 @@ const NOTICE_STATUS_LABEL: Record<DirectOnboardingLinkSummary["noticeDeliverySta
 
 function fmt(iso: string | null): string {
   if (!iso) return "-";
-  return new Date(iso).toLocaleString("ko-KR");
+  return fmtDateTime(iso);
 }
 
 export type DirectAccountLinksListHandle = { refresh: () => void };

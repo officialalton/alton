@@ -16,6 +16,7 @@ import {
 } from "./inquiry-and-meeting-actions";
 import MeetingRequestReviewPanel from "./MeetingRequestReviewPanel";
 import { useTabCachedData } from "./use-tab-cached-data";
+import { fmtIntl } from "@/lib/format-datetime";
 
 const INQUIRY_TTL_MS = 30_000;
 export const NEEDS_ACTION = new Set(["requested", "confirming", "scheduling"]);
@@ -53,7 +54,7 @@ function kstLocalToIso(value: string): string {
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "-";
-  return new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+  return fmtIntl(new Date(iso), { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
 
 function MeetingOperationsSkeleton() {

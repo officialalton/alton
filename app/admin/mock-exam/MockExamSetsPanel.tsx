@@ -24,6 +24,7 @@ import type { DifficultyTier } from "@/lib/mock-exam/assemble";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import MockExamSetContentViewer from "@/app/components/MockExamSetContentViewer";
+import { fmtDate } from "@/lib/format-datetime";
 
 const TIER_LABEL: Record<DifficultyTier, string> = { foundation: "기본", standard: "표준", advanced: "상위" };
 const STATUS_LABEL: Record<string, string> = { draft: "초안", published: "공개", archived: "보관" };
@@ -888,8 +889,8 @@ function HistoryTab() {
               <td className="py-2">{r.studentName ?? r.studentId}</td>
               <td>{r.examSetName}</td>
               <td>{STATUS_LABEL[r.status] ?? r.status}</td>
-              <td>{r.dueAt ? new Date(r.dueAt).toLocaleDateString("ko-KR") : "-"}</td>
-              <td>{r.submittedAt ? new Date(r.submittedAt).toLocaleDateString("ko-KR") : "-"}</td>
+              <td>{r.dueAt ? fmtDate(r.dueAt) : "-"}</td>
+              <td>{r.submittedAt ? fmtDate(r.submittedAt) : "-"}</td>
               <td>{r.correctCount !== null ? `${r.correctCount}/${r.totalCount}` : "-"}</td>
             </tr>
           ))}

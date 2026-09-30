@@ -6,6 +6,7 @@ import {
   openCompanyDocumentAction,
   type CompanyDocumentEntry,
 } from "./company-documents-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 // P4-3 4단계 — `문서 > 회사 문서`. 읽기 전용이다.
 //
@@ -26,7 +27,7 @@ function formatDate(value: string | null): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
 }
 
 export default function CompanyDocumentsPanel() {

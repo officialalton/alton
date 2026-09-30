@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { listMyContractDocumentsAction } from "./documents-actions";
 import type { ContractArchiveRow } from "@/app/admin/contract-archive-data";
+import { fmtDate } from "@/lib/format-datetime";
 
 // Phase B(2, 2026-09-23) — Documents 메인 탭. app/admin/ContractArchivePanel.tsx와
 // 같은 라벨·다운로드 흐름을 쓰되(사용자 지시: "기존 계약 문서 정책에 따라"),
@@ -43,7 +44,7 @@ function formatDate(value: string | null): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
 }
 
 export default function DocumentsPanel() {

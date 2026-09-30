@@ -10,6 +10,7 @@ import type {
 import type { ChatMessage } from "./chat-data";
 import ChatPanel from "./ChatPanel";
 import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
+import { fmtIntl } from "@/lib/format-datetime";
 
 type SubView =
   | { type: "list" }
@@ -196,11 +197,11 @@ function ProfileView({
 
 function formatKoreanDateTime(iso: string | null) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }

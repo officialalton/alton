@@ -35,6 +35,7 @@ import PillSubTabs from "@/app/components/PillSubTabs";
 import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
 import { getMyTimezoneSettings } from "@/lib/timezone-actions";
 import { DEFAULT_TIMEZONE } from "@/lib/timezone";
+import { fmtIntl } from "@/lib/format-datetime";
 
 // 요구사항 5(2026-09-03 통합 보완) — Calendar 초대 실패는 다른 종류의 문제(단순 재시도
 // 대기 vs 관리자 개입 필요)와 구분되는 상태·문구로 보여준다.
@@ -81,11 +82,11 @@ const COMPLETION_READINESS_LABEL: Record<string, string> = {
   not_applicable: "-",
 };
 
-function formatDateTime(iso: string | null): string {
+function formatDateTime(iso: string | null, timezone: string): string {
   if (!iso) return "-";
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
-  }).format(new Date(iso));
+  }, timezone);
 }
 
 type CalendarView = "today" | "week" | "month";
@@ -221,8 +222,8 @@ export default function ConsultationSchedulingPanel() {
                 {c.contact_name} · {c.contact_email} {c.contact_phone ? `· ${c.contact_phone}` : ""}
               </p>
               <p className="text-[12.5px] text-grey-500 mt-1">
-                희망 시간: {formatDateTime(c.starts_at)} · 출처: {c.source}
-                {c.hold_expires_at && ` · hold 만료: ${formatDateTime(c.hold_expires_at)}`}
+                희망 시간: {formatDateTime(c.starts_at, timezone)} · 출처: {c.source}
+                {c.hold_expires_at && ` · hold 만료: ${formatDateTime(c.hold_expires_at, timezone)}`}
               </p>
               {c.concerns && <p className="text-[12.5px] text-grey-500 mt-1">문의: {c.concerns}</p>}
               <div className="flex gap-2 mt-3">
@@ -293,7 +294,7 @@ export default function ConsultationSchedulingPanel() {
           return visibleScheduled.map((c) => (
             <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
               <p className="text-[13.5px] font-bold text-ink">
-                {formatDateTime(c.starts_at)} · {c.contact_name}
+                {formatDateTime(c.starts_at, timezone)} · {c.contact_name}
               </p>
               <p className="text-[12.5px] text-grey-500 mt-1">
                 {SYNC_STATUS_LABEL[c.google_sync_status] ?? c.google_sync_status}
@@ -318,7 +319,7 @@ export default function ConsultationSchedulingPanel() {
                   {TRIAL_GRANT_STATUS_LABEL[c.trial_entitlement_grant_status]}
                   {c.trial_entitlement_grant_status === "failed" && c.trial_entitlement_grant_error && ` (${c.trial_entitlement_grant_error})`}
                   {c.trial_entitlement_grant_status === "granted" && c.trial_entitlement_grant_expires_at &&
-                    ` · 만료: ${formatDateTime(c.trial_entitlement_grant_expires_at)}까지 체험수업이 시작해야 사용 가능`}
+                    ` · 만료: ${formatDateTime(c.trial_entitlement_grant_expires_at, timezone)}까지 체험수업이 시작해야 사용 가능`}
                 </p>
               )}
               <div className="flex flex-wrap gap-2 mt-3">
@@ -501,7 +502,7 @@ export default function ConsultationSchedulingPanel() {
               <p className="text-[12.5px] text-grey-700">
                 {s.organizer_email}({s.organizer_role === "consult_organizer" ? "상담 관리자" : "선생님"}) —{" "}
                 <span style={{ color: s.status === "active" ? "#16a34a" : "#b91c1c" }}>{SUBSCRIPTION_STATUS_LABEL[s.status] ?? s.status}</span>
-                {s.expires_at && ` · 만료: ${formatDateTime(s.expires_at)}`}
+                {s.expires_at && ` · 만료: ${formatDateTime(s.expires_at, timezone)}`}
                 {s.last_error && ` · 최근 오류: ${s.last_error}`}
               </p>
               {s.status !== "disabled" && (

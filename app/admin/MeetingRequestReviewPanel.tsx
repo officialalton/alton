@@ -16,6 +16,7 @@ import {
   type MeetingRequestReviewForAdmin,
   type MeetingRequestReviewEdit,
 } from "./meeting-request-review-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const DRIVE_STATUS_LABEL: Record<string, string> = {
   pending: "권한 부여 대기/실패(링크 미노출)",
@@ -98,8 +99,8 @@ export default function MeetingRequestReviewPanel({ meetingRequestId }: { meetin
       </div>
       {isFinal && (
         <p className="text-[11px] text-grey-500 mt-1">
-          확정일 {review.finalizedAt ? new Date(review.finalizedAt).toLocaleString("ko-KR") : "-"}
-          {review.adminEditedAt && ` · 최종 수정 ${new Date(review.adminEditedAt).toLocaleString("ko-KR")}`}
+          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt) : "-"}
+          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt)}`}
         </p>
       )}
 
@@ -120,7 +121,7 @@ export default function MeetingRequestReviewPanel({ meetingRequestId }: { meetin
               {edits.length === 0 && <p className="text-[11px] text-grey-500">수정 이력이 없습니다(아직 확정 후 수정된 적 없음).</p>}
               {edits.map((e) => (
                 <div key={e.id} className="text-[11px] text-grey-500 border-l-2 border-grey-200 pl-2">
-                  {new Date(e.editedAt).toLocaleString("ko-KR")} · {e.editedByName ?? "관리자"}
+                  {fmtDateTime(e.editedAt)} · {e.editedByName ?? "관리자"}
                   {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">이전 내용: {e.previousFinalText}</div>}
                 </div>
               ))}

@@ -2,6 +2,7 @@
 
 import { requireUser } from "@/lib/auth";
 import { loadHomeworkBatch, type HomeworkBatchItem } from "./homework-batch-data";
+import { fmtDate } from "@/lib/format-datetime";
 
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
 
@@ -24,7 +25,7 @@ export async function issueHomeworkBatchAction(
   const subjectId = (keywordRow?.subject_id as string | undefined) ?? null;
   const subjectsField = keywordRow?.subjects as unknown as { name: string } | { name: string }[] | null | undefined;
   const subjectName = (Array.isArray(subjectsField) ? subjectsField[0]?.name : subjectsField?.name) ?? null;
-  const dateLabel = new Date().toLocaleDateString("ko-KR", { month: "long", day: "numeric" });
+  const dateLabel = fmtDate(new Date(), { month: "long", day: "numeric" });
   const label = [dateLabel, subjectName, teacherProfile?.name].filter(Boolean).join(" ") || `${dateLabel} 과제`;
 
   const { data, error } = await supabase.rpc("issue_homework_batch_v2", {

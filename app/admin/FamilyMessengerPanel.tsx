@@ -13,13 +13,14 @@ import {
 } from "./inquiry-and-meeting-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
 import PillSubTabs from "@/app/components/PillSubTabs";
+import { fmtIntl } from "@/lib/format-datetime";
 
 // 문의함은 SSR(initialThreads)로 최초 진입을 채우고, 재진입은 TTL 30초 캐시를 쓴다.
 const INQUIRY_TTL_MS = 30_000;
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "-";
-  return new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date(iso));
+  return fmtIntl(new Date(iso), { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
 }
 
 function InquiryThreadSkeleton() {

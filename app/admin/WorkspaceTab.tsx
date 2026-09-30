@@ -9,6 +9,7 @@ import {
   reactivateTeacher,
   getTeacherActivationChecklist,
 } from "./workspace-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 const STATUS_LABEL: Record<string, string> = {
   not_started: "시작 전",
@@ -233,7 +234,7 @@ export default function WorkspaceTab({
                       {c.satisfied ? "✅" : "⬜"} {CONDITION_LABEL[c.condition] ?? c.condition}
                     </span>
                     <span className="text-grey-400">
-                      {c.evidence_at ? new Date(c.evidence_at).toLocaleDateString("ko-KR") : "—"}
+                      {c.evidence_at ? fmtDate(c.evidence_at) : "—"}
                     </span>
                   </li>
                 ))}

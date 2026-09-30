@@ -32,6 +32,7 @@ import type {
 } from "./consultation-data";
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 type SubTab = "consult" | "contracts" | "accounts" | "scheduling" | "trial" | "consent" | "errors" | "past";
 
@@ -155,7 +156,7 @@ function TrialSection({
                   <span className="text-[11px] font-semibold text-grey-500">({t.status})</span>
                 </div>
                 <div className="text-[12px] text-grey-500">
-                  선생님: {t.teacherName ?? t.teacherId} · {new Date(t.scheduledAt).toLocaleString("ko-KR")}
+                  선생님: {t.teacherName ?? t.teacherId} · {fmtDateTime(t.scheduledAt)}
                 </div>
                 {t.exceptionApprovedBy && (
                   <div className="text-[11px] text-grey-500">예외 승인됨: {t.exceptionReason}</div>
@@ -556,7 +557,7 @@ function ErrorDashboardSection({
             <div key={r.id} className={card + " flex items-center justify-between"}>
               <span className="text-[12.5px] text-ink">
                 {r.childName ?? r.childId ?? "학생 미확인"} · 계약 {r.contractId} ·{" "}
-                {new Date(r.createdAt).toLocaleString("ko-KR")}
+                {fmtDateTime(r.createdAt)}
                 <span className="text-[11px] text-grey-500 ml-2">{r.failureReason}</span>
               </span>
               <button

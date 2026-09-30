@@ -23,6 +23,7 @@ import {
   dispatchPayoutBatchNow,
   recordExternalPayoutTransfer,
 } from "./payout-batches-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 // R10 Task C — 레거시 PayoutsTab(teacher_payouts)을 대체하는 v3 payout_batches
 // 관리자 화면. 법인 설립 전 지급 경계(2026-09-07 정책) 때문에 이 화면에서
@@ -486,7 +487,7 @@ export default function PayoutBatchesTab({
                   ) : (
                     b.auditLog.map((a) => (
                       <div key={a.id} className="text-[12px] text-grey-500 py-0.5">
-                        {new Date(a.createdAt).toLocaleString("ko-KR")} ·{" "}
+                        {fmtDateTime(a.createdAt)} ·{" "}
                         {AUDIT_ACTION_LABEL[a.action] ?? a.action} · {a.actorName ?? "시스템(자동)"}
                         {a.note ? ` · ${a.note}` : ""}
                       </div>

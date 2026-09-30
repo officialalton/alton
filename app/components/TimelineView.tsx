@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { BoardCard } from "@/lib/board/types";
+import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-22(사용자 지시, 재작업) — "이거 말한거야" 스크린샷(Notion 타임라인)처럼
 // 실제 간트 형태로 다시 만든다: 왼쪽에 제목 목록, 오른쪽에 날짜 눈금 + 기간 막대.
@@ -52,7 +53,7 @@ export default function TimelineView({
   const ticks: { left: number; label: string }[] = [];
   for (let i = 0; i < totalDays; i += 7) {
     const d = new Date(rangeStart + i * DAY_MS);
-    ticks.push({ left: i * DAY_WIDTH, label: d.toLocaleDateString("ko-KR", { month: "short", day: "numeric" }) });
+    ticks.push({ left: i * DAY_WIDTH, label: fmtDate(d, { month: "short", day: "numeric" }) });
   }
 
   const todayMs = startOfDay(new Date().toISOString());

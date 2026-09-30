@@ -28,6 +28,7 @@ import {
   archiveConsultationMaterialAction,
   type ConsultationMaterial,
 } from "./consultation-materials-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-29 — 한 화면이 길어져 카테고리별 서브탭으로 나눴다(UnderlineSubTabs).
 // 기능·권한 변경 없음. `정산`은 Payouts 탭의 `컨설턴트 정산` 서브탭으로 이동.
@@ -237,7 +238,7 @@ export default function ConsultantAssignmentsTab({
               <div className="text-[13px] font-bold text-ink">{c.contactName}</div>
               <div className="text-[12px] text-grey-500 mb-2">
                 {c.contactEmail}
-                {c.studentGrade ? ` · ${c.studentGrade}` : ""} · {new Date(c.requestedAt).toLocaleDateString("ko-KR")}
+                {c.studentGrade ? ` · ${c.studentGrade}` : ""} · {fmtDate(c.requestedAt)}
               </div>
               <div className="flex gap-2">
                 <select

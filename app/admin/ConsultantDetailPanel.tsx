@@ -7,6 +7,7 @@ import {
   assignStudentToConsultantAction,
   type ConsultantDetail,
 } from "./consultant-assignment-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 // Users > Consultants 프로필 상세(관리자 포털 정리 항목 1, 2026-09-23).
 // 매칭 변경은 ConsultantAssignmentsTab과 같은 setStudentConsultantAction을
@@ -146,7 +147,7 @@ export default function ConsultantDetailPanel({
                 {h.studentName ?? "학생"} · {h.priorConsultantName ?? "미배정"} → {h.newConsultantName ?? "미배정"}
               </div>
               <div className="text-grey-500 mt-0.5">
-                {new Date(h.changedAt).toLocaleString("ko-KR")} {h.reason ? `· ${h.reason}` : ""}
+                {fmtDateTime(h.changedAt)} {h.reason ? `· ${h.reason}` : ""}
               </div>
             </div>
           ))}

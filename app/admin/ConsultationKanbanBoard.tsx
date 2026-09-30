@@ -48,6 +48,7 @@ import TrialOnboardingStudentsForm from "./TrialOnboardingStudentsForm";
 import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 import type { AdminSubject } from "./subject-data";
 import type { MatchingTeacherCandidate } from "./matching-data";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const btnPrimary = "text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50";
 const btnSecondary = "text-[12px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50";
@@ -61,7 +62,7 @@ const errText = "text-[12px] text-red mb-2";
  */
 function formatConsultTime(iso: string | null): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
 }
 
 const CONSULT_KANBAN_CACHE_KEY = "consult-kanban";

@@ -5,6 +5,7 @@ import type { SubjectEnrollmentView } from "./enrollment-data";
 import { getLessonReviewsForFamily, type FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
 import CurriculumOverlayView from "./CurriculumOverlayView";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { fmtDate } from "@/lib/format-datetime";
 
 const LESSON_TYPE_LABEL: Record<FamilyLessonReview["lessonType"], string> = {
   trial: "체험",
@@ -89,7 +90,7 @@ const STATUS_LABEL: Record<SubjectEnrollmentView["status"], string> = {
 
 function formatDate(iso: string | null): string {
   if (!iso) return "-";
-  return new Date(iso).toLocaleDateString("ko-KR", {
+  return fmtDate(iso, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

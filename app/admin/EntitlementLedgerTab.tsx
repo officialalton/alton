@@ -23,6 +23,7 @@ import type {
   listPurchasesNeedingReconciliation,
   listOpenOrRecentPaymentDisputes,
 } from "./entitlement-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 type SubTab = "versions" | "notices" | "reconciliation" | "refunds" | "adjust" | "purchase";
 
@@ -233,8 +234,8 @@ function ProductVersionsSection({
                 유효 {v.validityMonths}개월 · 할인 {formatMinor(v.discountMinor, v.currency)}({v.discountPercent}%)
               </div>
               <div className="text-[11.5px] text-grey-500 mt-0.5">
-                적용: {new Date(v.effectiveFrom).toLocaleString("ko-KR")} ~{" "}
-                {v.effectiveUntil ? new Date(v.effectiveUntil).toLocaleString("ko-KR") : "종료일 없음"}
+                적용: {fmtDateTime(v.effectiveFrom)} ~{" "}
+                {v.effectiveUntil ? fmtDateTime(v.effectiveUntil) : "종료일 없음"}
               </div>
             </div>
             {!v.discontinuedAt && (
@@ -270,7 +271,7 @@ function NoticesSection({ notices }: { notices: OpenPriceChangeNotice[] }) {
           <div key={n.id} className={card}>
             <div className="text-[13.5px] font-bold text-ink">상품 버전: {n.productVersionId}</div>
             <div className="text-[12px] text-grey-500 mt-0.5">
-              고지 마감: {new Date(n.noticeRequiredBy).toLocaleString("ko-KR")} · 상태: {n.status}
+              고지 마감: {fmtDateTime(n.noticeRequiredBy)} · 상태: {n.status}
             </div>
           </div>
         ))
@@ -304,7 +305,7 @@ function ReconciliationSection({
               <div className="text-[13.5px] font-bold text-ink">구매 ID: {it.purchaseId}</div>
               <div className="text-[12px] text-grey-500 mt-0.5">결제 시도 ID: {it.paymentAttemptId}</div>
               <div className="text-[12px] text-grey-500 mt-0.5">
-                실패 사유: {it.failureReason ?? "미기록"} · 생성: {new Date(it.createdAt).toLocaleString("ko-KR")}
+                실패 사유: {it.failureReason ?? "미기록"} · 생성: {fmtDateTime(it.createdAt)}
               </div>
             </div>
           ))}
@@ -333,8 +334,8 @@ function ReconciliationSection({
               {d.stripePaymentIntentId ? ` · payment_intent: ${d.stripePaymentIntentId}` : ""}
             </div>
             <div className="text-[12px] text-grey-500 mt-0.5">
-              최근 갱신: {d.stripeUpdatedAt ? new Date(d.stripeUpdatedAt).toLocaleString("ko-KR") : "—"}
-              {d.closedAt ? ` · 종결: ${new Date(d.closedAt).toLocaleString("ko-KR")}` : ""}
+              최근 갱신: {d.stripeUpdatedAt ? fmtDateTime(d.stripeUpdatedAt) : "—"}
+              {d.closedAt ? ` · 종결: ${fmtDateTime(d.closedAt)}` : ""}
             </div>
           </div>
         ))
@@ -608,14 +609,14 @@ function PurchaseLookupSection() {
             </div>
             <div>세금: {formatMinor(detail.taxMinor, detail.currency)}</div>
             <div>유효기간: {detail.validityMonths}개월</div>
-            <div>만료일: {detail.expiresAt ? new Date(detail.expiresAt).toLocaleString("ko-KR") : "-"}</div>
+            <div>만료일: {detail.expiresAt ? fmtDateTime(detail.expiresAt) : "-"}</div>
             <div>가격 정책 버전: {detail.pricePolicyVersion ?? "-"}</div>
             <div>환불 정책 버전: {detail.refundPolicyVersion}</div>
             <div>약관 버전: {detail.termsVersion ?? "-"}</div>
             <div>Stripe 세션 ID: {detail.stripeCheckoutSessionId ?? "-"}</div>
             <div>Stripe 결제 ID: {detail.stripePaymentIntentId ?? "-"}</div>
-            <div>생성: {new Date(detail.createdAt).toLocaleString("ko-KR")}</div>
-            <div>확정: {detail.confirmedAt ? new Date(detail.confirmedAt).toLocaleString("ko-KR") : "-"}</div>
+            <div>생성: {fmtDateTime(detail.createdAt)}</div>
+            <div>확정: {detail.confirmedAt ? fmtDateTime(detail.confirmedAt) : "-"}</div>
           </div>
         </div>
       )}

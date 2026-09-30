@@ -8,6 +8,7 @@ import {
   type TeacherDocumentSummary,
   type TeacherDocumentItem,
 } from "./teacher-documents-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 // P4-3 3단계 — `문서 > 교사 서류`. 읽기 전용 보관함이다.
 //
@@ -26,7 +27,7 @@ function formatDate(value: string | null): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
 }
 
 function messageForReason(reason: string): string {

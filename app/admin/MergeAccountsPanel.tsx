@@ -9,6 +9,7 @@ import {
   type MergeSearchResult,
   type PendingAnonymization,
 } from "./merge-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 const ROLE_LABEL: Record<string, string> = {
   student: "학생",
@@ -219,7 +220,7 @@ export default function MergeAccountsPanel() {
                 {p.mergedName ?? "이름 없음"} → {p.survivorName ?? "이름 없음"}
               </div>
               <div className="text-[11.5px] text-grey-500 mt-0.5">
-                병합일 {new Date(p.mergedAt).toLocaleDateString("ko-KR")}
+                병합일 {fmtDate(p.mergedAt)}
                 {p.reason && ` · ${p.reason}`}
                 {!p.eligibleNow && " · 아직 30일 유예 기간 중"}
               </div>

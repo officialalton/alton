@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import UnitPrepPanel from "@/app/teacher/UnitPrepPanel";
 import type { SessionPrepContext } from "./prep-context-data";
+import { fmtDate, fmtTime } from "@/lib/format-datetime";
 
 // P2/P3 — 예정 수업에서 들어오는 준비 화면.
 //
@@ -86,15 +87,15 @@ export function formatLessonTime(startsAt: string | null, endsAt: string | null)
   if (!startsAt) return "";
   const start = new Date(startsAt);
   if (Number.isNaN(start.getTime())) return "";
-  const date = start.toLocaleDateString("ko-KR", {
+  const date = fmtDate(start, {
     month: "long",
     day: "numeric",
     weekday: "short",
   });
-  const startTime = start.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+  const startTime = fmtTime(start, { hour: "2-digit", minute: "2-digit" });
   if (!endsAt) return `${date} ${startTime}`;
   const end = new Date(endsAt);
   if (Number.isNaN(end.getTime())) return `${date} ${startTime}`;
-  const endTime = end.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+  const endTime = fmtTime(end, { hour: "2-digit", minute: "2-digit" });
   return `${date} ${startTime}–${endTime}`;
 }

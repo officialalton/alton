@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ParentEntitlementsData, PurchaseReceipt } from "./entitlements-data";
 import { createEntitlementCheckoutSession } from "./purchase-actions";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 function formatMoney(minor: number, currency: string): string {
   const amount = minor / 100;
@@ -12,7 +13,7 @@ function formatMoney(minor: number, currency: string): string {
 
 function formatDate(iso: string | null): string {
   if (!iso) return "—";
-  return new Date(iso).toLocaleDateString("ko-KR");
+  return fmtDate(iso);
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -297,7 +298,7 @@ function ReceiptDetail({ receipt: r }: { receipt: PurchaseReceipt }) {
     ["결제 상태", STATUS_LABEL[r.status] ?? r.status],
     ["분쟁 상태", r.disputeStatus ? (DISPUTE_STATUS_LABEL[r.disputeStatus] ?? r.disputeStatus) : "없음"],
     ["결제대행사 거래 ID", r.stripePaymentIntentId ?? r.stripeCheckoutSessionId ?? "—"],
-    ["구매 확인 시각", r.confirmedAt ? new Date(r.confirmedAt).toLocaleString("ko-KR") : "미확인"],
+    ["구매 확인 시각", r.confirmedAt ? fmtDateTime(r.confirmedAt) : "미확인"],
   ];
 
   return (

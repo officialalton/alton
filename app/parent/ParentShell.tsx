@@ -56,6 +56,7 @@ import {
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-17/18 — 학부모 포털 IA 재구성(R13 상담 마일스톤). 메인 내비는 아래
 // 순서 고정: 홈/수업권/수강 과목/수업/상담/단어장/과제. "가족"(신규 자녀 상담
@@ -719,7 +720,7 @@ function ConsultationReviewCard({ review }: { review: HomeConsultationReview }) 
       <div className="flex items-center justify-between">
         <span className="text-[12px] font-bold text-ink">상담 리뷰</span>
         <span className="text-[11px] text-grey-500">
-          {review.startsAt ? new Date(review.startsAt).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" }) : "-"}
+          {review.startsAt ? fmtDateTime(review.startsAt, { dateStyle: "medium", timeStyle: "short" }) : "-"}
         </span>
       </div>
       <p className="text-[12.5px] text-ink whitespace-pre-wrap mt-1.5">{review.finalText}</p>

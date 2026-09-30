@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { TeacherLesson } from "./dashboard-data";
+import { fmtIntl } from "@/lib/format-datetime";
 
 type ReportType = "teacher_late" | "student_no_show_reported";
 
@@ -232,11 +233,11 @@ function LessonList({
 
 function formatKoreanDateTime(iso: string | null) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }

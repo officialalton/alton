@@ -8,6 +8,7 @@ import {
   type ClosedConsultationItem,
 } from "./consultation-kanban-actions";
 import { CLOSURE_TYPE_LABEL, type ConsultationClosureType } from "./consultation-kanban-constants";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const card = "border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3";
 const errText = "text-[12px] text-red mb-2";
@@ -70,7 +71,7 @@ export default function ClosedConsultationsSection() {
                 <span className="text-[11px] font-semibold text-grey-500">({CLOSURE_TYPE_LABEL[i.closureType]})</span>
               </div>
               <div className="text-[12px] text-grey-500">
-                {i.contactEmail} · 종료일 {new Date(i.closedAt).toLocaleString("ko-KR")}
+                {i.contactEmail} · 종료일 {fmtDateTime(i.closedAt)}
               </div>
             </div>
           </div>

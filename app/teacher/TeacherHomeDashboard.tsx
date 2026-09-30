@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { TeacherDashboardData } from "./dashboard-data";
 import type { TeacherAssignedSubject } from "./assignments-data";
+import { dateKey, fmtIntl } from "@/lib/format-datetime";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -89,9 +90,9 @@ function TodayLessonBanner({
   const sorted = [...withTime].sort(
     (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
   );
-  const todayKey = new Intl.DateTimeFormat("en-CA").format(new Date());
+  const todayKey = dateKey(new Date());
   const todayLesson = sorted.find(
-    (l) => new Intl.DateTimeFormat("en-CA").format(new Date(l.scheduledAt)) === todayKey
+    (l) => dateKey(new Date(l.scheduledAt)) === todayKey
   );
   if (!todayLesson) return null;
 
@@ -267,11 +268,11 @@ function UpcomingWidget({
 
 function formatKoreanDateTime(iso: string | null) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }

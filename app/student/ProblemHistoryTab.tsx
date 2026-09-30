@@ -6,6 +6,7 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import type { ProblemHistoryEntry } from "./problem-history-data";
 import { SKILL_CODES, domainLabel, domainShort, skillLabel } from "@/lib/problem-taxonomy";
+import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-14 — 학생 포털 문제 기록(v3). 수업·과제에서 답한 문제를 한 줄씩. 펼치면 지문·내 답·채점 결과, 채점 뒤엔 정답·해설.
 
@@ -139,7 +140,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                   )}
                   <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(본문 없음)"}</span>
                   <span className="text-[11.5px] text-grey-500 shrink-0">
-                    {[e.subjectName, e.unitTitle, e.startsAt ? new Date(e.startsAt).toLocaleDateString("ko-KR") : null].filter(Boolean).join(" · ")}
+                    {[e.subjectName, e.unitTitle, e.startsAt ? fmtDate(e.startsAt) : null].filter(Boolean).join(" · ")}
                   </span>
                 </button>
                 {open && <HistoryDetail entry={e} />}

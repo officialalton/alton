@@ -8,6 +8,7 @@ import { loadTeacherStudentRoadmapAction } from "./student-roadmap-actions";
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import TeacherPlannerBoard from "./TeacherPlannerBoard";
+import { fmtDate } from "@/lib/format-datetime";
 // M4 UAT #5 — 체험 수업 리뷰 작성 UI는 배정 탭에서 제거됐다. 진입 위치는
 // "정규수업" 탭(TeacherLessonScheduleTab)의 "예정된 수업" 목록으로 이동했다 —
 // 진행한 수업 내역이 실제로 보이는 화면에서 바로 리뷰를 작성하고, 확정하면
@@ -101,7 +102,7 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
 
 function formatDate(iso: string | null): string {
   if (!iso) return "-";
-  return new Date(iso).toLocaleDateString("ko-KR", {
+  return fmtDate(iso, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

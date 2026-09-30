@@ -29,6 +29,7 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import { SKILL_CODES, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import { materialStatusLines } from "@/lib/problem-material-need";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
 
@@ -664,7 +665,7 @@ function LessonSection({ unitId }: { unitId: string }) {
 function formatLessonDate(startsAt: string | null): string {
   if (!startsAt) return "시간 미정";
   const d = new Date(startsAt);
-  return d.toLocaleString("ko-KR", {
+  return fmtDateTime(d, {
     month: "long",
     day: "numeric",
     weekday: "short",

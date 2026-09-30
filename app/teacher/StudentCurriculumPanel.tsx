@@ -23,6 +23,7 @@ import {
   type AdditionalStudyUnitPreview,
 } from "./student-curriculum-actions";
 import type { EligibleLibrary, OverlayUnit, StudentCurriculum } from "./student-curriculum-data";
+import { fmtDate, fmtTime } from "@/lib/format-datetime";
 
 const STATUS_LABEL: Record<OverlayUnit["status"], string> = {
   not_started: "미시작",
@@ -36,8 +37,8 @@ function formatSessionTime(startsAt: string | null): string {
   if (!startsAt) return "다음 예약 없음";
   const d = new Date(startsAt);
   if (Number.isNaN(d.getTime())) return "다음 예약 없음";
-  const date = d.toLocaleDateString("ko-KR", { month: "long", day: "numeric" });
-  const time = d.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+  const date = fmtDate(d, { month: "long", day: "numeric" });
+  const time = fmtTime(d, { hour: "2-digit", minute: "2-digit" });
   return `${date} ${time} 수업`;
 }
 

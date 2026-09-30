@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { listContractArchiveAction } from "./contract-archive-actions";
 import type { ContractArchiveRow } from "./contract-archive-data";
+import { fmtDate } from "@/lib/format-datetime";
 
 // P4-3 2단계 — `문서 > 계약` 아카이브. 조회와 다운로드만 한다.
 // 발송·재발송·무효화 버튼은 두지 않는다(그 진입점은 `신규 > 정규 계약 발송`).
@@ -42,7 +43,7 @@ function formatDate(value: string | null): string {
   if (!value) return "—";
   const d = new Date(value);
   if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
+  return fmtDate(d, { year: "numeric", month: "long", day: "numeric" });
 }
 
 export default function ContractArchivePanel() {

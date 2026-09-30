@@ -23,6 +23,7 @@ import {
 import { cancelDirectOnboardingLinkStudentAction } from "./direct-account-actions";
 import { listConsultantsAction, setStudentConsultantAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
 import { useToasts, ToastStack } from "./Toast";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 const LINK_STATUS_LABEL: Record<TrialOnboardingLinkDetail["status"], string> = {
   pending: "발송됨 — 보호자 확인 대기",
@@ -40,7 +41,7 @@ const STUDENT_STATUS_LABEL: Record<TrialOnboardingLinkStudent["status"], string>
 
 function fmt(iso: string | null): string {
   if (!iso) return "-";
-  return new Date(iso).toLocaleString("ko-KR");
+  return fmtDateTime(iso);
 }
 
 export default function TrialOnboardingLinkProgress({ linkId }: { linkId: string }) {

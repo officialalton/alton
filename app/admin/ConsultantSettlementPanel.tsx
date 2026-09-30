@@ -13,6 +13,7 @@ import {
   type ConsultantPayoutPeriodAdmin,
   type ConsultantPayoutPeriodEvent,
 } from "./consultant-settlement-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-29 — Consultants 탭에 있던 `정산` 섹션을 Payouts 탭의 `컨설턴트 정산`
 // 서브탭으로 옮겼다(동작 변경 없음). 컨설턴트 목록은 이 패널이 직접 읽는다.
@@ -247,7 +248,7 @@ export default function ConsultantSettlementPanel() {
                     ) : (
                       eventsByPeriod[p.id].map((ev) => (
                         <div key={ev.id}>
-                          {new Date(ev.createdAt).toLocaleString("ko-KR")} · {ev.actorName ?? "알 수 없음"} ·{" "}
+                          {fmtDateTime(ev.createdAt)} · {ev.actorName ?? "알 수 없음"} ·{" "}
                           {ev.eventType === "created" ? "생성" : ev.eventType === "amount_changed" ? "금액 변경" : "상태 변경"}
                           {ev.previousValue ? ` (${ev.previousValue} → ${ev.newValue})` : ` (${ev.newValue})`}
                         </div>

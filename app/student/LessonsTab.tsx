@@ -10,6 +10,7 @@ import type { ReviewData, StudentFeedback } from "./review-data";
 import CurriculumView from "./CurriculumView";
 import ReviewPanel from "./ReviewPanel";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import { fmtIntl } from "@/lib/format-datetime";
 
 type SubView =
   | { type: "list" }
@@ -236,11 +237,11 @@ function PastList({
 
 function formatKoreanDateTime(iso: string | null) {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }

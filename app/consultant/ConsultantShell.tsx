@@ -86,6 +86,7 @@ import {
   type MeetingRequestReviewForConsultant,
   type MeetingRequestReviewEditForConsultant,
 } from "./meeting-request-review-actions";
+import { fmtDate, fmtDateTime, fmtTime } from "@/lib/format-datetime";
 
 type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "staff-messages" | "college-explore";
 
@@ -497,7 +498,7 @@ const MEETING_STATUS_LABEL: Record<string, string> = {
 
 function formatMeetingDateTime(iso: string | null): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
 }
 
 // Phase B(3, 2026-09-23) — 기존 "일정 요청"(meetings)과 "가능시간"(schedule)을
@@ -839,8 +840,8 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
       </div>
       {isFinal && (
         <p className="text-[11px] text-grey-500 mt-1">
-          확정일 {review.finalizedAt ? new Date(review.finalizedAt).toLocaleString("ko-KR") : "-"}
-          {review.adminEditedAt && ` · 최종 수정 ${new Date(review.adminEditedAt).toLocaleString("ko-KR")}`}
+          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt) : "-"}
+          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt)}`}
         </p>
       )}
       {isFinal && (
@@ -860,7 +861,7 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
               {edits.length === 0 && <p className="text-[11px] text-grey-500">수정 이력이 없습니다(아직 확정 후 수정된 적 없음).</p>}
               {edits.map((e) => (
                 <div key={e.id} className="text-[11px] text-grey-500 border-l-2 border-grey-200 pl-2">
-                  {new Date(e.editedAt).toLocaleString("ko-KR")} · {e.editedByName ?? "컨설턴트"}
+                  {fmtDateTime(e.editedAt)} · {e.editedByName ?? "컨설턴트"}
                   {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">이전 내용: {e.previousFinalText}</div>}
                 </div>
               ))}
@@ -985,7 +986,7 @@ function ConsultationSessionView({
           <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
             저장
           </button>
-          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">{new Date(savedAt).toLocaleString("ko-KR")} 저장됨</span>}
+          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">{fmtDateTime(savedAt)} 저장됨</span>}
         </div>
       </div>
     </div>
@@ -1249,8 +1250,8 @@ function TimeOffPanel() {
             <div>
               <span className="text-[13px] font-semibold text-ink">
                 {t.allDay
-                  ? new Date(t.startsAt).toLocaleDateString("ko-KR")
-                  : `${formatMeetingDateTime(t.startsAt)} ~ ${new Date(t.endsAt).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" })}`}
+                  ? fmtDate(t.startsAt)
+                  : `${formatMeetingDateTime(t.startsAt)} ~ ${fmtTime(t.endsAt, { hour: "2-digit", minute: "2-digit" })}`}
               </span>
               {t.reason && <div className="text-[11.5px] text-grey-500 mt-0.5">{t.reason}</div>}
             </div>
@@ -1533,7 +1534,7 @@ function StaffMessagesPanel() {
               <div className="text-[13px] font-bold text-ink">{i.subject ?? "제목 없음"}</div>
               <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
             </div>
-            <span className="text-[11px] text-grey-500">{new Date(i.lastMessageAt).toLocaleString("ko-KR")}</span>
+            <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt)}</span>
           </button>
         ))
       )}
@@ -1627,7 +1628,7 @@ function EndedStudentList({
         >
           <div className="flex items-center justify-between">
             <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
-            <span className="text-[11px] text-grey-500">{new Date(s.endedAt).toLocaleDateString("ko-KR")} 종료</span>
+            <span className="text-[11px] text-grey-500">{fmtDate(s.endedAt)} 종료</span>
           </div>
           {s.reason && <div className="text-[12px] text-grey-500 mt-1">{s.reason}</div>}
         </button>
@@ -1647,7 +1648,7 @@ function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStuden
       </button>
       <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-1">{student.name ?? "이름 없음"}</h1>
       <div className="text-[12px] text-grey-500 mb-4">
-        {new Date(student.endedAt).toLocaleString("ko-KR")}에 담당이 종료됨
+        {fmtDateTime(student.endedAt)}에 담당이 종료됨
       </div>
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 bg-grey-100">
         <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">종료 사유</div>
@@ -1835,7 +1836,7 @@ function StudentRoadmapPanel({ studentId }: { studentId: string }) {
 
 function formatMessengerDateTime(iso: string | null): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
 }
 
 // 2026-09-22 — 컨설턴트 household 메신저(읽기+답장 전용, 새 문의 열기는 없음).

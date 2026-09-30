@@ -21,6 +21,7 @@ import {
   type TeacherDocumentItem,
 } from "./settlement-actions";
 import { PAYOUT_DAY_OF_MONTH, type SettlementMonth, type TeacherSettlement } from "./settlement-data";
+import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 // 2026-09-12(제품 오너 확정 흐름) — 교사 화면은 아래 4단계로만 말한다.
 // '확정'이라는 모호한 말 대신 '송금 승인됨'을 쓴다: 사람이 실제 지급 대상으로
@@ -81,7 +82,7 @@ function payoutScheduleLabel(m: SettlementMonth): string {
   if (m.status === "paid") {
     // 외부 송금일은 날짜만 있는 값, paid_at은 시각까지 있는 값이라 표기 방법이 다르다.
     if (m.externalTransfer) return `지급일 ${formatDateOnly(m.externalTransfer.transferredOn)}`;
-    return m.paidAt ? `지급일 ${new Date(m.paidAt).toLocaleDateString("ko-KR")}` : "지급 완료";
+    return m.paidAt ? `지급일 ${fmtDate(m.paidAt)}` : "지급 완료";
   }
   if (m.scheduledPayoutDate) {
     const dateLabel = formatDateOnly(m.scheduledPayoutDate);
@@ -188,7 +189,7 @@ export default function SettlementTab() {
             </b>{" "}
             (예: 9월 수업분 → 10월 {PAYOUT_DAY_OF_MONTH}일)
           </div>
-          <div>마지막 갱신: {new Date(settlement.refreshedAt).toLocaleString("ko-KR")}</div>
+          <div>마지막 갱신: {fmtDateTime(settlement.refreshedAt)}</div>
           <div>수업 판정·조정 결과에 따라 확정 전까지 금액이 변동될 수 있습니다.</div>
           <div>세금·수수료 등 공제를 반영하지 않은 총액입니다.</div>
         </div>
@@ -311,7 +312,7 @@ export default function SettlementTab() {
                       <ul className="text-[11px] text-grey-400 mb-2 space-y-0.5">
                         {m.adjustments.map((a) => (
                           <li key={a.id} data-testid={`adjust-reason-${a.id}`}>
-                            {new Date(a.createdAt).toLocaleDateString("ko-KR")} ·{" "}
+                            {fmtDate(a.createdAt)} ·{" "}
                             {a.amountMinor > 0 ? "+" : ""}
                             {formatAmount(a.amountMinor, a.currency)} — {a.reason}
                           </li>
@@ -335,7 +336,7 @@ export default function SettlementTab() {
                         {m.lines.map((l) => (
                           <tr key={l.payoutItemId} className="text-grey-500">
                             <td className="py-0.5">
-                              {l.sessionDate ? new Date(l.sessionDate).toLocaleDateString("ko-KR") : "—"}
+                              {l.sessionDate ? fmtDate(l.sessionDate) : "—"}
                             </td>
                             <td className="py-0.5">{l.studentName ?? "—"}</td>
                             <td className="py-0.5">{l.subjectName ?? "—"}</td>
@@ -421,7 +422,7 @@ function PayoutAccountCard({
               <div data-testid="account-masked">계좌번호: {account.accountNumberMasked}</div>
               <div>통화: {account.currency}</div>
               <div className="text-[11.5px] text-grey-400">
-                최종 수정 {new Date(account.updatedAt).toLocaleString("ko-KR")}
+                최종 수정 {fmtDateTime(account.updatedAt)}
               </div>
             </div>
           ) : (
@@ -554,7 +555,7 @@ function DocumentsCard({
             <li key={d.id} className="flex items-center justify-between gap-2 text-[12px]">
               <span className="text-ink truncate">{d.fileName}</span>
               <span className="text-[11.5px] text-grey-400 shrink-0">
-                {new Date(d.uploadedAt).toLocaleDateString("ko-KR")}
+                {fmtDate(d.uploadedAt)}
               </span>
               <button
                 type="button"

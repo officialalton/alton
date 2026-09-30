@@ -65,6 +65,7 @@ import {
   type RefreshJob,
   type UpdateProposal,
 } from "@/lib/universities/refresh-actions";
+import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 const ADMISSION_METRIC_KEY_OPTIONS: { value: AdmissionMetricKey; label: string }[] = [
   { value: "sat_total_25", label: "SAT 총점 25th" },
@@ -144,7 +145,7 @@ function DataCollectionStatusBadge({
         : "bg-grey-100 text-grey-500";
   const text = status === "verified_pilot" ? "실검증 완료(UAT)" : status === "sources_pending_review" ? "출처 검토 필요" : "미확인";
   const verifiedAtLabel =
-    status === "verified_pilot" && verifiedAt ? new Date(verifiedAt).toLocaleDateString("ko-KR") : null;
+    status === "verified_pilot" && verifiedAt ? fmtDate(verifiedAt) : null;
   return (
     <span className={`rounded px-1.5 py-0.5 text-[10px] font-medium ${style}`}>
       {text}
@@ -340,7 +341,7 @@ function QueuedRefreshJobsSection({ setError }: { setError: (msg: string | null)
         {jobs.map((j) => (
           <li key={j.id} className="flex items-center justify-between rounded border border-grey-100 bg-white px-2 py-1 text-xs">
             <span>
-              {j.universityName} <span className="text-grey-400">· {new Date(j.createdAt).toLocaleString("ko-KR")}</span>
+              {j.universityName} <span className="text-grey-400">· {fmtDateTime(j.createdAt)}</span>
             </span>
             <button
               type="button"
@@ -988,7 +989,7 @@ function ReportsInboxSection({
             <p className="mt-1 whitespace-pre-wrap text-grey-700">{r.message}</p>
             {r.reportedValue && <p className="mt-1 text-grey-400">신고된 값: {r.reportedValue}</p>}
             <p className="mt-1 text-grey-400">
-              신고자 역할: {r.reporterRole ?? "알 수 없음"} · {new Date(r.createdAt).toLocaleString("ko-KR")}
+              신고자 역할: {r.reporterRole ?? "알 수 없음"} · {fmtDateTime(r.createdAt)}
             </p>
             {r.status !== "resolved" && r.status !== "dismissed" && (
               <div className="mt-2 space-y-1">

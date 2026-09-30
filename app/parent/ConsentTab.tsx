@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import { consentForChild } from "./consent-actions";
+import { fmtDate } from "@/lib/format-datetime";
 
 // 2026-09-28(초기 고객 절차 단순화) — 체험 Smart Notes 동의 섹션과 "정규 진행
 // 희망" 섹션(TrialConversionPanel)을 제거했다. 체험 수업에는 이제 AI 기록을
@@ -84,7 +85,7 @@ export default function ConsentTab({
               {child.latestConsent && (
                 <p className="text-[12.5px] text-grey-500 mb-3">
                   최근 처리: {child.latestConsent.policyVersionTitle} ·{" "}
-                  {new Date(child.latestConsent.consentedAt).toLocaleDateString("ko-KR")}
+                  {fmtDate(child.latestConsent.consentedAt)}
                   {child.latestConsent.revokedAt && " (철회됨)"}
                 </p>
               )}

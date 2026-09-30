@@ -14,10 +14,11 @@ import {
   markMyHouseholdMessengerReadAction,
 } from "./consultant-messenger-actions";
 import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 function formatDateTime(iso: string | null): string {
   if (!iso) return "";
-  return new Date(iso).toLocaleString("ko-KR", { dateStyle: "medium", timeStyle: "short" });
+  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" });
 }
 
 export default function StudentConsultantMessengerTab() {

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { boardColumnOf, type BoardCard, type BoardCardStatus, type BoardColumn } from "@/lib/board/types";
+import { fmtDate } from "@/lib/format-datetime";
 
 // Student Success Planner — Board 칼럼 렌더링(학생 포털·학부모 포털 공유).
 // 학생 포털은 수동 할 일에 상태 이동·삭제 버튼을 준다(onMove/onDelete 제공).
@@ -23,7 +24,7 @@ export const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
 
 export function formatDueAt(dueAt: string | null): string | null {
   if (!dueAt) return null;
-  return new Date(dueAt).toLocaleDateString("ko-KR", { month: "2-digit", day: "2-digit" });
+  return fmtDate(dueAt, { month: "2-digit", day: "2-digit" });
 }
 
 /** 2026-09-22(사용자 지시) — 항상 노출: 기간이 있으면 "MM/DD~MM/DD", 없으면 단일 마감일, 둘 다 없으면 "마감 없음". */

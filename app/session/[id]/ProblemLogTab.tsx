@@ -12,6 +12,7 @@ import {
   removeTeacherPick,
 } from "./problemlog-actions";
 import MathCanvas from "./MathCanvas";
+import { fmtIntl } from "@/lib/format-datetime";
 
 const REASONS = ["단어", "로직", "해석", "기타"];
 const FORMAT_LABEL: Record<ProblemLogEntry["format"], string> = {
@@ -695,11 +696,11 @@ function TeacherPickPanel({
 }
 
 function formatKoreanDateTime(iso: string) {
-  return new Intl.DateTimeFormat("ko-KR", {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  });
 }
