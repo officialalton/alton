@@ -30,6 +30,7 @@ import {
   updateMyConsultantProfileAction,
   type ConsultantProfile,
 } from "./profile-actions";
+import { StaffStudentStats, useRecordStaffView } from "@/app/components/StaffStudentViews";
 import PlannerOverviewView from "@/app/student/PlannerOverviewView";
 import BoardColumnsView from "@/app/components/BoardColumnsView";
 import type { ConsultantStudent, EndedConsultantStudent } from "./consultant-data";
@@ -1670,7 +1671,7 @@ function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStuden
   );
 }
 
-type StudentSubView = "overview" | "board" | "roadmap" | "messenger";
+type StudentSubView = "overview" | "board" | "stats" | "roadmap" | "messenger";
 
 // 컨설턴트 Round A(2026-09-22 사용자 지시) — 담당 학생 진입 시 Overview/Board/
 // Roadmap 세 화면을 오갈 수 있게 하고, Board는 학생 본인처럼 직접 수정할 수
@@ -1685,6 +1686,7 @@ function StudentPanel({
   onBack: () => void;
 }) {
   const [subView, setSubView] = useState<StudentSubView>("overview");
+  useRecordStaffView(studentId, subView === "overview" || subView === "board" || subView === "stats" ? subView : null);
   // 2026-09-22(사용자 지적 — 탭 전환마다 로딩이 길다) — Overview/Board가
   // 각자 loadStudentBoardCardsAction을 따로 호출해 학생을 열 때마다 최대
   // 2번 같은 데이터를 중복 조회했다. 여기서 한 번만 불러와 두 탭이 공유한다.
@@ -1718,6 +1720,7 @@ function StudentPanel({
           [
             { id: "overview", label: "Overview" },
             { id: "board", label: "Board" },
+            { id: "stats", label: "통계" },
             { id: "roadmap", label: "Roadmap" },
             { id: "messenger", label: "메신저" },
           ] as const
@@ -1743,6 +1746,8 @@ function StudentPanel({
         )
       ) : subView === "board" ? (
         <StudentBoardPanel studentId={studentId} cards={cards} error={cardsError} onReload={reloadCards} />
+      ) : subView === "stats" ? (
+        <StaffStudentStats key={studentId} studentId={studentId} />
       ) : subView === "roadmap" ? (
         <StudentRoadmapPanel studentId={studentId} />
       ) : (
