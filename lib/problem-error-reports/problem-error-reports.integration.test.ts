@@ -320,7 +320,8 @@ describe("모의고사: 문제 자체 오류 확정 → 전원 정답(원채점 
   });
 });
 
-const SPARE_SKILLS = ["words_in_context", "text_structure_purpose", "cross_text_connections"];
+// 실행 ID 가 붙은 전용 skill 코드 — 실제 skill 칸의 여분(다른 세션·시드가 넣은 공개 문항)에 결과가 흔들리지 않게 격리한다.
+const SPARE_SKILLS = [`zzsa${RUN}`, `zzsb${RUN}`, `zzsc${RUN}`];
 const letters = () => Array.from({ length: 14 }, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join("");
 /** 공개 상태·어떤 세트에도 안 들어간 여분 문항(같은 skill·난이도 칸). */
 function spare(skill: string, difficulty: string): string {
@@ -341,8 +342,14 @@ const setItems = (setId: string) =>
 
 describe("여분 문항 자동 교체 / 대체 문항 필요 큐", () => {
   beforeAll(() => {
-    psql(`update problems set archived_at = now(), archived_reason = 'problem-error-reports test cleanup'
-           where skill_code in ('words_in_context','text_structure_purpose','cross_text_connections') and archived_at is null and passage like 'R3 spare %';`);
+    SPARE_SKILLS.forEach((code, i) => {
+      psql(`insert into problem_skill_codes (code, domain, label, sort) values ('${code}', 'rw_craft_structure', 'ERR spare ${RUN} ${i}', 9990 + ${i}) on conflict (code) do nothing;`);
+    });
+  });
+  afterAll(() => {
+    // 이 실행이 만든 여분 문항·skill 코드 정리(판정 이력은 append-only 라 남는 행에 묶이므로 문항은 보관 처리).
+    psql(`update problems set archived_at = coalesce(archived_at, now()), archived_reason = coalesce(archived_reason, 'problem-error-reports test cleanup')
+           where skill_code in (${SPARE_SKILLS.map((c) => `'${c}'`).join(",")}) and passage like 'R3 spare %';`);
   });
 
   it("교체 성공: 시작 전 세트의 같은 칸(모듈·경로·난이도·skill)을 여분으로 바꾸고 세트는 여전히 ready·중복 0", async () => {

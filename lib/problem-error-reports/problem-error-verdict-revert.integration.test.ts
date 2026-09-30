@@ -5,6 +5,9 @@ import { ADMIN_ID, SUBJECT_ID, createRoutingSet, psql, rest } from "@/test/mock-
 
 // 오류 확정 → '오류 아님' 번복: 문항 복귀·대체 문항 필요 기록 닫기. 실행 ID(RUN) 전용 문항·세트만 쓴다.
 const RUN = randomUUID().slice(0, 8);
+// 실행 ID 전용 skill 코드 — 실제 skill 칸의 여분(다른 세션·시드의 공개 문항)에 결과가 흔들리지 않게 격리한다.
+const SK_A = `zzra${RUN}`;
+const SK_B = `zzrb${RUN}`;
 let TEACHER_ID: string;
 type Json = Record<string, unknown>;
 const letters = () => Array.from({ length: 14 }, () => String.fromCharCode(97 + Math.floor(Math.random() * 26))).join("");
@@ -27,8 +30,14 @@ function spare(skill: string, difficulty: string): string {
 
 beforeAll(() => {
   TEACHER_ID = createPerRunTeacher(psql, { emailPrefix: "problem-error-revert" });
+  [SK_A, SK_B].forEach((code, i) => {
+    psql(`insert into problem_skill_codes (code, domain, label, sort) values ('${code}', 'rw_craft_structure', 'REV spare ${RUN} ${i}', 9980 + ${i}) on conflict (code) do nothing;`);
+  });
 });
-afterAll(() => cleanupPerRunTeacher(psql, TEACHER_ID));
+afterAll(() => {
+  psql(`update problems set archived_at = coalesce(archived_at, now()), archived_reason = coalesce(archived_reason, 'revert test cleanup') where skill_code in ('${SK_A}','${SK_B}') and passage like 'R4 spare %';`);
+  cleanupPerRunTeacher(psql, TEACHER_ID);
+});
 
 describe("오류 확정 → 오류 아님 번복", () => {
   it("보관 해제(용도·상태 유지)·열린 대체 필요 취소·재확정 시 다시 쌓임·멱등", async () => {
@@ -82,9 +91,9 @@ describe("오류 확정 → 오류 아님 번복", () => {
   it("이미 자동 교체된 세트는 그대로: 기록은 linked 유지·교체 이력 유지·세트 불변, 문항만 복귀", async () => {
     const f = createRoutingSet({ run: RUN, label: "revert-replaced" });
     const item = f.ids.rw_higher[0];
-    psql(`update mock_exam_set_items set skill_code = 'words_in_context' where id = '${item}';`);
-    psql(`update problems set archived_at = now(), archived_reason = 'revert test cleanup' where skill_code = 'words_in_context' and passage like 'R4 spare %' and archived_at is null;`);
-    const s = spare("words_in_context", "medium");
+    psql(`update mock_exam_set_items set skill_code = '${SK_A}' where id = '${item}';`);
+    psql(`update problems set archived_at = now(), archived_reason = 'revert test cleanup' where skill_code = '${SK_A}' and passage like 'R4 spare %' and archived_at is null;`);
+    const s = spare(SK_A, "medium");
     const [p, v] = psql(`select problem_id || '|' || problem_version_id from mock_exam_set_items where id = '${item}';`).split("|");
     expect(((await verdict(p, v, "flawed_confirmed")).json as Json).autoReplaced).toBe(1);
     const shape = () => psql(`select string_agg(problem_id::text, ',' order by section, position) from mock_exam_set_items where exam_set_id = '${f.setId}';`);
@@ -101,8 +110,8 @@ describe("오류 확정 → 오류 아님 번복", () => {
   it("여분이 없어 열려 있던 세트 칸 기록은 취소되고 세트 칸은 원래 문항 그대로(복귀한 문항이 계속 사용 가능)", async () => {
     const f = createRoutingSet({ run: RUN, label: "revert-nospare" });
     const item = f.ids.rw_lower[1];
-    psql(`update mock_exam_set_items set skill_code = 'cross_text_connections' where id = '${item}';`);
-    psql(`update problems set archived_at = now(), archived_reason = 'revert test cleanup' where skill_code = 'cross_text_connections' and passage like 'R4 spare %' and archived_at is null;`);
+    psql(`update mock_exam_set_items set skill_code = '${SK_B}' where id = '${item}';`);
+    psql(`update problems set archived_at = now(), archived_reason = 'revert test cleanup' where skill_code = '${SK_B}' and passage like 'R4 spare %' and archived_at is null;`);
     const [p, v] = psql(`select problem_id || '|' || problem_version_id from mock_exam_set_items where id = '${item}';`).split("|");
     expect(((await verdict(p, v, "key_wrong_confirmed")).json as Json).replacementNeedsOpen).toBe(1);
     const r = await verdict(p, v, "not_error");
@@ -110,7 +119,7 @@ describe("오류 확정 → 오류 아님 번복", () => {
     expect(needs(p)).toBe("cancelled:verdict_reverted");
     expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${f.setId}' and problem_id = '${p}';`)).toBe("1");
     // 재시도(여분 교체 루틴)는 취소된 기록을 건드리지 않는다
-    spare("cross_text_connections", "medium");
+    spare(SK_B, "medium");
     await rest(ADMIN_ID, "rpc/problem_replacement_retry_open", { method: "POST", body: {} });
     expect(needs(p)).toBe("cancelled:verdict_reverted");
     expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${f.setId}' and problem_id = '${p}';`)).toBe("1");
