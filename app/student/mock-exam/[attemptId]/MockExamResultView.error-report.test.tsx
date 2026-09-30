@@ -38,11 +38,12 @@ const items = [
 
 describe("MockExamResultView — 문항 오류 조정", () => {
   it("조정된 응시는 안내 문구를 보이고 예상 점수 범위는 조정된(correct) 기준으로 계산된다", () => {
-    render(<MockExamResultView attempt={attempt(items, { scoreAdjusted: true })} readOnly={false} />);
+    const routes = { rw: "higher", math: "lower" } as const;
+    const adjusted = estimateScore(computeMockExamReport(items).bySection, routes)!;
+    const original = estimateScore(computeMockExamReport(items.map((i) => (i.adjusted ? { ...i, correct: false } : i))).bySection, routes)!;
+    render(<MockExamResultView attempt={attempt(items, { scoreAdjusted: true, scoreEstimate: adjusted })} readOnly={false} />);
     expect(screen.getByTestId("mock-exam-score-adjusted")).toHaveTextContent("문항 오류로 점수가 조정되었습니다");
     // R&W 2/2 → 조정 전(1/2)과 다른 범위
-    const adjusted = estimateScore(computeMockExamReport(items).bySection)!;
-    const original = estimateScore(computeMockExamReport(items.map((i) => (i.adjusted ? { ...i, correct: false } : i))).bySection)!;
     expect(adjusted.rw.high).toBeGreaterThan(original.rw.high);
     expect(screen.getByTestId("mock-exam-score-estimate")).toHaveTextContent(`${adjusted.rw.low}-${adjusted.rw.high}`);
   });
