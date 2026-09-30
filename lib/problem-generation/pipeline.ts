@@ -33,6 +33,8 @@ export type PipelineParams = {
   figurePolicy?: FigurePolicy;
   /** 독립 검사를 끄고 싶을 때(테스트). 기본 켜짐. */
   skipReview?: boolean;
+  /** generateSectionProblemsCore 에 그대로 넘기는 추가 지침(초기 생성 호출에만). */
+  extraGuidance?: string;
   /**
    * 2026-09-17(UAT 지적) — 통과 판정이 난 "즉시" 호출된다(같은 배치의 다른 문항이
    * 아직 게이트를 통과하는 중이어도 기다리지 않는다). 호출자(서버 액션)가 여기서
@@ -250,7 +252,7 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
           const chunk = await timed("generate", () => generateSectionProblemsCore({
             sectionTitle: params.topic?.trim() || params.skillType, subjectName: params.subjectName, skillType: params.skillType,
             difficulty: params.difficulty, format: params.format, count: n, figurePolicy: params.figurePolicy ?? "optional", skillCode: skillCode ?? undefined, keepFigureless: true,
-            avoidTopics,
+            avoidTopics, extraGuidance: params.extraGuidance,
           }));
           return { chunk };
         } catch (e) {
