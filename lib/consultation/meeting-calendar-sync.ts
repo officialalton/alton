@@ -1,9 +1,9 @@
-import { after } from "next/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime, deleteCalendarEvent } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
 import { resolveMeetingOrganizerEmail } from "./meeting-scheduling";
+import { CALENDAR_SYNC_MAX_ATTEMPTS, createCalendarResyncKit, isCalendarSyncEnabled, type SyncOutcome } from "./calendar-resync-kit";
 
 // 2026-09-29 오너 결정 — 미팅(meeting_requests)의 Google Calendar 동기화 단일 경로.
 //  - 취소는 이 파일의 cancelMeetingRequestWithCalendar() 하나만 거친다(관리자·컨설턴트 공통).
@@ -14,12 +14,10 @@ import { resolveMeetingOrganizerEmail } from "./meeting-scheduling";
 //  - claim 은 DB RPC(for update skip locked + 10분 임대)라 즉시 재시도와 크론이 같은 행을 동시에 만들지 못한다.
 //  - 실제 Google 호출은 CALENDAR_SYNC_ALLOW_REAL_CALLS=true 일 때만(fail-closed) — 꺼져 있으면 아무것도 claim 하지 않는다.
 
-export const MEETING_SYNC_MAX_ATTEMPTS = 5;
+export const MEETING_SYNC_MAX_ATTEMPTS = CALENDAR_SYNC_MAX_ATTEMPTS;
 const MEETING_TIMEZONE = "Asia/Seoul";
 
-export function isMeetingCalendarSyncEnabled(): boolean {
-  return process.env.CALENDAR_SYNC_ALLOW_REAL_CALLS === "true";
-}
+export const isMeetingCalendarSyncEnabled = isCalendarSyncEnabled;
 
 type MeetingSyncRow = {
   id: string;
@@ -35,7 +33,7 @@ type MeetingSyncRow = {
   google_sync_retry_count: number | null;
 };
 
-export type MeetingSyncOutcome = "synced" | "failed" | "permanent" | "skipped";
+export type MeetingSyncOutcome = SyncOutcome;
 
 async function deleteEvent(admin: SupabaseClient, row: MeetingSyncRow, eventId: string): Promise<void> {
   if (!row.consultant_id) throw new Error("담당 컨설턴트가 없어 Calendar 이벤트를 삭제할 수 없습니다.");
@@ -117,112 +115,26 @@ async function syncOne(admin: SupabaseClient, row: MeetingSyncRow): Promise<void
   }
 }
 
-/** claim 된 행 하나를 처리하고 결과(성공/실패 횟수 증가/영구 실패)를 기록한다. 절대 throw 하지 않는다. */
-async function processClaimed(admin: SupabaseClient, row: MeetingSyncRow): Promise<MeetingSyncOutcome> {
-  const now = new Date().toISOString();
-  try {
-    await syncOne(admin, row);
-    await admin
-      .from("meeting_requests")
-      .update({
-        google_sync_status: "succeeded",
-        google_sync_last_error: null,
-        google_sync_last_attempt_at: now,
-        google_sync_claimed_at: null,
-      })
-      .eq("id", row.id);
-    return "synced";
-  } catch (e) {
-    const message = (e instanceof Error ? e.message : String(e)).slice(0, 500);
-    const attempts = (row.google_sync_retry_count ?? 0) + 1;
-    const permanent = attempts >= MEETING_SYNC_MAX_ATTEMPTS;
-    await admin
-      .from("meeting_requests")
-      .update({
-        google_sync_status: permanent ? "reconciliation_needed" : "failed",
-        google_sync_retry_count: attempts,
-        google_sync_last_error: message,
-        google_sync_last_attempt_at: now,
-        google_sync_claimed_at: null,
-      })
-      .eq("id", row.id);
-    console.error(JSON.stringify({ event: "meeting_calendar_resync_failed", meetingRequestId: row.id, attempts, permanent, error: message }));
-    return permanent ? "permanent" : "failed";
-  }
-}
-
-async function claim(admin: SupabaseClient, limit: number, meetingRequestId?: string): Promise<MeetingSyncRow[]> {
-  const { data, error } = await admin.rpc("claim_meeting_calendar_syncs", {
-    p_limit: limit,
-    p_meeting_request_id: meetingRequestId ?? null,
-    p_max_attempts: MEETING_SYNC_MAX_ATTEMPTS,
-  });
-  if (error) throw new Error(error.message);
-  return (data ?? []) as MeetingSyncRow[];
-}
+const kit = createCalendarResyncKit<MeetingSyncRow>({
+  table: "meeting_requests",
+  claimRpc: "claim_meeting_calendar_syncs",
+  claimIdParam: "p_meeting_request_id",
+  successStatus: "succeeded",
+  logPrefix: "meeting_calendar",
+  syncOne,
+});
 
 /** 특정 미팅 하나를 지금 재시도한다(즉시 재시도·관리자 버튼). 실제 호출이 꺼져 있으면 아무것도 하지 않는다. */
-export async function resyncMeetingCalendarNow(meetingRequestId: string): Promise<MeetingSyncOutcome> {
-  if (!isMeetingCalendarSyncEnabled()) return "skipped";
-  const admin = createAdminClient();
-  const [row] = await claim(admin, 1, meetingRequestId);
-  if (!row) return "skipped";
-  return processClaimed(admin, row);
-}
+export const resyncMeetingCalendarNow = (meetingRequestId: string): Promise<MeetingSyncOutcome> => kit.resyncNow(meetingRequestId);
 
 /** 일 1회 크론 본체 — 재시도 가능한 failed 행을 일괄 처리한다. */
-export async function runMeetingCalendarResyncBatch(limit = 20): Promise<{ claimed: number; synced: number; failed: number; permanent: number; enabled: boolean }> {
-  if (!isMeetingCalendarSyncEnabled()) return { claimed: 0, synced: 0, failed: 0, permanent: 0, enabled: false };
-  const admin = createAdminClient();
-  const rows = await claim(admin, limit);
-  const out = { claimed: rows.length, synced: 0, failed: 0, permanent: 0, enabled: true };
-  for (const row of rows) {
-    const r = await processClaimed(admin, row);
-    if (r === "synced") out.synced += 1;
-    else if (r === "permanent") out.permanent += 1;
-    else out.failed += 1;
-  }
-  return out;
-}
+export const runMeetingCalendarResyncBatch = (limit = 20) => kit.runBatch(limit);
 
 /** 실패한 액션 직후 호출 — 응답을 막지 않고(after) 어떤 오류도 삼킨다. */
-export function scheduleMeetingCalendarResync(meetingRequestId: string): void {
-  const run = async () => {
-    try {
-      await resyncMeetingCalendarNow(meetingRequestId);
-    } catch (e) {
-      console.error(JSON.stringify({ event: "meeting_calendar_immediate_resync_failed", error: e instanceof Error ? e.message : String(e) }));
-    }
-  };
-  try {
-    if (!isMeetingCalendarSyncEnabled()) return;
-    try {
-      after(run);
-    } catch {
-      void run();
-    }
-  } catch (e) {
-    console.error(JSON.stringify({ event: "meeting_calendar_immediate_resync_failed", error: e instanceof Error ? e.message : String(e) }));
-  }
-}
+export const scheduleMeetingCalendarResync = (meetingRequestId: string): void => kit.schedule(meetingRequestId);
 
 /** 관리자 수동 재동기화 — 영구 실패(5회)도 횟수를 0으로 되돌려 다시 시도한다. */
-export async function adminForceResyncMeetingCalendar(meetingRequestId: string): Promise<MeetingSyncOutcome> {
-  if (!isMeetingCalendarSyncEnabled()) {
-    throw new Error("실제 Google 호출이 꺼져 있어(CALENDAR_SYNC_ALLOW_REAL_CALLS) 재동기화할 수 없습니다.");
-  }
-  const admin = createAdminClient();
-  const { data, error } = await admin
-    .from("meeting_requests")
-    .update({ google_sync_status: "failed", google_sync_retry_count: 0, google_sync_claimed_at: null })
-    .eq("id", meetingRequestId)
-    .in("google_sync_status", ["failed", "reconciliation_needed"])
-    .select("id")
-    .maybeSingle();
-  if (error) throw new Error(error.message);
-  if (!data) throw new Error("재동기화가 필요한 상태가 아닙니다.");
-  return resyncMeetingCalendarNow(meetingRequestId);
-}
+export const adminForceResyncMeetingCalendar = (meetingRequestId: string): Promise<MeetingSyncOutcome> => kit.forceResync(meetingRequestId);
 
 export type CancelMeetingResult = {
   newRequestId: string | null;

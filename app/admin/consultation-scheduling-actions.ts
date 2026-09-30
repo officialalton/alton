@@ -2,7 +2,7 @@
 
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
+import { syncOneConsultationCalendarEvent, cancelSyncedConsultationCalendarEvent, processPendingConsultationCalendarSyncs, adminForceResyncConsultationCalendar, retrySmartNotesConfigForConsultation, reprocessUnlinkedSmartNotesEvents } from "@/lib/consultation/calendar-sync";
 import { sendConsultationRejectionEmail } from "@/lib/consultation/notifications";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { scheduleContractDispatch } from "@/lib/contract-dispatch/immediate";
@@ -282,6 +282,12 @@ export async function retryTrialEntitlementGrant(consultationId: string): Promis
     p_consultation_id: consultationId,
   });
   if (error) throw new Error(friendlyDbMessage(error));
+}
+
+/** 실패한 상담 하나의 Google 재동기화 — 자동 재시도 중단(5회)도 횟수를 0으로 되돌려 다시 시도한다. */
+export async function resyncConsultationCalendar(consultationId: string): Promise<"synced" | "failed" | "permanent" | "skipped"> {
+  await requireAdmin();
+  return adminForceResyncConsultationCalendar(consultationId);
 }
 
 export async function retryFailedConsultationCalendarSyncs(): Promise<{ processed: number }> {

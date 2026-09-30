@@ -61,11 +61,15 @@ function buildConsultationsTable() {
       return {
         eq: () => ({
           in: () => ({
-            select: () => ({ maybeSingle: async () => ({ data: consultationRow, error: null }) }),
+            or: () => ({
+              select: () => ({ maybeSingle: async () => ({ data: consultationRow, error: null }) }),
+            }),
           }),
         }),
       };
     },
+    // 생성 직후 "그 사이 취소됐는가" 확인(2026-09-29 취소 레이스 방지).
+    select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { status: "scheduled" }, error: null }) }) }),
   };
 }
 

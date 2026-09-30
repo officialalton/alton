@@ -20,6 +20,7 @@ vi.mock("./consultation-scheduling-actions", () => ({
   recordConsultationOutcome: vi.fn(),
   retryTrialEntitlementGrant: vi.fn(),
   retryFailedConsultationCalendarSyncs: vi.fn(),
+  resyncConsultationCalendar: vi.fn(),
   retryConsultationSmartNotesConfig: vi.fn(),
   reprocessUnlinkedConsultationSmartNotesEvents: vi.fn(),
   listConsultAvailabilityRules: vi.fn(),
@@ -196,5 +197,47 @@ describe("ConsultationSchedulingPanel — 관리자 액션 버튼의 성공/실�
     const toast = await screen.findByTestId("admin-toast");
     expect(toast).toHaveAttribute("data-kind", "success");
     expect(toast.textContent).toContain("만료 임박 구독 갱신 완료");
+  });
+});
+
+describe("ConsultationSchedulingPanel — Google 재동기화(2026-09-29)", () => {
+  function setup(rows: Array<Record<string, unknown>>) {
+    vi.mocked(consultActions.listPendingConsultationRequests).mockResolvedValue([]);
+    vi.mocked(consultActions.listConsultationsForAdmin).mockResolvedValue(rows as never);
+    vi.mocked(consultActions.listConsultAvailabilityRules).mockResolvedValue([]);
+    vi.mocked(consultActions.listConsultAvailabilityExceptions).mockResolvedValue([]);
+    vi.mocked(subscriptionActions.listWorkspaceEventsSubscriptions).mockResolvedValue([]);
+    vi.mocked(consultActions.resyncConsultationCalendar).mockResolvedValue("synced");
+  }
+
+  it("synced 상담에는 재동기화 UI가 없다", async () => {
+    setup([BASE_CONSULTATION]);
+    render(<ConsultationSchedulingPanel />);
+    await screen.findByRole("button", { name: "상담 결과 기록" });
+    expect(screen.queryByRole("button", { name: "Google 재동기화" })).not.toBeInTheDocument();
+  });
+
+  it("failed: 시도 횟수·사유·자동 재시도 대기 문구와 버튼을 보여주고, 버튼은 액션을 호출한다", async () => {
+    setup([{ ...BASE_CONSULTATION, google_sync_status: "failed", google_sync_retry_count: 2, google_sync_last_error: "Calendar 500" }]);
+    render(<ConsultationSchedulingPanel />);
+    const box = await screen.findByTestId("consult-sync-status-consult-1");
+    expect(box.textContent).toContain("자동 재시도 대기(2/5회)");
+    expect(box.textContent).toContain("Calendar 500");
+    fireEvent.click(screen.getByRole("button", { name: "Google 재동기화" }));
+    await waitFor(() => expect(consultActions.resyncConsultationCalendar).toHaveBeenCalledWith("consult-1"));
+  });
+
+  it("reconciliation_needed: 자동 재시도 중단으로 표시한다", async () => {
+    setup([{ ...BASE_CONSULTATION, google_sync_status: "reconciliation_needed", google_sync_retry_count: 5 }]);
+    render(<ConsultationSchedulingPanel />);
+    const box = await screen.findByTestId("consult-sync-status-consult-1");
+    expect(box.textContent).toContain("자동 재시도 중단(5/5회)");
+  });
+
+  it("취소됐지만 이벤트 삭제가 실패한 상담도 재동기화 대상으로 보인다", async () => {
+    setup([{ ...BASE_CONSULTATION, status: "cancelled", google_sync_status: "failed", google_sync_retry_count: 1 }]);
+    render(<ConsultationSchedulingPanel />);
+    const box = await screen.findByTestId("consult-sync-status-consult-1");
+    expect(box.textContent).toContain("이벤트 삭제 실패");
   });
 });

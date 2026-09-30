@@ -19,6 +19,7 @@ import {
   recordConsultationOutcome,
   retryTrialEntitlementGrant,
   retryFailedConsultationCalendarSyncs,
+  resyncConsultationCalendar,
   retryConsultationSmartNotesConfig,
   reprocessUnlinkedConsultationSmartNotesEvents,
   type ConsultationListItem,
@@ -44,6 +45,25 @@ const SYNC_STATUS_LABEL: Record<string, string> = {
   failed: "Calendar 초대 실패(자동 재시도 중)",
   reconciliation_needed: "Calendar 초대 실패 — 관리자 확인 필요(이메일로 대체 안내됨)",
 };
+
+// 2026-09-29 — 자동 재시도(즉시 after → 일 1회 크론)가 5회에서 멈춘 상담은 관리자가 이 버튼으로 다시 시도한다(횟수 초기화).
+function CalendarSyncFailure({ c, busy, onResync }: { c: ConsultationListItem; busy: boolean; onResync: () => void }) {
+  if (c.google_sync_status !== "failed" && c.google_sync_status !== "reconciliation_needed") return null;
+  return (
+    <div className="flex items-center gap-2 mt-2 bg-grey-100 rounded-lg px-3 py-1.5" data-testid={`consult-sync-status-${c.id}`}>
+      <span className="text-[11.5px] text-red">
+        {c.status === "cancelled" ? "취소됨 — Google 이벤트 삭제 실패. " : ""}
+        {c.google_sync_status === "reconciliation_needed"
+          ? `Google 동기화 실패 — 자동 재시도 중단(${c.google_sync_retry_count}/5회), 확인이 필요합니다.`
+          : `Google 동기화 실패 — 자동 재시도 대기(${c.google_sync_retry_count}/5회).`}
+        {c.google_sync_last_error ? ` 사유: ${c.google_sync_last_error}` : ""}
+      </span>
+      <button disabled={busy} onClick={onResync} className="text-[11px] font-bold text-ink underline shrink-0 disabled:opacity-50">
+        Google 재동기화
+      </button>
+    </div>
+  );
+}
 
 const SUBSCRIPTION_STATUS_LABEL: Record<string, string> = {
   active: "정상",
@@ -115,6 +135,7 @@ export default function ConsultationSchedulingPanel() {
   }, []);
   const [pending, setPending] = useState<ConsultationListItem[]>([]);
   const [scheduled, setScheduled] = useState<ConsultationListItem[]>([]);
+  const [cancelledSyncIssues, setCancelledSyncIssues] = useState<ConsultationListItem[]>([]);
   const [view, setView] = useState<CalendarView>("week");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -143,6 +164,9 @@ export default function ConsultationSchedulingPanel() {
       ]);
       setPending(pendingRows);
       setScheduled(scheduledRows.filter((r) => r.status === "scheduled" || r.status === "completed"));
+      setCancelledSyncIssues(
+        scheduledRows.filter((r) => r.status === "cancelled" && (r.google_sync_status === "failed" || r.google_sync_status === "reconciliation_needed"))
+      );
       setSubscriptions(subscriptionRows);
       setError(null);
     } catch (e) {
@@ -259,6 +283,12 @@ export default function ConsultationSchedulingPanel() {
             onSelect={setView}
           />
         </div>
+        {cancelledSyncIssues.map((c) => (
+          <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-3 mb-3">
+            <p className="text-[12.5px] font-bold text-ink">{formatDateTime(c.starts_at)} · {c.contact_name} (취소됨)</p>
+            <CalendarSyncFailure c={c} busy={busyId === c.id} onResync={() => withBusy(c.id, async () => { await resyncConsultationCalendar(c.id); }, "Google 재동기화")} />
+          </div>
+        ))}
         {view === "month" && (
           <div className="mb-4 max-w-[280px]" data-testid="consultation-month-calendar">
             <MonthCalendar
@@ -307,6 +337,7 @@ export default function ConsultationSchedulingPanel() {
                 )}
                 {c.outcome && ` · 결과: ${OUTCOME_LABEL[c.outcome] ?? c.outcome}`}
               </p>
+              <CalendarSyncFailure c={c} busy={busyId === c.id} onResync={() => withBusy(c.id, async () => { await resyncConsultationCalendar(c.id); }, "Google 재동기화")} />
               <p className="text-[12px] mt-1.5" style={{ color: c.consultReadiness === "ready" ? "#16a34a" : "#b91c1c" }}>
                 {CONSULT_READINESS_LABEL[c.consultReadiness]}
               </p>
