@@ -18,7 +18,7 @@ const PAGE = 50;
 const ERROR_VERDICTS: Verdict[] = ["key_wrong_confirmed", "flawed_confirmed", "explanation_confirmed"];
 const BRANCH_EFFECT = {
   error: "문항 보관 · 이미 나간 응시·과제 전원 정답 처리(해설 오류는 채점 변경 없음) · 여분 문항 자동 교체 시도",
-  normal: "변경 없음 · 검토 필요 표시 해제 · 이전 조정은 원복",
+  normal: "문항 복귀(오류 확정으로 보관됐다면) · 대체 문항 필요 기록 닫기 · 이전 조정 원복 · 검토 필요 표시 해제",
 } as const;
 const DAYS_LABEL: Record<string, string> = { "30": "최근 30일", "7": "최근 7일" };
 const DIFF_LABEL: Record<string, string> = { easy: "쉬움", medium: "보통", hard: "어려움", unknown: "미지정" };
@@ -34,6 +34,9 @@ function resultText(r: ApplyVerdictResult): string {
   if (r.alreadyApplied) return "이미 같은 판정이 적용돼 있습니다. 남은 신고만 닫았습니다.";
   const parts: string[] = [VERDICT_LABEL[r.decision]];
   if (r.archived) parts.push("문항 보관");
+  if (r.restored) parts.push("문항 복귀");
+  if ((r.replacementNeedsCancelled ?? 0) > 0) parts.push(`대체 문항 필요 기록 ${r.replacementNeedsCancelled}건 닫음`);
+  if (r.decision === "not_error" && (r.replacedSetsKept ?? 0) > 0) parts.push(`이미 교체된 세트 ${r.replacedSetsKept}개는 그대로입니다`);
   if ((r.mockAdjustedAnswers ?? 0) > 0) parts.push(`모의고사 ${r.mockAdjustedAnswers}문항 조정 채점`);
   if ((r.sessionWorksAdjusted ?? 0) > 0) parts.push(`과제 ${r.sessionWorksAdjusted}건 조정`);
   if ((r.homeworkItemsAdjusted ?? 0) > 0) parts.push(`과제 묶음 ${r.homeworkItemsAdjusted}문항 조정`);

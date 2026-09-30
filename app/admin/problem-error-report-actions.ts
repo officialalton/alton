@@ -48,6 +48,9 @@ export type ApplyVerdictResult = {
   autoReplaced?: number;
   replacementNeedsOpen?: number;
   archived?: boolean;
+  restored?: boolean;
+  replacementNeedsCancelled?: number;
+  replacedSetsKept?: number;
 };
 
 export type ReplacementNeedSummary = {
