@@ -623,11 +623,6 @@ test.describe("M4 — 계약 자동 큐잉: 직접 계정 생성 · 정규 바�
     await detail.getByPlaceholder("보호자 이름").fill(`M4큐잉 정규 보호자 ${RUN}`);
     await detail.getByPlaceholder("학생 이름").fill(regStudentName);
     await detail.getByPlaceholder("학생 이메일").fill(regStudentEmail);
-    // 앱 결함 우회(총괄 보고 대상): '정규 진행 권장' 경로는 화면이 "체험 진행 확정" 버튼을
-    // 숨기는데도 create_trial_onboarding_link_multi가 trial_intent_confirmed_at을 요구해
-    // "보호자의 체험 진행 확정 이후에만 온보딩 링크를 발급할 수 있습니다"로 막힌다.
-    // 큐잉 검증을 계속하려고 그 컬럼만 직접 채운다 — 결함이 고쳐지면 이 줄을 지운다.
-    psql(`update consultations set trial_intent_confirmed_at = now() where id = '${regConsultationId}' and trial_intent_confirmed_at is null;`);
     await sendButton.click();
     await expect(detail.getByTestId("trial-onboarding-link-progress-toggle")).toBeVisible({ timeout: 30000 });
     const mail = await findLatestEmailTo(regGuardianEmail, "온보딩 안내");
