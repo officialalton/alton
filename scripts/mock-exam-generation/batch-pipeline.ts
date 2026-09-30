@@ -15,6 +15,8 @@ const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) for (const line of readFileSync(envPath, "utf-8").split("\n")) { const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, ""); }
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 const flag = (n: string) => process.argv.includes(n);
+const SYNC = process.argv.includes("--sync");
+const mult = () => (SYNC ? 2 : 1);
 const COMBOS: Record<string, { gen: string; rev: string }> = {
   A: { gen: "claude-sonnet-5-5", rev: "claude-sonnet-5-5" },
   B: { gen: "claude-opus-5-5", rev: "claude-fable-5-1" },
@@ -141,12 +143,12 @@ async function main() {
   const led = ledger(dir);
   // 1단계: 생성
   const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: cfg.gen, ...think(cfg.gen), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라. 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
-  const genEst = estimate(cfg.gen, cands.length, 1500, 1000);
-  const revEst = estimate(cfg.rev, cands.length, 2800, 520);
+  const genEst = estimate(cfg.gen, cands.length, 1500, 1000) * mult();
+  const revEst = estimate(cfg.rev, cands.length, 2800, 520) * mult();
   console.log(`[${combo}/${method}] 후보 ${cands.length} · 생성 ${cfg.gen} 추정 $${genEst.toFixed(2)} + 검수 ${cfg.rev} 추정 $${revEst.toFixed(2)} = $${(genEst + revEst).toFixed(2)} · 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
   if (led.spent() + genEst + revEst > budget) throw new Error("예산 상한 초과 예상 — 실행하지 않음");
   if (flag("--dry")) return;
-  const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: genEst });
+  const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: genEst / mult(), sync: SYNC });
   // 결정론 필터
   const gens = new Map<string, { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }>();
   const dropped: Record<string, string[]> = {};
@@ -162,10 +164,10 @@ async function main() {
   // 2단계: 검수(결정론 통과분만)
   const passDet = [...gens.values()].filter((x) => x.det.issues.length === 0);
   const revReqs: BatchReq[] = passDet.flatMap(({ c, g }) => [blindReq(cfg.rev, c.cid, c.skill, g), auditReq(cfg.rev, c, g, c.recipeId ? (recipesFor(c.skill).find((r) => r.id === c.recipeId) ?? null) : null)]);
-  const rev2 = estimate(cfg.rev, revReqs.length / 2, 2800, 520);
+  const rev2 = estimate(cfg.rev, revReqs.length / 2, 2800, 520) * mult();
   console.log(`결정론 통과 ${passDet.length}/${cands.length} -> 검수 요청 ${revReqs.length}건, 추정 $${rev2.toFixed(2)}`);
   if (led.spent() + rev2 > budget) throw new Error("검수 단계 예산 초과 예상 — 중단");
-  const revRes = await runBatch({ dir, name: "review", requests: revReqs, budgetUsd: budget, estimateUsd: rev2 });
+  const revRes = await runBatch({ dir, name: "review", requests: revReqs, budgetUsd: budget, estimateUsd: rev2 / mult(), sync: SYNC });
   writeFileSync(path.join(dir, "config.json"), JSON.stringify({ combo, method, ...cfg }));
   console.log("완료. `report` 로 집계하세요. 누적 비용 $" + led.spent().toFixed(2));
   void revRes; void dropped;
@@ -244,10 +246,10 @@ async function rereview() {
     return { c, g };
   });
   const reqs = items.flatMap(({ c, g }) => [blindReq(model, c.cid, c.skill, g), auditReq(model, c, g, recipesFor(c.skill).find((x) => x.id === c.recipeId) ?? null)]);
-  const est = estimate(model, items.length, 2800, 520);
+  const est = estimate(model, items.length, 2800, 520) * mult();
   console.log(`재검수 ${items.length}건(요청 ${reqs.length}) ${model} 추정 $${est.toFixed(2)} 누적 $${ledger(dir).spent().toFixed(2)}`);
   if (flag("--dry")) return;
-  const res = await runBatch({ dir, name: "rereview", requests: reqs, budgetUsd: Number(arg("--budget") ?? 8), estimateUsd: est });
+  const res = await runBatch({ dir, name: "rereview", requests: reqs, budgetUsd: Number(arg("--budget") ?? 8), estimateUsd: est / mult(), sync: SYNC });
   const out = items.map(({ c, g }) => { const b = res.get(`b-${c.cid}`.slice(0, 64)), a = res.get(`a-${c.cid}`.slice(0, 64)); const bi = b ? toolInput(b) : null, ai = a ? toolInput(a) : null; const rec = recipesFor(c.skill).find((x) => x.id === c.recipeId)!; const correct = Boolean(bi && ai && bi.picked_letter === g.correct_letter && !bi.other_defensible && ai.answer_correct && ai.explanation_consistent && ai.format_ok); const met = ai ? (ai.met as boolean[]).filter(Boolean).length : 0; const fit = Boolean(ai && ai.beyond_medium && !ai.only_complexity); return { gid: c.cid, skill: c.skill, recipeId: c.recipeId, correctOk: correct, complianceOk: met >= rec.minMet, hardFitOk: fit, which: ai?.which ?? [], note: ai?.note ?? "", hold: !(correct && fit) }; });
   writeFileSync(path.join(dir, "rereview.json"), JSON.stringify(out, null, 1));
   console.log(JSON.stringify({ n: out.length, correct: out.filter((x) => x.correctOk).length, compliance: out.filter((x) => x.complianceOk).length, hardFit: out.filter((x) => x.hardFitOk).length, hold: out.filter((x) => x.hold).length }));

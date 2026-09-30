@@ -38,7 +38,7 @@ export function ledger(dir: string) {
 
 type Result = { custom_id: string; ok: boolean; model: string; message?: { content: { type: string; input?: unknown; text?: string }[] }; usage?: Usage; cost?: number; err?: string };
 
-export async function runBatch(opts: { dir: string; name: string; requests: BatchReq[]; budgetUsd?: number; estimateUsd: number; pollMs?: number }): Promise<Map<string, Result>> {
+export async function runBatch(opts: { dir: string; name: string; requests: BatchReq[]; budgetUsd?: number; estimateUsd: number; pollMs?: number; sync?: boolean; syncConcurrency?: number }): Promise<Map<string, Result>> {
   mkdirSync(opts.dir, { recursive: true });
   const stateF = path.join(opts.dir, `${opts.name}.state.json`);
   const resF = path.join(opts.dir, `${opts.name}.results.jsonl`);
@@ -46,20 +46,22 @@ export async function runBatch(opts: { dir: string; name: string; requests: Batc
   const done = new Map<string, Result>();
   if (existsSync(resF)) for (const l of readFileSync(resF, "utf-8").split("\n").filter(Boolean)) { const r = JSON.parse(l) as Result; if (r.ok) done.set(r.custom_id, r); }
   const modelOf = new Map(opts.requests.map((r) => [r.custom_id, r.params.model]));
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < 4; attempt++) {
     const todo = opts.requests.filter((r) => !done.has(r.custom_id));
     if (!todo.length) break;
     let state = existsSync(stateF) ? (JSON.parse(readFileSync(stateF, "utf-8")) as { batchId: string | null; ids: string[] }) : { batchId: null, ids: [] };
     // 진행 중이던 배치가 지금 todo 와 같은 요청 집합이면 이어서 폴링.
-    const same = state.batchId && state.ids.length === todo.length && todo.every((r) => state.ids.includes(r.custom_id));
-    if (!same) {
+    const pending = Boolean(state.batchId);
+    if (!pending && opts.sync) { await syncRun(todo, opts, resF, done, modelOf, led); break; }
+    const same = pending && state.ids.length === todo.length && todo.every((r) => state.ids.includes(r.custom_id));
+    if (!pending) {
       const projected = led.spent() + opts.estimateUsd * (todo.length / opts.requests.length);
       if (opts.budgetUsd !== undefined && projected > opts.budgetUsd) throw new Error(`예산 초과 예상: 누적 ${led.spent().toFixed(2)} + 추정 ${(projected - led.spent()).toFixed(2)} > 상한 ${opts.budgetUsd}`);
       const b = await getClient().messages.batches.create({ requests: todo as never });
       state = { batchId: b.id, ids: todo.map((r) => r.custom_id) };
       writeFileSync(stateF, JSON.stringify(state));
       process.stderr.write(`[batch ${opts.name}] 제출 ${b.id} (${todo.length}건, 시도 ${attempt + 1})\n`);
-    } else process.stderr.write(`[batch ${opts.name}] 이어서 폴링 ${state.batchId}\n`);
+    } else process.stderr.write(`[batch ${opts.name}] 이어서 폴링(또는 취소 후 수집) ${state.batchId}\n`);
     for (;;) {
       const b = await getClient().messages.batches.retrieve(state.batchId!);
       if (b.processing_status === "ended") break;
@@ -95,3 +97,35 @@ export const toolInput = (r: Result): Record<string, unknown> | null => {
   const tu = r.message?.content.find((c) => c.type === "tool_use");
   return tu ? ((tu.input as Record<string, unknown>) ?? null) : null;
 };
+
+/** 동기 호출(배치 단가의 2배) — 큐가 막힌 모델용. 동시 호출 수를 제한하고 429/5xx 는 백오프 재시도, 호출마다 예산 장부를 확인한다. */
+async function syncRun(todo: BatchReq[], opts: { name: string; budgetUsd?: number; estimateUsd: number; syncConcurrency?: number }, resF: string, done: Map<string, Result>, modelOf: Map<string, string>, led: ReturnType<typeof ledger>) {
+  const q = [...todo];
+  let cost = 0;
+  const perReqEst = (opts.estimateUsd * 2) / Math.max(1, todo.length);
+  process.stderr.write(`[sync ${opts.name}] ${todo.length}건 동기 실행(단가 2배, 예상 $${(perReqEst * todo.length).toFixed(2)})\n`);
+  await Promise.all(Array.from({ length: opts.syncConcurrency ?? 6 }, async () => {
+    while (q.length) {
+      const r = q.shift()!;
+      if (opts.budgetUsd !== undefined && led.spent() + cost + perReqEst > opts.budgetUsd) { process.stderr.write(`[sync ${opts.name}] 예산 상한 도달 — 중단\n`); q.length = 0; return; }
+      for (let a = 0; a < 5; a++) {
+        try {
+          const msg = await getClient().messages.create(r.params as never);
+          const u = msg.usage as Usage;
+          const c = costOf(modelOf.get(r.custom_id) ?? "", u) * 2;
+          cost += c;
+          const rec: Result = { custom_id: r.custom_id, ok: true, model: modelOf.get(r.custom_id) ?? "", message: msg as never, usage: u, cost: c };
+          appendFileSync(resF, JSON.stringify(rec) + "\n");
+          done.set(r.custom_id, rec);
+          break;
+        } catch (e) {
+          const status = (e as { status?: number }).status;
+          if (status === 400) { appendFileSync(resF, JSON.stringify({ custom_id: r.custom_id, ok: false, model: modelOf.get(r.custom_id), err: (e as Error).message.slice(0, 200) }) + "\n"); break; }
+          await sleep(3000 * (a + 1));
+        }
+      }
+    }
+  }));
+  led.add(cost, `${opts.name} sync`);
+  process.stderr.write(`[sync ${opts.name}] 완료 성공 ${done.size}, 이번 비용 $${cost.toFixed(4)}, 누적 $${led.spent().toFixed(2)}\n`);
+}
