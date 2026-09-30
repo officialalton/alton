@@ -19,6 +19,7 @@ vi.mock("@/lib/supabase-admin", () => ({
 }));
 vi.mock("@/lib/admin-auth", () => ({
   requireAdminOrCapability: vi.fn().mockResolvedValue({ actorUserId: "admin1" }),
+  requireAdminCapabilityOrAssignedConsultant: vi.fn().mockResolvedValue({ actorUserId: "admin1" }),
 }));
 vi.mock("./subject-enrollment-actions", () => ({
   planSubjectEnrollment: vi.fn(),

@@ -15,6 +15,7 @@ vi.mock("@/lib/contract-dispatch/immediate", () => ({
 
 vi.mock("@/lib/admin-auth", () => ({
   requireAdmin: vi.fn().mockResolvedValue({ supabase: { rpc: rpcMock }, actorUserId: "admin1" }),
+  requireAdminOrConsultant: vi.fn().mockResolvedValue({ supabase: { rpc: rpcMock }, actorUserId: "admin1", role: "admin" }),
   requireAdminOrCapability: vi.fn().mockResolvedValue({ supabase: { rpc: rpcMock }, actorUserId: "admin1" }),
 }));
 
@@ -112,8 +113,8 @@ describe("recordConsultationOutcome", () => {
   });
 
   it("requireAdmin()이 throw해도(비관리자) 예외를 전파하지 않고 { ok: false, error }로 반환한다", async () => {
-    const { requireAdmin } = await import("@/lib/admin-auth");
-    vi.mocked(requireAdmin).mockRejectedValueOnce(new Error("관리자만 사용할 수 있습니다."));
+    const { requireAdminOrConsultant } = await import("@/lib/admin-auth");
+    vi.mocked(requireAdminOrConsultant).mockRejectedValueOnce(new Error("관리자 또는 담당 컨설턴트만 사용할 수 있습니다."));
     const { recordConsultationOutcome } = await import("./consultation-scheduling-actions");
 
     const result = await recordConsultationOutcome({
@@ -123,7 +124,7 @@ describe("recordConsultationOutcome", () => {
       adminReviewSummary: "요약",
     });
 
-    expect(result).toEqual({ ok: false, error: "관리자만 사용할 수 있습니다." });
+    expect(result).toEqual({ ok: false, error: "관리자 또는 담당 컨설턴트만 사용할 수 있습니다." });
   });
 });
 
@@ -146,5 +147,26 @@ describe("recordConsultationOutcome — 계약 즉시 발송 훅", () => {
     const r = await recordConsultationOutcome({ ...base, outcome: "regular_recommended" });
     expect(r.ok).toBe(false);
     expect(scheduleDispatchMock).not.toHaveBeenCalled();
+  });
+});
+
+describe("rejectConsultationRequest — 확정된 상담을 거절하면 Google 일정도 바로 지운다", () => {
+  it("RPC 성공 뒤 cancelSyncedConsultationCalendarEvent 를 호출하고 거절 메일을 보낸다", async () => {
+    const { cancelSyncedConsultationCalendarEvent } = await import("@/lib/consultation/calendar-sync");
+    const { sendConsultationRejectionEmail } = await import("@/lib/consultation/notifications");
+    vi.mocked(cancelSyncedConsultationCalendarEvent).mockClear();
+    rpcMock.mockResolvedValueOnce({ data: { contact_name: "김", contact_email: "k@example.com" }, error: null });
+    const { rejectConsultationRequest } = await import("./consultation-scheduling-actions");
+    await rejectConsultationRequest("consult-r1", "사유");
+    expect(cancelSyncedConsultationCalendarEvent).toHaveBeenCalledWith("consult-r1");
+    expect(sendConsultationRejectionEmail).toHaveBeenCalled();
+  });
+
+  it("Calendar 정리가 실패해도 거절 자체는 성공한다", async () => {
+    const { cancelSyncedConsultationCalendarEvent } = await import("@/lib/consultation/calendar-sync");
+    vi.mocked(cancelSyncedConsultationCalendarEvent).mockRejectedValueOnce(new Error("google down"));
+    rpcMock.mockResolvedValueOnce({ data: null, error: null });
+    const { rejectConsultationRequest } = await import("./consultation-scheduling-actions");
+    await expect(rejectConsultationRequest("consult-r2", "사유")).resolves.toBeUndefined();
   });
 });

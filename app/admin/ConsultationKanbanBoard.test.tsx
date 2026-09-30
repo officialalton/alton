@@ -865,3 +865,37 @@ describe("ConsultationKanbanBoard — 계정 생성 카드는 상담 라이프�
     expect(screen.getByText(/보호자 동의 확인 대기 중/)).toBeInTheDocument();
   });
 });
+
+describe("ConsultationKanbanBoard — 시간 없는 신청은 수락 버튼 대신 안내(2026-09-29 시나리오 감사)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    findDuplicateConsultationCandidatesMock.mockResolvedValue([]);
+  });
+
+  function setup(startsAt: string | null) {
+    listKanbanBoardActionMock.mockResolvedValue([{ ...cardRow(), status: "requested", outcome: null, stage: "requested" as const }]);
+    getConsultationCardDetailActionMock.mockResolvedValue({
+      ...cardDetail(),
+      consultation: { ...cardDetail().consultation, status: "requested", outcome: null, child_id: null, starts_at: startsAt, scheduled_at: null },
+      pipeline: null,
+    });
+    render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
+  }
+
+  it("starts_at 이 없으면 수락 버튼이 없고 예약 링크 안내가 나온다(거절은 가능)", async () => {
+    setup(null);
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+    expect(screen.getByTestId("awaiting-customer-slot")).toBeInTheDocument();
+    expect(screen.queryByText(/수락\(Calendar/)).not.toBeInTheDocument();
+    expect(screen.getByText("거절")).toBeInTheDocument();
+  });
+
+  it("starts_at 이 있으면 수락 버튼이 나온다", async () => {
+    setup("2026-09-10T01:00:00Z");
+    fireEvent.click(await screen.findByText("김민지"));
+    await screen.findByTestId("consultation-card-detail");
+    expect(screen.getByText(/수락\(Calendar/)).toBeInTheDocument();
+    expect(screen.queryByTestId("awaiting-customer-slot")).not.toBeInTheDocument();
+  });
+});

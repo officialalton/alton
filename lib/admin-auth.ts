@@ -91,3 +91,48 @@ export async function requireAdminOrCapability(capability: string) {
   }
   return { supabase, actorUserId: user.id };
 }
+
+// 2026-09-29(온보딩 시나리오 감사) — 배정 이후의 상담 진행(수락·거절·결과 기록)은 담당 컨설턴트의
+// 몫이다. DB RPC(admin_accept/reject_consultation·admin_record_consultation_outcome)는 이미
+// "관리자 또는 담당 컨설턴트"만 통과시키는데, 서버 액션이 requireAdmin()이라 컨설턴트 화면의
+// 같은 버튼이 항상 "관리자만 사용할 수 있습니다"로 막혀 있었다(막다른 길). 이 헬퍼는 관리자나
+// 컨설턴트 역할만 통과시키고, 담당 여부는 사용자 세션으로 호출하는 RPC가 최종 판정한다.
+export async function requireAdminOrConsultant() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+
+  const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+  if (profile?.role !== "admin" && profile?.role !== "consultant") {
+    throw new Error("관리자 또는 담당 컨설턴트만 사용할 수 있습니다.");
+  }
+  return { supabase, actorUserId: user.id, role: profile.role as "admin" | "consultant" };
+}
+
+// 상담 하나에 대한 작업(체험 진행 확정 등): 관리자·capability 보유자, 또는 그 상담의 담당 컨설턴트.
+export async function requireAdminCapabilityOrAssignedConsultant(capability: string, consultationId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+
+  const { data: profile } = await supabase.from("profiles").select("role, admin_tier").eq("id", user.id).single();
+  if (profile?.role === "admin" && profile.admin_tier !== "supervisor") {
+    return { supabase, actorUserId: user.id };
+  }
+  if (profile?.role === "consultant") {
+    const { data: row } = await supabase
+      .from("consultations")
+      .select("admissions_consultant_id")
+      .eq("id", consultationId)
+      .maybeSingle();
+    if (row?.admissions_consultant_id === user.id) return { supabase, actorUserId: user.id };
+    throw new Error("담당 컨설턴트만 이 상담을 진행할 수 있습니다.");
+  }
+  const { data: hasCapability } = await supabase.rpc("current_user_has_capability", { p_capability: capability });
+  if (!hasCapability) throw new Error("이 작업을 수행할 권한이 없습니다.");
+  return { supabase, actorUserId: user.id };
+}

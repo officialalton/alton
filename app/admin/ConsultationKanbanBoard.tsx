@@ -451,14 +451,21 @@ function ConsultationCardDetailPanel({
 
         {/* 1. 상담 신청 단계 — 수락/거절 */}
         {c.status === "requested" && (
-          <div className="mb-3 flex gap-2">
-            <button
-              className={btnPrimary}
-              disabled={busy}
-              onClick={() => run(() => acceptConsultationRequest(c.id))}
-            >
-              수락(Calendar·Meet 생성)
-            </button>
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            {/* 시간이 아직 없는 신청은 수락할 수 없다(서버도 거절) — 고객이 예약 링크에서 시간을 고르면 자동 확정된다. */}
+            {c.starts_at ? (
+              <button
+                className={btnPrimary}
+                disabled={busy}
+                onClick={() => run(() => acceptConsultationRequest(c.id))}
+              >
+                수락(Calendar·Meet 생성)
+              </button>
+            ) : (
+              <span className="text-[11.5px] text-grey-500" data-testid="awaiting-customer-slot">
+                고객이 예약 링크에서 시간을 고르면 자동으로 확정됩니다.
+              </span>
+            )}
             <button
               className={btnSecondary}
               disabled={busy}

@@ -176,12 +176,14 @@ export async function sendConsultationSchedulingLinkAction(consultationId: strin
 
   const { data: consultation, error: consultationError } = await supabase
     .from("consultations")
-    .select("contact_name, contact_email, admissions_consultant_id, starts_at")
+    .select("contact_name, contact_email, admissions_consultant_id, starts_at, status")
     .eq("id", consultationId)
     .single();
   if (consultationError) throw new Error(consultationError.message);
   if (!consultation.admissions_consultant_id) throw new Error("담당 컨설턴트가 먼저 배정되어야 합니다.");
   if (consultation.starts_at) throw new Error("이미 일정이 확정된 상담입니다.");
+  // 취소·종료된 상담에 예약 링크 메일이 나가면 고객이 열어도 무효라 혼란만 준다(2026-09-29 시나리오 감사).
+  if (consultation.status !== "requested") throw new Error(`신청 대기 상태의 상담에만 예약 링크를 보낼 수 있습니다(현재 상태: ${consultation.status}).`);
 
   const { data: consultant, error: consultantLookupError } = await supabase
     .from("profiles")
