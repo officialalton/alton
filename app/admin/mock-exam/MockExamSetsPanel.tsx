@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { Suspense, lazy, useEffect, useState, useTransition } from "react";
 import {
   assembleMockExamSet,
   archiveMockExamSetAction,
@@ -29,6 +29,10 @@ import { domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import MockExamSetContentViewer from "@/app/components/MockExamSetContentViewer";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
+
+// 대체 문항 필요 표시는 문제 오류 신고 기능(별도 액션 모듈) — 기존 화면 첫 렌더에 영향이 없도록 lazy 로 불러온다.
+const ReplacementNeedsBlock = lazy(() => import("./ReplacementNeeds").then((m) => ({ default: m.ReplacementNeedsBlock })));
+const ReplacementBadge = lazy(() => import("./ReplacementNeeds").then((m) => ({ default: m.ReplacementBadge })));
 
 const TIER_LABEL: Record<DifficultyTier, string> = { foundation: "기본", standard: "표준", advanced: "상위" };
 const STATUS_LABEL: Record<string, string> = { draft: "초안", published: "공개", archived: "보관" };
@@ -155,6 +159,13 @@ function PoolTab() {
         공개된 문항 기준입니다. 풀은 모의고사용과 기존(양쪽) 문항이며 일반용은 조립에 쓰이지 않습니다. 배정은 서로 다른 문항 수이고
         (여러 세트에 있어도 1회, 보관된 세트 제외) 남음 = 풀 − 배정입니다.
       </p>
+      <Suspense fallback={null}>
+        <ReplacementNeedsBlock
+          poolRest={Object.fromEntries(
+            (rows ?? []).map((r) => [`${r.satDomain}|${r.skillCode ?? ""}`, r.mockExam + r.both - r.assignedPublished - r.assignedDraft]),
+          )}
+        />
+      </Suspense>
     </section>
   );
 }
@@ -436,6 +447,11 @@ function SetListTable({ sets, emptyLabel }: { sets: MockExamSetSummary[]; emptyL
             <tr key={s.id} className="border-t border-grey-100">
               <td className="py-2">
                 {s.name} <span className="text-xs text-grey-400">v{s.versionNo}</span>
+                {s.status !== "archived" && (
+                  <Suspense fallback={null}>
+                    <ReplacementBadge examSetId={s.id} />
+                  </Suspense>
+                )}
               </td>
               <td>{TIER_LABEL[s.difficultyTier]}</td>
               <td>

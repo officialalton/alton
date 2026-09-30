@@ -585,7 +585,7 @@ export default function SessionShell({
           homeworkBatches={homeworkBatches}
         />
       ) : activeTab === "mock-exam" ? (
-        <SessionMockExamTab studentId={studentId} isTeacher={isTeacher} initialAttempts={initialMockExamAttempts} />
+        <SessionMockExamTab studentId={studentId} isTeacher={isTeacher} viewerRole={viewerRole} initialAttempts={initialMockExamAttempts} />
       ) : activeTab === "prep" ? (
         prep ? (
           <>

@@ -20,10 +20,13 @@ const STATUS_LABEL: Record<string, string> = {
 export default function SessionMockExamTab({
   studentId,
   isTeacher,
+  viewerRole,
   initialAttempts,
 }: {
   studentId: string;
   isTeacher: boolean;
+  /** 문제 오류 신고 버튼은 학생·선생님에게만 — 생략하면 isTeacher 로 추정. */
+  viewerRole?: "student" | "teacher" | "parent" | "admin";
   /** 2026-09-22(UAT "모의고사 탭만 유독 로딩이 길다") — 세션 페이지가 SSR로 미리
    * 받아 두면(다른 탭과 동일한 패턴) 탭을 열 때 따로 왕복하지 않는다. 없으면(구
    * 호출 경로 대비) 기존처럼 클라이언트에서 받는다. */
@@ -74,7 +77,11 @@ export default function SessionMockExamTab({
         {!detail ? (
           <p className="text-[13px] text-grey-500">불러오는 중…</p>
         ) : detail.status === "graded" ? (
-          <MockExamResultView attempt={detail} readOnly={isTeacher} />
+          <MockExamResultView
+            attempt={detail}
+            readOnly={isTeacher}
+            reportRole={(viewerRole ?? (isTeacher ? "teacher" : "student")) === "teacher" ? "teacher" : (viewerRole ?? "student") === "student" ? "student" : null}
+          />
         ) : isTeacher ? (
           <TeacherMockExamAttemptViewer attempt={detail} />
         ) : (

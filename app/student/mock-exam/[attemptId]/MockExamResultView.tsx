@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport, weakSkills } from "@/lib/mock-exam/report";
 import { SCORE_DISCLAIMER } from "@/lib/mock-exam/score-estimate";
@@ -9,6 +9,9 @@ import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 import { toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
+import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
+import type { MyReportStatus, ReporterRole } from "@/lib/problem-error-reports/labels";
 
 const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
@@ -37,8 +40,13 @@ export function ItemDetail({
   attemptId,
   studentId,
   viewerIsOwner = true,
+  reportRole = null,
+  reportStatus = null,
 }: {
   item: MockExamAttemptItem;
+  /** 문제 오류 신고 버튼을 보일 역할 — 학생(본인 결과)·선생님(담당 학생 열람)만. 학부모·관리자는 null. */
+  reportRole?: ReporterRole | null;
+  reportStatus?: MyReportStatus | null;
   /** 필기 저장/열람에 필요 — 없으면(하위 호환) 필기 도구를 안 보여준다. */
   attemptId?: string;
   studentId?: string;
@@ -77,6 +85,11 @@ export function ItemDetail({
           </button>
         )}
       </div>
+      {item.adjusted && (
+        <p className="mb-2 rounded-lg bg-green/10 px-3 py-1.5 text-[12px] font-semibold text-green" data-testid="mock-exam-item-adjusted">
+          문항 오류로 정답 처리된 문항입니다.
+        </p>
+      )}
       {item.passage && <RwStimulusView passage={item.passage} className="mb-3 text-[13px]" />}
       {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
       {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}
@@ -121,6 +134,15 @@ export function ItemDetail({
         </div>
       )}
 
+      {reportRole && attemptId && (
+        <ProblemErrorReportButton
+          className="mt-3"
+          role={reportRole}
+          initialStatus={reportStatus}
+          context={{ source: "mock_exam", attemptId, setItemId: item.setItemId, problemId: item.problemId }}
+        />
+      )}
+
       {attemptId && studentId && (
         <ProblemNoteCanvas
           context="mock_exam"
@@ -134,7 +156,31 @@ export function ItemDetail({
   );
 }
 
-export default function MockExamResultView({ attempt, readOnly }: { attempt: MockExamAttemptDetail; readOnly: boolean }) {
+export default function MockExamResultView({
+  attempt,
+  readOnly,
+  reportRole: reportRoleProp,
+}: {
+  attempt: MockExamAttemptDetail;
+  readOnly: boolean;
+  /** 문제 오류 신고 버튼 역할. 생략하면 본인 결과(readOnly=false)는 학생, 읽기 전용(학부모 등)은 없음. */
+  reportRole?: ReporterRole | null;
+}) {
+  const reportRole: ReporterRole | null = reportRoleProp !== undefined ? reportRoleProp : readOnly ? null : "student";
+  // 내가 신고한 문항의 진행 상태 — 결과 화면당 한 번만 조회한다.
+  const [myReports, setMyReports] = useState<Record<string, MyReportStatus>>({});
+  useEffect(() => {
+    if (!reportRole || attempt.items.length === 0) return;
+    let cancelled = false;
+    loadMyProblemErrorReportsAction(attempt.items.map((i) => i.problemId))
+      .then((r) => {
+        if (!cancelled && r.ok) setMyReports(r.value);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [reportRole, attempt.items]);
   const report = computeMockExamReport(attempt.items);
   // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 서버가 계산해 범위만 내려준다(경로·난이도는 클라이언트에 없다).
   const scoreEstimate = attempt.format === "mst" ? (attempt.scoreEstimate ?? null) : null;
@@ -155,6 +201,12 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
           실제 SAT·College Board 점수와 동등하지 않은 학습 진단 결과입니다(사양 7절).
         </p>
       </div>
+
+      {attempt.scoreAdjusted && (
+        <div role="note" className="rounded-lg border border-green bg-green/10 p-3 text-[12.5px] font-semibold text-green" data-testid="mock-exam-score-adjusted">
+          문항 오류로 점수가 조정되었습니다. 오류가 확인된 문항은 정답으로 처리됐고, 아래 점수와 예상 점수 범위는 조정된 채점 기준입니다.
+        </div>
+      )}
 
       {scoreEstimate && (
         <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate">
@@ -274,7 +326,14 @@ export default function MockExamResultView({ attempt, readOnly }: { attempt: Moc
     {attempt.items.length > 0 && (
       <div className="mt-4 md:sticky md:top-4 md:mt-0">
         {selected ? (
-          <ItemDetail item={selected} attemptId={attempt.id} studentId={attempt.studentId} viewerIsOwner={!readOnly} />
+          <ItemDetail
+            item={selected}
+            attemptId={attempt.id}
+            studentId={attempt.studentId}
+            viewerIsOwner={!readOnly}
+            reportRole={reportRole}
+            reportStatus={myReports[selected.problemId] ?? null}
+          />
         ) : (
           <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">
             왼쪽에서 문항을 누르면 여기에 문제·내 답·정답·해설이 표시됩니다.

@@ -30,6 +30,8 @@ export type MockExamAttemptSummary = {
   gradedAt: string | null;
   totalCount: number;
   correctCount: number | null;
+  /** 문항 오류 판정으로 correctCount 가 조정 채점 기준이다. */
+  scoreAdjusted?: boolean;
   /** 2026-09-22(사용자 지시) — 응시 화면을 나갔다가 다시 들어온 횟수. 시간
    * 어뷰징 의심 신호로 교사 화면에 노출한다(정교한 타이머 재설계는 아님). */
   entryCount: number;
@@ -53,6 +55,9 @@ export type MockExamAttemptItem = {
   figure: unknown;
   response: string | null;
   correct: boolean | null;
+  /** 문항 오류 판정으로 조정 채점된 문항(correct 는 조정 기준, originalCorrect 는 원채점). 신고 기능 이전 응답에는 없다. */
+  adjusted?: boolean;
+  originalCorrect?: boolean | null;
   flagged: boolean;
   savedToPractice: boolean;
   timeSpentSeconds: number | null;
@@ -83,6 +88,8 @@ export type MockExamAttemptDetail = {
   format: "fixed" | "mst";
   currentModule: "rw_m1" | "rw_m2" | "break" | "math_m1" | "math_m2" | null;
   items: MockExamAttemptItem[];
+  /** 문항 오류 판정으로 점수가 조정된 응시(학생·학부모 안내용). 원채점은 DB 에 보존된다. */
+  scoreAdjusted?: boolean;
   /** 직원(관리자·담당 교사·컨설턴트) 응답에만 있다. 학생·보호자 응답에는 이 키 자체가 없다(경로 비노출). */
   /** 예상 점수 범위(내부 추정). 서버가 경로로 계산해 범위만 싣는다 — 경로·난이도는 없다. MST 채점 완료 시에만. */
   scoreEstimate?: ScoreEstimate | null;
