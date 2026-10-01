@@ -30,32 +30,36 @@ function scanResidue() {
   return hits;
 }
 
-const SHUFFLE_INDUCED = ["06a3ced4", "a19ad79c", "daf80509", "9cedb4e8", "b43c5755", "7f8bd0b4", "9d4af989", "4eaf03a4", "9eb0fc6f", "a397f4d3", "021df67e", "43f4e230", "a297b352"];
+const SHUFFLE_INDUCED = ["06a3ced4", "a19ad79c", "daf80509", "9cedb4e8", "b43c5755", "7f8bd0b4", "9d4af989", "4eaf03a4", "9eb0fc6f", "a397f4d3", "021df67e", "43f4e230", "a297b352", "92641ca8", "078f6eba"];
 function main() {
   const plan = rd<FixEntry[]>(path.join(DIR, "plan.json"));
   const inPlan = new Set(plan.map((e) => e.gid));
   const sub = rd<{ chunk: number; gid: string; ok: boolean; severity: string; issue: string }[]>(path.join(DIR, "subverify/all-results.json"));
+  const rereview = ["rereview-result-1.json", "rereview-result-2.json"].flatMap((f) => rd<{ gid: string; ok: boolean; severity: string; issue: string }[]>(path.join(DIR, "subverify", f)));
+  const reSet = new Set(rereview.map((r) => r.gid));
+  const subAll = [...sub.filter((s) => !reSet.has(s.gid)).map((s) => ({ ...s })), ...rereview.map((r) => ({ chunk: 0, gid: r.gid, ok: r.ok, severity: r.severity, issue: r.issue }))];
   const residue = scanResidue();
   const residueGids = new Set(residue.keys());
   const rows = {
     residue: [...residue.values()].map((h) => ({ gid: h.gid, type: "생성 잔재", inPlan: inPlan.has(h.gid), fields: [...h.fields], matches: [...h.matches], foundIn: [...h.files].slice(0, 6) })),
-    shuffleInducedBlocking: sub.filter((s) => !s.ok && s.severity === "blocking" && SHUFFLE_INDUCED.some((p) => s.gid.startsWith(p))).map((s) => ({ gid: s.gid, type: "섞기로 생긴 오류(규칙 보강 대상)", issue: s.issue })),
+    shuffleInducedBlocking: subAll.filter((s) => !s.ok && s.severity === "blocking" && SHUFFLE_INDUCED.some((p) => s.gid.startsWith(p))).map((s) => ({ gid: s.gid, type: "섞기로 생긴 오류(규칙 보강 대상)", issue: s.issue })),
     preExisting: [
-      ...sub.filter((s) => !s.ok && s.severity === "blocking" && !SHUFFLE_INDUCED.some((p) => s.gid.startsWith(p)) && !residueGids.has(s.gid)).map((s) => ({ gid: s.gid, type: "해설-선택지 불일치 등 기존 결함(blocking)", issue: s.issue })),
-      ...sub.filter((s) => !s.ok && s.severity === "minor").map((s) => ({ gid: s.gid, type: "경미한 해설 결함(minor)", issue: s.issue })),
+      ...subAll.filter((s) => !s.ok && s.severity === "blocking" && !SHUFFLE_INDUCED.some((p) => s.gid.startsWith(p)) && !residueGids.has(s.gid)).map((s) => ({ gid: s.gid, type: "해설-선택지 불일치 등 기존 결함(blocking)", issue: s.issue })),
+      ...subAll.filter((s) => !s.ok && s.severity === "minor").map((s) => ({ gid: s.gid, type: "경미한 해설 결함(minor)", issue: s.issue })),
     ],
   };
   writeFileSync(path.join(DIR, "explanation-defects.json"), JSON.stringify({ generatedAt: new Date().toISOString(), counts: { residueGids: rows.residue.length, residueInPlan: rows.residue.filter((r) => r.inPlan).length, shuffleInducedBlocking: rows.shuffleInducedBlocking.length, preExisting: rows.preExisting.length }, ...rows }, null, 1));
 
   // 후보 v3: 이전에 검수를 통과했고(서브 에이전트 ok/minor 또는 AI 검증 통과) after 가 새 계획에서 불변인 항목만. 잔재·blocking 제외.
   const prevVerified = rd<FixEntry[]>(path.join(DIR, "apply-candidates.v2-verified223.json"));
+  const prevRe40 = rd<FixEntry[]>(path.join(DIR, "apply-candidates.v3-needsrereview40.json"));
   const prevStatic = rd<FixEntry[]>(path.join(DIR, "apply-candidates.v2-static891.json"));
   const preBlocking = new Set(rows.preExisting.filter((x) => x.type.includes("blocking")).map((x) => x.gid));
   const inducedGids = new Set(rows.shuffleInducedBlocking.map((x) => x.gid));
-  const subBy = new Map(sub.map((s) => [s.gid, s]));
+  const subBy = new Map(subAll.map((s) => [s.gid, s]));
   const reviewed = new Map<string, { e: FixEntry; how: string }>();
   for (const e of prevVerified) reviewed.set(e.gid, { e, how: "ai_verified_223" });
-  for (const e of prevStatic) { const s = subBy.get(e.gid); if (s && (s.ok || s.severity === "minor")) reviewed.set(e.gid, { e, how: s.ok ? "subagent_pass" : "subagent_minor_only" }); }
+  for (const e of [...prevStatic, ...prevRe40]) { const s = subBy.get(e.gid); if (s && (s.ok || s.severity === "minor")) reviewed.set(e.gid, { e, how: reSet.has(e.gid) ? (s.ok ? "rereview_pass" : "rereview_minor_only") : s.ok ? "subagent_pass" : "subagent_minor_only" }); }
   const v3: unknown[] = [], need: unknown[] = [];
   const same = (a?: FixEntry["after"], b?: FixEntry["after"]) => !!a && !!b && JSON.stringify(a) === JSON.stringify(b);
   for (const e of plan) {
