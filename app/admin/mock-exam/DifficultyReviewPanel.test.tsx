@@ -72,6 +72,18 @@ describe("DifficultyReviewPanel", () => {
     expect(screen.getByTestId("difficulty-stats")).toHaveTextContent("아직 응답이 없습니다");
   });
 
+  it("상세의 수식은 원문($…$)이 아니라 수식으로 그려진다", async () => {
+    list.mockResolvedValue(page([row("p1")]));
+    detail.mockResolvedValue(detailData({ passage: "그래프 $y = x^2 + 6$ 은", question: "$x$ 좌표는?", options: ["$-2$", "$2$", "$4$", "$10$"], explanation: "해설 $x^2 - 4x + 4 = 0$" }));
+    render(<DifficultyReviewPanel />);
+    await waitFor(() => screen.getByTestId("difficulty-row"));
+    fireEvent.click(screen.getByRole("button", { name: "상세" }));
+    await waitFor(() => screen.getByTestId("difficulty-detail"));
+    const box = screen.getByTestId("difficulty-detail");
+    expect(box.querySelectorAll(".katex").length).toBeGreaterThanOrEqual(5);
+    expect(box.textContent).not.toContain("$y = x^2 + 6$");
+  });
+
   it("단건 확인(hard 유지)은 사유 없이 가능, 변경은 사유가 없으면 호출하지 않는다", async () => {
     list.mockResolvedValue(page([row("p1")]));
     detail.mockResolvedValue(detailData());

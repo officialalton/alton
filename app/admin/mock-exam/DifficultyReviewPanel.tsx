@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import LearningText from "@/app/session/[id]/LearningText";
 import {
   getDifficultyReviewDetailAction,
   listDifficultyReviewAction,
@@ -56,21 +57,21 @@ function DetailView({ d }: { d: DifficultyReviewDetail }) {
   return (
     <div className="space-y-4 text-[12.5px]" data-testid="difficulty-detail">
       <div className="rounded-lg bg-grey-100 p-3">
-        {d.passage && <p className="whitespace-pre-wrap text-ink">{d.passage}</p>}
-        {d.question && <p className="mt-2 whitespace-pre-wrap font-semibold text-ink">{d.question}</p>}
+        {d.passage && <LearningText className="whitespace-pre-wrap text-ink" text={d.passage} />}
+        {d.question && <LearningText className="mt-2 whitespace-pre-wrap font-semibold text-ink" text={d.question} />}
         {d.hasFigure && <p className="mt-1 text-[11.5px] text-grey-500">(그림 포함 문항 — 그림은 문제은행에서 확인)</p>}
         {d.options && (
           <ol className="mt-2 space-y-0.5">
             {d.options.map((o, i) => (
               <li key={i} className={i === d.correctIndex ? "font-semibold text-green-800" : "text-ink"}>
-                {String.fromCharCode(65 + i)}. {o}
+                {String.fromCharCode(65 + i)}. <LearningText className="inline" text={o} />
                 {i === d.correctIndex && " (정답)"}
               </li>
             ))}
           </ol>
         )}
         {d.answers && d.answers.length > 0 && <p className="mt-2 text-ink">정답: {d.answers.join(", ")}</p>}
-        {d.explanation && <p className="mt-2 whitespace-pre-wrap text-grey-600">해설: {d.explanation}</p>}
+        {d.explanation && <div className="mt-2 text-grey-600"><span>해설: </span><LearningText className="inline whitespace-pre-wrap" text={d.explanation} /></div>}
       </div>
 
       <section data-testid="difficulty-basis">
