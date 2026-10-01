@@ -6,6 +6,7 @@ import { PR_ARCHETYPES } from "./skills/probability";
 // --- B 담당(일차 계열) ---
 import { LI_ARCHETYPES } from "./skills/linear-inequalities";
 import { LF_ARCHETYPES } from "./skills/linear-functions";
+import { L2_ARCHETYPES } from "./skills/linear-equations-two-var";
 import { LF_EM_ARCHETYPES } from "./skills/linear-functions.em";
 import { LI_EM_ARCHETYPES } from "./skills/linear-inequalities.em";
 import { LE_EM_ARCHETYPES } from "./skills/linear-equations-one-var.em";
@@ -15,6 +16,7 @@ export const ARCHETYPES: Archetype[] = [
   // --- B 담당(일차 계열) ---
   ...LI_ARCHETYPES,
   ...LF_ARCHETYPES,
+  ...L2_ARCHETYPES,
 ];
 /** easy/medium 원형(문장 틀 = 유사문항 그룹). hard 원형 ARCHETYPES 와 분리해 둔다(id 규칙·연산자 4개 규칙이 다름). */
 export const EM_ARCHETYPES: Archetype[] = [
