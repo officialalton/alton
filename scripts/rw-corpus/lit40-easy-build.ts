@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import path from "node:path";
-import { verifyExcerpt, normalize } from "./quote-verify.ts";
+import { verifyExcerpt, normalize } from "./quote-verify";
 
 const HOME = process.env.HOME ?? "";
 const ROOT = path.join(HOME, "Developer/ALTON-data/rw-corpus");
