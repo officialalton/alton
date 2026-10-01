@@ -425,3 +425,39 @@ hard 구조를 만드는 범용 변환. 세부 패턴 하나에 서로 다른 �
 - 확대 순서(30세트 hard 수요 큰 skill 의 세부 패턴부터): nonlinear_equations_systems(9)·nonlinear_functions(6)·equivalent_expressions(완료) → linear_functions·linear_equations_two_var·systems_linear·linear_inequalities → percentages·area_volume·lines_angles_triangles·right_triangles·circles → 수요 0 으로 계산된 통계 5 skill(후순위 필수 포함).
 - 원형당 비용은 '사실 문장 대안 작성'이 지배적이다(파일 길이 기준 원형당 약 40~60줄). 세부 패턴 75개 × 4 = 300개를 같은 방식으로 만들면 수작업 분량이 크다 — 대안 문구 작성을 모델 1회성 호출로 보조하는 방안(수 달러 이내)이 있으나 이번 작업에서는 쓰지 않았다(비용 0 유지).
 - 자료(표·산점도·도형) 필수 세부 패턴은 기존 figure 스키마와의 연동이 필요하다(원형 파일럿은 그림 없는 문항만).
+
+## 13. 유사문항 그룹 수 vs 세트당 필요 문항(그룹 부족 skill 식별)
+
+모의고사 세트당 그룹 1문항 제약이므로 한 세트에 그 skill 문항을 넣으려면 그룹 수 ≥ 세트당 필요 문항 수여야 한다(수치는 plan.json 3세트분을 3으로 나눈 값). 원형 문항의 그룹 키는 `c:<skill>:<원형ID>/<변형>`이라 원형·변형마다 새 그룹이 된다.
+
+| skill | 기존 그룹 수 | 세트당 필요(easy+medium) | 세트당 필요(hard) | 그룹 부족(easy+medium) | 파일럿 hard 그룹 수 |
+|---|---|---|---|---|---|
+| linear_equations_one_var | 3 | 4.0 | 0.7 | 부족 | 24 |
+| linear_functions | 5 | 4.0 | 0.7 | OK | - |
+| linear_equations_two_var | 6 | 4.0 | 0.7 | OK | - |
+| systems_linear | 6 | 4.0 | 0.7 | OK | - |
+| linear_inequalities | 3 | 4.0 | 0.3 | 부족 | - |
+| equivalent_expressions | 2 | 6.7 | 1.0 | 부족 | 14 |
+| nonlinear_equations_systems | 9 | 6.7 | 1.0 | OK | - |
+| nonlinear_functions | 6 | 6.7 | 1.0 | 부족 | - |
+| ratios_rates_units | 2 | 1.3 | 0.3 | OK | 11 |
+| percentages | 5 | 1.3 | 0.3 | OK | - |
+| one_variable_data | 4 | 1.3 | 0.0 | OK | - |
+| two_variable_data | 3 | 1.3 | 0.0 | OK | - |
+| probability | 2 | 1.3 | 0.0 | OK | 20 |
+| inference_margin_error | 1 | 1.3 | 0.0 | 부족 | - |
+| evaluating_statistical_claims | 1 | 1.3 | 0.0 | 부족 | - |
+| area_volume | 6 | 2.3 | 0.3 | OK | - |
+| lines_angles_triangles | 3 | 2.3 | 0.3 | OK | - |
+| right_triangles_trigonometry | 3 | 2.3 | 0.3 | OK | - |
+| circles | 7 | 1.7 | 0.3 | OK | - |
+
+- 그룹 부족은 대부분의 skill 에서 발생한다(기존 그룹 = 세부 패턴 수). easy/medium 원형(세부 패턴 × 연산자)으로 그룹을 늘려야 한다.
+
+## 14. 카탈로그 밖 세부 패턴 10개의 반영 방식(결정)
+
+`kind-catalog.ts` 에 구현 없는 kind 를 넣으면 관리자 '세부 패턴' 드롭다운이 컴파일러가 지원하지 않는 값을 노출하고 `attemptOne` 이 그 값을 `generateLinearTwoVarModel` 등에 그대로 넘기므로, **컴파일러 지원 시점에 함께 추가**한다. 그때까지 10개는 원형 전용 목록(이 문서 3절)으로만 관리한다.
+
+## 15. 확대 현황(승인 후 세션)
+
+승인 직후 이 세션에서는 (3)(4) 문서 갱신만 처리했다. 원형 확대와 모델 보조 문구 생성은 규모(300+ 원형)상 별도 세션이 필요하다.
