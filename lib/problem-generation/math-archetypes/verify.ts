@@ -106,9 +106,10 @@ export function verifyInstance(a: Archetype, inst: Instance): VerifyResult {
   failures.push(...checkParamsPrinted(inst));
   failures.push(...checkVariableMentions(inst));
   // hard 주장 기계 검사 — 단계·개념은 늘고 숫자는 단순해야 한다.
+  const isHard = (a.difficulty ?? "hard") === "hard";
   const minSteps = Math.max(5, a.mediumSteps + 1);
-  if (inst.trace.length < minSteps) failures.push(`풀이 단계 ${inst.trace.length} < ${minSteps} (같은 세부 패턴 medium ${a.mediumSteps} 대비 +1 이상이고 5 이상이어야 함)`);
-  if (a.concepts.length < 2) failures.push("결합 개념 2개 미만");
+  if (isHard && inst.trace.length < minSteps) failures.push(`풀이 단계 ${inst.trace.length} < ${minSteps} (같은 세부 패턴 medium ${a.mediumSteps} 대비 +1 이상이고 5 이상이어야 함)`);
+  if (isHard && a.concepts.length < 2) failures.push("결합 개념 2개 미만");
   const nums = (text.match(/-?\d+(\.\d+)?/g) ?? []).map(Number);
   if (nums.some((n) => Math.abs(n) > 999 && Math.abs(n) !== 1000)) failures.push("지문에 4자리 이상 숫자(복잡한 숫자로 hard 를 만들지 않는다)");
   if (/\d+\.\d{2,}/.test(text)) failures.push("지문에 소수 둘째 자리 이상");
