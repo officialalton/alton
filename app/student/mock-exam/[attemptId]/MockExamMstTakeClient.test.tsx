@@ -5,6 +5,7 @@ import type { MstAttemptState, MstItem, MstModuleState } from "@/lib/mock-exam/m
 const saveMock = vi.fn();
 const flagMock = vi.fn();
 const savedMock = vi.fn();
+const guessMock = vi.fn();
 const startMock = vi.fn();
 const submitMock = vi.fn();
 const loadMock = vi.fn();
@@ -14,6 +15,7 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   saveMockExamAnswerAction: (...a: unknown[]) => saveMock(...a),
   toggleMockExamFlagAction: (...a: unknown[]) => flagMock(...a),
   toggleMockExamSavedToPracticeAction: (...a: unknown[]) => savedMock(...a),
+  toggleMockExamGuessedAction: (...a: unknown[]) => guessMock(...a),
 }));
 vi.mock("@/lib/mock-exam/mst-actions", () => ({
   startMstAttemptAction: (a: unknown) => startMock(a),
@@ -67,6 +69,29 @@ async function renderClient(s = state()) {
 }
 
 describe("MockExamMstTakeClient", () => {
+  it("🎲 찍음 표시: 화살표 옆 버튼으로 토글하고, 실패하면 되돌린다", async () => {
+    guessMock.mockResolvedValueOnce({ ok: true }).mockResolvedValueOnce({ ok: false, error: "이미 제출된 모듈에는 표시를 바꿀 수 없습니다." });
+    loadMock.mockResolvedValue({ ok: false, error: "x" });
+    await renderClient();
+    const btn = screen.getByRole("button", { name: "Mark as guess" });
+    expect(btn).toHaveAttribute("aria-pressed", "false");
+    await act(async () => {
+      fireEvent.click(btn);
+    });
+    expect(guessMock).toHaveBeenCalledWith("att1", "i1", true);
+    expect(btn).toHaveAttribute("aria-pressed", "true");
+    await act(async () => {
+      fireEvent.click(btn);
+    });
+    expect(guessMock).toHaveBeenLastCalledWith("att1", "i1", false);
+    expect(btn).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("서버가 준 guessed 를 초기값으로 복구한다", async () => {
+    await renderClient(state({ items: [{ ...item("i1", 1, "rw_m1"), guessed: true }] }));
+    expect(screen.getByRole("button", { name: "Mark as guess" })).toHaveAttribute("aria-pressed", "true");
+  });
+
   it("시작 화면 → 시험 시작 → 첫 모듈", async () => {
     startMock.mockResolvedValue({ ok: true, value: state() });
     await renderClient(state({ status: "assigned", currentModule: null, modules: [], items: [] }));
