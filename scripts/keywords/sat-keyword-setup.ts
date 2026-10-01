@@ -60,7 +60,9 @@ async function main() {
     q = includeDrafts ? q.in("status", ["confirmed", "draft"]) : q.eq("status", "confirmed");
     return q.order("id").range(a, b);
   });
-  const lp = planProblemLinks(problems, subjects, (s, k) => kwMap.get(`${s}/${k}`), linkSet);
+  const skillKeywordIds = new Set(keywords.filter((k) => k.skill_code).map((k) => k.id));
+  const hasSkillKeyword = new Set(links.filter((l) => skillKeywordIds.has(l.keyword_id)).map((l) => l.problem_id));
+  const lp = planProblemLinks(problems, subjects, (s, k) => kwMap.get(`${s}/${k}`), linkSet, hasSkillKeyword);
   console.log(`(b) 문항 ${problems.length}건: 연결 추가 ${lp.inserts.length} · 이미 연결 ${lp.alreadyLinked} · skill_code null ${lp.nullSkill.length} · 타 과목 ${lp.otherSubject.length} · 알 수 없는 skill ${lp.unknownSkill.length}`);
   if (execute) {
     for (const rows of chunk(lp.inserts, 200)) {

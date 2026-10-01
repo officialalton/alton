@@ -56,3 +56,13 @@ describe("planLegacy", () => {
   });
   it("chunk", () => expect(chunk([1, 2, 3, 4, 5], 2)).toEqual([[1, 2], [3, 4], [5]]));
 });
+
+describe("planProblemLinks — 이미 스킬 키워드가 있는 문항", () => {
+  it("의도 스킬로 이미 연결된 문항(저장 skill_code 와 다름)에는 두 번째 키워드를 붙이지 않는다", () => {
+    const subjects = { sat_math: "m", sat_rw: "r" } as never;
+    const problems = [{ id: "p1", subject_id: "r", exam_system: "sat_rw", skill_code: "central_ideas_details" }] as never;
+    const lp = planProblemLinks(problems, subjects, () => "kw-central", new Set(), new Set(["p1"]));
+    expect(lp.inserts).toEqual([]);
+    expect(lp.alreadyLinked).toBe(1);
+  });
+});

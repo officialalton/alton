@@ -48,6 +48,8 @@ export function planProblemLinks(
   subjects: SubjectIds,
   keywordId: (subjectId: string, skillCode: string) => string | undefined,
   existingLinks: Set<string>,
+  /** 이미 새 체계 스킬 키워드가 하나라도 걸린 문항 id. 저장 skill_code 와 의도 스킬이 다른 문항(문학 override)에 두 번째 키워드를 붙이지 않는다. */
+  hasSkillKeyword: Set<string> = new Set(),
 ): LinkPlan {
   const out: LinkPlan = { inserts: [], alreadyLinked: 0, nullSkill: [], otherSubject: [], unknownSkill: [], countBySkill: {} };
   const seen = new Set<string>();
@@ -61,7 +63,7 @@ export function planProblemLinks(
     if (!kw) { out.unknownSkill.push({ id: p.id, skill_code: p.skill_code }); continue; }
     out.countBySkill[p.skill_code] = (out.countBySkill[p.skill_code] ?? 0) + 1;
     const key = `${p.id}:${kw}`;
-    if (existingLinks.has(key)) { out.alreadyLinked += 1; continue; }
+    if (existingLinks.has(key) || hasSkillKeyword.has(p.id)) { out.alreadyLinked += 1; continue; }
     if (seen.has(key)) continue;
     seen.add(key);
     out.inserts.push({ problem_id: p.id, keyword_id: kw });
