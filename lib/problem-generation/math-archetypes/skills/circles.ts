@@ -1,7 +1,7 @@
 // circles hard 원형 28개(세부 패턴 7 × 연산자 4) + easy/medium 원형(lite). 그림 없이 서술·식만으로 성립하는 문항.
 import { GenFail, type Archetype } from "../types";
 import { finish, spin, withParams, M, lin, shifted } from "../text";
-import { sem, withOpen, OPEN_GEO, piOpt, piDiff, forbidExcept } from "../c-kit";
+import { paraArch, sem, withOpen, OPEN_GEO, piOpt, piDiff, forbidExcept } from "../c-kit";
 import type { LiteArchetype } from "../c-lite";
 import type { DistractorKind } from "../../review";
 
@@ -16,7 +16,7 @@ const PYTH = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15], [12,
 const PI_DEGREES: [number, string][] = [[60, "60"], [90, "90"], [120, "120"], [45, "45"], [72, "72"], [150, "150"], [30, "30"], [135, "135"], [40, "40"], [80, "80"]];
 const term2 = (c: number, v: string) => (c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}${v}`);
 
-export const CI_ARCHETYPES: Archetype[] = [
+export const CI_ARCHETYPES: Archetype[] = ([
   // ───────────── circumference_radius ─────────────
   {
     id: "ci.circumference_radius.inverse", skill: SKILL, kind: "circumference_radius", operator: "inverse",
@@ -39,7 +39,7 @@ export const CI_ARCHETYPES: Archetype[] = [
         ],
         variant: "frame",
       });
-      return sem(out, [{ v: C, words: ["circumference"] }, { v: k, words: ["less", "radius"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
+      return sem(out, [{ v: C, words: ["circumference"] }, { v: k, words: ["less", "radius", "shorter", "minus"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
   },
   {
@@ -313,7 +313,7 @@ export const CI_ARCHETYPES: Archetype[] = [
         ],
         variant: "frame",
       });
-      return sem(out, [{ v: d, words: ["diameter"] }, { v: n, words: ["slices", "cut", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["length", "edge", "arc"], forbid: forbidExcept("arc", "length") });
+      return sem(out, [{ v: d, words: ["diameter"] }, { v: n, words: ["slices", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["length", "edge", "arc"], forbid: forbidExcept("arc", "length") });
     },
   },
   // ───────────── sector_area ─────────────
@@ -717,7 +717,7 @@ export const CI_ARCHETYPES: Archetype[] = [
       return sem(out, [], { words: ["integer"], forbid: [] });
     },
   },
-];
+ ] as Archetype[]).map(paraArch);
 
 // ───────────────────────── easy / medium 원형(lite) — 14개 틀 ─────────────────────────
 export const CI_LITE: LiteArchetype[] = [
@@ -808,7 +808,7 @@ export const CI_LITE: LiteArchetype[] = [
       const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `[[${who} has a radius of ${r} ${u}. It is cut into ${n} equal slices, and ${who2} eats ${k} of them.|${who2} is served ${k} slices of ${who.charAt(0).toLowerCase() + who.slice(1)} that has a radius of ${r} ${u} and was cut into ${n} equal slices.|The radius of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${r} ${u}; it is divided into ${n} equal slices, and ${who2} takes ${k} of them.]]`)), question: spin(rng, `[[What is the total area of the slices ${who2} eats, in square ${u}, in terms of π?|Find the combined area of the ${k} slices, in square ${u}, in terms of π.|How many square ${u} do the ${k} slices cover together, in terms of π?]]`), correct: c, fmt: piOpt,
         wrongs: [W(r * r, "step_missing", "원 전체의 넓이를 답했다."), W((r * r) / n, "step_missing", "한 조각의 넓이만 답했다."), W((k * r) / n * 2, "geometry_misapplied", "호의 길이로 계산했다."), W(c * 4, "geometry_misapplied", "반지름 대신 지름을 제곱했다.")],
         verificationJs: withParams({ r, n, k }, "let a=0; for(let i=0;i<P.k;i++) a+=P.r*P.r/P.n;\nreturn Math.round(a*1e6)/1e6;"), trace: [[`원 전체의 넓이는 π × ${r}² = ${r * r}π 이다.`, "Area of the circle."], [`한 조각은 1/${n} 이므로 ${k} 조각은 ${k}/${n} 이다.`, "Fraction eaten."], [`${k}/${n} × ${r * r}π = ${c}π 이다.`, "Area of the slices."]], variant: "equal_slices" });
-      return sem(out, [{ v: r, words: ["radius"] }, { v: n, words: ["slices", "cut", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
+      return sem(out, [{ v: r, words: ["radius"] }, { v: n, words: ["slices", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
   },
   {

@@ -1,7 +1,7 @@
 // area_volume hard 원형 24개(세부 패턴 6 × 연산자 4) + easy/medium 원형(lite). 그림 없이 서술만으로 성립하는 문항만 만든다.
 import { GenFail, type Archetype } from "../types";
 import { finish, spin, withParams } from "../text";
-import { sem, withOpen, OPEN_GEO, piOpt, forbidExcept, plural, UP } from "../c-kit";
+import { paraArch, sem, withOpen, OPEN_GEO, piOpt, forbidExcept, plural, UP, DOWN } from "../c-kit";
 import type { Rng } from "../rng";
 import type { LiteArchetype, Level } from "../c-lite";
 import type { DistractorKind } from "../../review";
@@ -17,7 +17,7 @@ const CANS = [["soup can", "A soup can"], ["paint can", "A paint can"], ["oil dr
 const TRIPLES = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [12, 16, 20], [15, 20, 25], [10, 24, 26], [20, 21, 29]] as const;
 const divisors = (n: number) => { const d: number[] = []; for (let i = 1; i <= n; i++) if (n % i === 0) d.push(i); return d; };
 
-export const AV_ARCHETYPES: Archetype[] = [
+export const AV_ARCHETYPES: Archetype[] = ([
   // ───────────── rectangle_area ─────────────
   {
     id: "av.rectangle_area.inverse", skill: SKILL, kind: "rectangle_area", operator: "inverse",
@@ -67,7 +67,7 @@ export const AV_ARCHETYPES: Archetype[] = [
         ],
         variant: "length_up_width_down",
       });
-      return sem(out, [{ v: l, words: ["length"] }, { v: w, words: ["width"] }, { v: p, words: [...UP, "longer"], pct: true }, { v: q, words: ["decreased", "shorter"], pct: true }], { words: ["area"], forbid: forbidExcept("area") });
+      return sem(out, [{ v: l, words: ["length"] }, { v: w, words: ["width"] }, { v: p, words: [...UP, "longer"], pct: true }, { v: q, words: [...DOWN, "shorter"], pct: true }], { words: ["area"], forbid: forbidExcept("area") });
     },
   },
   {
@@ -639,7 +639,7 @@ export const AV_ARCHETYPES: Archetype[] = [
       return sem(out, [{ v: dA, words: ["diameter"] }, { v: rB, words: ["radius"] }, { v: hA, words: ["height"] }], { words: ["height", "tall"], forbid: forbidExcept("height") });
     },
   },
-];
+ ] as Archetype[]).map(paraArch);
 
 // ───────────────────────── easy / medium 원형(lite) — 12개 틀 ─────────────────────────
 const nz = (rng: Rng, lo: number, hi: number, step = 1) => rng.int(Math.ceil(lo / step), Math.floor(hi / step)) * step;
@@ -739,7 +739,7 @@ export const AV_LITE: LiteArchetype[] = [
           : [W(V / l, "step_missing", "너비×높이(=w²)를 너비로 답했다."), W(V / (2 * l), "formula_misuse", "w² 대신 2w 로 나눴다."), W(w * w, "other", "너비의 제곱을 답했다."), W(V - l, "formula_misuse", "부피에서 길이를 뺐다.")],
         verificationJs: withParams({ V, l, w, easy: level === "easy" ? 1 : 0 }, "if(P.easy){ for(let h=1;h<=1000;h++) if(P.l*P.w*h===P.V) return h; throw new Error('없음'); }\nfor(let w=1;w<=1000;w++) if(P.l*w*w===P.V) return w;\nthrow new Error('없음');"),
         trace: level === "easy" ? [[`부피 = 길이 × 너비 × 높이 이므로 ${V} = ${l} × ${w} × h 이다.`, "Set up the volume formula."], [`h = ${V} ÷ ${l * w} = ${h} 이다.`, "Divide."]] : [[`너비와 높이가 같으므로 둘을 w 라 하면 ${V} = ${l} × w × w 이다.`, "Use w for both."], [`w² = ${V / l} 이다.`, "Divide by the length."], [`w = ${w} 이다.`, "Take the positive root."]], variant: level === "easy" ? "find_height" : "square_cross_section" });
-      return sem(out, [{ v: V, words: ["volume"] }, { v: l, words: ["length"] }, ...(level === "easy" ? [{ v: w, words: ["width"] }] : [])], { words: [level === "easy" ? "height" : "width"], forbid: forbidExcept(level === "easy" ? "height" : "width") });
+      return sem(out, [{ v: V, words: ["volume", "holds", "contains"] }, { v: l, words: ["length"] }, ...(level === "easy" ? [{ v: w, words: ["width"] }] : [])], { words: [level === "easy" ? "height" : "width"], forbid: forbidExcept(level === "easy" ? "height" : "width") });
     },
   },
   {
@@ -752,7 +752,7 @@ export const AV_LITE: LiteArchetype[] = [
         wrongs: [W(V / l, "step_missing", "한 변으로만 나눴다."), W(V - l * w, "formula_misuse", "부피에서 밑넓이를 뺐다."), W(V / (l + w), "formula_misuse", "두 변의 합으로 나눴다."), W(h + 1, "other", "계산 실수.")],
         verificationJs: withParams(level === "easy" ? { V, B: l * w } : { V, l, w }, level === "easy" ? "for(let h=1;h<=1000;h++){ if(P.B*h===P.V) return h; }\nthrow new Error('없음');" : "for(let h=1;h<=1000;h++){ if(P.l*P.w*h===P.V) return h; }\nthrow new Error('없음');"),
         trace: level === "easy" ? [[`부피 = 밑넓이 × 깊이 이므로 ${V} = ${l * w} × d 이다.`, "Volume equals base area times depth."], [`d = ${V} ÷ ${l * w} = ${h} 이다.`, "Divide."]] : [[`밑넓이는 ${l} × ${w} = ${l * w} 이다.`, "Compute the base area."], [`깊이 = ${V} ÷ ${l * w} = ${h} 이다.`, "Divide the volume by the base area."]], variant: level === "easy" ? "base_area_given" : "base_sides_given" });
-      return sem(out, level === "easy" ? [{ v: V, words: ["holds"] }, { v: l * w, words: ["area"] }] : [{ v: V, words: ["holds"] }, { v: l, words: ["base"] }, { v: w, words: ["base"] }], { words: ["deep", "depth"], forbid: forbidExcept() });
+      return sem(out, level === "easy" ? [{ v: V, words: ["holds", "contains"] }, { v: l * w, words: ["area"] }] : [{ v: V, words: ["holds", "contains"] }, { v: l, words: ["base"] }, { v: w, words: ["base"] }], { words: ["deep", "depth"], forbid: forbidExcept() });
     },
   },
   {

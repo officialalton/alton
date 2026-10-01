@@ -8,6 +8,7 @@ import { verifyInstance } from "./verify";
 import { bodyShingles, jaccard } from "./sweep";
 import { SKILL_BY_CODE } from "@/lib/problem-taxonomy";
 import type { PassedRecord } from "./bulk";
+import { paraphraseInst } from "./c-kit";
 
 export type Level = "easy" | "medium";
 export type LiteArchetype = {
@@ -32,7 +33,7 @@ export type LiteGen = { ok: true; inst: Instance } | { ok: false; why: "genfail"
 export function generateLite(a: LiteArchetype, level: Level, seed: number): LiteGen {
   let last = "";
   for (let t = 0; t < 40; t++) {
-    try { const inst = a.generate(liteRng(a, level, seed, t), level); return { ok: true, inst: { ...inst, variant: `${level}.${inst.variant}` } }; }
+    try { const rr = liteRng(a, level, seed, t); const inst = paraphraseInst(rr, a.generate(rr, level)); return { ok: true, inst: { ...inst, variant: `${level}.${inst.variant}` } }; }
     catch (e) { if (!(e instanceof GenFail)) return { ok: false, why: "throw", msg: (e as Error).message }; last = e.message; }
   }
   return { ok: false, why: "genfail", msg: last };

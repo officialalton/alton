@@ -1,7 +1,7 @@
 // percentages hard 원형 20개(세부 패턴 5 × 연산자 4). 금액은 '$' 가 수식 기호와 겹치므로 dollars 로 쓴다.
 import { GenFail, type Archetype } from "../types";
 import { facts, finish, spin, withParams } from "../text";
-import { sem, withOpen, aPct, OPEN_MONEY, OPEN_GROUP, OPEN_SCI, OPEN_GEO, OPEN_GEN, UP, DOWN } from "../c-kit";
+import { paraArch, sem, withOpen, aPct, OPEN_MONEY, OPEN_GROUP, OPEN_SCI, OPEN_GEO, OPEN_GEN, UP, DOWNC as DOWN } from "../c-kit";
 import { gcd, type Rng } from "../rng";
 import type { LiteArchetype, Level } from "../c-lite";
 import type { DistractorKind } from "../../review";
@@ -11,7 +11,7 @@ const W = (v: number, kind: DistractorKind, reason: string) => ({ v, kind, reaso
 const lcm = (a: number, b: number) => (a / gcd(a, b)) * b;
 const PCTS = [10, 20, 25, 30, 40, 50, 60, 75, 80];
 
-export const PCT_ARCHETYPES: Archetype[] = [
+export const PCT_ARCHETYPES: Archetype[] = ([
   // ───────────── percent_of ─────────────
   {
     id: "pct.percent_of.compose_kind", skill: SKILL, kind: "percent_of", operator: "compose_kind",
@@ -362,7 +362,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
     generate(rng) {
       const pairs = [[20, 25], [30, 40], [15, 20], [24, 30], [32, 40], [40, 50], [16, 20], [18, 24], [36, 48], [45, 60], [25, 50], [30, 50], [12, 15]];
       const [a, b] = rng.pick(pairs); const pct = (100 * (b - a)) / b; if (!Number.isInteger(pct)) throw new GenFail("x");
-      const D = lcm(a, b) * rng.int(1, 4); if (D > 990) throw new GenFail("x");
+      const D = lcm(a, b) * rng.int(1, 4); if (D > 990 || D === a || D === b) throw new GenFail("x");
       const [veh, unit, unit2] = rng.pick([["A delivery van", "miles per gallon", "gallons"], ["A hybrid sedan", "miles per gallon", "gallons"], ["A scooter", "kilometers per liter", "liters"], ["A tour bus", "kilometers per liter", "liters"]]);
       const dist = unit.startsWith("miles") ? "miles" : "kilometers";
       const stimulus = spin(rng, `${veh} gets ${a} ${unit}. After a tune-up it gets ${b} ${unit}. [[It then makes a ${D}-${dist.slice(0, -1)} delivery run|Both before and after the tune-up it makes the same ${D}-${dist.slice(0, -1)} trip|It drives the same ${D}-${dist.slice(0, -1)} route before and after]].`);
@@ -379,7 +379,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
         ],
         variant: "frame",
       });
-      return sem(out, [{ v: a, words: ["gets"] }, { v: b, words: ["gets"] }], { words: ["fuel"] });
+      return sem(out, [{ v: a, words: ["gets", "achieves", "averages"] }, { v: b, words: ["gets", "achieves", "averages"] }], { words: ["fuel"] });
     },
   },
   // ───────────── find_percent ─────────────
@@ -608,7 +608,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
       return out;
     },
   },
-];
+ ] as Archetype[]).map(paraArch);
 
 // ───────────────────────── easy / medium 원형(lite) — 10개 틀 ─────────────────────────
 const EP = [10, 20, 25, 50, 5], MP = [15, 30, 35, 40, 60, 75, 12, 45];

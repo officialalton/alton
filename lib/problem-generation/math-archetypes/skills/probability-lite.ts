@@ -57,11 +57,11 @@ export const PR_LITE: LiteArchetype[] = [
       const [pop, ga, gb] = rng.pick(GROUPS); const N = rng.int(4, 12) * 10, A = rng.int(Math.ceil(N * 0.3), Math.floor(N * 0.6)), B = rng.int(Math.ceil(N * 0.25), Math.floor(N * 0.55)); const AB = level === "easy" ? rng.int(3, Math.min(A, B) - 2) : rng.int(3, Math.min(A, B) - 2); const un = A + B - AB; if (un >= N || A === B || gcd(AB, A) === A) throw new GenFail("x");
       const nA = N - un;
       const stimulus = withOpen(rng, OPEN_GROUP, spin(rng, level === "easy" ? `Of ${N} ${pop} surveyed, ${A} ${ga}. Of those ${A}, ${AB} also ${gb}.` : `Of ${N} ${pop} surveyed, ${A} ${ga} and ${B} ${gb}. Exactly ${nA} of them do neither.`));
-      const out = finish(rng, { stimulus, question: spin(rng, `[[If one person is chosen at random from those who ${ga}, what is the probability that the person is also among those who ${gb}?|A person who ${ga} is chosen at random. What is the probability that this person is also one of those who ${gb}?|Among the people who ${ga}, what fraction are also among those who ${gb}?]]`), range: rangeOpen, correctText: frac(AB, A),
+      const out = finish(rng, { stimulus, question: spin(rng, `[[If one person is chosen at random from those who ${ga}, what is the probability that the person is also among those who ${gb}?|One person is chosen at random from those who ${ga}. What is the probability that this person is also one of those who ${gb}?|Among the people who ${ga}, what fraction are also among those who ${gb}?]]`), range: rangeOpen, correctText: frac(AB, A),
         wrongTexts: [Wf(AB, N, "condition_ignored", "분모를 조건(그 집단)이 아닌 전체 인원으로 잡았다."), Wf(AB, B, "condition_ignored", "분모를 다른 집단 B 로 잡았다."), Wf(A, N, "step_missing", "조건의 집단의 비율을 답했다."), Wf(AB, un, "condition_ignored", "분모를 합집합으로 잡았다."), Wf(A - AB, A, "opposite", "B 가 아닌 사람의 비율을 답했다.")],
         verificationJs: withParams(level === "easy" ? { A, AB, easy: 1, N: 1, B: 1, nA: 1 } : { A, AB: 1, easy: 0, N, B, nA }, "if(P.easy) return P.AB/P.A;\nconst union=P.N-P.nA; const both=P.A+P.B-union; return both/P.A;"),
         trace: level === "easy" ? [["조건부확률이므로 분모는 조건을 만족하는 집단의 크기 " + A + " 이다.", "The denominator is the conditioning group."], [`확률 = ${AB}/${A} = ${frac(AB, A)} 이다.`, "Probability."]] : [[`둘 중 하나 이상에 속한 사람은 ${N} − ${nA} = ${un} 명이다.`, "People in at least one group."], [`두 집단에 모두 속한 사람은 ${A} + ${B} − ${un} = ${AB} 명이다.`, "Inclusion–exclusion."], [`분모는 ${A} 이므로 확률 = ${AB}/${A} = ${frac(AB, A)} 이다.`, "Conditional probability."]], variant: level === "easy" ? "counts_given" : "union_given" });
-      return sem(out, [], { words: ["probability", "fraction"], forbid: [] });
+      return sem(out, [], { words: ["probability", "fraction", "chance", "likely"], forbid: [] });
     },
   },
   {
