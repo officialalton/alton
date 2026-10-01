@@ -23,7 +23,7 @@ import {
   updateBoardManualTaskStatus,
   deleteBoardManualTask,
   homeworkToBoardCard,
-  mockExamToBoardCard,
+  mockExamsToBoardCards,
   vocabQuizToBoardCard,
   manualTaskToBoardCard,
 } from "@/lib/board/data";
@@ -44,7 +44,7 @@ async function loadCards(supabase: Parameters<typeof loadStudentHomeworkBatches>
   ]);
   return [
     ...homework.map(homeworkToBoardCard),
-    ...mockExams.map(mockExamToBoardCard),
+    ...mockExamsToBoardCards(mockExams),
     ...vocabQuizzes.map(vocabQuizToBoardCard),
     ...manualTasks.map(manualTaskToBoardCard),
   ];

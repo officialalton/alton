@@ -62,8 +62,8 @@ describe("problem_note_strokes — 모의고사 필기 저장/열람 RPC", () =>
       `insert into mock_exam_set_items (exam_set_id, section, position, problem_id, problem_version_id, sat_domain, difficulty)
        values ('${examSetId}', 'math', 1, '${problemId}', '${versionId}', 'algebra', 'medium') returning id;`,
     );
-    attemptId = asUser(
-      TEACHER_ID,
+    // 2026-10-01: 교사 배정 RLS 제거 — 응시는 학생 시작 RPC(또는 서비스 롤)로만 생긴다. 테스트 픽스처는 서비스 롤로 만든다.
+    attemptId = psql(
       `insert into mock_exam_attempts (exam_set_id, student_id, assigned_by) values ('${examSetId}', '${STUDENT_ID}', '${TEACHER_ID}') returning id;`,
     );
 

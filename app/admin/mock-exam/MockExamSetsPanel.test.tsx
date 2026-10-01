@@ -6,8 +6,7 @@ vi.mock("../mock-exam-actions", () => ({
   getMockExamPoolSummaryAction: () => pool(),
   assembleMockExamSet: vi.fn(), archiveMockExamSetAction: vi.fn(), getMockExamSetContentAction: vi.fn(),
   getMockExamSetItems: vi.fn(), listMockExamSets: vi.fn(async () => []), publishMockExamSet: vi.fn(),
-  assignMockExamAsAdminAction: vi.fn(), assignMockExamToAllActiveStudentsAction: vi.fn(),
-  listAllActiveStudentsForMockExamAction: vi.fn(async () => []), listAllMockExamAttemptsAction: vi.fn(async () => []),
+  listAllMockExamAttemptsAction: vi.fn(async () => []),
 }));
 
 import MockExamSetsPanel from "./MockExamSetsPanel";

@@ -186,15 +186,12 @@ describe("직원(교사·관리자)은 RPC 로 경로와 정책 버전을 본다
     expect(psql(`select rw_m2_route from mock_exam_attempts where id = '${attemptA}';`)).toBe("higher");
   });
 
-  it("교사 배정 흐름 회귀: 담당 교사가 새 세트를 학생에게 배정(insert)·재배정(update)할 수 있다(컬럼 회수 후에도)", async () => {
+  it("2026-10-01 배정 폐지 회귀: 담당 교사도 REST 로 응시를 만들거나 고칠 수 없다(응시 생성은 학생 시작 RPC 뿐)", async () => {
     const newSet = createRoutingSet({ run: RUN, label: "teacher-assign" });
     const ins = await rest(TEACHER_ID, "mock_exam_attempts?select=id", {
       method: "POST",
       body: { student_id: SEED_STUDENT_ID, exam_set_id: newSet.setId, assigned_by: TEACHER_ID },
     });
-    expect([200, 201]).toContain(ins.status);
-    const id = (ins.json as { id: string }[])[0].id;
-    const upd = await rest(TEACHER_ID, `mock_exam_attempts?id=eq.${id}&select=id`, { method: "PATCH", body: { max_attempts: 1 } });
-    expect(upd.status).toBe(200);
+    expect([401, 403]).toContain(ins.status);
   });
 });

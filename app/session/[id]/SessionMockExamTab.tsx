@@ -92,7 +92,7 @@ export default function SessionMockExamTab({
   }
 
   if (attempts === null) return <p className="p-6 text-[13px] text-grey-500">불러오는 중…</p>;
-  if (attempts.length === 0) return <p className="p-6 text-[13px] text-grey-500">배정된 모의고사가 없습니다.</p>;
+  if (attempts.length === 0) return <p className="p-6 text-[13px] text-grey-500">시작한 모의고사가 없습니다. 학생 포털 모의고사 탭에서 공개된 시험을 시작할 수 있습니다.</p>;
 
   return (
     <div className="mx-auto max-w-[720px] px-6 py-6">

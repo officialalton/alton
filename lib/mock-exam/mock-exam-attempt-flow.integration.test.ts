@@ -103,33 +103,28 @@ beforeAll(() => {
   );
 });
 
-describe("모의고사 배정 — 담당 교사만 학생에게 배정할 수 있다", () => {
-  it("담당 교사는 배정(insert)할 수 있다", () => {
-    const attemptId = asUser(
-      TEACHER_ID,
-      `insert into mock_exam_attempts (exam_set_id, student_id, assigned_by) values ('${examSetId}', '${STUDENT_ID}', '${TEACHER_ID}') returning id;`,
-    );
+describe("모의고사 시작 — 학생이 공개 세트를 직접 시작한다(배정 없음, 2026-10-01)", () => {
+  it("활성 학생은 시작 RPC 로 응시를 만들고, 다시 시작해도 같은 응시를 돌려준다(멱등)", () => {
+    const attemptId = asUser(STUDENT_ID, `select mock_exam_open_start('${examSetId}');`);
     expect(attemptId).toMatch(/^[0-9a-f-]{36}$/);
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("assigned");
+    expect(asUser(STUDENT_ID, `select mock_exam_open_start('${examSetId}');`)).toBe(attemptId);
   });
 
-  it("담당이 아닌 교사는 배정할 수 없다(RLS insert 거절)", () => {
+  it("교사는 담당 학생이어도 응시를 직접 만들 수 없다(배정 RLS 제거)", () => {
     const out = fails(() =>
-      asUser(
-        otherTeacherId,
-        `insert into mock_exam_attempts (exam_set_id, student_id, assigned_by) values ('${examSetId}', '${otherStudentId}', '${otherTeacherId}');`,
-      ),
+      asUser(TEACHER_ID, `insert into mock_exam_attempts (exam_set_id, student_id, assigned_by) values ('${examSetId}', '${otherStudentId}', '${TEACHER_ID}');`),
     );
     expect(out).toMatch(/row-level security|policy/i);
   });
 
-  it("학생당 시험(세트 계열) 당 응시는 하나 — 같은 학생에게 같은 세트를 다시 배정하면 유니크 위반", () => {
-    const out = fails(() =>
-      asUser(
-        TEACHER_ID,
-        `insert into mock_exam_attempts (exam_set_id, student_id, assigned_by) values ('${examSetId}', '${STUDENT_ID}', '${TEACHER_ID}');`,
-      ),
-    );
+  it("학생도 응시를 직접 INSERT 할 수 없다", () => {
+    const out = fails(() => asUser(otherStudentId, `insert into mock_exam_attempts (exam_set_id, student_id) values ('${examSetId}', '${otherStudentId}');`));
+    expect(out).toMatch(/row-level security|policy/i);
+  });
+
+  it("학생당 시험(세트 계열) 당 응시는 하나 — 서비스 롤로 같은 학생·세트를 다시 넣으면 유니크 위반", () => {
+    const out = fails(() => psql(`insert into mock_exam_attempts (exam_set_id, student_id) values ('${examSetId}', '${STUDENT_ID}');`));
     expect(out).toMatch(/duplicate key|unique/i);
   });
 });

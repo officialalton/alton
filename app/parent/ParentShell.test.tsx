@@ -6,7 +6,7 @@ import type { Child } from "./children-data";
 
 const pushMock = vi.fn();
 vi.mock("./mock-exam-tab-actions", () => ({
-  loadChildMockExamAttemptsAction: vi.fn(async () => []),
+  loadChildMockExamOverviewAction: vi.fn(async () => ({ catalog: [], attempts: [] })),
 }));
 vi.mock("./board-actions", () => ({
   loadChildBoardCardsAction: vi.fn(async () => []),
@@ -444,7 +444,7 @@ describe("ParentShell", () => {
     );
     fireEvent.click(screen.getAllByText("모의고사")[0]);
     expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
-    expect(await screen.findByText("배정된 모의고사가 없습니다.")).toBeInTheDocument();
+    expect(await screen.findByText("공개된 모의고사가 없습니다.")).toBeInTheDocument();
   });
 
   it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {

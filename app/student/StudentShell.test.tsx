@@ -6,7 +6,7 @@ import type { RoadmapData } from "@/lib/roadmap/types";
 
 const pushMock = vi.fn();
 vi.mock("./mock-exam-tab-actions", () => ({
-  loadMyMockExamAttemptsAction: vi.fn(async () => []),
+  loadMyMockExamOverviewAction: vi.fn(async () => ({ catalog: [], attempts: [] })),
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: pushMock, replace: vi.fn(), refresh: vi.fn() }),

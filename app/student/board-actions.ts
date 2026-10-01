@@ -10,7 +10,7 @@ import {
   updateBoardManualTaskStatus,
   deleteBoardManualTask,
   homeworkToBoardCard,
-  mockExamToBoardCard,
+  mockExamsToBoardCards,
   vocabQuizToBoardCard,
   manualTaskToBoardCard,
 } from "@/lib/board/data";
@@ -29,7 +29,7 @@ export async function loadMyBoardCardsAction(): Promise<BoardCard[]> {
   ]);
   return [
     ...homework.map(homeworkToBoardCard),
-    ...mockExams.map(mockExamToBoardCard),
+    ...mockExamsToBoardCards(mockExams),
     ...vocabQuizzes.map(vocabQuizToBoardCard),
     ...manualTasks.map(manualTaskToBoardCard),
   ];
