@@ -35,6 +35,8 @@ export type Instance = {
   distractors: { index: number; kind: DistractorKind; reason: string }[];
   /** 문장이 말하는 양(명사)과 그에 대응해 세운 수식의 선언 — 명사-수식 매핑 표 기반 기계 검사(둘레/넓이 혼동 방지)용. 선택. */
   semantics?: { noun: string; expr: string; parts: string[]; vars: Record<string, number> }[];
+  /** 문장-수식 의미 일치 검사용: 지문이 '<명사구> 는 <값>' 으로 서술하는 대응표. 명사구와 값이 같은 문장에서 서로 가장 가까워야 한다(verify.checkBindings). */
+  bindings?: { phrase: string; value: number }[];
 };
 
 export type Archetype = {
@@ -49,9 +51,9 @@ export type Archetype = {
   extraThinking: string;
   /** 결합되는 개념(2개 이상) */
   concepts: string[];
+  /** 난이도. 생략하면 hard. easy/medium 원형은 hard 주장 검사(풀이 단계·결합 개념)를 면제받고 연산자는 "frame" 이다. */
+  difficulty?: "easy" | "medium" | "hard";
   /** 같은 kind 의 medium 컴파일러 풀이 단계 수(비교 기준) */
   mediumSteps: number;
-  /** 난이도. 생략하면 hard(파일럿 원형). easy/medium 원형은 hard 주장 검사(풀이 단계·결합 개념)를 면제받는다. */
-  difficulty?: "easy" | "medium" | "hard";
   generate(rng: Rng): Instance;
 };

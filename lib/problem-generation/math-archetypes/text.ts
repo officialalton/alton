@@ -50,6 +50,8 @@ export type Draft = {
   verificationJs: string;
   /** 풀이 단계 [한국어, English] */
   trace: [string, string][];
+  /** 문장-수식 의미 일치 검사용 대응표(명사구 ↔ 값). */
+  bindings?: Instance["bindings"];
   variant: string;
 };
 
@@ -80,7 +82,7 @@ export function finish(rng: Rng, d: Draft): Instance {
   const explanationEn = `${d.trace.map(([, en], i) => `(${i + 1}) ${en}`).join(" ")} So the answer is ${correctText}.`;
   return {
     stimulus: sentenceCase(d.stimulus), question: sentenceCase(d.question), options: order.map((o) => o.text), correctIndex: order.findIndex((o) => o.right),
-    evalAt: d.evalAt, explanation, explanationEn, verificationJs: d.verificationJs, trace: d.trace.map(([ko]) => ko), variant: d.variant,
+    evalAt: d.evalAt, explanation, explanationEn, verificationJs: d.verificationJs, trace: d.trace.map(([ko]) => ko), variant: d.variant, bindings: d.bindings,
     distractors: order.map((o, i) => ({ o, i })).filter(({ o }) => !o.right).map(({ o, i }) => ({ index: i, kind: o.kind, reason: o.reason })),
   };
 }
