@@ -1,0 +1,833 @@
+{
+ "taskId": "gen-lit40-medium-02-02",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-02-021",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-021",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 20,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Akari",
+      "Haoran"
+     ],
+     "nameCultures": [
+      "japanese",
+      "chinese"
+     ],
+     "locale": "Kyoto",
+     "setting": "a train compartment",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "about a promise nobody remembers making",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a train compartment in Kyoto; a teacher and a student who will not speak about a promise nobody remembers making"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Rails clicked under the floor, and the compartment smelled of wet umbrellas and green tea gone cold. Akari, who had taught Haoran calligraphy for six years, sat across from him with her hands folded. Somewhere between their last lesson and this trip to Kyoto, one of them had promised the other something. Neither could say what. Each suspected the other remembered and was waiting to be reminded. So they watched the rice fields slide past, and the silence between them became a sealed envelope, carried carefully, addressed to both of them, opened by neither. When the conductor called their station, Haoran reached for her bag before she could, the way he always had after class, and Akari let him take it without a word.",
+    "question": "As used in the text, the phrase “a sealed envelope” most nearly suggests that the silence between Akari and Haoran is",
+    "options": [
+     "a message that one of them has deliberately hidden from the other.",
+     "something they share and guard but are both reluctant to examine.",
+     "a formal barrier that has replaced the warmth of their earlier bond.",
+     "an obligation that Akari intends to fulfill once they arrive."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 두 사람 모두 약속의 내용을 기억하지 못하고 서로 상대가 기억한다고 여긴다고 서술한다. 두 사람 모두에게 보내졌지만 아무도 열지 않은 봉투라는 표현과 조심스럽게 들고 간다는 묘사는 공유된 침묵을 소중히 지니되 들여다보기를 꺼리는 상태를 뜻하므로 B가 정답이다. A는 한쪽이 의도적으로 숨긴다는 내용이라 둘 다 모른다는 서술과 어긋난다. C는 마지막에 가방을 들어 주는 장면이 여전한 친밀함을 보여 주므로 틀리고, D는 아카리가 약속을 지키려 한다는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "restrained"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-022",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-022",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 21,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Saoirse",
+      "Thiago"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "portuguese_brazilian"
+     ],
+     "locale": "Glasgow",
+     "setting": "a stone bridge",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a stone bridge in Glasgow; a priest and a lapsed parishioner about what to tell a younger sibling"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked me why our mother no longer came home, and I wanted the priest to give me an answer I could repeat. Thiago leaned on the cold stone and watched the river for a long while. Then he said that a hard truth told gently was a lantern, not a stone; the boy could carry it in front of him instead of on his back. I, Saoirse, the lapsed one, had expected scripture. Instead he offered me something I could use, and that night I sat on my brother's bed and told him plainly.",
+    "question": "As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently",
+    "options": [
+     "is a burden that the boy will gradually learn to ignore.",
+     "should be postponed until the boy is old enough to carry it.",
+     "can help the boy see his way rather than simply weigh on him.",
+     "must come from the church rather than from the boy's own family."
+    ],
+    "correct_letter": "C",
+    "explanation": "신부는 진실을 등 뒤에 지는 짐이 아니라 앞에 들고 가는 것이라고 덧붙이고, 화자는 그 말을 듣고 그날 밤 동생에게 솔직하게 말한다. 따라서 이 비유는 부드럽게 전한 진실이 짐이 되기보다 길을 비춰 준다는 뜻이므로 C가 정답이다. A는 '돌'의 의미만 취한 해석이고, B는 화자가 곧바로 말했다는 결과와 맞지 않는다. D는 신부가 경전 대신 실용적 조언을 주었다는 서술과 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "tender"
+   ],
+   "devices": [
+    "metaphor",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-023",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-023",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 22,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Booker",
+      "Mingyu"
+     ],
+     "nameCultures": [
+      "african_american",
+      "chinese"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a mountain bus stop",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "while deciding whether a rule still applies",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a mountain bus stop in Porto Alegre; a mother and a daughter planning a wedding while deciding whether a rule still applies"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Wind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she always chewed when nervous. In our family, a rule had come down like an heirloom: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and the only road to the chapel was this one. Every bus would carry me past it. My mother studied the timetable as if it were scripture, then folded it into a small square. Rules are coats, she said at last, cut for the shoulders of whoever first wore them. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.",
+    "question": "As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule",
+    "options": [
+     "protects the family from the harsh conditions of the mountains.",
+     "is a disguise that hides the bride's true feelings about marriage.",
+     "must be worn proudly by every bride who joins the family.",
+     "was shaped for earlier circumstances and may not fit the present."
+    ],
+    "correct_letter": "D",
+    "explanation": "어머니는 규칙이 처음 입은 사람의 어깨에 맞춰 재단된 코트라고 말한 뒤, 딸과 함께 버스를 타고 그 길을 피하지 않는다. 이는 규칙이 과거 상황에 맞춰 만들어져 지금 상황에는 맞지 않을 수 있다는 뜻이므로 D가 정답이다. A는 코트의 보호 기능만 문자 그대로 옮긴 오답이다. B는 감정을 숨긴다는 근거가 없고, C는 어머니가 결국 규칙을 따르지 않는 행동과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "wry"
+   ],
+   "devices": [
+    "metaphor",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-030",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-030",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 29,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Odessa",
+      "Lucius"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a cemetery gate",
+     "relationship": "a landlord and a long-term tenant",
+     "conflict": "after a surprising success that makes things harder",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a cemetery gate in the Mississippi Delta; a landlord and a long-term tenant after a surprising success that makes things harder"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "\"They printed your name in the county paper, Odessa,\" Lucius said, leaning on the cemetery gate he had owned, along with the cottage beside it, for thirty years. I had grown the prize-winning cotton in the plot he rented me, and for a moment we both laughed like old friends at a picnic. He even tipped his hat. Then he looked past me at the field, and his voice cooled. A tenant who wins prizes, he said, can afford a landlord's new price. He named a figure twice what I paid. I folded the newspaper along its crease, the way one folds a flag, and set it on the gate between us.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From grieving to festive, as Odessa recalls her family's long history on the land",
+     "From hostile to forgiving, as Lucius regrets an old quarrel with Odessa",
+     "From anxious to relieved, as Odessa learns that her rent will not change",
+     "From cordial to calculating, as Lucius turns Odessa's success into leverage"
+    ],
+    "correct_letter": "D",
+    "explanation": "지문 초반에 두 사람은 옛 친구처럼 웃고 루시어스는 모자까지 들어 인사한다. 그러나 그가 밭을 바라본 뒤 목소리가 식고, 상을 받은 소작인은 새 임대료를 감당할 수 있다며 두 배를 요구한다. 따라서 어조는 우호적인 분위기에서 계산적인 분위기로 바뀌므로 D가 정답이다. A, B, C는 각각 슬픔, 화해, 안도를 내세우지만 지문의 흐름과 반대되거나 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "cordial",
+    "bitter"
+   ],
+   "devices": [
+    "simile",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-031",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-031",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 30,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Avraham",
+      "Amit"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "hebrew_jewish"
+     ],
+     "locale": "Haifa",
+     "setting": "an apartment stairwell",
+     "relationship": "a keeper and a visiting surveyor",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "an apartment stairwell in Haifa; a keeper and a visiting surveyor over a promise made to a child"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We had climbed four flights of the Haifa stairwell before Amit, the visiting surveyor, mentioned the promise. Avraham, who kept the building, was in good humor, tapping each banister and naming the families who had lived behind each door: the baker, the violinist, the twins who chalked the landings. Amit listened, smiling, and wrote nothing. On the fifth landing he stopped beside a child's chalk drawing of a tree. The building would come down in spring, he said quietly. Avraham's hand stayed on the banister. He had told the girl upstairs that her tree would outlast them both, and now he stood looking at it as though it were already being washed away.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From genial reminiscence to quiet dismay",
+     "From cautious suspicion to open relief",
+     "From mournful regret to renewed hope",
+     "From brisk efficiency to lighthearted teasing"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 아브라함은 난간을 두드리며 이웃 가족들을 즐겁게 회상한다. 그러나 다섯 번째 층계참에서 건물이 봄에 철거된다는 말을 듣고, 아이에게 한 약속을 떠올리며 그림을 바라보는 장면으로 분위기가 가라앉는다. 따라서 다정한 회상에서 조용한 낙담으로 바뀌므로 A가 정답이다. B와 C는 변화의 방향이 반대이고, D는 지문의 감정 흐름과 관련이 없다."
+   },
+   "notes": [],
+   "tone": [
+    "nostalgic",
+    "somber"
+   ],
+   "devices": [
+    "imagery",
+    "foreshadowing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-032",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-032",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 31,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Kai",
+      "Nikhil"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "indian_subcontinent"
+     ],
+     "locale": "Mumbai",
+     "setting": "a rooftop water tank",
+     "relationship": "a captain and a stowaway",
+     "conflict": "over an apology offered too late",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a rooftop water tank in Mumbai; a captain and a stowaway over an apology offered too late"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Kai, the captain, found him at dawn\nbehind the rooftop tank in Mumbai,\na stowaway from the harbor, salt still in his hair,\nand laughed, and shared his tea, and called him lucky.\nThey traded jokes about the gulls,\nabout the city's thousand radios.\nThen Nikhil spoke: he had come to say\nhe was sorry for the fire on the old ship,\nthe one that took the captain's brother.\nKai set down the cup.\nThe tank dripped. The radios went on.\nAn apology, he said, is a boat\nthat must leave while the tide is high.",
+    "question": "Which choice best describes the shift in tone in the poem?",
+    "options": [
+     "From mournful to joyful, as Kai at last accepts Nikhil's late apology",
+     "From lighthearted to grave, as Nikhil's confession alters it",
+     "From fearful to confident, as Nikhil realizes he will not be punished",
+     "From formal to intimate, as the two men discover a shared past"
+    ],
+    "correct_letter": "B",
+    "explanation": "시의 앞부분에서 카이는 웃으며 차를 나누고 갈매기와 라디오에 대해 농담을 주고받는다. 그러나 니킬이 형을 앗아 간 화재에 대해 사과하자 카이는 컵을 내려놓고, 사과도 때를 놓치면 안 된다는 무거운 말을 한다. 따라서 가벼운 분위기에서 심각한 분위기로 바뀌므로 B가 정답이다. A는 사과를 받아들였다는 근거가 없고, C와 D는 마지막 장면의 무거움과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "lighthearted",
+    "grave"
+   ],
+   "devices": [
+    "metaphor",
+    "juxtaposition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-033",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-033",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "drama",
+    "seed": {
+     "index": 32,
+     "genre": "drama",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Marta",
+      "Ksenia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Gdansk",
+     "setting": "a radio repair shop",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a radio repair shop in Gdansk; an elder and a restless apprentice about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Solder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, paces by the window.\nKSENIA: Listen. Warsaw, Berlin, a station from Lisbon. Every one of them is somewhere I have never been.\nMARTA: (laughing) And every one of them is broken until we fix it. Pass me the small pliers, traveler.\nKSENIA: I mean it. I have a place on a ship in May.\n(MARTA stops. She sets down the receiver, and the hiss of static fills the room.)\nMARTA: My husband said May, too. He meant to send for me. I kept the shop open forty years so he could find it.\nKSENIA: (quietly) Then you know why I have to go.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From bitter to forgiving, as Marta pardons Ksenia for leaving",
+     "From anxious to excited, as Ksenia describes her travel plans",
+     "From teasing to sorrowful, as Marta recalls her own lost hope",
+     "From formal to playful, as the two women become closer friends"
+    ],
+    "correct_letter": "C",
+    "explanation": "처음에 마르타는 웃으며 크세니아를 여행자라고 부르며 놀린다. 그러나 크세니아가 5월에 배를 탄다고 하자 마르타는 수신기를 내려놓고, 남편도 5월을 말했지만 끝내 돌아오지 않은 기억을 꺼낸다. 따라서 장난스러운 분위기에서 슬픈 분위기로 바뀌므로 C가 정답이다. A는 마르타가 용서한다는 근거가 없고, B와 D는 변화의 방향이 지문과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "mournful"
+   ],
+   "devices": [
+    "stage directions",
+    "dialogue"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-034",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-034",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 33,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Etienne",
+      "Soraya"
+     ],
+     "nameCultures": [
+      "french",
+      "persian_central_asian"
+     ],
+     "locale": "Tehran",
+     "setting": "a summer camp dining hall",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a summer camp dining hall in Tehran; a retired judge and a young clerk about who gets credit for shared work"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Once, in the summer my uncle sent me to Tehran, I, Soraya, served as clerk to a retired judge, Etienne, who spent his holidays arbitrating quarrels at a camp beside the mountains. Each evening in the long dining hall, among clattering plates and the smell of saffron rice, he read aloud the judgments we had drafted together, and the children cheered. I glowed through every reading. Then one night the camp's oldest pupil asked him who had written the part about the stolen kite. Etienne smiled and said that he had. I had written it alone, word for word, and I sat very still, my spoon cooling in my hand, as the cheering began again.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From fearful to reassured, as the narrator realizes Etienne trusts her",
+     "From resentful to forgiving, as the narrator accepts Etienne's apology",
+     "From bored to amused, as the narrator joins in the children's cheering",
+     "From contented to stung, as the narrator sees her work claimed by him"
+    ],
+    "correct_letter": "D",
+    "explanation": "화자는 처음에 판결문 낭독 때마다 뿌듯해하며 즐거운 식당 분위기를 묘사한다. 그러나 한 학생의 질문에 에티엔이 화자가 혼자 쓴 부분을 자기가 썼다고 하자, 화자는 숟가락을 쥔 채 굳어 버린다. 따라서 만족스러운 분위기에서 상처받은 분위기로 바뀌므로 D가 정답이다. A와 C는 감정 변화가 반대이고, B는 에티엔이 사과했다는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "contented",
+    "wounded"
+   ],
+   "devices": [
+    "imagery",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-035",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-035",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 34,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Ingrid",
+      "Makana"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Auckland",
+     "setting": "a barbershop",
+     "relationship": "a ferryman's daughter and a passenger",
+     "conflict": "while waiting for important news",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a barbershop in Auckland; a ferryman's daughter and a passenger while waiting for important news"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "By the third hour in the Auckland barbershop, Makana had stopped pretending to read the magazines. My father ran the harbor ferry, and I, Ingrid, swept hair for the barber on Saturdays; Makana was a passenger who had missed the morning boat and was waiting for a call from the hospital about his wife. At first he joked with the barber about the rugby scores and let me tease him about his crooked part. When the phone finally rang, he crossed the room in two steps. He listened, said thank you, and sat down very slowly. Then he laughed, a loose, astonished laugh, and asked whether there was still time for a proper haircut before the evening ferry.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From strained patience to deep relief",
+     "From quiet grief to bitter disappointment",
+     "From cheerful confidence to sudden fear",
+     "From mild irritation to calm indifference"
+    ],
+    "correct_letter": "A",
+    "explanation": "마카나는 처음에 잡지를 읽는 척하며 농담으로 긴장을 감추고 병원 소식을 기다린다. 전화를 받은 뒤 천천히 앉았다가 놀란 듯 풀린 웃음을 터뜨리고 이발까지 하겠다고 말하므로, 좋은 소식에 안도했음을 알 수 있다. 따라서 긴장된 인내에서 깊은 안도로 바뀌므로 A가 정답이다. B와 C는 소식이 나빴다고 잘못 읽은 오답이고, D는 마지막의 감정적 반응과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "joyful"
+   ],
+   "devices": [
+    "imagery",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-036",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-036",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "letter",
+    "seed": {
+     "index": 35,
+     "genre": "letter",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Emiliano",
+      "Bartolo"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Oaxaca",
+     "setting": "a lakeside dock",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a lakeside dock in Oaxaca; two brothers who run a failing shop while rehearsing for an important performance"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are rotting under our rehearsal spot, and you still play the second verse too fast. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I meant this letter to be a ledger of our failures. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. But on Sunday, I think, we will play as if someone on the far shore is waiting for us. Your brother, Emiliano",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From playful teasing to stern disapproval",
+     "From grim accounting to tentative hope",
+     "From open despair to bitter resignation",
+     "From formal politeness to casual humor"
+    ],
+    "correct_letter": "B",
+    "explanation": "편지는 밀린 임대료, 썩은 부두, 너무 빠른 연주를 나열하며 실패의 장부처럼 시작한다. 그러나 화자는 물 건너로 퍼진 기타 소리와 모자를 벗은 어부를 떠올린 뒤 일요일 연주에 대한 기대를 말한다. 따라서 냉정한 결산에서 조심스러운 희망으로 바뀌므로 B가 정답이다. A와 D는 앞부분의 무거운 목록을 놓쳤고, C는 마지막의 희망적인 어조와 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "somber",
+    "hopeful"
+   ],
+   "devices": [
+    "listing",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-037",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-037",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "diary",
+    "seed": {
+     "index": 36,
+     "genre": "diary",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Lindiwe",
+      "Kenya"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "african_american"
+     ],
+     "locale": "Nairobi",
+     "setting": "a printing press room",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "about the proper way to say goodbye",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a printing press room in Nairobi; a mother-in-law and a new bride about the proper way to say goodbye"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Ink on my thumbs again, and Mama Lindiwe watching me scrub them at the press-room sink. Nairobi, March 1984. Tonight her son and I leave for Mombasa, and she has spent all week at the press teaching me the proper goodbye: a printed card for each neighbor, set in her own type, the margins exact. I hated every card. I wanted to hug people, not hand them paper. This afternoon she locked the last frame and pulled one proof for herself. It said only, To my daughter, Kenya. She did not hand it to me. She pinned it above the press where the light falls, and then she turned away and told me the ink would never come off my thumbs if I kept fussing.",
+    "question": "Which choice best describes the shift in tone in the diary entry?",
+    "options": [
+     "From grateful to resentful, as Kenya learns she must print the cards alone",
+     "From cheerful to anxious, as Kenya worries about her move to Mombasa",
+     "From irritated to moved, as Kenya sees what the goodbye means to Lindiwe",
+     "From tender to cold, as Lindiwe refuses to give Kenya the final card"
+    ],
+    "correct_letter": "C",
+    "explanation": "일기 앞부분에서 케냐는 이웃에게 카드를 나눠 주는 격식 있는 작별을 싫어했다고 말한다. 그러나 시어머니가 내 딸 케냐에게라는 카드를 찍어 빛이 드는 곳에 걸어 두고 돌아서는 장면에서, 그 의식이 시어머니의 애정 표현이었음을 깨닫는다. 따라서 짜증에서 감동으로 바뀌므로 C가 정답이다. A와 D는 감정 변화가 반대이고, B는 이사에 대한 불안을 다룬 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "exasperated",
+    "tender"
+   ],
+   "devices": [
+    "imagery",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-02-038",
+   "task": "gen-lit40-medium-02-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-02-038",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 37,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "second",
+     "styleEra": "early_20c",
+     "names": [
+      "Renata",
+      "Nicolas"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a salt flat",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over who should stay behind",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a salt flat in Lima; a seamstress and her only apprentice over who should stay behind"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Salt keeps every footprint. So the people of the white flats beyond Lima told it, and so you will hear it, as Renata the seamstress heard it on the night the caravan was to leave. Only one of you can stay to tend the well, the elders said, and Renata, laughing, offered her apprentice Nicolas a needle and a joke: whoever sewed the straighter seam would get to go. You can picture them racing by lamplight, teasing each other, thread snapping. But when Nicolas held up his perfect seam, Renata did not laugh. She looked at the long line of their footprints on the salt, all leading one way, and quietly unpicked her own seam so that his would win.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From solemn to comic, as the contest turns into a lighthearted game",
+     "From hopeful to bitter, as Renata resents losing the contest to Nicolas",
+     "From fearful to calm, as the elders settle the dispute on their behalf",
+     "From playful to selfless, as Renata quietly lets Nicolas go"
+    ],
+    "correct_letter": "D",
+    "explanation": "이야기 앞부분에서 레나타는 웃으며 바느질 시합을 제안하고 두 사람은 장난치며 경쟁한다. 그러나 니콜라스가 완벽한 솔기를 들어 보이자 레나타는 웃지 않고, 자신의 솔기를 몰래 풀어 그가 떠날 수 있게 한다. 따라서 장난스러운 분위기에서 자기희생적인 분위기로 바뀌므로 D가 정답이다. A는 변화의 방향이 반대이고, B는 원망의 근거가 없으며, C는 장로들이 결정한 것이 아니므로 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "poignant"
+   ],
+   "devices": [
+    "symbolism",
+    "second-person address"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-02-024",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-025",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-026",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-027",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-028",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-029",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-039",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-02-040",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

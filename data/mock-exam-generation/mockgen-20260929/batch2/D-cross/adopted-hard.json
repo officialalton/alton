@@ -1,0 +1,1361 @@
+[
+ {
+  "gid": "recipe-transitions-01",
+  "runId": "batch2-D-cross",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "transitions_contradictory_evidence_synthesis",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Ecologist Mireille Okafor studied a species of desert snail that seals itself inside its shell during droughts. In laboratory trials, snails kept in constantly dry air survived far longer than snails exposed to alternating dry and humid periods. In the field, however, snails at sites with frequent brief rains outlived those at sites that stayed dry all season. Okafor noticed that the field sites with rain also had more shade and cooler ground temperatures than the dry sites did. ______ she concluded that humidity changes alone probably shorten the snails' survival, and that the field advantage came from temperature rather than from the rain itself.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Ecologist Mireille Okafor studied a species of desert snail that seals itself inside its shell during droughts. In laboratory trials, snails kept in constantly dry air survived far longer than snails exposed to alternating dry and humid periods. In the field, however, snails at sites with frequent brief rains outlived those at sites that stayed dry all season. Okafor noticed that the field sites with rain also had more shade and cooler ground temperatures than the dry sites did. ______ she concluded that humidity changes alone probably shorten the snails' survival, and that the field advantage came from temperature rather than from the rain itself.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Taken together,",
+    "Even so,",
+    "In contrast,",
+    "For instance,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A(Taken together,): 마지막 문장의 결론은 실험실 결과(건습 반복이 생존을 줄임)와 야외 결과, 그리고 야외 비 온 지역이 더 서늘했다는 관찰을 함께 묶어서 나온 것이다. 그래서 여러 증거를 종합한다는 뜻의 전환어가 알맞다.\nB(Even so,): 야외 결과 한 가지만 보고, 그 결과를 무릅쓰고 반대 결론을 내리는 것처럼 읽은 선택지다. 그러나 이 결론은 야외 증거를 무시한 것이 아니다. 온도 차이로 야외 결과를 설명하면서 받아들인 것이므로 양보 관계가 아니다.\nC(In contrast,): 두 관찰이 서로 반대된다는 점만 보고 단순 대조로 처리한 선택지다. 마지막 문장은 앞 내용과 대조되는 주장이 아니라, 두 관찰을 조화시킨 결론이다.\nD(For instance,): 마지막 문장은 앞 내용을 보여 주는 예시가 아니라 결론이므로 흐름과 맞지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "실험실 결과와 야외 결과가 표면적으로 모순되고, 세 번째 관찰(그늘·저온)이 혼재 변수로 제시된 뒤 마지막 문장이 이를 종합해 조화시키는 결론이므로 'Taken together'가 유일하게 논리적으로 맞다. B는 야외 결과 하나만 반영한 양보 전환어, C는 단순 대조 전환어로 레시피 요구 오답 구조를 충족한다. 해설은 정답·오답 근거를 지문 내용과 일치하게 서술하며 모순이 없다. 단순 인접 문장 관계가 아니라 세 관찰의 종합 및 혼재 변수 인식을 요구하므로 medium 이상의 사고를 필요로 한다. 가상의 연구자·연구로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_inference",
+     "abstract_relation_beyond_surface_contrast"
+    ],
+    "note": "실험실 결과와 야외 결과가 서로 어긋나고, 세 번째 관찰(그늘·온도)이 둘을 조화시킨다. 결론은 세 관찰을 종합해야 나오므로 'Taken together'가 유일하게 타당하다. B는 양보, C는 단순 대조를 노린 오답이고 D는 관계 유형이 다른 오답이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-boundaries-00",
+  "runId": "batch2-D-cross",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "boundaries_dangling_modifier_subject_matching",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the 1930s, Nigerian photographer Jonathan Adagogo Green had already died, but his glass-plate negatives of the Niger Delta continued to circulate among colonial archives, often without credit. Only recently have historians begun restoring his name to these images. Trained in the studio conventions of West African portraiture yet working largely outdoors along the Bonny River, ______\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1930s, Nigerian photographer Jonathan Adagogo Green had already died, but his glass-plate negatives of the Niger Delta continued to circulate among colonial archives, often without credit. Only recently have historians begun restoring his name to these images. Trained in the studio conventions of West African portraiture yet working largely outdoors along the Bonny River, ______",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "Green blended formal posing with candid scenes of daily trade, producing images that defy easy classification.",
+    "Green's photographs blended formal posing with candid scenes of daily trade, defying easy classification.",
+    "the colonial archives blended formal posing with candid scenes of daily trade, producing images that defy easy classification.",
+    "the Bonny River's traders were shown in images blending formal posing with candid scenes, defying easy classification."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 분사구 'Trained in ... yet working largely outdoors ...'는 훈련을 받고 야외에서 작업한 사람, 즉 사진가 Green을 수식한다. 따라서 주절의 주어는 Green이어야 하며, A만 이 조건을 충족한다.\nB: 주어가 Green의 저작물인 'Green's photographs'이다. 수식 대상과 가깝지만 범주가 다르다. 사진은 훈련을 받거나 야외에서 작업할 수 없으므로 현수 수식어 오류가 된다.\nC: 'the colonial archives'는 앞 문맥에 나온 명사여서 그럴듯해 보이지만 수식어와 무관한 엉뚱한 주어이다. 기록 보관소는 훈련받거나 작업하는 주체가 아니다.\nD: 주어 'traders'는 복수형이고 동사 'were shown'과 수일치가 맞아 문법적으로는 완결된 문장이다. 그러나 상인들은 사진에 찍힌 대상일 뿐 초상 사진 관습을 훈련받고 강가에서 작업한 사람이 아니므로, 수식어가 의미상 가리킬 수 없는 주어이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Trained in ... yet working largely outdoors ...'는 훈련받고 야외 작업한 사람(Green)만 수식할 수 있으며, A만 Green을 주어로 둔다. B(Green's photographs)는 사람 vs 저작물 범주 오답, C(archives)·D(traders)는 문맥에 등장하는 그럴듯한 명사이나 수식 대상과 의미상 불일치. 네 선택지 모두 수일치·문법상 완결되어 있어 의미적 대응 추론이 필수. J. A. Green(1873–1905, Bonny 출신)의 1930년대 이전 사망·식민 아카이브 유통 서술은 사실과 부합. 해설은 정답 및 오답 각각의 배제 근거를 정확히 기술함."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "'yet'로 이어진 복합 분사구가 문두에 있고, 오답 B는 사람 대신 그 사람의 저작물(Green's photographs)을 주어로 삼았다. 오답 C·D는 앞 문맥에 나온 명사를 주어로 써서 그럴듯해 보인다. 네 선택지 모두 수일치가 맞아서 수일치만으로는 정답을 고를 수 없다. 앞 문맥의 단서도 문제없다. 다만 dangling modifier 유형으로서는 비교적 전형적인 구성이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-boundaries-01",
+  "runId": "batch2-D-cross",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "boundaries_clause_relation_punctuation_choice",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Tracking studies using tiny radio tags have complicated a long-held picture of honeybee foraging. Worker bees from a single hive are physically capable of flying across several square kilometers______ most of the nectar they actually bring back comes from flowers located within a few hundred meters of the colony.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Tracking studies using tiny radio tags have complicated a long-held picture of honeybee foraging. Worker bees from a single hive are physically capable of flying across several square kilometers______ most of the nectar they actually bring back comes from flowers located within a few hundred meters of the colony.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", but",
+    ", so",
+    ",",
+    " but;"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 빈칸 앞뒤는 모두 독립절이다(\"Worker bees ... are ... capable of flying ...\"와 \"most of the nectar ... comes from flowers ...\"). 두 절은 대조 관계다(멀리 날 수 있지만 실제로는 가까운 곳에서 모은다). 앞 문장의 \"complicated a long-held picture\"도 이런 대조를 예고한다. 따라서 쉼표와 대조의 등위접속사를 함께 쓴 \", but\"이 맞다.\nB(\", so\"): 구두점은 맞다. 하지만 'so'는 인과를 나타낸다. 멀리 날 수 있다는 사실이 가까운 꽃에서 꿀을 모으는 원인이 되지 않으므로 논리가 맞지 않는다.\nC(\",\"): 쉼표만으로 두 독립절을 이은 콤마 스플라이스다.\nD(\" but;\"): 세미콜론이 접속사 뒤에 붙어 있다. 그래서 절 경계가 아닌 곳에서 문장이 끊기고, 'but'이 앞 절 끝에 매달린다. 세미콜론 앞뒤가 모두 완전한 독립절이어야 한다는 규칙에 어긋난다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "빈칸 앞뒤 모두 완전한 독립절(\"Worker bees ... are physically capable of flying ...\" / \"most of the nectar ... comes from ...\"). 두 절은 '멀리 날 수 있다 vs 실제로는 가까운 곳에서 채집한다'의 명확한 대조이며, 앞 문장의 \"complicated a long-held picture\"가 이를 예고한다. \", but\" 정답 확인. B는 구두점은 적법하지만 인과 관계가 성립하지 않아 오답으로 기능하며, 이 때문에 단순 절 경계 판별을 넘어 절 간 논리 관계까지 고려해 구두점·접속사를 선택해야 하므로 hard 특성(independent_clause_boundary_judgment) 충족. C는 콤마 스플라이스, D는 접속사 뒤(절 경계 아님)에 세미콜론이 있어 체크리스트 4·5 충족. 해설은 각 선택지 판단 근거를 정확히 서술하며 모순 없음. 과학적 배경(벌의 비행 범위 대 실제 채집 거리)은 문항 내 연구 설정으로 제시되어 사실 오류로 볼 수 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답 A는 옳음. 다만 오답의 성격이 너무 전형적이어서 medium 수준을 넘지 못함. C는 명백한 콤마 스플라이스이고 D는 'but;'이라는 부자연스러운 형태여서 바로 배제되며, B의 'so'도 인과가 맞지 않아 쉽게 걸러짐. 세미콜론·마침표 등 적법한 구두점 전략끼리 비교하게 하지 않으므로 hard 특성(independent_clause_boundary_judgment)을 제대로 구현하지 못함. 삽입어나 분사구문 같은 추가 사고 요소도 없음.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-boundaries-02",
+  "runId": "batch2-D-cross",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "boundaries_insert_vs_clause_break",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "American ceramicist Toshiko Takaezu often closed the tops of her stoneware vessels completely, leaving no opening through which a viewer could look inside ______ she frequently dropped a small ball of clay into each form before sealing it, so that the finished piece would rattle softly when it was lifted.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "American ceramicist Toshiko Takaezu often closed the tops of her stoneware vessels completely, leaving no opening through which a viewer could look inside ______ she frequently dropped a small ball of clay into each form before sealing it, so that the finished piece would rattle softly when it was lifted.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ", however, she",
+    "; however, she",
+    "; however she",
+    ", however; she"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "정답 B. 빈칸 앞 \"American ceramicist ... look inside\"는 주어(Takaezu)와 동사(closed)를 갖춘 독립절이고, 빈칸 뒤 \"she frequently dropped ...\"도 주어(she)와 동사(dropped)를 갖춘 독립절이다. 따라서 however는 한 절 안에 들어간 단순 삽입어가 아니라 두 독립절을 잇는 접속부사이다. 앞 절은 세미콜론으로 끝내고 however 뒤에는 쉼표를 찍어야 한다.\nA(콤마 스플라이스): however를 문장 중간의 삽입어로 보고 양쪽에 쉼표만 찍었다. however는 등위접속사가 아니므로 두 독립절을 쉼표로만 이으면 콤마 스플라이스가 된다.\nC(비대칭 구두점): 세미콜론으로 절 경계는 제대로 표시했지만, 절 앞에 오는 접속부사 however 뒤의 쉼표가 빠졌다.\nD(경계 위치 착오): 세미콜론을 however 뒤에 두어 however가 앞 절의 끝에 붙은 삽입어처럼 되었다. 대조의 의미는 뒤 절을 이끌어야 하고, \"inside, however\"는 앞 절을 부자연스럽게 수식하므로 절 경계를 잘못 잡은 것이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "빈칸 앞(Takaezu closed…, leaving…inside)과 뒤(she frequently dropped…)가 모두 독립절임을 검산함. B가 유일한 정답. A는 콤마 스플라이스, C는 however 뒤 쉼표 누락, D는 however를 앞 절 끝에 붙여 대조 의미 위치가 어긋남(단독 문장이라 앞 절이 대조할 선행 내용이 없으므로 논리적으로 배제 가능). D 변별에 절 경계 위치 판단이 추가로 필요해 medium 이상. 다카에즈의 밀폐형 도자기·내부 점토 구슬(rattle)은 사실과 부합. 원문 표절 징후 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "SAT에서 흔한 '; however,' 유형의 전형적 medium 문항이다. 앞 절의 분사구(leaving...)와 관계절 때문에 길이만 늘어났을 뿐, 삽입어와 절 경계를 구분하는 판단은 기본 수준이다. D는 문법적으로 완전히 틀렸다고 보기 어렵고 의미상(대조가 뒤 절에 걸려야 함) 탈락하는데, 해설이 그 점을 설명하고 있어 받아들일 만하다. 사실관계(Takaezu가 닫힌 형태 안에 점토 공을 넣은 것)도 정확하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-boundaries-03",
+  "runId": "batch2-D-cross",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "boundaries_dangling_modifier_subject_matching",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the 1930s, Brazilian botanist Graziela Barroso was among the first women hired by Rio de Janeiro's Botanical Garden, where she eventually classified more than a hundred new plant species. Having taught herself taxonomy in her thirties after years of assisting her husband's fieldwork, ______ by the time of her death in 2003.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1930s, Brazilian botanist Graziela Barroso was among the first women hired by Rio de Janeiro's Botanical Garden, where she eventually classified more than a hundred new plant species. Having taught herself taxonomy in her thirties after years of assisting her husband's fieldwork, ______ by the time of her death in 2003.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "the garden's herbarium held thousands of specimens she had catalogued",
+    "Barroso's reference guides to Brazilian flora had trained generations of students",
+    "the species named in her honor numbered more than a dozen",
+    "Barroso had become known as the \"first lady of Brazilian botany\""
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "분사구 \"Having taught herself taxonomy...\"의 의미상 주어는 분류학을 독학한 사람, 즉 Barroso다. 따라서 주절 주어는 Barroso여야 한다. D는 Barroso를 주어로 두어 수식 관계가 정확하다.\nA: 주어 'the garden's herbarium'(식물표본관)은 수식어와 무관한 명사로, 표본관이 분류학을 독학했다는 뜻이 되어 현수 수식어 오류다. 지문에 나온 garden과 표면적으로 연결돼 그럴듯해 보일 뿐이다.\nB: 'Barroso's reference guides'는 Barroso라는 이름을 포함하지만 사람이 아니라 저작물이다. 소유격 속 Barroso는 주어가 아니므로, 참고서가 분류학을 독학했다는 의미가 된다.\nC: 'the species ... numbered'는 수일치에도 문제가 없고 그녀와 관련된 대상이지만, 종(species)이 스스로 분류학을 배울 수는 없으므로 의미상 수식 대상이 될 수 없다.\n네 선택지 모두 문법적으로 완전한 절이므로, 수식어가 가리키는 대상과 주어가 맞는지를 따져야만 정답을 고를 수 있다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching",
+     "temporal_reasoning_for_tense_selection"
+    ],
+    "note": "문두 분사구 \"Having taught herself taxonomy\"의 의미상 주어(Barroso)와 주절 주어 일치를 요구. D만 Barroso를 주어로 두며, B는 소유격 'Barroso's reference guides'로 이름은 포함하되 저작물이 주어인 함정, A·C는 지문 맥락과 표면적으로 연결된 사물 주어. 네 오답 모두 시제·수일치 문제가 없어 단순 문법 판단으로는 배제 불가. 'by the time of her death in 2003'과 과거완료 'had become'도 정합. 사실 관련: Barroso가 '브라질 식물학의 퍼스트레이디'로 불리고 2003년 사망한 점은 맞으나, 리우 식물원 근무 시작은 1940년대 초(1942년경)로 알려져 '1930s' 표기는 다소 부정확할 수 있음(문항 정답 판별에는 영향 없음)."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 D가 맞다. 소유격 함정(B)과 관련 사물 함정(A, C)이 들어 있어 의미상 주어를 추론해야 풀 수 있다. 사실 관계는 약간 불확실하다. Barroso는 1940년대에 채용된 것으로 알려져 있어 '1930s'라는 설정이 부정확할 수 있으나, 문법 문항의 판정에는 영향이 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-boundaries-05",
+  "runId": "batch2-D-cross",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "boundaries_insert_vs_clause_break",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, conservators assumed that wax cylinders recorded in the 1890s could not be played without a stylus scraping away part of their fragile grooves. The engineers who began testing optical scanning on such cylinders in the early 2000s ______ found that a high-resolution camera could map the grooves in three dimensions and let software reconstruct the sound without anything touching the wax.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "For decades, conservators assumed that wax cylinders recorded in the 1890s could not be played without a stylus scraping away part of their fragile grooves. The engineers who began testing optical scanning on such cylinders in the early 2000s ______ found that a high-resolution camera could map the grooves in three dimensions and let software reconstruct the sound without anything touching the wax.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "; however,",
+    ", however,",
+    ", however",
+    "however,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "정답 B. 두 번째 문장의 주어는 \"The engineers who began testing optical scanning on such cylinders in the early 2000s\"이고, 동사는 빈칸 뒤의 \"found\"이다. \"who began testing...\"은 주어를 꾸미는 관계절일 뿐이라서 빈칸 앞은 독립절이 아니다. 따라서 \"however\"는 주어와 동사 사이에 끼어든 삽입어이므로 앞뒤에 쉼표를 하나씩 찍어야 한다.\nA(오답): \"began testing ... in the early 2000s\"만 보고 빈칸 앞을 완전한 절로 착각한 경우이다. 세미콜론 앞뒤에는 독립절이 와야 하는데, 앞은 주어뿐이고 뒤(\"found that...\")에는 주어가 없다.\nC(오답): 삽입어 앞에만 쉼표를 찍어 비대칭이 된다. 게다가 주어와 동사 \"found\" 사이를 쉼표 하나로 끊는 셈이 된다.\nD(오답): 삽입어 뒤에만 쉼표를 찍은 경우로, 역시 비대칭이다. 쉼표가 짝을 이루지 못해 삽입어가 제대로 구분되지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination",
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "빈칸 앞 \"The engineers who began testing ... in the early 2000s\"는 관계절이 붙은 주어 명사구이고, 빈칸 뒤 \"found that...\"이 본동사이므로 however는 주어-동사 사이 삽입어 → 쌍쉼표(B)가 정답. 관계절 \"who began testing\"이 독립절처럼 보이게 설계되어 A(세미콜론) 함정이 유효하며, C/D는 비대칭 쉼표. 체크 4: 구조상 진짜 독립절이 없어 엄밀한 콤마 스플라이스는 불가능하나, C \", however\"가 콤마 스플라이스 패턴(오판 시 쉼표+however로 두 절 연결) 오답으로 기능하므로 충족으로 판정. 해설의 문법 판단·오답 설명 모두 정확. 1890년대 왁스 실린더의 2000년대 초 광학 스캐닝(IRENE 등) 배경도 사실과 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "관계절 속 동사 began 때문에 빈칸 앞이 완전한 절처럼 보이는 가든패스 구조여서, 주어-동사 사이 삽입어라는 판별이 필요하다. 다만 빈칸 앞이 독립절이 아니므로 어떤 선택지도 콤마 스플라이스를 만들지 않는다. A는 세미콜론 오용이고 C·D는 비대칭 쉼표다. 따라서 체크리스트 4번(콤마 스플라이스 오답)은 충족되지 않는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-command_of_evidence_text-01",
+  "runId": "batch2-D-cross",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "command_of_evidence_text_causal_vs_correlation_judgment",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In surveys of small freshwater ponds in the Netherlands, ecologist Marit Hoekstra found that ponds with dense stands of submerged stonewort algae (Chara) also tended to have unusually clear water, whereas ponds lacking stonewort were typically murky with floating phytoplankton. Hoekstra hypothesizes that stonewort actively causes the clarity: she proposes that the algae release chemical compounds that suppress phytoplankton growth. Skeptics note, however, that stonewort needs abundant light to establish on pond bottoms, so it may simply be that stonewort thrives only in ponds that are already clear for other reasons.\n\nWhich finding, if true, would most directly support Hoekstra's hypothesis?",
+   "stimulus": "In surveys of small freshwater ponds in the Netherlands, ecologist Marit Hoekstra found that ponds with dense stands of submerged stonewort algae (Chara) also tended to have unusually clear water, whereas ponds lacking stonewort were typically murky with floating phytoplankton. Hoekstra hypothesizes that stonewort actively causes the clarity: she proposes that the algae release chemical compounds that suppress phytoplankton growth. Skeptics note, however, that stonewort needs abundant light to establish on pond bottoms, so it may simply be that stonewort thrives only in ponds that are already clear for other reasons.",
+   "question": "Which finding, if true, would most directly support Hoekstra's hypothesis?",
+   "options": [
+    "When stonewort was experimentally planted in randomly selected murky ponds, those ponds' phytoplankton levels dropped sharply within weeks, while phytoplankton levels in unplanted murky ponds of similar depth and nutrient content stayed the same.",
+    "A follow-up survey of more than 200 additional ponds found that the denser a pond's stonewort cover was, the clearer its water tended to be.",
+    "In ponds where water clarity was improved by removing bottom-feeding fish that stir up sediment, stonewort colonized the pond floor within a year.",
+    "Ponds with low nitrogen and phosphorus runoff from nearby farms tended to have both clearer water and more stonewort than ponds receiving heavy fertilizer runoff."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 무작위로 고른 탁한 연못에 스톤워트를 인위적으로 심었더니 식물성 플랑크톤이 줄었고, 조건이 비슷한 대조 연못에는 변화가 없었다. 원인(스톤워트)을 먼저 넣고 결과(맑아짐)가 뒤따랐으므로 인과 방향이 확인되며, 무작위 배정과 대조군이 수심·영양염 같은 다른 설명을 배제한다. 따라서 '스톤워트가 맑은 물을 만든다'는 가설을 가장 직접적으로 지지한다.\nB(상관을 인과로 오해): 표본을 늘리고 용량-반응 관계를 보여도 여전히 상관일 뿐이다. 맑은 물이 스톤워트를 키운다는 회의론자의 설명과도 똑같이 들어맞는다.\nC(인과 방향 반대): 물이 먼저 맑아진 뒤 스톤워트가 자리 잡았다는 결과로, 회의론자가 말한 '맑음 → 스톤워트' 방향을 지지하므로 오히려 가설을 약화한다.\nD(제3의 원인): 영양염 유입이 적은 것이 맑은 물과 스톤워트 둘 다의 원인일 수 있음을 보여 준다. 그러면 두 현상의 상관은 이 공통 원인으로 설명되고, 스톤워트의 인과적 역할은 뒷받침되지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 상관(스톤워트 밀생 ↔ 맑은 물)과 두 경쟁 설명(Hoekstra의 인과 vs 회의론자의 역방향)을 제시하고 인과를 단정하지 않음. A는 무작위 배정·대조군을 갖춘 개입 실험으로 인과 방향과 대안 설명(수심·영양염)을 함께 배제해 가설을 가장 직접 지지함. B는 상관 강화(용량-반응)에 그쳐 역방향 설명과 양립, C는 '맑음→스톤워트' 역방향 증거로 오히려 회의론 지지, D는 영양염 유입이라는 공통 제3원인을 시사. 정답 유일성·해설 정합성 모두 양호. 학생은 실험 설계의 논리(개입 순서, 무작위화, 대조군)를 평가해야 하므로 단순 상관 확인형 medium 문항을 넘어서는 사고를 요구함. 사실적 오류 없음(Chara가 광의존적 저서성 대형조류이며 타감작용 가설이 실제 논의되는 점과 부합). 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "정답 A는 무작위 배정 실험과 대조군이 있어 가설을 가장 직접적으로 지지하므로 타당하다. 오답도 각각 역할이 맞다. B는 용량-반응 형태의 상관, C는 인과 방향 반대, D는 교란 요인(공통 원인)이다. 체크리스트 5번의 '무관한 원인'은 엄밀히 말해 교란 요인과 다르지만, 의도에는 부합한다고 봤다. 이 문항은 상관·인과를 구분하는 전형적 구조라 hard로서는 경계선에 있다. 가설의 메커니즘 범위(화학물질)까지 가려내도록 설계했다면 난이도가 더 높아졌을 것이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-command_of_evidence_text-02",
+  "runId": "batch2-D-cross",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "command_of_evidence_text_hypothesis_supporting_evidence_construction",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In medieval Iceland, many farms kept detailed accounts of the dates on which sheep were driven down from highland pastures each autumn. Historian Sigrún Halldórsdóttir has noticed that, across the fourteenth century, these round-up dates at farms in the northern districts shifted steadily earlier—by nearly three weeks overall. She hypothesizes that the shift was not driven by changes in labor or market demand but by a cooling climate that caused highland grasses to stop growing earlier in the season, forcing farmers to bring their flocks down before the animals lost condition.\n\nWhich finding, if true, would most directly support Halldórsdóttir's hypothesis?",
+   "stimulus": "In medieval Iceland, many farms kept detailed accounts of the dates on which sheep were driven down from highland pastures each autumn. Historian Sigrún Halldórsdóttir has noticed that, across the fourteenth century, these round-up dates at farms in the northern districts shifted steadily earlier—by nearly three weeks overall. She hypothesizes that the shift was not driven by changes in labor or market demand but by a cooling climate that caused highland grasses to stop growing earlier in the season, forcing farmers to bring their flocks down before the animals lost condition.",
+   "question": "Which finding, if true, would most directly support Halldórsdóttir's hypothesis?",
+   "options": [
+    "Records from the same northern farms show that the number of sheep each farm kept remained roughly constant throughout the fourteenth century, even as round-up dates moved earlier.",
+    "Pollen preserved in highland lake sediments near the northern farms indicates that the growing season for pasture grasses shortened during the fourteenth century, and farms at higher elevations, where cooling would end grass growth soonest, show the largest shifts in round-up dates.",
+    "Farm accounts from the northern districts reveal that, over the course of the fourteenth century, sheep were brought down from the highlands at progressively earlier points in the autumn.",
+    "Trade documents indicate that demand for Icelandic wool in continental markets rose sharply in the late fourteenth century, prompting farmers to shear and sell wool earlier in the year."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "정답 B: 가설은 '기후 냉각 → 목초 생장 조기 종료 → 양 몰이 날짜 앞당김'이라는 인과 구조이다. B는 목초 생장기가 실제로 짧아졌다는 독립 증거(꽃가루)와, 냉각 영향이 가장 클 고지대 농장에서 변화가 가장 컸다는 용량-반응 패턴을 함께 제시해 가설의 메커니즘을 직접 뒷받침한다.\nA(무관한 사실): 양의 수가 일정했다는 것은 기후 원인을 확인해 주지 않는다. 노동·시장 요인을 일부 배제하는 것처럼 보일 수 있으나 목초 생장 조기 종료와는 직접 연결되지 않는다.\nC(지문 재진술): 몰이 날짜가 점차 앞당겨졌다는 것은 지문에 이미 나온 관찰 자체로, 그 원인에 대한 증거가 아니다.\nD(반박): 양모 시장 수요 증가로 일정이 앞당겨졌다는 것은 가설이 배제한 시장 요인을 대안 설명으로 제시하므로 가설을 약화한다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_source_integration",
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction"
+    ],
+    "note": "지문은 관찰(몰이 날짜 3주 앞당김)+가설(냉각→목초 생장 조기 종료)만 제시하고 증거는 없음. B는 독립적 대리자료(호수 퇴적 꽃가루)로 목초 생장기 단축을 확인하고, 고도별 용량-반응 패턴으로 인과 방향까지 뒷받침해 가설의 메커니즘·범위에 정확히 부합. C는 지문 재진술, D는 시장 요인 대안(가설이 배제한 요인)으로 반박형, A는 무관/부분 배제. 해설의 논리와 정답 일치. 소소한 지적: 정답 B가 다른 선지보다 눈에 띄게 길어 길이 단서가 될 수 있음. D는 '양모 전단·판매' 시점이 몰이 날짜와 직접 동일하지 않아 반박 강도가 다소 약하나 대안 설명으로 기능함. 가상의 역사가·연구이며 14세기 아이슬란드 냉각은 역사적으로 개연성 있음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching",
+     "hypothetical_construction"
+    ],
+    "note": "B는 메커니즘 증거와 용량-반응 증거를 결합함. A는 대안 설명을 일부 배제하는 매력적 오답임. 다만 B는 길고 구체적이어서 정답이 다소 드러날 수 있음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-command_of_evidence_text-03",
+  "runId": "batch2-D-cross",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "command_of_evidence_text_multi_source_two_variable_combine",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Many desert plants open their flowers only at night, and botanists have long debated why. Ecologist Lucía Ferrante proposes that in the sacred datura (Datura wrightii), night blooming is favored mainly because it reduces water loss: large petals exposed to midday heat lose substantial moisture, so a plant that opens its flowers after sunset conserves water. A rival view holds that night blooming is favored instead because it matches the flowers to their most effective pollinators, nocturnal hawkmoths. To test Ferrante's hypothesis, a team grew datura plants in a greenhouse where pollinators were excluded and hand-pollinated every flower, while experimentally forcing some plants to open their flowers during the day and others at night. The team recorded both the amount of water each flower lost and the number of seeds each plant ultimately produced, under two soil-moisture conditions: well-watered and drought-stressed.\n\nWhich finding, if true, would most directly support Ferrante's hypothesis?",
+   "stimulus": "Many desert plants open their flowers only at night, and botanists have long debated why. Ecologist Lucía Ferrante proposes that in the sacred datura (Datura wrightii), night blooming is favored mainly because it reduces water loss: large petals exposed to midday heat lose substantial moisture, so a plant that opens its flowers after sunset conserves water. A rival view holds that night blooming is favored instead because it matches the flowers to their most effective pollinators, nocturnal hawkmoths. To test Ferrante's hypothesis, a team grew datura plants in a greenhouse where pollinators were excluded and hand-pollinated every flower, while experimentally forcing some plants to open their flowers during the day and others at night. The team recorded both the amount of water each flower lost and the number of seeds each plant ultimately produced, under two soil-moisture conditions: well-watered and drought-stressed.",
+   "question": "Which finding, if true, would most directly support Ferrante's hypothesis?",
+   "options": [
+    "Day-opening flowers lost considerably more water than night-opening flowers did, under both well-watered and drought-stressed conditions.",
+    "Under drought stress, day-opening flowers lost more water than night-opening flowers did, and day-opening plants produced markedly fewer seeds than night-opening plants did, whereas under well-watered conditions seed production was similar for the two groups.",
+    "Under drought stress, day-opening plants produced markedly fewer seeds than night-opening plants did, whereas under well-watered conditions seed production was similar for the two groups, although water loss was the same for day- and night-opening flowers.",
+    "In a separate field survey, night-opening datura flowers received many more visits from hawkmoths than day-opening flowers received from bees."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "정답 B: Ferrante의 가설은 '야간 개화가 수분 손실을 줄여서 유리하다'는 것이다. 이를 직접 지지하려면 (1) 주간 개화가 실제로 수분을 더 잃고, (2) 그 수분 손실이 번식 성과(종자 수)에 불리하게 작용한다는 것—특히 물이 부족할 때만 차이가 나타난다는 것—을 두 변수 모두로 보여야 한다. B는 수분 손실과 종자 생산을 결합하고, 수분이 제한될 때만 손해가 생긴다는 패턴까지 보여 준다.\n오답 A: 수분 손실 변수만 본 결론이다. 주간 개화가 물을 더 잃는다는 사실만으로는 그것이 적합도(종자 생산)에 실제 비용이 되는지 알 수 없다.\n오답 C: 종자 생산 변수만 본 결론이다. 가뭄에서 종자 차이가 나더라도 수분 손실이 같다면 그 차이는 물 절약으로 설명되지 않으므로 오히려 가설을 약화한다.\n오답 D: 자료(수분 매개자를 배제한 온실 실험)에 없는 제3의 변수인 수분 매개자 방문을 끌어들였다. 이는 경쟁 가설(박각시나방 적합)을 지지할 뿐이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_source_integration",
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "가설은 '수분 손실 감소 → 적합도 이익'이라는 인과 구조이므로, 수분 손실(원인)과 종자 생산(결과) 두 변수를 가뭄/충분 관수 조건과 결합한 B가 유일하게 완전히 부합한다. A는 수분 손실만(단일 변수 함정), C는 종자만이며 수분 손실 동일이라 오히려 가설 약화, D는 온실 실험 외부 자료로 경쟁 가설 지지. 해설은 각 오답의 결함을 정확히 짚고 정답 논리와 모순 없음. 수분 매개자 배제·수동 수분 설계로 경쟁 가설 통제 명시된 점도 논리적으로 타당."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_source_integration",
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "수분 손실·종자 생산·토양 수분 조건을 함께 봐야 정답이 나온다. A는 수분 손실만 본 선지로, 한 변수만 봐도 정답처럼 보이는 함정이다. C는 종자 생산 패턴은 같지만 메커니즘이 빠져 있어, 인과 판단을 요구하는 함정이다. D는 자료 밖 정보를 쓰며 경쟁 가설 쪽 선지다. 해설은 정확하고 서로 모순이 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-command_of_evidence_text-04",
+  "runId": "batch2-D-cross",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "command_of_evidence_text_causal_vs_correlation_judgment",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Along the coast of Portugal, ecologist Inês Carvalho noticed that tide pools containing the sea anemone Anthopleura also tended to host unusually high numbers of juvenile blennies, a small fish. Carvalho hypothesizes that the anemones cause juvenile blennies to settle in a pool: the anemones' stinging tentacles, she proposes, deter predatory crabs, making anemone-occupied pools safer places for young fish. Critics note, however, that anemones and blennies might simply both favor pools with the same physical features, such as greater depth or more stable water temperature.\n\nWhich finding, if true, would most directly support Carvalho's hypothesis?",
+   "stimulus": "Along the coast of Portugal, ecologist Inês Carvalho noticed that tide pools containing the sea anemone Anthopleura also tended to host unusually high numbers of juvenile blennies, a small fish. Carvalho hypothesizes that the anemones cause juvenile blennies to settle in a pool: the anemones' stinging tentacles, she proposes, deter predatory crabs, making anemone-occupied pools safer places for young fish. Critics note, however, that anemones and blennies might simply both favor pools with the same physical features, such as greater depth or more stable water temperature.",
+   "question": "Which finding, if true, would most directly support Carvalho's hypothesis?",
+   "options": [
+    "When Carvalho surveyed 60 additional tide pools along the same coast, the pools with the most anemones again contained the most juvenile blennies.",
+    "In pools matched for depth and temperature, juvenile blennies settled in greater numbers in pools where anemones were experimentally added than in otherwise identical pools left without anemones, and crab visits were less frequent in the pools with added anemones.",
+    "Anemones that shared pools with large numbers of juvenile blennies grew faster than anemones in pools with few blennies, apparently because they fed on scraps from the fish.",
+    "Deeper pools along the coast contained both more anemones and more juvenile blennies than shallower pools, and they also experienced smaller daily swings in water temperature."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "정답 B: 수심·수온(비평가들이 제시한 대안 요인)을 맞춘 웅덩이에 말미잘을 실험적으로 추가해 원인을 조작했을 때 치어 정착이 늘고, 제안된 기제(게 방문 감소)까지 관찰되었다. 제3요인 설명을 배제하고 '말미잘 → 치어 정착' 방향을 확인하므로 인과 가설을 가장 직접적으로 지지한다.\nA(상관을 인과로 오해): 더 많은 웅덩이에서 같은 상관이 반복됐을 뿐, 공통 서식 선호라는 대안 설명을 전혀 배제하지 못한다. 표본이 커졌다고 인과가 입증되지는 않는다.\nC(인과 방향 역전): 치어가 말미잘의 성장에 영향을 준다는, 즉 물고기 → 말미잘 방향의 효과를 보여 준다. 오히려 치어가 많은 곳에 말미잘이 번성한다는 역방향 설명을 뒷받침할 수 있다.\nD(제3의 원인): 수심과 온도 안정성이 두 생물 모두와 관련됨을 보여 주어, 비평가들의 공통 원인 설명을 강화한다. 가설과 관련된 변수를 다루지만 말미잘의 인과적 역할은 지지하지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 말미잘·치어 동시 출현이라는 상관만 제시하고, 인과(말미잘→치어, 기제: 게 억제)는 가설로만 제시되며 비평가의 제3요인 설명(수심·수온)이 명시되어 있다. B는 혼재 변수를 통제한 실험적 조작으로 인과 방향을 확인하고 기제(게 방문 감소)까지 뒷받침하므로 정답으로 타당하다. A는 표본 확대된 동일 상관(상관→인과 단순 치환), C는 치어→말미잘 역방향, D는 비평가의 공통 원인 설명 강화로 각각 요구된 오답 유형에 정확히 대응한다. 해설은 정답·오답 근거를 정확히 서술하며 모순 없음. Anthopleura는 실제 말미잘 속이고 시나리오는 가상이나 사실 오류 없음. 선지 B가 다른 선지보다 길어 정답 단서가 될 소지가 약간 있으나 SAT 형식 범위 내로 판단. 단순 자료 읽기를 넘어 대안 설명 배제·인과 방향 판별·기제 검증을 동시에 요구하므로 medium 초과."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "B는 교란변수를 통제하고 원인을 조작했으며 기제까지 확인하므로 정답으로 타당하다. D는 가설과 무관한 원인이 아니라 비평가가 제시한 공통원인을 지지하는 선택지이므로 항목 5는 엄밀히 보면 충족되지 않는다. 다만 D도 오답으로서 유효하다. B가 실험 설계라서 정답이 다소 쉽게 드러나지만, 대안 설명을 배제해야 하는 추론을 요구하므로 hard 수준으로 인정한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-command_of_evidence_text-05",
+  "runId": "batch2-D-cross",
+  "skill": "command_of_evidence_text",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "command_of_evidence_text_hypothesis_supporting_evidence_construction",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In many songbird species, females prefer males that sing more complex songs. Ornithologist Keiko Arakawa has proposed an explanation for this preference in swamp sparrows: song complexity, she argues, is an honest signal of how well a male was fed as a nestling. Because the brain regions that control song develop during a brief window shortly after hatching, only males that received abundant food during that window can build the neural structures needed for complex songs—so a female choosing a complex singer is, in effect, choosing a male whose early development went well. Arakawa notes that adult males in her study population vary widely in song complexity.\n\nWhich finding, if true, would most directly support Arakawa's hypothesis?",
+   "stimulus": "In many songbird species, females prefer males that sing more complex songs. Ornithologist Keiko Arakawa has proposed an explanation for this preference in swamp sparrows: song complexity, she argues, is an honest signal of how well a male was fed as a nestling. Because the brain regions that control song develop during a brief window shortly after hatching, only males that received abundant food during that window can build the neural structures needed for complex songs—so a female choosing a complex singer is, in effect, choosing a male whose early development went well. Arakawa notes that adult males in her study population vary widely in song complexity.",
+   "question": "Which finding, if true, would most directly support Arakawa's hypothesis?",
+   "options": [
+    "Male swamp sparrows that were given supplemental food only as adults, after the early developmental window had closed, sang songs no more complex than those of unsupplemented adult males.",
+    "Adult male swamp sparrows in Arakawa's study population differed considerably from one another in the number of distinct syllable types included in their songs.",
+    "Male swamp sparrows that were experimentally underfed for several days shortly after hatching later developed smaller song-control brain regions and sang less complex songs as adults than did well-fed brothers.",
+    "Male swamp sparrows raised with restricted food shortly after hatching sang songs as adults that were just as complex as those of males raised with abundant food."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "정답 C: 아라카와의 가설은 '부화 직후 먹이 공급 → 노래 조절 뇌 영역 발달 → 노래 복잡성'이라는 인과 사슬이다. C는 형제(유전적 배경이 비슷함)를 대상으로 부화 직후 먹이를 실험적으로 제한했을 때 뇌 영역이 작아지고 노래도 단순해졌다는 결과를 제시해 이 사슬의 각 고리를 직접 확인하므로 가설을 가장 직접적으로 지지한다.\nA(가설과 무관한 사실): 성체기 먹이 공급이 노래에 영향을 주지 않았다는 결과는 가설과 모순되지는 않지만, 초기 먹이 공급이 노래를 결정한다는 핵심 주장에 대해서는 아무것도 보여 주지 않는다. 예컨대 노래 복잡성이 먹이와 전혀 상관없이 유전만으로 정해지는 경우에도 똑같이 나타날 수 있는 결과다. '발달 시기'라는 표현이 겹쳐 그럴듯해 보인다.\nB(지문 재진술): 성체 수컷들의 노래 복잡성 차이가 크다는 것은 지문 마지막 문장에 이미 나온 관찰이며, 그 차이가 어린 시절 영양에서 비롯되었는지는 보여 주지 못한다.\nD(가설을 반박하는 결과): 초기 먹이를 제한해도 노래 복잡성이 같았다면 초기 영양이 노래 복잡성을 결정한다는 주장을 약화시킨다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "hypothetical_construction",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "지문은 가설(초기 먹이 → 노래 조절 뇌 영역 발달 → 노래 복잡성)과 관찰(성체 간 복잡성 편차)만 제시하고 증거는 없음. C는 형제 대조군을 이용한 실험적 조작으로 인과 사슬의 중간 고리(뇌 영역 크기)까지 확인하는 새로운 가상 결과로 가설에 정확히 부합. D는 반박 결과, B는 마지막 문장 재진술, A는 '발달 시기' 표현이 겹쳐 매력적이지만 초기 영양의 효과 자체는 보여주지 못하는 정교한 오답. 해설의 각 선택지 분석도 정확하며 모순 없음. 정답 판별에 인과 방향 판단과 A/C 간 정밀 매칭이 필요해 medium 이상."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "causal_reasoning_over_correlation",
+     "claim_evidence_precision_matching"
+    ],
+    "note": "C는 조작 실험(부화 직후 먹이 제한)과 형제 비교로 인과 사슬 전체를 확인한다. A는 가설과 모순되지 않지만 가설을 구별해 주지 못하는 매력적 오답이라서, 단순히 주제가 관련된 것을 넘어 실제로 가설을 가려내는 증거인지 판단해야 한다. D는 가설을 반박하는 결과, B는 지문 재진술이다. 다만 D와 B는 쉽게 소거되므로 hard라 해도 난이도 차이는 크지 않다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-text_structure_purpose-00",
+  "runId": "batch2-D-cross",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "text_structure_purpose_chain_role_synthesis",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, ecologists assumed that the tiny freshwater snail Potamopyrgus antipodarum spread between New Zealand lakes only when people carried it on boats and fishing gear. That assumption fit the pattern of invasions near popular boat ramps. Biologist Rhea Tamsin, however, noticed snail populations in remote alpine lakes that anglers rarely visit. __When she fed live snails to captive mallard ducks, roughly a quarter of them passed through the birds' guts unharmed and later reproduced.__ Because mallards routinely fly between lakes in a single day, Tamsin argues that waterfowl, not only humans, must be counted as carriers when managers model how the snail disperses.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "For decades, ecologists assumed that the tiny freshwater snail Potamopyrgus antipodarum spread between New Zealand lakes only when people carried it on boats and fishing gear. That assumption fit the pattern of invasions near popular boat ramps. Biologist Rhea Tamsin, however, noticed snail populations in remote alpine lakes that anglers rarely visit. __When she fed live snails to captive mallard ducks, roughly a quarter of them passed through the birds' guts unharmed and later reproduced.__ Because mallards routinely fly between lakes in a single day, Tamsin argues that waterfowl, not only humans, must be counted as carriers when managers model how the snail disperses.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It presents experimental evidence suggesting a mechanism that could account for the puzzling observation described earlier, thereby supporting the revised view stated at the end.",
+    "It reports an observation that casts doubt on the long-held assumption that boats and fishing gear spread the snail.",
+    "It explains why mallards are capable of carrying snails between lakes within a single day.",
+    "It states the main claim of the text, that managers should revise their models of how the snail disperses."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 앞 문장에서 낚시꾼이 거의 찾지 않는 외딴 고산 호수에서 달팽이가 발견되었다는 수수께끼가 나온다. 밑줄 문장은 달팽이가 오리 소화관을 살아서 통과한다는 실험 결과를 제시해 이 현상을 설명할 수 있는 경로를 보여 준다. 동시에 마지막 문장의 결론, 즉 물새도 운반자로 봐야 한다는 주장의 근거가 된다. 앞뒤 두 단계를 모두 이어 주는 역할이다.\nB(한 단계만 본 역할): 기존 가정을 흔드는 것은 앞 문장의 외딴 호수 관찰이다. 밑줄 문장은 반박에 그치지 않고 대안 메커니즘과 결론을 뒷받침하는 기능까지 한다. 또 이 문장은 관찰이 아니라 실험이다.\nC(인접 문장과의 혼동): 오리가 하루 안에 호수 사이를 날아다닌다는 내용은 마지막 문장에 있다. 밑줄 문장은 오리의 이동 능력을 설명하지 않는다.\nD(전체 목적과 개별 기능의 뒤바뀜): 모델을 고쳐야 한다는 것은 지문 전체의 결론으로, 마지막 문장에 나온다. 밑줄 문장은 그 결론을 뒷받침하는 근거일 뿐 주장 자체가 아니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "지문은 기존 가정 → 반례 관찰(외딴 호수) → 실험(밑줄) → 오리 이동 사실 → 결론(물새도 운반자)의 다단계 구조를 갖고, 밑줄 문장은 앞의 수수께끼를 설명하는 메커니즘이면서 뒤 결론의 근거라는 두 연결을 동시에 해야 확정된다. A가 정확하며 B(앞 문장 역할·관찰/실험 혼동), C(다음 문장 역할), D(전체 결론과 개별 기능 뒤바꿈)는 설계대로 작동한다. 해설도 각 오답 유형을 정확히 짚는다. 사소한 지적: 정답 A가 다른 선택지보다 눈에 띄게 길어 길이 단서가 될 수 있음(실패 사유는 아님). Potamopyrgus antipodarum은 실제 뉴질랜드 토착종이고 연구자 이름은 가상으로 보이며, 조류 소화관 통과 생존은 실제 연구와 부합해 사실 오류로 보지 않음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "밑줄 문장은 앞의 수수께끼(외딴 호수)와 뒤의 결론(물새 운반자)을 동시에 연결하는 기능이며, B는 인접 단계(관찰)의 역할, C는 마지막 문장 내용, D는 전체 주장으로 오답 설계가 레시피에 부합. 실제 연구자 이름은 가상으로 보이나 철새에 의한 P. antipodarum 소화관 생존 확산은 실제 보고된 현상과 일치해 사실 오류 없음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-text_structure_purpose-01",
+  "runId": "batch2-D-cross",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "text_structure_purpose_stance_contrast_inference",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Ethnomusicologist Rafaela Duarte has argued that the call-and-response work songs of Brazilian coffee harvesters served primarily to synchronize labor: by matching the rhythm of a leader's call, workers kept their picking motions in step, which, she claims, raised the pace of the harvest. Historian Tomás Oyelaran accepts that the songs had a steady, repetitive beat. __But he notes that plantation overseers' logbooks record slower daily yields on the days when singing was most frequent, and that former harvesters interviewed in the 1970s described the songs as a way to mock overseers in coded lyrics.__ For Oyelaran, the songs' regular rhythm was less a tool of efficiency than a cover under which workers could voice grievances unnoticed.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "Ethnomusicologist Rafaela Duarte has argued that the call-and-response work songs of Brazilian coffee harvesters served primarily to synchronize labor: by matching the rhythm of a leader's call, workers kept their picking motions in step, which, she claims, raised the pace of the harvest. Historian Tomás Oyelaran accepts that the songs had a steady, repetitive beat. __But he notes that plantation overseers' logbooks record slower daily yields on the days when singing was most frequent, and that former harvesters interviewed in the 1970s described the songs as a way to mock overseers in coded lyrics.__ For Oyelaran, the songs' regular rhythm was less a tool of efficiency than a cover under which workers could voice grievances unnoticed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It presents evidence that Oyelaran would likely use to dispute Duarte's view that the songs' main effect was to speed up the harvest.",
+    "It presents evidence that Duarte would likely cite to show that the songs' rhythm helped workers coordinate their resistance to overseers.",
+    "It explains how the songs' steady beat allowed harvesters to keep their picking motions in step with one another.",
+    "It suggests that Oyelaran would likely propose that the songs' lyrics, rather than their rhythm, were what made harvest labor faster."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 밑줄 문장은 노래가 잦은 날 수확량이 더 적었다는 기록과, 노래로 감독관을 조롱했다는 증언을 제시한다. 지문은 Oyelaran이 Duarte의 '수확 속도를 높였다'는 주장을 반박한다고 직접 말하지 않지만, 두 입장의 차이를 보면 이 증거가 바로 그 주장을 반박하는 근거임을 추론할 수 있다.\nB(입장을 뒤바꾼 오답): 이 증거를 Duarte가 쓸 것이라고 하며, 저항이라는 Oyelaran의 해석을 Duarte에게 돌렸다. 입장이 뒤바뀌었으므로 틀리다.\nC(한쪽 입장만 근거로 삼은 오답): 동작을 맞춘다는 Duarte의 설명만 따르고 있다. 밑줄 문장의 내용은 오히려 이 설명을 약화한다.\nD(지문에 없는 반응을 지어낸 오답): Oyelaran은 노래가 노동을 빠르게 했다고 주장하지 않는다. 가사가 효율을 높였다는 것은 지문에 없는 새로운 주장이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "inter_text_perspective_inference",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "Duarte(효율/동기화)와 Oyelaran(저항의 은폐) 두 입장이 명확히 대비되며, 밑줄 문장은 Oyelaran의 근거(수확량 기록+증언)를 제시한다. 지문이 '반박'이라고 명시하지 않아 A를 고르려면 두 입장의 차이와 근거의 논리적 역할을 연결해야 한다. B는 입장 뒤바꿈, C는 Duarte 쪽 설명만 반영, D는 지문에 없는 주장(가사가 속도를 높임)으로 오답 설계가 레시피에 부합한다. 다만 밑줄 문장이 \"he notes\"로 Oyelaran에게 직접 귀속되어 있어 A의 \"would likely use\"라는 가정형 표현은 다소 어색하고, 추론 요구 정도가 hard 중에서는 온건한 편이다(경미한 점, 정답성에는 영향 없음)."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "inter_text_perspective_inference",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "정답 A는 타당하다. 다만 밑줄 문장이 'But'으로 시작해 반박 기능이 꽤 드러나고, 두 번째 증거(조롱)는 속도 반박보다 Oyelaran의 대안 해석을 뒷받침하므로 A는 일부만 반영한다. 그래도 최선의 선택지다. 오답들의 매력도가 다소 낮아 hard 치고는 쉬운 편이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-text_structure_purpose-02",
+  "runId": "batch2-D-cross",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "text_structure_purpose_evidence_scope_match",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Many coastal towns plant salt marsh grasses along eroding shorelines, and advocates often claim that such \"living shorelines\" protect property from storm surge as well as concrete seawalls do. Ecologist Priya Raman tested part of this claim. Over three hurricane seasons, she compared shoreline plots in North Carolina protected by restored marsh with nearby plots protected by seawalls. __During storms with surges below one meter, marsh plots lost no more sediment than seawall plots did, but during the two storms whose surges exceeded one meter, marsh plots lost nearly three times as much.__ Raman concludes that marsh restoration can substitute for seawalls where moderate storms are the main threat, but that the broader claim of equivalent protection is not supported for severe storms.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "Many coastal towns plant salt marsh grasses along eroding shorelines, and advocates often claim that such \"living shorelines\" protect property from storm surge as well as concrete seawalls do. Ecologist Priya Raman tested part of this claim. Over three hurricane seasons, she compared shoreline plots in North Carolina protected by restored marsh with nearby plots protected by seawalls. __During storms with surges below one meter, marsh plots lost no more sediment than seawall plots did, but during the two storms whose surges exceeded one meter, marsh plots lost nearly three times as much.__ Raman concludes that marsh restoration can substitute for seawalls where moderate storms are the main threat, but that the broader claim of equivalent protection is not supported for severe storms.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It presents a finding that supports the advocates' claim only under a specific condition, which is the limited conclusion Raman draws.",
+    "It presents a finding showing that restored marshes generally protect shorelines as well as seawalls do, confirming the advocates' claim.",
+    "It presents a finding that marshes lose more sediment than seawalls in large storms, which is the sole basis for Raman's rejection of living shorelines.",
+    "It presents a finding suggesting that heavy sediment loss from marsh plots is what causes storm surges to rise above one meter."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 밑줄 문장에 따르면 해일이 1m 미만일 때는 습지와 방조제의 퇴적물 손실이 같았고, 1m를 넘을 때는 습지 쪽 손실이 약 3배였다. 그래서 이 근거는 옹호론자들의 주장을 '보통 규모의 폭풍'이라는 조건에서만 뒷받침한다. Raman의 결론도 보통 폭풍에서는 대체할 수 있지만 강한 폭풍에서는 아니라는 것이므로, 근거의 범위와 결론의 범위가 정확히 맞는다.\nB(과장): 1m 미만 결과만 보고 모든 경우에 동등하다고 넓혀 버렸다. 1m를 넘는 폭풍의 결과를 무시했다.\nC(일부만 반영한 축소 해석): 큰 폭풍의 결과만 반영하고 작은 폭풍에서 동등했다는 결과는 빠뜨렸다. 또 Raman은 습지 복원을 전면 거부하지 않고 조건부로 인정했다.\nD(인과 방향 역전): 해일이 퇴적물 손실을 일으키는 것인데, 선택지는 퇴적물 손실이 해일을 키운다고 인과를 거꾸로 설명했다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "evidence_role_discrimination",
+     "multi_step_logical_chain_integration",
+     "reversed_relation_resistance"
+    ],
+    "note": "밑줄 문장은 두 조건(1m 미만/초과)으로 나뉜 실험 결과이며, 정답 A는 이를 옹호론자 주장에 대한 '조건부 뒷받침'으로 규정하고 Raman의 제한적 결론과 범위를 정확히 일치시킴. B는 1m 미만 결과만으로 전면 동등성으로 과장, C는 큰 폭풍 결과만 반영하고 Raman이 '거부'했다고 왜곡, D는 해일→퇴적물 손실 인과를 역전. 해설은 각 오답 유형을 정확히 설명하며 수치·논리 모순 없음. 주장-검증-두 갈래 근거-조건부 결론의 다단계 사슬을 통합해야 하므로 medium 이상. 가상의 연구자 설정으로 사실 오류·저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "evidence_role_discrimination"
+    ],
+    "note": "레시피 항목은 모두 충족하고 정답 A도 옳다. 다만 오답들이 너무 쉽게 걸러진다. B는 1m 초과 결과와 정면으로 모순되고, C의 'sole basis for rejection'은 지문의 조건부 결론과 명백히 어긋나며, D의 인과 역전은 상식적으로 말이 안 된다. 게다가 마지막 문장이 결론을 그대로 알려 주기 때문에 여러 단계를 거쳐 재구성할 필요도 없다. 따라서 medium 수준의 근거 역할 판별 문항으로 본다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-text_structure_purpose-03",
+  "runId": "batch2-D-cross",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "text_structure_purpose_chain_role_synthesis",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For decades, ecologists assumed that the tiny freshwater crustacean Daphnia grows protective neck spines only when it detects chemicals released by predatory midge larvae. Laboratory trials seemed to confirm this: spines appeared reliably in tanks dosed with larval cues and almost never in clean water. Yet when biologist Maren Holt surveyed ponds in which the larvae had been absent for years, she still found spined Daphnia in several of them. __Holt noticed that every one of these ponds lay downstream of a pond where the larvae remained abundant.__ Testing water carried from the upstream ponds, she detected the larval cue at low but measurable levels, suggesting that the chemical signal can travel between connected ponds and that the spines she observed were not, after all, evidence against the original hypothesis.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "For decades, ecologists assumed that the tiny freshwater crustacean Daphnia grows protective neck spines only when it detects chemicals released by predatory midge larvae. Laboratory trials seemed to confirm this: spines appeared reliably in tanks dosed with larval cues and almost never in clean water. Yet when biologist Maren Holt surveyed ponds in which the larvae had been absent for years, she still found spined Daphnia in several of them. __Holt noticed that every one of these ponds lay downstream of a pond where the larvae remained abundant.__ Testing water carried from the upstream ponds, she detected the larval cue at low but measurable levels, suggesting that the chemical signal can travel between connected ponds and that the spines she observed were not, after all, evidence against the original hypothesis.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It presents an observation about the anomalous ponds that points toward an explanation, which a later test confirms, reconciling Holt's survey results with the long-held view.",
+    "It offers a finding showing that Daphnia can form spines without any predator cue, thereby challenging the assumption described at the beginning of the text.",
+    "It reports the experimental result showing that the larval cue is present in water from the upstream ponds.",
+    "It states the text's main purpose, which is to argue that pond connectivity is the primary factor determining whether Daphnia develop spines."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 밑줄 문장은 '유충 없는 연못에서도 가시가 있다'는 변칙(앞 문장)과, 상류 물에서 신호를 검출한 검증(뒤 문장)을 잇는 고리다. 공통점(모두 유충이 많은 연못의 하류)을 관찰해 설명의 단서를 제시하고, 이것이 검증되면서 기존 가설과 조사 결과가 화해된다. 즉 변칙→단서→검증→화해의 두 단계 이상을 연결해야 역할이 보인다.\nB(한 단계만 본 역할): 밑줄 문장 앞의 변칙만 보고 기존 가설을 반박한다고 해석했다. 실제로 밑줄 문장은 반박이 아니라 가설을 유지하는 설명의 출발점이며, 결론은 '반증이 아니었다'이다.\nC(인접 문장과 혼동): 상류 물에서 신호를 검출한 것은 다음 문장의 내용이다. 밑줄 문장은 지리적 위치에 대한 관찰일 뿐 검사 결과가 아니다.\nD(전체 목적과 개별 기능 뒤바꿈): 밑줄 문장은 지문의 목적을 진술하지 않으며, 지문은 연결성이 가시 형성의 주요 요인이라고 주장하지도 않는다. 결정 요인은 여전히 포식자 신호이고, 연결성은 신호가 전달되는 경로일 뿐이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "지문 구조(가정→실험 확인→변칙→밑줄 관찰→검증→화해)가 명확하고, 밑줄 문장은 변칙과 검증을 잇는 단서 역할로 A가 정확히 대응됨. B는 앞 문장(변칙)의 역할을 잘못 확장, C는 뒤 문장(검증 결과)과 혼동, D는 전체 목적과 개별 기능을 뒤바꾼 형태로 설계 의도에 부합. 해설의 오답 분석도 정확. 소소한 점: 정답 A가 다른 선택지보다 눈에 띄게 길어 길이 단서가 될 수 있으나 판정에 영향 줄 정도는 아님. Daphnia 유도방어(midge larvae Chaoborus 신호) 배경은 실제 생태학과 부합하며 Holt는 가상 인물로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "변칙→단서→검증→화해의 연쇄가 명확하다. B는 이전 단계, C는 다음 단계, D는 전체 목적과 개별 기능의 혼동을 노린 오답이다. 다만 A가 길고 구체적이어서 눈에 띄는 약점이 있다. B는 'without any predator cue'라는 표현 때문에 비교적 쉽게 배제된다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-text_structure_purpose-04",
+  "runId": "batch2-D-cross",
+  "skill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "text_structure_purpose_stance_contrast_inference",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Ethnomusicologist Rosa Villanueva argues that the work songs sung by nineteenth-century Chilean dockworkers were primarily tools for coordinating labor: their steady rhythms, she contends, let crews synchronize the lifting of heavy cargo, and verses were improvised mainly to keep that rhythm going. Historian Tomás Arriagada accepts that the songs kept time but points to a detail Villanueva treats as incidental. Many surviving verses mock specific foremen by nickname, and dock records show that crews sang these verses most often in the weeks before wage disputes. __For Arriagada, then, the improvised lyrics were not filler sustaining a beat but a coded channel through which workers voiced grievances they could not safely state outright.__\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "Ethnomusicologist Rosa Villanueva argues that the work songs sung by nineteenth-century Chilean dockworkers were primarily tools for coordinating labor: their steady rhythms, she contends, let crews synchronize the lifting of heavy cargo, and verses were improvised mainly to keep that rhythm going. Historian Tomás Arriagada accepts that the songs kept time but points to a detail Villanueva treats as incidental. Many surviving verses mock specific foremen by nickname, and dock records show that crews sang these verses most often in the weeks before wage disputes. __For Arriagada, then, the improvised lyrics were not filler sustaining a beat but a coded channel through which workers voiced grievances they could not safely state outright.__",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It states the conclusion Arriagada draws from the evidence he cites, implying that he would challenge Villanueva's view of why the verses were improvised while leaving her account of the songs' rhythm intact.",
+    "It presents Villanueva's reason for regarding the verses as incidental, suggesting that she would reject Arriagada's claim that the songs helped crews synchronize their lifting.",
+    "It summarizes Arriagada's interpretation of the dock records, indicating that he regards the songs' rhythmic function as a later scholarly invention.",
+    "It explains why Arriagada believes foremen tolerated the mocking verses, suggesting that he would expect Villanueva to agree that the songs eased tensions during wage disputes."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "정답 A: 밑줄 문장은 Arriagada가 앞에서 제시한 증거(감독관 조롱, 임금 분쟁 전 빈도)에서 이끌어낸 결론이다. 그는 노래가 박자를 맞췄다는 점은 인정하므로(accepts that the songs kept time) Villanueva의 리듬 설명은 받아들이되, 즉흥 가사가 리듬 유지용이라는 그녀의 주장에는 반박할 것임을 두 입장을 비교해 추론할 수 있다.\nB(입장 뒤바꿈): 밑줄은 Villanueva가 아니라 Arriagada의 견해이며, 동기화 기능을 주장한 쪽은 오히려 Villanueva이므로 반응 방향이 뒤집혔다.\nC(한쪽 입장만 사용): Arriagada의 증거만 근거로 삼아 리듬 기능까지 부정한다고 과장했다. 그는 리듬 기능을 명시적으로 인정한다.\nD(없는 반응 창작): 감독관이 조롱을 용인했다거나 노래가 긴장을 완화했다는 내용, Villanueva가 동의하리라는 반응은 지문에 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "inter_text_perspective_inference",
+     "multi_step_logical_chain_integration",
+     "evidence_role_discrimination"
+    ],
+    "note": "밑줄 문장은 \"For Arriagada, then\"으로 앞의 증거(감독관 조롱 가사, 임금 분쟁 전 빈도)에서 도출한 결론임이 명확하고, \"accepts that the songs kept time\"에 근거해 리듬 설명은 유지·가사 해석만 반박한다는 A의 추론이 정확히 성립. B는 화자 뒤바꿈, C는 리듬 기능 부정으로 지문과 정면 충돌, D는 감독관 용인·긴장 완화 등 지문에 없는 내용. 두 학자의 부분적 합의/불일치 범위를 정밀 추적해야 하므로 hard 적합. 정답 A가 다른 선택지보다 다소 길다는 점이 미세한 형식 단서가 될 수 있으나 판정에 영향 주는 수준은 아님."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_logical_chain_integration",
+     "inter_text_perspective_inference",
+     "evidence_role_discrimination",
+     "reversed_relation_resistance"
+    ],
+    "note": "정답 A가 맞다. 밑줄 문장은 Arriagada가 제시한 증거에서 도출한 결론이며, 리듬 기능은 인정하고 즉흥 가사의 목적만 반박한다는 부분 동의 구조를 추론해야 한다. B는 두 사람의 입장을 뒤바꿨고, C는 리듬 기능까지 부정한다고 과장했으며, D는 지문에 없는 반응을 지어냈다. 기능 파악과 입장 간 추론이 결합되어 있어 hard 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_one_var-00",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_one_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_one_var_two_stage_word",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "A print shop charges a fixed setup fee of 20 dollars for each order plus the same cost for every page printed. An order of 40 pages cost a total of 120 dollars. Later, a second order at the same shop, with the same setup fee and cost per page, cost a total of 170 dollars.\n\nHow many pages were printed in the second order?",
+   "stimulus": "A print shop charges a fixed setup fee of 20 dollars for each order plus the same cost for every page printed. An order of 40 pages cost a total of 120 dollars. Later, a second order at the same shop, with the same setup fee and cost per page, cost a total of 170 dollars.",
+   "question": "How many pages were printed in the second order?",
+   "options": [
+    "2.5",
+    "20",
+    "60",
+    "68"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "1단계: 페이지당 비용을 $p$라 하면 첫 주문에서 $20+40p=120$, $40p=100$, $p=2.5$ (달러).\n2단계: 둘째 주문의 페이지 수를 $n$이라 하면 $20+2.5n=170$, $2.5n=150$, $n=60$. 정답은 C.\n오답 A($2.5$): 1단계에서 구한 중간 미지수인 페이지당 비용으로, 최종 답이 아니다.\n오답 B($20$): 두 주문 금액의 차이 $170-120=50$을 $2.5$로 나눈 $20$은 추가된 페이지 수일 뿐이며, 첫 주문의 $40$페이지와 섞어 해석한 값이다.\n오답 D($68$): 둘째 조건에서 설치비를 빼지 않고 $\\frac{170}{2.5}=68$로 계산한 값이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "verbal_to_symbolic_translation",
+     "multi_quantity_structural_combination"
+    ],
+    "note": "검산: 20+40p=120→p=2.5; 20+2.5n=170→n=60 (C) 정확. 오답 해설(2.5 중간값, 20 추가 페이지, 68 설치비 누락) 모두 수치 일치. 고정비+단가 구조를 스스로 식으로 세우고 순서 의존적 두 단계를 거쳐야 하므로 medium 초과. 단, 난이도 상승 폭은 크지 않은 표준적 hard 하한 수준."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "검산: 20+40p=120이므로 p=2.5이고, 20+2.5n=170이므로 n=60이다. 정답 C가 맞다. 레시피 항목 세 가지는 모두 충족한다. 그러나 고정비+단가 구조에서 단가를 먼저 구하고 역산하는 풀이는 전형적인 medium 수준의 2단계 문장제이다. 관계 설정이 문제에 거의 그대로 주어져 있어 번역 부담이 작고, 방향 추적이나 구조 통합 같은 추가 사고도 요구하지 않는다. 따라서 hard 적합성은 부족하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_one_var-01",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_one_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_one_var_no_solution_param",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the equation $2(ax - 3) + 4x = 10x + 3b$, $a$ and $b$ are constants. The equation has infinitely many solutions for $x$.\n\nWhat is the value of $a - b$?",
+   "stimulus": "In the equation $2(ax - 3) + 4x = 10x + 3b$, $a$ and $b$ are constants. The equation has infinitely many solutions for $x$.",
+   "question": "What is the value of $a - b$?",
+   "options": [
+    "$1$",
+    "$3$",
+    "$5$",
+    "$7$"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "좌변을 전개하면 $2ax - 6 + 4x = (2a+4)x - 6$이다. 해가 무수히 많으려면 양변의 $x$ 계수와 상수항이 각각 같아야 한다.\n1단계: $2a + 4 = 10$이므로 $a = 3$이다.\n2단계: $-6 = 3b$이므로 $b = -2$이다.\n3단계: $a - b = 3 - (-2) = 5$이다.\n오답 A($1$): $b$의 부호를 잘못 처리해 $b = 2$로 두고 $3 - 2$를 계산한 값이다.\n오답 B($3$): $a$만 구하고 $b$를 반영하지 않은 중간값이다.\n오답 D($7$): 괄호를 전개할 때 $2$를 $ax$에만 곱하지 않고 아예 곱하지 않아 $a + 4 = 10$에서 $a = 6$, $-3 = 3b$에서 $b = -1$로 구해 $6 - (-1)$을 계산한 값이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_quantity_structural_combination",
+     "directional_condition_tracking"
+    ],
+    "note": "검산: 좌변 전개 (2a+4)x−6 = 10x+3b → a=3, b=−2, a−b=5 (C) 정확. 오답 A(부호 오류 b=2), B(a만 구한 중간값), D(2 미분배 시 a=6,b=−1) 모두 수치적으로 재현됨. 다만 D 해설 문구 \"ax에만 곱하지 않고 아예 곱하지 않아\"가 다소 어색하나 논리·수치는 일치. 난이도: 두 상수 동시 결정 후 결합(a−b)과 음수 부호 추적을 요구하므로 단일 계수만 묻는 medium보다는 한 단계 추가되지만, 문장 번역·표현 전환 요소는 없어 hard 중 하위 수준(경계선)."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답 5는 검산으로 확인했다(a=3, b=-2). 식을 전개한 뒤 x의 계수와 상수항을 각각 맞추는 전형적인 medium 문항이다. 문장을 식으로 옮기는 과정, 여러 양을 하나의 식으로 묶는 과정, 표·그래프 같은 표현 전환 등 hard 특성은 없다. 3단계에서 a-b를 계산하는 것도 새로운 식에 다시 대입하는 과정이라기보다 단순 계산에 가깝다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_one_var-02",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_one_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_one_var_two_stage_word",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "A photographer charges a fixed session fee plus $45$ dollars for each hour of shooting. A $3$-hour shoot costs a total of $210$ dollars. For an event held outside the city, the photographer adds a travel charge of $45$ dollars to the usual cost, and the total bill for this event was $390$ dollars.\n\nFor how many hours did the photographer shoot at the event outside the city?",
+   "stimulus": "A photographer charges a fixed session fee plus $45$ dollars for each hour of shooting. A $3$-hour shoot costs a total of $210$ dollars. For an event held outside the city, the photographer adds a travel charge of $45$ dollars to the usual cost, and the total bill for this event was $390$ dollars.",
+   "question": "For how many hours did the photographer shoot at the event outside the city?",
+   "options": [
+    "3",
+    "6",
+    "7",
+    "75"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "1단계: 고정 요금을 $f$라 하면 $f+45\\cdot 3=210$이므로 $f=210-135=75$ (dollars).\n2단계: 촬영 시간을 $h$라 하면 $75+45h+45=390$, $45h=270$, $h=6$. 따라서 정답은 6.\n오답 A(3): 첫째 조건의 총액 $210$을 고정 요금처럼 써서 $210+45h+45=390$을 풀면 $h=3$이 나온다(두 조건을 섞은 경우).\n오답 C(7): 출장비 $45$를 빠뜨려 $75+45h=390$을 풀면 $h=7$이 나온다.\n오답 D(75): 중간 미지수인 고정 요금 값을 최종 답으로 고른 경우이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "verbal_to_symbolic_translation",
+     "multi_quantity_structural_combination"
+    ],
+    "note": "검산: f=210−135=75; 75+45h+45=390 → h=6. 오답 유도 계산(A:3, C:7, D:75) 모두 해설과 일치. 고정비를 먼저 구해야 하는 순서 의존적 2단계 구조로 hard 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "verbal_to_symbolic_translation"
+    ],
+    "note": "검산: f=210-135=75, 75+45h+45=390 → h=6이 정답이다. 오답 선지 3, 7, 75도 해설에 적힌 오류 경로와 수치가 맞는다. 체크리스트 세 항목은 모두 충족한다. 다만 구조가 고정비+단가 번역 뒤 두 단계 대입하는 전형적인 medium 문항이다. 출장비가 시간당 요금과 같은 45인 것 말고는 추가로 생각할 거리가 거의 없어서 hard로 보기는 어렵다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_two_var-00",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_two_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_two_var_param_then_intersection",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the $xy$-plane, line $\\ell$ has equation $2x - 5y = 10$ and line $m$ has equation $kx + 4y = 108$, where $k$ is a constant. Line $m$ is perpendicular to line $\\ell$. The two lines intersect at the point $(a, b)$.\n\nWhat is the value of $a + b$?",
+   "stimulus": "In the $xy$-plane, line $\\ell$ has equation $2x - 5y = 10$ and line $m$ has equation $kx + 4y = 108$, where $k$ is a constant. Line $m$ is perpendicular to line $\\ell$. The two lines intersect at the point $(a, b)$.",
+   "question": "What is the value of $a + b$?",
+   "options": [
+    "$8$",
+    "$10$",
+    "$12$",
+    "$48.75$"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "1단계: 직선 $\\ell$의 기울기는 $y=\\frac{2}{5}x-2$이므로 $\\frac{2}{5}$입니다. 직선 $m$의 기울기는 $-\\frac{k}{4}$입니다.\n2단계: 두 직선이 수직이므로 $-\\frac{k}{4}=-\\frac{5}{2}$이고, 따라서 $k=10$입니다. 직선 $m$은 $10x+4y=108$, 즉 $5x+2y=54$가 됩니다.\n3단계: 연립합니다. $2x-5y=10$의 양변에 $2$를 곱하면 $4x-10y=20$이고, $5x+2y=54$의 양변에 $5$를 곱하면 $25x+10y=270$입니다. 두 식을 더하면 $29x=290$이므로 $x=10$이고, $y=\\frac{2\\cdot 10-10}{5}=2$입니다.\n4단계: $a+b=10+2=12$입니다.\n오답 분석: $8$은 합 대신 차 $a-b$를 구한 값입니다. $10$은 계수 $k$만 구하고 멈춘 중간값입니다. $48.75$는 수직 조건을 기울기의 부호만 바꾼 것($-\\frac{k}{4}=-\\frac{2}{5}$, $k=\\frac{8}{5}$)으로 잘못 적용해 교점 $(36.25, 12.5)$을 구하고 더한 값입니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "parameter_based_reasoning",
+     "implicit_condition_derivation",
+     "multi_step_synthesis"
+    ],
+    "note": "검산: ℓ 기울기 2/5, m 기울기 -k/4, 수직 조건 → k=10, m: 5x+2y=54. 연립 → x=10, y=2, a+b=12 (C) 일치. 오답 분석도 검산 결과 정확(D: k=8/5 → (36.25, 12.5) → 48.75; A: a−b=8; B: k=10). 수직 조건에서 미지 계수 도출 → 교점 → 합산의 3단계 구조로 medium 단순 연립보다 추가 사고 요구. 해설 내 모순·오계산 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "k=10이면 m은 5x+2y=54이고, 교점 (10,2)는 두 식을 모두 만족하므로 a+b=12가 맞음. 오답 D의 (36.25,12.5)도 k=8/5일 때 두 식을 만족함. B(10)는 k 값이자 a 값과도 같아서, 해설의 '중간값' 설명이 맞음. 다만 수직 조건으로 k를 구하고 교점을 구한 뒤 더하는 전형적인 절차형 medium 문항임. 숨은 조건 도출이나 매개변수 소거, 표현 간 대응 같은 hard 특성은 없고, 늘어난 것은 계산 단계 수뿐임.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-linear_equations_two_var-03",
+  "runId": "batch2-D-cross",
+  "skill": "linear_equations_two_var",
+  "domain": "algebra",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "linear_equations_two_var_two_points_and_meet",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the $xy$-plane, line $\\ell$ passes through the points $(-2, 7)$ and $(4, -5)$. Line $m$ has equation $3x + by = 12$, where $b$ is a constant. Lines $\\ell$ and $m$ intersect at a point whose $x$-coordinate is $3$.\n\nWhat is the $y$-intercept of line $\\ell$ minus the $y$-intercept of line $m$?",
+   "stimulus": "In the $xy$-plane, line $\\ell$ passes through the points $(-2, 7)$ and $(4, -5)$. Line $m$ has equation $3x + by = 12$, where $b$ is a constant. Lines $\\ell$ and $m$ intersect at a point whose $x$-coordinate is $3$.",
+   "question": "What is the $y$-intercept of line $\\ell$ minus the $y$-intercept of line $m$?",
+   "options": [
+    "$15$",
+    "$9$",
+    "$12$",
+    "$-9$"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "1) $\\ell$의 기울기: $\\frac{-5-7}{4-(-2)}=\\frac{-12}{6}=-2$. $y=-2x+c$에 $(-2,7)$을 대입하면 $7=4+c$, $c=3$이므로 $\\ell$: $y=-2x+3$, y절편은 $3$이다.\n2) 교점: $x=3$일 때 $y=-2\\cdot 3+3=-3$이므로 교점은 $(3,-3)$이다.\n3) $m$에 대입: $3\\cdot 3+b\\cdot(-3)=12$에서 $9-3b=12$, $b=-1$.\n4) $m$: $3x-y=12$, 즉 $y=3x-12$이므로 y절편은 $-12$이다.\n5) 차: $3-(-12)=15$. 정답 A.\n오답 분석:\nB($9$): 교점의 y좌표 $-3$을 $\\ell$의 y절편으로 착각해 $-3-(-12)$를 계산한 경우이다.\nC($12$): $m$의 y절편 크기만 보거나, 식의 상수항 $12$를 그대로 y절편으로 읽은 경우이다.\nD($-9$): $b$의 부호를 잘못 구해 $b=1$로 두면 $y=-3x+12$가 되어 $3-12=-9$가 나온다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "parameter_based_reasoning",
+     "multi_step_synthesis"
+    ],
+    "note": "검산: 기울기 -2, ℓ: y=-2x+3, 교점 (3,-3), 9-3b=12 → b=-1, m: y=3x-12, 3-(-12)=15. 정답 A 확인. 오답 분석도 수치적으로 일치. 미지 계수 b를 교점 조건으로 결정한 뒤 두 절편의 차를 구하는 다단계 구성으로 medium 초과."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "정답 15 검산 확인. 오답 논리도 타당함. 다만 두 점으로 직선 구하기→교점 대입→절편 비교로 이어지는 루틴한 단계를 차례로 밟을 뿐이라, 새로운 개념 전이나 암묵 조건 도출이 없어 hard 수준에 못 미침(medium 수준).",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-equivalent_expressions-00",
+  "runId": "batch2-D-cross",
+  "skill": "equivalent_expressions",
+  "domain": "advanced_math",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "equivalent_expressions_two_params_then_transform",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For all positive values of $x$, the equations $\\frac{(x^{a})^{2}}{x^{b}} = x^{4}$ and $x^{a} \\cdot x^{b} = x^{11}$ are true, where $a$ and $b$ are constants.\n\nWhich of the following is equivalent to $x^{a} \\cdot (x^{b})^{2}$ for all positive values of $x$?",
+   "stimulus": "For all positive values of $x$, the equations $\\frac{(x^{a})^{2}}{x^{b}} = x^{4}$ and $x^{a} \\cdot x^{b} = x^{11}$ are true, where $a$ and $b$ are constants.",
+   "question": "Which of the following is equivalent to $x^{a} \\cdot (x^{b})^{2}$ for all positive values of $x$?",
+   "options": [
+    "$x^{17}$",
+    "$x^{13}$",
+    "$x^{22}$",
+    "$x^{60}$"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "1단계: $\\frac{(x^{a})^{2}}{x^{b}} = x^{2a-b}$ 이므로 $2a-b=4$. 2단계: $x^{a}\\cdot x^{b}=x^{a+b}$ 이므로 $a+b=11$. 두 식을 더하면 $3a=15$, $a=5$, $b=6$. 3단계: $x^{a}\\cdot(x^{b})^{2}=x^{5}\\cdot x^{12}=x^{17}$. 오답 B: $(x^{b})^{2}$ 를 $x^{b+2}=x^{8}$ 로 보아 지수를 곱할 곳에서 더한 값 $x^{13}$. 오답 C: 매개변수를 따로 구하지 않고 $a+b=11$ 만 이용해 식 전체를 $(x^{a}x^{b})^{2}=x^{22}$ 로 착각한 값. 오답 D: $x^{5}\\cdot x^{12}$ 에서 지수를 더해야 하는데 곱해 $x^{60}$ 으로 만든 값.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_chaining",
+     "cross_representation_mapping"
+    ],
+    "note": "검산: 2a−b=4, a+b=11 → a=5, b=6 → x^5·x^12=x^17 (A) 정답. 오답 B(지수 곱 대신 덧셈), C(a+b=11 중간값만 사용해 (x^a x^b)^2), D(지수 곱)는 모두 해설과 수치가 일치. 체크리스트 4는 C가 'a+b=11 중간값' 기반이라 충족으로 봄(단, a=5나 b=6 그 자체를 지수로 쓴 오답은 없음). 지수법칙→연립일차방정식→역대입의 다단계 연결이 필요해 medium 이상. 난이도가 높은 편은 아니나 hard 하한 수준으로 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_chaining",
+     "combined_error_sensitivity"
+    ],
+    "note": "2a−b=4, a+b=11 → a=5, b=6 → x^17로 정답이 맞다. 두 조건에서 연립방정식을 세워야 하고 지수법칙을 여러 번 적용해야 하므로 medium보다는 한 단계 위지만, hard 중에서는 쉬운 편이다. 오답 B·C·D는 모두 지수 연산을 잘못했을 때 나오는 값이다. 중간 단계 값인 a=5, b=6, 11에 해당하는 x^5, x^6, x^11 같은 선택지는 없어서 4번 항목은 충족하지 못했다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "recipe-equivalent_expressions-01",
+  "runId": "batch2-D-cross",
+  "skill": "equivalent_expressions",
+  "domain": "advanced_math",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "equivalent_expressions_substitute_then_match",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "The equation $(3x+1)^2+a(3x+1)+b=9x^2+12x+7$ is true for all values of $x$, where $a$ and $b$ are constants.\n\nWhat is the value of $ab$?",
+   "stimulus": "The equation $(3x+1)^2+a(3x+1)+b=9x^2+12x+7$ is true for all values of $x$, where $a$ and $b$ are constants.",
+   "question": "What is the value of $ab$?",
+   "options": [
+    "6",
+    "8",
+    "12",
+    "28"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "$u=3x+1$로 두면 $x=\\frac{u-1}{3}$입니다. 그러면 $9x^2=(u-1)^2=u^2-2u+1$이고 $12x=4(u-1)=4u-4$입니다. 따라서 우변은 $u^2-2u+1+4u-4+7=u^2+2u+4$입니다. 좌변 $u^2+au+b$와 계수를 비교하면 $a=2$, $b=4$이므로 $ab=8$입니다.\n오답 A(6): $a+b$를 구한 뒤 멈춘 값입니다.\n오답 C(12): $b$를 구할 때 $(3x+1)^2$의 상수항 1만 빼고 $a(3x+1)$에서 나오는 상수항 $a$는 빼지 않아 $b=6$이 된 경우입니다. 이때 $2\\cdot 6=12$입니다.\n오답 D(28): $(3x+1)^2$를 전개할 때 생기는 $6x$와 상수 1을 무시하고 $3a=12$, $b=7$로 맞춘 경우입니다. 이때 $4\\cdot 7=28$입니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_chaining",
+     "structural_reformulation"
+    ],
+    "note": "직접 검산: (3x+1)^2+a(3x+1)+b = 9x^2+(6+3a)x+(1+a+b). 6+3a=12 → a=2; 1+2+b=7 → b=4; ab=8 (B) 정확. 해설의 u-치환 경로(u^2+2u+4)도 수치상 일치하며 오답 A·C·D의 유도 논리가 각각 a+b, 상수항에서 a 누락, 6x·1 무시와 정확히 대응됨. 상수항 b가 a에 종속되어 순차 연결이 필요하고, 우변을 (3x+1) 중심으로 재구성하거나 좌변을 전개해 구조를 맞춰야 하므로 전형적 medium(단순 계수 비교)보다 추가 사고 요구. 저작권 의심 없음, 형식 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "검산 결과: 9x^2+(6+3a)x+(1+a+b)이므로 a=2, b=4, ab=8이다. 오답 선지들의 오류 근거도 모두 맞다. 다만 전개 후 계수 비교를 한 번 하고 곱을 구하는 전형적인 medium 수준 문항이다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-equivalent_expressions-02",
+  "runId": "batch2-D-cross",
+  "skill": "equivalent_expressions",
+  "domain": "advanced_math",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "equivalent_expressions_two_params_then_transform",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "In the expression $px^3 + qx^2$, $p$ and $q$ are constants. When $x = 1$, the value of the expression is $10$, and when $x = 2$, the value of the expression is $56$.\n\nWhich of the following is equivalent to $px^3 + qx^2$?",
+   "stimulus": "In the expression $px^3 + qx^2$, $p$ and $q$ are constants. When $x = 1$, the value of the expression is $10$, and when $x = 2$, the value of the expression is $56$.",
+   "question": "Which of the following is equivalent to $px^3 + qx^2$?",
+   "options": [
+    "$2x^2(3x+2)$",
+    "$2x^3(2x+3)$",
+    "$2x^2(2x+3)$",
+    "$2x^2(2x+5)$"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "1단계: $x=1$을 대입하면 $p+q=10$이다.\n2단계: $x=2$를 대입하면 $8p+4q=56$이고, 양변을 4로 나누면 $2p+q=14$이다.\n3단계: 두 식을 빼면 $p=4$이고, 따라서 $q=6$이다.\n4단계: 식은 $4x^3+6x^2$이고, 공통인수 $2x^2$로 묶으면 $2x^2(2x+3)$이다. 정답은 C이다.\n오답 A: $p$와 $q$를 서로 바꿔 넣은 식이다. 전개하면 $6x^3+4x^2$가 된다.\n오답 B: 공통인수를 $2x^3$으로 잘못 묶은 식이다. 전개하면 $4x^4+6x^3$이 되어 원래 식의 지수와 맞지 않는다.\n오답 D: $p=4$만 구하고 $q$ 대신 합 $p+q=10$을 그대로 쓴 식이다. 전개하면 $4x^3+10x^2$가 된다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_chaining",
+     "cross_representation_mapping"
+    ],
+    "note": "검산: p+q=10, 8p+4q=56 → p=4, q=6 → 4x³+6x² = 2x²(2x+3), C 정답 확인. 두 조건에서 연립하여 매개변수를 구한 뒤 공통인수 묶기까지 연결해야 하며, 오답 D는 중간값(p+q=10) 오용, A는 p·q 교환, B는 공통인수 차수 오류로 각각 그럴듯한 함정 역할을 함. 해설의 계산과 오답 설명 모두 정확하고 모순 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_chaining"
+    ],
+    "note": "검산: p+q=10, 8p+4q=56 → 2p+q=14 → p=4, q=6. 4x^3+6x^2=2x^2(2x+3)이므로 C가 맞다. 오답 A(p·q 교환), B(인수 지수 오류), D(q 자리에 p+q 합을 씀, 중간값 함정)의 설명도 모두 맞다. 다만 p와 q는 각각 다른 조건에서 따로 구하는 것이 아니라 두 조건을 연립해서 함께 구한다. 전체 흐름(대입→2원 연립→공통인수로 묶기)도 전형적인 medium 문항 수준이라 hard로 보기에는 추가로 요구하는 사고가 부족하다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "recipe-equivalent_expressions-03",
+  "runId": "batch2-D-cross",
+  "skill": "equivalent_expressions",
+  "domain": "advanced_math",
+  "examSystem": "sat_math",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "equivalent_expressions_substitute_then_match",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "For all real values of $x$, the expression $3(x+4)^2 - 5(x+4) + c$ is equivalent to $3x^2 + bx + 10$, where $b$ and $c$ are constants.\n\nWhat is the value of $b - c$?",
+   "stimulus": "For all real values of $x$, the expression $3(x+4)^2 - 5(x+4) + c$ is equivalent to $3x^2 + bx + 10$, where $b$ and $c$ are constants.",
+   "question": "What is the value of $b - c$?",
+   "options": [
+    "$1$",
+    "$13$",
+    "$37$",
+    "$77$"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "$u = x+4$로 치환하면 주어진 식은 $3u^2 - 5u + c$입니다. 여기에 $u = x+4$를 다시 넣어 전개합니다.\n1단계: $3u^2 = 3(x^2 + 8x + 16) = 3x^2 + 24x + 48$\n2단계: $-5u = -5x - 20$\n3단계: 둘을 더하면 $3x^2 + 19x + 28 + c$입니다.\n4단계: 이 식을 $3x^2 + bx + 10$과 계수별로 비교합니다. $x$의 계수에서 $b = 19$이고, 상수항에서 $28 + c = 10$이므로 $c = -18$입니다.\n5단계: $b - c = 19 - (-18) = 37$입니다. 정답은 C입니다.\n오답 분석:\nA ($1$): $b$와 $c$는 맞게 구했지만 $b - c$ 대신 $b + c = 19 + (-18)$를 계산한 경우입니다.\nB ($13$): $(x+4)^2$를 $x^2 + 16$으로 잘못 전개해 교차항 $8x$를 빠뜨리면 $b = -5$가 됩니다. 이때 $c = -18$이므로 $-5 - (-18) = 13$이 나옵니다.\nD ($77$): $-5(x+4)$를 $-5x + 20$으로 부호를 잘못 분배하면 상수항 조건이 $48 + 20 + c = 10$이 되어 $c = -58$입니다. $b = 19$와 함께 계산하면 $19 - (-58) = 77$이 나옵니다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "multi_step_chaining",
+     "combined_error_sensitivity"
+    ],
+    "note": "검산: 3(x+4)^2−5(x+4)+c = 3x^2+19x+28+c → b=19, c=−18, b−c=37 (C) 정확. 오답 A/B/D 산출 경로도 모두 수치적으로 재현됨. 해설의 u치환은 사실상 장식적(바로 되돌림)이지만 오류는 아님. 전개→두 계수 비교→음수 c를 빼는 최종 결합의 단계 연결과 부호 함정으로 medium을 넘는 수준이나, hard 중에서는 하위권 난도."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [],
+    "note": "검산 결과: 3x^2+24x+48-5x-20+c = 3x^2+19x+28+c이므로 b=19, c=-18이고 b-c=37이 맞다. 오답 A, B, D는 각각 b+c 계산, 교차항 누락, 부호를 잘못 분배한 경우로 정확히 재현된다. 다만 전개한 뒤 계수를 비교하는 전형적인 medium 수준 문항이다. u 치환은 실제로 필요하지 않고 구조를 재배열하거나 숨은 조건을 찾을 일도 없어서, hard 특성은 사실상 충족되지 않는다.",
+    "passed": false
+   }
+  }
+ }
+]

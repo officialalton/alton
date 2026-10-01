@@ -33,7 +33,7 @@ describe("computePayoutAmounts", () => {
         if (table === "teachers") {
           return { select: () => Promise.resolve({ data: teachers }) };
         }
-        if (table === "sessions") {
+        if (table === "legacy_sessions") {
           return {
             select: () => ({
               eq: () => ({

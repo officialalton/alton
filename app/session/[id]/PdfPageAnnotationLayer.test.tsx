@@ -1,0 +1,287 @@
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { createRef } from "react";
+import PdfPageAnnotationLayer, { type PdfPageAnnotationHandle } from "./PdfPageAnnotationLayer";
+import * as actions from "./annotation-events-actions";
+
+// 2026-09-14 조사 문서의 재현 1·2 가 이 컴포넌트에서는 일어나지 않는지 확인한다.
+// 서버 액션·Realtime·캔버스는 mock — 실제 픽셀·DB 검증이 아니다(통합 테스트가 따로 있다).
+
+vi.mock("./annotation-events-actions", () => ({
+  appendPageStrokeEvents: vi.fn(),
+  loadPageStrokes: vi.fn(async () => []),
+}));
+
+const sent: unknown[] = [];
+vi.mock("@/utils/supabase/client", () => ({
+  createClient: () => ({
+    channel: () => ({
+      on: function on() {
+        return this;
+      },
+      subscribe: function subscribe() {
+        return this;
+      },
+      send: (msg: unknown) => sent.push(msg),
+    }),
+    removeChannel: vi.fn(),
+  }),
+}));
+
+const memory = new Map<string, string>();
+beforeEach(() => {
+  vi.clearAllMocks();
+  sent.length = 0;
+  memory.clear();
+  Object.defineProperty(window, "localStorage", {
+    configurable: true,
+    value: {
+      getItem: (k: string) => memory.get(k) ?? null,
+      setItem: (k: string, v: string) => void memory.set(k, v),
+      removeItem: (k: string) => void memory.delete(k),
+    },
+  });
+  HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
+    lineCap: "",
+    lineWidth: 0,
+    strokeStyle: "",
+    globalCompositeOperation: "",
+    beginPath: vi.fn(),
+    moveTo: vi.fn(),
+    lineTo: vi.fn(),
+    stroke: vi.fn(),
+    clearRect: vi.fn(),
+    fillText: vi.fn(),
+    fillStyle: "",
+    font: "",
+    textBaseline: "",
+  })) as unknown as typeof HTMLCanvasElement.prototype.getContext;
+  HTMLCanvasElement.prototype.getBoundingClientRect = () =>
+    ({ left: 0, top: 0, width: 600, height: 800, right: 600, bottom: 800, x: 0, y: 0, toJSON: () => ({}) }) as DOMRect;
+});
+
+const target = (page: number, versionId = "v1") => ({
+  sessionId: "s1",
+  curriculumDocId: "d1",
+  curriculumDocVersionId: versionId,
+  pageNumber: page,
+});
+
+async function drawOne(x = 10) {
+  const input = screen.getByTestId("pdf-input-layer");
+  fireEvent.pointerDown(input, { clientX: x, clientY: 10 });
+  fireEvent.pointerMove(input, { clientX: x + 5, clientY: 15 });
+  fireEvent.pointerUp(input);
+}
+
+async function enableDrawing() {
+  // 저장된 획을 읽어 오기 전에는 '필기 준비 중…' — 버튼 글자가 바뀌기를 기다린다(호출 여부만 보면 레이스).
+  fireEvent.click(await screen.findByRole("button", { name: "✏️ 필기 시작" }));
+}
+
+describe("PDF 페이지 필기 레이어", () => {
+  it("필기를 켜기 전에는 아래 화면의 클릭을 가로막지 않는다 (2026-09-14 UAT: 선택지·버튼 클릭 안 됨)", () => {
+    render(<PdfPageAnnotationLayer target={target(1)} role="student" viewerUserId="u1" width={600} height={800} />);
+    expect(screen.getByTestId("pdf-page-annotation-layer").className).toContain("pointer-events-none");
+    expect(screen.getByTestId("pdf-input-layer").className).toContain("pointer-events-none");
+    // 도구 막대는 눌러야 하니 스스로는 클릭을 받는다.
+    expect(screen.getByRole("button", { name: /필기/ }).closest("div")!.className).toContain("pointer-events-auto");
+  });
+
+  it("한 획은 eventId 를 달고 이 페이지의 대상으로만 저장된다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(2)} role="teacher" viewerUserId="t1" width={600} height={800} />);
+    await enableDrawing();
+    await drawOne();
+    expect(ref.current?.hasUnsaved()).toBe(true);
+
+    await act(async () => {
+      expect(await ref.current!.flush()).toBe(true);
+    });
+    expect(actions.appendPageStrokeEvents).toHaveBeenCalledTimes(1);
+    const call = vi.mocked(actions.appendPageStrokeEvents).mock.calls[0][0];
+    expect(call.target).toEqual(target(2));
+    expect(call.scope).toBe("teacher_shared");
+    expect(call.segments[0].eventId).toMatch(/[0-9a-f-]{36}/);
+    expect(ref.current?.hasUnsaved()).toBe(false);
+    // 실시간으로도 같은 eventId 가 나간다 — 상대가 그리는 획과 저장되는 획이 같은 것이다.
+    expect((sent[0] as { payload: { seg: { eventId: string } } }).payload.seg.eventId).toBe(call.segments[0].eventId);
+  });
+
+  it("재현 1 — 다른 페이지로 다시 마운트되면 이전 페이지의 미저장 획은 그 페이지 보관함에 남고 새 페이지 저장에 섞이지 않는다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!),
+    }));
+    const ref = createRef<PdfPageAnnotationHandle>();
+    const { unmount } = render(
+      <PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />
+    );
+    await enableDrawing();
+    await drawOne(10);
+    // 저장 전에 화면이 바뀐다(다음 페이지). 이전 인스턴스는 내려가며 보관함에 남긴다.
+    unmount();
+    const keyPage1 = Array.from(memory.keys()).find((k) => k.endsWith(":v1:1:teacher_shared"));
+    expect(keyPage1).toBeDefined();
+
+    const ref2 = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref2} target={target(2)} role="teacher" viewerUserId="t1" width={600} height={800} />);
+    await enableDrawing();
+    await drawOne(50);
+    await act(async () => {
+      await ref2.current!.flush();
+    });
+    const calls = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
+    expect(calls).toHaveLength(1);
+    expect((calls[0][0].target as { pageNumber: number }).pageNumber).toBe(2);
+    expect(calls[0][0].segments).toHaveLength(1);
+    expect(calls[0][0].segments[0].x0).toBe(50);
+    // 1쪽 획은 여전히 1쪽 보관함에 있다 — 1쪽으로 돌아오면 복구·저장된다.
+    expect(memory.get(keyPage1!)).toContain('"x0":10');
+  });
+
+  it("재현 2 — 저장 응답을 기다리는 동안 그린 획도 임시 기록에 남고, 먼저 보낸 저장이 끝나도 지워지지 않는다", async () => {
+    let resolveFirst: ((v: { savedEventIds: string[] }) => void) | null = null;
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementationOnce(
+      () => new Promise((resolve) => { resolveFirst = resolve; })
+    );
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="student" viewerUserId="u1" width={600} height={800} />);
+    await enableDrawing();
+    await drawOne(10);
+    let flushing: Promise<boolean>;
+    act(() => {
+      flushing = ref.current!.flush(); // 첫 획 전송 중
+    });
+    await drawOne(20); // 응답 전 두 번째 획
+
+    const key = Array.from(memory.keys()).find((k) => k.endsWith(":v1:1:student_shared"))!;
+    const kept = JSON.parse(memory.get(key)!) as { x0: number }[];
+    expect(kept.map((s) => s.x0)).toEqual([10, 20]);
+
+    const firstCall = vi.mocked(actions.appendPageStrokeEvents).mock.calls[0][0];
+    await act(async () => {
+      resolveFirst!({ savedEventIds: firstCall.segments.map((s) => s.eventId!) });
+      await flushing!;
+    });
+    const after = JSON.parse(memory.get(key)!) as { x0: number }[];
+    expect(after.map((s) => s.x0)).toEqual([20]);
+    expect(ref.current?.hasUnsaved()).toBe(true);
+  });
+
+  it("저장 실패는 미저장 상태와 다시 시도를 보여주고 획을 잃지 않는다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockRejectedValueOnce(new Error("network"));
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />);
+    await enableDrawing();
+    await drawOne();
+    await act(async () => {
+      expect(await ref.current!.flush()).toBe(false);
+    });
+    expect(screen.getByTestId("pdf-save-state")).toHaveTextContent("저장 안 됨");
+    expect(ref.current?.hasUnsaved()).toBe(true);
+
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementationOnce(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!),
+    }));
+    fireEvent.click(screen.getByRole("button", { name: "다시 시도" }));
+    await waitFor(() => expect(ref.current?.hasUnsaved()).toBe(false));
+    // 재시도는 같은 eventId 를 다시 보낸다 — 서버가 중복을 막는 근거.
+    const [first, second] = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
+    expect(second[0].segments[0].eventId).toBe(first[0].segments[0].eventId);
+  });
+
+  it("보호자(reader)는 입력 캔버스와 필기 버튼이 없다 — 두 레이어는 읽는다", async () => {
+    render(<PdfPageAnnotationLayer target={target(1)} role="reader" width={600} height={800} />);
+    await waitFor(() => expect(actions.loadPageStrokes).toHaveBeenCalledTimes(2));
+    expect(screen.queryByTestId("pdf-input-layer")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /필기 시작/ })).not.toBeInTheDocument();
+    expect(screen.getByTestId("pdf-teacher-layer")).toBeInTheDocument();
+    expect(screen.getByTestId("pdf-student-layer")).toBeInTheDocument();
+  });
+
+  // 2026-09-14 UAT — 타이핑 필기와 전체 지우기.
+  it("텍스트 도구: 클릭한 자리에 글을 쓰고 Enter 로 확정하면 text 조각으로 저장된다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />);
+    await enableDrawing();
+    fireEvent.click(screen.getByRole("button", { name: "T 텍스트" }));
+    fireEvent.pointerDown(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
+    fireEvent.pointerUp(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
+    const box = screen.getByTestId("pdf-text-input");
+    fireEvent.change(box, { target: { value: "핵심 문장" } });
+    fireEvent.keyDown(box, { key: "Enter" });
+    expect(screen.queryByTestId("pdf-text-input")).not.toBeInTheDocument();
+    await act(async () => {
+      expect(await ref.current!.flush()).toBe(true);
+    });
+    const call = vi.mocked(actions.appendPageStrokeEvents).mock.calls[0][0];
+    expect(call.segments).toHaveLength(1);
+    expect(call.segments[0]).toMatchObject({ tool: "text", text: "핵심 문장", x0: 120, y0: 40 });
+    // 빈 글은 저장하지 않는다.
+    fireEvent.pointerUp(screen.getByTestId("pdf-input-layer"), { clientX: 10, clientY: 10 });
+    fireEvent.keyDown(screen.getByTestId("pdf-text-input"), { key: "Escape" });
+    expect(ref.current?.hasUnsaved()).toBe(false);
+  });
+
+  it("전체 지우기: 확인하면 미저장 획을 먼저 저장한 뒤 clear 조각을 남기고 상대에게도 알린다", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    window.confirm = vi.fn(() => true);
+    const ref = createRef<PdfPageAnnotationHandle>();
+    render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="student" viewerUserId="s1" width={600} height={800} />);
+    await enableDrawing();
+    await drawOne();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
+    });
+    await waitFor(() => expect(actions.appendPageStrokeEvents).toHaveBeenCalledTimes(2));
+    const calls = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
+    expect(calls[0][0].segments[0].tool).toBe("pen");
+    expect(calls[1][0].segments).toHaveLength(1);
+    expect(calls[1][0].segments[0].tool).toBe("clear");
+    expect(calls[1][0].scope).toBe("student_shared");
+    const last = sent[sent.length - 1] as { payload: { scope: string; seg: { tool: string } } };
+    expect(last.payload).toMatchObject({ scope: "student_shared", seg: { tool: "clear" } });
+    expect(ref.current?.hasUnsaved()).toBe(false);
+  });
+
+  it("전체 지우기를 취소하면 아무것도 남기지 않는다", async () => {
+    window.confirm = vi.fn(() => false);
+    render(<PdfPageAnnotationLayer target={target(1)} role="student" viewerUserId="s1" width={600} height={800} />);
+    await enableDrawing();
+    fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
+    expect(actions.appendPageStrokeEvents).not.toHaveBeenCalled();
+  });
+
+  it("저장이 끝난 획은 창 크기가 바뀌어 다시 그릴 때도 남는다(2026-09-14 UAT: 크기 조절 뒤 필기가 사라졌다)", async () => {
+    vi.mocked(actions.appendPageStrokeEvents).mockImplementation(async ({ segments }) => ({
+      savedEventIds: segments.map((s) => s.eventId!).filter(Boolean),
+    }));
+    const strokeCalls: number[] = [];
+    HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
+      lineCap: "", lineWidth: 0, strokeStyle: "", globalCompositeOperation: "", fillStyle: "", font: "", textBaseline: "",
+      beginPath: vi.fn(), moveTo: vi.fn(), lineTo: vi.fn(), clearRect: vi.fn(), fillText: vi.fn(),
+      stroke: vi.fn(() => strokeCalls.push(1)),
+    })) as unknown as typeof HTMLCanvasElement.prototype.getContext;
+    const ref = createRef<PdfPageAnnotationHandle>();
+    const { rerender } = render(
+      <PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />
+    );
+    await enableDrawing();
+    await drawOne();
+    await act(async () => {
+      expect(await ref.current!.flush()).toBe(true);
+    });
+    strokeCalls.length = 0;
+    rerender(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={400} height={533} />);
+    // 크기가 바뀌어 다시 그렸고, 그때 저장된 획이 그려졌다.
+    expect(strokeCalls.length).toBeGreaterThan(0);
+  });
+});

@@ -1,0 +1,322 @@
+[
+ {
+  "id": "06a3ced4",
+  "cat": "index",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "options": [
+   "actively regulated by a hormonal signal that the animal's body could, under different conditions, be prevented from initiating",
+   "a trait that persists specifically because it allows the mother to expend as much energy as possible before the eggs hatch",
+   "a physiological response that occurs only after the eggs have already hatched rather than during the brooding period itself",
+   "caused primarily by the physical strain of aerating eggs rather than by any internal biological process"
+  ],
+  "explanation": "지문은 optic gland를 제거한 암컷이 동일한 에너지를 알에 소모했음에도 불구하고 쇠퇴하지 않고 더 오래 살았다는 실험을 제시한다. 이는 쇠퇴가 에너지 소모 자체의 결과가 아니라 optic gland가 분비하는 호르몬 신호에 의해 유발되는 과정이며, 그 신호가 없으면(즉 조건이 달라지면) 쇠퇴가 시작되지 않을 수 있음을 뜻한다. 따라서 정답은 '호르몬 신호에 의해 능동적으로 조절되며, 다른 조건에서는 개시가 저지될 수 있다'는 0번이다. 1번은 쇠퇴가 어미가 부화 전에 최대한 에너지를 쓸 수 있게 하려는 목적을 지닌 적응적 형질이라는 내용으로, 지문에 없는 목적론적 인과관계를 부여한 것이므로 근거가 없다(UNSUPPORTED). 2번은 쇠퇴가 알이 이미 부화한 후에만 나타난다는 주장으로, 지문은 부화 전 브루딩 기간 동안 이미 신체적 쇠퇴가 진행된다고 명시하므로 시간적 순서를 뒤바꾼 오류다(WRONG_SCOPE). 3번은 쇠퇴의 원인을 신체적 부담(에너지 소모)으로 돌려, 지문이 정확히 반박한 기존 가설을 그대로 반복하는 것이므로 지문의 결론과 정반대다(OPPOSITE).",
+  "explanationEn": null
+ },
+ {
+  "id": "a19ad79c",
+  "cat": "index",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "options": [
+   "By arguing that the decentralized nervous system of octopuses makes such comparisons premature and possibly misleading",
+   "By agreeing that convergent evolution proves octopuses possess mammalian-level reasoning abilities",
+   "By claiming that octopuses cannot learn to open jars or navigate mazes under any circumstances",
+   "By insisting that human caretakers are incapable of recognizing genuine intelligence in any animal"
+  ],
+  "explanation": "Text 1의 저자들은 문어가 병뚜껑을 열고 미로를 통과하며 사람을 구별하는 행동을 근거로, 이를 포유류에 필적하는 지능의 증거라고 주장한다. 반면 Text 2는 이러한 행동 자체는 인정하면서도, 문어의 신경세포 대부분이 중앙 뇌가 아니라 팔에 분산되어 있다는 점을 근거로, 그 행동이 실제로는 국소적 반사와 단순 연합 반응의 조합일 수 있다고 지적한다. 즉 Text 2는 Text 1이 제시한 '학습 행동 = 포유류 수준 지능'이라는 해석에 대해, 신경계의 구조적 차이를 근거로 그러한 비교가 성급하며 과장될 위험이 있다고 반박한다. 따라서 정답은 이 반박 논리를 정확히 반영한 0번이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "daf80509",
+  "cat": "index",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "options": [
+   "$x = 4$, volume $= 40$ liters",
+   "$x = 5$, volume $= 45$ liters",
+   "$x = 6$, volume $= 50$ liters",
+   "$x = 4$, volume $= 45$ liters"
+  ],
+  "explanation": "선 $m$은 $(0,20)$과 $(8,60)$을 지나므로 기울기는 $\\dfrac{60-20}{8-0}=5$이고, $y$절편이 $20$이므로 방정식은 $y=5x+20$이다.\n\n선 $n$은 $(0,60)$과 $(8,20)$을 지나므로 기울기는 $\\dfrac{20-60}{8-0}=-5$이고, $y$절편이 $60$이므로 방정식은 $y=-5x+60$이다.\n\n두 부피가 같아지는 $x$를 구하려면 $5x+20=-5x+60$을 풀어야 한다. 양변에 $5x$를 더하면 $10x+20=60$이 되고, $10x=40$이므로 $x=4$이다.\n\n이때 부피는 $y=5(4)+20=40$리터이며, 선 $n$으로 확인하면 $-5(4)+60=-20+60=40$으로 일치한다. 따라서 정답은 $x=4$, 부피 $40$리터인 선택지 A(인덱스 0)이다.\n\n오답 분석: 선택지 B($x=5$, $45$리터)는 두 직선의 기울기 크기(각각 $5$, $-5$)는 맞게 사용했지만 절편을 반영하는 과정에서 계산을 잘못하여 교점을 정확히 구하지 못한 경우이다. 선택지 C($x=6$, $50$리터)는 선 $m$의 기울기(5)만 올바르게 반영하고 선 $n$의 감소율과 절편 관계를 잘못 적용하여 나온 오답으로, 실제로는 두 방정식을 동시에 만족하지 않는다. 선택지 D($x=4$)는 올바른 시간 $x=4$는 찾았지만, 부피를 구할 때 선 $n$의 $y$절편(60)을 잘못 대입하거나 계산 과정에서 부호 실수를 하여 $45$리터로 잘못 계산한 경우이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "9cedb4e8",
+  "cat": "index",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "options": [
+   "To present evidence that challenges the previously stated traditional view about the purpose of the gold backgrounds",
+   "To state the central claim that the passage goes on to support with historical analysis",
+   "To concede that the traditional view about patron wealth still explains most surviving icons",
+   "To summarize the overall conclusion that scholars have reached about the function of the gold backgrounds"
+  ],
+  "explanation": "밑줄 문장 앞에는 전통적 견해(금박은 순전히 장식용이며 후원자의 부를 과시하기 위함)가 제시되고, 밑줄 문장은 'however'로 이 견해와 대조되는 구체적 관찰 사실(금박이 촛불을 반사하여 신성한 광채를 연출하도록 배치됨)을 제시한다. 이는 전통적 견해에 도전하는 증거(EVIDENCE) 역할이다.\n\nA(정답)는 이 역할을 정확히 서술한다.\nB는 밑줄 문장을 글 전체를 이끄는 '핵심 주장(CLAIM)'으로 잘못 규정한다. 실제 핵심 주장은 그 다음 문장('This suggests that the gold served a devotional function...')에서 제시된다.\nC는 밑줄 문장이 전통적 견해를 양보/인정(CONCESSION)한다고 잘못 서술한다. 그러나 밑줄 문장은 전통적 견해를 인정하는 것이 아니라 반박하는 증거를 제시한다.\nD는 밑줄 문장을 학자들의 최종 결론(CONCLUSION) 요약으로 잘못 서술한다. 결론 요약은 마지막 문장('Scholars now increasingly interpret...')에서 이루어진다.\n\n따라서 정답은 A(인덱스 0)이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "b43c5755",
+  "cat": "index",
+  "perm": [
+   2,
+   0,
+   1,
+   3
+  ],
+  "origIndex": 2,
+  "newIndex": 0,
+  "options": [
+   "By arguing that later retouching should be preserved because it reflects the values of past restorers just as much as the original artist's intentions do",
+   "By acknowledging that later retouching preserves a record of past restorers' choices, but maintaining that such choices should guide future conservation decisions rather than being treated as errors to correct",
+   "By countering that preserving flawed retouching misrepresents the artist's original work rather than honoring the fresco's history, since the pigments used have visibly distorted the composition",
+   "By suggesting that the darkened pigments in later retouching could simply be chemically reversed to restore the fresco's original appearance, making the debate over minimal intervention largely unnecessary"
+  ],
+  "explanation": "Text 1은 후대의 덧칠을 그대로 남기는 것이 프레스코화의 전체 역사를 존중하는 것이라고 주장한다. 반면 Text 2는 18~19세기에 서둘러 적용된 덧칠에 쓰인 안료가 변색되어 원작의 구도를 왜곡했다고 지적하며, 이러한 덧칠을 보존하는 것은 역사를 존중하는 것이 아니라 오히려 과거 복원가들의 오류를 보존하여 관람자에게 원작의 팔레트와 기법에 대해 왜곡된 인상을 남긴다고 반박한다. 따라서 정답은 이러한 반박 논리를 정확히 반영한 3번이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "7f8bd0b4",
+  "cat": "index",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "options": [
+   "the fees fail to account for unequal financial burdens across income groups and should include exemptions",
+   "vehicle volume in cities has never declined as a result of any pricing scheme",
+   "the fees will ultimately fail to reduce vehicle volume unless they are paired with major investments in public transit infrastructure",
+   "the fees are unlikely to reduce traffic congestion since wealthier drivers will simply continue driving regardless of cost"
+  ],
+  "explanation": "Text 2는 혼잡통행료가 교통량 감소라는 목표 자체는 타당하다고 인정하면서도, 그것이 시장 기반 해법으로서 소득 계층 간 불평등한 부담을 낳는다고 한정한다. 즉 저소득 통근자는 대중교통 대안이 부족해 요금을 더 크게 체감하는 반면 부유층은 영향을 받지 않는다는 점에서 요금 제도가 역진적이라고 비판하며, 소득 기반 면제를 요구한다. 이는 Text 1의 '시장 기반 해법' 주장에 대한 직접적 한정이므로 정답은 0번이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "9d4af989",
+  "cat": "ordinalList",
+  "perm": [
+   0,
+   2,
+   3,
+   1
+  ],
+  "origIndex": 1,
+  "newIndex": 3,
+  "options": [
+   "The total number of passengers who ride the bus each day",
+   "The daily fare revenue collected from passengers who do not pay the full adult fare",
+   "The full adult fare charged to each passenger",
+   "The number of days needed to collect 375 dollars in revenue"
+  ],
+  "explanation": "두 식 $R = 2.50p + 375$와 $R = 2.50p + 3(125)$를 비교하면 $375 = 3(125)$로 같은 값임을 알 수 있다. 원래 식에서 $2.50p$는 전액 요금을 낸 승객 $p$명에게서 나온 수입을 나타내므로, 나머지 상수항 $375$(즉 $3(125)$)는 전액 요금을 내지 않는 승객들로부터 걷힌 수입을 나타낸다. 이는 승객 수나 요금 자체가 아니라 금액(수입)이라는 점에 유의해야 한다. 선택지 1은 상수항을 승객 수로 착각한 오답, 선택지 3은 계수 2.50을 요금으로 오해하지 않고 엉뚱하게 상수항과 연결한 오답, 선택지 4는 금액을 날짜 수로 잘못 해석한 오답이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "c723be7b",
+  "cat": "article",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "options": [
+   "To argue that a specific detail, not the maple motif alone, distinguishes writing boxes that convey reflections on impermanence from those that are purely decorative",
+   "To describe how falling maple leaves on writing boxes signaled the changing of seasons to merchant families",
+   "To explain why almanac illustrations and writing-box designs both relied on the same maple motif for different purposes",
+   "To note that writing boxes were valued as literary objects before showing that their true purpose was purely ornamental"
+  ],
+  "explanation": "지문은 단풍 무늬 자체가 아니라 '미완성 시가 카드 위에 떨어지는 낙엽'이라는 구체적 세부 요소의 유무가 특정 공방의 철학적 함의를 지닌 작품과 단순 장식용 작품을 가르는 기준이라고 두 문장(Only when~, A box from a rival workshop~)을 종합해야 알 수 있는 주장을 편다. 정답 A는 이 종합된 핵심 관계를 정확히 반영한다.\nB는 지문에 언급된 '단풍의 계절적 의미'라는 부분 정보만 다루며, 이는 오히려 지문이 달력 삽화(almanac illustrations)의 기능이라고 구분한 내용과 혼동한 것으로, 글 전체 목적이 아니라 세부 근거 중 하나(그것도 다른 대상에 해당하는)를 목적으로 과장한 오답이다.\nC는 두 대상(달력 삽화와 필기함)이 '같은 단풍 무늬를 서로 다른 목적으로 사용했다'는 대조는 지문에 있으나, 글의 목적은 그 차이를 '설명'하는 것이 아니라 '미완성 세부 요소가 구분 기준이 된다'는 주장을 펴는 것이므로, 부분 일치 정보를 전체 목적으로 착각한 오답이다.\nD는 '인기·가치 있는 것으로 여겨졌다가 실제로는 순수 장식용임이 드러난다'는 구조로 설명하는데, 이는 원인과 결론을 전도시킨 것으로, 지문은 오히려 특정 세부가 있으면 철학적 의미를, 없으면 장식용임을 대조하는 것이지 전체가 결국 장식용이라는 결론으로 귀결되지 않는다.</explanation>\n<parameter name=\"hard_design\">정답 판단을 위해 'Only when~' 조건문과 'A box from a rival workshop, by contrast~' 대조문, 'Unlike simple almanac illustrations~' 비교문 세 문장을 모두 종합해야 하며, 각 오답은 지문의 서로 다른 부분(계절적 의미, 대조 대상의 목적 차이, 인기→반전 구조)과 표면적으로 일치해 근거 없이는 소거되지 않도록 설계했다.",
+  "explanationEn": null
+ },
+ {
+  "id": "4eaf03a4",
+  "cat": "article",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "options": [
+   "25.8 to 28.2",
+   "26.0 to 27.0",
+   "24.6 to 29.4",
+   "27.0 to 28.2"
+  ],
+  "explanation": "95% 신뢰구간은 표본평균 ± 오차범위로 구한다. 표본평균은 27kg, 오차범위는 1.2kg이므로 구간은 27 − 1.2 = 25.8부터 27 + 1.2 = 28.2까지이다. 따라서 정답은 A번이다. B는 오차범위를 절반만 적용한 값이고, C는 오차범위를 두 배로 잘못 적용한 값이며, D는 오차범위를 평균에서 빼지 않고 더하기만 한 값이다.",
+  "explanationEn": "A 95% confidence interval is found by taking the sample mean plus or minus the margin of error. The sample mean is 27 kg and the margin of error is 1.2 kg, so the interval runs from 27 − 1.2 = 25.8 to 27 + 1.2 = 28.2. Therefore, the answer is A. B mistakenly applies only half the margin of error, C doubles the margin of error, and D only adds the margin of error without subtracting it."
+ },
+ {
+  "id": "9eb0fc6f",
+  "cat": "letterForm",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "options": [
+   "but",
+   "and",
+   "but that",
+   "but which"
+  ],
+  "explanation": "이 문장의 뒷부분은 'a practice that critics once dismissed as amateurish'와 '(that) scholars now recognize as an ingenious act of resourcefulness'라는 두 개의 관계사절이 'but'로 대조·연결된 구조다. 두 절 모두 독립절이 아니라 명사 'a practice'를 수식하는 종속 관계사절이며, 앞뒤 내용이 '한때는 아마추어적이라 여겨졌지만 지금은 독창적인 방책으로 인정받는다'는 대조 관계이므로 등위접속사는 반드시 대조의 'but'이어야 한다. B는 'and'를 써서 대조 관계를 단순 나열 관계로 바꿔버리는데, 이는 문맥상 '한때 폄하되었지만 지금은 재평가된다'는 전환의 의미를 살리지 못해 부적절하다. D는 'but' 뒤에 관계대명사 'which'를 붙여 앞의 that절과 병렬을 맞추려 하지만, 이미 앞절에서 관계대명사 'that'이 명시적으로 쓰였으므로 뒤 절에서는 (that이 생략된) 형태로 병렬을 이루어야 하며, 'which'를 추가하면 두 관계사절의 병렬 구조가 어긋나 문법적으로 어색해진다. C의 'but that'은 관계절을 이중으로 표시해 문법적으로 어색하다. 따라서 아무 문장부호 없이 'but'만 쓰는 A가 정답이다.",
+  "explanationEn": "The latter part of the sentence contains two relative clauses, 'that critics once dismissed as amateurish' and '(that) scholars now recognize as an ingenious act of resourcefulness,' both modifying the noun phrase 'a practice' and contrasted by 'but.' Since neither clause is independent, no comma or semicolon should appear between them to falsely mark an independent-clause boundary. Choice B adds an unnecessary comma after 'but,' awkwardly disrupting the connection. Choice D uses a semicolon plus the relative pronoun 'which,' which incorrectly implies a new independent clause is beginning, violating the rule that semicolons join independent clauses. Choice C's 'but that' doubles the relative marker in a grammatically awkward way. Choice A, with 'but' alone and no punctuation, correctly coordinates the two dependent relative clauses."
+ },
+ {
+  "id": "a397f4d3",
+  "cat": "letterForm",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 0,
+  "newIndex": 1,
+  "options": [
+   "its data showed",
+   "it's data showed",
+   "its' data showed",
+   "its data, showed"
+  ],
+  "explanation": "빈칸 뒤의 명사 'data'를 수식하는 것은 'the planning commission's final report'를 가리키는 소유격이어야 하므로, 'it is'의 축약형인 'it's'가 아니라 소유격 대명사 'its'를 아포스트로피 없이 써야 한다. B의 'it's'는 'it is'/'it has'의 축약형이라 문맥상 의미가 통하지 않고, C의 'its''는 표준 영어에 존재하지 않는 형태다(소유격 대명사에는 아포스트로피가 붙지 않는다). D는 'its data'라는 주어와 동사 'showed' 사이에 불필요한 쉼표를 넣어 주어-동사 경계를 어색하게 끊는다. 따라서 아포스트로피 없이 'its data showed'로 매끄럽게 연결하는 A가 정답이다.",
+  "explanationEn": "The blank must supply a possessive form modifying 'data' that refers back to 'the planning commission's final report,' so the possessive pronoun 'its' (no apostrophe) is required rather than the contraction 'it's' (it is/it has). Choice B's 'it's' means 'it is' or 'it has,' which does not fit the context. Choice C's 'its'' is not a standard English form, since possessive pronouns never take an apostrophe. Choice D inserts an unnecessary comma between the subject 'its data' and the verb 'showed,' awkwardly breaking the subject-verb link. Choice A correctly uses the apostrophe-free possessive 'its' with no disruptive punctuation."
+ },
+ {
+  "id": "021df67e",
+  "cat": "letterForm",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "options": [
+   "It is plausible that the true percentage of all commuters who use public transit daily is 35%.",
+   "It is plausible that the true percentage of all commuters who use public transit daily is 43%.",
+   "The true percentage of all commuters who use public transit daily is exactly 38%.",
+   "It is plausible that the true percentage of all commuters who use public transit daily is 44%."
+  ],
+  "explanation": "오차범위를 고려한 신뢰구간은 38 − 4 = 34%부터 38 + 4 = 42%까지이다. 35%는 이 구간(34%~42%) 안에 포함되므로 타당한 값이다. A번이 정답이다. B의 43%는 42%를 넘어 구간 밖이고, C는 표본 비율이 모집단의 정확한 값이라고 단정하는 오류이며(표본 통계는 추정치일 뿐), D의 44%도 구간 상한 42%를 넘는다.",
+  "explanationEn": "The confidence interval, accounting for the margin of error, runs from 38 − 4 = 34% to 38 + 4 = 42%. Since 35% falls within this interval (34% to 42%), it is a plausible value, making A correct. B's 43% exceeds the upper bound of 42%, C incorrectly treats the sample percentage as the exact population value (a sample statistic is only an estimate), and D's 44% also exceeds the upper bound of 42%."
+ },
+ {
+  "id": "43f4e230",
+  "cat": "letterForm",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "options": [
+   "$0$; the theater earns no revenue when no tickets are sold.",
+   "$50$; the theater's fixed operating cost for the weekend.",
+   "$500$; the total revenue when all tickets are sold.",
+   "$10$; the price of one ticket in dollars."
+  ],
+  "explanation": "그래프는 원점 P(0, 0)를 지나고 점 Q(50, 500)를 지나는 직선이다. $x$절편은 그래프가 $x$축과 만나는 점, 즉 $y=0$일 때의 $x$값이다. 이 그래프에서 그 점은 원점 (0, 0)이므로 $x$절편은 $0$이다. 문맥상 $x$는 판매된 티켓 수, $y$는 총수익(달러)을 나타내므로, $x$절편이 0이라는 것은 티켓을 0장 팔면(즉 판매하지 않으면) 수익도 0달러라는 뜻이다. 따라서 정답은 A번이다. B번의 50은 그래프에 나타난 티켓 판매량의 한 값(점 Q의 x좌표)일 뿐 x절편이 아니며, 고정비용 개념은 이 그래프(원점을 지남, 절편이 0)와 맞지 않는다. C번의 500은 y절편이 아니라 점 Q의 y좌표(총수익)이며 이 역시 x절편이 아니다. D번의 10은 그래프의 기울기(티켓 한 장당 가격)이지 x절편이 아니다.",
+  "explanationEn": "The graph is a line through the origin P(0, 0) and the point Q(50, 500). The x-intercept is the point where the graph crosses the x-axis, that is, where $y = 0$. On this graph that point is the origin, (0, 0), so the x-intercept is $0$. Since x represents the number of tickets sold and y represents total revenue in dollars, an x-intercept of 0 means that when 0 tickets are sold, the revenue is $0. So the correct answer is A. Choice B's value of 50 is simply the x-coordinate of point Q on the graph, not the x-intercept, and there is no fixed cost shown since the line passes through the origin. Choice C's value of 500 is the y-coordinate of point Q (total revenue), not an x-intercept. Choice D's value of 10 is the slope of the line (price per ticket), not the x-intercept."
+ },
+ {
+  "id": "a297b352",
+  "cat": "letterForm",
+  "perm": [
+   1,
+   0,
+   2,
+   3
+  ],
+  "origIndex": 1,
+  "newIndex": 0,
+  "options": [
+   "To concede that coral bleaching is a normal and harmless part of the coral-algae relationship",
+   "To explain the mechanism by which rising water temperature disrupts the coral-algae partnership described earlier in the text",
+   "To conclude that all coral reefs will inevitably lose their biodiversity within a few weeks of warming",
+   "To present evidence that sunlight availability, rather than temperature, is the main threat to coral survival"
+  ],
+  "explanation": "밑줄 문장 앞부분은 산호 폴립과 조류의 공생 관계(에너지 공급과 보금자리 제공)를 설명한다. 밑줄 문장은 이 관계가 수온 상승이라는 조건에서 어떻게 깨지는지—폴립이 조류를 배출하여 백화 현상이 일어난다는—구체적 인과 메커니즘을 제시하는 설명(EVIDENCE) 역할을 한다. 따라서 정답은 B이다.\\n\\nA는 이 문장을 '백화가 정상적이고 무해하다는 양보(CONCESSION)'로 잘못 서술했다. 밑줄 문장 자체는 양보가 아니라 메커니즘 설명이며, 오히려 다음 문장에서 에너지 부족과 질병 취약성을 언급해 무해하지 않음을 보여준다.\\n\\nC는 이 문장을 '모든 산호초가 몇 주 안에 반드시 생물다양성을 잃는다는 결론(CONCLUSION)'으로 잘못 서술했다. 밑줄 문장은 백화가 일어나는 과정을 설명할 뿐이며, 결론은 마지막 문장(반복된 백화와 회복 시간 부족 시 생물다양성 회복 어려움)에서 제시된다.\\n\\nD는 이 문장을 '햇빛 부족이 산호 생존의 주된 위협이라는 주장을 뒷받침하는 근거(CLAIM을 지지하는 서로 다른 주제의 증거)'로 잘못 서술했다. 밑줄 문장이 다루는 것은 수온 상승이 공생 관계를 깨뜨리는 메커니즘이지 햇빛 부족의 위험성이 아니므로, 지문의 핵심 인과관계(온도-공생 붕괴)를 놓친 오답이다.",
+  "explanationEn": null
+ },
+ {
+  "id": "9d9f0889",
+  "cat": "extraLetter",
+  "perm": [
+   0,
+   2,
+   1,
+   3
+  ],
+  "origIndex": 1,
+  "newIndex": 2,
+  "options": [
+   "Water temperature at all surveyed sites rose by a similar amount during the heatwave, and nutrient upwelling was reduced across the entire region.",
+   "Sites where otter populations remained stable retained healthy kelp forests despite experiencing the same heatwave and nutrient disruption as sites where otters collapsed.",
+   "Urchins at sites with collapsed otter populations were observed feeding on kelp holdfasts throughout the year rather than only in warmer months.",
+   "Purple sea urchins can survive extended periods without kelp by switching to scavenging on organic debris on the seafloor."
+  ],
+  "explanation": "연구진의 주장은 '온도 단독'이라는 대안 가설을 배제하려면 온도/영양염 조건이 동일하면서 otter 생존 여부만 다른 지역을 비교해야 한다는 논리 구조를 갖는다. B는 바로 이 비교 조건을 완성하는 결과로, 동일한 열파와 영양염 교란을 겪었음에도 otter가 살아남은 지역은 켈프가 건강했다는 것을 보여줌으로써 온도가 아니라 포식자 붕괴가 원인임을 직접 뒷받침한다. A는 온도/영양염 조건이 동일했다는 사실만 확인할 뿐 otter 변수와의 비교가 빠져 있어 부분적 근거에 그친다. C는 otter 붕괴 지역에서 성게의 섭식 행동을 보여주지만 온도 요인이 통제되지 않은 상태이므로 대안 가설을 배제하지 못한다. D는 성게의 생존 전략에 관한 무관한 정보다.",
+  "explanationEn": "The researchers' claim requires ruling out temperature alone as the cause, which means comparing sites with identical temperature/nutrient disruption but differing otter survival. Choice C completes exactly this controlled comparison: sites with surviving otters kept healthy kelp despite the same heatwave, directly supporting predator collapse as the decisive factor. Choice A only confirms the control condition (equal temperature/nutrient disruption) without linking to otter survival, so it's only partial support. Choice B describes methodology that actually weakens the comparison rather than supporting the claim. Choice D shows urchin feeding behavior at otter-collapse sites but doesn't control for temperature, so it can't rule out the alternative hypothesis. Choice E is irrelevant information about urchin survival strategies."
+ },
+ {
+  "id": "bbd97b1b",
+  "cat": "extraLetter",
+  "perm": [
+   1,
+   2,
+   3,
+   0
+  ],
+  "origIndex": 0,
+  "newIndex": 3,
+  "options": [
+   "Stars at intermediate distances had disks with more planet-sized bodies than stars at greater distances, while stars very close to the massive star had no detectable disks at all.",
+   "Stars very close to the massive star had disks with fewer planet-sized bodies than stars at intermediate distances, but both groups showed a detectable gas disk of similar size.",
+   "Stars very close to the massive star and stars at intermediate distances both showed disks that were smaller in diameter than disks around stars at greater distances.",
+   "Stars at intermediate distances had disks with more planet-sized bodies than stars very close to the massive star, but stars at greater distances showed an even higher number of planet-sized bodies than either group."
+  ],
+  "explanation": "모델은 거리에 따라 세 가지 다른 결과(근접: 원반 완전 파괴, 중간: 원반 압축을 통한 행성 형성 가속, 원거리: 영향 없음)를 예측한다. 이를 가장 직접적으로 뒷받침하려면 근접 거리에서는 원반 자체가 없고, 중간 거리에서는 원거리보다 행성체가 더 많다는 두 결과가 함께 나타나야 한다. A는 정확히 이 조합을 제시한다. B는 근접 거리와 중간 거리 사이의 행성체 수 차이는 정확히 서술하지만, 근접 거리에서도 여전히 원반이 존재한다고 하여 모델이 예측하는 '원반 완전 파괴'라는 핵심 결과를 빠뜨린다. C는 원반이 파괴되는 것이 아니라 단순히 작아진다고 하여 '파괴'라는 강한 예측을 '축소'라는 약한 현상으로 바꿔버린다. D는 중간 거리가 근접 거리보다 행성체가 많다는 점은 맞지만, 원거리가 중간 거리보다 오히려 행성체가 더 많다고 하여 모델이 예측하는 가속(중간 거리가 우월)과 반대 방향을 보여준다. 따라서 정답은 A번이다.",
+  "explanationEn": "The model predicts three distinct outcomes by distance: complete disk destruction at close range, accelerated planet formation via disk compression at intermediate distances, and negligible effect at greater distances. The strongest support requires showing both that disks are absent at close range and that intermediate-distance stars have more planet-sized bodies than distant stars. Option A presents exactly this combination. Option B addresses the number of stars surveyed, an irrelevant variable unrelated to disks or planet formation. Option C describes disks as merely smaller rather than destroyed, weakening the strong 'destruction' prediction into a milder 'shrinking' phenomenon. Option D shows distant stars with more dust mass than intermediate-distance stars, reversing the direction of acceleration the model predicts. Option E shows close-range stars with more planet-sized bodies than intermediate-distance stars, directly contradicting the destruction prediction at close range, and uses 'erosion' to avoid claiming complete disk loss. Therefore, the correct answer is A."
+ }
+]

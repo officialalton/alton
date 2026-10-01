@@ -12,10 +12,13 @@ import {
   removeTeacherPick,
 } from "./problemlog-actions";
 import MathCanvas from "./MathCanvas";
+import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
+import { fmtIntl } from "@/lib/format-datetime";
 
 const REASONS = ["단어", "로직", "해석", "기타"];
 const FORMAT_LABEL: Record<ProblemLogEntry["format"], string> = {
   mc: "객관식",
+  spr: "숫자 입력",
   essay: "서술형",
   math: "수학",
 };
@@ -317,6 +320,7 @@ function LogCard({
   onPickSaved: (pick: ProblemLogEntry["teacherPick"]) => void;
   onPickRemoved: () => void;
 }) {
+  const tz = useViewerTimezone();
   const preview = entry.passage.slice(0, 110);
 
   return (
@@ -335,7 +339,7 @@ function LogCard({
             )}
             {entry.teacherPick && <Badge tone="yellow">🏷 선생님 픽</Badge>}
             <span className="text-[11.5px] text-grey-500">
-              {formatKoreanDateTime(entry.attemptedAt)}
+              {formatKoreanDateTime(entry.attemptedAt, tz)}
             </span>
           </div>
           <p className="text-[13px] text-ink leading-[1.5]">
@@ -436,6 +440,7 @@ function DetailBody({ entry }: { entry: ProblemLogEntry }) {
             내 응답
           </div>
           {entry.format === "math" ? (
+            // eslint-disable-next-line @next/next/no-img-element -- 캔버스에서 뽑은 data URL이라 next/image 최적화 대상이 아님
             <img src={entry.response} alt="내 풀이" className="border border-grey-200 rounded-lg" />
           ) : (
             <p className="text-[13px] text-ink whitespace-pre-wrap">{entry.response}</p>
@@ -692,12 +697,12 @@ function TeacherPickPanel({
   );
 }
 
-function formatKoreanDateTime(iso: string) {
-  return new Intl.DateTimeFormat("ko-KR", {
+function formatKoreanDateTime(iso: string, tz: string) {
+  return fmtIntl(new Date(iso), {
     month: "long",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-  }).format(new Date(iso));
+  }, tz);
 }

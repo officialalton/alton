@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type PayoutPeriod = { periodStart: string; periodEnd: string };
 
@@ -63,7 +64,7 @@ export async function computePayoutAmounts(
     .select("id, hourly_rate_krw, profile:profiles(name)");
 
   const { data: sessions } = await supabase
-    .from("sessions")
+    .from("legacy_sessions")
     .select("duration_minutes, enrollment:enrollments(teacher_id)")
     .eq("status", "completed")
     .gte("scheduled_at", period.periodStart)
@@ -113,10 +114,10 @@ export async function loadPayouts(supabase: SupabaseClient): Promise<PayoutListI
   if (!payouts || payouts.length === 0) return [];
 
   const teacherIds = Array.from(new Set(payouts.map((p) => p.teacher_id)));
-  const { data: profiles } = await supabase
+  const { data: profiles } = await selectInChunks(teacherIds, (chunk) => supabase
     .from("profiles")
     .select("id, name")
-    .in("id", teacherIds);
+    .in("id", chunk));
   const nameById = new Map((profiles ?? []).map((p) => [p.id, p.name]));
 
   return payouts.map((p) => ({

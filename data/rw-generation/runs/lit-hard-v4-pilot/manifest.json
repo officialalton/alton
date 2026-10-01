@@ -1,0 +1,98 @@
+{
+ "runId": "lit-hard-v4-pilot",
+ "preparedBatches": [
+  "hardv4-hard-01"
+ ],
+ "tasks": [
+  {
+   "taskId": "gen-hardv4-hard-01-01",
+   "kind": "generate",
+   "batchId": "hardv4-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/gen-hardv4-hard-01-01.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/gen-hardv4-hard-01-01.result.json",
+   "suggestedModel": "opus",
+   "items": 11,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-hardv4-hard-01-02",
+   "kind": "generate",
+   "batchId": "hardv4-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/gen-hardv4-hard-01-02.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/gen-hardv4-hard-01-02.result.json",
+   "suggestedModel": "opus",
+   "items": 11,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-hardv4-hard-01-03",
+   "kind": "generate",
+   "batchId": "hardv4-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/gen-hardv4-hard-01-03.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/gen-hardv4-hard-01-03.result.json",
+   "suggestedModel": "opus",
+   "items": 11,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rev-fable_judge-001",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/rev-fable_judge-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-fable_judge-001.result.json",
+   "suggestedModel": "fable",
+   "items": 15,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-001",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/rev-second_solver-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-second_solver-001.result.json",
+   "suggestedModel": "opus",
+   "items": 15,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-001",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/rev-explanation_audit-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-explanation_audit-001.result.json",
+   "suggestedModel": "sonnet",
+   "items": 15,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-002",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/rev-fable_judge-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-fable_judge-002.result.json",
+   "suggestedModel": "fable",
+   "items": 14,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-002",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/rev-second_solver-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-second_solver-002.result.json",
+   "suggestedModel": "opus",
+   "items": 14,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-002",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/tasks/rev-explanation_audit-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit-hard-v4-pilot/results/rev-explanation_audit-002.result.json",
+   "suggestedModel": "sonnet",
+   "items": 14,
+   "status": "pending"
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "itemId": "two_variable_data.association_direction_strength.SC.C",
+ "generatedAt": "2026-10-01T19:06:56.642Z",
+ "codeHash": "e68df4e7add347cb79e8611e7587716757db782fb943bac3a6756f96de4ed6a7",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-choice.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.association_direction_strength.SC.C.png",
+   "mobileFile": "two_variable_data.association_direction_strength.SC.C.m375.png",
+   "archetypeId": "tvd.association_direction_strength.SC.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Each scatterplot shows the age of a puppy and the puppy's weight for 10 data points, along with a line of best fit.",
+   "question": "Which scatterplot shows a strong positive association between age and weight?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) x 가 늘면 y 도 느는 방향(양)을 정한다. (2) 점이 직선 주변에 촘촘히 모인 정도(강한 연관)를 정한다. (3) 네 그래프의 방향을 먼저 대어 반대 방향 그래프를 지운다. (4) 남은 그래프에서 점이 직선에 모인 정도를 비교한다. (5) 방향과 강도가 모두 맞는 그래프를 고른다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

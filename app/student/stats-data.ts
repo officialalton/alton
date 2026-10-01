@@ -1,4 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { selectInChunks } from "@/lib/select-in-chunks";
+import { buildExtendedStats } from "@/lib/student-stats/metrics";
+import type { ExtendedStats, RawStatsAggregate, StatsTier } from "@/lib/student-stats/types";
 
 export type SubjectAttendance = {
   subjectName: string;
@@ -7,8 +10,11 @@ export type SubjectAttendance = {
 
 export type StatsData = {
   attendanceRate: number | null;
-  satisfactionAvg: number | null;
+  /** 학생이 선생님 수업에 준 만족도 — 직원(컨설턴트·관리자)에게만 내려간다. 학생 본인·학부모 응답에는 키 자체가 없다. */
+  satisfactionAvg?: number | null;
   bySubject: SubjectAttendance[];
+  /** 확장 통계(skill·수업권·모의고사·과제·습관·운영). 없으면 기존 요약만 보여준다. */
+  extended?: ExtendedStats;
 };
 
 function extractName(rel: unknown): string {
@@ -18,8 +24,10 @@ function extractName(rel: unknown): string {
 
 export async function loadStats(
   supabase: SupabaseClient,
-  studentId: string
+  studentId: string,
+  opts: { includeSatisfaction?: boolean } = {}
 ): Promise<StatsData> {
+  const includeSatisfaction = opts.includeSatisfaction ?? true;
   const { data: enrollments } = await supabase
     .from("enrollments")
     .select("id, subject:subjects(name)")
@@ -32,10 +40,10 @@ export async function loadStats(
   );
 
   const { data: sessions } = enrollmentIds.length
-    ? await supabase
-        .from("sessions")
-        .select("enrollment_id, status")
-        .in("enrollment_id", enrollmentIds)
+    ? await selectInChunks(enrollmentIds, (chunk) => supabase
+        .from("legacy_sessions")
+        .select("id, enrollment_id, status")
+        .in("enrollment_id", chunk))
     : { data: [] as never[] };
 
   const countsBySubject = new Map<string, { completed: number; noShow: number }>();
@@ -72,19 +80,15 @@ export async function loadStats(
     }
   );
 
-  const sessionIds = enrollmentIds.length
-    ? (
-        await supabase.from("sessions").select("id").in("enrollment_id", enrollmentIds)
-      ).data?.map((s) => s.id) ?? []
-    : [];
+  const sessionIds = (sessions ?? []).map((x) => x.id as string);
 
-  const { data: feedback } = sessionIds.length
-    ? await supabase
+  const { data: feedback } = includeSatisfaction && sessionIds.length
+    ? await selectInChunks(sessionIds, (chunk) => supabase
         .from("session_student_feedback")
         .select("rating")
         .eq("student_id", studentId)
-        .in("session_id", sessionIds)
-        .not("rating", "is", null)
+        .in("session_id", chunk)
+        .not("rating", "is", null))
     : { data: [] as { rating: number }[] };
 
   const ratings = (feedback ?? []).map((f) => f.rating).filter((r): r is number => r !== null);
@@ -93,5 +97,20 @@ export async function loadStats(
       ? Math.round((ratings.reduce((a, b) => a + b, 0) / ratings.length) * 10) / 10
       : null;
 
-  return { attendanceRate, satisfactionAvg, bySubject };
+  return includeSatisfaction ? { attendanceRate, satisfactionAvg, bySubject } : { attendanceRate, bySubject };
+}
+
+/** 통계 탭 전체(요약 + 확장). 호출부가 권한 검사(assertCanViewStudent/학생 본인/보호자)를 이미 통과시킨 뒤
+ * 서비스 클라이언트로 부른다. 조회 = legacy 요약 3~4개 + 집계 RPC 1개(병렬). 등급별로 필드를 서버에서 뺀다. */
+export async function loadStudentStats(
+  admin: SupabaseClient,
+  studentId: string,
+  tier: StatsTier
+): Promise<StatsData> {
+  const [base, agg] = await Promise.all([
+    loadStats(admin, studentId, { includeSatisfaction: tier !== "family" }),
+    admin.rpc("student_stats_aggregate", { p_student_id: studentId, p_include_staff: tier === "admin" }),
+  ]);
+  if (agg.error) throw new Error("통계를 집계하지 못했습니다.");
+  return { ...base, extended: buildExtendedStats(agg.data as RawStatsAggregate, tier) };
 }

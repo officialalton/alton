@@ -1,0 +1,23 @@
+{
+  "itemId": "two_variable_data.cell.TW.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "40ba0da0c4e89c0444c05a8cce7bfb38568a529efeb6e8bffb24368c633e8734",
+  "samples": [
+    "two_variable_data.cell.TW.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "표: print 22/21(합 43). (22+x)/(43+x)=0.7 → 30x=810 → x=27 = 정답 B. 합계 행 밑줄이 전 열에 걸쳐 이어짐(수정 확인). | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+}

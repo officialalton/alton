@@ -1,0 +1,259 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+// PDF 한 페이지를 캔버스에 그린다(pdf.js). 브라우저 내장 PDF iframe 위에 얹지 않는다 —
+// 필기 레이어가 페이지 픽셀 크기에 정확히 맞아야 하기 때문이다.
+//
+// 늦게 끝난 이전 페이지의 렌더가 현재 페이지를 덮지 않도록 렌더마다 세대 번호를 붙이고,
+// 진행 중인 렌더는 취소한다. 렌더가 끝난 뒤에야 부모에게 크기를 알려 입력을 연다.
+
+type PdfDocumentLike = {
+  numPages: number;
+  getPage: (n: number) => Promise<{
+    getViewport: (o: { scale: number }) => { width: number; height: number; scale: number };
+    render: (o: { canvasContext: CanvasRenderingContext2D; viewport: unknown }) => {
+      promise: Promise<void>;
+      cancel: () => void;
+    };
+    streamTextContent: () => ReadableStream;
+    getTextContent: () => Promise<{ items: { str?: string; transform?: number[] }[] }>;
+  }>;
+  destroy: () => Promise<void>;
+};
+
+const docCache = new Map<string, Promise<PdfDocumentLike>>();
+
+async function loadPdf(url: string): Promise<PdfDocumentLike> {
+  let cached = docCache.get(url);
+  if (!cached) {
+    cached = (async () => {
+      const pdfjs = await import("pdfjs-dist");
+      pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+        "pdfjs-dist/build/pdf.worker.min.mjs",
+        import.meta.url
+      ).toString();
+      const task = pdfjs.getDocument({ url });
+      return (await task.promise) as unknown as PdfDocumentLike;
+    })();
+    docCache.set(url, cached);
+    cached.catch(() => docCache.delete(url));
+  }
+  return cached;
+}
+
+export default function PdfPageCanvas({
+  url,
+  page,
+  zoom,
+  fitWidth,
+  fitHeight,
+  onRendered,
+  onError,
+}: {
+  url: string;
+  page: number;
+  /** 1 = 한 페이지가 화면에 다 들어오는 배율(가로·세로 중 작은 쪽). */
+  zoom: number;
+  /** 맞춤 기준 너비(px). */
+  fitWidth: number;
+  /** 맞춤 기준 높이(px). 0 이면 가로만 맞춘다. */
+  fitHeight?: number;
+  onRendered: (size: { width: number; height: number }) => void;
+  onError: (message: string) => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const textLayerRef = useRef<HTMLDivElement | null>(null);
+  const generationRef = useRef(0);
+  const [size, setSize] = useState<{ width: number; height: number } | null>(null);
+
+  useEffect(() => {
+    const generation = ++generationRef.current;
+    let cancelRender: (() => void) | null = null;
+    let disposed = false;
+
+    (async () => {
+      try {
+        const doc = await loadPdf(url);
+        if (disposed || generation !== generationRef.current) return;
+        const pdfPage = await doc.getPage(page);
+        if (disposed || generation !== generationRef.current) return;
+        const base = pdfPage.getViewport({ scale: 1 });
+        // 2026-09-14 UAT: 세로가 넘쳐 한 페이지가 다 안 보였다 → 가로·세로 중 작은 쪽에 맞춘다.
+        const fitW = fitWidth > 0 ? fitWidth / base.width : 1;
+        const fitH = fitHeight && fitHeight > 0 ? fitHeight / base.height : Infinity;
+        const scale = Math.min(fitW, fitH) * zoom;
+        const viewport = pdfPage.getViewport({ scale });
+        const canvas = canvasRef.current;
+        const ctx = canvas?.getContext("2d");
+        if (!canvas || !ctx) return;
+        const width = Math.floor(viewport.width);
+        const height = Math.floor(viewport.height);
+        // 레티나에서 흐리던 것: 그리는 픽셀은 devicePixelRatio 배로, 표시 크기는 논리 px 로.
+        const dpr = Math.min(3, Math.max(1, typeof window !== "undefined" ? window.devicePixelRatio || 1 : 1));
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        const renderViewport = pdfPage.getViewport({ scale: scale * dpr });
+        const task = pdfPage.render({ canvasContext: ctx, viewport: renderViewport });
+        cancelRender = () => task.cancel();
+        await task.promise;
+        if (disposed || generation !== generationRef.current) return;
+        setSize({ width, height });
+        onRendered({ width, height });
+
+        // 2026-09-21(사용자 지시) — PDF는 캔버스에 이미지로만 그려 단어를 클릭할 수
+        // 없었다. 실제 위치에 투명 텍스트를 겹쳐 클릭·드래그 선택·복사가 되게 한다
+        // (화면에 보이는 건 그대로 캔버스 이미지).
+        //
+        // 2026-09-22(재수정) — 처음엔 pdf.js의 공식 TextLayer 클래스를 썼는데, 그건
+        // 자기 뷰어(.page 컨테이너)가 설정해 주는 --total-scale-factor 등 CSS 변수에
+        // 기대어 글자 크기·위치를 계산한다. 그 변수들을 우리가 대신 지정해도 여전히
+        // 선택 자체가 전혀 안 됐다(원인 미상 — 아마 그 클래스가 기대하는 다른 뷰어
+        // 구조/스타일시트가 더 있는 듯). CSS 변수에 기대지 않고 각 글자 위치를 pdf.js
+        // Util.transform으로 직접 계산해 순수 픽셀 값으로 span을 배치하는, 더 오래되고
+        // 더 단순한 방식으로 바꾼다 — 외부 스타일시트·CSS 변수 의존이 전혀 없다.
+        const textLayerEl = textLayerRef.current;
+        if (textLayerEl && "getTextContent" in pdfPage) {
+          textLayerEl.style.width = `${width}px`;
+          textLayerEl.style.height = `${height}px`;
+          const pdfjs = await import("pdfjs-dist");
+          const textContent = await pdfPage.getTextContent();
+          if (disposed || generation !== generationRef.current) return;
+          const frag = document.createDocumentFragment();
+          const vt = (viewport as unknown as { transform: number[] }).transform;
+          for (const item of textContent.items) {
+            if (!item.str || !item.transform) continue;
+            const tx = (pdfjs.Util as unknown as { transform: (m1: number[], m2: number[]) => number[] }).transform(vt, item.transform);
+            const angle = Math.atan2(tx[1], tx[0]);
+            const fontHeight = Math.hypot(tx[2], tx[3]);
+            if (fontHeight <= 0) continue;
+            const span = document.createElement("span");
+            span.textContent = item.str;
+            span.style.position = "absolute";
+            span.style.left = `${tx[4]}px`;
+            span.style.top = `${tx[5] - fontHeight}px`;
+            span.style.fontSize = `${fontHeight}px`;
+            span.style.fontFamily = "sans-serif";
+            span.style.lineHeight = "1";
+            span.style.whiteSpace = "pre";
+            span.style.transformOrigin = "0% 100%";
+            if (angle !== 0) span.style.transform = `rotate(${angle}rad)`;
+            frag.appendChild(span);
+          }
+          textLayerEl.replaceChildren(frag);
+        }
+      } catch (e) {
+        if (disposed || generation !== generationRef.current) return;
+        const name = (e as { name?: string })?.name;
+        if (name === "RenderingCancelledException") return;
+        onError(e instanceof Error ? e.message : "PDF 를 그리지 못했습니다.");
+      }
+    })();
+
+    return () => {
+      disposed = true;
+      cancelRender?.();
+    };
+  }, [url, page, zoom, fitWidth, fitHeight, onRendered, onError]);
+
+  return (
+    <div className="relative inline-block">
+      <canvas
+        ref={canvasRef}
+        data-testid="pdf-page-canvas"
+        data-page={page}
+        className="block bg-white shadow-sm"
+        style={size ? { width: size.width, height: size.height } : undefined}
+      />
+      <div ref={textLayerRef} className="pdf-text-layer" data-testid="pdf-text-layer" />
+    </div>
+  );
+}
+
+/**
+ * 페이지 썸네일 — 목차용 작은 미리보기. 화면에 보일 때만 그린다(IntersectionObserver).
+ * 99쪽짜리 자료도 보이는 몇 장만 렌더하므로 가볍다. 문서는 같은 URL 캐시를 쓴다.
+ */
+export function PdfPageThumbnail({
+  url,
+  page,
+  width,
+  active,
+  label,
+  onSelect,
+}: {
+  url: string;
+  page: number;
+  width: number;
+  active: boolean;
+  label: string;
+  onSelect: () => void;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const holderRef = useRef<HTMLButtonElement | null>(null);
+  // IntersectionObserver 가 없는 환경(테스트)은 처음부터 보이는 것으로 둔다 — 효과 안에서
+  // 동기 setState 를 하지 않는다.
+  const [visible, setVisible] = useState(() => typeof IntersectionObserver === "undefined");
+  const [drawn, setDrawn] = useState(false);
+
+  useEffect(() => {
+    const el = holderRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) setVisible(true);
+      },
+      { rootMargin: "200px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible || drawn) return;
+    let disposed = false;
+    (async () => {
+      try {
+        const doc = await loadPdf(url);
+        const pdfPage = await doc.getPage(page);
+        const base = pdfPage.getViewport({ scale: 1 });
+        const viewport = pdfPage.getViewport({ scale: width / base.width });
+        const canvas = canvasRef.current;
+        const ctx = canvas?.getContext("2d");
+        if (!canvas || !ctx || disposed) return;
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        await pdfPage.render({ canvasContext: ctx, viewport }).promise;
+        if (!disposed) setDrawn(true);
+      } catch {
+        // 썸네일은 실패해도 라벨만 남긴다.
+      }
+    })();
+    return () => {
+      disposed = true;
+    };
+  }, [visible, drawn, url, page, width]);
+
+  return (
+    <button
+      ref={holderRef}
+      type="button"
+      onClick={onSelect}
+      aria-current={active ? "page" : undefined}
+      className={
+        "block w-full text-left rounded-lg p-1.5 mb-1.5 border-[1.5px] " +
+        (active ? "border-red bg-red-bg" : "border-transparent hover:bg-grey-100")
+      }
+    >
+      <canvas
+        ref={canvasRef}
+        data-testid={`pdf-thumb-${page}`}
+        className="block w-full bg-white border border-grey-200 rounded"
+        style={{ aspectRatio: drawn ? undefined : "16 / 9" }}
+      />
+      <div className={"text-[11px] mt-1 " + (active ? "text-red font-bold" : "text-grey-500")}>{label}</div>
+    </button>
+  );
+}

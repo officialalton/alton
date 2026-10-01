@@ -1,0 +1,528 @@
+{
+ "taskId": "rewrite-018",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-08-044",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-044",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 43,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Assunta",
+      "Karim"
+     ],
+     "nameCultures": [
+      "italian",
+      "arabic_levantine"
+     ],
+     "locale": "Bologna",
+     "setting": "a ship's galley",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "when a visitor arrives and sees what the family does not",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a ship's galley in Bologna; a mother-in-law and a new bride when a visitor arrives and sees what the family does not"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Years later, Karim would still describe the kitchen of that Bologna trattoria as a ship's galley: narrow, brass-railed, every pot hung where the sway of a sea might have flung it. He had come only to deliver flour, and he lingered in the doorway longer than he should have. Assunta was correcting her new daughter-in-law's pasta for the third time: too thick, too dry, too hurried. Each time, her voice carried out to the long table where the family sat, and each time an uncle laughed and called the old woman a tyrant. The bride rolled the dough again. From where Karim stood, though, he could see what the table could not. Before every sharp word, Assunta tipped a little water from her own glass into the bride's bowl, and the dough, which had been cracking at the edges, began to hold. Every correction was a rope thrown, not a blow. When the plates finally went out, the uncle praised the pasta and asked which of the two women had made it. Assunta named the bride without hesitation, and Karim left the sacks by the stove.",
+    "question": "As used in the text, the phrase “a rope thrown, not a blow” most nearly suggests that Assunta's corrections are",
+    "options": [
+     "quiet help for the bride disguised as scolding.",
+     "a harsh lesson that the bride will later come to be grateful for.",
+     "a performance staged mainly to amuse the relatives at the table.",
+     "a way of reminding the bride who truly controls the kitchen."
+    ],
+    "correct_letter": "A",
+    "explanation": "정답은 A이다. 가족에게는 날카로운 꾸중으로 들리지만, Karim은 Assunta가 꾸중할 때마다 자기 잔의 물을 부어 갈라지던 반죽을 살려 주는 모습을 본다. 또한 마지막에 Assunta가 칭찬을 며느리에게 돌리는 장면이 이 꾸중이 실제로는 도움이었음을 뒷받침한다. B는 미래의 감사를 지문 근거 없이 상정하고, C는 삼촌의 웃음을 Assunta의 의도로 착각한 것이며, D는 '폭군'이라는 가족의 시선만 받아들인 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "tender"
+   ],
+   "devices": [
+    "metaphor",
+    "dramatic irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-079",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-079",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 78,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Esperanza",
+      "Genevieve"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "french"
+     ],
+     "locale": "Galicia",
+     "setting": "a hillside terrace",
+     "relationship": "two night-shift coworkers",
+     "conflict": "when two traditions have to share one table",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a hillside terrace in Galicia; two night-shift coworkers when two traditions have to share one table"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We had argued for weeks about the table. I wanted the terrace laid the Galician way for my mother's visit, with octopus on wooden plates and bread torn by hand; Genevieve insisted on the long French lunch her grandmother used to serve, course after careful course. Both of us worked nights at the hospital, and we fought the way tired people fight, in clipped sentences over cold coffee at seven in the morning. I kept a list of every dish she rejected, and I was proud of how long it had grown. On the morning itself, both mothers arrived early. I found them in the kitchen, mine rolling crêpe batter far too thick and hers slicing octopus with a bread knife, each doing the other's dish badly and neither apologizing. I touched the list in my pocket. Seventeen items, I recalled, numbered in my neatest hand. We set out both kinds of plates, and Genevieve, catching my eye across the terrace, mouthed the number seventeen, which meant she had found it on the dresser days ago. Below us the vines dripped from the night's rain.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From cheerful anticipation to nervous unease about how the two mothers will get along",
+     "From cool detachment to lingering resentment over the many dishes Genevieve rejected",
+     "From tense rivalry to quiet sorrow about the weeks the two women lost to arguing",
+     "From weary irritation to sheepish humor about the narrator's own grievance"
+    ],
+    "correct_letter": "D",
+    "explanation": "정답은 D이다. 앞부분은 야간 근무에 지친 두 사람이 짧은 말로 다투고 화자가 거절당한 요리 목록을 자랑스럽게 여기는 짜증 섞인 어조다. 이후 두 어머니가 서로의 요리를 서툴게 만드는 장면, 그리고 Genevieve가 이미 목록을 알고 숫자를 입 모양으로 보내는 장면에서 화자는 자신의 집착을 겸연쩍게 웃어넘기게 된다. B는 목록을 만지는 장면을 원한으로 오해한 것이고, C는 슬픔의 근거가 없으며, A는 처음의 어조를 즐거운 기대로 잘못 본 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "weary",
+    "wry"
+   ],
+   "devices": [
+    "tone shift",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-080",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-080",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 79,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Haoran",
+      "Jiayi"
+     ],
+     "nameCultures": [
+      "chinese",
+      "chinese"
+     ],
+     "locale": "Taipei",
+     "setting": "a stone bridge",
+     "relationship": "an author and her translator",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a stone bridge in Taipei; an author and her translator about an ending that nobody wants to admit"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Rain beaded on the manuscript pages Jiayi had carried to the stone bridge, and she shielded them with her sleeve while Haoran read. He had translated four of her novels and liked to say that he read her endings first, the way some people taste the sauce before the noodles. Tonight he lingered over the opening chapters, laughing aloud at a scene in a fish market and quoting a line about a stubborn aunt back to her twice. Jiayi teased him for performing, and he bowed to the lanterns as if they were an audience. When he reached the last pages, he read them quickly, squared the stack, and began to tell her about a noodle shop that had opened behind the temple. She waited for the joke about the sauce. He offered her the pages instead, holding them by the corners so the rain would not spot the final chapter, the one she had rewritten six times. Traffic hissed over the wet stones. Jiayi tucked the manuscript under her coat and asked, in an even voice, whether the shop stayed open late.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From playful banter to a subdued sense that the ending has failed",
+     "From uneasy suspicion to relief once Haoran handles the final chapter with care",
+     "From quiet sadness to renewed hope that the ending can be improved once again",
+     "From polite formality to barely concealed anger at Haoran's empty compliments"
+    ],
+    "correct_letter": "A",
+    "explanation": "정답은 A이다. 앞부분에서 Haoran은 시장 장면에 웃고 등불에 절하는 등 두 사람의 대화가 장난스럽다. 그러나 그가 결말을 빠르게 읽고 평소의 '소스' 농담 없이 화제를 국수 가게로 돌리자, Jiayi는 결말에 문제가 있음을 조용히 알아차리고 담담한 목소리로 대답한다. B는 원고를 조심스럽게 다루는 동작을 칭찬으로 오해한 것이고, D는 Jiayi의 차분한 반응을 분노로 과장한 것이며, C는 앞부분이 슬펐다는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "subdued"
+   ],
+   "devices": [
+    "tone shift",
+    "implication"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-087",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-087",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 86,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Nova",
+      "Yona"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "indigenous_american"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a seed-saving cooperative",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "when someone returns after years without explaining",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a seed-saving cooperative in Albuquerque; a priest and a lapsed parishioner when someone returns after years without explaining"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Albuquerque in October smells of roasting chiles, and the seed-saving cooperative behind my church smells of paper envelopes and dust. I was labeling squash seed there when Nova walked in, eleven years after she had stopped coming to Mass, and asked whether we still needed volunteers. Yona, who runs the cooperative and has opinions about everyone, raised her eyebrows at me over the scale. I asked Nova nothing beyond whether she knew beans from squash. She said she had grown up sorting both. I have heard a great many confessions, and I have come to distrust the long ones; the shortest are often followed, much later, by the true account. So I let the afternoon pass in envelopes. Nova sorted the speckled bean seed from the plain faster than I could, pausing only once, over a packet labeled in her late grandmother's slanted script, which she set aside without comment. I did not ask about it. By evening the long table was covered in small brown packets, and I found that she had labeled each of hers in a hand very much like the one on the packet she had set aside.",
+    "question": "Which choice best describes the narrator's attitude toward Nova's return?",
+    "options": [
+     "Wary of her motives and quietly determined to uncover why she left the church",
+     "Disapproving of her absence but too courteous to say so in front of Yona",
+     "Patient with her silence and observant of what her actions may be revealing",
+     "Overjoyed by her return and hopeful that she will soon attend Mass again"
+    ],
+    "correct_letter": "C",
+    "explanation": "정답은 C이다. 화자는 Nova에게 콩과 호박 씨앗을 구분할 줄 아는지만 묻고 이유를 캐묻지 않으며, 긴 고백보다 나중에 오는 진실을 믿는다고 말한다. 동시에 할머니의 글씨가 적힌 봉투를 따로 두는 모습과 비슷한 필체로 쓴 라벨을 세심히 관찰한다. A는 관찰을 의심으로 오해한 것이고, B는 눈썹을 치켜든 사람이 화자가 아니라 Yona라는 점을 놓쳤으며, D는 미사 복귀에 대한 기대의 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "patient",
+    "contemplative"
+   ],
+   "devices": [
+    "first-person narration",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-088",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-088",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 87,
+     "genre": "personal_essay",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Tatiana",
+      "Lucia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "spanish_iberian"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a rural post office",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a rural post office in Tbilisi; an elder and a restless apprentice while hiding a small failure"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Smell of wet stamps and coal smoke filled the little rural post office outside Tbilisi every winter morning, and Lucia, nineteen and certain she was meant for somewhere larger, breathed it like a sentence she was serving. Tatiana had run the counter for thirty years. She was slow with the register, slower with gossip, and she kept her ledgers in an order no one else could follow, which Lucia mocked to anyone who would listen. That week Lucia misrouted a parcel of medicine to the wrong village and hid the receipt inside one of those ledgers, sick with dread. Tatiana, who opened every ledger every evening, said nothing about it. On Thursday she announced that her knees needed the mountain air and took the old van out alone over the frozen pass, returning at dusk with a basket of walnuts and, folded inside her glove, a signature from the right village. I have since come to think that her famous slowness was mostly a decision about what not to notice in public. Lucia stayed four more years, and in time she, too, learned to keep the ledgers in an order no one else could follow.",
+    "question": "Which choice best describes the narrator's attitude toward Tatiana?",
+    "options": [
+     "Critical of her for hiding a serious mistake from the villagers who were affected",
+     "Amused by her slow and old-fashioned habits behind the post office counter",
+     "Sympathetic to her but more interested in Lucia's restless wish to leave the valley",
+     "Appreciative of the tact with which she quietly repairs Lucia's mistake"
+    ],
+    "correct_letter": "D",
+    "explanation": "정답은 D이다. 화자는 Tatiana가 실수를 알고도 아무 말 없이 무릎 핑계를 대고 직접 고개를 넘어 서명을 받아 온 일을 서술하고, 그녀의 느림이 남의 일을 공개적으로 지적하지 않으려는 선택이었다고 평가한다. 마지막에 Lucia가 같은 장부 방식을 익혔다는 내용도 화자의 존중을 뒷받침한다. B는 Lucia의 조롱을 화자의 태도로 착각한 것이고, A는 비판의 근거가 없으며, C는 화자의 초점이 Tatiana에게 있다는 점을 놓쳤다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "admiring"
+   ],
+   "devices": [
+    "retrospective narration",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-094",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-094",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 93,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Jens",
+      "Marlon"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "caribbean"
+     ],
+     "locale": "Bergen",
+     "setting": "a bookbinder's workshop",
+     "relationship": "best friends after a move",
+     "conflict": "while arguing about something smaller than the real quarrel",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a bookbinder's workshop in Bergen; best friends after a move while arguing about something smaller than the real quarrel"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Bergen had given Jens a new job and a damp apartment, and when I visited, he brought me straight to the bookbinder's workshop where he now spent his days. We argued within the hour about glue. He said the animal glue was better; I said he only liked it because the old man who owned the shop liked it. Neither of us raised the week's notice he had given me before he left, or the letters I had not answered since. He pressed a spine between two boards and turned the screw, and I watched him check the binding by letting the book fall open on the bench, gently, the way a doctor lifts a wrist. Our friendship, I thought, had become a book sewn with too few stitches. Later he showed me a ledger he had rebound for a shipping firm, its pages lying flat under the lamp, and told me the old one had looked fine on the shelf for decades and split the first time anyone needed to read it straight through. I said nothing about glue after that.",
+    "question": "As used in the text, the phrase “a book sewn with too few stitches” most nearly suggests that the friendship",
+    "options": [
+     "looks whole but may not survive an honest reckoning.",
+     "has been permanently damaged by the friends' argument over glue.",
+     "is growing sturdier as the two friends share work in the shop.",
+     "matters chiefly for the memories the friends once recorded together."
+    ],
+    "correct_letter": "A",
+    "explanation": "정답은 A이다. 두 사람은 이사 통보와 답장하지 않은 편지라는 진짜 문제는 꺼내지 않고 접착제로만 다투는데, 이는 겉으로만 유지되는 관계를 보여 준다. 이어 Jens가 수십 년간 멀쩡해 보이다 처음으로 끝까지 읽으려 하자 갈라진 장부 이야기를 하면서, 실밥이 부족한 책이라는 비유가 진지한 대면에 견디지 못할 수 있는 관계를 뜻함이 분명해진다. B는 사소한 접착제 다툼을 결정적 손상으로 본 것이고, C와 D는 지문의 긴장감과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "rueful",
+    "restrained"
+   ],
+   "devices": [
+    "metaphor",
+    "analogy"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-095",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-095",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 94,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Ephraim",
+      "Kamal"
+     ],
+     "nameCultures": [
+      "english",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Ohio",
+     "setting": "a tea plantation",
+     "relationship": "a coach and a benched star",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a tea plantation in Ohio; a coach and a benched star when old loyalties collide with new ones"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Sit this match out, Ephraim said, and did not look up from his list. Kamal had carried the plantation's baseball nine for four summers, ever since the old owner had laid out a diamond between the tea terraces of his Ohio estate to keep the pickers' sons from idleness. The old owner had also paid for Ephraim's schooling and, before he died, asked him to look after the boy. Now a new manager had come from Cincinnati with nephews of his own to play, and it was the new manager who signed Ephraim's wages. Kamal sat on the bench beneath the drying sheds without complaint, which was worse. To the town, the choice looked like simple arithmetic: one star against a household. To Ephraim it was a rope pulled from both ends. He penciled the nephews into the order, erased one, wrote him in again until the paper thinned. In the fourth inning a nephew struck out, and the crowd's noise drifted up the hill like steam off a kettle, while Ephraim kept his eyes on the list as if it might still change.",
+    "question": "As used in the text, the phrase “a rope pulled from both ends” most nearly suggests that Ephraim",
+    "options": [
+     "has lost control of the team to the new manager and his nephews.",
+     "is torn between two loyalties making opposing demands.",
+     "is reluctant to choose between players whose skills seem equal.",
+     "has quietly decided to defy the new manager on Kamal's behalf."
+    ],
+    "correct_letter": "B",
+    "explanation": "정답은 B이다. Ephraim은 학비를 대 주고 Kamal을 부탁한 옛 주인에 대한 의리와, 자신의 임금을 주는 새 관리인에 대한 의무 사이에 놓여 있다. 타순을 썼다 지우기를 반복하는 모습도 양쪽에서 당겨지는 긴장을 보여 준다. A는 결정을 내리는 사람이 여전히 Ephraim이라는 점을 놓쳤고, C는 갈등을 실력 비교로 잘못 보았으며, D는 그가 결국 조카들을 타순에 넣었다는 점과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "somber"
+   ],
+   "devices": [
+    "metaphor",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-08-098",
+   "task": "rewrite-018",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-08-098",
+    "batchId": "lit40-medium-08",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 97,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Ottilie",
+      "Grant"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "english"
+     ],
+     "locale": "Hamburg",
+     "setting": "a snowed-in cabin",
+     "relationship": "two strangers sharing a delay",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a snowed-in cabin in Hamburg; two strangers sharing a delay over a borrowed object never returned"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Snow keeps no calendar. So I learned in the winter of my twentieth year, when the coach from Hamburg stalled beside a forester's cabin and two of us, strangers, were left to wait out the drifts. Grant was an Englishman with a cough and a great many opinions, and he called me Miss Ottilie with elaborate care, as though my name were fragile. He trimmed the lamp each evening with a small pocketknife and then set it on the sill, apart from his other things, never in his pocket. On the second night he admitted that it was not his; a woman on a ferry had lent it to him eleven years before, and he had never found her again. That knife, he said, had become a debt that gathered interest. He told me he had once nearly mailed it to the ferry company and had stopped at the post office door, because returning it to a stranger at a desk seemed worse than keeping it. By morning the drifts had reached the shutters, and he asked, too casually, whether I ever traveled by ferry.",
+    "question": "As used in the text, the phrase “a debt that gathered interest” most nearly suggests that the knife",
+    "options": [
+     "weighs on Grant more heavily with each year it goes unreturned.",
+     "has grown more valuable as a keepsake from the woman on the ferry.",
+     "reminds Grant of a sum of money he still owes to the ferry company.",
+     "has become a tool Grant depends on more and more during his travels."
+    ],
+    "correct_letter": "A",
+    "explanation": "정답은 A이다. Grant는 칼을 주머니가 아니라 창턱에 따로 두며 자기 물건으로 여기지 않고, 반납하려다 망설였던 일과 화자에게 배를 타는지 묻는 모습에서 아직도 돌려줄 길을 찾고 있음이 드러난다. 따라서 '이자가 붙는 빚'은 돌려주지 못한 세월만큼 커지는 마음의 부담을 뜻한다. B는 기념품으로서의 가치로 오해한 것이고, C는 비유를 실제 금전 채무로 읽은 것이며, D는 칼을 따로 두는 행동과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "gently humorous"
+   ],
+   "devices": [
+    "metaphor",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-08-084",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

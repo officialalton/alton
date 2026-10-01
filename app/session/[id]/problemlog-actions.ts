@@ -1,6 +1,7 @@
 "use server";
 
 import { requireUser as requireAuthenticatedUser } from "@/lib/auth";
+import { loadLegacyProblemAnswers } from "@/lib/legacy-problem-answers";
 
 // (2026-08-30 R2 정정) 이 로컬 requireUser()는 이름만 같을 뿐 @/lib/auth의
 // 실제 requireUser()와 무관하게 auth.getUser()만 확인해왔다 — 계정 상태
@@ -40,11 +41,10 @@ export async function retryMcAttempt(
 ) {
   const { supabase, userId } = await requireUser();
 
-  const { data: problem } = await supabase
-    .from("problems")
-    .select("correct_index, explanation")
-    .eq("id", problemId)
-    .single();
+  // RLS 로 볼 수 있는 문제인지 확인 뒤 정답·해설은 서버 admin 으로(컬럼 권한 회수, 20261904000000).
+  const { data: visible } = await supabase.from("problems").select("id").eq("id", problemId).single();
+  if (!visible) throw new Error("문제를 찾을 수 없습니다.");
+  const problem = (await loadLegacyProblemAnswers([problemId])).get(problemId);
   if (!problem) throw new Error("문제를 찾을 수 없습니다.");
 
   const prior = await countRetryAttempts(supabase, userId, problemId);
@@ -54,7 +54,7 @@ export async function retryMcAttempt(
     throw new Error("이미 채점이 끝난 문제입니다.");
   }
 
-  const correct = problem.correct_index === selectedIndex;
+  const correct = problem.correctIndex === selectedIndex;
   const attemptNumber = wrongSoFar + 1;
   const done = correct || attemptNumber >= 3;
 
@@ -71,7 +71,7 @@ export async function retryMcAttempt(
     correct,
     attemptNumber,
     done,
-    correctIndex: done ? problem.correct_index : null,
+    correctIndex: done ? problem.correctIndex : null,
     explanation: done ? problem.explanation : null,
   };
 }
@@ -83,12 +83,9 @@ async function retryOnceGraded(
 ) {
   const { supabase, userId } = await requireUser();
 
-  const { data: problem } = await supabase
-    .from("problems")
-    .select("explanation, format")
-    .eq("id", problemId)
-    .single();
-  if (!problem) throw new Error("문제를 찾을 수 없습니다.");
+  const { data: visible } = await supabase.from("problems").select("id, format").eq("id", problemId).single();
+  if (!visible) throw new Error("문제를 찾을 수 없습니다.");
+  const answer = (await loadLegacyProblemAnswers([problemId])).get(problemId);
 
   const { error } = await supabase.from("session_problem_attempts").insert({
     session_id: null,
@@ -101,7 +98,7 @@ async function retryOnceGraded(
 
   return {
     explanation:
-      problem.format === expectedFormat ? (problem.explanation as string) : null,
+      visible.format === expectedFormat ? (answer?.explanation ?? "") : null,
   };
 }
 

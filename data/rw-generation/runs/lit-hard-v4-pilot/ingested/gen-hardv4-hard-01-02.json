@@ -1,0 +1,662 @@
+{
+ "taskId": "gen-hardv4-hard-01-02",
+ "passed": [
+  {
+   "candidateId": "hardv4-hard-01-012",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-012",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "tone_or_mood",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 11,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Vesna",
+      "Mehrnaz"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "persian_central_asian"
+     ],
+     "locale": "Tehran",
+     "setting": "a ship's galley",
+     "relationship": "a mother-in-law and a new bride",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a ship's galley in Tehran; a mother-in-law and a new bride about an object that belonged to someone gone"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_tone_or_mood_hard_v4"
+   },
+   "g": {
+    "passage": "I was told the galley came off a Caspian ferry, bolted piece by piece into the back of my mother-in-law's restaurant in Tehran. Vesna liked to say the stove had crossed more water than she had. Three burners. One drawer that stuck. A brass ladle with a dent near the lip, used for soup, for rice, for knocking the drawer loose. Its hook had been put up by my husband's brother the year before we buried him. On my first morning I reached for the ladle, and she moved a wooden spoon into my hand before my fingers closed. Later, washing up, I watched her run her thumb along the dent twice before hanging it on its hook, apart from the others. Neither of us mentioned it. When I came in the next week, the ladle was lying on my side of the counter, beside the onions I was supposed to cut. Vesna was at the far burner with her back to me, stirring with the wooden spoon.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Playful and lighthearted toward the odd features of an old kitchen",
+     "Guarded and resentful toward a newcomer handling the family's things",
+     "Dry and quietly attentive toward a loss the two women share",
+     "Wistful and reflective toward the long history of the restaurant"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분은 '세 개의 화구, 잘 안 열리는 서랍' 같은 건조한 사실 나열과 농담조 문장으로 겉 어조를 만든다. 그러나 중간에 Vesna가 국자의 찌그러진 부분을 엄지로 두 번 쓰다듬고 따로 걸어 두는 동작, 그리고 그 고리를 세상을 떠난 시동생이 달았다는 정보가 상실을 조용히 드러낸다. 끝에서 국자가 화자 쪽 조리대에 놓여 있는 것은 그 상실을 화자와 나누려는 뜻이므로 C가 정답이다. A는 겉 층만 잡았고, B는 처음의 거리 두기를 적대로 뒤집어 읽어 마지막 동작을 설명하지 못하며, D는 대상을 식당의 역사 전체로 넓혔다."
+   },
+   "notes": [],
+   "tone": [
+    "dry",
+    "restrained",
+    "tender"
+   ],
+   "devices": [
+    "understatement",
+    "juxtaposition",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-013",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-013",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "relationship_between_characters",
+    "genre": "short_story",
+    "seed": {
+     "index": 12,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Annika",
+      "Aigerim"
+     ],
+     "nameCultures": [
+      "german_austrian",
+      "persian_central_asian"
+     ],
+     "locale": "Hamburg",
+     "setting": "a quiet library",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a quiet library in Hamburg; a farmer and a surveyor from the city over whether to sell a shared inheritance"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_hard_v4"
+   },
+   "g": {
+    "passage": "Two pencils, sharpened to the same length, lay beside the survey map when Aigerim arrived at the reading room. Annika stood and pulled out the chair across from her own. Thank you for coming into the city, she whispered, as if they were strangers meeting at a bank. Aigerim kept her coat on and answered that it was kind of her to arrange the room. Between them the map showed the farm their uncle had left them: forty hectares, a barn, the creek marked in blue ink. Annika turned the map so the creek faced Aigerim. Under it lay a folder. Inside were tax receipts for six years, each stamped paid, each signed in Annika's narrow hand and none in Aigerim's. Aigerim read them slowly and did not look up. Outside the tall windows of the Hamburg library a tram went past. When the buyer's offer came out of the folder last, Annika laid one of the pencils across it, capped her pen, and slid the offer, unsigned, back inside.",
+    "question": "Based on the text, which choice best describes the relationship between Annika and Aigerim?",
+    "options": [
+     "Distant co-heirs who meet only to settle a legal matter in a polite way",
+     "Co-owners in which Annika is steering Aigerim toward accepting the buyer's offer",
+     "Co-owners in which Aigerim has long supported Annika's life in the city",
+     "Co-owners in which Annika has quietly carried costs to keep Aigerim's farm intact"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분의 정중한 인사와 낯선 사람 같은 말투는 두 사람이 서먹한 공동 상속인일 뿐이라는 표면 관계(A)를 보여 준다. 그러나 중간의 세금 영수증 6년치가 모두 Annika의 서명뿐이라는 점은 비용을 누가 치러 왔는지 알려 준다. 끝에서 Annika가 매수 제안서를 서명하지 않은 채 다시 넣는 동작은 농장을 지키려는 조용한 양보이므로 D가 정답이다. B는 지도와 제안서가 나오는 앞 장면만 반영했고, C는 지원의 방향을 뒤집었다."
+   },
+   "notes": [],
+   "tone": [
+    "formal",
+    "restrained"
+   ],
+   "devices": [
+    "characterization",
+    "juxtaposition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-014",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-014",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 13,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Marlon",
+      "Shanice"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Kingston",
+     "setting": "a school music room",
+     "relationship": "a boy and the old man who sells him fish",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a school music room in Kingston; a boy and the old man who sells him fish while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_hard_v4"
+   },
+   "g": {
+    "passage": "Three rules hung over the music-room door: no food, no running, no instruments without permission. Shanice broke the first one every Friday, when Mr. Marlon came to the window with a newspaper parcel of sprats and said, Good afternoon, young lady, exactly as he said it to every customer on the street. She paid him in coins counted out on the sill. He counted them again, slowly, and each time handed one back, explaining that his scale was off today. In December she gave him a harmonica wrapped in foil. He had told her once that he played as a boy; she had not asked what he played. He turned it over, blew a thin note through the wrong end, and laughed loudly enough that the choir girls looked up. The next Friday the parcel was larger. He set it on the sill, took no coins at all, and stood a while longer than usual, the harmonica showing from his shirt pocket, still in its foil.",
+    "question": "Based on the text, which choice best describes Marlon's relationship with Shanice?",
+    "options": [
+     "He treats her formally while quietly bearing small costs on her behalf",
+     "He keeps a polite, businesslike distance from her as from his other customers",
+     "He is amused by her mistaken gift and gently teases her about it",
+     "He depends on her weekly purchases to keep his small trade going"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분의 'young lady'라는 공식 인사는 모든 손님에게 똑같이 하는 말이라 표면적으로는 B 같은 거래 관계로 읽힌다. 그러나 중간에 그가 매번 동전 하나를 돌려주고, 선물을 받은 뒤 다음 주에는 더 큰 꾸러미를 주며 돈을 받지 않는 것은 그가 조용히 비용을 떠안는다는 뜻이다. 끝에 잘못된 선물인 하모니카를 포장째 주머니에 넣고 있는 모습까지 겹치면 A가 정답이다. C는 웃음이 나온 한 장면만 반영했고, D는 의존의 방향을 뒤집었다."
+   },
+   "notes": [],
+   "tone": [
+    "formal",
+    "understated",
+    "warm"
+   ],
+   "devices": [
+    "characterization",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-015",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-015",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "relationship_between_characters",
+    "genre": "drama",
+    "seed": {
+     "index": 14,
+     "genre": "drama",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Sunja",
+      "Samira"
+     ],
+     "nameCultures": [
+      "korean",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "an old cinema projection booth",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "about the last item in a house being emptied",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "an old cinema projection booth in Marrakesh; a mother and a daughter planning a wedding about the last item in a house being emptied"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_hard_v4"
+   },
+   "g": {
+    "passage": "Marrakesh. An old cinema projection booth, late afternoon. Boxes are stacked to the ceiling everywhere except beside the projector. SAMIRA holds a clipboard. SUNJA holds a reel of film in a dented case.\nSAMIRA: Madam, the caterer needs the deposit by Thursday.\nSUNJA: Then the caterer shall have it, Mademoiselle.\n(Both nearly smile. Neither does.)\nSAMIRA: The movers come at nine. Everything goes. The projector is already listed for sale.\nSUNJA: And this? (She lifts the reel.)\nSAMIRA: The first film you ever ran here. The buyer asked for it too.\n(SUNJA sets an envelope on the clipboard. SAMIRA opens it: the deposit, in cash, and a receipt from the projector's buyer, dated yesterday.)\nSAMIRA: You sold it already.\nSUNJA: Thursday is close.\n(SAMIRA looks at the reel for a long moment. She tears off a strip of tape, writes KEEP on it, and presses it onto the case. She hands the reel back to her mother and crosses the projector off her list.)",
+    "question": "Based on the text, which choice best describes the relationship between Sunja and Samira?",
+    "options": [
+     "Two women whose formal titles reflect a strained and distant family bond",
+     "Two women whose playful formality covers quiet sacrifices made for each other",
+     "Two women whose talk about the reel reveals a clash over emptying the house",
+     "Two women whose wedding plans show the mother relying on her daughter's money"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 서로를 'Madam', 'Mademoiselle'라고 부르는 것은 거리감 있는 관계(A)처럼 보이지만 둘 다 웃음을 참는 지문은 그것이 장난스러운 격식임을 암시한다. 중간에 Sunja가 영사기를 이미 팔아 결혼식 보증금을 현금으로 내놓는 것은 어머니가 조용히 비용을 치렀다는 단서다. 끝에서 Samira가 릴에 KEEP 테이프를 붙여 어머니에게 돌려주는 동작은 딸 쪽의 양보이므로, 서로를 위한 희생을 말한 B가 정답이다. C는 릴을 둘러싼 한 장면만 반영했고, D는 돈이 오가는 방향을 뒤집었다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "restrained",
+    "tender"
+   ],
+   "devices": [
+    "dramatic irony",
+    "stage directions",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-016",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-016",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 15,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Dario",
+      "Camila"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a kite-maker's yard",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a kite-maker's yard in Lima; an old teacher and a former pupil over a promise made to a child"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_symbolism_hard_v4"
+   },
+   "g": {
+    "passage": "Paper rattled on the drying lines, and the yard smelled of flour paste. Dario, who had taught half the neighborhood to read before he took up kites, handed Camila a spool of string and told her to measure out thirty meters for the red one. She measured it, cut it, and tied it to the frame the way he had shown her when she was nine. He tested the knot with one tug and nodded. Years ago he had promised the boy next door a kite that would clear the church tower, and the boy had moved away before it was built. The red kite was for him; Dario had kept the address in a tin. When Camila came back that evening, the boxed kite stood by the gate, and Dario was winding the leftover string onto the empty spool by hand, slowly, end to end, instead of throwing it out as he did with every other scrap. He set the spool in her palm and closed her fingers over it.",
+    "question": "In the text, the string most likely represents",
+    "options": [
+     "the practical skill of measuring and cutting materials for a kite",
+     "the craft knowledge that Dario passed to Camila when she was young",
+     "a long-kept commitment that Dario now entrusts to Camila's care",
+     "the repair of a bond between teacher and pupil after years apart"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분에서 실은 길이를 재고 자르는 재료일 뿐이다(A). 중간에 그 실이 오래전 아이에게 한 약속의 연이 되고, 끝에서 Dario가 다른 자투리는 버리면서 남은 실만은 손으로 감아 Camila의 손에 쥐여 준다. 약속을 지키는 일과 그것을 다음 사람에게 넘기는 동작을 함께 설명하는 것은 C뿐이다. B는 어릴 때 배운 기술이라는 앞 맥락만 설명하고, D는 두 사람 사이에 멀어진 적이 있다는 근거가 없어 마지막 동작의 의미를 잘못 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "patient"
+   ],
+   "devices": [
+    "symbolism",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-017",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-017",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 16,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Wilhelmina",
+      "Aroha"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Maui",
+     "setting": "a seaside promenade",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "after a teacher's remark that changed everything",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a seaside promenade in Maui; a young apprentice and a master carpenter after a teacher's remark that changed everything"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 120,
+     "max": 180
+    },
+    "recipeId": "inferences_lit_symbolism_hard_v4"
+   },
+   "g": {
+    "passage": "What does a carpenter owe a bench that has outlived its builder? Wilhelmina asked that once, years ago, and Aroha had only handed her a block plane. That morning on the Maui promenade the plane did its ordinary work: Aroha shaved the warped slats of the old benches facing the harbor, and Wilhelmina swept the curls into a bucket. At the sixth bench Aroha stopped. Carved under the armrest were initials and a date, worn soft by salt. She ran the plane along the seat but lifted it each time it neared the letters, leaving a narrow strip untouched, a little higher than the rest. Wilhelmina's old shop teacher had told her she would never be careful enough for fine work, and she had repeated this to Aroha on her first day. At noon Aroha wiped the blade, set the plane in Wilhelmina's hands, and walked to the seventh bench without looking back.",
+    "question": "In the text, the block plane most likely represents",
+    "options": [
+     "the routine labor of repairing benches along the harbor",
+     "the authority that Aroha holds as the master of the work",
+     "the mending of Wilhelmina's confidence after her teacher's remark",
+     "a careful judgment about what to keep, now passed to Wilhelmina"
+    ],
+    "correct_letter": "D",
+    "explanation": "대패는 처음에 벤치 판을 깎는 평범한 도구로 등장한다(A). 중간에 Aroha가 새겨진 이니셜 근처에서 대패를 들어 올려 그 부분만 남겨 두면서, 대패는 무엇을 깎고 무엇을 남길지 판단하는 일과 연결된다. 끝에서 Aroha가 그 대패를 Wilhelmina의 손에 쥐여 주고 돌아보지 않고 떠나는 동작은 그 판단을 맡긴다는 뜻이므로 D가 정답이다. B는 스승의 권위라는 앞 맥락만 설명하고, C는 선생님의 말을 근거로 자신감 회복으로 읽었지만 대패를 다루는 동작이 그 해석과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "contemplative",
+    "restrained"
+   ],
+   "devices": [
+    "symbolism",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-019",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-019",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 18,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Isaiah",
+      "Mattie"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a laundromat",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a laundromat in the Mississippi Delta; a mother and her son leaving for college over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "g": {
+    "passage": "Four loads, two dryers, one hour: Mattie had it planned before they left the house. Isaiah carried the baskets because he was leaving for Jackson in the morning and said somebody ought to remember how. Between washers they talked about meal plans, dorm sheets, the price of quarters in a college town. Twice he began a sentence with Daddy used to, and twice Mattie asked whether he had packed the extension cord. Their talk went round the room like a sock caught against the glass, turning and turning in the same small arc. When the buzzer sounded, Mattie folded his shirts and set aside one that was not his, a faded work shirt with a name patch over the pocket, and laid it on top of his stack. She smoothed the patch flat with her thumb before she closed the basket.",
+    "question": "As used in the text, the phrase “like a sock caught against the glass” most nearly suggests that the conversation",
+    "options": [
+     "is weighed down by the many chores still left to finish",
+     "is held within the narrow limits of the small laundromat",
+     "keeps circling near one subject that stays close but unspoken",
+     "repeats the same practical topics in a dull, routine manner"
+    ],
+    "correct_letter": "C",
+    "explanation": "비유 앞에서 Isaiah가 아버지 이야기를 꺼낼 때마다 Mattie가 연장선 이야기로 화제를 돌리는 반복 행동이 나온다. 유리에 붙은 양말이 같은 자리를 맴돌듯 대화가 그 화제 가까이를 돌면서도 닿지 않는다는 뜻이다. 비유 뒤에 Mattie가 아버지의 작업복을 아들 짐 위에 얹고 이름표를 쓰다듬는 동작은 그 화제가 사라진 것이 아니라 말없이 곁에 있음을 보여 주므로 C가 정답이다. A는 무게, B는 공간의 한계라는 다른 속성을 골랐고, D는 실용적 화제만 보고 의미를 넓혀 결정 단서를 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "understated",
+    "tender"
+   ],
+   "devices": [
+    "simile",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-020",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-020",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 19,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Tamika",
+      "Lucius"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a bus depot",
+     "relationship": "a nurse and her night patient",
+     "conflict": "while one of them prepares to leave for good",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a bus depot in Chicago's South Side; a nurse and her night patient while one of them prepares to leave for good"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "g": {
+    "passage": "Years later, Tamika would remember the depot more clearly than the clinic. Every night at two she walked across the lot to the dispatcher's office on the South Side, where Lucius kept the night desk, and took his blood pressure beside a timetable no one had updated since spring. He rolled up his sleeve before she knocked. He kept the cuff warming against the space heater. In her last week she told him a new nurse would come, and he nodded and said the four o'clock bus to Memphis ran on time, if she wanted to know. His voice was a ticket punched for a trip already taken. On her final night the cuff was not by the heater. It was in the drawer, and the drawer was locked, and Lucius looked for the key a long while before he found it in his own shirt pocket.",
+    "question": "As used in the text, the phrase “a ticket punched for a trip already taken” most nearly suggests that Lucius's voice",
+    "options": [
+     "sounded worn out by the many long nights at the depot desk",
+     "carried the exact precision of the bus timetables he kept",
+     "was flat and mechanical, like a recorded station announcement",
+     "spoke of her leaving as settled before he had accepted it"
+    ],
+    "correct_letter": "D",
+    "explanation": "비유 앞에서 Lucius는 매일 밤 미리 소매를 걷고 혈압계를 데워 두며 Tamika의 방문을 기다리고, 그녀가 떠난다고 하자 버스 시간 이야기로 담담하게 답한다. '이미 다녀온 여행의 펀치 찍힌 표'는 그녀의 떠남을 끝난 일처럼 말하는 목소리를 가리킨다. 그러나 비유 뒤 마지막 밤에 혈압계를 서랍에 잠가 두고 열쇠를 한참 찾는 행동은 그가 아직 그 이별을 받아들이지 못했음을 보여 주므로 D가 정답이다. A는 피로, B는 정확성이라는 다른 속성을 골랐고, C는 비유를 문자적인 기계음으로 넓혀 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "restrained"
+   ],
+   "devices": [
+    "metaphor",
+    "flashback"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-021",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-021",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 20,
+     "genre": "poetry",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Jiayi",
+      "Sadia"
+     ],
+     "nameCultures": [
+      "chinese",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Port of Spain",
+     "setting": "an apartment stairwell",
+     "relationship": "a coach and a benched star",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "an apartment stairwell in Port of Spain; a coach and a benched star over silence kept to protect someone"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "words_in_context_lit_figurative_language_hard_v4"
+   },
+   "g": {
+    "passage": "When the gym lights went off at nine,\nSadia found her coach on the stairwell landing,\nthird floor, where the bulb had been dead since Carnival.\nJiayi sat with a clipboard on her knees,\nthe lineup written and rewritten,\nSadia's name crossed out in pencil,\nthen in pen.\nSadia did not ask why.\nEvery night that week she had climbed past this landing\nand said goodnight, Coach,\nand every night Jiayi had answered with the same\ntwo words about rest.\nBetween them the silence was a folded jersey pressed and set on a shelf too high to reach.\nBelow, a neighbor's younger brother\nran the steps two at a time,\nthe boy who had taken the blame at school\nfor what Sadia had chosen not to report.\nJiayi watched him pass,\nthen slid the clipboard under her arm\nso the crossed-out name faced her ribs.",
+    "question": "As used in the text, the phrase “a folded jersey pressed and set on a shelf” most nearly suggests that the silence is",
+    "options": [
+     "carefully kept in place by both of them for a protective purpose",
+     "heavy with the disappointment of Sadia's removal from the lineup",
+     "a barrier that places the team out of Sadia's reach for now",
+     "a sign that both are putting the season away like old clothes"
+    ],
+    "correct_letter": "A",
+    "explanation": "비유 앞에서 Sadia는 명단에서 빠진 이유를 묻지 않고, 두 사람은 매일 밤 같은 짧은 인사만 주고받으며 침묵을 함께 유지한다. 접어서 다려 둔 유니폼이라는 비유는 그 침묵이 정성 들여 보관되고 있음을 뜻한다. 비유 뒤에 대신 누명을 쓴 소년이 지나가고 Jiayi가 지워진 이름을 몸 쪽으로 가리는 동작은 그 침묵이 누군가를 보호하기 위한 것임을 보여 주므로 A가 정답이다. B는 무게, C는 손이 닿지 않는 높이라는 한계 속성을 골랐고, D는 옷을 치운다는 문자적 의미로 넓혀 보호의 단서를 설명하지 못한다."
+   },
+   "notes": [],
+   "tone": [
+    "hushed",
+    "guarded"
+   ],
+   "devices": [
+    "metaphor",
+    "repetition",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "hardv4-hard-01-022",
+   "task": "gen-hardv4-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "hardv4-hard-01-022",
+    "batchId": "hardv4-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "word_in_context",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Agnes",
+      "Mingyu"
+     ],
+     "nameCultures": [
+      "english",
+      "chinese"
+     ],
+     "locale": "Naples",
+     "setting": "a beekeeper's yard",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "about a promise nobody remembers making",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a beekeeper's yard in Naples; a widow and the delivery boy about a promise nobody remembers making"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 100,
+     "max": 150
+    },
+    "recipeId": "words_in_context_lit_word_in_context_hard_v4"
+   },
+   "g": {
+    "passage": "Who had promised the honey? Neither Agnes nor Mingyu could say. Every Tuesday for two years he had leaned his bicycle against her gate in Naples, unloaded her groceries, and refused the coins she held out, pointing instead at the hives as if a debt were already settled. Then a cold spring took the colonies, and one Tuesday the hives stood empty. Agnes met him at the gate with nothing in her hands. Mingyu, ______, carried the groceries in as usual, then knelt by the nearest empty hive and began scraping old wax from the frames, setting each clean frame in a neat stack against the wall. He came back the next Tuesday with a borrowed smoker tied to his handlebars.",
+    "question": "Which choice completes the text with the most logical and precise word or phrase?",
+    "options": [
+     "briefly hesitant",
+     "quietly undeterred",
+     "politely indifferent",
+     "visibly relieved"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 Mingyu는 2년 동안 돈을 받지 않고 벌통을 가리키며 꿀이 대가인 듯 행동했으므로, 꿀이 사라진 상황에서도 그의 태도가 흔들리지 않아야 한다는 첫 번째 제약이 생긴다. 빈칸 뒤에서 그는 평소처럼 장을 들여놓고 빈 벌통의 밀랍을 긁어내며 다음 주에는 훈연기까지 빌려 오는데, 이는 단순한 무관심이 아니라 적극적인 의지라는 두 번째 제약이다. 두 제약을 모두 만족하는 것은 B이다. C는 대가에 개의치 않는다는 첫 제약만 맞고 뒤의 적극적인 행동과 맞지 않으며, A와 D는 '평소처럼' 일하고 다시 돌아오는 행동과 어조가 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "steady"
+   ],
+   "devices": [
+    "characterization",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "hardv4-hard-01-018",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\")."
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

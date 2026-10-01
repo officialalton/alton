@@ -11,6 +11,14 @@ const CATEGORY_LABEL: Record<string, string> = {
   homework: "과제 수행",
 };
 
+const RATING_LABEL: Record<string, string> = {
+  below: "Below",
+  partial: "Partial",
+  average: "Average",
+  excellent: "Excellent",
+  outstanding: "Outstanding",
+};
+
 export default function ReviewPanel({
   sessionId,
   review,
@@ -28,7 +36,7 @@ export default function ReviewPanel({
     <div className="max-w-[640px] px-8 py-8">
       <button
         onClick={onBack}
-        className="text-[13px] text-grey-500 font-semibold mb-4"
+        className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
         ← 뒤로
       </button>
@@ -40,28 +48,28 @@ export default function ReviewPanel({
         </div>
       ) : (
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-6">
+          {review.categories.map((c) => (
+            <div key={c.category} className="mb-3">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">
+                  {CATEGORY_LABEL[c.category] ?? c.category}
+                </span>
+                {c.rating && (
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-grey-100 text-ink">
+                    {RATING_LABEL[c.rating] ?? c.rating}
+                  </span>
+                )}
+              </div>
+              {c.finalText && <p className="text-[13px] text-ink leading-[1.6]">{c.finalText}</p>}
+            </div>
+          ))}
           {review.teacherSummary && (
-            <p className="text-[13.5px] text-ink leading-[1.6] mb-3">
-              {review.teacherSummary}
-            </p>
+            <Field label="오늘 배운 것" text={review.teacherSummary} />
           )}
-          {review.strength && (
-            <Field label="잘한 점" text={review.strength} />
-          )}
-          {review.improve && (
-            <Field label="보완할 점" text={review.improve} />
-          )}
+          {review.strength && <Field label="잘한 점" text={review.strength} />}
+          {review.improve && <Field label="보완할 점" text={review.improve} />}
           {review.nextPlan && (
-            <Field label="다음 계획" text={review.nextPlan} />
-          )}
-          {review.categories.map((c) =>
-            c.finalText ? (
-              <Field
-                key={c.category}
-                label={CATEGORY_LABEL[c.category] ?? c.category}
-                text={c.finalText}
-              />
-            ) : null
+            <Field label="최종 정리" text={review.nextPlan} />
           )}
         </div>
       )}

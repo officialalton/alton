@@ -1,0 +1,346 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-005",
+ "chunkId": "rev-fable_judge-005",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-005.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-01-005",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "What do you say to someone who left without a word and comes back the same way? I asked myself that at the bus depot in Gdansk, where my brother Marcus and I had gone to meet Zofia, our cousin, eleven years after she boarded a coach to Berlin. Marcus had polished his shoes; I had not. Our shop sold fewer radios each month, and he talked about it on the drive as if Zofia might bring customers in her suitcase. She stepped down carrying one small bag and kissed us both, and she explained nothing. I waited for an apology that never came and was surprised to find I did not need it. Watching her laugh at Marcus's terrible jokes, I thought the years had cost her more than they had cost us. A cleaner moved between the empty bays, pushing a wide broom over oil stains shaped like countries.",
+   "question": "Which choice best describes the narrator's attitude toward Zofia?",
+   "options": [
+    "Forgiving, and inclined to imagine what Zofia has endured",
+    "Resentful, and determined to hear Zofia explain her absence",
+    "Hopeful, and eager for Zofia to rescue the struggling shop",
+    "Indifferent, since the narrator barely remembers Zofia at all"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-006",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Anacleto,\nI am writing from the projection booth, where the old machine still smells of oil and dust even though no film has run through it since spring. Your father's plane arrived this morning, wrapped in a flour sack, with a note saying he wished me to have it. I know you expected it. You swept his shop for six years before I ever held a chisel, and I have seen you run your thumb along that blade as if greeting someone. I will use it, because refusing a dead man's gift seems worse than accepting it badly. But every board I smooth will be a board I owe you, and I mean to keep the account. Tell your mother the booth's door finally closes; I rehung it on Tuesday with new hinges.\nCleotilde",
+   "question": "Which choice best describes Cleotilde's attitude toward receiving the plane?",
+   "options": [
+    "Proud, since the gift confirms she is the more gifted carpenter",
+    "Uneasy, since she regards the gift as a debt owed to Anacleto",
+    "Resentful that Anacleto's family sent the plane so carelessly",
+    "Doubtful that such an old plane will be useful in her work"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-007",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules for lessons, Grandfather Kerem says: no English, no dictionary, no laughing at his handwriting. Tonight we broke all three in the boarding-house kitchen while the kettle muttered on the stove. I had found the letter last week inside his old grammar book, addressed to a woman named only by an initial, and I asked him to teach me enough to read it myself. He agreed too quickly. Tonight he made me copy one sentence about the sea eleven times, and when I finally read it aloud, he turned toward the window and said my vowels were still too round. I think he is glad someone will understand it at last, and afraid of exactly the same thing. A neighbor's cat slept on the bread bin again; tomorrow I must buy more sugar.",
+   "question": "Which choice best describes Zhiming's attitude toward her grandfather in the diary entry?",
+   "options": [
+    "Frustrated that his strict rules keep slowing her progress",
+    "Embarrassed at having read a private letter without asking",
+    "Sensitive to the mixed feelings the lessons stir in him",
+    "Convinced that he regrets agreeing to teach her at all"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-008",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in a cabin buried to its windowsills in Tromso snow, a young cook named Emil received a gift from his stern uncle Silas: a pair of fine leather gloves, two sizes too small. Emil thanked him warmly and wore them to stir the porridge, though his knuckles pressed white against the seams. For a week he praised their softness, and for a week Silas watched him fumble the ladle. On the eighth morning, Silas set a second pair beside the stove, wide and plain and lined with wool, and said nothing at all. Emil put them on and, for the first time all week, laughed. In the old telling, the two of them then shoveled a path to the woodpile while the northern sky went green above the drifts.",
+   "question": "Which choice best describes the narrator's attitude toward Emil and Silas?",
+   "options": [
+    "Critical of Emil for deceiving his uncle about the gift",
+    "Amused by Silas's stubborn refusal to admit his mistake",
+    "Sorrowful about the coldness dividing uncle and nephew",
+    "Approving of the tact with which each spares the other"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-009",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Beside the counter of the little post office outside Porto Alegre, Dalia weighed the parcel twice before paying. Inside was the manuscript of her new novel, bound for Matheus, who had translated her last three books. Years ago he had borrowed her grandmother's fountain pen to sign a contract and had never returned it; she had mentioned it once, lightly, and then not again. Lately his letters arrived signed in that same green ink, and she found she no longer minded. The pen had gone on writing her sentences in another language, which seemed to her a kind of return. The clerk, a young man with ink on his cuffs, stamped the parcel and tossed it into a canvas sack already bulging with seed catalogs.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To show Dalia coming to see the unreturned pen as a shared bond",
+    "To describe the steps Dalia follows when she mails a manuscript abroad",
+    "To explain why Matheus was chosen to translate Dalia's recent novels",
+    "To suggest that lost possessions are rarely as valuable as they seem"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-01-010",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Was there a polite way to sit beside someone who had just mispronounced the name of your school in front of forty parents? I took the seat by the window anyway, and Kalani took the aisle, and the night bus pulled away from the hall in a hiss of brakes. For the first ten minutes she studied her phone, and I studied the dark shops of Chengdu sliding past. Then she asked me, very quietly, to say the name again so she could practice. I said it. She repeated it, wrong, and then nearly right. I had planned to stay angry until at least the weekend, but my resolve was fading faster than I liked. At the next stop, a vendor climbed on with a basket of steamed buns and walked the aisle calling out prices.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To recount the details of an embarrassing evening at a school event",
+    "To show the narrator's resentment easing as she notices Kalani's effort",
+    "To explain why Kalani struggles to pronounce words in the local dialect",
+    "To suggest that family conflicts are best resolved through patience"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-01-013",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "\"Same as always?\" Shamsuddin asked, and Danish nodded, which was most of their conversation for the afternoon. Every Thursday for forty years, the two men had come back to the music room of the Karachi school where they had once been students, to tune its tired harmonium and dust the tabla skins. Neither was paid. Neither, as far as I ever saw, suggested stopping. As a boy I sat on the bench and watched them work, my grandfather pressing keys while his friend adjusted reeds, and I thought them dull. Only later did I notice how each corrected note seemed to answer the one before, like a sentence the other could finish. When Danish died, Shamsuddin came the next Thursday alone and tuned the instrument to the same pitch. Afterward the room was locked, and the key hung on a nail in the headmaster's office.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To reveal a quiet ritual as the language of a long friendship",
+    "To recount the narrator's boyhood afternoons spent in a music room",
+    "To explain how the two men learned to repair old instruments",
+    "To suggest that true friends never need to speak to each other"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-01-014",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Dear Fumiko,\nI lost again. You will be pleased, though you will pretend otherwise when we meet at the club. I am writing from a train compartment somewhere in Hokkaido, with our travel set balanced on my knees, replaying the endgame you won on Sunday. For twelve years we have played every week, and for twelve years neither of us has mentioned the tournament in Osaka or the move you swear you did not take back. I used to think our silence was cowardice. Lately I suspect it is the only reason we still sit across from each other. The snow here has buried the fences entirely; only the tops of the telegraph poles mark the road.\nYours in rivalry,\nRukhsana",
+   "question": "Which choice best states the main purpose of the letter?",
+   "options": [
+    "To report the result of Sunday's game and to request a rematch soon",
+    "To suggest that their long silence on one subject preserves the rivalry",
+    "To accuse Fumiko at last of cheating during the tournament in Osaka",
+    "To argue that rivals should always settle their disputes right away"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-01-015",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Years ago, on the promenade by the Lagos sea, a nephew named Casey owed his uncle Babatunde the price of a fishing boat. Each evening Casey walked the seawall with coins in his pocket, meaning to pay, and each evening he bought roasted corn instead and told himself tomorrow. Babatunde saw this from his bench and said nothing. When at last Casey came with the full amount, the old man counted it twice, then pressed half of it back into his hand. \"The other half paid for the waiting,\" he said, \"and I would buy that again.\" Casey walked home with the coins heavy in his fist, unable to meet the eyes of the corn seller. The tellers say she still keeps her fire burning on that promenade until the last ferry docks.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe the evening routines along a busy seaside promenade",
+    "To explain how Casey earned enough money to buy a fishing boat",
+    "To show how a partial pardon teaches Casey more than a full one",
+    "To suggest that debts between relatives should never be repaid"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-01-016",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Paper remembers every fold. Sharda had told her daughter this a hundred times in the bookbinder's workshop in Dhaka, usually while correcting a crease Samira had made too quickly. Now Samira's suitcase stood by the door, and her bus left for the university at noon. Last month they had quarreled over the scholarship letter Sharda had hidden for two weeks, afraid of an empty house. Samira had not forgiven her, and the apology Sharda finally offered had arrived, like the letter, too late. This morning Sharda stitched a blank notebook by hand, choosing the heavy cotton thread she usually saved for paying customers, and slipped it into the suitcase without a word. Afterward she swept the trimmings from the floor and lit the small lamp above the press.",
+   "question": "Based on the text, why does Sharda most likely place the notebook in Samira's suitcase?",
+   "options": [
+    "She wants her craft to convey support her words failed to show",
+    "She hopes the notebook will persuade Samira to stay home this year",
+    "She expects Samira to record her university expenses in its pages",
+    "She needs to use up thread left over from an order for customers"
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-017",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "I had kept the lamps and gates of our old metro station in Seville for nineteen years when the surveyor arrived from Madrid. Everyone said Esteban had come to recommend closing the platform, and I believed it, so I polished every rail and swept the stairs twice before dawn. He spent the morning measuring tiles and asking which trains ran late. His questions were the kind I asked myself on sleepless nights, not the kind a man asks when his mind is made up. At noon he asked to see the flood marks on the eastern wall, the ones I had painted over years ago at my supervisor's request. I hesitated, then scraped the paint away with my key. He photographed each line carefully. That evening a busker set up by the turnstiles and played the same three songs until the last train.",
+   "question": "Based on the text, why does the narrator most likely scrape the paint from the eastern wall?",
+   "options": [
+    "He wants to prove that his supervisor ordered the marks hidden",
+    "He has decided to trust Esteban with the station's history",
+    "He knows the marks will win the station costly new repairs",
+    "He fears that Esteban would find the marks on his own anyway"
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-018",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "After the rain, on a hillside terrace above Glasgow, GIULIETTA and CHULSOO, two retired singers, sit at an iron table. A teapot steams between them.\nGIULIETTA: You've moved the sugar again.\nCHULSOO: It was in the sun.\nGIULIETTA: It was where I put it. You always did that. Shifted things a little to the left.\nCHULSOO: (quietly) On stage, you mean.\nGIULIETTA: I mean the sugar.\n(A long pause. CHULSOO slides the bowl back to its original place, exactly.)\nCHULSOO: Better?\nGIULIETTA: (not looking at her) Second act. Every night. A little to the left of my light.\n(Below them, a bus groans up the hill. CHULSOO pours tea into both cups.)",
+   "question": "Based on the scene, why does Giulietta most likely complain about the sugar?",
+   "options": [
+    "She is irritated that the sugar has been melting in the hot sun",
+    "She wants Chulsoo to apologize for moving the teapot as well",
+    "She is voicing an old grievance about being upstaged",
+    "She hopes to persuade Chulsoo to perform with her once again"
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-019",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "When I married Reid, I inherited a mother-in-law who had cooked in a ship's galley out of Kingston for twenty years and believed every meal should fit in one pot. My family set tables with seven small dishes, each in its own bowl. The first Sunday we cooked together in that narrow galley, docked for the holiday, she watched me arrange my bowls along the steel counter and said nothing. The next Sunday she brought a tray I had never seen, divided into compartments around a deep center, and set her stew in the middle. I learned later she had bought it across the harbor and carried it home on the bus in the rain. She never mentioned it. Reid still eats from the center first and works outward, which his mother calls bad manners.",
+   "question": "Based on the text, why does the mother-in-law most likely bring the divided tray?",
+   "options": [
+    "She wants to show the narrator that one pot is more practical",
+    "She is tired of washing seven small bowls after every meal",
+    "She hopes the tray will impress the ship's paying passengers",
+    "She wants both families' customs to share a single table"
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-020",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Angus ordered two teas before I had even sat down, the way he had every morning for the three years I worked under him on the Galway docks. This time the cafe was in the train station, and his duffel bag leaned against the table leg. He was leaving for his daughter's farm in Canada and not coming back. I had expected advice or at least a joke. Instead he slid his old tide tables across to me, the ones he had marked in pencil for every shift he had ever run. Then he asked me to explain the Thursday schedule to him, step by step, as if he were the new hire. I stumbled at first, then didn't. Halfway through he stopped correcting me. When the train was called, he left a coin on the saucer and buttoned his coat to the collar.",
+   "question": "Based on the text, why does Angus most likely ask the narrator to explain the Thursday schedule?",
+   "options": [
+    "He wants the narrator to see she is ready to work without him",
+    "He has forgotten the schedule after years of running other shifts",
+    "He hopes to delay boarding a train he does not truly want to catch",
+    "He plans to pass her explanation along to the owners of the docks"
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-021",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "When the notary's envelope arrived at the farmhouse, I left it unopened on the kitchen table for nine days, Margaux. You will say a captain should be decisive, and you are right; I gave orders for thirty years. But each morning I pass the doorway where you hid the night you crept off my boat at fifteen, soaked and refusing to give your name. I still remember how you scrubbed that floor for a week before you would let yourself sleep in the upstairs room. Selling would bring us each a tidy sum, and the roof does leak. Still, I have written to the notary that I need until spring. The figs are coming in early this year, and the neighbor's goats have found the gap in the fence again.",
+   "question": "Based on the letter, why does Colette most likely delay the sale of the farmhouse?",
+   "options": [
+    "She still resents Margaux for having crept onto her boat uninvited years ago.",
+    "She links the house with the place where Margaux first felt safe to stay.",
+    "She hopes that the delay will make Margaux write back to her more often.",
+    "She wants time to repair the leaking roof before the notary visits in spring."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-022",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Why did I tell Sipho the solo was his? I wrote the question on the back of a receipt at the night pharmacy, waiting for my headache tablets under that green cross. The board met on Tuesday, and nobody said the word, but the treasurer kept folding the budget sheet smaller and smaller. Sipho is nineteen and has never once played anything that anyone will remember. If this orchestra has one last concert in it, someone should leave that hall with a beginning instead of an ending. The pharmacist asked whether I wanted the larger box. I said yes, and she rang it up while a tram rattled past the window, nearly empty at that hour.",
+   "question": "Based on the diary entry, why did Mira most likely give Sipho the solo?",
+   "options": [
+    "She was frustrated that the board refused to discuss the budget openly.",
+    "She wanted the final concert to be remembered as the orchestra's triumph.",
+    "She sensed the orchestra was ending and wanted Sipho to begin something.",
+    "She had been advised by the treasurer to feature the youngest musicians."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-023",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "On the morning the house was finally emptied, only the water tank remained on the roof, round and patient as an old drum. Tendai, the priest who had once baptized Amara, climbed the stairs to ask whether his church might have it. Amara had not entered his church in eleven years, and she said so before he could speak. Yet she remembered how, in the dry months, her mother had lowered a hose from that tank to any bucket left at the gate, never asking whose. Since then the street below had learned to set its buckets out at dawn. 'Leave it where it is,' Amara told him, 'and leave the gate unlocked.' Tendai nodded and went down to wait for the bus, his cassock gray with roof dust.",
+   "question": "Based on the passage, why does Amara most likely refuse to let Tendai take the tank?",
+   "options": [
+    "She is still angry at the church she stopped attending eleven years ago.",
+    "She hopes the street will remember her mother's name because of the tank.",
+    "She has learned that the tank is too heavy to be carried down the stairs.",
+    "She wants the neighbors to keep drawing water as her mother had allowed."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-01-024",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Was this where they used to race paper boats? Lorenzo could no longer tell; the riverbed had cracked into plates of clay that shifted under his shoes. Ama walked a few steps ahead, as she always had, and for a moment he felt the old sting of trailing behind her. Then she stopped, crouched, and pressed her palm flat against the ground as if checking a child for fever. He crouched beside her. Neither of them mentioned the eight years of unanswered letters. Instead she traced a small curved line in the dust, the shape of a hull, and he added a mast, and she laughed softly, the same low laugh he had heard through bedroom walls when they were young. A goat bell sounded somewhere beyond the far bank.",
+   "question": "Which choice best describes the overall mood of the passage?",
+   "options": [
+    "Tender reconciliation tinged with traces of an old resentment",
+    "Lingering resentment that only briefly gives way to tenderness",
+    "Quiet bitterness over many years of letters left unanswered",
+    "Solemn grief for a childhood landscape now lost to drought"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-01-025",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Grape baskets lined the wall that Gopal's and Lakshmi's houses shared, each one sticky and humming with wasps. Through the plaster Gopal could hear Lakshmi running the same eight bars of her veena piece, stopping always at the same note. He paused with his knife over a cluster and hummed the next phrase for her, loudly, without meaning to. The playing stopped; then it came again, and this time it went past the stubborn note and into the bright run that followed. Gopal grinned and cut faster, his own lines for the festival play tumbling through his head. Once or twice he forgot a word and his stomach dropped, but the music next door kept carrying him forward. By noon the baskets were full and the courtyard smelled of crushed fruit.",
+   "question": "Which choice best describes the overall mood of the passage?",
+   "options": [
+    "Anxious dread about forgetting lines in the coming performance",
+    "Eager anticipation only occasionally interrupted by brief nerves",
+    "Nervous tension only occasionally relieved by bursts of hope",
+    "Weary resignation to the long, repetitive labor of the harvest"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-01-026",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Three rules for the hive, Siti said:\nmove slowly, breathe low, never curse in the yard.\nMandla, her clerk through twenty years of verdicts,\nheld the smoker that had been her husband's,\nits leather bellows patched with his careful thread.\n\nShe did not weep. She lifted a frame\nheavy with gold, and the bees walked over her wrist\nlike a sentence she had finally learned to read.\n\nOnce, his name caught in her throat\nand the yard went quiet for a breath.\nThen the smoke rose again, gray and sweet,\nand Mandla pumped it the way she showed him,\nslow, slow, the hum returning\nto the longan trees along the fence.",
+   "question": "Which choice best describes the overall tone of the poem?",
+   "options": [
+    "Raw grief that the quiet work of the hive cannot ease",
+    "Mournful longing broken by a few moments of calm",
+    "Calm reverence touched by a brief note of grief",
+    "Playful curiosity about the habits of the busy bees"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-005 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-005.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-01-005 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWhat do you say to someone who left without a word and comes back the same way? I asked myself that at the bus depot in Gdansk, where my brother Marcus and I had gone to meet Zofia, our cousin, eleven years after she boarded a coach to Berlin. Marcus had polished his shoes; I had not. Our shop sold fewer radios each month, and he talked about it on the drive as if Zofia might bring customers in her suitcase. She stepped down carrying one small bag and kissed us both, and she explained nothing. I waited for an apology that never came and was surprised to find I did not need it. Watching her laugh at Marcus's terrible jokes, I thought the years had cost her more than they had cost us. A cleaner moved between the empty bays, pushing a wide broom over oil stains shaped like countries.\n\n[질문] Which choice best describes the narrator's attitude toward Zofia?\nA) Forgiving, and inclined to imagine what Zofia has endured\nB) Resentful, and determined to hear Zofia explain her absence\nC) Hopeful, and eager for Zofia to rescue the struggling shop\nD) Indifferent, since the narrator barely remembers Zofia at all\n### lit40-medium-01-006 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nAnacleto,\nI am writing from the projection booth, where the old machine still smells of oil and dust even though no film has run through it since spring. Your father's plane arrived this morning, wrapped in a flour sack, with a note saying he wished me to have it. I know you expected it. You swept his shop for six years before I ever held a chisel, and I have seen you run your thumb along that blade as if greeting someone. I will use it, because refusing a dead man's gift seems worse than accepting it badly. But every board I smooth will be a board I owe you, and I mean to keep the account. Tell your mother the booth's door finally closes; I rehung it on Tuesday with new hinges.\nCleotilde\n\n[질문] Which choice best describes Cleotilde's attitude toward receiving the plane?\nA) Proud, since the gift confirms she is the more gifted carpenter\nB) Uneasy, since she regards the gift as a debt owed to Anacleto\nC) Resentful that Anacleto's family sent the plane so carelessly\nD) Doubtful that such an old plane will be useful in her work\n### lit40-medium-01-007 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nThree rules for lessons, Grandfather Kerem says: no English, no dictionary, no laughing at his handwriting. Tonight we broke all three in the boarding-house kitchen while the kettle muttered on the stove. I had found the letter last week inside his old grammar book, addressed to a woman named only by an initial, and I asked him to teach me enough to read it myself. He agreed too quickly. Tonight he made me copy one sentence about the sea eleven times, and when I finally read it aloud, he turned toward the window and said my vowels were still too round. I think he is glad someone will understand it at last, and afraid of exactly the same thing. A neighbor's cat slept on the bread bin again; tomorrow I must buy more sugar.\n\n[질문] Which choice best describes Zhiming's attitude toward her grandfather in the diary entry?\nA) Frustrated that his strict rules keep slowing her progress\nB) Embarrassed at having read a private letter without asking\nC) Sensitive to the mixed feelings the lessons stir in him\nD) Convinced that he regrets agreeing to teach her at all\n### lit40-medium-01-008 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nOnce, in a cabin buried to its windowsills in Tromso snow, a young cook named Emil received a gift from his stern uncle Silas: a pair of fine leather gloves, two sizes too small. Emil thanked him warmly and wore them to stir the porridge, though his knuckles pressed white against the seams. For a week he praised their softness, and for a week Silas watched him fumble the ladle. On the eighth morning, Silas set a second pair beside the stove, wide and plain and lined with wool, and said nothing at all. Emil put them on and, for the first time all week, laughed. In the old telling, the two of them then shoveled a path to the woodpile while the northern sky went green above the drifts.\n\n[질문] Which choice best describes the narrator's attitude toward Emil and Silas?\nA) Critical of Emil for deceiving his uncle about the gift\nB) Amused by Silas's stubborn refusal to admit his mistake\nC) Sorrowful about the coldness dividing uncle and nephew\nD) Approving of the tact with which each spares the other\n### lit40-medium-01-009 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nBeside the counter of the little post office outside Porto Alegre, Dalia weighed the parcel twice before paying. Inside was the manuscript of her new novel, bound for Matheus, who had translated her last three books. Years ago he had borrowed her grandmother's fountain pen to sign a contract and had never returned it; she had mentioned it once, lightly, and then not again. Lately his letters arrived signed in that same green ink, and she found she no longer minded. The pen had gone on writing her sentences in another language, which seemed to her a kind of return. The clerk, a young man with ink on his cuffs, stamped the parcel and tossed it into a canvas sack already bulging with seed catalogs.\n\n[질문] Which choice best states the main purpose of the text?\nA) To show Dalia coming to see the unreturned pen as a shared bond\nB) To describe the steps Dalia follows when she mails a manuscript abroad\nC) To explain why Matheus was chosen to translate Dalia's recent novels\nD) To suggest that lost possessions are rarely as valuable as they seem\n### lit40-medium-01-010 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nWas there a polite way to sit beside someone who had just mispronounced the name of your school in front of forty parents? I took the seat by the window anyway, and Kalani took the aisle, and the night bus pulled away from the hall in a hiss of brakes. For the first ten minutes she studied her phone, and I studied the dark shops of Chengdu sliding past. Then she asked me, very quietly, to say the name again so she could practice. I said it. She repeated it, wrong, and then nearly right. I had planned to stay angry until at least the weekend, but my resolve was fading faster than I liked. At the next stop, a vendor climbed on with a basket of steamed buns and walked the aisle calling out prices.\n\n[질문] Which choice best states the main purpose of the text?\nA) To recount the details of an embarrassing evening at a school event\nB) To show the narrator's resentment easing as she notices Kalani's effort\nC) To explain why Kalani struggles to pronounce words in the local dialect\nD) To suggest that family conflicts are best resolved through patience\n### lit40-medium-01-013 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\n\"Same as always?\" Shamsuddin asked, and Danish nodded, which was most of their conversation for the afternoon. Every Thursday for forty years, the two men had come back to the music room of the Karachi school where they had once been students, to tune its tired harmonium and dust the tabla skins. Neither was paid. Neither, as far as I ever saw, suggested stopping. As a boy I sat on the bench and watched them work, my grandfather pressing keys while his friend adjusted reeds, and I thought them dull. Only later did I notice how each corrected note seemed to answer the one before, like a sentence the other could finish. When Danish died, Shamsuddin came the next Thursday alone and tuned the instrument to the same pitch. Afterward the room was locked, and the key hung on a nail in the headmaster's office.\n\n[질문] Which choice best states the main purpose of the text?\nA) To reveal a quiet ritual as the language of a long friendship\nB) To recount the narrator's boyhood afternoons spent in a music room\nC) To explain how the two men learned to repair old instruments\nD) To suggest that true friends never need to speak to each other\n### lit40-medium-01-014 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nDear Fumiko,\nI lost again. You will be pleased, though you will pretend otherwise when we meet at the club. I am writing from a train compartment somewhere in Hokkaido, with our travel set balanced on my knees, replaying the endgame you won on Sunday. For twelve years we have played every week, and for twelve years neither of us has mentioned the tournament in Osaka or the move you swear you did not take back. I used to think our silence was cowardice. Lately I suspect it is the only reason we still sit across from each other. The snow here has buried the fences entirely; only the tops of the telegraph poles mark the road.\nYours in rivalry,\nRukhsana\n\n[질문] Which choice best states the main purpose of the letter?\nA) To report the result of Sunday's game and to request a rematch soon\nB) To suggest that their long silence on one subject preserves the rivalry\nC) To accuse Fumiko at last of cheating during the tournament in Osaka\nD) To argue that rivals should always settle their disputes right away\n### lit40-medium-01-015 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nYears ago, on the promenade by the Lagos sea, a nephew named Casey owed his uncle Babatunde the price of a fishing boat. Each evening Casey walked the seawall with coins in his pocket, meaning to pay, and each evening he bought roasted corn instead and told himself tomorrow. Babatunde saw this from his bench and said nothing. When at last Casey came with the full amount, the old man counted it twice, then pressed half of it back into his hand. \"The other half paid for the waiting,\" he said, \"and I would buy that again.\" Casey walked home with the coins heavy in his fist, unable to meet the eyes of the corn seller. The tellers say she still keeps her fire burning on that promenade until the last ferry docks.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe the evening routines along a busy seaside promenade\nB) To explain how Casey earned enough money to buy a fishing boat\nC) To show how a partial pardon teaches Casey more than a full one\nD) To suggest that debts between relatives should never be repaid\n### lit40-medium-01-016 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nPaper remembers every fold. Sharda had told her daughter this a hundred times in the bookbinder's workshop in Dhaka, usually while correcting a crease Samira had made too quickly. Now Samira's suitcase stood by the door, and her bus left for the university at noon. Last month they had quarreled over the scholarship letter Sharda had hidden for two weeks, afraid of an empty house. Samira had not forgiven her, and the apology Sharda finally offered had arrived, like the letter, too late. This morning Sharda stitched a blank notebook by hand, choosing the heavy cotton thread she usually saved for paying customers, and slipped it into the suitcase without a word. Afterward she swept the trimmings from the floor and lit the small lamp above the press.\n\n[질문] Based on the text, why does Sharda most likely place the notebook in Samira's suitcase?\nA) She wants her craft to convey support her words failed to show\nB) She hopes the notebook will persuade Samira to stay home this year\nC) She expects Samira to record her university expenses in its pages\nD) She needs to use up thread left over from an order for customers\n### lit40-medium-01-017 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nI had kept the lamps and gates of our old metro station in Seville for nineteen years when the surveyor arrived from Madrid. Everyone said Esteban had come to recommend closing the platform, and I believed it, so I polished every rail and swept the stairs twice before dawn. He spent the morning measuring tiles and asking which trains ran late. His questions were the kind I asked myself on sleepless nights, not the kind a man asks when his mind is made up. At noon he asked to see the flood marks on the eastern wall, the ones I had painted over years ago at my supervisor's request. I hesitated, then scraped the paint away with my key. He photographed each line carefully. That evening a busker set up by the turnstiles and played the same three songs until the last train.\n\n[질문] Based on the text, why does the narrator most likely scrape the paint from the eastern wall?\nA) He wants to prove that his supervisor ordered the marks hidden\nB) He has decided to trust Esteban with the station's history\nC) He knows the marks will win the station costly new repairs\nD) He fears that Esteban would find the marks on his own anyway\n### lit40-medium-01-018 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nAfter the rain, on a hillside terrace above Glasgow, GIULIETTA and CHULSOO, two retired singers, sit at an iron table. A teapot steams between them.\nGIULIETTA: You've moved the sugar again.\nCHULSOO: It was in the sun.\nGIULIETTA: It was where I put it. You always did that. Shifted things a little to the left.\nCHULSOO: (quietly) On stage, you mean.\nGIULIETTA: I mean the sugar.\n(A long pause. CHULSOO slides the bowl back to its original place, exactly.)\nCHULSOO: Better?\nGIULIETTA: (not looking at her) Second act. Every night. A little to the left of my light.\n(Below them, a bus groans up the hill. CHULSOO pours tea into both cups.)\n\n[질문] Based on the scene, why does Giulietta most likely complain about the sugar?\nA) She is irritated that the sugar has been melting in the hot sun\nB) She wants Chulsoo to apologize for moving the teapot as well\nC) She is voicing an old grievance about being upstaged\nD) She hopes to persuade Chulsoo to perform with her once again\n### lit40-medium-01-019 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nWhen I married Reid, I inherited a mother-in-law who had cooked in a ship's galley out of Kingston for twenty years and believed every meal should fit in one pot. My family set tables with seven small dishes, each in its own bowl. The first Sunday we cooked together in that narrow galley, docked for the holiday, she watched me arrange my bowls along the steel counter and said nothing. The next Sunday she brought a tray I had never seen, divided into compartments around a deep center, and set her stew in the middle. I learned later she had bought it across the harbor and carried it home on the bus in the rain. She never mentioned it. Reid still eats from the center first and works outward, which his mother calls bad manners.\n\n[질문] Based on the text, why does the mother-in-law most likely bring the divided tray?\nA) She wants to show the narrator that one pot is more practical\nB) She is tired of washing seven small bowls after every meal\nC) She hopes the tray will impress the ship's paying passengers\nD) She wants both families' customs to share a single table\n### lit40-medium-01-020 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nAngus ordered two teas before I had even sat down, the way he had every morning for the three years I worked under him on the Galway docks. This time the cafe was in the train station, and his duffel bag leaned against the table leg. He was leaving for his daughter's farm in Canada and not coming back. I had expected advice or at least a joke. Instead he slid his old tide tables across to me, the ones he had marked in pencil for every shift he had ever run. Then he asked me to explain the Thursday schedule to him, step by step, as if he were the new hire. I stumbled at first, then didn't. Halfway through he stopped correcting me. When the train was called, he left a coin on the saucer and buttoned his coat to the collar.\n\n[질문] Based on the text, why does Angus most likely ask the narrator to explain the Thursday schedule?\nA) He wants the narrator to see she is ready to work without him\nB) He has forgotten the schedule after years of running other shifts\nC) He hopes to delay boarding a train he does not truly want to catch\nD) He plans to pass her explanation along to the owners of the docks\n### lit40-medium-01-021 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nWhen the notary's envelope arrived at the farmhouse, I left it unopened on the kitchen table for nine days, Margaux. You will say a captain should be decisive, and you are right; I gave orders for thirty years. But each morning I pass the doorway where you hid the night you crept off my boat at fifteen, soaked and refusing to give your name. I still remember how you scrubbed that floor for a week before you would let yourself sleep in the upstairs room. Selling would bring us each a tidy sum, and the roof does leak. Still, I have written to the notary that I need until spring. The figs are coming in early this year, and the neighbor's goats have found the gap in the fence again.\n\n[질문] Based on the letter, why does Colette most likely delay the sale of the farmhouse?\nA) She still resents Margaux for having crept onto her boat uninvited years ago.\nB) She links the house with the place where Margaux first felt safe to stay.\nC) She hopes that the delay will make Margaux write back to her more often.\nD) She wants time to repair the leaking roof before the notary visits in spring.\n### lit40-medium-01-022 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nWhy did I tell Sipho the solo was his? I wrote the question on the back of a receipt at the night pharmacy, waiting for my headache tablets under that green cross. The board met on Tuesday, and nobody said the word, but the treasurer kept folding the budget sheet smaller and smaller. Sipho is nineteen and has never once played anything that anyone will remember. If this orchestra has one last concert in it, someone should leave that hall with a beginning instead of an ending. The pharmacist asked whether I wanted the larger box. I said yes, and she rang it up while a tram rattled past the window, nearly empty at that hour.\n\n[질문] Based on the diary entry, why did Mira most likely give Sipho the solo?\nA) She was frustrated that the board refused to discuss the budget openly.\nB) She wanted the final concert to be remembered as the orchestra's triumph.\nC) She sensed the orchestra was ending and wanted Sipho to begin something.\nD) She had been advised by the treasurer to feature the youngest musicians.\n### lit40-medium-01-023 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nOn the morning the house was finally emptied, only the water tank remained on the roof, round and patient as an old drum. Tendai, the priest who had once baptized Amara, climbed the stairs to ask whether his church might have it. Amara had not entered his church in eleven years, and she said so before he could speak. Yet she remembered how, in the dry months, her mother had lowered a hose from that tank to any bucket left at the gate, never asking whose. Since then the street below had learned to set its buckets out at dawn. 'Leave it where it is,' Amara told him, 'and leave the gate unlocked.' Tendai nodded and went down to wait for the bus, his cassock gray with roof dust.\n\n[질문] Based on the passage, why does Amara most likely refuse to let Tendai take the tank?\nA) She is still angry at the church she stopped attending eleven years ago.\nB) She hopes the street will remember her mother's name because of the tank.\nC) She has learned that the tank is too heavy to be carried down the stairs.\nD) She wants the neighbors to keep drawing water as her mother had allowed.\n### lit40-medium-01-024 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWas this where they used to race paper boats? Lorenzo could no longer tell; the riverbed had cracked into plates of clay that shifted under his shoes. Ama walked a few steps ahead, as she always had, and for a moment he felt the old sting of trailing behind her. Then she stopped, crouched, and pressed her palm flat against the ground as if checking a child for fever. He crouched beside her. Neither of them mentioned the eight years of unanswered letters. Instead she traced a small curved line in the dust, the shape of a hull, and he added a mast, and she laughed softly, the same low laugh he had heard through bedroom walls when they were young. A goat bell sounded somewhere beyond the far bank.\n\n[질문] Which choice best describes the overall mood of the passage?\nA) Tender reconciliation tinged with traces of an old resentment\nB) Lingering resentment that only briefly gives way to tenderness\nC) Quiet bitterness over many years of letters left unanswered\nD) Solemn grief for a childhood landscape now lost to drought\n### lit40-medium-01-025 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nGrape baskets lined the wall that Gopal's and Lakshmi's houses shared, each one sticky and humming with wasps. Through the plaster Gopal could hear Lakshmi running the same eight bars of her veena piece, stopping always at the same note. He paused with his knife over a cluster and hummed the next phrase for her, loudly, without meaning to. The playing stopped; then it came again, and this time it went past the stubborn note and into the bright run that followed. Gopal grinned and cut faster, his own lines for the festival play tumbling through his head. Once or twice he forgot a word and his stomach dropped, but the music next door kept carrying him forward. By noon the baskets were full and the courtyard smelled of crushed fruit.\n\n[질문] Which choice best describes the overall mood of the passage?\nA) Anxious dread about forgetting lines in the coming performance\nB) Eager anticipation only occasionally interrupted by brief nerves\nC) Nervous tension only occasionally relieved by bursts of hope\nD) Weary resignation to the long, repetitive labor of the harvest\n### lit40-medium-01-026 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nThree rules for the hive, Siti said:\nmove slowly, breathe low, never curse in the yard.\nMandla, her clerk through twenty years of verdicts,\nheld the smoker that had been her husband's,\nits leather bellows patched with his careful thread.\n\nShe did not weep. She lifted a frame\nheavy with gold, and the bees walked over her wrist\nlike a sentence she had finally learned to read.\n\nOnce, his name caught in her throat\nand the yard went quiet for a breath.\nThen the smoke rose again, gray and sweet,\nand Mandla pumped it the way she showed him,\nslow, slow, the hum returning\nto the longan trees along the fence.\n\n[질문] Which choice best describes the overall tone of the poem?\nA) Raw grief that the quiet work of the hive cannot ease\nB) Mournful longing broken by a few moments of calm\nC) Calm reverence touched by a brief note of grief\nD) Playful curiosity about the habits of the busy bees"
+}

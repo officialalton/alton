@@ -1,0 +1,720 @@
+{
+ "taskId": "rewrite-005",
+ "passed": [
+  {
+   "candidateId": "lit40-hard-01-100",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-hard-01-100",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "character_motivation",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 99,
+     "genre": "personal_essay",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Aoife",
+      "Rory"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "irish_scottish"
+     ],
+     "locale": "Galway",
+     "setting": "a vineyard at harvest",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a vineyard at harvest in Galway; a young apprentice and a master carpenter over a recipe that was never written down"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 110,
+     "max": 170
+    },
+    "recipeId": "inferences_lit_character_motivation_hard"
+   },
+   "g": {
+    "passage": "Grapes have no business in Galway. Rory grows them anyway beside his workshop and presses them each October in a press he built before you, Aoife, became his apprentice. He keeps no ledger; wood, he says, forgets nothing. This year the press splits along one cheek. Rory has a glue for such repairs, mixed from a recipe nobody has ever seen written; for three years you have asked for it and been told you will learn it when you need it. He mixes a first batch while you watch, measuring nothing, talking about the weather. When you take out the notebook you bought in town, he discovers that the clamps are still in the shed. Next morning he announces that his wrists are bad and the second batch is yours. You ruin it twice. On the third try he leans on the bench beside you, lifts a full bucket of lees without a wince, and tilts your pot a quarter-turn toward the window.",
+    "question": "Based on the text, why does Rory most likely claim that his wrists are bad?",
+    "options": [
+     "He is embarrassed to admit that his hands are now too unsteady for the work.",
+     "He wants the press repaired quickly while the grapes are still fresh enough.",
+     "He hopes Aoife's failures will convince her the recipe is too hard to share.",
+     "He means for Aoife to learn the glue through practice rather than a record."
+    ],
+    "correct_letter": "D",
+    "explanation": "Rory는 기록을 두지 않는 습관이 있고(앞부분), Aoife가 공책을 꺼내자 클램프 핑계로 자리를 피하게 만든다(중간). 이후 손목이 아프다던 그가 양동이를 거뜬히 들고 냄비 방향을 살짝 고쳐 주는 모습은 핑계가 그녀에게 직접 해 보게 하려는 것이었음을 보여 준다. A는 양동이를 거뜬히 드는 행동과 충돌하고, B는 서두르는 기색이 없는 장면과 맞지 않는다. C는 레시피를 숨기려는 초반 인상만 설명할 뿐 그가 옆에서 도와주는 행동과 모순되므로 D가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "understated"
+   ],
+   "devices": [
+    "second-person narration",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-005",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-005",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "short_story",
+    "seed": {
+     "index": 4,
+     "genre": "short_story",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Kainoa",
+      "Faris"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "arabic_levantine"
+     ],
+     "locale": "Hanoi",
+     "setting": "a river barge",
+     "relationship": "a sister and her younger brother's tutor",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a river barge in Hanoi; a sister and her younger brother's tutor while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "I unfolded the scarf on the barge's narrow deck while the Red River slid brown and slow beneath us in Hanoi. It was mustard yellow, a color I have avoided since childhood. Faris, who tutors my younger brother three afternoons a week, had wrapped it in newspaper folded with a draftsman's care. He did not look at the scarf; he looked at my hands. My brother, I suspected, had chosen the color, since he believes a joke is the highest form of affection. I tied the scarf at my throat and remarked that it matched the lanterns on the far bank. Faris exhaled and began reporting, too quickly, the boy's progress with fractions, and I asked a question about every one. Along the bank, a woman was hanging fish to dry on a line of bamboo poles.",
+    "question": "Based on the text, which choice best describes the relationship between the narrator, Kainoa, and Faris?",
+    "options": [
+     "Kainoa is quietly irritated by Faris but hides it to protect her brother.",
+     "Kainoa is eager to impress Faris, who closely judges how she receives his gift.",
+     "Faris and Kainoa are old friends who share a private joke about her brother.",
+     "Faris is anxious for Kainoa's approval, and she takes care to ease his worry."
+    ],
+    "correct_letter": "D",
+    "explanation": "Faris가 선물을 정성껏 포장하고 스카프가 아닌 화자의 손만 바라보는 모습, 그리고 안도의 숨을 쉬고 급하게 말을 쏟는 모습은 그가 화자의 반응을 몹시 신경 쓴다는 단서다. 화자는 싫어하는 색인데도 스카프를 매고 칭찬하며, 그의 보고마다 질문을 던져 그의 긴장을 풀어 준다. A는 화자의 짜증을 지어낸 것이고, B는 관계의 방향을 뒤집었다. C는 농담이 동생의 것일 뿐 둘의 오랜 우정을 보여 주지 않으므로 D가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "restrained"
+   ],
+   "devices": [
+    "understatement",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-022",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-022",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 21,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Saoirse",
+      "Thiago"
+     ],
+     "nameCultures": [
+      "irish_scottish",
+      "portuguese_brazilian"
+     ],
+     "locale": "Glasgow",
+     "setting": "a stone bridge",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a stone bridge in Glasgow; a priest and a lapsed parishioner about what to tell a younger sibling"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who decides what a nine-year-old is ready to hear? I put that question to Father Thiago on the Clyde bridge in the winter of 1987, though I had not set foot in his church for three years. My younger brother had asked why our mother no longer came home, and I had told him she was resting, which was what our aunts said. Thiago watched the river for a long while. A truth told gently, he said finally, is a lantern, not a stone. I had expected scripture, or a scolding for my absence, and got neither. That night I sat on my brother's bed and told him plainly where she had gone and why. He cried, and then he asked a dozen questions, each more practical than the last. In the morning he walked ahead of me to school, choosing the turns himself.",
+    "question": "As used in the text, the phrase “a lantern, not a stone” most nearly suggests that a hard truth told gently",
+    "options": [
+     "will weigh less on the boy than the comforting story the aunts had offered.",
+     "is something the adult should carry so that the boy need not bear it.",
+     "can help the boy find his way forward rather than merely burden him.",
+     "may frighten the boy at first but will fade from his memory with time."
+    ],
+    "correct_letter": "C",
+    "explanation": "등불은 앞길을 비추는 것이고 돌은 짊어지는 짐이므로, 이 비유는 진실이 아이를 짓누르기보다 길을 찾게 돕는다는 뜻이다. 진실을 들은 동생이 울고 난 뒤 점점 실용적인 질문을 하고, 다음 날 스스로 길을 골라 앞서 걷는 모습이 이를 뒷받침한다. A는 무게 비교에만 머물고 '등불'의 안내 의미를 놓친다. B는 어른이 대신 짊어진다는 뜻으로 오독했고, D는 지문에 근거가 없으므로 C가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "quiet"
+   ],
+   "devices": [
+    "metaphor",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-023",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-023",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 22,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Booker",
+      "Mingyu"
+     ],
+     "nameCultures": [
+      "african_american",
+      "chinese"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "a mountain bus stop",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "while deciding whether a rule still applies",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a mountain bus stop in Porto Alegre; a mother and a daughter planning a wedding while deciding whether a rule still applies"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Wind hissed through the pines above the mountain bus stop near Porto Alegre, and my mother, Mingyu, smelled of the orange peel she chews when she is deciding something. Our family rule had come down from her grandmother, who married in a valley town with two roads to the chapel: a bride must not see the wedding road before the wedding day. I was the bride, Booker was the groom, and up here there was exactly one road, which every bus took. My mother read the timetable twice, then folded it into a small square. Rules are coats, she said, and her own mother's had been let out twice before it ever reached her. She tucked the timetable into my pocket, and when the bus came, she climbed on beside me without looking away from the road.",
+    "question": "As used in the text, the phrase “Rules are coats” most nearly suggests that the family rule",
+    "options": [
+     "protects the family, as a coat guards against the harsh mountain weather.",
+     "can be put on or taken off whenever a bride finds it inconvenient.",
+     "is handed down with love and must be kept in its original form.",
+     "was cut for earlier circumstances and may need altering to fit now."
+    ],
+    "correct_letter": "D",
+    "explanation": "규칙은 길이 두 개였던 골짜기 마을에서 만들어졌는데, 지금은 길이 하나뿐이라 그대로 지킬 수 없다는 점이 앞부분 단서다. 어머니가 외할머니의 코트도 두 번이나 늘려 고쳤다고 말하는 대목은 규칙이 처한 상황에 맞게 고쳐질 수 있음을 보여 준다. A는 산의 날씨라는 표면 소재에 끌린 오답이고, B는 '아무 때나 벗는다'는 지나친 해석이다. C는 고쳐 입었다는 사실과 충돌하므로 D가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "contemplative",
+    "gentle"
+   ],
+   "devices": [
+    "metaphor",
+    "sensory imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-033",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-033",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "drama",
+    "seed": {
+     "index": 32,
+     "genre": "drama",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Marta",
+      "Ksenia"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Gdansk",
+     "setting": "a radio repair shop",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a radio repair shop in Gdansk; an elder and a restless apprentice about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Solder smoke and old dust hang over the bench of a Gdansk radio repair shop. MARTA, seventy, bends over an opened receiver; KSENIA, nineteen, turns the dial of another by the window.\nKSENIA: Warsaw. Berlin. Something from Lisbon. Every one of them is a place I have never been.\nMARTA: And every one of them is broken until we fix it. Pliers, traveler.\nKSENIA: I have a berth on a ship in May.\n(MARTA does not take the pliers. The static rises and falls.)\nMARTA: My husband had a berth in May once. He was going to send for me. For forty years I kept the sign over this door exactly the same, so he would know the shop.\nKSENIA: Marta, I—\nMARTA: (holding out her hand at last) Pliers. And write down the name of the ship before you forget it.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From cheerful to bitter, as Marta comes to resent Ksenia's plan to leave",
+     "From restless to resigned, as Ksenia gives up her plan to travel abroad",
+     "From teasing to wistful, as Marta's memory softens her reply to the news",
+     "From somber to playful, as Marta jokes about the stations Ksenia names"
+    ],
+    "correct_letter": "C",
+    "explanation": "처음에 Marta는 Ksenia를 '여행자'라 부르며 가볍게 놀린다. 배 이야기를 듣자 그녀는 펜치를 받지 않고 멈춘 뒤 떠난 남편을 기다리던 40년을 회상하며 아련한 어조로 바뀐다. 마지막에 배 이름을 적어 두라는 말은 원망이 아니라 회상이 그녀의 반응을 누그러뜨렸음을 보여 주므로 A는 틀리다. B는 Ksenia가 계획을 포기한 근거가 없고, D는 변화 방향이 반대이므로 C가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "teasing",
+    "wistful"
+   ],
+   "devices": [
+    "dialogue",
+    "stage directions"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-036",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-036",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "letter",
+    "seed": {
+     "index": 35,
+     "genre": "letter",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Emiliano",
+      "Bartolo"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Oaxaca",
+     "setting": "a lakeside dock",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "while rehearsing for an important performance",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a lakeside dock in Oaxaca; two brothers who run a failing shop while rehearsing for an important performance"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three things, brother Bartolo, I must set down before the festival: the shop owes four months' rent, the dock planks are soft under our rehearsal spot, and you still rush the second verse. I write this by the lake at Oaxaca, where we practiced again tonight while the fishermen pretended not to listen. I had meant to give you a full reckoning, column by column, as our father would have done. Yet as I write I keep hearing how the water carried your guitar across to the far shore, and how an old fisherman stood up in his boat and took off his hat. Perhaps the shop will close. Perhaps it must. On Sunday, I think, we will play as if someone on the far shore is waiting for us. Mend the third string before then. Your brother, Emiliano",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From fond teasing to sober worry about the shop's mounting debts",
+     "From sober tallying to cautious hopefulness about the performance",
+     "From frustration to firm confidence that the shop can still be saved",
+     "From regret to calm acceptance that the festival will be a failure"
+    ],
+    "correct_letter": "B",
+    "explanation": "편지는 밀린 집세, 썩은 부두, 빠른 연주 등 문제를 하나씩 따지는 냉정한 셈으로 시작한다. 그러나 호수 건너로 퍼진 기타 소리와 모자를 벗은 어부를 떠올리면서 공연에 대한 조심스러운 희망으로 어조가 바뀐다. A는 변화 방향이 반대이고, C는 가게가 문을 닫을 수도 있다고 인정한 대목과 충돌한다. D는 공연의 실패를 받아들인다고 해 지문의 희망과 맞지 않으므로 B가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "sober",
+    "hopeful"
+   ],
+   "devices": [
+    "epistolary form",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-046",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-046",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 45,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Mathis",
+      "Camille"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a snowed-in cabin",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "while arguing about something smaller than the real quarrel",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a snowed-in cabin in Lyon; a stepfather and his stepdaughter while arguing about something smaller than the real quarrel"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Lyon was two hours below us, and the road down had vanished under snow by noon. For three days Mathis and I argued about the woodstove: whether to bank it at night, how many logs, whose turn it was to crack the damper. It is only a stove, Camille, he said the first night, which made it worse. I was fifteen and had decided that everything he did in that cabin was wrong. On the third night he let the fire die, on purpose, I was sure, and I said so loudly. __He did not answer; he only took my mother's old wool coat from the hook and laid it over my shoulders.__ I knew the coat at once, and the smell of her soap still in its collar. Neither of us had said her name since October. In the morning we shoveled the path together, trading the one good shovel back and forth.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It reveals that Mathis let the fire die on purpose in order to teach Camille a lesson.",
+     "It marks the point at which Camille admits that Mathis was right about the stove.",
+     "It shows that Mathis is too worn out from the snowstorm to keep arguing.",
+     "It introduces an object that turns the narrator toward the grief beneath the quarrel."
+    ],
+    "correct_letter": "D",
+    "explanation": "밑줄 문장에서 Mathis가 말없이 어머니의 코트를 덮어 주자, 화자는 그 코트와 비누 냄새를 알아보고 10월 이후 아무도 어머니 이름을 말하지 않았음을 떠올린다. 이는 난로 다툼 밑에 있던 상실을 드러내는 전환점이며, 다음 날 함께 눈을 치우는 장면으로 이어진다. A는 '일부러 불을 꺼뜨렸다'는 화자의 의심을 사실로 받아들인 오답이다. B는 화자가 난로에 대해 인정하는 대목이 없고, C는 근거가 없으므로 D가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "poignant"
+   ],
+   "devices": [
+    "symbolism",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-055",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-055",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "diary",
+    "seed": {
+     "index": 54,
+     "genre": "diary",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Chana",
+      "Clara"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "english"
+     ],
+     "locale": "Dhaka",
+     "setting": "a river barge",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "about a name that no one uses anymore",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a river barge in Dhaka; a grandmother and her grandson about a name that no one uses anymore"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We have been three days on the barge down to Dhaka, and my grandson has taken to reading the cargo list aloud to the boatmen. This morning he found my old trunk among the jute bales and read out the name painted on its lid: Clara. He asked who she was. I told him she was a girl who once conjugated English verbs at a mission school and believed she would never live anywhere but beside a cold sea. He said it was a pretty name and asked why no one says it. I could not answer him at once. Since then he has said it twice more, testing it, and each time I have found some small reason to linger near him on the deck. Chana I have been for fifty years, and Chana I shall stay. Before supper I asked him to leave the lid as it is, and he promised not to paint over a single letter.",
+    "question": "Which choice best describes the diarist's attitude toward the name Clara?",
+    "options": [
+     "Tenderly attached to it, yet content to leave it in the past",
+     "Wistfully regretful, wishing she had kept the name of her girlhood",
+     "Uneasy, worried that the name will raise questions she cannot answer",
+     "Detached, regarding the name as belonging to someone else entirely"
+    ],
+    "correct_letter": "A",
+    "explanation": "손자가 그 이름을 부를 때마다 화자가 핑계를 만들어 그의 곁에 머무는 모습은 이름에 대한 애정을 보여 준다. 동시에 '50년 동안 Chana였고 앞으로도 Chana로 남겠다'는 말은 이름을 되찾을 생각이 없음을 드러낸다. B는 그 결심과 충돌하고, C는 바로 대답하지 못한 대목만 과장했다. D는 Clara를 '한 소녀'라고 3인칭으로 묘사한 부분에만 기대어, 뚜껑의 글자를 지켜 달라는 부탁과 모순되므로 A가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "reflective"
+   ],
+   "devices": [
+    "diary form",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-070",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-070",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "character_motivation",
+    "genre": "diary",
+    "seed": {
+     "index": 69,
+     "genre": "diary",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Yasmin",
+      "Omar"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a bakery before opening",
+     "relationship": "an author and her translator",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a bakery before opening in Marrakesh; an author and her translator while learning to let go of a habit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_character_motivation_medium"
+   },
+   "g": {
+    "passage": "Why do I always reach for the pen once more? I write this at the baker's counter in Marrakesh before dawn, while the loaves are still pale in the oven. Omar has arrived at five every morning this month and waited without complaint while I, Yasmin, struck out lines I had already struck out twice. Last week he read me his French version of my second chapter. In it I heard a sentence I had abandoned years ago, which he had quietly restored from the margins of my draft. Today, when he held out his hand, I gave him the last pages without rereading them. He seemed so startled that he nearly dropped them into the flour. The baker's boy is now dragging the first trays toward the door.",
+    "question": "Based on the text, why does Yasmin most likely give Omar the last pages without rereading them?",
+    "options": [
+     "She is too worn out from rising before dawn to look over the pages again.",
+     "She means to startle Omar out of his habit of waiting silently each morning.",
+     "She has come to trust that Omar's version keeps what she meant to say.",
+     "She must hurry so that the baker can open the shop on his usual schedule."
+    ],
+    "correct_letter": "C",
+    "explanation": "Yasmin은 이미 지운 줄을 거듭 지우는 습관이 있었는데, Omar의 번역에서 자신이 버렸던 문장이 원고 여백에서 되살아난 것을 듣는다. 이 두 단서를 이으면 그녀가 Omar가 자신의 의도를 지켜 준다고 믿게 되어 다시 읽지 않고 넘겼음을 알 수 있다. A는 다른 상태에서 동기를 끌어왔고, B는 Omar가 놀란 결과를 동기로 착각했다. D는 지문에 없는 외부 사정이므로 C가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "quiet"
+   ],
+   "devices": [
+    "rhetorical question",
+    "diary form"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-072",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-072",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "short_story",
+    "seed": {
+     "index": 71,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Isadora",
+      "Rafaela"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a bus depot",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a bus depot in Lisbon; a teacher and a student who will not speak over a borrowed object never returned"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "Who returns a thing after eleven years? Isadora wondered this as the young woman crossed toward the Lisbon depot bench where she waited each evening for the 28. Rafaela had once been the silent child in the back row of her fourth-grade class; now she was grown, and in her hands was the red umbrella Isadora had lent her one stormy afternoon in 1979. Isadora remembered the day that child had first raised her hand, and she sat a little straighter. Had something happened, she wondered, that the girl should come now, without a word of warning? Rafaela held out the umbrella, unopened, and smiled, and Isadora found herself smiling back before she had decided to. Somewhere behind them, a mechanic was hosing down the bay floor.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Warm, though briefly tinged with uncertainty",
+     "Uneasy, focused on what prompted the visit",
+     "Anxious, eased only for a moment by a smile",
+     "Wistful, dwelling on lost years of teaching"
+    ],
+    "correct_letter": "A",
+    "explanation": "Isadora는 아이가 처음 손을 들던 날을 떠올리며 자세를 고쳐 앉고, 마지막에는 자신도 모르게 미소로 화답한다. 그 사이에 무슨 일이 있었는지 걱정하는 질문이 한 번 끼어들지만 금세 미소에 밀려난다. B는 덜 두드러진 불안만 말했고, C는 따뜻함과 불안의 비중을 뒤집었다. D는 과거 교실이라는 소재와 어울리지만 상실감의 근거가 약하므로 A가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "gentle"
+   ],
+   "devices": [
+    "rhetorical question",
+    "flashback"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-02-077",
+   "task": "rewrite-005",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-02-077",
+    "batchId": "lit40-medium-02",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "memoir",
+    "seed": {
+     "index": 76,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Thorvald",
+      "Jens"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a summer camp dining hall",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "about the cost of a scholarship or opportunity",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a summer camp dining hall in Bergen; a gardener and the house's new owner about the cost of a scholarship or opportunity"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "Bergen in July smelled of tar and wet lilac, and the long dining hall of the summer school where I worked as a boy smelled of both. I was the gardener's son, trimming hedges for Thorvald, who had bought the estate that spring. One evening he called me in while the students ate and announced, before all of them, that he would pay my fees at the cathedral school in autumn. My face burned; I was holding a rake, and my boots had left a trail across his clean floor. Yet when he shook my hand, his grip was so earnest that I forgot the boots, and I thanked him twice, the second time louder. Jens, my father, was waiting by the kitchen door. Through the windows, gulls wheeled above the fish market.",
+    "question": "Which choice best describes the overall tone of the text?",
+    "options": [
+     "Embarrassed, dwelling mainly on the narrator's muddy clothes",
+     "Grateful, though at first clouded by self-conscious shame",
+     "Ashamed, with thanks offered largely out of politeness",
+     "Wary, suspicious of the new owner's public generosity"
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 학생들 앞에서 갈퀴를 든 채 흙 묻은 장화 자국을 의식하며 얼굴이 달아오른다. 그러나 진심 어린 악수에 장화를 잊고 두 번째 감사는 더 크게 말하는 데서 감사가 더 두드러진 정서임이 드러난다. A는 덜 두드러진 부끄러움만 말했고, C는 감사를 예의상으로 낮추어 비중을 뒤집었다. D는 새 주인이라는 소재와 어울리지만 의심의 근거가 없으므로 B가 정답이다."
+   },
+   "notes": [],
+   "tone": [
+    "grateful",
+    "nostalgic"
+   ],
+   "devices": [
+    "sensory imagery",
+    "memoir"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-02-063",
+   "stage": "distractor",
+   "reasons": [
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

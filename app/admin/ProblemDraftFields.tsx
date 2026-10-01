@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import type { DocProblem } from "./curriculum-doc-data";
 
-type Draft = Omit<DocProblem, "id">;
+type Draft = Omit<DocProblem, "id" | "keywords">;
 
 const LATEX_SNIPPETS: { label: string; snippet: string }[] = [
   { label: "위첨자", snippet: "x^2" },

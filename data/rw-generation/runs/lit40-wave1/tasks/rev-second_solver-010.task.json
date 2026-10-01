@@ -1,0 +1,319 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-010",
+ "chunkId": "rev-second_solver-010",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-010.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-01-051",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Taipei's eastern hills were no place for grapes, which Mingyu admitted in the first minute, while the two of us waited on his porch for a mudslide to be cleared from the only road. He had planted the vines thirty years ago, he said, after a schoolteacher returned his essay about his father's tea fields with one remark in the margin: Write about what you would choose. For years he believed the teacher had been mocking him. Then, pouring me a cup of his sour wine, he said he now suspected the remark had been praise, and that he had simply been slow to hear it. I, Xinyi, a stranger with a stalled scooter, offered nothing useful. When the road crew finally waved us through, he was trimming a single row near the porch, the one row he had left as tea.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To recount how two strangers were stranded together on a porch by a mudslide in the hills",
+    "To show how a man's lifelong choice grew from a remark whose meaning he has come to rethink",
+    "To argue that a teacher's harsh remarks are usually intended as encouragement for students",
+    "To suggest that Mingyu secretly regrets abandoning his father's tea fields for grapevines"
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-052",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Burnt coffee, floor polish, the hum of a vending machine: those are what remain to me of the night my husband had his surgery in Hamburg. For eleven years Annika had haggled at my counter over the price of rye, and for eleven years I had overcharged her slightly so that she would have something to win. When I closed the shop that afternoon, I told no one where I was going. Annika found me anyway, near midnight, carrying a paper bag from the chain bakery that had opened across from my shop in spring, the bakery I had cursed in front of her. She set a roll in my lap. I said it was stale. She said mine cost more. We argued in whispers until a nurse came to the door. Last week Annika paid full price for a rye loaf, counted the coins twice, and asked for a discount on Thursday's.",
+   "question": "Which choice best describes the main purpose of the text?",
+   "options": [
+    "To describe the narrator's fear and loneliness during the night of her husband's surgery",
+    "To suggest that old loyalties to local shops inevitably give way to newer chain businesses",
+    "To portray a loyalty between the narrator and a customer that is expressed through disputes",
+    "To show that Annika has finally stopped bargaining and now pays the narrator full price"
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-053",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "I learned to count in a Vienna printing room, where my father set type and where every sheet that left the presses was entered in a ledger thick as a paving stone. Outside, Matthias sold herring from a cart, and the winter I turned nine he began to let me pay on Fridays. He kept no book. When I asked once how he remembered, he said fish did not last long enough to need one. That winter my father lost his place at the press, and by March I owed for six weeks. I brought the coins twisted in a sheet of misprinted newsprint. Matthias took half and said the rest could wait until Linus was taller. I grew, but he was gone before I had. I have run presses of my own for forty years, and I still leave one column unruled in every ledger I keep.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A boy feels lasting guilt over a debt he never managed to repay to a local fish seller.",
+    "A father's job loss forced his young son to take on the family's financial burdens alone.",
+    "A printer explains why he adopted an unusual method of keeping his business records.",
+    "An old man's unrecorded credit left a lasting mark on a boy raised among strict accounts."
+   ],
+   "recipeBeyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-hard-01-054",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "'So you kept his plans,' Salma said from the end of the dock. Her sister, kneeling beside the half-built hull on the lake shore outside Naples, did not answer. Their father, Mateo, had laid the keel the summer before he died; at the funeral the sisters had argued about selling the boat and had not spoken in the two years since. Salma had come only to sign. Still, before she reached the hull she ran her palm along the stacked planks and rapped each one twice, as Mateo used to, listening for rot. When her sister asked whether she had brought a pen, Salma said the lake looked low this year. By midmorning she was holding planks steady, then measuring the next ones without being asked. At noon the buyer's car arrived. Salma walked up the slope, spoke with him briefly, and watched the car turn around. Back at the hull, she picked up the tape and read out a number.",
+   "question": "Based on the text, why does Salma most likely send the buyer away?",
+   "options": [
+    "She wants to finish the boat by herself as a private tribute to her father's craft.",
+    "She hopes to preserve the shared work that has begun to reconnect her with her sister.",
+    "She is trying to avoid another argument with her sister over the sale of the boat.",
+    "She suspects the planks are rotten and doubts the boat would sell at a fair price."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다"
+  },
+  {
+   "candidateId": "lit40-hard-01-055",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "hard",
+   "passage": "I used to find Mele's pencil marks in my brother's notebooks only as faint grooves, because she erased them every evening before she left our Auckland lodging house. She had tutored Nalani since winter at the table beside the courtyard's dry fountain. On the morning of the science fair I saw her on the fountain's rim with his volcano model on her knees, and I told her what I had overheard weeks before: that the idea for the side vents had been hers. The judges, I said, ought to know. Mele asked whether I thought the plaster would crack in the van. When I repeated myself, she turned the small paper flag bearing Nalani's name so that it faced the gate. At the fair he explained the vents for ten minutes, his hands shaping the air the way hers had. Mele stood near the back by the coats, her own coat folded over one arm.",
+   "question": "Based on the text, why does Mele most likely decline to claim credit for the vents?",
+   "options": [
+    "She fears that admitting her role would cost her the tutoring position with the family.",
+    "She doubts the vent idea was truly original and prefers not to defend it to the judges.",
+    "She wants Nalani to own the work fully, a goal her quiet habits had served all along.",
+    "She resents the narrator for spying on the lessons and refuses to discuss the matter."
+   ],
+   "recipeBeyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다"
+  },
+  {
+   "candidateId": "lit40-hard-01-057",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Beneath the drying lines of the kite-maker's yard in Bergen, where Gunnar's paper birds hung waiting for wind, the mother and her daughter worked down the wedding list item by item. Rooms for Anselmo's cousins: settled. Fish from the morning market: settled. Chairs, borrowed from the church: settled. The mother had always tied knots in whatever lay near her hands, and while they talked she knotted the twine meant for Gunnar's kite tails, small hard knots, one after another. Her daughter, without looking up from the list, slid the spool an inch farther away. The mother reached for it again. When the list was finished, the daughter said it had been easy, and the mother agreed that it had. At dusk Gunnar sent a red kite up from the hill, its tail running straight and clean. The mother sat with the knotted twine in her lap and began, one knot at a time, to work them loose with her thumbnail.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Orderly on the surface, with an undercurrent of reluctance",
+    "Calm, cheerful, and contentedly efficient throughout",
+    "Anguished and close to open despair beneath the routine",
+    "Resolute and untroubled once the list is fully settled"
+   ],
+   "recipeBeyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-058",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Karachi's monsoon had found our cellar for the first time in twenty years, and my father, Minjun, stood on the third step in his good shoes while sacks of rice turned slowly in the brown water. Ruwan, the insurance assessor, arrived at noon and addressed his questions to me, since my English was better. My father answered before I could, in Korean, low and fast: the pipe, the old wall, the city drains. I knew the hatch had been open; he left it open in every storm to air the shelves, a habit my mother had scolded for years. I translated the pipe. I translated the wall. Then I said, in English, that the hatch had also been open. Ruwan's pen moved. My father went upstairs without a word and stayed in the shop until dark. At supper there were two bowls on the table, and the larger piece of fish lay in mine.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Formal and coolly detached",
+    "Strained yet quietly tender",
+    "Bitter and openly hostile",
+    "Warm and fully reconciled"
+   ],
+   "recipeBeyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-059",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "'Leave the desk for last,' Baraka said, which meant, between twins, open it first. We had come back to our mother's house on the terrace above Nairobi to divide it, and we divided as we always had, with a tape measure and a grudge. He claimed the radio because he had fixed it in 1998; I claimed the good chairs because I had sat in them more. In the desk's lowest drawer were letters to Wanjiru, tied with the green ribbon she had worn to church, in a hand neither of us knew. Baraka read one and laid it face down. I read three. We went back to arguing over the blue pitcher, which each of us accused the other of breaking, and we argued longer and louder than the pitcher deserved. At dusk we closed the drawer together, his hand on one side of it and mine on the other, and left the ribbon where it was.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Playful and teasingly comic throughout",
+    "Grief-stricken and openly despairing",
+    "Wry yet quietly solemn underneath",
+    "Gravely mournful from start to finish"
+   ],
+   "recipeBeyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다"
+  },
+  {
+   "candidateId": "lit40-hard-01-063",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Manila came past the compartment window in strips of laundry and rain. Father Kiet had brought the old hymnal from Arisa's childhood parish, and he opened it on his knee to the third hymn, where someone long ago had penciled a softer word beside the printed Tagalog, a word that turned the line from an order into a request. Arisa said her grandmother had sung it that way every Sunday, loudly enough that the pews around her sang it too. She had not been inside a church, she added, in eleven years. Kiet said the bishop preferred the printed word. At the next station he mentioned that the new hymnals would be printed without margins. Arisa said nothing. She took the book, found the same word on two later pages, faint, in the same hand, and traced each one until the graphite shone, never pressing hard enough to smudge it. When the train slowed for her stop, she borrowed the pencil from his pocket, sharpened it against the window latch, and gave it back to him point first.",
+   "question": "In the text, the penciled word in the hymnal most likely represents",
+   "options": [
+    "Arisa's wish to replace the bishop's approved wording with her own version of the hymns.",
+    "the official teaching that Arisa rejected when she stopped attending the parish years ago.",
+    "an inherited, personal form of faith that Arisa still treasures despite her long absence.",
+    "a grief for her grandmother so strong that it now prevents Arisa from returning to church."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-065",
+   "attempt": 1,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "What does a prize weigh in a language you have only half learned? Zihan found out the week her Indonesian recitation won the provincial cup and her grandfather Wira's back room in Chengdu filled with cousins asking her to say something, anything. She repeated her speech; she knew nothing else by heart. Wira kept at his cutting table, laying flat blue chalk lines across the wool. Before each coat left the shop he brushed the lines away, and a customer who once asked to keep the pattern was told that a coat should not carry its measurements around. Zihan noticed he no longer corrected her in front of anyone. On the mornings after the cousins visited, a few words appeared at the edge of the table, faint, in that same blue, gone by noon. She began arriving early. In February a cousin asked her to recite again, and she answered instead in a sentence she had built herself, clumsy and new. Wira, sweeping chalk dust into his palm, did not look up, though he stopped sweeping.",
+   "question": "In the text, Wira's chalk lines most likely represent",
+   "options": [
+    "guidance that shapes Zihan's learning while leaving no visible trace of itself.",
+    "the prize Zihan won, which the family admires though it will fade from memory by spring.",
+    "Wira's private judgment of Zihan's mistakes, which he records but refuses to say aloud.",
+    "the Indonesian that Wira is losing in Chengdu, which survives only as faint, fragile marks."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-066",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "hard",
+   "passage": "Still borrowing my shuttle, Imtiaz? Lucien asked from the doorway, the rent book under his arm. She did not stop the loom. For eleven years she had rented the corner room of the Lyon cooperative from him, and for nine the walnut shuttle he had lent her, the winter her own cracked, had crossed her warp thousands of times a day. A new shuttle, bought that spring, still lay in its paper in a drawer. Lucien picked it up, weighed it, and set it down. He walked to the shelf where her finished bolts were stacked and ran his thumb along an edge; every length carried the same faint ridge, a catch in the weave that no other loom in the building made. Buyers now asked for it by name. He said, mostly to the window, that the shuttle had learned her hand better than it had ever learned his. Imtiaz offered to return it after the current order. Lucien wrote a figure in the rent book, crossed it out, wrote a smaller one, and asked whether the spring wool had arrived.",
+   "question": "As used in the text, the phrase “learned her hand better than it had ever learned his” most nearly suggests that the shuttle",
+   "options": [
+    "now belongs more to Imtiaz's craft than to Lucien's ownership.",
+    "has been reshaped by wear until it no longer fits Lucien's grip.",
+    "has been trained by Imtiaz to weave a pattern Lucien cannot copy.",
+    "has made Imtiaz a more skilled weaver than Lucien ever became."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-076",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Gyms remember everything. Caoimhe thought so as she sat on the low bench in the Glasgow school gym beside Jianguo, her stepson of eight months, while the deputy head read the janitor's account aloud: the boy seen at the equipment cupboard at four, the hasp forced by ten past. Jianguo spun a basketball on one finger. Caoimhe asked whether the janitor's watch had been checked against the bell, whether the hasp had been loose before, who else held keys. Each question came out clipped and orderly, and she wrote the answers in her diary as though preparing for a hearing. Then the deputy turned a page. A first-year's mother had phoned: Jianguo had sat with her son in the library until half four, going over fractions. The ball slowed and dropped into his lap. Caoimhe closed the diary. She tried to remember whether he had ever told her about the library, and could not, and found that the question she wanted to ask now was not one for the deputy. She set her hand on the bench, near his, and left it there.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from Caoimhe's open hostility toward Jianguo to relief that the school was mistaken.",
+    "It moves from Jianguo's careless defiance to resentment at being wrongly accused by the janitor.",
+    "It moves from Caoimhe's methodical, procedural questioning to a hesitant and private tenderness.",
+    "It moves from the deputy's formal reading to Caoimhe's embarrassment at her own suspicions."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-077",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Bologna had rained for a week, and Elisa, nine days the owner of the boarding house, was going through the kitchen with a notebook. Cracked cups, a latch that would not catch, the account book with two winters razored out. Rania, who had kept the garden for the previous owner, stood by the back door in her socks and answered each question the same way: not hers to know, the signora had handled the books. Elisa wrote that down too, and underlined it. Hunting for a pencil, she opened the drawer beneath the sink. Behind the dishcloths lay a child's school report, the pupil's surname the old owner's, the address this house, the dates the missing winters. Rania was not looking at Elisa; she was looking at the drawer. Elisa read the first line, then squared the report against the cloths and pushed the drawer shut with her hip. She tore the page of questions from her notebook and folded it small. Did the fig, she asked, want cutting back before the frost?",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It shifts from Rania's guarded evasiveness to a reluctant readiness to explain the missing winters.",
+    "It shifts from Elisa's mild suspicion of Rania to a determined resolve to uncover the house's past.",
+    "It shifts from Elisa's irritation at the house's disrepair to a weary acceptance of its many faults.",
+    "It shifts from Elisa's exacting, itemized inspection to a tactful restraint that lets a secret lie."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-079",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "When Renata moved to Arequipa, I hung her key to our Lima workshop on the nail above my bench, where it was handy, I said, for clients. For a year we traded quick, bright messages: a photo of a glue pot captioned with a client's name, a list of everyone who wanted gold leaf on a cookbook. I was good at those. Then the June storm came through the back wall, and while I pulled swollen boards from the water I lifted a loose slat and found a box she had left there: twelve blank journals, hand-sewn, one for each month she would be gone, the first marked with my name, Ximena, and the week she left. I read the date several times. I thought of my last message, a joke about a man who wanted his dog's diary bound in calfskin, and could not remember what I had been avoiding by sending it. That night I typed a sentence, deleted it, and typed it again. I asked how she was sleeping. Then I set the phone face down beside the first journal and opened it to its empty first page.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from playful affection for Renata to wounded anger that she hid a gift from the narrator.",
+    "It moves from a quick, joking lightness to a halting and more exposed earnestness.",
+    "It moves from lonely grief over Renata's move to a cheerful renewal of their old humor.",
+    "It moves from frantic worry about the storm to calm relief once the workshop is saved."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-080",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Years later, I can still taste the salt of that pool. On the date of our first concert, Yitzhak and I swam each year at the old salt-water baths in Thessaloniki, and for the tenth I came with a folder. In the changing room I laid it out: the harbor hall for a Saturday, the early songs rearranged, a letter to the critic who had once called us brave. Yitzhak said fine to each page, and fine again. In the water I kept going between strokes: posters, dates, a guest cellist. He floated on his back, eyes on the roof beams, and let me finish. Then he said my name, Eleni, the way he did before a difficult key change, and told me his left hand had been trembling on the frets since April. I let my feet find the bottom. We held the rope at the deep end without speaking, the folder growing damp on a bench somewhere behind us, and a gull walked the length of the empty diving board and back.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from Yitzhak's eager approval of the plans to a tired reluctance to perform again.",
+    "It moves from Eleni's wistful sorrow for the past to fresh excitement about the anniversary.",
+    "It moves from Eleni's brisk, determined planning to a subdued and grave stillness.",
+    "It moves from quiet tension between the partners to an easy reconciliation in the water."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-087",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Tehran in late October is mild enough to sit outdoors, so my brother Bahram and I read our mother's letters on the bench by the cemetery gate instead of in the emptied house. The carpets were sold, the books gone to the mosque library; only the brass samovar remained, and each of us had politely offered it to the other. __I had always assumed she kept it because it was too heavy to give away.__ The letters, written to her sister across thirty years, mention it often but only in passing: polished for Nowruz, dented on the stairs in Shiraz, mended by a man who overcharged. Bahram read out a line from a letter dated the spring after our father died: she had set the samovar going before she unpacked a single plate, so the new rooms would hear something familiar. He read it again, more slowly. We sat until the gatekeeper began locking the side entrance. Then Bahram folded the letter and said he would bring the car around; if we laid the samovar on a blanket, it would fit in the back.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains why the narrator and her brother have each declined to take the samovar.",
+    "It states a belief that details in the letters later call into question.",
+    "It summarizes the attitude toward the samovar that the mother expresses in her letters.",
+    "It reveals the narrator's lingering frustration with her mother's attachment to objects."
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-090",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Mabel had driven the harbor route for nineteen years and regarded the 7:40 as hers in roughly the way a cat regards a windowsill. Nikhil boarded it each morning at the chapel stop with a flask and a folded crossword, and if he was late she waited, engine running, and told the other passengers it was the timetable. On Monday the chapel stop was gone. The council had moved it two hundred yards on, to a glass shelter by the fish market, having consulted no one and least of all Mabel. Nikhil was waiting there and apologized when she drew up, as if he had signed the order himself. Mabel informed him that it was all the same to her where people chose to stand. It was all the same to her on Tuesday, too, when she slowed at the chapel anyway, and on Wednesday, and on Friday, when a herring gull had taken possession of the old post, she gave it two short, correct toots of the horn and drove on.",
+   "question": "Which choice best describes the narrator's attitude toward Mabel?",
+   "options": [
+    "Mild disapproval of her rudeness toward a passenger who has done nothing wrong",
+    "Affectionate amusement at her dignity and her refusal to admit attachment",
+    "Sympathetic pity for her loneliness after losing a routine she valued",
+    "Sincere admiration for her steady loyalty to the passengers on her route"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-091",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules hung by the guesthouse door:\nno shoes past the mat, no lamps past ten,\nno questions for the brothers while they pray.\nI kept them, and a fourth I never wrote,\nwhich was my daughter's name, Leila, unsaid.\nMy grandson broke it on the second night,\nup on one elbow in the narrow bed:\nwhy does my mother never come with us?\nAnd I, Soraya, gave him Samarkand,\nthe blue of the domes, the tiles, the thousand stars\nthe masons pressed by hand into the vaults.\nHe heard me out, the way a child will,\nthen asked again, more quietly, the same.\nI tell it now the way I'd tell a sum\nI added wrong for years and still recite,\neach star a coin laid down against a fare\ntoo large for coins. That night I broke a rule.\nThe lamp stayed lit past ten. He asked once more.",
+   "question": "Which choice best describes the speaker's attitude toward her response to her grandson's question?",
+   "options": [
+    "Quiet pride in having protected the boy from a painful family truth",
+    "Lingering frustration with the boy for pressing a question she avoided",
+    "Rueful recognition that her answer was an evasion she could not sustain",
+    "Tender nostalgia for the beauty she described to the boy in Samarkand"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-092",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Baoyu missed three practices in March, and I benched him for the semifinal, as the team rules require; I wrote those rules, and I have never made an exception. The following week I found him in the reading room of the district library in Shanghai, where the radiators ticked and nobody spoke above a breath. He had a calculus textbook open and, beside it, a ledger ruled in two columns, the kind his father kept at the noodle shop on Wuding Road. Without looking up he said his father's hands shook too much now for the evening shift. I had come with a few sentences about commitment. I sat down instead and asked which column was rent. He turned the ledger toward me. I checked his sums; he checked mine; neither of us mentioned basketball. My name is Tane, and I am not a sentimental coach. The rule is still on the gym wall, unchanged. Practice, these days, is on Tuesdays and Thursdays, the evenings the shop closes at six.",
+   "question": "Which choice best describes the narrator's attitude toward Baoyu's situation?",
+   "options": [
+    "Firm disappointment that Baoyu chose the shop over his duty to the team",
+    "Deep regret over enforcing a rule that he now believes was unfair",
+    "Cautious neutrality toward a family matter he thinks lies outside his role",
+    "Quiet sympathy expressed through action while his principles stay intact"
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-010 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-010.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-01-051 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nTaipei's eastern hills were no place for grapes, which Mingyu admitted in the first minute, while the two of us waited on his porch for a mudslide to be cleared from the only road. He had planted the vines thirty years ago, he said, after a schoolteacher returned his essay about his father's tea fields with one remark in the margin: Write about what you would choose. For years he believed the teacher had been mocking him. Then, pouring me a cup of his sour wine, he said he now suspected the remark had been praise, and that he had simply been slow to hear it. I, Xinyi, a stranger with a stalled scooter, offered nothing useful. When the road crew finally waved us through, he was trimming a single row near the porch, the one row he had left as tea.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To recount how two strangers were stranded together on a porch by a mudslide in the hills\nB) To show how a man's lifelong choice grew from a remark whose meaning he has come to rethink\nC) To argue that a teacher's harsh remarks are usually intended as encouragement for students\nD) To suggest that Mingyu secretly regrets abandoning his father's tea fields for grapevines\n### lit40-hard-01-052 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nBurnt coffee, floor polish, the hum of a vending machine: those are what remain to me of the night my husband had his surgery in Hamburg. For eleven years Annika had haggled at my counter over the price of rye, and for eleven years I had overcharged her slightly so that she would have something to win. When I closed the shop that afternoon, I told no one where I was going. Annika found me anyway, near midnight, carrying a paper bag from the chain bakery that had opened across from my shop in spring, the bakery I had cursed in front of her. She set a roll in my lap. I said it was stale. She said mine cost more. We argued in whispers until a nurse came to the door. Last week Annika paid full price for a rye loaf, counted the coins twice, and asked for a discount on Thursday's.\n\n[질문] Which choice best describes the main purpose of the text?\nA) To describe the narrator's fear and loneliness during the night of her husband's surgery\nB) To suggest that old loyalties to local shops inevitably give way to newer chain businesses\nC) To portray a loyalty between the narrator and a customer that is expressed through disputes\nD) To show that Annika has finally stopped bargaining and now pays the narrator full price\n### lit40-hard-01-053 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI learned to count in a Vienna printing room, where my father set type and where every sheet that left the presses was entered in a ledger thick as a paving stone. Outside, Matthias sold herring from a cart, and the winter I turned nine he began to let me pay on Fridays. He kept no book. When I asked once how he remembered, he said fish did not last long enough to need one. That winter my father lost his place at the press, and by March I owed for six weeks. I brought the coins twisted in a sheet of misprinted newsprint. Matthias took half and said the rest could wait until Linus was taller. I grew, but he was gone before I had. I have run presses of my own for forty years, and I still leave one column unruled in every ledger I keep.\n\n[질문] Which choice best states the main idea of the text?\nA) A boy feels lasting guilt over a debt he never managed to repay to a local fish seller.\nB) A father's job loss forced his young son to take on the family's financial burdens alone.\nC) A printer explains why he adopted an unusual method of keeping his business records.\nD) An old man's unrecorded credit left a lasting mark on a boy raised among strict accounts.\n### lit40-hard-01-054 — skill inferences · 유형 character_motivation\n[지문]\n'So you kept his plans,' Salma said from the end of the dock. Her sister, kneeling beside the half-built hull on the lake shore outside Naples, did not answer. Their father, Mateo, had laid the keel the summer before he died; at the funeral the sisters had argued about selling the boat and had not spoken in the two years since. Salma had come only to sign. Still, before she reached the hull she ran her palm along the stacked planks and rapped each one twice, as Mateo used to, listening for rot. When her sister asked whether she had brought a pen, Salma said the lake looked low this year. By midmorning she was holding planks steady, then measuring the next ones without being asked. At noon the buyer's car arrived. Salma walked up the slope, spoke with him briefly, and watched the car turn around. Back at the hull, she picked up the tape and read out a number.\n\n[질문] Based on the text, why does Salma most likely send the buyer away?\nA) She wants to finish the boat by herself as a private tribute to her father's craft.\nB) She hopes to preserve the shared work that has begun to reconnect her with her sister.\nC) She is trying to avoid another argument with her sister over the sale of the boat.\nD) She suspects the planks are rotten and doubts the boat would sell at a fair price.\n### lit40-hard-01-055 — skill inferences · 유형 character_motivation\n[지문]\nI used to find Mele's pencil marks in my brother's notebooks only as faint grooves, because she erased them every evening before she left our Auckland lodging house. She had tutored Nalani since winter at the table beside the courtyard's dry fountain. On the morning of the science fair I saw her on the fountain's rim with his volcano model on her knees, and I told her what I had overheard weeks before: that the idea for the side vents had been hers. The judges, I said, ought to know. Mele asked whether I thought the plaster would crack in the van. When I repeated myself, she turned the small paper flag bearing Nalani's name so that it faced the gate. At the fair he explained the vents for ten minutes, his hands shaping the air the way hers had. Mele stood near the back by the coats, her own coat folded over one arm.\n\n[질문] Based on the text, why does Mele most likely decline to claim credit for the vents?\nA) She fears that admitting her role would cost her the tutoring position with the family.\nB) She doubts the vent idea was truly original and prefers not to defend it to the judges.\nC) She wants Nalani to own the work fully, a goal her quiet habits had served all along.\nD) She resents the narrator for spying on the lessons and refuses to discuss the matter.\n### lit40-hard-01-057 — skill inferences · 유형 tone_or_mood\n[지문]\nBeneath the drying lines of the kite-maker's yard in Bergen, where Gunnar's paper birds hung waiting for wind, the mother and her daughter worked down the wedding list item by item. Rooms for Anselmo's cousins: settled. Fish from the morning market: settled. Chairs, borrowed from the church: settled. The mother had always tied knots in whatever lay near her hands, and while they talked she knotted the twine meant for Gunnar's kite tails, small hard knots, one after another. Her daughter, without looking up from the list, slid the spool an inch farther away. The mother reached for it again. When the list was finished, the daughter said it had been easy, and the mother agreed that it had. At dusk Gunnar sent a red kite up from the hill, its tail running straight and clean. The mother sat with the knotted twine in her lap and began, one knot at a time, to work them loose with her thumbnail.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Orderly on the surface, with an undercurrent of reluctance\nB) Calm, cheerful, and contentedly efficient throughout\nC) Anguished and close to open despair beneath the routine\nD) Resolute and untroubled once the list is fully settled\n### lit40-hard-01-058 — skill inferences · 유형 tone_or_mood\n[지문]\nKarachi's monsoon had found our cellar for the first time in twenty years, and my father, Minjun, stood on the third step in his good shoes while sacks of rice turned slowly in the brown water. Ruwan, the insurance assessor, arrived at noon and addressed his questions to me, since my English was better. My father answered before I could, in Korean, low and fast: the pipe, the old wall, the city drains. I knew the hatch had been open; he left it open in every storm to air the shelves, a habit my mother had scolded for years. I translated the pipe. I translated the wall. Then I said, in English, that the hatch had also been open. Ruwan's pen moved. My father went upstairs without a word and stayed in the shop until dark. At supper there were two bowls on the table, and the larger piece of fish lay in mine.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Formal and coolly detached\nB) Strained yet quietly tender\nC) Bitter and openly hostile\nD) Warm and fully reconciled\n### lit40-hard-01-059 — skill inferences · 유형 tone_or_mood\n[지문]\n'Leave the desk for last,' Baraka said, which meant, between twins, open it first. We had come back to our mother's house on the terrace above Nairobi to divide it, and we divided as we always had, with a tape measure and a grudge. He claimed the radio because he had fixed it in 1998; I claimed the good chairs because I had sat in them more. In the desk's lowest drawer were letters to Wanjiru, tied with the green ribbon she had worn to church, in a hand neither of us knew. Baraka read one and laid it face down. I read three. We went back to arguing over the blue pitcher, which each of us accused the other of breaking, and we argued longer and louder than the pitcher deserved. At dusk we closed the drawer together, his hand on one side of it and mine on the other, and left the ribbon where it was.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Playful and teasingly comic throughout\nB) Grief-stricken and openly despairing\nC) Wry yet quietly solemn underneath\nD) Gravely mournful from start to finish\n### lit40-hard-01-063 — skill inferences · 유형 symbolism\n[지문]\nManila came past the compartment window in strips of laundry and rain. Father Kiet had brought the old hymnal from Arisa's childhood parish, and he opened it on his knee to the third hymn, where someone long ago had penciled a softer word beside the printed Tagalog, a word that turned the line from an order into a request. Arisa said her grandmother had sung it that way every Sunday, loudly enough that the pews around her sang it too. She had not been inside a church, she added, in eleven years. Kiet said the bishop preferred the printed word. At the next station he mentioned that the new hymnals would be printed without margins. Arisa said nothing. She took the book, found the same word on two later pages, faint, in the same hand, and traced each one until the graphite shone, never pressing hard enough to smudge it. When the train slowed for her stop, she borrowed the pencil from his pocket, sharpened it against the window latch, and gave it back to him point first.\n\n[질문] In the text, the penciled word in the hymnal most likely represents\nA) Arisa's wish to replace the bishop's approved wording with her own version of the hymns.\nB) the official teaching that Arisa rejected when she stopped attending the parish years ago.\nC) an inherited, personal form of faith that Arisa still treasures despite her long absence.\nD) a grief for her grandmother so strong that it now prevents Arisa from returning to church.\n### lit40-hard-01-065 — skill inferences · 유형 symbolism\n[지문]\nWhat does a prize weigh in a language you have only half learned? Zihan found out the week her Indonesian recitation won the provincial cup and her grandfather Wira's back room in Chengdu filled with cousins asking her to say something, anything. She repeated her speech; she knew nothing else by heart. Wira kept at his cutting table, laying flat blue chalk lines across the wool. Before each coat left the shop he brushed the lines away, and a customer who once asked to keep the pattern was told that a coat should not carry its measurements around. Zihan noticed he no longer corrected her in front of anyone. On the mornings after the cousins visited, a few words appeared at the edge of the table, faint, in that same blue, gone by noon. She began arriving early. In February a cousin asked her to recite again, and she answered instead in a sentence she had built herself, clumsy and new. Wira, sweeping chalk dust into his palm, did not look up, though he stopped sweeping.\n\n[질문] In the text, Wira's chalk lines most likely represent\nA) guidance that shapes Zihan's learning while leaving no visible trace of itself.\nB) the prize Zihan won, which the family admires though it will fade from memory by spring.\nC) Wira's private judgment of Zihan's mistakes, which he records but refuses to say aloud.\nD) the Indonesian that Wira is losing in Chengdu, which survives only as faint, fragile marks.\n### lit40-hard-01-066 — skill words_in_context · 유형 figurative_language\n[지문]\nStill borrowing my shuttle, Imtiaz? Lucien asked from the doorway, the rent book under his arm. She did not stop the loom. For eleven years she had rented the corner room of the Lyon cooperative from him, and for nine the walnut shuttle he had lent her, the winter her own cracked, had crossed her warp thousands of times a day. A new shuttle, bought that spring, still lay in its paper in a drawer. Lucien picked it up, weighed it, and set it down. He walked to the shelf where her finished bolts were stacked and ran his thumb along an edge; every length carried the same faint ridge, a catch in the weave that no other loom in the building made. Buyers now asked for it by name. He said, mostly to the window, that the shuttle had learned her hand better than it had ever learned his. Imtiaz offered to return it after the current order. Lucien wrote a figure in the rent book, crossed it out, wrote a smaller one, and asked whether the spring wool had arrived.\n\n[질문] As used in the text, the phrase “learned her hand better than it had ever learned his” most nearly suggests that the shuttle\nA) now belongs more to Imtiaz's craft than to Lucien's ownership.\nB) has been reshaped by wear until it no longer fits Lucien's grip.\nC) has been trained by Imtiaz to weave a pattern Lucien cannot copy.\nD) has made Imtiaz a more skilled weaver than Lucien ever became.\n### lit40-hard-01-076 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nGyms remember everything. Caoimhe thought so as she sat on the low bench in the Glasgow school gym beside Jianguo, her stepson of eight months, while the deputy head read the janitor's account aloud: the boy seen at the equipment cupboard at four, the hasp forced by ten past. Jianguo spun a basketball on one finger. Caoimhe asked whether the janitor's watch had been checked against the bell, whether the hasp had been loose before, who else held keys. Each question came out clipped and orderly, and she wrote the answers in her diary as though preparing for a hearing. Then the deputy turned a page. A first-year's mother had phoned: Jianguo had sat with her son in the library until half four, going over fractions. The ball slowed and dropped into his lap. Caoimhe closed the diary. She tried to remember whether he had ever told her about the library, and could not, and found that the question she wanted to ask now was not one for the deputy. She set her hand on the bench, near his, and left it there.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from Caoimhe's open hostility toward Jianguo to relief that the school was mistaken.\nB) It moves from Jianguo's careless defiance to resentment at being wrongly accused by the janitor.\nC) It moves from Caoimhe's methodical, procedural questioning to a hesitant and private tenderness.\nD) It moves from the deputy's formal reading to Caoimhe's embarrassment at her own suspicions.\n### lit40-hard-01-077 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nBologna had rained for a week, and Elisa, nine days the owner of the boarding house, was going through the kitchen with a notebook. Cracked cups, a latch that would not catch, the account book with two winters razored out. Rania, who had kept the garden for the previous owner, stood by the back door in her socks and answered each question the same way: not hers to know, the signora had handled the books. Elisa wrote that down too, and underlined it. Hunting for a pencil, she opened the drawer beneath the sink. Behind the dishcloths lay a child's school report, the pupil's surname the old owner's, the address this house, the dates the missing winters. Rania was not looking at Elisa; she was looking at the drawer. Elisa read the first line, then squared the report against the cloths and pushed the drawer shut with her hip. She tore the page of questions from her notebook and folded it small. Did the fig, she asked, want cutting back before the frost?\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It shifts from Rania's guarded evasiveness to a reluctant readiness to explain the missing winters.\nB) It shifts from Elisa's mild suspicion of Rania to a determined resolve to uncover the house's past.\nC) It shifts from Elisa's irritation at the house's disrepair to a weary acceptance of its many faults.\nD) It shifts from Elisa's exacting, itemized inspection to a tactful restraint that lets a secret lie.\n### lit40-hard-01-079 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen Renata moved to Arequipa, I hung her key to our Lima workshop on the nail above my bench, where it was handy, I said, for clients. For a year we traded quick, bright messages: a photo of a glue pot captioned with a client's name, a list of everyone who wanted gold leaf on a cookbook. I was good at those. Then the June storm came through the back wall, and while I pulled swollen boards from the water I lifted a loose slat and found a box she had left there: twelve blank journals, hand-sewn, one for each month she would be gone, the first marked with my name, Ximena, and the week she left. I read the date several times. I thought of my last message, a joke about a man who wanted his dog's diary bound in calfskin, and could not remember what I had been avoiding by sending it. That night I typed a sentence, deleted it, and typed it again. I asked how she was sleeping. Then I set the phone face down beside the first journal and opened it to its empty first page.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from playful affection for Renata to wounded anger that she hid a gift from the narrator.\nB) It moves from a quick, joking lightness to a halting and more exposed earnestness.\nC) It moves from lonely grief over Renata's move to a cheerful renewal of their old humor.\nD) It moves from frantic worry about the storm to calm relief once the workshop is saved.\n### lit40-hard-01-080 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nYears later, I can still taste the salt of that pool. On the date of our first concert, Yitzhak and I swam each year at the old salt-water baths in Thessaloniki, and for the tenth I came with a folder. In the changing room I laid it out: the harbor hall for a Saturday, the early songs rearranged, a letter to the critic who had once called us brave. Yitzhak said fine to each page, and fine again. In the water I kept going between strokes: posters, dates, a guest cellist. He floated on his back, eyes on the roof beams, and let me finish. Then he said my name, Eleni, the way he did before a difficult key change, and told me his left hand had been trembling on the frets since April. I let my feet find the bottom. We held the rope at the deep end without speaking, the folder growing damp on a bench somewhere behind us, and a gull walked the length of the empty diving board and back.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from Yitzhak's eager approval of the plans to a tired reluctance to perform again.\nB) It moves from Eleni's wistful sorrow for the past to fresh excitement about the anniversary.\nC) It moves from Eleni's brisk, determined planning to a subdued and grave stillness.\nD) It moves from quiet tension between the partners to an easy reconciliation in the water.\n### lit40-hard-01-087 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nTehran in late October is mild enough to sit outdoors, so my brother Bahram and I read our mother's letters on the bench by the cemetery gate instead of in the emptied house. The carpets were sold, the books gone to the mosque library; only the brass samovar remained, and each of us had politely offered it to the other. __I had always assumed she kept it because it was too heavy to give away.__ The letters, written to her sister across thirty years, mention it often but only in passing: polished for Nowruz, dented on the stairs in Shiraz, mended by a man who overcharged. Bahram read out a line from a letter dated the spring after our father died: she had set the samovar going before she unpacked a single plate, so the new rooms would hear something familiar. He read it again, more slowly. We sat until the gatekeeper began locking the side entrance. Then Bahram folded the letter and said he would bring the car around; if we laid the samovar on a blanket, it would fit in the back.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains why the narrator and her brother have each declined to take the samovar.\nB) It states a belief that details in the letters later call into question.\nC) It summarizes the attitude toward the samovar that the mother expresses in her letters.\nD) It reveals the narrator's lingering frustration with her mother's attachment to objects.\n### lit40-hard-01-090 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nMabel had driven the harbor route for nineteen years and regarded the 7:40 as hers in roughly the way a cat regards a windowsill. Nikhil boarded it each morning at the chapel stop with a flask and a folded crossword, and if he was late she waited, engine running, and told the other passengers it was the timetable. On Monday the chapel stop was gone. The council had moved it two hundred yards on, to a glass shelter by the fish market, having consulted no one and least of all Mabel. Nikhil was waiting there and apologized when she drew up, as if he had signed the order himself. Mabel informed him that it was all the same to her where people chose to stand. It was all the same to her on Tuesday, too, when she slowed at the chapel anyway, and on Wednesday, and on Friday, when a herring gull had taken possession of the old post, she gave it two short, correct toots of the horn and drove on.\n\n[질문] Which choice best describes the narrator's attitude toward Mabel?\nA) Mild disapproval of her rudeness toward a passenger who has done nothing wrong\nB) Affectionate amusement at her dignity and her refusal to admit attachment\nC) Sympathetic pity for her loneliness after losing a routine she valued\nD) Sincere admiration for her steady loyalty to the passengers on her route\n### lit40-hard-01-091 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nThree rules hung by the guesthouse door:\nno shoes past the mat, no lamps past ten,\nno questions for the brothers while they pray.\nI kept them, and a fourth I never wrote,\nwhich was my daughter's name, Leila, unsaid.\nMy grandson broke it on the second night,\nup on one elbow in the narrow bed:\nwhy does my mother never come with us?\nAnd I, Soraya, gave him Samarkand,\nthe blue of the domes, the tiles, the thousand stars\nthe masons pressed by hand into the vaults.\nHe heard me out, the way a child will,\nthen asked again, more quietly, the same.\nI tell it now the way I'd tell a sum\nI added wrong for years and still recite,\neach star a coin laid down against a fare\ntoo large for coins. That night I broke a rule.\nThe lamp stayed lit past ten. He asked once more.\n\n[질문] Which choice best describes the speaker's attitude toward her response to her grandson's question?\nA) Quiet pride in having protected the boy from a painful family truth\nB) Lingering frustration with the boy for pressing a question she avoided\nC) Rueful recognition that her answer was an evasion she could not sustain\nD) Tender nostalgia for the beauty she described to the boy in Samarkand\n### lit40-hard-01-092 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nBaoyu missed three practices in March, and I benched him for the semifinal, as the team rules require; I wrote those rules, and I have never made an exception. The following week I found him in the reading room of the district library in Shanghai, where the radiators ticked and nobody spoke above a breath. He had a calculus textbook open and, beside it, a ledger ruled in two columns, the kind his father kept at the noodle shop on Wuding Road. Without looking up he said his father's hands shook too much now for the evening shift. I had come with a few sentences about commitment. I sat down instead and asked which column was rent. He turned the ledger toward me. I checked his sums; he checked mine; neither of us mentioned basketball. My name is Tane, and I am not a sentimental coach. The rule is still on the gym wall, unchanged. Practice, these days, is on Tuesdays and Thursdays, the evenings the shop closes at six.\n\n[질문] Which choice best describes the narrator's attitude toward Baoyu's situation?\nA) Firm disappointment that Baoyu chose the shop over his duty to the team\nB) Deep regret over enforcing a rule that he now believes was unfair\nC) Cautious neutrality toward a family matter he thinks lies outside his role\nD) Quiet sympathy expressed through action while his principles stay intact"
+}

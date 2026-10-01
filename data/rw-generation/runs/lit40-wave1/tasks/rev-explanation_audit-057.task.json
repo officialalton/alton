@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-057",
+ "chunkId": "rev-explanation_audit-057",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-057.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-02-036",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "For a long time we followed the pathway of an avalanche. To the right and left of us, upon considerable heights, the trees were sound and whole, and preserved, even at their ripe age, the health of youth. But down the straight pathway of the valley every tree had been swept away, the prostrate trunks, lying here and there, half buried in drifts of sand and rock. Here, over the whole surface, a fresh young growth not more than six or seven years old has sprung up, and begun a hopeless struggle for ground which the snow claims for its own. Before us opened winding avenues through forest; green meadows spread their pale, fresh herbage in sunny beauty.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Terrified and panicked",
+    "Observant and quietly reflective",
+    "Bitter and complaining",
+    "Playful and humorous"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 눈사태 길에 쓰러진 나무와 양옆의 건강한 나무를 자세히 대조한다. 또 어린 숲이 '희망 없는 싸움'을 시작했다고 담담히 생각한다. A, C, D는 이런 차분한 관찰과 맞지 않는다. 따라서 정답은 B이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-037",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "A thousand German colonists were called in and settled on the heath, but it was stronger than they, and they drifted away until scarce half a hundred families remained. The Government tried its hand, but there was no one who knew just how, and only discouragement resulted. Then came the war with Germany in 1864, that lost to Denmark a third of her territory. The country lay prostrate under the crushing blow. But it rose above defeat and disaster, and once more expectant eyes were turned toward the ancient domain that had slipped from its grasp.",
+   "question": "Based on the text, which choice best describes the relationship between Denmark and the heath?",
+   "options": [
+    "The heath was quickly tamed by the first German colonists.",
+    "The Danish government cared nothing for the ancient heath.",
+    "The heath defeated settlers, yet Denmark later looked to it again.",
+    "The war with Germany made Denmark give up on the heath forever."
+   ],
+   "correct_letter": "C",
+   "explanation": "황야는 독일 정착민들보다 '강해서' 그들이 떠나갔고 정부의 시도도 실패했다. 그러나 패전 뒤 덴마크는 다시 기대에 찬 눈으로 그 땅을 바라본다. A는 정착 실패와 반대이고, B는 정부가 시도했다는 말과 어긋나며, D는 다시 관심을 둔다는 결말과 반대이다. 따라서 정답은 C이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-038",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Almost without exception, it is by way of passion that a man and a woman approach each other. It is, of necessity, the exterior that first comes into view. Thus, all that youth and inexperience can know about love is its aspect of passion. Because Jane had again and again in her five grown-up years experienced men falling passionately in love with her, she fancied she was an expert in matters of love. In fact, she had still everything to learn.\n\nOn the way home she, assuming that the affair was as good as settled, that she and Victor Dorn were lovers, was busy with plans for the future.",
+   "question": "Based on the text, which choice best describes Jane's view of her relationship with Victor Dorn?",
+   "options": [
+    "Jane and Victor have openly agreed to marry very soon.",
+    "Jane distrusts Victor because he resembles her past admirers.",
+    "Victor has been chasing Jane passionately for five years.",
+    "Jane assumes a settled bond with Victor that may not exist."
+   ],
+   "correct_letter": "D",
+   "explanation": "서술자는 Jane이 연애 전문가라고 착각하지만 '아직 모든 것을 배워야 한다'고 말한다. 그런 그녀가 일이 거의 정해졌다고 '가정하며' Victor와의 미래를 계획한다. A는 확정된 합의가 없어 틀리고, B와 C는 지문에 없는 내용이다. 따라서 정답은 D이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-039",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Simple, natural, mild, and gracious, the gentle reserve of his manner added, under the circumstances, to the interest which he inspired. Somewhat of that reserve continued even after our acquaintance had ripened into intimacy.\n\nHe never spoke of his own past history, or future prospects, shunned all political discourse, and was with difficulty drawn into conversation upon the scenery and manners of the North of Europe. He seemed afraid of the subject.\n\nUpon general topics, whether of literature or art, he was remarkably open and candid. He possessed in an eminent degree the talent of acquiring languages for which his countrymen are distinguished, and had made the best use of those keys of knowledge.",
+   "question": "Based on the text, which choice best describes the narrator's relationship with the man?",
+   "options": [
+    "They grew close, though he stayed guarded about his past.",
+    "They argued often about politics and life in the North.",
+    "He openly told the narrator his entire life history.",
+    "The narrator found him rude and ended the acquaintance."
+   ],
+   "correct_letter": "A",
+   "explanation": "두 사람의 친분은 '친밀함으로 무르익었지만' 그의 조심스러움은 계속되었다. 그는 자신의 과거나 미래, 정치 이야기를 피했다. B는 그가 정치 이야기를 피했다는 말과 반대이고, C는 과거를 말하지 않았다는 점과 어긋나며, D는 그의 온화한 태도와 맞지 않는다. 따라서 정답은 A이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-040",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "I feel much obliged by your kind proposition as regards myself. For the present I must remain where I am. When I see that I have done all the good that I can accomplish for Washington College I may find it necessary to do something that will enable me to procure a competence for my family. I will then turn my hand to whatever may offer. For myself I want nothing but my food and clothes. I send in compliance with your request a number of autographs, enough, I should think, to last for all time; but if they will be of any service to you I will send more.",
+   "question": "Based on the text, which choice best describes the writer's relationship with the recipient?",
+   "options": [
+    "The writer resents the recipient for asking him for autographs.",
+    "The writer appreciates the recipient's offer but declines it for now.",
+    "The writer depends on the recipient for his family's food and clothes.",
+    "The writer has just accepted a new job that the recipient proposed."
+   ],
+   "correct_letter": "B",
+   "explanation": "글쓴이는 상대의 '친절한 제안'에 감사하지만 당분간은 지금 자리에 남아야 한다고 말한다. 또 상대의 요청대로 서명을 넉넉히 보내며 더 보내겠다고 한다. A는 기꺼이 보내는 태도와 반대이고, C와 D는 지문에 없는 내용이다. 따라서 정답은 B이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-041",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "After a bit I grew easier again; he seemed to keep his equilibrium, and I looked out at the side window on the moon-flooded landscape, with some interest. I had never seen brighter moonlight.\n\nSuddenly from out of the intense stillness and loneliness a figure, a human figure, became visible. It was that of a man, a young and active man, running along the footpath a few feet to our left, apparently from some whim, keeping pace with the fly. My first feeling was of satisfaction that I was no longer alone, at the tender mercies of my stupefied charioteer. But, as I gazed, a slight misgiving came over me. Who could it be running along this lonely road so late, and what was his motive in keeping up with us so steadily.",
+   "question": "In the text, the running figure who keeps pace with the fly most likely symbolizes",
+   "options": [
+    "the narrator's relief at reaching a familiar, well-traveled road",
+    "the driver's steady recovery of control over the carriage",
+    "a vague threat that turns the narrator's relief into unease",
+    "the narrator's own wish to leave the fly and walk home"
+   ],
+   "correct_letter": "C",
+   "explanation": "달빛 아래 고요와 외로움 속에서 나타난 인물은 처음엔 혼자가 아니라는 만족감을 주지만, 곧 왜 이렇게 늦게 따라오는지에 대한 불안을 일으킨다. 따라서 C가 그 인물이 안도를 불안으로 바꾸는 막연한 위협을 상징한다고 정확히 짚는다. A의 익숙한 길, B의 마부의 회복, D의 걸어가고 싶은 바람은 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-042",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "There must always be Winter, there must always be night and storm and cold. It is then that the flowers rest--they cannot always be in bloom. But somewhere on the great world the sun is always shining, and, just so sure as you live, it will sometime shine on you. The dear God has made it so. There is so much sun and so much storm, and we must have our share of both. It is Winter in your heart now, but soon it will be Spring. You have had one long Summer, and there must be something in between. We are not different from all else the dear God has made. It is all in one law, as the Herr Doctor will tell you.",
+   "question": "In the text, Winter most likely symbolizes",
+   "options": [
+    "a season the speaker dreads because the flowers die forever",
+    "the cold climate the listener must leave in order to recover",
+    "a punishment sent to those who complain about their lives",
+    "a time of grief that will eventually give way to renewal"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 꽃이 쉬는 시기로서 겨울을 말하고, 곧이어 너의 마음은 지금 겨울이지만 곧 봄이 올 것이라고 한다. 즉 겨울은 지나갈 슬픔의 시기를 상징하므로 D가 정답이다. A는 꽃이 영원히 죽는다고 하여 '쉰다'는 표현과 어긋나고, B와 C는 지문에 없는 내용이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-043",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "The two first of these, however, have during the first fortnight of their vegetation the brown and golden hues of Autumn upon them.\n\nBut we must be more brief in our search after the beauties of May, or we shall not have space to name the half of them. Let us turn, then, towards our home inclosures; glancing, as we pass, at a few more of those sweet sights which belong to the fields exclusively. And first let us feed our eyes with the brilliant green of yonder Wheat-field. The stems, you see, have just attained height enough to wave gracefully in the wind; which, as it passes over them, seems to convert the whole into a beautiful lake of bright green undulating water.",
+   "question": "In the text, the waving Wheat-field most likely symbolizes",
+   "options": [
+    "the lively abundance and beauty that May brings to the fields",
+    "the brown and golden decline that marks the coming of Autumn",
+    "the damage that strong winds cause to young crops in spring",
+    "the writer's longing to leave the fields for a distant sea"
+   ],
+   "correct_letter": "A",
+   "explanation": "필자는 5월의 아름다움을 찾는 중이라고 밝히고, 밀밭의 선명한 초록이 바람에 물결쳐 아름다운 호수처럼 보인다고 묘사한다. 따라서 밀밭은 5월이 들판에 가져오는 생동감과 풍요로운 아름다움을 상징하므로 A가 정답이다. B의 갈색·금빛은 다른 식물에 대한 설명이고, C와 D는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-044",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "The heavy, long-continued rains had made our trail extremely heavy, and in places almost impassable. The hours passed and we found ourselves advancing much more slowly than was desirable. The lowering clouds were massing on the mountain slopes, and the rain began to fall in torrents. It then began to dawn upon us that we might not be able to reach our destination in the limited time yet remaining of the fast-departing day.\n\nFurther progress along our dangerous path in the impenetrable gloom, that would immediately follow sunset, we knew to be impossible.",
+   "question": "In the text, the impenetrable gloom that would follow sunset most likely symbolizes",
+   "options": [
+    "the travelers' relief that the heavy rains had finally ended",
+    "an obstacle that threatens to halt the travelers' progress",
+    "the quiet beauty of the mountain scenery as evening falls",
+    "the travelers' growing distrust of the path they had chosen"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 비와 진창 때문에 일행의 진행이 늦어지고, 해가 지면 곧 뚫을 수 없는 어둠이 와서 더 나아가는 것이 불가능하다고 말한다. 따라서 어둠은 여정을 멈추게 할 장애물을 상징하므로 B가 정답이다. A는 비가 오히려 쏟아지는 상황과 맞지 않고, C와 D는 지문에서 강조되지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-045",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "A penny, worth fifty times as much as a sovereign, was something to retain and treasure. Doubtless, in their jungle-lairs, the wise old gray-beards put their heads together and agreed to raise the price on pennies when the worthless gold was all worked off. Who could tell? Mayhap the strange white men could be made to give even twenty sticks for a priceless copper.\n\nBy the end of the week the trade went slack. There was only the slightest dribble of gold. An occasional penny was reluctantly disposed of for ten sticks, while several thousand dollars in silver came in.\n\nOn the morning of the eighth day no trading was done. The gray-beards had matured their plan and were demanding twenty sticks for a penny, One-Eye delivered the new rate of exchange.",
+   "question": "As used in the text, the phrase “the slightest dribble of gold” most nearly suggests",
+   "options": [
+    "a very small, irregular trickle of gold coming in",
+    "a sudden flood of gold arriving all at once",
+    "a quantity of gold that had been melted down",
+    "a store of gold that was being secretly hidden"
+   ],
+   "correct_letter": "A",
+   "explanation": "바로 앞 문장에서 거래가 시들해졌다고 하므로 이 구절은 금이 아주 조금씩만 들어오는 상황을 나타낸다. 따라서 A가 정답이다. B는 정반대의 의미이고, C의 녹인 금과 D의 숨겨둔 금은 문맥과 관련이 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-046",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The day was gray and not warm, though it was the beginning of June, and a fire had been lighted in the study to serve the purpose, morally and physically, of the hot toddy recommended by the elder. Poor Mr. Buchanan spread his hands out to it when he was left alone. He was very much broken down. The tears came to his eyes. He felt forlorn, helpless, as if there was nothing in heaven or earth to support him. It was a question of money, and was not that a wretched thing to ask God for? The filthy siller, the root of so much evil. He could have demonstrated to you very powerfully, had you gone to ask his advice in such an emergency, that it was not money, but the love of money that was the root of all evil; but in his heart, in this dreadful emergency, he cursed it.",
+   "question": "As used in the text, the phrase “very much broken down” most nearly suggests",
+   "options": [
+    "badly injured in body after a recent fall",
+    "deeply discouraged and emotionally exhausted",
+    "furious with the elder who had advised him",
+    "weakened by an illness caught in the cold"
+   ],
+   "correct_letter": "B",
+   "explanation": "이어지는 문장에서 그는 눈물을 흘리고 쓸쓸하고 무력하며 의지할 데가 없다고 느낀다. 따라서 이 구절은 몸이 아니라 마음이 깊이 낙담하고 지친 상태를 뜻하므로 B가 정답이다. A와 D는 신체적 상태로 잘못 해석했고, C의 분노는 지문에 나타나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-047",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "Not in contempt but to our sport inclined\nSmile on us, shades of Judges short and tall\nPortrayed on windows of the Temple Hall;\nThere was a time that ye grave thoughts resigned,\nThen, warm with sack, the Serjeants' hearts waxed kind,\nIn mirth Lords Keepers danced the galliard all,\nNot in contempt.\n\nOf pleasures past the shadows here we find,\nGay strife on brighter swards we thus recall,\nWhere maiden laughter winged the flying ball;\nDeclare us, fair ones, with a merry mind\nNot in contempt.",
+   "question": "As used in the text, the phrase “maiden laughter winged the flying ball” most nearly suggests",
+   "options": [
+    "the young women threw the ball in anger",
+    "birds carried the ball across the lawn",
+    "laughter seemed to lift and speed the ball",
+    "laughter interrupted and stopped the game"
+   ],
+   "correct_letter": "C",
+   "explanation": "이 구절은 지난날의 즐거운 놀이를 회상하는 맥락에 있으며, 웃음이 공에 날개를 달아준 듯하다는 비유이다. 따라서 웃음이 공을 들어 올려 빨리 날게 한 것 같다는 C가 정답이다. A의 분노와 D의 중단은 즐거운 분위기와 맞지 않고, B는 비유를 문자 그대로 읽은 오답이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-049",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "I generally cover very great distances at a high speed without the least inconvenience to myself, but I find that those who accompany me nearly always break down.\n\nAfter inspecting a number of applicants I fixed upon one man whose features showed firmness of character and unusual determination. He was a man of few words--one of the rarest and best qualities in a travelling servant, and--he had no relations dependent upon him--the next best quality. He could shoot straight, he could stick on a saddle, he could walk. He required little sleep. He was willing to go to any country where I chose to take him.",
+   "question": "As used in the text, the phrase “he could stick on a saddle” most nearly suggests",
+   "options": [
+    "he could ride well without being thrown",
+    "he knew how to mend a torn saddle",
+    "he disliked riding on long journeys",
+    "he preferred walking to riding a horse"
+   ],
+   "correct_letter": "A",
+   "explanation": "이 구절은 사격, 도보 같은 여행 하인으로서의 능력들과 나란히 나열되어 있다. 따라서 말에서 떨어지지 않고 잘 탈 수 있다는 A가 정답이다. B는 '안장'이라는 단어만 따온 오답이고, C와 D는 칭찬하는 문맥과 어긋난다."
+  },
+  {
+   "candidateId": "lit40-easy-02-057",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Being thus installed as one of Mrs. Despard’s favorites, it was not at all singular that they should see a great deal of the young gentleman. And they did see him pretty often. Gradually he forgot his objection to meeting Lisbeth, and rather sneered in secret at the violence of that first shock of repulsion. It was all over, now, he said, and why should such a woman trouble him? Indeed, what greater proof of his security could he give himself than the fact that he could meet her almost daily, and still feel indifferent? It must be confessed that he rather prided himself upon his indifference.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "from bitter resentment to open forgiveness of Lisbeth",
+    "from cheerful anticipation to sudden grief over a loss",
+    "from the man's confident reasoning to a quietly ironic remark",
+    "from fear of Lisbeth to growing romantic admiration for her"
+   ],
+   "correct_letter": "C",
+   "explanation": "지문 중반까지 청년은 Lisbeth를 매일 만나도 무관심하다며 자신이 안전하다고 자신 있게 생각한다. 그러나 마지막에 화자는 그가 그 무관심을 은근히 자랑스러워했다고 털어놓으며 그 자신감을 살짝 비꼰다. 따라서 C가 정답이고, A, B, D의 감정 변화는 지문에 나타나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-058",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "I had looked forward to this quiet time as a schoolboy looks forward to the holidays, thinking at last I should have Fay to myself and could woo and win her back to me. But my hopes were doomed to disappointment. My darling seemed just as far from me as ever, only instead of being gay and laughter-loving she was quiet and depressed.\n\nAnnabel and I did all in our power to cheer her, but in vain. It was obvious that she was pining for society of her own age, and feeling the reaction after the gaiety of the Christmas vacation.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "from deep sorrow to sudden relief",
+    "from open anger to calm acceptance",
+    "from dull boredom to lively excitement",
+    "from eager hope to quiet disappointment"
+   ],
+   "correct_letter": "D",
+   "explanation": "화자는 처음에 이 시간을 방학을 기다리는 학생처럼 기대하며 Fay의 마음을 되찾으려 했다. 그러나 곧 희망이 좌절되었다고 하고, 우울한 Fay를 위로해도 소용없었다고 말한다. 따라서 열띤 기대에서 실망으로 바뀌는 D가 정답이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-059",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "The Judge took down his fiddle,\nAnd put his feet on the stove,\nAnd heaved a sigh from his middle\nThat might have been fat, or love;\nHe leaned his head on the mantel,\nAnd bent his ear to the strings,\nAnd the tender chords awakened\nThe echoes of many things.\n\nThe Bar had enjoyed the measure,\nThe Bench and Senate had been\nAmused at the simple pleasure\nHe drew from his violin;\nBut weary of power and duty,\nHe had laid them down with a sigh,\nExhausted of life the beauty,\nAnd he fiddled he knew not why.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "from gently comic warmth to weary melancholy",
+    "from deep grief to triumphant celebration",
+    "from open anger to light amusement",
+    "from stiff formality to sharp mockery"
+   ],
+   "correct_letter": "A",
+   "explanation": "첫 연은 판사가 난로에 발을 올리고 살찐 탓인지 사랑 탓인지 모를 한숨을 쉬는 등 유머러스하고 따뜻하다. 둘째 연에서는 권력과 의무에 지쳐 삶의 아름다움이 다했다는 쓸쓸한 분위기로 바뀐다. 따라서 A가 정답이고, B, C, D의 변화는 지문과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-060",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "ELSIE.\n\nNo, that's too rough. We'll play husband and wife. Bob and I will get married, and, Teresa, you must be the minister and a bridesmaid.\n\n(_They retire into the house, where, with the aid of a wrapper, a night dress, a bouquet, and a black mackintosh, the ceremony is properly performed._)\n\nELSIE.\n\nNow we'll have a little girl baby, and (_to Teresa_) you must be it.\n\nTERESA.\n\nNo, I want to be the wife now, and you be the baby.\n\nELSIE.\n\nNo, I'll be the husband, and let Bob be the baby.\n\nBOB.\n\nI won't be the baby!",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "from a bitter quarrel to friendly agreement",
+    "from cooperative play to petty arguing",
+    "from timid fear to growing bravery",
+    "from a solemn ritual to shared grief"
+   ],
+   "correct_letter": "B",
+   "explanation": "처음에 아이들은 결혼 놀이를 함께 하며 의식을 제대로 치른다. 그러나 아기 역할을 정하는 대목에서 Teresa와 Bob이 서로 원하지 않는 역할을 거부하며 다툰다. 따라서 협력하는 놀이에서 사소한 말다툼으로 바뀌는 B가 정답이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-061",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "We enter the principal room, at one end of which is a big bed, while nearer the door is a table with wine and glasses, and fruit, and specimens of lava and other matters. My friend, with the recklessness of youth, spends his money. I refuse to do anything of the kind; and again our coachman urges on his wild career. He pulls up again as a woman rushes out of her cabin to offer us drink. Again we are tempted, and in vain. Then we reach a level of reeds and rushes, where resides a venerable and unwashed hermit, who sighs as he turns in and thinks of the hardness of our hearts.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from cheerful anticipation to bitter regret over money spent.",
+    "It moves from anxious fear of the coachman to calm relief at arrival.",
+    "It moves from plain description of a room to playful mock-solemnity.",
+    "It moves from admiring praise of the hermit to open scorn for him."
+   ],
+   "correct_letter": "C",
+   "explanation": "지문은 방 안의 사물을 담담히 묘사하다가, 여관·여인·은자의 유혹을 거듭 물리치는 과정을 과장된 엄숙함으로 서술한다. 특히 은자가 '우리 마음의 완고함'을 한탄한다는 대목은 장난스러운 모의 진지함을 드러내므로 C가 정답이다. A의 후회, B의 두려움, D의 경멸은 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-062",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Despite this hint, the lesson is enforced upon the children, but there is no evidence that it bears fruit in their homes to any noticeable extent, as is the case with the Italians I spoke of. The homes are too hopeless, the grind too unceasing. The managers know it and have little hope of the older immigrants. It is toward getting hold of their children that they bend every effort, and with a success that shows how easily these children can be moulded for good or for bad. Nor do they let go their grasp of them until the job is finished.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from praise of the Italians to criticism of the managers.",
+    "It moves from confidence in the lesson to doubt about the children.",
+    "It moves from sympathy for older immigrants to anger at the children.",
+    "It moves from discouragement about the homes to resolve about the children."
+   ],
+   "correct_letter": "D",
+   "explanation": "앞부분은 가정이 '너무 절망적'이고 노인 이민자에게 희망이 적다는 낙담의 어조이다. 이후 '아이들을 붙잡는 데 모든 노력을 기울인다'며 결의와 성공의 어조로 바뀌므로 D가 정답이다. A는 이탈리아인이 비교 대상일 뿐이고, B와 C는 아이들에 대한 지문의 긍정적 평가와 반대된다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-057 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-057.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-02-036 — skill inferences · 유형 tone_or_mood\n[지문]\nFor a long time we followed the pathway of an avalanche. To the right and left of us, upon considerable heights, the trees were sound and whole, and preserved, even at their ripe age, the health of youth. But down the straight pathway of the valley every tree had been swept away, the prostrate trunks, lying here and there, half buried in drifts of sand and rock. Here, over the whole surface, a fresh young growth not more than six or seven years old has sprung up, and begun a hopeless struggle for ground which the snow claims for its own. Before us opened winding avenues through forest; green meadows spread their pale, fresh herbage in sunny beauty.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Terrified and panicked\nB) Observant and quietly reflective\nC) Bitter and complaining\nD) Playful and humorous\n\n[표시된 정답] B\n[해설]\n화자는 눈사태 길에 쓰러진 나무와 양옆의 건강한 나무를 자세히 대조한다. 또 어린 숲이 '희망 없는 싸움'을 시작했다고 담담히 생각한다. A, C, D는 이런 차분한 관찰과 맞지 않는다. 따라서 정답은 B이다.\n### lit40-easy-02-037 — skill inferences · 유형 relationship_between_characters\n[지문]\nA thousand German colonists were called in and settled on the heath, but it was stronger than they, and they drifted away until scarce half a hundred families remained. The Government tried its hand, but there was no one who knew just how, and only discouragement resulted. Then came the war with Germany in 1864, that lost to Denmark a third of her territory. The country lay prostrate under the crushing blow. But it rose above defeat and disaster, and once more expectant eyes were turned toward the ancient domain that had slipped from its grasp.\n\n[질문] Based on the text, which choice best describes the relationship between Denmark and the heath?\nA) The heath was quickly tamed by the first German colonists.\nB) The Danish government cared nothing for the ancient heath.\nC) The heath defeated settlers, yet Denmark later looked to it again.\nD) The war with Germany made Denmark give up on the heath forever.\n\n[표시된 정답] C\n[해설]\n황야는 독일 정착민들보다 '강해서' 그들이 떠나갔고 정부의 시도도 실패했다. 그러나 패전 뒤 덴마크는 다시 기대에 찬 눈으로 그 땅을 바라본다. A는 정착 실패와 반대이고, B는 정부가 시도했다는 말과 어긋나며, D는 다시 관심을 둔다는 결말과 반대이다. 따라서 정답은 C이다.\n### lit40-easy-02-038 — skill inferences · 유형 relationship_between_characters\n[지문]\nAlmost without exception, it is by way of passion that a man and a woman approach each other. It is, of necessity, the exterior that first comes into view. Thus, all that youth and inexperience can know about love is its aspect of passion. Because Jane had again and again in her five grown-up years experienced men falling passionately in love with her, she fancied she was an expert in matters of love. In fact, she had still everything to learn.\n\nOn the way home she, assuming that the affair was as good as settled, that she and Victor Dorn were lovers, was busy with plans for the future.\n\n[질문] Based on the text, which choice best describes Jane's view of her relationship with Victor Dorn?\nA) Jane and Victor have openly agreed to marry very soon.\nB) Jane distrusts Victor because he resembles her past admirers.\nC) Victor has been chasing Jane passionately for five years.\nD) Jane assumes a settled bond with Victor that may not exist.\n\n[표시된 정답] D\n[해설]\n서술자는 Jane이 연애 전문가라고 착각하지만 '아직 모든 것을 배워야 한다'고 말한다. 그런 그녀가 일이 거의 정해졌다고 '가정하며' Victor와의 미래를 계획한다. A는 확정된 합의가 없어 틀리고, B와 C는 지문에 없는 내용이다. 따라서 정답은 D이다.\n### lit40-easy-02-039 — skill inferences · 유형 relationship_between_characters\n[지문]\nSimple, natural, mild, and gracious, the gentle reserve of his manner added, under the circumstances, to the interest which he inspired. Somewhat of that reserve continued even after our acquaintance had ripened into intimacy.\n\nHe never spoke of his own past history, or future prospects, shunned all political discourse, and was with difficulty drawn into conversation upon the scenery and manners of the North of Europe. He seemed afraid of the subject.\n\nUpon general topics, whether of literature or art, he was remarkably open and candid. He possessed in an eminent degree the talent of acquiring languages for which his countrymen are distinguished, and had made the best use of those keys of knowledge.\n\n[질문] Based on the text, which choice best describes the narrator's relationship with the man?\nA) They grew close, though he stayed guarded about his past.\nB) They argued often about politics and life in the North.\nC) He openly told the narrator his entire life history.\nD) The narrator found him rude and ended the acquaintance.\n\n[표시된 정답] A\n[해설]\n두 사람의 친분은 '친밀함으로 무르익었지만' 그의 조심스러움은 계속되었다. 그는 자신의 과거나 미래, 정치 이야기를 피했다. B는 그가 정치 이야기를 피했다는 말과 반대이고, C는 과거를 말하지 않았다는 점과 어긋나며, D는 그의 온화한 태도와 맞지 않는다. 따라서 정답은 A이다.\n### lit40-easy-02-040 — skill inferences · 유형 relationship_between_characters\n[지문]\nI feel much obliged by your kind proposition as regards myself. For the present I must remain where I am. When I see that I have done all the good that I can accomplish for Washington College I may find it necessary to do something that will enable me to procure a competence for my family. I will then turn my hand to whatever may offer. For myself I want nothing but my food and clothes. I send in compliance with your request a number of autographs, enough, I should think, to last for all time; but if they will be of any service to you I will send more.\n\n[질문] Based on the text, which choice best describes the writer's relationship with the recipient?\nA) The writer resents the recipient for asking him for autographs.\nB) The writer appreciates the recipient's offer but declines it for now.\nC) The writer depends on the recipient for his family's food and clothes.\nD) The writer has just accepted a new job that the recipient proposed.\n\n[표시된 정답] B\n[해설]\n글쓴이는 상대의 '친절한 제안'에 감사하지만 당분간은 지금 자리에 남아야 한다고 말한다. 또 상대의 요청대로 서명을 넉넉히 보내며 더 보내겠다고 한다. A는 기꺼이 보내는 태도와 반대이고, C와 D는 지문에 없는 내용이다. 따라서 정답은 B이다.\n### lit40-easy-02-041 — skill inferences · 유형 symbolism\n[지문]\nAfter a bit I grew easier again; he seemed to keep his equilibrium, and I looked out at the side window on the moon-flooded landscape, with some interest. I had never seen brighter moonlight.\n\nSuddenly from out of the intense stillness and loneliness a figure, a human figure, became visible. It was that of a man, a young and active man, running along the footpath a few feet to our left, apparently from some whim, keeping pace with the fly. My first feeling was of satisfaction that I was no longer alone, at the tender mercies of my stupefied charioteer. But, as I gazed, a slight misgiving came over me. Who could it be running along this lonely road so late, and what was his motive in keeping up with us so steadily.\n\n[질문] In the text, the running figure who keeps pace with the fly most likely symbolizes\nA) the narrator's relief at reaching a familiar, well-traveled road\nB) the driver's steady recovery of control over the carriage\nC) a vague threat that turns the narrator's relief into unease\nD) the narrator's own wish to leave the fly and walk home\n\n[표시된 정답] C\n[해설]\n달빛 아래 고요와 외로움 속에서 나타난 인물은 처음엔 혼자가 아니라는 만족감을 주지만, 곧 왜 이렇게 늦게 따라오는지에 대한 불안을 일으킨다. 따라서 C가 그 인물이 안도를 불안으로 바꾸는 막연한 위협을 상징한다고 정확히 짚는다. A의 익숙한 길, B의 마부의 회복, D의 걸어가고 싶은 바람은 지문에 근거가 없다.\n### lit40-easy-02-042 — skill inferences · 유형 symbolism\n[지문]\nThere must always be Winter, there must always be night and storm and cold. It is then that the flowers rest--they cannot always be in bloom. But somewhere on the great world the sun is always shining, and, just so sure as you live, it will sometime shine on you. The dear God has made it so. There is so much sun and so much storm, and we must have our share of both. It is Winter in your heart now, but soon it will be Spring. You have had one long Summer, and there must be something in between. We are not different from all else the dear God has made. It is all in one law, as the Herr Doctor will tell you.\n\n[질문] In the text, Winter most likely symbolizes\nA) a season the speaker dreads because the flowers die forever\nB) the cold climate the listener must leave in order to recover\nC) a punishment sent to those who complain about their lives\nD) a time of grief that will eventually give way to renewal\n\n[표시된 정답] D\n[해설]\n화자는 꽃이 쉬는 시기로서 겨울을 말하고, 곧이어 너의 마음은 지금 겨울이지만 곧 봄이 올 것이라고 한다. 즉 겨울은 지나갈 슬픔의 시기를 상징하므로 D가 정답이다. A는 꽃이 영원히 죽는다고 하여 '쉰다'는 표현과 어긋나고, B와 C는 지문에 없는 내용이다.\n### lit40-easy-02-043 — skill inferences · 유형 symbolism\n[지문]\nThe two first of these, however, have during the first fortnight of their vegetation the brown and golden hues of Autumn upon them.\n\nBut we must be more brief in our search after the beauties of May, or we shall not have space to name the half of them. Let us turn, then, towards our home inclosures; glancing, as we pass, at a few more of those sweet sights which belong to the fields exclusively. And first let us feed our eyes with the brilliant green of yonder Wheat-field. The stems, you see, have just attained height enough to wave gracefully in the wind; which, as it passes over them, seems to convert the whole into a beautiful lake of bright green undulating water.\n\n[질문] In the text, the waving Wheat-field most likely symbolizes\nA) the lively abundance and beauty that May brings to the fields\nB) the brown and golden decline that marks the coming of Autumn\nC) the damage that strong winds cause to young crops in spring\nD) the writer's longing to leave the fields for a distant sea\n\n[표시된 정답] A\n[해설]\n필자는 5월의 아름다움을 찾는 중이라고 밝히고, 밀밭의 선명한 초록이 바람에 물결쳐 아름다운 호수처럼 보인다고 묘사한다. 따라서 밀밭은 5월이 들판에 가져오는 생동감과 풍요로운 아름다움을 상징하므로 A가 정답이다. B의 갈색·금빛은 다른 식물에 대한 설명이고, C와 D는 지문에 근거가 없다.\n### lit40-easy-02-044 — skill inferences · 유형 symbolism\n[지문]\nThe heavy, long-continued rains had made our trail extremely heavy, and in places almost impassable. The hours passed and we found ourselves advancing much more slowly than was desirable. The lowering clouds were massing on the mountain slopes, and the rain began to fall in torrents. It then began to dawn upon us that we might not be able to reach our destination in the limited time yet remaining of the fast-departing day.\n\nFurther progress along our dangerous path in the impenetrable gloom, that would immediately follow sunset, we knew to be impossible.\n\n[질문] In the text, the impenetrable gloom that would follow sunset most likely symbolizes\nA) the travelers' relief that the heavy rains had finally ended\nB) an obstacle that threatens to halt the travelers' progress\nC) the quiet beauty of the mountain scenery as evening falls\nD) the travelers' growing distrust of the path they had chosen\n\n[표시된 정답] B\n[해설]\n지문은 비와 진창 때문에 일행의 진행이 늦어지고, 해가 지면 곧 뚫을 수 없는 어둠이 와서 더 나아가는 것이 불가능하다고 말한다. 따라서 어둠은 여정을 멈추게 할 장애물을 상징하므로 B가 정답이다. A는 비가 오히려 쏟아지는 상황과 맞지 않고, C와 D는 지문에서 강조되지 않는다.\n### lit40-easy-02-045 — skill words_in_context · 유형 figurative_language\n[지문]\nA penny, worth fifty times as much as a sovereign, was something to retain and treasure. Doubtless, in their jungle-lairs, the wise old gray-beards put their heads together and agreed to raise the price on pennies when the worthless gold was all worked off. Who could tell? Mayhap the strange white men could be made to give even twenty sticks for a priceless copper.\n\nBy the end of the week the trade went slack. There was only the slightest dribble of gold. An occasional penny was reluctantly disposed of for ten sticks, while several thousand dollars in silver came in.\n\nOn the morning of the eighth day no trading was done. The gray-beards had matured their plan and were demanding twenty sticks for a penny, One-Eye delivered the new rate of exchange.\n\n[질문] As used in the text, the phrase “the slightest dribble of gold” most nearly suggests\nA) a very small, irregular trickle of gold coming in\nB) a sudden flood of gold arriving all at once\nC) a quantity of gold that had been melted down\nD) a store of gold that was being secretly hidden\n\n[표시된 정답] A\n[해설]\n바로 앞 문장에서 거래가 시들해졌다고 하므로 이 구절은 금이 아주 조금씩만 들어오는 상황을 나타낸다. 따라서 A가 정답이다. B는 정반대의 의미이고, C의 녹인 금과 D의 숨겨둔 금은 문맥과 관련이 없다.\n### lit40-easy-02-046 — skill words_in_context · 유형 figurative_language\n[지문]\nThe day was gray and not warm, though it was the beginning of June, and a fire had been lighted in the study to serve the purpose, morally and physically, of the hot toddy recommended by the elder. Poor Mr. Buchanan spread his hands out to it when he was left alone. He was very much broken down. The tears came to his eyes. He felt forlorn, helpless, as if there was nothing in heaven or earth to support him. It was a question of money, and was not that a wretched thing to ask God for? The filthy siller, the root of so much evil. He could have demonstrated to you very powerfully, had you gone to ask his advice in such an emergency, that it was not money, but the love of money that was the root of all evil; but in his heart, in this dreadful emergency, he cursed it.\n\n[질문] As used in the text, the phrase “very much broken down” most nearly suggests\nA) badly injured in body after a recent fall\nB) deeply discouraged and emotionally exhausted\nC) furious with the elder who had advised him\nD) weakened by an illness caught in the cold\n\n[표시된 정답] B\n[해설]\n이어지는 문장에서 그는 눈물을 흘리고 쓸쓸하고 무력하며 의지할 데가 없다고 느낀다. 따라서 이 구절은 몸이 아니라 마음이 깊이 낙담하고 지친 상태를 뜻하므로 B가 정답이다. A와 D는 신체적 상태로 잘못 해석했고, C의 분노는 지문에 나타나지 않는다.\n### lit40-easy-02-047 — skill words_in_context · 유형 figurative_language\n[지문]\nNot in contempt but to our sport inclined\nSmile on us, shades of Judges short and tall\nPortrayed on windows of the Temple Hall;\nThere was a time that ye grave thoughts resigned,\nThen, warm with sack, the Serjeants' hearts waxed kind,\nIn mirth Lords Keepers danced the galliard all,\nNot in contempt.\n\nOf pleasures past the shadows here we find,\nGay strife on brighter swards we thus recall,\nWhere maiden laughter winged the flying ball;\nDeclare us, fair ones, with a merry mind\nNot in contempt.\n\n[질문] As used in the text, the phrase “maiden laughter winged the flying ball” most nearly suggests\nA) the young women threw the ball in anger\nB) birds carried the ball across the lawn\nC) laughter seemed to lift and speed the ball\nD) laughter interrupted and stopped the game\n\n[표시된 정답] C\n[해설]\n이 구절은 지난날의 즐거운 놀이를 회상하는 맥락에 있으며, 웃음이 공에 날개를 달아준 듯하다는 비유이다. 따라서 웃음이 공을 들어 올려 빨리 날게 한 것 같다는 C가 정답이다. A의 분노와 D의 중단은 즐거운 분위기와 맞지 않고, B는 비유를 문자 그대로 읽은 오답이다.\n### lit40-easy-02-049 — skill words_in_context · 유형 figurative_language\n[지문]\nI generally cover very great distances at a high speed without the least inconvenience to myself, but I find that those who accompany me nearly always break down.\n\nAfter inspecting a number of applicants I fixed upon one man whose features showed firmness of character and unusual determination. He was a man of few words--one of the rarest and best qualities in a travelling servant, and--he had no relations dependent upon him--the next best quality. He could shoot straight, he could stick on a saddle, he could walk. He required little sleep. He was willing to go to any country where I chose to take him.\n\n[질문] As used in the text, the phrase “he could stick on a saddle” most nearly suggests\nA) he could ride well without being thrown\nB) he knew how to mend a torn saddle\nC) he disliked riding on long journeys\nD) he preferred walking to riding a horse\n\n[표시된 정답] A\n[해설]\n이 구절은 사격, 도보 같은 여행 하인으로서의 능력들과 나란히 나열되어 있다. 따라서 말에서 떨어지지 않고 잘 탈 수 있다는 A가 정답이다. B는 '안장'이라는 단어만 따온 오답이고, C와 D는 칭찬하는 문맥과 어긋난다.\n### lit40-easy-02-057 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nBeing thus installed as one of Mrs. Despard’s favorites, it was not at all singular that they should see a great deal of the young gentleman. And they did see him pretty often. Gradually he forgot his objection to meeting Lisbeth, and rather sneered in secret at the violence of that first shock of repulsion. It was all over, now, he said, and why should such a woman trouble him? Indeed, what greater proof of his security could he give himself than the fact that he could meet her almost daily, and still feel indifferent? It must be confessed that he rather prided himself upon his indifference.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) from bitter resentment to open forgiveness of Lisbeth\nB) from cheerful anticipation to sudden grief over a loss\nC) from the man's confident reasoning to a quietly ironic remark\nD) from fear of Lisbeth to growing romantic admiration for her\n\n[표시된 정답] C\n[해설]\n지문 중반까지 청년은 Lisbeth를 매일 만나도 무관심하다며 자신이 안전하다고 자신 있게 생각한다. 그러나 마지막에 화자는 그가 그 무관심을 은근히 자랑스러워했다고 털어놓으며 그 자신감을 살짝 비꼰다. 따라서 C가 정답이고, A, B, D의 감정 변화는 지문에 나타나지 않는다.\n### lit40-easy-02-058 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nI had looked forward to this quiet time as a schoolboy looks forward to the holidays, thinking at last I should have Fay to myself and could woo and win her back to me. But my hopes were doomed to disappointment. My darling seemed just as far from me as ever, only instead of being gay and laughter-loving she was quiet and depressed.\n\nAnnabel and I did all in our power to cheer her, but in vain. It was obvious that she was pining for society of her own age, and feeling the reaction after the gaiety of the Christmas vacation.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) from deep sorrow to sudden relief\nB) from open anger to calm acceptance\nC) from dull boredom to lively excitement\nD) from eager hope to quiet disappointment\n\n[표시된 정답] D\n[해설]\n화자는 처음에 이 시간을 방학을 기다리는 학생처럼 기대하며 Fay의 마음을 되찾으려 했다. 그러나 곧 희망이 좌절되었다고 하고, 우울한 Fay를 위로해도 소용없었다고 말한다. 따라서 열띤 기대에서 실망으로 바뀌는 D가 정답이다.\n### lit40-easy-02-059 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nThe Judge took down his fiddle,\nAnd put his feet on the stove,\nAnd heaved a sigh from his middle\nThat might have been fat, or love;\nHe leaned his head on the mantel,\nAnd bent his ear to the strings,\nAnd the tender chords awakened\nThe echoes of many things.\n\nThe Bar had enjoyed the measure,\nThe Bench and Senate had been\nAmused at the simple pleasure\nHe drew from his violin;\nBut weary of power and duty,\nHe had laid them down with a sigh,\nExhausted of life the beauty,\nAnd he fiddled he knew not why.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) from gently comic warmth to weary melancholy\nB) from deep grief to triumphant celebration\nC) from open anger to light amusement\nD) from stiff formality to sharp mockery\n\n[표시된 정답] A\n[해설]\n첫 연은 판사가 난로에 발을 올리고 살찐 탓인지 사랑 탓인지 모를 한숨을 쉬는 등 유머러스하고 따뜻하다. 둘째 연에서는 권력과 의무에 지쳐 삶의 아름다움이 다했다는 쓸쓸한 분위기로 바뀐다. 따라서 A가 정답이고, B, C, D의 변화는 지문과 맞지 않는다.\n### lit40-easy-02-060 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nELSIE.\n\nNo, that's too rough. We'll play husband and wife. Bob and I will get married, and, Teresa, you must be the minister and a bridesmaid.\n\n(_They retire into the house, where, with the aid of a wrapper, a night dress, a bouquet, and a black mackintosh, the ceremony is properly performed._)\n\nELSIE.\n\nNow we'll have a little girl baby, and (_to Teresa_) you must be it.\n\nTERESA.\n\nNo, I want to be the wife now, and you be the baby.\n\nELSIE.\n\nNo, I'll be the husband, and let Bob be the baby.\n\nBOB.\n\nI won't be the baby!\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) from a bitter quarrel to friendly agreement\nB) from cooperative play to petty arguing\nC) from timid fear to growing bravery\nD) from a solemn ritual to shared grief\n\n[표시된 정답] B\n[해설]\n처음에 아이들은 결혼 놀이를 함께 하며 의식을 제대로 치른다. 그러나 아기 역할을 정하는 대목에서 Teresa와 Bob이 서로 원하지 않는 역할을 거부하며 다툰다. 따라서 협력하는 놀이에서 사소한 말다툼으로 바뀌는 B가 정답이다.\n### lit40-easy-02-061 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWe enter the principal room, at one end of which is a big bed, while nearer the door is a table with wine and glasses, and fruit, and specimens of lava and other matters. My friend, with the recklessness of youth, spends his money. I refuse to do anything of the kind; and again our coachman urges on his wild career. He pulls up again as a woman rushes out of her cabin to offer us drink. Again we are tempted, and in vain. Then we reach a level of reeds and rushes, where resides a venerable and unwashed hermit, who sighs as he turns in and thinks of the hardness of our hearts.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from cheerful anticipation to bitter regret over money spent.\nB) It moves from anxious fear of the coachman to calm relief at arrival.\nC) It moves from plain description of a room to playful mock-solemnity.\nD) It moves from admiring praise of the hermit to open scorn for him.\n\n[표시된 정답] C\n[해설]\n지문은 방 안의 사물을 담담히 묘사하다가, 여관·여인·은자의 유혹을 거듭 물리치는 과정을 과장된 엄숙함으로 서술한다. 특히 은자가 '우리 마음의 완고함'을 한탄한다는 대목은 장난스러운 모의 진지함을 드러내므로 C가 정답이다. A의 후회, B의 두려움, D의 경멸은 지문에 근거가 없다.\n### lit40-easy-02-062 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nDespite this hint, the lesson is enforced upon the children, but there is no evidence that it bears fruit in their homes to any noticeable extent, as is the case with the Italians I spoke of. The homes are too hopeless, the grind too unceasing. The managers know it and have little hope of the older immigrants. It is toward getting hold of their children that they bend every effort, and with a success that shows how easily these children can be moulded for good or for bad. Nor do they let go their grasp of them until the job is finished.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from praise of the Italians to criticism of the managers.\nB) It moves from confidence in the lesson to doubt about the children.\nC) It moves from sympathy for older immigrants to anger at the children.\nD) It moves from discouragement about the homes to resolve about the children.\n\n[표시된 정답] D\n[해설]\n앞부분은 가정이 '너무 절망적'이고 노인 이민자에게 희망이 적다는 낙담의 어조이다. 이후 '아이들을 붙잡는 데 모든 노력을 기울인다'며 결의와 성공의 어조로 바뀌므로 D가 정답이다. A는 이탈리아인이 비교 대상일 뿐이고, B와 C는 아이들에 대한 지문의 긍정적 평가와 반대된다."
+}

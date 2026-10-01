@@ -20,6 +20,11 @@ vi.mock("@/utils/supabase/client", () => ({
   }),
 }));
 
+const confirmOwnEmailMock = vi.fn().mockResolvedValue(undefined);
+vi.mock("./actions", () => ({
+  confirmOwnEmailAfterPasswordSet: () => confirmOwnEmailMock(),
+}));
+
 function fillAndSubmit(password = "password123") {
   fireEvent.change(screen.getByLabelText("새 비밀번호"), { target: { value: password } });
   fireEvent.change(screen.getByLabelText("새 비밀번호 확인"), { target: { value: password } });
@@ -150,6 +155,17 @@ describe("SetPasswordPage", () => {
 
     await waitFor(() => {
       expect(pushMock).toHaveBeenCalledWith("/post-auth");
+    });
+  });
+
+  it("비밀번호 설정에 성공하면 email_confirm을 올리는 액션도 호출한다(학생 이메일 실검증 이벤트, 2026-09-05)", async () => {
+    window.location.hash = "#access_token=tok-a&refresh_token=ref-a&type=invite";
+    render(<SetPasswordPage />);
+
+    fillAndSubmit();
+
+    await waitFor(() => {
+      expect(confirmOwnEmailMock).toHaveBeenCalled();
     });
   });
 });

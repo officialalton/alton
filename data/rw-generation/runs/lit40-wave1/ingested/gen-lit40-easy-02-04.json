@@ -1,0 +1,1290 @@
+{
+ "taskId": "gen-lit40-easy-02-04",
+ "passed": [
+  {
+   "candidateId": "lit40-easy-02-061",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-061",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 60,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Dewi",
+      "Xiulan"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "chinese"
+     ],
+     "locale": "Colombo",
+     "setting": "a lighthouse station",
+     "relationship": "a coach and a benched star",
+     "conflict": "about keeping a family business open",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a lighthouse station in Colombo; a coach and a benched star about keeping a family business open"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We enter the principal room, at one end of which is a big bed, while nearer the door is a table with wine and glasses, and fruit, and specimens of lava and other matters. My friend, with the recklessness of youth, spends his money. I refuse to do anything of the kind; and again our coachman urges on his wild career. He pulls up again as a woman rushes out of her cabin to offer us drink. Again we are tempted, and in vain. Then we reach a level of reeds and rushes, where resides a venerable and unwashed hermit, who sighs as he turns in and thinks of the hardness of our hearts.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "It moves from cheerful anticipation to bitter regret over money spent.",
+     "It moves from anxious fear of the coachman to calm relief at arrival.",
+     "It moves from plain description of a room to playful mock-solemnity.",
+     "It moves from admiring praise of the hermit to open scorn for him."
+    ],
+    "correct_letter": "C",
+    "explanation": "지문은 방 안의 사물을 담담히 묘사하다가, 여관·여인·은자의 유혹을 거듭 물리치는 과정을 과장된 엄숙함으로 서술한다. 특히 은자가 '우리 마음의 완고함'을 한탄한다는 대목은 장난스러운 모의 진지함을 드러내므로 C가 정답이다. A의 후회, B의 두려움, D의 경멸은 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "playful"
+   ],
+   "devices": [
+    "irony",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "We enter the principal room, at one end of which is a big bed, while nearer the door is a table with wine and glasses, and fruit, and specimens of lava and other matters. My friend, with the recklessness of youth, spends his money. I refuse to do anything of the kind; and again our coachman urges on his wild career. He pulls up again as a woman rushes out of her cabin to offer us drink. Again we are tempted, and in vain. Then we reach a level of reeds and rushes, where resides a venerable and unwashed hermit, who sighs as he turns in and thinks of the hardness of our hearts.",
+    "source": {
+     "author": "Ritchie, J. Ewing (James Ewing)",
+     "work": "Cities of the Dawn\r Naples - Athens - Pompeii - Constantinople - Smyrna - Jaffa - Jerusalem - Alexandria - Cairo - Marseilles - Avignon - Lyons - Dijon",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1898,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/36084",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-36084",
+     "corpusTextSha256": "07cbd17eed2beae03ddb2f0011e57162186cd21a72e213c471c84713d64db8d1",
+     "excerptSha256": "4db8b3e9e93ec6f7f4079d90937fa49ec3429bce1f06d9b8530dbc8c668d2c4f",
+     "sliceSha256": "70c11c3efa07580a7201f84bc9ef34bc33a9d7dc15c2b3797473fe5441d05d68",
+     "location": {
+      "startChar": 46598,
+      "endChar": 47184,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 14
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-062",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-062",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 61,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Reid",
+      "Silas"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Vermont",
+     "setting": "a tea plantation",
+     "relationship": "a new teacher and a wary student",
+     "conflict": "over blame for a lost opportunity",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a tea plantation in Vermont; a new teacher and a wary student over blame for a lost opportunity"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Despite this hint, the lesson is enforced upon the children, but there is no evidence that it bears fruit in their homes to any noticeable extent, as is the case with the Italians I spoke of. The homes are too hopeless, the grind too unceasing. The managers know it and have little hope of the older immigrants. It is toward getting hold of their children that they bend every effort, and with a success that shows how easily these children can be moulded for good or for bad. Nor do they let go their grasp of them until the job is finished.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "It moves from praise of the Italians to criticism of the managers.",
+     "It moves from confidence in the lesson to doubt about the children.",
+     "It moves from sympathy for older immigrants to anger at the children.",
+     "It moves from discouragement about the homes to resolve about the children."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분은 가정이 '너무 절망적'이고 노인 이민자에게 희망이 적다는 낙담의 어조이다. 이후 '아이들을 붙잡는 데 모든 노력을 기울인다'며 결의와 성공의 어조로 바뀌므로 D가 정답이다. A는 이탈리아인이 비교 대상일 뿐이고, B와 C는 아이들에 대한 지문의 긍정적 평가와 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "somber",
+    "determined"
+   ],
+   "devices": [
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Despite this hint, the lesson is enforced upon the children, but there is no evidence that it bears fruit in their homes to any noticeable extent, as is the case with the Italians I spoke of. The homes are too hopeless, the grind too unceasing. The managers know it and have little hope of the older immigrants. It is toward getting hold of their children that they bend every effort, and with a success that shows how easily these children can be moulded for good or for bad. Nor do they let go their grasp of them until the job is finished.",
+    "source": {
+     "author": "Riis, Jacob A. (Jacob August)",
+     "work": "The Children of the Poor",
+     "year": 1892,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/32609",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-32609",
+     "corpusTextSha256": "c0bcf70cdeb948adcc3207fadc9315d7802017f22988567919b4ffa4c2b9e184",
+     "excerptSha256": "fa962e7147996dfa4cbf5b84525f57f376d918b71e80c35a955a1c0e4c784361",
+     "sliceSha256": "37acaa72493770e973c0a5a9d390d7a5185b91935fe342c70fe4ca74475c6a29",
+     "location": {
+      "startChar": 88794,
+      "endChar": 89336,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 18
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-063",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-063",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "letter",
+    "seed": {
+     "index": 62,
+     "genre": "letter",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Amara",
+      "Friedrich"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "german_austrian"
+     ],
+     "locale": "Hamburg",
+     "setting": "a printing press room",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a printing press room in Hamburg; a grandfather and a granddaughter learning his language after learning how someone really earned their reputation"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Sensible women may always have a good measure of political influence of the right sort, if they choose. And it is in one sense a duty on their part to claim this influence, and to exert it, but always in the true womanly way. The influence of good sense, of a sound judgment, of good feeling may always he theirs. Let us see that we preserve this influence, and that we use it wisely. But let us cherish our happy immunities as women by keeping aloof from all public personal action in the political field.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "It moves from urging women to use influence to cautioning against public action.",
+     "It moves from mocking women's political views to praising their quiet sense.",
+     "It moves from doubting women's judgment to demanding full political rights.",
+     "It moves from calmly describing a duty to angrily rejecting all influence."
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 먼저 여성이 분별력과 판단력으로 정치적 영향력을 행사하는 것이 의무라고 권한다. 그러나 'But'으로 시작하는 마지막 문장에서 공적 정치 활동은 멀리하라고 경고하는 어조로 바뀌므로 A가 정답이다. B의 조롱, C의 권리 요구, D의 분노는 지문과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "earnest",
+    "cautionary"
+   ],
+   "devices": [
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Sensible women may always have a good measure of political influence of the right sort, if they choose. And it is in one sense a duty on their part to claim this influence, and to exert it, but always in the true womanly way. The influence of good sense, of a sound judgment, of good feeling may always he theirs. Let us see that we preserve this influence, and that we use it wisely. But let us cherish our happy immunities as women by keeping aloof from all public personal action in the political field.",
+    "source": {
+     "author": "Cooper, Susan Fenimore",
+     "work": "Female Suffrage: A Letter to the Christian Women of America",
+     "year": 1850,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1894,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/2157",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-2157",
+     "corpusTextSha256": "c1ac76012f5349f216dbb20fe897960036f5c3467d195625d9fcd321a160973f",
+     "excerptSha256": "621c55687eadc7d5b542c7141d49e1818a2e585981c9f75fce6abaa410c1a9f8",
+     "sliceSha256": "a8a8a2009a04639d09f323a7afd2438955774c36ea6c9529cfee99f2fafca4bc",
+     "location": {
+      "startChar": 74030,
+      "endChar": 74536,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 83
+     },
+     "genre": "letter",
+     "workForm": "letter"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-064",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-064",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 63,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Takoda",
+      "Zhiming"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "chinese"
+     ],
+     "locale": "Taipei",
+     "setting": "a vineyard at harvest",
+     "relationship": "an old teacher and a former pupil",
+     "conflict": "after a misunderstood gift",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a vineyard at harvest in Taipei; an old teacher and a former pupil after a misunderstood gift"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "On Twelfth Night the little ones were christened, and then the trooper bethought himself of his promise to get back soon. The storms had ceased, but worse had befallen; the sea was frozen over as far as eye reached, and the island was cut off from all communication with the outer world. There was nothing for it but to wait. It proved the longest and hardest winter any one then living could remember. Easter was at hand before the ice broke up, and let a fishing smack slip over to Ystad, on the mainland. It came back with news that set the whole island wondering.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It recounts a christening in detail, then explains why the trooper never returned.",
+     "It describes a delay caused by the frozen sea, then hints at surprising news.",
+     "It praises the island's winter beauty, then contrasts it with the mainland.",
+     "It presents the trooper's promise, then shows him breaking it on purpose."
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 기병이 곧 돌아가겠다던 약속을 떠올렸지만 바다가 얼어 섬이 고립되었다고 전한다. 이어 유난히 길었던 겨울과 부활절 무렵 해빙을 거쳐, 섬 전체를 놀라게 한 소식이 왔다는 암시로 끝나므로 B가 정답이다. A는 세례식을 자세히 묘사하지 않고, C와 D는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "suspenseful",
+    "plain"
+   ],
+   "devices": [
+    "foreshadowing"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "On Twelfth Night the little ones were christened, and then the trooper bethought himself of his promise to get back soon. The storms had ceased, but worse had befallen; the sea was frozen over as far as eye reached, and the island was cut off from all communication with the outer world. There was nothing for it but to wait. It proved the longest and hardest winter any one then living could remember. Easter was at hand before the ice broke up, and let a fishing smack slip over to Ystad, on the mainland. It came back with news that set the whole island wondering.",
+    "source": {
+     "author": "Riis, Jacob A. (Jacob August)",
+     "work": "Hero Tales of the Far North",
+     "year": 1910,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/12481",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-12481",
+     "corpusTextSha256": "46cf0aa7e283b0602e1b993e94bbdf162f07b2a894b85055fc187845f413f3ba",
+     "excerptSha256": "2bedf0d44f72d12c0be2c400f985d88d5865a042439e66c9d6a06f9c3d579eb0",
+     "sliceSha256": "55ee48792548369504cad154f601334d6b7cd2025448a2db1a4aebc7a65b0c12",
+     "location": {
+      "startChar": 269468,
+      "endChar": 270035,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 81
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-066",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-066",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 65,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Suhyun",
+      "Elodie"
+     ],
+     "nameCultures": [
+      "korean",
+      "french"
+     ],
+     "locale": "Jeju Island",
+     "setting": "a language school classroom",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "about a promise nobody remembers making",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a language school classroom in Jeju Island; two musicians in a failing duo about a promise nobody remembers making"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The testimony in such a case must, under the conditions of the present life, be forever inaccessible. It lies wholly outside the range of experience. However abundant it may be, we cannot expect to meet with it. And accordingly our failure to produce it does not raise even the slightest presumption against our theory. When conceived in this way, the belief in a future life is without scientific support; but at the same time it is placed beyond the need of scientific support and beyond the range of scientific criticism.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It presents evidence for a future life, then dismisses opposing objections.",
+     "It criticizes belief in a future life, then urges readers to abandon it.",
+     "It recounts a personal experience, then generalizes it into a theory.",
+     "It claims the evidence is unreachable, then draws a conclusion about criticism."
+    ],
+    "correct_letter": "D",
+    "explanation": "지문은 먼저 그런 증언이 경험의 범위 밖에 있어 접근할 수 없다고 말한다. 그로부터 증거를 내놓지 못해도 이론에 불리하지 않다고 추론하고, 결국 그 믿음이 과학적 비판의 범위 밖에 있다고 결론짓는다. 따라서 D가 정답이며, A는 증거 제시, B는 믿음 포기 촉구, C는 개인 경험으로 잘못 설명한다."
+   },
+   "notes": [],
+   "tone": [
+    "reasoned",
+    "measured"
+   ],
+   "devices": [
+    "logical progression"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The testimony in such a case must, under the conditions of the present life, be forever inaccessible. It lies wholly outside the range of experience. However abundant it may be, we cannot expect to meet with it. And accordingly our failure to produce it does not raise even the slightest presumption against our theory. When conceived in this way, the belief in a future life is without scientific support; but at the same time it is placed beyond the need of scientific support and beyond the range of scientific criticism.",
+    "source": {
+     "author": "Fiske, John",
+     "work": "The Unseen World, and Other Essays",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1901,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/1486",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-1486",
+     "corpusTextSha256": "4b8a25cd8ff1944031115f38fa45f7731e5bd5c88447436e88d9ec2011bc6635",
+     "excerptSha256": "dbdb5fb4b4a9c0375b34e7505952ad78b0cc6a620300e62bfc0e73075f0717bd",
+     "sliceSha256": "4c0a4454524ca5a2c4b2921836f98163799d20f8e14a2180f9b3c939c520bd3d",
+     "location": {
+      "startChar": 91082,
+      "endChar": 91606,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 15
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-072",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-072",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "short_story",
+    "seed": {
+     "index": 71,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "19c",
+     "names": [
+      "Benedita",
+      "Kagiso"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "east_south_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a lakeside dock",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "after a surprising success that makes things harder",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a lakeside dock in Addis Ababa; a young apprentice and a master carpenter after a surprising success that makes things harder"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Where the ball passed, not one of us precisely knew; but I fancy it must have been over our heads, and that the wind of it may have contributed to our disaster.\n\nAt any rate, the boat sank by the stern, quite gently, in three feet of water, leaving the captain and myself, facing each other, on our feet. The other three took complete headers, and came up again, drenched and bubbling.\n\nSo far there was no great harm. No lives were lost, and we could wade ashore in safety. But there were all our stores at the bottom, and, to make things worse, only two guns out of five remained in a state for service. Mine I had snatched from my knees and held over my head, by a sort of instinct.",
+    "question": "Which choice best describes the narrator's attitude in the text?",
+    "options": [
+     "He regards the sinking with calm good humor while noting the real losses.",
+     "He recalls the sinking with lasting terror and shame at his own panic.",
+     "He blames the captain angrily for steering the boat into danger.",
+     "He shows complete indifference to the loss of the stores and guns."
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 배가 '아주 부드럽게' 석 자 물에 가라앉아 선장과 마주 선 채 남았다고 담담하고 익살스럽게 묘사한다. 동시에 식량이 가라앉고 총 다섯 정 중 두 정만 남았다는 실제 손실도 짚으므로 A가 정답이다. B의 공포, C의 비난은 근거가 없고, D는 '설상가상'이라는 표현과 모순된다."
+   },
+   "notes": [],
+   "tone": [
+    "humorous",
+    "calm"
+   ],
+   "devices": [
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Where the ball passed, not one of us precisely knew; but I fancy it must have been over our heads, and that the wind of it may have contributed to our disaster.\n\nAt any rate, the boat sank by the stern, quite gently, in three feet of water, leaving the captain and myself, facing each other, on our feet. The other three took complete headers, and came up again, drenched and bubbling.\n\nSo far there was no great harm. No lives were lost, and we could wade ashore in safety. But there were all our stores at the bottom, and, to make things worse, only two guns out of five remained in a state for service. Mine I had snatched from my knees and held over my head, by a sort of instinct.",
+    "source": {
+     "author": "Stevenson, Robert Louis",
+     "work": "The Works of Robert Louis Stevenson - Swanston Edition, Vol. 06",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1894,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/30393",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-30393",
+     "corpusTextSha256": "551588ab8340909abb2588edaa735b7f8463744b6da2f7cc8a26359682812181",
+     "excerptSha256": "af037fe45371e89e2d1c61eb6b23759ce75d805feac503c514979e70d3c88906",
+     "sliceSha256": "a1110ae273d83a5faf53d996da810043fc005cd7b40a3747b63603ff6106bbf8",
+     "location": {
+      "startChar": 178734,
+      "endChar": 179419,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 33
+     },
+     "genre": "short_story",
+     "workForm": "novel(scene used for short_story slot)"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-073",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-073",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 72,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Selin",
+      "Emre"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Thessaloniki",
+     "setting": "an apartment stairwell",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "after a storm reveals what was buried",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "an apartment stairwell in Thessaloniki; a retired judge and a young clerk after a storm reveals what was buried"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I was not very uncomfortable, for I had not been all over into the water. I drove down to the lumber shed, took the squire in, and headed towards home. The senator was shivering with cold, though fortunately it was a very warm day for the season, and he did not absolutely suffer.\n\nIt had been cloudy and threatening rain all the afternoon and evening, and before we reached the main road it began to pour in torrents. I had an oil-cloth, which I put over the trunk and the mail. Under ordinary circumstances, a seven-mile ride in such a heavy rain would have been a great misfortune; but, as both of us had been in the river, it did not make much difference to us.",
+    "question": "Which choice best describes the narrator's attitude in the text?",
+    "options": [
+     "He feels bitter frustration that the rain ruined an otherwise pleasant trip.",
+     "He accepts the downpour practically, since they were already soaked.",
+     "He is consumed by worry that the senator will fall seriously ill.",
+     "He takes quiet amusement in the squire's unfortunate soaking."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 평소라면 7마일을 폭우 속에 가는 것이 큰 불운이었겠지만, 둘 다 이미 강에 빠졌으니 별 차이가 없다고 말한다. 또 자신은 그리 불편하지 않았고 상원의원도 따뜻한 날씨 덕에 크게 고생하지 않았다고 하므로 B가 정답이다. A의 원망, C의 깊은 걱정, D의 조롱은 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "pragmatic",
+    "matter-of-fact"
+   ],
+   "devices": [
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I was not very uncomfortable, for I had not been all over into the water. I drove down to the lumber shed, took the squire in, and headed towards home. The senator was shivering with cold, though fortunately it was a very warm day for the season, and he did not absolutely suffer.\n\nIt had been cloudy and threatening rain all the afternoon and evening, and before we reached the main road it began to pour in torrents. I had an oil-cloth, which I put over the trunk and the mail. Under ordinary circumstances, a seven-mile ride in such a heavy rain would have been a great misfortune; but, as both of us had been in the river, it did not make much difference to us.",
+    "source": {
+     "author": "Optic, Oliver",
+     "work": "Down the River; Or, Buck Bradford and His Tyrants",
+     "year": 1896,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1897,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/24283",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-24283",
+     "corpusTextSha256": "227c42f85a8050b256e4a8db0486678976c5785f093c34791b92e9c0066bf4d1",
+     "excerptSha256": "605737720259667c8d8a365792027995d3e4a3e24e025501d3a10ecc4e18a6f4",
+     "sliceSha256": "14f756d9df0638de393a6ad78ad8660f5b3f0d9b663fcc4220948535d228103b",
+     "location": {
+      "startChar": 66427,
+      "endChar": 67092,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 20
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-074",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-074",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 73,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Noemie",
+      "Odile"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a flooded cellar",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a flooded cellar in Lyon; a teacher and a student who will not speak over a borrowed object never returned"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "\"See, Winter comes, to rule the varied year,\nSullen and sad, with all his rising train,\nVapours, and clouds, and storms. Be these my theme,\nThese! that exalt the soul to solemn thought,\nAnd heavenly musing. Welcome, kindred glooms!\nCongenial horrors, hail! with frequent foot,\nPleased have I, in my cheerful morn of life,\nWhen nursed by careless Solitude I lived,\nAnd sung of Nature with unceasing joy,\nPleased have I wander'd through your rough domain;\nTrod the pure virgin-snows, myself as pure;\nHeard the winds roar, and the big torrents burst;\nOr seen the deep-fermenting tempest brew'd\nIn the grim evening sky. Thus passed the time,\nTill through the lucid chambers of the south\nLook'd out the joyous Spring, look'd out, and smiled!\"",
+    "question": "Which choice best describes the narrator's attitude in the text?",
+    "options": [
+     "He dreads winter's arrival and longs only for the return of spring.",
+     "He treats winter with indifference, since it no longer affects him.",
+     "He welcomes winter's storms as kindred companions that lift the soul.",
+     "He regrets ever having wandered through winter's harsh domain."
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 겨울의 증기·구름·폭풍이 영혼을 '엄숙한 사색'으로 고양시킨다며 노래의 주제로 삼는다. 이어 '반가운 동족 같은 어둠'이라 부르며 젊은 시절 기쁘게 그 거친 영역을 거닐었다고 회상하므로 C가 정답이다. A의 두려움, B의 무관심, D의 후회는 '기뻤다'는 반복 표현과 모순된다."
+   },
+   "notes": [],
+   "tone": [
+    "exalted",
+    "reverent"
+   ],
+   "devices": [
+    "apostrophe",
+    "personification"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "\"See, Winter comes, to rule the varied year,\nSullen and sad, with all his rising train,\nVapours, and clouds, and storms. Be these my theme,\nThese! that exalt the soul to solemn thought,\nAnd heavenly musing. Welcome, kindred glooms!\nCongenial horrors, hail! with frequent foot,\nPleased have I, in my cheerful morn of life,\nWhen nursed by careless Solitude I lived,\nAnd sung of Nature with unceasing joy,\nPleased have I wander'd through your rough domain;\nTrod the pure virgin-snows, myself as pure;\nHeard the winds roar, and the big torrents burst;\nOr seen the deep-fermenting tempest brew'd\nIn the grim evening sky. Thus passed the time,\nTill through the lucid chambers of the south\nLook'd out the joyous Spring, look'd out, and smiled!\"",
+    "source": {
+     "author": "Wilson, John",
+     "work": "Recreations of Christopher North, Volume 2",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1854,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/19938",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-19938",
+     "corpusTextSha256": "f7bcbeb39a9a7d42d73654198362a31a978ebc6f2ff522a3e1430dee9c5d53bb",
+     "excerptSha256": "a456365aca1687d30ddc54fc4893934924eab1785053bc8bd64b22d54eb748a4",
+     "sliceSha256": "98c9fc5d1a1130e3dbc39747c2dc49674d736bd6907a372d48cb8c8ad2505c14",
+     "location": {
+      "startChar": 550146,
+      "endChar": 550943,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 57
+     },
+     "genre": "poetry",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-075",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-075",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 74,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Esperanza",
+      "Eulalio"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Havana",
+     "setting": "a school gymnasium",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a school gymnasium in Havana; a brother and sister reading their mother's letters while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I have achieved none of those objects which the instinct of mankind especially prompts them to pursue, and the accomplishment of which must therefore beget a native satisfaction. The truly wise, after all their speculations, will be led into the common path, and, in homage to the human nature that pervades them, will gather gold, and till the earth, and set out trees, and build a house. But I have scorned such wisdom. I have rejected, also, the settled, sober, careful gladness of a man by his own fireside, with those around him whose welfare is committed to his trust and all their guidance to his fond authority.",
+    "question": "Which choice best describes the narrator's attitude in the text?",
+    "options": [
+     "He takes triumphant pride in having escaped the common path of others.",
+     "He resents the wise for gathering gold while he remained poor.",
+     "He is confused about which goals mankind instinctively pursues.",
+     "He admits with rueful candor that he has spurned what others value."
+    ],
+    "correct_letter": "D",
+    "explanation": "화자는 인간이 본능적으로 추구하는 목표를 하나도 이루지 못했다고 고백한다. 이어 현명한 이들은 결국 집을 짓고 가정을 꾸리는데 자신은 '그런 지혜를 경멸했다'며 가정의 기쁨도 거부했다고 담담히 인정하므로 D가 정답이다. A의 자부심, B의 원망, C의 혼란은 지문의 자기 성찰적 어조와 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "rueful",
+    "reflective"
+   ],
+   "devices": [
+    "parallelism"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I have achieved none of those objects which the instinct of mankind especially prompts them to pursue, and the accomplishment of which must therefore beget a native satisfaction. The truly wise, after all their speculations, will be led into the common path, and, in homage to the human nature that pervades them, will gather gold, and till the earth, and set out trees, and build a house. But I have scorned such wisdom. I have rejected, also, the settled, sober, careful gladness of a man by his own fireside, with those around him whose welfare is committed to his trust and all their guidance to his fond authority.",
+    "source": {
+     "author": "Hawthorne, Nathaniel",
+     "work": "Fragments from the Journal of a Solitary Man (From: \"The Doliver Romance and Other Pieces: Tales and Sketches\")",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1864,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/9247",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-9247",
+     "corpusTextSha256": "885e234207e18103533a28f01fad74af8c921bb0953d4072a19e10e88f6eff01",
+     "excerptSha256": "4ee7fde270501e462a69555011653040bea09f3a763725c8487f21ebf1005d83",
+     "sliceSha256": "0f0df98a968aeaf9f4b648f15f6094b61b7cce2d3a059c176807d18d5123fe7a",
+     "location": {
+      "startChar": 4383,
+      "endChar": 5005,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 14
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-076",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-076",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "memoir",
+    "seed": {
+     "index": 75,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Aroha",
+      "Rafael"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "spanish_iberian"
+     ],
+     "locale": "Seville",
+     "setting": "a seed-saving cooperative",
+     "relationship": "a landlord and a long-term tenant",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a seed-saving cooperative in Seville; a landlord and a long-term tenant about an ending that nobody wants to admit"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The police station lodging-house, where the soft side of a plank is the regulation couch, is next in order. The manner in which this police bed is \"made up\" is interesting in its simplicity. The loose planks that make the platform are simply turned over, and the job is done, with an occasional coat of white-wash thrown in to sweeten things. I know of only one easier way, but, so far as I am informed, it has never been introduced in this country. It used to be practised, if report spoke truly, in certain old-country towns.",
+    "question": "Which choice best describes the narrator's attitude in the text?",
+    "options": [
+     "He views the police bed with dry mockery of its crude simplicity.",
+     "He sincerely admires the efficiency of the police bed's design.",
+     "He expresses open outrage and demands that the stations be reformed.",
+     "He feels nostalgic fondness for customs from old-country towns."
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 판자의 '부드러운 면'이 규정 침대라고 비꼬고, 판자를 뒤집기만 하면 잠자리 정리가 끝난다며 '단순함이 흥미롭다'고 말한다. 석회 칠로 '향기롭게' 한다는 표현도 반어적이므로 A가 정답이다. B는 반어를 문자 그대로 읽은 것이고, C의 분노와 D의 향수는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "ironic",
+    "dry"
+   ],
+   "devices": [
+    "irony",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The police station lodging-house, where the soft side of a plank is the regulation couch, is next in order. The manner in which this police bed is \"made up\" is interesting in its simplicity. The loose planks that make the platform are simply turned over, and the job is done, with an occasional coat of white-wash thrown in to sweeten things. I know of only one easier way, but, so far as I am informed, it has never been introduced in this country. It used to be practised, if report spoke truly, in certain old-country towns.",
+    "source": {
+     "author": "Riis, Jacob A. (Jacob August)",
+     "work": "How the Other Half Lives: Studies Among the Tenements of New York",
+     "year": 1890,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/45502",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-45502",
+     "corpusTextSha256": "c67e0d275ba30775009485c1a25b9b9c8f02c5d6d585c2b69b765013e7cbb920",
+     "excerptSha256": "c012f918aa916f57f72028b3adab95ad858f0853e70ecc80c58548104ca7dc4b",
+     "sliceSha256": "f9c8e15c02a3dacb537afdbf12a123134d26e810a2fc13d7b16ca370d7156378",
+     "location": {
+      "startChar": 135278,
+      "endChar": 135805,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 29
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-077",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-077",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "narrator_attitude",
+    "genre": "letter",
+    "seed": {
+     "index": 76,
+     "genre": "letter",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Aung",
+      "Assunta"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "italian"
+     ],
+     "locale": "Bologna",
+     "setting": "a rooftop laundry line",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a rooftop laundry line in Bologna; a seamstress and her only apprentice over silence kept to protect someone"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The night was cloudy and black, and every line in the architecture of the largest building in the world was defined in light, even to the cross, which, as I have said before, is at the height of a mountain from the base. For about an hour it was a delicate but vast structure of shining lines, like a drawing of a glorious temple on the clouds. At eight, as the clock struck, flakes of fire burst from every point, and the whole building seemed started into flame. It was done by a simultaneous kindling of torches in a thousand points, a man stationed at each. The glare seemed to exceed that of noonday. No description can give an idea of it.\n\nI am not sure that I have not been a little tedious in describing the ceremonies of the holy week.",
+    "question": "Which choice best describes the narrator's attitude in the text?",
+    "options": [
+     "He finds the illumination tiresome and wishes it had ended sooner.",
+     "He is awed by the spectacle yet worries he has described too much.",
+     "He doubts the religious meaning behind the week's ceremonies.",
+     "He is frightened by the sudden fire and fears for the building."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 성당의 윤곽이 빛으로 그려진 모습을 '구름 위 영광스러운 신전'에 비유하며 '어떤 묘사로도 전할 수 없다'고 감탄한다. 그러면서 마지막에 성주간 의식을 너무 지루하게 묘사한 것은 아닌지 걱정하므로 B가 정답이다. A의 지루함, C의 의심, D의 공포는 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "awed",
+    "self-conscious"
+   ],
+   "devices": [
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The night was cloudy and black, and every line in the architecture of the largest building in the world was defined in light, even to the cross, which, as I have said before, is at the height of a mountain from the base. For about an hour it was a delicate but vast structure of shining lines, like a drawing of a glorious temple on the clouds. At eight, as the clock struck, flakes of fire burst from every point, and the whole building seemed started into flame. It was done by a simultaneous kindling of torches in a thousand points, a man stationed at each. The glare seemed to exceed that of noonday. No description can give an idea of it.\n\nI am not sure that I have not been a little tedious in describing the ceremonies of the holy week.",
+    "source": {
+     "author": "Willis, Nathaniel Parker",
+     "work": "Pencillings by the Way Written During Some Years of Residence and Travel in Europe",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1867,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/39179",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-39179",
+     "corpusTextSha256": "e9e777d275163e390917030b964df52fb66cc4c4cbfb7a0e4fdb2b64d48554e0",
+     "excerptSha256": "7186ece15ca2b2b9b707ab485aa481fa6f7bbd9e16193fdab62b71b646730c55",
+     "sliceSha256": "b505e877bd6461c86c2a40bfeb7bcb34171e7eeda2b7be56cd9b2a40e35629a4",
+     "location": {
+      "startChar": 692765,
+      "endChar": 693509,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 80
+     },
+     "genre": "letter",
+     "workForm": "letter"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-078",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-078",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "main_idea_or_purpose",
+    "genre": "short_story",
+    "seed": {
+     "index": 77,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Camryn",
+      "Lucius"
+     ],
+     "nameCultures": [
+      "african_american",
+      "african_american"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a summer camp dining hall",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "over an old photograph",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a summer camp dining hall in Chicago's South Side; a priest and a lapsed parishioner over an old photograph"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Not that it must be for a moment supposed that our Women are destitute of affection. But unfortunately the passion of the moment predominates, in the Frail Sex, over every other consideration. This is, of course, a necessity arising from their unfortunate conformation. For as they have no pretensions to an angle, being inferior in this respect to the very lowest of the Isosceles, they are consequently wholly devoid of brain-power, and have neither reflection, judgment nor forethought, and hardly any memory. Hence, in their fits of fury, they remember no claims and recognize no distinctions.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "It argues that women are more affectionate by nature than men are.",
+     "It describes one woman's violent outburst and its consequences.",
+     "It gives the narrator's explanation of why women act on sudden passion.",
+     "It questions the reasoning ability of the lowest Isosceles figures."
+    ],
+    "correct_letter": "C",
+    "explanation": "서술자는 여성이 애정이 없는 것은 아니지만 순간의 감정이 다른 모든 고려를 압도한다고 말한다. 그 이유를 각이 없는 몸의 구조 때문에 판단력과 기억력이 없다는 데서 찾으므로 C가 정답이다. A는 비교 주장이 없고, B의 특정 사건과 D의 이등변삼각형 비판은 지문의 요지가 아니다."
+   },
+   "notes": [],
+   "tone": [
+    "satirical",
+    "pompous"
+   ],
+   "devices": [
+    "satire",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Not that it must be for a moment supposed that our Women are destitute of affection. But unfortunately the passion of the moment predominates, in the Frail Sex, over every other consideration. This is, of course, a necessity arising from their unfortunate conformation. For as they have no pretensions to an angle, being inferior in this respect to the very lowest of the Isosceles, they are consequently wholly devoid of brain-power, and have neither reflection, judgment nor forethought, and hardly any memory. Hence, in their fits of fury, they remember no claims and recognize no distinctions.",
+    "source": {
+     "author": "Abbott, Edwin Abbott",
+     "work": "Flatland: A Romance of Many Dimensions",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1926,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/201",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-201",
+     "corpusTextSha256": "a78926d61000e3bc22b223c5d1febe27de84bc6f58169dba4e414505b3046c84",
+     "excerptSha256": "51af186837e0e8bb0a43731bc4d4807c201719649ec8c5f85104c8c6c569d0ef",
+     "sliceSha256": "24dd2ccfcfde140b19b51cba39a4b13da443ae2aa8618a0497a9ea08f62cea1f",
+     "location": {
+      "startChar": 34612,
+      "endChar": 35212,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 17
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-079",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-079",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "main_idea_or_purpose",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 78,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Anacleto",
+      "Renata"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a fishing harbor",
+     "relationship": "twin brothers dividing a house",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a fishing harbor in Lima; twin brothers dividing a house over a promise made to a child"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "In the end she rejected both courses and decided for the riding costume. The reason she gave for this decision--the reason she gave herself--was that the riding costume would invest the call with an air of accident, of impulse. The real reason.\n\nIt may be that some feminine reader can guess why she chose the most startling, the most gracefully becoming, the most artlessly physical apparel in her wardrobe.\n\nShe said nothing to her father at lunch about her plans. Why should she speak of them? He might oppose; also, she might change her mind. After lunch she set out on her usual ride, galloping away into the hills--but she had put twenty-five dollars in bills in her trousers pocket.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "It shows a woman openly arguing with her father about her plans.",
+     "It shows the narrator criticizing the woman's choice of clothing.",
+     "It describes an ordinary ride taken purely for exercise in the hills.",
+     "It reveals a woman's concealed motives and quiet preparations for a call."
+    ],
+    "correct_letter": "D",
+    "explanation": "그녀는 승마복을 고르며 '우연한 방문처럼 보이려고'라는 이유를 스스로에게 대지만, 서술자는 '진짜 이유'가 따로 있음을 암시한다. 또 아버지에게 계획을 말하지 않고 평소처럼 말을 타러 나가면서 몰래 돈을 챙기므로 D가 정답이다. A는 아버지와 말다툼하지 않았고, B와 C는 지문의 의도를 놓친다."
+   },
+   "notes": [],
+   "tone": [
+    "sly",
+    "knowing"
+   ],
+   "devices": [
+    "direct address",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "In the end she rejected both courses and decided for the riding costume. The reason she gave for this decision--the reason she gave herself--was that the riding costume would invest the call with an air of accident, of impulse. The real reason.\n\nIt may be that some feminine reader can guess why she chose the most startling, the most gracefully becoming, the most artlessly physical apparel in her wardrobe.\n\nShe said nothing to her father at lunch about her plans. Why should she speak of them? He might oppose; also, she might change her mind. After lunch she set out on her usual ride, galloping away into the hills--but she had put twenty-five dollars in bills in her trousers pocket.",
+    "source": {
+     "author": "Phillips, David Graham",
+     "work": "The Conflict",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1911,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/433",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-433",
+     "corpusTextSha256": "9371fa5891db5f51aed045eddecd5dfa9c0658dc98dbe3572acb460f95569c39",
+     "excerptSha256": "0e34c2841b94c798ff170580e632aac409df3765d6e4ab82aaf8e8e4fd877478",
+     "sliceSha256": "287c0784426ab6fee2e12462579363aa15fee1dcabf711c917bdad5596930457",
+     "location": {
+      "startChar": 76934,
+      "endChar": 77627,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 14
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-02-080",
+   "task": "gen-lit40-easy-02-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-02-080",
+    "batchId": "lit40-easy-02",
+    "route": "excerpt",
+    "skill": "central_ideas_details",
+    "difficulty": "easy",
+    "questionType": "main_idea_or_purpose",
+    "genre": "drama",
+    "seed": {
+     "index": 79,
+     "genre": "drama",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Thandiwe",
+      "Mandla"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Nairobi",
+     "setting": "a train compartment",
+     "relationship": "two night-shift coworkers",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a train compartment in Nairobi; two night-shift coworkers over an invitation one of them refuses"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Every hand was hard at work over its appointed task, and there was no evidence in that silent well-ordered hive, of the recent little revolution.\n\nWhen the mathematician, having made his way to his own work-bench, had passed his unerring hand over it, he found all as he had left it—not a thing disturbed; every tool, every scrap of metal, every morsel of wire lying intact. Even the little steel coil which had come to such sudden grief, had been carefully rewound into proper compass, and placed ready to hand by Isaac Habrecht. “It is correctly adjusted, I think?” he said, as Dasipodius took it up.",
+    "question": "Which choice best states the main idea of the text?",
+    "options": [
+     "It shows the workshop restored to order, with even the damage quietly mended.",
+     "It depicts a revolt in the workshop that is still spreading among workers.",
+     "It describes the mathematician's anger on discovering his tools missing.",
+     "It reveals that Isaac Habrecht damaged the steel coil on purpose."
+    ],
+    "correct_letter": "A",
+    "explanation": "지문은 조용한 작업장에 최근의 작은 '혁명'의 흔적이 전혀 없다고 말한다. 수학자가 작업대를 살펴보니 모든 것이 그대로였고, 망가졌던 코일까지 다시 감겨 준비되어 있으므로 A가 정답이다. B는 이미 끝난 소동을 진행 중이라 보고, C와 D는 지문 내용과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "calm",
+    "orderly"
+   ],
+   "devices": [
+    "imagery",
+    "metaphor"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Every hand was hard at work over its appointed task, and there was no evidence in that silent well-ordered hive, of the recent little revolution.\n\nWhen the mathematician, having made his way to his own work-bench, had passed his unerring hand over it, he found all as he had left it—not a thing disturbed; every tool, every scrap of metal, every morsel of wire lying intact. Even the little steel coil which had come to such sudden grief, had been carefully rewound into proper compass, and placed ready to hand by Isaac Habrecht. “It is correctly adjusted, I think?” he said, as Dasipodius took it up.",
+    "source": {
+     "author": "Rowsell, Mary C. (Mary Catherine)",
+     "work": "The silver dial, volume 2 (of 3)",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1921,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/76371",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-76371",
+     "corpusTextSha256": "7f32ea082c0473dc93e118bbbf1a11e286d942bc0470b56761be446ab9cb400b",
+     "excerptSha256": "be309c7f1addfbd485ab54d9688d4fe0a8ff8c63dc0f34d2423507959a947e07",
+     "sliceSha256": "748d50fd7260cdad806442985674b761600870fb8d3076963b7291ee6d2aec69",
+     "location": {
+      "startChar": 114491,
+      "endChar": 115093,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 28
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-easy-02-065",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(15단어, 다음 13)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-067",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(17단어, 다음 14)"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-068",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-069",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-070",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-02-071",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

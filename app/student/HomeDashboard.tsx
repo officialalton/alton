@@ -1,8 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { DashboardData } from "./dashboard-data";
+import { dateKeyInTimezone } from "@/lib/calendar-date-utils";
+import { DEFAULT_TIMEZONE } from "@/lib/timezone";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -10,14 +12,16 @@ export default function HomeDashboard({
   studentName,
   data,
   onShowLessons,
-  onShowStats,
+  timezone,
 }: {
   studentName: string;
   data: DashboardData;
   onShowLessons: () => void;
-  onShowStats: () => void;
+  /** R6 — 확정 일정 표시 기준 시간대(resolveUserTimezone() 결과). 미전달 시 전역 기본값. */
+  timezone?: string;
 }) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const router = useRouter();
 
   return (
     <div className="px-8 py-8">
@@ -26,6 +30,12 @@ export default function HomeDashboard({
           {studentName}의 학습 현황
         </h1>
       </div>
+
+      <TodayLessonBanner
+        upcoming={data.upcoming}
+        timezone={timezone}
+        onEnter={(sessionId) => router.push(`/session/${sessionId}`)}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
         <div>
@@ -36,18 +46,78 @@ export default function HomeDashboard({
           />
         </div>
         <div className="flex flex-col gap-6">
-          <UpcomingWidget upcoming={data.upcoming} onShowAll={onShowLessons} />
-          <StatsWidget
-            attendanceRate={data.attendanceRate}
-            onShowAll={onShowStats}
-          />
+          <UpcomingWidget upcoming={data.upcoming} onShowAll={onShowLessons} timezone={timezone} />
+          <StatsWidget attendanceRate={data.attendanceRate} />
         </div>
       </div>
     </div>
   );
 }
 
-function CalendarCard({
+// 2026-09-22(사용자 지시) — Home은 Planner(Board)로 바뀌고, 이 캘린더·예정
+// 수업 위젯들은 Classes 탭의 새 "수업 일정" 서브탭으로 옮긴다(통계는 그대로
+// Home/Overview에 남는다). 컴포넌트 자체는 그대로 재사용하려고 export한다.
+
+// 2026-09-10(UI/UX 정리 1차) — "오늘 수업"이 있으면 가장 먼저 보이게 한다.
+// 새 쿼리는 추가하지 않는다(이미 홈에 내려오는 upcoming 목록에서 오늘 날짜인
+// 항목을 골라 보여줄 뿐). 오늘 수업이 없으면 다음 수업까지 D-day만 안내한다.
+export function TodayLessonBanner({
+  upcoming,
+  timezone,
+  onEnter,
+}: {
+  upcoming: DashboardData["upcoming"];
+  timezone?: string;
+  onEnter: (sessionId: string) => void;
+}) {
+  const [nowMs, setNowMs] = useState<number | null>(null);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- 렌더 중 Date.now() 직접 호출 금지 — 마운트 시 1회 스냅샷
+    setNowMs(Date.now());
+  }, []);
+  if (upcoming.length === 0) return null;
+
+  const tz = timezone ?? DEFAULT_TIMEZONE;
+  const sorted = [...upcoming].sort(
+    (a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime()
+  );
+  const todayKey = dateKeyInTimezone(new Date().toISOString(), tz);
+  const todayLesson = sorted.find((l) => dateKeyInTimezone(l.scheduledAt, tz) === todayKey);
+
+  if (todayLesson) {
+    return (
+      <div className="flex items-center justify-between gap-3 bg-ink text-white rounded-xl px-5 py-4 mb-6">
+        <div>
+          <div className="text-[12px] font-semibold text-white/70 mb-0.5">오늘 수업</div>
+          <div className="text-[14px] font-bold">
+            {formatKoreanDateTime(todayLesson.scheduledAt, timezone)} · {todayLesson.subjectName}
+          </div>
+        </div>
+        <button
+          onClick={() => onEnter(todayLesson.sessionId)}
+          className="text-[12.5px] font-bold bg-white text-ink px-4 py-2 rounded-lg shrink-0"
+        >
+          입장하기 →
+        </button>
+      </div>
+    );
+  }
+
+  const next = sorted[0];
+  const daysUntil = Math.max(
+    0,
+    Math.ceil((new Date(next.scheduledAt).getTime() - (nowMs ?? new Date(next.scheduledAt).getTime())) / (24 * 60 * 60 * 1000))
+  );
+  return (
+    <div className="bg-grey-100 rounded-xl px-5 py-4 mb-6 text-[13px] text-grey-500">
+      다음 수업까지 D-{daysUntil} · {formatKoreanDateTime(next.scheduledAt, timezone)}{" "}
+      {next.subjectName}
+    </div>
+  );
+}
+
+
+export function CalendarCard({
   data,
   selectedDay,
   onSelectDay,
@@ -125,7 +195,8 @@ function CalendarCard({
                 key={s.sessionId}
                 className="text-[12.5px] text-ink px-3 py-2 rounded-lg bg-grey-100 mb-1.5"
               >
-                {s.subjectName} · {s.sessionNumber}회차
+                {s.subjectName}
+                {s.sessionNumber !== null ? ` · ${s.sessionNumber}회차` : ""}
               </div>
             ))
           )}
@@ -135,12 +206,14 @@ function CalendarCard({
   );
 }
 
-function UpcomingWidget({
+export function UpcomingWidget({
   upcoming,
   onShowAll,
+  timezone,
 }: {
   upcoming: DashboardData["upcoming"];
   onShowAll: () => void;
+  timezone?: string;
 }) {
   const router = useRouter();
 
@@ -167,10 +240,11 @@ function UpcomingWidget({
             className="w-full text-left border-[1.5px] border-grey-200 rounded-lg px-3.5 py-3 mb-2 last:mb-0"
           >
             <div className="text-[12px] text-grey-500 mb-1">
-              {formatKoreanDateTime(lesson.scheduledAt)}
+              {formatKoreanDateTime(lesson.scheduledAt, timezone)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
-              {lesson.subjectName} · {lesson.sessionNumber}회차
+              {lesson.subjectName}
+              {lesson.sessionNumber !== null ? ` · ${lesson.sessionNumber}회차` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </div>
             <div className="text-[11.5px] text-grey-500 mt-0.5">
@@ -183,23 +257,15 @@ function UpcomingWidget({
   );
 }
 
-function StatsWidget({
+export function StatsWidget({
   attendanceRate,
-  onShowAll,
 }: {
   attendanceRate: number | null;
-  onShowAll: () => void;
 }) {
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-[14px] font-bold text-ink">통계 요약</h2>
-        <button
-          onClick={onShowAll}
-          className="text-[11.5px] font-semibold text-grey-500"
-        >
-          전체 보기 →
-        </button>
       </div>
       <div className="bg-grey-100 rounded-lg px-4 py-4">
         <div className="text-[11.5px] font-bold text-grey-500 mb-1">
@@ -213,8 +279,9 @@ function StatsWidget({
   );
 }
 
-function formatKoreanDateTime(iso: string) {
+function formatKoreanDateTime(iso: string, timezone?: string) {
   return new Intl.DateTimeFormat("ko-KR", {
+    timeZone: timezone,
     month: "long",
     day: "numeric",
     hour: "numeric",

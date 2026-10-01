@@ -1,0 +1,23 @@
+{
+  "itemId": "two_variable_data.conditional_share.TW.C",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "4de487d4956814bfdb4da52d4cbd62da5a7cf0554732d9e5dab3a4cb1297ad6c",
+  "samples": [
+    "two_variable_data.conditional_share.TW.C.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "조건: 가구 100명 중 60% 키움, 20명 중 50%. A=60/40,10/10 만 일치. B 는 행 뒤바뀜(20행이 10/10, 100행이 60/40 → 위 행 합이 20), C 는 열 바뀜(40/60, 비율 40%), D 는 3/17(15%). 정답 A 하나. 4개 표 크기·제목 동일, 서로 구별됨. 합계 행 밑줄 전 열 이어짐. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+}

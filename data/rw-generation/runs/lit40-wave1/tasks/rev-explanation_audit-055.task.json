@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-055",
+ "chunkId": "rev-explanation_audit-055",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-055.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-01-069",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "I know the face; there is a strange drooping about the eyelids, which to me adds a charm to the whole appearance. I do wish I could think where in the world I have seen her. I am going to search the hotel books to-morrow for I will not rest until I find out her name. It was almost dark, however, when we met, and she was going toward the opposite side of the Maine where there are no foreign hotels.\n\nI surmise, and suppose, and guess, but all to no purpose, while that one look seems to be planted indelibly upon my mind.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe the hotels on the far side of the Maine",
+    "To complain about poor lighting in the evening",
+    "To explain a plan to leave the city tomorrow",
+    "To convey an obsession with a half-known face"
+   ],
+   "correct_letter": "D",
+   "explanation": "글쓴이는 그 얼굴을 안다고 느끼며 이름을 알아낼 때까지 쉬지 않겠다고 말한다. 추측만 거듭할 뿐인데도 그 한 번의 눈길이 마음에 지워지지 않게 박혔다고 한다. 따라서 D가 정답이다. A의 호텔과 B의 어둠은 부수적 세부이고, C의 떠날 계획은 언급되지 않는다(내일은 숙박부를 뒤질 계획이다)."
+  },
+  {
+   "candidateId": "lit40-easy-01-070",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "When it all availed nothing and the winter came on, they retired into their huts and cut the acquaintance of the white men. They were afraid that they had come to take revenge for the harm done their people in the olden time. There was nothing for it, then, but that Egede must go to them, and this he did.\n\nThey seized their spears when they saw him coming, but he made signs that he was their friend. When he had nothing else to give them, he let them cut the buttons from his coat.",
+   "question": "Why does Egede most likely let the people cut the buttons from his coat?",
+   "options": [
+    "He wants to trade the buttons for their spears.",
+    "He hopes to repay the harm done in olden times.",
+    "He wishes to prove his friendly intentions.",
+    "He is forced to surrender them under threat."
+   ],
+   "correct_letter": "C",
+   "explanation": "사람들은 백인들이 옛날의 해악에 대한 복수를 하러 왔다고 두려워했다. 에게데는 창을 든 그들에게 자신이 친구라는 신호를 보내고, 더 줄 것이 없자 단추를 자르게 한다. 따라서 우호의 뜻을 증명하려는 C가 정답이다. A의 교환은 없고, B는 복수를 두려워한 쪽이 원주민이므로 오해이며, D는 위협에 굴복했다는 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-071",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "The opposition had been stubborn at first, gathering strength in secret and losing it in public, until at last good sense and kindliness prevailed. The motion to admit Charity as a member of the G. B. C. was carried unanimously, and almost the first she knew about it she was a full member, eagerly searching hill-side and meadow with the rest, and wondering deep in her inmost soul whether she ever, ever could \"catch up\" to the other girls. They knew so much from books, and she had been able to study so little!\n\nPoor Charity! She was wiser than she knew. Her habit of close observation, and her eager desire to learn, soon made her a valuable addition to the club.",
+   "question": "Based on the text, why does Charity search hill-side and meadow so eagerly?",
+   "options": [
+    "She hopes to win the club's opposition to her side.",
+    "She wants to prove that books are of little use.",
+    "She is trying to avoid the other girls' company.",
+    "She longs to match what the other girls know."
+   ],
+   "correct_letter": "D",
+   "explanation": "채리티는 다른 소녀들을 '따라잡을' 수 있을지 마음속 깊이 걱정하며 열심히 탐색한다. 그들은 책으로 많이 알지만 자신은 거의 공부하지 못했기 때문이다. 따라서 D가 정답이다. A는 반대가 이미 끝난 뒤의 일이고, B는 책을 낮춰 보는 근거가 없으며, C는 함께 탐색한다는 내용과 반대다."
+  },
+  {
+   "candidateId": "lit40-easy-01-072",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "On the third evening, when he had removed all signs of his work, he lighted two kerosene lamps and two candles, finding the effect, under this illumination, almost too brilliant and beautiful for belief. Rose should never see it now, he determined, until the furniture was in place. They had already chosen the kitchen and bedroom things, though they would not be needed for some months; but the rest was to wait until summer, when there would be the hay-money to spend.\n\nStephen did not go back to the River Farm till one o'clock that night; the pink bedroom held him in fetters too powerful to break.",
+   "question": "Why does Stephen decide that Rose should not see the room yet?",
+   "options": [
+    "He wants it to be complete before she sees it.",
+    "He fears she will dislike the room's color.",
+    "He is waiting to earn hay-money for paint.",
+    "He plans to keep the room for himself alone."
+   ],
+   "correct_letter": "A",
+   "explanation": "스티븐은 방의 효과가 믿기 어려울 만큼 아름답다고 느끼고, 가구가 제자리에 놓일 때까지 로즈에게 보이지 않겠다고 결심한다. 즉 완성된 모습을 보여 주고 싶은 것이므로 A가 정답이다. B의 색에 대한 걱정은 없고, C의 건초 값은 가구를 위한 것이며, D는 로즈를 위한 준비라는 맥락과 어긋난다."
+  },
+  {
+   "candidateId": "lit40-easy-01-074",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "I gladly accepted, feeling that here was an opportunity not only to support my friend in the step she had taken, but to make the path clear for other unhappy wives who might desire to follow her example. I had no thought of the persecution I was drawing down on myself for thus attacking so venerable an institution. I was always courageous in saying what I saw to be true, for the simple reason that I never dreamed of opposition. What seemed to me to be right I thought must be equally plain to all other rational beings. Hence I had no dread of denunciation. I was only surprised when I encountered it, and no number of experiences have, as yet, taught me to fear public opinion.",
+   "question": "Why was the narrator unafraid to speak out in support of her friend?",
+   "options": [
+    "She expected allies to protect her from critics.",
+    "She had grown used to public denunciation.",
+    "She assumed others would see right as she did.",
+    "She cared little whether her friend succeeded."
+   ],
+   "correct_letter": "C",
+   "explanation": "서술자는 반대를 꿈에도 생각하지 않았기 때문에 용감했다고 말한다. 자신에게 옳아 보이는 것은 다른 이성적인 사람들에게도 똑같이 분명하리라 여겼다는 것이다. 따라서 C가 정답이다. A의 보호자는 언급되지 않고, B는 비난을 만나면 '놀랐을 뿐'이라는 말과 어긋나며, D는 친구를 지지하려 했다는 내용과 반대다."
+  },
+  {
+   "candidateId": "lit40-easy-01-075",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "Perhaps it was the singular breadth of his forehead which made the lower part of his face look so unusually slight and feminine. His eyes were dark hazel, as clear, brilliant, and tender as a girl’s, and brimming full of a pensiveness which seemed both loving and melancholy. Few persons, at all events few women, who looked upon him ever looked beyond his eyes. They were very fascinating, and in a man’s countenance very strange. They were the kind of eyes which reveal passionate romances, and which make them.\n\nBy his side stood a boy, a singularly interesting and beautiful boy, fair-haired and blue-eyed, and delicate in color. When this boy saw the stranger approach he turned as pale as marble, slid away from the brigade commander’s side, and disappeared behind a group of staff officers and orderlies.",
+   "question": "Which choice best describes the overall mood of the text?",
+   "options": [
+    "Cheerful and lighthearted",
+    "Detached and coldly clinical",
+    "Bitter and openly hostile",
+    "Intrigued and faintly uneasy"
+   ],
+   "correct_letter": "D",
+   "explanation": "서술은 낯선 남자의 눈을 '매혹적이면서도 남자의 얼굴에서는 매우 이상한' 것으로 그려 신비감을 준다. 이어 소년이 그를 보자 대리석처럼 창백해져 사라지는 장면이 불안을 더한다. 따라서 D가 정답이다. A는 우울한 눈빛 묘사와 맞지 않고, B는 감각적 묘사가 풍부하므로 틀리며, C의 적대감은 드러나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-076",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "What had happened to Rose was the dilation of her vision. She saw things under a wider sky and in a clearer light. Above all, her heart was wrung with pity for Stephen--Stephen, with no comforting woman's hand to help him in his sore trouble; Stephen, bearing his losses alone, his burdens and anxieties alone, his nursing and daily work alone. Oh, how she felt herself needed! Needed! that was the magic word that unlocked her better nature. \"Darkness is the time for making roots and establishing plants, whether of the soil or of the soul,\" and all at once Rose had become a woman: a little one, perhaps, but a whole woman--and a bit of an angel, too, with healing in her wings.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Tender and uplifting",
+    "Mocking and dismissive",
+    "Anxious and despairing",
+    "Neutral and detached"
+   ],
+   "correct_letter": "A",
+   "explanation": "로즈는 홀로 짐을 지는 스티븐에게 연민을 느끼며 자신이 '필요하다'는 말에서 더 나은 본성을 깨운다. 서술자는 그녀가 온전한 여인이자 치유의 날개를 지닌 천사가 되었다고 따뜻하게 그린다. 따라서 A가 정답이다. B의 조롱은 없고, C는 고난이 성장의 계기로 그려지므로 틀리며, D는 감탄문 등 감정적 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-077",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "\"In retrospective vision bright,\nCan you recall dear Martha Wright\nWithout her work or knitting?\nThe needles flying in her hands,\nOn washing rags or baby's bands,\nOr other work as fitting?\n\n\"I cannot think they thought the less,\nOr ceased the company to bless\nWith conversation's riches,\nBecause they thus improved their time,\nAnd never deemed it was a crime\nTo fill the hours with stitches.\n\n\"They even used to preach and plan\nTo spread the fashion, so that man\nMight have this satisfaction;\nInstead of idling as men do,\nWith nervous meddling fingers too,\nWhy not mate talk with action?",
+   "question": "Which choice best describes the overall tone of the poem?",
+   "options": [
+    "Mournful and nostalgic",
+    "Playful and approving",
+    "Stern and disapproving",
+    "Bitter and resentful"
+   ],
+   "correct_letter": "B",
+   "explanation": "시는 뜨개질하며 대화를 나누던 여성들을 다정하게 떠올리며 그것이 결코 '죄'가 아니었다고 말한다. 마지막 연에서는 남자들도 빈둥대는 대신 '말과 행동을 짝지어 보라'고 가볍게 권한다. 따라서 B가 정답이다. A는 회상 장면이 있지만 슬픔은 없고, C·D는 칭찬과 유쾌한 권유라는 어조와 반대다."
+  },
+  {
+   "candidateId": "lit40-easy-01-078",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "To poor Vauvenargues life was not a laughing matter. His health had been completely ruined by the disastrous campaigns in Austria, and by the hardships of garrison life; and he was feeling more and more sharply that pinch of genteel poverty which is the hardest of all to bear. But if he never laughed, this martyr of the soul never ceased to smile. His perpetual sufferings did not affect his gentle sobriety of conversation. Those whose privilege it was to see Vauvenargues during these last years of his brief existence are united in their report of his magnanimity. Voltaire wrote, \"I have always found him the most unfortunate of human beings and the most tranquil.\"",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Wry and mocking",
+    "Bleak and hopeless",
+    "Warm and admiring",
+    "Cool and clinical"
+   ],
+   "correct_letter": "C",
+   "explanation": "글쓴이는 보브나르그를 '가엾은' 인물이자 '영혼의 순교자'로 부르며 그의 고통에 공감한다. 동시에 그가 웃지는 않았어도 늘 미소를 잃지 않았고 관대했다고 칭송한다. 따라서 C가 정답이다. A의 조롱은 없고, B는 고통 속에서도 평온을 강조하므로 틀리며, D는 감정이 담긴 표현과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-079",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "I shall be very glad to receive anything you may give to Mr. Washington McLean, as I know you recommend no one but those who deserve your good opinion.\n\nI am delighted to hear that your arm is still improving, and hope it will soon be restored. You are, however, becoming so accomplished with your left hand as not to need it. You must remember me very kindly to Mrs. Longstreet and all your children. I have not had an opportunity yet to return the compliment she paid me. I had, while in Richmond, a great many inquiries after you, and learned that you intended commencing business in New Orleans.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Formal and coldly distant",
+    "Anxious and apologetic",
+    "Teasing and sarcastic",
+    "Warm and courteous"
+   ],
+   "correct_letter": "D",
+   "explanation": "글쓴이는 상대의 팔이 회복되고 있다니 '기쁘다'고 말하고 가족에게 따뜻한 안부를 전해 달라고 부탁한다. 왼손을 능숙하게 쓴다는 말도 친근한 덕담이다. 따라서 D가 정답이다. A는 다정한 안부와 맞지 않고, B의 사과나 불안은 없으며, C는 가벼운 농담이 있지만 비꼼은 아니다."
+  },
+  {
+   "candidateId": "lit40-easy-01-080",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "We go like two thieves to the attic, laughing as though we were children once more. Presently we find the violin, and I see that it is one Cremona, very old, very fine, but with no strings. I fit on some strings that I have in mine pocket, but there is no bow and I can only play pizzicato. I need to hear the tone but one moment to know what it is that I have. 'It is most wonderful,' I say, and then the door opens and one very angry lady stands there.",
+   "question": "Which choice best describes the relationship between the narrator and the person who goes with him to the attic?",
+   "options": [
+    "Old friends sharing a playful secret adventure",
+    "Rivals competing to claim a valuable violin",
+    "A teacher guiding a nervous young student",
+    "Strangers brought together by an angry lady"
+   ],
+   "correct_letter": "A",
+   "explanation": "두 사람은 '두 도둑처럼' 다락방에 가며 '다시 아이가 된 듯' 웃는다. 이는 친밀하고 장난스러운 공모 관계를 보여 준다. 따라서 A가 정답이다. B의 경쟁은 없고, C의 사제 관계 근거가 없으며, D는 화난 여인이 나중에 등장할 뿐 두 사람을 만나게 한 것이 아니다."
+  },
+  {
+   "candidateId": "lit40-easy-01-081",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "The new-comer was perhaps some four years older than the other, but this was only detected by close examination.\n\n“And so you have come at last. O brother, brother! how I have wanted you!” said Louis, drawing his guest to a sofa, and shaking hands with him over and over again. “You have no idea how very, very much I have wanted you!”\n\nA shade of trouble came over his face as he spoke, and instantly that of his brother darkened with the same shadow, as if the pain which one felt must have a mutual vibration.",
+   "question": "Based on the text, which choice best describes the relationship between Louis and his guest?",
+   "options": [
+    "They are business partners who meet only to settle an old dispute.",
+    "They are brothers whose close bond lets each share the other's feelings.",
+    "They are old rivals who hide their resentment behind warm greetings.",
+    "They are strangers who have just been introduced by a mutual friend."
+   ],
+   "correct_letter": "B",
+   "explanation": "Louis가 손님을 'O brother, brother!'라고 부르며 몹시 기다렸다고 말하므로 두 사람은 형제이다. 또한 Louis의 얼굴에 걱정이 스치자 형의 얼굴도 즉시 같은 그늘로 어두워졌다는 서술은 서로의 감정을 함께 느끼는 깊은 유대를 보여 준다. 따라서 B가 정답이다. A, C, D는 사업 관계·숨은 적대감·처음 만난 사이를 말하지만 지문의 애정 어린 재회 장면과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-082",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "Is the best Gothic fit for our worship? Does it express our belief? Or shall we choose some other style?\n\nI say that it is; and that it is so because it is a style which, if not founded on Nature, has taken into itself more of Nature, of Nature beautiful and healthy, than any other style.\n\nWith greater knowledge of Nature, both geographical and scientific, fresh styles of architecture may and will arise, as much more beautiful, and as much more natural, than the Gothic, as Gothic is more beautiful and natural than the Norman. Till then we must take the best models which we have; use them; and, as it were, use them up and exhaust them.",
+   "question": "Based on the text, how does the author view the relationship between Gothic architecture and the styles that may follow it?",
+   "options": [
+    "Gothic is a perfect style that no later style could ever surpass.",
+    "Later styles should be avoided because they reject Gothic models.",
+    "Gothic is the best current model but may be surpassed by later styles.",
+    "Gothic and Norman styles are equally natural and equally beautiful."
+   ],
+   "correct_letter": "C",
+   "explanation": "필자는 고딕이 다른 양식보다 자연을 더 많이 담았기에 예배에 맞는다고 말한다. 동시에 자연에 대한 지식이 늘면 고딕보다 더 아름답고 자연스러운 새 양식이 생길 것이라고 예상하며, 그때까지는 가진 최선의 모델을 쓰자고 한다. 따라서 C가 정답이다. A는 미래 양식의 가능성을 부정하고, B는 새 양식을 피하라는 주장이 없으며, D는 고딕이 노르만보다 더 아름답다는 서술과 어긋난다."
+  },
+  {
+   "candidateId": "lit40-easy-01-083",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "easy",
+   "passage": "I was ambitious to absorb all the wisdom I could, but, really, I could not give an intelligent report of the points under discussion at any sitting. Oliver Johnson asked me, one day, if I enjoyed them. I thought, from a twinkle in his eye, that he thought I did not, so I told him I was ashamed to confess that I did not know what they were talking about. He said, \"Neither do I,--very few of their hearers do,--so you need not be surprised that they are incomprehensible to you, nor think less of your own capacity.\"\n\nI was indebted to Mr. Johnson for several of the greatest pleasures I enjoyed in Boston.",
+   "question": "Based on the text, which choice best describes the relationship between the narrator and Oliver Johnson?",
+   "options": [
+    "Johnson mocks the narrator for failing to follow the discussions.",
+    "The narrator resents Johnson for exposing her confusion to others.",
+    "Johnson and the narrator compete to seem the most learned listener.",
+    "Johnson reassures the narrator, who later feels grateful to him."
+   ],
+   "correct_letter": "D",
+   "explanation": "화자가 토론 내용을 이해하지 못했다고 고백하자 Johnson은 자신도 모르겠다며 화자의 능력을 낮게 보지 말라고 위로한다. 이어 화자는 보스턴에서 누린 큰 즐거움 여럿을 Johnson 덕분이라고 말한다. 따라서 위로와 감사의 관계를 말한 D가 정답이다. A의 조롱, B의 원망, C의 경쟁은 지문의 다정한 대화와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-084",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "The sweet fresh morning air seemed to revive her. Day was just breaking, and the sky was tinged all over with a soft rosy hue.\n\nAs she stood gazing on the still and peaceful scene before her, she heard the garden gate open, and a minute afterwards there was a gentle tap at the cottage door. The window of Katie's room was at the side of the house, so that Mrs. Lawrence could not see any one as they came through the garden. She glanced at the bed; Katie was still calmly sleeping. And opening the door as noiselessly as possible, she went down the stairs, thinking that perhaps the doctor had sent to inquire after his patient.",
+   "question": "In the text, the breaking day with its soft rosy sky most likely symbolizes",
+   "options": [
+    "a hopeful sense of renewal after a long night of watching.",
+    "the arrival of a dangerous visitor at the cottage door.",
+    "Mrs. Lawrence's wish to leave the cottage and its troubles.",
+    "the doctor's growing worry about the condition of his patient."
+   ],
+   "correct_letter": "A",
+   "explanation": "상쾌한 아침 공기가 그녀를 되살리는 듯했고 하늘이 부드러운 장밋빛으로 물들었다는 묘사는 회복과 희망의 분위기를 만든다. 또 Katie가 여전히 평온하게 잠들어 있다는 서술은 밤새 간호한 뒤의 안도감을 뒷받침한다. 따라서 A가 정답이다. B의 위험한 방문객, C의 떠나고 싶은 마음, D의 의사의 걱정은 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-085",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "One cold, raw evening, Gwendoline, returning from a reception, entered her apartments through the sitting-room. She found it dark, and, hearing Alice in the bed-chamber, passed on, and, giving her wraps into her hands, returned to the sitting-room. She was shivering from the cold, and, going to the fire, stirred it to a blaze. The brightness illuminated floor and ceiling, chairs and table, falling on the black marble of the last-mentioned article of furniture, and upon the whiteness of a visiting card that lay like a snowflake before her, as she stood with her back to the chimney. Leaning over, she took it up, and turned it to the light behind her.",
+   "question": "In the text, the white visiting card lying like a snowflake on the black marble most likely symbolizes",
+   "options": [
+    "the warmth Gwendoline feels after returning to her bright fire.",
+    "an unexpected and possibly chilling message awaiting Gwendoline.",
+    "the comfort of Alice's steady service in the bed-chamber.",
+    "the pleasant memories Gwendoline brings home from the reception."
+   ],
+   "correct_letter": "B",
+   "explanation": "Gwendoline은 춥고 음산한 저녁에 떨며 돌아왔고, 불빛 아래 검은 대리석 위에 눈송이처럼 놓인 흰 명함을 발견한다. 어둠 속에서 갑자기 드러나는 눈송이 비유는 예상치 못한, 차가운 기운의 소식을 암시한다. 따라서 B가 정답이다. A는 불의 따뜻함을, C는 하녀를, D는 연회의 기억을 말하지만 명함이라는 이미지의 의미와 관련이 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-086",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "A pair have built in a large, hollow limb in my old apple-tree for many years. Whether it is the same pair or not I do not know. Probably it is, or else some of their descendants. I looked into the cavity one day while the mother bird was upon the nest, but before she had laid any eggs. A sudden explosive sound came up out of the dark depths of the limb, much like that made by an alarmed cat. It made me jerk my head back, when out came the bird and hurried off.",
+   "question": "In the text, the hollow limb of the old apple tree mainly serves as a symbol of",
+   "options": [
+    "the author's fear of the dangers hidden in his orchard.",
+    "the decline of the old apple tree as it slowly dies.",
+    "a lasting home that birds return to year after year.",
+    "the author's wish to keep wild birds away from his house."
+   ],
+   "correct_letter": "C",
+   "explanation": "필자는 한 쌍의 새가 여러 해 동안 그 늙은 사과나무의 빈 가지에 둥지를 틀었다고 말한다. 같은 쌍인지 그 후손인지는 모르지만 아마 그럴 것이라는 추측은 세대를 이어 돌아오는 보금자리라는 의미를 강조한다. 따라서 C가 정답이다. A의 두려움, B의 나무의 죽음, D의 새를 쫓으려는 마음은 지문에 드러나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-01-087",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "easy",
+   "passage": "Behind the throne is a female figure as if in attendance on the great god. The whole group is surrounded by hieroglyphics, and inclosed in a frame richly adorned with symbolical figures. The winged globe is above, with the wings spread over all, and a line of serpents crowns the whole. The figures and paintings are in such perfect preservation, that they give the most correct idea of their ornaments and decorations (See Plate 19).\n\nStraight forward is the entrance into another chamber with two pillars. The wall of this place is outlined, ready for the sculptor to cut out his figure. It is here that we may plainly see the manner in which the artist prepared the figure on the wall ready to be cut; and it is almost impossible to give a description of the various figures, which adorn the walls and pillars of this chamber.",
+   "question": "In the text, the outlined but uncut wall in the second chamber mainly serves as a sign of",
+   "options": [
+    "the damage that time has done to the ancient paintings.",
+    "the great god's power over the figures that surround him.",
+    "the visitors' failure to understand the hieroglyphics.",
+    "the hidden working methods of the ancient artists."
+   ],
+   "correct_letter": "D",
+   "explanation": "필자는 첫 방의 그림이 완벽하게 보존되어 있다고 설명한 뒤, 다음 방의 벽은 조각가가 새길 수 있도록 윤곽만 그려져 있다고 말한다. 이어 여기서 예술가가 벽에 형상을 준비한 방식을 분명히 볼 수 있다고 덧붙인다. 따라서 D가 정답이다. A는 보존 상태가 완벽하다는 서술과 어긋나고, B와 C는 미완성 벽의 의미와 관련이 없다."
+  },
+  {
+   "candidateId": "lit40-easy-01-088",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "easy",
+   "passage": "The feeling gave her a certain sense of exhilaration. From the depths of her despair her easily influenced spirits sprang again to hope and confidence. After all, nothing very dreadful had happened. She must struggle not to give way to intemperate feelings. She must bear with Polly! she must put up with Maggie. It was all very trying, of course, but it was the English way. She walked along faster and faster, and now her lips rose in a light song, and now again she ran, eager to get over the ground. When she ran her light hair floated behind her, and she looked less and less like a living creature.",
+   "question": "As used in the text, the phrase “her easily influenced spirits sprang again to hope” most nearly suggests that she",
+   "options": [
+    "quickly recovers her cheerfulness after feeling deep despair.",
+    "jumps up into the air out of a sudden fright.",
+    "is persuaded by Polly and Maggie to change her plans.",
+    "slowly loses all confidence as she walks along the road."
+   ],
+   "correct_letter": "A",
+   "explanation": "이 구절 바로 앞에 절망의 깊은 곳에서라는 표현이 있고, 뒤에는 결국 끔찍한 일은 없었다는 생각이 이어진다. 그녀가 가볍게 노래하고 달리는 모습도 기분이 빠르게 회복되었음을 보여 준다. 따라서 A가 정답이다. B는 비유를 문자 그대로 읽었고, C는 근거가 없으며, D는 지문의 흐름과 반대이다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-055 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-055.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-01-069 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nI know the face; there is a strange drooping about the eyelids, which to me adds a charm to the whole appearance. I do wish I could think where in the world I have seen her. I am going to search the hotel books to-morrow for I will not rest until I find out her name. It was almost dark, however, when we met, and she was going toward the opposite side of the Maine where there are no foreign hotels.\n\nI surmise, and suppose, and guess, but all to no purpose, while that one look seems to be planted indelibly upon my mind.\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe the hotels on the far side of the Maine\nB) To complain about poor lighting in the evening\nC) To explain a plan to leave the city tomorrow\nD) To convey an obsession with a half-known face\n\n[표시된 정답] D\n[해설]\n글쓴이는 그 얼굴을 안다고 느끼며 이름을 알아낼 때까지 쉬지 않겠다고 말한다. 추측만 거듭할 뿐인데도 그 한 번의 눈길이 마음에 지워지지 않게 박혔다고 한다. 따라서 D가 정답이다. A의 호텔과 B의 어둠은 부수적 세부이고, C의 떠날 계획은 언급되지 않는다(내일은 숙박부를 뒤질 계획이다).\n### lit40-easy-01-070 — skill inferences · 유형 character_motivation\n[지문]\nWhen it all availed nothing and the winter came on, they retired into their huts and cut the acquaintance of the white men. They were afraid that they had come to take revenge for the harm done their people in the olden time. There was nothing for it, then, but that Egede must go to them, and this he did.\n\nThey seized their spears when they saw him coming, but he made signs that he was their friend. When he had nothing else to give them, he let them cut the buttons from his coat.\n\n[질문] Why does Egede most likely let the people cut the buttons from his coat?\nA) He wants to trade the buttons for their spears.\nB) He hopes to repay the harm done in olden times.\nC) He wishes to prove his friendly intentions.\nD) He is forced to surrender them under threat.\n\n[표시된 정답] C\n[해설]\n사람들은 백인들이 옛날의 해악에 대한 복수를 하러 왔다고 두려워했다. 에게데는 창을 든 그들에게 자신이 친구라는 신호를 보내고, 더 줄 것이 없자 단추를 자르게 한다. 따라서 우호의 뜻을 증명하려는 C가 정답이다. A의 교환은 없고, B는 복수를 두려워한 쪽이 원주민이므로 오해이며, D는 위협에 굴복했다는 근거가 없다.\n### lit40-easy-01-071 — skill inferences · 유형 character_motivation\n[지문]\nThe opposition had been stubborn at first, gathering strength in secret and losing it in public, until at last good sense and kindliness prevailed. The motion to admit Charity as a member of the G. B. C. was carried unanimously, and almost the first she knew about it she was a full member, eagerly searching hill-side and meadow with the rest, and wondering deep in her inmost soul whether she ever, ever could \"catch up\" to the other girls. They knew so much from books, and she had been able to study so little!\n\nPoor Charity! She was wiser than she knew. Her habit of close observation, and her eager desire to learn, soon made her a valuable addition to the club.\n\n[질문] Based on the text, why does Charity search hill-side and meadow so eagerly?\nA) She hopes to win the club's opposition to her side.\nB) She wants to prove that books are of little use.\nC) She is trying to avoid the other girls' company.\nD) She longs to match what the other girls know.\n\n[표시된 정답] D\n[해설]\n채리티는 다른 소녀들을 '따라잡을' 수 있을지 마음속 깊이 걱정하며 열심히 탐색한다. 그들은 책으로 많이 알지만 자신은 거의 공부하지 못했기 때문이다. 따라서 D가 정답이다. A는 반대가 이미 끝난 뒤의 일이고, B는 책을 낮춰 보는 근거가 없으며, C는 함께 탐색한다는 내용과 반대다.\n### lit40-easy-01-072 — skill inferences · 유형 character_motivation\n[지문]\nOn the third evening, when he had removed all signs of his work, he lighted two kerosene lamps and two candles, finding the effect, under this illumination, almost too brilliant and beautiful for belief. Rose should never see it now, he determined, until the furniture was in place. They had already chosen the kitchen and bedroom things, though they would not be needed for some months; but the rest was to wait until summer, when there would be the hay-money to spend.\n\nStephen did not go back to the River Farm till one o'clock that night; the pink bedroom held him in fetters too powerful to break.\n\n[질문] Why does Stephen decide that Rose should not see the room yet?\nA) He wants it to be complete before she sees it.\nB) He fears she will dislike the room's color.\nC) He is waiting to earn hay-money for paint.\nD) He plans to keep the room for himself alone.\n\n[표시된 정답] A\n[해설]\n스티븐은 방의 효과가 믿기 어려울 만큼 아름답다고 느끼고, 가구가 제자리에 놓일 때까지 로즈에게 보이지 않겠다고 결심한다. 즉 완성된 모습을 보여 주고 싶은 것이므로 A가 정답이다. B의 색에 대한 걱정은 없고, C의 건초 값은 가구를 위한 것이며, D는 로즈를 위한 준비라는 맥락과 어긋난다.\n### lit40-easy-01-074 — skill inferences · 유형 character_motivation\n[지문]\nI gladly accepted, feeling that here was an opportunity not only to support my friend in the step she had taken, but to make the path clear for other unhappy wives who might desire to follow her example. I had no thought of the persecution I was drawing down on myself for thus attacking so venerable an institution. I was always courageous in saying what I saw to be true, for the simple reason that I never dreamed of opposition. What seemed to me to be right I thought must be equally plain to all other rational beings. Hence I had no dread of denunciation. I was only surprised when I encountered it, and no number of experiences have, as yet, taught me to fear public opinion.\n\n[질문] Why was the narrator unafraid to speak out in support of her friend?\nA) She expected allies to protect her from critics.\nB) She had grown used to public denunciation.\nC) She assumed others would see right as she did.\nD) She cared little whether her friend succeeded.\n\n[표시된 정답] C\n[해설]\n서술자는 반대를 꿈에도 생각하지 않았기 때문에 용감했다고 말한다. 자신에게 옳아 보이는 것은 다른 이성적인 사람들에게도 똑같이 분명하리라 여겼다는 것이다. 따라서 C가 정답이다. A의 보호자는 언급되지 않고, B는 비난을 만나면 '놀랐을 뿐'이라는 말과 어긋나며, D는 친구를 지지하려 했다는 내용과 반대다.\n### lit40-easy-01-075 — skill inferences · 유형 tone_or_mood\n[지문]\nPerhaps it was the singular breadth of his forehead which made the lower part of his face look so unusually slight and feminine. His eyes were dark hazel, as clear, brilliant, and tender as a girl’s, and brimming full of a pensiveness which seemed both loving and melancholy. Few persons, at all events few women, who looked upon him ever looked beyond his eyes. They were very fascinating, and in a man’s countenance very strange. They were the kind of eyes which reveal passionate romances, and which make them.\n\nBy his side stood a boy, a singularly interesting and beautiful boy, fair-haired and blue-eyed, and delicate in color. When this boy saw the stranger approach he turned as pale as marble, slid away from the brigade commander’s side, and disappeared behind a group of staff officers and orderlies.\n\n[질문] Which choice best describes the overall mood of the text?\nA) Cheerful and lighthearted\nB) Detached and coldly clinical\nC) Bitter and openly hostile\nD) Intrigued and faintly uneasy\n\n[표시된 정답] D\n[해설]\n서술은 낯선 남자의 눈을 '매혹적이면서도 남자의 얼굴에서는 매우 이상한' 것으로 그려 신비감을 준다. 이어 소년이 그를 보자 대리석처럼 창백해져 사라지는 장면이 불안을 더한다. 따라서 D가 정답이다. A는 우울한 눈빛 묘사와 맞지 않고, B는 감각적 묘사가 풍부하므로 틀리며, C의 적대감은 드러나지 않는다.\n### lit40-easy-01-076 — skill inferences · 유형 tone_or_mood\n[지문]\nWhat had happened to Rose was the dilation of her vision. She saw things under a wider sky and in a clearer light. Above all, her heart was wrung with pity for Stephen--Stephen, with no comforting woman's hand to help him in his sore trouble; Stephen, bearing his losses alone, his burdens and anxieties alone, his nursing and daily work alone. Oh, how she felt herself needed! Needed! that was the magic word that unlocked her better nature. \"Darkness is the time for making roots and establishing plants, whether of the soil or of the soul,\" and all at once Rose had become a woman: a little one, perhaps, but a whole woman--and a bit of an angel, too, with healing in her wings.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Tender and uplifting\nB) Mocking and dismissive\nC) Anxious and despairing\nD) Neutral and detached\n\n[표시된 정답] A\n[해설]\n로즈는 홀로 짐을 지는 스티븐에게 연민을 느끼며 자신이 '필요하다'는 말에서 더 나은 본성을 깨운다. 서술자는 그녀가 온전한 여인이자 치유의 날개를 지닌 천사가 되었다고 따뜻하게 그린다. 따라서 A가 정답이다. B의 조롱은 없고, C는 고난이 성장의 계기로 그려지므로 틀리며, D는 감탄문 등 감정적 어조와 맞지 않는다.\n### lit40-easy-01-077 — skill inferences · 유형 tone_or_mood\n[지문]\n\"In retrospective vision bright,\nCan you recall dear Martha Wright\nWithout her work or knitting?\nThe needles flying in her hands,\nOn washing rags or baby's bands,\nOr other work as fitting?\n\n\"I cannot think they thought the less,\nOr ceased the company to bless\nWith conversation's riches,\nBecause they thus improved their time,\nAnd never deemed it was a crime\nTo fill the hours with stitches.\n\n\"They even used to preach and plan\nTo spread the fashion, so that man\nMight have this satisfaction;\nInstead of idling as men do,\nWith nervous meddling fingers too,\nWhy not mate talk with action?\n\n[질문] Which choice best describes the overall tone of the poem?\nA) Mournful and nostalgic\nB) Playful and approving\nC) Stern and disapproving\nD) Bitter and resentful\n\n[표시된 정답] B\n[해설]\n시는 뜨개질하며 대화를 나누던 여성들을 다정하게 떠올리며 그것이 결코 '죄'가 아니었다고 말한다. 마지막 연에서는 남자들도 빈둥대는 대신 '말과 행동을 짝지어 보라'고 가볍게 권한다. 따라서 B가 정답이다. A는 회상 장면이 있지만 슬픔은 없고, C·D는 칭찬과 유쾌한 권유라는 어조와 반대다.\n### lit40-easy-01-078 — skill inferences · 유형 tone_or_mood\n[지문]\nTo poor Vauvenargues life was not a laughing matter. His health had been completely ruined by the disastrous campaigns in Austria, and by the hardships of garrison life; and he was feeling more and more sharply that pinch of genteel poverty which is the hardest of all to bear. But if he never laughed, this martyr of the soul never ceased to smile. His perpetual sufferings did not affect his gentle sobriety of conversation. Those whose privilege it was to see Vauvenargues during these last years of his brief existence are united in their report of his magnanimity. Voltaire wrote, \"I have always found him the most unfortunate of human beings and the most tranquil.\"\n\n[질문] Which choice best describes the overall tone of the text?\nA) Wry and mocking\nB) Bleak and hopeless\nC) Warm and admiring\nD) Cool and clinical\n\n[표시된 정답] C\n[해설]\n글쓴이는 보브나르그를 '가엾은' 인물이자 '영혼의 순교자'로 부르며 그의 고통에 공감한다. 동시에 그가 웃지는 않았어도 늘 미소를 잃지 않았고 관대했다고 칭송한다. 따라서 C가 정답이다. A의 조롱은 없고, B는 고통 속에서도 평온을 강조하므로 틀리며, D는 감정이 담긴 표현과 맞지 않는다.\n### lit40-easy-01-079 — skill inferences · 유형 tone_or_mood\n[지문]\nI shall be very glad to receive anything you may give to Mr. Washington McLean, as I know you recommend no one but those who deserve your good opinion.\n\nI am delighted to hear that your arm is still improving, and hope it will soon be restored. You are, however, becoming so accomplished with your left hand as not to need it. You must remember me very kindly to Mrs. Longstreet and all your children. I have not had an opportunity yet to return the compliment she paid me. I had, while in Richmond, a great many inquiries after you, and learned that you intended commencing business in New Orleans.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Formal and coldly distant\nB) Anxious and apologetic\nC) Teasing and sarcastic\nD) Warm and courteous\n\n[표시된 정답] D\n[해설]\n글쓴이는 상대의 팔이 회복되고 있다니 '기쁘다'고 말하고 가족에게 따뜻한 안부를 전해 달라고 부탁한다. 왼손을 능숙하게 쓴다는 말도 친근한 덕담이다. 따라서 D가 정답이다. A는 다정한 안부와 맞지 않고, B의 사과나 불안은 없으며, C는 가벼운 농담이 있지만 비꼼은 아니다.\n### lit40-easy-01-080 — skill inferences · 유형 relationship_between_characters\n[지문]\nWe go like two thieves to the attic, laughing as though we were children once more. Presently we find the violin, and I see that it is one Cremona, very old, very fine, but with no strings. I fit on some strings that I have in mine pocket, but there is no bow and I can only play pizzicato. I need to hear the tone but one moment to know what it is that I have. 'It is most wonderful,' I say, and then the door opens and one very angry lady stands there.\n\n[질문] Which choice best describes the relationship between the narrator and the person who goes with him to the attic?\nA) Old friends sharing a playful secret adventure\nB) Rivals competing to claim a valuable violin\nC) A teacher guiding a nervous young student\nD) Strangers brought together by an angry lady\n\n[표시된 정답] A\n[해설]\n두 사람은 '두 도둑처럼' 다락방에 가며 '다시 아이가 된 듯' 웃는다. 이는 친밀하고 장난스러운 공모 관계를 보여 준다. 따라서 A가 정답이다. B의 경쟁은 없고, C의 사제 관계 근거가 없으며, D는 화난 여인이 나중에 등장할 뿐 두 사람을 만나게 한 것이 아니다.\n### lit40-easy-01-081 — skill inferences · 유형 relationship_between_characters\n[지문]\nThe new-comer was perhaps some four years older than the other, but this was only detected by close examination.\n\n“And so you have come at last. O brother, brother! how I have wanted you!” said Louis, drawing his guest to a sofa, and shaking hands with him over and over again. “You have no idea how very, very much I have wanted you!”\n\nA shade of trouble came over his face as he spoke, and instantly that of his brother darkened with the same shadow, as if the pain which one felt must have a mutual vibration.\n\n[질문] Based on the text, which choice best describes the relationship between Louis and his guest?\nA) They are business partners who meet only to settle an old dispute.\nB) They are brothers whose close bond lets each share the other's feelings.\nC) They are old rivals who hide their resentment behind warm greetings.\nD) They are strangers who have just been introduced by a mutual friend.\n\n[표시된 정답] B\n[해설]\nLouis가 손님을 'O brother, brother!'라고 부르며 몹시 기다렸다고 말하므로 두 사람은 형제이다. 또한 Louis의 얼굴에 걱정이 스치자 형의 얼굴도 즉시 같은 그늘로 어두워졌다는 서술은 서로의 감정을 함께 느끼는 깊은 유대를 보여 준다. 따라서 B가 정답이다. A, C, D는 사업 관계·숨은 적대감·처음 만난 사이를 말하지만 지문의 애정 어린 재회 장면과 맞지 않는다.\n### lit40-easy-01-082 — skill inferences · 유형 relationship_between_characters\n[지문]\nIs the best Gothic fit for our worship? Does it express our belief? Or shall we choose some other style?\n\nI say that it is; and that it is so because it is a style which, if not founded on Nature, has taken into itself more of Nature, of Nature beautiful and healthy, than any other style.\n\nWith greater knowledge of Nature, both geographical and scientific, fresh styles of architecture may and will arise, as much more beautiful, and as much more natural, than the Gothic, as Gothic is more beautiful and natural than the Norman. Till then we must take the best models which we have; use them; and, as it were, use them up and exhaust them.\n\n[질문] Based on the text, how does the author view the relationship between Gothic architecture and the styles that may follow it?\nA) Gothic is a perfect style that no later style could ever surpass.\nB) Later styles should be avoided because they reject Gothic models.\nC) Gothic is the best current model but may be surpassed by later styles.\nD) Gothic and Norman styles are equally natural and equally beautiful.\n\n[표시된 정답] C\n[해설]\n필자는 고딕이 다른 양식보다 자연을 더 많이 담았기에 예배에 맞는다고 말한다. 동시에 자연에 대한 지식이 늘면 고딕보다 더 아름답고 자연스러운 새 양식이 생길 것이라고 예상하며, 그때까지는 가진 최선의 모델을 쓰자고 한다. 따라서 C가 정답이다. A는 미래 양식의 가능성을 부정하고, B는 새 양식을 피하라는 주장이 없으며, D는 고딕이 노르만보다 더 아름답다는 서술과 어긋난다.\n### lit40-easy-01-083 — skill inferences · 유형 relationship_between_characters\n[지문]\nI was ambitious to absorb all the wisdom I could, but, really, I could not give an intelligent report of the points under discussion at any sitting. Oliver Johnson asked me, one day, if I enjoyed them. I thought, from a twinkle in his eye, that he thought I did not, so I told him I was ashamed to confess that I did not know what they were talking about. He said, \"Neither do I,--very few of their hearers do,--so you need not be surprised that they are incomprehensible to you, nor think less of your own capacity.\"\n\nI was indebted to Mr. Johnson for several of the greatest pleasures I enjoyed in Boston.\n\n[질문] Based on the text, which choice best describes the relationship between the narrator and Oliver Johnson?\nA) Johnson mocks the narrator for failing to follow the discussions.\nB) The narrator resents Johnson for exposing her confusion to others.\nC) Johnson and the narrator compete to seem the most learned listener.\nD) Johnson reassures the narrator, who later feels grateful to him.\n\n[표시된 정답] D\n[해설]\n화자가 토론 내용을 이해하지 못했다고 고백하자 Johnson은 자신도 모르겠다며 화자의 능력을 낮게 보지 말라고 위로한다. 이어 화자는 보스턴에서 누린 큰 즐거움 여럿을 Johnson 덕분이라고 말한다. 따라서 위로와 감사의 관계를 말한 D가 정답이다. A의 조롱, B의 원망, C의 경쟁은 지문의 다정한 대화와 맞지 않는다.\n### lit40-easy-01-084 — skill inferences · 유형 symbolism\n[지문]\nThe sweet fresh morning air seemed to revive her. Day was just breaking, and the sky was tinged all over with a soft rosy hue.\n\nAs she stood gazing on the still and peaceful scene before her, she heard the garden gate open, and a minute afterwards there was a gentle tap at the cottage door. The window of Katie's room was at the side of the house, so that Mrs. Lawrence could not see any one as they came through the garden. She glanced at the bed; Katie was still calmly sleeping. And opening the door as noiselessly as possible, she went down the stairs, thinking that perhaps the doctor had sent to inquire after his patient.\n\n[질문] In the text, the breaking day with its soft rosy sky most likely symbolizes\nA) a hopeful sense of renewal after a long night of watching.\nB) the arrival of a dangerous visitor at the cottage door.\nC) Mrs. Lawrence's wish to leave the cottage and its troubles.\nD) the doctor's growing worry about the condition of his patient.\n\n[표시된 정답] A\n[해설]\n상쾌한 아침 공기가 그녀를 되살리는 듯했고 하늘이 부드러운 장밋빛으로 물들었다는 묘사는 회복과 희망의 분위기를 만든다. 또 Katie가 여전히 평온하게 잠들어 있다는 서술은 밤새 간호한 뒤의 안도감을 뒷받침한다. 따라서 A가 정답이다. B의 위험한 방문객, C의 떠나고 싶은 마음, D의 의사의 걱정은 지문에 근거가 없다.\n### lit40-easy-01-085 — skill inferences · 유형 symbolism\n[지문]\nOne cold, raw evening, Gwendoline, returning from a reception, entered her apartments through the sitting-room. She found it dark, and, hearing Alice in the bed-chamber, passed on, and, giving her wraps into her hands, returned to the sitting-room. She was shivering from the cold, and, going to the fire, stirred it to a blaze. The brightness illuminated floor and ceiling, chairs and table, falling on the black marble of the last-mentioned article of furniture, and upon the whiteness of a visiting card that lay like a snowflake before her, as she stood with her back to the chimney. Leaning over, she took it up, and turned it to the light behind her.\n\n[질문] In the text, the white visiting card lying like a snowflake on the black marble most likely symbolizes\nA) the warmth Gwendoline feels after returning to her bright fire.\nB) an unexpected and possibly chilling message awaiting Gwendoline.\nC) the comfort of Alice's steady service in the bed-chamber.\nD) the pleasant memories Gwendoline brings home from the reception.\n\n[표시된 정답] B\n[해설]\nGwendoline은 춥고 음산한 저녁에 떨며 돌아왔고, 불빛 아래 검은 대리석 위에 눈송이처럼 놓인 흰 명함을 발견한다. 어둠 속에서 갑자기 드러나는 눈송이 비유는 예상치 못한, 차가운 기운의 소식을 암시한다. 따라서 B가 정답이다. A는 불의 따뜻함을, C는 하녀를, D는 연회의 기억을 말하지만 명함이라는 이미지의 의미와 관련이 없다.\n### lit40-easy-01-086 — skill inferences · 유형 symbolism\n[지문]\nA pair have built in a large, hollow limb in my old apple-tree for many years. Whether it is the same pair or not I do not know. Probably it is, or else some of their descendants. I looked into the cavity one day while the mother bird was upon the nest, but before she had laid any eggs. A sudden explosive sound came up out of the dark depths of the limb, much like that made by an alarmed cat. It made me jerk my head back, when out came the bird and hurried off.\n\n[질문] In the text, the hollow limb of the old apple tree mainly serves as a symbol of\nA) the author's fear of the dangers hidden in his orchard.\nB) the decline of the old apple tree as it slowly dies.\nC) a lasting home that birds return to year after year.\nD) the author's wish to keep wild birds away from his house.\n\n[표시된 정답] C\n[해설]\n필자는 한 쌍의 새가 여러 해 동안 그 늙은 사과나무의 빈 가지에 둥지를 틀었다고 말한다. 같은 쌍인지 그 후손인지는 모르지만 아마 그럴 것이라는 추측은 세대를 이어 돌아오는 보금자리라는 의미를 강조한다. 따라서 C가 정답이다. A의 두려움, B의 나무의 죽음, D의 새를 쫓으려는 마음은 지문에 드러나지 않는다.\n### lit40-easy-01-087 — skill inferences · 유형 symbolism\n[지문]\nBehind the throne is a female figure as if in attendance on the great god. The whole group is surrounded by hieroglyphics, and inclosed in a frame richly adorned with symbolical figures. The winged globe is above, with the wings spread over all, and a line of serpents crowns the whole. The figures and paintings are in such perfect preservation, that they give the most correct idea of their ornaments and decorations (See Plate 19).\n\nStraight forward is the entrance into another chamber with two pillars. The wall of this place is outlined, ready for the sculptor to cut out his figure. It is here that we may plainly see the manner in which the artist prepared the figure on the wall ready to be cut; and it is almost impossible to give a description of the various figures, which adorn the walls and pillars of this chamber.\n\n[질문] In the text, the outlined but uncut wall in the second chamber mainly serves as a sign of\nA) the damage that time has done to the ancient paintings.\nB) the great god's power over the figures that surround him.\nC) the visitors' failure to understand the hieroglyphics.\nD) the hidden working methods of the ancient artists.\n\n[표시된 정답] D\n[해설]\n필자는 첫 방의 그림이 완벽하게 보존되어 있다고 설명한 뒤, 다음 방의 벽은 조각가가 새길 수 있도록 윤곽만 그려져 있다고 말한다. 이어 여기서 예술가가 벽에 형상을 준비한 방식을 분명히 볼 수 있다고 덧붙인다. 따라서 D가 정답이다. A는 보존 상태가 완벽하다는 서술과 어긋나고, B와 C는 미완성 벽의 의미와 관련이 없다.\n### lit40-easy-01-088 — skill words_in_context · 유형 figurative_language\n[지문]\nThe feeling gave her a certain sense of exhilaration. From the depths of her despair her easily influenced spirits sprang again to hope and confidence. After all, nothing very dreadful had happened. She must struggle not to give way to intemperate feelings. She must bear with Polly! she must put up with Maggie. It was all very trying, of course, but it was the English way. She walked along faster and faster, and now her lips rose in a light song, and now again she ran, eager to get over the ground. When she ran her light hair floated behind her, and she looked less and less like a living creature.\n\n[질문] As used in the text, the phrase “her easily influenced spirits sprang again to hope” most nearly suggests that she\nA) quickly recovers her cheerfulness after feeling deep despair.\nB) jumps up into the air out of a sudden fright.\nC) is persuaded by Polly and Maggie to change her plans.\nD) slowly loses all confidence as she walks along the road.\n\n[표시된 정답] A\n[해설]\n이 구절 바로 앞에 절망의 깊은 곳에서라는 표현이 있고, 뒤에는 결국 끔찍한 일은 없었다는 생각이 이어진다. 그녀가 가볍게 노래하고 달리는 모습도 기분이 빠르게 회복되었음을 보여 준다. 따라서 A가 정답이다. B는 비유를 문자 그대로 읽었고, C는 근거가 없으며, D는 지문의 흐름과 반대이다."
+}

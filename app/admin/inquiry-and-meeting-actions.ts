@@ -1,0 +1,461 @@
+"use server";
+
+// R11(문의·면담) — 관리자 서버 액션. household_messages(문의)와 meeting_requests
+// (면담)를 다룬다. consultations(상담)와는 완전히 분리된 테이블이라 이 파일도
+// app/admin/consultation-actions.ts와 별도로 둔다.
+
+import { requireAdmin } from "@/lib/admin-auth";
+import { createAdminClient } from "@/lib/supabase-admin";
+import { createCalendarEventWithMeet, patchCalendarEventTime } from "@/lib/google-calendar";
+import { extractMeetingCodeFromLink } from "@/lib/google-meet";
+import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
+import {
+  MEETING_NEEDS_CONSULTANT_MESSAGE,
+  assertNoConsultantMeetingOverlap,
+  isCalendarRealCallsDisabledError,
+  resolveMeetingOrganizerEmail,
+} from "@/lib/consultation/meeting-scheduling";
+import {
+  adminForceResyncMeetingCalendar,
+  cancelMeetingRequestWithCalendar,
+  scheduleMeetingCalendarResync,
+  type MeetingSyncOutcome,
+} from "@/lib/consultation/meeting-calendar-sync";
+
+// 2026-09-22(사용자 지시) — household 전체가 공유하는 끝없는 대화 대신 "문의" 단위
+// 스레드로 바꿨다. 카드 하나 = 문의 하나(householdId가 아니라 inquiryId가 기본 키다).
+// 관리자가 종료(close_household_inquiry RPC)하면 status='closed'로 남아 내역이 된다.
+export type AdminInquiryThread = {
+  inquiryId: string;
+  householdId: string;
+  householdLabel: string;
+  status: "open" | "closed";
+  lastMessageAt: string;
+  messages: {
+    id: string;
+    senderRole: "guardian" | "admin";
+    body: string;
+    createdAt: string;
+  }[];
+  unreadForAdmin: boolean;
+};
+
+// 2026-09-10(P1-2) — 데이터가 늘어나도 이 화면이 계속 느려지지 않도록 최근
+// 90일 + 상한을 둔다. 열린(open) 문의는 오래됐어도 놓치면 안 되므로 기간 제한과
+// 별개로 항상 포함한다. household_inquiries에 (status, last_message_at) 인덱스가
+// 있어 두 조건 모두 인덱스로 걸린다(전에는 household_messages에 이 조건에 맞는
+// 인덱스가 없어 매번 전체 스캔이었다).
+const INQUIRY_LOOKBACK_DAYS = 90;
+const INQUIRY_LIMIT = 200;
+
+export async function listInquiryThreadsForAdmin(): Promise<AdminInquiryThread[]> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const since = new Date(Date.now() - INQUIRY_LOOKBACK_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const [{ data: recent, error }, { data: openOlder, error: openError }] = await Promise.all([
+    admin
+      .from("household_inquiries")
+      .select(
+        "id, household_id, status, last_message_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name)), household_messages(id, sender_role, body, created_at)"
+      )
+      .gte("last_message_at", since)
+      .order("last_message_at", { ascending: false })
+      .limit(INQUIRY_LIMIT),
+    admin
+      .from("household_inquiries")
+      .select(
+        "id, household_id, status, last_message_at, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name)), household_messages(id, sender_role, body, created_at)"
+      )
+      .lt("last_message_at", since)
+      .eq("status", "open")
+      .order("last_message_at", { ascending: false }),
+  ]);
+  if (error) throw new Error(error.message);
+  if (openError) throw new Error(openError.message);
+  const rows = [...(recent ?? []), ...(openOlder ?? [])];
+
+  const { data: readRows } = await admin.from("household_message_reads").select("household_id, last_read_at").eq("viewer_role", "admin");
+  const readByHousehold = new Map<string, string>((readRows ?? []).map((r) => [r.household_id as string, r.last_read_at as string]));
+
+  const threads: AdminInquiryThread[] = rows.map((row) => {
+    const householdRel = row.household as
+      | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }
+      | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }[]
+      | null;
+    const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
+    const guardianRel = household?.guardian;
+    const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
+    const label = guardian?.name ? `${guardian.name} 가족` : row.household_id;
+    const messages = ((row.household_messages as { id: string; sender_role: "guardian" | "admin"; body: string; created_at: string }[] | null) ?? []).sort(
+      (a, b) => a.created_at.localeCompare(b.created_at)
+    );
+    const lastReadAt = readByHousehold.get(row.household_id as string) ?? null;
+    const unreadForAdmin = messages.some((m) => m.sender_role === "guardian" && (!lastReadAt || m.created_at > lastReadAt));
+    return {
+      inquiryId: row.id as string,
+      householdId: row.household_id as string,
+      householdLabel: label as string,
+      status: row.status as "open" | "closed",
+      lastMessageAt: row.last_message_at as string,
+      messages: messages.map((m) => ({ id: m.id, senderRole: m.sender_role, body: m.body, createdAt: m.created_at })),
+      unreadForAdmin,
+    };
+  });
+  return threads.sort((a, b) => {
+    if (a.status !== b.status) return a.status === "open" ? -1 : 1;
+    return b.lastMessageAt.localeCompare(a.lastMessageAt);
+  });
+}
+
+export async function sendAdminInquiryMessage(inquiryId: string, householdId: string, body: string): Promise<void> {
+  const { adminUserId, supabase } = await requireAdmin();
+  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  const { error } = await supabase.from("household_messages").insert({
+    household_id: householdId,
+    inquiry_id: inquiryId,
+    sender_id: adminUserId,
+    sender_role: "admin",
+    body: body.trim(),
+  });
+  if (error) throw new Error(error.message.includes("household_inquiries") ? "이미 종료된 문의입니다." : error.message);
+}
+
+export async function closeHouseholdInquiry(inquiryId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("close_household_inquiry", { p_inquiry_id: inquiryId });
+  if (error) throw new Error(error.message);
+}
+
+export async function markHouseholdMessengerReadByAdmin(householdId: string): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase
+    .from("household_message_reads")
+    .upsert(
+      { household_id: householdId, viewer_role: "admin", last_read_at: new Date().toISOString() },
+      { onConflict: "household_id,viewer_role" }
+    );
+  if (error) throw new Error(error.message);
+}
+
+export type AdminMeetingRequest = {
+  id: string;
+  householdId: string;
+  householdLabel: string;
+  childName: string | null;
+  // 관리자 포털 정리 항목 3(2026-09-23) — "담당 컨설턴트가 처리할 일반
+  // 상담 업무는 컨설턴트 포털로 옮기고, 관리자는 전체 조회·미배정·실패·
+  // 예외 개입에 집중" — 담당이 있는 요청인지 UI에서 구분하기 위해 추가.
+  // 전체 조회 자체는 계속 이 목록에서 가능하다(숨기지 않음).
+  consultantId: string | null;
+  consultantName: string | null;
+  // 배정 제안 — 가족 자녀의 담당 컨설턴트(consultant_assignments). 관리자는 어떤 활성 컨설턴트든 고를 수 있다.
+  suggestedConsultantId: string | null;
+  subject: string | null;
+  content: string | null;
+  contactPreference: "phone" | "message" | "either" | null;
+  preferredContactTime: string | null;
+  status: "requested" | "confirming" | "scheduling" | "scheduled" | "completed" | "cancelled";
+  startsAt: string | null;
+  endsAt: string | null;
+  googleMeetLink: string | null;
+  googleSyncStatus: "pending" | "succeeded" | "failed" | "reconciliation_needed" | null;
+  googleSyncRetryCount: number;
+  googleSyncLastError: string | null;
+  rescheduledFromId: string | null;
+  createdAt: string;
+};
+
+export async function listMeetingRequestsForAdmin(): Promise<AdminMeetingRequest[]> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  return loadMeetingRequestsForAdmin(admin);
+}
+
+async function loadMeetingRequestsForAdmin(
+  admin: ReturnType<typeof createAdminClient>
+): Promise<AdminMeetingRequest[]> {
+  const { data, error } = await admin
+    .from("meeting_requests")
+    .select(
+      "id, household_id, subject, content, contact_preference, preferred_contact_time, status, starts_at, ends_at, google_meet_link, created_at, consultant_id, google_sync_status, google_sync_retry_count, google_sync_last_error, rescheduled_from_id, household:households(guardian:profiles!households_primary_guardian_id_fkey(name)), child:profiles!meeting_requests_child_id_fkey(name), consultant:profiles!meeting_requests_consultant_id_fkey(name)"
+    )
+    .order("created_at", { ascending: false })
+    // 2026-09-10(P1-2) — 미래 데이터 증가 대비 상한. 최신순 정렬이라 최근 건이
+    // 먼저 나온다.
+    .limit(500);
+  if (error) throw new Error(error.message);
+  // 배정 제안(미배정 행만): 가족 자녀 → 담당 컨설턴트. 쿼리 2개(배치).
+  const suggestions = new Map<string, string>();
+  const unassignedHouseholds = [...new Set((data ?? []).filter((r) => !r.consultant_id).map((r) => r.household_id as string))];
+  if (unassignedHouseholds.length > 0) {
+    const { data: kids, error: kidsError } = await admin
+      .from("household_members")
+      .select("household_id, profile_id")
+      .eq("role", "child")
+      .in("household_id", unassignedHouseholds);
+    if (kidsError) throw new Error(kidsError.message);
+    const kidIds = (kids ?? []).map((k) => k.profile_id as string);
+    if (kidIds.length > 0) {
+      const { data: assigns, error: assignsError } = await admin
+        .from("consultant_assignments")
+        .select("student_id, consultant_id")
+        .in("student_id", kidIds);
+      if (assignsError) throw new Error(assignsError.message);
+      const byStudent = new Map((assigns ?? []).map((a) => [a.student_id as string, a.consultant_id as string]));
+      for (const k of kids ?? []) {
+        const c = byStudent.get(k.profile_id as string);
+        if (c && !suggestions.has(k.household_id as string)) suggestions.set(k.household_id as string, c);
+      }
+    }
+  }
+  return (data ?? []).map((r) => {
+    const householdRel = r.household as { guardian?: { name?: string } | { name?: string }[] } | { guardian?: { name?: string } | { name?: string }[] }[] | null;
+    const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
+    const guardianRel = household?.guardian;
+    const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
+    const childRel = r.child as { name?: string } | { name?: string }[] | null;
+    const child = Array.isArray(childRel) ? childRel[0] : childRel;
+    const consultantRel = r.consultant as { name?: string } | { name?: string }[] | null;
+    const consultant = Array.isArray(consultantRel) ? consultantRel[0] : consultantRel;
+    return {
+      id: r.id,
+      householdId: r.household_id,
+      householdLabel: guardian?.name ? `${guardian.name} 가족` : "-",
+      childName: child?.name ?? null,
+      consultantId: r.consultant_id,
+      consultantName: consultant?.name ?? null,
+      suggestedConsultantId: r.consultant_id ? null : (suggestions.get(r.household_id as string) ?? null),
+      subject: r.subject,
+      content: r.content,
+      contactPreference: r.contact_preference,
+      preferredContactTime: r.preferred_contact_time,
+      status: r.status,
+      startsAt: r.starts_at,
+      endsAt: r.ends_at,
+      googleMeetLink: r.google_meet_link,
+      googleSyncStatus: r.google_sync_status,
+      googleSyncRetryCount: r.google_sync_retry_count ?? 0,
+      googleSyncLastError: r.google_sync_last_error,
+      rescheduledFromId: r.rescheduled_from_id,
+      createdAt: r.created_at,
+    };
+  });
+}
+
+export async function updateMeetingRequestStatus(
+  meetingRequestId: string,
+  // 2026-09-17(상담 마일스톤) — 'scheduled'는 유효한 시간+Calendar 이벤트 생성이
+  // 전제라 이 함수로는 만들 수 없다. scheduleMeetingRequest()를 거쳐야 한다.
+  status: "confirming" | "scheduling" | "completed" | "cancelled"
+): Promise<void> {
+  const { supabase, adminUserId } = await requireAdmin();
+  if (status === "cancelled") {
+    // 2026-09-29 — 취소는 Calendar 이벤트 삭제까지 하는 단일 경로를 거친다.
+    await cancelMeetingRequestWithCalendar({ meetingRequestId, actorId: adminUserId });
+    return;
+  }
+  const { error } = await supabase
+    .from("meeting_requests")
+    .update({ status, updated_at: new Date().toISOString() })
+    .eq("id", meetingRequestId);
+  if (error) throw new Error(error.message);
+}
+
+// 2026-09-29 오너 결정 — 확정된 미팅의 컨설턴트 변경은 수정이 아니라 "취소 → 다른 컨설턴트 배정 → 다시 확정"이다.
+// 이 액션은 취소(Calendar 이벤트 삭제 포함) + 같은 가족·자녀·주제·내용의 새 요청(시간·컨설턴트 없음)을 한 번에 만든다.
+export async function cancelAndRerequestMeetingRequest(
+  meetingRequestId: string
+): Promise<{ newRequestId: string; calendar: "none" | "deleted" | "pending" }> {
+  const { adminUserId } = await requireAdmin();
+  const r = await cancelMeetingRequestWithCalendar({ meetingRequestId, actorId: adminUserId, rerequest: true });
+  if (!r.newRequestId) throw new Error("재신청 요청을 만들지 못했습니다.");
+  return { newRequestId: r.newRequestId, calendar: r.calendar };
+}
+
+// Calendar 동기화 실패(failed/reconciliation_needed) 행을 관리자가 수동으로 다시 시도한다(횟수 초기화).
+export async function resyncMeetingRequestCalendar(meetingRequestId: string): Promise<MeetingSyncOutcome> {
+  await requireAdmin();
+  return adminForceResyncMeetingCalendar(meetingRequestId);
+}
+
+// 2026-09-17(상담 마일스톤) — meeting_requests를 'scheduled'로 전이할 때 반드시
+// 거쳐야 하는 관문. 요구사항:
+//  1. starts_at/ends_at이 둘 다 있고 ends_at > starts_at이어야만 진행(그렇지
+//     않으면 상태 전이 자체를 거부 — "시간 없이 조용히 scheduled로 넘어가는" 회귀
+//     방지).
+//  2. 멱등: 이미 google_event_id가 있으면 새로 만들지 않고 시간이 바뀐 경우에만
+//     patchCalendarEventTime으로 갱신한다(같은 이벤트 유지).
+//  3. 실패 안전: Calendar API 호출이 실패하면 DB 상태를 전혀 건드리지 않는다(트
+//     랜잭션 없이도 "호출 성공 후에만 쓰기" 순서로 같은 효과를 낸다) — 실패 응답을
+//     그대로 호출부(관리자 UI)에 올려보낸다.
+// 2026-09-29 오너 규칙 — 미팅은 배정된 컨설턴트와만 잡고, Calendar organizer 도 그 컨설턴트 본인이다.
+// 컨설턴트가 없으면 거절. 컨설턴트 계정 이메일이 없거나 실제 Google 호출이 꺼져 있으면 Calendar 없이
+// 미팅만 저장하고 google_sync_status='failed' 로 남긴다(재처리 대상).
+export async function scheduleMeetingRequest(params: {
+  meetingRequestId: string;
+  startsAt: string; // ISO
+  endsAt: string; // ISO
+}): Promise<{ googleMeetLink: string | null; googleSyncStatus: "succeeded" | "failed" }> {
+  const { supabase } = await requireAdmin();
+  const admin = createAdminClient();
+
+  const startsAtDate = new Date(params.startsAt);
+  const endsAtDate = new Date(params.endsAt);
+  if (Number.isNaN(startsAtDate.getTime()) || Number.isNaN(endsAtDate.getTime())) {
+    throw new Error("일정 시간이 올바르지 않습니다.");
+  }
+  if (endsAtDate.getTime() <= startsAtDate.getTime()) {
+    throw new Error("종료 시각은 시작 시각보다 뒤여야 합니다.");
+  }
+
+  const { data: row, error: loadError } = await admin
+    .from("meeting_requests")
+    .select("id, subject, consultant_id, google_event_id, google_meet_link, household:households(primary_guardian_id, guardian:profiles!households_primary_guardian_id_fkey(name))")
+    .eq("id", params.meetingRequestId)
+    .single();
+  if (loadError) throw new Error(loadError.message);
+  const consultantId = row.consultant_id as string | null;
+  if (!consultantId) throw new Error(MEETING_NEEDS_CONSULTANT_MESSAGE);
+  await assertNoConsultantMeetingOverlap(admin, {
+    consultantId,
+    startsAt: startsAtDate,
+    endsAt: endsAtDate,
+    excludeMeetingRequestId: params.meetingRequestId,
+  });
+
+  const householdRel = row.household as
+    | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }
+    | { primary_guardian_id?: string; guardian?: { name?: string } | { name?: string }[] }[]
+    | null;
+  const household = Array.isArray(householdRel) ? householdRel[0] : householdRel;
+  const guardianRel = household?.guardian;
+  const guardian = Array.isArray(guardianRel) ? guardianRel[0] : guardianRel;
+  // profiles에는 email 컬럼이 없다(auth.users에만 있음) — Admin API로 조회한다
+  // (app/admin/consultation-kanban-actions.ts와 동일 패턴).
+  let guardianEmail: string | undefined;
+  if (household?.primary_guardian_id) {
+    const { data: guardianAuth } = await admin.auth.admin.getUserById(household.primary_guardian_id);
+    guardianEmail = guardianAuth?.user?.email ?? undefined;
+  }
+
+  let googleEventId = row.google_event_id as string | null;
+  let googleMeetLink = row.google_meet_link as string | null;
+  let syncStatus: "succeeded" | "failed" = "succeeded";
+  let syncError: string | null = null;
+  const organizerEmail = await resolveMeetingOrganizerEmail(admin, consultantId);
+
+  try {
+    if (!organizerEmail) {
+      syncStatus = "failed";
+      syncError = "담당 컨설턴트의 Workspace 계정(이메일)을 찾을 수 없어 Calendar 일정을 만들지 못했습니다.";
+    } else if (googleEventId) {
+      // 이미 이벤트가 있으면 같은 이벤트의 시간만 갱신한다(새로 만들지 않음).
+      await patchCalendarEventTime({
+        teacherWorkspaceEmail: organizerEmail,
+        googleEventId,
+        startsAt: startsAtDate,
+        endsAt: endsAtDate,
+        timezone: "Asia/Seoul",
+        sendUpdates: "all",
+      });
+    } else {
+      const created = await createCalendarEventWithMeet({
+        teacherWorkspaceEmail: organizerEmail,
+        reservationId: params.meetingRequestId,
+        startsAt: startsAtDate,
+        endsAt: endsAtDate,
+        summary: `[Alton] 상담 — ${guardian?.name ?? "학부모"}`,
+        timezone: "Asia/Seoul",
+        attendeeEmail: guardianEmail,
+        sendUpdates: "all",
+      });
+      googleEventId = created.googleEventId;
+      googleMeetLink = created.meetLink;
+    }
+  } catch (e) {
+    // 실패 시 DB는 전혀 쓰지 않는다 — status는 이전 값(scheduling 등) 그대로
+    // 남고, 관리자는 재시도할 수 있다.
+    const message = e instanceof Error ? e.message : String(e);
+    if (!isCalendarRealCallsDisabledError(message)) {
+      throw new Error(`Calendar 일정 생성/갱신에 실패했습니다: ${message}`);
+    }
+    syncStatus = "failed";
+    syncError = message.slice(0, 500);
+  }
+
+  const meetingCode = googleMeetLink ? extractMeetingCodeFromLink(googleMeetLink) : null;
+
+  const { error: updateError } = await supabase
+    .from("meeting_requests")
+    .update({
+      status: "scheduled",
+      starts_at: params.startsAt,
+      ends_at: params.endsAt,
+      google_event_id: googleEventId,
+      google_meet_link: googleMeetLink,
+      google_meeting_code: meetingCode,
+      google_sync_status: syncStatus,
+      google_sync_retry_count: 0,
+      google_sync_last_error: syncError,
+      google_sync_last_attempt_at: new Date().toISOString(),
+      google_sync_claimed_at: null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", params.meetingRequestId);
+  if (updateError) throw new Error(friendlyDbMessage(updateError));
+  if (syncError) {
+    console.error(JSON.stringify({ type: "meeting_calendar_sync_failed", meetingRequestId: params.meetingRequestId, error: syncError }));
+    // 즉시 재시도(응답 뒤 after) — 실제 Google 호출이 꺼져 있으면 아무것도 하지 않고 일 1회 크론·관리자 버튼이 회수한다.
+    scheduleMeetingCalendarResync(params.meetingRequestId);
+  }
+
+  return { googleMeetLink, googleSyncStatus: syncStatus };
+}
+
+export type MeetingConsultantOption = { id: string; name: string | null };
+
+export type MeetingOperationsDashboard = {
+  requests: AdminMeetingRequest[];
+  consultants: MeetingConsultantOption[];
+};
+
+/**
+ * 2026-09-10(P1-2) — "면담 운영" 서브탭이 마운트 시 호출하던 3개 서버 액션을
+ * 하나로 합친다. 인증(requireAdmin)도 이 함수 안에서 한 번만 수행한다.
+ */
+export async function loadMeetingOperationsDashboardAction(): Promise<MeetingOperationsDashboard> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const [requests, consultants] = await Promise.all([
+    loadMeetingRequestsForAdmin(admin),
+    loadConsultantOptions(admin),
+  ]);
+  return { requests, consultants };
+}
+
+async function loadConsultantOptions(admin: ReturnType<typeof createAdminClient>): Promise<MeetingConsultantOption[]> {
+  const { data, error } = await admin.from("profiles").select("id, name").eq("role", "consultant").order("name", { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data ?? []) as MeetingConsultantOption[];
+}
+
+// 2026-09-29 오너 규칙 — 미팅은 배정된 컨설턴트와만. 관리자만 배정·변경(확정 전까지)한다.
+// 배정만으로는 시간·Calendar 이벤트를 만들지 않는다. 시간이 있는 옛 미팅이면 DB 트리거가 겹침을 거절한다.
+export async function assignMeetingRequestConsultant(params: { meetingRequestId: string; consultantId: string }): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("admin_assign_meeting_consultant", {
+    p_meeting_request_id: params.meetingRequestId,
+    p_consultant_id: params.consultantId,
+    p_reason: null,
+  });
+  if (error) {
+    if (error.code === "23P01") throw new Error(`해당 컨설턴트에게 이미 같은 시간의 일정이 있어 배정할 수 없습니다. (${error.message})`);
+    throw new Error(error.message);
+  }
+}
+
+// R12.1: meeting_request_messages 스레드는 더 이상 관리자 UI에도 노출하지
+// 않는다 — 상담 신청과 관련된 관리자↔보호자 대화는 이제 household_messages
+// (메신저)로만 처리한다. listMeetingRequestMessagesForAdmin/
+// sendAdminMeetingRequestMessage는 여기서 제거했다(테이블은 추가 전용 원칙에
+// 따라 그대로 유지).

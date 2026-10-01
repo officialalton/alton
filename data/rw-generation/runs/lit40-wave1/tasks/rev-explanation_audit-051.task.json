@@ -1,0 +1,299 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-051",
+ "chunkId": "rev-explanation_audit-051",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-051.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-07-044",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Rusted shears in hand, Annika knelt beside the tomato bed she and her brother Cyrus kept behind the community hall in Porto Alegre. That morning, hunting for twine in the shop's counter drawer, she had found a stack of overdue notices he had hidden beneath the receipt book. Now Cyrus arrived with two cups of coffee and a story about how well the week's sales had gone. Annika let him finish, then mentioned lightly that she had already sold her bicycle and would put the money toward the electricity bill. He stared at her, set down the cups, and quietly began tying up the vines she had missed. Across the garden, an old woman was scattering crushed eggshells around her lettuce.",
+   "question": "Based on the text, which choice best describes the relationship between Annika and Cyrus?",
+   "options": [
+    "They are siblings who each try to shield the other from the strain of the shop's troubles.",
+    "Annika resents Cyrus for hiding the shop's overdue notices and means to confront him.",
+    "Cyrus depends on Annika to make every decision about the shop and its unpaid bills.",
+    "They are rivals competing over the shop to prove which of them deserves to run it."
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "correct_letter": "A",
+   "explanation": "Cyrus는 연체 고지서를 서랍에 숨기고 매출이 좋았다고 이야기하며 Annika를 걱정시키지 않으려 하고, Annika는 그를 추궁하지 않고 자전거를 팔아 전기료에 보태겠다고 가볍게 말한다. 두 행동을 이어 읽으면 서로를 감싸 주려는 남매 관계, 즉 A가 드러난다. B는 Annika의 감정만 일부 반영했으며 실제로 그녀는 대립하지 않는다. C는 의존의 방향을 한쪽으로 몰았고, D는 형제 경쟁이라는 일반적 통념에서 나온 선택지다."
+  },
+  {
+   "candidateId": "lit40-medium-07-045",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Tar and wet hemp, that was the smell of every crossing. I was fourteen the summer Budi began riding our barge up the estuary from the Cornish coast, always with a sealed parcel on his knees and never with a fare in his hand. Father had told me only that Budi had once pulled him from the water at Falmouth, and that I, Abena, was not to ask for money. Each morning I spliced the frayed end of our mooring line, and each evening it had worn through again against the iron ring. Budi watched me work the strands together and once offered to buy us new rope. I said the old one would hold, and he did not argue. By September the splice was thicker than the rope itself, a knot of patches I could have tied blindfolded. On his last crossing he set his parcel down, took the line from me, and wove one strand in himself before stepping ashore without a word.",
+   "question": "In the text, the repeatedly mended mooring line most likely represents",
+   "options": [
+    "the ferryman's pride in the river skills he has passed down to his daughter.",
+    "the unspoken obligation that keeps the narrator's family and Budi bound together.",
+    "the growing danger of carrying passengers across the estuary in a worn barge.",
+    "the narrator's private wish to escape her father's trade on the river someday."
+   ],
+   "correct_letter": "B",
+   "explanation": "Budi는 아버지의 목숨을 구한 일 때문에 운임을 내지 않고, 아무도 그 빚을 말하지 않는다. 매일 끊어지고 다시 이어지는 밧줄, 새 밧줄을 사 주겠다는 제안을 거절하는 장면, 마지막에 Budi가 직접 한 가닥을 엮어 넣는 장면이 이어지며 밧줄은 양쪽을 묶는 말없는 의무를 상징하게 되므로 B가 정답이다. A는 기술 전수, C는 위험, D는 떠나고 싶은 마음을 말하지만 지문에 그런 단서가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-046",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "What do you say to a man who returns your present before he has even opened it? For three years I clerked for Bartolo in the courthouse above the harbor, and when he retired to take English lessons at a small language school in Valparaiso, I bought him a leather notebook for his vocabulary lists. On Tuesday he set it on my desk in the empty classroom, still in its tissue paper, and said he could not accept gifts from someone whose career he might yet be asked to recommend. His voice was the same one he had used from the bench, courteous and final. I held the package and felt I had been handed a verdict wrapped in tissue paper. Later, Camila, the teacher, asked me to help stack the chairs, and I did it slowly, listening to the gulls.",
+   "question": "As used in the text, the phrase “a verdict wrapped in tissue paper” most nearly suggests that the narrator",
+   "options": [
+    "believes Bartolo has secretly decided to report her conduct to the court.",
+    "thinks the notebook was wrapped too carelessly to be offered as a gift.",
+    "experiences the return as a firm judgment delivered with gentle politeness.",
+    "suspects Bartolo is pretending to be stern to conceal his real gratitude."
+   ],
+   "correct_letter": "C",
+   "explanation": "Bartolo는 선물을 뜯지도 않고 돌려주며 원칙적인 이유를 대고, 그의 목소리는 법정에서처럼 '정중하지만 단호했다'. 이 두 단서를 연결하면 '판결'은 되돌릴 수 없는 단호한 결정을, '얇은 포장지'는 그것이 부드럽고 예의 바르게 전달되었음을 뜻하므로 C가 정답이다. A는 판결이라는 단어를 법적 고발로 지나치게 문자적으로 읽었고, B는 포장지를 문자 그대로 받아들였다. D는 지문에 근거가 없는 숨은 감사를 가정한다."
+  },
+  {
+   "candidateId": "lit40-medium-07-047",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "By the third week of the monsoon, Sunethra had stopped expecting her father's letters and started counting the hives instead. Seven boxes stood along the wall of the yard in Karachi; the eighth had gone silent in April, its colony lost to mites. Lanying, who had shared a shop with her father before he sailed, came by most evenings to drink tea and talk of nothing in particular. She never mentioned bees. Yet one damp morning Sunethra lifted the lid of the eighth box and found it thick with a new swarm, the frames already beaded with wax. When she asked, Lanying only shrugged and spoke about the price of sugar. Her kindness, Sunethra thought, moved through the yard like smoke through a hive, calming everything and leaving nothing behind. That afternoon the rain came again, drumming on the tin roof of the shed.",
+   "question": "As used in the text, the phrase “like smoke through a hive” most nearly suggests that Lanying's help was",
+   "options": [
+    "irritating to the bees and unsettling to the rest of the yard.",
+    "brief and fleeting, so that Sunethra soon forgot about it.",
+    "heavy and oppressive, making the yard hard to breathe in.",
+    "quietly soothing and difficult to trace back to its source."
+   ],
+   "correct_letter": "D",
+   "explanation": "Lanying은 벌 이야기를 한 번도 꺼내지 않았고, 새 벌 떼에 대해 묻자 어깨만 으쓱하고 설탕 값 이야기로 넘어간다. 양봉에서 연기는 벌을 진정시키지만 흔적을 남기지 않으므로, 두 단서를 연결하면 그녀의 도움이 조용히 위로가 되면서도 출처를 드러내지 않았다는 D가 정답이다. A는 연기를 벌을 자극하는 것으로, C는 숨 막히는 것으로 오해한 해석이다. B는 금방 잊혔다고 하지만 Sunethra는 그 친절을 곱씹고 있다."
+  },
+  {
+   "candidateId": "lit40-medium-07-048",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "What would Ivy want, Ronan wondered,\nnow that an ocean sat between them\nand the date they had always kept came round again?\nAbove Port of Spain the tea rows climbed\nlike green stitches holding the slope together,\nand he walked them at dawn, as the two of them once had,\npinching the youngest leaves the way she taught him.\nLast year she had written that she kept no calendars now,\nthat each new street was busy erasing the old ones.\nSo he would send no card, no ribbon, nothing she must answer.\nHe dried one handful of leaves on the windowsill\nand mailed them folded in plain brown paper,\na small country she could steep and drink alone.\nThe pickers' songs drifted up from the lower terraces,\nthin and bright in the cooling air.",
+   "question": "As used in the text, the phrase “a small country she could steep and drink alone” most nearly suggests that the leaves are",
+   "options": [
+    "a piece of their shared place that Ivy can savor privately, without having to reply.",
+    "a reminder of the home Ronan hopes Ivy will one day come back to and settle in.",
+    "a costly gift meant to show Ivy how well the plantation has prospered since then.",
+    "a sign of the distance that has turned Ronan and Ivy into strangers to each other."
+   ],
+   "correct_letter": "A",
+   "explanation": "Ronan은 Ivy가 이제 달력을 지키지 않는다는 편지를 떠올리고 '그녀가 답해야 할 것은 아무것도' 보내지 않기로 한다. 함께 걷던 차밭의 잎을 보내며 그것을 '혼자 우려 마실 작은 나라'라고 부르므로, 두 단서를 이으면 공유한 장소의 한 조각을 부담 없이 홀로 즐기게 한다는 A가 정답이다. B는 귀환에 대한 바람을, C는 값비싼 과시를 가정하지만 지문에 근거가 없다. D는 거리를 말하지만 시는 단절이 아닌 배려를 그린다."
+  },
+  {
+   "candidateId": "lit40-medium-07-049",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Bailing with a soup pot, I stood knee-deep in the cellar of the Galway town hall in the spring of 1987 while Aoife, our mayor, held the torch. Somewhere down here, in a crate marked with a boy's surname, was his late grandfather's accordion, and Aoife had sworn to the boy at the funeral that it would be kept safe. She had said so before the river rose, before anyone knew the drains would fail. Even I, Chiara, the town's only doctor, have made my share of reckless reassurances at bedsides, so I did not scold her. Her promise, I thought, had been a paper boat set on a calm puddle, and now the puddle was a flood. We found the crate on a high shelf, damp at one corner, and Aoife laughed so hard she nearly dropped the torch. Upstairs, the clerk was ringing every household on the low road.",
+   "question": "As used in the text, the phrase “a paper boat set on a calm puddle” most nearly suggests that Aoife's promise was",
+   "options": [
+    "a playful game that she never intended the boy to take seriously.",
+    "sincere but made before she could foresee the danger to come.",
+    "carefully planned to withstand any disaster the town might face.",
+    "a political gesture designed to win favor with the boy's family."
+   ],
+   "correct_letter": "B",
+   "explanation": "Aoife는 강물이 불어나기 전, 배수구가 막힐 줄 아무도 몰랐을 때 약속을 했고, 의사인 화자도 병상에서 무모한 안심의 말을 해 본 적이 있다며 그녀를 탓하지 않는다. 종이배는 진심으로 띄웠지만 연약한 것이고 '잔잔한 웅덩이'는 위험을 예견할 수 없던 상황을 뜻하므로 B가 정답이다. A는 '종이배'의 놀이 이미지만 취했고, C는 연약함과 정반대다. D의 정치적 의도는 지문에 단서가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-050",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "When we came back to Jeju Island in the autumn of 1898, my father, Taeyang, would not walk past the cemetery gate where his own father lay. He had left the island a young man and returned with a daughter who spoke English better than Korean, and I think he feared the dead would hear the difference. Each Sunday I, Gil, asked whether we might go in, and each Sunday he said the path was too muddy. Yet by midwinter he had begun stopping at the gate to straighten its leaning post, and once I saw him brush the moss from the nearest stone with his cuff. His refusal, I understood, had worn as thin as a winter sleeve. In March he asked me to teach him the English word for chrysanthemum, though he never said why. The gate creaked on its hinge as the wind came off the sea.",
+   "question": "As used in the text, the phrase “worn as thin as a winter sleeve” most nearly suggests that Taeyang's",
+   "options": [
+    "reasons for avoiding the cemetery had always been weak and insincere.",
+    "health had been steadily failing during the cold island winter.",
+    "resistance had gradually weakened until it barely held at all.",
+    "poverty had left him unable to afford proper graveside offerings."
+   ],
+   "correct_letter": "C",
+   "explanation": "처음에 Taeyang은 매주 길이 질다며 묘지에 들어가기를 거부했지만, 한겨울쯤에는 문 기둥을 바로 세우고 소맷부리로 비석의 이끼를 닦는다. 오래 입어 닳은 겨울 소매처럼 그의 거부가 서서히 약해져 거의 남지 않았다는 뜻이므로 C가 정답이다. A는 '얇다'를 처음부터 약했다는 뜻으로 오독했고, 지문은 점진적 변화를 보여 준다. B는 겨울과 건강을, D는 낡은 옷과 가난을 문자적으로 연결한 오답이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-056",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Wringing out a cloth in the basin, Savitri listened to the pickers singing below the veranda of the vineyard house outside Mumbai. Her patient, Sharda, had not slept for three nights, and tonight she was in a mood to accuse. Had Savitri not insisted on the fever cure, Sharda declared, she would have been fit to travel to the conservatory in Poona and sing for its masters; the letter had come and gone while she lay here. Savitri set her jaw and recited, in a clipped voice, every dose of physic she had measured out. Then Sharda's hand slid across the coverlet and closed on her wrist, and the old woman whispered that she had known for years her voice was gone, that it was easier to blame a nurse than a throat. Savitri sat down slowly on the edge of the bed. She told Sharda about the grape baskets stacked by the press, purple to the brim, and Sharda listened with her eyes closed, smiling. Down the hill, the singing stopped, and a lantern moved toward the sheds.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It moves from defensive tension to gentle sympathy once Sharda confesses why she blamed Savitri.",
+    "It moves from cheerful hope to bitter resentment after Sharda learns the conservatory rejected her.",
+    "It moves from calm routine to sudden alarm as Sharda's fever grows worse during the long night.",
+    "It moves from quiet sorrow to playful teasing as Savitri describes the grape harvest to Sharda."
+   ],
+   "correct_letter": "A",
+   "explanation": "처음에 Sharda는 기회를 놓친 책임을 Savitri에게 돌리고, Savitri는 턱을 굳힌 채 딱딱한 목소리로 투약 기록을 읊어 방어적 긴장이 흐른다. 그러다 Sharda가 목소리는 이미 오래전에 사라졌고 목보다 간호사를 탓하는 게 쉬웠다고 고백하자, Savitri는 천천히 침대에 앉아 포도 이야기를 들려준다. 따라서 긴장에서 다정한 공감으로 바뀐다는 A가 정답이다. B는 거절 통보가 없고, C는 열이 악화되지 않으며, D는 장난스러운 분위기로 볼 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-057",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When Brigid swept into the dining hall of the boys' summer camp outside Glasgow, she meant to have it out with Esteban before the soup was served. Her brother had written home of a broken window and a week of extra lessons, and the tutor, it seemed, had told the camp master nothing at all about who had thrown the stone. Brigid laid the letter beside his plate and demanded to know what sort of guardian kept such things from a family. Esteban folded his napkin with great care. The stone, he said quietly, had been thrown at her brother, not by him, and the boys who threw it were the sons of the men who paid for the camp. Had he spoken, it was her brother who would have been sent home. Brigid sat down on the bench across from him, and for some time neither of them touched the bread. At the far end of the hall, a bell was rung for grace, and two hundred chairs scraped at once.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "from playful teasing to open hostility as Brigid learns about the broken window",
+    "from indignant accusation to sober understanding as Esteban explains his silence",
+    "from anxious worry to cheerful relief as Brigid learns her brother is unharmed",
+    "from formal politeness to bitter despair as Esteban admits he has failed the boy"
+   ],
+   "correct_letter": "B",
+   "explanation": "Brigid는 식당에 뛰어들어 편지를 내밀며 어떤 보호자가 가족에게 그런 일을 숨기느냐고 따져 분개한 어조로 시작한다. Esteban이 돌은 동생을 향해 던져졌고 말했다면 오히려 동생이 쫓겨났을 것이라고 설명하자, 그녀는 맞은편에 앉아 한동안 빵에 손대지 않는다. 따라서 분노한 추궁에서 숙연한 이해로 바뀐다는 B가 정답이다. A는 장난스러운 시작이, C는 밝은 안도가, D는 Esteban의 실패 인정이 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-058",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, the daughter would write that she had never hated anyone so thoroughly as the crowd at the Bologna ferry terminal on the morning her mother fainted against the ticket rail. Her mother had insisted on traveling alone, had refused the daughter's arm on the stairs, and then had crumpled in front of forty strangers, her hat rolling under a bench. The daughter remembered every stare and every whisper, and she recorded them in her diary with a cold, exact fury. But the essay turns on the next detail: Giacomo, the porter, retrieving the hat, brushing it with his sleeve, and handing it not to the daughter but to the mother, as though she were a lady who had merely dropped it. From that point the daughter's sentences loosen. She describes her mother pinning the hat back on with trembling dignity, and the two of them laughing, later, over the porter's grand bow. The ferry, she notes, left forty minutes late that day, its whistle echoing along the canal.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "from cheerful nostalgia to sudden grief when the mother collapses at the terminal",
+    "from calm reporting to anxious urgency as the daughter rushes to find medical help",
+    "from bitter resentment to warm gratitude after Giacomo's courteous gesture",
+    "from amused mockery to quiet shame as the daughter recalls her own rudeness"
+   ],
+   "correct_letter": "C",
+   "explanation": "처음에 딸은 군중을 그토록 미워한 적이 없다고 쓰고, 모든 시선과 속삭임을 차갑고 정확한 분노로 일기에 적는다. 그런데 짐꾼 Giacomo가 모자를 주워 어머니에게 숙녀를 대하듯 건넨 뒤로 문장이 풀리고, 어머니의 떨리는 위엄과 나중의 웃음이 그려진다. 따라서 쓰라린 원망에서 따뜻한 고마움으로 바뀐다는 C가 정답이다. A는 시작이 밝지 않고, B는 의료 도움을 구하는 장면이 없으며, D는 딸이 무례했다는 단서가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-059",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "“You always did eat too fast,” Leopoldina said, as Thiago bent over his bowl at the noodle stall behind the cemetery in Lisbon. It was the spring of 1924, and they had not spoken in eleven years. The funeral of their grandmother had brought them back to the same table, and the question of what to do with Leopoldina's aging father hung between them like steam. Thiago thought the old man should come to Porto; Leopoldina said he would wither away from the river. They argued in short, cool sentences, each correcting the other's memory of whose fault the long silence had been. Then the stall keeper set down a dish of fried dough without being asked, and Thiago recognized it as the treat their grandmother had bought them every Sunday as children. Leopoldina laughed despite herself and pushed the plate toward him. They began to talk of her father's fig tree, and of how he might be persuaded to visit both cities in turn. A tram rattled past, scattering pigeons from the cobbles.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "from mournful grief to playful mockery as the cousins begin teasing the stall keeper",
+    "from warm nostalgia to bitter dispute over who will inherit their grandmother's house",
+    "from polite formality to open anger when Thiago insists on moving the father to Porto",
+    "from guarded argument to renewed warmth after a reminder of their shared childhood"
+   ],
+   "correct_letter": "D",
+   "explanation": "사촌들은 처음에 아버지를 어디로 모실지를 두고 짧고 차가운 문장으로 다투며 오랜 침묵이 누구 탓인지 서로 바로잡는다. 노점 주인이 할머니가 어린 시절 매주 사 주던 튀김 과자를 내오자 Leopoldina가 웃으며 접시를 밀어 주고, 둘은 무화과나무와 두 도시를 오가는 방안을 이야기한다. 따라서 경계 어린 논쟁에서 공유한 추억을 계기로 따뜻함을 되찾는다는 D가 정답이다. A의 조롱, B의 유산 다툼, C의 공공연한 분노는 지문의 흐름과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-medium-07-060",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "medium",
+   "passage": "We had rented the school gymnasium in Kingston for the reception because it was cheap and because my mother had taught there for thirty years. That Saturday we walked its floor with a tape measure, arguing over where the long tables should go and whether Dwayne's band needed a riser. In the corner sat the one thing left from her house on Hope Road, which we had finished emptying that morning: a battered upright piano. My mother lifted its lid and played the first bars of the hymn she had used to end every school assembly, and I, Roshane, remembered sitting cross-legged on this very floor, listening to her. When she closed the lid, we did not return to the tables at once. Instead we measured again, this time to find a space beside the stage where the piano could stand on the day itself. Outside, a groundskeeper was chalking white lines across the football pitch.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It moves from routine planning to a memory sparked by an object, then back to reshaped planning.",
+    "It describes a long quarrel between mother and daughter and then explains how they resolved it.",
+    "It lists the items removed from a house and then judges which were most valuable to the family.",
+    "It presents the daughter's doubts about the wedding and then shows her mother easing them."
+   ],
+   "correct_letter": "A",
+   "explanation": "글은 체육관에서 줄자로 테이블 위치와 무대를 두고 실무적으로 계획하는 장면으로 시작한다. 이어 집에서 남은 마지막 물건인 피아노를 어머니가 연주하자 화자가 어린 시절 같은 바닥에 앉아 듣던 기억을 떠올리고, 이후 피아노를 놓을 자리를 찾기 위해 다시 측정하며 계획의 목적이 바뀐다. 따라서 계획→물건이 불러온 기억→바뀐 계획의 구조인 A가 정답이다. B의 오랜 다툼, C의 물건 목록 평가, D의 결혼에 대한 의심은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-070",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Vienna's Westbahnhof had a cafe with brass rails and bad pastries, and that is where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two, Camryn the American who measured twice and still cut wrong, and I expected a lecture or, worse, to be let go. He ordered two coffees and talked for an hour about a cabinet of his that had split in its first winter. At the time I thought he was avoiding the subject, and I resented him a little for it. He never offered to rebuild the staircases; in the following weeks he only stood in the workshop doorway while I did. I have heard people praise mentors who catch every mistake before it lands, and I understand the appeal. But I still plane a board the way I learned that winter, slowly, with no hands but mine on it.",
+   "question": "Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?",
+   "options": [
+    "Lingering resentment of a mentor who withheld guidance when it was most needed.",
+    "Settled appreciation for a restraint that she once took for evasion.",
+    "Mild amusement at Konrad's habit of telling stories instead of teaching.",
+    "Uncertain approval of a method she suspects most mentors would reject."
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 당시 Konrad가 문제를 회피한다고 여겨 조금 원망했다고 말하지만, 그가 계단을 대신 고치지 않고 지켜보기만 한 덕분에 지금도 그때 배운 방식으로 나무를 다룬다고 밝힌다. 과거의 오해와 현재의 평가를 연결하면 B가 정답이다. A는 과거의 감정을 현재 태도로 착각한 것이고, C의 재미는 근거가 없으며, D는 다른 멘토 방식에 대한 언급을 과대 해석한 것이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-071",
+   "attempt": 1,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Wet iron and diesel rose off the Maas the morning Soren asked me to stop interpreting for him. For six years I had sat at his elbow in every meeting with Dutch buyers, and even then, crossing the old stone bridge toward the harbor office in Rotterdam, I caught myself leaning toward his ear whenever a passerby spoke. He told me, in slow and careful Dutch, that he wanted to make his own mistakes now. I said of course. I, Marit, said of course and then spent the walk silently listing every word he was likely to get wrong. In the meeting I folded my hands and bit back three corrections, and I counted them as if they were sacrifices. I can smile at that woman now, tallying her small martyrdoms. She had built a self around being needed in two languages at once, and she called it loyalty. A tugboat nudged a gravel barge under the arch as we left, and I let him hold the door.",
+   "question": "Which choice best describes the narrator's attitude toward her past reaction to Soren's request?",
+   "options": [
+    "Bitter regret that she agreed so readily to stop interpreting for Soren.",
+    "Quiet pride in the self-control she showed by holding back corrections.",
+    "Gentle amusement mixed with a clear view of what her loyalty concealed.",
+    "Continued worry that Soren's Dutch was not yet ready for such meetings."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 과거의 자신을 보며 '이제는 웃을 수 있다'고 하면서도, 참은 교정을 희생처럼 셌던 일을 '작은 순교'라 부르고 필요받는 것을 충성이라 불렀다고 비판한다. 다정한 웃음과 비판적 통찰이 함께 있으므로 C가 정답이다. B는 교정을 참은 행동만 보면 그럴듯하지만 화자는 그것을 자랑이 아니라 과장된 희생으로 본다. A의 쓰라린 후회와 D의 지속적 걱정은 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-083",
+   "attempt": 1,
+   "skill": "words_in_context",
+   "questionType": "figurative_language",
+   "requestedDifficulty": "medium",
+   "passage": "Diesel and frying shallots hung over the depot in Surabaya, where the youth orchestra had waited two hours for a coach that was not coming on time. I was the youngest violinist then, and I remember Thida, our conductor, gathering us beneath a tin awning to explain what we would say at the festival gate: that our registration had gone in before the deadline. It had not. Without that sentence, she said, the hall booking would lapse, the borrowed cellos would go back to their school, and four months of rehearsal would have nowhere to land. She called the lie the keystone of the whole arch, and she said it softly, almost as though apologizing to the stone. Nobody else seemed to notice how much she had rested on one small claim. I, Arisa, did. When the coach finally wheezed into the lot, I sat by the window rehearsing the truth instead, the way I would have practiced a hard passage.",
+   "question": "As used in the text, the phrase “the keystone of the whole arch” most nearly suggests",
+   "options": [
+    "the crowning feature that would make the performance memorable",
+    "a minor detail that festival officials would probably overlook",
+    "a shared burden that every player would have to carry equally",
+    "the single claim on which every other arrangement depended"
+   ],
+   "correct_letter": "D",
+   "explanation": "Thida는 그 한 문장이 없으면 공연장 예약, 빌린 첼로, 넉 달의 연습이 모두 무너진다고 설명하고, 화자는 그녀가 작은 주장 하나에 많은 것을 얹었다고 느낀다. 이 두 단서를 연결하면 다른 모든 준비가 기대는 하나의 주장이라는 D가 정답이다. A는 쐐기돌이 아치 꼭대기에 있다는 점에서 그럴듯하지만 '돋보임'이 아니라 '지탱'이 핵심이다. B와 C는 지문에 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-medium-07-091",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Four reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week those nights were almost merry. He taught me to thread film by lamplight, called me hopeless when I tangled it, and gave the silent figures on the screen below a dozen absurd voices, one of them, he insisted, mine. On the eighth night, while he was splicing a broken reel, I mentioned that the doctor and I had arranged for him to move to the ward downstairs in the morning. His hands kept working. He finished the splice, tested it twice, and thanked me for letting him know. Then he asked, in the same even voice, whether the doctor had found the decision difficult to make without him, and turned the lamp so that its light fell on the film and not on his face.",
+   "question": "Which choice best describes how the tone of the text shifts?",
+   "options": [
+    "From cheerful teasing to resigned acceptance once Somchai agrees to the move",
+    "From playful warmth to wounded restraint once the planned transfer is revealed",
+    "From easy banter to open anger as Somchai confronts the nurse about the ward",
+    "From quiet unease to relief once Bao explains the reasons behind the transfer"
+   ],
+   "correct_letter": "B",
+   "explanation": "앞부분은 필름 감기를 가르치고 놀리며 우스운 목소리를 내는 장난스럽고 따뜻한 분위기다. 이송 결정을 알리자 Somchai는 차분히 감사하지만, 자신 없이 결정한 것을 꼬집는 질문을 하고 얼굴을 빛에서 돌려 상처를 억누른다. 따라서 B가 정답이다. A는 공손한 반응을 체념으로 오해한 것이고, C는 그가 소리치지 않으므로 틀리며, D의 안도는 지문에 없다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-051 — 16문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-051.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-07-044 — skill inferences · 유형 relationship_between_characters\n[지문]\nRusted shears in hand, Annika knelt beside the tomato bed she and her brother Cyrus kept behind the community hall in Porto Alegre. That morning, hunting for twine in the shop's counter drawer, she had found a stack of overdue notices he had hidden beneath the receipt book. Now Cyrus arrived with two cups of coffee and a story about how well the week's sales had gone. Annika let him finish, then mentioned lightly that she had already sold her bicycle and would put the money toward the electricity bill. He stared at her, set down the cups, and quietly began tying up the vines she had missed. Across the garden, an old woman was scattering crushed eggshells around her lettuce.\n\n[질문] Based on the text, which choice best describes the relationship between Annika and Cyrus?\nA) They are siblings who each try to shield the other from the strain of the shop's troubles.\nB) Annika resents Cyrus for hiding the shop's overdue notices and means to confront him.\nC) Cyrus depends on Annika to make every decision about the shop and its unpaid bills.\nD) They are rivals competing over the shop to prove which of them deserves to run it.\n\n[표시된 정답] A\n[해설]\nCyrus는 연체 고지서를 서랍에 숨기고 매출이 좋았다고 이야기하며 Annika를 걱정시키지 않으려 하고, Annika는 그를 추궁하지 않고 자전거를 팔아 전기료에 보태겠다고 가볍게 말한다. 두 행동을 이어 읽으면 서로를 감싸 주려는 남매 관계, 즉 A가 드러난다. B는 Annika의 감정만 일부 반영했으며 실제로 그녀는 대립하지 않는다. C는 의존의 방향을 한쪽으로 몰았고, D는 형제 경쟁이라는 일반적 통념에서 나온 선택지다.\n### lit40-medium-07-045 — skill inferences · 유형 symbolism\n[지문]\nTar and wet hemp, that was the smell of every crossing. I was fourteen the summer Budi began riding our barge up the estuary from the Cornish coast, always with a sealed parcel on his knees and never with a fare in his hand. Father had told me only that Budi had once pulled him from the water at Falmouth, and that I, Abena, was not to ask for money. Each morning I spliced the frayed end of our mooring line, and each evening it had worn through again against the iron ring. Budi watched me work the strands together and once offered to buy us new rope. I said the old one would hold, and he did not argue. By September the splice was thicker than the rope itself, a knot of patches I could have tied blindfolded. On his last crossing he set his parcel down, took the line from me, and wove one strand in himself before stepping ashore without a word.\n\n[질문] In the text, the repeatedly mended mooring line most likely represents\nA) the ferryman's pride in the river skills he has passed down to his daughter.\nB) the unspoken obligation that keeps the narrator's family and Budi bound together.\nC) the growing danger of carrying passengers across the estuary in a worn barge.\nD) the narrator's private wish to escape her father's trade on the river someday.\n\n[표시된 정답] B\n[해설]\nBudi는 아버지의 목숨을 구한 일 때문에 운임을 내지 않고, 아무도 그 빚을 말하지 않는다. 매일 끊어지고 다시 이어지는 밧줄, 새 밧줄을 사 주겠다는 제안을 거절하는 장면, 마지막에 Budi가 직접 한 가닥을 엮어 넣는 장면이 이어지며 밧줄은 양쪽을 묶는 말없는 의무를 상징하게 되므로 B가 정답이다. A는 기술 전수, C는 위험, D는 떠나고 싶은 마음을 말하지만 지문에 그런 단서가 없다.\n### lit40-medium-07-046 — skill words_in_context · 유형 figurative_language\n[지문]\nWhat do you say to a man who returns your present before he has even opened it? For three years I clerked for Bartolo in the courthouse above the harbor, and when he retired to take English lessons at a small language school in Valparaiso, I bought him a leather notebook for his vocabulary lists. On Tuesday he set it on my desk in the empty classroom, still in its tissue paper, and said he could not accept gifts from someone whose career he might yet be asked to recommend. His voice was the same one he had used from the bench, courteous and final. I held the package and felt I had been handed a verdict wrapped in tissue paper. Later, Camila, the teacher, asked me to help stack the chairs, and I did it slowly, listening to the gulls.\n\n[질문] As used in the text, the phrase “a verdict wrapped in tissue paper” most nearly suggests that the narrator\nA) believes Bartolo has secretly decided to report her conduct to the court.\nB) thinks the notebook was wrapped too carelessly to be offered as a gift.\nC) experiences the return as a firm judgment delivered with gentle politeness.\nD) suspects Bartolo is pretending to be stern to conceal his real gratitude.\n\n[표시된 정답] C\n[해설]\nBartolo는 선물을 뜯지도 않고 돌려주며 원칙적인 이유를 대고, 그의 목소리는 법정에서처럼 '정중하지만 단호했다'. 이 두 단서를 연결하면 '판결'은 되돌릴 수 없는 단호한 결정을, '얇은 포장지'는 그것이 부드럽고 예의 바르게 전달되었음을 뜻하므로 C가 정답이다. A는 판결이라는 단어를 법적 고발로 지나치게 문자적으로 읽었고, B는 포장지를 문자 그대로 받아들였다. D는 지문에 근거가 없는 숨은 감사를 가정한다.\n### lit40-medium-07-047 — skill words_in_context · 유형 figurative_language\n[지문]\nBy the third week of the monsoon, Sunethra had stopped expecting her father's letters and started counting the hives instead. Seven boxes stood along the wall of the yard in Karachi; the eighth had gone silent in April, its colony lost to mites. Lanying, who had shared a shop with her father before he sailed, came by most evenings to drink tea and talk of nothing in particular. She never mentioned bees. Yet one damp morning Sunethra lifted the lid of the eighth box and found it thick with a new swarm, the frames already beaded with wax. When she asked, Lanying only shrugged and spoke about the price of sugar. Her kindness, Sunethra thought, moved through the yard like smoke through a hive, calming everything and leaving nothing behind. That afternoon the rain came again, drumming on the tin roof of the shed.\n\n[질문] As used in the text, the phrase “like smoke through a hive” most nearly suggests that Lanying's help was\nA) irritating to the bees and unsettling to the rest of the yard.\nB) brief and fleeting, so that Sunethra soon forgot about it.\nC) heavy and oppressive, making the yard hard to breathe in.\nD) quietly soothing and difficult to trace back to its source.\n\n[표시된 정답] D\n[해설]\nLanying은 벌 이야기를 한 번도 꺼내지 않았고, 새 벌 떼에 대해 묻자 어깨만 으쓱하고 설탕 값 이야기로 넘어간다. 양봉에서 연기는 벌을 진정시키지만 흔적을 남기지 않으므로, 두 단서를 연결하면 그녀의 도움이 조용히 위로가 되면서도 출처를 드러내지 않았다는 D가 정답이다. A는 연기를 벌을 자극하는 것으로, C는 숨 막히는 것으로 오해한 해석이다. B는 금방 잊혔다고 하지만 Sunethra는 그 친절을 곱씹고 있다.\n### lit40-medium-07-048 — skill words_in_context · 유형 figurative_language\n[지문]\nWhat would Ivy want, Ronan wondered,\nnow that an ocean sat between them\nand the date they had always kept came round again?\nAbove Port of Spain the tea rows climbed\nlike green stitches holding the slope together,\nand he walked them at dawn, as the two of them once had,\npinching the youngest leaves the way she taught him.\nLast year she had written that she kept no calendars now,\nthat each new street was busy erasing the old ones.\nSo he would send no card, no ribbon, nothing she must answer.\nHe dried one handful of leaves on the windowsill\nand mailed them folded in plain brown paper,\na small country she could steep and drink alone.\nThe pickers' songs drifted up from the lower terraces,\nthin and bright in the cooling air.\n\n[질문] As used in the text, the phrase “a small country she could steep and drink alone” most nearly suggests that the leaves are\nA) a piece of their shared place that Ivy can savor privately, without having to reply.\nB) a reminder of the home Ronan hopes Ivy will one day come back to and settle in.\nC) a costly gift meant to show Ivy how well the plantation has prospered since then.\nD) a sign of the distance that has turned Ronan and Ivy into strangers to each other.\n\n[표시된 정답] A\n[해설]\nRonan은 Ivy가 이제 달력을 지키지 않는다는 편지를 떠올리고 '그녀가 답해야 할 것은 아무것도' 보내지 않기로 한다. 함께 걷던 차밭의 잎을 보내며 그것을 '혼자 우려 마실 작은 나라'라고 부르므로, 두 단서를 이으면 공유한 장소의 한 조각을 부담 없이 홀로 즐기게 한다는 A가 정답이다. B는 귀환에 대한 바람을, C는 값비싼 과시를 가정하지만 지문에 근거가 없다. D는 거리를 말하지만 시는 단절이 아닌 배려를 그린다.\n### lit40-medium-07-049 — skill words_in_context · 유형 figurative_language\n[지문]\nBailing with a soup pot, I stood knee-deep in the cellar of the Galway town hall in the spring of 1987 while Aoife, our mayor, held the torch. Somewhere down here, in a crate marked with a boy's surname, was his late grandfather's accordion, and Aoife had sworn to the boy at the funeral that it would be kept safe. She had said so before the river rose, before anyone knew the drains would fail. Even I, Chiara, the town's only doctor, have made my share of reckless reassurances at bedsides, so I did not scold her. Her promise, I thought, had been a paper boat set on a calm puddle, and now the puddle was a flood. We found the crate on a high shelf, damp at one corner, and Aoife laughed so hard she nearly dropped the torch. Upstairs, the clerk was ringing every household on the low road.\n\n[질문] As used in the text, the phrase “a paper boat set on a calm puddle” most nearly suggests that Aoife's promise was\nA) a playful game that she never intended the boy to take seriously.\nB) sincere but made before she could foresee the danger to come.\nC) carefully planned to withstand any disaster the town might face.\nD) a political gesture designed to win favor with the boy's family.\n\n[표시된 정답] B\n[해설]\nAoife는 강물이 불어나기 전, 배수구가 막힐 줄 아무도 몰랐을 때 약속을 했고, 의사인 화자도 병상에서 무모한 안심의 말을 해 본 적이 있다며 그녀를 탓하지 않는다. 종이배는 진심으로 띄웠지만 연약한 것이고 '잔잔한 웅덩이'는 위험을 예견할 수 없던 상황을 뜻하므로 B가 정답이다. A는 '종이배'의 놀이 이미지만 취했고, C는 연약함과 정반대다. D의 정치적 의도는 지문에 단서가 없다.\n### lit40-medium-07-050 — skill words_in_context · 유형 figurative_language\n[지문]\nWhen we came back to Jeju Island in the autumn of 1898, my father, Taeyang, would not walk past the cemetery gate where his own father lay. He had left the island a young man and returned with a daughter who spoke English better than Korean, and I think he feared the dead would hear the difference. Each Sunday I, Gil, asked whether we might go in, and each Sunday he said the path was too muddy. Yet by midwinter he had begun stopping at the gate to straighten its leaning post, and once I saw him brush the moss from the nearest stone with his cuff. His refusal, I understood, had worn as thin as a winter sleeve. In March he asked me to teach him the English word for chrysanthemum, though he never said why. The gate creaked on its hinge as the wind came off the sea.\n\n[질문] As used in the text, the phrase “worn as thin as a winter sleeve” most nearly suggests that Taeyang's\nA) reasons for avoiding the cemetery had always been weak and insincere.\nB) health had been steadily failing during the cold island winter.\nC) resistance had gradually weakened until it barely held at all.\nD) poverty had left him unable to afford proper graveside offerings.\n\n[표시된 정답] C\n[해설]\n처음에 Taeyang은 매주 길이 질다며 묘지에 들어가기를 거부했지만, 한겨울쯤에는 문 기둥을 바로 세우고 소맷부리로 비석의 이끼를 닦는다. 오래 입어 닳은 겨울 소매처럼 그의 거부가 서서히 약해져 거의 남지 않았다는 뜻이므로 C가 정답이다. A는 '얇다'를 처음부터 약했다는 뜻으로 오독했고, 지문은 점진적 변화를 보여 준다. B는 겨울과 건강을, D는 낡은 옷과 가난을 문자적으로 연결한 오답이다.\n### lit40-medium-07-056 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWringing out a cloth in the basin, Savitri listened to the pickers singing below the veranda of the vineyard house outside Mumbai. Her patient, Sharda, had not slept for three nights, and tonight she was in a mood to accuse. Had Savitri not insisted on the fever cure, Sharda declared, she would have been fit to travel to the conservatory in Poona and sing for its masters; the letter had come and gone while she lay here. Savitri set her jaw and recited, in a clipped voice, every dose of physic she had measured out. Then Sharda's hand slid across the coverlet and closed on her wrist, and the old woman whispered that she had known for years her voice was gone, that it was easier to blame a nurse than a throat. Savitri sat down slowly on the edge of the bed. She told Sharda about the grape baskets stacked by the press, purple to the brim, and Sharda listened with her eyes closed, smiling. Down the hill, the singing stopped, and a lantern moved toward the sheds.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It moves from defensive tension to gentle sympathy once Sharda confesses why she blamed Savitri.\nB) It moves from cheerful hope to bitter resentment after Sharda learns the conservatory rejected her.\nC) It moves from calm routine to sudden alarm as Sharda's fever grows worse during the long night.\nD) It moves from quiet sorrow to playful teasing as Savitri describes the grape harvest to Sharda.\n\n[표시된 정답] A\n[해설]\n처음에 Sharda는 기회를 놓친 책임을 Savitri에게 돌리고, Savitri는 턱을 굳힌 채 딱딱한 목소리로 투약 기록을 읊어 방어적 긴장이 흐른다. 그러다 Sharda가 목소리는 이미 오래전에 사라졌고 목보다 간호사를 탓하는 게 쉬웠다고 고백하자, Savitri는 천천히 침대에 앉아 포도 이야기를 들려준다. 따라서 긴장에서 다정한 공감으로 바뀐다는 A가 정답이다. B는 거절 통보가 없고, C는 열이 악화되지 않으며, D는 장난스러운 분위기로 볼 근거가 없다.\n### lit40-medium-07-057 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen Brigid swept into the dining hall of the boys' summer camp outside Glasgow, she meant to have it out with Esteban before the soup was served. Her brother had written home of a broken window and a week of extra lessons, and the tutor, it seemed, had told the camp master nothing at all about who had thrown the stone. Brigid laid the letter beside his plate and demanded to know what sort of guardian kept such things from a family. Esteban folded his napkin with great care. The stone, he said quietly, had been thrown at her brother, not by him, and the boys who threw it were the sons of the men who paid for the camp. Had he spoken, it was her brother who would have been sent home. Brigid sat down on the bench across from him, and for some time neither of them touched the bread. At the far end of the hall, a bell was rung for grace, and two hundred chairs scraped at once.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) from playful teasing to open hostility as Brigid learns about the broken window\nB) from indignant accusation to sober understanding as Esteban explains his silence\nC) from anxious worry to cheerful relief as Brigid learns her brother is unharmed\nD) from formal politeness to bitter despair as Esteban admits he has failed the boy\n\n[표시된 정답] B\n[해설]\nBrigid는 식당에 뛰어들어 편지를 내밀며 어떤 보호자가 가족에게 그런 일을 숨기느냐고 따져 분개한 어조로 시작한다. Esteban이 돌은 동생을 향해 던져졌고 말했다면 오히려 동생이 쫓겨났을 것이라고 설명하자, 그녀는 맞은편에 앉아 한동안 빵에 손대지 않는다. 따라서 분노한 추궁에서 숙연한 이해로 바뀐다는 B가 정답이다. A는 장난스러운 시작이, C는 밝은 안도가, D는 Esteban의 실패 인정이 지문에 없다.\n### lit40-medium-07-058 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nYears later, the daughter would write that she had never hated anyone so thoroughly as the crowd at the Bologna ferry terminal on the morning her mother fainted against the ticket rail. Her mother had insisted on traveling alone, had refused the daughter's arm on the stairs, and then had crumpled in front of forty strangers, her hat rolling under a bench. The daughter remembered every stare and every whisper, and she recorded them in her diary with a cold, exact fury. But the essay turns on the next detail: Giacomo, the porter, retrieving the hat, brushing it with his sleeve, and handing it not to the daughter but to the mother, as though she were a lady who had merely dropped it. From that point the daughter's sentences loosen. She describes her mother pinning the hat back on with trembling dignity, and the two of them laughing, later, over the porter's grand bow. The ferry, she notes, left forty minutes late that day, its whistle echoing along the canal.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) from cheerful nostalgia to sudden grief when the mother collapses at the terminal\nB) from calm reporting to anxious urgency as the daughter rushes to find medical help\nC) from bitter resentment to warm gratitude after Giacomo's courteous gesture\nD) from amused mockery to quiet shame as the daughter recalls her own rudeness\n\n[표시된 정답] C\n[해설]\n처음에 딸은 군중을 그토록 미워한 적이 없다고 쓰고, 모든 시선과 속삭임을 차갑고 정확한 분노로 일기에 적는다. 그런데 짐꾼 Giacomo가 모자를 주워 어머니에게 숙녀를 대하듯 건넨 뒤로 문장이 풀리고, 어머니의 떨리는 위엄과 나중의 웃음이 그려진다. 따라서 쓰라린 원망에서 따뜻한 고마움으로 바뀐다는 C가 정답이다. A는 시작이 밝지 않고, B는 의료 도움을 구하는 장면이 없으며, D는 딸이 무례했다는 단서가 없다.\n### lit40-medium-07-059 — skill text_structure_purpose · 유형 tone_shift\n[지문]\n“You always did eat too fast,” Leopoldina said, as Thiago bent over his bowl at the noodle stall behind the cemetery in Lisbon. It was the spring of 1924, and they had not spoken in eleven years. The funeral of their grandmother had brought them back to the same table, and the question of what to do with Leopoldina's aging father hung between them like steam. Thiago thought the old man should come to Porto; Leopoldina said he would wither away from the river. They argued in short, cool sentences, each correcting the other's memory of whose fault the long silence had been. Then the stall keeper set down a dish of fried dough without being asked, and Thiago recognized it as the treat their grandmother had bought them every Sunday as children. Leopoldina laughed despite herself and pushed the plate toward him. They began to talk of her father's fig tree, and of how he might be persuaded to visit both cities in turn. A tram rattled past, scattering pigeons from the cobbles.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) from mournful grief to playful mockery as the cousins begin teasing the stall keeper\nB) from warm nostalgia to bitter dispute over who will inherit their grandmother's house\nC) from polite formality to open anger when Thiago insists on moving the father to Porto\nD) from guarded argument to renewed warmth after a reminder of their shared childhood\n\n[표시된 정답] D\n[해설]\n사촌들은 처음에 아버지를 어디로 모실지를 두고 짧고 차가운 문장으로 다투며 오랜 침묵이 누구 탓인지 서로 바로잡는다. 노점 주인이 할머니가 어린 시절 매주 사 주던 튀김 과자를 내오자 Leopoldina가 웃으며 접시를 밀어 주고, 둘은 무화과나무와 두 도시를 오가는 방안을 이야기한다. 따라서 경계 어린 논쟁에서 공유한 추억을 계기로 따뜻함을 되찾는다는 D가 정답이다. A의 조롱, B의 유산 다툼, C의 공공연한 분노는 지문의 흐름과 맞지 않는다.\n### lit40-medium-07-060 — skill text_structure_purpose · 유형 text_structure\n[지문]\nWe had rented the school gymnasium in Kingston for the reception because it was cheap and because my mother had taught there for thirty years. That Saturday we walked its floor with a tape measure, arguing over where the long tables should go and whether Dwayne's band needed a riser. In the corner sat the one thing left from her house on Hope Road, which we had finished emptying that morning: a battered upright piano. My mother lifted its lid and played the first bars of the hymn she had used to end every school assembly, and I, Roshane, remembered sitting cross-legged on this very floor, listening to her. When she closed the lid, we did not return to the tables at once. Instead we measured again, this time to find a space beside the stage where the piano could stand on the day itself. Outside, a groundskeeper was chalking white lines across the football pitch.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It moves from routine planning to a memory sparked by an object, then back to reshaped planning.\nB) It describes a long quarrel between mother and daughter and then explains how they resolved it.\nC) It lists the items removed from a house and then judges which were most valuable to the family.\nD) It presents the daughter's doubts about the wedding and then shows her mother easing them.\n\n[표시된 정답] A\n[해설]\n글은 체육관에서 줄자로 테이블 위치와 무대를 두고 실무적으로 계획하는 장면으로 시작한다. 이어 집에서 남은 마지막 물건인 피아노를 어머니가 연주하자 화자가 어린 시절 같은 바닥에 앉아 듣던 기억을 떠올리고, 이후 피아노를 놓을 자리를 찾기 위해 다시 측정하며 계획의 목적이 바뀐다. 따라서 계획→물건이 불러온 기억→바뀐 계획의 구조인 A가 정답이다. B의 오랜 다툼, C의 물건 목록 평가, D의 결혼에 대한 의심은 지문에 없다.\n### lit40-medium-07-070 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nVienna's Westbahnhof had a cafe with brass rails and bad pastries, and that is where Konrad took me after the worst season of my apprenticeship, the autumn three of our staircases came back warped from a client's damp villa. I was twenty-two, Camryn the American who measured twice and still cut wrong, and I expected a lecture or, worse, to be let go. He ordered two coffees and talked for an hour about a cabinet of his that had split in its first winter. At the time I thought he was avoiding the subject, and I resented him a little for it. He never offered to rebuild the staircases; in the following weeks he only stood in the workshop doorway while I did. I have heard people praise mentors who catch every mistake before it lands, and I understand the appeal. But I still plane a board the way I learned that winter, slowly, with no hands but mine on it.\n\n[질문] Which choice best describes the narrator's attitude toward Konrad's way of handling the failed season?\nA) Lingering resentment of a mentor who withheld guidance when it was most needed.\nB) Settled appreciation for a restraint that she once took for evasion.\nC) Mild amusement at Konrad's habit of telling stories instead of teaching.\nD) Uncertain approval of a method she suspects most mentors would reject.\n\n[표시된 정답] B\n[해설]\n화자는 당시 Konrad가 문제를 회피한다고 여겨 조금 원망했다고 말하지만, 그가 계단을 대신 고치지 않고 지켜보기만 한 덕분에 지금도 그때 배운 방식으로 나무를 다룬다고 밝힌다. 과거의 오해와 현재의 평가를 연결하면 B가 정답이다. A는 과거의 감정을 현재 태도로 착각한 것이고, C의 재미는 근거가 없으며, D는 다른 멘토 방식에 대한 언급을 과대 해석한 것이다.\n### lit40-medium-07-071 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWet iron and diesel rose off the Maas the morning Soren asked me to stop interpreting for him. For six years I had sat at his elbow in every meeting with Dutch buyers, and even then, crossing the old stone bridge toward the harbor office in Rotterdam, I caught myself leaning toward his ear whenever a passerby spoke. He told me, in slow and careful Dutch, that he wanted to make his own mistakes now. I said of course. I, Marit, said of course and then spent the walk silently listing every word he was likely to get wrong. In the meeting I folded my hands and bit back three corrections, and I counted them as if they were sacrifices. I can smile at that woman now, tallying her small martyrdoms. She had built a self around being needed in two languages at once, and she called it loyalty. A tugboat nudged a gravel barge under the arch as we left, and I let him hold the door.\n\n[질문] Which choice best describes the narrator's attitude toward her past reaction to Soren's request?\nA) Bitter regret that she agreed so readily to stop interpreting for Soren.\nB) Quiet pride in the self-control she showed by holding back corrections.\nC) Gentle amusement mixed with a clear view of what her loyalty concealed.\nD) Continued worry that Soren's Dutch was not yet ready for such meetings.\n\n[표시된 정답] C\n[해설]\n화자는 과거의 자신을 보며 '이제는 웃을 수 있다'고 하면서도, 참은 교정을 희생처럼 셌던 일을 '작은 순교'라 부르고 필요받는 것을 충성이라 불렀다고 비판한다. 다정한 웃음과 비판적 통찰이 함께 있으므로 C가 정답이다. B는 교정을 참은 행동만 보면 그럴듯하지만 화자는 그것을 자랑이 아니라 과장된 희생으로 본다. A의 쓰라린 후회와 D의 지속적 걱정은 근거가 없다.\n### lit40-medium-07-083 — skill words_in_context · 유형 figurative_language\n[지문]\nDiesel and frying shallots hung over the depot in Surabaya, where the youth orchestra had waited two hours for a coach that was not coming on time. I was the youngest violinist then, and I remember Thida, our conductor, gathering us beneath a tin awning to explain what we would say at the festival gate: that our registration had gone in before the deadline. It had not. Without that sentence, she said, the hall booking would lapse, the borrowed cellos would go back to their school, and four months of rehearsal would have nowhere to land. She called the lie the keystone of the whole arch, and she said it softly, almost as though apologizing to the stone. Nobody else seemed to notice how much she had rested on one small claim. I, Arisa, did. When the coach finally wheezed into the lot, I sat by the window rehearsing the truth instead, the way I would have practiced a hard passage.\n\n[질문] As used in the text, the phrase “the keystone of the whole arch” most nearly suggests\nA) the crowning feature that would make the performance memorable\nB) a minor detail that festival officials would probably overlook\nC) a shared burden that every player would have to carry equally\nD) the single claim on which every other arrangement depended\n\n[표시된 정답] D\n[해설]\nThida는 그 한 문장이 없으면 공연장 예약, 빌린 첼로, 넉 달의 연습이 모두 무너진다고 설명하고, 화자는 그녀가 작은 주장 하나에 많은 것을 얹었다고 느낀다. 이 두 단서를 연결하면 다른 모든 준비가 기대는 하나의 주장이라는 D가 정답이다. A는 쐐기돌이 아치 꼭대기에 있다는 점에서 그럴듯하지만 '돋보임'이 아니라 '지탱'이 핵심이다. B와 C는 지문에 근거가 없다.\n### lit40-medium-07-091 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nFour reels, two projectors, one cot pushed against the wall: that was the whole of the booth above the old cinema in Manila where Somchai had asked to spend his nights. I, Bao, was his nurse, and for a week those nights were almost merry. He taught me to thread film by lamplight, called me hopeless when I tangled it, and gave the silent figures on the screen below a dozen absurd voices, one of them, he insisted, mine. On the eighth night, while he was splicing a broken reel, I mentioned that the doctor and I had arranged for him to move to the ward downstairs in the morning. His hands kept working. He finished the splice, tested it twice, and thanked me for letting him know. Then he asked, in the same even voice, whether the doctor had found the decision difficult to make without him, and turned the lamp so that its light fell on the film and not on his face.\n\n[질문] Which choice best describes how the tone of the text shifts?\nA) From cheerful teasing to resigned acceptance once Somchai agrees to the move\nB) From playful warmth to wounded restraint once the planned transfer is revealed\nC) From easy banter to open anger as Somchai confronts the nurse about the ward\nD) From quiet unease to relief once Bao explains the reasons behind the transfer\n\n[표시된 정답] B\n[해설]\n앞부분은 필름 감기를 가르치고 놀리며 우스운 목소리를 내는 장난스럽고 따뜻한 분위기다. 이송 결정을 알리자 Somchai는 차분히 감사하지만, 자신 없이 결정한 것을 꼬집는 질문을 하고 얼굴을 빛에서 돌려 상처를 억누른다. 따라서 B가 정답이다. A는 공손한 반응을 체념으로 오해한 것이고, C는 그가 소리치지 않으므로 틀리며, D의 안도는 지문에 없다."
+}

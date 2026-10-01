@@ -1,0 +1,453 @@
+{
+ "_readme": "레시피 v3(2026-10-01): R&W 문학 직접 생성 약한 유형(인물 동기·요지/목적·인물 관계·어조/분위기) hard·medium. 구조는 v2(id·instruction·beyondMedium·checklist·minMet·evidence·officialDifficulty·difficultySource)와 호환되고, v3 확장 필드(difficulty·questionType·genres·passageWords·evidenceSpread·distractorPlan·bannedPatterns)를 더했다. 핵심 골격: 근거를 서로 떨어진 곳에 흩어 놓고 마지막 문장이 정답을 재진술하지 않게 하며, 오답은 '정반대 분위기'가 아니라 부분 정답·방향 뒤집기·지문 표현 차용으로 만든다. scripts/rw-generation/recipe-v3.ts 가 검증한다.",
+ "inferences": [
+  {
+   "id": "inferences_lit_character_motivation_hard",
+   "difficulty": "hard",
+   "questionType": "character_motivation",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir"
+   ],
+   "passageWords": {
+    "min": 110,
+    "max": 170
+   },
+   "instruction": "인물이 한 행동을 하는 이유를 묻되 동기는 지문에 직접 서술하지 않는다. 동기를 암시하는 단서는 서로 떨어진 두 곳(예: 앞부분의 습관적 행동, 중간의 말 돌리기·회피)에 나눠 심고, 마지막 문장은 장면 묘사나 사물로 끝내 동기를 요약하지 않는다. 정답은 두 단서를 모두 설명하는 동기다. 오답 3개는 각각 (a) 앞 단서만 설명하는 동기 (b) 뒤 단서만 설명하는 동기 (c) 지문의 표현을 빌렸지만 인물의 다른 행동과 충돌하는 동기로 만들고, 셋 모두 이 인물이 가질 법한 감정이어야 한다.",
+   "beyondMedium": "동기를 한 문장에서 읽을 수 없고 떨어진 두 단서를 결합해야 하며, 오답이 한 단서만 설명하는 부분 정답이다",
+   "checklist": [
+    "동기가 지문에 직접 서술되지 않는가",
+    "동기를 암시하는 단서가 서로 다른 두 문장 이상에 흩어져 있는가",
+    "마지막 문장이 동기를 요약하거나 재진술하지 않는가",
+    "정답이 두 단서를 모두 설명하는가",
+    "오답이 각각 한 단서만 설명하거나 다른 행동과 충돌하는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "partial_early",
+     "kind": "partial_evidence",
+     "rule": "앞 단서만 설명하고 뒤 단서와 충돌하는 동기"
+    },
+    {
+     "id": "partial_late",
+     "kind": "partial_evidence",
+     "rule": "뒤 단서만 설명하고 앞 단서를 무시하는 동기"
+    },
+    {
+     "id": "wording_borrow",
+     "kind": "passage_wording",
+     "rule": "지문의 구절을 빌려 쓰지만 인물의 다른 행동과 모순되는 동기"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  },
+  {
+   "id": "inferences_lit_character_motivation_medium",
+   "difficulty": "medium",
+   "questionType": "character_motivation",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "memoir",
+    "letter"
+   ],
+   "passageWords": {
+    "min": 90,
+    "max": 150
+   },
+   "instruction": "인물의 행동 이유를 묻는다. 동기는 직접 서술하지 않고 지문 중간 두 문장 안에서 단서로 드러내되 서로 이어 읽으면 알 수 있게 한다. 마지막 문장은 동기와 무관한 후속 행동이나 배경으로 끝낸다. 오답 3개는 (a) 인물의 다른 감정에서 나온 동기 (b) 행동의 결과를 동기로 착각한 선택지 (c) 지문에 없는 외부 원인을 끌어온 선택지로 만들되 모두 지문의 단어를 한두 개 사용한다.",
+   "beyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다",
+   "checklist": [
+    "동기가 직접 서술되지 않는가",
+    "단서가 두 문장 이상에 걸쳐 있는가",
+    "마지막 문장이 동기를 재진술하지 않는가",
+    "오답이 지문 단어를 일부 활용하는가"
+   ],
+   "minMet": 3,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 1,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "other_emotion",
+     "kind": "plausible_emotion",
+     "rule": "인물의 다른 감정에서 나온 동기"
+    },
+    {
+     "id": "result_as_cause",
+     "kind": "reversed_cause",
+     "rule": "행동의 결과를 동기로 착각한 선택지"
+    },
+    {
+     "id": "outside_cause",
+     "kind": "passage_wording",
+     "rule": "지문 단어를 쓰지만 지문에 없는 외부 원인을 끌어온 선택지"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  },
+  {
+   "id": "inferences_lit_relationship_between_characters_hard",
+   "difficulty": "hard",
+   "questionType": "relationship_between_characters",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "drama",
+    "letter"
+   ],
+   "passageWords": {
+    "min": 110,
+    "max": 170
+   },
+   "instruction": "두 인물의 관계(서로에 대한 감정·권력 관계)를 추론하게 한다. 관계는 직접 서술하지 않고 호칭의 변화, 상대의 말을 받는 방식, 물건·자리 다루는 방식 등 서로 다른 두 곳 이상의 행동에서 드러낸다. 마지막 문장은 관계를 규정하지 않는 행동이나 배경으로 끝낸다. 정답은 두 곳의 단서를 모두 설명하는 관계이고, 오답 3개는 (a) 한 단서만 맞는 관계 (b) 표면의 정중함만 보고 고른 관계 (c) 단서의 방향(누가 누구에게)을 뒤집은 관계로 만든다.",
+   "beyondMedium": "표면 정중함 아래의 관계를 두 곳의 행동 단서로 추론해야 하며, 오답은 단서 방향을 뒤집거나 일부만 설명한다",
+   "checklist": [
+    "관계가 직접 서술되지 않는가",
+    "단서가 서로 다른 두 곳 이상의 행동에 있는가",
+    "마지막 문장이 관계를 규정하지 않는가",
+    "정답이 두 단서를 모두 설명하는가",
+    "오답 중 하나가 단서 방향을 뒤집은 것인가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "one_clue",
+     "kind": "partial_evidence",
+     "rule": "한 단서만 맞는 관계"
+    },
+    {
+     "id": "surface",
+     "kind": "plausible_emotion",
+     "rule": "표면의 정중함만 보고 고른 관계"
+    },
+    {
+     "id": "reversed",
+     "kind": "reversed_cause",
+     "rule": "누가 누구에게인지 방향을 뒤집은 관계"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  },
+  {
+   "id": "inferences_lit_relationship_between_characters_medium",
+   "difficulty": "medium",
+   "questionType": "relationship_between_characters",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "drama",
+    "letter"
+   ],
+   "passageWords": {
+    "min": 90,
+    "max": 150
+   },
+   "instruction": "두 인물의 관계를 추론하게 한다. 관계는 직접 서술하지 않고 두 문장 안의 대화·행동으로 드러내되 이어 읽으면 알 수 있게 한다. 마지막 문장은 관계와 무관한 장면 묘사로 끝낸다. 오답 3개는 (a) 인물 중 한쪽의 감정만 반영한 관계 (b) 지문 어휘를 쓰지만 반대 방향의 관계 (c) 일반적 통념에서 고른 관계로 만들되 모두 지문의 단어를 한두 개 사용한다.",
+   "beyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다",
+   "checklist": [
+    "관계가 직접 서술되지 않는가",
+    "단서가 두 문장 이상인가",
+    "마지막 문장이 관계를 규정하지 않는가",
+    "오답이 지문 단어를 사용하는가"
+   ],
+   "minMet": 3,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 1,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "one_sided",
+     "kind": "partial_evidence",
+     "rule": "한쪽 감정만 반영한 관계"
+    },
+    {
+     "id": "opposite_direction",
+     "kind": "reversed_cause",
+     "rule": "지문 어휘를 쓰지만 방향이 반대인 관계"
+    },
+    {
+     "id": "stereotype",
+     "kind": "plausible_emotion",
+     "rule": "일반적 통념에서 고른 관계"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  },
+  {
+   "id": "inferences_lit_tone_or_mood_hard",
+   "difficulty": "hard",
+   "questionType": "tone_or_mood",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "poetry",
+    "personal_essay",
+    "memoir"
+   ],
+   "passageWords": {
+    "min": 110,
+    "max": 170
+   },
+   "instruction": "지문 전체의 어조·분위기를 묻는다. 겉으로 드러나는 정서(예: 평온)와 행동·대조로 드러나는 실제 정서(예: 억눌린 불안)가 어긋나게 쓰되, 두 정서를 보여 주는 근거를 서로 떨어진 두 곳 이상에 둔다. 마지막 문장은 분위기를 명명하지 않는 구체 묘사로 끝낸다. 정답은 겉과 속을 함께 아우르는 어조이고, 오답 3개는 (a) 겉 정서만 반영한 어조 (b) 속 정서만 반영하되 강도를 과장한 어조 (c) 지문 단어를 쓰지만 중간에서 바뀐 어조를 한쪽으로 고정한 어조로 만든다 — 분위기가 정반대인 오답은 쓰지 않는다.",
+   "beyondMedium": "겉 정서와 속 정서의 어긋남을 두 곳 이상의 단서로 종합해야 하며 오답은 한쪽만 반영한다",
+   "checklist": [
+    "겉 정서와 실제 정서가 어긋나는가",
+    "근거가 서로 떨어진 두 곳 이상인가",
+    "마지막 문장이 분위기를 명명하지 않는가",
+    "정답이 겉과 속을 함께 아우르는가",
+    "오답 중 정반대 분위기가 없는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "surface_only",
+     "kind": "partial_evidence",
+     "rule": "겉 정서만 반영한 어조"
+    },
+    {
+     "id": "inner_overstated",
+     "kind": "overgeneralization",
+     "rule": "속 정서를 과장한 어조"
+    },
+    {
+     "id": "fixed_shift",
+     "kind": "passage_wording",
+     "rule": "지문 단어를 쓰지만 변화하는 어조를 한쪽으로 고정한 어조"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  },
+  {
+   "id": "inferences_lit_tone_or_mood_medium",
+   "difficulty": "medium",
+   "questionType": "tone_or_mood",
+   "genres": [
+    "short_story",
+    "novel_excerpt",
+    "poetry",
+    "personal_essay",
+    "letter",
+    "diary"
+   ],
+   "passageWords": {
+    "min": 90,
+    "max": 150
+   },
+   "instruction": "지문 전체의 어조·분위기를 묻는다. 지문에 서로 다른 두 정서(예: 설렘과 불안)가 섞여 있게 하고 한 쪽이 더 두드러지도록 쓴다. 마지막 문장은 분위기를 명명하지 않는다. 오답 3개는 (a) 덜 두드러진 정서만 말한 어조 (b) 두 정서를 섞었지만 비중을 뒤집은 어조 (c) 지문 소재와 어울리지만 지문에 단서가 약한 어조로 만들고 정반대 분위기는 쓰지 않는다.",
+   "beyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다",
+   "checklist": [
+    "두 정서가 섞여 있는가",
+    "마지막 문장이 분위기를 명명하지 않는가",
+    "오답에 정반대 분위기가 없는가",
+    "오답이 지문 단어를 일부 사용하는가"
+   ],
+   "minMet": 3,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 1,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "minor_emotion",
+     "kind": "partial_evidence",
+     "rule": "덜 두드러진 정서만 말한 어조"
+    },
+    {
+     "id": "weights_flipped",
+     "kind": "reversed_cause",
+     "rule": "두 정서의 비중을 뒤집은 어조"
+    },
+    {
+     "id": "weak_clue",
+     "kind": "plausible_emotion",
+     "rule": "소재와 어울리지만 단서가 약한 어조"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  }
+ ],
+ "central_ideas_details": [
+  {
+   "id": "central_ideas_details_lit_main_idea_or_purpose_hard",
+   "difficulty": "hard",
+   "questionType": "main_idea_or_purpose",
+   "genres": [
+    "personal_essay",
+    "memoir",
+    "short_story",
+    "novel_excerpt"
+   ],
+   "passageWords": {
+    "min": 110,
+    "max": 170
+   },
+   "instruction": "지문 전체의 요지나 서술 목적을 묻는다. 요지는 한 문장에 몰아 쓰지 않고, 처음의 구체적 일화·중간의 한 번 뒤집는 진술·끝의 사소한 관찰 세 곳에 나눠 둔다. 마지막 문장은 요지를 선언하지 않고 구체적 장면이나 사물로 닫는다. 정답은 세 곳을 모두 포괄하는 진술이고, 오답 3개는 각각 (a) 처음 일화만 요약한 선택지 (b) 중간 진술만 일반화한 선택지 (c) 끝의 관찰을 과장해 요지로 만든 선택지로 지문의 표현을 일부 사용한다.",
+   "beyondMedium": "요지가 세 곳의 근거를 종합해야 나오고, 오답은 각각 한 곳만 요약한 부분 요지다",
+   "checklist": [
+    "요지가 한 문장으로 선언되어 있지 않은가",
+    "근거가 처음·중간·끝 세 곳에 흩어져 있는가",
+    "마지막 문장이 요지를 재진술하지 않는가",
+    "정답이 세 곳을 포괄하는가",
+    "오답이 각각 한 곳만 요약하거나 과장하는가"
+   ],
+   "minMet": 4,
+   "evidenceSpread": {
+    "minSpans": 3,
+    "minSentenceGap": 2,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "only_opening",
+     "kind": "partial_evidence",
+     "rule": "처음 일화만 요약한 선택지"
+    },
+    {
+     "id": "only_middle",
+     "kind": "partial_evidence",
+     "rule": "중간 진술만 일반화한 선택지"
+    },
+    {
+     "id": "overstated_end",
+     "kind": "overgeneralization",
+     "rule": "끝의 관찰을 과장해 요지로 삼은 선택지"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  },
+  {
+   "id": "central_ideas_details_lit_main_idea_or_purpose_medium",
+   "difficulty": "medium",
+   "questionType": "main_idea_or_purpose",
+   "genres": [
+    "personal_essay",
+    "memoir",
+    "letter",
+    "short_story"
+   ],
+   "passageWords": {
+    "min": 90,
+    "max": 150
+   },
+   "instruction": "지문의 요지나 서술 목적을 묻는다. 요지는 직접 선언하지 않고 두 곳의 근거(앞부분 일화와 뒷부분 대비)에서 읽히게 한다. 마지막 문장은 요지와 다른 소재의 구체적 묘사로 끝낸다. 오답 3개는 (a) 일화만 요약 (b) 지문 소재를 쓰지만 목적이 다른 선택지 (c) 지나치게 일반적인 교훈 선택지로 만든다.",
+   "beyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다",
+   "checklist": [
+    "요지가 선언되지 않았는가",
+    "근거가 두 곳 이상에 있는가",
+    "마지막 문장이 요지를 재진술하지 않는가",
+    "오답이 지문 소재를 사용하는가"
+   ],
+   "minMet": 3,
+   "evidenceSpread": {
+    "minSpans": 2,
+    "minSentenceGap": 1,
+    "finalSentenceMustNotStateAnswer": true
+   },
+   "distractorPlan": [
+    {
+     "id": "anecdote_only",
+     "kind": "partial_evidence",
+     "rule": "일화만 요약한 선택지"
+    },
+    {
+     "id": "wrong_purpose",
+     "kind": "passage_wording",
+     "rule": "지문 소재를 쓰지만 서술 목적이 다른 선택지"
+    },
+    {
+     "id": "generic_moral",
+     "kind": "overgeneralization",
+     "rule": "지나치게 일반적인 교훈 선택지"
+    }
+   ],
+   "bannedPatterns": [
+    "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 문장이다",
+    "오답 3개가 지문의 분위기와 정반대 정서·행동이라 지문 분위기만 알아도 소거된다",
+    "정답만 길고 구체적이며 오답은 짧고 막연하다",
+    "지문 어딘가에 정답의 핵심어가 한 문장에 몰려 있다(근거가 한 곳)"
+   ],
+   "evidence": [],
+   "officialDifficulty": null,
+   "difficultySource": "내부 설계(2026-10-01 v3): 문학 직접 생성 테스트(v4)에서 약했던 유형(수율 0)의 오답·근거 구조를 재설계. 실전 문항 대조 데이터 없음 — 웨이브 1에서 수율로 검증"
+  }
+ ]
+}

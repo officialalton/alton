@@ -1,0 +1,1544 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "generate",
+ "runId": "lit40-wave1",
+ "taskId": "gen-lit40-easy-01-05",
+ "chunkId": "gen-lit40-easy-01-05",
+ "batchId": "lit40-easy-01",
+ "attempt": 0,
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-easy-01-05.result.json",
+ "outputSchema": {
+  "chunkId": "작업 파일의 chunkId 를 그대로",
+  "model": "당신의 모델 이름(예: opus)",
+  "items": [
+   {
+    "candidateId": "후보의 candidateId 를 그대로",
+    "passage": "영어 지문(문항의 질문은 넣지 않는다)",
+    "question": "영어 질문 한 문장",
+    "options": [
+     "선택지 A",
+     "선택지 B",
+     "선택지 C",
+     "선택지 D"
+    ],
+    "correct_letter": "A|B|C|D (targetLetter 와 같게)",
+    "explanation": "한국어 해설 3~5문장",
+    "tone": [
+     "지문 어조 영어 단어 1~3개"
+    ],
+    "devices": [
+     "쓰인 문학 장치 영어 단어"
+    ],
+    "declaration": {
+     "original": true,
+     "noRealWorkQuoted": true,
+     "noCopyrightedSource": true
+    }
+   }
+  ]
+ },
+ "candidates": [
+  {
+   "candidateId": "lit40-easy-01-081",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-081",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 80,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Tendai",
+      "Efua"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "west_african"
+     ],
+     "locale": "Addis Ababa",
+     "setting": "a school gymnasium",
+     "relationship": "a ferryman's daughter and a passenger",
+     "conflict": "about borrowed money and borrowed time",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a school gymnasium in Addis Ababa; a ferryman's daughter and a passenger about borrowed money and borrowed time"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The new-comer was perhaps some four years older than the other, but this was only detected by close examination.\n\n“And so you have come at last. O brother, brother! how I have wanted you!” said Louis, drawing his guest to a sofa, and shaking hands with him over and over again. “You have no idea how very, very much I have wanted you!”\n\nA shade of trouble came over his face as he spoke, and instantly that of his brother darkened with the same shadow, as if the pain which one felt must have a mutual vibration.",
+    "source": {
+     "author": "Stephens, Ann S. (Ann Sophia)",
+     "work": "The curse of gold",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1886,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/70134",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-70134",
+     "corpusTextSha256": "1091a5115f3eb09b3b6fa21c62e6a6432dfbcfdfd29af2725d7c8b6f99eef6ea",
+     "excerptSha256": "53e668937b5f17b57cc81856750801f4c1c1cdb30554340785b05edf315a45ff",
+     "sliceSha256": "e2211f93e7e3686e337cb31a18902885b342c58ce6595d7dcff93ea8d1ef8abf",
+     "location": {
+      "startChar": 465984,
+      "endChar": 466496,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 64
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-082",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "personal_essay",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-082",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 81,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Nalani",
+      "Anahera"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Maui",
+     "setting": "a clock-maker's shop",
+     "relationship": "an uncle and a nephew with a debt",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a clock-maker's shop in Maui; an uncle and a nephew with a debt over a repair that could never really fix it"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "Is the best Gothic fit for our worship? Does it express our belief? Or shall we choose some other style?\n\nI say that it is; and that it is so because it is a style which, if not founded on Nature, has taken into itself more of Nature, of Nature beautiful and healthy, than any other style.\n\nWith greater knowledge of Nature, both geographical and scientific, fresh styles of architecture may and will arise, as much more beautiful, and as much more natural, than the Gothic, as Gothic is more beautiful and natural than the Norman. Till then we must take the best models which we have; use them; and, as it were, use them up and exhaust them.",
+    "source": {
+     "author": "Kingsley, Charles",
+     "work": "Health and Education",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1875,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/17437",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-17437",
+     "corpusTextSha256": "5864e285432f153ead54d0ca99ab1ff2174455c17a3f506938ae2c73d7d46aea",
+     "excerptSha256": "38d8e5cfbfe66b2f3721a098edac5dbeccd128ba4e67c090a98bf924a8e7ff0c",
+     "sliceSha256": "eaaaad76df80e1bf0f41b13d0efc1a6404f37675561c7018bda11b60e2801757",
+     "location": {
+      "startChar": 430812,
+      "endChar": 431457,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 77
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-083",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "relationship_between_characters",
+   "genre": "memoir",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-083",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 82,
+     "genre": "memoir",
+     "pov": "second",
+     "styleEra": "late_20c",
+     "names": [
+      "Tatiana",
+      "Alisha"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "caribbean"
+     ],
+     "locale": "Tbilisi",
+     "setting": "a cemetery gate",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a cemetery gate in Tbilisi; a seamstress and her only apprentice over a recipe that was never written down"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "I was ambitious to absorb all the wisdom I could, but, really, I could not give an intelligent report of the points under discussion at any sitting. Oliver Johnson asked me, one day, if I enjoyed them. I thought, from a twinkle in his eye, that he thought I did not, so I told him I was ashamed to confess that I did not know what they were talking about. He said, \"Neither do I,--very few of their hearers do,--so you need not be surprised that they are incomprehensible to you, nor think less of your own capacity.\"\n\nI was indebted to Mr. Johnson for several of the greatest pleasures I enjoyed in Boston.",
+    "source": {
+     "author": "Stanton, Elizabeth Cady",
+     "work": "Eighty Years and More; Reminiscences 1815-1897",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1902,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/11982",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-11982",
+     "corpusTextSha256": "0de8715e48aab338bc4de4bf3c0bfc72560d80ca3634c831ce74e6a6298f651d",
+     "excerptSha256": "fe1d287e448dc4dde22b1027d4a8f08a9b2233dda804cf61b616edacc48d0a3d",
+     "sliceSha256": "2776b92b966bd6ad589ef934d8bd046da7a2dfe65897f7856c9c17f758b0c26e",
+     "location": {
+      "startChar": 216507,
+      "endChar": 217114,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 28
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-084",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "short_story",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-084",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 83,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Yitzhak",
+      "Eitan"
+     ],
+     "nameCultures": [
+      "hebrew_jewish",
+      "hebrew_jewish"
+     ],
+     "locale": "Haifa",
+     "setting": "a weaving cooperative",
+     "relationship": "a keeper and a visiting surveyor",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a weaving cooperative in Haifa; a keeper and a visiting surveyor over a witness account that differs"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The sweet fresh morning air seemed to revive her. Day was just breaking, and the sky was tinged all over with a soft rosy hue.\n\nAs she stood gazing on the still and peaceful scene before her, she heard the garden gate open, and a minute afterwards there was a gentle tap at the cottage door. The window of Katie's room was at the side of the house, so that Mrs. Lawrence could not see any one as they came through the garden. She glanced at the bed; Katie was still calmly sleeping. And opening the door as noiselessly as possible, she went down the stairs, thinking that perhaps the doctor had sent to inquire after his patient.",
+    "source": {
+     "author": "O'Brien, Charlotte Grace",
+     "work": "The happiness of Hazelbrook",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1909,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/78045",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-78045",
+     "corpusTextSha256": "2cd7210d184e2023f611a59a696b48570565b0de0d516b8b349281656d00cac0",
+     "excerptSha256": "6237fe7014a0b4310696cb9578271d455a8d2147449526c5f4da00e0422f7ace",
+     "sliceSha256": "df47de739383e3f983b906b6758e33da1b02485c2b3a3b3d7c2cec5d1683eb39",
+     "location": {
+      "startChar": 44039,
+      "endChar": 44668,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 50
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-085",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-085",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 84,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Hortense",
+      "Cecile"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Kingston",
+     "setting": "an abandoned orchard",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "about whether a small kindness was a cover for something else",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "an abandoned orchard in Kingston; a stepfather and his stepdaughter about whether a small kindness was a cover for something else"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "One cold, raw evening, Gwendoline, returning from a reception, entered her apartments through the sitting-room. She found it dark, and, hearing Alice in the bed-chamber, passed on, and, giving her wraps into her hands, returned to the sitting-room. She was shivering from the cold, and, going to the fire, stirred it to a blaze. The brightness illuminated floor and ceiling, chairs and table, falling on the black marble of the last-mentioned article of furniture, and upon the whiteness of a visiting card that lay like a snowflake before her, as she stood with her back to the chimney. Leaning over, she took it up, and turned it to the light behind her.",
+    "source": {
+     "author": "Ferguson, Kate Lee",
+     "work": "Cliquot: A Racing Story of Ideal Beauty",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1928,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/66587",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-66587",
+     "corpusTextSha256": "1695dfcc93331a6c30bdb274ccf805cd80bc6a9c8c1ac7b6ee1226b4970d8f5c",
+     "excerptSha256": "080523181cdb6b2db9466cdf131465e88a35df55b4bb2bf94e93435a4d65b2d8",
+     "sliceSha256": "1a82dfcf942223e7c73638b295ba10bbcc42504c3dfed311bc49cbc54d542c2e",
+     "location": {
+      "startChar": 121153,
+      "endChar": 121809,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 53
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-086",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "personal_essay",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-086",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 85,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Bokhee",
+      "Katerina"
+     ],
+     "nameCultures": [
+      "korean",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Ohio",
+     "setting": "a bookbinder's workshop",
+     "relationship": "a pair of rival bakers",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a bookbinder's workshop in Ohio; a pair of rival bakers when the plan works and nobody feels better"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "A pair have built in a large, hollow limb in my old apple-tree for many years. Whether it is the same pair or not I do not know. Probably it is, or else some of their descendants. I looked into the cavity one day while the mother bird was upon the nest, but before she had laid any eggs. A sudden explosive sound came up out of the dark depths of the limb, much like that made by an alarmed cat. It made me jerk my head back, when out came the bird and hurried off.",
+    "source": {
+     "author": "Burroughs, John",
+     "work": "Riverby",
+     "year": 1894,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1921,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/45307",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-45307",
+     "corpusTextSha256": "6dddf939831554028f37ef1142ac25d02a758c215f53c5109f454ce5057dbde2",
+     "excerptSha256": "3f8c3ccbb96a98fe53820b1668575bde9630c6463b5fbf915f824f704495f72a",
+     "sliceSha256": "85cccea21e1c2ffcf73f71cc188d6fe33e0d2a228251884c38b8f9597f56eb45",
+     "location": {
+      "startChar": 394027,
+      "endChar": 394492,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 82
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-087",
+   "route": "excerpt",
+   "skill": "inferences",
+   "difficulty": "easy",
+   "questionType": "symbolism",
+   "genre": "memoir",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-087",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "inferences",
+    "difficulty": "easy",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 86,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Eunseo",
+      "Seoyeon"
+     ],
+     "nameCultures": [
+      "korean",
+      "korean"
+     ],
+     "locale": "Busan",
+     "setting": "a laundromat",
+     "relationship": "an interpreter and her client",
+     "conflict": "about leaving versus staying loyal",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a laundromat in Busan; an interpreter and her client about leaving versus staying loyal"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "Behind the throne is a female figure as if in attendance on the great god. The whole group is surrounded by hieroglyphics, and inclosed in a frame richly adorned with symbolical figures. The winged globe is above, with the wings spread over all, and a line of serpents crowns the whole. The figures and paintings are in such perfect preservation, that they give the most correct idea of their ornaments and decorations (See Plate 19).\n\nStraight forward is the entrance into another chamber with two pillars. The wall of this place is outlined, ready for the sculptor to cut out his figure. It is here that we may plainly see the manner in which the artist prepared the figure on the wall ready to be cut; and it is almost impossible to give a description of the various figures, which adorn the walls and pillars of this chamber.",
+    "source": {
+     "author": "Belzoni, Giovanni Battista",
+     "work": "Narrative of the operations and recent discoveries within the pyramids, temples, tombs and excavations in Egypt and Nubia; vol. 1",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1823,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/77277",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-77277",
+     "corpusTextSha256": "6461a06a724c914f329061cf729f699502ffa1fe878595270bb17010faaad0f5",
+     "excerptSha256": "47e6bee771cc526d413436b561c7e41a29764cacaf8765de607146c0b09ac60e",
+     "sliceSha256": "7bd496b40a902a3f20a517a05ef6e526458ebf11e5b1774d9c524163d6c58a63",
+     "location": {
+      "startChar": 504941,
+      "endChar": 505770,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 87
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-088",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "short_story",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-088",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 87,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Kiet",
+      "Devon"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "african_american"
+     ],
+     "locale": "Riga",
+     "setting": "a snowed-in cabin",
+     "relationship": "two estranged sisters",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a snowed-in cabin in Riga; two estranged sisters after learning how someone really earned their reputation"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The feeling gave her a certain sense of exhilaration. From the depths of her despair her easily influenced spirits sprang again to hope and confidence. After all, nothing very dreadful had happened. She must struggle not to give way to intemperate feelings. She must bear with Polly! she must put up with Maggie. It was all very trying, of course, but it was the English way. She walked along faster and faster, and now her lips rose in a light song, and now again she ran, eager to get over the ground. When she ran her light hair floated behind her, and she looked less and less like a living creature.",
+    "source": {
+     "author": "Meade, L. T.",
+     "work": "Polly: A New-Fashioned Girl",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/18666",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-18666",
+     "corpusTextSha256": "841b95ac8df82bc0627b5b09919ca17181a2f920fe9d7fc85a14ed7b1f6d52f0",
+     "excerptSha256": "fef4132eae2dea8734b848137a94ca2748fb5d29e0dcdb89d72cc4065483613b",
+     "sliceSha256": "41f78c5704c67cad418c16b73cd7adb91dbf142112b855b8bead40e55ced8864",
+     "location": {
+      "startChar": 332691,
+      "endChar": 333295,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 75
+     },
+     "genre": "short_story",
+     "workForm": "novel(scene used for short_story slot)"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-089",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-089",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 88,
+     "genre": "novel_excerpt",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Astrid",
+      "Minjun"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "korean"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a customs checkpoint",
+     "relationship": "a sister and her younger brother's tutor",
+     "conflict": "after a misunderstood gift",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a customs checkpoint in Rotterdam; a sister and her younger brother's tutor after a misunderstood gift"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "During all the years of his growth into manhood, ever since he could remember, he had been practically the only son, the “young squire” in the eyes of the peasantry. He felt cheated of his birthright.\n\nThe packing-up had been a terrible business. Nothing had been said about retaining his rooms, and his nature was one that shrank back before the shadow of a coming hint. Quietly he had put all his things together, turning from Ursula’s silent, terrified gaze. Silence seemed to have fallen upon them all like a paralysis. The servants looked at each other.\n\nAll his life had been sheltered too warmly in his father’s fostering affection. The luxury of his youth hung about him--the easy generosity which had accounted money only a thing to spend on himself or on others, according to requirement.",
+    "source": {
+     "author": "Maartens, Maarten",
+     "work": "My Lady Nobody: A Novel",
+     "year": 1895,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1915,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/49903",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-49903",
+     "corpusTextSha256": "2e0211e663225eaa3bf7ce591f3c7ef4a4c538f252abe0218b3df40ffc44d753",
+     "excerptSha256": "f257b24ecfab7a830ac0428cb1d4665e61fd0db54d492cc2ed5448a46b5c78d9",
+     "sliceSha256": "483bb27e4393d0a2863982fde9473bdc790b69d394a1beedccf7fb584b43fee2",
+     "location": {
+      "startChar": 350098,
+      "endChar": 350896,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 45
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-090",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "poetry",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-090",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 89,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Sipho",
+      "Jomo"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Cape Town",
+     "setting": "a river barge",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a river barge in Cape Town; two brothers who run a failing shop over silence kept to protect someone"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "\"At length it came over a beautiful scene,\nThat nature in silence had made;\nThe place was but small, but't was sweetly serene,\nAnd chequered with sunshine and shade.\n\n\"I gazed and I envied with painful good will,\nAnd grew tired of my seat in the air;\nWhen all of a sudden my Castle stood still,\nAs if some attraction were there.\n\n\"Like a lark from the sky it came fluttering down,\nAnd placed me exactly in view,\nWhen whom should I meet in this charming retreat\nThis corner of calmness, but--you.",
+    "source": {
+     "author": "Conway, Moncure Daniel",
+     "work": "The Life Of Thomas Paine, Vol. 2. (of 2)\r With A History of His Literary, Political and Religious Career in America France, and England",
+     "year": 1899,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1907,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/37702",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-37702",
+     "corpusTextSha256": "be37952fdb30d442a46010fda5fab27fdfb8bfa6cc40335b86fdd0e6a04d44cb",
+     "excerptSha256": "0214deed2beea0faab87755dcb6b595457cbe478a8d1ce10d089ad169c5db6d1",
+     "sliceSha256": "325fa1c191da396a6c31471458b51d53e75b04ee102a740292f3ecbdf979c0c9",
+     "location": {
+      "startChar": 412199,
+      "endChar": 412749,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 47
+     },
+     "genre": "poetry",
+     "workForm": "poetry"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-091",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "personal_essay",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-091",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 90,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Lakshmi",
+      "Rajendra"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Kerala",
+     "setting": "an open-air market",
+     "relationship": "a teenage cook and her stern aunt",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "an open-air market in Kerala; a teenage cook and her stern aunt about who gets credit for shared work"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The occasional sense of our being too weak for the ordinary incidents of life, is strangely distressing. The cry of an infant makes us wretched for hours after, in spite of every effort of reason. I saw, through my telescope, two big boys worrying a little one, and I could not look to see the end of it. They were so far off that there was nothing to be done. The distress to me was such--the picture of the lives of the three boys was so vivid--that I felt as if I had no reason nor courage left.",
+    "source": {
+     "author": "Martineau, Harriet",
+     "work": "Life in the sick-room",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1876,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/74254",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-74254",
+     "corpusTextSha256": "f718120c430e261ac6273290d614127721803dfb83bb18a022941ad12b23008a",
+     "excerptSha256": "db1663c477cb18cab8471708ffa5afe8cc0da4eee32b370f228bc69ff3f7be3e",
+     "sliceSha256": "75a3203b833e7e512fc3963fadad9b494015d2709cc94481cb70162150280bdb",
+     "location": {
+      "startChar": 230265,
+      "endChar": 230763,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 82
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-092",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "memoir",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-092",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 91,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Beulah",
+      "Winifred"
+     ],
+     "nameCultures": [
+      "african_american",
+      "english"
+     ],
+     "locale": "Mumbai",
+     "setting": "a ship's galley",
+     "relationship": "a grandfather and a granddaughter learning his language",
+     "conflict": "about keeping a family business open",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a ship's galley in Mumbai; a grandfather and a granddaughter learning his language about keeping a family business open"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The family living in the hut consisted of three persons--man, wife and their little daughter, a sweet child of about four years of age. Both mother and child were neatly dressed, and had a genteel appearance that was in marked contrast with their surroundings. The child wore a tidy pink dress, tastefully ornamented, and seemed as if she had just come from the class-room of a convent school. The family impressed us as having seen better days, and had evidently not lived always so far away from their fellows.\n\nNear the house stood a large calabash tree, bearing the largest fruit of the kind we had yet observed.",
+    "source": {
+     "author": "Zahm, J. A. (John Augustine)",
+     "work": "Up the Orinoco and down the Magdalena",
+     "year": 1910,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1921,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/45848",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-45848",
+     "corpusTextSha256": "54f62b083085368174d2f37143d23101489252ac183ff30d739343dd0bfa02ab",
+     "excerptSha256": "e314b451e97ed9a0158f10ca21fb52a15c7c1a493c883e688ea3508127a378c9",
+     "sliceSha256": "97ae30e430b1a95fc26d75a6f0ee3f6196a0166f3ea1293334e8e887caf46abd",
+     "location": {
+      "startChar": 390209,
+      "endChar": 390825,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 44
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-093",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "figurative_language",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-093",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 92,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Chayton",
+      "Camille"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "french"
+     ],
+     "locale": "the Navajo plateau",
+     "setting": "a soccer field at dusk",
+     "relationship": "a conductor and the youngest violinist",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a soccer field at dusk in the Navajo plateau; a conductor and the youngest violinist about a debt neither will mention"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "Venus, who was present at the festival, heard him and knew the thought he would have uttered; and as an omen of her favor, caused the flame on the altar to shoot up thrice in a fiery point into the air. When he returned home, he went to see his statue, and leaning over the couch, gave a kiss to the mouth. It seemed to be warm. He pressed its lips again, he laid his hand upon the limbs; the ivory felt soft to his touch and yielded to his fingers like the wax of Hymettus. While he stands astonished and glad, though doubting, and fears he may be mistaken, again and again with a lover's ardor he touches the object of his hopes. It was indeed alive!",
+    "source": {
+     "author": "Bulfinch, Thomas",
+     "work": "The Age of Fable",
+     "year": 1855,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1867,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/4925",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-4925",
+     "corpusTextSha256": "9eae640d01475acfdab5febb4ec968bc50ea68b1cc07062ae9c27ed3a49a9610",
+     "excerptSha256": "a1fd99ae5415e973fa0efecef7f39d1b2792968236e8b4dd83601857ca933d7e",
+     "sliceSha256": "98f007d6424abb154612c2fb095c805009952afdad663a6eb97b8211e47278e8",
+     "location": {
+      "startChar": 143317,
+      "endChar": 143969,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 17
+     },
+     "genre": "fable_or_folktale_retelling",
+     "workForm": "fable_or_folktale_retelling"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-094",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "short_story",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-094",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "word_in_context",
+    "genre": "short_story",
+    "seed": {
+     "index": 93,
+     "genre": "short_story",
+     "pov": "second",
+     "styleEra": "contemporary",
+     "names": [
+      "Odile",
+      "Arisa"
+     ],
+     "nameCultures": [
+      "french",
+      "southeast_asian"
+     ],
+     "locale": "Marseille",
+     "setting": "a barbershop",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "about an ending that nobody wants to admit",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a barbershop in Marseille; a mayor and the town's only doctor about an ending that nobody wants to admit"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "At the dinner-table, her father again sat eying his guest with that same cold look of distrust and suspicion. And when the meal was at an end, he rose abruptly and called his daughter into another room. Presently Ralph heard his angry voice resounding through the house, interrupted now and then by a woman’s sobs, and a subdued, passionate pleading. When Bertha again entered the room, her eyes were very red, and he saw that she had been weeping. She threw a shawl over her shoulders, beckoned to him with her hand, and he arose and followed her. She led the way silently until they reached a thick copse of birch and alder near the strand. She dropped down upon a bench between two trees, and he took his seat at her side.",
+    "source": {
+     "author": "Boyesen, Hjalmar Hjorth",
+     "work": "A Good-For-Nothing 1876",
+     "year": 1876,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1895,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/23174",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-23174",
+     "corpusTextSha256": "66ab3c8166f981a2518e33e4778b2774e63aad4faa73b789ca0a93f135215396",
+     "excerptSha256": "c0ffe3fec6e1e76b19c8f185ec4f26d50a8adf3d3cd1b28f144334a33216f6a9",
+     "sliceSha256": "f106d74b6862b2e59509387987375dbd39eeb120cbc81897bc4baee7f75847ac",
+     "location": {
+      "startChar": 50747,
+      "endChar": 51472,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 91
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-095",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-095",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "word_in_context",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 94,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Saga",
+      "Anders"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Tromso",
+     "setting": "a rented farmhouse",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "about a translation that changes the meaning",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a rented farmhouse in Tromso; a grandmother and her grandson about a translation that changes the meaning"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The words have certainly not changed since he last glanced at them; and yet they seem to him to have a more compelling look. Why can't he force them to be more explicit? He pauses; telegram in one hand and candle in the other. What can she want with him? It is just within the bounds of possibility that she may really need his presence; how or why, he is unable to hazard the faintest conjecture. But it is just within the limits of the possible that she may. Various suggestions of what shape that possible may take flit across his puzzled brain. Can it be that her husband has at length made the discovery of what for five years has been the open secret of all his acquaintance?",
+    "source": {
+     "author": "Broughton, Rhoda",
+     "work": "Doctor Cupid: A Novel",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1920,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/35548",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-35548",
+     "corpusTextSha256": "267b0a1f923247d87f13f511205c5115a423affafb2f36f2b9718188632eff56",
+     "excerptSha256": "478acf5e4640466169aeea69adcc480528825fe7e8265a1c3fe327c2595af475",
+     "sliceSha256": "6464aca0c94700e3749e42f252adf20949c2f328379e5b25a82c1517932af5a0",
+     "location": {
+      "startChar": 312599,
+      "endChar": 313280,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 46
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-096",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "poetry",
+   "targetLetter": "A",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-096",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "word_in_context",
+    "genre": "poetry",
+    "seed": {
+     "index": 95,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Wenhua",
+      "Yaa"
+     ],
+     "nameCultures": [
+      "chinese",
+      "west_african"
+     ],
+     "locale": "Accra",
+     "setting": "a ceramics studio",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "after a storm reveals what was buried",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a ceramics studio in Accra; a young apprentice and a master carpenter after a storm reveals what was buried"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "Time passed on, and the Fairies had done nothing to gain their lovely home again. They wept no longer, but watched little Bud, as she daily tended the flowers, restoring their strength and beauty, or with gentle words flew from nest to nest, teaching the little birds to live happily together; and wherever she went blessings fell, and loving hearts were filled with gratitude.\n\nThen, one by one, the Elves secretly did some little work of kindness, and found a quiet joy come back to repay them. Flowers looked lovingly up as they passed, birds sang to cheer them when sad thoughts made them weep. And soon little Bud found out their gentle deeds, and her friendly words gave them new strength.",
+    "source": {
+     "author": "Alcott, Louisa May",
+     "work": "Flower Fables",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1888,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/163",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-163",
+     "corpusTextSha256": "ad90f88ec552be85678a6f7b475ea9cceccafc4759b1be73a424754b5439c6f3",
+     "excerptSha256": "a3d40f350ee17f634f9dcd3b422ff7feba6a84a83ce794f209e9c3fcd44b0b3c",
+     "sliceSha256": "d6aa9fbfc1818b110674cf548c526b538f33a339c8b1a35f9f240c69ed96c34f",
+     "location": {
+      "startChar": 123778,
+      "endChar": 124473,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 66
+     },
+     "genre": "fable_or_folktale_retelling",
+     "workForm": "fable_or_folktale_retelling"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-097",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-097",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "word_in_context",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 96,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Eulalio",
+      "Brigid"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "irish_scottish"
+     ],
+     "locale": "Valparaiso",
+     "setting": "a beekeeper's yard",
+     "relationship": "a returning soldier and his younger sister",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a beekeeper's yard in Valparaiso; a returning soldier and his younger sister over a borrowed object never returned"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "I by no means think graceful manners of small importance. They are the outward form of refinement in the mind, and good affections in the heart; and as such must be lovely. But when the form exists without the vital principle within, it is as cold and lifeless as flowers carved in marble.\n\nPoliteness, either of feeling or of manner, can never be taught by set maxims. Every-day influence, so unconsciously exerted, is all important in forming the characters of children: and in nothing more important than in their manners. If you are habitually polite, your children will become so, by the mere force of imitation, without any specific directions on the subject.",
+    "source": {
+     "author": "Child, Lydia Maria",
+     "work": "The mother's book",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1880,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/69345",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-69345",
+     "corpusTextSha256": "64c8c90f7f1bf5cad30091e63b70c17ed5a7e6249eef546973a24f3b0f653809",
+     "excerptSha256": "4ad816c6b068200e3ecc25ab3b51960e75e2404cf18533966bfadd7f36e5adc9",
+     "sliceSha256": "b11f0e53ceaad978d3c4420f75bc8238abb7b2a8c565605a405b1a2ee3e148b2",
+     "location": {
+      "startChar": 184746,
+      "endChar": 185411,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 62
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-098",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "memoir",
+   "targetLetter": "C",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-098",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "word_in_context",
+    "genre": "memoir",
+    "seed": {
+     "index": 97,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Paloma",
+      "Aydin"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "persian_central_asian"
+     ],
+     "locale": "Samarkand",
+     "setting": "a radio repair shop",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "over a promise made to a child",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a radio repair shop in Samarkand; two musicians in a failing duo over a promise made to a child"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "Making my way to where I supposed headquarters to be, I saw an important looking individual near by, whom I addressed, and inquired if he could tell me where General McClellan was to be found? \"No, I can not.\" Could he tell me when he was expected at headquarters? \"No.\" Was there any person there of whom I could inquire? \"Not a person.\" Did he know of any place where the necessary information could be obtained? \"Not a place.\" Could he make any suggestion, or throw the least ray of light upon the subject, which might lead to the whereabouts of the general? \"Not the slightest.\"\n\nTurning away in disgust, I said to the man, \"Well, good-by, Mr. Negative. I hope the effort which you have made to assist me will not injure you mentally or physically;\" and so saying I rode away, feeling that if I was as big as he imagined himself, and as strong as he was indifferent, I would give him a vigorous shaking before leaving him.",
+    "source": {
+     "author": "Edmonds, S. Emma E. (Sarah Emma Evelyn)",
+     "work": "Nurse and Spy in the Union Army\r The Adventures and Experiences of a Woman in Hospitals, Camps, and Battle-Fields",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1898,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/38497",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-38497",
+     "corpusTextSha256": "ac6d47a613eb5174e5427d06619cf13b96e3a2bc77b7c2761eeae40b911e89f1",
+     "excerptSha256": "0711e48ae8723070d4045ecacdeab242d0f02269d7c0f19356a11e0007b3c8d7",
+     "sliceSha256": "b90b3fb8ed0ad61fe3422d5855231a7448ee2850bf773fd86af92e38875d58c9",
+     "location": {
+      "startChar": 363948,
+      "endChar": 364874,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 70
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-099",
+   "route": "excerpt",
+   "skill": "words_in_context",
+   "difficulty": "easy",
+   "questionType": "word_in_context",
+   "genre": "fable_or_folktale_retelling",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-099",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "word_in_context",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 98,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Daphne",
+      "Defne"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "greek_balkan_turkish"
+     ],
+     "locale": "Istanbul",
+     "setting": "a hillside terrace",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a hillside terrace in Istanbul; a mother and her son leaving for college over an invitation one of them refuses"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "The cries of the spectators cheered Hippomenes,--\"Now, now, do your best! haste, haste! you gain on her! relax not! one more effort!\" It was doubtful whether the youth or the maiden heard these cries with the greater pleasure. But his breath began to fail him, his throat was dry, the goal yet far off. At that moment he threw down one of the golden apples. The virgin was all amazement. She stopped to pick it up. Hippomenes shot ahead. Shouts burst forth from all sides. She redoubled her efforts, and soon overtook him.",
+    "source": {
+     "author": "Bulfinch, Thomas",
+     "work": "The Age of Fable",
+     "year": 1855,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1867,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/4925",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-4925",
+     "corpusTextSha256": "9eae640d01475acfdab5febb4ec968bc50ea68b1cc07062ae9c27ed3a49a9610",
+     "excerptSha256": "5150a5b1fad3ed43e575c35105b97486c690e8c653ea1a381475daf4938c765e",
+     "sliceSha256": "6ba33156172529fb7aa1475f67f478bb7efbb44b6e555a86f6201d4a58382b40",
+     "location": {
+      "startChar": 301909,
+      "endChar": 302431,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 37
+     },
+     "genre": "fable_or_folktale_retelling",
+     "workForm": "fable_or_folktale_retelling"
+    }
+   }
+  },
+  {
+   "candidateId": "lit40-easy-01-100",
+   "route": "excerpt",
+   "skill": "text_structure_purpose",
+   "difficulty": "easy",
+   "questionType": "tone_shift",
+   "genre": "short_story",
+   "targetLetter": "D",
+   "words": {
+    "min": 60,
+    "max": 220
+   },
+   "recipeId": null,
+   "spec": {
+    "candidateId": "lit40-easy-01-100",
+    "batchId": "lit40-easy-01",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 99,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Rania",
+      "Noor"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a noodle stall",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "when one of them is offered a way out",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a noodle stall in Marrakesh; a pair of lifelong friends who rarely speak when one of them is offered a way out"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "promptBlock": "",
+   "excerpt": {
+    "text": "Meantime, the unconscious object of their criticism walked sadly down the old market-garden, whose rude outlines and homely details he once clothed with the poetry of a sensitive man's first love. Well, it was a common cabbage field and potato patch after all. In his disgust he felt conscious of even the loss of that sense of patronage and superiority which had invested his affection for a girl of meaner condition. His self-respect was humiliated with his love. The soil and dirt of those wretched cabbages had clung to him, but not to her. It was she who had gone higher; it was he who was left in the vulgar ruins of his misplaced passion.\n\nHe reached the bottom of the garden without observing any sign of the lonely invalid.",
+    "source": {
+     "author": "Harte, Bret",
+     "work": "A Millionaire of Rough-and-Ready",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1902,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/2280",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-2280",
+     "corpusTextSha256": "1ed4cee1686dac2f91db5166d02cd6e3cc0184090fcadbf988ecbaa43bb63aab",
+     "excerptSha256": "e04cf10f3637f640e2d18119bd0089c4d4ee1687db8f10ccbbe323bdbca473dc",
+     "sliceSha256": "c21ac60dbe96ede04243a60b7cfc764d5d0a4021151d46ef449bc28ee690d564",
+     "location": {
+      "startChar": 81717,
+      "endChar": 82452,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 51
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   }
+  }
+ ],
+ "instructions": "당신은 디지털 SAT Reading & Writing 문학 지문 문항 출제 위원이다. 아래 20개 후보 각각에 대해 문항 1개를 만들어 JSON 한 파일로 저장한다.\n작업: 새 문항 생성 · 청크 gen-lit40-easy-01-05\n규칙:\n1. 지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).\n2. 지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.\n3. 선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).\n4. 선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.\n5. 정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.\n6. 후보별 names 에 있는 이름만 인물 이름으로 쓴다. 지정되지 않은 이름·'Tobias'·'Odalys'·'Wren' 은 쓰지 않는다. 후보별 openingStyle 을 따르고 첫 단어를 The·You·It·There 로 시작하지 않는다.\n7. 지문 단어 수는 후보별 words.min~words.max 안이어야 한다(코드가 센다). 시는 줄바꿈을 \\n 으로 유지한다.\n8. XML 태그·마크다운·내부 메모·플레이스홀더·'As an AI' 류 문장을 출력에 넣지 않는다. 밑줄 표시는 앱 규격대로 두 밑줄 기호 __문장__ 만 쓴다. 출처·작가를 지어내지 않는다.\n9. 선언: 모든 항목에 declaration 3개(original, noRealWorkQuoted, noCopyrightedSource)를 true 로 쓴다. 그럴 수 없는 항목은 만들지 말고 candidateId 만 빼라(탈락 처리된다).\n발췌 작업: 제공된 발췌를 passage 에 그대로 넣고(공백 정규화만 허용), 질문·선택지·해설만 새로 만든다.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-easy-01-05.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"작업 파일의 chunkId 를 그대로\",\"model\":\"당신의 모델 이름(예: opus)\",\"items\":[{\"candidateId\":\"후보의 candidateId 를 그대로\",\"passage\":\"영어 지문(문항의 질문은 넣지 않는다)\",\"question\":\"영어 질문 한 문장\",\"options\":[\"선택지 A\",\"선택지 B\",\"선택지 C\",\"선택지 D\"],\"correct_letter\":\"A|B|C|D (targetLetter 와 같게)\",\"explanation\":\"한국어 해설 3~5문장\",\"tone\":[\"지문 어조 영어 단어 1~3개\"],\"devices\":[\"쓰인 문학 장치 영어 단어\"],\"declaration\":{\"original\":true,\"noRealWorkQuoted\":true,\"noCopyrightedSource\":true}}]}\n허용 값: correct_letter ∈ {A,B,C,D}, options 길이 4, declaration 3개 모두 true. 후보의 candidateId 를 바꾸지 않는다. 항목 순서는 후보 순서를 따른다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 후보 임의 추가·삭제, 이 작업 파일 수정. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 후보\n### lit40-easy-01-081 — skill inferences · 유형 relationship_between_characters · 난이도 easy · 장르 novel_excerpt · targetLetter B\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe new-comer was perhaps some four years older than the other, but this was only detected by close examination.\n\n“And so you have come at last. O brother, brother! how I have wanted you!” said Louis, drawing his guest to a sofa, and shaking hands with him over and over again. “You have no idea how very, very much I have wanted you!”\n\nA shade of trouble came over his face as he spoke, and instantly that of his brother darkened with the same shadow, as if the pain which one felt must have a mutual vibration.\n정답 위치: 정답 선택지는 B.\n### lit40-easy-01-082 — skill inferences · 유형 relationship_between_characters · 난이도 easy · 장르 personal_essay · targetLetter C\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nIs the best Gothic fit for our worship? Does it express our belief? Or shall we choose some other style?\n\nI say that it is; and that it is so because it is a style which, if not founded on Nature, has taken into itself more of Nature, of Nature beautiful and healthy, than any other style.\n\nWith greater knowledge of Nature, both geographical and scientific, fresh styles of architecture may and will arise, as much more beautiful, and as much more natural, than the Gothic, as Gothic is more beautiful and natural than the Norman. Till then we must take the best models which we have; use them; and, as it were, use them up and exhaust them.\n정답 위치: 정답 선택지는 C.\n### lit40-easy-01-083 — skill inferences · 유형 relationship_between_characters · 난이도 easy · 장르 memoir · targetLetter D\n유형 지시: 두 인물의 관계를 단서로 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nI was ambitious to absorb all the wisdom I could, but, really, I could not give an intelligent report of the points under discussion at any sitting. Oliver Johnson asked me, one day, if I enjoyed them. I thought, from a twinkle in his eye, that he thought I did not, so I told him I was ashamed to confess that I did not know what they were talking about. He said, \"Neither do I,--very few of their hearers do,--so you need not be surprised that they are incomprehensible to you, nor think less of your own capacity.\"\n\nI was indebted to Mr. Johnson for several of the greatest pleasures I enjoyed in Boston.\n정답 위치: 정답 선택지는 D.\n### lit40-easy-01-084 — skill inferences · 유형 symbolism · 난이도 easy · 장르 short_story · targetLetter A\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe sweet fresh morning air seemed to revive her. Day was just breaking, and the sky was tinged all over with a soft rosy hue.\n\nAs she stood gazing on the still and peaceful scene before her, she heard the garden gate open, and a minute afterwards there was a gentle tap at the cottage door. The window of Katie's room was at the side of the house, so that Mrs. Lawrence could not see any one as they came through the garden. She glanced at the bed; Katie was still calmly sleeping. And opening the door as noiselessly as possible, she went down the stairs, thinking that perhaps the doctor had sent to inquire after his patient.\n정답 위치: 정답 선택지는 A.\n### lit40-easy-01-085 — skill inferences · 유형 symbolism · 난이도 easy · 장르 novel_excerpt · targetLetter B\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nOne cold, raw evening, Gwendoline, returning from a reception, entered her apartments through the sitting-room. She found it dark, and, hearing Alice in the bed-chamber, passed on, and, giving her wraps into her hands, returned to the sitting-room. She was shivering from the cold, and, going to the fire, stirred it to a blaze. The brightness illuminated floor and ceiling, chairs and table, falling on the black marble of the last-mentioned article of furniture, and upon the whiteness of a visiting card that lay like a snowflake before her, as she stood with her back to the chimney. Leaning over, she took it up, and turned it to the light behind her.\n정답 위치: 정답 선택지는 B.\n### lit40-easy-01-086 — skill inferences · 유형 symbolism · 난이도 easy · 장르 personal_essay · targetLetter C\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nA pair have built in a large, hollow limb in my old apple-tree for many years. Whether it is the same pair or not I do not know. Probably it is, or else some of their descendants. I looked into the cavity one day while the mother bird was upon the nest, but before she had laid any eggs. A sudden explosive sound came up out of the dark depths of the limb, much like that made by an alarmed cat. It made me jerk my head back, when out came the bird and hurried off.\n정답 위치: 정답 선택지는 C.\n### lit40-easy-01-087 — skill inferences · 유형 symbolism · 난이도 easy · 장르 memoir · targetLetter D\n유형 지시: 반복·강조된 사물·이미지가 상징하는 바를 추론하게 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nBehind the throne is a female figure as if in attendance on the great god. The whole group is surrounded by hieroglyphics, and inclosed in a frame richly adorned with symbolical figures. The winged globe is above, with the wings spread over all, and a line of serpents crowns the whole. The figures and paintings are in such perfect preservation, that they give the most correct idea of their ornaments and decorations (See Plate 19).\n\nStraight forward is the entrance into another chamber with two pillars. The wall of this place is outlined, ready for the sculptor to cut out his figure. It is here that we may plainly see the manner in which the artist prepared the figure on the wall ready to be cut; and it is almost impossible to give a description of the various figures, which adorn the walls and pillars of this chamber.\n정답 위치: 정답 선택지는 D.\n### lit40-easy-01-088 — skill words_in_context · 유형 figurative_language · 난이도 easy · 장르 short_story · targetLetter A\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe feeling gave her a certain sense of exhilaration. From the depths of her despair her easily influenced spirits sprang again to hope and confidence. After all, nothing very dreadful had happened. She must struggle not to give way to intemperate feelings. She must bear with Polly! she must put up with Maggie. It was all very trying, of course, but it was the English way. She walked along faster and faster, and now her lips rose in a light song, and now again she ran, eager to get over the ground. When she ran her light hair floated behind her, and she looked less and less like a living creature.\n정답 위치: 정답 선택지는 A.\n### lit40-easy-01-089 — skill words_in_context · 유형 figurative_language · 난이도 easy · 장르 novel_excerpt · targetLetter B\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nDuring all the years of his growth into manhood, ever since he could remember, he had been practically the only son, the “young squire” in the eyes of the peasantry. He felt cheated of his birthright.\n\nThe packing-up had been a terrible business. Nothing had been said about retaining his rooms, and his nature was one that shrank back before the shadow of a coming hint. Quietly he had put all his things together, turning from Ursula’s silent, terrified gaze. Silence seemed to have fallen upon them all like a paralysis. The servants looked at each other.\n\nAll his life had been sheltered too warmly in his father’s fostering affection. The luxury of his youth hung about him--the easy generosity which had accounted money only a thing to spend on himself or on others, according to requirement.\n정답 위치: 정답 선택지는 B.\n### lit40-easy-01-090 — skill words_in_context · 유형 figurative_language · 난이도 easy · 장르 poetry · targetLetter C\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\n\"At length it came over a beautiful scene,\nThat nature in silence had made;\nThe place was but small, but't was sweetly serene,\nAnd chequered with sunshine and shade.\n\n\"I gazed and I envied with painful good will,\nAnd grew tired of my seat in the air;\nWhen all of a sudden my Castle stood still,\nAs if some attraction were there.\n\n\"Like a lark from the sky it came fluttering down,\nAnd placed me exactly in view,\nWhen whom should I meet in this charming retreat\nThis corner of calmness, but--you.\n정답 위치: 정답 선택지는 C.\n### lit40-easy-01-091 — skill words_in_context · 유형 figurative_language · 난이도 easy · 장르 personal_essay · targetLetter D\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe occasional sense of our being too weak for the ordinary incidents of life, is strangely distressing. The cry of an infant makes us wretched for hours after, in spite of every effort of reason. I saw, through my telescope, two big boys worrying a little one, and I could not look to see the end of it. They were so far off that there was nothing to be done. The distress to me was such--the picture of the lives of the three boys was so vivid--that I felt as if I had no reason nor courage left.\n정답 위치: 정답 선택지는 D.\n### lit40-easy-01-092 — skill words_in_context · 유형 figurative_language · 난이도 easy · 장르 memoir · targetLetter A\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe family living in the hut consisted of three persons--man, wife and their little daughter, a sweet child of about four years of age. Both mother and child were neatly dressed, and had a genteel appearance that was in marked contrast with their surroundings. The child wore a tidy pink dress, tastefully ornamented, and seemed as if she had just come from the class-room of a convent school. The family impressed us as having seen better days, and had evidently not lived always so far away from their fellows.\n\nNear the house stood a large calabash tree, bearing the largest fruit of the kind we had yet observed.\n정답 위치: 정답 선택지는 A.\n### lit40-easy-01-093 — skill words_in_context · 유형 figurative_language · 난이도 easy · 장르 fable_or_folktale_retelling · targetLetter B\n유형 지시: 비유 표현이 문맥에서 전달하는 의미를 묻는다. 질문은 'As used in the text, the phrase “…” most nearly suggests …' 형식이고 인용한 구절이 지문에 있어야 하며, 지문 본문에는 따옴표(\" “ ”)를 쓰지 않는다(대사는 따옴표 없이 서술).\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nVenus, who was present at the festival, heard him and knew the thought he would have uttered; and as an omen of her favor, caused the flame on the altar to shoot up thrice in a fiery point into the air. When he returned home, he went to see his statue, and leaning over the couch, gave a kiss to the mouth. It seemed to be warm. He pressed its lips again, he laid his hand upon the limbs; the ivory felt soft to his touch and yielded to his fingers like the wax of Hymettus. While he stands astonished and glad, though doubting, and fears he may be mistaken, again and again with a lover's ardor he touches the object of his hopes. It was indeed alive!\n정답 위치: 정답 선택지는 B.\n### lit40-easy-01-094 — skill words_in_context · 유형 word_in_context · 난이도 easy · 장르 short_story · targetLetter C\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nAt the dinner-table, her father again sat eying his guest with that same cold look of distrust and suspicion. And when the meal was at an end, he rose abruptly and called his daughter into another room. Presently Ralph heard his angry voice resounding through the house, interrupted now and then by a woman’s sobs, and a subdued, passionate pleading. When Bertha again entered the room, her eyes were very red, and he saw that she had been weeping. She threw a shawl over her shoulders, beckoned to him with her hand, and he arose and followed her. She led the way silently until they reached a thick copse of birch and alder near the strand. She dropped down upon a bench between two trees, and he took his seat at her side.\n정답 위치: 정답 선택지는 C.\n### lit40-easy-01-095 — skill words_in_context · 유형 word_in_context · 난이도 easy · 장르 novel_excerpt · targetLetter D\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe words have certainly not changed since he last glanced at them; and yet they seem to him to have a more compelling look. Why can't he force them to be more explicit? He pauses; telegram in one hand and candle in the other. What can she want with him? It is just within the bounds of possibility that she may really need his presence; how or why, he is unable to hazard the faintest conjecture. But it is just within the limits of the possible that she may. Various suggestions of what shape that possible may take flit across his puzzled brain. Can it be that her husband has at length made the discovery of what for five years has been the open secret of all his acquaintance?\n정답 위치: 정답 선택지는 D.\n### lit40-easy-01-096 — skill words_in_context · 유형 word_in_context · 난이도 easy · 장르 poetry · targetLetter A\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nTime passed on, and the Fairies had done nothing to gain their lovely home again. They wept no longer, but watched little Bud, as she daily tended the flowers, restoring their strength and beauty, or with gentle words flew from nest to nest, teaching the little birds to live happily together; and wherever she went blessings fell, and loving hearts were filled with gratitude.\n\nThen, one by one, the Elves secretly did some little work of kindness, and found a quiet joy come back to repay them. Flowers looked lovingly up as they passed, birds sang to cheer them when sad thoughts made them weep. And soon little Bud found out their gentle deeds, and her friendly words gave them new strength.\n정답 위치: 정답 선택지는 A.\n### lit40-easy-01-097 — skill words_in_context · 유형 word_in_context · 난이도 easy · 장르 personal_essay · targetLetter B\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nI by no means think graceful manners of small importance. They are the outward form of refinement in the mind, and good affections in the heart; and as such must be lovely. But when the form exists without the vital principle within, it is as cold and lifeless as flowers carved in marble.\n\nPoliteness, either of feeling or of manner, can never be taught by set maxims. Every-day influence, so unconsciously exerted, is all important in forming the characters of children: and in nothing more important than in their manners. If you are habitually polite, your children will become so, by the mere force of imitation, without any specific directions on the subject.\n정답 위치: 정답 선택지는 B.\n### lit40-easy-01-098 — skill words_in_context · 유형 word_in_context · 난이도 easy · 장르 memoir · targetLetter C\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nMaking my way to where I supposed headquarters to be, I saw an important looking individual near by, whom I addressed, and inquired if he could tell me where General McClellan was to be found? \"No, I can not.\" Could he tell me when he was expected at headquarters? \"No.\" Was there any person there of whom I could inquire? \"Not a person.\" Did he know of any place where the necessary information could be obtained? \"Not a place.\" Could he make any suggestion, or throw the least ray of light upon the subject, which might lead to the whereabouts of the general? \"Not the slightest.\"\n\nTurning away in disgust, I said to the man, \"Well, good-by, Mr. Negative. I hope the effort which you have made to assist me will not injure you mentally or physically;\" and so saying I rode away, feeling that if I was as big as he imagined himself, and as strong as he was indifferent, I would give him a vigorous shaking before leaving him.\n정답 위치: 정답 선택지는 C.\n### lit40-easy-01-099 — skill words_in_context · 유형 word_in_context · 난이도 easy · 장르 fable_or_folktale_retelling · targetLetter D\n유형 지시: 지문에 빈칸 ______ 을 정확히 하나 두고 질문은 'Which choice completes the text with the most logical and precise word or phrase?' 로 한다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nThe cries of the spectators cheered Hippomenes,--\"Now, now, do your best! haste, haste! you gain on her! relax not! one more effort!\" It was doubtful whether the youth or the maiden heard these cries with the greater pleasure. But his breath began to fail him, his throat was dry, the goal yet far off. At that moment he threw down one of the golden apples. The virgin was all amazement. She stopped to pick it up. Hippomenes shot ahead. Shouts burst forth from all sides. She redoubled her efforts, and soon overtook him.\n정답 위치: 정답 선택지는 D.\n### lit40-easy-01-100 — skill text_structure_purpose · 유형 tone_shift · 난이도 easy · 장르 short_story · targetLetter D\n유형 지시: 글 중간에서 어조가 바뀌는 지점과 의미를 묻는다.\n난이도 지시: easy: 단서가 한 문장 안에 비교적 직접 드러나고 오답이 분명히 틀리다.\n[발췌 지문 — 한 글자도 바꾸지 말고 passage 에 그대로 넣는다]\nMeantime, the unconscious object of their criticism walked sadly down the old market-garden, whose rude outlines and homely details he once clothed with the poetry of a sensitive man's first love. Well, it was a common cabbage field and potato patch after all. In his disgust he felt conscious of even the loss of that sense of patronage and superiority which had invested his affection for a girl of meaner condition. His self-respect was humiliated with his love. The soil and dirt of those wretched cabbages had clung to him, but not to her. It was she who had gone higher; it was he who was left in the vulgar ruins of his misplaced passion.\n\nHe reached the bottom of the garden without observing any sign of the lonely invalid.\n정답 위치: 정답 선택지는 D."
+}

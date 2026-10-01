@@ -81,7 +81,7 @@ export default function ChatPanel({
 
   return (
     <div className="max-w-[560px] px-8 py-8 flex flex-col h-screen">
-      <button onClick={onBack} className="text-[13px] text-grey-500 font-semibold mb-4">
+      <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
         ← 뒤로
       </button>
       <h1 className="text-[16px] font-extrabold text-ink mb-1">

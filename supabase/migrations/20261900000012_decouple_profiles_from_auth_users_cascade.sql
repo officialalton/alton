@@ -1,0 +1,48 @@
+-- 2026-09-24(Section 2 — 개인정보 보존·삭제 실사 중 발견) — 계정 병합
+-- 30일 뒤 원본 계정의 Auth 자격증명(auth.users) 실제 삭제가 구조적으로
+-- 항상 실패하던 문제의 근본 원인 수정.
+--
+-- 전수 조사 결과: public 스키마에서 profiles(id)를 참조하는 FK가 232개
+-- 있고 그중 203개가 NO ACTION/RESTRICT다. merge_accounts()가 이 중 대부분을
+-- 생존 계정으로 재배정하지만, 의도적으로 재배정하지 않는 것들이 있다 —
+-- teacher_rate_history(과거 시급 사실 보존), account_status_events
+-- (INSERT-only 감사로그, 이 병합 자체가 만든 'closed' 전이 기록 포함),
+-- account_merges(7년 보관 병합 감사기록) 등. 이런 감사·정산 기록은 "누가
+-- 그 일을 했는지"를 원래 UUID 그대로 영구 보존해야 하므로 재배정 대상이
+-- 아니다 — 그런데 profiles.id가 auth.users.id를 ON DELETE CASCADE로
+-- 참조하고 있어서, admin.auth.admin.deleteUser()로 auth.users 행을 지우면
+-- profiles 행까지 함께 지워지려다가 그 profiles.id를 참조하는 감사 테이블의
+-- NO ACTION 제약에 막혀 "Database error deleting user"로 실패했다
+-- (실제 UAT로 재현·확인 — 기존 단위 테스트는 deleteUser()를 mock해서 이
+-- 문제를 전혀 잡지 못하고 있었다).
+--
+-- 해결책은 203개 참조 테이블을 전부 바꾸는 게 아니라, profiles가 이미
+-- anonymize_merged_account()로 PII를 스크럽한 뒤에는 그 자체로 "PII 없는
+-- 영구 주체 식별자"이므로 auth.users의 생사와 profiles 행의 생사를
+-- 분리하는 것이다 — profiles.id → auth.users.id FK 자체를 없앤다(delete
+-- 동작을 CASCADE에서 다른 것으로 바꾸는 게 아니라 제약을 아예 제거해야
+-- 한다: NO ACTION/RESTRICT로 바꾸면 "auth.users를 지울 때 profiles가 아직
+-- 있으면 거부"가 되어 오히려 매번 삭제 자체가 막힌다 — PK 컬럼이라
+-- SET NULL도 불가능하다). INSERT 시점의 정합성(profiles.id는 항상 실제
+-- auth.users.id여야 한다)은 이미 앱 코드가 보장한다(finalize_account_invite/
+-- link_*_workspace_identity 등이 전부 서버에서 만든 auth id만 씀) — DB
+-- 제약이 빠져도 정상 생성 경로는 바뀌지 않는다.
+--
+-- 결과: auth.users 삭제는 이제 profiles를 전혀 건드리지 않는다 — profiles
+-- 행(이미 PII 스크럽됨)과 그걸 참조하는 감사·정산 기록 전부가 원래 UUID
+-- 그대로, 수정·삭제 없이 영구 보존된다. Auth 스키마 자체(세션·refresh
+-- token·identity 등)만 GoTrue가 정상적으로 정리한다.
+--
+-- **알려진 잔여 위험(별도 조치 필요, 이번 수정 범위 밖)**: auth.users를
+-- profiles 없이 "직접" NO ACTION으로 참조하는 8개 컬럼이 별도로 있다
+-- (contract_company_approvals.approved_by, university_source_urls.
+-- submitted_by/reviewed_by, university_data_reports.reporter_id/resolved_by,
+-- university_essay_prompts.reviewed_by, university_refresh_jobs.requested_by,
+-- university_update_proposals.reviewed_by — 전부 관리자가 검토·승인한
+-- 주체를 기록하는 컬럼). 병합 대상이 이 컬럼에 실제로 등장하는 관리자
+-- 계정이면 그 경우엔 여전히 삭제가 막힌다. 학생·학부모·교사 병합에서는
+-- 해당 없음(관리자 전용 감사 컬럼이라 실사용 시나리오에서 값이 없음)을
+-- 확인했지만, 관리자 계정을 병합·삭제하는 경우가 생기면 이 8개도 같은
+-- 방식(별도 영구 주체 테이블 분리 또는 이 컬럼들 자체의 삭제 정책 재검토)
+-- 으로 다시 다뤄야 한다.
+alter table public.profiles drop constraint profiles_id_fkey;

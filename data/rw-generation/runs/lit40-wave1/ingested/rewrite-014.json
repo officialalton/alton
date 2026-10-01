@@ -1,0 +1,663 @@
+{
+ "taskId": "rewrite-014",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-04-071",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-04-071",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 70,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Omar",
+      "Aponi"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "indigenous_american"
+     ],
+     "locale": "the Navajo plateau",
+     "setting": "a stone bridge",
+     "relationship": "best friends after a move",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a stone bridge in the Navajo plateau; best friends after a move over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Tell me about the trading post first, Aponi said, before I had even set down my bundle. So I told her. We stood on the stone bridge below the mesa in the spring of 1879, a year after my family had gone east, and I described my father's ledgers and the schoolmaster's squeaking boots until she laughed. Once, when we were nine, her brother had dared us both to walk the parapet; the summer before I left, the flood had taken him from beneath these same arches. Neither of us mentioned him. For two days we grazed our talk around the edges of one pasture, wandering wide to horses, to weather, to the price of wool. Whenever the water grew loud below us, she would point out a hawk, and I would look where she pointed, though I saw no hawk. On the third evening she pressed a smooth river stone into my palm without explaining it, and I carried it east in my coat. Shadows of the arches lay long across the dry wash, and somewhere up the slope a dog was bringing the sheep down.",
+    "question": "As used in the text, the phrase “grazed our talk around the edges of one pasture” most nearly suggests",
+    "options": [
+     "a habit of filling the awkwardness of a long separation with small talk.",
+     "Omar's quiet effort to shield Aponi from news she had not yet heard.",
+     "a shared, deliberate steering of conversation away from one painful subject.",
+     "a lingering dispute over the grazing land each family claimed near the bridge."
+    ],
+    "correct_letter": "C",
+    "explanation": "지문은 홍수로 아포니의 오빠가 죽었다는 사실을 언급한 직후 '둘 다 그를 말하지 않았다'고 쓰고, 물소리가 커질 때마다 아포니가 매를 가리키며 화제를 돌리고 화자가 보이지 않는 매를 바라보며 따라 주는 장면을 덧붙인다. 이 두 단서를 연결하면 '한 목초지의 가장자리를 맴돌며 이야기했다'는 표현은 두 사람이 함께 고통스러운 한 주제를 의도적으로 피했다는 뜻이므로 정답은 C이다. A는 잡담을 했다는 표면만 보고 회피의 대상이 있다는 점을 놓쳤다. B는 아포니가 이미 오빠의 죽음을 알고 있으므로 맞지 않고, D는 목초지를 문자 그대로 읽은 오답이다."
+   },
+   "notes": [],
+   "tone": [
+    "wistful",
+    "restrained"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-04-079",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-04-079",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 78,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Paloma",
+      "Declan"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "english"
+     ],
+     "locale": "Ohio",
+     "setting": "a salt-water pool",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a salt-water pool in Ohio; an elder and a restless apprentice when old loyalties collide with new ones"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Paloma handed me the ring of keys that morning, she bowed as if presenting a crown, and I laughed so hard I nearly dropped them. The salt-water pool behind the Dayton rec center had been hers for thirty summers; I was nineteen, her apprentice, and the aquatic park across town had just offered me twice her wage. I mentioned it while we skimmed leaves. Paloma asked whether they would give me a whistle with my name engraved on it, and maybe a manager younger than my sneakers. We traded jabs down the length of the deep end. Then, testing the water, she held the vial up to the light longer than she needed to. Her father's crew had poured these walls, she said. Every child on Fifth Street had learned to float in the shallow end, me included, and the drain still stuck each November in a way no manual explained. She did not ask me to stay. She only showed me, slowly, where to kick the grate. I set down the net. Across the water, light lay flat on the tiles, and a dragonfly kept touching the surface and lifting away.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It moves from affectionate joking to wounded reproach as Paloma faults the narrator for leaving.",
+     "It moves from nervous uncertainty to firm resolve as the narrator commits to the new job.",
+     "It moves from brisk instruction to lighthearted teasing as Paloma eases the morning's tension.",
+     "It moves from lighthearted teasing to quiet earnestness as Paloma passes on what she knows."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 팔로마는 왕관을 바치듯 열쇠를 건네고 새 직장을 두고 농담을 주고받으며 장난스러운 분위기를 만든다. 그러나 수질 검사 약병을 필요 이상으로 오래 들고 있는 순간부터 수영장의 내력과 겨울 배수구 요령을 천천히 알려 주며 어조가 진지하고 조용해진다. 따라서 정답은 D이다. A는 팔로마가 붙잡지도, 비난하지도 않는다는 서술과 어긋나고, B는 화자의 결심이 드러나지 않으며, C는 변화의 순서를 거꾸로 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "earnest"
+   ],
+   "devices": [
+    "tone shift",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-04-080",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-04-080",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 79,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Hasan",
+      "Sadia"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Thessaloniki",
+     "setting": "a crowded wedding hall",
+     "relationship": "a foreman and a young hire",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a crowded wedding hall in Thessaloniki; a foreman and a young hire while learning to let go of a habit"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Hasan counted chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he circled the hall twice before the guests came, tapping each chair back like a priest blessing pews, and I, newly hired, learned to time my yawns to the movement of his lips. That evening the count collapsed within minutes: cousins perched on window ledges, the musicians spilled down the stairs, and an aunt sat squarely on his tally board. I braced for thunder. None came. Hasan stood among the dancers with his hands loose at his sides, watching a boy asleep across two laps. Much later, as we folded linens, he mentioned that his father had once lost a post over a single guest left standing, and that he had counted chairs every night since, though no one had ever asked him to. Then he set his tally slate on my stack of napkins. Keep it or break it, Sadia, he said, and went to help the cooks. Out on the street, a cart wheel ground slowly over the wet stones.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It shifts from wry amusement at Hasan's ritual to a gentle, reflective sympathy.",
+     "It shifts from wry amusement at Hasan's ritual to nervous dread of his temper.",
+     "It shifts from quiet boredom with the work to exuberant joy at the crowded feast.",
+     "It shifts from mocking impatience with Hasan to admiration for his strict precision."
+    ],
+    "correct_letter": "A",
+    "explanation": "초반에 사디아는 의자를 세는 하산을 성직자에 빗대고 하품 타이밍을 맞추는 등 가볍게 비꼬는 재미로 바라본다. 이후 하산이 화를 내지 않고 잠든 아이를 지켜보는 모습, 아버지가 해고된 사연을 털어놓는 장면이 이어지며 어조는 이해와 연민이 담긴 차분한 성찰로 바뀐다. 따라서 정답은 A이다. B는 '천둥에 대비했다'는 예상만 보고 실제로 분노가 오지 않았다는 점을 놓쳤고, C와 D는 결혼식의 기쁨이나 하산의 엄격함에 대한 감탄으로 변화의 방향을 잘못 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "tender"
+   ],
+   "devices": [
+    "simile",
+    "tone shift"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-04-091",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-04-091",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 90,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Kagiso",
+      "Jomo"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Nairobi",
+     "setting": "a tailor's back room",
+     "relationship": "a girl and an old family friend",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a tailor's back room in Nairobi; a girl and an old family friend after a competition one of them lost on purpose"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Four objects lived in Jomo's back room: a treadle machine, a headless dressmaker's dummy, a radio that caught one station, and the runner-up plate from the 1979 district chess final, which he had lost to me when I was twelve. For ten years I had let people call me brilliant for beating a grown man. That afternoon I sat on his cutting table while he hemmed a pair of trousers, and I asked, idly, why the plate stayed hidden behind the radio rather than on the shelf with his tailoring prizes. __He pinned the hem, unpinned it, and pinned it again in exactly the same place.__ Then he said my name, Kagiso, as if starting over, and spoke of other things: the price of wool, my father's cough that winter, how quiet our house had been while my father lay in the hospital. A girl, he said, should have one thing to be proud of that has nothing to do with sickrooms. He did not mention chess. I looked at the plate a long time, and then at his hands, which never misjudged a move on cloth. Below, a bus ground its gears at the corner of Moi Avenue.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It shows Jomo's precision as a tailor, contrasting it with his lack of skill at chess.",
+     "It suggests Jomo is irritated by the question and wishes the narrator would stop asking.",
+     "It shows Jomo so absorbed in his work that he fails to hear the narrator's question.",
+     "It conveys Jomo's hesitation, hinting that the question touches something long concealed."
+    ],
+    "correct_letter": "D",
+    "explanation": "밑줄 문장은 같은 자리에 핀을 꽂았다 뺐다 다시 꽂는 무의미한 반복으로, 질문을 받은 조모가 바로 답하지 못하고 머뭇거린다는 것을 보여 준다. 이어서 그는 아버지의 병과 '병실과 상관없는 자랑거리'를 말하고, 화자는 천 위에서 수를 잘못 두는 법이 없는 그의 손을 바라본다. 이 단서들을 합치면 체스 패배에 숨겨진 사정이 있음을 암시하므로 정답은 D이다. A는 손재주 묘사만 보고 체스 실력 부족으로 단정했으며, B는 짜증의 근거가 없고, C는 그가 질문에 반응해 이야기를 시작한다는 점과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "restrained"
+   ],
+   "devices": [
+    "foreshadowing",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-04-097",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-04-097",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 96,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Pearl",
+      "Hortense"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a printing press room",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a printing press room in Port of Spain; a widow and the delivery boy about an object that belonged to someone gone"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Ma'am, this was in the type case, said the boy who brings the paper stock, holding out my husband's brass composing stick, which I had hunted for since the funeral. I thanked him coldly and counted the sorts in the drawer after he left. Widows in the press rooms of Port of Spain learn quickly that condolence and pilfering often arrive in the same hands. Yet he came back the next day to ask whether the stick had been set to the width of the Gazette or the hymn sheets, since the measure seemed odd to him. Only my husband had ever noticed such a thing. I showed him. He set three crooked lines, found each error himself, and reset them without a word of excuse. My sister-in-law Pearl tells everyone that Hortense has adopted a stray, and I let her. These days the composing stick is never where I leave it, and I have stopped counting the drawer. On the windowsill, the morning's proofs dry beside a jar of his marbles.",
+    "question": "Which choice best describes the narrator's attitude toward the delivery boy?",
+    "options": [
+     "Early suspicion that gradually softens into trust and quiet affection",
+     "Persistent wariness hidden beneath a show of polite gratitude",
+     "Pity for the boy's inexperience mixed with impatience at his errors",
+     "Grief-driven indifference that Pearl's teasing slowly breaks through"
+    ],
+    "correct_letter": "A",
+    "explanation": "처음에 화자는 소년에게 차갑게 감사를 표하고 그가 떠난 뒤 서랍의 활자를 세어 볼 만큼 의심한다. 그러나 남편만 알아챘던 조판 폭을 소년이 묻고 스스로 오류를 고치자 화자는 그를 가르치고, 지금은 서랍을 세지 않으며 창가에 그의 구슬 병까지 둔다. 앞의 의심과 뒤의 변화가 연결되므로 정답은 A이다. B는 '더 이상 세지 않는다'는 서술과 맞지 않고, C는 소년이 오류를 스스로 고친다는 점을 놓쳤으며, D는 변화를 펄의 놀림 덕으로 잘못 돌렸다."
+   },
+   "notes": [],
+   "tone": [
+    "guarded",
+    "warm"
+   ],
+   "devices": [
+    "characterization",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-05-001",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-05-001",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "main_idea_or_purpose",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 0,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Nova",
+      "Dalia"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "arabic_levantine"
+     ],
+     "locale": "Marrakesh",
+     "setting": "a snowed-in cabin",
+     "relationship": "an uncle and a nephew with a debt",
+     "conflict": "after a storm reveals what was buried",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a snowed-in cabin in Marrakesh; an uncle and a nephew with a debt after a storm reveals what was buried"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "central_ideas_details_lit_main_idea_or_purpose_medium"
+   },
+   "g": {
+    "passage": "Nova climbed the mountain road above Marrakesh with an envelope of cash sewn into a coat lining, and the storm shut both of them inside Dalia's cabin for three days. For a decade Nova had rehearsed this visit on night buses, polishing apologies until they shone. On the first morning Nova laid the envelope on the table; Dalia moved it aside to make room for the bread. On the second, they dug out the woodpile, and the shovel struck a tin box Dalia had buried long before. Inside lay the old receipts, each one crossed through in pencil gone gray with years. Dalia set the box by the stove and asked whether Nova still drew in the evenings. Beyond the window, wet snow slid from the cedar boughs and struck the drifts with a sound like breath let out.",
+    "question": "Which choice best states the main purpose of the text?",
+    "options": [
+     "To contrast Nova's long dread over the debt with Dalia's quiet, earlier release of it.",
+     "To recount how a snowstorm kept Nova in Dalia's cabin and led to a discovery.",
+     "To show how Dalia's buried records revealed the true amount Nova still owed her.",
+     "To suggest that old debts between relatives are best forgiven rather than repaid."
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분은 노바가 10년 동안 사과를 연습하며 빚을 두려워했다는 점을 보여 주고, 뒷부분은 달리아가 봉투를 치우고 오래전에 모든 영수증에 줄을 그어 묻어 두었다는 사실을 드러낸다. 두 부분을 대비하면 지문의 목적은 노바의 오랜 두려움과 달리아의 조용한 탕감을 대조하는 것이므로 정답은 A이다. B는 일화의 줄거리만 요약했고, C는 줄 그은 영수증을 남은 빚의 증거로 잘못 읽었다. D는 지문에서 직접 끌어낼 수 없는 지나치게 일반적인 교훈이다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "tender"
+   ],
+   "devices": [
+    "contrast",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-05-054",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-05-054",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 53,
+     "genre": "novel_excerpt",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Thandiwe",
+      "Lindiwe"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Cape Town",
+     "setting": "a boarding-house kitchen",
+     "relationship": "a landlord and a long-term tenant",
+     "conflict": "about teaching a skill that is dying out",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a boarding-house kitchen in Cape Town; a landlord and a long-term tenant about teaching a skill that is dying out"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Thandiwe had kept the boarding house on Bree Street for twenty years, and Lindiwe had lodged in its back room for nearly as long, paying in coins or, when coins were scarce, in reed mats woven to a pattern her grandmother had carried down from the hills. Buyers at the Saturday market sometimes asked who else made them. Lindiwe would only shrug. Lately she had begun leaving mats half finished on the windowsill, and in the mornings she ran her knuckles under the hot tap before she could close her hand around a cup. One winter evening Thandiwe cleared the kitchen table, laid out a bundle of reeds, and sat down with her sleeves rolled. Teach me, she said, before the pattern goes to sleep in your hands. Lindiwe snorted, but she pulled up a chair, and by the light of the stove the first rows appeared, crooked and stubborn. A kettle muttered on the back burner, and upstairs a lodger was practicing scales on a borrowed concertina.",
+    "question": "As used in the text, the phrase “before the pattern goes to sleep in your hands” most nearly suggests",
+    "options": [
+     "a hope that Lindiwe will finally rest after her many years of weaving.",
+     "the danger that the craft will vanish as Lindiwe's hands lose their strength.",
+     "the way the pattern has become so familiar that Lindiwe weaves without thought.",
+     "a worry that Lindiwe will keep the pattern secret from everyone in the house."
+    ],
+    "correct_letter": "B",
+    "explanation": "시장 손님들이 이 매트를 만드는 다른 사람이 있는지 묻지만 린디웨는 어깨만 으쓱한다는 대목은 이 문양을 아는 사람이 거의 없음을 암시한다. 또 매트를 반쯤 짠 채 두고 아침마다 뜨거운 물에 손마디를 녹여야 컵을 쥘 수 있다는 묘사는 손의 힘이 약해지고 있음을 보여 준다. 두 단서를 합치면 '문양이 손 안에서 잠든다'는 표현은 기술이 사라질 위험을 뜻하므로 정답은 B이다. A와 C는 '잠'을 휴식이나 무의식적 숙련으로 읽은 오답이고, D는 비밀 유지의 근거가 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "urgent"
+   ],
+   "devices": [
+    "metaphor",
+    "personification"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-05-057",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-05-057",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 56,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Eulalio",
+      "Pilar"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "spanish_iberian"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "an apartment stairwell",
+     "relationship": "an author and her translator",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "an apartment stairwell in the Cornish coast; an author and her translator over how to mark an anniversary"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Anniversaries matter to me. Ten years after my first novel appeared, I wanted a dinner on the harbor, speeches, a printed card with both our names. Eulalio, who had carried my sentences into English through three books, wanted nothing. We argued on the stairwell of my lodging on the Cornish coast, I on the landing, he two steps below, the skylight rattling in the sea wind. I reminded him that reviewers had praised the music of the English pages, and that he had asked for his name to be printed small on the title page, then smaller. He said that was rather the point. His part, he told me, had always been a lamp in the next room: enough to read by, never meant to be looked at. I wanted to argue that lamps can be thanked. Instead I asked him to write the card himself, in whatever size he liked. Overhead, a gull walked the slate roof, its claws scraping at every step.",
+    "question": "As used in the text, the phrase “a lamp in the next room” most nearly suggests",
+    "options": [
+     "a role that lets others see clearly while it remains out of sight itself.",
+     "a steady companionship that keeps Pilar from feeling alone as she writes.",
+     "a modest talent Eulalio hides because he doubts the quality of his work.",
+     "a sense of exclusion from the celebration Pilar has planned for the book."
+    ],
+    "correct_letter": "A",
+    "explanation": "서평가들은 영어판의 음악성을 칭찬했지만 에울랄리오는 제목 페이지에 자기 이름을 점점 더 작게 넣어 달라고 했고, '그게 바로 핵심'이라고 말한다. 이어 그는 자신의 몫을 '읽기에 충분하지만 바라보라고 있는 것은 아닌' 옆방의 등불에 비유한다. 두 단서를 연결하면 이 표현은 남이 잘 보도록 돕되 자신은 드러나지 않는 역할을 뜻하므로 정답은 A이다. B는 곁에 있는 존재라는 인상만 따랐고, C는 그가 자신의 실력을 의심한다는 근거가 없으며, D는 '옆방'을 소외로 잘못 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "gentle"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-05-078",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-05-078",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "poetry",
+    "seed": {
+     "index": 77,
+     "genre": "poetry",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Colette",
+      "Odile"
+     ],
+     "nameCultures": [
+      "french",
+      "french"
+     ],
+     "locale": "Lyon",
+     "setting": "a courtyard with a dry fountain",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "when a gift is returned instead of thanked",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a courtyard with a dry fountain in Lyon; a pair of lifelong friends who rarely speak when a gift is returned instead of thanked"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Colette left the parcel on the fountain's dry lip,\nthe blue scarf I knitted through a Lyon winter,\nfolded back into its paper, unworn.\nForty years across one courtyard,\nperhaps a hundred sentences between us.\nThe neighbors call it pride. I nearly did.\nBut the wool has taken on her lavender,\nas if it slept a while in her drawer,\nand tucked in the last fold, a strip of lace\nworked in the pattern her mother taught us both,\nColette and Odile, nine years old, sharing one needle.\nI sit beside the basin that holds no water\nand count the stitches she added, row by row,\nuntil the bells at Saint-Jean begin.",
+    "question": "Which choice best describes the speaker's attitude toward Colette's return of the scarf?",
+    "options": [
+     "Wounded, regarding the returned scarf as proof of Colette's lasting pride.",
+     "Tender, reading the scarf's return as a silent and generous answer.",
+     "Bewildered, unable to say why Colette would refuse a handmade gift.",
+     "Resigned, accepting the return as typical of a fading friendship."
+    ],
+    "correct_letter": "B",
+    "explanation": "화자는 이웃들이 오만이라 부르고 자신도 그렇게 부를 뻔했다고 인정하지만, 'But' 이후 스카프에 콜레트의 라벤더 향이 배어 있고 두 사람이 어릴 때 함께 배운 문양의 레이스가 끼워져 있음을 발견한다. 마지막에 그 레이스의 코를 한 줄씩 세는 모습까지 연결하면 화자는 돌려준 스카프를 말 없는 다정한 응답으로 받아들이고 있으므로 정답은 B이다. A는 화자가 스스로 부정한 해석을 택한 오답이고, C는 화자가 반환의 의미를 이해하고 있다는 점을 놓쳤다. D는 40년 우정이 이어지고 있다는 단서와 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "contemplative"
+   ],
+   "devices": [
+    "imagery",
+    "symbolism"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-05-093",
+   "task": "rewrite-014",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-05-093",
+    "batchId": "lit40-medium-05",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 92,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Anahera",
+      "Astrid"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a cemetery gate",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a cemetery gate in Bergen; a young apprentice and a master carpenter over how to mark an anniversary"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Astrid distrusted new gates. For forty years she had kept the oak gate of the Bergen cemetery standing by replacing a single rotten slat each spring, so that hardly a board of the first gate remained, though no mourner could have said when it changed. Her apprentice, Anahera, wanted the gate's hundredth year marked by something people would notice: a carved arch, gilt letters, a ribbon for the mayor to cut. Astrid listened, then handed her a plane and one slat sawn from the same stand of oak her own teacher had used. Anahera grumbled through the planing. When she fitted the board, its grain ran almost seamlessly into the slat beside it, which bore a faint carpenter's mark she did not recognize. Astrid touched the mark and said it was older than either of them. That evening the gate swung shut behind the last visitors, and the hinges, oiled that morning, made no sound at all.",
+    "question": "In the text, the cemetery gate most likely symbolizes",
+    "options": [
+     "a continuity sustained through small repairs handed down across generations.",
+     "Astrid's stubborn refusal to accept any change to the town's old customs.",
+     "the lasting grief of the mourners who pass through the cemetery each day.",
+     "a fading craft that younger carpenters such as Anahera no longer value."
+    ],
+    "correct_letter": "A",
+    "explanation": "아스트리드는 40년 동안 해마다 판자 하나씩만 갈아 문을 유지해 원래 판자는 거의 남지 않았지만 아무도 바뀐 시점을 알지 못한다. 또 그녀의 스승이 쓰던 숲의 참나무 판자를 아나헤라가 끼우자 결이 이어지고, 옆 판자에는 두 사람보다 오래된 목수의 표식이 남아 있다. 두 단서를 연결하면 문은 작은 보수가 세대를 거쳐 전해지며 이어지는 연속성을 상징하므로 정답은 A이다. B는 아스트리드가 실제로는 매년 변화를 주고 있다는 점을 놓쳤고, C는 배경인 묘지만 보고 고른 오답이며, D는 아나헤라가 투덜대면서도 작업을 해낸다는 점과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "calm",
+    "reverent"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-04-094",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 길이 불균형(최장/최단 1.88 > 1.8)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-080",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(4건 이미 같은 문두)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

@@ -1,6 +1,6 @@
 # Alton Education — DB 스키마 초안 (001-schema-design)
 
-**이 문서는 사람 검토 전 단계다. 마이그레이션 파일이나 코드는 아직 없다.**
+> **문서 상태: 폐기된 초기 초안·신규 구현 금지.** 현재 구현 구조를 이해하는 참고자료로만 보존한다. `credit_balance`, Calendly 중심 예약, 결합된 enrollment 등은 v3와 충돌한다. 신규 스키마는 `../2026-08-29-r0-approval-and-technical-validation-package.md`의 Gate B 절차와 `../2026-08-29-developer-handoff-v3.md`를 따른다.
 
 목업 HTML 7개의 `<script>`에 하드코딩된 데이터 구조를 전부 찾아 분석한 뒤 설계했다. 원본 하드코딩 변수명(`CURRICULUM_DOCS_T`, `MY_SUBJECTS_T` 등)은 각 테이블 설명에 "목업 근거"로 남겨서 대조하기 쉽게 했다.
 

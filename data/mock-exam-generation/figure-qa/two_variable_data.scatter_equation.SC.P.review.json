@@ -1,0 +1,23 @@
+{
+  "itemId": "two_variable_data.scatter_equation.SC.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "d172796f966e7750caf4497c3ed45afc357f7062d4ffa71cebe17a2d89b58416",
+  "samples": [
+    "two_variable_data.scatter_equation.SC.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "추세선이 (0,25)와 (10,10) 격자점을 지나고 x=12에서 7로 끝남. 기울기 -1.5, y=-1.5x+25, y=11.5 → x=9 = 정답 D(9). 점 높이·눈금 일치, 데스크톱·375px 모두 판독 가능. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+}

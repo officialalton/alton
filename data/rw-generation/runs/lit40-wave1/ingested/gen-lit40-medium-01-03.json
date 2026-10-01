@@ -1,0 +1,841 @@
+{
+ "taskId": "gen-lit40-medium-01-03",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-01-041",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-041",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 40,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Priya",
+      "Marlon"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "caribbean"
+     ],
+     "locale": "Surabaya",
+     "setting": "a tea plantation",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "when a child's question exposes an adult's evasion",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a tea plantation in Surabaya; a mayor and the town's only doctor when a child's question exposes an adult's evasion"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Why does a man wear a hat indoors? My daughter, Priya, asked this of Mayor Marlon one wet afternoon in the drying shed of the tea estate above Surabaya, where I had come, as the town's only doctor, to discuss the fever in the pickers' quarters. Marlon laughed and tipped the wide straw brim lower. He told me the clinic would get its new beds after the harvest, the same promise he had made after the last harvest. Each time I pressed him on the numbers, he adjusted the hat, and its shadow slid across his eyes like a shutter. Later, walking down between the rows, Priya said she thought he must have been cold. I told her yes, perhaps. But I had noticed that when the estate owner arrived in his car, Marlon took the hat off at once and held it against his chest, his face suddenly bare and eager.",
+    "question": "Based on the text, the mayor's hat most likely represents which of the following?",
+    "options": [
+     "The authority Marlon holds over the pickers and the clinic",
+     "Marlon's habit of concealing himself from people he owes",
+     "The damp, chilly weather that fills the drying shed",
+     "Marlon's embarrassment at being questioned by a child"
+    ],
+    "correct_letter": "B",
+    "explanation": "Marlon은 의사가 숫자를 따질 때마다 모자를 고쳐 써 그림자로 눈을 가리고, 약속은 매번 미뤄진다. 반면 농장주가 오자 즉시 모자를 벗고 맨얼굴을 드러낸다. 두 장면을 연결하면 모자는 자신에게 책임을 묻는 사람들 앞에서 자신을 숨기는 태도를 나타내므로 B가 정답이다. A는 권위를, C는 Priya의 순진한 해석을, D는 아이의 질문만을 근거로 한 오답이다."
+   },
+   "notes": [],
+   "tone": [
+    "observant",
+    "wry"
+   ],
+   "devices": [
+    "symbolism",
+    "simile",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-042",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-042",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 41,
+     "genre": "memoir",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Yuying",
+      "Camryn"
+     ],
+     "nameCultures": [
+      "chinese",
+      "african_american"
+     ],
+     "locale": "the Mississippi Delta",
+     "setting": "a crowded wedding hall",
+     "relationship": "a daughter and her absent father's friend",
+     "conflict": "over blame for a lost opportunity",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a crowded wedding hall in the Mississippi Delta; a daughter and her absent father's friend over blame for a lost opportunity"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "“He would have come, Yuying, if the river had let him,” Camryn says, and you do not believe him. The wedding hall is so crowded that the fiddlers must lean back against the wall, yet beside you one chair stands empty, a white card propped upon it bearing your father's name. You remember the letter from the conservatory in Memphis, the one that arrived the spring your father took the family savings downriver and did not return. Camryn had travelled with him that spring; you have always held him half to blame. Now he rests his hand upon the empty chair as he speaks, the way a man steadies himself against a rail. When the dancing begins and a cousin tries to borrow the chair, Camryn stops her gently. Leave it, he tells her. You notice that his own glass has stood untouched all evening, and that he will not look at the card.",
+    "question": "Based on the text, the empty chair most likely symbolizes which of the following?",
+    "options": [
+     "The narrator's lost chance to study at the conservatory",
+     "The crowding of the hall and the family's lack of money",
+     "An unresolved loss that weighs on Camryn as well as Yuying",
+     "Camryn's wish to take the father's place in the family"
+    ],
+    "correct_letter": "C",
+    "explanation": "빈 의자에는 떠나 돌아오지 않은 아버지의 이름표가 놓여 있고, Yuying은 그 일로 Camryn을 탓해 왔다. 그런데 Camryn은 의자에 기대듯 손을 얹고, 사촌이 의자를 가져가려 하자 막으며, 술잔도 건드리지 않은 채 이름표를 보지 못한다. 이 단서들을 이으면 의자는 두 사람 모두가 떨치지 못한 상실을 상징하므로 C가 정답이다. A는 아버지의 부재가 낳은 결과 하나만 본 것이고, B와 D는 지문의 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "somber",
+    "reproachful"
+   ],
+   "devices": [
+    "symbolism",
+    "second-person narration",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-043",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-043",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 42,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "second",
+     "styleEra": "late_20c",
+     "names": [
+      "Mateo",
+      "Rafaela"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a weaving cooperative",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "while waiting for important news",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a weaving cooperative in Lisbon; a gardener and the house's new owner while waiting for important news"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three rules governed the old weaving house in Lisbon, and you learned them on your first day: no lamp after midnight, no cloth cut before it is finished, and no news spoken until it is certain. Rafaela, who had bought the house that winter, kept all three. Each morning she climbed to the loom room while Mateo, the gardener, pruned the lemon trees below, and each morning she wove one more row of a blue cloth with no pattern anyone could name. The ship carrying her brother was weeks overdue. When Mateo asked why she did not weave something useful, a shawl or a blanket, she only said that the cloth was not finished. Rows gathered like days. Once, when a rumor of a wreck came up the hill, her hands stopped above the threads for a full hour; then she tied the next knot and went on. By midsummer, Mateo had begun bringing her a sprig of lemon blossom each dawn and laying it, without a word, beside the growing blue.",
+    "question": "Based on the text, the blue cloth most likely represents which of the following?",
+    "options": [
+     "Rafaela's wish to make the old house useful again",
+     "The strict household rules that came with the house",
+     "The friendship slowly forming between Rafaela and Mateo",
+     "Rafaela's refusal to stop expecting her brother's return"
+    ],
+    "correct_letter": "D",
+    "explanation": "Rafaela는 오빠의 배가 늦어지는 동안 매일 한 줄씩 천을 짜고, 끝나기 전에는 자르지 않는다는 규칙을 지킨다. 난파 소문에 한 시간 멈췄다가도 다시 매듭을 묶는 장면은 희망을 놓지 않는 태도를 보여 준다. 따라서 천은 오빠의 귀환을 계속 기다리는 마음을 상징하며 D가 정답이다. A는 Mateo의 제안을, B는 규칙 자체를, C는 마지막 장면의 꽃만을 근거로 한 그럴듯한 오답이다."
+   },
+   "notes": [],
+   "tone": [
+    "patient",
+    "hopeful"
+   ],
+   "devices": [
+    "symbolism",
+    "simile",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-044",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-044",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 43,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Elodie",
+      "Rangi"
+     ],
+     "nameCultures": [
+      "french",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Lyon",
+     "setting": "a school gymnasium",
+     "relationship": "a father and his stubborn son",
+     "conflict": "over how to mark an anniversary",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a school gymnasium in Lyon; a father and his stubborn son over how to mark an anniversary"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Years later, Rangi would still remember the evening his son refused to leave the gymnasium in Lyon. It was the anniversary of Elodie's death, and Rangi had planned a quiet dinner at the restaurant she had loved. The boy, fourteen and immovable, had other ideas: he wanted to shoot free throws in the empty gym where his mother had once coached, one for every year since she had been gone. Rangi argued, then pleaded, then sat on the bottom bleacher with his coat still buttoned. His son did not answer. He simply kept shooting, building a wall of silence brick by brick with every bounce of the ball. Only on the fifth shot, when the ball rolled away toward the bleachers, did Rangi stand, pick it up, and pass it back.",
+    "question": "As used in the text, the phrase “building a wall of silence brick by brick” most nearly suggests that the son",
+    "options": [
+     "was damaging the gymnasium in his anger at his father",
+     "was growing too tired to keep arguing with his father",
+     "was shutting out his father's objections through steady repetition",
+     "was quietly showing off his skill to win his father's praise"
+    ],
+    "correct_letter": "C",
+    "explanation": "아들은 아버지의 설득과 애원에 대답하지 않고, 공을 튀길 때마다 침묵을 한 겹씩 더한다. '벽돌을 한 장씩 쌓는다'는 비유는 같은 동작의 반복으로 아버지의 반대를 차단하는 모습을 나타내므로 C가 정답이다. A는 벽을 문자 그대로 받아들인 해석이고, B와 D는 지문에 피로나 과시의 단서가 없다. 아버지가 결국 공을 건네주는 결말도 아들이 쌓은 벽을 아버지가 받아들였음을 보여 준다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "tense"
+   ],
+   "devices": [
+    "metaphor",
+    "flashback"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-045",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-045",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 44,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Sigrid",
+      "Thorvald"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a lakeside dock",
+     "relationship": "a nurse and her night patient",
+     "conflict": "after an unsent apology",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a lakeside dock in Bergen; a nurse and her night patient after an unsent apology"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Night is honest. In the sanatorium above the lake outside Bergen, I learned that patients say at two in the morning what they hide by daylight. Thorvald, my night patient, could not sleep unless I wheeled him to the end of the dock, where the water lay black and still. On the fourth night he showed me an envelope addressed to his brother, sealed and stamped and eleven years old. He had written it the week after their quarrel. He never mailed it, he said, and his brother had died the following spring. He held it on his blanket while he talked, and I understood that the apology had become an anchor he dragged behind him, slowing every hour he had left. Before dawn he asked me, Sigrid, to keep it for him. I put it in my apron pocket, where it weighed almost nothing.",
+    "question": "As used in the text, the phrase “an anchor he dragged behind him” most nearly suggests that the unsent apology was",
+    "options": [
+     "a source of steadiness that kept Thorvald calm at night",
+     "a memory Thorvald was ready to throw into the lake",
+     "a hope of reconciliation that still guided his choices",
+     "a weight of regret that kept holding Thorvald back"
+    ],
+    "correct_letter": "D",
+    "explanation": "Thorvald는 형과 다툰 뒤 쓴 사과 편지를 11년 동안 부치지 못했고, 형은 이미 세상을 떠났다. 화자는 그 사과가 남은 시간을 늦추며 끌고 다니는 닻이 되었다고 말하는데, 이는 그를 붙잡는 후회의 무게를 뜻하므로 D가 정답이다. A는 닻의 '안정' 의미에 끌린 오답이고, B와 C는 형의 죽음으로 화해의 가능성이 사라졌다는 점과 맞지 않는다. 편지를 Sigrid에게 맡기자 거의 무게가 없었다는 대비도 이 해석을 뒷받침한다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "intimate"
+   ],
+   "devices": [
+    "metaphor",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-046",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-046",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 45,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Santiago",
+      "Ottavio"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "italian"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a clock-maker's shop",
+     "relationship": "an immigrant father and his English-speaking daughter",
+     "conflict": "after a quiet act of generosity",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a clock-maker's shop in Chicago's South Side; an immigrant father and his English-speaking daughter after a quiet act of generosity"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who pays a clockmaker for the hours he gives away?\nMy father, Santiago, bent above his bench\non Forty-Third Street, where the trains shook dust\nfrom the rafters into every open case.\nOttavio came in winter with a watch\nhis wife had worn, its mainspring broken, its glass\nclouded like a frozen pond.\nHe counted out his nickels on the counter.\nMy father pushed them back without a word\nand worked past closing, past supper, past the lamps,\nspending his minutes like coins on a stranger\nwhile I translated nothing, for nothing needed saying.\nWhen the watch ticked, Ottavio wept in Italian.\nMy father answered him in Spanish.\nI stood between them with my English,\nthe only one who thought words were required.",
+    "question": "As used in the text, the phrase “spending his minutes like coins on a stranger” most nearly suggests that Santiago was",
+    "options": [
+     "giving his own time freely in place of taking payment",
+     "wasting time carelessly on a repair he did not value",
+     "charging Ottavio for every minute of his labor",
+     "hurrying to finish the repair so he could close"
+    ],
+    "correct_letter": "A",
+    "explanation": "Santiago는 Ottavio가 내민 동전을 말없이 돌려주고, 가게 문을 닫은 뒤에도 늦게까지 시계를 고친다. 그러므로 '분을 동전처럼 쓴다'는 비유는 돈 대신 자기 시간을 선물처럼 내어 주었다는 뜻이며 A가 정답이다. C는 동전이라는 단어에 끌린 오답이고, B와 D는 정성껏 오래 일한 장면과 어긋난다. 첫 행의 질문도 대가 없이 내어 준 시간이라는 주제를 미리 보여 준다."
+   },
+   "notes": [],
+   "tone": [
+    "reverent",
+    "tender"
+   ],
+   "devices": [
+    "simile",
+    "rhetorical question",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-048",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-048",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 47,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Vikram",
+      "Ananya"
+     ],
+     "nameCultures": [
+      "indian_subcontinent",
+      "indian_subcontinent"
+     ],
+     "locale": "Mumbai",
+     "setting": "a monastery guesthouse",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "about teaching a skill that is dying out",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a monastery guesthouse in Mumbai; a violin student and an exacting teacher about teaching a skill that is dying out"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Four hours a day, six days a week, no recordings: those were Ananya's conditions when she agreed to teach me. We met in the guesthouse of a small monastery on the edge of Mumbai, where the monks let her use a whitewashed room in exchange for playing at their evening prayers. She taught a way of tuning and bowing that her own teacher had learned in a village whose name I could not find on any map. Nobody else I knew played like that anymore. When I asked why she would not let me record her, she said a tape would teach my ears but not my hands. Vikram, she would say, again, and correct my wrist with a pencil tap until I hated the sound of it. Only much later did I see that the old style lived in her fingers like a language with one speaker left.",
+    "question": "As used in the text, the phrase “a language with one speaker left” most nearly suggests that the old style was",
+    "options": [
+     "a technique so complex that it needed translation",
+     "a kind of music Ananya refused to share with others",
+     "a rare practice kept alive almost entirely by one person",
+     "a habit Ananya found difficult to explain in words"
+    ],
+    "correct_letter": "C",
+    "explanation": "지문은 그 연주법이 지도에도 없는 마을에서 전해졌고 이제 그렇게 연주하는 사람이 거의 없다고 말한다. 따라서 화자 한 명만 남은 언어라는 비유는 거의 한 사람에 의해서만 이어지는 사라져 가는 기술을 뜻하며 C가 정답이다. A는 '언어'를 번역과 연결한 오답이고, B는 녹음을 거부한 점만 보고 Ananya가 직접 가르친다는 사실을 놓친 것이다. D는 그녀가 말 대신 손으로 가르친 장면을 지나치게 해석한 것이다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "admiring"
+   ],
+   "devices": [
+    "simile",
+    "retrospection"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-049",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-049",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "fable_or_folktale_retelling",
+    "seed": {
+     "index": 48,
+     "genre": "fable_or_folktale_retelling",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Faisal",
+      "Edith"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "english"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "a stone bridge",
+     "relationship": "cousins reunited at a funeral",
+     "conflict": "after a competition one of them lost on purpose",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a stone bridge in the Cornish coast; cousins reunited at a funeral after a competition one of them lost on purpose"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "So you let me win, Edith said, the moment Faisal stepped onto the old stone bridge. They had not spoken in nine years, not since the summer their grandmother set them to race across the Cornish headland for her silver whistle. Faisal had been faster; everyone knew it. Yet a stride from the bridge he had stumbled, and Edith had touched the parapet first. Now the grandmother lay in the churchyard behind them, and the whistle hung at Edith's neck. All these years, she said, the prize had felt like borrowed bread, filling her mouth but never her stomach. Faisal looked down at the river. He told her he had seen how badly she needed something of her own that year. Edith unhooked the whistle and pressed it into his palm, and for once he did not give it back.",
+    "question": "As used in the text, the phrase “borrowed bread” most nearly suggests that Edith's victory was",
+    "options": [
+     "a gift she had been eager to return to her grandmother long ago",
+     "a reward she had always been required to share with Faisal",
+     "a prize whose value faded slowly as she grew older",
+     "a win she could not fully enjoy because it was not earned"
+    ],
+    "correct_letter": "D",
+    "explanation": "Edith는 더 빠른 Faisal이 결승 직전에 일부러 넘어져 이겼다는 사실을 알고 있었다. 빌린 빵이 입은 채워도 배는 채우지 못했다는 표현은 스스로 얻지 않은 승리라 진정한 만족을 주지 못했다는 뜻이므로 D가 정답이다. A는 할머니에게 돌려주려 했다는 근거가 없고, B는 '빌렸다'를 공유로 오해한 것이다. C는 시간이 흐르며 가치가 줄었다는 해석으로, 처음부터 공허했다는 지문 내용과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "rueful",
+    "reconciling"
+   ],
+   "devices": [
+    "metaphor",
+    "flashback"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-057",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-057",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 56,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Shigeru",
+      "Chiyo"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Kyoto",
+     "setting": "a community garden",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "about the cost of a scholarship or opportunity",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a community garden in Kyoto; two musicians in a failing duo about the cost of a scholarship or opportunity"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Smell of wet soil and crushed shiso rose around them as Shigeru and Chiyo knelt in their plot of the community garden in Kyoto, pulling weeds between the rows of eggplant. For an hour they joked about their last concert, where the audience had numbered eleven, including a sleeping baby, and Chiyo imitated the hall manager's sigh until Shigeru dropped his trowel laughing. Then she mentioned the letter. A conservatory in Vienna had offered her a full scholarship beginning in January; it covered one student, not a duo. Shigeru went on weeding. He asked, evenly, when she would need to answer, and whether her cello would travel in the hold or on a seat. Each question was polite and practical, and each one seemed to set him a little further from her.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From bitter complaint about the concert to warm encouragement",
+     "From playful teasing to guarded restraint after Chiyo's news",
+     "From nervous tension to calm acceptance of a shared plan",
+     "From nostalgic reflection to open celebration of Chiyo's success"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에서 두 사람은 관객 열한 명이었던 공연을 두고 농담하며 웃는다. Chiyo가 혼자만 받을 수 있는 장학금 소식을 꺼내자 Shigeru는 담담하고 실무적인 질문만 하며 감정을 감춘다. 따라서 장난스러운 분위기에서 절제되고 경계하는 분위기로 바뀌는 B가 정답이다. A와 D는 격려나 축하를, C는 함께 세운 계획을 말하지만 지문의 거리감과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "guarded"
+   ],
+   "devices": [
+    "tone shift",
+    "sensory imagery",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-058",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-058",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 57,
+     "genre": "poetry",
+     "pov": "second",
+     "styleEra": "early_20c",
+     "names": [
+      "Nayeli",
+      "Elan"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "indigenous_american"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a quiet library",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "over a decision made without asking",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a quiet library in Albuquerque; a stepfather and his stepdaughter over a decision made without asking"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Once, I loved the library on Central Avenue\nfor its hush, its radiators ticking like patient clocks,\nthe way Elan would leave me in the stacks\nand read the paper by the window, never hurrying.\nWe had a rhythm there: I chose, he signed.\nThen on a Saturday in March he said,\nbetween the atlases and the encyclopedias,\nthat he had sold the house, that we would move\nto Denver in June, that it was settled.\nSettled. As if I were a column he had added.\nNow the radiators only hiss.\nThe books lean on each other like strangers in a line.\nI, Nayeli, twelve, take down a map\nand trace a road I did not choose.",
+    "question": "Which choice best describes the shift in tone that occurs in the poem?",
+    "options": [
+     "From restless boredom to eager curiosity about a new city",
+     "From quiet fear to comforting reassurance from Elan",
+     "From fond nostalgia to resentful bitterness after Elan's news",
+     "From playful humor to calm resignation about the move"
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분에서 화자는 도서관의 고요함과 Elan과의 리듬을 애정 어린 회상으로 그린다. Elan이 묻지도 않고 이사를 결정했다고 말한 뒤, 화자는 'Settled'를 되뇌며 자신을 더해진 숫자 한 줄에 비유하고, 라디에이터는 '쉭쉭거리기만' 한다. 따라서 애정 어린 그리움에서 원망 섞인 씁쓸함으로 바뀌는 C가 정답이다. D는 체념으로 보일 수 있지만 원망이 드러나는 표현을 놓쳤고, A와 B는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "nostalgic",
+    "resentful"
+   ],
+   "devices": [
+    "tone shift",
+    "simile",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-059",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-059",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "drama",
+    "seed": {
+     "index": 58,
+     "genre": "drama",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Lan",
+      "Bartolo"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "latin_american"
+     ],
+     "locale": "Surabaya",
+     "setting": "a cemetery gate",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a cemetery gate in Surabaya; a retired judge and a young clerk about who gets credit for shared work"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "BARTOLO: They printed your name alone, Judge, on the front page.\n(Evening. The iron gate of a cemetery in Surabaya. LAN, a retired judge, leans on her cane. BARTOLO, her young clerk, holds a folded newspaper.)\nLAN: (lightly) Newspapers like a single name. It fits the column better.\nBARTOLO: I drafted three hundred pages of that opinion. You know I did.\nLAN: (still amused) And I signed them. That is how it is done, my boy.\nBARTOLO: My father is buried here. I promised him our family name would mean something one day. (He holds out the paper.) Read it to him.\n(LAN stops smiling. A long pause. She takes the newspaper, studies it, then lowers it.)\nLAN: (quietly) Give me your pen. Tomorrow I will write to the editor myself, and the correction will carry both our names.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From fierce anger to forced cheerfulness at the gate",
+     "From shared grief to hopeful celebration of the ruling",
+     "From formal respect to open hostility between the two",
+     "From dismissive amusement to sober acknowledgment of the clerk"
+    ],
+    "correct_letter": "D",
+    "explanation": "처음에 Lan은 '가볍게', '여전히 재미있다는 듯' 말하며 Bartolo의 기여를 관행이라고 넘긴다. Bartolo가 아버지의 무덤 앞에서 신문을 읽어 달라고 하자, 지문은 Lan이 웃음을 멈추고 오래 침묵한 뒤 '조용히' 말한다고 지시한다. 따라서 무시하는 듯한 여유에서 진지한 인정으로 바뀌는 D가 정답이다. A, B, C는 분노, 축하, 적대감처럼 지문에 없는 감정을 내세운다."
+   },
+   "notes": [],
+   "tone": [
+    "dismissive",
+    "solemn"
+   ],
+   "devices": [
+    "tone shift",
+    "stage directions",
+    "dialogue"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-01-060",
+   "task": "gen-lit40-medium-01-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-01-060",
+    "batchId": "lit40-medium-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 59,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Bokhee",
+      "Winston"
+     ],
+     "nameCultures": [
+      "korean",
+      "caribbean"
+     ],
+     "locale": "Taipei",
+     "setting": "a barbershop",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "after a harvest, voyage or season that went badly",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a barbershop in Taipei; a retired sailor and his neighbor after a harvest, voyage or season that went badly"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three chairs, two mirrors, one radio tuned to the shipping forecast: that is the whole of Winston's barbershop on a narrow lane in Taipei, and for years I came less for the haircut than for his stories. He had been a sailor for thirty years, and he told those years like jokes: the typhoon off Okinawa, the cook who kept a parrot, the captain who could not swim. Last month, when I came in, Bokhee from the noodle stall next door was already in the chair, and Winston was laughing at something she had said. Then she asked about his nephew's boat, the one that had gone out in August and come back with half its crew. Winston set the scissors down. He finished her haircut without another word, and when I took her place, he cut my hair the way one folds a letter one does not want to reread.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From lively storytelling to heavy silence when a recent loss is raised",
+     "From bitter regret to amused acceptance of his years at sea",
+     "From casual friendliness to open anger at Bokhee's rudeness",
+     "From nervous chatter to calm confidence about his nephew's future"
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 Winston은 30년 항해를 농담처럼 들려주고 Bokhee의 말에 웃는다. Bokhee가 선원 절반을 잃고 돌아온 조카의 배를 묻자 그는 가위를 내려놓고 아무 말 없이 머리를 마저 자른다. 따라서 활기찬 이야기에서 무거운 침묵으로 바뀌는 A가 정답이다. B는 변화 방향이 반대이고, C의 분노와 D의 자신감은 지문에 나타나지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "genial",
+    "somber"
+   ],
+   "devices": [
+    "tone shift",
+    "simile",
+    "listing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-01-047",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(11단어, 다음 9)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-050",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-051",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-052",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-053",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-054",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-055",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-01-056",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(13단어, 다음 10)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

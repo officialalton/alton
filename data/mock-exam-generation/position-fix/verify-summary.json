@@ -1,0 +1,69 @@
+{
+ "spentUsd": 25.01,
+ "cap": 25,
+ "strata": {
+  "math|refs": {
+   "total": 191,
+   "verified": 63,
+   "errors": 3,
+   "errorRate": 0.0476,
+   "expandedToFull": true,
+   "applied": 60,
+   "excludedFailed": 3,
+   "excludedUnverified": 128
+  },
+  "rw|plain": {
+   "total": 266,
+   "verified": 20,
+   "errors": 2,
+   "errorRate": 0.1,
+   "expandedToFull": false,
+   "applied": 264,
+   "excludedFailed": 2,
+   "excludedUnverified": 0
+  },
+  "rw|refs": {
+   "total": 535,
+   "verified": 40,
+   "errors": 2,
+   "errorRate": 0.05,
+   "expandedToFull": false,
+   "applied": 533,
+   "excludedFailed": 2,
+   "excludedUnverified": 0
+  },
+  "rw|ai": {
+   "total": 87,
+   "verified": 87,
+   "errors": 3,
+   "errorRate": 0.0345,
+   "expandedToFull": false,
+   "applied": 84,
+   "excludedFailed": 3,
+   "excludedUnverified": 0
+  },
+  "math|plain": {
+   "total": 26,
+   "verified": 20,
+   "errors": 3,
+   "errorRate": 0.15,
+   "expandedToFull": false,
+   "applied": 23,
+   "excludedFailed": 3,
+   "excludedUnverified": 0
+  },
+  "math|ai": {
+   "total": 6,
+   "verified": 6,
+   "errors": 0,
+   "errorRate": 0,
+   "expandedToFull": false,
+   "applied": 6,
+   "excludedFailed": 0,
+   "excludedUnverified": 0
+  }
+ },
+ "blindMismatchAmongVerified": 0,
+ "verifiedTotal": 236,
+ "applyCount": 970
+}
