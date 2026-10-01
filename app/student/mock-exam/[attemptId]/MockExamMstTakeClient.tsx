@@ -377,7 +377,7 @@ export default function MockExamMstTakeClient({
         <main className="max-w-[880px] min-w-0 flex-1 px-8 py-6" style={whiteboardOpen ? { marginRight: "min(436px, 40vw)" } : undefined}>
           {item ? (
             <>
-              {/* 콜리지보드식 번호 막대: 검은 번호 칸 + 회색 막대. 왼쪽에 오류 신고, 오른쪽 끝에 문제 저장(별). 검토 표시는 아래 Solve Later. */}
+              {/* 콜리지보드식 번호 막대: 검은 번호 칸 + 회색 막대. 오른쪽 끝에 오류 신고·문제 저장(별). 검토 표시는 아래 Solve Later. */}
               <div className="mb-5 flex items-stretch bg-[#cfcfcf]" data-testid="mst-qbar">
                 <div
                   className="flex min-w-[38px] items-center justify-center bg-[#111] px-2.5 py-1 font-serif text-[17px] font-bold text-white"
@@ -386,6 +386,7 @@ export default function MockExamMstTakeClient({
                   {item.moduleSeq}
                 </div>
                 <div className="flex flex-1 items-center gap-0.5 px-2">
+                  <div className="flex-1" />
                   <ProblemErrorReportButton
                     key={item.setItemId}
                     variant="icon"
@@ -393,7 +394,6 @@ export default function MockExamMstTakeClient({
                     role="student"
                     context={{ source: "mock_exam", attemptId: state.attemptId, setItemId: item.setItemId, problemId: item.problemId }}
                   />
-                  <div className="flex-1" />
                   <button
                     type="button"
                     onClick={() => void toggleSaved(item.setItemId)}

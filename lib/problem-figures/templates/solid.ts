@@ -166,7 +166,7 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
         rx = Math.max(CYL_MIN_SIDE / 2, (diameterVal * pxPerUnit) / 2);
         h = Math.max(CYL_MIN_SIDE, h0 * pxPerUnit);
       }
-      const ry = Math.max(14, Math.round(rx * 0.3));
+      const ry = Math.max(10, Math.round(rx * 0.2)); // 뚜껑 타원을 납작하게 — 겉모습 높이와 치수(중심~중심)의 차이를 줄인다(2026-10-02 오너 재지적).
       const c: Pt = [180, 70];
       ell(c, rx, ry);
       sheet.line([c[0] - rx, c[1]], [c[0] - rx, c[1] + h]); sheet.line([c[0] + rx, c[1]], [c[0] + rx, c[1] + h]);
@@ -177,6 +177,9 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       else if (d.diameter) { dimLine([c[0] - rx, c[1]], [c[0] + rx, c[1]], "diameter"); dimLabel(c[0], c[1] - 13, d.diameter, "지름 라벨"); }
       if (d.height) {
         const hx = c[0] + rx + 18;
+        // 보조선: 윗면·아랫면 타원 중심 높이에서 치수선까지 — 재는 구간(중심~중심)을 눈으로 따라갈 수 있게 한다.
+        sheet.line([c[0] + rx, c[1]], [hx, c[1]], { w: 0.8, dashed: true });
+        sheet.line([c[0] + rx, c[1] + h], [hx, c[1] + h], { w: 0.8, dashed: true });
         dimLine([hx, c[1]], [hx, c[1] + h], "height");
         dimLabel(hx + 8 + halfDiag(d.height), c[1] + h / 2, d.height, "높이 라벨");
       }
