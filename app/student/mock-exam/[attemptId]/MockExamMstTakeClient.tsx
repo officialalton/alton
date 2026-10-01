@@ -130,13 +130,33 @@ export default function MockExamMstTakeClient({
     }
   }
 
+  // 답 없이 Guessed 만 눌러 둔 채 다른 문항으로 넘어가면 그 표시는 자동 해제한다.
+  const prevItemRef = useRef<string | null>(null);
+  useEffect(() => {
+    const cur = state.items[cursor]?.setItemId ?? null;
+    const prev = prevItemRef.current;
+    prevItemRef.current = cur;
+    if (prev && prev !== cur && guessedMap[prev] && (responses[prev] ?? "") === "") {
+      setGuessedMap((p) => ({ ...p, [prev]: false }));
+      void toggleMockExamGuessedAction(state.attemptId, prev, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cursor]);
+
   async function saveAnswer(setItemId: string, value: string) {
     setResponses((p) => ({ ...p, [setItemId]: value }));
     const r = await saveMockExamAnswerAction(state.attemptId, setItemId, value);
     if (!r.ok) {
       setError(r.error);
       await recoverIfLocked(r.error);
-    } else setError(null);
+    } else {
+      setError(null);
+      // 답을 지우면 "찍음" 표시도 함께 해제한다(답 없는 Guessed 는 의미가 없다).
+      if (value === "" && guessedMap[setItemId]) {
+        setGuessedMap((p) => ({ ...p, [setItemId]: false }));
+        void toggleMockExamGuessedAction(state.attemptId, setItemId, false);
+      }
+    }
   }
 
   function saveSprDebounced(setItemId: string, value: string) {

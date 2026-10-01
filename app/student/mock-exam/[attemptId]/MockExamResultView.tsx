@@ -153,7 +153,7 @@ function ItemHeader({ item, attemptId, viewerIsOwner }: { item: MockExamAttemptI
     <div className="mb-2 flex items-start justify-between gap-2">
       <div>
         <p className="text-[12px] font-bold text-grey-500">
-          {item.guessed && (
+          {item.guessed && item.response && (
             <span role="img" aria-label="Guessed" title="Marked as a guess" className="mr-1 rounded border border-grey-300 px-1 text-[10px] font-semibold text-grey-600">
               Guessed
             </span>
@@ -369,7 +369,7 @@ export default function MockExamResultView({
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const filtered = useMemo(
-    () => attempt.items.filter((i) => (filter === "incorrect" ? i.correct === false : filter === "guessed" ? i.guessed === true : true)),
+    () => attempt.items.filter((i) => (filter === "incorrect" ? i.correct === false : filter === "guessed" ? i.guessed === true && !!i.response : true)),
     [attempt.items, filter],
   );
   const selected = filtered.find((i) => i.setItemId === selectedId) ?? filtered[0] ?? null;
@@ -541,7 +541,7 @@ export default function MockExamResultView({
                             data-testid={`review-item-${it.setItemId}`}
                           >
                             <span className="w-[52px] shrink-0 text-center">
-                              {it.guessed ? (
+                              {it.guessed && it.response ? (
                                 <span role="img" aria-label="Guessed" data-testid={`review-guessed-${it.setItemId}`} className="rounded border border-grey-300 px-1 text-[10px] font-semibold text-grey-600">
                                   Guessed
                                 </span>

@@ -87,6 +87,15 @@ describe("MockExamMstTakeClient", () => {
     expect(btn).toHaveAttribute("aria-pressed", "true");
   });
 
+  it("답 없이 Guessed 만 눌러 둔 채 다음 문항으로 넘어가면 표시가 자동 해제된다", async () => {
+    guessMock.mockResolvedValue({ ok: true });
+    await renderClient(state({ items: [{ ...item("i1", 1, "rw_m1"), guessed: true }, item("i2", 2, "rw_m1")] }));
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Next question" }));
+    });
+    expect(guessMock).toHaveBeenCalledWith("att1", "i1", false);
+  });
+
   it("서버가 준 guessed 를 초기값으로 복구한다", async () => {
     await renderClient(state({ items: [{ ...item("i1", 1, "rw_m1"), guessed: true }] }));
     expect(screen.getByRole("button", { name: "Mark as guess" })).toHaveAttribute("aria-pressed", "true");
