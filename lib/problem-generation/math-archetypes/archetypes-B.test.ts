@@ -5,6 +5,7 @@ import { ARCHETYPES, EM_ARCHETYPES } from "./registry";
 import { generateOne, sweepArchetype } from "./sweep";
 import { checkBindings, verifyInstance } from "./verify";
 import { getMathSkillKinds } from "../math-compilers/kind-catalog";
+import { produceFromArchetypes } from "./bulk";
 
 const B_SKILLS = ["linear_equations_one_var", "linear_functions", "linear_equations_two_var", "systems_linear", "linear_inequalities"] as const;
 /** 카탈로그 밖 systems_linear 세부 패턴(문서 3절 제안). 컴파일러 구현 시 kind-catalog.ts 에 함께 추가한다. */
@@ -57,6 +58,25 @@ describe("B easy/medium 원형(문장 틀 = 유사문항 그룹)", () => {
   }
 });
 
+describe("B 원형 전체 돌연변이 — 검증기가 일부러 망가뜨린 문항을 모두 잡는다", () => {
+  const all = [...hardB, ...emB];
+  it("정답 키 변경·선지 중복·풀이 단계 삭제(hard)는 어느 원형에서도 통과하지 않는다", () => {
+    for (const a of all) {
+      let inst = null as ReturnType<typeof generateOne> | null; for (let s = 0; s < 40 && !(inst && inst.ok); s++) inst = generateOne(a, s);
+      if (!inst || !inst.ok) throw new Error(`생성 실패 ${a.id}`);
+      const g = inst.inst;
+      expect(verifyInstance(a, g).ok, `${a.id} 원본`).toBe(true);
+      expect(verifyInstance(a, { ...g, correctIndex: (g.correctIndex + 1) % 4 }).ok, `${a.id} 정답 키 변경`).toBe(false);
+      const dup = [...g.options]; dup[(g.correctIndex + 1) % 4] = dup[g.correctIndex]; expect(verifyInstance(a, { ...g, options: dup }).ok, `${a.id} 선지 중복`).toBe(false);
+      if ((a.difficulty ?? "hard") === "hard") expect(verifyInstance(a, { ...g, trace: g.trace.slice(0, 2) }).ok, `${a.id} 단계 부족`).toBe(false);
+      expect(verifyInstance(a, { ...g, stimulus: `${g.stimulus} 한글이 섞인 지문` }).ok, `${a.id} 한글 지문`).toBe(false);
+    }
+  });
+  it("hard 원형 메타데이터: 추가 요구 사고가 길이·숫자·계산량만을 말하지 않는다", () => {
+    for (const a of hardB) { expect(a.extraThinking, a.id).toMatch(/medium/); expect(a.extraThinking, a.id).not.toMatch(/긴 지문|복잡한 숫자|계산량/); }
+  });
+});
+
 describe("문장과 변수의 의미 일치(명사-수식 대응표 기반 기계 검사)", () => {
   const withBindings = [...hardB, ...emB].filter((a) => { for (let s = 0; s < 20; s++) { const g = generateOne(a, s); if (g.ok && g.inst.bindings?.length) return true; } return false; });
   it("대응표를 가진 원형이 있고 모두 통과한다", () => {
@@ -78,4 +98,20 @@ describe("문장과 변수의 의미 일치(명사-수식 대응표 기반 기�
     const a = withBindings[0]; const g = generateOne(a, 2); if (!g.ok) return;
     expect(verifyInstance(a, { ...g.inst, correctIndex: (g.inst.correctIndex + 1) % 4 }).ok).toBe(false);
   });
+});
+
+describe("easy/medium 원형 대량 산출 — import.ts 호환 레코드·난이도·그룹 상한", () => {
+  for (const diff of ["easy", "medium"] as const) {
+    it(`linear_functions ${diff}: 레코드 난이도·confirmed 표식·그룹당 상한`, () => {
+      const pool = emB.filter((a) => a.skill === "linear_functions" && a.difficulty === diff);
+      const want = pool.length * 4; const { records, stats } = produceFromArchetypes(pool, { runId: "t", count: want, seedStart: 0, maxPerGroup: 4 });
+      expect(records).toHaveLength(want);
+      for (const r of records) {
+        expect(r.difficulty).toBe(diff); expect((r.problem as { difficulty: string }).difficulty).toBe(diff);
+        expect((r.quality as { mockExamGeneration: { difficultyStatus: string } }).mockExamGeneration.difficultyStatus).toBe("confirmed");
+        expect(r.subpattern.startsWith(`${r.recipeId}/`)).toBe(true);
+      }
+      expect(Math.max(...Object.values(stats.byGroup))).toBeLessThanOrEqual(4);
+    });
+  }
 });
