@@ -88,3 +88,63 @@ describe("돌연변이 테스트 — 감사가 잘못된 치환을 잡아낸다"
     expect(staticAudit(e).length).toBeGreaterThan(0);
   });
 });
+
+const fx2 = JSON.parse(readFileSync(path.join(__dirname, "fixtures/position-fix-failures-round2.json"), "utf-8")) as (typeof fx[number] & { cat: string })[];
+const mk = (f: (typeof fx2)[number], ko?: string, en?: string | null) => ({ options: f.options, origIndex: f.origIndex, newIndex: f.newIndex, perm: f.perm, before: { options: f.options, explanation: f.explanation, explanationEn: f.explanationEn }, after: { options: f.perm.map((o) => f.options[o]), correctIndex: f.newIndex, explanation: ko ?? remapAll(f.explanation, f.perm).text, explanationEn: f.explanationEn === null ? null : en ?? remapAll(f.explanationEn, f.perm).text } });
+const safe = (f: (typeof fx2)[number]) => {
+  const unc = [...analyze(f.explanation).uncertain, ...analyze(f.explanationEn ?? "").uncertain];
+  return { unc, fails: staticAudit(mk(f)) };
+};
+
+describe("2차 보강 — 서브 에이전트 blocking 이슈 고정 사례", () => {
+  it("fixtures 16건", () => expect(fx2.length).toBe(16));
+  it("고정 사례의 결정: 불확실은 생략, 그 밖은 정적 감사 통과(치환 정합)", () => {
+    const skipIds = ["06a3ced4", "a19ad79c", "b43c5755", "7f8bd0b4", "9d4af989", "9d9f0889", "bbd97b1b"];
+    for (const f of fx2) {
+      const { unc, fails } = safe(f);
+      if (skipIds.includes(f.id)) expect(unc.length, f.id).toBeGreaterThan(0);
+      else { expect(unc, f.id).toEqual([]); expect(fails, f.id).toEqual([]); }
+    }
+  });
+  it("(a) 인덱스 N 은 새 위치로 치환, 'N번' 숫자 지칭은 불확실로 생략", () => {
+    expect(remapAll("정답은 B(인덱스 0)이다.", [1, 0, 2, 3]).text).toBe("정답은 A(인덱스 1)이다.");
+    expect(analyze("정답은 0번이다.").uncertain.length).toBe(1);
+    expect(analyze("정답은 3번이다.").uncertain.length).toBe(1);
+  });
+  it("(b) '선택지 3·4' 서수 나열은 불확실", () => { expect(analyze("선택지 3은 틀리고 선택지 4는 정답이다.").uncertain.length).toBe(1); expect(analyze("선택지 3·4가 오답이다.").uncertain.length).toBe(1); });
+  it("(c) 관사 A 는 치환하지 않는다: 'A box', 'A 95% confidence interval', 'A $5 fee'", () => {
+    const perm = [1, 2, 3, 0];
+    expect(remapAll("(Only when it holds, A box from a rival workshop)", perm).text).toBe("(Only when it holds, A box from a rival workshop)");
+    expect(remapAll("A 95% confidence interval is found. A $5 fee applies.", perm).text).toBe("A 95% confidence interval is found. A $5 fee applies.");
+    expect(remapAll("Choice A is wrong, so A box is not it.", perm).text).toBe("Choice D is wrong, so A box is not it.");
+  });
+  it("(d) 소유격·조사: B's 43%, Choice B's value, A는", () => {
+    const perm = [1, 2, 3, 0];
+    expect(remapAll("B's 43% exceeds. Choice C's value of 500. 정답은 A이다. A는 틀렸다.", perm).text).toBe("A's 43% exceeds. Choice B's value of 500. 정답은 D이다. D는 틀렸다.");
+  });
+  it("(e) 새 정답을 오답처럼 서술하면 감사 실패, 존재하지 않는 Choice E 는 불확실", () => {
+    const f = fx2.find((x) => x.cat === "letterForm")!;
+    const e = mk(f);
+    const L = LETTERS_FOR_TEST[f.newIndex];
+    const bad = { ...e, after: { ...e.after, explanation: e.after.explanation + ` ${L}는 오답이다.` } };
+    expect(staticAudit(bad).length).toBeGreaterThan(0);
+    expect(analyze("Choice E is added.").uncertain.length).toBe(1);
+  });
+  it("홀수 따옴표는 불확실", () => { expect(analyze('He said "A is right. Choice B.').uncertain.length).toBe(1); });
+});
+const LETTERS_FOR_TEST = "ABCD";
+
+describe("2차 돌연변이", () => {
+  it("인덱스를 치환하지 않으면 실패", () => {
+    const f = fx2.find((x) => x.cat === "index" && /인덱스/.test(x.explanation));
+    if (!f) return;
+    const good = remapAll(f.explanation, f.perm).text;
+    const stale = good.replace(/인덱스\s*\d/g, (m) => m.replace(/\d/, String(f.origIndex)));
+    expect(stale === good ? true : staticAudit(mk(f, stale)).length > 0).toBe(true);
+  });
+  it("관사 A 를 잘못 치환하면 실패", () => {
+    const f = fx2.find((x) => x.id === "4eaf03a4")!;
+    const wrong = f.explanationEn!.replace("A 95%", "D 95%");
+    expect(staticAudit(mk(f, undefined, wrong)).length).toBeGreaterThan(0);
+  });
+});

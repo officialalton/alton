@@ -9,6 +9,7 @@
 //   --publish  : 임포트 직후 confirm_and_publish_problem_version 으로 공개(모의고사 조립 후보가 되려면 필요). 기본은 초안까지만.
 //   --tag      : 시험 임포트 표식. problems.topic 에 `mockgen-test:<tag>` 를 넣어 --cleanup-tag 로 지울 수 있게 한다.
 //   --cleanup-tag <tag> : 그 표식의 시험 데이터를 삭제(로컬 전용 — 원격 URL 이면 거부).
+import { findResidue } from "../../lib/problem-generation/residue";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 
@@ -113,6 +114,8 @@ async function main() {
     const g = r.problem;
     const stimulus = g.stimulus ?? g.passage ?? "";
     const question = g.question ?? null;
+    const residue = findResidue({ passage: g.passage as string | undefined, stimulus: g.stimulus as string | undefined, question: g.question as string | undefined, options: g.options as string[] | undefined, explanation: g.explanation as string | undefined, explanationEn: (g as { explanationEn?: string }).explanationEn, statements: g.statements as string[] | undefined });
+    if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}:${x.match}`).join(", ")}`); continue; }
     const key = `${stimulus}\u0000${question ?? ""}`;
     const pool = existing.get(r.skill) ?? [];
     if (pool.some((e) => e.key === key)) { stats.skippedExisting += 1; continue; }

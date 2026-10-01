@@ -1,8 +1,16 @@
 {
- "staticOnlyCount": 891,
- "verifiedCandidates223": 223,
- "sameAsNewRules": 133,
- "differsFromNewRules": 83,
- "notShuffledUnderNewRules": 7,
- "note": "static-only 는 정적 감사만 통과(AI 검증 없음) — 반영 금지, 유료 재검증 승인 후 승격"
+ "v3Count": 1060,
+ "needsRereview": 40,
+ "byReason": {
+  "섞기 오류를 규칙 보강으로 고친 뒤 재검수": 8,
+  "새로 후보가 됨(이전 검수 없음)": 28,
+  "새 규칙에서 after 가 달라짐(이전 검수 무효)": 4
+ },
+ "byHow": {
+  "ai_verified_223": 212,
+  "subagent_pass": 783,
+  "subagent_minor_only": 65
+ },
+ "droppedFromPrevious": 24,
+ "residueExcludedFromPlan": 8
 }

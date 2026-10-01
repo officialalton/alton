@@ -43,3 +43,23 @@
 - 세트 항목·수업 매니페스트·과제·풀이판·오류 신고·판정·채점 조정은 본문을 복사하지 않고 problem_version_id 로 참조하고, 채점도 응시 시점에 버전 행의 정답을 읽는다. 따라서 이미 응시·수업·과제·신고가 걸린 버전을 제자리에서 바꾸면 학생이 고른 번호와 저장된 정오가 어긋난다. 그런 문항은 건너뛰고 원문 유지(새 버전을 만드는 대안은 현재 공개 버전만 옮기므로 이미 조립된 세트는 옛 순서 유지).
 - 반영 항목은 문항 식별(quality 의 gid), 기대하는 이전 내용(expected), 새 내용(options·correct_index·explanation·explanation_en), perm, 방식, 검증 구분을 가진다. 이전 내용이 현재와 다르면 건너뛴다(멱등·stale 방지). 이력은 append-only.
 - 위험: 규칙이 확신 못 하는 표현의 잔여 오차(전수 검증으로 통제), 기존 결함 문항(28건 표시), Math 숫자 선택지 편향은 이 방식으로 교정 불가(생성 단계 목표 위치 주입으로만 해결).
+
+## 8. 2차 보강 (서브 에이전트 891건 전수 의미 검수 이후, AI 호출 0)
+서브 검수 결과: 통과 788, minor 73, blocking 30. blocking 30건을 직접 분류했다.
+- 섞기로 새로 생긴 오류(정적 감사가 못 잡음) 13건 + 생성 잔재 4건 + 섞기와 무관한 기존 결함 12건 + 기타.
+  - (a) 0기반 인덱스·숫자 지칭: '정답은 0번', 'B(인덱스 0)', '정답은 3번'(6건)
+  - (b) '선택지 3·4' 서수 나열(1건)
+  - (c) 문장 첫머리·문중 관사 A 오치환: 'A box'→'B box', 'A 95% confidence interval'→'D 95%…'(2건)
+  - (d) 글자 뒤 형태 누락: 소유격('Choice B's', 'B's 43%'), 'A는' 조사, 영어 'Choice' 나열(5건)
+  - (e) 해설이 정답을 오답처럼 서술하는 모순(1건 포함)
+- 규칙·감사 보강(`position-fix-rules.ts`): 인덱스 N(명시적 0기반)은 새 위치로 치환 / 'N번'·'선택지 N·M' 숫자 지칭은 0·1기반이 섞여 믿을 수 없어 불확실로 생략 / 관사 A는 뒤에 숫자·$·(·명사·형용사가 오면 어디서든 비참조(단 Choice·Option·making 등 문맥이 있으면 참조) / 소유격 글자('B's')를 참조로 인식 / 존재하지 않는 Choice E 이상 언급과 홀수 따옴표는 불확실 / 감사에 '새 정답을 오답처럼 서술하는 문장' 검사 추가.
+- 고정 사례 16건(`fixtures/position-fix-failures-round2.json`) + 1차 13건, 돌연변이 테스트(인덱스 미치환, 관사 오치환, 오답 서술 주입 등). 단위 테스트 전체 통과.
+- 계획 재생성: 섞기 1118건, 생략 788건. 분포 RW 25/26/25/24%, Math 24/27/25/24%. 이전에 검수한 항목은 같은 목표 위치를 유지해 검수가 유효하도록 했다.
+
+### 생성 잔재와 해설 결함 목록
+- `position-fix/explanation-defects.json`: ① 생성 잔재 10 gid(계획 안 8건 — `</explanation>`·`<parameter name=…>`·`hard_design`·'필요 없으므로' 메모, mock passed.json 의 05041cad 는 본문·질문 필드까지 오염) ② 섞기 오류 13 gid(규칙 보강 대상) ③ 섞기와 무관한 기존 결함(blocking 12 + minor 73, 관리자 조치 대상). 잔재 있는 문항은 후보 제외. 이미 원격에 임포트된 잔재 문항이 있으면 총괄이 보관 처리해야 한다.
+- 임포트 가드: `lib/problem-generation/residue.ts`(`findResidue`, 단위 테스트 4개) + `scripts/mock-exam-generation/import.ts` 에서 잔재가 있으면 거절. 일반용 `general-generation/import.ts`(다른 worktree)에도 같은 함수를 호출하도록 합쳐야 한다.
+
+### 후보 v3
+- `apply-candidates.json`(v3) 1060건 = 이전 검수 통과(AI 검증 212 + 서브 통과 783 + minor 65)이면서 새 규칙에서 after 불변이고 잔재·기존 blocking 이 아닌 항목. minor 만 있는 문항은 섞기가 해설을 더 망가뜨리지 않으므로 후보에 둔다.
+- `apply-candidates.needs-rereview.json` 40건: 섞기 오류를 규칙 보강으로 고친 8건, 새 규칙에서 after 가 달라진 4건, 새로 후보가 된 28건 — 재검수 필요. 이전 후보 파일은 `apply-candidates.v2-verified223.json`, `apply-candidates.v2-static891.json` 으로 보존.
