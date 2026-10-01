@@ -167,8 +167,13 @@ export const ITEM = defineItem({
       lv: "medium", name: "standard_form", sprNo: SPR_NO_TABLE, structure: "ax + by (≤,<,≥,>) c 꼴 부등식을 모든 행이 만족하는 표를 고름", extra: "medium: 두 항을 계산해 합을 c 와 비교", concepts: ["부등식의 해 확인", "값표"],
       gen(rng) {
         const [X, Y] = vp(rng);
-        const a = rng.int(2, 6), b = rng.int(2, 5), c = rng.int(10, 40); const op: Op = rng.pick(["<", "<=", ">", ">="]);
-        const s: Scene = { ks: [{ a, b, c, op }], xs: pickXs(rng, 0, Math.ceil(c / a) + 1, 3), ylo: 0, yhi: Math.ceil(c / b) + 6, cols: [X, Y] };
+        let a = 0, b = 0, c = 0, op: Op = "<", s: Scene | null = null;
+        for (let t = 0; t < 200; t++) {
+          a = rng.int(2, 6); b = rng.int(2, 5); c = rng.int(10, 40); op = rng.pick(["<", "<=", ">", ">="]);
+          const cand: Scene = { ks: [{ a, b, c, op }], xs: pickXs(rng, 0, Math.ceil(c / a) + 1, 3), ylo: 0, yhi: Math.ceil(c / b) + 6, cols: [X, Y] };
+          if (cand.xs.every((x) => { let n = 0; for (let y = cand.ylo; y <= cand.yhi; y++) if (allSat(cand.ks, x, y)) n++; return n >= 2; })) { s = cand; break; }
+        }
+        if (!s) throw new GenFail("가능한 y 부족");
         return build(rng, s, { stimulus: `$$${a}${X} + ${b}${Y} ${TEX[op]} ${c}$$ ${rng.pick(INTRO)}`, question: rng.pick(Q_ALL(X, Y)), P: { a, b, c }, trace: [[`각 행에서 ${a}x + ${b}y 를 계산한다.`, "Compute the left side."], [`그 값이 ${c} ${KO[op]}고 할 수 있는지 확인한다.`, "Compare with the constant."], [`경계(같은 경우)의 포함 여부도 확인한다.`, "Check the boundary rule."]], variant: `standard_form_${op}` });
       },
     },

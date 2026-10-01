@@ -1,0 +1,41 @@
+{
+ "itemId": "probability.sequential_without_replacement.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.822Z",
+ "codeHash": "b07d0ddd4eeff24afd01554574cb7aa8973ef9a38a2a8d702a095ece014db1ec",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.sequential_without_replacement.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.sequential_without_replacement.TB.P.png",
+   "mobileFile": "probability.sequential_without_replacement.TB.P.m375.png",
+   "archetypeId": "pr.sequential_without_replacement.TB.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shows the number of game chips of each kind in a bowl. One chip is chosen at random and not put back, and then a second chip is chosen at random.",
+   "question": "What is the probability that the two game chips match, that is, both are of the same kind?",
+   "options": [
+    "2/21",
+    "277/378",
+    "115/392",
+    "101/378"
+   ],
+   "correctIndex": 3,
+   "answer": "101/378",
+   "explanation": "(1) 표에서 개수를 읽는다: red 2, black 9, blue 9, white 8. (2) 전체 = 2 + 9 + 9 + 8 = 28 이다. (3) 같은 종류가 두 번 나오는 경우는 종류별로 배반이다. (4) 각 종류: red 2×1, black 9×8, blue 9×8, white 8×7 → 합 202 이다. (5) 전체 순서쌍 = 28×27 = 756 이다. (6) 확률 = 202/756 = 101/378 이다. 따라서 정답은 101/378이다.",
+   "structuralIssues": []
+  }
+ ]
+}

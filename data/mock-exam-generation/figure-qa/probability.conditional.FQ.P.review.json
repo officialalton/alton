@@ -1,0 +1,23 @@
+{
+  "itemId": "probability.conditional.FQ.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:01.514Z",
+  "reviewer": "visual-review-agent-RD",
+  "codeHash": "2898661b9bd2fc2eafa8c7cac50e4d04866cd912bd29ad574f66a6ab8f7eb633",
+  "samples": [
+    "probability.conditional.FQ.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "4/13: mean=52/13=4; values>4 are 5,6 -> 2+2=4 of 13 members. Nit: condition \"at least 3 photos\" includes every row so it is vacuous; explanation says mean ≈4 though it is exactly 4."
+}

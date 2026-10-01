@@ -1,0 +1,41 @@
+{
+ "itemId": "percentages.percent_change.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.827Z",
+ "codeHash": "48ac6b50c734636db7a22b435fbde3794836401ef5b7756907768a246db1947c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.percent_change.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.percent_change.TB.P.png",
+   "mobileFile": "percentages.percent_change.TB.P.m375.png",
+   "archetypeId": "pct.percent_change.TB.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A visitor center compared the number of maps sold at several kiosks in two periods, as shown in the table.",
+   "question": "Each of these kiosks had an increase from May to June. What is the greatest percent increase among the kiosks?",
+   "options": [
+    "30",
+    "120",
+    "5",
+    "40"
+   ],
+   "correctIndex": 3,
+   "answer": "40",
+   "explanation": "(1) 표에서 읽는다: Kiosk A 400→520, Kiosk B 140→175, Kiosk C 40→56, Kiosk E 380→399, Kiosk F 220→264. (2) 퍼센트 증가 = (나중 - 처음) ÷ 처음 × 100 이다. (3) 행별 퍼센트 증가: Kiosk A 30%, Kiosk B 25%, Kiosk C 40%, Kiosk E 5%, Kiosk F 20% 이다. (4) 증가량이 가장 큰 Kiosk A 는 30% 로 가장 크지 않다. (5) 가장 큰 퍼센트 증가는 40% 이다. 따라서 정답은 40이다.",
+   "structuralIssues": []
+  }
+ ]
+}

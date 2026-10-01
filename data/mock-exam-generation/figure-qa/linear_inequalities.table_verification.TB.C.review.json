@@ -1,0 +1,23 @@
+{
+  "itemId": "linear_inequalities.table_verification.TB.C",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T22:00:00.000Z",
+  "reviewer": "visual-review-agent-RF",
+  "codeHash": "af3525d66c3a4bd042e6b0c81f034252ca20052be940696a7284f42eaf56f2ef",
+  "samples": [
+    "linear_inequalities.table_verification.TB.C.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "15c+5d>150: A fails (2,24)=150 boundary; B fails (7,5)=130; C all pass (185,275,180); D has swapped columns, (0,12)=60 fails. Answer C matches meta. Nits: 'Choice A' option text redundant; small tables in full-width cards at desktop."
+}

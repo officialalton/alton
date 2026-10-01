@@ -1,0 +1,41 @@
+{
+ "itemId": "one_variable_data.relative_cumulative_frequency.FQ.P",
+ "generatedAt": "2026-10-01T21:46:07.817Z",
+ "codeHash": "f030c19168f2ead6aa70c9098129b117892e96f040e5dc963b9dbf86019e7189",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.relative_cumulative_frequency.FQ.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.relative_cumulative_frequency.FQ.P.png",
+   "mobileFile": "one_variable_data.relative_cumulative_frequency.FQ.P.m375.png",
+   "archetypeId": "ovd.relative_cumulative_frequency.FQ.P.inverse",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A survey recorded the number of hits each batter got in a season series for batters on a baseball team. The results are shown in the table. Afterward, additional batters join, and each of them has the greatest value shown in the table. After they join, 50% of all the batters have that greatest value.",
+   "question": "How many batters joined?",
+   "options": [
+    "40",
+    "80",
+    "15",
+    "30"
+   ],
+   "correctIndex": 3,
+   "answer": "30",
+   "explanation": "(1) 표에서 값과 도수를 읽는다: 2(19), 3(9), 4(12), 5(10) — 전체 50개. (2) 가장 큰 값 5 의 도수는 10, 전체는 50 이다. (3) k 명이 더해지면 (10 + k) ÷ (50 + k) = 50/100 이다. (4) 100(10 + k) = 50(50 + k) → 50k = 1500 이다. (5) k = 1500 ÷ 50 = 30 이다. 따라서 정답은 30이다.",
+   "structuralIssues": []
+  }
+ ]
+}

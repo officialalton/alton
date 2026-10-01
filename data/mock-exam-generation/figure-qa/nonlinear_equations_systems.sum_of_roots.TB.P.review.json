@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_equations_systems.sum_of_roots.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:12.000Z",
+  "reviewer": "visual-review-agent-RB",
+  "codeHash": "c4626fcebd04f3bfa563792445b32ef8be41fd404551c1e0aa2fbb89f0518282",
+  "samples": [
+    "nonlinear_equations_systems.sum_of_roots.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Second difference 2, symmetric about x=-3 (p(-3)=-29, extrapolated); real roots exist; sum=-6 -> D. Axis of symmetry is not in the table (requires extrapolation, acceptable)."
+}

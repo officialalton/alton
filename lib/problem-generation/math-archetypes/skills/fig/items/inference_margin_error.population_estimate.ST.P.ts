@@ -32,7 +32,7 @@ export const ITEM = defineItem({
         const N = popSize(rng, n, yes); const est = (N * yes) / n;
         const fig = factFig(`Survey of ${lcf(s.popLbl)}`, [[popRow(s), N], ["Sample size", n], ["Number in sample who said no", no2], ["Number in sample who were undecided", und]]);
         return figInst(rng, {
-          stimulus: intro(rng, s) + " Every person in the sample said yes, said no, or was undecided.",
+          stimulus: intro(rng, s) + ` Each person in the sample answered yes, no, or undecided to the question of whether they ${s.ev}.`,
           question: rng.pick([`Based on the survey, what is the best estimate of the number of ${lcf(s.popLbl)} who ${s.ev}?`, `Using the information shown, estimate how many of all ${lcf(s.popLbl)} ${s.ev}.`]), correct: est,
           wrongs: pos([W((N * no2) / n, "step_missing", "'아니오' 비율로 추정했다."), W((N * (no2 + und)) / n, "opposite", "'예'가 아닌 응답의 추정치를 답했다."), W(yes, "scope", "표본의 '예' 수를 그대로 답했다."), W((N * (n - no2)) / n, "condition_ignored", "미정 응답을 '예'에 넣었다."), W(est + N / 100, "other", "비율을 1% 크게 잡았다.")]),
           verificationJs: figJs({}, fig, `${GET_JS}const n=g('sample size'), y=n-g('said no')-g('undecided'); if (y<=0) throw new Error('예 응답 없음'); return g('total number')*y/n;`),

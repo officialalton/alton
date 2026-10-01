@@ -1,0 +1,23 @@
+{
+  "itemId": "evaluating_statistical_claims.sampling_generalization.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:11:57Z",
+  "reviewer": "visual-review-agent-RA",
+  "codeHash": "8fb30d222635daad8b00279cedf766cbdfc931f32a0e8670169f429e0aa5c6cb",
+  "samples": [
+    "evaluating_statistical_claims.sampling_generalization.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass",
+    "multi_figure_consistent": "n/a",
+    "choice_distinct_one_rule": "n/a"
+  },
+  "defects": [],
+  "notes": "표: Branch2 표본 0, 나머지 10% 추출 → Branch 1,3,4 로만 일반화 = B. 합계 30+27+27=84 일치. Nit(비차단): 모바일에서 'Branch 1' 이 두 줄로 쪼개지고(Branch / 1) 숫자는 하단 정렬."
+}

@@ -1,0 +1,41 @@
+{
+ "itemId": "evaluating_statistical_claims.sampling_generalization.ST.P",
+ "generatedAt": "2026-10-01T21:46:07.863Z",
+ "codeHash": "eb4ae720414c67b374bb3bd6ec0632fe4072d1200476f1dc23932d32374d26b9",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/evaluating_statistical_claims.sampling_generalization.ST.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "evaluating_statistical_claims.sampling_generalization.ST.P.png",
+   "mobileFile": "evaluating_statistical_claims.sampling_generalization.ST.P.m375.png",
+   "archetypeId": "esc.sampling_generalization.ST.P.constraint_select",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "To study grading tools, an organization surveyed a sample of teachers about whether they use a new grading app. Details of the study are shown in the table.",
+   "question": "Based on the information shown, to which group of people can the result most appropriately be generalized?",
+   "options": [
+    "The result applies to no one, since too few people were surveyed.",
+    "The result applies only to the 50 teachers in the sample.",
+    "The result applies only to teachers at one middle school, not necessarily to all teachers in Harbor School District.",
+    "The result applies to all teachers in Harbor School District."
+   ],
+   "correctIndex": 2,
+   "answer": "The result applies only to teachers at one middle school, not necessarily to all teachers in Harbor School District.",
+   "explanation": "(1) 선택 방법이 무작위이므로 표본은 명단 전체를 대표한다. (2) 명단에 있는 사람 수는 450, 목표 모집단은 1950 이다. (3) 명단은 모집단의 일부이다. (4) 명단 밖의 teachers 에게는 근거가 없다. (5) 표본 크기가 작아도 무작위면 명단 전체로 일반화할 수 있다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

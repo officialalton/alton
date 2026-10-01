@@ -1,0 +1,41 @@
+{
+ "itemId": "nonlinear_functions.exponential_vs_linear_growth.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.840Z",
+ "codeHash": "a6e747e32bbfd132ec0db9cd408fe689e7f4f6962c5e3df9e8371709244cd25d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.exponential_vs_linear_growth.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.exponential_vs_linear_growth.TB.P.png",
+   "mobileFile": "nonlinear_functions.exponential_vs_linear_growth.TB.P.m375.png",
+   "archetypeId": "nf.exponential_vs_linear_growth.TB.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shown compares the sizes of two insect colonies. For one, the size increases by the same amount each hour; for the other, it is multiplied by the same factor each hour. Suppose each pattern continues.",
+   "question": "What is the least number of hours for which the size of Colony B is greater than the size of Colony A?",
+   "options": [
+    "6",
+    "7",
+    "5",
+    "4"
+   ],
+   "correctIndex": 0,
+   "answer": "6",
+   "explanation": "(1) Colony A: 한 hour마다 35 씩 늘어 A(x) = 35x + 77 이다. (2) Colony B: 한 hour마다 2 배가 되어 B(x) = 6·2^x 이다. (3) 표 밖으로 이어 계산: x=5: A 252, B 192; x=6: A 287, B 384. (4) x = 5 에서는 B ≤ A, x = 6 에서 B > A 이다. (5) 따라서 6 hours 이다. 따라서 정답은 6이다.",
+   "structuralIssues": []
+  }
+ ]
+}

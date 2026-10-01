@@ -1,0 +1,41 @@
+{
+ "itemId": "linear_functions.interpret_slope.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.805Z",
+ "codeHash": "188c63be81320a787aecfd7d17148b07fe1e5fd57a320dd190b1ffa6f51ecfdf",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.interpret_slope.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.interpret_slope.TB.P.png",
+   "mobileFile": "linear_functions.interpret_slope.TB.P.m375.png",
+   "archetypeId": "lf.interpret_slope.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A linear relationship relates the number of songs on a playlist to the playlist's total length. Some pairs of values are shown in the table.",
+   "question": "Which statement best describes the rate of change of the relationship shown in the table?",
+   "options": [
+    "The playlist's total length increases by 8 minutes for each increase of 1 song in the number of songs on a playlist.",
+    "The playlist's total length increases by 4 minutes for each increase of 1 song in the number of songs on a playlist.",
+    "The number of songs on a playlist increases by 4 songs for each change of 1 minute in the playlist's total length.",
+    "When the number of songs on a playlist is 0 songs, the playlist's total length is 4 minutes."
+   ],
+   "correctIndex": 1,
+   "answer": "The playlist's total length increases by 4 minutes for each increase of 1 song in the number of songs on a playlist.",
+   "explanation": "(1) 표에서 두 행 (6, 26) 과 (8, 34) 을 읽는다. (2) 기울기 = (34 - 26) ÷ (8 - 6) = 4 이다. (3) 기울기의 크기는 4, 양수(증가) 이다. (4) 표의 x 간격은 2 이므로 한 행의 변화(8)는 1 단위당 변화가 아니다. (5) 기울기는 x 가 1 늘 때 y 의 변화량을 뜻한다. (6) 따라서 '4 minutes 씩 증가' 서술이 맞다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

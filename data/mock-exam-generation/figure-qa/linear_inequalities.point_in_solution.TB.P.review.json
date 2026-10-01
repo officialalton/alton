@@ -1,0 +1,23 @@
+{
+  "itemId": "linear_inequalities.point_in_solution.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:12.000Z",
+  "reviewer": "visual-review-agent-RB",
+  "codeHash": "f4aa28bb91bb2089f50578e41b9feaf94ff636c594785d7e9b1f8838d6b7ff54",
+  "samples": [
+    "linear_inequalities.point_in_solution.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "statement-type. Checked J(2,-4) yes, K(2,10) no, L(8,-1) yes, M(3,-7) fails 2nd, N(1,-5) fails 2nd (-21<-20) -> 2 = A. Nit: inequalities rendered in plain text with hyphen-minus and no italics/true minus signs."
+}

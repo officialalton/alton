@@ -1,0 +1,41 @@
+{
+ "itemId": "linear_equations_one_var.word_problem_translate.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.833Z",
+ "codeHash": "b879fb28da294d2b8a994c90972170cd89c3f0afa9a80cf5e10165b387634df0",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_one_var.word_problem_translate.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_one_var.word_problem_translate.TB.P.png",
+   "mobileFile": "linear_equations_one_var.word_problem_translate.TB.P.m375.png",
+   "archetypeId": "le1.word_problem_translate.TB.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "Maya rents a car and compares car rental companies. The fee and the cost per day for each are given in the table.",
+   "question": "For what number of days is the total cost at Drive Now equal to the total cost at Rent One?",
+   "options": [
+    "95",
+    "5",
+    "10",
+    "25"
+   ],
+   "correctIndex": 1,
+   "answer": "5",
+   "explanation": "(1) Drive Now 의 총액 = 20 + 15x 이다(x 는 days 수). (2) Rent One 의 총액 = 30 + 13x 이다(x 는 days 수). (3) 20 + 15x = 30 + 13x 로 놓는다. (4) 2x = 10 이다. (5) x = 5 이다. 따라서 정답은 5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

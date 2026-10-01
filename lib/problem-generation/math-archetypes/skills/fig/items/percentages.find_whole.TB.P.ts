@@ -39,7 +39,7 @@ export const ITEM = defineItem({
         const s = wholeScene(rng, rng.int(3, 4), 240); const T = sum(s.whole); const fig = wFig(s); const avgP = sum(s.pct) / s.pct.length;
         return figInst(rng, {
           stimulus: intro(rng, s),
-          question: rng.pick([`What is the total number of ${s.t.what} for all the ${s.t.many} in the table combined?`, `Based on the table, how many ${s.t.unit} were there in all, for these ${s.t.many} together?`]), correct: T,
+          question: rng.pick([`What is the total number of ${s.t.what} for all the ${s.t.many} in the table combined?`, `Based on the table, how many ${s.t.unit} were there in all across these ${s.t.many} combined, counting every one of them, not only those ${s.sub}?`]), correct: T,
           wrongs: pos([W(sum(s.part), "step_missing", "부분 개수만 더했다."), W(Math.round((sum(s.part) * 100) / avgP), "formula_misuse", "부분의 합을 평균 퍼센트로 한 번에 역산했다."), W(T - sum(s.part), "opposite", "나머지(부분이 아닌 것)만 더했다."), W(sum(s.part.map((p, i) => (p * s.pct[i]) / 100)), "opposite", "부분에 퍼센트를 곱했다."), W(T - s.whole[s.whole.length - 1], "step_missing", "마지막 행을 빠뜨렸다.")].filter((w) => Number.isInteger(w.v)), T),
           verificationJs: figJs({}, fig, `${W_JS}return w.reduce((a, b) => a + b, 0);`),
           trace: [read(s), ["전체 = 부분 ÷ (퍼센트 ÷ 100) 이다.", "Total = part ÷ percent."], ...s.names.map((_, i) => wh(s, i)), [`합 = ${s.whole.join(" + ")} = ${T} 이다.`, "Add the totals."]], variant: "sum_of_wholes",

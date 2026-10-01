@@ -1,23 +1,23 @@
 {
- "itemId": "two_variable_data.scatter_equation.LG.P",
- "verdict": "pass",
- "reviewedAt": "2026-10-01T07:22:51.000Z",
- "reviewer": "visual-review-agent-B3",
- "codeHash": "bb9b1c4225e4a829db7ed5e04d3f86945a9cd81e391f7d8783fd76c496852171",
- "samples": [
-  "two_variable_data.scatter_equation.LG.P.png"
- ],
- "checklist": {
-  "figure_present": "pass",
-  "proportion_matches_values": "pass",
-  "labels_placed_and_legible": "pass",
-  "multi_figure_consistent": "n/a",
-  "text_matches_figure_and_solvable": "pass",
-  "axes_ticks_units_legend": "pass",
-  "choice_distinct_one_rule": "pass",
-  "sat_visual_style": "pass",
-  "mobile_375_readable": "pass"
- },
- "defects": [],
- "notes": "선 위 점이 (0,10),(5,20)…(30,70)로 격자선 위. 기울기 2, y=2x+10, y=56 → x=23 = 정답 A(23). 눈금·축 제목 정상, 375px 판독 가능."
+  "itemId": "two_variable_data.scatter_equation.LG.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:00Z",
+  "reviewer": "visual-review-agent-RE",
+  "codeHash": "c80252280e93adb594ff92622110f3b1990e8e8cb467437e0732558833814f9f",
+  "samples": [
+    "two_variable_data.scatter_equation.LG.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Line (0,10)-(30,70) slope 2; 56=2x+10 -> x=23 = A. Matches."
 }

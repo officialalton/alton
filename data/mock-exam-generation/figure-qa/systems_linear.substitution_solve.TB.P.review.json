@@ -1,0 +1,23 @@
+{
+  "itemId": "systems_linear.substitution_solve.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:01.524Z",
+  "reviewer": "visual-review-agent-RD",
+  "codeHash": "2fbcd6874d18469a853c52e396fbaf94aff9d6e2aad6577609ecb6ac50555be1",
+  "samples": [
+    "systems_linear.substitution_solve.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Table gives y=2x-12; -2x-4(2x-12)=-52 -> x=10 = B. Table has no column labels beyond x,y (acceptable). Nit: equation/variables plain text not italic."
+}

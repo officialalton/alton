@@ -1,0 +1,23 @@
+{
+  "itemId": "evaluating_statistical_claims.causal_vs_association.ST.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:11:57Z",
+  "reviewer": "visual-review-agent-RA",
+  "codeHash": "dffd92f20b044089f6031c37eee9c139c6b94ce9600c6627ef517d378e3b31a9",
+  "samples": [
+    "evaluating_statistical_claims.causal_vs_association.ST.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass",
+    "multi_figure_consistent": "n/a",
+    "choice_distinct_one_rule": "n/a"
+  },
+  "defects": [],
+  "notes": "statement-type. 무작위 배정 + 사용자 평균 49 < 비사용자 71 → 인과·낮음 = A. 일치. Nit: 모바일 값 열이 텍스트는 위, 숫자는 아래 정렬이라 약간 들쭉날쭉."
+}

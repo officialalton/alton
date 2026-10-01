@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.find_x_for_value.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.085Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "05033d096ef57044949da511abb8bae20e9bc77c5d7b67e8ebc3818021e133e8",
+  "samples": [
+    "nonlinear_functions.find_x_for_value.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved from table: second difference 2 => a=1, p(x)=x^2-11x+16 (p(10)=6 ok); p(x)=-2 -> x^2-11x+18=0 -> x=2,9; x2=9 = meta answer. Nits (non-blocking): snapshot shows raw x_1/x_2 (no subscript conversion in snapshot page; real app presumably KaTeX); two-column table has wide empty gap on desktop."
+}

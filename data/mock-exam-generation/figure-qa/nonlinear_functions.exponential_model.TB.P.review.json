@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.exponential_model.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:12.000Z",
+  "reviewer": "visual-review-agent-RB",
+  "codeHash": "711d041a8a939c7e34e8bbae1975cc8b2d866f6e51f5cba69d5d20f6d62eb7d3",
+  "samples": [
+    "nonlinear_functions.exponential_model.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "14,28,56,112 at x=1..4: b=2, a=14/2=7 -> D. Nit: model text shows literal 'y = a(b)^x' with caret (not superscript) - cosmetic."
+}

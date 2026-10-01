@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.conditional_share.TW.C",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T07:22:49Z",
-  "reviewer": "visual-review-agent-A3",
-  "codeHash": "415df09bb9549501221bbdf5b677a9c6100bc399515d1790e4402e993ccafcd7",
+  "reviewedAt": "2026-10-01T21:12:01.525Z",
+  "reviewer": "visual-review-agent-RD",
+  "codeHash": "a8f4792df936c72ed63892ece92493b6643f1881881773c5c24e2a22392ddd35",
   "samples": [
     "two_variable_data.conditional_share.TW.C.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "조건: 가구 100명 중 60% 키움, 20명 중 50%. A=60/40,10/10 만 일치. B 는 행 뒤바뀜(20행이 10/10, 100행이 60/40 → 위 행 합이 20), C 는 열 바뀜(40/60, 비율 40%), D 는 3/17(15%). 정답 A 하나. 4개 표 크기·제목 동일, 서로 구별됨. 합계 행 밑줄 전 열 이어짐."
+  "notes": "Needs 60 and 10 owners with row totals 100/20: A. B swaps rows, C swaps columns for row1 (40/60), D has 3 of 20 (15%). Distinct, one rule each. Nit: option labels read Choice A..D."
 }

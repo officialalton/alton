@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.scatter_slope_context.SC.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T07:22:56Z",
-  "reviewer": "visual-review-agent-C3",
-  "codeHash": "bb9b1c4225e4a829db7ed5e04d3f86945a9cd81e391f7d8783fd76c496852171",
+  "reviewedAt": "2026-10-01T21:12:00Z",
+  "reviewer": "visual-review-agent-RE",
+  "codeHash": "c80252280e93adb594ff92622110f3b1990e8e8cb467437e0732558833814f9f",
   "samples": [
     "two_variable_data.scatter_slope_context.SC.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "추세선 (0,60)-(10,20) → 기울기 -4 miles/week, 14일=2주 → 8 = B. 점 9개 확인, 해설 숫자 일치."
+  "notes": "Slope -4 mi/week; 14 days = 2 weeks -> 8 = B. Matches."
 }

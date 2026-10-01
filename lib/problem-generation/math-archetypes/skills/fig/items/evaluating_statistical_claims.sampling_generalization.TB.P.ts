@@ -7,6 +7,7 @@ import { figInst, figJs } from "../../../figure-kit";
 import { defineItem, MC_ONLY_STATEMENT, statementInst } from "../item-kit";
 import { lcf, surv, type Surv } from "./_t7-kit";
 
+const plu = (u: string) => { const w = u.toLowerCase(); return /(s|x|ch|sh)$/.test(w) ? w + "es" : w + "s"; };
 const UNITS = ["Site", "Branch", "Ward", "Office", "Zone", "Section"];
 type Sc = { s: Surv; u: string; names: string[]; pop: number[]; samp: number[]; yes: number[]; f: number; on: number[]; fig: { type: "data"; kind: "table"; title: string; columns: string[]; rows: (string | number)[][] } };
 function scene(rng: Rng, o: { nOn?: number } = {}): Sc {
@@ -22,9 +23,9 @@ const LIST_JS = "const listNames=(a)=>a.length===1?a[0]:a.length===2?a[0]+' and 
 /** 표를 읽고, 뽑힌 구역의 표본 비율이 같은지 확인하는 JS. */
 const READ_JS = "const R=FIGURE.rows; const on=R.filter(r=>r[2]>0); if(!on.length) throw new Error('표본 없음'); for (const r of R) if (r[3]>r[2]||r[3]<0) throw new Error('응답 수 오류'); const f=on[0][1]/on[0][2]; for (const r of on) if (Math.abs(r[1]/r[2]-f)>1e-9) throw new Error('추출 비율이 다름');\n";
 const intro = (rng: Rng, c: Sc) => rng.pick([
-  `All ${lcf(c.s.popLbl)} belong to one of four ${c.u.toLowerCase()}s. A researcher chose ${c.s.ent} at random within some of the ${c.u.toLowerCase()}s, using the same sampling rate in each, and surveyed no one elsewhere. Each person sampled was asked whether they ${c.s.ev}. The table shows the results.`,
-  `To study ${c.s.topic}, an organization selected ${c.s.ent} at random from only some of the four ${c.u.toLowerCase()}s, sampling the same fraction of ${c.s.ent} in each one it chose. The table shown gives the number of ${c.s.ent} in each ${c.u.toLowerCase()}, the number sampled, and the number who said they ${c.s.ev}.`,
-  `The table shown describes a survey about ${c.s.topic}. In every ${c.u.toLowerCase()} that was sampled, the same fraction of ${c.s.ent} was chosen at random and asked whether they ${c.s.ev}; in the remaining ${c.u.toLowerCase()}s, no one was surveyed.`,
+  `All ${lcf(c.s.popLbl)} belong to one of four ${plu(c.u)}. A researcher chose ${c.s.ent} at random within some of the ${plu(c.u)}, using the same sampling rate in each, and surveyed no one elsewhere. Each person sampled was asked whether they ${c.s.ev}. The table shows the results.`,
+  `To study ${c.s.topic}, an organization selected ${c.s.ent} at random from only some of the four ${plu(c.u)}, sampling the same fraction of ${c.s.ent} in each one it chose. The table shown gives the number of ${c.s.ent} in each ${c.u.toLowerCase()}, the number sampled, and the number who said they ${c.s.ev}.`,
+  `The table shown describes a survey about ${c.s.topic}. In every ${c.u.toLowerCase()} that was sampled, the same fraction of ${c.s.ent} was chosen at random and asked whether they ${c.s.ev}; in the remaining ${plu(c.u)}, no one was surveyed.`,
 ]);
 const sum = (a: number[]) => a.reduce((x, y) => x + y, 0);
 const pos = (ws: ReturnType<typeof W>[]) => ws.filter((w) => w.v > 0 && Number.isInteger(w.v));
@@ -38,7 +39,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const c = scene(rng); const onN = c.on.map((i) => c.names[i]); const offN = c.names.filter((_, i) => !c.on.includes(i));
         const lead = rng.pick(["Only to the " + c.s.ent + " in ", "To the " + c.s.ent + " in "]);
-        const correct = `${lead}${listNames(onN)}`; const all = `To all ${lcf(c.s.popLbl)} in all four ${c.u.toLowerCase()}s`;
+        const correct = `${lead}${listNames(onN)}`; const all = `To all ${lcf(c.s.popLbl)} in all four ${plu(c.u)}`;
         const wrongs = [{ text: all, reason: "표본이 없는 구역까지 일반화했다." }, { text: `${lead}${listNames(offN)}`, reason: "표본이 0 인 구역을 골랐다." }, { text: `Only to the ${sum(c.samp)} ${c.s.ent} who were surveyed`, reason: "무작위 표본의 일반화를 부정했다." }];
         return statementInst(rng, {
           stimulus: intro(rng, c), question: rng.pick(["To which population can the survey result most appropriately be generalized?", "Based on the table, what is the broadest population to which the result can reasonably be generalized?"]), correct, wrongs, figure: c.fig, P: { lead },
@@ -53,7 +54,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const c = scene(rng); const S = sum(c.samp), Y = sum(c.yes), Pon = sum(c.on.map((i) => c.pop[i])), Pall = sum(c.pop); const ans = (Y * Pon) / S;
         return figInst(rng, {
-          stimulus: intro(rng, c), question: rng.pick([`Based on the survey, what is the best estimate of the total number of ${c.s.ent} in the sampled ${c.u.toLowerCase()}s who ${c.s.ev}?`, `Estimate how many ${c.s.ent}, in all the ${c.u.toLowerCase()}s where a sample was taken, ${c.s.ev}.`]), correct: ans,
+          stimulus: intro(rng, c), question: rng.pick([`Based on the survey, what is the best estimate of the total number of ${c.s.ent} in the sampled ${plu(c.u)} who ${c.s.ev}?`, `Estimate how many ${c.s.ent}, in all the ${plu(c.u)} where a sample was taken, ${c.s.ev}.`]), correct: ans,
           wrongs: pos([W(Math.round((Y * Pall) / S), "scope", "표본이 없는 구역까지 곱했다."), W(Y, "step_missing", "표본의 '예' 수를 답했다."), W(Pon - ans, "opposite", "'예'가 아닌 사람 수를 구했다."), W(Math.round((Y * Pon) / Pall), "formula_misuse", "비율의 분모를 잘못 잡았다."), W(ans + c.f, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== ans),
           verificationJs: figJs({}, c.fig, `${READ_JS}const S=on.reduce((a,r)=>a+r[2],0), Y=on.reduce((a,r)=>a+r[3],0), Pon=on.reduce((a,r)=>a+r[1],0); return Y*Pon/S;`),
           trace: [[`표본이 있는 구역: ${listNames(c.on.map((i) => c.names[i]))} 이다.`, "Sampled units."], [`그 구역들의 표본 합 = ${S}, '예' 합 = ${Y} 이다.`, "Combined sample."], [`그 구역들의 인원 합 = ${Pon} 이다(표본 없는 구역 제외).`, "Population of sampled units only."], [`비율 ${Y}/${S} 를 ${Pon} 에 곱한다.`, "Apply the proportion."], [`추정치 = ${ans} 이다.`, "Estimate."]], variant: "estimate_sampled_units",
@@ -80,7 +81,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const c = scene(rng); const S = sum(c.samp), Y = sum(c.yes), Pon = sum(c.on.map((i) => c.pop[i])), Pall = sum(c.pop); const est = (Y * Pon) / S; const ans = Pon - est;
         return figInst(rng, {
-          stimulus: intro(rng, c), question: `Based on the survey, about how many ${c.s.ent} in the sampled ${c.u.toLowerCase()}s would not say that they ${c.s.ev}?`, correct: ans,
+          stimulus: intro(rng, c), question: `Based on the survey, about how many ${c.s.ent} in the sampled ${plu(c.u)} would not say that they ${c.s.ev}?`, correct: ans,
           wrongs: pos([W(est, "opposite", "'예' 추정치를 답했다."), W(Pall - est, "scope", "전체 인원에서 뺐다."), W(S - Y, "step_missing", "표본의 '아니오' 수를 답했다."), W(Math.round(((S - Y) * Pall) / S), "scope", "모든 구역으로 확대했다."), W(ans + c.f, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== ans),
           verificationJs: figJs({}, c.fig, `${READ_JS}const S=on.reduce((a,r)=>a+r[2],0), Y=on.reduce((a,r)=>a+r[3],0), Pon=on.reduce((a,r)=>a+r[1],0); return Pon - Y*Pon/S;`),
           trace: [[`표본이 있는 구역의 인원 합 = ${Pon} 이다.`, "Population of sampled units."], [`합친 표본 ${S} 중 '예' ${Y} 이다.`, "Combined sample."], [`'예' 추정 = ${Pon} × ${Y}/${S} = ${est} 이다.`, "Estimate yes."], [`'예'가 아닌 사람 = ${Pon} - ${est} 이다.`, "Complement."], [`답은 ${ans} 이다.`, "Answer."]], variant: "complement_estimate_sampled_units",

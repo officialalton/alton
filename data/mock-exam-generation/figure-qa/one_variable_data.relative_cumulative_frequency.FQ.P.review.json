@@ -1,0 +1,23 @@
+{
+  "itemId": "one_variable_data.relative_cumulative_frequency.FQ.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.089Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "f030c19168f2ead6aa70c9098129b117892e96f040e5dc963b9dbf86019e7189",
+  "samples": [
+    "one_variable_data.relative_cumulative_frequency.FQ.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: total 50, greatest value 5 has 10; (10+k)/(50+k)=1/2 -> k=30 = meta. Nit: header Hits (hits) redundant."
+}

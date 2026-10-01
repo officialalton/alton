@@ -1,0 +1,23 @@
+{
+  "itemId": "percentages.find_percent.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.090Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "826eb7e592d2875bdf498b9e47eb2fe4e97daee6775072c7d7eafd2a31b63393",
+  "samples": [
+    "percentages.find_percent.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: total 155+45+190+110=500; (110+190)/500=60% = meta. Fine (Line 3 absent, acceptable)."
+}

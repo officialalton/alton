@@ -1,0 +1,41 @@
+{
+ "itemId": "probability.spinner_expected_value.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.823Z",
+ "codeHash": "67a36b7d29d552d45aac56464b23a4cb8a888268c3356e178c86516edf020be2",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.spinner_expected_value.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.spinner_expected_value.TB.P.png",
+   "mobileFile": "probability.spinner_expected_value.TB.P.m375.png",
+   "archetypeId": "pr.spinner_expected_value.TB.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "Players in a radio station contest take turns with a fair spinner whose sections are equal in size. Each section is labeled with an amount, and the table shows how many sections have each amount. A player must give up 84 dollars for each spin and then receives the amount shown where the spinner lands.",
+   "question": "If the player spins 7 times, what is the expected net gain, in dollars?",
+   "options": [
+    "112",
+    "24.5",
+    "3.5",
+    "612.5"
+   ],
+   "correctIndex": 1,
+   "answer": "24.5",
+   "explanation": "(1) 표에서 읽는다: 20(3칸), 80(3칸), 200(2칸). (2) 전체 칸 수 = 3 + 3 + 2 = 8 이다. (3) 기댓값 = (20×3 + 80×3 + 200×2) ÷ 8 = 700 ÷ 8 = 87.5 이다. (4) 한 번의 기대 순이익 = 87.5 - 84 = 3.5 이다. (5) 7 번이면 7 × 3.5 = 24.5 이다. 따라서 정답은 24.5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

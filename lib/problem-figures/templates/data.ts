@@ -166,8 +166,8 @@ function renderTable(spec: DataSpec): { html: string; alt: string; issues: Figur
   const align = cols.map((_, i) => spec.align?.[i] ?? (numericCol[i] ? "r" : "l"));
   const alignCss = { l: "left", c: "center", r: "right" } as const;
   const cell = (c: Cell) => esc(isNum(c) ? fmtNum(c) : String(c));
-  const th = cols.map((c, i) => `<th scope="col" style="text-align:${alignCss[align[i]]};padding:6px 12px;border-bottom:1.5px solid #111;font-weight:700;background:#f7f7f8;white-space:nowrap">${esc(c)}</th>`).join("");
-  const body = rows.map((r) => `<tr>${r.map((c, i) => `<td style="text-align:${alignCss[align[i]]};padding:6px 12px;border-bottom:1px solid #ddd;white-space:nowrap">${cell(c)}</td>`).join("")}</tr>`).join("");
+  const th = cols.map((c, i) => `<th scope="col" style="text-align:${alignCss[align[i]]};padding:6px 8px;border-bottom:1.5px solid #111;font-weight:700;background:#f7f7f8;white-space:normal;vertical-align:bottom">${esc(c)}</th>`).join("");
+  const body = rows.map((r) => `<tr>${r.map((c, i) => `<td style="text-align:${alignCss[align[i]]};padding:6px 8px;border-bottom:1px solid #ddd;white-space:${align[i] === "l" ? "normal" : "nowrap"}">${cell(c)}</td>`).join("")}</tr>`).join("");
   const caption = spec.title ? `<caption style="caption-side:top;text-align:left;font-weight:700;padding:0 0 6px;font-family:${FONT}">${esc(spec.title)}</caption>` : "";
   const html = `<div class="figure-table" style="overflow-x:auto;max-width:100%"><table role="table" style="border-collapse:collapse;font-family:${FONT};font-size:14px;color:#111;min-width:200px;border-top:2px solid #111">${caption}<thead><tr>${th}</tr></thead><tbody>${body}</tbody></table></div>`;
   const alt = `${spec.title ? spec.title + " — " : ""}표(${cols.length}열 ${rows.length}행). 열: ${cols.join(", ")}. ${rows.map((r) => r.map(cell).join(" / ")).join("; ")}.`;

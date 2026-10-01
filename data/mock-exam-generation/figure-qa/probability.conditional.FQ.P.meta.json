@@ -1,0 +1,41 @@
+{
+ "itemId": "probability.conditional.FQ.P",
+ "generatedAt": "2026-10-01T21:46:07.821Z",
+ "codeHash": "2898661b9bd2fc2eafa8c7cac50e4d04866cd912bd29ad574f66a6ab8f7eb633",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.conditional.FQ.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.conditional.FQ.P.png",
+   "mobileFile": "probability.conditional.FQ.P.m375.png",
+   "archetypeId": "pr.conditional.FQ.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A survey recorded the number of photos each club member submitted for members in a photography club. The results are shown in the table. A researcher picks, at random, one of the members with a value of at least 3 photos.",
+   "question": "What is the probability that the chosen member has a value greater than the mean of all the data in the table?",
+   "options": [
+    "3/13",
+    "7/13",
+    "4/13",
+    "9/13"
+   ],
+   "correctIndex": 2,
+   "answer": "4/13",
+   "explanation": "(1) 표에서 값과 도수를 읽는다: 3(6), 4(3), 5(2), 6(2) — 전체 13개. (2) 전체 개수 = 6 + 3 + 2 + 2 = 13 이다. (3) 평균 = 52 ÷ 13 ≈ 4 이다. (4) 3 이상인 값의 도수 합(조건) = 13 이다. (5) 그중 평균보다 큰 값의 도수 합은 4 이다. (6) 확률 = 4/13 = 4/13 이다. 따라서 정답은 4/13이다.",
+   "structuralIssues": []
+  }
+ ]
+}

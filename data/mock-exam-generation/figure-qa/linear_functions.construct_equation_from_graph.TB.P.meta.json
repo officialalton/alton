@@ -1,0 +1,41 @@
+{
+ "itemId": "linear_functions.construct_equation_from_graph.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.807Z",
+ "codeHash": "d456469034418a9ec5638251f615183750d1fed3fea4de5571b5c942c38947bd",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.construct_equation_from_graph.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.construct_equation_from_graph.TB.P.png",
+   "mobileFile": "linear_functions.construct_equation_from_graph.TB.P.m375.png",
+   "archetypeId": "lf.construct_equation_from_graph.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "For a linear model, the table lists the candle's remaining height at several values of the number of days since a candle was lit. Let $x$ represent the number of days since a candle was lit, in days, and let $y$ represent the candle's remaining height, in centimeters.",
+   "question": "Which equation gives $y$ in terms of $x$? $y =$",
+   "options": [
+    "$2x + 23$",
+    "$2x + 53$",
+    "$-2x + 23$",
+    "$23x + 2$"
+   ],
+   "correctIndex": 0,
+   "answer": "$2x + 23$",
+   "explanation": "(1) 표에서 두 행 (15, 53) 과 (18, 59) 을 읽는다. (2) 기울기 = (59 - 53) ÷ (18 - 15) = 2 이다. (3) x = 0 일 때 값: 53 - (2) × 15 = 23 이다. (4) 식: y = 2x + 23 이다. (5) 표의 다른 행 (21, 65) 로 확인한다. 따라서 정답은 $2x + 23$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

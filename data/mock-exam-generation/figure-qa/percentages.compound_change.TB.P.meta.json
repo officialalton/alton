@@ -1,0 +1,41 @@
+{
+ "itemId": "percentages.compound_change.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.829Z",
+ "codeHash": "0883fb2e3185ae9016bf404d5b66403bd2d48620c774795c7f7348dc791d109a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.compound_change.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.compound_change.TB.P.png",
+   "mobileFile": "percentages.compound_change.TB.P.m375.png",
+   "archetypeId": "pct.compound_change.TB.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "Starting from 600 trees, the number of trees sold at Oak Hollow changed by the percents shown in the table, one quarter at a time.",
+   "question": "How many trees were there in Quarter 4, according to the table?",
+   "options": [
+    "945",
+    "756",
+    "645",
+    "870"
+   ],
+   "correctIndex": 1,
+   "answer": "756",
+   "explanation": "(1) 표에서 변화율을 읽는다: 40%, -25%, 50%, -20%. (2) 처음 값은 600 이고, 변화마다 직전 값에 배수를 곱한다. (3) Quarter 1: 600 × 1.4 = 840 이다. (4) Quarter 2: 840 × 0.75 = 630 이다. (5) Quarter 3: 630 × 1.5 = 945 이다. (6) Quarter 4: 945 × 0.8 = 756 이다. (7) 따라서 Quarter 4 의 값은 756 이다. 따라서 정답은 756이다.",
+   "structuralIssues": []
+  }
+ ]
+}

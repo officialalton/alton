@@ -1,0 +1,23 @@
+{
+  "itemId": "one_variable_data.mean.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.088Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "78021e3cce1e4c7e8be7017c9188d1b6953b90670c9d4b6f1b75b35f8bab5cf5",
+  "samples": [
+    "one_variable_data.mean.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: sum 5+30+29+18+1+25=108; 7*16=112; new value 4 = meta. Fine."
+}

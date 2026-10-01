@@ -14,7 +14,9 @@ import { checkInstanceFigureQa } from "./figure-qa";
 vi.mock("../../../app/session/[id]/problem-image-actions", () => ({ getProblemImageUrlAction: async () => ({ ok: false, error: "mock" }) }));
 import ProblemFigure from "../../../app/session/[id]/ProblemFigure";
 
-const esc = (s: string) => s.replace(/\$/g, "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!);
+/** 본문의 $…$ 수식은 앱에서 KaTeX 로 그려진다 — 스냅샷에서는 흔한 기호만 유니코드로 바꿔 검수자가 원문 LaTeX 를 결함으로 오인하지 않게 한다. */
+const texLite = (s: string) => s.replace(/\\(ge|geq)\b/g, "≥").replace(/\\(le|leq)\b/g, "≤").replace(/\\ne\b/g, "≠").replace(/\\cdot\b/g, "·").replace(/\\times\b/g, "×").replace(/\\ell\b/g, "ℓ").replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, "($1)/($2)").replace(/\\(?:left|right)\b/g, "");
+const esc = (s: string) => texLite(s).replace(/\$/g, "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]!);
 const page = (stimulus: string, figure: string, question: string, options: string[], title: string) => `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><style>body{margin:0;padding:16px;font-family:Georgia,'Times New Roman',serif;font-size:16px;line-height:1.5;color:#111;background:#fff}main{max-width:688px}.q{font-weight:600}ol{list-style:upper-alpha;padding-left:24px}</style></head><body><main><p>${esc(stimulus)}</p>${figure}<p class="q">${esc(question)}</p><ol>${options.map((o) => `<li>${esc(o)}</li>`).join("")}</ol></main></body></html>`;
 
 describe.skipIf(!process.env.FIGURE_QA_SNAPSHOT)("시각 검수 스냅샷(HTML·메타)", () => {

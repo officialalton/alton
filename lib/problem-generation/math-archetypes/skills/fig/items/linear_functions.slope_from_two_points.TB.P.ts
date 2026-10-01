@@ -16,11 +16,11 @@ export const ITEM = defineItem({
       op: "unit_ratio", structure: "표의 두 행에서 기울기(표 단위당 변화)를 구한 뒤, 작은 단위 1 당 변화로 환산", extra: "두 행의 차로 기울기를 구하고 표 제목의 환산 비율로 나눠야 함(소수 답) — medium 은 표 단위의 기울기",
       concepts: ["값표의 두 점", "기울기", "단위 환산"],
       gen(rng) {
-        const s = makeLinTab(rng, { conv: true }); const c = s.t.conv!; const v = s.m / c.per; if (!oneDec(v) || v === 0) throw new GenFail("dec");
+        let s = makeLinTab(rng, { conv: true }); for (let t = 0; t < 200 && (!oneDec(s.m / s.t.conv!.per) || s.m === 0); t++) s = makeLinTab(rng, { conv: true }); const c = s.t.conv!; const v = s.m / c.per; if (!oneDec(v) || v === 0) throw new GenFail("dec");
         const fig = convFig(s); const dir = s.m > 0 ? "increase" : "decrease";
         return figInst(rng, {
           stimulus: `${linIntro(rng, s)} The conversion between units is given above the table.`,
-          question: `By how many ${s.t.yu} does ${s.yq} ${dir} for each increase of 1 ${sing(c.small)} in ${s.xq}?`, correct: Math.abs(v), fmt: fmtNum,
+          question: `By how many ${s.t.yu} does ${s.yq} ${dir} for each increase of 1 ${sing(c.small)} in ${s.xq}, when ${s.xq} is measured in ${c.small}?`, correct: Math.abs(v), fmt: fmtNum,
           wrongs: [W(Math.abs(s.m), "unit_error", "표 단위당 변화를 답했다."), W(Math.abs(s.m * c.per), "formula_misuse", "환산 비율을 곱했다."), W(Math.abs(v) * 2, "other", "두 행의 간격을 잘못 잡았다."), W(Math.abs((s.m * s.d) / c.per), "step_missing", "x 간격으로 나누지 않았다."), W(Math.abs(v) + 0.5, "other", "계산 중 어긋났다.")],
           verificationJs: figJs({}, fig, `${LIN_JS}${CONV_JS}return Math.abs(m / per);`),
           trace: [...linRead(s), [`1 ${sing(s.t.xu)} = ${c.per} ${c.small} 이다.`, "Read the conversion."], [`작은 단위 1 당 변화 = ${fmtNum(Math.abs(s.m))} ÷ ${c.per} = ${fmtNum(Math.abs(v))} 이다.`, "Divide by the conversion factor."], [`따라서 ${fmtNum(Math.abs(v))} ${s.t.yu} 씩 ${s.m > 0 ? "증가" : "감소"}한다.`, "State the rate."]], variant: "rate_per_small_unit",

@@ -1,0 +1,23 @@
+{
+  "itemId": "linear_functions.construct_equation_from_graph.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:11:57Z",
+  "reviewer": "visual-review-agent-RA",
+  "codeHash": "d456469034418a9ec5638251f615183750d1fed3fea4de5571b5c942c38947bd",
+  "samples": [
+    "linear_functions.construct_equation_from_graph.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass",
+    "multi_figure_consistent": "n/a",
+    "choice_distinct_one_rule": "n/a"
+  },
+  "defects": [],
+  "notes": "기울기 2, 15일 때 53 → 절편 23 → 2x+23 = A. 표 일치. Nit: 문항 ID 에 graph 가 있으나 표 형식(비차단)."
+}

@@ -1,0 +1,41 @@
+{
+ "itemId": "nonlinear_functions.vertex_x.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.842Z",
+ "codeHash": "56ae60ecbc4d8c6d552743a8013dcf1a751916aaefebed1ee91304b7befe0307",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.vertex_x.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.vertex_x.TB.P.png",
+   "mobileFile": "nonlinear_functions.vertex_x.TB.P.m375.png",
+   "archetypeId": "nf.vertex_x.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A calculator was used to evaluate a function at several inputs. The function $g$ is defined by $g(x) = ax^2 + bx + c$, where $a$, $b$, and $c$ are constants. The table shown gives some values of $x$ and $g(x)$.",
+   "question": "What is the $x$-coordinate of the vertex of the parabola $y = g(x)$?",
+   "options": [
+    "16",
+    "-8",
+    "5",
+    "8"
+   ],
+   "correctIndex": 3,
+   "answer": "8",
+   "explanation": "(1) 표에서 값을 읽는다: (0, -212), (1, -167), (2, -128), (3, -95) … (2) 1계 차분: 45, 39, 33, 27, 21 — 2계 차분이 -6 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = -3 이다. (4) 두 점을 대입해 b = 48, c = -212 를 얻는다. (5) 꼭짓점 x = -(48) ÷ (2 × -3) = 8 이다. 따라서 정답은 8이다.",
+   "structuralIssues": []
+  }
+ ]
+}

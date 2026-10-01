@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.context_graph_features.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:12.000Z",
+  "reviewer": "visual-review-agent-RB",
+  "codeHash": "3afaa8ec03fa8992e7a856a212b3925566973ed842aeb5c03a14698bd45172f9",
+  "samples": [
+    "nonlinear_functions.context_graph_features.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Heights 26,122,186,218,218,186 symmetric about t=3.5; second difference -32 so max=218+16*0.25=222 -> A. Distractor 218 is the table max. Rows consistent."
+}

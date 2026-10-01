@@ -1,0 +1,41 @@
+{
+ "itemId": "nonlinear_functions.evaluate.TB.P",
+ "generatedAt": "2026-10-01T21:46:07.837Z",
+ "codeHash": "21334023d527a0e4e5838e11280889d088d312b7bf1d73f869e32328cdd00cf5",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.evaluate.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.evaluate.TB.P.png",
+   "mobileFile": "nonlinear_functions.evaluate.TB.P.m375.png",
+   "archetypeId": "nf.evaluate.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "In a practice set, a function is described by a table. Some input-output pairs for a quadratic function $k$ are given in the table shown.",
+   "question": "What is the value of $k(11)$?",
+   "options": [
+    "-262",
+    "-240",
+    "240",
+    "-180"
+   ],
+   "correctIndex": 1,
+   "answer": "-240",
+   "explanation": "(1) 표에서 값을 읽는다: (1, -10), (2, -15), (3, -24), (4, -37) … (2) 1계 차분: -5, -9, -13, -17, -21 — 2계 차분이 -4 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = -2 이다. (4) 두 점을 대입해 b = 1, c = -9 를 얻는다. (5) k(11) = -2(11)² + (1)(11) + (-9) = -240 이다. 따라서 정답은 -240이다.",
+   "structuralIssues": []
+  }
+ ]
+}

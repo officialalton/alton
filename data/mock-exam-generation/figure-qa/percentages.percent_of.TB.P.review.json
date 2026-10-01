@@ -1,0 +1,23 @@
+{
+  "itemId": "percentages.percent_of.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.091Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "a5cc3ca27965b949beb161d7fb54b10cd2e83a8dadc3f2c876826de4570ca194",
+  "samples": [
+    "percentages.percent_of.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: total 50+45+155+55=305; 0.6*305=183 = meta. Fine."
+}

@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.exponential_vs_linear_growth.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:12.000Z",
+  "reviewer": "visual-review-agent-RB",
+  "codeHash": "a6e747e32bbfd132ec0db9cd408fe689e7f4f6962c5e3df9e8371709244cd25d",
+  "samples": [
+    "nonlinear_functions.exponential_vs_linear_growth.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "A=77+35t (112,147,182,217), B=6*2^t (12,24,48,96). t=5: A=252,B=192; t=6: A=287,B=384 -> 6 = A. Table columns have axes titles/units; mobile wraps headers cleanly."
+}

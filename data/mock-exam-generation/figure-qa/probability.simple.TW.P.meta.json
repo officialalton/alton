@@ -1,0 +1,41 @@
+{
+ "itemId": "probability.simple.TW.P",
+ "generatedAt": "2026-10-01T21:46:07.818Z",
+ "codeHash": "7e9a2a4f13182b360b7608e8ef6205c392d1dc9d8210234afbece5af1deab3e2",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.simple.TW.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.simple.TW.P.png",
+   "mobileFile": "probability.simple.TW.P.m375.png",
+   "archetypeId": "pr.simple.TW.P.chain2",
+   "seed": 11,
+   "signature": "data:two_way",
+   "stimulus": "The table shows the responses of neighbors in a block survey, organized by neighbor type. Suppose one of the neighbors in the table is selected at random.",
+   "question": "What is the probability that the person chosen is one of the corner-lot neighbors or kept a garden?",
+   "options": [
+    "30/59",
+    "20/59",
+    "9/59",
+    "50/59"
+   ],
+   "correctIndex": 3,
+   "answer": "50/59",
+   "explanation": "(1) 표에서 칸을 읽는다: corner-lot neighbors — 40, 12; mid-block neighbors — 48, 18. (2) 전체 인원 = 52 + 66 = 118 이다. (3) corner-lot neighbors 의 합계는 52, 응답한 사람의 합계는 88 이다. (4) 둘 다인 사람은 40 명이므로 합집합 = 52 + 88 - 40 = 100 이다. (5) 확률 = 100/118 이다. (6) 기약분수로 50/59 이다. 따라서 정답은 50/59이다.",
+   "structuralIssues": []
+  }
+ ]
+}

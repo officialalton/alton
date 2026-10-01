@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.vertex_y.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.087Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "a8b1a5cf86f03bdbd06e1bab111183159c1998f077b7478bfd974b059cf1bae2",
+  "samples": [
+    "nonlinear_functions.vertex_y.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: second difference 6 => a=3,b=-30,c=102 (f(7)=39 ok); min at x=5, f(5)=27 = meta answer. Fine."
+}

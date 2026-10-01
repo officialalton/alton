@@ -1,0 +1,23 @@
+{
+  "itemId": "one_variable_data.range.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.089Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "31ee52a124f86cb1d978feb875c29b559ff05ec4d849c1c854cfea3dcc0f8ce6",
+  "samples": [
+    "one_variable_data.range.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: min 24, new max = 24+64=88 (>69 ok) = meta. Nit: header Bikes sold (bikes) redundant; wording each of 5 entries slightly awkward."
+}

@@ -1,0 +1,23 @@
+{
+  "itemId": "percentages.compound_change.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T21:12:03.090Z",
+  "reviewer": "visual-review-agent-RC",
+  "codeHash": "0883fb2e3185ae9016bf404d5b66403bd2d48620c774795c7f7348dc791d109a",
+  "samples": [
+    "percentages.compound_change.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Solved: 600*1.4*0.75*1.5*0.8=756 = meta. Nit: stem says number of trees sold while question asks how many trees there were (mild ambiguity); caption Change from the previous quarter wraps above the table at 375 but fine."
+}
