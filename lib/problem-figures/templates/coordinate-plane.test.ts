@@ -162,3 +162,39 @@ describe("템플릿 3 — 거부", () => {
     expect(c.issues.some((i) => i.code === "figure_label_latex_leak")).toBe(true);
   });
 });
+
+// 2026-10-02(오너 UAT C4) — 축 이름 x·y 는 화살촉에 가리지 않고, 마지막 눈금 숫자와 겹치지 않으며, 충분히 크고 굵다.
+describe("축 이름·축 제목 시인성", () => {
+  const num = (svg: string, re: RegExp) => { const m = svg.match(re); if (!m) throw new Error(`없음: ${re}`); return m.slice(1).map(Number); };
+  for (const s of SAMPLES) {
+    it(s.name, () => {
+      const svg = renderPlane(s.spec).svg;
+      expect(svg).toMatch(/<marker id="ax" markerUnits="userSpaceOnUse" markerWidth="9"/);
+      const xAxis = num(svg, /<line x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)" stroke="#111" stroke-width="1.8" marker-end/);
+      const [xx, xy] = num(svg, /<text data-axis-name="x" x="([-\d.]+)" y="([-\d.]+)" [^>]*font-size="(?:1[3-9])"[^>]*font-weight="700" font-style="italic"/);
+      expect(xx).toBeGreaterThanOrEqual(xAxis[2] + 6); // 화살촉 끝(축 끝) 바깥
+      expect(Math.abs(xy - 4.5 - xAxis[3])).toBeLessThan(1);
+      // 마지막 눈금 숫자(축 아래 15px, 12px 글꼴)와 x 라벨 상자가 겹치지 않는다.
+      const last = [...svg.matchAll(/<text x="([-\d.]+)" y="([-\d.]+)" font-family="[^"]+" font-size="12" text-anchor="middle" fill="#111">([^<]+)<\/text>/g)].map((m) => [+m[1], +m[2], m[3]] as const).filter((t) => Math.abs(t[1] - (xAxis[3] + 15)) < 0.5);
+      for (const [tx, , txt] of last) {
+        const right = tx + (String(txt).length * 6.6) / 2;
+        const tickTop = xAxis[3] + 15 - 8.5, labelBottom = xy + 0.5; // 숫자 대문자 높이 ≈0.7em, 'x' 는 내림이 없다
+        expect(right < xx || tickTop > labelBottom).toBe(true);
+      }
+      const [, yy] = num(svg, /<text data-axis-name="y" x="([-\d.]+)" y="([-\d.]+)" [^>]*font-weight="700"/);
+      const yAxisTop = Math.min(...[...svg.matchAll(/<line x1="([-\d.]+)" y1="([-\d.]+)" x2="\1" y2="([-\d.]+)" stroke="#111" stroke-width="1.8" marker-end/g)].map((m) => +m[3]));
+      expect(yy).toBeLessThanOrEqual(yAxisTop - 10 + 0.01); // 화살촉(9px) 위
+      expect(yy - 14).toBeGreaterThan(0); // 캔버스 안
+    });
+  }
+  it("축 제목은 축 눈금 숫자 가까이(가로 제목은 눈금 아래 35px 이내, 세로 제목은 눈금 숫자 왼쪽 20px 이내)", () => {
+    const s = SAMPLES.find((x) => x.name === "제1사분면 응용(축 제목)")!;
+    const svg = renderPlane(s.spec).svg;
+    const xAxis = num(svg, /<line x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)" stroke="#111" stroke-width="1.8" marker-end/);
+    const [, ty] = num(svg, /<text data-axis-title="x" x="([-\d.]+)" y="([-\d.]+)"/);
+    expect(ty - xAxis[3]).toBeLessThanOrEqual(35);
+    const [tx] = num(svg, /<text data-axis-title="y" transform="translate\(([-\d.]+) /);
+    const yTickRight = xAxis[0] - 6, widest = 3 * 0.55 * 12; // '200'
+    expect(yTickRight - widest - tx).toBeLessThanOrEqual(20);
+  });
+});

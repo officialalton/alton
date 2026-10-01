@@ -51,6 +51,18 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       sheet.raw(`<path d="M ${f(c[0] - rx)} ${f(c[1])} A ${f(rx)} ${f(ry)} 0 0 ${sweep} ${f(c[0] + rx)} ${f(c[1])}" fill="none" stroke="#111" stroke-width="${dashed ? 1.4 : 2}"${dashed ? ' stroke-dasharray="5 4"' : ""}/>`);
     }
   };
+  /**
+   * 치수선 — 2026-10-02(오너 UAT C5): 원기둥 높이 '12' 가 치수선 없이 숫자만 떠 있어, 타원 뚜껑까지 합친 겉모습과
+   * 비교돼 "지름 12 와 높이 12 가 다르다" 고 보였다. 양끝 눈금(측정 방향에 수직)이 있는 가는 선으로 잰 구간을 명시한다.
+   * data-dim 은 불변식 테스트(같은 값 = 같은 px)가 읽는다.
+   */
+  const dimLine = (a: Pt, b: Pt, kind: string, tick = 5) => {
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+    const nx = -(b[1] - a[1]) / len, ny = (b[0] - a[0]) / len;
+    sheet.registerSegment(a, b);
+    sheet.raw(`<line data-dim="${kind}" x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="#111" stroke-width="1.3"/>`);
+    for (const e of [a, b]) sheet.raw(`<line x1="${f(e[0] - nx * tick)}" y1="${f(e[1] - ny * tick)}" x2="${f(e[0] + nx * tick)}" y2="${f(e[1] + ny * tick)}" stroke="#111" stroke-width="1.3"/>`);
+  };
   const dimLabel = (x: number, y: number, t: string | undefined, what: string) => { if (t) sheet.label(x, y, t, what); };
   /** 세로 선 옆 라벨 — 오른쪽·왼쪽 후보 중 겹치지 않는 자리(규칙). */
   const sideLabel = (mid: Pt, t: string, what: string, fallbackMids: Pt[] = []) => {
@@ -150,17 +162,24 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
         // 맞춰야 한다.
         const diameterVal = r0 * 2;
         const pxPerUnit = Math.min((CYL_MAX_RX * 2) / diameterVal, CYL_MAX_H / h0);
-        rx = Math.max(CYL_MIN_SIDE, Math.round((diameterVal * pxPerUnit) / 2));
-        h = Math.max(CYL_MIN_SIDE, Math.round(h0 * pxPerUnit));
+        // 반올림하지 않는다 — 지름 = 높이면 지름선 px 와 높이 치수선 px 가 정확히 같아야 한다(C5 불변식).
+        rx = Math.max(CYL_MIN_SIDE / 2, (diameterVal * pxPerUnit) / 2);
+        h = Math.max(CYL_MIN_SIDE, h0 * pxPerUnit);
       }
       const ry = Math.max(14, Math.round(rx * 0.3));
       const c: Pt = [180, 70];
       ell(c, rx, ry);
       sheet.line([c[0] - rx, c[1]], [c[0] - rx, c[1] + h]); sheet.line([c[0] + rx, c[1]], [c[0] + rx, c[1] + h]);
       ell([c[0], c[1] + h], rx, ry, "front"); ell([c[0], c[1] + h], rx, ry, "back", true);
-      const r = d.radius ?? d.diameter;
-      if (r) { if (d.radius) { sheet.line(c, [c[0] + rx, c[1]], { w: 1.4 }); sheet.dot(c); dimLabel(c[0] + rx / 2, c[1] - 12, d.radius, "반지름 라벨"); } else { sheet.line([c[0] - rx, c[1]], [c[0] + rx, c[1]], { w: 1.4 }); dimLabel(c[0], c[1] - 12, d.diameter, "지름 라벨"); } }
-      dimLabel(c[0] + rx + 12 + (d.height ? halfDiag(d.height) : 0), c[1] + h / 2, d.height, "높이 라벨");
+      // 반지름·지름은 윗면 타원 중심 높이의 가로 치수선, 높이는 옆면 오른쪽의 세로 치수선 — 양끝 눈금이
+      // 윗면·아랫면 타원 **중심 높이**에 정렬된다(뚜껑의 볼록한 부분은 높이에 들어가지 않음을 보여 준다).
+      if (d.radius) { sheet.dot(c); dimLine(c, [c[0] + rx, c[1]], "radius"); dimLabel(c[0] + rx / 2, c[1] - 13, d.radius, "반지름 라벨"); }
+      else if (d.diameter) { dimLine([c[0] - rx, c[1]], [c[0] + rx, c[1]], "diameter"); dimLabel(c[0], c[1] - 13, d.diameter, "지름 라벨"); }
+      if (d.height) {
+        const hx = c[0] + rx + 18;
+        dimLine([hx, c[1]], [hx, c[1] + h], "height");
+        dimLabel(hx + 8 + halfDiag(d.height), c[1] + h / 2, d.height, "높이 라벨");
+      }
       parts.push(`원기둥, ${d.radius ? `반지름 ${d.radius}` : d.diameter ? `지름 ${d.diameter}` : ""}${d.height ? `, 높이 ${d.height}` : ""}`);
       break;
     }
@@ -175,16 +194,16 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
         // 지름(2×cr0) 기준으로 비교한다.
         const diameterVal = cr0 * 2;
         const pxPerUnit = Math.min((CONE_MAX_RX * 2) / diameterVal, CONE_MAX_H / ch0);
-        rx = Math.max(CONE_MIN_SIDE, Math.round((diameterVal * pxPerUnit) / 2));
-        apexH = Math.max(CONE_MIN_SIDE, Math.round(ch0 * pxPerUnit));
+        rx = Math.max(CONE_MIN_SIDE, (diameterVal * pxPerUnit) / 2);
+        apexH = Math.max(CONE_MIN_SIDE, ch0 * pxPerUnit);
       }
       const ry = Math.max(14, Math.round(rx * 0.28));
       const c: Pt = [180, 215], apex: Pt = [180, 215 - apexH];
       ell(c, rx, ry, "front"); ell(c, rx, ry, "back", true);
       sheet.line(apex, [c[0] - rx, c[1]]); sheet.line(apex, [c[0] + rx, c[1]]);
       if (d.height) { dash(apex, c); sheet.rightAngle(c, 0, Math.PI / 2, 8); sideLabel([c[0], (apex[1] + c[1]) / 2], d.height, "높이 라벨"); }
-      if (d.radius) { sheet.line(c, [c[0] + rx, c[1]], { w: 1.4 }); sheet.dot(c); dimLabel(c[0] + rx / 2, c[1] + 14, d.radius, "반지름 라벨"); }
-      if (d.diameter) { sheet.line([c[0] - rx, c[1]], [c[0] + rx, c[1]], { w: 1.4 }); dimLabel(c[0], c[1] + 14, d.diameter, "지름 라벨"); }
+      if (d.radius) { sheet.dot(c); dimLine(c, [c[0] + rx, c[1]], "radius"); dimLabel(c[0] + rx / 2, c[1] + 15, d.radius, "반지름 라벨"); }
+      if (d.diameter) { dimLine([c[0] - rx, c[1]], [c[0] + rx, c[1]], "diameter"); dimLabel(c[0], c[1] + 15, d.diameter, "지름 라벨"); }
       dimLabel((apex[0] + c[0] + rx) / 2 + 12 + (d.slant ? halfDiag(d.slant) : 0), (apex[1] + c[1]) / 2, d.slant, "모선 라벨");
       parts.push(`원뿔${d.radius ? `, 반지름 ${d.radius}` : ""}${d.diameter ? `, 지름 ${d.diameter}` : ""}${d.height ? `, 높이 ${d.height}` : ""}${d.slant ? `, 모선 ${d.slant}` : ""}`);
       break;
@@ -194,8 +213,8 @@ export function renderSolid(spec: SolidSpec): { svg: string; alt: string; issues
       sheet.raw(`<circle cx="${c[0]}" cy="${c[1]}" r="${R}" fill="none" stroke="#111" stroke-width="2"/>`);
       ell(c, R, 26, "front"); ell(c, R, 26, "back", true);
       sheet.dot(c);
-      if (d.radius) { sheet.line(c, [c[0] + R, c[1]], { w: 1.4 }); dimLabel(c[0] + R / 2, c[1] - 12, d.radius, "반지름 라벨"); }
-      if (d.diameter) { sheet.line([c[0] - R, c[1]], [c[0] + R, c[1]], { w: 1.4 }); dimLabel(c[0], c[1] - 12, d.diameter, "지름 라벨"); }
+      if (d.radius) { dimLine(c, [c[0] + R, c[1]], "radius"); dimLabel(c[0] + R / 2, c[1] - 12, d.radius, "반지름 라벨"); }
+      if (d.diameter) { dimLine([c[0] - R, c[1]], [c[0] + R, c[1]], "diameter"); dimLabel(c[0], c[1] - 12, d.diameter, "지름 라벨"); }
       parts.push(`구${d.radius ? `, 반지름 ${d.radius}` : ""}${d.diameter ? `, 지름 ${d.diameter}` : ""}`);
       break;
     }

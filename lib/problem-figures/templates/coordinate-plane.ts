@@ -3,7 +3,7 @@
 // 객체 **id** 기반. AI 는 축 범위와 객체(점·직선·함수·선분·산점도)의 수학적 정의만 낸다. 격자·굵은 축·화살표·눈금 숫자·원점 O·
 // 축 제목·라벨 자리(후보 중 겹치지 않는 첫 자리)는 여기서 정한다. 라벨을 놓을 자리가 없거나 잘리면 검증 실패.
 
-import { dedupe, f, FONT, halfDiag, Sheet, type FigureIssue, type Pt } from "./_layout";
+import { dedupe, f, FONT, halfDiag, labelWidth, Sheet, type FigureIssue, type Pt } from "./_layout";
 
 export type FnKind = "linear" | "quadratic" | "exponential" | "abs" | "sqrt" | "cubic" | "rational";
 export type PointRef = string | Pt; // 점 객체 id 또는 좌표
@@ -37,6 +37,7 @@ export type PlaneSpec = {
 };
 
 const W = 420, H = 300, PAD = 34;
+const AXIS_NAME_SIZE = 14;
 const COLORS = ["#111", "#C8102E", "#1B6FB0", "#0f7b4a"];
 const isNum = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n);
 const isPt = (p: unknown): p is Pt => Array.isArray(p) && p.length === 2 && p.every(isNum);
@@ -280,7 +281,9 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
     for (const y of ys) sheet.raw(`<line x1="${f(sx(ax.min))}" y1="${f(sy(y))}" x2="${f(sx(ax.max))}" y2="${f(sy(y))}" stroke="#9ca3af" stroke-width="0.8"/>`);
   }
   const axX = ax.min <= 0 && ax.max >= 0 ? 0 : ax.min, axY = ay.min <= 0 && ay.max >= 0 ? 0 : ay.min;
-  sheet.raw(`<defs><marker id="ax" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#111"/></marker></defs>`);
+  // 2026-10-02(오너 UAT C4) — 기본 markerUnits(strokeWidth)로 화살촉이 선 굵기 1.8배(약 14px)가 돼 축 이름 x·y 를 가렸다.
+  // 화살촉은 화면 단위 9×7px 로 고정하고, 축 이름은 화살촉 바깥(x 는 끝 오른쪽, y 는 끝 위)에 굵은 이탤릭 14px 로 둔다.
+  sheet.raw(`<defs><marker id="ax" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 z" fill="#111"/></marker></defs>`);
   sheet.raw(`<line x1="${f(sx(ax.min))}" y1="${f(sy(axY))}" x2="${f(sx(ax.max))}" y2="${f(sy(axY))}" stroke="#111" stroke-width="1.8" marker-end="url(#ax)"/>`);
   sheet.raw(`<line x1="${f(sx(axX))}" y1="${f(sy(ay.min))}" x2="${f(sx(axX))}" y2="${f(sy(ay.max))}" stroke="#111" stroke-width="1.8" marker-end="url(#ax)"/>`);
   sheet.registerSegment([sx(ax.min), sy(axY)], [sx(ax.max), sy(axY)]);
@@ -292,10 +295,15 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
   xs.forEach((x) => { if (Math.abs(x - axX) > 1e-9 && onGrid(x, xStep * ex)) sheet.raw(`<text x="${f(sx(x))}" y="${f(sy(axY) + 15)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${f(x)}</text>`); });
   ys.forEach((y) => { if (Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)) sheet.raw(`<text x="${f(sx(axX) - 6)}" y="${f(sy(y) + 4)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111">${f(y)}</text>`); });
   if (axX === 0 && axY === 0) sheet.raw(`<text x="${f(sx(0) - 5)}" y="${f(sy(0) + 14)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111" font-style="italic">O</text>`);
-  sheet.raw(`<text x="${f(sx(ax.max) + 2)}" y="${f(sy(axY) + 4)}" font-family="${FONT}" font-size="12" fill="#111" font-style="italic">${ax.label ?? "x"}</text>`);
-  sheet.raw(`<text x="${f(sx(axX))}" y="${f(sy(ay.max) - 6)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111" font-style="italic">${ay.label ?? "y"}</text>`);
-  if (ax.title) sheet.raw(`<text x="${f((padL + W - PAD) / 2)}" y="${H - 6}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${ax.title}</text>`);
-  if (ay.title) sheet.raw(`<text transform="translate(12 ${f((PAD + H - padB) / 2)}) rotate(-90)" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${ay.title}</text>`);
+  sheet.raw(`<text data-axis-name="x" x="${f(sx(ax.max) + 9)}" y="${f(sy(axY) + 4.5)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="start" fill="#111">${ax.label ?? "x"}</text>`);
+  sheet.raw(`<text data-axis-name="y" x="${f(sx(axX))}" y="${f(sy(ay.max) - 10)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="middle" fill="#111">${ay.label ?? "y"}</text>`);
+  // 축 제목은 눈금 숫자 바로 바깥에 — 캔버스 가장자리에 붙이면 축과 멀어 어느 축 제목인지 읽기 어렵다(C4).
+  if (ax.title) sheet.raw(`<text data-axis-title="x" x="${f((padL + W - PAD) / 2)}" y="${f(Math.min(H - 6, sy(ay.min) + 32))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${ax.title}</text>`);
+  if (ay.title) {
+    const widest = Math.max(0, ...ys.filter((y) => Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)).map((y) => labelWidth(f(y), 12) - 6));
+    const left = axX === ax.min ? sx(axX) - 6 - widest : sx(ax.min);
+    sheet.raw(`<text data-axis-title="y" transform="translate(${f(Math.max(12, left - 8))} ${f((PAD + H - padB) / 2)}) rotate(-90)" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${ay.title}</text>`);
+  }
 
   // ---- 객체(곡선·선을 먼저 그려 라벨 충돌 대상으로 등록하고, 라벨은 마지막에)
   const labelJobs: { text: string; anchor: Pt; color: string; what: string; prefer: Pt[] }[] = [];
