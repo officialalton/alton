@@ -45,3 +45,6 @@ next-env.d.ts
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+# 시각 검수 스냅샷의 중간 산출물(HTML) — PNG·메타·판정 파일만 커밋한다
+/data/mock-exam-generation/figure-qa/_html/

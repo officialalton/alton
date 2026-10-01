@@ -311,7 +311,8 @@ function renderScatter(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const sy = drawYAxis(sheet, fr, dom.min, dom.max, dom.step, spec.yTitle);
   const sx = (v: number) => fr.x0 + ((v - xMin) / (xMax - xMin)) * (fr.x1 - fr.x0);
   for (let v = xMin; v <= xMax + 1e-9; v += xStep) {
-    sheet.raw(`<line x1="${f(sx(v))}" y1="${f(fr.y0)}" x2="${f(sx(v))}" y2="${f(fr.y1)}" stroke="#d1d5db" stroke-width="0.8"/>`);
+    // 왼쪽 끝(v = xMin)의 세로 격자선은 y 축 자리다 — 축(굵은 검정) 위에 회색 선을 덧그리면 축이 흐려진다(2026-10-01 PNG 시각 검수).
+    if (Math.abs(v - xMin) > 1e-9) sheet.raw(`<line x1="${f(sx(v))}" y1="${f(fr.y0)}" x2="${f(sx(v))}" y2="${f(fr.y1)}" stroke="#d1d5db" stroke-width="0.8"/>`);
     sheet.raw(`<text x="${f(sx(v))}" y="${f(fr.y1 + 15)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${fmtNum(Math.round(v * 1e6) / 1e6)}</text>`);
   }
   for (const [x, y] of pts) sheet.raw(`<circle cx="${f(sx(x))}" cy="${f(sy(y))}" r="3.5" fill="#111"/>`);
@@ -366,13 +367,13 @@ function renderTwoWay(spec: DataSpec): { html: string; alt: string; issues: Figu
   const rowSums = cells.map((r) => r.reduce((a, b) => a + b, 0));
   const colSums = cols.map((_, j) => cells.reduce((a, r) => a + r[j], 0));
   const grand = rowSums.reduce((a, b) => a + b, 0);
-  const td = (v: number | string, bold = false) => `<td style="text-align:${typeof v === "number" ? "right" : "left"};padding:6px 12px;border-bottom:1px solid #ddd;white-space:nowrap${bold ? ";font-weight:700;background:#f7f7f8" : ""}">${esc(typeof v === "number" ? fmtNum(v) : v)}</td>`;
-  const th = (v: string) => `<th scope="col" style="text-align:right;padding:6px 12px;border-bottom:1.5px solid #111;font-weight:700;background:#f7f7f8;white-space:nowrap">${esc(v)}</th>`;
-  const head = `<tr><th scope="col" style="text-align:left;padding:6px 12px;border-bottom:1.5px solid #111;background:#f7f7f8">${esc(spec.rowHeader ?? "")}</th>${cols.map(th).join("")}${totals ? th("Total") : ""}</tr>`;
-  const body = rows.map((r, i) => `<tr><th scope="row" style="text-align:left;padding:6px 12px;border-bottom:1px solid #ddd;font-weight:700;white-space:nowrap">${esc(r)}</th>${cells[i].map((v) => td(v)).join("")}${totals ? td(rowSums[i], true) : ""}</tr>`).join("");
-  const foot = totals ? `<tr><th scope="row" style="text-align:left;padding:6px 12px;font-weight:700;background:#f7f7f8">Total</th>${colSums.map((v) => td(v, true)).join("")}${td(grand, true)}</tr>` : "";
+  const td = (v: number | string, bold = false) => `<td style="text-align:${typeof v === "number" ? "right" : "left"};padding:6px 8px;border-bottom:1px solid #ddd;white-space:nowrap${bold ? ";font-weight:700;background:#f7f7f8" : ""}">${esc(typeof v === "number" ? fmtNum(v) : v)}</td>`;
+  const th = (v: string) => `<th scope="col" style="text-align:right;padding:6px 8px;border-bottom:1.5px solid #111;font-weight:700;background:#f7f7f8;white-space:normal">${esc(v)}</th>`;
+  const head = `<tr><th scope="col" style="text-align:left;padding:6px 8px;border-bottom:1.5px solid #111;background:#f7f7f8">${esc(spec.rowHeader ?? "")}</th>${cols.map(th).join("")}${totals ? th("Total") : ""}</tr>`;
+  const body = rows.map((r, i) => `<tr><th scope="row" style="text-align:left;padding:6px 8px;border-bottom:1px solid #ddd;font-weight:700;white-space:normal">${esc(r)}</th>${cells[i].map((v) => td(v)).join("")}${totals ? td(rowSums[i], true) : ""}</tr>`).join("");
+  const foot = totals ? `<tr><th scope="row" style="text-align:left;padding:6px 8px;border-bottom:1px solid #ddd;font-weight:700;background:#f7f7f8">Total</th>${colSums.map((v) => td(v, true)).join("")}${td(grand, true)}</tr>` : "";
   const caption = spec.title ? `<caption style="caption-side:top;text-align:left;font-weight:700;padding:0 0 6px;font-family:${FONT}">${esc(spec.title)}</caption>` : "";
-  const html = `<div class="figure-table" style="overflow-x:auto;max-width:100%"><table role="table" style="border-collapse:collapse;font-family:${FONT};font-size:14px;color:#111;min-width:240px;border-top:2px solid #111">${caption}<thead>${head}</thead><tbody>${body}${foot}</tbody></table></div>`;
+  const html = `<div class="figure-table" style="overflow-x:auto;max-width:100%"><table role="table" style="border-collapse:collapse;font-family:${FONT};font-size:14px;color:#111;min-width:0;border-top:2px solid #111">${caption}<thead>${head}</thead><tbody>${body}${foot}</tbody></table></div>`;
   const alt = `${spec.title ? spec.title + " — " : ""}양방향 표(${rows.length}행 × ${cols.length}열${totals ? ", 합계 포함" : ""}). ${rows.map((r, i) => `${r}: ${cols.map((c, j) => `${c} ${fmtNum(cells[i][j])}`).join(", ")}${totals ? `, 합계 ${fmtNum(rowSums[i])}` : ""}`).join("; ")}${totals ? `; 전체 ${fmtNum(grand)}` : ""}.`;
   return { html, alt, issues: [] };
 }

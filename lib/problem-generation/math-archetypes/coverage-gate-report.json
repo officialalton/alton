@@ -1,0 +1,7822 @@
+{
+ "version": 1,
+ "generatedAt": "2026-10-01T07:35:28.038Z",
+ "seedsPerArchetype": 5000,
+ "ok": false,
+ "summary": {
+  "items": 303,
+  "pass": 15,
+  "fail": 0,
+  "unimplemented": 232,
+  "blockedRenderer": 56,
+  "waived": 0
+ },
+ "gates": {
+  "G1": {
+   "ok": true,
+   "note": "기존 패턴 82개 중 manifest 누락 0, manifest 밖 자료 원형 0, 중복 id 0"
+  },
+  "G10": {
+   "ok": true,
+   "note": "자료 원형 skill two_variable_data: SPR 가능 유사문항 그룹 71개(필요 60: 30세트 × 세트당 2)"
+  },
+  "G8": {
+   "ok": true,
+   "note": "구현된 15개 조합의 렌더 구조 검사(전 원형·시드 0~199) 실패 0개 조합"
+  },
+  "G9": {
+   "ok": false,
+   "note": "시각 검수 pass 15/303(구현 15개 중 15개; 상태: pass 15)"
+  }
+ },
+ "items": {
+  "equivalent_expressions.polynomial_distribution.PG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "equivalent_expressions.polynomial_distribution.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.proportion.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.proportion.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.proportion.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.proportion.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.proportion.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.chained_conversion.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "ratios_rates_units.chained_conversion.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_one_var.solve.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_one_var.word_problem_translate.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_one_var.word_problem_translate.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_one_var.literal_rearrange.PG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.simple.TW.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.simple.FQ.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.simple.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.simple.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.simple.VT.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.conditional.TW.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.conditional.FQ.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.conditional.VT.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.sequential_without_replacement.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.sequential_without_replacement.VT.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.sequential_without_replacement.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.root.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.root.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.root.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.sum_of_roots.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.sum_of_roots.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.product_of_roots.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.num_real_solutions.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.num_real_solutions.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.irrational_sum_of_roots.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.irrational_product_of_roots.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.irrational_root_radical_form.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.linear_quadratic_intersection.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.parameter_discriminant.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.parameter_discriminant.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.evaluate.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.evaluate.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.evaluate.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.vertex_x.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.vertex_x.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.vertex_x.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.vertex_y.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.vertex_y.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.vertex_y.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.find_x_for_value.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.find_x_for_value.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.interpret_a.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.interpret_a.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.interpret_b.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.interpret_b.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.solve_one_var.NL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.solve_one_var.NL.C": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.solve_one_var.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.point_in_solution.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.point_in_solution.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.point_in_solution.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.table_verification.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.table_verification.TB.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.evaluate.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.evaluate.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.find_x_for_value.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.find_x_for_value.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.slope_from_two_points.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.slope_from_two_points.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.slope_from_two_points.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.interpret_slope.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.interpret_slope.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.interpret_slope.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.interpret_intercept.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.interpret_intercept.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.interpret_intercept.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.intersection_x.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.intersection_x.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.intersection_y.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.intersection_sum.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.slope.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.slope.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.slope.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.intercept.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.intercept.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.num_solutions.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_equations_two_var.num_solutions.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.substitution_solve.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.substitution_solve.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.elimination_value.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.param_no_solution.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.param_no_solution.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.word_system.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.word_system.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.word_system.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.triangle_angle_sum.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.triangle_angle_sum.TR.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.triangle_angle_sum.PT.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.exterior_angle.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.exterior_angle.PT.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.isosceles_base_angle.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.isosceles_base_angle.TR.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.similar_triangles.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.similar_triangles.TN.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.similar_triangles.TR.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.similar_triangles.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.pythagorean_hypotenuse.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.pythagorean_hypotenuse.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.pythagorean_leg.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.pythagorean_leg.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.trig_ratio.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.trig_ratio.UC.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.trig_ratio.TC.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.FQ.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.DP.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.HG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.SL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.FO.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.mean.DP.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.DP.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.FQ.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.HG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.BX.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.SL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.FO.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.median.BX.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.range.DP.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.range.BX.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.range.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.range.SL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.range.HG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.grouped_median_interval.HG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.grouped_median_interval.FQ.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.grouped_median_interval.FO.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.grouped_median_interval.HG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.cell.TW.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "inverse",
+    "chain2",
+    "unit_ratio",
+    "compare_scenarios"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+   }
+  },
+  "two_variable_data.cell.SB.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.row_total.TW.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "inverse",
+    "unit_ratio",
+    "constraint_select",
+    "compare_scenarios"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+   }
+  },
+  "two_variable_data.row_total.SB.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.conditional_share.TW.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "chain2",
+    "compare_scenarios",
+    "inverse",
+    "compose_kind"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+   }
+  },
+  "two_variable_data.conditional_share.SB.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.conditional_share.TW.C": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "inverse",
+    "chain2",
+    "repr_shift",
+    "compare_scenarios"
+   ],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+   }
+  },
+  "two_variable_data.scatter_equation.SC.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "inverse",
+    "chain2",
+    "compare_scenarios",
+    "constraint_select"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+   }
+  },
+  "two_variable_data.scatter_equation.LG.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "inverse",
+    "chain2",
+    "compare_scenarios",
+    "constraint_select"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+   }
+  },
+  "two_variable_data.scatter_equation.SC.C": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "repr_shift",
+    "chain2",
+    "inverse",
+    "compare_scenarios"
+   ],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-D2 · 2026-10-01T07:21:15Z"
+   }
+  },
+  "two_variable_data.scatter_predict.SC.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "chain2",
+    "compare_scenarios",
+    "unit_ratio",
+    "constraint_select"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+   }
+  },
+  "two_variable_data.scatter_predict.LG.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "chain2",
+    "compare_scenarios",
+    "unit_ratio",
+    "constraint_select"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+   }
+  },
+  "two_variable_data.scatter_slope_context.SC.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "unit_ratio",
+    "repr_shift",
+    "compare_scenarios",
+    "inverse"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+   }
+  },
+  "two_variable_data.scatter_slope_context.LG.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "unit_ratio",
+    "repr_shift",
+    "compare_scenarios",
+    "inverse"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+   }
+  },
+  "two_variable_data.scatter_count_above.SC.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "constraint_select",
+    "repr_shift",
+    "compare_scenarios",
+    "chain2"
+   ],
+   "sprHard": 4,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+   }
+  },
+  "two_variable_data.scatter_count_above.SC.C": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "constraint_select",
+    "compare_scenarios",
+    "inverse",
+    "unit_ratio"
+   ],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-D2 · 2026-10-01T07:21:15Z"
+   }
+  },
+  "inference_margin_error.population_estimate.ST.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.population_estimate.NL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.population_estimate.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.margin_interval.ST.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.margin_interval.NL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.margin_interval.NL.C": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.sample_size_effect.ST.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "inference_margin_error.sample_size_effect.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_of.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_of.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_of.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.find_whole.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.find_whole.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.find_whole.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_change.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_change.LG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_change.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.percent_change.SB.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.find_percent.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.find_percent.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.find_percent.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.compound_change.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.compound_change.LG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "percentages.compound_change.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.rectangle_area.PG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.rectangle_area.CM.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.rectangle_area.LS.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.rectangle_area.PG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.triangle_area.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.triangle_area.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.triangle_area.PG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.prism_volume.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.prism_volume.SX.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.prism_missing_dimension.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.prism_missing_dimension.SO.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.cylinder_volume_radius.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.cylinder_volume_radius.SX.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.cylinder_volume_diameter.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.cylinder_volume_diameter.SX.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circumference_radius.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circumference_radius.CM.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circumference_diameter.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.arc_length.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.arc_length.CM.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.sector_area.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.sector_area.CM.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.sector_area.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.central_from_inscribed.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.central_from_inscribed.CI.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.inscribed_from_central.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circle_equation_transform.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circle_equation_transform.CG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circle_equation_transform.CG.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.construct_equation_from_graph.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.construct_equation_from_graph.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.construct_equation_from_graph.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_functions.construct_equation_from_graph.LN.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.system_from_graph.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "systems_linear.system_from_graph.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.inequality_from_graph.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.inequality_from_graph.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.compound_inequality_number_line.NL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "linear_inequalities.compound_inequality_number_line.NL.C": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_model.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_model.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_model.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_model.TB.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_vs_linear_growth.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_vs_linear_growth.LG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.exponential_vs_linear_growth.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.function_transformation.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.function_transformation.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.function_transformation.FN.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.context_graph_features.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.context_graph_features.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.rational_asymptote.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_functions.rational_asymptote.FN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.circle_equation_graph.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "nonlinear_equations_systems.circle_equation_graph.CG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.spread_comparison.HG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.spread_comparison.DP.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.spread_comparison.BX.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.spread_comparison.HG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.quartile_percentile_from_plot.BX.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.quartile_percentile_from_plot.SL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.quartile_percentile_from_plot.FO.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.outlier_effect.DP.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.outlier_effect.BX.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.outlier_effect.SL.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.relative_cumulative_frequency.HG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.relative_cumulative_frequency.FO.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "one_variable_data.relative_cumulative_frequency.FQ.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.association_direction_strength.SC.P": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "repr_shift",
+    "compare_scenarios",
+    "chain2",
+    "param_condition"
+   ],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+   }
+  },
+  "two_variable_data.association_direction_strength.SC.C": {
+   "status": "pass",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "repr_shift",
+    "compare_scenarios",
+    "chain2",
+    "param_condition"
+   ],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "pass",
+    "detail": "visual-review-agent-D2 · 2026-10-01T07:21:15Z"
+   }
+  },
+  "two_variable_data.model_choice_linear_quadratic_exponential.SC.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.model_choice_linear_quadratic_exponential.SC.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.model_choice_linear_quadratic_exponential.FN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.intercept_residual_interpretation.SC.P#1": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.intercept_residual_interpretation.SC.P#2": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.outlier_influence_on_fit.SC.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "two_variable_data.outlier_influence_on_fit.SC.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.spinner_expected_value.PI.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "probability.spinner_expected_value.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "evaluating_statistical_claims.sampling_generalization.ST.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "evaluating_statistical_claims.sampling_generalization.TB.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "evaluating_statistical_claims.causal_vs_association.ST.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "evaluating_statistical_claims.causal_vs_association.BR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "evaluating_statistical_claims.study_design_random_assignment.ST.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.parallel_lines_transversal_angles.PT.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.parallel_lines_transversal_angles.PT.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.parallel_lines_transversal_angles.P3.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.vertical_supplementary_angles.PT.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.vertical_supplementary_angles.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.congruent_triangles.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.congruent_triangles.TR.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.polygon_interior_angle.PG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.triangle_inequality.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "lines_angles_triangles.nested_similar_parallel.TN.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.special_right_triangles.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.sin_cos_complementary.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.trig_application_elevation.TR.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.unit_circle_radian.UC.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.unit_circle_radian.UC.C": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.sinusoid_graph.TC.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.sinusoid_graph.TC.C": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.cone_pyramid_sphere_volume.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.surface_area.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.composite_solid.SX.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.shaded_region_area.CM.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.shaded_region_area.CM.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.trapezoid_parallelogram_area.PG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.similar_solids_scale.SO.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.similar_solids_scale.SO.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "area_volume.space_diagonal.SX.P": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.tangent_radius_perpendicular.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.chord_length.CI.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circle_equation_complete_square.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.circle_equation_complete_square.CG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "circles.inscribed_circumscribed_polygon.CM.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.distance_midpoint.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.transformation_image.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.transformation_image.CG.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.transformation_image.CG.B": {
+   "status": "blocked_renderer",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.polygon_area_on_plane.CG.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.parallel_perpendicular_slopes.LN.P": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  },
+  "coordinate_geometry.parallel_perpendicular_slopes.LN.C": {
+   "status": "unimplemented",
+   "hard": 0,
+   "em": 0,
+   "operators": [],
+   "sprHard": 0,
+   "failures": [],
+   "qa": {
+    "state": "unimplemented",
+    "detail": "구현되지 않은 조합"
+   }
+  }
+ },
+ "qaByItem": {
+  "equivalent_expressions.polynomial_distribution.PG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "equivalent_expressions.polynomial_distribution.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.proportion.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.proportion.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.proportion.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.proportion.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.proportion.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.chained_conversion.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "ratios_rates_units.chained_conversion.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_one_var.solve.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_one_var.word_problem_translate.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_one_var.word_problem_translate.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_one_var.literal_rearrange.PG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.simple.TW.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.simple.FQ.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.simple.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.simple.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.simple.VT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.conditional.TW.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.conditional.FQ.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.conditional.VT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.sequential_without_replacement.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.sequential_without_replacement.VT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.sequential_without_replacement.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.root.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.root.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.root.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.sum_of_roots.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.sum_of_roots.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.product_of_roots.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.num_real_solutions.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.num_real_solutions.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.irrational_sum_of_roots.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.irrational_product_of_roots.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.irrational_root_radical_form.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.linear_quadratic_intersection.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.parameter_discriminant.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.parameter_discriminant.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.evaluate.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.evaluate.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.evaluate.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.vertex_x.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.vertex_x.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.vertex_x.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.vertex_y.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.vertex_y.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.vertex_y.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.find_x_for_value.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.find_x_for_value.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.interpret_a.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.interpret_a.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.interpret_b.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.interpret_b.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.solve_one_var.NL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.solve_one_var.NL.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.solve_one_var.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.point_in_solution.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.point_in_solution.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.point_in_solution.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.table_verification.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.table_verification.TB.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.evaluate.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.evaluate.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.find_x_for_value.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.find_x_for_value.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.slope_from_two_points.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.slope_from_two_points.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.slope_from_two_points.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.interpret_slope.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.interpret_slope.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.interpret_slope.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.interpret_intercept.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.interpret_intercept.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.interpret_intercept.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.intersection_x.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.intersection_x.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.intersection_y.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.intersection_sum.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.slope.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.slope.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.slope.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.intercept.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.intercept.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.num_solutions.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_equations_two_var.num_solutions.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.substitution_solve.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.substitution_solve.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.elimination_value.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.param_no_solution.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.param_no_solution.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.word_system.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.word_system.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.word_system.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.triangle_angle_sum.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.triangle_angle_sum.TR.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.triangle_angle_sum.PT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.exterior_angle.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.exterior_angle.PT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.isosceles_base_angle.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.isosceles_base_angle.TR.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.similar_triangles.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.similar_triangles.TN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.similar_triangles.TR.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.similar_triangles.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.pythagorean_hypotenuse.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.pythagorean_hypotenuse.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.pythagorean_leg.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.pythagorean_leg.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.trig_ratio.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.trig_ratio.UC.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.trig_ratio.TC.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.FQ.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.DP.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.HG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.SL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.FO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.mean.DP.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.DP.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.FQ.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.HG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.BX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.SL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.FO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.median.BX.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.range.DP.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.range.BX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.range.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.range.SL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.range.HG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.grouped_median_interval.HG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.grouped_median_interval.FQ.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.grouped_median_interval.FO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.grouped_median_interval.HG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.cell.TW.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+  },
+  "two_variable_data.cell.SB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.row_total.TW.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+  },
+  "two_variable_data.row_total.SB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.conditional_share.TW.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+  },
+  "two_variable_data.conditional_share.SB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.conditional_share.TW.C": {
+   "state": "pass",
+   "detail": "visual-review-agent-A3 · 2026-10-01T07:22:49Z"
+  },
+  "two_variable_data.scatter_equation.SC.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+  },
+  "two_variable_data.scatter_equation.LG.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+  },
+  "two_variable_data.scatter_equation.SC.C": {
+   "state": "pass",
+   "detail": "visual-review-agent-D2 · 2026-10-01T07:21:15Z"
+  },
+  "two_variable_data.scatter_predict.SC.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+  },
+  "two_variable_data.scatter_predict.LG.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-B3 · 2026-10-01T07:22:51.000Z"
+  },
+  "two_variable_data.scatter_slope_context.SC.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+  },
+  "two_variable_data.scatter_slope_context.LG.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+  },
+  "two_variable_data.scatter_count_above.SC.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+  },
+  "two_variable_data.scatter_count_above.SC.C": {
+   "state": "pass",
+   "detail": "visual-review-agent-D2 · 2026-10-01T07:21:15Z"
+  },
+  "inference_margin_error.population_estimate.ST.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.population_estimate.NL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.population_estimate.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.margin_interval.ST.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.margin_interval.NL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.margin_interval.NL.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.sample_size_effect.ST.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "inference_margin_error.sample_size_effect.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_of.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_of.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_of.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.find_whole.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.find_whole.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.find_whole.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_change.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_change.LG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_change.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.percent_change.SB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.find_percent.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.find_percent.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.find_percent.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.compound_change.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.compound_change.LG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "percentages.compound_change.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.rectangle_area.PG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.rectangle_area.CM.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.rectangle_area.LS.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.rectangle_area.PG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.triangle_area.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.triangle_area.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.triangle_area.PG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.prism_volume.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.prism_volume.SX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.prism_missing_dimension.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.prism_missing_dimension.SO.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.cylinder_volume_radius.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.cylinder_volume_radius.SX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.cylinder_volume_diameter.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.cylinder_volume_diameter.SX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circumference_radius.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circumference_radius.CM.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circumference_diameter.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.arc_length.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.arc_length.CM.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.sector_area.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.sector_area.CM.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.sector_area.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.central_from_inscribed.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.central_from_inscribed.CI.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.inscribed_from_central.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circle_equation_transform.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circle_equation_transform.CG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circle_equation_transform.CG.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.construct_equation_from_graph.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.construct_equation_from_graph.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.construct_equation_from_graph.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_functions.construct_equation_from_graph.LN.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.system_from_graph.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "systems_linear.system_from_graph.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.inequality_from_graph.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.inequality_from_graph.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.compound_inequality_number_line.NL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "linear_inequalities.compound_inequality_number_line.NL.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_model.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_model.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_model.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_model.TB.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_vs_linear_growth.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_vs_linear_growth.LG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.exponential_vs_linear_growth.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.function_transformation.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.function_transformation.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.function_transformation.FN.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.context_graph_features.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.context_graph_features.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.rational_asymptote.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_functions.rational_asymptote.FN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.circle_equation_graph.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "nonlinear_equations_systems.circle_equation_graph.CG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.spread_comparison.HG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.spread_comparison.DP.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.spread_comparison.BX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.spread_comparison.HG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.quartile_percentile_from_plot.BX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.quartile_percentile_from_plot.SL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.quartile_percentile_from_plot.FO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.outlier_effect.DP.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.outlier_effect.BX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.outlier_effect.SL.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.relative_cumulative_frequency.HG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.relative_cumulative_frequency.FO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "one_variable_data.relative_cumulative_frequency.FQ.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.association_direction_strength.SC.P": {
+   "state": "pass",
+   "detail": "visual-review-agent-C3 · 2026-10-01T07:22:56Z"
+  },
+  "two_variable_data.association_direction_strength.SC.C": {
+   "state": "pass",
+   "detail": "visual-review-agent-D2 · 2026-10-01T07:21:15Z"
+  },
+  "two_variable_data.model_choice_linear_quadratic_exponential.SC.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.model_choice_linear_quadratic_exponential.SC.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.model_choice_linear_quadratic_exponential.FN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.intercept_residual_interpretation.SC.P#1": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.intercept_residual_interpretation.SC.P#2": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.outlier_influence_on_fit.SC.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "two_variable_data.outlier_influence_on_fit.SC.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.spinner_expected_value.PI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "probability.spinner_expected_value.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "evaluating_statistical_claims.sampling_generalization.ST.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "evaluating_statistical_claims.sampling_generalization.TB.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "evaluating_statistical_claims.causal_vs_association.ST.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "evaluating_statistical_claims.causal_vs_association.BR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "evaluating_statistical_claims.study_design_random_assignment.ST.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.parallel_lines_transversal_angles.PT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.parallel_lines_transversal_angles.PT.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.parallel_lines_transversal_angles.P3.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.vertical_supplementary_angles.PT.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.vertical_supplementary_angles.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.congruent_triangles.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.congruent_triangles.TR.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.polygon_interior_angle.PG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.triangle_inequality.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "lines_angles_triangles.nested_similar_parallel.TN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.special_right_triangles.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.sin_cos_complementary.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.trig_application_elevation.TR.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.unit_circle_radian.UC.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.unit_circle_radian.UC.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.sinusoid_graph.TC.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.sinusoid_graph.TC.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.cone_pyramid_sphere_volume.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.surface_area.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.composite_solid.SX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.shaded_region_area.CM.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.shaded_region_area.CM.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.trapezoid_parallelogram_area.PG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.similar_solids_scale.SO.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.similar_solids_scale.SO.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "area_volume.space_diagonal.SX.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.tangent_radius_perpendicular.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.chord_length.CI.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circle_equation_complete_square.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.circle_equation_complete_square.CG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "circles.inscribed_circumscribed_polygon.CM.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.distance_midpoint.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.transformation_image.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.transformation_image.CG.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.transformation_image.CG.B": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.polygon_area_on_plane.CG.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.parallel_perpendicular_slopes.LN.P": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  },
+  "coordinate_geometry.parallel_perpendicular_slopes.LN.C": {
+   "state": "unimplemented",
+   "detail": "구현되지 않은 조합"
+  }
+ },
+ "spr": {
+  "requiredHardSprFor30Sets": 60,
+  "supplyImplemented": 71,
+  "sprCapableItems": 235,
+  "sprIncapableItems": 68,
+  "byItem": {
+   "two_variable_data.cell.TW.P": 4,
+   "two_variable_data.row_total.TW.P": 4,
+   "two_variable_data.conditional_share.TW.P": 4,
+   "two_variable_data.conditional_share.TW.C": 0,
+   "two_variable_data.scatter_equation.SC.P": 4,
+   "two_variable_data.scatter_equation.LG.P": 4,
+   "two_variable_data.scatter_equation.SC.C": 0,
+   "two_variable_data.scatter_predict.SC.P": 4,
+   "two_variable_data.scatter_predict.LG.P": 4,
+   "two_variable_data.scatter_slope_context.SC.P": 4,
+   "two_variable_data.scatter_slope_context.LG.P": 4,
+   "two_variable_data.scatter_count_above.SC.P": 4,
+   "two_variable_data.scatter_count_above.SC.C": 0,
+   "two_variable_data.association_direction_strength.SC.P": 0,
+   "two_variable_data.association_direction_strength.SC.C": 0
+  }
+ },
+ "sprInventory": {
+  "total": 388,
+  "capable": 342,
+  "declared": 60,
+  "probed": 328,
+  "incapable": [
+   {
+    "id": "ee.polynomial_distribution.compose_kind",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "ee.polynomial_distribution.repr_shift",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "ee.rational_equivalence.compose_kind",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "nes.irrational_root_radical_form.inverse",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "nes.irrational_root_radical_form.chain2",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "nes.irrational_root_radical_form.constraint_select",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "nes.irrational_root_radical_form.compose_kind",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "tvd.conditional_share.TW.C.inverse",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.conditional_share.TW.C.chain2",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.conditional_share.TW.C.repr_shift",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.conditional_share.TW.C.compare_scenarios",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_equation.SC.C.repr_shift",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_equation.SC.C.chain2",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_equation.SC.C.inverse",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_equation.SC.C.compare_scenarios",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_count_above.SC.C.constraint_select",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_count_above.SC.C.compare_scenarios",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_count_above.SC.C.inverse",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.scatter_count_above.SC.C.unit_ratio",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.C.repr_shift",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.C.compare_scenarios",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.C.chain2",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.C.param_condition",
+    "reason": "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.P.repr_shift",
+    "reason": "정답이 서술 선지(연관의 방향·강도 판단)이고 숫자 값이 아니라서 단답으로 낼 수 없다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.P.compare_scenarios",
+    "reason": "정답이 서술 선지(연관의 방향·강도 판단)이고 숫자 값이 아니라서 단답으로 낼 수 없다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.P.chain2",
+    "reason": "정답이 서술 선지(연관의 방향·강도 판단)이고 숫자 값이 아니라서 단답으로 낼 수 없다",
+    "declared": true
+   },
+   {
+    "id": "tvd.association_direction_strength.SC.P.param_condition",
+    "reason": "정답이 서술 선지(연관의 방향·강도 판단)이고 숫자 값이 아니라서 단답으로 낼 수 없다",
+    "declared": true
+   },
+   {
+    "id": "av.cylinder_volume_radius.inverse",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "av.cylinder_volume_radius.compose_kind",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "av.cylinder_volume_radius.unit_ratio",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "av.cylinder_volume_diameter.chain2",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "av.cylinder_volume_diameter.unit_ratio",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_radius.inverse",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_radius.unit_ratio",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_radius.compose_kind",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답이 식(선지가 식)이라 SPR 불가)",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_radius.compare_scenarios",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_diameter.inverse",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_diameter.unit_ratio",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "ci.circumference_diameter.chain2",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.arc_length.chain2",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "ci.arc_length.unit_ratio",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "ci.arc_length.repr_shift",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.sector_area.inverse",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "ci.sector_area.chain2",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(spr 변환 불가: 정답 표기가 순수한 수가 아님(π·문자·식))",
+    "declared": false
+   },
+   {
+    "id": "ci.sector_area.compose_kind",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   },
+   {
+    "id": "ci.sector_area.compare_scenarios",
+    "reason": "프로브 판정: 시드 30개 중 0개만 SPR 로 변환됨(x)",
+    "declared": false
+   }
+  ]
+ },
+ "archetypeSweeps": [
+  {
+   "id": "tvd.cell.TW.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1262,
+    1236,
+    1295,
+    1207
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1275,
+    1234,
+    1262,
+    1229
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 44,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1244,
+    1236,
+    1250,
+    1270
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.unit_ratio",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1217,
+    1246,
+    1282,
+    1255
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.easy_read_cell",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 87,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1256,
+    1278,
+    1224,
+    1242
+   ]
+  },
+  {
+   "id": "tvd.cell.TW.P.med_sum_cells",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 88,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1236,
+    1282,
+    1210,
+    1272
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1217,
+    1274,
+    1275,
+    1234
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1248,
+    1224,
+    1223,
+    1305
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.unit_ratio",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1219,
+    1192,
+    1314,
+    1275
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.constraint_select",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "6/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1225,
+    1255,
+    1201,
+    1319
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.easy_row_total",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 114,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1311,
+    1217,
+    1236,
+    1236
+   ]
+  },
+  {
+   "id": "tvd.row_total.TW.P.med_row_gap",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 48,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1237,
+    1239,
+    1293,
+    1231
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1201,
+    1249,
+    1239,
+    1311
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 88,
+   "dup200": 0,
+   "dupAll": "2/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1275,
+    1248,
+    1242,
+    1235
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 89,
+   "dup200": 0,
+   "dupAll": "12/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1257,
+    1246,
+    1239,
+    1258
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.compose_kind",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1204,
+    1284,
+    1266,
+    1246
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.compose_kind",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 46,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.easy_row_percent",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 85,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1308,
+    1257,
+    1155,
+    1280
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.P.med_overall_percent",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 86,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1248,
+    1272,
+    1290,
+    1190
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.C.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1291,
+    1238,
+    1244,
+    1227
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.C.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1283,
+    1250,
+    1256,
+    1211
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.C.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1226,
+    1262,
+    1285,
+    1227
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.C.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1239,
+    1229,
+    1244,
+    1288
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.C.easy_table_row_share",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1297,
+    1313,
+    1188,
+    1202
+   ]
+  },
+  {
+   "id": "tvd.conditional_share.TW.C.med_table_two_totals",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 45,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1253,
+    1213,
+    1268,
+    1266
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 117,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1192,
+    1262,
+    1306,
+    1240
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 117,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 106,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1254,
+    1235,
+    1272,
+    1239
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 110,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 124,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1285,
+    1225,
+    1243,
+    1247
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 137,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 147,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1233,
+    1301,
+    1226,
+    1240
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.constraint_select",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 144,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.easy_slope",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 119,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1317,
+    1233,
+    1261,
+    1189
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.P.med_intercept",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 114,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1271,
+    1240,
+    1258,
+    1231
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 122,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1213,
+    1282,
+    1283,
+    1222
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 126,
+   "dup200": 0,
+   "dupAll": "23/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 100,
+   "dup200": 0,
+   "dupAll": "1/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1228,
+    1237,
+    1291,
+    1244
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 98,
+   "dup200": 0,
+   "dupAll": "26/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1179,
+    1261,
+    1265,
+    1295
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 123,
+   "dup200": 0,
+   "dupAll": "2/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 146,
+   "dup200": 0,
+   "dupAll": "1/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1295,
+    1242,
+    1266,
+    1197
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.constraint_select",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 140,
+   "dup200": 0,
+   "dupAll": "45/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.easy_slope",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 160,
+   "dup200": 0,
+   "dupAll": "14/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1278,
+    1214,
+    1225,
+    1283
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.LG.P.med_intercept",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "dup200": 0,
+   "dupAll": "10/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1219,
+    1302,
+    1249,
+    1230
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.C.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 62,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1225,
+    1229,
+    1291,
+    1255
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.C.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 62,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1315,
+    1245,
+    1244,
+    1196
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.C.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 61,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1237,
+    1284,
+    1211,
+    1268
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.C.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 62,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1183,
+    1316,
+    1316,
+    1185
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.C.easy_sign_intercept",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 63,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1222,
+    1231,
+    1222,
+    1325
+   ]
+  },
+  {
+   "id": "tvd.scatter_equation.SC.C.med_slope_and_point",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 61,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1242,
+    1260,
+    1216,
+    1282
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 87,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1236,
+    1292,
+    1241,
+    1231
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 99,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 173,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1256,
+    1227,
+    1280,
+    1237
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 180,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 71,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1214,
+    1283,
+    1246,
+    1257
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.unit_ratio",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 70,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 113,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1236,
+    1296,
+    1211,
+    1257
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.constraint_select",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 112,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.easy_read_end",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 118,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1289,
+    1234,
+    1225,
+    1252
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.SC.P.med_predict",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 122,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1262,
+    1300,
+    1191,
+    1247
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 67,
+   "dup200": 0,
+   "dupAll": "1/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1262,
+    1223,
+    1267,
+    1248
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 67,
+   "dup200": 0,
+   "dupAll": "8/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 148,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1307,
+    1249,
+    1213,
+    1231
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 149,
+   "dup200": 0,
+   "dupAll": "1/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 43,
+   "dup200": 0,
+   "dupAll": "4/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1228,
+    1262,
+    1229,
+    1281
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.unit_ratio",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 46,
+   "dup200": 0,
+   "dupAll": "42/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 126,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1261,
+    1301,
+    1231,
+    1207
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.constraint_select",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 126,
+   "dup200": 0,
+   "dupAll": "13/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.easy_read_end",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 119,
+   "dup200": 0,
+   "dupAll": "7/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1227,
+    1223,
+    1258,
+    1292
+   ]
+  },
+  {
+   "id": "tvd.scatter_predict.LG.P.med_predict",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 116,
+   "dup200": 0,
+   "dupAll": "2/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1227,
+    1229,
+    1259,
+    1285
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 76,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1288,
+    1243,
+    1206,
+    1263
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.unit_ratio",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 78,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 102,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1314,
+    1221,
+    1270,
+    1195
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.repr_shift",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 106,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 89,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1274,
+    1216,
+    1245,
+    1265
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 100,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1223,
+    1279,
+    1250,
+    1248
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 118,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.easy_range_change",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 115,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1239,
+    1241,
+    1277,
+    1243
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.SC.P.med_unit_slope",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 120,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1287,
+    1177,
+    1239,
+    1297
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 51,
+   "dup200": 0,
+   "dupAll": "5/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1275,
+    1242,
+    1281,
+    1202
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.unit_ratio",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 49,
+   "dup200": 0,
+   "dupAll": "138/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 65,
+   "dup200": 0,
+   "dupAll": "2/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1259,
+    1232,
+    1301,
+    1208
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.repr_shift",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 66,
+   "dup200": 0,
+   "dupAll": "17/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 67,
+   "dup200": 0,
+   "dupAll": "1/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1268,
+    1209,
+    1257,
+    1266
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 66,
+   "dup200": 0,
+   "dupAll": "9/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 135,
+   "dup200": 0,
+   "dupAll": "1/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1272,
+    1219,
+    1294,
+    1215
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.inverse",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 131,
+   "dup200": 0,
+   "dupAll": "32/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.easy_range_change",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 110,
+   "dup200": 0,
+   "dupAll": "16/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1202,
+    1269,
+    1254,
+    1275
+   ]
+  },
+  {
+   "id": "tvd.scatter_slope_context.LG.P.med_unit_slope",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 113,
+   "dup200": 0,
+   "dupAll": "4/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1268,
+    1237,
+    1256,
+    1239
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 191,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1249,
+    1234,
+    1280,
+    1237
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.constraint_select",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 188,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 176,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1212,
+    1203,
+    1276,
+    1309
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.repr_shift",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 190,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 172,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1232,
+    1264,
+    1210,
+    1294
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.compare_scenarios",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 183,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 113,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1274,
+    1220,
+    1197,
+    1309
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.chain2",
+   "fmt": "spr",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 117,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.easy_count_points",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 112,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1222,
+    1260,
+    1251,
+    1267
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.P.med_count_above",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 112,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1275,
+    1225,
+    1243,
+    1257
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.C.constraint_select",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1268,
+    1221,
+    1310,
+    1201
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.C.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1264,
+    1192,
+    1248,
+    1296
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.C.inverse",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1250,
+    1259,
+    1230,
+    1261
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.C.unit_ratio",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 59,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1250,
+    1244,
+    1228,
+    1278
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.C.easy_majority_above",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1268,
+    1224,
+    1257,
+    1251
+   ]
+  },
+  {
+   "id": "tvd.scatter_count_above.SC.C.med_at_least",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1256,
+    1213,
+    1268,
+    1263
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.P.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 60,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1236,
+    1267,
+    1235,
+    1262
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.P.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 58,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1263,
+    1255,
+    1227,
+    1255
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.P.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 33,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1217,
+    1265,
+    1272,
+    1246
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.P.param_condition",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 59,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1266,
+    1264,
+    1257,
+    1213
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.P.easy_direction",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 58,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1303,
+    1247,
+    1181,
+    1269
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.P.med_strength",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 59,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1305,
+    1212,
+    1256,
+    1227
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.C.repr_shift",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 63,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1298,
+    1207,
+    1250,
+    1245
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.C.compare_scenarios",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 61,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1264,
+    1224,
+    1264,
+    1248
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.C.chain2",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 59,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1256,
+    1228,
+    1264,
+    1252
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.C.param_condition",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 59,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1229,
+    1263,
+    1231,
+    1277
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.C.easy_none",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 61,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1229,
+    1284,
+    1213,
+    1274
+   ]
+  },
+  {
+   "id": "tvd.association_direction_strength.SC.C.med_negative",
+   "fmt": "mc",
+   "seeds": 5000,
+   "produced": 5000,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 61,
+   "dup200": 0,
+   "dupAll": "0/5000",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    1228,
+    1252,
+    1326,
+    1194
+   ]
+  }
+ ]
+}

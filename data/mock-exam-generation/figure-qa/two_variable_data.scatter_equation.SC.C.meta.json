@@ -1,0 +1,40 @@
+{
+ "itemId": "two_variable_data.scatter_equation.SC.C",
+ "generatedAt": "2026-10-01T07:21:50.636Z",
+ "codeHash": "370605ba4b57494f815ff1831927cb9b444c51483e3595de8516a873900c5c1e",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-choice.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.scatter_equation.SC.C.png",
+   "mobileFile": "two_variable_data.scatter_equation.SC.C.m375.png",
+   "archetypeId": "tvd.scatter_equation.SC.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Researchers studied the number of cups of flour used and the number of muffins baked. A line of best fit for the data predicts 40 muffins when flour is 0, and the predicted value increases by 2 muffins for each 1 cup increase in flour.",
+   "question": "Which scatterplot shows a line of best fit that matches this description?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) x = 0 에서 40 이므로 y 절편은 40 이다. (2) 1 cup 당 증가 2 이므로 기울기는 2 이다. (3) 직선은 y = 2x + 40 이다. (4) 네 그래프의 추세선이 (0, 40) 를 지나는지, 기울기의 부호와 크기가 맞는지 대어 본다. (5) 부호가 반대이거나 절편·기울기 크기가 다른 선은 제외한다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "itemId": "two_variable_data.conditional_share.TW.C",
+ "generatedAt": "2026-10-01T07:21:50.632Z",
+ "codeHash": "415df09bb9549501221bbdf5b677a9c6100bc399515d1790e4402e993ccafcd7",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-choice.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.conditional_share.TW.C.png",
+   "mobileFile": "two_variable_data.conditional_share.TW.C.m375.png",
+   "archetypeId": "tvd.conditional_share.TW.C.inverse",
+   "seed": 11,
+   "signature": "figure_choice[data:two_way]",
+   "stimulus": "The responses of households in a neighborhood survey are organized by household type. There were 100 households with children and 20 households without children. Of the households with children, 60% kept a pet, and of the households without children, 50% kept a pet.",
+   "question": "Which of the following tables matches the results described?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 0,
+   "answer": "A",
+   "explanation": "(1) households with children 는 100 명이고 60% 가 응답했으므로 응답 칸은 100 × 60% = 60 이다. (2) households without children 는 20 명이고 50% 가 응답했으므로 응답 칸은 10 이다. (3) 각 행의 나머지 칸은 합계에서 뺀 40, 10 이다. (4) 네 표를 이 칸 값과 행 합계에 대어 본다. (5) 행을 바꾼 표나 응답·비응답 열을 바꾼 표는 비율이 맞지 않는다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

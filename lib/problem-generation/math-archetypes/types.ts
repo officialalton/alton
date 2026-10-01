@@ -37,7 +37,25 @@ export type Instance = {
   semantics?: { noun: string; expr: string; parts: string[]; vars: Record<string, number> }[];
   /** 문장-수식 의미 일치 검사용: 지문이 '<명사구> 는 <값>' 으로 서술하는 대응표. 명사구와 값이 같은 문장에서 서로 가장 가까워야 한다(verify.checkBindings). */
   phraseBindings?: { phrase: string; value: number }[];
+  /**
+   * 자료(그림·표). figure 객체(lib/problem-figures 규격) 또는 없음. 지문은 값을 되풀이하지 않고 "the table / the graph shown" 으로 가리키며,
+   * verificationJs 는 이 figure 의 데이터를 `const FIGURE = {...};`(또는 선택지형은 `const CHOICES = [...]`)로 받아 읽는다.
+   */
+  figure?: unknown;
+  /** 정답이 숫자("value", 기본)인지 선택지 번호("index": 선택지형 figure_choice·서술 선지)인지. index 이면 verificationJs 는 정답 선지 번호(0 기준)를 return 한다. */
+  answerKind?: "value" | "index";
+  /** 문항 형식. 생략하면 mc. spr 이면 options 는 [] 이고 answers 에 동치 정답 목록(그리드 입력 형식)이 있다. */
+  format?: "mc" | "spr";
+  answers?: string[];
+  /** 선택지가 그림인 문항(figure_choice)의 오답 규칙 선언 — verify 의 일반 선택지 검증기가 쓴다. */
+  choice?: ChoiceDecl;
 };
+
+/**
+ * 선택지형 일반 검증기 입력. predicate 는 verificationJs 안에 있다(CHOICES 를 읽어 정답 하나만 참).
+ * rules[i] 는 선택지 i 가 따르는 오답 규칙 id(정답 자리는 "correct"). diagnoseJs 는 `(c, ok, P)` → 규칙 id 를 return 하는 함수 본문이다.
+ */
+export type ChoiceDecl = { rules: string[]; diagnoseJs: string; params: Record<string, unknown> };
 
 export type Archetype = {
   /** `<skill 약칭>.<kind>.<operator>` */
@@ -55,5 +73,11 @@ export type Archetype = {
   difficulty?: "easy" | "medium" | "hard";
   /** 같은 kind 의 medium 컴파일러 풀이 단계 수(비교 기준) */
   mediumSteps: number;
+  /** SPR(주관식 단답) 변형 가능 여부와 사유(새 자료 원형은 필수; 옛 원형은 생략 시 시드 프로브로 판정). */
+  spr?: { capable: boolean; reason: string };
+  /** 자료 커버리지 매니페스트 항목 id(`<skill>.<kind>.<fig>.<loc>`). 있으면 대량 생성 전 커버리지 게이트 대상이다. */
+  figureItem?: string;
+  /** 유사문항 그룹 키의 기준 id(생략 시 id). mc/spr 변형이 같은 그룹을 공유하게 한다. */
+  groupId?: string;
   generate(rng: Rng): Instance;
 };

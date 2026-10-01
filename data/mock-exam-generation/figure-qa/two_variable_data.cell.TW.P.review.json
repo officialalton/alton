@@ -1,0 +1,23 @@
+{
+  "itemId": "two_variable_data.cell.TW.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-01T07:22:49Z",
+  "reviewer": "visual-review-agent-A3",
+  "codeHash": "e1eb183c5759d38f22ca6529a1d4a7997d2e4aff015938f5c3005da36eb0a0a8",
+  "samples": [
+    "two_variable_data.cell.TW.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "표: print 22/21(합 43). (22+x)/(43+x)=0.7 → 30x=810 → x=27 = 정답 B. 합계 행 밑줄이 전 열에 걸쳐 이어짐(수정 확인)."
+}

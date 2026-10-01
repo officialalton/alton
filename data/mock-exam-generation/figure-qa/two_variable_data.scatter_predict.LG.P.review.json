@@ -1,0 +1,23 @@
+{
+ "itemId": "two_variable_data.scatter_predict.LG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-01T07:22:51.000Z",
+ "reviewer": "visual-review-agent-B3",
+ "codeHash": "bb9b1c4225e4a829db7ed5e04d3f86945a9cd81e391f7d8783fd76c496852171",
+ "samples": [
+  "two_variable_data.scatter_predict.LG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "점이 (0,5),(1,10),(2,15),(3,20),(4,25). 기울기 5, y=5x+5, x=3 → 20, ×1.25 = 25 = 정답 B(25). 눈금·축 정상, 375px 판독 가능."
+}

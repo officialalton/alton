@@ -143,7 +143,7 @@ export type MathCompilerSkill =
 // num_real_solutions, two_variable_data의 그래프 선택형)는 별도 분기를 두지 않았다 —
 // sprFromAnswerText가 숫자로 파싱되지 않는 정답을 null로 돌려주면 그 후보는 자동으로
 // 실패 처리되어 자연히 제외된다(요청한 만큼은 나머지 숫자형 종류에서 재시도로 채운다).
-const SPR_ELIGIBLE_SKILLS = new Set<MathCompilerSkill>([
+export const SPR_ELIGIBLE_SKILLS = new Set<MathCompilerSkill>([
   "linear_equations_one_var",
   "linear_equations_two_var",
   "systems_linear",

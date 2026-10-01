@@ -9,7 +9,7 @@ import { createHash } from "node:crypto";
 import type { Archetype, Instance } from "./types";
 import { GenFail } from "./types";
 import { checkNotation, runVerification, verifyInstance, type VerifyResult } from "./verify";
-import { bodyShingles, generateOne, jaccard } from "./sweep";
+import { bodyShingles, generateOne, jaccard, type Fmt } from "./sweep";
 import { checkContent } from "@/lib/problem-content-check";
 import { composeProblemText } from "@/lib/problem-question";
 import { findBannedWords } from "@/lib/problem-generation/common-quality-gate";
@@ -90,11 +90,11 @@ function verifyQualitative(a: LArch, inst: BInstance): VerifyResult {
 }
 
 export type LevelSweep = { id: string; level: Level; seeds: number; produced: number; genFail: number; thrown: number; verifyFail: number; failSeeds: { seed: number; why: string }[]; thrownSamples: string[]; variants: Record<string, number>; independent: number; independentByVariant: Record<string, number> };
-export function sweepLevel(a: LArch, seeds: number, opts: { seedStart?: number; cap?: number } = {}): LevelSweep {
+export function sweepLevel(a: LArch, seeds: number, opts: { seedStart?: number; cap?: number; fmt?: Fmt } = {}): LevelSweep {
   const st: LevelSweep = { id: a.id, level: a.level, seeds, produced: 0, genFail: 0, thrown: 0, verifyFail: 0, failSeeds: [], thrownSamples: [], variants: {}, independent: 0, independentByVariant: {} };
   const keepAll: Set<string>[] = []; const keepBy = new Map<string, Set<string>[]>(); const cap = opts.cap ?? 400;
   for (let s = opts.seedStart ?? 0; s < (opts.seedStart ?? 0) + seeds; s++) {
-    const g = generateOne(a, s);
+    const g = generateOne(a, s, opts.fmt);
     if (!g.ok) { if (g.why === "genfail") st.genFail++; else { st.thrown++; if (st.thrownSamples.length < 3) st.thrownSamples.push(g.msg); } continue; }
     const v = verifyLevel(a, g.inst as BInstance);
     if (!v.ok) { st.verifyFail++; if (st.failSeeds.length < 5) st.failSeeds.push({ seed: s, why: v.failures.join(" | ").slice(0, 240) }); continue; }
@@ -110,13 +110,14 @@ export function sweepLevel(a: LArch, seeds: number, opts: { seedStart?: number; 
 // ── passed.json 호환 레코드(easy/medium 은 confirmed, hard 는 bulk.ts 의 archetypeRecord 사용) ──
 const uuidFrom = (s: string) => { const h = createHash("sha1").update(s).digest("hex"); return `${h.slice(0, 8)}-${h.slice(8, 12)}-5${h.slice(13, 16)}-a${h.slice(17, 20)}-${h.slice(20, 32)}`; };
 export function levelRecord(a: LArch, inst: BInstance, seed: number, runId: string, verified: number | null) {
-  const subpattern = `${a.id}/${inst.variant}`; const passage = `${inst.stimulus}\n\n${inst.question}`;
+  const subpattern = `${a.groupId ?? a.id}/${inst.variant}`; const passage = `${inst.stimulus}\n\n${inst.question}`;
+  const spr = inst.format === "spr";
   return {
-    gid: uuidFrom(`${a.id}:${seed}`), runId, skill: a.skill, domain: SKILL_BY_CODE.get(a.skill)?.domain ?? "unknown", examSystem: "sat_math" as const, difficulty: a.level, format: "mc" as const,
-    problem: { format: "mc", figure: null, passage, stimulus: inst.stimulus, question: inst.question, needsFigure: false, options: inst.options, correctIndex: inst.correctIndex, answers: null, statements: null, explanation: inst.explanation, explanationEn: inst.explanationEn, difficulty: a.level,
+    gid: uuidFrom(spr ? `${a.id}:spr:${seed}` : `${a.id}:${seed}`), runId, skill: a.skill, domain: SKILL_BY_CODE.get(a.skill)?.domain ?? "unknown", examSystem: "sat_math" as const, difficulty: a.level, format: (spr ? "spr" : "mc") as "mc" | "spr",
+    problem: { format: spr ? "spr" : "mc", figure: inst.figure ?? null, passage, stimulus: inst.stimulus, question: inst.question, needsFigure: !!inst.figure, options: spr ? null : inst.options, correctIndex: spr ? null : inst.correctIndex, answers: spr ? inst.answers ?? null : null, statements: null, explanation: inst.explanation, explanationEn: inst.explanationEn, difficulty: a.level,
       distractorRationales: inst.distractors.map((d) => ({ index: d.index, plausible_because: "실제 풀이 과정에서 나올 수 있는 오류 경로다.", matches: "같은 식·수치에서 계산되었다.", why_wrong: d.reason, kind: d.kind })), difficultyRationale: a.extraThinking, design: null, subpattern },
     quality: { contract: { ok: true, issues: [] }, estimatedDifficulty: a.level, requestedDifficulty: a.level, difficultyReasons: [a.extraThinking], distractors: [], independentReview: { pickedIndex: null, pickedAnswer: null, agrees: true, confidence: "high", flags: [] }, needsReview: false, needsReviewReasons: [], calibrated: false, reviewedAt: new Date(0).toISOString(),
-      mockExamGeneration: { difficultyStatus: "confirmed", source: "compiler_archetype", archetypeId: a.id, operator: a.operator, kind: a.kind, level: a.level, concepts: a.concepts, steps: inst.trace.length, seed, variant: inst.variant, verification: { method: "verification_js", verified, correctOption: inst.options[inst.correctIndex] } } },
+      mockExamGeneration: { difficultyStatus: "confirmed", source: "compiler_archetype", archetypeId: a.id, operator: a.operator, kind: a.kind, level: a.level, concepts: a.concepts, steps: inst.trace.length, seed, variant: inst.variant, verification: { method: "verification_js", verified, correctOption: spr ? inst.answers?.[0] ?? null : inst.options[inst.correctIndex] } } },
     recipeId: a.id, recipeCheck: { source: "compiler_archetype", level: a.level }, createdVia: "compiler" as const, subpattern,
   };
 }

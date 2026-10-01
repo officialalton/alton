@@ -120,11 +120,16 @@ export function lintFigureChoice(spec: FigureChoiceSpec, options: string[] | nul
 
 /** 2×2 격자(모바일은 1열로 내려감)에 같은 크기로 그린다. 글자 A~D 는 격자 밖 캡션. */
 export function renderFigureChoice(spec: FigureChoiceSpec, renderChild: ChildRender): { markup: string; alt: string } {
+  const first0 = spec.choices[0] as { type?: string; kind?: string } | undefined; const tables = first0?.type === "data" && (first0.kind === "two_way" || first0.kind === "table" || first0.kind === "number_list");
   const cells = spec.choices.map((c, i) => {
-    const inner = renderChild(c).replace(/<svg /, '<svg data-choice="' + LETTERS[i] + '" ').replace(/style="max-width:100%;height:auto"/, 'style="width:100%;height:auto;display:block"');
+    let inner = renderChild(c).replace(/<svg /, '<svg data-choice="' + LETTERS[i] + '" ').replace(/style="max-width:100%;height:auto"/, 'style="width:100%;height:auto;display:block"');
+    // 표 선택지: 375px 화면에서도 모든 열이 보이도록 글자·여백을 줄이고 줄바꿈을 허용한다(가로 스크롤 뒤로 열이 숨지 않게).
+    if (tables) inner = inner.replace(/padding:6px 12px/g, "padding:4px 6px").replace(/white-space:nowrap/g, "white-space:normal").replace(/font-size:14px/g, "font-size:12.5px").replace(/min-width:\d+px;?/g, "");
     return `<figure style="margin:0;border:1.5px solid #ddd;border-radius:10px;padding:8px 8px 4px;background:#fff"><figcaption style="font-weight:700;font-size:13px;margin:0 0 4px;font-family:Georgia, serif">${LETTERS[i]}</figcaption>${inner}</figure>`;
   });
-  const markup = `<div class="figure-choice" data-testid="figure-choice" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;max-width:640px">${cells.join("")}</div>`;
+  // 그래프 선택지는 칸 최소 폭 280px — 640px 안에서 2×2, 모바일은 한 줄(예전 200px 는 3열+1개로 넘어가 글자가 7px 로 줄었다, 2026-10-01 PNG 시각 검수). 표(HTML <table>)가 선택지면 2×2 의 좁은 칸에서 칸 값이 가로 스크롤 뒤로 숨는다(2026-10-01 시각 확인) — 표 선택지는 한 줄에 하나씩 쌓는다.
+  const first = spec.choices[0] as { type?: string; kind?: string } | undefined; const tableChoices = first?.type === "data" && (first.kind === "two_way" || first.kind === "table" || first.kind === "number_list");
+  const markup = `<div class="figure-choice" data-testid="figure-choice" style="display:grid;grid-template-columns:${tableChoices ? "1fr" : "repeat(auto-fit,minmax(min(100%,280px),1fr))"};gap:10px;max-width:640px">${cells.join("")}</div>`;
   const alt = `그래프/도형 선택지 ${spec.choices.length}개(${LETTERS.slice(0, spec.choices.length).join(", ")}) — 같은 축·크기로 나란히.`;
   return { markup, alt };
 }
