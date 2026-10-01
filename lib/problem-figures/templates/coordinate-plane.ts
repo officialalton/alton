@@ -298,11 +298,11 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
   sheet.raw(`<text data-axis-name="x" x="${f(sx(ax.max) + 9)}" y="${f(sy(axY) + 4.5)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="start" fill="#111">${ax.label ?? "x"}</text>`);
   sheet.raw(`<text data-axis-name="y" x="${f(sx(axX))}" y="${f(sy(ay.max) - 10)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="middle" fill="#111">${ay.label ?? "y"}</text>`);
   // 축 제목은 눈금 숫자 바로 바깥에 — 캔버스 가장자리에 붙이면 축과 멀어 어느 축 제목인지 읽기 어렵다(C4).
-  if (ax.title) sheet.raw(`<text data-axis-title="x" x="${f((padL + W - PAD) / 2)}" y="${f(Math.min(H - 6, sy(ay.min) + 32))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${ax.title}</text>`);
+  if (ax.title) sheet.raw(`<text x="${f((padL + W - PAD) / 2)}" y="${f(Math.min(H - 6, sy(ay.min) + 32))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${ax.title}</text>`);
   if (ay.title) {
     const widest = Math.max(0, ...ys.filter((y) => Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)).map((y) => labelWidth(f(y), 12) - 6));
     const left = axX === ax.min ? sx(axX) - 6 - widest : sx(ax.min);
-    sheet.raw(`<text data-axis-title="y" transform="translate(${f(Math.max(12, left - 8))} ${f((PAD + H - padB) / 2)}) rotate(-90)" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${ay.title}</text>`);
+    sheet.raw(`<text transform="translate(${f(Math.max(12, left - 8))} ${f((PAD + H - padB) / 2)}) rotate(-90)" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="y" fill="#111">${ay.title}</text>`);
   }
 
   // ---- 객체(곡선·선을 먼저 그려 라벨 충돌 대상으로 등록하고, 라벨은 마지막에)

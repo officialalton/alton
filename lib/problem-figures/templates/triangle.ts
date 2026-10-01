@@ -256,8 +256,15 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
     if (a.label) {
       const mid = (a1 + a2) / 2;
       const half = (a2 - a1) / 2;
-      const r = Math.max((halfDiag(a.label) + 4) / Math.max(Math.sin(half), 0.25), ARC_R + (n - 1) * 5 + halfDiag(a.label) + 3);
-      sheet.label(c[0] + r * Math.cos(mid), c[1] - r * Math.sin(mid), a.label, `각 라벨(${a.at})`);
+      const hd = halfDiag(a.label);
+      const r = Math.max((hd + 4) / Math.max(Math.sin(half), 0.08), ARC_R + (n - 1) * 5 + hd + 3);
+      // 2026-10-02 — 각을 라벨대로 그리면서 아주 좁은 각(22°)·아주 넓은 둔각(136°)이 생겼다. 쐐기 안 자리가 선과
+      // 겹치면 쐐기 안 더 먼 자리, 그래도 막히면 꼭짓점 바깥(이등분선 반대쪽 — 변이 없는 쪽)으로 뺀다(규칙).
+      const outR = hd + 8;
+      const cands: Pt[] = [r, r * 1.25, r * 1.5].map((rr): Pt => [c[0] + rr * Math.cos(mid), c[1] - rr * Math.sin(mid)]);
+      cands.push([c[0] - outR * Math.cos(mid), c[1] + outR * Math.sin(mid)], [c[0] - (outR + 10) * Math.cos(mid), c[1] + (outR + 10) * Math.sin(mid)]);
+      const spot = sheet.firstFree(cands, a.label) ?? cands[0];
+      sheet.label(spot[0], spot[1], a.label, `각 라벨(${a.at})`);
     }
   }
 

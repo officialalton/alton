@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.scatter_count_above.SC.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T07:22:56Z",
-  "reviewer": "visual-review-agent-C3",
-  "codeHash": "bb9b1c4225e4a829db7ed5e04d3f86945a9cd81e391f7d8783fd76c496852171",
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "d172796f966e7750caf4497c3ed45afc357f7062d4ffa71cebe17a2d89b58416",
   "samples": [
     "two_variable_data.scatter_count_above.SC.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "추세선 y=100+x(0→100, 25→125). x>=9 점 11개 중 (10,121)(12,120)(14,121)(16,123)(18,127) 5개가 위, 6개 아래 → 5 = C. 해설 6개(전체 위쪽, x=6 포함)·6개(아래쪽) 모두 그림과 일치."
+  "notes": "추세선 y=100+x(0→100, 25→125). x>=9 점 11개 중 (10,121)(12,120)(14,121)(16,123)(18,127) 5개가 위, 6개 아래 → 5 = C. 해설 6개(전체 위쪽, x=6 포함)·6개(아래쪽) 모두 그림과 일치. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
 }

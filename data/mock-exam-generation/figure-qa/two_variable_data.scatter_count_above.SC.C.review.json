@@ -1,11 +1,23 @@
 {
   "itemId": "two_variable_data.scatter_count_above.SC.C",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T07:21:15Z",
-  "reviewer": "visual-review-agent-D2",
-  "codeHash": "370605ba4b57494f815ff1831927cb9b444c51483e3595de8516a873900c5c1e",
-  "samples": ["two_variable_data.scatter_count_above.SC.C.png"],
-  "checklist": { "figure_present": "pass", "proportion_matches_values": "pass", "labels_placed_and_legible": "pass", "multi_figure_consistent": "pass", "text_matches_figure_and_solvable": "pass", "axes_ticks_units_legend": "pass", "choice_distinct_one_rule": "pass", "sat_visual_style": "pass", "mobile_375_readable": "pass" },
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "e68df4e7add347cb79e8611e7587716757db782fb943bac3a6756f96de4ed6a7",
+  "samples": [
+    "two_variable_data.scatter_count_above.SC.C.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
   "defects": [],
-  "notes": "2x2 격자. 점을 선에 대어 세면 A=2, B=10(전부 위), C=4, D=3 → D. 선에 가장 가까운 점도 2.5~3 단위 이상 떨어져 위/아래 모호하지 않음(이전 지적 해소)."
+  "notes": "2x2 격자. 점을 선에 대어 세면 A=2, B=10(전부 위), C=4, D=3 → D. 선에 가장 가까운 점도 2.5~3 단위 이상 떨어져 위/아래 모호하지 않음(이전 지적 해소). | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
 }

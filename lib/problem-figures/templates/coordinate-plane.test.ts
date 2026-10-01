@@ -191,9 +191,9 @@ describe("축 이름·축 제목 시인성", () => {
     const s = SAMPLES.find((x) => x.name === "제1사분면 응용(축 제목)")!;
     const svg = renderPlane(s.spec).svg;
     const xAxis = num(svg, /<line x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)" stroke="#111" stroke-width="1.8" marker-end/);
-    const [, ty] = num(svg, /<text data-axis-title="x" x="([-\d.]+)" y="([-\d.]+)"/);
+    const [, ty] = num(svg, /<text x="([-\d.]+)" y="([-\d.]+)"[^>]*data-axis-title="x"/);
     expect(ty - xAxis[3]).toBeLessThanOrEqual(35);
-    const [tx] = num(svg, /<text data-axis-title="y" transform="translate\(([-\d.]+) /);
+    const [tx] = num(svg, /<text transform="translate\(([-\d.]+) [^>]*data-axis-title="y"/);
     const yTickRight = xAxis[0] - 6, widest = 3 * 0.55 * 12; // '200'
     expect(yTickRight - widest - tx).toBeLessThanOrEqual(20);
   });

@@ -197,7 +197,7 @@ function drawYAxis(sheet: Sheet, fr: Frame, min: number, max: number, step: numb
   // 2026-10-02(오너 UAT C4) — 제목을 캔버스 왼쪽 끝(x=14)에 고정하면 눈금 숫자와 멀어진다. 가장 긴 눈금 숫자 바로 바깥에 둔다.
   let widest = 0;
   for (let v = min; v <= max + 1e-9; v += step) widest = Math.max(widest, labelWidth(fmtNum(Math.round(v * 1e6) / 1e6), 12) - 6);
-  if (title) sheet.raw(`<text data-axis-title="y" transform="translate(${f(Math.max(12, fr.x0 - 6 - widest - 8))} ${f((fr.y0 + fr.y1) / 2)}) rotate(-90)" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(title)}</text>`);
+  if (title) sheet.raw(`<text transform="translate(${f(Math.max(12, fr.x0 - 6 - widest - 8))} ${f((fr.y0 + fr.y1) / 2)}) rotate(-90)" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="y" fill="#111">${esc(title)}</text>`);
   return sy;
 }
 
@@ -257,7 +257,7 @@ function renderBarOrLine(spec: DataSpec): { svg: string; alt: string; issues: Fi
   if (allValues.some((v) => v < dom.min || v > dom.max)) issues.push({ code: "out_of_range", message: `값이 세로축 범위(${dom.min}~${dom.max}) 밖에 있습니다 — yMin/yMax 를 고치세요.` });
   const sy = drawYAxis(sheet, fr, dom.min, dom.max, dom.step, spec.yTitle);
   const { slot } = drawCategoryLabels(sheet, fr, cats, issues);
-  if (spec.xTitle) sheet.raw(`<text data-axis-title="x" x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H, rotate))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(spec.xTitle)}</text>`);
+  if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H, rotate))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
   if (spec.kind === "bar") {
     const groupW = slot * 0.7, barW = groupW / series.length;
     cats.forEach((_, i) => {
@@ -301,7 +301,7 @@ function renderHistogram(spec: DataSpec): { svg: string; alt: string; issues: Fi
   const slotW = (fr.x1 - fr.x0) / bins.length;
   const every = labelWidth(fmtNum(hi), 12) > slotW - 4 ? 2 : 1;
   edges.forEach((e, i) => { if (i % every === 0 || i === edges.length - 1) sheet.label(sx(e), fr.y1 + 14, fmtNum(e), "구간 경계", { size: 12 }); });
-  if (spec.xTitle) sheet.raw(`<text data-axis-title="x" x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(spec.xTitle)}</text>`);
+  if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
   const alt = `${spec.title ? spec.title + " — " : ""}히스토그램${spec.xTitle ? `, 가로축 ${spec.xTitle}` : ""}. ${bins.map((b) => `${fmtNum(b.from)}~${fmtNum(b.to)}: ${fmtNum(b.count)}`).join(", ")}.`;
   return { svg: sheet.svg(alt), alt, issues: dedupe([...issues, ...sheet.uniqueIssues()]) };
 }
@@ -332,7 +332,7 @@ function renderScatter(spec: DataSpec): { svg: string; alt: string; issues: Figu
     if (inside.length >= 2) sheet.polyline([[sx(inside[0][0]), sy(inside[0][1])], [sx(inside[inside.length - 1][0]), sy(inside[inside.length - 1][1])]], { color: "#C8102E", w: 1.8 });
     else issues.push({ code: "out_of_range", message: "추세선이 그래프 범위 안에 보이지 않습니다 — slope/intercept 를 확인하세요." });
   }
-  if (spec.xTitle) sheet.raw(`<text data-axis-title="x" x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(spec.xTitle)}</text>`);
+  if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
   const alt = `${spec.title ? spec.title + " — " : ""}산점도(점 ${pts.length}개)${spec.xTitle ? `, 가로축 ${spec.xTitle}` : ""}${spec.yTitle ? `, 세로축 ${spec.yTitle}` : ""}${spec.fitLine ? `, 추세선 y = ${f(spec.fitLine.slope)}x + ${f(spec.fitLine.intercept)}` : ""}.`;
   return { svg: sheet.svg(alt), alt, issues: dedupe([...issues, ...sheet.uniqueIssues()]) };
 }
@@ -363,7 +363,7 @@ function renderBoxplot(spec: DataSpec): { svg: string; alt: string; issues: Figu
     sheet.raw(`<rect x="${f(sx(b.q1))}" y="${f(cy - h / 2)}" width="${f(Math.max(1, sx(b.q3) - sx(b.q1)))}" height="${h}" fill="#fff" stroke="#111" stroke-width="1.6"/>`);
     sheet.raw(`<line x1="${f(sx(b.median))}" y1="${f(cy - h / 2)}" x2="${f(sx(b.median))}" y2="${f(cy + h / 2)}" stroke="#111" stroke-width="2.2"/>`);
   });
-  if (spec.xTitle) sheet.raw(`<text data-axis-title="x" x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(spec.xTitle)}</text>`);
+  if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
   const alt = `${spec.title ? spec.title + " — " : ""}상자그림. ${boxes.map((b) => `${b.name}: 최소 ${fmtNum(b.min)}, Q1 ${fmtNum(b.q1)}, 중앙값 ${fmtNum(b.median)}, Q3 ${fmtNum(b.q3)}, 최대 ${fmtNum(b.max)}`).join("; ")}.`;
   return { svg: sheet.svg(alt), alt, issues: dedupe([...issues, ...sheet.uniqueIssues()]) };
 }
@@ -412,7 +412,7 @@ function renderDotPlot(spec: DataSpec): { svg: string; alt: string; issues: Figu
   const r = Math.min(6, slot / 3);
   for (const d of dots) for (let k = 0; k < d.count; k++) sheet.raw(`<circle cx="${f(sx(d.value))}" cy="${f(fr.y1 - 8 - k * (r * 2 + 3))}" r="${f(r)}" fill="#111"/>`);
   if (dots.some((d) => Math.abs(d.value - Math.round(d.value / step) * step) > 1e-9 && slot < 14)) issues.push({ code: "label_collision", message: "점도표의 값이 너무 촘촘합니다 — 눈금 간격에 맞는 값을 쓰거나 값 수를 줄이세요." });
-  if (spec.xTitle) sheet.raw(`<text data-axis-title="x" x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" fill="#111">${esc(spec.xTitle)}</text>`);
+  if (spec.xTitle) sheet.raw(`<text x="${f((fr.x0 + fr.x1) / 2)}" y="${f(xTitleY(fr, H))}" font-family="${FONT}" font-size="12.5" text-anchor="middle" data-axis-title="x" fill="#111">${esc(spec.xTitle)}</text>`);
   const alt = `${spec.title ? spec.title + " — " : ""}점도표${spec.xTitle ? `(${spec.xTitle})` : ""}. ${dots.map((d) => `${fmtNum(d.value)}: ${d.count}개`).join(", ")}.`;
   return { svg: sheet.svg(alt), alt, issues: dedupe([...issues, ...sheet.uniqueIssues()]) };
 }

@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.association_direction_strength.SC.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T07:22:56Z",
-  "reviewer": "visual-review-agent-C3",
-  "codeHash": "415df09bb9549501221bbdf5b677a9c6100bc399515d1790e4402e993ccafcd7",
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "4de487d4956814bfdb4da52d4cbd62da5a7cf0554732d9e5dab3a4cb1297ad6c",
   "samples": [
     "two_variable_data.association_direction_strength.SC.P.png",
     "two_variable_data.association_direction_strength.SC.P~compare_scenarios.png"
@@ -20,5 +20,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "샘플1: 점 10개 우상향, 직선 주변 밀집 → strong positive = B. 샘플2: Plot A 촘촘한 음의 추세, Plot B 산만 → Plot A 가 더 강함 = C. 두 플롯 축척(0-12, 0-100)·크기·축 제목 동일, 선택지 글자 일치."
+  "notes": "샘플1: 점 10개 우상향, 직선 주변 밀집 → strong positive = B. 샘플2: Plot A 촘촘한 음의 추세, Plot B 산만 → Plot A 가 더 강함 = C. 두 플롯 축척(0-12, 0-100)·크기·축 제목 동일, 선택지 글자 일치. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
 }

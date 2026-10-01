@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.conditional_share.TW.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T07:22:49Z",
-  "reviewer": "visual-review-agent-A3",
-  "codeHash": "e1eb183c5759d38f22ca6529a1d4a7997d2e4aff015938f5c3005da36eb0a0a8",
+  "reviewedAt": "2026-10-02T03:00:00Z",
+  "reviewer": "uat-figures-agent (C4 재검수)",
+  "codeHash": "40ba0da0c4e89c0444c05a8cce7bfb38568a529efeb6e8bffb24368c633e8734",
   "samples": [
     "two_variable_data.conditional_share.TW.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "표: city 60/112. 60/112×168=90 = 정답 C. 합계(77,97,92,189) 일치. 합계 행 밑줄 전 열 이어짐."
+  "notes": "표: city 60/112. 60/112×168=90 = 정답 C. 합계(77,97,92,189) 일치. 합계 행 밑줄 전 열 이어짐. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
 }
