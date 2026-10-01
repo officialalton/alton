@@ -8,6 +8,7 @@ import { LI_ARCHETYPES } from "./skills/linear-inequalities";
 import { LF_ARCHETYPES } from "./skills/linear-functions";
 import { L2_ARCHETYPES } from "./skills/linear-equations-two-var";
 import { LF_EM_ARCHETYPES } from "./skills/linear-functions.em";
+import { L2_EM_ARCHETYPES } from "./skills/linear-equations-two-var.em";
 import { LI_EM_ARCHETYPES } from "./skills/linear-inequalities.em";
 import { LE_EM_ARCHETYPES } from "./skills/linear-equations-one-var.em";
 
@@ -24,5 +25,6 @@ export const EM_ARCHETYPES: Archetype[] = [
   ...LI_EM_ARCHETYPES,
   ...LE_EM_ARCHETYPES,
   ...LF_EM_ARCHETYPES,
+  ...L2_EM_ARCHETYPES,
 ];
 export const archetypeById = (id: string) => [...ARCHETYPES, ...EM_ARCHETYPES].find((a) => a.id === id);
