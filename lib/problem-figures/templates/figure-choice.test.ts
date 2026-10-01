@@ -75,4 +75,12 @@ describe("figure_set — 복수 자료", () => {
     expect(validateFigureSpec({ type: "figure_set", figures: [{ id: "A", spec: line("l", 1, 0) }, { id: "A", spec: line("m", 2, 0) }] }).ok).toBe(false);
     expect(renderFigureSvg(set as never)).toContain('data-testid="figure-set"');
   });
+
+  it("표(이원표·표)가 선택지면 한 줄에 하나씩 쌓고, 그래프 선택지는 2×2 격자를 그대로 쓴다(표 칸이 좁은 칸에서 스크롤 뒤로 숨지 않게)", () => {
+    const tw = (c: number[][]) => ({ type: "data", kind: "two_way", rowLabels: ["A1", "A2"], colLabels: ["Yes", "Nope"], cells: c });
+    const tables = { type: "figure_choice", choices: [tw([[1, 2], [3, 4]]), tw([[2, 2], [3, 4]]), tw([[3, 2], [3, 4]]), tw([[4, 2], [3, 4]])] };
+    expect(renderFigureSvg(tables as never)).toContain("grid-template-columns:1fr;");
+    const graphs = { type: "figure_choice", choices: [1, 2, 3, 4].map((m) => ({ type: "plane", axes: { x: { min: 0, max: 10 }, y: { min: 0, max: 10 } }, objects: [{ id: "L1", kind: "line", slope: m / 4, intercept: 1 }] })) };
+    expect(renderFigureSvg(graphs as never)).toContain("repeat(auto-fit,minmax(min(100%,280px),1fr))");
+  });
 });
