@@ -316,19 +316,21 @@ export default function MockExamMstTakeClient({
             {state.items.map((it, i) => {
               const answered = (responses[it.setItemId] ?? "") !== "";
               const flagged = flags[it.setItemId] ?? false;
+              const guessed = (guessedMap[it.setItemId] ?? false) && answered;
               return (
                 <button
                   key={it.setItemId}
                   type="button"
                   onClick={() => setCursor(i)}
                   aria-current={i === cursor ? "true" : undefined}
-                  aria-label={`Question ${it.moduleSeq}${answered ? ", answered" : ""}${flagged ? ", marked for review" : ""}`}
+                  aria-label={`Question ${it.moduleSeq}${answered ? ", answered" : ""}${flagged ? ", marked for review" : ""}${guessed ? ", guessed" : ""}`}
                   className={`relative h-7 rounded border text-[11.5px] font-bold ${
                     i === cursor ? "border-ink bg-ink text-white" : answered ? "border-blue bg-blue-bg text-blue" : "border-grey-200 text-grey-500"
                   }`}
                 >
                   {it.moduleSeq}
                   {flagged && <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-yellow" />}
+                  {guessed && <span className="absolute -left-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#f97316]" data-testid={`mst-guessed-dot-${it.setItemId}`} />}
                 </button>
               );
             })}

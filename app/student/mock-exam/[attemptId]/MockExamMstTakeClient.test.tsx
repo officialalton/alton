@@ -96,6 +96,12 @@ describe("MockExamMstTakeClient", () => {
     expect(guessMock).toHaveBeenCalledWith("att1", "i1", false);
   });
 
+  it("번호 격자: 답을 고르고 Guessed 한 문항은 왼쪽 위 주황 점이 보인다", async () => {
+    await renderClient(state({ items: [{ ...item("i1", 1, "rw_m1"), guessed: true, response: "0" }, { ...item("i2", 2, "rw_m1"), guessed: true }] }));
+    expect(screen.getByTestId("mst-guessed-dot-i1")).toBeInTheDocument();
+    expect(screen.queryByTestId("mst-guessed-dot-i2")).toBeNull();
+  });
+
   it("서버가 준 guessed 를 초기값으로 복구한다", async () => {
     await renderClient(state({ items: [{ ...item("i1", 1, "rw_m1"), guessed: true }] }));
     expect(screen.getByRole("button", { name: "Mark as guess" })).toHaveAttribute("aria-pressed", "true");
