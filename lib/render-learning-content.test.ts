@@ -43,3 +43,35 @@ describe("splitLearningContent", () => {
     expect(hasMath("수식 없음")).toBe(false);
   });
 });
+
+describe("splitLearningContent — 통화 기호 $ (2026-10-02 UAT C3)", () => {
+  const kinds = (s: string) => splitLearningContent(s).map((p) => p.kind);
+  const text = (s: string) => splitLearningContent(s).filter((p) => p.kind === "text").map((p) => (p as { value: string }).value).join("");
+
+  it("$45 … $25 를 수식으로 묶지 않는다", () => {
+    const s = "A landscaping company charges a flat fee of $45 for a site visit, plus $25 for each hour of work.";
+    expect(kinds(s).every((k) => k === "text")).toBe(true);
+    expect(text(s)).toBe(s);
+  });
+  it("금액 나열($5, $10, and $15)도 글자로 둔다", () => {
+    const s = "Tickets cost $5, $10, and $15.";
+    expect(kinds(s).every((k) => k === "text")).toBe(true);
+    expect(text(s)).toBe(s);
+  });
+  it("통화와 진짜 수식이 섞여도 수식만 수식으로 그린다", () => {
+    const parts = splitLearningContent("It costs $45 per visit and $x$ visits.");
+    expect(parts.filter((p) => p.kind === "math")).toHaveLength(1);
+    expect(text("It costs $45 per visit and $x$ visits.")).toBe("It costs $45 per visit and  visits.");
+  });
+  it("이스케이프 \\$ 는 글자 $ 로 보인다", () => {
+    expect(kinds("costs \\$45 and \\$25 total")).not.toContain("math");
+    expect(text("costs \\$45 and \\$25 total")).toBe("costs $45 and $25 total");
+  });
+  it("회귀: 숫자로 시작하는 진짜 수식은 그대로 수식이다", () => {
+    expect(kinds("Solve $3x+1 = 7$ for x.")).toEqual(["text", "math", "text"]);
+    expect(kinds("$x$")).toEqual(["math"]);
+    expect(kinds("$2$ and $3$")).toEqual(["math", "text", "math"]);
+    expect(kinds("$$\\frac{1}{2}$$")).toEqual(["math"]);
+    expect(kinds("$\\frac{3}{4}$ of $12$")).toEqual(["math", "text", "math"]);
+  });
+});
