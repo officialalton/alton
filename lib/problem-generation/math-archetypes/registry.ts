@@ -7,6 +7,7 @@ import { LAT_HARD } from "./skills/lines-angles-triangles";
 import { RT_HARD } from "./skills/right-triangles-trigonometry";
 import { OVD_HARD } from "./skills/one-variable-data";
 import { TVD_HARD } from "./skills/two-variable-data";
+import { IME_HARD } from "./skills/inference-margin-error";
 
-export const ARCHETYPES: Archetype[] = [...EE_ARCHETYPES, ...RR_ARCHETYPES, ...LE_ARCHETYPES, ...PR_ARCHETYPES, ...LAT_HARD, ...RT_HARD, ...OVD_HARD, ...TVD_HARD];
+export const ARCHETYPES: Archetype[] = [...EE_ARCHETYPES, ...RR_ARCHETYPES, ...LE_ARCHETYPES, ...PR_ARCHETYPES, ...LAT_HARD, ...RT_HARD, ...OVD_HARD, ...TVD_HARD, ...IME_HARD];
 export const archetypeById = (id: string) => ARCHETYPES.find((a) => a.id === id);
