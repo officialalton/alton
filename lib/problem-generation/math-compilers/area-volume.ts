@@ -89,7 +89,7 @@ export function generateAreaVolumeModel(params: {
         { value: fmt(length * length), kind: "geometry_misapplied", reason: "다른 변은 쓰지 않고 한 변만 제곱했다(정사각형으로 착각)." },
       ];
       const distractors = pickUnique(cands, fmt(area));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "area_volume", difficulty: params.difficulty, questionKind, length, width, correctAnswer: fmt(area), distractors };
     }
 
@@ -106,7 +106,7 @@ export function generateAreaVolumeModel(params: {
         { value: fmt(base * height * 2), kind: "formula_misuse", reason: "1/2을 곱하지 않고 오히려 2를 곱했다." },
       ];
       const distractors = pickUnique(cands, fmt(area));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "area_volume", difficulty: params.difficulty, questionKind, base, height, correctAnswer: fmt(area), distractors };
     }
 
@@ -121,7 +121,7 @@ export function generateAreaVolumeModel(params: {
         { value: fmt(l + w + h), kind: "formula_misuse", reason: "세 변을 곱하지 않고 더했다." },
       ];
       const distractors = pickUnique(cands, fmt(volume));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "area_volume", difficulty: params.difficulty, questionKind, l, w, h, correctAnswer: fmt(volume), distractors };
     }
 
@@ -140,7 +140,7 @@ export function generateAreaVolumeModel(params: {
         { value: fmt(known[0] * known[1]), kind: "geometry_misapplied", reason: "부피를 알려진 두 변으로 나누지 않고 그 두 변을 곱한 값을 답으로 썼다." },
       ];
       const distractors = pickUnique(cands, fmt(answer));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "area_volume", difficulty: params.difficulty, questionKind, l, w, h, missingDim, volume, correctAnswer: fmt(answer), distractors };
     }
 
@@ -154,7 +154,7 @@ export function generateAreaVolumeModel(params: {
         { value: fmt(2 * radius * cylHeight), kind: "geometry_misapplied", reason: "부피 대신 옆면 겉넓이(2πrh) 공식을 사용했다." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "area_volume", difficulty: params.difficulty, questionKind, radius, cylHeight, correctAnswer: fmtPi(coeff), distractors };
     }
 
@@ -169,7 +169,7 @@ export function generateAreaVolumeModel(params: {
       { value: fmt(2 * radius * cylHeight), kind: "geometry_misapplied", reason: "부피 대신 옆면 겉넓이(2πrh) 공식을 사용했다." },
     ];
     const distractors = pickUnique(cands, fmtPi(coeff));
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return { skillCode: "area_volume", difficulty: params.difficulty, questionKind, radius, diameter, cylHeight, correctAnswer: fmtPi(coeff), distractors };
   }
   throw new Error("area_volume: 오답 후보 생성에 실패했습니다.");

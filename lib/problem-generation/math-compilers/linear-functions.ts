@@ -185,7 +185,7 @@ export function generateLinearFunctionModel(params: {
         seen.add(c.value);
         distractors.push({ value: fmt(c.value), kind: c.kind, reason: c.reason });
       }
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return {
         skillCode: "linear_functions", difficulty: params.difficulty, questionKind, m, b, x0,
         correctAnswer: fmt(value), distractors: distractors.slice(0, 3),
@@ -210,7 +210,7 @@ export function generateLinearFunctionModel(params: {
         seen.add(c.value);
         distractors.push({ value: fmt(c.value), kind: c.kind, reason: c.reason });
       }
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return {
         skillCode: "linear_functions", difficulty: params.difficulty, questionKind, m, b, target,
         correctAnswer: fmt(x0), distractors: distractors.slice(0, 3),
@@ -239,7 +239,7 @@ export function generateLinearFunctionModel(params: {
       seen.add(c.value);
       distractors.push({ value: fmt(c.value), kind: c.kind, reason: c.reason });
     }
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return {
       skillCode: "linear_functions", difficulty: params.difficulty, questionKind, m, b,
       p1: { x: x1, y: y1 }, p2: { x: x2, y: y2 },

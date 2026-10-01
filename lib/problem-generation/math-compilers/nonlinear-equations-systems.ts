@@ -218,7 +218,7 @@ export function generateNonlinearEqModel(params: {
         { value: -smaller, kind: "sign_error", reason: "작은 근의 부호까지 반대로 계산했다." },
       ];
       const distractors = pickUnique(cands, fmt(bigger));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "nonlinear_equations_systems", difficulty: params.difficulty, questionKind, b, c, r1, r2, correctAnswer: fmt(bigger), distractors };
     }
 
@@ -233,7 +233,7 @@ export function generateNonlinearEqModel(params: {
         { value: r1 - r2, kind: "formula_misuse", reason: "두 근을 더하지 않고 빼서 계산했다." },
       ];
       const distractors = pickUnique(cands, fmt(sum));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "nonlinear_equations_systems", difficulty: params.difficulty, questionKind, b, c, r1, r2, correctAnswer: fmt(sum), distractors };
     }
 
@@ -247,7 +247,7 @@ export function generateNonlinearEqModel(params: {
       { value: r1 - r2, kind: "formula_misuse", reason: "두 근을 곱하지 않고 빼서 계산했다." },
     ];
     const distractors = pickUnique(cands, fmt(product));
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return { skillCode: "nonlinear_equations_systems", difficulty: params.difficulty, questionKind, b, c, r1, r2, correctAnswer: fmt(product), distractors };
   }
   throw new Error("nonlinear_equations_systems: 오답 후보 생성에 실패했습니다.");

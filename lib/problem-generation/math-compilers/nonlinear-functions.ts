@@ -152,7 +152,7 @@ function generateQuadraticFnModel(params: {
         seen.add(text);
         distractors.push({ value: text, kind: c.kind, reason: c.reason });
       }
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { family: "quadratic", skillCode: "nonlinear_functions", difficulty: params.difficulty, questionKind, a, h, k, correctAnswer: fmt(correctValue), distractors };
     }
 
@@ -173,7 +173,7 @@ function generateQuadraticFnModel(params: {
       seen.add(text);
       distractors.push({ value: text, kind: c.kind, reason: c.reason });
     }
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return { family: "quadratic", skillCode: "nonlinear_functions", difficulty: params.difficulty, questionKind, a, h, k, x0, correctAnswer: fmt(value), distractors };
   }
   throw new Error("nonlinear_functions: 오답 후보 생성에 실패했습니다.");
@@ -282,7 +282,7 @@ function generateExponentialFnModel(params: { difficulty: NonlinearFnDifficulty;
         seen.add(text);
         distractors.push({ value: text, kind: c.kind, reason: c.reason });
       }
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { family: "exponential", skillCode: "nonlinear_functions", difficulty: params.difficulty, questionKind, a, b, ratePercent, isGrowth, context, t0: t, correctAnswer: fmt(value), distractors };
     }
 
@@ -303,7 +303,7 @@ function generateExponentialFnModel(params: { difficulty: NonlinearFnDifficulty;
       seen.add(cand);
       distractors.push({ value: fmt(cand), kind: "condition_ignored", reason: reasons[cand] ?? "지수 계산을 잘못했다." });
     }
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     const target = exponentialValue(a, b, t);
     return { family: "exponential", skillCode: "nonlinear_functions", difficulty: params.difficulty, questionKind, a, b, ratePercent, isGrowth, context, t0: target, correctAnswer: fmt(t), distractors };
   }

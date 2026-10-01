@@ -300,7 +300,7 @@ export function generateLinearTwoVarModel(params: {
       const value = questionKind === "slope" ? (askedLine === 1 ? m1 : m2) : (askedLine === 1 ? b1 : b2);
       const other = questionKind === "slope" ? (askedLine === 1 ? m2 : m1) : (askedLine === 1 ? b2 : b1);
       const distractors = buildDistractorsForCoordinate(value, other, m1, b1, m2, b2, questionKind);
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return {
         skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
         m1, b1, m2, b2, systemKind: "one_solution", intersection: { x, y }, askedLine,
@@ -312,7 +312,7 @@ export function generateLinearTwoVarModel(params: {
     const correctValue = questionKind === "intersection_x" ? x : questionKind === "intersection_y" ? y : x + y;
     const otherValue = questionKind === "intersection_x" ? y : questionKind === "intersection_y" ? x : x - y;
     const distractors = buildDistractorsForCoordinate(correctValue, otherValue, m1, b1, m2, b2);
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return {
       skillCode: "linear_equations_two_var", difficulty: params.difficulty, questionKind,
       m1, b1, m2, b2, systemKind: "one_solution", intersection: { x, y },
