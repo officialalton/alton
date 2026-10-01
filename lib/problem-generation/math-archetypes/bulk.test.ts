@@ -8,9 +8,10 @@ import { composeProblemText } from "@/lib/problem-question";
 
 const body = (r: { problem: Record<string, unknown> }) => shingles(`${r.problem.stimulus} ${r.problem.question} ${(r.problem.options as string[]).join(" ")}`);
 
+// 이 파일의 기존 검증은 mc 형태(options·correctIndex)를 전제하므로 형식 쿼터를 끄고(sprQuota: 0) 돌린다. 쿼터(기본 25% SPR)는 bulk-spr-quota.test.ts 가 검증한다.
 describe("produceFromArchetypes — 대량 산출기(원형 hard)", () => {
   const pool = ARCHETYPES.filter((a) => a.skill === "probability");
-  const run = () => produceFromArchetypes(pool, { runId: "test-run", count: 48, seedStart: 100 });
+  const run = () => produceFromArchetypes(pool, { runId: "test-run", count: 48, seedStart: 100, sprQuota: 0 });
   it("요청 수만큼 산출하고 import.ts 호환 레코드 형태를 지킨다", () => {
     const { records, stats } = run();
     expect(records).toHaveLength(48);
@@ -49,13 +50,13 @@ describe("produceFromArchetypes — 대량 산출기(원형 hard)", () => {
     expect(Math.max(...counts) - Math.min(...counts)).toBeLessThanOrEqual(2);
   });
   it("그룹당 상한(maxPerGroup)을 지킨다", () => {
-    const { stats } = produceFromArchetypes(pool, { runId: "t", count: 30, seedStart: 0, maxPerGroup: 2 });
+    const { stats } = produceFromArchetypes(pool, { runId: "t", count: 30, seedStart: 0, maxPerGroup: 2, sprQuota: 0 });
     expect(Math.max(...Object.values(stats.byGroup))).toBeLessThanOrEqual(2);
   });
   it("기존 은행과 0.6 이상 비슷한 문항은 제외한다", () => {
-    const first = produceFromArchetypes(pool, { runId: "t", count: 6, seedStart: 0 }).records;
+    const first = produceFromArchetypes(pool, { runId: "t", count: 6, seedStart: 0, sprQuota: 0 }).records;
     const existing = new Map([["probability", first.map(body)]]);
-    const again = produceFromArchetypes(pool, { runId: "t", count: 6, seedStart: 0, existing });
+    const again = produceFromArchetypes(pool, { runId: "t", count: 6, seedStart: 0, existing, sprQuota: 0 });
     const gids = new Set(first.map((r) => r.gid));
     expect(again.records.every((r) => !gids.has(r.gid))).toBe(true);
     expect(again.stats.duplicate).toBeGreaterThan(0);
@@ -66,22 +67,22 @@ describe("produceFromCompilers — 기존 컴파일러 easy/medium 산출", () =
   it("시드 고정 재현·confirmed 표식·그룹 상한·유사도 제한", () => {
     const origLog = console.log; console.log = () => {};
     try {
-      const a = produceFromCompilers("linear_equations_one_var", "medium", { runId: "t", count: 12, seedStart: 0 });
-      const b = produceFromCompilers("linear_equations_one_var", "medium", { runId: "t", count: 12, seedStart: 0 });
+      const a = produceFromCompilers("linear_equations_one_var", "medium", { runId: "t", count: 12, seedStart: 0, sprQuota: 0 });
+      const b = produceFromCompilers("linear_equations_one_var", "medium", { runId: "t", count: 12, seedStart: 0, sprQuota: 0 });
       expect(a.records.length).toBe(12);
       expect(a.records.map((r) => r.gid)).toEqual(b.records.map((r) => r.gid));
       expect(JSON.stringify(a.records[3].problem)).toBe(JSON.stringify(b.records[3].problem));
       for (const r of a.records) expect((r.quality as { mockExamGeneration: { difficultyStatus: string } }).mockExamGeneration.difficultyStatus).toBe("confirmed");
       const sh = a.records.map(body);
       for (let i = 0; i < sh.length; i++) for (let j = i + 1; j < sh.length; j++) expect(jaccard(sh[i], sh[j])).toBeLessThan(0.6);
-      const capped = produceFromCompilers("percentages", "easy", { runId: "t", count: 10, seedStart: 0, maxPerGroup: 3 });
+      const capped = produceFromCompilers("percentages", "easy", { runId: "t", count: 10, seedStart: 0, maxPerGroup: 3, sprQuota: 0 });
       expect(Math.max(...Object.values(capped.stats.byGroup))).toBeLessThanOrEqual(3);
     } finally { console.log = origLog; }
   }, 60_000);
   it("Math.random 을 호출 뒤 원래대로 복원한다", () => {
     const before = Math.random;
     const origLog = console.log; console.log = () => {};
-    try { produceFromCompilers("percentages", "easy", { runId: "t", count: 2, seedStart: 0 }); } finally { console.log = origLog; }
+    try { produceFromCompilers("percentages", "easy", { runId: "t", count: 2, seedStart: 0, sprQuota: 0 }); } finally { console.log = origLog; }
     expect(Math.random).toBe(before);
   });
 });

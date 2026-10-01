@@ -5,6 +5,8 @@ import { checkFigure } from "@/lib/problem-figures/check";
 import { composeProblemText } from "@/lib/problem-question";
 import { findBannedWords } from "@/lib/problem-generation/common-quality-gate";
 import type { Archetype, Instance } from "./types";
+import { checkChoiceInstance, checkFigureBinding } from "./figure-verify";
+import { checkSprAnswers } from "./spr";
 
 /** LaTeX 일부($, \frac, \sqrt, ^, 암묵 곱셈)를 JS 식으로 바꿔 평가한다. 변수는 vars 에 없으면 오류. \pi 는 계수만 본다(PI=1). */
 export function evalMath(src: string, vars: Record<string, number> = {}): number {
@@ -106,25 +108,46 @@ const TOL = 1e-6;
 
 export function verifyInstance(a: Archetype, inst: Instance): VerifyResult {
   const failures: string[] = []; let optionValues: number[] = []; let verified: number | null = null;
-  if (inst.options.length !== 4) failures.push(`선택지 ${inst.options.length}개`);
-  if (new Set(inst.options.map((o) => o.trim())).size !== inst.options.length) failures.push("선택지 문자열 중복");
-  if (!(inst.correctIndex >= 0 && inst.correctIndex < inst.options.length)) failures.push("정답 인덱스 범위 밖");
-  try { optionValues = inst.options.map((o) => evalMath(o, inst.evalAt ?? {})); } catch (e) { failures.push(`선택지 해석 실패: ${(e as Error).message}`); }
-  if (optionValues.length === inst.options.length) {
-    for (let i = 0; i < optionValues.length; i++) for (let j = i + 1; j < optionValues.length; j++) if (Math.abs(optionValues[i] - optionValues[j]) <= TOL) failures.push(`선택지 값 겹침 ${i + 1}/${j + 1}`);
+  const fmt = inst.format ?? "mc"; const isIndex = inst.answerKind === "index"; const isSpr = fmt === "spr";
+  if (isSpr) {
+    // SPR: 선택지 없음 — 정답 목록(answers)이 재계산값에서 규칙대로 만든 목록과 같아야 한다.
+    if (inst.options.length !== 0) failures.push("spr 인데 선택지가 남아 있음");
+    try { verified = runVerification(inst.verificationJs); failures.push(...checkSprAnswers(inst.answers, verified)); }
+    catch (e) { failures.push(`verification_js 실패: ${(e as Error).message}`); }
+  } else if (isIndex) {
+    // 선택지형(figure_choice)·서술 선지: verification_js 가 정답 선지 번호(0 기준)를 계산한다.
+    if (inst.options.length !== 4) failures.push(`선택지 ${inst.options.length}개`);
+    if (new Set(inst.options.map((o) => o.trim())).size !== inst.options.length) failures.push("선택지 문자열 중복");
+    if (!(inst.correctIndex >= 0 && inst.correctIndex < inst.options.length)) failures.push("정답 인덱스 범위 밖");
     try {
       verified = runVerification(inst.verificationJs);
-      const hit = optionValues.map((v, i) => (Math.abs(v - verified!) <= TOL * Math.max(1, Math.abs(verified!)) ? i : -1)).filter((i) => i >= 0);
-      if (hit.length !== 1) failures.push(`정답 재계산 ${verified} 와 일치하는 선지 ${hit.length}개`);
-      else if (hit[0] !== inst.correctIndex) failures.push(`정답 키 불일치: 재계산 ${verified} 는 ${hit[0] + 1}번, 표기 정답은 ${inst.correctIndex + 1}번`);
+      if (verified !== inst.correctIndex) failures.push(`정답 재계산 ${verified}번 ≠ 표기 정답 ${inst.correctIndex}번(0 기준)`);
     } catch (e) { failures.push(`verification_js 실패: ${(e as Error).message}`); }
+    const pm = inst.verificationJs.match(/^const P = (\{.*\});/);
+    if (pm) { try { const P = JSON.parse(pm[1]) as { options?: string[] }; if (P.options && JSON.stringify(P.options) !== JSON.stringify(inst.options)) failures.push("verification_js 가 인쇄된 선지를 그대로 읽지 않음"); } catch { failures.push("verification_js 상수 P 를 해석할 수 없음"); } }
+    if (inst.figure && (inst.figure as { type?: string }).type === "figure_choice") failures.push(...checkChoiceInstance(inst, verified));
+  } else {
+    if (inst.options.length !== 4) failures.push(`선택지 ${inst.options.length}개`);
+    if (new Set(inst.options.map((o) => o.trim())).size !== inst.options.length) failures.push("선택지 문자열 중복");
+    if (!(inst.correctIndex >= 0 && inst.correctIndex < inst.options.length)) failures.push("정답 인덱스 범위 밖");
+    try { optionValues = inst.options.map((o) => evalMath(o, inst.evalAt ?? {})); } catch (e) { failures.push(`선택지 해석 실패: ${(e as Error).message}`); }
+    if (optionValues.length === inst.options.length) {
+      for (let i = 0; i < optionValues.length; i++) for (let j = i + 1; j < optionValues.length; j++) if (Math.abs(optionValues[i] - optionValues[j]) <= TOL) failures.push(`선택지 값 겹침 ${i + 1}/${j + 1}`);
+      try {
+        verified = runVerification(inst.verificationJs);
+        const hit = optionValues.map((v, i) => (Math.abs(v - verified!) <= TOL * Math.max(1, Math.abs(verified!)) ? i : -1)).filter((i) => i >= 0);
+        if (hit.length !== 1) failures.push(`정답 재계산 ${verified} 와 일치하는 선지 ${hit.length}개`);
+        else if (hit[0] !== inst.correctIndex) failures.push(`정답 키 불일치: 재계산 ${verified} 는 ${hit[0] + 1}번, 표기 정답은 ${inst.correctIndex + 1}번`);
+      } catch (e) { failures.push(`verification_js 실패: ${(e as Error).message}`); }
+    }
   }
   failures.push(...checkNotation({ stimulus: inst.stimulus, question: inst.question, ...Object.fromEntries(inst.options.map((o, i) => [`option${i + 1}`, o])), explanation: inst.explanation, explanationEn: inst.explanationEn }));
   const text = composeProblemText(inst.stimulus, inst.question); // import.ts 와 같은 합성
   // import.ts 는 checkContent 이슈가 하나라도 있거나 checkFigure 가 실패하면 공개하지 않는다 — 여기서도 전부 0 이어야 통과.
-  for (const f of checkContent({ format: "mc", passage: text, options: inst.options, correctIndex: inst.correctIndex, explanation: inst.explanation, answers: null, statements: null, skillCode: a.skill, figure: null })) failures.push(`내용 검사 ${f.code}: ${f.message}`);
-  const fig = checkFigure(null, text, inst.options, inst.correctIndex);
+  for (const f of checkContent({ format: fmt, passage: text, options: isSpr ? null : inst.options, correctIndex: isSpr ? null : inst.correctIndex, explanation: inst.explanation, answers: isSpr ? inst.answers ?? null : null, statements: null, skillCode: a.skill, figure: inst.figure ?? null })) failures.push(`내용 검사 ${f.code}: ${f.message}`);
+  const fig = checkFigure(inst.figure ?? null, text, isSpr ? null : inst.options, isSpr ? null : inst.correctIndex);
   if (!fig.ok) for (const f of fig.issues) failures.push(`렌더 검사 ${f.code}: ${f.message}`);
+  failures.push(...checkFigureBinding(inst));
   for (const b of findBannedWords({ 지문: inst.stimulus, 질문: inst.question, 해설: inst.explanation })) failures.push(`금칙어: ${b.message}`);
   failures.push(...checkParamsPrinted(inst));
   failures.push(...checkVariableMentions(inst));
