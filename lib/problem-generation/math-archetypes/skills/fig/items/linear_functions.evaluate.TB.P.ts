@@ -1,6 +1,5 @@
 // linear_functions.evaluate.TB.P — 일차 관계 값표에서 표 밖의 x 에 대한 값을 구한다(기울기·절편은 표에서 계산해야 함).
 import { GenFail } from "../../../types";
-import type { Rng } from "../../../rng";
 import { fmtNum } from "../../../text";
 import { W } from "../../d-kit";
 import { figInst, figJs } from "../../../figure-kit";

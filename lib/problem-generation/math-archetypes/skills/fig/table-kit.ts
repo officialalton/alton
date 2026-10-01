@@ -32,7 +32,7 @@ export function makeLinTab(rng: Rng, o: LinOpts = {}): LinTab {
     if (!isInt(m * d) || !isInt(m * x0)) continue;
     const xs = Array.from({ length: n }, (_, i) => x0 + d * i); const ys = xs.map((x) => m * x + b);
     if (ys.some((y) => y < 0 || y > 900 || !isInt(y))) continue;
-    return { t, xs, ys, m, b, d, fig: linFig(t, xs, ys), xq: `the ${lc(t.xa)}`, yq: `the ${lc(t.ya)}` };
+    return { t, xs, ys, m, b, d, fig: linFig(t, xs, ys), xq: t.x, yq: t.y };
   }
   throw new GenFail("일차 값표 장면 표집 실패");
 }
@@ -40,7 +40,7 @@ export function makeLinTab(rng: Rng, o: LinOpts = {}): LinTab {
 export const LIN_JS = "const xs=FIGURE.rows.map(r=>r[0]), ys=FIGURE.rows.map(r=>r[1]); const m=(ys[1]-ys[0])/(xs[1]-xs[0]); const b=ys[0]-m*xs[0]; for (let i=0;i<xs.length;i++) if (Math.abs(m*xs[i]+b-ys[i])>1e-9) throw new Error('표가 일차 관계가 아님');\n";
 export const linIntro = (rng: Rng, s: LinTab) => rng.pick([
   `The table shows ${s.yq} for several values of ${s.xq}. The relationship between the two quantities is linear.`,
-  `The table shown gives values of ${s.xq} and the corresponding ${s.yq}. There is a linear relationship between these quantities.`,
+  `The table shown gives several values of ${s.xq} and the matching values of ${s.yq}. There is a linear relationship between these quantities.`,
   `A linear relationship relates ${s.xq} to ${s.yq}. Some pairs of values are shown in the table.`,
   `For a linear model, the table lists ${s.yq} at several values of ${s.xq}.`,
 ]);
@@ -49,7 +49,8 @@ export const linRead = (s: LinTab): [string, string][] => [
   [`표에서 두 행 (${s.xs[0]}, ${s.ys[0]}) 과 (${s.xs[1]}, ${s.ys[1]}) 을 읽는다.`, "Read two rows of the table."],
   [`기울기 = (${s.ys[1]} - ${s.ys[0]}) ÷ (${s.xs[1]} - ${s.xs[0]}) = ${fmtNum(s.m)} 이다.`, "Compute the rate of change."],
 ];
-export const linIntercept = (s: LinTab): [string, string] => [`x = 0 일 때 값: ${s.ys[0]} - ${fmtNum(s.m)} × ${s.xs[0]} = ${fmtNum(s.b)} 이다.`, "Find the value at x = 0."];
+export const capFirst = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+export const linIntercept = (s: LinTab): [string, string] => [`x = 0 일 때 값: ${s.ys[0]} - (${fmtNum(s.m)}) × ${s.xs[0]} = ${fmtNum(s.b)} 이다.`, "Find the value at x = 0."];
 /** 지문에 둘 새 x(표 밖, 정수). */
 export const offX = (rng: Rng, s: LinTab, lo = 1, hi = 8) => s.xs[s.xs.length - 1] + s.d * rng.int(lo, hi) + (rng.chance(0.5) ? 1 : 0);
 /** 단위 환산 장면: 표 제목에 '1 hour = 60 minutes' 를 둔다(환산 정보도 자료에만). */
