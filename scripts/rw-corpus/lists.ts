@@ -63,10 +63,10 @@ export function plosRows(maxDocs = 2000, caps: Caps = { maxFiles: 20, maxMB: 15 
   const rowsPer = 100;
   const pages = Math.ceil(maxDocs / rowsPer);
   const journalQ = PLOS_JOURNALS.map((j) => `journal:"${j}"`).join(" OR ");
-  const q = `(${journalQ}) AND article_type:"Research Article" AND publication_date:[2016-01-01T00:00:00Z TO 2025-12-31T23:59:59Z]`;
+  const q = `(${journalQ}) AND article_type:"Research Article" AND publication_date:[2016-01-01T00:00:00Z TO 2025-12-31T23:59:59Z] AND doc_type:full`;
   const all: Row[] = [];
   for (let p = 0; p < pages; p++) {
-    const params = new URLSearchParams({ q, fl: "id,title,author_display,journal,publication_date,abstract", rows: String(rowsPer), start: String(p * rowsPer), wt: "json", sort: "id asc" });
+    const params = new URLSearchParams({ q, fl: "id,title,author_display,journal,publication_date,abstract", rows: String(rowsPer), start: String(p * rowsPer), wt: "json", sort: "publication_date desc,id asc" });
     all.push({ sourceId: "plos", method: "http", url: `https://api.plos.org/search?${params.toString()}`, relPath: `plos/raw/page-${String(p).padStart(3, "0")}.json`, attribution: "PLOS (CC BY)", estMB: 0.6 });
   }
   const { kept, dropped, estMB } = applyCaps(all, caps, 0.6);

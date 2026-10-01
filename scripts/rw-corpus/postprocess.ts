@@ -40,7 +40,7 @@ export function plosItems(json: string): Item[] {
     const a = Array.isArray(d.abstract) ? d.abstract.join(" ") : d.abstract ?? "";
     const text = plain(a);
     const w = wc(text);
-    if (w < 120 || w > 260 || !d.id) continue;
+    if (w < 100 || w > 330 || !d.id || /\/(abstract|body|title|references)$/.test(d.id)) continue;
     out.push({ id: `plos-${d.id.replace(/[^A-Za-z0-9.]+/g, "_")}`, title: d.title ?? "", text, url: `https://doi.org/${d.id.replace(/^info:doi\//, "")}`, extra: { authors: d.author_display ?? [], journal: d.journal ?? "", publicationDate: d.publication_date ?? "" } });
   }
   return out;

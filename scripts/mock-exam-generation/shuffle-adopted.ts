@@ -16,7 +16,7 @@ if (existsSync(envPath)) for (const line of readFileSync(envPath, "utf-8").split
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 const RUN = path.resolve("data/mock-exam-generation/mockgen-20260929");
 const LETTERS = "ABCD";
-type Rec = { gid: string; skill: string; examSystem: string; format: string; problem: { passage?: string; stimulus?: string; question?: string; options: string[]; correctIndex: number; explanation: string; [k: string]: unknown }; quality: Record<string, unknown>; [k: string]: unknown };
+export type Rec = { gid: string; skill: string; examSystem: string; format: string; problem: { passage?: string; stimulus?: string; question?: string; options: string[]; correctIndex: number; explanation: string; [k: string]: unknown }; quality: Record<string, unknown>; [k: string]: unknown };
 
 // ---- 해설 글자 참조 치환 ----------------------------------------------------
 const LETTER = /(?<![A-Za-z0-9$\\'\-])([A-D])(?![A-Za-z0-9'\-])/g;
@@ -39,6 +39,8 @@ export function letterRefs(s: string): { index: number; letter: string }[] {
     const i = m.index!;
     if (mask[i]) continue;
     const after = s.slice(i + 1, i + 12);
+    const before = s.slice(Math.max(0, i - 14), i);
+    if (m[1] === "A" && /(?:choices?|options?|answers?|letters?|statements?|보기|선택지|\(|\/|,|\band|\bor|\bnor|\bneither|\bboth|\beither|\bvs\.?|\bthan|\bthrough|\bto)\s*$/i.test(before)) { out.push({ index: i, letter: m[1] }); continue; }
     if (/^\s+[a-z]{2,}/.test(after) && m[1] === "A" && !/^\s+(?:is|was|are|were|and|or|but|nor|does|doesn't|has|would|could|also|correctly|incorrectly|fails|states|says|provides|gives)\b/.test(after)) continue; // "A single boat" 류 관사
     out.push({ index: i, letter: m[1] });
   }
@@ -53,7 +55,7 @@ export function remapExplanation(s: string, map: Record<string, string>): string
 
 // ---- 위치 배정·재배치 -------------------------------------------------------
 // 숫자(분수·퍼센트·단위 붙은 수) 선택지는 SAT 관례상 오름차순으로 제시하므로 섞지 않는다. 변수가 들어간 식(y = 2x + 1 등)은 숫자 선택지가 아니다.
-const isNumericOptions = (opts: string[]) => opts.every((o) => {
+export const isNumericOptions = (opts: string[]) => opts.every((o) => {
   const t = o.replace(/\$/g, "").replace(/\\(?:d|t)?frac\{([^}]*)\}\{([^}]*)\}/g, "$1/$2").replace(/\\(?:text|mathrm)\{([^}]*)\}/g, "$1").replace(/\\[a-zA-Z]+/g, "").replace(/[{}]/g, "").trim();
   return /^[-+]?\s*\d[\d.,/]*\s*(?:%|°|[a-zA-Z²³ /]{0,14})$/.test(t) || /^[-+]?\d[\d.,/]*\s*(?:<|>|≤|≥)\s*[-+]?\d[\d.,/]*$/.test(t);
 });
