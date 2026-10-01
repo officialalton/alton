@@ -53,3 +53,42 @@ export const MY_STATUS_TEXT: Record<MyReportStatus, string> = {
   confirmed: "신고하신 오류가 확인되어 문항이 보관됐어요",
   not_error: "검토 결과 오류가 아닌 것으로 판단했어요",
 };
+
+// 영어 UI(모의고사 응시 화면 — 2026-10-02 사용자 지시). 기본 화면 문구는 위 한국어 그대로다.
+export type ReportLang = "ko" | "en";
+
+export const REPORT_TYPE_LABEL_EN: Record<ReportType, string> = {
+  wrong_key: "Wrong answer key",
+  flawed_problem: "Problem itself is flawed",
+  bad_explanation: "Explanation error",
+  other: "Other",
+};
+
+export const REPORT_TYPE_HINT_EN: Record<ReportType, string> = {
+  wrong_key: "The choice marked as correct is wrong.",
+  flawed_problem: "There is no correct answer, more than one, or the passage/question is unclear or looks broken.",
+  bad_explanation: "The answer is right but the explanation is wrong.",
+  other: "Something not listed above. Please describe it.",
+};
+
+export const MY_STATUS_TEXT_EN: Record<MyReportStatus, string> = {
+  reviewing: "Reported · Under review",
+  confirmed: "Your report was confirmed and the question has been retired",
+  not_error: "Reviewed: this was not found to be an error",
+};
+
+export const REPORT_UI_TEXT: Record<ReportLang, {
+  trigger: string; legend: string; memo: string; required: string; optional: string; placeholder: string;
+  cancel: string; close: string; submit: string; sending: string; accepted: string; duplicate: string;
+}> = {
+  ko: {
+    trigger: "문제 오류 신고", legend: "어떤 문제인가요? (필수)", memo: "메모", required: " (필수)", optional: " (선택)",
+    placeholder: "어떤 부분이 이상한지 적어 주세요.", cancel: "취소", close: "닫기", submit: "신고하기", sending: "보내는 중…",
+    accepted: "신고가 접수됐어요. 확인 후 결과를 안내해 드릴게요.", duplicate: "이미 신고한 문항이에요. 검토 중입니다.",
+  },
+  en: {
+    trigger: "Report a problem", legend: "What is wrong? (required)", memo: "Note", required: " (required)", optional: " (optional)",
+    placeholder: "Tell us what looks wrong.", cancel: "Cancel", close: "Close", submit: "Submit report", sending: "Sending…",
+    accepted: "Your report was received. We will review it and let you know the result.", duplicate: "You already reported this question. It is under review.",
+  },
+};

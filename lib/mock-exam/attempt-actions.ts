@@ -13,6 +13,7 @@
 import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { loadMockExamAttemptDetail, type MockExamAttemptDetail } from "./attempt-data";
+import { parseAnnotations, type MockExamAnnotations } from "./annotation-anchor";
 
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
 
@@ -87,6 +88,12 @@ export async function toggleMockExamFlagAction(attemptId: string, setItemId: str
   return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "표시를 저장하지 못했습니다.");
 }
 
+/** 2026-10-02(오너 UAT A8) — 학생이 답을 모르고 찍었을 때 스스로 남기는 "찍음" 표시(토글).
+ * mock_exam_toggle_flag 와 같은 가드(제출·잠긴 모듈 후 변경 불가). 결과 화면에 🎲 로 보인다. */
+export async function toggleMockExamGuessedAction(attemptId: string, setItemId: string, guessed: boolean): Promise<ActionResult> {
+  return callRpc("mock_exam_toggle_guessed", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_guessed: guessed }, "Could not save the guess mark.");
+}
+
 /** 2026-09-21(사용자 지시) — 문항을 학생 포털 Practice 탭(문제 기록)에 저장/해제한다.
  * 단어장의 "내 단어장"처럼 원하는 문항만 골라 담는 구조 — 표시(flagged)와 달리 시험을
  * 벗어나도(제출·채점 뒤에도) 계속 남아 나중에 다시 볼 수 있다. */
@@ -126,4 +133,25 @@ export async function finalizeMockExamGradingAction(attemptId: string): Promise<
     revalidatePath("/parent");
   }
   return r;
+}
+
+/** 2026-10-02(오너 요청) — 응시 중 하이라이트·한 줄 메모·답 소거 저장(문항당 전체 상태 덮어쓰기). 가드는 toggle_guessed 와 같다. */
+export async function saveMockExamAnnotationsAction(attemptId: string, setItemId: string, state: MockExamAnnotations): Promise<ActionResult> {
+  return callRpc(
+    "save_mock_exam_annotations",
+    { p_attempt_id: attemptId, p_set_item_id: setItemId, p_highlights: state.highlights, p_eliminated: state.eliminated },
+    "Could not save your highlights.",
+  );
+}
+
+/** 본인(응시 중·결과)·담당 교사·관리자·보호자 읽기. 읽기 전용 열람 용도로도 쓴다. */
+export async function loadMockExamAnnotationsAction(attemptId: string, setItemId: string): Promise<MockExamAnnotations> {
+  try {
+    const { supabase } = await requireUser();
+    const { data, error } = await supabase.rpc("load_mock_exam_annotations", { p_attempt_id: attemptId, p_set_item_id: setItemId });
+    if (error) return { highlights: [], eliminated: [] };
+    return parseAnnotations(data);
+  } catch {
+    return { highlights: [], eliminated: [] };
+  }
 }

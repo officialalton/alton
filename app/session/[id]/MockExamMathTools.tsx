@@ -1,5 +1,6 @@
 "use client";
 
+import { ReferenceFigureGrid } from "./MathReferenceFigures";
 import { useEffect, useRef, useState } from "react";
 
 // 고정형 SAT 모의고사 V1 — Math 공통 도구(사양 6절): 그래프 계산기 · 참조표.
@@ -114,7 +115,7 @@ export function GraphingCalculator({ heightClassName = "h-[360px]" }: { heightCl
     <div className={`flex flex-col rounded-lg border border-grey-200 bg-white p-2 w-full ${heightClassName}`} data-testid="mock-exam-calculator">
       {status === "error" ? (
         <div className="p-3 text-center text-[13px] text-red" data-testid="calculator-error">
-          그래프 계산기를 불러오지 못했습니다. 인터넷 연결을 확인해 주세요.
+          Could not load the graphing calculator. Please check your internet connection.
         </div>
       ) : (
         <div ref={containerRef} data-testid="desmos-calculator-container" className="w-full min-h-0 flex-1" />
@@ -123,53 +124,70 @@ export function GraphingCalculator({ heightClassName = "h-[360px]" }: { heightCl
   );
 }
 
-export function MathReferenceSheet() {
+/** 주관식(SPR) 답 입력 안내 — 참조표 팝업과 SPR 입력창 아래에서 같이 쓴다(2026-10-02 제품 오너 지시). */
+export function SprDirections({ className = "" }: { className?: string }) {
+  return (
+    <div className={`text-[12px] leading-relaxed text-grey-700 ${className}`} data-testid="spr-directions">
+      <p className="mb-1 font-bold text-ink">Student-produced response questions</p>
+      <ul className="list-disc space-y-0.5 pl-5">
+        <li>Type your answer in the box. Enter only one answer, even if you find more than one correct value.</li>
+        <li>
+          A <b>positive</b> answer can have up to 5 characters, and a <b>negative</b> answer up to 6 characters including the minus sign.
+        </li>
+        <li>
+          If a <b>fraction</b> is too long (over 5 characters for a positive answer, 6 for a negative one), enter its decimal equivalent instead.
+        </li>
+        <li>
+          If a <b>decimal</b> is too long, truncate it or round it at the fourth digit.
+        </li>
+        <li>
+          Write a <b>mixed number</b> (such as 3½) as an improper fraction (7/2) or as a decimal (3.5).
+        </li>
+        <li>
+          Do not include <b>symbols</b> such as a percent sign, comma, or dollar sign.
+        </li>
+      </ul>
+    </div>
+  );
+}
+
+function SheetLabel({ children }: { children: React.ReactNode }) {
+  return <span className="mb-2 inline-block bg-ink px-2 py-0.5 text-[10.5px] font-extrabold uppercase tracking-wider text-white">{children}</span>;
+}
+
+export function MathReferenceSheet({ calculatorAllowed = true }: { calculatorAllowed?: boolean } = {}) {
   return (
     <div className="rounded-lg border border-grey-200 bg-white p-4 text-[12.5px] leading-relaxed" data-testid="mock-exam-reference-sheet">
-      <h4 className="mb-2 text-[12px] font-extrabold uppercase tracking-wide text-grey-500">참조표</h4>
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <p className="font-bold">원</p>
-          <p>넓이 = πr², 둘레 = 2πr</p>
-        </div>
-        <div>
-          <p className="font-bold">직사각형</p>
-          <p>넓이 = 가로 × 세로</p>
-        </div>
-        <div>
-          <p className="font-bold">삼각형</p>
-          <p>넓이 = ½ × 밑변 × 높이</p>
-        </div>
-        <div>
-          <p className="font-bold">직각삼각형(피타고라스)</p>
-          <p>a² + b² = c²</p>
-        </div>
-        <div>
-          <p className="font-bold">특수각 직각삼각형</p>
-          <p>30-60-90: 변 비율 1 : √3 : 2</p>
-          <p>45-45-90: 변 비율 1 : 1 : √2</p>
-        </div>
-        <div>
-          <p className="font-bold">직육면체</p>
-          <p>부피 = 가로 × 세로 × 높이</p>
-        </div>
-        <div>
-          <p className="font-bold">원기둥</p>
-          <p>부피 = πr²h</p>
-        </div>
-        <div>
-          <p className="font-bold">구</p>
-          <p>부피 = (4/3)πr³</p>
-        </div>
-        <div>
-          <p className="font-bold">원뿔</p>
-          <p>부피 = (1/3)πr²h</p>
-        </div>
-        <div>
-          <p className="font-bold">각도</p>
-          <p>삼각형 내각의 합 = 180°, 원 = 360° = 2π 라디안</p>
-        </div>
-      </div>
+      <section className="mb-4">
+        <SheetLabel>Directions</SheetLabel>
+        <p>The questions in this section cover a range of important math skills.</p>
+        <p>{calculatorAllowed ? "A calculator may be used for all questions in this section." : "A calculator is not available in this section."}</p>
+      </section>
+
+      <section className="mb-4">
+        <SheetLabel>Notes</SheetLabel>
+        <p className="mb-1">Unless a question says otherwise:</p>
+        <ul className="list-disc space-y-0.5 pl-5">
+          <li>All variables and expressions represent real numbers.</li>
+          <li>Figures are drawn to scale.</li>
+          <li>All figures lie in a plane.</li>
+          <li>The domain of a function f is the set of all real numbers x for which f(x) is a real number.</li>
+        </ul>
+      </section>
+
+      <section className="mb-4">
+        <SheetLabel>Reference</SheetLabel>
+        <ReferenceFigureGrid />
+        <ul className="mt-3 space-y-0.5 text-[12px]">
+          <li>The number of degrees of arc in a circle is 360.</li>
+          <li>The number of radians of arc in a circle is 2π.</li>
+          <li>The sum of the measures, in degrees, of the angles of a triangle is 180.</li>
+        </ul>
+      </section>
+
+      <section className="border-t border-grey-200 pt-3">
+        <SprDirections />
+      </section>
     </div>
   );
 }
@@ -204,7 +222,7 @@ export function MockExamToolButtons({
           }`}
           data-testid="toggle-calculator"
         >
-          계산기
+          Calculator
         </button>
       )}
       {referenceSheetAllowed && (
@@ -263,9 +281,9 @@ export default function MockExamMathTools({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-grey-200 px-4 py-2">
-              <span className="text-[12px] font-extrabold text-grey-500">계산기</span>
+              <span className="text-[12px] font-extrabold text-grey-500">Calculator</span>
               <button type="button" onClick={onClose} className="text-[12px] font-bold text-grey-500 underline" data-testid="close-calculator">
-                닫기
+                Close
               </button>
             </div>
             <div className="min-h-0 flex-1 p-2">
@@ -277,16 +295,16 @@ export default function MockExamMathTools({
       {referenceSheetAllowed && open === "reference" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={onClose}>
           <div
-            className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white"
+            className="max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 flex items-center justify-between border-b border-grey-200 bg-white px-4 py-2">
               <span className="text-[12px] font-extrabold text-grey-500">Reference Sheet</span>
               <button type="button" onClick={onClose} className="text-[12px] font-bold text-grey-500 underline" data-testid="close-reference">
-                닫기
+                Close
               </button>
             </div>
-            <MathReferenceSheet />
+            <MathReferenceSheet calculatorAllowed={calculatorAllowed} />
           </div>
         </div>
       )}

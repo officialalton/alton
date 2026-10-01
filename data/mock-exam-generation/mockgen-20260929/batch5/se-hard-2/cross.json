@@ -1,0 +1,374 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 10,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 10,
+   "crossScored": 10,
+   "correct": {
+    "agree": 9,
+    "of": 10,
+    "fablePass": 8,
+    "opusPass": 9
+   },
+   "compliance": {
+    "agree": 10,
+    "of": 10,
+    "fablePass": 10,
+    "opusPass": 10
+   },
+   "hardFit": {
+    "agree": 6,
+    "of": 10,
+    "fablePass": 9,
+    "opusPass": 5
+   },
+   "adoptedBoth": 4,
+   "adoptedOneOnly": 4,
+   "yieldBoth": 0.4,
+   "costUsd": 1.669,
+   "costPerAdoptedBoth": 0.417,
+   "fableOnlyPass": 3,
+   "opusOnlyPass": 1
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 7,
+   "rw": 7,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "recipe-boundaries-30",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Interviewing more than two hundred practitioners over a decade'의 논리적 주어는 인터뷰 행위자 Ngugi이며 D만 일치. A는 Ngugi 관련 저작물(카탈로그)로 범주가 다른 매력적 오답, B·C는 지문 내 명사이나 행위자 불가. 네 선택지 동사가 모두 과거형이라 수일치로는 변별 불가하여 의미적 수식 관계 추론이 필수. 해설도 정답과 오답 배제 논리가 일관됨. 지문 내 '(a fictional researcher)' 표기는 실제 SAT 지문 양식과 다소 어긋나나 판정에 영향 없는 수준.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 D가 맞습니다. 오답 A의 'Ngugi's published catalog'는 Ngugi의 소유격이 붙은 저작물이라 그럴듯해 보이는 함정입니다. 다만 모든 오답 주어가 사람이 아닌 대상이라서 '사람을 고른다'는 단서만으로도 풀 수 있습니다. 그래서 난이도는 hard 기준의 하한에 가깝습니다.",
+    "issue": ""
+   },
+   "cost": 0.1446448
+  },
+  {
+   "cid": "recipe-boundaries-31",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment",
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "앞 절(When절+주절 'she expected ... within a season')과 뒤 절('most of them had not only survived but measurably expanded')은 모두 독립절이며 예상 vs 결과의 대조 관계가 분명하다. D의 ', but' + 도입 부사구 'three years later,'는 적절. B는 콤마 스플라이스, C는 'three years;later'로 절 경계 아닌 곳에 세미콜론. A는 구두점 형식은 맞으나 so의 인과 의미가 문맥과 충돌한다—단, A는 Standard English 관례상으로는 문법적으로 성립하므로 '관례' 문항의 오답으로는 다소 transitions 성격이 섞여 있음(치명적이지는 않으나 참고). 수식어 'three years later'를 절 경계와 구분해야 하고 대조 관계에 맞는 접속 전략을 고르는 추가 사고가 요구되어 hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "For A, the punctuation form itself is fine; the item only rules it out on the logical relation (so vs. but). This means choosing the connector based on the relationship between the clauses is a real part of the task. That said, it is a common type of distractor, so the hard level is moderate.",
+    "issue": ""
+   },
+   "cost": 0.1755392
+  },
+  {
+   "cid": "recipe-boundaries-32",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_insert_vs_clause_break",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "inserted_modifier_vs_clause_discrimination"
+    ],
+    "note": "정답 A 검증 완료: 빈칸 앞은 주어(The saguaro cactus of the Sonoran Desert)뿐, 뒤는 동사구(can swell ...)이므로 'for example'은 한 절 내부 삽입어 → 양쪽 쉼표 짝이 맞는 A가 유일하게 옳음. 해설도 각 오답 사유를 정확히 기술. 사실 오류·저작권 문제 없음. 다만 체크리스트 4(콤마 스플라이스 오답) 미충족: 빈칸 앞뒤가 독립절이 아니므로 구조상 콤마 스플라이스 오답을 만들 수 없고, B는 세미콜론 오용(비절 분리)에 해당. 또한 주어-동사 사이 삽입어 쉼표 짝 맞추기는 이 skill의 전형적 medium 수준 과제이며, hard 특성(절 간 논리관계에 따른 구두점 종류 선택, 복수 독립절 경계 판단 등) 중 inserted_modifier_vs_clause_discrimination만 가볍게 건드리므로 hard 적합성은 미흡하다고 판단.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 A가 맞다. 빈칸 앞은 주어뿐이고 뒤의 'can swell'이 그 주어의 동사이므로, 'for example'은 앞뒤에 쉼표를 짝지어 찍는 삽입어다. 체크리스트 4번은 충족하지 못했다. 앞뒤 중 어느 쪽도 독립절이 아니어서 콤마 스플라이스 오답을 만들 수 없는 구조이고, B는 세미콜론을 잘못 쓴 오답이다. 문항은 '주어 + 삽입어 + 동사' 형태의 전형적인 medium 수준이다. 독립절 사이에 끼어든 삽입어(예: '; however,' 대 ', however,')와 대비시키지 않아서 inserted_modifier_vs_clause_discrimination에서 말하는 판별이 실제로 필요하지 않다.",
+    "issue": ""
+   },
+   "cost": 0.1678
+  },
+  {
+   "cid": "recipe-boundaries-33",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_dangling_modifier_subject_matching",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구문 'Later trained in stoneware glazing...'의 의미적 대상은 Kwali이며, A만 Kwali를 주절 주어로 둔다. B는 지문에 등장한 기관명과 실존 인물(Michael Cardew, 실제 Abuja 센터 설립자)을 활용해 그럴듯하지만 훈련받은 주체가 Cardew로 읽히는 현수 수식어, C는 소유격 'Kwali's vessels'로 사람 대신 작품을 주어로 둔 범주 불일치 함정, D는 'glazes'가 주어인 수동 구문으로 모두 문법적으로는 완결된 문장이다. 빈칸에 주어와 동사가 함께 포함되어 수일치만으로는 판별 불가. A의 'vessels that were eventually exhibited in London and helped redefine...'은 자연스럽게 이어진다. Ladi Kwali의 이모에게서 Gwari 기법 습득, 1950년대 Abuja 센터 훈련, 런던 전시 등 사실관계도 정확하다. hard 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "네 선택지 모두 빈칸 뒤 'eventually exhibited in London and helped redefine...'와 이어 붙이면 문법적으로 완전한 문장이 된다. 'Later trained...' 분사구문의 의미상 주어는 사람인 Kwali이므로 A만 수식 관계가 맞는다. B는 다른 인물(Michael Cardew), C는 소유격 함정(Kwali's vessels, 사람이 아닌 작품), D는 수동태에 사물 주어(glazes)를 쓴 오답이다. 오답이 서로 다른 유형으로 구성되어 있고, 수일치만으로는 정답을 가려낼 수 없다. 사실관계도 맞다(Kwali는 Abuja Pottery Training Centre에서 Cardew에게 배웠다).",
+    "issue": ""
+   },
+   "cost": 0.1786808
+  },
+  {
+   "cid": "recipe-boundaries-34",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": "boundaries_clause_relation_punctuation_choice",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "정답 C는 옳고 해설도 일관됨(B 콤마 스플라이스, D 접속사와 주어 사이 세미콜론). 다만 오답 A(\", so the hoatzin\")는 구두점·문법상 완전히 Standard English 규범에 부합하며 오직 의미(인과 vs 대조)로만 배제됨. 'conventions of Standard English' 문두 아래서는 모든 오답이 규범 위반이어야 하는데 A는 사실상 transitions 문항의 오답 논리라서 형식상 결함. 호아친의 crop 발효·잎 식성은 사실에 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "independent_clause_boundary_judgment"
+    ],
+    "note": "C(, but)가 맞다. 두 절 모두 독립절이고 서로 대조 관계다. A는 형식은 맞지만 인과 접속사 so를 써서 의미가 틀렸다. B는 콤마 스플라이스, D는 절 경계가 아닌 곳에 세미콜론이 있다. 형식만이 아니라 절 사이 논리 관계를 따져야 하므로 medium보다는 어렵다. 다만 so/but 판별은 꽤 전형적이라 hard 중에서는 낮은 편이다. 호아친의 소낭 발효는 사실이다.",
+    "issue": ""
+   },
+   "cost": 0.1670292
+  },
+  {
+   "cid": "recipe-form_structure_sense-30",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "문두 분사구 'Having recorded...'의 의미상 행위자는 녹음을 수행한 Trujillo이며, D만 그를 주절 주어로 둠. A는 'recorded'와 형태적으로 연결되는 무생물 'the recordings', B는 배경 명사 Silbo Gomero(의미 중복까지 발생), C는 분사구에 인접한 유정 명사 'elderly speakers'(녹음 대상이지 행위자가 아님)로 각각 현수 수식을 유발하여 체크리스트 역할을 충실히 수행. 'work that later helped...' 동격 구조도 D와 자연스럽게 결합. 역사적 사실(Trujillo의 연구, 1999년 학교 필수 과목 지정)도 무리 없음. 해설은 정답·오답 근거를 정확히 설명하며 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 D가 맞고 해설에도 문제가 없다. 다만 난이도는 전형적인 medium 수준의 현수 수식어 문항이다. A·B는 주어가 무생물이어서 바로 지워진다. 사람 주어 오답은 C 하나뿐인데, C의 elderly speakers도 녹음을 당한 쪽이라 쉽게 배제된다. Trujillo라는 이름이 네 선택지에 모두 들어 있어서 행위자를 문맥에서 추적할 필요가 거의 없다. 체크리스트 3번의 '인접 명사'는 A(형태상 recorded와 이어지는 recordings)로 느슨하게 충족한 것으로 보았다. 엄밀히 보면 분사구에 가장 가까운 명사는 C의 speakers이다.",
+    "issue": ""
+   },
+   "cost": 0.1797192
+  },
+  {
+   "cid": "recipe-form_structure_sense-31",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "A는 세미콜론+therefore로 증거→결론의 인과관계를 올바르게 표현하므로 그 자체로 정답 적합. B는 콤마 스플라이스, C는 'a different story'에 이끌린 대조 오답으로 잘 설계됨. 그러나 D(\", and, therefore,\")는 Standard English에서 문법적으로 허용되는 '등위접속사 + 접속부사' 구조이며 논리도 맞아 실질적으로 두 번째 정답이 된다. 콤마가 다소 과다해 어색하지만 '오류'로 판정할 규범적 근거가 없다. 접속사 중복 오답을 만들려면 \", but therefore\" 같은 논리 충돌형이나 \"1800s, so therefore\" 류의 명백한 중복, 혹은 \"; and therefore\" 같은 구두점 오류 형태가 필요하다. 유일정답성 결함으로 현재 상태로는 사용 불가.",
+    "issue": "D에 대한 해설이 \"등위접속사 and와 접속부사 therefore를 함께 쓰면 연결어 중복 오류\"라고 단정하지만, 표준 영어에서 \", and therefore ...\" (등위접속사 + 접속부사)는 완전히 허용되는 구조다(예: \"The data were incomplete, and therefore the results were inconclusive\"). 따라서 D는 문법·논리 모두 성립하는 선택지가 되어 정답이 A와 D 둘이 된다. 해설의 근거(\"'; therefore,'나 ', so' 중 하나만 쓴다\")는 Standard English 규범에 대한 사실 오류."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "A도 옳지만 D(', and, therefore,')도 문법적으로 옳아 정답이 하나로 정해지지 않는다. 체크리스트 5번(접속사 중복 오류)은 실제 오류로 성립하지 않는다. D를 진짜 중복 오류(예: ', so therefore,' 또는 '; and therefore,')로 바꿔야 한다. 'a different story'를 이용한 대조 함정은 좋지만, 전반적으로 전형적인 medium 수준의 절 연결 문항이다.",
+    "issue": "해설은 D를 '연결어 중복'이라는 표준 영어 관습 오류로 처리하지만, ', and, therefore,'(= and therefore)는 문법적으로 옳은 표준 구조다. 독립절 두 개를 콤마+등위접속사 and로 바르게 잇고 있고, therefore는 삽입된 부사일 뿐이다. 장황하다고 볼 수는 있어도 관습 위반은 아니므로 D도 옳은 답이 될 수 있다. [블라인드: A 선택, 복수정답 가능]"
+   },
+   "cost": 0.1894844
+  },
+  {
+   "cid": "recipe-form_structure_sense-32",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_tense_consistency_across_quote",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "tense_agreement_across_context",
+     "parallel_structure_consistency"
+    ],
+    "note": "인용문 내 병렬 \"swept, fed, ___\"로 단순과거 watched가 정답임을 직접 확인. B는 현재형(인용문 과거 시제와 불일치), C는 병렬 중 하나만 진행형, D는 'had taught'·1987 인터뷰 시점 때문에 국소적으로 그럴듯하나 종료된 과거 반복 행위와 불일치 — 체크리스트 5항목 모두 충족. 바깥 절의 과거완료(had started/had taught)와 'for hours', 'Every morning' 등 유인 장치가 있어 인용문·주절 전반의 시제 추적을 요구하므로 medium 이상으로 판정하되, 병렬 선행 동사 두 개가 명시되어 있어 난이도 상승폭은 크지 않음(hard 하한 수준). Tagliapietra가 11세에 Murano에서 견습을 시작했다는 배경은 사실과 부합. 인터뷰 인용은 창작으로 보이나 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [],
+    "note": "정답 A가 옳다. 다만 병렬 구조 \"I swept, I fed, and I ___\" 바로 옆에 단순과거가 두 개 있어서, 앞 두 동사 형태만 맞추면 풀린다. 인용문 밖 맥락까지 추적해 시제를 판단할 필요가 없는 전형적인 medium 수준 문항이다. 오답 C와 D도 쉽게 지워진다. hard 특성 tense_agreement_across_context를 실질적으로 요구하지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.1458416
+  },
+  {
+   "cid": "recipe-form_structure_sense-33",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_dangling_modifier_agent_trace",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "분사구문 'Having compared...'의 행위자는 Lehtinen이며 C만 주절 주어로 Lehtinen을 둔다. A는 수식어구 내 인접 명사(letters), B는 배경 명사(workshop), D는 사람 명사(masters)로 각각 현수 수식어 오류를 유도하며, 'according to Lehtinen'·'Lehtinen discovered' 삽입구가 주어로 착각하게 만드는 장치가 있어 단순 인접 일치가 아닌 의미상 행위자 추적을 요구한다. 해설 정확, 지문은 가상 소재로 저작권 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "dangling_modifier_subject_matching"
+    ],
+    "note": "정답 C가 옳음: 분사구문의 행위자는 Lehtinen임. 오답 B·D는 삽입구(according to Lehtinen, Lehtinen discovered)로 Lehtinen을 문장 안에 넣어 두었지만 문법상 주어는 아니므로, 단순히 이름이 있는지만 보는 것으로는 풀 수 없음. D는 사람 주어라 그럴듯함. 수식어 위치에 대한 다양성은 다소 부족함(문두 분사구문만 있음).",
+    "issue": ""
+   },
+   "cost": 0.1380552
+  },
+  {
+   "cid": "recipe-form_structure_sense-34",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": "form_structure_sense_clause_logic_first_punctuation",
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "A는 세미콜론으로 독립절을 분리하고 'in seawater, however,'로 대조를 표시하여 문법·논리 모두 충족. 'actually grows tougher' 및 후행 'whereas' 절로 접속어 없이도 대조 관계 파악 가능. B 콤마 스플라이스, C therefore 논리 반대, D and+however 연결어 중복·의미 충돌로 오답 설계 충족. 다만 D의 'and ... however' 조합은 엄밀히 비문이라기보다 중복/어색 수준이어서 일부 수험자가 논쟁 가능한 소지는 있으나 SAT 관행상 수용 가능. 사실 관계(알루미늄 토버모라이트 결정 성장, 해수 속 로마 콘크리트 강화)는 Jackson et al. 2017 연구와 부합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "clause_relation_punctuation"
+    ],
+    "note": "A가 가장 좋은 답이다. 다만 D(', and in seawater, however,')는 문법적으로 성립할 수 있어서 오답이라는 근거가 약하다. 'but however'와 달리 and와 however를 함께 쓰는 것은 명백한 중복 오류가 아니므로, 정답이 하나로 확정되지 않을 위험이 있다. 대조 관계를 알아보고 세미콜론과 접속부사를 고르는 것은 전형적인 medium 수준이다. 난이도는 문장 길이와 과학 내용에서 나오며, 추가 사고를 요구하지는 않는다.",
+    "issue": "D가 오답이라는 설명('and와 however의 중복', 'and의 나열 의미가 대조와 충돌')은 논란의 여지가 있다. ', and ..., however,' 구조는 Standard English에서 대체로 허용되므로 D가 확실한 오답이라고 보기 어렵다."
+   },
+   "cost": 0.1822244
+  }
+ ]
+}

@@ -10,6 +10,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { findResidue } from "../../lib/problem-generation/residue";
+import { dedupeStem } from "../../lib/problem-text-guards";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -136,13 +137,16 @@ async function main() {
   };
   for (const r of recs) {
     const g = r.problem;
-    const stimulus = g.stimulus ?? g.passage ?? "";
     const question = g.question ?? null;
+    // 2026-10-02 UAT C2 — 생성 스키마가 passage를 필수로 요구해, 자극이 없는 수학 문항은 지문 자리에 질문 문장을 그대로 채운다. 새 레코드는 중복을 빼고 저장한다.
+    const rawStimulus = g.stimulus ?? g.passage ?? "";
+    const stimulus = dedupeStem(rawStimulus, question);
+    const rawKey = `${rawStimulus}\u0000${question ?? ""}`; // 예전에 중복 그대로 저장된 레코드와도 같은 문항으로 본다.
     const residue = findResidue({ passage: g.passage as string | undefined, stimulus: g.stimulus as string | undefined, question: g.question as string | undefined, options: g.options as string[] | undefined, explanation: g.explanation as string | undefined, explanationEn: (g as { explanationEn?: string }).explanationEn, statements: g.statements as string[] | undefined });
-    if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}:${x.match}`).join(", ")}`); continue; }
+    if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}[${x.kind}]:${x.match}`).join(", ")}`); continue; }
     const key = `${stimulus}\u0000${question ?? ""}`;
     const pool = existing.get(r.skill) ?? [];
-    const same = pool.find((e) => e.key === key);
+    const same = pool.find((e) => e.key === key || e.key === rawKey);
     if (same) { stats.skippedExisting += 1; if (publish && !dry) await linkKeywords(same.problemId, r, false); continue; }
     const sh = shingles(`${stimulus} ${question ?? ""} ${(g.options ?? []).join(" ")}`);
     if (dupCheck) {
@@ -169,7 +173,7 @@ async function main() {
     const { data: versionId, error: vErr } = await admin.rpc("save_problem_draft_version", {
       p_problem_id: problemId, p_passage: stimulus, p_options: g.options ?? null, p_correct_index: g.correctIndex ?? null, p_explanation: g.explanation,
       p_difficulty: r.difficulty, p_actor_id: actorId, p_answers: g.answers ?? null, p_figure: figureToSave, p_figure_checked: false,
-      p_statements: g.statements?.length ? g.statements : null, p_question: question?.trim() || null, p_repair_status: null, p_explanation_en: null,
+      p_statements: g.statements?.length ? g.statements : null, p_question: question?.trim() || null, p_repair_status: null, p_explanation_en: ((g as { explanationEn?: string | null }).explanationEn ?? null) || null,
       p_evidence_target: g.evidenceTarget ?? null, p_evidence_span: g.evidenceSpan ?? null, p_answer_rationale: g.answerRationale ?? null, p_distractor_error_types: g.distractorErrorTypes ?? null,
     });
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }

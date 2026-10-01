@@ -29,7 +29,7 @@ export type ParallelTransversalSpec = {
 /** 횡단선끼리의 교점 주변 네 쐐기: N = 평행선을 향한 쪽(교점이 아래면 위, 위면 아래 — 삼각형 안), S = 그 반대, E/W = 좌우. */
 export type CrossRegion = "N" | "S" | "E" | "W";
 
-import { ARC_R, dedupe, LABEL_SIZE, labelWidth, RIGHT_R, Sheet, type FigureIssue, type Pt } from "./_layout";
+import { ARC_R, dedupe, f, LABEL_SIZE, labelWidth, RIGHT_R, Sheet, type FigureIssue, type Pt } from "./_layout";
 export type { FigureIssue } from "./_layout";
 
 const W = 360;
@@ -147,6 +147,31 @@ export function validateParallelTransversal(rawInput: unknown): { ok: true; spec
   return { ok: true, spec: s as unknown as ParallelTransversalSpec };
 }
 
+/**
+ * 횡단선이 평행선과 이루는 예각(도). 2026-10-02(오너 UAT C6) — 라벨이 '37°' 인데 늘 55°로 그려져 눈으로 본 각이
+ * 라벨과 어긋났다. 평행선·횡단선 교점의 **숫자** 각 라벨이 있으면 그 각대로 그린다(예각 쐐기면 그 값, 둔각 쐐기면 180−값).
+ * 미지수 라벨('x°')은 쓰지 않는다. 너무 눕거나 선 각(30° 미만·80° 초과)은 조판이 깨지므로 기본값을 쓴다.
+ */
+export function slantDegFor(spec: ParallelTransversalSpec): number {
+  const isTransId = (x: string) => spec.transversals.some((tr) => tr.id === x);
+  // 두 횡단선이 만나는 그림은 기울기가 교점 배치와 묶여 있어 기본값을 쓴다.
+  if (spec.crossing || spec.angles.some((a) => isTransId(a.at[0]) && isTransId(a.at[1]))) return SLANT_DEG;
+  for (const a of spec.angles) {
+    if (a.right || isTransId(a.at[0]) && isTransId(a.at[1])) continue;
+    const m = (a.label ?? "").trim().match(/^(\d+(?:\.\d+)?)\s*°?$/);
+    if (!m) continue;
+    const v = Number(m[1]);
+    const t = spec.transversals.find((tr) => a.at.includes(tr.id));
+    if (!t || t.perpendicular || v <= 0 || v >= 180 || v === 90) continue;
+    const idx = spec.transversals.indexOf(t);
+    const rightSlant = (t.slant ?? (idx === 0 ? "right" : (spec.transversals[0].slant ?? "right"))) === "right";
+    const acute = (a.region === "NW" || a.region === "SE") === rightSlant;
+    const deg = acute ? v : 180 - v;
+    return deg >= 30 && deg <= 80 ? deg : SLANT_DEG;
+  }
+  return SLANT_DEG;
+}
+
 export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg: string; alt: string; issues: FigureIssue[] } {
   const sheet = new Sheet(W, 250);
   const issues = sheet.issues;
@@ -154,7 +179,8 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
   const putLabel = (x: number, y: number, t: string, what: string, italic = false) => sheet.label(x, y, t, what, { italic });
 
   // ---- 배치 계산: 라벨이 필요한 반지름과 두 평행선 사이 간격(사이에 놓이는 라벨 높이에 맞춰 늘린다)
-  const slant = (SLANT_DEG * Math.PI) / 180;
+  const slantDeg = slantDegFor(spec);
+  const slant = (slantDeg * Math.PI) / 180;
   const halfAcute = slant / 2, halfObtuse = (Math.PI - slant) / 2;
   const labelRadius = (label: string, wedgeHalf: number, right?: boolean) => {
     const w = labelWidth(label);
@@ -212,8 +238,10 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     ends.push({ top, bottom, dir });
     // 교점을 지나 더 나가도록 연장한다.
     // 만나는 쪽은 교점을 지나도록 길게, 벌어지는 쪽은 짧게(이름이 캔버스 밖으로 나가지 않게).
-    const extTop = crossing?.side === "above" ? 46 + crossDepth : crossing ? 26 : 46;
-    const extBottom = crossing?.side === "below" ? 46 + crossDepth : crossing ? 26 : 46;
+    // 기울기가 작을수록(예각이 좁을수록) 예각 쐐기 라벨이 교점에서 멀리 놓인다 — 이름이 라벨과 닿지 않게 그만큼 더 연장한다.
+    const EXT = Math.round(46 * Math.max(1, SLANT_DEG / slantDeg));
+    const extTop = crossing?.side === "above" ? 46 + crossDepth : crossing ? 26 : EXT;
+    const extBottom = crossing?.side === "below" ? 46 + crossDepth : crossing ? 26 : EXT;
     const k0: Pt = [top[0] - dir[0] * extTop, top[1] - dir[1] * extTop];
     const k1: Pt = [bottom[0] + dir[0] * extBottom, bottom[1] + dir[1] * extBottom];
     line(k0, k1);
@@ -296,7 +324,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     const mid = (a1 + a2) / 2;
     if (a.right) {
       sheet.rightAngle(c, a1, a2, RIGHT_R);
-      if (Math.abs(a2 - a1 - Math.PI / 2) > 0.02) issues.push({ code: "impossible", message: `교점 (${a.at.join(", ")}) ${a.region} 은 직각이 아닙니다 — 직각이면 그 횡단선을 perpendicular:true 로 두세요(기울어진 횡단선은 ${SLANT_DEG}° 로 만납니다).` });
+      if (Math.abs(a2 - a1 - Math.PI / 2) > 0.02) issues.push({ code: "impossible", message: `교점 (${a.at.join(", ")}) ${a.region} 은 직각이 아닙니다 — 직각이면 그 횡단선을 perpendicular:true 로 두세요(기울어진 횡단선은 ${f(slantDeg)}° 로 만납니다).` });
     } else {
       sheet.arc(c, ARC_R, a1, a2);
     }

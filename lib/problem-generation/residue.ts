@@ -8,6 +8,8 @@ const MEMO_RES: [string, RegExp][] = [
   ["도구 호출 흔적", /antml|function_calls|<!\[CDATA\[|\bparameter name=/],
   ["TODO/메모 표식", /\b(?:TODO|FIXME|XXX)\b|\[(?:메모|NOTE|TBD)[^\]]*\]/],
 ];
+import { findHangulInStem } from "../problem-text-guards";
+
 export type Residue = { field: string; match: string; kind: string };
 export type CheckableProblem = { passage?: string | null; stimulus?: string | null; question?: string | null; options?: string[] | null; explanation?: string | null; explanationEn?: string | null; statements?: string[] | null };
 
@@ -25,5 +27,13 @@ export function findResidue(p: CheckableProblem): Residue[] {
   (p.options ?? []).forEach((o, i) => add(`options[${i}]`, o));
   (p.statements ?? []).forEach((o, i) => add(`statements[${i}]`, o));
   add("explanation", p.explanation); add("explanationEn", p.explanationEn);
+  // 2026-10-02 UAT C1 — 영어 시험 문항의 지문·질문·선택지·진술에 한글이 있으면 거부(해설은 한국어 허용).
+  for (const field of findHangulInStem(p)) out.push({ field, match: (fieldText(p, field) ?? "").slice(0, 60), kind: "영어 문항 본문에 한글" });
   return out;
+}
+
+function fieldText(p: CheckableProblem, field: string): string | null | undefined {
+  const m = /^(options|statements)\[(\d+)\]$/.exec(field);
+  if (m) return (p[m[1] as "options" | "statements"] ?? [])[Number(m[2])];
+  return p[field as "passage" | "stimulus" | "question"];
 }

@@ -5,9 +5,14 @@ import { submitProblemErrorReportAction } from "@/lib/problem-error-reports/acti
 import {
   MEMO_MAX,
   MY_STATUS_TEXT,
+  MY_STATUS_TEXT_EN,
   REPORT_TYPE_HINT,
+  REPORT_TYPE_HINT_EN,
   REPORT_TYPE_LABEL,
+  REPORT_TYPE_LABEL_EN,
+  REPORT_UI_TEXT,
   reportTypesFor,
+  type ReportLang,
   type MyReportStatus,
   type ReportContext,
   type ReportType,
@@ -25,12 +30,22 @@ export default function ProblemErrorReportButton({
   role,
   initialStatus = null,
   className = "",
+  variant = "pill",
+  lang = "ko",
 }: {
   context: ReportContext;
   role: ReporterRole;
   initialStatus?: MyReportStatus | null;
   className?: string;
+  /** "icon": 응시 화면 번호 막대 안에 들어가는 작은 ⚠️ 아이콘(신고 양식은 아래로 떠서 열린다). 기본은 알약 버튼. */
+  variant?: "pill" | "icon";
+  /** 표시 언어. 기본 한국어, 모의고사 응시 화면은 영어. */
+  lang?: ReportLang;
 }) {
+  const T = REPORT_UI_TEXT[lang];
+  const statusText = lang === "en" ? MY_STATUS_TEXT_EN : MY_STATUS_TEXT;
+  const typeLabel = lang === "en" ? REPORT_TYPE_LABEL_EN : REPORT_TYPE_LABEL;
+  const typeHint = lang === "en" ? REPORT_TYPE_HINT_EN : REPORT_TYPE_HINT;
   const [open, setOpen] = useState(false);
   const [type, setType] = useState<ReportType | null>(null);
   const [memo, setMemo] = useState("");
@@ -70,19 +85,30 @@ export default function ProblemErrorReportButton({
   }
 
   const reported = status !== null;
+  const isIcon = variant === "icon";
   return (
-    <div className={className} data-testid="problem-error-report">
+    <div className={`${isIcon ? "relative inline-block " : ""}${className}`} data-testid="problem-error-report">
       <button
         ref={triggerRef}
         type="button"
         onClick={() => (open ? close() : setOpen(true))}
         aria-expanded={open}
         aria-controls={formId}
-        className={`inline-flex min-h-[32px] items-center rounded-full border px-3 py-1 text-[11.5px] font-bold transition-colors ${
-          reported ? "border-grey-200 bg-grey-50 text-grey-500" : "border-grey-300 text-grey-600 hover:bg-grey-100"
-        }`}
+        aria-label={reported ? statusText[status!] : T.trigger}
+        title={reported ? statusText[status!] : T.trigger}
+        className={
+          isIcon
+            ? `inline-flex h-7 w-7 items-center justify-center rounded text-ink leading-none transition-opacity hover:bg-black/10 ${reported ? "opacity-100" : "opacity-70 hover:opacity-100"}`
+            : `inline-flex min-h-[32px] items-center rounded-full border px-3 py-1 text-[11.5px] font-bold transition-colors ${
+                reported ? "border-grey-200 bg-grey-50 text-grey-500" : "border-grey-300 text-grey-600 hover:bg-grey-100"
+              }`
+        }
       >
-        {reported ? MY_STATUS_TEXT[status!] : "문제 오류 신고"}
+        {isIcon ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            {reported ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <><path d="M12 4l9 16H3z" /><path d="M12 10v4.5M12 17.4v.1" /></>}
+          </svg>
+        ) : reported ? statusText[status!] : T.trigger}
       </button>
 
       {open && (
@@ -98,17 +124,17 @@ export default function ProblemErrorReportButton({
               close();
             }
           }}
-          className="mt-2 rounded-lg border border-grey-200 bg-white p-3 text-[13px]"
-          aria-label="문제 오류 신고"
+          className={`rounded-lg border border-grey-200 bg-white p-3 text-[13px] ${isIcon ? "absolute left-0 top-full z-30 mt-1 w-[340px] shadow-lg" : "mt-2"}`}
+          aria-label={T.trigger}
         >
           {done ? (
             <p role="status" className="text-[12.5px] font-semibold text-grey-700">
-              {done === "duplicate" ? "이미 신고한 문항이에요. 검토 중입니다." : "신고가 접수됐어요. 확인 후 결과를 안내해 드릴게요."}
+              {done === "duplicate" ? T.duplicate : T.accepted}
             </p>
           ) : (
             <>
               <fieldset disabled={pending}>
-                <legend className="mb-1.5 text-[12px] font-bold text-grey-500">어떤 문제인가요? (필수)</legend>
+                <legend className="mb-1.5 text-[12px] font-bold text-grey-500">{T.legend}</legend>
                 <div className="flex flex-col gap-1">
                   {types.map((t) => (
                     <label
@@ -117,15 +143,15 @@ export default function ProblemErrorReportButton({
                     >
                       <input type="radio" name={`${formId}-type`} value={t} checked={type === t} onChange={() => setType(t)} className="mt-0.5" />
                       <span>
-                        <span className="block font-bold">{REPORT_TYPE_LABEL[t]}</span>
-                        <span className="block text-[11.5px] text-grey-500">{REPORT_TYPE_HINT[t]}</span>
+                        <span className="block font-bold">{typeLabel[t]}</span>
+                        <span className="block text-[11.5px] text-grey-500">{typeHint[t]}</span>
                       </span>
                     </label>
                   ))}
                 </div>
               </fieldset>
               <label className="mt-2 block text-[12px] font-bold text-grey-500" htmlFor={`${formId}-memo`}>
-                메모{memoRequired ? " (필수)" : " (선택)"}
+                {T.memo}{memoRequired ? T.required : T.optional}
               </label>
               <textarea
                 id={`${formId}-memo`}
@@ -134,7 +160,7 @@ export default function ProblemErrorReportButton({
                 rows={3}
                 maxLength={MEMO_MAX}
                 disabled={pending}
-                placeholder="어떤 부분이 이상한지 적어 주세요."
+                placeholder={T.placeholder}
                 className="mt-1 w-full rounded-lg border border-grey-200 p-2 text-[13px] focus:border-ink focus:outline-none"
               />
               <p className="mt-0.5 text-right text-[11px] text-grey-400">
@@ -149,7 +175,7 @@ export default function ProblemErrorReportButton({
           )}
           <div className="mt-2 flex items-center justify-end gap-2">
             <button type="button" onClick={close} className="min-h-[32px] rounded-lg px-3 py-1 text-[12px] font-bold text-grey-500 hover:bg-grey-100">
-              {done ? "닫기" : "취소"}
+              {done ? T.close : T.cancel}
             </button>
             {!done && (
               <button
@@ -157,7 +183,7 @@ export default function ProblemErrorReportButton({
                 disabled={!canSubmit}
                 className="min-h-[32px] rounded-lg bg-ink px-3 py-1 text-[12px] font-bold text-white disabled:opacity-40"
               >
-                {pending ? "보내는 중…" : "신고하기"}
+                {pending ? T.sending : T.submit}
               </button>
             )}
           </div>

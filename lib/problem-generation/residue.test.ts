@@ -11,9 +11,17 @@ describe("생성 잔재 검사", () => {
     expect(r.every((x) => x.field === "explanation")).toBe(true);
   });
   it("작성 메모와 </passage>, </note> 를 본문·선택지에서도 잡는다", () => {
-    expect(findResidue({ passage: "본문</passage>" }).length).toBe(1);
+    expect(findResidue({ passage: "body</passage>" }).length).toBe(1);
     expect(findResidue({ options: ["a", "필요 없으므로 4개만 유지", "c", "d"] })[0].field).toBe("options[1]");
     expect(residueInText("메모 </note>").length).toBe(1);
   });
   it("영어 해설도 검사", () => { expect(findResidue({ explanationEn: "text </explanation>" })[0].field).toBe("explanationEn"); });
+});
+
+describe("findResidue — 한글 본문 거부 (2026-10-02 UAT C1)", () => {
+  it("지문·질문·선택지 한글은 거부, 해설 한글은 허용", () => {
+    const r = findResidue({ passage: "다음 식을 보라. $x+1$", question: "What is x?", options: ["1", "2", "삼", "4"], explanation: "따라서 정답은 1이다." });
+    expect(r.filter((x) => x.kind === "영어 문항 본문에 한글").map((x) => x.field)).toEqual(["passage", "options[2]"]);
+    expect(findResidue({ passage: "x = 2", question: "What is x?", options: ["1"], explanation: "한국어 해설" })).toEqual([]);
+  });
 });

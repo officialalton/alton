@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  mstSectionSeconds,
   MST_BLUEPRINT,
   MST_MODULE_LABELS,
   MST_MODULE_ORDER,
@@ -47,5 +48,21 @@ describe("mstRemainingSecondsAt / formatMstClock", () => {
     expect(formatMstClock(1920)).toBe("32:00");
     expect(formatMstClock(65)).toBe("1:05");
     expect(formatMstClock(-3)).toBe("0:00");
+  });
+});
+
+describe("mstSectionSeconds", () => {
+  it("모듈 시작~제출 시각을 섹션별로 더하고 휴식·미시작 모듈은 뺀다", () => {
+    const r = mstSectionSeconds([
+      { module_key: "rw_m1", started_at: "2026-10-01T00:00:00Z", submitted_at: "2026-10-01T00:20:00Z", ends_at: "2026-10-01T00:32:00Z", time_limit_seconds: 1920 },
+      { module_key: "rw_m2", started_at: "2026-10-01T00:20:00Z", submitted_at: null, ends_at: "2026-10-01T00:52:00Z", time_limit_seconds: 1920 },
+      { module_key: "break", started_at: "2026-10-01T00:52:00Z", submitted_at: "2026-10-01T01:02:00Z", ends_at: null, time_limit_seconds: 600 },
+      { module_key: "math_m1", started_at: null, submitted_at: null, ends_at: null, time_limit_seconds: 2100 },
+    ]);
+    expect(r).toEqual({ rw: 1200 + 1920, math: null });
+  });
+  it("제한 시간을 넘지 않는다", () => {
+    const r = mstSectionSeconds([{ module_key: "math_m1", started_at: "2026-10-01T00:00:00Z", submitted_at: "2026-10-01T05:00:00Z", ends_at: null, time_limit_seconds: 2100 }]);
+    expect(r.math).toBe(2100);
   });
 });

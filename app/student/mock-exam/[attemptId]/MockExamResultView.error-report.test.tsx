@@ -5,13 +5,13 @@ import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam
 import { computeMockExamReport } from "@/lib/mock-exam/report";
 import { estimateScore } from "@/lib/mock-exam/score-estimate";
 
-vi.mock("@/lib/mock-exam/attempt-actions", () => ({ toggleMockExamSavedToPracticeAction: vi.fn() }));
+vi.mock("@/lib/mock-exam/attempt-actions", () => ({ toggleMockExamSavedToPracticeAction: vi.fn(), loadMockExamAnnotationsAction: vi.fn().mockResolvedValue({ highlights: [], eliminated: [] }) }));
 const mine = vi.fn();
 vi.mock("@/lib/problem-error-reports/actions", () => ({
   loadMyProblemErrorReportsAction: (...a: unknown[]) => mine(...a),
   submitProblemErrorReportAction: vi.fn(),
 }));
-vi.mock("@/app/components/ProblemNoteCanvas", () => ({ default: () => null }));
+vi.mock("@/app/components/ProblemNoteSnapshot", () => ({ default: () => null }));
 
 beforeEach(() => {
   mine.mockReset();
@@ -42,7 +42,7 @@ describe("MockExamResultView — 문항 오류 조정", () => {
     const adjusted = estimateScore(computeMockExamReport(items).bySection, routes)!;
     const original = estimateScore(computeMockExamReport(items.map((i) => (i.adjusted ? { ...i, correct: false } : i))).bySection, routes)!;
     render(<MockExamResultView attempt={attempt(items, { scoreAdjusted: true, scoreEstimate: adjusted })} readOnly={false} />);
-    expect(screen.getByTestId("mock-exam-score-adjusted")).toHaveTextContent("문항 오류로 점수가 조정되었습니다");
+    expect(screen.getByTestId("mock-exam-score-adjusted")).toHaveTextContent("Your score was adjusted");
     // R&W 2/2 → 조정 전(1/2)과 다른 범위
     expect(adjusted.rw.high).toBeGreaterThan(original.rw.high);
     expect(screen.getByTestId("mock-exam-score-estimate")).toHaveTextContent(`${adjusted.rw.low}-${adjusted.rw.high}`);
@@ -55,20 +55,23 @@ describe("MockExamResultView — 문항 오류 조정", () => {
 
   it("학생·선생님 결과에는 신고 버튼, 학부모(읽기 전용)에는 없다", async () => {
     const s = render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
+    fireEvent.click(screen.getByRole("tab", { name: "Review Mistakes" }));
     fireEvent.click(screen.getByTestId("review-item-irw2"));
-    expect(screen.getByRole("button", { name: "문제 오류 신고" })).toBeInTheDocument();
-    expect(screen.getByTestId("mock-exam-item-adjusted")).toHaveTextContent("정답 처리");
+    expect(screen.getByRole("button", { name: "Report a problem" })).toBeInTheDocument();
+    expect(screen.getByTestId("mock-exam-item-adjusted")).toHaveTextContent("scored as correct");
     await waitFor(() => expect(mine).toHaveBeenCalled());
     s.unmount();
     mine.mockClear();
     const t = render(<MockExamResultView attempt={attempt(items)} readOnly reportRole="teacher" />);
+    fireEvent.click(screen.getByRole("tab", { name: "Review Mistakes" }));
     fireEvent.click(screen.getByTestId("review-item-irw1"));
-    expect(screen.getByRole("button", { name: "문제 오류 신고" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Report a problem" })).toBeInTheDocument();
     t.unmount();
     mine.mockClear();
     render(<MockExamResultView attempt={attempt(items)} readOnly />);
+    fireEvent.click(screen.getByRole("tab", { name: "Review Mistakes" }));
     fireEvent.click(screen.getByTestId("review-item-irw1"));
-    expect(screen.queryByRole("button", { name: "문제 오류 신고" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Report a problem" })).toBeNull();
     expect(mine).not.toHaveBeenCalled();
   });
 });

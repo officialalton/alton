@@ -10,6 +10,7 @@ import path from "node:path";
 import vm from "node:vm";
 import { runBatch, estimate, ledger, toolInput, type BatchReq } from "./batch-lib";
 import { deterministicIssues, type Raw } from "./review";
+import { buildLevelCands, explanationEnIssues, levelVerdict, LEVEL_RULE, HANGUL } from "./rw-level";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) for (const line of readFileSync(envPath, "utf-8").split("\n")) { const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, ""); }
@@ -52,7 +53,7 @@ const QUESTION_RULE: Record<string, string> = {
 };
 const SKILLS_LABEL: Record<string, string> = { words_in_context: "Words in Context", central_ideas_details: "Central Ideas and Details", inferences: "Inferences", rhetorical_synthesis: "Rhetorical Synthesis", form_structure_sense: "Form, Structure, and Sense", nonlinear_equations_systems: "Nonlinear equations and systems", cross_text_connections: "Cross-Text Connections", systems_linear: "Systems of two linear equations", transitions: "Transitions", boundaries: "Boundaries", command_of_evidence_text: "Command of Evidence (Textual)", text_structure_purpose: "Text Structure and Purpose", linear_equations_one_var: "Linear equations in one variable", linear_equations_two_var: "Linear equations in two variables", equivalent_expressions: "Equivalent expressions" };
 
-type Cand = { cid: string; skill: string; system: "sat_rw" | "sat_math"; method: string; recipeId: string | null; instruction: string; idx: number; difficulty?: "easy" | "medium" | "hard"; seed?: string };
+type Cand = { cid: string; skill: string; system: "sat_rw" | "sat_math"; method: string; recipeId: string | null; instruction: string; idx: number; difficulty?: "easy" | "medium" | "hard"; seed?: string; targetLetter?: string };
 function buildCands(method: string, perRw: number, perMath: number, spec?: Record<string, number>, offset = 0): Cand[] {
   const out: Cand[] = [];
   const skills = spec ? Object.keys(spec) : method === "archetype" ? RW_SKILLS : [...RW_SKILLS, ...MATH_SKILLS];
@@ -73,7 +74,12 @@ const think = (model: string) => ({ thinking: model.includes("sonnet") ? { type:
 let MATH_PROMPT: "v1" | "v2" = "v1";
 const MATH_NOTATION_V2 = "\n수식 표기 규칙(필수): 모든 수식은 $…$ 로 열고 반드시 닫는다(지문·선택지·해설 모두, 짝이 맞아야 함). 수식 안에는 영어·숫자·LaTeX 명령만 쓰고 한글을 넣지 않는다(한글 설명은 수식 밖). 금액 기호로 $ 를 쓰지 말고 'dollars' 같은 단어로 쓴다. 분수는 \\frac{a}{b}, 곱은 \\cdot, 수식 안에서 줄바꿈(\\\\)을 쓰지 않는다.";
 const SYS_CACHE = { type: "ephemeral", ttl: "1h" };
-const genSystem = (c: Cand) => `당신은 디지털 SAT(${c.system === "sat_rw" ? "Reading and Writing" : "Math"}) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **${c.difficulty ?? "hard"}** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
+const levelGenSystem = (c: Cand) => `당신은 디지털 SAT(Reading and Writing) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **${c.difficulty}** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
+형식 규칙: ${QUESTION_RULE[c.skill]}
+지문·질문·선택지는 영어만(한글 금지). 해설은 두 벌: explanation(한국어 3~5문장)과 explanation_en(같은 내용의 영어 3~5문장, 한글 없음, 학생에게 설명하는 어조) 둘 다 필수. 두 해설 모두 선택지는 글자(A~D)로만 지칭하고, 두 해설의 글자 참조·결론은 서로 일치해야 한다. 정답이 지문·선택지 표면 일치로 드러나면 안 된다.
+난이도 기준(반드시 지킨다; hard 로 올라가거나 너무 쉬워지지 않게):
+${c.instruction}`;
+const genSystem = (c: Cand) => c.difficulty && c.difficulty !== "hard" ? levelGenSystem(c) : `당신은 디지털 SAT(${c.system === "sat_rw" ? "Reading and Writing" : "Math"}) 문항 출제자이다. 세부 기술: ${SKILLS_LABEL[c.skill]} (${c.skill}). **${c.difficulty ?? "hard"}** 난이도 문항 1개를 새로 창작한다(기존 시험 문항 재현 금지).
 형식 규칙: ${QUESTION_RULE[c.skill]}
 ${c.system === "sat_rw" ? "지문·질문·선택지는 영어, 해설은 한국어. 정답이 지문·선택지 표면 일치로 드러나면 안 된다." : "질문·선택지는 영어, 해설은 한국어(단계별 계산). 모든 계산을 생성 직전에 다시 검산하고, 해설에 '재계산' 같은 자기 수정 문구를 쓰지 않는다."}
 오답 3개는 각각 서로 다른 실제 오개념·중간값·부분 일치에 기반해 그럴듯해야 하고 지문을 읽고도 근거를 따져야만 지워진다. 난이도는 긴 지문·복잡한 숫자·계산량이 아니라 아래 사고 구조로만 만든다.
@@ -85,12 +91,13 @@ const genTool = (c: Cand) => ({ name: "problem", description: "hard 문항 1개"
   options: { type: "array", items: { type: "string" }, description: "선택지 4개(알파벳 접두어 없이)" },
   correct_letter: { type: "string", enum: ["A", "B", "C", "D"] },
   explanation: { type: "string", description: "한국어 해설: 정답 근거와 각 오답이 틀린 이유" },
+  explanation_en: { type: "string", description: "같은 해설의 영어 버전(한글 없음, 학생에게 설명하는 어조). 학생 화면은 영어 기본이므로 필수" },
   design: { type: "string", description: "hard 지시를 어떻게 적용했는지 한두 문장" },
   ...(c.system === "sat_math" ? { option_values: { type: ["array", "null"], items: { type: "number" } }, verification_js: { type: "string" } } : {}),
-}, required: ["passage", "question", "options", "correct_letter", "explanation", "design", ...(c.system === "sat_math" ? ["option_values", "verification_js"] : [])] } });
+}, required: ["passage", "question", "options", "correct_letter", "explanation", "explanation_en", "design", ...(c.system === "sat_math" ? ["option_values", "verification_js"] : [])] } });
 
-type Gen = { passage: string; question: string; options: string[]; correct_letter: string; explanation: string; design: string; option_values?: number[] | null; verification_js?: string };
-const toRaw = (c: Cand, g: Gen): Raw => ({ gid: c.cid, runId: "batch", skill: c.skill, domain: "", examSystem: c.system, difficulty: "hard", format: "mc", problem: { passage: `${g.passage}\n\n${g.question}`, stimulus: g.passage, question: g.question, options: g.options, correctIndex: "ABCD".indexOf(g.correct_letter), answers: null, explanation: g.explanation, figure: null, statements: null } } as Raw);
+type Gen = { passage: string; question: string; options: string[]; correct_letter: string; explanation: string; explanation_en?: string; design: string; option_values?: number[] | null; verification_js?: string };
+const toRaw = (c: Cand, g: Gen): Raw => ({ gid: c.cid, runId: "batch", skill: c.skill, domain: "", examSystem: c.system, difficulty: c.difficulty ?? "hard", format: "mc", problem: { passage: `${g.passage}\n\n${g.question}`, stimulus: g.passage, question: g.question, options: g.options, correctIndex: "ABCD".indexOf(g.correct_letter), answers: null, explanation: g.explanation, explanationEn: g.explanation_en ?? null, figure: null, statements: null } } as Raw);
 
 /** 결정론 검증: 품질 계약 + 원시 LaTeX 등 + Math 는 verification_js 재계산이 정답 값과 일치하고 다른 선택지 값과 겹치지 않는지. */
 async function deterministic(c: Cand, g: Gen): Promise<{ issues: string[]; mathVerify: "pass" | "fail" | "skipped" | null }> {
@@ -98,7 +105,7 @@ async function deterministic(c: Cand, g: Gen): Promise<{ issues: string[]; mathV
   const r = toRaw(c, g);
   const p = r.problem;
   const cr = checkQualityContract({ skillCode: c.skill, examSystem: c.system, format: "mc", stimulus: g.passage, question: g.question, options: g.options, correctIndex: p.correctIndex ?? null, answers: null, statements: null, explanation: g.explanation, figure: null });
-  const issues = [...cr.issues.map((i) => `contract:${i.code}`), ...deterministicIssues(r)];
+  const issues = [...cr.issues.map((i) => `contract:${i.code}`), ...deterministicIssues(r), ...(c.difficulty && c.difficulty !== "hard" ? [...explanationEnIssues(g.explanation_en), ...(HANGUL.test(`${g.passage}\n${g.question}\n${g.options.join("\n")}`) ? ["hangul_in_body"] : [])] : [])];
   let mathVerify: "pass" | "fail" | "skipped" | null = null;
   if (c.system === "sat_math") {
     const vals = g.option_values;
@@ -137,6 +144,21 @@ const auditReq = (model: string, c: Cand, g: Gen, recipe: Recipe | null): BatchR
     required: ["explanation_consistent", "explanation_issue", "answer_correct", "format_ok", "factual_error", "copyright_suspect", "met", "beyond_medium", "only_complexity", "which", "note"] } }],
   tool_choice: { type: "auto" },
   messages: [{ role: "user", content: `디지털 SAT 문항 감사관으로서 판정만 하라(고치지 않는다). 반드시 audit 도구 호출로 제출하라. 유형: ${c.skill}\n${recipe ? `[레시피 체크리스트]\n${recipe.checklist.map((x, i) => `${i + 1}. ${x}`).join("\n")}\n` : ""}[이 skill의 hard 특성]\n${(chars[c.skill]?.characteristics ?? []).map((x) => `- ${x.name}: ${x.description}`).join("\n")}\n\n${g.passage}\n\n${g.question}\n${optText(g, true)}\n\n[해설]\n${g.explanation}` }] } });
+
+/** easy/medium 감사: hard 의 beyond_medium 대신 목표 난이도 적합(level_verdict)과 영어 해설 검수를 본다. 판정만 하고 고치지 않는다. */
+const levelAuditReq = (model: string, c: Cand, g: Gen): BatchReq => ({ custom_id: `a-${c.cid}`.slice(0, 64), params: { model, ...think(model), max_tokens: 2500,
+  tools: [{ name: "audit", description: "정답·해설·영어해설·형식·저작권·난이도 적합 감사", input_schema: { type: "object", properties: {
+    explanation_consistent: { type: "boolean", description: "한국어 해설이 지정 정답을 정확히 뒷받침하고 선택지 글자 참조가 아래 선택지와 일치하며 모순이 없는가" },
+    explanation_issue: { type: "string", description: "해설 문제 요약(없으면 빈 문자열)" },
+    explanation_en_ok: { type: "boolean", description: "영어 해설이 한국어 해설과 같은 결론·글자 참조를 갖고, 정확하며 자연스러운 영어이고, 한글이 없는가" },
+    explanation_en_issue: { type: "string" },
+    answer_correct: { type: "boolean", description: "지정 정답이 실제로 옳은가(직접 검산)" },
+    format_ok: { type: "boolean" }, factual_error: { type: "boolean" }, copyright_suspect: { type: "boolean" },
+    level_verdict: { type: "string", enum: ["too_easy", "fits", "too_hard"], description: `목표 난이도(${c.difficulty}) 적합성. 기준: ${LEVEL_RULE[c.difficulty as "easy" | "medium"]}` },
+    note: { type: "string" } },
+    required: ["explanation_consistent", "explanation_issue", "explanation_en_ok", "explanation_en_issue", "answer_correct", "format_ok", "factual_error", "copyright_suspect", "level_verdict", "note"] } }],
+  tool_choice: { type: "auto" },
+  messages: [{ role: "user", content: `디지털 SAT 문항 감사관으로서 판정만 하라(고치지 않는다). 반드시 audit 도구 호출로 제출하라. 유형: ${c.skill} / 목표 난이도: ${c.difficulty}\n\n${g.passage}\n\n${g.question}\n${optText(g, true)}\n\n[해설(한국어)]\n${g.explanation}\n\n[해설(English)]\n${g.explanation_en ?? ""}` }] } });
 
 const tok = (s: string) => Math.ceil(s.length / 3);
 async function main() {
@@ -306,7 +328,11 @@ async function cross() {
   mkdirSync(dir, { recursive: true });
   const specArg = arg("--skills");
   const spec = specArg ? Object.fromEntries(specArg.split(",").map((x) => { const [k, n] = x.split(":"); return [k, Number(n)]; })) : undefined;
-  const cands = buildCands("recipe", per, Number(arg("--per-math") ?? per), spec, Number(arg("--idx-offset") ?? 0));
+  const level = (arg("--difficulty") ?? "hard") as "easy" | "medium" | "hard";
+  if (!["easy", "medium", "hard"].includes(level)) throw new Error("--difficulty 는 easy|medium|hard");
+  if (level !== "hard" && !spec) throw new Error("--difficulty easy|medium 은 --skills skill:n,... 필요(RW 전용)");
+  if (level !== "hard" && Object.keys(spec!).some((k) => isMath(k))) throw new Error("--difficulty easy|medium 은 RW skill 만 지원");
+  const cands: Cand[] = level === "hard" ? buildCands("recipe", per, Number(arg("--per-math") ?? per), spec, Number(arg("--idx-offset") ?? 0)) : buildLevelCands(level, spec!, SEEDS, Number(arg("--idx-offset") ?? 0));
   writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
   const led = ledger(dir);
   // 추정(동기 단가): 앞선 실측 — Opus 생성 약 $0.034/후보, Fable 검수 약 $0.105/후보, Opus 검수 약 $0.03/후보(결정론 통과 약 85%)
@@ -314,7 +340,7 @@ async function cross() {
   console.log(`[D-cross] 후보 ${cands.length} · 생성 ${genModel} · 검수 fable+opus · 추정(동기) $${est.toFixed(2)} · 구간 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
   if (led.spent() + est > budget * 1.15) throw new Error("추정이 상한을 크게 넘음 — 실행하지 않음");
   if (flag("--dry")) return;
-  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: genModel, ...think(genModel), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라. 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
+  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: genModel, ...think(genModel), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라.${c.seed ? ` 소재 영역: ${c.seed}.` : ""}${c.targetLetter ? ` 정답(correct_letter)은 반드시 ${c.targetLetter} 위치에 놓아라(선택지 순서를 그에 맞게 구성).` : ""} 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
   const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: cands.length * 0.017, sync: true });
   const gens = new Map<string, { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }>();
   for (const c of cands) {
@@ -325,7 +351,7 @@ async function cross() {
   writeFileSync(path.join(dir, "gens.json"), JSON.stringify([...gens.values()]));
   const passDet = [...gens.values()].filter((x) => x.det.issues.length === 0);
   for (const rv of REVIEWERS) {
-    const reqs = passDet.flatMap(({ c, g }) => [blindReq(rv.model, c.cid, c.skill, g), auditReq(rv.model, c, g, recipesFor(c.skill).find((r) => r.id === c.recipeId) ?? null)]);
+    const reqs = passDet.flatMap(({ c, g }) => [blindReq(rv.model, c.cid, c.skill, g), c.difficulty && c.difficulty !== "hard" ? levelAuditReq(rv.model, c, g) : auditReq(rv.model, c, g, recipesFor(c.skill).find((r) => r.id === c.recipeId) ?? null)]);
     await runBatch({ dir, name: `review-${rv.key}`, requests: reqs, budgetUsd: budget, estimateUsd: passDet.length * (rv.key === "fable" ? 0.0525 : 0.015), sync: true });
   }
   crossReport(dir);
@@ -341,6 +367,10 @@ function crossReport(dir: string) {
   const verdict = (key: "fable" | "opus", c: Cand, g: Gen): V | null => {
     const b = rev[key].get(`b-${c.cid}`.slice(0, 64))?.in, a = rev[key].get(`a-${c.cid}`.slice(0, 64))?.in;
     if (!a || !b) return null;
+    if (c.difficulty && c.difficulty !== "hard") {
+      const lv = levelVerdict(c.difficulty, g.correct_letter, { answerCorrect: Boolean(a.answer_correct), explanationConsistent: Boolean(a.explanation_consistent), formatOk: Boolean(a.format_ok), factualError: Boolean(a.factual_error), copyrightSuspect: Boolean(a.copyright_suspect), explanationEnOk: Boolean(a.explanation_en_ok), levelVerdict: String(a.level_verdict), blindPicked: String(b.picked_letter), blindOtherDefensible: Boolean(b.other_defensible), eliminated: ((b.easily_eliminated as string[]) ?? []).length });
+      return { correct: lv.correct, comp: true, fit: lv.fit, which: [String(a.level_verdict), `eliminated:${((b.easily_eliminated as string[]) ?? []).length}`], note: String(a.note ?? ""), issue: String(a.explanation_issue ?? "") + String(a.explanation_en_issue ?? "") };
+    }
     const recipe = recipesFor(c.skill).find((r) => r.id === c.recipeId);
     const agree = b.picked_letter === g.correct_letter && !b.other_defensible;
     const correct = agree && Boolean(a.answer_correct) && Boolean(a.explanation_consistent) && Boolean(a.format_ok) && !a.factual_error && !a.copyright_suspect;
@@ -370,11 +400,13 @@ function crossReport(dir: string) {
   const { SKILL_BY_CODE } = require("../../lib/problem-taxonomy") as typeof import("../../lib/problem-taxonomy");
   const adoptedHard = items.filter((i) => i.fable && i.opus).filter((i) => { const f = i.fable as V, o = i.opus as V; return f.correct && f.comp && f.fit && (fableOnly || o.correct); }).map((i) => {
     const x = gens.get(i.cid as string)!; const f = i.fable as V, o = i.opus as V; const meta = SKILL_BY_CODE.get(x.c.skill)!;
-    return { gid: x.c.cid, runId: "batch2-D-cross", skill: x.c.skill, domain: meta.domain, examSystem: x.c.system, difficulty: "hard", format: "mc", recipeId: x.c.recipeId, difficultyStatus: "provisional_ai",
-      problem: { passage: `${x.g.passage}\n\n${x.g.question}`, stimulus: x.g.passage, question: x.g.question, options: x.g.options, correctIndex: "ABCD".indexOf(x.g.correct_letter), answers: null, explanation: x.g.explanation, figure: null, statements: null },
-      quality: { generatedBy: "claude-opus-5-5", hardJudge: { model: "claude-fable-5-1", effort: "low", fit: f.fit, correctOk: f.correct, complianceOk: f.comp, which: f.which, note: f.note }, advisory: { model: "claude-opus-5-5", effort: "low", fit: o.fit, correctOk: o.correct, complianceOk: o.comp, which: o.which, note: o.note, passed: o.fit } } };
+    const lvl = x.c.difficulty ?? "hard";
+    return { gid: x.c.cid, runId: lvl === "hard" ? "batch2-D-cross" : `rw-supplement-${lvl}`, skill: x.c.skill, domain: meta.domain, examSystem: x.c.system, difficulty: lvl, format: "mc", recipeId: x.c.recipeId, ...(lvl === "hard" ? { difficultyStatus: "provisional_ai" } : {}),
+      problem: { passage: `${x.g.passage}\n\n${x.g.question}`, stimulus: x.g.passage, question: x.g.question, options: x.g.options, correctIndex: "ABCD".indexOf(x.g.correct_letter), answers: null, explanation: x.g.explanation, explanationEn: x.g.explanation_en ?? null, figure: null, statements: null },
+      quality: { generatedBy: "claude-opus-5-5", ...(lvl === "hard" ? {} : { levelTarget: lvl, targetLetter: x.c.targetLetter ?? null, seed: x.c.seed ?? null }), hardJudge: { model: "claude-fable-5-1", effort: "low", fit: f.fit, correctOk: f.correct, complianceOk: f.comp, which: f.which, note: f.note }, advisory: { model: "claude-opus-5-5", effort: "low", fit: o.fit, correctOk: o.correct, complianceOk: o.comp, which: o.which, note: o.note, passed: o.fit } } };
   });
   writeFileSync(path.join(dir, "adopted-hard.json"), JSON.stringify(adoptedHard, null, 1));
+  if (adoptedHard.some((a) => a.difficulty !== "hard")) writeFileSync(path.join(dir, "adopted.json"), JSON.stringify(adoptedHard, null, 1));
   (out as Record<string, unknown>).adoptedHardFableRule = { total: adoptedHard.length, rw: adoptedHard.filter((a) => a.examSystem === "sat_rw").length, math: adoptedHard.filter((a) => a.examSystem === "sat_math").length, correctBothRequired: !fableOnly };
   writeFileSync(path.join(dir, "cross.json"), JSON.stringify({ summary: out, items }, null, 1));
   console.log(JSON.stringify(out, null, 1));

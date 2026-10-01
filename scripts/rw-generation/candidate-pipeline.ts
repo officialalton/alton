@@ -51,7 +51,7 @@ export function injectedPromptBlock(spec: CandidateSpec, recipe?: RecipeV3 | nul
   ].filter(Boolean).join("\n");
 }
 
-export type Generated = { passage: string; question: string; options: string[]; correct_letter: string; explanation: string };
+export type Generated = { passage: string; question: string; options: string[]; correct_letter: string; explanation: string; explanationEn?: string };
 export type Verdict =
   | { action: "review"; g: Generated; notes: string[] }
   | { action: "retry_words"; instruction: string; count: number }

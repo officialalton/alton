@@ -17,7 +17,20 @@ export type ContentPart =
   | { kind: "math"; html: string; display: boolean }
   | { kind: "math-error"; source: string };
 
-const TOKEN = /\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__|(_{3,})/g;
+const TOKEN = /\\\$|\$\$([\s\S]+?)\$\$|\$([^$\n]+?)\$|__([^_\n][^\n]*?)__|(_{3,})/g;
+
+/**
+ * 2026-10-02 UAT(C3) — 통화 기호 `$`가 수식 구분자로 오인되는 것을 막는다.
+ * 생성 규칙은 금액을 'dollars'로 쓰거나 `\$`로 이스케이프하는 것이지만, 실제 데이터에
+ * "$45 for a site visit, plus $25"처럼 맨 `$`가 섞여 두 `$` 사이가 이탤릭 수식으로 깨졌다.
+ * 보수적 규칙: 인라인 후보 `$…$`의 내용이 숫자로 시작하고, (a) 닫는 `$` 바로 앞이 공백이거나
+ * (b) 닫는 `$` 바로 뒤가 숫자이면 — 여는 `$`는 통화 기호(글자)로 보고 그 다음 글자부터 다시 찾는다.
+ * 진짜 수식 `$3x+1$`, `$x$`, `$$…$$`는 이 조건에 걸리지 않는다.
+ */
+export function looksLikeCurrencyPair(inner: string, after: string): boolean {
+  if (!/^\d/.test(inner)) return false;
+  return /\s$/.test(inner) || /^\d/.test(after);
+}
 
 /**
  * 본문을 "글"과 "수식" 조각으로 나눈다. 수식이 하나도 없으면 글 한 조각만
@@ -35,6 +48,18 @@ export function splitLearningContent(source: string): ContentPart[] {
   while ((match = TOKEN.exec(source)) !== null) {
     if (match.index > lastIndex) {
       parts.push({ kind: "text", value: source.slice(lastIndex, match.index) });
+    }
+    if (match[0] === "\\$") {
+      // 이스케이프된 통화 기호 — 글자 "$"로 보여준다.
+      parts.push({ kind: "text", value: "$" });
+      lastIndex = match.index + match[0].length;
+      continue;
+    }
+    if (match[2] !== undefined && looksLikeCurrencyPair(match[2], source.slice(match.index + match[0].length, match.index + match[0].length + 1))) {
+      parts.push({ kind: "text", value: "$" });
+      lastIndex = match.index + 1;
+      TOKEN.lastIndex = lastIndex;
+      continue;
     }
     if (match[3] !== undefined) {
       parts.push({ kind: "underline", value: match[3] });

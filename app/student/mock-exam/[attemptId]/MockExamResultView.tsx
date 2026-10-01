@@ -1,19 +1,27 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
-import { computeMockExamReport, weakSkills } from "@/lib/mock-exam/report";
-import { SCORE_DISCLAIMER } from "@/lib/mock-exam/score-estimate";
+import { computeMockExamReport, weakSkills, type BreakdownRow } from "@/lib/mock-exam/report";
+import { SCORE_DISCLAIMER_EN } from "@/lib/mock-exam/score-estimate";
+import { satDomainDisplayName, satSkillDisplayName } from "@/lib/sat-keywords/taxonomy";
+import { satDomainDescription, satSkillDescription } from "@/lib/sat-keywords/skill-descriptions";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
-import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
-import { toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import ProblemNoteSnapshot from "@/app/components/ProblemNoteSnapshot";
+import { loadMockExamAnnotationsAction, toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import type { MockExamAnnotations } from "@/lib/mock-exam/annotation-anchor";
+import AnnotationLayer from "./AnnotationLayer";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
 import type { MyReportStatus, ReporterRole } from "@/lib/problem-error-reports/labels";
 
-const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
+// 2026-10-02(오너 UAT B1~B7) — SAT 영어 시험이므로 학생이 보는 결과 문구는 영어가 기본이다.
+// 해설만 English | 한국어 토글(explanation_en 이 없으면 한글 + 안내).
+const SECTION_LABEL: Record<string, string> = { rw: "Reading and Writing", math: "Math" };
+const SECTION_SHORT: Record<string, string> = { rw: "R&W", math: "Math" };
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
 function pct(correct: number, total: number): string {
@@ -21,77 +29,97 @@ function pct(correct: number, total: number): string {
   return `${Math.round((correct / total) * 100)}%`;
 }
 
-function formatMinutes(seconds: number): string {
-  return `${Math.round(seconds / 60)}분`;
+/** 기록이 없는(0초) 시간은 "0 min" 대신 null — 호출부가 표시하지 않는다(UAT B2). */
+function formatMinutes(seconds: number): string | null {
+  if (!seconds || seconds <= 0) return null;
+  return `${Math.max(1, Math.round(seconds / 60))} min`;
 }
 
-/**
- * 채점 확정된 모의고사 결과 — 학생·학부모 공용(사양 3절 "같은 원본에서 표시", 7절 결과 항목).
- * 2026-09-18 제품 오너 지시: 학부모용 상세 리포트가 "매우 중요"한 1급 요구사항으로 격상돼,
- * 학생 화면도 같은 상세 리포트를 쓰도록 공용 컴포넌트로 만들었다(사양 3절 "같은 원본" 원칙과도 맞다).
- * 내부 채점 근거(문법 규칙 id 등 내부 필드)는 애초에 이 컴포넌트에 넘어오지 않는다 — attempt-data.ts 가
- * problem_versions 의 공개 가능한 필드(문항 내용·정답·해설)만 골라 내려준다.
- */
-/** 문항 하나(지문·질문·선택지·내 답·정답·해설)를 읽기 전용으로 보여준다 — 학생 본인 결과
- * 화면뿐 아니라 교사의 "학생 풀이 읽기 전용 열람"(TeacherMockExamStatusTab)에서도 그대로
- * 재사용한다(둘 다 채점 뒤 필드가 채워진 MockExamAttemptItem을 받는다). */
-export function ItemDetail({
-  item,
-  attemptId,
-  studentId,
-  viewerIsOwner = true,
-  reportRole = null,
-  reportStatus = null,
-}: {
-  item: MockExamAttemptItem;
-  /** 문제 오류 신고 버튼을 보일 역할 — 학생(본인 결과)·선생님(담당 학생 열람)만. 학부모·관리자는 null. */
-  reportRole?: ReporterRole | null;
-  reportStatus?: MyReportStatus | null;
-  /** 필기 저장/열람에 필요 — 없으면(하위 호환) 필기 도구를 안 보여준다. */
-  attemptId?: string;
-  studentId?: string;
-  /** true(기본) — 이 응시의 학생 본인이 보는 중(필기 가능). false — 교사·학부모가 남의
-   * 응시를 읽기 전용으로 보는 중. */
-  viewerIsOwner?: boolean;
-}) {
-  const [saved, setSaved] = useState(item.savedToPractice);
+function itemTitle(item: MockExamAttemptItem): string {
+  return `${SECTION_LABEL[item.section]} · Question ${item.position}`;
+}
 
-  async function toggleSaved() {
-    if (!attemptId) return;
-    const next = !saved;
-    setSaved(next);
-    await toggleMockExamSavedToPracticeAction(attemptId, item.setItemId, next);
+function itemTopic(item: MockExamAttemptItem): string {
+  return [satDomainDisplayName(item.satDomain), satSkillDisplayName(item.skillCode)].filter(Boolean).join(" · ");
+}
+
+/** 해설 — 영어(explanation_en) 기본, 한국어 토글. 영어가 없으면 한국어 + 안내. */
+export function ExplanationPanel({ item }: { item: MockExamAttemptItem }) {
+  const en = item.explanationEn?.trim() ? item.explanationEn : null;
+  const ko = item.explanation?.trim() ? item.explanation : null;
+  const [lang, setLang] = useState<"en" | "ko">(en ? "en" : "ko");
+  if (!en && !ko) {
+    return <p className="text-[12.5px] text-grey-400">No explanation is available for this question.</p>;
   }
-
+  const showing = lang === "en" && en ? "en" : "ko";
   return (
-    <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
+    <div className="rounded-lg bg-grey-50 p-3 text-[12.5px] leading-relaxed" data-testid="mock-exam-explanation">
       <div className="mb-2 flex items-center justify-between gap-2">
-        <p className="text-[12px] font-bold text-grey-500">
-          {SECTION_LABEL[item.section]} {item.position}번 · {item.satDomain}
-          {item.skillCode ? ` · ${item.skillCode}` : ""}
-        </p>
-        {/* 2026-09-21(사용자 지시) — 학생 포털 Practice 탭에 이 문항을 저장/해제. */}
-        {viewerIsOwner && attemptId && (
+        <p className="text-[11px] font-extrabold uppercase tracking-wide text-grey-400">Explanation</p>
+        <div role="group" aria-label="Explanation language" className="inline-flex overflow-hidden rounded-md border border-grey-300 text-[11px] font-bold">
           <button
             type="button"
-            onClick={toggleSaved}
-            aria-pressed={saved}
-            className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-bold ${
-              saved ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
-            }`}
-            title="Practice 탭(문제 기록)에 저장"
+            aria-pressed={showing === "en"}
+            disabled={!en}
+            onClick={() => setLang("en")}
+            className={`px-2 py-0.5 ${showing === "en" ? "bg-ink text-white" : "text-grey-600"} disabled:opacity-40`}
           >
-            {saved ? "저장됨" : "+ 문제 저장"}
+            English
           </button>
-        )}
+          <button
+            type="button"
+            aria-pressed={showing === "ko"}
+            disabled={!ko}
+            onClick={() => setLang("ko")}
+            className={`border-l border-grey-300 px-2 py-0.5 ${showing === "ko" ? "bg-ink text-white" : "text-grey-600"} disabled:opacity-40`}
+          >
+            한국어
+          </button>
+        </div>
       </div>
-      {item.adjusted && (
-        <p className="mb-2 rounded-lg bg-green/10 px-3 py-1.5 text-[12px] font-semibold text-green" data-testid="mock-exam-item-adjusted">
-          문항 오류로 정답 처리된 문항입니다.
+      {!en && (
+        <p className="mb-1.5 text-[11px] text-grey-400" data-testid="mock-exam-explanation-en-missing">
+          English explanation not available yet.
         </p>
       )}
-      {item.passage && <RwStimulusView passage={item.passage} className="mb-3 text-[13px]" />}
-      {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
+      <div lang={showing}>
+        <LearningText text={(showing === "en" ? en : ko) ?? ""} />
+      </div>
+    </div>
+  );
+}
+
+/** 문제(지문·그림·선택지·내 답/정답)만 — 해설·도구 없음. */
+/** 응시 중 남긴 하이라이트·메모·소거를 읽기 전용으로 불러온다(결과 화면은 절대 새로 기록하지 않는다). */
+function useReadOnlyAnnotations(attemptId: string | undefined, setItemId: string): MockExamAnnotations | null {
+  const [loaded, setLoaded] = useState<{ key: string; value: MockExamAnnotations } | null>(null);
+  const key = `${attemptId ?? ""}:${setItemId}`;
+  useEffect(() => {
+    if (!attemptId) return;
+    let alive = true;
+    void loadMockExamAnnotationsAction(attemptId, setItemId).then((value) => {
+      if (alive) setLoaded({ key, value });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [attemptId, setItemId, key]);
+  return loaded?.key === key ? loaded.value : null;
+}
+
+function ItemProblem({ item, attemptId }: { item: MockExamAttemptItem; attemptId?: string }) {
+  const annotations = useReadOnlyAnnotations(attemptId, item.setItemId);
+  return (
+    <>
+      {item.adjusted && (
+        <p className="mb-2 rounded-lg bg-green/10 px-3 py-1.5 text-[12px] font-semibold text-green" data-testid="mock-exam-item-adjusted">
+          This question was scored as correct because an error was found in it.
+        </p>
+      )}
+      <AnnotationLayer key={item.setItemId} readOnly highlights={annotations?.highlights ?? []}>
+        {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
+        {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
+      </AnnotationLayer>
       {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}
 
       {item.options && item.options.length > 0 ? (
@@ -107,55 +135,223 @@ export function ItemDetail({
                 }`}
               >
                 <span className="font-bold">{OPTION_LETTERS[i] ?? i + 1}.</span>
-                <LearningText text={opt} />
-                {isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-green">정답</span>}
-                {isMine && !isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-red">내가 고른 답</span>}
+                <span className={annotations?.eliminated.includes(i) ? "line-through opacity-60" : undefined}>
+                  <LearningText text={opt} />
+                </span>
+                {isCorrect && (
+                  <span className="ml-auto shrink-0 text-[11px] font-bold text-green">{isMine ? "Your answer · Correct" : "Correct answer"}</span>
+                )}
+                {isMine && !isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-red">Your answer</span>}
               </div>
             );
           })}
+          {!item.response && <p className="text-[12px] text-grey-400">You did not answer this question.</p>}
         </div>
       ) : (
         <div className="flex flex-col gap-1.5 text-[13px]">
           <p>
-            <span className="font-bold text-grey-500">내가 쓴 답: </span>
-            {item.response ?? <span className="text-grey-400">답하지 않음</span>}
+            <span className="font-bold text-grey-500">Your answer: </span>
+            {item.response ?? <span className="text-grey-400">Not answered</span>}
           </p>
           <p>
-            <span className="font-bold text-grey-500">정답: </span>
-            {item.answers?.join(" 또는 ") ?? "-"}
+            <span className="font-bold text-grey-500">Correct answer: </span>
+            {item.answers?.join(" or ") ?? "-"}
           </p>
         </div>
       )}
+    </>
+  );
+}
 
-      {item.explanation && (
-        <div className="mt-3 rounded-lg bg-grey-50 p-3 text-[12.5px] leading-relaxed">
-          <p className="mb-1 text-[11px] font-extrabold uppercase tracking-wide text-grey-400">해설</p>
-          <LearningText text={item.explanation} />
-        </div>
-      )}
-
-      {reportRole && attemptId && (
-        <ProblemErrorReportButton
-          className="mt-3"
-          role={reportRole}
-          initialStatus={reportStatus}
-          context={{ source: "mock_exam", attemptId, setItemId: item.setItemId, problemId: item.problemId }}
-        />
-      )}
-
-      {attemptId && studentId && (
-        <ProblemNoteCanvas
-          context="mock_exam"
-          targetId={attemptId}
-          itemId={item.setItemId}
-          authorId={viewerIsOwner ? undefined : studentId}
-          readOnly={!viewerIsOwner}
-        />
+/** 문항 머리줄: 찍음 표시·제목·정오·영역/스킬 이름·문제 저장. */
+function ItemHeader({ item, attemptId, viewerIsOwner }: { item: MockExamAttemptItem; attemptId?: string; viewerIsOwner: boolean }) {
+  const [saved, setSaved] = useState(item.savedToPractice);
+  async function toggleSaved() {
+    if (!attemptId) return;
+    const next = !saved;
+    setSaved(next);
+    await toggleMockExamSavedToPracticeAction(attemptId, item.setItemId, next);
+  }
+  const topic = itemTopic(item);
+  return (
+    <div className="mb-2 flex items-start justify-between gap-2">
+      <div>
+        <p className="text-[12px] font-bold text-grey-500">
+          {item.guessed && item.response && (
+            <span role="img" aria-label="Guessed" title="Marked as a guess" className="mr-1 rounded border border-grey-300 px-1 text-[10px] font-semibold text-grey-600">
+              Guessed
+            </span>
+          )}
+          {itemTitle(item)}
+          {item.correct !== null && (
+            <span className={`ml-2 text-[11px] font-bold ${item.correct ? "text-green" : "text-red"}`}>{item.correct ? "Correct" : "Incorrect"}</span>
+          )}
+        </p>
+        {topic && <p className="text-[11.5px] text-grey-400">{topic}</p>}
+      </div>
+      {/* 2026-09-21(사용자 지시) — 학생 포털 Practice 탭에 이 문항을 저장/해제. */}
+      {viewerIsOwner && attemptId && (
+        <button
+          type="button"
+          onClick={toggleSaved}
+          aria-pressed={saved}
+          className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-bold ${
+            saved ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
+          }`}
+          title="Save to the Practice tab"
+        >
+          {saved ? "Saved" : "+ Save question"}
+        </button>
       )}
     </div>
   );
 }
 
+type ItemToolsProps = {
+  item: MockExamAttemptItem;
+  attemptId?: string;
+  studentId?: string;
+  viewerIsOwner: boolean;
+  reportRole: ReporterRole | null;
+  reportStatus: MyReportStatus | null;
+};
+
+/** 해설 아래 도구 — 오류 신고 + 제출 시점 필기 스냅샷(읽기 전용, 필기 없으면 숨김). */
+function ItemTools({ item, attemptId, studentId, viewerIsOwner, reportRole, reportStatus }: ItemToolsProps) {
+  return (
+    <>
+      {reportRole && attemptId && (
+        <ProblemErrorReportButton
+          className="mt-3"
+          role={reportRole}
+          lang="en"
+          initialStatus={reportStatus}
+          context={{ source: "mock_exam", attemptId, setItemId: item.setItemId, problemId: item.problemId }}
+        />
+      )}
+      {attemptId && studentId && (
+        <ProblemNoteSnapshot
+          key={item.setItemId}
+          context="mock_exam"
+          targetId={attemptId}
+          itemId={item.setItemId}
+          authorId={viewerIsOwner ? undefined : studentId}
+          label={viewerIsOwner ? "My scratch work (submitted)" : "Student's scratch work (submitted)"}
+        />
+      )}
+    </>
+  );
+}
+
+/** 문항 하나(지문·질문·선택지·내 답·정답·해설)를 읽기 전용으로 보여준다 — 교사의 "학생 풀이 읽기 전용
+ * 열람"(TeacherMockExamAttemptViewer)에서도 그대로 재사용한다(채점 뒤 필드가 채워진 MockExamAttemptItem). */
+export function ItemDetail({
+  item,
+  attemptId,
+  studentId,
+  viewerIsOwner = true,
+  reportRole = null,
+  reportStatus = null,
+}: {
+  item: MockExamAttemptItem;
+  /** 문제 오류 신고 버튼을 보일 역할 — 학생(본인 결과)·선생님(담당 학생 열람)만. 학부모·관리자는 null. */
+  reportRole?: ReporterRole | null;
+  reportStatus?: MyReportStatus | null;
+  /** 필기 열람에 필요 — 없으면(하위 호환) 필기 스냅샷을 안 보여준다. */
+  attemptId?: string;
+  studentId?: string;
+  /** true(기본) — 이 응시의 학생 본인이 보는 중. false — 교사·학부모가 읽기 전용으로 보는 중. */
+  viewerIsOwner?: boolean;
+}) {
+  return (
+    <div className="rounded-lg border border-grey-200 bg-white p-4 lg:h-full lg:overflow-y-auto" data-testid="mock-exam-item-detail">
+      <ItemHeader key={item.setItemId} item={item} attemptId={attemptId} viewerIsOwner={viewerIsOwner} />
+      <ItemProblem item={item} attemptId={attemptId} />
+      <div className="mt-3">
+        <ExplanationPanel key={item.setItemId} item={item} />
+      </div>
+      <ItemTools item={item} attemptId={attemptId} studentId={studentId} viewerIsOwner={viewerIsOwner} reportRole={reportRole} reportStatus={reportStatus} />
+    </div>
+  );
+}
+
+/** 영역·스킬 설명 팝업 — 모달. Esc·배경·Close 로 닫힌다. 열리면 Close 에 포커스, 닫히면 원래 버튼으로 복귀. */
+function InfoDialog({ title, body, onClose }: { title: string; body: string; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    const prev = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      prev?.focus?.();
+    };
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4" onClick={onClose}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mock-exam-info-title"
+        className="w-full max-w-[420px] rounded-xl bg-white p-5 shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 id="mock-exam-info-title" className="text-[15px] font-extrabold text-ink">
+          {title}
+        </h2>
+        <p className="mt-2 text-[13px] leading-relaxed text-grey-600">{body}</p>
+        <div className="mt-4 flex justify-end">
+          <button ref={closeRef} type="button" onClick={onClose} className="rounded-lg border-[1.5px] border-grey-200 px-4 py-1.5 text-[13px] font-semibold">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type Info = { title: string; body: string };
+
+function BreakdownList({ rows, kind, onInfo }: { rows: BreakdownRow[]; kind: "domain" | "skill"; onInfo: (i: Info) => void }) {
+  return (
+    <ul className="flex flex-col gap-1.5">
+      {rows.map((r) => {
+        const body = (kind === "domain" ? satDomainDescription(r.key) : satSkillDescription(r.key)) ?? "No description is available yet.";
+        return (
+          <li key={r.key} className="flex items-center justify-between gap-2 text-[13px]">
+            <button
+              type="button"
+              onClick={() => onInfo({ title: r.label, body })}
+              className="text-left text-grey-700 underline decoration-dotted underline-offset-2 hover:text-ink"
+              aria-haspopup="dialog"
+            >
+              {r.label}
+            </button>
+            <span className="shrink-0 font-bold">
+              {r.correct}/{r.total} ({pct(r.correct, r.total)})
+            </span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+type TabKey = "summary" | "domain" | "review";
+const TABS: { key: TabKey; label: string }[] = [
+  { key: "summary", label: "Summary" },
+  { key: "domain", label: "Results by Domain" },
+  { key: "review", label: "Review Mistakes" },
+];
+
+/**
+ * 채점 확정된 모의고사 결과 — 학생·학부모·교사 공용(사양 3절 "같은 원본에서 표시", 7절 결과 항목).
+ * 2026-10-02(오너 UAT B4) — Summary / Results by Domain / Review Mistakes 서브탭.
+ * 내부 채점 근거는 이 컴포넌트에 넘어오지 않는다 — attempt-data.ts 가 공개 가능한 필드만 내려준다.
+ */
 export default function MockExamResultView({
   attempt,
   readOnly,
@@ -181,166 +377,229 @@ export default function MockExamResultView({
       cancelled = true;
     };
   }, [reportRole, attempt.items]);
-  const report = computeMockExamReport(attempt.items);
-  // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 서버가 계산해 범위만 내려준다(경로·난이도는 클라이언트에 없다).
+  const report = computeMockExamReport(attempt.items, { sectionTimeSeconds: attempt.sectionTimeSeconds ?? null });
+  // MST 응시만 예상 점수 범위(내부 추정)를 보인다. 서버가 계산해 범위만 내려준다.
   const scoreEstimate = attempt.format === "mst" ? (attempt.scoreEstimate ?? null) : null;
-  const itemsById = useMemo(() => new Map(attempt.items.map((i) => [i.setItemId, i])), [attempt.items]);
+  const [tab, setTab] = useState<TabKey>("summary");
+  const [info, setInfo] = useState<Info | null>(null);
+  const closeInfo = useCallback(() => setInfo(null), []);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selected = selectedId ? (itemsById.get(selectedId) ?? null) : null;
+
+  // R&W 가 먼저, 그다음 Math — 각 영역 안에서는 응시 순서(모듈·문항 번호)대로.
+  const filtered = useMemo(() => {
+    const order: Record<string, number> = { rw: 0, math: 1 };
+    return attempt.items
+      .map((it, idx) => ({ it, idx }))
+      .sort((a, b) => (order[a.it.section] ?? 9) - (order[b.it.section] ?? 9) || a.it.position - b.it.position || a.idx - b.idx)
+      .map((x) => x.it);
+  }, [attempt.items]);
+  const selected = filtered.find((i) => i.setItemId === selectedId) ?? filtered[0] ?? null;
+  const totalTime = formatMinutes(report.totalTimeSpentSeconds);
 
   return (
-    <div className={attempt.items.length > 0 ? "md:grid md:grid-cols-[minmax(0,1fr)_420px] md:items-start md:gap-4" : ""}>
-    <div className="flex flex-col gap-4">
-      <div className="rounded-lg border border-grey-200 bg-white p-5 text-center">
-        <p className="text-[12px] font-bold uppercase tracking-wide text-grey-500">전체 정답률</p>
-        <p className="mt-1 text-[32px] font-extrabold">
-          {report.correctCount ?? 0}/{report.totalCount}
-        </p>
-        <p className="text-[13px] text-grey-500">{pct(report.correctCount ?? 0, report.totalCount)} · 총 소요 시간 {formatMinutes(report.totalTimeSpentSeconds)}</p>
-        <p className="mt-2 text-[11.5px] text-grey-400">
-          실제 SAT·College Board 점수와 동등하지 않은 학습 진단 결과입니다(사양 7절).
-        </p>
+    <div>
+      <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto border-b border-grey-200">
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            type="button"
+            role="tab"
+            id={`mock-exam-tab-${t.key}`}
+            aria-selected={tab === t.key}
+            aria-controls={`mock-exam-panel-${t.key}`}
+            onClick={() => setTab(t.key)}
+            className={`-mb-px shrink-0 whitespace-nowrap border-b-2 px-3 py-2 text-[13px] font-bold ${
+              tab === t.key ? "border-ink text-ink" : "border-transparent text-grey-500 hover:text-ink"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
-      {attempt.scoreAdjusted && (
-        <div role="note" className="rounded-lg border border-green bg-green/10 p-3 text-[12.5px] font-semibold text-green" data-testid="mock-exam-score-adjusted">
-          문항 오류로 점수가 조정되었습니다. 오류가 확인된 문항은 정답으로 처리됐고, 아래 점수와 예상 점수 범위는 조정된 채점 기준입니다.
-        </div>
-      )}
+      {tab === "summary" && (
+        <div role="tabpanel" id="mock-exam-panel-summary" aria-labelledby="mock-exam-tab-summary" className="flex flex-col gap-4">
+          <div className="rounded-lg border border-grey-200 bg-white p-5 text-center">
+            <p className="text-[12px] font-bold uppercase tracking-wide text-grey-500">Overall Accuracy</p>
+            <p className="mt-1 text-[32px] font-extrabold">
+              {report.correctCount ?? 0}/{report.totalCount}
+            </p>
+            <p className="text-[13px] text-grey-500" data-testid="mock-exam-overall-meta">
+              {pct(report.correctCount ?? 0, report.totalCount)}
+              {totalTime && <> · Total time {totalTime}</>}
+            </p>
+            <p className="mt-2 text-[11.5px] text-grey-400">
+              These results are a learning diagnostic and are not equivalent to an official SAT / College Board score.
+            </p>
+          </div>
 
-      {scoreEstimate && (
-        <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate">
-          <h3 className="mb-2 text-[13px] font-bold">예상 점수 범위(내부 추정)</h3>
-          <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="rounded-lg bg-grey-50 p-3">
-              <p className="text-[12px] font-bold text-grey-500">R&W</p>
-              <p className="text-[16px] font-extrabold">{scoreEstimate.rw.low}-{scoreEstimate.rw.high}</p>
+          {attempt.scoreAdjusted && (
+            <div role="note" className="rounded-lg border border-green bg-green/10 p-3 text-[12.5px] font-semibold text-green" data-testid="mock-exam-score-adjusted">
+              Your score was adjusted because of a question error. Questions confirmed to have errors were scored as correct, and the score
+              and estimated score range below use the adjusted scoring.
             </div>
-            <div className="rounded-lg bg-grey-50 p-3">
-              <p className="text-[12px] font-bold text-grey-500">Math</p>
-              <p className="text-[16px] font-extrabold">{scoreEstimate.math.low}-{scoreEstimate.math.high}</p>
+          )}
+
+          {scoreEstimate && (
+            <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate">
+              <h3 className="mb-2 text-[13px] font-bold">Estimated Score Range (internal estimate)</h3>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                {(
+                  [
+                    ["R&W", scoreEstimate.rw],
+                    ["Math", scoreEstimate.math],
+                    ["Total", scoreEstimate.total],
+                  ] as const
+                ).map(([label, r]) => (
+                  <div key={label} className="rounded-lg bg-grey-50 p-3">
+                    <p className="text-[12px] font-bold text-grey-500">{label}</p>
+                    <p className="text-[16px] font-extrabold">
+                      {r.low}-{r.high}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-[11.5px] text-grey-400">{SCORE_DISCLAIMER_EN}</p>
             </div>
-            <div className="rounded-lg bg-grey-50 p-3">
-              <p className="text-[12px] font-bold text-grey-500">총점</p>
-              <p className="text-[16px] font-extrabold">{scoreEstimate.total.low}-{scoreEstimate.total.high}</p>
+          )}
+
+          <div className="rounded-lg border border-grey-200 bg-white p-4">
+            <h3 className="mb-2 text-[13px] font-bold">Results by Section</h3>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {report.bySection.map((s) => {
+                const t = formatMinutes(s.timeSpentSeconds);
+                return (
+                  <div key={s.section} className="rounded-lg bg-grey-50 p-3" data-testid={`mock-exam-section-${s.section}`}>
+                    <p className="text-[12px] font-bold text-grey-500">{SECTION_LABEL[s.section]}</p>
+                    <p className="text-[18px] font-extrabold">
+                      {s.correct ?? 0}/{s.total}
+                    </p>
+                    {t && <p className="text-[11.5px] text-grey-500">Time {t}</p>}
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <p className="mt-2 text-[11.5px] text-grey-400">{SCORE_DISCLAIMER}</p>
         </div>
       )}
 
-      <div className="rounded-lg border border-grey-200 bg-white p-4">
-        <h3 className="mb-2 text-[13px] font-bold">섹션별 결과</h3>
-        <div className="grid grid-cols-2 gap-3">
-          {report.bySection.map((s) => (
-            <div key={s.section} className="rounded-lg bg-grey-50 p-3">
-              <p className="text-[12px] font-bold text-grey-500">{SECTION_LABEL[s.section]}</p>
-              <p className="text-[18px] font-extrabold">
-                {s.correct ?? 0}/{s.total}
-              </p>
-              <p className="text-[11.5px] text-grey-500">소요 {formatMinutes(s.timeSpentSeconds)}</p>
+      {tab === "domain" && (
+        <div role="tabpanel" id="mock-exam-panel-domain" aria-labelledby="mock-exam-tab-domain" className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {(["rw", "math"] as const).map((sec) => {
+            const domains = report.byDomain.filter((d) => d.section === sec);
+            const skills = report.bySkill.filter((d) => d.section === sec);
+            const weak = weakSkills(skills);
+            return (
+              <section key={sec} className="flex flex-col gap-3 rounded-lg border border-grey-200 bg-white p-4" data-testid={`mock-exam-domain-${sec}`}>
+                <h3 className="text-[14px] font-extrabold">{SECTION_LABEL[sec]}</h3>
+                {domains.length === 0 ? (
+                  <p className="text-[12.5px] text-grey-400">No graded questions in this section.</p>
+                ) : (
+                  <>
+                    <div>
+                      <h4 className="mb-1.5 text-[12px] font-bold uppercase tracking-wide text-grey-500">Domains</h4>
+                      <BreakdownList rows={domains} kind="domain" onInfo={setInfo} />
+                    </div>
+                    {weak.length > 0 && (
+                      <div data-testid="mock-exam-weak-skills">
+                        <h4 className="mb-1.5 text-[12px] font-bold uppercase tracking-wide text-grey-500">Skills to Focus On</h4>
+                        <BreakdownList rows={weak} kind="skill" onInfo={setInfo} />
+                      </div>
+                    )}
+                    {skills.length > 0 && (
+                      <div>
+                        <h4 className="mb-1.5 text-[12px] font-bold uppercase tracking-wide text-grey-500">Skills</h4>
+                        <BreakdownList rows={skills} kind="skill" onInfo={setInfo} />
+                      </div>
+                    )}
+                  </>
+                )}
+              </section>
+            );
+          })}
+          <p className="text-[11.5px] text-grey-400 md:col-span-2">Select a domain or skill name to see what it covers.</p>
+        </div>
+      )}
+
+      {tab === "review" && (
+        <div role="tabpanel" id="mock-exam-panel-review" aria-labelledby="mock-exam-tab-review">
+          {attempt.items.length === 0 ? (
+            <p className="text-[12.5px] text-grey-400">There are no questions to review.</p>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 lg:h-[calc(100vh-2rem)] lg:grid-cols-[230px_minmax(0,1fr)_minmax(240px,320px)] lg:items-stretch">
+              {/* 왼쪽: 문항 목록 + 필터 */}
+              <div className="rounded-lg border border-grey-200 bg-white p-3 lg:h-full lg:overflow-y-auto">
+                {(
+                  <ul className="flex max-h-[40vh] flex-col gap-1 overflow-y-auto lg:max-h-none">
+                    {filtered.map((it) => {
+                      const active = selected?.setItemId === it.setItemId;
+                      return (
+                        <li key={it.setItemId}>
+                          <button
+                            type="button"
+                            onClick={() => setSelectedId(it.setItemId)}
+                            aria-current={active ? "true" : undefined}
+                            className={`flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-[12.5px] ${
+                              active ? "bg-ink text-white" : "text-grey-600 hover:bg-grey-100"
+                            }`}
+                            data-testid={`review-item-${it.setItemId}`}
+                          >
+                            <span className="w-[62px] shrink-0 whitespace-nowrap font-semibold">
+                              {SECTION_SHORT[it.section]} {it.position}
+                            </span>
+                            <span className="w-[56px] shrink-0 text-center">
+                              {it.guessed && it.response ? (
+                                <span role="img" aria-label="Guessed" data-testid={`review-guessed-${it.setItemId}`} className={`rounded border px-1 text-[10px] font-semibold ${active ? "border-white/60 text-white" : "border-grey-300 text-grey-600"}`}>
+                                  Guessed
+                                </span>
+                              ) : null}
+                            </span>
+                            <span className={`ml-auto w-[62px] shrink-0 text-right text-[11px] font-bold ${active ? "" : it.correct === null ? "" : it.correct ? "text-green" : "text-red"}`}>
+                              {it.correct === null ? "" : it.correct ? "Correct" : "Incorrect"}
+                            </span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+                {!readOnly && report.missedItems.length > 0 && (
+                  <p className="mt-2 text-[11px] text-grey-400">Your teacher assigns review and follow-up practice for missed questions.</p>
+                )}
+              </div>
+
+              {/* 가운데: 문제 */}
+              {selected ? (
+                <div className="rounded-lg border border-grey-200 bg-white p-4 lg:h-full lg:overflow-y-auto" data-testid="mock-exam-item-detail">
+                  <ItemHeader key={selected.setItemId} item={selected} attemptId={attempt.id} viewerIsOwner={!readOnly} />
+                  <ItemProblem item={selected} attemptId={attempt.id} />
+                </div>
+              ) : (
+                <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">
+                  Select a question to see it here.
+                </div>
+              )}
+
+              {/* 오른쪽: 해설 + 제출 시점 필기(읽기 전용) — 스크롤 없이 닿도록 sticky */}
+              {selected && (
+                <div className="lg:h-full lg:overflow-y-auto" data-testid="mock-exam-explanation-panel">
+                  <ExplanationPanel key={selected.setItemId} item={selected} />
+                  <ItemTools
+                    item={selected}
+                    attemptId={attempt.id}
+                    studentId={attempt.studentId}
+                    viewerIsOwner={!readOnly}
+                    reportRole={reportRole}
+                    reportStatus={myReports[selected.problemId] ?? null}
+                  />
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="rounded-lg border border-grey-200 bg-white p-4">
-        <h3 className="mb-2 text-[13px] font-bold">영역별 결과</h3>
-        <ul className="flex flex-col gap-1.5">
-          {report.byDomain.map((d) => (
-            <li key={d.key} className="flex items-center justify-between text-[13px]">
-              <span className="text-grey-600">{d.label}</span>
-              <span className="font-bold">
-                {d.correct}/{d.total} ({pct(d.correct, d.total)})
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {weakSkills(report.bySkill).length > 0 && (
-        <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-weak-skills">
-          <h3 className="mb-2 text-[13px] font-bold">우선 보완할 세부기술</h3>
-          <ul className="flex flex-col gap-1.5">
-            {weakSkills(report.bySkill).map((s) => (
-              <li key={s.key} className="flex items-center justify-between text-[13px]">
-                <span className="text-grey-600">{s.label}</span>
-                <span className="font-bold">{s.correct}/{s.total} ({pct(s.correct, s.total)})</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {report.bySkill.length > 0 && (
-        <div className="rounded-lg border border-grey-200 bg-white p-4">
-          <h3 className="mb-2 text-[13px] font-bold">세부기술별 결과</h3>
-          <ul className="flex flex-col gap-1.5">
-            {report.bySkill.map((s) => (
-              <li key={s.key} className="flex items-center justify-between text-[13px]">
-                <span className="text-grey-600">{s.label}</span>
-                <span className="font-bold">
-                  {s.correct}/{s.total} ({pct(s.correct, s.total)})
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* 2026-09-21(UAT 지적) — "봤던 모의고사도 다시 볼 수 있게" — 오답만이 아니라 전체
-          문항을 다시 열어볼 수 있어야 한다. 정오 표시는 색상과 별개로 텍스트로도 구분한다. */}
-      {attempt.items.length > 0 && (
-        <div className="rounded-lg border border-grey-200 bg-white p-4">
-          <h3 className="mb-2 text-[13px] font-bold">전체 문항 다시 보기</h3>
-          <ul className="flex flex-col gap-1.5">
-            {attempt.items.map((it) => (
-              <li key={it.setItemId}>
-                <button
-                  type="button"
-                  onClick={() => setSelectedId(it.setItemId)}
-                  className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-[12.5px] ${
-                    selectedId === it.setItemId ? "bg-ink text-white" : "text-grey-600 hover:bg-grey-100"
-                  }`}
-                  data-testid={`review-item-${it.setItemId}`}
-                >
-                  <span>
-                    {SECTION_LABEL[it.section]} {it.position}번 · {it.satDomain}
-                    {it.skillCode ? ` · ${it.skillCode}` : ""}
-                  </span>
-                  {it.correct !== null && (
-                    <span className={`shrink-0 text-[11px] font-bold ${selectedId === it.setItemId ? "" : it.correct ? "text-green" : "text-red"}`}>
-                      {it.correct ? "정답" : "오답"}
-                    </span>
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul>
-          {!readOnly && report.missedItems.length > 0 && (
-            <p className="mt-2 text-[11.5px] text-grey-400">오답 복습·보충 과제는 담당 선생님이 발급합니다(사양 7절 — 자동 발급하지 않음).</p>
           )}
         </div>
       )}
-    </div>
-    {attempt.items.length > 0 && (
-      <div className="mt-4 md:sticky md:top-4 md:mt-0">
-        {selected ? (
-          <ItemDetail
-            item={selected}
-            attemptId={attempt.id}
-            studentId={attempt.studentId}
-            viewerIsOwner={!readOnly}
-            reportRole={reportRole}
-            reportStatus={myReports[selected.problemId] ?? null}
-          />
-        ) : (
-          <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">
-            왼쪽에서 문항을 누르면 여기에 문제·내 답·정답·해설이 표시됩니다.
-          </div>
-        )}
-      </div>
-    )}
+
+      {info && <InfoDialog title={info.title} body={info.body} onClose={closeInfo} />}
     </div>
   );
 }

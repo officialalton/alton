@@ -1,6 +1,7 @@
 "use client";
 
 import { useHighlightSupported } from "@/lib/use-highlight-supported";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
@@ -9,6 +10,7 @@ import {
   saveMockExamSectionTimeAction,
   submitMockExamAttemptAction,
   toggleMockExamFlagAction,
+  toggleMockExamGuessedAction,
   toggleMockExamSavedToPracticeAction,
   recordMockExamEntryAction,
 } from "@/lib/mock-exam/attempt-actions";
@@ -17,6 +19,7 @@ import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import MockExamResultView from "./MockExamResultView";
+import GuessButton from "./GuessButton";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
 
@@ -68,6 +71,8 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.response ?? ""])),
   );
   const [flags, setFlags] = useState<Record<string, boolean>>(Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.flagged])));
+  // 2026-10-02(오너 UAT A8) — 🎲 찍음 표시(4모듈 응시와 같은 RPC·컬럼).
+  const [guessed, setGuessed] = useState<Record<string, boolean>>(Object.fromEntries(attempt.items.map((i) => [i.setItemId, i.guessed ?? false])));
   // 2026-09-21(사용자 지시) — "표시"(flag)와 달리 학생 포털 Practice 탭에 계속 남는
   // "문제 저장". 단어장의 "내 단어장"처럼 원하는 문항만 골라 담는다.
   const [savedToPractice, setSavedToPractice] = useState<Record<string, boolean>>(
@@ -215,6 +220,18 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     const next = !flags[current.setItemId];
     setFlags((f) => ({ ...f, [current.setItemId]: next }));
     await toggleMockExamFlagAction(attempt.id, current.setItemId, next);
+  }
+
+  async function toggleGuessed() {
+    if (!current) return;
+    const id = current.setItemId;
+    const next = !guessed[id];
+    setGuessed((m) => ({ ...m, [id]: next }));
+    const r = await toggleMockExamGuessedAction(attempt.id, id, next);
+    if (!r.ok) {
+      setGuessed((m) => ({ ...m, [id]: !next }));
+      setError(r.error);
+    }
   }
 
   async function toggleSavedToPractice() {
@@ -405,7 +422,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               </div>
             </div>
             <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
-              {current.passage && <RwStimulusView passage={current.passage} className="mb-4 text-[13.5px]" />}
+              {dedupeStem(current.passage, current.question) && <RwStimulusView passage={dedupeStem(current.passage, current.question)} className="mb-4 text-[13.5px]" />}
               {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
             </div>
             {highlightMode && highlightSupported && (
@@ -489,6 +506,11 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           >
             이전 문항
           </button>
+          {current && (
+            <span className="ml-auto">
+              <GuessButton guessed={guessed[current.setItemId] ?? false} onToggle={() => void toggleGuessed()} />
+            </span>
+          )}
           {index < sectionItems.length - 1 ? (
             <button
               type="button"

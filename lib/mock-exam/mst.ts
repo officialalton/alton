@@ -50,3 +50,22 @@ export function formatMstClock(totalSeconds: number): string {
 }
 
 export const MST_TIME_WARNING_SECONDS = 5 * 60;
+
+/** 결과 화면 섹션 소요 시간(2026-10-02 UAT B2): MST 응시는 문항별 time_spent 를 모으지 않으므로
+ * mock_exam_attempt_modules 의 started_at ~ submitted_at(없으면 ends_at)으로 계산한다. 휴식 모듈은 제외,
+ * 모듈 제한 시간으로 상한을 둔다. 시작 기록이 있는 모듈이 하나도 없는 섹션은 null(표시하지 않음). */
+export function mstSectionSeconds(
+  modules: { module_key: string; started_at: string | null; submitted_at: string | null; ends_at: string | null; time_limit_seconds: number | null }[],
+): { rw: number | null; math: number | null } {
+  const out: { rw: number | null; math: number | null } = { rw: null, math: null };
+  for (const m of modules) {
+    const section = MST_BLUEPRINT[m.module_key as MstModuleKey]?.section ?? null;
+    if (!section || !m.started_at) continue;
+    const end = m.submitted_at ?? m.ends_at;
+    if (!end) continue;
+    let secs = Math.max(0, Math.round((Date.parse(end) - Date.parse(m.started_at)) / 1000));
+    if (m.time_limit_seconds && m.time_limit_seconds > 0) secs = Math.min(secs, m.time_limit_seconds);
+    if (Number.isFinite(secs)) out[section] = (out[section] ?? 0) + secs;
+  }
+  return out;
+}
