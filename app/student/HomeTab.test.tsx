@@ -73,4 +73,17 @@ describe("HomeTab — Home+Planner 통합(2026-09-22 사용자 지시)", () => {
     fireEvent.click(screen.getByText("완료로"));
     await waitFor(() => expect(updateMyManualTaskStatusAction).toHaveBeenCalledWith("m2", "done"));
   });
+
+  it("카드를 옮기면 보드를 다시 읽어 서버가 기록한 최종 편집자·시각을 반영한다", async () => {
+    const load = loadMyBoardCardsAction as ReturnType<typeof vi.fn>;
+    const base: BoardCard = { id: "m3", sourceType: "manual", sourceId: "m3", title: "단어 복습", subtitle: null, status: "backlog", dueAt: null, dueStartAt: null, href: null, createdByLabel: "학생 본인" };
+    load.mockReset();
+    load.mockResolvedValueOnce([base]).mockResolvedValue([{ ...base, status: "in_progress" }]);
+    (updateMyManualTaskStatusAction as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
+    render(<HomeTab studentName="지훈" dashboard={dashboard} />);
+    fireEvent.click(await screen.findByText("TODO"));
+    fireEvent.click(await screen.findByText("진행중으로"));
+    await waitFor(() => expect(updateMyManualTaskStatusAction).toHaveBeenCalledWith("m3", "in_progress"));
+    await waitFor(() => expect(load.mock.calls.length).toBeGreaterThanOrEqual(2));
+  });
 });

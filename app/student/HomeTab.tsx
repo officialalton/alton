@@ -80,6 +80,8 @@ export default function HomeTab({
     setCards((prev) => prev?.map((c) => (c.id === cardId ? { ...c, status } : c)) ?? prev);
     try {
       await updateMyManualTaskStatusAction(cardId, status);
+      // 서버가 기록한 최종 편집자·편집 시각을 카드에 반영하려고 다시 읽는다(낙관적 갱신은 상태만 바꿈).
+      reload();
     } catch (e) {
       setError(e instanceof Error ? e.message : "상태를 바꾸지 못했습니다.");
       reload();
