@@ -600,13 +600,24 @@ export async function listAllActiveStudentsForMockExamAction(): Promise<MockExam
   // 2026-09-28: 활성 학생 id를 모아 .in("id", [...])으로 다시 조회하던 방식은 학생 수가
   // 수백 명이 되면 PostgREST GET URL이 한도를 넘어 "URI too long"으로 실패했다 —
   // students(id → profiles.id FK) inner embed 한 번으로 같은 결과를 얻는다.
-  const { data, error } = await db
-    .from("profiles")
-    .select("id, name, students!inner(status)")
-    .eq("students.status", "active")
-    .order("name");
-  if (error) throw new Error(error.message);
-  return (data ?? []).map((r) => ({ id: r.id, name: r.name }));
+  // 2026-10-01: PostgREST 는 한 번에 최대 max_rows(기본 1000)행만 돌려줘서, 활성 학생이 1,000명을 넘으면 '전체 학생 배정'이
+  // 1,000명 뒤를 조용히 건너뛰었다 — 페이지를 나눠 모두 읽는다. 정렬 키에 id 를 넣어 페이지 경계의 중복·누락을 막는다.
+  const PAGE = 1000;
+  const rows: MockExamStudentOption[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await db
+      .from("profiles")
+      .select("id, name, students!inner(status)")
+      .eq("students.status", "active")
+      .order("name")
+      .order("id")
+      .range(from, from + PAGE - 1);
+    if (error) throw new Error(error.message);
+    const page = data ?? [];
+    for (const r of page) rows.push({ id: r.id, name: r.name });
+    if (page.length < PAGE) break;
+  }
+  return rows;
 }
 
 /** assignMockExamAction(lib/mock-exam/attempt-actions.ts)과 같은 배정 로직이지만, RLS의
