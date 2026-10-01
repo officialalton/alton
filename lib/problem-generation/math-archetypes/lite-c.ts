@@ -2,5 +2,6 @@
 import type { LiteArchetype } from "./c-lite";
 import { PCT_LITE } from "./skills/percentages";
 import { AV_LITE } from "./skills/area-volume";
+import { CI_LITE } from "./skills/circles";
 
-export const LITE_C_ARCHETYPES: LiteArchetype[] = [...PCT_LITE, ...AV_LITE];
+export const LITE_C_ARCHETYPES: LiteArchetype[] = [...PCT_LITE, ...AV_LITE, ...CI_LITE];

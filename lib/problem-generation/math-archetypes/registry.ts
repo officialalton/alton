@@ -5,7 +5,8 @@ import { LE_ARCHETYPES } from "./skills/linear-equations-one-var";
 import { PR_ARCHETYPES } from "./skills/probability";
 import { PCT_ARCHETYPES } from "./skills/percentages";
 import { AV_ARCHETYPES } from "./skills/area-volume";
+import { CI_ARCHETYPES } from "./skills/circles";
 
 export const ARCHETYPES: Archetype[] = [...EE_ARCHETYPES, ...RR_ARCHETYPES, ...LE_ARCHETYPES, ...PR_ARCHETYPES,
-  ...PCT_ARCHETYPES, ...AV_ARCHETYPES];
+  ...PCT_ARCHETYPES, ...AV_ARCHETYPES, ...CI_ARCHETYPES];
 export const archetypeById = (id: string) => ARCHETYPES.find((a) => a.id === id);

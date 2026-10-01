@@ -3,7 +3,7 @@ import { fmtNum } from "./text";
 import type { Instance } from "./types";
 
 /** `$36\pi$` 형태의 선지 문자열(계수만). 계수는 정수여야 한다. */
-export const piOpt = (v: number) => `$${fmtNum(v)}\\pi$`;
+export const piOpt = (v: number) => (v === 1 ? "$\\pi$" : `$${fmtNum(v)}\\pi$`);
 /** `$a - b\pi$`(식형 선지). */
 export const piDiff = (a: number, b: number) => `$${fmtNum(a)} ${b < 0 ? "+" : "-"} ${fmtNum(Math.abs(b))}\\pi$`;
 

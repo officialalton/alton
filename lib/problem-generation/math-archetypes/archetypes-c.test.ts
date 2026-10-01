@@ -11,7 +11,7 @@ const HARD_C = ARCHETYPES.filter((a) => C_SKILLS.includes(a.skill));
 describe("C 담당 hard 원형 구성", () => {
   it("percentages 20·area_volume 24·circles 28 개, 세부 패턴마다 4개이고 연산자가 모두 다르다", () => {
     const by = (s: string) => HARD_C.filter((a) => a.skill === s).length;
-    expect(by("percentages")).toBe(20); expect(by("area_volume")).toBe(24); if (by("circles")) expect(by("circles")).toBe(28);
+    expect(by("percentages")).toBe(20); expect(by("area_volume")).toBe(24); expect(by("circles")).toBe(28);
     const byKind = new Map<string, string[]>();
     for (const a of HARD_C) byKind.set(`${a.skill}.${a.kind}`, [...(byKind.get(`${a.skill}.${a.kind}`) ?? []), a.operator]);
     for (const [k, ops] of byKind) { expect(ops.length, k).toBe(4); expect(new Set(ops).size, k).toBe(4); }
