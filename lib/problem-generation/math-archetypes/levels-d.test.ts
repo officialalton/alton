@@ -22,7 +22,8 @@ describe("담당 D 원형 메타데이터", () => {
   it("같은 세부 패턴의 hard 원형 4개는 서로 다른 연산자를 쓴다", () => {
     const byKind = new Map<string, string[]>();
     for (const a of hard) byKind.set(`${a.skill}.${a.kind}`, [...(byKind.get(`${a.skill}.${a.kind}`) ?? []), a.operator]);
-    for (const [k, ops] of byKind) { expect(ops.length, k).toBe(4); expect(new Set(ops).size, k).toBe(4); }
+    // 정성 판단형(evaluating_statistical_claims)은 풀이 구조가 3가지를 넘으면 2×2 조합 매핑으로 환원되므로 세부 패턴당 3개(보고서 근거).
+    for (const [k, ops] of byKind) { const want = k.startsWith("evaluating_statistical_claims.") ? 3 : 4; expect(ops.length, k).toBe(want); expect(new Set(ops).size, k).toBe(want); }
   });
   it("hard 의 mediumSteps 는 medium 컴파일러 실측 단계 이상이다", () => {
     const base = JSON.parse(readFileSync("data/mock-exam-generation/math-medium-baseline.json", "utf-8")) as Record<string, { medium: number }>;
@@ -50,6 +51,18 @@ describe("담당 D 원형 시드 스윕 — 정답 재계산·선지 겹침·표
       expect(c).toBeGreaterThan(0);
     });
   }
+});
+
+describe("정성형 검증기 돌연변이(evaluating_statistical_claims)", () => {
+  const q = D_ARCHETYPES.find((x) => x.id === "esc.cause_vs_association.repr_shift") as LArch;
+  const good = (() => { for (let s = 0; s < 50; s++) { const g = generateOne(q, s); if (g.ok) return g.inst as BInstance; } throw new Error("no"); })();
+  it("원본 통과", () => expect(verifyLevel(q, good).ok).toBe(true));
+  it("정답 키를 바꾸면 verification_js 재계산과 어긋나 실패", () => expect(verifyLevel(q, { ...good, correctIndex: (good.correctIndex + 1) % 4 }).ok).toBe(false));
+  it("지문의 배정 방식을 바꾸면(무작위 ↔ 선택) 같은 선지로는 실패", () => {
+    const flipped = good.stimulus.includes("randomly assigned") || /coin|random number|hat/.test(good.stimulus) ? good.stimulus.replace(/Each participant was randomly assigned[^.]*\./, "Each participant chose whether to use it.").replace(/A computer randomly assigned[^.]*\./, "Each participant chose whether to use it.") : good.stimulus;
+    if (flipped !== good.stimulus) expect(verifyLevel(q, { ...good, stimulus: flipped }).ok).toBe(false);
+  });
+  it("선지에 같은 문장이 두 번 있으면 실패", () => { const o = [...good.options]; o[(good.correctIndex + 1) % 4] = o[good.correctIndex]; expect(verifyLevel(q, { ...good, options: o }).ok).toBe(false); });
 });
 
 describe("검증기 돌연변이(담당 D)", () => {

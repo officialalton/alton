@@ -5,5 +5,6 @@ import { RT_ALL } from "./skills/right-triangles-trigonometry";
 import { OVD_ALL } from "./skills/one-variable-data";
 import { TVD_ALL } from "./skills/two-variable-data";
 import { IME_ALL } from "./skills/inference-margin-error";
+import { ESC_ALL } from "./skills/evaluating-statistical-claims";
 
-export const D_ARCHETYPES: LArch[] = [...LAT_ALL, ...RT_ALL, ...OVD_ALL, ...TVD_ALL, ...IME_ALL];
+export const D_ARCHETYPES: LArch[] = [...LAT_ALL, ...RT_ALL, ...OVD_ALL, ...TVD_ALL, ...IME_ALL, ...ESC_ALL];
