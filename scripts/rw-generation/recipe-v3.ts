@@ -20,6 +20,11 @@ export type RecipeV3 = {
   evidence: string[];
   officialDifficulty: string | null;
   difficultySource: string;
+  /** v4(2026-10-01) 확장 필드 — v3 레시피에는 없다. */
+  version?: 4;
+  passageDesign?: { evidenceSites: string[]; directStatementBan: string; devices: string[] };
+  answerDesign?: { inferenceSteps: number; combine: string };
+  selfCheck?: string[];
 };
 export type RecipesV3 = Record<string, RecipeV3[]>;
 
@@ -29,6 +34,41 @@ export const loadRecipesV3 = (file = "data/mock-exam-generation/recipes-v3-liter
   void _readme;
   return rest as RecipesV3;
 };
+
+export const RECIPES_V4_FILE = "data/mock-exam-generation/recipes-v4-literary-hard.json";
+
+/** v3 + v4 를 합친 기본 레시피 집합. 같은 skill·유형·난이도에서 v4 가 앞에 와서(find 가 첫 항목을 고른다) 우선한다. */
+export const loadRecipesAll = (v3File?: string, v4File = RECIPES_V4_FILE): RecipesV3 => {
+  const merged: RecipesV3 = {};
+  for (const [skill, list] of Object.entries(loadRecipesV3(v4File))) merged[skill] = [...list];
+  for (const [skill, list] of Object.entries(loadRecipesV3(v3File))) merged[skill] = [...(merged[skill] ?? []), ...list];
+  return merged;
+};
+
+/** 레시피 조회: 같은 skill·유형·난이도 중 v4 가 있으면 v4, 없으면 v3. */
+export const findRecipe = (recipes: RecipesV3, skill: string, questionType: string, difficulty: "easy" | "medium" | "hard") =>
+  (recipes[skill] ?? []).find((r) => r.questionType === questionType && r.difficulty === difficulty) ?? null;
+
+export const LITERARY_QUESTION_TYPES = ["narrator_attitude", "main_idea_or_purpose", "character_motivation", "tone_or_mood", "relationship_between_characters", "symbolism", "figurative_language", "word_in_context", "tone_shift", "text_structure", "underlined_portion_function"] as const;
+
+/** v4 문학 hard 레시피 추가 검증: v3 검증 + 11유형 전부·서로 다른 오독 경로 3개·추론 2단계 이상·자기 점검 질문. */
+export function validateRecipesV4(recipes: RecipesV3, knownSkills?: string[]): string[] {
+  const errs = validateRecipesV3(recipes, knownSkills);
+  const all = Object.values(recipes).flat();
+  for (const t of LITERARY_QUESTION_TYPES) if (!all.some((r) => r.questionType === t && r.difficulty === "hard")) errs.push(`${t}: v4 hard 레시피 없음`);
+  for (const r of all) {
+    const at = r.id;
+    if (r.version !== 4) errs.push(`${at}: version 4 필요`);
+    if (r.difficulty !== "hard") errs.push(`${at}: v4 파일은 hard 전용`);
+    if (!r.id.endsWith("_hard_v4")) errs.push(`${at}: id 는 _hard_v4 로 끝나야 함`);
+    if (new Set(r.distractorPlan?.map((d) => d.kind)).size !== 3) errs.push(`${at}: 오답 3개는 서로 다른 오독 경로(kind)여야 함`);
+    if (!r.passageDesign || r.passageDesign.evidenceSites.length < 3 || !r.passageDesign.directStatementBan) errs.push(`${at}: passageDesign(근거 위치 3곳 이상·직접 서술 금지 범위)`);
+    if (!r.answerDesign || r.answerDesign.inferenceSteps < 2 || !r.answerDesign.combine) errs.push(`${at}: answerDesign(추론 2단계 이상·결합)`);
+    if (!Array.isArray(r.selfCheck) || r.selfCheck.length < 6) errs.push(`${at}: selfCheck 6개 이상`);
+    if ((r.distractorPlan ?? []).some((d) => /always|never|절대어 를 쓴다/.test(d.rule))) errs.push(`${at}: 오답 규칙이 절대어 사용을 권함`);
+  }
+  return errs;
+}
 
 const REQUIRED_BANS = ["마지막 문장", "정반대"]; // 직접 생성 테스트의 두 가지 약점이 금지 패턴에 반드시 들어 있어야 한다.
 
@@ -80,5 +120,10 @@ export function recipePromptBlock(r: RecipeV3): string {
     `오답 설계: ${r.distractorPlan.map((d, i) => `(${i + 1}) ${d.rule}`).join(" ")}`,
     `금지: ${r.bannedPatterns.join(" / ")}`,
     `지문 길이: ${r.passageWords.min}~${r.passageWords.max}단어.`,
+    ...(r.passageDesign ? [
+      `지문 설계: 근거 위치 — ${r.passageDesign.evidenceSites.join(" / ")}. 직접 서술 금지 — ${r.passageDesign.directStatementBan}.`,
+      `정답 설계: 추론 ${r.answerDesign?.inferenceSteps ?? 2}단계 — ${r.answerDesign?.combine ?? ""}. 오답 3개는 지문의 모든 명시 문장과 양립해야 하고(지문 사실과 충돌하는 오답 금지), 선택지 4개는 같은 문장틀·비슷한 길이로 쓴다.`,
+    ] : []),
+    ...(r.selfCheck?.length ? [`제출 전 자기 점검(하나라도 아니면 고쳐서 제출): ${r.selfCheck.map((q, i) => `(${i + 1}) ${q}`).join(" ")}`] : []),
   ].join("\n");
 }

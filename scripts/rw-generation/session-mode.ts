@@ -12,7 +12,7 @@ import { findResidue } from "../../lib/problem-generation/residue";
 import { validatePassages, type LiteraryPassage } from "../../lib/rw-passages/schema";
 import { DOMAINS } from "../mock-exam-generation/plan";
 import { SimIndex, gate as simGate } from "../mock-exam-generation/diversity";
-import { loadRecipesV3, type RecipesV3 } from "./recipe-v3";
+import { loadRecipesAll, type RecipesV3 } from "./recipe-v3";
 import { expandBatch, evaluateGenerated, injectedPromptBlock, type CandidateSpec, type Generated } from "./candidate-pipeline";
 import { UsageLedger } from "./usage-caps";
 import type { PositionCounts, PositionKey, Letter } from "./answer-position";
@@ -166,7 +166,7 @@ export function prepare(o: PrepareOptions): ManifestTask[] {
   const manifest = loadManifest(o.root, o.runId);
   if (manifest.preparedBatches.includes(o.batch.batchId)) throw new Error(`이미 prepare 한 배치입니다: ${o.batch.batchId}`);
   const { st, ledger } = loadState(o.root);
-  const recipes = o.recipes ?? loadRecipesV3();
+  const recipes = o.recipes ?? loadRecipesAll();
   const { specs, positions } = expandBatch(o.batch, { ledger, recipes, priorPositions: st.positions });
   const isExcerpt = o.batch.route === "excerpt";
   if (isExcerpt && (o.excerpts?.length ?? 0) < specs.length) throw new Error(`발췌 지문이 부족합니다: ${o.excerpts?.length ?? 0}/${specs.length}`);
@@ -307,7 +307,7 @@ export function reviewPrepare(o: { root: string; runId: string; chunkSize?: numb
   const d = dirs(o.root);
   const manifest = loadManifest(o.root, o.runId);
   const { st, ledger } = loadState(o.root);
-  const recipes = o.recipes ?? loadRecipesV3();
+  const recipes = o.recipes ?? loadRecipesAll();
   const reviewed = new Set(readJson<{ ids: string[] }>(path.join(d.root, "review-queued.json"), { ids: [] }).ids);
   const latest = latestPassed(o.root);
   const pool = [...latest.values()].filter((p) => !reviewed.has(queueKey(p)) && (!o.candidateIds || o.candidateIds.includes(p.candidateId))).sort((a, b) => a.candidateId.localeCompare(b.candidateId));
@@ -414,7 +414,7 @@ export function rewritePrepare(o: { root: string; runId: string; chunkSize?: num
   const d = dirs(o.root);
   const manifest = loadManifest(o.root, o.runId);
   const { st, ledger } = loadState(o.root);
-  const recipes = o.recipes ?? loadRecipesV3();
+  const recipes = o.recipes ?? loadRecipesAll();
   const taken = new Set(readJson<{ ids: string[] }>(path.join(d.root, "rewrite-queued.json"), { ids: [] }).ids);
   const cands: TaskCandidate[] = [];
   const { decisions } = reviewIngest(o.root);

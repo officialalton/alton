@@ -17,7 +17,7 @@ const BANK = Array.from({ length: 900 }, (_, i) => `${C[i % 14]}${V[(i >> 2) % 5
 const seedNum = (s: string) => [...s].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7);
 const words = (rnd: () => number, n: number) => Array.from({ length: n }, () => BANK[Math.floor(rnd() * BANK.length)]);
 const sentence = (rnd: () => number, n: number) => { const w = words(rnd, n); return w[0][0].toUpperCase() + w[0].slice(1) + " " + w.slice(1).join(" ") + "."; };
-const passageOf = (id: string, n = 120) => { const rnd = mulberry32(seedNum(id)); const out: string[] = []; let left = n; while (left > 0) { const k = Math.min(left, 12); out.push(sentence(rnd, k)); left -= k; } return out.join(" "); };
+const passageOf = (id: string, n = 150) => { const rnd = mulberry32(seedNum(id)); const out: string[] = []; let left = n; while (left > 0) { const k = Math.min(left, 12); out.push(sentence(rnd, k)); left -= k; } return out.join(" "); };
 const optionsOf = (id: string) => { const rnd = mulberry32(seedNum(id + "o")); return [0, 1, 2, 3].map(() => words(rnd, 7).join(" ")); };
 type Item = Record<string, unknown>;
 const goodItem = (c: GenTask["candidates"][number]): Item => ({

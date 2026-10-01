@@ -2,7 +2,7 @@
 // easy 는 저작권 자유 원문 발췌(route=excerpt), hard·medium 은 AI 지문+문항 동시 생성(route=ai_passage). 순수 계산 — API·DB 호출 없음.
 import { allocateCounts } from "../../lib/mock-exam/assemble";
 import { GENRE_WEIGHTS, GENRES_LIT, type LitGenre } from "./seed-bank";
-import { loadRecipesV3, type RecipesV3 } from "./recipe-v3";
+import { loadRecipesAll, findRecipe, type RecipesV3 } from "./recipe-v3";
 
 export type Difficulty = "easy" | "medium" | "hard";
 export const DIFFS: Difficulty[] = ["easy", "medium", "hard"];
@@ -64,7 +64,7 @@ export const BATCH_SIZE = 100;
 export type Route = "excerpt" | "ai_passage";
 export type Cell = {
   skill: string; difficulty: Difficulty; questionType: string; genre: LitGenre; route: Route;
-  needAdopt: number; candidates: number; recipeId: string | null; recipeSource: "v3" | "difficulty_tip" | "none";
+  needAdopt: number; candidates: number; recipeId: string | null; recipeSource: "v3" | "v4" | "difficulty_tip" | "none";
 };
 export type PlanBatch = { batchId: string; route: Route; difficulty: Difficulty; candidates: number; cells: { skill: string; questionType: string; genre: string; count: number }[]; estCostSyncUsd: number; estCostBatchUsd: number };
 
@@ -75,7 +75,7 @@ export type PlanOptions = { literaryShare?: number; recipes?: RecipesV3; adoptRa
 export function buildLiteraryPlan(opts: PlanOptions = {}) {
   const share = opts.literaryShare ?? LITERARY_SHARE;
   const rate = { ...ADOPT_RATE, ...opts.adoptRate };
-  const recipes = opts.recipes ?? loadRecipesV3();
+  const recipes = opts.recipes ?? loadRecipesAll();
   const batchSize = opts.batchSize ?? BATCH_SIZE;
   const needByDiff: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
   for (const d of DIFFS) needByDiff[d] = Math.round(PASSAGE_BASE[d] * share);
@@ -95,10 +95,12 @@ export function buildLiteraryPlan(opts: PlanOptions = {}) {
         for (const g of allowedGenres) {
           const n = gNeed[g] ?? 0;
           if (n === 0) continue;
-          const r = (recipes[t.skill] ?? []).find((x) => x.questionType === t.type && x.difficulty === d);
+          const r = findRecipe(recipes, t.skill, t.type, d);
+          // hard 문학 후보는 레시피 없이 만들지 않는다(웨이브 1: 레시피 없는 hard 채택률 낮음 + 난이도 지시문만으로는 hard 를 유지하지 못함).
+          if (d === "hard" && !r) throw new Error(`hard 후보에 레시피가 없습니다: ${t.skill}/${t.type} — recipes-v4-literary-hard.json 에 추가하세요`);
           cells.push({
             skill: t.skill, difficulty: d, questionType: t.type, genre: g, route, needAdopt: n, candidates: Math.ceil(n / effRate),
-            recipeId: r?.id ?? null, recipeSource: r ? "v3" : d === "easy" ? "none" : "difficulty_tip",
+            recipeId: r?.id ?? null, recipeSource: r ? (r.version === 4 ? "v4" : "v3") : d === "easy" ? "none" : "difficulty_tip",
           });
         }
       }

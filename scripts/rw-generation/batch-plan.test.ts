@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildLiteraryPlan, QTYPES, GENRE_ALLOWED, ADOPT_RATE } from "./batch-plan";
 import { expandBatch, evaluateGenerated, injectedPromptBlock, type Generated, type CandidateSpec } from "./candidate-pipeline";
-import { loadRecipesV3 } from "./recipe-v3";
+import { loadRecipesAll as loadRecipesV3 } from "./recipe-v3";
 import { UsageLedger } from "./usage-caps";
 import { positionSpread } from "./answer-position";
 
@@ -30,10 +30,11 @@ describe("문학 40% 배치 계획", () => {
   it("장르 제약: 일기·시·희곡·편지는 허용된 문항 유형에만 배정", () => {
     for (const c of plan.cells) { const allow = GENRE_ALLOWED[c.genre as keyof typeof GENRE_ALLOWED]; if (allow) expect(allow).toContain(c.questionType); }
   });
-  it("약한 4유형 hard·medium 셀은 레시피 v3 로 연결, 그 외 hard·medium 은 레시피 없이 난이도 지시문 사용, easy 는 레시피 없음", () => {
+  it("hard 셀은 모두 v4 레시피, 약한 4유형 medium 셀은 v3 레시피, 그 외 medium 은 난이도 지시문, easy 는 레시피 없음", () => {
     const weak = new Set(QTYPES.filter((t) => t.weak).map((t) => t.type));
     for (const c of plan.cells) {
       if (c.difficulty === "easy") expect(c.recipeSource).toBe("none");
+      else if (c.difficulty === "hard") { expect(c.recipeSource).toBe("v4"); expect(c.recipeId).toContain(c.questionType); }
       else if (weak.has(c.questionType)) { expect(c.recipeSource).toBe("v3"); expect(c.recipeId).toContain(c.questionType); }
       else expect(c.recipeSource).toBe("difficulty_tip");
     }
@@ -60,8 +61,8 @@ describe("배치 전개·생성 후 검사", () => {
     expect(a.specs).toHaveLength(batch.candidates);
     expect(a.specs.every((s) => s.words.min >= 60 && s.words.max <= 220)).toBe(true);
     const motivation = a.specs.find((s) => s.questionType === "character_motivation")!;
-    expect(motivation.recipeId).toContain("character_motivation_hard");
-    expect(motivation.words).toEqual({ min: 110, max: 170 });
+    expect(motivation.recipeId).toContain("character_motivation_hard_v4");
+    expect(motivation.words).toEqual({ min: 120, max: 180 });
   });
   const spec = (): CandidateSpec => expandBatch(batch, { ledger: new UsageLedger(), recipes }).specs.find((s) => s.questionType === "character_motivation")!;
   const passage = (n: number) => `Mara folded the apron twice and set the keys beside the register. ` + Array.from({ length: n }, (_, i) => `word${i}`).join(" ");
@@ -104,6 +105,6 @@ describe("배치 전개·생성 후 검사", () => {
     const s = spec();
     const r = recipes.inferences.find((x) => x.id === s.recipeId)!;
     const p = injectedPromptBlock(s, r);
-    for (const k of [s.seed.topicSeed, s.seed.names[0], `정답 위치: 정답 선택지는 반드시 ${s.targetLetter}`, "110~170", "근거 분산"]) expect(p).toContain(k);
+    for (const k of [s.seed.topicSeed, s.seed.names[0], `정답 위치: 정답 선택지는 반드시 ${s.targetLetter}`, "120~180", "근거 분산", "자기 점검"]) expect(p).toContain(k);
   });
 });

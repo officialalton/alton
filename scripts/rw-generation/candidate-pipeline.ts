@@ -6,7 +6,7 @@ import { distractorGate, restatementGate } from "./distractor-gate";
 import { composeSeeds, AVOID_FIRST_WORDS, type LiterarySeed } from "./seed-compose";
 import { UsageLedger, extractUsage, type Violation } from "./usage-caps";
 import { NAME_POOL, BANNED_NAMES } from "./name-pool";
-import { recipePromptBlock, type RecipesV3, type RecipeV3 } from "./recipe-v3";
+import { recipePromptBlock, findRecipe, type RecipesV3, type RecipeV3 } from "./recipe-v3";
 import type { PlanBatch, Route } from "./batch-plan";
 
 export type CandidateSpec = {
@@ -26,7 +26,8 @@ export function expandBatch(
   const seeds = composeSeeds({ n: flat.length, batchId: batch.batchId, ledger: opts.ledger, indexOffset: opts.indexOffset });
   const { letters, counts } = planAnswerPositions(flat.map((f) => ({ skill: f.skill, difficulty: batch.difficulty })), opts.priorPositions);
   const specs = flat.map((f, i): CandidateSpec => {
-    const recipe = (opts.recipes[f.skill] ?? []).find((r) => r.questionType === f.questionType && r.difficulty === batch.difficulty) ?? null;
+    const recipe = findRecipe(opts.recipes, f.skill, f.questionType, batch.difficulty);
+    if (batch.difficulty === "hard" && batch.route === "ai_passage" && !recipe) throw new Error(`hard 후보에 레시피가 없습니다: ${f.skill}/${f.questionType}`);
     // composeSeeds 는 장르를 자체 배분하지만 계획의 장르가 우선한다(유형별 허용 장르 제약을 계획이 이미 반영).
     const seed = { ...seeds[i], genre: f.genre as LiterarySeed["genre"] };
     return {
