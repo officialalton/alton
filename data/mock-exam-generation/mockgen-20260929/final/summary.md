@@ -1,11 +1,11 @@
 | 영역 | skill | 난이도 | 필요량(3세트 +여분2) | 기존 공개(가정) | 신규 생성(파이프라인 통과) | 신규 검수 통과 | 보관 후보 | 최종 | 여분(최종−3세트분) | 미달 | 미달(hard는 medium 여분 대체 후) |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | rw_information_ideas | central_ideas_details | easy | 6 | 0 | 14 | 13 | 1 | 13 | 9 |  |  |
-| rw_information_ideas | central_ideas_details | medium | 15 | 1 | 65 | 40 | 25 | 41 | 28 |  |  |
-| rw_information_ideas | central_ideas_details | hard | 4 | 0 | 10 | 4 | 0 | 4 | 2 |  |  |
+| rw_information_ideas | central_ideas_details | medium | 15 | 1 | 69 | 44 | 25 | 45 | 32 |  |  |
+| rw_information_ideas | central_ideas_details | hard | 4 | 0 | 6 | 0 | 0 | 0 | -2 | 4 |  |
 | rw_information_ideas | inferences | easy | 5 | 0 | 15 | 10 | 5 | 10 | 7 |  |  |
-| rw_information_ideas | inferences | medium | 13 | 0 | 79 | 24 | 55 | 24 | 13 |  |  |
-| rw_information_ideas | inferences | hard | 4 | 1 | 11 | 5 | 0 | 6 | 4 |  |  |
+| rw_information_ideas | inferences | medium | 13 | 0 | 84 | 29 | 55 | 29 | 18 |  |  |
+| rw_information_ideas | inferences | hard | 4 | 1 | 6 | 0 | 0 | 1 | -1 | 3 |  |
 | rw_information_ideas | command_of_evidence_text | easy | 5 | 0 | 17 | 11 | 6 | 11 | 8 |  |  |
 | rw_information_ideas | command_of_evidence_text | medium | 13 | 0 | 52 | 29 | 23 | 29 | 18 |  |  |
 | rw_information_ideas | command_of_evidence_text | hard | 4 | 0 | 0 | 0 | 0 | 0 | -2 | 4 |  |
@@ -13,8 +13,8 @@
 | rw_information_ideas | command_of_evidence_quant | medium | 10 | 1 | 32 | 19 | 13 | 20 | 12 |  |  |
 | rw_information_ideas | command_of_evidence_quant | hard | 3 | 1 | 0 | 0 | 0 | 1 | 0 | 2 |  |
 | rw_craft_structure | words_in_context | easy | 9 | 0 | 74 | 49 | 25 | 49 | 42 |  |  |
-| rw_craft_structure | words_in_context | medium | 23 | 0 | 92 | 37 | 55 | 37 | 16 |  |  |
-| rw_craft_structure | words_in_context | hard | 5 | 0 | 10 | 4 | 0 | 4 | 1 | 1 |  |
+| rw_craft_structure | words_in_context | medium | 23 | 0 | 96 | 41 | 55 | 41 | 20 |  |  |
+| rw_craft_structure | words_in_context | hard | 5 | 0 | 6 | 0 | 0 | 0 | -3 | 5 |  |
 | rw_craft_structure | text_structure_purpose | easy | 7 | 0 | 21 | 19 | 2 | 19 | 14 |  |  |
 | rw_craft_structure | text_structure_purpose | medium | 18 | 0 | 76 | 37 | 39 | 37 | 21 |  |  |
 | rw_craft_structure | text_structure_purpose | hard | 5 | 2 | 0 | 0 | 0 | 2 | -1 | 3 |  |
@@ -85,7 +85,7 @@
 | geometry_trig | circles | easy | 3 | 0 | 8 | 6 | 2 | 6 | 5 |  |  |
 | geometry_trig | circles | medium | 6 | 11 | 7 | 3 | 4 | 14 | 10 |  |  |
 | geometry_trig | circles | hard | 3 | 10 | 0 | 0 | 0 | 10 | 9 |  |  |
-| **sat_rw 합계** | | | 309 | 13 | 1026 | 619 | 377 | 632 | 389 | 32 | 0 |
+| **sat_rw 합계** | | | 309 | 13 | 1026 | 619 | 377 | 632 | 389 | 43 | 0 |
 | **sat_math 합계** | | | 302 | 276 | 602 | 340 | 217 | 616 | 418 | 9 | 0 |
 
 보관 사유 집계: {"answer_mismatch":108,"format_defect":69,"explanation_inconsistent":234,"weak_distractors":205,"factual_error":62,"ambiguous_answer":39,"empty_explanation":23,"raw_latex_in_explanation":13,"near_duplicate_of":31,"raw_latex_in_body":14,"copyright_suspect":4,"render_check_failed":1,"difficulty_unstable":1}

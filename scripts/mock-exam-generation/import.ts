@@ -29,6 +29,8 @@ type Rec = {
   review?: unknown;
   recipeId?: string | null;
   recipeCheck?: unknown;
+  difficultyStatus?: string;
+  quality_extra?: unknown;
   createdVia?: string;
   subpattern?: string | null;
 };
@@ -145,7 +147,7 @@ async function main() {
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }
     const { error: cErr } = await admin.rpc("set_problem_render_check", { p_version_id: versionId, p_check: check });
     if (cErr) { await cleanup1(`렌더 검사 기록 실패 ${cErr.message}`); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, review: r.review ?? null } } });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, difficultyStatus: r.difficultyStatus ?? ((r.quality.mockExamGeneration as Record<string, unknown> | undefined)?.difficultyStatus ?? null), review: r.review ?? null } } });
     if (qErr) failures.push(`${r.gid}: 품질 기록 실패 ${qErr.message}`);
     stats.created += 1;
     pool.push({ problemId: problemId as string, key, sh });
