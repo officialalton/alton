@@ -2,8 +2,7 @@
 import { GenFail, type Archetype } from "../types";
 import { finish, spin, withParams, M, lin, shifted } from "../text";
 import { sem, withOpen, OPEN_GEO, piOpt, piDiff, forbidExcept } from "../c-kit";
-import type { Rng } from "../rng";
-import type { LiteArchetype, Level } from "../c-lite";
+import type { LiteArchetype } from "../c-lite";
 import type { DistractorKind } from "../../review";
 
 const SKILL = "circles";
@@ -11,8 +10,8 @@ const W = (v: number, kind: DistractorKind, reason: string) => ({ v, kind, reaso
 const UNITS = ["meters", "feet", "centimeters", "inches", "yards"] as const;
 const SING: Record<string, string> = { meters: "meter", feet: "foot", centimeters: "centimeter", inches: "inch", yards: "yard" };
 const sq = (u: string) => `square ${u}`;
-const ROUND = [["fountain", "A circular fountain"], ["pond", "A circular pond"], ["rug", "A circular rug"], ["track", "A circular running track"], ["plaza", "A circular plaza"], ["stage", "A circular stage"], ["garden", "A circular garden"], ["pool", "A circular pool"]] as const;
-const WHEELS = [["bicycle wheel", "A bicycle wheel"], ["cart wheel", "A cart wheel"], ["roller", "A paint roller"], ["wheelbarrow wheel", "A wheelbarrow wheel"], ["scooter wheel", "A scooter wheel"], ["gear", "A large gear"]] as const;
+const ROUND = [["fountain", "A circular fountain"], ["pond", "A circular pond"], ["rug", "A circular rug"], ["running track", "A circular running track"], ["plaza", "A circular plaza"], ["stage", "A circular stage"], ["garden", "A circular garden"], ["pool", "A circular pool"], ["roundabout", "A circular roundabout"], ["carousel platform", "A circular carousel platform"], ["dance floor", "A circular dance floor"], ["gazebo floor", "A circular gazebo floor"], ["lawn", "A circular lawn"], ["skating rink", "A circular skating rink"], ["trampoline", "A circular trampoline"], ["drum head", "A circular drum head"], ["coaster", "A circular coaster"], ["table", "A circular table"], ["clock face", "A circular clock face"], ["helipad", "A circular helipad"], ["cake stand", "A circular cake stand"], ["fire pit", "A circular fire pit"], ["sandbox", "A circular sandbox"], ["reflecting pool", "A circular reflecting pool"], ["amphitheater floor", "A circular amphitheater floor"], ["flower bed", "A circular flower bed"], ["water feature", "A circular water feature"], ["game board", "A circular game board"], ["observation deck", "A circular observation deck"], ["mosaic", "A circular mosaic"]] as const;
+const WHEELS = [["bicycle wheel", "A bicycle wheel"], ["cart wheel", "A cart wheel"], ["paint roller", "A paint roller"], ["wheelbarrow wheel", "A wheelbarrow wheel"], ["scooter wheel", "A scooter wheel"], ["large gear", "A large gear"], ["skateboard wheel", "A skateboard wheel"], ["tractor wheel", "A tractor wheel"], ["roller skate wheel", "A roller skate wheel"], ["wagon wheel", "A wagon wheel"], ["office chair wheel", "An office chair wheel"], ["toy car wheel", "A toy car wheel"], ["lawn mower wheel", "A lawn mower wheel"], ["stroller wheel", "A stroller wheel"], ["shopping cart wheel", "A shopping cart wheel"]] as const;
 const PYTH = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [8, 15, 17], [9, 12, 15], [12, 16, 20], [7, 24, 25], [15, 20, 25]] as const;
 const PI_DEGREES: [number, string][] = [[60, "60"], [90, "90"], [120, "120"], [45, "45"], [72, "72"], [150, "150"], [30, "30"], [135, "135"], [40, "40"], [80, "80"]];
 const term2 = (c: number, v: string) => (c === 0 ? "" : ` ${c > 0 ? "+" : "-"} ${Math.abs(c) === 1 ? "" : Math.abs(c)}${v}`);
@@ -38,7 +37,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           ["넓이는 πr² 이다.", "Area formula."],
           [`π × ${r2}² = ${coef}π 이다.`, "Compute the area."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: C, words: ["circumference"] }, { v: k, words: ["less", "radius"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
@@ -63,7 +62,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`${2 * r * n}π ÷ 100 = ${coef}π m 이다.`, "Distance in meters."],
           [`이동 거리는 ${coef}π 미터이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["radius"] }, { v: n, words: ["rotations", "turns", "revolutions", "complete"] }], { words: ["meters", "distance", "travel"], forbid: forbidExcept() });
     },
@@ -75,13 +74,14 @@ export const CI_ARCHETYPES: Archetype[] = [
     concepts: ["원의 넓이", "내접(변=지름)", "정사각형 넓이"], mediumSteps: 1,
     generate(rng) {
       const r = rng.int(2, 14); const sqA = 4 * r * r, cA = r * r; const [nm, who] = rng.pick([["tile", "A square tile"], ["window", "A square window"], ["coaster", "A square coaster"], ["sign", "A square sign"], ["panel", "A square wall panel"], ["cake box", "A square cake box"]]); const u = rng.pick(UNITS);
-      const stimulus = spin(rng, `${who} has a circle drawn inside it. The circle has a radius of ${r} ${u} and touches all four sides of the square.`);
+      const whoL = who[0].toLowerCase() + who.slice(1);
+      const stimulus = spin(rng, `[[${who} has a circle drawn inside it. The circle has a radius of ${r} ${u} and touches all four sides of the square.|A circle with a radius of ${r} ${u} is drawn inside ${whoL} so that it touches all four sides of the square.|Inside ${whoL}, a circle of radius ${r} ${u} is drawn tangent to every side of the square.]]`);
       const wrongs: { text: string; kind: DistractorKind; reason: string }[] = [
         { text: piDiff(sqA, 2 * cA), kind: "formula_misuse", reason: "원의 넓이를 2πr² 로 계산했다." }, { text: piDiff(r * r, cA), kind: "geometry_misapplied", reason: "정사각형의 변을 반지름으로 착각했다." },
         { text: piDiff(2 * sqA, cA), kind: "geometry_misapplied", reason: "정사각형의 한 변을 4r 로 계산했다(변 = 지름이 아님)." }, { text: piDiff(sqA, 4 * cA), kind: "geometry_misapplied", reason: "반지름 대신 지름으로 원의 넓이를 계산했다." }, { text: piOpt(cA), kind: "step_missing", reason: "원의 넓이만 답했다." },
       ];
       return sem(finish(rng, {
-        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the area of the region inside the square but outside the circle, in ${sq(u)}?|Find the area of the part of the square that is not covered by the circle, in ${sq(u)}.|How many ${sq(u)} of the square lie outside the circle?]]`), correctText: piDiff(sqA, cA), wrongTexts: wrongs, evalAt: {},
+        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the area of the region inside the square but outside the circle, in ${sq(u)}?|Find the area of the part of the square that is not covered by the circle, in ${sq(u)}.|How many ${sq(u)} of the square lie outside the circle?|Determine the area, in ${sq(u)}, of the square that remains uncovered by the circle.]]`), correctText: piDiff(sqA, cA), wrongTexts: wrongs, evalAt: {},
         verificationJs: withParams({ r }, "const side=2*P.r; const square=side*side; const circleCoef=P.r*P.r; return square-circleCoef;"),
         trace: [
           [`원이 정사각형의 네 변에 닿으므로 정사각형의 한 변은 원의 지름 ${2 * r} 이다.`, "The side of the square equals the diameter."],
@@ -90,7 +90,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           ["구하는 영역은 정사각형에서 원을 뺀 부분이다.", "The region is the difference."],
           [`넓이 = ${sqA} − ${cA}π 이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       }), [{ v: r, words: ["radius"] }], { words: ["area", "outside"], forbid: [] });
     },
   },
@@ -113,7 +113,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`차이는 ${2 * rA}π − ${dB}π 이다.`, "Subtract."],
           [`따라서 ${coef}π 이다.`, "Answer."],
         ],
-        variant: x.split(" ")[0].toLowerCase(),
+        variant: "frame",
       });
       return sem(out, [{ v: rA, words: ["radius"] }, { v: dB, words: ["diameter"] }], { words: ["circumference"], forbid: forbidExcept("circumference") });
     },
@@ -138,7 +138,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`바깥 지름은 ${C + 2 * w} 이다.`, "Outer diameter."],
           [`바깥 둘레는 π × ${C + 2 * w} = ${coef}π 이다.`, "Outer circumference."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: C, words: ["circumference"] }, { v: w, words: ["width"] }], { words: ["circumference", "outer edge"], forbid: forbidExcept("circumference") });
     },
@@ -151,7 +151,7 @@ export const CI_ARCHETYPES: Archetype[] = [
     generate(rng) {
       const d = rng.pick([20, 25, 40, 50, 60, 30, 45, 80]), R = rng.int(2, 30); const coef = (d * R) / 100; if (!Number.isInteger(coef) || coef < 1 || coef > 300 || d === R) throw new GenFail("x");
       const [nm, who] = rng.pick([["wheel", "A delivery cart wheel"], ["roller", "A conveyor roller"], ["drum", "A rotating drum"], ["tire", "A bicycle tire"], ["pulley", "A pulley"]]);
-      const stimulus = spin(rng, `${who} has a diameter of ${d} centimeters. It rotates at a constant rate of ${R} complete [[rotations|turns|revolutions]] per minute, and its edge moves along a belt without slipping.`);
+      const stimulus = spin(rng, `[[${who} has a diameter of ${d} centimeters. It rotates at a constant rate of ${R} complete rotations per minute, and its edge moves along a belt without slipping.|The diameter of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${d} centimeters. It makes ${R} complete turns every minute, and a belt along its edge never slips.|${who} with a diameter of ${d} centimeters spins at a steady ${R} complete revolutions per minute while its edge drives a belt that does not slip.]]`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[How many meters does a point on the edge of the ${nm} travel in one minute, in terms of π?|In one minute, how many meters does the edge of the ${nm} move, in terms of π?|What distance, in meters per minute, does the edge move? Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
         wrongs: [W(coef * 100, "unit_error", "cm 를 m 로 환산하지 않았다."), W(coef * 2, "geometry_misapplied", "지름을 반지름처럼 보고 2πd 로 계산했다."), W(coef / R, "step_missing", "한 바퀴의 이동 거리만 구했다."), W(coef / 2, "formula_misuse", "둘레를 πd/2 로 계산했다."), W((d * d * R) / 400, "geometry_misapplied", "둘레 대신 넓이 계수를 계산했다.")],
@@ -163,7 +163,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`${d * R}π ÷ 100 = ${coef}π m 이다.`, "Convert to meters."],
           [`분당 ${coef}π 미터를 이동한다.`, "Answer."],
         ],
-        variant: nm,
+        variant: "frame",
       });
       return sem(out, [{ v: d, words: ["diameter"] }, { v: R, words: ["rotations", "turns", "revolutions", "complete"] }], { words: ["meters", "distance", "travel", "move"], forbid: forbidExcept() });
     },
@@ -175,7 +175,7 @@ export const CI_ARCHETYPES: Archetype[] = [
     concepts: ["정사각형 둘레", "내접원의 지름", "원의 둘레"], mediumSteps: 2,
     generate(rng) {
       const s = rng.int(3, 24), P = 4 * s; const [nm, who] = rng.pick([["coaster", "A square coaster"], ["tabletop", "A square tabletop"], ["floor tile", "A square floor tile"], ["picture frame", "A square picture frame"], ["sandbox", "A square sandbox"]]); const u = rng.pick(UNITS);
-      const stimulus = spin(rng, `${who} has a perimeter of ${P} ${u}. The largest possible circle is cut from it, and the circle touches all four sides of the square.`);
+      const stimulus = spin(rng, `[[${who} has a perimeter of ${P} ${u}. The largest possible circle is cut from it, and the circle touches all four sides of the square.|The perimeter of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${P} ${u}. A circle as large as possible is cut out of it, and this circle touches all four sides.|From ${who.charAt(0).toLowerCase() + who.slice(1)} with a perimeter of ${P} ${u}, the biggest circle that fits is cut out, tangent to each of the four sides.]]`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the circumference of the circle, in ${u}, in terms of π?|Find the circumference of the circle, in ${u}, in terms of π.|How long is the circle's circumference, in ${u}? Give the answer in terms of π.]]`), correct: s, fmt: piOpt,
         wrongs: [W(P, "geometry_misapplied", "정사각형의 둘레를 π 계수로 답했다."), W(2 * s, "geometry_misapplied", "한 변을 반지름으로 착각해 2πr 로 계산했다."), W(s / 2, "formula_misuse", "지름을 반으로 나눠 πr 로 계산했다."), W(s * s, "geometry_misapplied", "원의 넓이 계수를 답했다."), W(P / 2, "step_missing", "정사각형 한 변을 구하지 않고 반둘레를 사용했다.")],
@@ -187,7 +187,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           ["원의 둘레는 πd 이다.", "Circumference formula."],
           [`둘레 = π × ${s} = ${s}π 이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: P, words: ["perimeter"] }], { words: ["circumference"], forbid: forbidExcept("circumference") });
     },
@@ -200,7 +200,7 @@ export const CI_ARCHETYPES: Archetype[] = [
     generate(rng) {
       const dA = rng.pick([12, 16, 18, 20, 24, 30, 36, 40]), dB = rng.pick([6, 8, 9, 10, 12, 15, 18, 20, 4, 5]), n = rng.int(2, 20); if (dA <= dB || (n * dA) % dB !== 0) throw new GenFail("x"); const ans = (n * dA) / dB; if (ans > 200 || n === dA || n === dB || ans === n) throw new GenFail("x");
       const [A, B] = rng.pick([["Gear A", "Gear B"], ["Pulley A", "Pulley B"], ["Wheel A", "Wheel B"], ["Cog A", "Cog B"]]);
-      const stimulus = spin(rng, `${A} has a diameter of ${dA} centimeters and ${B} has a diameter of ${dB} centimeters. The two are connected by a belt that does not slip, so points on their edges always move the same distance. ${A} makes ${n} complete turns.`);
+      const stimulus = spin(rng, `[[${A} has a diameter of ${dA} centimeters and ${B} has a diameter of ${dB} centimeters.|The diameter of ${A} is ${dA} centimeters, while the diameter of ${B} is ${dB} centimeters.|Two round parts, ${A} and ${B}, have diameters of ${dA} centimeters and ${dB} centimeters, respectively.]] [[The two are connected by a belt that does not slip, so points on their edges always move the same distance.|A belt that never slips joins them, so their edges always travel equal distances.|Because a non-slipping belt links them, a point on either edge moves the same distance as a point on the other.]] [[${A} makes ${n} complete turns.|${A} is turned through exactly ${n} complete turns.|In some time, ${A} completes ${n} full turns.]]`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[How many complete turns does ${B} make?|How many complete turns does ${B} make in that time?|Find the number of complete turns made by ${B}.]]`), correct: ans,
         wrongs: [W((n * dB) / dA, "formula_misuse", "비를 거꾸로(작은 바퀴가 덜 돈다고) 적용했다."), W(n, "step_missing", "두 바퀴가 같은 횟수로 돈다고 보았다."), W((n * dA * dA) / (dB * dB), "geometry_misapplied", "지름비의 제곱(넓이비)을 사용했다."), W(n * dA, "step_missing", "이동 거리(π 제외)를 회전 수로 답했다."), W(n + (dA - dB), "other", "지름의 차이를 더했다.")],
@@ -212,9 +212,9 @@ export const CI_ARCHETYPES: Archetype[] = [
           ["벨트가 미끄러지지 않으므로 두 가장자리가 움직인 거리는 같다.", "The distances are equal."],
           [`${B} 의 회전 수는 ${n * dA}π ÷ ${dB}π = ${ans} 이다.`, "Divide the distance by B's circumference."],
         ],
-        variant: A.split(" ")[0].toLowerCase(),
+        variant: "frame",
       });
-      return sem(out, [{ v: dA, words: ["diameter"] }, { v: dB, words: ["diameter"] }, { v: n, words: ["turns", "makes", "complete"] }], { words: ["turns"], forbid: forbidExcept() });
+      return sem(out, [{ v: dA, words: ["diameter", "diameters"] }, { v: dB, words: ["diameter", "diameters"] }, { v: n, words: ["turns", "makes", "complete"] }], { words: ["turns"], forbid: forbidExcept() });
     },
   },
   // ───────────── arc_length ─────────────
@@ -237,7 +237,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           ["원둘레는 πd 이므로 지름은 π 를 약분해 구한다.", "Diameter from circumference."],
           [`지름 = ${d} 이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: L, words: ["arc", "length"] }, { v: th, words: ["angle", "degrees"] }], { words: ["diameter"], forbid: forbidExcept("diameter") });
     },
@@ -261,7 +261,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`호의 길이 = (${big}/360) × ${2 * r}π 이다.`, "Multiply."],
           [`따라서 ${coef}π 이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["radius"] }, { v: th, words: ["angle", "degrees"] }], { words: ["major arc"], forbid: forbidExcept("arc", "length") });
     },
@@ -286,7 +286,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`원둘레는 2π × ${r} = ${2 * r}π 이다(분침의 길이가 반지름).`, "The hand length is the radius."],
           [`호의 길이 = (${6 * m}/360) × ${2 * r}π = ${coef}π 이다.`, "Arc length."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["hand", "long"] }, { v: m, words: ["minutes"] }], { words: ["travel", "move", "distance"], forbid: forbidExcept() });
     },
@@ -311,7 +311,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`${k} 조각이므로 ${k} 를 곱한다.`, "Multiply by the number of slices."],
           [`총 호의 길이는 ${coef}π 이다.`, "Answer."],
         ],
-        variant: pl,
+        variant: "frame",
       });
       return sem(out, [{ v: d, words: ["diameter"] }, { v: n, words: ["slices", "cut", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["length", "edge", "arc"], forbid: forbidExcept("arc", "length") });
     },
@@ -336,7 +336,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`원둘레는 2π × ${r} = ${2 * r}π 이다.`, "Circumference."],
           [`호의 길이 = (${th}/360) × ${2 * r}π = ${L}π 이다.`, "Arc length."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: A, words: ["area"] }, { v: th, words: ["angle", "degrees"] }], { words: ["arc"], forbid: forbidExcept("arc", "length") });
     },
@@ -360,7 +360,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`원 전체의 넓이는 π × ${r}² = ${r * r}π 이다.`, "Full area."],
           [`부채꼴의 넓이 = (${L}/${2 * r}) × ${r * r}π = ${A}π 이다.`, "Sector area."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["radius"] }, { v: L, words: ["arc", "length"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
@@ -373,7 +373,7 @@ export const CI_ARCHETYPES: Archetype[] = [
     generate(rng) {
       const a = rng.int(1, 4), b = rng.int(a + 1, 6), c = rng.int(b + 1, 9); const T = a + b + c; const r = rng.int(3, 24); if (T > 18 || (r * r * c) % T !== 0) throw new GenFail("x"); const coef = (r * r * c) / T; if (coef > 400 || r === a || r === b || r === c || r === T) throw new GenFail("x");
       const [nm, who] = rng.pick([["budget chart", "A circular budget chart"], ["survey chart", "A circular survey chart"], ["pie chart", "A circular pie chart"], ["time chart", "A circular time-use chart"], ["sales chart", "A circular sales chart"]]); const u = rng.pick(UNITS);
-      const stimulus = spin(rng, `${who} is divided into three sectors whose central angles are in the ratio ${a} : ${b} : ${c}. The circle has a radius of ${r} ${u}.`);
+      const stimulus = spin(rng, `[[${who} is divided into three sectors whose central angles are in the ratio ${a} : ${b} : ${c}. The circle has a radius of ${r} ${u}.|The circle in ${who.charAt(0).toLowerCase() + who.slice(1)} has a radius of ${r} ${u}. Its three sectors have central angles in the ratio ${a} : ${b} : ${c}.|${who} has three sectors, and their central angles are in the ratio ${a} : ${b} : ${c}; the radius of the whole circle is ${r} ${u}.]]`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the area of the largest sector, in ${sq(u)}, in terms of π?|Find the area of the largest sector, in ${sq(u)}, in terms of π.|How many ${sq(u)} does the largest sector cover, in terms of π?]]`), correct: coef, fmt: piOpt,
         wrongs: [W((r * r * a) / T, "other", "가장 작은 부채꼴의 넓이를 답했다."), W((r * r * b) / T, "other", "중간 부채꼴의 넓이를 답했다."), W(r * r, "step_missing", "원 전체의 넓이를 답했다."), W((r * r * c) / (a + b), "formula_misuse", "비의 전체를 a+b 로 잡았다."), W((r * r) / c, "formula_misuse", "비를 거꾸로 사용했다.")],
@@ -385,7 +385,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`원의 넓이는 π × ${r}² = ${r * r}π 이다.`, "Area of the circle."],
           [`부채꼴의 넓이 = (${c}/${T}) × ${r * r}π = ${coef}π 이다.`, "Sector area."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["radius"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
@@ -436,7 +436,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`${a - 2}x = ${k} 이므로 x = ${x} 이다.`, "Solve for x."],
           [`중심각은 2 × ${x} = ${2 * x}° 이다.`, "Central angle."],
         ],
-        variant: `a${a}`,
+        variant: "frame",
       });
       return sem(out, [{ v: k, words: ["less"] }, { v: a, words: ["times"] }], { words: ["angle"], forbid: [] });
     },
@@ -498,7 +498,7 @@ export const CI_ARCHETYPES: Archetype[] = [
       const m = rng.pick([14, 18, 20, 24, 30, 36, 40]), lo = rng.int(30, 120), hi = lo + rng.int(90, 200); if (hi >= 360) throw new GenFail("x");
       const cs: number[] = []; for (let c = lo + 1; c < hi; c++) if (c % m === 0) cs.push(c); if (cs.length < 3 || cs.length > 8) throw new GenFail("x");
       const [P, Q] = rng.pick([["A", "B"], ["P", "Q"], ["R", "S"]]); const c0 = rng.pick(["C", "D"]);
-      const stimulus = spin(rng, `In a circle with center O, inscribed angle ${P}${c0}${Q} and central angle ${P}O${Q} intercept the same arc. The measure of angle ${P}O${Q} is a multiple of ${m} degrees and is greater than ${lo} degrees but less than ${hi} degrees.`);
+      const stimulus = spin(rng, `[[In a circle with center O, inscribed angle ${P}${c0}${Q} and central angle ${P}O${Q} intercept the same arc.|Angle ${P}${c0}${Q} is an inscribed angle of a circle with center O, and angle ${P}O${Q} is the central angle on the same arc.|A circle has center O. Inscribed angle ${P}${c0}${Q} and central angle ${P}O${Q} cut off the same arc.]] [[The measure of angle ${P}O${Q} is a multiple of ${m} degrees and is greater than ${lo} degrees but less than ${hi} degrees.|Angle ${P}O${Q} measures a multiple of ${m} degrees, with more than ${lo} degrees but fewer than ${hi} degrees.|The central angle is a multiple of ${m} degrees lying strictly between ${lo} degrees and ${hi} degrees.]]`);
       const n = cs.length;
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[How many different whole-number measures are possible for angle ${P}${c0}${Q}?|How many possible whole-number values does the inscribed angle ${P}${c0}${Q} have?|Find the number of possible whole-number measures of angle ${P}${c0}${Q}.]]`), correct: n,
@@ -511,9 +511,9 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`각각을 반으로 나누면 원주각은 ${cs.map((v) => v / 2).join(", ")} 이다(모두 정수).`, "Halve each."],
           [`따라서 ${n} 가지이다.`, "Count."],
         ],
-        variant: `m${m}`,
+        variant: "frame",
       });
-      return sem(out, [{ v: m, words: ["multiple"] }, { v: lo, words: ["greater"] }, { v: hi, words: ["less"] }], { words: ["how many", "number of"], forbid: [] });
+      return sem(out, [{ v: m, words: ["multiple"] }, { v: lo, words: ["greater", "more", "between", "strictly"] }, { v: hi, words: ["less", "fewer", "between", "strictly"] }], { words: ["how many", "number of"], forbid: [] });
     },
   },
   // ───────────── inscribed_from_central ─────────────
@@ -574,7 +574,7 @@ export const CI_ARCHETYPES: Archetype[] = [
       const m = rng.pick([5, 6, 7, 8, 9, 10, 12]), lo = rng.int(40, 150), hi = lo + rng.int(80, 190); if (hi >= 360) throw new GenFail("x");
       const cs: number[] = []; for (let c = lo + 1; c < hi; c++) if (c % 2 === 0 && (c / 2) % m === 0) cs.push(c); if (cs.length < 3 || cs.length > 9) throw new GenFail("x");
       const [P, Q] = rng.pick([["A", "B"], ["P", "Q"], ["R", "S"]]); const t = rng.pick(["C", "D"]); const n = cs.length;
-      const stimulus = spin(rng, `In a circle with center O, central angle ${P}O${Q} is greater than ${lo} degrees but less than ${hi} degrees. The inscribed angle ${P}${t}${Q} intercepts the same arc, and its measure is a whole number of degrees that is a multiple of ${m}.`);
+      const stimulus = spin(rng, `[[In a circle with center O, central angle ${P}O${Q} is greater than ${lo} degrees but less than ${hi} degrees.|A circle has center O, and central angle ${P}O${Q} lies strictly between ${lo} degrees and ${hi} degrees.|Central angle ${P}O${Q} of a circle with center O measures more than ${lo} degrees but fewer than ${hi} degrees.]] [[The inscribed angle ${P}${t}${Q} intercepts the same arc, and its measure is a whole number of degrees that is a multiple of ${m}.|Inscribed angle ${P}${t}${Q} cuts off the same arc; its measure is a whole number of degrees and a multiple of ${m}.|On that same arc, the inscribed angle ${P}${t}${Q} has a whole-number measure in degrees that is a multiple of ${m}.]]`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[How many different measures are possible for central angle ${P}O${Q}?|How many possible values does the central angle ${P}O${Q} have, in degrees?|Find the number of possible measures of angle ${P}O${Q}.]]`), correct: n,
         wrongs: [W(n + 1, "other", "경계값을 포함해 하나 더 셌다."), W(n - 1, "other", "경계 근처의 값을 하나 빠뜨렸다."), W(Math.floor((hi - lo) / m), "formula_misuse", "중심각의 간격을 m 으로 잘못 계산했다."), W(Math.floor((hi - lo) / (4 * m)), "formula_misuse", "간격을 4m 으로 잘못 계산했다."), W(Math.floor((hi - lo) / 2), "formula_misuse", "짝수만 센다고 어림했다.")],
@@ -586,9 +586,9 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`각각의 원주각은 ${cs.map((v) => v / 2).join(", ")} 이고 모두 ${m} 의 배수이다.`, "Check the inscribed angles."],
           [`따라서 ${n} 가지이다.`, "Count."],
         ],
-        variant: `m${m}`,
+        variant: "frame",
       });
-      return sem(out, [{ v: lo, words: ["greater"] }, { v: hi, words: ["less"] }, { v: m, words: ["multiple"] }], { words: ["how many", "number of"], forbid: [] });
+      return sem(out, [{ v: lo, words: ["greater", "more", "between", "strictly"] }, { v: hi, words: ["less", "fewer", "between", "strictly"] }, { v: m, words: ["multiple"] }], { words: ["how many", "number of"], forbid: [] });
     },
   },
   {
@@ -610,7 +610,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           [`${b - 2 === 1 ? "" : b - 2}x = ${2 * a - c} 이므로 x = ${x} 이다.`, "Solve for x."],
           [`원주각 = ${x} ${a >= 0 ? "+" : "−"} ${Math.abs(a)} = ${ans}° 이다.`, "Evaluate the inscribed angle."],
         ],
-        variant: `b${b}`,
+        variant: "frame",
       });
       return sem(out, [], { words: ["angle"], forbid: [] });
     },
@@ -712,7 +712,7 @@ export const CI_ARCHETYPES: Archetype[] = [
           ["각 쌍은 부호(±)와 순서를 바꾸면 서로 다른 점이 된다(0 이 있으면 부호 중복 제외).", "Count signs and orders."],
           [`모두 ${cnt} 개이다.`, "Total."],
         ],
-        variant: `R${R}`,
+        variant: "frame",
       });
       return sem(out, [], { words: ["integer"], forbid: [] });
     },
@@ -720,26 +720,25 @@ export const CI_ARCHETYPES: Archetype[] = [
 ];
 
 // ───────────────────────── easy / medium 원형(lite) — 14개 틀 ─────────────────────────
-const NICE_ANGLES = [60, 90, 120, 180, 45, 72, 150, 30, 135, 40] as const;
 export const CI_LITE: LiteArchetype[] = [
   {
     id: "ci.circumference_radius.wheel", skill: SKILL, kind: "circumference_radius", frame: "wheel", levels: ["easy", "medium"], structure: "바퀴 한 바퀴의 둘레 2πr(easy) / n 바퀴 이동 거리(medium)",
     generate(rng, level) {
       const r = rng.int(2, level === "easy" ? 15 : 12), n = rng.int(2, 9); if (r === n) throw new GenFail("x"); const [nm, who] = rng.pick(WHEELS); const u = rng.pick(["centimeters", "inches", "meters", "feet"] as const); const coef = level === "easy" ? 2 * r : 2 * r * n;
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `${who} has a radius of ${r} ${u}.${level === "easy" ? "" : ` It rolls straight ahead and makes exactly ${n} complete turns.`}`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the circumference of the ${nm}, in ${u}, in terms of π?|Find the circumference of the ${nm}, in ${u}, in terms of π.]]` : `[[How far does the ${nm} roll, in ${u}, in terms of π?|What distance does the ${nm} cover in those turns, in ${u}? Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `[[${who} has a radius of ${r} ${u}.|The radius of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${r} ${u}.|${who} is a circle of radius ${r} ${u}.]]${level === "easy" ? "" : ` [[It rolls straight ahead and makes exactly ${n} complete turns.|It rolls along the ground through exactly ${n} complete turns.|It goes through exactly ${n} full turns as it rolls forward.]]`}`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the circumference of the ${nm}, in ${u}, in terms of π?|Find the circumference of the ${nm}, in ${u}, in terms of π.|How long is the edge of the ${nm}, in ${u}? Give the answer in terms of π.]]` : `[[How far does the ${nm} roll, in ${u}, in terms of π?|What distance does the ${nm} cover in those turns, in ${u}? Give the answer in terms of π.|Find the total distance rolled, in ${u}, in terms of π.]]`), correct: coef, fmt: piOpt,
         wrongs: [W(coef / 2, "formula_misuse", "둘레를 πr 로 계산했다."), W(level === "easy" ? r * r : r * r * n, "geometry_misapplied", "둘레 대신 넓이 계수를 계산했다."), W(coef * 2, "geometry_misapplied", "반지름을 지름처럼 취급했다."), W(level === "easy" ? coef + 2 : 2 * r, "step_missing", level === "easy" ? "계산 실수." : "한 바퀴의 거리만 답했다.")],
         verificationJs: withParams({ r, n: level === "easy" ? 1 : n }, "let d=0; for(let i=0;i<P.n;i++) d+=2*P.r;\nreturn d;"),
         trace: [[`둘레 = 2π × ${r} = ${2 * r}π 이다.`, "Circumference."], ...(level === "easy" ? [] : [[`${n} 바퀴이므로 ${2 * r}π × ${n} = ${coef}π 이다.`, "Multiply by the number of turns."] as [string, string]])], variant: level === "easy" ? "circumference" : "distance" });
-      return sem(out, [{ v: r, words: ["radius"] }, ...(level === "easy" ? [] : [{ v: n, words: ["turns", "complete"] }])], { words: level === "easy" ? ["circumference"] : ["far", "distance", "roll"], forbid: forbidExcept(...(level === "easy" ? ["circumference"] : [])) });
+      return sem(out, [{ v: r, words: ["radius"] }, ...(level === "easy" ? [] : [{ v: n, words: ["turns", "complete"] }])], { words: level === "easy" ? ["circumference", "edge"] : ["far", "distance", "roll"], forbid: forbidExcept(...(level === "easy" ? ["circumference"] : [])) });
     },
   },
   {
     id: "ci.circumference_radius.fence", skill: SKILL, kind: "circumference_radius", frame: "fence", levels: ["easy", "medium"], structure: "원형 정원 울타리 길이 2πr(easy) / 단가를 곱한 비용(medium)",
     generate(rng, level) {
       const r = rng.int(3, 20), cost = rng.pick([2, 3, 4, 5, 6, 8]); if (r === cost) throw new GenFail("x"); const [nm, who] = rng.pick(ROUND); const u = rng.pick(UNITS); const coef = level === "easy" ? 2 * r : 2 * r * cost;
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `${who} has a radius of ${r} ${u}. A fence will be built along its entire edge.${level === "easy" ? "" : ` The fence costs ${cost} dollars for each ${SING[u]} of fencing.`}`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[How many ${u} of fencing are needed, in terms of π?|What length of fence is needed around the ${nm}, in ${u}? Give the answer in terms of π.]]` : `[[What is the total cost of the fence, in dollars, in terms of π?|How many dollars will the fence around the ${nm} cost? Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `[[${who} has a radius of ${r} ${u}. A fence will be built along its entire edge.|The radius of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${r} ${u}, and a fence is to run all the way along its edge.|${who} with a radius of ${r} ${u} is going to be fenced in around its whole edge.]]${level === "easy" ? "" : ` [[The fence costs ${cost} dollars for each ${SING[u]} of fencing.|Fencing is priced at ${cost} dollars for every ${SING[u]}.|Each ${SING[u]} of fence costs ${cost} dollars.]]`}`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[How many ${u} of fencing are needed, in terms of π?|What length of fence is needed around the ${nm}, in ${u}? Give the answer in terms of π.|Find the total amount of fencing, in ${u}, in terms of π.]]` : `[[What is the total cost of the fence, in dollars, in terms of π?|How many dollars will the fence around the ${nm} cost? Give the answer in terms of π.|Find the cost of fencing the whole edge, in dollars, in terms of π.]]`), correct: coef, fmt: piOpt,
         wrongs: [W(coef / 2, "formula_misuse", "둘레를 πr 로 계산했다."), W(level === "easy" ? r * r : r * r * cost, "geometry_misapplied", "둘레 대신 넓이 계수를 계산했다."), W(coef * 2, "geometry_misapplied", "반지름을 지름처럼 취급했다."), W(level === "easy" ? coef + 2 : 2 * r, "step_missing", level === "easy" ? "계산 실수." : "단가를 곱하지 않았다.")],
         verificationJs: withParams({ r, cost: level === "easy" ? 1 : cost }, "let t=0; for(let i=0;i<2*P.r;i++) t+=P.cost;\nreturn t;"),
         trace: [[`울타리의 길이는 원둘레 2π × ${r} = ${2 * r}π 이다.`, "Fence length is the circumference."], ...(level === "easy" ? [] : [[`비용 = ${2 * r}π × ${cost} = ${coef}π 달러이다.`, "Multiply by the unit cost."] as [string, string]])], variant: level === "easy" ? "length" : "cost" });
@@ -750,24 +749,24 @@ export const CI_LITE: LiteArchetype[] = [
     id: "ci.circumference_diameter.pizza", skill: SKILL, kind: "circumference_diameter", frame: "pizza", levels: ["easy", "medium"], structure: "지름으로 둘레 πd(easy) / 두 원의 둘레 차(medium)",
     generate(rng, level) {
       const d1 = rng.int(4, 30), d2 = rng.int(d1 + 2, 40); if (d1 === d2) throw new GenFail("x"); const [nm, who] = rng.pick([["pizza", "A round pizza"], ["pie", "A round pie"], ["tray", "A round serving tray"], ["plate", "A large round plate"], ["cake", "A round cake"], ["table", "A round table"]]); const u = rng.pick(["inches", "centimeters"] as const); const coef = level === "easy" ? d1 : d2 - d1;
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `${who} has a diameter of ${d1} ${u}.` : `${who} has a diameter of ${d1} ${u}. A larger one has a diameter of ${d2} ${u}.`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the circumference of the ${nm}, in ${u}, in terms of π?|Find the circumference of the ${nm}, in ${u}, in terms of π.]]` : `[[By how many ${u} is the circumference of the larger one greater than that of the smaller one, in terms of π?|What is the difference between the two circumferences, in ${u}, in terms of π?]]`), correct: coef, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `[[${who} has a diameter of ${d1} ${u}.|The diameter of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${d1} ${u}.|${who} measures ${d1} ${u} across, through its center.]]` : `[[${who} has a diameter of ${d1} ${u}. A larger one has a diameter of ${d2} ${u}.|${who} has a diameter of ${d1} ${u}, and a bigger one of the same kind has a diameter of ${d2} ${u}.|Two round items are the same kind: the smaller has a diameter of ${d1} ${u} and the larger has a diameter of ${d2} ${u}.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the circumference of the ${nm}, in ${u}, in terms of π?|Find the circumference of the ${nm}, in ${u}, in terms of π.|How far is it around the ${nm}, in ${u}? Give the answer in terms of π.|Determine the circumference of the ${nm} in ${u}, in terms of π.]]` : `[[By how many ${u} is the circumference of the larger one greater than that of the smaller one, in terms of π?|What is the difference between the two circumferences, in ${u}, in terms of π?|How much longer, in ${u}, is the distance around the larger one than around the smaller one? Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
         wrongs: [W(coef * 2, "geometry_misapplied", "지름을 반지름처럼 보고 2πd 로 계산했다."), W(coef / 2, "formula_misuse", "둘레를 πd/2 로 계산했다."), W(level === "easy" ? (d1 * d1) / 4 : (d2 * d2 - d1 * d1) / 4, "geometry_misapplied", level === "easy" ? "둘레 대신 넓이 계수를 계산했다." : "넓이의 차를 구했다."), W(level === "easy" ? coef + 2 : d1 + d2, level === "easy" ? "other" : "sign_error", level === "easy" ? "계산 실수." : "둘레를 더했다.")],
         verificationJs: withParams(level === "easy" ? { d1, d2: 0, easy: 1 } : { d1, d2, easy: 0 }, "return P.easy? P.d1 : P.d2-P.d1;"),
         trace: level === "easy" ? [[`둘레 = π × ${d1} = ${d1}π 이다.`, "Circumference."]] : [[`작은 원의 둘레는 ${d1}π, 큰 원의 둘레는 ${d2}π 이다.`, "Both circumferences."], [`차이는 ${d2}π − ${d1}π = ${d2 - d1}π 이다.`, "Subtract."]], variant: level === "easy" ? "circumference" : "difference" });
-      return sem(out, [{ v: d1, words: ["diameter"] }, ...(level === "easy" ? [] : [{ v: d2, words: ["diameter"] }])], { words: level === "easy" ? ["circumference"] : ["circumference", "difference"], forbid: forbidExcept("circumference") });
+      return sem(out, [{ v: d1, words: ["diameter", "across"] }, ...(level === "easy" ? [] : [{ v: d2, words: ["diameter"] }])], { words: level === "easy" ? ["circumference", "around"] : ["circumference", "difference", "around", "longer"], forbid: forbidExcept("circumference") });
     },
   },
   {
     id: "ci.circumference_diameter.rope", skill: SKILL, kind: "circumference_diameter", frame: "rope", levels: ["easy", "medium"], structure: "기둥을 한 바퀴 감는 끈의 길이 πd(easy) / k 바퀴 감는 끈의 길이(medium)",
     generate(rng, level) {
       const d = rng.int(3, 30), k = rng.int(2, 9); if (d === k) throw new GenFail("x"); const [nm, who] = rng.pick([["pole", "A rope"], ["pipe", "A cord"], ["post", "A ribbon"], ["barrel", "A strap"], ["tree trunk", "A cable"], ["column", "A string of lights"]]); const u = rng.pick(["inches", "centimeters", "feet"] as const); const coef = level === "easy" ? d : d * k;
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `${who} is wrapped around a cylindrical ${nm} that has a diameter of ${d} ${u}.${level === "easy" ? " The wrapping goes around the outside exactly once." : ` The material goes around the outside exactly ${k} times.`}`));
-      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the length of the material used for the wrapping, in ${u}, in terms of π?|How long is the wrapping, in ${u}? Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `[[${who} is wrapped around a cylindrical ${nm} that has a diameter of ${d} ${u}.|A cylindrical ${nm} has a diameter of ${d} ${u}, and ${who.charAt(0).toLowerCase() + who.slice(1)} is wound around it.|Around a cylindrical ${nm} with a diameter of ${d} ${u}, ${who.charAt(0).toLowerCase() + who.slice(1)} is wrapped snugly.]]${level === "easy" ? " [[The wrapping goes around the outside exactly once.|It makes exactly one trip around the outside.|It circles the outside one time and no more.]]" : ` [[The material goes around the outside exactly ${k} times.|It winds around the outside exactly ${k} times.|It makes exactly ${k} complete trips around the outside.]]`}`));
+      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the length of the material used for the wrapping, in ${u}, in terms of π?|How long is the wrapping, in ${u}? Give the answer in terms of π.|Find the total length of material needed, in ${u}, in terms of π.|Determine how many ${u} of material the wrapping uses. Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
         wrongs: [W(coef * 2, "geometry_misapplied", "지름을 반지름처럼 보고 2πd 로 계산했다."), W(coef / 2, "formula_misuse", "둘레를 πd/2 로 계산했다."), W(level === "easy" ? (d * d) / 4 : d * k * k, "geometry_misapplied", level === "easy" ? "둘레 대신 넓이 계수를 계산했다." : "감은 횟수를 제곱했다."), W(level === "easy" ? coef + 2 : d, level === "easy" ? "other" : "step_missing", level === "easy" ? "계산 실수." : "한 바퀴의 길이만 답했다.")],
         verificationJs: withParams({ d, k: level === "easy" ? 1 : k }, "let t=0; for(let i=0;i<P.k;i++) t+=P.d;\nreturn t;"),
         trace: [[`한 바퀴 = π × ${d} = ${d}π 이다.`, "One wrap."], ...(level === "easy" ? [] : [[`${k} 바퀴이므로 ${d}π × ${k} = ${coef}π 이다.`, "Multiply by the number of wraps."] as [string, string]])], variant: level === "easy" ? "one_wrap" : "k_wraps" });
-      return sem(out, [{ v: d, words: ["diameter"] }, ...(level === "easy" ? [] : [{ v: k, words: ["times", "around"] }])], { words: ["length", "long"], forbid: forbidExcept("length") });
+      return sem(out, [{ v: d, words: ["diameter"] }, ...(level === "easy" ? [] : [{ v: k, words: ["times", "around"] }])], { words: ["length", "long", "material", "wrapping"], forbid: forbidExcept("length") });
     },
   },
   {
@@ -787,12 +786,12 @@ export const CI_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const r = rng.pick([6, 9, 10, 12, 15, 18, 20, 24, 30]), m = rng.pick(level === "easy" ? [15, 30, 45] : [10, 20, 25, 35, 40, 50, 5]); const coef = (r * m) / 30; if (!Number.isInteger(coef) || coef < 1 || r === m) throw new GenFail("x");
       const [nm, who] = rng.pick([["wall clock", "The minute hand of a wall clock"], ["station clock", "The minute hand of a station clock"], ["clock tower", "The minute hand of a clock tower"], ["school clock", "The minute hand of a school clock"], ["kitchen clock", "The minute hand of a kitchen clock"]]);
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `${who} is ${r} centimeters long. A full turn of the hand takes 60 minutes.`));
-      const out = finish(rng, { stimulus, question: spin(rng, `[[How far does the tip of the minute hand move in ${m} minutes, in centimeters, in terms of π?|In ${m} minutes, what distance does the tip of the hand travel, in centimeters, in terms of π?]]`), correct: coef, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `[[${who} is ${r} centimeters long. A full turn of the hand takes 60 minutes.|The hand is ${r} centimeters long, and it needs 60 minutes for one full turn.|${who} measures ${r} centimeters, and it takes exactly 60 minutes to go once around the dial.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, `[[How far does the tip of the minute hand move in ${m} minutes, in centimeters, in terms of π?|In ${m} minutes, what distance does the tip of the hand travel, in centimeters, in terms of π?|Find the length of the path traced by the tip of the minute hand in ${m} minutes, in centimeters, in terms of π.|During ${m} minutes, how many centimeters does the tip of the hand travel? Give the answer in terms of π.]]`), correct: coef, fmt: piOpt,
         wrongs: [W(coef * 2, "geometry_misapplied", "분침의 길이를 지름으로 착각했다."), W(coef / 2, "formula_misuse", "둘레를 πr 로 계산했다."), W(2 * r, "step_missing", "한 바퀴의 거리를 답했다."), W((r * r * m) / 360, "geometry_misapplied", "호의 길이 대신 부채꼴 넓이로 계산했다.")],
         verificationJs: withParams({ r, m }, "let deg=0; for(let t=0;t<P.m;t++) deg+=6;\nreturn Math.round(2*P.r*deg/360*1e6)/1e6;"),
         trace: [[`${m}분 동안 분침은 ${6 * m}° 돈다(1분에 6°).`, "Angle swept."], [`호는 원둘레 2π × ${r} = ${2 * r}π 의 ${6 * m}/360 이므로 ${coef}π 이다.`, "Arc length."]], variant: level === "easy" ? "quarter_turns" : "other_minutes" });
-      return sem(out, [{ v: r, words: ["hand", "long"] }, { v: m, words: ["minutes"] }], { words: ["far", "distance", "travel", "move"], forbid: forbidExcept() });
+      return sem(out, [{ v: r, words: ["hand", "long"] }, { v: m, words: ["minutes"] }], { words: ["far", "distance", "travel", "move", "path"], forbid: forbidExcept("length") });
     },
   },
   {
@@ -800,22 +799,22 @@ export const CI_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const r = rng.int(3, 20); const [nm, who] = rng.pick([["pizza", "A round pizza"], ["pie", "A round pie"], ["cake", "A round cake"], ["flatbread", "A round flatbread"], ["quiche", "A round quiche"]]); const u = rng.pick(["inches", "centimeters"] as const);
       if (level === "easy") { const th = rng.pick([90, 180, 60, 120, 45, 30, 72, 40]); const c = (th * r * r) / 360; if (!Number.isInteger(c) || c < 2 || c > 300 || r === th) throw new GenFail("x");
-        const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `${who} has a radius of ${r} ${u}. A slice of it forms a sector with a central angle of ${th} degrees.`)), question: spin(rng, `[[What is the area of the slice, in square ${u}, in terms of π?|Find the area of the slice, in square ${u}, in terms of π.]]`), correct: c, fmt: piOpt,
+        const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `[[${who} has a radius of ${r} ${u}. A slice of it forms a sector with a central angle of ${th} degrees.|The radius of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${r} ${u}. One slice is a sector whose central angle measures ${th} degrees.|A slice is cut from ${who.charAt(0).toLowerCase() + who.slice(1)} of radius ${r} ${u}, and the slice's central angle is ${th} degrees.]]`)), question: spin(rng, `[[What is the area of the slice, in square ${u}, in terms of π?|Find the area of the slice, in square ${u}, in terms of π.|How many square ${u} does the slice cover, in terms of π?|Determine the area of the slice in square ${u}, leaving the answer in terms of π.]]`), correct: c, fmt: piOpt,
           wrongs: [W(r * r, "step_missing", "원 전체의 넓이를 답했다."), W((th * r) / 180, "geometry_misapplied", "부채꼴 넓이 대신 호의 길이를 계산했다."), W((th * r * r) / 180, "formula_misuse", "비율을 θ/180 으로 계산했다."), W(c * 4, "geometry_misapplied", "반지름 대신 지름을 제곱했다.")],
           verificationJs: withParams({ r, th }, "return Math.round(P.th*P.r*P.r/360*1e6)/1e6;"), trace: [[`원 전체의 넓이는 π × ${r}² = ${r * r}π 이다.`, "Area of the circle."], [`부채꼴은 ${th}/360 이므로 ${c}π 이다.`, "Take the fraction."]], variant: "angle_given" });
-        return sem(out, [{ v: r, words: ["radius"] }, { v: th, words: ["angle", "degrees"] }], { words: ["area"], forbid: forbidExcept("area") }); }
+        return sem(out, [{ v: r, words: ["radius"] }, { v: th, words: ["angle", "degrees"] }], { words: ["area", "cover"], forbid: forbidExcept("area") }); }
       const n = rng.pick([4, 6, 8, 12, 3, 5, 10]), k = rng.int(2, n - 1); const c = (k * r * r) / n; if (!Number.isInteger(c) || c < 2 || c > 300 || r === n || r === k || k === n) throw new GenFail("x");
       const [who2] = rng.pick([["Maya"], ["Jordan"], ["Kofi"], ["Sana"], ["Luis"]]);
-      const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `${who} has a radius of ${r} ${u}. It is cut into ${n} equal slices, and ${who2} eats ${k} of them.`)), question: spin(rng, `[[What is the total area of the slices ${who2} eats, in square ${u}, in terms of π?|Find the combined area of the ${k} slices, in square ${u}, in terms of π.]]`), correct: c, fmt: piOpt,
+      const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `[[${who} has a radius of ${r} ${u}. It is cut into ${n} equal slices, and ${who2} eats ${k} of them.|${who2} is served ${k} slices of ${who.charAt(0).toLowerCase() + who.slice(1)} that has a radius of ${r} ${u} and was cut into ${n} equal slices.|The radius of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${r} ${u}; it is divided into ${n} equal slices, and ${who2} takes ${k} of them.]]`)), question: spin(rng, `[[What is the total area of the slices ${who2} eats, in square ${u}, in terms of π?|Find the combined area of the ${k} slices, in square ${u}, in terms of π.|How many square ${u} do the ${k} slices cover together, in terms of π?]]`), correct: c, fmt: piOpt,
         wrongs: [W(r * r, "step_missing", "원 전체의 넓이를 답했다."), W((r * r) / n, "step_missing", "한 조각의 넓이만 답했다."), W((k * r) / n * 2, "geometry_misapplied", "호의 길이로 계산했다."), W(c * 4, "geometry_misapplied", "반지름 대신 지름을 제곱했다.")],
         verificationJs: withParams({ r, n, k }, "let a=0; for(let i=0;i<P.k;i++) a+=P.r*P.r/P.n;\nreturn Math.round(a*1e6)/1e6;"), trace: [[`원 전체의 넓이는 π × ${r}² = ${r * r}π 이다.`, "Area of the circle."], [`한 조각은 1/${n} 이므로 ${k} 조각은 ${k}/${n} 이다.`, "Fraction eaten."], [`${k}/${n} × ${r * r}π = ${c}π 이다.`, "Area of the slices."]], variant: "equal_slices" });
-      return sem(out, [{ v: r, words: ["radius"] }, { v: n, words: ["slices", "cut", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["area"], forbid: forbidExcept("area") });
+      return sem(out, [{ v: r, words: ["radius"] }, { v: n, words: ["slices", "cut", "equal"] }, { v: k, words: ["slices", "eats"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
   },
   {
     id: "ci.sector_area.pie", skill: SKILL, kind: "sector_area", frame: "pie", levels: ["easy", "medium"], structure: "분수·퍼센트로 주어진 부채꼴의 넓이(easy: 1/4·1/2, medium: 그 밖의 비율)",
     generate(rng, level) {
-      const r = rng.int(2, 24); const [num, den, txt] = rng.pick(level === "easy" ? [[1, 4, "one fourth"], [1, 2, "one half"], [3, 4, "three fourths"]] as const : [[1, 6, "one sixth"], [1, 3, "one third"], [5, 12, "five twelfths"], [1, 8, "one eighth"], [2, 5, "two fifths"], [3, 8, "three eighths"]] as const); const c = (num * r * r) / den; if (!Number.isInteger(c) || c < 2 || c > 300 || r === den || r === num) throw new GenFail("x");
+      const r = rng.int(2, 24); const [num, den, txt] = rng.pick((level === "easy" ? [[1, 4, "one fourth"], [1, 2, "one half"], [3, 4, "three fourths"]] : [[1, 6, "one sixth"], [1, 3, "one third"], [5, 12, "five twelfths"], [1, 8, "one eighth"], [2, 5, "two fifths"], [3, 8, "three eighths"]]) as [number, number, string][]); const c = (num * r * r) / den; if (!Number.isInteger(c) || c < 2 || c > 300 || r === den || r === num) throw new GenFail("x");
       const [nm, who] = rng.pick([["budget chart", "A circular budget chart"], ["survey chart", "A circular survey chart"], ["spinner", "A circular game spinner"], ["clock face", "A circular clock face"], ["dartboard", "A circular dartboard"]]); const u = rng.pick(UNITS);
       const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `${who} has a radius of ${r} ${u}. One shaded sector covers ${txt} (${num}/${den}) of the whole circle.`)), question: spin(rng, `[[What is the area of the shaded sector, in ${sq(u)}, in terms of π?|Find the area of the shaded sector, in ${sq(u)}, in terms of π.]]`), correct: c, fmt: piOpt,
         wrongs: [W(r * r, "step_missing", "원 전체의 넓이를 답했다."), W((num * 2 * r) / den, "geometry_misapplied", "넓이 대신 호의 길이를 계산했다."), W(c * 4, "geometry_misapplied", "반지름 대신 지름을 제곱했다."), W((den - num) * r * r / den, "opposite", "색칠하지 않은 부분의 넓이를 답했다."), W(c * 2, "formula_misuse", "비율을 두 배로 적용했다.")],
@@ -827,8 +826,8 @@ export const CI_LITE: LiteArchetype[] = [
     id: "ci.central_from_inscribed.direct", skill: SKILL, kind: "central_from_inscribed", frame: "direct", levels: ["easy", "medium"], structure: "원주각의 2 배(easy) / 중심각 = 원주각 + k 관계(medium)",
     generate(rng, level) {
       const x = rng.int(12, 85), k = rng.int(10, 60); const [P, Q] = rng.pick([["A", "B"], ["P", "Q"], ["R", "S"], ["M", "N"]]); const c = rng.pick(["C", "D", "T"]); if (x === k) throw new GenFail("x"); const cen = level === "easy" ? 2 * x : 2 * k;
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `In a circle with center O, inscribed angle ${P}${c}${Q} measures ${x} degrees and intercepts arc ${P}${Q}.` : `In a circle with center O, inscribed angle ${P}${c}${Q} and central angle ${P}O${Q} intercept the same arc. The central angle measures ${k} degrees more than the inscribed angle.`));
-      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the measure of central angle ${P}O${Q}, in degrees?|Find the measure of angle ${P}O${Q}, in degrees.|How many degrees is central angle ${P}O${Q}?]]`), correct: cen,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `[[In a circle with center O, inscribed angle ${P}${c}${Q} measures ${x} degrees and intercepts arc ${P}${Q}.|Angle ${P}${c}${Q} is inscribed in a circle with center O; it measures ${x} degrees and cuts off arc ${P}${Q}.|A circle has center O, and its inscribed angle ${P}${c}${Q} of ${x} degrees intercepts arc ${P}${Q}.]]` : `[[In a circle with center O, inscribed angle ${P}${c}${Q} and central angle ${P}O${Q} intercept the same arc. The central angle measures ${k} degrees more than the inscribed angle.|A circle has center O. Inscribed angle ${P}${c}${Q} and central angle ${P}O${Q} cut off the same arc, and the central angle is ${k} degrees more than the inscribed one.|Angles ${P}${c}${Q} (inscribed) and ${P}O${Q} (central) share the same arc of a circle with center O; angle ${P}O${Q} measures ${k} degrees more than angle ${P}${c}${Q}.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the measure of central angle ${P}O${Q}, in degrees?|Find the measure of angle ${P}O${Q}, in degrees.|How many degrees is central angle ${P}O${Q}?|Determine the central angle ${P}O${Q} in degrees.]]`), correct: cen,
         wrongs: level === "easy" ? [W(x / 2 + 0.5 === Math.floor(x / 2 + 0.5) ? x / 2 + 0.5 : x + 2, "other", "계산 실수."), W(x, "step_missing", "원주각을 그대로 답했다."), W(180 - 2 * x, "formula_misuse", "180° 에서 뺐다."), W(360 - 2 * x, "step_missing", "큰 호의 크기를 답했다."), W(x + 45, "other", "계산 실수.")] : [W(k, "step_missing", "원주각을 답했다."), W(4 * k, "formula_misuse", "중심각의 두 배를 답했다."), W(k + 20, "other", "계산 실수."), W(180 - 2 * k, "formula_misuse", "180° 에서 뺐다."), W(3 * k, "other", "계산 실수.")],
         verificationJs: withParams(level === "easy" ? { x, easy: 1 } : { k, easy: 0 }, "if(P.easy) return 2*P.x;\nfor(let i=1;i<=180;i++){ if(2*i===i+P.k) return 2*i; }\nthrow new Error('없음');"),
         trace: level === "easy" ? [["중심각은 같은 호의 원주각의 2 배이다.", "Central angle is twice the inscribed angle."], [`2 × ${x} = ${2 * x}° 이다.`, "Compute."]] : [["원주각을 x 라 하면 중심각은 2x 이다.", "Name the inscribed angle x."], [`2x = x + ${k} 이므로 x = ${k} 이다.`, "Solve."], [`중심각은 2 × ${k} = ${2 * k}° 이다.`, "Central angle."]], variant: level === "easy" ? "double" : "difference_given" });
@@ -839,8 +838,8 @@ export const CI_LITE: LiteArchetype[] = [
     id: "ci.central_from_inscribed.arc", skill: SKILL, kind: "central_from_inscribed", frame: "arc", levels: ["easy", "medium"], structure: "원주각으로 호의 크기(easy) / 식으로 표현된 원주각의 중심각(medium)",
     generate(rng, level) {
       const x = rng.int(10, 80), a = rng.int(3, 25), t = rng.int(5, 40); const [P, Q] = rng.pick([["A", "B"], ["P", "Q"], ["R", "S"], ["M", "N"], ["E", "F"]]); const c = rng.pick(["C", "D", "T"]); const val = level === "easy" ? x : t + a; if (t === a || val === t) throw new GenFail("x"); const ans = 2 * val;
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `Points ${P}, ${Q}, and ${c} lie on a circle. Inscribed angle ${P}${c}${Q} measures ${x} degrees.` : `In a circle with center O, inscribed angle ${P}${c}${Q} measures ${M(`x + ${a}`)} degrees, where x = ${t}.`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the measure of arc ${P}${Q} that the angle intercepts, in degrees?|Find the measure of the intercepted arc ${P}${Q}, in degrees.]]` : `[[What is the measure of central angle ${P}O${Q}, in degrees?|Find the measure of angle ${P}O${Q}, in degrees.]]`), correct: ans,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `[[Points ${P}, ${Q}, and ${c} lie on a circle. Inscribed angle ${P}${c}${Q} measures ${x} degrees.|Three points, ${P}, ${Q}, and ${c}, are on a circle, and the inscribed angle ${P}${c}${Q} is ${x} degrees.|On a circle, the inscribed angle formed at ${c} by points ${P} and ${Q} measures ${x} degrees.]]` : `[[In a circle with center O, inscribed angle ${P}${c}${Q} measures ${M(`x + ${a}`)} degrees, where x = ${t}.|The inscribed angle ${P}${c}${Q} of a circle with center O has a measure of ${M(`x + ${a}`)} degrees, and x = ${t}.|Let x = ${t}. In a circle with center O, inscribed angle ${P}${c}${Q} is ${M(`x + ${a}`)} degrees.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the measure of arc ${P}${Q} that the angle intercepts, in degrees?|Find the measure of the intercepted arc ${P}${Q}, in degrees.|How many degrees is the arc ${P}${Q} cut off by the angle?|Determine the measure of intercepted arc ${P}${Q} in degrees.]]` : `[[What is the measure of central angle ${P}O${Q}, in degrees?|Find the measure of angle ${P}O${Q}, in degrees.|How many degrees is the central angle ${P}O${Q} on the same arc?|Determine the central angle ${P}O${Q} in degrees.]]`), correct: ans,
         wrongs: [W(val, "step_missing", level === "easy" ? "원주각을 호의 크기로 답했다." : "원주각을 그대로 답했다."), W(180 - ans, "formula_misuse", "180° 에서 뺐다."), W(val * 4, "formula_misuse", "두 배를 한 번 더 했다."), W(level === "easy" ? 360 - ans : 2 * t + a, level === "easy" ? "step_missing" : "formula_misuse", level === "easy" ? "큰 호의 크기를 답했다." : "x 에만 2 를 곱했다.")],
         verificationJs: withParams(level === "easy" ? { x, a: 0, t: 0, easy: 1 } : { x: 0, a, t, easy: 0 }, "const v=P.easy? P.x : P.t+P.a; return v*2;"),
         trace: level === "easy" ? [["원주각은 가리키는 호의 크기의 절반이다.", "Inscribed angle is half its arc."], [`호의 크기 = 2 × ${x} = ${ans}° 이다.`, "Arc measure."]] : [[`원주각 = ${t} + ${a} = ${t + a}° 이다.`, "Evaluate the expression."], [`중심각은 원주각의 2 배이므로 2 × ${t + a} = ${ans}° 이다.`, "Double it."]], variant: level === "easy" ? "arc_measure" : "expression" });
@@ -862,7 +861,7 @@ export const CI_LITE: LiteArchetype[] = [
   {
     id: "ci.inscribed_from_central.fraction", skill: SKILL, kind: "inscribed_from_central", frame: "fraction", levels: ["easy", "medium"], structure: "호가 원의 몇 분의 몇인지로 주어진 원주각(easy: 1/4·1/2·1/3, medium: 그 밖의 분수)",
     generate(rng, level) {
-      const [num, den, txt] = rng.pick(level === "easy" ? [[1, 4, "one fourth"], [1, 2, "one half"], [1, 3, "one third"], [1, 6, "one sixth"]] as const : [[1, 5, "one fifth"], [1, 9, "one ninth"], [2, 5, "two fifths"], [1, 8, "one eighth"], [3, 10, "three tenths"], [1, 10, "one tenth"]] as const);
+      const [num, den, txt] = rng.pick((level === "easy" ? [[1, 4, "one fourth"], [1, 2, "one half"], [1, 3, "one third"], [1, 6, "one sixth"]] : [[1, 5, "one fifth"], [1, 9, "one ninth"], [2, 5, "two fifths"], [1, 8, "one eighth"], [3, 10, "three tenths"], [1, 10, "one tenth"]]) as [number, number, string][]);
       const arc = (360 * num) / den, ans = arc / 2; if (!Number.isInteger(ans)) throw new GenFail("x"); const [P, Q] = rng.pick([["A", "B"], ["P", "Q"], ["R", "S"], ["M", "N"]]); const t = rng.pick(["C", "D", "T"]);
       const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, spin(rng, `Points ${P}, ${Q}, and ${t} lie on a circle. The minor arc ${P}${Q} is ${txt} (${num}/${den}) of the whole circle, and point ${t} is on the major arc.`)), question: spin(rng, `[[What is the measure of inscribed angle ${P}${t}${Q}, in degrees?|Find the measure of angle ${P}${t}${Q}, in degrees.]]`), correct: ans,
         wrongs: [W(arc, "step_missing", "호의 크기를 그대로 답했다."), W(arc * 2, "formula_misuse", "호의 크기를 두 배로 계산했다."), W(arc / 4, "formula_misuse", "두 번 반으로 나눴다."), W(180 - ans, "geometry_misapplied", "맞은편 원주각을 답했다."), W(360 - arc, "step_missing", "큰 호의 크기를 답했다.")],
@@ -874,11 +873,11 @@ export const CI_LITE: LiteArchetype[] = [
     id: "ci.circle_equation_transform.read", skill: SKILL, kind: "circle_equation_transform", frame: "read", levels: ["easy", "medium"], structure: "표준형에서 반지름(easy) / 원둘레 계수(medium)",
     generate(rng, level) {
       const h = rng.int(-9, 9), k0 = rng.int(-9, 9), r = rng.int(2, 14); if (h === 0 || k0 === 0 || r === Math.abs(h) || r === Math.abs(k0)) throw new GenFail("x"); const R = r * r; const coef = level === "easy" ? r : 2 * r;
-      const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, (() => { const [a, b] = rng.pick([["In the xy-plane, a circle is given by the equation ", "."], ["A circle in the xy-plane has the equation ", "."], ["The graph of ", " is a circle in the xy-plane."]]); return `${a}${M(`(${shifted("x", -h)})^2 + (${shifted("y", -k0)})^2 = ${R}`)}${b}`; })()), question: spin(rng, level === "easy" ? "[[What is the radius of the circle?|Find the radius of the circle.|How long is the radius of the circle?]]" : "[[What is the circumference of the circle, in terms of π?|Find the circumference of the circle, in terms of π.]]"), correct: coef, fmt: level === "easy" ? undefined : piOpt,
+      const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, (() => { const [a, b] = rng.pick([["In the xy-plane, a circle is given by the equation ", "."], ["A circle in the xy-plane has the equation ", "."], ["The graph of ", " is a circle in the xy-plane."], ["Consider the circle in the xy-plane described by ", "."], ["The equation ", " defines a circle in the xy-plane."]]); return `${a}${M(`(${shifted("x", -h)})^2 + (${shifted("y", -k0)})^2 = ${R}`)}${b}`; })()), question: spin(rng, level === "easy" ? "[[What is the radius of the circle?|Find the radius of the circle.|How long is the radius of the circle?|Determine the length of the radius of this circle.]]" : "[[What is the circumference of the circle, in terms of π?|Find the circumference of the circle, in terms of π.|How long is the circle's circumference? Give the answer in terms of π.|Determine the circumference of this circle in terms of π.]]"), correct: coef, fmt: level === "easy" ? undefined : piOpt,
         wrongs: level === "easy" ? [W(R, "formula_misuse", "r² 를 반지름으로 답했다."), W(2 * r, "formula_misuse", "지름을 반지름으로 답했다."), W(Math.abs(h) + Math.abs(k0), "geometry_misapplied", "중심의 좌표를 반지름으로 답했다."), W(R / 2, "formula_misuse", "r² 를 반으로 나눴다.")] : [W(r, "formula_misuse", "둘레를 πr 로 계산했다."), W(R, "formula_misuse", "r² 를 계수로 답했다."), W(4 * r, "geometry_misapplied", "둘레를 4πr 로 계산했다."), W(R * 2, "geometry_misapplied", "넓이 계수의 두 배를 답했다.")],
         verificationJs: withParams({ R, easy: level === "easy" ? 1 : 0 }, "let r=null; for(let x=1;x<=100;x++) if(x*x===P.R) r=x;\nif(r===null) throw new Error('제곱수 아님');\nreturn P.easy? r : 2*r;"),
         trace: [[`우변 ${R} 이 r² 이므로 r = ${r} 이다.`, "Read r squared from the right side."], ...(level === "easy" ? [] : [[`둘레 = 2π × ${r} = ${2 * r}π 이다.`, "Circumference."] as [string, string]])], variant: level === "easy" ? "radius" : "circumference" });
-      return sem(out, [], { words: level === "easy" ? ["radius"] : ["circumference"], forbid: forbidExcept(...(level === "easy" ? ["radius"] : ["circumference"])) });
+      return sem(out, [], { words: level === "easy" ? ["radius"] : ["circumference"], forbid: forbidExcept(...(level === "easy" ? ["radius", "length"] : ["circumference", "length"])) });
     },
   },
   {
@@ -886,11 +885,11 @@ export const CI_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const h = rng.int(-9, 9), k0 = rng.int(-9, 9), F = rng.int(-20, 5); if (h === 0 || k0 === 0 || h === k0 || h + k0 === 0) throw new GenFail("x"); const R = h * h + k0 * k0 - F; if (R <= 0 || R > 400) throw new GenFail("x"); const D = -2 * h, E = -2 * k0; const ans = h + k0;
       const eq = level === "easy" ? `(${shifted("x", -h)})^2 + (${shifted("y", -k0)})^2 = ${R}` : `x^2 + y^2${term2(D, "x")}${term2(E, "y")}${F === 0 ? "" : ` ${F > 0 ? "+" : "-"} ${Math.abs(F)}`} = 0`;
-      const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, (() => { const [a, b] = rng.pick([["In the xy-plane, a circle is given by the equation ", "."], ["A circle in the xy-plane has the equation ", "."], ["The graph of ", " is a circle in the xy-plane."]]); return `${a}${M(eq)}${b}`; })()), question: spin(rng, "[[What is the sum of the x-coordinate and the y-coordinate of the center of the circle?|Find the sum of the coordinates of the center of the circle.|If the center is the point (a, b), what is the value of a + b?]]"), correct: ans,
+      const out = finish(rng, { stimulus: withOpen(rng, OPEN_GEO, (() => { const [a, b] = rng.pick([["In the xy-plane, a circle is given by the equation ", "."], ["A circle in the xy-plane has the equation ", "."], ["The graph of ", " is a circle in the xy-plane."], ["Consider the circle in the xy-plane described by ", "."], ["The equation ", " defines a circle in the xy-plane."]]); return `${a}${M(eq)}${b}`; })()), question: spin(rng, "[[What is the sum of the x-coordinate and the y-coordinate of the center of the circle?|Find the sum of the coordinates of the center of the circle.|If the center is the point (a, b), what is the value of a + b?|Add the x-coordinate and the y-coordinate of the circle's center. What is the result?]]"), correct: ans,
         wrongs: [W(-ans, "sign_error", "중심 좌표의 부호를 반대로 읽었다."), W(Math.abs(h) + Math.abs(k0), "sign_error", "부호를 무시하고 더했다."), W(level === "easy" ? h - k0 : (D + E) / 2, level === "easy" ? "formula_misuse" : "formula_misuse", level === "easy" ? "두 좌표를 더하지 않고 뺐다." : "x 와 y 의 계수 합의 절반(부호 반대)을 답했다."), W(level === "easy" ? R : F, "other", level === "easy" ? "r² 를 답했다." : "상수항을 답했다.")],
         verificationJs: withParams(level === "easy" ? { h: -h, k: -k0, easy: 1 } : { h: D, k: E, easy: 0 }, "if(P.easy) return -P.h + -P.k;\nreturn (-P.h/2) + (-P.k/2);"),
         trace: level === "easy" ? [["표준형 (x − h)² + (y − k)² = r² 에서 중심은 (h, k) 이다.", "Read the center from standard form."], [`중심은 (${h}, ${k0}) 이므로 합은 ${ans} 이다.`, "Add the coordinates."]] : [["x²+y²+Dx+Ey+F=0 의 중심은 (−D/2, −E/2) 이다.", "Center from general form."], [`(${-D / 2}, ${-E / 2}) 이므로 합은 ${ans} 이다.`, "Add the coordinates."]], variant: level === "easy" ? "standard_form" : "general_form" });
-      return sem(out, [], { words: ["sum", "a + b"], forbid: [] });
+      return sem(out, [], { words: ["sum", "a + b", "add", "result"], forbid: [] });
     },
   },
 ];

@@ -76,11 +76,11 @@ export function liteRecord(a: LiteArchetype, level: Level, inst: Instance, seed:
 
 export type LiteBulkStats = { attempts: number; genFail: number; verifyFail: number; duplicate: number; groupCap: number; accepted: number; byGroup: Record<string, number> };
 /** easy/medium 원형 산출: 원형 라운드 로빈, 그룹당 상한(기본 30), 본문 유사도 0.6 미만만 채택. */
-export function produceFromLite(archs: LiteArchetype[], level: Level, req: { runId: string; count: number; seedStart?: number; maxPerGroup?: number; threshold?: number; existing?: Map<string, Set<string>[]> }) {
+export function produceFromLite(archs: LiteArchetype[], level: Level, req: { runId: string; count: number; seedStart?: number; maxPerGroup?: number; threshold?: number; maxAttemptsPerItem?: number; existing?: Map<string, Set<string>[]> }) {
   const thr = req.threshold ?? 0.6, cap = req.maxPerGroup ?? 30; const pool = archs.filter((a) => a.levels.includes(level));
   const stats: LiteBulkStats = { attempts: 0, genFail: 0, verifyFail: 0, duplicate: 0, groupCap: 0, accepted: 0, byGroup: {} };
   const records: PassedRecord[] = []; const accepted = new Map<string, Set<string>[]>(); const seeds = new Map<string, number>();
-  let i = 0; const maxAttempts = 80 * req.count;
+  let i = 0; const maxAttempts = (req.maxAttemptsPerItem ?? 80) * req.count;
   while (records.length < req.count && stats.attempts < maxAttempts && pool.length) {
     const a = pool[i++ % pool.length]; const seed = seeds.get(a.id) ?? (req.seedStart ?? 0); seeds.set(a.id, seed + 1); stats.attempts++;
     const g = generateLite(a, level, seed); if (!g.ok) { stats.genFail++; continue; }

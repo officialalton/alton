@@ -61,12 +61,13 @@ export function semanticIssues(stimulus: string, question: string, binds: Bind[]
 /** 인스턴스 생성 끝에서 호출 — 위반이면 일반 Error(=시드 스윕에서 '예외'로 집계, 테스트 실패). 점검 포인트 문자열을 인스턴스에 붙인다. */
 export function sem(inst: Instance, binds: Bind[], ask?: AskSpec, note?: string): Instance {
   const issues = semanticIssues(inst.stimulus, inst.question, binds, ask);
-  if (issues.length) throw new Error(`[sem] ${issues.join("; ")}`);
+  if (issues.length) throw new Error(`[sem] ${issues.join("; ")} :: ${inst.stimulus.slice(0, 260)} || ${inst.question.slice(0, 120)}`);
   const parts = [...binds.map((b) => `${b.v}=${b.words[0]}`), ask ? `ask=${ask.words[0]}` : ""].filter(Boolean);
-  Object.assign(inst, { semNote: note ?? parts.join(", ") });
+  Object.assign(inst, { semNote: note ?? parts.join(", "), semBinds: binds, semAsk: ask });
   return inst;
 }
 export const semNoteOf = (inst: Instance) => (inst as Instance & { semNote?: string }).semNote ?? "";
+export const semOf = (inst: Instance) => inst as Instance & { semBinds?: Bind[]; semAsk?: AskSpec };
 
 /** 질문에서 구하는 양 하나만 남기는 금지어 목록: forbidExcept("area") → 넓이 외 양 명사 전부. */
 const QUANT = ["area", "perimeter", "volume", "circumference", "diameter", "radius", "arc", "surface", "height", "length", "width"];

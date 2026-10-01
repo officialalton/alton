@@ -71,7 +71,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
         { pop: "shoppers at a store", a: "use a coupon", b: "use a coupon for the whole order", nb: "use a coupon for a single item", c: "pay with a card", ask: "shoppers who pay with a card and use a coupon for a single item" },
       ]);
       const stimulus = facts(rng, [
-        [`A survey included ${N} ${c.pop}.`, `There were ${N} ${c.pop} in a survey.`, `${N} ${c.pop} answered a survey.`],
+        [`A survey included ${N} ${c.pop}.`, `A survey was given to ${N} ${c.pop}.`, `${N} ${c.pop} took part in a survey.`],
         [`Of these, ${p}% ${c.a}.`, `${p}% of them ${c.a}.`, `Exactly ${p}% of the people surveyed ${c.a}.`],
         [`Of those who ${c.a.replace(/^are /, "are ")}, ${q}% ${c.b}.`, `${q}% of the people in that group ${c.b}; the rest of the group ${c.nb}.`, `Within that group, ${q}% ${c.b}, and the rest ${c.nb}.`],
         [`Of the people who ${c.nb}, ${r}% ${c.c}.`, `${r}% of the group that ${c.nb} ${c.c}.`, `Among those who ${c.nb}, ${r}% ${c.c}.`],
@@ -88,7 +88,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
           [`다시 ${b}을(를) 기준량으로 ${r}% 를 구한다.`, "Switch the base again."],
           [`${b}의 ${r}% = ${d} 이다.`, "Third percentage."],
         ],
-        variant: c.pop.split(" ")[0],
+        variant: "frame",
       });
     },
   },
@@ -122,7 +122,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
           [`전체 ${T} 를 ${s / g0} 묶음으로 나누면 한 묶음은 ${T / (s / g0)} 이다.`, "Split the total."],
           [`y 는 ${p / g0} 묶음이므로 ${y} 이다.`, "Read off y."],
         ],
-        variant: c.noun,
+        variant: "frame",
       });
       return sem(out, [], { words: [n2] });
     },
@@ -238,7 +238,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
           ["1 kg = 1000 g 이다.", "Recall the unit relation."],
           [`${T - x} × 1000 = ${(T - x) * 1000} g 이다.`, "Convert to grams."],
         ],
-        variant: c.part,
+        variant: "frame",
       });
       return sem(out, [{ v: p, words: [c.part] }, { v: x, words: [c.part] }], { words: ["grams"] });
     },
@@ -336,7 +336,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
       const p = rng.pick([10, 12, 20, 24, 25, 30, 40, 50, 60, 75]), q = rng.pick([5, 8, 10, 15, 20, 25, 30, 40, 50]);
       const a2 = a + (a * p) / 100, b2 = b - (b * q) / 100;
       if (![a2, b2].every(Number.isInteger) || p <= q || a === b || a2 === b2 || a2 > 990 || (a2 - a) === (b - b2)) throw new GenFail("x");
-      const [A, B, unit, yrs] = rng.pick([["City A", "City B", "thousand residents", ["2010", "2020"]], ["Plant X", "Plant Y", "workers", ["2015", "2023"]], ["School East", "School West", "students", ["2012", "2022"]], ["Town Hall's website", "the library's website", "thousand visits per month", ["2019", "2024"]]]);
+      const [A, B, unit] = rng.pick([["City A", "City B", "thousand residents", ["2010", "2020"]], ["Plant X", "Plant Y", "workers", ["2015", "2023"]], ["School East", "School West", "students", ["2012", "2022"]], ["Town Hall's website", "the library's website", "thousand visits per month", ["2019", "2024"]]]);
       const stimulus = spin(rng, `Over the past decade, the number of ${unit} at ${A} [[rose|increased|grew]] from ${a} to ${a2}. Over the same period, the number at ${B} [[fell|decreased|dropped]] from ${b} to ${b2}.`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GROUP, stimulus), question: spin(rng, `[[By how many percentage points is the percent increase at ${A} greater than the percent decrease at ${B}?|The percent increase at ${A} exceeds the percent decrease at ${B} by how many percentage points?|What is the difference, in percentage points, between the percent increase at ${A} and the percent decrease at ${B}?]]`), correct: p - q,
@@ -377,7 +377,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
           [`기준량은 처음 연료 ${D / a} 이다.`, "The base is the original fuel."],
           [`${D / a - D / b} ÷ ${D / a} × 100 = ${pct}% 이다.`, "Percent decrease."],
         ],
-        variant: dist,
+        variant: "frame",
       });
       return sem(out, [{ v: a, words: ["gets"] }, { v: b, words: ["gets"] }], { words: ["fuel"] });
     },
@@ -436,7 +436,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
           [`하지 않는 사람의 비율은 100% − ${share}% 이다.`, "Take the complement."],
           [`따라서 ${100 - share}% 이다.`, "Answer."],
         ],
-        variant: c.pop.split(" ")[0],
+        variant: "frame",
       });
     },
   },
@@ -466,7 +466,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
           [`단위가 같으므로 ${a * b} ÷ ${big} 를 구한다.`, "Divide with matching units."],
           [`${(a * b) / big} × 100 = ${pct}% 이다.`, "Convert to a percent."],
         ],
-        variant: c.small.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: a, words: [c.small] }, { v: b, words: [c.small] }, { v: e, words: [c.big] }, { v: f, words: [c.big] }], { words: ["percent"] });
     },
@@ -482,7 +482,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
       const d1 = 100 / gcd(p, 100), d2 = 100 / gcd(q, 100), L0 = lcm(d1, d2); if (L0 < 10 || L0 > 200 || d1 === d2) throw new GenFail("x");
       const lower = L0 * rng.int(1, 4) + rng.int(0, L0 - 1); const ans = (Math.floor(lower / L0) + 1) * L0; if (ans > 990 || lower < 30) throw new GenFail("x");
       const [pop, g1, g2] = rng.pick([["club", "seniors", "juniors"], ["orchestra", "string players", "brass players"], ["class", "left-handed students", "students with glasses"], ["choir", "tenors", "sopranos"], ["robotics team", "builders", "programmers"]]);
-      const stimulus = spin(rng, `In a ${pop}, exactly ${p}% of the members are ${g1}, and exactly ${q}% are ${g2}. The number of members is a whole number greater than ${lower}, and the number of ${g1} and the number of ${g2} are also whole numbers.`);
+      const stimulus = spin(rng, `[[In a ${pop}, exactly ${p}% of the members are ${g1}, and exactly ${q}% are ${g2}.|Exactly ${p}% of the members of a ${pop} are ${g1}, while exactly ${q}% are ${g2}.|A ${pop} has members of whom exactly ${p}% are ${g1} and exactly ${q}% are ${g2}.]] [[The number of members is a whole number greater than ${lower}, and the number of ${g1} and the number of ${g2} are also whole numbers.|The ${pop} has a whole number of members greater than ${lower}, and the counts of ${g1} and of ${g2} must also be whole numbers.|Every count here is a whole number, and the total membership is greater than ${lower}.]]`);
       const out = finish(rng, {
         stimulus: withOpen(rng, OPEN_GROUP, stimulus), question: spin(rng, `[[What is the least possible number of members in the ${pop}?|What is the smallest number of members the ${pop} could have?|Find the minimum possible membership of the ${pop}.]]`), correct: ans,
         wrongs: [W(L0, "condition_ignored", "'greater than' 조건을 확인하지 않고 최소공배수를 답했다."), W(ans + L0, "other", "조건을 만족하는 첫 배수가 아니라 다음 배수를 답했다."), W(lower + 1, "condition_ignored", "퍼센트가 정수 인원이 되어야 한다는 조건을 무시했다."), W(Math.max(d1, d2) * (Math.floor(lower / Math.max(d1, d2)) + 1), "step_missing", "한 집단의 분모 조건만 사용했다."), W(d1 * d2 > 990 ? ans - L0 : d1 * d2, "formula_misuse", "두 분모를 최소공배수가 아니라 곱으로 처리했다.")],
@@ -496,7 +496,7 @@ export const PCT_ARCHETYPES: Archetype[] = [
         ],
         variant: "two_percentages",
       });
-      return sem(out, [{ v: p, words: [g1] }, { v: q, words: [g2] }]);
+      return sem(out, [{ v: p, words: [g1], pct: true }, { v: q, words: [g2], pct: true }]);
     },
   },
   // ───────────── compound_change ─────────────
@@ -510,9 +510,9 @@ export const PCT_ARCHETYPES: Archetype[] = [
       const M = (O * (100 + p)) / 100, F = (M * (100 - q)) / 100; const disc = M - F;
       if (!Number.isInteger(M) || !Number.isInteger(F) || disc < 5 || M > 990) throw new GenFail("x");
       const item = rng.pick([["a game console", "store"], ["a winter coat", "boutique"], ["a camera", "shop"], ["a desk", "showroom"], ["a pair of skis", "outfitter"]]);
-      const stimulus = spin(rng, `A ${item[1]} first raised the price by ${p}% on ${item[0]} and then advertised ${q}% off the raised price. A customer paid ${F} dollars.`);
+      const stimulus = spin(rng, `[[A ${item[1]} first raised the price by ${p}% on ${item[0]} and then advertised ${q}% off the raised price.|The price of ${item[0]} at a ${item[1]} was first raised by ${p}%, and the ${item[1]} then took ${q}% off the new, higher price.|After a ${p}% price increase on ${item[0]}, a ${item[1]} ran a sale that took ${q}% off the increased price.]] [[A customer paid ${F} dollars.|One shopper paid ${F} dollars at the register.|The price that a customer actually paid was ${F} dollars.]]`);
       const out = finish(rng, {
-        stimulus: withOpen(rng, OPEN_MONEY, stimulus), question: spin(rng, `[[How many dollars was the discount?|What was the amount of the discount, in dollars?|By how many dollars was the raised price reduced?]]`), correct: disc,
+        stimulus: withOpen(rng, OPEN_MONEY, stimulus), question: spin(rng, `[[How many dollars was the discount?|What was the amount of the discount, in dollars?|By how many dollars was the raised price reduced?|How many dollars did the customer save compared with the raised price?]]`), correct: disc,
         wrongs: [W((F * q) / 100, "condition_ignored", "할인액을 지불한 금액의 q% 로 계산했다."), W((O * q) / 100, "condition_ignored", "할인액을 원래 가격의 q% 로 계산했다."), W(M - O, "other", "인상액을 답했다."), W(O - F, "other", "원래 가격과 지불액의 차를 답했다."), W((M * q) / 100 - (M - O), "other", "계산 실수.")],
         verificationJs: withParams({ p, q, F }, "const out=[];\nfor(let o=1;o<=3000;o++){ if(o*(100+P.p)*(100-P.q)===P.F*10000){ const m=o*(100+P.p)/100; if(!Number.isInteger(m)) throw new Error('정수 아님'); out.push(m-P.F); } }\nif(out.length!==1) throw new Error('유일하지 않음');\nreturn out[0];"),
         trace: [
@@ -689,8 +689,8 @@ export const PCT_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const p = pctOf(rng, level), a = baseOf(rng, level), item = rng.pick(ITEMS), st = rng.pick(STORES); const nw = a + (a * p) / 100; if (!Number.isInteger(nw)) throw new GenFail("x");
       const cpn = level === "easy" ? 0 : rng.pick([5, 10, 15, 20]); const ans = nw - cpn;
-      const stimulus = withOpen(rng, OPEN_MONEY, spin(rng, `${st[0].toUpperCase() + st.slice(1)} [[raised|increased]] the price of ${item} by ${p}%. The old price was ${a} dollars.${level === "easy" ? "" : ` A customer then used a coupon worth ${cpn} dollars.`}`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? "[[What is the new price, in dollars?|How many dollars does the item cost now?|Find the new price in dollars.]]" : "[[How many dollars does the customer pay?|What is the final amount paid, in dollars?|Find the total the customer pays, in dollars.]]"), correct: ans,
+      const stimulus = withOpen(rng, OPEN_MONEY, spin(rng, `[[${st[0].toUpperCase() + st.slice(1)} raised the price of ${item} by ${p}%. The old price was ${a} dollars.|The old price of ${item} at ${st} was ${a} dollars, and the store increased it by ${p}%.|Before a change, ${item} cost ${a} dollars at ${st}; the price was then raised by ${p}%.]]${level === "easy" ? "" : ` [[A customer then used a coupon worth ${cpn} dollars.|Afterward, a customer applied a coupon worth ${cpn} dollars.|The customer had a coupon worth ${cpn} dollars and used it on the new price.]]`}`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? "[[What is the new price, in dollars?|How many dollars does the item cost now?|Find the new price in dollars.|After the increase, what does the item cost, in dollars?]]" : "[[How many dollars does the customer pay?|What is the final amount paid, in dollars?|Find the total the customer pays, in dollars.|After the coupon, what does the customer pay, in dollars?]]"), correct: ans,
         wrongs: [W(a - (a * p) / 100 - cpn, "sign_error", "인상을 인하로 계산했다."), W((a * p) / 100 + cpn, "step_missing", "인상액만 구했다."), W(a + p - cpn, "formula_misuse", "퍼센트를 달러로 그대로 더했다."), W(level === "easy" ? (a * p) / 100 : nw, "step_missing", level === "easy" ? "인상액만 답했다." : "쿠폰을 반영하지 않았다.")],
         verificationJs: withParams({ a, p, cpn }, "return P.a*(100+P.p)/100-P.cpn;"),
         trace: [[`인상액 = ${a} × ${p / 100} = ${(a * p) / 100} 이다.`, "Compute the increase."], [`새 가격 = ${a} + ${(a * p) / 100} = ${nw} 달러이다.`, "Add it."], ...(level === "easy" ? [] : [[`쿠폰을 빼면 ${nw} − ${cpn} = ${ans} 달러이다.`, "Subtract the coupon."] as [string, string]])], variant: level === "easy" ? "new_price" : "after_coupon" });
@@ -726,9 +726,9 @@ export const PCT_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const p = rng.pick([10, 20, 25, 50, 40]), q = rng.pick([10, 20, 25, 50]); const v0 = rng.pick([100, 200, 400, 500, 800, 160, 240]); const v1 = (v0 * (100 + p)) / 100, v2 = (v1 * (100 - q)) / 100;
       if (!Number.isInteger(v1) || !Number.isInteger(v2) || v2 === v0) throw new GenFail("x"); const net = ((v2 - v0) * 100) / v0; if (level === "medium" && !Number.isInteger(net)) throw new GenFail("x");
-      const [ent, unit, vb] = rng.pick([["A video's views", "views", ["rose", "then fell"]], ["A town's population", "residents", ["grew", "then shrank"]], ["A stock's price", "dollars", ["went up", "then went down"]], ["A club's savings", "dollars", ["increased", "then decreased"]]] as const);
-      const stimulus = withOpen(rng, OPEN_GROUP, spin(rng, `${ent} started at ${v0} ${unit}. It ${vb[0]} by ${p}% and ${vb[1]} by ${q}%.`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? "[[What is the final value?|What is the value after both changes?|Find the value at the end.]]" : "[[What is the overall percent change from the starting value? (Use a negative number for a decrease.)|By what percent did the value change overall? Use a negative number for a decrease.|Find the overall percent change, using a negative number for a decrease.]]"), correct: level === "easy" ? v2 : net,
+      const [ent, unit, vb] = rng.pick([["A video's views", "views", ["rose", "fell"]], ["A town's population", "residents", ["grew", "shrank"]], ["A stock's price", "dollars", ["went up", "went down"]], ["A club's savings", "dollars", ["increased", "decreased"]]] as const);
+      const stimulus = withOpen(rng, OPEN_GROUP, spin(rng, `[[${ent} started at ${v0} ${unit}. It ${vb[0]} by ${p}% and then ${vb[1]} by ${q}%.|At first, ${ent.charAt(0).toLowerCase() + ent.slice(1)} stood at ${v0} ${unit}. Then it ${vb[0]} by ${p}%, and after that it ${vb[1]} by ${q}%.|${ent} began at ${v0} ${unit}; first it ${vb[0]} by ${p}%, and later it ${vb[1]} by ${q}%.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? "[[What is the final value?|What is the value after both changes?|Find the value at the end.|How large is the value once both changes have happened?]]" : "[[What is the overall percent change from the starting value? (Use a negative number for a decrease.)|By what percent did the value change overall? Use a negative number for a decrease.|Find the overall percent change, using a negative number for a decrease.|Compared with the start, what is the net percent change? Write a decrease as a negative number.]]"), correct: level === "easy" ? v2 : net,
         wrongs: level === "easy" ? [W(v0 + (v0 * (p - q)) / 100, "formula_misuse", "두 퍼센트를 더하고 빼서 한 번에 적용했다."), W(v1, "step_missing", "두 번째 변화를 적용하지 않았다."), W((v0 * (100 - q)) / 100, "condition_ignored", "두 번째 변화를 처음 값에 적용했다."), W(v0 - (v1 - v2), "other", "증가분과 감소분의 차를 잘못 적용했다.")]
           : [W(p - q, "formula_misuse", "두 퍼센트를 단순히 뺐다."), W(-net, "sign_error", "부호를 반대로 적었다."), W(q - p, "sign_error", "부호가 반대인 단순 차를 답했다."), W(p, "step_missing", "첫 변화율만 답했다.")],
         verificationJs: withParams({ v0, p, q, ask: level === "easy" ? 1 : 0 }, "const a=P.v0*(100+P.p), b=a*(100-P.q); const f=b/10000; return P.ask? f : Math.round((f-P.v0)/P.v0*100*1e6)/1e6;"),

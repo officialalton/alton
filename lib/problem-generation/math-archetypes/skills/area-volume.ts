@@ -11,11 +11,10 @@ const W = (v: number, kind: DistractorKind, reason: string) => ({ v, kind, reaso
 const UNITS = ["meters", "feet", "centimeters", "inches", "yards"] as const;
 const SING: Record<string, string> = { meters: "meter", feet: "foot", centimeters: "centimeter", inches: "inch", yards: "yard" };
 const sq = (u: string) => `square ${u}`, cu = (u: string) => `cubic ${u}`;
-const RECT = [["garden", "A rectangular garden"], ["room", "A rectangular room"], ["courtyard", "A rectangular courtyard"], ["banner", "A rectangular banner"], ["pond", "A rectangular pond"], ["playground", "A rectangular playground"], ["stage", "A rectangular stage"], ["parking lot", "A rectangular parking lot"]] as const;
-const TANKS = [["aquarium", "An aquarium"], ["water tank", "A water tank"], ["storage bin", "A storage bin"], ["shipping crate", "A shipping crate"], ["fish tank", "A fish tank"], ["planter box", "A planter box"]] as const;
-const CANS = [["soup can", "A soup can"], ["paint can", "A paint can"], ["oil drum", "An oil drum"], ["water bucket", "A cylindrical water bucket"], ["trash can", "A cylindrical trash can"], ["coffee canister", "A coffee canister"], ["grain silo model", "A model of a grain silo"]] as const;
+const RECT = [["garden", "A rectangular garden"], ["room", "A rectangular room"], ["courtyard", "A rectangular courtyard"], ["banner", "A rectangular banner"], ["pond", "A rectangular pond"], ["playground", "A rectangular playground"], ["stage", "A rectangular stage"], ["parking lot", "A rectangular parking lot"], ["patio", "A rectangular patio"], ["wooden deck", "A rectangular wooden deck"], ["lawn", "A rectangular lawn"], ["rooftop terrace", "A rectangular rooftop terrace"], ["tennis court", "A rectangular tennis court"], ["basketball court", "A rectangular basketball court"], ["gym floor", "A rectangular gym floor"], ["classroom", "A rectangular classroom"], ["hallway", "A rectangular hallway"], ["practice field", "A rectangular practice field"], ["flower bed", "A rectangular flower bed"], ["vegetable plot", "A rectangular vegetable plot"], ["picnic lawn", "A rectangular picnic lawn"], ["skate park", "A rectangular skate park"], ["dog run", "A rectangular dog run"], ["pool deck", "A rectangular pool deck"], ["billboard", "A rectangular billboard"], ["poster board", "A rectangular poster board"], ["quilt", "A rectangular quilt"], ["bulletin board", "A rectangular bulletin board"], ["dance floor", "A rectangular dance floor"], ["workshop", "A rectangular workshop"]] as const;
+const TANKS = [["aquarium", "An aquarium"], ["water tank", "A water tank"], ["storage bin", "A storage bin"], ["shipping crate", "A shipping crate"], ["fish tank", "A fish tank"], ["planter box", "A planter box"], ["toolbox", "A toolbox"], ["cooler", "A cooler"], ["wooden chest", "A wooden chest"], ["display case", "A display case"], ["terrarium", "A terrarium"], ["sandbox", "A sandbox"], ["garden planter", "A garden planter"], ["compost bin", "A compost bin"], ["feed trough", "A feed trough"], ["packing box", "A packing box"], ["gift box", "A gift box"], ["cargo container", "A cargo container"], ["paint tray", "A paint tray"], ["ice chest", "An ice chest"], ["bread box", "A bread box"], ["jewelry box", "A jewelry box"], ["tool chest", "A tool chest"], ["battery case", "A battery case"], ["pet carrier", "A pet carrier"], ["laundry bin", "A laundry bin"], ["seed tray", "A seed tray"], ["moving box", "A moving box"], ["tackle box", "A tackle box"], ["fuel tank", "A fuel tank"]] as const;
+const CANS = [["soup can", "A soup can"], ["paint can", "A paint can"], ["oil drum", "An oil drum"], ["water bucket", "A water bucket"], ["trash can", "A trash can"], ["coffee canister", "A coffee canister"], ["grain silo model", "A grain silo model"], ["tomato can", "A tomato can"], ["popcorn tin", "A popcorn tin"], ["flour canister", "A flour canister"], ["juice can", "A juice can"], ["tennis ball tube", "A tennis ball tube"], ["paint bucket", "A paint bucket"], ["rain barrel", "A rain barrel"], ["thermos", "A thermos"], ["candle", "A candle"], ["pencil cup", "A pencil cup"], ["bean can", "A bean can"], ["tea tin", "A tea tin"], ["cookie tin", "A cookie tin"], ["chalk bucket", "A chalk bucket"], ["salt shaker", "A salt shaker"], ["glue jar", "A glue jar"], ["storage jar", "A storage jar"], ["pasta canister", "A pasta canister"], ["candy jar", "A candy jar"], ["sand pail", "A sand pail"], ["battery pack", "A battery pack"], ["vitamin bottle", "A vitamin bottle"], ["propane tank", "A propane tank"]] as const;
 const TRIPLES = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [6, 8, 10], [9, 12, 15], [12, 16, 20], [15, 20, 25], [10, 24, 26], [20, 21, 29]] as const;
-const A1 = (n: string) => (/^[aeiou]/i.test(n) ? "An" : "A");
 const divisors = (n: number) => { const d: number[] = []; for (let i = 1; i <= n; i++) if (n % i === 0) d.push(i); return d; };
 
 export const AV_ARCHETYPES: Archetype[] = [
@@ -40,7 +39,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`합이 ${P / 2} 인 쌍은 ${w} 와 ${l} 이다.`, "Pick the pair with the right sum."],
           [`더 긴 변은 ${l} ${u} 이다.`, "The longer side."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: A, words: ["area"] }, { v: P, words: ["perimeter"] }], { words: ["longer"], forbid: forbidExcept("length") });
     },
@@ -117,7 +116,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`직사각형의 넓이는 ${a} × ${b} = ${a * b} 이다.`, "Area of the rectangle."],
           [`차이는 ${s * s} − ${a * b} = ${diff} 이다.`, "Difference."],
         ],
-        variant: x.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [], { words: ["area"], forbid: forbidExcept("area") });
     },
@@ -143,7 +142,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`h > 0 이므로 h = ${h} 이다.`, "Take the positive root."],
           [`밑변 = ${k} × ${h} = ${k * h} 이다.`, "Compute the base."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: A, words: ["area"] }, { v: k, words: ["times"] }], { words: ["base"], forbid: forbidExcept("length") });
     },
@@ -168,7 +167,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`h = ${h} 이다.`, "Height."],
           [`넓이 = (1/2) × ${b} × ${h} = ${a * h} 이다.`, "Area."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: L, words: ["sides"] }, { v: b, words: ["base"] }], { words: ["area", "cover"], forbid: forbidExcept("area") });
     },
@@ -183,9 +182,9 @@ export const AV_ARCHETYPES: Archetype[] = [
       const det = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2); const A = Math.abs(det) / 2;
       const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]); const box = (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys));
       if (A < 4 || (x1 === x2 && y1 === y2) || new Set(pts.map((p) => p.join())).size < 3 || x1 === x2 || x2 === x3 || x1 === x3 || y1 === y2 || y2 === y3 || y1 === y3) throw new GenFail("x");
-      const stimulus = spin(rng, `In the xy-plane, a triangle has vertices at $(${x1}, ${y1})$, $(${x2}, ${y2})$, and $(${x3}, ${y3})$. Each unit on both axes represents one centimeter.`);
+      const stimulus = spin(rng, `[[In the xy-plane, a triangle has vertices at|A triangle in the coordinate plane has its three corners at|The vertices of a triangle drawn in the xy-plane are]] $(${x1}, ${y1})$, $(${x2}, ${y2})$, and $(${x3}, ${y3})$. [[Each unit on both axes represents one centimeter.|Both axes are marked in centimeters.|The scale on each axis is one centimeter per unit.]]`);
       return finish(rng, {
-        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, "[[What is the area of the triangle, in square centimeters?|Find the area of the triangle, in square centimeters.|How many square centimeters does the triangle cover?]]"), correct: A,
+        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, "[[What is the area of the triangle, in square centimeters?|Find the area of the triangle, in square centimeters.|How many square centimeters does the triangle cover?|Determine the area enclosed by the triangle, in square centimeters.]]"), correct: A,
         wrongs: [W(Math.abs(det), "formula_misuse", "÷2 를 빼먹었다."), W(box, "geometry_misapplied", "둘러싼 직사각형의 넓이를 답했다."), W(box / 2, "geometry_misapplied", "둘러싼 직사각형의 절반을 답했다."), W(A + 1, "other", "계산 실수."), W(Math.max(A - 1, 0.5), "other", "계산 실수."), W(Math.abs(x1 * y2 + x2 * y3 + x3 * y1) / 2, "formula_misuse", "신발끈 공식의 한 방향 합만 썼다.")],
         verificationJs: withParams({ x1, y1, x2, y2, x3, y3 }, "const X=[P.x1,P.x2,P.x3], Y=[P.y1,P.y2,P.y3];\nconst g=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a;};\nlet B=0; for(let i=0;i<3;i++){ const j=(i+1)%3; B+=g(X[i]-X[j],Y[i]-Y[j]); }\nconst area2=(x,y)=>Math.abs((X[1]-X[0])*(y-Y[0])-(Y[1]-Y[0])*(x-X[0]));\nconst sgn=(px,py,ax,ay,bx,by)=>(bx-ax)*(py-ay)-(by-ay)*(px-ax);\nlet I=0; for(let x=0;x<=9;x++) for(let y=0;y<=9;y++){ const d1=sgn(x,y,X[0],Y[0],X[1],Y[1]), d2=sgn(x,y,X[1],Y[1],X[2],Y[2]), d3=sgn(x,y,X[2],Y[2],X[0],Y[0]); const neg=d1<0||d2<0||d3<0, pos=d1>0||d2>0||d3>0; if(!(neg&&pos) && d1!==0 && d2!==0 && d3!==0) I++; }\nreturn I+B/2-1;"),
         trace: [
@@ -222,7 +221,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`조건을 만족하는 쌍: ${ok.map(([b, h]) => `(${b},${h})`).join(" ")} 이다.`, "Keep the valid pairs."],
           [`따라서 ${ok.length} 가지이다.`, "Count."],
         ],
-        variant: `k${k}`,
+        variant: "frame",
       });
       return sem(out, [{ v: A, words: ["area"] }, { v: k, words: ["times"] }], { words: ["pairs", "pair"] });
     },
@@ -248,7 +247,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`치수는 ${n}, ${n + 1}, ${n + 2} 이다.`, "The dimensions."],
           [`겉넓이 = 2(${l}·${w} + ${l}·${h} + ${w}·${h}) = ${S} 이다.`, "Surface area."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: V, words: ["volume"] }], { words: ["surface area"], forbid: forbidExcept("area", "surface") });
     },
@@ -274,7 +273,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`유량이 분당 ${r} L 이므로 시간은 ${L} ÷ ${r} 이다.`, "Divide by the rate."],
           [`${m} 분이 걸린다.`, "Minutes needed."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: l, words: ["length"] }, { v: w, words: ["width"] }, { v: h, words: ["height"] }], { words: ["minutes", "long"], forbid: forbidExcept() });
     },
@@ -301,7 +300,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`한 면의 넓이는 ${e}² = ${e * e} 이다.`, "Area of one face."],
           [`정육면체는 면이 6 개이므로 겉넓이는 6 × ${e * e} = ${S} 이다.`, "Total surface area."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [], { words: ["surface area"], forbid: forbidExcept("area", "surface") });
     },
@@ -315,9 +314,10 @@ export const AV_ARCHETYPES: Archetype[] = [
       const a = rng.pick([10, 12, 15, 20, 24, 30]), b = rng.pick([10, 15, 20, 25, 30]), d = rng.int(4, 20); const V = a * b * d;
       const c = rng.pick([6, 8, 10, 12, 15, 16, 20, 25]), e = rng.pick([6, 8, 10, 12, 15, 20, 25, 30]); if ((V % (c * e)) !== 0) throw new GenFail("x");
       const add = V / (c * e), f = rng.int(2, 20); const fin = f + add; if (add < 1 || add > 60 || fin > 99 || (a === c && b === e)) throw new GenFail("x");
-      const stimulus = spin(rng, `Tank A has a rectangular base measuring ${a} centimeters by ${b} centimeters and holds water to a depth of ${d} centimeters. Tank B has a rectangular base measuring ${c} centimeters by ${e} centimeters and holds water to a depth of ${f} centimeters. All the water from tank A is poured into tank B, and none spills.`);
+      const [T1, t2] = rng.pick([["Tank A", "tank B"], ["Aquarium A", "aquarium B"], ["Basin A", "basin B"], ["Container A", "container B"], ["Trough A", "trough B"]]); const t1 = T1[0].toLowerCase() + T1.slice(1);
+      const stimulus = spin(rng, `[[${T1} has a rectangular base measuring ${a} centimeters by ${b} centimeters and holds water to a depth of ${d} centimeters.|${T1} sits on a rectangular base that is ${a} centimeters by ${b} centimeters. The water in it has a depth of ${d} centimeters.|The base of ${t1} measures ${a} centimeters by ${b} centimeters. Its water has a depth of ${d} centimeters.]] [[${t2[0].toUpperCase() + t2.slice(1)} has a rectangular base measuring ${c} centimeters by ${e} centimeters and holds water to a depth of ${f} centimeters.|${t2[0].toUpperCase() + t2.slice(1)} sits on a rectangular base that is ${c} centimeters by ${e} centimeters. The water in it has a depth of ${f} centimeters.|The base of ${t2} measures ${c} centimeters by ${e} centimeters. Its water has a depth of ${f} centimeters.]] [[All the water from ${t1} is poured into ${t2}, and none spills.|Every drop of water in ${t1} is transferred into ${t2} with nothing lost.|${T1} is emptied completely into ${t2} without any spilling.]]`);
       const out = finish(rng, {
-        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, "[[What is the depth of the water in tank B after pouring, in centimeters?|How deep is the water in tank B afterward, in centimeters?|Find the new depth of the water in tank B, in centimeters.]]"), correct: fin,
+        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the depth of the water in ${t2} after pouring, in centimeters?|How deep is the water in ${t2} afterward, in centimeters?|Find the new depth of the water in ${t2}, in centimeters.|After the transfer, what is the depth of the water in ${t2}, in centimeters?]]`), correct: fin,
         wrongs: [W(add, "step_missing", "B 에 더해진 수위만 구하고 기존 수위를 더하지 않았다."), W(d + f, "formula_misuse", "두 수위를 그대로 더했다."), W((a * b * d) / (c * e) + d, "other", "A 의 수위를 더했다."), W(V / (c * e + 0) + f + 1, "other", "계산 실수."), W((a * b * (d + f)) / (c * e), "formula_misuse", "기존 B 의 수위를 A 의 밑넓이 기준으로 환산했다.")],
         verificationJs: withParams({ a, b, d, c, e, f }, "const vA=P.a*P.b*P.d, vB=P.c*P.e*P.f; const total=vA+vB; const base=P.c*P.e; if(total%base!==0) throw new Error('정수 아님'); return total/base;"),
         trace: [
@@ -354,7 +354,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`각 모서리는 부피를 그 모서리를 포함하지 않는 면의 넓이로 나눈 값이다: ${V}÷${a3}=${l}, ${V}÷${a2}=${w}, ${V}÷${a1}=${h}.`, "Divide the volume by each opposite face area."],
           [`세 모서리는 ${l}, ${w}, ${h} 이므로 가장 긴 것은 ${longest} 이다.`, "Pick the longest."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: a1, words: ["areas"] }, { v: a2, words: ["areas"] }, { v: a3, words: ["areas"] }], { words: ["longest"], forbid: forbidExcept("length") });
     },
@@ -380,7 +380,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`${nm2} 의 밑넓이는 ${l2} × ${w2} = ${l2 * w2} 이다.`, "Base area of the second prism."],
           [`부피 = ${l2 * w2} × ${h} = ${V2} 이다.`, "Volume of the second prism."],
         ],
-        variant: nm1.split(" ")[0].toLowerCase(),
+        variant: "frame",
       });
       return sem(out, [{ v: V1, words: ["volume"] }, { v: l1, words: ["base"] }, { v: w1, words: ["base"] }, { v: l2, words: ["base"] }, { v: w2, words: ["base"] }], { words: ["volume", "hold"], forbid: forbidExcept("volume") });
     },
@@ -405,7 +405,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           ["부피 = 밑넓이 × 높이 이므로 높이 = 부피 ÷ 밑넓이 이다.", "Solve for the height."],
           [`높이 = ${L * 1000} ÷ ${l * w} = ${h} cm 이다.`, "Height."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: l, words: ["base"] }, { v: w, words: ["base"] }], { words: ["height", "tall"], forbid: forbidExcept("height") });
     },
@@ -433,7 +433,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [trip.map(([a, b, c], i) => `(${a},${b},${c}) → ${SA[i]}`).join(", ") + " 이다.", "Tabulate."],
           [`가장 작은 값은 (${trip[bi].join(",")}) 의 ${best} 이다.`, "Choose the minimum."],
         ],
-        variant: `v${V}`,
+        variant: "frame",
       });
       return sem(out, [{ v: V, words: ["volume"] }], { words: ["surface area"], forbid: forbidExcept("area", "surface") });
     },
@@ -459,7 +459,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`r > 0 이므로 r = ${r} 이다.`, "Take the positive root."],
           [`밑면의 둘레는 2πr = ${2 * r}π 이다.`, "Circumference."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: k, words: ["volume"] }, { v: h, words: ["height"] }], { words: ["circumference"], forbid: forbidExcept("circumference") });
     },
@@ -472,9 +472,9 @@ export const AV_ARCHETYPES: Archetype[] = [
     generate(rng) {
       const r = rng.pick([4, 5, 8, 10, 12, 15, 20]), p = rng.pick([10, 20, 25, 50]), h = rng.int(2, 9); const r2 = (r * (100 + p)) / 100; if (!Number.isInteger(r2)) throw new GenFail("x");
       const d = h * (r2 * r2 - r * r); if (d > 9000) throw new GenFail("x"); const [nm, who] = rng.pick(CANS);
-      const stimulus = spin(rng, `${who} is a right circular cylinder with a radius of ${r} centimeters and a height of ${h} centimeters. Its radius is [[increased|made larger]] by ${p}%, while its height stays the same.`);
+      const stimulus = spin(rng, `[[${who} is a right circular cylinder with a radius of ${r} centimeters and a height of ${h} centimeters.|${who} is a right circular cylinder whose height is ${h} centimeters and whose radius is ${r} centimeters.|For ${who.charAt(0).toLowerCase() + who.slice(1)}, a right circular cylinder, the radius is ${r} centimeters and the height is ${h} centimeters.]] [[Its radius is increased by ${p}%, while its height stays the same.|The radius is made ${p}% larger, and the height is unchanged.|A redesign applies a ${p}% increase to the radius and keeps the height the same.]]`);
       const out = finish(rng, {
-        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[By how many cubic centimeters does the volume of the ${nm} increase, in terms of π?|What is the increase in volume, in cubic centimeters, in terms of π?|The volume increases by how many cubic centimeters, in terms of π?]]`), correct: d, fmt: piOpt,
+        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[By how many cubic centimeters does the volume of the ${nm} increase, in terms of π?|What is the increase in volume, in cubic centimeters, in terms of π?|The volume increases by how many cubic centimeters, in terms of π?|How much greater, in cubic centimeters, is the new volume than the old one? Give the answer in terms of π.]]`), correct: d, fmt: piOpt,
         wrongs: [W(h * r2 * r2, "step_missing", "새 부피만 구하고 처음 부피를 빼지 않았다."), W((h * r * r * p) / 100, "formula_misuse", "부피가 반지름과 같은 비율(p%)로 늘어난다고 보았다."), W(h * r * r, "step_missing", "처음 부피를 답했다."), W(h * (r2 - r) * (r2 - r), "formula_misuse", "반지름 변화량만 제곱했다."), W(h * (r2 - r) * 2 * r, "formula_misuse", "선형 근사로 계산했다.")],
         verificationJs: withParams({ r, p, h }, "const v0=P.r*P.r*P.h*10000; const v1=P.r*(100+P.p)*P.r*(100+P.p)*P.h; return (v1-v0)/10000;"),
         trace: [
@@ -484,7 +484,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           ["반지름이 커져도 높이는 그대로이므로 두 부피를 그대로 비교한다.", "Height is unchanged."],
           [`증가량은 ${r2 * r2 * h}π − ${r * r * h}π = ${d}π 이다.`, "Increase."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["radius"] }, { v: h, words: ["height"] }, { v: p, words: [...UP, "larger"], pct: true }], { words: ["volume"], forbid: forbidExcept("volume") });
     },
@@ -509,7 +509,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`${r * r * h}π ÷ 1000 = ${coef}π L 이다.`, "Capacity in liters."],
           [`용량은 ${coef}π 리터이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: r, words: ["radius"] }, { v: h, words: ["height"] }], { words: ["liters"], forbid: forbidExcept() });
     },
@@ -521,10 +521,10 @@ export const AV_ARCHETYPES: Archetype[] = [
     concepts: ["원기둥 부피", "부피 동일 조건 비교", "제곱 반비례"], mediumSteps: 1,
     generate(rng) {
       const rA = rng.int(2, 12), hA = rng.int(2, 18), rB = rng.int(2, 12); if (rA === rB || (rA * rA * hA) % (rB * rB) !== 0) throw new GenFail("x"); const hB = (rA * rA * hA) / (rB * rB);
-      if (hB === hA || hB > 99 || hB < 1) throw new GenFail("x"); const [nm] = rng.pick(CANS);
-      const stimulus = spin(rng, `Can A is a cylinder with a radius of ${rA} centimeters and a height of ${hA} centimeters. Can B is a cylinder with a radius of ${rB} centimeters. The two cans hold exactly the same volume.`);
+      if (hB === hA || hB > 99 || hB < 1) throw new GenFail("x"); const [nm] = rng.pick(CANS); const [C1, c2, cs] = rng.pick([["Can A", "can B", "cans"], ["Jar A", "jar B", "jars"], ["Drum A", "drum B", "drums"], ["Tank A", "tank B", "tanks"], ["Cup A", "cup B", "cups"]] as const);
+      const stimulus = spin(rng, `[[${C1} is a cylinder with a radius of ${rA} centimeters and a height of ${hA} centimeters.|${C1} is a cylinder whose height is ${hA} centimeters and whose radius is ${rA} centimeters.|The cylinder ${C1} has a radius of ${rA} centimeters, and its height is ${hA} centimeters.]] [[${c2[0].toUpperCase() + c2.slice(1)} is a cylinder with a radius of ${rB} centimeters.|The radius of ${c2}, also a cylinder, is ${rB} centimeters.|${c2[0].toUpperCase() + c2.slice(1)} is another cylinder, and its radius is ${rB} centimeters.]] [[The two ${cs} hold exactly the same volume.|Both ${cs} can hold precisely the same volume of liquid.|The volume that ${C1} holds equals the volume that ${c2} holds.]]`);
       const out = finish(rng, {
-        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, "[[What is the height of can B, in centimeters?|Find the height of can B, in centimeters.|How tall is can B, in centimeters?]]"), correct: hB,
+        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the height of ${c2}, in centimeters?|Find the height of ${c2}, in centimeters.|How tall is ${c2}, in centimeters?|Determine the height of ${c2} in centimeters.]]`), correct: hB,
         wrongs: [W((rA * hA) / rB, "formula_misuse", "높이가 반지름에 반비례한다고 보았다(제곱이 아님)."), W(hA, "step_missing", "같은 높이라고 답했다."), W((rB * rB * hA) / (rA * rA), "formula_misuse", "비를 거꾸로 적용했다."), W(rA * rA * hA, "step_missing", "A 의 부피 계수를 답했다."), W(hA + (rA - rB), "other", "반지름 차이만큼 더했다.")],
         verificationJs: withParams({ rA, hA, rB }, "const out=[];\nfor(let h=1;h<=2000;h++){ if(P.rB*P.rB*h===P.rA*P.rA*P.hA) out.push(h); }\nif(out.length!==1) throw new Error('유일하지 않음');\nreturn out[0];"),
         trace: [
@@ -534,7 +534,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`${rB * rB}h = ${rA * rA * hA} 이다.`, "Equation."],
           [`h = ${hB} 이다.`, "Solve."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: rA, words: ["radius"] }, { v: rB, words: ["radius"] }, { v: hA, words: ["height"] }], { words: ["height", "tall"], forbid: forbidExcept("height") });
     },
@@ -559,7 +559,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`d = ${d} 이다(세제곱근).`, "Take the cube root."],
           [`반지름은 ${d} ÷ 2 = ${d / 2} 이다.`, "Radius is half the diameter."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: k, words: ["volume"] }], { words: ["radius"], forbid: forbidExcept("radius") });
     },
@@ -584,7 +584,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           [`부피 = π × ${C / 2}² × ${m * C} 이다.`, "Substitute into the volume formula."],
           [`${(C * C) / 4} × ${m * C} = ${coef} 이므로 부피는 ${coef}π 이다.`, "Compute."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: C, words: ["circumference"] }, { v: m, words: ["times", "diameter", "height"] }], { words: ["volume", "hold"], forbid: forbidExcept("volume") });
     },
@@ -609,7 +609,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           ["1 L = 1000 cm³ 이므로 1000 으로 나눈다.", "Convert."],
           [`부피는 ${coef}π 리터이다.`, "Answer."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: d, words: ["diameter"] }, { v: h, words: ["height"] }], { words: ["liters", "volume"], forbid: forbidExcept("volume") });
     },
@@ -621,10 +621,10 @@ export const AV_ARCHETYPES: Archetype[] = [
     concepts: ["원기둥 부피", "지름·반지름 통일", "부피 동일 조건 비교"], mediumSteps: 2,
     generate(rng) {
       const rA = rng.int(2, 10), hA = rng.int(2, 18), rB = rng.int(2, 12); const dA = 2 * rA; if (rA === rB || (rA * rA * hA) % (rB * rB) !== 0) throw new GenFail("x"); const hB = (rA * rA * hA) / (rB * rB);
-      if (hB === hA || hB > 99 || dA === rB || hA === dA || hB === rB || hB === hA) throw new GenFail("x"); const [nm] = rng.pick(CANS);
-      const stimulus = spin(rng, `Can A is a cylinder with a diameter of ${dA} centimeters and a height of ${hA} centimeters. Can B is a cylinder with a radius of ${rB} centimeters. The two cans hold exactly the same volume.`);
+      if (hB === hA || hB > 99 || dA === rB || hA === dA || hB === rB || hB === hA) throw new GenFail("x"); const [nm] = rng.pick(CANS); const [C1, c2, cs] = rng.pick([["Can A", "can B", "cans"], ["Jar A", "jar B", "jars"], ["Drum A", "drum B", "drums"], ["Tank A", "tank B", "tanks"], ["Cup A", "cup B", "cups"]] as const);
+      const stimulus = spin(rng, `[[${C1} is a cylinder with a diameter of ${dA} centimeters and a height of ${hA} centimeters.|${C1} is a cylinder whose height is ${hA} centimeters and whose diameter is ${dA} centimeters.|The cylinder ${C1} has a diameter of ${dA} centimeters, and its height is ${hA} centimeters.]] [[${c2[0].toUpperCase() + c2.slice(1)} is a cylinder with a radius of ${rB} centimeters.|The radius of ${c2}, also a cylinder, is ${rB} centimeters.|${c2[0].toUpperCase() + c2.slice(1)} is another cylinder, and its radius is ${rB} centimeters.]] [[The two ${cs} hold exactly the same volume.|Both ${cs} can hold precisely the same volume of liquid.|The volume that ${C1} holds equals the volume that ${c2} holds.]]`);
       const out = finish(rng, {
-        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, "[[What is the height of can B, in centimeters?|Find the height of can B, in centimeters.|How tall is can B, in centimeters?]]"), correct: hB,
+        stimulus: withOpen(rng, OPEN_GEO, stimulus), question: spin(rng, `[[What is the height of ${c2}, in centimeters?|Find the height of ${c2}, in centimeters.|How tall is ${c2}, in centimeters?|Determine the height of ${c2} in centimeters.]]`), correct: hB,
         wrongs: [W((dA * dA * hA) / (rB * rB), "geometry_misapplied", "A 의 지름을 반지름처럼 제곱해 계산했다."), W((rA * rA * hA) / (2 * rB) , "formula_misuse", "B 의 반지름을 지름으로 착각했다."), W((dA * dA * hA) / (4 * rB * rB * 4), "other", "계산 실수."), W(hA, "step_missing", "같은 높이라고 답했다."), W((rA * hA) / rB, "formula_misuse", "높이가 반지름에 반비례한다고 보았다.")],
         verificationJs: withParams({ dA, hA, rB }, "const out=[];\nfor(let h=1;h<=2000;h++){ if(P.dA*P.dA*P.hA===4*P.rB*P.rB*h) out.push(h); }\nif(out.length!==1) throw new Error('유일하지 않음');\nreturn out[0];"),
         trace: [
@@ -634,7 +634,7 @@ export const AV_ARCHETYPES: Archetype[] = [
           ["두 부피가 같으므로 π 를 약분한다.", "Equate the volumes."],
           [`${rB * rB}h = ${rA * rA * hA} 이므로 h = ${hB} 이다.`, "Solve for the height."],
         ],
-        variant: nm.replace(/\s+/g, "_"),
+        variant: "frame",
       });
       return sem(out, [{ v: dA, words: ["diameter"] }, { v: rB, words: ["radius"] }, { v: hA, words: ["height"] }], { words: ["height", "tall"], forbid: forbidExcept("height") });
     },
@@ -760,8 +760,8 @@ export const AV_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const r = rng.int(2, level === "easy" ? 9 : 14), h = rng.int(2, level === "easy" ? 12 : 16), n = rng.int(2, 5); if (r === h || n === r || n === h) throw new GenFail("x"); const [nm, who] = rng.pick(CANS); const u = rng.pick(["centimeters", "inches", "meters", "feet"] as const);
       const c = r * r * h, ans = level === "easy" ? c : c * n; if (ans > 9000) throw new GenFail("x");
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `${who} is a right circular cylinder with a radius of ${r} ${u} and a height of ${h} ${u}.${level === "easy" ? "" : ` A shop stocks ${n} identical ones.`}`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.]]` : `[[What is the total volume of all ${n} identical ones, in ${cu(u)}, in terms of π?|Altogether, how many ${cu(u)} do the ${n} identical ones hold, in terms of π?]]`), correct: ans, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `[[${who} is a right circular cylinder with a radius of ${r} ${u} and a height of ${h} ${u}.|${who} is a right circular cylinder whose radius is ${r} ${u} and whose height is ${h} ${u}.|The cylinder, ${who.charAt(0).toLowerCase() + who.slice(1)}, has a radius of ${r} ${u} and stands ${h} ${u} in height.]]${level === "easy" ? "" : ` [[A shop stocks ${n} identical ones.|There are ${n} identical ones on a shop shelf.|A store keeps ${n} identical ones in stock.]]`}`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.|How many ${cu(u)} does the ${nm} hold, in terms of π?|Determine the volume of the ${nm} in ${cu(u)}, leaving the answer in terms of π.]]` : `[[What is the total volume of all ${n} identical ones, in ${cu(u)}, in terms of π?|Altogether, how many ${cu(u)} do the ${n} identical ones hold, in terms of π?|Find the combined volume of the ${n} identical ones, in ${cu(u)}, in terms of π.]]`), correct: ans, fmt: piOpt,
         wrongs: [W(level === "easy" ? 2 * r * h : 2 * r * h * n, "formula_misuse", "옆넓이 형태(2πrh)로 계산했다."), W(level === "easy" ? r * h : r * h * n, "formula_misuse", "r² 대신 r 을 곱했다."), W(level === "easy" ? 4 * r * r * h : 4 * c * n, "geometry_misapplied", "반지름 대신 지름을 제곱했다."), W(level === "easy" ? c + r : c * n + n, "other", "계산 실수."), W(level === "easy" ? r * r : c, level === "easy" ? "step_missing" : "step_missing", level === "easy" ? "밑넓이만 답했다." : "하나의 부피만 답했다.")],
         verificationJs: withParams({ r, h, n: level === "easy" ? 1 : n, easy: level === "easy" ? 1 : 0 }, "let v=0; for(let i=0;i<P.r*P.r;i++) v+=P.h;\nreturn P.easy? v : v*P.n;"),
         trace: [[`한 개의 부피 = π × ${r}² × ${h} = ${c}π 이다.`, "Volume of one cylinder."], ...(level === "easy" ? [] : [[`${n} 개이므로 ${c}π × ${n} = ${ans}π 이다.`, "Multiply by the number."] as [string, string]])], variant: level === "easy" ? "volume" : "total_of_n" });
@@ -773,25 +773,25 @@ export const AV_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const r = rng.int(2, 12), h = rng.int(3, 20); if (r === h) throw new GenFail("x"); const [nm, who] = rng.pick([["pipe", "A cylindrical pipe"], ["water main", "A cylindrical water main"], ["silo", "A cylindrical silo"], ["column", "A cylindrical column"], ["tube", "A cylindrical tube"], ["pillar", "A cylindrical pillar"]]); const u = rng.pick(["centimeters", "inches", "meters", "feet"] as const);
       const c = r * r * h; if (c > 9000) throw new GenFail("x");
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `${who} has a radius of ${r} ${u} and a length of ${h} ${u}.` : `${who} has a circular base with an area of $${r * r}\\pi$ ${sq(u)}. Its length is ${h} ${u}.`));
-      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.]]`), correct: c, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `[[${who} has a radius of ${r} ${u} and a length of ${h} ${u}.|${who} has these dimensions: its radius is ${r} ${u} and its length is ${h} ${u}.|${who} has a circular cross-section of radius ${r} ${u}, and its length is ${h} ${u}.]]` : `[[${who} has a circular base with an area of $${r * r}\\pi$ ${sq(u)}. Its length is ${h} ${u}.|The circular base of ${who.charAt(0).toLowerCase() + who.slice(1)} has an area of $${r * r}\\pi$ ${sq(u)}, and its length is ${h} ${u}.|${who} is ${h} ${u} in length, and the area of its circular base is $${r * r}\\pi$ ${sq(u)}.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.|How many ${cu(u)} does the ${nm} hold, in terms of π?|Determine the volume of the ${nm} in ${cu(u)}, leaving the answer in terms of π.]]`), correct: c, fmt: piOpt,
         wrongs: [W(2 * r * h, "formula_misuse", "옆넓이 형태로 계산했다."), W(r * h, "formula_misuse", "r² 대신 r 을 곱했다."), W(r * r + h, "formula_misuse", "밑넓이에 길이를 더했다."), W(level === "easy" ? 4 * c : r * r * h * 2, "geometry_misapplied", level === "easy" ? "반지름 대신 지름을 제곱했다." : "밑넓이 계수를 두 번 곱했다."), W(r * r, "step_missing", "밑넓이만 답했다.")],
         verificationJs: withParams(level === "easy" ? { r, h } : { a: r * r, h }, level === "easy" ? "let v=0; for(let i=0;i<P.r*P.r;i++) v+=P.h;\nreturn v;" : "let v=0; for(let i=0;i<P.a;i++) v+=P.h;\nreturn v;"),
         trace: level === "easy" ? [[`밑넓이 = π × ${r}² = ${r * r}π 이다.`, "Base area."], [`부피 = ${r * r}π × ${h} = ${c}π 이다.`, "Multiply by the length."]] : [[`밑넓이가 이미 ${r * r}π 로 주어졌다.`, "The base area is given."], [`부피 = 밑넓이 × 길이 = ${r * r}π × ${h} = ${c}π 이다.`, "Multiply by the length."]], variant: level === "easy" ? "radius_given" : "base_area_given" });
-      return sem(out, level === "easy" ? [{ v: r, words: ["radius"] }, { v: h, words: ["length"] }] : [{ v: r * r, words: ["area"] }, { v: h, words: ["length"] }], { words: ["volume"], forbid: forbidExcept("volume") });
+      return sem(out, level === "easy" ? [{ v: r, words: ["radius"] }, { v: h, words: ["length"] }] : [{ v: r * r, words: ["area", "base"] }, { v: h, words: ["length"] }], { words: ["volume", "hold"], forbid: forbidExcept("volume") });
     },
   },
   {
     id: "av.cylinder_volume_diameter.can", skill: SKILL, kind: "cylinder_volume_diameter", frame: "can", levels: ["easy", "medium"], structure: "지름으로 주어진 원기둥 부피(easy) / 분수만큼 찬 부피(medium)",
     generate(rng, level) {
       const r = rng.int(2, level === "easy" ? 9 : 12), h = rng.int(2, level === "easy" ? 12 : 16), d = 2 * r; if (d === h) throw new GenFail("x"); const [fn, fd, fw] = rng.pick(FRACS); const c = r * r * h; const ans = level === "easy" ? c : (c * fn) / fd; if (!Number.isInteger(ans)) throw new GenFail("x"); const [nm, who] = rng.pick(CANS); const u = rng.pick(["centimeters", "inches", "meters", "feet"] as const);
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `${who} is a right circular cylinder with a diameter of ${d} ${u} and a height of ${h} ${u}.${level === "easy" ? "" : ` It is currently filled to ${fw} of its capacity.`}`));
-      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.]]` : `[[What is the volume of the contents, in ${cu(u)}, in terms of π?|How many ${cu(u)} are inside the ${nm}, in terms of π?]]`), correct: ans, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, `[[${who} is a right circular cylinder with a diameter of ${d} ${u} and a height of ${h} ${u}.|${who} is a right circular cylinder whose diameter is ${d} ${u} and whose height is ${h} ${u}.|${who} has these measurements: diameter ${d} ${u}, height ${h} ${u}.]]${level === "easy" ? "" : ` [[It is currently filled to ${fw} of its capacity.|At the moment it is ${fw} full.|Its contents fill ${fw} of its capacity.]]`}`));
+      const out = finish(rng, { stimulus, question: spin(rng, level === "easy" ? `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.|How many ${cu(u)} does the ${nm} hold, in terms of π?|Determine the volume of the ${nm} in ${cu(u)}, leaving the answer in terms of π.]]` : `[[What is the volume of the contents, in ${cu(u)}, in terms of π?|How many ${cu(u)} are inside the ${nm}, in terms of π?|Find the volume of what the ${nm} currently holds, in ${cu(u)}, in terms of π.]]`), correct: ans, fmt: piOpt,
         wrongs: level === "easy" ? [W(4 * c, "geometry_misapplied", "지름을 반지름처럼 제곱했다."), W(2 * c, "formula_misuse", "지름을 한 번만 곱했다."), W(d * h, "formula_misuse", "지름과 높이만 곱했다."), W(c / 2, "formula_misuse", "반지름을 한 번 더 반으로 나눴다."), W(c + d, "other", "계산 실수.")]
           : [W(c, "step_missing", "가득 찼을 때의 부피를 답했다."), W((4 * c * fn) / fd, "geometry_misapplied", "지름을 반지름처럼 제곱했다."), W(c - ans, "opposite", "비어 있는 부분의 부피를 답했다."), W(2 * ans, "formula_misuse", "지름을 한 번만 곱했다."), W(ans + d, "other", "계산 실수.")],
         verificationJs: withParams({ d, h, fn: level === "easy" ? 1 : fn, fd: level === "easy" ? 1 : fd, easy: level === "easy" ? 1 : 0 }, "const v=(P.d*P.d*P.h)/4; return P.easy? v : v*P.fn/P.fd;"),
         trace: [[`지름이 ${d} 이므로 반지름은 ${r} 이다.`, "Radius from diameter."], [`가득 찼을 때의 부피 = π × ${r}² × ${h} = ${c}π 이다.`, "Full volume."], ...(level === "easy" ? [] : [[`${fw}(${fn}/${fd}) 만큼 찼으므로 ${c}π × ${fn}/${fd} = ${ans}π 이다.`, "Take the filled fraction."] as [string, string]])], variant: level === "easy" ? "volume" : "filled_fraction" });
-      return sem(out, [{ v: d, words: ["diameter"] }, { v: h, words: ["height"] }], { words: ["volume", "inside", "contents"], forbid: forbidExcept("volume") });
+      return sem(out, [{ v: d, words: ["diameter"] }, { v: h, words: ["height"] }], { words: ["volume", "inside", "contents", "hold"], forbid: forbidExcept("volume") });
     },
   },
   {
@@ -799,12 +799,12 @@ export const AV_LITE: LiteArchetype[] = [
     generate(rng, level) {
       const r = rng.int(2, 10), d = 2 * r, h = level === "easy" ? rng.int(3, 18) : 2 * d; if (h === d && level === "easy") throw new GenFail("x"); const c = r * r * h; if (c > 9000) throw new GenFail("x");
       const [nm, who] = rng.pick([["column", "A cylindrical column"], ["tower model", "A cylindrical tower model"], ["candle", "A cylindrical candle"], ["rod", "A solid cylindrical rod"], ["cake", "A cylindrical cake"], ["stool", "A cylindrical stool"]]); const u = rng.pick(["centimeters", "inches", "meters", "feet"] as const);
-      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `${who} has a diameter of ${d} ${u} and a height of ${h} ${u}.` : `${who} has a diameter of ${d} ${u}. Its height is twice its diameter.`));
-      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.]]`), correct: c, fmt: piOpt,
+      const stimulus = withOpen(rng, OPEN_GEO, spin(rng, level === "easy" ? `[[${who} has a diameter of ${d} ${u} and a height of ${h} ${u}.|For ${who.charAt(0).toLowerCase() + who.slice(1)}, the diameter is ${d} ${u} and the height is ${h} ${u}.|${who} has these measurements: height ${h} ${u}, diameter ${d} ${u}.]]` : `[[${who} has a diameter of ${d} ${u}. Its height is twice its diameter.|The diameter of ${who.charAt(0).toLowerCase() + who.slice(1)} is ${d} ${u}, and it is twice as tall as it is wide.|${who} measures ${d} ${u} across its diameter, and its height is double that diameter.]]`));
+      const out = finish(rng, { stimulus, question: spin(rng, `[[What is the volume of the ${nm}, in ${cu(u)}, in terms of π?|Find the volume of the ${nm}, in ${cu(u)}, in terms of π.|How many ${cu(u)} does the ${nm} hold, in terms of π?|Determine the volume of the ${nm} in ${cu(u)}, leaving the answer in terms of π.]]`), correct: c, fmt: piOpt,
         wrongs: [W(4 * c, "geometry_misapplied", "지름을 반지름처럼 제곱했다."), W(2 * c, "formula_misuse", "지름을 한 번만 곱했다."), W(c / 2, "formula_misuse", "반지름을 한 번 더 반으로 나눴다."), W(d * h, "formula_misuse", "지름과 높이만 곱했다."), W(r * h, "formula_misuse", "r² 대신 r 을 곱했다.")],
         verificationJs: withParams(level === "easy" ? { d, h, tw: 0 } : { d, h: 1, tw: 1 }, "const v=(P.d*P.d*(P.tw? 2*P.d : P.h))/4; return v;"),
         trace: level === "easy" ? [[`반지름 = ${d} ÷ 2 = ${r} 이다.`, "Radius."], [`부피 = π × ${r}² × ${h} = ${c}π 이다.`, "Volume."]] : [[`반지름 = ${d} ÷ 2 = ${r} 이다.`, "Radius."], [`높이는 지름의 2 배이므로 ${h} 이다.`, "Height."], [`부피 = π × ${r}² × ${h} = ${c}π 이다.`, "Volume."]], variant: level === "easy" ? "height_given" : "height_twice_diameter" });
-      return sem(out, level === "easy" ? [{ v: d, words: ["diameter"] }, { v: h, words: ["height"] }] : [{ v: d, words: ["diameter"] }], { words: ["volume"], forbid: forbidExcept("volume") });
+      return sem(out, level === "easy" ? [{ v: d, words: ["diameter"] }, { v: h, words: ["height"] }] : [{ v: d, words: ["diameter"] }], { words: ["volume", "hold"], forbid: forbidExcept("volume") });
     },
   },
 ];

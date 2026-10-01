@@ -3,7 +3,10 @@ import { describe, expect, it } from "vitest";
 import { LITE_C_ARCHETYPES } from "./lite-c";
 import { ARCHETYPES } from "./registry";
 import { generateLite, sweepLite, verifyLite } from "./c-lite";
-import { semanticIssues, forbidExcept, plural } from "./c-kit";
+import { semanticIssues, forbidExcept, plural, semOf } from "./c-kit";
+import { generateOne } from "./sweep";
+import { verifyInstance } from "./verify";
+import type { Instance } from "./types";
 
 const C_SKILLS = ["percentages", "area_volume", "circles"];
 const HARD_C = ARCHETYPES.filter((a) => C_SKILLS.includes(a.skill));
@@ -66,4 +69,41 @@ describe("문장-변수 의미 일치 검사기(명사-수식 매핑)", () => {
     expect(semanticIssues("The price was raised by 20%.", "?", [{ v: 20, words: ["raised", "increase", "increased"], pct: true }])).toEqual([]);
   });
   it("복수형 도우미", () => { expect(plural("box")).toBe("boxes"); expect(plural("crate")).toBe("crates"); expect(plural("pantry")).toBe("pantries"); });
+});
+
+describe("돌연변이 — C 담당 모든 원형(hard·lite)에서 검증기가 변조를 잡는가", () => {
+  const firstOk = (gen: (s: number) => { ok: boolean; inst?: Instance }) => { for (let s = 0; s < 60; s++) { const g = gen(s); if (g.ok) return g.inst!; } throw new Error("생성 실패"); };
+  const mutations = (inst: Instance, check: (i: Instance) => { ok: boolean; failures: string[] }) => {
+    expect(check(inst).ok, JSON.stringify(check(inst).failures)).toBe(true);
+    expect(check({ ...inst, correctIndex: (inst.correctIndex + 1) % 4 }).ok, "정답 키 변조").toBe(false);
+    const o = [...inst.options]; o[(inst.correctIndex + 1) % 4] = o[inst.correctIndex]; expect(check({ ...inst, options: o }).ok, "선지 겹침").toBe(false);
+    const m = inst.verificationJs.match(/^const P = (\{.*\});/)!; const P = JSON.parse(m[1]) as Record<string, unknown>; let caught = false;
+    for (const [k, v] of Object.entries(P)) { if (typeof v !== "number" || !Number.isInteger(v)) continue; for (const d of [1, -1, 2, 7, -3]) { const js = inst.verificationJs.replace(/^const P = \{.*\};/, `const P = ${JSON.stringify({ ...P, [k]: v + d })};`); const r = check({ ...inst, verificationJs: js }); if (!r.ok && r.failures.some((f) => f.includes("정답 재계산") || f.includes("verification_js 실패") || f.includes("정답 키 불일치"))) { caught = true; break; } } if (caught) break; }
+    expect(caught, "verification_js 상수 변조").toBe(true);
+    expect(check({ ...inst, stimulus: `${inst.stimulus} $x` }).ok, "$ 짝").toBe(false);
+  };
+  for (const a of HARD_C) it(`${a.id}: 변조를 잡는다`, () => { const inst = firstOk((s) => { const g = generateOne(a, s); return g.ok ? { ok: true, inst: g.inst } : { ok: false }; }); mutations(inst, (i) => verifyInstance(a, i)); });
+  for (const a of LITE_C_ARCHETYPES) for (const lv of a.levels) it(`${a.id} ${lv}: 변조를 잡는다`, () => { const inst = firstOk((s) => { const g = generateLite(a, lv, s); return g.ok ? { ok: true, inst: g.inst } : { ok: false }; }); mutations(inst, (i) => verifyLite(a, i)); });
+
+  const SWAP: Record<string, string> = { radius: "diameter", diameter: "radius", circumference: "area", area: "perimeter", volume: "area", height: "width", length: "width", width: "length", base: "height", perimeter: "area", raised: "reduced", increased: "decreased", increase: "decrease", discount: "markup", reduced: "raised" };
+  it("의미 불일치 돌연변이: 선언한 수량 명사를 다른 명사로 바꾸면 의미 검사가 잡는다(기하·퍼센트 원형 다수)", () => {
+    let tested = 0, caught = 0; const misses: string[] = [];
+    const all: { id: string; gen: (s: number) => Instance | null }[] = [
+      ...HARD_C.map((a) => ({ id: a.id, gen: (s: number) => { const g = generateOne(a, s); return g.ok ? g.inst : null; } })),
+      ...LITE_C_ARCHETYPES.flatMap((a) => a.levels.map((lv) => ({ id: `${a.id}#${lv}`, gen: (s: number) => { const g = generateLite(a, lv, s); return g.ok ? g.inst : null; } }))),
+    ];
+    for (const { id, gen } of all) {
+      for (let s = 0; s < 30; s++) {
+        const inst = gen(s); if (!inst) continue; const { semBinds, semAsk } = semOf(inst); if (!semBinds?.length) continue;
+        const b = semBinds.find((x) => x.words.some((w) => SWAP[w] && new RegExp(`\\b${w}\\b`, "i").test(inst.stimulus))); if (!b) continue;
+        const w = b.words.find((x) => SWAP[x] && new RegExp(`\\b${x}\\b`, "i").test(inst.stimulus))!;
+        const mutated = inst.stimulus.replace(new RegExp(`\\b${w}\\b`, "gi"), SWAP[w]); tested++;
+        if (semanticIssues(mutated, inst.question, semBinds, semAsk).length > 0) caught++; else misses.push(`${id}:${w}`);
+        break;
+      }
+    }
+    expect(tested).toBeGreaterThan(40);
+    expect(misses.length, `놓친 변조: ${misses.slice(0, 8).join(", ")}`).toBeLessThanOrEqual(Math.floor(tested * 0.1));
+    expect(caught).toBeGreaterThan(tested * 0.9);
+  });
 });
