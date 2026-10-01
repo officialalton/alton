@@ -73,19 +73,16 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     expect(screen.queryByRole("dialog")).toBeNull();
   });
 
-  it("Review Mistakes: 필터(All/Incorrect/Guessed)와 🎲 표시", () => {
+  it("Review Mistakes: 필터 없이 R&W 먼저 나열하고, 번호·Guessed·정오 칸이 있다", () => {
     render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
     fireEvent.click(screen.getByRole("tab", { name: "Review Mistakes" }));
+    expect(screen.queryByRole("button", { name: "Incorrect" })).toBeNull();
     expect(screen.getByTestId("review-guessed-r2")).toBeInTheDocument();
     expect(screen.queryByTestId("review-guessed-r1")).toBeNull();
-    fireEvent.click(screen.getByRole("button", { name: "Incorrect" }));
-    expect(screen.queryByTestId("review-item-r1")).toBeNull();
-    expect(screen.getByTestId("review-item-r2")).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Guessed" }));
-    expect(screen.getByTestId("review-item-m1")).toBeInTheDocument();
-    expect(screen.queryByTestId("review-item-r1")).toBeNull();
-    // 필터 첫 문항이 자동 선택된다
-    expect(screen.getByTestId("mock-exam-item-detail")).toHaveTextContent("Question r2");
+    const rows = screen.getAllByTestId(/^review-item-/).map((el) => el.getAttribute("data-testid"));
+    expect(rows.findIndex((x) => x === "review-item-m1")).toBeGreaterThan(rows.findIndex((x) => x === "review-item-r2"));
+    expect(screen.getByTestId("review-item-r1")).toHaveTextContent(/R&W 1/);
+    expect(screen.getByTestId("mock-exam-item-detail")).toHaveTextContent("Question r1");
   });
 
   it("해설: 영어 기본 + 한국어 토글, 영어가 없으면 한글 + 안내", () => {

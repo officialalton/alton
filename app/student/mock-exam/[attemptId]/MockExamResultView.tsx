@@ -264,7 +264,7 @@ export function ItemDetail({
   viewerIsOwner?: boolean;
 }) {
   return (
-    <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
+    <div className="rounded-lg border border-grey-200 bg-white p-4 lg:h-full lg:overflow-y-auto" data-testid="mock-exam-item-detail">
       <ItemHeader key={item.setItemId} item={item} attemptId={attemptId} viewerIsOwner={viewerIsOwner} />
       <ItemProblem item={item} attemptId={attemptId} />
       <div className="mt-3">
@@ -346,12 +346,6 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "domain", label: "Results by Domain" },
   { key: "review", label: "Review Mistakes" },
 ];
-type ReviewFilter = "all" | "incorrect" | "guessed";
-const FILTERS: [ReviewFilter, string][] = [
-  ["all", "All"],
-  ["incorrect", "Incorrect"],
-  ["guessed", "Guessed"],
-];
 
 /**
  * 채점 확정된 모의고사 결과 — 학생·학부모·교사 공용(사양 3절 "같은 원본에서 표시", 7절 결과 항목).
@@ -389,13 +383,16 @@ export default function MockExamResultView({
   const [tab, setTab] = useState<TabKey>("summary");
   const [info, setInfo] = useState<Info | null>(null);
   const closeInfo = useCallback(() => setInfo(null), []);
-  const [filter, setFilter] = useState<ReviewFilter>("all");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const filtered = useMemo(
-    () => attempt.items.filter((i) => (filter === "incorrect" ? i.correct === false : filter === "guessed" ? i.guessed === true && !!i.response : true)),
-    [attempt.items, filter],
-  );
+  // R&W 가 먼저, 그다음 Math — 각 영역 안에서는 응시 순서(모듈·문항 번호)대로.
+  const filtered = useMemo(() => {
+    const order: Record<string, number> = { rw: 0, math: 1 };
+    return attempt.items
+      .map((it, idx) => ({ it, idx }))
+      .sort((a, b) => (order[a.it.section] ?? 9) - (order[b.it.section] ?? 9) || a.it.position - b.it.position || a.idx - b.idx)
+      .map((x) => x.it);
+  }, [attempt.items]);
   const selected = filtered.find((i) => i.setItemId === selectedId) ?? filtered[0] ?? null;
   const totalTime = formatMinutes(report.totalTimeSpentSeconds);
 
@@ -529,27 +526,10 @@ export default function MockExamResultView({
           {attempt.items.length === 0 ? (
             <p className="text-[12.5px] text-grey-400">There are no questions to review.</p>
           ) : (
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-[180px_minmax(0,1fr)_minmax(240px,320px)] lg:items-start">
+            <div className="grid grid-cols-1 gap-4 lg:h-[calc(100vh-2rem)] lg:grid-cols-[230px_minmax(0,1fr)_minmax(240px,320px)] lg:items-stretch">
               {/* 왼쪽: 문항 목록 + 필터 */}
-              <div className="rounded-lg border border-grey-200 bg-white p-3 lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto">
-                <div role="group" aria-label="Filter questions" className="mb-2 flex flex-wrap gap-1">
-                  {FILTERS.map(([k, label]) => (
-                    <button
-                      key={k}
-                      type="button"
-                      aria-pressed={filter === k}
-                      onClick={() => setFilter(k)}
-                      className={`rounded-full border px-2 py-0.5 text-[11px] font-bold ${
-                        filter === k ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-                {filtered.length === 0 ? (
-                  <p className="px-1 py-2 text-[12px] text-grey-400">No questions match this filter.</p>
-                ) : (
+              <div className="rounded-lg border border-grey-200 bg-white p-3 lg:h-full lg:overflow-y-auto">
+                {(
                   <ul className="flex max-h-[40vh] flex-col gap-1 overflow-y-auto lg:max-h-none">
                     {filtered.map((it) => {
                       const active = selected?.setItemId === it.setItemId;
@@ -564,21 +544,19 @@ export default function MockExamResultView({
                             }`}
                             data-testid={`review-item-${it.setItemId}`}
                           >
-                            <span className="w-[52px] shrink-0 text-center">
+                            <span className="w-[62px] shrink-0 whitespace-nowrap font-semibold">
+                              {SECTION_SHORT[it.section]} {it.position}
+                            </span>
+                            <span className="w-[56px] shrink-0 text-center">
                               {it.guessed && it.response ? (
-                                <span role="img" aria-label="Guessed" data-testid={`review-guessed-${it.setItemId}`} className="rounded border border-grey-300 px-1 text-[10px] font-semibold text-grey-600">
+                                <span role="img" aria-label="Guessed" data-testid={`review-guessed-${it.setItemId}`} className={`rounded border px-1 text-[10px] font-semibold ${active ? "border-white/60 text-white" : "border-grey-300 text-grey-600"}`}>
                                   Guessed
                                 </span>
                               ) : null}
                             </span>
-                            <span className="min-w-0 flex-1 truncate">
-                              {SECTION_SHORT[it.section]} {it.position}
+                            <span className={`ml-auto w-[62px] shrink-0 text-right text-[11px] font-bold ${active ? "" : it.correct === null ? "" : it.correct ? "text-green" : "text-red"}`}>
+                              {it.correct === null ? "" : it.correct ? "Correct" : "Incorrect"}
                             </span>
-                            {it.correct !== null && (
-                              <span className={`shrink-0 text-[11px] font-bold ${active ? "" : it.correct ? "text-green" : "text-red"}`}>
-                                {it.correct ? "Correct" : "Incorrect"}
-                              </span>
-                            )}
                           </button>
                         </li>
                       );
@@ -592,7 +570,7 @@ export default function MockExamResultView({
 
               {/* 가운데: 문제 */}
               {selected ? (
-                <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
+                <div className="rounded-lg border border-grey-200 bg-white p-4 lg:h-full lg:overflow-y-auto" data-testid="mock-exam-item-detail">
                   <ItemHeader key={selected.setItemId} item={selected} attemptId={attempt.id} viewerIsOwner={!readOnly} />
                   <ItemProblem item={selected} attemptId={attempt.id} />
                 </div>
@@ -604,7 +582,7 @@ export default function MockExamResultView({
 
               {/* 오른쪽: 해설 + 제출 시점 필기(읽기 전용) — 스크롤 없이 닿도록 sticky */}
               {selected && (
-                <div className="lg:sticky lg:top-4 lg:max-h-[calc(100vh-2rem)] lg:overflow-y-auto" data-testid="mock-exam-explanation-panel">
+                <div className="lg:h-full lg:overflow-y-auto" data-testid="mock-exam-explanation-panel">
                   <ExplanationPanel key={selected.setItemId} item={selected} />
                   <ItemTools
                     item={selected}
