@@ -19,3 +19,9 @@ import type { Rng } from "../rng";
 import type { Instance } from "../types";
 /** 각·길이·개수처럼 0 이하가 의미 없는 양: 오답 후보에서 0 이하를 제외하고 finish 한다. */
 export function fin(rng: Rng, d: Draft): Instance { return finish(rng, { ...d, wrongs: d.wrongs?.filter((w) => w.v > 0) }); }
+
+/** 도형 종류를 가정하지 않는 도입 문장. */
+export const NEUTRAL_CTX = ["", "", "A student is working on a geometry problem. ", "A teacher writes a problem on the board. ", "Here is a question from a practice set. ", "Consider the following situation. ", "An engineer is checking some measurements. ", "A builder is planning a small project. "];
+/** 숫자 앞 부정관사: art(8) -> "an", art(7) -> "a". */
+export const art = (n: number) => (/^(8\d*|11|18)$/.test(String(n)) ? "an" : "a");
+export const SING: Record<string, string> = { feet: "foot", meters: "meter", inches: "inch", yards: "yard", centimeters: "centimeter", miles: "mile", kilometers: "kilometer" };
