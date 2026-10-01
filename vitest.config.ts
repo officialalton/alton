@@ -21,6 +21,9 @@ export default defineConfig({
         test: {
           name: "unit",
           exclude: [...SHARED_EXCLUDE, "**/*.integration.test.ts"],
+          // 2026-10-01 — 수학 원형 시드 스윕·소스 전수 스캔 같은 무거운 단위 테스트가 통합 프로젝트와 같이 돌 때
+          // CPU 포화로 5초 기본 제한에 간헐적으로 걸렸다(매번 다른 테스트). 로직 결함이 아니라 시간 문제다.
+          testTimeout: 30_000,
         },
       },
       {

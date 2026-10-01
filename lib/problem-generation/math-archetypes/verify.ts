@@ -28,7 +28,7 @@ export function evalMath(src: string, vars: Record<string, number> = {}): number
 }
 
 export function runVerification(js: string): number {
-  const out = vm.runInNewContext(`(function(){${js}})()`, {}, { timeout: 500 }) as unknown;
+  const out = vm.runInNewContext(`(function(){${js}})()`, {}, { timeout: 5000 }) as unknown;
   if (typeof out !== "number" || !Number.isFinite(out)) throw new Error(`verification_js 결과가 유한한 숫자가 아님: ${String(out)}`);
   return out;
 }
