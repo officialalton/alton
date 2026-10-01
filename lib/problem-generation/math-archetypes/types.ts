@@ -36,7 +36,7 @@ export type Instance = {
   /** 문장이 말하는 양(명사)과 그에 대응해 세운 수식의 선언 — 명사-수식 매핑 표 기반 기계 검사(둘레/넓이 혼동 방지)용. 선택. */
   semantics?: { noun: string; expr: string; parts: string[]; vars: Record<string, number> }[];
   /** 문장-수식 의미 일치 검사용: 지문이 '<명사구> 는 <값>' 으로 서술하는 대응표. 명사구와 값이 같은 문장에서 서로 가장 가까워야 한다(verify.checkBindings). */
-  bindings?: { phrase: string; value: number }[];
+  phraseBindings?: { phrase: string; value: number }[];
 };
 
 export type Archetype = {

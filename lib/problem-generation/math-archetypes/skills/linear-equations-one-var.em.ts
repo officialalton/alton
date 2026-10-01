@@ -174,7 +174,7 @@ export const LE_EM_ARCHETYPES: Archetype[] = [
       void sym;
       return finish(rng, {
         stimulus, question: spin(rng, `[[What is the ${asked}?|Find the ${asked}.|What is the value of the ${asked}?|Determine the ${asked}.|What ${asked} does the formula give?]]`), correct: ans, wrongs: [...wrongs, ...near(ans)],
-        bindings: keep.map((k) => ({ phrase: `the ${c[k]}`, value: nums[k] })),
+        phraseBindings: keep.map((k) => ({ phrase: `the ${c[k]}`, value: nums[k] })),
         verificationJs: withParams({ Y: Y0, S: ask === "s" ? 0 : S0, R: ask === "r" ? 0 : R0, Z: ask === "z" ? 0 : Z0, ask }, "const s=[];\nfor(let v=0;v<=400;v++){ const S=P.ask==='s'?v:P.S, R=P.ask==='r'?v:P.R, Z=P.ask==='z'?v:P.Z; if(S+R*Z===P.Y) s.push(v); }\nif(s.length!==1) throw new Error('유일하지 않음');\nreturn s[0];"),
         trace: [T(`공식 ${Yl} = ${Sl} + ${Rl}${Zl} 에 알려진 값을 대입한다.`, "Substitute the known values."), T(`${ask === "s" ? "더해진 항" : "상수항"}을 정리해 미지항만 남긴다.`, "Isolate the unknown term."), T(`나누어(또는 계산해) ${asked} = ${ans} 를 얻는다.`, "Solve.")],
         variant: "two_term_formula",

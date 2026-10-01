@@ -216,7 +216,7 @@ export const LI_ARCHETYPES: Archetype[] = [
       return finish(rng, {
         stimulus, question: spin(rng, `[[What is the least number of ${B}s that must also be sold to reach the goal?|What is the minimum number of ${B}s that still must be sold to meet the goal?|At least how many ${B}s must be sold to reach the goal?]]`), correct: need,
         wrongs: [...near(need).slice(0,0), W(need - 1, "condition_ignored", "올림하지 않고 내림해 목표에 모자란다."), W(Math.floor((T0 - a * pAmt) / b) + 2, "other", "올림 후 하나 더 더했다."), W(Math.round(T0 / b), "step_missing", "이미 판매한 입장권 수입을 빼지 않았다."), W(ceilDiv(T0 - b * pAmt, a), "formula_misuse", "두 가격을 서로 바꿔 계산했다."), W(T0 - a * pAmt, "step_missing", "남은 금액을 개수로 답했다.")],
-        bindings: [{ phrase: A, value: a }, { phrase: B, value: b }],
+        phraseBindings: [{ phrase: A, value: a }, { phrase: B, value: b }],
         verificationJs: withParams({ a, b, T: T0, p: pAmt }, "for(let y=0;y<=2000;y++) if(P.a*P.p+P.b*y>=P.T) return y;\nthrow new Error('없음');"),
         trace: [
           T(`${A} 수를 x, ${B} 수를 y 라 하면 수입은 $${a}x + ${b}y$ 이다.`, "Model total revenue."),

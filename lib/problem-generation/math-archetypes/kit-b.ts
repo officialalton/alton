@@ -46,7 +46,7 @@ export function meet(m1: number, b1: number, m2: number, b2: number): { x: Q; y:
 
 export const VAR_LETTERS = ["x", "t", "n", "m", "w"] as const;
 
-/** 맥락 은행: 명사구는 한 곳에서만 정의해 문장·대응표(bindings)가 같은 표를 쓴다. */
+/** 맥락 은행: 명사구는 한 곳에서만 정의해 문장·대응표(phraseBindings)가 같은 표를 쓴다. */
 export const SHOP: { thing: string; things: string; seller: string }[] = [
   { thing: "notebook", things: "notebooks", seller: "a campus store" },
   { thing: "ticket", things: "tickets", seller: "a theater" },

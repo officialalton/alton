@@ -263,7 +263,7 @@ export const SL_ARCHETYPES: Archetype[] = [
         stimulus: `${s1} ${s2} ${s3}`,
         question: spin(rng, `[[How many ${ask === "A" ? pair.A : pair.B}s were sold?|What is the number of ${ask === "A" ? pair.A : pair.B}s sold?|Find the number of ${ask === "A" ? pair.A : pair.B}s that were sold.|How many ${ask === "A" ? pair.A : pair.B}s did ${pair.org.toLowerCase()} sell?]]`), correct: ans,
 
-        bindings: [{ phrase: pair.A, value: pa }, { phrase: pair.B, value: pb }],
+        phraseBindings: [{ phrase: pair.A, value: pa }, { phrase: pair.B, value: pb }],
         wrongs: [W(ask === "A" ? y0 : x0, "other", "다른 종류의 매수를 답했다."), W(Math.round(Tt / (ask === "A" ? pa : pb)), "step_missing", "한 종류만 팔았다고 가정했다."), W(Math.round((Tt - pb * k) / (pa + pb * m)), "sign_error", "'k 적다'의 부호를 반대로 번역했다."), W(Math.round((Tt + pb * k) / (pa + pb)), "formula_misuse", "배수 m 을 반영하지 않았다."), W(ans + 1, "other", "계산 실수."), ...near(ans)],
         verificationJs: withParams({ pa, pb, m, k, T: Tt, ask: ask === "A" ? 1 : 0 }, "const out=[];\nfor(let x=1;x<=300;x++){ const y=P.m*x-P.k; if(y>=1&&P.pa*x+P.pb*y===P.T) out.push(P.ask?x:y); }\nif(out.length!==1) throw new Error('유일하지 않음');\nreturn out[0];"),
         trace: [T(`${pair.A} 수를 x, ${pair.B} 수를 y 라 한다.`, "Define the variables."), T(`'${k} less than ${mw} the number' 는 $y = ${m}x - ${k}$ 이다.`, "Translate the relation."), T(`금액 식: $${pa}x + ${pb}y = ${Tt}$ 이다.`, "Write the revenue equation."), T(`대입하면 $${pa}x + ${pb}(${m}x - ${k}) = ${Tt}$ 이므로 $${pa + pb * m}x = ${Tt + pb * k}$ 이다.`, "Substitute and collect."), T(`x = ${x0}, y = ${m}·${x0} - ${k} = ${y0} 이다.`, "Solve and find the other count.")],

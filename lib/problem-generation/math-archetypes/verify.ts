@@ -80,7 +80,7 @@ export function checkVariableMentions(inst: Instance): string[] {
 
 /** 문장과 변수의 의미 일치(명사-수식 대응표 기반): 각 대응 (명사구, 값)에 대해, 명사구가 나온 문장 안에서 명사구에 가장 가까운 숫자가 그 값이어야 한다. 명사구 중복도 금지. */
 export function checkBindings(inst: Instance): string[] {
-  const b = inst.bindings; if (!b?.length) return [];
+  const b = inst.phraseBindings; if (!b?.length) return [];
   const issues: string[] = []; const text = `${inst.stimulus}\n${inst.question}`;
   const sentences = text.split(/(?<=[.?!])\s+|\n+/).map((s) => s.replace(/\$/g, " "));
   const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

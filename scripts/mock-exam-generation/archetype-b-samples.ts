@@ -39,7 +39,7 @@ for (const a of [...ARCHETYPES, ...EM_ARCHETYPES].filter((x) => B.includes(x.ski
   const { records: rs } = produceFromArchetypes([a], { runId: "math-archetype-B", count: per, seedStart: 0 });
   for (const r of rs) {
     records.push(r); const p = r.problem as { stimulus: string; question: string; options: string[]; correctIndex: number }; const seed = (r.quality as { mockExamGeneration: { seed: number } }).mockExamGeneration.seed;
-    const g = generateOne(a, seed); const bind = g.ok && g.inst.bindings?.length ? `대응표: ${g.inst.bindings.map((b) => `${b.phrase}=${b.value}`).join("; ")} / ` : "";
+    const g = generateOne(a, seed); const bind = g.ok && g.inst.phraseBindings?.length ? `대응표: ${g.inst.phraseBindings.map((b) => `${b.phrase}=${b.value}`).join("; ")} / ` : "";
     const one = (t: string) => t.replace(/\s*\n+\s*/g, " ⏎ ").replace(/\t/g, " ");
     rows.push([a.id, a.difficulty ?? "hard", seed, r.gid, r.subpattern, one(p.stimulus), one(p.question), p.options[p.correctIndex], bind + (HINT[a.kind] ?? "")].join("\t"));
   }

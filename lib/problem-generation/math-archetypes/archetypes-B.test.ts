@@ -78,21 +78,21 @@ describe("B 원형 전체 돌연변이 — 검증기가 일부러 망가뜨린 �
 });
 
 describe("문장과 변수의 의미 일치(명사-수식 대응표 기반 기계 검사)", () => {
-  const withBindings = [...hardB, ...emB].filter((a) => { for (let s = 0; s < 20; s++) { const g = generateOne(a, s); if (g.ok && g.inst.bindings?.length) return true; } return false; });
+  const withBindings = [...hardB, ...emB].filter((a) => { for (let s = 0; s < 20; s++) { const g = generateOne(a, s); if (g.ok && g.inst.phraseBindings?.length) return true; } return false; });
   it("대응표를 가진 원형이 있고 모두 통과한다", () => {
     expect(withBindings.length).toBeGreaterThan(0);
     for (const a of withBindings) for (let s = 0; s < 60; s++) { const g = generateOne(a, s); if (g.ok) expect(checkBindings(g.inst), `${a.id}#${s}`).toEqual([]); }
   });
   it("돌연변이: 명사에 붙은 수를 서로 바꾸면 검사가 잡는다", () => {
-    const a = withBindings[0]; const g = [...Array(40).keys()].map((s) => generateOne(a, s)).find((x) => x.ok && (x.inst.bindings?.length ?? 0) >= 2);
+    const a = withBindings[0]; const g = [...Array(40).keys()].map((s) => generateOne(a, s)).find((x) => x.ok && (x.inst.phraseBindings?.length ?? 0) >= 2);
     if (!g || !g.ok) return;
-    const [b1, b2] = g.inst.bindings!; const t = g.inst.stimulus;
+    const [b1, b2] = g.inst.phraseBindings!; const t = g.inst.stimulus;
     const swapped = t.replace(new RegExp(`\\b${b1.value}\\b`, "g"), "@@").replace(new RegExp(`\\b${b2.value}\\b`, "g"), String(b1.value)).replace(/@@/g, String(b2.value));
     if (b1.value !== b2.value) expect(checkBindings({ ...g.inst, stimulus: swapped }).length).toBeGreaterThan(0);
   });
   it("돌연변이: 명사구가 본문에 없으면 잡는다", () => {
     const a = withBindings[0]; const g = generateOne(a, 1); if (!g.ok) return;
-    expect(checkBindings({ ...g.inst, bindings: [{ phrase: "zebra crossing", value: 3 }] }).length).toBeGreaterThan(0);
+    expect(checkBindings({ ...g.inst, phraseBindings: [{ phrase: "zebra crossing", value: 3 }] }).length).toBeGreaterThan(0);
   });
   it("돌연변이: 대응표가 있는 문항의 정답 키를 바꾸면 검증이 실패한다", () => {
     const a = withBindings[0]; const g = generateOne(a, 2); if (!g.ok) return;
