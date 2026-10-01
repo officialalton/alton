@@ -1,6 +1,7 @@
 "use client";
 
 import { useHighlightSupported } from "@/lib/use-highlight-supported";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import { useEffect, useRef, useState } from "react";
 import type { HomeworkBatch, HomeworkBatchItem } from "@/lib/homework-batch-data";
 import { submitHomeworkAnswerAction, gradeHomeworkBatchAction, toggleHomeworkItemSavedToPracticeAction, regradeHomeworkItemAction } from "@/lib/homework-batch-actions";
@@ -414,7 +415,7 @@ function BatchRunner({
         {/* 2026-09-21(UAT 지적) — 이 화면만 LearningText를 안 써서 마크다운 표·KaTeX 수식이
             원문 그대로("$y < -2x - 7$", "|x|y||---|---|..." 등) 노출되고 있었다. */}
         <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
-          {item.passage && <LearningText text={item.passage} className="mb-3 text-[13.5px]" />}
+          {dedupeStem(item.passage, item.question) && <LearningText text={dedupeStem(item.passage, item.question)} className="mb-3 text-[13.5px]" />}
           {item.figure != null && <ProblemFigure spec={item.figure} className="mb-3" />}
           {item.question && <LearningText text={item.question} className="mb-3 font-bold text-[14px]" />}
         </div>

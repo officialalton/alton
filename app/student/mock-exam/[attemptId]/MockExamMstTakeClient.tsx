@@ -5,6 +5,7 @@
 // 새로고침·재접속 시에도 page.tsx가 같은 상태 RPC로 복구한다. 적응형 경로명은 절대 표시하지 않는다.
 
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -346,7 +347,7 @@ export default function MockExamMstTakeClient({
                   </button>
                 </div>
               </div>
-              {item.passage && <RwStimulusView passage={item.passage} className="mb-4 text-[13.5px]" />}
+              {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
               {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
               {item.figure ? <ProblemFigure spec={item.figure} className="mb-4" /> : null}
 

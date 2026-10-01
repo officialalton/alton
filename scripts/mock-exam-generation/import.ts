@@ -12,6 +12,7 @@
 //           임포트 뒤 scripts/keywords/link-imported.ts --file <같은 파일> --execute 로 공용 키워드에 연결한다.
 //   --cleanup-tag <tag> : 그 표식의 시험 데이터를 삭제(로컬 전용 — 원격 URL 이면 거부).
 import { findResidue } from "../../lib/problem-generation/residue";
+import { dedupeStem } from "../../lib/problem-text-guards";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 
@@ -114,13 +115,16 @@ async function main() {
   const failures: string[] = [];
   for (const r of recs) {
     const g = r.problem;
-    const stimulus = g.stimulus ?? g.passage ?? "";
     const question = g.question ?? null;
+    // 2026-10-02 UAT C2 — 생성 스키마가 passage를 필수로 요구해, 자극이 없는 수학 문항은 지문 자리에 질문 문장을 그대로 채운다. 새 레코드는 중복을 빼고 저장한다.
+    const rawStimulus = g.stimulus ?? g.passage ?? "";
+    const stimulus = dedupeStem(rawStimulus, question);
+    const rawKey = `${rawStimulus}\u0000${question ?? ""}`; // 예전에 중복 그대로 저장된 레코드와도 같은 문항으로 본다.
     const residue = findResidue({ passage: g.passage as string | undefined, stimulus: g.stimulus as string | undefined, question: g.question as string | undefined, options: g.options as string[] | undefined, explanation: g.explanation as string | undefined, explanationEn: (g as { explanationEn?: string }).explanationEn, statements: g.statements as string[] | undefined });
-    if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}:${x.match}`).join(", ")}`); continue; }
+    if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}[${x.kind}]:${x.match}`).join(", ")}`); continue; }
     const key = `${stimulus}\u0000${question ?? ""}`;
     const pool = existing.get(r.skill) ?? [];
-    if (pool.some((e) => e.key === key)) { stats.skippedExisting += 1; continue; }
+    if (pool.some((e) => e.key === key || e.key === rawKey)) { stats.skippedExisting += 1; continue; }
     const sh = shingles(`${stimulus} ${question ?? ""} ${(g.options ?? []).join(" ")}`);
     if (dupCheck) {
       const hit = pool.find((e) => jaccard(sh, e.sh) >= 0.6);

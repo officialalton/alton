@@ -1,6 +1,7 @@
 "use client";
 
 import { useHighlightSupported } from "@/lib/use-highlight-supported";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
@@ -405,7 +406,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               </div>
             </div>
             <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
-              {current.passage && <RwStimulusView passage={current.passage} className="mb-4 text-[13.5px]" />}
+              {dedupeStem(current.passage, current.question) && <RwStimulusView passage={dedupeStem(current.passage, current.question)} className="mb-4 text-[13.5px]" />}
               {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
             </div>
             {highlightMode && highlightSupported && (

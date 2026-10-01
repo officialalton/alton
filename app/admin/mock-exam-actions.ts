@@ -18,6 +18,7 @@ import {
   type ExamSection,
   type FormatWeight,
 } from "@/lib/mock-exam/assemble";
+import { findHangulInStem } from "@/lib/problem-text-guards";
 import { loadMockExamSetContentForStaff, type MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { selectInChunks } from "@/lib/select-in-chunks";
 import { fetchAlreadyUsedProblemIds } from "@/lib/mock-exam/used-problem-ids";
@@ -97,7 +98,7 @@ function fetchEligiblePage(db: ReturnType<typeof createAdminClient>, domains: st
     .from("problems")
     .select(
       `id, sat_domain, skill_code, format, similarity_group,
-       problem_versions!problem_versions_problem_id_fkey!inner(id, status, difficulty)`,
+       problem_versions!problem_versions_problem_id_fkey!inner(id, status, difficulty, passage, question, options)`,
     )
     .in("sat_domain", domains)
     .eq("status", "confirmed")
@@ -131,6 +132,8 @@ async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, d
     // 모의고사는 자동 채점 가능한 형식(mc/spr)만 조립 후보로 쓴다 — 서술형·풀이형(essay/math)은
     // 채점 확정이 필요해 이번 라운드의 "제출 즉시 자동 채점" 정책과 맞지 않는다.
     if (row.format !== "mc" && row.format !== "spr") continue;
+    // 2026-10-02 UAT C1 — 영어 SAT 시험에 한글 지문·질문·선택지 문항이 섞이지 않게 후보에서 뺀다(해설은 무관).
+    if (findHangulInStem({ passage: version.passage, question: version.question, options: version.options as string[] | null }).length) continue;
     eligible.push({
       problemId: row.id,
       problemVersionId: version.id,

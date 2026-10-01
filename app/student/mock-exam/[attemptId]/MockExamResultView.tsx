@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport, weakSkills } from "@/lib/mock-exam/report";
 import { SCORE_DISCLAIMER } from "@/lib/mock-exam/score-estimate";
@@ -90,7 +91,7 @@ export function ItemDetail({
           문항 오류로 정답 처리된 문항입니다.
         </p>
       )}
-      {item.passage && <RwStimulusView passage={item.passage} className="mb-3 text-[13px]" />}
+      {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
       {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
       {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}
 
