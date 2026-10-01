@@ -87,6 +87,12 @@ export async function toggleMockExamFlagAction(attemptId: string, setItemId: str
   return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "표시를 저장하지 못했습니다.");
 }
 
+/** 2026-10-02(오너 UAT A8) — 학생이 답을 모르고 찍었을 때 스스로 남기는 "찍음" 표시(토글).
+ * mock_exam_toggle_flag 와 같은 가드(제출·잠긴 모듈 후 변경 불가). 결과 화면에 🎲 로 보인다. */
+export async function toggleMockExamGuessedAction(attemptId: string, setItemId: string, guessed: boolean): Promise<ActionResult> {
+  return callRpc("mock_exam_toggle_guessed", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_guessed: guessed }, "Could not save the guess mark.");
+}
+
 /** 2026-09-21(사용자 지시) — 문항을 학생 포털 Practice 탭(문제 기록)에 저장/해제한다.
  * 단어장의 "내 단어장"처럼 원하는 문항만 골라 담는 구조 — 표시(flagged)와 달리 시험을
  * 벗어나도(제출·채점 뒤에도) 계속 남아 나중에 다시 볼 수 있다. */

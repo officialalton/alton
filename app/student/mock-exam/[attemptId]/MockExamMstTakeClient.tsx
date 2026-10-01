@@ -6,13 +6,14 @@
 
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { dedupeStem } from "@/lib/problem-text-guards";
+import GuessButton from "./GuessButton";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, SprDirections, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
-import { saveMockExamAnswerAction, toggleMockExamFlagAction, toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import { saveMockExamAnswerAction, toggleMockExamFlagAction, toggleMockExamGuessedAction, toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
 import { loadMstAttemptStateAction, startMstAttemptAction, submitMstModuleAction, type MstAttemptState } from "@/lib/mock-exam/mst-actions";
 import {
   MST_BLUEPRINT,
@@ -52,6 +53,10 @@ export default function MockExamMstTakeClient({
   const [savedMap, setSavedMap] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(initialState.items.map((i) => [i.setItemId, i.savedToPractice])),
   );
+  // 2026-10-02(오너 UAT A8) — 답을 모르고 찍었을 때 학생이 스스로 누르는 표시. 결과 화면에 🎲 로 보인다.
+  const [guessedMap, setGuessedMap] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(initialState.items.map((i) => [i.setItemId, i.guessed ?? false])),
+  );
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -68,6 +73,7 @@ export default function MockExamMstTakeClient({
     setMathToolsOpen(null);
     setResponses(Object.fromEntries(next.items.map((i) => [i.setItemId, i.response ?? ""])));
     setFlags(Object.fromEntries(next.items.map((i) => [i.setItemId, i.flagged])));
+    setGuessedMap(Object.fromEntries(next.items.map((i) => [i.setItemId, i.guessed ?? false])));
   }, []);
 
   const current = state.modules.find((m) => m.moduleKey === state.currentModule) ?? null;
@@ -155,6 +161,17 @@ export default function MockExamMstTakeClient({
     const r = await toggleMockExamSavedToPracticeAction(state.attemptId, setItemId, next);
     if (!r.ok) {
       setSavedMap((p) => ({ ...p, [setItemId]: !next }));
+      setError(r.error);
+      await recoverIfLocked(r.error);
+    }
+  }
+
+  async function toggleGuessed(setItemId: string) {
+    const next = !guessedMap[setItemId];
+    setGuessedMap((p) => ({ ...p, [setItemId]: next }));
+    const r = await toggleMockExamGuessedAction(state.attemptId, setItemId, next);
+    if (!r.ok) {
+      setGuessedMap((p) => ({ ...p, [setItemId]: !next }));
       setError(r.error);
       await recoverIfLocked(r.error);
     }
@@ -411,6 +428,8 @@ export default function MockExamMstTakeClient({
                 >
                   ←
                 </button>
+                <div className="flex items-center gap-2">
+                <GuessButton guessed={guessedMap[item.setItemId] ?? false} onToggle={() => void toggleGuessed(item.setItemId)} />
                 {cursor >= state.items.length - 1 ? (
                   <button
                     type="button"
@@ -431,6 +450,7 @@ export default function MockExamMstTakeClient({
                     →
                   </button>
                 )}
+                </div>
               </div>
               {error && <p className="mt-4 text-[12.5px] text-red">{error}</p>}
             </>
