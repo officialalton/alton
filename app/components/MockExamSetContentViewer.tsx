@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
@@ -43,7 +44,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
             {SECTION_LABEL[current.section] ?? current.section} {current.position} · {current.satDomain}
             {current.skillCode ? ` · ${current.skillCode}` : ""} · {current.difficulty}
           </p>
-          {current.passage && <RwStimulusView passage={current.passage} className="mb-3 text-[13px]" />}
+          {dedupeStem(current.passage, current.question) && <RwStimulusView passage={dedupeStem(current.passage, current.question)} className="mb-3 text-[13px]" />}
           {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[13.5px]" />}
           {current.figure ? <ProblemFigure spec={current.figure} className="mb-3" /> : null}
 
