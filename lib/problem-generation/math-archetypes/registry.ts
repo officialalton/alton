@@ -7,8 +7,10 @@ import { PR_ARCHETYPES } from "./skills/probability";
 import { LI_ARCHETYPES } from "./skills/linear-inequalities";
 import { LF_ARCHETYPES } from "./skills/linear-functions";
 import { L2_ARCHETYPES } from "./skills/linear-equations-two-var";
+import { SL_ARCHETYPES } from "./skills/systems-linear";
 import { LF_EM_ARCHETYPES } from "./skills/linear-functions.em";
 import { L2_EM_ARCHETYPES } from "./skills/linear-equations-two-var.em";
+import { SL_EM_ARCHETYPES } from "./skills/systems-linear.em";
 import { LI_EM_ARCHETYPES } from "./skills/linear-inequalities.em";
 import { LE_EM_ARCHETYPES } from "./skills/linear-equations-one-var.em";
 
@@ -18,6 +20,7 @@ export const ARCHETYPES: Archetype[] = [
   ...LI_ARCHETYPES,
   ...LF_ARCHETYPES,
   ...L2_ARCHETYPES,
+  ...SL_ARCHETYPES,
 ];
 /** easy/medium 원형(문장 틀 = 유사문항 그룹). hard 원형 ARCHETYPES 와 분리해 둔다(id 규칙·연산자 4개 규칙이 다름). */
 export const EM_ARCHETYPES: Archetype[] = [
@@ -26,5 +29,6 @@ export const EM_ARCHETYPES: Archetype[] = [
   ...LE_EM_ARCHETYPES,
   ...LF_EM_ARCHETYPES,
   ...L2_EM_ARCHETYPES,
+  ...SL_EM_ARCHETYPES,
 ];
 export const archetypeById = (id: string) => [...ARCHETYPES, ...EM_ARCHETYPES].find((a) => a.id === id);
