@@ -69,6 +69,8 @@ export function buildTargetCells(
   difficultyWeights: DifficultyWeight[],
   totalCount: int,
   formatWeights?: FormatWeight[],
+  /** true 면 hard 셀은 형식(mc/spr)으로 나누지 않는다. hard SPR 공급이 없을 때 hard 칸이 비어 조립이 막히는 문제를 피한다(2026-10-01). */
+  hardIgnoreFormat = false,
 ): { satDomain: string; difficulty: ProblemDifficulty; format?: ProblemFormat; targetCount: number }[] {
   const domainCounts = allocateCounts(
     domainWeights.map((d) => ({ key: d.satDomain, weightPct: d.weightPct })),
@@ -83,7 +85,7 @@ export function buildTargetCells(
     );
     for (const diff of difficultyWeights) {
       const diffTotal = diffCounts[diff.difficulty] ?? 0;
-      if (formatWeights && formatWeights.length > 0 && diffTotal > 0) {
+      if (formatWeights && formatWeights.length > 0 && diffTotal > 0 && !(hardIgnoreFormat && diff.difficulty === "hard")) {
         const fmtCounts = allocateCounts(
           formatWeights.map((f) => ({ key: f.format, weightPct: f.weightPct })),
           diffTotal,
@@ -116,6 +118,12 @@ export type SelectionContext = {
   skillUse?: Map<string, number>;
   /** 이미 세트에 들어간 유사문항 그룹 키. 호출자가 세트 전체에 걸쳐 공유한다. */
   usedGroups?: Set<string>;
+  /**
+   * 다른 세트에서 이미 쓴 문항 id. hard 후보에 한해 하드 제외한다(세트 간 hard 문항 겹침 방지, 2026-10-01).
+   * 후보가 부족할 때만 재사용을 허용하며, 그때 재사용한 id 를 `hardReused` 에 담아 호출자가 경고로 기록할 수 있게 한다.
+   */
+  hardExcludeIds?: Set<string>;
+  hardReused?: Set<string>;
 };
 
 export function selectForCells(
@@ -151,12 +159,15 @@ export function selectForCells(
     // 한 개씩 고른다. 우선순위: (1) 이 모듈에서 덜 쓴 skill(skill 균형 — 소프트 선호일 뿐 정원을 비우거나 실패시키는 사유가 아니다. 재사용 회피보다는 앞선다) (2) 다른 세트에서 안 쓴 문항
     // (3) 노출 이력이 적은 문항 (4) problemId(결정적). 유사문항 그룹은 세트 안에서 한 번만 허용.
     let chosenCount = 0;
+    let allowHardReuse = false;
+    const hardEx = cell.difficulty === "hard" ? ctx.hardExcludeIds : undefined;
     while (chosenCount < cell.targetCount) {
       let best: EligibleProblem | null = null;
       let bestKey: [number, number, number, string] | null = null;
       for (const c of pool) {
         if (used.has(c.problemId)) continue;
         if (c.similarityGroup && usedGroups.has(c.similarityGroup)) continue;
+        if (hardEx && !allowHardReuse && hardEx.has(c.problemId)) continue;
         const key: [number, number, number, string] = [
           skillUse.get(`${c.satDomain}|${c.skillCode ?? ""}`) ?? 0, // skill 없는 문항도 하나의 버킷으로 센다
           excludeProblemIds.has(c.problemId) ? 1 : 0,
@@ -168,7 +179,12 @@ export function selectForCells(
           bestKey = key;
         }
       }
-      if (!best) break;
+      if (!best) {
+        // hard 후보가 모자라면 그때만 다른 세트 문항 재사용을 허용하고 기록한다.
+        if (hardEx && !allowHardReuse) { allowHardReuse = true; continue; }
+        break;
+      }
+      if (hardEx && allowHardReuse && hardEx.has(best.problemId)) ctx.hardReused?.add(best.problemId);
       used.add(best.problemId);
       if (best.similarityGroup) usedGroups.add(best.similarityGroup);
       const skillKey = `${best.satDomain}|${best.skillCode ?? ""}`;
@@ -268,6 +284,8 @@ export type AssembleSectionInput = {
   formatWeights?: FormatWeight[];
   /** skill 균형·유사문항 그룹 컨텍스트(MST 조립). */
   selection?: SelectionContext;
+  /** hard 셀의 형식 분할을 끈다(Math hard SPR 공급 부족 대응). */
+  hardIgnoreFormat?: boolean;
 };
 
 export type AssembleSectionResult = {
@@ -277,7 +295,7 @@ export type AssembleSectionResult = {
 
 /** 한 섹션(RW 또는 Math)을 통째로 조립한다 — 목표 셀 계산 → 후보 선택 → 순서 부여. */
 export function assembleSection(input: AssembleSectionInput): AssembleSectionResult {
-  const cells = buildTargetCells(input.domainWeights, input.difficultyWeights, input.totalCount, input.formatWeights);
+  const cells = buildTargetCells(input.domainWeights, input.difficultyWeights, input.totalCount, input.formatWeights, input.hardIgnoreFormat ?? false);
   const { items, shortfalls } = selectForCells(input.candidates, cells, input.excludeProblemIds, input.selection);
   return { items: orderSectionItems(items, input.section), shortfalls };
 }

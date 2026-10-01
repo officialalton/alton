@@ -58,6 +58,33 @@ describe("자료 필요성 판정", () => {
   });
 });
 
+describe("2026-10-01 자료 종류 오탐 수정", () => {
+  it("R&W 지문의 'table'·'graph shows' 같은 낱말은 필수가 아니라 권장(본문 추정)이다 — 텍스트 전용 문항이 차단되지 않는다", () => {
+    const need = judgeMaterialNeed({ examSystem: "sat_rw", skillCode: "central_ideas_details", text: "She set the table and the frequency of her visits dropped. Which choice best states the main idea?" });
+    expect(need).toMatchObject({ level: "recommended", kind: "data", viaTextCue: true });
+    expect(materialBlocker(need, null)).toBeNull();
+    const graph = judgeMaterialNeed({ examSystem: "sat_rw", skillCode: "inferences", text: "The graph shows how the town felt. Which choice most logically completes the text?" });
+    expect(graph.level).toBe("recommended");
+    expect(materialBlocker(graph, null)).toBeNull();
+  });
+  it("R&W 정량 근거는 본문 단서로도 계속 필수", () => {
+    const q = judgeMaterialNeed({ examSystem: "sat_rw", skillCode: "command_of_evidence_quant", text: "The table shows survey results." });
+    expect(q).toMatchObject({ level: "required", kind: "data" });
+    expect(materialBlocker(q, null)).toMatch(/자료 필수/);
+  });
+  it("본문 낱말(figure·as shown)로만 필수가 된 Math 문항은 그림이 이미 있으면 종류가 달라도 막지 않는다", () => {
+    const need = judgeMaterialNeed({ examSystem: "sat_math", skillCode: "linear_equations_one_var", text: "In the figure shown, the number of boxes is x. If 2x + 3 = 11, what is x?" });
+    expect(need).toMatchObject({ level: "required", kind: "geometry", viaTextCue: true });
+    expect(materialBlocker(need, { type: "data", kind: "table" })).toBeNull();
+    expect(materialBlocker(need, null)).toMatch(/자료 필수/); // 그림이 전혀 없으면 여전히 막는다
+  });
+  it("세부 기술이 필수로 선언된 경우(도형 기술)는 종류가 다른 그림이면 계속 차단", () => {
+    const need = judgeMaterialNeed({ examSystem: "sat_math", skillCode: "right_triangles_trigonometry", text: "In right triangle ABC…" });
+    expect(need.viaTextCue).toBe(false);
+    expect(materialBlocker(need, { type: "data", kind: "table" })).toMatch(/자료 필수/);
+  });
+});
+
 describe("질문 분리", () => {
   it("합치기·갈라내기·유무", () => {
     expect(composeProblemText("Body.", "What is x?")).toBe("Body.\n\nWhat is x?");

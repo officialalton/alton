@@ -277,3 +277,54 @@ describe("MST 모듈 계획(Phase 3 라우팅)", () => {
     expect(byModule["rw_m1:null"].every((id) => !id.startsWith("hard"))).toBe(true);
   });
 });
+
+describe("2026-10-01 사전 수정: hard 세트 간 하드 제외·hard 형식 분할 해제", () => {
+  const mk = (id: string, difficulty: "easy" | "medium" | "hard", extra: Partial<EligibleProblem> = {}): EligibleProblem => ({
+    problemId: id, problemVersionId: `v-${id}`, satDomain: "algebra", skillCode: "S1", difficulty, ...extra,
+  });
+  const hardCell = [{ satDomain: "algebra", difficulty: "hard" as const, targetCount: 2 }];
+
+  it("다른 세트에서 쓴 hard 문항은 대체 후보가 있으면 쓰지 않는다(2세트 연속 조립 시 hard 교집합 0)", () => {
+    const pool = ["h1", "h2", "h3", "h4"].map((id) => mk(id, "hard"));
+    const used = new Set<string>();
+    const first = selectForCells(pool, hardCell, new Set(), { hardExcludeIds: used }).items.map((i) => i.problemId);
+    first.forEach((id) => used.add(id));
+    const second = selectForCells(pool, hardCell, new Set(), { hardExcludeIds: used }).items.map((i) => i.problemId);
+    expect(first.filter((id) => second.includes(id))).toEqual([]);
+  });
+  it("hard 후보가 모자랄 때만 재사용을 허용하고 hardReused 에 기록한다", () => {
+    const pool = ["h1", "h2", "h3"].map((id) => mk(id, "hard"));
+    const hardReused = new Set<string>();
+    const r = selectForCells(pool, hardCell, new Set(), { hardExcludeIds: new Set(["h1", "h2"]), hardReused });
+    expect(r.items).toHaveLength(2);
+    expect(r.shortfalls).toEqual([]);
+    expect(r.items.map((i) => i.problemId)).toContain("h3");
+    expect(hardReused.size).toBe(1);
+  });
+  it("hardExcludeIds 는 hard 에만 적용 — medium 은 기존 규칙(재사용 회피는 소프트)", () => {
+    const pool = ["m1", "m2"].map((id) => mk(id, "medium"));
+    const r = selectForCells(pool, [{ satDomain: "algebra", difficulty: "medium", targetCount: 2 }], new Set(), { hardExcludeIds: new Set(["m1", "m2"]) });
+    expect(r.items).toHaveLength(2);
+  });
+  it("hardIgnoreFormat: hard 셀은 mc/spr 로 나누지 않아 hard SPR 공급이 없어도 칸이 채워진다", () => {
+    const dw = [{ satDomain: "algebra", weightPct: 100 }];
+    const diffw = [{ difficulty: "medium" as const, weightPct: 50 }, { difficulty: "hard" as const, weightPct: 50 }];
+    const fw = [{ format: "mc" as const, weightPct: 75 }, { format: "spr" as const, weightPct: 25 }];
+    const split = buildTargetCells(dw, diffw, 8, fw);
+    expect(split.filter((c) => c.difficulty === "hard").every((c) => c.format)).toBe(true);
+    const free = buildTargetCells(dw, diffw, 8, fw, true);
+    expect(free.filter((c) => c.difficulty === "hard")).toEqual([{ satDomain: "algebra", difficulty: "hard", targetCount: 4 }]);
+    expect(free.filter((c) => c.difficulty === "medium").every((c) => c.format)).toBe(true);
+    // hard 는 MC 만 있는 풀에서도 조립 가능
+    const pool: EligibleProblem[] = [
+      ...["h1", "h2", "h3", "h4"].map((id) => mk(id, "hard", { format: "mc" })),
+      ...["m1", "m2", "m3"].map((id) => mk(id, "medium", { format: "mc" })),
+      mk("m4", "medium", { format: "spr" }),
+    ];
+    const withSplit = assembleSection({ section: "math", totalCount: 8, domainWeights: dw, difficultyWeights: diffw, candidates: pool, formatWeights: fw });
+    const without = assembleSection({ section: "math", totalCount: 8, domainWeights: dw, difficultyWeights: diffw, candidates: pool, formatWeights: fw, hardIgnoreFormat: true });
+    expect(withSplit.shortfalls.some((s) => s.difficulty === "hard")).toBe(true);
+    expect(without.shortfalls).toEqual([]);
+    expect(without.items.filter((i) => i.difficulty === "hard")).toHaveLength(4);
+  });
+});

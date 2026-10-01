@@ -311,6 +311,7 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
     // 두 변형에 넣는 것은 불가능하다 — 풀이 부족하면 해당 셀이 shortfall 로 남아 readiness=incomplete.
     const usedInSet = new Set<string>();
     const usedGroups = new Set<string>(); // 유사문항 그룹은 세트 전체에서 하나만
+    const hardReused = new Set<string>(); // 후보 부족으로 어쩔 수 없이 재사용한 hard 문항(다른 세트와 겹침)
     const offsets: Record<ExamSection, number> = { rw: 0, math: 0 };
     for (const mod of mstModulePlans(routing)) {
       const isRw = mod.section === "rw";
@@ -328,7 +329,9 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
         ),
         excludeProblemIds: excludeIds,
         formatWeights: isRw ? undefined : MATH_FORMAT_WEIGHTS,
-        selection: { skillUse: new Map(), usedGroups },
+        hardIgnoreFormat: true,
+        // hard 문항은 다른 세트에서 쓴 것을 하드 제외한다(부족할 때만 재사용 — hardReused 에 기록).
+        selection: { skillUse: new Map(), usedGroups, hardExcludeIds: excludeIds, hardReused },
       });
       for (const item of result.items) {
         usedInSet.add(item.problemId);
@@ -337,6 +340,7 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
       offsets[mod.section] += result.items.length;
       shortfalls.push(...result.shortfalls.map((s) => ({ section: mod.section, moduleKey: mod.key, route: mod.route, ...s })));
     }
+    if (hardReused.size > 0) console.warn(`[mock-exam] hard 후보 부족으로 다른 세트와 겹친 문항 ${hardReused.size}건: ${[...hardReused].slice(0, 10).join(", ")}`);
   } else {
     const rwResult = assembleSection({
       section: "rw",
@@ -354,6 +358,7 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
       candidates: mathCandidates,
       excludeProblemIds: excludeIds,
       formatWeights: MATH_FORMAT_WEIGHTS,
+      hardIgnoreFormat: true,
     });
     allItems.push(...[...rwResult.items, ...mathResult.items].map((i) => ({ ...i, moduleKey: null, route: null })));
     shortfalls.push(

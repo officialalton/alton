@@ -25,6 +25,11 @@ export type MaterialNeed = {
    */
   alternatives: MaterialKind[];
   reason: string;
+  /**
+   * 질문 본문의 낱말(figure·as shown·table 등)만으로 판정한 필수다(세부 기술 자체의 선언이 아님). 본문 키워드 추정은 오탐이 잦아
+   * 이 경우에는 자료가 이미 있으면(종류가 달라도) 저장·공개를 막지 않고, R&W 는 필수가 아니라 권장으로만 낮춘다(2026-10-01).
+   */
+  viaTextCue?: boolean;
 };
 
 export const MATERIAL_KIND_LABEL: Record<MaterialKind, string> = {
@@ -118,23 +123,26 @@ export function judgeMaterialNeed(input: {
   const cueCanOverrideToRequired = !skillDefault || skillDefault.level === "required";
   if (CUE.graphAmbiguous.test(text) && !CUE.data.test(text) && !CUE.figureChoice.test(text)) {
     const m = text.match(CUE.graphAmbiguous)?.[0] ?? "graph";
-    if (skillDefaultKind === "data" || isRw) return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료 그래프(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
-    return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 함수 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
+    if (isRw && input.skillCode !== "command_of_evidence_quant") return { level: "recommended", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}의 본문에 그래프(${m}) 낱말이 있어 표·그래프 자료를 권장합니다(본문 추정 — 필수 아님).`, viaTextCue: true };
+    if (skillDefaultKind === "data" || isRw) return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료 그래프(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.`, viaTextCue: skillDefault?.level !== "required" };
+    return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 함수 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.`, viaTextCue: true };
   }
   if (CUE.figureChoice.test(text) && !isRw) {
-    return { level: "required", kind: "figure_choice", geometry: [], alternatives: ["figure_choice"], reason: `${subject}이 "어느 그래프인가"를 묻으므로 그래프/도형 선택지 4개가 필요합니다.` };
+    return { level: "required", kind: "figure_choice", geometry: [], alternatives: ["figure_choice"], reason: `${subject}이 "어느 그래프인가"를 묻으므로 그래프/도형 선택지 4개가 필요합니다.`, viaTextCue: true };
   }
   if (CUE.data.test(text)) {
     const m = text.match(CUE.data)?.[0] ?? "table";
-    return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.` };
+    // R&W 지문 속 'table'·'frequency' 같은 낱말은 자료 필요를 뜻하지 않는다 — 정량 근거(CoE quant)만 본문 단서로도 필수.
+    if (isRw && input.skillCode !== "command_of_evidence_quant") return { level: "recommended", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}의 본문에 자료 낱말(${m})이 있어 표·그래프 자료를 권장합니다(본문 추정 — 필수 아님).`, viaTextCue: true };
+    return { level: "required", kind: "data", geometry: [], alternatives: ["data"], reason: `${subject}이 자료(${m})를 읽어야 풀 수 있으므로 표·그래프 자료가 필요합니다.`, viaTextCue: skillDefault?.level !== "required" };
   }
   if (!isRw && cueCanOverrideToRequired && CUE.plane.test(text)) {
     const m = text.match(CUE.plane)?.[0] ?? "graph";
-    return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.` };
+    return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.`, viaTextCue: true };
   }
   if (!isRw && CUE.geometry.test(text)) {
     const m = text.match(CUE.geometry)?.[0] ?? "figure";
-    return { level: "required", kind: "geometry", geometry: geometryHits, alternatives: ["geometry"], reason: `${subject}이 도형(${m})을 가리키므로 도형 자료가 필요합니다.` };
+    return { level: "required", kind: "geometry", geometry: geometryHits, alternatives: ["geometry"], reason: `${subject}이 도형(${m})을 가리키므로 도형 자료가 필요합니다.`, viaTextCue: skillDefault?.level !== "required" };
   }
 
   // 2) 단서가 없으면 세부 기술의 기본 판정.
@@ -173,6 +181,8 @@ export function figureSatisfies(kind: MaterialKind | null, figure: unknown): boo
 export function materialBlocker(need: MaterialNeed, figure: unknown): string | null {
   if (need.level !== "required") return null;
   if (figureSatisfies(need.kind, figure)) return null;
+  // 본문 낱말 추정만으로 필수가 된 경우 — 그림이 이미 있으면(종류가 추정과 달라도) 막지 않는다(자료 종류 오탐).
+  if (need.viaTextCue && figure && typeof (figure as { type?: unknown }).type === "string") return null;
   return `자료 필수 문항입니다 — ${need.reason} ${need.kind ? `'${MATERIAL_KIND_LABEL[need.kind]}' 자료를 만들거나 그림을 올린 뒤 저장하세요.` : ""}`.trim();
 }
 
