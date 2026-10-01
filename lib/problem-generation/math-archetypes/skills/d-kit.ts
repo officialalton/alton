@@ -12,7 +12,7 @@ export const countMult = (lo: number, hi: number, m: number) => (hi < lo ? 0 : M
 
 /** 도입 문장(수치 없음) — 같은 틀의 본문을 서로 다른 장면으로 분산해 독립 변형을 늘린다. 뒤에 공백 포함, 빈 문자열은 도입 없음. */
 export const GEO_CTX = ["", "", "A geometry teacher describes a triangle to the class. ", "A designer is planning a triangular logo. ", "An architect sketches a triangular window. ", "A student is working on a triangle problem from a practice set. ", "A map maker marks out a triangular region. ", "A carpenter is cutting a triangular brace. "];
-export const DATA_CTX = ["", "", "A researcher is analyzing survey results. ", "A school counselor reviews some data. ", "A town planner collects information from residents. ", "A club treasurer summarizes the records. ", "A teacher is looking at class results. ", "A store manager studies sales records. "];
+export const DATA_CTX = ["", "", "Consider the following data. ", "Here is a question about a data set. ", "A student is analyzing some data. ", "Read the information below. ", "A teacher poses a statistics problem. ", "A data analyst is summarizing results. "];
 
 import { finish, type Draft } from "../text";
 import type { Rng } from "../rng";
@@ -25,3 +25,34 @@ export const NEUTRAL_CTX = ["", "", "A student is working on a geometry problem.
 /** 숫자 앞 부정관사: art(8) -> "an", art(7) -> "a". */
 export const art = (n: number) => (/^(8\d*|11|18)$/.test(String(n)) ? "an" : "a");
 export const SING: Record<string, string> = { feet: "foot", meters: "meter", inches: "inch", yards: "yard", centimeters: "centimeter", miles: "mile", kilometers: "kilometer" };
+
+// ── 자료 해석 계열 공용: 장면과 자료 나열 문장 ──
+export type Scene = { measure: string; ent: string; unit: string };
+export const SCENES: Scene[] = [
+  { measure: "daily high temperatures (in degrees Fahrenheit)", ent: "days", unit: "degrees" },
+  { measure: "quiz scores (in points)", ent: "students", unit: "points" },
+  { measure: "minutes spent on homework", ent: "students", unit: "minutes" },
+  { measure: "points scored", ent: "basketball games", unit: "points" },
+  { measure: "numbers of books read", ent: "club members", unit: "books" },
+  { measure: "numbers of customers served", ent: "days", unit: "customers" },
+  { measure: "lap times (in seconds)", ent: "runners", unit: "seconds" },
+  { measure: "weekly savings (in dollars)", ent: "weeks", unit: "dollars" },
+  { measure: "numbers of push-ups completed", ent: "athletes", unit: "push-ups" },
+  { measure: "heights (in centimeters)", ent: "seedlings", unit: "centimeters" },
+  { measure: "numbers of emails received", ent: "workdays", unit: "emails" },
+  { measure: "waiting times (in minutes)", ent: "patients", unit: "minutes" },
+];
+/** 자료 나열 문장(표현 4가지). 명사(measure)와 값 목록이 같은 문장에 놓인다. */
+export function listSentence(rng: Rng, sc: Scene, list: (number | string)[], n = list.length): string {
+  const l = list.join(", ");
+  return rng.pick([
+    `The ${sc.measure} for ${n} ${sc.ent} are ${l}.`,
+    `A researcher records the ${sc.measure} of ${n} ${sc.ent}: ${l}.`,
+    `Here are the ${sc.measure} for ${n} ${sc.ent}: ${l}.`,
+    `${n} ${sc.ent} were observed, and the ${sc.measure} were ${l}.`,
+  ]);
+}
+export const sum = (a: number[]) => a.reduce((x, y) => x + y, 0);
+export function rndList(rng: Rng, n: number, lo: number, hi: number): number[] { return Array.from({ length: n }, () => rng.int(lo, hi)); }
+export const medianOf = (a: number[]) => { const s = [...a].sort((x, y) => x - y); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+export const DATA_CTX_X = DATA_CTX;

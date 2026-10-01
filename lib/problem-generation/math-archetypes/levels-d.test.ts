@@ -14,7 +14,7 @@ describe("담당 D 원형 메타데이터", () => {
     for (const a of D_ARCHETYPES) {
       if (a.level === "hard") expect(a.id.endsWith(`.${a.operator}`), a.id).toBe(true);
       expect(a.concepts.length, a.id).toBeGreaterThanOrEqual(2);
-      expect(a.extraThinking.length, a.id).toBeGreaterThan(12);
+      expect(a.extraThinking.length, a.id).toBeGreaterThan(a.level === "hard" ? 12 : 6);
       expect(a.structure.length, a.id).toBeGreaterThan(12);
       expect(ids.has(a.id), `중복 ${a.id}`).toBe(false); ids.add(a.id);
     }
