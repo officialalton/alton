@@ -87,10 +87,34 @@ function labelBetween(sides: TriangleBody["sides"], a: string, b: string): numbe
   return parseLabel(s?.label);
 }
 
+/** 각 라벨을 순수 숫자 각도(도)로 파싱 — '76°', '76', '76 degrees'. 미지수('x°', 'θ', '(2x+5)°')는 null. */
+export function parseAngleLabel(t?: string): number | null {
+  if (!t) return null;
+  const m = t.trim().match(/^(\d+(?:\.\d+)?)\s*(?:°|degrees?)?$/i);
+  if (!m) return null;
+  const n = Number(m[1]);
+  return n > 0 && n < 180 ? n : null;
+}
+function knownAngle(b: TriangleBody, v: string): number | null {
+  return parseAngleLabel((b.angles ?? []).find((a) => a.at === v)?.label);
+}
+const RAD = Math.PI / 180;
+/** 밑변 (0,0)-(1,0) 위에서 왼쪽 밑각 a1·오른쪽 밑각 a2(도)인 꼭짓점 — 사인법칙. 폭이 [0,1] 밖이면 정규화한다. */
+function apexFromBaseAngles(a1: number, a2: number): Pt[] {
+  const t = Math.sin(a2 * RAD) / Math.sin((a1 + a2) * RAD);
+  const apex: Pt = [t * Math.cos(a1 * RAD), t * Math.sin(a1 * RAD)];
+  const raw: Pt[] = [apex, [0, 0], [1, 0]];
+  const minX = Math.min(...raw.map((p) => p[0])), maxX = Math.max(...raw.map((p) => p[0]));
+  const w = maxX - minX;
+  return raw.map((p) => [(p[0] - minX) / w, p[1] / w] as Pt);
+}
+
 /** 표준형 좌표(단위 프레임, 폭 1 기준) — kind 와 직각 위치로 모양을 정한다. 반환은 vertices 순서대로. */
 function shapeOf(b: TriangleBody): { pts: Pt[]; order: string[] } {
   const [v0, v1, v2] = b.vertices;
   const kind: TriangleKind = b.kind ?? (b.rightAngleAt ? "right" : "scalene");
+  // 2026-10-02(오너 UAT C6) — 'AB = AC, 꼭지각 A = 76°' 가 꼭지각 약 61°로 그려져 밑각 인상이 틀렸다.
+  // 숫자로 주어진 각 라벨은 그 각도대로 그린다(미지수 라벨 'x°' 는 제약에 쓰지 않는다 — 정답 노출 방지).
   if (kind === "right") {
     // 직각 꼭짓점 왼쓱 아래, 다음 꼭짓점(순환) 오른쪽 아래, 나머지 위.
     const r = b.rightAngleAt ?? v1;
@@ -107,12 +131,26 @@ function shapeOf(b: TriangleBody): { pts: Pt[]; order: string[] } {
       const maxLeg = Math.max(legBR, legTop);
       w = legBR / maxLeg;
       h = legTop / maxLeg;
+    } else {
+      // 예각 하나가 숫자로 주어지면 tan 으로 두 직각변 비율을 정한다(br 의 각 β → h/w = tan β).
+      const atBR = knownAngle(b, br), atTop = knownAngle(b, top);
+      const beta = atBR !== null && atBR < 90 ? atBR : atTop !== null && atTop < 90 ? 90 - atTop : null;
+      if (beta !== null) {
+        const ratio = Math.tan(beta * RAD);
+        if (ratio <= 1) { w = 1; h = ratio; } else { w = 1 / ratio; h = 1; }
+      }
     }
     const map: Record<string, Pt> = { [bl]: [0, 0], [br]: [w, 0], [top]: [0, h] };
     return { pts: b.vertices.map((v) => map[v]), order: [top, bl, br] };
   }
   if (kind === "equilateral") return { pts: [[0.5, Math.sqrt(3) / 2], [0, 0], [1, 0]], order: [v0, v1, v2] };
-  if (kind === "isosceles") return { pts: [[0.5, 0.85], [0, 0], [1, 0]], order: [v0, v1, v2] };
+  if (kind === "isosceles") {
+    // 꼭짓점 v0 이 꼭지각, v1·v2 가 밑각. 꼭지각 θ 가 주어지면 밑각 (180−θ)/2, 밑각 β 가 주어지면 그대로.
+    const apex = knownAngle(b, v0), base = knownAngle(b, v1) ?? knownAngle(b, v2);
+    const beta = apex !== null ? (180 - apex) / 2 : base !== null && base < 90 ? base : null;
+    if (beta !== null) return { pts: [[0.5, 0.5 * Math.tan(beta * RAD)], [0, 0], [1, 0]], order: [v0, v1, v2] };
+    return { pts: [[0.5, 0.85], [0, 0], [1, 0]], order: [v0, v1, v2] };
+  }
   // scalene — 밑변(v1-v2)에 대한 높이(altitude)가 숫자 라벨로 있으면 실제 밑변:높이 비율로.
   // (예: base=26, height=4처럼 아주 납작한 삼각형인데 고정 비율 탓에 정삼각형에 가깝게 보이던 사례.)
   const base = labelBetween(b.sides, v1, v2);
@@ -122,6 +160,19 @@ function shapeOf(b: TriangleBody): { pts: Pt[]; order: string[] } {
     // 꼭짓점 x좌표(발의 위치)는 임의로 밑변의 40% 지점에 둔다 — altitude foot 표시는 실제 발
     // 위치를 요구하지 않으므로(수선 표시일 뿐) 비율만 맞으면 된다.
     return { pts: [[0.4 * (base / maxV), alt / maxV], [0, 0], [base / maxV, 0]], order: [v0, v1, v2] };
+  }
+  // 숫자 각이 둘 이상이면 세 각이 정해진다. 하나뿐이면 나머지 두 각은 남은 각을 똑같이 나눈다(중립 — 미지수 각의 정답을 그림에 싣지 않는다).
+  const k0 = knownAngle(b, v0), k1 = knownAngle(b, v1), k2 = knownAngle(b, v2);
+  const nKnown = [k0, k1, k2].filter((k) => k !== null).length;
+  if (nKnown >= 1) {
+    let a1: number, a2: number;
+    if (k1 !== null && k2 !== null) [a1, a2] = [k1, k2];
+    else if (k0 !== null && k1 !== null) [a1, a2] = [k1, 180 - k0 - k1];
+    else if (k0 !== null && k2 !== null) [a1, a2] = [180 - k0 - k2, k2];
+    else if (k0 !== null) [a1, a2] = [(180 - k0) / 2, (180 - k0) / 2];
+    else if (k1 !== null) [a1, a2] = [k1, (180 - k1) / 2];
+    else [a1, a2] = [(180 - k2!) / 2, k2!];
+    if (a1 > 0 && a2 > 0 && a1 + a2 < 180) return { pts: apexFromBaseAngles(a1, a2), order: [v0, v1, v2] };
   }
   return { pts: [[0.36, 0.72], [0, 0], [1, 0]], order: [v0, v1, v2] }; // scalene(라벨 없음, 기존 고정 비율)
 }
