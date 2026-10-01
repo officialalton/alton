@@ -8,6 +8,8 @@
 //   숫자 마스킹) 0.6 이상이면 중복으로 건너뛴다(--no-dup-check 로 끔).
 //   --publish  : 임포트 직후 confirm_and_publish_problem_version 으로 공개(모의고사 조립 후보가 되려면 필요). 기본은 초안까지만.
 //   --tag      : 시험 임포트 표식. problems.topic 에 `mockgen-test:<tag>` 를 넣어 --cleanup-tag 로 지울 수 있게 한다.
+//   키워드: quality.mockExamGeneration.intendedSkill 에 실제 스킬(APP_SKILL_OVERRIDE 이전 planSkill)을 남긴다.
+//           임포트 뒤 scripts/keywords/link-imported.ts --file <같은 파일> --execute 로 공용 키워드에 연결한다.
 //   --cleanup-tag <tag> : 그 표식의 시험 데이터를 삭제(로컬 전용 — 원격 URL 이면 거부).
 import { findResidue } from "../../lib/problem-generation/residue";
 import { readFileSync, existsSync } from "node:fs";
@@ -24,7 +26,7 @@ const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? p
 const flag = (n: string) => process.argv.includes(n);
 
 type Rec = {
-  gid: string; runId: string; skill: string; domain: string; examSystem: string; difficulty: string; format: "mc" | "spr";
+  gid: string; runId: string; skill: string; planSkill?: string; domain: string; examSystem: string; difficulty: string; format: "mc" | "spr";
   problem: { passage?: string | null; stimulus?: string | null; question?: string | null; options?: string[] | null; correctIndex?: number | null; answers?: string[] | null; explanation: string; figure?: unknown; statements?: string[] | null; evidenceTarget?: string | null; evidenceSpan?: string | null; answerRationale?: string | null; distractorErrorTypes?: string[] | null };
   quality: Record<string, unknown>;
   review?: unknown;
@@ -150,7 +152,7 @@ async function main() {
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }
     const { error: cErr } = await admin.rpc("set_problem_render_check", { p_version_id: versionId, p_check: check });
     if (cErr) { await cleanup1(`렌더 검사 기록 실패 ${cErr.message}`); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, difficultyStatus: r.difficultyStatus ?? ((r.quality.mockExamGeneration as Record<string, unknown> | undefined)?.difficultyStatus ?? null), review: r.review ?? null } } });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, intendedSkill: r.planSkill ?? r.skill, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, difficultyStatus: r.difficultyStatus ?? ((r.quality.mockExamGeneration as Record<string, unknown> | undefined)?.difficultyStatus ?? null), review: r.review ?? null } } });
     if (qErr) failures.push(`${r.gid}: 품질 기록 실패 ${qErr.message}`);
     stats.created += 1;
     pool.push({ problemId: problemId as string, key, sh });
