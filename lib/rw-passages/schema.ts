@@ -9,7 +9,7 @@ export const INFERENCE_TARGETS = [
   "character_motivation", "tone_or_mood", "narrator_attitude", "tone_shift", "figurative_language", "symbolism",
   "relationship_between_characters", "word_in_context", "text_structure", "main_idea_or_purpose", "underlined_portion_function",
 ] as const;
-export const INTENDED_DIFFICULTY = ["medium", "hard"] as const;
+export const INTENDED_DIFFICULTY = ["easy", "medium", "hard"] as const;
 
 export type LiteraryPassage = {
   id: string;

@@ -44,7 +44,7 @@ data/rw-passages/<batchId>/README.md           # (선택) 생성 방법·프롬�
 | `topicSeed` | 장소·인물 관계·갈등을 한 줄(12자 이상). **같은 배치 안에서 중복 금지**(소재 겹침 방지 키) |
 | `text` | 60~220 단어, 영어 |
 | `features.inferenceTargets` | 이 글로 출제할 수 있는 문제 유형 1개 이상: character_motivation, tone_or_mood, narrator_attitude, tone_shift, figurative_language, symbolism, relationship_between_characters, word_in_context, text_structure, main_idea_or_purpose, underlined_portion_function |
-| `intendedDifficulty` | medium \| hard |
+| `intendedDifficulty` | easy \| medium \| hard |
 
 ## 품질 가이드(만들 때)
 - **hard 지문**: 화자의 태도가 직접 서술되지 않고 행동·대조·반복으로 드러나게 한다. 근거가 두 곳 이상에 흩어져 있어야 하고, 쉬운 오독(표면적 감정)과 정답 해석이 갈리게 쓴다.
