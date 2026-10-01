@@ -30,17 +30,18 @@ const baseQuality = () => ({
 export function archetypeRecord(a: Archetype, inst: Instance, seed: number, runId: string, verified: number | null): PassedRecord {
   const subpattern = `${a.id}/${inst.variant}`;
   const passage = `${inst.stimulus}\n\n${inst.question}`;
+  const diff: Difficulty = a.difficulty ?? "hard";
   return {
-    gid: uuidFrom(`${a.id}:${seed}`), runId, skill: a.skill, domain: domainOf(a.skill), examSystem: "sat_math", difficulty: "hard", format: "mc",
+    gid: uuidFrom(`${a.id}:${seed}`), runId, skill: a.skill, domain: domainOf(a.skill), examSystem: "sat_math", difficulty: diff, format: "mc",
     problem: {
       format: "mc", figure: null, passage, stimulus: inst.stimulus, question: inst.question, needsFigure: false, options: inst.options, correctIndex: inst.correctIndex, answers: null, statements: null,
-      explanation: inst.explanation, explanationEn: inst.explanationEn, difficulty: "hard",
+      explanation: inst.explanation, explanationEn: inst.explanationEn, difficulty: diff,
       distractorRationales: inst.distractors.map((d) => ({ index: d.index, plausible_because: "실제 풀이 과정에서 나올 수 있는 오류 경로다.", matches: "같은 식·수치에서 계산되었다.", why_wrong: d.reason, kind: d.kind })),
       difficultyRationale: a.extraThinking, design: null, subpattern,
     },
     quality: {
-      ...baseQuality(), estimatedDifficulty: "hard", requestedDifficulty: "hard", difficultyReasons: [a.extraThinking],
-      mockExamGeneration: { difficultyStatus: "provisional_ai", source: "compiler_archetype", archetypeId: a.id, operator: a.operator, kind: a.kind, extraThinking: a.extraThinking, concepts: a.concepts, steps: inst.trace.length, mediumSteps: a.mediumSteps, seed, variant: inst.variant, verification: { method: "verification_js", verified, correctOption: inst.options[inst.correctIndex] } },
+      ...baseQuality(), estimatedDifficulty: diff, requestedDifficulty: diff, difficultyReasons: [a.extraThinking],
+      mockExamGeneration: { difficultyStatus: diff === "hard" ? "provisional_ai" : "confirmed", source: "compiler_archetype", archetypeId: a.id, operator: a.operator, kind: a.kind, extraThinking: a.extraThinking, concepts: a.concepts, steps: inst.trace.length, mediumSteps: a.mediumSteps, seed, variant: inst.variant, verification: { method: "verification_js", verified, correctOption: inst.options[inst.correctIndex] } },
     },
     recipeId: a.id, recipeCheck: { source: "compiler_archetype", compliance: { met: a.concepts.length, minMet: 2, of: a.concepts.length, ok: true } }, createdVia: "compiler", subpattern,
   };

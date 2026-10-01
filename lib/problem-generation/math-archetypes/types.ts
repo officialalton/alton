@@ -11,7 +11,8 @@ export type OperatorId =
   | "unit_ratio" // 단위·비율 결합
   | "repr_shift" // 표현 변환(문장·표·도형 → 식)
   | "constraint_select" // 제약 추가 후 해 선택·개수(정수해·외래근·범위)
-  | "compare_scenarios"; // 두 경우 비교·임계점
+  | "compare_scenarios" // 두 경우 비교·임계점
+  | "frame"; // easy/medium 문장 틀(hard 연산자가 아님 — 유사문항 그룹 확장용)
 
 export class GenFail extends Error {}
 
@@ -32,6 +33,8 @@ export type Instance = {
   /** 같은 원형 안의 구조 변형 이름 — 유사문항 그룹(subpattern) 분산에 쓴다. */
   variant: string;
   distractors: { index: number; kind: DistractorKind; reason: string }[];
+  /** 문장-수식 의미 일치 검사용: 지문이 '<명사구> 는 <값>' 으로 서술하는 대응표. 명사구와 값이 같은 문장에서 서로 가장 가까워야 한다(verify.checkBindings). */
+  bindings?: { phrase: string; value: number }[];
 };
 
 export type Archetype = {
@@ -46,6 +49,8 @@ export type Archetype = {
   extraThinking: string;
   /** 결합되는 개념(2개 이상) */
   concepts: string[];
+  /** 난이도. 생략하면 hard. easy/medium 원형은 hard 주장 검사(풀이 단계·결합 개념)를 면제받고 연산자는 "frame" 이다. */
+  difficulty?: "easy" | "medium" | "hard";
   /** 같은 kind 의 medium 컴파일러 풀이 단계 수(비교 기준) */
   mediumSteps: number;
   generate(rng: Rng): Instance;

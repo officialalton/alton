@@ -78,6 +78,29 @@ export function checkVariableMentions(inst: Instance): string[] {
   return issues;
 }
 
+/** 문장과 변수의 의미 일치(명사-수식 대응표 기반): 각 대응 (명사구, 값)에 대해, 명사구가 나온 문장 안에서 명사구에 가장 가까운 숫자가 그 값이어야 한다. 명사구 중복도 금지. */
+export function checkBindings(inst: Instance): string[] {
+  const b = inst.bindings; if (!b?.length) return [];
+  const issues: string[] = []; const text = `${inst.stimulus}\n${inst.question}`;
+  const sentences = text.split(/(?<=[.?!])\s+|\n+/).map((s) => s.replace(/\$/g, " "));
+  const esc = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  if (new Set(b.map((x) => x.phrase.toLowerCase())).size !== b.length) issues.push("대응표에 같은 명사구가 둘 이상");
+  for (const { phrase, value } of b) {
+    let ok = false; let seen = false;
+    for (const sent of sentences) {
+      const m = new RegExp(esc(phrase), "i").exec(sent); if (!m) continue; seen = true;
+      const s0 = m.index, e0 = m.index + m[0].length;
+      const nums = [...sent.matchAll(/\d+(?:\.\d+)?/g)].map((x) => ({ v: Number(x[0]), gap: x.index! + x[0].length <= s0 ? s0 - (x.index! + x[0].length) : x.index! >= e0 ? x.index! - e0 : 0 }));
+      if (!nums.length) continue;
+      const best = Math.min(...nums.map((n) => n.gap));
+      if (nums.filter((n) => n.gap === best).every((n) => n.v === Math.abs(value))) ok = true;
+    }
+    if (!seen) issues.push(`의미 대응: 명사구 "${phrase}" 가 본문에 없음`);
+    else if (!ok) issues.push(`의미 대응: "${phrase}" 에 가장 가까운 수가 ${value} 가 아님`);
+  }
+  return issues;
+}
+
 export type VerifyResult = { ok: boolean; failures: string[]; optionValues: number[]; verified: number | null };
 const TOL = 1e-6;
 
@@ -107,8 +130,11 @@ export function verifyInstance(a: Archetype, inst: Instance): VerifyResult {
   failures.push(...checkVariableMentions(inst));
   // hard 주장 기계 검사 — 단계·개념은 늘고 숫자는 단순해야 한다.
   const minSteps = Math.max(5, a.mediumSteps + 1);
-  if (inst.trace.length < minSteps) failures.push(`풀이 단계 ${inst.trace.length} < ${minSteps} (같은 세부 패턴 medium ${a.mediumSteps} 대비 +1 이상이고 5 이상이어야 함)`);
-  if (a.concepts.length < 2) failures.push("결합 개념 2개 미만");
+  if ((a.difficulty ?? "hard") === "hard") {
+    if (inst.trace.length < minSteps) failures.push(`풀이 단계 ${inst.trace.length} < ${minSteps} (같은 세부 패턴 medium ${a.mediumSteps} 대비 +1 이상이고 5 이상이어야 함)`);
+    if (a.concepts.length < 2) failures.push("결합 개념 2개 미만");
+  } else if (inst.trace.length < 2) failures.push("풀이 단계 2 미만");
+  failures.push(...checkBindings(inst));
   const nums = (text.match(/-?\d+(\.\d+)?/g) ?? []).map(Number);
   if (nums.some((n) => Math.abs(n) > 999 && Math.abs(n) !== 1000)) failures.push("지문에 4자리 이상 숫자(복잡한 숫자로 hard 를 만들지 않는다)");
   if (/\d+\.\d{2,}/.test(text)) failures.push("지문에 소수 둘째 자리 이상");
