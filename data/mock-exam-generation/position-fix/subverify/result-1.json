@@ -1,0 +1,596 @@
+[
+ {
+  "gid": "4fe2723f-06c9-44d7-bef7-94d64fc4adf8",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "55981e4f-a11a-4074-9f46-93faa4d909bb",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "60ebda0b-23d0-4d1e-babe-06a817095314",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "a64f09ed-4f43-4e58-bb13-465546ceb152",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "618a6ee7-d30d-4577-ab49-f9747e5eb9bc",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "a680e139-466b-4a83-b94f-824913025458",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "efd69cb4-a20e-4197-912f-7f39fbe967ce",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "82c500d5-7c9a-4ac7-a8f4-3c4fff985b35",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "8ce37e48-5d35-4871-ac7d-36d001e1ffc9",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "3d92d68a-b77c-4bd6-ba2b-6722fcfbf922",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "db837e1a-6f12-4db7-8114-724ee73ddf2d",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "34c54448-ce51-4869-b535-90d34908d01b",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "61638aaa-3273-4428-83db-fff193e884c9",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "b8d6f4f2-f3c9-439e-99b8-734ba7a43f7f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "125340fe-e7ab-449b-a2c4-fa450b926b85",
+  "ok": false,
+  "issue": "영어 해설이 선택지 내용과 불일치: A를 \"shared pigment source\", B를 \"master taking on apprentices\"로 설명하나 실제 선택지는 얼굴/드레이퍼리 밑그림 동일, 공방 기록임. 한국어 해설 및 글자 매핑은 정확. 섞기 이전부터 있던 EN 오류로 보임.",
+  "severity": "minor"
+ },
+ {
+  "gid": "92b245a4-427a-4fc0-b729-a83e0f751dca",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "edf133a1-e671-4f52-8b07-ae780706bcf1",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "ca46ffe7-addd-40e8-8930-27d982fea714",
+  "ok": false,
+  "issue": "한국어/영어 해설의 C(섞기 후) 설명이 \"촛불·모래시계 상징 소재를 Text 2 논거로 착각\"인데 해당 선택지 실제 내용은 \"기록 침묵을 근거로 상징은 장식에 불과\"여서 불일치. 글자 매핑(A/B/C/D)은 새 순서에 맞음. 섞기 이전부터의 서술 불일치.",
+  "severity": "minor"
+ },
+ {
+  "gid": "a774151a-ee5a-4866-877c-0d8c4631f195",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "4e2186ee-74ca-44d6-851f-0058d8e2d524",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "d40fe6a0-6492-4fc8-8537-c6639ff3f3b8",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "5c4aa1d1-9fa2-4311-b800-06eb27adf68a",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "c7c1fc86-cd69-4665-9d55-e3cca54fc9e2",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "826960c2-01c5-4fef-8bb5-00172930afda",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "d98ee576-c36b-409b-9dcb-ee10f5dd332e",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "06a3ced4-bb9e-45cc-bdc2-2754c8b61e39",
+  "ok": false,
+  "issue": "해설이 0번/1번/2번/3번 0-기반 인덱스로 선택지를 지칭하는데 섞은 뒤 갱신되지 않음. 정답은 이제 3번(호르몬 신호)인데 해설은 \"0번\"을 정답으로, 1번=목적론 오답, 2번=부화 후, 3번=신체적 부담으로 서술 -> 전부 어긋남(정적검사 LR=0으로 미검출).",
+  "severity": "blocking"
+ },
+ {
+  "gid": "65bd13cb-7207-41f0-a7df-94912f0b95b6",
+  "ok": false,
+  "issue": "해설이 B를 \"지문에 없는 시간 순서(경력 초기/후기)\"로 설명하나 새 B는 \"조수가 카툰에 의존한 이유\" 내용이고, D 설명(\"항상 저가 선호\")도 실제 D(후원자가 낮은 경제 계층)와 어긋남. 글자 매핑은 올바름. 섞기 이전 서술 불일치.",
+  "severity": "minor"
+ },
+ {
+  "gid": "f85975f8-66d9-40fd-a949-c7a50d552e57",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "f18ef9d1-c81d-437d-94e9-fd0d44c2ce31",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "f3d77784-1f24-4a5a-8e9e-81e06c63f718",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "8390a447-8612-4745-9c40-e7d09a547417",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "ab83169c-de8c-49ab-b12d-447db4c210a8",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "27e94548-458e-4b17-ba00-a8632ab76172",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "d7b712ad-e52e-4d1a-aec3-70ae062ccfea",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "e58d3424-5c6a-45d8-b7b4-c879179da464",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "15cd2022-15d1-4c73-b31f-c345199c7b6a",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "abfb940d-16ef-44d2-8809-87c5af960cb6",
+  "ok": false,
+  "issue": "해설이 B를 \"도입 시기만 언급\"이라 하나 새 B는 전용 차로로 버스가 빠르게 달린다는 내용. 글자 매핑은 올바름. 섞기 이전부터의 서술 불일치.",
+  "severity": "minor"
+ },
+ {
+  "gid": "8b68909a-934e-45ad-93bc-0636108a1419",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "80524e89-b921-4072-ac25-f9c889254c3f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "c723be7b-9672-465e-93ee-7cd00772bc4a",
+  "ok": false,
+  "issue": "한국어 해설 안의 \"(Only when~, B box from a rival workshop~)\"에서 관사 A가 B로 잘못 치환됨(원문 \"A box from a rival workshop\"). 또한 해설 끝에 </explanation><parameter name=\"hard_design\">... 생성 마크업이 해설 본문에 그대로 섞여 있음(섞기 이전부터의 오염으로 보이나 노출되면 안 됨).",
+  "severity": "blocking"
+ },
+ {
+  "gid": "31b672ba-3e6d-4fef-abb5-5698b2164458",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "4cda21ee-a838-4069-84c3-d28a0107b06e",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "f6543ee8-c848-4a4a-afa2-0199b92110a0",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "542d5e42-bb92-4e0e-8790-375fad6cc661",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "91a58596-c853-4785-8ee9-6ec3431cc217",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "7bffbaaf-9fa8-4a3e-8b37-6e4be12277b3",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "32482bb6-d22b-4fc3-9d8c-92ccedfc6eea",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "622472df-1246-4920-b7ff-1341d62db6d3",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "bbe7d168-4c65-4838-8a9e-d182eedcee36",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "456b00e6-3909-432b-9b30-ff5b89a8cc97",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "87db1cc3-2817-49bd-af97-56dc7bf1b27f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "42e5368d-a825-40f8-8659-72519529defb",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "213f0030-3c5e-48a6-a45f-af27776e4190",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "6345a838-ebf0-407f-8670-30df94179c3f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "283ec019-f4cd-4a17-b924-d16d9c896950",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "fd3ad616-15e2-45e8-acde-0b17900b2247",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "7f37dbdc-a20f-4911-9c12-49ef225b4a85",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "e7ffe498-8560-4bad-9f9a-f721d837681c",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "4f11a634-1390-4b8a-8ea6-9e29e212a88d",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "51410bf1-c0d6-4b44-916f-3d725f5c562c",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "d9fc6d36-ac17-4ee5-b8e0-4dfddf974df8",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "c202aeb8-938f-486b-87f1-1ad7423cdbc2",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "81fe567e-c3f9-42dd-ba04-f5f0b1fac418",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "57530d56-0922-421f-bce8-088615670805",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "34067349-e952-4722-8501-8b9e272e6fcc",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "b3f750ad-e93b-4383-a22e-6d35fc821f71",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "bc204a2a-42cd-4e23-86bc-65fe19b581b2",
+  "ok": false,
+  "issue": "영어 해설 끝에 존재하지 않는 선택지 \"E\" 언급(\"E shows differing opinions...\"). 글자 A-D 매핑은 정확. 섞기 이전부터의 잔재.",
+  "severity": "minor"
+ },
+ {
+  "gid": "283d7780-08fd-4c68-bfe8-df2698c6c493",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "90dd7285-1f87-4fce-9d7f-d7362155aad9",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "a15d02b8-ebcb-4f4e-8a22-3fbe2f19457e",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "ca034268-1c2c-4598-b197-bd47cdaa4e5a",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "3b380fb8-4988-4143-b77c-4b14466969f1",
+  "ok": false,
+  "issue": "영어 해설 끝에 존재하지 않는 선택지 \"E\" 언급. 글자 A-D 매핑(정답 D, A/C 실험, B 비교불가)은 정확. 섞기 이전부터의 잔재.",
+  "severity": "minor"
+ },
+ {
+  "gid": "45580512-bd54-4ac9-b5ed-4df64c9d113b",
+  "ok": false,
+  "issue": "해설이 A를 \"측정 정밀도(정확한 개수 세기)\"로 설명하나 새 A는 \"각 집단이 정확히 30그루\"라는 내용. 글자 매핑은 올바름. 섞기 이전부터의 서술 불일치.",
+  "severity": "minor"
+ },
+ {
+  "gid": "78588883-a1a1-4723-adcb-ead0c59fb508",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "447292a0-0bb5-46a2-95c6-203fa5378a3f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "c1b9fb15-fdd0-436d-8d0a-358edfb44ede",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "eda2b98c-d5cf-4771-aa63-2d997619a99d",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "89e3d352-a911-433d-a711-19d2b69fffb0",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "b5578999-195d-43dd-8f40-779c294917fb",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "c124bdca-d99d-4809-9461-342882441460",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "aee21552-e66e-4353-810d-c77cb83c2074",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "4e5c16c7-9c77-42e7-a2ad-55e52f557099",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "316780c9-c1b7-4358-8e37-f7bbf9ecb095",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "5c2c6462-0fbb-41ec-91c3-3c686766414f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "2962c6bc-3a41-4609-b041-30d7b2e1c1d7",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "e08d6f66-c5a9-4e93-86a4-8ca8344e6140",
+  "ok": false,
+  "issue": "해설이 C를 \"보전 활동을 설명\"이라 하나 새 C는 \"성게가 포식자 없을 때 켈프를 파괴\" 내용. 글자 매핑은 올바름. 섞기 이전부터의 서술 불일치.",
+  "severity": "minor"
+ },
+ {
+  "gid": "644fc870-8b74-4a34-9b6f-0b9589f2f0a5",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "f9b4fc3f-a25b-47c0-84a6-b4e1ca70ee36",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "ab434cb1-4245-4fee-bc89-35162a6127d2",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "74f8f5f4-fa9d-4083-af1f-b174fdcb111f",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "0dd97523-38b3-4bfb-8c6f-244aaede949b",
+  "ok": false,
+  "issue": "영어 해설이 선택지와 전혀 다른 내용(A는 rainforest 비교, B는 bleaching, C는 freshwater lakes)을 설명. 한국어 해설과 글자 매핑은 정확. 섞기 이전부터의 EN 오류.",
+  "severity": "minor"
+ },
+ {
+  "gid": "e9847430-6be6-4847-a9b4-0df726e51dd0",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "58fe7583-17f7-4776-8063-2613e6fd0805",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "fda909ce-4c0e-4f54-ab93-c0fb4c7e7b40",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "c04ae335-4644-445b-8041-45c561fa69e4",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "39104940-1797-4aae-b5ce-8c581a5d4ad5",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "ca102afc-c4ec-4237-b0c6-1f97940d90cc",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "8af41537-3713-4b78-bd1c-0d291b857e0a",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ },
+ {
+  "gid": "50d71cd1-92ed-4c72-9688-872ef54280f8",
+  "ok": true,
+  "issue": "",
+  "severity": ""
+ }
+]

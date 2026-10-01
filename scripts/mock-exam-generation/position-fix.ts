@@ -47,7 +47,7 @@ export function classify(r: Rec): { skip?: string; ambiguous: boolean } {
   return { ambiguous: false };
 }
 
-function buildPlan(forceSkip: Map<string, string> = new Map()) {
+function buildPlan(forceSkip: Map<string, string> = new Map(), prefer: Map<string, number> = new Map()) {
   const all: FixEntry[] = [];
   const seen = new Set<string>();
   const perSource: Record<string, { n: number }> = {};
@@ -63,7 +63,10 @@ function buildPlan(forceSkip: Map<string, string> = new Map()) {
       const sys = recs.filter((r) => r.examSystem === system);
       const counts = [0, 0, 0, 0];
       for (const r of sys) if (cls.get(r.gid)!.skip && r.format === "mc" && r.problem.correctIndex >= 0) counts[r.problem.correctIndex]++;
-      for (const r of sys.filter((x) => !cls.get(x.gid)!.skip).sort((a, b) => a.gid.localeCompare(b.gid))) {
+      const open = sys.filter((x) => !cls.get(x.gid)!.skip).sort((a, b) => a.gid.localeCompare(b.gid));
+      // 이전에 검수를 거친 항목은 같은 목표 위치를 유지(검수 결과가 새 계획에서도 유효하도록)
+      for (const r of open) { const pt = prefer.get(r.gid); if (pt !== undefined && pt !== r.problem.correctIndex) { counts[pt]++; sysTarget.set(r.gid, pt); } }
+      for (const r of open.filter((x) => !sysTarget.has(x.gid))) {
         let best = 0;
         for (let k = 1; k < 4; k++) if (counts[k] < counts[best] || (counts[k] === counts[best] && best === r.problem.correctIndex && k !== r.problem.correctIndex)) best = k;
         counts[best]++; sysTarget.set(r.gid, best);
@@ -93,7 +96,9 @@ const dist = (es: FixEntry[], section: string, useAfter: boolean) => {
 function cmdPlan() {
   // 1차 계획 → 정적 감사 → 실패 문항은 '생략'으로 확정하고 목표 배정을 다시 계산(분포 균형 유지)
   const force = new Map<string, string>();
-  let all = buildPlan();
+  const prefer = new Map<string, number>();
+  for (const f of ["apply-candidates.v2-verified223.json", "apply-candidates.v2-static891.json"]) { const fp = path.join(OUT, f); if (existsSync(fp)) for (const e of JSON.parse(readFileSync(fp, "utf-8")) as FixEntry[]) if (e.newIndex !== undefined) prefer.set(e.gid, e.newIndex); }
+  let all = buildPlan(new Map(), prefer);
   for (let round = 0; round < 3; round++) {
     let added = 0;
     for (const e of all) {
@@ -102,7 +107,7 @@ function cmdPlan() {
       if (f.length) { force.set(e.gid, `정적 감사 실패: ${f[0]}`); added++; }
     }
     if (!added) break;
-    all = buildPlan(force);
+    all = buildPlan(force, prefer);
   }
   mkdirSync(OUT, { recursive: true });
   const sha = createHash("sha256").update(JSON.stringify(all.map((e) => [e.gid, e.status, e.after?.correctIndex]))).digest("hex").slice(0, 12);
