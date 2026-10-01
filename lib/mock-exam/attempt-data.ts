@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { computeMockExamReport } from "./report";
 import { estimateScore, type ScoreEstimate } from "./score-estimate";
+import { mstSectionSeconds } from "./mst";
 
 // 고정형 SAT 모의고사 V1 — 응시 기록 읽기 계층(학생/교사/학부모 공용).
 // 사양: docs/2026-09-17-fixed-mock-exam-v1-spec.md 3절(역할별 흐름)·5절(상태)·7절(답안·채점).
@@ -52,6 +53,9 @@ export type MockExamAttemptItem = {
   correctIndex: number | null;
   answers: string[] | null;
   explanation: string | null;
+  /** 영어 해설(problem_versions.explanation_en). explanation 이 공개된 경우에만 DB 가 싣는다
+   * (20262001000000). 없으면 화면은 한글 해설로 폴백한다. */
+  explanationEn?: string | null;
   figure: unknown;
   response: string | null;
   correct: boolean | null;
@@ -59,6 +63,8 @@ export type MockExamAttemptItem = {
   adjusted?: boolean;
   originalCorrect?: boolean | null;
   flagged: boolean;
+  /** 학생이 스스로 누른 "찍음" 표시(20262001000000). 마이그레이션 적용 전 응답에는 없다. */
+  guessed?: boolean;
   savedToPractice: boolean;
   timeSpentSeconds: number | null;
 };
@@ -93,6 +99,8 @@ export type MockExamAttemptDetail = {
   /** 직원(관리자·담당 교사·컨설턴트) 응답에만 있다. 학생·보호자 응답에는 이 키 자체가 없다(경로 비노출). */
   /** 예상 점수 범위(내부 추정). 서버가 경로로 계산해 범위만 싣는다 — 경로·난이도는 없다. MST 채점 완료 시에만. */
   scoreEstimate?: ScoreEstimate | null;
+  /** 섹션 소요 시간(초). MST 는 모듈 시작~제출 시각으로 계산한다(문항별 시간 미수집). null 이면 문항별 합계. */
+  sectionTimeSeconds?: { rw: number | null; math: number | null } | null;
   routing?: {
     rw: { route: "higher" | "lower" | null; policyVersion: number | null };
     math: { route: "higher" | "lower" | null; policyVersion: number | null };
@@ -140,7 +148,21 @@ export async function loadMockExamAttemptDetail(supabase: SupabaseClient, attemp
   const d = data as MockExamAttemptDetail & { items: MockExamAttemptItem[] | null };
   const detail = { ...d, items: Array.isArray(d.items) ? d.items : [] };
   if (detail.format !== "mst") return detail;
-  return { ...detail, scoreEstimate: await computeScoreEstimate(detail) };
+  const [scoreEstimate, sectionTimeSeconds] = await Promise.all([computeScoreEstimate(detail), loadMstSectionTime(detail.id)]);
+  return { ...detail, scoreEstimate, sectionTimeSeconds };
+}
+
+/** MST 섹션 소요 시간 — RPC 가 접근 권한을 확인한 뒤, 모듈 시각(경로 정보 없음)만 서비스 롤로 읽는다. */
+async function loadMstSectionTime(attemptId: string): Promise<{ rw: number | null; math: number | null } | null> {
+  try {
+    const { data } = await createAdminClient()
+      .from("mock_exam_attempt_modules")
+      .select("module_key, started_at, submitted_at, ends_at, time_limit_seconds")
+      .eq("attempt_id", attemptId);
+    return data ? mstSectionSeconds(data) : null;
+  } catch {
+    return null;
+  }
 }
 
 /** 경로는 학생·보호자 RPC 응답에 없으므로(RPC가 접근 권한을 이미 확인한 뒤) 서비스 롤로 읽어 계산에만 쓴다. */
