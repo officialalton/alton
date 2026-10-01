@@ -23,7 +23,7 @@ import CreditsTab from "./CreditsTab";
 import type { CreditsData } from "./credits-data";
 import TeacherTab from "./TeacherTab";
 import StudentMockExamTab from "./StudentMockExamTab";
-import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
+import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
 import type {
   TeacherListItem,
   TeacherProfileData,
@@ -108,7 +108,7 @@ export default function StudentShell({
   subjectEnrollments,
   lessonBooking,
   roadmap,
-  mockExamAttempts,
+  mockExamOverview,
 }: {
   studentName: string;
   initialTab?: string;
@@ -136,7 +136,7 @@ export default function StudentShell({
   subjectEnrollments: SubjectEnrollmentView[];
   lessonBooking: LessonBookingData;
   roadmap: RoadmapData;
-  mockExamAttempts?: MockExamAttemptSummary[];
+  mockExamOverview?: MockExamOverview;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
@@ -395,7 +395,7 @@ export default function StudentShell({
               chatThreads={chatThreads}
             />
           ) : activeTab === "mock-exam" ? (
-            <StudentMockExamTab initialAttempts={mockExamAttempts} />
+            <StudentMockExamTab initialOverview={mockExamOverview} />
           ) : activeTab === "consultant" ? (
             <StudentConsultantTab />
           ) : (

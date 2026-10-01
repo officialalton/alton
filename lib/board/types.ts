@@ -24,6 +24,15 @@ export type BoardCard = {
   href: string | null;
   /** 2026-09-22(사용자 지시) — "담당 선생님"/"담당 컨설턴트"/"학생 본인"/"관리자". */
   createdByLabel: string;
+  /** 2026-10-01 — 감사 필드(수동 할 일만). 서버 트리거가 기록한다. 자동 카드는 null. */
+  audit?: BoardCardAudit | null;
+};
+
+export type BoardCardAudit = {
+  createdByName: string | null;
+  createdAt: string;
+  updatedByName: string | null;
+  updatedAt: string | null;
 };
 
 export type BoardColumn = "overdue" | "backlog" | "in_progress" | "done";

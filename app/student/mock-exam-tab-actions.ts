@@ -2,16 +2,16 @@
 
 import { requireUser } from "@/lib/auth";
 import {
-  loadStudentMockExamAttempts,
+  loadMockExamOverview,
+  type MockExamOverview,
   loadMockExamAttemptDetail,
-  type MockExamAttemptSummary,
   type MockExamAttemptDetail,
 } from "@/lib/mock-exam/attempt-data";
 
-/** 학생 포털 "Mock Exams" 탭 — 본인 응시 목록(탭 전환 시 클라이언트에서 호출). */
-export async function loadMyMockExamAttemptsAction(): Promise<MockExamAttemptSummary[]> {
+/** 학생 포털 "Mock Exams" 탭 — 공개 세트 목록 + 본인 응시(탭 전환 시 클라이언트에서 호출). */
+export async function loadMyMockExamOverviewAction(): Promise<MockExamOverview> {
   const { user, supabase } = await requireUser();
-  return loadStudentMockExamAttempts(supabase, user.id);
+  return loadMockExamOverview(supabase, user.id);
 }
 
 /** 2026-09-21(UAT 지적) — 채점 완료된 결과는 별도 페이지로 나가지 않고 탭(왼쪽 네비게이션 유지)

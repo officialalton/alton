@@ -37,7 +37,7 @@ vi.mock("@/lib/board/data", () => ({
   updateBoardManualTaskStatus: data.update,
   deleteBoardManualTask: data.remove,
   homeworkToBoardCard: (x: unknown) => x,
-  mockExamToBoardCard: (x: unknown) => x,
+  mockExamsToBoardCards: (xs: unknown[]) => xs,
   vocabQuizToBoardCard: (x: unknown) => x,
   manualTaskToBoardCard: (x: unknown) => x,
 }));

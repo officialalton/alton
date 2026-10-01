@@ -590,121 +590,13 @@ export async function getMockExamSetContentAction(examSetId: string): Promise<Mo
   return loadMockExamSetContentForStaff(supabase, examSetId);
 }
 
-export type MockExamStudentOption = { id: string; name: string | null };
-
-/** 관리자 흐름 "배정" — 교사 담당 여부와 무관하게 어떤 학생에게도 배정할 수 있다(교사 배정
- * 화면은 담당 학생으로 제한되지만, 관리자는 전체 학생을 대상으로 한다). */
-export async function listAllActiveStudentsForMockExamAction(): Promise<MockExamStudentOption[]> {
-  await requireAdmin();
-  const db = createAdminClient();
-  // 2026-09-28: 활성 학생 id를 모아 .in("id", [...])으로 다시 조회하던 방식은 학생 수가
-  // 수백 명이 되면 PostgREST GET URL이 한도를 넘어 "URI too long"으로 실패했다 —
-  // students(id → profiles.id FK) inner embed 한 번으로 같은 결과를 얻는다.
-  // 2026-10-01: PostgREST 는 한 번에 최대 max_rows(기본 1000)행만 돌려줘서, 활성 학생이 1,000명을 넘으면 '전체 학생 배정'이
-  // 1,000명 뒤를 조용히 건너뛰었다 — 페이지를 나눠 모두 읽는다. 정렬 키에 id 를 넣어 페이지 경계의 중복·누락을 막는다.
-  const PAGE = 1000;
-  const rows: MockExamStudentOption[] = [];
-  for (let from = 0; ; from += PAGE) {
-    const { data, error } = await db
-      .from("profiles")
-      .select("id, name, students!inner(status)")
-      .eq("students.status", "active")
-      .order("name")
-      .order("id")
-      .range(from, from + PAGE - 1);
-    if (error) throw new Error(error.message);
-    const page = data ?? [];
-    for (const r of page) rows.push({ id: r.id, name: r.name });
-    if (page.length < PAGE) break;
-  }
-  return rows;
-}
-
-/** assignMockExamAction(lib/mock-exam/attempt-actions.ts)과 같은 배정 로직이지만, RLS의
- * teaches_student() 제한을 받지 않도록 admin 클라이언트로 직접 쓴다(관리자는 담당 교사가
- * 아니어도 배정할 수 있어야 한다). */
-export async function assignMockExamAsAdminAction(input: {
-  studentId: string;
-  examSetId: string;
-  dueAt?: string | null;
-}): Promise<{ ok: true } | { ok: false; error: string }> {
-  // mock_exam_attempts.assigned_by는 teachers(id) 참조라, 관리자 본인 id를 그대로 넣으면
-  // (관리자가 동시에 teachers 행을 갖고 있지 않은 한) FK 위반이 난다 — 관리자 배정은 null로 둔다.
-  await requireAdmin();
-  const db = createAdminClient();
-
-  const { data: setRow, error: setErr } = await db
-    .from("mock_exam_sets")
-    .select("set_group_id")
-    .eq("id", input.examSetId)
-    .maybeSingle();
-  if (setErr) return { ok: false, error: setErr.message };
-  if (!setRow) return { ok: false, error: "존재하지 않는 시험 세트입니다." };
-
-  const { data: existing, error: existingErr } = await db
-    .from("mock_exam_attempts")
-    .select("id, status")
-    .eq("student_id", input.studentId)
-    .eq("exam_set_group_id", setRow.set_group_id)
-    .maybeSingle();
-  if (existingErr) return { ok: false, error: existingErr.message };
-
-  if (existing) {
-    if (existing.status !== "assigned") {
-      return { ok: false, error: "이미 시작했거나 제출한 시험은 다시 배정할 수 없습니다." };
-    }
-    const { error } = await db
-      .from("mock_exam_attempts")
-      .update({ exam_set_id: input.examSetId, due_at: input.dueAt ?? null })
-      .eq("id", existing.id);
-    if (error) return { ok: false, error: error.message };
-    revalidatePath("/admin");
-    return { ok: true };
-  }
-
-  const { error } = await db.from("mock_exam_attempts").insert({
-    student_id: input.studentId,
-    exam_set_id: input.examSetId,
-    due_at: input.dueAt ?? null,
-  });
-  if (error) return { ok: false, error: error.message };
-  revalidatePath("/admin");
-  return { ok: true };
-}
-
-export type BulkAssignMockExamResult = {
-  assignedCount: number;
-  skipped: { studentId: string; studentName: string | null; reason: string }[];
-};
-
-/** 2026-09-21(사용자 지시) — "전체 학생에게 배정" — 비활성화(active가 아닌) 학생은
- * listAllActiveStudentsForMockExamAction이 이미 걸러낸다. 학생 하나하나에 대해
- * assignMockExamAsAdminAction과 같은 배정 로직을 돌리고, 이미 시작·제출한 시험이라
- * 배정을 건너뛴 학생은 사유와 함께 목록으로 돌려준다(전체를 막지 않는다 — 한 명
- * 실패했다고 나머지 배정까지 막을 이유가 없다). */
-export async function assignMockExamToAllActiveStudentsAction(input: {
-  examSetId: string;
-  dueAt?: string | null;
-}): Promise<BulkAssignMockExamResult> {
-  await requireAdmin();
-  const students = await listAllActiveStudentsForMockExamAction();
-  let assignedCount = 0;
-  const skipped: BulkAssignMockExamResult["skipped"] = [];
-  for (const s of students) {
-    const result = await assignMockExamAsAdminAction({ studentId: s.id, examSetId: input.examSetId, dueAt: input.dueAt ?? null });
-    if (result.ok) assignedCount += 1;
-    else skipped.push({ studentId: s.id, studentName: s.name, reason: result.error });
-  }
-  return { assignedCount, skipped };
-}
-
 export type MockExamAttemptHistoryRow = {
   attemptId: string;
   studentId: string;
   studentName: string | null;
   examSetName: string;
   status: string;
-  dueAt: string | null;
+  startedAt: string | null;
   submittedAt: string | null;
   gradedAt: string | null;
   totalCount: number;
@@ -716,15 +608,17 @@ export type MockExamAttemptHistoryRow = {
   mathPolicyVersion: number | null;
 };
 
-/** 관리자 흐름 "내역" — 전체 배정·응시 내역(누구에게 언제 배정했고, 얼마나 풀었는지)을 한 번에 본다. */
+/** 관리자 흐름 "내역" — 학생이 직접 시작한 응시 내역(최근 200건, 시작 전 제외). 배정은 폐지됐다(2026-10-01). */
 export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHistoryRow[]> {
   await requireAdmin();
   const db = createAdminClient();
 
   const { data: attempts, error } = await db
     .from("mock_exam_attempts")
-    .select("id, student_id, exam_set_id, status, due_at, submitted_at, graded_at, rw_m2_route, math_m2_route, rw_m2_route_policy_version, math_m2_route_policy_version")
-    .order("due_at", { ascending: false, nullsFirst: false });
+    .select("id, student_id, exam_set_id, status, started_at, submitted_at, graded_at, rw_m2_route, math_m2_route, rw_m2_route_policy_version, math_m2_route_policy_version")
+    .neq("status", "assigned")
+    .order("started_at", { ascending: false, nullsFirst: false })
+    .limit(200);
   if (error) throw new Error(error.message);
   if (!attempts || attempts.length === 0) return [];
 
@@ -735,7 +629,8 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
     selectInChunks(examSetIds, (chunk) => db.from("mock_exam_sets").select("id, name").in("id", chunk)),
     // 응시자가 실제로 풀 문항 수(라우팅 세트는 M2 변형 하나만 센다) — DB에서 집계(1,000행 상한 회피).
     db.rpc("mock_exam_set_expected_counts"),
-    selectInChunks(attempts.map((a) => a.id), (chunk) => db.from("mock_exam_answers").select("attempt_id, correct").in("attempt_id", chunk)),
+    // 채점 완료 응시만, 응시당 문항 ~100개 × 청크 8 < PostgREST 1,000행 상한.
+    selectInChunks(attempts.filter((a) => a.status === "graded").map((a) => a.id), (chunk) => db.from("mock_exam_answers").select("attempt_id, correct").in("attempt_id", chunk), 8),
   ]);
   const nameByStudent = new Map((profiles ?? []).map((p) => [p.id, p.name as string | null]));
   const nameBySet = new Map((sets ?? []).map((s) => [s.id, s.name as string]));
@@ -753,7 +648,7 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
     studentName: nameByStudent.get(a.student_id) ?? null,
     examSetName: nameBySet.get(a.exam_set_id) ?? "모의고사",
     status: a.status,
-    dueAt: a.due_at,
+    startedAt: a.started_at,
     submittedAt: a.submitted_at,
     gradedAt: a.graded_at,
     totalCount: totalCountBySet.get(a.exam_set_id) ?? 0,

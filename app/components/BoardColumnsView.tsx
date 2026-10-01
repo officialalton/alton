@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { boardColumnOf, type BoardCard, type BoardCardStatus, type BoardColumn } from "@/lib/board/types";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate } from "@/lib/format-datetime";
+import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
 // Student Success Planner — Board 칼럼 렌더링(학생 포털·학부모 포털 공유).
 // 학생 포털은 수동 할 일에 상태 이동·삭제 버튼을 준다(onMove/onDelete 제공).
@@ -34,6 +34,23 @@ export function formatDueRange(dueAt: string | null, dueStartAt: string | null, 
   if (!end) return "마감 없음";
   const start = formatDueAt(dueStartAt, tz);
   return start ? `${start} ~ ${end}` : `마감 ${end}`;
+}
+
+const AUDIT_DT: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false };
+
+/** 수동 할 일 상세 — 누가·언제 만들고 마지막으로 고쳤는지(서버 트리거 기록, 모든 열람 화면 공통). 모르면 '알 수 없음'. */
+export function BoardCardAuditDetail({ audit, tz }: { audit: NonNullable<BoardCard["audit"]>; tz: string }) {
+  const created = `${audit.createdByName ?? "알 수 없음"} · ${fmtDateTime(audit.createdAt, AUDIT_DT, tz)}`;
+  const edited = `${audit.updatedByName ?? "알 수 없음"} · ${audit.updatedAt ? fmtDateTime(audit.updatedAt, AUDIT_DT, tz) : "알 수 없음"}`;
+  return (
+    <details className="mt-1.5 text-[10.5px] text-grey-500" onClick={(e) => e.stopPropagation()}>
+      <summary className="cursor-pointer font-bold text-grey-400">상세</summary>
+      <div data-testid="board-card-audit" className="mt-1 space-y-0.5">
+        <div>생성: {created}</div>
+        <div>최종 편집: {edited}</div>
+      </div>
+    </details>
+  );
 }
 
 export default function BoardColumnsView({
@@ -105,6 +122,7 @@ function BoardCardItem({
       {card.subtitle && <div className="text-[11px] text-grey-500">{card.subtitle}</div>}
       <div className="text-[11px] text-grey-500 mt-1">{formatDueRange(card.dueAt, card.dueStartAt, tz)}</div>
       <div className="text-[10.5px] text-grey-400 mt-0.5">{card.createdByLabel}</div>
+      {card.audit && <BoardCardAuditDetail audit={card.audit} tz={tz} />}
       {editable && (
         <div className="flex items-center gap-1.5 mt-2">
           {(["backlog", "in_progress", "done"] as const)

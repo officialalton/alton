@@ -14,6 +14,10 @@ export type BoardManualTask = {
   createdBy: string;
   createdByRole: "student" | "teacher" | "admin" | "consultant";
   createdAt: string;
+  /** 서버 트리거가 기록하는 감사 필드(이름은 기록 시점 스냅샷). */
+  createdByName?: string | null;
+  updatedByName?: string | null;
+  updatedAt?: string | null;
 };
 
 function homeworkStatus(batch: HomeworkBatch): BoardCardStatus {
@@ -26,8 +30,13 @@ function homeworkStatus(batch: HomeworkBatch): BoardCardStatus {
 
 function mockExamStatus(status: MockExamAttemptSummary["status"]): BoardCardStatus {
   if (status === "submitted" || status === "graded") return "done";
-  if (status === "in_progress") return "in_progress";
-  return "backlog";
+  return "in_progress"; // 보드는 '시작한 응시'(진행 중·완료)만 다룬다 — 시작 전(assigned)은 mockExamsToBoardCards 가 거른다.
+}
+
+/** 모의고사 카드는 배정 기반이 아니다(2026-10-01): 학생이 시작한 응시(진행 중·완료)만 카드로 만들고,
+ * 미응시 세트·시작 화면만 열린 'assigned' 응시는 카드로 만들지 않는다. */
+export function mockExamsToBoardCards(attempts: MockExamAttemptSummary[]): BoardCard[] {
+  return attempts.filter((a) => a.status !== "assigned").map(mockExamToBoardCard);
 }
 
 function vocabQuizStatus(status: VocabQuiz["status"]): BoardCardStatus {
@@ -58,6 +67,7 @@ export function homeworkToBoardCard(batch: HomeworkBatch): BoardCard {
     dueStartAt: null,
     href: "/student?tab=homework",
     createdByLabel: batch.teacherName ?? "담당 선생님",
+    audit: null,
   };
 }
 
@@ -71,10 +81,12 @@ export function mockExamToBoardCard(attempt: MockExamAttemptSummary): BoardCard 
     status: mockExamStatus(attempt.status),
     dueAt: attempt.dueAt,
     dueStartAt: null,
-    href: attempt.status === "assigned" || attempt.status === "in_progress"
+    href: attempt.status === "in_progress"
       ? `/student/mock-exam/${attempt.id}`
       : "/student?tab=mock-exam",
-    createdByLabel: attempt.assignedByName ?? "담당 선생님",
+    // 배정 폐지(2026-10-01): 학생이 직접 시작한 응시. 기존 배정 응시는 배정한 선생님 이름을 그대로 쓴다.
+    createdByLabel: attempt.assignedByName ?? "학생 본인",
+    audit: null,
   };
 }
 
@@ -90,6 +102,7 @@ export function vocabQuizToBoardCard(quiz: VocabQuiz): BoardCard {
     dueStartAt: null,
     href: "/student?tab=vocab",
     createdByLabel: "학생 본인",
+    audit: null,
   };
 }
 
@@ -105,14 +118,17 @@ export function manualTaskToBoardCard(task: BoardManualTask): BoardCard {
     dueStartAt: task.dueStartAt,
     href: null,
     createdByLabel: CREATED_BY_LABEL[task.createdByRole],
+    audit: { createdByName: task.createdByName ?? null, createdAt: task.createdAt, updatedByName: task.updatedByName ?? null, updatedAt: task.updatedAt ?? null },
   };
 }
 
-const MANUAL_TASK_COLUMNS = "id, student_id, title, status, due_at, due_start_at, created_by, created_by_role, created_at";
+const MANUAL_TASK_COLUMNS =
+  "id, student_id, title, status, due_at, due_start_at, created_by, created_by_role, created_at, created_by_name, updated_by_name, updated_at";
 
 type ManualTaskRow = {
   id: string; student_id: string; title: string; status: string; due_at: string | null; due_start_at: string | null;
   created_by: string; created_by_role: string; created_at: string;
+  created_by_name: string | null; updated_by_name: string | null; updated_at: string | null;
 };
 
 function mapManualTaskRow(row: ManualTaskRow): BoardManualTask {
@@ -126,6 +142,9 @@ function mapManualTaskRow(row: ManualTaskRow): BoardManualTask {
     createdBy: row.created_by,
     createdByRole: row.created_by_role as BoardManualTask["createdByRole"],
     createdAt: row.created_at,
+    createdByName: row.created_by_name ?? null,
+    updatedByName: row.updated_by_name ?? null,
+    updatedAt: row.updated_at ?? null,
   };
 }
 

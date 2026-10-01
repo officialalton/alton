@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { homeworkToBoardCard, mockExamToBoardCard, vocabQuizToBoardCard, manualTaskToBoardCard } from "./data";
+import { homeworkToBoardCard, mockExamToBoardCard, mockExamsToBoardCards, vocabQuizToBoardCard, manualTaskToBoardCard } from "./data";
 import { boardColumnOf } from "./types";
 import type { HomeworkBatch } from "../homework-batch-data";
 import type { MockExamAttemptSummary } from "../mock-exam/attempt-data";
@@ -46,7 +46,10 @@ describe("board card 상태 계산 — 소스별 status 매핑", () => {
       startBy: null, startedAt: null, submittedAt: null, gradedAt: null,
       totalCount: 10, correctCount: null, entryCount: 0,
     };
-    expect(mockExamToBoardCard(base).status).toBe("backlog");
+    expect(mockExamToBoardCard(base).status).toBe("in_progress");
+    // 시작 전(assigned) 응시는 카드가 되지 않는다 — 보드는 시작한 응시만.
+    expect(mockExamsToBoardCards([base])).toEqual([]);
+    expect(mockExamsToBoardCards([{ ...base, status: "in_progress" }, { ...base, status: "graded" }])).toHaveLength(2);
     expect(mockExamToBoardCard({ ...base, status: "in_progress" }).status).toBe("in_progress");
     expect(mockExamToBoardCard({ ...base, status: "submitted" }).status).toBe("done");
     expect(mockExamToBoardCard({ ...base, status: "graded" }).status).toBe("done");
@@ -70,6 +73,18 @@ describe("board card 상태 계산 — 소스별 status 매핑", () => {
     });
     expect(card.status).toBe("in_progress");
     expect(card.sourceType).toBe("manual");
+  });
+
+  it("수동 할 일: 감사 필드를 카드로 옮기고, 없으면 null(알 수 없음 표시)로 둔다", () => {
+    const card = manualTaskToBoardCard({
+      id: "m2", studentId: "s1", title: "x", status: "backlog", dueAt: null, dueStartAt: null, createdBy: "t1", createdByRole: "teacher",
+      createdAt: "2026-09-20T00:00:00Z", createdByName: "김선생", updatedByName: "박컨설턴트", updatedAt: "2026-09-21T01:00:00Z",
+    });
+    expect(card.audit).toEqual({ createdByName: "김선생", createdAt: "2026-09-20T00:00:00Z", updatedByName: "박컨설턴트", updatedAt: "2026-09-21T01:00:00Z" });
+    const legacy = manualTaskToBoardCard({
+      id: "m3", studentId: "s1", title: "x", status: "backlog", dueAt: null, dueStartAt: null, createdBy: "t1", createdByRole: "teacher", createdAt: "2026-09-20T00:00:00Z",
+    });
+    expect(legacy.audit).toEqual({ createdByName: null, createdAt: "2026-09-20T00:00:00Z", updatedByName: null, updatedAt: null });
   });
 });
 

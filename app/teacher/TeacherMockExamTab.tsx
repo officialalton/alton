@@ -1,32 +1,30 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import MockExamAssignPanel from "./MockExamAssignPanel";
 import TeacherMockExamAttemptViewer from "./TeacherMockExamAttemptViewer";
 import MockExamSetContentViewer from "@/app/components/MockExamSetContentViewer";
 import {
   loadTeacherMockExamTabDataAction,
   getMockExamSetContentForTeacherAction,
   getMockExamAttemptDetailForTeacherAction,
-  listMyAssignedMockExamAttemptsAction,
+  listMyStudentMockExamAttemptsAction,
   type TeacherMockExamTabData,
-  type TeacherAssignedMockExamRow,
+  type TeacherStudentMockExamRow,
 } from "./mock-exam-tab-actions";
 import type { MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
 import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
 
-const SUB_TABS = ["배정", "현황", "열람", "내역"] as const;
+const SUB_TABS = ["현황", "열람", "내역"] as const;
 type SubTab = (typeof SUB_TABS)[number];
 const STATUS_LABEL: Record<string, string> = { assigned: "시작 전", in_progress: "진행 중", submitted: "채점 중", graded: "채점 완료" };
 
-// 2026-09-21(UAT 지적) — 모의고사는 TeacherShell 탭 안에서 동작한다(좌측 네비게이션 유지).
-// 배정/현황/열람/내역 4개 서브탭으로 재구성 — 배정만 있던 기존 화면에 (1) 담당 학생 풀이
-// 현황·채점 결과·통계를 보고 실제로 어떻게 풀었는지 읽기 전용으로 들어가 보는 "현황",
-// (2) 공개된 모의고사 문항을 미리 읽기 전용으로 보는 "열람", (3) 배정 내역을 더했다.
+// 2026-10-01 — 모의고사 배정 폐지(공개 세트는 모든 활성 학생이 직접 시작). 교사는 담당 학생의
+// 응시 결과를 읽기 전용으로 본다: (1) "현황" 풀이·채점 결과·통계, (2) "열람" 공개 문항 미리보기,
+// (3) "내역" 시작한 응시 목록. 특정 학생에게 시험을 지정하려면 학생 보드에 할 일을 추가한다.
 export default function TeacherMockExamTab() {
-  const [subTab, setSubTab] = useState<SubTab>("배정");
+  const [subTab, setSubTab] = useState<SubTab>("현황");
   const [data, setData] = useState<TeacherMockExamTabData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -65,14 +63,6 @@ export default function TeacherMockExamTab() {
         ))}
       </div>
 
-      {subTab === "배정" &&
-        (data.students.length === 0 ? (
-          <p className="text-[13px] text-grey-500">담당 학생이 없습니다.</p>
-        ) : data.examSets.length === 0 ? (
-          <p className="text-[13px] text-grey-500">공개된 시험 세트가 없습니다.</p>
-        ) : (
-          <MockExamAssignPanel students={data.students} examSets={data.examSets} attemptsByStudent={data.attemptsByStudent} onChanged={reload} />
-        ))}
       {subTab === "현황" && <StatusSubTab data={data} />}
       {subTab === "열람" && <BrowseSubTab examSets={data.examSets} />}
       {subTab === "내역" && <HistorySubTab />}
@@ -85,7 +75,7 @@ function StatusSubTab({ data }: { data: TeacherMockExamTabData }) {
   const [attempt, setAttempt] = useState<MockExamAttemptDetail | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
-  const allAttempts = data.students.flatMap((s) => data.attemptsByStudent[s.studentId] ?? []);
+  const allAttempts = data.students.flatMap((s) => (data.attemptsByStudent[s.studentId] ?? []).filter((a) => a.status !== "assigned"));
   const graded = allAttempts.filter((a) => a.status === "graded" && a.correctCount !== null);
   const avgPct =
     graded.length > 0
@@ -123,12 +113,12 @@ function StatusSubTab({ data }: { data: TeacherMockExamTabData }) {
       <div className="rounded-lg border border-grey-200 bg-white p-4">
         <p className="text-[12px] font-bold text-grey-500">통계</p>
         <p className="mt-1 text-[13px]">
-          전체 배정 {allAttempts.length}건 · 채점 완료 {graded.length}건
+          시작한 응시 {allAttempts.length}건 · 채점 완료 {graded.length}건
           {avgPct !== null && ` · 평균 정답률 ${avgPct}%`}
         </p>
       </div>
       {data.students.map((s) => {
-        const attempts = data.attemptsByStudent[s.studentId] ?? [];
+        const attempts = (data.attemptsByStudent[s.studentId] ?? []).filter((a) => a.status !== "assigned");
         if (attempts.length === 0) return null;
         return (
           <div key={s.studentId} className="rounded-lg border border-grey-200 bg-white p-4">
@@ -147,7 +137,7 @@ function StatusSubTab({ data }: { data: TeacherMockExamTabData }) {
                       </span>
                     )}
                   </span>
-                  {a.status !== "assigned" && (
+                  {(
                     <button type="button" onClick={() => openAttempt(a.id)} className="text-[12px] font-bold text-ink underline">
                       풀이 보기
                     </button>
@@ -204,14 +194,14 @@ function BrowseSubTab({ examSets }: { examSets: { id: string; name: string; diff
 
 function HistorySubTab() {
   const tz = useViewerTimezone();
-  const [rows, setRows] = useState<TeacherAssignedMockExamRow[] | null>(null);
+  const [rows, setRows] = useState<TeacherStudentMockExamRow[] | null>(null);
 
   useEffect(() => {
-    listMyAssignedMockExamAttemptsAction().then(setRows);
+    listMyStudentMockExamAttemptsAction().then(setRows);
   }, []);
 
   if (rows === null) return <p className="text-[13px] text-grey-500">불러오는 중…</p>;
-  if (rows.length === 0) return <p className="text-[13px] text-grey-500">배정한 모의고사가 없습니다.</p>;
+  if (rows.length === 0) return <p className="text-[13px] text-grey-500">담당 학생이 시작한 모의고사가 없습니다.</p>;
 
   return (
     <table className="w-full text-left text-[13px]">
@@ -220,7 +210,7 @@ function HistorySubTab() {
           <th className="py-1">학생</th>
           <th>세트</th>
           <th>상태</th>
-          <th>마감</th>
+          <th>시작</th>
           <th>정답</th>
         </tr>
       </thead>
@@ -230,7 +220,7 @@ function HistorySubTab() {
             <td className="py-1.5">{r.studentName ?? r.studentId}</td>
             <td>{r.examSetName}</td>
             <td>{STATUS_LABEL[r.status] ?? r.status}</td>
-            <td>{r.dueAt ? fmtDate(r.dueAt, undefined, tz) : "-"}</td>
+            <td>{r.startedAt ? fmtDate(r.startedAt, undefined, tz) : "-"}</td>
             <td>{r.correctCount !== null ? `${r.correctCount}/${r.totalCount}` : "-"}</td>
           </tr>
         ))}

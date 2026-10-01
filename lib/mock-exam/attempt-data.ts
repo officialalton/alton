@@ -124,7 +124,7 @@ export async function loadGuardianMockExamAttempts(supabase: SupabaseClient, stu
   return loadSummaries(supabase, studentId);
 }
 
-/** 교사가 담당 학생에게 배정한 모의고사 목록(수업 화면 `모의고사` 탭). */
+/** 담당 학생의 모의고사 응시 목록(수업 화면 `모의고사` 탭). */
 export async function loadTeacherMockExamAttemptsForStudent(
   supabase: SupabaseClient,
   studentId: string,
@@ -160,8 +160,28 @@ async function computeScoreEstimate(detail: MockExamAttemptDetail): Promise<Scor
   }
 }
 
-/** 관리자가 배정할 때 고를 공개 세트 목록(교사 배정 화면에서 재사용). */
-export async function loadPublishedMockExamSetsForAssignment(
+export type MockExamCatalogRow = {
+  examSetId: string;
+  setGroupId: string;
+  name: string;
+  description: string | null;
+  difficultyTier: string;
+  format: "fixed" | "mst";
+  publishedAt: string | null;
+  /** 이 학생의 응시(없으면 미응시). 'assigned' 는 시작은 눌렀지만 첫 문항 전. */
+  attemptId: string | null;
+  attemptStatus: AttemptStatus | null;
+};
+
+/** 공개된 모의고사 세트 전체 + 그 학생의 응시 상태 — RPC 한 번(N+1 없음). 학생 본인·학부모·교사·컨설턴트·관리자 열람용. */
+export async function loadMockExamOpenCatalog(supabase: SupabaseClient, studentId: string): Promise<MockExamCatalogRow[]> {
+  const { data, error } = await supabase.rpc("mock_exam_open_catalog", { p_student_id: studentId });
+  if (error) throw new Error(error.message);
+  return (Array.isArray(data) ? data : []) as MockExamCatalogRow[];
+}
+
+/** 관리자 화면 등에서 쓰는 공개 세트 이름·난이도 목록(조회 전용). */
+export async function loadPublishedMockExamSets(
   supabase: SupabaseClient,
 ): Promise<{ id: string; setGroupId: string; name: string; difficultyTier: string }[]> {
   const { data, error } = await supabase
@@ -171,4 +191,12 @@ export async function loadPublishedMockExamSetsForAssignment(
     .order("name", { ascending: true });
   if (error) throw new Error(error.message);
   return (data ?? []).map((r) => ({ id: r.id, setGroupId: r.set_group_id, name: r.name, difficultyTier: r.difficulty_tier }));
+}
+
+/** 학생·학부모 모의고사 탭 데이터 — 공개 세트 목록 + 응시 요약(RPC 2회, 병렬). */
+export type MockExamOverview = { catalog: MockExamCatalogRow[]; attempts: MockExamAttemptSummary[] };
+
+export async function loadMockExamOverview(supabase: SupabaseClient, studentId: string): Promise<MockExamOverview> {
+  const [catalog, attempts] = await Promise.all([loadMockExamOpenCatalog(supabase, studentId), loadSummaries(supabase, studentId)]);
+  return { catalog, attempts };
 }

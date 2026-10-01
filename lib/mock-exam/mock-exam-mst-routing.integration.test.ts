@@ -167,11 +167,11 @@ describe("경로 결정 — M1 성과에 따라 M2 문항 집합이 다르다", 
     expect(fails(() => psql(`update mock_exam_attempts set rw_m2_route = 'lower' where id = '${hiAttempt}';`))).toContain("바꿀 수 없습니다");
     // 학생은 UPDATE 정책 자체가 없어 0행(변화 없음) — 아래 routes() 로 확인.
     asUser(hi, `update mock_exam_attempts set rw_m2_route = 'lower' where id = '${hiAttempt}';`);
-    // 담당 교사는 배정 RLS 로 update/insert 가 열려 있어도 경로·정책 버전 컬럼은 쓸 수 없다(트리거).
+    // 2026-10-01: 교사 배정 RLS 가 제거돼 교사 UPDATE 는 0행(변화 없음), INSERT 는 거절된다. 경로·정책 버전 트리거는 서비스 롤에 대한 최종 방어로 남는다.
     const guardSet = createRoutingSet({ run: RUN, label: "guard" });
     const guardAttempt = assign(SEED_STUDENT_ID, guardSet.setId);
-    expect(fails(() => asUser(TEACHER_ID, `update mock_exam_attempts set rw_m2_route = 'higher' where id = '${guardAttempt}';`))).toContain("직접 수정");
-    expect(fails(() => asUser(TEACHER_ID, `update mock_exam_attempts set math_m2_route_policy_version = 7 where id = '${guardAttempt}';`))).toContain("직접 수정");
+    asUser(TEACHER_ID, `update mock_exam_attempts set rw_m2_route = 'higher' where id = '${guardAttempt}';`);
+    asUser(TEACHER_ID, `update mock_exam_attempts set math_m2_route_policy_version = 7 where id = '${guardAttempt}';`);
     const guardSet2 = createRoutingSet({ run: RUN, label: "guard2" });
     expect(fails(() => asUser(TEACHER_ID, `insert into mock_exam_attempts (student_id, exam_set_id, assigned_by, rw_m2_route) values ('${SEED_STUDENT_ID}', '${guardSet2.setId}', '${TEACHER_ID}', 'higher');`))).toContain("직접 지정");
     expect(routes(guardAttempt)).toMatchObject({ rw: "-", math: "-" });

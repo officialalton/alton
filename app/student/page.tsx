@@ -20,7 +20,7 @@ import { ensureThreadAndLoadMessages } from "./chat-data";
 import { loadStudentSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "./lesson-booking-data";
 import { loadRoadmapData } from "@/lib/roadmap/data";
-import { loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
+import { loadMockExamOverview } from "@/lib/mock-exam/attempt-data";
 
 export default async function StudentHomePage({
   searchParams,
@@ -72,7 +72,7 @@ export default async function StudentHomePage({
     subjectEnrollments,
     teacherList,
     roadmap,
-    mockExamAttempts,
+    mockExamOverview,
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
@@ -90,7 +90,11 @@ export default async function StudentHomePage({
     safeList("teacher_list", loadTeacherList(supabase, user.id)),
     loadRoadmapData(supabase, user.id),
     // 2026-09-22(UAT "모의고사 탭 로딩이 길다") — 다른 탭처럼 SSR로 미리 받는다.
-    safeList("mock_exam_attempts", loadStudentMockExamAttempts(supabase, user.id)),
+    loadMockExamOverview(supabase, user.id).catch((e) => {
+      // 실패 시 undefined — 탭이 열릴 때 클라이언트에서 다시 시도하고 오류를 보여준다(홈 전체는 죽이지 않는다).
+      console.error(JSON.stringify({ type: "student_home_loader_failed", label: "mock_exam_overview", error: e instanceof Error ? e.message : String(e) }));
+      return undefined;
+    }),
   ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
@@ -162,7 +166,7 @@ export default async function StudentHomePage({
       subjectEnrollments={subjectEnrollments}
       lessonBooking={lessonBooking}
       roadmap={roadmap}
-      mockExamAttempts={mockExamAttempts}
+      mockExamOverview={mockExamOverview}
     />
     </ViewerTimezoneProvider>
   );

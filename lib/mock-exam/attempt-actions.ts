@@ -1,6 +1,6 @@
 "use server";
 
-// 고정형 SAT 모의고사 V1 — 교사 배정 · 학생 응시(진행·저장·제출) · 교사 채점 확정 서버 액션.
+// 고정형 SAT 모의고사 V1 — 학생 시작(공개 세트, 배정 없음) · 응시(진행·저장·제출) · 교사 채점 확정 서버 액션.
 // 사양: docs/2026-09-17-fixed-mock-exam-v1-spec.md 3절(역할별 흐름)·5절(상태)·7절(답안·채점).
 //
 // 2026-09-21(P0 보안 차단) — 학생 쪽 쓰기(답 저장·표시·시간·제출)와 교사 채점 확정은 전부
@@ -21,68 +21,19 @@ function toErr(e: unknown, fallback: string): string {
   return msg.replace(/^[A-Z0-9]{5}:\s*/, "") || fallback;
 }
 
-export type AssignMockExamInput = {
-  studentId: string;
-  examSetId: string;
-  dueAt?: string | null;
-  startBy?: string | null;
-  maxAttempts?: number;
-  sessionId?: string | null;
-};
-
-/** 교사 흐름 1단계: 담당 학생에게 공개된 시험 세트를 배정한다(사양 3절 교사 1~2).
- * 학생당 시험(세트 계열) 당 응시 기록은 하나 — 이미 배정(assigned) 상태면 조건만 갱신하고,
- * 이미 시작·제출된 응시는 건드리지 않는다(사양 5절 "시작된 응시는 규칙을 고정").
- * 교사 배정 insert/update 는 기존 RLS(담당 교사만)가 그대로 강제한다. */
-export async function assignMockExamAction(input: AssignMockExamInput): Promise<ActionResult<{ attemptId: string }>> {
-  const { supabase } = await requireUser();
-
-  const { data: setRow, error: setErr } = await supabase.from("mock_exam_sets").select("set_group_id").eq("id", input.examSetId).maybeSingle();
-  if (setErr) return { ok: false, error: toErr(setErr, "시험 세트를 확인하지 못했습니다.") };
-  if (!setRow) return { ok: false, error: "존재하지 않는 시험 세트입니다." };
-
-  const { data: existing, error: existingErr } = await supabase
-    .from("mock_exam_attempts")
-    .select("id, status, exam_set_id")
-    .eq("student_id", input.studentId)
-    .eq("exam_set_group_id", setRow.set_group_id)
-    .maybeSingle();
-  if (existingErr) return { ok: false, error: toErr(existingErr, "배정 정보를 확인하지 못했습니다.") };
-
-  if (existing) {
-    if (existing.status !== "assigned") {
-      return { ok: false, error: "이미 시작했거나 제출한 시험은 다시 배정할 수 없습니다." };
-    }
-    const { error } = await supabase
-      .from("mock_exam_attempts")
-      .update({
-        exam_set_id: input.examSetId,
-        due_at: input.dueAt ?? null,
-        start_by: input.startBy ?? null,
-        max_attempts: input.maxAttempts ?? 1,
-        assigning_session_id: input.sessionId ?? null,
-      })
-      .eq("id", existing.id);
-    if (error) return { ok: false, error: toErr(error, "배정을 갱신하지 못했습니다.") };
-    revalidatePath("/teacher");
-    return { ok: true, value: { attemptId: existing.id } };
+/** 학생이 공개된 시험을 '시작'한다 — 응시(attempt)가 이때 생성된다(배정 없음, 2026-10-01).
+ * 서버 정의자 RPC 가 활성 학생 본인·공개·구성 완료 세트만 허용하고, 같은 시험은 응시 하나(멱등 —
+ * 이미 있으면 그 응시를 돌려준다). 학생이 attempt 를 직접 INSERT 할 RLS 는 없다. */
+export async function startMockExamAction(examSetId: string): Promise<ActionResult<{ attemptId: string }>> {
+  try {
+    const { supabase } = await requireUser();
+    const { data, error } = await supabase.rpc("mock_exam_open_start", { p_exam_set_id: examSetId });
+    if (error) return { ok: false, error: toErr(error, "시험을 시작하지 못했습니다.") };
+    revalidatePath("/student");
+    return { ok: true, value: { attemptId: data as string } };
+  } catch (e) {
+    return { ok: false, error: toErr(e, "시험을 시작하지 못했습니다.") };
   }
-
-  const { data: inserted, error } = await supabase
-    .from("mock_exam_attempts")
-    .insert({
-      student_id: input.studentId,
-      exam_set_id: input.examSetId,
-      due_at: input.dueAt ?? null,
-      start_by: input.startBy ?? null,
-      max_attempts: input.maxAttempts ?? 1,
-      assigning_session_id: input.sessionId ?? null,
-    })
-    .select("id")
-    .single();
-  if (error) return { ok: false, error: toErr(error, "배정하지 못했습니다. 담당 학생인지 확인하세요.") };
-  revalidatePath("/teacher");
-  return { ok: true, value: { attemptId: inserted.id } };
 }
 
 async function callRpc(fn: string, args: Record<string, unknown>, fallback: string): Promise<ActionResult> {

@@ -1,31 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import type { MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
-import { loadChildMockExamAttemptsAction } from "./mock-exam-tab-actions";
+import { useEffect, useMemo, useState } from "react";
+import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
+import { buildMockExamListRows } from "@/lib/mock-exam/open-list";
+import MockExamOpenList from "@/app/components/MockExamOpenList";
+import { loadChildMockExamOverviewAction } from "./mock-exam-tab-actions";
 
-const STATUS_LABEL: Record<string, string> = {
-  assigned: "시작 전",
-  in_progress: "진행 중",
-  submitted: "제출됨 — 채점 대기",
-  graded: "채점 완료",
-};
-
-// 2026-09-21(UAT 지적) — 학부모 홈의 "모의고사" 서브탭은 독립 라우트로 이동하지 않고 탭 안에서 자녀
-// 응시 목록을 바로 보여준다(좌측 네비게이션 유지). 상세 결과만 기존 라우트로 연다.
+// 2026-10-01 — 배정 폐지: 학부모는 공개된 모의고사 목록과 자녀의 시작·완료 상태를 읽기 전용으로 본다(시작 불가).
+// 상세 결과만 기존 라우트로 연다.
 export default function ParentMockExamTab({ studentId }: { studentId: string | null }) {
-  const [attempts, setAttempts] = useState<MockExamAttemptSummary[] | null>(null);
+  const [overview, setOverview] = useState<MockExamOverview | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!studentId) return;
     let cancelled = false;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
-    setAttempts(null);
-    loadChildMockExamAttemptsAction(studentId)
-      .then((rows) => {
-        if (!cancelled) setAttempts(rows);
+    setOverview(null);
+    loadChildMockExamOverviewAction(studentId)
+      .then((o) => {
+        if (!cancelled) setOverview(o);
       })
       .catch((e) => {
         if (!cancelled) setError(e instanceof Error ? e.message : "모의고사 목록을 불러오지 못했습니다.");
@@ -35,27 +29,15 @@ export default function ParentMockExamTab({ studentId }: { studentId: string | n
     };
   }, [studentId]);
 
+  const rows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
+
   if (!studentId) return <p className="p-8 text-[14px] text-grey-500">자녀를 먼저 선택하세요.</p>;
   if (error) return <p className="p-8 text-[14px] text-red">{error}</p>;
-  if (attempts === null) return <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>;
-  if (attempts.length === 0) return <p className="p-8 text-[14px] text-grey-500">배정된 모의고사가 없습니다.</p>;
+  if (overview === null) return <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>;
 
   return (
-    <ul className="px-6 py-5 flex flex-col gap-2">
-      {attempts.map((a) => (
-        <li key={a.id} className="rounded-lg border border-grey-200 bg-white p-4">
-          <p className="text-[14px] font-bold">{a.examSetName}</p>
-          <p className="mt-1 text-[12.5px] text-grey-500">
-            {STATUS_LABEL[a.status] ?? a.status}
-            {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} 정답`}
-          </p>
-          {a.status === "graded" && (
-            <Link href={`/parent/mock-exam/${studentId}/${a.id}`} className="mt-2 inline-block text-[12.5px] font-bold text-ink underline">
-              상세 결과 보기
-            </Link>
-          )}
-        </li>
-      ))}
-    </ul>
+    <div className="px-6 py-5">
+      <MockExamOpenList rows={rows} readOnly resultHref={(attemptId) => `/parent/mock-exam/${studentId}/${attemptId}`} />
+    </div>
   );
 }
