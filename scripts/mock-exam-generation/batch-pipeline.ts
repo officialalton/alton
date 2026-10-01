@@ -85,12 +85,13 @@ const genTool = (c: Cand) => ({ name: "problem", description: "hard 문항 1개"
   options: { type: "array", items: { type: "string" }, description: "선택지 4개(알파벳 접두어 없이)" },
   correct_letter: { type: "string", enum: ["A", "B", "C", "D"] },
   explanation: { type: "string", description: "한국어 해설: 정답 근거와 각 오답이 틀린 이유" },
+  explanation_en: { type: "string", description: "같은 해설의 영어 버전(한글 없음, 학생에게 설명하는 어조). 학생 화면은 영어 기본이므로 필수" },
   design: { type: "string", description: "hard 지시를 어떻게 적용했는지 한두 문장" },
   ...(c.system === "sat_math" ? { option_values: { type: ["array", "null"], items: { type: "number" } }, verification_js: { type: "string" } } : {}),
-}, required: ["passage", "question", "options", "correct_letter", "explanation", "design", ...(c.system === "sat_math" ? ["option_values", "verification_js"] : [])] } });
+}, required: ["passage", "question", "options", "correct_letter", "explanation", "explanation_en", "design", ...(c.system === "sat_math" ? ["option_values", "verification_js"] : [])] } });
 
-type Gen = { passage: string; question: string; options: string[]; correct_letter: string; explanation: string; design: string; option_values?: number[] | null; verification_js?: string };
-const toRaw = (c: Cand, g: Gen): Raw => ({ gid: c.cid, runId: "batch", skill: c.skill, domain: "", examSystem: c.system, difficulty: "hard", format: "mc", problem: { passage: `${g.passage}\n\n${g.question}`, stimulus: g.passage, question: g.question, options: g.options, correctIndex: "ABCD".indexOf(g.correct_letter), answers: null, explanation: g.explanation, figure: null, statements: null } } as Raw);
+type Gen = { passage: string; question: string; options: string[]; correct_letter: string; explanation: string; explanation_en?: string; design: string; option_values?: number[] | null; verification_js?: string };
+const toRaw = (c: Cand, g: Gen): Raw => ({ gid: c.cid, runId: "batch", skill: c.skill, domain: "", examSystem: c.system, difficulty: "hard", format: "mc", problem: { passage: `${g.passage}\n\n${g.question}`, stimulus: g.passage, question: g.question, options: g.options, correctIndex: "ABCD".indexOf(g.correct_letter), answers: null, explanation: g.explanation, explanationEn: g.explanation_en ?? null, figure: null, statements: null } } as Raw);
 
 /** 결정론 검증: 품질 계약 + 원시 LaTeX 등 + Math 는 verification_js 재계산이 정답 값과 일치하고 다른 선택지 값과 겹치지 않는지. */
 async function deterministic(c: Cand, g: Gen): Promise<{ issues: string[]; mathVerify: "pass" | "fail" | "skipped" | null }> {

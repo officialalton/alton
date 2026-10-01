@@ -22,7 +22,7 @@ const optionsOf = (id: string) => { const rnd = mulberry32(seedNum(id + "o")); r
 type Item = Record<string, unknown>;
 const goodItem = (c: GenTask["candidates"][number]): Item => ({
   candidateId: c.candidateId, passage: c.route === "excerpt" ? c.excerpt!.text : passageOf(c.candidateId), question: "Which choice best states the main purpose of the text?", options: optionsOf(c.candidateId),
-  correct_letter: c.targetLetter, explanation: `정답은 ${c.targetLetter} 이다. 근거는 지문의 두 곳에 있다.`, tone: ["wry"], devices: ["irony"], declaration: { original: true, noRealWorkQuoted: true, noCopyrightedSource: true },
+  correct_letter: c.targetLetter, explanation: `정답은 ${c.targetLetter} 이다. 근거는 지문의 두 곳에 있다.`, explanation_en: `The answer is ${c.targetLetter}. The evidence appears in two places in the text.`, tone: ["wry"], devices: ["irony"], declaration: { original: true, noRealWorkQuoted: true, noCopyrightedSource: true },
 });
 const agentWrite = (taskPath: string, mutate?: (items: Item[], task: GenTask) => Item[]) => {
   const task = JSON.parse(readFileSync(taskPath, "utf-8")) as GenTask;
@@ -95,10 +95,25 @@ describe("세션 모드: ingest(검증 게이트)", () => {
     expect(stages.missing).toBeTruthy();
     expect(existsSync(path.join(dirs(root).ingested, `${tasks[0].taskId}.json`))).toBe(true);
   });
+  it("영어 해설(explanation_en) 필수: 없거나 한글이 섞이면 탈락하고, 통과분 레코드에 explanationEn 이 실린다", () => {
+    const root = tmp();
+    const tasks = prepare({ root, runId: "en", batch: batch(), chunkSize: 10 });
+    agentWrite(tasks[0].path, (items) => {
+      items[0] = { ...items[0], explanation_en: "" };
+      items[1] = { ...items[1], explanation_en: "정답은 A 이다." };
+      return items.slice(0, 4);
+    });
+    const r = ingest(root, tasks[0].taskId);
+    const fmt = r.rejected.filter((x) => x.stage === "format").map((x) => x.reasons.join(" "));
+    expect(fmt.some((m) => /영어 해설/.test(m))).toBe(true);
+    expect(fmt.length).toBe(2);
+    expect(r.passed.length).toBe(2);
+    expect(r.passed.every((p) => typeof (p as { g: { explanationEn?: string } }).g.explanationEn === "string" && /^The answer is/.test((p as { g: { explanationEn: string } }).g.explanationEn))).toBe(true);
+  });
   it("어긋난 정답 위치는 보정되어 통과하고 notes 에 남는다", () => {
     const root = tmp();
     const tasks = prepare({ root, runId: "t", batch: batch(), chunkSize: 10 });
-    agentWrite(tasks[0].path, (items, task) => items.map((it, i) => { if (i !== 0) return it; const want = task.candidates[0].targetLetter; const other = "ABCD".replace(want, "")[0]; const opts = [...(it.options as string[])]; const a = "ABCD".indexOf(want), b = "ABCD".indexOf(other); [opts[a], opts[b]] = [opts[b], opts[a]]; return { ...it, options: opts, correct_letter: other, explanation: `정답은 ${other} 이다.` }; }));
+    agentWrite(tasks[0].path, (items, task) => items.map((it, i) => { if (i !== 0) return it; const want = task.candidates[0].targetLetter; const other = "ABCD".replace(want, "")[0]; const opts = [...(it.options as string[])]; const a = "ABCD".indexOf(want), b = "ABCD".indexOf(other); [opts[a], opts[b]] = [opts[b], opts[a]]; return { ...it, options: opts, correct_letter: other, explanation: `정답은 ${other} 이다.`, explanation_en: `The answer is ${other}.` }; }));
     const r = ingest(root, tasks[0].taskId);
     const p = r.passed.find((x) => x.candidateId.endsWith("-001"))!;
     expect(p.g.correct_letter).toBe(p.spec.targetLetter);

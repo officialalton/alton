@@ -86,7 +86,7 @@ export function chunkEven<T>(items: T[], size = 20): T[][] {
 
 const COMMON_RULES = [
   "지문은 전부 새로 쓴 창작이다. 실제 작품의 문장·플롯·고유한 인물 설정을 쓰지 말고, 실존 작가·작품 이름이나 'From … by …' 같은 출처 머리글을 붙이지 않는다(발췌 지문 작업은 제공된 발췌를 한 글자도 바꾸지 않는다).",
-  "지문·질문·선택지는 영어만 쓴다. 해설(explanation)만 한국어 3~5문장이며, 글자 참조는 선택지 글자(A~D)로만 한다.",
+  "지문·질문·선택지는 영어만 쓴다. 해설은 두 벌이다: explanation 은 한국어 3~5문장, explanation_en 은 같은 내용의 영어 3~5문장(한글이 한 글자도 없어야 하며 학생에게 설명하는 어조). 글자 참조는 선택지 글자(A~D)로만 한다. 영어 해설이 없거나 한글이 섞이면 탈락한다(오너 확정: 학생 화면은 영어 기본, 한글은 토글).",
   "선택지는 정확히 4개, 정답은 1개이고 정답 위치는 후보별 targetLetter 와 같아야 한다(어기면 코드가 선택지를 재배치하거나 탈락시킨다).",
   "선택지 길이·문체를 비슷하게 맞춘다. 정답이 가장 길거나 구체적이면 탈락한다. 오답 3개는 서로 다른 그럴듯한 오개념에서 나오게 하고 지문 표현을 일부 활용한다.",
   "정답이 지문 마지막 문장을 거의 그대로 바꿔 말한 것이면 탈락한다. 근거를 서로 떨어진 둘 이상의 문장에 둔다.",
@@ -105,6 +105,7 @@ const GEN_OUTPUT_SCHEMA = {
     options: ["선택지 A", "선택지 B", "선택지 C", "선택지 D"],
     correct_letter: "A|B|C|D (targetLetter 와 같게)",
     explanation: "한국어 해설 3~5문장",
+    explanation_en: "같은 내용의 영어 해설 3~5문장(한글 없음)",
     tone: ["지문 어조 영어 단어 1~3개"],
     devices: ["쓰인 문학 장치 영어 단어"],
     declaration: { original: true, noRealWorkQuoted: true, noCopyrightedSource: true },
@@ -211,7 +212,7 @@ function renderIssues(c: TaskCandidate, g: Generated): string[] {
   return [...issues, ...res.map((r) => `residue:${r.field}:${r.match}`)];
 }
 
-type RawItem = Partial<Generated> & { candidateId?: string; tone?: string[]; devices?: string[]; declaration?: Record<string, unknown> };
+type RawItem = Partial<Generated> & { explanation_en?: string; candidateId?: string; tone?: string[]; devices?: string[]; declaration?: Record<string, unknown> };
 
 /** 에이전트 결과 파일 하나를 검증한다. 탈락 사유는 stage 와 사유 문자열로 기록한다. */
 export function ingest(root: string, taskId: string, opts: { recordMode?: Mode } = {}): IngestResult {
@@ -248,8 +249,9 @@ export function ingest(root: string, taskId: string, opts: { recordMode?: Mode }
     const it = byId.get(c.candidateId);
     const rej = (stage: string, ...reasons: string[]) => out.rejected.push({ candidateId: c.candidateId, stage, reasons });
     if (!it) { rej("missing", "결과 파일에 항목 없음"); continue; }
-    const g: Generated = { passage: String(it.passage ?? ""), question: String(it.question ?? ""), options: Array.isArray(it.options) ? it.options.map(String) : [], correct_letter: String(it.correct_letter ?? ""), explanation: String(it.explanation ?? "") };
+    const g: Generated = { passage: String(it.passage ?? ""), question: String(it.question ?? ""), options: Array.isArray(it.options) ? it.options.map(String) : [], correct_letter: String(it.correct_letter ?? ""), explanation: String(it.explanation ?? ""), explanationEn: String(it.explanation_en ?? "").trim() };
     if (!g.passage || !g.question || g.options.length !== 4 || !/^[ABCD]$/.test(g.correct_letter) || !g.explanation.trim()) { rej("format", "지문·질문·선택지 4개·정답 글자·해설 필수"); continue; }
+    if (!g.explanationEn || HANGUL.test(g.explanationEn)) { rej("format", "영어 해설(explanation_en) 필수이며 한글이 없어야 함"); continue; }
     const dcl = it.declaration as Record<string, unknown> | undefined;
     if (!dcl || dcl.original !== true || dcl.noRealWorkQuoted !== true || dcl.noCopyrightedSource !== true) { rej("declaration", "선언 3개가 모두 true 가 아님"); continue; }
     if (HANGUL.test(g.passage) || HANGUL.test(g.question) || g.options.some((o) => HANGUL.test(o))) { rej("format", "지문·질문·선택지에 한글 포함"); continue; }
@@ -480,7 +482,7 @@ export function writeAdoptionReport(root: string, runId: string) {
     return {
       gid: `rwlit:${s.candidateId}`, runId, skill: appSkillOf(s.questionType, s.skill), planSkill: s.skill, domain: DOMAIN_OF.get(appSkillOf(s.questionType, s.skill)) ?? null, examSystem: "sat_rw", difficulty: s.difficulty, format: "mc", recipeId: s.recipeId,
       difficultyStatus: s.difficulty === "hard" ? "provisional_ai" : undefined,
-      problem: { passage: composeProblemText(p.g.passage, p.g.question), stimulus: p.g.passage, question: p.g.question, options: p.g.options, correctIndex: "ABCD".indexOf(p.g.correct_letter), answers: null, explanation: p.g.explanation, figure: null, statements: null },
+      problem: { passage: composeProblemText(p.g.passage, p.g.question), stimulus: p.g.passage, question: p.g.question, options: p.g.options, correctIndex: "ABCD".indexOf(p.g.correct_letter), answers: null, explanation: p.g.explanation, explanationEn: p.g.explanationEn ?? null, figure: null, statements: null },
       quality: { generatedBy: `session:${p.producerModel}`, route: s.route, questionType: s.questionType, weakType: stage?.weak ?? false, genre: s.genre, targetLetter: s.targetLetter, positionEnforced: p.notes.length > 0, seed: s.route === "ai_passage" ? { topicSeed: s.seed.topicSeed, names: s.seed.names, locale: s.seed.locale } : undefined, sourceText: p.excerpt?.source, rewrites: p.rewrites, attempts: p.attempt + 1, estDifficulty: x.estDifficulty },
     };
   });

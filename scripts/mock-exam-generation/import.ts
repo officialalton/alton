@@ -150,7 +150,7 @@ async function main() {
     const { data: versionId, error: vErr } = await admin.rpc("save_problem_draft_version", {
       p_problem_id: problemId, p_passage: stimulus, p_options: g.options ?? null, p_correct_index: g.correctIndex ?? null, p_explanation: g.explanation,
       p_difficulty: r.difficulty, p_actor_id: actorId, p_answers: g.answers ?? null, p_figure: figureToSave, p_figure_checked: false,
-      p_statements: g.statements?.length ? g.statements : null, p_question: question?.trim() || null, p_repair_status: null, p_explanation_en: null,
+      p_statements: g.statements?.length ? g.statements : null, p_question: question?.trim() || null, p_repair_status: null, p_explanation_en: ((g as { explanationEn?: string | null }).explanationEn ?? null) || null,
       p_evidence_target: g.evidenceTarget ?? null, p_evidence_span: g.evidenceSpan ?? null, p_answer_rationale: g.answerRationale ?? null, p_distractor_error_types: g.distractorErrorTypes ?? null,
     });
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }
