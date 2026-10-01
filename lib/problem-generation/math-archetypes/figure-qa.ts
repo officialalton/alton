@@ -52,6 +52,26 @@ function checkTwoWay(spec: Spec, html: string, issues: QaIssue[]) {
   if (JSON.stringify(rows) !== JSON.stringify(want)) issues.push({ code: "table_value_mismatch", message: `표에 그려진 칸 값 ${JSON.stringify(rows)} 이 데이터(합계 포함) ${JSON.stringify(want)} 와 다릅니다.` });
 }
 
+/** 일반 표(table): 머리글(열 이름)이 모두 그려지고, 행마다 그려진 칸 글자가 데이터(숫자는 천 단위 쉼표 무시)와 같아야 한다. 빈 표·열 이름 없음·값 불일치를 잡는다. */
+const cellText = (c: unknown) => (typeof c === "number" ? String(c) : String(c).trim());
+const unesc = (t: string) => t.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+function checkTable(spec: Spec, html: string, issues: QaIssue[]) {
+  const cols = (spec.columns ?? []) as string[]; const rows = (spec.rows ?? []) as unknown[][];
+  const head = [...html.matchAll(/<th\b[^>]*>([^<]*)<\/th>/g)].map((m) => unesc(m[1]));
+  if (!rows.length) { issues.push({ code: "render_empty", message: "표에 행이 없습니다." }); return; }
+  for (const c of cols) if (c && !head.includes(c.trim())) issues.push({ code: "table_header_missing", message: `표 머리글 '${c}' 가 그려지지 않았습니다.` });
+  const drawn = [...html.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map((m) => [...m[1].matchAll(/<td\b[^>]*>([^<]*)<\/td>/g)].map((c) => unesc(c[1]))).filter((r) => r.length);
+  const norm = (t: string) => (NUM.test(t.replace(/,/g, "")) ? String(toNum(t)) : t);
+  const want = rows.map((r) => r.map((c) => norm(cellText(c)))); const got = drawn.map((r) => r.map(norm));
+  if (JSON.stringify(got) !== JSON.stringify(want)) issues.push({ code: "table_value_mismatch", message: `표에 그려진 칸 ${JSON.stringify(got).slice(0, 160)} 이 데이터 ${JSON.stringify(want).slice(0, 160)} 와 다릅니다.` });
+}
+/** 문장형 자료(statement): 항목마다 라벨과 값이 그려져야 한다. */
+function checkStatement(spec: Spec, html: string, issues: QaIssue[]) {
+  const facts = (spec.facts ?? []) as { label: string; value: string | number }[]; const text = unesc(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ");
+  if (!facts.length) { issues.push({ code: "render_empty", message: "문장형 자료에 항목이 없습니다." }); return; }
+  for (const f of facts) { if (!text.includes(f.label.trim())) issues.push({ code: "table_header_missing", message: `자료 항목 '${f.label}' 이 그려지지 않았습니다.` }); const v = typeof f.value === "number" ? f.value.toLocaleString("en-US", { maximumFractionDigits: 2 }) : String(f.value); if (!text.includes(v) && !text.includes(String(f.value))) issues.push({ code: "table_value_mismatch", message: `자료 항목 '${f.label}' 의 값 ${String(f.value)} 이 그려지지 않았습니다.` }); }
+}
+
 const px = (mapping: NonNullable<ReturnType<typeof fit>>, v: number) => (v - mapping.b) / mapping.a;
 function checkAxes(spec: Spec, svg: string, issues: QaIssue[], isPlane: boolean) {
   const sc = readScale(svg);
@@ -113,6 +133,8 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
   if (!markup || markup.length < 50) return [{ code: "render_empty", message: "그림이 비어 있습니다." }];
   if (spec.type === "data" && spec.kind === "two_way") { checkTwoWay(spec, markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "table") { checkTable(spec, markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "statement") { checkStatement(spec, markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "scatter") { checkAxes(spec, markup, issues, false); checkScatterFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "line") { checkAxes({ ...spec, xTitle: spec.xTitle, yTitle: spec.yTitle }, markup, issues, false); checkLineChartFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }

@@ -11,6 +11,7 @@ import { RT_HARD } from "./skills/right-triangles-trigonometry";
 import { OVD_HARD } from "./skills/one-variable-data";
 import { TVD_HARD } from "./skills/two-variable-data";
 import { FTVD_HARD } from "./skills/two-variable-data-figure";
+import { FIG_HARD } from "./skills/fig";
 import { IME_HARD } from "./skills/inference-margin-error";
 import { PCT_ARCHETYPES } from "./skills/percentages";
 import { AV_ARCHETYPES } from "./skills/area-volume";
@@ -35,6 +36,8 @@ export const ARCHETYPES: Archetype[] = [
   ...LAT_HARD, ...RT_HARD, ...OVD_HARD, ...TVD_HARD, ...IME_HARD,
   // --- 자료(그림·표) 버전 원형(파일럿: two_variable_data 15항목) ---
   ...FTVD_HARD,
+  // --- 자료 원형 1단계 이후(skills/fig: 조합 하나 = 파일 하나) ---
+  ...FIG_HARD,
   // --- C 담당(비율·도형 계열) --- (easy/medium 틀은 lite-c.ts 의 LITE_C_ARCHETYPES)
   ...PCT_ARCHETYPES, ...AV_ARCHETYPES, ...CI_ARCHETYPES,
 ];

@@ -2,7 +2,7 @@
 //   해시 대상 = 그 항목의 원형 정의 파일 + 공용 빌더·장면 풀 + 쓰는 렌더러(figure type 별) + 앱 그림 컴포넌트(ProblemFigure). easy/medium 틀 파일도 포함한다(같은 렌더 경로를 쓰므로 보수적으로).
 //   한 파일이 여러 항목을 정의하므로 그 파일을 고치면 같은 파일의 모든 항목이 재검수 대상이 된다(보수적).
 import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 export const QA_DIR = path.join("data", "mock-exam-generation", "figure-qa");
@@ -13,20 +13,27 @@ const COMMON = [`${AR}/figure-kit.ts`, `${AR}/figure-topics.ts`, `${AR}/skills/t
 const RENDERER: Record<string, string[]> = { data: [`${FG}/templates/data.ts`], plane: [`${FG}/templates/coordinate-plane.ts`], figure_choice: [`${FG}/templates/figure-choice.ts`], figure_set: [`${FG}/templates/figure-choice.ts`] };
 
 /** 항목 id → 원형 정의 파일(이 파일럿의 two_variable_data 자료 원형). 새 skill 파일이 생기면 여기에 규칙을 더한다. */
-export function archetypeSourceFor(itemId: string): string[] {
+/** 1단계 이후 규칙: 조합 하나 = 파일 하나(`skills/fig/items/<조합ID>.ts`) + 그 자료 계열의 공용 장면 키트. 조합 파일을 고쳐도 다른 조합의 판정은 유지된다. */
+export const ITEM_DIR = `${AR}/skills/fig/items`;
+export const FAMILY_KIT: Record<string, string[]> = { TB: [`${AR}/skills/fig/table-kit.ts`], FQ: [`${AR}/skills/fig/table-kit.ts`], TW: [`${AR}/skills/fig/table-kit.ts`], ST: [`${AR}/skills/fig/table-kit.ts`] };
+export function archetypeSourceFor(itemId: string, root = process.cwd()): string[] {
   const [skill, kind, fig, loc] = itemId.split(".");
-  if (skill !== "two_variable_data") throw new Error(`시각 검수 해시 규칙이 없는 skill: ${skill}`);
+  const own = `${ITEM_DIR}/${itemId}.ts`;
+  if (skill !== "two_variable_data" || existsSync(path.join(root, own))) {
+    if (!existsSync(path.join(root, own))) throw new Error(`시각 검수 해시 규칙이 없는 조합(조합 파일 ${own} 없음): ${itemId}`);
+    return [own, `${AR}/skills/fig/item-kit.ts`, ...(FAMILY_KIT[fig] ?? [])];
+  }
   if (loc === "C" || kind === "association_direction_strength") return [`${AR}/skills/tvd-fig-choice.ts`];
   if (fig === "TW") return [`${AR}/skills/tvd-fig-tables.ts`];
   return [`${AR}/skills/tvd-fig-lines.ts`];
 }
-export function sourceFilesFor(itemId: string, figureTypes: string[]): string[] {
-  const set = new Set<string>([...archetypeSourceFor(itemId), ...COMMON]);
+export function sourceFilesFor(itemId: string, figureTypes: string[], root = process.cwd()): string[] {
+  const set = new Set<string>([...archetypeSourceFor(itemId, root), ...COMMON]);
   for (const t of figureTypes) for (const f of RENDERER[t] ?? []) set.add(f);
   return [...set].sort();
 }
 export function codeHash(itemId: string, figureTypes: string[], root = process.cwd()): { hash: string; files: string[] } {
-  const files = sourceFilesFor(itemId, figureTypes); const h = createHash("sha256");
+  const files = sourceFilesFor(itemId, figureTypes, root); const h = createHash("sha256");
   for (const f of files) { h.update(f); h.update("\0"); h.update(readFileSync(path.join(root, f))); h.update("\0"); }
   return { hash: h.digest("hex"), files };
 }

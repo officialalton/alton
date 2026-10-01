@@ -7,5 +7,6 @@ import { TVD_ALL } from "./skills/two-variable-data";
 import { IME_ALL } from "./skills/inference-margin-error";
 import { ESC_ALL } from "./skills/evaluating-statistical-claims";
 import { FTVD_ALL } from "./skills/two-variable-data-figure";
+import { FIG_ALL } from "./skills/fig";
 
-export const D_ARCHETYPES: LArch[] = [...LAT_ALL, ...RT_ALL, ...OVD_ALL, ...TVD_ALL, ...FTVD_ALL, ...IME_ALL, ...ESC_ALL];
+export const D_ARCHETYPES: LArch[] = [...LAT_ALL, ...RT_ALL, ...OVD_ALL, ...TVD_ALL, ...FTVD_ALL, ...FIG_ALL, ...IME_ALL, ...ESC_ALL];
