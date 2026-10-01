@@ -32,6 +32,9 @@ export default defineConfig({
           // `npm run test:integration:universities`)으로만 돈다.
           exclude: [...SHARED_EXCLUDE, "lib/universities/**/*.integration.test.ts"],
           fileParallelism: false,
+          // 2026-10-01 — 동기 psql을 여러 번 부르는 테스트가 에이전트 병행 부하·데이터 누적 때
+          // 5초 기본 제한에 간헐적으로 걸렸다(매번 다른 테스트). 로직 결함이 아니라 시간 문제다.
+          testTimeout: 30_000,
         },
       },
     ],
