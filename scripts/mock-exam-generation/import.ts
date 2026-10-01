@@ -1,4 +1,4 @@
-// 모의고사용 생성 문항 임포트 (2026-09-29) — 기존 문제은행 경로(create_bank_problem → save_problem_draft_version →
+// 모의고사용 생성 문항 임포트 (2026-09-29; 2026-09-30 컴파일러 원형 레코드의 quality.mockExamGeneration(difficultyStatus·archetypeId 등)을 덮어쓰지 않고 병합) — 기존 문제은행 경로(create_bank_problem → save_problem_draft_version →
 // set_problem_render_check → set_problem_quality)로 넣는다. 용도는 항상 mock_exam, created_via=ai_generated,
 // 유사문항 그룹은 DB 트리거가 자동 부여한다.
 //
@@ -145,7 +145,7 @@ async function main() {
     if (vErr || !versionId) { await cleanup1(`초안 저장 실패 ${vErr?.message}`); continue; }
     const { error: cErr } = await admin.rpc("set_problem_render_check", { p_version_id: versionId, p_check: check });
     if (cErr) { await cleanup1(`렌더 검사 기록 실패 ${cErr.message}`); continue; }
-    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { runId: r.runId, gid: r.gid, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? "recipe" : null, review: r.review ?? null } } });
+    const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, review: r.review ?? null } } });
     if (qErr) failures.push(`${r.gid}: 품질 기록 실패 ${qErr.message}`);
     stats.created += 1;
     pool.push({ problemId: problemId as string, key, sh });
