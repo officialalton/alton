@@ -184,22 +184,28 @@ describe("upsert_session_payout_item() — 마감 뒤 재판정은 차액 이월
   });
 
   it("그 차액은 다음 달 마감에 자동으로 실린다", () => {
+    // 월을 하드코딩하지 않는다: 이월 조정 항목은 '재판정한 날'의 달에 생기므로, 직전 달에 수업을 두고 이번 달 마감에 실리는지 본다.
+    const prevStart = psql(`select to_char(date_trunc('month', now()) - interval '1 month', 'YYYY-MM-DD');`);
+    const prevEnd = psql(`select to_char(date_trunc('month', now()) - interval '1 day', 'YYYY-MM-DD');`);
+    const sessionDay = psql(`select to_char(date_trunc('month', now()) - interval '1 month' + interval '9 days', 'YYYY-MM-DD');`);
+    const currStart = psql(`select to_char(date_trunc('month', now()), 'YYYY-MM-DD');`);
+    const currEnd = psql(`select to_char(date_trunc('month', now()) + interval '1 month' - interval '1 day', 'YYYY-MM-DD');`);
     const teacher = createTeacher("carry-next");
-    const { sessionId } = createSessionPayoutItem(teacher, "2026-08-10", 60000);
-    psql(`select * from close_payout_period('2026-08-01', '2026-08-31');`);
-    const augustBatch = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2026-08-01';`);
-    psql(`select approve_payout_batch('${augustBatch}'::uuid, '${ADMIN_ID}'::uuid);`);
+    const { sessionId } = createSessionPayoutItem(teacher, sessionDay, 60000);
+    psql(`select * from close_payout_period('${prevStart}', '${prevEnd}');`);
+    const prevBatch = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '${prevStart}';`);
+    psql(`select approve_payout_batch('${prevBatch}'::uuid, '${ADMIN_ID}'::uuid);`);
     psql(`update sessions set payable_minutes = 30 where id = '${sessionId}';`);
     psql(`select upsert_session_payout_item('${sessionId}');`);
 
-    // 다음 달 마감 — 9월엔 수업이 없지만 이월 조정만으로 묶음이 생긴다.
-    psql(`select * from close_payout_period('2026-09-01', '2026-09-30');`);
+    // 다음 달(이번 달) 마감 — 이번 달엔 수업이 없지만 이월 조정만으로 묶음이 생긴다.
+    psql(`select * from close_payout_period('${currStart}', '${currEnd}');`);
 
-    const septBatch = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '2026-09-01';`);
-    expect(septBatch).not.toBe("");
-    expect(psql(`select sum(amount_minor) from payout_items where batch_id = '${septBatch}';`)).toBe("-30000");
-    // 8월 묶음(승인됨)은 그대로다.
-    expect(psql(`select sum(amount_minor) from payout_items where batch_id = '${augustBatch}';`)).toBe("60000");
+    const currBatch = psql(`select id from payout_batches where teacher_id = '${teacher}' and period_start = '${currStart}';`);
+    expect(currBatch).not.toBe("");
+    expect(psql(`select sum(amount_minor) from payout_items where batch_id = '${currBatch}';`)).toBe("-30000");
+    // 직전 달 묶음(승인됨)은 그대로다.
+    expect(psql(`select sum(amount_minor) from payout_items where batch_id = '${prevBatch}';`)).toBe("60000");
   });
 
   it("아직 검토 중인 묶음이면 제자리에서 갱신한다(검토 정확도 유지)", () => {
