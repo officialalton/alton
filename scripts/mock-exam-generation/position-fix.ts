@@ -97,7 +97,7 @@ function cmdPlan() {
   // 1차 계획 → 정적 감사 → 실패 문항은 '생략'으로 확정하고 목표 배정을 다시 계산(분포 균형 유지)
   const force = new Map<string, string>();
   const prefer = new Map<string, number>();
-  for (const f of ["apply-candidates.v2-verified223.json", "apply-candidates.v2-static891.json"]) { const fp = path.join(OUT, f); if (existsSync(fp)) for (const e of JSON.parse(readFileSync(fp, "utf-8")) as FixEntry[]) if (e.newIndex !== undefined) prefer.set(e.gid, e.newIndex); }
+  for (const f of ["apply-candidates.v2-verified223.json", "apply-candidates.v2-static891.json", "apply-candidates.v3-1060.json", "apply-candidates.v3-needsrereview40.json"]) { const fp = path.join(OUT, f); if (existsSync(fp)) for (const e of JSON.parse(readFileSync(fp, "utf-8")) as FixEntry[]) if (e.newIndex !== undefined) prefer.set(e.gid, e.newIndex); }
   let all = buildPlan(new Map(), prefer);
   for (let round = 0; round < 3; round++) {
     let added = 0;

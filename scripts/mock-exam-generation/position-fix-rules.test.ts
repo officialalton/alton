@@ -99,7 +99,7 @@ const safe = (f: (typeof fx2)[number]) => {
 describe("2차 보강 — 서브 에이전트 blocking 이슈 고정 사례", () => {
   it("fixtures 16건", () => expect(fx2.length).toBe(16));
   it("고정 사례의 결정: 불확실은 생략, 그 밖은 정적 감사 통과(치환 정합)", () => {
-    const skipIds = ["06a3ced4", "a19ad79c", "b43c5755", "7f8bd0b4", "9d4af989", "9d9f0889", "bbd97b1b"];
+    const skipIds = ["06a3ced4", "a19ad79c", "b43c5755", "7f8bd0b4", "9d4af989", "9d9f0889", "bbd97b1b", "9cedb4e8", "4eaf03a4", "021df67e"];
     for (const f of fx2) {
       const { unc, fails } = safe(f);
       if (skipIds.includes(f.id)) expect(unc.length, f.id).toBeGreaterThan(0);
@@ -146,5 +146,42 @@ describe("2차 돌연변이", () => {
     const f = fx2.find((x) => x.id === "4eaf03a4")!;
     const wrong = f.explanationEn!.replace("A 95%", "D 95%");
     expect(staticAudit(mk(f, undefined, wrong)).length).toBeGreaterThan(0);
+  });
+});
+
+const fx3 = JSON.parse(readFileSync(path.join(__dirname, "fixtures/position-fix-failures-round3.json"), "utf-8")) as (typeof fx2)[number][];
+describe("3차 보강 — 보수 정책(모르는 글자 토큰이 있으면 생략)", () => {
+  it("makes/make/made A correct 와 문자 그대로의 \\n 뒤 'A는' 을 참조로 치환", () => {
+    const perm = [1, 0, 2, 3];
+    expect(remapAll("This makes A correct. B is wrong.", perm).text).toBe("This makes B correct. A is wrong.");
+    expect(remapAll("That made A correct and make B wrong.", perm).text).toBe("That made B correct and make A wrong.");
+    expect(remapAll("정답은 B이다.\\n\\nA는 틀렸다.", perm).text).toBe("정답은 A이다.\\n\\nB는 틀렸다.");
+  });
+  it("확정되지 않는 토큰이 하나라도 있으면 불확실: 문맥 없는 B, 수식 밖 변수 E", () => {
+    expect(analyze("Overall then B wins the day.").uncertain.length).toBe(1);
+    expect(analyze("The vector E points north.").uncertain.length).toBe(1);
+    expect(analyze("Vitamin C helps; Plan B fails.").uncertain.length).toBe(0);
+    expect(analyze("수식 $A + B$ 에서 값을 구한다.").uncertain.length).toBe(0);
+  });
+  it("이번 3건: 치환 정합이거나 생략", () => {
+    expect(fx3.length).toBe(3);
+    for (const f of fx3) {
+      const { unc, fails } = safe(f);
+      expect(unc.length > 0 || fails.length === 0, f.id).toBe(true);
+      if (unc.length === 0) { const e = mk(f); expect(staticAudit(e)).toEqual([]); }
+    }
+    const a = fx3.find((x) => x.id === "92641ca8")!;
+    const en = remapAll(a.explanationEn!, a.perm).text;
+    expect(en).toContain("makes B correct");
+    const b = fx3.find((x) => x.id === "078f6eba")!;
+    expect(remapAll(b.explanationEn!, b.perm).text).toContain("This makes C correct");
+  });
+  it("돌연변이: makes A correct 를 치환하지 않으면 실패, 정답 글자를 오답 문장으로 서술하면 실패", () => {
+    const a = fx3.find((x) => x.id === "92641ca8")!;
+    const stale = remapAll(a.explanationEn!, a.perm).text.replace("makes B correct", "makes A correct");
+    expect(staticAudit(mk(a, undefined, stale)).length).toBeGreaterThan(0);
+    const b = fx3.find((x) => x.id === "078f6eba")!;
+    const e = mk(b);
+    expect(staticAudit({ ...e, after: { ...e.after, explanation: e.after.explanation + " C번은 잘못된 설명이다." } }).length).toBeGreaterThan(0);
   });
 });
