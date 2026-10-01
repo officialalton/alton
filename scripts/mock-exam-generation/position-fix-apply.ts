@@ -87,7 +87,11 @@ async function main() {
   for (const c of cands) {
     const v = byGid.get(c.gid);
     if (!v) { missing.push(c.gid); continue; }
-    items.push({ cand: c, versionId: v.id });
+    // 원격 DB 에 영어 해설이 저장돼 있지 않으면(임포트가 explanation_en 을 비워 둠) 영어 해설은 비교도 반영도 하지 않는다.
+    const adapted: Cand = v.explanation_en == null
+      ? { ...c, before: { ...c.before, explanationEn: null }, after: { ...c.after, explanationEn: null } }
+      : c;
+    items.push({ cand: adapted, versionId: v.id });
   }
   console.log(`후보 ${cands.length}건 · 원격 공개 버전 매칭 ${items.length}건 · 원격에 없음 ${missing.length}건`);
 
