@@ -98,13 +98,17 @@ export default function ProblemErrorReportButton({
         title={reported ? statusText[status!] : T.trigger}
         className={
           isIcon
-            ? `inline-flex h-7 w-7 items-center justify-center rounded text-[15px] leading-none transition-opacity hover:bg-black/10 ${reported ? "opacity-100" : "opacity-60 hover:opacity-100"}`
+            ? `inline-flex h-7 w-7 items-center justify-center rounded text-ink leading-none transition-opacity hover:bg-black/10 ${reported ? "opacity-100" : "opacity-70 hover:opacity-100"}`
             : `inline-flex min-h-[32px] items-center rounded-full border px-3 py-1 text-[11.5px] font-bold transition-colors ${
                 reported ? "border-grey-200 bg-grey-50 text-grey-500" : "border-grey-300 text-grey-600 hover:bg-grey-100"
               }`
         }
       >
-        {isIcon ? (reported ? "✅" : "⚠️") : reported ? statusText[status!] : T.trigger}
+        {isIcon ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            {reported ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <><path d="M12 4l9 16H3z" /><path d="M12 10v4.5M12 17.4v.1" /></>}
+          </svg>
+        ) : reported ? statusText[status!] : T.trigger}
       </button>
 
       {open && (

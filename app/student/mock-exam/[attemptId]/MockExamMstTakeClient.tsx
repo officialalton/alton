@@ -53,7 +53,7 @@ export default function MockExamMstTakeClient({
   const [savedMap, setSavedMap] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(initialState.items.map((i) => [i.setItemId, i.savedToPractice])),
   );
-  // 2026-10-02(오너 UAT A8) — 답을 모르고 찍었을 때 학생이 스스로 누르는 표시. 결과 화면에 🎲 로 보인다.
+  // 2026-10-02(오너 UAT A8) — 답을 모르고 찍었을 때 학생이 스스로 누르는 표시. 결과 화면에 Guessed 로 보인다.
   const [guessedMap, setGuessedMap] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(initialState.items.map((i) => [i.setItemId, i.guessed ?? false])),
   );
@@ -321,7 +321,7 @@ export default function MockExamMstTakeClient({
         <main className="max-w-[880px] min-w-0 flex-1 px-8 py-6">
           {item ? (
             <>
-              {/* 콜리지보드식 번호 막대: 검은 번호 칸 + 회색 막대. 왼쪽에 검토 표시 🚩·오류 신고 ⚠️, 오른쪽 끝에 문제 저장 💾. */}
+              {/* 콜리지보드식 번호 막대: 검은 번호 칸 + 회색 막대. 왼쪽에 오류 신고, 오른쪽 끝에 문제 저장(별). 검토 표시는 아래 Solve Later. */}
               <div className="mb-5 flex items-stretch bg-[#cfcfcf]" data-testid="mst-qbar">
                 <div
                   className="flex min-w-[38px] items-center justify-center bg-[#111] px-2.5 py-1 font-serif text-[17px] font-bold text-white"
@@ -330,18 +330,6 @@ export default function MockExamMstTakeClient({
                   {item.moduleSeq}
                 </div>
                 <div className="flex flex-1 items-center gap-0.5 px-2">
-                  <button
-                    type="button"
-                    onClick={() => void toggleFlag(item.setItemId)}
-                    aria-pressed={flags[item.setItemId] ?? false}
-                    aria-label={flags[item.setItemId] ? "Unmark for Review" : "Mark for Review"}
-                    title={flags[item.setItemId] ? "Unmark for Review" : "Mark for Review"}
-                    className={`inline-flex h-7 w-7 items-center justify-center rounded text-[15px] leading-none hover:bg-black/10 ${
-                      flags[item.setItemId] ? "opacity-100" : "opacity-45 grayscale hover:opacity-100 hover:grayscale-0"
-                    }`}
-                  >
-                    🚩
-                  </button>
                   <ProblemErrorReportButton
                     key={item.setItemId}
                     variant="icon"
@@ -356,11 +344,11 @@ export default function MockExamMstTakeClient({
                     aria-pressed={savedMap[item.setItemId] ?? false}
                     aria-label={savedMap[item.setItemId] ? "Remove from saved questions" : "Save question"}
                     title={savedMap[item.setItemId] ? "Saved to Practice" : "Save to Practice"}
-                    className={`inline-flex h-7 w-7 items-center justify-center rounded text-[15px] leading-none hover:bg-black/10 ${
-                      savedMap[item.setItemId] ? "opacity-100" : "opacity-45 grayscale hover:opacity-100 hover:grayscale-0"
-                    }`}
+                    className="inline-flex h-7 w-7 items-center justify-center rounded text-ink hover:bg-black/10"
                   >
-                    💾
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill={savedMap[item.setItemId] ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -429,6 +417,19 @@ export default function MockExamMstTakeClient({
                   ←
                 </button>
                 <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => void toggleFlag(item.setItemId)}
+                  aria-pressed={flags[item.setItemId] ?? false}
+                  aria-label={flags[item.setItemId] ? "Unmark for Review" : "Mark for Review"}
+                  title={flags[item.setItemId] ? "Unmark Solve Later" : "Mark Solve Later"}
+                  data-testid="mock-exam-solve-later-toggle"
+                  className={`flex h-10 items-center justify-center rounded-lg border-[1.5px] px-3 text-[13px] font-semibold ${
+                    flags[item.setItemId] ? "border-ink bg-ink text-white" : "border-grey-200 text-grey-600 hover:border-ink hover:text-ink"
+                  }`}
+                >
+                  Solve Later
+                </button>
                 <GuessButton guessed={guessedMap[item.setItemId] ?? false} onToggle={() => void toggleGuessed(item.setItemId)} />
                 {cursor >= state.items.length - 1 ? (
                   <button

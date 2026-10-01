@@ -154,8 +154,8 @@ function ItemHeader({ item, attemptId, viewerIsOwner }: { item: MockExamAttemptI
       <div>
         <p className="text-[12px] font-bold text-grey-500">
           {item.guessed && (
-            <span role="img" aria-label="Guessed" title="Marked as a guess" className="mr-1">
-              🎲
+            <span role="img" aria-label="Guessed" title="Marked as a guess" className="mr-1 rounded border border-grey-300 px-1 text-[10px] font-semibold text-grey-600">
+              Guessed
             </span>
           )}
           {itemTitle(item)}
@@ -540,10 +540,10 @@ export default function MockExamResultView({
                             }`}
                             data-testid={`review-item-${it.setItemId}`}
                           >
-                            <span className="w-4 shrink-0 text-center">
+                            <span className="w-[52px] shrink-0 text-center">
                               {it.guessed ? (
-                                <span role="img" aria-label="Guessed" data-testid={`review-guessed-${it.setItemId}`}>
-                                  🎲
+                                <span role="img" aria-label="Guessed" data-testid={`review-guessed-${it.setItemId}`} className="rounded border border-grey-300 px-1 text-[10px] font-semibold text-grey-600">
+                                  Guessed
                                 </span>
                               ) : null}
                             </span>
