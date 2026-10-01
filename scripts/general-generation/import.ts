@@ -9,6 +9,7 @@
 //   지도에 없거나 라벨이 대상 DB 에 없으면 그 skill 문항은 키워드 없이 공개되고(후보 아님) 요약에 미연결로 보고한다.
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
+import { findResidue } from "../../lib/problem-generation/residue";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -137,6 +138,8 @@ async function main() {
     const g = r.problem;
     const stimulus = g.stimulus ?? g.passage ?? "";
     const question = g.question ?? null;
+    const residue = findResidue({ passage: g.passage as string | undefined, stimulus: g.stimulus as string | undefined, question: g.question as string | undefined, options: g.options as string[] | undefined, explanation: g.explanation as string | undefined, explanationEn: (g as { explanationEn?: string }).explanationEn, statements: g.statements as string[] | undefined });
+    if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}:${x.match}`).join(", ")}`); continue; }
     const key = `${stimulus}\u0000${question ?? ""}`;
     const pool = existing.get(r.skill) ?? [];
     const same = pool.find((e) => e.key === key);

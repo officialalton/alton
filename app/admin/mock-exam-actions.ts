@@ -20,6 +20,7 @@ import {
 } from "@/lib/mock-exam/assemble";
 import { loadMockExamSetContentForStaff, type MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { fetchAlreadyUsedProblemIds } from "@/lib/mock-exam/used-problem-ids";
 
 const RW_DOMAINS = ["rw_information_ideas", "rw_craft_structure", "rw_expression_ideas", "rw_standard_english"];
 const MATH_DOMAINS = ["algebra", "advanced_math", "problem_solving_data", "geometry_trig"];
@@ -157,31 +158,6 @@ async function fetchWeights(db: ReturnType<typeof createAdminClient>, tier: Diff
       weightPct: Number(r.weight_pct),
     })),
   };
-}
-
-/** 다른(공개된) 세트가 이미 쓴 문항 id — 가능하면 겹치지 않게 피한다(사양 5절 "이상적으로 세트 간에도"). */
-async function fetchAlreadyUsedProblemIds(db: ReturnType<typeof createAdminClient>, tier: DifficultyTier): Promise<Set<string>> {
-  const { data: publishedSets, error } = await db
-    .from("mock_exam_sets")
-    .select("id")
-    .eq("difficulty_tier", tier)
-    .eq("status", "published");
-  if (error) throw new Error(error.message);
-  const setIds = (publishedSets ?? []).map((s) => s.id);
-  if (setIds.length === 0) return new Set();
-  const ids = new Set<string>();
-  for (let from = 0; ; from += 1000) {
-    const { data: page, error: pageErr } = await db
-      .from("mock_exam_set_items")
-      .select("problem_id")
-      .in("exam_set_id", setIds)
-      .order("id", { ascending: true })
-      .range(from, from + 999);
-    if (pageErr) throw new Error(pageErr.message);
-    for (const i of page ?? []) ids.add(i.problem_id);
-    if (!page || page.length < 1000) break;
-  }
-  return ids;
 }
 
 /** 노출 이력(세트 포함 횟수 + 응답 저장 횟수) — 조립 시 덜 노출된 문항을 우선한다. */
