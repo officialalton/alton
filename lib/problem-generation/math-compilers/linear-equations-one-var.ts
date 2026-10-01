@@ -138,8 +138,11 @@ export function generateLinearOneVarModel(params: { difficulty: LinearOneVarDiff
       { value: sumAC !== 0 ? diffDB / sumAC : NaN, kind: "sign_error", reason: "x항을 이항할 때 부호를 바꾸지 않았다(계수를 뺀 게 아니라 더했다)." },
       { value: sumAC !== 0 ? sumDB / sumAC : NaN, kind: "formula_misuse", reason: "상수항과 x항 이항 둘 다 부호를 바꾸지 않았다." },
       { value: -x, kind: "condition_ignored", reason: "맞게 계산한 뒤 최종 답의 부호를 반대로 적었다." },
+      // 2026-09-30 — 후보가 3개 미만으로 남아 30회 재시도가 모두 소진되던 드문 시드(예: hard 시드 336)를 막는 예비 오류 경로.
+      { value: a !== 0 ? diffDB / a : NaN, kind: "condition_ignored", reason: "x항을 한쪽으로 모을 때 c x 를 이항하지 않고 a 로만 나눴다." },
+      { value: c !== 0 ? diffDB / c : NaN, kind: "condition_ignored", reason: "x항을 한쪽으로 모을 때 a x 를 이항하지 않고 c 로만 나눴다." },
     ];
-    const candidates = rawCandidates.filter((cand) => Number.isInteger(cand.value));
+    const candidates = rawCandidates.filter((cand) => Number.isInteger(cand.value) && Math.abs(cand.value) <= 500);
     const seen = new Set<number>([x]);
     const distractors: { value: string; kind: DistractorKind; reason: string }[] = [];
     for (const cand of candidates) {
@@ -148,7 +151,7 @@ export function generateLinearOneVarModel(params: { difficulty: LinearOneVarDiff
       seen.add(cand.value);
       distractors.push({ value: fmt(cand.value), kind: cand.kind, reason: cand.reason });
     }
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서도 3개 미만이면 오답 부족으로 반환하지 않고 아래에서 throw.
     return { kind: "solve", skillCode: "linear_equations_one_var", difficulty: params.difficulty, a, b, c, d, x, correctAnswer, distractors: distractors.slice(0, 3) };
   }
   throw new Error("linear_equations_one_var: 오답 후보 생성에 실패했습니다.");

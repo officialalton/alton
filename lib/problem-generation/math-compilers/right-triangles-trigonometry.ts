@@ -96,7 +96,7 @@ export function generateRightTriModel(params: {
         { value: fmt(Math.abs(leg1 - leg2)), kind: "geometry_misapplied", reason: "한 직각변을 빗변으로 착각해 나머지 변을 빼서 계산했다." },
       ];
       const distractors = pickUnique(cands, fmt(hyp));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "right_triangles_trigonometry", difficulty: params.difficulty, questionKind, leg1, leg2, hyp, correctAnswer: fmt(hyp), distractors };
     }
 
@@ -108,7 +108,7 @@ export function generateRightTriModel(params: {
         { value: fmt(leg1), kind: "condition_ignored", reason: "구해야 할 다른 직각변이 주어진 직각변과 같다고 착각했다." },
       ];
       const distractors = pickUnique(cands, fmt(leg2));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "right_triangles_trigonometry", difficulty: params.difficulty, questionKind, leg1, leg2, hyp, correctAnswer: fmt(leg2), distractors };
     }
 
@@ -135,7 +135,7 @@ export function generateRightTriModel(params: {
       { value: fmtFrac(correctDen, correctNum), kind: "formula_misuse", reason: "분자와 분모를 뒤집어(역수) 계산했다." },
     ];
     const distractors = pickUnique(cands, correctAnswer);
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return {
       skillCode: "right_triangles_trigonometry", difficulty: params.difficulty, questionKind,
       leg1, leg2, hyp, trigFn, atVertex, correctAnswer, distractors,

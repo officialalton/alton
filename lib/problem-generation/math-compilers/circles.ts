@@ -105,7 +105,7 @@ export function generateCirclesModel(params: {
         { value: fmt(2 * radius), kind: "unit_error", reason: "π를 빼먹고 지름(2r)만 답으로 썼다." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, radius, correctAnswer: fmtPi(coeff), distractors };
     }
 
@@ -119,7 +119,7 @@ export function generateCirclesModel(params: {
         { value: fmt(diameter), kind: "unit_error", reason: "π를 빼먹고 지름만 답으로 썼다." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, radius, diameter, correctAnswer: fmtPi(coeff), distractors };
     }
 
@@ -135,7 +135,7 @@ export function generateCirclesModel(params: {
         { value: fmtPi((2 * radius * (360 - angle)) / 360), kind: "condition_ignored", reason: "주어진 중심각이 아니라 나머지 각(360°−angle)의 비율로 계산했다." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, radius, centralAngle: angle, correctAnswer: fmtPi(coeff), distractors };
     }
 
@@ -151,7 +151,7 @@ export function generateCirclesModel(params: {
         { value: fmtPi((radius * radius * (360 - angle)) / 360), kind: "condition_ignored", reason: "주어진 중심각이 아니라 나머지 각(360°−angle)의 비율로 계산했다." },
       ];
       const distractors = pickUnique(cands, fmtPi(coeff));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, radius, centralAngle: angle, correctAnswer: fmtPi(coeff), distractors };
     }
 
@@ -164,7 +164,7 @@ export function generateCirclesModel(params: {
         { value: fmt(180 - centralAngle), kind: "condition_ignored", reason: "중심각과 원주각의 관계 대신 보각(180°에서 뺀 값) 관계를 사용했다." },
       ];
       const distractors = pickUnique(cands, fmt(centralAngle));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, inscribedAngle, centralAngle, correctAnswer: fmt(centralAngle), distractors };
     }
 
@@ -177,7 +177,7 @@ export function generateCirclesModel(params: {
         { value: fmt(180 - inscribedAngle), kind: "condition_ignored", reason: "중심각·원주각 관계 대신 보각(180°에서 뺀 값) 관계를 사용했다." },
       ];
       const distractors2 = pickUnique(cands2, fmt(inscribedAngle));
-      if (distractors2.length < 3 && attempt < 29) continue;
+      if (distractors2.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, inscribedAngle, centralAngle, correctAnswer: fmt(inscribedAngle), distractors: distractors2 };
     }
 
@@ -205,7 +205,7 @@ export function generateCirclesModel(params: {
           { value: circleEquationText(eqSquaredTerm("x", centerH + slip, "minus"), eqSquaredTerm("y", newK, "minus"), R), kind: "formula_misuse", reason: "오른쪽으로 이동한 양(dx)을 계산할 때 값을 하나 어긋나게 계산했다(산술 실수)." },
         ];
         const distractors = pickUnique(cands, correct);
-        if (distractors.length < 3 && attempt < 29) continue;
+        if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
         return { skillCode: "circles", difficulty: params.difficulty, questionKind, eqVariant, centerH, centerK, radius, shiftDx, shiftDy, correctAnswer: correct, distractors };
       }
 
@@ -219,7 +219,7 @@ export function generateCirclesModel(params: {
             { value: fmt(Math.abs(centerH)), kind: "condition_ignored", reason: "반지름 대신 중심의 x좌표를 답으로 썼다." },
           ];
           const distractors = pickUnique(cands, fmt(radius));
-          if (distractors.length < 3 && attempt < 29) continue;
+          if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
           return { skillCode: "circles", difficulty: params.difficulty, questionKind, eqVariant, centerH, centerK, radius, askFor, correctAnswer: fmt(radius), distractors };
         }
         const correct = `(${fmt(centerH)}, ${fmt(centerK)})`;
@@ -230,7 +230,7 @@ export function generateCirclesModel(params: {
           { value: `(${fmt(-centerH)}, ${fmt(-centerK)})`, kind: "sign_error", reason: "두 좌표의 부호를 모두 뒤집었다(전체 부호 오류)." },
         ];
         const distractors = pickUnique(cands, correct);
-        if (distractors.length < 3 && attempt < 29) continue;
+        if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
         return { skillCode: "circles", difficulty: params.difficulty, questionKind, eqVariant, centerH, centerK, radius, askFor, correctAnswer: correct, distractors };
       }
 
@@ -243,7 +243,7 @@ export function generateCirclesModel(params: {
         { value: circleEquationText(eqSquaredTerm("x", centerK, "minus"), eqSquaredTerm("y", centerH, "minus"), R), kind: "geometry_misapplied", reason: "중심의 x좌표와 y좌표(h와 k)를 서로 바꿔 썼다." },
       ];
       const distractors = pickUnique(cands, correct);
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "circles", difficulty: params.difficulty, questionKind, eqVariant, centerH, centerK, radius, correctAnswer: correct, distractors };
     }
   }

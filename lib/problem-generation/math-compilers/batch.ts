@@ -212,12 +212,12 @@ function buildQuality(reasons: string[]): QualityRecord {
   };
 }
 
-type AttemptTiming = { compileMs: number; renderCheckMs: number };
+export type AttemptTiming = { compileMs: number; renderCheckMs: number };
 
 /** 계산형 컴파일러 한 문항 시도 — 모델 계산 → 결정적 검사 → 표준 렌더링 검증기(checkFigure).
  * 셋 다 통과해야 채택한다. 렌더링 검증까지 여기서 실제로 돌려, 라벨 겹침 같은 결함이
  * 관리자 화면에 나가기 전에 걸리게 한다(2026-09-17 실측으로 발견한 결함 2건이 바로 이 검사로 잡힌다). */
-function attemptOne(
+export function attemptOne(
   skillCode: MathCompilerSkill,
   difficulty: LinearTwoVarDifficulty,
   timing: AttemptTiming,
@@ -504,7 +504,13 @@ export async function runMathCompilerBatch(
     if (candidatesEvaluated >= maxCandidates) { stoppedReason = "candidate_cap"; break; }
     if (Date.now() - start >= MAX_WALL_CLOCK_MS) { stoppedReason = "time_cap"; break; }
     candidatesEvaluated += 1;
-    const outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy, params.format ?? "mc", params.kind);
+    // 2026-09-30 — 컴파일러 내부 throw(오답 후보 고갈 등)가 배치 전체를 죽이지 않고 그 후보만 실패로 집계되게 한다.
+    let outcome: ReturnType<typeof attemptOne>;
+    try {
+      outcome = attemptOne(params.skillCode, params.difficulty, timing, params.figurePolicy, params.format ?? "mc", params.kind);
+    } catch (e) {
+      outcome = { ok: false, reason: `컴파일러 예외: ${(e as Error).message}` };
+    }
     if (!outcome.ok) {
       failures.push({ skillCode: params.skillCode, stage: "review", reason: outcome.reason, resolved: false, snippet: "" });
       continue;

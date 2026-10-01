@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   generateLinearOneVarModel,
   generateLiteralRearrangeModel,
@@ -8,6 +8,44 @@ import {
   renderWordProblemTranslateProblem,
   validateLinearOneVarModel,
 } from "./linear-equations-one-var";
+
+import { makeRng } from "../math-archetypes/rng";
+
+// 2026-09-30 — 난수에 의존하던 "오답 3개·정답과 안 겹침(100회)" 테스트가 드물게(시드 336 hard 등) 실패했다. 오답 후보가 3개 미만이면
+// 30회 재시도 후 짧은 모델을 그대로 반환하던 경로가 원인 — 이제 루프가 끝나면 throw 하고, 후보 풀도 넓혔다. 아래는 그 회귀 고정이다.
+const seeded = (seed: number) => vi.spyOn(Math, "random").mockImplementation(makeRng(seed).next);
+afterEach(() => vi.restoreAllMocks());
+
+describe("linear_equations_one_var 시드 스윕 회귀", () => {
+  it("이전에 오답 1~2개만 나오던 고정 시드들도 이제 정확히 3개의 서로 다른 오답을 낸다", () => {
+    const known: [number, "easy" | "medium" | "hard"][] = [[10757, "medium"], [336, "hard"], [3498, "hard"], [12023, "hard"], [13719, "hard"], [15640, "hard"], [15651, "hard"], [16103, "hard"]];
+    for (const [seed, difficulty] of known) {
+      seeded(seed);
+      const model = generateLinearOneVarModel({ difficulty, kind: "solve" });
+      const values = [model.correctAnswer, ...model.distractors.map((d) => d.value)];
+      expect(model.distractors, `seed ${seed}`).toHaveLength(3);
+      expect(new Set(values).size, `seed ${seed}`).toBe(4);
+      vi.restoreAllMocks();
+    }
+  });
+
+  it("모든 세부 패턴·난이도에서 3000 시드 동안 오답은 정확히 3개이고 정답·서로와 겹치지 않는다(문장제·리터럴은 2개 이상)", () => {
+    const bad: string[] = [];
+    for (const kind of ["solve", "word_problem_translate", "literal_rearrange"] as const) for (const difficulty of ["easy", "medium", "hard"] as const) {
+      const min = kind === "word_problem_translate" ? 2 : 3;
+      for (let s = 0; s < 3000; s++) {
+        seeded(s);
+        try {
+          const m = generateLinearOneVarModel({ difficulty, kind });
+          const values = [m.correctAnswer, ...m.distractors.map((d) => d.value)];
+          if (m.distractors.length < min || new Set(values).size !== values.length) bad.push(`${kind}/${difficulty}/seed${s}`);
+        } catch (e) { bad.push(`${kind}/${difficulty}/seed${s} throw ${(e as Error).message}`); }
+        vi.restoreAllMocks();
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+});
 
 describe("generateLinearOneVarModel — 결정적 계산", () => {
   it("항상 실제 방정식(a x + b = c x + d)에 들어맞는 정수해를 낸다(100회 반복)", () => {
@@ -22,6 +60,7 @@ describe("generateLinearOneVarModel — 결정적 계산", () => {
   });
 
   it("오답은 항상 정확히 3개이고 정답과 겹치지 않으며, 실제 오류 경로 종류에서만 나온다(100회 반복, 전 난이도)", () => {
+    seeded(20260930); // 난수 고정(재현 가능)
     const difficulties = ["easy", "medium", "hard"] as const;
     const allowedKinds = new Set(["sign_error", "formula_misuse", "condition_ignored"]);
     for (let i = 0; i < 100; i++) {

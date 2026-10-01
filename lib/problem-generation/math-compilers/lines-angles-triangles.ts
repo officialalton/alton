@@ -73,7 +73,7 @@ export function generateLinesAnglesModel(params: {
         { value: fmt(180 - angleA), kind: "formula_misuse", reason: "두 각 중 하나(B)를 빠뜨리고 180에서 A만 뺐다." },
       ];
       const distractors = pickUnique(cands, fmt(angleC));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind, angleA, angleB, correctAnswer: fmt(angleC), distractors };
     }
 
@@ -88,7 +88,7 @@ export function generateLinesAnglesModel(params: {
         { value: fmt(180 - angleA), kind: "formula_misuse", reason: "원격 내각의 합이 아니라 한 각의 보각을 계산했다." },
       ];
       const distractors = pickUnique(cands, fmt(exterior));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind, angleA, angleB, correctAnswer: fmt(exterior), distractors };
     }
 
@@ -101,7 +101,7 @@ export function generateLinesAnglesModel(params: {
         { value: fmt((180 + apexAngle) / 2), kind: "sign_error", reason: "180에서 꼭지각을 빼지 않고 오히려 더한 뒤 2로 나눴다." },
       ];
       const distractors = pickUnique(cands, fmt(baseAngle));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return { skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind, apexAngle, correctAnswer: fmt(baseAngle), distractors };
     }
 
@@ -132,7 +132,7 @@ export function generateLinesAnglesModel(params: {
         { value: fmt(noScale), kind: "condition_ignored", reason: "두 삼각형이 서로 다른 크기(닮음)임을 무시하고 합동으로 착각해 배율을 적용하지 않았다." },
       ];
       const distractors = pickUnique(cands, fmt(correct));
-      if (distractors.length < 3 && attempt < 29) continue;
+      if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
       return {
         skillCode: "lines_angles_triangles", difficulty: params.difficulty, questionKind,
         sideAB, sideBC, sideCA, sideDE, scaleNum, scaleDenom,

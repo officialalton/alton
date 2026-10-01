@@ -96,7 +96,7 @@ function generatePolynomialModel(difficulty: EquivalentExpressionsDifficulty): P
       seen.add(text);
       distractors.push({ value: text, kind: cand.kind, reason: cand.reason });
     }
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return { kind: "polynomial_distribution", skillCode: "equivalent_expressions", difficulty, a, b, c, d, m, n, correctAnswer, distractors: distractors.slice(0, 3) };
   }
   throw new Error("equivalent_expressions(polynomial_distribution): 오답 후보 생성에 실패했습니다.");
@@ -154,7 +154,7 @@ function generateRationalModel(difficulty: EquivalentExpressionsDifficulty): Rat
       seen.add(cand.value);
       distractors.push(cand);
     }
-    if (distractors.length < 3 && attempt < 29) continue;
+    if (distractors.length < 3) continue; // 2026-09-30 — 마지막 시도에서 오답이 모자라면 짧은 모델을 반환하지 않고 루프 뒤 throw 로 넘긴다(배치는 그 후보만 실패 처리).
     return { kind: "rational_equivalence", skillCode: "equivalent_expressions", difficulty, A, B, p, numM, numN, correctAnswer, distractors: distractors.slice(0, 3) };
   }
   throw new Error("equivalent_expressions(rational_equivalence): 오답 후보 생성에 실패했습니다.");
