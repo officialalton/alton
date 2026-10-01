@@ -1,0 +1,42 @@
+{
+ "runId": "lit-hard-v4-pilot",
+ "generated": 33,
+ "passedGenGates": 29,
+ "awaitingReview": 0,
+ "review": {
+  "adopted": 0,
+  "rejected": 0,
+  "pending": 29,
+  "rewriteEligible": 0
+ },
+ "adopted": 0,
+ "adoptedByDifficulty": {
+  "easy": 0,
+  "medium": 0,
+  "hard": 0
+ },
+ "rejectedByReason": {
+  "gen:distractor": 3,
+  "gen:render": 1
+ },
+ "rewriteEligible": [],
+ "cost": {
+  "session": {
+   "tasks": 3,
+   "items": 33,
+   "usd": 0,
+   "byStep": {
+    "generate": {
+     "tasks": 3,
+     "items": 33
+    }
+   }
+  },
+  "api": {
+   "calls": 0,
+   "items": 0,
+   "usd": 0,
+   "byStep": {}
+  }
+ }
+}

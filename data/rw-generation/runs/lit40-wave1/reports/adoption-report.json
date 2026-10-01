@@ -1,0 +1,96 @@
+{
+ "runId": "lit40-wave1",
+ "generated": 400,
+ "passedGenGates": 329,
+ "awaitingReview": 0,
+ "review": {
+  "adopted": 152,
+  "rejected": 177,
+  "pending": 0,
+  "rewriteEligible": 39
+ },
+ "adopted": 152,
+ "adoptedByDifficulty": {
+  "easy": 0,
+  "medium": 143,
+  "hard": 9
+ },
+ "rejectedByReason": {
+  "review:difficulty_too_easy": 147,
+  "review:distractors_not_plausible": 69,
+  "gen:distractor": 65,
+  "review:explanation_factual_error": 18,
+  "review:options_length_imbalance": 16,
+  "review:fable_multi_defensible": 7,
+  "gen:passage_schema": 5,
+  "gen:similarity": 3,
+  "review:difficulty_too_hard": 3,
+  "review:explanation_inconsistent": 2,
+  "gen:diversity": 1,
+  "review:second_answer_mismatch": 1
+ },
+ "rewriteEligible": [
+  "lit40-hard-01-014",
+  "lit40-hard-01-056",
+  "lit40-hard-01-100",
+  "lit40-medium-01-080",
+  "lit40-medium-02-005",
+  "lit40-medium-02-022",
+  "lit40-medium-02-023",
+  "lit40-medium-02-033",
+  "lit40-medium-02-036",
+  "lit40-medium-02-046",
+  "lit40-medium-02-055",
+  "lit40-medium-02-063",
+  "lit40-medium-02-070",
+  "lit40-medium-02-072",
+  "lit40-medium-02-077",
+  "lit40-medium-02-078",
+  "lit40-medium-02-079",
+  "lit40-medium-02-080",
+  "lit40-medium-02-081",
+  "lit40-medium-02-084",
+  "lit40-medium-02-092",
+  "lit40-medium-02-096",
+  "lit40-medium-02-097",
+  "lit40-medium-03-007",
+  "lit40-medium-03-011",
+  "lit40-medium-03-027",
+  "lit40-medium-03-032",
+  "lit40-medium-03-047",
+  "lit40-medium-03-048",
+  "lit40-medium-03-049",
+  "lit40-medium-03-050",
+  "lit40-medium-03-053",
+  "lit40-medium-03-054",
+  "lit40-medium-03-069",
+  "lit40-medium-03-071",
+  "lit40-medium-03-078",
+  "lit40-medium-03-084",
+  "lit40-medium-03-087",
+  "lit40-medium-03-097"
+ ],
+ "cost": {
+  "session": {
+   "tasks": 24,
+   "items": 460,
+   "usd": 0,
+   "byStep": {
+    "generate": {
+     "tasks": 20,
+     "items": 400
+    },
+    "rewrite": {
+     "tasks": 4,
+     "items": 60
+    }
+   }
+  },
+  "api": {
+   "calls": 0,
+   "items": 0,
+   "usd": 0,
+   "byStep": {}
+  }
+ }
+}

@@ -1,0 +1,881 @@
+{
+ "runId": "lit40-wave1",
+ "preparedBatches": [
+  "lit40-medium-01",
+  "lit40-hard-01",
+  "lit40-medium-02",
+  "lit40-medium-03"
+ ],
+ "tasks": [
+  {
+   "taskId": "gen-lit40-medium-01-01",
+   "kind": "generate",
+   "batchId": "lit40-medium-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-01-01.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-01-01.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-01-02",
+   "kind": "generate",
+   "batchId": "lit40-medium-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-01-02.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-01-02.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-01-03",
+   "kind": "generate",
+   "batchId": "lit40-medium-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-01-03.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-01-03.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-01-04",
+   "kind": "generate",
+   "batchId": "lit40-medium-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-01-04.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-01-04.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-01-05",
+   "kind": "generate",
+   "batchId": "lit40-medium-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-01-05.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-01-05.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-hard-01-01",
+   "kind": "generate",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-hard-01-01.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-01-01.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-hard-01-02",
+   "kind": "generate",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-hard-01-02.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-01-02.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-hard-01-03",
+   "kind": "generate",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-hard-01-03.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-01-03.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-hard-01-04",
+   "kind": "generate",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-hard-01-04.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-01-04.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-hard-01-05",
+   "kind": "generate",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-hard-01-05.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-hard-01-05.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rev-fable_judge-001",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-001.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-001",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-001.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-001",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-001.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-002",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-002.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-002",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-002.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-002",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-002.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-003",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-003.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-003.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-003",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-003.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-003.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-003",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-003.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-003.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-004",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-004.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-004.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-004",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-004.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-004.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-004",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-004.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-004.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-005",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-005.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-005.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-005",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-005.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-005.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-005",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-005.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-005.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-006",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-006.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-006.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-006",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-006.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-006.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-006",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-006.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-006.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-007",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-007.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-007.result.json",
+   "suggestedModel": "fable",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-007",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-007.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-007.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-007",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-007.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-007.result.json",
+   "suggestedModel": "sonnet",
+   "items": 20,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-008",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-008.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-008.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-008",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-008.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-008.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-008",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-008.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-008.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rewrite-001",
+   "kind": "rewrite",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-001.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-001.result.json",
+   "suggestedModel": "opus",
+   "items": 15,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rewrite-002",
+   "kind": "rewrite",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-002.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-002.result.json",
+   "suggestedModel": "opus",
+   "items": 15,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rewrite-003",
+   "kind": "rewrite",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-003.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-003.result.json",
+   "suggestedModel": "opus",
+   "items": 15,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rewrite-004",
+   "kind": "rewrite",
+   "batchId": "lit40-medium-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-004.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-004.result.json",
+   "suggestedModel": "opus",
+   "items": 15,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rev-fable_judge-009",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-009.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-009.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-009",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-009.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-009.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-009",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-009.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-009.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-010",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-010.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-010.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-010",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-010.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-010.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-010",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-010.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-010.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-011",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-011.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-011.result.json",
+   "suggestedModel": "fable",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-011",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-011.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-011.result.json",
+   "suggestedModel": "opus",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-011",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-011.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-011.result.json",
+   "suggestedModel": "sonnet",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "gen-lit40-medium-02-01",
+   "kind": "generate",
+   "batchId": "lit40-medium-02",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-02-01.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-01.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-02-02",
+   "kind": "generate",
+   "batchId": "lit40-medium-02",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-02-02.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-02.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-02-03",
+   "kind": "generate",
+   "batchId": "lit40-medium-02",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-02-03.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-03.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-02-04",
+   "kind": "generate",
+   "batchId": "lit40-medium-02",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-02-04.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-04.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-02-05",
+   "kind": "generate",
+   "batchId": "lit40-medium-02",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-02-05.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-02-05.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-03-01",
+   "kind": "generate",
+   "batchId": "lit40-medium-03",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-03-01.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-03-01.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-03-02",
+   "kind": "generate",
+   "batchId": "lit40-medium-03",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-03-02.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-03-02.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-03-03",
+   "kind": "generate",
+   "batchId": "lit40-medium-03",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-03-03.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-03-03.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-03-04",
+   "kind": "generate",
+   "batchId": "lit40-medium-03",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-03-04.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-03-04.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "gen-lit40-medium-03-05",
+   "kind": "generate",
+   "batchId": "lit40-medium-03",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/gen-lit40-medium-03-05.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/gen-lit40-medium-03-05.result.json",
+   "suggestedModel": "opus",
+   "items": 20,
+   "status": "ingested"
+  },
+  {
+   "taskId": "rev-fable_judge-012",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-012.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-012.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-012",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-012.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-012.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-012",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-012.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-012.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-013",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-013.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-013.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-013",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-013.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-013.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-013",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-013.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-013.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-014",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-014.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-014.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-014",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-014.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-014.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-014",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-014.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-014.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-015",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-015.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-015.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-015",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-015.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-015.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-015",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-015.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-015.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-016",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-016.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-016.result.json",
+   "suggestedModel": "fable",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-016",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-016.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-016.result.json",
+   "suggestedModel": "opus",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-016",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-016.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-016.result.json",
+   "suggestedModel": "sonnet",
+   "items": 19,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-017",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-017.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-017.result.json",
+   "suggestedModel": "fable",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-017",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-017.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-017.result.json",
+   "suggestedModel": "opus",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-017",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-017.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-017.result.json",
+   "suggestedModel": "sonnet",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-018",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-018.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-018.result.json",
+   "suggestedModel": "fable",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-018",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-018.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-018.result.json",
+   "suggestedModel": "opus",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-018",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-018.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-018.result.json",
+   "suggestedModel": "sonnet",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-019",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-019.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-019.result.json",
+   "suggestedModel": "fable",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-019",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-019.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-019.result.json",
+   "suggestedModel": "opus",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-019",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-019.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-019.result.json",
+   "suggestedModel": "sonnet",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-fable_judge-020",
+   "kind": "review",
+   "role": "fable_judge",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-fable_judge-020.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-020.result.json",
+   "suggestedModel": "fable",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-second_solver-020",
+   "kind": "review",
+   "role": "second_solver",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-second_solver-020.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-020.result.json",
+   "suggestedModel": "opus",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rev-explanation_audit-020",
+   "kind": "review",
+   "role": "explanation_audit",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rev-explanation_audit-020.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-020.result.json",
+   "suggestedModel": "sonnet",
+   "items": 18,
+   "status": "pending"
+  },
+  {
+   "taskId": "rewrite-005",
+   "kind": "rewrite",
+   "batchId": "lit40-hard-01",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-005.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-005.result.json",
+   "suggestedModel": "opus",
+   "items": 12,
+   "status": "pending"
+  },
+  {
+   "taskId": "rewrite-006",
+   "kind": "rewrite",
+   "batchId": "lit40-medium-02",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-006.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-006.result.json",
+   "suggestedModel": "opus",
+   "items": 12,
+   "status": "pending"
+  },
+  {
+   "taskId": "rewrite-007",
+   "kind": "rewrite",
+   "batchId": "lit40-medium-03",
+   "path": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/tasks/rewrite-007.task.json",
+   "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rewrite-007.result.json",
+   "suggestedModel": "opus",
+   "items": 12,
+   "status": "pending"
+  }
+ ]
+}

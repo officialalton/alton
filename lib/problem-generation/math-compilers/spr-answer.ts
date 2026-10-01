@@ -58,16 +58,24 @@ function truncateTo(abs: number, decimals: number): string {
   return trimZeros(t.toFixed(decimals));
 }
 
-/** 소수 표기 후보들 — 정확한 값, 그리고 4→0자리까지 반올림·절사한 값(SAT 규칙: 소수는
- * 끝까지 안 들어가면 반올림하거나 그 자리에서 끊어도 정답으로 인정한다). */
-function decimalCandidates(abs: number): string[] {
-  const out = new Set<string>();
-  out.add(trimZeros(abs.toFixed(6)));
+/** 소수 표기 후보들. SAT 규칙: 정확한 값이 그리드에 들어가면 그 값만 정답이다. 정확한 값이
+ * 그리드에 안 들어갈 때만(무한소수 등) 그리드를 '꽉 채운' 반올림 값과 절사 값을 인정한다 —
+ * 그리드보다 짧게 끊은 값(예: 3.5 의 4·3, 28/3 의 9.3)은 틀린 답이라 정답 목록에 넣지 않는다
+ * (2026-10-01 수학 자료 파일럿에서 발견: 이전에는 0~4자리 반올림·절사를 전부 넣어 틀린 학생 답이 맞음으로 처리됐다). */
+function decimalCandidates(abs: number, negative = false): string[] {
+  const sign = negative ? "-" : "";
+  const exact = trimZeros(abs.toFixed(6));
+  if (Math.abs(Number(exact) - abs) < 1e-9 && fitsSprFormat(sign + exact)) return [exact];
+  // 정확한 값이 안 들어간다: 그리드에 들어가는 가장 긴 소수 자리 수 하나만 쓴다(꽉 채운 값).
   for (let d = 4; d >= 0; d--) {
-    out.add(abs.toFixed(d));
-    out.add(truncateTo(abs, d));
+    const rounded = abs.toFixed(d);
+    if (!fitsSprFormat(sign + rounded)) continue;
+    const out = new Set<string>([rounded, truncateTo(abs, d)]);
+    // 정수로 떨어지는 자리까지 줄여야 들어가는 경우(d=0)는 오답이 되기 쉬워 허용하지 않는다.
+    if (d === 0) return [];
+    return Array.from(out);
   }
-  return Array.from(out);
+  return [];
 }
 
 export function sprFromInteger(n: number): SprAnswerModel {
@@ -79,7 +87,7 @@ export function sprFromInteger(n: number): SprAnswerModel {
 function sprFromDecimalOnly(value: number): SprAnswerModel {
   const neg = value < 0;
   const forms = new Set<string>();
-  for (const d of decimalCandidates(Math.abs(value))) {
+  for (const d of decimalCandidates(Math.abs(value), neg)) {
     const signed = neg ? `-${d}` : d;
     if (fitsSprFormat(signed)) forms.add(signed);
   }
@@ -108,7 +116,7 @@ export function sprFromFraction(num: number, den: number): SprAnswerModel {
   for (const f of [fracStr, unreducedFracStr]) {
     if (f && fitsSprFormat(f)) forms.add(f);
   }
-  for (const d of decimalCandidates(Math.abs(value))) {
+  for (const d of decimalCandidates(Math.abs(value), neg)) {
     const signed = neg ? `-${d}` : d;
     if (fitsSprFormat(signed)) forms.add(signed);
   }

@@ -1,0 +1,900 @@
+{
+ "taskId": "gen-lit40-hard-01-02",
+ "passed": [
+  {
+   "candidateId": "lit40-hard-01-021",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-021",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "hard",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 20,
+     "genre": "personal_essay",
+     "pov": "second",
+     "styleEra": "late_20c",
+     "names": [
+      "Burak",
+      "Yuto"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "japanese"
+     ],
+     "locale": "Hokkaido",
+     "setting": "a cemetery gate",
+     "relationship": "two musicians in a failing duo",
+     "conflict": "about an object that belonged to someone gone",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a cemetery gate in Hokkaido; two musicians in a failing duo about an object that belonged to someone gone"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When you reach the cemetery gate above Otaru in February, Burak is already there, holding the metronome that belonged to your old teacher. For eleven years the three of you rehearsed to its dry tick, and since the funeral neither of you has set it going. Yuto, he says, and offers it to you, as he has twice before, and twice before you have pushed it back into his gloved hands. Your duo has lost its booking at the hotel bar; lately you have both been playing a little ahead of each other, a little behind, as if each of you were listening for a different beat. Snow collects on the iron bars. Burak winds the metronome, then stops before releasing the arm. Neither of you says aloud who it was that kept you together. Walking down the hill afterward, you notice that the two of you have fallen into step without trying, and you do not mention it, and neither does he.",
+    "question": "In the text, the teacher's metronome most likely symbolizes",
+    "options": [
+     "the shared sense of timing that the duo relied on and has now lost.",
+     "a burden of grief that Burak hopes to escape by handing it to Yuto.",
+     "the formal training that the two musicians believe they have outgrown.",
+     "a valuable keepsake that each man feels the other deserves to own."
+    ],
+    "correct_letter": "A",
+    "explanation": "메트로놈은 세 사람이 11년간 함께 연주한 박자의 기준이었고, 장례 후 아무도 그것을 작동시키지 못한다. 이후 두 사람이 서로 앞서고 뒤처지며 '다른 박자'를 듣는 듯 연주한다는 서술은 함께 맞추던 호흡을 잃었음을 보여 준다. 마지막에 저절로 발걸음이 맞는 장면도 같은 의미를 뒷받침하므로 A가 정답이다. B는 건네는 행동만 보고 슬픔 회피로 읽은 표면 해석이고, C와 D는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "restrained"
+   ],
+   "devices": [
+    "symbolism",
+    "second-person narration",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-022",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-022",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 21,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Waya",
+      "Kamal"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a night bus",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "while waiting for important news",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a night bus in Albuquerque; a young apprentice and a master carpenter while waiting for important news"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Would the call come before the bus reached Central Avenue? Waya kept turning his phone face down on his knee and then face up again. Beside him, Kamal sat with his hands folded over the toolbag, his knuckles scarred from thirty years of chisels. The bid for the church restoration had gone in a month ago; if it was accepted, Waya would cut his first joints on a job that mattered. Kamal had said nothing about it all evening. But when the bus jolted over a pothole, he steadied the bag before Waya could, and Waya saw that the old man's thumb had been running along the same seam of canvas for miles, worrying a groove into the cloth as if it were a board that would not come true. Waya looked out at the dark storefronts and let him keep at it.",
+    "question": "As used in the text, the phrase “a board that would not come true” most nearly suggests",
+    "options": [
+     "that Kamal considers the toolbag poorly made and in need of repair.",
+     "that Kamal is bored by the long ride and is idly passing the time.",
+     "that Kamal is anxiously working at an uncertainty he cannot fix.",
+     "that Kamal is quietly showing Waya how to test the grain of wood."
+    ],
+    "correct_letter": "C",
+    "explanation": "목수에게 'true'하지 않은 판재는 아무리 다듬어도 바로 서지 않는 나무를 뜻한다. Kamal은 저녁 내내 입찰 이야기를 하지 않지만, 같은 솔기를 몇 마일 동안 문지르는 행동으로 불안을 드러낸다. 따라서 이 비유는 그가 해결할 수 없는 불확실성을 붙들고 초조해한다는 뜻이므로 C가 정답이다. A와 D는 목공 표현을 글자 그대로 읽은 오독이고, B는 행동의 긴장감을 놓친 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "quiet"
+   ],
+   "devices": [
+    "simile",
+    "characterization through action"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-023",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-023",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 22,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Zeynep",
+      "Saga"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "dutch_nordic"
+     ],
+     "locale": "Rotterdam",
+     "setting": "a movie theater in the off-season",
+     "relationship": "a teacher and a student who will not speak",
+     "conflict": "about what to tell a younger sibling",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a movie theater in the off-season in Rotterdam; a teacher and a student who will not speak about what to tell a younger sibling"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Damp velvet and old butter: the closed cinema near the Maas smelled of every winter it had survived. Zeynep had borrowed the key from the owner because Saga refused to talk at school, and here, at least, no one would pass the door. They sat in the fourth row. Saga's little brother would be home at six, expecting to hear whether their father was coming back from Izmir, and Saga had rehearsed two different answers on the tram. Neither of them mentioned this. Zeynep talked about the projector, about how the old operator used to thread film by hand. Saga nodded, watching the blank screen, which hung in front of them like a page left for someone else to write. When the radiator ticked, both of them glanced at the clock above the exit.",
+    "question": "As used in the text, the phrase “like a page left for someone else to write” most nearly suggests",
+    "options": [
+     "that the cinema has been abandoned and will not show films again.",
+     "that Saga wishes she could become a writer rather than a student.",
+     "that Zeynep hopes a film will help Saga forget her family worries.",
+     "that the answer owed to the brother remains unformed by either of them."
+    ],
+    "correct_letter": "D",
+    "explanation": "Saga는 동생에게 할 두 가지 답을 연습했지만 두 사람 모두 그 이야기를 꺼내지 않는다. 비어 있는 스크린을 '다른 누군가가 쓰도록 남겨 둔 페이지'에 비유한 것은 아직 정해지지 않은 대답을 누구도 맡으려 하지 않는다는 뜻이다. 둘이 함께 시계를 보는 장면도 6시가 다가오는 압박을 드러내므로 D가 정답이다. A는 극장을 글자 그대로 읽었고, B와 C는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "hushed",
+    "uneasy"
+   ],
+   "devices": [
+    "simile",
+    "sensory imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-024",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-024",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 23,
+     "genre": "poetry",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Errol",
+      "Consuelo"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "spanish_iberian"
+     ],
+     "locale": "Kingston",
+     "setting": "a stone bridge",
+     "relationship": "a father and his stubborn son",
+     "conflict": "after a misunderstood gift",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a stone bridge in Kingston; a father and his stubborn son after a misunderstood gift"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I gave you the fishing rod on your twelfth birthday, Errol,\nand you leaned it in the corner like a broom.\nConsuelo said you wanted books. I heard her\nthe way the river hears a pebble.\nNow we stand on the stone bridge over the Hope,\nyou with your satchel, I with nothing in my hands,\nand neither of us looks down at the water\nwhere I used to fish at your age.\nYou point to a heron, stiff as a nail.\nI almost tell you that my father gave me nothing,\nthat the rod was my whole vocabulary.\nInstead I count the stones in the railing,\neach one set by someone who did not explain it.",
+    "question": "As used in the text, the phrase “the way the river hears a pebble” most nearly suggests",
+    "options": [
+     "that the speaker took in Consuelo's words without changing his course.",
+     "that the speaker found Consuelo's remark sharp and painful to accept.",
+     "that Consuelo spoke so softly the speaker could not make out her words.",
+     "that the speaker and Consuelo often argued by the river about Errol."
+    ],
+    "correct_letter": "A",
+    "explanation": "강은 조약돌이 떨어져도 잠깐 물결이 일 뿐 흐름을 바꾸지 않는다. 화자는 아들이 책을 원한다는 Consuelo의 말을 들었지만 여전히 낚싯대를 선물했고, 그것이 자신의 유일한 '어휘'였다고 고백한다. 즉 말을 듣긴 했으나 행동은 바뀌지 않았다는 뜻이므로 A가 정답이다. B는 충격을, C는 소리 크기를 비유의 뜻으로 오해한 것이고, D는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "regretful",
+    "reticent"
+   ],
+   "devices": [
+    "simile",
+    "imagery",
+    "direct address"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-025",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-025",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 24,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Piper",
+      "Lucia"
+     ],
+     "nameCultures": [
+      "english",
+      "spanish_iberian"
+     ],
+     "locale": "Galicia",
+     "setting": "a school gymnasium",
+     "relationship": "a captain and a stowaway",
+     "conflict": "when two traditions have to share one table",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a school gymnasium in Galicia; a captain and a stowaway when two traditions have to share one table"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Piper had captained the girls' team at our school in Vigo for three seasons, and by the night of the winter dinner she ran the gymnasium like a deck: tables in rows, chairs squared, her grandmother's empanadas at the head. Lucia had arrived from Buenos Aires in October and came along that evening without being on any list; I think she slipped in behind the volunteers carrying folding chairs. She brought a tray of alfajores and set it down, hesitating, at the far corner. I watched Piper notice it. She said nothing. She lifted her grandmother's platter and slid it down the table until the two trays touched, then pulled up a chair at that end, the wrong end by her own rules, and sat. For the rest of the night the table listed toward Lucia's corner, a boat trimmed to an unexpected weight, and no one tried to set it straight.",
+    "question": "As used in the text, the phrase “a boat trimmed to an unexpected weight” most nearly suggests",
+    "options": [
+     "that the table was overloaded with food and close to collapsing.",
+     "that the gathering had rebalanced itself around the newcomer.",
+     "that Piper had lost control of the dinner she carefully planned.",
+     "that the guests were uneasy and wished Lucia had stayed home."
+    ],
+    "correct_letter": "B",
+    "explanation": "Piper는 체육관을 배의 갑판처럼 엄격히 정돈했지만, Lucia의 쟁반을 보고 말없이 할머니의 접시를 옮겨 붙이고 자신의 규칙상 '잘못된' 끝자리에 앉는다. 배가 새 무게에 맞춰 균형을 잡는다는 비유는 모임 전체가 새로 온 사람을 중심으로 다시 자리 잡았다는 뜻이므로 B가 정답이다. A는 비유를 물리적으로 읽은 오독이다. C와 D는 기운 테이블을 실패나 불편으로 본 표면 해석으로, 아무도 바로잡지 않았다는 서술과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "observant"
+   ],
+   "devices": [
+    "metaphor",
+    "extended metaphor"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-026",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-026",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "hard",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 25,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Anh",
+      "Shira"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "hebrew_jewish"
+     ],
+     "locale": "Manila",
+     "setting": "a ship's galley",
+     "relationship": "a new teacher and a wary student",
+     "conflict": "when the plan works and nobody feels better",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a ship's galley in Manila; a new teacher and a wary student when the plan works and nobody feels better"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three rules governed the galley of the training ship docked at Manila that summer: knives point down, nothing left on the burners, and no one cries where the cook can see. I was nineteen, newly hired to teach English to the cadets, and Anh, the cook, let me hold class at his steel tables between meals. Shira, the quietest cadet, would not answer me for weeks. So I made a plan. I asked her to translate Anh's recipes for the others, and she did, fluently, in front of everyone. The cadets applauded. Anh grinned. Shira folded the recipe card into smaller and smaller squares until it was the size of a stamp. That night I scrubbed the same pot three times. The plan had worked, I kept telling myself; the success sat in me like a meal eaten standing up.",
+    "question": "As used in the text, the phrase “like a meal eaten standing up” most nearly suggests",
+    "options": [
+     "that the narrator was too busy teaching to sit down and eat properly.",
+     "that the narrator felt physically ill from rough conditions aboard ship.",
+     "that the narrator's achievement felt hasty and gave no real satisfaction.",
+     "that the narrator was eager to celebrate the success with the whole crew."
+    ],
+    "correct_letter": "C",
+    "explanation": "계획은 성공해 박수가 나왔지만, Shira는 레시피 카드를 우표 크기까지 접으며 불편함을 드러낸다. 화자가 같은 냄비를 세 번 닦고 '성공했다'고 스스로를 설득하는 모습도 마음이 편치 않음을 보여 준다. 서서 급히 먹은 식사의 비유는 성공이 허겁지겁 지나가 아무런 포만감을 주지 않았다는 뜻이므로 C가 정답이다. A와 B는 비유를 글자 그대로 읽었고, D는 화자의 불편한 심정과 반대된다."
+   },
+   "notes": [],
+   "tone": [
+    "uneasy",
+    "self-critical"
+   ],
+   "devices": [
+    "simile",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-032",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-032",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 31,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Fiorella",
+      "Anneke"
+     ],
+     "nameCultures": [
+      "italian",
+      "dutch_nordic"
+     ],
+     "locale": "Bologna",
+     "setting": "a train-station cafe",
+     "relationship": "a brother and sister reading their mother's letters",
+     "conflict": "while one of them prepares to leave for good",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a train-station cafe in Bologna; a brother and sister reading their mother's letters while one of them prepares to leave for good"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Two cups of espresso cooled on the zinc counter of the station cafe in Bologna while Fiorella untied the ribbon around their mother's letters. Anneke's train to Rotterdam left at 4:10, and her suitcase held everything she meant to keep. They read the first letters aloud, laughing at the spelling, at the recipes copied into the margins, at a long complaint about a neighbor's goat. Fiorella did the voices. Then Anneke unfolded one dated the spring she had first gone away, years ago, and read it silently. Fiorella waited for the voice, and none came. Anneke set the page face down, squared it against the others, and picked up her ticket, turning it over as though it might list a different time. Fiorella retied the ribbon slowly, making the bow twice.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From bitter resentment of the mother to forgiving acceptance of her flaws",
+     "From playful shared reminiscence to a hushed tension about the departure",
+     "From anxious haste about the train to relief that there is time to spare",
+     "From detached curiosity about the letters to open grief expressed in tears"
+    ],
+    "correct_letter": "B",
+    "explanation": "전반부에서 두 사람은 편지를 소리 내어 읽으며 철자와 염소 이야기에 웃고, Fiorella는 목소리 연기까지 한다. Anneke가 처음 떠났던 봄의 편지를 말없이 읽는 순간부터 웃음은 사라지고, 기차표를 뒤집어 보거나 리본을 천천히 두 번 묶는 동작으로 긴장이 드러난다. 따라서 장난스러운 회상에서 이별을 앞둔 조용한 긴장으로 바뀌는 B가 정답이다. D는 눈물을 흘린다고 했지만 지문의 감정은 끝까지 겉으로 드러나지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "subdued"
+   ],
+   "devices": [
+    "tone shift",
+    "gesture",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-033",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-033",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 32,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Tamika",
+      "Ngozi"
+     ],
+     "nameCultures": [
+      "african_american",
+      "west_african"
+     ],
+     "locale": "Chicago's South Side",
+     "setting": "a ceramics studio",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a ceramics studio in Chicago's South Side; a widow and the delivery boy after learning how someone really earned their reputation"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Clay forgives nothing. Tamika's husband had said that to every student who walked into the studio on Seventy-First Street, and for thirty years the neighborhood had repeated it as proof of his genius. She was boxing his glazes when Ngozi arrived with the kiln parts, a lanky boy who lingered to admire the famous blue bowls on the top shelf. My uncle fired those, he said cheerfully. Your husband paid him in lunch. Tamika laughed, assuming a joke, and handed him a bowl to carry. Ngozi turned it over and showed her the mark scratched faintly into the foot, two initials that were not her husband's. She set the box of glazes down. For a while she simply moved along the shelf, bowl by bowl, turning each one over with care.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From grief-stricken mourning to cheerful celebration of the husband's work",
+     "From suspicious hostility toward Ngozi to grateful trust in his account",
+     "From affectionate pride in a legacy to a sober, searching reconsideration",
+     "From casual indifference about the bowls to an outraged public accusation"
+    ],
+    "correct_letter": "C",
+    "explanation": "도입부는 남편의 말이 동네에서 천재성의 증거로 반복되었다고 전하며 유산에 대한 자부심을 보여 준다. Tamika는 처음에 Ngozi의 말을 농담으로 여겨 웃지만, 그릇 바닥의 다른 이니셜을 본 뒤 상자를 내려놓고 그릇을 하나하나 뒤집어 본다. 이 변화는 분노가 아니라 차분히 사실을 다시 따져 보는 태도이므로 C가 정답이다. D는 공개적으로 비난한다고 했지만 그녀는 아무 말도 하지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "proud",
+    "sobered"
+   ],
+   "devices": [
+    "tone shift",
+    "irony",
+    "characterization through action"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-034",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-034",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "poetry",
+    "seed": {
+     "index": 33,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Thida",
+      "Neema"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "east_south_african"
+     ],
+     "locale": "Surabaya",
+     "setting": "a language school classroom",
+     "relationship": "a farmer and a surveyor from the city",
+     "conflict": "over an invitation one of them refuses",
+     "openingStyle": "과거를 회상하는 문장으로 시작('Years later', 'Once' 등)",
+     "topicSeed": "a language school classroom in Surabaya; a farmer and a surveyor from the city over an invitation one of them refuses"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Once a week the language school in Surabaya\nlent its back classroom to anyone with a map.\nThida came from the rice terraces with mud on her sandals,\nNeema from the city office with a rolled survey,\nand for an hour they practiced polite English,\nwould you, could you, may I, laughing at the verbs.\nThen Neema asked her to the ministry dinner,\nwhere the new road would be announced.\nThida closed her notebook.\nShe studied the whiteboard where the teacher\nhad written, in blue, the word boundary,\nand did not erase it, and did not answer,\nand thanked Neema, very correctly, for the invitation.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From formal distance to growing warmth as the two practice together",
+     "From confusion about English verbs to confident mastery of the lesson",
+     "From enthusiasm about the new road to disappointment at its delay",
+     "From easy shared amusement to guarded courtesy after the invitation"
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 두 사람은 공손한 영어 표현을 연습하며 동사를 두고 함께 웃는다. 그러나 새 도로 발표 만찬 초대를 받은 뒤 Thida는 공책을 덮고 'boundary'라는 단어를 바라보며 대답 없이 '매우 정확하게' 감사만 표한다. 앞에서 연습하던 공손함이 거리를 두는 수단으로 바뀌므로 D가 정답이다. A는 변화의 방향을 거꾸로 읽은 것이고, B와 C는 지문에 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "lighthearted",
+    "guarded"
+   ],
+   "devices": [
+    "tone shift",
+    "symbolism",
+    "polysyndeton"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-035",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-035",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 34,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Fausto",
+      "Joaquim"
+     ],
+     "nameCultures": [
+      "portuguese_brazilian",
+      "portuguese_brazilian"
+     ],
+     "locale": "Porto Alegre",
+     "setting": "an apartment stairwell",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "after a mistake that only one person noticed",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "an apartment stairwell in Porto Alegre; a grandson and the grandfather's old friend after a mistake that only one person noticed"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "After my grandfather's funeral in Porto Alegre, I volunteered to carry the folding chairs back up to the fourth floor, mostly so I would not have to talk. I was Fausto, the grandson who had read the eulogy, and I was proud of it; people squeezed my arm on the stairs and said how well I had captured him. On the third landing Joaquim, his oldest friend, stopped me and took two of the chairs. Lovely speech, he said. Then, while adjusting his grip, he mentioned that my grandfather had never fished a day in his life; the river stories had been Joaquim's own, told so often over dominoes that they had changed owners. He said it lightly. He carried the chairs the rest of the way. I climbed behind him counting the steps, which I had never once counted before.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From self-satisfied pride to quiet, chastened reflection",
+     "From fresh grief over the death to amusement at Joaquim",
+     "From resentment of Joaquim to admiration for his kindness",
+     "From nervous dread about speaking to relief at its success"
+    ],
+    "correct_letter": "A",
+    "explanation": "초반에 Fausto는 추도사를 자랑스러워하고, 사람들의 칭찬을 그대로 받아들인다. Joaquim이 강 이야기가 사실 자신의 것이었다고 가볍게 알려 준 뒤, Fausto는 말없이 뒤따라 오르며 처음으로 계단 수를 센다. 이 행동은 자신의 실수를 조용히 되새기는 마음을 보여 주므로 A가 정답이다. B는 Joaquim의 가벼운 말투만 보고 웃음으로 읽은 오독이고, C는 처음부터 원망이 있었다는 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "proud",
+    "chastened"
+   ],
+   "devices": [
+    "tone shift",
+    "understatement",
+    "first-person retrospection"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-036",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-036",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 35,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Bao",
+      "Dayoung"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "korean"
+     ],
+     "locale": "Hanoi",
+     "setting": "a quiet library",
+     "relationship": "two brothers who run a failing shop",
+     "conflict": "over who should stay behind",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a quiet library in Hanoi; two brothers who run a failing shop over who should stay behind"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We met in the reading room of the national library in Hanoi because neither of us could raise his voice there. Bao, my older brother, had brought the shop's ledger, and I, Dayoung, had brought nothing but the acceptance letter from the university in Seoul. For twenty minutes we whispered like conspirators, trading jokes about the librarian's squeaking cart, about our father's handwriting in the ledger, about the cat that slept on the rice sacks. Then Bao turned to the last page, where the debts were listed, and laid my letter beside it. He did not say anything. He straightened the two papers until their edges matched exactly. I listened to the cart squeak past again and found that it no longer seemed funny at all.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From quiet hostility to open reconciliation between the brothers",
+     "From conspiratorial humor to a heavy and wordless reckoning",
+     "From hopeful planning to excited celebration of the letter",
+     "From bored restlessness to irritation at the noisy librarian"
+    ],
+    "correct_letter": "B",
+    "explanation": "처음에 형제는 공모자처럼 속삭이며 사서의 수레, 아버지의 글씨, 고양이를 두고 농담을 주고받는다. Bao가 빚이 적힌 마지막 장과 합격 편지를 나란히 놓고 말없이 가장자리를 맞추는 순간, 누가 남아야 하는지라는 무거운 현실이 드러난다. 같은 수레 소리가 더는 우습지 않다는 대비가 분위기 변화를 확인해 주므로 B가 정답이다. D는 수레 소리를 표면적으로만 읽은 오독이다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "somber"
+   ],
+   "devices": [
+    "tone shift",
+    "contrast",
+    "repetition"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-037",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-037",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 36,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Seoyeon",
+      "Mehrnaz"
+     ],
+     "nameCultures": [
+      "korean",
+      "persian_central_asian"
+     ],
+     "locale": "Accra",
+     "setting": "a radio repair shop",
+     "relationship": "a violin student and an exacting teacher",
+     "conflict": "over whether to sell a shared inheritance",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a radio repair shop in Accra; a violin student and an exacting teacher over whether to sell a shared inheritance"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Sell it, Mehrnaz said, and you will be selling the only thing he ever tuned for both of us. Seoyeon did not answer. They stood in the radio repair shop off Oxford Street in Accra, where the technician had just lifted the back from the old valve set their late teacher had left to the two of them jointly. Inside, the tubes glowed amber. Seoyeon had come with a buyer's offer folded in her violin case; her tuition was due in a week. Mehrnaz, who corrected her bowing down to the angle of a wrist, said nothing more. The technician switched the radio on. A highlife station crackled in, then a violin concerto from somewhere far off, faint and slightly flat. Both women leaned toward it at once. Seoyeon heard Mehrnaz hum the correction under her breath, and found herself, without meaning to, humming it too.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "A history of the radio is given, followed by an account of its repair.",
+     "A disagreement is stated and then settled when one woman agrees to sell.",
+     "A dispute is introduced, set aside, and complicated by a shared habit.",
+     "A teacher's lesson is presented and then rejected by a defiant student."
+    ],
+    "correct_letter": "C",
+    "explanation": "글은 라디오를 팔지 말라는 Mehrnaz의 말로 갈등을 제시하고, Seoyeon의 등록금 사정이 그 갈등을 구체화한다. 이후 두 사람 모두 말을 멈추면서 논쟁은 잠시 보류된다. 라디오에서 음정이 약간 맞지 않는 바이올린 연주가 흘러나오자 두 사람은 똑같이 몸을 기울이고 함께 교정 음을 흥얼거린다. 이 공통된 습관이 판매 결정을 더 어렵게 만들므로 C가 정답이다. B는 결론이 났다고 보았지만 지문에서 결정은 끝내 내려지지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "tense",
+    "tender"
+   ],
+   "devices": [
+    "in medias res",
+    "symbolism",
+    "parallel action"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-hard-01-039",
+   "task": "gen-lit40-hard-01-02",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-hard-01-039",
+    "batchId": "lit40-hard-01",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "hard",
+    "questionType": "text_structure",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 38,
+     "genre": "personal_essay",
+     "pov": "second",
+     "styleEra": "19c",
+     "names": [
+      "Pearl",
+      "Cecile"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a roadside diner",
+     "relationship": "a mother and her son leaving for college",
+     "conflict": "while pretending to enjoy a gift that is wrong",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a roadside diner in Port of Spain; a mother and her son leaving for college while pretending to enjoy a gift that is wrong"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Port of Spain was still dark when my mother, Pearl, drove me to the diner on the highway for one last breakfast before my flight. I am Cecile, her only child, and I was leaving for a college in Toronto. She slid a wrapped box across the table: a wool scarf in the colors of a school I had not chosen, the one she had hoped for. I thanked her and put it on at once, over a T-shirt, in the heat. She praised how it looked. We ate saltfish and bake and talked about the weather in Canada. Only on the plane did I notice that she had sewn my initials into the fringe, crooked, by hand, the work of several nights. I wore it through every winter that followed, and I never told her that I knew she knew.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "A scene of polite pretense is shown and later reframed by a discovery.",
+     "A disagreement is recalled and then settled through frank conversation.",
+     "A journey is traced in order, ending with the author's arrival at school.",
+     "A gift is criticized, and the author then explains why it was returned."
+    ],
+    "correct_letter": "A",
+    "explanation": "식당 장면에서 Cecile은 원하지 않은 학교 색의 목도리를 바로 두르고, 어머니는 잘 어울린다고 칭찬하며 둘 다 아무렇지 않은 척한다. 비행기에서 손으로 수놓은 이니셜을 발견한 뒤에야 그 선물에 담긴 어머니의 마음과 서로의 연기가 새롭게 이해된다. 따라서 겉으로 꾸민 장면이 나중의 발견으로 다시 해석되는 구조인 A가 정답이다. B는 솔직한 대화가 없었다는 점, D는 선물을 계속 착용했다는 점과 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "bittersweet"
+   ],
+   "devices": [
+    "dramatic irony",
+    "retrospective narration",
+    "reframing"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-hard-01-027",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-028",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-029",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-030",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-031",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-038",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(17단어, 다음 14)",
+    "정답만 구체적(쉼표·절 구분이 정답에만 있음)"
+   ]
+  },
+  {
+   "candidateId": "lit40-hard-01-040",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(14단어, 다음 12)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

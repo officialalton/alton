@@ -55,3 +55,32 @@ describe("spr-answer 공용 답안 모델", () => {
     expect(fitsSprFormat("abc")).toBe(false);
   });
 });
+
+describe("SPR 소수 정답 목록 — 그리드보다 짧게 끊은 값은 정답이 아니다(2026-10-01 회귀)", () => {
+  it("정확한 값이 그리드에 들어가면 그 값(과 분수 표기)만 정답이다 — 7/2 에 4·3 이 들어가면 안 된다", () => {
+    const m = sprFromFraction(7, 2);
+    expect(m.answers.sort()).toEqual(["3.5", "7/2"]);
+    expect(sprFromAnswerText("3.5")?.answers.sort()).toEqual(["3.5", "35/10", "7/2"]); // 비기약 분수 표기도 같은 값
+    expect(sprFromFraction(1, 4).answers.sort()).toEqual(["0.25", "1/4"]);
+  });
+  it("무한소수는 그리드를 꽉 채운 반올림·절사 값만 인정한다", () => {
+    expect(sprFromFraction(1, 3).answers.sort()).toEqual(["0.333", "1/3"]);
+    expect(sprFromFraction(2, 3).answers.sort()).toEqual(["0.666", "0.667", "2/3"]);
+    expect(sprFromFraction(28, 3).answers.every((a) => a === "28/3" || a === "9.333")).toBe(true);
+  });
+  it("음수도 같은 규칙(부호 포함 6자 그리드)", () => {
+    expect(sprFromFraction(-7, 2).answers.sort()).toEqual(["-3.5", "-7/2"]);
+    expect(sprFromFraction(-1, 3).answers.every((a) => a === "-1/3" || a.startsWith("-0.33"))).toBe(true);
+  });
+  it("어떤 입력이든 정답 목록의 모든 값이 정확한 값과 그리드 규칙 안에서 같다", () => {
+    for (let den = 2; den <= 40; den++) for (let num = -40; num <= 40; num++) {
+      let m;
+      try { m = sprFromFraction(num, den); } catch { continue; }
+      for (const a of m.answers) {
+        const v = a.includes("/") ? Number(a.split("/")[0]) / Number(a.split("/")[1]) : Number(a);
+        expect(Math.abs(v - num / den)).toBeLessThan(0.0101); // 그리드를 꽉 채운 소수점 2~3자리 반올림·절사 오차 범위
+        expect(Number.isInteger(v) && !Number.isInteger(num / den)).toBe(false);
+      }
+    }
+  });
+});
