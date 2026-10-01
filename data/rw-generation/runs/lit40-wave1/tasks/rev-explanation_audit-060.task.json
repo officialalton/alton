@@ -1,0 +1,349 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-060",
+ "chunkId": "rev-explanation_audit-060",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-060.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-03-015",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Over its grave stood the leering spectre of unrest.\n\nWhen he took her in his arms later on, and kissed her, there was not the shadow of a doubt in the mind of either that the restraining influence of a condition over which they had no control was there to mock their endeavour to be natural. They were not to be deceived by the apparent earnestness of the embrace. Each knew that the other was asking a question, even as their lips met and clung in the rather pathetic attempt to confirm the fond dream of the night before. They kissed as through a veil. They were awake once more, and they were wary, unconvinced. The answer to their questions came in the kiss itself, and constraint fell upon them.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From bitter resentment to joyful reconciliation.",
+    "From quiet boredom to sudden romantic passion.",
+    "From hopeful tenderness to wary constraint.",
+    "From playful teasing to open, angry hostility."
+   ],
+   "correct_letter": "C",
+   "explanation": "두 사람은 지난밤의 '애틋한 꿈'을 확인하려는 '애처로운 시도'로 포옹하고 입을 맞춘다. 그러나 그들은 마치 '베일을 사이에 둔 듯' 입을 맞추고, 다시 깨어나 경계하며 확신하지 못하다가 결국 서먹함이 그들을 덮친다. 따라서 희망 어린 다정함에서 조심스러운 거리감으로 바뀌는 C가 정답이다. A는 변화 방향이 반대이고, D의 노골적인 적대감은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-03-016",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Low in the tomb of glory\nThe old man's ashes lie--\nUnuttered this my story,\nUnwritten to human eye;\nAnd the young man, blessed and blessing,\nWalks over the shady town,\nThe evil passions repressing,\nAnd his head bent humbly down.\n\nPerhaps he marvels why treasure\nOf the judge to his credit is set,\nAnd an old revival measure\nShould have been the statesman's pet.\nBut he hears the invitation,\nAnd sees the streaming eyes\nOf the old man lost to the nation,\nAnd forgiven beyond the skies.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From cheerful praise to bitter condemnation.",
+    "From angry protest to resigned silence.",
+    "From playful wit to anxious, growing dread.",
+    "From somber reflection to consoling reassurance."
+   ],
+   "correct_letter": "D",
+   "explanation": "첫 연은 영광의 무덤에 노인의 재가 누워 있다는 엄숙한 장면으로 시작한다. 마지막 부분에서 젊은이는 눈물 젖은 눈들을 보고 노인이 '하늘 너머에서 용서받았다'는 위안으로 나아가므로 D가 정답이다. A는 비난이 없어 틀렸고, B의 분노한 항의와 C의 장난스러운 재치는 지문의 엄숙한 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-03-017",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "At the Christmas dance the same some one had said her waltzing would make her \"all the rage\" in Boston. She wondered if it were true, and wondered whether, if she had not promised to marry Stephen, some splendid being from a city would have descended from his heights, bearing diamonds in his hand. Not that she would have accepted them; she only wondered. These disloyal thoughts came seldom, and she put them resolutely away, devoting herself with all the greater assiduity to her muslin curtains and ruffled pillow-shams. Stephen, too, had his momentary pangs. There were times when he could calm his doubts only by working on the little house. The mere sight of the beloved floors and walls and ceilings comforted his heart, and brought him good cheer.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From wistful daydreaming to steady reassurance.",
+    "From open anger to cheerful acceptance.",
+    "From calm confidence to growing panic.",
+    "From playful mockery to sincere regret."
+   ],
+   "correct_letter": "A",
+   "explanation": "전반부에서 그녀는 도시의 멋진 남자가 다이아몬드를 들고 내려왔을지 상상하며 아쉬운 공상에 잠긴다. 그러나 그 '불충한 생각'을 단호히 물리치고 커튼과 베갯잇에 몰두하며, 스티븐도 작은 집을 보며 마음의 위안을 얻는다. 따라서 아쉬운 공상에서 안정된 안도로 바뀌는 A가 정답이다. B의 분노와 C의 공황은 지문에 없고, D의 조롱도 드러나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-03-018",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "I fancy we are most of us tired of Constantinople. To me it is a place where a little sight-seeing goes a long way. Our gallant captain, on the contrary, tells me that he could put in three months here very well. As it is, there are about 2,000 English here, to say nothing of naturalized Greeks and Maltese. I suppose Constantinople is not a bad place for a short residence. The hotels are good, and in some you may have a bedroom for four francs a day. Provisions are not dear, but house-rent is very expensive. The population of the place is dense, at which I wonder, as Constantinople seems to me the most unhealthy city I have ever seen.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From eager enthusiasm to bitter disappointment.",
+    "From weary dismissal to practical appraisal.",
+    "From scholarly detachment to fond nostalgia.",
+    "From playful humor to fearful alarm."
+   ],
+   "correct_letter": "B",
+   "explanation": "필자는 처음에 대부분이 콘스탄티노플에 질렸으며 관광은 조금이면 충분하다고 지친 듯 말한다. 이후 짧게 머물기에는 나쁘지 않다며 호텔 값, 식료품, 집세를 차분히 따지는 실용적 평가로 넘어가므로 B가 정답이다. A는 처음부터 열의가 없었으므로 틀렸고, C의 향수와 D의 두려움은 지문에 드러나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-03-019",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "My mother had the words engraved on the inside of a ring, which Hugh wore for many years.\n\nBy far the closest and dearest of all the ties which bound Hugh to another was his love for my mother. Though she still lives to bless us, I may say this, that never did a mother give to her children a larger and a wiser love than she gave to us; she was our playmate and companion, but we always gave her a perfectly trustful and unquestioning obedience. Yet it was always a reasonable and critical obedience. She never exacted silent submission, but gave us her reasons readily. She never curtailed our independence, or oppressed us with a sense of over-anxiety. She never demanded confidence, but welcomed it with perfect, understanding.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From joyful celebration to quiet mourning.",
+    "From harsh criticism to reluctant praise.",
+    "From plain report to warm, grateful tribute.",
+    "From anxious worry to calm indifference."
+   ],
+   "correct_letter": "C",
+   "explanation": "첫 문장은 어머니가 반지 안쪽에 글을 새겼다는 사실만 담담하게 전한다. 이어서 필자는 어머니가 누구보다 크고 지혜로운 사랑을 주었고 이유를 설명하며 자녀의 독립을 존중했다고 따뜻하게 찬미하므로 C가 정답이다. A의 축하나 애도는 없고, B의 비판도 없으며, D의 무관심은 깊은 애정 표현과 반대이다."
+  },
+  {
+   "candidateId": "lit40-easy-03-020",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "I mounted the steps, however, and rung at the door. It was opened by a pale nun, of thirty, who hesitated a moment, and let me pass. In a small, plain chapel within, the service of the altar was just commencing, and, before I reached a seat, a low plaintive chant commenced, in female voices from the choir. It went on with occasional interruptions from the prayers, for perhaps an hour. I can not describe the excessive mournfulness of the music. One or two familiar hymns occurred in the course of it, like airs in a recitative, the same sung in our churches, but the effect was totally different.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "From solemn grief to cheerful relief.",
+    "From eager curiosity to angry disapproval.",
+    "From familiar comfort to bored indifference.",
+    "From plain narration to deep, moved sorrow."
+   ],
+   "correct_letter": "D",
+   "explanation": "전반부는 계단을 올라 초인종을 누르고 수녀가 문을 열어 주는 과정을 담담하게 서술한다. 이후 낮고 애처로운 성가가 시작되자 필자는 음악의 '지나친 구슬픔'을 묘사할 수 없다고 말하며 깊이 감동한다. 따라서 담담한 서술에서 깊은 슬픔과 감동으로 바뀌는 D가 정답이다. A는 변화 방향이 반대이고, B의 분노와 C의 지루함은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-03-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "There are some people who habitually, and from a strong sense of duty, live on the shady side of life. Metaphorically speaking, the sunshine may almost touch the very path on which they are treading, but they shrink from and avoid it, having a strong preference for the shade, but considering themselves martyrs while they live in it. Mrs. Cameron was one of these people. The circumstances of her life had elected plenty of sunshine for her; she had a devoted and excellent husband, an abundant income, and admirable health. It is true she had no children, and it is also true that she had brought herself by careful cultivation to a state of chronic ill-temper.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It describes Mrs. Cameron's poor health and then explains how her husband came to cure her.",
+    "It states a general claim about certain people and then gives Mrs. Cameron as an example.",
+    "It contrasts two married couples and then judges which of the two is the happier pair.",
+    "It recounts a sunny walk in the country and then shifts to a memory of a darker period."
+   ],
+   "correct_letter": "B",
+   "explanation": "지문은 '삶의 그늘진 쪽에 사는 사람들'에 대한 일반적 진술로 시작한다. 이어 'Mrs. Cameron was one of these people'이라는 문장으로 구체적 사례를 제시하고 그녀의 환경을 덧붙인다. 그러므로 B가 정답이다. 그녀는 건강이 좋다고 했으므로 A는 틀리고, C·D의 비교나 산책 장면은 없다."
+  },
+  {
+   "candidateId": "lit40-easy-03-023",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "The chamber of the solitary student is peopled with immortal guests. He has friends who are always steadfast, who are never false, who are silent when he is weary, who go forth with him to his work, who await his return. In the literature of the world a grand society is open to all who choose to enter it.\n\nBooks are the chief food of our intellectual life.--There are men that have, indeed, done great things who have read but little. These have had their want of mental training compensated by their powers of observation and experience of life. But they have been for the most part exceptional men, and it is possible they might have done better if they had studied more.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It tells the story of one solitary student and then describes the friends he has lost.",
+    "It lists several famous books and then ranks them by their value to young scholars.",
+    "It praises books as companions and then answers an objection about light readers.",
+    "It argues against heavy reading and then admits that books can offer some comfort."
+   ],
+   "correct_letter": "C",
+   "explanation": "첫 단락은 책을 '불멸의 손님'이자 변치 않는 친구로 비유하며 찬양한다. 둘째 단락은 적게 읽고도 큰일을 한 사람들이 있다는 반론을 들고, 그들은 예외였으며 더 공부했다면 나았을 것이라고 답한다. 따라서 C가 구조를 정확히 요약한다. A의 잃어버린 친구, B의 책 순위, D의 독서 반대는 지문과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-03-024",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "I was, however, happily disappointed, when at the close of the ceremony the company retired, and my sisters went about employing every means for my consolation and comfort.\n\nBeing now settled and provided with a home, I was employed in nursing the children, and doing light work about the house. Occasionally I was sent out with the Indian hunters, when they went but a short distance, to help them carry their game.\n\nMy situation was easy; I had no particular hardships to endure. But still, the recollection of my parents, my brothers and sisters, my home, and my own captivity, destroyed my happiness, and made me constantly solitary, lonesome and gloomy.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It lists the narrator's daily chores and then explains how she escaped from captivity.",
+    "It describes a harsh punishment and then the narrator's secret plan to seek revenge.",
+    "It praises the hunters' great skill and then describes one hunt the narrator joined.",
+    "It describes the narrator's easy new routine and then reveals her lasting sorrow."
+   ],
+   "correct_letter": "D",
+   "explanation": "지문은 의식이 끝난 뒤 자매들의 위로와 아이 돌보기·가벼운 일로 이루어진 새 생활을 설명한다. 이어 'My situation was easy'라고 말한 뒤 'But still'로 전환하며 가족에 대한 기억이 행복을 앗아 갔다고 밝힌다. 따라서 D가 정답이다. 탈출·복수·사냥 찬양은 지문에 없으므로 A, B, C는 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-029",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "With a firm step he walked from his prison to the foot of the gibbet, and mounted the steps. Resting a moment, he addressed the spectators, exhorting them to take example from his dreadful fate, and to avoid the evil courses which had, step by step, conducted him to it. At length the executioner warned him that his time was up.\n\n\"I am ready,\" he answered, and was about to submit his neck to the fatal noose, when, starting back, he exclaimed in a voice of agony, \"He is come! he is come! Oh, save me from him!--save me!\"\n\nBefore he could utter more, the drop was let fall, and all was soon over. The rest of the crew died making no sign.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Detached, reporting the man's last moments without comment",
+    "Admiring, praising the man as a hero who faces death bravely",
+    "Mocking, treating the man's cry of terror as a source of humor",
+    "Outraged, protesting that the execution is unjust and cruel"
+   ],
+   "correct_letter": "A",
+   "explanation": "서술자는 사형수가 교수대에 오르고 군중에게 훈계하는 과정을 감정 표현 없이 차례로 전한다. 그의 절규 뒤에도 'all was soon over', 'The rest of the crew died making no sign'처럼 짧고 담담하게 마무리한다. 따라서 A가 정답이다. 영웅으로 찬양하거나 조롱하거나 처형에 분노하는 표현은 없으므로 B, C, D는 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-030",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Perhaps I was wrong in this: I dare say I was, as I nearly always am. It is the people who make the greatest demands that get the largest supplies. But it was not in me either to make the one or to claim the other; and we can only act according to our kind.\n\nIn looking back on past events I once used to think: \"How much better things would have turned out, if only I had acted differently.\" But as I grew older and wiser I changed the formula to: \"How much better things would have turned out, if only I had had the power to act differently.\" And at the back of my mind I knew that I never had had the power.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Bitter, blaming other people for making unfair demands on the narrator",
+    "Resigned, accepting that the narrator lacked power to act otherwise",
+    "Proud, confident that the narrator's past choices were always correct",
+    "Hopeful, expecting that the narrator will act more boldly in the future"
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 자신이 틀렸을지 모른다고 인정하며 'we can only act according to our kind'라고 말한다. 이어 '다르게 행동할 힘이 있었다면'으로 공식을 바꾸고 그런 힘이 없었음을 알았다고 밝힌다. 이는 자신의 한계를 받아들이는 체념의 태도이므로 B가 정답이다. 남을 탓하거나 과거 선택을 자랑하거나 미래를 기대하는 말은 없으므로 A, C, D는 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-031",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "The Suffolk (was it Surrey?) flirt\nWithout a pang threw over\nPoor Jack and all his works like dirt,\nAnd caught a richer lover.\n\nWe read one morning more to say\nWe had not been quite idle,\nAnd then to end the arduous day\nEnjoyed a swim in Rydal.\n\nNext day the hundredweight of books\nWas packed once more in cases,\nWe left the lakes and hills and brooks\nAnd southward turned our faces.",
+   "question": "Which choice best describes the speaker's attitude toward the holiday described in the poem?",
+   "options": [
+    "Grieving, mourning a romance that ended in a painful betrayal",
+    "Earnest, recording a period of intense and serious study",
+    "Playfully ironic, poking fun at how little work was done",
+    "Angry, resenting the flirt who abandoned poor Jack"
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 '조금 더 읽은' 것만으로 'We had not been quite idle'이라고 말하고, 수영으로 끝난 하루를 'arduous day'라고 부른다. 이는 일을 거의 하지 않았음을 장난스럽게 비꼬는 표현이다. 또 백 파운드나 되는 책을 다시 상자에 싸서 떠나는 장면도 읽지 않은 책을 암시한다. 따라서 C가 정답이며, 실연의 슬픔이나 분노, 진지한 학업을 강조하는 A, B, D는 가벼운 어조와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-03-032",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Suppose thrown among us a person of well-developed intellect, but unacquainted with a single language or word that we use. It is absolutely useless to talk to him, because nothing that we say conveys any meaning to his mind. We can supply him no dictionary, because by hypothesis he knows no language to which we have access. How shall we proceed to communicate our ideas to him? Clearly there is but one possible way--namely, through his senses. Outside of this means of bringing him in contact with us we can have no communication with him. We, therefore, begin by showing him sensible objects, and letting him understand that certain words which we use correspond to those objects.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Doubtful, suggesting that communication with the stranger may be impossible",
+    "Impatient, dismissing the stranger as unworthy of the effort involved",
+    "Amused, treating the stranger's confusion as a kind of harmless joke",
+    "Confident, reasoning step by step toward the one workable method"
+   ],
+   "correct_letter": "D",
+   "explanation": "필자는 언어를 모르는 사람을 가정하고 말이나 사전이 소용없음을 차례로 따진다. 그 뒤 'Clearly there is but one possible way'라고 단언하며 감각을 통한 방법을 제시한다. 따라서 논리적으로 확신하는 D가 정답이다. 소통 방법을 찾았으므로 A는 틀리고, 상대를 무시하거나 재미있어하는 표현이 없어 B, C도 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-033",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "Whilst we were in the midst of our work, some natives made their appearance. I held out a branch as a sign of peace, when they ventured up to hold a parley, though evidently with great suspicion. They were rather small, and the tall ones were slim and lightly built. They examined Brown's hat, and expressed a great desire to keep it. In order to make them a present, I went to the tents to fetch some broken pieces of iron; and whilst I was away, Brown, wishing to surprise them, mounted his horse, and commenced trotting, which frightened them so much, that they ran away, and did not come again.",
+   "question": "Which choice best describes the narrator's attitude in the text?",
+   "options": [
+    "Curious and kind, trying to win the visitors' trust with gifts",
+    "Fearful, convinced that the visitors intend to attack the whole camp",
+    "Scornful, dismissing the visitors as small and quite unimportant",
+    "Amused, delighted that Brown's trick frightened the visitors away"
+   ],
+   "correct_letter": "A",
+   "explanation": "서술자는 평화의 표시로 나뭇가지를 내밀고 원주민들의 생김새를 자세히 관찰한다. 또 선물을 주려고 쇳조각을 가지러 텐트로 간다. 따라서 호기심과 선의를 보이는 A가 정답이다. 공격을 두려워하거나 깔보는 표현은 없고, Brown의 행동으로 그들이 다시 오지 않은 일을 즐거워하지도 않으므로 B, C, D는 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-035",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "The five held meetings in secret to complete their arrangements, and these meetings were enlivened with much smothered laughter. It was to be a \"glorious joke.\" A boat-race, of course; and there must be a great show of previous practice, tremendous rivalry, and pressing competition, so that a strong feeling of partisanship would be aroused; while in truth, the race itself was to be a sham. The boats were to reach the goal at the same moment, nobody was to win, yet every one was to claim the victory; the air was to be rent with cries of \"foul!\" and spurious shouts of triumph, accompanied by vehement demands for a \"fresh try.\" Then a second start was to be made--One, two, three, and off!",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To describe a real boat race and the team that fairly won it",
+    "To explain why the five friends quarreled over who would win",
+    "To present a group's secret plan to stage a fake race",
+    "To criticize rowing competitions for encouraging bitter rivalry"
+   ],
+   "correct_letter": "C",
+   "explanation": "지문은 다섯 사람이 웃음을 참으며 비밀 모임을 가졌고 그것이 'glorious joke'였다고 말한다. 이어 경주 자체는 'sham'으로, 아무도 이기지 않고 모두 승리를 주장하도록 계획되었다고 설명한다. 따라서 C가 정답이다. 실제 경주나 실제 다툼이 아니므로 A, B는 틀리고, 조정 경기를 비판하는 내용이 없어 D도 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-036",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In fact, civilization from its very inception has been “machine-made.” It began when our remotest ancestor snatched the bough of a tree and decided thenceforth to walk erect, using the bough as staff and club--that is, as a machine. Every tool of every kind has been a machine; and the progress of the race has been determined by the number and efficiency of its machines, both those designed to compel peace and those designed to further the arts of peace. If you wish to measure the actual value of any civilization--value in producing healthy minds in healthy bodies--you need only inquire into the kind and number and efficiency of its machines. Why? Because the machine represents the effort of man to adjust himself to his environment, his environment to himself.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To warn that modern machines threaten healthy minds and bodies",
+    "To describe how the earliest humans first learned to walk erect",
+    "To argue that tools designed for war have slowed human progress",
+    "To claim that machines have always driven civilization"
+   ],
+   "correct_letter": "D",
+   "explanation": "필자는 문명이 처음부터 '기계로 만들어진' 것이라 주장하며, 나뭇가지를 지팡이로 쓴 조상의 예를 든다. 이어 인류의 진보는 기계의 수와 효율로 결정되었고, 문명의 가치도 기계로 잴 수 있다고 말한다. 따라서 D가 정답이다. 기계를 경고하지 않으므로 A는 틀리고, 직립보행은 예시일 뿐이며 전쟁 도구가 진보를 늦췄다는 말은 없어 B, C도 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-037",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "easy",
+   "passage": "In spite of this, the landlord has done his share; chiefly perhaps by yielding--not always gracefully--when it was no longer of any use to fight. There have been exceptions, however: men and women who have mended and built with an eye to the real welfare of their tenants as well as to their own pockets. Let it be well understood that the two are inseparable, if any good is to come of it. The business of housing the poor, if it is to amount to anything, must be business, as it was business with our fathers to put them where they are. As charity, pastime, or fad, it will miserably fail, always and everywhere.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To argue that housing the poor works only as fair business",
+    "To praise landlords for always fighting to improve their tenants' homes",
+    "To claim that charity is the best way to improve housing for the poor",
+    "To describe how one landlord's family built new homes for the poor"
+   ],
+   "correct_letter": "A",
+   "explanation": "필자는 세입자의 복지와 지주의 이익이 분리될 수 없다고 말한다. 또 빈민 주거 사업은 '사업'이어야 하며, 자선이나 취미로 하면 반드시 실패한다고 주장한다. 따라서 A가 정답이다. 지주가 마지못해 양보했다고 했으므로 B는 틀리고, 자선은 실패한다고 했으므로 C도 틀리며, 특정 가문의 이야기는 없어 D도 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-038",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "easy",
+   "passage": "When the second woman with the two little ones came up and begged for the toy, something hard and sullen and cruel rose in the widow's heart, and she refused angrily to give up the thing. She hated those two boys who had been spared when her own was taken. She would not make them happy.\n\n\"No, you shall not have it,\" she cried, clutching the Noah's ark fiercely. \"I will destroy it.\"\n\nThe poor woman and the children followed her wistfully. The little boys were crying. They were cold and hungry and disappointed.",
+   "question": "Based on the text, why does the widow refuse to give up the toy?",
+   "options": [
+    "She resents that the boys were spared when her own son was taken.",
+    "She believes the toy is far too valuable to give away to strangers.",
+    "She hopes to sell the Noah's ark later to buy food for herself.",
+    "She fears the two boys will break the toy as soon as they get it."
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 과부가 두 소년을 미워했다고 하며, 그 이유를 '자기 아이는 데려가졌는데 그들은 살아남았기 때문'이라고 밝힌다. 또 'She would not make them happy'라는 문장이 그 동기를 다시 보여 준다. 따라서 A가 정답이다. 그녀는 장난감을 부수겠다고 했으므로 값이나 판매를 생각한 B, C는 틀리고, 소년들이 장난감을 망가뜨릴까 걱정하는 내용도 없어 D도 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-03-039",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "easy",
+   "passage": "For weeks it takes the edge off his bliss; for weeks he never glances at the addresses of his letters without a pang of dread; for weeks he never turns the handle of his door on his return home from his work without a shiver of apprehension. But not once does his eye alight on that feared handwriting; always his room is empty of that once so longed-for, and now dreaded presence. Ah, he is not so indispensable to her as he had fancied! She can do better without him than in his self-value had appeared possible. He need not be afraid that her fingers will ever again trace his name upon paper, or hurriedly lift his latch.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Joyful, celebrating a lover's long-awaited and happy reunion",
+    "Anxious, then rueful as the man's fear proves needless",
+    "Angry, condemning a woman for her cruelty toward the man",
+    "Calm, describing a man's untroubled and steady routine"
+   ],
+   "correct_letter": "B",
+   "explanation": "지문의 앞부분은 'pang of dread', 'shiver of apprehension'처럼 남자가 몇 주 동안 느끼는 불안을 반복해 보여 준다. 그러나 그 여인은 끝내 나타나지 않고, 'Ah, he is not so indispensable to her'에서 그는 자신이 생각만큼 중요하지 않았음을 씁쓸하게 깨닫는다. 따라서 B가 정답이다. 재회나 분노, 평온함은 지문에 드러나지 않으므로 A, C, D는 틀리다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-060 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-060.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-03-015 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nOver its grave stood the leering spectre of unrest.\n\nWhen he took her in his arms later on, and kissed her, there was not the shadow of a doubt in the mind of either that the restraining influence of a condition over which they had no control was there to mock their endeavour to be natural. They were not to be deceived by the apparent earnestness of the embrace. Each knew that the other was asking a question, even as their lips met and clung in the rather pathetic attempt to confirm the fond dream of the night before. They kissed as through a veil. They were awake once more, and they were wary, unconvinced. The answer to their questions came in the kiss itself, and constraint fell upon them.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From bitter resentment to joyful reconciliation.\nB) From quiet boredom to sudden romantic passion.\nC) From hopeful tenderness to wary constraint.\nD) From playful teasing to open, angry hostility.\n\n[표시된 정답] C\n[해설]\n두 사람은 지난밤의 '애틋한 꿈'을 확인하려는 '애처로운 시도'로 포옹하고 입을 맞춘다. 그러나 그들은 마치 '베일을 사이에 둔 듯' 입을 맞추고, 다시 깨어나 경계하며 확신하지 못하다가 결국 서먹함이 그들을 덮친다. 따라서 희망 어린 다정함에서 조심스러운 거리감으로 바뀌는 C가 정답이다. A는 변화 방향이 반대이고, D의 노골적인 적대감은 지문에 없다.\n### lit40-easy-03-016 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nLow in the tomb of glory\nThe old man's ashes lie--\nUnuttered this my story,\nUnwritten to human eye;\nAnd the young man, blessed and blessing,\nWalks over the shady town,\nThe evil passions repressing,\nAnd his head bent humbly down.\n\nPerhaps he marvels why treasure\nOf the judge to his credit is set,\nAnd an old revival measure\nShould have been the statesman's pet.\nBut he hears the invitation,\nAnd sees the streaming eyes\nOf the old man lost to the nation,\nAnd forgiven beyond the skies.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From cheerful praise to bitter condemnation.\nB) From angry protest to resigned silence.\nC) From playful wit to anxious, growing dread.\nD) From somber reflection to consoling reassurance.\n\n[표시된 정답] D\n[해설]\n첫 연은 영광의 무덤에 노인의 재가 누워 있다는 엄숙한 장면으로 시작한다. 마지막 부분에서 젊은이는 눈물 젖은 눈들을 보고 노인이 '하늘 너머에서 용서받았다'는 위안으로 나아가므로 D가 정답이다. A는 비난이 없어 틀렸고, B의 분노한 항의와 C의 장난스러운 재치는 지문의 엄숙한 어조와 맞지 않는다.\n### lit40-easy-03-017 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nAt the Christmas dance the same some one had said her waltzing would make her \"all the rage\" in Boston. She wondered if it were true, and wondered whether, if she had not promised to marry Stephen, some splendid being from a city would have descended from his heights, bearing diamonds in his hand. Not that she would have accepted them; she only wondered. These disloyal thoughts came seldom, and she put them resolutely away, devoting herself with all the greater assiduity to her muslin curtains and ruffled pillow-shams. Stephen, too, had his momentary pangs. There were times when he could calm his doubts only by working on the little house. The mere sight of the beloved floors and walls and ceilings comforted his heart, and brought him good cheer.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From wistful daydreaming to steady reassurance.\nB) From open anger to cheerful acceptance.\nC) From calm confidence to growing panic.\nD) From playful mockery to sincere regret.\n\n[표시된 정답] A\n[해설]\n전반부에서 그녀는 도시의 멋진 남자가 다이아몬드를 들고 내려왔을지 상상하며 아쉬운 공상에 잠긴다. 그러나 그 '불충한 생각'을 단호히 물리치고 커튼과 베갯잇에 몰두하며, 스티븐도 작은 집을 보며 마음의 위안을 얻는다. 따라서 아쉬운 공상에서 안정된 안도로 바뀌는 A가 정답이다. B의 분노와 C의 공황은 지문에 없고, D의 조롱도 드러나지 않는다.\n### lit40-easy-03-018 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nI fancy we are most of us tired of Constantinople. To me it is a place where a little sight-seeing goes a long way. Our gallant captain, on the contrary, tells me that he could put in three months here very well. As it is, there are about 2,000 English here, to say nothing of naturalized Greeks and Maltese. I suppose Constantinople is not a bad place for a short residence. The hotels are good, and in some you may have a bedroom for four francs a day. Provisions are not dear, but house-rent is very expensive. The population of the place is dense, at which I wonder, as Constantinople seems to me the most unhealthy city I have ever seen.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From eager enthusiasm to bitter disappointment.\nB) From weary dismissal to practical appraisal.\nC) From scholarly detachment to fond nostalgia.\nD) From playful humor to fearful alarm.\n\n[표시된 정답] B\n[해설]\n필자는 처음에 대부분이 콘스탄티노플에 질렸으며 관광은 조금이면 충분하다고 지친 듯 말한다. 이후 짧게 머물기에는 나쁘지 않다며 호텔 값, 식료품, 집세를 차분히 따지는 실용적 평가로 넘어가므로 B가 정답이다. A는 처음부터 열의가 없었으므로 틀렸고, C의 향수와 D의 두려움은 지문에 드러나지 않는다.\n### lit40-easy-03-019 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nMy mother had the words engraved on the inside of a ring, which Hugh wore for many years.\n\nBy far the closest and dearest of all the ties which bound Hugh to another was his love for my mother. Though she still lives to bless us, I may say this, that never did a mother give to her children a larger and a wiser love than she gave to us; she was our playmate and companion, but we always gave her a perfectly trustful and unquestioning obedience. Yet it was always a reasonable and critical obedience. She never exacted silent submission, but gave us her reasons readily. She never curtailed our independence, or oppressed us with a sense of over-anxiety. She never demanded confidence, but welcomed it with perfect, understanding.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From joyful celebration to quiet mourning.\nB) From harsh criticism to reluctant praise.\nC) From plain report to warm, grateful tribute.\nD) From anxious worry to calm indifference.\n\n[표시된 정답] C\n[해설]\n첫 문장은 어머니가 반지 안쪽에 글을 새겼다는 사실만 담담하게 전한다. 이어서 필자는 어머니가 누구보다 크고 지혜로운 사랑을 주었고 이유를 설명하며 자녀의 독립을 존중했다고 따뜻하게 찬미하므로 C가 정답이다. A의 축하나 애도는 없고, B의 비판도 없으며, D의 무관심은 깊은 애정 표현과 반대이다.\n### lit40-easy-03-020 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nI mounted the steps, however, and rung at the door. It was opened by a pale nun, of thirty, who hesitated a moment, and let me pass. In a small, plain chapel within, the service of the altar was just commencing, and, before I reached a seat, a low plaintive chant commenced, in female voices from the choir. It went on with occasional interruptions from the prayers, for perhaps an hour. I can not describe the excessive mournfulness of the music. One or two familiar hymns occurred in the course of it, like airs in a recitative, the same sung in our churches, but the effect was totally different.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) From solemn grief to cheerful relief.\nB) From eager curiosity to angry disapproval.\nC) From familiar comfort to bored indifference.\nD) From plain narration to deep, moved sorrow.\n\n[표시된 정답] D\n[해설]\n전반부는 계단을 올라 초인종을 누르고 수녀가 문을 열어 주는 과정을 담담하게 서술한다. 이후 낮고 애처로운 성가가 시작되자 필자는 음악의 '지나친 구슬픔'을 묘사할 수 없다고 말하며 깊이 감동한다. 따라서 담담한 서술에서 깊은 슬픔과 감동으로 바뀌는 D가 정답이다. A는 변화 방향이 반대이고, B의 분노와 C의 지루함은 지문에 없다.\n### lit40-easy-03-022 — skill text_structure_purpose · 유형 text_structure\n[지문]\nThere are some people who habitually, and from a strong sense of duty, live on the shady side of life. Metaphorically speaking, the sunshine may almost touch the very path on which they are treading, but they shrink from and avoid it, having a strong preference for the shade, but considering themselves martyrs while they live in it. Mrs. Cameron was one of these people. The circumstances of her life had elected plenty of sunshine for her; she had a devoted and excellent husband, an abundant income, and admirable health. It is true she had no children, and it is also true that she had brought herself by careful cultivation to a state of chronic ill-temper.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It describes Mrs. Cameron's poor health and then explains how her husband came to cure her.\nB) It states a general claim about certain people and then gives Mrs. Cameron as an example.\nC) It contrasts two married couples and then judges which of the two is the happier pair.\nD) It recounts a sunny walk in the country and then shifts to a memory of a darker period.\n\n[표시된 정답] B\n[해설]\n지문은 '삶의 그늘진 쪽에 사는 사람들'에 대한 일반적 진술로 시작한다. 이어 'Mrs. Cameron was one of these people'이라는 문장으로 구체적 사례를 제시하고 그녀의 환경을 덧붙인다. 그러므로 B가 정답이다. 그녀는 건강이 좋다고 했으므로 A는 틀리고, C·D의 비교나 산책 장면은 없다.\n### lit40-easy-03-023 — skill text_structure_purpose · 유형 text_structure\n[지문]\nThe chamber of the solitary student is peopled with immortal guests. He has friends who are always steadfast, who are never false, who are silent when he is weary, who go forth with him to his work, who await his return. In the literature of the world a grand society is open to all who choose to enter it.\n\nBooks are the chief food of our intellectual life.--There are men that have, indeed, done great things who have read but little. These have had their want of mental training compensated by their powers of observation and experience of life. But they have been for the most part exceptional men, and it is possible they might have done better if they had studied more.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It tells the story of one solitary student and then describes the friends he has lost.\nB) It lists several famous books and then ranks them by their value to young scholars.\nC) It praises books as companions and then answers an objection about light readers.\nD) It argues against heavy reading and then admits that books can offer some comfort.\n\n[표시된 정답] C\n[해설]\n첫 단락은 책을 '불멸의 손님'이자 변치 않는 친구로 비유하며 찬양한다. 둘째 단락은 적게 읽고도 큰일을 한 사람들이 있다는 반론을 들고, 그들은 예외였으며 더 공부했다면 나았을 것이라고 답한다. 따라서 C가 구조를 정확히 요약한다. A의 잃어버린 친구, B의 책 순위, D의 독서 반대는 지문과 맞지 않는다.\n### lit40-easy-03-024 — skill text_structure_purpose · 유형 text_structure\n[지문]\nI was, however, happily disappointed, when at the close of the ceremony the company retired, and my sisters went about employing every means for my consolation and comfort.\n\nBeing now settled and provided with a home, I was employed in nursing the children, and doing light work about the house. Occasionally I was sent out with the Indian hunters, when they went but a short distance, to help them carry their game.\n\nMy situation was easy; I had no particular hardships to endure. But still, the recollection of my parents, my brothers and sisters, my home, and my own captivity, destroyed my happiness, and made me constantly solitary, lonesome and gloomy.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It lists the narrator's daily chores and then explains how she escaped from captivity.\nB) It describes a harsh punishment and then the narrator's secret plan to seek revenge.\nC) It praises the hunters' great skill and then describes one hunt the narrator joined.\nD) It describes the narrator's easy new routine and then reveals her lasting sorrow.\n\n[표시된 정답] D\n[해설]\n지문은 의식이 끝난 뒤 자매들의 위로와 아이 돌보기·가벼운 일로 이루어진 새 생활을 설명한다. 이어 'My situation was easy'라고 말한 뒤 'But still'로 전환하며 가족에 대한 기억이 행복을 앗아 갔다고 밝힌다. 따라서 D가 정답이다. 탈출·복수·사냥 찬양은 지문에 없으므로 A, B, C는 틀리다.\n### lit40-easy-03-029 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWith a firm step he walked from his prison to the foot of the gibbet, and mounted the steps. Resting a moment, he addressed the spectators, exhorting them to take example from his dreadful fate, and to avoid the evil courses which had, step by step, conducted him to it. At length the executioner warned him that his time was up.\n\n\"I am ready,\" he answered, and was about to submit his neck to the fatal noose, when, starting back, he exclaimed in a voice of agony, \"He is come! he is come! Oh, save me from him!--save me!\"\n\nBefore he could utter more, the drop was let fall, and all was soon over. The rest of the crew died making no sign.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Detached, reporting the man's last moments without comment\nB) Admiring, praising the man as a hero who faces death bravely\nC) Mocking, treating the man's cry of terror as a source of humor\nD) Outraged, protesting that the execution is unjust and cruel\n\n[표시된 정답] A\n[해설]\n서술자는 사형수가 교수대에 오르고 군중에게 훈계하는 과정을 감정 표현 없이 차례로 전한다. 그의 절규 뒤에도 'all was soon over', 'The rest of the crew died making no sign'처럼 짧고 담담하게 마무리한다. 따라서 A가 정답이다. 영웅으로 찬양하거나 조롱하거나 처형에 분노하는 표현은 없으므로 B, C, D는 틀리다.\n### lit40-easy-03-030 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nPerhaps I was wrong in this: I dare say I was, as I nearly always am. It is the people who make the greatest demands that get the largest supplies. But it was not in me either to make the one or to claim the other; and we can only act according to our kind.\n\nIn looking back on past events I once used to think: \"How much better things would have turned out, if only I had acted differently.\" But as I grew older and wiser I changed the formula to: \"How much better things would have turned out, if only I had had the power to act differently.\" And at the back of my mind I knew that I never had had the power.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Bitter, blaming other people for making unfair demands on the narrator\nB) Resigned, accepting that the narrator lacked power to act otherwise\nC) Proud, confident that the narrator's past choices were always correct\nD) Hopeful, expecting that the narrator will act more boldly in the future\n\n[표시된 정답] B\n[해설]\n서술자는 자신이 틀렸을지 모른다고 인정하며 'we can only act according to our kind'라고 말한다. 이어 '다르게 행동할 힘이 있었다면'으로 공식을 바꾸고 그런 힘이 없었음을 알았다고 밝힌다. 이는 자신의 한계를 받아들이는 체념의 태도이므로 B가 정답이다. 남을 탓하거나 과거 선택을 자랑하거나 미래를 기대하는 말은 없으므로 A, C, D는 틀리다.\n### lit40-easy-03-031 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nThe Suffolk (was it Surrey?) flirt\nWithout a pang threw over\nPoor Jack and all his works like dirt,\nAnd caught a richer lover.\n\nWe read one morning more to say\nWe had not been quite idle,\nAnd then to end the arduous day\nEnjoyed a swim in Rydal.\n\nNext day the hundredweight of books\nWas packed once more in cases,\nWe left the lakes and hills and brooks\nAnd southward turned our faces.\n\n[질문] Which choice best describes the speaker's attitude toward the holiday described in the poem?\nA) Grieving, mourning a romance that ended in a painful betrayal\nB) Earnest, recording a period of intense and serious study\nC) Playfully ironic, poking fun at how little work was done\nD) Angry, resenting the flirt who abandoned poor Jack\n\n[표시된 정답] C\n[해설]\n화자는 '조금 더 읽은' 것만으로 'We had not been quite idle'이라고 말하고, 수영으로 끝난 하루를 'arduous day'라고 부른다. 이는 일을 거의 하지 않았음을 장난스럽게 비꼬는 표현이다. 또 백 파운드나 되는 책을 다시 상자에 싸서 떠나는 장면도 읽지 않은 책을 암시한다. 따라서 C가 정답이며, 실연의 슬픔이나 분노, 진지한 학업을 강조하는 A, B, D는 가벼운 어조와 맞지 않는다.\n### lit40-easy-03-032 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nSuppose thrown among us a person of well-developed intellect, but unacquainted with a single language or word that we use. It is absolutely useless to talk to him, because nothing that we say conveys any meaning to his mind. We can supply him no dictionary, because by hypothesis he knows no language to which we have access. How shall we proceed to communicate our ideas to him? Clearly there is but one possible way--namely, through his senses. Outside of this means of bringing him in contact with us we can have no communication with him. We, therefore, begin by showing him sensible objects, and letting him understand that certain words which we use correspond to those objects.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Doubtful, suggesting that communication with the stranger may be impossible\nB) Impatient, dismissing the stranger as unworthy of the effort involved\nC) Amused, treating the stranger's confusion as a kind of harmless joke\nD) Confident, reasoning step by step toward the one workable method\n\n[표시된 정답] D\n[해설]\n필자는 언어를 모르는 사람을 가정하고 말이나 사전이 소용없음을 차례로 따진다. 그 뒤 'Clearly there is but one possible way'라고 단언하며 감각을 통한 방법을 제시한다. 따라서 논리적으로 확신하는 D가 정답이다. 소통 방법을 찾았으므로 A는 틀리고, 상대를 무시하거나 재미있어하는 표현이 없어 B, C도 틀리다.\n### lit40-easy-03-033 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWhilst we were in the midst of our work, some natives made their appearance. I held out a branch as a sign of peace, when they ventured up to hold a parley, though evidently with great suspicion. They were rather small, and the tall ones were slim and lightly built. They examined Brown's hat, and expressed a great desire to keep it. In order to make them a present, I went to the tents to fetch some broken pieces of iron; and whilst I was away, Brown, wishing to surprise them, mounted his horse, and commenced trotting, which frightened them so much, that they ran away, and did not come again.\n\n[질문] Which choice best describes the narrator's attitude in the text?\nA) Curious and kind, trying to win the visitors' trust with gifts\nB) Fearful, convinced that the visitors intend to attack the whole camp\nC) Scornful, dismissing the visitors as small and quite unimportant\nD) Amused, delighted that Brown's trick frightened the visitors away\n\n[표시된 정답] A\n[해설]\n서술자는 평화의 표시로 나뭇가지를 내밀고 원주민들의 생김새를 자세히 관찰한다. 또 선물을 주려고 쇳조각을 가지러 텐트로 간다. 따라서 호기심과 선의를 보이는 A가 정답이다. 공격을 두려워하거나 깔보는 표현은 없고, Brown의 행동으로 그들이 다시 오지 않은 일을 즐거워하지도 않으므로 B, C, D는 틀리다.\n### lit40-easy-03-035 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nThe five held meetings in secret to complete their arrangements, and these meetings were enlivened with much smothered laughter. It was to be a \"glorious joke.\" A boat-race, of course; and there must be a great show of previous practice, tremendous rivalry, and pressing competition, so that a strong feeling of partisanship would be aroused; while in truth, the race itself was to be a sham. The boats were to reach the goal at the same moment, nobody was to win, yet every one was to claim the victory; the air was to be rent with cries of \"foul!\" and spurious shouts of triumph, accompanied by vehement demands for a \"fresh try.\" Then a second start was to be made--One, two, three, and off!\n\n[질문] Which choice best states the main purpose of the text?\nA) To describe a real boat race and the team that fairly won it\nB) To explain why the five friends quarreled over who would win\nC) To present a group's secret plan to stage a fake race\nD) To criticize rowing competitions for encouraging bitter rivalry\n\n[표시된 정답] C\n[해설]\n지문은 다섯 사람이 웃음을 참으며 비밀 모임을 가졌고 그것이 'glorious joke'였다고 말한다. 이어 경주 자체는 'sham'으로, 아무도 이기지 않고 모두 승리를 주장하도록 계획되었다고 설명한다. 따라서 C가 정답이다. 실제 경주나 실제 다툼이 아니므로 A, B는 틀리고, 조정 경기를 비판하는 내용이 없어 D도 틀리다.\n### lit40-easy-03-036 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nIn fact, civilization from its very inception has been “machine-made.” It began when our remotest ancestor snatched the bough of a tree and decided thenceforth to walk erect, using the bough as staff and club--that is, as a machine. Every tool of every kind has been a machine; and the progress of the race has been determined by the number and efficiency of its machines, both those designed to compel peace and those designed to further the arts of peace. If you wish to measure the actual value of any civilization--value in producing healthy minds in healthy bodies--you need only inquire into the kind and number and efficiency of its machines. Why? Because the machine represents the effort of man to adjust himself to his environment, his environment to himself.\n\n[질문] Which choice best states the main purpose of the text?\nA) To warn that modern machines threaten healthy minds and bodies\nB) To describe how the earliest humans first learned to walk erect\nC) To argue that tools designed for war have slowed human progress\nD) To claim that machines have always driven civilization\n\n[표시된 정답] D\n[해설]\n필자는 문명이 처음부터 '기계로 만들어진' 것이라 주장하며, 나뭇가지를 지팡이로 쓴 조상의 예를 든다. 이어 인류의 진보는 기계의 수와 효율로 결정되었고, 문명의 가치도 기계로 잴 수 있다고 말한다. 따라서 D가 정답이다. 기계를 경고하지 않으므로 A는 틀리고, 직립보행은 예시일 뿐이며 전쟁 도구가 진보를 늦췄다는 말은 없어 B, C도 틀리다.\n### lit40-easy-03-037 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nIn spite of this, the landlord has done his share; chiefly perhaps by yielding--not always gracefully--when it was no longer of any use to fight. There have been exceptions, however: men and women who have mended and built with an eye to the real welfare of their tenants as well as to their own pockets. Let it be well understood that the two are inseparable, if any good is to come of it. The business of housing the poor, if it is to amount to anything, must be business, as it was business with our fathers to put them where they are. As charity, pastime, or fad, it will miserably fail, always and everywhere.\n\n[질문] Which choice best states the main purpose of the text?\nA) To argue that housing the poor works only as fair business\nB) To praise landlords for always fighting to improve their tenants' homes\nC) To claim that charity is the best way to improve housing for the poor\nD) To describe how one landlord's family built new homes for the poor\n\n[표시된 정답] A\n[해설]\n필자는 세입자의 복지와 지주의 이익이 분리될 수 없다고 말한다. 또 빈민 주거 사업은 '사업'이어야 하며, 자선이나 취미로 하면 반드시 실패한다고 주장한다. 따라서 A가 정답이다. 지주가 마지못해 양보했다고 했으므로 B는 틀리고, 자선은 실패한다고 했으므로 C도 틀리며, 특정 가문의 이야기는 없어 D도 틀리다.\n### lit40-easy-03-038 — skill inferences · 유형 character_motivation\n[지문]\nWhen the second woman with the two little ones came up and begged for the toy, something hard and sullen and cruel rose in the widow's heart, and she refused angrily to give up the thing. She hated those two boys who had been spared when her own was taken. She would not make them happy.\n\n\"No, you shall not have it,\" she cried, clutching the Noah's ark fiercely. \"I will destroy it.\"\n\nThe poor woman and the children followed her wistfully. The little boys were crying. They were cold and hungry and disappointed.\n\n[질문] Based on the text, why does the widow refuse to give up the toy?\nA) She resents that the boys were spared when her own son was taken.\nB) She believes the toy is far too valuable to give away to strangers.\nC) She hopes to sell the Noah's ark later to buy food for herself.\nD) She fears the two boys will break the toy as soon as they get it.\n\n[표시된 정답] A\n[해설]\n지문은 과부가 두 소년을 미워했다고 하며, 그 이유를 '자기 아이는 데려가졌는데 그들은 살아남았기 때문'이라고 밝힌다. 또 'She would not make them happy'라는 문장이 그 동기를 다시 보여 준다. 따라서 A가 정답이다. 그녀는 장난감을 부수겠다고 했으므로 값이나 판매를 생각한 B, C는 틀리고, 소년들이 장난감을 망가뜨릴까 걱정하는 내용도 없어 D도 틀리다.\n### lit40-easy-03-039 — skill inferences · 유형 tone_or_mood\n[지문]\nFor weeks it takes the edge off his bliss; for weeks he never glances at the addresses of his letters without a pang of dread; for weeks he never turns the handle of his door on his return home from his work without a shiver of apprehension. But not once does his eye alight on that feared handwriting; always his room is empty of that once so longed-for, and now dreaded presence. Ah, he is not so indispensable to her as he had fancied! She can do better without him than in his self-value had appeared possible. He need not be afraid that her fingers will ever again trace his name upon paper, or hurriedly lift his latch.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Joyful, celebrating a lover's long-awaited and happy reunion\nB) Anxious, then rueful as the man's fear proves needless\nC) Angry, condemning a woman for her cruelty toward the man\nD) Calm, describing a man's untroubled and steady routine\n\n[표시된 정답] B\n[해설]\n지문의 앞부분은 'pang of dread', 'shiver of apprehension'처럼 남자가 몇 주 동안 느끼는 불안을 반복해 보여 준다. 그러나 그 여인은 끝내 나타나지 않고, 'Ah, he is not so indispensable to her'에서 그는 자신이 생각만큼 중요하지 않았음을 씁쓸하게 깨닫는다. 따라서 B가 정답이다. 재회나 분노, 평온함은 지문에 드러나지 않으므로 A, C, D는 틀리다."
+}

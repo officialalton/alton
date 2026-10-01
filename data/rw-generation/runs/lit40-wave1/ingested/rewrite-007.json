@@ -1,0 +1,720 @@
+{
+ "taskId": "rewrite-007",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-03-047",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-047",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 46,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Aydin",
+      "Darius"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "persian_central_asian"
+     ],
+     "locale": "Samarkand",
+     "setting": "a bakery before opening",
+     "relationship": "a widow and the delivery boy",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a bakery before opening in Samarkand; a widow and the delivery boy about a debt neither will mention"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "Smoke from the tandoor and the sour breath of rising dough met me each morning in our Samarkand bakery, long before the shutters opened. Darius came at four, though I paid him from six. I never asked him to come early, and he never asked to be paid for it. My husband, before he died, had lent the boy's mother money for a surgery; the ledger with her name in it still sat on the shelf above the flour bins. Darius dusted that shelf every morning and never once touched the ledger. On the coldest days I burned the stale loaves in the oven and told him there was no bread to spare, then left a warm round on the stool by the door, where he would find it without having to thank me. Outside, a cart rattled over the stones toward the market.",
+    "question": "Based on the text, which choice best describes the relationship between the narrator and Darius?",
+    "options": [
+     "Each quietly acknowledges an old obligation while sparing the other from having to discuss it.",
+     "Darius works extra hours mainly to win the narrator's trust so that she will forgive the loan.",
+     "The narrator keeps the ledger in sight to remind Darius that his mother's debt is still owed.",
+     "The narrator treats Darius with the distant formality expected of a widow toward a hired boy."
+    ],
+    "correct_letter": "A",
+    "explanation": "다리우스는 돈을 받지 않는 이른 시간에 일하고 장부가 있는 선반을 닦으면서도 장부를 건드리지 않는다. 화자는 빵이 없다고 말하면서도 고맙다고 말할 필요가 없도록 문가 의자에 빵을 남겨 둔다. 이 두 장면을 함께 보면 둘 다 빚을 의식하지만 서로 말하지 않게 배려하는 관계이므로 A가 정답이다. B는 다리우스 쪽 동기만 추측했고, C는 장부의 의미를 압박으로 뒤집었으며, D는 과부와 일꾼이라는 통념에 기댄 선택지다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "restrained"
+   ],
+   "devices": [
+    "imagery",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-048",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-048",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 47,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Cleotilde",
+      "Emiliano"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Havana",
+     "setting": "a ferry terminal",
+     "relationship": "a priest and a lapsed parishioner",
+     "conflict": "when one of them is offered a way out",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a ferry terminal in Havana; a priest and a lapsed parishioner when one of them is offered a way out"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We sat on the bench nearest the Havana ferry ramp, and Cleotilde held the ticket her cousin had paid for, a single crossing that left at dawn. Father Emiliano had walked her down from the parish without being asked. She had not come to Mass in ten years, and she reminded him of that twice, as though it settled something. He said nothing about Mass. Instead he watched a deckhand loop a gray mooring line around an iron post. The rope was frayed in a dozen places, spliced and respliced, and the boat pulled at it with every swell. When the deckhand later lifted the line free, the ferry drifted without a sound. Cleotilde asked whether he would scold her for leaving. He said that a rope is not there to keep a boat from sailing, only to let it come back to the same place. She turned the ticket over in her fingers. Gulls argued over a fish head near the customs shed.",
+    "question": "In the text, the mooring line most likely represents",
+    "options": [
+     "the duties that Father Emiliano believes should keep Cleotilde from leaving Havana.",
+     "a tie to home and faith that allows a return without forbidding departure.",
+     "the strain Cleotilde feels between her cousin's plans and her own uncertain wishes.",
+     "the long years of neglect that have worn away Cleotilde's ties to the parish."
+    ],
+    "correct_letter": "B",
+    "explanation": "신부는 미사 이야기를 하지 않고 계류 밧줄을 바라보며, 밧줄은 배가 떠나지 못하게 하는 것이 아니라 같은 곳으로 돌아오게 하는 것이라고 말한다. 또 밧줄이 여러 번 이어 붙여졌다는 묘사는 끊어질 듯해도 유지되는 유대를 보여 준다. 따라서 떠남을 막지 않으면서 돌아올 수 있게 하는 고향과 신앙의 연결이라는 B가 정답이다. A는 신부의 말과 반대 방향이고, C는 배가 밧줄을 당기는 모습만 긴장으로 읽었으며, D는 해진 부분만 보고 유대가 사라졌다고 본 오독이다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "contemplative"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-049",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-049",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 48,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Milena",
+      "Marlon"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "caribbean"
+     ],
+     "locale": "Riga",
+     "setting": "a barbershop",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "over a shared chore that has become a ritual",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a barbershop in Riga; a mother and a daughter planning a wedding over a shared chore that has become a ritual"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Milena held the dustpan while her mother swept, as she had every Saturday since she was nine. Marlon's barbershop on Brīvības Street closed at six, and her mother, who had cut hair there for twenty years, never let anyone else sweep the floor. Tonight they were meant to choose wedding napkins; the catalog lay open on a barber chair, untouched. The broom moved in its old pattern, under the mirrors, around the coat rack, toward the door. Her mother talked about guest lists and seating while she swept, and Milena answered without looking up. Once her mother paused and said that Milena's new flat had wooden floors, the kind that showed every hair. Marlon, counting the till, laughed and said she would need a better broom. Near the end, her mother's arms slowed. Milena set down the pan, took the broom, and finished the last corner in the same strokes, left to right. Her mother picked up the dustpan without a word. Outside, a tram rang its bell twice at the corner.",
+    "question": "In the text, the act of sweeping the shop floor most likely represents",
+    "options": [
+     "a tiresome chore that Milena intends to leave behind once she is married.",
+     "the mother's quiet resistance to discussing her daughter's coming wedding.",
+     "a shared habit carrying their bond forward as their roles shift.",
+     "the strict standards Marlon expects his employees to follow in the shop."
+    ],
+    "correct_letter": "C",
+    "explanation": "어머니는 쓸면서 결혼 준비 이야기를 하고 딸의 새 집 바닥을 언급하므로 청소가 결혼을 피하는 수단이 아니다. 끝에 밀레나가 같은 방식으로 빗자루를 이어받고 어머니가 쓰레받기를 드는 장면은 역할이 바뀌는 가운데 습관이 이어짐을 보여 준다. 따라서 C가 정답이다. A는 바닥 이야기를 벗어나고 싶은 일로 오해했고, B는 카탈로그가 펼쳐진 채 방치된 점만 근거로 삼았으며, D는 마를론의 농담을 규칙으로 과장했다."
+   },
+   "notes": [],
+   "tone": [
+    "tender",
+    "nostalgic"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-050",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-050",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "poetry",
+    "seed": {
+     "index": 49,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "contemporary",
+     "names": [
+      "Nandi",
+      "Neema"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "east_south_african"
+     ],
+     "locale": "Nairobi",
+     "setting": "a movie theater in the off-season",
+     "relationship": "a returning soldier and his younger sister",
+     "conflict": "while one of them quietly changes their mind",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a movie theater in the off-season in Nairobi; a returning soldier and his younger sister while one of them quietly changes their mind"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Three rules of the theater in the off-season:\nno films, no tickets, no questions at the door.\nNandi sat in row nine in his pressed uniform,\nhis reenlistment form folded in his cap,\nwhile Neema swept husks from the aisle,\nleftovers of a Nairobi season long gone.\nOn other nights, in other countries,\nhe had watched walls fill up with fire.\nHere the screen hung blank, a sheet of white\nthat nobody had yet been paid to color.\nNeema bumped the projector switch by accident;\nlight crossed the room and carried nothing,\nonly dust, turning slow as weather.\nHe did not ask her to switch it off.\nHe walked to the stage and held one hand\ninside the beam, and watched his shadow\nlie down across the white, as large as he liked.\nNeema leaned on the broom and waited.\nOn the seat behind him, the cap tipped over,\nand the folded paper slid onto the floor.",
+    "question": "In the text, the blank screen most likely represents",
+    "options": [
+     "the painful scenes from war that Nandi still sees whenever he closes his eyes.",
+     "the emptiness of a theater that has nothing to show during the off-season.",
+     "the silence between Nandi and Neema that neither of them knows how to break.",
+     "an open future that Nandi is starting to picture as something he can shape."
+    ],
+    "correct_letter": "D",
+    "explanation": "스크린은 아직 아무도 색칠하지 않은 흰 천으로 묘사되어 전쟁의 불타는 벽과 대비된다. 난디가 빛 속에 손을 넣어 원하는 만큼 큰 그림자를 스크린에 드리우는 장면은 그가 그 빈 공간을 스스로 채울 수 있다고 느끼기 시작했음을 보여 준다. 따라서 D가 정답이다. A는 전쟁 기억을 스크린 자체로 착각했고, B는 비수기라는 표면적 의미에 머물렀으며, C는 남매 사이 침묵이라는 지문에 근거가 약한 해석이다."
+   },
+   "notes": [],
+   "tone": [
+    "quiet",
+    "hopeful"
+   ],
+   "devices": [
+    "symbolism",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-053",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-053",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 52,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Zawadi",
+      "Theo"
+     ],
+     "nameCultures": [
+      "east_south_african",
+      "french"
+     ],
+     "locale": "Marseille",
+     "setting": "a community garden",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "after a misunderstood gift",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a community garden in Marseille; a grandmother and her grandson after a misunderstood gift"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Who gives a widow a shovel for her seventy-fifth birthday? Zawadi had turned the question over for a week, ever since Theo arrived with the long box tied in green ribbon. Since her husband's funeral she had hardly left the flat, and her neighbors had begun to say, kindly, that she should find something to do with her hands. So the shovel stood in the kitchen corner like an accusation. Each morning she moved her chair so that her back was to it, and each evening she found herself facing it again. On Sunday Theo returned and walked her up the hill to the community garden above the Marseille harbor. In the farthest bed, beneath a fig tree, the soil had gone hard and pale. Theo said his grandfather had dug this plot for forty years and had asked that no stranger ever turn it. Zawadi held out her hand for the shovel he had carried up the hill.",
+    "question": "As used in the text, the phrase “like an accusation” most nearly suggests that the shovel",
+    "options": [
+     "seemed to Zawadi a reminder of the garden work her husband once did alone.",
+     "struck Zawadi as an awkward, impractical gift for a woman of her age.",
+     "appeared to Zawadi to blame her for withdrawing from life in her grief.",
+     "showed Zawadi that Theo shared her neighbors' impatience with her mourning."
+    ],
+    "correct_letter": "C",
+    "explanation": "자와디는 장례 이후 집을 거의 나가지 않았고 이웃들은 손으로 할 일을 찾으라고 말해 왔으므로, 삽은 그녀에게 슬픔 속에 틀어박힌 자신을 꾸짖는 물건처럼 느껴진다. 등을 돌려 앉아도 다시 마주하게 된다는 묘사도 그 불편한 책망감을 강화한다. 따라서 C가 정답이다. A는 결말에서 밝혀지는 정원 정보를 당시 그녀의 감정으로 앞당겼고, B는 생일 선물에 대한 첫 의문만 반영했으며, D는 테오의 실제 의도와 반대다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "poignant"
+   ],
+   "devices": [
+    "simile",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-054",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-054",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 53,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Josiah",
+      "Ephraim"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Ohio",
+     "setting": "a language school classroom",
+     "relationship": "a boy and the old man who sells him fish",
+     "conflict": "after learning how someone really earned their reputation",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a language school classroom in Ohio; a boy and the old man who sells him fish after learning how someone really earned their reputation"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Josiah had bought fish from Ephraim every Friday for two years and had never once seen the old man smile. On Mill Street people said he shorted his scales and shouted at children who leaned on his counter. So Josiah nearly dropped his notebook the Tuesday he walked into the night English class at the Ohio language school and found Ephraim at the chalkboard, drilling six new arrivals on the names of vegetables. Afterward the teacher explained that Ephraim had come to town forty years earlier knowing no English and had taught the class for free ever since. Once, she said, a student had brought him a cake at the market, and he had not spoken to her for a month. His temper, the teacher said, was a fence he had built himself. Josiah thought of every child Ephraim had sent away from the counter and wondered how many of their parents sat in this room. Ephraim erased the board in long, careful strokes.",
+    "question": "As used in the text, the phrase “a fence he had built himself” most nearly suggests that Ephraim's temper is",
+    "options": [
+     "a habit he picked up from years of dealing with rude customers at the market.",
+     "an outlet for the frustration he feels when his students learn too slowly.",
+     "a reputation that his neighbors created and that he has never tried to correct.",
+     "a deliberate barrier that keeps others from thanking him for his kindness."
+    ],
+    "correct_letter": "D",
+    "explanation": "에프라임은 무료로 수업을 가르치면서도, 시장에서 케이크를 가져온 학생과 한 달간 말을 하지 않았다. 이 일화와 '스스로 쌓은 울타리'라는 표현을 연결하면 그의 성미는 감사 표현을 막으려고 일부러 세운 벽임을 알 수 있다. 따라서 D가 정답이다. A는 손님 탓으로 원인을 바꾸었고, B는 수업 장면을 근거 없이 짜증으로 읽었으며, C는 '스스로'라는 말과 달리 이웃이 만든 평판으로 보았다."
+   },
+   "notes": [],
+   "tone": [
+    "revealing",
+    "reflective"
+   ],
+   "devices": [
+    "metaphor",
+    "irony"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-069",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-069",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 68,
+     "genre": "personal_essay",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Kemoy",
+      "Dwayne"
+     ],
+     "nameCultures": [
+      "caribbean",
+      "caribbean"
+     ],
+     "locale": "Port of Spain",
+     "setting": "a salt-water pool",
+     "relationship": "a mother and a daughter planning a wedding",
+     "conflict": "when an expected rival turns out to be an ally",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a salt-water pool in Port of Spain; a mother and a daughter planning a wedding when an expected rival turns out to be an ally"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Some guests are announced long before they arrive. For a month the bride had heard warnings about Kemoy, Dwayne's aunt, who had opposed the engagement and was now coming to the salt-water pool in Port of Spain where the bride and her mother planned the wedding with their feet in the water. The mother rehearsed polite refusals under her breath. When Kemoy came, she lowered herself onto the edge of the pool, kept her own feet dry, and criticized the guest list, the menu, and the color of the tablecloths. The bride felt her mother stiffen beside her. Then Kemoy asked what the hall would cost. Hearing the figure, she clicked her tongue, opened her handbag, and unfolded a page of names: a caterer who owed her a favor, a cousin with a free hall, a band that played for half price. Two families, she said, should not go broke on one afternoon. Then she slipped off her sandals and put her feet in the water beside them.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "From relaxed planning at the pool to growing fear of a lasting family feud",
+     "From wary dread of Kemoy to relief at discovering her practical support",
+     "From open hostility toward the wedding to grudging acceptance of its cost",
+     "From cheerful excitement about the wedding to weary concern about money"
+    ],
+    "correct_letter": "B",
+    "explanation": "앞부분에는 한 달간의 경고, 어머니의 거절 연습, 비판에 굳어지는 어머니 등 케모이에 대한 경계와 걱정이 드러난다. 뒷부분에서 케모이가 비용을 아낄 명단을 꺼내고 마침내 함께 발을 물에 담그는 장면은 그녀가 실질적인 협력자임을 보여 준다. 따라서 B가 정답이다. A는 앞부분의 긴장을 놓쳤고, C는 케모이의 과거 반대를 화자 쪽 어조로 착각했으며, D는 돈 이야기를 지친 체념으로 잘못 읽었다."
+   },
+   "notes": [],
+   "tone": [
+    "apprehensive",
+    "relieved"
+   ],
+   "devices": [
+    "foreshadowing",
+    "gesture"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-071",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-071",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "letter",
+    "seed": {
+     "index": 70,
+     "genre": "letter",
+     "pov": "first",
+     "styleEra": "late_20c",
+     "names": [
+      "Tallulah",
+      "Talon"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "indigenous_american"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a laundromat",
+     "relationship": "two neighbors with a shared wall",
+     "conflict": "after discovering a letter meant for someone else",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a laundromat in Albuquerque; two neighbors with a shared wall after discovering a letter meant for someone else"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "\"Not again,\" I said this morning, pulling your envelope out of my dryer at the laundromat.\n\nDear Talon,\n\nI am writing because this is the third piece of your mail that has reached my machine, my mailbox, or my coat pocket, and I am starting to think the wall between our apartments lets through more than your radio. I had a note ready to slide under your door. It used the word \"repeatedly\" twice. But the envelope had come open in the wash, and the first line was showing before I could look away. It was from the clinic, about your sister. I should not have read it, and I will not pretend I did not. I have complained about that wall every night for a year. I did not know what you were listening for on the other side of it. My door is open after six. I make terrible coffee, and I will not mention the mail.\n\nTallulah",
+    "question": "Which choice best describes the shift in tone that occurs in the letter?",
+    "options": [
+     "From friendly amusement at the mix-up to formal distance about privacy",
+     "From mild curiosity about the envelope to anxious alarm over the clinic",
+     "From sincere apology for reading the letter to lighthearted teasing",
+     "From annoyed complaint about the misdelivered mail to quiet sympathy"
+    ],
+    "correct_letter": "D",
+    "explanation": "편지 앞부분의 '또'라는 혼잣말, 세 번째 우편물, '반복적으로'를 두 번 쓴 항의 메모는 짜증을 보여 준다. 그러나 병원 편지를 본 뒤 벽 너머에서 그가 무엇을 기다렸는지 몰랐다고 말하며 문을 열어 두겠다고 제안하는 부분은 조용한 연민으로 바뀐다. 따라서 D가 정답이다. A는 방향이 반대이고, B는 걱정을 과장한 해석이며, C는 마지막 커피 농담만 근거로 사과와 놀림의 순서를 잘못 잡았다."
+   },
+   "notes": [],
+   "tone": [
+    "irritated",
+    "compassionate"
+   ],
+   "devices": [
+    "epistolary form",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-078",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-078",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "underlined_portion_function",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 77,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Putri",
+      "Anh"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Hanoi",
+     "setting": "a quiet library",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "while deciding whether a rule still applies",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a quiet library in Hanoi; a stepfather and his stepdaughter while deciding whether a rule still applies"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "After her mother remarried, Putri learned that Anh kept one rule above all others: no talking in the reading room of the old library in Hanoi, where he took her every Sunday. She resented it. For a year they sat across from each other in silence, he behind his newspapers and she behind whatever novel she could pretend to read. She decided the rule was his way of not having to know her. Twice that spring she left a book open on the table, hoping he would ask about it; he only turned another page. The week before she left for university, she asked whether the rule still applied now that she was grown. He considered the question, then slid a library slip across the table. On it, in pencil, was the title of every book she had read there, with a small mark beside the ones she had read twice. __He had been listening in the only language the room allowed.__ Outside, scooters crowded the wet street, and neither of them hurried to cross.",
+    "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+    "options": [
+     "It suggests that Anh preferred the library's silence to speaking with Putri.",
+     "It explains why Anh insisted so strictly on the rule of silence in the room.",
+     "It reframes the silence Putri resented as a form of attention Anh paid her.",
+     "It shows that Putri has finally accepted that the rule no longer applies."
+    ],
+    "correct_letter": "C",
+    "explanation": "푸트리는 침묵 규칙을 자신을 알려 하지 않는 방법으로 여겼고, 책을 펼쳐 두어도 묻지 않는 안을 보며 그 생각을 굳혔다. 그런데 안이 건넨 쪽지에 그녀가 읽은 모든 책이 적혀 있었고, 밑줄 문장은 그 침묵 속에서도 그가 그녀를 지켜보고 있었다는 의미로 앞의 해석을 뒤집는다. 따라서 C가 정답이다. A는 푸트리의 처음 오해를 그대로 따랐고, B는 규칙의 이유 설명으로 오해했으며, D는 규칙 적용 여부라는 질문에만 매달렸다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "warm"
+   ],
+   "devices": [
+    "metaphor",
+    "reversal"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-084",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-084",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "central_ideas_details",
+    "difficulty": "medium",
+    "questionType": "narrator_attitude",
+    "genre": "memoir",
+    "seed": {
+     "index": 83,
+     "genre": "memoir",
+     "pov": "third_omniscient",
+     "styleEra": "19c",
+     "names": [
+      "Pavel",
+      "Irena"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Gdansk",
+     "setting": "a soccer field at dusk",
+     "relationship": "a grandmother and her grandson",
+     "conflict": "after a public embarrassment",
+     "openingStyle": "대명사 I 또는 We 로 시작",
+     "topicSeed": "a soccer field at dusk in Gdansk; a grandmother and her grandson after a public embarrassment"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "We were both quiet on the walk home from the field in Gdansk, Pavel because he had sent the penalty kick over the crossbar in front of every family on the street, and his grandmother Irena because she seemed to be thinking about something else. She had watched from the bench by the fence in her good coat. Halfway home she began, without being asked, to describe a school play in which she had forgotten every line and stood frozen while the hall laughed. She described the laughter in great detail, more than Pavel thought anyone would want to remember. At eleven he decided she simply liked her own stories better than his match. Decades later, telling his own daughter about that night, he paused over the part where Irena had never once mentioned the ball, and he found he had to start the sentence twice. Along the shipyard road, the streetlights came on one after another.",
+    "question": "Which choice best describes Pavel's attitude as an adult toward his grandmother's story?",
+    "options": [
+     "Lasting puzzlement over why she turned the talk away from his missed kick",
+     "Moved appreciation for the care hidden in how she chose to comfort him",
+     "Lingering embarrassment that she exposed such a humiliating memory to him",
+     "Quiet regret that he had once judged her stories to be self-centered"
+    ],
+    "correct_letter": "B",
+    "explanation": "할머니는 손자가 묻지도 않았는데 자신의 창피했던 기억을 자세히 이야기하고 공에 대해서는 끝내 언급하지 않는다. 어른이 된 파벨은 그 부분에서 문장을 두 번 시작해야 할 만큼 감정이 북받치는데, 이는 할머니의 이야기가 자신을 위로하려는 세심한 배려였음을 깨닫고 감동했음을 보여 준다. 따라서 B가 정답이다. A는 열한 살 때의 오해에 머물렀고, C는 이야기 속 창피함을 파벨의 감정으로 옮겼으며, D는 그럴듯하지만 지문은 후회보다 할머니에 대한 감동에 초점을 둔다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "tender"
+   ],
+   "devices": [
+    "retrospection",
+    "understatement"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  },
+  {
+   "candidateId": "lit40-medium-03-097",
+   "task": "rewrite-007",
+   "attempt": 1,
+   "spec": {
+    "candidateId": "lit40-medium-03-097",
+    "batchId": "lit40-medium-03",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "tone_or_mood",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 96,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Anneke",
+      "Marit"
+     ],
+     "nameCultures": [
+      "dutch_nordic",
+      "dutch_nordic"
+     ],
+     "locale": "Bergen",
+     "setting": "a hospital waiting room",
+     "relationship": "two strangers sharing a delay",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a hospital waiting room in Bergen; two strangers sharing a delay about who gets credit for shared work"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_tone_or_mood_medium"
+   },
+   "g": {
+    "passage": "Paper cups rose in a careful tower on the low table between us, one added for each hour of the delay in the Bergen hospital waiting room. I, Anneke, had set down the first cup; Marit, a stranger until that morning, had steadied the base when it leaned. By the third hour we were debating, with mock solemnity, who deserved credit for the structure. I argued that foundations come first. Marit argued that a foundation is only a floor until someone builds on it. A nurse passing with a cart told us to apply for a grant, and we both laughed louder than the joke deserved. When a door opened down the corridor, Marit stopped talking in the middle of a word, then picked the sentence up again as if nothing had happened. I added the sixth cup slowly. Rain ran down the tall windows above the car park.",
+    "question": "Which choice best describes the overall mood of the passage?",
+    "options": [
+     "Tense and fearful, as the two strangers dread the news they are waiting for",
+     "Competitive and prickly, as each stranger insists on credit for the tower",
+     "Quietly anxious, with brief bursts of humor that barely mask the worry",
+     "Playful and companionable, with an undercurrent of unspoken unease"
+    ],
+    "correct_letter": "D",
+    "explanation": "두 사람은 컵 탑의 공로를 두고 장난스럽게 진지한 척 논쟁하고, 간호사의 농담에 크게 웃으며 친밀감을 쌓는다. 그러나 너무 크게 웃는 모습, 문이 열릴 때 마리트가 말을 멈추는 장면, 천천히 컵을 올리는 동작은 말하지 않은 불안이 깔려 있음을 보여 준다. 지문의 중심은 장난스러운 동료애이고 불안은 밑바닥에 있으므로 D가 정답이다. A는 덜 두드러진 불안만 말했고, C는 두 정서의 비중을 뒤집었으며, B는 공로 다툼을 실제 경쟁으로 오해했다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "uneasy"
+   ],
+   "devices": [
+    "imagery",
+    "subtext"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 1
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-03-087",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(4건 이미 같은 문두)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

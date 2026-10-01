@@ -1,0 +1,298 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-070",
+ "chunkId": "rev-explanation_audit-070",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-070.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-easy-02-001",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "I rested but an instant while these thoughts rushed through my brain. I felt myself going down. It was useless to do so, I felt; but I could not help making one more struggle for the boon of life. It would have been useless if a kind Providence had not come to my aid, for my strength was nearly exhausted, and I was utterly inadequate to the task of bearing up the heavy burden of my companion.\n\nMy head struck against a log, one end of which had grounded on the shore, while the other projected out over the deep water of the stream. I clutched it, threw my arms around it, and hugged it as though it was the dearest friend on earth.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "From hopeless exhaustion to grateful relief at finding support",
+    "From calm reflection to bitter anger at the narrator's companion",
+    "From cheerful confidence to sudden fear of the deep stream",
+    "From playful humor to solemn grief over a lost friend nearby"
+   ],
+   "correct_letter": "A",
+   "explanation": "서술자는 처음에 힘이 다해 가라앉는 절망적 상태를 말한다. 그러다 통나무에 머리가 닿자 그것을 '가장 소중한 친구'처럼 껴안으며 안도와 감사의 어조로 바뀐다. 따라서 A가 정답이다. B·C·D의 분노, 쾌활한 자신감, 유머는 지문에 나타나지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-002",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "\"Oh, a splendid soup is the true pea-green,\nI for it often call,\nAnd up it comes, in a smart tureen,\nWhen I dine in my banquet hall.\nWhen a leg of mutton at home is boiled,\nThe liquor I always keep,\nAnd in that liquor, before 't is spoiled,\nA peck of peas I steep;\nWhen boiled till tender they have been\nI rub through a sieve the peas so green.\n\n\"Though the trouble the indolent may shock,\nI rub with all my power,\nAnd having returned them to the stock,\nI stew them for an hour;\nOf younger peas I take some more,\nThe mixture to improve,\nThrown in a little time before\nThe soup from the fire I move.\nThen seldom a better soup is seen\nThan the old familiar soup pea-green.\"",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "From sad longing for the past to joyful hope for the future",
+    "From proud praise of the soup to plain cooking advice",
+    "From angry complaint about the work to calm acceptance of it",
+    "From formal politeness to open mockery of all lazy cooks"
+   ],
+   "correct_letter": "B",
+   "explanation": "화자는 첫 줄에서 완두콩 수프를 'splendid'라며 자랑스럽게 칭찬한다. 이어 고기 국물에 완두콩을 담그고 체에 거르고 한 시간 끓이는 과정을 차근차근 설명하는 실용적 어조로 바뀐다. 따라서 B가 정답이다. A의 그리움, C의 불평, D의 조롱은 지문 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-003",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "CLAIRE.\n\nAs you please. Do you like kissing games?\n\nTOM.\n\n(_Red in the face._) No; do you? (_He does._)\n\nCLAIRE.\n\nOh, I don't mind. (_An embarrassed pause._)\n\nTOM.\n\nI like football and those kind of games.\n\nCLAIRE.\n\nThey are all very well for boys. But I don't much care for games myself, and, besides, I don't have the time.\n\nTOM.\n\nWhat do girls do with themselves all the time?\n\nCLAIRE.\n\nOh! I have my lessons, and I walk out with my maid every morning, and I dress three times a day, and then I have visits to make on other little girls.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "From friendly teasing to a bitter argument about football",
+    "From cheerful excitement to quiet sadness about lost time",
+    "From awkward embarrassment to easy talk of routines",
+    "From formal politeness to open boasting about family wealth"
+   ],
+   "correct_letter": "C",
+   "explanation": "키스 놀이 이야기에서 Tom은 얼굴이 붉어지고 '어색한 침묵'이 흐른다. 그 뒤 대화는 축구와 Claire의 수업·산책·옷 갈아입기 같은 일상 이야기로 넘어가며 편안해진다. 따라서 C가 정답이다. A의 말다툼이나 D의 재산 자랑은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-004",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "Every living thing has this power to vary within limits. No doubt, the power of variation was much greater in early times, and animals and plants were able to change much more then than now.\n\nAs time went on, things sort of settled down, as it were, and stopped changing so rapidly.\n\nBut way back in the early ages the plants changed a good deal. And all they had to work with, you will remember, was just stem and leaves,—not another thing. But that was enough. They could change stem and leaves into thorns, as we know, and they could do something else.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "From doubtful questioning to firm, settled scientific certainty",
+    "From lively storytelling to dry, technical description",
+    "From warm admiration of plants to open criticism of them",
+    "From formal statement to a casual, chatty explanation"
+   ],
+   "correct_letter": "D",
+   "explanation": "첫 단락은 모든 생물이 변이할 수 있다는 사실을 격식 있게 진술한다. 그 뒤 'sort of settled down, as it were', 'you will remember' 같은 구어적 표현으로 독자에게 말을 거는 편안한 어조로 바뀐다. 따라서 D가 정답이다. B는 변화 방향이 반대이고, C의 비판은 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-005",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "In October they may be shot in extraordinary numbers, but should the sportsman be disappointed in finding his game, he may proceed to the falls of St. Anne, distant twelve miles. I mention this, supposing him to be a regular water-fall man. I had ceased to be so since I had seen Niagara. The different accounts I heard of Lake Charles prevented me from going there. Some told me it was full of cat-fish, and large frogs, which eat the little ones; others called it a beautiful lake, and that good trout-fishing was to be had there. I certainly eat some small ones, which had been caught there, of a most delicious flavour.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "From practical advice for hunters to offhand opinion",
+    "From excited praise of Lake Charles to a fearful warning",
+    "From personal memory to strict rules for every sportsman",
+    "From disappointment with Niagara to delight in waterfalls"
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 사냥꾼이 어디로 가면 좋은지 알려 주는 안내문 같은 어조로 시작한다. 그러다 'I had ceased to be so since I had seen Niagara'처럼 개인적이고 가벼운 의견이 끼어든다. 따라서 A가 정답이다. 서술자는 Lake Charles에 가지 않았으므로 B는 틀리고, Niagara에 실망했다는 D도 근거가 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-006",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "easy",
+   "passage": "We entirely believe that a republican form of government in a Christian country may be the highest, the noblest, and the happiest that the world has yet seen. Still, we do not believe in magic. And we do not believe in idolatry. We Americans are just as much given to idolatry as any other people. Our idols may differ from those of other nations; but they are, none the less, still idols. And it strikes the writer that the ballot-box is rapidly becoming an object of idolatry with us. Is it not so? From the vote alone we expect all things good. From the vote alone we expect protection against all things evil. Of the vote Americans can never have too much--of the vote they can never have enough.",
+   "question": "Which choice best describes the shift in tone that occurs in the passage?",
+   "options": [
+    "From doubtful suspicion of democracy to warm enthusiasm for it",
+    "From praise of the republic to a warning about idolatry",
+    "From humorous mockery to sincere praise of other nations' idols",
+    "From personal anger to a calm, neutral description of voting"
+   ],
+   "correct_letter": "B",
+   "explanation": "필자는 처음에 기독교 국가의 공화정이 가장 고귀한 정부일 수 있다고 칭찬한다. 그러나 'Still, we do not believe in magic' 이후 투표함이 우상이 되어 간다고 경고하는 비판적 어조로 바뀐다. 따라서 B가 정답이다. A는 변화 방향이 반대이고, D의 중립적 묘사는 지문의 날카로운 비판과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-008",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "I could see the waves, the surf ahead; knew that some shore or coast was near. But, even as I recognised this, wondering, too, why at the moment when I was doomed to be drowned I should have this gift accorded me, I lost my hold on the boat and, a moment later, was thrown ashore or, at least, touched bottom. And--and it was a hard fight; I never thought to win through it. Each recoil of the waves tore me back again only to find myself thrown forward with the next. Three times it happened. Then--then, at last, when I knew that, on the next occasion, I should have no breath left in my body, I was flung still farther on land than I had been before, and, this time, I determined I would not be dragged back alive, so I dug my foot and hands into the soft sand.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It recalls a calm voyage, then a storm, then a rescue by a passing ship.",
+    "It describes a shore in detail, then explains how the narrator built a boat.",
+    "It moves from a happy landing to regret about leaving the boat behind.",
+    "It traces a struggle in the surf that ends in a firm resolve to hold on."
+   ],
+   "correct_letter": "D",
+   "explanation": "서술자는 해안이 가까움을 알아차린 뒤 배를 놓치고 파도에 휩쓸린다. 파도에 세 번 밀려났다 던져지는 싸움이 이어지고, 마지막에 다시는 끌려가지 않겠다며 모래에 손발을 박는다. 따라서 D가 정답이다. 다른 배의 구조(A)나 배를 만드는 일(B)은 나오지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-009",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "Indeed, though the boy’s lack of discipline told on him all through life, his reader regrets nothing else which a university could have given him, except, perhaps, milder manners. Hazlitt was perfectly aware that he had too little general knowledge; but general knowledge he did not consider so good a tool for his self-set task in life as a persistent, passionate study of one or two subjects. Again, he is pleased to conjecture, with bluntness, that if he had learned more he would have thought less. (Perhaps he was the friend cited by Elia, who gave up reading to improve his originality!",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It notes a writer's lack of schooling, then explains why he accepted it.",
+    "It lists a university's benefits, then argues every student needs them.",
+    "It describes a writer's childhood, then follows his later career in order.",
+    "It criticizes a writer's manners, then defends Elia against his many critics."
+   ],
+   "correct_letter": "A",
+   "explanation": "지문은 먼저 Hazlitt가 대학 교육을 받지 못해 규율이 부족했다는 점을 언급한다. 이어 그가 폭넓은 지식보다 한두 주제에 대한 열정적 탐구를 더 나은 도구로 여겼고, 더 배웠다면 덜 생각했을 것이라 추측했다고 설명한다. 따라서 A가 정답이다. B는 지문의 입장과 반대이고, C의 연대기적 서술은 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-010",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "easy",
+   "passage": "At the end of this room, which I call the entrance-hall, and opposite the aperture, is a large door, from which three steps lead down into a chamber with two pillars. This is twenty-eight feet two inches by twenty-five feet six inches. The pillars are three feet ten inches square. I gave it the name of the drawing-room; for it is covered with figures, which, though only outlined, are so fine and perfect, that one would think they had been drawn only the day before. Returning into the entrance-hall, there is on the left of the aperture a large staircase, which descended into a corridor.",
+   "question": "Which choice best describes the overall structure of the passage?",
+   "options": [
+    "It tells the history of the builders before describing the tomb's purpose.",
+    "It moves room by room, giving measurements and noting why one was named.",
+    "It compares two tombs, then argues that one is far more beautiful.",
+    "It describes the figures in detail, then explains how they were painted."
+   ],
+   "correct_letter": "B",
+   "explanation": "서술자는 입구 홀에서 계단을 내려가 기둥 두 개가 있는 방으로 이동하며 크기를 적는다. 그 방을 그림 때문에 'drawing-room'이라 이름 붙였다고 설명한 뒤, 다시 입구 홀로 돌아와 왼쪽 계단을 묘사한다. 따라서 B가 정답이다. 건축가의 역사(A)나 두 무덤의 비교(C)는 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-easy-02-016",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "The minister had been about to speak; but when she put forth this argument he sat dumb, his lips apart, gazing at her almost with a look of terror. It was a full minute before he attempted to say anything, and that in the midst of a discussion of this sort seems a long time. He faltered a little at last, when he did speak.\n\n“I am not sure,” he said, “that I had thought of this: but no doubt you are right, no doubt you are right.”\n\n“Certainly I am right,” she cried, triumphant in her victory.",
+   "question": "Based on the narrator's description, which choice best characterizes the minister's response to the woman's argument?",
+   "options": [
+    "He dismisses it calmly and returns to his own point.",
+    "He is stunned by it and yields to it with hesitation.",
+    "He accepts it eagerly and thanks her for her wisdom.",
+    "He mocks it openly and leaves the discussion in anger."
+   ],
+   "correct_letter": "B",
+   "explanation": "목사는 그 논리를 듣자 입을 벌린 채 거의 공포에 가까운 표정으로 말을 잃는다. 한참 뒤 머뭇거리며 'no doubt you are right'라고 마지못해 인정한다. 따라서 B가 정답이다. 그가 기꺼이 감사했다는 C나 화를 냈다는 D는 지문과 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-easy-02-017",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "\"But as a daughter and a niece,\nI pride myself on every piece\nOf handiwork created;\nWhile reveling in social chat,\nOr listening to gossip flat,\nMy gain is unabated.\n\n\"That German emperor you scorn,\nSeems to my mind a monarch born,\nWorthy to lead a column;\nI'll warrant he could talk and work,\nAnd, neither being used to shirk,\nWas rarely very solemn.\n\n\"I could say more upon this head,\nBut must, before I go to bed.\nYour idle precepts mocking,\nGet out my needle and my yarn\nAnd, caring not a single darn.\nJust finish up this stocking.\"",
+   "question": "Which choice best describes the speaker's attitude toward the listener's views?",
+   "options": [
+    "She accepts them humbly and promises to change her habits.",
+    "She fears them deeply and worries about the German emperor.",
+    "She dismisses them cheerfully and turns back to her own work.",
+    "She debates them seriously and asks the listener for more advice."
+   ],
+   "correct_letter": "C",
+   "explanation": "화자는 상대가 경멸하는 독일 황제를 오히려 일도 하고 말도 할 줄 아는 인물로 옹호한다. 마지막에는 상대의 'idle precepts'를 비웃으며 전혀 개의치 않고 뜨개질을 마치겠다고 말한다. 따라서 C가 정답이다. A의 겸손한 수용이나 D의 진지한 조언 요청은 지문과 반대이다."
+  },
+  {
+   "candidateId": "lit40-easy-02-018",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "If this time ever comes shall we not cease to regard it as \"wicked\" to work at certain times, just as much as we would count it absurd to pass a law making it illegal for us to be happy on Wednesday? Isn't good work an effort to produce a useful, necessary or beautiful thing? If so, good work is a prayer, prompted by a loving heart--a prayer to benefit and bless. If prayer is not a desire, backed up by a right human effort to bring about its efficacy, then what is it?\n\nWork is a service performed for ourselves and others. If I love you I will surely work for you--in this way I reveal my love. And to manifest my love in this manner is a joy and gratification to me.",
+   "question": "Which choice best describes the author's attitude toward work?",
+   "options": [
+    "He sees it as a burden to be avoided on holy days.",
+    "He treats it as a necessary evil imposed by law.",
+    "He considers it a private duty owed to no one else.",
+    "He regards it as a joyful act of love and service."
+   ],
+   "correct_letter": "D",
+   "explanation": "필자는 좋은 일이 유용하거나 아름다운 것을 만들려는 노력이며 '기도'와 같다고 말한다. 또 사랑하면 그 사람을 위해 일하게 되고, 그렇게 사랑을 드러내는 것이 기쁨이라고 밝힌다. 따라서 D가 정답이다. 특정한 때에 일하는 것을 '사악하다'고 보는 시각은 필자가 비판하는 대상이므로 A는 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-02-019",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "I could not believe the stern truth, and was determined to find out for myself. Consequently I went back to the heights, where I had seen the troops stack their guns and throw themselves upon the ground at night-fall, but no troops were there. I thought then that they had merely changed their position, and that by going over the field I should certainly find them. I had not gone far before I saw a camp fire in the distance. Supposing that I had found a clue to the secret, I made all haste toward the fire; but as I drew near I saw but one solitary figure sitting by it, and that was the form of a female.",
+   "question": "Which choice best describes the narrator's attitude toward the \"stern truth\" mentioned in the first sentence?",
+   "options": [
+    "Unwilling to accept it and determined to test it himself",
+    "Relieved by it and eager to share it with the troops",
+    "Indifferent to it and more curious about the camp fire",
+    "Frightened by it and anxious to hide from the lone figure"
+   ],
+   "correct_letter": "A",
+   "explanation": "서술자는 첫 문장에서 그 사실을 믿을 수 없어 직접 확인하겠다고 결심한다. 이후 군대가 있던 고지로 돌아가고, 위치만 바뀌었을 것이라 생각하며 들판을 계속 찾아다닌다. 따라서 A가 정답이다. 모닥불을 향한 것도 단서를 찾기 위해서였으므로 C는 틀리다."
+  },
+  {
+   "candidateId": "lit40-easy-02-020",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "easy",
+   "passage": "For the man to discharge worthily the duties of his own position becomes his highest merit. For the woman to discharge worthily the duties of her own position becomes her highest merit. To be noble the man must be manly. To be noble the woman must be womanly. Independently of the virtues required equally of both sexes, such as truth, uprightness, candor, fidelity, honor, we look in man for somewhat more of wisdom, of vigor, of courage, from natural endowment, combined with enlarged action and experience. In woman we look more especially for greater purity, modesty, patience, grace, sweetness, tenderness, refinement, as the consequences of a finer organization, in a protected and sheltered position. That state of society will always be the most rational, the soundest, the happiest, where each sex conscientiously discharges its own duties, without intruding on those of the other.",
+   "question": "Which choice best describes the author's attitude toward the roles of men and women?",
+   "options": [
+    "Open doubt that either sex has any real duties to perform",
+    "Firm approval of distinct duties for each sex",
+    "Strong support for women entering the work of men",
+    "Mild amusement at old-fashioned ideas of manliness"
+   ],
+   "correct_letter": "B",
+   "explanation": "필자는 남자와 여자가 각자의 자리에서 의무를 다하는 것이 최고의 덕이라고 반복해 말한다. 마지막에는 각 성이 상대의 영역을 침범하지 않고 자기 의무를 다하는 사회가 가장 건전하다고 단언한다. 따라서 B가 정답이다. C는 '침범하지 않는다'는 주장과 반대이다."
+  },
+  {
+   "candidateId": "lit40-medium-07-021",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "When the buffet doors opened, the wedding hall in Busan dissolved into a hundred conversations, and Sunja let the noise carry her to a corner table. Joon, her grandson, slid in beside her, tugging at a collar his mother had ironed too stiffly, and teased her about the cousin who had tripped on the aisle runner. Sunja swatted his wrist and laughed until her eyes watered. Then he drew a creased photograph from his jacket: a young woman in a borrowed hanbok beside a man no one in the family had ever named. \"Who is he, Halmeoni?\" Sunja glanced at it, smiled, and said it was only a neighbor, a long time ago. She refilled Joon's cup, though it was nearly full, and asked loudly whether he had tried the japchae. Twice more she praised the bride's dress. When he slid the photograph back toward her, she placed her napkin over it, smoothing the cloth flat with both hands, and turned to wave at a cousin across the room.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From playful teasing between relatives to wistful nostalgia as Sunja recalls the man in the photograph",
+    "From irritation at the noisy crowd to warm amusement as Joon jokes about a clumsy cousin",
+    "From festive merriment to open grief as Sunja is reminded of a loss she has long concealed",
+    "From relaxed banter to an effortful cheerfulness that seems meant to steer attention elsewhere"
+   ],
+   "correct_letter": "D",
+   "explanation": "앞부분에서 Joon의 농담에 Sunja가 눈물이 날 만큼 웃는 장면은 편안한 농담의 분위기를 보여 준다. 사진이 나온 뒤 Sunja는 거의 찬 잔을 다시 채우고, 잡채를 크게 권하고, 신부 드레스를 두 번이나 칭찬하는데 이는 화제를 돌리려는 억지 명랑함이다. 냅킨으로 사진을 덮는 행동도 같은 의도를 뒷받침하므로 D가 정답이다. A는 Sunja가 회상에 잠기는 장면이 없고, C는 그녀가 슬픔을 드러내지 않고 오히려 감추므로 틀리며, B는 사진 이후의 변화를 놓친다."
+  },
+  {
+   "candidateId": "lit40-medium-07-022",
+   "attempt": 1,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "medium",
+   "passage": "Who goes to the cinema in Tromso in May, when the sun refuses to set and no one needs the dark? Anders asked himself this as he bought a ticket from a girl reading a magazine. Inside, the theater held eleven people, and one of them was Anneke, who had not come to Mass in three years. She waved with easy warmth, and Anders, who had rehearsed several gentle reproaches over the years, found he wanted none of them. They traded complaints about the stale popcorn and the price of parking. Then Anneke's daughter leaned across her mother's lap. \"Why don't we go to church anymore? You said Father Anders moved away.\" Anneke laughed a little too quickly and said children mix everything up. Anders laughed as well, and agreed that he did travel a great deal. He began folding his ticket stub into smaller and smaller squares. When the lights finally dimmed, he found himself studying the advertisements with unusual care.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "It shifts from lighthearted ease between two acquaintances to an awkward complicity in covering an excuse.",
+    "It shifts from friendly chatter between two acquaintances to open reproach as Anders confronts Anneke.",
+    "It shifts from wry curiosity about the empty theater to gentle amusement at a child's confused question.",
+    "It shifts from guarded politeness between a priest and a parishioner to relaxed warmth prompted by a child."
+   ],
+   "correct_letter": "A",
+   "explanation": "앞부분에서 Anders는 준비해 둔 꾸짖음을 버리고 Anneke와 팝콘과 주차비 이야기를 나누며 가볍고 편안한 분위기를 만든다. 아이의 질문 뒤 Anneke가 너무 빨리 웃으며 둘러대고 Anders도 함께 웃으며 자신이 자주 여행한다고 맞장구치는 것은 핑계를 함께 덮는 어색한 공모를 보여 준다. 표를 접고 광고를 유난히 열심히 보는 행동도 불편함을 뒷받침하므로 A가 정답이다. B는 Anders가 책망하지 않으므로, C는 두 사람의 웃음이 진짜 즐거움이 아니므로, D는 처음부터 분위기가 편안했으므로 틀리다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-070 — 16문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-070.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-easy-02-001 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nI rested but an instant while these thoughts rushed through my brain. I felt myself going down. It was useless to do so, I felt; but I could not help making one more struggle for the boon of life. It would have been useless if a kind Providence had not come to my aid, for my strength was nearly exhausted, and I was utterly inadequate to the task of bearing up the heavy burden of my companion.\n\nMy head struck against a log, one end of which had grounded on the shore, while the other projected out over the deep water of the stream. I clutched it, threw my arms around it, and hugged it as though it was the dearest friend on earth.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) From hopeless exhaustion to grateful relief at finding support\nB) From calm reflection to bitter anger at the narrator's companion\nC) From cheerful confidence to sudden fear of the deep stream\nD) From playful humor to solemn grief over a lost friend nearby\n\n[표시된 정답] A\n[해설]\n서술자는 처음에 힘이 다해 가라앉는 절망적 상태를 말한다. 그러다 통나무에 머리가 닿자 그것을 '가장 소중한 친구'처럼 껴안으며 안도와 감사의 어조로 바뀐다. 따라서 A가 정답이다. B·C·D의 분노, 쾌활한 자신감, 유머는 지문에 나타나지 않는다.\n### lit40-easy-02-002 — skill text_structure_purpose · 유형 tone_shift\n[지문]\n\"Oh, a splendid soup is the true pea-green,\nI for it often call,\nAnd up it comes, in a smart tureen,\nWhen I dine in my banquet hall.\nWhen a leg of mutton at home is boiled,\nThe liquor I always keep,\nAnd in that liquor, before 't is spoiled,\nA peck of peas I steep;\nWhen boiled till tender they have been\nI rub through a sieve the peas so green.\n\n\"Though the trouble the indolent may shock,\nI rub with all my power,\nAnd having returned them to the stock,\nI stew them for an hour;\nOf younger peas I take some more,\nThe mixture to improve,\nThrown in a little time before\nThe soup from the fire I move.\nThen seldom a better soup is seen\nThan the old familiar soup pea-green.\"\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) From sad longing for the past to joyful hope for the future\nB) From proud praise of the soup to plain cooking advice\nC) From angry complaint about the work to calm acceptance of it\nD) From formal politeness to open mockery of all lazy cooks\n\n[표시된 정답] B\n[해설]\n화자는 첫 줄에서 완두콩 수프를 'splendid'라며 자랑스럽게 칭찬한다. 이어 고기 국물에 완두콩을 담그고 체에 거르고 한 시간 끓이는 과정을 차근차근 설명하는 실용적 어조로 바뀐다. 따라서 B가 정답이다. A의 그리움, C의 불평, D의 조롱은 지문 근거가 없다.\n### lit40-easy-02-003 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nCLAIRE.\n\nAs you please. Do you like kissing games?\n\nTOM.\n\n(_Red in the face._) No; do you? (_He does._)\n\nCLAIRE.\n\nOh, I don't mind. (_An embarrassed pause._)\n\nTOM.\n\nI like football and those kind of games.\n\nCLAIRE.\n\nThey are all very well for boys. But I don't much care for games myself, and, besides, I don't have the time.\n\nTOM.\n\nWhat do girls do with themselves all the time?\n\nCLAIRE.\n\nOh! I have my lessons, and I walk out with my maid every morning, and I dress three times a day, and then I have visits to make on other little girls.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) From friendly teasing to a bitter argument about football\nB) From cheerful excitement to quiet sadness about lost time\nC) From awkward embarrassment to easy talk of routines\nD) From formal politeness to open boasting about family wealth\n\n[표시된 정답] C\n[해설]\n키스 놀이 이야기에서 Tom은 얼굴이 붉어지고 '어색한 침묵'이 흐른다. 그 뒤 대화는 축구와 Claire의 수업·산책·옷 갈아입기 같은 일상 이야기로 넘어가며 편안해진다. 따라서 C가 정답이다. A의 말다툼이나 D의 재산 자랑은 지문에 없다.\n### lit40-easy-02-004 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nEvery living thing has this power to vary within limits. No doubt, the power of variation was much greater in early times, and animals and plants were able to change much more then than now.\n\nAs time went on, things sort of settled down, as it were, and stopped changing so rapidly.\n\nBut way back in the early ages the plants changed a good deal. And all they had to work with, you will remember, was just stem and leaves,—not another thing. But that was enough. They could change stem and leaves into thorns, as we know, and they could do something else.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) From doubtful questioning to firm, settled scientific certainty\nB) From lively storytelling to dry, technical description\nC) From warm admiration of plants to open criticism of them\nD) From formal statement to a casual, chatty explanation\n\n[표시된 정답] D\n[해설]\n첫 단락은 모든 생물이 변이할 수 있다는 사실을 격식 있게 진술한다. 그 뒤 'sort of settled down, as it were', 'you will remember' 같은 구어적 표현으로 독자에게 말을 거는 편안한 어조로 바뀐다. 따라서 D가 정답이다. B는 변화 방향이 반대이고, C의 비판은 지문에 없다.\n### lit40-easy-02-005 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nIn October they may be shot in extraordinary numbers, but should the sportsman be disappointed in finding his game, he may proceed to the falls of St. Anne, distant twelve miles. I mention this, supposing him to be a regular water-fall man. I had ceased to be so since I had seen Niagara. The different accounts I heard of Lake Charles prevented me from going there. Some told me it was full of cat-fish, and large frogs, which eat the little ones; others called it a beautiful lake, and that good trout-fishing was to be had there. I certainly eat some small ones, which had been caught there, of a most delicious flavour.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) From practical advice for hunters to offhand opinion\nB) From excited praise of Lake Charles to a fearful warning\nC) From personal memory to strict rules for every sportsman\nD) From disappointment with Niagara to delight in waterfalls\n\n[표시된 정답] A\n[해설]\n지문은 사냥꾼이 어디로 가면 좋은지 알려 주는 안내문 같은 어조로 시작한다. 그러다 'I had ceased to be so since I had seen Niagara'처럼 개인적이고 가벼운 의견이 끼어든다. 따라서 A가 정답이다. 서술자는 Lake Charles에 가지 않았으므로 B는 틀리고, Niagara에 실망했다는 D도 근거가 없다.\n### lit40-easy-02-006 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWe entirely believe that a republican form of government in a Christian country may be the highest, the noblest, and the happiest that the world has yet seen. Still, we do not believe in magic. And we do not believe in idolatry. We Americans are just as much given to idolatry as any other people. Our idols may differ from those of other nations; but they are, none the less, still idols. And it strikes the writer that the ballot-box is rapidly becoming an object of idolatry with us. Is it not so? From the vote alone we expect all things good. From the vote alone we expect protection against all things evil. Of the vote Americans can never have too much--of the vote they can never have enough.\n\n[질문] Which choice best describes the shift in tone that occurs in the passage?\nA) From doubtful suspicion of democracy to warm enthusiasm for it\nB) From praise of the republic to a warning about idolatry\nC) From humorous mockery to sincere praise of other nations' idols\nD) From personal anger to a calm, neutral description of voting\n\n[표시된 정답] B\n[해설]\n필자는 처음에 기독교 국가의 공화정이 가장 고귀한 정부일 수 있다고 칭찬한다. 그러나 'Still, we do not believe in magic' 이후 투표함이 우상이 되어 간다고 경고하는 비판적 어조로 바뀐다. 따라서 B가 정답이다. A는 변화 방향이 반대이고, D의 중립적 묘사는 지문의 날카로운 비판과 맞지 않는다.\n### lit40-easy-02-008 — skill text_structure_purpose · 유형 text_structure\n[지문]\nI could see the waves, the surf ahead; knew that some shore or coast was near. But, even as I recognised this, wondering, too, why at the moment when I was doomed to be drowned I should have this gift accorded me, I lost my hold on the boat and, a moment later, was thrown ashore or, at least, touched bottom. And--and it was a hard fight; I never thought to win through it. Each recoil of the waves tore me back again only to find myself thrown forward with the next. Three times it happened. Then--then, at last, when I knew that, on the next occasion, I should have no breath left in my body, I was flung still farther on land than I had been before, and, this time, I determined I would not be dragged back alive, so I dug my foot and hands into the soft sand.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It recalls a calm voyage, then a storm, then a rescue by a passing ship.\nB) It describes a shore in detail, then explains how the narrator built a boat.\nC) It moves from a happy landing to regret about leaving the boat behind.\nD) It traces a struggle in the surf that ends in a firm resolve to hold on.\n\n[표시된 정답] D\n[해설]\n서술자는 해안이 가까움을 알아차린 뒤 배를 놓치고 파도에 휩쓸린다. 파도에 세 번 밀려났다 던져지는 싸움이 이어지고, 마지막에 다시는 끌려가지 않겠다며 모래에 손발을 박는다. 따라서 D가 정답이다. 다른 배의 구조(A)나 배를 만드는 일(B)은 나오지 않는다.\n### lit40-easy-02-009 — skill text_structure_purpose · 유형 text_structure\n[지문]\nIndeed, though the boy’s lack of discipline told on him all through life, his reader regrets nothing else which a university could have given him, except, perhaps, milder manners. Hazlitt was perfectly aware that he had too little general knowledge; but general knowledge he did not consider so good a tool for his self-set task in life as a persistent, passionate study of one or two subjects. Again, he is pleased to conjecture, with bluntness, that if he had learned more he would have thought less. (Perhaps he was the friend cited by Elia, who gave up reading to improve his originality!\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It notes a writer's lack of schooling, then explains why he accepted it.\nB) It lists a university's benefits, then argues every student needs them.\nC) It describes a writer's childhood, then follows his later career in order.\nD) It criticizes a writer's manners, then defends Elia against his many critics.\n\n[표시된 정답] A\n[해설]\n지문은 먼저 Hazlitt가 대학 교육을 받지 못해 규율이 부족했다는 점을 언급한다. 이어 그가 폭넓은 지식보다 한두 주제에 대한 열정적 탐구를 더 나은 도구로 여겼고, 더 배웠다면 덜 생각했을 것이라 추측했다고 설명한다. 따라서 A가 정답이다. B는 지문의 입장과 반대이고, C의 연대기적 서술은 없다.\n### lit40-easy-02-010 — skill text_structure_purpose · 유형 text_structure\n[지문]\nAt the end of this room, which I call the entrance-hall, and opposite the aperture, is a large door, from which three steps lead down into a chamber with two pillars. This is twenty-eight feet two inches by twenty-five feet six inches. The pillars are three feet ten inches square. I gave it the name of the drawing-room; for it is covered with figures, which, though only outlined, are so fine and perfect, that one would think they had been drawn only the day before. Returning into the entrance-hall, there is on the left of the aperture a large staircase, which descended into a corridor.\n\n[질문] Which choice best describes the overall structure of the passage?\nA) It tells the history of the builders before describing the tomb's purpose.\nB) It moves room by room, giving measurements and noting why one was named.\nC) It compares two tombs, then argues that one is far more beautiful.\nD) It describes the figures in detail, then explains how they were painted.\n\n[표시된 정답] B\n[해설]\n서술자는 입구 홀에서 계단을 내려가 기둥 두 개가 있는 방으로 이동하며 크기를 적는다. 그 방을 그림 때문에 'drawing-room'이라 이름 붙였다고 설명한 뒤, 다시 입구 홀로 돌아와 왼쪽 계단을 묘사한다. 따라서 B가 정답이다. 건축가의 역사(A)나 두 무덤의 비교(C)는 지문에 없다.\n### lit40-easy-02-016 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nThe minister had been about to speak; but when she put forth this argument he sat dumb, his lips apart, gazing at her almost with a look of terror. It was a full minute before he attempted to say anything, and that in the midst of a discussion of this sort seems a long time. He faltered a little at last, when he did speak.\n\n“I am not sure,” he said, “that I had thought of this: but no doubt you are right, no doubt you are right.”\n\n“Certainly I am right,” she cried, triumphant in her victory.\n\n[질문] Based on the narrator's description, which choice best characterizes the minister's response to the woman's argument?\nA) He dismisses it calmly and returns to his own point.\nB) He is stunned by it and yields to it with hesitation.\nC) He accepts it eagerly and thanks her for her wisdom.\nD) He mocks it openly and leaves the discussion in anger.\n\n[표시된 정답] B\n[해설]\n목사는 그 논리를 듣자 입을 벌린 채 거의 공포에 가까운 표정으로 말을 잃는다. 한참 뒤 머뭇거리며 'no doubt you are right'라고 마지못해 인정한다. 따라서 B가 정답이다. 그가 기꺼이 감사했다는 C나 화를 냈다는 D는 지문과 맞지 않는다.\n### lit40-easy-02-017 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\n\"But as a daughter and a niece,\nI pride myself on every piece\nOf handiwork created;\nWhile reveling in social chat,\nOr listening to gossip flat,\nMy gain is unabated.\n\n\"That German emperor you scorn,\nSeems to my mind a monarch born,\nWorthy to lead a column;\nI'll warrant he could talk and work,\nAnd, neither being used to shirk,\nWas rarely very solemn.\n\n\"I could say more upon this head,\nBut must, before I go to bed.\nYour idle precepts mocking,\nGet out my needle and my yarn\nAnd, caring not a single darn.\nJust finish up this stocking.\"\n\n[질문] Which choice best describes the speaker's attitude toward the listener's views?\nA) She accepts them humbly and promises to change her habits.\nB) She fears them deeply and worries about the German emperor.\nC) She dismisses them cheerfully and turns back to her own work.\nD) She debates them seriously and asks the listener for more advice.\n\n[표시된 정답] C\n[해설]\n화자는 상대가 경멸하는 독일 황제를 오히려 일도 하고 말도 할 줄 아는 인물로 옹호한다. 마지막에는 상대의 'idle precepts'를 비웃으며 전혀 개의치 않고 뜨개질을 마치겠다고 말한다. 따라서 C가 정답이다. A의 겸손한 수용이나 D의 진지한 조언 요청은 지문과 반대이다.\n### lit40-easy-02-018 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nIf this time ever comes shall we not cease to regard it as \"wicked\" to work at certain times, just as much as we would count it absurd to pass a law making it illegal for us to be happy on Wednesday? Isn't good work an effort to produce a useful, necessary or beautiful thing? If so, good work is a prayer, prompted by a loving heart--a prayer to benefit and bless. If prayer is not a desire, backed up by a right human effort to bring about its efficacy, then what is it?\n\nWork is a service performed for ourselves and others. If I love you I will surely work for you--in this way I reveal my love. And to manifest my love in this manner is a joy and gratification to me.\n\n[질문] Which choice best describes the author's attitude toward work?\nA) He sees it as a burden to be avoided on holy days.\nB) He treats it as a necessary evil imposed by law.\nC) He considers it a private duty owed to no one else.\nD) He regards it as a joyful act of love and service.\n\n[표시된 정답] D\n[해설]\n필자는 좋은 일이 유용하거나 아름다운 것을 만들려는 노력이며 '기도'와 같다고 말한다. 또 사랑하면 그 사람을 위해 일하게 되고, 그렇게 사랑을 드러내는 것이 기쁨이라고 밝힌다. 따라서 D가 정답이다. 특정한 때에 일하는 것을 '사악하다'고 보는 시각은 필자가 비판하는 대상이므로 A는 틀리다.\n### lit40-easy-02-019 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI could not believe the stern truth, and was determined to find out for myself. Consequently I went back to the heights, where I had seen the troops stack their guns and throw themselves upon the ground at night-fall, but no troops were there. I thought then that they had merely changed their position, and that by going over the field I should certainly find them. I had not gone far before I saw a camp fire in the distance. Supposing that I had found a clue to the secret, I made all haste toward the fire; but as I drew near I saw but one solitary figure sitting by it, and that was the form of a female.\n\n[질문] Which choice best describes the narrator's attitude toward the \"stern truth\" mentioned in the first sentence?\nA) Unwilling to accept it and determined to test it himself\nB) Relieved by it and eager to share it with the troops\nC) Indifferent to it and more curious about the camp fire\nD) Frightened by it and anxious to hide from the lone figure\n\n[표시된 정답] A\n[해설]\n서술자는 첫 문장에서 그 사실을 믿을 수 없어 직접 확인하겠다고 결심한다. 이후 군대가 있던 고지로 돌아가고, 위치만 바뀌었을 것이라 생각하며 들판을 계속 찾아다닌다. 따라서 A가 정답이다. 모닥불을 향한 것도 단서를 찾기 위해서였으므로 C는 틀리다.\n### lit40-easy-02-020 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nFor the man to discharge worthily the duties of his own position becomes his highest merit. For the woman to discharge worthily the duties of her own position becomes her highest merit. To be noble the man must be manly. To be noble the woman must be womanly. Independently of the virtues required equally of both sexes, such as truth, uprightness, candor, fidelity, honor, we look in man for somewhat more of wisdom, of vigor, of courage, from natural endowment, combined with enlarged action and experience. In woman we look more especially for greater purity, modesty, patience, grace, sweetness, tenderness, refinement, as the consequences of a finer organization, in a protected and sheltered position. That state of society will always be the most rational, the soundest, the happiest, where each sex conscientiously discharges its own duties, without intruding on those of the other.\n\n[질문] Which choice best describes the author's attitude toward the roles of men and women?\nA) Open doubt that either sex has any real duties to perform\nB) Firm approval of distinct duties for each sex\nC) Strong support for women entering the work of men\nD) Mild amusement at old-fashioned ideas of manliness\n\n[표시된 정답] B\n[해설]\n필자는 남자와 여자가 각자의 자리에서 의무를 다하는 것이 최고의 덕이라고 반복해 말한다. 마지막에는 각 성이 상대의 영역을 침범하지 않고 자기 의무를 다하는 사회가 가장 건전하다고 단언한다. 따라서 B가 정답이다. C는 '침범하지 않는다'는 주장과 반대이다.\n### lit40-medium-07-021 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhen the buffet doors opened, the wedding hall in Busan dissolved into a hundred conversations, and Sunja let the noise carry her to a corner table. Joon, her grandson, slid in beside her, tugging at a collar his mother had ironed too stiffly, and teased her about the cousin who had tripped on the aisle runner. Sunja swatted his wrist and laughed until her eyes watered. Then he drew a creased photograph from his jacket: a young woman in a borrowed hanbok beside a man no one in the family had ever named. \"Who is he, Halmeoni?\" Sunja glanced at it, smiled, and said it was only a neighbor, a long time ago. She refilled Joon's cup, though it was nearly full, and asked loudly whether he had tried the japchae. Twice more she praised the bride's dress. When he slid the photograph back toward her, she placed her napkin over it, smoothing the cloth flat with both hands, and turned to wave at a cousin across the room.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From playful teasing between relatives to wistful nostalgia as Sunja recalls the man in the photograph\nB) From irritation at the noisy crowd to warm amusement as Joon jokes about a clumsy cousin\nC) From festive merriment to open grief as Sunja is reminded of a loss she has long concealed\nD) From relaxed banter to an effortful cheerfulness that seems meant to steer attention elsewhere\n\n[표시된 정답] D\n[해설]\n앞부분에서 Joon의 농담에 Sunja가 눈물이 날 만큼 웃는 장면은 편안한 농담의 분위기를 보여 준다. 사진이 나온 뒤 Sunja는 거의 찬 잔을 다시 채우고, 잡채를 크게 권하고, 신부 드레스를 두 번이나 칭찬하는데 이는 화제를 돌리려는 억지 명랑함이다. 냅킨으로 사진을 덮는 행동도 같은 의도를 뒷받침하므로 D가 정답이다. A는 Sunja가 회상에 잠기는 장면이 없고, C는 그녀가 슬픔을 드러내지 않고 오히려 감추므로 틀리며, B는 사진 이후의 변화를 놓친다.\n### lit40-medium-07-022 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWho goes to the cinema in Tromso in May, when the sun refuses to set and no one needs the dark? Anders asked himself this as he bought a ticket from a girl reading a magazine. Inside, the theater held eleven people, and one of them was Anneke, who had not come to Mass in three years. She waved with easy warmth, and Anders, who had rehearsed several gentle reproaches over the years, found he wanted none of them. They traded complaints about the stale popcorn and the price of parking. Then Anneke's daughter leaned across her mother's lap. \"Why don't we go to church anymore? You said Father Anders moved away.\" Anneke laughed a little too quickly and said children mix everything up. Anders laughed as well, and agreed that he did travel a great deal. He began folding his ticket stub into smaller and smaller squares. When the lights finally dimmed, he found himself studying the advertisements with unusual care.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) It shifts from lighthearted ease between two acquaintances to an awkward complicity in covering an excuse.\nB) It shifts from friendly chatter between two acquaintances to open reproach as Anders confronts Anneke.\nC) It shifts from wry curiosity about the empty theater to gentle amusement at a child's confused question.\nD) It shifts from guarded politeness between a priest and a parishioner to relaxed warmth prompted by a child.\n\n[표시된 정답] A\n[해설]\n앞부분에서 Anders는 준비해 둔 꾸짖음을 버리고 Anneke와 팝콘과 주차비 이야기를 나누며 가볍고 편안한 분위기를 만든다. 아이의 질문 뒤 Anneke가 너무 빨리 웃으며 둘러대고 Anders도 함께 웃으며 자신이 자주 여행한다고 맞장구치는 것은 핑계를 함께 덮는 어색한 공모를 보여 준다. 표를 접고 광고를 유난히 열심히 보는 행동도 불편함을 뒷받침하므로 A가 정답이다. B는 Anders가 책망하지 않으므로, C는 두 사람의 웃음이 진짜 즐거움이 아니므로, D는 처음부터 분위기가 편안했으므로 틀리다."
+}

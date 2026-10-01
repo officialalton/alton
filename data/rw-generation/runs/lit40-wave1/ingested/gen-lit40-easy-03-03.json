@@ -1,0 +1,1133 @@
+{
+ "taskId": "gen-lit40-easy-03-03",
+ "passed": [
+  {
+   "candidateId": "lit40-easy-03-042",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-042",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 41,
+     "genre": "short_story",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Bartolo",
+      "Eunseo"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "korean"
+     ],
+     "locale": "Lima",
+     "setting": "a rented farmhouse",
+     "relationship": "a retired judge and a young clerk",
+     "conflict": "after an unsent apology",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a rented farmhouse in Lima; a retired judge and a young clerk after an unsent apology"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The white mists were still curtseying to one another across wider spaces in the valley, and the dim light behind them grew slowly stronger. There was a scent of turf-smoke on the air from a fire which someone had lit under a bank a little way down the hill. The very strokes of old Dan Heron’s hammer continued to come up in a faint rap-tap from the roadside, where he was breaking lumps of reddish sandstone; for Dan was so deaf that he applied himself to his tasks with abstracted concentration, and could not easily be interrupted. Evidently the news had not penetrated to him. A murmur of voices was passing to and fro in a knot of men gathered at a short distance. Pierce might have caught a sentence now and then.",
+    "question": "As used in the text, the phrase “curtseying to one another” most nearly suggests that the mists are?",
+    "options": [
+     "moving gently as if bowing to each other",
+     "clearing away suddenly before the sunrise",
+     "hiding the men gathered down the hill",
+     "thickening as the turf-smoke spreads"
+    ],
+    "correct_letter": "A",
+    "explanation": "'curtseying'은 무릎을 굽혀 인사하는 동작으로, 안개가 골짜기에서 서로를 향해 부드럽게 움직이는 모습을 의인화한다. 이어지는 문장에서 빛이 '천천히' 강해진다는 묘사도 느리고 고요한 아침 분위기를 뒷받침한다. 따라서 A가 정답이다. B는 '갑자기' 걷힌다는 점, C와 D는 사람을 숨기거나 연기로 짙어진다는 근거가 없다는 점에서 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "calm",
+    "quiet"
+   ],
+   "devices": [
+    "personification",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The white mists were still curtseying to one another across wider spaces in the valley, and the dim light behind them grew slowly stronger. There was a scent of turf-smoke on the air from a fire which someone had lit under a bank a little way down the hill. The very strokes of old Dan Heron’s hammer continued to come up in a faint rap-tap from the roadside, where he was breaking lumps of reddish sandstone; for Dan was so deaf that he applied himself to his tasks with abstracted concentration, and could not easily be interrupted. Evidently the news had not penetrated to him. A murmur of voices was passing to and fro in a knot of men gathered at a short distance. Pierce might have caught a sentence now and then.",
+    "source": {
+     "author": "Barlow, Jane",
+     "work": "A creel of Irish stories",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1917,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/75587",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-75587",
+     "corpusTextSha256": "2ba1d74fed1f4d352dd42f352b2b1bc8dd0ea8b5155499b66784fcd533da614d",
+     "excerptSha256": "ffcf9ba78dd1feeafa5bc2455ba66272244f686d337e6dafc12e57dbdd2e4159",
+     "sliceSha256": "9ff6b0f6a76665d10a37213efc2c47ee5c807ccea71e5e5599e585807f839a48",
+     "location": {
+      "startChar": 105070,
+      "endChar": 105789,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 31
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-043",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-043",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 42,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Kainoa",
+      "Hemi"
+     ],
+     "nameCultures": [
+      "pacific_maori_hawaiian",
+      "pacific_maori_hawaiian"
+     ],
+     "locale": "Maui",
+     "setting": "a tailor's back room",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "over silence kept to protect someone",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a tailor's back room in Maui; a retired sailor and his neighbor over silence kept to protect someone"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I chronicle wild doings in this place, and have no time for the sweets of love long denied. But strange as the bridal had been, so the nuptials were strange, one like the other played to a steel undertone. When Richard had his Jehane, at first he could not enjoy her. He rode away with her like a storm; the way was long, the pace furious. Not a word had passed between them, at least not a reasoned word. Once or twice at first he leaned forward over her shoulder and set his cheek to her glowing cheek.",
+    "question": "As used in the text, the phrase “played to a steel undertone” most nearly suggests that the marriage had?",
+    "options": [
+     "a cheerful music that filled the wedding feast",
+     "an underlying harshness running beneath it",
+     "a display of wealth in the couple's armor",
+     "a quiet sadness felt only by the narrator"
+    ],
+    "correct_letter": "B",
+    "explanation": "'steel undertone'은 결혼 밑에 깔린 차갑고 거친 기운을 음악 비유로 표현한 것이다. 리처드가 신부를 '폭풍처럼' 데려가고 속도가 '맹렬했으며' 제대로 된 말 한마디 없었다는 묘사가 이를 뒷받침한다. 따라서 B가 정답이다. A의 즐거운 음악, C의 부의 과시, D의 화자만의 슬픔은 지문 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "intense",
+    "dramatic"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I chronicle wild doings in this place, and have no time for the sweets of love long denied. But strange as the bridal had been, so the nuptials were strange, one like the other played to a steel undertone. When Richard had his Jehane, at first he could not enjoy her. He rode away with her like a storm; the way was long, the pace furious. Not a word had passed between them, at least not a reasoned word. Once or twice at first he leaned forward over her shoulder and set his cheek to her glowing cheek.",
+    "source": {
+     "author": "Hewlett, Maurice",
+     "work": "The Life and Death of Richard Yea-and-Nay",
+     "year": 1900,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1923,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/14813",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-14813",
+     "corpusTextSha256": "ed266b4df353a5fe5be8e14f665ac48ad6f0725a145d6f2d28a2df7115b4a627",
+     "excerptSha256": "ce364f92282573bd13090300b30bd47554314b26b67c634aa60a29eedcdbe718",
+     "sliceSha256": "5e53eaac769f20168ce4aa32378ab678240521d423faa796c1771feaaea1e786",
+     "location": {
+      "startChar": 159037,
+      "endChar": 159541,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 27
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-044",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-044",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 43,
+     "genre": "poetry",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Despina",
+      "Tallulah"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "indigenous_american"
+     ],
+     "locale": "the Navajo plateau",
+     "setting": "a dried-riverbed crossing",
+     "relationship": "a ranger and a lost hiker",
+     "conflict": "over a recipe that was never written down",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a dried-riverbed crossing in the Navajo plateau; a ranger and a lost hiker over a recipe that was never written down"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "I brought my doom upon myself,\nAnd there I was upon the shelf\nIn melancholy.\nWhy, say you, did I go at all?\nI once met Chloris at a ball,\nAnd in my folly\nI went and suffered all this pain\nIn hopes to see her once again.\n\nOf strawberries a pound at least\nI ate, and made myself a beast\nWith tea and sherry;\nAnd raspberries I ate and trembled,\nUntil I felt that I resembled\nMyself a berry,\nBut 'twas the berry that at school\nWe used to call a gooseberry fool.",
+    "question": "As used in the text, the phrase “upon the shelf” most nearly suggests that the speaker was?",
+    "options": [
+     "proudly displayed for everyone to admire him",
+     "busily serving food to the other guests",
+     "set aside and ignored by those around him",
+     "safely hidden from the woman he loved"
+    ],
+    "correct_letter": "C",
+    "explanation": "'upon the shelf'는 선반 위에 올려진 물건처럼 쓰이지 않고 밀려나 있는 상태를 뜻한다. 바로 뒤의 'In melancholy'와 스스로 '파멸'을 불렀다는 첫 줄이 화자가 무도회에서 소외되어 우울했음을 보여 준다. 따라서 C가 정답이다. A는 감탄의 대상이라는 점, B는 음식을 대접했다는 점, D는 클로리스를 다시 보려고 갔다는 내용과 맞지 않아 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "humorous",
+    "self-mocking"
+   ],
+   "devices": [
+    "idiom",
+    "pun",
+    "rhyme"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "I brought my doom upon myself,\nAnd there I was upon the shelf\nIn melancholy.\nWhy, say you, did I go at all?\nI once met Chloris at a ball,\nAnd in my folly\nI went and suffered all this pain\nIn hopes to see her once again.\n\nOf strawberries a pound at least\nI ate, and made myself a beast\nWith tea and sherry;\nAnd raspberries I ate and trembled,\nUntil I felt that I resembled\nMyself a berry,\nBut 'twas the berry that at school\nWe used to call a gooseberry fool.",
+    "source": {
+     "author": "Williams, James",
+     "work": "Briefless Ballads and Legal Lyrics Second Series",
+     "year": 1881,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1911,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/25281",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-25281",
+     "corpusTextSha256": "d1bbbb0191efc2af1dee2b818324573e887a1a2f029402d8612f6f79225a6ad4",
+     "excerptSha256": "2acdfce3997e58b4eed4eab3128778fa3f1d2edabe95d5445543572a166e5c43",
+     "sliceSha256": "e904bdaf931398b1f41afc32d5abc5221ccecc86d3e25c2081f9a8df808dbc95",
+     "location": {
+      "startChar": 20137,
+      "endChar": 20678,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 38
+     },
+     "genre": "poetry",
+     "workForm": "poetry"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-045",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-045",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 44,
+     "genre": "personal_essay",
+     "pov": "third_omniscient",
+     "styleEra": "early_20c",
+     "names": [
+      "Dalia",
+      "Winston"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "caribbean"
+     ],
+     "locale": "Cairo",
+     "setting": "a laundromat",
+     "relationship": "a seamstress and her only apprentice",
+     "conflict": "over a tool or instrument inherited by the wrong person",
+     "openingStyle": "감각 묘사(소리·냄새·촉감)로 시작",
+     "topicSeed": "a laundromat in Cairo; a seamstress and her only apprentice over a tool or instrument inherited by the wrong person"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "On one hand we see an enormous increase in the brain power of the people--a multitude able to think, eager to think, not to be prevented from thinking, where only two or three generations ago the thinking was done exclusively by the few. On the other hand we see the necessity for more thinking, for vigorous stirring-up of the minds of the masses, for more and more education. And, year by year, the stirring-up process increases. The evils of the present day are as old as the race, as old as ignorance, as old as human frailty. The good, the benefits, are new, entirely new.\n\nThe material and mental forces of modern civilization have already wrought wonders.",
+    "question": "As used in the text, the phrase “vigorous stirring-up of the minds of the masses” most nearly suggests a need for?",
+    "options": [
+     "a violent disturbance that threatens order",
+     "a blending of all classes into one group",
+     "a confusion that stops people from thinking",
+     "an energetic effort to awaken thinking"
+    ],
+    "correct_letter": "D",
+    "explanation": "'stirring-up'은 휘저어 깨우는 동작으로, 대중의 정신을 활발히 일깨우는 일을 비유한다. 같은 문장에서 이것이 '더 많은 사고'와 '더 많은 교육'의 필요와 나란히 제시되고, 앞 문장도 생각하려는 대중의 증가를 말한다. 따라서 D가 정답이다. A의 폭력적 혼란, B의 계층 혼합, C의 사고 마비는 교육을 긍정하는 글의 흐름과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "earnest",
+    "optimistic"
+   ],
+   "devices": [
+    "metaphor",
+    "parallelism"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "On one hand we see an enormous increase in the brain power of the people--a multitude able to think, eager to think, not to be prevented from thinking, where only two or three generations ago the thinking was done exclusively by the few. On the other hand we see the necessity for more thinking, for vigorous stirring-up of the minds of the masses, for more and more education. And, year by year, the stirring-up process increases. The evils of the present day are as old as the race, as old as ignorance, as old as human frailty. The good, the benefits, are new, entirely new.\n\nThe material and mental forces of modern civilization have already wrought wonders.",
+    "source": {
+     "author": "Phillips, David Graham",
+     "work": "The Reign of Gilt",
+     "year": 1905,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1911,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/64402",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-64402",
+     "corpusTextSha256": "d71eb0d97f8568b44def28357a0f276ebe563a61af9781b67ac18f691c1d61be",
+     "excerptSha256": "321e401b0b32d8a732eefb1ddf52c6fce1c3b468181d6a6a2b8468a3075b5703",
+     "sliceSha256": "7b77a96a4e2654f2fa885d9333476d2db5cb475601a310cec7bb96b92ea6c1fe",
+     "location": {
+      "startChar": 232043,
+      "endChar": 232705,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 69
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-046",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-046",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "words_in_context",
+    "difficulty": "easy",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 45,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Declan",
+      "Leah"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "Vermont",
+     "setting": "a printing press room",
+     "relationship": "two strangers sharing a delay",
+     "conflict": "over a witness account that differs",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a printing press room in Vermont; two strangers sharing a delay over a witness account that differs"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The mystical element in him was for ever reaching out in search of some Divine essence in the world. He was not in search at any time of personal relations. He attracted more affection than he ever gave; he rejoiced its sympathy and kindred companionship as a flower rejoices in sunshine; but I think he had little taste of the baffled suffering which accompanies all deep human passion. He once wrote \"God has preserved me extraordinarily from intimacies with others. He has done this, not I. I have longed for intimacies and failed to win them.\" He had little of the pastoral spirit; I do not think that he yearned over unshepherded souls, or primarily desired to seek and save the lost. On the other hand he responded eagerly to any claim made to himself for help and guidance, and he was always eager not to chill or disappoint people who seemed to need him.",
+    "question": "As used in the text, the phrase “as a flower rejoices in sunshine” most nearly suggests that the man felt?",
+    "options": [
+     "a natural, easy pleasure in others' warmth",
+     "a constant struggle to earn people's affection",
+     "a fragile need that withered without company",
+     "a strong urge to seek out lonely, lost souls"
+    ],
+    "correct_letter": "A",
+    "explanation": "꽃이 햇빛을 즐기듯이라는 직유는 그가 타인의 공감을 애쓰지 않고 자연스럽게 즐겼음을 뜻한다. 같은 문장에서 그는 '준 것보다 많은 애정을 받았고' 깊은 열정의 고통은 거의 몰랐다고 하여 이를 뒷받침한다. 따라서 A가 정답이다. B는 애정을 얻으려 애썼다는 점, C는 그가 개인적 관계를 찾지 않았다는 점, D는 길 잃은 영혼을 찾지 않았다는 서술과 어긋난다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "measured"
+   ],
+   "devices": [
+    "simile",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The mystical element in him was for ever reaching out in search of some Divine essence in the world. He was not in search at any time of personal relations. He attracted more affection than he ever gave; he rejoiced its sympathy and kindred companionship as a flower rejoices in sunshine; but I think he had little taste of the baffled suffering which accompanies all deep human passion. He once wrote \"God has preserved me extraordinarily from intimacies with others. He has done this, not I. I have longed for intimacies and failed to win them.\" He had little of the pastoral spirit; I do not think that he yearned over unshepherded souls, or primarily desired to seek and save the lost. On the other hand he responded eagerly to any claim made to himself for help and guidance, and he was always eager not to chill or disappoint people who seemed to need him.",
+    "source": {
+     "author": "Benson, Arthur Christopher",
+     "work": "Hugh: Memoirs of a Brother",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1925,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/18615",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-18615",
+     "corpusTextSha256": "f8ecb82920609f648f85f089edfbf4874ec9330b7dbc2ed7d15d08057a9da10a",
+     "excerptSha256": "97cf0c4d0ba3b81d80f17a69ce178e856786882883e0eb683a8ad4b460c99b4e",
+     "sliceSha256": "d67401137b4945b6ac99d62d956be7b6b8bdacb8825dff52b783040062364f86",
+     "location": {
+      "startChar": 137384,
+      "endChar": 138246,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 53
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-052",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-052",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 51,
+     "genre": "short_story",
+     "pov": "third_omniscient",
+     "styleEra": "contemporary",
+     "names": [
+      "Nguyen",
+      "Anh"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "southeast_asian"
+     ],
+     "locale": "Chiang Mai",
+     "setting": "a mountain bus stop",
+     "relationship": "a ferryman's daughter and a passenger",
+     "conflict": "about a debt neither will mention",
+     "openingStyle": "짧은 단언문으로 시작",
+     "topicSeed": "a mountain bus stop in Chiang Mai; a ferryman's daughter and a passenger about a debt neither will mention"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The description of the forest was a description of the wood where she had first met Harcourt; the charm of it returned, until she almost seemed to again inhale its balsamic freshness in the pages before her. Now, as then, her youth came back with the same longing and regret. But more bewildering than all, it was herself that moved there, painted with the loving hand of the narrator. For the first time she experienced the delicious flattery of seeing herself as only a lover could see her. The smallest detail of her costume was suggested with an accuracy that pleasantly thrilled her feminine sense.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "It moves from wistful remembrance to pleased surprise at her portrayal.",
+     "It moves from amused detachment to bitter anger at the narrator.",
+     "It moves from fearful suspicion to calm acceptance of Harcourt's absence.",
+     "It moves from careful analysis to boredom with the book's details."
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 그녀는 하코트를 처음 만난 숲을 떠올리며 '그리움과 후회'를 느낀다. 그러나 'But more bewildering than all' 이후 자신이 연인의 눈으로 그려졌음을 깨닫고 '달콤한 아첨'과 즐거운 전율을 느낀다. 따라서 A가 정답이다. B의 분노, C의 의심, D의 지루함은 지문에 나타나지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "nostalgic",
+    "delighted"
+   ],
+   "devices": [
+    "imagery",
+    "tone shift"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The description of the forest was a description of the wood where she had first met Harcourt; the charm of it returned, until she almost seemed to again inhale its balsamic freshness in the pages before her. Now, as then, her youth came back with the same longing and regret. But more bewildering than all, it was herself that moved there, painted with the loving hand of the narrator. For the first time she experienced the delicious flattery of seeing herself as only a lover could see her. The smallest detail of her costume was suggested with an accuracy that pleasantly thrilled her feminine sense.",
+    "source": {
+     "author": "Harte, Bret",
+     "work": "A First Family of Tasajara",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1902,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/2723",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-2723",
+     "corpusTextSha256": "114e4f6888545465267ec59d94d8762167884cbf871dbf1ce711f987ac7f188c",
+     "excerptSha256": "16cdc35aa2ed4f9bd116e309ad86d81fa6689c4ce3be40b8fcaf8d11a4663e91",
+     "sliceSha256": "da3cbd9e787a417daaf9dbe7187aa59919669da5ac6d438d88c95d702b406f30",
+     "location": {
+      "startChar": 294857,
+      "endChar": 295460,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 90
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-053",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-053",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 52,
+     "genre": "novel_excerpt",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Haruto",
+      "Hana"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Hokkaido",
+     "setting": "a weaving cooperative",
+     "relationship": "a young apprentice and a master carpenter",
+     "conflict": "when someone returns after years without explaining",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a weaving cooperative in Hokkaido; a young apprentice and a master carpenter when someone returns after years without explaining"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Miss Field won the first and third, her antagonist contenting himself with the second. It had always been so, and for ten years she had taken a childish delight in her skill. \"My dear Doctor,\" she often said, \"it takes a woman of brains to play chess.\"\n\n\"It does, indeed,\" he invariably answered, with an air of gallantry. Once he had been indiscreet and had won all three games, but that was in the beginning and it had never happened since.\n\nWhen the clock struck ten, he looked at his heavy, old-fashioned silver watch with apparent surprise. \"I had no idea it was so late,\" he said.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From bitter rivalry to warm reconciliation between the two players.",
+     "From Miss Field's pride to gentle irony about the Doctor's losses.",
+     "From cheerful conversation to sudden alarm at the lateness of the hour.",
+     "From solemn reflection to open mockery of Miss Field's chess skill."
+    ],
+    "correct_letter": "B",
+    "explanation": "처음에는 필드 양이 체스 실력을 '어린아이처럼' 기뻐하는 모습이 그려진다. 그러나 박사가 한 번 '경솔하게' 세 판을 다 이긴 뒤 다시는 그런 일이 없었다는 서술에서 그가 일부러 져 준다는 은근한 아이러니가 드러난다. 따라서 B가 정답이다. A의 원한, C의 놀람, D의 공개적 조롱은 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "affectionate",
+    "wry"
+   ],
+   "devices": [
+    "irony",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Miss Field won the first and third, her antagonist contenting himself with the second. It had always been so, and for ten years she had taken a childish delight in her skill. \"My dear Doctor,\" she often said, \"it takes a woman of brains to play chess.\"\n\n\"It does, indeed,\" he invariably answered, with an air of gallantry. Once he had been indiscreet and had won all three games, but that was in the beginning and it had never happened since.\n\nWhen the clock struck ten, he looked at his heavy, old-fashioned silver watch with apparent surprise. \"I had no idea it was so late,\" he said.",
+    "source": {
+     "author": "Reed, Myrtle",
+     "work": "The Master's Violin",
+     "year": 1904,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1911,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/33601",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-33601",
+     "corpusTextSha256": "b6b769fb1894d9fd6c2eabd806f01858ad293fca3df90be5cbcecd9536bd867b",
+     "excerptSha256": "c56871b1b4a1a5989531eb2dd3d89f2d8f25e7b1d4971ae53eb5a25b48d6e9cd",
+     "sliceSha256": "1606c470d7545469df5b2edfc83e0b2c033ffefcec47477e813dc7f03650e35b",
+     "location": {
+      "startChar": 64455,
+      "endChar": 65041,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 20
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-054",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-054",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 53,
+     "genre": "personal_essay",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Hassan",
+      "Benedita"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a roadside diner",
+     "relationship": "a coach and a benched star",
+     "conflict": "when a visitor arrives and sees what the family does not",
+     "openingStyle": "시간·날짜 표현으로 시작('By', 'On', 'After' 등)",
+     "topicSeed": "a roadside diner in Lisbon; a coach and a benched star when a visitor arrives and sees what the family does not"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The drainage has been rendered better, and the fearful odours that met you at every turn have disappeared. The poor are indolent, dirty, thriftless, and ill-housed; but that does not much matter, as most of their lives are passed in the open air. The convents are suppressed, the schoolmaster is abroad, and they may grow better as the years roll by, and Italy, as a nation, once more becomes great and renowned. But a good deal has yet to be done. I heard of things to be seen in Naples of the most disgraceful and disgusting character.",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From harsh condemnation to full satisfaction with Naples' progress.",
+     "From playful humor to deep grief over the suffering of the city's poor.",
+     "From measured hope about reforms to sharp disapproval of what remains.",
+     "From detached description to warm praise for Italy's former glory."
+    ],
+    "correct_letter": "C",
+    "explanation": "앞부분에서 화자는 배수 개선, 학교 교육 등을 들며 이탈리아가 '나아질 수도 있다'고 조심스럽게 기대한다. 그러나 'But a good deal has yet to be done' 이후 '수치스럽고 역겨운' 일들을 언급하며 비판적 어조로 바뀐다. 따라서 C가 정답이다. A는 순서가 반대이고, B의 슬픔과 D의 과거 찬양은 지문 근거가 없다."
+   },
+   "notes": [],
+   "tone": [
+    "critical",
+    "guarded"
+   ],
+   "devices": [
+    "contrast",
+    "tone shift"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The drainage has been rendered better, and the fearful odours that met you at every turn have disappeared. The poor are indolent, dirty, thriftless, and ill-housed; but that does not much matter, as most of their lives are passed in the open air. The convents are suppressed, the schoolmaster is abroad, and they may grow better as the years roll by, and Italy, as a nation, once more becomes great and renowned. But a good deal has yet to be done. I heard of things to be seen in Naples of the most disgraceful and disgusting character.",
+    "source": {
+     "author": "Ritchie, J. Ewing (James Ewing)",
+     "work": "Cities of the Dawn\r Naples - Athens - Pompeii - Constantinople - Smyrna - Jaffa - Jerusalem - Alexandria - Cairo - Marseilles - Avignon - Lyons - Dijon",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1898,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/36084",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-36084",
+     "corpusTextSha256": "07cbd17eed2beae03ddb2f0011e57162186cd21a72e213c471c84713d64db8d1",
+     "excerptSha256": "8ac95697a397b9df8151cc8442f6f7e5759fa1aab392d0e89fe278aec3f24de9",
+     "sliceSha256": "ef581cf31b21871fa7b57c3a1a577ce1339ea96ac000e595bc7354a097beebfc",
+     "location": {
+      "startChar": 31232,
+      "endChar": 31773,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 10
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-055",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-055",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "tone_shift",
+    "genre": "memoir",
+    "seed": {
+     "index": 54,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Takeshi",
+      "Shigeru"
+     ],
+     "nameCultures": [
+      "japanese",
+      "japanese"
+     ],
+     "locale": "Kyoto",
+     "setting": "a tea plantation",
+     "relationship": "a grandson and the grandfather's old friend",
+     "conflict": "after a storm reveals what was buried",
+     "openingStyle": "숫자·목록·규칙을 말하며 시작",
+     "topicSeed": "a tea plantation in Kyoto; a grandson and the grandfather's old friend after a storm reveals what was buried"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The high-priced quartet has never been relied upon, the chorus choir being preferred, not merely for its own singing, but because it served best in leading the congregation, and that was the thing ever kept in mind. Mr. Beecher loved the old-fashioned hymns, though he had also a hearty welcome for new ones, and he was never satisfied unless he got everybody to singing. I have often seen him jump up from his chair right in the middle of a hymn and hold up his hand for silence. \"You are not singing this hymn right,\" he would say. \"Sing it with more spirit, and let everybody sing.\"",
+    "question": "Which choice best describes the shift in tone in the text?",
+    "options": [
+     "From fond praise of Beecher to sharp criticism of his strict methods.",
+     "From excitement about new hymns to regret over losing the old ones.",
+     "From formal complaint about the choir to amused approval of the quartet.",
+     "From calm explanation to a lively scene of Beecher in action."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분은 비싼 사중창단 대신 합창단을 둔 이유를 차분히 설명한다. 이후 'I have often seen him jump up' 부분부터 비처가 찬송 도중 벌떡 일어나 손을 들고 직접 외치는 생생한 장면으로 바뀐다. 따라서 D가 정답이다. A의 비판, B의 후회, C의 사중창단 칭찬은 지문 내용과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "admiring",
+    "lively"
+   ],
+   "devices": [
+    "anecdote",
+    "dialogue"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The high-priced quartet has never been relied upon, the chorus choir being preferred, not merely for its own singing, but because it served best in leading the congregation, and that was the thing ever kept in mind. Mr. Beecher loved the old-fashioned hymns, though he had also a hearty welcome for new ones, and he was never satisfied unless he got everybody to singing. I have often seen him jump up from his chair right in the middle of a hymn and hold up his hand for silence. \"You are not singing this hymn right,\" he would say. \"Sing it with more spirit, and let everybody sing.\"",
+    "source": {
+     "author": "Griswold, Stephen Morrell",
+     "work": "Sixty years with Plymouth Church",
+     "year": 1907,
+     "yearSource": "text-header(copyright/published line)",
+     "authorDeathYear": 1916,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/24356",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-24356",
+     "corpusTextSha256": "a4034f6c498de44063dba01cf9c920ea8af0f2fd5684a2bf50dd71702fef02a7",
+     "excerptSha256": "d85e9f17ab050ae3504ef3a5505aa38f5412cee33f9ec8f546a3b5c0e34425af",
+     "sliceSha256": "481dca7e4e9972490fd29d1f33eacbb301994b54e66e418948bf41174f560b04",
+     "location": {
+      "startChar": 30663,
+      "endChar": 31248,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 24
+     },
+     "genre": "memoir",
+     "workForm": "memoir"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-056",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-056",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "short_story",
+    "seed": {
+     "index": 55,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "contemporary",
+     "names": [
+      "Jordan",
+      "Casey"
+     ],
+     "nameCultures": [
+      "english",
+      "english"
+     ],
+     "locale": "the Cornish coast",
+     "setting": "a language school classroom",
+     "relationship": "a pair of lifelong friends who rarely speak",
+     "conflict": "over a borrowed object never returned",
+     "openingStyle": "구체적인 사물이나 동작으로 시작(관사 The 로 시작하지 말 것)",
+     "topicSeed": "a language school classroom in the Cornish coast; a pair of lifelong friends who rarely speak over a borrowed object never returned"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "The loss of her son struck the final blow to Mrs. Hale's already declining health, and a severe attack of fever, which for some time threatened her life, left her totally blind. She arose from her bed of sickness, a sadder but a wiser woman, confessing the folly and weakness of which she had been guilty in her treatment of Tom.\n\nShe was no longer able to work for herself, and her friends advised her to go into the workhouse. But the poor woman clung so fondly to her old home, every corner of which was familiar to her, and into every room of which she could soon grope her way by means of a stick, that Sir Herbert, to whom the cottage belonged, consented to her staying in it as long as she liked.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It describes a misfortune that blinds Mrs. Hale and how she keeps her home.",
+     "It recounts Tom's return home and then describes Mrs. Hale's joyful recovery.",
+     "It compares the cottage with the workhouse and then argues for the workhouse.",
+     "It introduces Sir Herbert as a landlord and then lists the rules of his cottages."
+    ],
+    "correct_letter": "A",
+    "explanation": "첫 단락은 아들을 잃은 충격과 열병으로 헤일 부인이 시력을 잃는 불행을 서술한다. 둘째 단락은 일할 수 없게 된 그녀가 구빈원 대신 익숙한 집에 계속 머물게 되는 과정을 보여 준다. 따라서 A가 정답이다. B는 톰의 귀환이 없고, C는 구빈원을 옹호하지 않으며, D는 허버트 경이 잠깐 언급될 뿐이라 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "somber",
+    "sympathetic"
+   ],
+   "devices": [
+    "chronological narration"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "The loss of her son struck the final blow to Mrs. Hale's already declining health, and a severe attack of fever, which for some time threatened her life, left her totally blind. She arose from her bed of sickness, a sadder but a wiser woman, confessing the folly and weakness of which she had been guilty in her treatment of Tom.\n\nShe was no longer able to work for herself, and her friends advised her to go into the workhouse. But the poor woman clung so fondly to her old home, every corner of which was familiar to her, and into every room of which she could soon grope her way by means of a stick, that Sir Herbert, to whom the cottage belonged, consented to her staying in it as long as she liked.",
+    "source": {
+     "author": "O'Brien, Charlotte Grace",
+     "work": "The happiness of Hazelbrook",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1909,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/78045",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-78045",
+     "corpusTextSha256": "2cd7210d184e2023f611a59a696b48570565b0de0d516b8b349281656d00cac0",
+     "excerptSha256": "a42a54672525a592f7cdd3449497ae449204598f0bff02bab25ee8c0c1af2d7f",
+     "sliceSha256": "27646e51afc16df9ef5c12daa823489458524b383122fb6f3673c96c6f656aa4",
+     "location": {
+      "startChar": 68548,
+      "endChar": 69251,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 77
+     },
+     "genre": "short_story",
+     "workForm": "short_story"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-057",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-057",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 56,
+     "genre": "novel_excerpt",
+     "pov": "mixed_or_none",
+     "styleEra": "early_20c",
+     "names": [
+      "Waya",
+      "Nova"
+     ],
+     "nameCultures": [
+      "indigenous_american",
+      "indigenous_american"
+     ],
+     "locale": "Albuquerque",
+     "setting": "a courtyard with a dry fountain",
+     "relationship": "a daughter and her absent father's friend",
+     "conflict": "over a repair that could never really fix it",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a courtyard with a dry fountain in Albuquerque; a daughter and her absent father's friend over a repair that could never really fix it"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Tam would have come into it almost intact. He might have been able to educate himself while he was yet young, to spare himself many a drudging day and weary night.\n\nBut looking back calmly over the gulf of years, with the mountains of difficulty well past, the man decided it was better as it had been. He had profited by the warfare he had undergone--it had made twice the man of him that he might have been otherwise. It was more honourable to have hewed out the fortune which he honestly thought so great and enviable, than to have derived even a part of it from the gift of another.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It lists Tam's many hardships and then blames another person for them.",
+     "It imagines an easier past for Tam and then why he prefers his own.",
+     "It describes Tam's present fortune and then predicts how he will spend it.",
+     "It recounts a quarrel over a gift and then describes how it was settled."
+    ],
+    "correct_letter": "B",
+    "explanation": "첫 단락은 탐이 재산을 물려받았다면 일찍 교육받고 고생을 덜 했을 것이라는 가정을 제시한다. 둘째 단락은 'But' 이후 그가 지난 투쟁이 자신을 두 배의 사람으로 만들었으므로 실제 삶이 더 나았다고 결론짓는다. 따라서 B가 정답이다. A의 남 탓, C의 미래 예측, D의 다툼은 지문에 없다."
+   },
+   "notes": [],
+   "tone": [
+    "reflective",
+    "proud"
+   ],
+   "devices": [
+    "hypothetical",
+    "contrast"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Tam would have come into it almost intact. He might have been able to educate himself while he was yet young, to spare himself many a drudging day and weary night.\n\nBut looking back calmly over the gulf of years, with the mountains of difficulty well past, the man decided it was better as it had been. He had profited by the warfare he had undergone--it had made twice the man of him that he might have been otherwise. It was more honourable to have hewed out the fortune which he honestly thought so great and enviable, than to have derived even a part of it from the gift of another.",
+    "source": {
+     "author": "Tytler, Sarah",
+     "work": "Saint Mungo's city; vol. 2 [of 3]",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1914,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/79372",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg:gutenberg-79372",
+     "corpusTextSha256": "79f300fa70d17367cdd3426263e17b6259ee2de78e0d3653b545ac4caae60bea",
+     "excerptSha256": "dfd60859d496480a6a9b53c16e2311977e4144bb8561435296d11bd665991196",
+     "sliceSha256": "f5d82ef34d334c84929664e2b6c4212c42890f695554b838a5af8f9ef072fa18",
+     "location": {
+      "startChar": 225818,
+      "endChar": 226404,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 80
+     },
+     "genre": "novel_excerpt",
+     "workForm": "novel_excerpt"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-easy-03-058",
+   "task": "gen-lit40-easy-03-03",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-easy-03-058",
+    "batchId": "lit40-easy-03",
+    "route": "excerpt",
+    "skill": "text_structure_purpose",
+    "difficulty": "easy",
+    "questionType": "text_structure",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 57,
+     "genre": "personal_essay",
+     "pov": "third_limited",
+     "styleEra": "late_20c",
+     "names": [
+      "Nasrin",
+      "Aydin"
+     ],
+     "nameCultures": [
+      "persian_central_asian",
+      "persian_central_asian"
+     ],
+     "locale": "Samarkand",
+     "setting": "a quiet library",
+     "relationship": "a captain and a stowaway",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a quiet library in Samarkand; a captain and a stowaway while hiding a small failure"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Be sure that every motive which comes not from the single eye; every motive which springs from self; is by its very essence unheroic, let it look as gaudy or as beneficent as it may.\n\nBut I cannot go so far as to say the same of the love of approbation--the desire for the love and respect of our fellow-men.\n\nThat must not be excluded from the list of heroic motives. I know that it is, or may be proved to be, by victorious analysis, an emotion common to us and the lower animals. And yet no man excludes it less than that true hero, St. Paul.",
+    "question": "Which choice best describes the overall structure of the text?",
+    "options": [
+     "It praises St. Paul's heroism and then lists the motives he rejected.",
+     "It defines heroism and then argues that no human motive is heroic.",
+     "It rejects selfish motives and then defends one, love of approval.",
+     "It describes animal emotions and then contrasts them with human habits."
+    ],
+    "correct_letter": "C",
+    "explanation": "글은 먼저 자기에게서 나온 동기는 본질적으로 영웅적이지 않다고 단언한다. 이어 'But' 이후 인정받고 싶은 욕구만은 예외라고 하며 반론을 인정한 뒤 성 바울을 예로 들어 옹호한다. 따라서 C가 정답이다. A는 성 바울이 마지막 예시일 뿐이고, B는 예외를 인정하는 내용과 어긋나며, D는 동물 감정이 반론의 일부로만 언급되어 틀리다."
+   },
+   "notes": [],
+   "tone": [
+    "earnest",
+    "argumentative"
+   ],
+   "devices": [
+    "concession",
+    "example"
+   ],
+   "producerModel": "opus",
+   "excerpt": {
+    "text": "Be sure that every motive which comes not from the single eye; every motive which springs from self; is by its very essence unheroic, let it look as gaudy or as beneficent as it may.\n\nBut I cannot go so far as to say the same of the love of approbation--the desire for the love and respect of our fellow-men.\n\nThat must not be excluded from the list of heroic motives. I know that it is, or may be proved to be, by victorious analysis, an emotion common to us and the lower animals. And yet no man excludes it less than that true hero, St. Paul.",
+    "source": {
+     "author": "Kingsley, Charles",
+     "work": "Health and Education",
+     "year": null,
+     "yearSource": "unknown(코퍼스 메타에 발행연도 없음)",
+     "authorDeathYear": 1875,
+     "sourceUrl": "https://www.gutenberg.org/ebooks/17437",
+     "license": "public_domain_us",
+     "licenseEvidenceUrl": "https://www.gutenberg.org/policy/permission.html",
+     "corpusId": "gutenberg_humanities:gutenberg-17437",
+     "corpusTextSha256": "5864e285432f153ead54d0ca99ab1ff2174455c17a3f506938ae2c73d7d46aea",
+     "excerptSha256": "ca8bd0be96ebee3ba5dd9a2e6f73d8c16a5f225ace6c79f39caaccc3d7c9d415",
+     "sliceSha256": "60ab07967a1bdebae642a5a0a097c2d7955a79d757daf06038c588a42640dd41",
+     "location": {
+      "startChar": 296610,
+      "endChar": 297157,
+      "basis": "LF-normalized corpus text",
+      "approxPercent": 53
+     },
+     "genre": "personal_essay",
+     "workForm": "personal_essay"
+    }
+   },
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-easy-03-041",
+   "stage": "distractor",
+   "reasons": [
+    "오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-047",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-048",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-049",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-050",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-051",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-059",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  },
+  {
+   "candidateId": "lit40-easy-03-060",
+   "stage": "format",
+   "reasons": [
+    "발췌 지문이 제공된 원문과 다름"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

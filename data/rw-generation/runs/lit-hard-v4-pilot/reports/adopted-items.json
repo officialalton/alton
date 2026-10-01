@@ -1,1 +1,578 @@
-[]
+[
+ {
+  "gid": "rwlit:hardv4-hard-01-002",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Father Mohan cannot cook. He has told me so himself, three times, while standing in my cellar up to his shins in Nile water and asking about my mother's lentil bread. I said the recipe went into the ground with her, which was not a lie, exactly, since she never measured anything and I only ever watched. He nodded and lifted another sack of flour onto the shelf above the waterline. For a man who preaches at me every feast day, he carries flour poorly; half of it was paste by noon. When he had gone, I found the sacks stacked by weight, the ruined ones set apart, and a pencil note on the lid of the bread tin asking only what she had used in place of salt. I kept the note. On Sunday, I set a loaf on the vestry step before the bells, and went home by the long road so as not to pass his door.\n\nWhich choice best describes the narrator's attitude toward Father Mohan?",
+   "stimulus": "Father Mohan cannot cook. He has told me so himself, three times, while standing in my cellar up to his shins in Nile water and asking about my mother's lentil bread. I said the recipe went into the ground with her, which was not a lie, exactly, since she never measured anything and I only ever watched. He nodded and lifted another sack of flour onto the shelf above the waterline. For a man who preaches at me every feast day, he carries flour poorly; half of it was paste by noon. When he had gone, I found the sacks stacked by weight, the ruined ones set apart, and a pencil note on the lid of the bread tin asking only what she had used in place of salt. I kept the note. On Sunday, I set a loaf on the vestry step before the bells, and went home by the long road so as not to pass his door.",
+   "question": "Which choice best describes the narrator's attitude toward Father Mohan?",
+   "options": [
+    "Mildly mocking of Mohan's efforts while weary of his preaching",
+    "Warm toward Mohan while driven mainly by guilt about her mother",
+    "Skeptical of Mohan's cooking while curious about his pencil note",
+    "Grudgingly appreciative of Mohan's help while unwilling to say so"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "화자는 앞부분에서 Mohan이 요리를 못하고 밀가루도 서툴게 나른다며 건조하게 비꼰다. 중간의 '거짓말은 아니었다, 정확히는'이라는 정정은 화자가 레시피를 완전히 닫아 버린 것은 아님을 암시한다. 뒷부분에서 화자는 그의 쪽지를 간직하고 빵을 몰래 두고 오되 그의 집 앞은 피해 돌아간다. 따라서 마지못한 고마움을 드러내지 않으려는 태도인 D가 정답이며, A는 말투만, B는 이유를 어머니에 대한 죄책감으로 바꾼 것, C는 지문 어휘(cooking, note)를 빌린 일반화다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "narrator_attitude",
+   "weakType": false,
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a flooded cellar in Cairo; a priest and a lapsed parishioner over a recipe that was never written down",
+    "names": [
+     "Mohan",
+     "Lanying"
+    ],
+    "locale": "Cairo"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-003",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_lit_narrator_attitude_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Flour dust on the counter showed every mark of Astrid's borrowed fountain pen, which she had been tapping since six. I had lent it to her at the notary's office in March, for one signature, and I reminded her of this whenever we met, usually while she was mispronouncing 'gracias' to someone who spoke perfect English. Clients like Astrid keep interpreters humble; they also keep us broke. I wanted the pen back, or I told myself I did, which is not quite the same. When the baker came out with the first trays, Astrid asked me how to say that the bread smelled like her grandmother's kitchen. I gave her the words slowly, twice, and let her say them herself. Later, when she reached for the pen to sign for the order, I looked at the window and asked the baker about the weather in the hills.\n\nWhich choice best describes the narrator's attitude toward Astrid?",
+   "stimulus": "Flour dust on the counter showed every mark of Astrid's borrowed fountain pen, which she had been tapping since six. I had lent it to her at the notary's office in March, for one signature, and I reminded her of this whenever we met, usually while she was mispronouncing 'gracias' to someone who spoke perfect English. Clients like Astrid keep interpreters humble; they also keep us broke. I wanted the pen back, or I told myself I did, which is not quite the same. When the baker came out with the first trays, Astrid asked me how to say that the bread smelled like her grandmother's kitchen. I gave her the words slowly, twice, and let her say them herself. Later, when she reached for the pen to sign for the order, I looked at the window and asked the baker about the weather in the hills.",
+   "question": "Which choice best describes the narrator's attitude toward Astrid?",
+   "options": [
+    "Affectionate toward Astrid while posing as a put-upon creditor",
+    "Irritated by Astrid's habits while resigned to losing the pen",
+    "Patient with Astrid while hoping to earn her future business",
+    "Humble about her own work while still wanting the pen back"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "화자는 앞부분에서 펜을 빌려 간 일을 매번 상기시키고 Astrid의 서툰 스페인어와 수입 문제를 투덜거린다. 중간에 '돌려받고 싶다고 스스로에게 말했을 뿐'이라는 정정이 나와 불평이 진심이 아님을 내비친다. 뒷부분에서 화자는 Astrid가 직접 말하도록 단어를 천천히 가르쳐 주고, 그녀가 펜을 쓰려 할 때 일부러 시선을 돌려 화제를 피한다. 그러므로 빚쟁이 행세 아래 애정이 깔린 A가 정답이며, B는 말투만, C는 이유를 금전적 이익으로 바꾼 것, D는 지문 어휘(humble, wanted)를 빌려 정정 어구와 맞지 않게 일반화한 것이다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "narrator_attitude",
+   "weakType": false,
+   "genre": "memoir",
+   "targetLetter": "A",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a bakery before opening in Oaxaca; an interpreter and her client over a borrowed object never returned",
+    "names": [
+     "Makana",
+     "Astrid"
+    ],
+    "locale": "Oaxaca"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-004",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Two bakers share my scale. Every morning before I open, Wira and Arisa come through the back door of the shop with their sacks, and each accuses the other of resting a thumb on the brass pan. I have watched this for six years from behind a bolt of silk. They weigh, they quarrel about the weight, they leave by separate doors. On the wall above the scale someone keeps a chalk tally in two columns, and I have never asked whose hand it is. Last winter Arisa went to her sister's in Hai Phong for a month. Wira came at the usual hour, weighed his flour, and then, without a word to me, weighed out a second sack and set it by the door Arisa always used. He frowned at the pan for a long while, lifted his thumb from the edge, and weighed it again. Each morning the second column on the wall grew by one mark.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "Two bakers share my scale. Every morning before I open, Wira and Arisa come through the back door of the shop with their sacks, and each accuses the other of resting a thumb on the brass pan. I have watched this for six years from behind a bolt of silk. They weigh, they quarrel about the weight, they leave by separate doors. On the wall above the scale someone keeps a chalk tally in two columns, and I have never asked whose hand it is. Last winter Arisa went to her sister's in Hai Phong for a month. Wira came at the usual hour, weighed his flour, and then, without a word to me, weighed out a second sack and set it by the door Arisa always used. He frowned at the pan for a long while, lifted his thumb from the edge, and weighed it again. Each morning the second column on the wall grew by one mark.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "Two rival bakers share a scale and argue each morning over its fairness.",
+    "Two rival bakers keep up a morning quarrel that quietly binds them together.",
+    "One baker, left alone, keeps weighing flour at the usual hour each morning.",
+    "Two rival bakers grow closer because one baker's absence ends their quarrel."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞부분의 사건은 두 제빵사가 매일 아침 저울을 두고 서로 엄지를 올린다고 다투는 장면이다. 중간의 두 칸짜리 분필 기록은 설명 없이 남지만, 뒷부분에서 Arisa가 없는 동안 Wira가 그녀 몫까지 달고 자기 엄지를 떼어 다시 재며 두 번째 칸이 계속 늘어난다. 이 두 사건을 겹치면 다툼 자체가 둘을 묶는 의식이었음이 드러나므로 B가 정답이다. A는 사건 1만, C는 사건 2만 말하며, D는 부재가 다툼을 끝내 가까워졌다고 인과 방향을 뒤집었다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "main_idea_or_purpose",
+   "weakType": true,
+   "genre": "personal_essay",
+   "targetLetter": "B",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a tailor's back room in Hanoi; a pair of rival bakers over a shared chore that has become a ritual",
+    "names": [
+     "Wira",
+     "Arisa"
+    ],
+    "locale": "Hanoi"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-005",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "I met Ayesha for the first time at the cafe in Shanghai South Station, where she thanked me for keeping her late uncle's garden exactly as he had left it. I accepted the thanks and the green tea. I did not mention the plum tree by the gate, which had died in March and which I had replaced, at my own cost, with one from a nursery in Songjiang. In my coat that day was a folded receipt that I kept meaning to throw away. A year later we met at the same table. Ayesha slid a photograph across to me: her uncle, young, beside the gate, the plum tree behind him already thick and crooked. She asked whether I thought a tree could straighten itself with age. I said some did. She nodded, put the photograph back in her bag, and ordered us both another pot.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "I met Ayesha for the first time at the cafe in Shanghai South Station, where she thanked me for keeping her late uncle's garden exactly as he had left it. I accepted the thanks and the green tea. I did not mention the plum tree by the gate, which had died in March and which I had replaced, at my own cost, with one from a nursery in Songjiang. In my coat that day was a folded receipt that I kept meaning to throw away. A year later we met at the same table. Ayesha slid a photograph across to me: her uncle, young, beside the gate, the plum tree behind him already thick and crooked. She asked whether I thought a tree could straighten itself with age. I said some did. She nodded, put the photograph back in her bag, and ordered us both another pot.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A gardener accepts praise for a garden while concealing a costly replacement.",
+    "A new owner shares an old photograph of her uncle beside the garden gate.",
+    "A gardener's hidden repair is likely seen through and tactfully left unspoken.",
+    "A gardener's silence about a repair makes the owner doubt his other work."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "사건 1에서 화자는 정원을 그대로 지켜 줬다는 감사를 받으면서 죽은 매화나무를 몰래 바꿔 심은 사실을 숨긴다. 1년 뒤 사건 2에서 Ayesha는 원래 나무가 굵고 굽어 있던 사진을 보여 주며 나무가 곧게 펴질 수 있는지 묻고, 화자의 얼버무림에 고개만 끄덕인 뒤 차를 더 주문한다. 두 사건을 함께 읽으면 화자의 숨김이 이미 간파되었으나 조용히 묻어 두어졌음을 알 수 있어 C가 정답이다. A는 사건 1만, B는 사건 2의 표현만 빌렸고, D는 침묵이 의심을 낳았다고 관계를 뒤집었으나 지문에는 그런 의심의 행동이 없다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "main_idea_or_purpose",
+   "weakType": true,
+   "genre": "memoir",
+   "targetLetter": "C",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a train-station cafe in Shanghai; a gardener and the house's new owner while hiding a small failure",
+    "names": [
+     "Haoran",
+     "Ayesha"
+    ],
+    "locale": "Shanghai"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-006",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "central_ideas_details",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "central_ideas_details_lit_main_idea_or_purpose_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "By the autumn of 1931 the ranger Eunseo had given up the mountain and taken the job of marking the school field in lime. Eleven years earlier she had found a hiker named Bokhee in the fog below the crater, half a day off the trail, and had walked him down without once letting go of his collar, saying in front of the whole village that a fool deserved the fog. He had left the island the next week. She still kept, in her coat, the collar button that had come off in her hand. At dusk one evening a man came onto the field with a dozen boys and a ball. He set them in a row along her fresh white line and told them that anyone who crossed it before the whistle would run the field twice. Eunseo started toward him, the words she had saved ready in her mouth. Bokhee raised his hand to her, then blew his own whistle, and the boys ran.\n\nWhich choice best states the main idea of the text?",
+   "stimulus": "By the autumn of 1931 the ranger Eunseo had given up the mountain and taken the job of marking the school field in lime. Eleven years earlier she had found a hiker named Bokhee in the fog below the crater, half a day off the trail, and had walked him down without once letting go of his collar, saying in front of the whole village that a fool deserved the fog. He had left the island the next week. She still kept, in her coat, the collar button that had come off in her hand. At dusk one evening a man came onto the field with a dozen boys and a ball. He set them in a row along her fresh white line and told them that anyone who crossed it before the whistle would run the field twice. Eunseo started toward him, the words she had saved ready in her mouth. Bokhee raised his hand to her, then blew his own whistle, and the boys ran.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "A ranger once shamed a lost hiker publicly while leading him to safety.",
+    "A man trains a row of boys to wait for his whistle at a line.",
+    "A ranger's later regret leads her to treat a returning hiker more gently.",
+    "A ranger's old harshness lives on in the hiker's teaching, overtaking her apology."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞부분의 사건 1에서 Eunseo는 길 잃은 Bokhee를 멱살 잡듯 끌고 내려오며 마을 사람들 앞에서 망신을 준다. 중간의 단추는 설명 없이 남지만, 뒷부분 사건 2에서 Bokhee는 아이들을 그녀가 그은 선에 세우고 휘파람 전에 넘지 말라고 엄하게 가르친다. Eunseo가 준비한 말을 꺼내기도 전에 그는 손을 들고 휘파람을 불어, 그녀의 엄격함이 이미 그의 가르침이 되어 사과를 앞질렀음이 드러나므로 D가 정답이다. A는 사건 1만, B는 사건 2만 말하며, C는 그녀의 후회가 행동을 바꿨다고 인과를 뒤집었는데 지문은 그녀가 실제로 대하는 방식을 보여 주지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "main_idea_or_purpose",
+   "weakType": true,
+   "genre": "short_story",
+   "targetLetter": "D",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a soccer field at dusk in Jeju Island; a ranger and a lost hiker over an apology offered too late",
+    "names": [
+     "Eunseo",
+     "Bokhee"
+    ],
+    "locale": "Jeju Island"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-007",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_lit_character_motivation_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "When the garden gate opened on Thursdays, Avraham was always already inside, sorting the post that came for the plot holders into the tin box by the tool shed. He had done this since Miriam's father left for Beirut, and no one had asked him to. That morning Miriam held out an envelope she had found under the seed packets in her father's drawer, addressed in his hand to a woman in Jaffa. Avraham glanced at the postmark space, which was blank, and at the date in the corner, which was the week before her father went away. He said that the post office was on his way home and he might as well take it. He had already been through that drawer twice that spring, looking, he said, for bean seed. He slid the envelope into his inner coat pocket, not the satchel, and knelt to turn the soil in her father's empty bed.\n\nBased on the text, why does Avraham most likely take the envelope from Miriam?",
+   "stimulus": "When the garden gate opened on Thursdays, Avraham was always already inside, sorting the post that came for the plot holders into the tin box by the tool shed. He had done this since Miriam's father left for Beirut, and no one had asked him to. That morning Miriam held out an envelope she had found under the seed packets in her father's drawer, addressed in his hand to a woman in Jaffa. Avraham glanced at the postmark space, which was blank, and at the date in the corner, which was the week before her father went away. He said that the post office was on his way home and he might as well take it. He had already been through that drawer twice that spring, looking, he said, for bean seed. He slid the envelope into his inner coat pocket, not the satchel, and knelt to turn the soil in her father's empty bed.",
+   "question": "Based on the text, why does Avraham most likely take the envelope from Miriam?",
+   "options": [
+    "To post it on his way home as a small favor to Miriam",
+    "To secure a letter he had been hunting for on his own",
+    "To continue the post duties he took on for the garden's members",
+    "To spare himself questions from Miriam about her father's leaving"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "Avraham은 우체국이 집에 가는 길이라며 편지를 가져가겠다고 하지만, 이는 표면 명분이다. 앞부분에서 그는 Miriam의 아버지가 떠난 뒤 아무도 부탁하지 않은 우편 정리를 맡아 왔고, 중간에서는 이미 봄에 그 서랍을 두 번이나 뒤졌다는 사실이 드러난다. 끝에서 그는 편지를 우편 가방이 아닌 안주머니에 넣어, 부치려는 것이 아니라 스스로 찾던 편지를 확보하려 했음을 암시하므로 B가 정답이다. A는 표면 명분만, C는 습관 단서만 설명하고, D는 다른 감정을 끌어와 서랍을 미리 뒤진 순서를 설명하지 못한다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "character_motivation",
+   "weakType": true,
+   "genre": "short_story",
+   "targetLetter": "B",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a community garden in Haifa; a daughter and her absent father's friend after discovering a letter meant for someone else",
+    "names": [
+     "Avraham",
+     "Miriam"
+    ],
+    "locale": "Haifa"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-009",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_lit_character_motivation_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Whenever Mathis came for the rent, he stopped on the stone bridge below our building and asked to see my mother's photograph again, the one from 1952 with every shutter on the rue open and painted. He said his father wanted the old colors for the repairs. Theo, he called me, as if we were still twelve. In the second week of August he asked to borrow it outright. That was the week the notice went up in the lobby that the building had been sold, and the week, as everyone in Marseille knows, when no office in the city answers its telephone. He gave me a receipt in his own handwriting. A month later he brought the photograph back in a stiff envelope stamped by the city archive, with the date of a hearing penciled on the flap.\n\nBased on the text, why does Mathis most likely borrow the photograph?",
+   "stimulus": "Whenever Mathis came for the rent, he stopped on the stone bridge below our building and asked to see my mother's photograph again, the one from 1952 with every shutter on the rue open and painted. He said his father wanted the old colors for the repairs. Theo, he called me, as if we were still twelve. In the second week of August he asked to borrow it outright. That was the week the notice went up in the lobby that the building had been sold, and the week, as everyone in Marseille knows, when no office in the city answers its telephone. He gave me a receipt in his own handwriting. A month later he brought the photograph back in a stiff envelope stamped by the city archive, with the date of a hearing penciled on the flap.",
+   "question": "Based on the text, why does Mathis most likely borrow the photograph?",
+   "options": [
+    "To match the original shutter colors for his father's repairs",
+    "To keep a reminder of the childhood he shared with Theo",
+    "To make amends to Theo's family for his father's sale",
+    "To submit it as a record for keeping the building unchanged"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "Mathis는 아버지가 수리를 위해 옛 색을 원한다는 표면 명분을 댄다. 앞부분에서 그는 월세를 걷으러 올 때마다 다리 위에서 사진을 다시 보자고 했고, 중간에서는 건물이 팔렸다는 공고가 붙은 바로 그 주에 사진을 아예 빌려 가며 아버지가 아닌 자기 손으로 영수증을 써 준다. 끝에서 사진은 시 기록 보관소 도장과 청문회 날짜가 적힌 봉투에 담겨 돌아오므로, 건물을 지키기 위한 자료로 쓰려 했다는 D가 정답이다. A는 표면 명분만, B는 습관 단서만 설명하고, C는 미안함이라는 다른 감정으로 보아 보관소·청문회로 이어지는 순서를 설명하지 못한다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "character_motivation",
+   "weakType": true,
+   "genre": "memoir",
+   "targetLetter": "D",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a stone bridge in Marseille; a landlord's son and a tenant's daughter over an old photograph",
+    "names": [
+     "Mathis",
+     "Theo"
+    ],
+    "locale": "Marseille"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-011",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_lit_tone_or_mood_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "\"He is my nephew, and he swims well,\" I told the attendant at the sea-pool, and signed the ledger in my best schoolroom hand. Babatunde stood behind me with his towel folded into a square. He had not spoken a word in my classroom since Michaelmas, and he did not speak now. The attendant took my shilling. The pool was cut into the rocks below the fort, and the tide refreshed it twice a day, and the water was green and very still. I had prepared a little speech about courage. I did not give it. When he reached the edge he stopped, and I stopped beside him, and I watched a crab work along the wall rather than his face. He went in at last without a sound. I sat on the warm rock with my boots still laced and my hand on his towel until his head came up the third time.\n\nWhich choice best describes the tone of the text?",
+   "stimulus": "\"He is my nephew, and he swims well,\" I told the attendant at the sea-pool, and signed the ledger in my best schoolroom hand. Babatunde stood behind me with his towel folded into a square. He had not spoken a word in my classroom since Michaelmas, and he did not speak now. The attendant took my shilling. The pool was cut into the rocks below the fort, and the tide refreshed it twice a day, and the water was green and very still. I had prepared a little speech about courage. I did not give it. When he reached the edge he stopped, and I stopped beside him, and I watched a crab work along the wall rather than his face. He went in at last without a sound. I sat on the warm rock with my boots still laced and my hand on his towel until his head came up the third time.",
+   "question": "Which choice best describes the tone of the text?",
+   "options": [
+    "Brisk and businesslike toward a pupil's seaside outing",
+    "Composed and anxiously watchful toward a wordless pupil",
+    "Composed and uneasy toward her own small deception",
+    "Calm and protective toward the children in her care"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞부분에서 화자는 거짓말을 하고 장부에 서명하고 돈을 내는 일을 사무적으로 짧게 서술해 침착한 겉 어조를 만든다. 중간에서 준비한 연설을 하지 않고 소년의 얼굴 대신 게를 바라보는 멈칫함이 나타나고, 끝에서는 장화도 벗지 않은 채 수건에 손을 얹고 그의 머리가 세 번째로 떠오를 때까지 기다린다. 이 두 층을 겹치면 침착하지만 불안하게 지켜보는 어조인 B가 정답이다. A는 겉 층만, C는 속 층의 원인을 거짓말에 대한 불편함으로 바꾼 것이며, D는 대상을 맡은 아이들 전체로 넓혔다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "tone_or_mood",
+   "weakType": true,
+   "genre": "novel_excerpt",
+   "targetLetter": "B",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a salt-water pool in Accra; a teacher and a student who will not speak over a plan that depends on a lie",
+    "names": [
+     "Esperanza",
+     "Babatunde"
+    ],
+    "locale": "Accra"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-013",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_lit_relationship_between_characters_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Two pencils, sharpened to the same length, lay beside the survey map when Aigerim arrived at the reading room. Annika stood and pulled out the chair across from her own. Thank you for coming into the city, she whispered, as if they were strangers meeting at a bank. Aigerim kept her coat on and answered that it was kind of her to arrange the room. Between them the map showed the farm their uncle had left them: forty hectares, a barn, the creek marked in blue ink. Annika turned the map so the creek faced Aigerim. Under it lay a folder. Inside were tax receipts for six years, each stamped paid, each signed in Annika's narrow hand and none in Aigerim's. Aigerim read them slowly and did not look up. Outside the tall windows of the Hamburg library a tram went past. When the buyer's offer came out of the folder last, Annika laid one of the pencils across it, capped her pen, and slid the offer, unsigned, back inside.\n\nBased on the text, which choice best describes the relationship between Annika and Aigerim?",
+   "stimulus": "Two pencils, sharpened to the same length, lay beside the survey map when Aigerim arrived at the reading room. Annika stood and pulled out the chair across from her own. Thank you for coming into the city, she whispered, as if they were strangers meeting at a bank. Aigerim kept her coat on and answered that it was kind of her to arrange the room. Between them the map showed the farm their uncle had left them: forty hectares, a barn, the creek marked in blue ink. Annika turned the map so the creek faced Aigerim. Under it lay a folder. Inside were tax receipts for six years, each stamped paid, each signed in Annika's narrow hand and none in Aigerim's. Aigerim read them slowly and did not look up. Outside the tall windows of the Hamburg library a tram went past. When the buyer's offer came out of the folder last, Annika laid one of the pencils across it, capped her pen, and slid the offer, unsigned, back inside.",
+   "question": "Based on the text, which choice best describes the relationship between Annika and Aigerim?",
+   "options": [
+    "Distant co-heirs who meet only to settle a legal matter in a polite way",
+    "Co-owners in which Annika is steering Aigerim toward accepting the buyer's offer",
+    "Co-owners in which Aigerim has long supported Annika's life in the city",
+    "Co-owners in which Annika has quietly carried costs to keep Aigerim's farm intact"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞부분의 정중한 인사와 낯선 사람 같은 말투는 두 사람이 서먹한 공동 상속인일 뿐이라는 표면 관계(A)를 보여 준다. 그러나 중간의 세금 영수증 6년치가 모두 Annika의 서명뿐이라는 점은 비용을 누가 치러 왔는지 알려 준다. 끝에서 Annika가 매수 제안서를 서명하지 않은 채 다시 넣는 동작은 농장을 지키려는 조용한 양보이므로 D가 정답이다. B는 지도와 제안서가 나오는 앞 장면만 반영했고, C는 지원의 방향을 뒤집었다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "relationship_between_characters",
+   "weakType": true,
+   "genre": "short_story",
+   "targetLetter": "D",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a quiet library in Hamburg; a farmer and a surveyor from the city over whether to sell a shared inheritance",
+    "names": [
+     "Annika",
+     "Aigerim"
+    ],
+    "locale": "Hamburg"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-016",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_lit_symbolism_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "Paper rattled on the drying lines, and the yard smelled of flour paste. Dario, who had taught half the neighborhood to read before he took up kites, handed Camila a spool of string and told her to measure out thirty meters for the red one. She measured it, cut it, and tied it to the frame the way he had shown her when she was nine. He tested the knot with one tug and nodded. Years ago he had promised the boy next door a kite that would clear the church tower, and the boy had moved away before it was built. The red kite was for him; Dario had kept the address in a tin. When Camila came back that evening, the boxed kite stood by the gate, and Dario was winding the leftover string onto the empty spool by hand, slowly, end to end, instead of throwing it out as he did with every other scrap. He set the spool in her palm and closed her fingers over it.\n\nIn the text, the string most likely represents",
+   "stimulus": "Paper rattled on the drying lines, and the yard smelled of flour paste. Dario, who had taught half the neighborhood to read before he took up kites, handed Camila a spool of string and told her to measure out thirty meters for the red one. She measured it, cut it, and tied it to the frame the way he had shown her when she was nine. He tested the knot with one tug and nodded. Years ago he had promised the boy next door a kite that would clear the church tower, and the boy had moved away before it was built. The red kite was for him; Dario had kept the address in a tin. When Camila came back that evening, the boxed kite stood by the gate, and Dario was winding the leftover string onto the empty spool by hand, slowly, end to end, instead of throwing it out as he did with every other scrap. He set the spool in her palm and closed her fingers over it.",
+   "question": "In the text, the string most likely represents",
+   "options": [
+    "the practical skill of measuring and cutting materials for a kite",
+    "the craft knowledge that Dario passed to Camila when she was young",
+    "a long-kept commitment that Dario now entrusts to Camila's care",
+    "the repair of a bond between teacher and pupil after years apart"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞부분에서 실은 길이를 재고 자르는 재료일 뿐이다(A). 중간에 그 실이 오래전 아이에게 한 약속의 연이 되고, 끝에서 Dario가 다른 자투리는 버리면서 남은 실만은 손으로 감아 Camila의 손에 쥐여 준다. 약속을 지키는 일과 그것을 다음 사람에게 넘기는 동작을 함께 설명하는 것은 C뿐이다. B는 어릴 때 배운 기술이라는 앞 맥락만 설명하고, D는 두 사람 사이에 멀어진 적이 있다는 근거가 없어 마지막 동작의 의미를 잘못 읽었다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "symbolism",
+   "weakType": false,
+   "genre": "short_story",
+   "targetLetter": "C",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a kite-maker's yard in Lima; an old teacher and a former pupil over a promise made to a child",
+    "names": [
+     "Dario",
+     "Camila"
+    ],
+    "locale": "Lima"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-017",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "central_ideas_details",
+  "planSkill": "inferences",
+  "domain": "rw_information_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "inferences_lit_symbolism_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "What does a carpenter owe a bench that has outlived its builder? Wilhelmina asked that once, years ago, and Aroha had only handed her a block plane. That morning on the Maui promenade the plane did its ordinary work: Aroha shaved the warped slats of the old benches facing the harbor, and Wilhelmina swept the curls into a bucket. At the sixth bench Aroha stopped. Carved under the armrest were initials and a date, worn soft by salt. She ran the plane along the seat but lifted it each time it neared the letters, leaving a narrow strip untouched, a little higher than the rest. Wilhelmina's old shop teacher had told her she would never be careful enough for fine work, and she had repeated this to Aroha on her first day. At noon Aroha wiped the blade, set the plane in Wilhelmina's hands, and walked to the seventh bench without looking back.\n\nIn the text, the block plane most likely represents",
+   "stimulus": "What does a carpenter owe a bench that has outlived its builder? Wilhelmina asked that once, years ago, and Aroha had only handed her a block plane. That morning on the Maui promenade the plane did its ordinary work: Aroha shaved the warped slats of the old benches facing the harbor, and Wilhelmina swept the curls into a bucket. At the sixth bench Aroha stopped. Carved under the armrest were initials and a date, worn soft by salt. She ran the plane along the seat but lifted it each time it neared the letters, leaving a narrow strip untouched, a little higher than the rest. Wilhelmina's old shop teacher had told her she would never be careful enough for fine work, and she had repeated this to Aroha on her first day. At noon Aroha wiped the blade, set the plane in Wilhelmina's hands, and walked to the seventh bench without looking back.",
+   "question": "In the text, the block plane most likely represents",
+   "options": [
+    "the routine labor of repairing benches along the harbor",
+    "the authority that Aroha holds as the master of the work",
+    "the mending of Wilhelmina's confidence after her teacher's remark",
+    "a careful judgment about what to keep, now passed to Wilhelmina"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "대패는 처음에 벤치 판을 깎는 평범한 도구로 등장한다(A). 중간에 Aroha가 새겨진 이니셜 근처에서 대패를 들어 올려 그 부분만 남겨 두면서, 대패는 무엇을 깎고 무엇을 남길지 판단하는 일과 연결된다. 끝에서 Aroha가 그 대패를 Wilhelmina의 손에 쥐여 주고 돌아보지 않고 떠나는 동작은 그 판단을 맡긴다는 뜻이므로 D가 정답이다. B는 스승의 권위라는 앞 맥락만 설명하고, C는 선생님의 말을 근거로 자신감 회복으로 읽었지만 대패를 다루는 동작이 그 해석과 맞지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "symbolism",
+   "weakType": false,
+   "genre": "novel_excerpt",
+   "targetLetter": "D",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a seaside promenade in Maui; a young apprentice and a master carpenter after a teacher's remark that changed everything",
+    "names": [
+     "Wilhelmina",
+     "Aroha"
+    ],
+    "locale": "Maui"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ },
+ {
+  "gid": "rwlit:hardv4-hard-01-031",
+  "runId": "lit-hard-v4-pilot",
+  "skill": "text_structure_purpose",
+  "planSkill": "text_structure_purpose",
+  "domain": "rw_craft_structure",
+  "examSystem": "sat_rw",
+  "difficulty": "hard",
+  "format": "mc",
+  "recipeId": "text_structure_purpose_lit_underlined_portion_function_hard_v4",
+  "difficultyStatus": "provisional_ai",
+  "problem": {
+   "passage": "I had clerked for Judge Eamon for one summer when he invited me to his terrace above the Saône and announced, as if testing the sound of my name, that Takoda and he would finish the Ferrand file that week. __He kept the file's last page face down beneath a stone ashtray, as he had on the bench, where he never read a verdict until he had heard every word.__ We worked through the mornings. He corrected my French, poured the coffee himself, and pointed out which slope of vines belonged to which cousin. By Friday the other pages were annotated in his small slanted hand, and nothing remained to be heard. When I reached for the ashtray, he covered it with his palm, asked about my plans for autumn, and suggested I carry the file back to the court with the last page unread, just as it was.\n\nWhich choice best describes the function of the underlined sentence in the text as a whole?",
+   "stimulus": "I had clerked for Judge Eamon for one summer when he invited me to his terrace above the Saône and announced, as if testing the sound of my name, that Takoda and he would finish the Ferrand file that week. __He kept the file's last page face down beneath a stone ashtray, as he had on the bench, where he never read a verdict until he had heard every word.__ We worked through the mornings. He corrected my French, poured the coffee himself, and pointed out which slope of vines belonged to which cousin. By Friday the other pages were annotated in his small slanted hand, and nothing remained to be heard. When I reached for the ashtray, he covered it with his palm, asked about my plans for autumn, and suggested I carry the file back to the court with the last page unread, just as it was.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It offers background on Eamon's career that explains why Takoda was invited to the terrace",
+    "It establishes a habit of patience that the finished annotations show Eamon has now outgrown",
+    "It establishes a general principle of fairness that guides how Eamon treats his young clerk",
+    "It establishes a habit that later makes Eamon's covering of the page seem like avoidance"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "밑줄 문장은 단독으로 보면 판사 시절의 신중한 습관을 소개하는 배경 설명처럼 보인다. 중간의 커피와 포도밭 장면을 지나, 금요일에는 들을 것이 더 남지 않았는데도 Eamon은 재떨이를 손으로 덮고 마지막 장을 읽지 않은 채 돌려보내자고 한다. 이 후반 사건 때문에 밑줄 문장은 끝을 마주하기를 피하는 태도의 복선으로 다시 읽히므로 D가 정답이다. A는 밑줄 문장만 따로 읽었고, B는 기능을 습관의 해소로 뒤집었으며, C는 일반적 원칙으로 넓혀 후반 단서와 맞지 않는다.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "session:opus",
+   "route": "ai_passage",
+   "questionType": "underlined_portion_function",
+   "weakType": false,
+   "genre": "short_story",
+   "targetLetter": "D",
+   "positionEnforced": false,
+   "seed": {
+    "topicSeed": "a hillside terrace in Lyon; a retired judge and a young clerk about an ending that nobody wants to admit",
+    "names": [
+     "Eamon",
+     "Takoda"
+    ],
+    "locale": "Lyon"
+   },
+   "rewrites": 0,
+   "attempts": 1,
+   "estDifficulty": "hard"
+  }
+ }
+]

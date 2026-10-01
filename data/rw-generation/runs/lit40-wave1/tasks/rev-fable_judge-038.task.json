@@ -1,0 +1,325 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "fable_judge",
+ "runId": "lit40-wave1",
+ "taskId": "rev-fable_judge-038",
+ "chunkId": "rev-fable_judge-038",
+ "suggestedModel": "fable",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-038.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "정답 외 방어 가능한 선택지가 있으면 true",
+    "est_difficulty": "easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)",
+    "hard_fit": "실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)",
+    "plausible_distractors": "오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true",
+    "length_balanced": "네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true",
+    "multi_answer_risk": "복수 정답 위험이 있으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-medium-05-031",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "I had been Gopal's apprentice in the bookbinding workshop in Dhaka for only a year when we were hired to empty a widow's house. My name is Efua, and I was restless then; I wanted to sort everything into piles and be done by noon. Gopal moved slowly, opening each ledger and letter as if it might speak. By evening only one item remained: a ragged prayer book with its spine split in three places. I offered to throw it on the cart. __Gopal instead wrapped it in cloth and set it on his own workbench, where it stayed untouched for a week.__ When he finally began repairing it, he let me hold the thread, and I learned that some work cannot be hurried without being lost. Later the widow's grandson came to collect it, and paid in mangoes.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that the elder wanted to keep the prayer book for his own collection.",
+    "It suggests that the apprentice resented being given the simplest tasks in the workshop.",
+    "It explains why the workshop was too busy to repair the book right away.",
+    "It shows the elder's patient regard for the book, preparing the apprentice's lesson."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-032",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Once, Ruoxi had believed the bus depot in Oaxaca would close before her shop did. She sold phone cards and sweet bread from a counter beside platform four, and every afternoon Valentina arrived to ask the same question: had the cousin in Puebla written back? Ruoxi always said no. __That spring, a company offered to buy the counter and the lease for more money than she had earned in a decade.__ She kept the letter folded under the cash box for a month. Valentina, still waiting for her cousin's reply, began bringing her coffee and staying through the evening rush, talking about the buses she would take once the letter came. When Ruoxi finally answered the company, she wrote only that the counter was not for sale. Outside, a driver honked twice and pulled out toward the mountains.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces a chance to leave that gives the shopkeeper's choice to stay weight.",
+    "It reveals that the shopkeeper was secretly struggling to pay the depot's rising fees.",
+    "It explains why the customer visited the counter every afternoon with the same question.",
+    "It suggests that the company intended to close the depot and move the buses elsewhere."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-033",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "When I first met Tyrese, he was kneeling beside the dry fountain in a courtyard in Port of Spain, clearing leaves from a basin that had not held water in years. I had just bought the house, and I was there to plan where my mother's bed would go when she moved in from the country. Cecile, I kept telling myself, would hate the city. __Tyrese told me his own father had refused to leave his hillside until the day he could no longer climb it.__ He did not say whether that had been wise. I spent the afternoon measuring doorways and thinking less about furniture than about what my mother would lose, and what she might insist on keeping. By evening I had decided to ask her rather than tell her. Tyrese turned on the hose, and the fountain coughed rust.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It explains why the gardener has neglected the fountain for many years.",
+    "It offers a parallel story that leads the narrator to rethink her approach.",
+    "It reveals that the gardener disapproves of the new owner's purchase of the house.",
+    "It describes the gardener's father in order to introduce a conflict over the property."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-034",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "medium",
+   "passage": "Glasgow rain had pooled on the lid of the rooftop water tank where Saoirse and I used to rehearse, back when we shared a stage at a cabaret on Sauchiehall Street. I climbed up there again last winter to scatter nothing in particular, just to look. Saoirse's mother had made a lamb stew for the cast every opening night, and she never wrote the recipe down. After she died, Saoirse and I tried for years to reproduce it, arguing over thyme and barley. __Once, Ronan, the old stagehand, told us we were cooking a memory, not a stew.__ We laughed at him then. Now Saoirse lives in Cork, and when she phones, we no longer talk about ingredients. We talk about the opening nights themselves. The tank hummed under my hand, full of a cold that never quite reached the street.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It shows that the stagehand had a better memory of the recipe than the two women did.",
+    "It reveals that the narrator and Saoirse finally abandoned cooking because of a quarrel.",
+    "It offers an insight first dismissed that anticipates the women's later shift.",
+    "It explains why the narrator has returned to the rooftop after many years away."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-035",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "\"Leave the dough, Leopoldina, it knows what to do,\" Wolfram said, though I had stopped being his pupil thirty years ago. We were in my bakery in Chengdu an hour before opening, and he had come, as he did every Sunday now, to watch me work. I have a habit of punching the dough twice more than it needs, a habit he spent an entire school year trying to correct in his chemistry lab, of all places. He is eighty-one. His hands tremble when he lifts a cup. Still he leans over the bowl and points, and I let him, because I know these mornings are how he goes on being a teacher. I fold the dough once, the way he wants, and leave it alone. Then the first delivery van rattles up outside, its headlights sweeping across the flour bins.",
+   "question": "Which choice best describes the narrator's attitude toward Wolfram?",
+   "options": [
+    "She is irritated by his interference and wishes he would stop visiting the bakery.",
+    "She is indifferent to his advice and continues baking the way she always has.",
+    "She is fondly indulgent, letting him guide her because she values his role.",
+    "She is fearful of his judgment and anxious to prove she has become skilled."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-036",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Two rules held in the rented farmhouse in Galway that summer: no one read the letters alone, and no one read them after dark. Orla made the rules, and her brother kept them, mostly because he could not think of better ones. Their mother had written forty-three letters during the year she worked abroad, and the siblings opened one each evening at the kitchen table. Orla read aloud. Her brother listened and said little, because he had failed his driving test that afternoon and could not bring himself to admit it. Orla noticed his silence and did not ask; she only slowed down at the parts where their mother wrote about learning, late in life, to drive. Imani, the neighbor's girl, brought eggs at seven. Orla thanked her and set the basket on the windowsill beside the unopened envelopes.",
+   "question": "Which choice best describes the narrator's attitude toward Orla?",
+   "options": [
+    "The narrator mocks her rules as rigid and pointless.",
+    "The narrator criticizes her for ignoring her brother's distress.",
+    "The narrator treats her as a distant figure whose motives are unclear.",
+    "The narrator quietly admires her tactful kindness."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-037",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "Hollis winds the shop clocks every Thursday,\na chore he once lost to Birdie on a bet\nin the Manchester chess club, forty years back.\nHe still says she cheated. She still says\nhe moved his bishop like a man asleep.\nNow she sits on the stool by the regulator\nand calls out which ones run slow,\nand he turns each key with the care\nof someone tightening a promise.\nI watch them from the counter, their quarrel\nworn smooth as a pocket watch's case,\nand think how a debt can turn into a vow.\nOutside, the tram bells keep their own time.",
+   "question": "Which choice best describes the speaker's attitude toward Hollis and Birdie?",
+   "options": [
+    "The speaker regards their old rivalry with fondness for the bond it has become.",
+    "The speaker views their quarrel with weary impatience because it has never been settled.",
+    "The speaker treats their ritual with detached curiosity about how antique clocks are maintained.",
+    "The speaker sees their partnership with concern that one of them is being treated unfairly."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-038",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "medium",
+   "passage": "When my mother and I stood in line at the customs checkpoint in Tehran, carrying a garment bag between us like a sleeping child, we talked only about the wedding. Which caterer, which flowers, whether Felix's family would expect a second reception. We did not talk about my father, who had always been the one to handle the officers and the forms, and who had died in March. My mother answered the officer's questions too quickly, then too slowly. I noticed she had brought his old fountain pen to sign the declaration. Nicolas, my fiancé's brother, waved from beyond the glass, and she waved back with exaggerated cheer. I found it hard to watch and harder to look away. I have since come to think that her pretending was a kind of bravery I did not yet possess. The officer stamped our papers without looking up.",
+   "question": "Which choice best describes the narrator's attitude toward her mother?",
+   "options": [
+    "The narrator is embarrassed by her mother's nervousness and wishes she had traveled alone.",
+    "The narrator is tenderly respectful, seeing courage in her mother's forced cheer.",
+    "The narrator is frustrated that her mother refuses to plan the wedding in detail.",
+    "The narrator is amused by her mother's attempts to impress the officers at the checkpoint."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-05-040",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Static hissed from every shelf of Baraka's radio repair shop in Addis Ababa when Wanjiru brought in her late uncle's set. Baraka, a retired sailor, recognized it at once and said he had promised to fix it decades ago. Wanjiru remembered no such promise, and neither, she suspected, did he. Still, he worked on it for three evenings while she waited on a stool, and he told her stories of ports her uncle had never mentioned. On the fourth evening the radio played a song, faint but clear. Baraka seemed less pleased by the music than by the fact that she had stayed to hear it. Across the street, a vendor lowered the shutters on his stall of spices.",
+   "question": "Which choice best states the main purpose of the passage?",
+   "options": [
+    "To recount how a retired sailor repaired an old radio for a customer over several evenings",
+    "To describe the busy shops and vendors of a neighborhood in Addis Ababa at dusk",
+    "To show that kindness is always rewarded when people keep their promises to one another",
+    "To suggest that a forgotten promise serves mainly as a reason for two people to connect"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-05-041",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "I had lent Errol eleven rupees in the spring, and he had promised to repay me by the monsoon, when he would surely be restored to the side. All that summer he sat upon the bench at our matches, and all that summer he came to me at the harbor with excuses as neatly coiled as the nets drying on the sea wall. Each excuse asked for another week. I granted them, believing a week a small thing to give a young man. Only when the rains came, and Shirin told me he had taken work hauling ice on the night boats, did I understand that every week I had lent him was a week he had spent elsewhere, and that the money had never been the larger debt. Below us, a trawler nosed into its berth, its deck silver with pomfret and its crew shouting for the scales.",
+   "question": "Which choice best states the main purpose of the text?",
+   "options": [
+    "To depict the narrator's dawning sense that the time he granted Errol cost more than the money",
+    "To recount how Errol sat on the bench all summer while repeatedly delaying repayment of a small loan",
+    "To describe the working life of the harbor, where nets, ice boats, and trawlers shape each day",
+    "To suggest that generosity toward others is usually repaid with disappointment and regret"
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-05-042",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "medium",
+   "passage": "Ruwan had cooked for the summer camp in Karachi for nineteen years, and on my first visit as her son's wife, I watched the camp director praise her dal before two hundred children. Everyone applauded. Afterward, in the steam behind the serving counter, she counted the onions she had bought with her own money and wrote the sum in a small notebook no one had ever asked to see. The next week the director thanked me, too, for the rotis I had rolled, and Danish beamed as though I had won a prize. I found Ruwan's notebook on the shelf that evening; my name had already been added beneath hers, with an empty column waiting. Outside, the boys were dragging benches across the courtyard for the evening's talent show, arguing over who would sit nearest the fan.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "The narrator recalls helping Ruwan cook for the children during her first visit to the camp.",
+    "The praise both women receive at the camp conceals labor and expense that go unrewarded.",
+    "The camp is portrayed as a lively place where children gather for meals and shows.",
+    "Families grow closer when they share the work of feeding others in their community."
+   ],
+   "recipeBeyondMedium": "두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다"
+  },
+  {
+   "candidateId": "lit40-medium-05-044",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Years later, Despina would remember that the floodlights had not yet come on when she found the envelope. It had slipped from Kostas's music case onto the grass beside the soccer field, where he liked to walk his students after lessons, and it was addressed not to her but to the conservatory in Vienna. Through the thin paper she could read her own name beside the words regrettably not ready. She thought of the scale he had made her repeat forty times that afternoon, and of how he had said, almost gently, that Vienna would ask for more. She tucked the envelope back into the case without a word and asked him for one more hour of lessons each week. On the far side of the field, boys were still kicking a ball toward a goal they could barely see.",
+   "question": "Based on the text, why does Despina most likely ask Kostas for more lessons?",
+   "options": [
+    "She is ashamed of having read a letter that was never meant for her eyes.",
+    "She wants Kostas to rewrite his letter and praise her to the conservatory.",
+    "She has been told by the conservatory that she must repeat her scales.",
+    "She wants to meet the standard Kostas thinks the conservatory will demand."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-05-045",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Salt stung the cut on Renata's knuckle as she lowered herself into the pool carved from the black rock. Mingyu was already there, floating on his back the way he had when her father still came to Jeju each summer. He was selling his dive shop and moving to Busan for good, he had told her, and he had a box of her father's things he did not know what to do with. Inside, she had found a logbook filled with dives the two men had made together, each entry signed by both. Now she swam to him and asked, before she could lose her nerve, whether he would teach her the route from the last page. He was quiet, then nodded toward the reef. Gulls wheeled over the breakwater, quarreling over a fish one of them had dropped.",
+   "question": "Based on the text, why does Renata most likely ask Mingyu to teach her the route?",
+   "options": [
+    "She wants to share part of her father's life with Mingyu before he leaves.",
+    "She is angry that Mingyu kept her father's belongings for so many years.",
+    "She hopes the lesson will persuade Mingyu to keep his dive shop open.",
+    "She was asked by her father to complete the dives in his old logbook."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-05-046",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "character_motivation",
+   "requestedDifficulty": "medium",
+   "passage": "Once, in a laundromat near the Beirut harbor, I folded sheets beside a woman who had ridden my father's ferry that morning. Fiorella, she said her name was, and she was mending a sail for the yacht club, a job she had been hired for alone. I knew something of sails; my father's had torn every spring, and I, Tamika, had patched them since I was nine. When she struggled with the seam, I showed her the double stitch, and we finished the work together while the machines rattled. She thanked me warmly and said the club would be delighted with her. Weeks earlier, I had watched my father accept praise for patches I had sewn. So I wrote my initials, small, in the corner of the canvas. The attendant came by then, mopping soap from the floor.",
+   "question": "Based on the text, why does the narrator most likely write her initials on the canvas?",
+   "options": [
+    "She is proud of the double stitch and wants Fiorella to remember how to sew it.",
+    "She wants a lasting mark of her share in work that others are likely to claim.",
+    "She hopes the yacht club will notice her initials and hire her for future repairs.",
+    "She was told by her father that every sail she patched should carry her name."
+   ],
+   "recipeBeyondMedium": "단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다"
+  },
+  {
+   "candidateId": "lit40-medium-05-047",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "Bay rum and scorched hair hung in the air as Itzel snapped a cape around my father's neck. Bogdan had lived in Havana for thirty years and still refused to speak Spanish in her shop, so I was, as always, his translator. Short on the sides, he told me in Russian, not too much on top. I told Itzel to take it all off. She raised her scissors and grinned at me in the mirror, and I grinned back, because he had been telling me for weeks that I was too stubborn to cut my own hair. Only when the first gray lock slid down the cape did I notice his hands tightening on the armrests. Itzel hummed along with the radio, a bolero about a sailor and a faraway port.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Uneasy and apprehensive, focused on the father's tightening grip on the chair",
+    "Uneasy with brief flashes of humor, dwelling mostly on the father's distress",
+    "Playfully mischievous, though shadowed by a growing hint of unease",
+    "Nostalgic and wistful, recalling the narrator's childhood visits to the shop"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-05-048",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "medium",
+   "passage": "We have been waiting since noon, you and your grandfather, on the orange chairs outside the scan room. To pass the time, Haruto takes a photograph from his wallet: a boy on a snowbank, holding a fish nearly as long as himself. You try the word for proud and get it wrong, and he laughs so loudly that the nurse at the desk looks up. He corrects you, slowly, tapping each syllable on your wrist, Mio, the way he once tapped rhythms for you on the kitchen table. Twice he glances at the door when it opens, and twice he goes back to the photograph as if it were a lesson he must finish. You say the word again, correctly this time. Outside the window, a snowplow scrapes along the empty lot, its yellow light turning in the dusk.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Anxious and fearful, centered on the results of the grandfather's scan",
+    "Tense and apprehensive, softened by brief moments of shared laughter",
+    "Mournful and elegiac, lamenting a childhood that can never return",
+    "Affectionate and gently humorous, with an undercurrent of worry"
+   ],
+   "recipeBeyondMedium": "두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다"
+  },
+  {
+   "candidateId": "lit40-medium-05-049",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "“They have locked the reading room for the inspector,” the woman beside me said, and that was how I, Anushka, met Zofia. We sat together on the bench in the corridor of the Tbilisi library, two strangers with nowhere to be for an hour. She was reading the same pamphlet I was, a tribute to the professor whose portrait hung above us. When I mentioned that my aunt had typed his famous lectures, Zofia closed the pamphlet and said quietly that her mother had written them. For a moment neither of us spoke. Then she slid half of her bread across the bench to me, and I offered her my aunt's address. A clerk passed with a cart of ledgers, one wheel squeaking at every tile.",
+   "question": "Which choice best describes the relationship between Anushka and Zofia that develops in the text?",
+   "options": [
+    "Two strangers drawn into a quiet alliance by a shared discovery about the professor",
+    "A stranger who pities a woman whose mother was never credited for her lectures",
+    "Rivals competing to prove whose relative truly earned the professor's reputation",
+    "A scholar and an admirer united by their deep respect for a famous professor"
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-05-050",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "medium",
+   "passage": "Greta did not want to sell. She pushed her mother's chair along the promenade each afternoon, past the pier where the steamers unloaded, and each afternoon her mother raised the matter of the house in Blankenese. The roof leaks, the old woman said, and you cannot nurse me and mend slates at once. Greta tucked the blanket tighter around her mother's knees and pointed out a ship flying a Norwegian flag. Later, when her mother asked whether the agent had written again, Greta answered that the letter must have gone astray, though it lay folded in her coat pocket. Her mother reached up and patted the hand on the chair. Along the railing, a vendor was selling smoked eel wrapped in newspaper.",
+   "question": "Which choice best describes the relationship between Greta and her mother?",
+   "options": [
+    "A frustrated daughter grown tired of her mother's constant talk about the house",
+    "A protective daughter deflecting a mother who gently accepts her evasions",
+    "A daughter pressing her reluctant mother to agree to sell the family house",
+    "A grateful mother and daughter made inseparable by their shared hardships"
+   ],
+   "recipeBeyondMedium": "두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다"
+  },
+  {
+   "candidateId": "lit40-medium-05-051",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "medium",
+   "passage": "Years ago, when I was foreman of the crew that laid the tiles at the new metro station in Lima, I wrote an apology to Linh, the youngest of my workers, whom I had blamed before everyone for a cracked step that was not his doing. I, Ofelia, carried the letter in my vest for a week. Each evening I waited on the platform where he caught his train, and each evening a car pulled in, its doors opened, and I let it go. Linh would board, nod to me through the glass, and be carried off toward the hills. On the seventh evening the doors opened again and closed again, and I watched the red lamp of the last car dwindle into the tunnel. The paper had gone soft at the folds by then. Above the platform, pigeons settled along the iron beams, shaking dust from their feathers.",
+   "question": "In the text, the trains that the narrator lets depart most likely represent",
+   "options": [
+    "the speed with which the young hire advances beyond his foreman's crew.",
+    "the new station's progress, which the narrator's crew helped bring about.",
+    "the narrator's repeated chances to apologize, each allowed to pass.",
+    "the distance between the city center and the hills where Linh lives."
+   ]
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자다. 정답 표시가 없다. 먼저 문항을 직접 풀고(picked_letter), 이어서 난이도·hard 적합·오답 품질을 판정한다. 요청 난이도에 맞추려 하지 말고 실제로 느끼는 대로 답한다.\n청크 rev-fable_judge-038 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-fable_judge-038.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"정답 외 방어 가능한 선택지가 있으면 true\",\"est_difficulty\":\"easy|medium|hard (실제 체감, 요청 난이도에 맞추지 말 것)\",\"hard_fit\":\"실제 SAT hard 수준의 사고 단계가 필요하면 true(지문 길이·난어만이면 false)\",\"plausible_distractors\":\"오답 3개가 모두 그럴듯하고 서로 다른 오개념에서 나왔으면 true\",\"length_balanced\":\"네 선택지 길이·구체성이 비슷해 정답이 형식으로 드러나지 않으면 true\",\"multi_answer_risk\":\"복수 정답 위험이 있으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-medium-05-031 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nI had been Gopal's apprentice in the bookbinding workshop in Dhaka for only a year when we were hired to empty a widow's house. My name is Efua, and I was restless then; I wanted to sort everything into piles and be done by noon. Gopal moved slowly, opening each ledger and letter as if it might speak. By evening only one item remained: a ragged prayer book with its spine split in three places. I offered to throw it on the cart. __Gopal instead wrapped it in cloth and set it on his own workbench, where it stayed untouched for a week.__ When he finally began repairing it, he let me hold the thread, and I learned that some work cannot be hurried without being lost. Later the widow's grandson came to collect it, and paid in mangoes.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that the elder wanted to keep the prayer book for his own collection.\nB) It suggests that the apprentice resented being given the simplest tasks in the workshop.\nC) It explains why the workshop was too busy to repair the book right away.\nD) It shows the elder's patient regard for the book, preparing the apprentice's lesson.\n### lit40-medium-05-032 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nOnce, Ruoxi had believed the bus depot in Oaxaca would close before her shop did. She sold phone cards and sweet bread from a counter beside platform four, and every afternoon Valentina arrived to ask the same question: had the cousin in Puebla written back? Ruoxi always said no. __That spring, a company offered to buy the counter and the lease for more money than she had earned in a decade.__ She kept the letter folded under the cash box for a month. Valentina, still waiting for her cousin's reply, began bringing her coffee and staying through the evening rush, talking about the buses she would take once the letter came. When Ruoxi finally answered the company, she wrote only that the counter was not for sale. Outside, a driver honked twice and pulled out toward the mountains.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces a chance to leave that gives the shopkeeper's choice to stay weight.\nB) It reveals that the shopkeeper was secretly struggling to pay the depot's rising fees.\nC) It explains why the customer visited the counter every afternoon with the same question.\nD) It suggests that the company intended to close the depot and move the buses elsewhere.\n### lit40-medium-05-033 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nWhen I first met Tyrese, he was kneeling beside the dry fountain in a courtyard in Port of Spain, clearing leaves from a basin that had not held water in years. I had just bought the house, and I was there to plan where my mother's bed would go when she moved in from the country. Cecile, I kept telling myself, would hate the city. __Tyrese told me his own father had refused to leave his hillside until the day he could no longer climb it.__ He did not say whether that had been wise. I spent the afternoon measuring doorways and thinking less about furniture than about what my mother would lose, and what she might insist on keeping. By evening I had decided to ask her rather than tell her. Tyrese turned on the hose, and the fountain coughed rust.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It explains why the gardener has neglected the fountain for many years.\nB) It offers a parallel story that leads the narrator to rethink her approach.\nC) It reveals that the gardener disapproves of the new owner's purchase of the house.\nD) It describes the gardener's father in order to introduce a conflict over the property.\n### lit40-medium-05-034 — skill text_structure_purpose · 유형 underlined_portion_function · 요청 난이도 medium\n[지문]\nGlasgow rain had pooled on the lid of the rooftop water tank where Saoirse and I used to rehearse, back when we shared a stage at a cabaret on Sauchiehall Street. I climbed up there again last winter to scatter nothing in particular, just to look. Saoirse's mother had made a lamb stew for the cast every opening night, and she never wrote the recipe down. After she died, Saoirse and I tried for years to reproduce it, arguing over thyme and barley. __Once, Ronan, the old stagehand, told us we were cooking a memory, not a stew.__ We laughed at him then. Now Saoirse lives in Cork, and when she phones, we no longer talk about ingredients. We talk about the opening nights themselves. The tank hummed under my hand, full of a cold that never quite reached the street.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It shows that the stagehand had a better memory of the recipe than the two women did.\nB) It reveals that the narrator and Saoirse finally abandoned cooking because of a quarrel.\nC) It offers an insight first dismissed that anticipates the women's later shift.\nD) It explains why the narrator has returned to the rooftop after many years away.\n### lit40-medium-05-035 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\n\"Leave the dough, Leopoldina, it knows what to do,\" Wolfram said, though I had stopped being his pupil thirty years ago. We were in my bakery in Chengdu an hour before opening, and he had come, as he did every Sunday now, to watch me work. I have a habit of punching the dough twice more than it needs, a habit he spent an entire school year trying to correct in his chemistry lab, of all places. He is eighty-one. His hands tremble when he lifts a cup. Still he leans over the bowl and points, and I let him, because I know these mornings are how he goes on being a teacher. I fold the dough once, the way he wants, and leave it alone. Then the first delivery van rattles up outside, its headlights sweeping across the flour bins.\n\n[질문] Which choice best describes the narrator's attitude toward Wolfram?\nA) She is irritated by his interference and wishes he would stop visiting the bakery.\nB) She is indifferent to his advice and continues baking the way she always has.\nC) She is fondly indulgent, letting him guide her because she values his role.\nD) She is fearful of his judgment and anxious to prove she has become skilled.\n### lit40-medium-05-036 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nTwo rules held in the rented farmhouse in Galway that summer: no one read the letters alone, and no one read them after dark. Orla made the rules, and her brother kept them, mostly because he could not think of better ones. Their mother had written forty-three letters during the year she worked abroad, and the siblings opened one each evening at the kitchen table. Orla read aloud. Her brother listened and said little, because he had failed his driving test that afternoon and could not bring himself to admit it. Orla noticed his silence and did not ask; she only slowed down at the parts where their mother wrote about learning, late in life, to drive. Imani, the neighbor's girl, brought eggs at seven. Orla thanked her and set the basket on the windowsill beside the unopened envelopes.\n\n[질문] Which choice best describes the narrator's attitude toward Orla?\nA) The narrator mocks her rules as rigid and pointless.\nB) The narrator criticizes her for ignoring her brother's distress.\nC) The narrator treats her as a distant figure whose motives are unclear.\nD) The narrator quietly admires her tactful kindness.\n### lit40-medium-05-037 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nHollis winds the shop clocks every Thursday,\na chore he once lost to Birdie on a bet\nin the Manchester chess club, forty years back.\nHe still says she cheated. She still says\nhe moved his bishop like a man asleep.\nNow she sits on the stool by the regulator\nand calls out which ones run slow,\nand he turns each key with the care\nof someone tightening a promise.\nI watch them from the counter, their quarrel\nworn smooth as a pocket watch's case,\nand think how a debt can turn into a vow.\nOutside, the tram bells keep their own time.\n\n[질문] Which choice best describes the speaker's attitude toward Hollis and Birdie?\nA) The speaker regards their old rivalry with fondness for the bond it has become.\nB) The speaker views their quarrel with weary impatience because it has never been settled.\nC) The speaker treats their ritual with detached curiosity about how antique clocks are maintained.\nD) The speaker sees their partnership with concern that one of them is being treated unfairly.\n### lit40-medium-05-038 — skill central_ideas_details · 유형 narrator_attitude · 요청 난이도 medium\n[지문]\nWhen my mother and I stood in line at the customs checkpoint in Tehran, carrying a garment bag between us like a sleeping child, we talked only about the wedding. Which caterer, which flowers, whether Felix's family would expect a second reception. We did not talk about my father, who had always been the one to handle the officers and the forms, and who had died in March. My mother answered the officer's questions too quickly, then too slowly. I noticed she had brought his old fountain pen to sign the declaration. Nicolas, my fiancé's brother, waved from beyond the glass, and she waved back with exaggerated cheer. I found it hard to watch and harder to look away. I have since come to think that her pretending was a kind of bravery I did not yet possess. The officer stamped our papers without looking up.\n\n[질문] Which choice best describes the narrator's attitude toward her mother?\nA) The narrator is embarrassed by her mother's nervousness and wishes she had traveled alone.\nB) The narrator is tenderly respectful, seeing courage in her mother's forced cheer.\nC) The narrator is frustrated that her mother refuses to plan the wedding in detail.\nD) The narrator is amused by her mother's attempts to impress the officers at the checkpoint.\n### lit40-medium-05-040 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nStatic hissed from every shelf of Baraka's radio repair shop in Addis Ababa when Wanjiru brought in her late uncle's set. Baraka, a retired sailor, recognized it at once and said he had promised to fix it decades ago. Wanjiru remembered no such promise, and neither, she suspected, did he. Still, he worked on it for three evenings while she waited on a stool, and he told her stories of ports her uncle had never mentioned. On the fourth evening the radio played a song, faint but clear. Baraka seemed less pleased by the music than by the fact that she had stayed to hear it. Across the street, a vendor lowered the shutters on his stall of spices.\n\n[질문] Which choice best states the main purpose of the passage?\nA) To recount how a retired sailor repaired an old radio for a customer over several evenings\nB) To describe the busy shops and vendors of a neighborhood in Addis Ababa at dusk\nC) To show that kindness is always rewarded when people keep their promises to one another\nD) To suggest that a forgotten promise serves mainly as a reason for two people to connect\n### lit40-medium-05-041 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nI had lent Errol eleven rupees in the spring, and he had promised to repay me by the monsoon, when he would surely be restored to the side. All that summer he sat upon the bench at our matches, and all that summer he came to me at the harbor with excuses as neatly coiled as the nets drying on the sea wall. Each excuse asked for another week. I granted them, believing a week a small thing to give a young man. Only when the rains came, and Shirin told me he had taken work hauling ice on the night boats, did I understand that every week I had lent him was a week he had spent elsewhere, and that the money had never been the larger debt. Below us, a trawler nosed into its berth, its deck silver with pomfret and its crew shouting for the scales.\n\n[질문] Which choice best states the main purpose of the text?\nA) To depict the narrator's dawning sense that the time he granted Errol cost more than the money\nB) To recount how Errol sat on the bench all summer while repeatedly delaying repayment of a small loan\nC) To describe the working life of the harbor, where nets, ice boats, and trawlers shape each day\nD) To suggest that generosity toward others is usually repaid with disappointment and regret\n### lit40-medium-05-042 — skill central_ideas_details · 유형 main_idea_or_purpose · 요청 난이도 medium · hard 기준: 두 곳의 근거를 합쳐 요지를 잡아야 하고, 오답 하나는 일화 요약에 그치는 부분 요지다\n[지문]\nRuwan had cooked for the summer camp in Karachi for nineteen years, and on my first visit as her son's wife, I watched the camp director praise her dal before two hundred children. Everyone applauded. Afterward, in the steam behind the serving counter, she counted the onions she had bought with her own money and wrote the sum in a small notebook no one had ever asked to see. The next week the director thanked me, too, for the rotis I had rolled, and Danish beamed as though I had won a prize. I found Ruwan's notebook on the shelf that evening; my name had already been added beneath hers, with an empty column waiting. Outside, the boys were dragging benches across the courtyard for the evening's talent show, arguing over who would sit nearest the fan.\n\n[질문] Which choice best states the main idea of the text?\nA) The narrator recalls helping Ruwan cook for the children during her first visit to the camp.\nB) The praise both women receive at the camp conceals labor and expense that go unrewarded.\nC) The camp is portrayed as a lively place where children gather for meals and shows.\nD) Families grow closer when they share the work of feeding others in their community.\n### lit40-medium-05-044 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nYears later, Despina would remember that the floodlights had not yet come on when she found the envelope. It had slipped from Kostas's music case onto the grass beside the soccer field, where he liked to walk his students after lessons, and it was addressed not to her but to the conservatory in Vienna. Through the thin paper she could read her own name beside the words regrettably not ready. She thought of the scale he had made her repeat forty times that afternoon, and of how he had said, almost gently, that Vienna would ask for more. She tucked the envelope back into the case without a word and asked him for one more hour of lessons each week. On the far side of the field, boys were still kicking a ball toward a goal they could barely see.\n\n[질문] Based on the text, why does Despina most likely ask Kostas for more lessons?\nA) She is ashamed of having read a letter that was never meant for her eyes.\nB) She wants Kostas to rewrite his letter and praise her to the conservatory.\nC) She has been told by the conservatory that she must repeat her scales.\nD) She wants to meet the standard Kostas thinks the conservatory will demand.\n### lit40-medium-05-045 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nSalt stung the cut on Renata's knuckle as she lowered herself into the pool carved from the black rock. Mingyu was already there, floating on his back the way he had when her father still came to Jeju each summer. He was selling his dive shop and moving to Busan for good, he had told her, and he had a box of her father's things he did not know what to do with. Inside, she had found a logbook filled with dives the two men had made together, each entry signed by both. Now she swam to him and asked, before she could lose her nerve, whether he would teach her the route from the last page. He was quiet, then nodded toward the reef. Gulls wheeled over the breakwater, quarreling over a fish one of them had dropped.\n\n[질문] Based on the text, why does Renata most likely ask Mingyu to teach her the route?\nA) She wants to share part of her father's life with Mingyu before he leaves.\nB) She is angry that Mingyu kept her father's belongings for so many years.\nC) She hopes the lesson will persuade Mingyu to keep his dive shop open.\nD) She was asked by her father to complete the dives in his old logbook.\n### lit40-medium-05-046 — skill inferences · 유형 character_motivation · 요청 난이도 medium · hard 기준: 단서를 두 문장 이상 연결해야 하며 오답 중 하나는 결과를 동기로 착각하는 전형적 오독이다\n[지문]\nOnce, in a laundromat near the Beirut harbor, I folded sheets beside a woman who had ridden my father's ferry that morning. Fiorella, she said her name was, and she was mending a sail for the yacht club, a job she had been hired for alone. I knew something of sails; my father's had torn every spring, and I, Tamika, had patched them since I was nine. When she struggled with the seam, I showed her the double stitch, and we finished the work together while the machines rattled. She thanked me warmly and said the club would be delighted with her. Weeks earlier, I had watched my father accept praise for patches I had sewn. So I wrote my initials, small, in the corner of the canvas. The attendant came by then, mopping soap from the floor.\n\n[질문] Based on the text, why does the narrator most likely write her initials on the canvas?\nA) She is proud of the double stitch and wants Fiorella to remember how to sew it.\nB) She wants a lasting mark of her share in work that others are likely to claim.\nC) She hopes the yacht club will notice her initials and hire her for future repairs.\nD) She was told by her father that every sail she patched should carry her name.\n### lit40-medium-05-047 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nBay rum and scorched hair hung in the air as Itzel snapped a cape around my father's neck. Bogdan had lived in Havana for thirty years and still refused to speak Spanish in her shop, so I was, as always, his translator. Short on the sides, he told me in Russian, not too much on top. I told Itzel to take it all off. She raised her scissors and grinned at me in the mirror, and I grinned back, because he had been telling me for weeks that I was too stubborn to cut my own hair. Only when the first gray lock slid down the cape did I notice his hands tightening on the armrests. Itzel hummed along with the radio, a bolero about a sailor and a faraway port.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Uneasy and apprehensive, focused on the father's tightening grip on the chair\nB) Uneasy with brief flashes of humor, dwelling mostly on the father's distress\nC) Playfully mischievous, though shadowed by a growing hint of unease\nD) Nostalgic and wistful, recalling the narrator's childhood visits to the shop\n### lit40-medium-05-048 — skill inferences · 유형 tone_or_mood · 요청 난이도 medium · hard 기준: 두 정서의 비중을 판단해야 하며, 오답은 정반대가 아니라 비중이 틀린 어조다\n[지문]\nWe have been waiting since noon, you and your grandfather, on the orange chairs outside the scan room. To pass the time, Haruto takes a photograph from his wallet: a boy on a snowbank, holding a fish nearly as long as himself. You try the word for proud and get it wrong, and he laughs so loudly that the nurse at the desk looks up. He corrects you, slowly, tapping each syllable on your wrist, Mio, the way he once tapped rhythms for you on the kitchen table. Twice he glances at the door when it opens, and twice he goes back to the photograph as if it were a lesson he must finish. You say the word again, correctly this time. Outside the window, a snowplow scrapes along the empty lot, its yellow light turning in the dusk.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Anxious and fearful, centered on the results of the grandfather's scan\nB) Tense and apprehensive, softened by brief moments of shared laughter\nC) Mournful and elegiac, lamenting a childhood that can never return\nD) Affectionate and gently humorous, with an undercurrent of worry\n### lit40-medium-05-049 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\n“They have locked the reading room for the inspector,” the woman beside me said, and that was how I, Anushka, met Zofia. We sat together on the bench in the corridor of the Tbilisi library, two strangers with nowhere to be for an hour. She was reading the same pamphlet I was, a tribute to the professor whose portrait hung above us. When I mentioned that my aunt had typed his famous lectures, Zofia closed the pamphlet and said quietly that her mother had written them. For a moment neither of us spoke. Then she slid half of her bread across the bench to me, and I offered her my aunt's address. A clerk passed with a cart of ledgers, one wheel squeaking at every tile.\n\n[질문] Which choice best describes the relationship between Anushka and Zofia that develops in the text?\nA) Two strangers drawn into a quiet alliance by a shared discovery about the professor\nB) A stranger who pities a woman whose mother was never credited for her lectures\nC) Rivals competing to prove whose relative truly earned the professor's reputation\nD) A scholar and an admirer united by their deep respect for a famous professor\n### lit40-medium-05-050 — skill inferences · 유형 relationship_between_characters · 요청 난이도 medium · hard 기준: 두 문장의 단서를 연결해야 하고 오답은 한쪽 감정만 반영한다\n[지문]\nGreta did not want to sell. She pushed her mother's chair along the promenade each afternoon, past the pier where the steamers unloaded, and each afternoon her mother raised the matter of the house in Blankenese. The roof leaks, the old woman said, and you cannot nurse me and mend slates at once. Greta tucked the blanket tighter around her mother's knees and pointed out a ship flying a Norwegian flag. Later, when her mother asked whether the agent had written again, Greta answered that the letter must have gone astray, though it lay folded in her coat pocket. Her mother reached up and patted the hand on the chair. Along the railing, a vendor was selling smoked eel wrapped in newspaper.\n\n[질문] Which choice best describes the relationship between Greta and her mother?\nA) A frustrated daughter grown tired of her mother's constant talk about the house\nB) A protective daughter deflecting a mother who gently accepts her evasions\nC) A daughter pressing her reluctant mother to agree to sell the family house\nD) A grateful mother and daughter made inseparable by their shared hardships\n### lit40-medium-05-051 — skill inferences · 유형 symbolism · 요청 난이도 medium\n[지문]\nYears ago, when I was foreman of the crew that laid the tiles at the new metro station in Lima, I wrote an apology to Linh, the youngest of my workers, whom I had blamed before everyone for a cracked step that was not his doing. I, Ofelia, carried the letter in my vest for a week. Each evening I waited on the platform where he caught his train, and each evening a car pulled in, its doors opened, and I let it go. Linh would board, nod to me through the glass, and be carried off toward the hills. On the seventh evening the doors opened again and closed again, and I watched the red lamp of the last car dwindle into the tunnel. The paper had gone soft at the folds by then. Above the platform, pigeons settled along the iron beams, shaking dust from their feathers.\n\n[질문] In the text, the trains that the narrator lets depart most likely represent\nA) the speed with which the young hire advances beyond his foreman's crew.\nB) the new station's progress, which the narrator's crew helped bring about.\nC) the narrator's repeated chances to apologize, each allowed to pass.\nD) the distance between the city center and the hills where Linh lives."
+}

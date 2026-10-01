@@ -1,0 +1,368 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "explanation_audit",
+ "runId": "lit40-wave1",
+ "taskId": "rev-explanation_audit-024",
+ "chunkId": "rev-explanation_audit-024",
+ "suggestedModel": "sonnet",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-024.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "sonnet",
+  "items": [
+   {
+    "candidateId": "id",
+    "answer_correct": "표시된 정답이 정말 정답이면 true",
+    "explanation_consistent": "해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true",
+    "explanation_factual": "해설에 사실 오류가 없으면 true",
+    "issues": "한 줄 메모"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-02-029",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Who labels seeds in pencil anymore? My grandmother Cecile did, every packet in the cooperative's back room in Port of Spain, in a slanted hand that faded within a year. __She said ink was for things a person was sure of.__ I spent that August sorting bodi beans and pigeon peas beside her, sealing envelopes, writing dates. She talked about rainfall and weevils and the price of jute sacks. She did not talk about my mother, who had not come home in six years. On the last day, reaching for a fresh box of envelopes, I found one already sealed and addressed in pencil to my mother in London, the stamp gone pale with age. Cecile took it from me, looked at it a long while, and slid it back into the box among the seed packets.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It offers a stated rule that later accounts for a letter written and kept back.",
+    "It offers a stated rule that mainly characterizes Cecile as a careful keeper of seed records.",
+    "It offers a stated rule that introduces the cooperative's practice of dating every packet.",
+    "It offers a stated rule that reflects the cooperative's caution about the uncertain rainfall."
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "A",
+   "explanation": "밑줄 문장은 처음에는 연필로 이름표를 쓰는 할머니의 습관을 설명하는 성격 묘사처럼 읽힌다. 그런데 할머니가 딸 이야기를 피한다는 중간 단서와, 연필로 주소를 쓴 채 봉인되어 오래 보관된 편지가 발견되는 끝 장면이 이어지면, 이 말은 할머니가 확신하지 못해 보내지 못한 사과를 설명하는 복선이 된다. 따라서 A가 정답이다. B는 밑줄만 단독으로 읽었고, C는 바로 뒤 문장(날짜 쓰기)과의 관계로 읽었으며, D는 지문 어휘(rainfall)를 빌려 일반화했다."
+  },
+  {
+   "candidateId": "lit40-hard-02-030",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Hari had not spoken to me since the morning I called his essay too careful to be brave. __On the train to Pune he took the upper berth and spread his notebooks across it, the way he used to spread them across the front desk of my classroom.__ The compartment filled with the smell of cardamom tea and wet umbrellas. A family below us argued over a tiffin of lemon rice. I graded papers. Hari watched the rain streak the window, and when the vendor came through he bought two cups of tea, set one on the ledge near my elbow without a word, and climbed back up. Near Lonavala the train stopped in a cutting. I looked up. Every notebook on the berth lay open, turned toward me, and on the top page, in his cramped hand, was a new first line, crossed out and rewritten four times.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It describes a habit that mainly shows Hari's wish to keep his distance from his teacher.",
+    "It describes a habit that later reads as a silent offer to share his work.",
+    "It describes a habit whose tension is resolved when Hari leaves a cup of tea for her.",
+    "It describes a habit that reflects how students carry the classroom into daily life."
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "B",
+   "explanation": "밑줄 문장은 단독으로 보면 Hari가 위 칸에 올라가 거리를 두는 장면 묘사처럼 보인다. 그러나 끝에서 공책이 모두 선생님 쪽으로 펼쳐져 있고 네 번 고쳐 쓴 첫 문장이 보이는 장면이 나오면서, 공책을 펼쳐 놓는 옛 습관이 말없이 글을 보여 주려는 제안이었음이 드러난다. 따라서 B가 정답이다. A는 밑줄만 단독으로 읽었고, C는 바로 뒤 차 장면에서 갈등이 해소된 것으로 읽었으며, D는 교실이라는 지문 표현을 빌려 일반화했다."
+  },
+  {
+   "candidateId": "lit40-hard-02-031",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Beside the shoe repair stall under the arcades of Bologna, Shuang waited each Saturday while the cobbler resoled whatever her family had worn through that week. __Chulsoo, her younger brother's tutor, passed the stall at nine o'clock exactly and lifted his hat to her without slowing.__ She considered him a stiff young man who corrected grammar at dinner. One Saturday the cobbler handed her the boy's boots and remarked that the tutor had paid for them already, as he had the month before. Shuang said that was unnecessary. She paid again, and the cobbler shrugged and pocketed both coins. The following week her brother brought home a prize for Latin composition, and Chulsoo, at dinner, remarked only that the ablative was still weak. At nine the next Saturday Shuang stood at the stall. The tutor lifted his hat, and his step, for once, slowed.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It introduces a routine that mainly establishes the tutor's formal and punctual manner.",
+    "It introduces a routine that confirms Shuang's sense of him as a stiff young man.",
+    "It introduces a routine whose stiffness later appears to mask his care for the boy.",
+    "It introduces a routine that reflects the polite customs of the city's busy arcades."
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "C",
+   "explanation": "밑줄 문장은 단독으로 보면 Chulsoo의 딱딱하고 시간을 엄수하는 성격을 보여 주는 묘사다. 그러나 그가 몰래 동생의 구두 값을 두 번이나 치렀다는 사실과, 상을 받은 뒤에도 '탈격이 약하다'고만 말하는 태도, 마지막에 걸음이 느려지는 장면이 이어지며 그 형식적 태도가 자부심과 애정을 감추는 겉모습이었음이 드러난다. 따라서 C가 정답이다. A는 밑줄만 읽었고, B는 바로 뒤 문장과의 관계로 기능을 뒤집었으며, D는 장소 표현을 빌려 일반화했다."
+  },
+  {
+   "candidateId": "lit40-hard-02-033",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Chlorine and salt stung Dana's eyes the first morning at the pool in Vermont, and he complained about it to anyone who would listen, mostly Casey, his grandfather's old friend, who swam laps there at six. Casey talked too much, Dana decided. He told the same stories about the quarry, he whistled through his teeth, and he had a plan: they would tell Dana's grandfather the doctor said swimming would help his knee. The doctor had said no such thing. Dana told Casey it was a ridiculous plan. He went along with it anyway, which was not lying, exactly, he told himself, only agreeing in a loud voice. By the third week the grandfather was swimming. Dana came early now. He set Casey's towel on the warm bench by the heater, and when Casey told the quarry story again, Dana asked a question about the part he already knew.",
+   "question": "Which choice best describes Dana's attitude toward Casey as conveyed in the text?",
+   "options": [
+    "Mild contempt for Casey despite some patience with his repeated stories.",
+    "Quiet affection for Casey despite a habit of grumbling about him.",
+    "Guilty fondness for Casey despite private doubts about their shared plan.",
+    "Amused tolerance for Casey despite finding his plan rather ridiculous."
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Dana는 Casey가 말이 많고 같은 이야기를 반복한다고 불평하지만, 중간의 '정확히 거짓말은 아니'라는 자기 정정은 그가 Casey의 계획에 사실상 동참했음을 보여 준다. 뒤에서는 일찍 와서 Casey의 수건을 따뜻한 벤치에 놓고, 이미 아는 대목을 일부러 질문하며 이야기를 들어 준다. 말투와 행동의 어긋남을 합치면 B가 정답이다. A는 말투만 읽었고, C는 애정의 이유를 자신의 죄책감으로 돌렸으며, D는 지문 어휘(ridiculous)를 빌렸지만 행동 단서와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-hard-02-034",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Once a month I brought the supply boat into the cove below the tea terraces, and that spring I found Mio curled behind the fertilizer sacks, a scholarship letter for a college in Plymouth folded in his shoe. I told him he was a nuisance. I told him stowaways ate more than paying cargo and complained about the smell of diesel, which he did, constantly. I made him scrub the deck twice a day. He asked what the fare would have cost. I said more than he had, which was not lying, exactly, only rounding up. On the last run before term I kept the boat in the cove an extra hour while he said goodbye to the pickers on the terraces, and I wrote nothing in the log about the extra fuel. When he asked again about the fare, I talked about the tide tables until he gave up.",
+   "question": "Which choice best describes the narrator's attitude toward Mio as conveyed in the text?",
+   "options": [
+    "Weary impatience with Mio despite brief moments of shared humor aboard.",
+    "Protective care for Mio despite a wish to make up for her own past.",
+    "Quiet generosity toward Mio despite a show of gruff annoyance with him.",
+    "Grudging acceptance of Mio despite calling him a nuisance to the crew."
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "correct_letter": "C",
+   "explanation": "화자는 앞에서 Mio를 골칫거리라 부르고 갑판 청소를 시키는 등 퉁명스러운 말투를 보인다. 중간에 뱃삯에 대해 '거짓말은 아니고 반올림했을 뿐'이라는 정정이 나오고, 뒤에서는 작별 인사를 위해 배를 한 시간 더 머물게 하고 연료 기록을 남기지 않으며 뱃삯 이야기를 피한다. 이 행동들은 말투 아래의 조용한 너그러움을 보여 주므로 C가 정답이다. A는 말투만 읽었고, B는 지문에 근거 없는 화자 자신의 과거를 이유로 들었으며, D는 지문 어휘(nuisance)를 빌렸지만 행동 단서를 설명하지 못한다."
+  },
+  {
+   "candidateId": "lit40-hard-02-035",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "By seven the gym on Seventy-First smells of floor wax\nand the folding chairs are already crooked.\nDevon, who rode my father's ferry every summer\nand talked the whole way across about nothing,\nasks me to the spring dance under the dead scoreboard.\nI tell him he dances like a dropped mop.\nI tell him I have a shift on the dock,\nwhich is not lying, exactly—\nmy father would let me off if I asked.\nHe laughs. He says, Kenya, fair enough.\nAfter he goes I stack the chairs he knocked over\nand straighten the ones he didn't,\nand when the custodian kills the lights\nI stand a while by the bleachers\nwhere he left his jacket, and fold it\nsleeve over sleeve, the way my father folds a flag,\nand carry it home on the ferry, on my lap,\nthe whole way across.",
+   "question": "Which choice best describes the speaker's attitude toward Devon as conveyed in the text?",
+   "options": [
+    "Teasing scorn for Devon while granting that he takes refusal well.",
+    "Fond regard for Devon while feeling bound by duty to her father.",
+    "Amused patience for Devon while finding him talkative about nothing.",
+    "Hidden tenderness for Devon while turning him away with jokes."
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "correct_letter": "D",
+   "explanation": "화자는 Devon이 '떨어진 대걸레처럼 춤춘다'고 놀리고 부두 근무를 핑계로 초대를 거절한다. 그러나 '정확히 거짓말은 아니'라는 정정으로 아버지가 쉬게 해 줄 것임을 스스로 인정하고, 뒤에서는 그가 넘어뜨린 의자를 정리하고 두고 간 재킷을 정성껏 접어 무릎에 올린 채 집까지 가져간다. 농담과 행동의 어긋남을 합치면 감춘 애정을 말하는 D가 정답이다. A는 말투만 읽었고, B는 거절의 이유를 아버지에 대한 의무로 뒤집었으며, C는 지문 표현을 빌렸지만 행동 단서와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-hard-02-036",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "What is owed to a stranger met in a delay? I put the question to myself at the ferry terminal in Thessaloniki, where the steamer was held two days by weather, and where a gentleman named Emre occupied the bench beside mine and would not stop talking. He was travelling to a dying friend. He talked of whether to tell the man that his son had lost the family vineyard, and he talked of it badly, in circles, through too much tobacco. I found him tiresome, and I said so to the clerk, which was not unkind, exactly, only accurate. On the second evening I bought two coffees and set one by his elbow. When he began again about the vineyard, I did not turn the subject, and I asked what his friend had loved most about the vines.",
+   "question": "Which choice best describes the narrator's attitude toward Emre as conveyed in the text?",
+   "options": [
+    "Growing sympathy for Emre despite a stated weariness with his talk.",
+    "Mild disdain for Emre despite a polite tolerance of his company.",
+    "Kindly interest in Emre despite wishing mainly to pass the delay.",
+    "Tired impatience with Emre despite finding him less tiresome later."
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "correct_letter": "A",
+   "explanation": "화자는 앞에서 Emre를 지루하다고 평가하고 직원에게까지 그렇게 말하지만, '불친절한 것은 아니고 정확할 뿐'이라는 자기 정정이 그 평가를 누그러뜨린다. 뒤에서는 커피를 사서 그의 팔꿈치 옆에 두고, 포도밭 이야기를 피하지 않은 채 친구가 무엇을 사랑했는지 묻는다. 이 행동은 말투 아래 공감이 자라고 있음을 보여 주므로 A가 정답이다. B는 말투만 읽었고, C는 관심의 이유를 지루함 달래기로 돌렸으며, D는 지문 어휘(tiresome)를 빌렸지만 행동 단서와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-hard-02-037",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "Yona ran the crew that rewired the old apartment block in Lisbon, and on my first day he told me I held a screwdriver like a soup spoon. He said that sort of thing all spring. He timed my coffee breaks. He called me the intern in front of the tenants, though I was nothing of the kind. His plan was to finish the stairwell before the inspector came, working nights, and it worked: the inspector signed off on a Friday, and nobody on the crew so much as smiled. I told my sister he was impossible, which was not quite fair, I suspected even then. On the last night I stayed after the others, coiled the leftover cable the way he coiled it, elbow to thumb, left it on his toolbox with the ends taped, and went down the stairs without switching on the new lights.",
+   "question": "Which choice best describes the narrator's attitude toward Yona as conveyed in the text?",
+   "options": [
+    "Lingering resentment of Yona despite relief that the job is finished.",
+    "Unspoken respect for Yona despite complaints about his harsh manner.",
+    "Dutiful gratitude to Yona despite doubts about her own skill at work.",
+    "Weary tolerance of Yona despite finding him impossible at times."
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "correct_letter": "B",
+   "explanation": "화자는 앞부분에서 Yona의 조롱과 휴식 시간 재기 같은 거친 태도를 나열하고 동생에게 그가 '불가능한 사람'이라고 말한다. 그러나 '그다지 공정하지 않았다'는 자기 정정이 이어지고, 마지막 밤에는 그가 하던 방식대로 전선을 감아 끝을 테이프로 감싼 뒤 그의 공구함에 남겨 둔다. 그의 방식을 따라 하는 이 행동은 말하지 않은 존경을 드러내므로 B가 정답이다. A는 불평의 말투만 읽었고, C는 이유를 자신의 실력에 대한 불안으로 돌렸으며, D는 지문 어휘(impossible)를 빌렸지만 행동 단서와 맞지 않는다."
+  },
+  {
+   "candidateId": "lit40-hard-02-038",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Four rules governed the bakery in Chengdu before dawn: flour first, then water, then salt, then silence. Dalia had learned them at fourteen, when her aunt took her in, and for three years the two of them had folded dough side by side without speaking, her aunt's knuckles pressing a pattern that Dalia copied stroke for stroke. Each morning her aunt set out two aprons on the counter, though Dalia owned three of her own. Dalia never asked why. That winter her aunt's wrists swelled, and one morning she did not come down. Dalia worked alone. She weighed the flour, poured the water, measured the salt. When the first trays were out, she found that she had set two aprons on the counter herself, and that between folds she had been pausing for knuckles beside hers that did not come. She took the second apron and hung it back on its hook.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "The text shows how a strict aunt trains her niece in a craft through wordless repetition.",
+    "The text shows how a young cook manages the bakery alone while her aunt is unwell.",
+    "The text shows how a silent chore became a bond felt most in its absence.",
+    "The text shows how working alone leads a young cook to take up her aunt's routine."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다",
+   "correct_letter": "C",
+   "explanation": "앞부분(사건 1)은 이모와 Dalia가 말없이 반죽을 접는 엄격한 일과를 보여 주고, 이유가 설명되지 않는 앞치마 두 장이 중간에 미해결 디테일로 남는다. 뒷부분(사건 2)에서 혼자 일하게 된 Dalia가 스스로 앞치마 두 장을 꺼내고 곁의 손을 기다리며 멈추는 모습은, 그 일과가 단순한 훈련이 아니라 둘의 유대였음을 다시 읽게 한다. 따라서 두 사건의 관계를 진술한 C가 정답이다. A는 사건 1만, B는 사건 2만 말했고, D는 일과가 이미 있었는데도 혼자 일한 것이 그 원인인 것처럼 인과를 뒤집었다."
+  },
+  {
+   "candidateId": "lit40-hard-02-039",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "Years later the tenants of the block in Nairobi would still describe Ren tapping the rooftop water tank each dawn with a spanner, three knocks, listening for how full it rang. Moshe, the surveyor sent by the water board, watched him do it on his first morning and noted in his ledger that the meter had been broken for a decade. Ren nodded. He showed Moshe where the overflow pipe rusted, where pigeons drank, where the children hid their kites. In a corner of the roof sat a folded canvas bag that neither man mentioned. On Moshe's final morning he brought a new meter, installed it, and read the numbers aloud. Ren listened, then picked up the spanner, knocked three times on the tank, and handed the spanner to the boy from the third floor who had come up to watch. Then he lifted the canvas bag onto his shoulder.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "The text shows how a visiting surveyor learns that a building's meter has long been broken.",
+    "The text shows how a new meter gives the tenants a dependable reading of their water.",
+    "The text shows how a keeper's plan to leave prompts the water board to install a meter.",
+    "The text shows how a keeper hands on his skill as a device seems to replace it."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다",
+   "correct_letter": "D",
+   "explanation": "앞부분(사건 1)에서 Ren은 고장 난 계량기 대신 물탱크를 두드려 수위를 듣고, 구석의 캔버스 가방은 설명 없이 남는다. 뒷부분(사건 2)에서 새 계량기가 설치된 뒤에도 그는 세 번 두드리고 스패너를 소년에게 건넨 다음 가방을 메고 떠난다. 두 사건을 합치면 기계가 그의 기술을 대체하는 순간에 그가 그 기술을 다음 사람에게 넘긴다는 D가 요지다. A는 사건 1만, B는 사건 2만 말했고, C는 떠남이 계량기 설치의 원인인 것처럼 인과를 뒤집었다."
+  },
+  {
+   "candidateId": "lit40-hard-02-040",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "main_idea_or_purpose",
+   "requestedDifficulty": "hard",
+   "passage": "By the time we stopped at the diner outside Krakow, the commission was gone: the church restorers had chosen another workshop, and Matthias said it was because my joints on the sample pew had gapped. I agreed. I had measured too fast. Over pierogi and weak coffee he listed my errors, calmly, the way he listed lumber, and I wrote them on a napkin. On the windowsill beside our booth stood a small carved bird with one wing mended in a darker wood; neither of us spoke of it. A year later, sorting his papers when his eyes failed, I found the restorers' letter. They had praised the pew. They had chosen the other workshop because Matthias asked a price he must have known they could not pay. I drove out to the diner again. I ordered pierogi and weak coffee, and I left the napkin, still folded, under my cup.",
+   "question": "Which choice best states the main idea of the text?",
+   "options": [
+    "The text shows how a later discovery recasts a fault the narrator had once accepted.",
+    "The text shows how an apprentice learns from a careful list of her own errors.",
+    "The text shows how a letter reveals the restorers' high opinion of a sample pew.",
+    "The text shows how losing a commission leads a master to price his work too high."
+   ],
+   "recipeBeyondMedium": "요지가 한 사건이 아닌 두 사건의 관계이며, 오답이 모두 지문 사실과 양립하는 부분 요지·인과 뒤집기다",
+   "correct_letter": "A",
+   "explanation": "앞부분(사건 1)에서 화자는 일을 놓친 원인이 자신의 이음매라는 Matthias의 말을 받아들이고 실수 목록을 냅킨에 적으며, 고쳐진 나무 새는 설명 없이 남는다. 1년 뒤(사건 2) 발견한 편지는 의뢰를 잃은 진짜 이유가 Matthias가 일부러 높게 부른 값이었음을 드러내 사건 1을 다시 읽게 한다. 따라서 나중의 발견이 받아들였던 잘못을 다시 보게 만든다는 A가 요지다. B는 사건 1만, C는 사건 2만 말했고, D는 높은 가격이 의뢰를 잃게 한 원인인데 인과를 뒤집었다."
+  },
+  {
+   "candidateId": "lit40-hard-02-061",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "\"Read it again,\" Akari said, the mayor's paper folding in her glove.\nEach evening on the Riga platform, Kalani, the town's only doctor,\nhad copied the notice into three languages, slowly,\nchecking every verb against the old dictionary she carried.\nTonight the train was late; the lamps hummed above the tracks.\nAkari pointed to one line: her word for \"closed\"\nhad become \"abandoned\" in the version already pasted on the station wall.\nKalani was ______ by the error.\nShe did not argue or apologize.\nShe took a pencil from her coat, crossed out the word on the posted sheet,\nand wrote the smaller word above it, letter by letter,\nwhile the arriving train drowned whatever Akari said next.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "openly embarrassed",
+    "mildly amused",
+    "slowly distracted",
+    "quietly troubled"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "correct_letter": "D",
+   "explanation": "앞부분에서 Kalani는 매일 저녁 모든 동사를 사전과 대조할 만큼 번역의 정확성에 마음을 쓰는 인물로 그려지므로 오류에 무심할 수 없다. 뒷부분에서 그녀는 따지지도 사과하지도 않고 연필로 한 글자씩 조용히 고쳐 쓰므로, 반응의 정도는 겉으로 드러나지 않는 차분한 동요여야 한다. 두 조건을 모두 만족하는 것은 D이다. A는 오류에 신경 쓴다는 점은 맞지만 드러내 놓고 당황한다는 정도가 뒤의 침착한 행동과 어긋나고, B는 정확성에 대한 그녀의 집착과 맞지 않으며, C는 지문의 'slowly'를 빌렸을 뿐 오류 앞에서의 반응을 설명하지 못한다."
+  },
+  {
+   "candidateId": "lit40-hard-02-062",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "When I worked nights on the ward, I passed a clock-maker's shop in Ohio every morning, and Hedwig was always already at his bench, tightening the same brass wheel of the same tall clock. Winifred, my patient in bed four, had sent it there. Every week she asked whether it was ready, and every week I said soon. One morning Hedwig set down his loupe and told me the clock would never keep time again; the case had warped. I carried that sentence back to the ward like a cold cup of tea. Winifred, though, was ______ when I repeated it. She asked me to tell Hedwig to keep working on it anyway, and that night she wound her small wristwatch twice before sleeping, holding it near her ear.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "calmly accepting",
+    "openly distressed",
+    "coldly dismissive",
+    "mildly relieved"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "correct_letter": "A",
+   "explanation": "Winifred는 매주 시계가 준비됐는지 묻는데, 이는 수리의 완성보다 수리가 계속되는 과정 자체에 마음을 두고 있음을 보여 준다. 고칠 수 없다는 말을 들은 뒤에도 그녀는 계속 작업해 달라고 부탁하고 손목시계를 태엽 감아 귀에 대므로 반응은 동요 없이 받아들이는 쪽이다. 따라서 A가 두 단서를 모두 만족한다. B는 시계에 대한 애착만 보고 고른 표현으로 뒤의 차분한 부탁과 맞지 않고, C는 지문의 'cold'를 빌린 표현으로 계속 고쳐 달라는 부탁과 어긋나며, D는 안도할 이유가 지문에 없다."
+  },
+  {
+   "candidateId": "lit40-hard-02-063",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Coins rattled in Savitri's palm as she counted them a second time at the ticket window of the Accra depot. She did this every trip, my stepmother, recounting fares she had already counted at home, as if the numbers might change on the way over. I was fifteen and certain she did it to look busy. That afternoon the clerk said the Kumasi coach had left an hour earlier; she had read the timetable wrong. I waited for her to blame the board, or the clerk, or me. Instead she was ______ about it. She bought two cold sodas with part of the fare money, sat beside me on the bench, and asked me, of all people, to read the next departure aloud.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "visibly flustered",
+    "unexpectedly frank",
+    "politely evasive",
+    "busily occupied"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다",
+   "correct_letter": "B",
+   "explanation": "앞부분에서 Savitri가 요금을 거듭 세는 습관은 실수를 두려워하는 사람처럼 보이게 하고, 화자는 그녀가 남 탓을 하리라 예상한다. 그러나 뒤에서 그녀는 자기 실수를 감추지 않고 화자 옆에 앉아 다음 출발 시각을 읽어 달라고 부탁하므로, 실수를 숨김없이 인정하는 태도가 드러난다. 따라서 B가 '예상과 달리'라는 의외성과 솔직함을 모두 담는다. A는 앞의 습관과만 맞고 뒤의 여유 있는 행동과 어긋나며, C는 도움을 청하는 행동과 맞지 않고, D는 지문의 'busy'를 빌린 표현일 뿐이다."
+  },
+  {
+   "candidateId": "lit40-hard-02-066",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "By the ninth week of the dry season\nAma had taught Zainab every jar:\nmillet tied with red thread, cowpea with blue,\nokra wrapped in newsprint from the year of floods,\neach lid tapped twice, each name said aloud.\nZainab learned the counting and the drying racks,\nthe way a seed is tested in a cup of water,\nthe floaters tossed out, the sinkers kept.\nShe spoke of the bus to the coast,\nof cousins, of work in the port.\nAma kept sorting.\nThen Ama stopped naming.\nShe let a full jar stand open in the light.\nAt dusk she pressed a twist of cloth, unlabeled,\ninto the girl's hand,\nand turned back to the shelves\nbefore Zainab could untie it.",
+   "question": "Which choice best describes the shift in tone that occurs in the text?",
+   "options": [
+    "It shifts from lively instruction to weary routine, as the elder grows tired of naming every jar.",
+    "It shifts from exacting instruction to a quiet release, as the elder doubts her own skill as a teacher.",
+    "It shifts from exacting instruction to a quiet release, as the elder comes to terms with the apprentice's plans.",
+    "It shifts from exacting instruction to a grieving protest, as the elder resists the apprentice's plans."
+   ],
+   "recipeBeyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다",
+   "correct_letter": "C",
+   "explanation": "시의 앞부분은 실 색깔, 포장지, 뚜껑 두드리기까지 세세하게 나열하며 Ama의 엄격한 가르침을 보여 주지만, Zainab이 해안행 버스와 항구 일을 말한 뒤 행이 짧아지고 Ama는 이름 부르기를 멈춘다. 마지막에 이름표 없는 씨앗 꾸러미를 건네고 돌아서는 동작은 떠나려는 제자의 뜻을 받아들이고 보내 주는 마음으로 읽힌다. 따라서 C가 정답이다. A는 짧아진 행을 단순한 피로로 읽었고, B는 원인을 Ama 자신의 자질에 대한 의심으로 뒤집었으며, D는 선물을 건네는 행동과 맞지 않게 정도를 항의로 과장했다."
+  },
+  {
+   "candidateId": "lit40-hard-02-073",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Cleotilde and Imtiaz had played chess in the abandoned orchard outside Lyon every Sunday since the club lost its hall. __Their board sat on a stump, and the club's old rule, written on a card tucked beneath it, said that a touched piece must be moved.__ The pear trees had gone wild; fruit split on the grass and drew wasps. The two rivals spoke little, played slowly, and kept score in a notebook that neither would let the other hold. They had been trading the lead for eleven years. This Sunday a wasp landed on Imtiaz's queen. He brushed it away, and his knuckle tipped the queen onto its side. Cleotilde looked at the piece, then at the stump. Moving the queen now would cost him the game and the lead. She reached under the board, slid out the card, and folded it into her coat pocket. Then she set the queen upright on its square and waited.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It establishes the setting by showing how the two players arrange their weekly game.",
+    "It introduces a standard that later becomes the basis of a choice Cleotilde makes.",
+    "It contrasts the players' orderly game with the disorder of the wild orchard.",
+    "It explains why the two players keep score in a notebook neither will share."
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "B",
+   "explanation": "밑줄 문장은 단독으로 보면 그루터기 위 체스판과 카드 한 장을 묘사하는 배경 설명처럼 보인다. 그러나 후반부에 Imtiaz가 실수로 퀸을 건드려 규칙대로라면 경기를 잃게 되자, Cleotilde가 그 카드를 빼서 주머니에 넣고 퀸을 다시 세운다. 따라서 밑줄 문장은 후반의 선택을 가능하게 하는 기준을 미리 심어 둔 복선이므로 B가 정답이다. A는 밑줄 문장의 표면 기능만 읽었고, C는 바로 뒤 문장의 무성한 과수원 묘사와의 관계로만 보았으며, D는 지문의 노트 표현을 빌렸지만 후반 사건과 연결되지 않는다."
+  },
+  {
+   "candidateId": "lit40-hard-02-074",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "When the season ended on Maui, the little theater on Front Street ran one film a night for whoever wandered in, and Bogdan, who had run its projector for thirty years, let Larissa sit with him in the booth. __He called her Lara, the way her grandmother had, and she let him, though no one else had used that name since the funeral.__ They watched through the small square window while the reel ticked beside them. Between shows Bogdan oiled the gears and told her which seats squeaked and which ones leaked in the rain. One night in October he asked her to thread the projector herself. Her hands shook; the film slipped twice from the sprockets. When the picture finally steadied on the screen, Bogdan took a marker from his pocket. On the strip of tape above the booth door, where his own name had been written for thirty years, he added a second name beneath it: Lara.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It portrays Bogdan as an old friend who still misses Larissa's late grandmother.",
+    "It shifts the focus from family memories to the daily work of the booth.",
+    "It prepares for a later moment in which Bogdan marks Larissa as his successor.",
+    "It suggests that Larissa puts up with old habits out of politeness to Bogdan."
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "C",
+   "explanation": "밑줄 문장은 단독으로 보면 Bogdan이 할머니를 그리워하며 옛 애칭을 쓰는 인물 묘사처럼 보인다. 그러나 후반부에 Larissa가 처음으로 혼자 영사기를 걸어 화면을 안정시키자, Bogdan은 자신의 이름 아래에 바로 그 애칭 'Lara'를 적어 그녀를 영사실의 후계자로 표시한다. 따라서 밑줄 문장은 그 애칭이 후반에 다른 의미를 얻도록 준비하는 복선이므로 C가 정답이다. A는 밑줄 문장의 표면만 읽었고, B는 바로 뒤 문장과의 관계로만 기능을 보았으며, D는 'let him'이라는 표현을 일반화했을 뿐 후반 사건을 설명하지 못한다."
+  },
+  {
+   "candidateId": "lit40-hard-02-076",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "underlined_portion_function",
+   "requestedDifficulty": "hard",
+   "passage": "Aiko kept everything. In the harbor town in Hokkaido where we had both retired, her house held forty years of programs from the theater where we once sang duets, each one pressed flat and labeled by year. __She told me once, over tea, that she had never missed a single performance of mine, not even after we stopped singing together.__ I laughed, and she poured more tea. Her husband, Haruo, mended nets on the jetty below the house and waved whenever I passed. Last winter, after Aiko's stroke, Haruo asked me to help sort her desk. In the bottom drawer, under the programs, we found ticket stubs: one for every concert I had given alone, in Osaka, in Sapporo, in cities she had told me she had never visited. Haruo held one up to the window light. He did not ask me what it meant, and I put the stubs back in the order she had left them.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It offers a remark that the drawer's contents later show to be literally true.",
+    "It conveys a polite compliment that the narrator treats as a kind exaggeration.",
+    "It introduces the friendship that Haruo shares with the narrator in town.",
+    "It suggests that Aiko kept old records mainly out of a love of order."
+   ],
+   "recipeBeyondMedium": "밑줄 문장의 기능을 지문 후반 사건이 바꾸므로 밑줄 근처만 읽으면 오답에 걸리고, 오답이 모두 지문에 근거한 기능이다",
+   "correct_letter": "A",
+   "explanation": "밑줄 문장은 단독으로 보면 오랜 동료가 건넨 인사치레 같은 말이고, 화자도 웃어넘긴다. 그러나 후반부에 서랍에서 화자가 혼자 공연한 모든 콘서트의 표가 나오면서, Aiko가 가 본 적 없다던 도시까지 몰래 찾아가 공연을 보았다는 사실이 드러난다. 따라서 밑줄 문장은 나중에 문자 그대로 사실로 밝혀지는 말을 미리 심어 둔 것이므로 A가 정답이다. B는 밑줄 문장과 화자의 웃음만 보고 표면 기능을 골랐고, C는 바로 뒤 문장의 Haruo 소개와의 관계로만 보았으며, D는 'kept everything'을 빌려 일반화했을 뿐 서랍의 발견을 설명하지 못한다."
+  },
+  {
+   "candidateId": "lit40-hard-02-077",
+   "attempt": 0,
+   "skill": "central_ideas_details",
+   "questionType": "narrator_attitude",
+   "requestedDifficulty": "hard",
+   "passage": "I run a spice shop in Marrakesh that a former ship's cook built to look like a galley, all brass hooks and low beams, and every morning Joaquin ducks under those beams to complain about my saffron. Too damp, too pale, too expensive. He has said this for nine years. He buys a gram each time anyway, counted out of a jar he insists I lift down from the top shelf. Last month a hotel offered to buy my stock and the lease; I could retire to my daughter's house in Fes. I told Joaquin, mostly to watch his face. He said good, the hotel's saffron would at least be dry. I am not saying I was hurt, exactly. I signed nothing that week. I did move the jar to the lowest shelf, where a man with a bad back could reach it himself, and I wrote the price on the lid in larger numbers.",
+   "question": "Which choice best describes the narrator's attitude toward Joaquin?",
+   "options": [
+    "Weary irritation at his complaints while hoping the sale will put an end to them",
+    "Real fondness for him while feeling guilty about nearly selling the shop",
+    "Protective care for him while keeping up a show of mutual grumbling",
+    "Proud attachment to the galley shop while doubting its worth to customers"
+   ],
+   "recipeBeyondMedium": "말투와 행동의 어긋남을 읽어야 하고, 네 선택지가 같은 양가 구조라 형식 단서가 없다",
+   "correct_letter": "C",
+   "explanation": "앞부분에서 화자는 Joaquin의 불평을 건조하게 옮기고 그의 반응을 보려고 매각 이야기를 꺼내는 등 서로 투덜대는 말투를 유지한다. 중간의 'not saying I was hurt, exactly'라는 망설이는 정정은 그 말투 아래 감정이 있음을 암시한다. 뒤에서 화자는 아무것도 서명하지 않고, 허리가 아픈 Joaquin이 직접 닿도록 병을 아래 칸으로 옮기며 가격을 크게 적는데, 이는 그를 배려하는 행동이다. 따라서 C가 정답이며, A는 말투만 읽었고, B는 배려의 이유를 죄책감으로 바꾸었으며, D는 지문의 가게 묘사를 빌려 태도로 일반화했다."
+  }
+ ],
+ "instructions": "당신은 문항 감사관이다. 표시된 정답과 해설을 받아, 정답이 맞는지·해설이 일관되고 사실에 맞는지 점검한다(고치지 않고 판정만).\n청크 rev-explanation_audit-024 — 19문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-explanation_audit-024.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"sonnet\",\"items\":[{\"candidateId\":\"id\",\"answer_correct\":\"표시된 정답이 정말 정답이면 true\",\"explanation_consistent\":\"해설이 정답·오답 판단과 일치하고 글자 참조가 맞으면 true\",\"explanation_factual\":\"해설에 사실 오류가 없으면 true\",\"issues\":\"한 줄 메모\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-02-029 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWho labels seeds in pencil anymore? My grandmother Cecile did, every packet in the cooperative's back room in Port of Spain, in a slanted hand that faded within a year. __She said ink was for things a person was sure of.__ I spent that August sorting bodi beans and pigeon peas beside her, sealing envelopes, writing dates. She talked about rainfall and weevils and the price of jute sacks. She did not talk about my mother, who had not come home in six years. On the last day, reaching for a fresh box of envelopes, I found one already sealed and addressed in pencil to my mother in London, the stamp gone pale with age. Cecile took it from me, looked at it a long while, and slid it back into the box among the seed packets.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It offers a stated rule that later accounts for a letter written and kept back.\nB) It offers a stated rule that mainly characterizes Cecile as a careful keeper of seed records.\nC) It offers a stated rule that introduces the cooperative's practice of dating every packet.\nD) It offers a stated rule that reflects the cooperative's caution about the uncertain rainfall.\n\n[표시된 정답] A\n[해설]\n밑줄 문장은 처음에는 연필로 이름표를 쓰는 할머니의 습관을 설명하는 성격 묘사처럼 읽힌다. 그런데 할머니가 딸 이야기를 피한다는 중간 단서와, 연필로 주소를 쓴 채 봉인되어 오래 보관된 편지가 발견되는 끝 장면이 이어지면, 이 말은 할머니가 확신하지 못해 보내지 못한 사과를 설명하는 복선이 된다. 따라서 A가 정답이다. B는 밑줄만 단독으로 읽었고, C는 바로 뒤 문장(날짜 쓰기)과의 관계로 읽었으며, D는 지문 어휘(rainfall)를 빌려 일반화했다.\n### lit40-hard-02-030 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nHari had not spoken to me since the morning I called his essay too careful to be brave. __On the train to Pune he took the upper berth and spread his notebooks across it, the way he used to spread them across the front desk of my classroom.__ The compartment filled with the smell of cardamom tea and wet umbrellas. A family below us argued over a tiffin of lemon rice. I graded papers. Hari watched the rain streak the window, and when the vendor came through he bought two cups of tea, set one on the ledge near my elbow without a word, and climbed back up. Near Lonavala the train stopped in a cutting. I looked up. Every notebook on the berth lay open, turned toward me, and on the top page, in his cramped hand, was a new first line, crossed out and rewritten four times.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It describes a habit that mainly shows Hari's wish to keep his distance from his teacher.\nB) It describes a habit that later reads as a silent offer to share his work.\nC) It describes a habit whose tension is resolved when Hari leaves a cup of tea for her.\nD) It describes a habit that reflects how students carry the classroom into daily life.\n\n[표시된 정답] B\n[해설]\n밑줄 문장은 단독으로 보면 Hari가 위 칸에 올라가 거리를 두는 장면 묘사처럼 보인다. 그러나 끝에서 공책이 모두 선생님 쪽으로 펼쳐져 있고 네 번 고쳐 쓴 첫 문장이 보이는 장면이 나오면서, 공책을 펼쳐 놓는 옛 습관이 말없이 글을 보여 주려는 제안이었음이 드러난다. 따라서 B가 정답이다. A는 밑줄만 단독으로 읽었고, C는 바로 뒤 차 장면에서 갈등이 해소된 것으로 읽었으며, D는 교실이라는 지문 표현을 빌려 일반화했다.\n### lit40-hard-02-031 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nBeside the shoe repair stall under the arcades of Bologna, Shuang waited each Saturday while the cobbler resoled whatever her family had worn through that week. __Chulsoo, her younger brother's tutor, passed the stall at nine o'clock exactly and lifted his hat to her without slowing.__ She considered him a stiff young man who corrected grammar at dinner. One Saturday the cobbler handed her the boy's boots and remarked that the tutor had paid for them already, as he had the month before. Shuang said that was unnecessary. She paid again, and the cobbler shrugged and pocketed both coins. The following week her brother brought home a prize for Latin composition, and Chulsoo, at dinner, remarked only that the ablative was still weak. At nine the next Saturday Shuang stood at the stall. The tutor lifted his hat, and his step, for once, slowed.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It introduces a routine that mainly establishes the tutor's formal and punctual manner.\nB) It introduces a routine that confirms Shuang's sense of him as a stiff young man.\nC) It introduces a routine whose stiffness later appears to mask his care for the boy.\nD) It introduces a routine that reflects the polite customs of the city's busy arcades.\n\n[표시된 정답] C\n[해설]\n밑줄 문장은 단독으로 보면 Chulsoo의 딱딱하고 시간을 엄수하는 성격을 보여 주는 묘사다. 그러나 그가 몰래 동생의 구두 값을 두 번이나 치렀다는 사실과, 상을 받은 뒤에도 '탈격이 약하다'고만 말하는 태도, 마지막에 걸음이 느려지는 장면이 이어지며 그 형식적 태도가 자부심과 애정을 감추는 겉모습이었음이 드러난다. 따라서 C가 정답이다. A는 밑줄만 읽었고, B는 바로 뒤 문장과의 관계로 기능을 뒤집었으며, D는 장소 표현을 빌려 일반화했다.\n### lit40-hard-02-033 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nChlorine and salt stung Dana's eyes the first morning at the pool in Vermont, and he complained about it to anyone who would listen, mostly Casey, his grandfather's old friend, who swam laps there at six. Casey talked too much, Dana decided. He told the same stories about the quarry, he whistled through his teeth, and he had a plan: they would tell Dana's grandfather the doctor said swimming would help his knee. The doctor had said no such thing. Dana told Casey it was a ridiculous plan. He went along with it anyway, which was not lying, exactly, he told himself, only agreeing in a loud voice. By the third week the grandfather was swimming. Dana came early now. He set Casey's towel on the warm bench by the heater, and when Casey told the quarry story again, Dana asked a question about the part he already knew.\n\n[질문] Which choice best describes Dana's attitude toward Casey as conveyed in the text?\nA) Mild contempt for Casey despite some patience with his repeated stories.\nB) Quiet affection for Casey despite a habit of grumbling about him.\nC) Guilty fondness for Casey despite private doubts about their shared plan.\nD) Amused tolerance for Casey despite finding his plan rather ridiculous.\n\n[표시된 정답] B\n[해설]\n앞부분에서 Dana는 Casey가 말이 많고 같은 이야기를 반복한다고 불평하지만, 중간의 '정확히 거짓말은 아니'라는 자기 정정은 그가 Casey의 계획에 사실상 동참했음을 보여 준다. 뒤에서는 일찍 와서 Casey의 수건을 따뜻한 벤치에 놓고, 이미 아는 대목을 일부러 질문하며 이야기를 들어 준다. 말투와 행동의 어긋남을 합치면 B가 정답이다. A는 말투만 읽었고, C는 애정의 이유를 자신의 죄책감으로 돌렸으며, D는 지문 어휘(ridiculous)를 빌렸지만 행동 단서와 맞지 않는다.\n### lit40-hard-02-034 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nOnce a month I brought the supply boat into the cove below the tea terraces, and that spring I found Mio curled behind the fertilizer sacks, a scholarship letter for a college in Plymouth folded in his shoe. I told him he was a nuisance. I told him stowaways ate more than paying cargo and complained about the smell of diesel, which he did, constantly. I made him scrub the deck twice a day. He asked what the fare would have cost. I said more than he had, which was not lying, exactly, only rounding up. On the last run before term I kept the boat in the cove an extra hour while he said goodbye to the pickers on the terraces, and I wrote nothing in the log about the extra fuel. When he asked again about the fare, I talked about the tide tables until he gave up.\n\n[질문] Which choice best describes the narrator's attitude toward Mio as conveyed in the text?\nA) Weary impatience with Mio despite brief moments of shared humor aboard.\nB) Protective care for Mio despite a wish to make up for her own past.\nC) Quiet generosity toward Mio despite a show of gruff annoyance with him.\nD) Grudging acceptance of Mio despite calling him a nuisance to the crew.\n\n[표시된 정답] C\n[해설]\n화자는 앞에서 Mio를 골칫거리라 부르고 갑판 청소를 시키는 등 퉁명스러운 말투를 보인다. 중간에 뱃삯에 대해 '거짓말은 아니고 반올림했을 뿐'이라는 정정이 나오고, 뒤에서는 작별 인사를 위해 배를 한 시간 더 머물게 하고 연료 기록을 남기지 않으며 뱃삯 이야기를 피한다. 이 행동들은 말투 아래의 조용한 너그러움을 보여 주므로 C가 정답이다. A는 말투만 읽었고, B는 지문에 근거 없는 화자 자신의 과거를 이유로 들었으며, D는 지문 어휘(nuisance)를 빌렸지만 행동 단서를 설명하지 못한다.\n### lit40-hard-02-035 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nBy seven the gym on Seventy-First smells of floor wax\nand the folding chairs are already crooked.\nDevon, who rode my father's ferry every summer\nand talked the whole way across about nothing,\nasks me to the spring dance under the dead scoreboard.\nI tell him he dances like a dropped mop.\nI tell him I have a shift on the dock,\nwhich is not lying, exactly—\nmy father would let me off if I asked.\nHe laughs. He says, Kenya, fair enough.\nAfter he goes I stack the chairs he knocked over\nand straighten the ones he didn't,\nand when the custodian kills the lights\nI stand a while by the bleachers\nwhere he left his jacket, and fold it\nsleeve over sleeve, the way my father folds a flag,\nand carry it home on the ferry, on my lap,\nthe whole way across.\n\n[질문] Which choice best describes the speaker's attitude toward Devon as conveyed in the text?\nA) Teasing scorn for Devon while granting that he takes refusal well.\nB) Fond regard for Devon while feeling bound by duty to her father.\nC) Amused patience for Devon while finding him talkative about nothing.\nD) Hidden tenderness for Devon while turning him away with jokes.\n\n[표시된 정답] D\n[해설]\n화자는 Devon이 '떨어진 대걸레처럼 춤춘다'고 놀리고 부두 근무를 핑계로 초대를 거절한다. 그러나 '정확히 거짓말은 아니'라는 정정으로 아버지가 쉬게 해 줄 것임을 스스로 인정하고, 뒤에서는 그가 넘어뜨린 의자를 정리하고 두고 간 재킷을 정성껏 접어 무릎에 올린 채 집까지 가져간다. 농담과 행동의 어긋남을 합치면 감춘 애정을 말하는 D가 정답이다. A는 말투만 읽었고, B는 거절의 이유를 아버지에 대한 의무로 뒤집었으며, C는 지문 표현을 빌렸지만 행동 단서와 맞지 않는다.\n### lit40-hard-02-036 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nWhat is owed to a stranger met in a delay? I put the question to myself at the ferry terminal in Thessaloniki, where the steamer was held two days by weather, and where a gentleman named Emre occupied the bench beside mine and would not stop talking. He was travelling to a dying friend. He talked of whether to tell the man that his son had lost the family vineyard, and he talked of it badly, in circles, through too much tobacco. I found him tiresome, and I said so to the clerk, which was not unkind, exactly, only accurate. On the second evening I bought two coffees and set one by his elbow. When he began again about the vineyard, I did not turn the subject, and I asked what his friend had loved most about the vines.\n\n[질문] Which choice best describes the narrator's attitude toward Emre as conveyed in the text?\nA) Growing sympathy for Emre despite a stated weariness with his talk.\nB) Mild disdain for Emre despite a polite tolerance of his company.\nC) Kindly interest in Emre despite wishing mainly to pass the delay.\nD) Tired impatience with Emre despite finding him less tiresome later.\n\n[표시된 정답] A\n[해설]\n화자는 앞에서 Emre를 지루하다고 평가하고 직원에게까지 그렇게 말하지만, '불친절한 것은 아니고 정확할 뿐'이라는 자기 정정이 그 평가를 누그러뜨린다. 뒤에서는 커피를 사서 그의 팔꿈치 옆에 두고, 포도밭 이야기를 피하지 않은 채 친구가 무엇을 사랑했는지 묻는다. 이 행동은 말투 아래 공감이 자라고 있음을 보여 주므로 A가 정답이다. B는 말투만 읽었고, C는 관심의 이유를 지루함 달래기로 돌렸으며, D는 지문 어휘(tiresome)를 빌렸지만 행동 단서와 맞지 않는다.\n### lit40-hard-02-037 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nYona ran the crew that rewired the old apartment block in Lisbon, and on my first day he told me I held a screwdriver like a soup spoon. He said that sort of thing all spring. He timed my coffee breaks. He called me the intern in front of the tenants, though I was nothing of the kind. His plan was to finish the stairwell before the inspector came, working nights, and it worked: the inspector signed off on a Friday, and nobody on the crew so much as smiled. I told my sister he was impossible, which was not quite fair, I suspected even then. On the last night I stayed after the others, coiled the leftover cable the way he coiled it, elbow to thumb, left it on his toolbox with the ends taped, and went down the stairs without switching on the new lights.\n\n[질문] Which choice best describes the narrator's attitude toward Yona as conveyed in the text?\nA) Lingering resentment of Yona despite relief that the job is finished.\nB) Unspoken respect for Yona despite complaints about his harsh manner.\nC) Dutiful gratitude to Yona despite doubts about her own skill at work.\nD) Weary tolerance of Yona despite finding him impossible at times.\n\n[표시된 정답] B\n[해설]\n화자는 앞부분에서 Yona의 조롱과 휴식 시간 재기 같은 거친 태도를 나열하고 동생에게 그가 '불가능한 사람'이라고 말한다. 그러나 '그다지 공정하지 않았다'는 자기 정정이 이어지고, 마지막 밤에는 그가 하던 방식대로 전선을 감아 끝을 테이프로 감싼 뒤 그의 공구함에 남겨 둔다. 그의 방식을 따라 하는 이 행동은 말하지 않은 존경을 드러내므로 B가 정답이다. A는 불평의 말투만 읽었고, C는 이유를 자신의 실력에 대한 불안으로 돌렸으며, D는 지문 어휘(impossible)를 빌렸지만 행동 단서와 맞지 않는다.\n### lit40-hard-02-038 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nFour rules governed the bakery in Chengdu before dawn: flour first, then water, then salt, then silence. Dalia had learned them at fourteen, when her aunt took her in, and for three years the two of them had folded dough side by side without speaking, her aunt's knuckles pressing a pattern that Dalia copied stroke for stroke. Each morning her aunt set out two aprons on the counter, though Dalia owned three of her own. Dalia never asked why. That winter her aunt's wrists swelled, and one morning she did not come down. Dalia worked alone. She weighed the flour, poured the water, measured the salt. When the first trays were out, she found that she had set two aprons on the counter herself, and that between folds she had been pausing for knuckles beside hers that did not come. She took the second apron and hung it back on its hook.\n\n[질문] Which choice best states the main idea of the text?\nA) The text shows how a strict aunt trains her niece in a craft through wordless repetition.\nB) The text shows how a young cook manages the bakery alone while her aunt is unwell.\nC) The text shows how a silent chore became a bond felt most in its absence.\nD) The text shows how working alone leads a young cook to take up her aunt's routine.\n\n[표시된 정답] C\n[해설]\n앞부분(사건 1)은 이모와 Dalia가 말없이 반죽을 접는 엄격한 일과를 보여 주고, 이유가 설명되지 않는 앞치마 두 장이 중간에 미해결 디테일로 남는다. 뒷부분(사건 2)에서 혼자 일하게 된 Dalia가 스스로 앞치마 두 장을 꺼내고 곁의 손을 기다리며 멈추는 모습은, 그 일과가 단순한 훈련이 아니라 둘의 유대였음을 다시 읽게 한다. 따라서 두 사건의 관계를 진술한 C가 정답이다. A는 사건 1만, B는 사건 2만 말했고, D는 일과가 이미 있었는데도 혼자 일한 것이 그 원인인 것처럼 인과를 뒤집었다.\n### lit40-hard-02-039 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nYears later the tenants of the block in Nairobi would still describe Ren tapping the rooftop water tank each dawn with a spanner, three knocks, listening for how full it rang. Moshe, the surveyor sent by the water board, watched him do it on his first morning and noted in his ledger that the meter had been broken for a decade. Ren nodded. He showed Moshe where the overflow pipe rusted, where pigeons drank, where the children hid their kites. In a corner of the roof sat a folded canvas bag that neither man mentioned. On Moshe's final morning he brought a new meter, installed it, and read the numbers aloud. Ren listened, then picked up the spanner, knocked three times on the tank, and handed the spanner to the boy from the third floor who had come up to watch. Then he lifted the canvas bag onto his shoulder.\n\n[질문] Which choice best states the main idea of the text?\nA) The text shows how a visiting surveyor learns that a building's meter has long been broken.\nB) The text shows how a new meter gives the tenants a dependable reading of their water.\nC) The text shows how a keeper's plan to leave prompts the water board to install a meter.\nD) The text shows how a keeper hands on his skill as a device seems to replace it.\n\n[표시된 정답] D\n[해설]\n앞부분(사건 1)에서 Ren은 고장 난 계량기 대신 물탱크를 두드려 수위를 듣고, 구석의 캔버스 가방은 설명 없이 남는다. 뒷부분(사건 2)에서 새 계량기가 설치된 뒤에도 그는 세 번 두드리고 스패너를 소년에게 건넨 다음 가방을 메고 떠난다. 두 사건을 합치면 기계가 그의 기술을 대체하는 순간에 그가 그 기술을 다음 사람에게 넘긴다는 D가 요지다. A는 사건 1만, B는 사건 2만 말했고, C는 떠남이 계량기 설치의 원인인 것처럼 인과를 뒤집었다.\n### lit40-hard-02-040 — skill central_ideas_details · 유형 main_idea_or_purpose\n[지문]\nBy the time we stopped at the diner outside Krakow, the commission was gone: the church restorers had chosen another workshop, and Matthias said it was because my joints on the sample pew had gapped. I agreed. I had measured too fast. Over pierogi and weak coffee he listed my errors, calmly, the way he listed lumber, and I wrote them on a napkin. On the windowsill beside our booth stood a small carved bird with one wing mended in a darker wood; neither of us spoke of it. A year later, sorting his papers when his eyes failed, I found the restorers' letter. They had praised the pew. They had chosen the other workshop because Matthias asked a price he must have known they could not pay. I drove out to the diner again. I ordered pierogi and weak coffee, and I left the napkin, still folded, under my cup.\n\n[질문] Which choice best states the main idea of the text?\nA) The text shows how a later discovery recasts a fault the narrator had once accepted.\nB) The text shows how an apprentice learns from a careful list of her own errors.\nC) The text shows how a letter reveals the restorers' high opinion of a sample pew.\nD) The text shows how losing a commission leads a master to price his work too high.\n\n[표시된 정답] A\n[해설]\n앞부분(사건 1)에서 화자는 일을 놓친 원인이 자신의 이음매라는 Matthias의 말을 받아들이고 실수 목록을 냅킨에 적으며, 고쳐진 나무 새는 설명 없이 남는다. 1년 뒤(사건 2) 발견한 편지는 의뢰를 잃은 진짜 이유가 Matthias가 일부러 높게 부른 값이었음을 드러내 사건 1을 다시 읽게 한다. 따라서 나중의 발견이 받아들였던 잘못을 다시 보게 만든다는 A가 요지다. B는 사건 1만, C는 사건 2만 말했고, D는 높은 가격이 의뢰를 잃게 한 원인인데 인과를 뒤집었다.\n### lit40-hard-02-061 — skill words_in_context · 유형 word_in_context\n[지문]\n\"Read it again,\" Akari said, the mayor's paper folding in her glove.\nEach evening on the Riga platform, Kalani, the town's only doctor,\nhad copied the notice into three languages, slowly,\nchecking every verb against the old dictionary she carried.\nTonight the train was late; the lamps hummed above the tracks.\nAkari pointed to one line: her word for \"closed\"\nhad become \"abandoned\" in the version already pasted on the station wall.\nKalani was ______ by the error.\nShe did not argue or apologize.\nShe took a pencil from her coat, crossed out the word on the posted sheet,\nand wrote the smaller word above it, letter by letter,\nwhile the arriving train drowned whatever Akari said next.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) openly embarrassed\nB) mildly amused\nC) slowly distracted\nD) quietly troubled\n\n[표시된 정답] D\n[해설]\n앞부분에서 Kalani는 매일 저녁 모든 동사를 사전과 대조할 만큼 번역의 정확성에 마음을 쓰는 인물로 그려지므로 오류에 무심할 수 없다. 뒷부분에서 그녀는 따지지도 사과하지도 않고 연필로 한 글자씩 조용히 고쳐 쓰므로, 반응의 정도는 겉으로 드러나지 않는 차분한 동요여야 한다. 두 조건을 모두 만족하는 것은 D이다. A는 오류에 신경 쓴다는 점은 맞지만 드러내 놓고 당황한다는 정도가 뒤의 침착한 행동과 어긋나고, B는 정확성에 대한 그녀의 집착과 맞지 않으며, C는 지문의 'slowly'를 빌렸을 뿐 오류 앞에서의 반응을 설명하지 못한다.\n### lit40-hard-02-062 — skill words_in_context · 유형 word_in_context\n[지문]\nWhen I worked nights on the ward, I passed a clock-maker's shop in Ohio every morning, and Hedwig was always already at his bench, tightening the same brass wheel of the same tall clock. Winifred, my patient in bed four, had sent it there. Every week she asked whether it was ready, and every week I said soon. One morning Hedwig set down his loupe and told me the clock would never keep time again; the case had warped. I carried that sentence back to the ward like a cold cup of tea. Winifred, though, was ______ when I repeated it. She asked me to tell Hedwig to keep working on it anyway, and that night she wound her small wristwatch twice before sleeping, holding it near her ear.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) calmly accepting\nB) openly distressed\nC) coldly dismissive\nD) mildly relieved\n\n[표시된 정답] A\n[해설]\nWinifred는 매주 시계가 준비됐는지 묻는데, 이는 수리의 완성보다 수리가 계속되는 과정 자체에 마음을 두고 있음을 보여 준다. 고칠 수 없다는 말을 들은 뒤에도 그녀는 계속 작업해 달라고 부탁하고 손목시계를 태엽 감아 귀에 대므로 반응은 동요 없이 받아들이는 쪽이다. 따라서 A가 두 단서를 모두 만족한다. B는 시계에 대한 애착만 보고 고른 표현으로 뒤의 차분한 부탁과 맞지 않고, C는 지문의 'cold'를 빌린 표현으로 계속 고쳐 달라는 부탁과 어긋나며, D는 안도할 이유가 지문에 없다.\n### lit40-hard-02-063 — skill words_in_context · 유형 word_in_context\n[지문]\nCoins rattled in Savitri's palm as she counted them a second time at the ticket window of the Accra depot. She did this every trip, my stepmother, recounting fares she had already counted at home, as if the numbers might change on the way over. I was fifteen and certain she did it to look busy. That afternoon the clerk said the Kumasi coach had left an hour earlier; she had read the timetable wrong. I waited for her to blame the board, or the clerk, or me. Instead she was ______ about it. She bought two cold sodas with part of the fare money, sat beside me on the bench, and asked me, of all people, to read the next departure aloud.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) visibly flustered\nB) unexpectedly frank\nC) politely evasive\nD) busily occupied\n\n[표시된 정답] B\n[해설]\n앞부분에서 Savitri가 요금을 거듭 세는 습관은 실수를 두려워하는 사람처럼 보이게 하고, 화자는 그녀가 남 탓을 하리라 예상한다. 그러나 뒤에서 그녀는 자기 실수를 감추지 않고 화자 옆에 앉아 다음 출발 시각을 읽어 달라고 부탁하므로, 실수를 숨김없이 인정하는 태도가 드러난다. 따라서 B가 '예상과 달리'라는 의외성과 솔직함을 모두 담는다. A는 앞의 습관과만 맞고 뒤의 여유 있는 행동과 어긋나며, C는 도움을 청하는 행동과 맞지 않고, D는 지문의 'busy'를 빌린 표현일 뿐이다.\n### lit40-hard-02-066 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nBy the ninth week of the dry season\nAma had taught Zainab every jar:\nmillet tied with red thread, cowpea with blue,\nokra wrapped in newsprint from the year of floods,\neach lid tapped twice, each name said aloud.\nZainab learned the counting and the drying racks,\nthe way a seed is tested in a cup of water,\nthe floaters tossed out, the sinkers kept.\nShe spoke of the bus to the coast,\nof cousins, of work in the port.\nAma kept sorting.\nThen Ama stopped naming.\nShe let a full jar stand open in the light.\nAt dusk she pressed a twist of cloth, unlabeled,\ninto the girl's hand,\nand turned back to the shelves\nbefore Zainab could untie it.\n\n[질문] Which choice best describes the shift in tone that occurs in the text?\nA) It shifts from lively instruction to weary routine, as the elder grows tired of naming every jar.\nB) It shifts from exacting instruction to a quiet release, as the elder doubts her own skill as a teacher.\nC) It shifts from exacting instruction to a quiet release, as the elder comes to terms with the apprentice's plans.\nD) It shifts from exacting instruction to a grieving protest, as the elder resists the apprentice's plans.\n\n[표시된 정답] C\n[해설]\n시의 앞부분은 실 색깔, 포장지, 뚜껑 두드리기까지 세세하게 나열하며 Ama의 엄격한 가르침을 보여 주지만, Zainab이 해안행 버스와 항구 일을 말한 뒤 행이 짧아지고 Ama는 이름 부르기를 멈춘다. 마지막에 이름표 없는 씨앗 꾸러미를 건네고 돌아서는 동작은 떠나려는 제자의 뜻을 받아들이고 보내 주는 마음으로 읽힌다. 따라서 C가 정답이다. A는 짧아진 행을 단순한 피로로 읽었고, B는 원인을 Ama 자신의 자질에 대한 의심으로 뒤집었으며, D는 선물을 건네는 행동과 맞지 않게 정도를 항의로 과장했다.\n### lit40-hard-02-073 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nCleotilde and Imtiaz had played chess in the abandoned orchard outside Lyon every Sunday since the club lost its hall. __Their board sat on a stump, and the club's old rule, written on a card tucked beneath it, said that a touched piece must be moved.__ The pear trees had gone wild; fruit split on the grass and drew wasps. The two rivals spoke little, played slowly, and kept score in a notebook that neither would let the other hold. They had been trading the lead for eleven years. This Sunday a wasp landed on Imtiaz's queen. He brushed it away, and his knuckle tipped the queen onto its side. Cleotilde looked at the piece, then at the stump. Moving the queen now would cost him the game and the lead. She reached under the board, slid out the card, and folded it into her coat pocket. Then she set the queen upright on its square and waited.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It establishes the setting by showing how the two players arrange their weekly game.\nB) It introduces a standard that later becomes the basis of a choice Cleotilde makes.\nC) It contrasts the players' orderly game with the disorder of the wild orchard.\nD) It explains why the two players keep score in a notebook neither will share.\n\n[표시된 정답] B\n[해설]\n밑줄 문장은 단독으로 보면 그루터기 위 체스판과 카드 한 장을 묘사하는 배경 설명처럼 보인다. 그러나 후반부에 Imtiaz가 실수로 퀸을 건드려 규칙대로라면 경기를 잃게 되자, Cleotilde가 그 카드를 빼서 주머니에 넣고 퀸을 다시 세운다. 따라서 밑줄 문장은 후반의 선택을 가능하게 하는 기준을 미리 심어 둔 복선이므로 B가 정답이다. A는 밑줄 문장의 표면 기능만 읽었고, C는 바로 뒤 문장의 무성한 과수원 묘사와의 관계로만 보았으며, D는 지문의 노트 표현을 빌렸지만 후반 사건과 연결되지 않는다.\n### lit40-hard-02-074 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nWhen the season ended on Maui, the little theater on Front Street ran one film a night for whoever wandered in, and Bogdan, who had run its projector for thirty years, let Larissa sit with him in the booth. __He called her Lara, the way her grandmother had, and she let him, though no one else had used that name since the funeral.__ They watched through the small square window while the reel ticked beside them. Between shows Bogdan oiled the gears and told her which seats squeaked and which ones leaked in the rain. One night in October he asked her to thread the projector herself. Her hands shook; the film slipped twice from the sprockets. When the picture finally steadied on the screen, Bogdan took a marker from his pocket. On the strip of tape above the booth door, where his own name had been written for thirty years, he added a second name beneath it: Lara.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It portrays Bogdan as an old friend who still misses Larissa's late grandmother.\nB) It shifts the focus from family memories to the daily work of the booth.\nC) It prepares for a later moment in which Bogdan marks Larissa as his successor.\nD) It suggests that Larissa puts up with old habits out of politeness to Bogdan.\n\n[표시된 정답] C\n[해설]\n밑줄 문장은 단독으로 보면 Bogdan이 할머니를 그리워하며 옛 애칭을 쓰는 인물 묘사처럼 보인다. 그러나 후반부에 Larissa가 처음으로 혼자 영사기를 걸어 화면을 안정시키자, Bogdan은 자신의 이름 아래에 바로 그 애칭 'Lara'를 적어 그녀를 영사실의 후계자로 표시한다. 따라서 밑줄 문장은 그 애칭이 후반에 다른 의미를 얻도록 준비하는 복선이므로 C가 정답이다. A는 밑줄 문장의 표면만 읽었고, B는 바로 뒤 문장과의 관계로만 기능을 보았으며, D는 'let him'이라는 표현을 일반화했을 뿐 후반 사건을 설명하지 못한다.\n### lit40-hard-02-076 — skill text_structure_purpose · 유형 underlined_portion_function\n[지문]\nAiko kept everything. In the harbor town in Hokkaido where we had both retired, her house held forty years of programs from the theater where we once sang duets, each one pressed flat and labeled by year. __She told me once, over tea, that she had never missed a single performance of mine, not even after we stopped singing together.__ I laughed, and she poured more tea. Her husband, Haruo, mended nets on the jetty below the house and waved whenever I passed. Last winter, after Aiko's stroke, Haruo asked me to help sort her desk. In the bottom drawer, under the programs, we found ticket stubs: one for every concert I had given alone, in Osaka, in Sapporo, in cities she had told me she had never visited. Haruo held one up to the window light. He did not ask me what it meant, and I put the stubs back in the order she had left them.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It offers a remark that the drawer's contents later show to be literally true.\nB) It conveys a polite compliment that the narrator treats as a kind exaggeration.\nC) It introduces the friendship that Haruo shares with the narrator in town.\nD) It suggests that Aiko kept old records mainly out of a love of order.\n\n[표시된 정답] A\n[해설]\n밑줄 문장은 단독으로 보면 오랜 동료가 건넨 인사치레 같은 말이고, 화자도 웃어넘긴다. 그러나 후반부에 서랍에서 화자가 혼자 공연한 모든 콘서트의 표가 나오면서, Aiko가 가 본 적 없다던 도시까지 몰래 찾아가 공연을 보았다는 사실이 드러난다. 따라서 밑줄 문장은 나중에 문자 그대로 사실로 밝혀지는 말을 미리 심어 둔 것이므로 A가 정답이다. B는 밑줄 문장과 화자의 웃음만 보고 표면 기능을 골랐고, C는 바로 뒤 문장의 Haruo 소개와의 관계로만 보았으며, D는 'kept everything'을 빌려 일반화했을 뿐 서랍의 발견을 설명하지 못한다.\n### lit40-hard-02-077 — skill central_ideas_details · 유형 narrator_attitude\n[지문]\nI run a spice shop in Marrakesh that a former ship's cook built to look like a galley, all brass hooks and low beams, and every morning Joaquin ducks under those beams to complain about my saffron. Too damp, too pale, too expensive. He has said this for nine years. He buys a gram each time anyway, counted out of a jar he insists I lift down from the top shelf. Last month a hotel offered to buy my stock and the lease; I could retire to my daughter's house in Fes. I told Joaquin, mostly to watch his face. He said good, the hotel's saffron would at least be dry. I am not saying I was hurt, exactly. I signed nothing that week. I did move the jar to the lowest shelf, where a man with a bad back could reach it himself, and I wrote the price on the lid in larger numbers.\n\n[질문] Which choice best describes the narrator's attitude toward Joaquin?\nA) Weary irritation at his complaints while hoping the sale will put an end to them\nB) Real fondness for him while feeling guilty about nearly selling the shop\nC) Protective care for him while keeping up a show of mutual grumbling\nD) Proud attachment to the galley shop while doubting its worth to customers\n\n[표시된 정답] C\n[해설]\n앞부분에서 화자는 Joaquin의 불평을 건조하게 옮기고 그의 반응을 보려고 매각 이야기를 꺼내는 등 서로 투덜대는 말투를 유지한다. 중간의 'not saying I was hurt, exactly'라는 망설이는 정정은 그 말투 아래 감정이 있음을 암시한다. 뒤에서 화자는 아무것도 서명하지 않고, 허리가 아픈 Joaquin이 직접 닿도록 병을 아래 칸으로 옮기며 가격을 크게 적는데, 이는 그를 배려하는 행동이다. 따라서 C가 정답이며, A는 말투만 읽었고, B는 배려의 이유를 죄책감으로 바꾸었으며, D는 지문의 가게 묘사를 빌려 태도로 일반화했다."
+}

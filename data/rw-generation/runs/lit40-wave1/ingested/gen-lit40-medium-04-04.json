@@ -1,0 +1,781 @@
+{
+ "taskId": "gen-lit40-medium-04-04",
+ "passed": [
+  {
+   "candidateId": "lit40-medium-04-061",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-061",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "relationship_between_characters",
+    "genre": "memoir",
+    "seed": {
+     "index": 60,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Booker",
+      "Kwame"
+     ],
+     "nameCultures": [
+      "african_american",
+      "west_african"
+     ],
+     "locale": "Dakar",
+     "setting": "a movie theater in the off-season",
+     "relationship": "an interpreter and her client",
+     "conflict": "about who gets credit for shared work",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a movie theater in the off-season in Dakar; an interpreter and her client about who gets credit for shared work"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 90,
+     "max": 150
+    },
+    "recipeId": "inferences_lit_relationship_between_characters_medium"
+   },
+   "g": {
+    "passage": "\"Put your name beside mine on the cover,\" Kwame said, though he did not look up from the proofs. We had taken over the back rows of a shuttered cinema in Dakar because the owner, idle until the rainy months ended, rented it to us cheaply. For weeks I had turned his Wolof stories into English sentences, and he had read every page aloud to me, stopping to ask whether a word still sounded like him. I told him an interpreter's name belonged inside the book, in small print. He shook his head and penciled my initials into the margin of each chapter we had argued over most. Above us, the projector booth stood dark, and dust drifted through the single bar of light from the lobby door.",
+    "question": "Based on the text, how would the narrator's relationship with Kwame best be described?",
+    "options": [
+     "A collaboration in which Kwame credits the narrator more readily than she credits herself",
+     "A tense arrangement in which the narrator resents being left out of the credit",
+     "A formal partnership in which the narrator demands credit that Kwame withholds",
+     "A typical business bond in which Kwame treats the interpreter's work as minor"
+    ],
+    "correct_letter": "A",
+    "explanation": "첫 문장에서 Kwame는 화자의 이름을 표지에 함께 넣자고 제안하고, 뒤에서는 화자가 사양하자 가장 많이 논쟁한 장마다 그녀의 이니셜을 적어 넣는다. 반면 화자는 통역자의 이름은 작은 글씨로 안에 들어가면 된다고 말한다. 두 단서를 이으면 Kwame가 화자보다 그녀의 기여를 더 인정하는 협업 관계임을 알 수 있으므로 A가 정답이다. B와 C는 공로를 요구하거나 원망하는 쪽을 반대로 설정했고, D는 고용 관계에 대한 통념일 뿐 지문과 맞지 않는다."
+   },
+   "notes": [],
+   "tone": [
+    "warm",
+    "understated"
+   ],
+   "devices": [
+    "dialogue",
+    "characterization",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-062",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-062",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "short_story",
+    "seed": {
+     "index": 61,
+     "genre": "short_story",
+     "pov": "third_limited",
+     "styleEra": "early_20c",
+     "names": [
+      "Anacleto",
+      "Ximena"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Lima",
+     "setting": "a tea plantation",
+     "relationship": "a stepfather and his stepdaughter",
+     "conflict": "over an apology offered too late",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a tea plantation in Lima; a stepfather and his stepdaughter over an apology offered too late"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Ximena returned to the terraces in the hills outside Lima, Anacleto was still pruning the old tea bushes the way her mother had taught him, cutting each stem back hard so it would flush green in spring. She had not answered his letter for six years. He had written it the winter after the funeral, a single page saying he had been wrong to send her away to her aunt's house. Now he handed her the shears without a word. Along the row she noticed the bush he had cut too late the year before: its leaves had come in thin and bitter, and he had left it standing anyway. \"Some of them recover,\" he said. \"Some take longer.\" Ximena knelt and began clearing the dead wood from its base, while mist slid down from the ridge and settled over the lower rows.",
+    "question": "In the text, the bush that was cut too late most likely represents",
+    "options": [
+     "the decline of the plantation since the death of Ximena's mother",
+     "Anacleto's belated apology and his hope that it can still mend things",
+     "Ximena's resentment, which has grown bitter during her years away",
+     "the harsh discipline Anacleto once imposed on his stepdaughter"
+    ],
+    "correct_letter": "B",
+    "explanation": "지문 앞부분에서 Anacleto는 장례 뒤 겨울에 사과 편지를 보냈지만 Ximena는 6년간 답하지 않았다. 이후 '너무 늦게 잘린' 덤불을 그가 남겨 두었고 '어떤 것은 회복되고 어떤 것은 더 오래 걸린다'고 말한다. 늦은 가지치기와 늦은 사과가 겹치고, 덤불을 남겨 둔 행동은 관계 회복에 대한 희망을 보여 주므로 B가 정답이다. A는 농장 자체로, C는 Ximena의 감정으로, D는 과거의 엄격함으로 상징을 잘못 연결했다."
+   },
+   "notes": [],
+   "tone": [
+    "restrained",
+    "hopeful"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-063",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-063",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 62,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Thida",
+      "Zaynab"
+     ],
+     "nameCultures": [
+      "southeast_asian",
+      "arabic_levantine"
+     ],
+     "locale": "Cairo",
+     "setting": "a rented farmhouse",
+     "relationship": "a gardener and the house's new owner",
+     "conflict": "about starting over somewhere unfamiliar",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a rented farmhouse in Cairo; a gardener and the house's new owner about starting over somewhere unfamiliar"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Cairo had stayed behind us on the far side of the canal, and the farmhouse I had rented seemed to belong to no city at all. On my first morning, Thida showed me the lemon tree by the well, a graft she had bound to a wild root years earlier. The scar still showed, a pale ring where the two barks had met and refused, for a season, to agree. I said I did not know how long I would stay. Thida only tightened the old twine around a new cutting and told me grafts take best when no one watches them too closely. Each evening after that, Zaynab, I told myself, go and see the tree, and I walked to it before supper, pressing my thumb against the ring as if checking a pulse. By the end of the month a single green shoot had pushed out just above it. In the kitchen the kettle whistled, and the shutters knocked against the frame in the wind.",
+    "question": "In the text, the grafted lemon tree most likely symbolizes",
+    "options": [
+     "Thida's loyalty to the farmhouse and to its previous tenants",
+     "the narrator's regret about leaving her life in the city",
+     "the narrator's gradual effort to take root in a new place",
+     "the quiet conflict between the narrator and Thida over the garden"
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 도시를 떠나 낯선 농가에 왔고 얼마나 머물지 모르겠다고 말한다. 접목된 나무는 낯선 두 껍질이 처음엔 맞지 않다가 결국 붙은 흔적을 지니며, 화자가 매일 그 자리를 확인한 끝에 새싹이 돋는다. 두 단서를 연결하면 나무는 새로운 곳에 서서히 뿌리내리려는 화자의 노력을 상징하므로 C가 정답이다. A는 Thida 쪽으로, B는 후회라는 반대 정서로, D는 지문에 없는 갈등으로 해석했다."
+   },
+   "notes": [],
+   "tone": [
+    "tentative",
+    "contemplative"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery",
+    "simile"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-065",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-065",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 64,
+     "genre": "personal_essay",
+     "pov": "third_omniscient",
+     "styleEra": "late_20c",
+     "names": [
+      "Yasmin",
+      "Karim"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "arabic_levantine"
+     ],
+     "locale": "Cairo",
+     "setting": "a train-station cafe",
+     "relationship": "a sister and her younger brother's tutor",
+     "conflict": "after a quiet act of generosity",
+     "openingStyle": "장소 이름으로 시작",
+     "topicSeed": "a train-station cafe in Cairo; a sister and her younger brother's tutor after a quiet act of generosity"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Ramses Station, in the autumn of 1987, kept a narrow cafe beside platform four where students waited out the delays over sweet tea. Yasmin went there every Thursday to pay Karim, her younger brother's tutor, from an envelope she counted twice. He always refused the last coin, pressing it back into her palm with a joke about inflation. She never argued; instead she slipped it into a chipped glass jar on the counter, where the waiter collected change for the boy who swept the platforms. Neither of them ever spoke of it. By spring the jar was nearly full, its coins dull from handling, and the boy was wearing a pair of new shoes. When the trains at last ran on schedule again, the cafe rearranged its tables, but someone kept the jar beside the register.",
+    "question": "In the text, the glass jar most likely symbolizes",
+    "options": [
+     "a quiet generosity that Yasmin and Karim share without discussing it",
+     "Yasmin's lingering anxiety about the cost of her brother's lessons",
+     "Karim's reluctance to accept any payment for his teaching",
+     "the cafe's struggle to survive the station's long delays"
+    ],
+    "correct_letter": "A",
+    "explanation": "Karim은 마지막 동전을 매번 돌려주고, Yasmin은 그것을 다투지 않고 청소하는 소년을 위한 유리병에 넣는다. 지문은 두 사람이 이를 한 번도 말하지 않았다고 밝히고, 봄이 되자 소년이 새 신발을 신게 된다. 병은 두 사람이 말없이 함께 이어 가는 너그러움을 상징하므로 A가 정답이다. B는 Yasmin의 걱정, C는 Karim 한쪽의 태도, D는 카페 사정에만 초점을 맞춘 오답이다."
+   },
+   "notes": [],
+   "tone": [
+    "gentle",
+    "understated"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-066",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-066",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "inferences",
+    "difficulty": "medium",
+    "questionType": "symbolism",
+    "genre": "memoir",
+    "seed": {
+     "index": 65,
+     "genre": "memoir",
+     "pov": "mixed_or_none",
+     "styleEra": "19c",
+     "names": [
+      "Sunethra",
+      "Joaquim"
+     ],
+     "nameCultures": [
+      "south_asian_muslim_sri_lankan",
+      "portuguese_brazilian"
+     ],
+     "locale": "Lisbon",
+     "setting": "a lakeside dock",
+     "relationship": "a ranger and a lost hiker",
+     "conflict": "about the proper way to say goodbye",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a lakeside dock in Lisbon; a ranger and a lost hiker about the proper way to say goodbye"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Sunethra kept the keeper's lodge at the reservoir above Lisbon in the year of the great drought, and it was there, in 1868, that Joaquim stumbled out of the pines after two nights astray. She fed him, dried his boots, and on the third morning walked him to the end of the dock, where a lantern hung on a post. It was her custom to light it for every departing traveler, even by day. Joaquim laughed and said a handshake would do. She lit it anyway. He told the story for years afterward: how he had looked back from the ridge and seen the small flame still burning above the water long after the lodge itself had vanished behind the trees. In his telling, he never said whether he waved.",
+    "question": "In the text, the lantern on the dock most likely represents",
+    "options": [
+     "the danger of crossing the hills without a guide",
+     "a farewell that lets Sunethra's care follow Joaquim",
+     "Sunethra's fear that Joaquim will become lost again",
+     "Joaquim's amusement at the keeper's formal customs"
+    ],
+    "correct_letter": "B",
+    "explanation": "Sunethra는 떠나는 모든 여행자를 위해 낮에도 등불을 켜는 관습이 있고, Joaquim이 악수면 충분하다고 해도 등불을 켠다. 이후 Joaquim은 숙소가 숲 뒤로 사라진 뒤에도 그 불꽃이 계속 보였다고 수년간 이야기한다. 두 단서를 연결하면 등불은 떠난 뒤에도 그를 따라가는 Sunethra의 보살핌, 곧 작별의 방식을 상징하므로 B가 정답이다. A와 C는 위험과 두려움으로, D는 Joaquim의 웃음이라는 한 장면만으로 해석했다."
+   },
+   "notes": [],
+   "tone": [
+    "nostalgic",
+    "serene"
+   ],
+   "devices": [
+    "symbolism",
+    "imagery",
+    "frame narrative"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-067",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-067",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "short_story",
+    "seed": {
+     "index": 66,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Dario",
+      "Camila"
+     ],
+     "nameCultures": [
+      "latin_american",
+      "latin_american"
+     ],
+     "locale": "Oaxaca",
+     "setting": "an abandoned orchard",
+     "relationship": "a retired sailor and his neighbor",
+     "conflict": "over an old photograph",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "an abandoned orchard in Oaxaca; a retired sailor and his neighbor over an old photograph"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When Camila found the photograph in the drawer of my sea chest, she carried it out to the orchard where I was sitting among the dead mango trees. In the picture I was twenty, grinning on the deck of a freighter, an arm around a man I had not spoken of in forty years. She asked who he was. I told her the trees had stopped bearing the summer I came home, as if they had waited for me and then given up. She did not let me change the subject. She set the photograph on my knee and waited. For a while the memory sat in my chest like an anchor dropped in deep water, heavy and impossible to haul up alone. Then, slowly, with her still beside me, I began to tell her about the storm off Veracruz. Camila listened, peeling a dry branch into strips, while the wind moved through the bare limbs overhead.",
+    "question": "As used in the text, the phrase “like an anchor dropped in deep water” most nearly suggests that the memory is",
+    "options": [
+     "dangerous and likely to cause the narrator further harm",
+     "buried so long that the narrator has truly forgotten it",
+     "weighty and hard for the narrator to raise without help",
+     "steadying and a reliable source of comfort to the narrator"
+    ],
+    "correct_letter": "C",
+    "explanation": "화자는 40년 동안 그 남자에 대해 말하지 않았고 Camila의 질문에 화제를 돌리려 한다. 기억은 깊은 물에 내린 닻처럼 무겁고 혼자서는 끌어올릴 수 없다고 묘사되며, 화자는 Camila가 곁에 있을 때에야 이야기를 시작한다. 따라서 이 비유는 무겁고 도움 없이는 꺼내기 어려운 기억을 뜻하므로 C가 정답이다. A는 위험성, B는 완전한 망각, D는 안정감이라는 닻의 다른 연상을 끌어왔다."
+   },
+   "notes": [],
+   "tone": [
+    "melancholy",
+    "reflective"
+   ],
+   "devices": [
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-069",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-069",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "poetry",
+    "seed": {
+     "index": 68,
+     "genre": "poetry",
+     "pov": "first",
+     "styleEra": "early_20c",
+     "names": [
+      "Eleni",
+      "Jianguo"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "chinese"
+     ],
+     "locale": "Chengdu",
+     "setting": "a salt-water pool",
+     "relationship": "cousins reunited at a funeral",
+     "conflict": "while hiding a small failure",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a salt-water pool in Chengdu; cousins reunited at a funeral while hiding a small failure"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "When the mourners left the hall in Chengdu,\nJianguo and I walked to the salt-water baths\nour grandfather had built in the year of floods.\nEleni, he asked, you passed your examinations?\nI nodded, and the lie went under\nlike a stone into the brine,\nwhere nothing sinks quite all the way.\n\nWe sat on the tiled edge, feet in the green water.\nHe spoke of the ledger he had kept for the old man,\nof figures he had copied twice.\nI watched my small untruth bob near the surface,\npale as a coin, refusing to drown.\n\nAbove the pool the paper lanterns swung,\nand someone in the courtyard swept the ash.",
+    "question": "As used in the text, the phrase “where nothing sinks quite all the way” most nearly suggests that the speaker's lie",
+    "options": [
+     "cannot be fully hidden and keeps threatening to resurface",
+     "was forgotten almost as soon as the speaker had told it",
+     "will soon be discovered and harshly judged by Jianguo",
+     "is far too small to carry any lasting importance at all"
+    ],
+    "correct_letter": "A",
+    "explanation": "화자는 시험에 합격했느냐는 질문에 거짓으로 고개를 끄덕이고, 그 거짓말은 염수 속 돌처럼 가라앉지만 완전히 가라앉지는 않는다. 둘째 연에서도 그 작은 거짓은 수면 근처에서 떠다니며 '가라앉기를 거부한다'. 두 부분을 이으면 거짓말이 완전히 숨겨지지 않고 계속 떠오르려 한다는 뜻이므로 A가 정답이다. B는 망각, C는 발각과 비난, D는 사소함으로 의미를 잘못 잡았다."
+   },
+   "notes": [],
+   "tone": [
+    "somber",
+    "uneasy"
+   ],
+   "devices": [
+    "metaphor",
+    "simile",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-070",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-070",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "personal_essay",
+    "seed": {
+     "index": 69,
+     "genre": "personal_essay",
+     "pov": "mixed_or_none",
+     "styleEra": "late_20c",
+     "names": [
+      "Vesna",
+      "Pavel"
+     ],
+     "nameCultures": [
+      "slavic_baltic",
+      "slavic_baltic"
+     ],
+     "locale": "Riga",
+     "setting": "a shoe repair stall",
+     "relationship": "a mayor and the town's only doctor",
+     "conflict": "when two traditions have to share one table",
+     "openingStyle": "의문문으로 시작",
+     "topicSeed": "a shoe repair stall in Riga; a mayor and the town's only doctor when two traditions have to share one table"
+    },
+    "targetLetter": "B",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "What does a town do when its two oldest customs both claim the same evening? In the Riga suburb where I grew up, the answer was worked out in 1991 at the back of Vesna's shoe repair stall, because she was mayor and the stall had the only table long enough. Pavel, the town's only doctor, wanted the midsummer supper to follow his family's Orthodox fast; Vesna's neighbors wanted the old Latvian songs and the cheese with caraway. For an hour they argued over awls and heel nails. Then Pavel took a needle from the bench and said the problem was simple stitching. Two leathers of different grain, he explained, can still be sewn into a single sole if the thread is patient. By midnight they had a menu that served both. I still keep a pair of shoes resoled at that stall, and the seam has never split.",
+    "question": "As used in the text, the phrase “sewn into a single sole” most nearly suggests",
+    "options": [
+     "forcing one tradition to give way entirely to the other",
+     "joining two different customs into one shared occasion",
+     "repairing an old friendship that had broken apart",
+     "simplifying the supper by removing its older rituals"
+    ],
+    "correct_letter": "B",
+    "explanation": "지문은 두 전통이 같은 저녁을 요구하는 상황에서 시작하며, Pavel은 결이 다른 두 가죽도 인내심 있는 실로 하나의 밑창이 될 수 있다고 말한다. 자정이 되자 두 전통을 모두 담은 메뉴가 완성된다. 따라서 이 표현은 서로 다른 관습을 하나의 공동 행사로 엮는다는 뜻이므로 B가 정답이다. A는 한쪽의 양보, C는 우정 회복, D는 의식 제거로 잘못 해석했다."
+   },
+   "notes": [],
+   "tone": [
+    "wry",
+    "affectionate"
+   ],
+   "devices": [
+    "metaphor",
+    "rhetorical question"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-071",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-071",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "words_in_context",
+    "difficulty": "medium",
+    "questionType": "figurative_language",
+    "genre": "memoir",
+    "seed": {
+     "index": 70,
+     "genre": "memoir",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Omar",
+      "Aponi"
+     ],
+     "nameCultures": [
+      "arabic_levantine",
+      "indigenous_american"
+     ],
+     "locale": "the Navajo plateau",
+     "setting": "a stone bridge",
+     "relationship": "best friends after a move",
+     "conflict": "over an unspoken agreement to avoid one subject",
+     "openingStyle": "대화 한 줄로 시작",
+     "topicSeed": "a stone bridge in the Navajo plateau; best friends after a move over an unspoken agreement to avoid one subject"
+    },
+    "targetLetter": "C",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Not the river, Omar, Aponi said, before I had even opened my mouth. We were standing on the stone bridge below the mesa in the spring of 1879, the first time I had seen her since my family moved east to the trading post. As children we had crossed this bridge daily; the summer before I left, her brother had been caught by the flood beneath it. We had never spoken of it, and now we kept a fence of silence around that one field, walking beside it with great care. So we talked of horses, of my father's ledgers, of the new schoolhouse. Whenever the water grew loud below us, she pointed to a hawk or asked about the weather in the east. I let her. At dusk the shadows of the arches stretched across the dry wash, and a flock of sheep came down the far slope.",
+    "question": "As used in the text, the phrase “a fence of silence around that one field” most nearly suggests",
+    "options": [
+     "a quarrel that has ended the friendship between Omar and Aponi",
+     "the physical boundary dividing the two families' grazing lands",
+     "a shared and careful avoidance of one painful subject",
+     "Aponi's wish to keep Omar from returning to the plateau"
+    ],
+    "correct_letter": "C",
+    "explanation": "Aponi는 첫마디부터 '강 얘기는 말자'고 하고, 화자는 그녀의 오빠가 그 다리 아래 홍수에 휩쓸렸던 일을 둘이 한 번도 말하지 않았다고 밝힌다. 이후에도 물소리가 커지면 Aponi는 매나 날씨 이야기로 화제를 돌리고 화자는 이를 받아 준다. 따라서 '침묵의 울타리'는 두 사람이 함께 조심스럽게 피하는 아픈 주제를 뜻하므로 C가 정답이다. A는 결별, B는 실제 경계, D는 Aponi 한쪽의 거부로 오해한 선택지다."
+   },
+   "notes": [],
+   "tone": [
+    "guarded",
+    "wistful"
+   ],
+   "devices": [
+    "metaphor",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-079",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-079",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "short_story",
+    "seed": {
+     "index": 78,
+     "genre": "short_story",
+     "pov": "first",
+     "styleEra": "contemporary",
+     "names": [
+      "Paloma",
+      "Declan"
+     ],
+     "nameCultures": [
+      "spanish_iberian",
+      "english"
+     ],
+     "locale": "Ohio",
+     "setting": "a salt-water pool",
+     "relationship": "an elder and a restless apprentice",
+     "conflict": "when old loyalties collide with new ones",
+     "openingStyle": "부사절·전치사구로 시작('When', 'Although', 'Beside' 등)",
+     "topicSeed": "a salt-water pool in Ohio; an elder and a restless apprentice when old loyalties collide with new ones"
+    },
+    "targetLetter": "D",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Although the salt-water pool at the community center in Dayton, Ohio, had been Paloma's for thirty years, she let me open it that morning, handing me the ring of keys with a ceremony that made me laugh. I was nineteen, her apprentice lifeguard, and restless; the new aquatic park across town had offered me a job at twice the pay. I joked about it while we tested the water and skimmed the leaves. Paloma joked back, asking whether the new place came with a wave machine and a manager half my age. Then she stopped skimming. She told me the pool had been dug by her father's crew, that she had taught every child in the neighborhood to float in its shallow end, and that she had hoped someone would know where the drain stuck in winter. I put down the net. Across the water, the morning light lay flat and bright on the tiles.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It moves from nostalgic reflection to bitter accusation as Paloma blames the narrator.",
+     "It moves from anxious doubt to calm confidence as the narrator decides to leave.",
+     "It moves from formal instruction to casual joking as Paloma relaxes her standards.",
+     "It moves from playful banter to quiet seriousness as Paloma speaks of the pool."
+    ],
+    "correct_letter": "D",
+    "explanation": "앞부분에서 화자는 열쇠를 건네는 의식에 웃고, 두 사람은 새 수영장 일자리를 두고 농담을 주고받는다. 'Then she stopped skimming' 이후 Paloma는 아버지가 판 수영장과 아이들을 가르친 기억, 누군가 이어받기를 바랐던 마음을 조용히 털어놓고 화자는 그물을 내려놓는다. 장난스러운 대화에서 진지한 분위기로 바뀌므로 D가 정답이다. A는 비난이 없다는 점, B는 화자가 떠나기로 결정하지 않았다는 점, C는 변화 방향이 반대라는 점에서 틀렸다."
+   },
+   "notes": [],
+   "tone": [
+    "playful",
+    "earnest"
+   ],
+   "devices": [
+    "tone shift",
+    "dialogue",
+    "imagery"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  },
+  {
+   "candidateId": "lit40-medium-04-080",
+   "task": "gen-lit40-medium-04-04",
+   "attempt": 0,
+   "spec": {
+    "candidateId": "lit40-medium-04-080",
+    "batchId": "lit40-medium-04",
+    "route": "ai_passage",
+    "skill": "text_structure_purpose",
+    "difficulty": "medium",
+    "questionType": "tone_shift",
+    "genre": "novel_excerpt",
+    "seed": {
+     "index": 79,
+     "genre": "novel_excerpt",
+     "pov": "first",
+     "styleEra": "19c",
+     "names": [
+      "Hasan",
+      "Sadia"
+     ],
+     "nameCultures": [
+      "greek_balkan_turkish",
+      "south_asian_muslim_sri_lankan"
+     ],
+     "locale": "Thessaloniki",
+     "setting": "a crowded wedding hall",
+     "relationship": "a foreman and a young hire",
+     "conflict": "while learning to let go of a habit",
+     "openingStyle": "인물의 이름으로 시작",
+     "topicSeed": "a crowded wedding hall in Thessaloniki; a foreman and a young hire while learning to let go of a habit"
+    },
+    "targetLetter": "A",
+    "words": {
+     "min": 60,
+     "max": 220
+    },
+    "recipeId": null
+   },
+   "g": {
+    "passage": "Hasan, our foreman, had a habit of counting chairs. At every wedding we staffed in Thessaloniki that summer of 1872, he walked the hall twice before the guests arrived, tapping each chair back and muttering numbers, and I, newly hired, trailed behind him trying not to smile. That evening the hall was so crowded that the count fell apart at once; guests perched on window ledges, and the musicians spilled onto the stairs. I expected an outburst. Instead Hasan stood still among the dancers, and something in his face loosened. He told me, quite softly, that his father had been a foreman too and had once been dismissed because a single guest went without a seat. Then he handed me his tally slate. Keep it or break it, Sadia, he said. Beyond the doors, a cart rolled past on the wet stones.",
+    "question": "Which choice best describes the shift in tone that occurs in the text?",
+    "options": [
+     "It moves from lightly amused observation to a tender, reflective mood.",
+     "It moves from fearful tension to triumphant celebration of the wedding.",
+     "It moves from solemn grief to cheerful relief once the guests arrive.",
+     "It moves from bitter complaint to grudging respect for Hasan's rules."
+    ],
+    "correct_letter": "A",
+    "explanation": "앞부분에서 화자는 의자를 세는 Hasan의 습관을 따라다니며 웃음을 참는, 가볍고 재미있어하는 시선을 보인다. 홀이 붐벼 숫자가 무너진 뒤 Hasan의 얼굴이 풀리고, 그는 해고된 아버지 이야기를 조용히 털어놓으며 계산판을 건넨다. 가벼운 관찰에서 다정하고 성찰적인 분위기로 바뀌므로 A가 정답이다. B와 C는 결혼식의 즐거움에 끌린 오답이고, D는 화자가 불평한 적이 없다는 점에서 틀렸다."
+   },
+   "notes": [],
+   "tone": [
+    "amused",
+    "tender"
+   ],
+   "devices": [
+    "tone shift",
+    "characterization"
+   ],
+   "producerModel": "opus",
+   "wordRetries": 0,
+   "rewrites": 0
+  }
+ ],
+ "rejected": [
+  {
+   "candidateId": "lit40-medium-04-064",
+   "stage": "render",
+   "reasons": [
+    "rw_question:질문 문장을 인식하지 못했습니다 — 지문 마지막 단락이 SAT 문항처럼 물음표로 끝나야 합니다(예: \"Which choice …?\")."
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-068",
+   "stage": "distractor",
+   "reasons": [
+    "정답이 가장 긴 선택지(13단어, 다음 11)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-072",
+   "stage": "similarity",
+   "reasons": [
+    "문두 집중(3건 이미 같은 문두)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-073",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-074",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-075",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-076",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-077",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  },
+  {
+   "candidateId": "lit40-medium-04-078",
+   "stage": "distractor",
+   "reasons": [
+    "선택지 단어 수 범위 밖(2~40)"
+   ]
+  }
+ ],
+ "retryWords": [],
+ "extraIgnored": []
+}

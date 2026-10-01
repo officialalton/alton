@@ -1,0 +1,346 @@
+{
+ "schema": "rw-session-task/v1",
+ "kind": "review",
+ "role": "second_solver",
+ "runId": "lit40-wave1",
+ "taskId": "rev-second_solver-023",
+ "chunkId": "rev-second_solver-023",
+ "suggestedModel": "opus",
+ "resultPath": "/Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-023.result.json",
+ "outputSchema": {
+  "chunkId": "청크 ID",
+  "model": "opus|fable",
+  "items": [
+   {
+    "candidateId": "id",
+    "picked_letter": "A|B|C|D",
+    "other_defensible": "boolean",
+    "confidence": "high|medium|low",
+    "note": "풀이 한 줄"
+   }
+  ]
+ },
+ "items": [
+  {
+   "candidateId": "lit40-hard-02-001",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Mangoes, mostly, though the orchard outside Surabaya had long ago given up deciding. Arisa counted eleven trees still standing and two that had lain down sometime before the rains. Thuy said the fallen ones were resting. Arisa said they were firewood with good manners. They walked the rows the way they had as girls, kicking husks, naming the trees after teachers they had disliked. At the gate Arisa took a parcel from her bag: the brass bell Thuy had mailed to her new flat in Jakarta, still in its paper, the knot untouched. Thuy looked at the knot, not at the bell. She did not ask why. Arisa tied the parcel to the lowest branch of the eleventh tree, where the wind could reach it, and stepped back. They waited. When it rang once, faintly, Thuy reached up and tightened the knot so it would hold through the season.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Teasing and tender toward a bond that has outlasted distance",
+    "Teasing and carefree toward an orchard left to fall apart",
+    "Teasing and guarded toward a gift that has caused offense",
+    "Teasing and tender toward every place from their girlhood"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-02-002",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Three rules for the salt pans, Aoife had told the squad on the first morning: hats on, water every hour, no running where the crust is thin. Lanying had broken the third rule once, two years ago today, and had not played a full match since. Now she sat on the cooler with her knee strapped, timing the others' sprints with a stopwatch that ran four seconds slow. Aoife did not correct it. She read the numbers aloud as given and wrote them on her clipboard in neat columns. At noon the team left for lunch in the van. Aoife stayed. She walked out to the thin place, where the white crust had split into plates, and stood there with her hands in her pockets. Lanying came after a while, limping, and stood beside her. Neither of them mentioned the date. Aoife handed her the clipboard and the pen, and Lanying wrote one more line at the bottom of the column, below the others, in her own hand.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Brisk and businesslike toward an ordinary day of training",
+    "Brisk and quietly solemn toward a loss both women still carry",
+    "Brisk and quietly relieved toward a loss now safely behind them",
+    "Brisk and quietly solemn toward the history of the whole squad"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-02-003",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "tone_or_mood",
+   "requestedDifficulty": "hard",
+   "passage": "Chalk dust still lives in the grooves of the piano lid in Room 4, and I traced it with one finger while Thandiwe tuned the violin I had left behind twenty years ago. She remembered the winter concert one way: I had played the solo, she said, and stumbled, and kept going. I remembered it another way. I had not played at all; I had stood in the wings while a boy from the upper class played it in my place. We went over the details like clerks. The program, the coat rack, the radiator that knocked. She was certain about the radiator. So was I. Then she took a folder from the cabinet, the old programs, and found that winter's sheet. She looked at it for longer than reading takes. She closed the folder, slid it back behind the others, and asked me, Hala, to play the solo now, while the room was empty.",
+   "question": "Which choice best describes the overall tone of the text?",
+   "options": [
+    "Methodical and detached toward a dispute over plain facts",
+    "Methodical and quietly embarrassed toward a mistaken memory",
+    "Methodical and quietly gentle toward an old disappointment",
+    "Methodical and quietly gentle toward all of her former pupils"
+   ],
+   "recipeBeyondMedium": "겉 어조만 읽으면 오답에 걸리고 속 어조의 원인까지 맞혀야 하며, 네 선택지 구조가 동일해 형식 단서가 없다"
+  },
+  {
+   "candidateId": "lit40-hard-02-004",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "By six the boarding-house kitchen in Manila smelled of garlic rice, and Tyrese was already at the long table with the ledger open. 'Maestro,' he said when Ruoxi came down, and stood, as he did at rehearsals. Ruoxi waved him back into his chair. The house had been her mother's; the orchestra paid Tyrese a stipend that rarely reached the end of a month, and his rent here was, on paper, three months overdue. Ruoxi poured two cups of coffee and set the sugared one in front of him. He turned the ledger toward her. A column of small payments ran down the margin in his hand, each dated, each initialed: the plumber in January, the gas man, the property tax in March. Ruoxi read them twice. Then she took her own pen, struck through the line that said his rent was owing, and pushed the ledger back across the table. Tyrese closed it and went to wash the pans.",
+   "question": "Based on the text, which choice best describes the relationship between Ruoxi and Tyrese?",
+   "options": [
+    "A junior player who defers to his conductor out of professional respect",
+    "A tenant who has fallen behind and depends on his landlord's patience",
+    "A landlord who forgives a debt to reward a tenant's tidy bookkeeping",
+    "A young musician who has quietly covered his mentor's expenses himself"
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-005",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "I filled out the customs form in my grandfather's language while he watched, and Burak corrected my letters with the end of his pencil, tapping twice for every mistake. 'Again, Noor.' The post office at the edge of the village outside Cairo had one window and a clerk who knew him. Burak called him Effendi; the clerk called him Uncle. The parcel was for my mother in Izmir: his winter coat, two jars of honey, a photograph of the house. On the form there was a line for the sender's return address. I wrote ours. He took the pencil, crossed it out, and wrote the clerk's address instead, slowly, so I could copy the shapes later. Outside he gave me the receipt and the pencil both. That evening my mother called to ask when we were coming. He handed me the phone and went out to water the beans, and I answered in his language, carefully, the way he had taught me, that I would stay through the summer.",
+   "question": "Based on the text, which choice best describes the relationship between Noor and Burak?",
+   "options": [
+    "A granddaughter who chooses to remain with a grandfather readying her departure",
+    "A strict tutor and a pupil whose lessons follow the rules of a classroom",
+    "A grandfather who quietly relies on his granddaughter to handle his errands",
+    "Two travelers who are working together to send their belongings back home"
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-006",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "relationship_between_characters",
+   "requestedDifficulty": "hard",
+   "passage": "On Thursdays, after the courts closed, I carried Amelia's proofs down to the press room on Ogarna Street in Gdansk. She was retired by then and wrote small pamphlets on old cases. She insisted that I, Dmitri, address her as Judge, and she addressed me as Clerk, never by name. The pressman set her type; I read it back to her aloud. One week the pamphlet concerned a theft from the harbor office in a year I knew well, because my father had worked there. The draft named no one. Amelia listened to my reading without interrupting, as she always did, and at the paragraph describing the missing ledger she asked me to stop. She took the proof, removed one line with a ruler and a blade, and paid the pressman for a second setting from her own purse. The line had given the shift on which the ledger vanished. The following Thursday she called me Clerk, as before.",
+   "question": "Based on the text, which choice best describes the relationship between Amelia and Dmitri?",
+   "options": [
+    "A retired judge who keeps a strict and formal distance from her assistant",
+    "A retired judge who quietly shields her assistant's family at her own cost",
+    "A young clerk who quietly guards his employer's reputation by editing her",
+    "A retired judge who grows wary of her assistant once his father comes up"
+   ],
+   "recipeBeyondMedium": "관계의 방향(누가 누구에게 의존·양보하는가)을 읽어야 하고, 호칭이 주는 표면 관계가 가장 강한 오답으로 작동하며, 오답이 지문과 충돌하지 않는다"
+  },
+  {
+   "candidateId": "lit40-hard-02-007",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Four pans hung above the galley stove, and Joaquim's mother had ruled on each before Beatriz came aboard: the big one for beans, the small one for eggs, the copper one for show, and the black iron one for her alone. Beatriz learned the order in the first week. She scrubbed the iron pan when told, oiled it, and hung it back on its own hook at the far end, handle turned outward the way the older woman liked. In July the river ran high, and the boat stayed docked at Porto Alegre for a month while Joaquim worked the cargo cranes. His mother took to sitting on deck with her mending. One evening Beatriz, alone in the galley, cooked rice in the iron pan for the first time. She did not hide it. The next morning she found the pan washed and oiled already, hanging not on its old hook but on the one beside the stove, handle turned toward the spot where Beatriz stood to cook.",
+   "question": "In the text, the black iron pan most likely represents which of the following?",
+   "options": [
+    "The heavy daily chores that a cook must perform aboard a river boat",
+    "The strict rules by which the older woman keeps the bride at a distance",
+    "The place in the family that the older woman is now ready to open up",
+    "The strained bond between the women that the bride repairs by cooking"
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-02-008",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "Years later Zaynab could still describe the thing Consuelo gave her that winter: a tin whistle painted blue, the kind sold to tourists on the quay. Consuelo sold fish by day and swept the night pharmacy in Vigo where Zaynab's mother worked the late counter, and she had seen Zaynab practicing scales on a school recorder behind the till. The whistle was in the wrong key for every song Zaynab knew. She played it anyway, each night at ten, when Consuelo came in with her broom, and Consuelo leaned on the handle and nodded along until the tune was done. In March the old woman stopped coming; a nephew took over the broom. Zaynab kept the whistle in the drawer with the spare receipts. On the last night her mother worked there, Zaynab took it out, wiped it on her sleeve, and left it standing upright in the cup of pens beside the register, where the next clerk would find it.",
+   "question": "In the text, the blue tin whistle most likely represents which of the following?",
+   "options": [
+    "A cheap instrument that Zaynab uses to practice her musical scales",
+    "A mistaken gift that Zaynab endures to avoid hurting the old woman",
+    "A friendship that fades once the old woman stops visiting the shop",
+    "A nightly kindness that Zaynab chooses to pass along to a stranger"
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-02-009",
+   "attempt": 0,
+   "skill": "inferences",
+   "questionType": "symbolism",
+   "requestedDifficulty": "hard",
+   "passage": "My father kept time by the lamp. At the Colombo station Shamsuddin wound the clockwork that turned the lens every four hours, and he wound it with a brass key he had borrowed from the keeper before him and, as far as anyone knew, never returned. I was eleven when I asked why he did not buy his own. He said this one fit. At sixteen I refused to learn the winding at all; I wanted engines, not lamps, and I told him so loudly. He wound the clock alone for three more years. When the station was automated, the men from the port authority asked for the key. He gave them a different one, from the drawer, which also fit. The morning I left for the engineering college in Kandy, he pressed the brass key into my palm and closed my fingers over it. I have it still, on a nail by my own door, and I, Hollis, wind nothing with it.",
+   "question": "In the text, the brass key most likely represents which of the following?",
+   "options": [
+    "A duty that is held in trust and handed down rather than kept",
+    "A tool that is needed to wind the clock that turns the lens",
+    "A debt that the father owes the old keeper and will not settle",
+    "A quarrel between father and son that ends with a final gift"
+   ],
+   "recipeBeyondMedium": "사물이 두 맥락에서 다른 의미를 띠고, 가장 강한 오답이 인물 관계로 읽은 그럴듯한 상징 해석이다"
+  },
+  {
+   "candidateId": "lit40-hard-02-015",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Years ago Sigrid and Anneke had sung the same duet every night for a season, and since then they had not spoken. Now both worked the small vineyard outside Rotterdam at harvest, and Sigrid kept to the far rows. Each morning she left her full crates at the end of Anneke's row, where the cart stopped, then walked off before Anneke reached them. On the last day of picking, rain came early, and the two women ended up under the same shed. Anneke hummed the opening bars of the duet, softly, once. Sigrid's reply was ______. She sang the second line under her breath, and when Anneke turned toward her, she was looking out at the vines again, rubbing grape stain from her thumb.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "openly welcoming",
+    "politely reserved",
+    "tunefully nostalgic",
+    "tentatively receptive"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-02-016",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "Soren paid on time. For eleven years he had rented the room above Sunja's net shed at the Jeju harbor, and for eleven years he had paid with a handwritten slip listing every won, down to the coins. When the winch slipped in October and crushed a crate of her abalone, he was the one working it. The harbor office wanted a written account. Sunja offered to write it herself and say the cable had been old. Soren thanked her and took the form home. What he returned the next morning was ______. He had listed the cable's age and the weight of the crate, and, on a separate line in his small square hand, that he had looked away to light a cigarette.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "scrupulously candid",
+    "respectfully deferential",
+    "cautiously accurate",
+    "neatly businesslike"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-02-017",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "We meet on the promenade at four, Ofelia and I,\nthe board on the bench between us, the gulls on the rail.\nThirty years she has opened with the same pawn.\nThirty years I have answered it badly on purpose\nso she can say, as she likes to say, Bartolo, you learn nothing.\n\nThis spring her hand shakes when she lifts the queen.\nI do not look. I study the harbor, the cranes, a red ship.\nHer move, when it comes, is ______,\nand I answer as if it were the old one,\nthe same bad answer, the same small loss.\nShe says my line. I nod. The tide goes out\nthe way it has gone out every afternoon in Valparaiso,\nand I set the pieces back for tomorrow.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "suddenly reckless",
+    "noticeably altered",
+    "carefully rehearsed",
+    "slowly deliberate"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-02-018",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "On Sundays Nicolas sold walnut sweets from a folding table outside the cemetery gate in Tbilisi, and on Sundays I, Vesna, bought two and asked for the recipe. He was a retired sailor and gave answers like weather reports: some sugar, the right walnuts, enough time. I wrote down whatever he said. The list never matched the one from the week before. Last winter he was ill, and his table stood empty for a month. When he came back, he pressed a paper bag into my hands that held no sweets, only walnuts, a jar of grape must, and a length of string. His instruction was ______. He stood beside me at my own stove that evening and guided my hands, and did not leave until the first strand had set.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "precisely written",
+    "vaguely poetic",
+    "wordlessly practical",
+    "sweetly nostalgic"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-02-019",
+   "attempt": 0,
+   "skill": "words_in_context",
+   "questionType": "word_in_context",
+   "requestedDifficulty": "hard",
+   "passage": "When the snow closed the road above Naples, my mother, Esperanza, and I had three days in the cabin with her mother, Assunta, and the question we had driven up to ask. I was leaving for college in a week. My mother had brought brochures for a residence in the city; she left them on the table, in the bread basket, by the stove, and each time Assunta moved them, unread, to the windowsill. On the second night the power failed. Assunta lit the lamps herself and made soup in the dark without searching for anything. My mother watched her hands. Her answer, the next morning, was ______. She gathered the brochures from the sill, folded them into her coat pocket, and asked Assunta to show me how to bank the stove before we left.",
+   "question": "Which choice completes the text with the most logical and precise word or phrase?",
+   "options": [
+    "firmly insistent",
+    "openly defeated",
+    "warmly nostalgic",
+    "quietly relenting"
+   ],
+   "recipeBeyondMedium": "빈칸 뒤 정의가 없고 두 제약을 동시에 만족하는 표현만 정답이며, 오답이 모두 문법적으로 맞고 의미 영역이 같다"
+  },
+  {
+   "candidateId": "lit40-hard-02-020",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Two iced coffees, condensed milk at the bottom, a paper straw already going soft: Arman ordered for both of them without asking, as he had every morning that month. The cafe at the Chiang Mai station faced platform two, and Kiet sat facing it too, his bag between his feet, the letter from the boarding school in Bangkok folded into quarters in his shirt pocket. Arman talked about the timetable. The 8:30 was usually late; the 9:10 had a better carriage; the seats on the left got the morning sun until Lampang. He described the vendors who would come through with sticky rice, and which ones to avoid. He described the toilets. Kiet said yes, thank you, he knew. Arman drank his coffee. When the 8:30 was announced, on time, he stood, picked up Kiet's bag before Kiet could reach it, carried it to the carriage door, handed it up, and stayed on the platform with his hands in his pockets until the train had passed the signal box.",
+   "question": "Which choice best describes the shift in tone in the text?",
+   "options": [
+    "From busy practicality to formal courtesy, as Arman keeps up appearances",
+    "From busy practicality to quiet withdrawal, as Arman regrets talking too much",
+    "From busy practicality to quiet resentment, as Arman resists Kiet's departure",
+    "From busy practicality to quiet support, as Arman accepts Kiet's choice to go"
+   ],
+   "recipeBeyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다"
+  },
+  {
+   "candidateId": "lit40-hard-02-022",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "Tehran in late May, and the yard hums\nthe way our mother's kettle hummed before it boiled.\nPouya lifts each frame toward the light,\ncounts the capped cells aloud, names the queen\nthe way she named her hens, after aunts.\nI read him her letters from the cedar box:\nthe price of sugar the winter I was born,\na neighbor's wedding, the plum tree she swore\nshe would graft and did, the next spring,\nwearing her blue scarf against the wind.\nThen the page about the shop.\nI read the date.\nI read the weather.\nPouya sets the frame back gently.\nHe asks for the next letter, please,\nand thanks me when I give it,\nand fills the smoker with dry pine needles\nuntil the yard goes grey and quiet.\nLeila, he says, read the plum tree again.\nI keep my thumb on the third line\nof the page about the shop, where her hand\nleans the way it leaned when she wrote out sums.",
+   "question": "Which choice best describes the shift in tone in the text and its significance?",
+   "options": [
+    "It narrows from easy description to polite requests, suggesting Pouya wishes to show his sister more courtesy than before.",
+    "It narrows from fond, detailed memory to guarded brevity, suggesting both siblings are steering around a matter the letter raises.",
+    "It narrows from fond, detailed memory to guarded brevity, suggesting the speaker has grown tired of reading aloud to Pouya.",
+    "It narrows from fond, detailed memory to guarded brevity, suggesting the siblings have begun to quarrel over their mother's past."
+   ],
+   "recipeBeyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다"
+  },
+  {
+   "candidateId": "lit40-hard-02-023",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "“Hand me the blue pins, if you would,” Lakshmi said, and I did, and for an hour we worked the line on the roof of our mother's old boardinghouse in Albuquerque as if no years stood between us. She showed me how to shake a sheet so the wind takes the creases, how to hang shirts by the hem so the shoulders do not pucker, how the adobe parapet holds the morning heat like a palm. She had brought ironed handkerchiefs for me, a dozen, each with my initial stitched in the corner. I thanked her. She asked whether the deed to the house was still kept in the hall desk. I said that it was. We hung the pillowcases. We hung the towels. I thanked her again for the handkerchiefs. That evening I took the deed from the hall desk and carried it to my room, and I folded one of her handkerchiefs around it before I set it beneath my pillow.",
+   "question": "Which choice best describes the shift in tone in the text and its significance?",
+   "options": [
+    "It moves from practical lessons to repeated thanks, suggesting the narrator has grown more grateful for her sister's care.",
+    "It moves from easy fellowship to guarded politeness, suggesting the narrator regrets having said so little about the house.",
+    "It moves from easy fellowship to guarded politeness, suggesting the narrator suspects the gift served to ease a request.",
+    "It moves from easy fellowship to guarded politeness, suggesting the narrator has decided to cut off contact with Lakshmi."
+   ],
+   "recipeBeyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다"
+  },
+  {
+   "candidateId": "lit40-hard-02-024",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "tone_shift",
+   "requestedDifficulty": "hard",
+   "passage": "What does one say to a brother who has been gone three years? At the depot in Dakar I said nothing useful. I asked Kofi about the ship, and he told me everything: the salt crust on the rails, the cook who sang in Wolof and burned the rice, the porpoises off the cape that the men counted like coins. He laughed often. He asked after our mother, the goats, the mango tree by the well. Then I mentioned that our little brother Chinedu had practiced a salute for him all week. Kofi said that was kind. He said he would like to see it. He picked up his kit bag. On the bus he sat by the window and asked about the price of millet. When we reached the house and Chinedu ran out, standing very straight with his hand at his brow, Kofi knelt, folded the boy's raised hand down into his own, and held it there.",
+   "question": "Which choice best describes the shift in tone in the text and its significance?",
+   "options": [
+    "It changes from casual chatter to formal politeness, suggesting Kofi has resumed the manners his family expects at home.",
+    "It changes from lively storytelling to measured courtesy, suggesting Kofi is ashamed of having talked so long about himself.",
+    "It changes from lively storytelling to measured courtesy, suggesting Kofi is angry that Chinedu was taught to salute him.",
+    "It changes from lively storytelling to measured courtesy, suggesting Kofi is uneasy about being honored as a soldier."
+   ],
+   "recipeBeyondMedium": "전환이 명시되지 않고 겉 어조는 그대로여서 겉 변화만 읽으면 걸리며, 오답이 방향·원인·정도 중 하나만 틀린다"
+  },
+  {
+   "candidateId": "lit40-hard-02-025",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Armand had built kites in the yard behind the old silk quarter of Lyon for forty years, and each morning he tested the frames before Okja arrived, bending every spar against his knee and listening for the small dry crack that meant bad wood. Lately he had begun leaving the spars in a heap for her to test alone. Okja took this as impatience. She tested them quickly, tossed the cracked ones aside, and asked for harder work: the great silk dragon for the midsummer festival, the commission he had promised the mayor. Armand said she might begin it. He watched her cut the first panel. That afternoon a carter came for the old drying racks, and Armand counted coins into the man's palm, and the man asked whether the yard would open again in spring. Armand told him to mind the gate. Okja kept cutting silk. When the light failed, he lit the lamp and set it beside her, and went inside without taking his own stool.",
+   "question": "Which choice best describes the overall structure of the text?",
+   "options": [
+    "It begins with a habit the apprentice misreads, then shows a sale that recasts that habit, and ends with the question left unspoken.",
+    "It begins with the elder's morning routine, then describes the apprentice's eagerness, and ends with her request for harder work.",
+    "It begins with a habit that reveals the elder's plans, then shows the apprentice taking it as impatience, and ends with the question unspoken.",
+    "It begins with a habit the apprentice takes as impatience, then shows a sale that recasts it, and ends with the yard passing to her."
+   ],
+   "recipeBeyondMedium": "오답이 모두 지문 사실과 일치하고 순서·초점·결말 기능 중 하나만 틀리며, 정답은 재해석 단계를 포함한다"
+  },
+  {
+   "candidateId": "lit40-hard-02-026",
+   "attempt": 0,
+   "skill": "text_structure_purpose",
+   "questionType": "text_structure",
+   "requestedDifficulty": "hard",
+   "passage": "Noa hated weddings. In the hall in Haifa the band played too loud and the aunts pressed honey cake on anyone who sat down, and Yoav, her stepfather, moved through the crowd in a suit slightly too big in the shoulders. __He had worn the same wristwatch every day since she was nine, an old steel one that ran four minutes slow and that he never reset.__ Noa watched him dance with the bride's grandmother, then with a cousin, then with no one, swaying alone near the cake table with his eyes closed. She ate two pieces of honey cake. She checked her phone. At midnight, when the room counted down to the cutting of the cake, Yoav's voice came a little behind everyone else's, as if he were counting by another clock. Afterward he found her by the coat racks, unbuckled the watch, and fastened it on her wrist. Her father's initials were scratched into the back.",
+   "question": "Which choice best describes the function of the underlined sentence in the text as a whole?",
+   "options": [
+    "It presents a quirk that mainly establishes Yoav as careless about small practical matters.",
+    "It presents a quirk that later marks the watch as a keepsake of Noa's father.",
+    "It presents a quirk that explains why Yoav sways alone near the cake table at the wedding.",
+    "It presents a quirk that illustrates how weddings stir up old habits among the guests."
+   ],
+   "recipeBeyondMedium": "오답이 모두 지문 사실과 일치하고 순서·초점·결말 기능 중 하나만 틀리며, 정답은 재해석 단계를 포함한다"
+  }
+ ],
+ "instructions": "당신은 디지털 SAT 독립 채점자(두 번째 풀이자)다. 정답 표시가 없다. 직접 풀고 정답 외에 방어 가능한 선택지가 있는지 판정한다. 다른 풀이자의 답은 모른다.\n청크 rev-second_solver-023 — 20문항.\n출력: Write 도구로 정확히 이 경로에 JSON 한 파일을 쓴다 → /Users/jangjiman/Developer/ALTON/data/rw-generation/runs/lit40-wave1/results/rev-second_solver-023.result.json\n출력 JSON 스키마(예시 구조): {\"chunkId\":\"청크 ID\",\"model\":\"opus|fable\",\"items\":[{\"candidateId\":\"id\",\"picked_letter\":\"A|B|C|D\",\"other_defensible\":\"boolean\",\"confidence\":\"high|medium|low\",\"note\":\"풀이 한 줄\"}]}\n허용 값: picked_letter ∈ {A,B,C,D}, 불리언 필드는 true/false, est_difficulty ∈ {easy,medium,hard}. candidateId 를 바꾸지 않고 모든 항목에 답한다.\n금지: 결과 파일 외의 파일 생성·수정, 다른 명령 실행, 문항 수정·재작성. 끝나면 'done <항목 수>' 한 줄만 답한다.\n\n## 문항\n### lit40-hard-02-001 — skill inferences · 유형 tone_or_mood\n[지문]\nMangoes, mostly, though the orchard outside Surabaya had long ago given up deciding. Arisa counted eleven trees still standing and two that had lain down sometime before the rains. Thuy said the fallen ones were resting. Arisa said they were firewood with good manners. They walked the rows the way they had as girls, kicking husks, naming the trees after teachers they had disliked. At the gate Arisa took a parcel from her bag: the brass bell Thuy had mailed to her new flat in Jakarta, still in its paper, the knot untouched. Thuy looked at the knot, not at the bell. She did not ask why. Arisa tied the parcel to the lowest branch of the eleventh tree, where the wind could reach it, and stepped back. They waited. When it rang once, faintly, Thuy reached up and tightened the knot so it would hold through the season.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Teasing and tender toward a bond that has outlasted distance\nB) Teasing and carefree toward an orchard left to fall apart\nC) Teasing and guarded toward a gift that has caused offense\nD) Teasing and tender toward every place from their girlhood\n### lit40-hard-02-002 — skill inferences · 유형 tone_or_mood\n[지문]\nThree rules for the salt pans, Aoife had told the squad on the first morning: hats on, water every hour, no running where the crust is thin. Lanying had broken the third rule once, two years ago today, and had not played a full match since. Now she sat on the cooler with her knee strapped, timing the others' sprints with a stopwatch that ran four seconds slow. Aoife did not correct it. She read the numbers aloud as given and wrote them on her clipboard in neat columns. At noon the team left for lunch in the van. Aoife stayed. She walked out to the thin place, where the white crust had split into plates, and stood there with her hands in her pockets. Lanying came after a while, limping, and stood beside her. Neither of them mentioned the date. Aoife handed her the clipboard and the pen, and Lanying wrote one more line at the bottom of the column, below the others, in her own hand.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Brisk and businesslike toward an ordinary day of training\nB) Brisk and quietly solemn toward a loss both women still carry\nC) Brisk and quietly relieved toward a loss now safely behind them\nD) Brisk and quietly solemn toward the history of the whole squad\n### lit40-hard-02-003 — skill inferences · 유형 tone_or_mood\n[지문]\nChalk dust still lives in the grooves of the piano lid in Room 4, and I traced it with one finger while Thandiwe tuned the violin I had left behind twenty years ago. She remembered the winter concert one way: I had played the solo, she said, and stumbled, and kept going. I remembered it another way. I had not played at all; I had stood in the wings while a boy from the upper class played it in my place. We went over the details like clerks. The program, the coat rack, the radiator that knocked. She was certain about the radiator. So was I. Then she took a folder from the cabinet, the old programs, and found that winter's sheet. She looked at it for longer than reading takes. She closed the folder, slid it back behind the others, and asked me, Hala, to play the solo now, while the room was empty.\n\n[질문] Which choice best describes the overall tone of the text?\nA) Methodical and detached toward a dispute over plain facts\nB) Methodical and quietly embarrassed toward a mistaken memory\nC) Methodical and quietly gentle toward an old disappointment\nD) Methodical and quietly gentle toward all of her former pupils\n### lit40-hard-02-004 — skill inferences · 유형 relationship_between_characters\n[지문]\nBy six the boarding-house kitchen in Manila smelled of garlic rice, and Tyrese was already at the long table with the ledger open. 'Maestro,' he said when Ruoxi came down, and stood, as he did at rehearsals. Ruoxi waved him back into his chair. The house had been her mother's; the orchestra paid Tyrese a stipend that rarely reached the end of a month, and his rent here was, on paper, three months overdue. Ruoxi poured two cups of coffee and set the sugared one in front of him. He turned the ledger toward her. A column of small payments ran down the margin in his hand, each dated, each initialed: the plumber in January, the gas man, the property tax in March. Ruoxi read them twice. Then she took her own pen, struck through the line that said his rent was owing, and pushed the ledger back across the table. Tyrese closed it and went to wash the pans.\n\n[질문] Based on the text, which choice best describes the relationship between Ruoxi and Tyrese?\nA) A junior player who defers to his conductor out of professional respect\nB) A tenant who has fallen behind and depends on his landlord's patience\nC) A landlord who forgives a debt to reward a tenant's tidy bookkeeping\nD) A young musician who has quietly covered his mentor's expenses himself\n### lit40-hard-02-005 — skill inferences · 유형 relationship_between_characters\n[지문]\nI filled out the customs form in my grandfather's language while he watched, and Burak corrected my letters with the end of his pencil, tapping twice for every mistake. 'Again, Noor.' The post office at the edge of the village outside Cairo had one window and a clerk who knew him. Burak called him Effendi; the clerk called him Uncle. The parcel was for my mother in Izmir: his winter coat, two jars of honey, a photograph of the house. On the form there was a line for the sender's return address. I wrote ours. He took the pencil, crossed it out, and wrote the clerk's address instead, slowly, so I could copy the shapes later. Outside he gave me the receipt and the pencil both. That evening my mother called to ask when we were coming. He handed me the phone and went out to water the beans, and I answered in his language, carefully, the way he had taught me, that I would stay through the summer.\n\n[질문] Based on the text, which choice best describes the relationship between Noor and Burak?\nA) A granddaughter who chooses to remain with a grandfather readying her departure\nB) A strict tutor and a pupil whose lessons follow the rules of a classroom\nC) A grandfather who quietly relies on his granddaughter to handle his errands\nD) Two travelers who are working together to send their belongings back home\n### lit40-hard-02-006 — skill inferences · 유형 relationship_between_characters\n[지문]\nOn Thursdays, after the courts closed, I carried Amelia's proofs down to the press room on Ogarna Street in Gdansk. She was retired by then and wrote small pamphlets on old cases. She insisted that I, Dmitri, address her as Judge, and she addressed me as Clerk, never by name. The pressman set her type; I read it back to her aloud. One week the pamphlet concerned a theft from the harbor office in a year I knew well, because my father had worked there. The draft named no one. Amelia listened to my reading without interrupting, as she always did, and at the paragraph describing the missing ledger she asked me to stop. She took the proof, removed one line with a ruler and a blade, and paid the pressman for a second setting from her own purse. The line had given the shift on which the ledger vanished. The following Thursday she called me Clerk, as before.\n\n[질문] Based on the text, which choice best describes the relationship between Amelia and Dmitri?\nA) A retired judge who keeps a strict and formal distance from her assistant\nB) A retired judge who quietly shields her assistant's family at her own cost\nC) A young clerk who quietly guards his employer's reputation by editing her\nD) A retired judge who grows wary of her assistant once his father comes up\n### lit40-hard-02-007 — skill inferences · 유형 symbolism\n[지문]\nFour pans hung above the galley stove, and Joaquim's mother had ruled on each before Beatriz came aboard: the big one for beans, the small one for eggs, the copper one for show, and the black iron one for her alone. Beatriz learned the order in the first week. She scrubbed the iron pan when told, oiled it, and hung it back on its own hook at the far end, handle turned outward the way the older woman liked. In July the river ran high, and the boat stayed docked at Porto Alegre for a month while Joaquim worked the cargo cranes. His mother took to sitting on deck with her mending. One evening Beatriz, alone in the galley, cooked rice in the iron pan for the first time. She did not hide it. The next morning she found the pan washed and oiled already, hanging not on its old hook but on the one beside the stove, handle turned toward the spot where Beatriz stood to cook.\n\n[질문] In the text, the black iron pan most likely represents which of the following?\nA) The heavy daily chores that a cook must perform aboard a river boat\nB) The strict rules by which the older woman keeps the bride at a distance\nC) The place in the family that the older woman is now ready to open up\nD) The strained bond between the women that the bride repairs by cooking\n### lit40-hard-02-008 — skill inferences · 유형 symbolism\n[지문]\nYears later Zaynab could still describe the thing Consuelo gave her that winter: a tin whistle painted blue, the kind sold to tourists on the quay. Consuelo sold fish by day and swept the night pharmacy in Vigo where Zaynab's mother worked the late counter, and she had seen Zaynab practicing scales on a school recorder behind the till. The whistle was in the wrong key for every song Zaynab knew. She played it anyway, each night at ten, when Consuelo came in with her broom, and Consuelo leaned on the handle and nodded along until the tune was done. In March the old woman stopped coming; a nephew took over the broom. Zaynab kept the whistle in the drawer with the spare receipts. On the last night her mother worked there, Zaynab took it out, wiped it on her sleeve, and left it standing upright in the cup of pens beside the register, where the next clerk would find it.\n\n[질문] In the text, the blue tin whistle most likely represents which of the following?\nA) A cheap instrument that Zaynab uses to practice her musical scales\nB) A mistaken gift that Zaynab endures to avoid hurting the old woman\nC) A friendship that fades once the old woman stops visiting the shop\nD) A nightly kindness that Zaynab chooses to pass along to a stranger\n### lit40-hard-02-009 — skill inferences · 유형 symbolism\n[지문]\nMy father kept time by the lamp. At the Colombo station Shamsuddin wound the clockwork that turned the lens every four hours, and he wound it with a brass key he had borrowed from the keeper before him and, as far as anyone knew, never returned. I was eleven when I asked why he did not buy his own. He said this one fit. At sixteen I refused to learn the winding at all; I wanted engines, not lamps, and I told him so loudly. He wound the clock alone for three more years. When the station was automated, the men from the port authority asked for the key. He gave them a different one, from the drawer, which also fit. The morning I left for the engineering college in Kandy, he pressed the brass key into my palm and closed my fingers over it. I have it still, on a nail by my own door, and I, Hollis, wind nothing with it.\n\n[질문] In the text, the brass key most likely represents which of the following?\nA) A duty that is held in trust and handed down rather than kept\nB) A tool that is needed to wind the clock that turns the lens\nC) A debt that the father owes the old keeper and will not settle\nD) A quarrel between father and son that ends with a final gift\n### lit40-hard-02-015 — skill words_in_context · 유형 word_in_context\n[지문]\nYears ago Sigrid and Anneke had sung the same duet every night for a season, and since then they had not spoken. Now both worked the small vineyard outside Rotterdam at harvest, and Sigrid kept to the far rows. Each morning she left her full crates at the end of Anneke's row, where the cart stopped, then walked off before Anneke reached them. On the last day of picking, rain came early, and the two women ended up under the same shed. Anneke hummed the opening bars of the duet, softly, once. Sigrid's reply was ______. She sang the second line under her breath, and when Anneke turned toward her, she was looking out at the vines again, rubbing grape stain from her thumb.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) openly welcoming\nB) politely reserved\nC) tunefully nostalgic\nD) tentatively receptive\n### lit40-hard-02-016 — skill words_in_context · 유형 word_in_context\n[지문]\nSoren paid on time. For eleven years he had rented the room above Sunja's net shed at the Jeju harbor, and for eleven years he had paid with a handwritten slip listing every won, down to the coins. When the winch slipped in October and crushed a crate of her abalone, he was the one working it. The harbor office wanted a written account. Sunja offered to write it herself and say the cable had been old. Soren thanked her and took the form home. What he returned the next morning was ______. He had listed the cable's age and the weight of the crate, and, on a separate line in his small square hand, that he had looked away to light a cigarette.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) scrupulously candid\nB) respectfully deferential\nC) cautiously accurate\nD) neatly businesslike\n### lit40-hard-02-017 — skill words_in_context · 유형 word_in_context\n[지문]\nWe meet on the promenade at four, Ofelia and I,\nthe board on the bench between us, the gulls on the rail.\nThirty years she has opened with the same pawn.\nThirty years I have answered it badly on purpose\nso she can say, as she likes to say, Bartolo, you learn nothing.\n\nThis spring her hand shakes when she lifts the queen.\nI do not look. I study the harbor, the cranes, a red ship.\nHer move, when it comes, is ______,\nand I answer as if it were the old one,\nthe same bad answer, the same small loss.\nShe says my line. I nod. The tide goes out\nthe way it has gone out every afternoon in Valparaiso,\nand I set the pieces back for tomorrow.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) suddenly reckless\nB) noticeably altered\nC) carefully rehearsed\nD) slowly deliberate\n### lit40-hard-02-018 — skill words_in_context · 유형 word_in_context\n[지문]\nOn Sundays Nicolas sold walnut sweets from a folding table outside the cemetery gate in Tbilisi, and on Sundays I, Vesna, bought two and asked for the recipe. He was a retired sailor and gave answers like weather reports: some sugar, the right walnuts, enough time. I wrote down whatever he said. The list never matched the one from the week before. Last winter he was ill, and his table stood empty for a month. When he came back, he pressed a paper bag into my hands that held no sweets, only walnuts, a jar of grape must, and a length of string. His instruction was ______. He stood beside me at my own stove that evening and guided my hands, and did not leave until the first strand had set.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) precisely written\nB) vaguely poetic\nC) wordlessly practical\nD) sweetly nostalgic\n### lit40-hard-02-019 — skill words_in_context · 유형 word_in_context\n[지문]\nWhen the snow closed the road above Naples, my mother, Esperanza, and I had three days in the cabin with her mother, Assunta, and the question we had driven up to ask. I was leaving for college in a week. My mother had brought brochures for a residence in the city; she left them on the table, in the bread basket, by the stove, and each time Assunta moved them, unread, to the windowsill. On the second night the power failed. Assunta lit the lamps herself and made soup in the dark without searching for anything. My mother watched her hands. Her answer, the next morning, was ______. She gathered the brochures from the sill, folded them into her coat pocket, and asked Assunta to show me how to bank the stove before we left.\n\n[질문] Which choice completes the text with the most logical and precise word or phrase?\nA) firmly insistent\nB) openly defeated\nC) warmly nostalgic\nD) quietly relenting\n### lit40-hard-02-020 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nTwo iced coffees, condensed milk at the bottom, a paper straw already going soft: Arman ordered for both of them without asking, as he had every morning that month. The cafe at the Chiang Mai station faced platform two, and Kiet sat facing it too, his bag between his feet, the letter from the boarding school in Bangkok folded into quarters in his shirt pocket. Arman talked about the timetable. The 8:30 was usually late; the 9:10 had a better carriage; the seats on the left got the morning sun until Lampang. He described the vendors who would come through with sticky rice, and which ones to avoid. He described the toilets. Kiet said yes, thank you, he knew. Arman drank his coffee. When the 8:30 was announced, on time, he stood, picked up Kiet's bag before Kiet could reach it, carried it to the carriage door, handed it up, and stayed on the platform with his hands in his pockets until the train had passed the signal box.\n\n[질문] Which choice best describes the shift in tone in the text?\nA) From busy practicality to formal courtesy, as Arman keeps up appearances\nB) From busy practicality to quiet withdrawal, as Arman regrets talking too much\nC) From busy practicality to quiet resentment, as Arman resists Kiet's departure\nD) From busy practicality to quiet support, as Arman accepts Kiet's choice to go\n### lit40-hard-02-022 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nTehran in late May, and the yard hums\nthe way our mother's kettle hummed before it boiled.\nPouya lifts each frame toward the light,\ncounts the capped cells aloud, names the queen\nthe way she named her hens, after aunts.\nI read him her letters from the cedar box:\nthe price of sugar the winter I was born,\na neighbor's wedding, the plum tree she swore\nshe would graft and did, the next spring,\nwearing her blue scarf against the wind.\nThen the page about the shop.\nI read the date.\nI read the weather.\nPouya sets the frame back gently.\nHe asks for the next letter, please,\nand thanks me when I give it,\nand fills the smoker with dry pine needles\nuntil the yard goes grey and quiet.\nLeila, he says, read the plum tree again.\nI keep my thumb on the third line\nof the page about the shop, where her hand\nleans the way it leaned when she wrote out sums.\n\n[질문] Which choice best describes the shift in tone in the text and its significance?\nA) It narrows from easy description to polite requests, suggesting Pouya wishes to show his sister more courtesy than before.\nB) It narrows from fond, detailed memory to guarded brevity, suggesting both siblings are steering around a matter the letter raises.\nC) It narrows from fond, detailed memory to guarded brevity, suggesting the speaker has grown tired of reading aloud to Pouya.\nD) It narrows from fond, detailed memory to guarded brevity, suggesting the siblings have begun to quarrel over their mother's past.\n### lit40-hard-02-023 — skill text_structure_purpose · 유형 tone_shift\n[지문]\n“Hand me the blue pins, if you would,” Lakshmi said, and I did, and for an hour we worked the line on the roof of our mother's old boardinghouse in Albuquerque as if no years stood between us. She showed me how to shake a sheet so the wind takes the creases, how to hang shirts by the hem so the shoulders do not pucker, how the adobe parapet holds the morning heat like a palm. She had brought ironed handkerchiefs for me, a dozen, each with my initial stitched in the corner. I thanked her. She asked whether the deed to the house was still kept in the hall desk. I said that it was. We hung the pillowcases. We hung the towels. I thanked her again for the handkerchiefs. That evening I took the deed from the hall desk and carried it to my room, and I folded one of her handkerchiefs around it before I set it beneath my pillow.\n\n[질문] Which choice best describes the shift in tone in the text and its significance?\nA) It moves from practical lessons to repeated thanks, suggesting the narrator has grown more grateful for her sister's care.\nB) It moves from easy fellowship to guarded politeness, suggesting the narrator regrets having said so little about the house.\nC) It moves from easy fellowship to guarded politeness, suggesting the narrator suspects the gift served to ease a request.\nD) It moves from easy fellowship to guarded politeness, suggesting the narrator has decided to cut off contact with Lakshmi.\n### lit40-hard-02-024 — skill text_structure_purpose · 유형 tone_shift\n[지문]\nWhat does one say to a brother who has been gone three years? At the depot in Dakar I said nothing useful. I asked Kofi about the ship, and he told me everything: the salt crust on the rails, the cook who sang in Wolof and burned the rice, the porpoises off the cape that the men counted like coins. He laughed often. He asked after our mother, the goats, the mango tree by the well. Then I mentioned that our little brother Chinedu had practiced a salute for him all week. Kofi said that was kind. He said he would like to see it. He picked up his kit bag. On the bus he sat by the window and asked about the price of millet. When we reached the house and Chinedu ran out, standing very straight with his hand at his brow, Kofi knelt, folded the boy's raised hand down into his own, and held it there.\n\n[질문] Which choice best describes the shift in tone in the text and its significance?\nA) It changes from casual chatter to formal politeness, suggesting Kofi has resumed the manners his family expects at home.\nB) It changes from lively storytelling to measured courtesy, suggesting Kofi is ashamed of having talked so long about himself.\nC) It changes from lively storytelling to measured courtesy, suggesting Kofi is angry that Chinedu was taught to salute him.\nD) It changes from lively storytelling to measured courtesy, suggesting Kofi is uneasy about being honored as a soldier.\n### lit40-hard-02-025 — skill text_structure_purpose · 유형 text_structure\n[지문]\nArmand had built kites in the yard behind the old silk quarter of Lyon for forty years, and each morning he tested the frames before Okja arrived, bending every spar against his knee and listening for the small dry crack that meant bad wood. Lately he had begun leaving the spars in a heap for her to test alone. Okja took this as impatience. She tested them quickly, tossed the cracked ones aside, and asked for harder work: the great silk dragon for the midsummer festival, the commission he had promised the mayor. Armand said she might begin it. He watched her cut the first panel. That afternoon a carter came for the old drying racks, and Armand counted coins into the man's palm, and the man asked whether the yard would open again in spring. Armand told him to mind the gate. Okja kept cutting silk. When the light failed, he lit the lamp and set it beside her, and went inside without taking his own stool.\n\n[질문] Which choice best describes the overall structure of the text?\nA) It begins with a habit the apprentice misreads, then shows a sale that recasts that habit, and ends with the question left unspoken.\nB) It begins with the elder's morning routine, then describes the apprentice's eagerness, and ends with her request for harder work.\nC) It begins with a habit that reveals the elder's plans, then shows the apprentice taking it as impatience, and ends with the question unspoken.\nD) It begins with a habit the apprentice takes as impatience, then shows a sale that recasts it, and ends with the yard passing to her.\n### lit40-hard-02-026 — skill text_structure_purpose · 유형 text_structure\n[지문]\nNoa hated weddings. In the hall in Haifa the band played too loud and the aunts pressed honey cake on anyone who sat down, and Yoav, her stepfather, moved through the crowd in a suit slightly too big in the shoulders. __He had worn the same wristwatch every day since she was nine, an old steel one that ran four minutes slow and that he never reset.__ Noa watched him dance with the bride's grandmother, then with a cousin, then with no one, swaying alone near the cake table with his eyes closed. She ate two pieces of honey cake. She checked her phone. At midnight, when the room counted down to the cutting of the cake, Yoav's voice came a little behind everyone else's, as if he were counting by another clock. Afterward he found her by the coat racks, unbuckled the watch, and fastened it on her wrist. Her father's initials were scratched into the back.\n\n[질문] Which choice best describes the function of the underlined sentence in the text as a whole?\nA) It presents a quirk that mainly establishes Yoav as careless about small practical matters.\nB) It presents a quirk that later marks the watch as a keepsake of Noa's father.\nC) It presents a quirk that explains why Yoav sways alone near the cake table at the wedding.\nD) It presents a quirk that illustrates how weddings stir up old habits among the guests."
+}

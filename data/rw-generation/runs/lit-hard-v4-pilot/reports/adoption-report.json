@@ -4,22 +4,43 @@
  "passedGenGates": 29,
  "awaitingReview": 0,
  "review": {
-  "adopted": 0,
-  "rejected": 0,
-  "pending": 29,
-  "rewriteEligible": 0
+  "adopted": 12,
+  "rejected": 17,
+  "pending": 0,
+  "rewriteEligible": 9
  },
- "adopted": 0,
+ "adopted": 12,
  "adoptedByDifficulty": {
   "easy": 0,
   "medium": 0,
-  "hard": 0
+  "hard": 12
  },
  "rejectedByReason": {
+  "review:difficulty_too_easy": 12,
   "gen:distractor": 3,
-  "gen:render": 1
+  "review:fable_multi_defensible": 3,
+  "review:audit_answer_incorrect": 2,
+  "review:distractors_not_plausible": 2,
+  "review:explanation_factual_error": 2,
+  "review:explanation_inconsistent": 2,
+  "review:multi_answer_risk": 2,
+  "review:second_multi_defensible": 2,
+  "gen:render": 1,
+  "review:fable_answer_mismatch": 1,
+  "review:options_length_imbalance": 1,
+  "review:second_answer_mismatch": 1
  },
- "rewriteEligible": [],
+ "rewriteEligible": [
+  "hardv4-hard-01-012",
+  "hardv4-hard-01-014",
+  "hardv4-hard-01-019",
+  "hardv4-hard-01-020",
+  "hardv4-hard-01-022",
+  "hardv4-hard-01-023",
+  "hardv4-hard-01-024",
+  "hardv4-hard-01-028",
+  "hardv4-hard-01-030"
+ ],
  "cost": {
   "session": {
    "tasks": 3,
