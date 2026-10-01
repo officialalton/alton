@@ -8,9 +8,9 @@ import {
   type StrokeSegment,
 } from "@/lib/problem-notes-actions";
 
-const CANVAS_HEIGHT = 220;
+export const CANVAS_HEIGHT = 220;
 
-function drawAll(ctx: CanvasRenderingContext2D, strokes: StrokeSegment[], width: number) {
+export function drawAll(ctx: CanvasRenderingContext2D, strokes: StrokeSegment[], width: number) {
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   for (const s of strokes) {
     const scale = s.w ? width / s.w : 1;

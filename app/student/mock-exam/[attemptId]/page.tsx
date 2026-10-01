@@ -40,7 +40,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-6">
+    <main className={`mx-auto px-4 py-6 ${isGraded ? "max-w-6xl" : "max-w-4xl"}`}>
       {isGraded && (
         <Link
           href="/student?tab=mock-exam"
