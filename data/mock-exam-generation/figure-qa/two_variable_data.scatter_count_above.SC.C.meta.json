@@ -1,0 +1,40 @@
+{
+ "itemId": "two_variable_data.scatter_count_above.SC.C",
+ "generatedAt": "2026-10-01T07:21:50.640Z",
+ "codeHash": "370605ba4b57494f815ff1831927cb9b444c51483e3595de8516a873900c5c1e",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-choice.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.scatter_count_above.SC.C.png",
+   "mobileFile": "two_variable_data.scatter_count_above.SC.C.m375.png",
+   "archetypeId": "tvd.scatter_count_above.SC.C.constraint_select",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "Each scatterplot shows the number of seconds since a ball was dropped and the ball's speed for 10 data points, along with a line of best fit.",
+   "question": "Which scatterplot has exactly 3 of its data points above its line of best fit?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 각 그래프에서 추세선의 위치를 읽는다. (2) 각 그래프의 점 10개가 추세선보다 위인지 아래인지 판정한다. (3) 그래프마다 위쪽 점 수를 센다. (4) 위쪽 점이 정확히 3 개인 그래프를 찾는다. (5) 위쪽과 아래쪽을 바꿔 센 그래프(7 개)나 한 개 차이인 그래프와 구별한다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

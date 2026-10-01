@@ -1,0 +1,39 @@
+{
+ "itemId": "two_variable_data.scatter_equation.SC.P",
+ "generatedAt": "2026-10-01T07:21:50.617Z",
+ "codeHash": "bb9b1c4225e4a829db7ed5e04d3f86945a9cd81e391f7d8783fd76c496852171",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-lines.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.scatter_equation.SC.P.png",
+   "mobileFile": "two_variable_data.scatter_equation.SC.P.m375.png",
+   "archetypeId": "tvd.scatter_equation.SC.P.inverse",
+   "seed": 11,
+   "signature": "data:scatter",
+   "stimulus": "A scatterplot of 9 observations relates the number of pages in a book to the book's price; a line of best fit is also drawn.",
+   "question": "According to the line of best fit shown, for what value of pages (in pages) is the predicted price (in dollars) equal to 11.5?",
+   "options": [
+    "-8",
+    "10",
+    "-24",
+    "9"
+   ],
+   "correctIndex": 3,
+   "answer": "9",
+   "explanation": "(1) 그림에서 직선 위의 두 격자점 (0, 25) 과 (10, 10) 를 읽는다. (2) 기울기 m = (10 - 25) ÷ (10 - 0) = -1.5 이다. (3) 식은 y = -1.5x + 25 이다. (4) y = 11.5 을 대입하면 11.5 = -1.5x + 25 이다. (5) x = (11.5 - 25) ÷ -1.5 = 9 이다. 따라서 정답은 9이다.",
+   "structuralIssues": []
+  }
+ ]
+}
