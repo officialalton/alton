@@ -10,7 +10,15 @@ ROOT="$HOME/Developer/ALTON-data/rw-corpus"
 WORK="$ROOT/_lists"
 
 echo "== 사전 점검"
-[ -n "${CORPUS_CONTACT:-}" ] || { [ "$MODE" = "--execute" ] && { echo "CORPUS_CONTACT 환경변수가 필요합니다(예: CORPUS_CONTACT=you@example.com). User-Agent 에 들어갑니다."; exit 1; } || echo "(경고) CORPUS_CONTACT 미설정 — --execute 때는 필수"; }
+# 네트워크 호출 전에 연락처 검증(드라이런 포함 — MedlinePlus 목록 단계가 HEAD 요청을 보낸다)
+CONTACT_RE='^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+CC="${CORPUS_CONTACT:-}"
+if [ -z "$CC" ]; then echo "CORPUS_CONTACT 가 비어 있습니다. 실제 이메일 주소(영문·숫자)로 CORPUS_CONTACT 를 지정하세요. 예) CORPUS_CONTACT=name@gmail.com"; exit 1; fi
+if ! [[ "$CC" =~ $CONTACT_RE ]] || [[ "$CC" =~ [Ee][Xx][Aa][Mm][Pp][Ll][Ee]\.(com|org|net) ]] || [[ "$CC" == *본인* ]] || [[ "$CC" == *[Yy][Oo][Uu][Rr]* ]]; then
+  echo "CORPUS_CONTACT 가 실제 이메일 형식이 아니거나 예시 값입니다(값: $CC). 한글·example.com·'your' 같은 예시는 쓸 수 없습니다. 실제 이메일 주소(영문·숫자)로 CORPUS_CONTACT 를 지정하세요."; exit 1
+fi
+echo "연락처: $CC"
+if [ "$MODE" = "--dry" ]; then echo "(안내) dry-run 이라도 MedlinePlus 최신 파일 확인(HEAD 요청 몇 건)과 필요 시 목록 단계에서 네트워크를 씁니다. 원문 본문은 받지 않습니다."; fi
 command -v rsync >/dev/null || { echo "rsync 가 없습니다"; exit 1; }
 command -v python3 >/dev/null || { echo "python3 가 없습니다"; exit 1; }
 case "$ROOT" in *"Mobile Documents"*|*CloudDocs*|*iCloud*) echo "저장 경로가 iCloud 입니다"; exit 1;; esac

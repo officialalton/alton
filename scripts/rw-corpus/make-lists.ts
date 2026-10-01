@@ -1,3 +1,4 @@
+import { userAgent } from "./contact";
 // 목록 생성 CLI. 사용: npx tsx scripts/rw-corpus/make-lists.ts --source gutenberg|medlineplus|plos --out list.jsonl [--date YYYY-MM-DD]
 //  gutenberg : ~/Developer/ALTON-data/rw-corpus/catalog/gutenberg_selected.json (gutenberg_select.py 출력) 필요.
 //  medlineplus: --date 미지정이면 최근 7일을 공식 서버에 HEAD 로 확인해 존재하는 가장 최근 파일을 쓴다(네트워크 HEAD 1~7회).
@@ -11,7 +12,7 @@ const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? p
 async function latestMedlineDate(): Promise<string> {
   for (let back = 0; back < 8; back++) {
     const d = new Date(Date.now() - back * 86400000).toISOString().slice(0, 10);
-    const r = await fetch(`https://medlineplus.gov/xml/mplus_topics_${d}.xml`, { method: "HEAD", headers: { "User-Agent": `ALTON-corpus-collector/0.1 (${process.env.CORPUS_CONTACT ?? "contact unset"})` } });
+    const r = await fetch(`https://medlineplus.gov/xml/mplus_topics_${d}.xml`, { method: "HEAD", headers: { "User-Agent": userAgent(process.env.CORPUS_CONTACT ?? "") } });
     if (r.ok) return d;
     await new Promise((x) => setTimeout(x, 1000));
   }

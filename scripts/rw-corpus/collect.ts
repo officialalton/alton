@@ -1,3 +1,4 @@
+import { validateContact } from "./contact";
 // 원문 코퍼스 수집기 — **오너가 터미널에서 직접 실행**(에이전트 실행 금지). 기본 dry-run, `--execute` 로 실제 수집.
 //  - 매니페스트에서 approved=true 인 원천의 공식 경로(http API/파일, 공식 rsync 미러)만. 링크 따라가기·스크래핑 없음.
 //  - 안전: User-Agent 에 연락처(CORPUS_CONTACT), 원천별 요청 간격(delayMs), 원천별·전체 용량 상한(maxTotalMB·globalMaxMB), 저장 경로가 저장소·iCloud 밖인지 검사,
@@ -79,9 +80,11 @@ async function main() {
   console.log(JSON.stringify({ mode: execute ? "execute" : "dry-run", storageRoot: root, freeDiskGB: +free.toFixed(1), minFreeDiskGB: minFree, rsyncAvailable: hasRsync, contactSet: Boolean(contact), planned: plan.allowed.length, estimatedMB: plan.estMB, perSource: plan.perSource, skippedExisting: plan.skipped, rejectedCount: plan.rejected.length, rejected: plan.rejected.slice(0, 15) }, null, 1));
   if (!execute) return;
   if (free < minFree) throw new Error(`디스크 여유 ${free.toFixed(1)}GB < ${minFree}GB — 중단`);
-  if (!contact) throw new Error("CORPUS_CONTACT(연락처, 예: 이메일) 환경변수를 설정하세요 — User-Agent 에 들어갑니다");
+  const contactErr = validateContact(contact);
+  if (contactErr) throw new Error(contactErr);
   if (!hasRsync) throw new Error("rsync 가 없습니다");
   const ua = manifest.userAgent.replace("contact via CORPUS_CONTACT env", `contact ${contact}`);
+  if (/[^\x20-\x7e]/.test(ua)) throw new Error("User-Agent 에 비ASCII 문자가 있습니다 — CORPUS_CONTACT 를 영문 이메일로 지정하세요");
   const srcById = new Map(manifest.sources.map((s) => [s.id, s]));
   const fail: string[] = [];
   let done = 0, lastAt = 0;

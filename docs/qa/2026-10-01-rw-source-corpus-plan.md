@@ -2,14 +2,16 @@
 
 ## 실행 방법 (오너가 터미널에서 직접 — 에이전트는 이 명령을 실행하지 않는다)
 범위: 원천 3개만(매니페스트 `approved=true`: **Project Gutenberg**, **MedlinePlus 공식 XML**, **PLOS**), 전체 상한 **150MB**(Gutenberg 105·MedlinePlus 35·PLOS 15), 저장 위치 `~/Developer/ALTON-data/rw-corpus/`(저장소·iCloud 밖, 원문 본문은 커밋하지 않음). 나머지 원천은 `approved=false` 유지. 모든 요청은 공식 경로만(Gutenberg 공식 rsync 미러·공식 카탈로그, MedlinePlus 공식 XML, PLOS 공식 Search API — allofplos.zip 5GB 덤프는 쓰지 않음), 원천별 요청 간격(Gutenberg 2.5초·PLOS 7초·MedlinePlus 1초), User-Agent 에 연락처 명시, 디스크 여유 20GB 미만이면 중단.
+**경고: `<영문이메일주소>` 자리에는 반드시 실제 영문·숫자 이메일 주소(예: name@gmail.com)를 넣으세요. 한글·example.com·"your" 같은 예시 문구를 그대로 넣으면 네트워크 호출 전에 종료됩니다(HTTP 헤더는 영문만 허용). 따옴표와 꺾쇠(<>)도 지우고 주소로 바꾸세요.**
+
 1. **dry-run(받을 목록·예상 용량·거부 사유·디스크 여유만 확인, 원문은 받지 않음)** — 저장소 루트에서:
 ```
-CORPUS_CONTACT="본인이메일@example.com" scripts/rw-corpus/run.sh
+CORPUS_CONTACT="<영문이메일주소>" scripts/rw-corpus/run.sh
 ```
    (목록 생성 중 MedlinePlus 최신 파일 확인용 HEAD 요청 몇 건만 나가고, Gutenberg 는 이미 받아 둔 카탈로그로 로컬 선별만 합니다. 카탈로그가 없으면 dry-run 은 받지 않고 안내만 합니다.)
 2. **실제 수집(승인된 3개 원천, 재개 가능·재실행 안전)**:
 ```
-CORPUS_CONTACT="본인이메일@example.com" scripts/rw-corpus/run.sh --execute
+CORPUS_CONTACT="<영문이메일주소>" scripts/rw-corpus/run.sh --execute
 ```
    중간에 끊겨도 같은 명령을 다시 실행하면 이미 받은 항목(`.meta.json` 있는 것)은 건너뜁니다.
 3. **끝났을 때 확인 방법**:

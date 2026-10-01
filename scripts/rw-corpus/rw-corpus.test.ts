@@ -129,3 +129,20 @@ describe("후처리(합성 픽스처)", () => {
   });
   void mkdirSync; void readFileSync;
 });
+
+import { validateContact, userAgent } from "./contact";
+describe("CORPUS_CONTACT 검증", () => {
+  it("한글·빈 값·예시 값은 거부(네트워크 전)", () => {
+    expect(validateContact("본인이메일@example.com")).toMatch(/비ASCII/);
+    expect(validateContact("")).toMatch(/비어/);
+    expect(validateContact(undefined)).toMatch(/비어/);
+    expect(validateContact("me@example.com")).toMatch(/예시/);
+    expect(validateContact("your@gmail.com")).toMatch(/예시/);
+    expect(validateContact("not-an-email")).toMatch(/형식/);
+    expect(() => userAgent("본인@x.com")).toThrow();
+  });
+  it("정상 이메일은 통과하고 UA 가 ASCII", () => {
+    expect(validateContact("jiman@bulqot.co")).toBeNull();
+    expect(/^[\x20-\x7e]+$/.test(userAgent("jiman@bulqot.co"))).toBe(true);
+  });
+});
