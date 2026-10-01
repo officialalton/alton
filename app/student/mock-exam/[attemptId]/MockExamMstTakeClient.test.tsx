@@ -6,6 +6,10 @@ const saveMock = vi.fn();
 const flagMock = vi.fn();
 const savedMock = vi.fn();
 const guessMock = vi.fn();
+const annotLoadMock = vi.fn();
+const annotSaveMock = vi.fn();
+const wbLoadMock = vi.fn();
+const wbSaveMock = vi.fn();
 const startMock = vi.fn();
 const submitMock = vi.fn();
 const loadMock = vi.fn();
@@ -16,6 +20,12 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   toggleMockExamFlagAction: (...a: unknown[]) => flagMock(...a),
   toggleMockExamSavedToPracticeAction: (...a: unknown[]) => savedMock(...a),
   toggleMockExamGuessedAction: (...a: unknown[]) => guessMock(...a),
+  loadMockExamAnnotationsAction: (...a: unknown[]) => annotLoadMock(...a),
+  saveMockExamAnnotationsAction: (...a: unknown[]) => annotSaveMock(...a),
+}));
+vi.mock("@/lib/problem-notes-actions", () => ({
+  loadProblemNoteStrokesAction: (...a: unknown[]) => wbLoadMock(...a),
+  saveProblemNoteStrokesAction: (...a: unknown[]) => wbSaveMock(...a),
 }));
 vi.mock("@/lib/mock-exam/mst-actions", () => ({
   startMstAttemptAction: (a: unknown) => startMock(a),
@@ -57,6 +67,10 @@ function state(over: Partial<MstAttemptState> = {}): MstAttemptState {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  annotLoadMock.mockResolvedValue({ highlights: [], eliminated: [] });
+  annotSaveMock.mockResolvedValue({ ok: true });
+  wbLoadMock.mockResolvedValue([]);
+  wbSaveMock.mockResolvedValue({ ok: true });
   saveMock.mockResolvedValue({ ok: true });
   flagMock.mockResolvedValue({ ok: true });
   submitMock.mockResolvedValue({ ok: true, value: state({ currentModule: "rw_m2", modules: [ { ...mod("rw_m1", 0), locked: true }, mod("rw_m2", 1920, 2)], items: [item("i3", 1, "rw_m2")] }) });
@@ -209,5 +223,52 @@ describe("MockExamMstTakeClient", () => {
     expect(submitMock).toHaveBeenCalledWith("att1", "break");
     expect(refreshMock).toHaveBeenCalled();
     expect(document.body.textContent).not.toMatch(/higher|lower|고난도/i);
+  });
+
+  it("답 소거: 소거 모드에서 선택지를 누르면 줄이 그어지고(답 아님) 저장·복원되며, 줄 그은 선택지는 소거 해제 전엔 답으로 못 고른다", async () => {
+    await renderClient();
+    await act(async () => {});
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-eliminate-toggle"));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole("radio", { name: /B1/ }));
+    });
+    expect(saveMock).not.toHaveBeenCalled();
+    expect(annotSaveMock).toHaveBeenCalledWith("att1", "i1", { highlights: [], eliminated: [1] });
+    expect(screen.getByRole("radio", { name: /B1/ })).toHaveAttribute("data-eliminated", "true");
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-eliminate-toggle"));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole("radio", { name: /B1/ }));
+    });
+    expect(saveMock).not.toHaveBeenCalled();
+    await act(async () => {
+      fireEvent.click(screen.getByRole("radio", { name: /A1/ }));
+    });
+    expect(saveMock).toHaveBeenCalledWith("att1", "i1", "0");
+  });
+
+  it("서버에 저장된 소거·하이라이트를 문항 진입 시 복원한다", async () => {
+    annotLoadMock.mockResolvedValue({ highlights: [{ id: "h1", start: 0, end: 2, text: "Q1", note: "n" }], eliminated: [2] });
+    await renderClient();
+    await act(async () => {});
+    expect(annotLoadMock).toHaveBeenCalledWith("att1", "i1");
+    expect(screen.getByRole("radio", { name: /C1/ })).toHaveAttribute("data-eliminated", "true");
+    expect(screen.getByTestId("annotation-notes")).toHaveTextContent("n");
+  });
+
+  it("화이트보드: 버튼으로 패널을 열면 문항 필기를 불러오고 닫을 수 있다", async () => {
+    await renderClient();
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-whiteboard-toggle"));
+    });
+    expect(screen.getByTestId("mst-whiteboard")).toBeInTheDocument();
+    expect(wbLoadMock).toHaveBeenCalledWith("mock_exam", "att1", "i1");
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Close whiteboard" }));
+    });
+    expect(screen.queryByTestId("mst-whiteboard")).toBeNull();
   });
 });

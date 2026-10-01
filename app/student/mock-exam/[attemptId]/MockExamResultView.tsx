@@ -11,7 +11,9 @@ import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import ProblemNoteSnapshot from "@/app/components/ProblemNoteSnapshot";
-import { toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import { loadMockExamAnnotationsAction, toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import type { MockExamAnnotations } from "@/lib/mock-exam/annotation-anchor";
+import AnnotationLayer from "./AnnotationLayer";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
 import type { MyReportStatus, ReporterRole } from "@/lib/problem-error-reports/labels";
@@ -88,7 +90,25 @@ export function ExplanationPanel({ item }: { item: MockExamAttemptItem }) {
 }
 
 /** 문제(지문·그림·선택지·내 답/정답)만 — 해설·도구 없음. */
-function ItemProblem({ item }: { item: MockExamAttemptItem }) {
+/** 응시 중 남긴 하이라이트·메모·소거를 읽기 전용으로 불러온다(결과 화면은 절대 새로 기록하지 않는다). */
+function useReadOnlyAnnotations(attemptId: string | undefined, setItemId: string): MockExamAnnotations | null {
+  const [loaded, setLoaded] = useState<{ key: string; value: MockExamAnnotations } | null>(null);
+  const key = `${attemptId ?? ""}:${setItemId}`;
+  useEffect(() => {
+    if (!attemptId) return;
+    let alive = true;
+    void loadMockExamAnnotationsAction(attemptId, setItemId).then((value) => {
+      if (alive) setLoaded({ key, value });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [attemptId, setItemId, key]);
+  return loaded?.key === key ? loaded.value : null;
+}
+
+function ItemProblem({ item, attemptId }: { item: MockExamAttemptItem; attemptId?: string }) {
+  const annotations = useReadOnlyAnnotations(attemptId, item.setItemId);
   return (
     <>
       {item.adjusted && (
@@ -96,8 +116,10 @@ function ItemProblem({ item }: { item: MockExamAttemptItem }) {
           This question was scored as correct because an error was found in it.
         </p>
       )}
-      {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
-      {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
+      <AnnotationLayer key={item.setItemId} readOnly highlights={annotations?.highlights ?? []}>
+        {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
+        {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
+      </AnnotationLayer>
       {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}
 
       {item.options && item.options.length > 0 ? (
@@ -113,7 +135,9 @@ function ItemProblem({ item }: { item: MockExamAttemptItem }) {
                 }`}
               >
                 <span className="font-bold">{OPTION_LETTERS[i] ?? i + 1}.</span>
-                <LearningText text={opt} />
+                <span className={annotations?.eliminated.includes(i) ? "line-through opacity-60" : undefined}>
+                  <LearningText text={opt} />
+                </span>
                 {isCorrect && (
                   <span className="ml-auto shrink-0 text-[11px] font-bold text-green">{isMine ? "Your answer · Correct" : "Correct answer"}</span>
                 )}
@@ -242,7 +266,7 @@ export function ItemDetail({
   return (
     <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
       <ItemHeader key={item.setItemId} item={item} attemptId={attemptId} viewerIsOwner={viewerIsOwner} />
-      <ItemProblem item={item} />
+      <ItemProblem item={item} attemptId={attemptId} />
       <div className="mt-3">
         <ExplanationPanel key={item.setItemId} item={item} />
       </div>
@@ -570,7 +594,7 @@ export default function MockExamResultView({
               {selected ? (
                 <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-item-detail">
                   <ItemHeader key={selected.setItemId} item={selected} attemptId={attempt.id} viewerIsOwner={!readOnly} />
-                  <ItemProblem item={selected} />
+                  <ItemProblem item={selected} attemptId={attempt.id} />
                 </div>
               ) : (
                 <div className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[12.5px] text-grey-400">

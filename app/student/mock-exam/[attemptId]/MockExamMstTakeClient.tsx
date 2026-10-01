@@ -13,7 +13,11 @@ import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import MockExamMathTools, { MockExamToolButtons, SprDirections, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
-import { saveMockExamAnswerAction, toggleMockExamFlagAction, toggleMockExamGuessedAction, toggleMockExamSavedToPracticeAction } from "@/lib/mock-exam/attempt-actions";
+import AnnotationLayer from "./AnnotationLayer";
+import MockExamWhiteboard from "./MockExamWhiteboard";
+import { saveMockExamAnswerAction, toggleMockExamFlagAction, toggleMockExamGuessedAction, toggleMockExamSavedToPracticeAction, loadMockExamAnnotationsAction, saveMockExamAnnotationsAction } from "@/lib/mock-exam/attempt-actions";
+import type { MockExamAnnotations } from "@/lib/mock-exam/annotation-anchor";
+import { useHighlightSupported } from "@/lib/use-highlight-supported";
 import { loadMstAttemptStateAction, startMstAttemptAction, submitMstModuleAction, type MstAttemptState } from "@/lib/mock-exam/mst-actions";
 import {
   MST_BLUEPRINT,
@@ -61,6 +65,14 @@ export default function MockExamMstTakeClient({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [mathToolsOpen, setMathToolsOpen] = useState<MathToolsOpen>(null);
+  // 2026-10-02(오너 요청) — Bluebook 식 도구: 하이라이트(+한 줄 메모)·답 소거·풀이용 화이트보드.
+  // 하이라이트·메모·소거는 문항별로 서버에 저장되어 이동·새로고침 뒤에도 복원된다(제출 후 잠김).
+  const highlightSupported = useHighlightSupported();
+  const [highlightMode, setHighlightMode] = useState(false);
+  const [eliminateMode, setEliminateMode] = useState(false);
+  const [whiteboardOpen, setWhiteboardOpen] = useState(false);
+  const [annotations, setAnnotations] = useState<Record<string, MockExamAnnotations>>({});
+  const annotationsLoadedRef = useRef<Set<string>>(new Set());
   const busyRef = useRef(false);
   const sprTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -142,6 +154,28 @@ export default function MockExamMstTakeClient({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cursor]);
+
+  const currentItemId = state.items[cursor]?.setItemId ?? null;
+  useEffect(() => {
+    if (!currentItemId || annotationsLoadedRef.current.has(currentItemId)) return;
+    annotationsLoadedRef.current.add(currentItemId);
+    let alive = true;
+    void loadMockExamAnnotationsAction(state.attemptId, currentItemId).then((a) => {
+      if (alive) setAnnotations((p) => (p[currentItemId] ? p : { ...p, [currentItemId]: a }));
+    });
+    return () => {
+      alive = false;
+    };
+  }, [currentItemId, state.attemptId]);
+
+  async function updateAnnotations(setItemId: string, next: MockExamAnnotations) {
+    setAnnotations((p) => ({ ...p, [setItemId]: next }));
+    const r = await saveMockExamAnnotationsAction(state.attemptId, setItemId, next);
+    if (!r.ok) {
+      setError(r.error);
+      await recoverIfLocked(r.error);
+    }
+  }
 
   async function saveAnswer(setItemId: string, value: string) {
     setResponses((p) => ({ ...p, [setItemId]: value }));
@@ -340,7 +374,7 @@ export default function MockExamMstTakeClient({
           </div>
         </nav>
 
-        <main className="max-w-[880px] min-w-0 flex-1 px-8 py-6">
+        <main className="max-w-[880px] min-w-0 flex-1 px-8 py-6" style={whiteboardOpen ? { marginRight: "min(436px, 40vw)" } : undefined}>
           {item ? (
             <>
               {/* 콜리지보드식 번호 막대: 검은 번호 칸 + 회색 막대. 왼쪽에 오류 신고, 오른쪽 끝에 문제 저장(별). 검토 표시는 아래 Solve Later. */}
@@ -374,24 +408,78 @@ export default function MockExamMstTakeClient({
                   </button>
                 </div>
               </div>
-              {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
-              {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
+              <div className="mb-3 flex flex-wrap items-center gap-1.5" data-testid="mst-tools">
+                {highlightSupported && (
+                  <button
+                    type="button"
+                    onClick={() => setHighlightMode((v) => !v)}
+                    aria-pressed={highlightMode}
+                    title="Highlight text, then click a highlight to add a note"
+                    data-testid="mst-highlight-toggle"
+                    className={`rounded border px-2.5 py-1 text-[11.5px] font-bold ${highlightMode ? "border-ink bg-yellow text-ink" : "border-grey-300 text-grey-600"}`}
+                  >
+                    Highlight
+                  </button>
+                )}
+                {item.format === "mc" && item.options && (
+                  <button
+                    type="button"
+                    onClick={() => setEliminateMode((v) => !v)}
+                    aria-pressed={eliminateMode}
+                    title="Strike out answer choices"
+                    data-testid="mst-eliminate-toggle"
+                    className={`rounded border px-2.5 py-1 text-[11.5px] font-bold ${eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`}
+                  >
+                    Eliminate
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setWhiteboardOpen((v) => !v)}
+                  aria-pressed={whiteboardOpen}
+                  data-testid="mst-whiteboard-toggle"
+                  className={`rounded border px-2.5 py-1 text-[11.5px] font-bold ${whiteboardOpen ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`}
+                >
+                  Whiteboard
+                </button>
+              </div>
+              <AnnotationLayer
+                key={item.setItemId}
+                highlightMode={highlightMode}
+                highlights={annotations[item.setItemId]?.highlights ?? []}
+                onChange={(h) => void updateAnnotations(item.setItemId, { highlights: h, eliminated: annotations[item.setItemId]?.eliminated ?? [] })}
+              >
+                {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
+                {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
+              </AnnotationLayer>
               {item.figure ? <ProblemFigure spec={item.figure} className="mb-4" /> : null}
 
               {item.format === "mc" && item.options ? (
                 <div role="radiogroup" aria-label="선택지" className="flex flex-col gap-2">
                   {item.options.map((opt, idx) => {
                     const chosen = responses[item.setItemId] === String(idx);
+                    const struck = (annotations[item.setItemId]?.eliminated ?? []).includes(idx);
                     return (
                       <button
                         key={idx}
                         type="button"
                         role="radio"
                         aria-checked={chosen}
-                        onClick={() => void saveAnswer(item.setItemId, String(idx))}
+                        data-eliminated={struck ? "true" : undefined}
+                        onClick={() => {
+                          // 소거 모드: 선택지를 눌러도 답이 되지 않고 줄이 그어진다(다시 누르면 해제). 줄 그은 선택지는
+                          // 소거를 풀기 전에는 답으로 고를 수 없다(고정형 응시 화면과 같은 규칙).
+                          const cur = annotations[item.setItemId] ?? { highlights: [], eliminated: [] };
+                          if (eliminateMode) {
+                            const eliminated = struck ? cur.eliminated.filter((n) => n !== idx) : [...cur.eliminated, idx].sort((a, b) => a - b);
+                            void updateAnnotations(item.setItemId, { ...cur, eliminated });
+                          } else if (!struck) {
+                            void saveAnswer(item.setItemId, String(idx));
+                          }
+                        }}
                         className={`flex min-w-0 items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] ${
                           chosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
-                        }`}
+                        } ${struck ? "opacity-50" : ""}`}
                       >
                         <span
                           className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
@@ -400,7 +488,7 @@ export default function MockExamMstTakeClient({
                         >
                           {OPTION_LETTERS[idx] ?? idx + 1}
                         </span>
-                        <span className="min-w-0 break-words">
+                        <span className={`min-w-0 break-words ${struck ? "line-through" : ""}`}>
                           <LearningText text={opt} />
                         </span>
                       </button>
@@ -482,6 +570,8 @@ export default function MockExamMstTakeClient({
           )}
         </main>
       </div>
+
+      {whiteboardOpen && item && <MockExamWhiteboard key={item.setItemId} attemptId={state.attemptId} itemId={item.setItemId} onClose={() => setWhiteboardOpen(false)} />}
 
       {mathTools && (
         <MockExamMathTools

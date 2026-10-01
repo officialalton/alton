@@ -5,7 +5,7 @@ import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam
 import { computeMockExamReport } from "@/lib/mock-exam/report";
 import { estimateScore } from "@/lib/mock-exam/score-estimate";
 
-vi.mock("@/lib/mock-exam/attempt-actions", () => ({ toggleMockExamSavedToPracticeAction: vi.fn() }));
+vi.mock("@/lib/mock-exam/attempt-actions", () => ({ toggleMockExamSavedToPracticeAction: vi.fn(), loadMockExamAnnotationsAction: vi.fn().mockResolvedValue({ highlights: [], eliminated: [] }) }));
 const mine = vi.fn();
 vi.mock("@/lib/problem-error-reports/actions", () => ({
   loadMyProblemErrorReportsAction: (...a: unknown[]) => mine(...a),

@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import MockExamResultView from "./MockExamResultView";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 
-vi.mock("@/lib/mock-exam/attempt-actions", () => ({ toggleMockExamSavedToPracticeAction: vi.fn() }));
+vi.mock("@/lib/mock-exam/attempt-actions", () => ({ toggleMockExamSavedToPracticeAction: vi.fn(), loadMockExamAnnotationsAction: vi.fn().mockResolvedValue({ highlights: [], eliminated: [] }) }));
 vi.mock("@/lib/problem-error-reports/actions", () => ({
   loadMyProblemErrorReportsAction: vi.fn().mockResolvedValue({ ok: true, value: {} }),
   submitProblemErrorReportAction: vi.fn(),

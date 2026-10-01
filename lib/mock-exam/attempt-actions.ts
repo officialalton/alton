@@ -13,6 +13,7 @@
 import { revalidatePath } from "next/cache";
 import { requireUser } from "@/lib/auth";
 import { loadMockExamAttemptDetail, type MockExamAttemptDetail } from "./attempt-data";
+import { parseAnnotations, type MockExamAnnotations } from "./annotation-anchor";
 
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
 
@@ -132,4 +133,25 @@ export async function finalizeMockExamGradingAction(attemptId: string): Promise<
     revalidatePath("/parent");
   }
   return r;
+}
+
+/** 2026-10-02(오너 요청) — 응시 중 하이라이트·한 줄 메모·답 소거 저장(문항당 전체 상태 덮어쓰기). 가드는 toggle_guessed 와 같다. */
+export async function saveMockExamAnnotationsAction(attemptId: string, setItemId: string, state: MockExamAnnotations): Promise<ActionResult> {
+  return callRpc(
+    "save_mock_exam_annotations",
+    { p_attempt_id: attemptId, p_set_item_id: setItemId, p_highlights: state.highlights, p_eliminated: state.eliminated },
+    "Could not save your highlights.",
+  );
+}
+
+/** 본인(응시 중·결과)·담당 교사·관리자·보호자 읽기. 읽기 전용 열람 용도로도 쓴다. */
+export async function loadMockExamAnnotationsAction(attemptId: string, setItemId: string): Promise<MockExamAnnotations> {
+  try {
+    const { supabase } = await requireUser();
+    const { data, error } = await supabase.rpc("load_mock_exam_annotations", { p_attempt_id: attemptId, p_set_item_id: setItemId });
+    if (error) return { highlights: [], eliminated: [] };
+    return parseAnnotations(data);
+  } catch {
+    return { highlights: [], eliminated: [] };
+  }
 }

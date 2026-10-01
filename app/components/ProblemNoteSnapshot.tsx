@@ -45,15 +45,18 @@ export default function ProblemNoteSnapshot({
   }, [strokes]);
 
   if (!strokes || strokes.length === 0) return null;
+  // 풀이용 화이트보드는 기본 캔버스보다 길게 쓸 수 있으므로, 획이 잘리지 않게 높이를 늘린다.
+  const maxY = Math.max(...strokes.map((s) => Math.max(s.y0, s.y1) * (s.w ? 640 / s.w : 1)));
+  const height = Math.max(CANVAS_HEIGHT, Math.ceil(maxY) + 12);
   return (
     <details open className="mt-3 rounded-lg border border-grey-200 bg-white" data-testid="problem-note-snapshot">
       <summary className="cursor-pointer px-3 py-2 text-[12px] font-bold text-grey-600">{label}</summary>
       <canvas
         ref={canvasRef}
         width={640}
-        height={CANVAS_HEIGHT}
+        height={height}
         className="w-full"
-        style={{ height: CANVAS_HEIGHT }}
+        style={{ aspectRatio: `640 / ${height}` }}
         aria-label={label}
         role="img"
       />
