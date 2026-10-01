@@ -19,9 +19,9 @@ const LETTERS = "ABCD";
 export type Rec = { gid: string; skill: string; examSystem: string; format: string; problem: { passage?: string; stimulus?: string; question?: string; options: string[]; correctIndex: number; explanation: string; [k: string]: unknown }; quality: Record<string, unknown>; [k: string]: unknown };
 
 // ---- 해설 글자 참조 치환 ----------------------------------------------------
-const LETTER = /(?<![A-Za-z0-9$\\'\-])([A-D])(?![A-Za-z0-9'\-])/g;
+export const LETTER = /(?<![A-Za-z0-9$\\'\-])([A-D])(?![A-Za-z0-9'\-])/g;
 /** 따옴표("…", “…”, '…' 는 제외 — 소유격과 혼동) 안의 구간 마스크. */
-function quotedMask(s: string): boolean[] {
+export function quotedMask(s: string): boolean[] {
   const mask = new Array(s.length).fill(false);
   let open = false, start = -1, closer = '"';
   for (let i = 0; i < s.length; i++) {

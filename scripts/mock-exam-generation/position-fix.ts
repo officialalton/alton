@@ -7,7 +7,8 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
-import { letterRefs, remapExplanation, reorder, isNumericOptions, type Rec } from "./shuffle-adopted";
+import { letterRefs, reorder, isNumericOptions, type Rec } from "./shuffle-adopted";
+import { analyze, remapAll, staticAudit } from "./position-fix-rules";
 
 const arg = (n: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : undefined; };
 const LETTERS = "ABCD";
@@ -29,6 +30,7 @@ export type FixEntry = {
 
 const ORDER_DEP = /\b(all|none|both|neither|any) of (the|these|those) (above|following|choices|options)\b|\bthe (previous|preceding|above|following) (option|choice|answer)s?\b|위의 (모두|보기)|모두 (맞|옳|해당)|(없음|해당 없음)|위 (보기|선택지)|\bnone of the above\b|\ball of the above\b/i;
 const TOKEN = (s: string | undefined | null) => letterRefs(s ?? "").length;
+const REFS = (s: string | undefined | null) => analyze(s ?? "").toks.length;
 
 export function classify(r: Rec): { skip?: string; ambiguous: boolean } {
   const p = r.problem;
@@ -40,19 +42,12 @@ export function classify(r: Rec): { skip?: string; ambiguous: boolean } {
   const body = `${p.stimulus ?? ""} ${p.passage ?? ""} ${p.question ?? ""}`;
   if (TOKEN(body) > 0 || (p.figure && JSON.stringify(p.figure).match(/"id":"[A-D]"/))) return { skip: "본문·도형에 글자 토큰(점·변수) — 해설 글자와 구분 불가", ambiguous: true };
   const ex = String(p.explanation ?? ""), en = String((p as { explanationEn?: string }).explanationEn ?? "");
-  // 모호: 영어 해설에서 관사로 건너뛴 'A …' 가 있는데 다른 글자 참조(B~D)도 있는 경우, 또는 따옴표 안 글자 토큰이 있는 경우
-  const amb = (t: string) => {
-    if (!t) return false;
-    const refs = letterRefs(t).map((x) => x.letter);
-    const skippedA = (t.match(/(?<![A-Za-z0-9$\\'\-])A(?=\s+[a-z]{2,})/g) ?? []).length - refs.filter((l) => l === "A").length;
-    const quotedLetter = /["“][^"”]*(?<![A-Za-z0-9$\\'\-])[A-D](?![A-Za-z0-9'\-])[^"”]*["”]/.test(t);
-    return (skippedA > 0 && refs.some((l) => l !== "A")) || quotedLetter;
-  };
-  if (amb(ex) || amb(en)) return { skip: "해설 글자 참조 판정 모호(AI 재작성 대상)", ambiguous: true };
+  const unc = [...analyze(ex).uncertain, ...analyze(en).uncertain];
+  if (unc.length) return { skip: `해설 참조 불확실(규칙이 확신하지 못함): ${unc[0]}`, ambiguous: true };
   return { ambiguous: false };
 }
 
-function buildPlan() {
+function buildPlan(forceSkip: Map<string, string> = new Map()) {
   const all: FixEntry[] = [];
   const seen = new Set<string>();
   const perSource: Record<string, { n: number }> = {};
@@ -62,7 +57,7 @@ function buildPlan() {
     recs.forEach((r) => seen.add(r.gid));
     perSource[source] = { n: (perSource[source]?.n ?? 0) + recs.length };
     // 섞을 수 있는 문항에만 목표 배정 — 결정 가능한 skip 은 미리 걸러서 plan() 에 넘기지 않는다(원본 위치로 카운트에 반영).
-    const cls = new Map(recs.map((r) => [r.gid, classify(r)]));
+    const cls = new Map(recs.map((r) => { const c = classify(r); const f = forceSkip.get(r.gid); return [r.gid, f && !c.skip ? { skip: f, ambiguous: true } : c]; }));
     const sysTarget = new Map<string, number>();
     for (const system of ["sat_rw", "sat_math"]) {
       const sys = recs.filter((r) => r.examSystem === system);
@@ -77,14 +72,13 @@ function buildPlan() {
     for (const r of recs) {
       const p = r.problem, c = cls.get(r.gid)!;
       const ex = String(p.explanation ?? ""), en = ((p as { explanationEn?: string | null }).explanationEn ?? null) as string | null;
-      const base = { gid: r.gid, source, runId: String(r.runId ?? ""), skill: r.skill, section: (r.examSystem === "sat_rw" ? "rw" : "math") as "rw" | "math", format: r.format, origIndex: p.correctIndex, letterRefs: TOKEN(ex), letterRefsEn: TOKEN(en), ambiguous: c.ambiguous, before: { options: p.options, correctIndex: p.correctIndex, explanation: ex, explanationEn: en } };
+      const base = { gid: r.gid, source, runId: String(r.runId ?? ""), skill: r.skill, section: (r.examSystem === "sat_rw" ? "rw" : "math") as "rw" | "math", format: r.format, origIndex: p.correctIndex, letterRefs: REFS(ex), letterRefsEn: REFS(en), ambiguous: c.ambiguous, before: { options: p.options, correctIndex: p.correctIndex, explanation: ex, explanationEn: en } };
       const t = sysTarget.get(r.gid);
       if (c.skip || t === undefined) { all.push({ ...base, status: "skip", reason: c.skip ?? "대상 아님", rewritten: false }); continue; }
       if (t === p.correctIndex) { all.push({ ...base, status: "skip", reason: "이미 목표 위치", rewritten: false }); continue; }
       const { options, perm } = reorder(p.options, p.correctIndex, t);
-      const map: Record<string, string> = {}; perm.forEach((o, n) => { map[LETTERS[o]] = LETTERS[n]; });
-      const nex = base.letterRefs ? remapExplanation(ex, map) : ex;
-      const nen = en && base.letterRefsEn ? remapExplanation(en, map) : en;
+      const nex = base.letterRefs ? remapAll(ex, perm).text : ex;
+      const nen = en && base.letterRefsEn ? remapAll(en, perm).text : en;
       all.push({ ...base, status: "shuffle", newIndex: t, perm, rewritten: base.letterRefs > 0 || base.letterRefsEn > 0, rewriteMethod: base.letterRefs > 0 || base.letterRefsEn > 0 ? "deterministic" : "none", after: { options, correctIndex: t, explanation: nex, explanationEn: nen } });
     }
   }
@@ -97,7 +91,19 @@ const dist = (es: FixEntry[], section: string, useAfter: boolean) => {
 };
 
 function cmdPlan() {
-  const all = buildPlan();
+  // 1차 계획 → 정적 감사 → 실패 문항은 '생략'으로 확정하고 목표 배정을 다시 계산(분포 균형 유지)
+  const force = new Map<string, string>();
+  let all = buildPlan();
+  for (let round = 0; round < 3; round++) {
+    let added = 0;
+    for (const e of all) {
+      if (e.status !== "shuffle" || !e.after || !e.perm) continue;
+      const f = staticAudit({ options: e.before.options, origIndex: e.origIndex, newIndex: e.newIndex!, perm: e.perm, before: e.before, after: e.after });
+      if (f.length) { force.set(e.gid, `정적 감사 실패: ${f[0]}`); added++; }
+    }
+    if (!added) break;
+    all = buildPlan(force);
+  }
   mkdirSync(OUT, { recursive: true });
   const sha = createHash("sha256").update(JSON.stringify(all.map((e) => [e.gid, e.status, e.after?.correctIndex]))).digest("hex").slice(0, 12);
   writeFileSync(path.join(OUT, "plan.json"), JSON.stringify(all));
