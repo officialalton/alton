@@ -37,11 +37,21 @@ export type LibrarySubjectTree = {
 const UNASSIGNED_UNIT_TITLE = "단원 미지정";
 const NO_KEYWORD_LABEL = "키워드 미지정";
 
+export type BuildSubjectMaterialTreeOptions = {
+  /**
+   * 2026-10-05 무료 회원 S3 — 이 과목들은 수강 관계가 아니라 "무료 공개 자료가 있어서" 들어온 과목이다.
+   * RLS가 이미 free 자료만 돌려주지만, 로더 자체도 access_tier='free'만 남겨 두 겹으로 지킨다.
+   */
+  freeOnlySubjectIds?: ReadonlySet<string>;
+};
+
 export async function buildSubjectMaterialTree(
   supabase: SupabaseClient,
-  subjectIds: string[]
+  subjectIds: string[],
+  options: BuildSubjectMaterialTreeOptions = {}
 ): Promise<LibrarySubjectTree[]> {
   if (subjectIds.length === 0) return [];
+  const freeOnly = options.freeOnlySubjectIds ?? new Set<string>();
 
   const [{ data: subjects }, { data: units }, { data: unitKeywords }, { data: keywords }, { data: docs }] =
     await Promise.all([
@@ -51,7 +61,7 @@ export async function buildSubjectMaterialTree(
       selectInChunks(subjectIds, (chunk) => supabase.from("subject_keywords").select("id, subject_id, label").in("subject_id", chunk).eq("status", "active")),
       selectInChunks(subjectIds, (chunk) => supabase
         .from("curriculum_docs")
-        .select("id, title, kind, subject_id, primary_keyword_id")
+        .select("id, title, kind, subject_id, primary_keyword_id, access_tier")
         .in("subject_id", chunk)
         .eq("status", "published")
         .is("archived_at", null)
@@ -60,7 +70,7 @@ export async function buildSubjectMaterialTree(
 
   type UnitRow = { id: string; subject_id: string; position: number; unit_title: string };
   type KeywordRow = { id: string; subject_id: string; label: string };
-  type DocRow = { id: string; title: string; kind: string | null; subject_id: string; primary_keyword_id: string | null };
+  type DocRow = { id: string; title: string; kind: string | null; subject_id: string; primary_keyword_id: string | null; access_tier?: string | null };
 
   const unitsBySubject = new Map<string, UnitRow[]>();
   for (const u of (units ?? []) as UnitRow[]) {
@@ -82,6 +92,7 @@ export async function buildSubjectMaterialTree(
   const docsByKeyword = new Map<string, DocRow[]>();
   const docsWithNoKeyword: DocRow[] = [];
   for (const d of (docs ?? []) as DocRow[]) {
+    if (freeOnly.has(d.subject_id) && d.access_tier !== "free") continue;
     if (d.primary_keyword_id && keywordById.has(d.primary_keyword_id)) {
       const list = docsByKeyword.get(d.primary_keyword_id) ?? [];
       list.push(d);

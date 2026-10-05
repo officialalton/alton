@@ -288,13 +288,19 @@ export type CurriculumDocListItem = {
   kind: "html" | "pdf" | "video";
   sourceDriveName: string | null;
   hasDriveSource: boolean;
+  /** 2026-10-05 무료 회원 S3 — 무료 공개 여부·권리 확인 상태(20262100000003). */
+  accessTier: "tutoring" | "free";
+  rightsStatus: "confirmed" | "needs_review" | "restricted";
+  rightsNote: string | null;
+  rightsConfirmedByName: string | null;
+  rightsConfirmedAt: string | null;
 };
 
 export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<CurriculumDocListItem[]> {
   const { data: docs } = await supabase
     .from("curriculum_docs")
     .select(
-      "id, title, status, subject_id, unit_id, primary_keyword_id, archived_at, archived_reason, kind, source_drive_name, source_drive_file_id, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title), primary_keyword:subject_keywords!curriculum_docs_primary_keyword_id_fkey(label)"
+      "id, title, status, subject_id, unit_id, primary_keyword_id, archived_at, archived_reason, kind, source_drive_name, source_drive_file_id, access_tier, rights_status, rights_note, rights_confirmed_at, subject:subjects(name), unit:subject_template_units!curriculum_docs_unit_id_fkey(unit_title), primary_keyword:subject_keywords!curriculum_docs_primary_keyword_id_fkey(label), rights_confirmer:profiles!curriculum_docs_rights_confirmed_by_fkey(name)"
     )
     .order("title", { ascending: true });
   if (!docs || docs.length === 0) return [];
@@ -329,7 +335,16 @@ export async function loadCurriculumDocList(supabase: SupabaseClient): Promise<C
       : "html"),
     sourceDriveName: ((d as { source_drive_name?: string | null }).source_drive_name as string | null) ?? null,
     hasDriveSource: Boolean((d as { source_drive_file_id?: string | null }).source_drive_file_id),
+    accessTier: (d as { access_tier?: string }).access_tier === "free" ? "free" : "tutoring",
+    rightsStatus: normalizeRightsStatus((d as { rights_status?: string }).rights_status),
+    rightsNote: ((d as { rights_note?: string | null }).rights_note as string | null) ?? null,
+    rightsConfirmedByName: extractName((d as { rights_confirmer?: unknown }).rights_confirmer) || null,
+    rightsConfirmedAt: ((d as { rights_confirmed_at?: string | null }).rights_confirmed_at as string | null) ?? null,
   }));
+}
+
+function normalizeRightsStatus(raw: unknown): CurriculumDocListItem["rightsStatus"] {
+  return raw === "confirmed" || raw === "restricted" ? raw : "needs_review";
 }
 
 function extractLabel(rel: unknown): string | null {

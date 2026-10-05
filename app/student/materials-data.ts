@@ -82,29 +82,102 @@ export async function studentEnrolledSubjectIds(
   return subjects;
 }
 
-export async function loadMaterialsLibraryTree(supabase: SupabaseClient, studentId: string) {
-  const subjects = await studentEnrolledSubjectIds(supabase, studentId);
+export type FreePublishedDoc = {
+  id: string;
+  title: string;
+  subjectId: string;
+  subjectName: string;
+  unitId: string | null;
+};
+
+/**
+ * 2026-10-05 무료 회원 S3 — 무료 공개(access_tier='free') 중 배포·미보관 자료. 활성 학생 누구나
+ * (무료 회원 포함) 본다. RLS(20262100000003)가 같은 조건으로 열어 주므로 쿼리 1회.
+ */
+export async function loadFreePublishedDocs(supabase: SupabaseClient): Promise<FreePublishedDoc[]> {
+  const { data } = await supabase
+    .from("curriculum_docs")
+    .select("id, title, subject_id, unit_id, subject:subjects(name)")
+    .eq("access_tier", "free")
+    .eq("status", "published")
+    .is("archived_at", null)
+    .order("title", { ascending: true });
+  return (data ?? []).map((d) => {
+    const row = Array.isArray(d.subject) ? d.subject[0] : d.subject;
+    return {
+      id: d.id as string,
+      title: d.title as string,
+      subjectId: d.subject_id as string,
+      unitId: (d.unit_id as string | null) ?? null,
+      subjectName: (row as { name?: string } | null)?.name ?? "",
+    };
+  });
+}
+
+export type MaterialsLibraryOptions = {
+  /**
+   * false = 수강 과목 조회를 건너뛴다(무료 회원 — 수강 관계가 없으므로 쿼리 2회 절약).
+   * 기본 true: 수강 과목 ∪ 무료 공개 자료.
+   */
+  includeEnrolled?: boolean;
+};
+
+/** 수강 과목(선택) ∪ 무료 공개 자료의 과목. 무료 공개만으로 들어온 과목은 freeOnly로 표시한다. */
+async function resolveLibrarySubjects(
+  supabase: SupabaseClient,
+  studentId: string,
+  options: MaterialsLibraryOptions
+): Promise<{ subjects: Map<string, string>; freeOnly: Set<string>; freeDocs: FreePublishedDoc[] }> {
+  const [enrolled, freeDocs] = await Promise.all([
+    options.includeEnrolled === false ? Promise.resolve(new Map<string, string>()) : studentEnrolledSubjectIds(supabase, studentId),
+    loadFreePublishedDocs(supabase),
+  ]);
+  const subjects = new Map(enrolled);
+  const freeOnly = new Set<string>();
+  for (const d of freeDocs) {
+    if (subjects.has(d.subjectId)) continue;
+    subjects.set(d.subjectId, d.subjectName);
+    freeOnly.add(d.subjectId);
+  }
+  return { subjects, freeOnly, freeDocs };
+}
+
+export async function loadMaterialsLibraryTree(
+  supabase: SupabaseClient,
+  studentId: string,
+  options: MaterialsLibraryOptions = {}
+) {
+  const { subjects, freeOnly } = await resolveLibrarySubjects(supabase, studentId, options);
   const { buildSubjectMaterialTree } = await import("@/lib/subject-material-library");
-  return buildSubjectMaterialTree(supabase, Array.from(subjects.keys()));
+  return buildSubjectMaterialTree(supabase, Array.from(subjects.keys()), { freeOnlySubjectIds: freeOnly });
 }
 
 export async function loadMaterialsLibrary(
   supabase: SupabaseClient,
-  studentId: string
+  studentId: string,
+  options: MaterialsLibraryOptions = {}
 ): Promise<LibrarySubject[]> {
-  const subjects = await studentEnrolledSubjectIds(supabase, studentId);
-  const subjectIds = Array.from(subjects.keys());
-  if (subjectIds.length === 0) return [];
+  const { subjects, freeOnly, freeDocs } = await resolveLibrarySubjects(supabase, studentId, options);
+  const enrolledSubjectIds = Array.from(subjects.keys()).filter((id) => !freeOnly.has(id));
+  if (subjects.size === 0) return [];
 
-  const { data: docs } = await selectInChunks(subjectIds, (chunk) => supabase
-    .from("curriculum_docs")
-    .select("id, title, subject_id, unit_id")
-    .in("subject_id", chunk)
-    .eq("status", "published")
-    .order("title", { ascending: true }), { sort: orderComparator(["title", true]) });
+  const { data: enrolledDocs } = enrolledSubjectIds.length
+    ? await selectInChunks(enrolledSubjectIds, (chunk) => supabase
+        .from("curriculum_docs")
+        .select("id, title, subject_id, unit_id")
+        .in("subject_id", chunk)
+        .eq("status", "published")
+        .order("title", { ascending: true }), { sort: orderComparator(["title", true]) })
+    : { data: [] as { id: string; title: string; subject_id: string; unit_id: string | null }[] };
+  // 수강 과목의 문서 ∪ 무료 공개 문서(수강 과목 안의 무료 문서는 이미 들어 있으므로 id로 중복 제거).
+  const seen = new Set((enrolledDocs ?? []).map((d) => d.id));
+  const docs = [
+    ...(enrolledDocs ?? []),
+    ...freeDocs.filter((d) => !seen.has(d.id)).map((d) => ({ id: d.id, title: d.title, subject_id: d.subjectId, unit_id: d.unitId })),
+  ];
 
   const unitIds = Array.from(
-    new Set((docs ?? []).map((d) => d.unit_id).filter((id): id is string => !!id))
+    new Set(docs.map((d) => d.unit_id).filter((id): id is string => !!id))
   );
   const { data: units } = unitIds.length
     ? await selectInChunks(unitIds, (chunk) => supabase
@@ -115,7 +188,7 @@ export async function loadMaterialsLibrary(
   const unitTitleById = new Map((units ?? []).map((u) => [u.id, u.unit_title]));
 
   const bySubject = new Map<string, LibraryDocSummary[]>();
-  for (const d of docs ?? []) {
+  for (const d of docs) {
     const list = bySubject.get(d.subject_id) ?? [];
     list.push({
       id: d.id,

@@ -34,6 +34,7 @@ vi.mock("./curriculum-doc-actions", () => ({
   createCurriculumDoc: vi.fn(),
   getCurriculumDocDetailAction: vi.fn(),
   setDocArchived: vi.fn(),
+  setDocAccess: vi.fn(),
   updateDocTitle: vi.fn(),
   setDocPublished: vi.fn(),
   addSection: vi.fn(),
@@ -73,6 +74,11 @@ const existingDocListItem: CurriculumDocListItem = {
   hasDriveSource: false,
   archivedAt: null,
   archivedReason: null,
+  accessTier: "tutoring",
+  rightsStatus: "needs_review",
+  rightsNote: null,
+  rightsConfirmedByName: null,
+  rightsConfirmedAt: null,
 };
 
 const existingDocDetail: DocEditorData = {
@@ -245,5 +251,52 @@ describe("새로 만든 교재도 과목 키워드·단원을 바로 쓴다", ()
     const unitGroups = screen.getAllByTestId("doc-group").map((g) => g.textContent ?? "");
     expect(unitGroups.some((t) => t.includes("1. 함수의 기초") && t.includes("Words Core"))).toBe(true);
     expect(unitGroups.some((t) => t.includes("(단원에 아직 안 들어감)"))).toBe(true);
+  });
+
+  // 2026-10-05 무료 회원 S3 — 무료 공개 토글·권리 상태·목록 분리.
+  describe("무료 공개·권리 상태", () => {
+    it("무료 공개 체크박스는 setDocAccess(free)를 부르고 성공하면 반영된다", async () => {
+      vi.mocked(docActions.setDocAccess).mockResolvedValue({ ok: true, rightsConfirmedAt: null });
+      const confirmed = { ...existingDocListItem, rightsStatus: "confirmed" as const, rightsConfirmedByName: "관리자", rightsConfirmedAt: "2026-10-05T00:00:00Z" };
+      render(<Wrapper initialDocs={[confirmed]} subjects={subjects} />);
+      const box = screen.getByLabelText("이차방정식 개념 정리 무료 공개") as HTMLInputElement;
+      expect(box.checked).toBe(false);
+      fireEvent.click(box);
+      await waitFor(() => expect(docActions.setDocAccess).toHaveBeenCalledWith("doc1", { accessTier: "free" }));
+      await waitFor(() => expect((screen.getByLabelText("이차방정식 개념 정리 무료 공개") as HTMLInputElement).checked).toBe(true));
+    });
+
+    it("권리 미확인 상태에서 무료 공개를 켜면 DB 오류 메시지를 그대로 보여주고 체크는 풀린 채 남는다", async () => {
+      vi.mocked(docActions.setDocAccess).mockResolvedValue({
+        ok: false,
+        error: 'new row for relation "curriculum_docs" violates check constraint "curriculum_docs_free_requires_confirmed_rights"',
+      });
+      render(<Wrapper initialDocs={[existingDocListItem]} subjects={subjects} />);
+      fireEvent.click(screen.getByLabelText("이차방정식 개념 정리 무료 공개"));
+      await screen.findByRole("alert");
+      expect(screen.getByRole("alert").textContent).toContain("curriculum_docs_free_requires_confirmed_rights");
+      expect((screen.getByLabelText("이차방정식 개념 정리 무료 공개") as HTMLInputElement).checked).toBe(false);
+    });
+
+    it("권리 상태 select 는 setDocAccess(rightsStatus)를 부르고 확인 시각을 보여준다", async () => {
+      vi.mocked(docActions.setDocAccess).mockResolvedValue({ ok: true, rightsConfirmedAt: "2026-10-05T03:00:00Z" });
+      render(<Wrapper initialDocs={[existingDocListItem]} subjects={subjects} />);
+      fireEvent.change(screen.getByLabelText("이차방정식 개념 정리 권리 상태"), { target: { value: "confirmed" } });
+      await waitFor(() => expect(docActions.setDocAccess).toHaveBeenCalledWith("doc1", { rightsStatus: "confirmed" }));
+      await screen.findByText(/확인: 방금/);
+    });
+
+    it("권리 확인됨 / 확인 필요 목록을 나눠 본다", () => {
+      const confirmedDoc = { ...existingDocListItem, id: "doc2", title: "확인된 교재", rightsStatus: "confirmed" as const };
+      render(<Wrapper initialDocs={[existingDocListItem, confirmedDoc]} subjects={subjects} />);
+      expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
+      expect(screen.getByText("확인된 교재")).toBeInTheDocument();
+      fireEvent.click(screen.getByText(/^권리 확인됨 \(1\)/));
+      expect(screen.queryByText("이차방정식 개념 정리")).not.toBeInTheDocument();
+      expect(screen.getByText("확인된 교재")).toBeInTheDocument();
+      fireEvent.click(screen.getByText(/^확인 필요 \(1\)/));
+      expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
+      expect(screen.queryByText("확인된 교재")).not.toBeInTheDocument();
+    });
   });
 });
