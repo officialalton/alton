@@ -271,4 +271,47 @@ describe("MockExamMstTakeClient", () => {
     });
     expect(screen.queryByTestId("mst-whiteboard")).toBeNull();
   });
+
+  it("도구 모드(소거·화이트보드)는 문항을 옮기면 꺼진다", async () => {
+    await renderClient();
+    await act(async () => {});
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-eliminate-toggle"));
+      fireEvent.click(screen.getByTestId("mst-whiteboard-toggle"));
+    });
+    expect(screen.getByTestId("mst-eliminate-toggle")).toHaveAttribute("aria-pressed", "true");
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Next question" }));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Previous question" }));
+    });
+    expect(screen.getByTestId("mst-eliminate-toggle")).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByTestId("mst-whiteboard-toggle")).toHaveAttribute("aria-pressed", "false");
+    expect(screen.queryByTestId("mst-whiteboard")).toBeNull();
+  });
+
+  it("두 칸 레이아웃: 왼쪽에 문제, 오른쪽에 선택지; 하단 막대는 별도 고정 영역", async () => {
+    await renderClient();
+    await act(async () => {});
+    expect(screen.getByTestId("mst-pane-left")).toHaveTextContent("Q1");
+    expect(screen.getByTestId("mst-pane-right")).toContainElement(screen.getByRole("radio", { name: /A1/ }));
+    expect(screen.getByTestId("mst-footer")).toContainElement(screen.getByRole("button", { name: "Next question" }));
+    expect(screen.getByTestId("mst-footer")).toContainElement(screen.getByRole("button", { name: "Previous question" }));
+  });
+
+  it("번호 격자: Solve Later 는 칸 전체가 노랑, 답한 문항은 초록", async () => {
+    await renderClient();
+    await act(async () => {});
+    await act(async () => {
+      fireEvent.click(screen.getByRole("radio", { name: /A1/ }));
+      fireEvent.click(screen.getByTestId("mock-exam-solve-later-toggle"));
+    });
+    await act(async () => {
+      fireEvent.click(screen.getByRole("button", { name: "Next question" }));
+    });
+    const first = screen.getByRole("button", { name: /^Question 1,/ });
+    expect(first.className).toMatch(/bg-yellow/);
+    expect(first.querySelector(".bg-yellow")).toBeNull();
+  });
 });

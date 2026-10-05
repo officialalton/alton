@@ -44,10 +44,8 @@ describe("MockExamWhiteboard", () => {
     fireEvent.pointerDown(canvas, { clientX: 10, clientY: 10 });
     fireEvent.pointerMove(canvas, { clientX: 20, clientY: 20 });
     fireEvent.pointerUp(canvas);
-    expect(saveMock).not.toHaveBeenCalled();
-    await act(async () => {
-      vi.advanceTimersByTime(900);
-    });
+    // 획을 마치면 디바운스를 기다리지 않고 바로 저장한다(직후 모듈 제출로 마지막 획이 사라지지 않게).
+    await act(async () => {});
     expect(saveMock).toHaveBeenCalledTimes(1);
     const [ctx, target, item, strokes] = saveMock.mock.calls[0];
     expect([ctx, target, item]).toEqual(["mock_exam", "a1", "i1"]);

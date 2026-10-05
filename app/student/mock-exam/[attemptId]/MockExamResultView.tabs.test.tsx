@@ -82,6 +82,9 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     const rows = screen.getAllByTestId(/^review-item-/).map((el) => el.getAttribute("data-testid"));
     expect(rows.findIndex((x) => x === "review-item-m1")).toBeGreaterThan(rows.findIndex((x) => x === "review-item-r2"));
     expect(screen.getByTestId("review-item-r1")).toHaveTextContent(/R&W 1/);
+    expect(screen.getByTestId("review-mark-r1")).toHaveTextContent("O");
+    expect(screen.getByTestId("review-mark-r2")).toHaveTextContent("X");
+    expect(screen.getByTestId("review-item-r1")).not.toHaveTextContent("Correct");
     expect(screen.getByTestId("mock-exam-item-detail")).toHaveTextContent("Question r1");
   });
 
@@ -110,5 +113,10 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     fireEvent.click(screen.getByRole("tab", { name: "Review Mistakes" }));
     expect(await screen.findByTestId("problem-note-snapshot")).toHaveTextContent("My scratch work (submitted)");
     expect(screen.queryByRole("button", { name: /whiteboard|Clear|화이트보드|지우기/i })).toBeNull();
+    // 오른쪽 패널에서 해설보다 위에 놓인다.
+    const panel = screen.getByTestId("mock-exam-explanation-panel");
+    const snap = within(panel).getByTestId("problem-note-snapshot");
+    const expl = within(panel).getByTestId("mock-exam-explanation");
+    expect(snap.compareDocumentPosition(expl) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

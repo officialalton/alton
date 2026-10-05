@@ -143,6 +143,8 @@ export default function MockExamWhiteboard({
   }
 
   function up() {
+    // 획을 마칠 때 바로 저장한다 — 디바운스 중에 모듈을 제출하면 서버가 쓰기를 거부해 마지막 획이 사라질 수 있다.
+    if (drawingRef.current && dirtyRef.current) void flush();
     drawingRef.current = null;
   }
 
@@ -160,7 +162,7 @@ export default function MockExamWhiteboard({
     <aside
       aria-label="Whiteboard"
       data-testid="mst-whiteboard"
-      className="fixed right-4 top-[72px] z-20 w-[min(420px,calc(100vw-2rem))] rounded-lg border border-grey-300 bg-white shadow-lg"
+      className="fixed right-4 top-[72px] z-20 w-[min(540px,calc(100vw-2rem))] rounded-lg border border-grey-300 bg-white shadow-lg"
     >
       <div className="flex items-center gap-1.5 border-b border-grey-200 px-2.5 py-2">
         <span className="mr-1 text-[12px] font-extrabold text-ink">Whiteboard</span>

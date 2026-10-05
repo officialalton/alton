@@ -217,7 +217,21 @@ type ItemToolsProps = {
 };
 
 /** 해설 아래 도구 — 오류 신고 + 제출 시점 필기 스냅샷(읽기 전용, 필기 없으면 숨김). */
-function ItemTools({ item, attemptId, studentId, viewerIsOwner, reportRole, reportStatus }: ItemToolsProps) {
+function ItemNote({ item, attemptId, studentId, viewerIsOwner }: Pick<ItemToolsProps, "item" | "attemptId" | "studentId" | "viewerIsOwner">) {
+  if (!attemptId || !studentId) return null;
+  return (
+    <ProblemNoteSnapshot
+      key={item.setItemId}
+      context="mock_exam"
+      targetId={attemptId}
+      itemId={item.setItemId}
+      authorId={viewerIsOwner ? undefined : studentId}
+      label={viewerIsOwner ? "My scratch work (submitted)" : "Student's scratch work (submitted)"}
+    />
+  );
+}
+
+function ItemTools({ item, attemptId, studentId, viewerIsOwner, reportRole, reportStatus, noteFirst = false }: ItemToolsProps & { noteFirst?: boolean }) {
   return (
     <>
       {reportRole && attemptId && (
@@ -229,16 +243,7 @@ function ItemTools({ item, attemptId, studentId, viewerIsOwner, reportRole, repo
           context={{ source: "mock_exam", attemptId, setItemId: item.setItemId, problemId: item.problemId }}
         />
       )}
-      {attemptId && studentId && (
-        <ProblemNoteSnapshot
-          key={item.setItemId}
-          context="mock_exam"
-          targetId={attemptId}
-          itemId={item.setItemId}
-          authorId={viewerIsOwner ? undefined : studentId}
-          label={viewerIsOwner ? "My scratch work (submitted)" : "Student's scratch work (submitted)"}
-        />
-      )}
+      {!noteFirst && <ItemNote item={item} attemptId={attemptId} studentId={studentId} viewerIsOwner={viewerIsOwner} />}
     </>
   );
 }
@@ -554,8 +559,17 @@ export default function MockExamResultView({
                                 </span>
                               ) : null}
                             </span>
-                            <span className={`ml-auto w-[62px] shrink-0 text-right text-[11px] font-bold ${active ? "" : it.correct === null ? "" : it.correct ? "text-green" : "text-red"}`}>
-                              {it.correct === null ? "" : it.correct ? "Correct" : "Incorrect"}
+                            <span
+                              className="ml-auto w-[20px] shrink-0 text-center text-[14px] font-extrabold"
+                              data-testid={`review-mark-${it.setItemId}`}
+                              role={it.correct === null ? undefined : "img"}
+                              aria-label={it.correct === null ? undefined : it.correct ? "Correct" : "Incorrect"}
+                            >
+                              {it.correct === null ? "" : it.correct ? (
+                                <span className={active ? "text-green-300" : "text-green"}>O</span>
+                              ) : (
+                                <span className={active ? "text-red-300" : "text-red"}>X</span>
+                              )}
                             </span>
                           </button>
                         </li>
@@ -583,8 +597,13 @@ export default function MockExamResultView({
               {/* 오른쪽: 해설 + 제출 시점 필기(읽기 전용) — 스크롤 없이 닿도록 sticky */}
               {selected && (
                 <div className="lg:h-full lg:overflow-y-auto" data-testid="mock-exam-explanation-panel">
-                  <ExplanationPanel key={selected.setItemId} item={selected} />
+                  {/* 풀이 필기는 해설 위에 — 스크롤하지 않아도 보이게. 필기가 없는 문항은 아무것도 그리지 않는다. */}
+                  <ItemNote item={selected} attemptId={attempt.id} studentId={attempt.studentId} viewerIsOwner={!readOnly} />
+                  <div className="mt-3">
+                    <ExplanationPanel key={selected.setItemId} item={selected} />
+                  </div>
                   <ItemTools
+                    noteFirst
                     item={selected}
                     attemptId={attempt.id}
                     studentId={attempt.studentId}
