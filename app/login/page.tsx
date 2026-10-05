@@ -3,6 +3,7 @@ import { login } from "./actions";
 import { signInWithGoogleForStaff } from "./staff-google-actions";
 import { createClient } from "@/utils/supabase/server";
 import { resolveAccountDestination } from "@/lib/auth";
+import { pendingFreeSignupDestination } from "@/lib/free-member-signup";
 
 export default async function LoginPage({
   searchParams,
@@ -30,6 +31,9 @@ export default async function LoginPage({
       .select("role")
       .eq("id", user.id)
       .single();
+    // 2026-10-05 무료 학습 회원(S1) — 셀프 가입 대기자(프로필 없음+표식)만 완료 화면으로.
+    const pending = pendingFreeSignupDestination(user, !!profile);
+    if (pending) redirect(pending);
     redirect(await resolveAccountDestination(supabase, profile?.role));
   }
 
@@ -112,6 +116,12 @@ export default async function LoginPage({
 
         <p className="text-center text-[13px] text-grey-500 mt-[22px] leading-[1.7]">
           학부모·학생 계정은 상담·계약 절차 이후 초대를 통해 생성됩니다.
+          <br />
+          학생이라면{" "}
+          <a href="/signup/student" className="text-red font-bold">
+            무료 학습 회원 가입
+          </a>
+          으로 모의고사를 바로 시작할 수 있어요.
           <br />
           선생님으로 지원하고 싶으신가요?{" "}
           <a
