@@ -70,7 +70,7 @@ function checkTable(spec: Spec, html: string, issues: QaIssue[]) {
 function checkStatement(spec: Spec, html: string, issues: QaIssue[]) {
   const facts = (spec.facts ?? []) as { label: string; value: string | number }[]; const text = unesc(html.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ");
   if (!facts.length) { issues.push({ code: "render_empty", message: "문장형 자료에 항목이 없습니다." }); return; }
-  for (const f of facts) { if (!text.includes(f.label.trim())) issues.push({ code: "table_header_missing", message: `자료 항목 '${f.label}' 이 그려지지 않았습니다.` }); const v = typeof f.value === "number" ? f.value.toLocaleString("en-US", { maximumFractionDigits: 2 }) : String(f.value); if (!text.includes(v) && !text.includes(String(f.value))) issues.push({ code: "table_value_mismatch", message: `자료 항목 '${f.label}' 의 값 ${String(f.value)} 이 그려지지 않았습니다.` }); }
+  for (const f of facts) { if (!text.includes(f.label.trim())) issues.push({ code: "table_header_missing", message: `자료 항목 '${f.label}' 이 그려지지 않았습니다.` }); const v = typeof f.value === "number" ? new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(f.value) : String(f.value); if (!text.includes(v) && !text.includes(String(f.value))) issues.push({ code: "table_value_mismatch", message: `자료 항목 '${f.label}' 의 값 ${String(f.value)} 이 그려지지 않았습니다.` }); }
 }
 
 const px = (mapping: NonNullable<ReturnType<typeof fit>>, v: number) => (v - mapping.b) / mapping.a;
