@@ -50,6 +50,7 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
 import NavIcon from "@/app/components/NavIcon";
+import { hasFeature, type FeatureKey } from "@/lib/feature-access";
 
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
@@ -82,6 +83,47 @@ const NAV_ITEMS = [
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
 
+// 2026-10-05 무료 학습 회원(S1) — 탭 ↔ 기능 키(brief §2.1). featureAccess가 내려오면 키가 없는 탭은 숨긴다.
+// 서버 가드(requireStudentFeature)와 같은 student_feature_access 결과를 쓴다. 키가 안 내려오면(기존 경로) 전부 표시.
+const NAV_FEATURE: Record<TabId, FeatureKey> = {
+  home: "home",
+  roadmap: "roadmap",
+  enrollment: "course",
+  classes: "class",
+  teacher: "teacher",
+  consultant: "consultant_portal",
+  "mock-exam": "mock_exam",
+  homework: "homework",
+  problemlog: "problem_log",
+  vocab: "vocab",
+  materials: "materials_free",
+};
+
+function FreeMemberHome({ studentName, onSelectTab }: { studentName: string; onSelectTab: (id: TabId) => void }) {
+  return (
+    <PageFrame title="Home">
+      <div className="rounded-xl bg-white border border-brand-border p-6">
+        <p className="text-[12px] font-bold text-brand-red mb-1">무료 학습 회원</p>
+        <h2 className="text-[20px] font-extrabold text-navy mb-2">{studentName} 학생님, 환영합니다</h2>
+        <p className="text-[13.5px] text-grey-500 leading-[1.7] mb-5">
+          무료 모의고사를 풀고 결과·해설을 확인해 보세요. 틀린 문제는 Practice에, 모르는 단어는 Vocabulary에 모아 복습할 수 있습니다.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <button type="button" onClick={() => onSelectTab("mock-exam")} className="px-4 py-2.5 rounded-lg bg-brand-red text-white text-[13px] font-bold">
+            모의고사 보기
+          </button>
+          <button type="button" onClick={() => onSelectTab("problemlog")} className="px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
+            Practice
+          </button>
+          <button type="button" onClick={() => onSelectTab("vocab")} className="px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
+            Vocabulary
+          </button>
+        </div>
+      </div>
+    </PageFrame>
+  );
+}
+
 export default function StudentShell({
   studentName,
   initialTab,
@@ -109,6 +151,7 @@ export default function StudentShell({
   lessonBooking,
   roadmap,
   mockExamOverview,
+  featureAccess,
 }: {
   studentName: string;
   initialTab?: string;
@@ -135,11 +178,19 @@ export default function StudentShell({
   chatThreads: Record<string, { threadId: string; messages: ChatMessage[] }>;
   subjectEnrollments: SubjectEnrollmentView[];
   lessonBooking: LessonBookingData;
-  roadmap: RoadmapData;
+  /** 무료 회원(S1)은 로드맵 로더를 건너뛰어 null — 탭도 숨겨진다. */
+  roadmap: RoadmapData | null;
   mockExamOverview?: MockExamOverview;
+  /** student_feature_access 결과. 없으면(기존 경로) 모든 탭 표시. */
+  featureAccess?: FeatureKey[];
 }) {
   const router = useRouter();
-  const validTabIds = useMemo(() => NAV_ITEMS.map((n) => n.id), []);
+  const navItems = useMemo(
+    () => (featureAccess ? NAV_ITEMS.filter((n) => hasFeature(featureAccess, NAV_FEATURE[n.id])) : [...NAV_ITEMS]),
+    [featureAccess]
+  );
+  const validTabIds = useMemo(() => navItems.map((n) => n.id), [navItems]);
+  const isFreeMember = !!featureAccess && !hasFeature(featureAccess, "class");
   const [activeTab, setActiveTab] = useState<TabId>(
     validTabIds.includes(initialTab as TabId) ? (initialTab as TabId) : "home"
   );
@@ -152,8 +203,9 @@ export default function StudentShell({
   // 2026-09-22(사용자 지시) — Consultant 탭(메신저)을 열고 닫을 때마다 배지를
   // 다시 조회한다(app/parent/ParentShell.tsx와 동일 패턴).
   useEffect(() => {
+    if (isFreeMember) return; // 무료 회원은 household 메신저가 없다(S1).
     getMyHouseholdMessengerUnreadCountAction().then(setMessengerUnread).catch(() => {});
-  }, [activeTab]);
+  }, [activeTab, isFreeMember]);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이
@@ -179,13 +231,13 @@ export default function StudentShell({
     router.refresh();
   }
 
-  const activeLabel = NAV_ITEMS.find((n) => n.id === activeTab)?.label ?? "";
+  const activeLabel = navItems.find((n) => n.id === activeTab)?.label ?? "";
 
   // 2026-09-10(UI/UX 정리 1차, 배치4) — 모바일 하단 탭: 홈·수업·과제·교재 +
   // 더보기(나머지). 데스크톱 사이드바는 그대로 두고 모바일에서만 숨긴다.
   const MOBILE_PRIMARY_IDS: TabId[] = ["home", "classes", "homework", "materials"];
-  const mobilePrimary = NAV_ITEMS.filter((n) => MOBILE_PRIMARY_IDS.includes(n.id));
-  const mobileMore = NAV_ITEMS.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
+  const mobilePrimary = navItems.filter((n) => MOBILE_PRIMARY_IDS.includes(n.id));
+  const mobileMore = navItems.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
 
   return (
     <div className="min-h-screen bg-cream flex">
@@ -198,7 +250,7 @@ export default function StudentShell({
           </svg>
           <span className="text-[13.5px] font-extrabold text-white tracking-[-0.01em]">ALTON</span>
         </div>
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <button
             key={item.id}
             onClick={() => selectTab(item.id)}
@@ -349,10 +401,14 @@ export default function StudentShell({
             (왼쪽 정렬 텍스트 등) 두고, 제목 위치·컬럼 폭만 통일한다. */}
         <div className="flex-1">
         {activeTab === "home" ? (
-          <HomeTab studentName={studentName} dashboard={dashboard} />
+          isFreeMember ? (
+            <FreeMemberHome studentName={studentName} onSelectTab={selectTab} />
+          ) : (
+            <HomeTab studentName={studentName} dashboard={dashboard} />
+          )
         ) : (
         <PageFrame title={activeLabel}>
-          {activeTab === "roadmap" ? (
+          {activeTab === "roadmap" && roadmap ? (
             <RoadmapView data={roadmap} />
           ) : activeTab === "enrollment" ? (
             <EnrollmentTab enrollments={subjectEnrollments} />

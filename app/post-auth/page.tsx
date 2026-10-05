@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { resolveAccountDestination } from "@/lib/auth";
+import { pendingFreeSignupDestination } from "@/lib/free-member-signup";
 
 /**
  * 로그인 화면을 거치지 않고 세션만 새로 생겼을 때(예: 비밀번호 설정 직후)
@@ -21,6 +22,10 @@ export default async function PostAuthPage() {
     .select("role")
     .eq("id", user.id)
     .single();
+
+  // 2026-10-05 무료 학습 회원(S1) — 셀프 가입 대기자(프로필 없음+표식)만 완료 화면으로.
+  const pending = pendingFreeSignupDestination(user, !!profile);
+  if (pending) redirect(pending);
 
   redirect(await resolveAccountDestination(supabase, profile?.role));
 }

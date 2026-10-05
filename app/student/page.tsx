@@ -21,14 +21,80 @@ import { loadStudentSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "./lesson-booking-data";
 import { loadRoadmapData } from "@/lib/roadmap/data";
 import { loadMockExamOverview } from "@/lib/mock-exam/attempt-data";
+import { hasFeature, loadStudentFeatureAccess } from "@/lib/feature-access";
+import { resolveUserTimezone } from "@/lib/timezone";
 
 export default async function StudentHomePage({
   searchParams,
 }: {
   searchParams: Promise<{ tab?: string }>;
 }) {
-  const { user, supabase } = await requireUser();
+  const { user, supabase, profile } = await requireUser();
   const { tab } = await searchParams;
+
+  // 2026-10-05 무료 학습 회원(S1) — 기능 권한은 student_feature_access 하나로 판정한다. 과외 키("class")가
+  // 없는 학생(household·수강·선생님이 없는 무료 회원)은 그 전제를 깔고 있는 로더(대시보드/수업권/예약/
+  // 선생님·채팅/수강/과제/로드맵)를 건너뛰고 무료 집합 데이터만 받는다(쿼리 수 감소). 제대로 된 무료 홈은 S2.
+  const featureAccess = await loadStudentFeatureAccess(supabase, user.id);
+  if (!hasFeature(featureAccess, "class")) {
+    const safeListFree = async <T,>(label: string, p: Promise<T[]>): Promise<T[]> => {
+      try {
+        return await p;
+      } catch (e) {
+        console.error(JSON.stringify({ type: "student_home_loader_failed", label, error: e instanceof Error ? e.message : String(e) }));
+        return [];
+      }
+    };
+    const [myVocabWords, vocabLibraryBooks, vocabQuizzes, vocabFolders, problemHistory, materialsLibraryTree, mockExamOverview] =
+      await Promise.all([
+        safeListFree("vocab_words", loadMyVocabWords(supabase, user.id)),
+        safeListFree("vocab_books", loadLibraryBooks(supabase)),
+        safeListFree("vocab_quizzes", loadVocabQuizzes(supabase, user.id)),
+        safeListFree("vocab_folders", loadVocabFolders(supabase, user.id)),
+        safeListFree("problem_history", loadProblemHistory(user.id)),
+        safeListFree("materials_library", loadMaterialsLibraryTree(supabase, user.id)),
+        loadMockExamOverview(supabase, user.id).catch((e) => {
+          console.error(JSON.stringify({ type: "student_home_loader_failed", label: "mock_exam_overview", error: e instanceof Error ? e.message : String(e) }));
+          return undefined;
+        }),
+      ]);
+    const timezone = resolveUserTimezone({ profileTimezone: profile?.timezone ?? null });
+    const studentName = profile?.name ?? "";
+    const now = new Date();
+    return (
+      <ViewerTimezoneProvider timezone={timezone}>
+        <StudentShell
+          studentName={studentName}
+          initialTab={tab}
+          featureAccess={featureAccess}
+          dashboard={{ studentName, upcoming: [], calendarByDay: {}, calendarYear: now.getFullYear(), calendarMonth: now.getMonth(), attendanceRate: null }}
+          myVocabWords={myVocabWords}
+          vocabLibraryBooks={vocabLibraryBooks}
+          vocabQuizzes={vocabQuizzes}
+          vocabFolders={vocabFolders}
+          problemHistory={problemHistory}
+          upcoming={[]}
+          past={[]}
+          curricula={[]}
+          memosByEnrollment={{}}
+          reviews={{}}
+          myFeedback={{}}
+          studentId={user.id}
+          homeworkBatches={[]}
+          materialsLibraryTree={materialsLibraryTree}
+          credits={{ balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null }}
+          teacherList={[]}
+          teacherProfiles={{}}
+          teacherSessionHistory={{}}
+          chatThreads={{}}
+          subjectEnrollments={[]}
+          lessonBooking={{ bookableEnrollments: [], pendingActivationSubjects: [], upcomingBookings: [], pastSessionsForReport: [], timezone }}
+          roadmap={null}
+          mockExamOverview={mockExamOverview}
+        />
+      </ViewerTimezoneProvider>
+    );
+  }
   // 2026-09-09(UAT 정정) — 홈 대시보드가 레거시 legacy_sessions만 조회해
   // v3 전용 배정 학생의 예정 수업이 홈 캘린더/위젯에서 누락되던 문제 수정.
   // loadDashboardData()가 v3 예약(loadLessonBookingData 결과)을 병합하려면
@@ -143,6 +209,7 @@ export default async function StudentHomePage({
     <StudentShell
       studentName={dashboard.studentName}
       initialTab={tab}
+      featureAccess={featureAccess}
       dashboard={dashboard}
       myVocabWords={myVocabWords}
       vocabLibraryBooks={vocabLibraryBooks}
