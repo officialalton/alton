@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_functions.context_graph_features.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "3afaa8ec03fa8992e7a856a212b3925566973ed842aeb5c03a14698bd45172f9",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "e1e4c4e6ee27f008c40b826b4a7848360476868a81608fb547f98daf11ff3d04",
   "samples": [
     "nonlinear_functions.context_graph_features.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Heights 26,122,186,218,218,186 symmetric about t=3.5; second difference -32 so max=218+16*0.25=222 -> A. Distractor 218 is the table max. Rows consistent."
+  "notes": "대칭축 x=3.5(값 218,218 사이), 최댓값 222 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

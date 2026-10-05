@@ -1,9 +1,9 @@
 {
   "itemId": "linear_functions.interpret_intercept.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "b42dd05eba460233bceacdd161a8894d9ac560ce8c85c79afb791ca1abf9801c",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "24c99ddfa49d0d8ef93596ef7c36ca5fe5d734db5d4dbec1032b33c825279dfb",
   "samples": [
     "linear_functions.interpret_intercept.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Rows (3,10),(4,12),(5,14),(6,16): slope 2, y at x=0 is 4 -> C (4 riders at cost 0). Distractors: 10 (first row), 2 (slope), D rate-as-4 wrong. Nit: numeric columns right-aligned far from headers (cosmetic). 'at the start' is acceptable."
+  "notes": "표 (3,10),(4,12) 기울기 2, x=0 값 10-6=4 → C. 일치. 선/곡선 라벨 없음(새 규칙 무관). 정답 C 유일. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

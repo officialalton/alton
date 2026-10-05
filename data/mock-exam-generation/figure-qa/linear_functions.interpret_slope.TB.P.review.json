@@ -1,9 +1,9 @@
 {
   "itemId": "linear_functions.interpret_slope.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "188c63be81320a787aecfd7d17148b07fe1e5fd57a320dd190b1ffa6f51ecfdf",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "f9e1af43e496c8a0293aadc4688f348b46a327f6632cee5edf6a16ecb23f7fb8",
   "samples": [
     "linear_functions.interpret_slope.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Rows (6,26)..(14,58): rate 4 min per song -> B. A doubles, C inverts, D uses intercept 4 which is wrong (true intercept 2). Nit: 'Songs (songs)' redundant unit in header."
+  "notes": "(6,26),(8,34) 기울기 4/song → B. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

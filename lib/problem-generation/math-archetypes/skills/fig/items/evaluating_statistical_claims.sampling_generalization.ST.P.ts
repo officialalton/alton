@@ -102,7 +102,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "sample_percent", structure: "표본에서 '예'라고 답한 백분율을 구함", extra: "easy: 비율", concepts: ["표본 비율"],
+      lv: "easy", name: "sample_percent", structure: "표본에서 '예'라고 답한 백분율을 구함", extra: "easy: 비율", concepts: ["표본 비율", "비율 → 백분율"],
       gen(rng) {
         const s = surv(rng); const { n, yes, no, p } = sampleCounts(rng); const N = rng.int(20, 60) * 50;
         const fig = factFig(`Survey of ${lcf(s.popLbl)}`, studyRows(s, N, N, fullList(s), rng.pick(RANDOM_SAMPLE), n, yes, no), H);

@@ -5,6 +5,7 @@
 // 이 네 가지는 각각 돌연변이 테스트(figure-qa.test.ts)로 고정한다(일부러 망가뜨려서 검사가 잡는지).
 // 사람이 눈으로 보는 부분(SAT 시각 스타일 일치 등)은 PNG 스냅샷 + 검수 판정 파일(docs/qa/2026-10-01-math-figure-visual-qa.md)로 한다.
 import { renderFigureSvg } from "@/lib/problem-figures/render";
+import { problemText } from "@/lib/problem-figures/label-rule";
 import type { FigureSpec } from "@/lib/problem-figures/spec";
 import type { Instance } from "./types";
 import { mentionsFigure } from "./figure-verify";
@@ -143,8 +144,8 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
 
 const tickSig = (svg: string) => { const s = readScale(svg); return JSON.stringify([s.xTicks, s.yTicks]); };
 /** 복수 그림(figure_set 자료 / figure_choice 선택지): 같은 단위·같은 축척(눈금)·같은 크기여야 한다. */
-export function checkMultiFigure(children: Spec[], kind: "figure_set" | "figure_choice"): QaIssue[] {
-  const issues: QaIssue[] = []; const svgs = children.map((c) => renderFigureSvg(c as unknown as FigureSpec));
+export function checkMultiFigure(children: Spec[], kind: "figure_set" | "figure_choice", textForLabels?: string): QaIssue[] {
+  const issues: QaIssue[] = []; const svgs = children.map((c) => renderFigureSvg(c as unknown as FigureSpec, textForLabels === undefined ? undefined : { text: textForLabels }));
   children.forEach((c, i) => checkRenderedFigure(c, svgs[i]).forEach((q) => issues.push({ code: q.code, message: `${kind === "figure_choice" ? "선택지" : "자료"} ${"ABCD"[i]}: ${q.message}` })));
   const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar")) || c.type === "plane");
   if (graphs) {
@@ -173,9 +174,11 @@ export function checkChoiceDistinct(children: Spec[]): QaIssue[] {
 /** 인스턴스 전체의 구조 검사 — 자료 존재·렌더 충실도·복수 그림 일관성·선택지 구별. */
 export function checkInstanceFigureQa(inst: Instance): QaIssue[] {
   const issues: QaIssue[] = []; const fig = inst.figure as Spec | null | undefined; const text = `${inst.stimulus} ${inst.question}`;
+  // 앱과 같은 규칙으로 그린다: 문제 텍스트(지문·질문·선택지)에 안 나오는 직선·곡선 라벨은 빠진다(label-rule.ts).
+  const allText = problemText(inst.stimulus, inst.question, inst.options);
   if (!fig) { if (mentionsFigure(text)) issues.push({ code: "figure_missing", message: "지문이 그림·표를 가리키는데 자료가 없습니다(needsFigure 인데 figure 없음)." }); return issues; }
-  if (fig.type === "figure_choice") { const ch = fig.choices as Spec[]; issues.push(...checkMultiFigure(ch, "figure_choice"), ...checkChoiceDistinct(ch)); if (ch.length !== 4) issues.push({ code: "choice_count", message: `선택지 그림 ${ch.length}개` }); }
-  else if (fig.type === "figure_set") issues.push(...checkMultiFigure((fig.figures as { spec: Spec }[]).map((f) => f.spec), "figure_set"));
-  else issues.push(...checkRenderedFigure(fig, renderFigureSvg(fig as unknown as FigureSpec)));
+  if (fig.type === "figure_choice") { const ch = fig.choices as Spec[]; issues.push(...checkMultiFigure(ch, "figure_choice", allText), ...checkChoiceDistinct(ch)); if (ch.length !== 4) issues.push({ code: "choice_count", message: `선택지 그림 ${ch.length}개` }); }
+  else if (fig.type === "figure_set") issues.push(...checkMultiFigure((fig.figures as { spec: Spec }[]).map((f) => f.spec), "figure_set", allText));
+  else issues.push(...checkRenderedFigure(fig, renderFigureSvg(fig as unknown as FigureSpec, { text: allText })));
   return issues;
 }

@@ -8,6 +8,7 @@ import type { ProblemHistoryEntry } from "./problem-history-data";
 import { SKILL_CODES, domainLabel, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate } from "@/lib/format-datetime";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 // 2026-09-14 — 학생 포털 문제 기록(v3). 수업·과제에서 답한 문제를 한 줄씩. 펼치면 지문·내 답·채점 결과, 채점 뒤엔 정답·해설.
 
@@ -184,7 +185,7 @@ function GradeBadge({ entry }: { entry: ProblemHistoryEntry }) {
 function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
   return (
     <div className="mt-3 rounded-lg bg-grey-100 px-4 py-3" data-testid="history-detail">
-      <ProblemFigure spec={e.figure} className="mb-2" />
+      <ProblemFigure spec={e.figure} text={problemText(e.passage, e.options)} className="mb-2" />
       <LearningText text={stripInlineOptions(e.passage, e.options) || "(본문 없음)"} className="learning-body text-[13.5px] leading-[1.75] text-ink" />
       {e.format === "mc" && e.options.length > 0 && (
         <ol className="mt-2 space-y-1">

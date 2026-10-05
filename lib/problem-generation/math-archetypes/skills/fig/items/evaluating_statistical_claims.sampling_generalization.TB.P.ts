@@ -91,7 +91,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "total_sampled", structure: "표의 표본 수 열을 더해 전체 표본 크기를 구함", extra: "easy: 합", concepts: ["표 읽기"],
+      lv: "easy", name: "total_sampled", structure: "표의 표본 수 열을 더해 전체 표본 크기를 구함", extra: "easy: 합", concepts: ["표 읽기", "합계"],
       gen(rng) {
         const c = scene(rng); const S = sum(c.samp);
         return figInst(rng, { stimulus: intro(rng, c), question: `How many ${c.s.ent} were in the sample in all?`, correct: S, wrongs: pos([W(sum(c.yes), "axis_misread", "'예' 열을 더했다."), W(sum(c.pop), "axis_misread", "인원 열을 더했다."), W(Math.max(...c.samp), "step_missing", "가장 큰 값만."), W(S + 10, "other", "계산 오류.")]).filter((w) => w.v !== S),

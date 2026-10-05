@@ -17,6 +17,7 @@ import AnnotationLayer from "./AnnotationLayer";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
 import type { MyReportStatus, ReporterRole } from "@/lib/problem-error-reports/labels";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 // 2026-10-02(오너 UAT B1~B7) — SAT 영어 시험이므로 학생이 보는 결과 문구는 영어가 기본이다.
 // 해설만 English | 한국어 토글(explanation_en 이 없으면 한글 + 안내).
@@ -120,7 +121,7 @@ function ItemProblem({ item, attemptId }: { item: MockExamAttemptItem; attemptId
         {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
         {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
       </AnnotationLayer>
-      {item.figure ? <ProblemFigure spec={item.figure} className="mb-3" /> : null}
+      {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-3" /> : null}
 
       {item.options && item.options.length > 0 ? (
         <div className="flex flex-col gap-1.5">

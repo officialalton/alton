@@ -1,9 +1,9 @@
 {
   "itemId": "one_variable_data.median.FQ.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:03.089Z",
-  "reviewer": "visual-review-agent-RC",
-  "codeHash": "92ecd052759cf92eb52f8e9626633e826fe035bf0667bb071613455dd10daaad",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "8ec247b3743c75ffef3bcb11a7c9911b70754daa334c77e4cdc10d9dd39beff8",
   "samples": [
     "one_variable_data.median.FQ.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved: n=16, sum 384 mean 24; median avg of 8th,9th = (22+24)/2=23; diff 1 = meta. Nit: header Laps (laps) redundant."
+  "notes": "n=16, sum=384, mean 24; median avg of 8th,9th = (22+24)/2=23; diff 1 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
 }

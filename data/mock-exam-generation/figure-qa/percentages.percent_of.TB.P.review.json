@@ -1,9 +1,9 @@
 {
   "itemId": "percentages.percent_of.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:03.091Z",
-  "reviewer": "visual-review-agent-RC",
-  "codeHash": "a5cc3ca27965b949beb161d7fb54b10cd2e83a8dadc3f2c876826de4570ca194",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "42b9c8c7397f10ff09a78cc87147e82056f54a9a7e23603f8f4860e30a434867",
   "samples": [
     "percentages.percent_of.TB.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved: total 50+45+155+55=305; 0.6*305=183 = meta. Fine."
+  "notes": "total 305; 60% = 183 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
 }

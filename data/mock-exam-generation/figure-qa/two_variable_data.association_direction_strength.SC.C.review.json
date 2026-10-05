@@ -1,23 +1,23 @@
 {
-  "itemId": "two_variable_data.association_direction_strength.SC.C",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:01.524Z",
-  "reviewer": "visual-review-agent-RD",
-  "codeHash": "566e590ce00f519df31ee62bc80690b84d47c7a0341ceb031a111a832d5a64b0",
-  "samples": [
-    "two_variable_data.association_direction_strength.SC.C.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "pass",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "D shows tight rising points near line (strong positive); A strong negative, B ~0, C weak positive. Nit: option labels read Choice A..D."
+ "itemId": "two_variable_data.association_direction_strength.SC.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:48.651Z",
+ "reviewer": "visual-review-agent-SD",
+ "codeHash": "3485dad124b7bedde0fc8a1fedc1f1169aba2387a692e38bab393c368610967f",
+ "samples": [
+  "two_variable_data.association_direction_strength.SC.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "D is the only rising tight cloud (A falls, B flat, C weak/scattered) = D. Best-fit lines are unlabeled and no text refers to them by label: OK with new label rule."
 }

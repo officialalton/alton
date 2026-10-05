@@ -9,7 +9,7 @@ export const QA_DIR = path.join("data", "mock-exam-generation", "figure-qa");
 export const QA_HTML_DIR = path.join(QA_DIR, "_html");
 const AR = "lib/problem-generation/math-archetypes";
 const FG = "lib/problem-figures";
-const COMMON = [`${AR}/figure-kit.ts`, `${AR}/figure-topics.ts`, `${AR}/skills/tvd-fig-levels.ts`, `${FG}/render.ts`, `${FG}/templates/_layout.ts`, "app/session/[id]/ProblemFigure.tsx", `${AR}/figure-qa-snapshot.test.ts`, `${AR}/figure-qa-samples.ts`, "scripts/mock-exam-generation/figure-qa-render.mjs"];
+const COMMON = [`${AR}/figure-kit.ts`, `${AR}/figure-topics.ts`, `${AR}/skills/tvd-fig-levels.ts`, `${FG}/render.ts`, `${FG}/label-rule.ts`, `${FG}/templates/_layout.ts`, "app/session/[id]/ProblemFigure.tsx", `${AR}/figure-qa-snapshot.test.ts`, `${AR}/figure-qa-samples.ts`, "scripts/mock-exam-generation/figure-qa-render.mjs"];
 const RENDERER: Record<string, string[]> = { data: [`${FG}/templates/data.ts`], plane: [`${FG}/templates/coordinate-plane.ts`], figure_choice: [`${FG}/templates/figure-choice.ts`], figure_set: [`${FG}/templates/figure-choice.ts`] };
 
 /** 항목 id → 원형 정의 파일(이 파일럿의 two_variable_data 자료 원형). 새 skill 파일이 생기면 여기에 규칙을 더한다. */

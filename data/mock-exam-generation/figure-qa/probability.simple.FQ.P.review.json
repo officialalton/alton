@@ -1,23 +1,23 @@
 {
-  "itemId": "probability.simple.FQ.P",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:01.522Z",
-  "reviewer": "visual-review-agent-RD",
-  "codeHash": "3f883c51dc313f28a26444c448426e8fd446f65c7a9afe184e5432bf1d5cd38f",
-  "samples": [
-    "probability.simple.FQ.P.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "n/a",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "n/a",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "mean=104/27~3.85; values 4(7)+5(9)=16 -> 16/27 = A."
+ "itemId": "probability.simple.FQ.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:48.650Z",
+ "reviewer": "visual-review-agent-SD",
+ "codeHash": "5940978d1a8bb09cfcb6e86b5c88215c47784fbd1d69f771839e2876e65db3cc",
+ "samples": [
+  "probability.simple.FQ.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "n=27, sum 104, mean 3.85; >mean: 4(7)+5(9)=16/27 = A."
 }

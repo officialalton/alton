@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_functions.vertex_y.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:03.087Z",
-  "reviewer": "visual-review-agent-RC",
-  "codeHash": "a8b1a5cf86f03bdbd06e1bab111183159c1998f077b7478bfd974b059cf1bae2",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "57b93fcb9181e075fd3dce29021b6153fb281296d1a560ed542612df3a756867",
   "samples": [
     "nonlinear_functions.vertex_y.TB.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved: second difference 6 => a=3,b=-30,c=102 (f(7)=39 ok); min at x=5, f(5)=27 = meta answer. Fine."
+  "notes": "diffs 15,21,27,33,39 => a=3, vertex x=5, f(5)=39-9-3=27 = meta (min). Table only; no line labels. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
 }

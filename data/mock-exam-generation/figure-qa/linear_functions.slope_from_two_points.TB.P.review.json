@@ -1,9 +1,9 @@
 {
   "itemId": "linear_functions.slope_from_two_points.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T22:00:00.000Z",
-  "reviewer": "visual-review-agent-RF",
-  "codeHash": "d541f6246f4b26b928dfbfa07d666f7c42350ea3096a8deb94b94f4b9cec1bb7",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "92525097b78c1ae16b524962e433d73794fe1567131eb2179e17690724706bfa",
   "samples": [
     "linear_functions.slope_from_two_points.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Table rows (15,201),(20,261)... slope 60/5=12 MB/min; 1 min=60 s (shown above table) -> 0.2 MB/s = A. Matches meta. Nit: question wording clumsy."
+  "notes": "기울기 12 MB/min, 1 min=60 s → 0.2 → A. 환산식 표 위에 표시. nit: 질문 문구 'number of minutes ... measured in seconds'가 다소 어색. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

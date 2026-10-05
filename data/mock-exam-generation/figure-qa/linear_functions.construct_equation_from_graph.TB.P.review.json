@@ -1,9 +1,9 @@
 {
   "itemId": "linear_functions.construct_equation_from_graph.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:11:57Z",
-  "reviewer": "visual-review-agent-RA",
-  "codeHash": "d456469034418a9ec5638251f615183750d1fed3fea4de5571b5c942c38947bd",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "0a4ef9bf3c9426e73b0dc59aa666c3469733b1d1dff93da2009859879fbb66dd",
   "samples": [
     "linear_functions.construct_equation_from_graph.TB.P.png"
   ],
@@ -11,13 +11,13 @@
     "figure_present": "pass",
     "proportion_matches_values": "pass",
     "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
-    "mobile_375_readable": "pass",
-    "multi_figure_consistent": "n/a",
-    "choice_distinct_one_rule": "n/a"
+    "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "기울기 2, 15일 때 53 → 절편 23 → 2x+23 = A. 표 일치. Nit: 문항 ID 에 graph 가 있으나 표 형식(비차단)."
+  "notes": "기울기 2, 절편 53-30=23 → y=2x+23 = A. Nit(비차단): '남은 높이'가 날수에 따라 증가해 현실성 낮음(양초는 줄어야 함); 풀이에는 지장 없음."
 }

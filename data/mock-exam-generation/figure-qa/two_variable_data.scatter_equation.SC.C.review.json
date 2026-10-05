@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.scatter_equation.SC.C",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:00Z",
-  "reviewer": "visual-review-agent-RE",
-  "codeHash": "566e590ce00f519df31ee62bc80690b84d47c7a0341ceb031a111a832d5a64b0",
+  "reviewedAt": "2026-10-05T19:42:35.611Z",
+  "reviewer": "visual-review-agent-SE",
+  "codeHash": "3485dad124b7bedde0fc8a1fedc1f1169aba2387a692e38bab393c368610967f",
   "samples": [
     "two_variable_data.scatter_equation.SC.C.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "y=2x+40: A negative slope, B intercept 40 slope ~4, C intercept 40 slope 2, D intercept 60 -> C. Matches."
+  "notes": "Solved from image: only C starts at 40 with slope 2 (reaches ~64 at x=12) -> C. Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact. Choices use 4 identical axes/sizes."
 }

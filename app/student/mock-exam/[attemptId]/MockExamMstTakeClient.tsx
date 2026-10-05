@@ -28,6 +28,7 @@ import {
   mstMathToolsAllowed,
   mstRemainingSecondsAt,
 } from "@/lib/mock-exam/mst";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
@@ -452,7 +453,7 @@ export default function MockExamMstTakeClient({
                 {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
                 {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
               </AnnotationLayer>
-              {item.figure ? <ProblemFigure spec={item.figure} className="mb-4" /> : null}
+              {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-4" /> : null}
 
               {item.format === "mc" && item.options ? (
                 <div role="radiogroup" aria-label="선택지" className="flex flex-col gap-2">

@@ -103,7 +103,7 @@ const i = P.options.indexOf(want); if (i<0) throw new Error('맞는 서술 없�
   ],
   em: [
     {
-      lv: "easy", name: "upper_end", structure: "표본 %와 오차범위로 구간의 위 끝을 구함", extra: "easy: % + 오차범위", concepts: ["그럴듯한 구간"],
+      lv: "easy", name: "upper_end", structure: "표본 %와 오차범위로 구간의 위 끝을 구함", extra: "easy: % + 오차범위", concepts: ["그럴듯한 구간", "표본 비율 ± 오차한계"],
       gen(rng) {
         const s = surv(rng); const { n, p } = sampleCounts(rng, { pLo: 15, pHi: 85 }); const m = rng.int(2, 7);
         const fig = factFig(`Survey of ${lcf(s.popLbl)}`, [["Sample size", n], ["Percent in sample who said yes", p], ["Margin of error (percentage points)", m]]);

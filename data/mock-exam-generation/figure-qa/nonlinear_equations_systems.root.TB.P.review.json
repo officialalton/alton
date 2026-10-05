@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_equations_systems.root.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "b4e6ecd73a6391d71d7684ea43a1764781853e69fa93e6285887f927530af6e3",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "ab2b075c06b097afa95232c2a571612b0c22a02f4a206e18ff1fc5749b59e47d",
   "samples": [
     "nonlinear_equations_systems.root.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Second difference 6 -> r=3x^2-48x+144=3(x-4)(x-12); larger root 12 -> C. All five rows check."
+  "notes": "2계 차분 6 → a=3, b=-48, c=144 → 3(x-4)(x-12) → 큰 근 12 → C. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

@@ -51,7 +51,16 @@ const CTX = [
   { who: "A botanist", what: "the number of leaves on a fast-growing vine", tv: "r", fn: "T", tu: "days", grow: true },
   { who: "A librarian", what: "the number of digital books borrowed through a new program", tv: "b", fn: "D", tu: "months", grow: true },
   { who: "A park ranger", what: "the number of rabbits on an island", tv: "j", fn: "N", tu: "months", grow: true },
+  { who: "A veterinarian", what: "the number of bacteria in a culture dish", tv: "u", fn: "Q", tu: "hours", grow: true },
+  { who: "A farmer", what: "the number of bees in a new hive", tv: "z", fn: "H", tu: "weeks", grow: true },
+  { who: "A software company", what: "the number of registered users of an app", tv: "e", fn: "U", tu: "months", grow: true },
+  { who: "A zoologist", what: "the number of birds nesting on a cliff", tv: "a", fn: "E", tu: "years", grow: true },
+  { who: "A teacher", what: "the number of students who joined an online club", tv: "c", fn: "J", tu: "weeks", grow: true },
+  { who: "A banker", what: "the balance, in dollars, of a savings account", tv: "i", fn: "W", tu: "years", grow: true },
+  { who: "A geologist", what: "the number of mineral crystals in a growing sample", tv: "g", fn: "X", tu: "days", grow: true },
+  { who: "A streaming service", what: "the number of viewers of a new series", tv: "v", fn: "Y", tu: "weeks", grow: true },
 ];
+const lcf1 = (w: string) => w.charAt(0).toLowerCase() + w.slice(1);
 const sg = (u: string) => u.replace(/s$/, "");
 const QS = (fn: string, tv: string) => [`Which table gives values of $${fn}(${tv})$ that are consistent with this model?`, `Which of the following tables could show values of $${fn}(${tv})$ for this model?`, `Which table correctly shows values of $${fn}(${tv})$ predicted by the model?`, `For which table are all the values of $${fn}(${tv})$ given by this model?`];
 const WORD: Record<number, string> = { 2: "doubles", 3: "triples", 4: "quadruples" };
@@ -136,9 +145,9 @@ export const ITEM = defineItem({
     {
       lv: "easy", name: "equation_given", sprNo: SPR_NO_TABLE, structure: "f(x) = a·b^x 식을 주고 맞는 값표를 고름", extra: "easy: 식에 대입", concepts: ["지수함수", "값표"],
       gen(rng) {
-        const [tv, fn] = rng.pick([["x", "f"], ["t", "g"], ["n", "h"]]); const b = rng.pick([2, 3, 4]); const A = rng.int(1, Math.floor(999 / b ** 3)) * b ** 3;
+        const c = rng.pick(CTX.filter((q) => q.grow)); const tv = c.tv, fn = c.fn; const b = rng.pick([2, 3, 4]); const A = rng.int(1, Math.floor(999 / b ** 3)) * b ** 3;
         const model = `const A = P.A, g = P.b, g3 = 1 / P.b; const e = (t) => t;`;
-        return build(rng, { A, g: b, g3: 1 / b, e: (t) => t, ts: [0, 1, 2, 3] }, [tv, `${fn}(${tv})`], model, { stimulus: `$$${fn}(${tv}) = ${A}(${b})^{${tv}}$$ ${rng.pick(["The function is defined as shown.", "An exponential function is given above."])}`, question: rng.pick([`Which table gives values of $${fn}(${tv})$ for this function?`, `Which of the following tables shows values of $${fn}$?`]), P: { A, b }, trace: [[`${tv} = 0 일 때 ${A}, 이후 매번 ${b} 배이다.`, "Start value and factor."], [`값은 ${[0, 1, 2, 3].map((t) => A * b ** t).join(", ")} 이다.`, "Evaluate."]], variant: "equation_given" });
+        return build(rng, { A, g: b, g3: 1 / b, e: (t) => t, ts: [0, 1, 2, 3] }, [tv, `${fn}(${tv})`], model, { stimulus: rng.pick([`${c.who} models ${c.what} with the function $$${fn}(${tv}) = ${A}(${b})^{${tv}}$$ where $${tv}$ is the number of ${c.tu} since the start.`, `The function $${fn}$ given by $$${fn}(${tv}) = ${A}(${b})^{${tv}}$$ models ${c.what}, where $${tv}$ is the number of ${c.tu} after ${lcf1(c.who)} begins recording.`, `${c.who} finds that ${c.what} follows an exponential model: $$${fn}(${tv}) = ${A}(${b})^{${tv}}$$ Here $${tv}$ is measured in ${c.tu}.`]), question: rng.pick([`Which table gives values of $${fn}(${tv})$ for this function?`, `Which of the following tables shows values of $${fn}$?`]), P: { A, b }, trace: [[`${tv} = 0 일 때 ${A}, 이후 매번 ${b} 배이다.`, "Start value and factor."], [`값은 ${[0, 1, 2, 3].map((t) => A * b ** t).join(", ")} 이다.`, "Evaluate."]], variant: "equation_given" });
       },
     },
     {
@@ -146,7 +155,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const c = rng.pick(CTX.filter((q) => q.grow)); const b = rng.pick([2, 3, 4]); const A = rng.int(1, Math.floor(999 / b ** 3)) * b ** 3; const ts = [0, 1, 2, 3];
         const model = `const A = P.A, g = ({ doubles: 2, triples: 3, quadruples: 4 })[P.w], g3 = 1 / g; const e = (t) => t;`;
-        return build(rng, { A, g: b, g3: 1 / b, e: (t) => t, ts }, [c.tv, `${c.fn}(${c.tv})`], model, { stimulus: `${c.who} models ${c.what}. The amount starts at ${A} and ${WORD[b]} every ${sg(c.tu)}. The function $${c.fn}$ gives the amount $${c.tv}$ ${c.tu} after the start.`, question: rng.pick(QS(c.fn, c.tv)), P: { A, w: WORD[b] }, trace: [[`초기값 ${A}, 배율 ${b} 이다.`, "Initial value and factor."], [`모형은 ${A}·${b}^${c.tv} 이다.`, "Write the model."], [`표의 각 ${c.tv} 에서 계산한다.`, "Evaluate each row."]], variant: `words_x${b}` });
+        return build(rng, { A, g: b, g3: 1 / b, e: (t) => t, ts }, [c.tv, `${c.fn}(${c.tv})`], model, { stimulus: rng.pick([`${c.who} models ${c.what}. The amount starts at ${A} and ${WORD[b]} every ${sg(c.tu)}. The function $${c.fn}$ gives the amount $${c.tv}$ ${c.tu} after the start.`, `At the start of an observation, ${c.what} is ${A}. Each ${sg(c.tu)}, this quantity ${WORD[b]}. Let $${c.fn}(${c.tv})$ represent the quantity $${c.tv}$ ${c.tu} later.`, `${c.who} tracks ${c.what}. Initially it is ${A}, and every ${sg(c.tu)} it ${WORD[b]}. The function $${c.fn}$ models the quantity after $${c.tv}$ ${c.tu}.`]), question: rng.pick(QS(c.fn, c.tv)), P: { A, w: WORD[b] }, trace: [[`초기값 ${A}, 배율 ${b} 이다.`, "Initial value and factor."], [`모형은 ${A}·${b}^${c.tv} 이다.`, "Write the model."], [`표의 각 ${c.tv} 에서 계산한다.`, "Evaluate each row."]], variant: `words_x${b}` });
       },
     },
   ],

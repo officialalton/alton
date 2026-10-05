@@ -1,9 +1,9 @@
 {
   "itemId": "one_variable_data.grouped_median_interval.FQ.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:03.087Z",
-  "reviewer": "visual-review-agent-RC",
-  "codeHash": "d83aae7e8097615618a789e4c5bad25925c204fc484847b62933af4ec18a94b0",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "f8aaa3e5e0d2ab6647fa91d3155070645d4e5950379713a7488846f793d54c9c",
   "samples": [
     "one_variable_data.grouped_median_interval.FQ.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved: 11+9+7+6+11+4=48, +9 in top interval =57, median is 29th; cumulative 11,20,27,33 -> 80-99, lower endpoint 80 = meta. Mobile header wraps cleanly. Nit: header Steps (hundreds of steps) is awkward wording."
+  "notes": "counts 11,9,7,6,11,4=48; +9 in 120-139 => 57; 29th value: cum 11,20,27,33 => 80-99, lower endpoint 80 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
 }

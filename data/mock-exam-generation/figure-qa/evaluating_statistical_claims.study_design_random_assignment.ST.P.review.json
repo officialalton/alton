@@ -1,9 +1,9 @@
 {
   "itemId": "evaluating_statistical_claims.study_design_random_assignment.ST.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:11:57Z",
-  "reviewer": "visual-review-agent-RA",
-  "codeHash": "6813216492fd67fa98783345ff206993d324644db36b6719499afc8adb0deb94",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "fd7281ea809344ff4d5bda81e3d3f04cc85d187aba2ea061fa2679b9a8713295",
   "samples": [
     "evaluating_statistical_claims.study_design_random_assignment.ST.P.png"
   ],
@@ -11,13 +11,13 @@
     "figure_present": "pass",
     "proportion_matches_values": "pass",
     "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
-    "mobile_375_readable": "pass",
-    "multi_figure_consistent": "n/a",
-    "choice_distinct_one_rule": "n/a"
+    "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "statement-type. 무작위 배정, 39/50=78% vs 30/60=50% → D(인과 가능성 높음). 일치. 합계 110 일치."
+  "notes": "표: 무작위 배정 → 인과 추론 가능 = D. 풀림."
 }

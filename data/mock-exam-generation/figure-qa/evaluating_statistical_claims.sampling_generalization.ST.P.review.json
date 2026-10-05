@@ -1,9 +1,9 @@
 {
   "itemId": "evaluating_statistical_claims.sampling_generalization.ST.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:11:57Z",
-  "reviewer": "visual-review-agent-RA",
-  "codeHash": "eb4ae720414c67b374bb3bd6ec0632fe4072d1200476f1dc23932d32374d26b9",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "28e867a895e43fd10ae4cda73caeb5213059cc4caaa1c6c7d9bdec6d9bb14a60",
   "samples": [
     "evaluating_statistical_claims.sampling_generalization.ST.P.png"
   ],
@@ -11,13 +11,13 @@
     "figure_present": "pass",
     "proportion_matches_values": "pass",
     "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
-    "mobile_375_readable": "pass",
-    "multi_figure_consistent": "n/a",
-    "choice_distinct_one_rule": "n/a"
+    "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "statement-type. 한 중학교 명단(450)에서 무작위 추출 → 그 학교 교사에게만 일반화 = C. 일치. 모바일 줄바꿈 정상."
+  "notes": "표: 한 중학교 명단에서 무작위 → 해당 중학교 교사에게만 일반화 = C. 풀림. Nit: 모바일 열 폭 양호."
 }

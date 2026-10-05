@@ -1,9 +1,9 @@
 {
   "itemId": "inference_margin_error.population_estimate.ST.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:11:57Z",
-  "reviewer": "visual-review-agent-RA",
-  "codeHash": "84a0863e53c0a92dea823d229404bcba02a9e9669c2b1940682fb7be7f99445d",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "be9947512609ab0343e39e17b7364da7292bb9c0ebb620323d3b86cbd0936470",
   "samples": [
     "inference_margin_error.population_estimate.ST.P.png"
   ],
@@ -11,13 +11,13 @@
     "figure_present": "pass",
     "proportion_matches_values": "pass",
     "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
-    "mobile_375_readable": "pass",
-    "multi_figure_consistent": "n/a",
-    "choice_distinct_one_rule": "n/a"
+    "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "statement-type. 400-227-33=140, 35% × 9000 = 3150 = B. 일치."
+  "notes": "yes=400-227-33=140, 140/400×9000=3150 = B. 풀림."
 }

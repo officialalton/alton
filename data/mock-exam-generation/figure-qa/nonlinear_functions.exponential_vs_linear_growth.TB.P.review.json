@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_functions.exponential_vs_linear_growth.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "a6e747e32bbfd132ec0db9cd408fe689e7f4f6962c5e3df9e8371709244cd25d",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "4a87476a92d7e053303477f430b2c5f87b0891f573b000ba9bdc92d3f08e1a93",
   "samples": [
     "nonlinear_functions.exponential_vs_linear_growth.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "A=77+35t (112,147,182,217), B=6*2^t (12,24,48,96). t=5: A=252,B=192; t=6: A=287,B=384 -> 6 = A. Table columns have axes titles/units; mobile wraps headers cleanly."
+  "notes": "A=35x+77, B=6·2^x; x=5 252>192, x=6 287<384 → 6 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

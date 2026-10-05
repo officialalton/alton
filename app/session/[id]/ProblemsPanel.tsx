@@ -31,6 +31,7 @@ import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "./Mo
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import { loadMyProblemErrorReportsAction } from "@/lib/problem-error-reports/actions";
 import type { MyReportStatus } from "@/lib/problem-error-reports/labels";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: "쉬움",
@@ -616,7 +617,7 @@ export default function ProblemsPanel({
                 {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다.
                     2026-09-19(제품 오너 발견) — 지문이 "as shown below" 처럼 자료가 아래에 있다고
                     서술하는데 자료가 지문보다 먼저 그려져 서술과 화면 순서가 어긋났다 — 지문 다음으로 옮긴다. */}
-                {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} className="mb-4" />}
+                {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && <ProblemFigure spec={p.figure} text={problemText(p.passage, p.options)} className="mb-4" />}
 
                 {p.statements && p.statements.length > 0 && (
                   <ol className="mb-4 pl-1" data-testid="statements">
@@ -677,7 +678,7 @@ export default function ProblemsPanel({
                             <span
                               className="block max-w-[320px] mt-1 [&_svg]:w-full [&_svg]:h-auto"
                               data-testid={`choice-figure-${i}`}
-                              dangerouslySetInnerHTML={{ __html: renderFigureSvg((p.figure as { choices: FigureSpec[] }).choices[i]) }}
+                              dangerouslySetInnerHTML={{ __html: renderFigureSvg((p.figure as { choices: FigureSpec[] }).choices[i], { text: problemText(p.passage, p.options) }) }}
                             />
                           ) : (
                             <LearningText text={opt} className="learning-body inline" />

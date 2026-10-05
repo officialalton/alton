@@ -1,9 +1,9 @@
 {
   "itemId": "linear_inequalities.point_in_solution.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "f4aa28bb91bb2089f50578e41b9feaf94ff636c594785d7e9b1f8838d6b7ff54",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "fd52498b895788928921261cfdbe1a965f2be4c549ed13b29617e6fcd7fe7f14",
   "samples": [
     "linear_inequalities.point_in_solution.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "statement-type. Checked J(2,-4) yes, K(2,10) no, L(8,-1) yes, M(3,-7) fails 2nd, N(1,-5) fails 2nd (-21<-20) -> 2 = A. Nit: inequalities rendered in plain text with hyphen-minus and no italics/true minus signs."
+  "notes": "J(2,-4) ok, K no, L(8,-1) ok, M no(-31<-20), N no(-21<-20) → 2 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

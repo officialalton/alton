@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_functions.exponential_model.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "711d041a8a939c7e34e8bbae1975cc8b2d866f6e51f5cba69d5d20f6d62eb7d3",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "00aee45efd84d811e1284b88b7ef88054230e3adea8848331d0ef7d06fedf0d4",
   "samples": [
     "nonlinear_functions.exponential_model.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "14,28,56,112 at x=1..4: b=2, a=14/2=7 -> D. Nit: model text shows literal 'y = a(b)^x' with caret (not superscript) - cosmetic."
+  "notes": "x=1→14, 비 2 → a=14/2=7 → D. 일치. nit: y=a(b)^x 평문 표기. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

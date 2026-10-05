@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.scatter_slope_context.SC.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:00Z",
-  "reviewer": "visual-review-agent-RE",
-  "codeHash": "c80252280e93adb594ff92622110f3b1990e8e8cb467437e0732558833814f9f",
+  "reviewedAt": "2026-10-05T19:42:35.612Z",
+  "reviewer": "visual-review-agent-SE",
+  "codeHash": "478ba1fd9d4cb675e27cf9201fecf0da203fc744c34d9d97556639154b3394b2",
   "samples": [
     "two_variable_data.scatter_slope_context.SC.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Slope -4 mi/week; 14 days = 2 weeks -> 8 = B. Matches."
+  "notes": "Solved from image: slope -4 mi/wk, 14d=2wk -> 8 (B). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact."
 }

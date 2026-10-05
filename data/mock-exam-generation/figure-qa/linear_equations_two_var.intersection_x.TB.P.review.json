@@ -1,9 +1,9 @@
 {
   "itemId": "linear_equations_two_var.intersection_x.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:11:57Z",
-  "reviewer": "visual-review-agent-RA",
-  "codeHash": "cfa218afac2d98cca5f0825af5161ae46d8ec527139f137ee31fe8d2f59c1b8a",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "50fdf09d2ff44b568c3734a10c6e578e9a8d83b6d454df25c4cc9c7431dc6abe",
   "samples": [
     "linear_equations_two_var.intersection_x.TB.P.png"
   ],
@@ -11,13 +11,13 @@
     "figure_present": "pass",
     "proportion_matches_values": "pass",
     "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
-    "mobile_375_readable": "pass",
-    "multi_figure_consistent": "n/a",
-    "choice_distinct_one_rule": "n/a"
+    "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Maya 18+4x, Theo 44+2x → x=13 = C. 표 값 일치."
+  "notes": "Maya 18+4w, Theo 44+2w → w=13 = C. 풀림."
 }

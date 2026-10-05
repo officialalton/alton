@@ -96,7 +96,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "sample_percent", structure: "표본 크기와 '예' 응답 수로 표본 백분율을 구함", extra: "easy: 비율 → 백분율", concepts: ["표본 비율"],
+      lv: "easy", name: "sample_percent", structure: "표본 크기와 '예' 응답 수로 표본 백분율을 구함", extra: "easy: 비율 → 백분율", concepts: ["표본 비율", "비율 → 백분율"],
       gen(rng) {
         const s = surv(rng); const { n, yes, no, p } = sampleCounts(rng);
         const fig = factFig(`Survey of ${lcf(s.popLbl)}`, [["Sample size", n], ["Number in sample who said yes", yes], ["Number in sample who said no", no]]);

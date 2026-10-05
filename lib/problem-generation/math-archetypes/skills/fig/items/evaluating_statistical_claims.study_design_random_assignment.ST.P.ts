@@ -96,7 +96,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "treatment_rate", structure: "처치 쪽 개선 백분율을 구함", extra: "easy: 비율", concepts: ["비율"],
+      lv: "easy", name: "treatment_rate", structure: "처치 쪽 개선 백분율을 구함", extra: "easy: 비율", concepts: ["비율", "처치군 비교"],
       gen(rng) {
         const st = study(rng); const { n1, n2 } = sizes(rng); const k1 = imp(rng, n1), k2 = imp(rng, n2); const p = (100 * k1) / n1;
         const fig = factFig(`Experiment on ${st.tr}`, rowsOf(st, rng.pick([...RANDOM_ASSIGN, ...CHOICE_ASSIGN]), n1, n2, k1, k2), H);

@@ -1,9 +1,9 @@
 {
   "itemId": "equivalent_expressions.polynomial_distribution.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:11:57Z",
-  "reviewer": "visual-review-agent-RA",
-  "codeHash": "e6831f22a70ee34fc05b51fae7e0aa7f79e379faf69a16ade927e2eea038855f",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "a00820c02aaf62bdbdb4cba65d77bb79cd1999e2fe0425aeceb3c92af28343e2",
   "samples": [
     "equivalent_expressions.polynomial_distribution.TB.P.png"
   ],
@@ -11,13 +11,13 @@
     "figure_present": "pass",
     "proportion_matches_values": "pass",
     "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
-    "mobile_375_readable": "pass",
-    "multi_figure_consistent": "n/a",
-    "choice_distinct_one_rule": "n/a"
+    "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "그림만으로 p(1..5)=-9,-6,-5,-6,-9, 2계 차분 -2 → a=-1, p(1)=-1+b+c=-9, p(2)=-4+2b+c=-6 → b=6 = 정답 A. Nit(비차단): 스냅샷 지문에 ax^2 가 LaTeX 미변환 평문(앱은 수식 렌더 경로 사용 추정)."
+  "notes": "그림만으로 p(1..5)=-9,-6,-5,-6,-9, 2계 차분 -2 → a=-1, b=6 = 정답 A. Nit(비차단): 스냅샷 지문의 ax^2 가 LaTeX 미변환 평문(앱은 수식 렌더 경로). 곡선 라벨 없음 — 신규 라벨 규칙 영향 없음."
 }

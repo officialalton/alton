@@ -1,9 +1,9 @@
 {
   "itemId": "linear_inequalities.table_verification.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "66e9ddf3ae98da08856763e290af47e6bf61679199065c4e6b66f3f35dba32c3",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "32e7a535ba641818f28c56ca840b4aab762cfa58616bbc00edf15b5a44161d3a",
   "samples": [
     "linear_inequalities.table_verification.TB.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "statement-type. Jordan t+c=14>13 no; Kiara 24+5=29,13 yes; Luis 26<27 no; Mina 17 no; Noah 25 no -> 1 = D. Nit: 't + c' in plain text."
+  "notes": "Kiara만 2t+5c>=27 및 t+c<=13 동시 충족 → 1 → D. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

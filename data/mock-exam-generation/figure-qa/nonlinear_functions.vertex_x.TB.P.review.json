@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_functions.vertex_x.TB.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:03.086Z",
-  "reviewer": "visual-review-agent-RC",
-  "codeHash": "56ae60ecbc4d8c6d552743a8013dcf1a751916aaefebed1ee91304b7befe0307",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "88d3e1a6baa0b6afa93ecc2d53bb656202239698c1fcf785f9bed94237916f12",
   "samples": [
     "nonlinear_functions.vertex_x.TB.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved: second difference -6 => a=-3, b=48 (g(1)=-3+48-212=-167 ok); vertex x=-b/2a=8 = meta answer. Nit: snapshot shows raw ax^2 (snapshot page does not render superscripts)."
+  "notes": "2nd diff -6 => a=-3,b=48; vertex x=8 = meta. Table only; no line labels. Nit: snapshot shows raw ax^2 (snapshot page does not render superscripts). Re-review after label rule change: table items, no line/curve labels referenced or drawn."
 }

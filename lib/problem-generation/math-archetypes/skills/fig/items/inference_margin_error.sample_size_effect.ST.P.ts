@@ -93,7 +93,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "size_ratio", structure: "두 설문의 표본 크기 비를 구함", extra: "easy: 나눗셈", concepts: ["표본 크기"],
+      lv: "easy", name: "size_ratio", structure: "두 설문의 표본 크기 비를 구함", extra: "easy: 나눗셈", concepts: ["표본 크기", "오차한계와 표본 크기의 관계"],
       gen(rng) {
         const s = surv(rng); const nA = rng.pick([50, 100, 150, 200]); const K = rng.pick([2, 3, 4, 5, 6]); const nB = nA * K;
         const fig = factFig(`Two surveys of ${lcf(s.popLbl)}`, [["Survey A sample size", nA], ["Survey B sample size", nB]]);

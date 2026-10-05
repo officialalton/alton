@@ -1,23 +1,23 @@
 {
-  "itemId": "two_variable_data.conditional_share.TW.C",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:01.525Z",
-  "reviewer": "visual-review-agent-RD",
-  "codeHash": "a8f4792df936c72ed63892ece92493b6643f1881881773c5c24e2a22392ddd35",
-  "samples": [
-    "two_variable_data.conditional_share.TW.C.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "pass",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "Needs 60 and 10 owners with row totals 100/20: A. B swaps rows, C swaps columns for row1 (40/60), D has 3 of 20 (15%). Distinct, one rule each. Nit: option labels read Choice A..D."
+ "itemId": "two_variable_data.conditional_share.TW.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:48.651Z",
+ "reviewer": "visual-review-agent-SD",
+ "codeHash": "4fdb7364f8d9de8e9a6ddc6fbfc762cedc403c10413262cd9b1e3dfd398f4936",
+ "samples": [
+  "two_variable_data.conditional_share.TW.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "Row with children 60/40/100, without 10/10/20 -> A; B swaps rows, C swaps columns, D has wrong 3/17 split."
 }

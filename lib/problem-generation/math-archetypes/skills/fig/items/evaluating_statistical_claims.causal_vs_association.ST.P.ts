@@ -97,7 +97,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "mean_difference", structure: "두 조건의 평균 차를 구함", extra: "easy: 뺄셈", concepts: ["평균 비교"],
+      lv: "easy", name: "mean_difference", structure: "두 조건의 평균 차를 구함", extra: "easy: 뺄셈", concepts: ["평균 비교", "평균의 차"],
       gen(rng) {
         const st = study(rng); const { n1, n2 } = counts(rng); const a = rng.int(50, 95), b = a - rng.int(2, 20);
         const fig = factFig(`Study of ${st.tr}`, [...baseRows(st, rng.pick(NONRANDOM_SAMPLE), rng.pick([...RANDOM_ASSIGN, ...CHOICE_ASSIGN]), n1, n2), [`Mean ${st.out}, users (points)`, a], [`Mean ${st.out}, non-users (points)`, b]], H);
@@ -106,7 +106,7 @@ export const ITEM = defineItem({
       },
     },
     {
-      lv: "medium", name: "mean_from_total", structure: "한 조건의 총점과 인원으로 평균을 구함", extra: "medium: 총점 ÷ 인원", concepts: ["평균"],
+      lv: "medium", name: "mean_from_total", structure: "한 조건의 총점과 인원으로 평균을 구함", extra: "medium: 총점 ÷ 인원", concepts: ["평균", "총합 ÷ 개수"],
       gen(rng) {
         const st = study(rng); const { n1, n2 } = counts(rng); const a = rng.int(50, 90) + rng.pick([0, 0.5]); const T1 = a * n1, T2 = rng.int(40, 90) * n2; if (!Number.isInteger(T1)) throw new GenFail("int");
         const fig = factFig(`Study of ${st.tr}`, [...baseRows(st, rng.pick(NONRANDOM_SAMPLE), rng.pick([...RANDOM_ASSIGN, ...CHOICE_ASSIGN]), n1, n2), [`Total ${st.out} points, users`, T1], [`Total ${st.out} points, non-users`, T2]], H);

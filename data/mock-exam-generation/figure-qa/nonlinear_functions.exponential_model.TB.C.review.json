@@ -1,9 +1,9 @@
 {
   "itemId": "nonlinear_functions.exponential_model.TB.C",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:12.000Z",
-  "reviewer": "visual-review-agent-RB",
-  "codeHash": "83bc4e17576992bb7544bf9d950e42f7d3a83b63acc2cbc16616766912d06236",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "90e523ad9c289ba0f35f05bf244c0f63e15fbe4fb5de058422ca1cabc80edda7",
   "samples": [
     "nonlinear_functions.exponential_model.TB.C.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "480*1.5^w: 480,720,1080,1620 -> D. A is linear (+240), B halves, C starts at 720 (wrong initial). One rule each. Nit: 'Let F(w) be the amount' vague (should say number of followers); 'Choice A' option labels redundant; cards wide with small tables at desktop."
+  "notes": "32,48,72,108 (x1.5) 표 C가 정답. A 반대 배율, B 한 주기 밀림, D 등차(가산). 4개 표 모두 보임. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
 }

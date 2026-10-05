@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.conditional_share.TW.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-01T21:12:00Z",
-  "reviewer": "visual-review-agent-RE",
-  "codeHash": "5c5ce68b181af4500b2ca85c2dc44cda4a12901d23b6d14532ec10ce7af0e5f5",
+  "reviewedAt": "2026-10-05T19:42:35.609Z",
+  "reviewer": "visual-review-agent-SE",
+  "codeHash": "8b69dc7503eb219b76804a8536a4f16b843d02f4156b05327578ec5ae819d2b2",
   "samples": [
     "two_variable_data.conditional_share.TW.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "City 60/112 x168 = 90 = C. Totals 112,77,97,92,189 consistent. Mobile wraps headers, all columns readable."
+  "notes": "Solved from image: 60/112*168=90 (C). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact."
 }

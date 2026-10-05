@@ -6,6 +6,7 @@ import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
 import type { UnitPreview } from "@/app/student/curriculum-overlay-actions";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 // 학생·보호자의 회차별 '수업 준비' — 예약이 없어도 회차 기준으로 열린다.
 //
@@ -196,7 +197,7 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
           )}
           {/* 2026-09-17(UAT 지적) — 그래프가 필요한 문제(Math)는 그림 없이 보여주면
               풀 수 없다. 실제 수업(세션뷰)과 같은 렌더러(ProblemFigure)를 그대로 쓴다. */}
-          {p.figure != null && <ProblemFigure spec={p.figure} className="mb-5" />}
+          {p.figure != null && <ProblemFigure spec={p.figure} text={problemText(p.passage, p.options)} className="mb-5" />}
           {p.options && p.options.length > 0 && (
             <ol>
               {p.options.map((opt, i) => (
