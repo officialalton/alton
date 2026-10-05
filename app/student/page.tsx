@@ -23,6 +23,7 @@ import { loadRoadmapData } from "@/lib/roadmap/data";
 import { loadMockExamOverview } from "@/lib/mock-exam/attempt-data";
 import { loadMockExamWeaknessSummary, topWeaknesses } from "@/lib/mock-exam/weakness";
 import { hasFeature, loadStudentFeatureAccess } from "@/lib/feature-access";
+import type { InterestStatus } from "./tutoring-state";
 import { resolveUserTimezone } from "@/lib/timezone";
 
 export default async function StudentHomePage({
@@ -48,7 +49,7 @@ export default async function StudentHomePage({
         return [];
       }
     };
-    const [myVocabWords, vocabLibraryBooks, vocabQuizzes, vocabFolders, problemHistory, materialsLibraryTree, mockExamOverview, weakness] =
+    const [myVocabWords, vocabLibraryBooks, vocabQuizzes, vocabFolders, problemHistory, materialsLibraryTree, mockExamOverview, weakness, interestStatus] =
       await Promise.all([
         safeListFree("vocab_words", loadMyVocabWords(supabase, user.id)),
         safeListFree("vocab_books", loadLibraryBooks(supabase)),
@@ -65,6 +66,16 @@ export default async function StudentHomePage({
           console.error(JSON.stringify({ type: "student_home_loader_failed", label: "mock_exam_weakness", error: e instanceof Error ? e.message : String(e) }));
           return null;
         }),
+        // S4(+1 쿼리): "선생님과 이야기하기" 카드의 상태 문구(관심 등록/초대 중/연결됨/예약됨).
+        supabase
+          .from("student_consult_interests")
+          .select("status")
+          .eq("student_id", user.id)
+          .not("status", "in", "(cancelled,expired)")
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle()
+          .then((r) => (r.data?.status as InterestStatus | undefined) ?? null, () => null),
       ]);
     const timezone = resolveUserTimezone({ profileTimezone: profile?.timezone ?? null });
     const studentName = profile?.name ?? "";
@@ -99,7 +110,7 @@ export default async function StudentHomePage({
           lessonBooking={{ bookableEnrollments: [], pendingActivationSubjects: [], upcomingBookings: [], pastSessionsForReport: [], timezone }}
           roadmap={null}
           mockExamOverview={mockExamOverview}
-          freeHome={{ weaknesses: weakness ? topWeaknesses(weakness, 3) : [], gradedAttemptCount: weakness?.gradedAttemptCount ?? 0 }}
+          freeHome={{ weaknesses: weakness ? topWeaknesses(weakness, 3) : [], gradedAttemptCount: weakness?.gradedAttemptCount ?? 0, interestStatus }}
         />
       </ViewerTimezoneProvider>
     );

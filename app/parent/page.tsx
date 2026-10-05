@@ -1,5 +1,6 @@
 import { requireUser } from "@/lib/auth";
 import { loadChildren } from "./children-data";
+import { loadFreeMemberFamilyStatus } from "./free-member-data";
 import { loadDashboardData } from "@/app/student/dashboard-data";
 import { loadLessons } from "@/app/student/lessons-data";
 import { loadCurricula } from "@/app/student/curriculum-data";
@@ -64,6 +65,7 @@ export default async function ParentHomePage({
     childrenSubjectEnrollments,
     vocabData,
     homeworkByChild,
+    freeMemberStatus,
   ] = await Promise.all([
     dashboardPromise,
     lessonBookingPromise,
@@ -76,6 +78,11 @@ export default async function ParentHomePage({
     loadChildrenSubjectEnrollments(supabase, children),
     loadParentVocabData(supabase, user.id),
     loadParentHomeworkData(supabase, user.id),
+    // 2026-10-05 무료 회원 S4 — 자녀 배지·상담 탭 배너(+2 쿼리, 실패해도 포털은 뜬다).
+    loadFreeMemberFamilyStatus(supabase, children.map((c) => c.studentId)).catch((e) => {
+      console.error(JSON.stringify({ type: "parent_free_member_status_failed", error: e instanceof Error ? e.message : String(e) }));
+      return { freeMemberChildIds: [], consults: [] };
+    }),
   ]);
 
   const pastSessionIds = past.map((l) => l.sessionId);
@@ -117,6 +124,7 @@ export default async function ParentHomePage({
       vocabData={vocabData}
       homeworkByChild={homeworkByChild}
       lessonBooking={lessonBooking}
+      freeMemberStatus={freeMemberStatus}
     />
     </ViewerTimezoneProvider>
   );

@@ -33,6 +33,8 @@ import ConsentTab from "./ConsentTab";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import ConsultationRequestTab from "./ConsultationRequestTab";
 import ConsultationHistoryTab from "./ConsultationHistoryTab";
+import FreeMemberConsultBanner from "./FreeMemberConsultBanner";
+import type { FreeMemberFamilyStatus } from "./free-member-data";
 import MessengerTab from "./MessengerTab";
 import { getMessengerUnreadCount } from "./inquiry-actions";
 import { getAllFamilyLessonReviews, getHomeConsultationReviews, type HomeConsultationReview } from "./home-reviews-actions";
@@ -119,6 +121,7 @@ export default function ParentShell({
   childrenSubjectEnrollments,
   vocabData,
   homeworkByChild,
+  freeMemberStatus,
   lessonBooking,
 }: {
   parentName: string;
@@ -141,6 +144,8 @@ export default function ParentShell({
   vocabData: ParentVocabData;
   homeworkByChild: ParentChildHomework[];
   lessonBooking: LessonBookingData;
+  /** 2026-10-05 무료 회원 S4 — 자녀 배지("Free study member")·상담 탭 배너. 없으면 기존 화면과 동일. */
+  freeMemberStatus?: FreeMemberFamilyStatus;
 }) {
   const router = useRouter();
   const validTabIds = useMemo(
@@ -289,6 +294,11 @@ export default function ParentShell({
                 }
               >
                 {c.name}
+                {freeMemberStatus?.freeMemberChildIds.includes(c.studentId) && (
+                  <span className="ml-1.5 text-[10px] font-bold uppercase tracking-wide opacity-80" data-testid="free-member-badge">
+                    Free
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -702,7 +712,10 @@ export default function ParentShell({
             <ParentHomeworkTab childrenHomework={homeworkByChild} />
           ) : activeTab === "consult" ? (
             consultSubTab === "request" ? (
-              <ConsultationRequestTab />
+              <>
+                {freeMemberStatus && <FreeMemberConsultBanner consults={freeMemberStatus.consults} />}
+                <ConsultationRequestTab />
+              </>
             ) : consultSubTab === "history" ? (
               <ConsultationHistoryTab />
             ) : (

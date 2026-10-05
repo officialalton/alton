@@ -50,6 +50,7 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
 import FreeMemberHome from "./FreeMemberHome";
+import type { InterestStatus } from "./tutoring-state";
 import type { BreakdownRow } from "@/lib/mock-exam/report";
 import NavIcon from "@/app/components/NavIcon";
 import { hasFeature, type FeatureKey } from "@/lib/feature-access-keys";
@@ -162,7 +163,7 @@ export default function StudentShell({
   /** student_feature_access 결과. 없으면(기존 경로) 모든 탭 표시. */
   featureAccess?: FeatureKey[];
   /** 2026-10-05 S2 무료 홈 데이터(약점 TOP 3 등). 무료 분기(page.tsx)에서만 내려온다. */
-  freeHome?: { weaknesses: BreakdownRow[]; gradedAttemptCount: number };
+  freeHome?: { weaknesses: BreakdownRow[]; gradedAttemptCount: number; interestStatus?: InterestStatus | null };
 }) {
   const router = useRouter();
   const navItems = useMemo(
@@ -388,6 +389,7 @@ export default function StudentShell({
               overview={mockExamOverview}
               weaknesses={freeHome?.weaknesses ?? []}
               gradedAttemptCount={freeHome?.gradedAttemptCount ?? 0}
+              interestStatus={freeHome?.interestStatus ?? null}
               onSelectTab={selectTab}
             />
           ) : (
