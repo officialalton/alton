@@ -8,6 +8,9 @@ const { rpcMock, createAdminClientMock } = vi.hoisted(() => {
   return { rpcMock, createAdminClientMock: vi.fn(() => ({ rpc: rpcMock })) };
 });
 vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: createAdminClientMock }));
+// 2026-10-05 무료 회원 S4 — 같은 크론에 붙은 보호자 초대 단계는 별도 유닛(lib/guardian-link/cron.test.ts)에서 검증한다.
+const guardianStepMock = vi.hoisted(() => vi.fn());
+vi.mock("@/lib/guardian-link/cron", () => ({ runGuardianLinkDailyStep: guardianStepMock }));
 
 import { GET } from "./route";
 
@@ -16,6 +19,7 @@ const ORIGINAL_SECRET = process.env.CRON_SECRET;
 beforeEach(() => {
   vi.clearAllMocks();
   rpcMock.mockResolvedValue({ data: 3, error: null });
+  guardianStepMock.mockResolvedValue({ expiredCount: 1, remindersSent: 0, remindersFailed: 0 });
 });
 afterEach(() => {
   if (ORIGINAL_SECRET === undefined) delete process.env.CRON_SECRET;
@@ -45,8 +49,9 @@ describe("GET /api/cron/mark-expired-invites", () => {
     process.env.CRON_SECRET = "s3cret";
     const res = await GET(request({ authorization: "Bearer s3cret" }));
     expect(res.status).toBe(200);
-    await expect(res.json()).resolves.toMatchObject({ ok: true, expiredCount: 3 });
+    await expect(res.json()).resolves.toMatchObject({ ok: true, expiredCount: 3, guardianLink: { expiredCount: 1 } });
     expect(rpcMock).toHaveBeenCalledWith("mark_expired_invites");
+    expect(guardianStepMock).toHaveBeenCalledWith(expect.objectContaining({ rpc: rpcMock }), "https://example.com");
   });
 
   it("RPC가 실패해도 예외를 흘리지 않고 500과 사유를 돌려준다", async () => {
@@ -55,5 +60,6 @@ describe("GET /api/cron/mark-expired-invites", () => {
     const res = await GET(request({ authorization: "Bearer s3cret" }));
     expect(res.status).toBe(500);
     await expect(res.json()).resolves.toMatchObject({ ok: false, error: "permission denied" });
+    expect(guardianStepMock).not.toHaveBeenCalled();
   });
 });

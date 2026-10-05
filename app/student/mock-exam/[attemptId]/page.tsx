@@ -3,6 +3,7 @@ import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { loadMockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
 import { loadMstAttemptStateAction } from "@/lib/mock-exam/mst-actions";
+import { hasFeature, loadStudentFeatureAccess } from "@/lib/feature-access";
 import MockExamTakeClient from "./MockExamTakeClient";
 import MockExamMstTakeClient from "./MockExamMstTakeClient";
 import MockExamResultView from "./MockExamResultView";
@@ -25,6 +26,8 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
   // 그대로 두지만, 채점 완료된 결과 화면은 다 본 뒤 나갈 방법이 없어 학생이 갇힌 것처럼
   // 보였다 — 결과 화면에만 명시적 뒤로가기를 붙인다.
   const isGraded = attempt.status === "graded";
+  // 2026-10-05 무료 회원 S4 — 채점된 결과 상단에만 "Talk with a tutor" 링크(무료 회원 한정, +1 RPC). UI 본문은 건드리지 않는다.
+  const showTutoringCta = isGraded && !hasFeature(await loadStudentFeatureAccess(supabase, user.id).catch(() => []), "class");
 
   if (!isGraded && attempt.format === "mst") {
     const state = await loadMstAttemptStateAction(attemptId);
@@ -49,7 +52,14 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           ← 뒤로
         </Link>
       )}
-      <h1 className="mb-4 text-[18px] font-extrabold">{attempt.examSetName}</h1>
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        <h1 className="text-[18px] font-extrabold">{attempt.examSetName}</h1>
+        {showTutoringCta && (
+          <Link href="/student/tutoring?from=result" data-testid="result-tutoring-cta" className="text-[13px] font-bold text-white bg-brand-red rounded-lg px-3 py-1.5">
+            Talk with a tutor
+          </Link>
+        )}
+      </div>
       {isGraded ? <MockExamResultView attempt={attempt} readOnly={false} /> : <MockExamTakeClient attempt={attempt} />}
     </main>
   );

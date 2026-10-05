@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageFrame from "@/app/components/PageFrame";
 import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
 import type { BreakdownRow } from "@/lib/mock-exam/report";
+import { ctaLabelFor, type InterestStatus } from "./tutoring-state";
 
 // 2026-10-05 무료 회원 S2 — 무료 학습 회원 홈(브리프 §3.6): 다음 모의고사, 최근 결과 점수, 약점 상위 3,
 // Practice/Vocabulary 바로가기, "선생님과 이야기하기" 카드(S4 전까지 '상담 준비 중' 상태).
@@ -14,12 +15,15 @@ export type FreeMemberHomeProps = {
   /** topWeaknesses(lib/mock-exam/weakness.ts) 결과. 채점 확정 응시가 없으면 빈 배열. */
   weaknesses: BreakdownRow[];
   gradedAttemptCount: number;
+  /** S4 — 관심 등록 상태(없으면 null). 카드 문구가 상태별로 바뀐다. */
+  interestStatus?: InterestStatus | null;
   onSelectTab: (id: "mock-exam" | "problemlog" | "vocab") => void;
 };
 
 const pct = (r: BreakdownRow) => Math.round((r.correct / r.total) * 100);
 
-export default function FreeMemberHome({ studentName, overview, weaknesses, gradedAttemptCount, onSelectTab }: FreeMemberHomeProps) {
+export default function FreeMemberHome({ studentName, overview, weaknesses, gradedAttemptCount, interestStatus = null, onSelectTab }: FreeMemberHomeProps) {
+  const cta = ctaLabelFor(interestStatus ? { kind: "interest", status: interestStatus, invites: [] } : { kind: "none", invites: [] });
   const catalog = overview?.catalog ?? [];
   const attempts = overview?.attempts ?? [];
   const inProgress = catalog.find((c) => c.attemptStatus === "assigned" || c.attemptStatus === "in_progress");
@@ -110,12 +114,10 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
 
       <section className="rounded-xl bg-navy p-6 text-white" data-testid="free-home-tutoring-card">
         <p className="text-[12px] font-bold text-[#97A9C8] mb-1">1:1 Tutoring</p>
-        <h3 className="text-[17px] font-extrabold mb-1">선생님과 이야기하기</h3>
-        <p className="text-[13px] text-[#C9D3E6] leading-[1.7] mb-3">
-          모의고사 결과를 바탕으로 맞춤 수업을 받고 싶다면 상담을 신청해 보세요. 상담 신청 기능은 준비 중입니다.
-        </p>
-        <Link href="/student/tutoring" className="inline-block px-4 py-2.5 rounded-lg bg-white text-navy text-[13px] font-bold">
-          과외 안내 보기
+        <h3 className="text-[17px] font-extrabold mb-1">{cta.title}</h3>
+        <p className="text-[13px] text-[#C9D3E6] leading-[1.7] mb-3">{cta.body}</p>
+        <Link href="/student/tutoring?from=home" className="inline-block px-4 py-2.5 rounded-lg bg-white text-navy text-[13px] font-bold">
+          {cta.button}
         </Link>
       </section>
     </PageFrame>

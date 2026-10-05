@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { runGuardianLinkDailyStep } from "@/lib/guardian-link/cron";
 
 // Section 2(2026-09-24) — "오픈 전 blocker: mark_expired_invites cron 연결".
 // 다른 크론과 같은 fail-closed 규칙: CRON_SECRET이 없으면 아무것도 하지 않는다.
@@ -26,5 +27,10 @@ export async function GET(request: Request) {
   }
 
   console.log(JSON.stringify({ event: "mark_expired_invites_ran", expiredCount: data }));
-  return NextResponse.json({ ok: true, expiredCount: data });
+
+  // 2026-10-05 무료 회원 S4 — 같은 일일 크론에 보호자 초대 만료·리마인더 단계를 붙인다(Vercel Hobby: 새 크론 항목 금지).
+  // 이 단계의 실패는 위 결과에 영향을 주지 않는다(별도 필드로 보고).
+  const guardianLink = await runGuardianLinkDailyStep(admin, new URL(request.url).origin);
+
+  return NextResponse.json({ ok: true, expiredCount: data, guardianLink });
 }
