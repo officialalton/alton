@@ -1,23 +1,25 @@
 {
- "itemId": "two_variable_data.association_direction_strength.SC.C",
- "verdict": "pass",
- "reviewedAt": "2026-10-05T19:42:48.651Z",
- "reviewer": "visual-review-agent-SD",
- "codeHash": "3485dad124b7bedde0fc8a1fedc1f1169aba2387a692e38bab393c368610967f",
- "samples": [
-  "two_variable_data.association_direction_strength.SC.C.png"
- ],
- "checklist": {
-  "figure_present": "pass",
-  "proportion_matches_values": "pass",
-  "labels_placed_and_legible": "pass",
-  "multi_figure_consistent": "pass",
-  "text_matches_figure_and_solvable": "pass",
-  "axes_ticks_units_legend": "pass",
-  "choice_distinct_one_rule": "pass",
-  "sat_visual_style": "pass",
-  "mobile_375_readable": "pass"
- },
- "defects": [],
- "notes": "D is the only rising tight cloud (A falls, B flat, C weak/scattered) = D. Best-fit lines are unlabeled and no text refers to them by label: OK with new label rule."
+  "itemId": "two_variable_data.association_direction_strength.SC.C",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:48.651Z",
+  "reviewer": "visual-review-agent-SD",
+  "codeHash": "54552fb23690788c727bb6599b2af600fabb3b3f741d308b5a0430f6c1a5f810",
+  "samples": [
+    "two_variable_data.association_direction_strength.SC.C.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "D is the only rising tight cloud (A falls, B flat, C weak/scattered) = D. Best-fit lines are unlabeled and no text refers to them by label: OK with new label rule.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 통합 병합(math-figure-table + fig-fixes3) 후 스냅샷 재생성 — SVG·PNG 바이트 동일(git diff 없음), 해시만 갱신"
 }

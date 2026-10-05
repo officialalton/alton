@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:35.610Z",
   "reviewer": "visual-review-agent-SE",
-  "codeHash": "3485dad124b7bedde0fc8a1fedc1f1169aba2387a692e38bab393c368610967f",
+  "codeHash": "54552fb23690788c727bb6599b2af600fabb3b3f741d308b5a0430f6c1a5f810",
   "samples": [
     "two_variable_data.scatter_count_above.SC.C.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved from image: above counts A2,B10,C4,D3 -> D. Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact. Choices use 4 identical axes/sizes."
+  "notes": "Solved from image: above counts A2,B10,C4,D3 -> D. Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact. Choices use 4 identical axes/sizes.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 통합 병합(math-figure-table + fig-fixes3) 후 스냅샷 재생성 — SVG·PNG 바이트 동일(git diff 없음), 해시만 갱신"
 }
