@@ -55,7 +55,8 @@ export default async function StudentHomePage({
         safeListFree("vocab_quizzes", loadVocabQuizzes(supabase, user.id)),
         safeListFree("vocab_folders", loadVocabFolders(supabase, user.id)),
         safeListFree("problem_history", loadProblemHistory(user.id, { mockExamOnly: true })),
-        safeListFree("materials_library", loadMaterialsLibraryTree(supabase, user.id)),
+        // 무료 회원: 수강 관계가 없으므로 무료 공개 자료만(수강 조회 2회 생략).
+        safeListFree("materials_library", loadMaterialsLibraryTree(supabase, user.id, { includeEnrolled: false })),
         loadMockExamOverview(supabase, user.id).catch((e) => {
           console.error(JSON.stringify({ type: "student_home_loader_failed", label: "mock_exam_overview", error: e instanceof Error ? e.message : String(e) }));
           return undefined;

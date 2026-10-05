@@ -245,6 +245,48 @@ export async function setDocArchived(
   return { ok: true };
 }
 
+/**
+ * 2026-10-05 무료 회원 S3 — 무료 공개 토글·권리 상태(docs/briefs/2026-10-05-free-member-tutoring-design.md §4.4).
+ * 확인자·시각·감사는 DB 트리거(20262100000003)가 기록한다. free+미확인은 CHECK 제약이 거절하며 그 메시지를
+ * 그대로 돌려준다(관리자가 원인을 바로 보게).
+ */
+export type DocAccessUpdate = {
+  accessTier?: "tutoring" | "free";
+  rightsStatus?: "confirmed" | "needs_review" | "restricted";
+  rightsNote?: string | null;
+};
+
+export async function setDocAccess(
+  docId: string,
+  update: DocAccessUpdate
+): Promise<{ ok: true; rightsConfirmedAt: string | null } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+  const patch: Record<string, unknown> = {};
+  if (update.accessTier !== undefined) {
+    if (update.accessTier !== "tutoring" && update.accessTier !== "free") return { ok: false, error: "공개 범위 값이 올바르지 않습니다." };
+    patch.access_tier = update.accessTier;
+  }
+  if (update.rightsStatus !== undefined) {
+    if (!["confirmed", "needs_review", "restricted"].includes(update.rightsStatus)) return { ok: false, error: "권리 상태 값이 올바르지 않습니다." };
+    patch.rights_status = update.rightsStatus;
+  }
+  if (update.rightsNote !== undefined) patch.rights_note = update.rightsNote?.trim() || null;
+  if (Object.keys(patch).length === 0) return { ok: false, error: "바꿀 내용이 없습니다." };
+
+  const { data, error } = await supabase
+    .from("curriculum_docs")
+    .update(patch)
+    .eq("id", docId)
+    .select("rights_confirmed_at")
+    .maybeSingle();
+  if (error) {
+    console.error(JSON.stringify({ event: "set_doc_access_failed", docId, message: error.message }));
+    return { ok: false, error: error.message };
+  }
+  if (!data) return { ok: false, error: "교재를 찾을 수 없습니다." };
+  return { ok: true, rightsConfirmedAt: (data as { rights_confirmed_at: string | null }).rights_confirmed_at ?? null };
+}
+
 export async function setDocPrimaryKeyword(
   docId: string,
   keywordId: string | null,

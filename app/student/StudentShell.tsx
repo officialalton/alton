@@ -429,7 +429,7 @@ export default function StudentShell({
           ) : activeTab === "homework" ? (
             <StudentHomeworkTab batches={homeworkBatches} />
           ) : activeTab === "materials" ? (
-            <MaterialsLibraryTab tree={materialsLibraryTree} />
+            <MaterialsLibraryTab tree={materialsLibraryTree} isFreeMember={isFreeMember} />
           ) : activeTab === "teacher" ? (
             <TeacherTab
               teachers={teacherList}

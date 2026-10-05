@@ -44,6 +44,16 @@ const doc: LibraryDocDetail = {
 };
 
 describe("LibraryDocView", () => {
+  // 2026-10-05 무료 회원 S3 — 무료 공개 HTML 교재도 teaching_tip 은 학생(무료 회원 포함)·보호자에게 보이지 않는다.
+  it("teaching_tip 은 교사·관리자에게만 보인다", () => {
+    const withTip: LibraryDocDetail = { ...doc, sections: [{ ...doc.sections[0], teachingTip: "<p>교사용 팁입니다</p>" }] };
+    const { unmount } = render(<LibraryDocView doc={withTip} viewerRole="student" />);
+    expect(screen.queryByText("교사용 팁입니다")).not.toBeInTheDocument();
+    unmount();
+    render(<LibraryDocView doc={withTip} viewerRole="parent" />);
+    expect(screen.queryByText("교사용 팁입니다")).not.toBeInTheDocument();
+  });
+
   it("제목, 목차, 본문을 보여준다", () => {
     render(<LibraryDocView doc={doc} viewerRole="student" />);
     expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();

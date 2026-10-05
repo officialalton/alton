@@ -3,6 +3,7 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
 import {
   getCurriculumDocDetailAction,
+  setDocAccess,
   setDocArchived,
   updateDocTitle,
 } from "./curriculum-doc-actions";
@@ -26,6 +27,14 @@ const STATUS_LABEL: Record<string, string> = {
 // 가벼워서 서버 쪽 limit 없이도 안전 — 과목/단원 드릴다운(MaterialsLibraryTab)이
 // 전체 목록을 필요로 하므로 서버 쿼리 자체는 제한하지 않는다).
 const PAGE_SIZE = 20;
+
+// 2026-10-05 무료 회원 S3 — 권리 확인 상태 라벨. free 지정은 confirmed일 때만 DB가 허용한다(20262100000003).
+const RIGHTS_LABEL: Record<CurriculumDocListItem["rightsStatus"], string> = {
+  confirmed: "권리 확인됨",
+  needs_review: "확인 필요",
+  restricted: "공개 불가",
+};
+type RightsView = "all" | "confirmed" | "needs_review";
 
 export default function CurriculumDocsTab({
   docs,
@@ -51,6 +60,10 @@ export default function CurriculumDocsTab({
   // 2026-09-14 — 라이브러리 탭을 여기로 합쳤다. 키워드별(기본) / 단원별 / 목록.
   const [viewMode, setViewMode] = useState<"keyword" | "unit" | "list">("keyword");
   const [archiveError, setArchiveError] = useState<string | null>(null);
+  // 2026-10-05 무료 회원 S3 — 권리 확인됨 / 확인 필요 목록 분리 보기 + 무료 공개 토글 오류(DB 메시지 그대로).
+  const [rightsView, setRightsView] = useState<RightsView>("all");
+  const [accessError, setAccessError] = useState<string | null>(null);
+  const [accessBusyId, setAccessBusyId] = useState<string | null>(null);
   const [assetNotice, setAssetNotice] = useState<string | null>(null);
   const [publishingAssetId, setPublishingAssetId] = useState<string | null>(null);
 
@@ -95,6 +108,37 @@ export default function CurriculumDocsTab({
         d.id === docId ? { ...d, archivedAt: archived ? new Date().toISOString() : null } : d
       )
     );
+  }
+  async function changeAccess(
+    doc: CurriculumDocListItem,
+    update: { accessTier?: CurriculumDocListItem["accessTier"]; rightsStatus?: CurriculumDocListItem["rightsStatus"]; rightsNote?: string | null }
+  ) {
+    setAccessError(null);
+    setAccessBusyId(doc.id);
+    try {
+      const result = await setDocAccess(doc.id, update);
+      if (!result.ok) {
+        setAccessError(`${doc.title}: ${result.error}`);
+        return;
+      }
+      setDocs((prev) =>
+        prev.map((d) => {
+          if (d.id !== doc.id) return d;
+          const rightsStatus = update.rightsStatus ?? d.rightsStatus;
+          return {
+            ...d,
+            accessTier: update.accessTier ?? d.accessTier,
+            rightsStatus,
+            rightsNote: update.rightsNote !== undefined ? update.rightsNote : d.rightsNote,
+            rightsConfirmedAt: rightsStatus === "confirmed" ? result.rightsConfirmedAt : null,
+            // 확인자 이름은 다음 목록 조회 때 채워진다(지금은 "방금 확인"으로 표시).
+            rightsConfirmedByName: rightsStatus === "confirmed" && rightsStatus !== d.rightsStatus ? null : d.rightsConfirmedByName,
+          };
+        })
+      );
+    } finally {
+      setAccessBusyId(null);
+    }
   }
   const [detailError, setDetailError] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -191,7 +235,8 @@ export default function CurriculumDocsTab({
   const filteredDocs = docs
     .filter((d) => (showArchived ? Boolean(d.archivedAt) : !d.archivedAt))
     .filter((d) => query.trim() === "" || d.title.toLowerCase().includes(query.trim().toLowerCase()))
-    .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword);
+    .filter((d) => !onlyMissingPrimary || !d.hasPrimaryKeyword)
+    .filter((d) => (rightsView === "all" ? true : rightsView === "confirmed" ? d.rightsStatus === "confirmed" : d.rightsStatus !== "confirmed"));
 
   // 키워드별: 과목 › 대표 키워드. 단원별: 과목 › 단원(그 단원에 붙은 키워드를 대표 키워드로 가진 교재) — 교재 하나가
   // 여러 단원에 들어갈 수 있으니 여러 묶음에 나온다. 대표 키워드 없는 교재는 "(키워드 미지정)".
@@ -252,6 +297,48 @@ export default function CurriculumDocsTab({
                   {!d.hasPrimaryKeyword && " · 대표 키워드 없음"}
                   {d.archivedAt && " · 보관됨"}
                 </div>
+                <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-grey-500" data-testid="doc-access-row">
+                  <label className="flex items-center gap-1.5">
+                    <input
+                      type="checkbox"
+                      aria-label={`${d.title} 무료 공개`}
+                      checked={d.accessTier === "free"}
+                      disabled={accessBusyId === d.id}
+                      onChange={(e) => void changeAccess(d, { accessTier: e.target.checked ? "free" : "tutoring" })}
+                    />
+                    <span className={d.accessTier === "free" ? "font-bold text-green" : ""}>무료 공개</span>
+                  </label>
+                  <label className="flex items-center gap-1.5">
+                    <span>권리:</span>
+                    <select
+                      aria-label={`${d.title} 권리 상태`}
+                      value={d.rightsStatus}
+                      disabled={accessBusyId === d.id}
+                      onChange={(e) => void changeAccess(d, { rightsStatus: e.target.value as CurriculumDocListItem["rightsStatus"] })}
+                      className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-1.5 py-0.5"
+                    >
+                      {(Object.keys(RIGHTS_LABEL) as CurriculumDocListItem["rightsStatus"][]).map((k) => (
+                        <option key={k} value={k}>{RIGHTS_LABEL[k]}</option>
+                      ))}
+                    </select>
+                  </label>
+                  {d.rightsStatus === "confirmed" && (
+                    <span>
+                      확인: {d.rightsConfirmedByName ?? "방금"}
+                      {d.rightsConfirmedAt ? ` · ${new Date(d.rightsConfirmedAt).toLocaleString("ko-KR")}` : ""}
+                    </span>
+                  )}
+                  <input
+                    aria-label={`${d.title} 권리 메모`}
+                    defaultValue={d.rightsNote ?? ""}
+                    placeholder="권리 메모(출처·확인 근거)"
+                    onBlur={(e) => {
+                      const next = e.target.value.trim() || null;
+                      if (next !== (d.rightsNote ?? null)) void changeAccess(d, { rightsNote: next });
+                    }}
+                    className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-0.5 w-[220px] max-w-full"
+                  />
+                </div>
                 {d.kind !== "html" && (
                   <div className="mt-1.5 text-[12px] text-grey-500">
                     {d.sourceDriveName && (
@@ -311,6 +398,7 @@ export default function CurriculumDocsTab({
       </p>
       {detailError && <p className="text-[12.5px] text-red mb-3">{detailError}</p>}
       {archiveError && <p className="text-[12.5px] text-red mb-3">{archiveError}</p>}
+      {accessError && <p className="text-[12.5px] text-red mb-3" role="alert">{accessError}</p>}
       {assetNotice && <p className="text-[12.5px] text-ink bg-grey-100 rounded-lg px-3 py-2 mb-3">{assetNotice}</p>}
 
       <UnderlineSubTabs
@@ -330,6 +418,18 @@ export default function CurriculumDocsTab({
         placeholder={showArchived ? "보관된 교재에서 찾기" : "교재 제목으로 찾기"}
         className="w-full text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 mb-3"
       />
+
+      <div className="mb-3" role="group" aria-label="권리 상태">
+        <PillSubTabs
+          items={[
+            { id: "all", label: "전체" },
+            { id: "confirmed", label: `권리 확인됨 (${docs.filter((d) => d.rightsStatus === "confirmed").length})` },
+            { id: "needs_review", label: `확인 필요 (${docs.filter((d) => d.rightsStatus !== "confirmed").length})` },
+          ]}
+          activeId={rightsView}
+          onSelect={setRightsView}
+        />
+      </div>
 
       <div className="mb-3" role="group" aria-label="보기 방식">
         <PillSubTabs
