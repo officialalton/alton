@@ -1,0 +1,42 @@
+{
+ "itemId": "linear_equations_two_var.intersection_x.TB.P",
+ "generatedAt": "2026-10-05T19:36:55.129Z",
+ "codeHash": "50fdf09d2ff44b568c3734a10c6e578e9a8d83b6d454df25c4cc9c7431dc6abe",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_two_var.intersection_x.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_two_var.intersection_x.TB.P.png",
+   "mobileFile": "linear_equations_two_var.intersection_x.TB.P.m375.png",
+   "archetypeId": "l2.intersection_x.TB.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "Two linear relationships are shown in the table: the savings of two friends at several values of the number of weeks.",
+   "question": "If both relationships continue, for what value of the number of weeks will Maya and Theo have the same savings?",
+   "options": [
+    "14",
+    "7",
+    "13",
+    "31"
+   ],
+   "correctIndex": 2,
+   "answer": "13",
+   "explanation": "(1) Maya: 두 행에서 기울기 4, x = 0 일 때 18 이다. (2) Theo: 두 행에서 기울기 2, x = 0 일 때 44 이다. (3) 4x + 18 = 2x + 44 로 놓는다. (4) (4 - 2)x = 44 - 18 이다. (5) x = 26 ÷ 2 = 13 이다. 따라서 정답은 13이다.",
+   "structuralIssues": []
+  }
+ ]
+}

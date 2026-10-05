@@ -1,0 +1,23 @@
+{
+ "itemId": "probability.conditional.FQ.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:48.648Z",
+ "reviewer": "visual-review-agent-SD",
+ "codeHash": "d4bfb7c0eb535b0534a17e8d5ac8789b6f6faa41682297e3708680d9499cb9e6",
+ "samples": [
+  "probability.conditional.FQ.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "values 3(6),4(3),5(2),6(2); n=13, mean=52/13=4; >4: 5,6 -> 4/13 = C. Nit: numeric columns right-aligned far from first-column header."
+}

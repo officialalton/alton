@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.scatter_equation.SC.C",
   "verdict": "pass",
-  "reviewedAt": "2026-10-02T03:00:00Z",
-  "reviewer": "uat-figures-agent (C4 재검수)",
-  "codeHash": "e68df4e7add347cb79e8611e7587716757db782fb943bac3a6756f96de4ed6a7",
+  "reviewedAt": "2026-10-05T19:42:35.611Z",
+  "reviewer": "visual-review-agent-SE",
+  "codeHash": "3485dad124b7bedde0fc8a1fedc1f1169aba2387a692e38bab393c368610967f",
   "samples": [
     "two_variable_data.scatter_equation.SC.C.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "2x2 격자 확인, 4개 그림 축·눈금·크기 동일. 풀이: y절편 40, 기울기 +2 이면 x=12 에서 64 → C. A 는 기울기 음, B 는 기울기 4(x=12 에서 88), D 는 절편 60. 각 오답이 한 규칙만 어김. 눈금 글자는 작지만 판독 가능. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+  "notes": "Solved from image: only C starts at 40 with slope 2 (reaches ~64 at x=12) -> C. Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact. Choices use 4 identical axes/sizes."
 }

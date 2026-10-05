@@ -1,0 +1,23 @@
+{
+  "itemId": "linear_inequalities.table_verification.TB.C",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "0032acbc13d29342d74a3eb93c5f1c843fd315ced043a14fcdb9c2a43dec35d4",
+  "samples": [
+    "linear_inequalities.table_verification.TB.C.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "pass",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "pass",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "c=2,d=31 / 7,34 / 12,0 은 15c+5d>150 모두 충족 → C. A(2,24=150 경계), B(7,5), D(열 바뀜) 각각 한 규칙 위반. 4개 표 모두 보임·열 이름 c,d 있음. 선택지 텍스트 'Choice A' 형식은 의도된 것. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+}

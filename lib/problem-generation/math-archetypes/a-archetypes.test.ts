@@ -7,7 +7,10 @@ import { checkSemantics } from "./skills/a-kit";
 import { produceFromArchetypes } from "./bulk";
 
 const MY = ["nonlinear_equations_systems", "nonlinear_functions", "equivalent_expressions"];
-const hardA = ARCHETYPES.filter((a) => MY.slice(0, 2).includes(a.skill));
+// 자료(표·그림) 원형(figureItem)은 조합 게이트(figure-coverage.test.ts)가 개수·연산자를 검사한다 — 옛 원형 개수(60)·매트릭스 일치 검사에서는 뺀다. 의미(명사-식) 검사는 자료 원형에도 그대로 적용한다.
+const allA = ARCHETYPES.filter((a) => MY.slice(0, 2).includes(a.skill));
+const hardA = allA.filter((a) => !a.figureItem);
+const figA = allA.filter((a) => a.figureItem);
 const emA = ARCHETYPES_EM.filter((a) => MY.includes(a.skill));
 // docs/qa/2026-09-30-math-hard-archetypes.md 5절 적용 매트릭스(세부 패턴 → 연산자 4개)
 const MATRIX: Record<string, string[]> = {
@@ -78,7 +81,7 @@ describe("담당 A easy/medium 원형 시드 스윕", () => {
 
 describe("담당 A hard 원형 — 명사-수식 매핑 기계 검사(둘레/넓이 혼동 방지)", () => {
   it("넓이·둘레·매출 말이 있는 원형은 대응 식이 선언돼 있고 값 규칙과 맞다", () => {
-    for (const a of [...hardA, ...emA]) for (let s = 0; s < 80; s++) { const g = generateOne(a, s); if (g.ok) expect(checkSemantics(g.inst), `${a.id} seed ${s}`).toEqual([]); }
+    for (const a of [...hardA, ...figA, ...emA]) for (let s = 0; s < 80; s++) { const g = generateOne(a, s); if (g.ok) expect(checkSemantics(g.inst), `${a.id} seed ${s}`).toEqual([]); }
   });
   it("문장에 '넓이/둘레/매출'이 있는 원형이 실제로 존재한다(검사가 공전하지 않음)", () => {
     const ids = new Set<string>();

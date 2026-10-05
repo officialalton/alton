@@ -10,7 +10,8 @@ const body = (r: { problem: Record<string, unknown> }) => shingles(`${r.problem.
 
 // 이 파일의 기존 검증은 mc 형태(options·correctIndex)를 전제하므로 형식 쿼터를 끄고(sprQuota: 0) 돌린다. 쿼터(기본 25% SPR)는 bulk-spr-quota.test.ts 가 검증한다.
 describe("produceFromArchetypes — 대량 산출기(원형 hard)", () => {
-  const pool = ARCHETYPES.filter((a) => a.skill === "probability");
+  // 자료(표·그림) 원형은 커버리지 게이트(전체 ok=false 이면 allowItems 없이는 거부)를 거치므로 이 일반 산출기 테스트의 풀에서는 뺀다 — 게이트 경로는 아래 별도 테스트와 bulk-spr-quota.test.ts 가 본다.
+  const pool = ARCHETYPES.filter((a) => a.skill === "probability" && !a.figureItem);
   const run = () => produceFromArchetypes(pool, { runId: "test-run", count: 48, seedStart: 100, sprQuota: 0 });
   it("요청 수만큼 산출하고 import.ts 호환 레코드 형태를 지킨다", () => {
     const { records, stats } = run();
@@ -84,5 +85,17 @@ describe("produceFromCompilers — 기존 컴파일러 easy/medium 산출", () =
     const origLog = console.log; console.log = () => {};
     try { produceFromCompilers("percentages", "easy", { runId: "t", count: 2, seedStart: 0, sprQuota: 0 }); } finally { console.log = origLog; }
     expect(Math.random).toBe(before);
+  });
+});
+
+describe("produceFromArchetypes — 자료 원형은 게이트를 지킨다", () => {
+  const fig = ARCHETYPES.filter((a) => a.figureItem === "probability.simple.TW.P");
+  it("게이트(전체 ok=false)를 통과하지 못한 채로는 자료 원형 대량 생성을 거부한다", () => {
+    expect(fig.length).toBeGreaterThan(0);
+    expect(() => produceFromArchetypes(fig, { runId: "g", count: 4, sprQuota: 0 })).toThrow();
+  });
+  it("검수를 통과한 조합을 allowItems 로 명시하면 산출한다", () => {
+    const { records } = produceFromArchetypes(fig, { runId: "g", count: 8, seedStart: 0, sprQuota: 0, allowItems: ["probability.simple.TW.P"] });
+    expect(records).toHaveLength(8);
   });
 });

@@ -1,0 +1,42 @@
+{
+ "itemId": "nonlinear_functions.context_graph_features.TB.P",
+ "generatedAt": "2026-10-05T19:36:55.170Z",
+ "codeHash": "e1e4c4e6ee27f008c40b826b4a7848360476868a81608fb547f98daf11ff3d04",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.context_graph_features.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.context_graph_features.TB.P.png",
+   "mobileFile": "nonlinear_functions.context_graph_features.TB.P.m375.png",
+   "archetypeId": "nf.context_graph_features.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A water balloon is launched from a slingshot on a balcony. Selected values of the height of the balloon above the ground after the balloon was launched are listed in the table. Assume the quadratic model holds for all values considered.",
+   "question": "According to the model, what is the greatest height, in feet, of the balloon?",
+   "options": [
+    "222",
+    "206",
+    "26",
+    "218"
+   ],
+   "correctIndex": 0,
+   "answer": "222",
+   "explanation": "(1) 표에서 값을 읽는다: (0, 26), (1, 122), (2, 186), (3, 218) … (2) 1계 차분: 96, 64, 32, 0, -32 — 2계 차분이 -32 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = -16 이다. (4) 두 점을 대입해 b = 112, c = 26 를 얻는다. (5) h(2) = h(5) = 186 이므로 대칭축은 x = (2 + 5) ÷ 2 = 3.5 이다. (6) 최댓값 = h(3.5) = 222 feet 이다. 따라서 정답은 222이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -14,7 +14,7 @@ import ProblemFigure from "../../../app/session/[id]/ProblemFigure";
 const items = [...new Set(figureArchetypes().map((a) => a.figureItem!))];
 const sample = (item: string, n = 3) => { const out: { id: string; fig: Record<string, unknown> }[] = []; for (const a of figureArchetypes().filter((x) => x.figureItem === item && x.level === "hard")) for (let s = 0; s < 6 && out.length < n; s++) { const g = generateOne(a, s); if (g.ok && g.inst.figure) out.push({ id: a.id, fig: g.inst.figure as Record<string, unknown> }); } return out; };
 
-describe("파일럿 15항목 — 앱 렌더 경로에서 그림·표가 보인다", () => {
+describe("자료 원형(파일럿 15항목 + 1단계 조합) — 앱 렌더 경로에서 그림·표가 보인다", () => {
   for (const item of items) {
     it(`${item}: ProblemFigure 가 오류 없이 그리고 값이 화면에 있다`, () => {
       const ss = sample(item); expect(ss.length).toBeGreaterThan(0);
@@ -22,6 +22,7 @@ describe("파일럿 15항목 — 앱 렌더 경로에서 그림·표가 보인�
         const { container, queryByTestId, unmount } = render(createElement(ProblemFigure, { spec: fig }));
         expect(queryByTestId("problem-figure-error")).toBeNull(); const box = queryByTestId("problem-figure"); expect(box).toBeTruthy();
         const html = container.innerHTML; const t = fig.type as string;
+        if (t === "data" && fig.kind === "table") { expect(container.querySelectorAll("table").length).toBe(1); for (const c of fig.columns as string[]) expect(container.textContent).toContain(c); for (const row of fig.rows as (string | number)[][]) for (const v of row) expect(container.textContent).toContain(typeof v === "number" && Math.abs(v) >= 1000 ? v.toLocaleString("en-US") : String(v)); }
         if (t === "data" && fig.kind === "two_way") { expect(container.querySelectorAll("table").length).toBe(1); for (const row of fig.cells as number[][]) for (const v of row) expect(container.textContent).toContain(String(v)); expect(container.textContent).toContain("Total"); }
         if (t === "data" && fig.kind === "scatter") { expect(container.querySelectorAll("svg circle").length).toBe((fig.points as unknown[]).length); if (fig.fitLine) expect(html).toContain("#C8102E"); }
         if (t === "data" && fig.kind === "line") { expect(container.querySelectorAll("svg circle").length).toBe(((fig.series as { values: number[] }[])[0].values).length); }

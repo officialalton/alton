@@ -1,0 +1,23 @@
+{
+  "itemId": "evaluating_statistical_claims.sampling_generalization.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "f8594c4b0d99162805af839c0bdb74ec18680df2e79d2f222641ac06b0093360",
+  "samples": [
+    "evaluating_statistical_claims.sampling_generalization.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "표: Branch 2 표본 0, 나머지 10% 동일 비율 → Branch 1,3,4 에만 = B. 풀림. Nit(비차단): 375px 에서 'Branch 1' 이 두 줄로 줄바꿈(숫자 분리)되나 판독 가능."
+}

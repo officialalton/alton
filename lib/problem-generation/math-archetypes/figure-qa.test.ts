@@ -2,7 +2,9 @@
 import { describe, expect, it } from "vitest";
 import { figureArchetypes } from "./figure-coverage-gate";
 import { generateOne } from "./sweep";
-import { checkChoiceInstance } from "./figure-verify";
+import { checkChoiceInstance, tamperFigure } from "./figure-verify";
+import { mutantsOf } from "./figure-coverage-gate";
+import { verifyLevel } from "./levels-d";
 import { checkChoiceDistinct, checkInstanceFigureQa, checkMultiFigure, checkRenderedFigure, readScale } from "./figure-qa";
 import { renderFigureSvg } from "@/lib/problem-figures/render";
 import type { FigureSpec } from "@/lib/problem-figures/spec";
@@ -13,7 +15,7 @@ const inst = (id: string, seed = 3): Instance => { for (let s = seed; s < seed +
 const codes = (is: { code: string }[]) => is.map((i) => i.code);
 type Spec = Record<string, unknown> & { type: string };
 
-describe("구조 검사: 파일럿 15항목의 실제 생성물은 전부 통과한다", () => {
+describe("구조 검사: 자료 원형(파일럿 15항목 + 1단계 조합)의 실제 생성물은 전부 통과한다", () => {
   it("모든 원형(hard·easy/medium) × 시드 12개 — 자료 존재·값 충실도·축·단위·라벨·복수 그림 일관성·선택지 구별", () => {
     const bad: string[] = []; let n = 0;
     for (const a of A) for (let s = 0; s < 12; s++) { const g = generateOne(a, s); if (!g.ok) continue; n++; const q = checkInstanceFigureQa(g.inst); if (q.length) bad.push(`${a.id}#${s}: ${q.map((x) => `${x.code} ${x.message}`).join(" | ").slice(0, 200)}`); }
@@ -106,5 +108,26 @@ describe("선택지형: 오답 그림은 정답과 구별되고 '정확히 하�
     const ok = ch[c.correctIndex].objects[0].fitLine; ch[w].objects[0].fitLine = { slope: -ok.slope, intercept: ok.intercept + 10 * (ok.intercept > 40 ? -1 : 1) };
     const bad = { ...c, figure: { ...fig, choices: ch }, verificationJs: c.verificationJs.replace(/^const CHOICES = .*;$/m, `const CHOICES = ${JSON.stringify(ch)};`) };
     expect(checkChoiceInstance(bad, c.correctIndex).join("|")).toMatch(/진단은|같은 그림/);
+  });
+});
+
+describe("표 계열(1단계): 일반 표·문장형 자료의 구조 검사와 칸 변조", () => {
+  const ti = inst("lf.evaluate.TB.P.chain2"); const tspec = ti.figure as Spec; const thtml = renderFigureSvg(tspec as unknown as FigureSpec);
+  it("원본 표는 통과", () => expect(checkRenderedFigure(tspec, thtml)).toEqual([]));
+  it("(a) 칸 숫자 하나를 다르게 그리면 값 불일치", () => {
+    const rows = tspec.rows as number[][]; const v = String(rows[rows.length - 1][1]);
+    const i = thtml.lastIndexOf(`>${v}<`); const bad = `${thtml.slice(0, i)}>${Number(v) + 7}<${thtml.slice(i + v.length + 2)}`;
+    expect(codes(checkRenderedFigure(tspec, bad))).toContain("table_value_mismatch");
+  });
+  it("(b) 열 이름(단위 포함)이 빠지면 머리글 누락", () => { const cols = tspec.columns as string[]; expect(codes(checkRenderedFigure(tspec, thtml.replace(`>${cols[1]}<`, "><")))).toContain("table_header_missing"); });
+  it("(d) 행이 없는 표·빈 마크업은 자료 없음", () => { expect(codes(checkRenderedFigure({ ...tspec, rows: [] }, thtml))).toContain("render_empty"); expect(codes(checkRenderedFigure(tspec, ""))).toContain("render_empty"); });
+  it("문장형 자료: 항목 값이 그려지지 않으면 잡는다", () => {
+    const st = { type: "data", kind: "statement", facts: [{ label: "Sample size", value: 400 }, { label: "Margin of error", value: 3, unit: "percent" }] } as Spec; const html = renderFigureSvg(st as unknown as FigureSpec);
+    expect(checkRenderedFigure(st, html)).toEqual([]); expect(codes(checkRenderedFigure(st, html.replace(">400<", ">40<")))).toContain("table_value_mismatch");
+  });
+  it("'cell' 변조(칸 하나 +1)는 기울기처럼 평행이동·배율에 불변인 답도 바꾼다(일차 표 전제 위반 → 재계산이 던짐)", () => {
+    const a = find("lf.slope_from_two_points.TB.P.med_slope"); const i0 = inst(a.id);
+    const mutated = mutantsOf(i0); expect(mutated.length).toBeGreaterThanOrEqual(4); expect(mutated.some((m) => !verifyLevel(a, m).ok)).toBe(true);
+    const cellOnly = { ...i0, figure: tamperFigure(i0.figure, "cell") }; expect(JSON.stringify(cellOnly.figure)).not.toBe(JSON.stringify(i0.figure));
   });
 });

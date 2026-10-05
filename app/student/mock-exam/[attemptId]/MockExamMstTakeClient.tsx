@@ -28,6 +28,7 @@ import {
   mstMathToolsAllowed,
   mstRemainingSecondsAt,
 } from "@/lib/mock-exam/mst";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
@@ -508,7 +509,7 @@ export default function MockExamMstTakeClient({
                     {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
                     {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
                   </AnnotationLayer>
-                  {item.figure ? <ProblemFigure spec={item.figure} className="mb-4" /> : null}
+                  {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-4" /> : null}
                 </section>
 
                 <section aria-label="Answer" className="px-8 py-6 md:w-1/2 md:overflow-y-auto" data-testid="mst-pane-right">

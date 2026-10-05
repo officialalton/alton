@@ -1,5 +1,6 @@
 "use client";
 
+import { problemText } from "@/lib/problem-figures/label-rule";
 import { useMemo, useState } from "react";
 import {
   createDraftVersionAction,
@@ -206,7 +207,7 @@ export default function ProblemDraftEditor({
       <FieldTitle hint="학생·교사 수업 화면과 같은 렌더입니다. 아래 칸을 고치면 바로 바뀝니다.">학생 화면 미리보기</FieldTitle>
       <div className="border-[1.5px] border-dashed border-grey-200 rounded-lg px-4 py-3" data-testid="passage-preview">
         {figureParsed.spec != null && (figureParsed.spec as { type?: string }).type !== "figure_choice" && (
-          <div className="max-w-full mb-3"><ProblemFigure spec={figureParsed.spec} /></div>
+          <div className="max-w-full mb-3"><ProblemFigure spec={figureParsed.spec} text={problemText(passage, question, options)} /></div>
         )}
         {fullText.trim() ? (
           <RwStimulusView passage={fullText} className="learning-body text-[14px] leading-[1.75] text-ink" />
@@ -656,10 +657,10 @@ export function PublishedContentView({ problem, content }: { problem: BankProble
           순서가 어긋났다. 실제 SAT도 자료는 그 자료를 언급하는 문장 뒤에 온다 — 지문 다음으로
           옮긴다. */}
       {p.figure != null && (p.figure as { type?: string }).type !== "figure_choice" && (vis.material || vis.legacyAll) && (
-        <div className="max-w-full mt-2 mb-2"><ProblemFigure spec={p.figure} /></div>
+        <div className="max-w-full mt-2 mb-2"><ProblemFigure spec={p.figure} text={problemText(p.passage, p.question, p.options)} /></div>
       )}
       {p.figure != null && (p.figure as { type?: string }).type === "figure_choice" && (
-        <div className="max-w-full mt-2 mb-2" data-testid="published-figure-choice"><ProblemFigure spec={p.figure} /></div>
+        <div className="max-w-full mt-2 mb-2" data-testid="published-figure-choice"><ProblemFigure spec={p.figure} text={problemText(p.passage, p.question, p.options)} /></div>
       )}
       {!problem.hasQuestion && <p className="text-[11.5px] text-red mt-1">질문 보완 필요 — 공개본은 자동으로 고치지 않습니다. 수정 초안에서 질문을 갈라내거나 재생성하세요.</p>}
       {(vis.statements || vis.legacyAll) && p.statements?.length ? (

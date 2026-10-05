@@ -1,0 +1,42 @@
+{
+ "itemId": "systems_linear.substitution_solve.TB.P",
+ "generatedAt": "2026-10-05T19:36:55.178Z",
+ "codeHash": "d2fe74263ea24da7347dea136271eb4fb0de538cea4238e16a4dc4975c027567",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/systems_linear.substitution_solve.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "systems_linear.substitution_solve.TB.P.png",
+   "mobileFile": "systems_linear.substitution_solve.TB.P.m375.png",
+   "archetypeId": "sl.substitution_solve.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shown gives some solutions $(x, y)$ of a linear equation. Consider the system formed by the relationship in the table and the equation $-2x - 4y = -52$.",
+   "question": "The system has the solution $(x, y)$. What is $x$?",
+   "options": [
+    "8",
+    "10",
+    "11",
+    "-10"
+   ],
+   "correctIndex": 1,
+   "answer": "10",
+   "explanation": "(1) 표에서 두 점 (1, -10), (2, -8) 을 읽는다. (2) 기울기 = (-8 - (-10)) ÷ (2 - (1)) = 2 이다. (3) y 절편 = -10 - (2)(1) = -12 이므로 y = 2x - 12 이다. (4) -2x + -4(2x - 12) = -52 에 대입한다. (5) (-10)x = -100 이므로 x = 10 이다. (6) 확인: y = 8, -2(10) + -4(8) = -52 이다. 따라서 정답은 10이다.",
+   "structuralIssues": []
+  }
+ ]
+}

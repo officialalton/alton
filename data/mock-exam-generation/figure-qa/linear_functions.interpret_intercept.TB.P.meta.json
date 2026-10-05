@@ -1,0 +1,42 @@
+{
+ "itemId": "linear_functions.interpret_intercept.TB.P",
+ "generatedAt": "2026-10-05T19:36:55.125Z",
+ "codeHash": "24c99ddfa49d0d8ef93596ef7c36ca5fe5d734db5d4dbec1032b33c825279dfb",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.interpret_intercept.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.interpret_intercept.TB.P.png",
+   "mobileFile": "linear_functions.interpret_intercept.TB.P.m375.png",
+   "archetypeId": "lf.interpret_intercept.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shows the number of riders for several values of the cost of a bike ride. The relationship between the two quantities is linear.",
+   "question": "Which statement best describes the value of the number of riders at the start, according to the linear relationship?",
+   "options": [
+    "When the cost of a bike ride is 0 dollars, the number of riders is 2 riders.",
+    "When the cost of a bike ride is 0 dollars, the number of riders is 10 riders.",
+    "When the cost of a bike ride is 0 dollars, the number of riders is 4 riders.",
+    "The number of riders increases by 4 riders for each increase of 1 dollar in the cost of a bike ride."
+   ],
+   "correctIndex": 2,
+   "answer": "When the cost of a bike ride is 0 dollars, the number of riders is 4 riders.",
+   "explanation": "(1) 표에서 두 행 (3, 10) 과 (4, 12) 을 읽는다. (2) 기울기 = (12 - 10) ÷ (4 - 3) = 2 이다. (3) x = 0 일 때 값: 10 - (2) × 3 = 4 이다. (4) 표의 첫 행 x 는 3 이라 첫 행 값은 처음 값이 아니다. (5) 절편은 입력이 0 일 때의 값을 뜻한다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

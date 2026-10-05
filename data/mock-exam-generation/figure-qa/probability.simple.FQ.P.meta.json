@@ -1,0 +1,42 @@
+{
+ "itemId": "probability.simple.FQ.P",
+ "generatedAt": "2026-10-05T19:36:55.140Z",
+ "codeHash": "5940978d1a8bb09cfcb6e86b5c88215c47784fbd1d69f771839e2876e65db3cc",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.simple.FQ.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.simple.FQ.P.png",
+   "mobileFile": "probability.simple.FQ.P.m375.png",
+   "archetypeId": "pr.simple.FQ.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The frequency table shows the number of museums each tourist visited for tourists in a city survey. Each of the tourists is equally likely to be chosen, and one is chosen.",
+   "question": "What is the probability that the chosen tourist has a value greater than the mean of all the values in the table?",
+   "options": [
+    "16/27",
+    "11/27",
+    "1/2",
+    "17/27"
+   ],
+   "correctIndex": 0,
+   "answer": "16/27",
+   "explanation": "(1) 표에서 값과 도수를 읽는다: 2(2), 3(9), 4(7), 5(9) — 전체 27개. (2) 전체 개수 = 2 + 9 + 7 + 9 = 27 이다. (3) 합 = 2×2 + 3×9 + 4×7 + 5×9 = 104 이다. (4) 평균 = 104 ÷ 27 ≈ 3.85 이다. (5) 평균보다 큰 값의 도수 합은 16 이다. (6) 확률 = 16/27 = 16/27 이다. 따라서 정답은 16/27이다.",
+   "structuralIssues": []
+  }
+ ]
+}

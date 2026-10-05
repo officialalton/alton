@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.scatter_predict.LG.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-02T03:00:00Z",
-  "reviewer": "uat-figures-agent (C4 재검수)",
-  "codeHash": "d172796f966e7750caf4497c3ed45afc357f7062d4ffa71cebe17a2d89b58416",
+  "reviewedAt": "2026-10-05T19:42:35.611Z",
+  "reviewer": "visual-review-agent-SE",
+  "codeHash": "478ba1fd9d4cb675e27cf9201fecf0da203fc744c34d9d97556639154b3394b2",
   "samples": [
     "two_variable_data.scatter_predict.LG.P.png"
   ],
@@ -14,10 +14,10 @@
     "multi_figure_consistent": "n/a",
     "text_matches_figure_and_solvable": "pass",
     "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
+    "choice_distinct_one_rule": "n/a",
     "sat_visual_style": "pass",
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "점이 (0,5),(1,10),(2,15),(3,20),(4,25). 기울기 5, y=5x+5, x=3 → 20, ×1.25 = 25 = 정답 B(25). 눈금·축 정상, 375px 판독 가능. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+  "notes": "Solved from image: y=5x+5, x=3 -> 20, x1.25 = 25 (B). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact."
 }

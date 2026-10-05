@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.context_graph_features.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "e1e4c4e6ee27f008c40b826b4a7848360476868a81608fb547f98daf11ff3d04",
+  "samples": [
+    "nonlinear_functions.context_graph_features.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "대칭축 x=3.5(값 218,218 사이), 최댓값 222 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+}

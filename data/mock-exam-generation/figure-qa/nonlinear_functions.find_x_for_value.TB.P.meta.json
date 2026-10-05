@@ -1,0 +1,42 @@
+{
+ "itemId": "nonlinear_functions.find_x_for_value.TB.P",
+ "generatedAt": "2026-10-05T19:36:55.165Z",
+ "codeHash": "2b0c0264a30ee1d717e6aeff065d9a4943f4246ac5b8d256c697cfe1b56b09e1",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.find_x_for_value.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.find_x_for_value.TB.P.png",
+   "mobileFile": "nonlinear_functions.find_x_for_value.TB.P.m375.png",
+   "archetypeId": "nf.find_x_for_value.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "An engineer models a curve with a function. For the quadratic function $p$, the table shown gives $p(x)$ for selected values of $x$. The equation $p(x) = -2$ has two solutions.",
+   "question": "If the two solutions are $x_1$ and $x_2$, where $x_1 < x_2$, what is the value of $x_2$?",
+   "options": [
+    "2",
+    "-2",
+    "9",
+    "-9"
+   ],
+   "correctIndex": 2,
+   "answer": "9",
+   "explanation": "(1) 표에서 값을 읽는다: (10, 6), (11, 16), (12, 28), (13, 42) … (2) 1계 차분: 10, 12, 14, 16, 18 — 2계 차분이 2 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = 1 이다. (4) 두 점을 대입해 b = -11, c = 16 를 얻는다. (5) p(x) - (-2) = 1(x - (2))(x - (9)) = 0 이다. (6) 해는 2, 9 이고 큰 해는 9 이다. 따라서 정답은 9이다.",
+   "structuralIssues": []
+  }
+ ]
+}

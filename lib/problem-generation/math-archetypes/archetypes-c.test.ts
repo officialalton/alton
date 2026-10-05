@@ -5,11 +5,15 @@ import { ARCHETYPES } from "./registry";
 import { generateLite, sweepLite, verifyLite } from "./c-lite";
 import { semanticIssues, forbidExcept, plural, semOf } from "./c-kit";
 import { generateOne } from "./sweep";
+import { mutantsOf } from "./figure-coverage-gate";
 import { verifyInstance } from "./verify";
 import type { Instance } from "./types";
 
 const C_SKILLS = ["percentages", "area_volume", "circles"];
-const HARD_C = ARCHETYPES.filter((a) => C_SKILLS.includes(a.skill));
+// 자료(표·그림) 원형(figureItem)은 조합 단위 게이트 G1~G10(figure-coverage.test.ts)이 개수·연산자·변조를 따로 검사한다 — 옛 원형의 개수 기대값(20·24·28)은 그대로 둔다.
+const ALL_C = ARCHETYPES.filter((a) => C_SKILLS.includes(a.skill));
+const HARD_C = ALL_C.filter((a) => !a.figureItem);
+const FIG_C = ALL_C.filter((a) => a.figureItem);
 
 describe("C 담당 hard 원형 구성", () => {
   it("percentages 20·area_volume 24·circles 28 개, 세부 패턴마다 4개이고 연산자가 모두 다르다", () => {
@@ -73,16 +77,19 @@ describe("문장-변수 의미 일치 검사기(명사-수식 매핑)", () => {
 
 describe("돌연변이 — C 담당 모든 원형(hard·lite)에서 검증기가 변조를 잡는가", () => {
   const firstOk = (gen: (s: number) => { ok: boolean; inst?: Instance }) => { for (let s = 0; s < 60; s++) { const g = gen(s); if (g.ok) return g.inst!; } throw new Error("생성 실패"); };
-  const mutations = (inst: Instance, check: (i: Instance) => { ok: boolean; failures: string[] }) => {
+  const mutations = (inst: Instance, check: (i: Instance) => { ok: boolean; failures: string[] }, figure = false) => {
     expect(check(inst).ok, JSON.stringify(check(inst).failures)).toBe(true);
     expect(check({ ...inst, correctIndex: (inst.correctIndex + 1) % 4 }).ok, "정답 키 변조").toBe(false);
     const o = [...inst.options]; o[(inst.correctIndex + 1) % 4] = o[inst.correctIndex]; expect(check({ ...inst, options: o }).ok, "선지 겹침").toBe(false);
+    if (figure) { expect(mutantsOf(inst).some((mm) => !check(mm).ok), "자료(FIGURE) 변조").toBe(true); expect(check({ ...inst, stimulus: `${inst.stimulus} $x` }).ok, "$ 짝").toBe(false); return; }
     const m = inst.verificationJs.match(/^const P = (\{.*\});/)!; const P = JSON.parse(m[1]) as Record<string, unknown>; let caught = false;
     for (const [k, v] of Object.entries(P)) { if (typeof v !== "number" || !Number.isInteger(v)) continue; for (const d of [1, -1, 2, 7, -3]) { const js = inst.verificationJs.replace(/^const P = \{.*\};/, `const P = ${JSON.stringify({ ...P, [k]: v + d })};`); const r = check({ ...inst, verificationJs: js }); if (!r.ok && r.failures.some((f) => f.includes("정답 재계산") || f.includes("verification_js 실패") || f.includes("정답 키 불일치"))) { caught = true; break; } } if (caught) break; }
     expect(caught, "verification_js 상수 변조").toBe(true);
     expect(check({ ...inst, stimulus: `${inst.stimulus} $x` }).ok, "$ 짝").toBe(false);
   };
   for (const a of HARD_C) it(`${a.id}: 변조를 잡는다`, () => { const inst = firstOk((s) => { const g = generateOne(a, s); return g.ok ? { ok: true, inst: g.inst } : { ok: false }; }); mutations(inst, (i) => verifyInstance(a, i)); });
+  // 자료 원형: 값은 FIGURE 에 있으므로 P 상수 대신 자료(셀·점) 변조(게이트 G6 와 같은 tamperFigure)가 잡히는지 본다.
+  for (const a of FIG_C) it(`${a.id}: 자료 변조를 잡는다`, () => { const inst = firstOk((s) => { const g = generateOne(a, s); return g.ok ? { ok: true, inst: g.inst } : { ok: false }; }); mutations(inst, (i) => verifyInstance(a, i), true); });
   for (const a of LITE_C_ARCHETYPES) for (const lv of a.levels) it(`${a.id} ${lv}: 변조를 잡는다`, () => { const inst = firstOk((s) => { const g = generateLite(a, lv, s); return g.ok ? { ok: true, inst: g.inst } : { ok: false }; }); mutations(inst, (i) => verifyLite(a, i)); });
 
   const SWAP: Record<string, string> = { radius: "diameter", diameter: "radius", circumference: "area", area: "perimeter", volume: "area", height: "width", length: "width", width: "length", base: "height", perimeter: "area", raised: "reduced", increased: "decreased", increase: "decrease", discount: "markup", reduced: "raised" };

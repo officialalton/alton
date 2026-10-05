@@ -31,6 +31,7 @@ import { SKILL_CODES, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import { materialStatusLines } from "@/lib/problem-material-need";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
 
@@ -562,7 +563,7 @@ function ProblemPreview({ problem }: { problem: KeywordProblem }) {
   }
   return (
     <div className="mt-2 rounded-lg bg-grey-100 px-4 py-3" data-testid="problem-preview">
-      <ProblemFigure spec={pv.figure} className="mb-2" />
+      <ProblemFigure spec={pv.figure} text={problemText(pv.passage, pv.options)} className="mb-2" />
       <LearningText
         text={stripInlineOptions(pv.passage, pv.options) || "(본문 없음)"}
         className="learning-body text-[13px] leading-[1.7] text-ink"

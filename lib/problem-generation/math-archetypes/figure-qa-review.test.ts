@@ -53,8 +53,14 @@ describe("검수 상태 — pass/defect/missing/stale/snapshot_stale/no_snapshot
 
 describe("매니페스트 전체 — 검수 상태 열은 조합 303개를 모두 덮는다", () => {
   it("파일럿 15조합에는 샘플이 있고(선택지형·복수 자료 포함), 샘플 id 는 조합 id 로 시작한다", () => {
-    const ids = qaItemIds(); expect(ids).toHaveLength(15); for (const id of ids) { expect(FIGURE_ITEMS.some((r) => r.id === id), id).toBe(true); const ss = qaSamples(id); expect(ss.length, id).toBeGreaterThan(0); for (const s of ss) expect(s.file.startsWith(id)).toBe(true); }
+    const ids = qaItemIds(); expect(ids.filter((id) => id.startsWith("two_variable_data."))).toHaveLength(15); expect(ids.length).toBeGreaterThanOrEqual(15); for (const id of ids) { expect(FIGURE_ITEMS.some((r) => r.id === id), id).toBe(true); const ss = qaSamples(id); expect(ss.length, id).toBeGreaterThan(0); for (const s of ss) expect(s.file.startsWith(id)).toBe(true); }
     expect(qaSamples("two_variable_data.association_direction_strength.SC.P").length).toBe(2); // 단일 산점도 + figure_set(Plot A/B)
     expect(QA_DIR).toContain("figure-qa");
+  });
+  it("1단계 조합(skills/fig/items)의 해시 대상은 그 조합 파일 하나 + DSL·표 키트 + 공용(파일럿 규칙은 그대로)", () => {
+    const id = "linear_functions.evaluate.TB.P"; const fs = sourceFilesFor(id, ["data"]);
+    expect(fs).toContain(`lib/problem-generation/math-archetypes/skills/fig/items/${id}.ts`); expect(fs.some((f) => f.endsWith("table-kit.ts"))).toBe(true);
+    expect(fs.some((f) => f.includes("items/") && !f.endsWith(`${id}.ts`))).toBe(false); // 다른 조합 파일을 고쳐도 이 조합 판정은 유지된다
+    expect(sourceFilesFor(ITEM, TYPES)).toContain("lib/problem-generation/math-archetypes/skills/tvd-fig-lines.ts");
   });
 });

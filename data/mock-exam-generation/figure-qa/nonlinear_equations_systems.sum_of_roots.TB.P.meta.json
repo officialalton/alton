@@ -1,0 +1,42 @@
+{
+ "itemId": "nonlinear_equations_systems.sum_of_roots.TB.P",
+ "generatedAt": "2026-10-05T19:36:55.161Z",
+ "codeHash": "97628e9ad2c4d213e8099f6a496d8b9df1c425f2b96dcf23d531b962c6ff2b22",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.sum_of_roots.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.sum_of_roots.TB.P.png",
+   "mobileFile": "nonlinear_equations_systems.sum_of_roots.TB.P.m375.png",
+   "archetypeId": "nes.sum_of_roots.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "During a lesson on functions, a class builds a table of values. A quadratic function $p$ takes the values given in the table for the listed values of $x$.",
+   "question": "What is the sum of all real solutions to $p(x) = 0$?",
+   "options": [
+    "-3",
+    "6",
+    "-20",
+    "-6"
+   ],
+   "correctIndex": 3,
+   "answer": "-6",
+   "explanation": "(1) 표에서 값을 읽는다: (-9, 7), (-8, -4), (-7, -13), (-6, -20) … (2) 1계 차분: -11, -9, -7, -5, -3 — 2계 차분이 2 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = 1 이다. (4) 두 점을 대입해 b = 6, c = -20 를 얻는다. (5) 두 해의 합 = -b ÷ a (= 대칭축의 2배) 이다. (6) 합 = -(6) ÷ 1 = -6 이다. 따라서 정답은 -6이다.",
+   "structuralIssues": []
+  }
+ ]
+}
