@@ -12,10 +12,17 @@ export type TriangleBody = {
   vertices: [string, string, string];
   kind?: TriangleKind;
   rightAngleAt?: string;
+  /**
+   * 직각삼각형에서 **수평(지면)으로 그릴 직각변**의 두 끝점 [왼쪽, 오른쪽]. 직각 꼭짓점은 둘 중 하나여야 하고,
+   * 세 번째 꼭짓점은 직각 꼭짓점 바로 위에 선다. 고도각·수평 거리·그림자·사다리 같은 지문은 반드시 지정한다
+   * (생략하면 꼭짓점 이름 순서로 가로·세로가 정해져 지문의 수평/수직과 어긋날 수 있다).
+   */
+  horizontal?: [string, string];
   /** 변 — 두 꼭짓점 사이. label 은 길이('6', 'x', '√2'), tick 은 등변 표시 개수(1~3). */
   sides?: { between: [string, string]; label?: string; tick?: 1 | 2 | 3 }[];
   /** 각 — 꼭짓점. label('40°', 'θ'), arc(기본 true), tick 은 등각 표시(호 개수 1~2). */
-  angles?: { at: string; label?: string; arc?: boolean; tick?: 1 | 2 }[];
+  angles?: { at: string; label?: string; arc?: boolean; tick?: 1 | 2; value?: number }[];
+  // value — 그림을 그릴 때만 쓰는 **실제 각도(도)**. 인쇄하지 않는다(정답 노출 방지). label 이 'x°'·생략이어도 그림이 참값과 일치한다.
   /** 높이(수선) — 꼭짓점에서 맞은변으로. foot 은 발 이름(선택). */
   altitude?: { from: string; foot?: string; label?: string };
 };
@@ -35,6 +42,11 @@ function validateBody(b: Record<string, unknown>, who: string): string | null {
   if (new Set(vs).size !== 3) return `${who}꼭짓점 이름이 중복됩니다.`;
   if (b.kind !== undefined && !["scalene", "isosceles", "right", "equilateral"].includes(String(b.kind))) return `${who}kind 는 scalene|isosceles|right|equilateral 입니다.`;
   if (b.rightAngleAt !== undefined && !vs.includes(String(b.rightAngleAt))) return `${who}rightAngleAt 은 꼭짓점 이름이어야 합니다.`;
+  if (b.horizontal !== undefined) {
+    const h = b.horizontal;
+    if (!Array.isArray(h) || h.length !== 2 || h[0] === h[1] || !h.every((v) => vs.includes(String(v)))) return `${who}horizontal 은 서로 다른 꼭짓점 2개여야 합니다.`;
+    if (b.rightAngleAt === undefined || !h.includes(String(b.rightAngleAt))) return `${who}horizontal 의 두 꼭짓점 중 하나가 rightAngleAt 이어야 합니다.`;
+  }
   if (b.kind === "right" && b.rightAngleAt === undefined) return `${who}직각삼각형은 rightAngleAt 이 필요합니다.`;
   if (b.sides !== undefined) {
     if (!Array.isArray(b.sides)) return `${who}sides 는 배열이어야 합니다.`;
@@ -49,6 +61,7 @@ function validateBody(b: Record<string, unknown>, who: string): string | null {
     for (const a of b.angles as Record<string, unknown>[]) {
       if (!a || !vs.includes(String(a.at))) return `${who}angles[].at 은 꼭짓점 이름이어야 합니다.`;
       if (a.label !== undefined && typeof a.label !== "string") return `${who}angles[].label 은 문자열입니다.`;
+      if (a.value !== undefined && !(typeof a.value === "number" && a.value > 0 && a.value < 180)) return `${who}angles[].value 는 0~180 사이 숫자(도)입니다.`;
       if (String(a.at) === String(b.rightAngleAt) && a.label) return `${who}직각 꼭짓점 ${String(a.at)} 에는 각 라벨을 따로 두지 않습니다(직각 표시가 대신합니다).`;
     }
   }
@@ -96,7 +109,10 @@ export function parseAngleLabel(t?: string): number | null {
   return n > 0 && n < 180 ? n : null;
 }
 function knownAngle(b: TriangleBody, v: string): number | null {
-  return parseAngleLabel((b.angles ?? []).find((a) => a.at === v)?.label);
+  const a = (b.angles ?? []).find((x) => x.at === v);
+  if (!a) return null;
+  if (typeof a.value === "number" && a.value > 0 && a.value < 180) return a.value;
+  return parseAngleLabel(a.label);
 }
 const RAD = Math.PI / 180;
 /** 밑변 (0,0)-(1,0) 위에서 왼쪽 밑각 a1·오른쪽 밑각 a2(도)인 꼭짓점 — 사인법칙. 폭이 [0,1] 밖이면 정규화한다. */
@@ -119,7 +135,12 @@ function shapeOf(b: TriangleBody): { pts: Pt[]; order: string[] } {
     // 직각 꼭짓점 왼쓱 아래, 다음 꼭짓점(순환) 오른쪽 아래, 나머지 위.
     const r = b.rightAngleAt ?? v1;
     const i = b.vertices.indexOf(r);
-    const bl = b.vertices[i], br = b.vertices[(i + 1) % 3], top = b.vertices[(i + 2) % 3];
+    const bl = b.vertices[i];
+    let br = b.vertices[(i + 1) % 3], top = b.vertices[(i + 2) % 3];
+    // horizontal 이 있으면 그 변이 지면(가로)이다: 직각 꼭짓점 bl, 지면의 다른 끝 br, 나머지 top(직각 꼭짓점 바로 위).
+    const hz = b.horizontal;
+    if (hz && hz.includes(r)) { br = hz[0] === r ? hz[1] : hz[0]; top = b.vertices.find((v) => v !== r && v !== br)!; }
+    const mirror = Boolean(hz && hz[1] === r); // 직각 꼭짓점이 지면의 오른쪽 끝
     // 2026-09-19(제품 오너 발견) — 두 직각변 값과 무관하게 항상 가로:세로 = 4:3 고정이었다
     // (예: AB=18, AC=80인데 거의 정사각형에 가까운 삼각형으로 보임). bl-br·bl-top 변의
     // 숫자 라벨이 둘 다 있으면 그 실제 비율로 그린다(단위 프레임 안에서 상대 비율만
@@ -140,7 +161,7 @@ function shapeOf(b: TriangleBody): { pts: Pt[]; order: string[] } {
         if (ratio <= 1) { w = 1; h = ratio; } else { w = 1 / ratio; h = 1; }
       }
     }
-    const map: Record<string, Pt> = { [bl]: [0, 0], [br]: [w, 0], [top]: [0, h] };
+    const map: Record<string, Pt> = mirror ? { [bl]: [w, 0], [br]: [0, 0], [top]: [w, h] } : { [bl]: [0, 0], [br]: [w, 0], [top]: [0, h] };
     return { pts: b.vertices.map((v) => map[v]), order: [top, bl, br] };
   }
   if (kind === "equilateral") return { pts: [[0.5, Math.sqrt(3) / 2], [0, 0], [1, 0]], order: [v0, v1, v2] };
@@ -252,7 +273,9 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
     if (a2 - a1 > Math.PI) [a1, a2] = [a2, a1 + 2 * Math.PI];
     const isRight = a.at === b.rightAngleAt;
     const n = a.tick ?? 1;
-    if (!isRight && a.arc !== false) for (let i = 0; i < n; i++) sheet.arc(c, ARC_R + i * 5, a1, a2);
+    // value 만 있는 각(라벨·눗금 없음)은 그림 모양용이다 — 호를 그리지 않는다.
+    const drawArc = a.arc ?? (a.label !== undefined || a.tick !== undefined || a.value === undefined);
+    if (!isRight && drawArc) for (let i = 0; i < n; i++) sheet.arc(c, ARC_R + i * 5, a1, a2);
     if (a.label) {
       const mid = (a1 + a2) / 2;
       const half = (a2 - a1) / 2;
@@ -392,6 +415,16 @@ export function lintTriangleAgainstText(spec: TriangleSpec, passage: string): Fi
   for (const m of text.matchAll(/(\([^()]{1,24}\)|\b\d+(?:\.\d+)?|\b[a-zθ])\s*(?:°|degrees|\^\\?circ)/g)) {
     const lbl = `${m[1].trim()}°`.replace(/\s+/g, "").replace(/−/g, "-");
     if (!angleLabels.has(lbl)) issues.push({ code: "ref_missing", message: `지문의 각 '${m[1].trim()}°' 가 도형의 각 라벨에 없습니다.` });
+  }
+  // 2026-10-05(오너 UAT) — 풍선 고도각 문제: 직각 꼭짓점 이름 순서로 가로/세로가 정해져 40 m(수평 거리)가 세로변으로 그려졌다.
+  // 지면·수평·수직 의미가 있는 지문의 직각삼각형은 어느 변이 지면인지(horizontal) 반드시 밝힌다.
+  if (/\b(angle of (?:elevation|depression)|horizontal(?:ly)?|level ground|flat ground|vertical(?:ly)?|directly (?:above|below)|shadow)\b/i.test(text)) {
+    for (const b of bodies) if (b.rightAngleAt && !b.horizontal) issues.push({ code: "orientation_missing", message: "지문에 수평·수직·고도각 의미가 있는데 직각삼각형에 horizontal(지면으로 그릴 직각변의 두 끝점 [왼쪽, 오른쪽])이 없습니다 — 수평 거리·높이가 그림에서 뒤바뀔 수 있습니다." });
+  }
+  // 각의 관계(몇 배·합·차)로 푸는 문제는 정답 각이 그림에 보여서는 안 되지만 그림은 참값과 맞아야 한다 → 각마다 value(참값, 비인쇄)를 준다.
+  if (!spec.second && !spec.rightAngleAt && /\b(times|twice|half|more than|less than|sum of|ratio)\b/i.test(text) && /\bangles?\b/i.test(text)) {
+    const known = spec.vertices.filter((v) => knownAngle(spec, v) !== null).length;
+    if (known < 3) issues.push({ code: "angle_value_missing", message: "각의 관계로 푸는 문제인데 일부 각에 value(참값, 인쇄 안 됨)가 없어 그림이 실제 각과 어긋날 수 있습니다 — 세 각 모두 angles[].value 를 주세요." });
   }
   if (/\b(north|south|east|west|quadrant|region)\b/i.test(text)) {
     issues.push({ code: "wording", message: "지문에 방위·영역 표현이 있습니다 — 점·변·각 이름으로 부릅니다." });

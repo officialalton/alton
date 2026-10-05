@@ -318,6 +318,30 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
   /** 라벨 후보 — 가까운 고리부터 세 고리(규칙). 못 놓으면 거부. */
   const around = (p: Pt, d = 14): Pt[] => [...ring(p, d), ...ring(p, d + 10), ...ring(p, d + 20)];
 
+  /**
+   * 직선 라벨 후보 — 선 바로 옆(법선 방향으로 라벨 상자가 선에 닿지 않을 만큼만 띄운 자리), 오른쪽 끝에서 안쪽으로 차례로.
+   * 2026-10-05(오너 UAT) — 끝점 둘레 고리 후보만 쓰면 라벨이 선에서 멀리(대각선 25~45px) 떨어져 어느 선의 라벨인지 헷갈렸다.
+   * 그림(플롯) 안에 완전히 들어오는 자리만 쓰고, 없으면 기존 후보로 물러난다.
+   */
+  const besideLine = (a: Pt, b: Pt, text: string): Pt[] => {
+    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1;
+    const nx = -dy / L, ny = dx / L;
+    const w = labelWidth(text, 13), h = 15; // 실제 그리는 글자 크기(13)의 상자 — firstFree 도 같은 크기로 본다
+    const off = (w / 2) * Math.abs(nx) + (h / 2) * Math.abs(ny) + 3.5;
+    const x1 = sx(ax.min), x2 = sx(ax.max), y1 = sy(ay.max), y2 = sy(ay.min);
+    const out: Pt[] = [];
+    for (const t of [0.94, 0.86, 0.78, 0.68, 0.58, 0.48, 0.38, 0.28]) {
+      for (const extra of [0, 5]) {
+        const sides = ny <= 0 ? [1, -1] : [-1, 1]; // 화면 위쪽 법선을 먼저
+        for (const sd of sides) {
+          const c: Pt = [a[0] + dx * t + nx * sd * (off + extra), a[1] + dy * t + ny * sd * (off + extra)];
+          if (c[0] - w / 2 >= x1 && c[0] + w / 2 <= x2 && c[1] - h / 2 >= y1 && c[1] + h / 2 <= y2) out.push(c);
+        }
+      }
+    }
+    return out;
+  };
+
   spec.objects.forEach((o, idx) => {
     const color = COLORS[idx % COLORS.length];
     if (o.kind === "line") {
@@ -334,7 +358,7 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
           sheet.polyline(ends.map(([x, y]) => [sx(x), sy(y)] as Pt), { color, dashed: o.style === "dashed" });
           const end: Pt = [sx(ends[1][0]), sy(ends[1][1])];
           const q: Pt = [(sx(ends[0][0]) + end[0] * 3) / 4, (sy(ends[0][1]) + end[1] * 3) / 4];
-          if (o.label) labelJobs.push({ text: o.label, anchor: end, color, what: `직선 ${o.id} 라벨`, prefer: [[end[0] - halfDiag(o.label) - 4, end[1] - 12], [end[0] - halfDiag(o.label) - 4, end[1] + 12], ...around(end, 18), ...around(q, 20)] });
+          if (o.label) labelJobs.push({ text: o.label, anchor: end, color, what: `직선 ${o.id} 라벨`, prefer: [...besideLine([sx(ends[0][0]), sy(ends[0][1])], end, o.label), [end[0] - halfDiag(o.label) - 4, end[1] - 12], [end[0] - halfDiag(o.label) - 4, end[1] + 12], ...around(end, 18), ...around(q, 20)] });
         }
         altParts.push(`직선 ${o.label ?? o.id}: ${formatFn("linear", [lp.m, lp.b])}`);
       }
@@ -485,7 +509,7 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
     altParts.push(`점 ${o.label ?? o.id} (${x}, ${y})`);
   });
   for (const job of labelJobs) {
-    const spot = sheet.firstFree(job.prefer, job.text);
+    const spot = sheet.firstFree(job.prefer, job.text, 13); // label() 이 그리는 크기(13)와 같은 상자로 본다
     if (!spot) { issues.push({ code: "label_collision", message: `${job.what} '${job.text}' 를 겹치지 않게 놓을 자리가 없습니다 — 축 범위를 넓히거나 라벨을 줄이세요.` }); continue; }
     sheet.label(spot[0], spot[1], job.text, job.what, { italic: true, size: 13, color: job.color });
   }
