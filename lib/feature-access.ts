@@ -9,66 +9,9 @@ import { requireUser } from "./auth";
  *
  * S1에서는 헬퍼와 테스트만 만들고 신규 가입/프로비저닝 액션에만 적용한다. 기존 학생 서버 액션 전면 적용은 S2.
  */
-export const FEATURE_KEYS = [
-  // 공통(C)
-  "account",
-  "problem_report",
-  // 무료(F)
-  "home",
-  "mock_exam",
-  "problem_log",
-  "vocab",
-  "materials_free",
-  "tutoring_info",
-  // 과외(T)
-  "roadmap",
-  "course",
-  "class",
-  "teacher",
-  "homework",
-  "lesson_booking",
-  "teacher_chat",
-  "consultant_portal",
-  "credits",
-  "college",
-  "session",
-] as const;
-
-export type FeatureKey = (typeof FEATURE_KEYS)[number];
-
-export const COMMON_FEATURE_KEYS: readonly FeatureKey[] = ["account", "problem_report"];
-export const FREE_FEATURE_KEYS: readonly FeatureKey[] = ["home", "mock_exam", "problem_log", "vocab", "materials_free", "tutoring_info"];
-export const TUTORING_FEATURE_KEYS: readonly FeatureKey[] = [
-  "roadmap",
-  "course",
-  "class",
-  "teacher",
-  "homework",
-  "lesson_booking",
-  "teacher_chat",
-  "consultant_portal",
-  "credits",
-  "college",
-  "session",
-];
-
-export function isFeatureKey(value: unknown): value is FeatureKey {
-  return typeof value === "string" && (FEATURE_KEYS as readonly string[]).includes(value);
-}
-
-/** RPC 결과(text[])를 알려진 키 집합으로 정규화한다. 모르는 키는 버린다(fail-closed). */
-export function normalizeFeatureAccess(raw: unknown): FeatureKey[] {
-  if (!Array.isArray(raw)) return [];
-  const out: FeatureKey[] = [];
-  for (const v of raw) {
-    if (isFeatureKey(v) && !out.includes(v)) out.push(v);
-  }
-  return out;
-}
-
-export function hasFeature(access: readonly FeatureKey[], key: FeatureKey): boolean {
-  return access.includes(key);
-}
+export { FEATURE_KEYS, COMMON_FEATURE_KEYS, FREE_FEATURE_KEYS, TUTORING_FEATURE_KEYS, isFeatureKey, normalizeFeatureAccess, hasFeature } from "./feature-access-keys";
+export type { FeatureKey } from "./feature-access-keys";
+import { normalizeFeatureAccess, hasFeature, type FeatureKey } from "./feature-access-keys";
 
 type RpcClient = { rpc: (fn: string, args: Record<string, unknown>) => PromiseLike<{ data: unknown; error: { message: string } | null }> };
 
