@@ -11,7 +11,7 @@
 // 않는다(요청자 세션 → RPC).
 
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { loadMockExamAttemptDetail, type MockExamAttemptDetail } from "./attempt-data";
 import { parseAnnotations, type MockExamAnnotations } from "./annotation-anchor";
 
@@ -27,7 +27,7 @@ function toErr(e: unknown, fallback: string): string {
  * 이미 있으면 그 응시를 돌려준다). 학생이 attempt 를 직접 INSERT 할 RLS 는 없다. */
 export async function startMockExamAction(examSetId: string): Promise<ActionResult<{ attemptId: string }>> {
   try {
-    const { supabase } = await requireUser();
+    const { supabase } = await requireStudentFeature("mock_exam");
     const { data, error } = await supabase.rpc("mock_exam_open_start", { p_exam_set_id: examSetId });
     if (error) return { ok: false, error: toErr(error, "시험을 시작하지 못했습니다.") };
     revalidatePath("/student");
@@ -39,7 +39,7 @@ export async function startMockExamAction(examSetId: string): Promise<ActionResu
 
 async function callRpc(fn: string, args: Record<string, unknown>, fallback: string): Promise<ActionResult> {
   try {
-    const { supabase } = await requireUser();
+    const { supabase } = await requireStudentFeature("mock_exam");
     const { error } = await supabase.rpc(fn, args);
     if (error) return { ok: false, error: toErr(error, fallback) };
     return { ok: true, value: undefined };
@@ -117,7 +117,7 @@ export async function submitMockExamAttemptAction(attemptId: string): Promise<Ac
   revalidatePath("/student");
   revalidatePath("/teacher");
   revalidatePath("/parent");
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("mock_exam");
   const attempt = await loadMockExamAttemptDetail(supabase, attemptId);
   return { ok: true, value: { attempt } };
 }
@@ -147,7 +147,7 @@ export async function saveMockExamAnnotationsAction(attemptId: string, setItemId
 /** 본인(응시 중·결과)·담당 교사·관리자·보호자 읽기. 읽기 전용 열람 용도로도 쓴다. */
 export async function loadMockExamAnnotationsAction(attemptId: string, setItemId: string): Promise<MockExamAnnotations> {
   try {
-    const { supabase } = await requireUser();
+    const { supabase } = await requireStudentFeature("mock_exam");
     const { data, error } = await supabase.rpc("load_mock_exam_annotations", { p_attempt_id: attemptId, p_set_item_id: setItemId });
     if (error) return { highlights: [], eliminated: [] };
     return parseAnnotations(data);

@@ -163,7 +163,10 @@ async function loadSavedHomeworkPractice(studentId: string): Promise<ProblemHist
   return entries;
 }
 
-export async function loadProblemHistory(studentId: string): Promise<ProblemHistoryEntry[]> {
+/** 2026-10-05 무료 회원 S2 — sources.mockExamOnly: 수업·과제 소스가 구조적으로 없는 무료 회원은 모의고사
+ * 저장분만 조회한다(쿼리 2개 절약, 브리프 §1.6 "수업·과제 소스는 자연히 비어 있음"). */
+export async function loadProblemHistory(studentId: string, opts: { mockExamOnly?: boolean } = {}): Promise<ProblemHistoryEntry[]> {
+  if (opts.mockExamOnly) return loadSavedMockExamPractice(studentId);
   const admin = createAdminClient();
   const { data: work } = await admin
     .from("session_problem_work")

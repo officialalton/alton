@@ -4,7 +4,7 @@
 // 보호자용 버전과 동일 로직, "이 자녀가 내 가족"이 아니라 "이게 내 계정인지"만 다르다).
 
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { createAdminClient } from "@/lib/supabase-admin";
 import {
   confirmLessonBooking,
@@ -21,7 +21,7 @@ import { respondToLessonRescheduleRequest } from "@/lib/booking/reschedule";
 export type { AvailableSlotsQuery };
 
 export async function listAvailableSlotsForBooking(query: AvailableSlotsQuery): Promise<Date[]> {
-  await requireUser();
+  await requireStudentFeature("lesson_booking");
   return queryAvailableSlots(query);
 }
 
@@ -36,7 +36,7 @@ export type CreateLessonBookingParams = {
 export async function createMyLessonBooking(
   params: CreateLessonBookingParams
 ): Promise<BookingActionOutcome<{ reservationId: string; sessionId: string }>> {
-  const { user } = await requireUser();
+  const { user } = await requireStudentFeature("lesson_booking");
   try {
     const admin = createAdminClient();
     await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
@@ -67,7 +67,7 @@ export type CreateWeeklySeriesParams = {
 export async function createMyWeeklyLessonSeries(
   params: CreateWeeklySeriesParams
 ): Promise<BookingActionOutcome<WeeklySeriesOccurrenceResult[]>> {
-  const { user } = await requireUser();
+  const { user } = await requireStudentFeature("lesson_booking");
   try {
     const admin = createAdminClient();
     await assertActiveTeacherAssignment(admin, params.subjectEnrollmentId, params.teacherId);
@@ -83,7 +83,7 @@ export async function createMyWeeklyLessonSeries(
 
 /** R6: 브라우저 감지 timezone 제안 UI가 "적용" 클릭 시 호출 — 본인 profiles.timezone 갱신. */
 export async function updateMyTimezone(timezone: string): Promise<void> {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("account");
   const { error } = await supabase.from("profiles").update({ timezone }).eq("id", user.id);
   if (error) throw new Error(error.message);
 }
@@ -99,7 +99,7 @@ export type PendingLessonRescheduleRequest = {
 /** 2026-09-22(사용자 지시) — 선생님이 건 재조정 요청 중 내 예약(subject_enrollments.child_id=본인)에
  * 대한 대기 중인 것만 보여준다. RLS("학생/보호자 본인 예약 조회")가 이미 범위를 제한한다. */
 export async function listMyPendingLessonRescheduleRequestsAction(): Promise<PendingLessonRescheduleRequest[]> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("lesson_booking");
   const { data, error } = await supabase
     .from("reservation_reschedule_requests")
     .select("id, reservation_id, proposed_starts_at, proposed_ends_at, reason")
@@ -116,13 +116,13 @@ export async function listMyPendingLessonRescheduleRequestsAction(): Promise<Pen
 }
 
 export async function respondToMyLessonRescheduleRequestAction(requestId: string, accept: boolean): Promise<void> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("lesson_booking");
   await respondToLessonRescheduleRequest(supabase, requestId, accept);
   revalidatePath("/student");
 }
 
 export async function cancelMyLessonBooking(params: { reservationId: string; reason: string }): Promise<void> {
-  const { user } = await requireUser();
+  const { user } = await requireStudentFeature("lesson_booking");
   const admin = createAdminClient();
   await assertReservationBelongsToChild(admin, params.reservationId, user.id);
   await cancelLessonBooking({

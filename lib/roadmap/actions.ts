@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/utils/supabase/server";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { loadRoadmapData } from "./data";
 import type {
   RoadmapData,
@@ -38,12 +38,10 @@ function revalidateRoadmapPaths(studentId: string) {
   revalidatePath(`/admin/students/${studentId}/roadmap`);
 }
 
+// 2026-10-05 무료 회원 S2 — 학생이면 과외 키 "roadmap" 필요(결정 7-13: 1차 불허). 학부모·컨설턴트·관리자는
+// passthrough이고 범위는 _roadmap_can_write RLS가 최종 결정한다.
 async function requireLoggedIn() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  const { supabase } = await requireStudentFeature("roadmap");
   return supabase;
 }
 

@@ -1,6 +1,6 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { createAdminClient } from "@/lib/supabase-admin";
 
 // 파일 자료(PDF·영상)의 고정 사본을 여는 서명 URL.
@@ -17,7 +17,7 @@ export type AssetUrlResult =
 const EXPIRES_IN_SECONDS = 600;
 
 export async function getAssetVersionUrlAction(versionId: string): Promise<AssetUrlResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("materials_free");
 
   const { data: version } = await supabase
     .from("curriculum_doc_versions")

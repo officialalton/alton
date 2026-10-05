@@ -4,7 +4,7 @@
 // "문항당 필기 스냅샷 하나"다. 저장은 문항을 벗어날 때(응시 화면의 문항 이동 flush와
 // 같은 타이밍)나 필기 도구를 끌 때 호출한다.
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 
 export type ProblemNoteContext = "mock_exam" | "homework" | "problem";
 export type StrokeSegment = { x0: number; y0: number; x1: number; y1: number; color: string; w?: number };
@@ -15,7 +15,7 @@ export async function saveProblemNoteStrokesAction(
   itemId: string,
   strokes: StrokeSegment[],
 ): Promise<{ ok: true } | { ok: false; error: string }> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("mock_exam");
   const { error } = await supabase.rpc("save_problem_note_strokes", {
     p_context: context,
     p_target_id: targetId,
@@ -33,7 +33,7 @@ export async function loadProblemNoteStrokesAction(
   itemId: string,
   authorId?: string,
 ): Promise<StrokeSegment[]> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("mock_exam");
   const { data, error } = await supabase.rpc("load_problem_note_strokes", {
     p_context: context,
     p_target_id: targetId,

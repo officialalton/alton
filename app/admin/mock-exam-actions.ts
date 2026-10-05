@@ -50,6 +50,8 @@ export type MockExamSetSummary = {
   mathCount: number;
   createdAt: string;
   publishedAt: string | null;
+  /** 2026-10-05 무료 회원 S2 — free=무료 회원에게도 공개(공개+문항 구성 완료 세트만, DB 트리거가 강제). */
+  accessTier: "free" | "tutoring";
 };
 
 /** includeArchived=false(기본, "생성/검토/공개" 서브탭용)면 보관된 세트를 뺀다.
@@ -61,7 +63,7 @@ export async function listMockExamSets(
   const db = createAdminClient();
   let query = db
     .from("mock_exam_sets")
-    .select("id, set_group_id, version_no, name, difficulty_tier, status, format, readiness_status, readiness_report, created_at, published_at")
+    .select("id, set_group_id, version_no, name, difficulty_tier, status, format, readiness_status, readiness_report, created_at, published_at, access_tier")
     .order("created_at", { ascending: false });
   if (opts.archivedOnly) query = query.not("archived_at", "is", null);
   else if (!opts.includeArchived) query = query.is("archived_at", null);
@@ -90,7 +92,18 @@ export async function listMockExamSets(
     format: (s.format ?? "fixed") as "fixed" | "mst",
     readinessStatus: (s.readiness_status ?? "not_applicable") as MockExamSetSummary["readinessStatus"],
     readinessReport: (s.readiness_report as MstReadinessReport | null) ?? null,
+    accessTier: (s.access_tier === "free" ? "free" : "tutoring") as MockExamSetSummary["accessTier"],
   }));
+}
+
+/** 2026-10-05 무료 회원 S2 — 공개 세트의 무료 공개 여부 토글. 규칙(공개·보관 아님·MST는 ready)은 DB 트리거
+ * mock_exam_sets_guard_access_tier 가 최종 방어선이고, 여기서는 그 오류 문구를 그대로 올린다. */
+export async function setMockExamSetAccessTierAction(examSetId: string, accessTier: "free" | "tutoring"): Promise<void> {
+  await requireAdmin();
+  const db = createAdminClient();
+  const { error } = await db.from("mock_exam_sets").update({ access_tier: accessTier }).eq("id", examSetId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin");
 }
 
 function fetchEligiblePage(db: ReturnType<typeof createAdminClient>, domains: string[], from: number, to: number) {

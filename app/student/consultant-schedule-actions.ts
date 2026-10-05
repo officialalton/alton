@@ -7,14 +7,14 @@
 // list_open_consultant_meeting_slots RPC와 RLS(20261470000000)가 이미
 // "본인 담당 컨설턴트인지"를 강제하므로 여기서는 추가 검증을 하지 않는다.
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import type { MeetingRequest, GuardianMeetingRequestReview } from "@/app/parent/inquiry-actions";
 import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 
 export type MyAssignedConsultant = { id: string; name: string | null };
 
 export async function getMyAssignedConsultantAction(): Promise<MyAssignedConsultant | null> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
   if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
   const { data, error } = await supabase
     .from("consultant_assignments")
@@ -35,7 +35,7 @@ export async function listOpenSlotsForMyConsultantAction(
   fromIso: string,
   toIso: string
 ): Promise<ConsultantSlot[]> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("consultant_portal");
   const { data, error } = await supabase.rpc("list_open_consultant_meeting_slots", {
     p_consultant_id: consultantId,
     p_from: fromIso,
@@ -53,7 +53,7 @@ export async function submitMyConsultantMeetingRequestAction(params: {
   slotStartsAtIso: string;
 }): Promise<SubmitConsultantMeetingRequestResult> {
   try {
-    const { user, profile, supabase } = await requireUser();
+    const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
     if (profile?.role !== "student") throw new Error("학생만 신청할 수 있습니다.");
     if (!params.reason?.trim()) throw new Error("상담 사유를 입력해주세요.");
     if (!params.slotStartsAtIso) throw new Error("희망 시간을 선택해주세요.");
@@ -90,7 +90,7 @@ export async function submitMyConsultantMeetingRequestAction(params: {
 }
 
 export async function listMyConsultantMeetingRequestsAction(): Promise<MeetingRequest[]> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
   if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
   const { data, error } = await supabase
     .from("meeting_requests")
@@ -124,7 +124,7 @@ export async function listMyConsultantMeetingRequestsAction(): Promise<MeetingRe
 export async function getMyConsultantMeetingRequestReviewAction(
   meetingRequestId: string
 ): Promise<GuardianMeetingRequestReview | null> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
   if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
   const { data: owns } = await supabase
     .from("meeting_requests")

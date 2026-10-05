@@ -1,9 +1,9 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 
 export async function requestParentPayment(): Promise<{ guardianName: string }> {
-  const { supabase, user } = await requireUser();
+  const { supabase, user } = await requireStudentFeature("credits");
 
   // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다
   // (guardian_students는 동결).

@@ -37,7 +37,7 @@ export async function loadRoadmapData(
     reviewRes,
   ] = await Promise.all([
     supabase.from("profiles").select("name").eq("id", studentId).maybeSingle(),
-    supabase.from("students").select("grade, school_name, gpa, gpa_scale, class_rank, class_size").eq("id", studentId).maybeSingle(),
+    supabase.from("students").select("grade, school_name, gpa, gpa_scale, class_rank, class_size, member_type").eq("id", studentId).maybeSingle(),
     supabase
       .from("student_academic_profile")
       .select(
@@ -267,6 +267,7 @@ export async function loadRoadmapData(
     studentId,
     studentName: profileRes.data?.name ?? "학생",
     grade: studentRes.data?.grade ?? null,
+    memberType: studentRes.data?.member_type === "free" ? "free" : "tutoring",
     schoolName: studentRes.data?.school_name ?? null,
     gpa: studentRes.data?.gpa ?? null,
     gpaScale: studentRes.data?.gpa_scale ?? null,

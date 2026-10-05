@@ -1,6 +1,6 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { loadHomeworkBatch, type HomeworkBatchItem } from "./homework-batch-data";
 import { fmtDate } from "@/lib/format-datetime";
 
@@ -16,7 +16,7 @@ export async function issueHomeworkBatchAction(
 ): Promise<ActionResult<{ id: string; problemCount: number }>> {
   const wanted = requests.filter((r) => Number.isFinite(r.count) && r.count > 0);
   if (wanted.length === 0) return { ok: false, error: "키워드별로 낼 개수를 적으세요." };
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("homework");
 
   const [{ data: teacherProfile }, { data: keywordRow }] = await Promise.all([
     supabase.from("profiles").select("name").eq("id", user.id).maybeSingle(),
@@ -46,7 +46,7 @@ export async function issueHomeworkBatchAction(
  * UPDATE 가 열려 있어 graded/grade 를 REST API 로 직접 바꿀 수 있었다). SECURITY DEFINER RPC 가
  * 본인·미채점 검사를 하고 response/submittedAt/autoCorrect 세 키만 갱신한다(정오 계산도 DB 안에서). */
 export async function submitHomeworkAnswerAction(batchId: string, problemId: string, response: string): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("homework_submit_answer", { p_batch_id: batchId, p_problem_id: problemId, p_response: response });
   if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "답을 저장하지 못했습니다." };
   return { ok: true, value: undefined };
@@ -58,7 +58,7 @@ export async function gradeHomeworkBatchAction(
   batchId: string,
   overrides: { problemId: string; grade: "correct" | "incorrect"; comment?: string }[]
 ): Promise<ActionResult> {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("homework");
   const batch = await loadHomeworkBatch(supabase, batchId);
   if (!batch) return { ok: false, error: "과제를 찾을 수 없습니다." };
   if (batch.teacherId !== user.id) return { ok: false, error: "발급한 교사만 채점할 수 있습니다." };
@@ -87,7 +87,7 @@ export async function gradeHomeworkBatchAction(
  * (모의고사와 같은 구조 — 저장한 문항만 Practice에 뜬다). homework_batches.items는
  * jsonb 배열이라 저장 여부도 원소 안에 같이 둔다(toggle_homework_item_saved_to_practice RPC). */
 export async function toggleHomeworkItemSavedToPracticeAction(batchId: string, problemId: string, saved: boolean): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("toggle_homework_item_saved_to_practice", { p_batch_id: batchId, p_problem_id: problemId, p_saved: saved });
   if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "저장하지 못했습니다." };
   return { ok: true, value: undefined };
@@ -98,7 +98,7 @@ export async function toggleHomeworkItemSavedToPracticeAction(batchId: string, p
 export async function regradeHomeworkItemAction(
   batchId: string, problemId: string, grade: "correct" | "incorrect" | null, comment?: string
 ): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("homework_regrade_item", { p_batch_id: batchId, p_problem_id: problemId, p_grade: grade, p_comment: comment ?? null });
   if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "다시 채점하지 못했습니다." };
   return { ok: true, value: undefined };

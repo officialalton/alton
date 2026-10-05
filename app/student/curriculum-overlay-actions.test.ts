@@ -19,8 +19,13 @@ const { mockSupabase, state } = vi.hoisted(() => {
   return { mockSupabase, state };
 });
 
-vi.mock("@/utils/supabase/server", () => ({
-  createClient: vi.fn().mockResolvedValue(mockSupabase),
+// 2026-10-05 무료 회원 S2 — 액션은 requireStudentFeature("course")(lib/feature-access)를 거친다. 비로그인은 그
+// 헬퍼(requireUser)가 거부하므로 여기서는 같은 오류를 흉내 낸다.
+vi.mock("@/lib/feature-access", () => ({
+  requireStudentFeature: vi.fn(async () => {
+    if (!state.user) throw new Error("로그인이 필요합니다.");
+    return { user: state.user, profile: { role: "student" }, supabase: mockSupabase, featureAccess: ["course"] };
+  }),
 }));
 
 import { loadMyCurriculumOverlay } from "./curriculum-overlay-actions";

@@ -14,8 +14,9 @@ function builder(table: string) {
   };
   return q;
 }
-vi.mock("@/lib/auth", () => ({
-  requireUser: async () => ({ user: { id: "st1" }, profile: { role: "student" }, supabase: { from: builder } }),
+// 2026-10-05 S2 — 액션은 requireStudentFeature("consultant_portal")(lib/feature-access)를 거친다.
+vi.mock("@/lib/feature-access", () => ({
+  requireStudentFeature: async () => ({ user: { id: "st1" }, profile: { role: "student" }, supabase: { from: builder }, featureAccess: [] }),
 }));
 
 import { getMyHouseholdMessengerUnreadCountAction, markMyHouseholdMessengerReadAction } from "./consultant-messenger-actions";

@@ -49,6 +49,8 @@ import { getMyHouseholdMessengerUnreadCountAction } from "./consultant-messenger
 import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import PageFrame from "@/app/components/PageFrame";
+import FreeMemberHome from "./FreeMemberHome";
+import type { BreakdownRow } from "@/lib/mock-exam/report";
 import NavIcon from "@/app/components/NavIcon";
 import { hasFeature, type FeatureKey } from "@/lib/feature-access-keys";
 
@@ -99,31 +101,6 @@ const NAV_FEATURE: Record<TabId, FeatureKey> = {
   materials: "materials_free",
 };
 
-function FreeMemberHome({ studentName, onSelectTab }: { studentName: string; onSelectTab: (id: TabId) => void }) {
-  return (
-    <PageFrame title="Home">
-      <div className="rounded-xl bg-white border border-brand-border p-6">
-        <p className="text-[12px] font-bold text-brand-red mb-1">무료 학습 회원</p>
-        <h2 className="text-[20px] font-extrabold text-navy mb-2">{studentName} 학생님, 환영합니다</h2>
-        <p className="text-[13.5px] text-grey-500 leading-[1.7] mb-5">
-          무료 모의고사를 풀고 결과·해설을 확인해 보세요. 틀린 문제는 Practice에, 모르는 단어는 Vocabulary에 모아 복습할 수 있습니다.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={() => onSelectTab("mock-exam")} className="px-4 py-2.5 rounded-lg bg-brand-red text-white text-[13px] font-bold">
-            모의고사 보기
-          </button>
-          <button type="button" onClick={() => onSelectTab("problemlog")} className="px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
-            Practice
-          </button>
-          <button type="button" onClick={() => onSelectTab("vocab")} className="px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
-            Vocabulary
-          </button>
-        </div>
-      </div>
-    </PageFrame>
-  );
-}
-
 export default function StudentShell({
   studentName,
   initialTab,
@@ -152,6 +129,7 @@ export default function StudentShell({
   roadmap,
   mockExamOverview,
   featureAccess,
+  freeHome,
 }: {
   studentName: string;
   initialTab?: string;
@@ -183,6 +161,8 @@ export default function StudentShell({
   mockExamOverview?: MockExamOverview;
   /** student_feature_access 결과. 없으면(기존 경로) 모든 탭 표시. */
   featureAccess?: FeatureKey[];
+  /** 2026-10-05 S2 무료 홈 데이터(약점 TOP 3 등). 무료 분기(page.tsx)에서만 내려온다. */
+  freeHome?: { weaknesses: BreakdownRow[]; gradedAttemptCount: number };
 }) {
   const router = useRouter();
   const navItems = useMemo(
@@ -235,7 +215,8 @@ export default function StudentShell({
 
   // 2026-09-10(UI/UX 정리 1차, 배치4) — 모바일 하단 탭: 홈·수업·과제·교재 +
   // 더보기(나머지). 데스크톱 사이드바는 그대로 두고 모바일에서만 숨긴다.
-  const MOBILE_PRIMARY_IDS: TabId[] = ["home", "classes", "homework", "materials"];
+  // 2026-10-05 S2 — 무료 회원은 수업·과제 탭이 없으므로 모의고사·Practice·단어장을 하단 기본 탭으로.
+  const MOBILE_PRIMARY_IDS: TabId[] = isFreeMember ? ["home", "mock-exam", "problemlog", "vocab"] : ["home", "classes", "homework", "materials"];
   const mobilePrimary = navItems.filter((n) => MOBILE_PRIMARY_IDS.includes(n.id));
   const mobileMore = navItems.filter((n) => !MOBILE_PRIMARY_IDS.includes(n.id));
 
@@ -402,7 +383,13 @@ export default function StudentShell({
         <div className="flex-1">
         {activeTab === "home" ? (
           isFreeMember ? (
-            <FreeMemberHome studentName={studentName} onSelectTab={selectTab} />
+            <FreeMemberHome
+              studentName={studentName}
+              overview={mockExamOverview}
+              weaknesses={freeHome?.weaknesses ?? []}
+              gradedAttemptCount={freeHome?.gradedAttemptCount ?? 0}
+              onSelectTab={selectTab}
+            />
           ) : (
             <HomeTab studentName={studentName} dashboard={dashboard} />
           )

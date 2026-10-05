@@ -84,6 +84,7 @@ const roadmap: RoadmapData = {
   studentId: "student-1",
   studentName: "지훈",
   grade: null,
+  memberType: "tutoring",
   schoolName: null,
   gpa: null,
   gpaScale: null,

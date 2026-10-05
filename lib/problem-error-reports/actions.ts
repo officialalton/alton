@@ -3,7 +3,7 @@
 // 문제 오류 신고 — 학생·선생님 서버 액션. 쓰기는 전부 SECURITY DEFINER RPC(problem_error_report_submit) 한 곳이고,
 // 권한(학생=본인 수업·응시, 선생님=담당 수업·학생)·중복·유형 규칙은 DB 가 강제한다. 여기서는 요청자 세션으로만 호출한다.
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { MEMO_MAX, type MyReportStatus, type ReportContext, type ReportType } from "./labels";
 
 type Result<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
@@ -21,7 +21,7 @@ export async function submitProblemErrorReportAction(input: {
   const memo = (input.memo ?? "").trim();
   if (memo.length > MEMO_MAX) return { ok: false, error: `메모는 ${MEMO_MAX}자 이내로 적어 주세요.` };
   if (input.reportType === "other" && !memo) return { ok: false, error: "기타 사유는 내용을 적어 주세요." };
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("problem_report");
   const c = input.context;
   const { data, error } = await supabase.rpc("problem_error_report_submit", {
     p_source: c.source,
@@ -42,7 +42,7 @@ export async function submitProblemErrorReportAction(input: {
 export async function loadMyProblemErrorReportsAction(problemIds: string[]): Promise<Result<Record<string, MyReportStatus>>> {
   const ids = [...new Set(problemIds)].filter(Boolean).slice(0, 500);
   if (ids.length === 0) return { ok: true, value: {} };
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("problem_report");
   const { data, error } = await supabase.rpc("problem_error_report_mine", { p_problem_ids: ids });
   if (error) return { ok: false, error: toErr(error, "신고 상태를 불러오지 못했습니다.") };
   const out: Record<string, MyReportStatus> = {};

@@ -39,6 +39,7 @@ const pendingStudent: StudentListItem = {
   profileCompletedAt: null,
   apCourseCount: 0,
   extracurricularCount: 0,
+  memberType: "tutoring",
 };
 
 const activeStudent: StudentListItem = {

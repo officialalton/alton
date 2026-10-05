@@ -108,7 +108,8 @@ export async function loadAdminDashboard(
   });
 
   const { data: pendingStudentRows } = visibleChildIds.length
-    ? await selectInChunks(visibleChildIds, (chunk) => supabase.from("students").select("id, profile:profiles(name)").in("id", chunk))
+    // 2026-10-05 무료 회원 S2 — 무료 학습 회원은 매칭 대기 집계에서 제외(고객 모집단 분리).
+    ? await selectInChunks(visibleChildIds, (chunk) => supabase.from("students").select("id, profile:profiles(name)").neq("member_type", "free").in("id", chunk))
     : { data: [] as { id: string; profile: unknown }[] };
 
   const { data: pendingTeacherRows } = await supabase

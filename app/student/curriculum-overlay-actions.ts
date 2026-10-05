@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { loadStudentCurriculum, type StudentCurriculum } from "@/lib/curriculum-overlay-data";
 
 // v3 커리큘럼 열람 결함 수정(2026-09-11) — 학생 본인·연결된 학부모의 읽기 전용
@@ -16,11 +16,8 @@ import { loadStudentCurriculum, type StudentCurriculum } from "@/lib/curriculum-
 export async function loadMyCurriculumOverlay(
   subjectEnrollmentId: string
 ): Promise<StudentCurriculum> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  // 2026-10-05 무료 회원 S2 — 학생이면 과외 키 "course" 필요(학부모·교사는 passthrough, 범위는 RLS).
+  const { supabase } = await requireStudentFeature("course");
 
   return loadStudentCurriculum(supabase, subjectEnrollmentId);
 }
@@ -69,11 +66,8 @@ export type UnitPreview = {
 };
 
 export async function loadUnitPreview(overlayUnitId: string): Promise<UnitPreview | null> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  // 2026-10-05 무료 회원 S2 — 학생이면 과외 키 "course" 필요(학부모·교사는 passthrough, 범위는 RLS).
+  const { supabase } = await requireStudentFeature("course");
 
   const { data, error } = await supabase.rpc("unit_preview_for_viewer", {
     p_overlay_unit_id: overlayUnitId,

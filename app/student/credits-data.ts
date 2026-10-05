@@ -19,9 +19,13 @@ export async function loadCreditsData(
 ): Promise<CreditsData> {
   const { data: student } = await supabase
     .from("students")
-    .select("credit_balance")
+    .select("credit_balance, member_type")
     .eq("id", studentId)
     .single();
+  // 2026-10-05 무료 회원 S2 — 무료 학습 회원은 보호자·수업권이 구조적으로 없다(쿼리 생략, 빈 수업권).
+  if (student?.member_type === "free") {
+    return { balance: 0, guardianName: null, regularRemaining: 0, regularNearestExpiry: null, trialEntitlement: null };
+  }
 
   // (2026-08-30 R2 Task 3) 가족 관계 원본은 households/household_members다
   // (guardian_students는 동결).

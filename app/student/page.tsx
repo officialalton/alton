@@ -21,6 +21,7 @@ import { loadStudentSubjectEnrollments } from "./enrollment-data";
 import { loadLessonBookingData } from "./lesson-booking-data";
 import { loadRoadmapData } from "@/lib/roadmap/data";
 import { loadMockExamOverview } from "@/lib/mock-exam/attempt-data";
+import { loadMockExamWeaknessSummary, topWeaknesses } from "@/lib/mock-exam/weakness";
 import { hasFeature, loadStudentFeatureAccess } from "@/lib/feature-access";
 import { resolveUserTimezone } from "@/lib/timezone";
 
@@ -32,9 +33,11 @@ export default async function StudentHomePage({
   const { user, supabase, profile } = await requireUser();
   const { tab } = await searchParams;
 
-  // 2026-10-05 무료 학습 회원(S1) — 기능 권한은 student_feature_access 하나로 판정한다. 과외 키("class")가
+  // 2026-10-05 무료 학습 회원(S1→S2) — 기능 권한은 student_feature_access 하나로 판정한다. 과외 키("class")가
   // 없는 학생(household·수강·선생님이 없는 무료 회원)은 그 전제를 깔고 있는 로더(대시보드/수업권/예약/
-  // 선생님·채팅/수강/과제/로드맵)를 건너뛰고 무료 집합 데이터만 받는다(쿼리 수 감소). 제대로 된 무료 홈은 S2.
+  // 선생님·채팅/수강/과제/로드맵)를 건너뛰고 무료 집합 데이터만 받는다.
+  // 쿼리 수(데이터 0건 기준, 단어 라이브러리 책 수 N 제외): S1 13개 → S2 12개 — 약점 요약 RPC(+1)를 더하고
+  // Practice 로더를 모의고사 저장분만으로 좁혀(-2) 상한(≤ S1)을 지킨다.
   const featureAccess = await loadStudentFeatureAccess(supabase, user.id);
   if (!hasFeature(featureAccess, "class")) {
     const safeListFree = async <T,>(label: string, p: Promise<T[]>): Promise<T[]> => {
@@ -45,17 +48,21 @@ export default async function StudentHomePage({
         return [];
       }
     };
-    const [myVocabWords, vocabLibraryBooks, vocabQuizzes, vocabFolders, problemHistory, materialsLibraryTree, mockExamOverview] =
+    const [myVocabWords, vocabLibraryBooks, vocabQuizzes, vocabFolders, problemHistory, materialsLibraryTree, mockExamOverview, weakness] =
       await Promise.all([
         safeListFree("vocab_words", loadMyVocabWords(supabase, user.id)),
         safeListFree("vocab_books", loadLibraryBooks(supabase)),
         safeListFree("vocab_quizzes", loadVocabQuizzes(supabase, user.id)),
         safeListFree("vocab_folders", loadVocabFolders(supabase, user.id)),
-        safeListFree("problem_history", loadProblemHistory(user.id)),
+        safeListFree("problem_history", loadProblemHistory(user.id, { mockExamOnly: true })),
         safeListFree("materials_library", loadMaterialsLibraryTree(supabase, user.id)),
         loadMockExamOverview(supabase, user.id).catch((e) => {
           console.error(JSON.stringify({ type: "student_home_loader_failed", label: "mock_exam_overview", error: e instanceof Error ? e.message : String(e) }));
           return undefined;
+        }),
+        loadMockExamWeaknessSummary(supabase, user.id).catch((e) => {
+          console.error(JSON.stringify({ type: "student_home_loader_failed", label: "mock_exam_weakness", error: e instanceof Error ? e.message : String(e) }));
+          return null;
         }),
       ]);
     const timezone = resolveUserTimezone({ profileTimezone: profile?.timezone ?? null });
@@ -91,6 +98,7 @@ export default async function StudentHomePage({
           lessonBooking={{ bookableEnrollments: [], pendingActivationSubjects: [], upcomingBookings: [], pastSessionsForReport: [], timezone }}
           roadmap={null}
           mockExamOverview={mockExamOverview}
+          freeHome={{ weaknesses: weakness ? topWeaknesses(weakness, 3) : [], gradedAttemptCount: weakness?.gradedAttemptCount ?? 0 }}
         />
       </ViewerTimezoneProvider>
     );

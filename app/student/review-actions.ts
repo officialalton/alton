@@ -1,6 +1,6 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { getAllFamilyLessonReviews } from "@/app/parent/home-reviews-actions";
 import type { FamilyLessonReview } from "@/app/parent/lesson-review-family-actions";
 
@@ -9,7 +9,7 @@ export async function submitStudentFeedback(
   rating: number,
   comment: string
 ) {
-  const { supabase, user } = await requireUser();
+  const { supabase, user } = await requireStudentFeature("class");
 
   const { error } = await supabase.from("session_student_feedback").upsert(
     {
@@ -32,7 +32,7 @@ export async function submitStudentFeedback(
 // 재사용한다. "상담 리뷰"는 household(보호자) 단위 개념이라 학생 화면에는
 // 넣지 않는다(listGuardianMeetingRequests는 role='parent' 전용).
 export async function getMyLessonReviewsAction(): Promise<FamilyLessonReview[]> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("class");
   if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
   const { data: enrollments, error } = await supabase
     .from("subject_enrollments")

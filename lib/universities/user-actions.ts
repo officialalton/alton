@@ -5,7 +5,7 @@
 // 써서 RLS(20261473000000)가 안전망 역할을 하게 한다(app/parent/inquiry-actions.ts와
 // 동일 원칙 — service_role 어드민 클라이언트를 쓰지 않는다).
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { revalidatePath } from "next/cache";
 import type { SourceUrlType } from "./actions";
 
@@ -18,7 +18,7 @@ export async function proposeUniversitySourceUrl(input: {
   cycleYear?: number | null;
   isOfficial: boolean;
 }): Promise<void> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("college");
   if (profile?.role !== "consultant" && profile?.role !== "admin") {
     throw new Error("컨설턴트 또는 관리자만 출처 URL을 제안할 수 있습니다.");
   }
@@ -50,7 +50,7 @@ export async function listMySubmittedSourceUrls(universityId: string): Promise<
     createdAt: string;
   }[]
 > {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("college");
   const { data, error } = await supabase
     .from("university_source_urls")
     .select("id, url, source_type, cycle_year, is_official, status, review_note, created_at")
@@ -77,7 +77,7 @@ export async function reportUniversityDataIssue(input: {
   reportedValue?: string | null;
   message: string;
 }): Promise<void> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("college");
   if (!input.message.trim()) throw new Error("신고 내용을 입력해 주세요.");
   const { error } = await supabase.from("university_data_reports").insert({
     university_id: input.universityId ?? null,

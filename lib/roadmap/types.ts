@@ -174,6 +174,8 @@ export interface RoadmapData {
   studentId: string;
   studentName: string;
   grade: string | null;
+  /** 2026-10-05 무료 회원 S2 — 관리자·컨설턴트 화면 배지용(무료 회원은 로드맵 쓰기 불가, _roadmap_can_write). */
+  memberType: "free" | "tutoring";
   schoolName: string | null;
   gpa: number | null;
   gpaScale: string | null;

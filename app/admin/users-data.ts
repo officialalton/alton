@@ -34,6 +34,8 @@ export type StudentListItem = {
   profileCompletedAt: string | null;
   apCourseCount: number;
   extracurricularCount: number;
+  /** 2026-10-05 무료 회원 S2 — free=셀프 가입 무료 학습 회원(고객 아님, 배지·필터용). */
+  memberType: "free" | "tutoring";
 };
 
 export type TeacherListItem = {
@@ -209,7 +211,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   const { data: students } = await supabase
     .from("students")
     .select(
-      "id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at, profile:profiles(name, date_of_birth, date_of_birth_verified_at)"
+      "id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at, member_type, profile:profiles(name, date_of_birth, date_of_birth_verified_at)"
     )
     .order("joined_at", { ascending: false });
   if (!students || students.length === 0) return [];
@@ -310,6 +312,7 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
       profileCompletedAt: s.profile_completed_at,
       apCourseCount: apCourseCountByStudent.get(s.id) ?? 0,
       extracurricularCount: extracurricularCountByStudent.get(s.id) ?? 0,
+      memberType: s.member_type === "free" ? "free" : "tutoring",
     };
   });
 }

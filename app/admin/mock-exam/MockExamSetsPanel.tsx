@@ -4,6 +4,7 @@ import { Suspense, lazy, useEffect, useState, useTransition } from "react";
 import {
   assembleMockExamSet,
   archiveMockExamSetAction,
+  setMockExamSetAccessTierAction,
   getMockExamSetContentAction,
   getMockExamSetItems,
   listMockExamSets,
@@ -680,6 +681,20 @@ function PublishTab() {
     }
   }
 
+  const [tierBusy, setTierBusy] = useState(false);
+  async function handleAccessTier(setId: string, tier: "free" | "tutoring") {
+    setTierBusy(true);
+    setArchiveError(null);
+    try {
+      await setMockExamSetAccessTierAction(setId, tier);
+      refresh();
+    } catch (e) {
+      setArchiveError(e instanceof Error ? e.message : "무료 공개 설정에 실패했습니다.");
+    } finally {
+      setTierBusy(false);
+    }
+  }
+
   if (sets === null) return <p className="text-sm text-grey-400">불러오는 중…</p>;
 
   return (
@@ -698,6 +713,11 @@ function PublishTab() {
                 }`}
               >
                 {s.name} v{s.versionNo} · {TIER_LABEL[s.difficultyTier]} · R&W {s.rwCount} · Math {s.mathCount}
+                {s.accessTier === "free" && (
+                  <span className="ml-2 rounded bg-green-bg px-1.5 py-0.5 text-[10.5px] font-bold text-green" data-testid="access-tier-badge">
+                    무료 공개
+                  </span>
+                )}
               </button>
             </li>
           ))}
@@ -715,6 +735,17 @@ function PublishTab() {
             <>
               <div className="mb-3 flex items-center justify-between gap-2">
                 <span className="text-sm font-semibold text-ink">문항 내용</span>
+                {/* 2026-10-05 무료 회원 S2 — 무료 공개 토글(무료 회원에게 노출되는 세트, 오너 결정 7-1: 소수 세트만). */}
+                <label className="flex items-center gap-1.5 text-xs font-semibold text-grey-600">
+                  <input
+                    type="checkbox"
+                    data-testid="access-tier-toggle"
+                    disabled={tierBusy}
+                    checked={sets.find((s) => s.id === selectedId)?.accessTier === "free"}
+                    onChange={(e) => handleAccessTier(selectedId, e.target.checked ? "free" : "tutoring")}
+                  />
+                  무료 회원에게 공개
+                </label>
                 {confirmingArchive ? (
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-grey-500">보관하면 학생에게 더 이상 보이지 않습니다.</span>

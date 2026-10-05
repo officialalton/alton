@@ -1,7 +1,7 @@
 "use server";
 
 import { selectInChunks } from "@/lib/select-in-chunks";
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import type { VocabQuizItem } from "./vocab-library-data";
 
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
@@ -10,7 +10,7 @@ type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: 
 export async function addMyVocabWordAction(input: {
   word: string; definition?: string; example?: string; example2?: string; synonymWords?: string[]; antonymWords?: string[]; folderId?: string | null;
 }): Promise<ActionResult<string>> {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("vocab");
   const word = input.word.trim();
   if (!word) return { ok: false, error: "단어를 입력하세요." };
   const { data, error } = await supabase
@@ -31,7 +31,7 @@ export async function updateMyVocabWordAction(
   id: string,
   input: { word?: string; definition?: string; example?: string; example2?: string; synonymWords?: string[]; antonymWords?: string[] }
 ): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const patch: Record<string, unknown> = {};
   if (input.word !== undefined) patch.word = input.word.trim();
   if (input.definition !== undefined) patch.definition = input.definition.trim() || null;
@@ -45,7 +45,7 @@ export async function updateMyVocabWordAction(
 }
 
 export async function deleteMyVocabWordAction(id: string): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const { error } = await supabase.from("vocab_words").delete().eq("id", id);
   if (error) return { ok: false, error: "단어를 삭제하지 못했습니다." };
   return { ok: true, value: undefined };
@@ -54,7 +54,7 @@ export async function deleteMyVocabWordAction(id: string): Promise<ActionResult>
 // --- 폴더 ---
 
 export async function createVocabFolderAction(name: string): Promise<ActionResult<{ id: string; name: string }>> {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("vocab");
   const trimmed = name.trim();
   if (!trimmed) return { ok: false, error: "폴더 이름을 입력하세요." };
   const { data, error } = await supabase
@@ -68,7 +68,7 @@ export async function createVocabFolderAction(name: string): Promise<ActionResul
 
 /** 내 단어장의 커스텀 단어를 다른 폴더로 옮긴다(폴더 없음은 null). */
 export async function setMyVocabWordFolderAction(wordId: string, folderId: string | null): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const { error } = await supabase.from("vocab_words").update({ folder_id: folderId }).eq("id", wordId);
   if (error) return { ok: false, error: "폴더를 옮기지 못했습니다." };
   return { ok: true, value: undefined };
@@ -76,7 +76,7 @@ export async function setMyVocabWordFolderAction(wordId: string, folderId: strin
 
 /** 공용 단어장의 단어를 "내 단어장"의 한 폴더에 저장한다(별표) — folderId가 null이면 저장을 취소(삭제)한다. */
 export async function toggleLibraryWordInMyVocabAction(libraryWordId: string, folderId: string | null): Promise<ActionResult> {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("vocab");
   if (folderId === null) {
     const { data: lw } = await supabase.from("vocab_library_words").select("word").eq("id", libraryWordId).maybeSingle();
     if (!lw) return { ok: false, error: "단어를 찾을 수 없습니다." };
@@ -99,7 +99,7 @@ type WordPoolEntry = {
 };
 
 async function collectWordPool(
-  supabase: Awaited<ReturnType<typeof requireUser>>["supabase"],
+  supabase: Awaited<ReturnType<typeof requireStudentFeature>>["supabase"],
   studentId: string,
   source: { customWords: boolean; bookIds: string[]; folderIds?: string[]; difficultyMin?: number; difficultyMax?: number }
 ): Promise<WordPoolEntry[]> {
@@ -177,7 +177,7 @@ function buildQuizItems(pool: WordPoolEntry[], count: number): VocabQuizItem[] {
 export async function createVocabQuizAction(input: {
   customWords: boolean; bookIds: string[]; count: number; folderIds?: string[];
 }): Promise<ActionResult<{ id: string; items: VocabQuizItem[] }>> {
-  const { user, supabase } = await requireUser();
+  const { user, supabase } = await requireStudentFeature("vocab");
   const pool = await collectWordPool(supabase, user.id, input);
   const items = buildQuizItems(pool, Math.max(1, Math.min(50, input.count)));
   if (items.length === 0) {
@@ -200,7 +200,7 @@ export async function createVocabQuizAction(input: {
  * 진행 중 저장(saveVocabQuizProgressAction)과 최종 제출(submitVocabQuizAction)이 함께 쓴다 —
  * 도중에 나가도 그때까지 틀린 단어는 이미 오답 노트에 반영돼 있어야 한다. */
 async function syncWrongAnswersToNotebook(
-  supabase: Awaited<ReturnType<typeof requireUser>>["supabase"],
+  supabase: Awaited<ReturnType<typeof requireStudentFeature>>["supabase"],
   studentId: string,
   items: VocabQuizItem[],
   answers: (number | null)[]
@@ -239,7 +239,7 @@ async function syncWrongAnswersToNotebook(
 /** 시험 도중 답을 고를 때마다 호출 — 그 즉시 오답을 오답 노트에 반영하고 진행 상태를 저장한다.
  * 나가거나 새로고침해도 그때까지 답한 내용과 오답 노트 반영은 남아있다. */
 export async function saveVocabQuizProgressAction(quizId: string, answers: (number | null)[]): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
   if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
   if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
@@ -258,7 +258,7 @@ export async function saveVocabQuizProgressAction(quizId: string, answers: (numb
 
 /** 다시 풀기 — 점수·답안을 초기화하고 처음부터 다시 응시할 수 있게 한다(문항은 그대로). */
 export async function retakeVocabQuizAction(quizId: string): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const { error } = await supabase
     .from("vocab_quizzes")
     .update({ status: "pending", answers: null, score: null, total: null, submitted_at: null })
@@ -269,7 +269,7 @@ export async function retakeVocabQuizAction(quizId: string): Promise<ActionResul
 
 /** 채점 + 오답을 "오답 노트" 폴더에 자동 저장, 맞힌 단어는(오답 노트에 있었다면) 거기서 뺀다. */
 export async function submitVocabQuizAction(quizId: string, answers: number[]): Promise<ActionResult<{ score: number; total: number }>> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
   if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
   if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
@@ -291,7 +291,7 @@ export async function assignVocabQuizAction(input: {
   sessionId: string | null; studentId: string; customWords: boolean; bookIds: string[]; count: number;
   folderIds?: string[]; difficultyMin?: number; difficultyMax?: number; dueAt?: string | null;
 }): Promise<ActionResult<{ id: string }>> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const pool = await collectWordPool(supabase, input.studentId, input);
   const items = buildQuizItems(pool, Math.max(1, Math.min(50, input.count)));
   if (items.length === 0) return { ok: false, error: "선택한 단어 범위에 영어 유의어가 있는 단어가 4개 이상 있어야 시험을 낼 수 있습니다." };
@@ -306,7 +306,7 @@ export async function assignVocabQuizAction(input: {
 
 /** 교사가 공용 단어장의 단어를 학생 개인 단어장에 배정 복사한다(폴더 지정). */
 export async function assignLibraryWordsToStudentAction(studentId: string, libraryWordIds: string[], folderId: string | null = null): Promise<ActionResult> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   const { error } = await supabase.rpc("assign_library_words_to_student", {
     p_student_id: studentId, p_library_word_ids: libraryWordIds, p_folder_id: folderId,
   });
@@ -318,7 +318,7 @@ export async function assignLibraryWordsToStudentAction(studentId: string, libra
 export async function searchLibraryWordsAction(query: string, bookId?: string): Promise<
   { id: string; word: string; definitionKo: string | null; bookTitle: string; difficulty: number | null }[]
 > {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("vocab");
   let q = supabase
     .from("vocab_library_words")
     .select("id, word, definition_ko, difficulty, book:vocab_library_books(title)")

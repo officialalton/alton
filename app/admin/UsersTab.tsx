@@ -81,6 +81,8 @@ export default function UsersTab({
   // 전체 검색 대상"을 그대로 만족한다 — 검색을 위해 서버에 추가 조회를
   // 하거나 상세·커리큘럼을 미리 불러오지 않는다.
   const [searchQuery, setSearchQuery] = useState("");
+  // 2026-10-05 무료 회원 S2 — 학생 목록 회원 유형 필터(전체/과외/무료). 전용 탭은 이후 단계.
+  const [memberFilter, setMemberFilter] = useState<"all" | "tutoring" | "free">("all");
   // 2026-09-10(P1 — 학부모 SSR 회귀 조사 후속) — 학부모도 학생/선생님과
   // 동일하게 null=아직 조회 안 됨(스켈레톤), 빈 배열=조회했는데 0명을
   // 구분한다. parentsErrorCode가 있으면 목록 영역에만 "불러오지 못했습니다 ·
@@ -152,14 +154,17 @@ export default function UsersTab({
           p.name.toLowerCase().includes(normalizedQuery) ||
           p.email.toLowerCase().includes(normalizedQuery)
       );
-  const filteredStudents = !normalizedQuery
-    ? students
-    : (students ?? []).filter(
-        (s) =>
-          s.name.toLowerCase().includes(normalizedQuery) ||
-          s.email.toLowerCase().includes(normalizedQuery) ||
-          s.parentNames.some((n) => n.toLowerCase().includes(normalizedQuery))
-      );
+  const filteredStudents =
+    students === null
+      ? null
+      : students.filter(
+          (s) =>
+            (memberFilter === "all" || s.memberType === memberFilter) &&
+            (!normalizedQuery ||
+              s.name.toLowerCase().includes(normalizedQuery) ||
+              s.email.toLowerCase().includes(normalizedQuery) ||
+              s.parentNames.some((n) => n.toLowerCase().includes(normalizedQuery)))
+        );
   const filteredTeachers = !normalizedQuery
     ? teachers
     : (teachers ?? []).filter(
@@ -253,6 +258,18 @@ export default function UsersTab({
     <div className="max-w-[640px]">
       <div className="flex items-center justify-between mb-5 border-b border-grey-200">
         <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="border-b-0" />
+        {subtab === "students" && (
+          <select
+            aria-label="회원 유형"
+            value={memberFilter}
+            onChange={(e) => setMemberFilter(e.target.value as "all" | "tutoring" | "free")}
+            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 mb-2.5 mr-2"
+          >
+            <option value="all">전체 회원</option>
+            <option value="tutoring">과외 회원</option>
+            <option value="free">무료 회원</option>
+          </select>
+        )}
         {(subtab === "parents" || subtab === "students" || subtab === "teachers") && (
           <input
             value={searchQuery}
@@ -375,7 +392,14 @@ export default function UsersTab({
                 className="w-full text-left"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[13.5px] font-bold text-ink">{s.name}</span>
+                  <span className="text-[13.5px] font-bold text-ink">
+                    {s.name}
+                    {s.memberType === "free" && (
+                      <span className="ml-2 text-[10.5px] font-bold px-2 py-0.5 rounded-full bg-red-bg text-brand-red" data-testid="free-member-badge">
+                        무료 회원
+                      </span>
+                    )}
+                  </span>
                   <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
                     {STUDENT_STATUS_LABEL[s.status] ?? s.status}
                   </span>

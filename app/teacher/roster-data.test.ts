@@ -37,7 +37,8 @@ function makeSupabase(params: {
         return { select: () => ({ eq: () => ({ eq: () => Promise.resolve({ data: params.assignments }) }) }) };
       }
       if (table === "students") {
-        return { select: () => ({ in: () => Promise.resolve({ data: params.students }) }) };
+        // 2026-10-05 S2 — .neq("member_type","free") 체인 추가.
+        return { select: () => ({ neq: () => ({ in: () => Promise.resolve({ data: params.students }) }) }) };
       }
       if (table === "teacher_curriculum_templates") {
         return { select: () => ({ eq: () => ({ in: () => Promise.resolve({ data: params.legacyTemplates ?? [] }) }) }) };

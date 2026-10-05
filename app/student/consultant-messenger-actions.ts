@@ -7,7 +7,7 @@
 // 학생 본인 행을 허용하므로 컨설턴트 쪽과 달리 SECURITY DEFINER 없이 직접
 // 조회한다(20261468000000).
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
 
@@ -29,7 +29,7 @@ async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: st
 }
 
 async function requireStudent(): Promise<{ supabase: SupabaseClient; userId: string }> {
-  const { user, profile, supabase } = await requireUser();
+  const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
   if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
   return { supabase, userId: user.id };
 }

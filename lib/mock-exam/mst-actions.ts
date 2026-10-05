@@ -4,7 +4,7 @@
 // 만료·잠금·자동 제출은 RPC가 서버 시각으로 처리하므로 여기서는 결과를 그대로 돌려주기만 한다.
 
 import { revalidatePath } from "next/cache";
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import type { MockExamAttemptItem } from "./attempt-data";
 import type { MstModuleKey } from "./mst";
 
@@ -42,7 +42,7 @@ function normalize(data: unknown): MstAttemptState {
   return { ...d, modules: Array.isArray(d.modules) ? d.modules : [], items: Array.isArray(d.items) ? d.items : [] };
 }
 
-type MstSupabase = Awaited<ReturnType<typeof requireUser>>["supabase"];
+type MstSupabase = Awaited<ReturnType<typeof requireStudentFeature>>["supabase"];
 
 async function fetchMstState(supabase: MstSupabase, attemptId: string): Promise<ActionResult<MstAttemptState>> {
   const { data, error } = await supabase.rpc("mock_exam_mst_state", { p_attempt_id: attemptId });
@@ -52,7 +52,7 @@ async function fetchMstState(supabase: MstSupabase, attemptId: string): Promise<
 
 export async function loadMstAttemptStateAction(attemptId: string): Promise<ActionResult<MstAttemptState>> {
   try {
-    const { supabase } = await requireUser();
+    const { supabase } = await requireStudentFeature("mock_exam");
     return await fetchMstState(supabase, attemptId);
   } catch (e) {
     return { ok: false, error: toErr(e, "응시 상태를 불러오지 못했습니다.") };
@@ -62,7 +62,7 @@ export async function loadMstAttemptStateAction(attemptId: string): Promise<Acti
 /** 시작 화면 "시험 시작": assigned → in_progress, 모듈 생성, R&W Module 1 타이머 시작. 멱등. */
 export async function startMstAttemptAction(attemptId: string): Promise<ActionResult<MstAttemptState>> {
   try {
-    const { supabase } = await requireUser();
+    const { supabase } = await requireStudentFeature("mock_exam");
     const { error } = await supabase.rpc("mock_exam_start_mst", { p_attempt_id: attemptId });
     if (error) return { ok: false, error: toErr(error, "시험을 시작하지 못했습니다.") };
     // 모듈 타이머는 위 RPC 의 now() 로 시작한다. 그 뒤 서버 작업(로그인 재확인·캐시 갱신)이 끼면 학생 시간에서 빠지므로
@@ -79,7 +79,7 @@ export async function startMstAttemptAction(attemptId: string): Promise<ActionRe
  * 서버가 no-op으로 처리하므로 중복 호출이 안전하다. 최신 상태를 함께 돌려준다. */
 export async function submitMstModuleAction(attemptId: string, expectedModule: MstModuleKey): Promise<ActionResult<MstAttemptState>> {
   try {
-    const { supabase } = await requireUser();
+    const { supabase } = await requireStudentFeature("mock_exam");
     const { error } = await supabase.rpc("mock_exam_submit_module", { p_attempt_id: attemptId, p_expected_module: expectedModule });
     if (error) return { ok: false, error: toErr(error, "모듈을 제출하지 못했습니다.") };
     // 다음 모듈 타이머도 이 RPC 시각에 시작하므로 시작과 같은 순서를 지킨다(상태 조회 → 캐시 갱신).

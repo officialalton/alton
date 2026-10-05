@@ -36,6 +36,7 @@ const student: StudentListItem = {
   profileCompletedAt: null,
   apCourseCount: 0,
   extracurricularCount: 0,
+  memberType: "tutoring",
 };
 
 describe("StudentDetailPanel", () => {

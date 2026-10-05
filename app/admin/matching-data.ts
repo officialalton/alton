@@ -35,6 +35,8 @@ export async function loadStudentsForMatching(supabase: SupabaseClient): Promise
   const { data: students } = await supabase
     .from("students")
     .select("id, grade, status, profile:profiles(name)")
+    // 2026-10-05 무료 회원 S2(브리프 §6.2) — 무료 학습 회원은 고객 모집단이 아니다(매칭 대상 제외).
+    .neq("member_type", "free")
     .order("joined_at", { ascending: false });
   if (!students || students.length === 0) return [];
 

@@ -136,6 +136,8 @@ export async function loadRoster(
   const { data: studentRows } = await selectInChunks(studentIds, (chunk) => supabase
     .from("students")
     .select("id, grade, profile:profiles(name)")
+    // 2026-10-05 무료 회원 S2 — 무료 학습 회원은 수강·배정이 없어 여기 올 수 없지만, 고객 모집단 분리를 명시한다.
+    .neq("member_type", "free")
     .in("id", chunk));
 
   const studentById = new Map(

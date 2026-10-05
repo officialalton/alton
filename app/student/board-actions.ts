@@ -1,6 +1,6 @@
 "use server";
 
-import { requireUser } from "@/lib/auth";
+import { requireStudentFeature } from "@/lib/feature-access";
 import { loadStudentHomeworkBatches } from "@/lib/homework-batch-data";
 import { loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
 import { loadVocabQuizzes } from "./vocab-library-data";
@@ -20,7 +20,7 @@ import type { BoardCard, BoardCardStatus } from "@/lib/board/types";
 // 수동 할 일을 만들고/상태를 바꾸고/지운다. 과제·모의고사·단어시험 카드는 읽기
 // 전용(그 화면 자체에서 진행 상태가 바뀐다 — 여기서 직접 상태를 바꾸지 않는다).
 export async function loadMyBoardCardsAction(): Promise<BoardCard[]> {
-  const { supabase, user } = await requireUser();
+  const { supabase, user } = await requireStudentFeature("home");
   const [homework, mockExams, vocabQuizzes, manualTasks] = await Promise.all([
     loadStudentHomeworkBatches(supabase, user.id),
     loadStudentMockExamAttempts(supabase, user.id),
@@ -36,7 +36,7 @@ export async function loadMyBoardCardsAction(): Promise<BoardCard[]> {
 }
 
 export async function createMyManualTaskAction(title: string, dueAt?: string | null, dueStartAt?: string | null): Promise<BoardCard> {
-  const { supabase, user } = await requireUser();
+  const { supabase, user } = await requireStudentFeature("home");
   const trimmed = title.trim();
   if (!trimmed) throw new Error("할 일 제목을 입력하세요.");
   const task = await createBoardManualTask(supabase, {
@@ -51,11 +51,11 @@ export async function createMyManualTaskAction(title: string, dueAt?: string | n
 }
 
 export async function updateMyManualTaskStatusAction(taskId: string, status: BoardCardStatus): Promise<void> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("home");
   await updateBoardManualTaskStatus(supabase, taskId, status);
 }
 
 export async function deleteMyManualTaskAction(taskId: string): Promise<void> {
-  const { supabase } = await requireUser();
+  const { supabase } = await requireStudentFeature("home");
   await deleteBoardManualTask(supabase, taskId);
 }
