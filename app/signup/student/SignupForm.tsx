@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { createSignupClient } from "@/utils/supabase/client";
 import { MIN_PASSWORD_LENGTH, STUDENT_TERMS_VERSION, validateStudentSignup } from "@/lib/free-member-signup";
 
 const inputClass =
@@ -34,7 +34,7 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
       return;
     }
     setSubmitting(true);
-    const supabase = createClient();
+    const supabase = createSignupClient();
     const { data, error: signUpError } = await supabase.auth.signUp({
       email: v.email,
       password: v.password,
