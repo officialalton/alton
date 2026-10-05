@@ -81,7 +81,7 @@ describe("템플릿 3 — 거부", () => {
   });
   it("라벨을 놓을 자리가 없으면 거부한다(점이 빽빽하고 라벨이 길 때)", () => {
     const objs: PlaneSpec["objects"] = [];
-    for (let i = 0; i < 6; i++) objs.push({ id: `p${i}`, kind: "point", at: [0.2 * i, 0.2 * i], label: `Point number ${i} with a very long label` });
+    for (let i = 0; i < 12; i++) objs.push({ id: `p${i}`, kind: "point", at: [0.1 * i, 0.1 * i], label: `Point number ${i} with a very long label` });
     const r = renderPlane(P(objs, { x: { min: -1, max: 2 }, y: { min: -1, max: 2 } }));
     expect(r.issues.some((i) => i.code === "label_collision")).toBe(true);
   });
