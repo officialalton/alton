@@ -1,0 +1,42 @@
+{
+ "itemId": "evaluating_statistical_claims.sampling_generalization.TB.P",
+ "generatedAt": "2026-10-05T20:19:34.661Z",
+ "codeHash": "f8594c4b0d99162805af839c0bdb74ec18680df2e79d2f222641ac06b0093360",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/evaluating_statistical_claims.sampling_generalization.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "evaluating_statistical_claims.sampling_generalization.TB.P.png",
+   "mobileFile": "evaluating_statistical_claims.sampling_generalization.TB.P.m375.png",
+   "archetypeId": "esc.sampling_generalization.TB.P.constraint_select",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "To study the print edition, an organization selected readers at random from only some of the four branches, sampling the same fraction of readers in each one it chose. The table shown gives the number of readers in each branch, the number sampled, and the number who said they want a weekend print edition.",
+   "question": "To which population can the survey result most appropriately be generalized?",
+   "options": [
+    "To all subscribers to a city newspaper in all four branches",
+    "Only to the readers in Branch 1, Branch 3, and Branch 4",
+    "Only to the readers in Branch 2",
+    "Only to the 84 readers who were surveyed"
+   ],
+   "correctIndex": 1,
+   "answer": "Only to the readers in Branch 1, Branch 3, and Branch 4",
+   "explanation": "(1) 표의 '표본 수' 열을 읽는다. (2) 표본이 있는 구역: Branch 1, Branch 3, and Branch 4 이다. (3) 표본이 0 인 구역: Branch 2 이다. (4) 무작위 표본은 뽑힌 구역의 사람들만 대표한다. (5) 따라서 Branch 1, Branch 3, and Branch 4 의 readers 에게만 일반화한다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

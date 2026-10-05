@@ -1,0 +1,23 @@
+{
+  "itemId": "inference_margin_error.margin_interval.ST.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "522e9ba4da3ad4c67b2613aa430928b36c4f376586ebea61fcc3a1cfbbc732fa",
+  "samples": [
+    "inference_margin_error.margin_interval.ST.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "구간 45~55% → 표본 비율 50%, 500×0.5=250 = C. 풀림."
+}

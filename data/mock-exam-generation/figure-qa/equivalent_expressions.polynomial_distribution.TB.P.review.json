@@ -1,0 +1,23 @@
+{
+  "itemId": "equivalent_expressions.polynomial_distribution.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:43Z",
+  "reviewer": "visual-review-agent-SA",
+  "codeHash": "a00820c02aaf62bdbdb4cba65d77bb79cd1999e2fe0425aeceb3c92af28343e2",
+  "samples": [
+    "equivalent_expressions.polynomial_distribution.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "그림만으로 p(1..5)=-9,-6,-5,-6,-9, 2계 차분 -2 → a=-1, b=6 = 정답 A. Nit(비차단): 스냅샷 지문의 ax^2 가 LaTeX 미변환 평문(앱은 수식 렌더 경로). 곡선 라벨 없음 — 신규 라벨 규칙 영향 없음."
+}

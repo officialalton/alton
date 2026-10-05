@@ -28,9 +28,47 @@ import {
   mstMathToolsAllowed,
   mstRemainingSecondsAt,
 } from "@/lib/mock-exam/mst";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
+// 이전·다음 화살표: 똑같은 중립 윤곽 버튼. 마우스 클릭 뒤에는 포커스 링을 남기지 않는다(focus-visible 만).
+const NAV_BTN =
+  "flex h-10 w-12 items-center justify-center rounded-lg border-[1.5px] border-grey-300 bg-white text-[20px] font-semibold text-ink hover:bg-grey-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 disabled:opacity-40 disabled:hover:bg-white";
+
+function ToolIconButton({
+  label,
+  title,
+  pressed,
+  onClick,
+  testId,
+  children,
+}: {
+  label: string;
+  title: string;
+  pressed: boolean;
+  onClick: () => void;
+  testId: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={pressed}
+      aria-label={label}
+      title={title}
+      data-testid={testId}
+      className={`inline-flex h-7 w-7 items-center justify-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+        pressed ? "bg-ink text-white" : "text-ink hover:bg-black/10"
+      }`}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {children}
+      </svg>
+    </button>
+  );
+}
 export default function MockExamMstTakeClient({
   initialState,
   examSetName,
@@ -81,11 +119,22 @@ export default function MockExamMstTakeClient({
     setFetchedAt(Date.now());
     setNow(Date.now());
     setCursor(0);
+    setHighlightMode(false);
+    setEliminateMode(false);
+    setWhiteboardOpen(false);
     setConfirmOpen(false);
     setMathToolsOpen(null);
     setResponses(Object.fromEntries(next.items.map((i) => [i.setItemId, i.response ?? ""])));
     setFlags(Object.fromEntries(next.items.map((i) => [i.setItemId, i.flagged])));
     setGuessedMap(Object.fromEntries(next.items.map((i) => [i.setItemId, i.guessed ?? false])));
+  }, []);
+
+  // 문항이 바뀌면 도구 모드(하이라이트·소거·화이트보드 열림)는 꺼진다 — 저장된 필기 자체는 문항별로 남는다.
+  const goTo = useCallback((i: number) => {
+    setCursor(i);
+    setHighlightMode(false);
+    setEliminateMode(false);
+    setWhiteboardOpen(false);
   }, []);
 
   const current = state.modules.find((m) => m.moduleKey === state.currentModule) ?? null;
@@ -310,7 +359,7 @@ export default function MockExamMstTakeClient({
   const mathTools = mstMathToolsAllowed(state.currentModule);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex h-screen flex-col bg-white">
       <header className="flex items-center justify-between border-b border-grey-200 px-6 py-3">
         <div className="text-[13.5px] font-bold text-ink" data-testid="mst-module-label">
           {MST_MODULE_LABELS[state.currentModule]}
@@ -355,15 +404,20 @@ export default function MockExamMstTakeClient({
                 <button
                   key={it.setItemId}
                   type="button"
-                  onClick={() => setCursor(i)}
+                  onClick={() => goTo(i)}
                   aria-current={i === cursor ? "true" : undefined}
                   aria-label={`Question ${it.moduleSeq}${answered ? ", answered" : ""}${flagged ? ", marked for review" : ""}${guessed ? ", guessed" : ""}`}
                   className={`relative h-7 rounded border text-[11.5px] font-bold ${
-                    i === cursor ? "border-ink bg-ink text-white" : answered ? "border-blue bg-blue-bg text-blue" : "border-grey-200 text-grey-500"
+                    i === cursor
+                      ? "border-ink bg-ink text-white"
+                      : flagged
+                        ? "border-yellow bg-yellow text-ink"
+                        : answered
+                          ? "border-green bg-green/10 text-green"
+                          : "border-grey-200 text-grey-500"
                   }`}
                 >
                   {it.moduleSeq}
-                  {flagged && <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-yellow" />}
                   {guessed && <span className="absolute -left-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#f97316]" data-testid={`mst-guessed-dot-${it.setItemId}`} />}
                 </button>
               );
@@ -374,18 +428,52 @@ export default function MockExamMstTakeClient({
           </div>
         </nav>
 
-        <main className="max-w-[880px] min-w-0 flex-1 px-8 py-6" style={whiteboardOpen ? { marginRight: "min(436px, 40vw)" } : undefined}>
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col" style={whiteboardOpen ? { marginRight: "min(556px, 45vw)" } : undefined}>
           {item ? (
             <>
-              {/* 콜리지보드식 번호 막대: 검은 번호 칸 + 회색 막대. 오른쪽 끝에 오류 신고·문제 저장(별). 검토 표시는 아래 Solve Later. */}
-              <div className="mb-5 flex items-stretch bg-[#cfcfcf]" data-testid="mst-qbar">
+              {/* 번호 막대: 검은 번호 칸 + 도구(하이라이트·소거·화이트보드) | 오른쪽 끝에 오류 신고·문제 저장(별). */}
+              <div className="flex shrink-0 items-stretch bg-[#cfcfcf]" data-testid="mst-qbar">
                 <div
                   className="flex min-w-[38px] items-center justify-center bg-[#111] px-2.5 py-1 font-serif text-[17px] font-bold text-white"
                   data-testid="mst-qnum"
                 >
                   {item.moduleSeq}
                 </div>
-                <div className="flex flex-1 items-center gap-0.5 px-2">
+                <div className="flex flex-1 items-center gap-1 px-2" data-testid="mst-tools">
+                  {highlightSupported && (
+                    <ToolIconButton
+                      label="Highlight"
+                      title="Highlight text, then click a highlight to add a note"
+                      pressed={highlightMode}
+                      onClick={() => setHighlightMode((v) => !v)}
+                      testId="mst-highlight-toggle"
+                    >
+                      <path d="M4 20h6M14.5 4.5l5 5-8.5 8.5H6v-5z" />
+                      <path d="M12 7l5 5" />
+                    </ToolIconButton>
+                  )}
+                  {item.format === "mc" && item.options && (
+                    <ToolIconButton
+                      label="Eliminate"
+                      title="Strike out answer choices"
+                      pressed={eliminateMode}
+                      onClick={() => setEliminateMode((v) => !v)}
+                      testId="mst-eliminate-toggle"
+                    >
+                      <path d="M4 12h16" />
+                      <path d="M8 7.5c.8-1.6 2.4-2.5 4.2-2.5 2.2 0 3.8 1.1 3.8 2.8M8 16.2C8 18 9.8 19 12 19c2.3 0 4-1.2 4-3" />
+                    </ToolIconButton>
+                  )}
+                  <ToolIconButton
+                    label="Whiteboard"
+                    title="Open the scratch whiteboard"
+                    pressed={whiteboardOpen}
+                    onClick={() => setWhiteboardOpen((v) => !v)}
+                    testId="mst-whiteboard-toggle"
+                  >
+                    <rect x="3.5" y="4.5" width="17" height="12" rx="1.5" />
+                    <path d="M8 20h8M12 16.5V20M8.5 13l5-5 1.8 1.8-5 5H8.5z" />
+                  </ToolIconButton>
                   <div className="flex-1" />
                   <ProblemErrorReportButton
                     key={item.setItemId}
@@ -400,7 +488,7 @@ export default function MockExamMstTakeClient({
                     aria-pressed={savedMap[item.setItemId] ?? false}
                     aria-label={savedMap[item.setItemId] ? "Remove from saved questions" : "Save question"}
                     title={savedMap[item.setItemId] ? "Saved to Practice" : "Save to Practice"}
-                    className="inline-flex h-7 w-7 items-center justify-center rounded text-ink hover:bg-black/10"
+                    className="inline-flex h-7 w-7 items-center justify-center rounded text-ink hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill={savedMap[item.setItemId] ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true">
                       <path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z" />
@@ -408,165 +496,128 @@ export default function MockExamMstTakeClient({
                   </button>
                 </div>
               </div>
-              <div className="mb-3 flex flex-wrap items-center gap-1.5" data-testid="mst-tools">
-                {highlightSupported && (
-                  <button
-                    type="button"
-                    onClick={() => setHighlightMode((v) => !v)}
-                    aria-pressed={highlightMode}
-                    title="Highlight text, then click a highlight to add a note"
-                    data-testid="mst-highlight-toggle"
-                    className={`rounded border px-2.5 py-1 text-[11.5px] font-bold ${highlightMode ? "border-ink bg-yellow text-ink" : "border-grey-300 text-grey-600"}`}
+
+              {/* 두 칸: 왼쪽 지문·문제·그림 / 오른쪽 선택지(또는 답 입력). 각 칸이 따로 스크롤, 좁은 화면에서는 위아래로 쌓인다. */}
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden" data-testid="mst-panes">
+                <section aria-label="Passage and question" className="px-8 py-6 md:w-1/2 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
+                  <AnnotationLayer
+                    key={item.setItemId}
+                    highlightMode={highlightMode}
+                    highlights={annotations[item.setItemId]?.highlights ?? []}
+                    onChange={(h) => void updateAnnotations(item.setItemId, { highlights: h, eliminated: annotations[item.setItemId]?.eliminated ?? [] })}
                   >
-                    Highlight
-                  </button>
-                )}
-                {item.format === "mc" && item.options && (
-                  <button
-                    type="button"
-                    onClick={() => setEliminateMode((v) => !v)}
-                    aria-pressed={eliminateMode}
-                    title="Strike out answer choices"
-                    data-testid="mst-eliminate-toggle"
-                    className={`rounded border px-2.5 py-1 text-[11.5px] font-bold ${eliminateMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`}
-                  >
-                    Eliminate
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={() => setWhiteboardOpen((v) => !v)}
-                  aria-pressed={whiteboardOpen}
-                  data-testid="mst-whiteboard-toggle"
-                  className={`rounded border px-2.5 py-1 text-[11.5px] font-bold ${whiteboardOpen ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`}
-                >
-                  Whiteboard
-                </button>
+                    {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
+                    {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
+                  </AnnotationLayer>
+                  {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-4" /> : null}
+                </section>
+
+                <section aria-label="Answer" className="px-8 py-6 md:w-1/2 md:overflow-y-auto" data-testid="mst-pane-right">
+                  {item.format === "mc" && item.options ? (
+                    <div role="radiogroup" aria-label="선택지" className="flex flex-col gap-2">
+                      {item.options.map((opt, idx) => {
+                        const chosen = responses[item.setItemId] === String(idx);
+                        const struck = (annotations[item.setItemId]?.eliminated ?? []).includes(idx);
+                        return (
+                          <button
+                            key={idx}
+                            type="button"
+                            role="radio"
+                            aria-checked={chosen}
+                            data-eliminated={struck ? "true" : undefined}
+                            onClick={() => {
+                              // 소거 모드: 선택지를 눌러도 답이 되지 않고 줄이 그어진다(다시 누르면 해제). 줄 그은 선택지는
+                              // 소거를 풀기 전에는 답으로 고를 수 없다(고정형 응시 화면과 같은 규칙).
+                              const cur = annotations[item.setItemId] ?? { highlights: [], eliminated: [] };
+                              if (eliminateMode) {
+                                const eliminated = struck ? cur.eliminated.filter((n) => n !== idx) : [...cur.eliminated, idx].sort((a, b) => a - b);
+                                void updateAnnotations(item.setItemId, { ...cur, eliminated });
+                              } else if (!struck) {
+                                void saveAnswer(item.setItemId, String(idx));
+                              }
+                            }}
+                            className={`flex min-w-0 items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+                              chosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
+                            } ${struck ? "opacity-50" : ""}`}
+                          >
+                            <span
+                              className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
+                                chosen ? "border-ink bg-ink text-white" : "border-grey-400 text-grey-500"
+                              }`}
+                            >
+                              {OPTION_LETTERS[idx] ?? idx + 1}
+                            </span>
+                            <span className={`min-w-0 break-words ${struck ? "line-through" : ""}`}>
+                              <LearningText text={opt} />
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="mb-1.5 block text-[12.5px] font-semibold text-grey-500" htmlFor={`spr-${item.setItemId}`}>
+                        Enter your answer (number, decimal, or fraction)
+                      </label>
+                      <input
+                        id={`spr-${item.setItemId}`}
+                        type="text"
+                        inputMode="decimal"
+                        value={responses[item.setItemId] ?? ""}
+                        onChange={(e) => saveSprDebounced(item.setItemId, e.target.value)}
+                        className="w-48 rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px] text-ink"
+                        data-testid="mst-spr-input"
+                      />
+                      <details className="mt-4 max-w-xl rounded-lg border border-grey-200 p-3" data-testid="mst-spr-help">
+                        <summary className="cursor-pointer text-[12px] font-bold text-grey-600">Answer directions</summary>
+                        <SprDirections className="mt-2" />
+                      </details>
+                    </div>
+                  )}
+                  {error && <p className="mt-4 text-[12.5px] text-red">{error}</p>}
+                </section>
               </div>
-              <AnnotationLayer
-                key={item.setItemId}
-                highlightMode={highlightMode}
-                highlights={annotations[item.setItemId]?.highlights ?? []}
-                onChange={(h) => void updateAnnotations(item.setItemId, { highlights: h, eliminated: annotations[item.setItemId]?.eliminated ?? [] })}
-              >
-                {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
-                {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
-              </AnnotationLayer>
-              {item.figure ? <ProblemFigure spec={item.figure} className="mb-4" /> : null}
 
-              {item.format === "mc" && item.options ? (
-                <div role="radiogroup" aria-label="선택지" className="flex flex-col gap-2">
-                  {item.options.map((opt, idx) => {
-                    const chosen = responses[item.setItemId] === String(idx);
-                    const struck = (annotations[item.setItemId]?.eliminated ?? []).includes(idx);
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        role="radio"
-                        aria-checked={chosen}
-                        data-eliminated={struck ? "true" : undefined}
-                        onClick={() => {
-                          // 소거 모드: 선택지를 눌러도 답이 되지 않고 줄이 그어진다(다시 누르면 해제). 줄 그은 선택지는
-                          // 소거를 풀기 전에는 답으로 고를 수 없다(고정형 응시 화면과 같은 규칙).
-                          const cur = annotations[item.setItemId] ?? { highlights: [], eliminated: [] };
-                          if (eliminateMode) {
-                            const eliminated = struck ? cur.eliminated.filter((n) => n !== idx) : [...cur.eliminated, idx].sort((a, b) => a - b);
-                            void updateAnnotations(item.setItemId, { ...cur, eliminated });
-                          } else if (!struck) {
-                            void saveAnswer(item.setItemId, String(idx));
-                          }
-                        }}
-                        className={`flex min-w-0 items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] ${
-                          chosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
-                        } ${struck ? "opacity-50" : ""}`}
-                      >
-                        <span
-                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
-                            chosen ? "border-ink bg-ink text-white" : "border-grey-400 text-grey-500"
-                          }`}
-                        >
-                          {OPTION_LETTERS[idx] ?? idx + 1}
-                        </span>
-                        <span className={`min-w-0 break-words ${struck ? "line-through" : ""}`}>
-                          <LearningText text={opt} />
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div>
-                  <label className="mb-1.5 block text-[12.5px] font-semibold text-grey-500" htmlFor={`spr-${item.setItemId}`}>
-                    Enter your answer (number, decimal, or fraction)
-                  </label>
-                  <input
-                    id={`spr-${item.setItemId}`}
-                    type="text"
-                    inputMode="decimal"
-                    value={responses[item.setItemId] ?? ""}
-                    onChange={(e) => saveSprDebounced(item.setItemId, e.target.value)}
-                    className="w-48 rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px] text-ink"
-                    data-testid="mst-spr-input"
-                  />
-                  <details className="mt-4 max-w-xl rounded-lg border border-grey-200 p-3" data-testid="mst-spr-help">
-                    <summary className="cursor-pointer text-[12px] font-bold text-grey-600">Answer directions</summary>
-                    <SprDirections className="mt-2" />
-                  </details>
-                </div>
-              )}
-
-              <div className="mt-8 flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={() => setCursor((c) => Math.max(0, c - 1))}
-                  disabled={cursor === 0}
-                  aria-label="Previous question"
-                  className="flex h-10 w-12 items-center justify-center rounded-lg border-[1.5px] border-grey-200 text-[20px] font-semibold text-ink disabled:opacity-40"
-                >
+              {/* 하단 액션 막대 — 문항 크기와 무관하게 같은 자리에 고정. */}
+              <div className="flex shrink-0 items-center justify-between border-t border-grey-200 bg-white px-8 py-3" data-testid="mst-footer">
+                <button type="button" onClick={() => goTo(Math.max(0, cursor - 1))} disabled={cursor === 0} aria-label="Previous question" className={NAV_BTN}>
                   ←
                 </button>
                 <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => void toggleFlag(item.setItemId)}
-                  aria-pressed={flags[item.setItemId] ?? false}
-                  aria-label={flags[item.setItemId] ? "Unmark for Review" : "Mark for Review"}
-                  title={flags[item.setItemId] ? "Unmark Solve Later" : "Mark Solve Later"}
-                  data-testid="mock-exam-solve-later-toggle"
-                  className={`flex h-10 items-center justify-center rounded-lg border-[1.5px] px-3 text-[13px] font-semibold ${
-                    flags[item.setItemId] ? "border-ink bg-ink text-white" : "border-grey-200 text-grey-600 hover:border-ink hover:text-ink"
-                  }`}
-                >
-                  Solve Later
-                </button>
-                <GuessButton guessed={guessedMap[item.setItemId] ?? false} onToggle={() => void toggleGuessed(item.setItemId)} />
-                {cursor >= state.items.length - 1 ? (
                   <button
                     type="button"
-                    onClick={() => setConfirmOpen(true)}
-                    disabled={busy}
-                    className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white disabled:opacity-50"
-                    data-testid="mst-submit-last"
+                    onClick={() => void toggleFlag(item.setItemId)}
+                    aria-pressed={flags[item.setItemId] ?? false}
+                    aria-label={flags[item.setItemId] ? "Unmark for Review" : "Mark for Review"}
+                    title={flags[item.setItemId] ? "Unmark Solve Later" : "Mark Solve Later"}
+                    data-testid="mock-exam-solve-later-toggle"
+                    className={`flex h-10 items-center justify-center rounded-lg border-[1.5px] px-3 text-[13px] font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+                      flags[item.setItemId] ? "border-ink bg-ink text-white" : "border-grey-200 text-grey-600 hover:border-ink hover:text-ink"
+                    }`}
                   >
-                    Submit Module
+                    Solve Later
                   </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setCursor((c) => Math.min(state.items.length - 1, c + 1))}
-                    aria-label="Next question"
-                    className="flex h-10 w-12 items-center justify-center rounded-lg bg-ink text-[20px] font-semibold text-white"
-                  >
-                    →
-                  </button>
-                )}
+                  <GuessButton guessed={guessedMap[item.setItemId] ?? false} onToggle={() => void toggleGuessed(item.setItemId)} />
+                  {cursor >= state.items.length - 1 ? (
+                    <button
+                      type="button"
+                      onClick={() => setConfirmOpen(true)}
+                      disabled={busy}
+                      className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white disabled:opacity-50"
+                      data-testid="mst-submit-last"
+                    >
+                      Submit Module
+                    </button>
+                  ) : (
+                    <button type="button" onClick={() => goTo(Math.min(state.items.length - 1, cursor + 1))} aria-label="Next question" className={NAV_BTN}>
+                      →
+                    </button>
+                  )}
                 </div>
               </div>
-              {error && <p className="mt-4 text-[12.5px] text-red">{error}</p>}
             </>
           ) : (
-            <p className="text-[13px] text-grey-500">This module has no questions. Submit the module to continue.</p>
+            <p className="p-8 text-[13px] text-grey-500">This module has no questions. Submit the module to continue.</p>
           )}
         </main>
       </div>

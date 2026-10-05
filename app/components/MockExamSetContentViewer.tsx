@@ -6,6 +6,7 @@ import type { MockExamSetContentItem } from "@/lib/mock-exam/set-content";
 import LearningText from "@/app/session/[id]/LearningText";
 import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const SECTION_LABEL: Record<string, string> = { rw: "R&W", math: "Math" };
 const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
@@ -46,7 +47,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
           </p>
           {dedupeStem(current.passage, current.question) && <RwStimulusView passage={dedupeStem(current.passage, current.question)} className="mb-3 text-[13px]" />}
           {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[13.5px]" />}
-          {current.figure ? <ProblemFigure spec={current.figure} className="mb-3" /> : null}
+          {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-3" /> : null}
 
           {current.options && current.options.length > 0 ? (
             <div className="flex flex-col gap-1.5">

@@ -12,6 +12,7 @@ import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import LearningText from "@/app/session/[id]/LearningText";
 import MockExamMathTools, { MockExamToolButtons, type MathToolsOpen } from "@/app/session/[id]/MockExamMathTools";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 const FORMAT_LABEL: Record<HomeworkBatchItem["format"], string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
 
@@ -416,7 +417,7 @@ function BatchRunner({
             원문 그대로("$y < -2x - 7$", "|x|y||---|---|..." 등) 노출되고 있었다. */}
         <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
           {dedupeStem(item.passage, item.question) && <LearningText text={dedupeStem(item.passage, item.question)} className="mb-3 text-[13.5px]" />}
-          {item.figure != null && <ProblemFigure spec={item.figure} className="mb-3" />}
+          {item.figure != null && <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-3" />}
           {item.question && <LearningText text={item.question} className="mb-3 font-bold text-[14px]" />}
         </div>
         {highlightMode && highlightSupported && (

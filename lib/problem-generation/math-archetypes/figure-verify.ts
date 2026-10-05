@@ -56,8 +56,8 @@ export function checkFigureBinding(inst: Instance): string[] {
 }
 
 const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series"]);
-export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap";
-export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap"];
+export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell";
+export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell"];
 const isPair = (p: unknown): p is [number, number] => Array.isArray(p) && p.length === 2 && p.every((n) => typeof n === "number");
 /**
  * 돌연변이: 자료 수치(표 칸·점 좌표·계열 값·추세선)를 변조한다. 축·눈금 값은 건드리지 않는다.
@@ -78,6 +78,15 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
     if (v && typeof v === "object") return Object.fromEntries(Object.entries(v as Record<string, unknown>).map(([k, x]) => [k, walk(x, inData || DATA_KEYS.has(k), k)]));
     return v;
   };
+  if (mode === "cell") {
+    // 표의 칸 하나만 +1(마지막 행의 마지막 숫자 칸 / 이원표 첫 칸) — 평행이동·배율에 불변인 값(일차 관계의 기울기 등)을 겨냥한다.
+    const o = fig as { kind?: string; rows?: unknown[][]; cells?: number[][]; choices?: unknown[]; figures?: { spec: unknown }[] } | null;
+    if (o && Array.isArray(o.rows)) { const rows = o.rows.map((r) => [...r]); for (let i = rows.length - 1; i >= 0; i--) { const j = rows[i].map((c) => typeof c === "number").lastIndexOf(true); if (j > 0) { rows[i][j] = (rows[i][j] as number) + 1; return { ...o, rows }; } } return fig; }
+    if (o && Array.isArray(o.cells)) { const cells = o.cells.map((r) => [...r]); cells[0][0] += 1; return { ...o, cells }; }
+    if (o && Array.isArray(o.choices)) return { ...o, choices: o.choices.map((c, i) => (i === 0 ? tamperFigure(c, "cell") : c)) };
+    if (o && Array.isArray(o.figures)) return { ...o, figures: o.figures.map((f, i) => (i === 0 ? { ...f, spec: tamperFigure(f.spec, "cell") } : f)) };
+    return fig;
+  }
   if (mode === "swap") {
     const o = fig as { figures?: { spec: unknown }[]; choices?: unknown[] } | null;
     if (o && Array.isArray(o.figures) && o.figures.length === 2) return { ...o, figures: [{ ...o.figures[0], spec: o.figures[1].spec }, { ...o.figures[1], spec: o.figures[0].spec }] };

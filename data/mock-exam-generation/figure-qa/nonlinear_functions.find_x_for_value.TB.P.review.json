@@ -1,0 +1,23 @@
+{
+  "itemId": "nonlinear_functions.find_x_for_value.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "2b0c0264a30ee1d717e6aeff065d9a4943f4246ac5b8d256c697cfe1b56b09e1",
+  "samples": [
+    "nonlinear_functions.find_x_for_value.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "p(10..15)=6,16,28,42,58,76; 2nd diff 2 => p=x^2-11x+16; p=-2 => (x-2)(x-9)=0, larger=9 = meta. Table only, no line labels affected by new rule. Nit: snapshot shows x_1/x_2 as plain text (snapshot page does not render subscripts). Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+}

@@ -1,9 +1,9 @@
 {
   "itemId": "two_variable_data.row_total.TW.P",
   "verdict": "pass",
-  "reviewedAt": "2026-10-02T03:00:00Z",
-  "reviewer": "uat-figures-agent (C4 재검수)",
-  "codeHash": "40ba0da0c4e89c0444c05a8cce7bfb38568a529efeb6e8bffb24368c633e8734",
+  "reviewedAt": "2026-10-05T19:42:35.610Z",
+  "reviewer": "visual-review-agent-SE",
+  "codeHash": "8b69dc7503eb219b76804a8536a4f16b843d02f4156b05327578ec5ae819d2b2",
   "samples": [
     "two_variable_data.row_total.TW.P.png"
   ],
@@ -19,5 +19,5 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "표: downtown 43+53=96, 전체 195. (96+x)/(195+x)=0.55 → 45x=1125 → x=25 = 정답 C. 합계 모두 일치. 합계 행 밑줄 전 열 이어짐. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+  "notes": "Solved from image: (96+x)/(195+x)=.55 -> x=25 (C). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact."
 }

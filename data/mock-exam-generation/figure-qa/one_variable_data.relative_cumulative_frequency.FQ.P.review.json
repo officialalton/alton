@@ -1,0 +1,23 @@
+{
+  "itemId": "one_variable_data.relative_cumulative_frequency.FQ.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "ae39dd6af61913d2f41f91d0df372cda63b8756a28804bb402642dc8f44a6cf4",
+  "samples": [
+    "one_variable_data.relative_cumulative_frequency.FQ.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "n=50, 10 at value 5; (10+x)/(50+x)=0.5 => x=30 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+}

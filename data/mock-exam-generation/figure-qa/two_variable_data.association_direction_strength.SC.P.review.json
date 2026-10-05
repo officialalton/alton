@@ -1,24 +1,24 @@
 {
-  "itemId": "two_variable_data.association_direction_strength.SC.P",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-02T03:00:00Z",
-  "reviewer": "uat-figures-agent (C4 재검수)",
-  "codeHash": "4de487d4956814bfdb4da52d4cbd62da5a7cf0554732d9e5dab3a4cb1297ad6c",
-  "samples": [
-    "two_variable_data.association_direction_strength.SC.P.png",
-    "two_variable_data.association_direction_strength.SC.P~compare_scenarios.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "pass",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "pass",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "샘플1: 점 10개 우상향, 직선 주변 밀집 → strong positive = B. 샘플2: Plot A 촘촘한 음의 추세, Plot B 산만 → Plot A 가 더 강함 = C. 두 플롯 축척(0-12, 0-100)·크기·축 제목 동일, 선택지 글자 일치. | 2026-10-02 재검수: C4(축 제목을 눈금 가까이·좌표평면 축 이름 굵게) 렌더 변경 후 데스크톱 PNG 재생성·육안 확인 — 축 제목·눈금 숫자·점/선 겹침 없음, 값·정답 영향 없음(데이터 동일)."
+ "itemId": "two_variable_data.association_direction_strength.SC.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:48.651Z",
+ "reviewer": "visual-review-agent-SD",
+ "codeHash": "4fdb7364f8d9de8e9a6ddc6fbfc762cedc403c10413262cd9b1e3dfd398f4936",
+ "samples": [
+  "two_variable_data.association_direction_strength.SC.P.png",
+  "two_variable_data.association_direction_strength.SC.P~compare_scenarios.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "Main plot: clearly rising, fairly tight though concave plateau -> strong positive = B (a student could waffle with 'moderate'; non-blocking nit). compare_scenarios: A tight negative, B scattered -> Plot A stronger = C. Panel titles Plot A/Plot B are drawn."
 }

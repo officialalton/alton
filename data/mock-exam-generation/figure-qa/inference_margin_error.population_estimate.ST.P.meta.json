@@ -1,0 +1,42 @@
+{
+ "itemId": "inference_margin_error.population_estimate.ST.P",
+ "generatedAt": "2026-10-05T20:19:34.648Z",
+ "codeHash": "be9947512609ab0343e39e17b7364da7292bb9c0ebb620323d3b86cbd0936470",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.population_estimate.ST.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.population_estimate.ST.P.png",
+   "mobileFile": "inference_margin_error.population_estimate.ST.P.m375.png",
+   "archetypeId": "ime.population_estimate.ST.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A random sample of farmers in Hale County took part in a survey on planting plans. The information in the table shown describes the survey and its results. Each person in the sample answered yes, no, or undecided to the question of whether they plan to plant more corn.",
+   "question": "Based on the survey, what is the best estimate of the number of farmers in Hale County who plan to plant more corn?",
+   "options": [
+    "5850",
+    "3150",
+    "140",
+    "3240"
+   ],
+   "correctIndex": 1,
+   "answer": "3150",
+   "explanation": "(1) 표본 크기 400 에서 '아니오' 227 와 '미정' 33 을 뺀다. (2) '예' 응답 수는 400 - 227 - 33 = 140 이다. (3) 표본 비율은 140/400 = 35% 이다. (4) 무작위 표본이므로 이 비율을 모집단에 적용한다. (5) 9000 × 140/400 = 3150 이다. 따라서 정답은 3150이다.",
+   "structuralIssues": []
+  }
+ ]
+}

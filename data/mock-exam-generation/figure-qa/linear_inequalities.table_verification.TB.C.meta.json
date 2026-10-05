@@ -1,0 +1,43 @@
+{
+ "itemId": "linear_inequalities.table_verification.TB.C",
+ "generatedAt": "2026-10-05T20:19:34.665Z",
+ "codeHash": "0032acbc13d29342d74a3eb93c5f1c843fd315ced043a14fcdb9c2a43dec35d4",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.table_verification.TB.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.table_verification.TB.C.png",
+   "mobileFile": "linear_inequalities.table_verification.TB.C.m375.png",
+   "archetypeId": "li.table_verification.TB.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[data:table]",
+   "stimulus": "A coach is buying $c$ soccer balls that cost 15 dollars each and $d$ water bottles that cost 5 dollars each. The total cost must be more than 150 dollars.",
+   "question": "Which table gives values of $c$ and their corresponding values of $d$ that meet this condition?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 총비용은 15x + 5y 이다. (2) 'more than' 이므로 15x + 5y > 150 이다. (3) 각 표의 행마다 15x + 5y 를 계산해 150 와 비교한다. (4) 정답 표의 각 행 (2, 31), (7, 34), (12, 0) 은 모두 조건을 만족한다. (5) 다른 표는 부등호 방향·경계·한 행·x 와 y 의 순서 중 하나가 어긋난다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

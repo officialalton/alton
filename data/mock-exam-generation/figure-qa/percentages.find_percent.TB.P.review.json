@@ -1,0 +1,23 @@
+{
+  "itemId": "percentages.find_percent.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:43:04.000Z",
+  "reviewer": "visual-review-agent-SC",
+  "codeHash": "b49b2a65d997e4fc42d059c303ff65146041895113b41a7022ae98fd34e4070d",
+  "samples": [
+    "percentages.find_percent.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "total 500; (110+190)/500=60% = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+}

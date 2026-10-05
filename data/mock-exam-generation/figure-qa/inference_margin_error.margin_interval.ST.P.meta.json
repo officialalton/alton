@@ -1,0 +1,42 @@
+{
+ "itemId": "inference_margin_error.margin_interval.ST.P",
+ "generatedAt": "2026-10-05T20:19:34.658Z",
+ "codeHash": "522e9ba4da3ad4c67b2613aa430928b36c4f376586ebea61fcc3a1cfbbc732fa",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.margin_interval.ST.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.margin_interval.ST.P.png",
+   "mobileFile": "inference_margin_error.margin_interval.ST.P.m375.png",
+   "archetypeId": "ime.margin_interval.ST.P.inverse",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A survey asked a random sample of drivers whether they support lower speed limits. The table shows information about the survey. The plausible interval for the percent of all licensed drivers in a state who support lower speed limits was found as the sample percent plus or minus the margin of error.",
+   "question": "Based on the information shown, what number of the drivers in the sample said yes?",
+   "options": [
+    "50",
+    "225",
+    "250",
+    "275"
+   ],
+   "correctIndex": 2,
+   "answer": "250",
+   "explanation": "(1) 구간은 45% ~ 55% 이다. (2) 구간은 표본 % ± 오차범위이므로 표본 %는 구간의 중심이다. (3) 표본 % = (45 + 55) ÷ 2 = 50% 이다. (4) 오차범위는 55 - 50 = 5 퍼센트 포인트이다(확인). (5) '예' 수 = 500 × 50% = 250 이다. 따라서 정답은 250이다.",
+   "structuralIssues": []
+  }
+ ]
+}

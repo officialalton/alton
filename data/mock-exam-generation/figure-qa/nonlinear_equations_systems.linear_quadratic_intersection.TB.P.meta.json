@@ -1,0 +1,42 @@
+{
+ "itemId": "nonlinear_equations_systems.linear_quadratic_intersection.TB.P",
+ "generatedAt": "2026-10-05T20:19:34.633Z",
+ "codeHash": "d4c1ef6f1ce28b000a92711df02d07d1403dae149ee4115383fe3cb6bf8ca2b4",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.linear_quadratic_intersection.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.linear_quadratic_intersection.TB.P.png",
+   "mobileFile": "nonlinear_equations_systems.linear_quadratic_intersection.TB.P.m375.png",
+   "archetypeId": "nes.linear_quadratic_intersection.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A graphing program reports several values of a function. The table shows several values of $x$ and the corresponding values of $q(x)$ for the quadratic function $q$. The system of equations $y = q(x)$ and $y = 3x - 9$ has two solutions $(x, y)$.",
+   "question": "What is the greater of the $x$-coordinates of the intersection points?",
+   "options": [
+    "-1",
+    "-3",
+    "3",
+    "2"
+   ],
+   "correctIndex": 3,
+   "answer": "2",
+   "explanation": "(1) 표에서 값을 읽는다: (-11, 62), (-10, 45), (-9, 30), (-8, 17) … (2) 1계 차분: -17, -15, -13, -11, -9 — 2계 차분이 2 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = 1 이다. (4) 두 점을 대입해 b = 4, c = -15 를 얻는다. (5) q(x) = 3x - 9 ⇒ 1x² + (1)x + (-6) = 0 ⇒ 1(x - (-3))(x - (2)) = 0 이다. (6) x = -3, 2 이고 큰 값은 2 이다. 따라서 정답은 2이다.",
+   "structuralIssues": []
+  }
+ ]
+}

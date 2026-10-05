@@ -1,0 +1,42 @@
+{
+ "itemId": "nonlinear_equations_systems.root.TB.P",
+ "generatedAt": "2026-10-05T20:19:34.631Z",
+ "codeHash": "ab2b075c06b097afa95232c2a571612b0c22a02f4a206e18ff1fc5749b59e47d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.root.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.root.TB.P.png",
+   "mobileFile": "nonlinear_equations_systems.root.TB.P.m375.png",
+   "archetypeId": "nes.root.TB.P.repr_shift",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "In a practice set, a function is described by a table. The graph of $y = r(x)$ in the $xy$-plane is a parabola. The table shown lists several points $(x, r(x))$ on the graph. The equation $r(x) = 0$ has two real solutions.",
+   "question": "What is the larger of the two values of $x$?",
+   "options": [
+    "4",
+    "-12",
+    "12",
+    "-4"
+   ],
+   "correctIndex": 2,
+   "answer": "12",
+   "explanation": "(1) 표에서 값을 읽는다: (-1, 195), (0, 144), (1, 99), (2, 60) … (2) 1계 차분: -51, -45, -39, -33 — 2계 차분이 6 로 일정하므로 이차함수이다. (3) 이차항 계수 a = (2계 차분) ÷ (2 × 1²) = 3 이다. (4) 두 점을 대입해 b = -48, c = 144 를 얻는다. (5) r(x) = 3(x - (4))(x - (12)) 로 인수분해한다. (6) 해는 4, 12 이고 큰 해는 12 이다. 따라서 정답은 12이다.",
+   "structuralIssues": []
+  }
+ ]
+}

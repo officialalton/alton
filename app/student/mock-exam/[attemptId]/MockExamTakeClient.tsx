@@ -22,6 +22,7 @@ import MockExamResultView from "./MockExamResultView";
 import GuessButton from "./GuessButton";
 import ProblemErrorReportButton from "@/app/components/ProblemErrorReportButton";
 import ProblemNoteCanvas from "@/app/components/ProblemNoteCanvas";
+import { problemText } from "@/lib/problem-figures/label-rule";
 
 // 고정형 SAT 모의고사 V1 — 학생 응시 화면(사양 3절 학생 흐름, 4절 수업 탭/독립 진입 공용).
 // 적응형이 아니므로 문항 순서는 고정(mock_exam_set_items.position). 시간 제한은 섹션(R&W/Math)
@@ -434,7 +435,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 하이라이트 지우기
               </button>
             )}
-            {current.figure ? <ProblemFigure spec={current.figure} className="mb-4" /> : null}
+            {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-4" /> : null}
 
             {current.format === "mc" && current.options ? (
               <div className="flex flex-col gap-2">

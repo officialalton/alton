@@ -1,0 +1,42 @@
+{
+ "itemId": "ratios_rates_units.chained_conversion.TB.P",
+ "generatedAt": "2026-10-05T20:19:34.629Z",
+ "codeHash": "0d9d471928289fb95bf38af8c8d3c2965132d1a64173d76d47bbc76ede9f015c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/ratios_rates_units.chained_conversion.TB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "ratios_rates_units.chained_conversion.TB.P.png",
+   "mobileFile": "ratios_rates_units.chained_conversion.TB.P.m375.png",
+   "archetypeId": "rru.chained_conversion.TB.P.chain2",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "The table shows how the units used at an orchard are related.",
+   "question": "How many apples are in 6 trucks?",
+   "options": [
+    "72",
+    "108",
+    "432",
+    "78"
+   ],
+   "correctIndex": 2,
+   "answer": "432",
+   "explanation": "(1) 표: 1 truck = 6 baskets, 1 basket = 3 bags, 1 bag = 4 apples. (2) 6 trucks = 6 × 6 = 36 baskets 이다. (3) 36 × 3 = 108 bags 이다. (4) 108 × 4 = 432 apples 이다. (5) 따라서 432 이다. 따라서 정답은 432이다.",
+   "structuralIssues": []
+  }
+ ]
+}

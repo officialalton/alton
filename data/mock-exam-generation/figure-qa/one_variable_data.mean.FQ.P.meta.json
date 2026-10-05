@@ -1,0 +1,42 @@
+{
+ "itemId": "one_variable_data.mean.FQ.P",
+ "generatedAt": "2026-10-05T20:19:34.609Z",
+ "codeHash": "bb17854f88afaa5594709b0548051c1e139acc93db08cd1dd4a7a9b02cde282a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.mean.FQ.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.mean.FQ.P.png",
+   "mobileFile": "one_variable_data.mean.FQ.P.m375.png",
+   "archetypeId": "ovd.mean.FQ.P.inverse",
+   "seed": 11,
+   "signature": "data:table",
+   "stimulus": "A survey recorded the number of rainy days in each month for months in a weather record. The results are shown in the table. Later, 4 more months join the group, and each of them has the same value. Then the mean of all the values is 7 days.",
+   "question": "What is the value, in days, for each of the 4 new months?",
+   "options": [
+    "5",
+    "24",
+    "6",
+    "7"
+   ],
+   "correctIndex": 2,
+   "answer": "6",
+   "explanation": "(1) 표에서 값과 도수를 읽는다: 5(1), 6(3), 7(6), 8(9) — 전체 19개. (2) 전체 개수 = 1 + 3 + 6 + 9 = 19 이다. (3) 합 = 5×1 + 6×3 + 7×6 + 8×9 = 137 이다. (4) 새 전체 개수 = 19 + 4 = 23, 새 합 = 7 × 23 = 161 이다. (5) 더해진 합 = 161 - 137 = 24 이다. (6) 한 명의 값 = 24 ÷ 4 = 6 이다. 따라서 정답은 6이다.",
+   "structuralIssues": []
+  }
+ ]
+}

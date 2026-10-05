@@ -1,0 +1,23 @@
+{
+  "itemId": "linear_inequalities.table_verification.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:52Z",
+  "reviewer": "visual-review-agent-SB",
+  "codeHash": "32e7a535ba641818f28c56ca840b4aab762cfa58616bbc00edf15b5a44161d3a",
+  "samples": [
+    "linear_inequalities.table_verification.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "Kiara만 2t+5c>=27 및 t+c<=13 동시 충족 → 1 → D. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+}
