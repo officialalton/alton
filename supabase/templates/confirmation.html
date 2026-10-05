@@ -2,9 +2,9 @@
 
 <p>To finish creating your free learning account, please confirm your email address by clicking the button below.</p>
 
-<p><a href="{{ .SiteURL }}/signup/student/confirm?token_hash={{ .TokenHash }}&type=signup">Confirm email and get started</a></p>
+<p><a href="{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=signup">Confirm email and get started</a></p>
 
 <p>If the button doesn't work, copy and paste this link into your browser:</p>
-<p>{{ .SiteURL }}/signup/student/confirm?token_hash={{ .TokenHash }}&type=signup</p>
+<p>{{ .RedirectTo }}?token_hash={{ .TokenHash }}&type=signup</p>
 
 <p>If you didn't request this, you can safely ignore this email. No account will be created.</p>
