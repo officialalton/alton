@@ -133,9 +133,10 @@ export default function ConsentTab({
         data-testid="smart-notes-contract-notice"
         className="text-[12.5px] text-grey-500 leading-[1.6] mt-9 border-t border-grey-200 pt-5"
       >
-        ALTON EDUCATION regular lessons use Google Meet&apos;s AI meeting notes to support lesson quality and progress
-        tracking. See the Family Service Agreement for details on how this data is handled. The family agreement does
-        not require a subscription or any minimum purchase; lesson credits can be bought whenever you need them.
+        Regular paid lessons include video recording, audio recording, speech-to-text transcription and AI lesson notes,
+        as set out in the Parent Notice and Consent above and in your Education Services Agreement. First consultations
+        and trial lessons are not recorded. The agreement does not require a subscription or any minimum purchase; lesson
+        credits can be bought whenever you need them.
       </p>
 
       {docModal && (

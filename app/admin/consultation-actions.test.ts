@@ -37,7 +37,7 @@ const householdMembersMaybeSingleMock = vi.fn().mockResolvedValue({ data: null, 
 const contractsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const contractVersionsUpdateEqMock = vi.fn().mockResolvedValue({ error: null });
 const contractVersionsSingleMock = vi.fn().mockResolvedValue({
-  data: { id: "cv1", contract_id: "ct1", company_signed_at: "2026-09-13T00:00:00Z" },
+  data: { id: "cv1", contract_id: "ct1", company_signed_at: "2026-09-13T00:00:00Z", contracts: { child_id: "child1" } },
   error: null,
 });
 
@@ -117,7 +117,10 @@ const fromMock = vi.fn((table: string) => {
   }
   if (table === "profiles") {
     return {
-      select: () => ({ in: profilesSelectInMock }),
+      select: () => ({
+        in: profilesSelectInMock,
+        eq: () => ({ maybeSingle: async () => ({ data: { date_of_birth: "2012-03-09" }, error: null }) }),
+      }),
     };
   }
   if (table === "contract_activation_retries") {
@@ -280,7 +283,7 @@ describe("sendContractForSignature — production base URI guardrail", () => {
     contractsUpdateEqMock.mockResolvedValue({ error: null });
     contractVersionsUpdateEqMock.mockResolvedValue({ error: null });
     contractVersionsSingleMock.mockResolvedValue({
-      data: { id: "cv1", contract_id: "ct1", company_signed_at: "2026-09-13T00:00:00Z" },
+      data: { id: "cv1", contract_id: "ct1", company_signed_at: "2026-09-13T00:00:00Z", contracts: { child_id: "child1" } },
       error: null,
     });
   });
