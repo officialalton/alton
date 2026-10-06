@@ -83,7 +83,7 @@ This Agreement and its completed schedules state the employment terms addressed 
 - Supervisor: ____________________
 - Position: Part-time, nonexempt Teacher
 - Regular hourly rate: USD $50.00
-- Payroll period and designated paydays: ____________________
+- Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid on the 20th of the same month; wages for work performed from the 16th through the last day of a month are paid on the 5th of the following month.
 - Applicable overtime rates: As required by law and stated in the wage notice
 
 ## Schedule B — Prior Materials
