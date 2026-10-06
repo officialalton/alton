@@ -1,7 +1,7 @@
 // P4-2 — 자동 송금 실행 오케스트레이션.
 //
 // 확정 정책: 송금 승인된 묶음은 지정된 **지급 예정일**에 자동 송금 대상이 된다.
-// 실행 시각은 기존 정산 기준과 같은 **UTC 매월 10일 03:00**.
+// 실행 시각은 기존 정산 기준과 같은 **매월 5일·20일(회사 시간대 America/Los_Angeles 날짜, 크론은 매일 17:00 UTC에 돌며 LA 날짜로 걸러냄)**(월 2회 정산, 2026-10-06 오너 확정).
 //
 // **게이트가 닫혀 있으면 아무것도 하지 않는다.** real_disbursement_enabled()가
 // false면 상태를 바꾸지도, dispatch_idempotency_key를 만들지도 않는다 —
@@ -13,6 +13,7 @@
 // 돌려준다(제공자에 Idempotency-Key로 전달할 값 — 이중 송금 방지).
 
 import { createAdminClient } from "@/lib/supabase-admin";
+import { companyDateOf } from "./payout-schedule";
 
 // 2026-09-12(제품 오너 확정) — **교사 정산의 송금 제공자는 Wise 하나뿐이다.**
 // Mercury는 법인 수취 계좌·운영비·법인카드·자금 관리용이며 교사 정산의 자동 송금·
@@ -28,13 +29,12 @@ export type AutoDispatchResult = {
   skippedGlobalOff: boolean;
 };
 
-/** 자동 송금 실행 시각: 매월 10일 03:00 UTC. */
-export const AUTO_DISPATCH_DAY_OF_MONTH = 10;
-export const AUTO_DISPATCH_HOUR_UTC = 3;
+/** 자동 송금 실행일(회사 시간대 날짜). */
+export const AUTO_DISPATCH_DAYS_OF_MONTH = [5, 20] as const;
 
 export async function runAutoPayoutDispatch(now: Date = new Date()): Promise<AutoDispatchResult> {
   const admin = createAdminClient();
-  const dueOn = now.toISOString().slice(0, 10);
+  const dueOn = companyDateOf(now) ?? now.toISOString().slice(0, 10);
 
   const { data: settings, error: settingsError } = await admin
     .from("payout_auto_dispatch_settings")

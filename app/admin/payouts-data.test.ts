@@ -6,14 +6,14 @@ import {
 } from "./payouts-data";
 
 describe("previousMonthRange", () => {
-  it("주어진 날짜 기준 전월 1일~말일을 반환한다", () => {
-    const result = previousMonthRange(new Date("2026-09-15T00:00:00Z"));
-    expect(result).toEqual({ periodStart: "2026-08-01", periodEnd: "2026-08-31" });
+  it("월 2회 정산: 1~15일이면 지난달 16일~말일, 16일 이후면 이번 달 1~15일", () => {
+    expect(previousMonthRange(new Date("2026-09-15T00:00:00Z"))).toEqual({ periodStart: "2026-08-16", periodEnd: "2026-08-31" });
+    expect(previousMonthRange(new Date("2026-09-16T12:00:00Z"))).toEqual({ periodStart: "2026-09-01", periodEnd: "2026-09-15" });
   });
 
   it("1월이면 전년도 12월을 반환한다", () => {
     const result = previousMonthRange(new Date("2026-01-10T00:00:00Z"));
-    expect(result).toEqual({ periodStart: "2025-12-01", periodEnd: "2025-12-31" });
+    expect(result).toEqual({ periodStart: "2025-12-16", periodEnd: "2025-12-31" });
   });
 });
 

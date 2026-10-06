@@ -2,7 +2,8 @@
 //   docs/contracts/teacher-california-employment-agreement-v0.2-en.md  (teachers working in California)
 //   docs/contracts/teacher-non-us-services-agreement-v0.2-en.md        (teachers working outside the United States)
 // The form is chosen from the ACTUAL work location only — never from nationality, account role or tax form.
-// Commercial/execution values (paydays, non-lesson compensation, fee allocation, notice period, ...) are never
+// Paydays (semimonthly, 5th/20th, Pacific Time), fee allocation (Company bears) and the 30-day notice are fixed in the
+// source text (owner decision 2026-10-06). Other execution values (non-lesson compensation, payment details, ...) are never
 // invented here: if a required value is missing, rendering throws UnfilledContractError and nothing is sent.
 import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { assertLegalTextClean, UnfilledContractError } from "@/lib/legal/guard";
@@ -57,15 +58,12 @@ export type TeacherAgreementCommon = {
 export type CaliforniaTeacherAgreementParams = TeacherAgreementCommon & {
   californiaWorkLocation: string;
   supervisor: string;
-  payrollPeriodAndPaydays: string;
 };
 
 export type NonUsTeacherAgreementParams = TeacherAgreementCommon & {
   actualWorkCountryAndLocation: string;
   nonLessonServicesScopeAndCompensation: string;
   paymentMethodAndRecipientDetails: string;
-  transferAndConversionFeeAllocation: string;
-  terminationNoticePeriod: string;
 };
 
 function requireFields(values: Record<string, string | null | undefined>): void {
@@ -122,7 +120,6 @@ export function renderCaliforniaTeacherAgreementHtml(p: CaliforniaTeacherAgreeme
     effectiveDate: p.effectiveDate,
     californiaWorkLocation: p.californiaWorkLocation,
     supervisor: p.supervisor,
-    payrollPeriodAndPaydays: p.payrollPeriodAndPaydays,
     priorMaterials: p.priorMaterials,
   });
   assertCompany(p.companyApproval);
@@ -136,7 +133,6 @@ export function renderCaliforniaTeacherAgreementHtml(p: CaliforniaTeacherAgreeme
       if (at("Start date:")) return [`Start date: ${escapeHtml(formatIsoDateEn(p.effectiveDate))}`];
       if (at("California work location:")) return [`California work location: ${escapeHtml(p.californiaWorkLocation)}`];
       if (at("Supervisor:")) return [`Supervisor: ${escapeHtml(p.supervisor)}`];
-      if (at("Payroll period and designated paydays:")) return [`Payroll period and designated paydays: ${escapeHtml(p.payrollPeriodAndPaydays)}`];
       return null;
     },
     rewriteParagraph: (text) => {
@@ -158,8 +154,6 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
     actualWorkCountryAndLocation: p.actualWorkCountryAndLocation,
     nonLessonServicesScopeAndCompensation: p.nonLessonServicesScopeAndCompensation,
     paymentMethodAndRecipientDetails: p.paymentMethodAndRecipientDetails,
-    transferAndConversionFeeAllocation: p.transferAndConversionFeeAllocation,
-    terminationNoticePeriod: p.terminationNoticePeriod,
     priorMaterials: p.priorMaterials,
   });
   assertCompany(p.companyApproval);
@@ -175,9 +169,6 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
       if (at("Nonlesson services, scope, and compensation:"))
         return [`Nonlesson services, scope, and compensation: ${escapeHtml(p.nonLessonServicesScopeAndCompensation)}`];
       if (at("Payment method and recipient details:")) return [`Payment method and recipient details: ${escapeHtml(p.paymentMethodAndRecipientDetails)}`];
-      if (at("Transfer, intermediary, and conversion fee allocation:"))
-        return [`Transfer, intermediary, and conversion fee allocation: ${escapeHtml(p.transferAndConversionFeeAllocation)}`];
-      if (at("Termination notice period:")) return [`Termination notice period: ${escapeHtml(p.terminationNoticePeriod)}`];
       return null;
     },
     rewriteParagraph: (text) => {

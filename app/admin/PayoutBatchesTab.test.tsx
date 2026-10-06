@@ -152,7 +152,7 @@ describe("PayoutBatchesTab — UAT 후속(2026-09-12)", () => {
     expect(listMock).toHaveBeenCalledTimes(1);
   });
 
-  it("월 마감 실행 버튼이 자동 마감과 같은 경로를 호출한다", async () => {
+  it("정산 마감 실행 버튼이 자동 마감과 같은 경로를 호출한다", async () => {
     listMock.mockResolvedValue(batches);
     render(<PayoutBatchesTab initialBatches={batches} />);
 
@@ -341,7 +341,7 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
     expect(screen.getByText(/체험 수업 · 60분/)).toBeInTheDocument();
     expect(screen.getByText(/관리자 조정 · 교통비 차감/)).toBeInTheDocument();
     expect(screen.getByText(/송금 승인 · 김관리/)).toBeInTheDocument();
-    expect(screen.getByText(/월 마감\(자동\) · 시스템\(자동\)/)).toBeInTheDocument();
+    expect(screen.getByText(/정산 마감\(자동\) · 시스템\(자동\)/)).toBeInTheDocument();
     expect(screen.queryByText(/알 수 없음/)).not.toBeInTheDocument();
   });
 });

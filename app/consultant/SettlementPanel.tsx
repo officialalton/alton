@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { formatPeriodWithPayoutEn } from "@/lib/payout/payout-schedule";
 import {
   getMyPayoutAccountAction,
   saveMyPayoutAccountAction,
@@ -127,6 +128,7 @@ export default function SettlementPanel() {
       </div>
 
       <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Payout History</div>
+      <p className="text-[12px] text-grey-500 mb-2">Payouts are made twice a month: the 1st–15th is paid on the 20th, and the 16th–end of month on the 5th of the next month (Pacific Time).</p>
       {periods === null ? (
         <p className="text-[13px] text-grey-500">Loading…</p>
       ) : periods.length === 0 ? (
@@ -136,7 +138,7 @@ export default function SettlementPanel() {
           <div key={p.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2.5">
             <div className="flex items-center justify-between">
               <span className="text-[13px] font-bold text-ink">
-                {p.periodStart} ~ {p.periodEnd}
+                {formatPeriodWithPayoutEn(p.periodStart, p.periodEnd)}
               </span>
               <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">{STATUS_LABEL[p.status] ?? p.status}</span>
             </div>
