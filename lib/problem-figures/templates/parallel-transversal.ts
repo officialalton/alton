@@ -18,7 +18,7 @@ export type ParallelTransversalSpec = {
    * 각 — 어느 교점(두 선), 어느 사분면, 라벨. right 면 직각 표시.
    * 횡단선끼리의 교점(at 이 횡단선 2개)에서는 region 이 N(평행선 쪽·삼각형 안) / S(반대쪽) / E / W 다.
    */
-  angles: { at: [string, string]; region: Region | CrossRegion; label?: string; right?: boolean }[];
+  angles: { at: [string, string]; region: Region | CrossRegion; label?: string; right?: boolean; /** 그림을 그릴 때만 쓰는 실제 각도(도) — 인쇄하지 않는다. label 이 'x°'·'(2x + 10)°' 여도 그림이 참값과 일치한다. */ value?: number }[];
   /**
    * 두 횡단선이 만나는 자리(2026-09-15 확장). below: 아래 평행선 아래에서 만난다(두 평행선·두 횡단선이 삼각형을 이룬다), above: 위 평행선 위에서.
    * 두 횡단선이 서로 만나는 점·각을 쓰면 없어도 below 로 본다.
@@ -158,9 +158,10 @@ export function slantDegFor(spec: ParallelTransversalSpec): number {
   if (spec.crossing || spec.angles.some((a) => isTransId(a.at[0]) && isTransId(a.at[1]))) return SLANT_DEG;
   for (const a of spec.angles) {
     if (a.right || isTransId(a.at[0]) && isTransId(a.at[1])) continue;
+    // value(비인쇄 참값)가 있으면 그것을, 없으면 숫자 라벨을 쓴다. 미지수·식 라벨은 value 가 없으면 기본 기울기.
     const m = (a.label ?? "").trim().match(/^(\d+(?:\.\d+)?)\s*°?$/);
-    if (!m) continue;
-    const v = Number(m[1]);
+    const v = typeof a.value === "number" ? a.value : m ? Number(m[1]) : NaN;
+    if (!Number.isFinite(v)) continue;
     const t = spec.transversals.find((tr) => a.at.includes(tr.id));
     if (!t || t.perpendicular || v <= 0 || v >= 180 || v === 90) continue;
     const idx = spec.transversals.indexOf(t);

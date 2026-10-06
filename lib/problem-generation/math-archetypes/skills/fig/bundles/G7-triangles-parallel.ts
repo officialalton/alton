@@ -12,5 +12,6 @@ import { ITEM as latSim } from "../items/lines_angles_triangles.similar_triangle
 import { ITEM as latCong } from "../items/lines_angles_triangles.congruent_triangles.TR.P";
 import { ITEM as latTi } from "../items/lines_angles_triangles.triangle_inequality.TR.P";
 import { ITEM as avTriArea } from "../items/area_volume.triangle_area.TR.P";
+import { ITEM as latPtPar } from "../items/lines_angles_triangles.parallel_lines_transversal_angles.PT.P";
 
-export const BUNDLE: LArch[] = [...latSim, ...avTriArea, ...latTi, ...latCong, ...latAngleSum, ...rttHyp, ...rttLeg, ...latIso, ...rttTrig, ...rttSpecial, ...rttComp, ...rttElev];
+export const BUNDLE: LArch[] = [...latSim, ...latPtPar, ...avTriArea, ...latTi, ...latCong, ...latAngleSum, ...rttHyp, ...rttLeg, ...latIso, ...rttTrig, ...rttSpecial, ...rttComp, ...rttElev];

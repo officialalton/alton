@@ -72,4 +72,10 @@ describe("평행선·횡단선 — 숫자 각 라벨대로 기울인다", () => 
   it("예각 쐐기 37° → 횡단선이 37°", () => expect(Math.abs(drawnSlant(base("37°", "NW")) - 37)).toBeLessThan(3));
   it("둔각 쐐기 115° → 횡단선이 65°", () => expect(Math.abs(drawnSlant(base("115°", "NE")) - 65)).toBeLessThan(3));
   it("미지수 라벨만 있으면 기본 기울기(55°)", () => expect(Math.abs(drawnSlant(base("y°", "NW")) - 55)).toBeLessThan(0.5));
+  it("식 라벨('(2x + 10)°')이어도 value(비인쇄 참값 48°)가 있으면 그 각대로 그린다", () => {
+    const spec = base("(2x + 10)°", "NW"); spec.angles[0] = { ...spec.angles[0], value: 48 };
+    expect(Math.abs(drawnSlant(spec) - 48)).toBeLessThan(3);
+    const obtuse = base("(2x + 10)°", "NE"); obtuse.angles[0] = { ...obtuse.angles[0], value: 118 };
+    expect(Math.abs(drawnSlant(obtuse) - 62)).toBeLessThan(3);
+  });
 });
