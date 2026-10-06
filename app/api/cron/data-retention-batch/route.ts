@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { deleteDriveFile, processDeletionQueue } from "@/lib/retention/drive-deletion";
 
 // R12(Section 2, 2026-09-24) — 자료 유형별 보존기간 자동 삭제·비식별화 배치.
 // 다른 크론과 같은 fail-closed 규칙: CRON_SECRET이 없으면 아무것도 하지
@@ -41,6 +42,22 @@ export async function GET(request: Request) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }
 
-  console.log(JSON.stringify({ event: "data_retention_batch_ran", dryRun, result: data }));
-  return NextResponse.json({ ok: true, dryRun, result: data });
+  // Drive 파일 삭제 워커는 별도 플래그(RETENTION_DRIVE_DELETION_ENABLED=true)가 있을 때만, 그리고 dryRun이 아닐 때만 돈다.
+  let drive: unknown = null;
+  if (!dryRun && process.env.RETENTION_DRIVE_DELETION_ENABLED === "true") {
+    drive = await processDeletionQueue({
+      claim: async (limit) => {
+        const { data: rows, error: e } = await admin.rpc("retention_claim_deletion_targets", { p_limit: limit });
+        if (e) throw new Error(e.message);
+        return rows ?? [];
+      },
+      markResult: async (id, ok, err) => {
+        await admin.rpc("retention_mark_deletion_result", { p_id: id, p_ok: ok, p_error: err ?? null });
+      },
+      deleteFile: deleteDriveFile,
+    });
+  }
+
+  console.log(JSON.stringify({ event: "data_retention_batch_ran", dryRun, result: data, drive }));
+  return NextResponse.json({ ok: true, dryRun, result: data, drive });
 }
