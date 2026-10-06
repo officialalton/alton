@@ -4,6 +4,7 @@ vi.mock("./contract-dispatch-actions", () => ({
   listContractDispatchJobs: vi.fn(),
   runContractDispatchQueueAction: vi.fn(),
   retryContractDispatchJobAction: vi.fn(),
+  setContractAutoDispatchEnabledAction: vi.fn(),
 }));
 vi.mock("./use-tab-cached-data", () => ({ useTabCachedData: vi.fn() }));
 
