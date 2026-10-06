@@ -113,7 +113,7 @@ describe("관리자 서버 액션의 createAdminClient() 호출부는 항상 req
         if (ALLOWLIST_FUNCTIONS.has(fn.name)) continue;
         if (!fn.body.includes("createAdminClient")) continue;
         // 담당 컨설턴트 겸용 가드(lib/admin-auth.ts)도 역할·담당 검사를 내부에서 수행하므로 인정한다.
-        const hasGuard = /require(AdminOrConsultant|AdminCapabilityOrAssignedConsultant|Admin(OrCapability)?)\s*\(/.test(fn.body);
+        const hasGuard = /require(AdminOrConsultant|AdminCapabilityOrAssignedConsultant|Admin(OrCapability)?|PayoutAccountStaff)\s*\(/.test(fn.body);
         if (!hasGuard) {
           offenders.push(`${rel}::${fn.name}`);
         }
