@@ -80,6 +80,7 @@ export default function TeacherShell({
   availabilityExceptions,
   availabilityTimezone,
   timezoneSaved = true,
+  payoutAccountMissing = false,
   lessonSchedule,
   materialsLibraryTree,
   vocabOverview,
@@ -97,6 +98,8 @@ export default function TeacherShell({
   availabilityTimezone: string;
   /** profiles.timezone 이 저장돼 있는지 — false 면 온보딩 배너를 띄우고 가능 시간 저장을 막는다(보기·다른 탭은 그대로). */
   timezoneSaved?: boolean;
+  /** 수취 계좌가 아직 없으면 true — 필수 등록 단계를 상단에 안내한다(저장 후에는 사라진다). */
+  payoutAccountMissing?: boolean;
   lessonSchedule: TeacherLessonScheduleItem[];
   materialsLibraryTree: LibrarySubjectTree[];
   vocabOverview: TeacherVocabOverview;
@@ -125,6 +128,7 @@ export default function TeacherShell({
   const [assignmentsSubtab, setAssignmentsSubtab] = useState<"active" | "past">("active");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [timezoneModalOpen, setTimezoneModalOpen] = useState(false);
+  const [payoutAccountNeeded, setPayoutAccountNeeded] = useState(payoutAccountMissing);
   const [operatingCurriculumJump, setOperatingCurriculumJump] = useState<{
     subjectEnrollmentId: string;
     subjectId: string;
@@ -294,6 +298,21 @@ export default function TeacherShell({
             </button>
           </div>
         )}
+        {payoutAccountNeeded && activeTab !== "settlement" && (
+          <div
+            data-testid="teacher-payout-account-banner"
+            className="mx-4 md:mx-8 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border-[1.5px] border-red/40 bg-red/5 px-4 py-3"
+          >
+            <p className="text-[13px] font-semibold text-ink">Set up your payout account so we can pay you. It only takes a minute.</p>
+            <button
+              type="button"
+              onClick={() => selectTab("settlement")}
+              className="shrink-0 rounded-lg bg-red px-3.5 py-2 text-[13px] font-semibold text-white"
+            >
+              Set up payout account
+            </button>
+          </div>
+        )}
         {activeTab === "home" ? (
           <TeacherHomeDashboard
             data={dashboard}
@@ -386,7 +405,7 @@ export default function TeacherShell({
               initialKeywords={initialHomeworkKeywords}
             />
           ) : activeTab === "settlement" ? (
-            <SettlementTab />
+            <SettlementTab onAccountSaved={() => setPayoutAccountNeeded(false)} />
           ) : activeTab === "mock-exam" ? (
             <TeacherMockExamTab />
           ) : (

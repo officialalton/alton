@@ -152,7 +152,7 @@ describe("SettlementTab — 예정액 요약", () => {
 
   it("서브탭 4개로 나뉘어 있고 기본은 정산 현황이다", async () => {
     render(<SettlementTab />);
-    for (const label of ["Overview", "Payout History", "Bank Account", "Documents"]) {
+    for (const label of ["Overview", "Payout History", "Payout Account", "Documents"]) {
       expect(await screen.findByText(label)).toBeInTheDocument();
     }
     // 기본 탭에서는 월별 내역·계좌·서류 카드가 보이지 않는다.
@@ -279,43 +279,64 @@ describe("SettlementTab — 예정액 요약", () => {
 });
 
 describe("SettlementTab — 수취 계좌", () => {
-  it("등록 전에는 빈 상태를, 저장 후에는 마스킹된 계좌번호만 보여준다", async () => {
+  it("등록 전에는 필수 등록 안내(배너)와 등록 폼을 보여주고, 저장 후에는 읽기 전용 마스킹 화면만 보인다", async () => {
     render(<SettlementTab />);
+    expect(await screen.findByTestId("account-setup-banner")).toBeInTheDocument();
     await openSubtab("account");
     expect(await screen.findByTestId("account-empty")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("Add account"));
     fireEvent.change(screen.getByLabelText("Account holder"), { target: { value: "김선생" } });
     fireEvent.change(screen.getByLabelText("Bank name"), { target: { value: "국민은행" } });
     fireEvent.change(screen.getByLabelText("Account number"), { target: { value: "110-123-456789" } });
-    fireEvent.click(screen.getByText("Save"));
+    fireEvent.click(screen.getByTestId("account-save"));
 
     expect(await screen.findByTestId("account-masked")).toHaveTextContent("****6789");
-    // 전체 계좌번호가 화면에 남아 있으면 안 된다.
     expect(screen.queryByText(/110-123-456789/)).not.toBeInTheDocument();
+    // 저장 뒤: 수정 수단이 없고 직원 문의 안내만 있다.
+    expect(screen.getByTestId("account-locked-note")).toHaveTextContent("To change your account details, contact ALTON staff.");
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("account-save")).not.toBeInTheDocument();
   });
 
-  it("서버가 입력을 거부하면 사유를 보여주고 편집 상태를 유지한다", async () => {
+  it("이미 등록된 계좌는 처음부터 읽기 전용이다(수정·추가 버튼 없음)", async () => {
+    getAccountMock.mockResolvedValue({
+      accountHolderName: "김선생", bankName: "국민은행", accountNumberMasked: "****6789", currency: "KRW",
+      country: "KR", swiftOrRouting: null, updatedAt: "2026-09-12T03:00:00.000Z",
+    });
+    render(<SettlementTab />);
+    await openSubtab("account");
+    expect(await screen.findByTestId("account-masked")).toHaveTextContent("****6789");
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByText("Add account")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("account-setup-banner")).not.toBeInTheDocument();
+    expect(screen.getByTestId("account-locked-note")).toBeInTheDocument();
+  });
+
+  it("서버가 입력을 거부하면 사유를 보여주고 폼을 유지한다", async () => {
     saveAccountMock.mockResolvedValue({ status: "invalid", message: "Please enter the account holder name." });
     render(<SettlementTab />);
     await openSubtab("account");
-    fireEvent.click(await screen.findByText("Add account"));
-    fireEvent.click(screen.getByText("Save"));
+    fireEvent.click(await screen.findByTestId("account-save"));
 
     expect(await screen.findByText("Please enter the account holder name.")).toBeInTheDocument();
     expect(screen.getByLabelText("Bank name")).toBeInTheDocument();
+  });
+
+  it("USD를 고르면 ABA 라우팅 입력이 나온다", async () => {
+    render(<SettlementTab />);
+    await openSubtab("account");
+    fireEvent.change(await screen.findByLabelText("Currency"), { target: { value: "USD" } });
+    expect(screen.getByText("ABA routing number")).toBeInTheDocument();
   });
 });
 
   it("통화는 KRW/USD 중에서 고르게 하고 계좌번호 하이픈 안내를 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("account");
-    fireEvent.click(await screen.findByText("Add account"));
-
-    const currency = screen.getByLabelText("Currency") as HTMLSelectElement;
+    const currency = (await screen.findByLabelText("Currency")) as HTMLSelectElement;
     expect(currency.tagName).toBe("SELECT");
     expect(Array.from(currency.options).map((o) => o.value)).toEqual(["KRW", "USD"]);
-    expect(screen.getByText(/Use hyphens \(-\) and no spaces/)).toBeInTheDocument();
+    expect(screen.getByText(/hyphens are fine/)).toBeInTheDocument();
   });
 
 describe("SettlementTab — 제출 서류", () => {

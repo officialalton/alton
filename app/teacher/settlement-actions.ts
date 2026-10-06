@@ -17,8 +17,10 @@
 import { randomUUID } from "node:crypto";
 import { requireUser } from "@/lib/auth";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { validatePayoutAccountInput } from "@/lib/payout/account-validation";
 import { loadTeacherSettlement, maskAccountNumber, type TeacherSettlement } from "./settlement-data";
 
+const ACCOUNT_LOCKED_MESSAGE = "To change your account details, contact ALTON staff.";
 const MAX_DOCUMENT_BYTES = 10 * 1024 * 1024;
 const ALLOWED_DOCUMENT_TYPES = new Set([
   "application/pdf",
@@ -34,6 +36,7 @@ export type MaskedPayoutAccount = {
   accountNumberMasked: string;
   currency: string;
   country: string | null;
+  /** SWIFT/라우팅은 끝 4자리만(마스킹). 전체 값은 교사 화면에도 내려가지 않는다. */
   swiftOrRouting: string | null;
   updatedAt: string;
 };
@@ -111,7 +114,7 @@ export async function loadSettlementPageDataAction(): Promise<{
     loadTeacherSettlement(supabase, user.id),
     admin
       .from("teacher_payout_accounts")
-      .select("account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing, updated_at")
+      .select("account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing_last4, updated_at")
       .eq("teacher_id", user.id)
       .maybeSingle(),
     admin
@@ -137,7 +140,7 @@ export async function loadSettlementPageDataAction(): Promise<{
         accountNumberMasked: maskAccountNumber(accountRow.account_number_last4 as string),
         currency: accountRow.currency as string,
         country: (accountRow.country as string | null) ?? null,
-        swiftOrRouting: (accountRow.swift_or_routing as string | null) ?? null,
+        swiftOrRouting: accountRow.swift_or_routing_last4 ? maskAccountNumber(accountRow.swift_or_routing_last4 as string) : null,
         updatedAt: accountRow.updated_at as string,
       }
     : null;
@@ -181,7 +184,7 @@ export async function getMyPayoutAccountAction(): Promise<MaskedPayoutAccount | 
   const admin = createAdminClient();
   const { data, error } = await admin
     .from("teacher_payout_accounts")
-    .select("account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing, updated_at")
+    .select("account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing_last4, updated_at")
     .eq("teacher_id", userId)
     .maybeSingle();
   if (error) throw new Error(error.message);
@@ -192,7 +195,7 @@ export async function getMyPayoutAccountAction(): Promise<MaskedPayoutAccount | 
     accountNumberMasked: maskAccountNumber(data.account_number_last4 as string),
     currency: data.currency as string,
     country: (data.country as string | null) ?? null,
-    swiftOrRouting: (data.swift_or_routing as string | null) ?? null,
+    swiftOrRouting: data.swift_or_routing_last4 ? maskAccountNumber(data.swift_or_routing_last4 as string) : null,
     updatedAt: data.updated_at as string,
   };
 }
@@ -201,99 +204,58 @@ export type SavePayoutAccountResult =
   | { status: "saved"; account: MaskedPayoutAccount }
   | { status: "invalid"; message: string };
 
+/**
+ * 교사의 **최초 1회** 수취 계좌 등록. 이미 등록돼 있으면 서버에서 거절한다(화면에서 숨기는 것만으로 막지 않는다).
+ * 이후 수정은 정산권한 보유자·마스터 관리자만 한다(app/admin/teacher-payout-accounts-actions.ts).
+ * 저장은 DB 함수(save_teacher_payout_account)가 암호화·이력을 한 트랜잭션으로 처리하며, 같은 잠금 규칙을 DB에서도 강제한다.
+ */
 export async function saveMyPayoutAccountAction(
   input: PayoutAccountInput
 ): Promise<SavePayoutAccountResult> {
   const { userId } = await requireTeacherUser();
 
-  const accountHolderName = input.accountHolderName.trim();
-  const bankName = input.bankName.trim();
-  const accountNumber = input.accountNumber.trim();
-  const currency = (input.currency || "KRW").trim().toUpperCase();
-  if (!accountHolderName) return { status: "invalid", message: "Please enter the account holder name." };
-  if (!bankName) return { status: "invalid", message: "Please enter the bank name." };
-  if (accountNumber.replace(/\D/g, "").length < 4) {
-    return { status: "invalid", message: "Please enter a valid account number (at least 4 digits)." };
-  }
-  if (!/^[A-Z]{3}$/.test(currency)) {
-    return { status: "invalid", message: "The currency code must be 3 letters (e.g. KRW)." };
-  }
+  const validated = validatePayoutAccountInput(input);
+  if (!validated.ok) return { status: "invalid", message: validated.message };
+  const v = validated.value;
 
   const admin = createAdminClient();
 
-  // P4-2 — 실제 송금 요청 이후에는 계좌를 바꿀 수 없다. 돈이 이미 나가는 중인데
-  // 수취 계좌가 바뀌면 어디로 갔는지 설명할 수 없게 된다. 지급이 끝난(paid) 뒤에는
-  // 다음 정산을 위해 다시 바꿀 수 있다 — 막는 것은 "진행 중"인 동안뿐이다.
-  const { data: inFlight, error: inFlightError } = await admin
-    .from("payout_batches")
-    .select("id")
-    .eq("teacher_id", userId)
-    .in("status", ["dispatch_requested", "provider_pending", "processing"])
-    .limit(1);
-  if (inFlightError) throw new Error(inFlightError.message);
-  if (inFlight && inFlight.length > 0) {
-    return {
-      status: "invalid",
-      message: "A transfer is currently in progress, so the account can't be changed right now. Please try again after the payout is complete.",
-    };
-  }
-
   const { data: existing, error: existingError } = await admin
     .from("teacher_payout_accounts")
-    .select("id, account_holder_name, bank_name, account_number_last4, currency, country, swift_or_routing")
+    .select("id")
     .eq("teacher_id", userId)
     .maybeSingle();
   if (existingError) throw new Error(existingError.message);
-
-  const next = {
-    teacher_id: userId,
-    account_holder_name: accountHolderName,
-    bank_name: bankName,
-    account_number: accountNumber,
-    account_number_last4: last4Of(accountNumber),
-    currency,
-    country: input.country?.trim() || null,
-    swift_or_routing: input.swiftOrRouting?.trim() || null,
-    updated_at: new Date().toISOString(),
-    updated_by: userId,
-  };
-
-  const changedFields: string[] = [];
   if (existing) {
-    if (existing.account_holder_name !== next.account_holder_name) changedFields.push("account_holder_name");
-    if (existing.bank_name !== next.bank_name) changedFields.push("bank_name");
-    if (existing.account_number_last4 !== next.account_number_last4) changedFields.push("account_number");
-    if (existing.currency !== next.currency) changedFields.push("currency");
-    if ((existing.country ?? null) !== next.country) changedFields.push("country");
-    if ((existing.swift_or_routing ?? null) !== next.swift_or_routing) changedFields.push("swift_or_routing");
+    return { status: "invalid", message: ACCOUNT_LOCKED_MESSAGE };
   }
 
-  const { error: upsertError } = await admin
-    .from("teacher_payout_accounts")
-    .upsert(next, { onConflict: "teacher_id" });
-  if (upsertError) throw new Error(upsertError.message);
-
-  // 변경 이력은 전체 계좌번호를 복제하지 않는다 — 바뀐 필드 이름과 끝 4자리만.
-  // 계좌번호 자체가 바뀌지 않은 재저장(다른 필드만 수정)도 이력을 남긴다.
-  await admin.from("teacher_payout_account_events").insert({
-    teacher_id: userId,
-    action: existing ? "updated" : "created",
-    actor_id: userId,
-    changed_fields: existing ? changedFields : ["account_holder_name", "bank_name", "account_number", "currency"],
-    previous_last4: (existing?.account_number_last4 as string | undefined) ?? null,
-    new_last4: next.account_number_last4,
+  const { error } = await admin.rpc("save_teacher_payout_account", {
+    p_teacher_id: userId,
+    p_actor_id: userId,
+    p_by_admin: false,
+    p_holder: v.accountHolderName,
+    p_bank: v.bankName,
+    p_number: v.accountNumber,
+    p_currency: v.currency,
+    p_country: v.country,
+    p_swift: v.swiftOrRouting,
   });
+  if (error) {
+    if (/LOCKED/.test(error.message)) return { status: "invalid", message: ACCOUNT_LOCKED_MESSAGE };
+    throw new Error(error.message);
+  }
 
   return {
     status: "saved",
     account: {
-      accountHolderName: next.account_holder_name,
-      bankName: next.bank_name,
-      accountNumberMasked: maskAccountNumber(next.account_number_last4),
-      currency: next.currency,
-      country: next.country,
-      swiftOrRouting: next.swift_or_routing,
-      updatedAt: next.updated_at,
+      accountHolderName: v.accountHolderName,
+      bankName: v.bankName,
+      accountNumberMasked: maskAccountNumber(last4Of(v.accountNumber)),
+      currency: v.currency,
+      country: v.country,
+      swiftOrRouting: v.swiftOrRouting ? maskAccountNumber(last4Of(v.swiftOrRouting)) : null,
+      updatedAt: new Date().toISOString(),
     },
   };
 }

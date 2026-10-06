@@ -8,14 +8,15 @@ import { describe, expect, it, vi, beforeEach } from "vitest";
 type QueryResult = { data: unknown; error: unknown };
 type Call = { table: string; op: "insert" | "upsert"; payload: Record<string, unknown> };
 
-const { adminFromMock, storageFromMock, requireUserMock } = vi.hoisted(() => ({
+const { adminFromMock, adminRpcMock, storageFromMock, requireUserMock } = vi.hoisted(() => ({
   adminFromMock: vi.fn(),
+  adminRpcMock: vi.fn(),
   storageFromMock: vi.fn(),
   requireUserMock: vi.fn(),
 }));
 
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ from: adminFromMock, storage: { from: storageFromMock } }),
+  createAdminClient: () => ({ from: adminFromMock, rpc: adminRpcMock, storage: { from: storageFromMock } }),
 }));
 vi.mock("@/lib/auth", () => ({ requireUser: requireUserMock }));
 
@@ -63,6 +64,7 @@ const VALID_INPUT = {
   bankName: "국민은행",
   accountNumber: "110-123-456789",
   currency: "KRW",
+  country: "KR",
 };
 
 beforeEach(() => {
@@ -87,71 +89,50 @@ describe("maskAccountNumber", () => {
   });
 });
 
-describe("saveMyPayoutAccountAction", () => {
-  it("신규 저장 시 전체 계좌번호를 응답에 넣지 않고 created 이력을 남긴다", async () => {
-    setQueue("teacher_payout_accounts", [{ data: null, error: null }, { data: null, error: null }]);
+describe("saveMyPayoutAccountAction — 최초 1회 등록만(이후 교사 수정 차단)", () => {
+  it("신규 등록은 DB 함수(암호화·이력)로 보내고 응답에는 마스킹 값만 담는다", async () => {
+    setQueue("teacher_payout_accounts", [{ data: null, error: null }]);
+    adminRpcMock.mockResolvedValue({ data: { created: true }, error: null });
 
     const result = await saveMyPayoutAccountAction(VALID_INPUT);
 
     expect(result.status).toBe("saved");
     if (result.status === "saved") {
       expect(result.account.accountNumberMasked).toBe("****6789");
-      expect(JSON.stringify(result.account)).not.toContain("110-123-456789");
-      expect(JSON.stringify(result.account)).not.toContain("123456789");
+      expect(JSON.stringify(result.account)).not.toContain("110123456789");
     }
-    const upsert = calls.find((c) => c.table === "teacher_payout_accounts" && c.op === "upsert");
-    expect(upsert?.payload).toMatchObject({ account_number: "110-123-456789", account_number_last4: "6789" });
-    const event = calls.find((c) => c.table === "teacher_payout_account_events");
-    expect(event?.payload).toMatchObject({ action: "created", new_last4: "6789", previous_last4: null });
-    // 이력에는 전체 계좌번호를 복제하지 않는다.
-    expect(JSON.stringify(event?.payload)).not.toContain("110-123-456789");
+    expect(adminRpcMock).toHaveBeenCalledWith(
+      "save_teacher_payout_account",
+      expect.objectContaining({ p_teacher_id: "teacher-1", p_actor_id: "teacher-1", p_by_admin: false, p_number: "110123456789", p_currency: "KRW" })
+    );
+    // 평문 번호를 테이블에 직접 upsert하지 않는다.
+    expect(calls.find((c) => c.op === "upsert")).toBeUndefined();
   });
 
-  it("기존 계좌를 수정하면 바뀐 필드만 이력에 남는다", async () => {
-    setQueue("teacher_payout_accounts", [
-      {
-        data: {
-          id: "a1",
-          account_holder_name: "김선생",
-          bank_name: "신한은행",
-          account_number_last4: "1111",
-          currency: "KRW",
-          country: null,
-          swift_or_routing: null,
-        },
-        error: null,
-      },
-      { data: null, error: null },
-    ]);
-
-    await saveMyPayoutAccountAction(VALID_INPUT);
-
-    const event = calls.find((c) => c.table === "teacher_payout_account_events");
-    expect(event?.payload).toMatchObject({ action: "updated", previous_last4: "1111", new_last4: "6789" });
-    expect(event?.payload.changed_fields).toEqual(["bank_name", "account_number"]);
-  });
-
-  it("필수값이 비었거나 계좌번호가 짧으면 저장하지 않는다", async () => {
-    const noHolder = await saveMyPayoutAccountAction({ ...VALID_INPUT, accountHolderName: "  " });
-    expect(noHolder).toEqual({ status: "invalid", message: "Please enter the account holder name." });
-
-    const shortNumber = await saveMyPayoutAccountAction({ ...VALID_INPUT, accountNumber: "12" });
-    expect(shortNumber.status).toBe("invalid");
-
-    expect(calls).toEqual([]);
-  });
-
-  it("송금이 진행 중인 정산 건이 있으면 계좌를 바꿀 수 없다", async () => {
-    // P4-2: 송금 요청 이후에는 수취 계좌를 바꿀 수 없다(돈이 나가는 중에 계좌가
-    // 바뀌면 어디로 갔는지 설명할 수 없다). 지급 완료 뒤에는 다시 바꿀 수 있다.
-    setQueue("payout_batches", [{ data: [{ id: "b1" }], error: null }]);
+  it("이미 등록돼 있으면 서버에서 거절한다(화면 숨김과 무관) — DB 함수도 호출하지 않는다", async () => {
+    setQueue("teacher_payout_accounts", [{ data: { id: "a1" }, error: null }]);
 
     const result = await saveMyPayoutAccountAction(VALID_INPUT);
 
-    expect(result).toEqual({
+    expect(result).toEqual({ status: "invalid", message: "To change your account details, contact ALTON staff." });
+    expect(adminRpcMock).not.toHaveBeenCalled();
+  });
+
+  it("동시 요청으로 DB가 LOCKED를 돌려줘도 같은 메시지로 거절한다", async () => {
+    setQueue("teacher_payout_accounts", [{ data: null, error: null }]);
+    adminRpcMock.mockResolvedValue({ data: null, error: { message: "LOCKED: 계좌 정보는 최초 등록 이후 …" } });
+    expect(await saveMyPayoutAccountAction(VALID_INPUT)).toEqual({
       status: "invalid",
-      message: "A transfer is currently in progress, so the account can't be changed right now. Please try again after the payout is complete.",
+      message: "To change your account details, contact ALTON staff.",
     });
+  });
+
+  it("통화별 검증: 필수값 누락·KRW 자리수·USD ABA 라우팅이 틀리면 저장하지 않는다", async () => {
+    expect(await saveMyPayoutAccountAction({ ...VALID_INPUT, accountHolderName: "  " })).toEqual({ status: "invalid", message: "Please enter the account holder name." });
+    expect((await saveMyPayoutAccountAction({ ...VALID_INPUT, accountNumber: "12" })).status).toBe("invalid");
+    const usdNoRouting = await saveMyPayoutAccountAction({ ...VALID_INPUT, currency: "USD", country: "US", accountNumber: "000123456789" });
+    expect(usdNoRouting).toEqual({ status: "invalid", message: "A U.S. account needs a 9-digit ABA routing number." });
+    expect(adminRpcMock).not.toHaveBeenCalled();
     expect(calls).toEqual([]);
   });
 
@@ -163,7 +144,7 @@ describe("saveMyPayoutAccountAction", () => {
       },
     });
     await expect(saveMyPayoutAccountAction(VALID_INPUT)).rejects.toThrow("Only teacher accounts");
-    expect(calls).toEqual([]);
+    expect(adminRpcMock).not.toHaveBeenCalled();
   });
 });
 

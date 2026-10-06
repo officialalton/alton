@@ -34,7 +34,7 @@ import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 const SUBTABS = [
   { id: "summary", label: "Overview" },
   { id: "history", label: "Payout History" },
-  { id: "account", label: "Bank Account" },
+  { id: "account", label: "Payout Account" },
   { id: "documents", label: "Documents" },
 ] as const;
 type SubtabId = (typeof SUBTABS)[number]["id"];
@@ -121,7 +121,7 @@ function TotalsRow({ totals, emptyLabel }: { totals: Record<string, number>; emp
   );
 }
 
-export default function SettlementTab() {
+export default function SettlementTab({ onAccountSaved }: { onAccountSaved?: () => void } = {}) {
   const tz = useViewerTimezone();
   const [settlement, setSettlement] = useState<TeacherSettlement | null>(null);
   const [account, setAccount] = useState<MaskedPayoutAccount | null>(null);
@@ -177,6 +177,15 @@ export default function SettlementTab() {
         Review payouts for completed lessons and upcoming amounts, and manage your bank account and documents.
       </p>
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
+
+      {!account && subtab !== "account" && (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border-[1.5px] border-red/40 bg-red/5 px-4 py-3" data-testid="account-setup-banner">
+          <p className="text-[13px] font-semibold text-ink">Set up your payout account so we can pay you.</p>
+          <button type="button" onClick={() => setSubtab("account")} className="text-[12.5px] font-bold text-white bg-red rounded-lg px-3 py-1.5">
+            Set up payout account
+          </button>
+        </div>
+      )}
 
       {notices.length > 0 && (
         <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4" data-testid="payout-notices">
@@ -416,7 +425,15 @@ export default function SettlementTab() {
       </section>
       )}
 
-      {subtab === "account" && <PayoutAccountCard account={account} onSaved={setAccount} />}
+      {subtab === "account" && (
+        <PayoutAccountCard
+          account={account}
+          onSaved={(a) => {
+            setAccount(a);
+            onAccountSaved?.();
+          }}
+        />
+      )}
       {subtab === "documents" && (
         <DocumentsCard
           documents={documents ?? []}
@@ -458,123 +475,131 @@ function PayoutAccountCard({
   onSaved: (a: MaskedPayoutAccount) => void;
 }) {
   const tz = useViewerTimezone();
-  const [editing, setEditing] = useState(false);
-  // P4-2(UAT 후속) — 통화가 미리 채워져 있으면 "이미 저장된 값"처럼 보인다는
-  // 피드백에 따라, 입력은 라벨이 붙은 필드로 나누고 통화는 선택으로 바꾼다.
-  const [form, setForm] = useState({ accountHolderName: "", bankName: "", accountNumber: "", currency: "KRW" });
+  // 정책(2026-10-06): 교사는 최초 1회만 등록한다. 저장 뒤에는 읽기 전용이고 수정은 ALTON 직원만 한다
+  // (서버 액션·DB 함수도 같은 규칙으로 막는다 — 화면에서 숨기는 것만으로 끝내지 않는다).
+  const [form, setForm] = useState({
+    accountHolderName: "",
+    bankName: "",
+    accountNumber: "",
+    swiftOrRouting: "",
+    currency: "KRW",
+    country: "KR",
+  });
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  if (account) {
+    return (
+      <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
+        <div className="text-[13px] font-bold text-ink mb-2">Payout account</div>
+        <div className="text-[12px] text-grey-500 space-y-0.5">
+          <div>Account holder: {account.accountHolderName}</div>
+          <div>Bank: {account.bankName}</div>
+          <div data-testid="account-masked">Account number: {account.accountNumberMasked}</div>
+          {account.swiftOrRouting && <div>SWIFT / routing: {account.swiftOrRouting}</div>}
+          <div>Currency: {account.currency}</div>
+          {account.country && <div>Country: {account.country}</div>}
+          <div className="text-[11.5px] text-grey-400">Last updated {fmtDateTime(account.updatedAt, undefined, tz)}</div>
+        </div>
+        <p className="text-[11.5px] text-grey-500 mt-2" data-testid="account-locked-note">
+          To change your account details, contact ALTON staff.
+        </p>
+      </section>
+    );
+  }
+
+  const usd = form.currency === "USD";
   return (
-    <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
-      <div className="text-[13px] font-bold text-ink mb-2">Payout bank account</div>
-      {!editing ? (
-        <>
-          {account ? (
-            <div className="text-[12px] text-grey-500 space-y-0.5">
-              <div>Account holder: {account.accountHolderName}</div>
-              <div>Bank: {account.bankName}</div>
-              <div data-testid="account-masked">Account number: {account.accountNumberMasked}</div>
-              <div>Currency: {account.currency}</div>
-              <div className="text-[11.5px] text-grey-400">
-                Last updated {fmtDateTime(account.updatedAt, undefined, tz)}
-              </div>
-            </div>
-          ) : (
-            <p className="text-[12px] text-grey-500" data-testid="account-empty">
-              No payout bank account on file yet.
-            </p>
-          )}
+    <section className="border-[1.5px] border-red/40 rounded-xl px-5 py-4 mb-4" data-testid="account-setup">
+      <div className="text-[13px] font-bold text-ink mb-1">Set up your payout account</div>
+      <p className="text-[12px] text-grey-500 mb-3" data-testid="account-empty">
+        Payouts are made by bank transfer. Please enter your bank account once; after you save it, only ALTON staff can change it.
+      </p>
+      <div className="space-y-2">
+        {error && <p className="text-[12px] text-red" data-testid="account-error">{error}</p>}
+        <Field label="Account holder">
+          <input
+            value={form.accountHolderName}
+            onChange={(e) => setForm((f) => ({ ...f, accountHolderName: e.target.value }))}
+            placeholder="Exactly as shown on the account"
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+          />
+        </Field>
+        <Field label="Bank name">
+          <input
+            value={form.bankName}
+            onChange={(e) => setForm((f) => ({ ...f, bankName: e.target.value }))}
+            placeholder="e.g. Woori Bank"
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+          />
+        </Field>
+        <Field label="Currency">
+          <select
+            value={form.currency}
+            onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value, country: e.target.value === "USD" ? "US" : "KR" }))}
+            aria-label="Currency"
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px] bg-white"
+          >
+            <option value="KRW">KRW (Korean won)</option>
+            <option value="USD">USD (US dollar)</option>
+          </select>
+        </Field>
+        <Field label="Country of the bank account">
+          <input
+            value={form.country}
+            onChange={(e) => setForm((f) => ({ ...f, country: e.target.value }))}
+            placeholder="e.g. KR or US"
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+          />
+        </Field>
+        <Field label="Account number" hint={usd ? "Digits only (4–17)" : "Digits only (8–16); hyphens are fine, e.g. 1002-123-456789"}>
+          <input
+            value={form.accountNumber}
+            onChange={(e) => setForm((f) => ({ ...f, accountNumber: e.target.value }))}
+            placeholder="Full account number"
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+          />
+        </Field>
+        <Field label={usd ? "ABA routing number" : "SWIFT code (optional)"} hint={usd ? "9 digits" : undefined}>
+          <input
+            value={form.swiftOrRouting}
+            onChange={(e) => setForm((f) => ({ ...f, swiftOrRouting: e.target.value }))}
+            placeholder={usd ? "9-digit routing number" : "e.g. CZNBKRSE"}
+            className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
+          />
+        </Field>
+        <p className="text-[11px] text-grey-400">
+          For security, only the last 4 digits are shown after you save. To change them later, contact ALTON staff.
+        </p>
+        <div className="flex gap-3 mt-1">
           <button
             type="button"
-            onClick={() => {
-              setEditing(true);
+            disabled={busy}
+            aria-busy={busy}
+            data-testid="account-save"
+            className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
+            onClick={async () => {
+              setBusy(true);
               setError(null);
-              setForm({
-                accountHolderName: account?.accountHolderName ?? "",
-                bankName: account?.bankName ?? "",
-                accountNumber: "",
-                currency: account?.currency ?? "KRW",
-              });
-            }}
-            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink mt-2"
-          >
-            {account ? "Edit" : "Add account"}
-          </button>
-        </>
-      ) : (
-        <div className="space-y-2">
-          {error && <p className="text-[12px] text-red">{error}</p>}
-          <Field label="Account holder">
-            <input
-              value={form.accountHolderName}
-              onChange={(e) => setForm((f) => ({ ...f, accountHolderName: e.target.value }))}
-              placeholder="Exactly as shown on the account"
-              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-            />
-          </Field>
-          <Field label="Bank name">
-            <input
-              value={form.bankName}
-              onChange={(e) => setForm((f) => ({ ...f, bankName: e.target.value }))}
-              placeholder="e.g. Woori Bank"
-              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-            />
-          </Field>
-          <Field label="Account number" hint="Use hyphens (-) and no spaces, e.g. 1002-123-456789">
-            <input
-              value={form.accountNumber}
-              onChange={(e) => setForm((f) => ({ ...f, accountNumber: e.target.value }))}
-              placeholder="Full account number"
-              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
-            />
-          </Field>
-          <Field label="Currency">
-            <select
-              value={form.currency}
-              onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))}
-              aria-label="Currency"
-              className="w-full border border-grey-200 rounded px-2 py-1 text-[12px] bg-white"
-            >
-              <option value="KRW">KRW (Korean won)</option>
-              <option value="USD">USD (US dollar)</option>
-            </select>
-          </Field>
-          <p className="text-[11px] text-grey-400">
-            For security, only the last 4 digits of a saved account number are shown. Re-enter the full number when editing.
-          </p>
-          <div className="flex gap-3 mt-1">
-            <button
-              type="button"
-              disabled={busy}
-              aria-busy={busy}
-              className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
-              onClick={async () => {
-                setBusy(true);
-                setError(null);
-                try {
-                  const result = await saveMyPayoutAccountAction(form);
-                  if (result.status === "invalid") {
-                    setError(result.message);
-                  } else {
-                    onSaved(result.account);
-                    setEditing(false);
-                  }
-                } catch (e) {
-                  setError(e instanceof Error ? e.message : String(e));
-                } finally {
-                  setBusy(false);
+              try {
+                const result = await saveMyPayoutAccountAction(form);
+                if (result.status === "invalid") {
+                  setError(result.message);
+                } else {
+                  setForm((f) => ({ ...f, accountNumber: "", swiftOrRouting: "" }));
+                  onSaved(result.account);
                 }
-              }}
-            >
-              {busy ? "Saving…" : "Save"}
-            </button>
-            <button type="button" onClick={() => setEditing(false)} className="text-[12px] font-semibold text-grey-500">
-              Cancel
-            </button>
-          </div>
+              } catch (e) {
+                setError(e instanceof Error ? e.message : String(e));
+              } finally {
+                setBusy(false);
+              }
+            }}
+          >
+            {busy ? "Saving…" : "Save payout account"}
+          </button>
         </div>
-      )}
+      </div>
     </section>
   );
 }
