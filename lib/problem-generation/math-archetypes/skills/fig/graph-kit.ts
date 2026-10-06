@@ -95,3 +95,86 @@ export const convNote = (s: LinGraph) => `Note that 1 ${sing(s.t.xu)} = ${s.t.co
 export function gInst(rng: Rng, d: Draft, fig: unknown): Instance {
   return figInst(rng, d.correct !== undefined && d.correct >= 0 && d.wrongs ? { ...d, wrongs: d.wrongs.filter((w) => w.v >= 0) } : d, fig);
 }
+
+// ───────────────────────── 두 직선(연립·교점) 그래프 ─────────────────────────
+export type PairTopic = { x: string; xa: string; xu: string; ya: string; yu: string; A: string; B: string; what: string };
+export const PAIR_TOPICS: PairTopic[] = [
+  { x: "the number of months", xa: "Months", xu: "months", ya: "total cost", yu: "dollars", A: "Plan A", B: "Plan B", what: "the total cost of two phone plans" },
+  { x: "the number of weeks", xa: "Weeks", xu: "weeks", ya: "savings", yu: "dollars", A: "Maya", B: "Theo", what: "the savings of two friends" },
+  { x: "the number of days", xa: "Days", xu: "days", ya: "height", yu: "centimeters", A: "Plant P", B: "Plant Q", what: "the heights of two plants" },
+  { x: "the number of miles driven", xa: "Distance", xu: "miles", ya: "rental charge", yu: "dollars", A: "Company R", B: "Company S", what: "the charges of two car rental companies" },
+  { x: "the number of visits", xa: "Visits", xu: "visits", ya: "total fee", yu: "dollars", A: "Gym A", B: "Gym B", what: "the total fees at two gyms" },
+  { x: "the number of minutes", xa: "Time", xu: "minutes", ya: "distance from home", yu: "meters", A: "Runner 1", B: "Runner 2", what: "the distances of two runners from home" },
+  { x: "the number of hours worked", xa: "Hours worked", xu: "hours", ya: "pay", yu: "dollars", A: "Job A", B: "Job B", what: "the pay for two part-time jobs" },
+  { x: "the number of weeks", xa: "Weeks", xu: "weeks", ya: "pages read", yu: "pages", A: "Reader 1", B: "Reader 2", what: "the pages read by two students" },
+  { x: "the number of guests", xa: "Guests", xu: "guests", ya: "catering cost", yu: "dollars", A: "Caterer A", B: "Caterer B", what: "the costs of two caterers" },
+  { x: "the number of months", xa: "Months", xu: "months", ya: "members", yu: "members", A: "Club A", B: "Club B", what: "the membership of two clubs" },
+  { x: "the number of uses", xa: "Uses", xu: "uses", ya: "total cost", yu: "dollars", A: "Pass A", B: "Pass B", what: "the costs of two transit passes" },
+  { x: "the number of seconds", xa: "Time", xu: "seconds", ya: "altitude", yu: "meters", A: "Balloon A", B: "Balloon B", what: "the altitudes of two weather balloons" },
+  { x: "the number of lessons", xa: "Lessons", xu: "lessons", ya: "total charge", yu: "dollars", A: "Studio A", B: "Studio B", what: "the charges of two music studios" },
+  { x: "the number of months", xa: "Months", xu: "months", ya: "subscribers", yu: "thousands", A: "Channel A", B: "Channel B", what: "the subscribers of two video channels" },
+  { x: "the number of shirts printed", xa: "Shirts", xu: "shirts", ya: "order cost", yu: "dollars", A: "Printer A", B: "Printer B", what: "the order costs at two print shops" },
+  { x: "the number of weeks", xa: "Weeks", xu: "weeks", ya: "weight", yu: "pounds", A: "Calf A", B: "Calf B", what: "the weights of two calves" },
+  { x: "the number of hours", xa: "Time", xu: "hours", ya: "distance traveled", yu: "miles", A: "Bus A", B: "Bus B", what: "the distances traveled by two buses" },
+  { x: "the number of years", xa: "Years", xu: "years", ya: "tree height", yu: "feet", A: "Oak", B: "Maple", what: "the heights of two trees" },
+  { x: "the number of tickets", xa: "Tickets", xu: "tickets", ya: "total price", yu: "dollars", A: "Theater A", B: "Theater B", what: "the total ticket prices at two theaters" },
+  { x: "the number of hours", xa: "Time", xu: "hours", ya: "pool water", yu: "hundreds of gallons", A: "Pool A", B: "Pool B", what: "the water in two pools being filled" },
+];
+export type LinePair = { t: PairTopic; X: number; xStep: number; yMax: number; S: number; m1: number; b1: number; m2: number; b2: number; xi: number; yi: number; fig: PlaneFig };
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+export type PairOpts = {
+  /** 교점이 그림 안(격자점)인가 — 기본은 그림 오른쪽 밖(연장해야 만남). */
+  inside?: boolean;
+  /** 교점의 x 가 정수가 아님(그림 밖만) — 올림 문항용. */
+  fracX?: boolean;
+  /** 두 직선이 평행(기울기 같음, 절편 다름) */
+  parallel?: boolean;
+  /** 두 직선이 같은 직선(겹침) */
+  same?: boolean;
+  topic?: PairTopic;
+};
+/**
+ * 직선 둘의 그래프. 두 직선은 모두 y 절편(0, b)과 그림 안의 격자점 하나를 지나 눈금으로 읽을 수 있다(점은 찍지 않는다).
+ * 직선 1 은 기울기가 크고 처음 값이 작아 교점 이후 위로 올라선다. 직선 라벨(이름)은 지문이 가리킬 때만 남는다(label-rule).
+ */
+export function makeLinePair(rng: Rng, o: PairOpts = {}): LinePair {
+  for (let tr = 0; tr < 800; tr++) {
+    const t = o.topic ?? rng.pick(PAIR_TOPICS); const xStep = rng.pick([1, 1, 2]); const nx = rng.int(5, 8); const X = xStep * nx; const S = rng.pick([5, 10, 10, 20]);
+    let m1 = rng.int(3, 12), m2 = rng.int(1, m1 - 1), b1 = rng.int(0, 5) * S, b2: number, xi: number;
+    if (o.same) { m2 = m1; b2 = b1; xi = NaN; }
+    else if (o.parallel) { m2 = m1; b2 = b1 + rng.int(1, 4) * S; xi = NaN; }
+    else {
+      xi = o.inside ? xStep * rng.int(2, nx - 1) : (o.fracX ? X + rng.int(1, 8) + 0.5 : X + rng.int(1, 8)); b2 = b1 + (m1 - m2) * xi;
+      if (!Number.isInteger(b2) && !o.fracX) continue; if (o.fracX) { b2 = Math.round(b2 / S) * S; xi = (b2 - b1) / (m1 - m2); if (Number.isInteger(xi) || b2 <= b1) continue; }
+    }
+    if (b2 % S !== 0 || b2 < 0) continue;
+    const v = [b1 + m1 * X, b2 + m2 * X]; const top = Math.max(...v, o.inside ? m1 * xi + b1 : 0); const yMax = Math.ceil((top + 1) / S) * S; if (yMax / S < 4 || yMax / S > 9) continue;
+    const yi = o.same || o.parallel ? NaN : m1 * xi + b1; if (o.inside && yi % S !== 0) continue;
+    const second = (m: number, b: number): [number, number] | null => { for (let i = nx; i >= 1; i--) { const x = i * xStep, y = b + m * x; if (y % S === 0 && y <= yMax) return [x, y]; } return null; };
+    const p1 = second(m1, b1), p2 = second(m2, b2); if (!p1 || !p2) continue;
+    if (!o.inside && !o.same && !o.parallel && p1[0] >= xi) continue;
+    const fig: PlaneFig = {
+      type: "plane", axes: { x: { min: 0, max: X, step: xStep, title: axisTitle(t.xa, t.xu) }, y: { min: 0, max: yMax, step: S, title: axisTitle(cap(t.ya), t.yu) } },
+      objects: [{ id: "A1", kind: "line", through: [[0, b1], p1], label: t.A }, { id: "B1", kind: "line", through: [[0, b2], p2], label: t.B }],
+    };
+    return { t, X, xStep, yMax, S, m1, b1, m2, b2, xi, yi, fig };
+  }
+  throw new GenFail("두 직선 그래프 장면 표집 실패");
+}
+/** FIGURE(plane)에서 두 직선(objects[0], [1])의 기울기·절편을 읽는다. 변수: m1, b1, m2, b2. 교점은 호출 쪽이 필요하면 계산한다. */
+export const PAIR_JS = "const Ls=FIGURE.objects.filter(o=>o.kind==='line'); if (Ls.length!==2) throw new Error('직선 2개 아님'); const fit=(L)=>{const p=L.through[0], q=L.through[1]; const m=(q[1]-p[1])/(q[0]-p[0]); return [m, p[1]-m*p[0]];}; const [m1,b1]=fit(Ls[0]), [m2,b2]=fit(Ls[1]);\n";
+/** 위에 더해: m1 ≠ m2 를 요구하고 교점(xi, yi)을 계산한다. */
+export const PAIR_X_JS = `${PAIR_JS}if (m1===m2) throw new Error('평행'); const xi=(b2-b1)/(m1-m2), yi=m1*xi+b1;\n`;
+export const pairIntro = (rng: Rng, s: LinePair) => rng.pick([
+  `The graph shows ${s.t.what} for several values of ${s.t.x}. Each relationship is linear.`,
+  `The graph shown compares ${s.t.what}. For each, the relationship with ${s.t.x} is linear.`,
+  `Two linear relationships are shown in the graph: ${s.t.what} as ${s.t.x} varies.`,
+  `A report tracked ${s.t.what}. The graph shown gives both relationships, and both change linearly with ${s.t.x}.`,
+  `In the graph shown, ${s.t.what} change at constant rates as ${s.t.x} increases.`,
+]);
+export const ifCont = (rng: Rng) => rng.pick(["If both relationships continue", "Assuming the linear patterns continue", "If the lines in the graph are extended", "Extending both relationships"]);
+export const pairRead = (s: LinePair): [string, string][] => [
+  [`${s.t.A}: 그래프에서 y 절편 ${s.b1} 과 격자점을 읽어 기울기 ${s.m1} 을 구한다.`, `${s.t.A}: starting value and slope from the graph.`],
+  [`${s.t.B}: 그래프에서 y 절편 ${s.b2} 과 격자점을 읽어 기울기 ${s.m2} 를 구한다.`, `${s.t.B}: starting value and slope from the graph.`],
+  [`${s.m1}x + ${s.b1} = ${s.m2}x + ${s.b2} 로 놓는다.`, "Set the two expressions equal."],
+];

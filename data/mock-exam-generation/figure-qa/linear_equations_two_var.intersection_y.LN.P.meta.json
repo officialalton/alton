@@ -1,0 +1,41 @@
+{
+ "itemId": "linear_equations_two_var.intersection_y.LN.P",
+ "generatedAt": "2026-10-06T02:23:05.633Z",
+ "codeHash": "357916825615ff33be03a5657c83b0ce24161257777f55c64be6cd5ccb235c16",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_two_var.intersection_y.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_two_var.intersection_y.LN.P.png",
+   "mobileFile": "linear_equations_two_var.intersection_y.LN.P.m375.png",
+   "archetypeId": "l2.intersection_y.LN.P.chain2",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The graph shows the heights of two trees for several values of the number of years. Each relationship is linear.",
+   "question": "Extending both relationships, what will the tree height, in feet, be at the moment Oak and Maple are equal?",
+   "options": [
+    "20",
+    "10",
+    "80",
+    "88"
+   ],
+   "correctIndex": 2,
+   "answer": "80",
+   "explanation": "(1) Oak: 그래프에서 y 절편 0 과 격자점을 읽어 기울기 8 을 구한다. (2) Maple: 그래프에서 y 절편 60 과 격자점을 읽어 기울기 2 를 구한다. (3) 8x + 0 = 2x + 60 로 놓는다. (4) x = 10 이다. (5) y = 8·10 + 0 = 80 이다. (6) 확인: 2·10 + 60 = 80 이다. 따라서 정답은 80이다.",
+   "structuralIssues": []
+  }
+ ]
+}

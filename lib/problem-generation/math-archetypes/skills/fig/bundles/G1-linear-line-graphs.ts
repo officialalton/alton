@@ -6,5 +6,7 @@ import { ITEM as lfSlope } from "../items/linear_functions.slope_from_two_points
 import { ITEM as lfInterpSlope } from "../items/linear_functions.interpret_slope.LN.P";
 import { ITEM as lfInterpIntercept } from "../items/linear_functions.interpret_intercept.LN.P";
 import { ITEM as lfConstruct } from "../items/linear_functions.construct_equation_from_graph.LN.P";
+import { ITEM as l2IntersectX } from "../items/linear_equations_two_var.intersection_x.LN.P";
+import { ITEM as l2IntersectY } from "../items/linear_equations_two_var.intersection_y.LN.P";
 
-export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct];
+export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct, ...l2IntersectX, ...l2IntersectY];

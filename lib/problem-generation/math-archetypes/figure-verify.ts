@@ -56,8 +56,8 @@ export function checkFigureBinding(inst: Instance): string[] {
 }
 
 const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series", "through", "at", "params"]);
-export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell";
-export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell"];
+export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell" | "line";
+export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell", "line"];
 const isPair = (p: unknown): p is [number, number] => Array.isArray(p) && p.length === 2 && p.every((n) => typeof n === "number");
 /**
  * 돌연변이: 자료 수치(표 칸·점 좌표·계열 값·추세선)를 변조한다. 축·눈금 값은 건드리지 않는다.
@@ -85,6 +85,19 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
     if (o && Array.isArray(o.cells)) { const cells = o.cells.map((r) => [...r]); cells[0][0] += 1; return { ...o, cells }; }
     if (o && Array.isArray(o.choices)) return { ...o, choices: o.choices.map((c, i) => (i === 0 ? tamperFigure(c, "cell") : c)) };
     if (o && Array.isArray(o.figures)) return { ...o, figures: o.figures.map((f, i) => (i === 0 ? { ...f, spec: tamperFigure(f.spec, "cell") } : f)) };
+    return fig;
+  }
+  if (mode === "line") {
+    // 좌표평면: 첫 직선(line)의 둘째 통과점 y 를 +1 — 두 점이 한 직선을 정하므로 평행이동·배율에 불변인 값(기울기·교점 x 의 차 등)도 바뀐다. 선택지·복수 자료는 첫 자식만.
+    const shift = (o: { objects?: Record<string, unknown>[] }) => {
+      if (!o || !Array.isArray(o.objects)) return null; const li = o.objects.findIndex((q) => q.kind === "line" && Array.isArray(q.through)); if (li < 0) return null;
+      const ln = o.objects[li] as { through: [number, number][] }; const old = ln.through[1]; if (!isPair(old)) return null;
+      return { ...o, objects: o.objects.map((q, i) => (i === li ? { ...q, through: [ln.through[0], [old[0], old[1] + 1]] } : q)) };
+    };
+    const o = fig as { objects?: Record<string, unknown>[]; choices?: unknown[]; figures?: { spec: unknown }[] } | null;
+    const direct = o ? shift(o as { objects?: Record<string, unknown>[] }) : null; if (direct) return direct;
+    if (o && Array.isArray(o.choices)) return { ...o, choices: o.choices.map((c, i) => (i === 0 ? tamperFigure(c, "line") : c)) };
+    if (o && Array.isArray(o.figures)) return { ...o, figures: o.figures.map((f, i) => (i === 0 ? { ...f, spec: tamperFigure(f.spec, "line") } : f)) };
     return fig;
   }
   if (mode === "swap") {
