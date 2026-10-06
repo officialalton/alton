@@ -17,6 +17,7 @@ export default function ConsultForm() {
   const [email, setEmail] = useState("");
   const [studentGrade, setStudentGrade] = useState("");
   const [concerns, setConcerns] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -35,6 +36,10 @@ export default function ConsultForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
+    if (!agreed) {
+      setError("Please agree to the collection and use of your personal information.");
+      return;
+    }
     setSubmitting(true);
     try {
       await submitHomepageConsultRequest({
@@ -123,10 +128,17 @@ export default function ConsultForm() {
         />
       </Field>
 
-      <p className="mt-5 text-[12.5px] text-grey-500">
-        Your name, phone, and email are used only for this consultation and are deleted after a
-        retention period once it ends.
-      </p>
+      <label className="flex items-start gap-2.5 mt-5 text-[12.5px] text-grey-500">
+        <input
+          type="checkbox"
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+          className="mt-0.5"
+        />
+        I agree to the collection and use of my personal information for this consultation.
+        (Name, phone, and email are used only for the consultation and deleted after a
+        retention period once it ends.)
+      </label>
 
       {error && <p className="text-[13px] text-red mt-3">{error}</p>}
 

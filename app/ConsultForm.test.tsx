@@ -19,18 +19,23 @@ function fillRequiredFields() {
   fireEvent.change(screen.getByLabelText("Email"), { target: { value: "minji@example.com" } });
 }
 
-// 2026-10-06: 개인정보 동의 체크박스 제거 — 기존 호출부 호환용 no-op.
-function agree() {}
+function agree() {
+  fireEvent.click(screen.getByText(/I agree to the collection and use of my personal information/).closest("label")!.querySelector("input")!);
+}
 
 describe("ConsultForm", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("동의 체크박스가 없고 안내 문구만 보인다", () => {
+  it("동의 없이 제출하면 에러 문구를 보여주고 서버 액션을 호출하지 않는다", async () => {
     render(<ConsultForm />);
-    expect(screen.queryByRole("checkbox")).toBeNull();
-    expect(screen.getByText(/used only for this consultation/)).toBeInTheDocument();
+    fillRequiredFields();
+    fireEvent.click(screen.getByText("Request a consultation"));
+    expect(
+      await screen.findByText("Please agree to the collection and use of your personal information.")
+    ).toBeInTheDocument();
+    expect(actions.submitHomepageConsultRequest).not.toHaveBeenCalled();
   });
 
   it("필수 항목을 채우고 동의 후 제출하면 서버 액션이 호출되고 완료 문구가 보인다(슬롯 선택 없음)", async () => {
