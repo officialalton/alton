@@ -1,0 +1,42 @@
+{
+ "itemId": "lines_angles_triangles.similar_triangles.TN.P",
+ "generatedAt": "2026-10-06T07:32:59.410Z",
+ "codeHash": "449dbc9f8ad1fbf16ec7ea95d53ed736c21c638a06ff3a749d9ed30a61e9b153",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/triangle-nested.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.similar_triangles.TN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.similar_triangles.TN.P.png",
+   "mobileFile": "lines_angles_triangles.similar_triangles.TN.P.m375.png",
+   "archetypeId": "lat.similar_triangles.TN.P.chain2",
+   "seed": 11,
+   "signature": "triangle_nested:parallel",
+   "stimulus": "A carpenter cuts a brace for a triangular roof. Triangle $GUS$ is shown with a segment $\\overline{KV}$ drawn parallel to $\\overline{US}$; its endpoints lie on the other two sides.",
+   "question": "What is the value of $x$?",
+   "options": [
+    "18",
+    "9",
+    "12",
+    "3"
+   ],
+   "correctIndex": 1,
+   "answer": "9",
+   "explanation": "(1) 그림에서 AD, DB, DE 길이 라벨을 읽는다. (2) AB = AD + DB = 6 + 3 = 9 이다. (3) DE ∥ BC 이므로 삼각형 GKV 와 삼각형 GUS 는 닮음이다. (4) AD/AB = DE/BC 이므로 6/9 = 6/x 이다. (5) x = 6 × 9 ÷ 6 = 9 이다. 따라서 정답은 9이다.",
+   "structuralIssues": []
+  }
+ ]
+}

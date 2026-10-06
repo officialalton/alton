@@ -1,0 +1,61 @@
+{
+ "itemId": "area_volume.similar_solids_scale.SO.B",
+ "generatedAt": "2026-10-06T07:32:59.444Z",
+ "codeHash": "aa7b1cc5119fa0f20ee03444958d308d00974658ba5bbb180d58dc5dd5f7ce6c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-bundle.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.similar_solids_scale.SO.B.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.similar_solids_scale.SO.B.png",
+   "mobileFile": "area_volume.similar_solids_scale.SO.B.m375.png",
+   "archetypeId": "av.similar_solids_scale.SO.B.repr_shift",
+   "seed": 11,
+   "signature": "figure_bundle[solid:cylinder>solid:cylinder]",
+   "stimulus": "A student studies solids in a geometry class. A cylinder is drawn first, with the lengths of its dimensions labeled, followed by four candidate solids. The first figure is the given solid, and four candidate solids are shown as choices. Look at which edges and segments are labeled in the figure before you decide which relationship between them to use. The scale factor from the given cylinder to the cylinder in the correct choice is 2.",
+   "question": "Which one of the four solids is similar to the given cylinder?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 기준 입체(cylinder)의 치수 라벨을 읽는다. (2) 치수는 4, 8 이다. (3) 모든 치수에 2 를 곱하면 8, 16 이다. (4) 일부 치수만 바꾸거나 일정한 수를 더한 입체는 닮음이 아니다. (5) 한 치수만 어긋난 입체도 오답이다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.similar_solids_scale.SO.B~compose_kind.png",
+   "mobileFile": "area_volume.similar_solids_scale.SO.B~compose_kind.m375.png",
+   "archetypeId": "av.similar_solids_scale.SO.B.compose_kind",
+   "seed": 11,
+   "signature": "figure_bundle[solid:cone>solid:cone]",
+   "stimulus": "A teacher draws a solid on the board. In the given figure, the dimensions of a cone are labeled in one unit. The first figure is the given solid, and four candidate solids are shown as choices. Read each label in the figure as a length in the same unit, and then work out the quantity asked for below. The volume of the cone in the correct choice is 8 times the volume of the given cone.",
+   "question": "Which cone below has the same shape as the given one, only larger or smaller?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) 기준 입체(cone)의 치수 라벨을 읽는다. (2) 부피의 비 8 = (닮음비)³ 이므로 닮음비 = ∛8 = 2 이다. (3) 모든 치수에 2 를 곱하면 10, 14 이다. (4) 부피의 비 8 을 닮음비로 쓰면 치수가 40, 56 로 너무 커진다. (5) 닮음비의 제곱 4 도 오답이다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

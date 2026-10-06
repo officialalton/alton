@@ -11,7 +11,7 @@ import type { Rng } from "../../../rng";
 const pos = (ws: ReturnType<typeof W>[]) => ws.filter((w) => Number.isFinite(w.v) && w.v > 0);
 const arcFig = (rng: Rng, theta: number, o: { r?: number; d?: number; label?: string; a0?: number } = {}): { f: CircFig; A: string; B: string } => {
   const [A, B] = circNames(rng, 2); const a0 = o.a0 ?? rng.pick([10, 25, 40, 100, 150, 200, 250]); const lab = o.label ?? `${theta}°`;
-  return { A, B, f: { type: "circle", points: arcPts(A, B, a0, theta), ...(o.r !== undefined ? { radii: [{ to: A, label: String(o.r) }] } : {}), ...(o.d !== undefined ? { chords: [{ between: [A, A], label: "" }].slice(0, 0) } : {}), arcs: [{ from: A, to: B }], centralAngles: [{ between: [A, B], label: lab }] } };
+  return { A, B, f: { type: "circle", points: arcPts(A, B, a0, theta), ...(o.r !== undefined ? { radii: [{ to: A, label: String(o.r) }] } : {}), ...(o.d !== undefined ? { chords: [{ between: [A, A] as [string, string], label: "" }].slice(0, 0) } : {}), arcs: [{ from: A, to: B }], centralAngles: [{ between: [A, B], label: lab }] } };
 };
 // 지름은 수평 — 라벨이 중심 바로 위에 놓이므로 중심각을 아래 반원(205°~335°)에 둔다.
 const withDiam = (rng: Rng, f: CircFig, d: number): CircFig => { const [C, D] = circNames(rng, 4).filter((n) => !f.points.some((p) => p.id === n)).slice(0, 2); const a = 0; return { ...f, points: [...f.points, { id: C, angle: a }, { id: D, angle: a + 180 }], chords: [{ between: [C, D], label: String(d), diameter: true }] }; };

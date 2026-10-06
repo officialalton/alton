@@ -1,0 +1,24 @@
+{
+ "itemId": "probability.sequential_without_replacement.VT.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T08:00:00Z",
+ "reviewer": "visual-review-agent-mathE",
+ "codeHash": "ffabb51735cd83d407fa2923a496db06104805c9bf8a5e5c3c8d941eb129cc11",
+ "samples": [
+  "probability.sequential_without_replacement.VT.P.m375.png",
+  "probability.sequential_without_replacement.VT.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인."
+}

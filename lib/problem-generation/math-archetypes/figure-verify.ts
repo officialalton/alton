@@ -11,6 +11,8 @@ import type { Instance } from "./types";
 
 export const FIGURE_LINE = /^const FIGURE = (.*);$/m;
 export const CHOICES_LINE = /^const CHOICES = (.*);$/m;
+/** B형(figure_bundle): 지문 그림(STEM)과 선택지(CHOICES)를 모두 verification_js 가 읽는다. */
+export const STEM_LINE = /^const STEM = (.*);$/m;
 
 /** 값을 돌려주는 일반 실행기(숫자 제한 없음). */
 export function runJs(js: string, timeout = 5000): unknown {
@@ -20,8 +22,9 @@ export function runJs(js: string, timeout = 5000): unknown {
 const parseLine = (js: string, re: RegExp): unknown | undefined => { const m = js.match(re); if (!m) return undefined; try { return JSON.parse(m[1]); } catch { return undefined; } };
 export const embeddedFigure = (js: string) => parseLine(js, FIGURE_LINE);
 export const embeddedChoices = (js: string) => parseLine(js, CHOICES_LINE);
+export const embeddedStem = (js: string) => parseLine(js, STEM_LINE);
 /** FIGURE/CHOICES 상수를 비워 '자료 없이' 돌려 본다. */
-export const withoutFigure = (js: string) => js.replace(FIGURE_LINE, "const FIGURE = null;").replace(CHOICES_LINE, "const CHOICES = [];");
+export const withoutFigure = (js: string) => js.replace(FIGURE_LINE, "const FIGURE = null;").replace(CHOICES_LINE, "const CHOICES = [];").replace(STEM_LINE, "const STEM = null;");
 /** P 상수 한 줄(지문에 인쇄된 값). */
 export const paramsLine = (js: string) => js.match(/^const P = \{.*\};$/m)?.[0] ?? "const P = {};";
 
@@ -37,7 +40,12 @@ export function checkFigureBinding(inst: Instance): string[] {
   if (!fig) return issues;
   const text = `${inst.stimulus} ${inst.question}`;
   if (!mentionsFigure(text)) issues.push("자료가 있는데 지문·질문이 자료를 가리키지 않음(\"the table/graph shown\")");
-  if (fig.type === "figure_choice") {
+  if (fig.type === "figure_bundle") {
+    const b = fig as unknown as { stem: unknown; choices: { choices: unknown[] } };
+    const ch = embeddedChoices(inst.verificationJs); const st = embeddedStem(inst.verificationJs);
+    if (ch === undefined) issues.push("verification_js 에 const CHOICES = [...] 없음"); else if (!sameJson(ch, b.choices.choices)) issues.push("verification_js 의 CHOICES 가 Instance.figure.choices 와 다름(검증이 인쇄된 선택지를 풀지 않음)");
+    if (st === undefined) issues.push("verification_js 에 const STEM = {...} 없음"); else if (!sameJson(st, b.stem)) issues.push("verification_js 의 STEM 이 Instance.figure.stem 과 다름(검증이 인쇄된 기준 그림을 풀지 않음)");
+  } else if (fig.type === "figure_choice") {
     const ch = embeddedChoices(inst.verificationJs);
     if (ch === undefined) issues.push("verification_js 에 const CHOICES = [...] 없음");
     else if (!sameJson(ch, fig.choices)) issues.push("verification_js 의 CHOICES 가 Instance.figure.choices 와 다름(검증이 인쇄된 선택지를 풀지 않음)");
@@ -78,6 +86,13 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
     if (v && typeof v === "object") return Object.fromEntries(Object.entries(v as Record<string, unknown>).map(([k, x]) => [k, walk(x, inData || DATA_KEYS.has(k), k)]));
     return v;
   };
+  const bd = fig as { type?: string; stem?: unknown; choices?: { choices: unknown[] } } | null;
+  if (bd && bd.type === "figure_bundle" && bd.choices) {
+    // B형: 기준 그림 변조(label·line·cell·수치)와 선택지 변조(순서 뒤집기·선택지 첫 그림 변조)를 모두 둔다 — 한 모드라도 검출하면 변조가 잡힌 것이다.
+    if (mode === "swap") return { ...bd, choices: { ...bd.choices, choices: [...bd.choices.choices].reverse() } };
+    if (mode === "drop") return { ...bd, choices: { ...bd.choices, choices: bd.choices.choices.map((c, i) => (i === 0 ? tamperFigure(c, "label") : c)) } };
+    return { ...bd, stem: tamperFigure(bd.stem, mode) };
+  }
   if (mode === "cell") {
     // 표의 칸 하나만 +1(마지막 행의 마지막 숫자 칸 / 이원표 첫 칸) — 평행이동·배율에 불변인 값(일차 관계의 기울기 등)을 겨냥한다.
     const o = fig as { kind?: string; rows?: unknown[][]; cells?: number[][]; choices?: unknown[]; figures?: { spec: unknown }[] } | null;
@@ -132,7 +147,9 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
 /** 선택지형 일반 검증기 — verify 가 `answerKind:"index"` + figure_choice 인스턴스에 적용한다. */
 export function checkChoiceInstance(inst: Instance, verifiedIndex: number | null): string[] {
   const issues: string[] = [];
-  const fig = inst.figure as { type?: string; choices?: unknown[] } | null | undefined;
+  const fig0 = inst.figure as { type?: string; choices?: unknown; stem?: unknown } | null | undefined;
+  const stemFig = fig0 && fig0.type === "figure_bundle" ? fig0.stem : undefined;
+  const fig = (fig0 && fig0.type === "figure_bundle" ? fig0.choices : fig0) as { type?: string; choices?: unknown[] } | null | undefined;
   const d = inst.choice;
   if (!fig || fig.type !== "figure_choice" || !Array.isArray(fig.choices)) return ["선택지형인데 figure 가 figure_choice 가 아님"];
   const n = fig.choices.length;
@@ -148,7 +165,7 @@ export function checkChoiceInstance(inst: Instance, verifiedIndex: number | null
   if (verifiedIndex === null) return issues;
   // 오답 3개가 선언한 규칙으로 진단되는가
   try {
-    const js = `${paramsLine(inst.verificationJs)}\nconst CHOICES = ${JSON.stringify(fig.choices)};\nconst OK = CHOICES[${verifiedIndex}];\nconst diag = (c, ok, P) => { ${d.diagnoseJs} };\nreturn CHOICES.map((c, i) => (i === ${verifiedIndex} ? "correct" : diag(c, OK, P)));`;
+    const js = `${paramsLine(inst.verificationJs)}\n${stemFig !== undefined ? `const STEM = ${JSON.stringify(stemFig)};\n` : ""}const CHOICES = ${JSON.stringify(fig.choices)};\nconst OK = CHOICES[${verifiedIndex}];\nconst diag = (c, ok, P) => { ${d.diagnoseJs} };\nreturn CHOICES.map((c, i) => (i === ${verifiedIndex} ? "correct" : diag(c, OK, P)));`;
     const got = runJs(js) as unknown[];
     if (!Array.isArray(got) || got.length !== n) issues.push("오답 진단 결과 형식 오류");
     else got.forEach((g, i) => { if (g !== d.rules[i]) issues.push(`선택지 ${"ABCD"[i]}: 선언한 규칙 '${d.rules[i]}' 인데 진단은 '${String(g)}'`); });

@@ -66,7 +66,7 @@ function build(rng: Rng, s: Scene, variant: string) {
   const ok = okFig(s); const diag = diagBody(`${s.spec}if (c.kind==='isosceles' && c.vertices[0]===N[0]) return 'iso_other'; `);
   let r; try { r = triChoices(rng, ok, s.extra.filter((f) => f.kind === 'isosceles'), s.P, s.pred, diag); } catch (e) { if (!(e instanceof GenFail)) throw e; r = triChoices(rng, ok, s.extra, s.P, s.pred, diag); }
   const { choices, correctIndex, rules } = r;
-  return guard(choiceInst(rng, { stimulus: LEAD[rng.int(0, LEAD.length - 1)] + s.text, question: Q(rng, nm(s.v)), choices, correctIndex, rules, P: s.P, predicateJs: `${M_JS}${s.pred}`, diagnoseJs: diag, trace: s.explain, variant, explainKo: "", explainEn: "" }));
+  return guard(choiceInst(rng, { stimulus: LEAD[rng.int(0, LEAD.length - 1)] + s.text, question: Q(rng, nm(s.v)), choices, correctIndex, rules, P: s.P as Record<string, string | number>, predicateJs: `${M_JS}${s.pred}`, diagnoseJs: diag, trace: s.explain, variant, explainKo: "", explainEn: "" }));
 }
 const one = (f: (rng: Rng) => Scene, variant: string) => (rng: Rng) => { let last = ""; for (let i = 0; i < 40; i++) { try { return build(rng, f(rng), variant); } catch (e) { if (!(e instanceof GenFail)) throw e; last = (e as Error).message; } } throw new GenFail("이등변삼각형 선택지 표집 실패: " + last); };
 

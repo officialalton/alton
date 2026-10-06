@@ -1,0 +1,45 @@
+{
+ "itemId": "linear_functions.construct_equation_from_graph.LN.B",
+ "generatedAt": "2026-10-06T07:32:59.434Z",
+ "codeHash": "3bc74c02c57db9a8ac56751a070ccbd07ed794abc2bf3cbefdb4aed37ca2db41",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-bundle.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.construct_equation_from_graph.LN.B.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.construct_equation_from_graph.LN.B.png",
+   "mobileFile": "linear_functions.construct_equation_from_graph.LN.B.m375.png",
+   "archetypeId": "lf.construct_equation_from_graph.LN.B.repr_shift",
+   "seed": 11,
+   "signature": "figure_bundle[plane>plane]",
+   "stimulus": "A designer sketches a figure on a coordinate grid. A student graphs a line in the $xy$-plane, as shown. The given figure is drawn first. Each of the four choices is a graph in the same $xy$-plane. A neat sketch of the situation is drawn below, and the labels on it are the only information you need. The point marked off the line in the given graph is used in the question.",
+   "question": "Which of the following graphs shows the line that is parallel to the given line and passes through the point $(-1, 4)$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 기준 그래프에서 표시점 두 개를 읽어 기울기 m 과 y 절편 b 를 구한다. (2) 평행하므로 기울기는 m = -2 로 같다. (3) 점 (-1, 4) 을 지나므로 b' = 4 - (-2)(-1) = 2 이다. (4) y = -2x + 2 의 그래프를 고른다. (5) 다른 그래프는 점의 좌표를 바꿔 쓰거나 기울기 부호를 바꾸거나 q 를 절편으로 쓴 것이다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}
