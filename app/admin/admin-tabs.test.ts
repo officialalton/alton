@@ -24,4 +24,8 @@ describe("resolveAdminTab (2026-09-10, P1-3 — AdminShell·admin/page.tsx 공�
     expect((ADMIN_TAB_IDS as readonly string[]).includes("free-members")).toBe(false);
     expect(resolveAdminTab("free-members")).toBe("free-accounts");
   });
+
+  it("retention 탭이 등록돼 있다(2026-10-07)", () => {
+    expect(resolveAdminTab("retention")).toBe("retention");
+  });
 });
