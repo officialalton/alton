@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T07:00:00Z",
  "reviewer": "claude-sonnet-5.5 (math-C session)",
- "codeHash": "f1c98ce0b6c71112d295f4e6b1c0d705070e510d350d39293e8de91e65cd5aaf",
+ "codeHash": "15b1c3b028b2433596078889be096bc294aca61d2152890cbc2e7c2be8bbd213",
  "samples": [
   "inference_margin_error.population_estimate.BR.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: Yes 225·No 200·Unsure 75 → 표본 500, 제목 모집단 4,600 → 4600×225/500=2070 (D). 막대가 25 간격 눈금선과 일치, 제목·축 제목·375px 모두 판독 가능. (메타 정답: 2070)"
+ "notes": "그림만 보고 풀이: Yes 225·No 200·Unsure 75 → 표본 500, 제목 모집단 4,600 → 4600×225/500=2070 (D). 막대가 25 간격 눈금선과 일치, 제목·축 제목·375px 모두 판독 가능. (메타 정답: 2070) [해시 갱신: 같은 키트(_t7bar-kit)에 다른 조합이 추가돼 판정이 무효화되어 재서명 — 샘플 PNG 가 판정 시점과 바이트 동일함을 확인]"
 }
