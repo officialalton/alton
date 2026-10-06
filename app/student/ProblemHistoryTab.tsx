@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { logLearningEventAction } from "./activity-actions";
 import LearningText from "@/app/session/[id]/LearningText";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { stripInlineOptions } from "@/lib/problem-text";
@@ -21,6 +22,8 @@ type GradeFilter = "all" | "correct" | "partial" | "incorrect" | "pending";
 
 export default function ProblemHistoryTab({ entries, isFreeMember = false }: { entries: ProblemHistoryEntry[]; isFreeMember?: boolean }) {
   const tz = useViewerTimezone();
+  // 2026-10-06 S6 — 오답노트 탭 열람 기록(학생 본인만, 10분 디듀프는 DB).
+  useEffect(() => { void logLearningEventAction("mistake_review_opened"); }, []);
   const [subject, setSubject] = useState(ALL);
   const [gradeFilter, setGradeFilter] = useState<GradeFilter>("all");
   const [formatFilter, setFormatFilter] = useState<"all" | ProblemHistoryEntry["format"]>("all");
