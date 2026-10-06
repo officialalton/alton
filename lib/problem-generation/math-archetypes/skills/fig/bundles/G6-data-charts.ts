@@ -11,5 +11,10 @@ import { ITEM as pctFindBR } from "../items/percentages.find_percent.BR.P";
 import { ITEM as pctChangeBR } from "../items/percentages.percent_change.BR.P";
 import { ITEM as ovdMeanBR } from "../items/one_variable_data.mean.BR.P";
 import { ITEM as probSimpleBR } from "../items/probability.simple.BR.P";
+import { ITEM as ovdMedianBX } from "../items/one_variable_data.median.BX.P";
+import { ITEM as ovdRangeBX } from "../items/one_variable_data.range.BX.P";
+import { ITEM as ovdSpreadBX } from "../items/one_variable_data.spread_comparison.BX.P";
+import { ITEM as ovdOutlierBX } from "../items/one_variable_data.outlier_effect.BX.P";
+import { ITEM as ovdQuartileBX } from "../items/one_variable_data.quartile_percentile_from_plot.BX.P";
 
-export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR];
+export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX];

@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.median.BX.P",
+ "generatedAt": "2026-10-06T02:54:52.952Z",
+ "codeHash": "6c2142972761acab146857e5771c7051152a04b17e7415779ca06c8bc5df2590",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.median.BX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.median.BX.P.png",
+   "mobileFile": "one_variable_data.median.BX.P.m375.png",
+   "archetypeId": "ovd.median.BX.P.chain2",
+   "seed": 11,
+   "signature": "data:boxplot",
+   "stimulus": "The box plot shown summarizes the resting heart rates for athletes on a team. Each of the four parts of the plot that lie between consecutive summary values (the minimum, Q1, the median, Q3, the maximum) contains an equal number of values. The data set has 32 values.",
+   "question": "How many values are in the sections of the plot between 54 beats per minute and 58 beats per minute?",
+   "options": [
+    "8",
+    "16",
+    "24",
+    "32"
+   ],
+   "correctIndex": 1,
+   "answer": "16",
+   "explanation": "(1) 상자그림에서 다섯 수를 읽는다: 최솟값 44, Q1 46, 중앙값 54, Q3 56, 최댓값 58. (2) 54 는 median, 58 는 maximum 이다. (3) 두 값 사이에는 2 개 구간이 있고, 한 구간에는 32 ÷ 4 = 8 개가 있다. (4) 2 × 8 = 16 이다. (5) 따라서 그 구간에는 16 개의 값이 있다. 따라서 정답은 16이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.quartile_percentile_from_plot.BX.P",
+ "generatedAt": "2026-10-06T02:54:52.957Z",
+ "codeHash": "68f6a809909a98d35895477fee4288fce6d9185f2a9c459e70af60c0f829929b",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.quartile_percentile_from_plot.BX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.quartile_percentile_from_plot.BX.P.png",
+   "mobileFile": "one_variable_data.quartile_percentile_from_plot.BX.P.m375.png",
+   "archetypeId": "ovd.quartile_percentile_from_plot.BX.P.chain2",
+   "seed": 11,
+   "signature": "data:boxplot",
+   "stimulus": "The box plot shown gives the five-number summary of the monthly electricity bills for households in a neighborhood. The five summary values split the data into four sections, and every one of the four sections contains the same number of values.",
+   "question": "About what percent of the data lie above 60 dollars? (Use the sections of the plot.)",
+   "options": [
+    "100",
+    "50",
+    "75",
+    "25"
+   ],
+   "correctIndex": 2,
+   "answer": "75",
+   "explanation": "(1) 상자그림에서 다섯 수를 읽는다: 최솟값 55, Q1 60, 중앙값 70, Q3 90, 최댓값 95. (2) 60 는 first quartile 이다. (3) first quartile 보다 위에는 3 개 구간이 있다. (4) 3 × 25% = 75% 이다. (5) 따라서 75% 이다. 따라서 정답은 75이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.median.BX.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:50:52Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "6c2142972761acab146857e5771c7051152a04b17e7415779ca06c8bc5df2590",
+ "samples": [
+  "one_variable_data.median.BX.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 최솟값 44·Q1 46·중앙값 54·Q3 56·최댓값 58, 54~58 은 두 구간(중앙값~최댓값) → 32÷4×2=16, 메타 정답 16 일치. 보조: 두 집단 상자그림(compare_scenarios) 샘플을 별도 렌더해 두 상자가 같은 눈금에 놓이고 중앙값 선 55·60 판독 확인. 눈금·축 제목 단위 양호, 375px 확인."
+}

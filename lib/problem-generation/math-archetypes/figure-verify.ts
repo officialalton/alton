@@ -55,7 +55,7 @@ export function checkFigureBinding(inst: Instance): string[] {
   return issues;
 }
 
-const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series", "through", "at", "params"]);
+const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series", "through", "at", "params", "min", "q1", "median", "q3", "max"]);
 export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell" | "line";
 export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell", "line"];
 const isPair = (p: unknown): p is [number, number] => Array.isArray(p) && p.length === 2 && p.every((n) => typeof n === "number");

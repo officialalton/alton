@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.range.BX.P",
+ "generatedAt": "2026-10-06T02:54:52.953Z",
+ "codeHash": "03c48084dd547668263afff8ea1be5aa0c116bcd7ecc485bae67417d552ab182",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.range.BX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.range.BX.P.png",
+   "mobileFile": "one_variable_data.range.BX.P.m375.png",
+   "archetypeId": "ovd.range.BX.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:boxplot",
+   "stimulus": "Two box plots are shown, one for each of two groups of runners in a city race, for the times to finish a race.",
+   "question": "What is the positive difference between the range of the Men's race data and the range of the Women's race data, in minutes?",
+   "options": [
+    "5",
+    "10",
+    "15",
+    "65"
+   ],
+   "correctIndex": 2,
+   "answer": "15",
+   "explanation": "(1) 상자그림(Men's race)에서 다섯 수를 읽는다: 최솟값 30, Q1 35, 중앙값 50, Q3 65, 최댓값 70. (2) 상자그림(Women's race)에서 다섯 수를 읽는다: 최솟값 35, Q1 40, 중앙값 45, Q3 55, 최댓값 60. (3) 범위: Men's race 70 - 30 = 40, Women's race 60 - 35 = 25 이다. (4) 차 = |40 - 25| = 15 이다. (5) 따라서 두 범위는 15 minutes 만큼 다르다. 따라서 정답은 15이다.",
+   "structuralIssues": []
+  }
+ ]
+}

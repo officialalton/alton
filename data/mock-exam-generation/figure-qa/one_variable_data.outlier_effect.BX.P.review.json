@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.outlier_effect.BX.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:55:15Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "e81b4258a5e9d004d07ce868f15cc4398d84156e196872207e8ac5b7ec3c2e13",
+ "samples": [
+  "one_variable_data.outlier_effect.BX.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 최솟값 40·최댓값 48, 새 값 66 추가 → 새 범위 26, 메타 정답 26 일치. 눈금 숫자(1 간격)와 상자·꼬리 정렬, 축 제목 단위 양호."
+}

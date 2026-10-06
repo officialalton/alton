@@ -113,3 +113,50 @@ export const bfIntro = (rng: Rng, s: BarFqScene) => rng.pick([
   `A survey recorded the ${s.t.what} for ${s.t.ent} ${s.t.where}. The results are shown in the graph, with bar heights counting ${s.t.ent}.`,
 ]);
 export const bfRead = (s: BarFqScene): [string, string] => [`그래프에서 값과 막대 높이(도수)를 읽는다: ${s.vals.map((v, i) => `${v}(${s.freqs[i]})`).join(", ")} — 전체 ${s.N}개.`, "Read each value and its bar height."];
+
+// ───────────────────────── 상자그림(BX) ─────────────────────────
+// 다섯 수 요약(최솟값·Q1·중앙값·Q3·최댓값)을 눈금 간격의 배수로 만든다 — 엔진의 가로 눈금 간격(niceStep(범위, 8))이 s 가 되도록 범위를 s 의 5~8 배로 둔다.
+export type BoxTopic = { what: string; ent: string; where: string; unit: string; col: string; names: [string, string]; lo: number };
+export const BOX_TOPICS: BoxTopic[] = [
+  { what: "scores on a math test", ent: "students", where: "in a school", unit: "points", col: "Test score", names: ["Morning section", "Afternoon section"], lo: 40 },
+  { what: "times to finish a race", ent: "runners", where: "in a city race", unit: "minutes", col: "Finish time", names: ["Men's race", "Women's race"], lo: 20 },
+  { what: "daily sales", ent: "days", where: "at a bakery", unit: "dollars", col: "Daily sales", names: ["Spring", "Fall"], lo: 100 },
+  { what: "heights of plants", ent: "plants", where: "in a greenhouse", unit: "centimeters", col: "Plant height", names: ["Variety A", "Variety B"], lo: 10 },
+  { what: "waiting times for appointments", ent: "patients", where: "at a clinic", unit: "minutes", col: "Waiting time", names: ["Clinic A", "Clinic B"], lo: 5 },
+  { what: "lengths of phone calls", ent: "calls", where: "at a help desk", unit: "minutes", col: "Call length", names: ["Weekday", "Weekend"], lo: 2 },
+  { what: "weights of packages", ent: "packages", where: "at a shipping center", unit: "pounds", col: "Package weight", names: ["Ground", "Air"], lo: 4 },
+  { what: "monthly electricity bills", ent: "households", where: "in a neighborhood", unit: "dollars", col: "Monthly bill", names: ["Summer", "Winter"], lo: 40 },
+  { what: "battery lives", ent: "phones", where: "in a product test", unit: "hours", col: "Battery life", names: ["Model X", "Model Y"], lo: 6 },
+  { what: "commute distances", ent: "workers", where: "at a company", unit: "miles", col: "Commute distance", names: ["Office A", "Office B"], lo: 2 },
+  { what: "typing speeds", ent: "applicants", where: "for an office job", unit: "words per minute", col: "Typing speed", names: ["Team A", "Team B"], lo: 20 },
+  { what: "resting heart rates", ent: "athletes", where: "on a team", unit: "beats per minute", col: "Heart rate", names: ["Sprinters", "Distance runners"], lo: 40 },
+];
+export type BoxFive = { min: number; q1: number; median: number; q3: number; max: number };
+export type BoxScene = { t: BoxTopic; s: number; R: number; boxes: BoxFive[]; names: string[]; fig: { type: "data"; kind: "boxplot"; boxes: { name: string; min: number; q1: number; median: number; q3: number; max: number }[]; xTitle: string } };
+const SS = [1, 2, 5, 10];
+/**
+ * 상자그림 장면: 모든 수가 눈금 간격 s 의 배수. 첫 상자의 범위 = s×R(R 5~8) 로 두어 엔진의 눈금 간격이 s 가 된다.
+ * 둘째 상자(groups=2)는 같은 축 안(첫 상자의 최솟값~최댓값)에 놓인다. 이름은 두 집단일 때만 의미가 있다.
+ */
+export function makeBox(rng: Rng, o: { groups?: 1 | 2; topic?: BoxTopic; /** 한 상자의 구간(최소~Q1 등)이 모두 달라 서로 구별되게 */ strict?: boolean } = {}): BoxScene {
+  const t = o.topic ?? rng.pick(BOX_TOPICS); const s = rng.pick(SS); const R = rng.int(5, 8); const g = o.groups ?? 1;
+  const base = Math.ceil(t.lo / s) * s + s * rng.int(0, 3);
+  const five = (lo: number, hi: number): BoxFive | null => { const p = [lo, ...rng.shuffle(Array.from({ length: hi - lo - 1 }, (_, i) => lo + 1 + i)).slice(0, 3).sort((a, b) => a - b), hi]; if (p.length !== 5 || new Set(p).size !== 5) return null; return { min: base + p[0] * s, q1: base + p[1] * s, median: base + p[2] * s, q3: base + p[3] * s, max: base + p[4] * s }; };
+  const boxes: BoxFive[] = []; const b1 = five(0, R); if (!b1) throw new GenFail("상자 표집 실패"); boxes.push(b1);
+  if (g === 2) { for (let tr = 0; tr < 40; tr++) { const lo = rng.int(0, 2), hi = rng.int(R - 2, R); if (hi - lo < 4) continue; const b = five(lo, hi); if (b && JSON.stringify(b) !== JSON.stringify(b1)) { boxes.push(b); break; } } if (boxes.length < 2) throw new GenFail("둘째 상자 표집 실패"); }
+  const names = g === 2 ? [...t.names] : [t.ent.charAt(0).toUpperCase() + t.ent.slice(1)];
+  return { t, s, R, boxes, names, fig: { type: "data", kind: "boxplot", boxes: boxes.map((b, i) => ({ name: names[i], ...b })), xTitle: `${t.col} (${t.unit})` } };
+}
+/** FIGURE(상자그림)에서 상자 배열 B 와 다섯 수 이름 배열 K 를 읽는 JS. 값이 min ≤ q1 ≤ median ≤ q3 ≤ max 가 아니면 던진다. */
+export const BX_JS = "const B=FIGURE.boxes; if (!B||!B.length) throw new Error('상자 없음'); for (const b of B) { const v=[b.min,b.q1,b.median,b.q3,b.max]; if (v.some(x=>typeof x!=='number')) throw new Error('값 오류'); for (let i=1;i<5;i++) if (v[i]<v[i-1]) throw new Error('다섯 수 순서 오류'); } const K=['min','q1','median','q3','max'];\n";
+export const bxIntro = (rng: Rng, s: BoxScene) => rng.pick([
+  `The box plot shown summarizes the ${s.t.what} for ${s.t.ent} ${s.t.where}.`,
+  `A box plot is shown for the ${s.t.what} of ${s.t.ent} ${s.t.where}.`,
+  `The box plot shown gives the five-number summary of the ${s.t.what} for ${s.t.ent} ${s.t.where}.`,
+]);
+export const bxIntro2 = (rng: Rng, s: BoxScene) => rng.pick([
+  `The box plots shown compare the ${s.t.what} for ${s.t.ent} ${s.t.where} in two groups.`,
+  `Two box plots are shown, one for each of two groups of ${s.t.ent} ${s.t.where}, for the ${s.t.what}.`,
+  `The box plots shown summarize the ${s.t.what} of two groups of ${s.t.ent} ${s.t.where}.`,
+]);
+export const bxRead = (s: BoxScene, i = 0): [string, string] => { const b = s.boxes[i]; return [`상자그림${s.boxes.length > 1 ? `(${s.names[i]})` : ""}에서 다섯 수를 읽는다: 최솟값 ${b.min}, Q1 ${b.q1}, 중앙값 ${b.median}, Q3 ${b.q3}, 최댓값 ${b.max}.`, "Read the five-number summary from the box plot."]; };
