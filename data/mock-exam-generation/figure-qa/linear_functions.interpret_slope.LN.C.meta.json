@@ -1,0 +1,49 @@
+{
+ "itemId": "linear_functions.interpret_slope.LN.C",
+ "generatedAt": "2026-10-06T11:04:11.273Z",
+ "codeHash": "cd13329495d24570d9948659ba4686267d94236314eb0f462ce2151c3afbb4b1",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.interpret_slope.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/lnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.interpret_slope.LN.C.png",
+   "mobileFile": "linear_functions.interpret_slope.LN.C.m375.png",
+   "archetypeId": "isc.interpret_slope.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "A teacher sketches possible graphs on a grid. Each of the four graphs shown is a line in the same $xy$-plane.",
+   "question": "Which of the four graphs shown is a line that passes through the point where $x = 2$ and $y = 5$, with a slope of 2?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 기울기는 2, 점 (2, 5) 을 지난다. (2) y = 2x + b 에 점을 넣으면 b = 1 이다. (3) 각 선택지 그래프에서 기울기와 y 절편(또는 지나는 점)을 읽는다. (4) 첫째 조건을 만족하지 못하는 그래프를 지운다. (5) 둘째 조건을 만족하지 못하는 그래프를 지운다. (6) 남은 그래프가 정답이다. (7) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "itemId": "linear_functions.construct_equation_from_graph.LN.C",
+ "generatedAt": "2026-10-06T11:04:11.291Z",
+ "codeHash": "8064b9ad807fd930a5b0e995072cb263cf65f58ab2aeb3d2a236209ba1264ad3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_functions.construct_equation_from_graph.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/lnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_functions.construct_equation_from_graph.LN.C.png",
+   "mobileFile": "linear_functions.construct_equation_from_graph.LN.C.m375.png",
+   "archetypeId": "cfgc.construct_equation_from_graph.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "A designer compares four curves on a coordinate grid. Each of the four graphs shown is a line in the same $xy$-plane.",
+   "question": "Which line among the choices shown has $y$-intercept -1 and a slope of -3?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 기울기 -3, y 절편 -1 이므로 y = -3x + -1 이다. (2) 각 선택지 그래프에서 기울기와 y 절편(또는 지나는 점)을 읽는다. (3) 첫째 조건을 만족하지 못하는 그래프를 지운다. (4) 둘째 조건을 만족하지 못하는 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

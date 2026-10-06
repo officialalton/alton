@@ -1,0 +1,49 @@
+{
+ "itemId": "nonlinear_functions.interpret_a.FN.C",
+ "generatedAt": "2026-10-06T11:04:11.334Z",
+ "codeHash": "529b21373a9953d951db76393fbaaa596213231ae98f3b0e91bdb062dd41d056",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/fnc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.interpret_a.FN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.interpret_a.FN.C.png",
+   "mobileFile": "nonlinear_functions.interpret_a.FN.C.m375.png",
+   "archetypeId": "nac.interpret_a.FN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "In a practice set, four graphs are shown in the $xy$-plane. Four candidate parabolas are shown, graphed on one set of axes.",
+   "question": "Which parabola among the choices shown is the graph of $y = ax^2 + bx + c$ where $a = -2$ and $c = -4$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) a = -2 이므로 아래로 열리고, c = -4 는 y 절편이다. (2) 각 그래프에서 꼭짓점·열린 방향·지나는 점을 읽는다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}
