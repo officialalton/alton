@@ -63,7 +63,7 @@ export function checkFigureBinding(inst: Instance): string[] {
   return issues;
 }
 
-const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series", "through", "at", "params", "min", "q1", "median", "q3", "max", "sides", "center", "radius", "vertices", "dx", "dy", "k"]);
+const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series", "through", "at", "params", "min", "q1", "median", "q3", "max", "sides", "center", "radius", "vertices", "dx", "dy", "k", "amount", "lo", "hi", "leaves", "stem"]);
 export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell" | "line" | "label" | "label_last";
 export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell", "line", "label", "label_last"];
 const isPair = (p: unknown): p is [number, number] => Array.isArray(p) && p.length === 2 && p.every((n) => typeof n === "number");
@@ -100,6 +100,11 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
     if (o && Array.isArray(o.cells)) { const cells = o.cells.map((r) => [...r]); cells[0][0] += 1; return { ...o, cells }; }
     // 자료 그래프: 점도표 마지막 값의 점 +1 · 히스토그램 마지막 구간 도수 +1 · 막대(첫 계열) 마지막 값 +1 · 상자그림 첫 상자의 최댓값 +1 — 평행이동·배율에 불변인 통계(범위·중앙값 위치 등)도 바꾼다.
     const g = fig as { dots?: { count: number }[]; bins?: { count: number }[]; series?: { values: number[] }[]; boxes?: { max: number }[] } | null;
+    // 새 렌더러(2026-10 D): 수직선 첫 구간·반직선·점의 끝값 +1 · 줄기-잎 마지막 잎 +1(범위 밖이면 -1) · 원그래프 마지막 부채꼴 amount +1.
+    const nl = fig as { type?: string; items?: Record<string, unknown>[]; stems?: { stem: number; leaves: number[] }[]; slices?: { amount: number }[] } | null;
+    if (nl && nl.type === "number_line" && Array.isArray(nl.items)) { const items = nl.items.map((it) => ({ ...it })); const it = items[items.length - 1]; if (it.kind === "interval") it.hi = (it.hi as number) + 1; else it.at = (it.at as number) + 1; return { ...nl, items }; }
+    if (nl && nl.type === "stem_leaf" && Array.isArray(nl.stems)) { const stems = nl.stems.map((s) => ({ ...s, leaves: [...s.leaves] })); for (let i = stems.length - 1; i >= 0; i--) if (stems[i].leaves.length) { const k = stems[i].leaves.length - 1; stems[i].leaves[k] = stems[i].leaves[k] >= 9 ? 8 : stems[i].leaves[k] + 1; break; } return { ...nl, stems }; }
+    if (nl && nl.type === "pie" && Array.isArray(nl.slices)) return { ...nl, slices: nl.slices.map((s, i) => (i === nl.slices!.length - 1 ? { ...s, amount: s.amount + 1 } : s)) };
     if (g && Array.isArray(g.dots) && g.dots.length) return { ...g, dots: g.dots.map((d, i) => (i === g.dots!.length - 1 ? { ...d, count: d.count + 1 } : d)) };
     if (g && Array.isArray(g.bins) && g.bins.length) return { ...g, bins: g.bins.map((d, i) => (i === g.bins!.length - 1 ? { ...d, count: d.count + 1 } : d)) };
     if (g && Array.isArray(g.series) && g.series.length) return { ...g, series: g.series.map((se, si) => (si === 0 ? { ...se, values: se.values.map((v, i) => (i === se.values.length - 1 ? v + 1 : v)) } : se)) };

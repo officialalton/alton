@@ -1,0 +1,43 @@
+{
+ "itemId": "one_variable_data.quartile_percentile_from_plot.SL.P",
+ "generatedAt": "2026-10-06T08:44:35.624Z",
+ "codeHash": "593dffd8b372cb5bcfbf050d50742c71f35f4c9887c204307dac048225dd15bd",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stem-leaf.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.quartile_percentile_from_plot.SL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.quartile_percentile_from_plot.SL.P.png",
+   "mobileFile": "one_variable_data.quartile_percentile_from_plot.SL.P.m375.png",
+   "archetypeId": "ovd.quartile_percentile_from_plot.SL.P.chain2",
+   "seed": 11,
+   "signature": "stem_leaf",
+   "stimulus": "A stem-and-leaf plot is shown for the lengths of phone calls at a help desk. Each leaf is one value. The first quartile is the median of the lower half of the values, and the third quartile is the median of the upper half; when the number of values is odd, the overall median is left out of both halves. Answer the question using only the data in the plot.",
+   "question": "What is the interquartile range of the values?",
+   "options": [
+    "16.5",
+    "48",
+    "50",
+    "33.5"
+   ],
+   "correctIndex": 3,
+   "answer": "33.5",
+   "explanation": "(1) 줄기-잎 그림에서 모든 값을 읽는다: 10, 10, 16, 17, 24, 34, 34, 36, 41, 50, 50, 52, 58 — 전체 13개. (2) 아래 절반의 중앙값 Q1 = 16.5 이다. (3) 위 절반의 중앙값 Q3 = 50 이다. (4) IQR = 50 - 16.5 = 33.5 이다. (5) 따라서 답은 33.5 이다. 따라서 정답은 33.5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

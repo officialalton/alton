@@ -18,6 +18,7 @@ import { lintSolidXAgainstText, renderSolidX } from "./templates/solid-x";
 import { lintTriNestedAgainstText, renderTriNested } from "./templates/triangle-nested";
 import { lintVennTreeAgainstText, renderVennTree } from "./templates/venn-tree";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
+import { isDSpec, lintD, renderD } from "./templates/d-registry";
 import { lintFigureBundle, renderFigureBundle } from "./templates/figure-bundle";
 import { renderFigureSvg } from "./render";
 import { figureAlt } from "./alt";
@@ -162,6 +163,11 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "circle") {
     const r = renderCircle(spec);
     issues.push(...r.issues, ...lintCircleAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (isDSpec(spec)) {
+    const r = renderD(spec);
+    issues.push(...r.issues, ...lintD(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "data") {

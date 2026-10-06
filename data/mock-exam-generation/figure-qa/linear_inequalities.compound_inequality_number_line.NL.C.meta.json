@@ -1,0 +1,44 @@
+{
+ "itemId": "linear_inequalities.compound_inequality_number_line.NL.C",
+ "generatedAt": "2026-10-06T08:44:35.644Z",
+ "codeHash": "8e870f336c6bd6e772d33a844fc6f72ef6f4bc5dc6c3b4f578555b2ce8ca829d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-figures/templates/number-line.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.compound_inequality_number_line.NL.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/nl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.compound_inequality_number_line.NL.C.png",
+   "mobileFile": "linear_inequalities.compound_inequality_number_line.NL.C.m375.png",
+   "archetypeId": "li.compound_inequality_number_line.NL.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[number_line]",
+   "stimulus": "A student solves the inequality $-11 \\le x - 7 \\le -5$. The number line contains the information needed for this question.",
+   "question": "Which of the following graphs shows all of the solutions to the compound inequality?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 0,
+   "answer": "A",
+   "explanation": "(1) 세 부분에서 -7 를 더하면 -4 ≤ x ≤ 2 이다. (2) -4(찬 점) 에서 2(찬 점) 까지의 구간이다. (3) 결과를 그림과 다시 대조해 확인한다. (4) 결과를 그림과 다시 대조해 확인한다. (5) 따라서 답은 -11 ≤ x - 7 ≤ -5 이다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

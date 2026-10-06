@@ -1,0 +1,43 @@
+{
+ "itemId": "ratios_rates_units.proportion.PI.P",
+ "generatedAt": "2026-10-06T08:44:35.626Z",
+ "codeHash": "90e24291294473676998f59b5d768482abd6f4746fe99d5cc1cbdb74dbeeda8c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/pie.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/ratios_rates_units.proportion.PI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pi-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "ratios_rates_units.proportion.PI.P.png",
+   "mobileFile": "ratios_rates_units.proportion.PI.P.m375.png",
+   "archetypeId": "rru.proportion.PI.P.inverse",
+   "seed": 11,
+   "signature": "pie",
+   "stimulus": "In the pie chart shown, each section represents one category of the type of pet owned by the households in a neighborhood survey. The size of each section is labeled as a percent of the whole. The same distribution describes a second, larger group of households. In that group, 160 households own Fish. Each section of the pie chart is a separate category.",
+   "question": "How many households in the second group own Birds?",
+   "options": [
+    "80",
+    "320",
+    "150",
+    "160"
+   ],
+   "correctIndex": 0,
+   "answer": "80",
+   "explanation": "(1) 원그래프에서 각 부채꼴의 값을 읽는다: Fish 20%, Rabbits 25%, Dogs 30%, Birds 10%, Cats 15%. (2) Fish : Birds = 20 : 10 이다. (3) 160 : x = 20 : 10 로 비례식을 세운다. (4) x = 160 × 10 ÷ 20 이다. (5) 따라서 답은 80 이다. 따라서 정답은 80이다.",
+   "structuralIssues": []
+  }
+ ]
+}

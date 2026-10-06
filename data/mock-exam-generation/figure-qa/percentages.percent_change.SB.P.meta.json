@@ -1,0 +1,44 @@
+{
+ "itemId": "percentages.percent_change.SB.P",
+ "generatedAt": "2026-10-06T08:44:35.666Z",
+ "codeHash": "23d86f0dabdec4a5792114ae1dece3428d287fe9dd482df11efa02a3bc6ef67a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stacked-bar.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.percent_change.SB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sb-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.percent_change.SB.P.png",
+   "mobileFile": "percentages.percent_change.SB.P.m375.png",
+   "archetypeId": "pct.percent_change.SB.P.chain2",
+   "seed": 11,
+   "signature": "stacked_bar",
+   "stimulus": "The stacked bar graph shown displays app downloads by type over two periods, with one bar for each period. The graph contains all of the data needed for this question.",
+   "question": "The total number of downloads rose from Before to After. By what percent?",
+   "options": [
+    "160",
+    "60",
+    "70",
+    "150"
+   ],
+   "correctIndex": 1,
+   "answer": "60",
+   "explanation": "(1) 그래프의 조각 값을 읽는다: Before(Games 50, Music 50, Photos 150); After(Games 150, Music 100, Photos 150). (2) Before 합계 = 250, After 합계 = 400 이다. (3) 변화량 = 400 - 250 = 150 이다. (4) 150 ÷ 250 = 0.6 이다. (5) 퍼센트 변화의 크기는 60% 이다(증가). (6) 따라서 답은 60 이다. 따라서 정답은 60이다.",
+   "structuralIssues": []
+  }
+ ]
+}

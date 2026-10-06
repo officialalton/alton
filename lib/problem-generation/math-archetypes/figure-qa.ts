@@ -9,6 +9,7 @@ import { problemText } from "@/lib/problem-figures/label-rule";
 import type { FigureSpec } from "@/lib/problem-figures/spec";
 import type { Instance } from "./types";
 import { mentionsFigure } from "./figure-verify";
+import { checkDFigure } from "./figure-qa-d";
 
 export type QaIssue = { code: string; message: string };
 type Spec = Record<string, unknown> & { type: string; kind?: string };
@@ -432,6 +433,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "histogram") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: true, xTitle: true, yTitle: true }); checkHistogramFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  { const d = checkDFigure(spec, markup); if (d) return d; } // 새 렌더러 5종(수직선·줄기-잎·원그래프·도수다각형/누적도수곡선·누적 막대) — figure-qa-d.ts
   if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
   if (spec.type === "parallel_three") { checkParallelThreeFidelity(spec, markup, issues); return issues; }
   if (spec.type === "l_shape") { checkLShapeFidelity(spec, markup, issues); return issues; }
@@ -449,7 +451,7 @@ const tickSig = (svg: string) => { const s = readScale(svg); return JSON.stringi
 export function checkMultiFigure(children: Spec[], kind: "figure_set" | "figure_choice", textForLabels?: string): QaIssue[] {
   const issues: QaIssue[] = []; const svgs = children.map((c) => renderFigureSvg(c as unknown as FigureSpec, textForLabels === undefined ? undefined : { text: textForLabels }));
   children.forEach((c, i) => checkRenderedFigure(c, svgs[i]).forEach((q) => issues.push({ code: q.code, message: `${kind === "figure_choice" ? "선택지" : "자료"} ${"ABCD"[i]}: ${q.message}` })));
-  const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar" || c.kind === "dot_plot" || c.kind === "histogram" || c.kind === "boxplot")) || c.type === "plane" || c.type === "trig_curve");
+  const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar" || c.kind === "dot_plot" || c.kind === "histogram" || c.kind === "boxplot")) || c.type === "plane" || c.type === "trig_curve" || c.type === "number_line");
   if (graphs) {
     if (new Set(svgs.map(tickSig)).size > 1) issues.push({ code: kind === "figure_choice" ? "choice_axes_differ" : "scale_mismatch_between_figures", message: "복수 그림의 눈금(축척)이 서로 다릅니다 — 같은 단위의 값은 같은 축척으로 그려야 합니다." });
     if (new Set(svgs.map(viewBox)).size > 1) issues.push({ code: "choice_size_differ", message: "복수 그림의 크기가 서로 다릅니다." });

@@ -1,0 +1,43 @@
+{
+ "itemId": "linear_inequalities.solve_one_var.NL.P",
+ "generatedAt": "2026-10-06T08:44:35.638Z",
+ "codeHash": "b96d8b71c1e053202453863010c0844f24c406834ea51a606453e6eb16038d5e",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/number-line.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.solve_one_var.NL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/nl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.solve_one_var.NL.P.png",
+   "mobileFile": "linear_inequalities.solve_one_var.NL.P.m375.png",
+   "archetypeId": "li.solve_one_var.NL.P.repr_shift",
+   "seed": 11,
+   "signature": "number_line",
+   "stimulus": "The number line shown displays the solution set of a linear inequality in $x$. Consider the graph on the number line.",
+   "question": "Which of the following inequalities is represented by the graph on the number line shown?",
+   "options": [
+    "$3x - 1 > -4$",
+    "$3x - 1 \\ge -4$",
+    "$3x - 1 < -7$",
+    "$3x - 1 < -4$"
+   ],
+   "correctIndex": 3,
+   "answer": "$3x - 1 < -4$",
+   "explanation": "(1) 그림은 -1 에서 왼쪽으로 빈 점의 반직선이다. (2) 3x < -3 로 정리한다. (3) 3 로 나누면 방향은 그대로이다: x < -1 이다. (4) 정답은 3x - 1 < -4 이다. (5) 다른 선지는 방향·경계·끝점 중 하나가 그림과 다르다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}
