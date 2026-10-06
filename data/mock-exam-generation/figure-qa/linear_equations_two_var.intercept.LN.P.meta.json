@@ -1,0 +1,44 @@
+{
+ "itemId": "linear_equations_two_var.intercept.LN.P",
+ "generatedAt": "2026-10-06T04:25:57.752Z",
+ "codeHash": "660e1f6497475fc62d4e70f99f30e23d3c9f43de7c2b83c58c7e5c2360f3f71c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_two_var.intercept.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_two_var.intercept.LN.P.png",
+   "mobileFile": "linear_equations_two_var.intercept.LN.P.m375.png",
+   "archetypeId": "l2i.intercept.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "An engineer plots a straight path on a grid. In the $xy$-plane, the graph of a line is shown. An equation of the line shown is $-4x + 2y = c$, where $c$ is a constant.",
+   "question": "What is the value of the constant $c$?",
+   "options": [
+    "-6",
+    "-4",
+    "-12",
+    "12"
+   ],
+   "correctIndex": 2,
+   "answer": "-12",
+   "explanation": "(1) 그래프에 표시된 두 점 (2, -2) 과 (5, 4) 을 읽는다. (2) 기울기 = (4 - (-2)) ÷ (5 - (2)) = 2 이다. (3) y 절편 b = -2 - (2)(2) = -6 이다. (4) x = 0 을 식에 대입하면 2y = c 이므로 c = 2 × -6 이다. (5) c = -12 이다. 따라서 정답은 -12이다.",
+   "structuralIssues": []
+  }
+ ]
+}
