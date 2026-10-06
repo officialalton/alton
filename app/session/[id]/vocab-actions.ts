@@ -2,56 +2,42 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { requireUser } from "@/lib/auth";
+import { VOCAB_ENTRY_TOOL_SCHEMA, buildVocabEntryPrompt, validateVocabDefinitions } from "@/lib/vocab/definition";
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-async function generateVocabEntry(word: string) {
+async function requestVocabEntry(word: string) {
   const message = await anthropic.messages.create({
     model: "claude-haiku-4-5-20251001",
-    max_tokens: 500,
+    max_tokens: 600,
     tools: [
       {
         name: "vocab_entry",
         description: "학생 단어장에 저장할 단어 뜻풀이를 만든다.",
-        input_schema: {
-          type: "object",
-          properties: {
-            definition: {
-              type: "string",
-              description: "이 단어의 뜻 — 간결한 한국어 설명",
-            },
-            example: {
-              type: "string",
-              description: "이 단어를 사용한 새로운 예문 (영단어면 영어 문장)",
-            },
-            similar: {
-              type: "array",
-              items: { type: "string" },
-              description: "비슷한 뜻의 단어 3개",
-            },
-          },
-          required: ["definition", "example", "similar"],
-        },
+        input_schema: VOCAB_ENTRY_TOOL_SCHEMA,
       },
     ],
     tool_choice: { type: "tool", name: "vocab_entry" },
-    messages: [
-      {
-        role: "user",
-        content: `SAT/AP 수업 교재를 읽던 학생이 모르는 단어 "${word}"를 단어장에 저장하려고 합니다. 이 단어의 뜻, 예문, 비슷한 단어 3개를 정리해주세요.`,
-      },
-    ],
+    messages: [{ role: "user", content: buildVocabEntryPrompt(word) }],
   });
 
   const toolUse = message.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
     throw new Error("AI 응답을 처리할 수 없습니다.");
   }
-  return toolUse.input as {
-    definition: string;
-    example: string;
-    similar: string[];
-  };
+  return toolUse.input as { definition_en?: string; definition?: string; example: string; similar: string[] };
+}
+
+// 영어 뜻(definition_en)은 새 단어에 필수 — 검증에 실패하면 한 번 더 요청하고, 그래도 안 되면 저장하지 않는다.
+async function generateVocabEntry(word: string) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const entry = await requestVocabEntry(word);
+    const v = validateVocabDefinitions(entry);
+    if (v.ok) {
+      return { definition: v.value.definitionKo, definitionEn: v.value.definitionEn, example: entry.example, similar: entry.similar };
+    }
+  }
+  throw new Error("AI가 영어 뜻을 만들지 못했습니다. 다시 시도해 주세요.");
 }
 
 export async function addVocabWord(
@@ -64,7 +50,7 @@ export async function addVocabWord(
 
   const { data: existing } = await supabase
     .from("vocab_words")
-    .select("id, word, definition, example, similar_words, created_at, folder_id")
+    .select("id, word, definition, definition_en, example, similar_words, created_at, folder_id")
     .eq("student_id", studentId)
     .ilike("word", word)
     .maybeSingle();
@@ -78,6 +64,7 @@ export async function addVocabWord(
       id: existing.id,
       word: existing.word,
       definition: existing.definition,
+      definitionEn: existing.definition_en as string | null,
       example: existing.example,
       similarWords: existing.similar_words,
       createdAt: existing.created_at,
@@ -107,12 +94,13 @@ export async function addVocabWord(
       student_id: studentId,
       word,
       definition: entry.definition,
+      definition_en: entry.definitionEn,
       example: entry.example,
       similar_words: entry.similar,
       source_session_id: legacySession ? sourceSessionId : null,
       folder_id: folderId ?? null,
     })
-    .select("id, word, definition, example, similar_words, created_at")
+    .select("id, word, definition, definition_en, example, similar_words, created_at")
     .single();
   if (error) throw new Error(error.message);
 
@@ -120,6 +108,7 @@ export async function addVocabWord(
     id: inserted.id,
     word: inserted.word,
     definition: inserted.definition,
+    definitionEn: inserted.definition_en as string | null,
     example: inserted.example,
     similarWords: inserted.similar_words,
     createdAt: inserted.created_at,

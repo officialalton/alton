@@ -11,6 +11,7 @@ import {
 } from "./vocab-library-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
+import { pickDefinition } from "@/lib/vocab/definition";
 
 type SourceKey = "custom" | `book:${string}`;
 const ALPHA_RANGES: [string, string][] = [["A", "C"], ["D", "F"], ["G", "I"], ["J", "L"], ["M", "O"], ["P", "R"], ["S", "U"], ["V", "Z"]];
@@ -55,7 +56,7 @@ function Empty({ text }: { text: string }) {
 type DisplayWord = {
   key: string;
   word: string;
-  definitionEn: string;
+  definitionEn: string | null;
   definitionKo: string | null;
   example1: string | null;
   example2: string | null;
@@ -68,6 +69,12 @@ type DisplayWord = {
 
 function englishGloss(synonymWords: string[] | null): string {
   return synonymWords && synonymWords.length ? synonymWords.join(", ") : "(영어 뜻 없음)";
+}
+
+// 2026-10-05 — 영어 뜻이 기본, 한국어는 토글. 영어 뜻(definition_en)이 없는 기존 단어는 한국어 뜻만 보여주고 토글 대상이 아니다.
+function wordDefinition(w: DisplayWord, showKorean: boolean): string {
+  const v = pickDefinition(w.definitionEn, w.definitionKo, showKorean);
+  return v.text || englishGloss(w.synonymWords);
 }
 
 function WordsPanel({
@@ -110,7 +117,7 @@ function WordsPanel({
     if (selected === "custom") {
       const filtered = folderFilter === "all" ? myWords : myWords.filter((w) => w.folderId === folderFilter);
       return filtered.map((w) => ({
-        key: w.id, word: w.word, definitionEn: englishGloss(w.synonymWords), definitionKo: w.definition,
+        key: w.id, word: w.word, definitionEn: w.definitionEn, definitionKo: w.definition,
         example1: w.example, example2: w.example2, synonymWords: w.synonymWords, antonymWords: w.antonymWords,
         myWordId: w.id, libraryWordId: null, folderId: w.folderId,
       }));
@@ -119,7 +126,7 @@ function WordsPanel({
     return words.map((w) => {
       const mine = myWordByLowerWord.get(w.word.toLowerCase());
       return {
-        key: w.id, word: w.word, definitionEn: englishGloss(w.synonymWords), definitionKo: w.definitionKo,
+        key: w.id, word: w.word, definitionEn: w.definitionEn, definitionKo: w.definitionKo,
         example1: w.example1, example2: w.example2, synonymWords: w.synonymWords, antonymWords: w.antonymWords,
         myWordId: mine?.id ?? null, libraryWordId: w.id, folderId: mine?.folderId ?? null,
       };
@@ -218,9 +225,12 @@ function WordsPanel({
       )}
 
       <div className="flex flex-wrap items-center gap-2 mb-3">
-        <button onClick={() => setShowKorean((v) => !v)} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink">
-          {showKorean ? "한글 뜻 숨기기" : "한글 뜻 보기"}
-        </button>
+        {allDisplay.some((w) => pickDefinition(w.definitionEn, w.definitionKo, false).hasToggle) && (
+          <div role="group" aria-label="Definition language" className="inline-flex rounded-lg border-[1.5px] border-grey-200 overflow-hidden text-[12px] font-bold">
+            <button aria-pressed={!showKorean} onClick={() => setShowKorean(false)} className={"px-3 py-1.5 " + (!showKorean ? "bg-ink text-white" : "text-ink")}>English</button>
+            <button aria-pressed={showKorean} onClick={() => setShowKorean(true)} className={"px-3 py-1.5 " + (showKorean ? "bg-ink text-white" : "text-ink")}>한국어</button>
+          </div>
+        )}
         <button
           onClick={() => setHideMode((m) => { const next = m === "definition" ? "none" : "definition"; if (next !== "none") setRevealedKeys(new Set()); return next; })}
           className={"text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (hideMode === "definition" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
@@ -300,7 +310,7 @@ function WordsPanel({
                         const exists = prev.some((x) => x.word.toLowerCase() === w.word.toLowerCase());
                         if (exists) return prev.map((x) => (x.word.toLowerCase() === w.word.toLowerCase() ? { ...x, folderId } : x));
                         return [
-                          { id: `pending-${w.libraryWordId}`, word: w.word, definition: w.definitionKo, example: w.example1, example2: w.example2, synonymWords: w.synonymWords, antonymWords: w.antonymWords, createdAt: new Date().toISOString(), folderId },
+                          { id: `pending-${w.libraryWordId}`, word: w.word, definition: w.definitionKo, definitionEn: w.definitionEn, example: w.example1, example2: w.example2, synonymWords: w.synonymWords, antonymWords: w.antonymWords, createdAt: new Date().toISOString(), folderId },
                           ...prev,
                         ];
                       });
@@ -367,7 +377,7 @@ function WordRow({
           className={"flex-1 text-[13.5px] text-ink " + (defHidden ? "blur-sm select-none cursor-pointer" : "")}
           onClick={() => defHidden && onToggleReveal()}
         >
-          {defHidden ? "가려짐 (클릭해서 보기)" : showKorean ? (w.definitionKo || "(한글 뜻 없음)") : w.definitionEn}
+          {defHidden ? "가려짐 (클릭해서 보기)" : wordDefinition(w, showKorean)}
         </div>
         <div className="relative shrink-0">
           <button
@@ -409,7 +419,6 @@ function WordRow({
       </div>
       {detailOpen && (
         <div className="mt-2 pl-[142px] space-y-1.5">
-          {showKorean && !defHidden && <p className="text-[12.5px] text-grey-500">한글 뜻: {w.definitionKo || "(없음)"}</p>}
           {(w.example1 || w.example2) && (
             <div className="text-[12.5px] text-grey-500 space-y-0.5">
               {w.example1 && <p>예문 1: {w.example1}</p>}
@@ -449,7 +458,7 @@ function AddWordForm({ folders, onCancel, onAdded }: { folders: VocabFolder[]; o
     const r = await addMyVocabWordAction({ word, definition, example, folderId });
     setBusy(false);
     if (!r.ok) { setError(r.error); return; }
-    onAdded({ id: r.value, word: word.trim(), definition: definition.trim() || null, example: example.trim() || null, example2: null, synonymWords: null, antonymWords: null, createdAt: new Date().toISOString(), folderId });
+    onAdded({ id: r.value, word: word.trim(), definition: definition.trim() || null, definitionEn: null, example: example.trim() || null, example2: null, synonymWords: null, antonymWords: null, createdAt: new Date().toISOString(), folderId });
   }
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-4">

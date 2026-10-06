@@ -316,12 +316,12 @@ export async function assignLibraryWordsToStudentAction(studentId: string, libra
 
 /** 라이브러리 단어 검색(교사가 세션/포털에서 배정할 단어를 고를 때). */
 export async function searchLibraryWordsAction(query: string, bookId?: string): Promise<
-  { id: string; word: string; definitionKo: string | null; bookTitle: string; difficulty: number | null }[]
+  { id: string; word: string; definitionKo: string | null; definitionEn: string | null; bookTitle: string; difficulty: number | null }[]
 > {
   const { supabase } = await requireStudentFeature("vocab");
   let q = supabase
     .from("vocab_library_words")
-    .select("id, word, definition_ko, difficulty, book:vocab_library_books(title)")
+    .select("id, word, definition_ko, definition_en, difficulty, book:vocab_library_books(title)")
     .limit(30);
   if (bookId) q = q.eq("book_id", bookId);
   if (query.trim()) q = q.ilike("word", `${query.trim()}%`);
@@ -329,7 +329,7 @@ export async function searchLibraryWordsAction(query: string, bookId?: string): 
   return (data ?? []).map((w) => {
     const book = Array.isArray(w.book) ? w.book[0] : w.book;
     return {
-      id: w.id as string, word: w.word as string, definitionKo: w.definition_ko as string | null,
+      id: w.id as string, word: w.word as string, definitionKo: w.definition_ko as string | null, definitionEn: w.definition_en as string | null,
       bookTitle: (book as { title?: string } | null)?.title ?? "", difficulty: w.difficulty as number | null,
     };
   });
