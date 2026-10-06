@@ -8,6 +8,7 @@ export type VocabEntry = {
   id: string;
   word: string;
   definition: string | null;
+  definitionEn: string | null;
   example: string | null;
   similarWords: string[] | null;
   createdAt: string;
@@ -25,7 +26,7 @@ export async function loadVocabWords(
 ): Promise<VocabEntry[]> {
   const { data } = await supabase
     .from("vocab_words")
-    .select("id, word, definition, example, similar_words, created_at")
+    .select("id, word, definition, definition_en, example, similar_words, created_at")
     .eq("student_id", studentId)
     .order("created_at", { ascending: false });
 
@@ -33,6 +34,7 @@ export async function loadVocabWords(
     id: v.id,
     word: v.word,
     definition: v.definition,
+    definitionEn: v.definition_en as string | null,
     example: v.example,
     similarWords: v.similar_words,
     createdAt: v.created_at,

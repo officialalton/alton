@@ -71,3 +71,28 @@ describe("VocabLibraryTab — 시험 만들기·채점 흐름", () => {
     expect(screen.getByText(/오답 노트/)).toBeInTheDocument();
   });
 });
+
+describe("VocabLibraryTab — 단어 뜻 영어 기본 + 한국어 토글", () => {
+  const word = (over: Record<string, unknown>) => ({
+    id: "w1", word: "abate", definition: "줄어들다", definitionEn: "to become less intense",
+    example: null, example2: null, synonymWords: ["diminish"], antonymWords: null,
+    createdAt: "2026-10-05T00:00:00Z", folderId: null, ...over,
+  });
+
+  it("영어 뜻이 기본으로 보이고 한국어 버튼을 누르면 한국어 뜻이 보인다", () => {
+    render(<VocabLibraryTab myWords={[word({})]} books={[]} quizzes={[]} folders={folders} />);
+    expect(screen.getByText("to become less intense")).toBeInTheDocument();
+    expect(screen.queryByText("줄어들다")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "한국어" }));
+    expect(screen.getByText("줄어들다")).toBeInTheDocument();
+    expect(screen.queryByText("to become less intense")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "English" }));
+    expect(screen.getByText("to become less intense")).toBeInTheDocument();
+  });
+
+  it("영어 뜻이 없는 레거시 단어는 한국어 뜻만 보이고 토글이 없다", () => {
+    render(<VocabLibraryTab myWords={[word({ definitionEn: null })]} books={[]} quizzes={[]} folders={folders} />);
+    expect(screen.getByText("줄어들다")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "한국어" })).not.toBeInTheDocument();
+  });
+});

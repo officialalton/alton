@@ -7,6 +7,7 @@ export type MyVocabWord = {
   id: string;
   word: string;
   definition: string | null;
+  definitionEn: string | null;
   example: string | null;
   example2: string | null;
   synonymWords: string[] | null;
@@ -21,6 +22,7 @@ export type LibraryWord = {
   id: string;
   word: string;
   definitionKo: string | null;
+  definitionEn: string | null;
   synonymWords: string[] | null;
   antonymWords: string[] | null;
   example1: string | null;
@@ -30,13 +32,14 @@ export type LibraryWord = {
 export async function loadMyVocabWords(supabase: SupabaseClient, studentId: string): Promise<MyVocabWord[]> {
   const { data } = await supabase
     .from("vocab_words")
-    .select("id, word, definition, example, example2, similar_words, antonym_words, created_at, folder_id")
+    .select("id, word, definition, definition_en, example, example2, similar_words, antonym_words, created_at, folder_id")
     .eq("student_id", studentId)
     .order("created_at", { ascending: false });
   return (data ?? []).map((v) => ({
     id: v.id as string,
     word: v.word as string,
     definition: v.definition as string | null,
+    definitionEn: v.definition_en as string | null,
     example: v.example as string | null,
     example2: v.example2 as string | null,
     synonymWords: v.similar_words as string[] | null,
@@ -61,13 +64,14 @@ export async function loadLibraryBooks(supabase: SupabaseClient): Promise<Librar
 export async function loadLibraryBookWords(supabase: SupabaseClient, bookId: string): Promise<LibraryWord[]> {
   const { data } = await supabase
     .from("vocab_library_words")
-    .select("id, word, definition_ko, synonym_words, antonym_words, example1, example2")
+    .select("id, word, definition_ko, definition_en, synonym_words, antonym_words, example1, example2")
     .eq("book_id", bookId)
     .order("position", { ascending: true });
   return (data ?? []).map((w) => ({
     id: w.id as string,
     word: w.word as string,
     definitionKo: w.definition_ko as string | null,
+    definitionEn: w.definition_en as string | null,
     synonymWords: w.synonym_words as string[] | null,
     antonymWords: w.antonym_words as string[] | null,
     example1: w.example1 as string | null,

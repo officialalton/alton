@@ -5,6 +5,7 @@
 // 실행: npx tsx scripts/vocab-library-seed.ts --book=1 [--book=2 ...] [--dry-run]
 import { readFileSync, existsSync, appendFileSync } from "node:fs";
 import path from "node:path";
+import { hasHangul } from "../lib/vocab/definition";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) {
@@ -36,7 +37,7 @@ const VOLUME_PLAN: VolumePlan[] = [
 ];
 
 type RawWord = {
-  word: string; definition_ko: string; example1: string; example2: string;
+  word: string; definition_ko: string; definition_en: string; example1: string; example2: string;
   synonym_words: string[]; antonym_words: string[]; difficulty: number; source_note: string;
 };
 
@@ -60,6 +61,7 @@ function validateWord(w: unknown, seenGlobal: Set<string>, seenThisBook: Set<str
   const key = normalize(word);
   if (seenGlobal.has(key) || seenThisBook.has(key)) return { ok: false, reason: "duplicate" };
   if (!r.definition_ko || typeof r.definition_ko !== "string" || r.definition_ko.trim().length < 2) return { ok: false, reason: "definition_missing" };
+  if (!r.definition_en || typeof r.definition_en !== "string" || r.definition_en.trim().length < 2 || hasHangul(r.definition_en)) return { ok: false, reason: "definition_en_missing_or_hangul" };
   if (!r.example1 || typeof r.example1 !== "string" || !exampleUsesWord(r.example1, word)) return { ok: false, reason: "example1_missing_or_mismatch" };
   if (!r.example2 || typeof r.example2 !== "string" || !exampleUsesWord(r.example2, word)) return { ok: false, reason: "example2_missing_or_mismatch" };
   if (normalize(r.example1) === normalize(r.example2)) return { ok: false, reason: "examples_identical" };
@@ -73,7 +75,7 @@ function validateWord(w: unknown, seenGlobal: Set<string>, seenThisBook: Set<str
   return {
     ok: true,
     value: {
-      word, definition_ko: r.definition_ko.trim(), example1: r.example1.trim(), example2: r.example2.trim(),
+      word, definition_ko: r.definition_ko.trim(), definition_en: r.definition_en.trim(), example1: r.example1.trim(), example2: r.example2.trim(),
       synonym_words: r.synonym_words.map((s) => s.trim()), antonym_words: r.antonym_words.map((s) => s.trim()),
       difficulty, source_note: r.source_note.trim(), position: 0,
     },
@@ -104,6 +106,7 @@ async function generateBatch(plan: VolumePlan, exclude: string[], need: number) 
                 properties: {
                   word: { type: "string", description: "영단어(원형). 구(phrase)는 피한다." },
                   definition_ko: { type: "string", description: "SAT 지문 문맥에서 실제로 쓰이는 뜻 하나(한글, 간결하게)." },
+                  definition_en: { type: "string", description: "Same single sense in one concise, student-friendly English definition (no Korean characters)." },
                   example1: { type: "string", description: "이 단어를 이 뜻으로 쓰는 영어 예문(SAT 지문 톤). 반드시 이 단어(또는 그 활용형)를 포함." },
                   example2: { type: "string", description: "example1과 다른 상황의 두 번째 영어 예문. 역시 이 단어를 포함하고 example1과 문장이 달라야 한다." },
                   synonym_words: { type: "array", items: { type: "string" }, minItems: 2, maxItems: 2, description: "같은 뜻의 유사어 2개(표제어 자신 제외)." },
@@ -111,7 +114,7 @@ async function generateBatch(plan: VolumePlan, exclude: string[], need: number) 
                   difficulty: { type: "number", description: `이 권의 난이도 범위(${plan.difficultyMin}~${plan.difficultyMax}) 안의 정수.` },
                   source_note: { type: "string", description: "이 단어를 이 권·이 난이도에 넣은 선정 기준(예: 'SAT Reading 사설 지문 고빈도', '수사학적 분석 지문 필수어'). College Board 등 특정 공식 자료명은 쓰지 않는다." },
                 },
-                required: ["word", "definition_ko", "example1", "example2", "synonym_words", "antonym_words", "difficulty", "source_note"],
+                required: ["word", "definition_ko", "definition_en", "example1", "example2", "synonym_words", "antonym_words", "difficulty", "source_note"],
               },
             },
           },
@@ -191,7 +194,7 @@ async function fillBook(admin: import("@supabase/supabase-js").SupabaseClient, p
   if (bookErr || !book) throw new Error(`권 upsert 실패(${plan.volumeNo}): ${bookErr?.message}`);
 
   const rows = accepted.map((w) => ({
-    book_id: book.id, word: w.word, definition_ko: w.definition_ko, synonym_words: w.synonym_words,
+    book_id: book.id, word: w.word, definition_ko: w.definition_ko, definition_en: w.definition_en, synonym_words: w.synonym_words,
     antonym_words: w.antonym_words, example1: w.example1, example2: w.example2, position: w.position,
     difficulty: w.difficulty, source_note: w.source_note,
   }));

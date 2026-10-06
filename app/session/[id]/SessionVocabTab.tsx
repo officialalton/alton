@@ -77,7 +77,7 @@ export default function SessionVocabTab({
   );
 }
 
-function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigned: (words: { id: string; word: string; definition: string | null; example: string | null; example2: string | null; synonymWords: string[] | null; antonymWords: string[] | null; createdAt: string; folderId: string | null }[]) => void }) {
+function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigned: (words: { id: string; word: string; definition: string | null; definitionEn: string | null; example: string | null; example2: string | null; synonymWords: string[] | null; antonymWords: string[] | null; createdAt: string; folderId: string | null }[]) => void }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Awaited<ReturnType<typeof searchLibraryWordsAction>>>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -95,7 +95,7 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
       const now = new Date().toISOString();
       onAssigned(
         results.filter((r) => selected.has(r.id)).map((r) => ({
-          id: r.id, word: r.word, definition: r.definitionKo, example: null, example2: null, synonymWords: null, antonymWords: null, createdAt: now, folderId: null,
+          id: r.id, word: r.word, definition: r.definitionKo, definitionEn: r.definitionEn, example: null, example2: null, synonymWords: null, antonymWords: null, createdAt: now, folderId: null,
         }))
       );
     }
@@ -118,7 +118,7 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
                 onChange={() => setSelected((prev) => { const next = new Set(prev); if (next.has(r.id)) next.delete(r.id); else next.add(r.id); return next; })}
               />
               <span className="font-bold text-ink">{r.word}</span>
-              <span className="text-grey-500">{r.definitionKo}</span>
+              <span className="text-grey-500">{r.definitionEn ?? r.definitionKo}</span>
               <span className="text-[10.5px] text-grey-400 ml-auto">{r.bookTitle}</span>
             </label>
           ))}
