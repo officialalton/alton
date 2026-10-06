@@ -18,5 +18,6 @@ import { ITEM as sxPrism } from "../items/area_volume.prism_volume.SX.P";
 import { ITEM as sxCylR } from "../items/area_volume.cylinder_volume_radius.SX.P";
 import { ITEM as sxCylD } from "../items/area_volume.cylinder_volume_diameter.SX.P";
 import { ITEM as sxComp } from "../items/area_volume.composite_solid.SX.P";
+import { ITEM as lsArea } from "../items/area_volume.rectangle_area.LS.P";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea];

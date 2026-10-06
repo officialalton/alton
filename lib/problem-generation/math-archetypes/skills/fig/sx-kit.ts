@@ -74,7 +74,7 @@ export const COMP_INTROS = [
   "A decorative lamp is built from a cylinder and a hemisphere placed on top; the figure labels the radius and the height of the cylinder.",
   "A tank for storing gas is a cylinder with a half-sphere cap, as in the figure; the radius and the cylinder height are labeled.",
 ];
-const TAILS = [
+export const TAILS = [
   "Use only the measurements shown in the figure to answer the question that follows, and give your answer in the unit used there.",
   "Study the labeled measurements in the figure carefully before answering, because every length you need appears on the drawing.",
   "The drawing is not to scale, so rely on the labeled numbers rather than on how long each segment looks.",

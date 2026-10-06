@@ -10,6 +10,7 @@ import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
 import { renderUnitCircle } from "./templates/unit-circle";
 import { renderTrigCurve } from "./templates/trig-curve";
+import { renderLShape } from "./templates/l-shape";
 import { renderSolidX } from "./templates/solid-x";
 import { renderTriNested } from "./templates/triangle-nested";
 import { renderVennTree } from "./templates/venn-tree";
@@ -29,6 +30,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "venn_tree": return renderVennTree(spec).alt;
     case "triangle_nested": return renderTriNested(spec).alt;
     case "solid_x": return renderSolidX(spec).alt;
+    case "l_shape": return renderLShape(spec).alt;
     case "image": return spec.alt;
     default: return undefined;
   }

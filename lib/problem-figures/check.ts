@@ -12,6 +12,7 @@ import { lintSolidAgainstText, renderSolid } from "./templates/solid";
 import { lintCompositeAgainstText, renderComposite } from "./templates/composite";
 import { lintUnitCircleAgainstText, renderUnitCircle } from "./templates/unit-circle";
 import { lintTrigCurveAgainstText, renderTrigCurve } from "./templates/trig-curve";
+import { lintLShapeAgainstText, renderLShape } from "./templates/l-shape";
 import { lintSolidXAgainstText, renderSolidX } from "./templates/solid-x";
 import { lintTriNestedAgainstText, renderTriNested } from "./templates/triangle-nested";
 import { lintVennTreeAgainstText, renderVennTree } from "./templates/venn-tree";
@@ -108,6 +109,11 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "composite") {
     const r = renderComposite(spec);
     issues.push(...r.issues, ...lintCompositeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "l_shape") {
+    const r = renderLShape(spec);
+    issues.push(...r.issues, ...lintLShapeAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "solid_x") {

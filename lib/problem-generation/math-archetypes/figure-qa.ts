@@ -377,6 +377,23 @@ function checkSolidXFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   if (!/Figure not drawn to scale/.test(svg)) issues.push({ code: "render_value_mismatch", message: "입체 확장 도식은 'not drawn to scale' 표기가 있어야 합니다." });
 }
 
+
+// ───────────────────────── L자형(l_shape) 충실도 ─────────────────────────
+function checkLShapeFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const S = spec as unknown as { shape: { W: number; H: number; w1: number; h1: number }; sides?: { edge: number; label: string }[]; notToScale?: boolean };
+  const ls = [...svg.matchAll(/<line\b([^>]*)\/?>/g)].map((m) => ({ x1: Number(attr(m[1], "x1")), y1: Number(attr(m[1], "y1")), x2: Number(attr(m[1], "x2")), y2: Number(attr(m[1], "y2")), w: attr(m[1], "stroke-width"), stroke: attr(m[1], "stroke") })).filter((l) => l.stroke === "#111" && l.w === "2");
+  if (ls.length !== 6) { issues.push({ code: "render_empty", message: `L자형의 변이 ${ls.length}개 그려졌습니다(6개 필요).` }); return; }
+  // 모든 변이 가로·세로여야 하고(직각), 변 길이 비가 shape 와 같아야 한다
+  for (const l of ls) if (Math.abs(l.x1 - l.x2) > 0.6 && Math.abs(l.y1 - l.y2) > 0.6) issues.push({ code: "render_value_mismatch", message: "가로·세로가 아닌 변이 있습니다(직각 도형이어야 함)." });
+  const len = (l: { x1: number; y1: number; x2: number; y2: number }) => Math.hypot(l.x2 - l.x1, l.y2 - l.y1); const { W, H, w1, h1 } = S.shape; const want = [W, h1, W - w1, H - h1, w1, H];
+  const big = Math.max(...ls.map(len)), bigW = Math.max(W, H); const k = big / bigW;
+  const sorted = [...ls].sort((a, b) => len(a) - len(b)); const ws = [...want].sort((a, b) => a - b);
+  sorted.forEach((l, i) => { if (Math.abs(len(l) - ws[i] * k) > 2.5) issues.push({ code: "render_value_mismatch", message: `그려진 변 길이 ${len(l).toFixed(1)}px 이 shape 의 ${ws[i]} (환산 ${(ws[i] * k).toFixed(1)}px) 와 다릅니다.` }); });
+  const ts = texts(svg); for (const q of S.sides ?? []) if (!ts.some((t) => t.text === q.label)) issues.push({ code: "label_missing", message: `변 라벨 '${q.label}' 이 그려지지 않았습니다.` });
+  // 숫자 라벨은 shape 의 해당 변과 비례(= 라벨 값 ÷ 참값 이 모두 같아야 함)
+  if (!S.notToScale) { const r = (S.sides ?? []).map((q) => ({ v: /^\d+(?:\.\d+)?$/.test(q.label) ? Number(q.label) : null, t: want[q.edge] })).filter((q) => q.v !== null) as { v: number; t: number }[]; for (let i = 1; i < r.length; i++) if (Math.abs(r[i].v / r[i].t / (r[0].v / r[0].t) - 1) > 0.05) { issues.push({ code: "render_value_mismatch", message: `라벨 ${r[i].v} 과 ${r[0].v} 의 비가 그려진 변의 비와 다릅니다(그림이 라벨과 비례하지 않음).` }); break; } }
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -391,6 +408,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
+  if (spec.type === "l_shape") { checkLShapeFidelity(spec, markup, issues); return issues; }
   if (spec.type === "solid_x") { checkSolidXFidelity(spec, markup, issues); return issues; }
   if (spec.type === "triangle_nested") { checkTriNestedFidelity(spec, markup, issues); return issues; }
   if (spec.type === "venn_tree") { checkVennTreeFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }

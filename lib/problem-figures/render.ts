@@ -9,6 +9,7 @@ import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
 import { renderUnitCircle } from "./templates/unit-circle";
 import { renderTrigCurve } from "./templates/trig-curve";
+import { renderLShape } from "./templates/l-shape";
 import { renderSolidX } from "./templates/solid-x";
 import { renderTriNested } from "./templates/triangle-nested";
 import { renderVennTree } from "./templates/venn-tree";
@@ -71,6 +72,7 @@ export function renderFigureSvg(specIn: FigureSpec, opts?: { text?: string }): s
   if (spec.type === "venn_tree") return renderVennTree(spec).svg;
   if (spec.type === "triangle_nested") return renderTriNested(spec).svg;
   if (spec.type === "solid_x") return renderSolidX(spec).svg;
+  if (spec.type === "l_shape") return renderLShape(spec).svg;
   if (spec.type === "figure_choice") return renderFigureChoice(spec, (c) => renderFigureSvg(c as FigureSpec)).markup;
   if (spec.type === "figure_set") return renderFigureSet(spec, (c) => renderFigureSvg(c as FigureSpec), (c) => figureAlt(c as FigureSpec)).markup; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);
