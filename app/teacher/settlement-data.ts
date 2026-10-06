@@ -1,6 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
-import { payoutPeriodOfDate, PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF, type PayoutPeriodInfo } from "@/lib/payout/payout-schedule";
+import { companyDateOf, payoutPeriodOfDate, PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF, type PayoutPeriodInfo } from "@/lib/payout/payout-schedule";
 
 // P4-2 — 교사 본인 정산 조회 데이터 계층.
 // 착수 정리: docs/2026-09-12-p4-2-teacher-settlement-plan.md
@@ -109,6 +109,10 @@ export type SettlementMonth = {
   periodEnd: string | null;
   /** 예상 지급일 — 명목 10일·26일을 직전 영업일로 보정한 값. */
   nominalPayoutDate: string | null;
+  /** 실제 적용되는 지급 기한 = 승인 시 저장된 값, 없으면 기간 규칙의 기한. */
+  effectiveDeadline?: string | null;
+  /** 지급 완료가 아닌데 기한(회사 시간대 날짜)이 이미 지났다 — "다음 지급"이 아니라 "기한 경과·처리 중"으로 보여야 한다. */
+  overdue?: boolean;
   currency: string;
   status: SettlementStatus;
   /** 시스템이 수업별로 자동 산정한 합계(관리자가 고칠 수 없는 값). */
@@ -142,6 +146,10 @@ export type TeacherSettlement = {
   approvedTotalsByCurrency: Record<string, number>;
   /** 지급 완료 금액(통화별). */
   paidTotalsByCurrency: Record<string, number>;
+  /** 기한이 지났는데 아직 "예정" 상태인 금액(통화별) — 다음 지급 카드에 섞지 않고 별도로 보여 준다. */
+  overdueTotalsByCurrency?: Record<string, number>;
+  /** 위 금액 중 가장 이른 원래 기한. */
+  overdueSince?: string | null;
   /** 다음 지급 예정 월('YYYY-MM') — nextPayoutDate가 속한 달. 없으면 null. */
   nextPayoutMonth: string | null;
   /** 다음 명목 지급일 — 예정 금액이 있는 가장 이른 정산 기간의 지급일. 없으면 null. */
@@ -169,9 +177,12 @@ function extractName(rel: unknown): string | null {
 
 export async function loadTeacherSettlement(
   supabase: SupabaseClient,
-  teacherId: string
+  teacherId: string,
+  now: Date = new Date()
 ): Promise<TeacherSettlement> {
-  const refreshedAt = new Date().toISOString();
+  const refreshedAt = now.toISOString();
+  // 기한이 지났는지는 회사 시간대(America/Los_Angeles) 달력 날짜로 판단한다.
+  const today = companyDateOf(now) ?? refreshedAt.slice(0, 10);
   const empty: TeacherSettlement = {
     months: [],
     scheduledTotalsByCurrency: {},
@@ -298,6 +309,8 @@ export async function loadTeacherSettlement(
   const inReviewTotalsByCurrency: Record<string, number> = {};
   const approvedTotalsByCurrency: Record<string, number> = {};
   const paidTotalsByCurrency: Record<string, number> = {};
+  const overdueTotalsByCurrency: Record<string, number> = {};
+  let overdueSince: string | null = null;
 
   for (const item of items) {
     const session = item.session_id ? sessionById.get(item.session_id as string) : undefined;
@@ -339,8 +352,13 @@ export async function loadTeacherSettlement(
       currency,
     };
 
+    // 지급 완료가 아니고 기한이 지났으면 "기한 경과·처리 중" — 과거 날짜를 다음 지급으로 보여 주지 않는다.
+    const itemDeadline = ((batch?.scheduled_payout_date as string | null) ?? period?.payoutDate) ?? null;
+    const itemOverdue = status !== "paid" && itemDeadline !== null && itemDeadline < today;
+
     const existing = byMonthCurrency.get(key);
     if (existing) {
+      if (itemOverdue) existing.overdue = true;
       existing.totalAmountMinor += line.amountMinor;
       if (isAdjustment) existing.adjustmentAmountMinor += line.amountMinor;
       else {
@@ -356,6 +374,8 @@ export async function loadTeacherSettlement(
         periodStart: period?.periodStart ?? null,
         periodEnd: period?.periodEnd ?? null,
         nominalPayoutDate: period?.payoutDate ?? null,
+        effectiveDeadline: itemDeadline,
+        overdue: itemOverdue,
         currency,
         status,
         autoCalculatedAmountMinor: isAdjustment ? 0 : line.amountMinor,
@@ -370,6 +390,12 @@ export async function loadTeacherSettlement(
         lines: isAdjustment ? [] : [line],
         adjustments: item.batch_id ? adjustmentsByBatch.get(item.batch_id as string) ?? [] : [],
       });
+    }
+
+    if (itemOverdue && status === "scheduled") {
+      overdueTotalsByCurrency[currency] = (overdueTotalsByCurrency[currency] ?? 0) + line.amountMinor;
+      if (itemDeadline && (overdueSince === null || itemDeadline < overdueSince)) overdueSince = itemDeadline;
+      continue; // "다음 지급 예정" 합계에는 넣지 않는다.
     }
 
     const bucket = {
@@ -391,9 +417,10 @@ export async function loadTeacherSettlement(
   }
 
   // 다음 지급 예정일 = 아직 확정되지 않은(예정) 금액이 있는 가장 이른 정산 기간의 지급일.
+  // "다음 지급" 카드의 금액(예정)과 짝이 맞게: 예정 상태이면서 아직 오지 않은 기한 중 가장 이른 것만. 기한 경과 건은 제외한다.
   const scheduledPeriods = months
-    .filter((m) => m.status === "scheduled" && m.nominalPayoutDate)
-    .map((m) => m.nominalPayoutDate as string)
+    .filter((m) => m.status === "scheduled" && !m.overdue && m.effectiveDeadline && m.effectiveDeadline >= today)
+    .map((m) => m.effectiveDeadline as string)
     .sort();
   const nextPayoutDate = scheduledPeriods[0] ?? null;
   const nextPayoutMonth = nextPayoutDate ? monthKey(nextPayoutDate) : null;
@@ -404,6 +431,8 @@ export async function loadTeacherSettlement(
     inReviewTotalsByCurrency,
     approvedTotalsByCurrency,
     paidTotalsByCurrency,
+    overdueTotalsByCurrency,
+    overdueSince,
     nextPayoutMonth,
     nextPayoutDate,
     refreshedAt,

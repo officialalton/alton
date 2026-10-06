@@ -221,3 +221,21 @@ describe("송금 요청일 = 지급 기한 − N영업일", () => {
     expect(PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT).toBe(3);
   });
 });
+
+describe("formatPeriodStatusEn — 기한 경과 표기", () => {
+  const OCT7 = new Date("2026-10-07T17:00:00Z");
+  it("미지급인데 기한이 지났으면 'Was due … — processing'", async () => {
+    const { formatPeriodStatusEn } = await import("./payout-schedule");
+    expect(formatPeriodStatusEn("2026-09-01", "2026-09-15", false, OCT7)).toEqual({ label: "Sep 1–15, 2026 · Was due Sep 25, 2026 — processing", overdue: true });
+  });
+  it("지급 완료이거나 기한 전이면 일반 라벨", async () => {
+    const { formatPeriodStatusEn } = await import("./payout-schedule");
+    expect(formatPeriodStatusEn("2026-09-01", "2026-09-15", true, OCT7).overdue).toBe(false);
+    expect(formatPeriodStatusEn("2026-10-01", "2026-10-15", false, OCT7)).toEqual({ label: "Oct 1–15, 2026 → paid by Oct 26", overdue: false });
+  });
+  it("기한 당일(LA)은 아직 경과가 아니다", async () => {
+    const { formatPeriodStatusEn } = await import("./payout-schedule");
+    expect(formatPeriodStatusEn("2026-10-01", "2026-10-15", false, new Date("2026-10-26T20:00:00Z")).overdue).toBe(false);
+    expect(formatPeriodStatusEn("2026-10-01", "2026-10-15", false, new Date("2026-10-27T20:00:00Z")).overdue).toBe(true);
+  });
+});

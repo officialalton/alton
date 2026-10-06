@@ -436,3 +436,27 @@ describe("SettlementTab — payout notices", () => {
     expect(screen.queryByTestId("payout-notices")).not.toBeInTheDocument();
   });
 });
+
+describe("SettlementTab — 기한 경과", () => {
+  it("기한이 지난 예정 건은 'Overdue — being processed'와 원래 기한을 보여주고, 다음 지급 기한 줄은 없다", async () => {
+    loadPageDataMock.mockResolvedValue({
+      settlement: {
+        ...SETTLEMENT,
+        scheduledTotalsByCurrency: {},
+        overdueTotalsByCurrency: { KRW: 70000 },
+        overdueSince: "2026-09-25",
+        nextPayoutMonth: null,
+        nextPayoutDate: null,
+        months: [{ ...SETTLEMENT.months[0], status: "scheduled", overdue: true, effectiveDeadline: "2026-09-25", scheduledPayoutDate: null }],
+      },
+      account: null,
+      documents: [],
+      notices: [],
+    });
+    render(<SettlementTab />);
+    expect(await screen.findByTestId("overdue-payout")).toHaveTextContent("Overdue — being processed");
+    expect(screen.getByTestId("overdue-payout")).toHaveTextContent("Was due Sep 25, 2026");
+    expect(screen.queryByText(/Next payout deadline/)).not.toBeInTheDocument();
+    expect(screen.getByText("No upcoming amount yet.")).toBeInTheDocument();
+  });
+});

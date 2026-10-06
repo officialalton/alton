@@ -95,6 +95,8 @@ function payoutScheduleLabel(m: SettlementMonth, tz: string): string {
     if (m.externalTransfer) return `Paid on ${formatDateOnly(m.externalTransfer.transferredOn)}`;
     return m.paidAt ? `Paid on ${fmtDate(m.paidAt, undefined, tz)}` : "Paid";
   }
+  // 기한이 지난 미지급 건: 과거 날짜를 "Paid by"로 보여 주지 않는다.
+  if (m.overdue && m.effectiveDeadline) return `Was due ${formatDateOnly(m.effectiveDeadline)} — processing`;
   if (m.scheduledPayoutDate) {
     const dateLabel = formatDateOnly(m.scheduledPayoutDate);
     return m.status === "in_review" ? `Paid after review (by ${dateLabel})` : `Paid by ${dateLabel}`;
@@ -240,6 +242,15 @@ export default function SettlementTab({ onAccountSaved }: { onAccountSaved?: () 
       <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4">
         <div className="text-[13px] font-bold text-ink mb-2">Next upcoming payout</div>
         <TotalsRow totals={settlement.scheduledTotalsByCurrency} emptyLabel="No upcoming amount yet." />
+        {Object.keys(settlement.overdueTotalsByCurrency ?? {}).length > 0 && (
+          <div className="mt-2" data-testid="overdue-payout">
+            <div className="text-[11.5px] font-bold text-red mb-0.5">Overdue — being processed</div>
+            <TotalsRow totals={settlement.overdueTotalsByCurrency ?? {}} emptyLabel="" />
+            {settlement.overdueSince && (
+              <div className="text-[11.5px] text-grey-500">Was due {formatDateOnly(settlement.overdueSince)} — we are processing this payout.</div>
+            )}
+          </div>
+        )}
         <div className="text-[11.5px] text-grey-500 mt-1.5 space-y-0.5">
           <div>
             <b>

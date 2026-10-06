@@ -28,10 +28,12 @@ const BASE_TABLES = {
   sessions: [
     { id: "sess-1", reservation_id: "res-1", subject_enrollment_id: "se-1" },
     { id: "sess-2", reservation_id: "res-2", subject_enrollment_id: "se-1" },
+    { id: "sess-3", reservation_id: "res-3", subject_enrollment_id: "se-1" },
   ],
   reservations: [
     { id: "res-1", starts_at: "2026-08-10T01:00:00.000Z" },
     { id: "res-2", starts_at: "2026-09-03T01:00:00.000Z" },
+    { id: "res-3", starts_at: "2026-10-03T01:00:00.000Z" },
   ],
   subject_enrollments: [{ id: "se-1", child: { name: "김학생" }, subject: { name: "SAT Math" } }],
 };
@@ -50,6 +52,9 @@ function item(over: Partial<Row>): Row {
     ...over,
   };
 }
+
+// 기한 판단은 "지금"에 따라 달라지므로 시각을 고정한다. EARLY: 모든 기한 이전(기존 의미 유지).
+const EARLY = new Date("2026-08-01T12:00:00Z");
 
 describe("nextMonthKey", () => {
   it("연말을 넘어가면 해가 바뀐다", () => {
@@ -96,7 +101,7 @@ describe("settlementStatusOf — DB 배치 상태 → 교사 4단계 매핑", ()
 describe("loadTeacherSettlement", () => {
   it("정산 내역이 없으면 빈 결과와 null 지급 예정 월을 돌려준다", async () => {
     const { client } = supabaseMock({ payout_items: [] });
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
     expect(result.months).toEqual([]);
     expect(result.nextPayoutMonth).toBeNull();
     expect(result.scheduledTotalsByCurrency).toEqual({});
@@ -120,7 +125,7 @@ describe("loadTeacherSettlement", () => {
       ],
     });
 
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
 
     expect(result.scheduledTotalsByCurrency).toEqual({ KRW: 50000 });
     expect(result.inReviewTotalsByCurrency).toEqual({ KRW: 10000 });
@@ -138,7 +143,7 @@ describe("loadTeacherSettlement", () => {
       payout_batches: [],
     });
 
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
 
     expect(result.months).toHaveLength(1);
     const m = result.months[0];
@@ -169,7 +174,7 @@ describe("loadTeacherSettlement", () => {
       payout_batches: [{ id: "b1", status: "approved", paid_at: null }],
     });
 
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
 
     const august = result.months.filter((m) => m.settlementMonth === "2026-08");
     expect(august.map((m) => m.status).sort()).toEqual(["approved", "scheduled"]);
@@ -204,7 +209,7 @@ describe("loadTeacherSettlement", () => {
       ],
     });
 
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
     const august = result.months.find((m) => m.settlementMonth === "2026-08")!;
 
     expect(august.autoCalculatedAmountMinor).toBe(60000);
@@ -242,7 +247,7 @@ describe("loadTeacherSettlement", () => {
       payout_batches: [],
     });
 
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
 
     expect(result.months).toHaveLength(1);
     expect(result.months[0]).toMatchObject({
@@ -267,7 +272,7 @@ describe("loadTeacherSettlement", () => {
       payout_batches: [],
     });
 
-    await loadTeacherSettlement(client, "t1");
+    await loadTeacherSettlement(client, "t1", EARLY);
 
     expect(callCounts.payout_items).toBe(1);
     expect(callCounts.sessions).toBe(1);
@@ -282,10 +287,85 @@ describe("loadTeacherSettlement", () => {
       payout_batches: [],
     });
 
-    const result = await loadTeacherSettlement(client, "t1");
+    const result = await loadTeacherSettlement(client, "t1", EARLY);
 
     expect(result.scheduledTotalsByCurrency).toEqual({ KRW: 7000 });
     expect(result.months[0].settlementMonth).toBe("unknown");
     expect(result.months[0].payoutMonth).toBe("unknown");
+  });
+});
+
+describe("loadTeacherSettlement — 기한이 지난 건은 '다음 지급'이 아니다", () => {
+  const OCT7 = new Date("2026-10-07T17:00:00Z"); // LA 10월 7일
+
+  it("배치 없는 옛 예정 건(기한 9/25 경과)은 다음 지급에서 빠지고 '기한 경과' 합계로 분리된다", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [item({ id: "i-old", session_id: "sess-2", batch_id: null, amount_minor: 70000 })],
+      payout_batches: [],
+    });
+    const r = await loadTeacherSettlement(client, "t1", OCT7);
+    expect(r.scheduledTotalsByCurrency).toEqual({});
+    expect(r.overdueTotalsByCurrency).toEqual({ KRW: 70000 });
+    expect(r.overdueSince).toBe("2026-09-25");
+    expect(r.nextPayoutDate).toBeNull();
+    expect(r.months[0]).toMatchObject({ overdue: true, effectiveDeadline: "2026-09-25" });
+  });
+
+  it("검토 중·승인된 묶음도 기한이 지났으면 overdue 표시(금액은 각자 카드에 남는다). 다음 기한은 예정 금액과 짝이라 예정 건이 없으면 null", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [
+        item({ id: "i-rev", session_id: "sess-2", batch_id: "b-rev", amount_minor: 10000 }),
+        item({ id: "i-fut", session_id: "sess-1", batch_id: "b-fut", amount_minor: 20000 }),
+      ],
+      payout_batches: [
+        { id: "b-rev", status: "reviewing", paid_at: null, scheduled_payout_date: "2026-09-25" },
+        { id: "b-fut", status: "approved", paid_at: null, scheduled_payout_date: "2026-10-26" },
+      ],
+    });
+    const r = await loadTeacherSettlement(client, "t1", OCT7);
+    expect(r.inReviewTotalsByCurrency).toEqual({ KRW: 10000 });
+    expect(r.approvedTotalsByCurrency).toEqual({ KRW: 20000 });
+    expect(r.months.find((m) => m.status === "in_review")?.overdue).toBe(true);
+    expect(r.months.find((m) => m.status === "approved")?.overdue).toBe(false);
+    expect(r.nextPayoutDate).toBeNull();
+  });
+
+  it("기한이 지난 건과 미래 기한 건이 섞이면 다음 기한은 미래 것이다", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [
+        item({ id: "i-old", session_id: "sess-2", batch_id: null, amount_minor: 70000 }),
+        item({ id: "i-new", session_id: "sess-3", batch_id: null, amount_minor: 30000 }),
+      ],
+      payout_batches: [],
+    });
+    const r = await loadTeacherSettlement(client, "t1", OCT7);
+    expect(r.overdueTotalsByCurrency).toEqual({ KRW: 70000 });
+    expect(r.scheduledTotalsByCurrency).toEqual({ KRW: 30000 });
+    expect(r.nextPayoutDate).toBe("2026-10-26");
+  });
+
+  it("지급 완료 건은 기한이 지나도 overdue가 아니다", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [item({ id: "i-paid", session_id: "sess-2", batch_id: "b-paid", amount_minor: 5000 })],
+      payout_batches: [{ id: "b-paid", status: "paid", paid_at: "2026-09-26T00:00:00Z", scheduled_payout_date: "2026-09-25" }],
+    });
+    const r = await loadTeacherSettlement(client, "t1", OCT7);
+    expect(r.overdueTotalsByCurrency).toEqual({});
+    expect(r.months[0].overdue).toBe(false);
+  });
+
+  it("기한 당일(LA 날짜)은 아직 경과가 아니다", async () => {
+    const { client } = supabaseMock({
+      ...BASE_TABLES,
+      payout_items: [item({ id: "i-today", session_id: "sess-2", batch_id: null, amount_minor: 1000 })],
+      payout_batches: [],
+    });
+    const r = await loadTeacherSettlement(client, "t1", new Date("2026-09-25T20:00:00Z"));
+    expect(r.overdueTotalsByCurrency).toEqual({});
+    expect(r.nextPayoutDate).toBe("2026-09-25");
   });
 });

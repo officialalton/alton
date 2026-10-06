@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatPeriodWithPayoutEn } from "@/lib/payout/payout-schedule";
+import { formatPeriodStatusEn } from "@/lib/payout/payout-schedule";
 import {
   getMyPayoutAccountAction,
   saveMyPayoutAccountAction,
@@ -158,9 +158,9 @@ export default function SettlementPanel({ onAccountSaved }: { onAccountSaved?: (
           <div key={p.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2.5">
             <div className="flex items-center justify-between">
               <span className="text-[13px] font-bold text-ink">
-                {formatPeriodWithPayoutEn(p.periodStart, p.periodEnd)}
+                {formatPeriodStatusEn(p.periodStart, p.periodEnd, p.status === "paid").label}
               </span>
-              <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">{STATUS_LABEL[p.status] ?? p.status}</span>
+              <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">{formatPeriodStatusEn(p.periodStart, p.periodEnd, p.status === "paid").overdue ? "Overdue — processing" : STATUS_LABEL[p.status] ?? p.status}</span>
             </div>
             <div className="text-[13px] text-ink mt-1">{new Intl.NumberFormat("en-US").format(p.amountMinor / 100)} {p.currency}</div>
             {p.note && <div className="text-[12px] text-grey-500 mt-1">{p.note}</div>}
