@@ -17,7 +17,7 @@ describe("컨설턴트 계좌 관리자 액션 — 권한·검증·위임", () =
   it("권한이 없으면 대리 입력·전체 번호 보기 모두 거부(DB 호출 없음)", async () => {
     staffMock.mockRejectedValue(new Error("이 작업을 수행할 권한이 없습니다"));
     await expect(saveConsultantPayoutAccountByAdminAction("c1", INPUT)).rejects.toThrow("권한");
-    await expect(revealConsultantPayoutAccountAction("c1")).rejects.toThrow("권한");
+    await expect(revealConsultantPayoutAccountAction("c1", "수동 송금 사유")).rejects.toThrow("권한");
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -27,6 +27,11 @@ describe("컨설턴트 계좌 관리자 액션 — 권한·검증·위임", () =
       status: "invalid",
       message: "USD 계좌는 9자리 ABA 라우팅 번호가 필요합니다.",
     });
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
+  it("전체 번호 보기 사유가 5자 미만이면 거부", async () => {
+    await expect(revealConsultantPayoutAccountAction("c1", "abc")).rejects.toThrow("5자 이상");
     expect(rpcMock).not.toHaveBeenCalled();
   });
 

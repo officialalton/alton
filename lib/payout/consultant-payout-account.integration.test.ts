@@ -112,7 +112,8 @@ describe("컨설턴트 계좌 — 관리자 대리 입력·알림·권한 매트
     psql(`insert into supervisor_capabilities (profile_id, capability) values ('${cap}', '정산권한');`);
     save(c, c, false);
     expect(psql(`select account_number from reveal_consultant_payout_account('${c}'::uuid, '${master}'::uuid, '수동 송금');`)).toBe(NUMBER);
-    expect(psql(`select account_number from reveal_consultant_payout_account('${c}'::uuid, '${cap}'::uuid);`)).toBe(NUMBER);
+    expect(psql(`select account_number from reveal_consultant_payout_account('${c}'::uuid, '${cap}'::uuid, '정산 대조 확인');`)).toBe(NUMBER);
+    expect(psqlError(`select * from reveal_consultant_payout_account('${c}'::uuid, '${master}'::uuid);`)).toMatch(/5자 이상/);
     expect(psql(`select count(*) from consultant_payout_account_reveals where consultant_id = '${c}';`)).toBe("2");
     expect(psql(`select count(*) from consultant_payout_account_reveals r where r.consultant_id = '${c}' and r::text like '%${NUMBER}%';`)).toBe("0");
     expect(psqlError(`update consultant_payout_account_reveals set reason = 'x' where consultant_id = '${c}';`)).toMatch(/INSERT-only/);

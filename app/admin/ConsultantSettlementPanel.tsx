@@ -165,7 +165,7 @@ export default function ConsultantSettlementPanel() {
               registered={Boolean(account)}
               initial={{ accountHolderName: account?.accountHolderName ?? "", bankName: account?.bankName ?? "", currency: account?.currency ?? "KRW", country: account?.country ?? null }}
               canManage={canManageAccount}
-              onReveal={() => revealConsultantPayoutAccountAction(selectedConsultantId)}
+              onReveal={(reason) => revealConsultantPayoutAccountAction(selectedConsultantId, reason)}
               onSave={(input) => saveConsultantPayoutAccountByAdminAction(selectedConsultantId, input)}
               onSaved={() => reload(selectedConsultantId)}
             />

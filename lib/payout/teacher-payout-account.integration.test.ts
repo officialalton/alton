@@ -141,7 +141,10 @@ describe("전체 번호 보기(reveal) — 권한 매트릭스와 감사", () =>
     save(teacher, teacher, false);
 
     expect(psql(`select account_number from reveal_teacher_payout_account('${teacher}'::uuid, '${master}'::uuid, '수동 송금');`)).toBe(NUMBER);
-    expect(psql(`select account_number from reveal_teacher_payout_account('${teacher}'::uuid, '${capAdmin}'::uuid);`)).toBe(NUMBER);
+    expect(psql(`select account_number from reveal_teacher_payout_account('${teacher}'::uuid, '${capAdmin}'::uuid, '정산 대조 확인');`)).toBe(NUMBER);
+    // 사유 없이·짧은 사유로는 복호화도 감사 행도 없다.
+    expect(psqlError(`select * from reveal_teacher_payout_account('${teacher}'::uuid, '${master}'::uuid);`)).toMatch(/5자 이상/);
+    expect(psqlError(`select * from reveal_teacher_payout_account('${teacher}'::uuid, '${master}'::uuid, '짧음');`)).toMatch(/5자 이상/);
     expect(psql(`select count(*) from teacher_payout_account_reveals where teacher_id = '${teacher}';`)).toBe("2");
     expect(psql(`select reason from teacher_payout_account_reveals where teacher_id = '${teacher}' and actor_id = '${master}';`)).toBe("수동 송금");
     expect(psql(`select count(*) from teacher_payout_account_reveals r where r.teacher_id = '${teacher}' and r::text like '%${NUMBER}%';`)).toBe("0");
@@ -164,7 +167,7 @@ describe("전체 번호 보기(reveal) — 권한 매트릭스와 감사", () =>
     const teacher = createProfile("teacher", "t-reveal-immut");
     const master = createProfile("admin", "m3", "master");
     save(teacher, teacher, false);
-    psql(`select 1 from reveal_teacher_payout_account('${teacher}'::uuid, '${master}'::uuid);`);
+    psql(`select 1 from reveal_teacher_payout_account('${teacher}'::uuid, '${master}'::uuid, '감사 불변성 확인');`);
     expect(psqlError(`update teacher_payout_account_reveals set reason = 'x' where teacher_id = '${teacher}';`)).toMatch(/INSERT-only/);
     expect(psqlError(`delete from teacher_payout_account_reveals where teacher_id = '${teacher}';`)).toMatch(/INSERT-only/);
   });

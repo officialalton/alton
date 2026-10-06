@@ -113,7 +113,7 @@ export default function TeacherPayoutAccountsPanel() {
             registered={a.registered}
             initial={{ accountHolderName: a.accountHolderName, bankName: a.bankName, currency: a.currency, country: a.country }}
             canManage={canManage}
-            onReveal={() => revealTeacherPayoutAccountAction(a.teacherId)}
+            onReveal={(reason) => revealTeacherPayoutAccountAction(a.teacherId, reason)}
             onSave={(input) => saveTeacherPayoutAccountByAdminAction(a.teacherId, input)}
             onSaved={reload}
           />

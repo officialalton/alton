@@ -191,13 +191,15 @@ export type RevealedPayoutAccount = {
  * 전체 번호 보기(reveal). 목록 payload에는 포함되지 않으며, 호출마다 DB가 감사 행을 남긴 뒤 복호화한다.
  * 반환값은 호출한 화면이 일시적으로만(약 30초) 보여 준다. 서버는 이 값을 로그·이력·알림에 남기지 않는다.
  */
-export async function revealTeacherPayoutAccountAction(teacherId: string, reason?: string): Promise<RevealedPayoutAccount> {
+export async function revealTeacherPayoutAccountAction(teacherId: string, reason: string): Promise<RevealedPayoutAccount> {
   const { actorUserId } = await requirePayoutAccountStaff();
+  const trimmedReason = reason?.trim() ?? "";
+  if (trimmedReason.length < 5) throw new Error("전체 번호를 보는 사유를 5자 이상 입력해주세요.");
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("reveal_teacher_payout_account", {
     p_teacher_id: teacherId,
     p_actor_id: actorUserId,
-    p_reason: reason?.trim() || null,
+    p_reason: trimmedReason,
   });
   if (error) throw new Error(error.message);
   const row = (Array.isArray(data) ? data[0] : data) as Record<string, unknown> | null;

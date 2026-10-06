@@ -5,14 +5,43 @@
 --    DB 함수가 복호화해서 돌려주며 **호출마다 감사 행**(처리자·교사·시각·사유, 번호 자체는 남기지 않음)을 남긴다.
 --  * 저장 시 암호화(pgcrypto pgp_sym_encrypt, 키는 Supabase Vault 비밀). 평문 컬럼은 비운다(끝 4자리만 남김).
 
-create extension if not exists pgcrypto;
-create extension if not exists supabase_vault;
+-- 사전 점검(Vault 보장): pgcrypto·supabase_vault 확장과 vault.create_secret이 없으면 **아무것도 바꾸기 전에** 명확한 오류로 중단한다.
+-- (마이그레이션 한 파일은 한 트랜잭션이라 부분 적용 상태가 남지 않는다.) 키를 Postgres 설정값이나 앱 환경변수로 대신 조용히 쓰지 않는다 —
+-- Vault를 보장할 수 없는 환경이면 이 마이그레이션을 적용하지 말고 보고할 것(docs/POLICY-DECISIONS.md 계좌 항목 참고).
+do $$
+begin
+  if not exists (select 1 from pg_available_extensions where name = 'pgcrypto') then
+    raise exception '수취 계좌 암호화 중단: pgcrypto 확장을 사용할 수 없습니다. 이 환경에서는 적용하지 마세요.';
+  end if;
+  if not exists (select 1 from pg_available_extensions where name = 'supabase_vault') then
+    raise exception '수취 계좌 암호화 중단: supabase_vault 확장을 사용할 수 없습니다. Supabase 대시보드에서 Vault를 켠 뒤 다시 적용하거나, Vault를 보장할 수 없으면 적용하지 말고 보고하세요(키를 설정값·환경변수로 대체하지 않습니다).';
+  end if;
+  begin
+    create extension if not exists pgcrypto;
+    create extension if not exists supabase_vault;
+  exception when others then
+    raise exception '수취 계좌 암호화 중단: 확장 생성에 실패했습니다(%). 권한 또는 Vault 활성화를 확인하세요.', sqlerrm;
+  end;
+  if to_regproc('vault.create_secret') is null or to_regclass('vault.decrypted_secrets') is null then
+    raise exception '수취 계좌 암호화 중단: vault.create_secret / vault.decrypted_secrets를 찾을 수 없습니다.';
+  end if;
+end $$;
 
 -- 키: Vault 비밀(없으면 생성). 환경마다 별도 키다 — DB를 다른 프로젝트로 복원하면 Vault 키 이전이 필요하다.
 do $$
+declare v_key text;
 begin
   if not exists (select 1 from vault.secrets where name = 'payout_account_encryption_key') then
-    perform vault.create_secret(encode(extensions.gen_random_bytes(32), 'hex'), 'payout_account_encryption_key', '교사 수취 계좌 암호화 키');
+    begin
+      perform vault.create_secret(encode(extensions.gen_random_bytes(32), 'hex'), 'payout_account_encryption_key', '교사 수취 계좌 암호화 키');
+    exception when others then
+      raise exception '수취 계좌 암호화 중단: Vault 비밀 생성에 실패했습니다(%).', sqlerrm;
+    end;
+  end if;
+  -- 만든 키를 실제로 복호화해 읽을 수 있어야 한다(읽지 못하는 키로 데이터를 암호화하면 복구 불가).
+  select decrypted_secret into v_key from vault.decrypted_secrets where name = 'payout_account_encryption_key';
+  if v_key is null or length(v_key) < 32 then
+    raise exception '수취 계좌 암호화 중단: Vault 키를 읽지 못했습니다. 데이터를 암호화하지 않고 중단합니다.';
   end if;
 end $$;
 

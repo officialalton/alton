@@ -28,6 +28,14 @@ export type PayoutAccountValidation =
   | { ok: true; value: ValidatedPayoutAccount }
   | { ok: false; code: string; message: string };
 
+/** ABA 라우팅 번호 체크섬: 3·7·1 가중치(3(d1+d4+d7)+7(d2+d5+d8)+(d3+d6+d9)) mod 10 == 0. */
+export function isValidAbaRoutingNumber(routing: string): boolean {
+  if (!/^\d{9}$/.test(routing)) return false;
+  const d = routing.split("").map(Number);
+  const sum = 3 * (d[0] + d[3] + d[6]) + 7 * (d[1] + d[4] + d[7]) + (d[2] + d[5] + d[8]);
+  return sum % 10 === 0;
+}
+
 export function validatePayoutAccountInput(input: PayoutAccountInputRaw): PayoutAccountValidation {
   const accountHolderName = input.accountHolderName.trim();
   const bankName = input.bankName.trim();
@@ -52,6 +60,7 @@ export function validatePayoutAccountInput(input: PayoutAccountInputRaw): Payout
   } else {
     const routing = swiftOrRouting.replace(/[\s-]/g, "");
     if (!/^\d{9}$/.test(routing)) return { ok: false, code: "routing", message: "A U.S. account needs a 9-digit ABA routing number." };
+    if (!isValidAbaRoutingNumber(routing)) return { ok: false, code: "routing_checksum", message: "That ABA routing number does not look valid. Please check it and try again." };
     if (digits.length < 4 || digits.length > 17) {
       return { ok: false, code: "account_length", message: "A U.S. account number must be 4–17 digits." };
     }
@@ -72,4 +81,5 @@ export const PAYOUT_ACCOUNT_ERROR_KO: Record<string, string> = {
   account_digits: "계좌번호는 숫자만 입력해주세요(공백·하이픈은 무시됩니다).",
   account_length: "계좌번호 자릿수가 맞지 않습니다(KRW 8~16자리, USD 4~17자리).",
   routing: "USD 계좌는 9자리 ABA 라우팅 번호가 필요합니다.",
+  routing_checksum: "ABA 라우팅 번호가 유효하지 않습니다(체크섬 불일치). 번호를 다시 확인해주세요.",
 };

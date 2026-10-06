@@ -111,13 +111,15 @@ export type RevealedConsultantAccount = {
 };
 
 /** 전체 번호 보기 — 호출마다 DB가 감사 행(번호 제외)을 남긴 뒤 복호화한다. 화면은 일시적으로만 보여 준다. */
-export async function revealConsultantPayoutAccountAction(consultantId: string, reason?: string): Promise<RevealedConsultantAccount> {
+export async function revealConsultantPayoutAccountAction(consultantId: string, reason: string): Promise<RevealedConsultantAccount> {
   const { actorUserId } = await requirePayoutAccountStaff();
+  const trimmedReason = reason?.trim() ?? "";
+  if (trimmedReason.length < 5) throw new Error("전체 번호를 보는 사유를 5자 이상 입력해주세요.");
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("reveal_consultant_payout_account", {
     p_consultant_id: consultantId,
     p_actor_id: actorUserId,
-    p_reason: reason?.trim() || null,
+    p_reason: trimmedReason,
   });
   if (error) throw new Error(error.message);
   const row = (Array.isArray(data) ? data[0] : data) as Record<string, unknown> | null;

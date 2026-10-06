@@ -30,7 +30,7 @@ describe("권한: 정산권한·마스터가 아니면 모든 쓰기·reveal 액
   });
   it("전체 번호 보기", async () => {
     staffMock.mockRejectedValue(new Error("이 작업을 수행할 권한이 없습니다"));
-    await expect(revealTeacherPayoutAccountAction("t1")).rejects.toThrow("권한");
+    await expect(revealTeacherPayoutAccountAction("t1", "수동 송금 사유")).rejects.toThrow("권한");
     expect(rpcMock).not.toHaveBeenCalled();
   });
   it("권한 조회는 예외 대신 canManage=false", async () => {
@@ -75,6 +75,12 @@ describe("saveTeacherPayoutAccountByAdminAction", () => {
 });
 
 describe("revealTeacherPayoutAccountAction", () => {
+  it("사유가 5자 미만이면 DB를 부르지 않고 거부한다", async () => {
+    await expect(revealTeacherPayoutAccountAction("t1", "  짧음 ")).rejects.toThrow("5자 이상");
+    await expect(revealTeacherPayoutAccountAction("t1", "")).rejects.toThrow("5자 이상");
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+
   it("DB reveal 함수(감사 포함)에 위임하고 값을 매핑한다", async () => {
     rpcMock.mockResolvedValue({ data: [{ account_holder_name: "김", bank_name: "국민", account_number: "110123456789", swift_or_routing: null, currency: "KRW", country: "KR" }], error: null });
     const r = await revealTeacherPayoutAccountAction("t1", " 수동 송금 ");

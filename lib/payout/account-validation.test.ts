@@ -1,7 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { validatePayoutAccountInput } from "./account-validation";
+import { isValidAbaRoutingNumber, validatePayoutAccountInput } from "./account-validation";
 
 const base = { accountHolderName: "Kim Teacher", bankName: "Kookmin Bank", country: "KR" };
+
+describe("ABA 라우팅 체크섬(3-7-1)", () => {
+  it("실제 형식의 유효 번호는 통과, 한 자리만 틀려도 거부", () => {
+    for (const ok of ["021000021", "011401533", "121000358", "322271627"]) expect(isValidAbaRoutingNumber(ok)).toBe(true);
+    for (const bad of ["021000022", "123456789", "000000001", "02100002", "02100002A", ""]) expect(isValidAbaRoutingNumber(bad)).toBe(false);
+  });
+  it("검증기가 체크섬 불일치를 별도 코드로 돌려준다(공백·하이픈 무시)", () => {
+    const r = validatePayoutAccountInput({ accountHolderName: "A", bankName: "B", country: "US", currency: "USD", accountNumber: "000123456789", swiftOrRouting: "123-456-789" });
+    expect(r).toMatchObject({ ok: false, code: "routing_checksum" });
+    const ok = validatePayoutAccountInput({ accountHolderName: "A", bankName: "B", country: "US", currency: "USD", accountNumber: "000123456789", swiftOrRouting: "021 000 021" });
+    expect(ok.ok).toBe(true);
+  });
+});
 
 describe("validatePayoutAccountInput", () => {
   it("KRW: 숫자 8~16자리 계좌번호 + 은행명이면 통과(하이픈·공백 무시), SWIFT는 선택", () => {

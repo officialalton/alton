@@ -67,8 +67,14 @@ describe("TeacherPayoutAccountsPanel", () => {
     await screen.findByTestId("masked-t1");
     expect(screen.queryByText(/110123456789/)).not.toBeInTheDocument();
     fireEvent.click(await screen.findByTestId("reveal-t1"));
+    // 사유 없이는 호출하지 않는다.
+    fireEvent.click(await screen.findByTestId("reveal-confirm-t1"));
+    expect(await screen.findByTestId("error-t1")).toHaveTextContent("5자 이상");
+    expect(revealMock).not.toHaveBeenCalled();
+    fireEvent.change(screen.getByLabelText("열람 사유"), { target: { value: "10월 수동 송금" } });
+    fireEvent.click(screen.getByTestId("reveal-confirm-t1"));
     expect(await screen.findByTestId("revealed-number-t1")).toHaveTextContent("110123456789");
-    expect(revealMock).toHaveBeenCalledWith("t1");
+    expect(revealMock).toHaveBeenCalledWith("t1", "10월 수동 송금");
     fireEvent.click(screen.getByText("지금 숨기기"));
     expect(screen.queryByTestId("revealed-number-t1")).not.toBeInTheDocument();
   });

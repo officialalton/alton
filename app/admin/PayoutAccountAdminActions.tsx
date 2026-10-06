@@ -38,11 +38,14 @@ export default function PayoutAccountAdminActions({
   registered: boolean;
   initial: { accountHolderName: string; bankName: string; currency: string; country: string | null };
   canManage: boolean;
-  onReveal: () => Promise<RevealedAccount>;
+  /** 사유(5자 이상)를 받아 호출한다 — 서버·DB도 같은 규칙을 강제한다. */
+  onReveal: (reason: string) => Promise<RevealedAccount>;
   onSave: (input: AccountFormValues) => Promise<{ status: "saved" } | { status: "invalid"; message: string }>;
   onSaved: () => void | Promise<void>;
 }) {
   const [revealed, setRevealed] = useState<{ data: RevealedAccount; secondsLeft: number } | null>(null);
+  const [askReason, setAskReason] = useState(false);
+  const [reason, setReason] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [form, setForm] = useState<AccountFormValues>({ accountHolderName: "", bankName: "", accountNumber: "", swiftOrRouting: "", currency: "KRW", country: "KR" });
   const [busy, setBusy] = useState(false);
@@ -60,8 +63,14 @@ export default function PayoutAccountAdminActions({
 
   async function reveal() {
     setError(null);
+    if (reason.trim().length < 5) {
+      setError("전체 번호를 보는 사유를 5자 이상 입력해주세요.");
+      return;
+    }
     try {
-      const data = await onReveal();
+      const data = await onReveal(reason.trim());
+      setAskReason(false);
+      setReason("");
       if (timer.current) clearInterval(timer.current);
       setRevealed({ data, secondsLeft: REVEAL_SECONDS });
       timer.current = setInterval(() => {
@@ -108,7 +117,7 @@ export default function PayoutAccountAdminActions({
     <div className="mt-2">
       <div className="flex gap-2">
         {registered && (
-          <button type="button" onClick={() => void reveal()} className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200" data-testid={`reveal-${idKey}`}>
+          <button type="button" onClick={() => { setAskReason(!askReason); setError(null); }} className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200" data-testid={`reveal-${idKey}`}>
             전체 번호 보기
           </button>
         )}
@@ -126,6 +135,20 @@ export default function PayoutAccountAdminActions({
           {registered ? "수정(대신 입력)" : "대신 입력"}
         </button>
       </div>
+      {askReason && (
+        <div className="mt-2 flex flex-wrap items-center gap-2" data-testid={`reason-${idKey}`}>
+          <input
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            placeholder="열람 사유(5자 이상, 예: 10월 정산 수동 송금)"
+            aria-label="열람 사유"
+            className="flex-1 min-w-[220px] border border-grey-200 rounded px-2 py-1 text-[12px]"
+          />
+          <button type="button" onClick={() => void reveal()} className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg bg-ink text-white" data-testid={`reveal-confirm-${idKey}`}>
+            확인하고 보기
+          </button>
+        </div>
+      )}
       {error && <p className="text-[12px] text-red mt-1" data-testid={`error-${idKey}`}>{error}</p>}
       {message && <p className="text-[12px] text-green mt-1">{message}</p>}
 
