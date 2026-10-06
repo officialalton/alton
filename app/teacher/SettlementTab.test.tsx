@@ -11,12 +11,14 @@ const {
   uploadDocMock,
   downloadUrlMock,
   deleteDocMock,
+  markReadMock,
 } = vi.hoisted(() => ({
   loadPageDataMock: vi.fn(),
   saveAccountMock: vi.fn(),
   uploadDocMock: vi.fn(),
   downloadUrlMock: vi.fn(),
   deleteDocMock: vi.fn(),
+  markReadMock: vi.fn(),
 }));
 
 vi.mock("./settlement-actions", () => ({
@@ -25,6 +27,7 @@ vi.mock("./settlement-actions", () => ({
   uploadMyDocumentAction: uploadDocMock,
   getMyDocumentDownloadUrlAction: downloadUrlMock,
   deleteMyDocumentAction: deleteDocMock,
+  markPayoutNoticeReadAction: markReadMock,
 }));
 
 // 2026-09-22(성능 수정: 정산·계좌·서류를 서버 액션 1개로 합침) — 기존 테스트는
@@ -378,5 +381,37 @@ describe("SettlementTab — 제출 서류", () => {
     });
 
     await waitFor(() => expect(screen.getByText("계약서.pdf")).toBeInTheDocument());
+  });
+});
+
+describe("SettlementTab — payout notices", () => {
+  const NOTICES = [
+    { id: "n1", kind: "payout_delayed_late", message: "Your payout for Oct 1–15, 2026 is delayed. It is now expected to arrive by Oct 30, 2026 (original deadline: Oct 26, 2026).", createdAt: "2026-10-27T18:00:00.000Z", read: false },
+    { id: "n2", kind: "payout_date_changed", message: "Your payout for Sep 16–30, 2026 will now be paid by Oct 8, 2026.", createdAt: "2026-10-01T18:00:00.000Z", read: true },
+  ];
+
+  it("shows the latest notices at the top with unread state", async () => {
+    loadPageDataMock.mockResolvedValue({ settlement: SETTLEMENT, account: null, documents: [], notices: NOTICES });
+    render(<SettlementTab />);
+    expect(await screen.findByTestId("payout-notices")).toBeInTheDocument();
+    expect(screen.getByTestId("payout-notice-n1")).toHaveTextContent("is delayed");
+    expect(screen.getByTestId("mark-read-n1")).toBeInTheDocument();
+    expect(screen.queryByTestId("mark-read-n2")).not.toBeInTheDocument();
+  });
+
+  it("mark as read calls the server action and clears the unread control", async () => {
+    markReadMock.mockResolvedValue({ ok: true });
+    loadPageDataMock.mockResolvedValue({ settlement: SETTLEMENT, account: null, documents: [], notices: NOTICES });
+    render(<SettlementTab />);
+    fireEvent.click(await screen.findByTestId("mark-read-n1"));
+    await waitFor(() => expect(markReadMock).toHaveBeenCalledWith("n1"));
+    await waitFor(() => expect(screen.queryByTestId("mark-read-n1")).not.toBeInTheDocument());
+  });
+
+  it("hides the section when there are no notices", async () => {
+    loadPageDataMock.mockResolvedValue({ settlement: SETTLEMENT, account: null, documents: [], notices: [] });
+    render(<SettlementTab />);
+    await screen.findByText(/Review payouts for completed lessons/);
+    expect(screen.queryByTestId("payout-notices")).not.toBeInTheDocument();
   });
 });

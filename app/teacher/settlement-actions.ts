@@ -47,6 +47,15 @@ export type PayoutAccountInput = {
   swiftOrRouting?: string;
 };
 
+/** 지급 일정 변경·지연 알림(인앱 기록). 이메일이 아니다. */
+export type PayoutNotice = {
+  id: string;
+  kind: string;
+  message: string;
+  createdAt: string;
+  read: boolean;
+};
+
 export type TeacherDocumentItem = {
   id: string;
   fileName: string;
@@ -90,6 +99,7 @@ export async function loadSettlementPageDataAction(): Promise<{
   settlement: TeacherSettlement;
   account: MaskedPayoutAccount | null;
   documents: TeacherDocumentItem[];
+  notices: PayoutNotice[];
 }> {
   const { user, supabase } = await requireUser();
   const { data: profile, error: profileError } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
@@ -97,7 +107,7 @@ export async function loadSettlementPageDataAction(): Promise<{
   if (profile?.role !== "teacher") throw new Error("Only teacher accounts can use this.");
 
   const admin = createAdminClient();
-  const [settlement, { data: accountRow, error: accountError }, { data: docRows, error: docsError }] = await Promise.all([
+  const [settlement, { data: accountRow, error: accountError }, { data: docRows, error: docsError }, { data: noticeRows }] = await Promise.all([
     loadTeacherSettlement(supabase, user.id),
     admin
       .from("teacher_payout_accounts")
@@ -109,6 +119,13 @@ export async function loadSettlementPageDataAction(): Promise<{
       .select("id, file_name, content_type, size_bytes, note, uploaded_at")
       .eq("teacher_id", user.id)
       .order("uploaded_at", { ascending: false }),
+    // 본인 알림 최근 3건(teacher_id 스코프). 실패해도 정산 화면은 열려야 하므로 오류는 무시한다.
+    admin
+      .from("payout_teacher_notices")
+      .select("id, kind, message, created_at, read_at")
+      .eq("teacher_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(3),
   ]);
   if (accountError) throw new Error(accountError.message);
   if (docsError) throw new Error(docsError.message);
@@ -133,7 +150,30 @@ export async function loadSettlementPageDataAction(): Promise<{
     uploadedAt: d.uploaded_at as string,
   }));
 
-  return { settlement, account, documents };
+  const notices: PayoutNotice[] = (noticeRows ?? []).map((n) => ({
+    id: n.id as string,
+    kind: n.kind as string,
+    message: n.message as string,
+    createdAt: n.created_at as string,
+    read: n.read_at != null,
+  }));
+
+  return { settlement, account, documents, notices };
+}
+
+/** 본인 알림만 읽음 처리한다(teacher_id 스코프 — 다른 교사의 id를 넣어도 0행). 이미 읽은 알림은 그대로 둔다. */
+export async function markPayoutNoticeReadAction(noticeId: string): Promise<{ ok: boolean }> {
+  const { userId } = await requireTeacherUser();
+  if (!/^[0-9a-f-]{36}$/i.test(noticeId)) return { ok: false };
+  const admin = createAdminClient();
+  const { error } = await admin
+    .from("payout_teacher_notices")
+    .update({ read_at: new Date().toISOString() })
+    .eq("id", noticeId)
+    .eq("teacher_id", userId)
+    .is("read_at", null);
+  if (error) throw new Error(error.message);
+  return { ok: true };
 }
 
 export async function getMyPayoutAccountAction(): Promise<MaskedPayoutAccount | null> {

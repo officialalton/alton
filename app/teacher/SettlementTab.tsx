@@ -17,6 +17,8 @@ import {
   uploadMyDocumentAction,
   getMyDocumentDownloadUrlAction,
   deleteMyDocumentAction,
+  markPayoutNoticeReadAction,
+  type PayoutNotice,
   type MaskedPayoutAccount,
   type TeacherDocumentItem,
 } from "./settlement-actions";
@@ -124,14 +126,16 @@ export default function SettlementTab() {
   const [settlement, setSettlement] = useState<TeacherSettlement | null>(null);
   const [account, setAccount] = useState<MaskedPayoutAccount | null>(null);
   const [documents, setDocuments] = useState<TeacherDocumentItem[] | null>(null);
+  const [notices, setNotices] = useState<PayoutNotice[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [openMonth, setOpenMonth] = useState<string | null>(null);
   const [subtab, setSubtab] = useState<SubtabId>("summary");
 
   function reload(): Promise<void> {
     return loadSettlementPageDataAction()
-      .then(({ settlement: s, account: a, documents: d }) => {
+      .then(({ settlement: s, account: a, documents: d, notices: n }) => {
         setSettlement(s);
+        setNotices(n ?? []);
         setAccount(a);
         setDocuments(d);
         setError(null);
@@ -173,6 +177,39 @@ export default function SettlementTab() {
         Review payouts for completed lessons and upcoming amounts, and manage your bank account and documents.
       </p>
       {error && <p className="text-[12px] text-red mb-3">{error}</p>}
+
+      {notices.length > 0 && (
+        <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4" data-testid="payout-notices">
+          <div className="text-[13px] font-bold text-ink mb-2">Payout notices</div>
+          <ul className="space-y-2">
+            {notices.map((n) => (
+              <li key={n.id} className="flex items-start justify-between gap-3" data-testid={`payout-notice-${n.id}`}>
+                <div>
+                  <div className={"text-[12.5px] " + (n.read ? "text-grey-500" : "text-ink font-semibold")}>
+                    {!n.read && <span className="inline-block w-1.5 h-1.5 rounded-full bg-red mr-1.5 align-middle" aria-label="Unread" />}
+                    {n.message}
+                  </div>
+                  <div className="text-[11px] text-grey-400 mt-0.5">{fmtDateTime(n.createdAt, undefined, tz)}</div>
+                </div>
+                {!n.read && (
+                  <button
+                    type="button"
+                    data-testid={`mark-read-${n.id}`}
+                    className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 shrink-0"
+                    onClick={() => {
+                      void markPayoutNoticeReadAction(n.id)
+                        .then(() => setNotices((prev) => prev.map((x) => (x.id === n.id ? { ...x, read: true } : x))))
+                        .catch(() => setError("Couldn't mark the notice as read."));
+                    }}
+                  >
+                    Mark as read
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="flex gap-4 mb-5 border-b border-grey-200">
         {SUBTABS.map((t) => (

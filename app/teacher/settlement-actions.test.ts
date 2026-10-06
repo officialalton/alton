@@ -23,6 +23,7 @@ import {
   getMyPayoutAccountAction,
   saveMyPayoutAccountAction,
   uploadMyDocumentAction,
+  markPayoutNoticeReadAction,
 } from "./settlement-actions";
 import { maskAccountNumber } from "./settlement-data";
 
@@ -244,5 +245,32 @@ describe("uploadMyDocumentAction", () => {
       uploadMyDocumentAction(formDataWith(new File(["1"], "a.pdf", { type: "application/pdf" })))
     ).rejects.toThrow("insert failed");
     expect(removeMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("markPayoutNoticeReadAction", () => {
+  it("본인(teacher_id) 스코프 + 아직 안 읽은 행만 읽음 처리한다", async () => {
+    const eqs: Array<[string, unknown]> = [];
+    let updated: Record<string, unknown> | null = null;
+    let isCall: [string, unknown] | null = null;
+    const chain: Record<string, unknown> = {};
+    chain.update = (payload: Record<string, unknown>) => { updated = payload; return chain; };
+    chain.eq = (col: string, val: unknown) => { eqs.push([col, val]); return chain; };
+    chain.is = (col: string, val: unknown) => { isCall = [col, val]; return Promise.resolve({ error: null }); };
+    adminFromMock.mockImplementation(() => chain);
+
+    const result = await markPayoutNoticeReadAction("11111111-1111-1111-1111-111111111111");
+
+    expect(result).toEqual({ ok: true });
+    expect(eqs).toContainEqual(["teacher_id", "teacher-1"]);
+    expect(eqs).toContainEqual(["id", "11111111-1111-1111-1111-111111111111"]);
+    expect(isCall).toEqual(["read_at", null]);
+    expect(updated).toHaveProperty("read_at");
+  });
+
+  it("id 형식이 이상하면 DB를 호출하지 않는다", async () => {
+    adminFromMock.mockClear();
+    expect(await markPayoutNoticeReadAction("x' or 1=1")).toEqual({ ok: false });
+    expect(adminFromMock).not.toHaveBeenCalled();
   });
 });
