@@ -152,6 +152,10 @@ export class Sheet {
     this.placed.push({ kind: "label", text: t, x, y, w, h });
     this.text(x, y, t, { italic: o.italic, size, color: o.color });
   }
+  /** 글자를 그리지 않고 자리만 잡는다 — 이후 라벨이 이 자리와 겹치면 label_collision 으로 기록된다(예: 아래 'Note' 문구 자리). */
+  reserve(x: number, y: number, t: string, size = LABEL_SIZE) {
+    this.placed.push({ kind: "label", text: t, x, y, w: labelWidth(t, size), h: size + 2 });
+  }
   note(text: string) {
     this.text(24, this.height - 14, text, { size: 12.5, italic: true, anchor: "start" });
   }

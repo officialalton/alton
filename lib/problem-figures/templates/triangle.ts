@@ -354,6 +354,7 @@ export function renderTriangle(spec: TriangleSpec): { svg: string; alt: string; 
   const W = spec.second ? 580 : 360, H = 270;
   const sheet = new Sheet(W, H);
   const PADX = 58, PADTOP = 46, PADBOT = spec.notToScale ? 52 : 40;
+  if (spec.notToScale) sheet.reserve(24 + 85, H - 14, "Note: Figure not drawn to scale.", 12.5); // 'Note' 문구 자리(왼쪽 아래)를 라벨이 침범하면 충돌로 잡는다
   let alt: string;
   if (!spec.second) {
     alt = drawTriangle(sheet, spec, { x: PADX, y: PADTOP, w: W - PADX * 2, h: H - PADTOP - PADBOT }).alt;
