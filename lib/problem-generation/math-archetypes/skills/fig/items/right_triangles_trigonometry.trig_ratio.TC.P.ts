@@ -22,6 +22,8 @@ const intro = (rng: Rng, f: Fn, v: string, extra = "") => rng.pick(LEAD) + rng.p
   `In the $xy$-plane, the figure shows the graph of $y = \\${f} x$ on the interval from $0$ to $2\\pi$. The labeled point $P$ lies on the graph and has $x$-coordinate $${v}$.${extra}`,
   `The curve $y = \\${f} x$, $0 \\le x \\le 2\\pi$, is graphed in the figure. Point $P$ on the curve is marked with its coordinates, where $${v}$ is its $x$-coordinate.${extra}`,
   `Shown is the graph of $y = \\${f} x$ for $0 \\le x \\le 2\\pi$. Point $P$ is on the graph with $x$-coordinate $${v}$, and the coordinates of $P$ are labeled.${extra}`,
+  `The figure plots $y = \\${f} x$ over $0 \\le x \\le 2\\pi$. The marked point $P$ has $x$-coordinate $${v}$, and its coordinates are written next to it.${extra}`,
+  `Point $P$, with $x$-coordinate $${v}$, is marked on the graph of $y = \\${f} x$ for $0 \\le x \\le 2\\pi$ in the figure, and its coordinates are labeled.${extra}`,
 ]);
 const intro2 = (rng: Rng, f: Fn, v: string, w: string) => rng.pick(LEAD) + rng.pick([
   `The graph of $y = \\${f} x$ for $0 \\le x \\le 2\\pi$ is shown. Points $P$ and $Q$ are on the graph; their coordinates are labeled, with $x$-coordinates $${v}$ and $${w}$, respectively.`,

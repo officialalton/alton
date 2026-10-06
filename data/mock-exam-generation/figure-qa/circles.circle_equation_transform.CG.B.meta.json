@@ -1,7 +1,7 @@
 {
  "itemId": "circles.circle_equation_transform.CG.B",
- "generatedAt": "2026-10-06T08:32:16.267Z",
- "codeHash": "0a4385f48e15f8a63df856dad7a5e41f8b816a65a4026b0bd20e4ea44dff61b8",
+ "generatedAt": "2026-10-06T14:19:46.806Z",
+ "codeHash": "0984ca547d74c0bd98e8ffa26d759bdd9bb73c7a480015a74897d9ba85818caa",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -14,9 +14,13 @@
   "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
   "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
   "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cgc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
   "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
   "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
   "lib/problem-generation/math-archetypes/skills/fig/items/circles.circle_equation_transform.CG.B.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
   "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
   "scripts/mock-exam-generation/figure-qa-render.mjs"
  ],
@@ -38,12 +42,7 @@
    "correctIndex": 2,
    "answer": "C",
    "explanation": "(1) 기준 그래프에서 중심 (cx, cy) 과 반지름 r 을 읽는다. (2) 중심은 (3, 3), 반지름은 2 이다. (3) 4 units 오른쪽으로 x 에 4 를, 3 units 아래로 y 에 -3 를 더한다. (4) 새 중심은 (7, 0) 이고 반지름은 그대로이다. (5) 방향이나 이동량을 바꾸거나 반지름이 달라진 그래프는 오답이다. 따라서 정답은 C이다.",
-   "structuralIssues": [
-    {
-     "code": "choice_axes_differ",
-     "message": "복수 그림의 눈금(축척)이 서로 다릅니다 — 같은 단위의 값은 같은 축척으로 그려야 합니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }
