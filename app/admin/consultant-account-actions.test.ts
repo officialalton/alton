@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { staffMock, rpcMock, getUserMock, listConsultantsMock } = vi.hoisted(() => ({ staffMock: vi.fn(), rpcMock: vi.fn(), getUserMock: vi.fn(), listConsultantsMock: vi.fn() }));
+const { staffMock, rpcMock, getUserMock, listConsultantsMock, fromMock } = vi.hoisted(() => ({ staffMock: vi.fn(), rpcMock: vi.fn(), getUserMock: vi.fn(), listConsultantsMock: vi.fn(), fromMock: vi.fn() }));
 vi.mock("./consultant-assignment-actions", () => ({ listConsultantsAction: listConsultantsMock }));
-vi.mock("@/lib/admin-auth", () => ({ requireAdminOrCapability: vi.fn(), requirePayoutAccountStaff: staffMock }));
-vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock, from: vi.fn(), auth: { admin: { getUserById: getUserMock } } }) }));
+vi.mock("@/lib/admin-auth", () => ({ requireAdminOrCapability: vi.fn().mockResolvedValue({}), requirePayoutAccountStaff: staffMock }));
+vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock, from: fromMock, auth: { admin: { getUserById: getUserMock } } }) }));
 
-import { listPayoutConsultantsAction, revealConsultantPayoutAccountAction, saveConsultantPayoutAccountByAdminAction } from "./consultant-settlement-actions";
+import { getConsultantContractFeeAction, listPayoutConsultantsAction, revealConsultantPayoutAccountAction, saveConsultantPayoutAccountByAdminAction } from "./consultant-settlement-actions";
 
 const INPUT = { accountHolderName: "지만", bankName: "국민은행", accountNumber: "110-123-456789", currency: "KRW", country: "KR" };
 
@@ -65,5 +65,28 @@ describe("삭제된 컨설턴트 제외", () => {
       message: "삭제되었거나 존재하지 않는 계정에는 계좌를 입력할 수 없습니다.",
     });
     expect(rpcMock).not.toHaveBeenCalled();
+  });
+});
+
+function feeChain(rows: unknown[]) {
+  const chain: Record<string, unknown> = {};
+  for (const m of ["select", "eq", "order", "limit"]) chain[m] = () => chain;
+  chain.then = (f: (v: unknown) => unknown) => Promise.resolve({ data: rows, error: null }).then(f);
+  return chain;
+}
+
+describe("getConsultantContractFeeAction — 서명된 계약의 월 보수", () => {
+  it("서명된 계약 스냅샷의 월 보수·통화·시작일을 돌려준다(문자열 bigint도 숫자로)", async () => {
+    fromMock.mockReturnValue(feeChain([{ inputs_snapshot: { monthly_fee_minor: "3100000", monthly_fee_currency: "KRW", start_date: "2026-10-01" }, signed_at: "2026-10-02T00:00:00Z" }]));
+    expect(await getConsultantContractFeeAction("c1")).toEqual({ monthlyFeeMinor: 3100000, currency: "KRW", startDate: "2026-10-01", signedAt: "2026-10-02T00:00:00Z" });
+    expect(fromMock).toHaveBeenCalledWith("teacher_contracts");
+  });
+  it("서명된 계약이 없거나 보수·통화가 비면 null(제안하지 않는다)", async () => {
+    fromMock.mockReturnValue(feeChain([]));
+    expect(await getConsultantContractFeeAction("c1")).toBeNull();
+    fromMock.mockReturnValue(feeChain([{ inputs_snapshot: { monthly_fee_minor: null, monthly_fee_currency: "KRW" }, signed_at: null }]));
+    expect(await getConsultantContractFeeAction("c1")).toBeNull();
+    fromMock.mockReturnValue(feeChain([{ inputs_snapshot: { monthly_fee_minor: 100, monthly_fee_currency: "EUR" }, signed_at: null }]));
+    expect(await getConsultantContractFeeAction("c1")).toBeNull();
   });
 });

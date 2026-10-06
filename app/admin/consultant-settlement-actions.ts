@@ -85,6 +85,32 @@ export async function listPayoutConsultantsAction() {
   return all.filter((c) => c.email !== null);
 }
 
+export type ConsultantContractFee = { monthlyFeeMinor: number; currency: "KRW" | "USD"; startDate: string | null; signedAt: string | null } | null;
+
+/**
+ * 서명 완료된 컨설턴트 계약서(teacher_contracts.agreement_form='consultant_services', status='signed')의 월 보수·통화·시작일.
+ * 계약 기준 금액 "제안"에만 쓰며 정산 금액을 자동으로 채우지 않는다. 서명 전·보수 미기재면 null.
+ */
+export async function getConsultantContractFeeAction(consultantId: string): Promise<ConsultantContractFee> {
+  await requireAdminOrCapability(PAYOUT_CAPABILITY);
+  const admin = createAdminClient();
+  const { data, error } = await admin
+    .from("teacher_contracts")
+    .select("inputs_snapshot, signed_at")
+    .eq("teacher_id", consultantId)
+    .eq("agreement_form", "consultant_services")
+    .eq("status", "signed")
+    .order("signed_at", { ascending: false })
+    .limit(1);
+  if (error) throw new Error(error.message);
+  const row = data?.[0];
+  const snap = (row?.inputs_snapshot ?? null) as { monthly_fee_minor?: number | string | null; monthly_fee_currency?: string | null; start_date?: string | null } | null;
+  const minor = snap?.monthly_fee_minor == null ? NaN : Number(snap.monthly_fee_minor);
+  const currency = snap?.monthly_fee_currency;
+  if (!snap || !Number.isInteger(minor) || minor <= 0 || (currency !== "KRW" && currency !== "USD")) return null;
+  return { monthlyFeeMinor: minor, currency, startDate: snap.start_date ?? null, signedAt: (row?.signed_at as string | null) ?? null };
+}
+
 export type SaveConsultantAccountResult = { status: "saved"; changedFields: string[] } | { status: "invalid"; message: string };
 
 /** 컨설턴트를 대신해 수취 계좌를 입력·수정한다(정산권한·마스터). 이력(끝 4자리만)과 본인 알림은 DB 함수가 남긴다. */
