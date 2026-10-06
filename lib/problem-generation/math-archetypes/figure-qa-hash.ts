@@ -44,7 +44,7 @@ export function codeHash(itemId: string, figureTypes: string[], root = process.c
 // ── math-B(기하) 공용 키트: PT·PG·CI·CM·CG·SO 조합은 geo-kit 를 해시에 포함한다. TR 은 기존 8조합의 판정을 보존하려고 새 조합만 개별 등록한다. ──
 const GEO_KIT = `${AR}/skills/fig/geo-kit.ts`;
 for (const code of ["PT", "PG", "CI", "CM", "CG", "SO"]) FAMILY_KIT[code] = [GEO_KIT, ...(FAMILY_KIT[code] ?? [])];
-export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P"];
+export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P", "lines_angles_triangles.congruent_triangles.TR.P", "lines_angles_triangles.triangle_inequality.TR.P"];
 for (const id of GEO_TR_ITEMS) ITEM_KIT[id] = [GEO_KIT, ...(ITEM_KIT[id] ?? [])];
 
 // ── 판정 파일 ──

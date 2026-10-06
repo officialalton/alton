@@ -48,3 +48,21 @@ export const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 /** 숫자 라벨 파싱 JS(정수·소수) — NaN 이면 미지수. */
 export const NUM_JS = "const num=(s)=>{ const t=String(s).replace(/[°\\s]/g,''); return /^\\d+(?:\\.\\d+)?$/.test(t)?Number(t):NaN; };\n";
+
+// ── 합동 두 삼각형: 둘째 삼각형의 배치(위·왼쪽 아래·오른쪽 아래에 오는 꼭짓점)가 달라도 같은 크기로 보이게 하는 second.scale ──
+// 삼각형 렌더러(templates/triangle.ts)는 각 삼각형을 가로폭(경계 상자)이 1 인 단위 틀로 그린 뒤 틀 크기에 맞춘다. 그 규칙을 그대로 따라 두 삼각형의 화면 길이/실제 길이가 같아지는 scale 을 찾는다.
+const T2_W = 580, T2_PADX = 58, T2_GAP = 84, T2_H = 270, T2_PADTOP = 46, T2_PADBOT = 40;
+const PAIR_IDX = (i: number, j: number) => (i + j === 1 ? 0 : i + j === 3 ? 1 : 2);
+/** s=[v0v1, v1v2, v0v2] 변과 ang 각을 가진 삼각형을 pos=[위, 왼쪽, 오른쪽] 대응으로 놓았을 때의 (경계 상자 폭, 높이/폭). */
+function frameOf(s: number[], ang: number[], pos: number[]): { W: number; y: number } {
+  const [c0, c1, c2] = pos; const base = s[PAIR_IDX(c1, c2)], adj = s[PAIR_IDX(c0, c1)]; const a = ang[c1] * RAD;
+  const ax = adj * Math.cos(a), ay = adj * Math.sin(a); const W = Math.max(base, ax) - Math.min(0, ax);
+  return { W, y: ay / W };
+}
+export function congScale(s: number[], ang: number[], pos: number[]): number {
+  const f1 = frameOf(s, ang, [0, 1, 2]), f2 = frameOf(s, ang, pos); const wAvail = T2_W - T2_PADX * 2 - T2_GAP, hAvail = T2_H - T2_PADTOP - T2_PADBOT;
+  const diff = (r: number) => { const m = Math.max(1, r); const sc1 = 1 / m, sc2 = r / m; const tot = sc1 + sc2; const w = (sc: number) => (wAvail * sc) / tot; return Math.min(w(sc2), (hAvail * sc2) / Math.max(f2.y, 0.7)) / f2.W - Math.min(w(sc1), (hAvail * sc1) / Math.max(f1.y, 0.7)) / f1.W; };
+  let lo = 0.4, hi = 1.6; if (diff(lo) > 0 || diff(hi) < 0) throw new GenFail("합동 배치 크기 보정 불가");
+  for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; if (diff(mid) < 0) lo = mid; else hi = mid; }
+  return Math.round(((lo + hi) / 2) * 100) / 100;
+}

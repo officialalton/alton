@@ -1,0 +1,24 @@
+{
+ "itemId": "lines_angles_triangles.congruent_triangles.TR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T05:04:14Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "369ccf43b552e85fc9e10e60809d314fe7c95b15b742e9b4ba8efc145b9add3e",
+ "samples": [
+  "lines_angles_triangles.congruent_triangles.TR.P.png",
+  "lines_angles_triangles.congruent_triangles.TR.P~compose_kind.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "합동 두 삼각형 2샘플(각 대응·직각삼각형 넓이) 데스크톱·375px 확인: 둘째 삼각형을 다른 배치(위·왼쪽·오른쪽 자리)로 놓아도 second.scale 보정(congScale)으로 첫째와 같은 크기로 그려져 합동으로 보임, 각 라벨 33°/84°/직각변 6·8·빗변 10 이 그려진 값과 일치, 꼭짓점·라벨 겹침 없음. 갤러리(시드 1~6, 4개 연산자)에서도 식 라벨(x + 12, 3x - 13 등)·대응 정합 확인."
+}
