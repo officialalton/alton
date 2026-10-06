@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:00:06Z",
  "reviewer": "claude-sonnet-5.5 (math-D session)",
- "codeHash": "1f5918e0ad089ca926d194f53c2b55a60b705a0f9e2dfe427ccb0310a59be91f",
+ "codeHash": "0ac46b73f27f04c6173535b415b078d5d343326e5fbb97de9536ffdb689b2c47",
  "samples": [
   "inference_margin_error.margin_interval.NL.C.png"
  ],
@@ -19,5 +19,5 @@
   "choice_distinct_one_rule": "pass"
  },
  "defects": [],
- "notes": "수직선: 눈금 균일, 찬 점·빈 점·반직선 방향·구간이 데이터와 일치, 선택지형은 같은 축·크기의 4개 그래프, 데스크톱·375px 읽음."
+ "notes": "수직선: 눈금 균일, 찬 점·빈 점·반직선 방향·구간이 데이터와 일치, 선택지형은 같은 축·크기의 4개 그래프, 데스크톱·375px 읽음. [재스탬프: easy/medium 문구 변형 추가, 샘플 본문·렌더 동일 확인]"
 }
