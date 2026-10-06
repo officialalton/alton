@@ -3,15 +3,17 @@
 // 2026-09-28 — 초기 고객 절차 단순화 4단계: 자동 계약 발송 outbox 관리자 화면.
 // 체험 수업 completed 또는 직접 계정 생성 시 DB 트리거가 이 큐에 작업을
 // 쌓는다(contract_dispatch_jobs). 실제 DocuSign 발송은
-// CONTRACT_AUTO_DISPATCH_ENABLED=true일 때만 일어난다 — 기본은 비활성이라
-// 아래 "발송 실행" 버튼을 눌러도 큐만 계속 쌓이고 실제 이메일은 안 나간다.
+// 2026-10-06: 관리자 토글(contract_dispatch_settings, 기본 켜짐)이 켜져 있으면 조건 충족 시
+// 실제 DocuSign 계약서가 자동 발송된다. 환경변수 "false"는 비상 강제 정지.
 
 import { useState } from "react";
 import {
   listContractDispatchJobs,
   runContractDispatchQueueAction,
+  setContractAutoDispatchEnabledAction,
   retryContractDispatchJobAction,
   type ContractDispatchJobListItem,
+  type ContractDispatchSettingInfo,
 } from "./contract-dispatch-actions";
 import { useTabCachedData } from "./use-tab-cached-data";
 import type { DispatchOneResult } from "@/lib/contract-dispatch/dispatcher";
@@ -20,7 +22,7 @@ import type { DispatchOneResult } from "@/lib/contract-dispatch/dispatcher";
 export function describeRetryOutcome(result: DispatchOneResult): string {
   switch (result.outcome) {
     case "disabled":
-      return "자동 발송이 꺼져 있어(CONTRACT_AUTO_DISPATCH_ENABLED) 아무 것도 보내지 않았습니다. 작업은 그대로 대기 중입니다.";
+      return "자동 발송이 꺼져 있어 아무 것도 보내지 않았습니다. 작업은 그대로 대기 중입니다.";
     case "sent":
       return "계약서를 발송했습니다.";
     case "already_sent":
@@ -51,6 +53,8 @@ const TRIGGER_LABEL: Record<ContractDispatchJobListItem["trigger_type"], string>
 export default function ContractDispatchQueueSection() {
   const { data, refreshing, refresh } = useTabCachedData<{
     autoDispatchEnabled: boolean;
+    envHardStop: boolean;
+    setting: ContractDispatchSettingInfo;
     jobs: ContractDispatchJobListItem[];
   }>({
     cacheKey: "contract-dispatch-jobs",
@@ -60,10 +64,30 @@ export default function ContractDispatchQueueSection() {
   const [running, setRunning] = useState(false);
   const [retryingId, setRetryingId] = useState<string | null>(null);
   const [runResult, setRunResult] = useState<string | null>(null);
+  const [toggling, setToggling] = useState(false);
+  const [confirmingOn, setConfirmingOn] = useState(false);
+  const [toggleError, setToggleError] = useState<string | null>(null);
   const [retryMessages, setRetryMessages] = useState<Record<string, string>>({});
 
   const jobs = data?.jobs ?? [];
   const autoDispatchEnabled = data?.autoDispatchEnabled ?? false;
+  const envHardStop = data?.envHardStop ?? false;
+  const settingEnabled = data?.setting.enabled ?? false;
+
+  async function applyToggle(next: boolean) {
+    setToggling(true);
+    setToggleError(null);
+    try {
+      await setContractAutoDispatchEnabledAction(next);
+      setConfirmingOn(false);
+      await refresh();
+    } catch (e) {
+      setToggleError(e instanceof Error ? e.message : "설정을 바꾸지 못했습니다.");
+    } finally {
+      setToggling(false);
+    }
+  }
+
   const pendingCount = jobs.filter((j) => j.status === "queued" || j.status === "retryable_failed").length;
 
   return (
@@ -79,14 +103,72 @@ export default function ContractDispatchQueueSection() {
         </button>
       </div>
 
+      <div className="flex items-center justify-between gap-3 mb-3" data-testid="contract-dispatch-toggle">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-[13px] font-bold text-ink">
+            계약서 자동 발송 {settingEnabled ? "켜짐" : "꺼짐"}
+          </span>
+          <span className="text-[11.5px] text-grey-500" data-testid="contract-dispatch-toggle-meta">
+            {data?.setting.updatedAt
+              ? `마지막 변경: ${data.setting.updatedByName ?? "알 수 없음"} · ${new Date(data.setting.updatedAt).toLocaleString("ko-KR")}`
+              : "마지막 변경: 기본값(켜짐)"}
+          </span>
+        </div>
+        <button
+          role="switch"
+          aria-checked={settingEnabled}
+          aria-label="계약서 자동 발송"
+          disabled={toggling || !data}
+          onClick={() => (settingEnabled ? void applyToggle(false) : setConfirmingOn(true))}
+          className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
+        >
+          {settingEnabled ? "끄기" : "켜기"}
+        </button>
+      </div>
+      {toggleError && (
+        <p className="text-[12px] text-red mb-2" role="alert">
+          {toggleError}
+        </p>
+      )}
+      {confirmingOn && (
+        <div
+          role="alertdialog"
+          aria-label="계약서 자동 발송 켜기 확인"
+          className="bg-yellow-bg text-[12px] text-ink rounded-lg px-3.5 py-3 mb-3"
+          data-testid="contract-dispatch-confirm"
+        >
+          <p className="mb-2">
+            자동 발송을 켜면 조건(체험 수업 완료·직접 계정 생성·정규 바로 진행)이 충족될 때 실제 DocuSign 계약서가
+            보호자에게 자동으로 발송됩니다. 켜시겠습니까?
+          </p>
+          <div className="flex gap-2">
+            <button
+              disabled={toggling}
+              onClick={() => void applyToggle(true)}
+              className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
+            >
+              {toggling ? "처리 중..." : "켜기 확인"}
+            </button>
+            <button
+              disabled={toggling}
+              onClick={() => setConfirmingOn(false)}
+              className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      )}
+
       {!autoDispatchEnabled && (
         <div
           className="bg-yellow-bg text-[12px] text-ink rounded-lg px-3.5 py-2.5 mb-3"
           data-testid="contract-dispatch-disabled-banner"
         >
-          자동 발송이 비활성화되어 있습니다(CONTRACT_AUTO_DISPATCH_ENABLED 환경변수
-          필요). 체험 수업 완료·직접 계정 생성 시 이 큐에는 계속 쌓이지만, 실제
-          이메일·계약서는 나가지 않습니다. 활성화는 별도 승인 후 진행합니다.
+          {envHardStop
+            ? "비상 정지(환경변수 CONTRACT_AUTO_DISPATCH_ENABLED=false)가 걸려 있어 위 설정과 관계없이 발송되지 않습니다. "
+            : "자동 발송이 꺼져 있습니다. "}
+          큐에는 계속 쌓이지만 실제 이메일·계약서는 나가지 않습니다.
         </div>
       )}
 
