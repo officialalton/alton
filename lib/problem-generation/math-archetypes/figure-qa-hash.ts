@@ -45,8 +45,10 @@ export function codeHash(itemId: string, figureTypes: string[], root = process.c
 const GEO_KIT = `${AR}/skills/fig/geo-kit.ts`, GEO_PT_KIT = `${AR}/skills/fig/geo-pt-kit.ts`;
 for (const code of ["PT", "PG", "CI", "CM", "CG", "SO"]) FAMILY_KIT[code] = [GEO_KIT, ...(FAMILY_KIT[code] ?? [])];
 FAMILY_KIT.PT = [GEO_PT_KIT, ...FAMILY_KIT.PT];
-export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P", "lines_angles_triangles.congruent_triangles.TR.P", "lines_angles_triangles.triangle_inequality.TR.P", "area_volume.triangle_area.TR.P"];
+export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P", "lines_angles_triangles.congruent_triangles.TR.P", "lines_angles_triangles.triangle_inequality.TR.P", "area_volume.triangle_area.TR.P", "lines_angles_triangles.exterior_angle.TR.P"];
 for (const id of GEO_TR_ITEMS) ITEM_KIT[id] = [GEO_KIT, ...(ITEM_KIT[id] ?? [])];
+const EXT_KIT = `${AR}/skills/fig/ext-kit.ts`;
+for (const id of ["lines_angles_triangles.exterior_angle.TR.P"]) ITEM_KIT[id] = [EXT_KIT, ...(ITEM_KIT[id] ?? [])];
 
 // ── 판정 파일 ──
 export type ReviewChecklistKey = "figure_present" | "proportion_matches_values" | "labels_placed_and_legible" | "multi_figure_consistent" | "text_matches_figure_and_solvable" | "axes_ticks_units_legend" | "choice_distinct_one_rule" | "sat_visual_style" | "mobile_375_readable";

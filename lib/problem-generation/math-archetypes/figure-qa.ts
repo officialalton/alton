@@ -215,6 +215,17 @@ function checkTriangleFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   const len = (u: string, v: string) => Math.hypot(at.get(u)![0] - at.get(v)![0], at.get(u)![1] - at.get(v)![1]);
   for (const a of ((spec.angles as { at: string; label?: string; value?: number }[]) ?? [])) { const want = typeof a.value === "number" ? a.value : parseAng(a.label); if (want === null || !at.has(a.at)) continue; const got = ang(a.at); if (Math.abs(got - want) > 2.5) issues.push({ code: "render_value_mismatch", message: `꼭짓점 ${a.at} 의 각이 ${got.toFixed(1)}° 로 그려졌지만 데이터는 ${want}° 입니다(그림이 참값과 다름).` }); }
   const ra = spec.rightAngleAt as string | undefined; if (ra && at.has(ra)) { const got = ang(ra); if (Math.abs(got - 90) > 2.5) issues.push({ code: "render_value_mismatch", message: `직각 꼭짓점 ${ra} 의 각이 ${got.toFixed(1)}° 로 그려졌습니다.` }); }
+  const ext = spec.extend as { from: string; at: string; label?: string } | undefined;
+  if (ext && at.has(ext.at) && at.has(ext.from)) { // 변 연장: 연장선(4 번째 굵은 선)과 나머지 변 사이의 바깥각이 라벨(숫자)·참값(180° − 내각)과 맞는지
+    const c = at.get(ext.at)!; const ls = segs[3]; const third = names.find((n) => n !== ext.from && n !== ext.at); const tp = third ? at.get(third) : undefined;
+    if (!ls || !tp) issues.push({ code: "render_empty", message: "변 연장선이 그려지지 않았습니다." });
+    else {
+      const e: [number, number] = Math.hypot(ls.x1 - c[0], ls.y1 - c[1]) < 0.6 ? [ls.x2, ls.y2] : [ls.x1, ls.y1];
+      const a = Math.atan2(e[1] - c[1], e[0] - c[0]), b = Math.atan2(tp[1] - c[1], tp[0] - c[0]); let got = Math.abs(a - b) * 180 / Math.PI; if (got > 180) got = 360 - got;
+      const inner = ((spec.angles as { at: string; value?: number }[]) ?? []).find((q) => q.at === ext.at)?.value; const want = parseAng(ext.label) ?? (typeof inner === "number" ? 180 - inner : null);
+      if (want !== null && Math.abs(got - want) > 2.5) issues.push({ code: "render_value_mismatch", message: `꼭짓점 ${ext.at} 의 바깥각이 ${got.toFixed(1)}° 로 그려졌지만 데이터는 ${want}° 입니다.` });
+    }
+  }
   if (!spec.notToScale) {
     const sides = ((spec.sides as { between: [string, string]; label?: string }[]) ?? []).map((q) => ({ v: parseSideNum(q.label), a: q.between[0], b: q.between[1] })).filter((q) => q.v !== null && at.has(q.a) && at.has(q.b)) as { v: number; a: string; b: string }[];
     for (let i = 1; i < sides.length; i++) { const r0 = len(sides[0].a, sides[0].b) / sides[0].v, ri = len(sides[i].a, sides[i].b) / sides[i].v; if (Math.abs(ri / r0 - 1) > 0.06) { issues.push({ code: "render_value_mismatch", message: `변 ${sides[i].a}${sides[i].b} 의 길이 비율이 변 ${sides[0].a}${sides[0].b} 와 라벨 ${sides[i].v}:${sides[0].v} 에 맞지 않게 그려졌습니다(${(ri / r0).toFixed(2)} 배).` }); break; } }

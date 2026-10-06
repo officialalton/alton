@@ -1,0 +1,45 @@
+{
+ "itemId": "lines_angles_triangles.exterior_angle.TR.P",
+ "generatedAt": "2026-10-06T05:58:18.209Z",
+ "codeHash": "3e60835bfd97378a465dd460ec456468151cf9e47a7f09c48ec0d25f76e968f4",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.exterior_angle.TR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.exterior_angle.TR.P.png",
+   "mobileFile": "lines_angles_triangles.exterior_angle.TR.P.m375.png",
+   "archetypeId": "lat.exterior_angle.TR.P.compose_kind",
+   "seed": 11,
+   "signature": "triangle:scalene",
+   "stimulus": "A designer sketches a triangular flag. In triangle $HNR$ shown, side $RN$ is extended past $N$ to point $B$. Some angle measures are labeled in degrees.",
+   "question": "How many degrees is the angle at vertex $N$ inside the triangle?",
+   "options": [
+    "20",
+    "127",
+    "83",
+    "97"
+   ],
+   "correctIndex": 2,
+   "answer": "83",
+   "explanation": "(1) 그림에서 변 RN 가 N 너머로 연장되어 있고 각의 라벨을 읽는다. (2) 바깥각 정리: (3x+37) = (3x-7) + (x+24) 에서 x = 20 이다. (3) 바깥각 = 97° 이다. (4) 내각 ∠N = 180° - 97° = 83° 이다. (5) 따라서 83 이다. 따라서 정답은 83이다.",
+   "structuralIssues": []
+  }
+ ]
+}
