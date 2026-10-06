@@ -8,5 +8,6 @@ import { ITEM as rttTrig } from "../items/right_triangles_trigonometry.trig_rati
 import { ITEM as rttSpecial } from "../items/right_triangles_trigonometry.special_right_triangles.TR.P";
 import { ITEM as rttComp } from "../items/right_triangles_trigonometry.sin_cos_complementary.TR.P";
 import { ITEM as rttElev } from "../items/right_triangles_trigonometry.trig_application_elevation.TR.P";
+import { ITEM as latSim } from "../items/lines_angles_triangles.similar_triangles.TR.P";
 
-export const BUNDLE: LArch[] = [...latAngleSum, ...rttHyp, ...rttLeg, ...latIso, ...rttTrig, ...rttSpecial, ...rttComp, ...rttElev];
+export const BUNDLE: LArch[] = [...latSim, ...latAngleSum, ...rttHyp, ...rttLeg, ...latIso, ...rttTrig, ...rttSpecial, ...rttComp, ...rttElev];
