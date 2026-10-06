@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.spread_comparison.DP.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:00:27Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "e516c5bb512c4d2797961eec9d1c7e752ba9ad8cea09f9854d07229e85a98267",
+ "samples": [
+  "one_variable_data.spread_comparison.DP.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 두 점도표가 같은 가로 눈금(4~10): Sample A 4~10(범위 6), Sample B 7~10(범위 3) → 차 3, 메타 정답 3 일치. 점 개수·눈금 정렬·축 제목 단위 양호, 두 그림 크기 동일, 375px 에서 위아래로 쌓여 판독 가능."
+}

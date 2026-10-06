@@ -17,12 +17,14 @@ const RENDERER: Record<string, string[]> = { data: [`${FG}/templates/data.ts`], 
 export const ITEM_DIR = `${AR}/skills/fig/items`;
 const TK = `${AR}/skills/fig/table-kit.ts`, GK = `${AR}/skills/fig/graph-kit.ts`, DK = `${AR}/skills/fig/data-kit.ts`, HK = `${AR}/skills/fig/hist-kit.ts`;
 export const FAMILY_KIT: Record<string, string[]> = { TB: [TK], FQ: [TK], TW: [TK], ST: [TK], LN: [GK, TK], FN: [GK, TK], DP: [DK, GK, TK], HG: [HK, DK, GK, TK], BX: [DK, GK, TK], BR: [DK, GK, TK, `${AR}/skills/fig/items/_t4-kit.ts`] };
+/** 조합별 추가 키트(공용 FAMILY_KIT 로 묶기 어려운 조합 전용 장면 키트) — 이 파일을 고치면 그 조합만 재검수 대상이 된다. */
+export const ITEM_KIT: Record<string, string[]> = { "one_variable_data.spread_comparison.DP.P": [`${AR}/skills/fig/dot2-kit.ts`] };
 export function archetypeSourceFor(itemId: string, root = process.cwd()): string[] {
   const [skill, kind, fig, loc] = itemId.split(".");
   const own = `${ITEM_DIR}/${itemId}.ts`;
   if (skill !== "two_variable_data" || existsSync(path.join(root, own))) {
     if (!existsSync(path.join(root, own))) throw new Error(`시각 검수 해시 규칙이 없는 조합(조합 파일 ${own} 없음): ${itemId}`);
-    return [own, `${AR}/skills/fig/item-kit.ts`, ...(FAMILY_KIT[fig] ?? [])];
+    return [own, `${AR}/skills/fig/item-kit.ts`, ...(FAMILY_KIT[fig] ?? []), ...(ITEM_KIT[itemId] ?? [])];
   }
   if (loc === "C" || kind === "association_direction_strength") return [`${AR}/skills/tvd-fig-choice.ts`];
   if (fig === "TW") return [`${AR}/skills/tvd-fig-tables.ts`];

@@ -166,7 +166,7 @@ function checkDotPlotFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   const dots = spec.dots as { value: number; count: number }[]; const sc = readScale(svg); const cs = [...svg.matchAll(/<circle\b([^>]*)\/?>/g)].map((m) => ({ cx: Number(attr(m[1], "cx")), r: Number(attr(m[1], "r")) })).filter((c) => c.r === 6);
   const total = dots.reduce((a, d) => a + d.count, 0); if (cs.length !== total) { issues.push({ code: cs.length === 0 ? "render_empty" : "render_value_mismatch", message: `그려진 점 ${cs.length}개 ≠ 데이터 점 ${total}개.` }); return; }
   if (!sc.x) return; const got = new Map<number, number>(); for (const c of cs) { const v = Math.round((sc.x.a * c.cx + sc.x.b) * 1000) / 1000; got.set(v, (got.get(v) ?? 0) + 1); }
-  for (const d of dots) { const hit = [...got.entries()].find(([v]) => Math.abs(v - d.value) <= Math.abs(sc.x!.a) * 1.5); if (!hit || hit[1] !== d.count) issues.push({ code: "render_value_mismatch", message: `값 ${d.value} 에 그려진 점 ${hit ? hit[1] : 0}개 ≠ 데이터 ${d.count}개.` }); }
+  for (const d of dots.filter((q) => q.count > 0)) { const hit = [...got.entries()].find(([v]) => Math.abs(v - d.value) <= Math.abs(sc.x!.a) * 1.5); if (!hit || hit[1] !== d.count) issues.push({ code: "render_value_mismatch", message: `값 ${d.value} 에 그려진 점 ${hit ? hit[1] : 0}개 ≠ 데이터 ${d.count}개.` }); }
 }
 function checkBoxplotFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   const boxes = spec.boxes as { name: string; min: number; q1: number; median: number; q3: number; max: number }[]; const sc = readScale(svg); if (!sc.x) return;
@@ -220,7 +220,7 @@ const tickSig = (svg: string) => { const s = readScale(svg); return JSON.stringi
 export function checkMultiFigure(children: Spec[], kind: "figure_set" | "figure_choice", textForLabels?: string): QaIssue[] {
   const issues: QaIssue[] = []; const svgs = children.map((c) => renderFigureSvg(c as unknown as FigureSpec, textForLabels === undefined ? undefined : { text: textForLabels }));
   children.forEach((c, i) => checkRenderedFigure(c, svgs[i]).forEach((q) => issues.push({ code: q.code, message: `${kind === "figure_choice" ? "선택지" : "자료"} ${"ABCD"[i]}: ${q.message}` })));
-  const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar")) || c.type === "plane");
+  const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar" || c.kind === "dot_plot" || c.kind === "histogram" || c.kind === "boxplot")) || c.type === "plane");
   if (graphs) {
     if (new Set(svgs.map(tickSig)).size > 1) issues.push({ code: kind === "figure_choice" ? "choice_axes_differ" : "scale_mismatch_between_figures", message: "복수 그림의 눈금(축척)이 서로 다릅니다 — 같은 단위의 값은 같은 축척으로 그려야 합니다." });
     if (new Set(svgs.map(viewBox)).size > 1) issues.push({ code: "choice_size_differ", message: "복수 그림의 크기가 서로 다릅니다." });

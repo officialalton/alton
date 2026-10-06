@@ -16,5 +16,7 @@ import { ITEM as ovdRangeBX } from "../items/one_variable_data.range.BX.P";
 import { ITEM as ovdSpreadBX } from "../items/one_variable_data.spread_comparison.BX.P";
 import { ITEM as ovdOutlierBX } from "../items/one_variable_data.outlier_effect.BX.P";
 import { ITEM as ovdQuartileBX } from "../items/one_variable_data.quartile_percentile_from_plot.BX.P";
+import { ITEM as ovdSpreadDP } from "../items/one_variable_data.spread_comparison.DP.P";
+import { ITEM as ovdOutlierDP } from "../items/one_variable_data.outlier_effect.DP.P";
 
-export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX];
+export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP];
