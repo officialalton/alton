@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.mean.DP.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T05:10:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "92fc1fa5819c9ee005606cc5449f8df8693d9a838830c32f316cc155ee365513",
+ "samples": [
+  "one_variable_data.mean.DP.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "데스크톱 2x2·모바일 1열 모두 확인: 네 점도표가 같은 값 0~6·같은 눈금·같은 최대 점 높이로 그려지고 점이 열마다 정렬. 지문(28개, 평균 3)에 맞는 그림은 정답 자리 하나뿐이며 정답은 N=400 스윕 검증기(재계산)가 일치 확인. 선택지마다 개수만 틀림/평균만 틀림/둘 다 틀림 중 서로 다른 규칙."
+}

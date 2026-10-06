@@ -1,0 +1,23 @@
+{
+ "itemId": "two_variable_data.model_choice_linear_quadratic_exponential.SC.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "ac939e5ac5876db4e14479e73b59506eaccb938fbb6bc13bd6eb5a988fa3a4bc",
+ "samples": [
+  "two_variable_data.model_choice_linear_quadratic_exponential.SC.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 지수 감소 → A(80,40,20,10,5; 비 1/2). B 는 이차(위로 볼록), C 는 지수 증가, D 는 일차 감소. 네 그림이 같은 축·눈금·크기, 선택지마다 서로 다른 모형 유형, 데스크톱 2x2·375px 1열 판독 가능. (메타 정답: A)"
+}

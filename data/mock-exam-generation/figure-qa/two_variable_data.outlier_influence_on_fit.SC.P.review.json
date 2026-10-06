@@ -1,0 +1,24 @@
+{
+ "itemId": "two_variable_data.outlier_influence_on_fit.SC.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "31caa8ecc5210569a382b7d4c7a961fe35c9f3f44e877b7ff352be3fa6419e33",
+ "samples": [
+  "two_variable_data.outlier_influence_on_fit.SC.P.png",
+  "two_variable_data.outlier_influence_on_fit.SC.P~compare_scenarios.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: (샘플1) 이상치(x=10, y=60)가 추세선 아래로 끌어 기울기를 줄임 → 빼면 기울기 증가 + 점이 직선에 더 가까워짐 (D). (샘플2) Graph B 의 이상치가 x 오른쪽 끝(y=140)이라 직선을 평평하게 끌어당겨 기울기 변화가 더 큼, Graph A 의 이상치는 가운데(x=5) → D. 두 그래프 같은 축·눈금·크기, 데스크톱·375px 판독 가능. (메타 정답: The slope of the line of best fit would increase, and the data would fit the line more closely. / Graph B changes more, because its outlier is at the far end of the x-values.)"
+}
