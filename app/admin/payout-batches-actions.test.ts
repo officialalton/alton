@@ -89,4 +89,26 @@ describe("payout-batches-actions (v3, R10 Task C)", () => {
     expect((actions as Record<string, unknown>).markPayoutBatchPaid).toBeUndefined();
     expect((actions as Record<string, unknown>).dispatchPayoutBatch).toBeUndefined();
   });
+
+  it("setPayoutBatchScheduledDate: 주말·휴일 제안은 needs_confirmation으로, 확인 후 재호출은 finalDate를 돌려준다", async () => {
+    const { setPayoutBatchScheduledDate } = await import("./payout-batches-actions");
+    rpcMock.mockResolvedValueOnce({ data: null, error: { message: "NON_BUSINESS_DAY:2026-10-09:선택한 날짜는 주말입니다." } });
+    const first = await setPayoutBatchScheduledDate({ batchId: "b1", newDate: "2026-10-10", reason: "연기" });
+    expect(first).toEqual({ status: "needs_confirmation", suggestedDate: "2026-10-09", message: "선택한 날짜는 주말입니다." });
+    expect(rpcMock).toHaveBeenLastCalledWith("set_payout_batch_scheduled_date", expect.objectContaining({ p_confirm_business_day: false }));
+
+    rpcMock.mockResolvedValueOnce({ data: "2026-10-09", error: null });
+    const second = await setPayoutBatchScheduledDate({ batchId: "b1", newDate: "2026-10-10", reason: "연기", confirmBusinessDay: true });
+    expect(second).toEqual({ status: "ok", finalDate: "2026-10-09" });
+    expect(rpcMock).toHaveBeenLastCalledWith("set_payout_batch_scheduled_date", expect.objectContaining({ p_confirm_business_day: true }));
+  });
+
+  it("지연·즉시 지급 액션은 각자 RPC로 간다(일반 변경 RPC를 우회하지 않는다)", async () => {
+    const { payPayoutBatchImmediately, setPayoutBatchDelayedDate } = await import("./payout-batches-actions");
+    rpcMock.mockResolvedValue({ error: null });
+    await payPayoutBatchImmediately({ batchId: "b1", reason: "지연" });
+    expect(rpcMock).toHaveBeenLastCalledWith("set_payout_batch_pay_immediately", { p_batch_id: "b1", p_reason: "지연", p_actor_id: "admin1" });
+    await setPayoutBatchDelayedDate({ batchId: "b1", newDate: "2026-11-20", reason: "장애" });
+    expect(rpcMock).toHaveBeenLastCalledWith("set_payout_batch_delayed_date", { p_batch_id: "b1", p_new_date: "2026-11-20", p_reason: "장애", p_actor_id: "admin1" });
+  });
 });

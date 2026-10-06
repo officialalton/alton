@@ -126,12 +126,12 @@ describe("loadTeacherSettlement", () => {
     expect(result.inReviewTotalsByCurrency).toEqual({ KRW: 10000 });
     expect(result.approvedTotalsByCurrency).toEqual({ KRW: 30000 });
     expect(result.paidTotalsByCurrency).toEqual({ KRW: 20000 });
-    // 예정 금액이 있는 가장 이른 정산 기간(2026-09-01~15, LA 기준)의 지급일(9/20 일요일 → 9/18).
-    expect(result.nextPayoutDate).toBe("2026-09-18"); // 20일 일요일 → 직전 영업일
+    // 예정 금액이 있는 가장 이른 정산 기간(2026-09-01~15, LA 기준)의 지급일(9/26 토요일 → 9/25).
+    expect(result.nextPayoutDate).toBe("2026-09-25"); // 26일 토요일 → 직전 영업일
     expect(result.nextPayoutMonth).toBe("2026-09");
   });
 
-  it("반월 정산 기간으로 묶고 명목 지급일(20일/5일)을 계산하며 수업별 산출 근거를 채운다", async () => {
+  it("반월 정산 기간으로 묶고 지급 기한(26일/10일)을 계산하며 수업별 산출 근거를 채운다", async () => {
     const { client } = supabaseMock({
       ...BASE_TABLES,
       payout_items: [item({ id: "i1", session_id: "sess-1" })],
@@ -146,7 +146,7 @@ describe("loadTeacherSettlement", () => {
     expect(m.periodKey).toBe("2026-08-H1");
     expect(m.periodStart).toBe("2026-08-01");
     expect(m.periodEnd).toBe("2026-08-15");
-    expect(m.nominalPayoutDate).toBe("2026-08-20");
+    expect(m.nominalPayoutDate).toBe("2026-08-26");
     expect(m.payoutMonth).toBe("2026-08");
     expect(m.status).toBe("scheduled");
     expect(m.lessonCount).toBe(1);

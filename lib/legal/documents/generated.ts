@@ -530,7 +530,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
               "Supervisor: ____________________",
               "Position: Part-time, nonexempt Teacher",
               "Regular hourly rate: USD $50.00",
-              "Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid on the 20th of the same month; wages for work performed from the 16th through the last day of a month are paid on the 5th of the following month.",
+              "Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; wages for work performed from the 16th through the last day of a month are paid no later than the 10th of the following month.",
               "Applicable overtime rates: As required by law and stated in the wage notice"
             ]
           }
@@ -625,7 +625,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid on the 20th of the same month; services performed from the 16th through the last day of a month are paid on the 5th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim."
+            "text": "Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; services performed from the 16th through the last day of a month are paid no later than the 10th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim."
           },
           {
             "t": "p",
@@ -768,7 +768,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
               "Lesson fee: USD $50.00 per 60 recognized minutes",
               "Nonlesson services, scope, and compensation: ____________________",
               "Payment method and recipient details: ____________________",
-              "Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid on the 20th of the same month, and the 16th–end of month is paid on the 5th of the following month",
+              "Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid no later than the 26th of the same month, and the 16th–end of month is paid no later than the 10th of the following month",
               "Transfer, intermediary, and conversion fees: Borne by the Company",
               "Termination notice period: 30 days"
             ]

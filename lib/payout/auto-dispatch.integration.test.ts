@@ -18,6 +18,17 @@ function psql(sql: string): string {
   }).trim();
 }
 
+function laToday(): string {
+  return psql(`select (now() at time zone 'America/Los_Angeles')::date;`);
+}
+
+function nextBusinessDayOnOrAfter(dateIso: string): string {
+  return psql(
+    `select min(d::date) from generate_series('${dateIso}'::date, '${dateIso}'::date + 10, interval '1 day') d
+     where extract(isodow from d) < 6 and not exists (select 1 from payout_bank_holidays h where h.holiday_date = d::date);`
+  );
+}
+
 function createTeacher(label: string): string {
   const email = `p4-2d-${label}-${Date.now()}-${Math.random().toString(36).slice(2)}@example.com`;
   const id = psql(
@@ -65,30 +76,30 @@ function createApprovedBatch(label: string, dateIso: string): { teacher: string;
   return { teacher, batchId };
 }
 
-describe("next_scheduled_payout_date() — 5일·20일 슬롯(America/Los_Angeles, 당일 08:00 마감)", () => {
+describe("next_scheduled_payout_date() — 10일·26일 슬롯(America/Los_Angeles, 당일 08:00 마감)", () => {
   it("슬롯 당일 08:00 LA 이전 승인은 당일, 이후는 다음 슬롯이다", () => {
     const row = psql(
       `select next_scheduled_payout_date('2026-09-01T00:00:00Z'::timestamptz),
-              next_scheduled_payout_date('2026-09-05T14:59:59Z'::timestamptz),
-              next_scheduled_payout_date('2026-09-05T15:00:01Z'::timestamptz),
-              next_scheduled_payout_date('2026-12-20T16:00:00Z'::timestamptz),
+              next_scheduled_payout_date('2026-09-25T14:59:59Z'::timestamptz),
+              next_scheduled_payout_date('2026-09-25T15:00:01Z'::timestamptz),
+              next_scheduled_payout_date('2026-12-26T16:00:00Z'::timestamptz),
               next_scheduled_payout_date('2026-12-31T23:00:00Z'::timestamptz);`
     ).split("|");
-    // 2026-09-05는 토요일(Labor Day 주말) → 금요일 9/4, 9/20은 일요일 → 9/18.
-    expect(row).toEqual(["2026-09-04", "2026-09-18", "2026-09-18", "2027-01-05", "2027-01-05"]);
+    // 9/10(목)·9/26(토)→9/25(금)·10/10(토)→10/9(금)·1/10(일)→1/8(금).
+    expect(row).toEqual(["2026-09-10", "2026-09-25", "2026-10-09", "2027-01-08", "2027-01-08"]);
   });
 
-  it("기간 명목 지급일(1~15일→20일, 16일~말일→다음 달 5일)보다 일찍 잡히지 않는다", () => {
+  it("기간 지급 기한(1~15일→26일, 16일~말일→다음 달 10일)보다 일찍 잡히지 않는다", () => {
     const row = psql(
       `select scheduled_payout_date_for_batch('2026-10-15', '2026-10-01T00:00:00Z'::timestamptz),
-              scheduled_payout_date_for_batch('2026-10-15', '2026-10-21T00:00:00Z'::timestamptz),
-              scheduled_payout_date_for_batch('2026-10-31', '2026-11-01T00:00:00Z'::timestamptz);`
+              scheduled_payout_date_for_batch('2026-10-15', '2026-10-27T00:00:00Z'::timestamptz),
+              scheduled_payout_date_for_batch('2026-10-31', '2026-11-11T00:00:00Z'::timestamptz);`
     ).split("|");
-    expect(row).toEqual(["2026-10-20", "2026-11-05", "2026-11-05"]);
+    expect(row).toEqual(["2026-10-26", "2026-11-10", "2026-11-25"]);
   });
 
   it("지급일 보정: 주말·연방 은행 휴일은 직전 영업일, SQL 휴일 표는 TS 표와 같다", () => {
-    expect(psql(`select payout_business_day_on_or_before('2026-09-07'), payout_business_day_on_or_before('2026-01-19'), payout_business_day_on_or_before('2026-10-20');`)).toBe("2026-09-04|2026-01-16|2026-10-20");
+    expect(psql(`select payout_business_day_on_or_before('2026-09-07'), payout_business_day_on_or_before('2026-01-19'), payout_business_day_on_or_before('2026-10-26');`)).toBe("2026-09-04|2026-01-16|2026-10-26");
     const sqlDates = psql(`select string_agg(holiday_date::text, ',' order by holiday_date) from payout_bank_holidays;`);
     expect(sqlDates.split(",")).toEqual([...US_BANK_HOLIDAYS]);
   });
@@ -109,17 +120,18 @@ describe("승인 시 지급 예정일 저장", () => {
   });
 
   it("관리자가 예정일을 바꾸면 전후 날짜·사유·처리자가 이력에 남는다", () => {
-    const { batchId } = createApprovedBatch("change", "2026-06-10");
+    const { batchId } = createApprovedBatch("change", laToday());
     const before = psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`);
+    const target = nextBusinessDayOnOrAfter(laToday());
 
-    psql(`select set_payout_batch_scheduled_date('${batchId}'::uuid, '2027-03-10', '은행 점검으로 연기', '${ADMIN_ID}'::uuid);`);
+    psql(`select set_payout_batch_scheduled_date('${batchId}'::uuid, '${target}', '은행 점검으로 연기', '${ADMIN_ID}'::uuid);`);
 
-    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2027-03-10");
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe(target);
     const row = psql(
       `select previous_date, new_date, reason, actor_id is not null from payout_scheduled_date_events
        where batch_id = '${batchId}'::uuid and source = 'admin_change';`
     );
-    expect(row).toBe(`${before}|2027-03-10|은행 점검으로 연기|t`);
+    expect(row).toBe(`${before}|${target}|은행 점검으로 연기|t`);
   });
 
   it("사유 없이는 예정일을 바꿀 수 없다", () => {
@@ -345,12 +357,12 @@ describe("기존 승인 묶음 보정 — 자동 송금은 켜지 않는다 (202
 
     psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
 
-    // 2026-02-03 승인 → 슬롯(2026-02-05, 기간 1월 말일 종료 → 명목 2월 5일).
-    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2026-02-05");
+    // 2026-02-03 승인 → 기한(2026-02-10).
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2026-02-10");
     expect(psql(`select count(*) from payout_scheduled_date_events where batch_id = '${batchId}';`)).toBe("1");
     // **자동 송금은 여전히 제외** — Wise 게이트를 여는 순간 과거 건이 나가면 안 된다.
     expect(psql(`select auto_dispatch_enabled from payout_batches where id = '${batchId}';`)).toBe("f");
-    expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-05') where batch_id = '${batchId}';`)).toBe("0");
+    expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-10') where batch_id = '${batchId}';`)).toBe("0");
   });
 
   it("관리자가 명시적으로 포함시키면 그때부터 대상이 된다", () => {
@@ -359,16 +371,17 @@ describe("기존 승인 묶음 보정 — 자동 송금은 켜지 않는다 (202
 
     psql(`select set_payout_batch_auto_dispatch('${batchId}'::uuid, true, '${ADMIN_ID}'::uuid);`);
 
-    expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-05') where batch_id = '${batchId}';`)).toBe("1");
+    expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-10') where batch_id = '${batchId}';`)).toBe("1");
   });
 
   it("이미 예정일이 있으면 덮어쓰지 않는다(관리자가 지정한 날짜 보호)", () => {
-    const { batchId } = createApprovedBatch("keep-date", "2027-11-10");
-    psql(`select set_payout_batch_scheduled_date('${batchId}'::uuid, '2028-01-15', '협의된 날짜', '${ADMIN_ID}'::uuid);`);
+    const { batchId } = createApprovedBatch("keep-date", laToday());
+    const keep = nextBusinessDayOnOrAfter(laToday());
+    psql(`select set_payout_batch_scheduled_date('${batchId}'::uuid, '${keep}', '협의된 날짜', '${ADMIN_ID}'::uuid);`);
 
     psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`);
 
-    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2028-01-15");
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe(keep);
   });
 
   it("승인 전 묶음에는 예정일을 확정할 수 없다", () => {
@@ -380,5 +393,71 @@ describe("기존 승인 묶음 보정 — 자동 송금은 켜지 않는다 (202
     expect(() => psql(`select ensure_payout_batch_scheduled_date('${batchId}'::uuid, '${ADMIN_ID}'::uuid);`)).toThrow(
       /송금 승인된 묶음만/
     );
+  });
+});
+
+describe("지급 예정일 변경 규칙(관리자) — 사유·과거·기한·휴일·상태, 선생님 알림 기록", () => {
+  const callChange = (batchId: string, date: string, reason: string, confirm = false) =>
+    psql(`select set_payout_batch_scheduled_date('${batchId}'::uuid, '${date}', '${reason}', '${ADMIN_ID}'::uuid, ${confirm});`);
+
+  it("과거 날짜는 일반 변경으로 막힌다", () => {
+    const { batchId } = createApprovedBatch("past", laToday());
+    expect(() => callChange(batchId, psql(`select ${"'" + laToday() + "'"}::date - 1;`), "사유")).toThrow(/과거 날짜/);
+  });
+
+  it("법정 기한(1~15일→26일, 16일~말일→다음 달 10일)을 넘기는 날짜는 일반 변경으로 막히고, 지연 지급 경로는 경보를 남긴다", () => {
+    const { teacher, batchId } = createApprovedBatch("late", laToday());
+    const deadline = psql(`select payout_nominal_date(period_end) from payout_batches where id = '${batchId}';`);
+    const after = nextBusinessDayOnOrAfter(psql(`select '${deadline}'::date + 3;`));
+    expect(() => callChange(batchId, after, "사유")).toThrow(/법정 지급 기한/);
+    // 기한 이내인 날짜로는 지연 지급 경로를 쓸 수 없다.
+    expect(() =>
+      psql(`select set_payout_batch_delayed_date('${batchId}'::uuid, '${nextBusinessDayOnOrAfter(laToday())}', '사유', '${ADMIN_ID}'::uuid);`)
+    ).toThrow(/법정 지급 기한/);
+    psql(`select set_payout_batch_delayed_date('${batchId}'::uuid, '${after}', '송금 업체 장애', '${ADMIN_ID}'::uuid);`);
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe(after);
+    expect(psql(`select count(*) from payout_batch_audit_log where batch_id = '${batchId}' and action = 'delayed_payment_alert';`)).toBe("1");
+    expect(psql(`select source from payout_scheduled_date_events where batch_id = '${batchId}' order by created_at desc limit 1;`)).toBe("delayed_payment");
+    expect(psql(`select count(*) from payout_teacher_notices where teacher_id = '${teacher}' and kind = 'payout_delayed';`)).toBe("1");
+  });
+
+  it("토요일을 고르면 직전 영업일을 제안하고, 확인해야만 그 날짜로 적용된다", () => {
+    const { teacher, batchId } = createApprovedBatch("weekend", laToday());
+    const saturday = psql(
+      `select min(d::date) from generate_series('${laToday()}'::date + 2, '${laToday()}'::date + 9, interval '1 day') d where extract(isodow from d) = 6;`
+    );
+    let message = "";
+    try {
+      callChange(batchId, saturday, "사유");
+    } catch (e) {
+      message = String((e as { stderr?: Buffer }).stderr ?? e);
+    }
+    const m = /NON_BUSINESS_DAY:(\d{4}-\d{2}-\d{2}):/.exec(message);
+    expect(m).not.toBeNull();
+    const suggested = m![1];
+    expect(suggested < saturday).toBe(true);
+    expect(psql(`select payout_business_day_on_or_before('${saturday}');`)).toBe(suggested);
+    expect(callChange(batchId, saturday, "사유", true)).toBe(suggested);
+    expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe(suggested);
+    expect(psql(`select count(*) from payout_teacher_notices where teacher_id = '${teacher}' and kind = 'payout_date_changed';`)).toBe("1");
+  });
+
+  it("즉시 지급: 예정일이 지난 묶음만 오늘(LA)로 당기고 이력·알림을 남긴다. 아직 안 지난 묶음은 거절", () => {
+    const { teacher, batchId } = createApprovedBatch("immediate", laToday());
+    expect(() => psql(`select set_payout_batch_pay_immediately('${batchId}'::uuid, '사유', '${ADMIN_ID}'::uuid);`)).toThrow(/아직 지급 예정일이 지나지 않은/);
+    psql(`update payout_batches set scheduled_payout_date = '${laToday()}'::date - 3 where id = '${batchId}';`);
+    expect(() => psql(`select set_payout_batch_pay_immediately('${batchId}'::uuid, ' ', '${ADMIN_ID}'::uuid);`)).toThrow(/사유/);
+    expect(psql(`select set_payout_batch_pay_immediately('${batchId}'::uuid, '운영 지연', '${ADMIN_ID}'::uuid);`)).toBe(laToday());
+    expect(psql(`select source from payout_scheduled_date_events where batch_id = '${batchId}' order by created_at desc limit 1;`)).toBe("pay_immediately");
+    expect(psql(`select count(*) from payout_batch_audit_log where batch_id = '${batchId}' and action = 'pay_immediately_requested';`)).toBe("1");
+    expect(psql(`select count(*) from payout_teacher_notices where teacher_id = '${teacher}';`)).toBe("1");
+    // 송금 게이트는 그대로 닫혀 있다 — 상태는 approved 그대로.
+    expect(psql(`select status from payout_batches where id = '${batchId}';`)).toBe("approved");
+  });
+
+  it("송금 요청·처리·지급 완료 상태의 묶음은 날짜를 바꿀 수 없다", () => {
+    const { batchId } = createApprovedBatch("inflight", laToday());
+    psql(`update payout_batches set status = 'provider_pending' where id = '${batchId}';`);
+    expect(() => callChange(batchId, nextBusinessDayOnOrAfter(laToday()), "사유")).toThrow(/변경할 수 없습니다/);
   });
 });

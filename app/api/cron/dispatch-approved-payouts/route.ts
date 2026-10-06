@@ -32,7 +32,7 @@ export async function GET(request: Request) {
 
   // 요일·날짜 게이트를 두지 않는다. 대상은 DB가 "지급 예정일 <= 오늘(LA)"로 정하므로
   // (list_due_auto_dispatch_batches) 미래 예정일은 나가지 않고, 크론이 하루 빠지거나 관리자가
-  // 예정일을 5·20일이 아닌 날로 바꿨어도 다음 실행에서 따라잡는다. 중복 송금은 배치당
+  // 예정일을 10·26일이 아닌 날로 바꿨어도 다음 실행에서 따라잡는다. 중복 송금은 배치당
   // dispatch_idempotency_key(행 잠금 아래 1회 발급)가 막는다.
 
   try {

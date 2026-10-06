@@ -154,7 +154,7 @@ export default function ConsultantSettlementPanel() {
             )}
           </div>
 
-          <p className="text-[11.5px] text-grey-500 mb-2">정산 기간은 월 2회(1~15일 → 같은 달 20일 지급, 16일~말일 → 다음 달 5일 지급)이며 날짜 기준은 {COMPANY_TIME_ZONE}입니다. 금액은 지금처럼 수기 입력합니다.</p>
+          <p className="text-[11.5px] text-grey-500 mb-2">정산 기간은 월 2회(1~15일 → 같은 달 26일까지 지급, 16일~말일 → 다음 달 10일까지 지급)이며 날짜 기준은 {COMPANY_TIME_ZONE}입니다. 금액은 지금처럼 수기 입력합니다.</p>
           <form
             className="flex flex-wrap items-end gap-2 mb-4"
             onSubmit={(e) => {
