@@ -37,7 +37,7 @@ function fails(fn: () => unknown): string {
 
 function createAuthUser(opts: { confirmed: boolean; selfSignup: boolean; label: string }): string {
   const meta = opts.selfSignup
-    ? `'{"signup_source":"self_signup","name":"${opts.label}","birthdate":"2010-05-01","grade":"10학년","terms_version":"2026-10-05"}'`
+    ? `'{"signup_source":"self_signup","name":"${opts.label}","birthdate":"2010-05-01","grade":"10학년","terms_version":"2026-10-06"}'`
     : `'{"name":"${opts.label}"}'`;
   const id = psql(
     `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
@@ -50,7 +50,7 @@ function createAuthUser(opts: { confirmed: boolean; selfSignup: boolean; label: 
   return id;
 }
 
-const PROVISION = (name = "김학생", birthdate = "2010-05-01", grade = "10학년", school: string | null = null, terms = "2026-10-05") =>
+const PROVISION = (name = "김학생", birthdate = "2010-05-01", grade = "10학년", school: string | null = null, terms = "2026-10-06") =>
   `select provision_free_member('${name}', '${birthdate}', '${grade}', ${school === null ? "null" : `'${school}'`}, '${terms}');`;
 
 function parseTextArray(raw: string): string[] {
@@ -85,7 +85,7 @@ describe("provision_free_member", () => {
     const young = new Date();
     young.setUTCFullYear(young.getUTCFullYear() - 12);
     expect(fails(() => asUser(uid, PROVISION("어린이", young.toISOString().slice(0, 10))))).toContain("만 13세 미만");
-    expect(fails(() => asUser(uid, `select provision_free_member('어린이', null, '7학년', null, '2026-10-05');`))).toContain("생년월일은 필수");
+    expect(fails(() => asUser(uid, `select provision_free_member('어린이', null, '7학년', null, '2026-10-06');`))).toContain("생년월일은 필수");
     expect(psql(`select count(*) from profiles where id = '${uid}';`)).toBe("0");
   });
 
@@ -104,14 +104,14 @@ describe("provision_free_member", () => {
     const uid = createAuthUser({ confirmed: true, selfSignup: true, label: "ok" });
 
     it("profiles(student)+students(active/free/self_signup)+약관 동의가 생기고 역할은 항상 student", () => {
-      expect(asUser(uid, PROVISION("  김학생 ", "2010-05-01", "10학년", "  ", "2026-10-05"))).toBe(uid);
+      expect(asUser(uid, PROVISION("  김학생 ", "2010-05-01", "10학년", "  ", "2026-10-06"))).toBe(uid);
       expect(psql(`select role || '|' || name || '|' || date_of_birth from profiles where id = '${uid}';`)).toBe("student|김학생|2010-05-01");
       expect(
         psql(
           `select status || '|' || member_type || '|' || signup_source || '|' || grade || '|' || coalesce(school_name, '<null>') || '|' || (profile_completed_at is not null) from students where id = '${uid}';`,
         ),
       ).toBe("active|free|self_signup|10학년|<null>|true");
-      expect(psql(`select terms_version || '|' || source from student_terms_acceptances where student_id = '${uid}';`)).toBe("2026-10-05|self_signup");
+      expect(psql(`select terms_version || '|' || source from student_terms_acceptances where student_id = '${uid}';`)).toBe("2026-10-06|self_signup");
     });
 
     it("멱등: 두 번째 호출은 같은 id를 돌려주고 행 수가 늘지 않는다", () => {

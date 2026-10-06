@@ -14,7 +14,7 @@
  *     (다른 기기에서 확인 메일을 열어도 진행 가능해야 한다는 요구와도 맞다).
  */
 
-export const STUDENT_TERMS_VERSION = "2026-10-05";
+export const STUDENT_TERMS_VERSION = "2026-10-06";
 
 export const SIGNUP_SOURCE_FLAG = { key: "signup_source", value: "self_signup" } as const;
 
