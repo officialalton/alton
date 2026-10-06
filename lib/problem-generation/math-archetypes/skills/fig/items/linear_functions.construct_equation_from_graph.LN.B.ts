@@ -5,10 +5,9 @@ import type { Rng } from "../../../rng";
 import { defineItem } from "../item-kit";
 import { keyBundle, SPR_NO_B } from "../b-kit";
 import { makePureLine, pureIntro } from "../pure-kit";
-import { TAILS } from "../sx-kit";
-import { INTRO_TAILS, LEADS_G, LINE_KEY_JS, lineChoice, lineKey } from "../ln-b-kit";
+import { COORD_TAILS, INTRO_TAILS, LEADS_G, LINE_KEY_JS, lineChoice, lineKey } from "../ln-b-kit";
 
-const intro = (rng: Rng, extra = "") => `${rng.pick(LEADS_G)}${pureIntro(rng)} ${rng.pick(INTRO_TAILS)} ${rng.pick(TAILS)}${extra}`;
+const intro = (rng: Rng, extra = "") => `${rng.pick(LEADS_G)}${pureIntro(rng)} ${rng.pick(INTRO_TAILS)} ${rng.pick(COORD_TAILS)}${extra}`;
 const rd: [string, string] = ["기준 그래프에서 표시점 두 개를 읽어 기울기 m 과 y 절편 b 를 구한다.", "Read two points to find the slope and the y-intercept."];
 const EXP = (expr: string) => `const [m,b]=STEMLINE(); const rd=(x)=>Math.round(x*1e6)/1e6; const EXPECT=rd(${expr.split("|")[0]})+'|'+rd(${expr.split("|")[1]});`;
 function mk(rng: Rng, o: { ms?: number[] }) { const s = makePureLine(rng, { ms: o.ms ?? [-3, -2, -1, 1, 2, 3] }); return s; }

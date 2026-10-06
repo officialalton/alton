@@ -11,7 +11,9 @@ const figOf = (s: S): Fig => { const f = parabolaOk(s.R, s.A, s.H, s.K) as unkno
 const cnt = (s: S) => { const B = -2 * s.A * s.H, C = s.A * s.H * s.H + s.K; const d = (B - s.m) ** 2 - 4 * s.A * (C - s.b); return d > 1e-9 ? 2 : Math.abs(d) <= 1e-9 ? 1 : 0; };
 const STAT = "const o=c.objects.find(q=>q.kind==='function'&&q.fn==='quadratic'); const L=c.objects.find(q=>q.kind==='line'); if(!o||!L) throw new Error('포물선·직선 필요'); const [A,B,C]=o.params; const m=L.slope, b=L.intercept; const d=(B-m)*(B-m)-4*A*(C-b); return {A, m, b, cnt: d>1e-9?2:(Math.abs(d)<=1e-9?1:0)};";
 const randS = (rng: Rng, R: number): S => ({ R, A: rng.pick([-2, -1, 1, 2]), H: rng.int(-3, 3), K: rng.int(-(R - 3), R - 3), m: rng.pick([-2, -1, 1, 2, 3, -3]), b: rng.int(-(R - 2), R - 2) });
-const valid = (s: S) => { try { figOf(s); return Math.abs(s.m) * 1 > 0; } catch { return false; } };
+/** 교점이 모두 그림 안에 보여야 개수를 눈으로 셀 수 있다. */
+const visible = (s: S) => { const B = -2 * s.A * s.H, C = s.A * s.H * s.H + s.K; const d = (B - s.m) ** 2 - 4 * s.A * (C - s.b); if (d < -1e-9) return true; const xs = d <= 1e-9 ? [-(B - s.m) / (2 * s.A)] : [(-(B - s.m) + Math.sqrt(d)) / (2 * s.A), (-(B - s.m) - Math.sqrt(d)) / (2 * s.A)]; return xs.every((x) => Math.abs(x) <= s.R - 1 && Math.abs(s.m * x + s.b) <= s.R - 1 && Math.abs(x) >= 0.6); };
+const valid = (s: S) => { try { figOf(s); return visible(s); } catch { return false; } };
 const poolFor = (rng: Rng, R: number) => { const out: Fig[] = []; for (let i = 0; i < 2500; i++) { const s = randS(rng, R); if (valid(s)) out.push(figOf(s)); } return out; };
 /** 조건에 맞는 정답 장면. */
 function okScene(rng: Rng, want: (s: S) => boolean): S { for (let t = 0; t < 3000; t++) { const s = randS(rng, rng.pick(R_SET)); if (!valid(s) || !want(s)) continue; return s; } throw new GenFail("교점 장면"); }

@@ -4,6 +4,17 @@ import type { Rng } from "../../rng";
 import { pureAxes, clearOfLabels } from "./pure-kit";
 
 export const LEADS_G = ["", "", "A student studies graphs in an algebra class. ", "A teacher draws a graph on the board. ", "A graphing program plots a figure. ", "In a practice set, a graph is shown in the $xy$-plane. ", "A designer sketches a figure on a coordinate grid. ", "An engineer plots a graph on a grid. "];
+/** 좌표평면·그래프 B형 지문의 꼬리 문장(길이·모서리 표기를 말하는 sx-kit TAILS 는 여기에 맞지 않는다). */
+export const COORD_TAILS = [
+  "Compare each choice with the given graph, paying attention to where the graph sits on the grid.",
+  "Read the positions of the key points on the given graph before you look at the choices.",
+  "Every graph is drawn on the same grid, so positions on one graph can be compared directly with positions on another.",
+  "Only one of the four choices matches the relationship described below.",
+  "Decide what changes between the given graph and the correct choice, and then check each option.",
+  "The scale on the axes is the same in all five graphs.",
+  "Use the grid lines to read coordinates accurately from each graph.",
+  "Think about how the given graph would have to change to produce each of the choices.",
+];
 export const INTRO_TAILS = [
   "The first graph is the given figure, and four graphs with the same axes are shown as choices.",
   "Use the given graph to answer the question, and compare the four choices, which all use the same axes.",
