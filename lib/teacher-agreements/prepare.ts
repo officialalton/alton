@@ -2,9 +2,12 @@ import { randomUUID } from "node:crypto";
 import {
   renderCaliforniaTeacherAgreementHtml,
   renderNonUsTeacherAgreementHtml,
+  renderUsContractorTeacherAgreementHtml,
+  type TeacherRate,
   selectTeacherAgreementForm,
   type TeacherAgreementForm,
 } from "@/lib/contracts/teacher-agreement-template";
+import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { COMPANY_NAME } from "@/lib/legal";
 import { UnfilledContractError } from "@/lib/legal/guard";
 import { TEACHER_APPROVER } from "./schedule-defaults";
@@ -37,8 +40,8 @@ export type PrepareArgs = {
   /** teacher_workspace_provisioning.status === 'created' */
   workspaceProvisioned: boolean;
   inputs: TeacherAgreementInputs | null;
-  /** teachers.hourly_rate_krw (current accepted rate; synced from teacher_rate_history). */
-  hourlyRateKrw?: number | null;
+  /** Current rate from teacher_rate_history (amount_minor + currency). Null when no rate is set. */
+  rate?: TeacherRate | null;
   /** Agreement id printed as the document identifier; generated when sending. */
   agreementId?: string;
   now?: Date;
@@ -73,11 +76,14 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   const selection = selectTeacherAgreementForm({ country: i.work_country, region: i.work_region });
   if (selection.form === null) {
     if (!blank(i.work_country)) {
-      missing.push(blank(i.work_region) && i.work_country?.toUpperCase() === "US" ? "근무 주(미국)" : "이 근무 지역에 사용할 수 있는 계약서 양식 없음");
+      missing.push("해당 국가의 보수 통화·계약서 양식이 설정되지 않음(현재 KR=KRW, 미국=USD만 지원)");
     }
     return { ok: false, missing, form: null };
   }
   const form = selection.form;
+  const wantCurrency = form === "non_us_services" ? "KRW" : "USD";
+  if (!a.rate || a.rate.amountMinor <= 0) missing.push("선생님 시급 미설정 — 선생님 상세에서 시급을 먼저 등록");
+  else if (a.rate.currency !== wantCurrency) missing.push(`이 근무 지역은 ${wantCurrency} 시급이 필요합니다(현재 ${a.rate.currency}) — 시급 통화를 확인하세요`);
   if (blank(i.mailing_address)) missing.push("우편 주소");
   if (blank(i.start_date)) missing.push("시작일");
   if (blank(i.work_location_detail)) missing.push(form === "california_employment" ? "캘리포니아 근무 위치" : "근무 도시·지역");
@@ -85,10 +91,9 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (form === "california_employment") {
     if (blank(i.supervisor_name)) missing.push("감독자(Supervisor) 이름");
   } else {
-    if (!a.hourlyRateKrw || a.hourlyRateKrw <= 0) missing.push("선생님 시급(원) 미설정 — 선생님 상세에서 시급을 먼저 등록");
-    if (i.work_country?.toUpperCase() !== "KR") missing.push("해당 국가의 보수 통화가 설정되지 않음(현재 KR만 KRW 지원)");
     if (blank(i.payment_details)) missing.push("지급 방법·수령 정보");
   }
+  if (form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) missing.push("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
   if (missing.length > 0) return { ok: false, missing, form };
 
   const agreementId = a.agreementId ?? randomUUID();
@@ -114,13 +119,20 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
             ...common,
             californiaWorkLocation: i.work_location_detail!,
             supervisor: i.supervisor_name!,
+            lessonRate: a.rate as TeacherRate & { currency: "USD" },
+          })
+        : form === "us_contractor_services"
+        ? renderUsContractorTeacherAgreementHtml({
+            ...common,
+            actualWorkCountryAndLocation: `${countryName(i.work_country!)}${blank(i.work_region) ? "" : `, ${i.work_region}`} — ${i.work_location_detail!}`,
+            paymentMethodAndRecipientDetails: i.payment_details!,
+            lessonRate: a.rate as TeacherRate & { currency: "USD" },
           })
         : renderNonUsTeacherAgreementHtml({
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)} — ${i.work_location_detail!}`,
             paymentMethodAndRecipientDetails: i.payment_details!,
-            lessonRatePer60Minutes: a.hourlyRateKrw!,
-            currency: "KRW" as const,
+            lessonRate: a.rate as TeacherRate & { currency: "KRW" },
           });
     return { ok: true, form, templateVersion: selection.templateVersion, html, recipientEmail: email, agreementId };
   } catch (e) {

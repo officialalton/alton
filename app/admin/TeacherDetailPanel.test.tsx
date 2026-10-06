@@ -8,6 +8,7 @@ import type { TeacherListItem } from "./users-data";
 vi.mock("./users-actions", () => ({
   setTeacherStatus: vi.fn(),
   setTeacherHourlyRate: vi.fn(),
+  getTeacherRateLockAction: vi.fn().mockResolvedValue({ lock: null, message: null, rate: null }),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({
@@ -80,7 +81,7 @@ describe("TeacherDetailPanel", () => {
     fireEvent.click(screen.getAllByText("저장")[0]);
 
     await waitFor(() =>
-      expect(actions.setTeacherHourlyRate).toHaveBeenCalledWith(teacher.id, 35000)
+      expect(actions.setTeacherHourlyRate).toHaveBeenCalledWith(teacher.id, 35000, "KRW")
     );
   });
 

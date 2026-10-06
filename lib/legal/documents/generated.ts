@@ -2,7 +2,7 @@
 // The English source files are the authoritative text; a drift test fails when they diverge.
 import type { LegalDocumentData } from "../types";
 
-export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalifornia" | "teacherNonUs" | "under13Notice", LegalDocumentData> = {
+export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalifornia" | "teacherNonUs" | "under13Notice", LegalDocumentData> & { teacherUsContractor?: LegalDocumentData } = {
   "parentAgreement": {
     "title": "ALTON Education Services Agreement",
     "versionLine": "Agreement Version 0.3-EN-CA | October 6, 2026",
@@ -395,7 +395,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "The regular hourly rate is **USD $50.00 for all compensable time**. Compensable time includes teaching, required preparation and review, homework assessment, required meetings and training, required communications, and required setup or documentation. Lesson pricing and student credits do not determine wages owed."
+            "text": "The regular hourly rate is the Employee's accepted hourly rate stated in Schedule A, for all compensable time. Compensable time includes teaching, required preparation and review, homework assessment, required meetings and training, required communications, and required setup or documentation. Lesson pricing and student credits do not determine wages owed."
           },
           {
             "t": "p",
@@ -529,7 +529,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
               "California work location: ____________________",
               "Supervisor: ____________________",
               "Position: Part-time, nonexempt Teacher",
-              "Regular hourly rate: USD $50.00",
+              "Regular hourly rate: Employee's accepted hourly rate",
               "Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; wages for work performed from the 16th through the last day of a month are paid no later than the 10th of the following month.",
               "Applicable overtime rates: As required by law and stated in the wage notice"
             ]

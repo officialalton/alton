@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { setTeacherStatus, setTeacherHourlyRate } from "./users-actions";
+import { setTeacherStatus, setTeacherHourlyRate, getTeacherRateLockAction } from "./users-actions";
 import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
 import type { AdminSubject } from "./subject-data";
 import TeacherAgreementSection from "./TeacherAgreementSection";
@@ -46,6 +46,25 @@ export default function TeacherDetailPanel({
   const [hourlyRate, setHourlyRate] = useState(
     teacher.hourlyRateKrw != null ? String(teacher.hourlyRateKrw) : ""
   );
+  const [rateCurrency, setRateCurrency] = useState<"KRW" | "USD">("KRW");
+  const [rateLockMessage, setRateLockMessage] = useState<string | null>(null);
+  const [rateError, setRateError] = useState<string | null>(null);
+  useEffect(() => {
+    let alive = true;
+    getTeacherRateLockAction(teacher.id)
+      .then((r) => {
+        if (!alive) return;
+        setRateLockMessage(r.message);
+        if (r.rate) {
+          setRateCurrency(r.rate.currency);
+          setHourlyRate(r.rate.currency === "USD" ? (r.rate.amountMinor / 100).toFixed(2) : String(r.rate.amountMinor));
+        }
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [teacher.id]);
   const [savingRate, setSavingRate] = useState(false);
   const [savedRate, setSavedRate] = useState(false);
 
@@ -105,10 +124,13 @@ export default function TeacherDetailPanel({
     if (!rate || rate <= 0) return;
     setSavingRate(true);
     setSavedRate(false);
+    setRateError(null);
     try {
-      await setTeacherHourlyRate(teacher.id, rate);
-      onUpdated({ hourlyRateKrw: rate });
+      await setTeacherHourlyRate(teacher.id, rate, rateCurrency);
+      if (rateCurrency === "KRW") onUpdated({ hourlyRateKrw: rate });
       setSavedRate(true);
+    } catch (e) {
+      setRateError(e instanceof Error ? e.message : "시급 저장에 실패했습니다.");
     } finally {
       setSavingRate(false);
     }
@@ -185,22 +207,34 @@ export default function TeacherDetailPanel({
           시급 (정산 기준)
         </div>
         <div className="flex gap-2">
+          <select
+            value={rateCurrency}
+            onChange={(e) => setRateCurrency(e.target.value as "KRW" | "USD")}
+            disabled={rateLockMessage !== null}
+            className="px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] disabled:opacity-50"
+          >
+            <option value="KRW">KRW (원)</option>
+            <option value="USD">USD ($)</option>
+          </select>
           <input
+            disabled={rateLockMessage !== null}
             value={hourlyRate}
             onChange={(e) => setHourlyRate(e.target.value)}
-            type="number"
+            type="number" step="any"
             min="1"
             placeholder="예: 30000"
             className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
           />
           <button
-            disabled={savingRate}
+            disabled={savingRate || rateLockMessage !== null}
             onClick={handleSaveHourlyRate}
             className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 shrink-0"
           >
             {savingRate ? "저장 중..." : "저장"}
           </button>
         </div>
+        {rateLockMessage && <p className="text-[12px] text-grey-500 mt-1.5">{rateLockMessage}</p>}
+        {rateError && <p className="text-[12px] text-red mt-1.5">{rateError}</p>}
         {savedRate && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
 

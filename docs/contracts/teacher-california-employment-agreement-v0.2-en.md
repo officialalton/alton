@@ -16,7 +16,7 @@ Duties include instruction, reasonable preparation, assignment review, lesson do
 
 ## 4. Compensation and Timekeeping
 
-The regular hourly rate is **USD $50.00 for all compensable time**. Compensable time includes teaching, required preparation and review, homework assessment, required meetings and training, required communications, and required setup or documentation. Lesson pricing and student credits do not determine wages owed.
+The regular hourly rate is the Employee's accepted hourly rate stated in Schedule A, for all compensable time. Compensable time includes teaching, required preparation and review, homework assessment, required meetings and training, required communications, and required setup or documentation. Lesson pricing and student credits do not determine wages owed.
 
 The Employee must accurately record all hours worked, including work outside scheduled lessons. No off-the-clock work is permitted. All hours worked will be paid, including overtime worked without advance approval; failure to follow scheduling instructions may be addressed separately. The Company pays applicable overtime, minimum wages, reporting-time pay, and other required compensation. No provision treats required preparation as unpaid or includes it without compensation in a teaching-only rate.
 
@@ -82,7 +82,7 @@ This Agreement and its completed schedules state the employment terms addressed 
 - California work location: ____________________
 - Supervisor: ____________________
 - Position: Part-time, nonexempt Teacher
-- Regular hourly rate: USD $50.00
+- Regular hourly rate: Employee's accepted hourly rate
 - Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; wages for work performed from the 16th through the last day of a month are paid no later than the 10th of the following month.
 - Applicable overtime rates: As required by law and stated in the wage notice
 

@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { requireAdmin } from "@/lib/admin-auth";
 import { sendInviteEmail } from "@/lib/invite-email";
 import { currentRequestOrigin } from "@/lib/request-origin";
+import { loadCurrentTeacherRate, loadTeacherRateLock, RATE_LOCK_MESSAGE, type TeacherRateLock } from "@/lib/teacher-agreements/rate";
 import { assertTeacherHasValidRate } from "@/lib/enrollment/teacher-rate-check";
 import {
   loadParents,
@@ -306,20 +307,26 @@ export async function setTeacherStatus(
 
 export async function setTeacherHourlyRate(
   teacherId: string,
-  rateKrw: number
+  rate: number,
+  currency: "KRW" | "USD" = "KRW"
 ): Promise<void> {
   await requireAdmin();
-  if (!Number.isFinite(rateKrw) || rateKrw <= 0) {
-    throw new Error("시급은 1원 이상의 숫자로 입력해주세요.");
+  if (!Number.isFinite(rate) || rate <= 0) {
+    throw new Error(currency === "USD" ? "시급은 0보다 큰 달러 금액으로 입력해주세요." : "시급은 1원 이상의 숫자로 입력해주세요.");
   }
+  // USD는 minor unit(센트)로 저장한다. 통화 간 환산은 하지 않는다.
+  const amountMinor = currency === "USD" ? Math.round(rate * 100) : Math.round(rate);
+  if (amountMinor <= 0) throw new Error("시급이 너무 작습니다.");
   // set_teacher_rate()만이 시급 변경의 정상 경로다(기존 이력 종료 + 새 이력
   // 생성을 원자적으로 수행) — teachers.hourly_rate_krw 직접 UPDATE는 이 함수가
   // teacher_rate_history와 함께 동기화해주므로 더 이상 직접 하지 않는다.
   const admin = createAdminClient();
+  const lock = await loadTeacherRateLock(admin, teacherId);
+  if (lock) throw new Error(RATE_LOCK_MESSAGE[lock]);
   const { error } = await admin.rpc("set_teacher_rate", {
     p_teacher_id: teacherId,
-    p_amount_minor: rateKrw,
-    p_currency: "KRW",
+    p_amount_minor: amountMinor,
+    p_currency: currency,
   });
   if (error) throw new Error(error.message);
 }
@@ -376,4 +383,13 @@ export async function recordClosedAccountAccess(profileId: string, reason: strin
     p_reason: reason,
   });
   if (error) throw new Error(error.message);
+}
+
+export async function getTeacherRateLockAction(
+  teacherId: string
+): Promise<{ lock: TeacherRateLock; message: string | null; rate: { amountMinor: number; currency: "KRW" | "USD" } | null }> {
+  await requireAdmin();
+  const admin = createAdminClient();
+  const [lock, rate] = await Promise.all([loadTeacherRateLock(admin, teacherId), loadCurrentTeacherRate(admin, teacherId)]);
+  return { lock, message: lock ? RATE_LOCK_MESSAGE[lock] : null, rate: rate ? { amountMinor: rate.amountMinor, currency: rate.currency } : null };
 }

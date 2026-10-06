@@ -197,6 +197,13 @@ describe("inviteStudent", () => {
   });
 });
 
+function contractsChain(rows: Record<string, unknown>[]) {
+  const c: Record<string, unknown> = {};
+  for (const m of ["select", "eq", "not"]) c[m] = () => c;
+  c.then = (res: (v: unknown) => unknown) => res({ data: rows, error: null });
+  return c;
+}
+
 describe("setTeacherHourlyRate", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -211,6 +218,7 @@ describe("setTeacherHourlyRate", () => {
       createAdminClient: () => ({
         from: (table: string) => {
           if (table === "teachers") return { update: teachersUpdateMock };
+          if (table === "teacher_contracts") return contractsChain([]);
           throw new Error(`unexpected table ${table}`);
         },
         rpc: rpcMock,
@@ -227,6 +235,24 @@ describe("setTeacherHourlyRate", () => {
       p_currency: "KRW",
     });
     expect(teachersUpdateMock).not.toHaveBeenCalled();
+  });
+
+  it("USD는 센트로 저장하고, 계약서가 열려 있거나 서명됐으면 시급 변경을 막는다", async () => {
+    const rpcMock = vi.fn().mockResolvedValue({ error: null });
+    let rows: Record<string, unknown>[] = [];
+    vi.doMock("@/lib/supabase-admin", () => ({
+      createAdminClient: () => ({ from: () => contractsChain(rows), rpc: rpcMock }),
+    }));
+    vi.resetModules();
+    const { setTeacherHourlyRate } = await import("./users-actions");
+    await setTeacherHourlyRate("teacher1", 50, "USD");
+    expect(rpcMock).toHaveBeenCalledWith("set_teacher_rate", { p_teacher_id: "teacher1", p_amount_minor: 5000, p_currency: "USD" });
+    rpcMock.mockClear();
+    rows = [{ status: "sent", docusign_envelope_status: "sent" }];
+    await expect(setTeacherHourlyRate("teacher1", 60, "USD")).rejects.toThrow(/무효 처리/);
+    rows = [{ status: "signed", docusign_envelope_status: "completed" }];
+    await expect(setTeacherHourlyRate("teacher1", 60, "USD")).rejects.toThrow(/합의서/);
+    expect(rpcMock).not.toHaveBeenCalled();
   });
 
   it("0 이하의 시급은 RPC 호출 전에 거부한다", async () => {
