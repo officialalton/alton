@@ -3,5 +3,6 @@ import type { LArch } from "../../../levels-d";
 import { ITEM as pctChangeLG } from "../items/percentages.percent_change.LG.P";
 import { ITEM as pctCompLG } from "../items/percentages.compound_change.LG.P";
 import { ITEM as nfExpLG } from "../items/nonlinear_functions.exponential_vs_linear_growth.LG.P";
+import { ITEM as tvdResid1 } from "../items/two_variable_data.intercept_residual_interpretation.SC.P_1";
 
-export const BUNDLE: LArch[] = [...nfExpLG, ...pctCompLG, ...pctChangeLG];
+export const BUNDLE: LArch[] = [...tvdResid1, ...nfExpLG, ...pctCompLG, ...pctChangeLG];
