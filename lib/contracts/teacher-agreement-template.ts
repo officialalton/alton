@@ -63,6 +63,9 @@ export type CaliforniaTeacherAgreementParams = TeacherAgreementCommon & {
 export type NonUsTeacherAgreementParams = TeacherAgreementCommon & {
   actualWorkCountryAndLocation: string;
   paymentMethodAndRecipientDetails: string;
+  /** Teacher's accepted hourly rate per 60 minutes, in whole units of `currency` (no conversion). */
+  lessonRatePer60Minutes: number;
+  currency: "KRW";
 };
 
 function requireFields(values: Record<string, string | null | undefined>): void {
@@ -144,6 +147,11 @@ export function renderCaliforniaTeacherAgreementHtml(p: CaliforniaTeacherAgreeme
   return html;
 }
 
+function formatRate(amount: number, currency: string): string {
+  if (!Number.isFinite(amount) || amount <= 0 || !currency) throw new UnfilledContractError(["Lesson-service hourly rate"]);
+  return `${currency} ${amount.toLocaleString("en-US")}`;
+}
+
 export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams): string {
   requireFields({
     teacherName: p.teacherName,
@@ -164,6 +172,7 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
       if (at("Actual work country and location:")) return [`Actual work country and location: ${escapeHtml(p.actualWorkCountryAndLocation)}`];
       if (at("Company notice address:")) return [`Company notice address: ${escapeHtml(COMPANY_NOTICE_ADDRESS)}`];
       if (at("Effective date:")) return [`Effective date: ${escapeHtml(formatIsoDateEn(p.effectiveDate))}`];
+      if (at("Lesson fee:")) return [`Lesson fee: ${escapeHtml(formatRate(p.lessonRatePer60Minutes, p.currency))} per 60 recognized minutes`];
       if (at("Payment method and recipient details:")) return [`Payment method and recipient details: ${escapeHtml(p.paymentMethodAndRecipientDetails)}`];
       return null;
     },

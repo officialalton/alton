@@ -13,6 +13,8 @@ const nonUs = {
   ...common,
   actualWorkCountryAndLocation: "South Korea, Seoul",
   paymentMethodAndRecipientDetails: "Bank transfer",
+  lessonRatePer60Minutes: 50000,
+  currency: "KRW" as const,
 };
 
 describe("selectTeacherAgreementForm", () => {

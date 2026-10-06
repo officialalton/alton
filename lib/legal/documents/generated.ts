@@ -599,7 +599,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "The lesson-service fee is **USD $50.00 per 60 minutes of recognized lesson time**, calculated by the minute. A recognized 120-minute lesson pays $100.00; a recognized 60-minute trial pays $50.00. The accepted rate is recorded for each assignment. A later rate change applies prospectively only after written agreement."
+            "text": "The lesson-service fee is the Teacher's accepted hourly rate stated in Schedule A, per 60 minutes of recognized lesson time, calculated by the minute. The accepted rate is recorded for each assignment. A later rate change applies prospectively only after written agreement."
           },
           {
             "t": "p",
@@ -765,7 +765,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
               "Company notice address: ____________________",
               "Company contact: official@alton.education",
               "Effective date: ____________________",
-              "Lesson fee: USD $50.00 per 60 recognized minutes",
+              "Lesson fee: Teacher's accepted hourly rate per 60 recognized minutes",
               "Required nonlesson work: Paid at the lesson fee rate by recorded actual minutes (Section 3)",
               "Payment method and recipient details: ____________________",
               "Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid no later than the 26th of the same month, and the 16th–end of month is paid no later than the 10th of the following month",

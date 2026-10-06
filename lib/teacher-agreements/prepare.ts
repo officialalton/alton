@@ -37,6 +37,8 @@ export type PrepareArgs = {
   /** teacher_workspace_provisioning.status === 'created' */
   workspaceProvisioned: boolean;
   inputs: TeacherAgreementInputs | null;
+  /** teachers.hourly_rate_krw (current accepted rate; synced from teacher_rate_history). */
+  hourlyRateKrw?: number | null;
   /** Agreement id printed as the document identifier; generated when sending. */
   agreementId?: string;
   now?: Date;
@@ -83,6 +85,8 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (form === "california_employment") {
     if (blank(i.supervisor_name)) missing.push("감독자(Supervisor) 이름");
   } else {
+    if (!a.hourlyRateKrw || a.hourlyRateKrw <= 0) missing.push("선생님 시급(원) 미설정 — 선생님 상세에서 시급을 먼저 등록");
+    if (i.work_country?.toUpperCase() !== "KR") missing.push("해당 국가의 보수 통화가 설정되지 않음(현재 KR만 KRW 지원)");
     if (blank(i.payment_details)) missing.push("지급 방법·수령 정보");
   }
   if (missing.length > 0) return { ok: false, missing, form };
@@ -115,6 +119,8 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)} — ${i.work_location_detail!}`,
             paymentMethodAndRecipientDetails: i.payment_details!,
+            lessonRatePer60Minutes: a.hourlyRateKrw!,
+            currency: "KRW" as const,
           });
     return { ok: true, form, templateVersion: selection.templateVersion, html, recipientEmail: email, agreementId };
   } catch (e) {

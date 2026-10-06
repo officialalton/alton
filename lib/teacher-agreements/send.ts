@@ -23,7 +23,7 @@ const INPUT_COLUMNS =
 
 async function loadBasics(admin: SupabaseClient, teacherId: string) {
   const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }] = await Promise.all([
-    admin.from("teachers").select("workspace_email").eq("id", teacherId).maybeSingle(),
+    admin.from("teachers").select("workspace_email, hourly_rate_krw").eq("id", teacherId).maybeSingle(),
     admin.from("profiles").select("name").eq("id", teacherId).maybeSingle(),
     admin.from("teacher_workspace_provisioning").select("status").eq("linked_teacher_id", teacherId).maybeSingle(),
     admin.from("teacher_agreement_inputs").select(INPUT_COLUMNS).eq("teacher_id", teacherId).maybeSingle(),
@@ -31,6 +31,7 @@ async function loadBasics(admin: SupabaseClient, teacherId: string) {
   return {
     teacherName: (profile?.name as string | undefined) ?? "",
     workspaceEmail: (teacher?.workspace_email as string | null | undefined) ?? null,
+    hourlyRateKrw: (teacher?.hourly_rate_krw as number | null | undefined) ?? null,
     workspaceProvisioned: prov?.status === "created",
     inputs: (inputs as TeacherAgreementInputs | null) ?? null,
   };

@@ -35,7 +35,7 @@ const krInputs: TeacherAgreementInputs = {
   supervisor_name: null,
   payment_details: "Bank transfer to the account on file",
 };
-const base = { teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
+const base = { hourlyRateKrw: 50000, teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
 
 describe("prepareTeacherAgreement", () => {
   it("selects the California form from the actual work location and uses the shared Schedule A defaults", () => {
@@ -54,9 +54,17 @@ describe("prepareTeacherAgreement", () => {
     expect(r.ok && r.form).toBe("non_us_services");
     if (r.ok) {
       expect(r.html).toContain("South Korea");
+      expect(r.html).toContain("KRW 50,000 per 60 recognized minutes");
+      expect(r.html).not.toContain("USD");
       expect(r.html).toMatch(/30 days/);
       expect(r.html).toContain("Pacific Time");
     }
+  });
+  it("blocks non-US without a rate or with an unconfigured currency", () => {
+    const noRate = prepareTeacherAgreement({ ...base, hourlyRateKrw: null, inputs: krInputs });
+    expect(!noRate.ok && noRate.missing.join()).toContain("시급");
+    const jp = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, work_country: "JP" } });
+    expect(!jp.ok && jp.missing.join()).toContain("통화");
   });
   it("lists every missing input and never sends a blank form", () => {
     const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, payment_details: " ", mailing_address: null } });
