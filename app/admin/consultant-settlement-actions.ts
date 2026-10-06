@@ -1,12 +1,13 @@
 "use server";
 
-// Phase B(5, 2026-09-23) — 관리자 정산 > 컨설턴트. app/admin/teacher-payout-
-// accounts-actions.ts와 같은 마스킹 원칙(전체 계좌번호는 절대 응답에 넣지
-// 않음)을 계좌 조회에 그대로 적용한다. 지급 기간·금액은 상담 건수로 자동
+// Phase B(5, 2026-09-23) — 관리자 정산 > 컨설턴트.
+// 계좌 정책(2026-10-06 오너, 교사와 동일): 목록·조회에는 끝 4자리만 담고, 컨설턴트는 최초 1회만 본인이 등록한다.
+// 이후 변경은 마스터 관리자·정산권한 보유자가 대신 입력하며(이력·본인 알림), 전체 번호는 감사되는 '전체 번호 보기'로만 본다. 지급 기간·금액은 상담 건수로 자동
 // 계산하지 않고 관리자가 직접 입력·확정한다(사용자 확정 정책) — 금액 변경·
 // 상태 변경은 전부 consultant_payout_period_events에 기록한다.
 
-import { requireAdminOrCapability } from "@/lib/admin-auth";
+import { requireAdminOrCapability, requirePayoutAccountStaff } from "@/lib/admin-auth";
+import { PAYOUT_ACCOUNT_ERROR_KO, validatePayoutAccountInput, type PayoutAccountInputRaw } from "@/lib/payout/account-validation";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { maskAccountNumber } from "@/app/teacher/settlement-data";
 import { selectInChunks } from "@/lib/select-in-chunks";
@@ -21,6 +22,7 @@ export type ConsultantPayoutAccountAdminView = {
   accountNumberMasked: string;
   currency: string;
   country: string | null;
+  enteredByAdmin: boolean;
   updatedAt: string;
 } | null;
 
@@ -52,7 +54,7 @@ export async function getConsultantPayoutAccountAction(consultantId: string): Pr
   const [{ data: account, error }, { data: profile }] = await Promise.all([
     admin
       .from("consultant_payout_accounts")
-      .select("account_holder_name, bank_name, account_number_last4, currency, country, updated_at")
+      .select("account_holder_name, bank_name, account_number_last4, currency, country, entered_by_admin, updated_at")
       .eq("consultant_id", consultantId)
       .maybeSingle(),
     admin.from("profiles").select("name").eq("id", consultantId).maybeSingle(),
@@ -67,7 +69,66 @@ export async function getConsultantPayoutAccountAction(consultantId: string): Pr
     accountNumberMasked: maskAccountNumber(account.account_number_last4),
     currency: account.currency,
     country: account.country,
+    enteredByAdmin: account.entered_by_admin === true,
     updatedAt: account.updated_at,
+  };
+}
+
+export type SaveConsultantAccountResult = { status: "saved"; changedFields: string[] } | { status: "invalid"; message: string };
+
+/** 컨설턴트를 대신해 수취 계좌를 입력·수정한다(정산권한·마스터). 이력(끝 4자리만)과 본인 알림은 DB 함수가 남긴다. */
+export async function saveConsultantPayoutAccountByAdminAction(consultantId: string, input: PayoutAccountInputRaw): Promise<SaveConsultantAccountResult> {
+  const { actorUserId } = await requirePayoutAccountStaff();
+  const validated = validatePayoutAccountInput(input);
+  if (!validated.ok) return { status: "invalid", message: PAYOUT_ACCOUNT_ERROR_KO[validated.code] ?? validated.message };
+  const v = validated.value;
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("save_consultant_payout_account", {
+    p_consultant_id: consultantId,
+    p_actor_id: actorUserId,
+    p_by_admin: true,
+    p_holder: v.accountHolderName,
+    p_bank: v.bankName,
+    p_number: v.accountNumber,
+    p_currency: v.currency,
+    p_country: v.country,
+    p_swift: v.swiftOrRouting,
+  });
+  if (error) {
+    if (/컨설턴트 계정이 아닙니다/.test(error.message)) return { status: "invalid", message: "컨설턴트 계정이 아닙니다." };
+    throw new Error(error.message);
+  }
+  return { status: "saved", changedFields: ((data as { changed_fields?: string[] } | null)?.changed_fields ?? []) as string[] };
+}
+
+export type RevealedConsultantAccount = {
+  accountHolderName: string;
+  bankName: string;
+  accountNumber: string;
+  swiftOrRouting: string | null;
+  currency: string;
+  country: string | null;
+};
+
+/** 전체 번호 보기 — 호출마다 DB가 감사 행(번호 제외)을 남긴 뒤 복호화한다. 화면은 일시적으로만 보여 준다. */
+export async function revealConsultantPayoutAccountAction(consultantId: string, reason?: string): Promise<RevealedConsultantAccount> {
+  const { actorUserId } = await requirePayoutAccountStaff();
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("reveal_consultant_payout_account", {
+    p_consultant_id: consultantId,
+    p_actor_id: actorUserId,
+    p_reason: reason?.trim() || null,
+  });
+  if (error) throw new Error(error.message);
+  const row = (Array.isArray(data) ? data[0] : data) as Record<string, unknown> | null;
+  if (!row) throw new Error("등록된 수취 계좌가 없습니다.");
+  return {
+    accountHolderName: row.account_holder_name as string,
+    bankName: row.bank_name as string,
+    accountNumber: row.account_number as string,
+    swiftOrRouting: (row.swift_or_routing as string | null) ?? null,
+    currency: row.currency as string,
+    country: (row.country as string | null) ?? null,
   };
 }
 

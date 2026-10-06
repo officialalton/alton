@@ -47,6 +47,9 @@ afterAll(() => {
     `begin;
      alter table teacher_payout_account_events disable trigger teacher_payout_account_events_no_update;
      alter table teacher_payout_account_reveals disable trigger teacher_payout_account_reveals_no_update;
+     delete from teacher_payout_account_events where teacher_id in (select id from profiles where name like '${RUN}-%') or actor_id in (select id from profiles where name like '${RUN}-%');
+     delete from teacher_payout_account_reveals where teacher_id in (select id from profiles where name like '${RUN}-%') or actor_id in (select id from profiles where name like '${RUN}-%');
+     delete from teacher_payout_accounts where teacher_id in (select id from profiles where name like '${RUN}-%');
      delete from profiles where name like '${RUN}-%';
      alter table teacher_payout_account_events enable trigger teacher_payout_account_events_no_update;
      alter table teacher_payout_account_reveals enable trigger teacher_payout_account_reveals_no_update;

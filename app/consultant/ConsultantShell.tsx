@@ -96,14 +96,18 @@ export default function ConsultantShell({
   endedStudents,
   assignedConsultations,
   initialTab,
+  payoutAccountMissing = false,
 }: {
   consultantName: string;
   students: ConsultantStudent[];
   endedStudents: EndedConsultantStudent[];
   assignedConsultations: IntakeConsultation[];
   initialTab?: string;
+  /** 수취 계좌가 아직 없으면 true — 필수 등록 단계를 상단에 안내한다(저장 후 사라진다). */
+  payoutAccountMissing?: boolean;
 }) {
   const router = useRouter();
+  const [payoutAccountNeeded, setPayoutAccountNeeded] = useState(payoutAccountMissing);
   const validNavIds = useMemo(() => NAV_IDS, []);
   const [nav, setNav] = useState<NavId>(
     validNavIds.includes(initialTab as NavId) ? (initialTab as NavId) : "assignments"
@@ -305,6 +309,17 @@ export default function ConsultantShell({
       </aside>
 
       <main className="flex-1">
+        {payoutAccountNeeded && nav !== "settlement" && (
+          <div
+            data-testid="consultant-payout-account-banner"
+            className="mx-4 md:mx-8 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border-[1.5px] border-red/40 bg-red/5 px-4 py-3"
+          >
+            <p className="text-[13px] font-semibold text-ink">Set up your payout account so we can pay you. It only takes a minute.</p>
+            <button type="button" onClick={() => selectNav("settlement")} className="shrink-0 rounded-lg bg-red px-3.5 py-2 text-[13px] font-semibold text-white">
+              Set up payout account
+            </button>
+          </div>
+        )}
         {nav === "assignments" ? (
           <MyKanbanSection />
         ) : nav === "schedule" ? (
@@ -314,7 +329,7 @@ export default function ConsultantShell({
         ) : nav === "profile" ? (
           <ProfilePanel />
         ) : nav === "settlement" ? (
-          <SettlementPanel />
+          <SettlementPanel onAccountSaved={() => setPayoutAccountNeeded(false)} />
         ) : nav === "staff-messages" ? (
           <StaffMessagesPanel />
         ) : nav === "college-explore" ? (

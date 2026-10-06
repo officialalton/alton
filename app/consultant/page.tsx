@@ -19,10 +19,12 @@ export default async function ConsultantHomePage({
 }) {
   const { tab } = await searchParams;
   const { user, profile, supabase } = await requireUser();
-  const [students, endedStudents, assignedConsultations] = await Promise.all([
+  const [students, endedStudents, assignedConsultations, { data: payoutAccountRow }] = await Promise.all([
     loadMyAssignedStudents(supabase, user.id),
     loadMyEndedAssignedStudents(supabase, user.id),
     loadMyAssignedConsultations(supabase, user.id),
+    // 수취 계좌 등록 여부만(번호는 읽지 않는다).
+    supabase.from("consultant_payout_accounts").select("id").eq("consultant_id", user.id).maybeSingle(),
   ]);
 
   const viewerTimezone = await loadViewerTimezone(supabase, user.id, profile);
@@ -34,6 +36,7 @@ export default async function ConsultantHomePage({
       endedStudents={endedStudents}
       assignedConsultations={assignedConsultations}
       initialTab={tab}
+      payoutAccountMissing={!payoutAccountRow}
     />
     </ViewerTimezoneProvider>
   );

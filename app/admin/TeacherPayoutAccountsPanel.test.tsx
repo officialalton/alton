@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 
 // P4-2 — 관리자 `정산` > `수취 계좌`. 교사 화면과 같은 원본·같은 마스킹을 쓰는지와
-// 변경 이력 표시를 검증한다. 관리자는 조회 전용이다(수정 버튼이 없어야 한다).
+// 변경 이력 표시를 검증한다. 수정·전체 번호 보기는 정산권한·마스터만 가능하다(권한 없으면 버튼이 없어야 한다).
 
 const { listMock, permMock, revealMock, saveMock } = vi.hoisted(() => ({ listMock: vi.fn(), permMock: vi.fn(), revealMock: vi.fn(), saveMock: vi.fn() }));
 vi.mock("./teacher-payout-accounts-actions", () => ({
@@ -91,7 +91,7 @@ describe("TeacherPayoutAccountsPanel", () => {
     render(<TeacherPayoutAccountsPanel />);
     fireEvent.click(await screen.findByTestId("edit-t1"));
     fireEvent.click(screen.getByTestId("save-t1"));
-    expect(await screen.findByTestId("payout-accounts-error")).toHaveTextContent("자릿수");
+    expect(await screen.findByTestId("error-t1")).toHaveTextContent("자릿수");
   });
 
   it("변경 이력을 펼치면 바뀐 필드와 끝 4자리 전·후를 보여준다", async () => {
