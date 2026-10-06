@@ -31,6 +31,16 @@ import { ITEM as leoW } from "../items/linear_equations_one_var.word_problem_tra
 import { ITEM as nfEM } from "../items/nonlinear_functions.exponential_model.FN.P";
 import { ITEM as pcFN } from "../items/percentages.compound_change.FN.P";
 import { ITEM as nfEL } from "../items/nonlinear_functions.exponential_vs_linear_growth.FN.P";
+import { ITEM as sftC } from "../items/linear_functions.slope_from_two_points.LN.C";
+import { ITEM as isC } from "../items/linear_functions.interpret_slope.LN.C";
+import { ITEM as iiC } from "../items/linear_functions.interpret_intercept.LN.C";
+import { ITEM as l2sC } from "../items/linear_equations_two_var.slope.LN.C";
+import { ITEM as l2iC } from "../items/linear_equations_two_var.intercept.LN.C";
+import { ITEM as l2nC } from "../items/linear_equations_two_var.num_solutions.LN.C";
+import { ITEM as spnC } from "../items/systems_linear.param_no_solution.LN.C";
+import { ITEM as cfgC } from "../items/linear_functions.construct_equation_from_graph.LN.C";
+import { ITEM as cppC } from "../items/coordinate_geometry.parallel_perpendicular_slopes.LN.C";
+import { ITEM as sfgC } from "../items/systems_linear.system_from_graph.LN.C";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC];
 
