@@ -102,7 +102,11 @@ describe("cron day gates (LA)", () => {
   it("매일 17:00 UTC 크론에서 LA 날짜로 마감일·지급일을 가린다", () => {
     expect(isPeriodCloseDay(new Date("2026-10-01T17:00:00.000Z"))).toBe(true);
     expect(isPeriodCloseDay(new Date("2026-10-16T17:00:00.000Z"))).toBe(true);
-    expect(isPeriodCloseDay(new Date("2026-10-02T17:00:00.000Z"))).toBe(false);
+    // 마감일을 놓쳐도 3일 창 안에서 따라잡는다(멱등). 창 밖은 false.
+    expect(isPeriodCloseDay(new Date("2026-10-03T17:00:00.000Z"))).toBe(true);
+    expect(isPeriodCloseDay(new Date("2026-10-18T17:00:00.000Z"))).toBe(true);
+    expect(isPeriodCloseDay(new Date("2026-10-04T17:00:00.000Z"))).toBe(false);
+    expect(isPeriodCloseDay(new Date("2026-10-19T17:00:00.000Z"))).toBe(false);
     expect(isPayoutDay(new Date("2026-11-05T17:00:00.000Z"))).toBe(true); // PST 09:00 (목)
     expect(isPayoutDay(new Date("2026-10-20T17:00:00.000Z"))).toBe(true); // PDT 10:00
     expect(isPayoutDay(new Date("2026-10-21T17:00:00.000Z"))).toBe(false);

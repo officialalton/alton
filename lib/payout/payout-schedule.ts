@@ -177,10 +177,14 @@ export function formatPeriodWithPayoutEn(periodStart: string, periodEnd: string,
   return pay ? `${label} → paid ${formatDateOnlyEn(pay)}${shifted ? ` (${weekdayEn(pay)})` : ""}` : label;
 }
 
-/** 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 마감일(1일·16일)이면 true. */
+/**
+ * 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 마감 창(1~3일·16~18일)이면 true.
+ * 마감일(1일·16일)에 크론이 한 번 빠져도 다음 날 따라잡도록 3일 창을 둔다. 마감은 멱등이다
+ * (DB의 close_payout_period가 이미 묶인 항목을 다시 담지 않는다).
+ */
 export function isPeriodCloseDay(now: Date = new Date()): boolean {
   const d = Number((companyDateOf(now) ?? "").slice(8, 10));
-  return d === 1 || d === 16;
+  return (d >= 1 && d <= 3) || (d >= 16 && d <= 18);
 }
 
 /** 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 (보정된) 지급일이면 true. 크론은 매일 17:00 UTC에 돈다. */

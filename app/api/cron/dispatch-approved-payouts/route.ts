@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import { runAutoPayoutDispatch } from "@/lib/payout/auto-dispatch";
-import { isPayoutDay } from "@/lib/payout/payout-schedule";
 
-// P4-2 — 자동 송금 크론 진입점(매일 17:00 UTC, LA 날짜 5·20일에만 처리).
+// P4-2 — 자동 송금 크론 진입점(매일 17:00 UTC, 예정일이 도래한 승인 묶음만 처리).
 //
 // 월 마감 크론과 같은 fail-closed 규칙이다: CRON_SECRET이 없으면 아무것도 하지 않는다.
 // 그리고 그 위에 지급 경계가 하나 더 있다 — real_disbursement_enabled()가 false면
@@ -31,10 +30,10 @@ export async function GET(request: Request) {
     );
   }
 
-  // 크론은 UTC 매일 17:00. 회사 시간대(LA) 날짜가 5일·20일일 때만 송금 대상을 처리한다.
-  if (!isPayoutDay(new Date())) {
-    return NextResponse.json({ ok: true, skipped: "not a payout day (America/Los_Angeles)" });
-  }
+  // 요일·날짜 게이트를 두지 않는다. 대상은 DB가 "지급 예정일 <= 오늘(LA)"로 정하므로
+  // (list_due_auto_dispatch_batches) 미래 예정일은 나가지 않고, 크론이 하루 빠지거나 관리자가
+  // 예정일을 5·20일이 아닌 날로 바꿨어도 다음 실행에서 따라잡는다. 중복 송금은 배치당
+  // dispatch_idempotency_key(행 잠금 아래 1회 발급)가 막는다.
 
   try {
     const result = await runAutoPayoutDispatch();
