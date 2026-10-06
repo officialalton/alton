@@ -1,5 +1,5 @@
 import { createHmac, createSign, timingSafeEqual } from "crypto";
-import { SIGNATURE_ANCHOR, DATE_SIGNED_ANCHOR } from "@/lib/contracts/family-contract-template";
+import { SIGNATURE_ANCHOR, DATE_SIGNED_ANCHOR, ADDRESS_ANCHOR } from "@/lib/contracts/family-contract-template";
 
 // R3: DocuSign 연동을 레거시 "family 단위 1회성 계약" 흐름에서 자녀별
 // contract_version 기반 흐름으로 일반화한다. JWT 인증(getAccessToken)
@@ -135,7 +135,7 @@ export async function createEnvelope(params: {
       documents: [
         {
           documentBase64: Buffer.from(params.documentHtml).toString("base64"),
-          name: "Alton Education 계약서",
+          name: "Alton Education Agreement",
           fileExtension: "html",
           documentId: "1",
         },
@@ -161,6 +161,25 @@ export async function createEnvelope(params: {
                   anchorIgnoreIfNotPresent: "false",
                 },
               ],
+              // 계약자 통지 주소는 서명 시 직접 입력하는 필수 텍스트 필드다(시스템에 저장된 원본이 없다).
+              ...(params.documentHtml.includes(ADDRESS_ANCHOR)
+                ? {
+                    textTabs: [
+                      {
+                        anchorString: ADDRESS_ANCHOR,
+                        anchorUnits: "pixels",
+                        anchorXOffset: "0",
+                        anchorYOffset: "-10",
+                        anchorIgnoreIfNotPresent: "false",
+                        tabLabel: "customerNoticeAddress",
+                        required: "true",
+                        width: "320",
+                        height: "22",
+                        locked: "false",
+                      },
+                    ],
+                  }
+                : {}),
               dateSignedTabs: [
                 {
                   anchorString: DATE_SIGNED_ANCHOR,
