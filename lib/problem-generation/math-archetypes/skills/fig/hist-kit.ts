@@ -2,6 +2,7 @@
 // 구간 도수표 문항(grouped_median_interval.FQ)의 장면·해설·검증 JS 를 그림(data.histogram)용으로 옮긴 것이다. 세로 눈금은 1 칸 간격이라 막대 높이를 정확히 읽을 수 있다.
 import type { Rng } from "../../rng";
 import { W } from "../d-kit";
+import { titleWith } from "./axis-title";
 export { expand, medianOfList } from "./table-kit";
 
 export type GTopic = { what: string; col: string; unit: string; cnt: string; ent: string; where: string; starts: number[]; w: number };
@@ -34,7 +35,7 @@ export type GScene = { t: GTopic; los: number[]; freqs: number[]; N: number; fig
 export const HG_TOPICS = G_TOPICS.filter((t) => Math.min(...t.starts) < 100);
 /** 막대 구간 라벨: 히스토그램은 경계가 이어지므로 "60–70"(왼쪽 끝 포함, 오른쪽 끝 불포함)로 쓴다. */
 export const label = (t: GTopic, lo: number) => `${lo}–${lo + t.w}`;
-export const histFig = (t: GTopic, los: number[], freqs: number[]) => ({ type: "data" as const, kind: "histogram" as const, bins: los.map((lo, i) => ({ from: lo, to: lo + t.w, count: freqs[i] })), xTitle: `${t.col} (${t.unit})`, yTitle: `Frequency (${t.ent})`, yMin: 0, yMax: Math.max(...freqs) + 1, yStep: 1 });
+export const histFig = (t: GTopic, los: number[], freqs: number[]) => ({ type: "data" as const, kind: "histogram" as const, bins: los.map((lo, i) => ({ from: lo, to: lo + t.w, count: freqs[i] })), xTitle: titleWith(t.col, t.unit), yTitle: `Frequency (${t.ent})`, yMin: 0, yMax: Math.max(...freqs) + 1, yStep: 1 });
 /** 히스토그램: 구간 k(4~6)개, 도수 1~fmax(≤10 — 세로 눈금을 1 칸씩 두어 정확히 읽게 한다). */
 export function makeG(rng: Rng, o: { fmax?: number } = {}): GScene {
   const t = rng.pick(HG_TOPICS); const k = rng.int(4, 6); const s0 = rng.pick(t.starts); const los = Array.from({ length: k }, (_, i) => s0 + t.w * i);

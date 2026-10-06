@@ -1,9 +1,9 @@
 {
  "itemId": "linear_equations_one_var.word_problem_translate.LN.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T14:00:00Z",
+ "reviewedAt": "2026-10-06T22:00:59Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "32832421e257f52bb10502dfcc0a4313f98530f875d6cc532f994cdae735eb1f",
+ "codeHash": "3ef04fb96222d3252790660a010ec638077edd47f887423cbaa94e23608a7006",
  "samples": [
   "linear_equations_one_var.word_problem_translate.LN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "데스크톱 확인·샘플 정답 수작업 검산(지수 곡선은 양의 y 비대칭 축). 375px는 같은 레이아웃이라 동일 판정(직접 확인 아님)."
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호."
 }

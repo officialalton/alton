@@ -1,9 +1,9 @@
 {
  "itemId": "percentages.find_percent.BR.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T03:58:06Z",
- "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "3cecabb3f5b6dba26534d963f09775a77b0e206e1718879f2def008ce1c9df63",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "221b1e66e09db3d2b5f15a045904fa58d593dc252bd63508d75f5fa710089fc2",
  "samples": [
   "percentages.find_percent.BR.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: Lane B 160, C 40, D 120, F 80 → 합 400, B+F=240 → 60%, 메타 정답 60 일치. 375px 에서 막대·범주 이름·눈금 판독 가능. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호."
 }

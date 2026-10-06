@@ -1,9 +1,9 @@
 {
  "itemId": "one_variable_data.mean.DP.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T03:58:06Z",
- "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "878fd596cc68d4b1ca31186cce02ead4aa7b175cbbd9db11a734965b26e2b267",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "af93ae2e2af35dc6dbfbae72e3319abf026d6bfe70139763fedd7ccf3fc4e81f",
  "samples": [
   "one_variable_data.mean.DP.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 점도표 6(3),8(5),10(4),12(7) → 합 182, 개수 19, 새 평균 10 (2명 추가) → 새 합 210 → 추가 합 28 → 각 14, 메타 정답 14 일치. 점 개수가 열마다 세어지고 눈금 숫자 정렬·축 제목 단위 양호, 375px 판독 가능. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호."
 }

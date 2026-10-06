@@ -1,7 +1,7 @@
 {
  "itemId": "one_variable_data.mean.DP.P",
- "generatedAt": "2026-10-06T19:22:40.356Z",
- "codeHash": "878fd596cc68d4b1ca31186cce02ead4aa7b175cbbd9db11a734965b26e2b267",
+ "generatedAt": "2026-10-06T22:00:06.551Z",
+ "codeHash": "af93ae2e2af35dc6dbfbae72e3319abf026d6bfe70139763fedd7ccf3fc4e81f",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -38,7 +38,12 @@
    "correctIndex": 1,
    "answer": "14",
    "explanation": "(1) 점도표에서 값과 점 개수를 읽는다: 6(3), 8(5), 10(4), 12(7) — 전체 19개. (2) 전체 개수 = 3 + 5 + 4 + 7 = 19 이다. (3) 합 = 6×3 + 8×5 + 10×4 + 12×7 = 182 이다. (4) 새 전체 개수 = 19 + 2 = 21, 새 합 = 10 × 21 = 210 이다. (5) 더해진 합 = 210 - 182 = 28 이다. (6) 한 명의 값 = 28 ÷ 2 = 14 이다. 따라서 정답은 14이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Messages sent' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

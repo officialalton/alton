@@ -1,7 +1,7 @@
 {
  "itemId": "percentages.find_whole.BR.P",
- "generatedAt": "2026-10-06T19:22:40.277Z",
- "codeHash": "793bc2bff766816c8d6a39ae6dba9b729f79a233ff37a085f07fde24e0ba83ab",
+ "generatedAt": "2026-10-06T22:00:06.476Z",
+ "codeHash": "a12963cbf505ecce574c02d59da69bc764c6ddfb5d464b65dd3e6c87a5fd7b9c",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -39,7 +39,12 @@
    "correctIndex": 1,
    "answer": "40",
    "explanation": "(1) 막대그래프에서 읽는다: Sunny Hill 200, Fern Hollow 160, Rose Glen 120, Ivy Ridge 80. (2) 전체 = 부분 ÷ (퍼센트 ÷ 100) 이다. (3) Rose Glen: 120 ÷ 0.5 = 240 이다. (4) Ivy Ridge: 80 ÷ 0.4 = 200 이다. (5) 차 = |240 - 200| = 40 이다. 따라서 정답은 40이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "세로축 제목 'Trees sold' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

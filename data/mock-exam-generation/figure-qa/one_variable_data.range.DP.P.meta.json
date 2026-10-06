@@ -1,7 +1,7 @@
 {
  "itemId": "one_variable_data.range.DP.P",
- "generatedAt": "2026-10-06T19:22:40.359Z",
- "codeHash": "7995d70040349fc57b9da6f28ee6801b25fefd5ce14e63e9d101c45434316b11",
+ "generatedAt": "2026-10-06T22:00:06.555Z",
+ "codeHash": "2da021b060f4a073621663b27a28c4c8b71377c5f508fc876b27783de8d64c5e",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -38,7 +38,12 @@
    "correctIndex": 3,
    "answer": "25",
    "explanation": "(1) 점도표에서 점의 위치를 읽는다: 1(9개), 2(8개), 3(5개), 4(6개), 5(1개), 6(8개), 7(5개) — 전체 42개. (2) 최댓값 7, 최솟값 1 이다. (3) 원래 범위 = 7 - 1 = 6 이다. (4) 새 값이 가장 크므로 새 범위 = 새 값 - 1 이다. (5) 새 값 = 1 + 24 = 25 이다. 따라서 정답은 25이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Eggs per nest' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

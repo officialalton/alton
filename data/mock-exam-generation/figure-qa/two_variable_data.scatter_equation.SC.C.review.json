@@ -1,9 +1,9 @@
 {
  "itemId": "two_variable_data.scatter_equation.SC.C",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T04:19:11Z",
- "reviewer": "visual-review-agent-SE",
- "codeHash": "5168aaba0d450853f12585389413438b7fc1c0b6e2351819c4e987a811c610c9",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "f27fc6c1c55a8f25fa99f2636daf62f57c699ce9a71e2d1a24e2ec3046d33915",
  "samples": [
   "two_variable_data.scatter_equation.SC.C.png"
  ],
@@ -19,7 +19,7 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "Solved from image: only C starts at 40 with slope 2 (reaches ~64 at x=12) -> C. Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact. Choices use 4 identical axes/sizes. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]",
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호.",
  "restampedAt": "2026-10-05T00:00:00Z",
  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

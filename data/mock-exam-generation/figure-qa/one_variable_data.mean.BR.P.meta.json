@@ -1,7 +1,7 @@
 {
  "itemId": "one_variable_data.mean.BR.P",
- "generatedAt": "2026-10-06T19:22:40.372Z",
- "codeHash": "36d0fa7d9d4e783f6370279d2b7b9fd5dffc93cc6b7dbda45e0885d3240004e1",
+ "generatedAt": "2026-10-06T22:00:06.565Z",
+ "codeHash": "7f075e7b4a4f1f1ee385989165048078d6a627b2302dfec0ad556ddd96058ce9",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -39,7 +39,12 @@
    "correctIndex": 3,
    "answer": "4",
    "explanation": "(1) 그래프에서 값과 막대 높이(도수)를 읽는다: 6(5), 8(1), 10(3), 12(7), 14(5) — 전체 21개. (2) 전체 개수 = 5 + 1 + 3 + 7 + 5 = 21 이다. (3) 합 = 6×5 + 8×1 + 10×3 + 12×7 + 14×5 = 222 이다. (4) 새 전체 개수 = 21 + 2 = 23, 새 합 = 10 × 23 = 230 이다. (5) 더해진 합 = 230 - 222 = 8 이다. (6) 한 명의 값 = 8 ÷ 2 = 4 이다. 따라서 정답은 4이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "세로축 제목 'Number of teams' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

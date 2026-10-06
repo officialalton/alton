@@ -1,7 +1,7 @@
 {
  "itemId": "linear_equations_two_var.intersection_sum.LN.P",
- "generatedAt": "2026-10-06T19:22:39.996Z",
- "codeHash": "62f482833ca4b7f7967018604487de0c73d52b904dccbaaf216e19131ae95341",
+ "generatedAt": "2026-10-06T22:00:06.175Z",
+ "codeHash": "acc9a5f09f3850d2a3b9241070d0bac42a37c9e778be2023b459a833c8755057",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -37,7 +37,12 @@
    "correctIndex": 1,
    "answer": "90",
    "explanation": "(1) Printer A: 그래프에서 y 절편 10 과 격자점을 읽어 기울기 3 을 구한다. (2) Printer B: 그래프에서 y 절편 50 과 격자점을 읽어 기울기 1 를 구한다. (3) 3x + 10 = 1x + 50 로 놓는다. (4) x = 20 이다. (5) y = 3·20 + 10 = 70 이다. (6) x + y = 20 + 70 = 90 이다. 따라서 정답은 90이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Shirts' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

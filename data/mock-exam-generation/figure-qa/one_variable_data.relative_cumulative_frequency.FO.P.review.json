@@ -1,9 +1,9 @@
 {
  "itemId": "one_variable_data.relative_cumulative_frequency.FO.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T08:00:06Z",
- "reviewer": "claude-sonnet-5.5 (math-D session)",
- "codeHash": "7ebe2e45e09f16a9bcba1622f3c1fa1a360c082fe29f100a30a04def9a7959ef",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "7e84cca3d6a62434c113b7e37c06d3025c5a5b99fe92f408ecb0e83b634b07f7",
  "samples": [
   "one_variable_data.relative_cumulative_frequency.FO.P.png"
  ],
@@ -19,5 +19,5 @@
   "choice_distinct_one_rule": "n/a"
  },
  "defects": [],
- "notes": "도수다각형·누적도수곡선: 점이 격자선 위, 가로 눈금=계급값/경계, 축 제목 단위 있음, 데스크톱·375px 읽음. [재스탬프: easy/medium 문구 변형 추가, 샘플 본문·렌더 동일 확인]"
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호."
 }

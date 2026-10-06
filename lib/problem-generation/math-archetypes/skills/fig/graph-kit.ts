@@ -10,6 +10,7 @@ import { figInst } from "../../figure-kit";
 import type { Draft } from "../../text";
 import type { Instance } from "../../types";
 import { sing, capFirst, lc } from "./table-kit";
+import { titleWith } from "./axis-title";
 
 export { sing, capFirst, lc };
 const isInt = Number.isInteger;
@@ -31,7 +32,7 @@ export type LinGraph = {
 };
 export type PlaneFig = { type: "plane"; axes: { x: PlaneAxisSpec; y: PlaneAxisSpec }; objects: Record<string, unknown>[] };
 
-export const axisTitle = (a: string, u: string) => `${a} (${u})`;
+export const axisTitle = (a: string, u: string) => titleWith(a, u);
 /**
  * 직선 하나 + 격자점 두 개를 담은 plane figure. 엔진의 scatter(점) + fitLine(검은 직선)으로 그려 SAT 지면처럼 검은 점·검은 직선이 된다(line·point 객체는 객체 순서대로 색이 달라진다).
  * 직선 라벨(label)은 지문이 그 글자를 가리킬 때만 남는다(label-rule).

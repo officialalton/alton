@@ -4,13 +4,12 @@ import { GenFail } from "../../../types";
 import type { Rng } from "../../../rng";
 import { defineItem } from "../item-kit";
 import { keyBundle, SPR_NO_B } from "../b-kit";
-import { TAILS } from "../sx-kit";
-import { INTRO_TAILS, LEADS_G, POLY_KEY_JS, polyFig, rngPoly } from "../ln-b-kit";
+import { COORD_TAILS, INTRO_TAILS, LEADS_G, POLY_KEY_JS, polyFig, rngPoly } from "../ln-b-kit";
 
 type V = [number, number][];
 const intro = (rng: Rng, extra = "") => `${rng.pick(LEADS_G)}${rng.pick([
-  "A triangle is graphed in the $xy$-plane of the given figure.", "The given figure shows a triangle drawn on a coordinate grid.", "The first graph shows triangle in the $xy$-plane, followed by four candidate graphs.", "In the $xy$-plane shown first, a triangle is drawn with its vertices on grid points.", "A triangle with vertices at grid points is shown in the given figure.",
-])} ${rng.pick(INTRO_TAILS)} ${rng.pick(TAILS)}${extra}`;
+  "A triangle is graphed in the $xy$-plane of the given figure.", "The given figure shows a triangle drawn on a coordinate grid.", "The first graph shows a triangle in the $xy$-plane.", "In the $xy$-plane shown first, a triangle is drawn with its vertices on grid points.", "A triangle with vertices at grid points is shown in the given figure.",
+])} ${rng.pick(INTRO_TAILS)} ${rng.pick(COORD_TAILS)}${extra}`;
 const rd: [string, string] = ["기준 그래프에서 세 꼭짓점의 좌표를 읽는다.", "Read the three vertices."];
 const Q = (what: string) => [`Which graph shows ${what}?`, `Which of the following graphs shows ${what}?`, `Which one of the four graphs represents ${what}?`];
 const SEM = (e: string) => `const V=STEMP(); const f=(v)=>${e}; const EXPECT=fmtKey(V.map(f));`;

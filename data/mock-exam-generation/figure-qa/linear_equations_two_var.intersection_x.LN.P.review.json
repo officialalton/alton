@@ -1,9 +1,9 @@
 {
  "itemId": "linear_equations_two_var.intersection_x.LN.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T04:19:11Z",
- "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "2594e6db3b0fc9d29ef5665f9476b57fa784e2ed9b78779004ca809458fb6f64",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "58eec16a97106af753ce2af62e1e34fefcc53d16cab8d2eea6918b16064840e3",
  "samples": [
   "linear_equations_two_var.intersection_x.LN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: Theater A (0,20),(5,80) 기울기 12, Theater B (0,40),(4,80) 기울기 10 → 12x+20=10x+40 → x=10, 메타 정답 10 일치. 두 직선 색·이름 라벨이 직선 바로 옆, 눈금 정렬·축 제목 양호, 375px 가로 스크롤 없음. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호."
 }

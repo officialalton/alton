@@ -4,12 +4,11 @@ import { GenFail } from "../../../types";
 import type { Rng } from "../../../rng";
 import { defineItem } from "../item-kit";
 import { keyBundle, SPR_NO_B } from "../b-kit";
-import { TAILS } from "../sx-kit";
-import { INTRO_TAILS, LEADS_G, QUAD_KEY_JS, parabola, quadSmall } from "../ln-b-kit";
+import { COORD_TAILS, INTRO_TAILS, LEADS_G, QUAD_KEY_JS, parabola, quadSmall } from "../ln-b-kit";
 
 const intro = (rng: Rng, extra = "") => `${rng.pick(LEADS_G)}${rng.pick([
   "The graph of the quadratic function $f$ is shown in the $xy$-plane.", "A parabola, the graph of a quadratic function $f$, is shown in the given figure.", "In the given figure, the graph of $y = f(x)$ is a parabola with three marked points.", "The function $f$ is quadratic, and its graph is shown in the $xy$-plane with three points marked on it.", "The first figure shows the graph of a quadratic function $f$ in the $xy$-plane.",
-])} ${rng.pick(INTRO_TAILS)} ${rng.pick(TAILS)}${extra}`;
+])} ${rng.pick(INTRO_TAILS)} ${rng.pick(COORD_TAILS)}${extra}`;
 const rd: [string, string] = ["기준 그래프에서 꼭짓점 (H, K) 과 열린 방향(A 의 부호)을 읽는다.", "Read the vertex and the direction of opening."];
 const Qg = (rng: Rng) => rng.pick(["Which graph shows the function $g$?", "Which of the following graphs is the graph of $g$?", "Which one of the four graphs represents $g$?"]);
 const EXPQ = (e: string) => `const q=STEMQ(); const mk=(A,H,K)=>[A,-2*A*H,A*H*H+K].map(v=>Math.round(v*1e6)/1e6).join('|'); const EXPECT=${e};`;

@@ -4,12 +4,11 @@ import { GenFail } from "../../../types";
 import type { Rng } from "../../../rng";
 import { defineItem } from "../item-kit";
 import { keyBundle, SPR_NO_B } from "../b-kit";
-import { TAILS } from "../sx-kit";
-import { CIRCLE_KEY_JS, INTRO_TAILS, LEADS_G, circleFig } from "../ln-b-kit";
+import { CIRCLE_KEY_JS, COORD_TAILS, INTRO_TAILS, LEADS_G, circleFig } from "../ln-b-kit";
 
 const intro = (rng: Rng, extra = "") => `${rng.pick(LEADS_G)}${rng.pick([
-  "A circle is graphed in the $xy$-plane shown in the given figure.", "The given figure shows a circle in the $xy$-plane.", "In the $xy$-plane of the given figure, a circle is drawn on a coordinate grid.", "The graph of a circle is shown first, followed by four candidate graphs.", "A circle in the $xy$-plane is shown in the first figure.",
-])} ${rng.pick(INTRO_TAILS)} ${rng.pick(TAILS)}${extra}`;
+  "A circle is graphed in the $xy$-plane shown in the given figure.", "The given figure shows a circle in the $xy$-plane.", "In the $xy$-plane of the given figure, a circle is drawn on a coordinate grid.", "The graph of a circle is shown first.", "A circle in the $xy$-plane is shown in the first figure.",
+])} ${rng.pick(INTRO_TAILS)} ${rng.pick(COORD_TAILS)}${extra}`;
 const rd: [string, string] = ["기준 그래프에서 중심 (cx, cy) 과 반지름 r 을 읽는다.", "Read the center and the radius."];
 const Q = (what: string) => [`Which graph shows ${what}?`, `Which of the following graphs shows ${what}?`, `Which one of the four graphs represents ${what}?`];
 const EXPC = (e: string) => `const q=STEMC(); const EXPECT=(${e}).join('|');`;

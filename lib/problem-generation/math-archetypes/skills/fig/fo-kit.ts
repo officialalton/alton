@@ -9,6 +9,7 @@ import { figJs } from "../../figure-kit";
 import { defineItem } from "./item-kit";
 import { gInst } from "./graph-kit";
 import { renderFreqChart, type FreqChartSpec } from "@/lib/problem-figures/templates/freq-chart";
+import { titleWith } from "./axis-title";
 
 const f = fmtNum;
 export type FoTopic = { ph: string; what: string; ent: string; where: string; unit: string; xName: string; lo0: number[]; w: number[] };
@@ -31,7 +32,7 @@ export function makeFO(rng: Rng, o: FoOpts): FoScene {
   const t = rng.pick(FO_TOPICS); const w = rng.pick(t.w); const k = o.k ?? rng.int(5, 6); const lo = rng.pick(t.lo0); const u = rng.pick([2, 4, 5]);
   const parts = partitions(rng, k); if (o.distinctMax && parts.filter((c) => c === Math.max(...parts)).length > 1) throw new GenFail("최빈 계급 중복");
   const bins = parts.map((c, i) => ({ from: lo + i * w, to: lo + (i + 1) * w, count: c * u })); const N = 10 * u; let acc = 0; const cum = bins.map((b) => (acc += b.count)); const mids = bins.map((b) => (b.from + b.to) / 2);
-  const percent = !!o.percent; const xTitle = `${t.xName} (${t.unit})`; const base = { type: "freq_chart" as const, kind: o.kind, bins, xTitle };
+  const percent = !!o.percent; const xTitle = titleWith(t.xName, t.unit); const base = { type: "freq_chart" as const, kind: o.kind, bins, xTitle };
   const fig: FreqChartSpec = o.kind === "polygon" ? { ...base, yTitle: `Frequency (${t.ent})`, yStep: u, yMax: (Math.max(...parts) + 1) * u } : percent ? { ...base, percent: true, yTitle: "Cumulative percent (%)", yStep: 10, yMax: 100 } : { ...base, yTitle: `Cumulative frequency (${t.ent})`, yStep: u, yMax: N };
   if (renderFreqChart(fig).issues.length) throw new GenFail("도수다각형 배치");
   return { t, bins, N, u, w, cum, mids, fig, kind: o.kind, percent };

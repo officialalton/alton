@@ -1,7 +1,7 @@
 {
  "itemId": "systems_linear.word_system.LN.P",
- "generatedAt": "2026-10-06T19:22:40.117Z",
- "codeHash": "e85afd934fd31b97e22db31d0490ecd0dfc3636873f8fe79307919a0203771f6",
+ "generatedAt": "2026-10-06T22:00:06.286Z",
+ "codeHash": "9090f786a278023da6c4f60c05179668ead429c1f10a82ee00f0c7c42072f98f",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -37,7 +37,16 @@
    "correctIndex": 2,
    "answer": "4",
    "explanation": "(1) Club A: 그래프에서 y 절편 0 과 격자점을 읽어 기울기 4 을 구한다. (2) Club B: 그래프에서 y 절편 10 과 격자점을 읽어 기울기 3 를 구한다. (3) Club A(14) = 4·14 + 0 = 56 이다. (4) Club B(14) = 3·14 + 10 = 52 이다. (5) 차 = 4 이다. 따라서 정답은 4이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Months' 에 단위(괄호)가 없습니다."
+    },
+    {
+     "code": "unit_missing_in_title",
+     "message": "세로축 제목 'Members' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

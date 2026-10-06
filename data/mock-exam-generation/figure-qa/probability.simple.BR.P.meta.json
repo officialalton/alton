@@ -1,7 +1,7 @@
 {
  "itemId": "probability.simple.BR.P",
- "generatedAt": "2026-10-06T19:22:40.373Z",
- "codeHash": "f6e64ba213fd8e96b31946bf9a101c4c1a288a818be31cf6d36a32068c627b05",
+ "generatedAt": "2026-10-06T22:00:06.567Z",
+ "codeHash": "fe04d9643ba1dc22eee743d3d7545653038bce5da5091860bf3f0c5e33353512",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -39,7 +39,12 @@
    "correctIndex": 3,
    "answer": "4/7",
    "explanation": "(1) 그래프에서 값과 막대 높이(도수)를 읽는다: 2(9), 3(8), 4(3), 5(1) — 전체 21개. (2) 전체 개수 = 9 + 8 + 3 + 1 = 21 이다. (3) 합 = 2×9 + 3×8 + 4×3 + 5×1 = 59 이다. (4) 평균 = 59 ÷ 21 ≈ 2.81 이다. (5) 평균보다 큰 값의 도수 합은 12 이다. (6) 확률 = 12/21 = 4/7 이다. 따라서 정답은 4/7이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "세로축 제목 'Number of students' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }
