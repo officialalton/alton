@@ -12,5 +12,7 @@ import { ITEM as vtSeq } from "../items/probability.sequential_without_replaceme
 import { ITEM as tnSim } from "../items/lines_angles_triangles.similar_triangles.TN.P";
 import { ITEM as tnNest } from "../items/lines_angles_triangles.nested_similar_parallel.TN.P";
 import { ITEM as tnAlt } from "../items/right_triangles_trigonometry.similar_right_triangle_altitude.TN.P";
+import { ITEM as sxPyth } from "../items/right_triangles_trigonometry.pythagorean_hypotenuse.SX.P";
+import { ITEM as sxSpace } from "../items/area_volume.space_diagonal.SX.P";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace];

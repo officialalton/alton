@@ -361,6 +361,22 @@ function checkTriNestedFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   if (!(spec as { notToScale?: boolean }).notToScale) for (let i = 1; i < num.length; i++) { const r0 = len(num[0].a, num[0].b) / num[0].v, ri = len(num[i].a, num[i].b) / num[i].v; if (Math.abs(ri / r0 - 1) > 0.07) { issues.push({ code: "render_value_mismatch", message: `변 ${num[i].a}${num[i].b} 의 길이 비율이 변 ${num[0].a}${num[0].b} 와 라벨 ${num[i].v}:${num[0].v} 에 맞지 않게 그려졌습니다.` }); break; } }
 }
 
+
+// ───────────────────────── 입체 확장(solid_x) 충실도 ─────────────────────────
+function checkSolidXFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const S = spec as unknown as { kind: string; dims: { id: string; label: string }[]; diagonal?: string };
+  const ts = texts(svg); for (const d of S.dims) if (!ts.some((t) => t.text === d.label)) issues.push({ code: "label_missing", message: `치수 라벨 '${d.id} = ${d.label}' 이 그려지지 않았습니다.` });
+  const all = [...svg.matchAll(/<line\b([^>]*)\/?>/g)].map((m) => ({ x1: Number(attr(m[1], "x1")), y1: Number(attr(m[1], "y1")), x2: Number(attr(m[1], "x2")), y2: Number(attr(m[1], "y2")), dash: /stroke-dasharray/.test(m[1]), w: Number(attr(m[1], "stroke-width") ?? 0), stroke: attr(m[1], "stroke") ?? "" })).filter((l) => l.stroke === "#111");
+  const key = (x: number, y: number) => `${Math.round(x)},${Math.round(y)}`; const ends = new Map<string, number>(); for (const l of all) { for (const k of [key(l.x1, l.y1), key(l.x2, l.y2)]) ends.set(k, (ends.get(k) ?? 0) + 1); }
+  const diags = all.filter((l) => l.dash && l.w >= 2.1); const wantDiag = S.kind === "box_diagonal" ? (S.diagonal === "both" ? 1 : S.diagonal === "face_bottom" || S.diagonal === "face_front" ? 0 : 1) : S.kind === "cylinder_section" ? 1 : 0;
+  if (diags.length < wantDiag) issues.push({ code: "render_empty", message: "대각선(굵은 점선)이 그려지지 않았습니다." });
+  const dashed = all.filter((l) => l.dash).length; const need = S.kind === "box_diagonal" ? 3 + (S.diagonal === "both" ? 2 : 1) : S.kind === "triangular_prism" ? 3 : 0;
+  if (need && dashed < need) issues.push({ code: "render_value_mismatch", message: `점선 ${dashed}개 < 기대 ${need}개(숨은 모서리·대각선).` });
+  const need2 = S.kind === "box_diagonal" ? 3 : 2; // 모서리 꼭짓점에는 선이 여럿 모인다
+  for (const l of [...diags, ...(S.kind === "box_diagonal" ? all.filter((q) => q.dash && q.w < 2.1 && (S.diagonal === "face_bottom" || S.diagonal === "face_front" || S.diagonal === "both") && Math.hypot(q.x2 - q.x1, q.y2 - q.y1) > 60) : [])]) for (const k of [key(l.x1, l.y1), key(l.x2, l.y2)]) if ((ends.get(k) ?? 0) < need2) issues.push({ code: "render_value_mismatch", message: `대각선의 끝점 (${k}) 이 입체의 꼭짓점이 아닙니다(모서리가 ${(ends.get(k) ?? 0)}개만 만남).` });
+  if (!/Figure not drawn to scale/.test(svg)) issues.push({ code: "render_value_mismatch", message: "입체 확장 도식은 'not drawn to scale' 표기가 있어야 합니다." });
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -375,6 +391,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
+  if (spec.type === "solid_x") { checkSolidXFidelity(spec, markup, issues); return issues; }
   if (spec.type === "triangle_nested") { checkTriNestedFidelity(spec, markup, issues); return issues; }
   if (spec.type === "venn_tree") { checkVennTreeFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "trig_curve") { checkTrigCurveFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
