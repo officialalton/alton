@@ -134,12 +134,12 @@ function checkPlaneScatter(spec: Spec, svg: string, issues: QaIssue[]) {
 const rects = (svg: string) => [...svg.matchAll(/<rect\b([^>]*)\/?>/g)].map((m) => ({ x: Number(attr(m[1], "x")), y: Number(attr(m[1], "y")), w: Number(attr(m[1], "width")), h: Number(attr(m[1], "height")), fill: attr(m[1], "fill") ?? "" }));
 const DATA_COLORS = ["#111", "#C8102E", "#1B6FB0", "#0f7b4a"];
 /** 눈금 숫자(수치 축)·축 제목·단위 검사 — xNum/yNum 은 그 축이 수치 눈금을 가지는가(막대의 가로축은 범주라 제외). */
-function checkChartAxes(spec: Spec, svg: string, issues: QaIssue[], o: { xNum: boolean; yNum: boolean; xTitle: boolean; yTitle: boolean }) {
+function checkChartAxes(spec: Spec, svg: string, issues: QaIssue[], o: { xNum: boolean; yNum: boolean; xTitle: boolean; yTitle: boolean; /** 가로축 제목에 단위(괄호)를 요구하는가 — 범주 축은 단위가 없다. */ xUnit?: boolean }) {
   const sc = readScale(svg);
   if (o.yNum) { if (!sc.y || sc.yTicks.length < 3) issues.push({ code: "axis_ticks_missing", message: `세로축 눈금 숫자가 ${sc.yTicks.length}개뿐입니다(3개 이상 필요).` }); else if (sc.y.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `세로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${sc.y.maxRes.toFixed(1)}px).` }); }
   if (o.xNum) { if (!sc.x || sc.xTicks.length < 3) issues.push({ code: "axis_ticks_missing", message: `가로축 눈금 숫자가 ${sc.xTicks.length}개뿐입니다(3개 이상 필요).` }); else if (sc.x.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `가로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${sc.x.maxRes.toFixed(1)}px).` }); }
   const want: [string, string | undefined, boolean][] = [["가로", spec.xTitle as string | undefined, o.xTitle], ["세로", spec.yTitle as string | undefined, o.yTitle]];
-  for (const [n, t, need] of want) { if (!need) continue; if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+  for (const [n, t, need] of want) { if (!need) continue; if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t) && !(n === "가로" && o.xUnit === false)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
 }
 const tolY = (sc: NonNullable<ReturnType<typeof fit>>) => Math.abs(sc.a) * 1.5;
 
@@ -206,7 +206,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "statement") { checkStatement(spec, markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "scatter") { checkAxes(spec, markup, issues, false); checkScatterFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "line") { checkAxes({ ...spec, xTitle: spec.xTitle, yTitle: spec.yTitle }, markup, issues, false); checkLineChartFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
-  if (spec.type === "data" && spec.kind === "bar") { checkChartAxes(spec, markup, issues, { xNum: false, yNum: true, xTitle: true, yTitle: true }); checkBarFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "bar") { checkChartAxes(spec, markup, issues, { xNum: false, yNum: true, xTitle: true, yTitle: true, xUnit: false }); checkBarFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "histogram") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: true, xTitle: true, yTitle: true }); checkHistogramFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }

@@ -16,7 +16,7 @@ const RENDERER: Record<string, string[]> = { data: [`${FG}/templates/data.ts`], 
 /** 1단계 이후 규칙: 조합 하나 = 파일 하나(`skills/fig/items/<조합ID>.ts`) + 그 자료 계열의 공용 장면 키트. 조합 파일을 고쳐도 다른 조합의 판정은 유지된다. */
 export const ITEM_DIR = `${AR}/skills/fig/items`;
 const TK = `${AR}/skills/fig/table-kit.ts`, GK = `${AR}/skills/fig/graph-kit.ts`, DK = `${AR}/skills/fig/data-kit.ts`, HK = `${AR}/skills/fig/hist-kit.ts`;
-export const FAMILY_KIT: Record<string, string[]> = { TB: [TK], FQ: [TK], TW: [TK], ST: [TK], LN: [GK, TK], FN: [GK, TK], DP: [DK, GK, TK], HG: [HK, DK, GK, TK], BX: [DK, GK, TK], BR: [DK, GK, TK] };
+export const FAMILY_KIT: Record<string, string[]> = { TB: [TK], FQ: [TK], TW: [TK], ST: [TK], LN: [GK, TK], FN: [GK, TK], DP: [DK, GK, TK], HG: [HK, DK, GK, TK], BX: [DK, GK, TK], BR: [DK, GK, TK, `${AR}/skills/fig/items/_t4-kit.ts`] };
 export function archetypeSourceFor(itemId: string, root = process.cwd()): string[] {
   const [skill, kind, fig, loc] = itemId.split(".");
   const own = `${ITEM_DIR}/${itemId}.ts`;

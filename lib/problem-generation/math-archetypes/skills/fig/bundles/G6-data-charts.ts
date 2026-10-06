@@ -6,5 +6,7 @@ import { ITEM as ovdRangeDP } from "../items/one_variable_data.range.DP.P";
 import { ITEM as ovdGroupedHG } from "../items/one_variable_data.grouped_median_interval.HG.P";
 import { ITEM as ovdMeanHG } from "../items/one_variable_data.mean.HG.P";
 import { ITEM as ovdMedianHG } from "../items/one_variable_data.median.HG.P";
+import { ITEM as pctOfBR } from "../items/percentages.percent_of.BR.P";
+import { ITEM as pctFindBR } from "../items/percentages.find_percent.BR.P";
 
-export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG];
+export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR];

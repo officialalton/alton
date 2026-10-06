@@ -1,0 +1,23 @@
+{
+ "itemId": "percentages.find_percent.BR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:43:53Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "bc7c9586ff46ba165068c6b8d153e0858753aa440ed7365e9526d1653df68fbb",
+ "samples": [
+  "percentages.find_percent.BR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Lane B 160, C 40, D 120, F 80 → 합 400, B+F=240 → 60%, 메타 정답 60 일치. 375px 에서 막대·범주 이름·눈금 판독 가능."
+}

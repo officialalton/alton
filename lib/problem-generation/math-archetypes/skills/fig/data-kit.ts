@@ -42,3 +42,28 @@ export const toList = (s: DotScene): DotList => ({ t: s.t, vals: expand(s), fig:
 /** DP_JS 에 목록 문항용 이름을 더한다: v(점 하나하나의 값), n(개수), sv(오름차순 정렬). S(합)는 DP_JS 가 이미 정의한다. */
 export const DPL_JS = `${DP_JS}const v=list, n=list.length, sv=list;\n`;
 export const dlRead = (s: DotList): [string, string] => [`점도표에서 점의 위치를 읽는다: ${s.base.vals.map((v, i) => `${v}(${s.base.freqs[i]}개)`).join(", ")} — 전체 ${s.vals.length}개.`, "Read the position of every dot in the dot plot."];
+
+// ───────────────────────── 막대그래프(BR) ─────────────────────────
+// 개수 장면(행 이름 × 개수, _t4-kit)을 막대로 그린다. 막대 높이를 눈금(격자선)에서 정확히 읽도록 값은 세로 눈금 간격의 배수로만 만든다.
+import { COUNT_TOPICS, retry, lcFirst, type CountTopic, type CountScene } from "./items/_t4-kit";
+export type BarScene = CountScene & { yStep: number; yMax: number; fig: { type: "data"; kind: "bar"; categories: string[]; series: { values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
+export const barFig = (s: { t: CountTopic; names: string[]; vals: number[]; yStep: number; yMax: number }) => ({ type: "data" as const, kind: "bar" as const, categories: s.names, series: [{ values: s.vals }], xTitle: s.t.rowHead, yTitle: `${s.t.col} (${s.t.unit})`, yMin: 0, yMax: s.yMax, yStep: s.yStep });
+/** 범주 이름에 숫자가 있으면(Route 1·Line 2) 지문이 두 범주를 말할 때 엔진의 값 대조(lint)가 다른 범주의 숫자를 값으로 오인하고, 이름이 길면(12자 초과) 축 아래에 놓이지 않는다. */
+export const BAR_TOPICS = COUNT_TOPICS.filter((t) => t.rows.every((r) => !/\d/.test(r) && r.length <= 12));
+const Y_STEPS = [5, 10, 20, 25, 40, 50, 100, 200];
+/** 막대 장면: n 개 막대, 값은 lo~hi 안의 세로 눈금 간격(step 의 배수) 배수이고 서로 다르다. */
+export function barScene(rng: Rng, n: number, lo: number, hi: number, step: number, topic?: CountTopic): BarScene {
+  const t = topic ?? rng.pick(BAR_TOPICS); const names = rng.shuffle(t.rows).slice(0, n).sort((a, b) => t.rows.indexOf(a) - t.rows.indexOf(b));
+  const steps = Y_STEPS.filter((y) => y % step === 0 && hi / y >= 4 && hi / y <= 10 && Math.floor(hi / y) - Math.ceil(lo / y) + 1 >= n);
+  if (!steps.length) throw new GenFail("막대 눈금 간격 없음"); const yStep = rng.pick(steps);
+  return retry(40, () => { const vals = names.map(() => yStep * rng.int(Math.ceil(lo / yStep), Math.floor(hi / yStep))); if (new Set(vals).size !== n) return null; const yMax = (Math.floor(Math.max(...vals) / yStep) + 1) * yStep; return { t, names, vals, yStep, yMax, fig: barFig({ t, names, vals, yStep, yMax }) }; }, "막대 장면");
+}
+export const bar = (s: BarScene) => s.fig;
+export const barIntro = (rng: Rng, s: CountScene, when = rng.pick(["last month", "last week", "on one Saturday", "during one month", "last year", "during a holiday weekend"])) => rng.pick([
+  `${s.t.who} recorded the number of ${s.t.what} ${s.t.prep} each of ${s.names.length} ${s.t.many} ${when}. The results are shown in the graph.`,
+  `The graph shows the number of ${s.t.what} ${s.t.prep} each of ${s.names.length} ${s.t.many} ${when}.`,
+  `The number of ${s.t.what} ${s.t.prep} each of several ${s.t.many} ${when} is given in the graph shown.`,
+  `For a report, ${lcFirst(s.t.who)} charted the number of ${s.t.what} ${s.t.prep} several ${s.t.many} ${when}, as shown in the graph.`,
+]);
+/** FIGURE(막대)에서 이름 nm·값 v·합 S·조회 at 을 읽는 JS(ROW_JS 와 같은 변수 이름). */
+export const BAR_ROW_JS = "const nm=FIGURE.categories; const v=FIGURE.series[0].values; if (v.some(x=>typeof x!=='number')||v.length!==nm.length) throw new Error('값 오류'); const S=v.reduce((a,b)=>a+b,0); const at=(k)=>{ const i=nm.indexOf(k); if (i<0) throw new Error('막대 없음'); return v[i]; };\n";
