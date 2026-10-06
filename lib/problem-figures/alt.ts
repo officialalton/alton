@@ -8,6 +8,7 @@ import { renderCircle } from "./templates/circle";
 import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
+import { renderD } from "./templates/d-registry";
 
 export function figureAlt(spec: FigureSpec): string | undefined {
   switch (spec.type) {
@@ -20,6 +21,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "solid": return renderSolid(spec).alt;
     case "composite": return renderComposite(spec).alt;
     case "image": return spec.alt;
+    case "number_line": case "stem_leaf": case "pie": case "freq_chart": case "stacked_bar": return renderD(spec).alt;
     default: return undefined;
   }
 }

@@ -8,6 +8,7 @@ import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
 import { renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
+import { isDSpec, renderD } from "./templates/d-registry";
 import { figureAlt } from "./alt";
 import { pruneUnmentionedLineLabels } from "./label-rule";
 
@@ -61,6 +62,7 @@ export function renderFigureSvg(specIn: FigureSpec, opts?: { text?: string }): s
   if (spec.type === "polygon") return renderPolygon(spec).svg;
   if (spec.type === "solid") return renderSolid(spec).svg;
   if (spec.type === "composite") return renderComposite(spec).svg;
+  if (isDSpec(spec)) return renderD(spec).svg;
   if (spec.type === "figure_choice") return renderFigureChoice(spec, (c) => renderFigureSvg(c as FigureSpec)).markup;
   if (spec.type === "figure_set") return renderFigureSet(spec, (c) => renderFigureSvg(c as FigureSpec), (c) => figureAlt(c as FigureSpec)).markup; // 표·숫자 목록은 HTML, 그래프는 SVG — 모두 우리 마크업
   return spec.type === "coordinate_plane" ? renderPlane(spec) : renderGeometry(spec);
