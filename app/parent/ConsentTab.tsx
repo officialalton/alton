@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import { consentForChild } from "./consent-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate } from "@/lib/format-datetime";
+import { fmtDateEn as fmtDate } from "@/lib/format-datetime-en";
 
 // 2026-09-28(초기 고객 절차 단순화) — 체험 Smart Notes 동의 섹션과 "정규 진행
 // 희망" 섹션(TrialConversionPanel)을 제거했다. 체험 수업에는 이제 AI 기록을
@@ -49,7 +49,7 @@ export default function ConsentTab({
     <div className="max-w-[560px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-2">Parental Consent</h1>
       <p className="text-[13px] text-grey-500 mb-5 leading-[1.6]">
-        Children under 13 need a parent or guardian's consent to use the service.
+        Children under 13 need a parent or guardian&apos;s consent to use the service.
       </p>
 
       {error && (

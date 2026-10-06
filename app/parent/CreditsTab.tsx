@@ -16,11 +16,11 @@ import type { ParentCreditsData } from "./credits-data";
 export default function CreditsTab({ data }: { data: ParentCreditsData }) {
   return (
     <div className="max-w-[560px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">지인 추천</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">Refer a Friend</h1>
       {data.referralCode ? (
         <ReferralCard code={data.referralCode} />
       ) : (
-        <p className="text-[13px] text-grey-500">추천 코드가 아직 없습니다.</p>
+        <p className="text-[13px] text-grey-500">No referral code yet.</p>
       )}
     </div>
   );
@@ -43,11 +43,11 @@ function ReferralCard({ code }: { code: string }) {
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
       <h2 className="text-[14px] font-bold text-ink mb-1.5">
-        지인 추천하고 수업권 받기
+        Refer a friend and earn lesson credits
       </h2>
       <p className="text-[12px] text-grey-500 mb-3 leading-[1.6]">
-        아래 코드를 공유한 지인이 상담 신청 시 이 코드를 입력하고 정식
-        계약까지 이어지면, 수업권이 자동 지급됩니다.
+        When a friend you share the code below with enters it when requesting a consultation and goes on to sign a
+        contract, lesson credits are granted automatically.
       </p>
       <div className="flex items-center justify-between bg-grey-100 rounded-lg px-4 py-3">
         <span className="text-[14px] font-bold text-ink tracking-wide">
@@ -57,7 +57,7 @@ function ReferralCard({ code }: { code: string }) {
           onClick={handleCopy}
           className="text-[12px] font-bold text-blue"
         >
-          {copied ? "복사됨" : "복사"}
+          {copied ? "Copied" : "Copy"}
         </button>
       </div>
     </div>

@@ -16,7 +16,7 @@ export default async function ParentMockExamResultPage({ params }: { params: Pro
   return (
     <main className="mx-auto max-w-2xl px-4 py-6">
       <h1 className="mb-1 text-[18px] font-extrabold">{attempt.examSetName}</h1>
-      <p className="mb-4 text-[12.5px] text-grey-500">{attempt.studentName} 학생 결과</p>
+      <p className="mb-4 text-[12.5px] text-grey-500">{attempt.studentName}&apos;s results</p>
       <MockExamResultView attempt={attempt} readOnly />
     </main>
   );

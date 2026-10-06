@@ -10,6 +10,6 @@ export async function createCreditCheckoutSession(
   _studentId: string
 ): Promise<string> {
   throw new Error(
-    "레거시 결제 경로는 R4 전환 이후 비활성화되었습니다 — 수업권 구매 탭을 이용해주세요."
+    "The legacy payment path was disabled after the R4 transition. Please use the Lesson Credits purchase tab."
   );
 }

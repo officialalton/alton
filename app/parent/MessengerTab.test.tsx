@@ -53,8 +53,8 @@ describe("MessengerTab", () => {
       { id: "inquiry1", status: "open", createdAt: "2027-01-01T00:00:00.000Z", lastMessageAt: "2027-01-01T00:00:00.000Z", closedAt: null, firstMessage: "새 문의입니다" },
     ]);
 
-    fireEvent.change(screen.getByLabelText("새 문의 내용"), { target: { value: "새 문의입니다" } });
-    fireEvent.click(screen.getByText("문의하기"));
+    fireEvent.change(screen.getByLabelText("New inquiry message"), { target: { value: "새 문의입니다" } });
+    fireEvent.click(screen.getByText("Send Inquiry"));
 
     await waitFor(() => expect(startGuardianInquiryMock).toHaveBeenCalledWith("새 문의입니다", ""));
     await waitFor(() => expect(screen.getByText("새 문의입니다")).toBeInTheDocument());
@@ -74,8 +74,8 @@ describe("MessengerTab", () => {
     await waitFor(() => expect(screen.getByText("답변입니다")).toBeInTheDocument());
 
     sendGuardianInquiryMessageMock.mockResolvedValue(undefined);
-    fireEvent.change(screen.getByLabelText("메시지 내용"), { target: { value: "재문의합니다" } });
-    fireEvent.click(screen.getByText("전송"));
+    fireEvent.change(screen.getByLabelText("Message"), { target: { value: "재문의합니다" } });
+    fireEvent.click(screen.getByText("Send"));
 
     await waitFor(() => expect(sendGuardianInquiryMessageMock).toHaveBeenCalledWith("inquiry1", "재문의합니다"));
   });
@@ -88,10 +88,10 @@ describe("MessengerTab", () => {
       { id: "m1", senderId: "guardian1", senderRole: "guardian", body: "종료된 옛날 문의 내용", createdAt: "2027-01-01T00:00:00.000Z" },
     ]);
     render(<MessengerTab />);
-    fireEvent.click(screen.getByText("지난 문의"));
+    fireEvent.click(screen.getByText("Past Inquiries"));
     await waitFor(() => expect(screen.getByText("종료된 옛날 문의 내용")).toBeInTheDocument());
 
     fireEvent.click(screen.getByText("종료된 옛날 문의 내용"));
-    await waitFor(() => expect(screen.queryByLabelText("메시지 내용")).toBeNull());
+    await waitFor(() => expect(screen.queryByLabelText("Message")).toBeNull());
   });
 });

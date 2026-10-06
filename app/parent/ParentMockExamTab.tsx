@@ -22,7 +22,7 @@ export default function ParentMockExamTab({ studentId }: { studentId: string | n
         if (!cancelled) setOverview(o);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "모의고사 목록을 불러오지 못했습니다.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Could not load the mock exam list.");
       });
     return () => {
       cancelled = true;
@@ -31,9 +31,9 @@ export default function ParentMockExamTab({ studentId }: { studentId: string | n
 
   const rows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
 
-  if (!studentId) return <p className="p-8 text-[14px] text-grey-500">자녀를 먼저 선택하세요.</p>;
+  if (!studentId) return <p className="p-8 text-[14px] text-grey-500">Please select a child first.</p>;
   if (error) return <p className="p-8 text-[14px] text-red">{error}</p>;
-  if (overview === null) return <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>;
+  if (overview === null) return <p className="p-8 text-[14px] text-grey-500">Loading...</p>;
 
   return (
     <div className="px-6 py-5">

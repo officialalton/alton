@@ -36,7 +36,7 @@ describe("ConsultationHistoryTab", () => {
   it("신청 내역을 불러와 상태와 사유를 보여준다", async () => {
     listGuardianMeetingRequestsMock.mockResolvedValue([baseMeeting]);
     render(<ConsultationHistoryTab />);
-    await waitFor(() => expect(screen.getByText("신청됨")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Requested")).toBeInTheDocument());
     expect(screen.getByText(/요즘 수학 성적이 걱정됩니다/)).toBeInTheDocument();
   });
 
@@ -48,11 +48,11 @@ describe("ConsultationHistoryTab", () => {
       driveLink: null,
     });
     render(<ConsultationHistoryTab />);
-    await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("리뷰 보기"));
+    await waitFor(() => expect(screen.getByText("Completed")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("View review"));
     await waitFor(() => expect(screen.getByText("확정된 리뷰 내용입니다")).toBeInTheDocument());
     // 미팅록 접근 권한이 granted로 확인되지 않았으므로 링크를 노출하지 않는다.
-    expect(screen.queryByText("미팅록 보기")).not.toBeInTheDocument();
+    expect(screen.queryByText("View meeting record")).not.toBeInTheDocument();
   });
 
   it("driveLink가 있으면(granted 확인됨) 미팅록 링크를 보여준다", async () => {
@@ -63,8 +63,8 @@ describe("ConsultationHistoryTab", () => {
       driveLink: { driveFileId: "file123" },
     });
     render(<ConsultationHistoryTab />);
-    await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("리뷰 보기"));
-    await waitFor(() => expect(screen.getByText("미팅록 보기")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Completed")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("View review"));
+    await waitFor(() => expect(screen.getByText("View meeting record")).toBeInTheDocument());
   });
 });

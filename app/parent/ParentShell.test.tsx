@@ -110,7 +110,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["홈", "수강권", "수강 과목", "수업", "모의고사", "상담", "단어장", "과제"].forEach((label) =>
+    ["Home", "Lesson Credits", "Courses", "Lessons", "Mock Exams", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/교재는
@@ -119,22 +119,22 @@ describe("ParentShell", () => {
     // 돌아왔으므로 더 이상 부재를 확인하지 않는다(아래 별도 테스트가 커버).
     // 2026-09-22(사용자 지시) — 모의고사도 홈 서브탭에서 좌측 nav "모의고사"로
     // 옮겼고, 통계 서브탭은 아예 없앴다(Overview에 이미 있다는 이유).
-    expect(screen.queryByText("지인 추천")).not.toBeInTheDocument();
-    expect(screen.queryByText("가족")).not.toBeInTheDocument();
-    expect(screen.queryByText("교재")).not.toBeInTheDocument();
+    expect(screen.queryByText("Refer a Friend")).not.toBeInTheDocument();
+    expect(screen.queryByText("Family")).not.toBeInTheDocument();
+    expect(screen.queryByText("Materials")).not.toBeInTheDocument();
     expect(screen.getAllByText("지훈").length).toBeGreaterThan(0);
     expect(screen.getAllByText("이서아").length).toBeGreaterThan(0);
     // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로 합쳤다.
     expect(screen.getByText("Review")).toBeInTheDocument();
     // 2026-09-30(오너 결정) — 통계 서브탭 복귀: 학생 본인과 같은 범위의 통계를 본다.
-    expect(screen.getByText("통계")).toBeInTheDocument();
+    expect(screen.getByText("Stats")).toBeInTheDocument();
     // 홈 기본 서브탭은 Overview — "Review" 탭 내용은 눌러야 보인다.
     fireEvent.click(screen.getByText("Review"));
     // 2026-09-18(사용자 결정 2차) — "종합 리뷰"는 수업/상담 리뷰를 합친 목록이
-    // 아니라 향후 AI OS가 만들 "월간 종합 리뷰" 전용 자리라 정적 준비 중
+    // 아니라 향후 AI OS가 만들 "Monthly Summary Review" 전용 자리라 정적 준비 중
     // 문구만 보여준다(데이터 로딩 없음 — 즉시 렌더되므로 findByText 불필요).
-    expect(screen.getByText("월간 종합 리뷰")).toBeInTheDocument();
-    expect(screen.getByText(/아직 생성된 월간 종합 리뷰가 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText("Monthly Summary Review")).toBeInTheDocument();
+    expect(screen.getByText(/No monthly summary review has been generated yet/)).toBeInTheDocument();
   });
 
   it("홈 상단에는 동의 배너를 보여주지 않는다(2026-09-17, 배지는 프로필 메뉴로만)", () => {
@@ -150,7 +150,7 @@ describe("ParentShell", () => {
         ]}
       />
     );
-    expect(screen.queryByText(/동의 필요한 문서가/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/documents need your consent/)).not.toBeInTheDocument();
   });
 
   // 2026-09-22(사용자 지시) — 종합/수업/상담 리뷰를 "Review" 서브탭 하나로
@@ -192,7 +192,7 @@ describe("ParentShell", () => {
     fireEvent.click(screen.getByText("Review"));
     expect(await screen.findByText("수업 리뷰 내용")).toBeInTheDocument();
     expect(await screen.findByText("학습 태도가 좋아졌습니다.")).toBeInTheDocument();
-    expect(screen.getByText("월간 종합 리뷰")).toBeInTheDocument();
+    expect(screen.getByText("Monthly Summary Review")).toBeInTheDocument();
   });
 
   it("홈 'Review' 서브탭의 상담 리뷰 빈 상태는 간결한 문구를 보여준다", async () => {
@@ -206,7 +206,7 @@ describe("ParentShell", () => {
       />
     );
     fireEvent.click(screen.getByText("Review"));
-    expect(await screen.findByText("아직 확정된 상담 리뷰가 없습니다.")).toBeInTheDocument();
+    expect(await screen.findByText("No finalized consultation reviews yet.")).toBeInTheDocument();
   });
 
   it("다른 자녀 pill을 누르면 ?child= 쿼리로 이동한다", () => {
@@ -233,8 +233,8 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("수업")[0]);
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Lessons")[0]);
+    expect(screen.getByText("No upcoming lessons.")).toBeInTheDocument();
   });
 
   // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13의 "예약 독립 탭
@@ -250,9 +250,9 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("예약")[0]);
+    fireEvent.click(screen.getAllByText("Bookings")[0]);
     expect(
-      screen.getByText(/아직 선생님 배정이 완료되지 않았어요/)
+      screen.getByText(/A teacher hasn.t been assigned yet/)
     ).toBeInTheDocument();
   });
 
@@ -268,9 +268,9 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("홈")[0]);
+    fireEvent.click(screen.getAllByText("Home")[0]);
     fireEvent.click(await screen.findByText("Board"));
-    expect(await screen.findByText("백로그")).toBeInTheDocument();
+    expect(await screen.findByText("Backlog")).toBeInTheDocument();
   });
 
   it("수업권 탭을 누르면 EntitlementsTab(R4)이 렌더링된다", () => {
@@ -283,9 +283,9 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("수강권")[0]);
-    expect(screen.getByText("현황")).toBeInTheDocument();
-    expect(screen.getByText("구매")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Lesson Credits")[0]);
+    expect(screen.getByText("Overview")).toBeInTheDocument();
+    expect(screen.getByText("Buy")).toBeInTheDocument();
   });
 
   it("상담 탭은 상담 신청 서브탭이 기본이고, 상담 내역 서브탭은 ConsultationHistoryTab을 보여준다", async () => {
@@ -298,10 +298,10 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("상담")[0]);
-    expect(await screen.findByPlaceholderText("상담 사유를 입력해주세요")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("상담 내역"));
-    expect(await screen.findByText("신청한 상담이 없습니다.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("Consultations")[0]);
+    expect(await screen.findByPlaceholderText("What would you like to discuss?")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("History"));
+    expect(await screen.findByText("No consultation requests yet.")).toBeInTheDocument();
   });
 
   // 2026-09-18 통합 지시: 신규 자녀 상담 신청 흐름(showNewChildConsult 토글,
@@ -318,11 +318,11 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(screen.getAllByText("동의").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("지인 추천").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("시간대 설정").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(screen.getAllByText("Consent").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Refer a Friend").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Time Zone").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Log Out").length).toBeGreaterThan(0);
   });
 
   it("계정 메뉴의 지인 추천을 누르면 CreditsTab(추천 코드 전용)이 모달로 뜨고 결제수단 입력은 없다", () => {
@@ -335,10 +335,10 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    fireEvent.click(screen.getAllByText("지인 추천")[0]);
-    expect(screen.getByText("추천 코드가 아직 없습니다.")).toBeInTheDocument();
-    expect(screen.queryByText("장 보유")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    fireEvent.click(screen.getAllByText("Refer a Friend")[0]);
+    expect(screen.getByText("No referral code yet.")).toBeInTheDocument();
+    expect(screen.queryByText("credits available")).not.toBeInTheDocument();
     expect(screen.queryByPlaceholderText("0000 0000 0000 0000")).not.toBeInTheDocument();
   });
 
@@ -352,8 +352,8 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    fireEvent.click(screen.getAllByText("동의")[0]);
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    fireEvent.click(screen.getAllByText("Consent")[0]);
     expect(pushMock).toHaveBeenCalledWith("?child=s1&tab=consent", { scroll: false });
   });
 
@@ -370,8 +370,8 @@ describe("ParentShell", () => {
         ]}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(within(screen.getAllByText("Consent")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
   it("생년월일이 아직 입력되지 않은 자녀는 is_under_13이 true여도 동의 배지 카운트에 포함하지 않는다(계정 생성 직후 회귀 방지)", () => {
@@ -387,8 +387,8 @@ describe("ParentShell", () => {
         ]}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(within(screen.getAllByText("Consent")[0].parentElement as HTMLElement).queryByText("1")).not.toBeInTheDocument();
   });
 
   it("조치가 필요한 항목이 전부 없으면 동의 배지를 보여주지 않는다", () => {
@@ -401,7 +401,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
+    fireEvent.click(screen.getByText("김민지 ▾"));
     expect(screen.queryByText("0")).not.toBeInTheDocument();
   });
 
@@ -424,8 +424,8 @@ describe("ParentShell", () => {
         ]}
       />
     );
-    fireEvent.click(screen.getByText("김민지 학부모님 ▾"));
-    expect(within(screen.getAllByText("동의")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("김민지 ▾"));
+    expect(within(screen.getAllByText("Consent")[0].parentElement as HTMLElement).getByText("1")).toBeInTheDocument();
   });
 
   // 2026-09-22(사용자 지시) — "모의고사"는 이제 홈 서브탭이 아니라 좌측
@@ -442,9 +442,9 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("모의고사")[0]);
+    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
     expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
-    expect(await screen.findByText("공개된 모의고사가 없습니다.")).toBeInTheDocument();
+    expect(await screen.findByText("No mock exams are available yet.")).toBeInTheDocument();
   });
 
   it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {
@@ -457,21 +457,21 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    expect(screen.getAllByRole("button", { name: new RegExp("홈") })[0]).toHaveAttribute(
+    expect(screen.getAllByRole("button", { name: new RegExp("Home") })[0]).toHaveAttribute(
       "aria-current",
       "page"
     );
     expect(
-      screen.getAllByRole("button", { name: new RegExp("수강권") })[0]
+      screen.getAllByRole("button", { name: new RegExp("Lesson Credits") })[0]
     ).not.toHaveAttribute("aria-current");
 
-    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("수강권") })[0]);
-    expect(screen.getAllByRole("button", { name: new RegExp("수강권") })[0]).toHaveAttribute(
+    fireEvent.click(screen.getAllByRole("button", { name: new RegExp("Lesson Credits") })[0]);
+    expect(screen.getAllByRole("button", { name: new RegExp("Lesson Credits") })[0]).toHaveAttribute(
       "aria-current",
       "page"
     );
     expect(
-      screen.getAllByRole("button", { name: new RegExp("홈") })[0]
+      screen.getAllByRole("button", { name: new RegExp("Home") })[0]
     ).not.toHaveAttribute("aria-current");
   });
 });

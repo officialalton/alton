@@ -14,15 +14,15 @@
 export default function FamilyTab({ onGoToConsultRequest }: { onGoToConsultRequest?: () => void }) {
   return (
     <div className="max-w-[520px] px-5 py-6">
-      <h2 className="text-[16px] font-bold text-ink mb-4">자녀 추가</h2>
+      <h2 className="text-[16px] font-bold text-ink mb-4">Add a Child</h2>
 
       <div className="border-[1.5px] border-grey-200 rounded-xl p-5 mb-5">
         <p className="text-[13px] text-ink font-semibold mb-2">
-          새 자녀를 추가하려면 먼저 상담을 신청해주세요.
+          To add a new child, please request a consultation first.
         </p>
         <p className="text-[12px] text-grey-500 mb-3">
-          상담 없이 바로 자녀 계정을 초대할 수 없습니다. 상담 신청 후 관리자가
-          확인하면 계정 초대 안내를 이메일로 보내드립니다.
+          You cannot invite a child account without a consultation. After you request one and an admin
+          reviews it, we will email you the account invitation instructions.
         </p>
         {onGoToConsultRequest && (
           <button
@@ -30,24 +30,24 @@ export default function FamilyTab({ onGoToConsultRequest }: { onGoToConsultReque
             onClick={onGoToConsultRequest}
             className="text-[13px] font-bold text-white bg-ink rounded-lg px-4 py-2"
           >
-            새 자녀 상담 신청하러 가기 →
+            Request a consultation for a new child →
           </button>
         )}
       </div>
 
       <div className="border-[1.5px] border-grey-100 rounded-xl p-5 opacity-50 pointer-events-none select-none">
-        <h3 className="text-[13px] font-bold text-ink mb-2">자녀 추가 초대(상담 전 비활성화됨)</h3>
+        <h3 className="text-[13px] font-bold text-ink mb-2">Add a child (disabled before consultation)</h3>
         <p className="text-[12px] text-grey-500 mb-3">
-          이 화면에서 바로 자녀 계정을 초대하는 기능은 더 이상 지원하지 않습니다.
-          위의 &quot;새 자녀 상담 신청&quot;을 이용해주세요.
+          Inviting a child account directly from this screen is no longer supported.
+          Please use &quot;Request a consultation for a new child&quot; above.
         </p>
         <div className="space-y-2 mb-3">
-          <input placeholder="이름" disabled aria-label="이름(비활성화됨)" className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]" />
-          <input placeholder="이메일" disabled aria-label="이메일(비활성화됨)" className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]" />
-          <input placeholder="학년(선택)" disabled aria-label="학년(비활성화됨)" className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]" />
+          <input placeholder="Name" disabled aria-label="Name (disabled)" className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]" />
+          <input placeholder="Email" disabled aria-label="Email (disabled)" className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]" />
+          <input placeholder="Grade (optional)" disabled aria-label="Grade (disabled)" className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]" />
         </div>
         <button disabled className="text-[13px] font-bold text-white bg-ink rounded-lg px-4 py-2 disabled:opacity-50">
-          초대 보내기
+          Send invite
         </button>
       </div>
     </div>

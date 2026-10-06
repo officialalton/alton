@@ -20,7 +20,7 @@ import {
   type HouseholdMessage,
 } from "./inquiry-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
 
 function formatDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";

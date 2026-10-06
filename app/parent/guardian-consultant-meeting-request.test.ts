@@ -84,7 +84,7 @@ describe("getMyHouseholdConsultantsAction", () => {
 
   it("보호자가 아니면 거부한다", async () => {
     requireUserMock.mockResolvedValue({ user: { id: "u1" }, profile: { role: "student" }, supabase: makeSupabase({}) });
-    await expect(getMyHouseholdConsultantsAction()).rejects.toThrow("보호자만 접근할 수 있습니다.");
+    await expect(getMyHouseholdConsultantsAction()).rejects.toThrow("Only parents or guardians can access this.");
   });
 });
 
@@ -100,7 +100,7 @@ describe("submitMeetingRequest — 담당 컨설턴트 지정 경로", () => {
       consultantId: "wrong-consultant",
     });
 
-    expect(result).toEqual({ ok: false, error: "선택한 자녀의 담당 컨설턴트가 아닙니다." });
+    expect(result).toEqual({ ok: false, error: "This consultant is not assigned to the selected child." });
     expect(supabase._insertMock).not.toHaveBeenCalled();
   });
 
@@ -110,7 +110,7 @@ describe("submitMeetingRequest — 담당 컨설턴트 지정 경로", () => {
 
     const result = await submitMeetingRequest({ reason: "상담 요청", childId: "child1", consultantId: "real-consultant" });
 
-    expect(result).toEqual({ ok: false, error: "상담 희망 시간을 선택해주세요." });
+    expect(result).toEqual({ ok: false, error: "Please select a consultation time." });
     expect(supabase._insertMock).not.toHaveBeenCalled();
   });
 
