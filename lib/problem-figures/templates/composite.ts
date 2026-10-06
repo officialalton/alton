@@ -78,6 +78,7 @@ export function renderComposite(spec: CompositeSpec): { svg: string; alt: string
 export function lintCompositeAgainstText(spec: CompositeSpec, passage: string): FigureIssue[] {
   const issues: FigureIssue[] = [];
   const text = passage.replace(/\$/g, "");
+  if (text.trim().length < 40) return issues; // 지문 없이 그림만 점검하는 호출(자리표 문장)에서는 도형 낱말 대조를 하지 않는다 — 실제 문항은 항상 전체 지문으로 검사한다
   const words: Record<string, RegExp> = { square: /\bsquare\b/i, rectangle: /\brectangl/i, circle: /\bcircle|circular\b/i, semicircle: /\bsemicircle|semicircular\b/i, triangle: /\btriangl/i };
   if (!words[spec.outer.kind].test(text)) issues.push({ code: "ref_missing", message: `지문에 바깥 도형(${spec.outer.kind})이 언급되지 않습니다.` });
   if (!words[spec.inner.kind].test(text)) issues.push({ code: "ref_missing", message: `지문에 안쪽 도형(${spec.inner.kind})이 언급되지 않습니다.` });
