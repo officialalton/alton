@@ -23,5 +23,6 @@ import { ITEM as p3Item } from "../items/lines_angles_triangles.parallel_lines_t
 import { ITEM as trbSim } from "../items/lines_angles_triangles.similar_triangles.TR.B";
 import { ITEM as trbCong } from "../items/lines_angles_triangles.congruent_triangles.TR.B";
 import { ITEM as lnB } from "../items/linear_functions.construct_equation_from_graph.LN.B";
+import { ITEM as fnB } from "../items/nonlinear_functions.function_transformation.FN.B";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong, ...lnB];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong, ...lnB, ...fnB];

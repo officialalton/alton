@@ -53,3 +53,17 @@ export const rngPoly = (rng: Rng): [number, number][] => {
   }
   throw new GenFail("다각형 표집 실패");
 };
+
+/** 꼭짓점이 원점 근처인(|H| ≤ 3, |K| ≤ 4) 포물선 기준 그림 — 변환(최대 ±3)한 그래프도 [-10, 10] 안에 들어온다. 곡선이 먼저, 표시점 세 개가 나중. */
+export function quadSmall(rng: Rng) {
+  for (let t = 0; t < 400; t++) {
+    const R = 10, A = rng.pick([-2, -1, 1, 2]), H = rng.int(-3, 3), K = rng.int(-4, 4); const B = -2 * A * H, C = A * H * H + K; const y = (x: number) => A * x * x + B * x + C;
+    // 곡선 라벨은 오른쪽 끝 근처에 놓인다 — y 축 이름과 겹치지 않게 오른쪽 끝의 x 가 y 축에서 충분히 떨어져야 한다(변환한 그래프도 같은 이유로 ±3 이동 뒤를 본다).
+    const endX = (h: number, k: number) => h + Math.sqrt(A > 0 ? Math.max(0, (R - k) / A) : Math.max(0, (R + k) / -A)); if (Math.abs(endX(H, K)) < 2.5) continue;
+    const cand: number[] = []; for (let x = -R; x <= R; x++) if (x !== H && Math.abs(y(x)) <= R && clearOfLabels(x, y(x), R)) cand.push(x);
+    if (cand.length < 3) continue; const xs = rng.shuffle(cand).slice(0, 3);
+    xs.sort((p, q) => p - q); const ys = xs.map(y);
+    return { fn: "f", A, B, C, H, K, xs, ys, R, fig: { type: "plane" as const, axes: pureAxes(R), objects: [{ id: "F1", kind: "function" as const, fn: "quadratic" as const, params: [A, B, C], label: "f" }, { id: "S1", kind: "scatter" as const, points: xs.map((x, i) => [x, ys[i]] as [number, number]) }] } };
+  }
+  throw new GenFail("작은 포물선 표집 실패");
+}
