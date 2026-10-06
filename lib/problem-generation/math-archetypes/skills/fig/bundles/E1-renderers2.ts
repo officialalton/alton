@@ -21,5 +21,6 @@ import { ITEM as sxComp } from "../items/area_volume.composite_solid.SX.P";
 import { ITEM as lsArea } from "../items/area_volume.rectangle_area.LS.P";
 import { ITEM as p3Item } from "../items/lines_angles_triangles.parallel_lines_transversal_angles.P3.P";
 import { ITEM as trbSim } from "../items/lines_angles_triangles.similar_triangles.TR.B";
+import { ITEM as trbCong } from "../items/lines_angles_triangles.congruent_triangles.TR.B";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong];
