@@ -10,7 +10,7 @@ export default function ParentHomeworkTab({ childrenHomework }: { childrenHomewo
   const [childId, setChildId] = useState(childrenHomework[0]?.childId ?? "");
   const current = childrenHomework.find((c) => c.childId === childId) ?? childrenHomework[0];
 
-  if (!current) return <div className="max-w-[760px] text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
+  if (!current) return <div className="max-w-[760px] text-[13px] text-grey-500">No linked child found.</div>;
 
   return (
     <div className="max-w-[760px]">

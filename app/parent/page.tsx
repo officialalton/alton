@@ -30,7 +30,7 @@ export default async function ParentHomePage({
     return (
       <div className="min-h-screen flex items-center justify-center px-5">
         <p className="text-[14px] text-grey-500">
-          연결된 자녀 계정이 없습니다.
+          No linked child account found.
         </p>
       </div>
     );
@@ -104,7 +104,7 @@ export default async function ParentHomePage({
   return (
     <ViewerTimezoneProvider timezone={profile?.timezone || lessonBooking.timezone}>
     <ParentShell
-      parentName={profile?.name ?? "학부모"}
+      parentName={profile?.name ?? "Parent"}
       childrenList={children}
       currentChildId={currentChildId}
       initialTab={tab}

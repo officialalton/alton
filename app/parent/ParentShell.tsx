@@ -61,7 +61,7 @@ import RoadmapView from "@/app/components/RoadmapView";
 import type { RoadmapData } from "@/lib/roadmap/types";
 import { getRoadmapForStudent } from "@/lib/roadmap/actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
 
 // 2026-09-17/18 — 학부모 포털 IA 재구성(R13 상담 마일스톤). 메인 내비는 아래
 // 순서 고정: 홈/수업권/수강 과목/수업/상담/단어장/과제. "가족"(신규 자녀 상담

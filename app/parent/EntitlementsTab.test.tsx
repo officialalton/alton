@@ -12,7 +12,7 @@ const baseData: ParentEntitlementsData = {
   prices: [
     {
       productCode: "lesson_pack_1",
-      productName: "단건 수업권",
+      productName: "Single lesson",
       quantity: 1,
       unitPriceMinor: 21875,
       packagePriceMinor: 21875,
@@ -24,7 +24,7 @@ const baseData: ParentEntitlementsData = {
     },
     {
       productCode: "lesson_pack_20",
-      productName: "20회 패키지 수업권",
+      productName: "20-lesson package",
       quantity: 20,
       unitPriceMinor: 21875,
       packagePriceMinor: 350000,
@@ -52,8 +52,8 @@ const baseData: ParentEntitlementsData = {
           contractId: "c1",
           contractVersionNumber: 2,
           productCode: "lesson_pack_20",
-          productName: "20회 패키지 수업권",
-          lessonTypeLabel: "정규 1:1 수업",
+          productName: "20-lesson package",
+          lessonTypeLabel: "Regular 1:1 lesson",
           lessonDurationMinutes: 120,
           quantity: 20,
           unitPriceMinor: 21875,
@@ -94,15 +94,15 @@ const baseData: ParentEntitlementsData = {
 describe("EntitlementsTab", () => {
   it("현재 가격과 할인율을 보여준다", () => {
     render(<EntitlementsTab data={baseData} />);
-    fireEvent.click(screen.getByText("구매"));
-    expect(screen.getByText("단건 수업권")).toBeInTheDocument();
-    expect(screen.getByText("20회 패키지 수업권")).toBeInTheDocument();
-    expect(screen.getByText(/20% 할인/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Buy"));
+    expect(screen.getByText("Single lesson")).toBeInTheDocument();
+    expect(screen.getByText("20-lesson package")).toBeInTheDocument();
+    expect(screen.getByText(/20% off/)).toBeInTheDocument();
   });
 
   it("자격 있는 자녀는 선택 가능하고 자격 없는 자녀는 비활성화된다", () => {
     render(<EntitlementsTab data={baseData} />);
-    fireEvent.click(screen.getByText("구매"));
+    fireEvent.click(screen.getByText("Buy"));
     const eligibleButton = screen.getAllByText(/지훈/)[0].closest("button");
     const ineligibleButton = screen.getAllByText(/이서아/)[0].closest("button");
     expect(eligibleButton).not.toBeDisabled();
@@ -120,8 +120,8 @@ describe("EntitlementsTab", () => {
     window.location = { ...originalLocation, href: "" };
 
     render(<EntitlementsTab data={baseData} />);
-    fireEvent.click(screen.getByText("구매"));
-    fireEvent.click(screen.getByText("구매하기"));
+    fireEvent.click(screen.getByText("Buy"));
+    fireEvent.click(screen.getByText("Buy Now"));
 
     await waitFor(() => {
       expect(createEntitlementCheckoutSession).toHaveBeenCalledWith({
@@ -137,15 +137,15 @@ describe("EntitlementsTab", () => {
 
   it("체크아웃 세션 생성 실패 시 오류 메시지를 보여준다", async () => {
     vi.mocked(createEntitlementCheckoutSession).mockRejectedValue(
-      new Error("결제 가능한(active) 계약이 없어 구매할 수 없습니다.")
+      new Error("No active contract found. Purchases require an active contract.")
     );
     render(<EntitlementsTab data={baseData} />);
-    fireEvent.click(screen.getByText("구매"));
-    fireEvent.click(screen.getByText("구매하기"));
+    fireEvent.click(screen.getByText("Buy"));
+    fireEvent.click(screen.getByText("Buy Now"));
 
     await waitFor(() => {
       expect(
-        screen.getByText("결제 가능한(active) 계약이 없어 구매할 수 없습니다.")
+        screen.getByText("No active contract found. Purchases require an active contract.")
       ).toBeInTheDocument();
     });
   });
@@ -153,41 +153,41 @@ describe("EntitlementsTab", () => {
   it("잔여량과 만료일을 보여준다", () => {
     render(<EntitlementsTab data={baseData} />);
     expect(screen.getByText("5")).toBeInTheDocument();
-    expect(screen.getAllByText(/가장 빠른 만료일:/).length).toBeGreaterThan(0);
-    expect(screen.getByText("잔여 5회")).toBeInTheDocument();
+    expect(screen.getAllByText(/Earliest expiration:/).length).toBeGreaterThan(0);
+    expect(screen.getByText("5 lessons left")).toBeInTheDocument();
   });
 
   it("M2: 체험수업권 보유 시 정규 수업권과 별도 카드로 보여준다", () => {
     render(<EntitlementsTab data={baseData} />);
-    expect(screen.getByText("체험수업권(60분) 1회 보유 중")).toBeInTheDocument();
-    expect(screen.getByText(/구매·환불·양도가 불가능합니다/)).toBeInTheDocument();
+    expect(screen.getByText("1 trial lesson credit (60 min) available")).toBeInTheDocument();
+    expect(screen.getByText(/cannot be purchased, refunded, or transferred/)).toBeInTheDocument();
   });
 
   it("구매 내역을 펼치면 영수증 필드를 보여준다", () => {
     render(<EntitlementsTab data={baseData} />);
-    fireEvent.click(screen.getByText(/20회 패키지 수업권 ·/));
-    expect(screen.getByText("주문/결제 ID")).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/20-lesson package ·/));
+    expect(screen.getByText("Order / payment ID")).toBeInTheDocument();
     expect(screen.getByText("pu1")).toBeInTheDocument();
-    expect(screen.getByText("결제대행사 거래 ID")).toBeInTheDocument();
+    expect(screen.getByText("Payment processor transaction ID")).toBeInTheDocument();
     expect(screen.getByText("pi_test_1")).toBeInTheDocument();
   });
 
   it("purchaseStatus가 success면 완료 안내를 보여준다", () => {
     render(<EntitlementsTab data={baseData} purchaseStatus="success" />);
-    expect(screen.getByText(/결제 완료, 수업권이 지급되었습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/Payment complete/)).toBeInTheDocument();
   });
 
-  // 2026-09-18(UI 폴리싱) — "현황"/"구매" 서브탭 분리.
-  it("기본 서브탭은 '현황'이라 잔여량은 바로 보이고 구매 상품 목록은 숨어있다", () => {
+  // 2026-09-18(UI 폴리싱) — "Overview"/"구매" 서브탭 분리.
+  it("기본 서브탭은 Overview이라 잔여량은 바로 보이고 구매 상품 목록은 숨어있다", () => {
     render(<EntitlementsTab data={baseData} />);
-    expect(screen.getByText("지훈의 수업권")).toBeInTheDocument();
-    expect(screen.queryByText("단건 수업권")).toBeNull();
+    expect(screen.getByText("지훈's Lesson Credits")).toBeInTheDocument();
+    expect(screen.queryByText("Single lesson")).toBeNull();
   });
 
-  it("'구매' 서브탭을 누르면 구매 전 확인 섹션이 보이고 현황 섹션은 숨는다", () => {
+  it("Buy 서브탭을 누르면 구매 전 확인 섹션이 보이고 현황 섹션은 숨는다", () => {
     render(<EntitlementsTab data={baseData} />);
-    fireEvent.click(screen.getByText("구매"));
-    expect(screen.getByText("단건 수업권")).toBeInTheDocument();
-    expect(screen.queryByText("지훈의 수업권")).toBeNull();
+    fireEvent.click(screen.getByText("Buy"));
+    expect(screen.getByText("Single lesson")).toBeInTheDocument();
+    expect(screen.queryByText("지훈's Lesson Credits")).toBeNull();
   });
 });

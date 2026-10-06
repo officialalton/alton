@@ -11,7 +11,7 @@ export default function ParentVocabTab({ data }: { data: ParentVocabData }) {
   const [childId, setChildId] = useState(children[0]?.childId ?? "");
   const current = children.find((c) => c.childId === childId) ?? children[0];
 
-  if (!current) return <div className="max-w-[760px] text-[13px] text-grey-500">연결된 자녀가 없습니다.</div>;
+  if (!current) return <div className="max-w-[760px] text-[13px] text-grey-500">No linked child found.</div>;
 
   return (
     <div>

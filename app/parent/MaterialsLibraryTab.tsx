@@ -8,7 +8,7 @@ export default function ParentMaterialsLibraryTab({ childLibraries }: { childLib
     return (
       <div className="max-w-[720px]">
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          아직 활성 자녀가 없어요.
+          No active children yet.
         </div>
       </div>
     );
@@ -19,9 +19,9 @@ export default function ParentMaterialsLibraryTab({ childLibraries }: { childLib
         <div key={child.childId} className="border-b border-grey-100 last:border-b-0">
           <MaterialLibraryTree
             subjects={child.tree}
-            sectionHeading={`${child.childName} 학생 교재`}
-            description="자녀가 듣고 있는 과목의 교재를 단원·키워드 순서로 모아봅니다. 문제 정답·해설은 그 자녀가 이미 푼 것만 보입니다."
-            emptyMessage="아직 배정된 교재가 없어요."
+            sectionHeading={`${child.childName}'s materials`}
+            description="Materials for your child's subjects, organized by unit and keyword. Answers and explanations appear only for questions your child has already solved."
+            emptyMessage="No materials assigned yet."
             docHref={(docId) => `/materials/${docId}?childId=${child.childId}`}
           />
         </div>

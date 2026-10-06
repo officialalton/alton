@@ -155,7 +155,7 @@ describe("createEntitlementCheckoutSession", () => {
 
     await expect(
       createEntitlementCheckoutSession({ childId: "not-my-child", entitlementProductCode: "lesson_pack_20" })
-    ).rejects.toThrow("본인 가족 구성원이 아닌 자녀에 대해서는 구매할 수 없습니다.");
+    ).rejects.toThrow("You can only purchase for a child in your own family.");
     expect(createSessionMock).not.toHaveBeenCalled();
   });
 
@@ -165,7 +165,7 @@ describe("createEntitlementCheckoutSession", () => {
 
     await expect(
       createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "lesson_pack_20" })
-    ).rejects.toThrow("결제 가능한(active) 계약이 없어 구매할 수 없습니다.");
+    ).rejects.toThrow("No active contract found. Purchases require an active contract.");
     expect(createSessionMock).not.toHaveBeenCalled();
   });
 
@@ -183,7 +183,7 @@ describe("createEntitlementCheckoutSession", () => {
 
     await expect(
       createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "lesson_pack_20" })
-    ).rejects.toThrow("결제 가능한(active) 계약이 없어 구매할 수 없습니다.");
+    ).rejects.toThrow("No active contract found. Purchases require an active contract.");
     expect(createSessionMock).not.toHaveBeenCalled();
   });
 
@@ -195,7 +195,7 @@ describe("createEntitlementCheckoutSession", () => {
 
     await expect(
       createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "trial_lesson_grant" })
-    ).rejects.toThrow("구매할 수 없는 상품입니다.");
+    ).rejects.toThrow("This product is not available for purchase.");
     expect(purchaseInsertSingleMock).not.toHaveBeenCalled();
     expect(createSessionMock).not.toHaveBeenCalled();
   });
@@ -206,7 +206,7 @@ describe("createEntitlementCheckoutSession", () => {
 
     await expect(
       createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "lesson_pack_20" })
-    ).rejects.toThrow("가격 정보 없음");
+    ).rejects.toThrow("Pricing information is not available.")//PX;
     expect(purchaseInsertSingleMock).not.toHaveBeenCalled();
     expect(createSessionMock).not.toHaveBeenCalled();
   });
@@ -219,6 +219,6 @@ describe("createEntitlementCheckoutSession", () => {
 
     await expect(
       createEntitlementCheckoutSession({ childId: "child1", entitlementProductCode: "lesson_pack_20" })
-    ).rejects.toThrow("가격 정보 없음");
+    ).rejects.toThrow("Pricing information is not available.")//PX;
   });
 });

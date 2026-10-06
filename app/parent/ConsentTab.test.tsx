@@ -28,7 +28,7 @@ describe("ConsentTab", () => {
   it("13세 미만 자녀가 없으면 안내 문구만 보여준다", () => {
     render(<ConsentTab activePolicy={activePolicy}>{[]}</ConsentTab>);
     expect(
-      screen.getByText("동의가 필요한 만 13세 미만 자녀가 없습니다.")
+      screen.getByText("No children under 13 require consent.")
     ).toBeInTheDocument();
   });
 
@@ -46,15 +46,15 @@ describe("ConsentTab", () => {
     ];
     render(<ConsentTab activePolicy={activePolicy}>{children}</ConsentTab>);
 
-    expect(screen.getByText("동의 필요")).toBeInTheDocument();
-    fireEvent.click(screen.getByText(`${activePolicy.title} 원문 보기`));
+    expect(screen.getByText("Consent needed")).toBeInTheDocument();
+    fireEvent.click(screen.getByText(`View ${activePolicy.title}`));
     const modal = screen.getByTestId("consent-document-modal");
     expect(modal).toHaveTextContent(activePolicy.title);
     expect(modal.querySelector("iframe")).toHaveAttribute("src", activePolicy.documentUrl);
-    fireEvent.click(screen.getByText("닫기"));
+    fireEvent.click(screen.getByText("Close"));
     expect(screen.queryByTestId("consent-document-modal")).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByText(`${activePolicy.title}에 동의`));
+    fireEvent.click(screen.getByText(`Agree to ${activePolicy.title}`));
 
     await waitFor(() => {
       expect(consentForChildMock).toHaveBeenCalledWith("student1", "policy1");
@@ -69,7 +69,7 @@ describe("ConsentTab", () => {
     ];
     render(<ConsentTab activePolicy={activePolicy}>{children}</ConsentTab>);
     expect(
-      screen.getByText("동의가 필요한 만 13세 미만 자녀가 없습니다.")
+      screen.getByText("No children under 13 require consent.")
     ).toBeInTheDocument();
     expect(screen.queryByTestId("consent-card-student1")).not.toBeInTheDocument();
     expect(screen.queryByTestId("consent-card-student2")).not.toBeInTheDocument();
@@ -92,9 +92,9 @@ describe("ConsentTab", () => {
       </ConsentTab>
     );
 
-    fireEvent.click(screen.getByText(`${activePolicy.title} 원문 보기`));
+    fireEvent.click(screen.getByText(`View ${activePolicy.title}`));
     const modal = screen.getByTestId("consent-document-modal");
-    expect(modal).toHaveTextContent("원문 준비 중입니다.");
+    expect(modal).toHaveTextContent("Document coming soon.");
     expect(modal.querySelector("iframe")).not.toBeInTheDocument();
   });
 
@@ -115,10 +115,10 @@ describe("ConsentTab", () => {
       },
     ];
     render(<ConsentTab activePolicy={activePolicy}>{children}</ConsentTab>);
-    expect(screen.queryByText("동의 철회")).not.toBeInTheDocument();
-    const doneButton = screen.getByRole("button", { name: "동의 완료" });
+    expect(screen.queryByText("Revoke consent")).not.toBeInTheDocument();
+    const doneButton = screen.getByRole("button", { name: "Consent given" });
     expect(doneButton).toBeDisabled();
-    expect(screen.getByText(`${activePolicy.title} 원문 보기`)).toBeInTheDocument();
+    expect(screen.getByText(`View ${activePolicy.title}`)).toBeInTheDocument();
   });
 
   it("Smart Notes는 가족계약 조항이라는 안내 문구를 보여주고, 회차별 ON/OFF 컨트롤은 없다", () => {
@@ -127,8 +127,8 @@ describe("ConsentTab", () => {
     ];
     render(<ConsentTab activePolicy={activePolicy}>{children}</ConsentTab>);
     expect(screen.getByTestId("smart-notes-contract-notice")).toBeInTheDocument();
-    expect(screen.queryByText(/사용 중 · 끄기/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/사용 안 함 · 켜기/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Using · Turn off/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Not using · Turn on/)).not.toBeInTheDocument();
     expect(screen.queryByTestId("ai-notes-card-student2")).not.toBeInTheDocument();
   });
 });

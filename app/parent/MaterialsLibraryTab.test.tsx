@@ -29,7 +29,7 @@ const childLibraries: ParentChildLibrary[] = [
 describe("ParentMaterialsLibraryTab", () => {
   it("자녀별로 구분해서 교재를 보여준다", () => {
     render(<ParentMaterialsLibraryTab childLibraries={childLibraries} />);
-    expect(screen.getByText("지훈 학생 교재")).toBeInTheDocument();
+    expect(screen.getByText("지훈's materials")).toBeInTheDocument();
     expect(screen.getByText(/이차방정식 개념/)).toBeInTheDocument();
   });
 
@@ -41,6 +41,6 @@ describe("ParentMaterialsLibraryTab", () => {
 
   it("활성 자녀가 없으면 안내 문구를 보여준다", () => {
     render(<ParentMaterialsLibraryTab childLibraries={[]} />);
-    expect(screen.getByText("아직 활성 자녀가 없어요.")).toBeInTheDocument();
+    expect(screen.getByText("No active children yet.")).toBeInTheDocument();
   });
 });

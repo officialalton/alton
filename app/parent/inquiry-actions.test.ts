@@ -78,7 +78,7 @@ describe("startGuardianInquiry", () => {
   });
 
   it("빈 내용이면 거부한다", async () => {
-    await expect(startGuardianInquiry("   ")).rejects.toThrow("내용을 입력해주세요");
+    await expect(startGuardianInquiry("   ")).rejects.toThrow("Please enter a message.");
   });
 
   it("본인 household_id로 문의를 만들고 첫 메시지를 삽입한다", async () => {
@@ -109,7 +109,7 @@ describe("sendGuardianInquiryMessage", () => {
   });
 
   it("빈 내용이면 거부한다", async () => {
-    await expect(sendGuardianInquiryMessage("inquiry1", "   ")).rejects.toThrow("내용을 입력해주세요");
+    await expect(sendGuardianInquiryMessage("inquiry1", "   ")).rejects.toThrow("Please enter a message.");
   });
 
   it("지정한 문의에 sender_role='guardian' 메시지를 삽입한다", async () => {
@@ -136,12 +136,12 @@ describe("submitMeetingRequest", () => {
 
   it("사유 미입력 시 예외를 던지지 않고 ok:false를 반환한다", async () => {
     const result = await submitMeetingRequest({ reason: "" });
-    expect(result).toEqual({ ok: false, error: "상담 사유를 입력해주세요." });
+    expect(result).toEqual({ ok: false, error: "Please tell us what you'd like to discuss." });
   });
 
   it("담당 컨설턴트 없이 시간을 보내면 거절한다(공용 슬롯 없음, 2026-09-29)", async () => {
     const result = await submitMeetingRequest({ reason: "다음 학기 진도 상담을 요청합니다.", slotStartsAtIso: SLOT_ISO });
-    expect(result).toEqual({ ok: false, error: "담당 컨설턴트가 배정되기 전에는 상담 시간을 선택할 수 없습니다." });
+    expect(result).toEqual({ ok: false, error: "A consultation time can't be selected until a consultant has been assigned." });
     expect(insertMock).not.toHaveBeenCalled();
   });
 

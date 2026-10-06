@@ -42,17 +42,17 @@ describe("ConsultationRequestTab", () => {
 
   it("담당 컨설턴트가 없으면 시간 선택기 없이 안내 문구만 보이고 슬롯을 조회하지 않는다", async () => {
     render(<ConsultationRequestTab />);
-    await screen.findByText("상담 신청하기");
+    await screen.findByText("Submit Request");
     expect(screen.queryByText("테스트용 슬롯 선택")).not.toBeInTheDocument();
-    expect(screen.getByText(/담당 컨설턴트가 배정되지 않아 상담 시간을 고를 수 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/A consultant hasn't been assigned yet/)).toBeInTheDocument();
     expect(listOpenSlotsForConsultantActionMock).not.toHaveBeenCalled();
   });
 
   it("담당 컨설턴트가 없으면 사유만 입력해도 시간 없이 접수된다", async () => {
     submitMeetingRequestMock.mockResolvedValue({ ok: true });
     render(<ConsultationRequestTab />);
-    fireEvent.change(await screen.findByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.change(await screen.findByLabelText("What would you like to discuss?"), { target: { value: "상담 사유입니다" } });
+    fireEvent.click(screen.getByText("Submit Request"));
     await waitFor(() =>
       expect(submitMeetingRequestMock).toHaveBeenCalledWith({
         reason: "상담 사유입니다",
@@ -61,21 +61,21 @@ describe("ConsultationRequestTab", () => {
         consultantId: undefined,
       })
     );
-    await waitFor(() => expect(screen.getByText("상담 신청이 접수되었습니다.")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Your consultation request has been received.")).toBeInTheDocument());
   });
 
   it("사유 없이 제출하면 에러를 보여주고 submitMeetingRequest는 호출되지 않는다", async () => {
     render(<ConsultationRequestTab />);
-    fireEvent.click(await screen.findByText("상담 신청하기"));
-    await waitFor(() => expect(screen.getByText("상담 사유를 입력해주세요.")).toBeInTheDocument());
+    fireEvent.click(await screen.findByText("Submit Request"));
+    await waitFor(() => expect(screen.getByText("Please tell us what you'd like to discuss.")).toBeInTheDocument());
     expect(submitMeetingRequestMock).not.toHaveBeenCalled();
   });
 
   it("제출 실패 시 서버가 반환한 에러 메시지를 보여준다", async () => {
     submitMeetingRequestMock.mockResolvedValue({ ok: false, error: "이미 진행 중인 상담이 있습니다." });
     render(<ConsultationRequestTab />);
-    fireEvent.change(await screen.findByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.change(await screen.findByLabelText("What would you like to discuss?"), { target: { value: "상담 사유입니다" } });
+    fireEvent.click(screen.getByText("Submit Request"));
     await waitFor(() => expect(screen.getByText("이미 진행 중인 상담이 있습니다.")).toBeInTheDocument());
   });
 
@@ -84,9 +84,9 @@ describe("ConsultationRequestTab", () => {
       { childId: "child1", childName: "테스트 자녀", consultantId: "consultant1", consultantName: "지만" },
     ]);
     render(<ConsultationRequestTab />);
-    fireEvent.change(await screen.findByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
-    fireEvent.click(screen.getByText("상담 신청하기"));
-    await waitFor(() => expect(screen.getByText("상담 희망 시간을 먼저 선택해주세요.")).toBeInTheDocument());
+    fireEvent.change(await screen.findByLabelText("What would you like to discuss?"), { target: { value: "상담 사유입니다" } });
+    fireEvent.click(screen.getByText("Submit Request"));
+    await waitFor(() => expect(screen.getByText("Please select a consultation time first.")).toBeInTheDocument());
     expect(submitMeetingRequestMock).not.toHaveBeenCalled();
   });
 
@@ -97,8 +97,8 @@ describe("ConsultationRequestTab", () => {
     render(<ConsultationRequestTab />);
     await waitFor(() => expect(screen.getByText("지만", { exact: false })).toBeInTheDocument());
     fireEvent.click(await screen.findByText("테스트용 슬롯 선택"));
-    fireEvent.change(screen.getByLabelText("상담 사유"), { target: { value: "상담 사유입니다" } });
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.change(screen.getByLabelText("What would you like to discuss?"), { target: { value: "상담 사유입니다" } });
+    fireEvent.click(screen.getByText("Submit Request"));
     await waitFor(() =>
       expect(submitMeetingRequestMock).toHaveBeenCalledWith({
         reason: "상담 사유입니다",
@@ -115,8 +115,8 @@ describe("ConsultationRequestTab", () => {
       { childId: "child2", childName: "둘째", consultantId: "consultant2", consultantName: "다른컨설턴트" },
     ]);
     render(<ConsultationRequestTab />);
-    await waitFor(() => expect(screen.getByText("대상 자녀")).toBeInTheDocument());
-    expect(screen.getByText("첫째(지만)")).toBeInTheDocument();
-    expect(screen.getByText("둘째(다른컨설턴트)")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("Child")).toBeInTheDocument());
+    expect(screen.getByText("첫째 (지만)")).toBeInTheDocument();
+    expect(screen.getByText("둘째 (다른컨설턴트)")).toBeInTheDocument();
   });
 });

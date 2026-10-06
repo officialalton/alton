@@ -12,8 +12,8 @@ import { loadStudentStats, type StatsData } from "@/app/student/stats-data";
 
 export async function getParentChildStats(studentId: string): Promise<StatsData> {
   const { supabase, user, profile } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const access = await assertCanViewStudent(supabase, user.id, studentId);
-  if (access.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (access.role !== "parent") throw new Error("Only parents or guardians can access this.");
   return loadStudentStats(createAdminClient(), studentId, statsTierFor(access.role));
 }

@@ -5,11 +5,11 @@ import type { ParentEntitlementsData, PurchaseReceipt } from "./entitlements-dat
 import { createEntitlementCheckoutSession } from "./purchase-actions";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateEn as fmtDate, fmtDateTimeEn as fmtDateTime, fmtNumberEn } from "@/lib/format-datetime-en";
 
 function formatMoney(minor: number, currency: string): string {
   const amount = minor / 100;
-  return `${currency} ${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  return `${currency} ${fmtNumberEn(amount, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
 function formatDate(iso: string | null, tz: string): string {

@@ -13,7 +13,7 @@ import {
   type GuardianMeetingRequestReview,
 } from "./inquiry-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
   requested: "Requested",
