@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.circumference_diameter.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:51:17Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "b2e5909534211e5c4d98eae56633700f601d9f1b4cf3a80b152c0134bd38ed6a",
+ "samples": [
+  "circles.circumference_diameter.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "원 그림(지름 MS 라벨 21, 중심 O) 샘플 데스크톱·375px 확인: 지름선·점 이름·지름 라벨 겹침 없음, 갤러리(4 연산자·시드 1)로 반원 호·지름 라벨 위치 확인. \\pi 는 스냅샷 한계(앱은 KaTeX)."
+}

@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.circumference_radius.CI.P",
+ "generatedAt": "2026-10-06T06:51:01.258Z",
+ "codeHash": "b12b0ce4ef0e41fa916abbdeea6a073142cd0f2a598a88c571f5cee9ac1ed30a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.circumference_radius.CI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.circumference_radius.CI.P.png",
+   "mobileFile": "circles.circumference_radius.CI.P.m375.png",
+   "archetypeId": "ci.circumference_radius.CI.P.inverse",
+   "seed": 11,
+   "signature": "circle",
+   "stimulus": "Answers that involve $\\pi$ are left in terms of $\\pi$. A circle with center $O$ is shown in the figure. Its circumference is $14\\pi$. All lengths are in centimeters.",
+   "question": "Find the area of the circle in terms of $\\pi$.",
+   "options": [
+    "$49\\pi$",
+    "$7\\pi$",
+    "$14\\pi$",
+    "$98\\pi$"
+   ],
+   "correctIndex": 0,
+   "answer": "$49\\pi$",
+   "explanation": "(1) 그림에서 반지름 7 을 읽는다(둘레 14π 와 일치). (2) 둘레 2πr = 14π 이므로 r = 7 이다. (3) 넓이 = πr² 이다. (4) π × 7² = 49π 이다. (5) 따라서 49π 이다. 따라서 정답은 $49\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}
