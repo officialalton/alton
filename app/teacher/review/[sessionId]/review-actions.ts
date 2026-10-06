@@ -20,7 +20,7 @@ async function requireSessionTeacher(sessionId: string) {
     ? session.enrollment[0]
     : session?.enrollment;
   if (!enrollment || enrollment.teacher_id !== user.id) {
-    throw new Error("이 세션의 선생님만 사용할 수 있습니다.");
+    throw new Error("Only the teacher for this session can do this.");
   }
   return { supabase, user };
 }
@@ -135,12 +135,12 @@ async function notifyGuardiansOfReview(
 
     await sendEmail({
       to: email,
-      subject: `[Alton Education] ${studentProfile?.name ?? "자녀"} 학생의 수업 리뷰가 도착했습니다`,
+      subject: `[ALTON EDUCATION] A lesson review for ${studentProfile?.name ?? "your child"} is ready`,
       html: `
-        <p>안녕하세요.</p>
-        <p>${studentProfile?.name ?? "자녀"} 학생의 ${subjectName} ${session.session_number}회차 수업 리뷰가 작성되었습니다.</p>
-        <p>포털에 로그인하여 확인해주세요.</p>
-        <p>감사합니다.<br/>Alton Education</p>
+        <p>Hello,</p>
+        <p>The lesson review for ${studentProfile?.name ?? "your child"}'s ${subjectName} session ${session.session_number} has been written.</p>
+        <p>Please sign in to the portal to read it.</p>
+        <p>Thank you,<br/>ALTON EDUCATION</p>
       `,
     });
   }

@@ -76,7 +76,7 @@ export default function MobileBottomNav({
                   </span>
                 )}
               </span>
-              더보기
+              More
             </button>
           );
         })()}

@@ -15,7 +15,7 @@ export async function issueHomeworkBatchAction(
   requests: { keywordId: string; count: number }[]
 ): Promise<ActionResult<{ id: string; problemCount: number }>> {
   const wanted = requests.filter((r) => Number.isFinite(r.count) && r.count > 0);
-  if (wanted.length === 0) return { ok: false, error: "키워드별로 낼 개수를 적으세요." };
+  if (wanted.length === 0) return { ok: false, error: "Enter how many questions to issue per keyword." };
   const { user, supabase } = await requireStudentFeature("homework");
 
   const [{ data: teacherProfile }, { data: keywordRow }] = await Promise.all([
@@ -26,7 +26,7 @@ export async function issueHomeworkBatchAction(
   const subjectsField = keywordRow?.subjects as unknown as { name: string } | { name: string }[] | null | undefined;
   const subjectName = (Array.isArray(subjectsField) ? subjectsField[0]?.name : subjectsField?.name) ?? null;
   const dateLabel = fmtDate(new Date(), { month: "long", day: "numeric" });
-  const label = [dateLabel, subjectName, teacherProfile?.name].filter(Boolean).join(" ") || `${dateLabel} 과제`;
+  const label = [dateLabel, subjectName, teacherProfile?.name].filter(Boolean).join(" ") || `${dateLabel} Homework`;
 
   const { data, error } = await supabase.rpc("issue_homework_batch_v2", {
     p_student_id: studentId, p_label: label,
@@ -60,8 +60,8 @@ export async function gradeHomeworkBatchAction(
 ): Promise<ActionResult> {
   const { user, supabase } = await requireStudentFeature("homework");
   const batch = await loadHomeworkBatch(supabase, batchId);
-  if (!batch) return { ok: false, error: "과제를 찾을 수 없습니다." };
-  if (batch.teacherId !== user.id) return { ok: false, error: "발급한 교사만 채점할 수 있습니다." };
+  if (!batch) return { ok: false, error: "Homework not found." };
+  if (batch.teacherId !== user.id) return { ok: false, error: "Only the teacher who issued this homework can grade it." };
   const overrideByProblem = new Map(overrides.map((o) => [o.problemId, o]));
   const now = new Date().toISOString();
   const nextItems: HomeworkBatchItem[] = batch.items.map((i) => {
@@ -79,7 +79,7 @@ export async function gradeHomeworkBatchAction(
     };
   });
   const { error } = await supabase.from("homework_batches").update({ items: nextItems }).eq("id", batchId);
-  if (error) return { ok: false, error: "채점을 저장하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't save the grading." };
   return { ok: true, value: undefined };
 }
 
@@ -100,6 +100,6 @@ export async function regradeHomeworkItemAction(
 ): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("homework_regrade_item", { p_batch_id: batchId, p_problem_id: problemId, p_grade: grade, p_comment: comment ?? null });
-  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "다시 채점하지 못했습니다." };
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "Couldn't regrade this question." };
   return { ok: true, value: undefined };
 }

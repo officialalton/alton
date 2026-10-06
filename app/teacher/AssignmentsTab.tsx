@@ -16,11 +16,11 @@ import { fmtDate } from "@/lib/format-datetime";
 // 그 세션이 "지난 수업"으로 넘어가는 흐름이 사용자 피드백이었다.
 
 const STATUS_LABEL: Record<string, string> = {
-  requested: "요청됨 — 관리자 확인 대기",
-  processing: "관리자 처리 중",
-  completed: "처리 완료",
-  failed: "처리 실패 — 관리자 재처리 대기",
-  cancelled: "취소됨",
+  requested: "Requested — awaiting admin review",
+  processing: "Being processed by admin",
+  completed: "Completed",
+  failed: "Failed — awaiting admin retry",
+  cancelled: "Cancelled",
 };
 
 function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
@@ -44,7 +44,7 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
   if (existing) {
     return (
       <div className="text-[11px] text-grey-500 mt-1.5">
-        배정 종료 요청: {STATUS_LABEL[existing.status] ?? existing.status}
+        End-of-assignment request: {STATUS_LABEL[existing.status] ?? existing.status}
         {/* 선생님은 자신의 요청을 확정 처리할 수 없다 — 상태 조회만 가능 */}
       </div>
     );
@@ -59,7 +59,7 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
           onClick={() => setOpen(true)}
           className="text-[10.5px] font-medium text-grey-400 underline"
         >
-          배정 종료 요청
+          Request to end assignment
         </button>
       </div>
     );
@@ -70,13 +70,13 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
       <div className="w-full max-w-[280px]">
         <textarea
           className="w-full border border-grey-300 rounded px-2 py-1 text-[12px]"
-          placeholder="종료 요청 사유"
+          placeholder="Reason for ending the assignment"
           value={reason}
           onChange={(e) => setReason(e.target.value)}
         />
         <div className="flex gap-2 mt-1 justify-end">
           <button onClick={() => setOpen(false)} className="text-[11px] text-grey-500">
-            취소
+            Cancel
           </button>
           <button
             disabled={submitting || reason.trim().length === 0}
@@ -93,7 +93,7 @@ function TerminationRequestControl({ a }: { a: TeacherAssignedSubject }) {
             }}
             className="text-[11px] font-bold px-2.5 py-1 rounded bg-ink text-white disabled:opacity-50"
           >
-            요청 제출 (관리자만 확정 가능)
+            Submit request (admin confirms)
           </button>
         </div>
       </div>
@@ -128,9 +128,9 @@ function StudentPlannerPanel({
         onClick={onBack}
         className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
-        ← 뒤로
+        ← Back
       </button>
-      <h1 className="text-[18px] font-extrabold text-ink mt-2">{studentName} 학습 플래너</h1>
+      <h1 className="text-[18px] font-extrabold text-ink mt-2">{studentName} — Study Planner</h1>
       <TeacherPlannerBoard studentId={studentId} />
     </div>
   );
@@ -159,7 +159,7 @@ function StudentRoadmapPanel({
       })
       .catch((e) => {
         if (!cancelled) {
-          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+          setState({ status: "error", message: e instanceof Error ? e.message : "Couldn't load the roadmap." });
         }
       });
     return () => {
@@ -173,13 +173,13 @@ function StudentRoadmapPanel({
         onClick={onBack}
         className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
-        ← 뒤로
+        ← Back
       </button>
-      <h1 className="text-[18px] font-extrabold text-ink mt-2">{studentName} 학생 프로필 · 로드맵</h1>
-      <p className="text-[12.5px] text-grey-500 mt-1">읽기 전용입니다. 수정은 학생·보호자·관리자만 가능합니다.</p>
+      <h1 className="text-[18px] font-extrabold text-ink mt-2">{studentName} — Student Profile & Roadmap</h1>
+      <p className="text-[12.5px] text-grey-500 mt-1">Read-only. Only the student, parent, or admin can edit it.</p>
 
       {state.status === "loading" && (
-        <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>
+        <div className="py-8 text-[13px] text-grey-500">Loading…</div>
       )}
       {state.status === "error" && <div className="py-8 text-[13px] text-red">{state.message}</div>}
       {state.status === "ready" && <RoadmapView data={state.data} readOnly />}
@@ -250,8 +250,8 @@ export default function AssignmentsTab({
         <UnderlineSubTabs
           className="mb-5"
           items={[
-            { id: "active", label: `배정 중 (${current.length})` },
-            { id: "past", label: `배정 종료 (${past.length})` },
+            { id: "active", label: `Active (${current.length})` },
+            { id: "past", label: `Ended (${past.length})` },
           ]}
           activeId={subtab}
           onSelect={setSubtab}
@@ -261,7 +261,7 @@ export default function AssignmentsTab({
       {subtab === "active" ? (
         current.length === 0 ? (
           <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-            현재 배정된 학생이 없습니다.
+            No students assigned to you yet.
           </div>
         ) : (
           current.map((a) => (
@@ -274,11 +274,11 @@ export default function AssignmentsTab({
                   <div className="text-[13.5px] font-bold text-ink">{a.subjectName}</div>
                   <div className="text-[13px] text-grey-600">{a.studentName}</div>
                   <div className="text-[12px] text-grey-500 mt-0.5">
-                    {formatDate(a.effectiveFrom, tz)}부터
+                    Since {formatDate(a.effectiveFrom, tz)}
                   </div>
                 </div>
                 <span className="text-[11px] font-bold px-2 py-1 rounded-full bg-grey-100 text-grey-500">
-                  {a.status === "active" ? "배정중" : "예정"}
+                  {a.status === "active" ? "Active" : "Planned"}
                 </span>
               </div>
               {/* 학생 플래너(오버뷰·보드)·로드맵·커리큘럼 진입 버튼. */}
@@ -287,13 +287,13 @@ export default function AssignmentsTab({
                   onClick={() => setView({ type: "planner", studentId: a.studentId, studentName: a.studentName })}
                   className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
                 >
-                  학습 플래너
+                  Study Planner
                 </button>
                 <button
                   onClick={() => setView({ type: "roadmap", studentId: a.studentId, studentName: a.studentName })}
                   className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
                 >
-                  로드맵
+                  Roadmap
                 </button>
                 {onOpenOperatingCurriculum && (
                   <button
@@ -302,7 +302,7 @@ export default function AssignmentsTab({
                     }
                     className="text-[12px] font-semibold px-3 py-1.5 rounded-full bg-grey-100 text-ink"
                   >
-                    커리큘럼
+                    Curriculum
                   </button>
                 )}
               </div>
@@ -312,7 +312,7 @@ export default function AssignmentsTab({
         )
       ) : past.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          배정 종료 이력이 없습니다.
+          No ended assignments yet.
         </div>
       ) : (
         <div className="space-y-1.5">
@@ -324,7 +324,7 @@ export default function AssignmentsTab({
               <div className="text-[13px] font-bold text-ink">{a.subjectName}</div>
               <div className="text-[12.5px] text-grey-600">{a.studentName}</div>
               <div className="text-[11.5px] text-grey-500 mt-0.5">
-                {formatDate(a.effectiveFrom, tz)} ~ {formatDate(a.effectiveUntil, tz)}
+                {formatDate(a.effectiveFrom, tz)} – {formatDate(a.effectiveUntil, tz)}
               </div>
             </div>
           ))}

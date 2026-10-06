@@ -19,7 +19,7 @@ export default async function TeacherStudentRoadmapPage({
   if (profile?.role !== "teacher" && profile?.role !== "admin") {
     return (
       <div className="max-w-[640px] mx-auto px-6 py-8 text-[13px] text-grey-500">
-        접근 권한이 없습니다.
+        You don&apos;t have permission to view this.
       </div>
     );
   }
@@ -37,12 +37,12 @@ export default async function TeacherStudentRoadmapPage({
           href={backHref}
           className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform inline-block"
         >
-          ← 뒤로
+          ← Back
         </Link>
         <h1 className="text-[18px] font-extrabold text-ink mt-2">
-          {data.studentName} 학생 프로필 · 로드맵
+          {data.studentName} — Student Profile & Roadmap
         </h1>
-        <p className="text-[12.5px] text-grey-500 mt-1">읽기 전용입니다. 수정은 학생·보호자·관리자만 가능합니다.</p>
+        <p className="text-[12.5px] text-grey-500 mt-1">Read-only. Only the student, parent, or admin can edit it.</p>
       </div>
       <RoadmapView data={data} readOnly />
     </div>

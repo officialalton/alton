@@ -20,7 +20,7 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -29,7 +29,7 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
     .single();
 
   if (profile?.role === "admin") return { supabase, user };
-  if (profile?.role !== "teacher") throw new Error("선생님만 사용할 수 있습니다.");
+  if (profile?.role !== "teacher") throw new Error("Only teachers can use this.");
 
   const { data: assignment } = await supabase
     .from("teacher_assignments")
@@ -38,7 +38,7 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
     .eq("teacher_id", user.id)
     .in("status", ["planned", "active"])
     .maybeSingle();
-  if (!assignment) throw new Error("담당 학생의 세션 준비만 조정할 수 있습니다.");
+  if (!assignment) throw new Error("You can only adjust session prep for your assigned students.");
 
   return { supabase, user };
 }
@@ -53,13 +53,13 @@ async function requireOwningTeacherOrAdmin(preparedSelectionId: string) {
     .eq("id", preparedSelectionId)
     .maybeSingle();
   if (error) throw new Error(error.message);
-  if (!selection) throw new Error("존재하지 않는 준비된 선택입니다.");
+  if (!selection) throw new Error("This prepared selection doesn't exist.");
   return requireAssignedTeacherOrAdmin(selection.subject_enrollment_id);
 }
 
 function translateError(error: { code?: string; message: string }): never {
   if (error.code === "23505") {
-    throw new Error("이미 존재하거나 중복된 항목입니다.");
+    throw new Error("This item already exists or is a duplicate.");
   }
   throw new Error(error.message);
 }
@@ -69,7 +69,7 @@ function translateError(error: { code?: string; message: string }): never {
 // 바뀌면서 필요해짐 — 이 파일의 다른 함수들은 이번 수정 범위 밖이라 여전히
 // translateError()를 그대로 쓴다).
 function translateErrorMessage(error: { code?: string; message: string }): string {
-  if (error.code === "23505") return "이미 존재하거나 중복된 항목입니다.";
+  if (error.code === "23505") return "This item already exists or is a duplicate.";
   return error.message;
 }
 
@@ -168,7 +168,7 @@ export async function setSelectionActiveKeywords(
   try {
     ({ supabase } = await requireOwningTeacherOrAdmin(preparedSelectionId));
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "권한을 확인할 수 없습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "Couldn't verify permission." };
   }
 
   const { error: deleteError } = await supabase
@@ -291,7 +291,7 @@ export async function attachSelectionToSession(
     .eq("id", preparedSelectionId);
   if (error) {
     if (error.code === "23505") {
-      throw new Error("이 세션에는 이미 다른 준비된 선택이 붙어 있습니다.");
+      throw new Error("A different prepared selection is already attached to this session.");
     }
     throw new Error(error.message);
   }

@@ -19,7 +19,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
   const current = items[index];
 
   if (items.length === 0) {
-    return <p className="text-[13px] text-grey-500">이 세트에는 문항이 없습니다.</p>;
+    return <p className="text-[13px] text-grey-500">This set has no questions yet.</p>;
   }
 
   return (
@@ -62,21 +62,21 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
                   >
                     <span>{OPTION_LETTERS[i] ?? i + 1}.</span>
                     <LearningText text={opt} />
-                    {isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-green">정답</span>}
+                    {isCorrect && <span className="ml-auto shrink-0 text-[11px] font-bold text-green">Answer</span>}
                   </div>
                 );
               })}
             </div>
           ) : (
             <p className="text-[13px]">
-              <span className="font-bold text-grey-500">정답: </span>
-              {current.answers?.join(" 또는 ") ?? "-"}
+              <span className="font-bold text-grey-500">Answer: </span>
+              {current.answers?.join(" or ") ?? "-"}
             </p>
           )}
 
           {current.explanation && (
             <div className="mt-3 rounded-lg bg-grey-50 p-3 text-[12.5px] leading-relaxed">
-              <p className="mb-1 text-[11px] font-extrabold uppercase tracking-wide text-grey-400">해설</p>
+              <p className="mb-1 text-[11px] font-extrabold uppercase tracking-wide text-grey-400">Explanation</p>
               <LearningText text={current.explanation} />
             </div>
           )}
@@ -88,7 +88,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
               onClick={() => setIndex((i) => Math.max(0, i - 1))}
               className="rounded-lg border border-grey-300 px-3 py-1.5 text-[12px] font-bold disabled:opacity-40"
             >
-              이전
+              Previous
             </button>
             <span className="text-[12px] text-grey-500">
               {index + 1} / {items.length}
@@ -99,7 +99,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
               onClick={() => setIndex((i) => Math.min(items.length - 1, i + 1))}
               className="rounded-lg border border-grey-300 px-3 py-1.5 text-[12px] font-bold disabled:opacity-40"
             >
-              다음
+              Next
             </button>
           </div>
         </div>

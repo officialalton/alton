@@ -53,7 +53,7 @@ describe("담당 학생 인가", () => {
   it("담당이 아닌 선생님이 호출하면 거부한다", async () => {
     state.assignment = null;
     await expect(excludeUnit("enr1", "unit1")).rejects.toThrow(
-      "담당 학생의 커리큘럼만 조정할 수 있습니다."
+      "You can only adjust curricula for your assigned students."
     );
   });
 
@@ -64,7 +64,7 @@ describe("담당 학생 인가", () => {
   it("loadStudentCurriculumPanelData — 담당이 아닌 선생님이 호출하면 거부한다(다른 학생 데이터 미노출)", async () => {
     state.assignment = null;
     await expect(loadStudentCurriculumPanelData("enr-not-mine", "sub1")).rejects.toThrow(
-      "담당 학생의 커리큘럼만 조정할 수 있습니다."
+      "You can only adjust curricula for your assigned students."
     );
   });
 
@@ -92,7 +92,7 @@ describe("ensureActiveOverlay — corrective 1: 단일 RPC로 생성+베이스�
     mockSupabase.rpc.mockClear();
     await expect(ensureActiveOverlay("enr-not-mine")).resolves.toEqual({
       ok: false,
-      error: "담당 학생의 커리큘럼만 조정할 수 있습니다.",
+      error: "You can only adjust curricula for your assigned students.",
     });
     expect(mockSupabase.rpc).not.toHaveBeenCalled();
   });

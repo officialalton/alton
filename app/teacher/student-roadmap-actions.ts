@@ -12,7 +12,7 @@ import type { RoadmapData } from "@/lib/roadmap/types";
 export async function loadTeacherStudentRoadmapAction(studentId: string): Promise<RoadmapData> {
   const { supabase, profile } = await requireUser();
   if (profile?.role !== "teacher" && profile?.role !== "admin") {
-    throw new Error("접근 권한이 없습니다.");
+    throw new Error("You don't have permission to view this.");
   }
   return loadRoadmapData(supabase, studentId);
 }

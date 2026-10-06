@@ -62,27 +62,27 @@ export default function VocabQuizIssueForm({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5">
-      <p className="text-[13px] font-bold text-ink mb-3">즉석 단어 시험 발급(선택지는 영어입니다)</p>
+      <p className="text-[13px] font-bold text-ink mb-3">Issue a vocabulary quiz (answer choices are in English)</p>
 
       {!fixedStudentId && (
         <div className="mb-3">
-          <p className="text-[12px] font-bold text-grey-500 mb-1.5">학생 선택</p>
+          <p className="text-[12px] font-bold text-grey-500 mb-1.5">Select students</p>
           <div className="flex flex-wrap gap-2">
             {students.map((s) => (
               <label key={s.id} className="text-[12.5px] flex items-center gap-1.5">
                 <input type="checkbox" checked={selectedStudents.has(s.id)} onChange={() => toggle(selectedStudents, setSelectedStudents, s.id)} /> {s.name}
               </label>
             ))}
-            {students.length === 0 && <p className="text-[12px] text-grey-400">담당 학생이 없습니다.</p>}
+            {students.length === 0 && <p className="text-[12px] text-grey-400">No students assigned to you yet.</p>}
           </div>
         </div>
       )}
 
       <div className="mb-3">
-        <p className="text-[12px] font-bold text-grey-500 mb-1.5">학생 개인 단어장</p>
+        <p className="text-[12px] font-bold text-grey-500 mb-1.5">Student&apos;s personal word list</p>
         <div className="flex flex-wrap gap-2">
           <label className="text-[12.5px] flex items-center gap-1.5">
-            <input type="checkbox" checked={customWords} onChange={() => setCustomWords((v) => !v)} /> 내 단어장 전체(학생별로 각자의 단어장에서 낸다)
+            <input type="checkbox" checked={customWords} onChange={() => setCustomWords((v) => !v)} /> Entire personal word list (each student is quizzed from their own list)
           </label>
           {/* 폴더별 세분화는 학생이 하나로 고정된 화면(수업 화면)에서만 의미가 있다 — 여러 학생을
               한꺼번에 고르는 교사 포털에서는 폴더 목록 자체를 안 받는다(fixedStudentId 없음). */}
@@ -95,7 +95,7 @@ export default function VocabQuizIssueForm({
       </div>
 
       <div className="mb-3">
-        <p className="text-[12px] font-bold text-grey-500 mb-1.5">ALTON SAT 공용 단어장(권)</p>
+        <p className="text-[12px] font-bold text-grey-500 mb-1.5">ALTON SAT shared word books</p>
         <div className="flex flex-wrap gap-2">
           {books.map((b) => (
             <label key={b.id} className="text-[12.5px] flex items-center gap-1.5">
@@ -108,11 +108,11 @@ export default function VocabQuizIssueForm({
       {bookIds.size > 0 && (
         <div className="flex flex-wrap gap-4 mb-3">
           <label className="text-[12.5px] flex items-center gap-2">
-            난이도
+            Difficulty
             <select value={difficultyMin} onChange={(e) => setDifficultyMin(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-1.5 py-1">
               {[1, 2, 3, 4, 5].map((d) => <option key={d} value={d}>{d}</option>)}
             </select>
-            ~
+            to
             <select value={difficultyMax} onChange={(e) => setDifficultyMax(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-1.5 py-1">
               {[1, 2, 3, 4, 5].map((d) => <option key={d} value={d}>{d}</option>)}
             </select>
@@ -121,11 +121,11 @@ export default function VocabQuizIssueForm({
       )}
       <div className="flex flex-wrap gap-4 mb-3">
         <label className="text-[12.5px] flex items-center gap-2">
-          문항 수
+          Number of questions
           <input type="number" min={1} max={50} value={count} onChange={(e) => setCount(Number(e.target.value) || 10)} className="w-16 border-[1.5px] border-grey-200 rounded-lg px-2 py-1" />
         </label>
         <label className="text-[12.5px] flex items-center gap-2">
-          마감(선택)
+          Due date (optional)
           <input type="datetime-local" value={dueAt} onChange={(e) => setDueAt(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1" />
         </label>
       </div>
@@ -134,7 +134,7 @@ export default function VocabQuizIssueForm({
         <div className="mb-3 space-y-1">
           {results.map((r) => (
             <p key={r.studentId} className={"text-[12px] " + (r.ok ? "text-green" : "text-red")}>
-              {nameOf(r.studentId)} — {r.ok ? "발급 완료" : r.error}
+              {nameOf(r.studentId)} — {r.ok ? "Issued" : r.error}
             </p>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function VocabQuizIssueForm({
         onClick={() => void issue()}
         className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-40"
       >
-        {busy ? "발급 중…" : "시험 발급"}
+        {busy ? "Issuing…" : "Issue quiz"}
       </button>
     </div>
   );

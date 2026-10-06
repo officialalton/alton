@@ -25,7 +25,7 @@ export default async function TeacherSessionPrepPage({
     return (
       <div className="min-h-screen flex items-center justify-center px-5">
         <p className="text-[14px] text-grey-500">
-          이 수업의 준비 화면을 열 권한이 없거나, 수업을 찾을 수 없습니다.
+          You don&apos;t have permission to open prep for this lesson, or the lesson couldn&apos;t be found.
         </p>
       </div>
     );

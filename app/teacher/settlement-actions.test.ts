@@ -132,7 +132,7 @@ describe("saveMyPayoutAccountAction", () => {
 
   it("필수값이 비었거나 계좌번호가 짧으면 저장하지 않는다", async () => {
     const noHolder = await saveMyPayoutAccountAction({ ...VALID_INPUT, accountHolderName: "  " });
-    expect(noHolder).toEqual({ status: "invalid", message: "예금주를 입력해주세요." });
+    expect(noHolder).toEqual({ status: "invalid", message: "Please enter the account holder name." });
 
     const shortNumber = await saveMyPayoutAccountAction({ ...VALID_INPUT, accountNumber: "12" });
     expect(shortNumber.status).toBe("invalid");
@@ -149,7 +149,7 @@ describe("saveMyPayoutAccountAction", () => {
 
     expect(result).toEqual({
       status: "invalid",
-      message: "송금이 진행 중인 정산 건이 있어 지금은 계좌를 변경할 수 없습니다. 지급 완료 후 변경해주세요.",
+      message: "A transfer is currently in progress, so the account can't be changed right now. Please try again after the payout is complete.",
     });
     expect(calls).toEqual([]);
   });
@@ -161,7 +161,7 @@ describe("saveMyPayoutAccountAction", () => {
         from: () => ({ select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { role: "parent" }, error: null }) }) }) }),
       },
     });
-    await expect(saveMyPayoutAccountAction(VALID_INPUT)).rejects.toThrow("선생님 계정만");
+    await expect(saveMyPayoutAccountAction(VALID_INPUT)).rejects.toThrow("Only teacher accounts");
     expect(calls).toEqual([]);
   });
 });

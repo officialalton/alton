@@ -36,16 +36,16 @@ describe("학생 회차 수업 준비 화면", () => {
       <UnitPreviewView preview={makePreview()} subjectName="SAT Reading" studentName={null} backHref="/student" />
     );
     expect(screen.getByText("Speaking")).toBeInTheDocument();
-    expect(screen.getByText("수업 전")).toBeInTheDocument();
+    expect(screen.getByText("Before lesson")).toBeInTheDocument();
     expect(screen.getByText("말하기 유형을 구분한다")).toBeInTheDocument();
     expect(screen.getByText("본문입니다")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "문제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Problems" }));
     expect(screen.getByText("지문 A")).toBeInTheDocument();
     expect(screen.getByText("가")).toBeInTheDocument();
-    expect(screen.queryByText("정답")).not.toBeInTheDocument();
+    expect(screen.queryByText("Answer")).not.toBeInTheDocument();
     expect(screen.queryByText(/풀이판/)).not.toBeInTheDocument();
-    expect(screen.getByText(/풀이와 제출은 수업에서 합니다/)).toBeInTheDocument();
+    expect(screen.getByText(/Solving and submitting happen in the lesson/)).toBeInTheDocument();
   });
 
   it("예약된 수업이 있으면 그 수업으로 가는 길을 함께 보여준다", () => {
@@ -57,7 +57,7 @@ describe("학생 회차 수업 준비 화면", () => {
         backHref="/student"
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "예약된 수업 →" }));
+    fireEvent.click(screen.getByRole("button", { name: "Scheduled lesson →" }));
     expect(push).toHaveBeenCalledWith("/session/s9");
   });
 
@@ -70,7 +70,7 @@ describe("학생 회차 수업 준비 화면", () => {
         backHref="/parent"
       />
     );
-    expect(screen.getByText("지훈 학생 · SAT Reading")).toBeInTheDocument();
+    expect(screen.getByText("지훈 / SAT Reading")).toBeInTheDocument();
   });
 
   it("아직 담긴 것이 없으면 빈 상태를 말한다", () => {
@@ -83,7 +83,7 @@ describe("학생 회차 수업 준비 화면", () => {
         initialTab="problems"
       />
     );
-    expect(screen.getByText("아직 준비된 문제가 없습니다")).toBeInTheDocument();
+    expect(screen.getByText("No problems yet")).toBeInTheDocument();
   });
 });
 
@@ -102,9 +102,9 @@ describe("파일 자료", () => {
         backHref="/student"
       />
     );
-    const pdfLink = screen.getByRole("link", { name: /PDF · 2쪽 · 열기/ });
+    const pdfLink = screen.getByRole("link", { name: /PDF \(2 pages\) \/ Open/ });
     expect(pdfLink).toHaveAttribute("href", "/materials/d-pdf");
-    expect(screen.getByRole("link", { name: /영상 · 열기/ })).toHaveAttribute("href", "/materials/d-vid");
-    expect(screen.queryByText("내용이 없는 교재입니다.")).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Video \/ Open/ })).toHaveAttribute("href", "/materials/d-vid");
+    expect(screen.queryByText("This material has no content.")).not.toBeInTheDocument();
   });
 });

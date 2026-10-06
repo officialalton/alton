@@ -101,7 +101,7 @@ describe("담당 학생 인가 — 준비된 선택 최상위 액션", () => {
   it("담당이 아닌 선생님은 준비된 선택을 만들 수 없다", async () => {
     state.assignment = null;
     await expect(createPreparedSelection("enr1")).rejects.toThrow(
-      "담당 학생의 세션 준비만 조정할 수 있습니다."
+      "You can only adjust session prep for your assigned students."
     );
   });
 
@@ -117,7 +117,7 @@ describe("담당 학생 인가 — 준비된 선택 하위 테이블 액션(prep
     state.selectionRow = { subject_enrollment_id: "enr1" };
     state.assignment = null;
     await expect(addUnitToSelection("sel1", "overlay-unit-1")).rejects.toThrow(
-      "담당 학생의 세션 준비만 조정할 수 있습니다."
+      "You can only adjust session prep for your assigned students."
     );
   });
 

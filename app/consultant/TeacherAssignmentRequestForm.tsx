@@ -40,12 +40,12 @@ export default function TeacherAssignmentRequestForm({
   const [sent, setSent] = useState(false);
 
   if (sent) {
-    return <p className="text-[12.5px] text-green bg-green/5 rounded-lg px-3 py-2">배정 요청을 보냈습니다 — 선생님의 수락을 기다리는 중입니다.</p>;
+    return <p className="text-[12.5px] text-green bg-green/5 rounded-lg px-3 py-2">Assignment request sent — waiting for the teacher to accept.</p>;
   }
 
   return (
     <div className="mb-3 border border-grey-200 rounded-lg p-3" data-testid="teacher-assignment-request-form">
-      <div className="text-[11.5px] font-bold text-grey-500 mb-1.5">선생님 배정 요청</div>
+      <div className="text-[11.5px] font-bold text-grey-500 mb-1.5">Teacher Assignment Request</div>
       {error && <p className="text-[12px] text-red mb-2">{error}</p>}
       {!subjectId ? (
         <div className="flex flex-wrap gap-1.5">
@@ -62,7 +62,7 @@ export default function TeacherAssignmentRequestForm({
       ) : !teacherId ? (
         <div>
           <div className="text-[11px] text-grey-500 mb-1.5">
-            {subjects.find((s) => s.subjectId === subjectId)?.subjectName ?? subjectId} — 선생님 선택
+            {subjects.find((s) => s.subjectId === subjectId)?.subjectName ?? subjectId} — Select a teacher
           </div>
           <div className="flex flex-wrap gap-1.5">
             {(teacherCandidatesBySubject[subjectId] ?? []).map((t) => (
@@ -75,51 +75,51 @@ export default function TeacherAssignmentRequestForm({
               </button>
             ))}
             {(teacherCandidatesBySubject[subjectId] ?? []).length === 0 && (
-              <p className="text-[11.5px] text-grey-400">이 과목을 가르칠 수 있는 선생님이 없습니다.</p>
+              <p className="text-[11.5px] text-grey-400">No teachers available for this subject.</p>
             )}
           </div>
           <button className="text-[11px] text-grey-500 underline mt-1.5" onClick={() => setSubjectId(null)}>
-            다른 과목 선택
+            Choose another subject
           </button>
         </div>
       ) : (
         <div className="space-y-1.5">
           <div className="text-[12px] font-bold text-ink">
             {subjects.find((s) => s.subjectId === subjectId)?.subjectName} ·{" "}
-            {teacherCandidatesBySubject[subjectId]?.find((t) => t.id === teacherId)?.name} 선생님에게 요청
+            {teacherCandidatesBySubject[subjectId]?.find((t) => t.id === teacherId)?.name} — Send request
           </div>
           <input
             value={grade}
             onChange={(e) => setGrade(e.target.value)}
-            placeholder="학년"
+            placeholder="Grade"
             className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
           />
           <input
             value={currentScore}
             onChange={(e) => setCurrentScore(e.target.value)}
-            placeholder="현재 성적(선택)"
+            placeholder="Current score (optional)"
             className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
           />
           <input
             value={goal}
             onChange={(e) => setGoal(e.target.value)}
-            placeholder="목표(선택)"
+            placeholder="Goal (optional)"
             className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
           />
           <label className="flex items-center gap-1.5 text-[12px]">
             <input type="checkbox" checked={isNewStudent} onChange={(e) => setIsNewStudent(e.target.checked)} />
-            신규 학생
+            New student
           </label>
           <input
             value={preferredSchedule}
             onChange={(e) => setPreferredSchedule(e.target.value)}
-            placeholder="희망 일정(선택)"
+            placeholder="Preferred schedule (optional)"
             className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
           />
           <textarea
             value={requestNote}
             onChange={(e) => setRequestNote(e.target.value)}
-            placeholder="요청 내용(선택)"
+            placeholder="Notes (optional)"
             className="w-full border border-grey-200 rounded px-2 py-1.5 text-[12px]"
           />
           <div className="flex gap-2">
@@ -146,16 +146,16 @@ export default function TeacherAssignmentRequestForm({
                   setSent(true);
                   onSent?.();
                 } catch (e) {
-                  setError(e instanceof Error ? e.message : "요청을 보내지 못했습니다.");
+                  setError(e instanceof Error ? e.message : "Couldn't send the request.");
                 } finally {
                   setBusy(false);
                 }
               }}
             >
-              {busy ? "보내는 중..." : "요청 보내기"}
+              {busy ? "Sending..." : "Send request"}
             </button>
             <button className="text-[12px] font-semibold text-grey-500" disabled={busy} onClick={() => setTeacherId(null)}>
-              다른 선생님 선택
+              Choose another teacher
             </button>
           </div>
         </div>

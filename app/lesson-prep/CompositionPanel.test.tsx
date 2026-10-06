@@ -78,8 +78,8 @@ describe("수업 준비 구성 패널", () => {
 
   it("자동으로 들어온 교재와 직접 담은 교재를 구분해 보여준다", () => {
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
-    expect(screen.getByText("키워드에서 자동")).toBeInTheDocument();
-    expect(screen.getByText("직접 담음")).toBeInTheDocument();
+    expect(screen.getByText("Auto from keyword")).toBeInTheDocument();
+    expect(screen.getByText("Added manually")).toBeInTheDocument();
   });
 
   it("붙은 키워드와 붙지 않은 키워드를 구분한다", () => {
@@ -106,7 +106,7 @@ describe("수업 준비 구성 패널", () => {
     vi.mocked(actions.removeMaterial).mockResolvedValue({ ok: true });
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
 
-    fireEvent.click(screen.getAllByText("빼기")[0]);
+    fireEvent.click(screen.getAllByText("Remove")[0]);
     await waitFor(() =>
       expect(actions.removeMaterial).toHaveBeenCalledWith("teacher", "u1", "d1")
     );
@@ -116,12 +116,12 @@ describe("수업 준비 구성 패널", () => {
   it("실패하면 사유를 보여주고 목록을 바꾸지 않는다", async () => {
     vi.mocked(actions.removeMaterial).mockResolvedValue({
       ok: false,
-      error: "교재를 빼지 못했습니다.",
+      error: "Couldn't remove the material.",
     });
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
 
-    fireEvent.click(screen.getAllByText("빼기")[0]);
-    await waitFor(() => expect(screen.getByText("교재를 빼지 못했습니다.")).toBeInTheDocument());
+    fireEvent.click(screen.getAllByText("Remove")[0]);
+    await waitFor(() => expect(screen.getByText("Couldn't remove the material.")).toBeInTheDocument());
     expect(screen.getByText("자동 교재")).toBeInTheDocument();
   });
 
@@ -136,9 +136,9 @@ describe("수업 준비 구성 패널", () => {
         problems={[]}
       />
     );
-    fireEvent.click(screen.getByText("직접 담기"));
-    expect(screen.getByText("담김")).toBeInTheDocument();
-    expect(screen.getByText("담기")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Add manually"));
+    expect(screen.getByText("Added")).toBeInTheDocument();
+    expect(screen.getByText("Add")).toBeInTheDocument();
   });
 
   it("담긴 교재가 없으면 빈 상태를 말해준다", () => {
@@ -146,7 +146,7 @@ describe("수업 준비 구성 패널", () => {
       <CompositionPanel composition={makeComposition({ materials: [] })} pickable={[]} problems={[]} />
     );
     expect(
-      screen.getByText("아직 담긴 교재가 없습니다. 키워드를 붙이거나 직접 담아 주세요.")
+      screen.getByText("No materials added yet. Attach a keyword or add materials manually.")
     ).toBeInTheDocument();
   });
 
@@ -166,7 +166,7 @@ describe("수업 준비 구성 패널", () => {
     expect(screen.getByText("지문 첫 줄…")).toBeInTheDocument();
     expect(screen.getByText("medium")).toBeInTheDocument();
     // 2026-09-13 지시 3번: 세 계층 모두 여기서 담고 뺀다 — 미리보기 전용이 아니다.
-    expect(screen.getAllByText("담기").length).toBe(2);
+    expect(screen.getAllByText("Add").length).toBe(2);
   });
 
   // 2026-09-21(UAT 지적) — "문제 한 번에 20개 담기게 하는 버튼 필요". 후보가 20개보다
@@ -184,14 +184,14 @@ describe("수업 준비 구성 패널", () => {
       />
     );
 
-    const bulkButton = screen.getByText("2개 한 번에 담기");
+    const bulkButton = screen.getByText("Add 2 at once");
     fireEvent.click(bulkButton);
 
     await waitFor(() => expect(actions.addProblem).toHaveBeenCalledTimes(2));
     expect(actions.addProblem).toHaveBeenNthCalledWith(1, "teacher", "u1", "p1");
     expect(actions.addProblem).toHaveBeenNthCalledWith(2, "teacher", "u1", "p2");
     // 담긴 뒤에는 후보(더 담기) 목록에서 빠지고 "문제" 구성 목록 쪽으로만 남는다.
-    await waitFor(() => expect(screen.getByText("더 담을 문제가 없습니다.")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("No more problems to add.")).toBeInTheDocument());
   });
 
   // 2026-09-14 UAT: "문제를 클릭하면 문제를 볼 수 있어야 될 거 같아 간략하게라도"
@@ -220,7 +220,7 @@ describe("수업 준비 구성 패널", () => {
     // 다른 문제를 누르면 그쪽으로 옮겨 간다 — 공개 버전이 없으면 이유를 말한다.
     fireEvent.click(screen.getByText("미리보기 없는 문제"));
     expect(screen.queryByText("지문 첫 줄 전체 내용입니다.")).not.toBeInTheDocument();
-    expect(screen.getByText(/미리보기를 보여줄 수 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/no preview is available/)).toBeInTheDocument();
     fireEvent.click(screen.getByText("미리보기 없는 문제"));
     expect(screen.queryByTestId("problem-preview")).not.toBeInTheDocument();
   });
@@ -234,13 +234,13 @@ describe("수업 준비 구성 패널", () => {
       />
     );
     expect(
-      screen.getByText("키워드를 붙이면 해당하는 문제가 여기에 모입니다.")
+      screen.getByText("Attach a keyword and matching problems will appear here.")
     ).toBeInTheDocument();
   });
 
   it("키워드는 있는데 문제가 없으면 다르게 말한다", () => {
     render(<CompositionPanel composition={makeComposition()} pickable={[]} problems={[]} />);
-    expect(screen.getByText("더 담을 문제가 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No more problems to add.")).toBeInTheDocument();
   });
 
   // 지시 1번 — 시작한 수업 안에서 이 패널이 열리면, 보이는 것과 적용 범위가 다르다.

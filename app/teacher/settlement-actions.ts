@@ -70,7 +70,7 @@ async function requireTeacherUser(): Promise<{ userId: string }> {
     .eq("id", user.id)
     .maybeSingle();
   if (error) throw new Error(error.message);
-  if (profile?.role !== "teacher") throw new Error("선생님 계정만 사용할 수 있습니다.");
+  if (profile?.role !== "teacher") throw new Error("Only teacher accounts can use this.");
   return { userId: user.id };
 }
 
@@ -94,7 +94,7 @@ export async function loadSettlementPageDataAction(): Promise<{
   const { user, supabase } = await requireUser();
   const { data: profile, error: profileError } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
   if (profileError) throw new Error(profileError.message);
-  if (profile?.role !== "teacher") throw new Error("선생님 계정만 사용할 수 있습니다.");
+  if (profile?.role !== "teacher") throw new Error("Only teacher accounts can use this.");
 
   const admin = createAdminClient();
   const [settlement, { data: accountRow, error: accountError }, { data: docRows, error: docsError }] = await Promise.all([
@@ -170,13 +170,13 @@ export async function saveMyPayoutAccountAction(
   const bankName = input.bankName.trim();
   const accountNumber = input.accountNumber.trim();
   const currency = (input.currency || "KRW").trim().toUpperCase();
-  if (!accountHolderName) return { status: "invalid", message: "예금주를 입력해주세요." };
-  if (!bankName) return { status: "invalid", message: "은행명을 입력해주세요." };
+  if (!accountHolderName) return { status: "invalid", message: "Please enter the account holder name." };
+  if (!bankName) return { status: "invalid", message: "Please enter the bank name." };
   if (accountNumber.replace(/\D/g, "").length < 4) {
-    return { status: "invalid", message: "계좌번호를 정확히 입력해주세요(숫자 4자리 이상)." };
+    return { status: "invalid", message: "Please enter a valid account number (at least 4 digits)." };
   }
   if (!/^[A-Z]{3}$/.test(currency)) {
-    return { status: "invalid", message: "통화 코드는 3자리 영문이어야 합니다(예: KRW)." };
+    return { status: "invalid", message: "The currency code must be 3 letters (e.g. KRW)." };
   }
 
   const admin = createAdminClient();
@@ -194,7 +194,7 @@ export async function saveMyPayoutAccountAction(
   if (inFlight && inFlight.length > 0) {
     return {
       status: "invalid",
-      message: "송금이 진행 중인 정산 건이 있어 지금은 계좌를 변경할 수 없습니다. 지급 완료 후 변경해주세요.",
+      message: "A transfer is currently in progress, so the account can't be changed right now. Please try again after the payout is complete.",
     };
   }
 
@@ -286,13 +286,13 @@ export async function uploadMyDocumentAction(formData: FormData): Promise<Upload
   const file = formData.get("file");
   const note = (formData.get("note") as string | null)?.trim() || null;
   if (!(file instanceof File) || file.size === 0) {
-    return { status: "invalid", message: "업로드할 파일을 선택해주세요." };
+    return { status: "invalid", message: "Please choose a file to upload." };
   }
   if (file.size > MAX_DOCUMENT_BYTES) {
-    return { status: "invalid", message: "파일 크기는 10MB 이하여야 합니다." };
+    return { status: "invalid", message: "The file must be 10MB or smaller." };
   }
   if (file.type && !ALLOWED_DOCUMENT_TYPES.has(file.type)) {
-    return { status: "invalid", message: "PDF 또는 이미지(PNG/JPG/HEIC) 파일만 업로드할 수 있습니다." };
+    return { status: "invalid", message: "Only PDF or image files (PNG/JPG/HEIC) can be uploaded." };
   }
 
   const admin = createAdminClient();
@@ -344,12 +344,12 @@ export async function getMyDocumentDownloadUrlAction(documentId: string): Promis
     .eq("id", documentId)
     .maybeSingle();
   if (error) throw new Error(error.message);
-  if (!data || data.teacher_id !== userId) throw new Error("본인이 업로드한 서류만 내려받을 수 있습니다.");
+  if (!data || data.teacher_id !== userId) throw new Error("You can only download documents you uploaded.");
 
   const { data: signed, error: signError } = await admin.storage
     .from("teacher-documents")
     .createSignedUrl(data.storage_path as string, 60);
-  if (signError || !signed?.signedUrl) throw new Error(signError?.message ?? "다운로드 링크를 만들지 못했습니다.");
+  if (signError || !signed?.signedUrl) throw new Error(signError?.message ?? "Couldn't create a download link.");
   return signed.signedUrl;
 }
 
@@ -365,7 +365,7 @@ export async function deleteMyDocumentAction(documentId: string): Promise<void> 
     .maybeSingle();
   if (error) throw new Error(error.message);
   if (!data || data.teacher_id !== userId) {
-    throw new Error("본인이 업로드한 서류만 삭제할 수 있습니다.");
+    throw new Error("You can only delete documents you uploaded.");
   }
 
   const { error: removeError } = await admin.storage

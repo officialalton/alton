@@ -64,8 +64,8 @@ export async function respondTeacherAssignmentRequestAction(
     await postTeacherAssignmentResultSystemMessage({
       consultantId: row.consultantId,
       body: accept
-        ? `선생님이 "${row.studentName}" 학생(${row.subjectId}) 배정 요청을 수락했습니다.`
-        : `선생님이 "${row.studentName}" 학생(${row.subjectId}) 배정 요청을 거절했습니다.${rejectReason ? ` 사유: ${rejectReason}` : ""}`,
+        ? `The teacher accepted the assignment request for student "${row.studentName}" (${row.subjectId}).`
+        : `The teacher declined the assignment request for student "${row.studentName}" (${row.subjectId}).${rejectReason ? ` Reason: ${rejectReason}` : ""}`,
     });
   } catch (e) {
     console.error("teacher_assignment_request 결과 시스템 메시지 실패:", e);

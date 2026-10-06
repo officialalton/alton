@@ -72,8 +72,8 @@ export default async function LessonPrepPage({
   if (!allowed) {
     return (
       <div className="max-w-[720px] px-8 py-16">
-        <h1 className="text-[18px] font-extrabold text-ink mb-2">수업 준비</h1>
-        <p className="text-[13px] text-grey-500">이 회차를 열 권한이 없습니다.</p>
+        <h1 className="text-[18px] font-extrabold text-ink mb-2">Lesson Prep</h1>
+        <p className="text-[13px] text-grey-500">You don&apos;t have permission to open this session.</p>
       </div>
     );
   }
@@ -144,7 +144,7 @@ export default async function LessonPrepPage({
           href={BACK_HREF[layer]}
           className="inline-block text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
         >
-          ← 뒤로
+          ← Back
         </Link>
       </div>
       <ViewerTimezoneProvider timezone={viewerTimezone}>
@@ -154,7 +154,7 @@ export default async function LessonPrepPage({
         problems={problems}
         scopeNotice={
           fromSessionId
-            ? "예약된 수업에서 들어왔습니다. 여기서 고치는 것이 그 수업의 준비안이며, 아래에서 수업을 시작할 때 지금 내용이 고정됩니다."
+            ? "You came here from a scheduled lesson. What you edit here is the prep for that lesson, and the content is locked when the lesson starts."
             : null
         }
       />

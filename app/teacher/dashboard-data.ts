@@ -183,7 +183,7 @@ export async function loadTeacherDashboard(
   );
 
   return {
-    teacherName: profile?.name ?? "선생님",
+    teacherName: profile?.name ?? "Teacher",
     status: teacherRow?.status ?? "pending",
     upcoming,
     past,

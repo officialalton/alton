@@ -114,7 +114,7 @@ describe("StudentCurriculumPanel — 2026-09-18 회차 카드 배지·추가 학
         library={library}
       />
     );
-    expect(screen.getAllByText("다음 수업에 추가 학습 회차 넣기")).toHaveLength(1);
+    expect(screen.getAllByText("Insert additional study session before next lesson")).toHaveLength(1);
   });
 
   it("'목표 미작성'·'수업 N개에 연결됨' 배지를 더는 쓰지 않는다", () => {
@@ -152,12 +152,12 @@ describe("StudentCurriculumPanel — 2026-09-18 회차 카드 배지·추가 학
         library={library}
       />
     );
-    fireEvent.click(screen.getByText("다음 수업에 추가 학습 회차 넣기"));
+    fireEvent.click(screen.getByText("Insert additional study session before next lesson"));
     await waitFor(() =>
       expect(actions.previewAdditionalStudyUnitInsert).toHaveBeenCalledWith("se1", "u2")
     );
-    await waitFor(() => expect(screen.getByText(/새 회차: 추가 학습 · Math 1/)).toBeInTheDocument());
-    expect(screen.getByText(/영향받지 않는 시작·완료 수업 1개/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/New session: 추가 학습 · Math 1/)).toBeInTheDocument());
+    expect(screen.getByText(/Started\/completed lessons unaffected: 1/)).toBeInTheDocument();
   });
 
   it("확정하면 insertAdditionalStudyUnit을 한 번만 호출하고 목록을 새로고침한다", async () => {
@@ -181,9 +181,9 @@ describe("StudentCurriculumPanel — 2026-09-18 회차 카드 배지·추가 학
         library={library}
       />
     );
-    fireEvent.click(screen.getByText("다음 수업에 추가 학습 회차 넣기"));
-    await waitFor(() => expect(screen.getByText("추가 학습 회차 넣기")).toBeInTheDocument());
-    fireEvent.click(screen.getByText("추가 학습 회차 넣기"));
+    fireEvent.click(screen.getByText("Insert additional study session before next lesson"));
+    await waitFor(() => expect(screen.getByText("Insert additional study session")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("Insert additional study session"));
 
     await waitFor(() => expect(actions.insertAdditionalStudyUnit).toHaveBeenCalledTimes(1));
     expect(actions.insertAdditionalStudyUnit).toHaveBeenCalledWith("se1", "u2");
@@ -199,8 +199,8 @@ describe("StudentCurriculumPanel — 2026-09-18 회차 카드 배지·추가 학
         library={library}
       />
     );
-    expect(screen.getByText("교재·문제 변경 있음")).toBeInTheDocument();
-    expect(screen.getByText("변경 내용 보기")).toBeInTheDocument();
+    expect(screen.getByText("Materials/problems updated")).toBeInTheDocument();
+    expect(screen.getByText("View changes")).toBeInTheDocument();
     expect(screen.queryByText("기준본 업데이트 있음")).not.toBeInTheDocument();
     expect(screen.queryByText("변경 확인")).not.toBeInTheDocument();
   });

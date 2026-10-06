@@ -24,7 +24,7 @@ describe("MobileBottomNav", () => {
     render(<MobileBottomNav primary={primary} more={more} activeId="home" onSelect={onSelect} />);
     expect(screen.queryByText("단어장")).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("더보기"));
+    fireEvent.click(screen.getByText("More"));
     expect(screen.getByText("단어장")).toBeInTheDocument();
     expect(screen.getByText("통계")).toBeInTheDocument();
 
@@ -35,6 +35,6 @@ describe("MobileBottomNav", () => {
 
   it("more가 비어있으면 '더보기' 버튼을 보여주지 않는다", () => {
     render(<MobileBottomNav primary={primary} more={[]} activeId="home" onSelect={vi.fn()} />);
-    expect(screen.queryByText("더보기")).not.toBeInTheDocument();
+    expect(screen.queryByText("More")).not.toBeInTheDocument();
   });
 });

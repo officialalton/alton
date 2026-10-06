@@ -28,32 +28,32 @@ describe("StaffStudentViews", () => {
     access.current = { role: "admin", actions: [], tabs: ALL, audit: true };
     render(<StaffStudentViews studentId="s1" />);
     await waitFor(() => expect(recordStaffStudentViewAction).toHaveBeenCalledWith("s1", "overview"));
-    fireEvent.click(await screen.findByRole("tab", { name: "보드" }));
+    fireEvent.click(await screen.findByRole("tab", { name: "Board" }));
     await screen.findByText("수동 할 일");
-    expect(screen.queryByRole("button", { name: /삭제|이동|완료|추가/ })).toBeNull();
+    expect(screen.queryByRole("button", { name: /Delete|Move|Done|Add/ })).toBeNull();
     expect(recordStaffStudentViewAction).toHaveBeenCalledWith("s1", "board");
-    fireEvent.click(screen.getByRole("tab", { name: "통계" }));
+    fireEvent.click(screen.getByRole("tab", { name: "Stats" }));
     await screen.findByText("수업 참여율");
   });
 
   it("선생님: 할 일 추가 폼만(이동·삭제 없음), 통계 탭 없음", async () => {
     access.current = { role: "teacher", actions: ["create"], tabs: ["overview", "board"], audit: true };
     render(<StaffStudentViews studentId="s1" />);
-    fireEvent.click(await screen.findByRole("tab", { name: "보드" }));
-    expect(screen.queryByRole("tab", { name: "통계" })).toBeNull();
-    fireEvent.change(screen.getByPlaceholderText("+ 할 일 추가"), { target: { value: "새 할 일" } });
-    fireEvent.click(screen.getByRole("button", { name: "추가" }));
+    fireEvent.click(await screen.findByRole("tab", { name: "Board" }));
+    expect(screen.queryByRole("tab", { name: "Stats" })).toBeNull();
+    fireEvent.change(screen.getByPlaceholderText("+ Add a task"), { target: { value: "새 할 일" } });
+    fireEvent.click(screen.getByRole("button", { name: "Add" }));
     await waitFor(() => expect(createStudentViewTaskAction).toHaveBeenCalledWith("s1", "새 할 일"));
-    expect(screen.queryByRole("button", { name: /삭제/ })).toBeNull();
+    expect(screen.queryByRole("button", { name: /Delete/ })).toBeNull();
   });
 
   it("학부모: 읽기 전용, 열람 기록을 남기지 않는다(통계 탭은 학부모 포털 자체 화면)", async () => {
     access.current = { role: "parent", actions: [], tabs: ["overview", "board"], audit: false };
     render(<StaffStudentViews studentId="s1" />);
-    fireEvent.click(await screen.findByRole("tab", { name: "보드" }));
+    fireEvent.click(await screen.findByRole("tab", { name: "Board" }));
     await screen.findByText("수동 할 일");
-    expect(screen.queryByRole("tab", { name: "통계" })).toBeNull();
-    expect(screen.queryByPlaceholderText("+ 할 일 추가")).toBeNull();
+    expect(screen.queryByRole("tab", { name: "Stats" })).toBeNull();
+    expect(screen.queryByPlaceholderText("+ Add a task")).toBeNull();
     expect(recordStaffStudentViewAction).not.toHaveBeenCalled();
   });
 

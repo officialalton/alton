@@ -122,40 +122,40 @@ describe("SettlementTab — 예정액 요약", () => {
     // 같은 금액이 월별 표에도 나오므로 요약 카드(예정)만 콕 집어 확인한다.
     const scheduled = await screen.findAllByText("₩150,000");
     expect(scheduled.length).toBeGreaterThan(0);
-    for (const label of ["검토 중", "송금 승인됨", "지급 완료"]) {
+    for (const label of ["In review", "Transfer approved", "Paid"]) {
       expect(screen.getAllByText(label).length).toBeGreaterThan(0);
     }
     expect(screen.getByText("₩40,000")).toBeInTheDocument();
     expect(screen.getByText("₩80,000")).toBeInTheDocument();
     expect(screen.getByText("₩200,000")).toBeInTheDocument();
     // '확정'이라는 모호한 라벨은 더 이상 쓰지 않는다.
-    expect(screen.queryByText("확정(지급 대기)")).not.toBeInTheDocument();
+    expect(screen.queryByText("Confirmed (awaiting payout)")).not.toBeInTheDocument();
   });
 
   it("매월 10일 전월분 지급 안내와 갱신 시각·변동 안내를 보여준다", async () => {
     render(<SettlementTab />);
-    expect(await screen.findByText(/매월 10일에 전월 수업분을 지급합니다/)).toBeInTheDocument();
+    expect(await screen.findByText(/Lessons are paid on the 10th of the following month/)).toBeInTheDocument();
     // 2026-09-12: "승인 시점에 정해집니다" 문구는 제품 오너 요청으로 제거했다.
-    expect(screen.queryByText(/송금 승인 시점에 정해집니다/)).not.toBeInTheDocument();
-    expect(screen.getByText(/마지막 갱신:/)).toBeInTheDocument();
-    expect(screen.getByText(/확정 전까지 금액이 변동될 수 있습니다/)).toBeInTheDocument();
-    expect(screen.getByText(/공제를 반영하지 않은 총액/)).toBeInTheDocument();
+    expect(screen.queryByText(/is set at the time of transfer approval/)).not.toBeInTheDocument();
+    expect(screen.getByText(/Last updated:/)).toBeInTheDocument();
+    expect(screen.getByText(/Amounts may change until finalized/)).toBeInTheDocument();
+    expect(screen.getByText(/Gross totals before taxes, fees, or other deductions/)).toBeInTheDocument();
   });
 
   it("서브탭 4개로 나뉘어 있고 기본은 정산 현황이다", async () => {
     render(<SettlementTab />);
-    for (const label of ["정산 현황", "정산 내역", "계좌", "서류"]) {
+    for (const label of ["Overview", "Payout History", "Bank Account", "Documents"]) {
       expect(await screen.findByText(label)).toBeInTheDocument();
     }
     // 기본 탭에서는 월별 내역·계좌·서류 카드가 보이지 않는다.
-    expect(screen.queryByText("월별 정산 내역")).not.toBeInTheDocument();
-    expect(screen.queryByText("수취 계좌")).not.toBeInTheDocument();
+    expect(screen.queryByText("Monthly payout history")).not.toBeInTheDocument();
+    expect(screen.queryByText("Payout bank account")).not.toBeInTheDocument();
   });
 
   it("마감 뒤 변동은 승인된 금액을 고치지 않고 다음 정산월 조정으로 간다고 안내한다", async () => {
     render(<SettlementTab />);
     expect(
-      await screen.findByText(/이미 승인된 금액을 고치지 않고 다음 정산월의 조정 항목으로 반영합니다/)
+      await screen.findByText(/the approved amount is not edited; the difference is applied as an adjustment in the next payout month/)
     ).toBeInTheDocument();
   });
 
@@ -166,7 +166,7 @@ describe("SettlementTab — 예정액 요약", () => {
     fireEvent.click(row);
     expect(await screen.findByText("김학생")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
-    expect(screen.getByText("60분")).toBeInTheDocument();
+    expect(screen.getByText("60 min")).toBeInTheDocument();
   });
 
   it("자동 산정 수업 합계·관리자 조정액·최종 금액을 분리해 보여준다", async () => {
@@ -186,8 +186,8 @@ describe("SettlementTab — 예정액 요약", () => {
     fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
 
     const key = "2026-09|KRW|scheduled";
-    expect(await screen.findByTestId(`sched-${key}`)).toHaveTextContent("2026. 10. 10.");
-    expect(screen.getByTestId(`auto-dispatch-${key}`)).toHaveTextContent("대상");
+    expect(await screen.findByTestId(`sched-${key}`)).toHaveTextContent("Oct 10, 2026");
+    expect(screen.getByTestId(`auto-dispatch-${key}`)).toHaveTextContent("Yes");
   });
 
   it("예정일이 아직 정해지지 않았으면 구체적인 날짜를 보여주지 않는다", async () => {
@@ -197,7 +197,7 @@ describe("SettlementTab — 예정액 요약", () => {
     });
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/승인 후 지급 예정일이 정해집니다/)).toBeInTheDocument();
+    expect(await screen.findByText(/The payout date is set after approval/)).toBeInTheDocument();
   });
 
   it("지급 예정일 변경 이력과 은행 직접 송금 사실을 교사도 볼 수 있다", async () => {
@@ -226,7 +226,7 @@ describe("SettlementTab — 예정액 요약", () => {
     fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|paid"));
 
     expect(await screen.findByTestId("date-change-dc1")).toHaveTextContent("은행 점검으로 연기");
-    expect(screen.getByTestId("external-2026-09|KRW|paid")).toHaveTextContent("은행 직접 송금");
+    expect(screen.getByTestId("external-2026-09|KRW|paid")).toHaveTextContent("Direct bank transfer");
   });
 
   it("관리자 조정 내역의 사유와 금액을 교사도 볼 수 있다", async () => {
@@ -244,13 +244,13 @@ describe("SettlementTab — 예정액 요약", () => {
     });
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/검토 완료 후 지급 \(예정일 2026\. 10\. 10\.\)/)).toBeInTheDocument();
+    expect(await screen.findByText(/Paid after review \(scheduled Oct 10, 2026\)/)).toBeInTheDocument();
   });
 
   it("예정 건은 지급 예정일을 그대로 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/지급 예정일 2026\. 10\. 10\./)).toBeInTheDocument();
+    expect(await screen.findByText(/Scheduled payout Oct 10, 2026/)).toBeInTheDocument();
   });
 
   it("정산 내역이 없으면 빈 상태 문구를 보여준다", async () => {
@@ -275,11 +275,11 @@ describe("SettlementTab — 수취 계좌", () => {
     await openSubtab("account");
     expect(await screen.findByTestId("account-empty")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("등록"));
-    fireEvent.change(screen.getByLabelText("예금주"), { target: { value: "김선생" } });
-    fireEvent.change(screen.getByLabelText("은행명"), { target: { value: "국민은행" } });
-    fireEvent.change(screen.getByLabelText("계좌번호"), { target: { value: "110-123-456789" } });
-    fireEvent.click(screen.getByText("저장"));
+    fireEvent.click(screen.getByText("Add account"));
+    fireEvent.change(screen.getByLabelText("Account holder"), { target: { value: "김선생" } });
+    fireEvent.change(screen.getByLabelText("Bank name"), { target: { value: "국민은행" } });
+    fireEvent.change(screen.getByLabelText("Account number"), { target: { value: "110-123-456789" } });
+    fireEvent.click(screen.getByText("Save"));
 
     expect(await screen.findByTestId("account-masked")).toHaveTextContent("****6789");
     // 전체 계좌번호가 화면에 남아 있으면 안 된다.
@@ -287,26 +287,26 @@ describe("SettlementTab — 수취 계좌", () => {
   });
 
   it("서버가 입력을 거부하면 사유를 보여주고 편집 상태를 유지한다", async () => {
-    saveAccountMock.mockResolvedValue({ status: "invalid", message: "예금주를 입력해주세요." });
+    saveAccountMock.mockResolvedValue({ status: "invalid", message: "Please enter the account holder name." });
     render(<SettlementTab />);
     await openSubtab("account");
-    fireEvent.click(await screen.findByText("등록"));
-    fireEvent.click(screen.getByText("저장"));
+    fireEvent.click(await screen.findByText("Add account"));
+    fireEvent.click(screen.getByText("Save"));
 
-    expect(await screen.findByText("예금주를 입력해주세요.")).toBeInTheDocument();
-    expect(screen.getByLabelText("은행명")).toBeInTheDocument();
+    expect(await screen.findByText("Please enter the account holder name.")).toBeInTheDocument();
+    expect(screen.getByLabelText("Bank name")).toBeInTheDocument();
   });
 });
 
   it("통화는 KRW/USD 중에서 고르게 하고 계좌번호 하이픈 안내를 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("account");
-    fireEvent.click(await screen.findByText("등록"));
+    fireEvent.click(await screen.findByText("Add account"));
 
-    const currency = screen.getByLabelText("통화") as HTMLSelectElement;
+    const currency = screen.getByLabelText("Currency") as HTMLSelectElement;
     expect(currency.tagName).toBe("SELECT");
     expect(Array.from(currency.options).map((o) => o.value)).toEqual(["KRW", "USD"]);
-    expect(screen.getByText(/띄어쓰기 없이 하이픈\(-\)을 넣어서 작성/)).toBeInTheDocument();
+    expect(screen.getByText(/Use hyphens \(-\) and no spaces/)).toBeInTheDocument();
   });
 
 describe("SettlementTab — 제출 서류", () => {
@@ -315,17 +315,17 @@ describe("SettlementTab — 제출 서류", () => {
     await openSubtab("documents");
     expect(await screen.findByTestId("documents-empty")).toBeInTheDocument();
     expect(
-      screen.getByText(/제출 여부가 정산·매칭·수업 진행에 영향을 주지 않습니다/)
+      screen.getByText(/does not affect payouts, matching, or lessons/)
     ).toBeInTheDocument();
-    expect(screen.queryByText(/필수 서류/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/미제출/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Required documents/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Not submitted/)).not.toBeInTheDocument();
   });
 
   it("업로드 입력이 버튼으로 보인다(기본 file input을 그대로 노출하지 않는다)", async () => {
     render(<SettlementTab />);
     await openSubtab("documents");
-    expect(await screen.findByTestId("upload-document")).toHaveTextContent("파일 선택해서 올리기");
-    expect(screen.getByLabelText("서류 업로드")).toHaveClass("hidden");
+    expect(await screen.findByTestId("upload-document")).toHaveTextContent("Choose a file to upload");
+    expect(screen.getByLabelText("Upload document")).toHaveClass("hidden");
   });
 
   it("잘못 올린 서류를 삭제할 수 있다", async () => {
@@ -366,7 +366,7 @@ describe("SettlementTab — 제출 서류", () => {
     await openSubtab("documents");
     await screen.findByTestId("documents-empty");
 
-    const input = screen.getByLabelText("서류 업로드");
+    const input = screen.getByLabelText("Upload document");
     fireEvent.change(input, {
       target: { files: [new File(["1"], "계약서.pdf", { type: "application/pdf" })] },
     });

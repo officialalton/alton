@@ -40,10 +40,10 @@ const withoutTemplate: MySubject = {
 describe("MySubjectsTab", () => {
   it("템플릿 유무에 따라 편집/만들기 버튼을 다르게 보여준다", () => {
     render(<MySubjectsTab initialSubjects={[withTemplate, withoutTemplate]} />);
-    expect(screen.getByText("2개 회차 구성")).toBeInTheDocument();
-    expect(screen.getByText("아직 템플릿이 없습니다")).toBeInTheDocument();
-    expect(screen.getByText("편집")).toBeInTheDocument();
-    expect(screen.getByText("템플릿 만들기")).toBeInTheDocument();
+    expect(screen.getByText("2 sessions composed")).toBeInTheDocument();
+    expect(screen.getByText("No template yet")).toBeInTheDocument();
+    expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(screen.getByText("Create template")).toBeInTheDocument();
   });
 
   it("템플릿 만들기를 누르면 생성 후 바로 편집 화면으로 이동한다", async () => {
@@ -52,9 +52,9 @@ describe("MySubjectsTab", () => {
       units: [{ id: "u1", position: 1, unitTitle: "기초 통계", note: null, teacherComment: null, keywordIds: [], linkedToCatalog: true }],
     });
     render(<MySubjectsTab initialSubjects={[withoutTemplate]} />);
-    fireEvent.click(screen.getByText("템플릿 만들기"));
+    fireEvent.click(screen.getByText("Create template"));
     await waitFor(() =>
-      expect(screen.getByText("AP Statistics 커리큘럼 편집")).toBeInTheDocument()
+      expect(screen.getByText("Edit AP Statistics Curriculum")).toBeInTheDocument()
     );
     expect(screen.getByDisplayValue("기초 통계")).toBeInTheDocument();
   });
@@ -71,20 +71,20 @@ describe("MySubjectsTab", () => {
     });
     vi.mocked(actions.removeTemplateUnit).mockResolvedValue(undefined);
     render(<MySubjectsTab initialSubjects={[withTemplate]} />);
-    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("Edit"));
 
-    fireEvent.click(screen.getByText("+ 회차 추가"));
+    fireEvent.click(screen.getByText("+ Add session"));
     await waitFor(() => expect(actions.addTemplateUnit).toHaveBeenCalledWith("tpl1", 8));
     await waitFor(() => expect(screen.getByDisplayValue("새 회차")).toBeInTheDocument());
 
-    fireEvent.click(screen.getAllByText("삭제")[0]);
+    fireEvent.click(screen.getAllByText("Delete")[0]);
     await waitFor(() => expect(actions.removeTemplateUnit).toHaveBeenCalledWith("u1"));
   });
 
   it("맨 위 회차는 위로 이동 버튼이 비활성화된다", () => {
     render(<MySubjectsTab initialSubjects={[withTemplate]} />);
-    fireEvent.click(screen.getByText("편집"));
-    const upButtons = screen.getAllByText("↑ 위로");
+    fireEvent.click(screen.getByText("Edit"));
+    const upButtons = screen.getAllByText("↑ Up");
     expect(upButtons[0]).toBeDisabled();
   });
 });
@@ -104,18 +104,18 @@ describe("MySubjectsTab — 보관된 과목", () => {
   it("현재 목록에는 보관 과목이 섞이지 않는다", () => {
     render(<MySubjectsTab initialSubjects={[archivedSubject]} />);
     expect(screen.queryByText("테스트 과목 1")).not.toBeInTheDocument();
-    expect(screen.getByText("담당 중인 과목이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No subjects assigned yet.")).toBeInTheDocument();
   });
 
   it("보관됨에서 열어 커리큘럼을 계속 볼 수 있다", () => {
     render(<MySubjectsTab initialSubjects={[archivedSubject]} />);
-    fireEvent.click(screen.getByText(/^보관됨/));
+    fireEvent.click(screen.getByText(/^Archived/));
 
     expect(screen.getByText("테스트 과목 1")).toBeInTheDocument();
     // 탭 라벨과 배지가 같은 글자다 — 개수로 확인한다.
-    expect(screen.getAllByText("보관됨").length).toBeGreaterThan(1);
+    expect(screen.getAllByText("Archived").length).toBeGreaterThan(1);
     // 편집 진입이 살아 있어야 한다 — 접근 자체를 막으면 안 된다.
-    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("Edit"));
     expect(screen.getByDisplayValue("회차")).toBeInTheDocument();
   });
 });
@@ -148,7 +148,7 @@ describe("회차 키워드", () => {
 
   function openEditor(subject: MySubject = withKeywords) {
     render(<MySubjectsTab initialSubjects={[subject]} />);
-    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("Edit"));
   }
 
   it("기준본에서 내려온 키워드가 붙은 상태로 보인다", () => {
@@ -188,20 +188,20 @@ describe("회차 키워드", () => {
   it("실패하면 사유를 화면에 보여주고 상태를 바꾸지 않는다", async () => {
     vi.mocked(actions.addTemplateUnitKeyword).mockResolvedValue({
       ok: false,
-      error: "키워드를 붙이지 못했습니다.",
+      error: "Couldn't attach the keyword.",
     });
     openEditor();
 
     fireEvent.click(screen.getByRole("button", { name: "함수" }));
     await waitFor(() =>
-      expect(screen.getByText("키워드를 붙이지 못했습니다.")).toBeInTheDocument()
+      expect(screen.getByText("Couldn't attach the keyword.")).toBeInTheDocument()
     );
     expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "false");
   });
 
   it("기준본과 이어진 회차에는 보정 버튼이 있다", () => {
     openEditor();
-    expect(screen.getByText("기준본에서 가져오기")).toBeInTheDocument();
+    expect(screen.getByText("Import from base")).toBeInTheDocument();
   });
 
   it("직접 추가한 보충 회차에는 보정 버튼이 없다", () => {
@@ -210,9 +210,9 @@ describe("회차 키워드", () => {
       ...withKeywords,
       units: [{ ...withKeywords.units[0], linkedToCatalog: false, keywordIds: [] }],
     });
-    expect(screen.queryByText("기준본에서 가져오기")).not.toBeInTheDocument();
+    expect(screen.queryByText("Import from base")).not.toBeInTheDocument();
     expect(
-      screen.getByText("직접 추가한 회차라 물려받을 기준본이 없습니다. 키워드를 직접 고르세요.")
+      screen.getByText("This session was added manually, so there is no base to inherit from. Pick keywords yourself.")
     ).toBeInTheDocument();
   });
 
@@ -224,9 +224,9 @@ describe("회차 키워드", () => {
     });
     openEditor();
 
-    fireEvent.click(screen.getByText("기준본에서 가져오기"));
+    fireEvent.click(screen.getByText("Import from base"));
     await waitFor(() =>
-      expect(screen.getByText("기준본에서 키워드 1개를 가져왔습니다.")).toBeInTheDocument()
+      expect(screen.getByText("Imported 1 keywords from the base curriculum.")).toBeInTheDocument()
     );
     expect(screen.getByRole("button", { name: "함수" })).toHaveAttribute("aria-pressed", "true");
   });
@@ -252,11 +252,11 @@ describe("템플릿 전체 보정", () => {
 
   it("비어 있는 회차 수를 알려주고 한 번에 가져오게 한다", () => {
     render(<MySubjectsTab initialSubjects={[emptyTemplate]} />);
-    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByText("Edit"));
     expect(
-      screen.getByText(/키워드가 비어 있는 회차가 2개 있습니다/)
+      screen.getByText(/2 sessions have no keywords yet/)
     ).toBeInTheDocument();
-    expect(screen.getByText("전체 가져오기")).toBeInTheDocument();
+    expect(screen.getByText("Import all")).toBeInTheDocument();
   });
 
   it("전체 가져오기는 서버가 돌려준 회차별 상태를 그대로 그린다", async () => {
@@ -266,11 +266,11 @@ describe("템플릿 전체 보정", () => {
       keywordIdsByUnit: { u1: ["k1"], u2: ["k2"] },
     });
     render(<MySubjectsTab initialSubjects={[emptyTemplate]} />);
-    fireEvent.click(screen.getByText("편집"));
-    fireEvent.click(screen.getByText("전체 가져오기"));
+    fireEvent.click(screen.getByText("Edit"));
+    fireEvent.click(screen.getByText("Import all"));
 
     await waitFor(() =>
-      expect(screen.getByText("2개 키워드를 기준본에서 가져왔습니다.")).toBeInTheDocument()
+      expect(screen.getByText("Imported 2 keywords from the base curriculum.")).toBeInTheDocument()
     );
     // 두 회차가 서로 다른 키워드를 받는다 — 한 덩어리로 뭉뚱그리지 않는다.
     const speaking = screen.getAllByRole("button", { name: "Speaking" });
@@ -280,7 +280,7 @@ describe("템플릿 전체 보정", () => {
     expect(speaking[1]).toHaveAttribute("aria-pressed", "false");
     expect(voca[1]).toHaveAttribute("aria-pressed", "true");
     // 다 채워졌으므로 안내는 사라진다.
-    expect(screen.queryByText(/키워드가 비어 있는 회차가/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/sessions have no keywords yet/)).not.toBeInTheDocument();
   });
 
   it("채울 것이 없으면 안내가 보이지 않는다", () => {
@@ -294,7 +294,7 @@ describe("템플릿 전체 보정", () => {
         ]}
       />
     );
-    fireEvent.click(screen.getByText("편집"));
-    expect(screen.queryByText(/키워드가 비어 있는 회차가/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("Edit"));
+    expect(screen.queryByText(/sessions have no keywords yet/)).not.toBeInTheDocument();
   });
 });

@@ -39,8 +39,8 @@ export default function HomeworkAssignTab({
       <UnderlineSubTabs
         className="mb-5"
         items={[
-          { id: "create", label: "과제 생성" },
-          { id: "history", label: "과제 내역" },
+          { id: "create", label: "Create Homework" },
+          { id: "history", label: "Homework History" },
         ]}
         activeId={subtab}
         onSelect={setSubtab}
@@ -56,11 +56,11 @@ export default function HomeworkAssignTab({
             {s.name}
           </button>
         ))}
-        {students.length === 0 && <p className="text-[13px] text-grey-500">담당 학생이 없습니다.</p>}
+        {students.length === 0 && <p className="text-[13px] text-grey-500">No students assigned to you yet.</p>}
       </div>
 
       {!studentId ? null : subtab === "history" ? (
-        loading ? <p className="text-[13px] text-grey-500">불러오는 중…</p> : <HomeworkBatchPanel batches={batches} viewerRole="teacher" />
+        loading ? <p className="text-[13px] text-grey-500">Loading…</p> : <HomeworkBatchPanel batches={batches} viewerRole="teacher" />
       ) : (
         <HomeworkIssueForm studentId={studentId} initialKeywords={initialKeywords} />
       )}

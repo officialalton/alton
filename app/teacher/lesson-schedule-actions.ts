@@ -127,7 +127,7 @@ export async function cancelMyLessonScheduleBooking(params: { reservationId: str
     const admin = createAdminClient();
     const { data } = await admin.from("reservations").select("owner_profile_id").eq("id", params.reservationId).maybeSingle();
     if (!data || data.owner_profile_id !== user.id) {
-      return { ok: false, error: "본인 수업만 취소할 수 있습니다." };
+      return { ok: false, error: "You can only cancel your own lessons." };
     }
     await cancelLessonBooking({
       reservationId: params.reservationId,
@@ -151,7 +151,7 @@ export async function startMyLessonSession(sessionId: string): Promise<ActionRes
     const admin = createAdminClient();
     const { data } = await admin.from("sessions").select("teacher_id").eq("id", sessionId).maybeSingle();
     if (!data || data.teacher_id !== user.id) {
-      return { ok: false, error: "본인 수업만 시작할 수 있습니다." };
+      return { ok: false, error: "You can only start your own lessons." };
     }
     const { error } = await admin.rpc("mark_lesson_session_started", { p_session_id: sessionId, p_actor_id: user.id });
     if (error) return { ok: false, error: friendlyDbMessage(error) };
@@ -171,7 +171,7 @@ export async function repinMyLiveLesson(sessionId: string): Promise<ActionResult
       admin.from("profiles").select("role").eq("id", user.id).maybeSingle(),
     ]);
     if (!session || (session.teacher_id !== user.id && profile?.role !== "admin")) {
-      return { ok: false, error: "본인 수업만 다시 고정할 수 있습니다." };
+      return { ok: false, error: "You can only re-pin your own lessons." };
     }
     const { error } = await admin.rpc("repin_live_session_content", { p_session_id: sessionId, p_actor_id: user.id });
     if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") };
@@ -207,7 +207,7 @@ export async function finalizeMyLessonSession(params: {
     const admin = createAdminClient();
     const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
     if (!data || data.teacher_id !== user.id) {
-      return { ok: false, error: "본인 수업만 종료할 수 있습니다." };
+      return { ok: false, error: "You can only end your own lessons." };
     }
     const { error } = await admin.rpc("finalize_lesson_session", {
       p_session_id: params.sessionId,
@@ -242,7 +242,7 @@ export async function resolveMyLessonLateness(params: {
     const admin = createAdminClient();
     const { data } = await admin.from("sessions").select("teacher_id").eq("id", params.sessionId).maybeSingle();
     if (!data || data.teacher_id !== user.id) {
-      return { ok: false, error: "본인 수업만 연장할 수 있습니다." };
+      return { ok: false, error: "You can only extend your own lessons." };
     }
     const { error } = await admin.rpc("resolve_teacher_lateness", {
       p_session_id: params.sessionId,

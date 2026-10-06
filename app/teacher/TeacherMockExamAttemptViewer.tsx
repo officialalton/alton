@@ -13,16 +13,16 @@ export default function TeacherMockExamAttemptViewer({ attempt }: { attempt: Moc
   const [index, setIndex] = useState(0);
   const current = attempt.items[index];
 
-  if (attempt.items.length === 0) return <p className="text-[13px] text-grey-500">문항이 없습니다.</p>;
+  if (attempt.items.length === 0) return <p className="text-[13px] text-grey-500">No questions.</p>;
 
   const routing = attempt.routing;
   return (
     <div className="flex flex-col gap-3">
       {routing && (routing.rw.route || routing.math.route) && (
         <p className="text-[12px] text-grey-600" data-testid="teacher-routing-info">
-          Module 2 경로(교사 전용): R&W {routing.rw.route ?? "-"}
-          {routing.rw.policyVersion != null ? ` (정책 v${routing.rw.policyVersion})` : ""} · Math {routing.math.route ?? "-"}
-          {routing.math.policyVersion != null ? ` (정책 v${routing.math.policyVersion})` : ""}
+          Module 2 routing (teachers only): R&W {routing.rw.route ?? "-"}
+          {routing.rw.policyVersion != null ? ` (policy v${routing.rw.policyVersion})` : ""} · Math {routing.math.route ?? "-"}
+          {routing.math.policyVersion != null ? ` (policy v${routing.math.policyVersion})` : ""}
         </p>
       )}
       <div className="flex flex-col gap-3 md:flex-row">

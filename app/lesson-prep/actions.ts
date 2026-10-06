@@ -25,7 +25,7 @@ async function gate(layer: PrepLayer) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { supabase: null, error: "로그인이 필요합니다." } as const;
+  if (!user) return { supabase: null, error: "Please sign in." } as const;
 
   const { data: profile } = await supabase
     .from("profiles")
@@ -35,10 +35,10 @@ async function gate(layer: PrepLayer) {
   const role = profile?.role as string | undefined;
 
   if (layer === "catalog" && role !== "admin") {
-    return { supabase: null, error: "관리자만 기준본을 고칠 수 있습니다." } as const;
+    return { supabase: null, error: "Only admins can edit the master template." } as const;
   }
   if (layer !== "catalog" && role !== "teacher" && role !== "admin") {
-    return { supabase: null, error: "선생님·관리자만 수업을 준비할 수 있습니다." } as const;
+    return { supabase: null, error: "Only teachers and admins can prepare lessons." } as const;
   }
   return { supabase, error: null } as const;
 }
@@ -58,7 +58,7 @@ export async function addKeyword(
   // 23505(이미 붙어 있음)는 오류가 아니다 — 원하는 상태가 이미 맞다.
   if (error && error.code !== "23505") {
     console.error(JSON.stringify({ event: "prep_keyword_add_failed", layer, message: error.message }));
-    return { ok: false, error: "키워드를 붙이지 못했습니다." };
+    return { ok: false, error: "Couldn't attach the keyword." };
   }
   return { ok: true };
 }
@@ -79,7 +79,7 @@ export async function removeKeyword(
     .eq("keyword_id", keywordId);
   if (error) {
     console.error(JSON.stringify({ event: "prep_keyword_remove_failed", layer, message: error.message }));
-    return { ok: false, error: "키워드를 떼지 못했습니다." };
+    return { ok: false, error: "Couldn't detach the keyword." };
   }
   return { ok: true };
 }
@@ -116,7 +116,7 @@ export async function removeMaterial(
     .eq("curriculum_doc_id", curriculumDocId);
   if (error) {
     console.error(JSON.stringify({ event: "prep_material_remove_failed", layer, message: error.message }));
-    return { ok: false, error: "교재를 빼지 못했습니다." };
+    return { ok: false, error: "Couldn't remove the material." };
   }
 
   const removed = (row ?? {}) as { source?: string; inherited?: boolean };
@@ -130,7 +130,7 @@ export async function removeMaterial(
       console.error(
         JSON.stringify({ event: "prep_exclusion_failed", layer, message: exclusionError.message })
       );
-      return { ok: false, error: "교재를 뺐지만 다시 들어올 수 있습니다. 한 번 더 확인해 주세요." };
+      return { ok: false, error: "The material was removed, but it may come back on the next sync. Please double-check." };
     }
   }
   return { ok: true };
@@ -160,7 +160,7 @@ export async function addMaterial(
     .insert({ [spec.unitFk]: unitId, curriculum_doc_id: curriculumDocId, source: "manual" });
   if (error && error.code !== "23505") {
     console.error(JSON.stringify({ event: "prep_material_add_failed", layer, message: error.message }));
-    return { ok: false, error: "교재를 담지 못했습니다." };
+    return { ok: false, error: "Couldn't add the material." };
   }
   return { ok: true };
 }
@@ -181,11 +181,11 @@ export async function swapMaterialOrder(
     .select("curriculum_doc_id, position")
     .eq(spec.unitFk, unitId)
     .in("curriculum_doc_id", [docIdA, docIdB]);
-  if (!rows || rows.length !== 2) return { ok: false, error: "순서를 바꾸지 못했습니다." };
+  if (!rows || rows.length !== 2) return { ok: false, error: "Couldn't reorder." };
 
   const a = rows.find((r) => r.curriculum_doc_id === docIdA);
   const b = rows.find((r) => r.curriculum_doc_id === docIdB);
-  if (!a || !b) return { ok: false, error: "순서를 바꾸지 못했습니다." };
+  if (!a || !b) return { ok: false, error: "Couldn't reorder." };
 
   // position에 unique 제약은 없지만, 중간값을 거쳐 바꿔 두 행이 같은 값을 갖는
   // 순간을 만들지 않는다 — 그 사이에 목록을 읽으면 순서가 뒤집혀 보인다.
@@ -207,7 +207,7 @@ export async function swapMaterialOrder(
     .eq("curriculum_doc_id", docIdA);
   if (error) {
     console.error(JSON.stringify({ event: "prep_material_move_failed", layer, message: error.message }));
-    return { ok: false, error: "순서를 바꾸지 못했습니다." };
+    return { ok: false, error: "Couldn't reorder." };
   }
   return { ok: true };
 }
@@ -238,7 +238,7 @@ export async function saveGoal(
       .upsert({ overlay_unit_id: unitId, goal: value }, { onConflict: "overlay_unit_id" });
     if (error) {
       console.error(JSON.stringify({ event: "prep_goal_save_failed", layer, message: error.message }));
-      return { ok: false, error: "목표를 저장하지 못했습니다." };
+      return { ok: false, error: "Couldn't save the goal." };
     }
     return { ok: true };
   }
@@ -249,7 +249,7 @@ export async function saveGoal(
     .eq("id", unitId);
   if (error) {
     console.error(JSON.stringify({ event: "prep_goal_save_failed", layer, message: error.message }));
-    return { ok: false, error: "목표를 저장하지 못했습니다." };
+    return { ok: false, error: "Couldn't save the goal." };
   }
   return { ok: true };
 }
@@ -334,7 +334,7 @@ export async function previewRecomposition(
   });
   if (error) {
     console.error(JSON.stringify({ event: "prep_recompose_preview_failed", layer, message: error.message }));
-    return { ok: false, error: "변경 내용을 확인하지 못했습니다." };
+    return { ok: false, error: "Couldn't check the changes." };
   }
   return { ok: true, value: asSummary(data) };
 }
@@ -365,10 +365,10 @@ export async function applyRecomposition(
       return {
         ok: false,
         stale: true,
-        error: "미리 본 뒤에 구성이나 교재·문제가 바뀌었습니다. 변경분을 다시 확인해주세요.",
+        error: "The composition, materials, or problems changed after the preview. Please review the changes again.",
       };
     }
-    return { ok: false, error: "다시 구성하지 못했습니다." };
+    return { ok: false, error: "Couldn't recompose." };
   }
   return { ok: true, value: asSummary(data) };
 }
@@ -398,7 +398,7 @@ export async function inheritDefaults(
 
   if (layer === "catalog") {
     // 기준본이 곧 기준이다 — 위에서 물려받을 것이 없다.
-    return { ok: false, error: "관리자 기준본은 물려받을 상위 구성이 없습니다." };
+    return { ok: false, error: "The admin master template has no parent composition to inherit from." };
   }
 
   const fn =
@@ -413,7 +413,7 @@ export async function inheritDefaults(
     console.error(
       JSON.stringify({ event: "prep_inherit_failed", layer, message: error.message })
     );
-    return { ok: false, error: "상위 구성을 가져오지 못했습니다." };
+    return { ok: false, error: "Couldn't load the parent composition." };
   }
   const row = (data ?? {}) as Record<string, number | undefined>;
   return {
@@ -472,7 +472,7 @@ export async function addProblem(
 
   if (layer === "student") {
     const prepId = await prepIdFor(supabase, unitId);
-    if (!prepId) return { ok: false, error: "이 회차의 준비를 만들지 못했습니다." };
+    if (!prepId) return { ok: false, error: "Couldn't create the prep for this session." };
 
     const { data: last } = await supabase
       .from("curriculum_unit_prep_items")
@@ -490,7 +490,7 @@ export async function addProblem(
     });
     if (error && error.code !== "23505") {
       console.error(JSON.stringify({ event: "prep_problem_add_failed", layer, message: error.message }));
-      return { ok: false, error: readableWriteError(error.message, "문제를 담지 못했습니다.") };
+      return { ok: false, error: readableWriteError(error.message, "Couldn't add the problem.") };
     }
     return { ok: true };
   }
@@ -516,7 +516,7 @@ export async function addProblem(
   });
   if (error && error.code !== "23505") {
     console.error(JSON.stringify({ event: "prep_problem_add_failed", layer, message: error.message }));
-    return { ok: false, error: readableWriteError(error.message, "문제를 담지 못했습니다.") };
+    return { ok: false, error: readableWriteError(error.message, "Couldn't add the problem.") };
   }
   return { ok: true };
 }
@@ -538,7 +538,7 @@ export async function removeProblem(
       .eq("prep_id", prepId)
       .eq("content_type", "problem")
       .eq("content_id", problemId);
-    if (error) return { ok: false, error: "문제를 빼지 못했습니다." };
+    if (error) return { ok: false, error: "Couldn't remove the problem." };
 
     // 학생 층도 뺀 기록을 남긴다(20261347000000). 없으면 다음 '기본 구성 업데이트'가
     // 교사 기본 구성에서 그대로 다시 내려보낸다.
@@ -559,7 +559,7 @@ export async function removeProblem(
     .delete()
     .eq("unit_id", unitId)
     .eq("problem_id", problemId);
-  if (error) return { ok: false, error: "문제를 빼지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't remove the problem." };
 
   // 뺀 기록을 남긴다 — 없으면 다음 '다시 구성'에서 자동으로 되살아난다.
   await supabase.from(exclusionTable).insert({ unit_id: unitId, problem_id: problemId });
@@ -612,7 +612,7 @@ export async function listLessonsForUnit(
 
 export async function linkLesson(unitId: string, sessionId: string): Promise<PrepResult> {
   const { supabase } = await gate("student");
-  if (!supabase) return { ok: false, error: "선생님·관리자만 수업을 준비할 수 있습니다." };
+  if (!supabase) return { ok: false, error: "Only teachers and admins can prepare lessons." };
 
   const { linkUnitPrepToLesson } = await import("@/app/teacher/unit-prep-actions");
   const result = await linkUnitPrepToLesson(unitId, sessionId);
@@ -633,7 +633,7 @@ export async function linkLesson(unitId: string, sessionId: string): Promise<Pre
  */
 export async function repinLiveLesson(sessionId: string): Promise<PrepResult> {
   const { supabase } = await gate("student");
-  if (!supabase) return { ok: false, error: "선생님·관리자만 다시 고정할 수 있습니다." };
+  if (!supabase) return { ok: false, error: "Only teachers and admins can re-pin." };
   const { repinMyLiveLesson } = await import("@/app/teacher/lesson-schedule-actions");
   const result = await repinMyLiveLesson(sessionId);
   if (!result.ok) return { ok: false, error: result.error };
@@ -642,7 +642,7 @@ export async function repinLiveLesson(sessionId: string): Promise<PrepResult> {
 
 export async function startLesson(sessionId: string): Promise<PrepResult> {
   const { supabase } = await gate("student");
-  if (!supabase) return { ok: false, error: "선생님·관리자만 수업을 시작할 수 있습니다." };
+  if (!supabase) return { ok: false, error: "Only teachers and admins can start a lesson." };
 
   const { startMyLessonSession } = await import("@/app/teacher/lesson-schedule-actions");
   const result = await startMyLessonSession(sessionId);

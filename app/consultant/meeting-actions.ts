@@ -34,7 +34,7 @@ export type AssignedMeetingRequest = {
 
 async function requireConsultant() {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "consultant") throw new Error("컨설턴트만 접근할 수 있습니다.");
+  if (profile?.role !== "consultant") throw new Error("Only consultants can access this.");
   return { userId: user.id, supabase };
 }
 
@@ -72,7 +72,7 @@ export async function cancelMyMeetingRequestAction(meetingRequestId: string): Pr
     .eq("consultant_id", userId)
     .maybeSingle();
   if (error) throw new Error(error.message);
-  if (!data) throw new Error("본인이 담당하는 미팅만 취소할 수 있습니다.");
+  if (!data) throw new Error("You can only cancel meetings assigned to you.");
   await cancelMeetingRequestWithCalendar({ meetingRequestId, actorId: userId });
 }
 
@@ -94,10 +94,10 @@ export async function scheduleMyMeetingRequestAction(params: {
   const startsAtDate = new Date(params.startsAt);
   const endsAtDate = new Date(params.endsAt);
   if (Number.isNaN(startsAtDate.getTime()) || Number.isNaN(endsAtDate.getTime())) {
-    throw new Error("일정 시간이 올바르지 않습니다.");
+    throw new Error("The meeting time is invalid.");
   }
   if (endsAtDate.getTime() <= startsAtDate.getTime()) {
-    throw new Error("종료 시각은 시작 시각보다 뒤여야 합니다.");
+    throw new Error("End time must be after the start time.");
   }
 
   const { data: row, error: loadError } = await supabase
@@ -141,7 +141,7 @@ export async function scheduleMyMeetingRequestAction(params: {
         reservationId: params.meetingRequestId,
         startsAt: startsAtDate,
         endsAt: endsAtDate,
-        summary: `[Alton] 컨설팅 미팅 — ${child?.name ?? "학생"}`,
+        summary: `[Alton] Consulting Meeting — ${child?.name ?? "Student"}`,
         timezone: "Asia/Seoul",
         attendeeEmail: studentEmail,
         sendUpdates: "all",
@@ -151,7 +151,7 @@ export async function scheduleMyMeetingRequestAction(params: {
     }
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
-    throw new Error(`Calendar 일정 생성/갱신에 실패했습니다: ${message}`);
+    throw new Error(`Couldn't create or update the Calendar event: ${message}`);
   }
 
   const meetingCode = googleMeetLink ? extractMeetingCodeFromLink(googleMeetLink) : null;

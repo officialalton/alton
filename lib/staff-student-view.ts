@@ -38,7 +38,7 @@ export function studentViewPolicy(role: StudentViewRole): StudentViewAccess {
 }
 
 export class StudentViewDeniedError extends Error {
-  constructor(message = "이 학생을 열람할 권한이 없습니다.") {
+  constructor(message = "You don't have permission to view this student.") {
     super(message);
     this.name = "StudentViewDeniedError";
   }
@@ -49,7 +49,7 @@ export async function assertCanViewStudent(
   userId: string,
   studentId: string
 ): Promise<StudentViewAccess> {
-  if (!studentId) throw new StudentViewDeniedError("학생을 지정하세요.");
+  if (!studentId) throw new StudentViewDeniedError("Please select a student.");
   const { data: profile } = await supabase
     .from("profiles")
     .select("role, admin_tier")
@@ -65,17 +65,17 @@ export async function assertCanViewStudent(
   if (profile?.role === "consultant") {
     const { data: assigned } = await supabase.rpc("is_assigned_consultant_of", { p_student_id: studentId });
     if (assigned === true) return studentViewPolicy("consultant");
-    throw new StudentViewDeniedError("담당 학생만 열람할 수 있습니다.");
+    throw new StudentViewDeniedError("You can only view students assigned to you.");
   }
   if (profile?.role === "teacher") {
     const { data: teaches } = await supabase.rpc("teaches_student", { p_student_id: studentId });
     if (teaches === true) return studentViewPolicy("teacher");
-    throw new StudentViewDeniedError("현재 담당 중인 학생만 열람할 수 있습니다.");
+    throw new StudentViewDeniedError("You can only view students you currently teach.");
   }
   if (profile?.role === "parent") {
     const { data: guardian } = await supabase.rpc("is_guardian_of", { p_student_id: studentId });
     if (guardian === true) return studentViewPolicy("parent");
-    throw new StudentViewDeniedError("자녀만 열람할 수 있습니다.");
+    throw new StudentViewDeniedError("You can only view your own child.");
   }
   throw new StudentViewDeniedError();
 }
@@ -88,6 +88,6 @@ export async function assertCanWriteStudentTask(
   action: StudentViewAction
 ): Promise<StudentViewAccess> {
   const access = await assertCanViewStudent(supabase, userId, studentId);
-  if (!access.actions.includes(action)) throw new StudentViewDeniedError("이 화면에서는 수정할 수 없습니다.");
+  if (!access.actions.includes(action)) throw new StudentViewDeniedError("You can't make changes from this view.");
   return access;
 }

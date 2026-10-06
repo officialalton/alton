@@ -33,7 +33,7 @@ describe("startMyStaffInquiryAction", () => {
 
   it("내용이 비어있으면 거부한다", async () => {
     requireConsultantMock.mockResolvedValue({ user: { id: "c1" }, supabase: {} });
-    await expect(startMyStaffInquiryAction("   ")).rejects.toThrow("내용을 입력해주세요.");
+    await expect(startMyStaffInquiryAction("   ")).rejects.toThrow("Please enter a message.");
   });
 });
 
@@ -43,7 +43,7 @@ describe("sendMyStaffMessageAction", () => {
       from: () => ({ insert: () => Promise.resolve({ error: { message: "violates foreign key constraint on consultant_admin_inquiries" } }) }),
     };
     requireConsultantMock.mockResolvedValue({ user: { id: "c1" }, supabase });
-    await expect(sendMyStaffMessageAction("i1", "내용")).rejects.toThrow("종료된 문의입니다.");
+    await expect(sendMyStaffMessageAction("i1", "내용")).rejects.toThrow("This thread has been closed.");
   });
 });
 

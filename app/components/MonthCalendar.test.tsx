@@ -13,7 +13,7 @@ describe("MonthCalendar", () => {
         initialYearMonth="2026-10"
       />
     );
-    expect(screen.getByText("2026년 10월")).toBeInTheDocument();
+    expect(screen.getByText("October 2026")).toBeInTheDocument();
     fireEvent.click(screen.getByText("15"));
     expect(onSelectDate).toHaveBeenCalledWith("2026-10-15");
   });
@@ -44,7 +44,7 @@ describe("MonthCalendar", () => {
     );
     const button = screen.getByText("15").closest("button");
     expect(button?.className).toContain("underline");
-    expect(button?.getAttribute("title")).toBe("외부 일정 있음(예약 불가)");
+    expect(button?.getAttribute("title")).toBe("External event (unavailable for booking)");
   });
 
   it("이전/다음 달 버튼으로 표시 월이 바뀐다", () => {
@@ -56,10 +56,10 @@ describe("MonthCalendar", () => {
         initialYearMonth="2026-10"
       />
     );
-    fireEvent.click(screen.getByLabelText("다음 달"));
-    expect(screen.getByText("2026년 11월")).toBeInTheDocument();
-    fireEvent.click(screen.getByLabelText("이전 달"));
-    fireEvent.click(screen.getByLabelText("이전 달"));
-    expect(screen.getByText("2026년 9월")).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Next month"));
+    expect(screen.getByText("November 2026")).toBeInTheDocument();
+    fireEvent.click(screen.getByLabelText("Previous month"));
+    fireEvent.click(screen.getByLabelText("Previous month"));
+    expect(screen.getByText("September 2026")).toBeInTheDocument();
   });
 });

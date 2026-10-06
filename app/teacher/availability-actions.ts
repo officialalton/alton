@@ -69,7 +69,7 @@ export async function addTeacherAvailabilityRule(input: AvailabilityRuleInput): 
     return rangesOverlap(newStart, newEnd, timeToMinutes(r.start_time_local as string), timeToMinutes(r.end_time_local as string));
   });
   if (hasOverlap) {
-    throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+    throw new Error("An overlapping time range already exists for this day.");
   }
 
   const { data, error } = await supabase
@@ -90,7 +90,7 @@ export async function addTeacherAvailabilityRule(input: AvailabilityRuleInput): 
     // teacher_availability_rules_no_overlap exclusion 제약(23P01) — 같은 요일·겹치는
     // 유효기간 안에서 시간대가 겹치는 규칙을 등록하려 한 경우.
     if (error.code === "23P01") {
-      throw new Error("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+      throw new Error("An overlapping time range already exists for this day.");
     }
     throw new Error(error.message);
   }

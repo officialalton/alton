@@ -7,7 +7,8 @@ import type { TeacherAssignedSubject } from "./assignments-data";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { dateKey, fmtIntl } from "@/lib/format-datetime";
 
-const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
+const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // 2026-09-10(UI/UX 정리 1차) — "오늘 수업 → 수업 준비 → 담당 학생" 흐름.
 // 새 쿼리는 추가하지 않는다: "오늘 수업"은 이미 있는 upcoming 목록에서 오늘
@@ -36,17 +37,17 @@ export default function TeacherHomeDashboard({
   return (
     <div className="px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-6">
-        {data.teacherName} 선생님, 안녕하세요
+        Hello, {data.teacherName}
       </h1>
 
       {status === "pending" && (
         <div className="border-[1.5px] border-ink rounded-xl px-5 py-4.5 mb-6">
           <h2 className="text-[14px] font-bold text-ink mb-1.5">
-            계정이 아직 활성화되지 않았습니다
+            Your account isn&apos;t active yet
           </h2>
           <p className="text-[12.5px] text-grey-500 leading-[1.6]">
-            Google Workspace 연결·시급 설정·계약 확인 등 필요한 절차가
-            완료되면 관리자가 활동을 시작할 수 있도록 승인합니다.
+            Once the required steps (Google Workspace connection, hourly rate setup,
+            contract confirmation) are complete, an admin will approve your account.
           </p>
         </div>
       )}
@@ -57,16 +58,16 @@ export default function TeacherHomeDashboard({
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-        <ActionCard title="수업 준비" onClick={onShowCurriculum}>
-          담당 학생의 다음 수업에 쓸 교재·문제를 미리 골라두세요.
+        <ActionCard title="Lesson Prep" onClick={onShowCurriculum}>
+          Pick the materials and problems for your students&apos; next lessons ahead of time.
         </ActionCard>
-        <ActionCard title={`담당 학생 (${currentAssignments.length})`} onClick={onShowAssignments}>
+        <ActionCard title={`My Students (${currentAssignments.length})`} onClick={onShowAssignments}>
           {currentAssignments.length === 0
-            ? "아직 배정된 학생이 없어요."
+            ? "No students assigned yet."
             : currentAssignments
                 .slice(0, 3)
                 .map((a) => `${a.studentName}(${a.subjectName})`)
-                .join(", ") + (currentAssignments.length > 3 ? " 외" : "")}
+                .join(", ") + (currentAssignments.length > 3 ? ", and more" : "")}
         </ActionCard>
       </div>
 
@@ -101,7 +102,7 @@ function TodayLessonBanner({
   return (
     <div className="flex items-center justify-between gap-3 bg-ink text-white rounded-xl px-5 py-4 mb-6">
       <div>
-        <div className="text-[12px] font-semibold text-white/70 mb-0.5">오늘 수업</div>
+        <div className="text-[12px] font-semibold text-white/70 mb-0.5">Today&apos;s lesson</div>
         <div className="text-[14px] font-bold">
           {formatKoreanDateTime(todayLesson.scheduledAt, tz)} · {todayLesson.studentName} ·{" "}
           {todayLesson.subjectName}
@@ -111,7 +112,7 @@ function TodayLessonBanner({
         onClick={() => onEnter(todayLesson.sessionId)}
         className="text-[12.5px] font-bold bg-white text-ink px-4 py-2 rounded-lg shrink-0"
       >
-        입장하기 →
+        Enter →
       </button>
     </div>
   );
@@ -160,7 +161,7 @@ function CalendarCard({
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
       <h2 className="text-[14px] font-bold text-ink mb-3">
-        {calendarYear}년 {calendarMonth + 1}월
+        {MONTH_NAMES[calendarMonth]} {calendarYear}
       </h2>
       <div className="grid grid-cols-7 gap-1 text-center mb-1">
         {WEEKDAYS.map((w) => (
@@ -203,10 +204,10 @@ function CalendarCard({
       {selectedDay !== null && (
         <div className="mt-4 pt-4 border-t border-grey-200">
           <h3 className="text-[12.5px] font-bold text-ink mb-2">
-            {data.calendarMonth + 1}월 {selectedDay}일 수업
+            Lessons on {MONTH_NAMES[data.calendarMonth]} {selectedDay}
           </h3>
           {selectedSessions.length === 0 ? (
-            <p className="text-[12.5px] text-grey-500">예정된 수업이 없습니다.</p>
+            <p className="text-[12.5px] text-grey-500">No upcoming lessons.</p>
           ) : (
             selectedSessions.map((s) => (
               <div
@@ -214,7 +215,7 @@ function CalendarCard({
                 className="text-[12.5px] text-ink px-3 py-2 rounded-lg bg-grey-100 mb-1.5"
               >
                 {s.studentName} · {s.subjectName}
-                {s.sessionNumber !== null ? ` · ${s.sessionNumber}회차` : ""}
+                {s.sessionNumber !== null ? ` · Session ${s.sessionNumber}` : ""}
               </div>
             ))
           )}
@@ -238,14 +239,14 @@ function UpcomingWidget({
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-[14px] font-bold text-ink">예정된 수업</h2>
+        <h2 className="text-[14px] font-bold text-ink">Upcoming lessons</h2>
         <button onClick={onShowAll} className="text-[11.5px] font-semibold text-grey-500">
-          전체 보기 →
+          View all →
         </button>
       </div>
       {top.length === 0 ? (
         <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-3 py-4 text-center">
-          예정된 수업이 없습니다.
+          No upcoming lessons.
         </p>
       ) : (
         top.map((lesson) => (
@@ -259,7 +260,7 @@ function UpcomingWidget({
             </div>
             <div className="text-[13px] font-semibold text-ink">
               {lesson.studentName} · {lesson.subjectName}
-              {lesson.sessionNumber !== null ? ` · ${lesson.sessionNumber}회차` : ""}
+              {lesson.sessionNumber !== null ? ` · Session ${lesson.sessionNumber}` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </div>
           </button>

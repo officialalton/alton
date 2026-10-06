@@ -115,14 +115,14 @@ describe("createMyTimeOffAction", () => {
 
     await expect(
       createMyTimeOffAction({ startsAt: "2026-10-01T10:00:00Z", endsAt: "2026-10-01T09:00:00Z", allDay: false })
-    ).rejects.toThrow("종료 시각은 시작 시각보다 나중이어야 합니다.");
+    ).rejects.toThrow("End time must be after the start time.");
   });
 
   it("컨설턴트가 아니면 거부한다", async () => {
     requireUserMock.mockResolvedValue({ user: { id: "u1" }, profile: { role: "parent" }, supabase: makeSupabase({}) });
     await expect(
       createMyTimeOffAction({ startsAt: "2026-10-01T00:00:00Z", endsAt: "2026-10-01T23:59:00Z", allDay: true })
-    ).rejects.toThrow("컨설턴트만 접근할 수 있습니다.");
+    ).rejects.toThrow("Only consultants can access this.");
   });
 });
 
