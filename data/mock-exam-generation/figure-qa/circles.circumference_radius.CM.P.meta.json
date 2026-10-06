@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.circumference_radius.CM.P",
+ "generatedAt": "2026-10-06T07:12:20.041Z",
+ "codeHash": "5c673cefd28fd623569f8af8d7cd53a11980491567e416264f181f2c84e7d0d6",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.circumference_radius.CM.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.circumference_radius.CM.P.png",
+   "mobileFile": "circles.circumference_radius.CM.P.m375.png",
+   "archetypeId": "ci.circumference_radius.CM.P.compose_kind",
+   "seed": 11,
+   "signature": "composite",
+   "stimulus": "A museum curator plans the display shown. Check each label against the part of the figure it describes. In the figure shown, the circle and the square are arranged so that the circle's diameter spans the full width of the square.",
+   "question": "What is the circumference of the circle, in terms of $\\pi$?",
+   "options": [
+    "$9\\pi$",
+    "$3\\pi$",
+    "$12\\pi$",
+    "$6\\pi$"
+   ],
+   "correctIndex": 3,
+   "answer": "$6\\pi$",
+   "explanation": "(1) 그림에서 정사각형의 변 6 를 읽는다. (2) 원이 정사각형의 네 변에 닿으므로 원의 지름 = 변 = 6 이다. (3) 둘레 = π × 6 이다. (4) = 6π 이다. (5) 따라서 6π 이다. 따라서 정답은 $6\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}
