@@ -1,6 +1,6 @@
 {
  "itemId": "one_variable_data.spread_comparison.DP.P",
- "generatedAt": "2026-10-06T22:40:24.012Z",
+ "generatedAt": "2026-10-06T23:32:00.137Z",
  "codeHash": "271cf80bec24ea7d29ea1b28bc27bd11da0542403b3e30b42b029cf195f3e471",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -40,16 +40,7 @@
    "correctIndex": 3,
    "answer": "3",
    "explanation": "(1) 두 점도표에서 점이 있는 값을 읽는다: Sample A 4~10, Sample B 7~10. (2) 범위: Sample A 10 - 4 = 6, Sample B 10 - 7 = 3 이다. (3) 차 = |6 - 3| = 3 이다. (4) 점이 하나도 없는 값은 범위에 들어가지 않는다. (5) 따라서 3 hours 만큼 다르다. 따라서 정답은 3이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "자료 A: 가로축 제목 'Hours of sleep' 에 단위(괄호)가 없습니다."
-    },
-    {
-     "code": "unit_missing_in_title",
-     "message": "자료 B: 가로축 제목 'Hours of sleep' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

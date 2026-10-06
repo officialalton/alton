@@ -1,6 +1,6 @@
 {
  "itemId": "two_variable_data.scatter_count_above.SC.P",
- "generatedAt": "2026-10-06T22:40:23.521Z",
+ "generatedAt": "2026-10-06T23:31:59.579Z",
  "codeHash": "25ff6bf98c8f89288c703c276e8f408c8f838e7ff9bae4ddc22349f437fecb59",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -34,16 +34,7 @@
    "correctIndex": 2,
    "answer": "5",
    "explanation": "(1) 그림에서 추세선이 지나는 두 격자점을 읽어 선의 위치를 파악한다. (2) x 값이 9 이상인 점만 고른다(11개). (3) 각 점이 추세선보다 위에 있는지 판정한다. (4) 위쪽에 있는 점을 센다: 5개. (5) 전체에서 센 위쪽 점(6개)이나, x 조건을 만족하는 점 중 아래쪽 점(6개)과 구별한다. 따라서 정답은 5이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "가로축 제목 'Years operating' 에 단위(괄호)가 없습니다."
-    },
-    {
-     "code": "unit_missing_in_title",
-     "message": "세로축 제목 'Employees' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

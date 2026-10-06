@@ -1,7 +1,7 @@
 {
  "itemId": "two_variable_data.scatter_slope_context.SC.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewedAt": "2026-10-06T23:33:13Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
  "codeHash": "25ff6bf98c8f89288c703c276e8f408c8f838e7ff9bae4ddc22349f437fecb59",
  "samples": [
@@ -19,7 +19,7 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호.",
+ "notes": "축 제목을 'Number of …' 형태로 정리한 재생성본 데스크톱 PNG를 읽고 재서명: 단위가 제목에 명시되고 서술·그림·선지가 일치함.",
  "restampedAt": "2026-10-05T00:00:00Z",
  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

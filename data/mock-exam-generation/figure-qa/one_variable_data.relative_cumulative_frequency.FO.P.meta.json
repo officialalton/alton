@@ -1,6 +1,6 @@
 {
  "itemId": "one_variable_data.relative_cumulative_frequency.FO.P",
- "generatedAt": "2026-10-06T22:40:24.228Z",
+ "generatedAt": "2026-10-06T23:32:00.378Z",
  "codeHash": "7e84cca3d6a62434c113b7e37c06d3025c5a5b99fe92f408ecb0e83b634b07f7",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -38,12 +38,7 @@
    "correctIndex": 1,
    "answer": "40",
    "explanation": "(1) 누적 상대도수 그래프에서 각 경계의 누적 %를 읽는다: 250: 20%, 300: 40%, 350: 50%, 400: 90%, 450: 100%. (2) 400 이하: 90% 이다. (3) 350 이하: 50% 이다. (4) 차 = 40% 이다. (5) 따라서 답은 40 이다. 따라서 정답은 40이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "가로축 제목 'Daily visitors' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

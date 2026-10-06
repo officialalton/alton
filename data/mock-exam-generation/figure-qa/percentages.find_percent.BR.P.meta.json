@@ -1,6 +1,6 @@
 {
  "itemId": "percentages.find_percent.BR.P",
- "generatedAt": "2026-10-06T22:40:23.998Z",
+ "generatedAt": "2026-10-06T23:32:00.124Z",
  "codeHash": "221b1e66e09db3d2b5f15a045904fa58d593dc252bd63508d75f5fa710089fc2",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -39,12 +39,7 @@
    "correctIndex": 1,
    "answer": "60",
    "explanation": "(1) 막대그래프에서 값을 읽는다: Lane B 160, Lane C 40, Lane D 120, Lane F 80. (2) 합계 = 160 + 40 + 120 + 80 = 400 이다. (3) 두 행의 합 = 160 + 80 = 240 이다. (4) 240 ÷ 400 = 0.6 이다. (5) 퍼센트로 바꾸면 60% 이다. 따라서 정답은 60이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "세로축 제목 'Cars' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

@@ -1,6 +1,6 @@
 {
  "itemId": "percentages.percent_change.BR.P",
- "generatedAt": "2026-10-06T22:40:24.000Z",
+ "generatedAt": "2026-10-06T23:32:00.126Z",
  "codeHash": "3fe928315069e403fc39a8d45ada33d99b9f89210a5b925cc5749d7cd62b933b",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -39,12 +39,7 @@
    "correctIndex": 1,
    "answer": "75",
    "explanation": "(1) 막대그래프에서 읽는다: Rialto 20→30, Strand 50→80, Majestic 60→90, Lyric 80→100, Orpheum 40→70. (2) 퍼센트 증가 = (나중 - 처음) ÷ 처음 × 100 이다. (3) 행별 퍼센트 증가: Rialto 50%, Strand 60%, Majestic 50%, Lyric 25%, Orpheum 75% 이다. (4) 증가량이 가장 큰 Strand 는 60% 로 가장 크지 않다. (5) 가장 큰 퍼센트 증가는 75% 이다. 따라서 정답은 75이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "세로축 제목 'Tickets sold' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

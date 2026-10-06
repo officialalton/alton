@@ -1,6 +1,6 @@
 {
  "itemId": "linear_equations_two_var.num_solutions.LN.P",
- "generatedAt": "2026-10-06T22:40:23.638Z",
+ "generatedAt": "2026-10-06T23:31:59.716Z",
  "codeHash": "deb920dc96f3019b6191119df6d25dd1fed6c03c83a90837b9292f11713981a0",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -37,12 +37,7 @@
    "correctIndex": 0,
    "answer": "12",
    "explanation": "(1) Pass A: y 절편 0 과 격자점을 읽어 기울기 12 을 구한다. (2) Pass B: y 절편 80 과 격자점을 읽어 기울기 4 를 구한다. (3) 같아지는 순간이 없으려면 두 직선이 평행해야 하고, 처음 값은 서로 달라야 한다(0 ≠ 80). (4) 따라서 k = Pass A 의 기울기 = 12 이다. (5) 확인: k = 12 이면 두 직선의 기울기가 같고 처음 값(0, 80)이 달라 평행이다. 따라서 정답은 12이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "가로축 제목 'Uses' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

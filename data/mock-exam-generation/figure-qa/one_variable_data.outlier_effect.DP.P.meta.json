@@ -1,6 +1,6 @@
 {
  "itemId": "one_variable_data.outlier_effect.DP.P",
- "generatedAt": "2026-10-06T22:40:24.014Z",
+ "generatedAt": "2026-10-06T23:32:00.139Z",
  "codeHash": "519f00ed6ed51774e29d77f1c522817a1501569ff8a8f526e01614e6332379fd",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -38,12 +38,7 @@
    "correctIndex": 1,
    "answer": "36",
    "explanation": "(1) 점도표에서 값과 점 개수를 읽는다: 0(8), 2(3), 4(7), 6(2), 8(5), 10(6) — 전체 31개. (2) 최솟값 0, 최댓값 10 이다. (3) 새 값 36 가 새 최댓값이 된다. (4) 새 범위 = 36 - 0 = 36 이다. (5) 따라서 범위는 36 messages 이다. 따라서 정답은 36이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "가로축 제목 'Messages sent' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }

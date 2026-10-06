@@ -1,6 +1,6 @@
 {
  "itemId": "two_variable_data.scatter_slope_context.SC.P",
- "generatedAt": "2026-10-06T22:40:23.519Z",
+ "generatedAt": "2026-10-06T23:31:59.577Z",
  "codeHash": "25ff6bf98c8f89288c703c276e8f408c8f838e7ff9bae4ddc22349f437fecb59",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
@@ -34,12 +34,7 @@
    "correctIndex": 1,
    "answer": "8",
    "explanation": "(1) 그림에서 직선 위의 두 격자점 (0, 60) 과 (10, 20) 를 읽는다. (2) 기울기 m = (20 - 60) ÷ (10 - 0) = -4 이다. (3) 기울기 -4 는 weeks 1 당 miles 의 변화량이다. (4) 14 days = 14 ÷ 7 = 2 weeks 이다. (5) 변화량 = -4 × 2 의 크기 = 8 이다. 따라서 정답은 8이다.",
-   "structuralIssues": [
-    {
-     "code": "unit_missing_in_title",
-     "message": "가로축 제목 'Weeks of training' 에 단위(괄호)가 없습니다."
-    }
-   ]
+   "structuralIssues": []
   }
  ]
 }
