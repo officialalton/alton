@@ -394,6 +394,20 @@ function checkLShapeFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   if (!S.notToScale) { const r = (S.sides ?? []).map((q) => ({ v: /^\d+(?:\.\d+)?$/.test(q.label) ? Number(q.label) : null, t: want[q.edge] })).filter((q) => q.v !== null) as { v: number; t: number }[]; for (let i = 1; i < r.length; i++) if (Math.abs(r[i].v / r[i].t / (r[0].v / r[0].t) - 1) > 0.05) { issues.push({ code: "render_value_mismatch", message: `라벨 ${r[i].v} 과 ${r[0].v} 의 비가 그려진 변의 비와 다릅니다(그림이 라벨과 비례하지 않음).` }); break; } }
 }
 
+
+// ───────────────────────── 평행선 3개(parallel_three) 충실도 ─────────────────────────
+function checkParallelThreeFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const S = spec as unknown as { lines: string[]; transversal: string; angle: number; gaps?: number[]; labels: { line: number; region: string; label: string }[] };
+  const ls = [...svg.matchAll(/<line\b([^>]*)\/?>/g)].map((m) => ({ x1: Number(attr(m[1], "x1")), y1: Number(attr(m[1], "y1")), x2: Number(attr(m[1], "x2")), y2: Number(attr(m[1], "y2")), w: attr(m[1], "stroke-width"), stroke: attr(m[1], "stroke") })).filter((l) => l.stroke === "#111" && l.w === "2");
+  const hz = ls.filter((l) => Math.abs(l.y1 - l.y2) < 0.01).sort((a, b) => a.y1 - b.y1); const tr = ls.filter((l) => Math.abs(l.y1 - l.y2) >= 0.01);
+  if (hz.length !== 3 || tr.length !== 1) { issues.push({ code: "render_empty", message: `평행선 ${hz.length}개·횡단선 ${tr.length}개가 그려졌습니다(3개·1개 필요).` }); return; }
+  const g = S.gaps ?? [1, 1]; const r = (hz[1].y1 - hz[0].y1) / (hz[2].y1 - hz[1].y1); if (Math.abs(r / (g[0] / g[1]) - 1) > 0.04) issues.push({ code: "render_value_mismatch", message: `평행선 간격 비 ${r.toFixed(2)} 가 데이터 ${(g[0] / g[1]).toFixed(2)} 와 다릅니다.` });
+  const t = tr[0]; let a = (Math.atan2(-(t.y2 - t.y1), t.x2 - t.x1) * 180) / Math.PI; if (a < 0) a += 180; if (a >= 180) a -= 180; const want = ((S.angle % 180) + 180) % 180;
+  if (Math.abs(a - want) > 1) issues.push({ code: "render_value_mismatch", message: `횡단선의 기울기 ${a.toFixed(1)}° 가 데이터 ${want.toFixed(1)}° 와 다르게 그려졌습니다.` });
+  const ts = texts(svg); for (const q of S.labels) { if (!ts.some((x) => x.text === q.label)) issues.push({ code: "label_missing", message: `각 라벨 '${q.label}' 이 그려지지 않았습니다.` }); const m = q.label.replace(/\s/g, "").match(/^(\d+(?:\.\d+)?)°?$/); if (m) { const tv = q.region === "NE" || q.region === "SW" ? S.angle : 180 - S.angle; if (Math.abs(Number(m[1]) - tv) > 1.5) issues.push({ code: "render_value_mismatch", message: `${q.region} 각 라벨 ${q.label} 이 그려진 각 ${tv.toFixed(1)}° 와 다릅니다(그림이 참값과 다름).` }); } }
+  for (const n of S.lines) if (!ts.some((x) => x.text === n)) issues.push({ code: "label_missing", message: `선 이름 '${n}' 이 그려지지 않았습니다.` });
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -408,6 +422,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
+  if (spec.type === "parallel_three") { checkParallelThreeFidelity(spec, markup, issues); return issues; }
   if (spec.type === "l_shape") { checkLShapeFidelity(spec, markup, issues); return issues; }
   if (spec.type === "solid_x") { checkSolidXFidelity(spec, markup, issues); return issues; }
   if (spec.type === "triangle_nested") { checkTriNestedFidelity(spec, markup, issues); return issues; }

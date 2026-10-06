@@ -72,6 +72,8 @@ import type { SolidSpec } from "./templates/solid";
 import { validateSolid } from "./templates/solid";
 import type { CompositeSpec } from "./templates/composite";
 import { validateComposite } from "./templates/composite";
+import type { ParallelThreeSpec } from "./templates/parallel-three";
+import { validateParallelThree } from "./templates/parallel-three";
 import type { LShapeSpec } from "./templates/l-shape";
 import { validateLShape } from "./templates/l-shape";
 import type { SolidXSpec } from "./templates/solid-x";
@@ -91,10 +93,10 @@ import { validateFigureChoice, validateFigureSet } from "./templates/figure-choi
  * 2026-09-14 표준 렌더링 엔진: `geometry`(좌표 자유 입력)는 **레거시** — 읽기·표시만 하고 새 저장·공개는 막는다(재생성 필요).
  * 새 도형은 템플릿(`parallel_transversal`, …)으로 관계만 받는다.
  */
-export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec | DataSpec | CircleSpec | PolygonSpec | SolidSpec | CompositeSpec | UnitCircleSpec | TrigCurveSpec | VennTreeSpec | TriNestedSpec | SolidXSpec | LShapeSpec | FigureChoiceSpec | FigureSetSpec;
+export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec | DataSpec | CircleSpec | PolygonSpec | SolidSpec | CompositeSpec | UnitCircleSpec | TrigCurveSpec | VennTreeSpec | TriNestedSpec | SolidXSpec | LShapeSpec | ParallelThreeSpec | FigureChoiceSpec | FigureSetSpec;
 /** 표준 템플릿 — AI 가 낼 수 있는 도형·자료 데이터 type. */
-export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "trig_curve", "venn_tree", "triangle_nested", "solid_x", "l_shape", "plane", "data"];
-export const GEOMETRY_TEMPLATE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "triangle_nested", "solid_x", "l_shape"];
+export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "trig_curve", "venn_tree", "triangle_nested", "solid_x", "l_shape", "parallel_three", "plane", "data"];
+export const GEOMETRY_TEMPLATE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "triangle_nested", "solid_x", "l_shape", "parallel_three"];
 /** 레거시(좌표 자유 입력) — 표시만, 새 공개 불가(2026-09-14 템플릿 3 이후 coordinate_plane 도 레거시). */
 export const LEGACY_FIGURE_TYPES: readonly string[] = ["geometry", "coordinate_plane"];
 
@@ -147,6 +149,7 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
   if (s.type === "triangle_nested") return validateTriNested(s);
   if (s.type === "solid_x") return validateSolidX(s);
   if (s.type === "l_shape") return validateLShape(s);
+  if (s.type === "parallel_three") return validateParallelThree(s);
   if (s.type === "figure_choice") return validateFigureChoice(s, validateFigureSpec);
   if (s.type === "figure_set") return validateFigureSet(s, validateFigureSpec);
   if (s.type === "geometry") {
