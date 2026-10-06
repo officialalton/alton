@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T05:30:00Z",
  "reviewer": "claude-sonnet-5.5 (math-C session)",
- "codeHash": "00c8e03c5499e07665681c9793132ee6e2b20f2a57528a2fd3dafb996774e48f",
+ "codeHash": "e69cf81db5f00cee35b43279ed05bb7504f9af691b4c0439ed468c82e788eacb",
  "samples": [
   "one_variable_data.median.BX.C.png"
  ],
@@ -19,5 +19,6 @@
   "multi_figure_consistent": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 중앙값 60·IQR 40 → D(Q1 40, 중앙값 60, Q3 80) 가 정답, 메타 정답 D 일치. A 는 중앙값만(50), C 는 IQR 만(20), B 는 둘 다 틀림(70, 30). 네 그림이 같은 최소 30·최대 90·같은 눈금·같은 크기. 데스크톱 2x2·375px 1열 모두 판독 가능."
+ "notes": "그림만 보고 풀이: 중앙값 60·IQR 40 → D(Q1 40, 중앙값 60, Q3 80) 가 정답, 메타 정답 D 일치. A 는 중앙값만(50), C 는 IQR 만(20), B 는 둘 다 틀림(70, 30). 네 그림이 같은 최소 30·최대 90·같은 눈금·같은 크기. 데스크톱 2x2·375px 1열 모두 판독 가능.",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }

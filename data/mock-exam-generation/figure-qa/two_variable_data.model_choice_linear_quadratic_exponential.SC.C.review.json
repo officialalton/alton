@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T07:00:00Z",
  "reviewer": "claude-sonnet-5.5 (math-C session)",
- "codeHash": "71051aa486e9574095298e1b822a34097770cbadb0d305320c4d2342c1db891d",
+ "codeHash": "1ce07d210380de7bbd57ad28ddaad6f6798689642733bf2e960442f9be7bed47",
  "samples": [
   "two_variable_data.model_choice_linear_quadratic_exponential.SC.C.png"
  ],
@@ -19,5 +19,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 지수 감소 → A(80,40,20,10,5; 비 1/2). B 는 이차(위로 볼록), C 는 지수 증가, D 는 일차 감소. 네 그림이 같은 축·눈금·크기, 선택지마다 서로 다른 모형 유형, 데스크톱 2x2·375px 1열 판독 가능. (메타 정답: A)"
+ "notes": "그림만 보고 풀이: 지수 감소 → A(80,40,20,10,5; 비 1/2). B 는 이차(위로 볼록), C 는 지수 증가, D 는 일차 감소. 네 그림이 같은 축·눈금·크기, 선택지마다 서로 다른 모형 유형, 데스크톱 2x2·375px 1열 판독 가능. (메타 정답: A)",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }

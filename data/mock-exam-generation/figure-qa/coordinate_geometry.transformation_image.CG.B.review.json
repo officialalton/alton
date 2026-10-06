@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:00:00Z",
  "reviewer": "visual-review-agent-mathE",
- "codeHash": "679c11718707ab51f053379ad0e8a215c8951ed3b07463092cd53bc8cf99062b",
+ "codeHash": "86019c1422cb70c964c40f9b6f4f27d075e89e489927ee798a75f8b0e7de9b66",
  "samples": [
   "coordinate_geometry.transformation_image.CG.B.m375.png",
   "coordinate_geometry.transformation_image.CG.B.png"
@@ -20,5 +20,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인."
+ "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인.",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }

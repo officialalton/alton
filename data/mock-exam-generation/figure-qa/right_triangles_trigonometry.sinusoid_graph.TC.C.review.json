@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:00:00Z",
  "reviewer": "visual-review-agent-mathE",
- "codeHash": "520a8b209db356fadc0a72cb4e9c956c529207d31ac08bc1a53100386bed264b",
+ "codeHash": "fc52452058bb2e6149523e857b390df6ed95ea1ff2ce91ec4065e86a65a5da35",
  "samples": [
   "right_triangles_trigonometry.sinusoid_graph.TC.C.m375.png",
   "right_triangles_trigonometry.sinusoid_graph.TC.C.png"
@@ -20,5 +20,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인."
+ "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인.",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }

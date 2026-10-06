@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:00:00Z",
  "reviewer": "visual-review-agent-mathE",
- "codeHash": "0a4385f48e15f8a63df856dad7a5e41f8b816a65a4026b0bd20e4ea44dff61b8",
+ "codeHash": "0984ca547d74c0bd98e8ffa26d759bdd9bb73c7a480015a74897d9ba85818caa",
  "samples": [
   "circles.circle_equation_transform.CG.B.m375.png",
   "circles.circle_equation_transform.CG.B.png"
@@ -20,5 +20,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인."
+ "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인.",
+ "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }
