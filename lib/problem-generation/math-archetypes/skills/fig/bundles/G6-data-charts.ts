@@ -20,5 +20,6 @@ import { ITEM as ovdSpreadDP } from "../items/one_variable_data.spread_compariso
 import { ITEM as ovdOutlierDP } from "../items/one_variable_data.outlier_effect.DP.P";
 import { ITEM as ovdRangeHG } from "../items/one_variable_data.range.HG.P";
 import { ITEM as ovdSpreadHG } from "../items/one_variable_data.spread_comparison.HG.P";
+import { ITEM as ovdRelcumHG } from "../items/one_variable_data.relative_cumulative_frequency.HG.P";
 
-export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG];
+export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG, ...ovdRelcumHG];
