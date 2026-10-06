@@ -42,7 +42,17 @@ function save(teacher: string, actor: string, byAdmin: boolean, number = NUMBER,
 }
 
 afterAll(() => {
-  psql(`delete from auth.users where email like '${RUN}-%';`);
+  // INSERT-only 이력 트리거가 cascade 삭제도 막으므로, 이 실행 ID의 행을 지울 때만 한 트랜잭션 안에서 잠시 끈다.
+  psql(
+    `begin;
+     alter table teacher_payout_account_events disable trigger teacher_payout_account_events_no_update;
+     alter table teacher_payout_account_reveals disable trigger teacher_payout_account_reveals_no_update;
+     delete from profiles where name like '${RUN}-%';
+     alter table teacher_payout_account_events enable trigger teacher_payout_account_events_no_update;
+     alter table teacher_payout_account_reveals enable trigger teacher_payout_account_reveals_no_update;
+     delete from auth.users where email like '${RUN}-%';
+     commit;`
+  );
 });
 
 describe("암호화 저장 + 최초 1회 등록 잠금", () => {
