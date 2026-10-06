@@ -181,3 +181,33 @@ export const quadVertexIntro = (rng: Rng, fn: string) => rng.pick(LEADS) + rng.p
   `In the $xy$-plane, the vertex and two other points are marked on the graph of the quadratic function $${fn}$.`, `A quadratic function $${fn}$ is graphed in the $xy$-plane shown, and its vertex and two other points on the graph are marked.`,
   `The figure shows the graph of $y = ${fn}(x)$, a parabola in the $xy$-plane. The vertex and two other points on it are marked.`, `For the quadratic function $${fn}$, the graph shown has its vertex and two additional points marked.`,
 ]);
+
+// ───────── 지수 곡선 순수 그래프(축 제목 x·y, 양의 y 비대칭 축 — 기존 pureAxes 는 그대로) ─────────
+export const posAxes = (X: number, Y: number) => ({ x: { min: 0, max: X, step: 1, title: "x" }, y: { min: 0, max: Y, step: Y / 5, title: "y" } });
+const Y_NICE = [20, 25, 30, 40, 50, 60, 80, 100, 120, 150, 200, 250, 300];
+export type ExpX = { fn: string; a: number; p: number; q: number; b: number; xs: number[]; ys: number[]; X: number; Y: number; y: (x: number) => number; fig: PlaneFig };
+/** y = a (p/q)^x, 정수값. 표시점은 연속한 정수 x 세 개(x ≥ 1, 곡선 위). 곡선은 [0, X] 에서 y 축 범위 안. */
+export function makeExp(rng: Rng, fn: string, o: { ratios?: [number, number][]; startAt?: number; extra?: Record<string, unknown>[]; markOrigin?: boolean } = {}): ExpX {
+  const RS = o.ratios ?? [[2, 1], [3, 1], [3, 2], [1, 2], [4, 1], [5, 4]];
+  for (let tr = 0; tr < 1500; tr++) {
+    const [p, q] = rng.pick(RS); const X = rng.pick([4, 5, 6]); const t = rng.int(1, 5); const a = t * q ** X; const b = p / q;
+    const y = (x: number) => a * b ** x; const vals = Array.from({ length: X + 1 }, (_, i) => y(i)); if (vals.some((v) => !Number.isInteger(v) || v < 1)) continue;
+    const top = Math.max(...vals); const Y = Y_NICE.find((v) => v >= top * 1.08); if (!Y || Y > 300 || top < Y * 0.45) continue;
+    const s0 = o.startAt ?? rng.int(o.markOrigin ? 0 : 1, Math.max(o.markOrigin ? 0 : 1, X - 2)); const xs = [s0, s0 + 1, s0 + 2]; if (xs[2] > X) continue; const ys = xs.map(y);
+    if (new Set(ys).size < 3 || ys.some((v) => v < Y * 0.06 || v > Y * 0.95)) continue;
+    const objects: Record<string, unknown>[] = [{ id: "F1", kind: "function", fn: "exponential", params: [a, b, 0], label: fn }, { id: "S1", kind: "scatter", points: xs.map((x, i) => [x, ys[i]] as [number, number]) }, ...(o.extra ?? [])];
+    return { fn, a, p, q, b, xs, ys, X, Y, y, fig: { type: "plane", axes: posAxes(X, Y), objects } as unknown as PlaneFig };
+  }
+  throw new GenFail("지수 곡선 장면 표집 실패");
+}
+/** FIGURE 의 지수 곡선(F1: a·b^x, 상수항 0)과 표시점을 읽어 a, b, f 를 정의한다. 표시점이 곡선 위가 아니면 던진다. */
+export const EXP_JS = "const EF=FIGURE.objects.find(o=>o.kind==='function'&&o.fn==='exponential'); const ES=FIGURE.objects.find(o=>o.kind==='scatter'); const a=EF.params[0], b=EF.params[1]; if (Math.abs(EF.params[2])>1e-12||!(a>0)||!(b>0)) throw new Error('지수 곡선 형태 아님'); const f=(x)=>a*Math.pow(b,x); if (ES) for (const p of ES.points) if (Math.abs(f(p[0])-p[1])>1e-6) throw new Error('점이 곡선 위에 없음');\n";
+export const expIntro = (rng: Rng, fn: string) => rng.pick(["", "", "A student is studying a function in algebra class. ", "A teacher draws an exponential curve on a grid. ", "A graphing program plots a function. ", "In a practice set, a function is shown as a graph. "]) + rng.pick([
+  `The graph of the exponential function $${fn}$ is shown in the $xy$-plane, with three points marked on it.`, `The figure shows the graph of $y = ${fn}(x)$, an exponential curve in the $xy$-plane, and three marked points on it.`, `For the exponential function $${fn}$, the graph shown gives selected points $(x, ${fn}(x))$.`,
+  `An exponential function $${fn}$ is graphed in the $xy$-plane shown. Three points on the graph are marked.`, `Three marked points lie on the graph of $y = ${fn}(x)$ shown in the $xy$-plane, where $${fn}$ is an exponential function.`,
+]);
+export const expRead = (e: ExpX): [string, string][] => [
+  [`그래프에 표시된 점을 읽는다: ${e.xs.map((x, i) => `(${x}, ${e.ys[i]})`).join(", ")}.`, "Read the marked points."],
+  [`x 가 1 늘 때 값이 ${e.ys[1]} ÷ ${e.ys[0]} = ${e.b} 배가 되므로 b = ${e.b} 이다.`, "The ratio of consecutive values is b."],
+  [`${e.xs[0]} 에서의 값 ${e.ys[0]} = a × ${e.b}^${e.xs[0]} 이므로 a = ${e.a} 이다.`, "Solve for a."],
+];
