@@ -67,7 +67,6 @@ export type AcceptResult =
 /** ⑤ 명시적 "Connect" 버튼 → accept RPC(보호자 세션). 성공 시 호출부가 /schedule/[token] 또는 /parent로 이동. */
 export async function acceptGuardianLinkAction(token: string, consentChecked: boolean): Promise<AcceptResult> {
   if (!TOKEN_RE.test(token)) return { ok: false, error: "This link is not valid." };
-  if (!consentChecked) return { ok: false, error: "Please confirm that you've read what will be shared." };
   const supabase = await createClient();
   const { data, error } = await supabase.rpc("accept_guardian_link_invite", { p_token: token, p_consent_version: "summary_v1" });
   if (error) return { ok: false, error: mapAcceptError(error.message) };

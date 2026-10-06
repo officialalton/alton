@@ -10,7 +10,7 @@ vi.mock("./actions", () => ({ acceptGuardianLinkAction: acceptMock, createGuardi
 vi.mock("next/navigation", () => ({ useRouter: () => ({ replace: replaceMock, push: vi.fn() }) }));
 vi.mock("@/lib/analytics/track", () => ({ trackEvent: trackMock }));
 
-import GuardianLinkClient, { NOT_SHARED_ITEMS, SHARED_ITEMS } from "./GuardianLinkClient";
+import GuardianLinkClient from "./GuardianLinkClient";
 import type { ClaimResult } from "./actions";
 
 const base: ClaimResult = {
@@ -68,16 +68,11 @@ describe("GuardianLinkClient — 상태별 화면(영어)", () => {
     expect(screen.queryByRole("button", { name: /Connect and continue/ })).not.toBeInTheDocument();
   });
 
-  it("동의 화면: 공유 항목 목록이 고정돼 있고, 체크 전엔 수락 버튼 비활성, 수락 후 예약 화면으로 이동", async () => {
+  it("수락 화면: 동의 절차 없이 버튼 한 번으로 수락하고 예약 화면으로 이동", async () => {
     acceptMock.mockResolvedValue({ ok: true, outcome: "accepted", schedulingToken: "sched-1", booked: false });
     render(<GuardianLinkClient token="t" claim={{ ...base, accountExists: true, viewer: { loggedIn: true, emailMatches: true, isParent: true } }} />);
-    const shared = screen.getByTestId("shared-items").querySelectorAll("li");
-    expect(Array.from(shared).map((li) => li.textContent)).toEqual([...SHARED_ITEMS]);
-    expect(screen.getByTestId("not-shared-items").querySelectorAll("li")).toHaveLength(NOT_SHARED_ITEMS.length);
-    expect(SHARED_ITEMS.join(" ")).not.toMatch(/notes|annotation|whiteboard/i);
+    expect(screen.queryByRole("checkbox")).toBeNull();
     const btn = screen.getByRole("button", { name: "Connect and continue" });
-    expect(btn).toBeDisabled();
-    fireEvent.click(screen.getByRole("checkbox"));
     expect(btn).toBeEnabled();
     fireEvent.click(btn);
     await waitFor(() => expect(acceptMock).toHaveBeenCalledWith("t", true));
@@ -89,14 +84,12 @@ describe("GuardianLinkClient — 상태별 화면(영어)", () => {
     acceptMock.mockResolvedValueOnce({ ok: true, outcome: "accepted", schedulingToken: null, booked: false });
     const claim = { ...base, accountExists: true, viewer: { loggedIn: true, emailMatches: true, isParent: true } };
     const { unmount } = render(<GuardianLinkClient token="t" claim={claim} />);
-    fireEvent.click(screen.getByRole("checkbox"));
     fireEvent.click(screen.getByRole("button", { name: "Connect and continue" }));
     await waitFor(() => expect(replaceMock).toHaveBeenCalledWith("/parent?tab=consult"));
     unmount();
 
     acceptMock.mockResolvedValueOnce({ ok: true, outcome: "manual_review", reason: "student_in_other_household" });
     render(<GuardianLinkClient token="t" claim={claim} />);
-    fireEvent.click(screen.getByRole("checkbox"));
     fireEvent.click(screen.getByRole("button", { name: "Connect and continue" }));
     expect(await screen.findByText(/review this connection/)).toBeInTheDocument();
   });

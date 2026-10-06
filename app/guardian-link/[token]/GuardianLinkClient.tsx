@@ -9,18 +9,12 @@ import { acceptGuardianLinkAction, createGuardianAccountFromLinkAction, remember
 // 2026-10-05 무료 회원 S4 — 상태별 화면: 무효/만료/철회/대체/검토중, 계정 없음(가입), 계정 있음(로그인), 로그인됨(동의+수락).
 // 공유 항목 목록(§3.3 ④)은 SHARED_ITEMS 상수 하나로 고정한다(테스트가 스냅샷).
 
-export const SHARED_ITEMS = [
-  "Practice-test attempts, scores, section breakdowns and your student's individual answers and explanations",
-  "Weak areas by domain and skill (aggregated)",
-  "Saved practice problems and vocabulary list size",
-  "Basic profile: name, grade, and school (if provided)",
-] as const;
 
-export const NOT_SHARED_ITEMS = ["Your student's private notes, highlights, annotations and whiteboard scratch work"] as const;
+
+
 
 export default function GuardianLinkClient({ token, claim }: { token: string; claim: ClaimResult }) {
   const router = useRouter();
-  const [consent, setConsent] = useState(false);
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -131,25 +125,9 @@ export default function GuardianLinkClient({ token, claim }: { token: string; cl
   return (
     <Card>
       {header}
-      <div className="rounded-lg bg-grey-50 border border-grey-200 p-4 mb-4">
-        <p className="text-[12.5px] font-bold text-ink mb-2">What will be shared with you and your admissions consultant</p>
-        <ul className="text-[12.5px] text-grey-700 list-disc pl-5 leading-[1.7]" data-testid="shared-items">
-          {SHARED_ITEMS.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-        <p className="text-[12.5px] font-bold text-ink mt-3 mb-1">Not shared</p>
-        <ul className="text-[12.5px] text-grey-700 list-disc pl-5 leading-[1.7]" data-testid="not-shared-items">
-          {NOT_SHARED_ITEMS.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-        <p className="text-[12px] text-grey-600 mt-3">Connecting does not sign you up for paid lessons. You can revoke summary sharing from your parent portal at any time.</p>
-      </div>
-      <label className="flex items-start gap-2 text-[13px] text-ink mb-4">
-        <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5" />
-        <span>I&apos;m {student}&apos;s parent or guardian and I agree to share the information above.</span>
-      </label>
+      <p className="text-[13px] text-grey-700 mb-4">
+        Connect your account to {student} to see their practice results and book a free consultation. Connecting does not sign you up for paid lessons.
+      </p>
       {error && (
         <p role="alert" className="text-[12.5px] text-red mb-3">
           {error}
@@ -157,11 +135,11 @@ export default function GuardianLinkClient({ token, claim }: { token: string; cl
       )}
       <button
         type="button"
-        disabled={pending || !consent}
+        disabled={pending}
         onClick={() => {
           setError(null);
           startTransition(async () => {
-            const r = await acceptGuardianLinkAction(token, consent);
+            const r = await acceptGuardianLinkAction(token, true);
             if (!r.ok) {
               setError(r.error);
               return;
