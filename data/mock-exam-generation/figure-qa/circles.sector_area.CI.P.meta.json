@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.sector_area.CI.P",
+ "generatedAt": "2026-10-06T07:03:18.307Z",
+ "codeHash": "114e56fd7f9c34f40dc2f2f37f988b2d539be4eb5e1e1d8c9f47c227ca3fd53a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.sector_area.CI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.sector_area.CI.P.png",
+   "mobileFile": "circles.sector_area.CI.P.m375.png",
+   "archetypeId": "ci.sector_area.CI.P.compose_kind",
+   "seed": 11,
+   "signature": "circle",
+   "stimulus": "A student is studying the circle shown. A calculator is not necessary. A circle with center $O$ is shown, and the sector bounded by $OT$ and $OX$ is shaded.",
+   "question": "How large is the shaded sector's area, in terms of $\\pi$?",
+   "options": [
+    "$150\\pi$",
+    "$15\\pi$",
+    "$300\\pi$",
+    "$400\\pi$"
+   ],
+   "correctIndex": 0,
+   "answer": "$150\\pi$",
+   "explanation": "(1) 그림에서 중심각 135° 와 반지름 20 을 읽는다. (2) 원의 넓이 = π × 20² = 400π 이다. (3) 부채꼴은 원의 135/360 이다. (4) 넓이 = 135/360 × 400π 이다. (5) 따라서 150π 이다. 따라서 정답은 $150\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

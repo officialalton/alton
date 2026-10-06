@@ -18,7 +18,7 @@ import MockExamTab from "./MockExamTab";
 import ErrorReportsTab from "./ErrorReportsTab";
 import type { MockExamSetSummary } from "./mock-exam-actions";
 import UsersTab from "./UsersTab";
-import FreeMembersTab from "./FreeMembersTab";
+import FreeAccountsTab from "./free-accounts/FreeAccountsTab";
 import BookingReconciliationPanel from "./BookingReconciliationPanel";
 import UnifiedScheduleTab from "./UnifiedScheduleTab";
 import ConsultationTab from "./ConsultationTab";
@@ -62,7 +62,7 @@ import type { IntakeConsultation } from "@/app/consultant/intake-data";
 const NAV_ITEMS = [
   { id: "home", label: "Home", icon: "home" },
   { id: "users", label: "Users", icon: "users" },
-  { id: "free-members", label: "Free Members", icon: "users" },
+  { id: "free-accounts", label: "Free Accounts", icon: "users" },
   { id: "matching", label: "Matching", icon: "matching" },
   { id: "consult", label: "Onboarding", icon: "onboarding" },
   { id: "catalog", label: "Curriculum", icon: "curriculum" },
@@ -236,7 +236,7 @@ export default function AdminShell({
   const OPERATIONS_IDS: TabId[] = [
     "home",
     "users",
-    "free-members",
+    "free-accounts",
     "matching",
     "consult",
     "unified-schedule",
@@ -443,8 +443,8 @@ export default function AdminShell({
             <MockExamTab initialSets={mockExamSets} />
           ) : activeTab === "users" ? (
             <UsersTab subjects={subjects} />
-          ) : activeTab === "free-members" ? (
-            <FreeMembersTab />
+          ) : activeTab === "free-accounts" ? (
+            <FreeAccountsTab />
           ) : activeTab === "entitlements" ? (
             <EntitlementLedgerTab
               products={entitlementProducts}

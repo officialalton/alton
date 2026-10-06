@@ -12,6 +12,7 @@ export function figureSignature(fig: unknown): { signature: string; types: strin
   const f = fig as { type?: string; kind?: string; choices?: { type?: string; kind?: string }[]; figures?: { spec: { type?: string; kind?: string } }[] } | null;
   if (!f) return { signature: "none", types: [] };
   const one = (x: { type?: string; kind?: string }) => `${x.type}${x.kind ? `:${x.kind}` : ""}`;
+  if ((f as { type?: string }).type === "figure_bundle") { const b = f as unknown as { stem: { type?: string; kind?: string }; choices: { choices: { type?: string; kind?: string }[] } }; return { signature: `figure_bundle[${one(b.stem)}>${one(b.choices.choices[0])}]`, types: ["figure_bundle", "figure_choice", b.stem.type!, ...new Set(b.choices.choices.map((c) => c.type!))] }; }
   if (f.type === "figure_choice") return { signature: `figure_choice[${one(f.choices![0])}]`, types: ["figure_choice", ...new Set(f.choices!.map((c) => c.type!))] };
   if (f.type === "figure_set") return { signature: `figure_set[${one(f.figures![0].spec)}]`, types: ["figure_set", ...new Set(f.figures!.map((c) => c.spec.type!))] };
   return { signature: one(f), types: [f.type!] };

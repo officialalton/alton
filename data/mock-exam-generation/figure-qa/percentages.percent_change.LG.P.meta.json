@@ -1,0 +1,43 @@
+{
+ "itemId": "percentages.percent_change.LG.P",
+ "generatedAt": "2026-10-06T06:08:52.224Z",
+ "codeHash": "f090030c8d6962ffc964f97b8ec41de907a7915338f3246b576997c22dbe2729",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_lg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t4-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.percent_change.LG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.percent_change.LG.P.png",
+   "mobileFile": "percentages.percent_change.LG.P.m375.png",
+   "archetypeId": "pct.percent_change.LG.P.compare_scenarios",
+   "seed": 11,
+   "signature": "data:line",
+   "stimulus": "The graph shows the number of maps sold at Kiosk E for each of 5 consecutive years.",
+   "question": "Of the year-to-year changes shown, what is the greatest percent increase?",
+   "options": [
+    "80",
+    "200",
+    "40",
+    "205"
+   ],
+   "correctIndex": 1,
+   "answer": "200",
+   "explanation": "(1) 선그래프에서 값을 읽는다: 2016 100, 2017 50, 2018 90, 2019 20, 2020 60. (2) 퍼센트 증가 = (나중 - 처음) ÷ 처음 × 100 이다. (3) 구간별 증가율: -50%, 80%, -77.78%, 200% 이다. (4) 증가량이 가장 큰 구간은 증가율이 가장 크지 않다. (5) 가장 큰 증가율은 200% 이다. 따라서 정답은 200이다.",
+   "structuralIssues": []
+  }
+ ]
+}

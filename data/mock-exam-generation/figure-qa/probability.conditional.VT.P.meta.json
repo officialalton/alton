@@ -1,0 +1,42 @@
+{
+ "itemId": "probability.conditional.VT.P",
+ "generatedAt": "2026-10-06T07:23:14.232Z",
+ "codeHash": "a7b85f2a28fb80fe661f759e24bfde03bb129af1bde8e7b9873a9e6f7ed8948c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/venn-tree.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.conditional.VT.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/vt-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.conditional.VT.P.png",
+   "mobileFile": "probability.conditional.VT.P.m375.png",
+   "archetypeId": "prob.conditional.VT.P.chain2",
+   "seed": 11,
+   "signature": "venn_tree:venn",
+   "stimulus": "In the Venn diagram shown, the two circles represent the readers in a library survey who read a mystery novel and who read a history book, with the overlap showing those in both. The total number is shown, and the overlap is marked $x$.",
+   "question": "Given that a randomly selected reader read a history book, what is the probability that the reader read a mystery novel?",
+   "options": [
+    "8/19",
+    "4/9",
+    "4/57",
+    "1/6"
+   ],
+   "correctIndex": 1,
+   "answer": "4/9",
+   "explanation": "(1) 전체 57 에서 x = 57 - (20 + 5 + 28) = 4 이다. (2) 벤 다이어그램에서 영역 값을 읽는다: Mystery 만 20, 교집합 4, History 만 5, 어느 쪽도 아님 28. (3) 조건: History 에 속함 → 분모는 4 + 5 = 9 이다. (4) 확률 = 4/9 = 4/9 이다. (5) 따라서 4/9 이다. 따라서 정답은 4/9이다.",
+   "structuralIssues": []
+  }
+ ]
+}

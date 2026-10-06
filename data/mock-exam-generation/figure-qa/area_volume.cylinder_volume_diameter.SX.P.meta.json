@@ -1,0 +1,42 @@
+{
+ "itemId": "area_volume.cylinder_volume_diameter.SX.P",
+ "generatedAt": "2026-10-06T07:23:14.245Z",
+ "codeHash": "bf9a496d272f6b4e1434fd69c2a6cb0e8b050f5eb050880360ead08ef07ef6ed",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/solid-x.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.cylinder_volume_diameter.SX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sx-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.cylinder_volume_diameter.SX.P.png",
+   "mobileFile": "area_volume.cylinder_volume_diameter.SX.P.m375.png",
+   "archetypeId": "av.cylinder_volume_diameter.SX.P.chain2",
+   "seed": 11,
+   "signature": "solid_x:cylinder_section",
+   "stimulus": "A grain bin is modeled by the cylinder in the figure. The dashed rectangle is a cross section through the axis of the cylinder. Before you calculate, decide which of the labeled lengths are needed and which ones are only there for reference.",
+   "question": "What is the volume, in cubic units, of the cylinder shown?",
+   "options": [
+    "$48\\pi$",
+    "$288\\pi$",
+    "$90\\pi$",
+    "$72\\pi$"
+   ],
+   "correctIndex": 3,
+   "answer": "$72\\pi$",
+   "explanation": "(1) 그림에서 지름·대각선 라벨을 읽는다. (2) 반지름 = 6 ÷ 2 = 3 이다. (3) x² = 10² - 6² = 64 이므로 높이 x = 8 이다. (4) 부피 = π × 3² × 8 = 72π 이다. (5) 따라서 72π 이다. 따라서 정답은 $72\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

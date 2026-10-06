@@ -1,0 +1,45 @@
+{
+ "itemId": "area_volume.cylinder_volume_diameter.SO.P",
+ "generatedAt": "2026-10-06T07:21:08.002Z",
+ "codeHash": "facecd096b5eef5f01df38dcaec376b641dc86e17bebb9c909ef09f4003c6233",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cyl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.cylinder_volume_diameter.SO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.cylinder_volume_diameter.SO.P.png",
+   "mobileFile": "area_volume.cylinder_volume_diameter.SO.P.m375.png",
+   "archetypeId": "av.cylinder_volume_diameter.SO.P.compose_kind",
+   "seed": 11,
+   "signature": "solid:cylinder",
+   "stimulus": "A shop owner measures the item shown. Pay attention to the units. The solid in the figure is a cylindrical water tank with labeled measurements.",
+   "question": "The volume of the solid is how many cubic units, in terms of $\\pi$?",
+   "options": [
+    "$2916\\pi$",
+    "$81\\pi$",
+    "$729\\pi$",
+    "$162\\pi$"
+   ],
+   "correctIndex": 2,
+   "answer": "$729\\pi$",
+   "explanation": "(1) 그림에서 지름 18 과 높이 9 를 읽는다. (2) 반지름 = 18 ÷ 2 = 9 이다. (3) 밑면의 넓이 = π × 9² = 81π 이다. (4) 부피 = 81π × 9 이다. (5) 따라서 729π 이다. 따라서 정답은 $729\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

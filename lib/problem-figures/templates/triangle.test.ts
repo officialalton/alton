@@ -65,3 +65,33 @@ describe("템플릿 2 — 거부", () => {
     expect(r.issues.some((i) => i.code === "label_collision" || i.code === "clipped")).toBe(true);
   });
 });
+
+describe("식 라벨('x + 4'·'2x')은 숫자 길이로 읽지 않는다(2026-10-06)", () => {
+  const lines = (svg: string) => (svg.match(/<line [^>]*stroke-width="2"[^>]*\/>/g) ?? []).join("");
+  const mk = (base: string) => renderTriangle(T({ notToScale: false, kind: "scalene", sides: [{ between: ["B", "C"], label: base }], altitude: { from: "A", foot: "D", label: "12" } }));
+  it("밑변 'x + 4' 는 라벨이 없을 때와 같은 기본 모양, 숫자 '4' 는 밑변:높이 = 4:12 로 그린다", () => {
+    expect(lines(mk("x + 4").svg)).toBe(lines(renderTriangle(T({ notToScale: false, kind: "scalene", altitude: { from: "A", foot: "D", label: "12" } })).svg));
+    expect(lines(mk("4").svg)).not.toBe(lines(mk("x + 4").svg));
+    expect(lines(mk("2x").svg)).toBe(lines(mk("x + 4").svg));
+  });
+});
+
+describe("변 연장(extend) — 바깥각", () => {
+  const ext = (over: Partial<TriangleSpec> = {}): TriangleSpec => T({ kind: "scalene", angles: [{ at: "A", label: "x°", value: 60 }, { at: "B", label: "2x°", value: 50 }, { at: "C", value: 70 }], extend: { from: "B", at: "C", label: "110°", end: "D" }, ...over });
+  const text = "In triangle $ABC$ shown, side $BC$ is extended to point $D$. The angles are labeled in degrees. What is the exterior angle at $C$, $110°$, $x°$, $2x°$?";
+  it("연장선·바깥각 호·라벨이 충돌 없이 그려진다", () => {
+    const r = renderTriangle(ext());
+    expect(r.issues).toEqual([]);
+    expect(r.svg).toContain("110°");
+    expect(checkFigure(ext(), text).ok).toBe(true);
+  });
+  it("연장하지 않은 삼각형의 그림은 바뀌지 않는다(연장 필드 없으면 같은 SVG)", () => {
+    const base = T({ kind: "scalene", angles: [{ at: "A", label: "50°" }] });
+    expect(renderTriangle(base).svg).toBe(renderTriangle({ ...base }).svg);
+  });
+  it("연장 필드 검증: 같은 꼭짓점·모르는 꼭짓점은 거부", () => {
+    expect(validateTriangle(ext({ extend: { from: "B", at: "B" } })).ok).toBe(false);
+    expect(validateTriangle(ext({ extend: { from: "B", at: "Z" } })).ok).toBe(false);
+    expect(validateTriangle(ext({ extend: { from: "B", at: "C", end: "A" } })).ok).toBe(false);
+  });
+});

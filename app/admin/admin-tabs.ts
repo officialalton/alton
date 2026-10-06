@@ -7,8 +7,8 @@
 export const ADMIN_NAV_TAB_IDS = [
   "home",
   "users",
-  // 2026-10-05 무료 회원(S5) — 목록·상담 관심 큐·보호자 연결 수동 검토.
-  "free-members",
+  // 2026-10-06 Free Accounts — 무료 회원 목록·상세(점수 통계)·Analytics. 옛 id "free-members"는 alias.
+  "free-accounts",
   "matching",
   "consult",
   "catalog",
@@ -54,8 +54,12 @@ const VALID_TAB_ID_SET: ReadonlySet<string> = new Set(ADMIN_TAB_IDS);
 // (?tab=inquiry)는 Messenger로 보낸다(AdminShell이 raw 값으로 '가족' 서브탭을 연다).
 export const LEGACY_INQUIRY_TAB_ID = "inquiry";
 
+// 2026-10-06 — 옛 "Free Members" 탭 id(?tab=free-members) 북마크는 Free Accounts로 보낸다.
+export const LEGACY_FREE_MEMBERS_TAB_ID = "free-members";
+
 /** 알 수 없거나 없는 tab 값은 항상 "home"으로 정규화한다. */
 export function resolveAdminTab(tab: string | undefined | null): AdminTabId {
   if (tab === LEGACY_INQUIRY_TAB_ID) return "messenger";
+  if (tab === LEGACY_FREE_MEMBERS_TAB_ID) return "free-accounts";
   return tab && VALID_TAB_ID_SET.has(tab) ? (tab as AdminTabId) : "home";
 }

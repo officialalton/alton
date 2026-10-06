@@ -1,0 +1,62 @@
+{
+ "itemId": "area_volume.triangle_area.PG.P",
+ "generatedAt": "2026-10-06T06:43:53.354Z",
+ "codeHash": "4cb2c5288ae020190bb2d467858b26994d61dcd7f5df9bd2b932939efe203695",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.triangle_area.PG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.triangle_area.PG.P.png",
+   "mobileFile": "area_volume.triangle_area.PG.P.m375.png",
+   "archetypeId": "av.triangle_area.PG.P.compose_kind",
+   "seed": 11,
+   "signature": "polygon:parallelogram",
+   "stimulus": "A landscaper plans the plot shown. The parallelogram $BDTY$ in the figure is split by diagonal $BT$ into triangles $BDT$ and $BTY$. Lengths are given in the same unit.",
+   "question": "How large is the area of triangle $BDT$?",
+   "options": [
+    "77",
+    "23",
+    "66",
+    "132"
+   ],
+   "correctIndex": 2,
+   "answer": "66",
+   "explanation": "(1) 그림에서 밑변 BD = 12, 높이 = 11 를 읽는다. (2) 평행사변형의 넓이 = 12 × 11 = 132 이다. (3) 대각선 BT 는 평행사변형을 합동인 두 삼각형으로 나눈다. (4) 삼각형 BDT 의 넓이 = 132 ÷ 2 = 66 이다. (5) 따라서 66 이다. 따라서 정답은 66이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.triangle_area.PG.P~chain2.png",
+   "mobileFile": "area_volume.triangle_area.PG.P~chain2.m375.png",
+   "archetypeId": "av.triangle_area.PG.P.chain2",
+   "seed": 11,
+   "signature": "polygon:rectangle",
+   "stimulus": "A designer drafts the shape shown. Rectangle $HLRW$ is shown with its diagonal $HR$. All lengths shown are in feet.",
+   "question": "What is the area of triangle $HLR$ formed by the diagonal?",
+   "options": [
+    "30",
+    "240",
+    "480",
+    "272"
+   ],
+   "correctIndex": 1,
+   "answer": "240",
+   "explanation": "(1) 그림에서 HL = 16, 대각선 HR = 34 를 읽는다. (2) 삼각형 HLR 는 L 에서 직각이다. (3) LR² = 34² - 16² = 900 이므로 LR = 30 이다. (4) 넓이 = ½ × 16 × 30 이다. (5) 따라서 240 이다. 따라서 정답은 240이다.",
+   "structuralIssues": []
+  }
+ ]
+}

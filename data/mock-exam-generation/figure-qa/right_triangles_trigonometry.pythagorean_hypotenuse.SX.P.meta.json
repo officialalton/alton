@@ -1,0 +1,42 @@
+{
+ "itemId": "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P",
+ "generatedAt": "2026-10-06T07:23:14.239Z",
+ "codeHash": "8ce9862d0c39ea6514fc8e9e395e176d1610259bc104e0c981ad6637491b055a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/solid-x.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.pythagorean_hypotenuse.SX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sx-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P.png",
+   "mobileFile": "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P.m375.png",
+   "archetypeId": "rtt.pythagorean_hypotenuse.SX.P.chain2",
+   "seed": 11,
+   "signature": "solid_x:box_diagonal",
+   "stimulus": "A carpenter builds a storage bench in the shape of the rectangular box in the figure, marking its edges and a dashed segment inside. Pay attention to which quantities are labeled with numbers and which are labeled with letters in the diagram.",
+   "question": "What is the length of the space diagonal, shown as $x$?",
+   "options": [
+    "21",
+    "22",
+    "29",
+    "441"
+   ],
+   "correctIndex": 0,
+   "answer": "21",
+   "explanation": "(1) 그림에서 길이·너비·높이 라벨을 읽는다. (2) 밑면 대각선² = 5² + 20² = 425 이다. (3) 공간 대각선² = 밑면 대각선² + 4² = 441 이다. (4) x = √441 = 21 이다. (5) 따라서 21 이다. 따라서 정답은 21이다.",
+   "structuralIssues": []
+  }
+ ]
+}

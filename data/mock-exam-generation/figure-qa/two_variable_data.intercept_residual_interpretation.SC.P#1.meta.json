@@ -1,0 +1,41 @@
+{
+ "itemId": "two_variable_data.intercept_residual_interpretation.SC.P#1",
+ "generatedAt": "2026-10-06T06:14:35.119Z",
+ "codeHash": "5d83667fbba3b85cef93c8cf117995b36b30cd70e8a9562172b563102d23e4b8",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.intercept_residual_interpretation.SC.P_1.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.intercept_residual_interpretation.SC.P#1.png",
+   "mobileFile": "two_variable_data.intercept_residual_interpretation.SC.P#1.m375.png",
+   "archetypeId": "tvd.intercept_residual_interpretation.SC.P#1.chain2",
+   "seed": 11,
+   "signature": "data:scatter",
+   "stimulus": "The scatterplot shows the number of hours of sunlight a plant receives each day and the plant's daily growth for 8 data points, along with a line of best fit.",
+   "question": "What is the residual, in millimeters, for the point with sunlight equal to 7? (Residual = actual value − predicted value.)",
+   "options": [
+    "139",
+    "21",
+    "128",
+    "11"
+   ],
+   "correctIndex": 3,
+   "answer": "11",
+   "explanation": "(1) 그림에서 직선 위의 두 격자점 (0, 100) 과 (10, 140) 를 읽는다. (2) 기울기 m = (140 - 100) ÷ (10 - 0) = 4, 식은 y = 4x + 100 이다. (3) x = 7 에서 예측값 = 4 × 7 + 100 = 128 이다. (4) 그 x 의 점의 관측값은 139 이다. (5) 잔차 = 139 - 128 = 11 이다. 따라서 정답은 11이다.",
+   "structuralIssues": []
+  }
+ ]
+}

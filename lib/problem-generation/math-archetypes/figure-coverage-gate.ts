@@ -16,7 +16,7 @@ import { verifyLevel, type LArch } from "./levels-d";
 import { verifyInstance } from "./verify";
 import { sprCapability, levelOf } from "./spr-capability";
 import { sprTarget } from "./spr";
-import { CHOICES_LINE, FIGURE_LINE, TAMPER_MODES, tamperFigure, type TamperMode } from "./figure-verify";
+import { CHOICES_LINE, STEM_LINE, FIGURE_LINE, TAMPER_MODES, tamperFigure, type TamperMode } from "./figure-verify";
 import type { Archetype, Instance } from "./types";
 
 /** SPR 공급 요구(30세트 × 세트당 hard SPR 약 2개). 같은 유사문항 그룹은 한 세트에 하나라 그룹 수가 60 이상이어야 그룹을 재사용하지 않고 30세트를 채운다. */
@@ -27,7 +27,9 @@ export const figureArchetypes = (): LArch[] => D_ARCHETYPES.filter((a) => a.figu
 
 function mutate(inst: Instance, mode: TamperMode): Instance {
   const figure = tamperFigure(inst.figure, mode); let js = inst.verificationJs;
-  if (CHOICES_LINE.test(js)) js = js.replace(CHOICES_LINE, `const CHOICES = ${JSON.stringify((figure as { choices: unknown[] }).choices)};`);
+  const bf = figure as { type?: string; stem?: unknown; choices?: unknown };
+  if (bf && bf.type === "figure_bundle") js = js.replace(CHOICES_LINE, `const CHOICES = ${JSON.stringify((bf.choices as { choices: unknown[] }).choices)};`).replace(STEM_LINE, `const STEM = ${JSON.stringify(bf.stem)};`);
+  else if (CHOICES_LINE.test(js)) js = js.replace(CHOICES_LINE, `const CHOICES = ${JSON.stringify((figure as { choices: unknown[] }).choices)};`);
   else js = js.replace(FIGURE_LINE, `const FIGURE = ${JSON.stringify(figure)};`);
   return { ...inst, figure, verificationJs: js };
 }

@@ -15,7 +15,7 @@ export type FigureChoiceSpec = { type: "figure_choice"; choices: unknown[]; notT
 export type FigureSetSpec = { type: "figure_set"; figures: { id: string; title?: string; spec: unknown }[] };
 
 const LETTERS = ["A", "B", "C", "D", "E"];
-const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "data", "number_line"];
+const CHILD_TYPES_ALLOWED = ["plane", "parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "trig_curve", "data", "number_line"];
 
 /** 지문의 일차식과 같은 그래프가 든 선택지 번호(정확히 하나일 때). */
 /** 지문의 식(일차 y = mx + b, 이차 y = ax² + bx + c, 절댓값 y = a|x − h| + k)과 같은 그래프가 든 선택지 번호들. */

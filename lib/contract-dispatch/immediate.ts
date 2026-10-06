@@ -8,7 +8,7 @@ import { isContractAutoDispatchEnabled, processContractDispatchQueue } from "./d
 // 크론(/api/cron/dispatch-contracts)은 재시도 백스톱이다.
 //
 // 규칙: 호출자의 결과·지연에 절대 영향을 주지 않는다 — 어떤 오류도 삼키고 로그만 남긴다.
-// fail-closed: CONTRACT_AUTO_DISPATCH_ENABLED !== "true"면 아무것도 하지 않는다(claim도 발송도 없음).
+// fail-closed: 관리자 설정이 꺼져 있거나 env가 "false"(비상 정지)이거나 설정 조회 실패면 아무것도 하지 않는다(claim도 발송도 없음).
 
 export type ContractDispatchScope = {
   /** 이미 아는 자녀 id들 */
@@ -42,8 +42,8 @@ async function resolveChildIds(scope: ContractDispatchScope): Promise<string[]> 
 
 /** 워커 실행 본체 — 절대 throw하지 않는다. */
 export async function runContractDispatchNow(scope: ContractDispatchScope): Promise<void> {
-  if (!isContractAutoDispatchEnabled()) return;
   try {
+    if (!(await isContractAutoDispatchEnabled(createAdminClient()))) return;
     const childIds = await resolveChildIds(scope);
     if (childIds.length === 0) return;
     const result = await processContractDispatchQueue(createAdminClient(), { childIds });
@@ -59,7 +59,6 @@ export async function runContractDispatchNow(scope: ContractDispatchScope): Prom
  * after()가 불가능하면 fire-and-forget으로 돌린다. 어떤 경우에도 throw하지 않는다. */
 export function scheduleContractDispatch(scope: ContractDispatchScope): void {
   try {
-    if (!isContractAutoDispatchEnabled()) return;
     try {
       after(() => runContractDispatchNow(scope));
     } catch {

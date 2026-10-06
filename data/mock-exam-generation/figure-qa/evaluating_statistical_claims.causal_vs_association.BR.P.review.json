@@ -1,0 +1,23 @@
+{
+ "itemId": "evaluating_statistical_claims.causal_vs_association.BR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "db1aab00a46f01505336ee4289adbecf49402099278c70676adffe3f9c8cefc0",
+ "samples": [
+  "evaluating_statistical_claims.causal_vs_association.BR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 컴퓨터로 무작위 배정 + 사용자 막대 80 > 비사용자 40 → 인과 + higher (D). 막대가 10 간격 눈금과 일치, 선지 4개가 방향·인과 조합으로 서로 다른 규칙, 데스크톱·375px 판독 가능. (메타 정답: Using a daily ear-training app caused a higher mean pitch accuracy score among the participants.)"
+}

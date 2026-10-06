@@ -17,6 +17,8 @@ export type PolygonSpec = {
   diagonals?: { between: [string, string]; label?: string }[];
   /** 높이 — 꼭짓점에서 맞은 변(밑변)으로 수선, 점선 + 직각 표시. */
   height?: { from: string; label?: string; foot?: string };
+  /** 직사각형 전용 — 두 변이 숫자 라벨일 때 단위당 화면 길이(px). 선택지처럼 여러 직사각형을 같은 축척으로 나란히 그릴 때 준다(생략하면 그림마다 틀에 맞춰 키운다). */
+  pxPerUnit?: number;
   notToScale?: boolean;
 };
 
@@ -35,6 +37,7 @@ export function validatePolygon(input: unknown): { ok: true; spec: PolygonSpec }
   const vs = s.vertices as string[];
   const has = (v: unknown) => typeof v === "string" && vs.includes(v);
   const adjacent = (a: string, b: string) => { const i = vs.indexOf(a), j = vs.indexOf(b); return (i + 1) % n === j || (j + 1) % n === i; };
+  if (s.pxPerUnit !== undefined && !(typeof s.pxPerUnit === "number" && s.pxPerUnit > 0 && s.pxPerUnit <= 40)) return { ok: false, error: "pxPerUnit 은 0 보다 크고 40 이하인 숫자입니다." };
   for (const sl of (s.sideLabels ?? []) as Record<string, unknown>[]) {
     if (!sl || !Array.isArray(sl.between) || sl.between.length !== 2 || !sl.between.every(has) || sl.between[0] === sl.between[1]) return { ok: false, error: "sideLabels[].between 은 서로 다른 꼭짓점 2개여야 합니다." };
     if (!adjacent(sl.between[0] as string, sl.between[1] as string)) return { ok: false, error: `${(sl.between as string[]).join("")} 은 변이 아닙니다(이웃 꼭짓점이 아님) — 대각선이면 diagonals 에.` };
@@ -59,6 +62,8 @@ function parseSideLabel(spec: PolygonSpec, a: string, b: string): number | null 
   const sl = (spec.sideLabels ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a));
   const t = sl?.label;
   if (!t) return null;
+  // 'x + 4'·'3x'·'(2x + 1)' 같은 식 라벨은 숫자 길이가 아니다(숫자만 뽑아 32 로 읽으면 그림 비율이 틀어진다).
+  if (/\d[a-zA-Zℓ]|[a-zA-Zℓ]\s*[+\-−*/]|[+\-−*/]\s*[a-zA-Zℓ]/.test(t)) return null;
   const n = Number(t.trim().replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : null;
 }
@@ -77,9 +82,11 @@ function shape(spec: PolygonSpec): Pt[] {
       const wLabel = parseSideLabel(spec, spec.vertices[0], spec.vertices[1]);
       const hLabel = parseSideLabel(spec, spec.vertices[1], spec.vertices[2]);
       if (wLabel !== null && hLabel !== null) {
-        const pxPerUnit = Math.min(MAX_W / wLabel, MAX_H / hLabel);
-        halfW = Math.max(MIN_SIDE, Math.round(wLabel * pxPerUnit)) / 2;
-        fullH = Math.max(MIN_SIDE, Math.round(hLabel * pxPerUnit));
+        const shared = typeof spec.pxPerUnit === "number" && spec.pxPerUnit > 0 ? spec.pxPerUnit : null;
+        const pxPerUnit = shared ?? Math.min(MAX_W / wLabel, MAX_H / hLabel);
+        const minSide = shared ? 24 : MIN_SIDE;
+        halfW = Math.max(minSide, Math.round(wLabel * pxPerUnit)) / 2;
+        fullH = Math.max(minSide, Math.round(hLabel * pxPerUnit));
       }
       return [[cx - halfW, baseY], [cx + halfW, baseY], [cx + halfW, baseY - fullH], [cx - halfW, baseY - fullH]];
     }
@@ -100,8 +107,9 @@ function shape(spec: PolygonSpec): Pt[] {
 }
 
 export function renderPolygon(spec: PolygonSpec): { svg: string; alt: string; issues: FigureIssue[] } {
-  const W = 360, H = spec.notToScale ? 270 : 250;
+  const W = 360, H = spec.notToScale ? 292 : 250; // 'Note' 문구가 아래 변 라벨에 닿지 않게 여유를 둔다
   const sheet = new Sheet(W, H);
+  if (spec.notToScale) sheet.reserve(24 + 85, H - 14, "Note: Figure not drawn to scale.", 12.5); // 'Note' 자리를 라벨이 침범하면 충돌로 잡는다
   const issues: FigureIssue[] = [];
   const pts = shape(spec);
   const n = pts.length;
@@ -191,15 +199,15 @@ export function lintPolygonAgainstText(spec: PolygonSpec, passage: string): Figu
   const issues: FigureIssue[] = [];
   const text = passage.replace(/\$/g, "").replace(/\\overline\{([A-Z]{2})\}/g, "$1").replace(/\\angle/g, "∠").replace(/−/g, "-");
   const names = new Set<string>([...spec.vertices, ...(spec.height?.foot ? [spec.height.foot] : [])]);
-  const kindWords: Record<PolygonKind, RegExp> = { rectangle: /\brectangle\b/i, square: /\bsquare\b/i, parallelogram: /\bparallelogram\b/i, rhombus: /\brhombus\b/i, trapezoid: /\btrapezoid\b/i, regular: /\b(regular\s+)?(pentagon|hexagon|heptagon|octagon|polygon|triangle)\b/i };
+  const kindWords: Record<PolygonKind, RegExp> = { rectangle: /\brectangle\b/i, square: /\bsquare\b/i, parallelogram: /\bparallelogram\b/i, rhombus: /\brhombus\b/i, trapezoid: /\btrapezoid\b/i, regular: /\b(?:(?:regular\s+)?(?:pentagon|hexagon|heptagon|octagon|polygon)|(?:regular|equilateral)\s+triangle)\b/i };
   for (const [k, re] of Object.entries(kindWords) as [PolygonKind, RegExp][]) {
     if (k !== spec.kind && re.test(text) && !(spec.kind === "square" && k === "rectangle")) issues.push({ code: "ref_mismatch", message: `지문은 ${k} 를 말하지만 도형의 kind 는 ${spec.kind} 입니다.` });
   }
-  for (const m of text.matchAll(/\b(?:rectangle|square|parallelogram|rhombus|trapezoid|pentagon|hexagon|polygon|quadrilateral)\s+([A-Z]{3,8})\b/gi)) for (const ch of m[1]) if (!names.has(ch)) issues.push({ code: "ref_missing", message: `지문의 도형 ${m[1]} 의 점 '${ch}' 가 도형 데이터에 없습니다.` });
+  for (const m of text.matchAll(/\b(?:[Rr]ectangle|[Ss]quare|[Pp]arallelogram|[Rr]hombus|[Tt]rapezoid|[Pp]entagon|[Hh]exagon|[Pp]olygon|[Qq]uadrilateral)\s+([A-Z]{3,8})\b/g)) for (const ch of m[1]) if (!names.has(ch)) issues.push({ code: "ref_missing", message: `지문의 도형 ${m[1]} 의 점 '${ch}' 가 도형 데이터에 없습니다.` });
   const sideLabel = (a: string, b: string) => (spec.sideLabels ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a))?.label;
   const diag = (a: string, b: string) => (spec.diagonals ?? []).find((d) => (d.between[0] === a && d.between[1] === b) || (d.between[0] === b && d.between[1] === a));
   for (const m of text.matchAll(/\b(?:side|segment|length of)\s+([A-Z])([A-Z])\b/g)) if (!names.has(m[1]) || !names.has(m[2])) issues.push({ code: "ref_missing", message: `지문의 변 ${m[1]}${m[2]} 의 점이 도형에 없습니다.` });
-  for (const m of text.matchAll(/\bdiagonal\s+([A-Z])([A-Z])\b/gi)) if (!diag(m[1], m[2])) issues.push({ code: "ref_missing", message: `지문의 대각선 ${m[1]}${m[2]} 가 도형에 없습니다.` });
+  for (const m of text.matchAll(/\b[Dd]iagonal\s+([A-Z])([A-Z])\b/g)) if (!diag(m[1], m[2])) issues.push({ code: "ref_missing", message: `지문의 대각선 ${m[1]}${m[2]} 가 도형에 없습니다.` });
   for (const m of text.matchAll(/\b([A-Z])([A-Z])\s*=\s*(\d+(?:\.\d+)?|√\d+|\d+\/\d+)/g)) {
     const lbl = sideLabel(m[1], m[2]) ?? diag(m[1], m[2])?.label;
     if (lbl === undefined) { if (names.has(m[1]) && names.has(m[2])) issues.push({ code: "ref_missing", message: `지문은 ${m[1]}${m[2]} = ${m[3]} 인데 그림에 그 길이 라벨이 없습니다.` }); }

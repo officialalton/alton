@@ -1,0 +1,45 @@
+{
+ "itemId": "lines_angles_triangles.similar_triangles.TR.B",
+ "generatedAt": "2026-10-06T07:23:14.253Z",
+ "codeHash": "8d24b9f069e918379a2637d10145e0271fd2e328cf64ff6cc6ec9070813973c3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-bundle.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.similar_triangles.TR.B.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.similar_triangles.TR.B.png",
+   "mobileFile": "lines_angles_triangles.similar_triangles.TR.B.m375.png",
+   "archetypeId": "lat.similar_triangles.TR.B.repr_shift",
+   "seed": 11,
+   "signature": "figure_bundle[triangle>triangle]",
+   "stimulus": "An architect sketches triangular braces for a frame. In the figure, triangle $KPR$ is drawn first, followed by four lettered triangles. Measures are labeled, and the figures are not drawn to scale. Everything needed to answer the question is given in the labeled drawing, so no other measurements are required.",
+   "question": "Which triangle below must be similar to triangle $KPR$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) 그림에서 기준 삼각형의 세 변 라벨을 읽는다. (2) 변을 작은 것부터 정렬하면 5, 6, 8 이다. (3) 닮으려면 선택지의 정렬된 변과 비가 모두 같아야 한다(이 문항의 정답은 2 배). (4) 다른 선택지는 일정한 수를 더했거나(비가 다름) 한 변만 어긋나거나 변마다 다른 비를 쓴다. (5) 따라서 2 배 한 삼각형이 정답이다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

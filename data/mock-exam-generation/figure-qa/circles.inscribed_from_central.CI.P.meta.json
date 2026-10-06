@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.inscribed_from_central.CI.P",
+ "generatedAt": "2026-10-06T07:03:18.311Z",
+ "codeHash": "5e774bbf04d54efcc37cc04088f82fbc7e4dd8a2b1b0a319323e1321171a6dd1",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.inscribed_from_central.CI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.inscribed_from_central.CI.P.png",
+   "mobileFile": "circles.inscribed_from_central.CI.P.m375.png",
+   "archetypeId": "ci.inscribed_from_central.CI.P.compose_kind",
+   "seed": 11,
+   "signature": "circle",
+   "stimulus": "The figure is not needed to be measured; every needed length is labeled. The figure shows a circle with center $O$ and points $E$, $M$, and $Q$ on the circle.",
+   "question": "In the figure shown, what is $x$?",
+   "options": [
+    "146",
+    "292",
+    "107",
+    "73"
+   ],
+   "correctIndex": 3,
+   "answer": "73",
+   "explanation": "(1) 그림에서 중심각 146° 를 읽는다. (2) 원주각은 같은 호의 중심각의 절반이다. (3) x = 146° ÷ 2 이다. (4) = 73° 이다. (5) 따라서 73 이다. 따라서 정답은 73이다.",
+   "structuralIssues": []
+  }
+ ]
+}

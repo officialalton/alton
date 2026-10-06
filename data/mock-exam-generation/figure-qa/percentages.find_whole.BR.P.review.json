@@ -1,0 +1,23 @@
+{
+ "itemId": "percentages.find_whole.BR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "7efce1659f51e8b0dad64455bb2e5bc6a66194cf900c06817cc55e1a862586b8",
+ "samples": [
+  "percentages.find_whole.BR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Rose Glen 120÷0.5=240, Ivy Ridge 80÷0.4=200 → 차 40(B). 막대 눈금 0~240(40 간격)·막대 높이가 눈금선과 일치, 범주 이름 대각 표기 판독 가능, 375px 양호. (메타 정답: 40)"
+}

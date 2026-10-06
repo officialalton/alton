@@ -10,8 +10,16 @@ import { lintCircleAgainstText, renderCircle } from "./templates/circle";
 import { lintPolygonAgainstText, renderPolygon } from "./templates/polygon";
 import { lintSolidAgainstText, renderSolid } from "./templates/solid";
 import { lintCompositeAgainstText, renderComposite } from "./templates/composite";
+import { lintUnitCircleAgainstText, renderUnitCircle } from "./templates/unit-circle";
+import { lintTrigCurveAgainstText, renderTrigCurve } from "./templates/trig-curve";
+import { lintParallelThreeAgainstText, renderParallelThree } from "./templates/parallel-three";
+import { lintLShapeAgainstText, renderLShape } from "./templates/l-shape";
+import { lintSolidXAgainstText, renderSolidX } from "./templates/solid-x";
+import { lintTriNestedAgainstText, renderTriNested } from "./templates/triangle-nested";
+import { lintVennTreeAgainstText, renderVennTree } from "./templates/venn-tree";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
 import { isDSpec, lintD, renderD } from "./templates/d-registry";
+import { lintFigureBundle, renderFigureBundle } from "./templates/figure-bundle";
 import { renderFigureSvg } from "./render";
 import { figureAlt } from "./alt";
 
@@ -84,6 +92,12 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
     issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options, correctIndex));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
+  if (spec.type === "figure_bundle") {
+    const childCheck = (c: unknown, text: string) => { const r = checkFigure(c, text); return { issues: r.issues, alt: r.alt }; };
+    issues.push(...lintFigureBundle(spec, options, childCheck, { passage, correctIndex }));
+    const r = renderFigureBundle(spec, (c) => renderFigureSvg(c as typeof spec), (c) => figureAlt(c as typeof spec));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
   if (spec.type === "figure_choice") {
     const childCheck = (c: unknown, text: string) => { const r = checkFigure(c, text); return { issues: r.issues, alt: r.alt }; };
     issues.push(...lintFigureChoice(spec, options, childCheck, { passage, correctIndex }));
@@ -104,6 +118,41 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "composite") {
     const r = renderComposite(spec);
     issues.push(...r.issues, ...lintCompositeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "parallel_three") {
+    const r = renderParallelThree(spec);
+    issues.push(...r.issues, ...lintParallelThreeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "l_shape") {
+    const r = renderLShape(spec);
+    issues.push(...r.issues, ...lintLShapeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "solid_x") {
+    const r = renderSolidX(spec);
+    issues.push(...r.issues, ...lintSolidXAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "triangle_nested") {
+    const r = renderTriNested(spec);
+    issues.push(...r.issues, ...lintTriNestedAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "venn_tree") {
+    const r = renderVennTree(spec);
+    issues.push(...r.issues, ...lintVennTreeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "trig_curve") {
+    const r = renderTrigCurve(spec);
+    issues.push(...r.issues, ...lintTrigCurveAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "unit_circle") {
+    const r = renderUnitCircle(spec);
+    issues.push(...r.issues, ...lintUnitCircleAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "solid") {

@@ -169,9 +169,9 @@ export function figureSatisfies(kind: MaterialKind | null, figure: unknown): boo
   if (!t) return false;
   if (t === "image") return true; // 올린 그림은 어떤 자료든 대신할 수 있다(alt 필수는 별도 검사)
   switch (kind) {
-    case "plane": return t === "plane" || t === "figure_set";
+    case "plane": return t === "plane" || t === "trig_curve" || t === "figure_set";
     case "geometry": return (GEOMETRY_TEMPLATE_TYPES as readonly string[]).includes(t) || t === "figure_set";
-    case "data": return t === "data" || t === "figure_set";
+    case "data": return t === "data" || t === "venn_tree" || t === "figure_set";
     case "figure_choice": return t === "figure_choice";
     case "figure_set": return t === "figure_set";
   }

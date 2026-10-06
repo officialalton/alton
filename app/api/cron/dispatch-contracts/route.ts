@@ -3,7 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { processContractDispatchQueue } from "@/lib/contract-dispatch/dispatcher";
 
 // 계약 자동 발송 outbox 워커. fail-closed: CRON_SECRET이 없으면 동작하지 않고,
-// CONTRACT_AUTO_DISPATCH_ENABLED가 "true"가 아니면 큐를 건드리지 않는다(발송 없음).
+// 관리자 설정이 꺼져 있거나 env가 "false"(비상 정지)면 큐를 건드리지 않는다(발송 없음).
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET;
   if (!secret) {

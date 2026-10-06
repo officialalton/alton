@@ -1,0 +1,42 @@
+{
+ "itemId": "area_volume.prism_volume.SX.P",
+ "generatedAt": "2026-10-06T07:23:14.241Z",
+ "codeHash": "1292e77e7089831b772e42847a460477f72656288f23dfea6513dd9a81e268dd",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/solid-x.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.prism_volume.SX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sx-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.prism_volume.SX.P.png",
+   "mobileFile": "area_volume.prism_volume.SX.P.m375.png",
+   "archetypeId": "av.prism_volume.SX.P.chain2",
+   "seed": 11,
+   "signature": "solid_x:triangular_prism",
+   "stimulus": "A wedge-shaped doorstop is a triangular prism, shown in the figure with its right-triangle face and the length of the prism labeled. All of the dimensions in the figure use the same unit of length, so the answer needs no conversion.",
+   "question": "What is the volume, in cubic units, of the triangular prism shown?",
+   "options": [
+    "60",
+    "1785",
+    "840",
+    "1680"
+   ],
+   "correctIndex": 2,
+   "answer": "840",
+   "explanation": "(1) 그림에서 직각변·빗변·기둥 길이 라벨을 읽는다. (2) x² = 17² - 15² = 64 이므로 x = 8 이다. (3) 밑면의 넓이 = ½ × 15 × 8 = 60 이다. (4) 부피 = 밑면의 넓이 × 길이 = 60 × 14 = 840 이다. (5) 따라서 840 이다. 따라서 정답은 840이다.",
+   "structuralIssues": []
+  }
+ ]
+}

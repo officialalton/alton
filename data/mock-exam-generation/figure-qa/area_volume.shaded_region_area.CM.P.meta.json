@@ -1,0 +1,41 @@
+{
+ "itemId": "area_volume.shaded_region_area.CM.P",
+ "generatedAt": "2026-10-06T07:12:20.044Z",
+ "codeHash": "aa252271561a39a0b54194ea59b2ca1ecadbb3171f7877d549ea3c1537d5e4d5",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.shaded_region_area.CM.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.shaded_region_area.CM.P.png",
+   "mobileFile": "area_volume.shaded_region_area.CM.P.m375.png",
+   "archetypeId": "av.shaded_region_area.CM.P.compose_kind",
+   "seed": 11,
+   "signature": "composite",
+   "stimulus": "A tile installer marks the surface shown. Check each label against the part of the figure it describes. The figure shows a circular stamp inside a square label, with the circle's edge meeting the middle of each side of the label. The region inside the square but outside the circle is shaded.",
+   "question": "Find the area of the shaded region.",
+   "options": [
+    "$256 - 256\\pi$",
+    "$256 - 64\\pi$",
+    "$256 - 128\\pi$",
+    "$128 - 64\\pi$"
+   ],
+   "correctIndex": 1,
+   "answer": "$256 - 64\\pi$",
+   "explanation": "(1) 그림에서 정사각형의 변 16 를 읽는다. (2) 정사각형의 넓이 = 16² = 256 이다. (3) 원의 지름 = 변 = 16 이므로 반지름 8, 넓이 = 64π 이다. (4) 음영 = 정사각형 − 원 = 256 - 64π 이다. (5) 따라서 256 - 64π 이다. 따라서 정답은 $256 - 64\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

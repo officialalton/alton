@@ -72,4 +72,28 @@ describe("평행선·횡단선 — 숫자 각 라벨대로 기울인다", () => 
   it("예각 쐐기 37° → 횡단선이 37°", () => expect(Math.abs(drawnSlant(base("37°", "NW")) - 37)).toBeLessThan(3));
   it("둔각 쐐기 115° → 횡단선이 65°", () => expect(Math.abs(drawnSlant(base("115°", "NE")) - 65)).toBeLessThan(3));
   it("미지수 라벨만 있으면 기본 기울기(55°)", () => expect(Math.abs(drawnSlant(base("y°", "NW")) - 55)).toBeLessThan(0.5));
+  it("식 라벨('(2x + 10)°')이어도 value(비인쇄 참값 48°)가 있으면 그 각대로 그린다", () => {
+    const spec = base("(2x + 10)°", "NW"); spec.angles[0] = { ...spec.angles[0], value: 48 };
+    expect(Math.abs(drawnSlant(spec) - 48)).toBeLessThan(3);
+    const obtuse = base("(2x + 10)°", "NE"); obtuse.angles[0] = { ...obtuse.angles[0], value: 118 };
+    expect(Math.abs(drawnSlant(obtuse) - 62)).toBeLessThan(3);
+  });
+});
+
+describe("평행선·횡단선 — 횡단선끼리 만나는 그림(crossing.slants)은 두 횡단선을 각자의 각대로 그린다", () => {
+  const spec = (slants: [number, number]): ParallelTransversalSpec => ({
+    type: "parallel_transversal", parallel: ["m", "n"], transversals: [{ id: "p" }, { id: "q" }], crossing: { side: "below", slants },
+    points: [{ id: "X", on: ["p", "q"] }], angles: [{ at: ["p", "q"], region: "N", label: "x°" }], notToScale: true,
+  });
+  const slantsOf = (sp: ParallelTransversalSpec) => { const ls = lines(renderParallelTransversal(sp).svg); return [ls[2], ls[3]].map((t) => Math.atan2(Math.abs(t[1][1] - t[0][1]), Math.abs(t[1][0] - t[0][0])) * (180 / Math.PI)); };
+  for (const sl of [[55, 55], [48, 70], [66, 44], [80, 52]] as [number, number][]) {
+    it(`각 ${sl.join("°·")}°`, () => {
+      const r = renderParallelTransversal(spec(sl)); expect(r.issues).toEqual([]);
+      const [a, b] = slantsOf(spec(sl)); expect(Math.abs(a - sl[0])).toBeLessThan(2); expect(Math.abs(b - sl[1])).toBeLessThan(2);
+    });
+  }
+  it("slants 가 없으면 기존 그림과 같다(둘 다 55°·가로 360)", () => {
+    const sp = spec([55, 55]); delete (sp.crossing as { slants?: unknown }).slants;
+    const r = renderParallelTransversal(sp); expect(r.svg).toContain('viewBox="0 0 360'); const [a, b] = slantsOf(sp); expect(Math.abs(a - 55)).toBeLessThan(0.5); expect(Math.abs(b - 55)).toBeLessThan(0.5);
+  });
 });

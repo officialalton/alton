@@ -1,0 +1,42 @@
+{
+ "itemId": "probability.sequential_without_replacement.VT.P",
+ "generatedAt": "2026-10-06T07:23:14.233Z",
+ "codeHash": "73af35fc57b3872764784d62ba22116401855e8c2776a5b808751e7c48b31e6d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/venn-tree.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/probability.sequential_without_replacement.VT.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/vt-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "probability.sequential_without_replacement.VT.P.png",
+   "mobileFile": "probability.sequential_without_replacement.VT.P.m375.png",
+   "archetypeId": "prob.sequential_without_replacement.VT.P.chain2",
+   "seed": 11,
+   "signature": "venn_tree:tree",
+   "stimulus": "A teacher prepares a probability exercise. A drawer contains socks of two colors, gray and brown. Two socks are pulled at random without replacement. The tree diagram shown gives the probabilities. One branch probability is marked $x$.",
+   "question": "What is the probability that the first sock is brown and the second sock is gray?",
+   "options": [
+    "3/7",
+    "2/7",
+    "12/49",
+    "2/3"
+   ],
+   "correctIndex": 1,
+   "answer": "2/7",
+   "explanation": "(1) 수형도의 가지 확률을 읽는다: 첫 단계 Gray 4/7, Brown 3/7; 둘째 단계의 분모는 6 이다. (2) x 는 같은 가지에서 나온 다른 확률의 여사건이므로 x = 2/3 이다. (3) 첫 단계 brown = 3/7 이다. (4) 곱 = 3/7 × 2/3 = 2/7 이다. (5) 따라서 2/7 이다. 따라서 정답은 2/7이다.",
+   "structuralIssues": []
+  }
+ ]
+}
