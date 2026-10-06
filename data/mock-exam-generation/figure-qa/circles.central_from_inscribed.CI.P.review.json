@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.central_from_inscribed.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:03:22Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "52c7b86c77a524162a36f2916e9ec941fb1ded260a45edc46ed34667bd84b9b9",
+ "samples": [
+  "circles.central_from_inscribed.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "원주각·중심각 그림(큰 호·작은 호 위 꼭짓점, 식 라벨 변형) 샘플 + 갤러리 4 연산자 확인: 원주각 호·중심각 호·라벨·점 이름 겹침 없음, 식 라벨 문항은 원주각을 58° 이상으로 제한해 라벨이 중심 O 근처에 몰리지 않게 함."
+}

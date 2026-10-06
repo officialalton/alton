@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.central_from_inscribed.CI.P",
+ "generatedAt": "2026-10-06T07:03:18.309Z",
+ "codeHash": "52c7b86c77a524162a36f2916e9ec941fb1ded260a45edc46ed34667bd84b9b9",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.central_from_inscribed.CI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.central_from_inscribed.CI.P.png",
+   "mobileFile": "circles.central_from_inscribed.CI.P.m375.png",
+   "archetypeId": "ci.central_from_inscribed.CI.P.compose_kind",
+   "seed": 11,
+   "signature": "circle",
+   "stimulus": "A designer plans a circular logo. Round shapes like this appear on many practical plans. Points $A$, $G$, and $L$ lie on the circle with center $O$ shown in the figure.",
+   "question": "In the figure shown, what is $x$?",
+   "options": [
+    "37",
+    "212",
+    "148",
+    "74"
+   ],
+   "correctIndex": 2,
+   "answer": "148",
+   "explanation": "(1) 그림에서 원주각 74° 를 읽는다. (2) 원주각은 같은 호의 중심각의 절반이다. (3) 중심각 x = 2 × 74° 이다. (4) = 148° 이다. (5) 따라서 148 이다. 따라서 정답은 148이다.",
+   "structuralIssues": []
+  }
+ ]
+}

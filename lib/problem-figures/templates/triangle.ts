@@ -25,6 +25,8 @@ export type TriangleBody = {
   // value — 그림을 그릴 때만 쓰는 **실제 각도(도)**. 인쇄하지 않는다(정답 노출 방지). label 이 'x°'·생략이어도 그림이 참값과 일치한다.
   /** 높이(수선) — 꼭짓점에서 맞은변으로. foot 은 발 이름(선택). */
   altitude?: { from: string; foot?: string; label?: string };
+  /** 변 연장 — from→at 변을 at 너머로 늘려 그리고, 연장선과 at 의 다른 변 사이의 바깥각(외각)에 호를 긋는다. label('(3x+10)°')이 있으면 바깥각 라벨, end 는 연장선 끝점 이름(선택). 바깥각의 크기는 삼각형(angles[].value)이 정한다. */
+  extend?: { from: string; at: string; label?: string; end?: string };
 };
 
 export type TriangleSpec = {
@@ -65,6 +67,12 @@ function validateBody(b: Record<string, unknown>, who: string): string | null {
       if (String(a.at) === String(b.rightAngleAt) && a.label) return `${who}직각 꼭짓점 ${String(a.at)} 에는 각 라벨을 따로 두지 않습니다(직각 표시가 대신합니다).`;
     }
   }
+  if (b.extend !== undefined) {
+    const ex = b.extend as Record<string, unknown>;
+    if (!ex || !vs.includes(String(ex.from)) || !vs.includes(String(ex.at)) || ex.from === ex.at) return `${who}extend.from·at 은 서로 다른 꼭짓점 이름이어야 합니다.`;
+    if (ex.label !== undefined && typeof ex.label !== "string") return `${who}extend.label 은 문자열입니다.`;
+    if (ex.end !== undefined && (!isName(ex.end) || vs.includes(String(ex.end)))) return `${who}extend.end 는 꼭짓점과 다른 새 이름이어야 합니다.`;
+  }
   if (b.altitude !== undefined) {
     const al = b.altitude as Record<string, unknown>;
     if (!al || !vs.includes(String(al.from))) return `${who}altitude.from 은 꼭짓점 이름이어야 합니다.`;
@@ -92,6 +100,8 @@ export function validateTriangle(input: unknown): { ok: true; spec: TriangleSpec
 /** side/altitude 라벨을 순수 숫자로 파싱(변수 라벨이면 null). */
 function parseLabel(t?: string): number | null {
   if (!t) return null;
+  // 'x + 4'·'2x' 같은 식 라벨은 숫자 길이가 아니다(예전엔 숫자만 뽑아 4·2 로 읽어 그림 비율이 틀어졌다).
+  if (/\d[a-zA-Z]|[a-zA-Z]\s*[+\-−*/]|[+\-−*/]\s*[a-zA-Z]/.test(t)) return null;
   const n = Number(t.trim().replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : null;
 }
@@ -115,6 +125,8 @@ function knownAngle(b: TriangleBody, v: string): number | null {
   return parseAngleLabel(a.label);
 }
 const RAD = Math.PI / 180;
+/** 변 연장선의 길이(단위 프레임, 밑변 폭 = 1 기준). */
+const EXT_LEN = 0.42;
 /** 밑변 (0,0)-(1,0) 위에서 왼쪽 밑각 a1·오른쪽 밑각 a2(도)인 꼭짓점 — 사인법칙. 폭이 [0,1] 밖이면 정규화한다. */
 function apexFromBaseAngles(a1: number, a2: number): Pt[] {
   const t = Math.sin(a2 * RAD) / Math.sin((a1 + a2) * RAD);
@@ -202,11 +214,25 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
   void opts;
   const { pts } = shapeOf(b);
   // 단위 프레임 → 화면. 위쪽 라벨·호 여백을 남긴다.
-  const maxY = Math.max(...pts.map((p) => p[1]));
-  const sx = frame.w, sy = frame.h / Math.max(maxY, 0.7);
-  const scale = Math.min(sx, sy);
-  const usedW = scale * 1, usedH = scale * maxY;
-  const ox = frame.x + (frame.w - usedW) / 2, oy = frame.y + frame.h - (frame.h - usedH) / 2;
+  let maxY = Math.max(...pts.map((p) => p[1]));
+  let sx = frame.w, sy = frame.h / Math.max(maxY, 0.7);
+  let scale = Math.min(sx, sy);
+  let usedW = scale * 1, usedH = scale * maxY;
+  let ox = frame.x + (frame.w - usedW) / 2, oy = frame.y + frame.h - (frame.h - usedH) / 2;
+  // 변 연장: 연장선 끝점도 그림 틀 안에 들어오게 단위 프레임의 경계 상자를 넓힌다(연장이 없으면 위 계산 그대로 — 기존 그림은 바뀌지 않는다).
+  let extU: Pt | null = null;
+  if (b.extend) {
+    const iF = b.vertices.indexOf(b.extend.from), iA = b.vertices.indexOf(b.extend.at);
+    const dx = pts[iA][0] - pts[iF][0], dy = pts[iA][1] - pts[iF][1], dl = Math.hypot(dx, dy) || 1;
+    extU = [pts[iA][0] + (dx / dl) * EXT_LEN, pts[iA][1] + (dy / dl) * EXT_LEN];
+    const xs = [...pts.map((p) => p[0]), extU[0]], ys = [...pts.map((p) => p[1]), extU[1]];
+    const minX = Math.min(...xs), maxX = Math.max(...xs), minYe = Math.min(0, ...ys), maxYe = Math.max(...ys);
+    const bw = maxX - minX, bh = Math.max(maxYe - minYe, 0.7);
+    scale = Math.min(frame.w / bw, frame.h / bh);
+    ox = frame.x + (frame.w - scale * bw) / 2 - minX * scale;
+    oy = frame.y + frame.h - (frame.h - scale * (maxYe - minYe)) / 2 + minYe * scale;
+    maxY = maxYe; usedW = scale * bw; usedH = scale * (maxYe - minYe); void usedW; void usedH;
+  }
   const P = new Map<string, Pt>();
   b.vertices.forEach((v, i) => P.set(v, [ox + pts[i][0] * scale, oy - pts[i][1] * scale]));
   const at = (v: string) => P.get(v)!;
@@ -215,6 +241,28 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
   // 변
   const edges: [string, string][] = [[b.vertices[0], b.vertices[1]], [b.vertices[1], b.vertices[2]], [b.vertices[2], b.vertices[0]]];
   for (const [p, q] of edges) sheet.line(at(p), at(q));
+
+  // 변 연장선과 바깥각 호·라벨
+  if (b.extend && extU) {
+    const ex = b.extend, c = at(ex.at), e: Pt = [ox + extU[0] * scale, oy - extU[1] * scale];
+    sheet.line(c, e);
+    const third = at(b.vertices.find((v) => v !== ex.from && v !== ex.at)!);
+    const aE = norm(Math.atan2(-(e[1] - c[1]), e[0] - c[0])), aT = norm(Math.atan2(-(third[1] - c[1]), third[0] - c[0]));
+    let d = aT - aE; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI;
+    const start = d > 0 ? aE : aT, span = Math.abs(d);
+    sheet.arc(c, ARC_R + 4, start, start + span);
+    if (ex.label) {
+      const mid = start + span / 2, half = span / 2, hd = halfDiag(ex.label);
+      const r = Math.max((hd + 4) / Math.max(Math.sin(half), 0.08), ARC_R + 4 + hd + 3);
+      const cands: Pt[] = [r, r * 1.25, r * 1.5].map((rr): Pt => [c[0] + rr * Math.cos(mid), c[1] - rr * Math.sin(mid)]);
+      const spot = sheet.firstFree(cands, ex.label) ?? cands[0];
+      sheet.label(spot[0], spot[1], ex.label, `바깥각 라벨(${ex.at})`);
+    }
+    if (ex.end) {
+      const dx = e[0] - c[0], dy = e[1] - c[1], dl = Math.hypot(dx, dy) || 1;
+      sheet.label(e[0] + (dx / dl) * (halfDiag(ex.end) + 6), e[1] + (dy / dl) * (halfDiag(ex.end) + 6), ex.end, `연장선 끝점(${ex.end})`, { italic: true });
+    }
+  }
 
   // 직각 표시
   if (b.rightAngleAt) {
@@ -288,6 +336,11 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
       cands.push([c[0] - outR * Math.cos(mid), c[1] + outR * Math.sin(mid)], [c[0] - (outR + 10) * Math.cos(mid), c[1] + (outR + 10) * Math.sin(mid)]);
       const spot = sheet.firstFree(cands, a.label) ?? cands[0];
       sheet.label(spot[0], spot[1], a.label, `각 라벨(${a.at})`);
+      // 변을 연장한 그림: 각 라벨은 자기 꼭짓점이 다른 꼭짓점보다 가까워야 한다(좁은 각의 라벨이 이웃 꼭짓점 쪽으로 밀려 어느 각의 것인지 모호해지는 것을 막는다).
+      if (b.extend) {
+        const own = Math.hypot(spot[0] - c[0], spot[1] - c[1]);
+        for (const o of others) if (Math.hypot(spot[0] - o[0], spot[1] - o[1]) < own * 1.05) { sheet.issues.push({ code: "label_ambiguous", message: `각 라벨 '${a.label}' 이 꼭짓점 ${a.at} 보다 다른 꼭짓점에 더 가까워 어느 각의 라벨인지 모호합니다.` }); break; }
+      }
     }
   }
 
@@ -343,6 +396,7 @@ function drawTriangle(sheet: Sheet, b: TriangleBody, frame: { x: number; y: numb
     (b.rightAngleAt ? `, ${b.rightAngleAt}에서 직각` : "") +
     ((b.sides ?? []).filter((s) => s.label).length ? `. 변: ${(b.sides ?? []).filter((s) => s.label).map((s) => `${s.between.join("")} = ${s.label}`).join(", ")}` : "") +
     ((b.angles ?? []).filter((a) => a.label).length ? `. 각: ${(b.angles ?? []).filter((a) => a.label).map((a) => `${a.at} = ${a.label}`).join(", ")}` : "") +
+    (b.extend ? `. 변 ${b.extend.from}${b.extend.at} 를 ${b.extend.at} 너머로 연장${b.extend.label ? `, 바깥각 ${b.extend.label}` : ""}` : "") +
     (b.altitude ? `. ${b.altitude.from}에서 맞은변에 내린 높이${b.altitude.label ? ` ${b.altitude.label}` : ""}` : "") +
     ".";
   return { alt };
@@ -352,6 +406,7 @@ export function renderTriangle(spec: TriangleSpec): { svg: string; alt: string; 
   const W = spec.second ? 580 : 360, H = 270;
   const sheet = new Sheet(W, H);
   const PADX = 58, PADTOP = 46, PADBOT = spec.notToScale ? 52 : 40;
+  if (spec.notToScale) sheet.reserve(24 + 85, H - 14, "Note: Figure not drawn to scale.", 12.5); // 'Note' 문구 자리(왼쪽 아래)를 라벨이 침범하면 충돌로 잡는다
   let alt: string;
   if (!spec.second) {
     alt = drawTriangle(sheet, spec, { x: PADX, y: PADTOP, w: W - PADX * 2, h: H - PADTOP - PADBOT }).alt;
@@ -373,7 +428,7 @@ export function renderTriangle(spec: TriangleSpec): { svg: string; alt: string; 
     alt = `${a1} ${a2}`;
   }
   // 라벨 중복(꼭짓점·발 이름)
-  const names = [...spec.vertices, ...(spec.altitude?.foot ? [spec.altitude.foot] : []), ...(spec.second?.vertices ?? []), ...(spec.second?.altitude?.foot ? [spec.second.altitude.foot] : [])];
+  const names = [...spec.vertices, ...(spec.extend?.end ? [spec.extend.end] : []), ...(spec.altitude?.foot ? [spec.altitude.foot] : []), ...(spec.second?.vertices ?? []), ...(spec.second?.altitude?.foot ? [spec.second.altitude.foot] : [])];
   const dup = names.filter((n, i) => names.indexOf(n) !== i);
   for (const d of new Set(dup)) sheet.issues.push({ code: "duplicate_label", message: `점 이름 '${d}' 가 중복됩니다(두 삼각형은 서로 다른 이름을 씁니다).` });
   if (spec.notToScale) sheet.note("Note: Figure not drawn to scale.");
@@ -390,7 +445,7 @@ export function lintTriangleAgainstText(spec: TriangleSpec, passage: string): Fi
   const allVertices = new Set(bodies.flatMap((b) => [...b.vertices, ...(b.altitude?.foot ? [b.altitude.foot] : [])]));
   const hasSide = (a: string, b: string) => bodies.some((bd) => bd.vertices.includes(a) && bd.vertices.includes(b)) || bodies.some((bd) => bd.altitude?.foot && [a, b].includes(bd.altitude.foot) && (bd.vertices.includes(a) || bd.vertices.includes(b)));
   const sideLabel = (a: string, b: string) => bodies.flatMap((bd) => bd.sides ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a))?.label;
-  const angleLabels = new Set(bodies.flatMap((b) => (b.angles ?? []).map((a) => (a.label ?? "").replace(/\s+/g, "").replace(/−/g, "-"))));
+  const angleLabels = new Set(bodies.flatMap((b) => [...(b.angles ?? []).map((a) => a.label ?? ""), ...(b.extend?.label ? [b.extend.label] : [])].map((l) => l.replace(/\s+/g, "").replace(/−/g, "-"))));
 
   for (const m of text.matchAll(/(?:triangles?|△)\s+([A-Z]{3})/g)) {
     for (const ch of m[1]) if (!allVertices.has(ch)) issues.push({ code: "ref_missing", message: `지문의 삼각형 ${m[1]} 의 점 '${ch}' 가 도형 데이터에 없습니다.` });

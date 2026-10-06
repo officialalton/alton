@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.arc_length.CM.P",
+ "generatedAt": "2026-10-06T07:12:20.042Z",
+ "codeHash": "3e0bb44f884f43c68101e51739d96ee7ca48d5aac925884121bcf98bba4cec7b",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.arc_length.CM.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.arc_length.CM.P.png",
+   "mobileFile": "circles.arc_length.CM.P.m375.png",
+   "archetypeId": "ci.arc_length.CM.P.compose_kind",
+   "seed": 11,
+   "signature": "composite",
+   "stimulus": "An architect sketches the plan below. Use the labels in the figure. A semicircle sits on top of a rectangle in the figure shown, and its diameter is the rectangle's top side.",
+   "question": "Which value gives the length of the curved part (the semicircular arc), written in terms of $\\pi$?",
+   "options": [
+    "$5\\pi$",
+    "$40\\pi$",
+    "$10\\pi$",
+    "$20\\pi$"
+   ],
+   "correctIndex": 2,
+   "answer": "$10\\pi$",
+   "explanation": "(1) 그림에서 직사각형의 너비 20 를 읽는다. (2) 반원의 지름은 직사각형의 윗변 = 20 이다. (3) 반원의 호 = 원둘레의 절반 = π × 20 ÷ 2 이다. (4) = 10π 이다. (5) 따라서 10π 이다. 따라서 정답은 $10\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

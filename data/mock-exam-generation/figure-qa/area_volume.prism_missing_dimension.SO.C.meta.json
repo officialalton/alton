@@ -1,0 +1,45 @@
+{
+ "itemId": "area_volume.prism_missing_dimension.SO.C",
+ "generatedAt": "2026-10-06T07:21:07.996Z",
+ "codeHash": "f39bc7dc18e951b401c3ab790bf7b94168082a5697ee06c0443f05def496cece",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.prism_missing_dimension.SO.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.prism_missing_dimension.SO.C.png",
+   "mobileFile": "area_volume.prism_missing_dimension.SO.C.m375.png",
+   "archetypeId": "av.prism_missing_dimension.SO.C.compose_kind",
+   "seed": 11,
+   "signature": "figure_choice[solid:rectangular_prism]",
+   "stimulus": "A scientist describes the container shown. Use the labels in the figure. The volume of a rectangular box is 64 cubic units.",
+   "question": "Which of the following figures shows the prism described?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) 각 그림의 길이·너비·높이를 곱해 부피를 구한다. (2) 지문의 부피와 같은 그림을 찾는다. (3) 겉넓이나 밑면의 넓이가 지문의 수와 같은 그림은 부피가 아니라 다른 양이 같은 것이다. (4) 따라서 세 치수의 곱이 지문의 부피인 그림을 고른다. (5) 다른 부피의 그림은 제외한다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}

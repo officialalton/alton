@@ -41,6 +41,21 @@ export function codeHash(itemId: string, figureTypes: string[], root = process.c
   return { hash: h.digest("hex"), files };
 }
 
+// ── math-B(기하) 공용 키트: PT·PG·CI·CM·CG·SO 조합은 geo-kit 를 해시에 포함한다. TR 은 기존 8조합의 판정을 보존하려고 새 조합만 개별 등록한다. ──
+const GEO_KIT = `${AR}/skills/fig/geo-kit.ts`, GEO_PT_KIT = `${AR}/skills/fig/geo-pt-kit.ts`;
+for (const code of ["PT", "PG", "CI", "CM", "CG", "SO"]) FAMILY_KIT[code] = [GEO_KIT, ...(FAMILY_KIT[code] ?? [])];
+FAMILY_KIT.PT = [GEO_PT_KIT, ...FAMILY_KIT.PT];
+FAMILY_KIT.SO = [`${AR}/skills/fig/so-kit.ts`, `${AR}/skills/fig/pg-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, ...(FAMILY_KIT.SO ?? [])];
+const CYL_KIT = `${AR}/skills/fig/cyl-kit.ts`; for (const id of ["area_volume.cylinder_volume_radius.SO.P", "area_volume.cylinder_volume_diameter.SO.P"]) ITEM_KIT[id] = [CYL_KIT, ...(ITEM_KIT[id] ?? [])];
+FAMILY_KIT.PG = [`${AR}/skills/fig/pg-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, ...FAMILY_KIT.PG];
+export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P", "lines_angles_triangles.congruent_triangles.TR.P", "lines_angles_triangles.triangle_inequality.TR.P", "area_volume.triangle_area.TR.P", "lines_angles_triangles.exterior_angle.TR.P", "lines_angles_triangles.vertical_supplementary_angles.TR.P", "lines_angles_triangles.triangle_angle_sum.TR.C", "lines_angles_triangles.isosceles_base_angle.TR.C"];
+for (const id of GEO_TR_ITEMS) ITEM_KIT[id] = [GEO_KIT, ...(ITEM_KIT[id] ?? [])];
+const CR_KIT = `${AR}/skills/fig/geo-cr-kit.ts`;
+for (const id of ["lines_angles_triangles.exterior_angle.PT.P", "lines_angles_triangles.triangle_angle_sum.PT.P"]) ITEM_KIT[id] = [CR_KIT, ...(ITEM_KIT[id] ?? [])];
+const EXT_KIT = `${AR}/skills/fig/ext-kit.ts`, TRC_KIT = `${AR}/skills/fig/trc-kit.ts`;
+for (const id of ["lines_angles_triangles.triangle_angle_sum.TR.C", "lines_angles_triangles.isosceles_base_angle.TR.C"]) ITEM_KIT[id] = [TRC_KIT, ...(ITEM_KIT[id] ?? [])];
+for (const id of ["lines_angles_triangles.exterior_angle.TR.P", "lines_angles_triangles.vertical_supplementary_angles.TR.P"]) ITEM_KIT[id] = [EXT_KIT, ...(ITEM_KIT[id] ?? [])];
+
 // ── 판정 파일 ──
 export type ReviewChecklistKey = "figure_present" | "proportion_matches_values" | "labels_placed_and_legible" | "multi_figure_consistent" | "text_matches_figure_and_solvable" | "axes_ticks_units_legend" | "choice_distinct_one_rule" | "sat_visual_style" | "mobile_375_readable";
 export type ReviewFile = {
