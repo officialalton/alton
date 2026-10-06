@@ -99,6 +99,6 @@ export function renderTriNested(spec: TriNestedSpec): { svg: string; alt: string
 export function lintTriNestedAgainstText(spec: TriNestedSpec, passage: string): FigureIssue[] {
   const issues: FigureIssue[] = []; const text = passage.replace(/\$/g, "").replace(/\\overline\{([A-Z]{2})\}/g, "$1");
   const all = new Set([...spec.vertices, ...spec.points]);
-  for (const m of text.matchAll(/(?:triangles?|△|segment|side)\s+([A-Z]{2,3})\b/g)) for (const ch of m[1]) if (!all.has(ch)) issues.push({ code: "ref_missing", message: `지문의 ${m[1]} 의 점 '${ch}' 가 그림에 없습니다.` });
+  for (const m of text.matchAll(/(?:[Tt]riangles?|△|[Ss]egment|[Ss]ide)\s+([A-Z]{2,3})\b/g)) for (const ch of m[1]) if (!all.has(ch)) issues.push({ code: "ref_missing", message: `지문의 ${m[1]} 의 점 '${ch}' 가 그림에 없습니다.` });
   return dedupe(issues);
 }
