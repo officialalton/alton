@@ -1,9 +1,9 @@
 {
  "itemId": "circles.circle_equation_transform.CG.C",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T07:58:58Z",
+ "reviewedAt": "2026-10-06T14:48:50Z",
  "reviewer": "claude-sonnet-5.5 (math-B session)",
- "codeHash": "9007fe710143133b60f67cabf887ba8e1a4a74c10ae6dd73341c81bbf3d162ba",
+ "codeHash": "fac034face336229cddde308f3aac1c2d84df57a0c885f020c7292f2dc120217",
  "samples": [
   "circles.circle_equation_transform.CG.C.png"
  ],
@@ -19,6 +19,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "샘플 PNG(데스크톱·375px)와 변형별 갤러리를 직접 확인: 점·원·다각형이 좌표 격자 위의 정수 좌표에 놓이고 라벨이 점 옆에 읽히며 정답이 그림 값과 일치. 원이 눈금 숫자와 겹치는 곳이 있으나 판독 가능. 선택지 수식은 스냅샷 하네스가 렌더하지 않는 표기.",
+ "notes": "샘플 PNG(데스크톱·375px)와 변형별 갤러리를 직접 확인: 점·원·다각형이 좌표 격자 위의 정수 좌표에 놓이고 라벨이 점 옆에 읽히며 정답이 그림 값과 일치. 원이 눈금 숫자와 겹치는 곳이 있으나 판독 가능. 선택지 수식은 스냅샷 하네스가 렌더하지 않는 표기. [재스탬프: 키트 해시 등록으로 코드 해시만 갱신, 샘플 PNG 바이트 동일]",
  "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }
