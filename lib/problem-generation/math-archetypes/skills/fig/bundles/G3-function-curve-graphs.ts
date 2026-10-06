@@ -43,6 +43,15 @@ import { ITEM as cppC } from "../items/coordinate_geometry.parallel_perpendicula
 import { ITEM as sfgC } from "../items/systems_linear.system_from_graph.LN.C";
 import { ITEM as ifgC } from "../items/linear_inequalities.inequality_from_graph.LN.C";
 import { ITEM as pisC } from "../items/linear_inequalities.point_in_solution.LN.C";
+import { ITEM as nrC } from "../items/nonlinear_equations_systems.root.FN.C";
+import { ITEM as nnC } from "../items/nonlinear_equations_systems.num_real_solutions.FN.C";
+import { ITEM as npC } from "../items/nonlinear_equations_systems.parameter_discriminant.FN.C";
+import { ITEM as neC } from "../items/nonlinear_functions.evaluate.FN.C";
+import { ITEM as nvxC } from "../items/nonlinear_functions.vertex_x.FN.C";
+import { ITEM as nvyC } from "../items/nonlinear_functions.vertex_y.FN.C";
+import { ITEM as naC } from "../items/nonlinear_functions.interpret_a.FN.C";
+import { ITEM as nbC } from "../items/nonlinear_functions.interpret_b.FN.C";
+import { ITEM as nftC } from "../items/nonlinear_functions.function_transformation.FN.C";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC];
 
