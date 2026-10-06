@@ -147,8 +147,9 @@ function checkBarFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   const cats = spec.categories as string[]; const series = spec.series as { values: number[] }[]; const sc = readScale(svg); const rs = rects(svg);
   for (const c of cats) if (!texts(svg).some((t) => t.text.trim() === c.trim())) issues.push({ code: "category_label_missing", message: `범주 이름 '${c}' 가 그려지지 않았습니다.` });
   if (!sc.y) return;
+  const axisLn = lines(svg).filter((l) => l.stroke === "#111" && Math.abs(l.y1 - l.y2) < 1e-6).sort((a, b) => Math.abs(b.x2 - b.x1) - Math.abs(a.x2 - a.x1))[0]; const base = axisLn?.y1;
   series.forEach((se, si) => {
-    const bars = rs.filter((r) => r.fill === DATA_COLORS[si % 4] && r.w > 4 && r.h >= 0).sort((a, b) => a.x - b.x);
+    const bars = rs.filter((r) => r.fill === DATA_COLORS[si % 4] && r.w > 4 && r.h >= 0 && (base === undefined || Math.abs(r.y + r.h - base) < 1.5)).sort((a, b) => a.x - b.x); // 범례 견본은 밑변이 축 위에 있지 않다
     if (bars.length !== se.values.length) { issues.push({ code: bars.length === 0 ? "render_empty" : "render_value_mismatch", message: `계열 ${si + 1} 의 막대 ${bars.length}개 ≠ 데이터 ${se.values.length}개.` }); return; }
     bars.forEach((b, i) => { const got = sc.y!.a * b.y + sc.y!.b; if (Math.abs(got - se.values[i]) > tolY(sc.y!)) issues.push({ code: "render_value_mismatch", message: `'${cats[i]}' 막대의 높이가 눈금 기준 ${got.toFixed(1)} 로 그려졌지만 데이터는 ${se.values[i]} 입니다(길이·값 비율 불일치).` }); });
   });

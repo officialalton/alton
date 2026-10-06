@@ -67,3 +67,29 @@ export const barIntro = (rng: Rng, s: CountScene, when = rng.pick(["last month",
 ]);
 /** FIGURE(막대)에서 이름 nm·값 v·합 S·조회 at 을 읽는 JS(ROW_JS 와 같은 변수 이름). */
 export const BAR_ROW_JS = "const nm=FIGURE.categories; const v=FIGURE.series[0].values; if (v.some(x=>typeof x!=='number')||v.length!==nm.length) throw new Error('값 오류'); const S=v.reduce((a,b)=>a+b,0); const at=(k)=>{ const i=nm.indexOf(k); if (i<0) throw new Error('막대 없음'); return v[i]; };\n";
+
+// ── 두 기간 묶음 막대(범례 있음): 기간 1·기간 2 의 값이 모두 세로 눈금 간격의 배수 ──
+import { PERIODS, pLow, type TwoScene } from "./items/_t4-kit";
+export type TwoBar = TwoScene & { yStep: number; yMax: number; fig: { type: "data"; kind: "bar"; categories: string[]; series: { name: string; values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
+export const twoBarFig = (s: { t: CountTopic; names: string[]; vals: number[]; v2: number[]; p: [string, string]; yStep: number; yMax: number }) => ({ type: "data" as const, kind: "bar" as const, categories: s.names, series: [{ name: s.p[0], values: s.vals }, { name: s.p[1], values: s.v2 }], xTitle: s.t.rowHead, yTitle: `${s.t.col} (${s.t.unit})`, yMin: 0, yMax: s.yMax, yStep: s.yStep });
+/** 두 기간 막대 장면: 막대 높이는 눈금 칸 수(1~10)의 정수배, 행마다 변화율이 pcts 안에 든다(칸 수 a→b 의 정확한 퍼센트 변화). */
+export function twoSceneBar(rng: Rng, n: number, pcts: number[]): TwoBar {
+  const t = rng.pick(BAR_TOPICS); const names = rng.shuffle(t.rows).slice(0, n).sort((a, b) => t.rows.indexOf(a) - t.rows.indexOf(b)); const p = rng.pick(PERIODS.filter((q) => q.every((x) => !/\d/.test(x)))) as [string, string];
+  const pairs: [number, number, number][] = []; for (let a = 2; a <= 10; a++) for (let b = 1; b <= 10; b++) { if (a === b) continue; const pc = ((b - a) * 100) / a; if (Number.isInteger(pc) && pcts.includes(pc)) pairs.push([a, b, pc]); }
+  if (pairs.length < n) throw new GenFail("두 기간 막대 쌍 부족");
+  const yStep = rng.pick([10, 20, 25, 50]);
+  return retry(60, () => {
+    const pick = rng.shuffle(pairs).slice(0, n); if (new Set(pick.map((q) => q[0])).size !== n) return null;
+    const vals = pick.map((q) => q[0] * yStep), v2 = pick.map((q) => q[1] * yStep), pct = pick.map((q) => q[2]); const yMax = (Math.max(...pick.map((q) => Math.max(q[0], q[1]))) + 1) * yStep;
+    return { t, names, vals, p, v2, pct, yStep, yMax, fig: twoBarFig({ t, names, vals, v2, p, yStep, yMax }) };
+  }, "두 기간 막대 장면");
+}
+export const twoBar = (s: TwoBar) => s.fig;
+export const twoBarIntro = (rng: Rng, s: TwoScene) => rng.pick([
+  `The graph shows the number of ${s.t.what} ${s.t.prep} each of ${s.names.length} ${s.t.many} in two time periods.`,
+  `${s.t.who} compared the number of ${s.t.what} ${s.t.prep} several ${s.t.many} in two periods, as shown in the graph.`,
+  `The graph shown gives the number of ${s.t.what} ${s.t.prep} ${s.names.length} ${s.t.many}, for ${pLow(s.p[0])} and for ${pLow(s.p[1])}.`,
+  `For each of several ${s.t.many}, the graph shown gives the number of ${s.t.what} in two periods.`,
+]);
+/** FIGURE(묶음 막대)에서 이름 nm·a(기간 1)·b(기간 2)·idx·pc 를 읽는 JS(TWO_JS 와 같은 변수 이름). */
+export const BAR_TWO_JS = "const nm=FIGURE.categories; const a=FIGURE.series[0].values, b=FIGURE.series[1].values; if (a.some(x=>typeof x!=='number'||x<=0)||b.some(x=>typeof x!=='number')||a.length!==nm.length||b.length!==nm.length) throw new Error('값 오류'); const idx=(k)=>{ const i=nm.indexOf(k); if (i<0) throw new Error('막대 없음'); return i; }; const pc=(i)=>(b[i]-a[i])/a[i]*100;\n";

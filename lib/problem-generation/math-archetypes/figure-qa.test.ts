@@ -172,6 +172,13 @@ describe("그래프 계열(G6): 막대·히스토그램·점도표·상자그림
     const svg = R(box); const bad = svg.replace(/(<line x1=")([\d.]+)(" y1="[\d.]+" x2=")([\d.]+)(" y2="[\d.]+" stroke="#111" stroke-width="2.2")/, (_m, a, x1, b, x2, c) => `${a}${Number(x1) + 20}${b}${Number(x2) + 20}${c}`); expect(bad).not.toBe(svg);
     expect(codes(checkRenderedFigure(box, bad))).toContain("render_value_mismatch");
   });
+  it("(a) 묶음 막대(범례 있음)의 둘째 계열 막대를 늘려 그리면 값 불일치, 범례 견본은 막대로 세지 않는다", () => {
+    const g2 = { ...bar, series: [{ name: "Last year", values: [12, 20, 8] }, { name: "This year", values: [16, 8, 12] }] } as Spec; const svg = R(g2);
+    expect(checkRenderedFigure(g2, svg)).toEqual([]);
+    const reds = [...svg.matchAll(/<rect x="[^"]+" y="([\d.]+)" width="[^"]+" height="([\d.]+)" fill="#C8102E"\/>/g)]; const last = reds[reds.length - 1]; // 마지막 빨간 사각형 = 막대(범례 견본이 아님)
+    const bad = svg.replace(last[0], last[0].replace(`y="${last[1]}"`, `y="${Number(last[1]) - 30}"`).replace(`height="${last[2]}"`, `height="${Number(last[2]) + 30}"`)); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(g2, bad))).toContain("render_value_mismatch");
+  });
   it("(b) 축 제목의 단위(괄호)가 빠지면 잡는다", () => { expect(codes(checkRenderedFigure({ ...bar, yTitle: "Visitors" }, R({ ...bar, yTitle: "Visitors" })))).toContain("unit_missing_in_title"); });
   it("(d) 범주 이름이 그려지지 않으면 잡는다", () => { const svg = R(bar); expect(codes(checkRenderedFigure(bar, svg.replace(">Tue<", "><")))).toContain("category_label_missing"); });
 });
