@@ -1,5 +1,9 @@
 # ALTON — 현재 상태 (2026-09-25 기준)
 
+> **2026-10-06 영문 계약 기획**: `docs/contracts/parent-education-services-agreement-v0.3-en-california-draft.md` 전체 초안 및 `…-review-and-handoff.md` 작성. California 기준·영문·13세 미만 정책·상담/체험 AI 제외·정규 전사 계획 반영. 법률/구현 검토 전 발송 불가; 실제 서명 HTML·DB 미변경.
+
+> **2026-10-06 연령 정책 정정**: 13세 미만도 가입 경로 허용, 실제 제공은 운영 검토. 기존 보호자 동의·접근 게이트 유지, 연령/학년 일괄 가입 차단 추가 금지. 무료 회원·관리자 설계 및 계약 법률 검토 메모 상단 정정 참조. 구현·DB 변경 없음.
+
 > 새 세션은 `CLAUDE.md` → 이 문서 → `docs/BRANCH-WORKFLOW.md` 순으로 읽고 시작한다.
 > 그 이전 상세 이력(2026-08-29 ~ 2026-09-14 낮)은
 > [`history/CURRENT-archive-until-2026-09-14.md`](history/CURRENT-archive-until-2026-09-14.md)에 원문 그대로 있다 — 필요할 때만 검색한다.
