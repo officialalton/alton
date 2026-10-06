@@ -198,7 +198,7 @@ export function lintPolygonAgainstText(spec: PolygonSpec, passage: string): Figu
   const issues: FigureIssue[] = [];
   const text = passage.replace(/\$/g, "").replace(/\\overline\{([A-Z]{2})\}/g, "$1").replace(/\\angle/g, "∠").replace(/−/g, "-");
   const names = new Set<string>([...spec.vertices, ...(spec.height?.foot ? [spec.height.foot] : [])]);
-  const kindWords: Record<PolygonKind, RegExp> = { rectangle: /\brectangle\b/i, square: /\bsquare\b/i, parallelogram: /\bparallelogram\b/i, rhombus: /\brhombus\b/i, trapezoid: /\btrapezoid\b/i, regular: /\b(regular\s+)?(pentagon|hexagon|heptagon|octagon|polygon|triangle)\b/i };
+  const kindWords: Record<PolygonKind, RegExp> = { rectangle: /\brectangle\b/i, square: /\bsquare\b/i, parallelogram: /\bparallelogram\b/i, rhombus: /\brhombus\b/i, trapezoid: /\btrapezoid\b/i, regular: /\b(?:(?:regular\s+)?(?:pentagon|hexagon|heptagon|octagon|polygon)|(?:regular|equilateral)\s+triangle)\b/i };
   for (const [k, re] of Object.entries(kindWords) as [PolygonKind, RegExp][]) {
     if (k !== spec.kind && re.test(text) && !(spec.kind === "square" && k === "rectangle")) issues.push({ code: "ref_mismatch", message: `지문은 ${k} 를 말하지만 도형의 kind 는 ${spec.kind} 입니다.` });
   }

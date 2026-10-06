@@ -1,0 +1,23 @@
+{
+ "itemId": "area_volume.trapezoid_parallelogram_area.PG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:31:21Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "40d3eb40c9148ed73338c01cfc13d78a0bef9cc0882a090ad74e87c926b66bad",
+ "samples": [
+  "area_volume.trapezoid_parallelogram_area.PG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "사다리꼴·평행사변형 그림 샘플 데스크톱·375px 확인: 두 밑변 라벨(위 11·아래 15)·높이(점선+직각 라벨 11)·이등변 다리 눈금과 다리 라벨이 겹침 없이 표시, notToScale 'Note' 문구. 갤러리(4 연산자·시드 1)로 평행사변형 비스듬한 변 라벨·미지 높이 h 확인."
+}
