@@ -58,6 +58,9 @@ export default async function MaterialsLibraryPage({
   const { prev, next } = tree ? findAdjacentDocs([tree], id) : { prev: null, next: null };
   const adjacentHref = (docId: string) => (childId ? `/materials/${docId}?childId=${childId}` : `/materials/${docId}`);
 
+  // 2026-10-06 S6 — 자료 열람 기록(학생 본인만 DB가 받는다, 보호자·교사는 무시, 10분 디듀프). 실패해도 화면에는 영향 없음.
+  await supabase.rpc("log_learning_event", { p_kind: "material_opened", p_ref_id: id }).then(() => {}, () => {});
+
   // 읽던 위치(HTML만, 본인 기준 — 보호자가 자녀 화면을 볼 때도 보호자 자신의 위치를 쓴다).
   let initialSectionId: string | null = null;
   if (doc.kind === "html") {

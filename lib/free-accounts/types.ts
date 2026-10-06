@@ -38,11 +38,12 @@ export type FreeAccountProfile = {
 /** 응시 이력 한 행: 점수 환산용 AttemptFacts + 화면 표시용 부가 필드. */
 export type AttemptHistoryRow = AttemptFacts & { difficultyTier: string; submittedAt: string | null; scoreAdjusted: boolean; createdAtOrder: number };
 
+export type UsageEvents = { opens: number; lastAt: string | null };
 export type NotTracked = "not_tracked";
 export type LearningUsage = {
-  mistakeNotebook: { savedCount: number; lastUpdatedAt: string | null; reviewed: NotTracked };
-  vocabulary: { wordsSaved: number; lastWordAt: string | null; quizzesCompleted: number; avgQuizPct: number | null; lastQuizAt: string | null; flashcardStudy: NotTracked };
-  materials: { docsOpened: number; lastReadAt: string | null; views: NotTracked; timeSpent: NotTracked };
+  mistakeNotebook: { savedCount: number; lastUpdatedAt: string | null; reviewed: NotTracked | UsageEvents };
+  vocabulary: { wordsSaved: number; lastWordAt: string | null; quizzesCompleted: number; avgQuizPct: number | null; lastQuizAt: string | null; flashcardStudy: NotTracked | UsageEvents };
+  materials: { docsOpened: number; lastReadAt: string | null; views: NotTracked | UsageEvents; timeSpent: NotTracked };
   tracking: { learningEventsSince: string | null };
 };
 
@@ -53,7 +54,7 @@ export type FreeAccountsAnalytics = {
   learning: {
     testsStarted: number; testsCompleted: number; startedCohortSize: number; startedCohortCompleted: number;
     satStarted: number; apStarted: number; mistakeNotebookSavedTotal: number; mistakeNotebookStudentsTotal: number;
-    vocabWordsAdded: number; vocabWordStudents: number; vocabQuizzesCompleted: number; vocabQuizStudents: number; materialsDocsOpened: number;
+    vocabWordsAdded: number; vocabWordStudents: number; mistakeReviewOpens: number; mistakeReviewStudents: number; vocabStudyOpens: number; materialOpens: number; materialStudents: number; trackingSince: string | null; vocabQuizzesCompleted: number; vocabQuizStudents: number; materialsDocsOpened: number;
   };
   conversion: {
     consultRequests: number; invitesSent: number; invitesAccepted: number; bookings: number; completions: number; tutoringConversions: number;

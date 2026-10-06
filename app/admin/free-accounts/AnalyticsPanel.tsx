@@ -39,6 +39,7 @@ export default function AnalyticsPanel() {
   const error = current?.error ?? null;
   const preset = (days: number) => { setTo(daysAgo(0)); setFrom(daysAgo(days - 1)); };
 
+  const since = data?.learning.trackingSince ? `tracking since ${data.learning.trackingSince.slice(0, 10)}` : "Not tracked yet";
   return (
     <div data-testid="free-accounts-analytics">
       <div className="flex flex-wrap items-end gap-3 mb-5 text-[12.5px]">
@@ -69,7 +70,10 @@ export default function AnalyticsPanel() {
             <Metric label="Mistake notebook saves" value={data.learning.mistakeNotebookSavedTotal} note={`${data.learning.mistakeNotebookStudentsTotal} students · all time (not period-filtered)`} />
             <Metric label="Vocabulary words added" value={data.learning.vocabWordsAdded} note={`${data.learning.vocabWordStudents} students`} />
             <Metric label="Vocabulary quizzes completed" value={data.learning.vocabQuizzesCompleted} note={`${data.learning.vocabQuizStudents} students`} />
-            <Metric label="Materials opened" value={data.learning.materialsDocsOpened} note="Documents with last read in period; view counts not tracked yet" />
+            <Metric label="Materials opened" value={data.learning.materialsDocsOpened} note="Documents with last read in period" />
+            <Metric label="Mistake notebook opens" value={data.learning.mistakeReviewOpens} note={`${data.learning.mistakeReviewStudents} students · ${since}`} />
+            <Metric label="Vocabulary study tab opens" value={data.learning.vocabStudyOpens} note={since} />
+            <Metric label="Material views" value={data.learning.materialOpens} note={`${data.learning.materialStudents} students · ${since}`} />
           </Section>
           <Section title="Conversion">
             <Metric label="Consultation requests" value={data.conversion.consultRequests} />
