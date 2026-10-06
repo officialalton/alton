@@ -1,0 +1,23 @@
+{
+ "itemId": "equivalent_expressions.polynomial_distribution.PG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:38:34Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "471e569127195f1cc5414d111c607f2a8f18c03da677a41d8c0ca7320ac9a143",
+ "samples": [
+  "equivalent_expressions.polynomial_distribution.PG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "직사각형(식 라벨 3x + 2, 3x + 8, notToScale) 샘플 데스크톱·375px 확인: 식 라벨이 숫자로 오독되지 않아 기본 비율로 그려지고(polygon parseSideLabel 수정), 변 라벨·꼭짓점 이름·'Note' 문구 겹침 없음(polygon 에 Note 자리 예약·여백 추가). 갤러리·재스냅샷으로 PG 4조합 모두 Note 간격 확인."
+}

@@ -107,8 +107,9 @@ function shape(spec: PolygonSpec): Pt[] {
 }
 
 export function renderPolygon(spec: PolygonSpec): { svg: string; alt: string; issues: FigureIssue[] } {
-  const W = 360, H = spec.notToScale ? 270 : 250;
+  const W = 360, H = spec.notToScale ? 292 : 250; // 'Note' 문구가 아래 변 라벨에 닿지 않게 여유를 둔다
   const sheet = new Sheet(W, H);
+  if (spec.notToScale) sheet.reserve(24 + 85, H - 14, "Note: Figure not drawn to scale.", 12.5); // 'Note' 자리를 라벨이 침범하면 충돌로 잡는다
   const issues: FigureIssue[] = [];
   const pts = shape(spec);
   const n = pts.length;
