@@ -1,0 +1,45 @@
+{
+ "itemId": "linear_inequalities.point_in_solution.LN.P",
+ "generatedAt": "2026-10-06T10:31:28.292Z",
+ "codeHash": "b32c2c49dcb54be467169dd402692d306db2cfd23d1ec2236f0aa299b898f25e",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_inequalities.point_in_solution.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_inequalities.point_in_solution.LN.P.png",
+   "mobileFile": "linear_inequalities.point_in_solution.LN.P.m375.png",
+   "archetypeId": "pisg.point_in_solution.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A teacher graphs an inequality on a grid. The figure shows the solution set of a linear inequality as a shaded area of the $xy$-plane.",
+   "question": "Which of the following points satisfies the inequality shown in the graph?",
+   "options": [
+    "(3, 5)",
+    "(-7, 0)",
+    "(-4, 4)",
+    "(-2, 4)"
+   ],
+   "correctIndex": 0,
+   "answer": "(3, 5)",
+   "explanation": "(1) 경계선이 지나는 격자점 (-9, -3), (3, 9) 에서 기울기 1, y 절편 6 을 구한다. (2) 경계선이 점선이므로 경계 위의 점은 해가 아니다(<, >). (3) 음영은 경계선의 아래쪽이므로 y 이하(<) 이다. (4) 각 선택지의 점을 경계선 y = 1x + (6) 와 비교한다(음영 쪽인지, 경계 포함인지). (5) 조건에 맞는 점은 (3, 5) 이다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

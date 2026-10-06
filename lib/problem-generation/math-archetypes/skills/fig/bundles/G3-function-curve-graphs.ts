@@ -18,6 +18,7 @@ import { ITEM as nesRad } from "../items/nonlinear_equations_systems.irrational_
 import { ITEM as cgPP } from "../items/coordinate_geometry.parallel_perpendicular_slopes.LN.P";
 import { ITEM as sysFG } from "../items/systems_linear.system_from_graph.LN.P";
 import { ITEM as liFG } from "../items/linear_inequalities.inequality_from_graph.LN.P";
+import { ITEM as liPS } from "../items/linear_inequalities.point_in_solution.LN.P";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS];
 
