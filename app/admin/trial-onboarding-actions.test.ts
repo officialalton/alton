@@ -15,7 +15,7 @@ const { adminRpcMock, adminFromMock, companySignOffMock, sendContractMock, sendE
   }),
 }));
 vi.mock("@/lib/supabase-admin", () => ({
-  createAdminClient: () => ({ rpc: adminRpcMock, from: adminFromMock }),
+  createAdminClient: () => ({ rpc: adminRpcMock, from: adminFromMock, auth: { admin: { getUserById: vi.fn().mockResolvedValue({ data: { user: { email: "free@example.com" } } }) } } }),
 }));
 vi.mock("@/lib/admin-auth", () => ({
   requireAdminOrCapability: vi.fn().mockResolvedValue({ actorUserId: "admin1" }),
@@ -347,6 +347,7 @@ describe("sendTrialOnboardingNoticeAction", () => {
 
   function mockNoExistingLink() {
     adminFromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { child_id: null, source: "homepage" }, error: null }) }) }) };
       if (table === "trial_onboarding_links") {
         return {
           select: () => ({
@@ -384,6 +385,7 @@ describe("sendTrialOnboardingNoticeAction", () => {
 
   it("이미 발송 완료된 상담에 다시 요청하면(중복 클릭) 이메일을 다시 보내지 않는다", async () => {
     adminFromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { child_id: null, source: "homepage" }, error: null }) }) }) };
       if (table === "trial_onboarding_links") {
         return {
           select: () => ({
@@ -581,5 +583,43 @@ describe("sendTrialOnboardingNoticeAction", () => {
       expect.objectContaining({ p_guardian_email: "g@example.com" })
     );
     expect(sendEmailMock).toHaveBeenCalledWith(expect.objectContaining({ to: "g@example.com" }));
+  });
+
+  // 2026-10-05 무료 회원 S5 — 상담이 기존 무료 회원 자녀에 연결돼 있으면 그 자녀를 existing_child_id 로 payload 에 넣고
+  // 중복 이메일 차단에서 제외한다. 다른 자녀의 충돌은 그대로 차단한다.
+  it("free_member 상담의 기존 자녀는 existing_child_id 로 전달되고 이메일 중복 차단에서 제외된다", async () => {
+    adminFromMock.mockImplementation((table: string) => {
+      if (table === "consultations") {
+        return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { child_id: "kid1", source: "free_member" }, error: null }) }) }) };
+      }
+      if (table === "students") {
+        return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { member_type: "free", grade: "10" }, error: null }) }) }) };
+      }
+      if (table === "profiles") {
+        return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { name: "Free Kid" }, error: null }) }) }) };
+      }
+      if (table === "trial_onboarding_links") {
+        return {
+          select: () => ({ eq: () => ({ eq: () => ({ order: () => ({ limit: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }) }) }) }) }),
+          update: () => ({ eq: () => Promise.resolve({ data: null, error: null }) }),
+        };
+      }
+      if (table === "trial_onboarding_link_events") return { insert: () => Promise.resolve({ data: null, error: null }) };
+      throw new Error(`unexpected table ${table}`);
+    });
+    adminRpcMock.mockImplementation((fn: string, args: { p_email?: string }) =>
+      fn === "find_auth_user_id_by_email"
+        ? Promise.resolve({ data: args.p_email === "free@example.com" ? "kid1" : null, error: null })
+        : Promise.resolve({ data: [{ link_id: "l1", raw_token: "tok1" }], error: null })
+    );
+    sendEmailMock.mockResolvedValue(undefined);
+
+    const result = await sendTrialOnboardingNoticeAction({ ...baseParams, students: [{ name: "x", email: "x@example.com" }] });
+
+    expect(result.status).toBe("sent");
+    const call = adminRpcMock.mock.calls.find((c) => c[0] === "create_trial_onboarding_link_multi");
+    expect(call?.[1].p_students[0]).toMatchObject({ existing_child_id: "kid1", email: "free@example.com" });
+    expect(call?.[1].p_students[1]).not.toHaveProperty("existing_child_id");
+    // 클라이언트가 existingChildId 를 주장해도 child_id 없는 상담에서는 무시된다는 것은 아래 DB 통합 테스트가 고정한다.
   });
 });

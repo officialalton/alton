@@ -34,6 +34,7 @@ import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import ConsultationRequestTab from "./ConsultationRequestTab";
 import ConsultationHistoryTab from "./ConsultationHistoryTab";
 import FreeMemberConsultBanner from "./FreeMemberConsultBanner";
+import LearningSummarySharingCard from "./LearningSummarySharingCard";
 import type { FreeMemberFamilyStatus } from "./free-member-data";
 import MessengerTab from "./MessengerTab";
 import { getMessengerUnreadCount } from "./inquiry-actions";
@@ -714,6 +715,7 @@ export default function ParentShell({
             consultSubTab === "request" ? (
               <>
                 {freeMemberStatus && <FreeMemberConsultBanner consults={freeMemberStatus.consults} />}
+                {freeMemberStatus && <LearningSummarySharingCard items={freeMemberStatus.summarySharedChildren} />}
                 <ConsultationRequestTab />
               </>
             ) : consultSubTab === "history" ? (

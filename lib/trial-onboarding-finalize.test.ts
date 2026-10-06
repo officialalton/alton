@@ -26,6 +26,13 @@ const fromMock = vi.fn((table: string) => {
   if (table === "trial_onboarding_links") {
     return { select: () => ({ neq: () => ({ or: crossLinkOrMock }) }) };
   }
+  if (table === "trial_onboarding_link_students") {
+    // 기존 무료 회원 자녀(is_existing_child) 조회 — 이 테스트들은 해당 행이 없다.
+    return {
+      select: () => ({ eq: () => ({ eq: () => Promise.resolve({ data: [], error: null }) }) }),
+      update: () => ({ eq: updateEqMock }),
+    };
+  }
   return { update: () => ({ eq: updateEqMock }) };
 });
 vi.mock("@/lib/supabase-admin", () => ({

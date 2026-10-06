@@ -14,10 +14,15 @@ export type OnboardingEmailCollision = { name: string; email: string };
 
 export async function findExistingAuthEmailCollisions(
   admin: ReturnType<typeof createAdminClient>,
-  students: { name: string; email: string }[]
+  students: { name: string; email: string }[],
+  // 2026-10-05 무료 회원 S5 — 상담에 연결된 기존 무료 회원 자녀(consultations.child_id)의 이메일은
+  // "재사용 대상"이므로 중복으로 막지 않는다. 호출부가 상담 child_id 와 일치함을 검증한 값만 넘긴다.
+  options?: { excludeEmails?: string[] }
 ): Promise<OnboardingEmailCollision[]> {
   const collisions: OnboardingEmailCollision[] = [];
+  const excluded = new Set((options?.excludeEmails ?? []).map((e) => e.trim().toLowerCase()));
   for (const s of students) {
+    if (excluded.has(s.email.trim().toLowerCase())) continue;
     const { data, error } = await admin.rpc("find_auth_user_id_by_email", { p_email: s.email });
     if (error) throw new Error(`이메일 중복 확인에 실패했습니다(${s.email}): ${error.message}`);
     if (data) collisions.push({ name: s.name, email: s.email });

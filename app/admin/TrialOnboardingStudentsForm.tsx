@@ -8,16 +8,24 @@
 // 개별 이름/이메일/학년/과목 입력, 형식 검증(빈 값·이메일 형식)까지 동일하게
 // 적용된다. 별도의 "체험 대상 자녀 확정" 단계나 자녀 수 선택 UI는 만들지 않는다.
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   sendTrialOnboardingNoticeAction,
+  loadExistingFreeMemberChildAction,
   type SendTrialOnboardingNoticeResult,
 } from "./trial-onboarding-actions";
 import { useToasts, ToastStack } from "./Toast";
 
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export type TrialOnboardingStudentRow = { name: string; email: string; grade: string; subject: string };
+export type TrialOnboardingStudentRow = {
+  name: string;
+  email: string;
+  grade: string;
+  subject: string;
+  /** 기존 무료 회원 자녀 연결 행 — 이름·이메일은 읽기 전용(서버가 다시 검증). */
+  existingChildId?: string;
+};
 
 function emptyRow(defaultGrade = ""): TrialOnboardingStudentRow {
   return { name: "", email: "", grade: defaultGrade, subject: "" };
@@ -32,6 +40,7 @@ export default function TrialOnboardingStudentsForm({
   noticeDeliveryStatus,
   noticeSendError,
   onResult,
+  existingChildId,
 }: {
   consultationId: string;
   defaultGuardianEmail?: string;
@@ -44,6 +53,8 @@ export default function TrialOnboardingStudentsForm({
   noticeDeliveryStatus?: "pending" | "sent" | "failed" | null;
   noticeSendError?: string | null;
   onResult: (result: SendTrialOnboardingNoticeResult) => void;
+  /** 상담에 연결된 자녀(consultations.child_id). 있으면 무료 회원 연결 여부를 서버에서 확인한다. */
+  existingChildId?: string | null;
 }) {
   const [guardianEmail, setGuardianEmail] = useState(defaultGuardianEmail);
   const [guardianName, setGuardianName] = useState(defaultGuardianName);
@@ -54,6 +65,24 @@ export default function TrialOnboardingStudentsForm({
   // 학생 입력란이 문제인지 이메일별로 표시한다(일반 에러 배너 대신).
   const [duplicateEmails, setDuplicateEmails] = useState<Set<string>>(new Set());
   const { toasts, showToast, dismiss } = useToasts();
+
+  // 2026-10-05 무료 회원 S5 — 기존 무료 회원 자녀가 연결된 상담이면 첫 행을 그 자녀로 고정한다.
+  useEffect(() => {
+    if (!existingChildId) return;
+    let alive = true;
+    loadExistingFreeMemberChildAction(consultationId)
+      .then((child) => {
+        if (!alive || !child) return;
+        setStudents((prev) => [
+          { name: child.name, email: child.email, grade: child.grade ?? "", subject: "", existingChildId: child.id },
+          ...prev.filter((r) => r.email.trim().toLowerCase() !== child.email.toLowerCase() && (r.name.trim() || r.email.trim())),
+        ]);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [existingChildId, consultationId]);
 
   function updateStudent(index: number, field: keyof TrialOnboardingStudentRow, value: string) {
     if (field === "email" && duplicateEmails.size > 0) {
@@ -101,14 +130,21 @@ export default function TrialOnboardingStudentsForm({
         {students.map((s, i) => (
           <div key={i} className="border border-grey-200 rounded-lg p-2 space-y-1 relative">
             <div className="text-[11px] font-bold text-grey-400">학생 {i + 1}</div>
+            {s.existingChildId && (
+              <p className="text-[11px] font-bold text-green" data-testid={`existing-free-member-${i}`}>
+                기존 무료 회원 자녀 연결 — 새 계정을 만들지 않고 기존 학생 계정을 그대로 과외 회원으로 전환합니다.
+              </p>
+            )}
             <input
               value={s.name}
+              readOnly={!!s.existingChildId}
               onChange={(e) => updateStudent(i, "name", e.target.value)}
               placeholder="학생 이름"
               className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
             />
             <input
               value={s.email}
+              readOnly={!!s.existingChildId}
               onChange={(e) => updateStudent(i, "email", e.target.value)}
               placeholder="학생 이메일"
               className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
@@ -130,7 +166,7 @@ export default function TrialOnboardingStudentsForm({
               placeholder="과목(선택)"
               className="w-full border border-grey-200 rounded px-2 py-1 text-[12px]"
             />
-            {students.length > 1 && (
+            {students.length > 1 && !s.existingChildId && (
               <button
                 type="button"
                 onClick={() => removeStudentRow(i)}
@@ -163,6 +199,7 @@ export default function TrialOnboardingStudentsForm({
                 email: s.email,
                 grade: s.grade || undefined,
                 subject: s.subject || undefined,
+                existingChildId: s.existingChildId,
               })),
             });
             if (result.status === "duplicate_emails") {
