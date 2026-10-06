@@ -20,7 +20,7 @@ The regular hourly rate is **USD $50.00 for all compensable time**. Compensable 
 
 The Employee must accurately record all hours worked, including work outside scheduled lessons. No off-the-clock work is permitted. All hours worked will be paid, including overtime worked without advance approval; failure to follow scheduling instructions may be addressed separately. The Company pays applicable overtime, minimum wages, reporting-time pay, and other required compensation. No provision treats required preparation as unpaid or includes it without compensation in a teaching-only rate.
 
-The regular payroll period and designated paydays are stated in Schedule A and the required wage notice. Payroll deductions are limited to those permitted by law. Student refunds, cancellations, business losses, or disputed lesson credits do not authorize unlawful deductions from wages.
+The regular payroll period and designated paydays are stated in Schedule A and the required wage notice. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. Payroll deductions are limited to those permitted by law. Student refunds, cancellations, business losses, or disputed lesson credits do not authorize unlawful deductions from wages.
 
 ## 5. Breaks, Leave, and Expenses
 

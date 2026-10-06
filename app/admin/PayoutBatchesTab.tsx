@@ -401,7 +401,7 @@ export default function PayoutBatchesTab({
           {autoDispatchOn ? "끄기" : "켜기"}
         </button>
         <span className="text-[11px] text-grey-400">
-          매월 5일·20일(America/Los_Angeles 기준)에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
+          매월 5일·20일(주말·미국 연방 은행 휴일이면 직전 영업일, America/Los_Angeles 기준)에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
         </span>
       </div>
       <p className="text-[11.5px] text-grey-500 mb-3">

@@ -203,6 +203,7 @@ export default function SettlementTab() {
           </div>
           {settlement.nextPayoutDate && <div>Next payout date: {formatDateOnly(settlement.nextPayoutDate)}</div>}
           <div>Pay periods and payout dates follow Pacific Time (America/Los_Angeles).</div>
+          <div>If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day.</div>
           <div>Last updated: {fmtDateTime(settlement.refreshedAt, undefined, tz)}</div>
           <div>Amounts may change until finalized, depending on lesson outcomes and adjustments.</div>
           <div>Gross totals before taxes, fees, or other deductions.</div>

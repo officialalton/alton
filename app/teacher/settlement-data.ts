@@ -107,7 +107,7 @@ export type SettlementMonth = {
   periodKey: string;
   periodStart: string | null;
   periodEnd: string | null;
-  /** 명목 지급일(5일·20일). 주말·공휴일 보정은 적용하지 않는다. */
+  /** 예상 지급일 — 명목 5일·20일을 직전 영업일로 보정한 값. */
   nominalPayoutDate: string | null;
   currency: string;
   status: SettlementStatus;
