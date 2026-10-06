@@ -32,6 +32,8 @@ export type LibraryDoc = {
 export type LibraryKeyword = {
   id: string;
   label: string;
+  domainCode?: string | null;
+  skillCode?: string | null;
 };
 
 export type EligibleLibrary = {
@@ -67,7 +69,7 @@ export async function loadEligibleLibrary(
       .order("title", { ascending: true }),
     supabase
       .from("subject_keywords")
-      .select("id, label")
+      .select("id, label, domain_code, skill_code")
       .eq("subject_id", subjectId)
       .eq("status", "active")
       .order("label", { ascending: true }),
@@ -76,6 +78,6 @@ export async function loadEligibleLibrary(
   return {
     units: (units ?? []).map((u) => ({ id: u.id, position: u.position, unitTitle: u.unit_title })),
     publishedDocs: (docs ?? []).map((d) => ({ id: d.id, title: d.title })),
-    keywords: (keywords ?? []).map((k) => ({ id: k.id, label: k.label })),
+    keywords: (keywords ?? []).map((k) => ({ id: k.id, label: k.label, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null })),
   };
 }

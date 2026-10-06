@@ -289,3 +289,27 @@ describe("위 계층·버전 변경 자동 반영", () => {
     expect(actions.previewRecomposition).not.toHaveBeenCalled();
   });
 });
+
+describe("CompositionPanel — 키워드 도메인 그룹", () => {
+  it("SAT 도메인별 제목 아래에 칩이 묶이고 선택 상태가 유지된다", () => {
+    render(
+      <CompositionPanel
+        composition={makeComposition({
+          keywords: [{ id: "k1", label: "Linear equations in one variable" }],
+          subjectKeywords: [
+            { id: "k1", label: "Linear equations in one variable", domainCode: "algebra", skillCode: "linear_equations_one_var" },
+            { id: "k2", label: "Circles", domainCode: "geometry_trig" },
+            { id: "k3", label: "Legacy" },
+          ],
+        })}
+        pickable={[]}
+        problems={[]}
+      />
+    );
+    expect(screen.getByText("Algebra")).toBeInTheDocument();
+    expect(screen.getByText("Geometry and Trigonometry")).toBeInTheDocument();
+    expect(screen.getByText("Other")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Linear equations in one variable" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Circles" })).toHaveAttribute("aria-pressed", "false");
+  });
+});

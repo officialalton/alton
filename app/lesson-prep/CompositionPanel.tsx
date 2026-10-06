@@ -1,5 +1,6 @@
 "use client";
 
+import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
@@ -275,8 +276,10 @@ export default function CompositionPanel({
             No keywords registered for this subject yet.
           </p>
         ) : (
-          <div className="flex flex-wrap gap-1.5">
-            {composition.subjectKeywords.map((k) => {
+          <GroupedKeywordList
+            items={composition.subjectKeywords}
+            selectedIds={keywordIds}
+            renderItem={(k) => {
               const attached = keywordIds.includes(k.id);
               return (
                 <button
@@ -293,8 +296,8 @@ export default function CompositionPanel({
                   {k.label}
                 </button>
               );
-            })}
-          </div>
+            }}
+          />
         )}
       </section>
 

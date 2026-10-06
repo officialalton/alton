@@ -823,3 +823,23 @@ describe("문제 용도(2026-09-29)", () => {
     await waitFor(() => expect(listBankProblemsAction).toHaveBeenLastCalledWith(expect.objectContaining({ usageScope: "mock_exam" })));
   });
 });
+
+describe("ProblemBankTab — 키워드 도메인 그룹", () => {
+  it("키워드 필터가 도메인별 optgroup 으로 묶인다", async () => {
+    const grouped = [
+      {
+        ...subjects[0],
+        keywords: [
+          { id: "kw1", label: "Linear equations", status: "active", domainCode: "algebra" },
+          { id: "kw2", label: "이차방정식", status: "active" },
+        ],
+      },
+      ...subjects.slice(1),
+    ];
+    render(<ProblemBankTab subjects={grouped} />);
+    fireEvent.change(screen.getByLabelText("과목"), { target: { value: "sub1" } });
+    await waitFor(() => expect(screen.getByLabelText("키워드")).not.toBeDisabled());
+    const select = screen.getByLabelText("키워드") as HTMLSelectElement;
+    expect([...select.querySelectorAll("optgroup")].map((g) => g.label)).toEqual(["Algebra", "기타"]);
+  });
+});

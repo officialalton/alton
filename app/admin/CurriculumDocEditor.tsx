@@ -25,6 +25,8 @@ import RichTextEditable from "./RichTextEditable";
 import ProblemDraftFields from "./ProblemDraftFields";
 import type { DocEditorData, DocProblem, DocSection } from "./curriculum-doc-data";
 import type { SubjectKeyword } from "./subject-data";
+import { GroupedKeywordList, GroupedKeywordOptions } from "@/app/components/GroupedKeywords";
+
 
 const FORMAT_LABEL: Record<ProblemFormat, string> = {
   mc: "객관식",
@@ -235,11 +237,7 @@ export default function CurriculumDocEditor({
             className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[260px]"
           >
             <option value="">지정하지 않음</option>
-            {catalog.map((k) => (
-              <option key={k.id} value={k.id}>
-                {k.label}
-              </option>
-            ))}
+            <GroupedKeywordOptions items={catalog} otherLabel="기타" />
           </select>
           <input
             aria-label="키워드 안 순서"
@@ -871,15 +869,20 @@ function KeywordTagger({
           </div>
           {input.trim() && suggestions.length > 0 && (
             <div className="absolute z-10 mt-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm max-h-32 overflow-auto">
-              {suggestions.map((k) => (
-                <button
-                  key={k.id}
-                  onClick={() => handleAdd(k)}
-                  className="block w-full text-left px-2.5 py-1.5 text-[12px] hover:bg-grey-100"
-                >
-                  {k.label}
-                </button>
-              ))}
+              <GroupedKeywordList
+                items={suggestions}
+                otherLabel="기타"
+                flatWrap={(c) => <>{c}</>}
+                renderItem={(k) => (
+                  <button
+                    key={k.id}
+                    onClick={() => handleAdd(k)}
+                    className="block w-full text-left px-2.5 py-1.5 text-[12px] hover:bg-grey-100"
+                  >
+                    {k.label}
+                  </button>
+                )}
+              />
             </div>
           )}
         </div>

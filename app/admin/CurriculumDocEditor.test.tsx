@@ -456,3 +456,19 @@ describe("교재 단원 나중에 정하기", () => {
     );
   });
 });
+
+describe("대표 키워드 — 도메인 그룹", () => {
+  it("선택 상자가 도메인별 optgroup 으로 묶이고 구 키워드는 기타", () => {
+    const grouped: DocEditorData = {
+      ...doc,
+      subjectKeywords: [
+        { id: "kw1", label: "Circles", status: "active", domainCode: "geometry_trig" },
+        { id: "kw2", label: "삼각비", status: "active" },
+      ],
+    };
+    render(<CurriculumDocEditor doc={grouped} onBack={vi.fn()} onDeleted={vi.fn()} />);
+    const select = screen.getByLabelText("대표 키워드") as HTMLSelectElement;
+    expect([...select.querySelectorAll("optgroup")].map((g) => g.label)).toEqual(["Geometry and Trigonometry", "기타"]);
+    expect(select.querySelector("option[value='kw1']")).not.toBeNull();
+  });
+});

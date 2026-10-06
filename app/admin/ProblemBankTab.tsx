@@ -40,6 +40,8 @@ import {
 } from "@/lib/problem-taxonomy";
 import { judgeMaterialNeed, MATERIAL_KIND_LABEL, MATERIAL_LEVEL_LABEL } from "@/lib/problem-material-need";
 import type { AdminSubject, SubjectKeyword } from "./subject-data";
+import { GroupedKeywordList, GroupedKeywordOptions } from "@/app/components/GroupedKeywords";
+
 
 // P2 3차·8차 — 관리자 문제은행. 교재와 독립된 진입점이다.
 //
@@ -235,7 +237,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
     const multi = subjectIds.length > 1;
     return subjectIds.flatMap((sid) => {
       const subjectName = (catalog ?? []).find((s) => s.subjectId === sid)?.subjectName ?? "";
-      return (keywordsBySubject.get(sid) ?? []).map((k) => ({ id: k.id, subjectId: sid, label: multi ? `${subjectName} · ${k.label}` : k.label }));
+      return (keywordsBySubject.get(sid) ?? []).map((k) => ({ id: k.id, subjectId: sid, domainCode: k.domainCode, skillCode: k.skillCode, label: multi ? `${subjectName} · ${k.label}` : k.label }));
     });
   }, [selectedVisible, keywordsBySubject, catalog]);
 
@@ -566,9 +568,7 @@ export default function ProblemBankTab({ subjects }: { subjects: AdminSubject[] 
                 className="text-[12px] px-2 py-1.5 rounded-lg border-[1.5px] border-grey-200 bg-white max-w-[220px]"
               >
                 <option value="">키워드 선택…</option>
-                {bulkKeywordOptions.map((o) => (
-                  <option key={o.id} value={o.id}>{o.label}</option>
-                ))}
+                <GroupedKeywordOptions items={bulkKeywordOptions} otherLabel="기타" />
               </select>
               <button type="button" disabled={busy || bulkBusy || !bulkKeywordId} onClick={() => void applyKeywordToSelected(true)} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50">
                 키워드 추가
@@ -726,9 +726,7 @@ function Filters({
         </select>
         <select aria-label="키워드" disabled={!filter.subjectId} value={filter.keywordId ?? ""} onChange={(e) => onChange({ keywordId: e.target.value || undefined })} className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 disabled:opacity-50">
           <option value="">{filter.subjectId ? "모든 키워드" : "과목을 먼저 고르세요"}</option>
-          {keywords.map((k) => (
-            <option key={k.id} value={k.id}>{k.label}</option>
-          ))}
+          <GroupedKeywordOptions items={keywords} otherLabel="기타" />
         </select>
       </div>
 
@@ -890,16 +888,19 @@ function NewProblemPanel({
         </select>
         {subjectId && keywords.length === 0 && <span className="text-[12px] text-grey-500">이 과목에 등록된 키워드가 없습니다. 커리큘럼에서 먼저 만드세요.</span>}
         {subjectId && keywords.length > 0 && (
-          <div className="flex flex-wrap gap-1.5">
-            {keywords.map((k) => {
+          <GroupedKeywordList
+            items={keywords}
+            otherLabel="기타"
+            selectedIds={keywordIds}
+            renderItem={(k) => {
               const on = keywordIds.includes(k.id);
               return (
                 <button key={k.id} type="button" aria-pressed={on} onClick={() => setKeywordIds((prev) => (on ? prev.filter((id) => id !== k.id) : [...prev, k.id]))} className={"text-[12px] font-bold px-2.5 py-1 rounded-full border-[1.5px] " + (on ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")}>
                   {k.label}
                 </button>
               );
-            })}
-          </div>
+            }}
+          />
         )}
       </div>
 
@@ -1427,16 +1428,19 @@ function KeywordPicker({ problem, keywords, busy, onRun }: { problem: BankProble
       {keywords.length === 0 ? (
         <p className="text-[12.5px] text-grey-500">이 과목에 등록된 키워드가 없습니다. 커리큘럼에서 먼저 키워드를 만드세요.</p>
       ) : (
-        <div className="flex flex-wrap gap-1.5">
-          {keywords.map((k) => {
+        <GroupedKeywordList
+          items={keywords}
+          otherLabel="기타"
+          selectedIds={attached}
+          renderItem={(k) => {
             const on = attached.has(k.id);
             return (
-              <button key={k.id} disabled={busy} onClick={() => void onRun(() => setProblemKeywordAction(problem.id, k.id, !on), on ? "키워드를 뗐습니다." : "키워드를 붙였습니다.")} className={"text-[12px] font-bold px-2.5 py-1 rounded-full border-[1.5px] disabled:opacity-50 " + (on ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")}>
+              <button key={k.id} aria-pressed={on} disabled={busy} onClick={() => void onRun(() => setProblemKeywordAction(problem.id, k.id, !on), on ? "키워드를 뗐습니다." : "키워드를 붙였습니다.")} className={"text-[12px] font-bold px-2.5 py-1 rounded-full border-[1.5px] disabled:opacity-50 " + (on ? "bg-ink text-white border-ink" : "bg-white text-grey-500 border-grey-200")}>
                 {k.label}
               </button>
             );
-          })}
-        </div>
+          }}
+        />
       )}
       {problem.keywords.length === 0 && <p className="text-[11.5px] text-grey-500 mt-1.5">키워드 없이도 저장하고 공개할 수 있습니다. 회차 자동 구성은 키워드로 후보를 찾으므로, 키워드가 없으면 구성에 포함되지 않습니다.</p>}
     </div>

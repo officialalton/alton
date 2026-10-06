@@ -1,5 +1,6 @@
 "use client";
 
+import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
 import { useEffect, useRef, useState } from "react";
 import type { HomeworkKeywordOption } from "@/app/teacher/homework-direct-data";
 import { loadStudentHomeworkCreatePanelAction } from "@/app/teacher/homework-direct-client-data";
@@ -62,21 +63,27 @@ export default function HomeworkIssueForm({
       {keywords.length === 0 ? (
         <p className="text-[12.5px] text-grey-500">No keywords are available for this student&apos;s subjects.</p>
       ) : (
-        <ul className="divide-y divide-grey-100 mb-3">
-          {keywords.map((k) => (
-            <li key={k.id} className="flex items-center gap-3 py-2 text-[12.5px]">
-              <span className="font-bold text-ink flex-1">{k.label}</span>
-              <input
-                type="number" min={0} inputMode="numeric"
-                value={counts[k.id] ?? ""}
-                onChange={(e) => setCounts((c) => ({ ...c, [k.id]: e.target.value }))}
-                placeholder="0"
-                className="w-[64px] text-[13px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
-              />
-              <span className="text-grey-500">questions</span>
-            </li>
-          ))}
-        </ul>
+        <div className="mb-3">
+          <GroupedKeywordList
+            items={keywords}
+            selectedIds={keywords.filter((k) => (parseInt(counts[k.id] ?? "", 10) || 0) > 0).map((k) => k.id)}
+            flatWrap={(c) => <ul className="divide-y divide-grey-100">{c}</ul>}
+            renderItem={(k) => (
+              <li key={k.id} className="flex items-center gap-3 py-2 text-[12.5px]">
+                <span className="font-bold text-ink flex-1">{k.label}</span>
+                <input
+                  type="number" min={0} inputMode="numeric"
+                  aria-label={`${k.label} count`}
+                  value={counts[k.id] ?? ""}
+                  onChange={(e) => setCounts((c) => ({ ...c, [k.id]: e.target.value }))}
+                  placeholder="0"
+                  className="w-[64px] text-[13px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
+                />
+                <span className="text-grey-500">questions</span>
+              </li>
+            )}
+          />
+        </div>
       )}
       {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
       {notice && <p className="text-[12.5px] text-green mb-2">{notice}</p>}

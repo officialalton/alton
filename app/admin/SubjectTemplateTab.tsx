@@ -15,6 +15,8 @@ import {
   removeUnitKeyword,
 } from "./subject-actions";
 import type { AdminSubject, SubjectKeyword, SubjectUnit } from "./subject-data";
+import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
+
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 
 export default function SubjectTemplateTab({
@@ -453,25 +455,31 @@ function SubjectDetailEditor({
             className="w-full px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] mb-2"
           />
           {keywords.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-2">
-              {keywords.map((k) => {
-                const tagged = (u.keywordIds ?? []).includes(k.id);
-                return (
-                  <button
-                    key={k.id}
-                    // 사전 칩과 회차 태그 버튼이 같은 글자를 갖는다 — 무엇을 누르는
-                    // 자리인지 이름으로 구분해 둔다.
-                    aria-label={`${u.unitTitle} 회차에 ${k.label} ${tagged ? "해제" : "태그"}`}
-                    onClick={() => handleToggleUnitKeyword(u.id, k.id, tagged)}
-                    className={
-                      "text-[11px] font-semibold px-2 py-1 rounded-full border-[1.5px] " +
-                      (tagged ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
-                    }
-                  >
-                    {k.label}
-                  </button>
-                );
-              })}
+            <div className="mb-2">
+              <GroupedKeywordList
+                items={keywords}
+                otherLabel="기타"
+                selectedIds={u.keywordIds ?? []}
+                renderItem={(k) => {
+                  const tagged = (u.keywordIds ?? []).includes(k.id);
+                  return (
+                    <button
+                      key={k.id}
+                      // 사전 칩과 회차 태그 버튼이 같은 글자를 갖는다 — 무엇을 누르는
+                      // 자리인지 이름으로 구분해 둔다.
+                      aria-label={`${u.unitTitle} 회차에 ${k.label} ${tagged ? "해제" : "태그"}`}
+                      aria-pressed={tagged}
+                      onClick={() => handleToggleUnitKeyword(u.id, k.id, tagged)}
+                      className={
+                        "text-[11px] font-semibold px-2 py-1 rounded-full border-[1.5px] " +
+                        (tagged ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
+                      }
+                    >
+                      {k.label}
+                    </button>
+                  );
+                }}
+              />
             </div>
           )}
           <div className="flex items-center gap-3">
