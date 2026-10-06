@@ -1,0 +1,23 @@
+{
+ "itemId": "two_variable_data.model_choice_linear_quadratic_exponential.SC.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "19cf3037abcdaa2a571a45cfa6591390911f56848617507b9a68a0e11605a610",
+ "samples": [
+  "two_variable_data.model_choice_linear_quadratic_exponential.SC.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 점 60,80,100,120,140 → 1차 차분 20 일정 → 양의 기울기 일차 (D). 눈금(40 간격, 반 칸 정수 배 값)과 점 위치 일치, 선지 4개가 서로 다른 모형, 데스크톱·375px 판독 가능. (메타 정답: A linear function with a positive slope)"
+}
