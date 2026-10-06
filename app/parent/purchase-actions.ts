@@ -50,7 +50,7 @@ export async function createEntitlementCheckoutSession(
     .eq("role", "guardian");
   const householdIds = (guardianLinks ?? []).map((l) => l.household_id as string);
   if (householdIds.length === 0) {
-    throw new Error("보호자 권한이 없습니다.");
+    throw new Error("You don't have parent or guardian access.");
   }
 
   const { data: childLink } = await supabase
@@ -61,7 +61,7 @@ export async function createEntitlementCheckoutSession(
     .in("household_id", householdIds)
     .maybeSingle();
   if (!childLink) {
-    throw new Error("본인 가족 구성원이 아닌 자녀에 대해서는 구매할 수 없습니다.");
+    throw new Error("You can only purchase for a child in your own family.");
   }
   const householdId = childLink.household_id as string;
 
@@ -73,7 +73,7 @@ export async function createEntitlementCheckoutSession(
     .eq("status", "active")
     .maybeSingle();
   if (!contract) {
-    throw new Error("결제 가능한(active) 계약이 없어 구매할 수 없습니다.");
+    throw new Error("No active contract found. Purchases require an active contract.");
   }
 
   // 관리자 클라이언트: entitlement_product_versions/purchases는 일반 RLS로
@@ -88,14 +88,14 @@ export async function createEntitlementCheckoutSession(
     .eq("code", entitlementProductCode)
     .maybeSingle();
   if (!product) {
-    throw new Error("존재하지 않는 상품 코드입니다.");
+    throw new Error("Unknown product code.");
   }
   // M2 — 체험수업권(trial_lesson_grant)처럼 시스템만 지급 가능한 상품은 구매
   // 화면에 노출되지 않아야 한다(요구사항 2: 구매 불가). 가격 버전을 만들지
-  // 않은 것이 1차 방어선(아래에서 "가격 정보 없음"으로 fail-closed)이지만,
+  // 않은 것이 1차 방어선(아래에서 "Pricing information is not available."으로 fail-closed)이지만,
   // 이 명시적 검사가 더 정확한 에러 메시지를 준다.
   if (product.system_only) {
-    throw new Error("구매할 수 없는 상품입니다.");
+    throw new Error("This product is not available for purchase.");
   }
 
   // 3) 현재 유효한 가격 버전 조회(effective_from <= now < effective_until, 미할인 아님).
@@ -115,7 +115,7 @@ export async function createEntitlementCheckoutSession(
   );
   if (!productVersion) {
     // fail closed — 정책: 가격 정보 없이 구매를 진행시키지 않는다.
-    throw new Error("가격 정보 없음");
+    throw new Error("Pricing information is not available.");
   }
 
   const taxMinor = 0; // TODO(launch blocker): 세금 서비스 미연동, 지금은 항상 0.
@@ -147,7 +147,7 @@ export async function createEntitlementCheckoutSession(
     .select("id")
     .single();
   if (purchaseError || !purchase) {
-    throw new Error(purchaseError?.message ?? "구매 내역 생성에 실패했습니다.");
+    throw new Error(purchaseError?.message ?? "We couldn't create the purchase record.");
   }
 
   // 5) Stripe Checkout Session 생성(1회성 payment 모드, 구독 아님).
@@ -163,7 +163,7 @@ export async function createEntitlementCheckoutSession(
         {
           price_data: {
             currency: (productVersion.currency as string).toLowerCase(),
-            product_data: { name: `${product.code} (${product.quantity}회)` },
+            product_data: { name: `${product.code} (${product.quantity} lessons)` },
             unit_amount: totalMinor,
           },
           quantity: 1,
@@ -183,7 +183,7 @@ export async function createEntitlementCheckoutSession(
     { idempotencyKey: `purchase-checkout:${purchase.id}` }
   );
   if (!session.url) {
-    throw new Error("결제 세션 생성에 실패했습니다.");
+    throw new Error("We couldn't start the checkout session.");
   }
 
   // 6) stripe_checkout_session_id를 purchases에 반영.

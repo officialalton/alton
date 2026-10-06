@@ -44,11 +44,11 @@ export default function ConsultationRequestTab() {
   async function handleSubmit() {
     setError(null);
     if (hasAssignedConsultant && !slotStartsAt) {
-      setError("상담 희망 시간을 먼저 선택해주세요.");
+      setError("Please select a consultation time first.");
       return;
     }
     if (!reason.trim()) {
-      setError("상담 사유를 입력해주세요.");
+      setError("Please tell us what you'd like to discuss.");
       return;
     }
     setSubmitting(true);
@@ -69,27 +69,27 @@ export default function ConsultationRequestTab() {
   }
 
   if (consultants === null) {
-    return <div className="max-w-[720px] px-5 py-6 text-[13px] text-grey-500">불러오는 중…</div>;
+    return <div className="max-w-[720px] px-5 py-6 text-[13px] text-grey-500">Loading…</div>;
   }
 
   return (
     <div className="max-w-[720px] px-5 py-6">
-      <h2 className="text-[16px] font-bold text-ink mb-1">상담 신청</h2>
+      <h2 className="text-[16px] font-bold text-ink mb-1">Request a Consultation</h2>
       <p className="text-[12.5px] text-grey-500 mb-5">
         {hasAssignedConsultant ? (
           <>
-            담당 컨설턴트 <b className="text-ink">{selected?.consultantName ?? ""}</b>님의 상담 가능 시간을 선택하고, 상담
-            사유를 입력해 신청할 수 있습니다.
+            Pick an available time with your consultant <b className="text-ink">{selected?.consultantName ?? ""}</b> and
+            tell us what you&apos;d like to discuss.
           </>
         ) : (
-          "상담 사유를 입력해 신청하면 관리자가 담당 컨설턴트를 배정하고 일정을 안내드립니다."
+          "Tell us what you'd like to discuss. ALTON EDUCATION will assign a consultant and follow up with scheduling."
         )}{" "}
-        신청 진행 상황과 대화는 각각 &quot;상담 내역&quot;·&quot;메신저&quot;에서 확인해주세요.
+        Track progress under &quot;History&quot; and continue the conversation under &quot;Messages&quot;.
       </p>
 
       {hasAssignedConsultant && consultants.length > 1 && (
         <div className="mb-4">
-          <label className="text-[11px] font-bold text-grey-500 mb-1 block">대상 자녀</label>
+          <label className="text-[11px] font-bold text-grey-500 mb-1 block">Child</label>
           <select
             value={selectedChildId ?? ""}
             onChange={(e) => {
@@ -101,7 +101,7 @@ export default function ConsultationRequestTab() {
           >
             {consultants.map((c) => (
               <option key={c.childId} value={c.childId}>
-                {c.childName ?? "이름 없음"}({c.consultantName ?? "담당자"})
+                {c.childName ?? "Unnamed"} ({c.consultantName ?? "Consultant"})
               </option>
             ))}
           </select>
@@ -109,7 +109,7 @@ export default function ConsultationRequestTab() {
       )}
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
-        <h3 className="text-[13.5px] font-bold text-ink mb-3">상담 희망 시간(60분)</h3>
+        <h3 className="text-[13.5px] font-bold text-ink mb-3">Preferred Time (60 min)</h3>
         {hasAssignedConsultant ? (
           selected && (
             <ConsultSlotPicker
@@ -124,23 +124,23 @@ export default function ConsultationRequestTab() {
           )
         ) : (
           <p className="text-[12.5px] text-grey-700">
-            아직 담당 컨설턴트가 배정되지 않아 상담 시간을 고를 수 없습니다. 상담 사유를 남겨 주시면 관리자가 담당
-            컨설턴트를 배정한 뒤 상담 일정을 안내드립니다.
+            A consultant hasn&apos;t been assigned yet, so a time can&apos;t be selected. Leave your request below and
+            ALTON EDUCATION will assign a consultant and follow up with scheduling.
           </p>
         )}
       </section>
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
-        {submitted && <p className="text-[12.5px] text-green-600 mb-2">상담 신청이 접수되었습니다.</p>}
+        {submitted && <p className="text-[12.5px] text-green-600 mb-2">Your consultation request has been received.</p>}
         <textarea
-          aria-label="상담 사유"
+          aria-label="What would you like to discuss?"
           value={reason}
           onChange={(e) => {
             setReason(e.target.value);
             setSubmitted(false);
           }}
-          placeholder="상담 사유를 입력해주세요"
+          placeholder="What would you like to discuss?"
           className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[120px]"
         />
         <button
@@ -149,7 +149,7 @@ export default function ConsultationRequestTab() {
           onClick={handleSubmit}
           className="mt-3 px-6 py-2.5 rounded-xl bg-red text-white text-[13px] font-bold disabled:opacity-50"
         >
-          {submitting ? "신청 중..." : "상담 신청하기"}
+          {submitting ? "Submitting..." : "Submit Request"}
         </button>
       </section>
     </div>

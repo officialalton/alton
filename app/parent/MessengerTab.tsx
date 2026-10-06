@@ -41,7 +41,7 @@ export default function MessengerTab() {
   function loadInquiries() {
     listGuardianInquiries()
       .then(setInquiries)
-      .catch((e) => setError(e instanceof Error ? e.message : "문의 목록을 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "We couldn't load your inquiries."));
   }
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function MessengerTab() {
       loadInquiries();
       setOpenId(inquiryId);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "문의를 시작하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "We couldn't start the inquiry.");
     } finally {
       setStarting(false);
     }
@@ -86,36 +86,36 @@ export default function MessengerTab() {
 
   return (
     <div className="max-w-[720px] px-5 py-6">
-      <h2 className="text-[16px] font-bold text-ink mb-1">메신저</h2>
+      <h2 className="text-[16px] font-bold text-ink mb-1">Messages</h2>
       <p className="text-[12.5px] text-grey-500 mb-4">
-        기존 자녀에 대한 일반적인 문의는 여기서{" "}
+        Use this space for general questions about your enrolled child. Messages go to{" "}
         {consultantName ? (
           <>
-            담당 컨설턴트 <b className="text-ink">{consultantName}</b>님 또는 관리자에게
+            your consultant <b className="text-ink">{consultantName}</b> or the ALTON EDUCATION team
           </>
         ) : (
-          "관리자에게"
-        )}{" "}
-        남길 수 있습니다. 문의마다 별도 대화창으로 관리되고, 답변을 마치고 종료하면 지난 문의로 넘어갑니다.
-        구체적인 상담이 필요하면 &ldquo;상담 신청&rdquo; 탭을 이용해주세요.
+          "the ALTON EDUCATION team"
+        )}
+        . Each inquiry has its own thread; once it is answered and closed, it moves to Past inquiries.
+        For a dedicated consultation, use the &ldquo;Request&rdquo; tab.
       </p>
 
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
-        <div className="text-[12.5px] font-bold text-grey-500 mb-2">새 문의 시작하기</div>
+        <div className="text-[12.5px] font-bold text-grey-500 mb-2">Start a New Inquiry</div>
         <input
           value={newSubject}
           onChange={(e) => setNewSubject(e.target.value)}
-          placeholder="주제(선택)"
+          placeholder="Subject (optional)"
           className="w-full mb-2 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
         />
         <div className="flex gap-2">
           <textarea
-            aria-label="새 문의 내용"
+            aria-label="New inquiry message"
             value={newBody}
             onChange={(e) => setNewBody(e.target.value)}
-            placeholder="문의 내용을 입력해주세요"
+            placeholder="Type your question"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
           />
           <button
@@ -124,7 +124,7 @@ export default function MessengerTab() {
             onClick={handleStart}
             className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
           >
-            문의하기
+            Send Inquiry
           </button>
         </div>
       </section>
@@ -141,15 +141,15 @@ export default function MessengerTab() {
               (subTab === t ? "bg-ink text-white" : "bg-grey-100 text-grey-600")
             }
           >
-            {t === "open" ? "진행 중 문의" : "지난 문의"}
+            {t === "open" ? "Open Inquiries" : "Past Inquiries"}
           </button>
         ))}
       </div>
 
-      {inquiries === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+      {inquiries === null && !error && <p className="text-[13px] text-grey-500">Loading...</p>}
       {inquiries && visible.length === 0 && (
         <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          {subTab === "open" ? "진행 중인 문의가 없습니다." : "지난 문의가 없습니다."}
+          {subTab === "open" ? "No open inquiries." : "No past inquiries."}
         </p>
       )}
       {inquiries && visible.length > 0 && (
@@ -165,7 +165,7 @@ export default function MessengerTab() {
                   {i.subject && <p className="text-[12.5px] font-bold text-ink truncate">{i.subject}</p>}
                   <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
                   <p className="text-[11px] text-grey-500 mt-0.5">
-                    {i.status === "closed" ? `종료됨 · ${formatDateTime(i.closedAt, tz)}` : `최근 메시지 ${formatDateTime(i.lastMessageAt, tz)}`}
+                    {i.status === "closed" ? `Closed · ${formatDateTime(i.closedAt, tz)}` : `Last message ${formatDateTime(i.lastMessageAt, tz)}`}
                   </p>
                 </div>
                 <span className="text-[11px] font-bold text-grey-400 shrink-0">›</span>
@@ -189,7 +189,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
   function loadMessages() {
     listGuardianInquiryMessages(inquiry.id)
       .then(setMessages)
-      .catch((e) => setError(e instanceof Error ? e.message : "메시지를 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "We couldn't load the messages."));
   }
 
   useEffect(() => {
@@ -206,7 +206,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
       setDraft("");
       loadMessages();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "전송에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "We couldn't send your message.");
     } finally {
       setSending(false);
     }
@@ -215,29 +215,29 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
   return (
     <div className="max-w-[720px] px-5 py-6">
       <button type="button" onClick={onBack} className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform mb-4">
-        ← 문의 목록으로
+        ← Back to inquiries
       </button>
       {readOnly && (
         <p className="text-[12px] font-bold text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-3">
-          종료된 문의입니다({formatDateTime(inquiry.closedAt, tz)}) — 읽기 전용이며, 이어서 문의하려면 목록에서 새 문의를 시작해주세요.
+          This inquiry was closed on {formatDateTime(inquiry.closedAt, tz)}. It is read-only; to follow up, start a new inquiry from the list.
         </p>
       )}
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
-        {messages === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+        {messages === null && !error && <p className="text-[13px] text-grey-500">Loading...</p>}
         {messages && messages.length > 0 && (
           <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
             {messages.map((m) => {
               const isMine = m.senderRole === "guardian";
               const label =
                 m.senderRole === "admin"
-                  ? "관리자"
+                  ? "ALTON EDUCATION"
                   : m.senderRole === "consultant"
-                    ? "담당 컨설턴트"
+                    ? "Consultant"
                     : m.senderRole === "student"
-                      ? "자녀"
-                      : "나";
+                      ? "Child"
+                      : "Me";
               return (
                 <div
                   key={m.id}
@@ -255,10 +255,10 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
         {!readOnly && (
           <div className="flex gap-2">
             <textarea
-              aria-label="메시지 내용"
+              aria-label="Message"
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
-              placeholder="메시지를 입력해주세요"
+              placeholder="Type a message"
               className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
             />
             <button
@@ -267,7 +267,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
               onClick={handleSend}
               className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
             >
-              전송
+              Send
             </button>
           </div>
         )}

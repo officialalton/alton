@@ -64,14 +64,14 @@ async function requireGuardianHouseholdId(supabase: SupabaseClient, guardianId: 
     .eq("role", "guardian")
     .limit(1)
     .maybeSingle();
-  if (!data) throw new Error("소속된 household가 없습니다. 관리자에게 문의해주세요.");
+  if (!data) throw new Error("No household is linked to your account. Please contact ALTON EDUCATION support.");
   return data.household_id as string;
 }
 
 /** 진행 중 + 지난 문의 목록(최근 메시지 순). */
 export async function listGuardianInquiries(): Promise<HouseholdInquirySummary[]> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase
     .from("household_inquiries")
@@ -98,7 +98,7 @@ export async function listGuardianInquiries(): Promise<HouseholdInquirySummary[]
  * 안내 문구("관리자에게 문의")가 실제 담당자를 반영하도록 화면에서 쓴다. */
 export async function getAssignedConsultantNameAction(): Promise<string | null> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase.rpc("consultant_name_for_household", { p_household_id: householdId });
   if (error) throw new Error(error.message);
@@ -108,7 +108,7 @@ export async function getAssignedConsultantNameAction(): Promise<string | null> 
 /** 문의 하나의 메시지 전체(시간순). */
 export async function listGuardianInquiryMessages(inquiryId: string): Promise<HouseholdMessage[]> {
   const { profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const { data, error } = await supabase
     .from("household_messages")
     .select("id, sender_id, sender_role, body, created_at")
@@ -127,8 +127,8 @@ export async function listGuardianInquiryMessages(inquiryId: string): Promise<Ho
 /** 새 문의를 열고 첫 메시지를 남긴다. */
 export async function startGuardianInquiry(body: string, subject?: string): Promise<{ inquiryId: string }> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data: inquiry, error: inquiryError } = await supabase
     .from("household_inquiries")
@@ -150,8 +150,8 @@ export async function startGuardianInquiry(body: string, subject?: string): Prom
 /** 진행 중인 문의에 이어서 메시지를 남긴다(재문의) — 닫힌 문의는 DB에서 거부된다. */
 export async function sendGuardianInquiryMessage(inquiryId: string, body: string): Promise<void> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { error } = await supabase.from("household_messages").insert({
     household_id: householdId,
@@ -160,12 +160,12 @@ export async function sendGuardianInquiryMessage(inquiryId: string, body: string
     sender_role: "guardian",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message.includes("household_inquiries") ? "종료된 문의입니다. 새 문의를 시작해주세요." : error.message);
+  if (error) throw new Error(error.message.includes("household_inquiries") ? "This inquiry has been closed. Please start a new one." : error.message);
 }
 
 export async function listGuardianMeetingRequests(): Promise<MeetingRequest[]> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase
     .from("meeting_requests")
@@ -197,7 +197,7 @@ export async function listGuardianMeetingRequests(): Promise<MeetingRequest[]> {
 
 export async function listGuardianChildrenForMeeting(): Promise<{ id: string; name: string }[]> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data, error } = await supabase
     .from("household_members")
@@ -227,7 +227,7 @@ export type HouseholdChildConsultant = {
 // 명시"할 수 있게.
 export async function getMyHouseholdConsultantsAction(): Promise<HouseholdChildConsultant[]> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
 
   const { data: children, error: childrenError } = await supabase
@@ -302,13 +302,13 @@ export async function submitMeetingRequest(params: {
 }): Promise<SubmitMeetingRequestResult> {
   try {
     const { user, profile, supabase } = await requireUser();
-    if (profile?.role !== "parent") throw new Error("보호자만 상담을 신청할 수 있습니다.");
-    if (!params.reason?.trim()) throw new Error("상담 사유를 입력해주세요.");
+    if (profile?.role !== "parent") throw new Error("Only parents or guardians can request a consultation.");
+    if (!params.reason?.trim()) throw new Error("Please tell us what you'd like to discuss.");
     const householdId = await requireGuardianHouseholdId(supabase, user.id);
 
     let startsAtIso: string | null = null;
     if (params.consultantId) {
-      if (!params.childId) throw new Error("대상 자녀를 선택해주세요.");
+      if (!params.childId) throw new Error("Please select a child.");
       const { data: assignment, error: assignmentError } = await supabase
         .from("consultant_assignments")
         .select("consultant_id")
@@ -316,12 +316,12 @@ export async function submitMeetingRequest(params: {
         .maybeSingle();
       if (assignmentError) throw new Error(assignmentError.message);
       if (assignment?.consultant_id !== params.consultantId) {
-        throw new Error("선택한 자녀의 담당 컨설턴트가 아닙니다.");
+        throw new Error("This consultant is not assigned to the selected child.");
       }
-      if (!params.slotStartsAtIso) throw new Error("상담 희망 시간을 선택해주세요.");
+      if (!params.slotStartsAtIso) throw new Error("Please select a consultation time.");
       startsAtIso = new Date(params.slotStartsAtIso).toISOString();
     } else if (params.slotStartsAtIso) {
-      throw new Error("담당 컨설턴트가 배정되기 전에는 상담 시간을 선택할 수 없습니다.");
+      throw new Error("A consultation time can't be selected until a consultant has been assigned.");
     }
     const endsAtIso = startsAtIso ? new Date(new Date(startsAtIso).getTime() + 60 * 60 * 1000).toISOString() : null;
 
@@ -341,7 +341,7 @@ export async function submitMeetingRequest(params: {
     if (error) throw new Error(friendlyDbMessage(error));
     return { ok: true };
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "상담 신청에 실패했습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "We couldn't submit your consultation request." };
   }
 }
 
@@ -361,7 +361,7 @@ async function assertGuardianOwnsMeetingRequest(
     .eq("id", meetingRequestId)
     .eq("household_id", householdId)
     .maybeSingle();
-  if (!data) throw new Error("본인 household의 상담 신청만 조회할 수 있습니다.");
+  if (!data) throw new Error("You can only view consultation requests from your own household.");
 }
 
 export type GuardianMeetingRequestReview = {
@@ -378,7 +378,7 @@ export async function getGuardianMeetingRequestReview(
   meetingRequestId: string
 ): Promise<GuardianMeetingRequestReview | null> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   await assertGuardianOwnsMeetingRequest(supabase, householdId, meetingRequestId);
 
@@ -407,7 +407,7 @@ export async function getGuardianMeetingRequestReview(
 
 export async function getMessengerUnreadCount(): Promise<number> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { data: readRow } = await supabase
     .from("household_message_reads")
@@ -428,7 +428,7 @@ export async function getMessengerUnreadCount(): Promise<number> {
 
 export async function markMessengerRead(): Promise<void> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "parent") throw new Error("보호자만 접근할 수 있습니다.");
+  if (profile?.role !== "parent") throw new Error("Only parents or guardians can access this.");
   const householdId = await requireGuardianHouseholdId(supabase, user.id);
   const { error } = await supabase
     .from("household_message_reads")

@@ -16,12 +16,12 @@ import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
-  requested: "신청됨",
-  confirming: "확인 중",
-  scheduling: "일정 조율 중",
-  scheduled: "일정 확정",
-  completed: "완료",
-  cancelled: "취소",
+  requested: "Requested",
+  confirming: "Confirming",
+  scheduling: "Scheduling",
+  scheduled: "Scheduled",
+  completed: "Completed",
+  cancelled: "Cancelled",
 };
 
 function formatDateTime(iso: string | null, tz: string): string {
@@ -39,15 +39,15 @@ function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
       .catch(() => setReview(null));
   }, [meetingRequestId]);
 
-  if (review === undefined) return <p className="text-[12px] text-grey-500 mt-2">리뷰를 불러오는 중...</p>;
-  if (review === null) return <p className="text-[12px] text-grey-500 mt-2">아직 확정된 리뷰가 없습니다.</p>;
+  if (review === undefined) return <p className="text-[12px] text-grey-500 mt-2">Loading review...</p>;
+  if (review === null) return <p className="text-[12px] text-grey-500 mt-2">No finalized review yet.</p>;
 
   return (
     <div className="mt-2 border-t border-grey-200 pt-2">
-      <h4 className="text-[12px] font-bold text-ink mb-1">상담 리뷰</h4>
+      <h4 className="text-[12px] font-bold text-ink mb-1">Consultation Review</h4>
       <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
       {review.finalizedAt && (
-        <p className="text-[11px] text-grey-500 mt-1">확정일 {formatDateTime(review.finalizedAt, tz)}</p>
+        <p className="text-[11px] text-grey-500 mt-1">Finalized {formatDateTime(review.finalizedAt, tz)}</p>
       )}
       {/* 미팅록 링크는 권한 부여가 실제로 granted로 확인된 경우에만 노출한다.
           없거나 pending/failed면 아무것도 표시하지 않는다(스펙 요구사항). */}
@@ -58,7 +58,7 @@ function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
           rel="noreferrer"
           className="inline-block mt-2 text-[12px] font-semibold text-ink underline"
         >
-          미팅록 보기
+          View meeting record
         </a>
       )}
     </div>
@@ -76,23 +76,23 @@ export default function ConsultationHistoryTab() {
 
   return (
     <div className="max-w-[720px] px-5 py-6">
-      <h2 className="text-[16px] font-bold text-ink mb-1">상담 내역</h2>
+      <h2 className="text-[16px] font-bold text-ink mb-1">Consultation History</h2>
       <p className="text-[12.5px] text-grey-500 mb-5">
-        신청한 상담의 진행 상태를 확인할 수 있습니다. 완료된 상담은 확정된 리뷰를 함께 볼 수 있습니다.
+        Track the status of your consultation requests. Completed consultations include the finalized review.
       </p>
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
-        {meetings === null && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
-        {meetings && meetings.length === 0 && <p className="text-[13px] text-grey-500">신청한 상담이 없습니다.</p>}
+        {meetings === null && <p className="text-[13px] text-grey-500">Loading...</p>}
+        {meetings && meetings.length === 0 && <p className="text-[13px] text-grey-500">No consultation requests yet.</p>}
         {meetings && meetings.length > 0 && (
           <div className="space-y-2">
             {meetings.map((m) => (
               <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
                 <div className="flex items-center justify-between">
                   <span className="text-[13px] font-bold text-ink">{MEETING_STATUS_LABEL[m.status] ?? m.status}</span>
-                  <span className="text-[11px] text-grey-500">신청일 {formatDateTime(m.createdAt, tz)}</span>
+                  <span className="text-[11px] text-grey-500">Requested {formatDateTime(m.createdAt, tz)}</span>
                 </div>
-                {m.content && <div className="text-[12px] text-grey-500 mt-0.5">사유: {m.content}</div>}
+                {m.content && <div className="text-[12px] text-grey-500 mt-0.5">Topic: {m.content}</div>}
                 {m.startsAt && <div className="text-[12px] text-grey-500 mt-0.5">🗓 {formatDateTime(m.startsAt, tz)}</div>}
                 {m.googleMeetLink && (
                   <a
@@ -101,7 +101,7 @@ export default function ConsultationHistoryTab() {
                     rel="noreferrer"
                     className="inline-block mt-1 text-[12px] font-semibold text-ink underline"
                   >
-                    Google Meet 링크
+                    Google Meet link
                   </a>
                 )}
                 {m.status === "completed" && (
@@ -111,7 +111,7 @@ export default function ConsultationHistoryTab() {
                       onClick={() => setExpandedId(expandedId === m.id ? null : m.id)}
                       className="mt-2 text-[11.5px] font-bold text-ink underline block"
                     >
-                      {expandedId === m.id ? "리뷰 접기" : "리뷰 보기"}
+                      {expandedId === m.id ? "Hide review" : "View review"}
                     </button>
                     {expandedId === m.id && <CompletedReview meetingRequestId={m.id} />}
                   </>
