@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.grouped_median_interval.HG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:40:20Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "9748976a0e8f56f6730e539184593dc6c85cf895cc958912cb6a07d219574c0d",
+ "samples": [
+  "one_variable_data.grouped_median_interval.HG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 40-45:1, 45-50:6, 50-55:7, 55-60:9, 60-65:3(+9→12), 전체 35 → 18번째 값 누적 1,7,14,23 → 55-60 구간 하한 55, 메타 정답 55 일치. 구간 경계 포함 규칙이 지문에 명시, 375px 에서 막대·눈금 판독 가능."
+}
