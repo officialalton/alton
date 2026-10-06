@@ -1,9 +1,9 @@
 {
  "itemId": "nonlinear_functions.function_transformation.FN.C",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T11:12:55Z",
+ "reviewedAt": "2026-10-06T14:50:55Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "76e9edc3c1172de20a2a1c75fb9589875bd46c68d75cdf6487da9ab7f63d942f",
+ "codeHash": "8c508980cc72fe2d9f0e49196a2f667f28a4acea94a0656eaca3ccbc449ccc33",
  "samples": [
   "nonlinear_functions.function_transformation.FN.C.png",
   "nonlinear_functions.function_transformation.FN.C.m375.png"
@@ -20,5 +20,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "리드 문장 중복 수정 후 재생성본을 데스크톱 PNG 21장 전부 읽고, 375px는 계열별(직선·부등식·포물선) 4장 확인. 선택지 4개 중 서술 조건을 모두 만족하는 도형이 하나, 오답은 조건 일부 위반. 축·눈금·라벨 양호. FN.C 계수 문항은 x² 유니코드 표기로 변경."
+ "notes": "이동 서술 문구 변형 추가로 재생성된 PNG(데스크톱·375px)를 읽고 재서명: 정답 D(꼭짓점 (3,1))가 서술과 일치, 오답은 조건 위반."
 }

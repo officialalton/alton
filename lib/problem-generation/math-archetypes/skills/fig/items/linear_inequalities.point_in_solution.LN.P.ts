@@ -35,12 +35,12 @@ export const ITEM = defineItem({
   prefix: "pisg", itemId: "linear_inequalities.point_in_solution.LN.P",
   hard: [
     { op: "repr_shift", structure: "음영 그래프의 경계선·방향·점선 여부를 읽고 선택지 점 중 해인 점을 고름", extra: "경계선 위의 점이 선택지에 있어 점선·실선을 구분해야 함 — medium 은 경계선에서 먼 점", concepts: ["부등식의 그래프", "점이 해인지 판정"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, true, "pick_solution", T1) },
-    { op: "chain2", structure: "음영 그래프에서 선택지 점 중 해가 아닌 점을 고름", extra: "세 점이 해이고 하나만 아님 — 해를 찾는 것과 반대로 판정해야 함", concepts: ["부등식의 그래프", "점이 해인지 판정", "부정 조건"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, false, "pick_non_solution", T1) },
-    { op: "compose_kind", structure: "x 좌표가 같은 점 네 개 중 해인 점을 고름(경계선과의 세로 거리 비교)", extra: "같은 x 에서 y 값만 달라 경계선 값 m x + b 를 계산해 비교해야 함", concepts: ["부등식의 그래프", "경계값 계산"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, true, "fixed_x", T1, { fixedX: true }) },
-    { op: "constraint_select", structure: "x 좌표가 같은 점 네 개 중 해가 아닌 점을 고름", extra: "경계 포함 여부와 음영 방향을 함께 써서 유일한 비해를 골라야 함", concepts: ["부등식의 그래프", "경계값 계산", "부정 조건"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, false, "fixed_x_non", T1, { fixedX: true }) },
+    { op: "chain2", structure: "음영 그래프에서 선택지 점 중 해가 아닌 점을 고름", extra: "세 점이 해이고 하나만 아님 — 해를 찾는 것과 반대로 판정해야 함 — medium 은 해인 점 고르기", concepts: ["부등식의 그래프", "점이 해인지 판정", "부정 조건"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, false, "pick_non_solution", T1) },
+    { op: "compose_kind", structure: "x 좌표가 같은 점 네 개 중 해인 점을 고름(경계선과의 세로 거리 비교)", extra: "같은 x 에서 y 값만 달라 경계선 값 m x + b 를 계산해 비교해야 함 — medium 은 먼 점 고르기", concepts: ["부등식의 그래프", "경계값 계산"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, true, "fixed_x", T1, { fixedX: true }) },
+    { op: "constraint_select", structure: "x 좌표가 같은 점 네 개 중 해가 아닌 점을 고름", extra: "경계 포함 여부와 음영 방향을 함께 써서 유일한 비해를 골라야 함 — medium 은 해인 점 고르기", concepts: ["부등식의 그래프", "경계값 계산", "부정 조건"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, false, "fixed_x_non", T1, { fixedX: true }) },
   ],
   em: [
-    { lv: "easy", name: "pick_solution_far", structure: "음영 그래프에서 해인 점을 고름(경계선에서 먼 점)", extra: "easy: 음영 안의 점", concepts: ["부등식의 그래프"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, true, "pick_solution_easy", T1) },
+    { lv: "easy", name: "pick_solution_far", structure: "음영 그래프에서 해인 점을 고름(경계선에서 먼 점)", extra: "easy: 음영 안의 점", concepts: ["부등식의 그래프", "그래프 읽기"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, true, "pick_solution_easy", T1) },
     { lv: "medium", name: "pick_non_solution", structure: "음영 그래프에서 해가 아닌 점을 고름", extra: "medium: 부정 조건", concepts: ["부등식의 그래프", "부정 조건"], sprNo: MC_ONLY_STATEMENT, gen: (rng) => mk(rng, false, "pick_non_solution_med", (s, g) => [...T1(s, g), [`나머지 세 점은 모두 해이다.`, "The other three points are solutions."]]) },
   ],
 });

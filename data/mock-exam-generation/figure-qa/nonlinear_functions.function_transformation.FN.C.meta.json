@@ -1,7 +1,7 @@
 {
  "itemId": "nonlinear_functions.function_transformation.FN.C",
- "generatedAt": "2026-10-06T11:40:50.941Z",
- "codeHash": "76e9edc3c1172de20a2a1c75fb9589875bd46c68d75cdf6487da9ab7f63d942f",
+ "generatedAt": "2026-10-06T14:50:17.686Z",
+ "codeHash": "8c508980cc72fe2d9f0e49196a2f667f28a4acea94a0656eaca3ccbc449ccc33",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -32,17 +32,17 @@
    "archetypeId": "nftc.function_transformation.FN.C.repr_shift",
    "seed": 11,
    "signature": "figure_choice[plane]",
-   "stimulus": "A designer compares curves on a coordinate grid. The choices shown are four parabola graphs that share the same axes.",
-   "question": "Which of the four graphs shown is a parabola that is the graph obtained by shifting a parabola with vertex at the point with $x$-coordinate 3 and $y$-coordinate 3, opening downward with the same shape, 2 units down?",
+   "stimulus": "In a practice set, students compare graphs in the $xy$-plane. Four graphs of parabolas are shown in the $xy$-plane, all with the same axes.",
+   "question": "Which graph shown is the graph of a parabola that is the graph obtained by shifting a parabola with vertex at the point with $x$-coordinate 3 and $y$-coordinate 3, opening downward with the same shape, 2 units down?",
    "options": [
     "A",
     "B",
     "C",
     "D"
    ],
-   "correctIndex": 2,
-   "answer": "C",
-   "explanation": "(1) 꼭짓점 (3, 3) 를 2 units down 옮기면 (3, 1) 이다. (2) 각 그래프에서 꼭짓점·열린 방향·지나는 점을 읽는다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 C이다.",
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 꼭짓점 (3, 3) 를 2 units down 옮기면 (3, 1) 이다. (2) 각 그래프에서 꼭짓점·열린 방향·지나는 점을 읽는다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 D이다.",
    "structuralIssues": []
   }
  ]

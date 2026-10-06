@@ -31,7 +31,7 @@ export const ITEM = defineItem({
   prefix: "sfcg", itemId: "systems_linear.system_from_graph.LN.C",
   hard: [H("repr_shift", 0, "두 직선의 기울기·절편을 각각 서술로 주고 그 연립의 그래프를 고름"), H("chain2", 1, "해와 한 직선의 식을 서술로 주고 그 연립의 그래프를 고름"), H("compose_kind", 2, "한 직선은 기울기와 지나는 점, 다른 직선은 기울기와 절편으로 주고 그 연립의 그래프를 고름"), H("inverse", 3, "해의 x 와 한 직선의 식을 주고 그 연립의 그래프를 고름")],
   em: [
-    { lv: "easy", name: "both_lines", sprNo: SPR_NO_PLANE_CHOICE, structure: "두 직선의 식을 서술로 주고 그래프를 고름", extra: "easy: 두 직선 대조", concepts: ["연립방정식의 그래프"], gen: mkGen(0, true) },
+    { lv: "easy", name: "both_lines", sprNo: SPR_NO_PLANE_CHOICE, structure: "두 직선의 식을 서술로 주고 그래프를 고름", extra: "easy: 두 직선 대조", concepts: ["연립방정식의 그래프", "그래프 읽기"], gen: mkGen(0, true) },
     { lv: "medium", name: "point_line", sprNo: SPR_NO_PLANE_CHOICE, structure: "한 직선은 지나는 점으로, 다른 직선은 절편으로 주고 그래프를 고름", extra: "medium: 점으로 절편 구하기", concepts: ["연립방정식의 그래프", "직선의 식"], gen: mkGen(2, true) },
   ],
 });
