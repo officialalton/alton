@@ -5,6 +5,8 @@ import type { DashboardData } from "./dashboard-data";
 import type { RoadmapData } from "@/lib/roadmap/types";
 
 const pushMock = vi.fn();
+const touchActivityAction = vi.hoisted(() => vi.fn());
+vi.mock("./activity-tracking", () => ({ touchActivityAction, logLearningEventAction: vi.fn() }));
 vi.mock("./mock-exam-tab-actions", () => ({
   loadMyMockExamOverviewAction: vi.fn(async () => ({ catalog: [], attempts: [] })),
 }));
@@ -173,6 +175,13 @@ const lessonsProps = {
 };
 
 describe("StudentShell", () => {
+  // POLICY-DECISIONS: 학습 이용 이벤트·하트비트 — 마운트 시 1회
+  it("calls the activity heartbeat exactly once on mount", () => {
+    touchActivityAction.mockClear();
+    render(<StudentShell studentName="지훈" dashboard={dashboard} problemHistory={[]} {...lessonsProps} />);
+    expect(touchActivityAction).toHaveBeenCalledTimes(1);
+  });
+
   it("사이드바 10개 항목을 보여주고, 기본 탭은 홈이다", () => {
     render(
       <StudentShell
