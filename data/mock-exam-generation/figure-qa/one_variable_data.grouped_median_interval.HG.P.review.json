@@ -1,9 +1,9 @@
 {
  "itemId": "one_variable_data.grouped_median_interval.HG.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T02:56:09Z",
+ "reviewedAt": "2026-10-06T03:08:35Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "09df2597beefdea464e630b27a9f87bb78a1239e29ca0a20fef1600bab8c73b4",
+ "codeHash": "9362032bb69de961ce5beb803d211be892a3d039cbe4e56e9559401c5de0cebc",
  "samples": [
   "one_variable_data.grouped_median_interval.HG.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 40-45:1, 45-50:6, 50-55:7, 55-60:9, 60-65:3(+9→12), 전체 35 → 18번째 값 누적 1,7,14,23 → 55-60 구간 하한 55, 메타 정답 55 일치. 구간 경계 포함 규칙이 지문에 명시, 375px 에서 막대·눈금 판독 가능. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+ "notes": "그림만 보고 풀이: 40-45:1, 45-50:6, 50-55:7, 55-60:9, 60-65:3(+9→12), 전체 35 → 18번째 값 누적 1,7,14,23 → 55-60 구간 하한 55, 메타 정답 55 일치. 구간 경계 포함 규칙이 지문에 명시, 375px 에서 막대·눈금 판독 가능. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }

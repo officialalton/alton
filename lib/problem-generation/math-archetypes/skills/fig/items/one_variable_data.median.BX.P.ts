@@ -1,6 +1,5 @@
 // one_variable_data.median.BX.P — 상자그림의 다섯 수 요약에서 중앙값·사분위 위치를 읽고, 구간별 개수(네 구간에 같은 개수)·두 집단 비교·자료 변환으로 확장한다.
 import { GenFail } from "../../../types";
-import { fmtNum } from "../../../text";
 import { W } from "../../d-kit";
 import { figJs } from "../../../figure-kit";
 import { defineItem } from "../item-kit";

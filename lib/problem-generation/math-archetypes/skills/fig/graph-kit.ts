@@ -140,7 +140,7 @@ export type PairOpts = {
 export function makeLinePair(rng: Rng, o: PairOpts = {}): LinePair {
   for (let tr = 0; tr < 800; tr++) {
     const t = o.topic ?? rng.pick(PAIR_TOPICS); const xStep = rng.pick([1, 1, 2]); const nx = rng.int(5, 8); const X = xStep * nx; const S = rng.pick([5, 10, 10, 20]);
-    let m1 = rng.int(3, 12), m2 = rng.int(1, m1 - 1), b1 = rng.int(0, 5) * S, b2: number, xi: number;
+    const m1 = rng.int(3, 12); let m2 = rng.int(1, m1 - 1); const b1 = rng.int(0, 5) * S; let b2: number, xi: number;
     if (o.same) { m2 = m1; b2 = b1; xi = NaN; }
     else if (o.parallel) { m2 = m1; b2 = b1 + rng.int(1, 4) * S; xi = NaN; }
     else {

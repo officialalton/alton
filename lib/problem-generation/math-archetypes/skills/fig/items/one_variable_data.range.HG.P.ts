@@ -1,5 +1,4 @@
 // one_variable_data.range.HG.P — 히스토그램에서 가능한 범위(구간 경계로 한정)를 구한다: 가장 큰 가능한 범위 = 마지막 막대 오른쪽 끝 − 첫 막대 왼쪽 끝.
-import { GenFail } from "../../../types";
 import { W } from "../../d-kit";
 import { figJs } from "../../../figure-kit";
 import { defineItem } from "../item-kit";

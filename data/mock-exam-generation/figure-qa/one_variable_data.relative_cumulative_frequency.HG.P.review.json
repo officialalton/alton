@@ -1,9 +1,9 @@
 {
  "itemId": "one_variable_data.relative_cumulative_frequency.HG.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T03:06:19Z",
+ "reviewedAt": "2026-10-06T03:08:35Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "3c6b1196ad1cd153b75158b85f304ddb997cf38d28c506e77fa301a49b6dba37",
+ "codeHash": "2d955e7732a0512a092d0916993b711b61166be9e06a6a1b5e9d123245898bff",
  "samples": [
   "one_variable_data.relative_cumulative_frequency.HG.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 막대 40–45:4, 45–50:3, 50–55:5, 55–60:2, 60–65:3, 65–70:3 (전체 20) → 55 아래 4+3+5=12 → 60%, 메타 정답 60 일치. 막대 높이가 세로 눈금(1칸)과 일치, 경계 눈금·축 제목 양호."
+ "notes": "그림만 보고 풀이: 막대 40–45:4, 45–50:3, 50–55:5, 55–60:2, 60–65:3, 65–70:3 (전체 20) → 55 아래 4+3+5=12 → 60%, 메타 정답 60 일치. 막대 높이가 세로 눈금(1칸)과 일치, 경계 눈금·축 제목 양호. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }

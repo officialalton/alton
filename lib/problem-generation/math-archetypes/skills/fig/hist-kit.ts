@@ -1,6 +1,5 @@
 // 히스토그램(HG) 공용 장면 키트 — 구간 막대(왼쪽 끝 포함·오른쪽 끝 불포함)의 중앙값 구간·상대 누적 도수 등 HG 조합 파일들이 함께 쓴다.
 // 구간 도수표 문항(grouped_median_interval.FQ)의 장면·해설·검증 JS 를 그림(data.histogram)용으로 옮긴 것이다. 세로 눈금은 1 칸 간격이라 막대 높이를 정확히 읽을 수 있다.
-import { GenFail } from "../../types";
 import type { Rng } from "../../rng";
 import { W } from "../d-kit";
 export { expand, medianOfList } from "./table-kit";

@@ -4,7 +4,7 @@ import { fmtNum } from "../../../text";
 import { W } from "../../d-kit";
 import { figJs } from "../../../figure-kit";
 import { defineItem, MC_ONLY_STATEMENT, statementInst } from "../item-kit";
-import { gInst, capFirst, sing, convNote, GL_JS, glIntercept, glIntro, glRead, makeLinGraph, offXg, type LinGraph } from "../graph-kit";
+import { gInst, capFirst, sing, GL_JS, glIntercept, glIntro, glRead, makeLinGraph } from "../graph-kit";
 
 export const ITEM = defineItem({
   prefix: "lf", itemId: "linear_functions.interpret_intercept.LN.P",

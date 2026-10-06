@@ -5,7 +5,7 @@ import { fmtNum, lin } from "../../../text";
 import { W } from "../../d-kit";
 import { figJs } from "../../../figure-kit";
 import { defineItem } from "../item-kit";
-import { gInst, capFirst, sing, convNote, GL_JS, glIntercept, glIntro, glRead, makeLinGraph, offXg, type LinGraph } from "../graph-kit";
+import { gInst, convNote, GL_JS, glIntercept, glIntro, glRead, makeLinGraph } from "../graph-kit";
 
 const EXPR_ONLY = "정답이 식(문자를 포함한 표현)이라 그리드 입력 숫자로 낼 수 없다";
 const M = (s: string) => `$${s}$`;

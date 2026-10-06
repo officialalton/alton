@@ -4,7 +4,7 @@ import { fmtNum } from "../../../text";
 import { W } from "../../d-kit";
 import { figJs } from "../../../figure-kit";
 import { defineItem } from "../item-kit";
-import { gInst, capFirst, sing, convNote, GL_JS, glIntercept, glIntro, glRead, makeLinGraph, offXg, type LinGraph } from "../graph-kit";
+import { gInst, convNote, GL_JS, glIntercept, glIntro, glRead, makeLinGraph, offXg, type LinGraph } from "../graph-kit";
 
 const ev = (s: LinGraph, x: number) => s.m * x + s.b;
 const isInt = Number.isInteger;
