@@ -1,0 +1,45 @@
+{
+ "itemId": "systems_linear.substitution_solve.LN.P",
+ "generatedAt": "2026-10-06T10:41:18.641Z",
+ "codeHash": "012dc8b8c187246e3694e8766bd58c2b0f7679ef9316a0bbecf825716ae6e49a",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/systems_linear.substitution_solve.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "systems_linear.substitution_solve.LN.P.png",
+   "mobileFile": "systems_linear.substitution_solve.LN.P.m375.png",
+   "archetypeId": "ssgg.substitution_solve.LN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "Both equations of a linear system are graphed in the $xy$-plane shown, and one of them can be written as $y = -x - 6$. Consider the ordered pair $(x, y)$ that solves the system.",
+   "question": "Find the value of $x$.",
+   "options": [
+    "11",
+    "-11",
+    "12",
+    "-17"
+   ],
+   "correctIndex": 0,
+   "answer": "11",
+   "explanation": "(1) 지문의 식에서 y = -x - 6 이다. (2) 다른 직선이 지나는 격자점 (4, -3), (7, -9) 에서 기울기 -2, y 절편 5 를 구한다. (3) 첫 식을 둘째 식 y = -2x + 5 에 대입한다. (4) -1x + (-6) = -2x + (5) 에서 (1)x = 11 이다. (5) x = 11 이다. 따라서 정답은 11이다.",
+   "structuralIssues": []
+  }
+ ]
+}

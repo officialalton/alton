@@ -1,0 +1,23 @@
+{
+ "itemId": "linear_equations_one_var.solve.LN.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T12:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "7afef7b96575bcf215f7c90fa7d1579406596e9b0e79a6f43edcfbb5b160ebe8",
+ "samples": [
+  "linear_equations_one_var.solve.LN.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "순수 두 직선/직선 그래프(축 제목 x·y), 데스크톱 확인·샘플 정답 수작업 검산. 375px는 같은 레이아웃이라 동일 판정(직접 확인 아님)."
+}
