@@ -19,7 +19,7 @@ const ALL = "All";
 
 type GradeFilter = "all" | "correct" | "partial" | "incorrect" | "pending";
 
-export default function ProblemHistoryTab({ entries }: { entries: ProblemHistoryEntry[] }) {
+export default function ProblemHistoryTab({ entries, isFreeMember = false }: { entries: ProblemHistoryEntry[]; isFreeMember?: boolean }) {
   const tz = useViewerTimezone();
   const [subject, setSubject] = useState(ALL);
   const [gradeFilter, setGradeFilter] = useState<GradeFilter>("all");
@@ -58,7 +58,9 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
   return (
     <div className="max-w-[760px]">
       <p className="text-[13px] text-grey-500 mb-4">
-        Problems you answered in lessons and assignments. Answers and explanations unlock once your teacher grades them.
+        {isFreeMember
+          ? "Questions you missed or saved from your practice tests. Review the explanation and try them again."
+          : "Problems you answered in lessons and assignments. Answers and explanations unlock once your teacher grades them."}
         {entries.length > 0 && (
           <>
             {" "}
@@ -83,12 +85,14 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
           onChange={(v) => setFormatFilter(v as "all" | ProblemHistoryEntry["format"])}
           options={[["all", "All"], ["mc", "Multiple choice"], ["spr", "Numeric"], ["essay", "Written"], ["math", "Worked"]]}
         />
+        {!isFreeMember && (
         <Chips
           label="Source"
           value={sourceFilter}
           onChange={(v) => setSourceFilter(v as "all" | "lesson" | "homework" | "mock_exam")}
           options={[["all", "All"], ["lesson", "Lesson"], ["homework", "Assignment"], ["mock_exam", "Practice Test"]]}
         />
+        )}
       </div>
 
       {skillSummary.length > 0 && (
@@ -143,10 +147,12 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                   )}
                   <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(No text)"}</span>
                   <span className="text-[11.5px] text-grey-500 shrink-0">
-                    {[e.subjectName, e.unitTitle, e.startsAt ? fmtDate(e.startsAt, undefined, tz) : null].filter(Boolean).join(" · ")}
+                    {isFreeMember
+                      ? ["Practice Test", e.unitTitle, e.startsAt ? fmtDate(e.startsAt, { month: "short", day: "numeric", year: "numeric" }, tz) : null].filter(Boolean).join(" · ")
+                      : [e.subjectName, e.unitTitle, e.startsAt ? fmtDate(e.startsAt, undefined, tz) : null].filter(Boolean).join(" · ")}
                   </span>
                 </button>
-                {open && <HistoryDetail entry={e} />}
+                {open && <HistoryDetail entry={e} isFreeMember={isFreeMember} />}
               </li>
             );
           })}
@@ -182,7 +188,7 @@ function GradeBadge({ entry }: { entry: ProblemHistoryEntry }) {
   return <span className={"text-[11px] font-bold " + cls}>{GRADE_LABEL[entry.grade]}</span>;
 }
 
-function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
+function HistoryDetail({ entry: e, isFreeMember }: { entry: ProblemHistoryEntry; isFreeMember: boolean }) {
   return (
     <div className="mt-3 rounded-lg bg-grey-100 px-4 py-3" data-testid="history-detail">
       <ProblemFigure spec={e.figure} text={problemText(e.passage, e.options)} className="mb-2" />
@@ -224,7 +230,7 @@ function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
       {e.format === "math" && <p className="mt-2 text-[12.5px] text-grey-500">You can view your work on the whiteboard in the Problems tab of that lesson.</p>}
       {e.graded && (
         <div className="mt-2 text-[12.5px] text-ink">
-          <span className="font-bold">Teacher&apos;s grade: </span>
+          <span className="font-bold">{isFreeMember ? "Result: " : "Teacher's grade: "}</span>
           {e.grade ? GRADE_LABEL[e.grade] : "Graded"}
           {e.gradeComment && <span className="text-grey-500"> · “{e.gradeComment}”</span>}
         </div>
@@ -235,7 +241,7 @@ function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
           <LearningText text={e.explanation} className="learning-body text-[13px] leading-[1.7] text-ink" />
         </div>
       )}
-      {!e.graded && <p className="mt-2 text-[12px] text-grey-500">The answer and explanation will appear here once your teacher grades it.</p>}
+      {!e.graded && !isFreeMember && <p className="mt-2 text-[12px] text-grey-500">The answer and explanation will appear here once your teacher grades it.</p>}
     </div>
   );
 }

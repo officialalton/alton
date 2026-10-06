@@ -51,8 +51,10 @@ export default function TutoringInterestPanel({ initialState, entryPoint }: { in
   const expiredInvites = state.invites.filter((i) => i.status === "pending" && isInviteExpired(i.expiresAt, now));
   const accepted = state.invites.find((i) => i.status === "accepted");
   const review = state.invites.find((i) => i.status === "manual_review");
+  // 초대가 대기 중이면 폼을 숨긴다(상태·재발송·'Cancel / change email'만). 취소·만료 뒤 다시 보인다.
   const showForm =
     state.kind === "none" || (state.kind === "interest" && (state.status === "registered" || state.status === "invite_sent"));
+  const showInviteForm = showForm && pendingInvites.length === 0;
 
   return (
     <div className="rounded-xl bg-white border border-brand-border p-6" data-testid="tutoring-interest-panel">
@@ -72,7 +74,7 @@ export default function TutoringInterestPanel({ initialState, entryPoint }: { in
         </button>
       )}
 
-      {showForm && state.kind !== "none" && (
+      {showInviteForm && state.kind !== "none" && (
         <form
           onSubmit={(e) => {
             e.preventDefault();

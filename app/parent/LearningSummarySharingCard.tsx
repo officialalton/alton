@@ -17,7 +17,7 @@ export default function LearningSummarySharingCard({ items }: { items: { student
         <div key={c.studentId} className="rounded-xl border border-brand-border bg-white p-4">
           <p className="text-[13.5px] font-bold text-ink mb-1">Learning summary sharing{c.name ? ` — ${c.name}` : ""}</p>
           <p className="text-[12.5px] text-grey-500 mb-3">
-            Your admissions consultant can see a short summary of {c.name ?? "your child"}&apos;s practice activity (counts and weakest areas only — never answers or notes). You can stop sharing at any time.
+            Your admissions consultant can see a short summary of {c.name ?? "your child"}&apos;s practice activity (counts and weakest areas). You can stop sharing at any time.
           </p>
           <button
             type="button"

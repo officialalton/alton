@@ -56,3 +56,20 @@ describe("ProblemHistoryTab — 학생 포털 문제 기록(v3, 2026-09-14)", ()
     expect(screen.getByText("No problems match these filters.")).toBeInTheDocument();
   });
 });
+
+describe("ProblemHistoryTab — 무료 회원(2026-10-05 UAT)", () => {
+  const mock: ProblemHistoryEntry = { ...base, workId: "m1", source: "mock_exam", subjectName: "Mock Exam", unitTitle: "Set A", startsAt: "2026-10-03T12:00:00Z", graded: true, grade: "incorrect", correctIndex: 1, explanation: "why" };
+  it("무료 회원: 안내 문구·소스 필터·행 라벨이 연습시험 기준이다", () => {
+    render(<ProblemHistoryTab entries={[mock]} isFreeMember />);
+    expect(screen.getByText(/Questions you missed or saved from your practice tests\./)).toBeInTheDocument();
+    expect(screen.queryByText(/teacher grades/)).toBeNull();
+    expect(screen.queryByText("Source")).toBeNull();
+    expect(screen.queryByText("Lesson")).toBeNull();
+    expect(screen.getByText("Practice Test · Set A · Oct 3, 2026")).toBeInTheDocument();
+  });
+  it("과외 회원은 기존 문구 유지", () => {
+    render(<ProblemHistoryTab entries={[mock]} />);
+    expect(screen.getByText(/once your teacher grades them/)).toBeInTheDocument();
+    expect(screen.getByText("Source")).toBeInTheDocument();
+  });
+});

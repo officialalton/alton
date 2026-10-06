@@ -1,4 +1,5 @@
 import { escapeHtml, sendEmail } from "@/lib/email";
+import { plainName } from "./grade-label";
 
 // 2026-10-05 무료 회원 S4 — 보호자 연결 메일 3종(브리프 §5.2). 오너 결정(2026-10-05): 신규 학생·보호자
 // 대면 문구는 영어. 발송은 lib/email sendEmail 하나로만(실제 수신자 발송은 호출부 책임 — 테스트는 모킹).
@@ -17,7 +18,7 @@ function layout(body: string): string {
 
 /** ① 학생이 보호자 이메일을 입력했을 때 보내는 초대. 링크는 /guardian-link/[token]. */
 export async function sendGuardianLinkInviteEmail(params: { to: string; studentFirstName: string; inviteUrl: string; expiresInDays?: number }): Promise<void> {
-  const name = escapeHtml(params.studentFirstName || "Your student");
+  const name = escapeHtml(plainName(params.studentFirstName) || "Your student");
   await sendEmail({
     to: params.to,
     subject: `[ALTON EDUCATION] ${name} would like to connect you as their parent`,
@@ -37,7 +38,7 @@ export async function sendGuardianLinkInviteEmail(params: { to: string; studentF
 
 /** ② 학생이 이미 연결된 보호자가 있을 때 — 초대 대신 보호자에게 "상담을 예약해 주세요" 안내(1회). */
 export async function sendLinkedGuardianBookingNoticeEmail(params: { to: string; guardianName: string | null; studentFirstName: string; portalUrl: string }): Promise<void> {
-  const name = escapeHtml(params.studentFirstName || "Your student");
+  const name = escapeHtml(plainName(params.studentFirstName) || "Your student");
   const greeting = params.guardianName ? `Hello ${escapeHtml(params.guardianName)},` : "Hello,";
   await sendEmail({
     to: params.to,
@@ -55,7 +56,7 @@ export async function sendLinkedGuardianBookingNoticeEmail(params: { to: string;
 
 /** ③ 수락 후 예약 미완료 리마인더(일일 크론, 최대 1회) / 초대 미수락 리마인더(최대 1회). */
 export async function sendGuardianLinkReminderEmail(params: { to: string; kind: "unaccepted" | "unbooked"; studentFirstName: string; url: string }): Promise<void> {
-  const name = escapeHtml(params.studentFirstName || "Your student");
+  const name = escapeHtml(plainName(params.studentFirstName) || "Your student");
   const isUnbooked = params.kind === "unbooked";
   await sendEmail({
     to: params.to,

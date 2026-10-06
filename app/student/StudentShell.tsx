@@ -427,7 +427,7 @@ export default function StudentShell({
           ) : activeTab === "vocab" ? (
             <VocabLibraryTab myWords={myVocabWords} books={vocabLibraryBooks} quizzes={vocabQuizzes} folders={vocabFolders} />
           ) : activeTab === "problemlog" ? (
-            <ProblemHistoryTab entries={problemHistory} />
+            <ProblemHistoryTab entries={problemHistory} isFreeMember={isFreeMember} />
           ) : activeTab === "homework" ? (
             <StudentHomeworkTab batches={homeworkBatches} />
           ) : activeTab === "materials" ? (

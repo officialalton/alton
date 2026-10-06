@@ -116,4 +116,23 @@ describe("TutoringInterestPanel", () => {
     expect(screen.getByTestId("invite-accepted")).toHaveTextContent(/waiting for your parent to pick a consultation time/);
     expect(screen.queryByLabelText("Parent or guardian email")).not.toBeInTheDocument();
   });
+
+  it("초대 대기 중엔 이메일 폼을 숨기고, 취소하면 다시 보인다", async () => {
+    m.revoke.mockResolvedValue({ ok: true });
+    m.load.mockResolvedValue({ kind: "interest", status: "registered", invites: [] } satisfies TutoringInterestState);
+    render(
+      <TutoringInterestPanel
+        initialState={{
+          kind: "interest",
+          status: "invite_sent",
+          invites: [{ id: "i1", email: "p@example.com", status: "pending", expiresAt: new Date(Date.now() + 86400000).toISOString(), lastSentAt: new Date().toISOString(), acceptedAt: null, manualReviewReason: null }],
+        }}
+        entryPoint="home"
+      />,
+    );
+    expect(screen.queryByLabelText("Parent or guardian email")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Send invite" })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Cancel / change email" }));
+    expect(await screen.findByLabelText("Parent or guardian email")).toBeInTheDocument();
+  });
 });

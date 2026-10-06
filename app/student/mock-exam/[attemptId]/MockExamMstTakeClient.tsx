@@ -428,7 +428,7 @@ export default function MockExamMstTakeClient({
           </div>
         </nav>
 
-        <main className="flex min-h-0 min-w-0 flex-1 flex-col" style={whiteboardOpen ? { marginRight: "min(556px, 45vw)" } : undefined}>
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col">
           {item ? (
             <>
               {/* 번호 막대: 검은 번호 칸 + 도구(하이라이트·소거·화이트보드) | 오른쪽 끝에 오류 신고·문제 저장(별). */}
@@ -499,7 +499,7 @@ export default function MockExamMstTakeClient({
 
               {/* 두 칸: 왼쪽 지문·문제·그림 / 오른쪽 선택지(또는 답 입력). 각 칸이 따로 스크롤, 좁은 화면에서는 위아래로 쌓인다. */}
               <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden" data-testid="mst-panes">
-                <section aria-label="Passage and question" className="px-8 py-6 md:w-1/2 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
+                <section aria-label="Passage and question" className="min-w-0 overflow-x-auto px-8 py-6 md:w-1/2 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
                   <AnnotationLayer
                     key={item.setItemId}
                     highlightMode={highlightMode}
@@ -622,6 +622,7 @@ export default function MockExamMstTakeClient({
         </main>
       </div>
 
+      {/* 화이트보드는 떠 있는 패널(오버레이): 왼쪽 지문 칸을 줄이지 않는다(표·그림 잘림 방지). */}
       {whiteboardOpen && item && <MockExamWhiteboard key={item.setItemId} attemptId={state.attemptId} itemId={item.setItemId} onClose={() => setWhiteboardOpen(false)} />}
 
       {mathTools && (
