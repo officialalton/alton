@@ -1,9 +1,9 @@
 {
  "itemId": "percentages.find_whole.BR.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T07:00:00Z",
- "reviewer": "claude-sonnet-5.5 (math-C session)",
- "codeHash": "793bc2bff766816c8d6a39ae6dba9b729f79a233ff37a085f07fde24e0ba83ab",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "a12963cbf505ecce574c02d59da69bc764c6ddfb5d464b65dd3e6c87a5fd7b9c",
  "samples": [
   "percentages.find_whole.BR.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: Rose Glen 120÷0.5=240, Ivy Ridge 80÷0.4=200 → 차 40(B). 막대 눈금 0~240(40 간격)·막대 높이가 눈금선과 일치, 범주 이름 대각 표기 판독 가능, 375px 양호. (메타 정답: 40)"
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호."
 }

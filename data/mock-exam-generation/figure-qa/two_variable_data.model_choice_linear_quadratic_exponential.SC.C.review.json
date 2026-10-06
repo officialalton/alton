@@ -1,9 +1,9 @@
 {
  "itemId": "two_variable_data.model_choice_linear_quadratic_exponential.SC.C",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T07:00:00Z",
- "reviewer": "claude-sonnet-5.5 (math-C session)",
- "codeHash": "1ce07d210380de7bbd57ad28ddaad6f6798689642733bf2e960442f9be7bed47",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "d42403dddf4ae526a14a459ae4c61a08ada29385e345608f59ffca1a3c08c620",
  "samples": [
   "two_variable_data.model_choice_linear_quadratic_exponential.SC.C.png"
  ],
@@ -19,6 +19,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 지수 감소 → A(80,40,20,10,5; 비 1/2). B 는 이차(위로 볼록), C 는 지수 증가, D 는 일차 감소. 네 그림이 같은 축·눈금·크기, 선택지마다 서로 다른 모형 유형, 데스크톱 2x2·375px 1열 판독 가능. (메타 정답: A)",
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호.",
  "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }

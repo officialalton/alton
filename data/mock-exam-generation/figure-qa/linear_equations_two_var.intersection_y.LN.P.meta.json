@@ -1,7 +1,7 @@
 {
  "itemId": "linear_equations_two_var.intersection_y.LN.P",
- "generatedAt": "2026-10-06T19:22:39.993Z",
- "codeHash": "a1640d115f244e8b1b02393e2de9872c6995b1bb4d7aa3772341af7b62d74ce0",
+ "generatedAt": "2026-10-06T22:00:06.171Z",
+ "codeHash": "11c2a393651053ee615d852ed202569d3649053c03c97e5972de72a1b24b908a",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -37,7 +37,12 @@
    "correctIndex": 2,
    "answer": "80",
    "explanation": "(1) Oak: 그래프에서 y 절편 0 과 격자점을 읽어 기울기 8 을 구한다. (2) Maple: 그래프에서 y 절편 60 과 격자점을 읽어 기울기 2 를 구한다. (3) 8x + 0 = 2x + 60 로 놓는다. (4) x = 10 이다. (5) y = 8·10 + 0 = 80 이다. (6) 확인: 2·10 + 60 = 80 이다. 따라서 정답은 80이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Years' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

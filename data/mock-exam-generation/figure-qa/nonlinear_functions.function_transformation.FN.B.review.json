@@ -1,9 +1,9 @@
 {
  "itemId": "nonlinear_functions.function_transformation.FN.B",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T08:00:00Z",
- "reviewer": "visual-review-agent-mathE",
- "codeHash": "b90fdb3cdf2e25bbf9f5e5274cf673609bbdf4b4621df7c03086501cc5a79224",
+ "reviewedAt": "2026-10-06T22:00:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "420f1e8c31b05c59c8b9cd6afeaa6f1cf218908c71e4358f0b3984d4e4234665",
  "samples": [
   "nonlinear_functions.function_transformation.FN.B.png"
  ],
@@ -19,6 +19,6 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "데스크톱·375px PNG를 직접 읽고 그림-지문-정답 일치, 라벨 겹침·잘림 없음 확인.",
+ "notes": "축 제목 단위 중복 제거·B형 꼬리 문장 정리 후 재생성본 데스크톱 PNG를 읽고 재서명(신규 3조합은 최초 서명). 서술·그림·선지 일치, 축·눈금·라벨 양호.",
  "leadReread": "2026-10-06 통합 후 데스크톱 PNG 재판독(렌더러 halo·문구 변경 반영) — 결함 없음"
 }

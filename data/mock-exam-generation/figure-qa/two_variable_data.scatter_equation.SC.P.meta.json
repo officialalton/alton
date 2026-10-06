@@ -1,7 +1,7 @@
 {
  "itemId": "two_variable_data.scatter_equation.SC.P",
- "generatedAt": "2026-10-06T19:22:39.866Z",
- "codeHash": "ca475aec4d604602ea487bd8e76f5a2bb77492673c516b9e321113bcc282df54",
+ "generatedAt": "2026-10-06T22:00:06.036Z",
+ "codeHash": "25ff6bf98c8f89288c703c276e8f408c8f838e7ff9bae4ddc22349f437fecb59",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -34,7 +34,12 @@
    "correctIndex": 3,
    "answer": "9",
    "explanation": "(1) 그림에서 직선 위의 두 격자점 (0, 25) 과 (10, 10) 를 읽는다. (2) 기울기 m = (10 - 25) ÷ (10 - 0) = -1.5 이다. (3) 식은 y = -1.5x + 25 이다. (4) y = 11.5 을 대입하면 11.5 = -1.5x + 25 이다. (5) x = (11.5 - 25) ÷ -1.5 = 9 이다. 따라서 정답은 9이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Pages' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

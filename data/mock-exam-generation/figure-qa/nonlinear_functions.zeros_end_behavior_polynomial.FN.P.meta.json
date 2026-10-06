@@ -1,0 +1,44 @@
+{
+ "itemId": "nonlinear_functions.zeros_end_behavior_polynomial.FN.P",
+ "generatedAt": "2026-10-06T22:00:06.434Z",
+ "codeHash": "27c58e935889d112ca5572e79315764a1e3267834ea6a4fe308bc349ead7d310",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cubic-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.zeros_end_behavior_polynomial.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.zeros_end_behavior_polynomial.FN.P.png",
+   "mobileFile": "nonlinear_functions.zeros_end_behavior_polynomial.FN.P.m375.png",
+   "archetypeId": "zebp.zeros_end_behavior_polynomial.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The figure shows the graph of $y = g(x)$, a cubic curve in the $xy$-plane, and three marked points on it. The function is defined by $g(x) = ax³ + bx² + cx + d$, where $a$, $b$, $c$, and $d$ are constants.",
+   "question": "Find the value of the constant $b$.",
+   "options": [
+    "-2",
+    "16",
+    "-1",
+    "2"
+   ],
+   "correctIndex": 0,
+   "answer": "-2",
+   "explanation": "(1) 곡선이 x 축과 만나는 눈금을 읽으면 영점은 x = -4, -2, 4 이다. (y 눈금은 x 눈금과 간격이 다르다.) (2) 표시된 점 (-5, 27) 을 f(x) = a(x - (-4))(x - (-2))(x - (4)) 에 대입한다. (3) a = -1 이다. (4) 전개하면 x² 의 계수는 -a(r₁ + r₂ + r₃) = -(-1)(-2) 이다. (5) b = -2 이다. 따라서 정답은 -2이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,7 +1,7 @@
 {
  "itemId": "two_variable_data.scatter_equation.SC.C",
- "generatedAt": "2026-10-06T19:22:39.881Z",
- "codeHash": "5168aaba0d450853f12585389413438b7fc1c0b6e2351819c4e987a811c610c9",
+ "generatedAt": "2026-10-06T22:00:06.050Z",
+ "codeHash": "f27fc6c1c55a8f25fa99f2636daf62f57c699ce9a71e2d1a24e2ec3046d33915",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -35,7 +35,24 @@
    "correctIndex": 2,
    "answer": "C",
    "explanation": "(1) x = 0 에서 40 이므로 y 절편은 40 이다. (2) 1 cup 당 증가 2 이므로 기울기는 2 이다. (3) 직선은 y = 2x + 40 이다. (4) 네 그래프의 추세선이 (0, 40) 를 지나는지, 기울기의 부호와 크기가 맞는지 대어 본다. (5) 부호가 반대이거나 절편·기울기 크기가 다른 선은 제외한다. 따라서 정답은 C이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "선택지 A: 세로축 제목 'Muffins baked' 에 단위(괄호)가 없습니다."
+    },
+    {
+     "code": "unit_missing_in_title",
+     "message": "선택지 B: 세로축 제목 'Muffins baked' 에 단위(괄호)가 없습니다."
+    },
+    {
+     "code": "unit_missing_in_title",
+     "message": "선택지 C: 세로축 제목 'Muffins baked' 에 단위(괄호)가 없습니다."
+    },
+    {
+     "code": "unit_missing_in_title",
+     "message": "선택지 D: 세로축 제목 'Muffins baked' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

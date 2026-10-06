@@ -1,7 +1,7 @@
 {
  "itemId": "linear_equations_one_var.word_problem_translate.LN.P",
- "generatedAt": "2026-10-06T19:22:40.124Z",
- "codeHash": "32832421e257f52bb10502dfcc0a4313f98530f875d6cc532f994cdae735eb1f",
+ "generatedAt": "2026-10-06T22:00:06.292Z",
+ "codeHash": "3ef04fb96222d3252790660a010ec638077edd47f887423cbaa94e23608a7006",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -37,7 +37,12 @@
    "correctIndex": 2,
    "answer": "25",
    "explanation": "(1) 그래프에 표시된 두 점 (0, 20) 과 (4, 40) 을 읽는다. (2) 기울기 = (40 - 20) ÷ (4 - 0) = 5 이다. (3) x = 0 일 때 값: 20 - (5) × 0 = 20 이다. (4) y = 5x + 20 로 쓸 수 있다. (5) a + b = 25 이다. 따라서 정답은 25이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Employees' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "itemId": "linear_equations_two_var.intersection_x.LN.P",
- "generatedAt": "2026-10-06T19:22:39.989Z",
- "codeHash": "2594e6db3b0fc9d29ef5665f9476b57fa784e2ed9b78779004ca809458fb6f64",
+ "generatedAt": "2026-10-06T22:00:06.168Z",
+ "codeHash": "58eec16a97106af753ce2af62e1e34fefcc53d16cab8d2eea6918b16064840e3",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -37,7 +37,12 @@
    "correctIndex": 1,
    "answer": "10",
    "explanation": "(1) Theater A: 그래프에서 y 절편 20 과 격자점을 읽어 기울기 12 을 구한다. (2) Theater B: 그래프에서 y 절편 40 과 격자점을 읽어 기울기 10 를 구한다. (3) 12x + 20 = 10x + 40 로 놓는다. (4) (12 - 10)x = 40 - 20 이다. (5) x = 20 ÷ 2 = 10 이다. 따라서 정답은 10이다.",
-   "structuralIssues": []
+   "structuralIssues": [
+    {
+     "code": "unit_missing_in_title",
+     "message": "가로축 제목 'Tickets' 에 단위(괄호)가 없습니다."
+    }
+   ]
   }
  ]
 }
