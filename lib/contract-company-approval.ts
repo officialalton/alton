@@ -64,7 +64,7 @@ function toTemplateFields(row: CompanyApprovalRow): CompanyApprovalForTemplate {
     companyEntityName: row.company_entity_name,
     approverName: row.approver_name,
     approverTitle: row.approver_title,
-    approvedAtLabel: new Date(row.approved_at).toLocaleString("ko-KR", { timeZoneName: "short" }),
+    approvedAtLabel: new Date(row.approved_at).toLocaleString("en-US", { timeZone: "UTC", dateStyle: "long", timeStyle: "short" }) + " UTC",
     documentIdentifier: row.document_identifier,
   };
 }

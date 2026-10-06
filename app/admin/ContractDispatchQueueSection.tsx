@@ -110,7 +110,7 @@ export default function ContractDispatchQueueSection() {
           </span>
           <span className="text-[11.5px] text-grey-500" data-testid="contract-dispatch-toggle-meta">
             {data?.setting.updatedAt
-              ? `마지막 변경: ${data.setting.updatedByName ?? "알 수 없음"} · ${new Date(data.setting.updatedAt).toLocaleString("ko-KR")}`
+              ? `마지막 변경: ${data.setting.updatedByName ?? "알 수 없음"} · ${new Date(data.setting.updatedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}`
               : "마지막 변경: 기본값(켜짐)"}
           </span>
         </div>

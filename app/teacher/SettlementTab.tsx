@@ -20,7 +20,8 @@ import {
   type MaskedPayoutAccount,
   type TeacherDocumentItem,
 } from "./settlement-actions";
-import { PAYOUT_DAY_OF_MONTH, type SettlementMonth, type TeacherSettlement } from "./settlement-data";
+import { formatPeriodLabelEn, formatPeriodWithPayoutEn, PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF } from "@/lib/payout/payout-schedule";
+import { type SettlementMonth, type TeacherSettlement } from "./settlement-data";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
 
@@ -96,7 +97,7 @@ function payoutScheduleLabel(m: SettlementMonth, tz: string): string {
     const dateLabel = formatDateOnly(m.scheduledPayoutDate);
     return m.status === "in_review" ? `Paid after review (scheduled ${dateLabel})` : `Scheduled payout ${dateLabel}`;
   }
-  // 아직 승인 전이라 예정일이 정해지지 않았다.
+  // 아직 승인 전이라 예정일이 정해지지 않았다(명목 지급일은 기간 규칙에서 안내).
   if (m.status === "in_review") return "In review – the payout date is set once approved";
   return "The payout date is set after approval";
 }
@@ -146,6 +147,7 @@ export default function SettlementTab() {
               approvedTotalsByCurrency: {},
               paidTotalsByCurrency: {},
               nextPayoutMonth: null,
+              nextPayoutDate: null,
               refreshedAt: new Date().toISOString(),
             }
         );
@@ -195,10 +197,12 @@ export default function SettlementTab() {
         <div className="text-[11.5px] text-grey-500 mt-1.5 space-y-0.5">
           <div>
             <b>
-              Lessons are paid on the {PAYOUT_DAY_OF_MONTH}th of the following month.
+              Payouts are made twice a month, on the {PAYOUT_DAY_SECOND_HALF}th and the {PAYOUT_DAY_FIRST_HALF}th.
             </b>{" "}
-            (e.g. September lessons → October {PAYOUT_DAY_OF_MONTH})
+            (Lessons from the 1st–15th are paid on the {PAYOUT_DAY_FIRST_HALF}th of the same month; lessons from the 16th–end of month are paid on the {PAYOUT_DAY_SECOND_HALF}th of the next month. e.g. {formatPeriodWithPayoutEn("2026-10-01", "2026-10-15").replace(/, 2026/, "")})
           </div>
+          {settlement.nextPayoutDate && <div>Next payout date: {formatDateOnly(settlement.nextPayoutDate)}</div>}
+          <div>Pay periods and payout dates follow Pacific Time (America/Los_Angeles).</div>
           <div>Last updated: {fmtDateTime(settlement.refreshedAt, undefined, tz)}</div>
           <div>Amounts may change until finalized, depending on lesson outcomes and adjustments.</div>
           <div>Gross totals before taxes, fees, or other deductions.</div>
@@ -218,24 +222,24 @@ export default function SettlementTab() {
           </div>
         </div>
         <p className="text-[11px] text-grey-400 mt-2">
-          When a payout month ends, a monthly batch is created and moves to <b>In review</b>. Once an
+          When a payout period (1st–15th or 16th–end of month) ends, a batch is created and moves to <b>In review</b>. Once an
           operator gives final approval for payment, it becomes <b>Transfer approved</b>. If a lesson
           outcome or amount changes after the cutoff, the approved amount is not edited; the difference
-          is applied as an adjustment in the next payout month.
+          is applied as an adjustment in the next payout period.
         </p>
       </section>
       )}
 
       {subtab === "history" && (
       <section className="mb-4">
-        <div className="text-[13px] font-bold text-ink mb-2">Monthly payout history</div>
+        <div className="text-[13px] font-bold text-ink mb-2">Payout history</div>
         {settlement.months.length === 0 ? (
           <p className="text-[13px] text-grey-500" data-testid="settlement-empty">
             No payouts yet. Completed lessons will appear here.
           </p>
         ) : (
           settlement.months.map((m) => {
-            const key = `${m.settlementMonth}|${m.currency}|${m.status}`;
+            const key = `${m.periodKey}|${m.currency}|${m.status}`;
             const open = openMonth === key;
             return (
               <div key={key} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
@@ -248,7 +252,7 @@ export default function SettlementTab() {
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="text-[13.5px] font-bold text-ink">
-                        {formatMonth(m.settlementMonth)} lessons
+                        {m.periodStart && m.periodEnd ? formatPeriodLabelEn(m.periodStart, m.periodEnd) : formatMonth(m.settlementMonth)} lessons
                       </div>
                       <div className="text-[12px] text-grey-500 mt-0.5">
                         {payoutScheduleLabel(m, tz)} · {m.lessonCount} {m.lessonCount === 1 ? "lesson" : "lessons"}

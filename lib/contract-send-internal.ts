@@ -1,6 +1,11 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createEnvelope, assertDocusignSandboxBaseUri } from "@/lib/docusign";
-import { renderFamilyContractHtml, type CompanyApprovalForTemplate } from "@/lib/contracts/family-contract-template";
+import {
+  FAMILY_CONTRACT_TEMPLATE_VERSION,
+  renderFamilyContractHtml,
+  type CompanyApprovalForTemplate,
+} from "@/lib/contracts/family-contract-template";
+import { STUDENT_TERMS_VERSION } from "@/lib/legal";
 
 // (2026-09-29 6단계: 호출부는 관리자 원클릭 발송과 계약 자동 발송 워커다.)
 // companySignOffContractVersion
@@ -43,7 +48,7 @@ export async function sendContractForSignatureInternal(
 
   const { data: version, error: versionError } = await admin
     .from("contract_versions")
-    .select("id, contract_id, company_signed_at")
+    .select("id, contract_id, company_signed_at, contracts:contract_id(child_id)")
     .eq("id", params.contractVersionId)
     .single();
   if (versionError) throw new Error(versionError.message);
@@ -52,15 +57,29 @@ export async function sendContractForSignatureInternal(
     throw new Error("회사 승인이 완료되지 않은 계약 버전은 보호자에게 발송할 수 없습니다. companySignOffContractVersionInternal을 먼저 호출하세요.");
   }
 
+  // 학생 생년월일은 계약서의 실제 기재 항목이다(프로필 원본). 없으면 렌더링 단계에서 막혀 발송되지 않는다.
+  const contractRel = version.contracts as unknown as { child_id: string } | { child_id: string }[] | null;
+  const childId = (Array.isArray(contractRel) ? contractRel[0] : contractRel)?.child_id;
+  const { data: childProfile } = childId
+    ? await admin.from("profiles").select("date_of_birth").eq("id", childId).maybeSingle()
+    : { data: null };
+  const studentDateOfBirth = (childProfile?.date_of_birth as string | null | undefined) ?? "";
+
+  // 미완성(플레이스홀더·빈 칸·내부 검토 문구) 계약서는 여기서 throw되어 DocuSign 호출 전에 발송이 차단된다.
+  const documentHtml = renderFamilyContractHtml({
+    parentName: params.recipientName,
+    signerEmail: params.recipientEmail,
+    studentName: params.childName,
+    studentDateOfBirth,
+    contractId: params.contractVersionId,
+    companyApproval: params.companyApproval,
+  });
+
   const { envelopeId } = await createEnvelope({
     recipientEmail: params.recipientEmail,
     recipientName: params.recipientName,
-    documentHtml: renderFamilyContractHtml({
-      parentName: params.recipientName,
-      studentName: params.childName,
-      companyApproval: params.companyApproval,
-    }),
-    emailSubject: "Alton Education 서비스 이용 계약서",
+    documentHtml,
+    emailSubject: "Alton Education Services Agreement",
     webhookUrl: params.webhookUrl,
   });
 
@@ -70,6 +89,12 @@ export async function sendContractForSignatureInternal(
       docusign_envelope_id: envelopeId,
       docusign_envelope_status: "sent",
       docusign_status_updated_at: new Date().toISOString(),
+      // 서명 대상 문서의 실제 버전·당사자 스냅샷을 남긴다(완료본과 동일 문안을 사후 증명).
+      template_version: FAMILY_CONTRACT_TEMPLATE_VERSION,
+      privacy_policy_version: STUDENT_TERMS_VERSION,
+      company_signing_entity: "registered_llc",
+      guardian_snapshot: { name: params.recipientName, email: params.recipientEmail },
+      student_snapshot: { name: params.childName, date_of_birth: studentDateOfBirth },
     })
     .eq("id", params.contractVersionId);
   if (error) throw new Error(error.message);

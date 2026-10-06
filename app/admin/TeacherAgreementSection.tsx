@@ -1,0 +1,141 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+  getTeacherAgreementStateAction,
+  saveTeacherAgreementInputsAction,
+  sendTeacherAgreementAction,
+} from "./teacher-agreement-actions";
+import type { TeacherAgreementState } from "@/lib/teacher-agreements/send";
+import type { TeacherAgreementInputs } from "@/lib/teacher-agreements/prepare";
+
+const STATUS_LABEL: Record<TeacherAgreementState["status"], string> = {
+  not_sent: "미발송",
+  sent: "발송됨(서명 대기)",
+  signed: "서명 완료",
+  declined: "서명 거부",
+  voided: "무효 처리",
+};
+
+type Field = { key: keyof TeacherAgreementInputs; label: string; placeholder?: string; multiline?: boolean; type?: string };
+const FIELDS: Field[] = [
+  { key: "work_country", label: "실제 근무 국가(2자리 코드)", placeholder: "US, KR ..." },
+  { key: "work_region", label: "근무 주(미국인 경우)", placeholder: "CA" },
+  { key: "work_location_detail", label: "근무 위치(캘리포니아 근무지 또는 도시)" },
+  { key: "mailing_address", label: "우편 주소" },
+  { key: "start_date", label: "시작일", type: "date" },
+  { key: "supervisor_name", label: "감독자(Supervisor) 이름 — 캘리포니아 전용" },
+  { key: "prior_materials", label: "기존 자료(없으면 None)", multiline: true },
+  { key: "non_lesson_terms", label: "비수업 업무 범위·보수 — 해외 전용", multiline: true },
+  { key: "payment_details", label: "지급 방법·수령 정보 — 해외 전용", multiline: true },
+];
+
+export default function TeacherAgreementSection({ teacherId }: { teacherId: string }) {
+  const [state, setState] = useState<TeacherAgreementState | null>(null);
+  const [form, setForm] = useState<Record<string, string>>({});
+  const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  function apply(s: TeacherAgreementState) {
+    setState(s);
+    const f: Record<string, string> = {};
+    for (const fld of FIELDS) f[fld.key] = (s.inputs?.[fld.key] as string | null | undefined) ?? "";
+    setForm(f);
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+    getTeacherAgreementStateAction(teacherId).then((r) => {
+      if (cancelled) return;
+      if (r.ok) apply(r.data);
+      else setMsg({ kind: "err", text: r.error });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [teacherId]);
+
+  async function run(fn: () => ReturnType<typeof saveTeacherAgreementInputsAction>, okText: string) {
+    setBusy(true);
+    setMsg(null);
+    try {
+      const r = await fn();
+      if (r.ok) {
+        apply(r.data);
+        setMsg({ kind: "ok", text: okText });
+      } else setMsg({ kind: "err", text: r.error });
+    } catch {
+      setMsg({ kind: "err", text: "처리에 실패했습니다. 잠시 후 다시 시도해주세요." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-4" data-testid="teacher-agreement-section">
+      <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">선생님 계약서</div>
+      {!state ? (
+        <p className="text-[13px] text-grey-500">{msg?.text ?? "불러오는 중..."}</p>
+      ) : (
+        <>
+          <p className="text-[13px] text-ink mb-2">
+            상태: <strong data-testid="teacher-agreement-status">{STATUS_LABEL[state.status]}</strong>
+            {state.form ? ` · ${state.form === "california_employment" ? "캘리포니아 고용계약" : "해외 서비스 계약"}` : ""}
+          </p>
+          {state.status !== "signed" && (
+            <>
+              <div className="grid gap-2 mb-3">
+                {FIELDS.map((f) => (
+                  <label key={f.key} className="text-[12px] text-grey-600 font-semibold">
+                    {f.label}
+                    {f.multiline ? (
+                      <textarea
+                        value={form[f.key] ?? ""}
+                        onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
+                        rows={2}
+                        className="block w-full mt-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] font-normal"
+                      />
+                    ) : (
+                      <input
+                        type={f.type ?? "text"}
+                        value={form[f.key] ?? ""}
+                        placeholder={f.placeholder}
+                        onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
+                        className="block w-full mt-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] font-normal"
+                      />
+                    )}
+                  </label>
+                ))}
+              </div>
+              <div className="flex gap-2 mb-2">
+                <button
+                  disabled={busy}
+                  onClick={() => run(() => saveTeacherAgreementInputsAction(teacherId, form), "✓ 저장되었습니다")}
+                  className="text-[12px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] border-ink text-ink disabled:opacity-50"
+                >
+                  입력 저장
+                </button>
+                <button
+                  disabled={busy || !state.ready}
+                  onClick={() => run(() => sendTeacherAgreementAction(teacherId), "✓ 계약서를 발송했습니다")}
+                  className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
+                >
+                  계약서 발송
+                </button>
+              </div>
+              {state.missing.length > 0 ? (
+                <p className="text-[12px] text-red" data-testid="teacher-agreement-missing">
+                  발송 전 필요한 입력: {state.missing.join(", ")}
+                </p>
+              ) : state.ready ? (
+                <p className="text-[12px] text-green">발송 준비가 완료되었습니다. 수신: 선생님 @alton.education 주소 (자동 발송되지 않습니다)</p>
+              ) : null}
+            </>
+          )}
+          {state.status === "signed" && <p className="text-[12px] text-green">서명 완료본은 수정할 수 없습니다.</p>}
+          {msg && <p className={"text-[12px] mt-1.5 " + (msg.kind === "ok" ? "text-green" : "text-red")}>{msg.text}</p>}
+        </>
+      )}
+    </div>
+  );
+}

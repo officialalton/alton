@@ -5,6 +5,7 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 // (통합 테스트가 담당), 여기서는 진입 통제만 본다.
 
 const { runMock } = vi.hoisted(() => ({ runMock: vi.fn() }));
+vi.mock("@/lib/payout/payout-schedule", () => ({ isPayoutDay: () => true }));
 vi.mock("@/lib/payout/auto-dispatch", () => ({ runAutoPayoutDispatch: runMock }));
 
 import { GET } from "./route";

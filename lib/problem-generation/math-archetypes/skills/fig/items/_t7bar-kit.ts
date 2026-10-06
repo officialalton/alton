@@ -8,7 +8,7 @@ export { SURVEYS, type Surv };
 export type RespScene = { s: Surv; yStep: number; a: number; d: number; u: number; n: number; N: number; fig: { type: "data"; kind: "bar"; title: string; categories: string[]; series: { values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
 export const RESP = ["Yes", "No", "Unsure"];
 export function respFig(s: Surv, yStep: number, vals: number[], N: number): RespScene["fig"] {
-  return { type: "data", kind: "bar", title: `Population: ${N.toLocaleString("en-US")} ${s.ent}`, categories: RESP, series: [{ values: vals }], xTitle: "Answer to the survey question", yTitle: `Responses (${s.ent})`, yMin: 0, yMax: (Math.max(...vals) / yStep + 1) * yStep, yStep };
+  return { type: "data", kind: "bar", title: `Population: ${new Intl.NumberFormat("en-US").format(N)} ${s.ent}`, categories: RESP, series: [{ values: vals }], xTitle: "Answer to the survey question", yTitle: `Responses (${s.ent})`, yMin: 0, yMax: (Math.max(...vals) / yStep + 1) * yStep, yStep };
 }
 /** N: 모집단(100 의 배수, 표본 크기의 5 배 이상). 추정치 N·a/n 이 정수. */
 export function respScene(rng: Rng, o: { needInt?: ("a" | "d")[]; maxEst?: number } = {}): RespScene {
