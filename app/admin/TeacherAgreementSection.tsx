@@ -28,7 +28,6 @@ const FIELDS: Field[] = [
   { key: "start_date", label: "시작일", type: "date" },
   { key: "supervisor_name", label: "감독자(Supervisor) 이름 — 캘리포니아 전용" },
   { key: "prior_materials", label: "기존 자료(비워 두면 None으로 기재)", multiline: true },
-  { key: "payment_details", label: "지급 방법·수령 정보 — 방법, 통화, 수령인 이름, 계좌 끝 4자리까지만(전체 계좌·세금번호 금지)", multiline: true },
 ];
 
 export default function TeacherAgreementSection({ teacherId }: { teacherId: string }) {

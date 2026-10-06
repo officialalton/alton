@@ -28,7 +28,6 @@ const caInputs: TeacherAgreementInputs = {
   start_date: "2026-11-01",
   supervisor_name: "Do Kyung Kim",
   prior_materials: "None",
-  payment_details: null,
   engagement_type: "employee",
 };
 const krInputs: TeacherAgreementInputs = {
@@ -37,16 +36,15 @@ const krInputs: TeacherAgreementInputs = {
   work_region: null,
   work_location_detail: "Seoul",
   supervisor_name: null,
-  payment_details: "Bank transfer to the account on file",
   engagement_type: "contractor",
 };
-const base = { rate: { amountMinor: 50000, currency: "KRW" as const }, teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
+const base = { payoutAccount: { holderName: "Sora Park", bankName: "Shinhan Bank", last4: "1234", currency: "KRW" }, rate: { amountMinor: 50000, currency: "KRW" as const }, teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
 
 describe("prepareTeacherAgreement", () => {
   it("contractor US (CA included) is blocked with a Korean message until the contractor text exists", () => {
     const usRate = { amountMinor: 5000, currency: "USD" as const };
     for (const region of ["CA", "TX"]) {
-      const r = prepareTeacherAgreement({ ...base, rate: usRate, inputs: { ...caInputs, engagement_type: "contractor", payment_details: "ACH, USD", work_region: region } });
+      const r = prepareTeacherAgreement({ ...base, rate: usRate, inputs: { ...caInputs, engagement_type: "contractor", work_region: region } });
       expect(r.ok).toBe(false);
       if (!r.ok) {
         expect(r.form).toBe("us_contractor_services");
@@ -66,6 +64,13 @@ describe("prepareTeacherAgreement", () => {
     const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, prior_materials: null } });
     expect(r.ok).toBe(true);
   });
+  it("blocks when no payout account is registered or its currency differs from the rate", () => {
+    const none = prepareTeacherAgreement({ ...base, payoutAccount: null, inputs: krInputs });
+    expect(!none.ok && none.missing.join()).toContain("수취 계좌");
+    const usd = prepareTeacherAgreement({ ...base, payoutAccount: { holderName: "S", bankName: "B", last4: "1", currency: "USD" }, inputs: krInputs });
+    expect(usd.ok).toBe(false);
+    expect(agreementChecklist({ ...base, payoutAccount: null, inputs: krInputs }).find((c) => c.key === "payout_account")?.ok).toBe(false);
+  });
   it("requires the currency to match the work country", () => {
     const r = prepareTeacherAgreement({ ...base, rate: { amountMinor: 5000, currency: "USD" }, inputs: krInputs });
     expect(!r.ok && r.missing.join()).toContain("KRW");
@@ -75,6 +80,7 @@ describe("prepareTeacherAgreement", () => {
     expect(r.ok && r.form).toBe("non_us_services");
     if (r.ok) {
       expect(r.html).toContain("South Korea");
+      expect(r.html).toContain("Bank transfer (wire) to the recipient account on file. Recipient: Sora Park; bank: Shinhan Bank; account ending 1234; currency: KRW");
       expect(r.html).toContain("KRW 50,000 per 60 recognized minutes");
       expect(r.html).not.toContain("USD");
       expect(r.html).toMatch(/30 days/);
@@ -88,9 +94,9 @@ describe("prepareTeacherAgreement", () => {
     expect(!jp.ok && jp.missing.join()).toContain("통화");
   });
   it("lists every missing input and never sends a blank form", () => {
-    const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, payment_details: " ", mailing_address: null } });
+    const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, mailing_address: null } });
     expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.missing).toEqual(expect.arrayContaining(["우편 주소", "지급 방법·수령 정보"]));
+    if (!r.ok) expect(r.missing).toEqual(expect.arrayContaining(["우편 주소"]));
   });
   it("blocks when the Workspace account is not provisioned or the location is unknown", () => {
     expect(prepareTeacherAgreement({ ...base, workspaceProvisioned: false, inputs: krInputs }).ok).toBe(false);
@@ -106,9 +112,9 @@ describe("prepareTeacherAgreement", () => {
 
 describe("validateTeacherAgreementInputs payment details", () => {
   it("rejects full account or tax numbers but allows the last 4 digits", () => {
-    expect(validateTeacherAgreementInputs({ payment_details: "Bank transfer, KRW, Sora Park, account ending 1234" }).ok).toBe(true);
-    expect(validateTeacherAgreementInputs({ payment_details: "Account 1002-345-678901" }).ok).toBe(false);
-    expect(validateTeacherAgreementInputs({ payment_details: "SSN 123-45-6789" }).ok).toBe(false);
+    expect(validateTeacherAgreementInputs({ prior_materials: "My own SAT workbook, 2024 edition" }).ok).toBe(true);
+    expect(validateTeacherAgreementInputs({ prior_materials: "Account 1002-345-678901" }).ok).toBe(false);
+    expect(validateTeacherAgreementInputs({ prior_materials: "SSN 123-45-6789" }).ok).toBe(false);
     expect(validateTeacherAgreementInputs({ engagement_type: "boss" }).ok).toBe(false);
     const d = validateTeacherAgreementInputs({});
     expect(d.ok && d.value.engagement_type).toBe("contractor");
@@ -144,6 +150,7 @@ function fakeAdmin(opts: { inputs: TeacherAgreementInputs | null; existing?: { s
       if (table === "profiles") return q({ name: "Sora Park" });
       if (table === "teacher_workspace_provisioning") return q({ status: "created" });
       if (table === "teacher_agreement_inputs") return q(opts.inputs);
+      if (table === "teacher_payout_accounts") return q({ account_holder_name: "Sora Park", bank_name: "Shinhan Bank", account_number_last4: "1234", currency: "KRW" });
       if (table === "teacher_rate_history") return q({ id: "r1", amount_minor: 50000, currency: "KRW" });
       if (table === "teacher_contracts")
         return {
@@ -173,7 +180,7 @@ describe("sendTeacherAgreementInternal", () => {
     expect(admin.inserted[0]).toMatchObject({ teacher_id: "t1", agreement_form: "non_us_services", template_version: "0.2-EN", inputs_snapshot: expect.objectContaining({ rate: { amountMinor: 50000, currency: "KRW" } }), docusign_envelope_id: "env-1", status: "sent" });
   });
   it("blocks before DocuSign when inputs are missing", async () => {
-    await expect(sendTeacherAgreementInternal(fakeAdmin({ inputs: { ...krInputs, payment_details: null } }) as never, params)).rejects.toBeInstanceOf(
+    await expect(sendTeacherAgreementInternal(fakeAdmin({ inputs: { ...krInputs, mailing_address: null } }) as never, params)).rejects.toBeInstanceOf(
       TeacherAgreementNotReadyError
     );
     expect(createEnvelopeMock).not.toHaveBeenCalled();

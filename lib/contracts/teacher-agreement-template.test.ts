@@ -13,7 +13,7 @@ const ca = { ...common, lessonRate: { amountMinor: 5000, currency: "USD" as cons
 const nonUs = {
   ...common,
   actualWorkCountryAndLocation: "South Korea, Seoul",
-  paymentMethodAndRecipientDetails: "Bank transfer",
+  paymentMethodAndRecipientDetails: "Bank transfer (wire) to the recipient account on file.",
   lessonRate: { amountMinor: 50000, currency: "KRW" as const },
 };
 

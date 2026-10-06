@@ -23,20 +23,24 @@ export type TeacherAgreementState = {
 };
 
 const INPUT_COLUMNS =
-  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, payment_details, engagement_type";
+  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, engagement_type";
 
 async function loadBasics(admin: SupabaseClient, teacherId: string) {
-  const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }, rate] = await Promise.all([
+  const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }, rate, { data: payout }] = await Promise.all([
     admin.from("teachers").select("workspace_email").eq("id", teacherId).maybeSingle(),
     admin.from("profiles").select("name").eq("id", teacherId).maybeSingle(),
     admin.from("teacher_workspace_provisioning").select("status").eq("linked_teacher_id", teacherId).maybeSingle(),
     admin.from("teacher_agreement_inputs").select(INPUT_COLUMNS).eq("teacher_id", teacherId).maybeSingle(),
     loadCurrentTeacherRate(admin, teacherId),
+    admin.from("teacher_payout_accounts").select("account_holder_name, bank_name, account_number_last4, currency").eq("teacher_id", teacherId).maybeSingle(),
   ]);
   return {
     teacherName: (profile?.name as string | undefined) ?? "",
     workspaceEmail: (teacher?.workspace_email as string | null | undefined) ?? null,
     rate: rate ? { amountMinor: rate.amountMinor, currency: rate.currency } : null,
+    payoutAccount: payout
+      ? { holderName: payout.account_holder_name as string, bankName: payout.bank_name as string, last4: payout.account_number_last4 as string, currency: payout.currency as string }
+      : null,
     workspaceProvisioned: prov?.status === "created",
     inputs: (inputs as TeacherAgreementInputs | null) ?? null,
   };

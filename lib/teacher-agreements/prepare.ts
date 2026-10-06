@@ -21,7 +21,6 @@ export type TeacherAgreementInputs = {
   start_date: string | null;
   supervisor_name: string | null;
   prior_materials: string | null;
-  payment_details: string | null;
   /** contractor (default) or employee — selects the agreement form together with the work location. */
   engagement_type: "contractor" | "employee";
 };
@@ -34,9 +33,15 @@ export const EMPTY_INPUTS: TeacherAgreementInputs = {
   start_date: null,
   supervisor_name: null,
   prior_materials: null,
-  payment_details: null,
   engagement_type: "contractor",
 };
+
+export type PayoutAccountSummary = { holderName: string; bankName: string; last4: string; currency: string };
+
+/** Fixed bank-transfer wording; only holder, bank, last 4 digits and currency are ever rendered. */
+export function bankTransferText(a: PayoutAccountSummary): string {
+  return `Bank transfer (wire) to the recipient account on file. Recipient: ${a.holderName}; bank: ${a.bankName}; account ending ${a.last4}; currency: ${a.currency}`;
+}
 
 export type PrepareArgs = {
   teacherName: string;
@@ -46,6 +51,8 @@ export type PrepareArgs = {
   inputs: TeacherAgreementInputs | null;
   /** Current rate from teacher_rate_history (amount_minor + currency). Null when no rate is set. */
   rate?: TeacherRate | null;
+  /** Non-sensitive fields of teacher_payout_accounts (never the full number). */
+  payoutAccount?: PayoutAccountSummary | null;
   /** Agreement id printed as the document identifier; generated when sending. */
   agreementId?: string;
   now?: Date;
@@ -99,10 +106,13 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (form === "california_employment") {
     if (blank(i.supervisor_name)) missing.push("감독자(Supervisor) 이름");
   } else {
-    if (blank(i.payment_details)) missing.push("지급 방법·수령 정보");
-    else if (sensitiveNumberProblem(i.payment_details!)) missing.push("지급 정보에 전체 계좌·세금번호 포함 — 끝 4자리까지만 입력");
+    if (!a.payoutAccount) missing.push("수취 계좌 미등록 — 정산 > 수취 계좌에서 등록(선생님 또는 관리자)");
+    else if (a.rate && a.payoutAccount.currency !== a.rate.currency) missing.push(`수취 계좌 통화(${a.payoutAccount.currency})가 시급 통화(${a.rate.currency})와 다릅니다`);
   }
   if (form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) missing.push("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
+  if (missing.length > 0) return { ok: false, missing, form };
+
+  if (!blank(i.prior_materials) && sensitiveNumberProblem(i.prior_materials!)) missing.push("기존 자료에 긴 숫자열(계좌·세금번호 등) 포함");
   if (missing.length > 0) return { ok: false, missing, form };
 
   const agreementId = a.agreementId ?? randomUUID();
@@ -134,13 +144,13 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
         ? renderUsContractorTeacherAgreementHtml({
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)}${blank(i.work_region) ? "" : `, ${i.work_region}`} — ${i.work_location_detail!}`,
-            paymentMethodAndRecipientDetails: i.payment_details!,
+            paymentMethodAndRecipientDetails: bankTransferText(a.payoutAccount!),
             lessonRate: a.rate as TeacherRate & { currency: "USD" },
           })
         : renderNonUsTeacherAgreementHtml({
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)} — ${i.work_location_detail!}`,
-            paymentMethodAndRecipientDetails: i.payment_details!,
+            paymentMethodAndRecipientDetails: bankTransferText(a.payoutAccount!),
             lessonRate: a.rate as TeacherRate & { currency: "KRW" },
           });
     return { ok: true, form, templateVersion: selection.templateVersion, html, recipientEmail: email, agreementId };
@@ -166,6 +176,6 @@ export function agreementChecklist(a: PrepareArgs): { key: string; label: string
     { key: "rate", label: `시급·통화 등록(${sel.form ? want : "통화 확인 필요"})`, ok: !!a.rate && a.rate.amountMinor > 0 && !!sel.form && a.rate.currency === want },
   ];
   if (sel.form === "california_employment") items.push({ key: "supervisor", label: "감독자 이름", ok: !blank(i.supervisor_name) });
-  else items.push({ key: "payment", label: "지급 방법·수령 정보(전체 계좌번호 제외)", ok: !blank(i.payment_details) && !sensitiveNumberProblem(i.payment_details!) });
+  else items.push({ key: "payout_account", label: "수취 계좌 등록(정산 > 수취 계좌)", ok: !!a.payoutAccount && (!a.rate || a.payoutAccount.currency === a.rate.currency) });
   return items;
 }
