@@ -148,3 +148,30 @@ describe("그래프 계열(G 묶음): 좌표평면 직선(line)의 비율 충실
     const mut = tamperFigure(spec, "add") as Spec; expect(JSON.stringify(mut)).not.toBe(JSON.stringify(spec));
   });
 });
+
+describe("그래프 계열(G6): 막대·히스토그램·점도표·상자그림의 비율 충실도 검사와 돌연변이", () => {
+  const bar = { type: "data", kind: "bar", categories: ["Mon", "Tue", "Wed"], series: [{ values: [12, 20, 8] }], xTitle: "Day (day)", yTitle: "Visitors (people)", yMin: 0, yMax: 24, yStep: 4 } as Spec;
+  const hist = { type: "data", kind: "histogram", bins: [{ from: 0, to: 10, count: 3 }, { from: 10, to: 20, count: 7 }, { from: 20, to: 30, count: 5 }], xTitle: "Time (minutes)", yTitle: "Frequency (students)" } as Spec;
+  const dot = { type: "data", kind: "dot_plot", dots: [{ value: 1, count: 3 }, { value: 2, count: 5 }, { value: 4, count: 2 }], xTitle: "Books (books)" } as Spec;
+  const box = { type: "data", kind: "boxplot", boxes: [{ name: "Class A", min: 2, q1: 5, median: 8, q3: 12, max: 20 }, { name: "Class B", min: 4, q1: 6, median: 9, q3: 11, max: 15 }], xTitle: "Score (points)" } as Spec;
+  const R = (s: Spec) => renderFigureSvg(s as unknown as FigureSpec);
+  it("원본은 모두 통과", () => { for (const s of [bar, hist, dot, box]) expect(checkRenderedFigure(s, R(s)), String(s.kind)).toEqual([]); });
+  it("(a) 막대 높이를 눈금 대비 늘려 그리면 값 불일치", () => {
+    const svg = R(bar); const bad = svg.replace(/(<rect x="[^"]+" y=")([\d.]+)(" width="[^"]+" height=")([\d.]+)/, (_m, a, y, b, h) => `${a}${Number(y) - 30}${b}${Number(h) + 30}`); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(bar, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 히스토그램 막대의 너비·위치가 구간과 다르면 값 불일치", () => {
+    const svg = R(hist); const bad = svg.replace(/(<rect x=")([\d.]+)(" y="[^"]+" width=")([\d.]+)/, (_m, a, x, b, w) => `${a}${x}${b}${Number(w) * 0.7}`); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(hist, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 점도표의 점 하나를 지우면 점 개수 불일치", () => {
+    const svg = R(dot); const bad = svg.replace(/<circle cx="[^"]+" cy="[^"]+" r="6" fill="#111"\/>/, ""); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(dot, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 상자그림의 중앙값 선을 옮기면 값 불일치", () => {
+    const svg = R(box); const bad = svg.replace(/(<line x1=")([\d.]+)(" y1="[\d.]+" x2=")([\d.]+)(" y2="[\d.]+" stroke="#111" stroke-width="2.2")/, (_m, a, x1, b, x2, c) => `${a}${Number(x1) + 20}${b}${Number(x2) + 20}${c}`); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(box, bad))).toContain("render_value_mismatch");
+  });
+  it("(b) 축 제목의 단위(괄호)가 빠지면 잡는다", () => { expect(codes(checkRenderedFigure({ ...bar, yTitle: "Visitors" }, R({ ...bar, yTitle: "Visitors" })))).toContain("unit_missing_in_title"); });
+  it("(d) 범주 이름이 그려지지 않으면 잡는다", () => { const svg = R(bar); expect(codes(checkRenderedFigure(bar, svg.replace(">Tue<", "><")))).toContain("category_label_missing"); });
+});

@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.range.DP.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:35:56Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "f1a0272f836270fda16758ed3f0261f80cea23fa98415e2ac6382849195113ad",
+ "samples": [
+  "one_variable_data.range.DP.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 최솟값 1·최댓값 7, 새 최댓값-1=24 → 새 값 25, 메타 정답 25 일치. 점 개수·눈금 정렬·축 제목 양호, 375px 에서 점 열이 겹치지 않고 판독 가능."
+}

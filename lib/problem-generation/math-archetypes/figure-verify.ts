@@ -83,6 +83,12 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
     const o = fig as { kind?: string; rows?: unknown[][]; cells?: number[][]; choices?: unknown[]; figures?: { spec: unknown }[] } | null;
     if (o && Array.isArray(o.rows)) { const rows = o.rows.map((r) => [...r]); for (let i = rows.length - 1; i >= 0; i--) { const j = rows[i].map((c) => typeof c === "number").lastIndexOf(true); if (j > 0) { rows[i][j] = (rows[i][j] as number) + 1; return { ...o, rows }; } } return fig; }
     if (o && Array.isArray(o.cells)) { const cells = o.cells.map((r) => [...r]); cells[0][0] += 1; return { ...o, cells }; }
+    // 자료 그래프: 점도표 마지막 값의 점 +1 · 히스토그램 마지막 구간 도수 +1 · 막대(첫 계열) 마지막 값 +1 · 상자그림 첫 상자의 최댓값 +1 — 평행이동·배율에 불변인 통계(범위·중앙값 위치 등)도 바꾼다.
+    const g = fig as { dots?: { count: number }[]; bins?: { count: number }[]; series?: { values: number[] }[]; boxes?: { max: number }[] } | null;
+    if (g && Array.isArray(g.dots) && g.dots.length) return { ...g, dots: g.dots.map((d, i) => (i === g.dots!.length - 1 ? { ...d, count: d.count + 1 } : d)) };
+    if (g && Array.isArray(g.bins) && g.bins.length) return { ...g, bins: g.bins.map((d, i) => (i === g.bins!.length - 1 ? { ...d, count: d.count + 1 } : d)) };
+    if (g && Array.isArray(g.series) && g.series.length) return { ...g, series: g.series.map((se, si) => (si === 0 ? { ...se, values: se.values.map((v, i) => (i === se.values.length - 1 ? v + 1 : v)) } : se)) };
+    if (g && Array.isArray(g.boxes) && g.boxes.length) return { ...g, boxes: g.boxes.map((b, i) => (i === 0 ? { ...b, max: b.max + 1 } : b)) };
     if (o && Array.isArray(o.choices)) return { ...o, choices: o.choices.map((c, i) => (i === 0 ? tamperFigure(c, "cell") : c)) };
     if (o && Array.isArray(o.figures)) return { ...o, figures: o.figures.map((f, i) => (i === 0 ? { ...f, spec: tamperFigure(f.spec, "cell") } : f)) };
     return fig;

@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.median.DP.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:35:56Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "b038d26ad252fbb2e7026034813efb84d5d43cb26424540972c259c53a77cddf",
+ "samples": [
+  "one_variable_data.median.DP.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 4(7),5(6),6(9),7(1),8(3),9(6),10(9) → 합 287/41=7(평균), 중앙값 21번째=6 → 차 1, 메타 정답 1 일치. 열마다 점 개수 판독 가능, 눈금·축 제목 양호."
+}
