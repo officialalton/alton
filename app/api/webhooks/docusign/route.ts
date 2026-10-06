@@ -4,7 +4,9 @@ import { verifyDocusignWebhookSignature } from "@/lib/docusign";
 import { queueDriveArtifactSync } from "@/lib/drive-artifacts";
 import { autoActivateReadySubjectEnrollments } from "@/lib/enrollment/auto-activate";
 import { autoCloseConsultationOnContractSigned } from "@/lib/enrollment/auto-close-consultation";
+import { after } from "next/server";
 import { applyTeacherAgreementEnvelopeEvent } from "@/lib/teacher-agreements/webhook";
+import { archiveSignedTeacherAgreements } from "@/lib/teacher-agreements/archive";
 
 // R3: docusign_envelope_id 컬럼이 contracts에 생겼으므로(20260912000000 마이그레이션)
 // 이 라우트를 no-op 스텁에서 실제 처리로 복구한다.
@@ -162,6 +164,16 @@ export async function POST(request: Request) {
       .update({ processed_at: new Date().toISOString() })
       .eq("provider", "docusign")
       .eq("event_id", eventId);
+    if (envelopeStatus === "completed") {
+      // 응답을 막지 않고 서명본을 Shared Drive에 보관한다. 실패해도 서명 상태는 유지되고 재시도 가능하다.
+      after(async () => {
+        try {
+          await archiveSignedTeacherAgreements(admin);
+        } catch (e) {
+          console.error(JSON.stringify({ type: "teacher_agreement_archive_error", error: e instanceof Error ? e.message : String(e) }));
+        }
+      });
+    }
     return NextResponse.json({ ok: true, teacherAgreement: true });
   }
 

@@ -10,6 +10,8 @@ export type TeacherAgreementState = {
   sentAt: string | null;
   signedAt: string | null;
   form: string | null;
+  /** signed-copy archiving: null until signed */
+  archive: { status: string; lastError: string | null; retryCount: number } | null;
   inputs: TeacherAgreementInputs | null;
   /** empty = ready to send */
   missing: string[];
@@ -39,7 +41,7 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
   const basics = await loadBasics(admin, teacherId);
   const { data: rows } = await admin
     .from("teacher_contracts")
-    .select("status, docusign_envelope_status, sent_at, signed_at, agreement_form")
+    .select("status, docusign_envelope_status, sent_at, signed_at, agreement_form, drive_sync_status, drive_last_error, drive_retry_count")
     .eq("teacher_id", teacherId)
     .not("agreement_form", "is", null)
     .order("sent_at", { ascending: false })
@@ -59,6 +61,13 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
     sentAt: (latest?.sent_at as string | null | undefined) ?? null,
     signedAt: (latest?.signed_at as string | null | undefined) ?? null,
     form: (latest?.agreement_form as string | null | undefined) ?? null,
+    archive: latest?.drive_sync_status
+      ? {
+          status: latest.drive_sync_status as string,
+          lastError: (latest.drive_last_error as string | null) ?? null,
+          retryCount: (latest.drive_retry_count as number | null) ?? 0,
+        }
+      : null,
     inputs: basics.inputs,
     missing,
     ready: prepared.ok && (status === "not_sent" || status === "declined" || status === "voided"),

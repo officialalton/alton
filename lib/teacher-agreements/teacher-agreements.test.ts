@@ -1,7 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const createEnvelopeMock = vi.fn();
+const uploadMock = vi.fn();
+const downloadMock = vi.fn();
+vi.mock("@/lib/drive-artifacts", () => ({ uploadArtifactToDrive: (...a: unknown[]) => uploadMock(...a) }));
 vi.mock("@/lib/docusign", () => ({
+  downloadCompletedDocument: (...a: unknown[]) => downloadMock(...a),
   assertDocusignSandboxBaseUri: vi.fn(),
   createEnvelope: (...a: unknown[]) => createEnvelopeMock(...a),
 }));
@@ -9,6 +13,7 @@ vi.mock("@/lib/docusign", () => ({
 import { prepareTeacherAgreement, type TeacherAgreementInputs } from "./prepare";
 import { sendTeacherAgreementInternal, TeacherAgreementNotReadyError } from "./send";
 import { validateTeacherAgreementInputs } from "./validate-inputs";
+import { archiveSignedTeacherAgreements } from "./archive";
 import { applyTeacherAgreementEnvelopeEvent } from "./webhook";
 
 const caInputs: TeacherAgreementInputs = {
@@ -161,7 +166,7 @@ describe("applyTeacherAgreementEnvelopeEvent", () => {
   it("marks signed on completion and stores a document reference", async () => {
     const a = adminWith({ id: "c1", status: "sent", docusign_envelope_status: "sent", document_url: null });
     expect(await applyTeacherAgreementEnvelopeEvent(a as never, "env-9", "completed", "2026-11-01T00:00:00Z")).toBe(true);
-    expect(a.updates[0]).toMatchObject({ status: "signed", docusign_envelope_status: "completed", document_url: "docusign-envelope:env-9" });
+    expect(a.updates[0]).toMatchObject({ status: "signed", docusign_envelope_status: "completed", document_url: "docusign-envelope:env-9", drive_sync_status: "queued" });
   });
   it("records declined without signing, and never rewrites a signed record or regresses", async () => {
     const d = adminWith({ id: "c1", status: "sent", docusign_envelope_status: "sent", document_url: null });
@@ -174,5 +179,54 @@ describe("applyTeacherAgreementEnvelopeEvent", () => {
     const r = adminWith({ id: "c1", status: "sent", docusign_envelope_status: "declined", document_url: null });
     await applyTeacherAgreementEnvelopeEvent(r as never, "e", "delivered", "t");
     expect(r.updates).toHaveLength(0);
+  });
+});
+
+describe("archiveSignedTeacherAgreements", () => {
+  function archAdmin(rows: Record<string, unknown>[]) {
+    const updates: Record<string, unknown>[] = [];
+    const sel: Record<string, unknown> = {};
+    for (const m of ["eq", "in", "not"]) sel[m] = () => sel;
+    sel.then = (res: (v: unknown) => unknown) => res({ data: rows, error: null });
+    return {
+      updates,
+      from: () => ({
+        select: () => sel,
+        update: (patch: Record<string, unknown>) => {
+          updates.push(patch);
+          const u: Record<string, unknown> = {};
+          u.eq = () => u;
+          u.in = () => u;
+          u.select = async () => ({ data: [{ id: "x" }], error: null });
+          u.then = (res: (v: unknown) => unknown) => res({ error: null });
+          return u;
+        },
+      }),
+    };
+  }
+  const row = { id: "c1", teacher_id: "t1", docusign_envelope_id: "env-1", drive_retry_count: 0 };
+  beforeEach(() => {
+    downloadMock.mockReset().mockResolvedValue(Buffer.from("pdf"));
+    uploadMock.mockReset().mockResolvedValue({ driveFileId: "drv1" });
+  });
+  it("uploads the signed PDF and records the Drive reference", async () => {
+    const a = archAdmin([row]);
+    expect(await archiveSignedTeacherAgreements(a as never)).toMatchObject({ attempted: 1, succeeded: 1 });
+    expect(uploadMock.mock.calls[0][0].fileName).toBe("teacher-agreement-t1-c1.pdf");
+    expect(a.updates.at(-1)).toMatchObject({ drive_sync_status: "succeeded", drive_file_id: "drv1", document_url: "https://drive.google.com/file/d/drv1/view" });
+  });
+  it("keeps the signed state and marks the row retryable when Drive fails", async () => {
+    uploadMock.mockRejectedValue(new Error("drive down"));
+    const a = archAdmin([row]);
+    expect(await archiveSignedTeacherAgreements(a as never)).toMatchObject({ failed: 1, succeeded: 0 });
+    const last = a.updates.at(-1)!;
+    expect(last).toMatchObject({ drive_sync_status: "retryable_failed", drive_retry_count: 1, drive_last_error: "drive down" });
+    expect(last).not.toHaveProperty("status");
+    expect(last).not.toHaveProperty("document_url");
+  });
+  it("escalates to manual review after repeated failures", async () => {
+    uploadMock.mockRejectedValue(new Error("x"));
+    const a = archAdmin([{ ...row, drive_retry_count: 5 }]);
+    expect(await archiveSignedTeacherAgreements(a as never)).toMatchObject({ manualReview: 1 });
   });
 });

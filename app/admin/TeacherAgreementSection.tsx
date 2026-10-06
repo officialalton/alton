@@ -5,6 +5,7 @@ import {
   getTeacherAgreementStateAction,
   saveTeacherAgreementInputsAction,
   sendTeacherAgreementAction,
+  retryTeacherAgreementArchiveAction,
 } from "./teacher-agreement-actions";
 import type { TeacherAgreementState } from "@/lib/teacher-agreements/send";
 import type { TeacherAgreementInputs } from "@/lib/teacher-agreements/prepare";
@@ -132,7 +133,31 @@ export default function TeacherAgreementSection({ teacherId }: { teacherId: stri
               ) : null}
             </>
           )}
-          {state.status === "signed" && <p className="text-[12px] text-green">서명 완료본은 수정할 수 없습니다.</p>}
+          {state.status === "signed" && (
+            <div className="mb-1">
+              <p className="text-[12px] text-green">서명 완료본은 수정할 수 없습니다.</p>
+              <p className="text-[12px] text-grey-600 mt-1" data-testid="teacher-agreement-archive">
+                서명본 보관(Drive):{" "}
+                {state.archive?.status === "succeeded"
+                  ? "완료"
+                  : state.archive?.status === "manual_review"
+                    ? "수동 확인 필요"
+                    : state.archive?.status === "retryable_failed"
+                      ? `실패 — 재시도 대기(${state.archive.retryCount}회)`
+                      : "대기/처리 중"}
+                {state.archive?.lastError && state.archive.status !== "succeeded" ? ` · ${state.archive.lastError}` : ""}
+              </p>
+              {state.archive && state.archive.status !== "succeeded" && (
+                <button
+                  disabled={busy}
+                  onClick={() => run(() => retryTeacherAgreementArchiveAction(teacherId), "보관을 다시 시도했습니다")}
+                  className="mt-1 text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-ink text-ink disabled:opacity-50"
+                >
+                  보관 재시도
+                </button>
+              )}
+            </div>
+          )}
           {msg && <p className={"text-[12px] mt-1.5 " + (msg.kind === "ok" ? "text-green" : "text-red")}>{msg.text}</p>}
         </>
       )}

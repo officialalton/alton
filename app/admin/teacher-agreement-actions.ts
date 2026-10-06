@@ -11,6 +11,7 @@ import {
   TeacherAgreementNotReadyError,
   type TeacherAgreementState,
 } from "@/lib/teacher-agreements/send";
+import { retryTeacherAgreementArchive } from "@/lib/teacher-agreements/archive";
 import { validateTeacherAgreementInputs } from "@/lib/teacher-agreements/validate-inputs";
 import type { TeacherAgreementInputs } from "@/lib/teacher-agreements/prepare";
 
@@ -60,5 +61,17 @@ export async function sendTeacherAgreementAction(teacherId: string): Promise<Tea
   } catch (e) {
     if (e instanceof TeacherAgreementNotReadyError) return { ok: false, error: e.message };
     return { ok: false, error: e instanceof Error ? e.message : "발송에 실패했습니다." };
+  }
+}
+
+/** 서명본 Drive 보관 재시도 — 서명 상태는 그대로 두고 보관만 다시 시도한다. */
+export async function retryTeacherAgreementArchiveAction(teacherId: string): Promise<TeacherAgreementActionResult<TeacherAgreementState>> {
+  try {
+    await requireAdmin();
+    const admin = createAdminClient();
+    await retryTeacherAgreementArchive(admin, teacherId);
+    return { ok: true, data: await loadTeacherAgreementState(admin, teacherId) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "보관 재시도에 실패했습니다." };
   }
 }
