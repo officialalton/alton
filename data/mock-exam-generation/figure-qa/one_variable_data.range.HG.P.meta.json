@@ -1,0 +1,45 @@
+{
+ "itemId": "one_variable_data.range.HG.P",
+ "generatedAt": "2026-10-06T03:04:40.629Z",
+ "codeHash": "873d6f3802b1cbbc973714307e625945a2d30d79cd1aa7cf2c2725a3324d6479",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/hist-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.range.HG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.range.HG.P.png",
+   "mobileFile": "one_variable_data.range.HG.P.m375.png",
+   "archetypeId": "ovd.range.HG.P.chain2",
+   "seed": 11,
+   "signature": "data:histogram",
+   "stimulus": "A study recorded the battery lives of phones for phones in a product test. The grouped results are shown in the histogram, where a value equal to a bar's right endpoint is counted in the interval to its right.",
+   "question": "Based on the histogram, what is the largest the range of the data could be, in hours?",
+   "options": [
+    "16",
+    "28",
+    "24",
+    "20"
+   ],
+   "correctIndex": 2,
+   "answer": "24",
+   "explanation": "(1) 히스토그램에서 막대의 구간과 높이를 읽는다: 8–12(2), 12–16(2), 16–20(10), 20–24(3), 24–28(3), 28–32(6) — 전체 26개. (2) 첫 막대는 8–12 이므로 가장 작은 값은 8 이상이다. (3) 마지막 막대는 28–32 이므로 가장 큰 값은 32 미만이다. (4) 가능한 가장 큰 범위 = 32 - 8 = 24 이다. (5) 따라서 24 hours 이다. 따라서 정답은 24이다.",
+   "structuralIssues": []
+  }
+ ]
+}

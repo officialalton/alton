@@ -18,7 +18,7 @@ export const ITEM_DIR = `${AR}/skills/fig/items`;
 const TK = `${AR}/skills/fig/table-kit.ts`, GK = `${AR}/skills/fig/graph-kit.ts`, DK = `${AR}/skills/fig/data-kit.ts`, HK = `${AR}/skills/fig/hist-kit.ts`;
 export const FAMILY_KIT: Record<string, string[]> = { TB: [TK], FQ: [TK], TW: [TK], ST: [TK], LN: [GK, TK], FN: [GK, TK], DP: [DK, GK, TK], HG: [HK, DK, GK, TK], BX: [DK, GK, TK], BR: [DK, GK, TK, `${AR}/skills/fig/items/_t4-kit.ts`] };
 /** 조합별 추가 키트(공용 FAMILY_KIT 로 묶기 어려운 조합 전용 장면 키트) — 이 파일을 고치면 그 조합만 재검수 대상이 된다. */
-export const ITEM_KIT: Record<string, string[]> = { "one_variable_data.spread_comparison.DP.P": [`${AR}/skills/fig/dot2-kit.ts`] };
+export const ITEM_KIT: Record<string, string[]> = { "one_variable_data.spread_comparison.DP.P": [`${AR}/skills/fig/dot2-kit.ts`], "one_variable_data.spread_comparison.HG.P": [`${AR}/skills/fig/hist2-kit.ts`] };
 export function archetypeSourceFor(itemId: string, root = process.cwd()): string[] {
   const [skill, kind, fig, loc] = itemId.split(".");
   const own = `${ITEM_DIR}/${itemId}.ts`;

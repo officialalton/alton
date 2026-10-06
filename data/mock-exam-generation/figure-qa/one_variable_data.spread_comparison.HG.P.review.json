@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.spread_comparison.HG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:04:41Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "ba5463120ef28dbd826fcfc3e54a2b93068b03e255ca5a68a9e9e38a24aad60a",
+ "samples": [
+  "one_variable_data.spread_comparison.HG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Sample A 65~90(막대 5개, 가능한 가장 큰 범위 25), Sample B 65~80(15) → 차 10, 메타 정답 10 일치. 두 히스토그램이 같은 가로(60~95)·세로(0~6) 눈금, 크기 동일, 경계 포함 규칙이 지문에 명시."
+}
