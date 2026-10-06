@@ -14,7 +14,7 @@ vi.mock("@/app/components/public/PublicShell", () => ({
 
 describe("legal pages", () => {
   it("version and last-updated date are in step", () => {
-    expect(STUDENT_TERMS_VERSION).toBe("2026-10-06");
+    expect(STUDENT_TERMS_VERSION).toBe("2026-10-06-v2");
     expect(LEGAL_LAST_UPDATED).toBe("October 6, 2026");
   });
 

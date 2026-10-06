@@ -60,8 +60,8 @@ const ITEM_TYPE_LABEL: Record<string, string> = {
   reversal: "역분개",
 };
 const AUDIT_ACTION_LABEL: Record<string, string> = {
-  auto_closed: "월 마감(자동)",
-  auto_closed_appended: "월 마감 재실행 — 항목 추가",
+  auto_closed: "정산 마감(자동)",
+  auto_closed_appended: "정산 마감 재실행 — 항목 추가",
   scheduled_date_backfilled: "지급 예정일 보정",
   submitted_for_review: "검토 제출",
   reviewing: "검토 제출",
@@ -369,7 +369,7 @@ export default function PayoutBatchesTab({
           data-testid="close-month-now"
           className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          {generating ? "처리 중..." : "월 마감 실행"}
+          {generating ? "처리 중..." : "정산 마감 실행"}
         </button>
         <button
           disabled={generating}
@@ -401,11 +401,11 @@ export default function PayoutBatchesTab({
           {autoDispatchOn ? "끄기" : "켜기"}
         </button>
         <span className="text-[11px] text-grey-400">
-          매월 10일 03:00 UTC에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
+          매월 5일·20일(주말·미국 연방 은행 휴일이면 직전 영업일, America/Los_Angeles 기준)에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
         </span>
       </div>
       <p className="text-[11.5px] text-grey-500 mb-3">
-        정상 경로는 <b>매월 1일 자동 마감</b>입니다(크론). 위 <b>월 마감 실행</b>은 같은 자동 마감을
+        정상 경로는 <b>매월 1일·16일(America/Los_Angeles 기준) 자동 마감</b>입니다(크론, 1~15일분은 20일 · 16일~말일분은 다음 달 5일 지급). 위 <b>정산 마감 실행</b>은 같은 자동 마감을
         수동으로 한 번 더 돌리는 버튼이라 여러 번 눌러도 같은 항목이 두 번 묶이지 않고, 이미 만들어진
         묶음에 새 항목만 더합니다. <b>Batch 생성(구경로)</b>은 이전 방식으로, 열린 묶음을 재사용하지
         않아 같은 기간에 묶음이 또 생길 수 있으니 특별한 경우에만 쓰세요.

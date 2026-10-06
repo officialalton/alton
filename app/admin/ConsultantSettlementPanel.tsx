@@ -15,6 +15,7 @@ import {
 } from "./consultant-settlement-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
+import { COMPANY_TIME_ZONE, payoutDateForPeriodEnd, previousPayoutPeriod } from "@/lib/payout/payout-schedule";
 
 // 2026-09-29 — Consultants 탭에 있던 `정산` 섹션을 Payouts 탭의 `컨설턴트 정산`
 // 서브탭으로 옮겼다(동작 변경 없음). 컨설턴트 목록은 이 패널이 직접 읽는다.
@@ -153,6 +154,7 @@ export default function ConsultantSettlementPanel() {
             )}
           </div>
 
+          <p className="text-[11.5px] text-grey-500 mb-2">정산 기간은 월 2회(1~15일 → 같은 달 20일 지급, 16일~말일 → 다음 달 5일 지급)이며 날짜 기준은 {COMPANY_TIME_ZONE}입니다. 금액은 지금처럼 수기 입력합니다.</p>
           <form
             className="flex flex-wrap items-end gap-2 mb-4"
             onSubmit={(e) => {
@@ -160,6 +162,7 @@ export default function ConsultantSettlementPanel() {
               void handleCreate();
             }}
           >
+            <button type="button" onClick={() => { const r = previousPayoutPeriod(new Date()); setNewStart(r.periodStart); setNewEnd(r.periodEnd); }} className="text-[12px] font-bold px-2.5 py-1.5 rounded-lg border-[1.5px] border-grey-200">직전 정산 기간 채우기</button>
             <input type="date" value={newStart} onChange={(e) => setNewStart(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
             <span className="text-[13px] text-grey-500">~</span>
             <input type="date" value={newEnd} onChange={(e) => setNewEnd(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
@@ -191,6 +194,7 @@ export default function ConsultantSettlementPanel() {
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[13px] font-bold text-ink">
                     {p.periodStart} ~ {p.periodEnd}
+                    {payoutDateForPeriodEnd(p.periodEnd) ? ` (예상 지급일 ${payoutDateForPeriodEnd(p.periodEnd)})` : ""}
                   </span>
                   <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">
                     {p.status === "draft" ? "작성 중(컨설턴트에게 안 보임)" : p.status === "confirmed" ? "지급 예정" : "지급 완료"}

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { setTeacherStatus, setTeacherHourlyRate } from "./users-actions";
 import { assignTeacherSubject, unassignTeacherSubject } from "./teacher-subjects-actions";
 import type { AdminSubject } from "./subject-data";
+import TeacherAgreementSection from "./TeacherAgreementSection";
 
 // 2026-09-09(UAT 지적, 제품 오너 승인): 보관된 과목은 신규 담당 배정 후보에서
 // 제외하되, 이미 이 선생님에게 배정돼 있던 과목이면(보관 전에 배정된 경우)
@@ -202,6 +203,8 @@ export default function TeacherDetailPanel({
         </div>
         {savedRate && <p className="text-[12px] text-green mt-1.5">✓ 저장되었습니다</p>}
       </div>
+
+      <TeacherAgreementSection teacherId={teacher.id} />
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4">
         <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">

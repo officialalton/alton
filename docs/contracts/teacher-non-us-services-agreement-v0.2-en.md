@@ -28,9 +28,9 @@ For an accepted regular 120-minute lesson, a student cancellation less than 24 h
 
 ## 5. Statements and Payment
 
-Settlement covers each calendar month. The Company provides a statement within three business days after month end and pays amounts due within ten business days after month end. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim.
+Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid on the 20th of the same month; services performed from the 16th through the last day of a month are paid on the 5th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim.
 
-The statement identifies assignments, recognized minutes, applicable rates, separately payable services, and lawful adjustments. Transfer method, currency conversion, and allocation of bank or intermediary fees are stated in Schedule A. No undisclosed fee or student refund is automatically deducted from earned compensation. Disputed amounts are identified and discussed promptly; undisputed amounts remain payable on schedule.
+The statement identifies assignments, recognized minutes, applicable rates, separately payable services, and lawful adjustments. The Company bears all bank, transfer, intermediary, and currency-conversion fees for payments to the Teacher, so the Teacher receives the full statement amount. The payment method is stated in Schedule A. No undisclosed fee or student refund is automatically deducted from earned compensation. Disputed amounts are identified and discussed promptly; undisputed amounts remain payable on schedule.
 
 ## 6. Tax and Business Responsibilities
 
@@ -50,7 +50,7 @@ The signing participant expressly consents to these activities for authorized re
 
 ALTON uses designated Google Workspace, Meet, Drive, and Gemini services and authorized providers acting for the stated purposes. Recordings, transcripts, and AI notes are stored with restricted access. Authorized teachers and staff may access them for their duties. Students and verified guardians may view lesson artifacts made available to their accounts; this does not grant unrestricted download, redistribution, or access to another family's records or private student notes and whiteboards. No public posting, unrelated advertising, sale, or unrestricted model training is authorized by this consent.
 
-ALTON keeps these records only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
+Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
 
 AI notes and transcripts may contain omissions, speaker errors, or inaccuracies. Corrections may be requested. AI output alone does not conclusively determine attendance, wages, fees, refunds, or disputes. Material changes receive updated notice and renewed consent when required.
 
@@ -58,7 +58,7 @@ Required review, correction, and documentation must have expressly agreed compen
 
 ## 9. Confidentiality and Data Security
 
-Use nonpublic student, family, security, and business information only for accepted services. Apply reasonable security, restrict access, report incidents promptly, and return or securely remove information when access ends, subject to lawful retention. Follow applicable cross-border transfer and data-processing requirements. The Teacher may not use student data for unrelated marketing or solicitations.
+Use nonpublic student, family, security, and business information only for accepted services. Apply reasonable security, restrict access, report incidents promptly, and return or securely remove information when access ends, subject to lawful retention. Company records are retained under the retention schedule in ALTON's Privacy Policy. Follow applicable cross-border transfer and data-processing requirements. The Teacher may not use student data for unrelated marketing or solicitations.
 
 Nothing prohibits protected reporting, cooperation with authorities, legal advice, or other nonwaivable rights. Qualifying confidential trade-secret disclosures protected by applicable law remain protected.
 
@@ -98,8 +98,9 @@ This Agreement, completed schedules, and accepted written assignments govern the
 - Lesson fee: USD $50.00 per 60 recognized minutes
 - Nonlesson services, scope, and compensation: ____________________
 - Payment method and recipient details: ____________________
-- Transfer, intermediary, and conversion fee allocation: ____________________
-- Termination notice period: ____________________
+- Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid on the 20th of the same month, and the 16th–end of month is paid on the 5th of the following month
+- Transfer, intermediary, and conversion fees: Borne by the Company
+- Termination notice period: 30 days
 
 ## Schedule B — Prior Materials and Licenses
 

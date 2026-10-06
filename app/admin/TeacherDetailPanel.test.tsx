@@ -15,6 +15,8 @@ vi.mock("./teacher-subjects-actions", () => ({
   unassignTeacherSubject: vi.fn(),
 }));
 
+vi.mock("./TeacherAgreementSection", () => ({ default: () => null }));
+
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ refresh: vi.fn() }),
 }));

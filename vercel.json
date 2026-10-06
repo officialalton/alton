@@ -5,11 +5,11 @@
   "crons": [
     {
       "path": "/api/cron/close-payout-month",
-      "schedule": "0 3 1 * *"
+      "schedule": "0 17 * * *"
     },
     {
       "path": "/api/cron/dispatch-approved-payouts",
-      "schedule": "0 3 10 * *"
+      "schedule": "0 17 * * *"
     },
     {
       "path": "/api/cron/mark-expired-invites",

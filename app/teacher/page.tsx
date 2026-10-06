@@ -5,6 +5,7 @@ import { loadMySubjects } from "./mysubjects-data";
 import { loadTeacherAssignments } from "./assignments-data";
 import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
 import TeacherShell from "./TeacherShell";
+import TeacherAgreementNotice from "./TeacherAgreementNotice";
 import { listMyAvailabilityRules, listTeacherAvailabilityExceptions } from "./availability-actions";
 import { listMyLessonSchedule } from "./lesson-schedule-actions";
 import { resolveUserTimezone } from "@/lib/timezone";
@@ -90,6 +91,7 @@ export default async function TeacherHomePage({
 
   return (
     <ViewerTimezoneProvider timezone={availabilityTimezone}>
+    <TeacherAgreementNotice />
     <TeacherShell
       initialTab={tab}
       initialHomeworkStudentId={student}

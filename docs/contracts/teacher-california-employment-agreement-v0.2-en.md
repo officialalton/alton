@@ -20,7 +20,7 @@ The regular hourly rate is **USD $50.00 for all compensable time**. Compensable 
 
 The Employee must accurately record all hours worked, including work outside scheduled lessons. No off-the-clock work is permitted. All hours worked will be paid, including overtime worked without advance approval; failure to follow scheduling instructions may be addressed separately. The Company pays applicable overtime, minimum wages, reporting-time pay, and other required compensation. No provision treats required preparation as unpaid or includes it without compensation in a teaching-only rate.
 
-The regular payroll period and designated paydays are stated in Schedule A and the required wage notice. Payroll deductions are limited to those permitted by law. Student refunds, cancellations, business losses, or disputed lesson credits do not authorize unlawful deductions from wages.
+The regular payroll period and designated paydays are stated in Schedule A and the required wage notice. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. Payroll deductions are limited to those permitted by law. Student refunds, cancellations, business losses, or disputed lesson credits do not authorize unlawful deductions from wages.
 
 ## 5. Breaks, Leave, and Expenses
 
@@ -40,7 +40,7 @@ The signing participant expressly consents to these activities for authorized re
 
 ALTON uses designated Google Workspace, Meet, Drive, and Gemini services and authorized providers acting for the stated purposes. Recordings, transcripts, and AI notes are stored with restricted access. Authorized teachers and staff may access them for their duties. Students and verified guardians may view lesson artifacts made available to their accounts; this does not grant unrestricted download, redistribution, or access to another family's records or private student notes and whiteboards. No public posting, unrelated advertising, sale, or unrestricted model training is authorized by this consent.
 
-ALTON keeps these records only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
+Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
 
 AI notes and transcripts may contain omissions, speaker errors, or inaccuracies. Corrections may be requested. AI output alone does not conclusively determine attendance, wages, fees, refunds, or disputes. Material changes receive updated notice and renewed consent when required.
 
@@ -48,7 +48,7 @@ Required review, correction, and documentation are compensable work under this A
 
 ## 8. Confidentiality and Protected Rights
 
-Protect nonpublic student, family, employee, security, and business information. Use it only for authorized duties, restrict access, and return or securely remove Company information on request, subject to lawful retention and protected disclosures.
+Protect nonpublic student, family, employee, security, and business information. Use it only for authorized duties, restrict access, and return or securely remove Company information on request, subject to lawful retention and protected disclosures. Company records are retained under the retention schedule in ALTON's Privacy Policy.
 
 Nothing restricts discussion of wages or working conditions, protected concerted activity, reporting suspected violations, cooperating with authorities, consulting counsel, or exercising other protected rights. No prior Company permission is required for legally protected reporting. Federal trade-secret law protects qualifying confidential disclosures to government officials or attorneys to report or investigate suspected violations and qualifying sealed court filings; this Agreement does not limit that protection.
 
@@ -83,7 +83,7 @@ This Agreement and its completed schedules state the employment terms addressed 
 - Supervisor: ____________________
 - Position: Part-time, nonexempt Teacher
 - Regular hourly rate: USD $50.00
-- Payroll period and designated paydays: ____________________
+- Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid on the 20th of the same month; wages for work performed from the 16th through the last day of a month are paid on the 5th of the following month.
 - Applicable overtime rates: As required by law and stated in the wage notice
 
 ## Schedule B — Prior Materials
