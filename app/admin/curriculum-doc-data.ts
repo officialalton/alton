@@ -135,7 +135,7 @@ export async function loadCurriculumDocsByIds(
       subjectIds.length
         ? selectInChunks(subjectIds, (chunk) => supabase
             .from("subject_keywords")
-            .select("id, subject_id, label, status")
+            .select("id, subject_id, label, status, domain_code, skill_code")
             .in("subject_id", chunk)
             .order("label", { ascending: true }), { sort: orderComparator(["label", true]) })
         : Promise.resolve({ data: [] as never[] }),
@@ -189,9 +189,9 @@ export async function loadCurriculumDocsByIds(
 
   const keywordsBySubject = new Map<string, SubjectKeyword[]>();
   for (const k of subjectKeywordRows ?? []) {
-    const row = k as { id: string; subject_id: string; label: string; status: string };
+    const row = k as { id: string; subject_id: string; label: string; status: string; domain_code?: string | null; skill_code?: string | null };
     const list = keywordsBySubject.get(row.subject_id) ?? [];
-    list.push({ id: row.id, label: row.label, status: row.status });
+    list.push({ id: row.id, label: row.label, status: row.status, domainCode: row.domain_code ?? null, skillCode: row.skill_code ?? null });
     keywordsBySubject.set(row.subject_id, list);
   }
 

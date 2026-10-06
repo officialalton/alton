@@ -1,5 +1,6 @@
 "use client";
 
+import { GroupedKeywordOptions } from "@/app/components/GroupedKeywords";
 import { useEffect, useState } from "react";
 import {
   loadUnitComposition,
@@ -213,13 +214,9 @@ export default function UnitPrepPanel({
                 className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 max-w-[280px]"
               >
                 <option value="">Choose a keyword…</option>
-                {composition.subjectKeywords
-                  .filter((k) => !composition.keywords.some((c) => c.id === k.id))
-                  .map((k) => (
-                    <option key={k.id} value={k.id}>
-                      {k.label}
-                    </option>
-                  ))}
+                <GroupedKeywordOptions
+                  items={composition.subjectKeywords.filter((k) => !composition.keywords.some((c) => c.id === k.id))}
+                />
               </select>
               <button
                 disabled={!keywordToAdd || saving}

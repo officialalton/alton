@@ -260,3 +260,20 @@ describe("UnitPrepPanel — 기본 구성 보충", () => {
     await waitFor(() => expect(screen.getByText(/Imported 2 keywords and 3 materials/)).toBeInTheDocument());
   });
 });
+
+describe("UnitPrepPanel — 키워드 도메인 그룹", () => {
+  it("Add keyword 선택 상자가 도메인별 optgroup 으로 묶인다", async () => {
+    mockAll({
+      composition: {
+        subjectKeywords: [
+          { id: "kw-1", label: "Linear equations", domainCode: "algebra" } as never,
+          { id: "kw-2", label: "Legacy" } as never,
+        ],
+      },
+    });
+    renderPanel();
+    const select = (await screen.findByLabelText("Add keyword")) as HTMLSelectElement;
+    expect([...select.querySelectorAll("optgroup")].map((g) => g.label)).toEqual(["Algebra", "Other"]);
+    expect(select.querySelector("option[value='kw-1']")).not.toBeNull();
+  });
+});

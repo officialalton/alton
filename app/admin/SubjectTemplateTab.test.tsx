@@ -242,3 +242,21 @@ describe("과목 키워드 이름 수정", () => {
     expect(screen.getByTitle("이름 고치기")).toHaveTextContent("포물선");
   });
 });
+
+describe("회차 키워드 태그 — 도메인 그룹(관리자는 한국어 '기타')", () => {
+  it("도메인 제목 아래로 묶이고 구 키워드는 기타에 들어간다", () => {
+    const subject: AdminSubject = {
+      ...satMath,
+      keywords: [
+        { id: "kw1", label: "Linear equations", status: "active", domainCode: "algebra" },
+        { id: "kw2", label: "포물선", status: "active" },
+      ],
+      units: [{ id: "u1", position: 1, unitTitle: "함수의 기초", note: null, keywordIds: ["kw1"] }],
+    };
+    render(<Wrapper initialSubjects={[subject]} />);
+    fireEvent.click(screen.getByText("편집"));
+    expect(screen.getByText("Algebra")).toBeInTheDocument();
+    expect(screen.getByText("기타")).toBeInTheDocument();
+    expect(screen.getByLabelText("함수의 기초 회차에 Linear equations 해제")).toHaveAttribute("aria-pressed", "true");
+  });
+});
