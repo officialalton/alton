@@ -1,9 +1,9 @@
 {
  "itemId": "percentages.percent_of.BR.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T02:43:53Z",
+ "reviewedAt": "2026-10-06T02:56:09Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "23676e9c6c0980e01e0377e52fa20d07c6581519b40139816750c942f1c41084",
+ "codeHash": "07a4ac531d7c81a6aea84d339c0bca0c77a5d21e706ad69b7d95f7e1a1881597",
  "samples": [
   "percentages.percent_of.BR.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: Gym A 200, B 50, C 150, D 100 → 합 500, 20% = 100, 메타 정답 100 일치. 막대 높이가 눈금 격자선에 정확히 닿고 범주 이름·축 제목 양호."
+ "notes": "그림만 보고 풀이: Gym A 200, B 50, C 150, D 100 → 합 500, 20% = 100, 메타 정답 100 일치. 막대 높이가 눈금 격자선에 정확히 닿고 범주 이름·축 제목 양호. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }

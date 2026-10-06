@@ -1,9 +1,9 @@
 {
  "itemId": "one_variable_data.median.HG.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T02:40:20Z",
+ "reviewedAt": "2026-10-06T02:56:09Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "e9984b3385f2327dfc0c4487f93769fa01a0821ea35acb58895abf9b0120af9a",
+ "codeHash": "cb12759e9cf6d2f8855b83b54d23369ccfe0c908227aa0a74ac04220ea2b68ab",
  "samples": [
   "one_variable_data.median.HG.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 30-40:7, 40-50:10, 50-60:4, 60-70:9 → 중점 합 1500/30=50(평균), 중앙값 15·16번째 모두 40-50 구간(중점 45) → 차 5, 메타 정답 5 일치. 막대·눈금·축 제목 양호."
+ "notes": "그림만 보고 풀이: 30-40:7, 40-50:10, 50-60:4, 60-70:9 → 중점 합 1500/30=50(평균), 중앙값 15·16번째 모두 40-50 구간(중점 45) → 차 5, 메타 정답 5 일치. 막대·눈금·축 제목 양호. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }

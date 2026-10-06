@@ -1,9 +1,9 @@
 {
  "itemId": "one_variable_data.mean.BR.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T02:46:57Z",
+ "reviewedAt": "2026-10-06T02:56:09Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "33db0f663316f63ff2d8c6853122820eab39c6b3f2ca366af68fbe72eee99037",
+ "codeHash": "dacc04fe4ff301bf60fcb4a8f090f123bae6a673f22059b8e2a11389fe0ff73f",
  "samples": [
   "one_variable_data.mean.BR.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 값 6(5),8(1),10(3),12(7),14(5) → 합 222, 21개, 2팀 추가 후 평균 10 → 새 합 230 → 8/2=4, 메타 정답 4 일치. 막대 높이가 세로 눈금(1칸)과 일치, 가로 값 눈금·축 제목 단위 양호."
+ "notes": "그림만 보고 풀이: 값 6(5),8(1),10(3),12(7),14(5) → 합 222, 21개, 2팀 추가 후 평균 10 → 새 합 230 → 8/2=4, 메타 정답 4 일치. 막대 높이가 세로 눈금(1칸)과 일치, 가로 값 눈금·축 제목 단위 양호. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }

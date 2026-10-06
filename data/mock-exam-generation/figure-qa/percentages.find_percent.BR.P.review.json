@@ -1,9 +1,9 @@
 {
  "itemId": "percentages.find_percent.BR.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T02:43:53Z",
+ "reviewedAt": "2026-10-06T02:56:09Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "bc7c9586ff46ba165068c6b8d153e0858753aa440ed7365e9526d1653df68fbb",
+ "codeHash": "89785073a6d4462fe6f78b3bbd561efc4aec5a25e320ab37c9e9c15f25b2bc9b",
  "samples": [
   "percentages.find_percent.BR.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: Lane B 160, C 40, D 120, F 80 → 합 400, B+F=240 → 60%, 메타 정답 60 일치. 375px 에서 막대·범주 이름·눈금 판독 가능."
+ "notes": "그림만 보고 풀이: Lane B 160, C 40, D 120, F 80 → 합 400, B+F=240 → 60%, 메타 정답 60 일치. 375px 에서 막대·범주 이름·눈금 판독 가능. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }
