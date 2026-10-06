@@ -79,3 +79,21 @@ describe("평행선·횡단선 — 숫자 각 라벨대로 기울인다", () => 
     expect(Math.abs(drawnSlant(obtuse) - 62)).toBeLessThan(3);
   });
 });
+
+describe("평행선·횡단선 — 횡단선끼리 만나는 그림(crossing.slants)은 두 횡단선을 각자의 각대로 그린다", () => {
+  const spec = (slants: [number, number]): ParallelTransversalSpec => ({
+    type: "parallel_transversal", parallel: ["m", "n"], transversals: [{ id: "p" }, { id: "q" }], crossing: { side: "below", slants },
+    points: [{ id: "X", on: ["p", "q"] }], angles: [{ at: ["p", "q"], region: "N", label: "x°" }], notToScale: true,
+  });
+  const slantsOf = (sp: ParallelTransversalSpec) => { const ls = lines(renderParallelTransversal(sp).svg); return [ls[2], ls[3]].map((t) => Math.atan2(Math.abs(t[1][1] - t[0][1]), Math.abs(t[1][0] - t[0][0])) * (180 / Math.PI)); };
+  for (const sl of [[55, 55], [48, 70], [66, 44], [80, 52]] as [number, number][]) {
+    it(`각 ${sl.join("°·")}°`, () => {
+      const r = renderParallelTransversal(spec(sl)); expect(r.issues).toEqual([]);
+      const [a, b] = slantsOf(spec(sl)); expect(Math.abs(a - sl[0])).toBeLessThan(2); expect(Math.abs(b - sl[1])).toBeLessThan(2);
+    });
+  }
+  it("slants 가 없으면 기존 그림과 같다(둘 다 55°·가로 360)", () => {
+    const sp = spec([55, 55]); delete (sp.crossing as { slants?: unknown }).slants;
+    const r = renderParallelTransversal(sp); expect(r.svg).toContain('viewBox="0 0 360'); const [a, b] = slantsOf(sp); expect(Math.abs(a - 55)).toBeLessThan(0.5); expect(Math.abs(b - 55)).toBeLessThan(0.5);
+  });
+});

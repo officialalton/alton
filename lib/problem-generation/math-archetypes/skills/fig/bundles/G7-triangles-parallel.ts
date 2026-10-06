@@ -15,8 +15,9 @@ import { ITEM as avTriArea } from "../items/area_volume.triangle_area.TR.P";
 import { ITEM as latExt } from "../items/lines_angles_triangles.exterior_angle.TR.P";
 import { ITEM as latAsC } from "../items/lines_angles_triangles.triangle_angle_sum.TR.C";
 import { ITEM as latIsoC } from "../items/lines_angles_triangles.isosceles_base_angle.TR.C";
+import { ITEM as latExtPt } from "../items/lines_angles_triangles.exterior_angle.PT.P";
 import { ITEM as latVsTr } from "../items/lines_angles_triangles.vertical_supplementary_angles.TR.P";
 import { ITEM as latPtPar } from "../items/lines_angles_triangles.parallel_lines_transversal_angles.PT.P";
 import { ITEM as latPtVert } from "../items/lines_angles_triangles.vertical_supplementary_angles.PT.P";
 
-export const BUNDLE: LArch[] = [...latSim, ...latPtVert, ...latPtPar, ...avTriArea, ...latExt, ...latVsTr, ...latAsC, ...latIsoC, ...latTi, ...latCong, ...latAngleSum, ...rttHyp, ...rttLeg, ...latIso, ...rttTrig, ...rttSpecial, ...rttComp, ...rttElev];
+export const BUNDLE: LArch[] = [...latSim, ...latPtVert, ...latPtPar, ...avTriArea, ...latExt, ...latVsTr, ...latAsC, ...latIsoC, ...latExtPt, ...latTi, ...latCong, ...latAngleSum, ...rttHyp, ...rttLeg, ...latIso, ...rttTrig, ...rttSpecial, ...rttComp, ...rttElev];

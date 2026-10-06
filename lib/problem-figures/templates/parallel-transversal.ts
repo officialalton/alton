@@ -23,7 +23,7 @@ export type ParallelTransversalSpec = {
    * 두 횡단선이 만나는 자리(2026-09-15 확장). below: 아래 평행선 아래에서 만난다(두 평행선·두 횡단선이 삼각형을 이룬다), above: 위 평행선 위에서.
    * 두 횡단선이 서로 만나는 점·각을 쓰면 없어도 below 로 본다.
    */
-  crossing?: { side: "above" | "below" };
+  crossing?: { side: "above" | "below"; /** 두 횡단선이 평행선과 이루는 예각(도) [왼쪽 횡단선, 오른쪽 횡단선] — 38~85. 주면 그림이 이 각대로 그려진다(교점 각 = 180° − 두 각의 합). 생략하면 둘 다 55°. */ slants?: [number, number] };
   notToScale?: boolean;
 };
 /** 횡단선끼리의 교점 주변 네 쐐기: N = 평행선을 향한 쪽(교점이 아래면 위, 위면 아래 — 삼각형 안), S = 그 반대, E/W = 좌우. */
@@ -124,6 +124,7 @@ export function validateParallelTransversal(rawInput: unknown): { ok: true; spec
     const c = s.crossing as Record<string, unknown> | null;
     if (!c || (c.side !== "above" && c.side !== "below")) return { ok: false, error: "crossing 은 { side: 'above' | 'below' } 입니다." };
     if ((s.transversals as unknown[]).length !== 2) return { ok: false, error: "crossing(횡단선끼리의 교점)은 횡단선이 2개일 때만 쓸 수 있습니다." };
+    if (c.slants !== undefined && !(Array.isArray(c.slants) && c.slants.length === 2 && c.slants.every((v) => typeof v === "number" && v >= 38 && v <= 85) && (c.slants as number[])[0] + (c.slants as number[])[1] < 150)) return { ok: false, error: "crossing.slants 는 38~85 사이 숫자 둘(합 150 미만)입니다." };
   }
   if (s.points !== undefined) {
     if (!Array.isArray(s.points)) return { ok: false, error: "points 는 배열이어야 합니다." };
@@ -174,7 +175,8 @@ export function slantDegFor(spec: ParallelTransversalSpec): number {
 }
 
 export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg: string; alt: string; issues: FigureIssue[] } {
-  const sheet = new Sheet(W, 250);
+  const WD = spec.crossing?.slants ? 420 : W; // slants 가 있으면 두 횡단선이 서로 다른 각이라 가로를 넓힌다(없으면 기존 크기)
+  const sheet = new Sheet(WD, 250);
   const issues = sheet.issues;
   const line = (a: Pt, b: Pt) => sheet.line(a, b);
   const putLabel = (x: number, y: number, t: string, what: string, italic = false) => sheet.label(x, y, t, what, { italic });
@@ -182,13 +184,12 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
   // ---- 배치 계산: 라벨이 필요한 반지름과 두 평행선 사이 간격(사이에 놓이는 라벨 높이에 맞춰 늘린다)
   const slantDeg = slantDegFor(spec);
   const slant = (slantDeg * Math.PI) / 180;
-  const halfAcute = slant / 2, halfObtuse = (Math.PI - slant) / 2;
   const labelRadius = (label: string, wedgeHalf: number, right?: boolean) => {
     const w = labelWidth(label);
     const diag = Math.hypot(w, LABEL_SIZE + 2) / 2;
     return Math.max(LABEL_R, (diag + 4) / Math.max(Math.sin(wedgeHalf), 0.2), (right ? RIGHT_R * Math.SQRT2 : ARC_R) + diag + 3);
   };
-  const wedgeHalfOf = (region: Region, right: boolean) => ((region === "NW" || region === "SE") === right ? halfAcute : halfObtuse);
+  const wedgeHalfOf = (region: Region, right: boolean, sl = slant) => ((region === "NW" || region === "SE") === right ? sl / 2 : (Math.PI - sl) / 2);
   let innerTop = 0, innerBottom = 0;
   const isTransId = (x: string) => spec.transversals.some((tr) => tr.id === x);
   const isCross = (pair: [string, string]) => isTransId(pair[0]) && isTransId(pair[1]);
@@ -198,7 +199,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     const t = spec.transversals.find((tr) => a.at.includes(tr.id))!;
     const idx = spec.transversals.indexOf(t);
     const rightSlant = (t.slant ?? (idx === 0 ? "right" : (spec.transversals[0].slant ?? "right"))) === "right";
-    const half = t.perpendicular ? Math.PI / 4 : wedgeHalfOf(a.region as Region, rightSlant);
+    const half = t.perpendicular ? Math.PI / 4 : wedgeHalfOf(a.region as Region, crossing?.slants ? (idx === 0) : rightSlant, crossing?.slants ? (crossing.slants[idx] * Math.PI) / 180 : slant);
     const r = labelRadius(a.label, half, a.right);
     const vertical = r * Math.sin(half) + (LABEL_SIZE + 2) / 2; // 라벨 상자의 세로 도달 거리(대략)
     const onTop = a.at.includes(spec.parallel[0]);
@@ -211,7 +212,12 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
   const gap = Math.max(MIN_GAP, Math.ceil(innerTop + innerBottom + 12));
   // 횡단선끼리 만나는 자리 — 두 횡단선을 좌우로 벌려(120, 260) 서로 마주 기울이면 평행선 밖에서 만난다. 그 깊이만큼 캔버스를 늘린다.
   const dxGap = gap / 2 / Math.tan(slant);
-  const crossDepth = crossing ? ((CROSS_X[1] - CROSS_X[0] - 2 * dxGap) / 2) * Math.tan(slant) : 0;
+  const cs = crossing?.slants ? [(crossing.slants[0] * Math.PI) / 180, (crossing.slants[1] * Math.PI) / 180] : null;
+  // slants: 아래 평행선 위의 두 교점 P(왼쪽 횡단선)·Q 의 간격 wb 를 정해 삼각형(꼭대기 X)을 가운데에 놓는다. 윗 끝이 선 밖으로 나가지 않게 wb 의 상한을 둔다.
+  const csL = cs ? PAD + 8 + gap / Math.tan(cs[0]) : 0, csR = cs ? WD - PAD - 8 - gap / Math.tan(cs[1]) : 0;
+  const csWb = cs ? Math.min(150, csR - csL) : 0, csB0 = cs ? csL + (csR - csL - csWb) / 2 : 0;
+  if (cs && csWb < 96) issues.push({ code: "impossible", message: `두 횡단선의 각(${crossing!.slants![0]}°·${crossing!.slants![1]}°)이 작아 그림이 가로에 들어가지 않습니다.` });
+  const crossDepth = cs ? (csWb * Math.sin(cs[0]) * Math.sin(cs[1])) / Math.sin(cs[0] + cs[1]) : crossing ? ((CROSS_X[1] - CROSS_X[0] - 2 * dxGap) / 2) * Math.tan(slant) : 0;
   const topY = TOP_Y + (crossing?.side === "above" ? crossDepth + 30 : 0);
   const LINE_Y: [number, number] = [topY, topY + gap];
   const H = LINE_Y[1] + 78 + (crossing?.side === "below" ? crossDepth + 30 : 0);
@@ -219,7 +225,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
 
   // ---- 평행선
   const slantMain = (spec.transversals[0].slant ?? "right") === "right";
-  LINE_Y.forEach((y) => line([PAD, y], [W - PAD, y]));
+  LINE_Y.forEach((y) => line([PAD, y], [WD - PAD, y]));
   // ---- 횡단선(1~2) — 두 번째는 반대 기울기·중심 오프셋
   const inter = new Map<string, Pt>(); // key `${parallel}|${transversal}`
   const transDir = new Map<string, Pt>(); // 아래쪽으로 향하는 단위 방향
@@ -233,8 +239,12 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     const xMid = crossing ? CROSS_X[i] : spec.transversals.length === 1 ? 190 : i === 0 ? 150 : 230;
     // 수직 횡단선은 곧게 내려간다(2026-09-15) — 네 각이 직각.
     const dx = t.perpendicular ? 0 : (LINE_Y[1] - LINE_Y[0]) / 2 / Math.tan(slant);
-    const top: Pt = [right ? xMid - dx : xMid + dx, LINE_Y[0]];
-    const bottom: Pt = [right ? xMid + dx : xMid - dx, LINE_Y[1]];
+    let top: Pt = [right ? xMid - dx : xMid + dx, LINE_Y[0]];
+    let bottom: Pt = [right ? xMid + dx : xMid - dx, LINE_Y[1]];
+    if (cs) { // 각 횡단선을 자기 각(cs[i])대로: 아래 교점은 csB0(왼쪽)·csB0 + csWb(오른쪽), 위 교점은 gap / tan(각)만큼 바깥으로
+      const bx = i === 0 ? csB0 : csB0 + csWb, tx = i === 0 ? bx - gap / Math.tan(cs[0]) : bx + gap / Math.tan(cs[1]);
+      top = [tx, LINE_Y[0]]; bottom = [bx, LINE_Y[1]];
+    }
     const dir: Pt = [(bottom[0] - top[0]) / Math.hypot(bottom[0] - top[0], bottom[1] - top[1]), (bottom[1] - top[1]) / Math.hypot(bottom[0] - top[0], bottom[1] - top[1])];
     ends.push({ top, bottom, dir });
     // 교점을 지나 더 나가도록 연장한다.
@@ -242,7 +252,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     // 기울기가 작을수록(예각이 좁을수록) 예각 쐐기 라벨이 교점에서 멀리 놓인다 — 이름이 라벨과 닿지 않게 그만큼 더 연장한다.
     const EXT = Math.round(46 * Math.max(1, SLANT_DEG / slantDeg));
     const extTop = crossing?.side === "above" ? 46 + crossDepth : crossing ? 26 : EXT;
-    const extBottom = crossing?.side === "below" ? 46 + crossDepth : crossing ? 26 : EXT;
+    const extBottom = cs && crossing?.side === "below" ? ((i === 0 ? Math.sin(cs[1]) : Math.sin(cs[0])) * csWb) / Math.sin(cs[0] + cs[1]) + 46 : crossing?.side === "below" ? 46 + crossDepth : crossing ? 26 : EXT; // slants: 꼭대기 X 까지의 거리 + 46
     const k0: Pt = [top[0] - dir[0] * extTop, top[1] - dir[1] * extTop];
     const k1: Pt = [bottom[0] + dir[0] * extBottom, bottom[1] + dir[1] * extBottom];
     line(k0, k1);
@@ -256,7 +266,7 @@ export function renderParallelTransversal(spec: ParallelTransversalSpec): { svg:
     else putLabel(k1[0] + dir[0] * nameOff, k1[1] + dir[1] * nameOff, t.id, "횡단선 이름", true);
   });
   // 평행선 이름(오른쪽 끝 바깥)
-  LINE_Y.forEach((y, i) => putLabel(W - PAD + 14, y, spec.parallel[i], "평행선 이름", true));
+  LINE_Y.forEach((y, i) => putLabel(WD - PAD + 14, y, spec.parallel[i], "평행선 이름", true));
 
   // 횡단선끼리의 교점(있으면) — 두 직선의 교점을 계산해 등록한다.
   const crossKey = spec.transversals.length === 2 ? `${spec.transversals[0].id}|${spec.transversals[1].id}` : null;
