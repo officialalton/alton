@@ -25,7 +25,7 @@ export type PrismScene = { a: number; b: number; c: number; L: number };
 export function makePrism(rng: Rng): PrismScene { const [a0, b0, c0] = rng.pick(TRI3); const sw = rng.chance(0.5); return { a: sw ? b0 : a0, b: sw ? a0 : b0, c: c0, L: rng.int(4, 14) }; }
 
 // 원기둥 축 단면: (2r)² + h² = d²
-export const CYL3: [number, number, number][] = [[2, 3, 5], [3, 8, 10], [4, 6, 10], [4, 15, 17], [6, 5, 13], [6, 9, 15], [6, 16, 20], [5, 24, 26], [8, 12, 20], [3, 4, 5]];
+export const CYL3: [number, number, number][] = [[2, 3, 5], [3, 8, 10], [4, 6, 10], [4, 15, 17], [6, 5, 13], [6, 9, 15], [6, 16, 20], [5, 24, 26], [8, 12, 20], [10, 15, 25], [9, 24, 30], [12, 10, 26], [10, 21, 29], [12, 7, 25]];
 export type CylScene = { r: number; h: number; d: number };
 export function makeCyl(rng: Rng): CylScene { const [r, h, d] = rng.pick(CYL3); return { r, h, d }; }
 export const piT = (k: number | string) => `$${k}\\pi$`;

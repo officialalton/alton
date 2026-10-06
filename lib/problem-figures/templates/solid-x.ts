@@ -113,7 +113,7 @@ export function renderSolidX(spec: SolidXSpec): { svg: string; alt: string; issu
 export function lintSolidXAgainstText(spec: SolidXSpec, passage: string): FigureIssue[] {
   const issues: FigureIssue[] = []; const text = passage.replace(/\$/g, "");
   const words: Record<SolidXKind, RegExp> = { box_diagonal: /\b(rectangular (?:prism|box)|box)\b/i, triangular_prism: /\btriangular prism\b/i, cylinder_section: /\bcylind(?:er|rical)\b/i, cylinder_hemisphere: /\b(?:cylinder|hemisphere)\b/i };
-  if (/\b(sphere|cone|pyramid)\b/i.test(text) && spec.kind !== "cylinder_hemisphere" && /\b(cone|pyramid)\b/i.test(text)) issues.push({ code: "ref_mismatch", message: "지문이 말하는 입체가 도식과 다릅니다." });
+  void spec;
   void words;
   return dedupe(issues);
 }

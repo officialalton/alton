@@ -14,5 +14,9 @@ import { ITEM as tnNest } from "../items/lines_angles_triangles.nested_similar_p
 import { ITEM as tnAlt } from "../items/right_triangles_trigonometry.similar_right_triangle_altitude.TN.P";
 import { ITEM as sxPyth } from "../items/right_triangles_trigonometry.pythagorean_hypotenuse.SX.P";
 import { ITEM as sxSpace } from "../items/area_volume.space_diagonal.SX.P";
+import { ITEM as sxPrism } from "../items/area_volume.prism_volume.SX.P";
+import { ITEM as sxCylR } from "../items/area_volume.cylinder_volume_radius.SX.P";
+import { ITEM as sxCylD } from "../items/area_volume.cylinder_volume_diameter.SX.P";
+import { ITEM as sxComp } from "../items/area_volume.composite_solid.SX.P";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp];
