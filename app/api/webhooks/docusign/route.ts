@@ -4,6 +4,7 @@ import { verifyDocusignWebhookSignature } from "@/lib/docusign";
 import { queueDriveArtifactSync } from "@/lib/drive-artifacts";
 import { autoActivateReadySubjectEnrollments } from "@/lib/enrollment/auto-activate";
 import { autoCloseConsultationOnContractSigned } from "@/lib/enrollment/auto-close-consultation";
+import { applyTeacherAgreementEnvelopeEvent } from "@/lib/teacher-agreements/webhook";
 
 // R3: docusign_envelope_id 컬럼이 contracts에 생겼으므로(20260912000000 마이그레이션)
 // 이 라우트를 no-op 스텁에서 실제 처리로 복구한다.
@@ -152,6 +153,16 @@ export async function POST(request: Request) {
       .eq("provider", "docusign")
       .eq("event_id", eventId);
     return NextResponse.json({ ok: true, skipped: `unhandled event: ${event}` });
+  }
+
+  // 선생님 계약서 봉투는 teacher_contracts가 소유한다(가족 계약 경로와 분리).
+  if (await applyTeacherAgreementEnvelopeEvent(admin, envelopeId, envelopeStatus, new Date().toISOString())) {
+    await admin
+      .from("external_event_receipts")
+      .update({ processed_at: new Date().toISOString() })
+      .eq("provider", "docusign")
+      .eq("event_id", eventId);
+    return NextResponse.json({ ok: true, teacherAgreement: true });
   }
 
   const { data: contractVersion } = await admin

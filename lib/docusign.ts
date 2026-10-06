@@ -115,6 +115,7 @@ export async function createEnvelope(params: {
   documentHtml: string;
   emailSubject: string;
   webhookUrl: string;
+  documentName?: string;
 }): Promise<{ envelopeId: string }> {
   assertAnchorPresentInDocumentHtml(params.documentHtml, SIGNATURE_ANCHOR);
   assertAnchorPresentInDocumentHtml(params.documentHtml, DATE_SIGNED_ANCHOR);
@@ -135,7 +136,7 @@ export async function createEnvelope(params: {
       documents: [
         {
           documentBase64: Buffer.from(params.documentHtml).toString("base64"),
-          name: "Alton Education Agreement",
+          name: params.documentName ?? "Alton Education Agreement",
           fileExtension: "html",
           documentId: "1",
         },
