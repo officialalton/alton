@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.median.BX.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T05:30:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "9d4558d72bbbe8e3f9538ecbf7804185ac9ef312591c3138e279eb8ca0ddce51",
+ "samples": [
+  "one_variable_data.median.BX.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass",
+  "multi_figure_consistent": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 중앙값 60·IQR 40 → D(Q1 40, 중앙값 60, Q3 80) 가 정답, 메타 정답 D 일치. A 는 중앙값만(50), C 는 IQR 만(20), B 는 둘 다 틀림(70, 30). 네 그림이 같은 최소 30·최대 90·같은 눈금·같은 크기. 데스크톱 2x2·375px 1열 모두 판독 가능."
+}
