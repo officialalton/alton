@@ -48,6 +48,7 @@ FAMILY_KIT.PT = [GEO_PT_KIT, ...FAMILY_KIT.PT];
 FAMILY_KIT.SO = [`${AR}/skills/fig/so-kit.ts`, `${AR}/skills/fig/pg-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, ...(FAMILY_KIT.SO ?? [])];
 const CYL_KIT = `${AR}/skills/fig/cyl-kit.ts`; for (const id of ["area_volume.cylinder_volume_radius.SO.P", "area_volume.cylinder_volume_diameter.SO.P"]) ITEM_KIT[id] = [CYL_KIT, ...(ITEM_KIT[id] ?? [])];
 FAMILY_KIT.PG = [`${AR}/skills/fig/pg-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, ...FAMILY_KIT.PG];
+FAMILY_KIT.CG = [`${AR}/skills/fig/cg-kit.ts`, `${AR}/skills/fig/cgc-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, `${AR}/skills/fig/pg-kit.ts`, ...(FAMILY_KIT.CG ?? [])];
 export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P", "lines_angles_triangles.congruent_triangles.TR.P", "lines_angles_triangles.triangle_inequality.TR.P", "area_volume.triangle_area.TR.P", "lines_angles_triangles.exterior_angle.TR.P", "lines_angles_triangles.vertical_supplementary_angles.TR.P", "lines_angles_triangles.triangle_angle_sum.TR.C", "lines_angles_triangles.isosceles_base_angle.TR.C"];
 for (const id of GEO_TR_ITEMS) ITEM_KIT[id] = [GEO_KIT, ...(ITEM_KIT[id] ?? [])];
 const CR_KIT = `${AR}/skills/fig/geo-cr-kit.ts`;

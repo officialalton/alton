@@ -1,0 +1,46 @@
+{
+ "itemId": "right_triangles_trigonometry.pythagorean_leg.CG.P",
+ "generatedAt": "2026-10-06T07:58:40.138Z",
+ "codeHash": "757d530fd8837f910b23a034df4b5ea63d1fe2f58a026c8bf36ff6c5ccc83a41",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cgc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.pythagorean_leg.CG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.pythagorean_leg.CG.P.png",
+   "mobileFile": "right_triangles_trigonometry.pythagorean_leg.CG.P.m375.png",
+   "archetypeId": "av.pythagorean_leg.CG.P.compose_kind",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A designer places the shape shown on a grid. Pay attention to the coordinates of each point. Points W and X are plotted in the figure shown, and WX is a leg of a right triangle whose right angle is at X. The hypotenuse of the triangle is 15 units long.",
+   "question": "Find the length of the other leg of the triangle.",
+   "options": [
+    "27",
+    "81",
+    "9",
+    "3"
+   ],
+   "correctIndex": 2,
+   "answer": "9",
+   "explanation": "(1) 그림에서 W, X 의 좌표를 읽는다. (2) 읽은 직각변 WX = 12 이다. (3) 빗변² = 15² = 225 이다. (4) 다른 직각변² = 225 − 12² = 81 이다. (5) 따라서 9 이다. 따라서 정답은 9이다.",
+   "structuralIssues": []
+  }
+ ]
+}

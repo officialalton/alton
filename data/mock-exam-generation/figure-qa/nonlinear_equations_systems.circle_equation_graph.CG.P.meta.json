@@ -1,0 +1,46 @@
+{
+ "itemId": "nonlinear_equations_systems.circle_equation_graph.CG.P",
+ "generatedAt": "2026-10-06T07:58:40.156Z",
+ "codeHash": "ff5fd29e2647539db89b0ea35ab14b6b3bd108136c118ee56470010d4b3b4798",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cgc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.circle_equation_graph.CG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.circle_equation_graph.CG.P.png",
+   "mobileFile": "nonlinear_equations_systems.circle_equation_graph.CG.P.m375.png",
+   "archetypeId": "av.circle_equation_graph.CG.P.compose_kind",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A student graphs the figure shown in the $xy$-plane. The coordinate grid shown contains a circle with center A that passes through Y. The equation of the circle is written as $(x - h)^2 + (y - k)^2 = r^2$.",
+   "question": "In the equation of the circle, what is $r^2$?",
+   "options": [
+    "25",
+    "7",
+    "5",
+    "19"
+   ],
+   "correctIndex": 0,
+   "answer": "25",
+   "explanation": "(1) 그림에서 A = (5, 5), Y = (1, 8) 를 읽는다. (2) 가로 차 = 4, 세로 차 = 3 이다. (3) 반지름 r = √(4² + 3²) = 5 이다. (4) r² = 5² 이다. (5) 따라서 25 이다. 따라서 정답은 25이다.",
+   "structuralIssues": []
+  }
+ ]
+}

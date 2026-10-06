@@ -1,0 +1,47 @@
+{
+ "itemId": "circles.circle_equation_transform.CG.C",
+ "generatedAt": "2026-10-06T07:58:40.178Z",
+ "codeHash": "04553e033555cc6262dc469e3c96990537fea22e4329daf48e9292ee09faefbb",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cgc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.circle_equation_transform.CG.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.circle_equation_transform.CG.C.png",
+   "mobileFile": "circles.circle_equation_transform.CG.C.m375.png",
+   "archetypeId": "av.circle_equation_transform.CG.C.compose_kind",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "The graphs are drawn to the same scale. A circle with equation $(x - 3)^2 + (y - 2)^2 = 9$ is translated 2 units to the right and 1 unit up.",
+   "question": "Which graph matches the transformed circle?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 원래 중심은 (3, 2), 반지름은 3 이다. (2) 오른쪽으로 2, 위로 1 이동한다. (3) 상의 중심 = (5, 3) 이다. (4) 평행이동은 반지름을 바꾸지 않는다. (5) 이 중심과 반지름 3 을 가진 원을 고른다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}
