@@ -27,6 +27,7 @@ import { ITEM as ssPN } from "../items/systems_linear.param_no_solution.LN.P";
 import { ITEM as ssWS } from "../items/systems_linear.word_system.LN.P";
 import { ITEM as rruP } from "../items/ratios_rates_units.proportion.LN.P";
 import { ITEM as rruC } from "../items/ratios_rates_units.chained_conversion.LN.P";
+import { ITEM as leoW } from "../items/linear_equations_one_var.word_problem_translate.LN.P";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW];
 
