@@ -10,5 +10,6 @@ import { ITEM as l2IntersectX } from "../items/linear_equations_two_var.intersec
 import { ITEM as l2IntersectY } from "../items/linear_equations_two_var.intersection_y.LN.P";
 import { ITEM as l2IntersectSum } from "../items/linear_equations_two_var.intersection_sum.LN.P";
 import { ITEM as l2NumSol } from "../items/linear_equations_two_var.num_solutions.LN.P";
+import { ITEM as l2gSlope } from "../items/linear_equations_two_var.slope.LN.P";
 
-export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct, ...l2IntersectX, ...l2IntersectY, ...l2IntersectSum, ...l2NumSol];
+export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct, ...l2IntersectX, ...l2IntersectY, ...l2IntersectSum, ...l2NumSol, ...l2gSlope];

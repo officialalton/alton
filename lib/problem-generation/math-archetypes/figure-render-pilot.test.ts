@@ -27,7 +27,7 @@ describe("자료 원형(파일럿 15항목 + 1단계 조합) — 앱 렌더 경�
         if (t === "data" && fig.kind === "scatter") { expect(container.querySelectorAll("svg circle").length).toBe((fig.points as unknown[]).length); if (fig.fitLine) expect(html).toContain("#C8102E"); }
         if (t === "data" && fig.kind === "line") { expect(container.querySelectorAll("svg circle").length).toBe(((fig.series as { values: number[] }[])[0].values).length); }
         if (t === "figure_choice") { const ch = fig.choices as { type: string }[]; expect(ch).toHaveLength(4); expect(container.querySelectorAll("figure").length).toBe(4); for (const L of ["A", "B", "C", "D"]) expect(container.textContent).toContain(L); if (ch[0].type === "plane") expect(container.querySelectorAll("svg").length).toBe(4); if (ch[0].type === "data") expect(container.querySelectorAll("table").length).toBe(4); }
-        if (t === "figure_set") { expect(container.querySelectorAll("figure").length).toBe(2); expect(container.textContent).toContain("Plot A"); expect(container.textContent).toContain("Plot B"); }
+        if (t === "figure_set") { expect(container.querySelectorAll("figure").length).toBe(2); for (const f of fig.figures as { title: string }[]) { expect(f.title).toBeTruthy(); expect(container.textContent).toContain(f.title); } }
         unmount(); cleanup();
       }
     });

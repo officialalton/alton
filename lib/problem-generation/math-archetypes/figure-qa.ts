@@ -88,8 +88,8 @@ function checkAxes(spec: Spec, svg: string, issues: QaIssue[], isPlane: boolean)
   }
   // 축 제목·단위
   const xt = (spec.xTitle ?? (spec.axes as { x?: { title?: string } } | undefined)?.x?.title) as string | undefined, yt = (spec.yTitle ?? (spec.axes as { y?: { title?: string } } | undefined)?.y?.title) as string | undefined;
-  for (const [n, t] of [["가로", xt], ["세로", yt]] as const) { if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
-  void isPlane;
+  for (const [n, t] of [["가로", xt], ["세로", yt]] as const) { if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t) && !(isPlane && t.trim() === (n === "가로" ? "x" : "y"))) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+  // 순수 함수 그래프(실생활 맥락 없음)는 축 제목 'x'/'y' 를 허용한다(오너 승인 2026-10-05) — 제목 자체는 여전히 필수이고 그려져야 한다.
 }
 
 function checkOverlapAndClip(svg: string, issues: QaIssue[]) {
