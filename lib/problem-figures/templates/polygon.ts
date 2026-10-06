@@ -59,6 +59,8 @@ function parseSideLabel(spec: PolygonSpec, a: string, b: string): number | null 
   const sl = (spec.sideLabels ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a));
   const t = sl?.label;
   if (!t) return null;
+  // 'x + 4'·'3x'·'(2x + 1)' 같은 식 라벨은 숫자 길이가 아니다(숫자만 뽑아 32 로 읽으면 그림 비율이 틀어진다).
+  if (/\d[a-zA-Zℓ]|[a-zA-Zℓ]\s*[+\-−*/]|[+\-−*/]\s*[a-zA-Zℓ]/.test(t)) return null;
   const n = Number(t.trim().replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : null;
 }
