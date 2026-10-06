@@ -1,0 +1,46 @@
+{
+ "itemId": "nonlinear_equations_systems.linear_quadratic_intersection.FN.P",
+ "generatedAt": "2026-10-06T07:51:02.043Z",
+ "codeHash": "31295090aa33ccfb966d03f79b81711369f654981af2275680ab0be009a652ce",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t5-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.linear_quadratic_intersection.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.linear_quadratic_intersection.FN.P.png",
+   "mobileFile": "nonlinear_equations_systems.linear_quadratic_intersection.FN.P.m375.png",
+   "archetypeId": "nlqg.linear_quadratic_intersection.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The parabola shown is the graph of the quadratic function $k$ in the $xy$-plane. Three points on it are marked. A line with equation $y = 12x + 6$ is drawn in the same plane. It crosses the parabola at two points.",
+   "question": "What is the larger $x$-coordinate of the two intersection points?",
+   "options": [
+    "-4",
+    "2",
+    "-18",
+    "-2"
+   ],
+   "correctIndex": 3,
+   "answer": "-2",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (2, 6), (5, 3), (6, -2). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = -1, b = 6, c = -2 이다. (4) 식: y = -1x² + 6x - 2 이다. (5) 교점에서는 포물선과 직선의 y 가 같으므로 ax² + bx + c = mx + n 으로 놓는다. (6) 정리하면 -1x² + (-6)x + (-8) = 0 이다. (7) 인수분해하면 해는 x = -4, -2 이고 큰 값은 -2 이다. 따라서 정답은 -2이다.",
+   "structuralIssues": []
+  }
+ ]
+}

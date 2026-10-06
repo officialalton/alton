@@ -1,0 +1,46 @@
+{
+ "itemId": "nonlinear_equations_systems.irrational_root_radical_form.FN.P",
+ "generatedAt": "2026-10-06T07:51:02.050Z",
+ "codeHash": "9d30e4e11e450951810a23f5afae8f8f68e7e8171c1190045f2f7a02999e300c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t5-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_equations_systems.irrational_root_radical_form.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_equations_systems.irrational_root_radical_form.FN.P.png",
+   "mobileFile": "nonlinear_equations_systems.irrational_root_radical_form.FN.P.m375.png",
+   "archetypeId": "irrg.irrational_root_radical_form.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A quadratic function $h$ is graphed in the $xy$-plane shown. Points on the graph are marked. Over the real numbers, $h(x) = 0$ has two solutions. The greater one equals $p + \\sqrt{m}$ for integers $p$ and $m$ with $m > 0$.",
+   "question": "What is $m$?",
+   "options": [
+    "28",
+    "8",
+    "0",
+    "7"
+   ],
+   "correctIndex": 3,
+   "answer": "7",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (-3, 2), (2, -3), (4, 9). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = 1, b = 0, c = -7 이다. (4) 식: y = 1x² + 0x - 7 이다. (5) 꼭짓점형으로 고치면 1(x - (0))² + (-7) 이다. (6) (x - (0))² = 7 이므로 x = 0 ± √7 이다. (7) 따라서 m = 7 이다. 따라서 정답은 7이다.",
+   "structuralIssues": []
+  }
+ ]
+}
