@@ -203,11 +203,11 @@ export function lintPolygonAgainstText(spec: PolygonSpec, passage: string): Figu
   for (const [k, re] of Object.entries(kindWords) as [PolygonKind, RegExp][]) {
     if (k !== spec.kind && re.test(text) && !(spec.kind === "square" && k === "rectangle")) issues.push({ code: "ref_mismatch", message: `지문은 ${k} 를 말하지만 도형의 kind 는 ${spec.kind} 입니다.` });
   }
-  for (const m of text.matchAll(/\b(?:rectangle|square|parallelogram|rhombus|trapezoid|pentagon|hexagon|polygon|quadrilateral)\s+([A-Z]{3,8})\b/gi)) for (const ch of m[1]) if (!names.has(ch)) issues.push({ code: "ref_missing", message: `지문의 도형 ${m[1]} 의 점 '${ch}' 가 도형 데이터에 없습니다.` });
+  for (const m of text.matchAll(/\b(?:[Rr]ectangle|[Ss]quare|[Pp]arallelogram|[Rr]hombus|[Tt]rapezoid|[Pp]entagon|[Hh]exagon|[Pp]olygon|[Qq]uadrilateral)\s+([A-Z]{3,8})\b/g)) for (const ch of m[1]) if (!names.has(ch)) issues.push({ code: "ref_missing", message: `지문의 도형 ${m[1]} 의 점 '${ch}' 가 도형 데이터에 없습니다.` });
   const sideLabel = (a: string, b: string) => (spec.sideLabels ?? []).find((s) => (s.between[0] === a && s.between[1] === b) || (s.between[0] === b && s.between[1] === a))?.label;
   const diag = (a: string, b: string) => (spec.diagonals ?? []).find((d) => (d.between[0] === a && d.between[1] === b) || (d.between[0] === b && d.between[1] === a));
   for (const m of text.matchAll(/\b(?:side|segment|length of)\s+([A-Z])([A-Z])\b/g)) if (!names.has(m[1]) || !names.has(m[2])) issues.push({ code: "ref_missing", message: `지문의 변 ${m[1]}${m[2]} 의 점이 도형에 없습니다.` });
-  for (const m of text.matchAll(/\bdiagonal\s+([A-Z])([A-Z])\b/gi)) if (!diag(m[1], m[2])) issues.push({ code: "ref_missing", message: `지문의 대각선 ${m[1]}${m[2]} 가 도형에 없습니다.` });
+  for (const m of text.matchAll(/\b[Dd]iagonal\s+([A-Z])([A-Z])\b/g)) if (!diag(m[1], m[2])) issues.push({ code: "ref_missing", message: `지문의 대각선 ${m[1]}${m[2]} 가 도형에 없습니다.` });
   for (const m of text.matchAll(/\b([A-Z])([A-Z])\s*=\s*(\d+(?:\.\d+)?|√\d+|\d+\/\d+)/g)) {
     const lbl = sideLabel(m[1], m[2]) ?? diag(m[1], m[2])?.label;
     if (lbl === undefined) { if (names.has(m[1]) && names.has(m[2])) issues.push({ code: "ref_missing", message: `지문은 ${m[1]}${m[2]} = ${m[3]} 인데 그림에 그 길이 라벨이 없습니다.` }); }

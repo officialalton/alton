@@ -1,9 +1,9 @@
 {
  "itemId": "lines_angles_triangles.polygon_interior_angle.PG.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T06:34:45Z",
+ "reviewedAt": "2026-10-06T06:44:29Z",
  "reviewer": "claude-sonnet-5.5 (math-B session)",
- "codeHash": "81eb6432596afce1493fb11472f14abca90ce9817191e1cc6929d1bf7538f7ec",
+ "codeHash": "fa839b1d05caa80750315c0e5b1ae8614251eac1cb8992c8625caed076917172",
  "samples": [
   "lines_angles_triangles.polygon_interior_angle.PG.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "정다각형 그림(팔각형, 변의 수는 꼭짓점 수로 읽음) 샘플 데스크톱·375px 확인: 정다각형이 규칙대로 그려지고 꼭짓점 이름이 겹침 없이 바깥에 놓임, 각 라벨 x°·숫자 라벨은 해당 꼭짓점 호와 함께 표시(갤러리 오각·육각 확인). 외각 문항은 라벨 없이 지문으로만 묻도록 정정. polygon 'sides' 를 변조 자료 키로 추가해 변의 수 변조가 검출되게 함."
+ "notes": "정다각형 그림(오각형, 변의 수는 꼭짓점 수로 읽음) 샘플 데스크톱·375px 확인(샘플 갱신: 텍스트 변형 추가): 정다각형 규칙대로 그려지고 꼭짓점 이름이 겹침 없이 바깥에 놓임, 갤러리에서 각 라벨 x°·숫자 라벨 호 표시 확인."
 }
