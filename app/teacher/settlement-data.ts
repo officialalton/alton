@@ -15,7 +15,7 @@ import { payoutPeriodOfDate, PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF, type
 // admin 클라이언트를 쓰지 않는다.
 //
 // 정산 월 기준: generate_payout_batches()가 예약 시작일(reservations.starts_at)
-// 기준으로 기간을 묶으므로 여기서도 같은 기준을 쓴다. 정산 기간은 월 2회(1~15일 → 같은 달 20일, 16일~말일 → 다음 달 5일)다.
+// 기준으로 기간을 묶으므로 여기서도 같은 기준을 쓴다. 정산 기간은 월 2회(1~15일 → 같은 달 26일, 16일~말일 → 다음 달 10일)다.
 
 // 저장된 계좌번호의 표시 규칙 — 서버가 내려보내는 유일한 형태다.
 // "use server" 파일은 async 함수만 export할 수 있어 동기 헬퍼는 여기에 둔다
@@ -107,7 +107,7 @@ export type SettlementMonth = {
   periodKey: string;
   periodStart: string | null;
   periodEnd: string | null;
-  /** 예상 지급일 — 명목 5일·20일을 직전 영업일로 보정한 값. */
+  /** 예상 지급일 — 명목 10일·26일을 직전 영업일로 보정한 값. */
   nominalPayoutDate: string | null;
   currency: string;
   status: SettlementStatus;
@@ -150,7 +150,7 @@ export type TeacherSettlement = {
   refreshedAt: string;
 };
 
-// 2026-10-06(제품 오너 확정) — 월 2회 지급: 1~15일분은 같은 달 20일, 16일~말일분은 다음 달 5일.
+// 2026-10-06(제품 오너 확정) — 월 2회 지급: 1~15일분은 같은 달 26일까지, 16일~말일분은 다음 달 10일까지.
 export { PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF };
 
 function monthKey(iso: string): string {

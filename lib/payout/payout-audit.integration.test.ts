@@ -162,12 +162,12 @@ describe("자동 송금 대상·중복 송금 방지", () => {
 
 describe("승인 마감(08:00 LA)과 크론 실행 시각의 정합", () => {
   it("크론(17:00 UTC = LA 09:00/10:00)은 08:00 LA 전 승인분을 같은 날 처리하고, 이후 승인분은 다음 슬롯이다", () => {
-    // 2026-10-20(PDT, UTC-7): 08:00 LA = 15:00Z, 크론 17:00Z = 10:00 LA.
+    // 2026-10-26(PDT, UTC-7): 08:00 LA = 15:00Z, 크론 17:00Z = 10:00 LA.
     const row = psql(
-      `select next_scheduled_payout_date('2026-10-20T14:59:00Z'::timestamptz), next_scheduled_payout_date('2026-10-20T15:01:00Z'::timestamptz),
-              next_scheduled_payout_date('2027-01-05T15:59:00Z'::timestamptz), next_scheduled_payout_date('2027-01-05T16:01:00Z'::timestamptz);`
+      `select next_scheduled_payout_date('2026-10-26T14:59:00Z'::timestamptz), next_scheduled_payout_date('2026-10-26T15:01:00Z'::timestamptz),
+              next_scheduled_payout_date('2027-01-08T15:59:00Z'::timestamptz), next_scheduled_payout_date('2027-01-08T16:01:00Z'::timestamptz);`
     );
-    // 2027-01-05(PST, UTC-8): 08:00 LA = 16:00Z, 크론 17:00Z = 09:00 LA — 둘 다 마감 뒤에 돈다.
-    expect(row).toBe("2026-10-20|2026-11-05|2027-01-05|2027-01-20");
+    // 2027-01-08(PST, UTC-8): 08:00 LA = 16:00Z, 크론 17:00Z = 09:00 LA — 둘 다 마감 뒤에 돈다.
+    expect(row).toBe("2026-10-26|2026-11-10|2027-01-08|2027-01-26");
   });
 });

@@ -1,12 +1,12 @@
 // 교사·컨설턴트 정산 일정 — 월 2회(2026-10-06 오너 확정).
 //
-// 근무(수업) 1~15일분은 같은 달 20일에, 16일~말일분은 다음 달 5일에 지급한다
+// 근무(수업) 1~15일분은 같은 달 26일까지, 16일~말일분은 다음 달 10일까지 지급한다(2026-10-06 오너 변경: 종전 20일/5일 → 26일/10일; 5·20일은 폐기)
 // (California semimonthly 기준). 기간·지급일 판정은 모두
 // **회사 시간대(COMPANY_TIME_ZONE = America/Los_Angeles) 달력 날짜**다(오너 확정).
 // 이전의 UTC 기준(reservations.starts_at::date)은 폐기됐고, DB 함수도 같은
 // 시간대로 환산한다(20262100000046). 크론은 UTC로 도니 작업 안에서 LA 날짜를 계산한다.
 //
-// 지급일 보정(2026-10-06 오너 위임 확정): 명목 5일·20일이 주말 또는 미국 연방 은행 휴일이면
+// 지급일 보정(2026-10-06 오너 위임 확정): 명목 10일·26일이 주말 또는 미국 연방 은행 휴일이면
 // **직전 영업일**에 지급한다(shiftToBusinessDay). 계약서에는 명목 날짜와 이 보정 문장이 함께 들어간다.
 // SQL의 payout_business_day_on_or_before()와 같은 규칙이다.
 
@@ -15,8 +15,8 @@ export const COMPANY_TIME_ZONE = "America/Los_Angeles";
 
 import { isUsBankHoliday } from "./us-bank-holidays";
 
-export const PAYOUT_DAY_FIRST_HALF = 20; // 1~15일분 → 같은 달 20일
-export const PAYOUT_DAY_SECOND_HALF = 5; // 16일~말일분 → 다음 달 5일
+export const PAYOUT_DAY_FIRST_HALF = 26; // 1~15일분 → 같은 달 26일까지(지급 기한)
+export const PAYOUT_DAY_SECOND_HALF = 10; // 16일~말일분 → 다음 달 10일까지(지급 기한)
 export const PAYOUT_DAYS_OF_MONTH = [PAYOUT_DAY_SECOND_HALF, PAYOUT_DAY_FIRST_HALF] as const;
 
 export type PayoutPeriodRange = { periodStart: string; periodEnd: string };
@@ -25,7 +25,7 @@ export type PayoutPeriodInfo = PayoutPeriodRange & {
   periodKey: string;
   /** 실제 지급일(명목일을 직전 영업일로 보정한 값) 'YYYY-MM-DD' */
   payoutDate: string;
-  /** 명목 지급일(5일·20일) */
+  /** 명목 지급일(10일·26일) */
   nominalPayoutDate: string;
 };
 
@@ -103,7 +103,7 @@ export function payoutPeriodOfDate(dateOrIso: string): PayoutPeriodInfo | null {
   };
 }
 
-/** 기간 종료일 기준 명목 지급일(5일·20일, 보정 전). */
+/** 기간 종료일 기준 명목 지급일(10일·26일, 보정 전). */
 export function nominalPayoutDateForPeriodEnd(periodEnd: string): string | null {
   const p = parseDateOnly(periodEnd);
   if (!p) return null;
@@ -130,7 +130,7 @@ export function previousPayoutPeriod(now: Date = new Date()): PayoutPeriodRange 
   return { periodStart: ymd(prevY, prevM, 16), periodEnd: ymd(prevY, prevM, lastDayOf(prevY, prevM)) };
 }
 
-/** 'YYYY-MM-DD' 명목 지급일(5일·20일) → 한 번에 지급되는 정산 기간. */
+/** 'YYYY-MM-DD' 명목 지급일(10일·26일) → 한 번에 지급되는 정산 기간. */
 export function periodForPayoutDate(payoutDate: string): PayoutPeriodRange | null {
   const p = parseDateOnly(payoutDate);
   if (!p) return null;
@@ -167,7 +167,7 @@ export function formatPeriodLabelEn(periodStart: string, periodEnd: string): str
   return `${formatDateOnlyEn(periodStart)} – ${formatDateOnlyEn(periodEnd, true)}`;
 }
 
-/** "Oct 1–15, 2026 → paid Oct 20". 지급일은 명목 규칙(5일·20일)에서 계산한다. */
+/** "Oct 1–15, 2026 → paid Oct 20". 지급일은 명목 규칙(10일·26일)에서 계산한다. */
 export function formatPeriodWithPayoutEn(periodStart: string, periodEnd: string, payoutDate?: string | null): string {
   const pay = payoutDate ?? payoutDateForPeriodEnd(periodEnd);
   const label = formatPeriodLabelEn(periodStart, periodEnd);

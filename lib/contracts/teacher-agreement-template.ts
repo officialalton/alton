@@ -2,7 +2,7 @@
 //   docs/contracts/teacher-california-employment-agreement-v0.2-en.md  (teachers working in California)
 //   docs/contracts/teacher-non-us-services-agreement-v0.2-en.md        (teachers working outside the United States)
 // The form is chosen from the ACTUAL work location only — never from nationality, account role or tax form.
-// Paydays (semimonthly, 5th/20th, Pacific Time), fee allocation (Company bears) and the 30-day notice are fixed in the
+// Paydays (semimonthly, 26th/10th pay deadlines, Pacific Time), fee allocation (Company bears) and the 30-day notice are fixed in the
 // source text (owner decision 2026-10-06). Other execution values (non-lesson compensation, payment details, ...) are never
 // invented here: if a required value is missing, rendering throws UnfilledContractError and nothing is sent.
 import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";

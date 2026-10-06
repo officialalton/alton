@@ -135,15 +135,61 @@ export async function deletePayoutBatch(batchId: string): Promise<DeletePayoutBa
 
 export type PayoutActionResult = { status: "ok" } | { status: "rejected"; error: string };
 
-/** 관리자만 지급 예정일을 바꾼다. 변경 전후·사유·처리자·시각은 DB가 이력으로 남긴다. */
+export type PayoutDateChangeResult =
+  | { status: "ok"; finalDate: string }
+  | { status: "needs_confirmation"; suggestedDate: string; message: string }
+  | { status: "rejected"; error: string };
+
+/**
+ * 관리자만 지급 예정일을 바꾼다(일반 변경). 사유 필수·과거 금지·법정 기한 초과 금지는 DB가 강제한다.
+ * 주말·연방 은행 휴일이면 직전 영업일을 제안하고(needs_confirmation), confirmBusinessDay=true로 다시 호출해야 적용된다.
+ * 변경 전후·사유·처리자·시각은 DB가 이력으로 남기고 선생님 알림 기록도 만든다.
+ */
 export async function setPayoutBatchScheduledDate(params: {
+  batchId: string;
+  newDate: string;
+  reason: string;
+  confirmBusinessDay?: boolean;
+}): Promise<PayoutDateChangeResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { data, error } = await admin.rpc("set_payout_batch_scheduled_date", {
+    p_batch_id: params.batchId,
+    p_new_date: params.newDate,
+    p_reason: params.reason,
+    p_actor_id: adminUserId,
+    p_confirm_business_day: params.confirmBusinessDay === true,
+  });
+  if (error) {
+    const m = /NON_BUSINESS_DAY:(\d{4}-\d{2}-\d{2}):(.*)/.exec(error.message);
+    if (m) return { status: "needs_confirmation", suggestedDate: m[1], message: m[2].trim() };
+    return { status: "rejected", error: error.message };
+  }
+  return { status: "ok", finalDate: (data as string) ?? params.newDate };
+}
+
+/** 지연된(예정일이 지난) 묶음을 오늘(LA)로 당기는 별도 경로. 실제 송금 게이트는 그대로 통과해야 한다. */
+export async function payPayoutBatchImmediately(params: { batchId: string; reason: string }): Promise<PayoutActionResult> {
+  const { adminUserId } = await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin.rpc("set_payout_batch_pay_immediately", {
+    p_batch_id: params.batchId,
+    p_reason: params.reason,
+    p_actor_id: adminUserId,
+  });
+  if (error) return { status: "rejected", error: error.message };
+  return { status: "ok" };
+}
+
+/** 법정 지급 기한을 넘기는 지연 지급 날짜. 감사 로그에 직원 경보를 남긴다. */
+export async function setPayoutBatchDelayedDate(params: {
   batchId: string;
   newDate: string;
   reason: string;
 }): Promise<PayoutActionResult> {
   const { adminUserId } = await requireAdmin();
   const admin = createAdminClient();
-  const { error } = await admin.rpc("set_payout_batch_scheduled_date", {
+  const { error } = await admin.rpc("set_payout_batch_delayed_date", {
     p_batch_id: params.batchId,
     p_new_date: params.newDate,
     p_reason: params.reason,

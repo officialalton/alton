@@ -45,7 +45,7 @@ describe("prepareTeacherAgreement", () => {
     if (!r.ok) return;
     expect(r.form).toBe("california_employment");
     expect(r.html).toContain("Pacific Time");
-    expect(r.html).toContain("20th");
+    expect(r.html).toContain("26th");
     expect(r.recipientEmail).toBe("sora@alton.education");
     expect(r.html).toContain("/sig1/");
     expect(r.html).not.toMatch(/_{3,}|\[[^\]]+\]/);

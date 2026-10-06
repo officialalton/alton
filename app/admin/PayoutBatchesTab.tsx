@@ -6,6 +6,7 @@ import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
 import { previousMonthRange } from "./payouts-data";
+import { companyDateOf, payoutDateForPeriodEnd } from "@/lib/payout/payout-schedule";
 import {
   generatePayoutBatches,
   submitPayoutBatchForReview,
@@ -16,6 +17,8 @@ import {
   deletePayoutBatch,
   closePayoutMonthNow,
   setPayoutBatchScheduledDate,
+  payPayoutBatchImmediately,
+  setPayoutBatchDelayedDate,
   setPayoutBatchAutoDispatch,
   loadPayoutSettingsAction,
   ensurePayoutBatchScheduledDate,
@@ -70,6 +73,8 @@ const AUDIT_ACTION_LABEL: Record<string, string> = {
   adjusted: "금액 조정",
   auto_dispatch_toggled: "자동 송금 설정 변경",
   scheduled_date_changed: "지급 예정일 변경",
+  pay_immediately_requested: "즉시 지급 처리(예정일을 오늘로)",
+  delayed_payment_alert: "⚠ 법정 기한 초과 지연 지급 — 직원 확인 필요",
   external_transfer_recorded: "외부 송금 완료 기록",
   dispatch_requested: "송금 요청",
   provider_pending: "금융사 처리 중",
@@ -218,6 +223,59 @@ export default function PayoutBatchesTab({
       setMessage(e instanceof Error ? e.message : "처리 실패");
       setBusyId(null);
     }
+  }
+
+  const [dateWarning, setDateWarning] = useState<Record<string, string>>({});
+
+  function todayLa(): string {
+    return companyDateOf(new Date()) ?? "";
+  }
+
+  async function handleChangeDate(b: { id: string }) {
+    const draft = dateDraft[b.id];
+    const newDate = draft?.date ?? "";
+    const reason = draft?.reason ?? "";
+    setDateWarning((p) => ({ ...p, [b.id]: "" }));
+    setBusyId(b.id);
+    try {
+      let result = await setPayoutBatchScheduledDate({ batchId: b.id, newDate, reason });
+      if (result.status === "needs_confirmation") {
+        const { message: note, suggestedDate } = result;
+        const ok = window.confirm(`${note}\n(제안: ${suggestedDate})`);
+        if (!ok) {
+          setDateWarning((p) => ({ ...p, [b.id]: `주말·휴일이라 적용하지 않았습니다. 제안 날짜: ${suggestedDate}` }));
+          setBusyId(null);
+          return;
+        }
+        result = await setPayoutBatchScheduledDate({ batchId: b.id, newDate, reason, confirmBusinessDay: true });
+      }
+      if (result.status === "rejected") {
+        setMessage(result.error);
+        setBusyId(null);
+        return;
+      }
+      if (result.status === "ok") setMessage(`지급 예정일을 ${result.finalDate}로 변경했습니다. 선생님 알림 기록이 남았습니다.`);
+      await refresh();
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "처리 실패");
+      setBusyId(null);
+    }
+  }
+
+  async function handlePayImmediately(b: { id: string }) {
+    const reason = dateDraft[b.id]?.reason ?? "";
+    if (!window.confirm("이 지연된 묶음의 지급 예정일을 오늘로 당깁니다. 실제 송금은 기존 송금 게이트를 그대로 거칩니다. 진행할까요?")) return;
+    await runBatchAction(b.id, () => payPayoutBatchImmediately({ batchId: b.id, reason }), "예정일을 오늘로 당겼습니다(즉시 지급 처리).");
+  }
+
+  async function handleDelayedDate(b: { id: string }) {
+    const draft = dateDraft[b.id];
+    if (!window.confirm("법정 지급 기한을 넘기는 지연 지급으로 기록합니다. 직원 확인 경보가 남고 선생님에게 알림 기록이 생깁니다. 진행할까요?")) return;
+    await runBatchAction(
+      b.id,
+      () => setPayoutBatchDelayedDate({ batchId: b.id, newDate: draft?.date ?? "", reason: draft?.reason ?? "" }),
+      "지연 지급 날짜로 변경했습니다(경보 기록됨)."
+    );
   }
 
   async function handleDelete(id: string) {
@@ -401,11 +459,11 @@ export default function PayoutBatchesTab({
           {autoDispatchOn ? "끄기" : "켜기"}
         </button>
         <span className="text-[11px] text-grey-400">
-          매월 5일·20일(주말·미국 연방 은행 휴일이면 직전 영업일, America/Los_Angeles 기준)에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
+          매월 10일·26일(주말·미국 연방 은행 휴일이면 직전 영업일, America/Los_Angeles 기준)에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
         </span>
       </div>
       <p className="text-[11.5px] text-grey-500 mb-3">
-        정상 경로는 <b>매월 1일·16일(America/Los_Angeles 기준) 자동 마감</b>입니다(크론, 1~15일분은 20일 · 16일~말일분은 다음 달 5일 지급). 위 <b>정산 마감 실행</b>은 같은 자동 마감을
+        정상 경로는 <b>매월 1일·16일(America/Los_Angeles 기준) 자동 마감</b>입니다(크론, 1~15일분은 26일까지 · 16일~말일분은 다음 달 10일까지 지급). 위 <b>정산 마감 실행</b>은 같은 자동 마감을
         수동으로 한 번 더 돌리는 버튼이라 여러 번 눌러도 같은 항목이 두 번 묶이지 않고, 이미 만들어진
         묶음에 새 항목만 더합니다. <b>Batch 생성(구경로)</b>은 이전 방식으로, 열린 묶음을 재사용하지
         않아 같은 기간에 묶음이 또 생길 수 있으니 특별한 경우에만 쓰세요.
@@ -641,23 +699,38 @@ export default function PayoutBatchesTab({
                             <button
                               disabled={busyId === b.id}
                               data-testid={`change-date-${b.id}`}
-                              onClick={() =>
-                                runBatchAction(
-                                  b.id,
-                                  () =>
-                                    setPayoutBatchScheduledDate({
-                                      batchId: b.id,
-                                      newDate: dateDraft[b.id]?.date ?? "",
-                                      reason: dateDraft[b.id]?.reason ?? "",
-                                    }),
-                                  "지급 예정일을 변경했습니다."
-                                )
-                              }
+                              onClick={() => void handleChangeDate(b)}
                               className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 disabled:opacity-50"
                             >
                               예정일 변경
                             </button>
                           </div>
+                          <p className="text-[11px] text-grey-400" data-testid={`date-rules-${b.id}`}>
+                            변경 사유는 필수이며 과거 날짜·법정 기한({payoutDateForPeriodEnd(b.periodEnd) ?? "-"}) 초과 날짜는 일반 변경으로 처리되지 않습니다.
+                            주말·미국 연방 은행 휴일을 고르면 직전 영업일을 제안하고 확인을 받습니다. 오늘 날짜로 잡으면 결제 업체 마감 시간 때문에 입금이 더 늦어질 수 있습니다.
+                            표시 날짜는 <b>송금 요청일</b>이며, 선생님 계좌 <b>입금일</b>은 은행·송금 업체 처리에 따라 달라질 수 있습니다.
+                          </p>
+                          {dateWarning[b.id] && (
+                            <p className="text-[11.5px] font-bold text-red" data-testid={`date-warning-${b.id}`}>{dateWarning[b.id]}</p>
+                          )}
+                          {b.scheduledPayoutDate && b.scheduledPayoutDate < todayLa() && (
+                            <button
+                              disabled={busyId === b.id}
+                              data-testid={`pay-immediately-${b.id}`}
+                              onClick={() => void handlePayImmediately(b)}
+                              className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red text-red disabled:opacity-50"
+                            >
+                              즉시 지급 처리(지연된 묶음)
+                            </button>
+                          )}
+                          <button
+                            disabled={busyId === b.id}
+                            data-testid={`delayed-payment-${b.id}`}
+                            onClick={() => void handleDelayedDate(b)}
+                            className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-grey-500 disabled:opacity-50"
+                          >
+                            지연 지급 처리(법정 기한 초과)
+                          </button>
                           <button
                             disabled={busyId === b.id}
                             data-testid={`toggle-batch-auto-${b.id}`}

@@ -128,7 +128,7 @@ export default function SettlementPanel() {
       </div>
 
       <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Payout History</div>
-      <p className="text-[12px] text-grey-500 mb-2">Payouts are made twice a month: the 1st–15th is paid on the 20th, and the 16th–end of month on the 5th of the next month (Pacific Time).</p>
+      <p className="text-[12px] text-grey-500 mb-2">Payouts are made twice a month: the 1st–15th is paid no later than the 26th, and the 16th–end of month no later than the 10th of the next month (Pacific Time).</p>
       {periods === null ? (
         <p className="text-[13px] text-grey-500">Loading…</p>
       ) : periods.length === 0 ? (

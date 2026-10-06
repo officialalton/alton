@@ -33,8 +33,8 @@ describe("teacher agreement rendering", () => {
     expect(html).toContain("Teacher Employment Agreement");
     expect(html).toContain("USD $50.00");
     expect(html).toContain("Pacific Time (America/Los_Angeles)");
-    expect(html).toContain("paid on the 20th of the same month");
-    expect(html).toContain("5th of the following month");
+    expect(html).toContain("paid no later than the 26th of the same month");
+    expect(html).toContain("10th of the following month");
     expect(html).toContain("payment is made on the preceding business day");
     expect(html).toContain("/sig1/");
     for (const p of ["video recording", "audio recording", "text transcript", "AI-assisted preparation"]) expect(html).toContain(p);
@@ -46,7 +46,7 @@ describe("teacher agreement rendering", () => {
     expect(html).toContain("Termination notice period: 30 days");
     expect(html).toContain("Borne by the Company");
     expect(html).toContain("payment is made on the preceding business day");
-    expect(html).toContain("paid on the 20th of the same month");
+    expect(html).toContain("paid no later than the 26th of the same month");
     expect(html).not.toMatch(/_{3,}|\[[^\]]+\]|draft/i);
   });
   it("never invents unresolved commercial values", () => {

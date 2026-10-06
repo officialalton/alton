@@ -14,23 +14,23 @@ import {
   previousPayoutPeriod,
 } from "./payout-schedule";
 
-// 월 2회 정산(2026-10-06): 1~15일분 → 같은 달 20일, 16일~말일분 → 다음 달 5일. 기준은 회사 시간대 America/Los_Angeles.
+// 월 2회 정산(2026-10-06): 1~15일분 → 같은 달 26일까지, 16일~말일분 → 다음 달 10일까지. 기준은 회사 시간대 America/Los_Angeles.
 
 describe("payoutPeriodOfDate", () => {
   it("경계: 1일·15일은 전반기, 16일은 후반기", () => {
-    expect(payoutPeriodOfDate("2026-09-01")).toMatchObject({ periodKey: "2026-09-H1", periodStart: "2026-09-01", periodEnd: "2026-09-15", nominalPayoutDate: "2026-09-20", payoutDate: "2026-09-18" });
+    expect(payoutPeriodOfDate("2026-09-01")).toMatchObject({ periodKey: "2026-09-H1", periodStart: "2026-09-01", periodEnd: "2026-09-15", nominalPayoutDate: "2026-09-26", payoutDate: "2026-09-25" });
     expect(payoutPeriodOfDate("2026-09-15")?.periodKey).toBe("2026-09-H1");
-    expect(payoutPeriodOfDate("2026-09-16")).toMatchObject({ periodKey: "2026-09-H2", periodStart: "2026-09-16", periodEnd: "2026-09-30", payoutDate: "2026-10-05" });
+    expect(payoutPeriodOfDate("2026-09-16")).toMatchObject({ periodKey: "2026-09-H2", periodStart: "2026-09-16", periodEnd: "2026-09-30", payoutDate: "2026-10-09" });
   });
 
   it("월말: 30일·31일·2월(평년·윤년)", () => {
-    expect(payoutPeriodOfDate("2026-10-31")).toMatchObject({ periodEnd: "2026-10-31", payoutDate: "2026-11-05" });
-    expect(payoutPeriodOfDate("2026-02-28")).toMatchObject({ periodEnd: "2026-02-28", payoutDate: "2026-03-05" });
-    expect(payoutPeriodOfDate("2028-02-29")).toMatchObject({ periodStart: "2028-02-16", periodEnd: "2028-02-29", nominalPayoutDate: "2028-03-05", payoutDate: "2028-03-03" });
+    expect(payoutPeriodOfDate("2026-10-31")).toMatchObject({ periodEnd: "2026-10-31", payoutDate: "2026-11-10" });
+    expect(payoutPeriodOfDate("2026-02-28")).toMatchObject({ periodEnd: "2026-02-28", payoutDate: "2026-03-10" });
+    expect(payoutPeriodOfDate("2028-02-29")).toMatchObject({ periodStart: "2028-02-16", periodEnd: "2028-02-29", nominalPayoutDate: "2028-03-10", payoutDate: "2028-03-10" });
   });
 
   it("12월 후반기는 다음 해 1월 5일에 지급한다", () => {
-    expect(payoutPeriodOfDate("2026-12-20")).toMatchObject({ periodEnd: "2026-12-31", payoutDate: "2027-01-05" });
+    expect(payoutPeriodOfDate("2026-12-20")).toMatchObject({ periodEnd: "2026-12-31", nominalPayoutDate: "2027-01-10", payoutDate: "2027-01-08" });
   });
 
   it("ISO 시각은 LA 달력 날짜로 환산한다(UTC 아님)", () => {
@@ -46,7 +46,7 @@ describe("payoutPeriodOfDate", () => {
   });
 
   it("겨울(PST, UTC-8) 월말 경계: LA 12월 31일 23:59는 12월 후반기 → 1월 5일 지급", () => {
-    expect(payoutPeriodOfDate("2027-01-01T07:59:00.000Z")).toMatchObject({ periodKey: "2026-12-H2", payoutDate: "2027-01-05" });
+    expect(payoutPeriodOfDate("2027-01-01T07:59:00.000Z")).toMatchObject({ periodKey: "2026-12-H2", payoutDate: "2027-01-08" });
     expect(payoutPeriodOfDate("2027-01-01T08:00:00.000Z")?.periodKey).toBe("2027-01-H1");
   });
 
@@ -67,10 +67,10 @@ describe("payoutPeriodOfDate", () => {
 });
 
 describe("payoutDateForPeriodEnd", () => {
-  it("15일 이하 종료는 같은 달 20일, 그 외(말일)는 다음 달 5일 — 기존 월 단위 묶음도 5일", () => {
-    expect(payoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-18"); // 20일이 일요일 → 금요일
-    expect(payoutDateForPeriodEnd("2026-09-30")).toBe("2026-10-05");
-    expect(payoutDateForPeriodEnd("2026-12-31")).toBe("2027-01-05");
+  it("15일 이하 종료는 같은 달 26일, 그 외(말일)는 다음 달 10일 — 기존 월 단위 묶음도 10일", () => {
+    expect(payoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-25"); // 26일이 토요일 → 금요일
+    expect(payoutDateForPeriodEnd("2026-09-30")).toBe("2026-10-09");
+    expect(payoutDateForPeriodEnd("2026-12-31")).toBe("2027-01-08");
   });
 });
 
@@ -107,36 +107,36 @@ describe("cron day gates (LA)", () => {
     expect(isPeriodCloseDay(new Date("2026-10-18T17:00:00.000Z"))).toBe(true);
     expect(isPeriodCloseDay(new Date("2026-10-04T17:00:00.000Z"))).toBe(false);
     expect(isPeriodCloseDay(new Date("2026-10-19T17:00:00.000Z"))).toBe(false);
-    expect(isPayoutDay(new Date("2026-11-05T17:00:00.000Z"))).toBe(true); // PST 09:00 (목)
-    expect(isPayoutDay(new Date("2026-10-20T17:00:00.000Z"))).toBe(true); // PDT 10:00
-    expect(isPayoutDay(new Date("2026-10-21T17:00:00.000Z"))).toBe(false);
-    // UTC 날짜가 5일이어도 LA가 4일이면 지급일이 아니다.
-    expect(isPayoutDay(new Date("2026-10-05T03:00:00.000Z"))).toBe(false);
+    expect(isPayoutDay(new Date("2026-11-10T17:00:00.000Z"))).toBe(true); // PST 09:00 (화)
+    expect(isPayoutDay(new Date("2026-10-26T17:00:00.000Z"))).toBe(true); // PDT 10:00 (월)
+    expect(isPayoutDay(new Date("2026-10-27T17:00:00.000Z"))).toBe(false);
+    // UTC 날짜가 27일이어도 LA가 26일 20:00이면 아직 지급일이다.
+    expect(isPayoutDay(new Date("2026-10-27T03:00:00.000Z"))).toBe(true);
   });
 });
 
 describe("periodForPayoutDate", () => {
-  it("20일은 같은 달 1~15일분, 5일은 지난달 16일~말일분", () => {
-    expect(periodForPayoutDate("2026-10-20")).toEqual({ periodStart: "2026-10-01", periodEnd: "2026-10-15" });
-    expect(periodForPayoutDate("2026-03-05")).toEqual({ periodStart: "2026-02-16", periodEnd: "2026-02-28" });
-    expect(periodForPayoutDate("2027-01-05")).toEqual({ periodStart: "2026-12-16", periodEnd: "2026-12-31" });
-    expect(periodForPayoutDate("2026-10-10")).toBeNull();
+  it("26일은 같은 달 1~15일분, 10일은 지난달 16일~말일분", () => {
+    expect(periodForPayoutDate("2026-10-26")).toEqual({ periodStart: "2026-10-01", periodEnd: "2026-10-15" });
+    expect(periodForPayoutDate("2026-03-10")).toEqual({ periodStart: "2026-02-16", periodEnd: "2026-02-28" });
+    expect(periodForPayoutDate("2027-01-10")).toEqual({ periodStart: "2026-12-16", periodEnd: "2026-12-31" });
+    expect(periodForPayoutDate("2026-10-20")).toBeNull();
   });
 });
 
 describe("period labels", () => {
-  it("표준 반월 기간과 지급일을 'Oct 1–15, 2026 → paid Oct 20'로 표기한다", async () => {
+  it("표준 반월 기간과 지급일을 'Oct 1–15, 2026 → paid Oct 26'로 표기한다", async () => {
     const { formatPeriodWithPayoutEn, formatPeriodLabelEn } = await import("./payout-schedule");
-    expect(formatPeriodWithPayoutEn("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 20");
-    expect(formatPeriodWithPayoutEn("2026-10-16", "2026-10-31")).toBe("Oct 16–31, 2026 → paid Nov 5");
-    expect(formatPeriodWithPayoutEn("2026-12-16", "2026-12-31")).toBe("Dec 16–31, 2026 → paid Jan 5");
+    expect(formatPeriodWithPayoutEn("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 26");
+    expect(formatPeriodWithPayoutEn("2026-10-16", "2026-10-31")).toBe("Oct 16–31, 2026 → paid Nov 10");
+    expect(formatPeriodWithPayoutEn("2026-12-16", "2026-12-31")).toBe("Dec 16–31, 2026 → paid Jan 8 (Fri)");
     expect(formatPeriodLabelEn("2026-10-20", "2026-11-03")).toBe("Oct 20 – Nov 3, 2026");
   });
 });
 
 describe("지급일 보정 — 주말·미국 연방 은행 휴일이면 직전 영업일", () => {
   it("평일이면 그대로", () => {
-    expect(shiftToBusinessDay("2026-10-20")).toBe("2026-10-20"); // 화
+    expect(shiftToBusinessDay("2026-10-26")).toBe("2026-10-26"); // 월
   });
   it("토요일·일요일은 금요일로", () => {
     expect(shiftToBusinessDay("2026-09-05")).toBe("2026-09-04"); // 토
@@ -156,30 +156,30 @@ describe("지급일 보정 — 주말·미국 연방 은행 휴일이면 직전 
     expect(shiftToBusinessDay("2026-11-20")).toBe("2026-11-20");
     expect(shiftToBusinessDay("2026-11-26")).toBe("2026-11-25");
   });
-  it("1월 1일(휴일)과 1월 5일(지급일) 구분 — 12/16~12/31분은 1/5(화) 그대로", () => {
+  it("1월 1일(휴일)과 1월 10일(지급 기한) 구분 — 12/16~12/31분은 1/10(일) → 1/8(금)", () => {
     expect(shiftToBusinessDay("2027-01-01")).toBe("2026-12-31");
-    expect(payoutDateForPeriodEnd("2026-12-31")).toBe("2027-01-05");
-    // 2028-01-05는 수요일, 2028-01-01(토)은 표에 없으므로(토요일 휴일 비관측) 영향 없음.
-    expect(payoutDateForPeriodEnd("2027-12-31")).toBe("2028-01-05");
+    expect(payoutDateForPeriodEnd("2026-12-31")).toBe("2027-01-08");
+    // 2028-01-10은 월요일이라 그대로, 2028-01-01(토)은 표에 없으므로(토요일 휴일 비관측) 영향 없음.
+    expect(payoutDateForPeriodEnd("2027-12-31")).toBe("2028-01-10");
   });
-  it("12월 말 → 1월 경계: 연말 휴일(12/25)과 일요일 12/20", () => {
+  it("12월 말 → 1월 경계: 연말 휴일(12/25)과 토요일 12/26", () => {
     expect(shiftToBusinessDay("2026-12-25")).toBe("2026-12-24");
-    expect(payoutDateForPeriodEnd("2026-12-15")).toBe("2026-12-18"); // 12/20 일요일
+    expect(payoutDateForPeriodEnd("2026-12-15")).toBe("2026-12-24"); // 12/26 토 → 12/25 휴일 → 12/24
   });
   it("명목 날짜는 보정하지 않는다", () => {
-    expect(nominalPayoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-20");
-    expect(payoutPeriodOfDate("2026-09-03")).toMatchObject({ nominalPayoutDate: "2026-09-20", payoutDate: "2026-09-18" });
+    expect(nominalPayoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-26");
+    expect(payoutPeriodOfDate("2026-09-03")).toMatchObject({ nominalPayoutDate: "2026-09-26", payoutDate: "2026-09-25" });
   });
   it("라벨: 당겨진 경우 요일 표기", () => {
-    expect(fmtPeriod("2026-09-01", "2026-09-15")).toBe("Sep 1–15, 2026 → paid Sep 18 (Fri)");
-    expect(fmtPeriod("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 20");
+    expect(fmtPeriod("2026-09-01", "2026-09-15")).toBe("Sep 1–15, 2026 → paid Sep 25 (Fri)");
+    expect(fmtPeriod("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 26");
   });
-  it("크론 게이트는 보정된 날에 켜진다(토요일 9/5가 아니라 금요일 9/4)", () => {
-    expect(isPayoutDay(new Date("2026-09-04T17:00:00.000Z"))).toBe(true);
-    expect(isPayoutDay(new Date("2026-09-05T17:00:00.000Z"))).toBe(false);
-    expect(isPayoutDay(new Date("2026-09-18T17:00:00.000Z"))).toBe(true);
-    expect(isPayoutDay(new Date("2026-09-20T17:00:00.000Z"))).toBe(false);
-    expect(isPayoutDay(new Date("2026-10-20T17:00:00.000Z"))).toBe(true);
+  it("크론 게이트는 보정된 날에 켜진다(토요일 9/26이 아니라 금요일 9/25)", () => {
+    expect(isPayoutDay(new Date("2026-09-25T17:00:00.000Z"))).toBe(true);
+    expect(isPayoutDay(new Date("2026-09-26T17:00:00.000Z"))).toBe(false);
+    expect(isPayoutDay(new Date("2026-10-09T17:00:00.000Z"))).toBe(true); // 10/10 토 → 10/9 금
+    expect(isPayoutDay(new Date("2026-10-10T17:00:00.000Z"))).toBe(false);
+    expect(isPayoutDay(new Date("2026-10-26T17:00:00.000Z"))).toBe(true);
   });
   it("휴일 표는 2026–2030 전 연도를 덮고 모두 평일이다", () => {
     expect(US_BANK_HOLIDAYS_LAST_YEAR).toBe(2030);

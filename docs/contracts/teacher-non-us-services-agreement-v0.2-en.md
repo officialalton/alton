@@ -28,7 +28,7 @@ For an accepted regular 120-minute lesson, a student cancellation less than 24 h
 
 ## 5. Statements and Payment
 
-Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid on the 20th of the same month; services performed from the 16th through the last day of a month are paid on the 5th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim.
+Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; services performed from the 16th through the last day of a month are paid no later than the 10th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim.
 
 The statement identifies assignments, recognized minutes, applicable rates, separately payable services, and lawful adjustments. The Company bears all bank, transfer, intermediary, and currency-conversion fees for payments to the Teacher, so the Teacher receives the full statement amount. The payment method is stated in Schedule A. No undisclosed fee or student refund is automatically deducted from earned compensation. Disputed amounts are identified and discussed promptly; undisputed amounts remain payable on schedule.
 
@@ -98,7 +98,7 @@ This Agreement, completed schedules, and accepted written assignments govern the
 - Lesson fee: USD $50.00 per 60 recognized minutes
 - Nonlesson services, scope, and compensation: ____________________
 - Payment method and recipient details: ____________________
-- Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid on the 20th of the same month, and the 16th–end of month is paid on the 5th of the following month
+- Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid no later than the 26th of the same month, and the 16th–end of month is paid no later than the 10th of the following month
 - Transfer, intermediary, and conversion fees: Borne by the Company
 - Termination notice period: 30 days
 

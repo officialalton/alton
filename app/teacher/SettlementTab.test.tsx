@@ -57,7 +57,7 @@ const SETTLEMENT = {
       periodKey: "2026-09-H1",
       periodStart: "2026-09-01",
       periodEnd: "2026-09-15",
-      nominalPayoutDate: "2026-09-20",
+      nominalPayoutDate: "2026-09-25",
       currency: "KRW",
       status: "scheduled" as const,
       autoCalculatedAmountMinor: 160000,
@@ -98,7 +98,7 @@ const SETTLEMENT = {
   approvedTotalsByCurrency: { KRW: 80000 },
   paidTotalsByCurrency: { KRW: 200000 },
   nextPayoutMonth: "2026-09",
-  nextPayoutDate: "2026-09-20",
+  nextPayoutDate: "2026-09-25",
   refreshedAt: "2026-09-12T03:00:00.000Z",
 };
 
@@ -137,9 +137,9 @@ describe("SettlementTab — 예정액 요약", () => {
     expect(screen.queryByText("Confirmed (awaiting payout)")).not.toBeInTheDocument();
   });
 
-  it("매월 10일 전월분 지급 안내와 갱신 시각·변동 안내를 보여준다", async () => {
+  it("반월 지급 기한 안내와 갱신 시각·변동 안내를 보여준다", async () => {
     render(<SettlementTab />);
-    expect(await screen.findByText(/Payouts are made twice a month, on the 5th and the 20th/)).toBeInTheDocument();
+    expect(await screen.findByText(/Payouts are made twice a month, no later than the 26th and the 10th/)).toBeInTheDocument();
     // 2026-09-12: "승인 시점에 정해집니다" 문구는 제품 오너 요청으로 제거했다.
     expect(screen.queryByText(/is set at the time of transfer approval/)).not.toBeInTheDocument();
     expect(screen.getByText(/Last updated:/)).toBeInTheDocument();
