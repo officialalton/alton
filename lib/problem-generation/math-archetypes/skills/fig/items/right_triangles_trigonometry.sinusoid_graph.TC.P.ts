@@ -54,7 +54,7 @@ export const ITEM = defineItem({
       },
     },
     {
-      op: "compare_scenarios", structure: "두 시각의 값을 각각 구해 차를 구함", extra: "모형을 세워 두 시각을 따로 대입해 빼야 함(최댓값과 최솟값의 차로 단순화하는 함정) — medium 은 주기",
+      op: "compare_scenarios", structure: "두 시각의 값을 각각 구한 뒤 두 값의 차를 계산해 답을 구함", extra: "모형을 세워 두 시각을 따로 대입해 빼야 함(최댓값과 최솟값의 차로 단순화하는 함정) — medium 은 주기",
       concepts: ["삼각함수 그래프", "두 시각 비교", "차"],
       gen(rng) {
         const s = makeSinScene(rng, { T: [12, 24] }); const offs = [{ o: 0, c: 1 }, { o: s.T / 6, c: 0.5 }, { o: s.T / 4, c: 0 }, { o: s.T / 3, c: -0.5 }, { o: s.T / 2, c: -1 }]; const [i, j] = (() => { const a = rng.int(0, 3), b = rng.int(a + 1, 4); return [a, b]; })();

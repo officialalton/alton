@@ -85,7 +85,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "vertical_numeric", structure: "한 교점에서 마주 보는 두 각 중 하나가 숫자, 다른 하나가 x° 일 때 맞꼭지각이 같음을 써서 x 를 구함", extra: "easy: 맞꼭지각이 같다", concepts: ["맞꼭지각"],
+      lv: "easy", name: "vertical_numeric", structure: "한 교점에서 마주 보는 두 각 중 하나가 숫자, 다른 하나가 x° 일 때 맞꼭지각이 같음을 써서 x 를 구함", extra: "easy: 맞꼭지각이 같다", concepts: ["맞꼭지각", "보각과 구별"],
       gen(rng) {
         const sc = ptScene(rng, 1); const line = rng.pick([0, 1] as const); const { r1, r2 } = pair(rng, "vertical"); const m = measure(sc, 0, r1);
         const fig = ptFig(sc, [{ line, ti: 0, region: r1, label: numLabel(m) }, { line, ti: 0, region: r2, label: "x°" }]);
