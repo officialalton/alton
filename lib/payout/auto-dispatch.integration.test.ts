@@ -514,3 +514,27 @@ describe("지급 예정일 변경 규칙(관리자) — 사유·과거·기한·
     expect(() => callChange(batchId, nextBusinessDayOnOrAfter(laToday()), "사유")).toThrow(/변경할 수 없습니다/);
   });
 });
+
+describe("늦은 승인 → 선생님 지연 알림(멱등)", () => {
+  it("기한이 지난 뒤 승인하면 영문 지연 알림이 한 건 생기고, 다시 계산해도 늘지 않는다", () => {
+    const { teacher, batchId } = createApprovedBatch("late-notice", "2026-05-10"); // 기한 2026-06-10은 이미 지났다
+    const count = () =>
+      psql(`select count(*) from payout_teacher_notices where teacher_id = '${teacher}' and batch_id = '${batchId}' and kind = 'payout_delayed_late';`);
+    expect(count()).toBe("1");
+    const msg = psql(`select message from payout_teacher_notices where teacher_id = '${teacher}' and kind = 'payout_delayed_late';`);
+    expect(msg).toMatch(/is delayed\. It is now expected to arrive by [A-Z][a-z]{2} \d{1,2}, \d{4} \(original deadline: Jun 10, 2026\)\./);
+    // 같은 묶음을 다시 평가(날짜 변경·재승인 경로)해도 알림은 한 건이다.
+    psql(`select payout_refresh_deadline_risk('${batchId}'::uuid);`);
+    psql(`select payout_refresh_deadline_risk('${batchId}'::uuid);`);
+    expect(count()).toBe("1");
+  });
+
+  it("일찍 승인한 묶음에는 지연 알림이 없다", () => {
+    const { teacher } = createApprovedBatch("no-late-notice", laToday());
+    expect(psql(`select count(*) from payout_teacher_notices where teacher_id = '${teacher}' and kind = 'payout_delayed_late';`)).toBe("0");
+  });
+
+  it("예상 입금일은 가장 이른 송금 요청일 + N영업일이고 기한보다 빠르지 않다", () => {
+    expect(psql(`select payout_business_day_plus('2026-10-26', 3), payout_business_day_plus('2026-12-23', 3);`)).toBe("2026-10-29|2026-12-29");
+  });
+});

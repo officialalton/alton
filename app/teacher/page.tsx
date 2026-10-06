@@ -63,6 +63,7 @@ export default async function TeacherHomePage({
     { data: teacherProfile },
     materialsLibraryTree,
     vocabOverview,
+    { data: payoutAccountRow },
   ] = await Promise.all([
     dashboardPromise,
     loadRoster(supabase, user.id),
@@ -74,6 +75,8 @@ export default async function TeacherHomePage({
     teacherProfilePromise,
     loadTeacherMaterialsLibraryTree(supabase, user.id),
     loadTeacherVocabOverview(supabase, user.id),
+    // 수취 계좌 등록 여부만(번호는 읽지 않는다). 없으면 포털 상단에 등록 단계를 안내한다.
+    supabase.from("teacher_payout_accounts").select("id").eq("teacher_id", user.id).maybeSingle(),
   ]);
   const availabilityTimezone = resolveUserTimezone({
     profileTimezone: (teacherProfile?.timezone as string) ?? null,
@@ -104,6 +107,7 @@ export default async function TeacherHomePage({
       availabilityExceptions={availabilityExceptions}
       availabilityTimezone={availabilityTimezone}
       timezoneSaved={Boolean(teacherProfile?.timezone)}
+      payoutAccountMissing={!payoutAccountRow}
       lessonSchedule={lessonSchedule}
       materialsLibraryTree={materialsLibraryTree}
       vocabOverview={vocabOverview}

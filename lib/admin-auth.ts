@@ -136,3 +136,22 @@ export async function requireAdminCapabilityOrAssignedConsultant(capability: str
   if (!hasCapability) throw new Error("이 작업을 수행할 권한이 없습니다.");
   return { supabase, actorUserId: user.id };
 }
+
+// 2026-10-06(오너 확정) — 수취 계좌 전체 번호를 다루는 작업(대리 입력·수정, 전체 번호 보기)은 일반 관리자 전원이 아니라
+// **마스터 관리자 또는 정산권한 보유 관리자**만 한다. DB 함수(payout_account_staff_allowed 등)가 같은 기준으로 최종 방어한다.
+// 교사·컨설턴트 계좌가 같은 기준을 쓰도록 이 헬퍼를 공유한다.
+export async function requirePayoutAccountStaff() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("로그인이 필요합니다.");
+
+  const { data: profile } = await supabase.from("profiles").select("role, admin_tier").eq("id", user.id).single();
+  if (profile?.role !== "admin") throw new Error("이 작업을 수행할 권한이 없습니다.");
+  if (profile.admin_tier !== "master") {
+    const { data: hasCapability } = await supabase.rpc("current_user_has_capability", { p_capability: "정산권한" });
+    if (!hasCapability) throw new Error("이 작업을 수행할 권한이 없습니다(정산권한 또는 마스터 관리자 필요).");
+  }
+  return { supabase, actorUserId: user.id };
+}

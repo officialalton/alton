@@ -9,12 +9,16 @@ import {
   createConsultantPayoutPeriodAction,
   updateConsultantPayoutPeriodAmountAction,
   updateConsultantPayoutPeriodStatusAction,
+  revealConsultantPayoutAccountAction,
+  saveConsultantPayoutAccountByAdminAction,
   type ConsultantPayoutAccountAdminView,
   type ConsultantPayoutPeriodAdmin,
   type ConsultantPayoutPeriodEvent,
 } from "./consultant-settlement-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
+import PayoutAccountAdminActions from "./PayoutAccountAdminActions";
+import { getPayoutAccountStaffPermissionAction } from "./teacher-payout-accounts-actions";
 import { COMPANY_TIME_ZONE, payoutDateForPeriodEnd, previousPayoutPeriod } from "@/lib/payout/payout-schedule";
 
 // 2026-09-29 — Consultants 탭에 있던 `정산` 섹션을 Payouts 탭의 `컨설턴트 정산`
@@ -31,6 +35,7 @@ export default function ConsultantSettlementPanel() {
   const [account, setAccount] = useState<ConsultantPayoutAccountAdminView>(null);
   const [periods, setPeriods] = useState<ConsultantPayoutPeriodAdmin[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [canManageAccount, setCanManageAccount] = useState(false);
   const [busy, setBusy] = useState(false);
   const [newStart, setNewStart] = useState("");
   const [newEnd, setNewEnd] = useState("");
@@ -41,6 +46,7 @@ export default function ConsultantSettlementPanel() {
   const [eventsByPeriod, setEventsByPeriod] = useState<Record<string, ConsultantPayoutPeriodEvent[]>>({});
 
   useEffect(() => {
+    void getPayoutAccountStaffPermissionAction().then((p) => setCanManageAccount(p.canManage)).catch(() => setCanManageAccount(false));
     listConsultantsAction()
       .then(setConsultants)
       .catch((e) => setError(e instanceof Error ? e.message : "컨설턴트 목록을 불러오지 못했습니다."));
@@ -146,12 +152,23 @@ export default function ConsultantSettlementPanel() {
           <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-4">
             <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-1">수취 계좌</div>
             {account ? (
-              <div className="text-[13px] text-ink">
-                {account.bankName} {account.accountNumberMasked} · 예금주 {account.accountHolderName}
+              <div className="text-[13px] text-ink" data-testid="consultant-account-masked">
+                {account.bankName} {account.accountNumberMasked} · 예금주 {account.accountHolderName} · {account.currency}
+                {account.enteredByAdmin && <span className="ml-1.5 text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">관리자 입력</span>}
               </div>
             ) : (
-              <div className="text-[13px] text-grey-500">등록된 계좌가 없습니다.</div>
+              <div className="text-[13px] text-amber-700" data-testid="consultant-account-missing">미등록 — 컨설턴트 포털에 계좌 등록 단계가 표시됩니다.</div>
             )}
+            <p className="text-[11px] text-grey-400 mt-1">결제 수단은 은행 송금뿐입니다. 컨설턴트는 최초 1회만 등록하고, 이후 변경은 마스터·정산권한 관리자가 대신 입력합니다.</p>
+            <PayoutAccountAdminActions
+              idKey={`consultant-${selectedConsultantId}`}
+              registered={Boolean(account)}
+              initial={{ accountHolderName: account?.accountHolderName ?? "", bankName: account?.bankName ?? "", currency: account?.currency ?? "KRW", country: account?.country ?? null }}
+              canManage={canManageAccount}
+              onReveal={(reason) => revealConsultantPayoutAccountAction(selectedConsultantId, reason)}
+              onSave={(input) => saveConsultantPayoutAccountByAdminAction(selectedConsultantId, input)}
+              onSaved={() => reload(selectedConsultantId)}
+            />
           </div>
 
           <p className="text-[11.5px] text-grey-500 mb-2">정산 기간은 월 2회(1~15일 → 같은 달 26일까지 지급, 16일~말일 → 다음 달 10일까지 지급)이며 날짜 기준은 {COMPANY_TIME_ZONE}입니다. 금액은 지금처럼 수기 입력합니다.</p>
