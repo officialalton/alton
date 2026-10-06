@@ -6,7 +6,7 @@ import { pureAxes } from "../pure-kit";
 import { C_LEADS, SPR_NO_PLANE_CHOICE, cInst, oneCond, poolChoices, twoCond } from "../cplane-kit";
 
 const R = 8;
-const HS = [-5, -3, -2, 2, 3, 5], KS = [-5, -3, -2, 2, 3, 5], MS = [-4, -2, 2, 4];
+const HS = [-5, -4, -2, 2, 4, 5], KS = [-5, -4, -2, 2, 4, 5], MS = [-4, -2, 2, 4]; // R=8 의 눈금 숫자(±3, ±6)와 점근선이 겹치지 않는 값
 type S = { h: number; k: number; m: number };
 const fig = (s: S) => ({ type: "plane" as const, axes: pureAxes(R), objects: [{ id: "F1", kind: "function" as const, fn: "rational" as const, params: [s.k, s.m - s.k * s.h, 1, -s.h] }] });
 const POOL: S[] = HS.flatMap((h) => KS.flatMap((k) => MS.map((m) => ({ h, k, m }))));

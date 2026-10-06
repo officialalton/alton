@@ -1,0 +1,48 @@
+{
+ "itemId": "systems_linear.word_system.LN.C",
+ "generatedAt": "2026-10-06T11:39:14.150Z",
+ "codeHash": "775d38574b83517bf210e9fada9951dc4e4fc9b30f1d8df21ace23b63d8d1ab5",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/systems_linear.word_system.LN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "systems_linear.word_system.LN.C.png",
+   "mobileFile": "systems_linear.word_system.LN.C.m375.png",
+   "archetypeId": "wscg.word_system.LN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "A graphing program draws candidate graphs for a worksheet. Two lines model two phone plans, where $x$ is the number of gigabytes and $y$ is the monthly bill in dollars. Choices A through D, shown below, are graphs of two lines in the same $xy$-plane.",
+   "question": "Which graph shown could represent two lines in which Plan A has a monthly fee of 3 dollars and charges 2 dollars per gigabyte, and Plan B has a monthly fee of 4 dollars and charges 1 dollar per gigabyte?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) Plan A: y = 2x + 3, Plan B: y = 1x + 4. (2) 각 그래프의 두 직선의 기울기와 y 절편을 읽는다. (3) 조건 하나라도 어긋난 그래프를 지운다. (4) 남은 그래프가 정답이다. (5) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

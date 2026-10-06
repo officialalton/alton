@@ -1,0 +1,44 @@
+{
+ "itemId": "nonlinear_functions.context_graph_features.FN.P",
+ "generatedAt": "2026-10-06T11:39:14.128Z",
+ "codeHash": "14937d6130bf7f91c5278fa4eb81a35b7e7c23639cf58eb984ae7512255d83d3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.context_graph_features.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.context_graph_features.FN.P.png",
+   "mobileFile": "nonlinear_functions.context_graph_features.FN.P.m375.png",
+   "archetypeId": "cgfp.context_graph_features.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "A model for the height of a soccer ball is graphed in the $xy$-plane shown, where $x$ is the number of seconds after it is kicked and $y$ is the height in meters. The graph passes through the three marked points.",
+   "question": "At how many seconds after it is kicked does the model reach its greatest height?",
+   "options": [
+    "3",
+    "4",
+    "12",
+    "-3"
+   ],
+   "correctIndex": 0,
+   "answer": "3",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (1, 8), (4, 11), (6, 3). (2) y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다. (3) 연립해 풀면 a = -1, b = 6, c = 3 이다. (4) 식: y = -1x² + 6x + 3 이다. (5) 꼭짓점 x = -b/(2a) = 3 이다. (6) 최고 높이의 시각은 3 이다. 따라서 정답은 3이다.",
+   "structuralIssues": []
+  }
+ ]
+}

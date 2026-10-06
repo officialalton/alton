@@ -1,0 +1,45 @@
+{
+ "itemId": "two_variable_data.model_choice_linear_quadratic_exponential.FN.P",
+ "generatedAt": "2026-10-06T11:39:14.131Z",
+ "codeHash": "1d0515cd4b750ba11c9d46cba5cf18c5c89dc0dd1af6719b03d2bba49f12eb04",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.model_choice_linear_quadratic_exponential.FN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/mdl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-fn-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.model_choice_linear_quadratic_exponential.FN.P.png",
+   "mobileFile": "two_variable_data.model_choice_linear_quadratic_exponential.FN.P.m375.png",
+   "archetypeId": "mcfp.model_choice_linear_quadratic_exponential.FN.P.repr_shift",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The graph of a function is shown in the $xy$-plane, with three points marked on it. The $x$-values of the marked points are consecutive integers.",
+   "question": "Which of the following best describes a function that models the graph shown?",
+   "options": [
+    "Quadratic, because the increase in $y$ itself grows by 8 each time $x$ increases by 1.",
+    "Linear, because $y$ increases by 8 each time $x$ increases by 1.",
+    "Quadratic, because the increase in $y$ itself grows by 4 each time $x$ increases by 1.",
+    "Exponential, because $y$ is multiplied by 1.5 each time $x$ increases by 1."
+   ],
+   "correctIndex": 2,
+   "answer": "Quadratic, because the increase in $y$ itself grows by 4 each time $x$ increases by 1.",
+   "explanation": "(1) 그래프에 표시된 점을 읽는다: (1, 12), (2, 20), (3, 32). (2) 연속한 값의 차는 8, 12 이고 비는 1.67, 1.6 이다. (3) 차가 일정하게 늘어나므로 이차함수이다. (4) 그 값은 4 이다. (5) 따라서 '이차함수' 서술이 맞다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

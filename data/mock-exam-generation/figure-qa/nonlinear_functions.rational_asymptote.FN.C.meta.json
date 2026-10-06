@@ -1,0 +1,48 @@
+{
+ "itemId": "nonlinear_functions.rational_asymptote.FN.C",
+ "generatedAt": "2026-10-06T11:39:14.136Z",
+ "codeHash": "793d017ba25d187b2f880de8d33e56da62fffa29d6b1e884ca7296d72493551f",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/cplane-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/nonlinear_functions.rational_asymptote.FN.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ln-b-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pure-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "nonlinear_functions.rational_asymptote.FN.C.png",
+   "mobileFile": "nonlinear_functions.rational_asymptote.FN.C.m375.png",
+   "archetypeId": "racc.rational_asymptote.FN.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[plane]",
+   "stimulus": "A graphing program draws candidate graphs for a worksheet. The choices shown are four graphs of rational functions that share the same axes.",
+   "question": "Which graph shown is the graph of a rational function that has a vertical asymptote at $x = 5$ and a horizontal asymptote at $y = -5$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 1,
+   "answer": "B",
+   "explanation": "(1) 수직 점근선 x = 5, 수평 점근선 y = -5. (2) 각 그래프의 점선 점근선과 곡선의 가지를 읽는다. (3) 첫째 조건을 어긴 그래프를 지운다. (4) 둘째 조건을 어긴 그래프를 지운다. (5) 남은 그래프가 정답이다. (6) 다른 그래프는 조건 하나 이상이 어긋난다. 따라서 정답은 B이다.",
+   "structuralIssues": []
+  }
+ ]
+}
