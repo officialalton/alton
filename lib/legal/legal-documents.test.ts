@@ -8,7 +8,7 @@ import { findLegalTextProblems } from "./guard";
 import { inlineToPlainText } from "./inline";
 import { canStartLessonCapture } from "./recording-gate";
 import { RECORDING_CLAUSE_PARAGRAPHS } from "./recording-clause";
-import { PRIVACY_SECTIONS, TERMS_SECTIONS, type SiteSection } from "./site-documents";
+import { PRIVACY_SECTIONS, RETENTION_INTRO, RETENTION_ITEMS, TERMS_SECTIONS, type SiteSection } from "./site-documents";
 
 const root = path.resolve(__dirname, "../..");
 const read = (f: string) => readFileSync(path.join(root, "docs/contracts", f), "utf8");
@@ -68,6 +68,26 @@ describe("recording / transcription / AI notes consent is consistent", () => {
   });
   it("adds no per-lesson consent step", () => {
     for (const [, text] of docs) expect(text).not.toMatch(/consent (again )?(before|at) each lesson|per-lesson consent/i);
+  });
+});
+
+describe("one unified retention schedule", () => {
+  const withSchedule: [string, string][] = [
+    ["parent", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.parentAgreement)],
+    ["under-13", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.under13Notice)],
+    ["terms", flat(TERMS_SECTIONS)],
+    ["privacy", flat(PRIVACY_SECTIONS)],
+  ];
+  it.each(withSchedule)("%s states every schedule item exactly", (_n, text) => {
+    expect(norm(text)).toContain(norm(RETENTION_INTRO));
+    for (const item of RETENTION_ITEMS) expect(norm(text)).toContain(norm(item));
+  });
+  it.each(["teacherCalifornia", "teacherNonUs"] as const)("%s refers to the schedule", (k) => {
+    expect(JSON.stringify(GENERATED_LEGAL_DOCUMENTS[k])).toContain("retention schedule in ALTON's Privacy Policy");
+  });
+  it("recording clause states the 1-year period and no longer says there is no fixed period", () => {
+    expect(RECORDING_CLAUSE_PARAGRAPHS.join(" ")).toContain("kept for 1 year after the last lesson");
+    for (const item of [...RETENTION_ITEMS, ...RECORDING_CLAUSE_PARAGRAPHS]) expect(item).not.toMatch(/no fixed (period|duration)/i);
   });
 });
 
