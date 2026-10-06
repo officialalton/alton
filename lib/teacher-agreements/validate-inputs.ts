@@ -8,7 +8,6 @@ const LIMITS: Record<keyof TeacherAgreementInputs, [number, number]> = {
   start_date: [10, 10],
   supervisor_name: [2, 120],
   prior_materials: [2, 2000],
-  non_lesson_terms: [2, 2000],
   payment_details: [2, 500],
 };
 
@@ -20,7 +19,6 @@ const LABEL: Record<keyof TeacherAgreementInputs, string> = {
   start_date: "시작일",
   supervisor_name: "감독자 이름",
   prior_materials: "기존 자료",
-  non_lesson_terms: "비수업 업무·보수",
   payment_details: "지급 방법·수령 정보",
 };
 

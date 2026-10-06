@@ -27,7 +27,6 @@ const FIELDS: Field[] = [
   { key: "start_date", label: "시작일", type: "date" },
   { key: "supervisor_name", label: "감독자(Supervisor) 이름 — 캘리포니아 전용" },
   { key: "prior_materials", label: "기존 자료(없으면 None)", multiline: true },
-  { key: "non_lesson_terms", label: "비수업 업무 범위·보수 — 해외 전용", multiline: true },
   { key: "payment_details", label: "지급 방법·수령 정보 — 해외 전용", multiline: true },
 ];
 

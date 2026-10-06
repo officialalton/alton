@@ -25,7 +25,6 @@ const caInputs: TeacherAgreementInputs = {
   start_date: "2026-11-01",
   supervisor_name: "Do Kyung Kim",
   prior_materials: "None",
-  non_lesson_terms: null,
   payment_details: null,
 };
 const krInputs: TeacherAgreementInputs = {
@@ -34,7 +33,6 @@ const krInputs: TeacherAgreementInputs = {
   work_region: null,
   work_location_detail: "Seoul",
   supervisor_name: null,
-  non_lesson_terms: "Review and documentation: USD 50 per hour",
   payment_details: "Bank transfer to the account on file",
 };
 const base = { teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
@@ -61,9 +59,9 @@ describe("prepareTeacherAgreement", () => {
     }
   });
   it("lists every missing input and never sends a blank form", () => {
-    const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, non_lesson_terms: null, payment_details: " ", mailing_address: null } });
+    const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, payment_details: " ", mailing_address: null } });
     expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.missing).toEqual(expect.arrayContaining(["우편 주소", "비수업 업무 범위·보수", "지급 방법·수령 정보"]));
+    if (!r.ok) expect(r.missing).toEqual(expect.arrayContaining(["우편 주소", "지급 방법·수령 정보"]));
   });
   it("blocks when the Workspace account is not provisioned or the location is unknown", () => {
     expect(prepareTeacherAgreement({ ...base, workspaceProvisioned: false, inputs: caInputs }).ok).toBe(false);

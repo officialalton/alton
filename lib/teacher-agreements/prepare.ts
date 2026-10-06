@@ -17,7 +17,6 @@ export type TeacherAgreementInputs = {
   start_date: string | null;
   supervisor_name: string | null;
   prior_materials: string | null;
-  non_lesson_terms: string | null;
   payment_details: string | null;
 };
 
@@ -29,7 +28,6 @@ export const EMPTY_INPUTS: TeacherAgreementInputs = {
   start_date: null,
   supervisor_name: null,
   prior_materials: null,
-  non_lesson_terms: null,
   payment_details: null,
 };
 
@@ -85,7 +83,6 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (form === "california_employment") {
     if (blank(i.supervisor_name)) missing.push("감독자(Supervisor) 이름");
   } else {
-    if (blank(i.non_lesson_terms)) missing.push("비수업 업무 범위·보수");
     if (blank(i.payment_details)) missing.push("지급 방법·수령 정보");
   }
   if (missing.length > 0) return { ok: false, missing, form };
@@ -117,7 +114,6 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
         : renderNonUsTeacherAgreementHtml({
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)} — ${i.work_location_detail!}`,
-            nonLessonServicesScopeAndCompensation: i.non_lesson_terms!,
             paymentMethodAndRecipientDetails: i.payment_details!,
           });
     return { ok: true, form, templateVersion: selection.templateVersion, html, recipientEmail: email, agreementId };

@@ -12,7 +12,6 @@ const ca = { ...common, californiaWorkLocation: "Remote, San Jose, CA", supervis
 const nonUs = {
   ...common,
   actualWorkCountryAndLocation: "South Korea, Seoul",
-  nonLessonServicesScopeAndCompensation: "Review: USD 50 per hour",
   paymentMethodAndRecipientDetails: "Bank transfer",
 };
 
@@ -51,7 +50,6 @@ describe("teacher agreement rendering", () => {
   });
   it("never invents unresolved commercial values", () => {
     expect(() => renderNonUsTeacherAgreementHtml({ ...nonUs, paymentMethodAndRecipientDetails: " " })).toThrow(UnfilledContractError);
-    expect(() => renderNonUsTeacherAgreementHtml({ ...nonUs, nonLessonServicesScopeAndCompensation: "" })).toThrow(UnfilledContractError);
     expect(() => renderCaliforniaTeacherAgreementHtml({ ...ca, supervisor: "" })).toThrow(UnfilledContractError);
   });
 });

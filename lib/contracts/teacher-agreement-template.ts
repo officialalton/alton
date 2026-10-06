@@ -3,7 +3,7 @@
 //   docs/contracts/teacher-non-us-services-agreement-v0.2-en.md        (teachers working outside the United States)
 // The form is chosen from the ACTUAL work location only — never from nationality, account role or tax form.
 // Paydays (semimonthly, 26th/10th pay deadlines, Pacific Time), fee allocation (Company bears) and the 30-day notice are fixed in the
-// source text (owner decision 2026-10-06). Other execution values (non-lesson compensation, payment details, ...) are never
+// source text (owner decision 2026-10-06). Other execution values (payment details, ...) are never
 // invented here: if a required value is missing, rendering throws UnfilledContractError and nothing is sent.
 import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { assertLegalTextClean, UnfilledContractError } from "@/lib/legal/guard";
@@ -62,7 +62,6 @@ export type CaliforniaTeacherAgreementParams = TeacherAgreementCommon & {
 
 export type NonUsTeacherAgreementParams = TeacherAgreementCommon & {
   actualWorkCountryAndLocation: string;
-  nonLessonServicesScopeAndCompensation: string;
   paymentMethodAndRecipientDetails: string;
 };
 
@@ -152,7 +151,6 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
     teacherAddress: p.teacherAddress,
     effectiveDate: p.effectiveDate,
     actualWorkCountryAndLocation: p.actualWorkCountryAndLocation,
-    nonLessonServicesScopeAndCompensation: p.nonLessonServicesScopeAndCompensation,
     paymentMethodAndRecipientDetails: p.paymentMethodAndRecipientDetails,
     priorMaterials: p.priorMaterials,
   });
@@ -166,8 +164,6 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
       if (at("Actual work country and location:")) return [`Actual work country and location: ${escapeHtml(p.actualWorkCountryAndLocation)}`];
       if (at("Company notice address:")) return [`Company notice address: ${escapeHtml(COMPANY_NOTICE_ADDRESS)}`];
       if (at("Effective date:")) return [`Effective date: ${escapeHtml(formatIsoDateEn(p.effectiveDate))}`];
-      if (at("Nonlesson services, scope, and compensation:"))
-        return [`Nonlesson services, scope, and compensation: ${escapeHtml(p.nonLessonServicesScopeAndCompensation)}`];
       if (at("Payment method and recipient details:")) return [`Payment method and recipient details: ${escapeHtml(p.paymentMethodAndRecipientDetails)}`];
       return null;
     },

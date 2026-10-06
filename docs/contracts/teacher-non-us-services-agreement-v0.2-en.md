@@ -18,7 +18,7 @@ The Teacher may not substitute another person or disclose student information to
 
 The lesson-service fee is **USD $50.00 per 60 minutes of recognized lesson time**, calculated by the minute. A recognized 120-minute lesson pays $100.00; a recognized 60-minute trial pays $50.00. The accepted rate is recorded for each assignment. A later rate change applies prospectively only after written agreement.
 
-Recognized lesson time is determined from the accepted booking and documented completion or cancellation decision, rather than meeting connection logs alone. Required nonlesson work, including preparation, review, documentation, meetings, or training, must have its scope and compensation recorded in Schedule A or an accepted written assignment. Mandatory payment rights under applicable law prevail.
+Recognized lesson time is determined from the accepted booking and documented completion or cancellation decision, rather than meeting connection logs alone. Required nonlesson work is compensated at the Teacher's accepted lesson-service hourly rate under this Section 3, calculated by the minute from the recorded actual time of the required work, reported on the same pay statement as lesson fees, and paid on the same deadlines. Required nonlesson work means preparation, assignment review, meeting-notes review, and required meetings and training. Any other additional services require a separate written fee before performance. Mandatory payment rights under applicable law prevail.
 
 ## 4. Cancellation and Attendance
 
@@ -96,7 +96,7 @@ This Agreement, completed schedules, and accepted written assignments govern the
 - Company contact: official@alton.education
 - Effective date: ____________________
 - Lesson fee: USD $50.00 per 60 recognized minutes
-- Nonlesson services, scope, and compensation: ____________________
+- Required nonlesson work: Paid at the lesson fee rate by recorded actual minutes (Section 3)
 - Payment method and recipient details: ____________________
 - Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid no later than the 26th of the same month, and the 16th–end of month is paid no later than the 10th of the following month
 - Transfer, intermediary, and conversion fees: Borne by the Company
