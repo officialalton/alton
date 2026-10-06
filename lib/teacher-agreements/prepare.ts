@@ -2,11 +2,15 @@ import { randomUUID } from "node:crypto";
 import {
   renderCaliforniaTeacherAgreementHtml,
   renderNonUsTeacherAgreementHtml,
+  renderUsContractorTeacherAgreementHtml,
+  type TeacherRate,
   selectTeacherAgreementForm,
   type TeacherAgreementForm,
 } from "@/lib/contracts/teacher-agreement-template";
+import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { COMPANY_NAME } from "@/lib/legal";
 import { UnfilledContractError } from "@/lib/legal/guard";
+import { sensitiveNumberProblem } from "./validate-inputs";
 import { TEACHER_APPROVER } from "./schedule-defaults";
 
 export type TeacherAgreementInputs = {
@@ -17,8 +21,9 @@ export type TeacherAgreementInputs = {
   start_date: string | null;
   supervisor_name: string | null;
   prior_materials: string | null;
-  non_lesson_terms: string | null;
   payment_details: string | null;
+  /** contractor (default) or employee — selects the agreement form together with the work location. */
+  engagement_type: "contractor" | "employee";
 };
 
 export const EMPTY_INPUTS: TeacherAgreementInputs = {
@@ -29,8 +34,8 @@ export const EMPTY_INPUTS: TeacherAgreementInputs = {
   start_date: null,
   supervisor_name: null,
   prior_materials: null,
-  non_lesson_terms: null,
   payment_details: null,
+  engagement_type: "contractor",
 };
 
 export type PrepareArgs = {
@@ -39,6 +44,8 @@ export type PrepareArgs = {
   /** teacher_workspace_provisioning.status === 'created' */
   workspaceProvisioned: boolean;
   inputs: TeacherAgreementInputs | null;
+  /** Current rate from teacher_rate_history (amount_minor + currency). Null when no rate is set. */
+  rate?: TeacherRate | null;
   /** Agreement id printed as the document identifier; generated when sending. */
   agreementId?: string;
   now?: Date;
@@ -70,24 +77,32 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (!a.workspaceProvisioned || !email.endsWith("@alton.education")) missing.push("Workspace 계정(@alton.education) 생성 완료");
   if (blank(i.work_country)) missing.push("실제 근무 국가");
 
-  const selection = selectTeacherAgreementForm({ country: i.work_country, region: i.work_region });
+  const selection = selectTeacherAgreementForm({ country: i.work_country, region: i.work_region, engagementType: i.engagement_type });
   if (selection.form === null) {
     if (!blank(i.work_country)) {
-      missing.push(blank(i.work_region) && i.work_country?.toUpperCase() === "US" ? "근무 주(미국)" : "이 근무 지역에 사용할 수 있는 계약서 양식 없음");
+      const emp = i.engagement_type === "employee";
+      missing.push(
+        emp
+          ? "직원(employee) 계약은 미국 캘리포니아 근무자만 지원합니다"
+          : "해당 국가의 보수 통화·계약서 양식이 설정되지 않음(현재 KR=KRW, 미국=USD만 지원)"
+      );
     }
     return { ok: false, missing, form: null };
   }
   const form = selection.form;
+  const wantCurrency = form === "non_us_services" ? "KRW" : "USD";
+  if (!a.rate || a.rate.amountMinor <= 0) missing.push("선생님 시급 미설정 — 선생님 상세에서 시급을 먼저 등록");
+  else if (a.rate.currency !== wantCurrency) missing.push(`이 근무 지역은 ${wantCurrency} 시급이 필요합니다(현재 ${a.rate.currency}) — 시급 통화를 확인하세요`);
   if (blank(i.mailing_address)) missing.push("우편 주소");
   if (blank(i.start_date)) missing.push("시작일");
   if (blank(i.work_location_detail)) missing.push(form === "california_employment" ? "캘리포니아 근무 위치" : "근무 도시·지역");
-  if (blank(i.prior_materials)) missing.push("기존 자료(없으면 None 입력)");
   if (form === "california_employment") {
     if (blank(i.supervisor_name)) missing.push("감독자(Supervisor) 이름");
   } else {
-    if (blank(i.non_lesson_terms)) missing.push("비수업 업무 범위·보수");
     if (blank(i.payment_details)) missing.push("지급 방법·수령 정보");
+    else if (sensitiveNumberProblem(i.payment_details!)) missing.push("지급 정보에 전체 계좌·세금번호 포함 — 끝 4자리까지만 입력");
   }
+  if (form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) missing.push("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
   if (missing.length > 0) return { ok: false, missing, form };
 
   const agreementId = a.agreementId ?? randomUUID();
@@ -103,7 +118,7 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
     teacherEmail: email,
     teacherAddress: i.mailing_address!,
     effectiveDate: i.start_date!,
-    priorMaterials: i.prior_materials!,
+    priorMaterials: blank(i.prior_materials) ? "None" : i.prior_materials!,
     companyApproval,
   };
   try {
@@ -113,12 +128,20 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
             ...common,
             californiaWorkLocation: i.work_location_detail!,
             supervisor: i.supervisor_name!,
+            lessonRate: a.rate as TeacherRate & { currency: "USD" },
+          })
+        : form === "us_contractor_services"
+        ? renderUsContractorTeacherAgreementHtml({
+            ...common,
+            actualWorkCountryAndLocation: `${countryName(i.work_country!)}${blank(i.work_region) ? "" : `, ${i.work_region}`} — ${i.work_location_detail!}`,
+            paymentMethodAndRecipientDetails: i.payment_details!,
+            lessonRate: a.rate as TeacherRate & { currency: "USD" },
           })
         : renderNonUsTeacherAgreementHtml({
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)} — ${i.work_location_detail!}`,
-            nonLessonServicesScopeAndCompensation: i.non_lesson_terms!,
             paymentMethodAndRecipientDetails: i.payment_details!,
+            lessonRate: a.rate as TeacherRate & { currency: "KRW" },
           });
     return { ok: true, form, templateVersion: selection.templateVersion, html, recipientEmail: email, agreementId };
   } catch (e) {

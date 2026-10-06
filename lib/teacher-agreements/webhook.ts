@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { recordAcceptedRate } from "./rate";
 
 const TERMINAL = new Set(["completed", "declined", "voided"]);
 
@@ -14,7 +15,7 @@ export async function applyTeacherAgreementEnvelopeEvent(
 ): Promise<boolean> {
   const { data: row } = await admin
     .from("teacher_contracts")
-    .select("id, status, docusign_envelope_status, document_url")
+    .select("id, teacher_id, inputs_snapshot, status, docusign_envelope_status, document_url")
     .eq("docusign_envelope_id", envelopeId)
     .maybeSingle();
   if (!row) return false;
@@ -31,5 +32,6 @@ export async function applyTeacherAgreementEnvelopeEvent(
   }
   const { error } = await admin.from("teacher_contracts").update(patch).eq("id", row.id).neq("status", "signed");
   if (error) throw new Error(error.message);
+  if (envelopeStatus === "completed") await recordAcceptedRate(admin, row as { id: string; teacher_id: string; inputs_snapshot: unknown });
   return true;
 }

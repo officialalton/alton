@@ -86,7 +86,7 @@ describe("one unified retention schedule", () => {
     expect(JSON.stringify(GENERATED_LEGAL_DOCUMENTS[k])).toContain("retention schedule in ALTON's Privacy Policy");
   });
   it("recording clause states the 1-year period and no longer says there is no fixed period", () => {
-    expect(RECORDING_CLAUSE_PARAGRAPHS.join(" ")).toContain("kept for 1 year after the last lesson");
+    expect(RECORDING_CLAUSE_PARAGRAPHS.join(" ")).toContain("eligible for deletion one year after that lesson, regardless of continued enrolment");
     for (const item of [...RETENTION_ITEMS, ...RECORDING_CLAUSE_PARAGRAPHS]) expect(item).not.toMatch(/no fixed (period|duration)/i);
   });
 });

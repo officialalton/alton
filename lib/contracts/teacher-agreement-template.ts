@@ -3,7 +3,7 @@
 //   docs/contracts/teacher-non-us-services-agreement-v0.2-en.md        (teachers working outside the United States)
 // The form is chosen from the ACTUAL work location only — never from nationality, account role or tax form.
 // Paydays (semimonthly, 26th/10th pay deadlines, Pacific Time), fee allocation (Company bears) and the 30-day notice are fixed in the
-// source text (owner decision 2026-10-06). Other execution values (non-lesson compensation, payment details, ...) are never
+// source text (owner decision 2026-10-06). Other execution values (payment details, ...) are never
 // invented here: if a required value is missing, rendering throws UnfilledContractError and nothing is sent.
 import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { assertLegalTextClean, UnfilledContractError } from "@/lib/legal/guard";
@@ -19,8 +19,9 @@ import {
 
 export const TEACHER_CALIFORNIA_TEMPLATE_VERSION = "0.2-EN-CA";
 export const TEACHER_NON_US_TEMPLATE_VERSION = "0.2-EN";
+export const TEACHER_US_CONTRACTOR_TEMPLATE_VERSION = "0.1-EN-US-CONTRACTOR";
 
-export type TeacherAgreementForm = "california_employment" | "non_us_services";
+export type TeacherAgreementForm = "california_employment" | "non_us_services" | "us_contractor_services";
 
 /** Where the teacher will actually perform the work. Nationality and account role are deliberately not inputs. */
 export type TeacherWorkLocation = {
@@ -28,6 +29,8 @@ export type TeacherWorkLocation = {
   country: string | null | undefined;
   /** U.S. state or territory (code or name) when country is US. */
   region?: string | null;
+  /** contractor (default) or employee. Employee is only available in California. */
+  engagementType?: "contractor" | "employee" | null;
 };
 
 export type TeacherAgreementSelection =
@@ -37,11 +40,16 @@ export type TeacherAgreementSelection =
 export function selectTeacherAgreementForm(location: TeacherWorkLocation): TeacherAgreementSelection {
   const country = (location.country ?? "").trim().toUpperCase();
   if (!country) return { form: null, reason: "The actual work country has not been provided." };
-  if (country !== "US") return { form: "non_us_services", templateVersion: TEACHER_NON_US_TEMPLATE_VERSION };
-  const region = (location.region ?? "").trim().toLowerCase();
-  if (region === "ca" || region === "california") return { form: "california_employment", templateVersion: TEACHER_CALIFORNIA_TEMPLATE_VERSION };
-  if (!region) return { form: null, reason: "The U.S. work state has not been provided." };
-  return { form: null, reason: "No agreement form is available for work performed in this U.S. state." };
+  // Default engagement is contractor (owner decision 2026-10-06); the California employment form is selected only for an
+  // explicitly marked employee working in California.
+  if (location.engagementType === "employee") {
+    const region = (location.region ?? "").trim().toLowerCase();
+    if (country === "US" && (region === "ca" || region === "california")) return { form: "california_employment", templateVersion: TEACHER_CALIFORNIA_TEMPLATE_VERSION };
+    return { form: null, reason: "The employee agreement is available only for work performed in California." };
+  }
+  if (country === "KR") return { form: "non_us_services", templateVersion: TEACHER_NON_US_TEMPLATE_VERSION };
+  if (country === "US") return { form: "us_contractor_services", templateVersion: TEACHER_US_CONTRACTOR_TEMPLATE_VERSION };
+  return { form: null, reason: "The pay currency and agreement form are not configured for this work country." };
 }
 
 export type TeacherAgreementCommon = {
@@ -55,15 +63,19 @@ export type TeacherAgreementCommon = {
   companyApproval: CompanyApprovalForTemplate;
 };
 
+/** Teacher's accepted hourly rate per 60 minutes in minor units (KRW: won, USD: cents). Never converted between currencies. */
+export type TeacherRate = { amountMinor: number; currency: "KRW" | "USD" };
+
 export type CaliforniaTeacherAgreementParams = TeacherAgreementCommon & {
+  lessonRate: TeacherRate & { currency: "USD" };
   californiaWorkLocation: string;
   supervisor: string;
 };
 
 export type NonUsTeacherAgreementParams = TeacherAgreementCommon & {
   actualWorkCountryAndLocation: string;
-  nonLessonServicesScopeAndCompensation: string;
   paymentMethodAndRecipientDetails: string;
+  lessonRate: TeacherRate & { currency: "KRW" };
 };
 
 function requireFields(values: Record<string, string | null | undefined>): void {
@@ -130,6 +142,7 @@ export function renderCaliforniaTeacherAgreementHtml(p: CaliforniaTeacherAgreeme
       if (at("Employee legal name:")) return [`Employee legal name: ${escapeHtml(p.teacherName)}`];
       if (at("Employee address and email:")) return [`Employee address and email: ${escapeHtml(p.teacherAddress)}; ${escapeHtml(p.teacherEmail)}`];
       if (at("Company notice address:")) return [`Company notice address: ${escapeHtml(COMPANY_NOTICE_ADDRESS)}`];
+      if (at("Regular hourly rate:")) return [`Regular hourly rate: ${escapeHtml(formatRate(p.lessonRate))} per hour of compensable time`];
       if (at("Start date:")) return [`Start date: ${escapeHtml(formatIsoDateEn(p.effectiveDate))}`];
       if (at("California work location:")) return [`California work location: ${escapeHtml(p.californiaWorkLocation)}`];
       if (at("Supervisor:")) return [`Supervisor: ${escapeHtml(p.supervisor)}`];
@@ -145,6 +158,42 @@ export function renderCaliforniaTeacherAgreementHtml(p: CaliforniaTeacherAgreeme
   return html;
 }
 
+function formatRate(rate: TeacherRate | undefined): string {
+  if (!rate || !Number.isFinite(rate.amountMinor) || rate.amountMinor <= 0) throw new UnfilledContractError(["Hourly rate"]);
+  if (rate.currency === "USD") return `USD $${(rate.amountMinor / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  if (rate.currency === "KRW") return `KRW ${rate.amountMinor.toLocaleString("en-US")}`;
+  throw new UnfilledContractError(["Hourly rate currency"]);
+}
+
+export type UsContractorTeacherAgreementParams = TeacherAgreementCommon & {
+  /** U.S. state and city where the work is actually performed. */
+  actualWorkCountryAndLocation: string;
+  paymentMethodAndRecipientDetails: string;
+  lessonRate: TeacherRate & { currency: "USD" };
+};
+
+/**
+ * U.S. (outside California) independent-contractor services agreement. The source text does not exist yet: until
+ * docs/contracts/teacher-us-contractor-services-agreement-v0.1-en.md is written and generated, rendering throws
+ * UnfilledContractError so nothing is sent. Once the text exists only that file + `node scripts/legal-docs/generate.mjs`
+ * are needed; Schedule A bullets reuse the same labels as the non-U.S. form.
+ */
+export function renderUsContractorTeacherAgreementHtml(p: UsContractorTeacherAgreementParams): string {
+  const doc = GENERATED_LEGAL_DOCUMENTS.teacherUsContractor;
+  if (!doc) throw new UnfilledContractError(["U.S. independent-contractor agreement text (not yet available)"]);
+  requireFields({
+    teacherName: p.teacherName,
+    teacherEmail: p.teacherEmail,
+    teacherAddress: p.teacherAddress,
+    effectiveDate: p.effectiveDate,
+    actualWorkCountryAndLocation: p.actualWorkCountryAndLocation,
+    paymentMethodAndRecipientDetails: p.paymentMethodAndRecipientDetails,
+    priorMaterials: p.priorMaterials,
+  });
+  assertCompany(p.companyApproval);
+  return renderNonUsLikeBody(doc, p);
+}
+
 export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams): string {
   requireFields({
     teacherName: p.teacherName,
@@ -152,12 +201,17 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
     teacherAddress: p.teacherAddress,
     effectiveDate: p.effectiveDate,
     actualWorkCountryAndLocation: p.actualWorkCountryAndLocation,
-    nonLessonServicesScopeAndCompensation: p.nonLessonServicesScopeAndCompensation,
     paymentMethodAndRecipientDetails: p.paymentMethodAndRecipientDetails,
     priorMaterials: p.priorMaterials,
   });
   assertCompany(p.companyApproval);
-  const doc = GENERATED_LEGAL_DOCUMENTS.teacherNonUs;
+  return renderNonUsLikeBody(GENERATED_LEGAL_DOCUMENTS.teacherNonUs, p);
+}
+
+function renderNonUsLikeBody(
+  doc: NonNullable<typeof GENERATED_LEGAL_DOCUMENTS.teacherUsContractor>,
+  p: NonUsTeacherAgreementParams | UsContractorTeacherAgreementParams
+): string {
   const body = documentBodyHtml(doc, {
     rewriteBullet: (item) => {
       const at = (l: string) => item.startsWith(l);
@@ -166,8 +220,7 @@ export function renderNonUsTeacherAgreementHtml(p: NonUsTeacherAgreementParams):
       if (at("Actual work country and location:")) return [`Actual work country and location: ${escapeHtml(p.actualWorkCountryAndLocation)}`];
       if (at("Company notice address:")) return [`Company notice address: ${escapeHtml(COMPANY_NOTICE_ADDRESS)}`];
       if (at("Effective date:")) return [`Effective date: ${escapeHtml(formatIsoDateEn(p.effectiveDate))}`];
-      if (at("Nonlesson services, scope, and compensation:"))
-        return [`Nonlesson services, scope, and compensation: ${escapeHtml(p.nonLessonServicesScopeAndCompensation)}`];
+      if (at("Lesson fee:")) return [`Lesson fee: ${escapeHtml(formatRate(p.lessonRate))} per 60 recognized minutes`];
       if (at("Payment method and recipient details:")) return [`Payment method and recipient details: ${escapeHtml(p.paymentMethodAndRecipientDetails)}`];
       return null;
     },

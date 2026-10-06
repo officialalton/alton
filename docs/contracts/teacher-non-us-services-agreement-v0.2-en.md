@@ -16,9 +16,9 @@ The Teacher may not substitute another person or disclose student information to
 
 ## 3. Fees and Recognized Lesson Time
 
-The lesson-service fee is **USD $50.00 per 60 minutes of recognized lesson time**, calculated by the minute. A recognized 120-minute lesson pays $100.00; a recognized 60-minute trial pays $50.00. The accepted rate is recorded for each assignment. A later rate change applies prospectively only after written agreement.
+The lesson-service fee is the Teacher's accepted hourly rate stated in Schedule A, per 60 minutes of recognized lesson time, calculated by the minute. The accepted rate is recorded for each assignment. A later rate change applies prospectively only after written agreement.
 
-Recognized lesson time is determined from the accepted booking and documented completion or cancellation decision, rather than meeting connection logs alone. Required nonlesson work, including preparation, review, documentation, meetings, or training, must have its scope and compensation recorded in Schedule A or an accepted written assignment. Mandatory payment rights under applicable law prevail.
+Recognized lesson time is determined from the accepted booking and documented completion or cancellation decision, rather than meeting connection logs alone. Required nonlesson work is compensated at the Teacher's accepted lesson-service hourly rate under this Section 3, calculated by the minute from the recorded actual time of the required work, reported on the same pay statement as lesson fees, and paid on the same deadlines. Required nonlesson work means preparation, assignment review, meeting-notes review, and required meetings and training. Any other additional services require a separate written fee before performance. Mandatory payment rights under applicable law prevail.
 
 ## 4. Cancellation and Attendance
 
@@ -34,7 +34,7 @@ The statement identifies assignments, recognized minutes, applicable rates, sepa
 
 ## 6. Tax and Business Responsibilities
 
-The Teacher provides accurate tax-status documentation applicable to their circumstances, including Form W-8BEN when appropriate, and notifies the Company of changes. The Company makes any legally required withholding and reporting and provides supporting records. Neither an IRS form nor foreign citizenship alone determines worker classification.
+The Teacher is responsible for the taxes that apply to the Teacher. The Company complies with its own statutory withholding and reporting obligations where applicable. Tax forms and related documentation are handled outside this Agreement.
 
 Subject to mandatory law and the agreed arrangement, the Teacher is responsible for their own business registrations, taxes, insurance, and ordinary equipment and connectivity costs. Any agreed reimbursable expense requires appropriate documentation. These terms do not transfer obligations that the Company must bear by law.
 
@@ -44,13 +44,13 @@ The Teacher uses approved student communication and meeting channels, maintains 
 
 ## 8. Video Recording, Audio Recording, Transcription, and AI Lesson Notes
 
-Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded.
+Regular paid lessons include conversion of speech into a text transcript, storage of transcripts, and AI-assisted preparation and storage of lesson notes and summaries (Smart Notes). Lesson video recording and audio recording, and storage of recordings, are not currently provided; if ALTON offers them in the future, this clause also covers them, and ALTON confirms the applicable consents before any recording is activated. Lesson content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded.
 
 The signing participant expressly consents to these activities for authorized regular lessons. A parent or legal guardian authorizes processing of the named child's participation within their lawful authority. ALTON provides notice before recording and obtains consent from all participants as required by applicable law. Additional attendees must receive notice and give required consent before capture begins. A parent signature does not substitute for another participant's consent. Recording must not start until the applicable agreement, required parental verification, and participant consent are complete.
 
 ALTON uses designated Google Workspace, Meet, Drive, and Gemini services and authorized providers acting for the stated purposes. Recordings, transcripts, and AI notes are stored with restricted access. Authorized teachers and staff may access them for their duties. Students and verified guardians may view lesson artifacts made available to their accounts; this does not grant unrestricted download, redistribution, or access to another family's records or private student notes and whiteboards. No public posting, unrelated advertising, sale, or unrestricted model training is authorized by this consent.
 
-Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
+Each lesson's transcript and Smart Notes become eligible for deletion one year after that lesson, regardless of continued enrolment (the full retention schedule appears in the Privacy Policy), and lesson materials are kept for 1 year after the last lesson. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
 
 AI notes and transcripts may contain omissions, speaker errors, or inaccuracies. Corrections may be requested. AI output alone does not conclusively determine attendance, wages, fees, refunds, or disputes. Material changes receive updated notice and renewed consent when required.
 
@@ -95,8 +95,8 @@ This Agreement, completed schedules, and accepted written assignments govern the
 - Company notice address: ____________________
 - Company contact: official@alton.education
 - Effective date: ____________________
-- Lesson fee: USD $50.00 per 60 recognized minutes
-- Nonlesson services, scope, and compensation: ____________________
+- Lesson fee: Teacher's accepted hourly rate per 60 recognized minutes
+- Required nonlesson work: Paid at the lesson fee rate by recorded actual minutes (Section 3)
 - Payment method and recipient details: ____________________
 - Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid no later than the 26th of the same month, and the 16th–end of month is paid no later than the 10th of the following month
 - Transfer, intermediary, and conversion fees: Borne by the Company

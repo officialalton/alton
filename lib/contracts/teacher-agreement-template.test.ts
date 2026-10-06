@@ -4,25 +4,29 @@ import {
   renderCaliforniaTeacherAgreementHtml,
   renderNonUsTeacherAgreementHtml,
   selectTeacherAgreementForm,
+  renderUsContractorTeacherAgreementHtml,
 } from "./teacher-agreement-template";
 
 const approval = { companyEntityName: "Alton Education LLC", approverName: "Do Kyung Kim", approverTitle: "CEO", approvedAtLabel: "October 6, 2026 at 9:00 AM UTC", documentIdentifier: "t1" };
 const common = { teacherName: "Sora Park", teacherEmail: "sora@example.com", teacherAddress: "1 Main St", effectiveDate: "2026-11-01", priorMaterials: "None", companyApproval: approval };
-const ca = { ...common, californiaWorkLocation: "Remote, San Jose, CA", supervisor: "Do Kyung Kim" };
+const ca = { ...common, lessonRate: { amountMinor: 5000, currency: "USD" as const }, californiaWorkLocation: "Remote, San Jose, CA", supervisor: "Do Kyung Kim" };
 const nonUs = {
   ...common,
   actualWorkCountryAndLocation: "South Korea, Seoul",
-  nonLessonServicesScopeAndCompensation: "Review: USD 50 per hour",
   paymentMethodAndRecipientDetails: "Bank transfer",
+  lessonRate: { amountMinor: 50000, currency: "KRW" as const },
 };
 
 describe("selectTeacherAgreementForm", () => {
   it("chooses by actual work location only", () => {
-    expect(selectTeacherAgreementForm({ country: "US", region: "CA" })).toMatchObject({ form: "california_employment" });
-    expect(selectTeacherAgreementForm({ country: "us", region: "California" })).toMatchObject({ form: "california_employment" });
+    // All teachers are independent contractors; the California employment form is kept but never selected.
+    expect(selectTeacherAgreementForm({ country: "US", region: "CA" })).toMatchObject({ form: "us_contractor_services" });
+    expect(selectTeacherAgreementForm({ country: "US", region: "CA", engagementType: "employee" })).toMatchObject({ form: "california_employment" });
+    expect(selectTeacherAgreementForm({ country: "US", region: "TX", engagementType: "employee" }).form).toBeNull();
+    expect(selectTeacherAgreementForm({ country: "KR", engagementType: "employee" }).form).toBeNull();
+    expect(selectTeacherAgreementForm({ country: "us", region: "TX" })).toMatchObject({ form: "us_contractor_services" });
     expect(selectTeacherAgreementForm({ country: "KR" })).toMatchObject({ form: "non_us_services" });
-    expect(selectTeacherAgreementForm({ country: "US", region: "NY" }).form).toBeNull();
-    expect(selectTeacherAgreementForm({ country: "US" }).form).toBeNull();
+    expect(selectTeacherAgreementForm({ country: "JP" }).form).toBeNull();
     expect(selectTeacherAgreementForm({ country: "" }).form).toBeNull();
   });
 });
@@ -49,9 +53,12 @@ describe("teacher agreement rendering", () => {
     expect(html).toContain("paid no later than the 26th of the same month");
     expect(html).not.toMatch(/_{3,}|\[[^\]]+\]|draft/i);
   });
+  it("renders the system USD rate in the California form and blocks the contractor form until its text exists", () => {
+    expect(renderCaliforniaTeacherAgreementHtml(ca)).toContain("USD $50.00 per hour of compensable time");
+    expect(() => renderUsContractorTeacherAgreementHtml({ ...common, actualWorkCountryAndLocation: "US, TX", paymentMethodAndRecipientDetails: "ACH", lessonRate: { amountMinor: 5000, currency: "USD" } })).toThrow(UnfilledContractError);
+  });
   it("never invents unresolved commercial values", () => {
     expect(() => renderNonUsTeacherAgreementHtml({ ...nonUs, paymentMethodAndRecipientDetails: " " })).toThrow(UnfilledContractError);
-    expect(() => renderNonUsTeacherAgreementHtml({ ...nonUs, nonLessonServicesScopeAndCompensation: "" })).toThrow(UnfilledContractError);
     expect(() => renderCaliforniaTeacherAgreementHtml({ ...ca, supervisor: "" })).toThrow(UnfilledContractError);
   });
 });

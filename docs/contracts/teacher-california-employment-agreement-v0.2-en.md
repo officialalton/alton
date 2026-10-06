@@ -16,7 +16,7 @@ Duties include instruction, reasonable preparation, assignment review, lesson do
 
 ## 4. Compensation and Timekeeping
 
-The regular hourly rate is **USD $50.00 for all compensable time**. Compensable time includes teaching, required preparation and review, homework assessment, required meetings and training, required communications, and required setup or documentation. Lesson pricing and student credits do not determine wages owed.
+The regular hourly rate is the Employee's accepted hourly rate stated in Schedule A, for all compensable time. Compensable time includes teaching, required preparation and review, homework assessment, required meetings and training, required communications, and required setup or documentation. Lesson pricing and student credits do not determine wages owed.
 
 The Employee must accurately record all hours worked, including work outside scheduled lessons. No off-the-clock work is permitted. All hours worked will be paid, including overtime worked without advance approval; failure to follow scheduling instructions may be addressed separately. The Company pays applicable overtime, minimum wages, reporting-time pay, and other required compensation. No provision treats required preparation as unpaid or includes it without compensation in a teaching-only rate.
 
@@ -34,13 +34,13 @@ Use approved communication and meeting channels. Maintain professional boundarie
 
 ## 7. Video Recording, Audio Recording, Transcription, and AI Lesson Notes
 
-Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded.
+Regular paid lessons include conversion of speech into a text transcript, storage of transcripts, and AI-assisted preparation and storage of lesson notes and summaries (Smart Notes). Lesson video recording and audio recording, and storage of recordings, are not currently provided; if ALTON offers them in the future, this clause also covers them, and ALTON confirms the applicable consents before any recording is activated. Lesson content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded.
 
 The signing participant expressly consents to these activities for authorized regular lessons. A parent or legal guardian authorizes processing of the named child's participation within their lawful authority. ALTON provides notice before recording and obtains consent from all participants as required by applicable law. Additional attendees must receive notice and give required consent before capture begins. A parent signature does not substitute for another participant's consent. Recording must not start until the applicable agreement, required parental verification, and participant consent are complete.
 
 ALTON uses designated Google Workspace, Meet, Drive, and Gemini services and authorized providers acting for the stated purposes. Recordings, transcripts, and AI notes are stored with restricted access. Authorized teachers and staff may access them for their duties. Students and verified guardians may view lesson artifacts made available to their accounts; this does not grant unrestricted download, redistribution, or access to another family's records or private student notes and whiteboards. No public posting, unrelated advertising, sale, or unrestricted model training is authorized by this consent.
 
-Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
+Each lesson's transcript and Smart Notes become eligible for deletion one year after that lesson, regardless of continued enrolment (the full retention schedule appears in the Privacy Policy), and lesson materials are kept for 1 year after the last lesson. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
 
 AI notes and transcripts may contain omissions, speaker errors, or inaccuracies. Corrections may be requested. AI output alone does not conclusively determine attendance, wages, fees, refunds, or disputes. Material changes receive updated notice and renewed consent when required.
 
@@ -64,7 +64,7 @@ The Employee may engage in lawful outside work subject to avoiding actual confli
 
 ## 11. Separation
 
-Upon separation, the Company pays final wages and accrued amounts within applicable statutory deadlines. The Employee must return Company property and cooperate with a reasonable handover; payment of earned wages is not conditioned on handover or a release. Student information must remain protected after separation. Any continuing obligations apply only to the extent lawful.
+Upon separation, the Company pays final wages and accrued amounts within applicable statutory deadlines. Final pay follows applicable law separately from the regular paydays. No advance-notice requirement is a condition of resignation or a reason to hold final pay. The Employee must return Company property and cooperate with a reasonable handover; payment of earned wages is not conditioned on handover or a release. Student information must remain protected after separation. Any continuing obligations apply only to the extent lawful.
 
 ## 12. Law, Disputes, and Entire Agreement
 
@@ -82,7 +82,7 @@ This Agreement and its completed schedules state the employment terms addressed 
 - California work location: ____________________
 - Supervisor: ____________________
 - Position: Part-time, nonexempt Teacher
-- Regular hourly rate: USD $50.00
+- Regular hourly rate: Employee's accepted hourly rate
 - Payroll period and designated paydays: Semimonthly, with pay periods and paydays measured in Pacific Time (America/Los_Angeles). Wages for work performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; wages for work performed from the 16th through the last day of a month are paid no later than the 10th of the following month.
 - Applicable overtime rates: As required by law and stated in the wage notice
 

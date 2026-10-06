@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { assertDocusignSandboxBaseUri, createEnvelope } from "@/lib/docusign";
+import { loadCurrentTeacherRate } from "./rate";
 import { prepareTeacherAgreement, type PrepareResult, type TeacherAgreementInputs } from "./prepare";
 
 export type TeacherAgreementStatus = "not_sent" | "sent" | "signed" | "declined" | "voided";
@@ -19,18 +20,20 @@ export type TeacherAgreementState = {
 };
 
 const INPUT_COLUMNS =
-  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, non_lesson_terms, payment_details";
+  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, payment_details, engagement_type";
 
 async function loadBasics(admin: SupabaseClient, teacherId: string) {
-  const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }] = await Promise.all([
+  const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }, rate] = await Promise.all([
     admin.from("teachers").select("workspace_email").eq("id", teacherId).maybeSingle(),
     admin.from("profiles").select("name").eq("id", teacherId).maybeSingle(),
     admin.from("teacher_workspace_provisioning").select("status").eq("linked_teacher_id", teacherId).maybeSingle(),
     admin.from("teacher_agreement_inputs").select(INPUT_COLUMNS).eq("teacher_id", teacherId).maybeSingle(),
+    loadCurrentTeacherRate(admin, teacherId),
   ]);
   return {
     teacherName: (profile?.name as string | undefined) ?? "",
     workspaceEmail: (teacher?.workspace_email as string | null | undefined) ?? null,
+    rate: rate ? { amountMinor: rate.amountMinor, currency: rate.currency } : null,
     workspaceProvisioned: prov?.status === "created",
     inputs: (inputs as TeacherAgreementInputs | null) ?? null,
   };
@@ -129,7 +132,7 @@ export async function sendTeacherAgreementInternal(
     sent_at: new Date().toISOString(),
     sent_by: params.actorUserId,
     recipient_email: prepared.recipientEmail,
-    inputs_snapshot: basics.inputs,
+    inputs_snapshot: { ...basics.inputs, rate: basics.rate },
   });
   if (error) {
     // The envelope exists but is not recorded — surface loudly so it can be voided by hand.
