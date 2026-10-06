@@ -1,9 +1,9 @@
 {
  "itemId": "lines_angles_triangles.exterior_angle.PT.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T06:15:44Z",
+ "reviewedAt": "2026-10-06T06:18:26Z",
  "reviewer": "claude-sonnet-5.5 (math-B session)",
- "codeHash": "d13d52549a6013f7f7df1f17d454b1393cf85531beb83dacc728ee2722e0cb92",
+ "codeHash": "71d24cf69ca7e4b07be162bba462e3241f962a623b700b5a6cefec721224f902",
  "samples": [
   "lines_angles_triangles.exterior_angle.PT.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "평행선 2 + 횡단선 2(아래에서 만남, 삼각형 FWE) 샘플 데스크톱·375px 확인: crossing.slants 로 두 횡단선이 각자의 각대로 그려지고(참값 value) 라벨 값(5x+47=117°, x+53=67°, 2x+22=50°)이 그림 비율과 일치, 바깥각 호가 W 의 연장선 쪽에 표시, 점 이름·선 이름·각 라벨 겹침 없음. 갤러리(4 연산자·시드 1~2)로 위/아래 평행선 동위각 라벨·P/Q 양쪽 바깥각 확인. 꼭대기 각 라벨이 좁은 쐐기 때문에 꼭짓점에서 떨어져 놓이는 것은 엔진 표준 배치."
+ "notes": "재스탬프 아님(장면 규칙 꼭대기 각 ≥60° 로 샘플 갱신) — 평행선 2 + 횡단선 2(삼각형 AXH) 샘플 데스크톱·375px 확인: 라벨 값(3x+50=128°, 3x-9=69°, 4x-45=59°)이 그림 비율과 일치하고 바깥각 호가 변 HX 의 연장선 쪽, 점·선 이름·각 라벨 겹침 없음. 갤러리(4 연산자·시드 1~2)로 위/아래 동위각·P/Q 양쪽 바깥각 확인."
 }

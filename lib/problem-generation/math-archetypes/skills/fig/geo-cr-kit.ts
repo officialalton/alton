@@ -7,13 +7,13 @@ import { exprLabel } from "./tri-kit";
 import { lead } from "./geo-kit";
 
 export type CrScene = { par: [string, string]; tr: [string, string]; P: string; Q: string; X: string; al: number; be: number; ga: number };
-/** 장면: 평행선 이름은 m·n 이 아닌 쌍도 쓴다. 예각 al·be 는 46~72 의 서로 다른 정수(꼭대기 각 36° 이상). */
+/** 장면: 평행선 이름은 m·n 이 아닌 쌍도 쓴다. 예각 al·be 는 46~74 의 서로 다른 정수(꼭대기 각 60° 이상 — 좁으면 그 라벨이 꼭짓점에서 멀리 놓여 밑각 라벨과 뒤섞인다). */
 export function crScene(rng: Rng, o: { alMin?: number; alMax?: number } = {}): CrScene {
   const par: [string, string] = rng.pick([["m", "n"], ["j", "k"], ["a", "b"], ["u", "v"]] as [string, string][]);
   const tr: [string, string] = rng.pick(([["p", "q"], ["s", "t"], ["r", "w"], ["c", "d"]] as [string, string][]).filter((t) => !t.some((n) => par.includes(n))));
   const pts = rng.shuffle(["P", "Q", "X", "R", "S", "T", "U", "V", "W", "Y", "Z", "A", "B", "C", "D", "E", "F", "G", "H"].filter((n) => !par.includes(n.toLowerCase()) && !tr.includes(n.toLowerCase()))).slice(0, 3);
   for (let t = 0; t < 100; t++) {
-    const al = rng.int(o.alMin ?? 46, o.alMax ?? 72), be = rng.int(o.alMin ?? 46, o.alMax ?? 72); const ga = 180 - al - be; if (al === be || ga < 36 || ga === al || ga === be) continue;
+    const al = rng.int(o.alMin ?? 46, o.alMax ?? 74), be = rng.int(o.alMin ?? 46, o.alMax ?? 74); const ga = 180 - al - be; if (al === be || ga < 60 || ga === al || ga === be) continue; // 꼭대기 각이 좁으면 그 라벨이 꼭짓점에서 멀리 놓여 밑각 라벨과 뒤섞인다 → 60° 이상
     return { par, tr, P: pts[0], Q: pts[1], X: pts[2], al, be, ga };
   }
   throw new GenFail("교차 장면 표집 실패");

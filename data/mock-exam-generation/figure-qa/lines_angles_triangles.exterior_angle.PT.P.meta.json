@@ -1,7 +1,7 @@
 {
  "itemId": "lines_angles_triangles.exterior_angle.PT.P",
- "generatedAt": "2026-10-06T06:15:28.787Z",
- "codeHash": "d13d52549a6013f7f7df1f17d454b1393cf85531beb83dacc728ee2722e0cb92",
+ "generatedAt": "2026-10-06T06:18:13.814Z",
+ "codeHash": "71d24cf69ca7e4b07be162bba462e3241f962a623b700b5a6cefec721224f902",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -26,17 +26,17 @@
    "archetypeId": "lat.exterior_angle.PT.P.compose_kind",
    "seed": 11,
    "signature": "parallel_transversal",
-   "stimulus": "A student draws the figure shown for a geometry assignment. The figure shows parallel lines $u$ and $v$ cut by transversals $p$ and $q$. The transversals intersect at point $F$ and meet line $v$ at points $W$ and $E$, so triangle $FWE$ is formed. Some angle measures are marked in degrees. Side $EW$ is extended past $W$ along line $v$.",
-   "question": "What is the degree measure of the interior angle of the triangle at $W$?",
+   "stimulus": "A designer plans the layout shown. The figure shows parallel lines $m$ and $n$ cut by transversals $s$ and $t$. The transversals intersect at point $A$ and meet line $n$ at points $X$ and $H$, so triangle $AXH$ is formed. Some angle measures are marked in degrees. Side $HX$ is extended past $X$ along line $n$.",
+   "question": "How many degrees is the angle at vertex $X$ inside triangle $AXH$?",
    "options": [
-    "14",
-    "117",
-    "130",
-    "63"
+    "111",
+    "52",
+    "128",
+    "26"
    ],
-   "correctIndex": 3,
-   "answer": "63",
-   "explanation": "(1) 그림에서 각 라벨을 읽는다. (2) 위 평행선 u 에서 읽은 각은 평행선이므로 동위각으로 삼각형의 E 의 각과 같다. (3) 바깥각 정리: (5x+47) = (2x+22) + (x+53) 에서 x = 14 이다. (4) 바깥각 = 117° 이다. (5) 삼각형의 W 의 각 = 180° - 117° = 63° 이다. (6) 따라서 63 이다. 따라서 정답은 63이다.",
+   "correctIndex": 1,
+   "answer": "52",
+   "explanation": "(1) 그림에서 각 라벨을 읽는다. (2) 위 평행선 m 에서 읽은 각은 평행선이므로 동위각으로 삼각형의 H 의 각과 같다. (3) 바깥각 정리: (3x+50) = (3x-9) + (4x-45) 에서 x = 26 이다. (4) 바깥각 = 128° 이다. (5) 삼각형의 X 의 각 = 180° - 128° = 52° 이다. (6) 따라서 52 이다. 따라서 정답은 52이다.",
    "structuralIssues": []
   }
  ]
