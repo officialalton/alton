@@ -1,0 +1,23 @@
+{
+ "itemId": "lines_angles_triangles.isosceles_base_angle.TR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:29:42Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "f247ed2d2e2acc91e4bd87e2f0574ff6af8db262625c2c6317f04ad09dc7fef4",
+ "samples": [
+  "lines_angles_triangles.isosceles_base_angle.TR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "삼각형 비례·각도·변 라벨이 값과 일치, 라벨 겹침 없음, 데스크톱·375px 확인(스냅샷은 LaTeX 미조판이라 \\sin 이 원문으로 보임, 앱 렌더와 무관)."
+}

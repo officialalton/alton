@@ -56,8 +56,8 @@ export function checkFigureBinding(inst: Instance): string[] {
 }
 
 const DATA_KEYS = new Set(["cells", "points", "values", "rows", "slope", "intercept", "dots", "bins", "count", "series", "through", "at", "params", "min", "q1", "median", "q3", "max"]);
-export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell" | "line";
-export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell", "line"];
+export type TamperMode = "add" | "scale" | "neg" | "flipy" | "scramble" | "drop" | "swap" | "cell" | "line" | "label" | "label_last";
+export const TAMPER_MODES: TamperMode[] = ["add", "scale", "neg", "flipy", "scramble", "drop", "swap", "cell", "line", "label", "label_last"];
 const isPair = (p: unknown): p is [number, number] => Array.isArray(p) && p.length === 2 && p.every((n) => typeof n === "number");
 /**
  * 돌연변이: 자료 수치(표 칸·점 좌표·계열 값·추세선)를 변조한다. 축·눈금 값은 건드리지 않는다.
@@ -105,6 +105,19 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
     if (o && Array.isArray(o.choices)) return { ...o, choices: o.choices.map((c, i) => (i === 0 ? tamperFigure(c, "line") : c)) };
     if (o && Array.isArray(o.figures)) return { ...o, figures: o.figures.map((f, i) => (i === 0 ? { ...f, spec: tamperFigure(f.spec, "line") } : f)) };
     return fig;
+  }
+  if (mode === "label" || mode === "label_last") {
+    // 도형: 숫자가 든 첫(label)·마지막(label_last) 'label'(각·변 라벨)의 마지막 정수를 +1 — 라벨 속 값이 답을 정하는 도형 자료(삼각형·원·다각형·입체)의 변조.
+    // 둘을 모두 두는 까닭: 두 직각변을 맞바꿔도 같은 답(둘레·직각변의 합)이 나오는 장면이 있어 첫 라벨만 바꾸면 못 잡는다.
+    const hasDigit = (v: unknown, key = ""): number => (typeof v === "string" ? (key === "label" && /\d/.test(v) ? 1 : 0) : Array.isArray(v) ? v.reduce((n: number, x) => n + hasDigit(x, key), 0) : v && typeof v === "object" ? Object.entries(v as Record<string, unknown>).reduce((n, [k, x]) => n + hasDigit(x, k), 0) : 0);
+    const total = hasDigit(fig); if (!total) return fig; const target = mode === "label" ? 1 : total; let seen = 0;
+    const walkL = (v: unknown, key = ""): unknown => {
+      if (typeof v === "string") { if (key === "label" && /\d/.test(v)) { seen++; if (seen === target) { const idx = [...v.matchAll(/\d+/g)].pop()!; return `${v.slice(0, idx.index)}${Number(idx[0]) + 1}${v.slice((idx.index ?? 0) + idx[0].length)}`; } } return v; }
+      if (Array.isArray(v)) return v.map((x) => walkL(x, key));
+      if (v && typeof v === "object") return Object.fromEntries(Object.entries(v as Record<string, unknown>).map(([k, x]) => [k, walkL(x, k)]));
+      return v;
+    };
+    return walkL(fig);
   }
   if (mode === "swap") {
     const o = fig as { figures?: { spec: unknown }[]; choices?: unknown[] } | null;

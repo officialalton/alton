@@ -182,3 +182,22 @@ describe("그래프 계열(G6): 막대·히스토그램·점도표·상자그림
   it("(b) 축 제목의 단위(괄호)가 빠지면 잡는다", () => { expect(codes(checkRenderedFigure({ ...bar, yTitle: "Visitors" }, R({ ...bar, yTitle: "Visitors" })))).toContain("unit_missing_in_title"); });
   it("(d) 범주 이름이 그려지지 않으면 잡는다", () => { const svg = R(bar); expect(codes(checkRenderedFigure(bar, svg.replace(">Tue<", "><")))).toContain("category_label_missing"); });
 });
+
+describe("그래프 계열(G7): 삼각형의 각·변 비율 충실도 검사와 돌연변이", () => {
+  const ang = { type: "triangle", vertices: ["A", "B", "C"], angles: [{ at: "A", label: "(2x + 10)°", value: 50 }, { at: "B", label: "(3x - 5)°", value: 70 }, { at: "C", label: "(x + 20)°", value: 60 }] } as Spec;
+  const rt = { type: "triangle", vertices: ["P", "Q", "R"], kind: "right", rightAngleAt: "Q", horizontal: ["Q", "R"], sides: [{ between: ["Q", "R"], label: "12" }, { between: ["P", "Q"], label: "5" }, { between: ["P", "R"], label: "x" }] } as Spec;
+  const R = (s: Spec) => renderFigureSvg(s as unknown as FigureSpec);
+  it("원본은 통과", () => { expect(checkRenderedFigure(ang, R(ang))).toEqual([]); expect(checkRenderedFigure(rt, R(rt))).toEqual([]); });
+  it("(a) 각의 참값(value)과 다르게 그려진 삼각형은 잡는다(그림에 40°·꼭지각 120° 로 그리기)", () => {
+    const bad = { ...ang, angles: [{ at: "A", label: "(2x + 10)°", value: 50 }, { at: "B", label: "(3x - 5)°", value: 70 }, { at: "C", label: "(x + 20)°", value: 60 }] } as Spec;
+    const svg = R(bad).replace(/<line x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)" stroke="#111" stroke-width="2"/, (_m, a, b, c, d) => `<line x1="${Number(a) + 25}" y1="${b}" x2="${c}" y2="${d}" stroke="#111" stroke-width="2"`);
+    expect(codes(checkRenderedFigure(bad, svg))).toContain("render_value_mismatch");
+  });
+  it("(a) 두 직각변 라벨 12:5 의 비율과 다르게 그려지면 잡는다", () => {
+    const svg = R(rt).replace(/(<line x1="58" y1=")([\d.]+)(" x2="58" y2=")([\d.]+)/, (_m, a, y1, b, y2) => `${a}${Number(y1) - 40}${b}${y2}`);
+    expect(svg).not.toBe(R(rt)); expect(codes(checkRenderedFigure(rt, svg))).toContain("render_value_mismatch");
+  });
+  it("'label' 변조: 숫자가 든 첫 라벨의 마지막 정수가 바뀐다", () => {
+    const m = tamperFigure(rt, "label") as { sides: { label: string }[] }; expect(m.sides[0].label).toBe("13");
+  });
+});

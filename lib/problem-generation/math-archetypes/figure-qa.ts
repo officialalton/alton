@@ -198,6 +198,29 @@ function checkPlaneLines(spec: Spec, svg: string, issues: QaIssue[]) {
   }
 }
 
+// ───────── 삼각형(triangle) 충실도 ─────────
+const parseAng = (t?: string): number | null => { if (!t) return null; const m = t.trim().match(/^(\d+(?:\.\d+)?)\s*(?:°|degrees?)?$/i); return m ? Number(m[1]) : null; };
+const parseSideNum = (t?: string): number | null => { if (!t) return null; const m = t.trim().match(/^(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : null; };
+/** 그려진 삼각형(굵기 2 의 검은 선 3 개)의 꼭짓점을 이름(이탤릭 글자)과 짝지어 각·변 길이를 읽고, 데이터의 각(value·숫자 라벨)·직각·숫자 변 라벨과 맞는지 본다. 두 번째 삼각형은 보지 않는다. */
+function checkTriangleFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const segs = [...svg.matchAll(/<line\b([^>]*)\/?>/g)].map((m) => ({ x1: Number(attr(m[1], "x1")), y1: Number(attr(m[1], "y1")), x2: Number(attr(m[1], "x2")), y2: Number(attr(m[1], "y2")), w: attr(m[1], "stroke-width"), stroke: attr(m[1], "stroke") })).filter((l) => l.stroke === "#111" && l.w === "2");
+  if (segs.length < 3) { issues.push({ code: "render_empty", message: "삼각형의 변이 3 개 그려지지 않았습니다." }); return; }
+  const pts: [number, number][] = []; const add = (x: number, y: number) => { if (!pts.some((p) => Math.hypot(p[0] - x, p[1] - y) < 0.6)) pts.push([x, y]); };
+  for (const l of segs.slice(0, 3)) { add(l.x1, l.y1); add(l.x2, l.y2); }
+  if (pts.length !== 3) { issues.push({ code: "render_value_mismatch", message: `삼각형의 꼭짓점이 ${pts.length} 개로 읽힙니다.` }); return; }
+  const names = (spec.vertices as string[]) ?? []; const it = texts(svg).filter((t) => names.includes(t.text) && t.size >= 14);
+  const at = new Map<string, [number, number]>(); for (const n of names) { const tx = it.find((t) => t.text === n); if (!tx) continue; let best = pts[0], bd = Infinity; for (const p of pts) { const d = Math.hypot(p[0] - tx.x, p[1] - tx.y); if (d < bd) { bd = d; best = p; } } at.set(n, best); }
+  if (at.size !== 3 || new Set([...at.values()].map((p) => p.join(","))).size !== 3) return; // 꼭짓점 이름 위치가 모호하면(이름 글자 없음) 건너뜀
+  const ang = (v: string) => { const [o, ...rest] = [at.get(v)!, ...[...at.entries()].filter(([k]) => k !== v).map(([, p]) => p)]; const a = Math.atan2(rest[0][1] - o[1], rest[0][0] - o[0]), b = Math.atan2(rest[1][1] - o[1], rest[1][0] - o[0]); let d = Math.abs(a - b) * 180 / Math.PI; if (d > 180) d = 360 - d; return d; };
+  const len = (u: string, v: string) => Math.hypot(at.get(u)![0] - at.get(v)![0], at.get(u)![1] - at.get(v)![1]);
+  for (const a of ((spec.angles as { at: string; label?: string; value?: number }[]) ?? [])) { const want = typeof a.value === "number" ? a.value : parseAng(a.label); if (want === null || !at.has(a.at)) continue; const got = ang(a.at); if (Math.abs(got - want) > 2.5) issues.push({ code: "render_value_mismatch", message: `꼭짓점 ${a.at} 의 각이 ${got.toFixed(1)}° 로 그려졌지만 데이터는 ${want}° 입니다(그림이 참값과 다름).` }); }
+  const ra = spec.rightAngleAt as string | undefined; if (ra && at.has(ra)) { const got = ang(ra); if (Math.abs(got - 90) > 2.5) issues.push({ code: "render_value_mismatch", message: `직각 꼭짓점 ${ra} 의 각이 ${got.toFixed(1)}° 로 그려졌습니다.` }); }
+  if (!spec.notToScale) {
+    const sides = ((spec.sides as { between: [string, string]; label?: string }[]) ?? []).map((q) => ({ v: parseSideNum(q.label), a: q.between[0], b: q.between[1] })).filter((q) => q.v !== null && at.has(q.a) && at.has(q.b)) as { v: number; a: string; b: string }[];
+    for (let i = 1; i < sides.length; i++) { const r0 = len(sides[0].a, sides[0].b) / sides[0].v, ri = len(sides[i].a, sides[i].b) / sides[i].v; if (Math.abs(ri / r0 - 1) > 0.06) { issues.push({ code: "render_value_mismatch", message: `변 ${sides[i].a}${sides[i].b} 의 길이 비율이 변 ${sides[0].a}${sides[0].b} 와 라벨 ${sides[i].v}:${sides[0].v} 에 맞지 않게 그려졌습니다(${(ri / r0).toFixed(2)} 배).` }); break; } }
+  }
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -211,6 +234,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "histogram") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: true, xTitle: true, yTitle: true }); checkHistogramFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
   if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkPlaneLines(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   return issues;
 }
