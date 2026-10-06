@@ -220,7 +220,7 @@ describe("고객 시간대(customer_timezone) — 모든 동기화 경로가 행
     createMock.mockRejectedValue(new Error("Calendar API 요청 실패 (status 500)"));
     await resyncConsultationCalendarNow(id);
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
-    expect(String(sendEmailMock.mock.calls[0][0].html)).toContain("서울");
+    expect(String(sendEmailMock.mock.calls[0][0].html)).toContain("Seoul");
   });
 });
 

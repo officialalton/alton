@@ -184,7 +184,7 @@ describe("취소는 Calendar 이벤트를 지운다", () => {
     const mine = insertMeeting({ event: `ev-${RUN}-cmine`, sync: "succeeded" });
     const theirs = insertMeeting({ consultant: CB, event: `ev-${RUN}-cb`, sync: "succeeded" });
     currentUser = CA;
-    await expect(cancelMyMeetingRequestAction(theirs)).rejects.toThrow("본인이 담당하는 미팅만");
+    await expect(cancelMyMeetingRequestAction(theirs)).rejects.toThrow("You can only cancel meetings assigned to you.");
     expect(row(theirs).status).toBe("scheduled");
     await cancelMyMeetingRequestAction(mine);
     expect(deleteMock).toHaveBeenCalledWith(expect.objectContaining({ googleEventId: `ev-${RUN}-cmine`, teacherWorkspaceEmail: `${TAG}-ca@example.com` }));
