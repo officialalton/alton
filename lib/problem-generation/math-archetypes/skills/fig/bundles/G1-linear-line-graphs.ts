@@ -8,5 +8,7 @@ import { ITEM as lfInterpIntercept } from "../items/linear_functions.interpret_i
 import { ITEM as lfConstruct } from "../items/linear_functions.construct_equation_from_graph.LN.P";
 import { ITEM as l2IntersectX } from "../items/linear_equations_two_var.intersection_x.LN.P";
 import { ITEM as l2IntersectY } from "../items/linear_equations_two_var.intersection_y.LN.P";
+import { ITEM as l2IntersectSum } from "../items/linear_equations_two_var.intersection_sum.LN.P";
+import { ITEM as l2NumSol } from "../items/linear_equations_two_var.num_solutions.LN.P";
 
-export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct, ...l2IntersectX, ...l2IntersectY];
+export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct, ...l2IntersectX, ...l2IntersectY, ...l2IntersectSum, ...l2NumSol];

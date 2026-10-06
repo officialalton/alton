@@ -1,0 +1,23 @@
+{
+ "itemId": "linear_equations_two_var.num_solutions.LN.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:28:52Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "898a6168958ee0d6028de983065f60c3218c254d53aef2ac67040cbb1fb1f6fa",
+ "samples": [
+  "linear_equations_two_var.num_solutions.LN.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Pass A (0,0),(5,60) 기울기 12 → 평행이면 k=12, 메타 정답 12 일치. 보조 확인: 평행선(compose_kind) 샘플을 별도 렌더해 두 직선이 평행·라벨 옆 배치·세로 간격 판독 확인. 눈금·축 제목 양호, 375px 판독 가능."
+}

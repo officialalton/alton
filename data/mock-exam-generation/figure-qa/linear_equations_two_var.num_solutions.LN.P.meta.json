@@ -1,0 +1,41 @@
+{
+ "itemId": "linear_equations_two_var.num_solutions.LN.P",
+ "generatedAt": "2026-10-06T02:28:51.763Z",
+ "codeHash": "898a6168958ee0d6028de983065f60c3218c254d53aef2ac67040cbb1fb1f6fa",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_two_var.num_solutions.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_two_var.num_solutions.LN.P.png",
+   "mobileFile": "linear_equations_two_var.num_solutions.LN.P.m375.png",
+   "archetypeId": "l2.num_solutions.LN.P.param_condition",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The graph shown compares the costs of two transit passes. For each, the relationship with the number of uses is linear. Suppose the rate of change of Pass B is changed to $k$ dollars per use, where $k$ is a constant, while its starting value (80 dollars) stays the same.",
+   "question": "If Pass A and the changed Pass B are never equal at any value of the number of uses, what is $k$?",
+   "options": [
+    "12",
+    "4",
+    "0",
+    "13"
+   ],
+   "correctIndex": 0,
+   "answer": "12",
+   "explanation": "(1) Pass A: y 절편 0 과 격자점을 읽어 기울기 12 을 구한다. (2) Pass B: y 절편 80 과 격자점을 읽어 기울기 4 를 구한다. (3) 같아지는 순간이 없으려면 두 직선이 평행해야 하고, 처음 값은 서로 달라야 한다(0 ≠ 80). (4) 따라서 k = Pass A 의 기울기 = 12 이다. (5) 확인: k = 12 이면 두 직선의 기울기가 같고 처음 값(0, 80)이 달라 평행이다. 따라서 정답은 12이다.",
+   "structuralIssues": []
+  }
+ ]
+}
