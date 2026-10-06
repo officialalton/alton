@@ -125,7 +125,7 @@ const jobStatus = (childId: string) =>
 
 describe("runContractDispatchNow — 실제 DB, DocuSign 모킹", () => {
   it("비활성이면 큐는 queued 그대로이고 발송·claim이 없다", async () => {
-    delete process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
+    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "false"; // 비상 정지(자동 발송 기본 ON, 환경변수 "false" 가 즉시 중지)
     const { childId, sessionId } = trialCompletedChild("imm-off");
     expect(jobStatus(childId)).toBe("queued");
     await runContractDispatchNow({ sessionId });

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { logLearningEventAction } from "./activity-actions";
+import { logLearningEventAction } from "./activity-tracking";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import type { MyVocabWord, LibraryBook, LibraryWord, VocabQuiz, VocabQuizItem, VocabFolder } from "./vocab-library-data";
 import {

@@ -82,6 +82,10 @@ const fromMock = vi.fn((table: string) => {
       update: () => ({ eq: () => ({ eq: subjectEnrollmentsUpdateEqMock }) }),
     };
   }
+  if (table === "teacher_contracts") {
+    // 선생님 계약 envelope 인지 먼저 확인한다 — 이 테스트의 envelope 는 가족 계약이므로 일치 행 없음.
+    return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }) }) };
+  }
   throw new Error(`unexpected table ${table}`);
 });
 

@@ -3,7 +3,7 @@ import { f, FONT, labelWidth, type Sheet } from "./_layout";
 
 export type Frame = { x0: number; y0: number; x1: number; y1: number };
 export const COLORS = ["#111", "#C8102E", "#1B6FB0", "#0f7b4a"];
-export const fmtTick = (n: number) => (Math.abs(n) >= 1000 ? n.toLocaleString("en-US") : f(n));
+export const fmtTick = (n: number) => (Math.abs(n) >= 1000 ? new Intl.NumberFormat("en-US").format(n) : f(n));
 
 /** 세로축(값) — 범위·눈금·격자·숫자·제목. 값 → 화면 y 함수를 돌려준다. */
 export function drawYAxis(sheet: Sheet, fr: Frame, min: number, max: number, step: number, title?: string): (v: number) => number {

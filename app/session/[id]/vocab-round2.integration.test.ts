@@ -135,7 +135,7 @@ describe("ensure_default_vocab_folder — 학생·담당 교사만 부를 수 �
     const second = asUser(STUDENT_ID, `select ensure_default_vocab_folder('${STUDENT_ID}');`);
     expect(second).toBe(first);
     const name = psql(`select name from vocab_word_folders where id = '${first}';`);
-    expect(name).toBe("오답 노트");
+    expect(name).toBe("Missed Words");
   });
 
   it("담당이 아닌 교사는 거절된다", () => {

@@ -37,7 +37,7 @@ export function validatePie(input: unknown): { ok: true; spec: PieSpec } | { ok:
   return { ok: true, spec: s as unknown as PieSpec };
 }
 
-const fmtNum = (n: number) => (Math.abs(n) >= 1000 ? n.toLocaleString("en-US") : f(n));
+const fmtNum = (n: number) => (Math.abs(n) >= 1000 ? new Intl.NumberFormat("en-US").format(n) : f(n));
 /** 부채꼴 라벨 글. */
 export function pieLabelText(spec: PieSpec, i: number): string {
   const sl = spec.slices[i];
