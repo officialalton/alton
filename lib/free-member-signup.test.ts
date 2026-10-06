@@ -71,7 +71,7 @@ describe("validateStudentSignup", () => {
 describe("isPendingFreeSignup / readSignupMetadata / pendingFreeSignupDestination", () => {
   const confirmed = {
     email_confirmed_at: "2026-10-05T00:00:00Z",
-    user_metadata: { signup_source: "self_signup", name: "김학생", birthdate: "2010-05-01", grade: "10학년", terms_version: "2026-10-05" },
+    user_metadata: { signup_source: "self_signup", name: "김학생", birthdate: "2010-05-01", grade: "10학년", terms_version: "2026-10-06" },
   };
 
   it("표식+이메일 확인이 있어야 대기 가입자다", () => {

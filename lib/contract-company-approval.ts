@@ -6,7 +6,7 @@ import type { CompanyApprovalForTemplate } from "@/lib/contracts/family-contract
 // contract_company_approvals는 변경 불가능한 감사 이력이다(마이그레이션의
 // reject_*_mutation 트리거로 UPDATE/DELETE를 DB 레벨에서 차단) — 발송되는
 // 문서에 그대로 인쇄되는 값이 실제 저장된 값과 항상 일치해야 하기 때문이다.
-export const COMPANY_ENTITY_NAME = "Alton Education Inc.";
+export const COMPANY_ENTITY_NAME = "Alton Education LLC";
 
 type CompanyApprovalRow = {
   contract_version_id: string;
