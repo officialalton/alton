@@ -1,10 +1,18 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { downloadCompletedDocument } from "@/lib/docusign";
+import { downloadCertificateOfCompletion, downloadCompletedDocument } from "@/lib/docusign";
 import { uploadArtifactToDrive } from "@/lib/drive-artifacts";
+import { archiveFileName } from "@/lib/drive/archive-config";
 
 const MAX_RETRIES = 5;
 
-type ArchiveRow = { id: string; teacher_id: string; docusign_envelope_id: string; drive_retry_count: number };
+type ArchiveRow = {
+  id: string;
+  teacher_id: string;
+  docusign_envelope_id: string;
+  drive_retry_count: number;
+  template_version: string | null;
+  signed_at: string | null;
+};
 
 export type ArchiveResult = { attempted: number; succeeded: number; failed: number; manualReview: number };
 
@@ -16,7 +24,7 @@ export type ArchiveResult = { attempted: number; succeeded: number; failed: numb
 export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts?: { teacherId?: string }): Promise<ArchiveResult> {
   let q = admin
     .from("teacher_contracts")
-    .select("id, teacher_id, docusign_envelope_id, drive_retry_count")
+    .select("id, teacher_id, docusign_envelope_id, drive_retry_count, template_version, signed_at")
     .eq("status", "signed")
     .in("drive_sync_status", ["queued", "retryable_failed"])
     .not("docusign_envelope_id", "is", null);
@@ -36,18 +44,33 @@ export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts
     if (!claimed || claimed.length === 0) continue; // another worker owns it
     result.attempted += 1;
     try {
-      const fileBuffer = await downloadCompletedDocument(row.docusign_envelope_id);
-      const { driveFileId } = await uploadArtifactToDrive({
-        contractId: row.id,
-        artifactType: "signed_document",
-        fileBuffer,
-        fileName: `teacher-agreement-${row.teacher_id}-${row.id}.pdf`,
-      });
+      const { data: profile } = await admin.from("profiles").select("name").eq("id", row.teacher_id).maybeSingle();
+      const personName = (profile?.name as string | undefined) ?? "Teacher";
+      const version = row.template_version ?? "unversioned";
+      const signedAt = row.signed_at ?? new Date().toISOString();
+      const put = (certificate: boolean, fileBuffer: Buffer) =>
+        uploadArtifactToDrive({
+          contractId: row.id,
+          artifactType: certificate ? "certificate_of_completion" : "signed_document",
+          fileBuffer,
+          fileName: archiveFileName({ contractType: "teacher_agreement", contractId: row.id, version, signedAt, certificate }),
+          destination: {
+            kind: "teacher",
+            personId: row.teacher_id,
+            personName,
+            identity: { contractId: row.id, docKind: certificate ? "certificate_of_completion" : "signed_document", contractType: "teacher_agreement" },
+          },
+        });
+      // Each upload is deduplicated by contract id + kind, so a retry after a partial failure never duplicates the first file.
+      const { driveFileId, personFolderId } = await put(false, await downloadCompletedDocument(row.docusign_envelope_id));
+      const { driveFileId: certificateFileId } = await put(true, await downloadCertificateOfCompletion(row.docusign_envelope_id));
       await admin
         .from("teacher_contracts")
         .update({
           drive_sync_status: "succeeded",
           drive_file_id: driveFileId,
+          drive_folder_id: personFolderId ?? null,
+          drive_certificate_file_id: certificateFileId,
           drive_synced_at: new Date().toISOString(),
           drive_last_error: null,
           document_url: `https://drive.google.com/file/d/${driveFileId}/view`,

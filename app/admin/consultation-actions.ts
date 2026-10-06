@@ -548,10 +548,15 @@ export async function retryFailedDriveArtifacts(): Promise<{
   let manualReview = 0;
   for (const row of (rows ?? []) as DriveArtifactRow[]) {
     try {
-      const { driveFileId } = await processOneDriveArtifact(admin, row);
+      const { driveFileId, personFolderId } = await processOneDriveArtifact(admin, row);
       await admin
         .from("drive_artifacts")
-        .update({ sync_status: "succeeded", drive_file_id: driveFileId, uploaded_at: new Date().toISOString() })
+        .update({
+          sync_status: "succeeded",
+          drive_file_id: driveFileId,
+          ...(personFolderId ? { drive_folder_id: personFolderId } : {}),
+          uploaded_at: new Date().toISOString(),
+        })
         .eq("id", row.id);
     } catch (uploadError) {
       // 정책: Drive 저장 실패는 서명/계약 상태를 되돌리지 않고 sync_status만

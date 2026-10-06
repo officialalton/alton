@@ -6,6 +6,7 @@ const downloadMock = vi.fn();
 vi.mock("@/lib/drive-artifacts", () => ({ uploadArtifactToDrive: (...a: unknown[]) => uploadMock(...a) }));
 vi.mock("@/lib/docusign", () => ({
   downloadCompletedDocument: (...a: unknown[]) => downloadMock(...a),
+  downloadCertificateOfCompletion: (...a: unknown[]) => downloadMock(...a),
   assertDocusignSandboxBaseUri: vi.fn(),
   createEnvelope: (...a: unknown[]) => createEnvelopeMock(...a),
 }));
@@ -188,6 +189,7 @@ describe("archiveSignedTeacherAgreements", () => {
     const sel: Record<string, unknown> = {};
     for (const m of ["eq", "in", "not"]) sel[m] = () => sel;
     sel.then = (res: (v: unknown) => unknown) => res({ data: rows, error: null });
+    sel.maybeSingle = async () => ({ data: { name: "Sora Park" }, error: null });
     return {
       updates,
       from: () => ({
@@ -204,16 +206,19 @@ describe("archiveSignedTeacherAgreements", () => {
       }),
     };
   }
-  const row = { id: "c1", teacher_id: "t1", docusign_envelope_id: "env-1", drive_retry_count: 0 };
+  const row = { id: "c1", teacher_id: "t1", docusign_envelope_id: "env-1", drive_retry_count: 0, template_version: "0.2-EN-CA", signed_at: "2026-11-01T12:00:00Z" };
   beforeEach(() => {
     downloadMock.mockReset().mockResolvedValue(Buffer.from("pdf"));
-    uploadMock.mockReset().mockResolvedValue({ driveFileId: "drv1" });
+    uploadMock.mockReset().mockResolvedValue({ driveFileId: "drv1", personFolderId: "pf1" });
   });
   it("uploads the signed PDF and records the Drive reference", async () => {
     const a = archAdmin([row]);
     expect(await archiveSignedTeacherAgreements(a as never)).toMatchObject({ attempted: 1, succeeded: 1 });
-    expect(uploadMock.mock.calls[0][0].fileName).toBe("teacher-agreement-t1-c1.pdf");
-    expect(a.updates.at(-1)).toMatchObject({ drive_sync_status: "succeeded", drive_file_id: "drv1", document_url: "https://drive.google.com/file/d/drv1/view" });
+    expect(uploadMock.mock.calls[0][0].fileName).toBe("teacher_agreement_c1_0.2-EN-CA_2026-11-01.pdf");
+    expect(uploadMock.mock.calls[1][0].fileName).toBe("teacher_agreement_c1_0.2-EN-CA_2026-11-01_certificate.pdf");
+    expect(uploadMock.mock.calls[0][0].destination.identity).toMatchObject({ contractId: "c1", docKind: "signed_document" });
+    expect(uploadMock.mock.calls[0][0].destination).toMatchObject({ kind: "teacher", personId: "t1", personName: "Sora Park" });
+    expect(a.updates.at(-1)).toMatchObject({ drive_sync_status: "succeeded", drive_file_id: "drv1", drive_folder_id: "pf1", drive_certificate_file_id: "drv1", document_url: "https://drive.google.com/file/d/drv1/view" });
   });
   it("keeps the signed state and marks the row retryable when Drive fails", async () => {
     uploadMock.mockRejectedValue(new Error("drive down"));

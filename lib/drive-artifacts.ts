@@ -3,6 +3,8 @@ import { getDriveApiAccessToken } from "@/lib/google-workspace-auth";
 import { getR3PreviewDriveAccessToken } from "@/lib/drive-preview-verify-auth";
 import { downloadCompletedDocument, downloadCertificateOfCompletion } from "@/lib/docusign";
 import { driveFetch, DRIVE_API } from "@/lib/drive/fetch";
+import { archiveFileName, archiveRootFolderId, type ArchiveContractType, type ArchiveKind } from "@/lib/drive/archive-config";
+import { findFileByIdentity, findOrCreatePersonFolder } from "@/lib/drive/person-folder";
 
 const MAX_RETRY_COUNT = 5;
 
@@ -132,7 +134,18 @@ export async function uploadArtifactToDrive(params: {
   fileBuffer: Buffer;
   fileName: string;
   existingDriveFileId?: string | null;
-}): Promise<{ driveFileId: string }> {
+  /**
+   * When given, the file goes to the real archive root for that kind, inside this person's own subfolder (created on
+   * demand). Without it the legacy sandbox folder is used. Both paths stay behind DRIVE_ARTIFACTS_ALLOW_REAL_WRITES.
+   */
+  destination?: {
+    kind: ArchiveKind;
+    personId: string;
+    personName: string;
+    /** logical identity (our contract id + document kind): an existing file with it is never replaced or duplicated */
+    identity?: { contractId: string; docKind: string; contractType: ArchiveContractType; parentContractId?: string };
+  };
+}): Promise<{ driveFileId: string; personFolderId?: string }> {
   if (params.existingDriveFileId) {
     return { driveFileId: params.existingDriveFileId };
   }
@@ -149,14 +162,44 @@ export async function uploadArtifactToDrive(params: {
     process.env.VERCEL_ENV === "preview"
       ? await getR3PreviewDriveAccessToken()
       : await getDriveApiAccessToken();
-  const folderId = await getTestFolderId(token);
+  const dest = params.destination;
+  const folderId = dest
+    ? await findOrCreatePersonFolder(token, {
+        rootId: archiveRootFolderId(dest.kind),
+        kind: dest.kind,
+        personId: dest.personId,
+        displayName: dest.personName,
+      })
+    : await getTestFolderId(token);
+  const personFolderId = dest ? folderId : undefined;
 
-  const existingFileId = await findExistingFileInFolder(token, params.fileName, folderId);
+  const identity = dest?.identity;
+  const byIdentity = identity ? await findFileByIdentity(token, folderId, identity.contractId, identity.docKind) : null;
+  const existingFileId = byIdentity ?? (await findExistingFileInFolder(token, params.fileName, folderId));
   if (existingFileId) {
-    return { driveFileId: existingFileId };
+    return { driveFileId: existingFileId, personFolderId };
   }
 
-  const metadata = { name: params.fileName, parents: [folderId] };
+  const metadata = {
+    name: params.fileName,
+    parents: [folderId],
+    ...(dest
+      ? {
+          appProperties: {
+            altonPersonId: dest.personId,
+            altonKind: dest.kind,
+            ...(identity
+              ? {
+                  altonContractId: identity.contractId,
+                  altonDocKind: identity.docKind,
+                  altonContractType: identity.contractType,
+                  ...(identity.parentContractId ? { altonParentContractId: identity.parentContractId } : {}),
+                }
+              : {}),
+          },
+        }
+      : {}),
+  };
   const boundary = "r3driveupload";
   const body =
     `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n` +
@@ -174,7 +217,7 @@ export async function uploadArtifactToDrive(params: {
     }
   );
   const data = (await uploadRes.json()) as { id: string };
-  return { driveFileId: data.id };
+  return { driveFileId: data.id, personFolderId };
 }
 
 // =========================================================================
@@ -188,13 +231,20 @@ export async function uploadArtifactToDrive(params: {
  * completed된 버전을 우선하고 없으면 docusign_envelope_id가 있는 가장 최근
  * 버전을 쓴다.
  */
-async function resolveEnvelopeIdForContract(
+async function resolveFamilyArchiveContext(
   admin: ReturnType<typeof createAdminClient>,
   contractId: string
-): Promise<string> {
+): Promise<{
+  versionId: string;
+  envelopeId: string;
+  templateVersion: string;
+  signedAt: string;
+  guardianId: string;
+  guardianName: string;
+}> {
   const { data: versions, error } = await admin
     .from("contract_versions")
-    .select("docusign_envelope_id, docusign_envelope_status, version_number")
+    .select("id, docusign_envelope_id, docusign_envelope_status, version_number, template_version, docusign_status_updated_at")
     .eq("contract_id", contractId)
     .not("docusign_envelope_id", "is", null)
     .order("version_number", { ascending: false });
@@ -202,8 +252,39 @@ async function resolveEnvelopeIdForContract(
   if (!versions || versions.length === 0) {
     throw new Error(`계약 ${contractId}에 연결된 DocuSign envelope을 찾을 수 없습니다.`);
   }
-  const completed = versions.find((v) => v.docusign_envelope_status === "completed");
-  return (completed ?? versions[0]).docusign_envelope_id as string;
+  const v = versions.find((x) => x.docusign_envelope_status === "completed") ?? versions[0];
+
+  // 서명한 보호자: 계약 대상 학생의 household 보호자(대표 보호자 우선) — 계약 발송이 쓰는 선택 규칙과 같다.
+  const { data: contract } = await admin.from("contracts").select("child_id").eq("id", contractId).maybeSingle();
+  const childId = contract?.child_id as string | undefined;
+  if (!childId) throw new Error(`계약 ${contractId}의 학생을 찾을 수 없습니다.`);
+  const { data: childLink } = await admin
+    .from("household_members")
+    .select("household_id")
+    .eq("profile_id", childId)
+    .eq("role", "child")
+    .limit(1)
+    .maybeSingle();
+  if (!childLink) throw new Error("학생의 household를 찾을 수 없습니다.");
+  const { data: guardianLink } = await admin
+    .from("household_members")
+    .select("profile_id")
+    .eq("household_id", childLink.household_id)
+    .eq("role", "guardian")
+    .order("is_primary", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (!guardianLink) throw new Error("계약을 서명한 보호자를 찾을 수 없습니다.");
+  const { data: guardianProfile } = await admin.from("profiles").select("name").eq("id", guardianLink.profile_id).maybeSingle();
+
+  return {
+    versionId: v.id as string,
+    envelopeId: v.docusign_envelope_id as string,
+    templateVersion: (v.template_version as string | null) ?? "unversioned",
+    signedAt: (v.docusign_status_updated_at as string | null) ?? new Date().toISOString(),
+    guardianId: guardianLink.profile_id as string,
+    guardianName: (guardianProfile?.name as string | undefined) ?? "Parent",
+  };
 }
 
 async function downloadArtifactBuffer(
@@ -232,17 +313,29 @@ type DriveArtifactRow = {
 async function processOneDriveArtifact(
   admin: ReturnType<typeof createAdminClient>,
   row: DriveArtifactRow
-): Promise<{ driveFileId: string }> {
+): Promise<{ driveFileId: string; personFolderId?: string }> {
   if (row.drive_file_id) {
     return { driveFileId: row.drive_file_id };
   }
-  const envelopeId = await resolveEnvelopeIdForContract(admin, row.contract_id);
-  const fileBuffer = await downloadArtifactBuffer(row.artifact_type, envelopeId);
+  const ctx = await resolveFamilyArchiveContext(admin, row.contract_id);
+  const fileBuffer = await downloadArtifactBuffer(row.artifact_type, ctx.envelopeId);
   return uploadArtifactToDrive({
     contractId: row.contract_id,
     artifactType: row.artifact_type,
     fileBuffer,
-    fileName: `${row.artifact_type}.pdf`,
+    fileName: archiveFileName({
+      contractType: "family_agreement",
+      contractId: ctx.versionId,
+      version: ctx.templateVersion,
+      signedAt: ctx.signedAt,
+      certificate: row.artifact_type === "certificate_of_completion",
+    }),
+    destination: {
+      kind: "family",
+      personId: ctx.guardianId,
+      personName: ctx.guardianName,
+      identity: { contractId: ctx.versionId, docKind: row.artifact_type, contractType: "family_agreement" },
+    },
   });
 }
 
@@ -291,10 +384,15 @@ export async function processQueuedDriveArtifacts(): Promise<{
     }
 
     try {
-      const { driveFileId } = await processOneDriveArtifact(admin, row);
+      const { driveFileId, personFolderId } = await processOneDriveArtifact(admin, row);
       await admin
         .from("drive_artifacts")
-        .update({ sync_status: "succeeded", drive_file_id: driveFileId, uploaded_at: new Date().toISOString() })
+        .update({
+          sync_status: "succeeded",
+          drive_file_id: driveFileId,
+          ...(personFolderId ? { drive_folder_id: personFolderId } : {}),
+          uploaded_at: new Date().toISOString(),
+        })
         .eq("id", row.id);
       succeeded += 1;
     } catch (uploadError) {
