@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics/track";
 import { dedupeStem } from "@/lib/problem-text-guards";
 import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport, weakSkills, type BreakdownRow } from "@/lib/mock-exam/report";
@@ -172,6 +173,7 @@ function ItemHeader({ item, attemptId, viewerIsOwner }: { item: MockExamAttemptI
     const next = !saved;
     setSaved(next);
     await toggleMockExamSavedToPracticeAction(attemptId, item.setItemId, next);
+    if (next) trackEvent("mistake_saved", { entry_point: "practice_results" });
   }
   const topic = itemTopic(item);
   return (
@@ -371,6 +373,9 @@ export default function MockExamResultView({
   const reportRole: ReporterRole | null = reportRoleProp !== undefined ? reportRoleProp : readOnly ? null : "student";
   // 내가 신고한 문항의 진행 상태 — 결과 화면당 한 번만 조회한다.
   const [myReports, setMyReports] = useState<Record<string, MyReportStatus>>({});
+  useEffect(() => {
+    if (!readOnly) trackEvent("practice_results_viewed", { entry_point: "results_page" }, { onceKey: `results-${attempt.id}` });
+  }, [readOnly, attempt.id]);
   useEffect(() => {
     if (!reportRole || attempt.items.length === 0) return;
     let cancelled = false;

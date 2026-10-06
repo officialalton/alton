@@ -15,9 +15,17 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "ALTON EDUCATION — Premium Online SAT & AP Tutoring",
+  title: "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring",
   description:
-    "Premium 1:1 online SAT and AP tutoring for students in the US and Korea aiming for top US universities. Dedicated tutors from Korea's top graduate programs, feedback after every lesson, and progress the whole family can see.",
+    "Practice with free SAT tests, understand your mistakes, and keep your review organized. Premium tutoring and educational consulting are available when you need more support.",
+  openGraph: {
+    title: "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring",
+    description:
+      "Practice with free SAT tests, understand your mistakes, and keep your review organized. Premium tutoring and educational consulting are available when you need more support.",
+    type: "website",
+    siteName: "ALTON Education",
+  },
+  twitter: { card: "summary", title: "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

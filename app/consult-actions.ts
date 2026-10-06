@@ -30,7 +30,7 @@ export async function submitHomepageConsultRequest(params: {
   idempotencyKey: string;
 }): Promise<{ id: string; status: string }> {
   if (!params.parentName.trim() || !params.email.trim()) {
-    throw new Error("이름과 이메일은 필수입니다.");
+    throw new Error("Name and email are required.");
   }
 
   const admin = createAdminClient();

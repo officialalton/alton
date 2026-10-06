@@ -46,13 +46,13 @@ export async function resolveAccountDestination(
 
   if (status === "closure_pending" || status === "closed") {
     await supabase.auth.signOut();
-    return "/login?error=" + encodeURIComponent("계정이 폐쇄되어 로그인할 수 없습니다.");
+    return "/login?error=" + encodeURIComponent("This account is closed and cannot sign in.");
   }
   if (status === "unknown") {
     await supabase.auth.signOut();
     return (
       "/login?error=" +
-      encodeURIComponent("계정 정보를 확인할 수 없습니다. 관리자에게 문의해주세요.")
+      encodeURIComponent("We could not verify your account. Please contact support.")
     );
   }
   // M4 UAT #2(2026-09-05): 학생 프로필 완성(생년월일/학교명/학년 등) 강제

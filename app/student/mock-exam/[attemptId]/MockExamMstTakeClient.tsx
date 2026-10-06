@@ -324,7 +324,7 @@ export default function MockExamMstTakeClient({
   if (state.status !== "in_progress" || !state.currentModule) {
     return (
       <div className="mx-auto max-w-[640px] px-6 py-16 text-center">
-        <h1 className="text-[20px] font-extrabold text-ink">You have completed the mock exam</h1>
+        <h1 className="text-[20px] font-extrabold text-ink">You have completed the practice test</h1>
         <p className="mt-3 text-[13.5px] text-grey-500">Loading your results…</p>
       </div>
     );

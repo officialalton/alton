@@ -22,7 +22,7 @@ export default function ParentMockExamTab({ studentId }: { studentId: string | n
         if (!cancelled) setOverview(o);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "Could not load the mock exam list.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Could not load the practice test list.");
       });
     return () => {
       cancelled = true;
