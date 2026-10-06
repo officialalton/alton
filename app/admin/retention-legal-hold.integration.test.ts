@@ -9,7 +9,7 @@ const ADMIN = "aaaaaaaa-0000-0000-0000-000000000001";
 function run(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A"], {
     encoding: "utf-8",
-    input: `begin; set local session_replication_role = replica; ${sql} rollback;`,
+    input: `begin; insert into supervisor_capabilities (profile_id, capability) values ('${ADMIN}','legal_hold_holder') on conflict do nothing; set local session_replication_role = replica; ${sql} rollback;`,
   });
 }
 const lines = (o: string) =>
