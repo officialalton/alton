@@ -5,7 +5,6 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 // (통합 테스트가 담당), 여기서는 진입 통제만 본다.
 
 const { runMock } = vi.hoisted(() => ({ runMock: vi.fn() }));
-vi.mock("@/lib/payout/payout-schedule", () => ({ isPayoutDay: () => true }));
 vi.mock("@/lib/payout/auto-dispatch", () => ({ runAutoPayoutDispatch: runMock }));
 
 import { GET } from "./route";
@@ -75,5 +74,12 @@ describe("GET /api/cron/dispatch-approved-payouts", () => {
     const res = await GET(request({ authorization: "Bearer s3cret" }));
     expect(res.status).toBe(503);
     expect(runMock).not.toHaveBeenCalled();
+  });
+
+  it("날짜 게이트가 없다 — 5·20일이 아닌 날에도 실행해 놓친 예정일·관리자 변경 예정일을 따라잡는다", async () => {
+    process.env.CRON_SECRET = "s";
+    const res = await GET(request({ authorization: "Bearer s" }));
+    expect(res.status).toBe(200);
+    expect(runMock).toHaveBeenCalledTimes(1);
   });
 });

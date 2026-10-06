@@ -26,11 +26,14 @@ export type ClosedBatchSummary = {
 export async function closePayoutPeriod(params: {
   periodStart: string;
   periodEnd: string;
+  /** true면 기간 시작일 이전의 미배치 항목도 쓸어 담는다(크론 catch-up). 관리자 수동 실행은 false. */
+  includeEarlier?: boolean;
 }): Promise<ClosedBatchSummary[]> {
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("close_payout_period", {
     p_period_start: params.periodStart,
     p_period_end: params.periodEnd,
+    p_include_earlier: params.includeEarlier ?? false,
   });
   if (error) throw new Error(error.message);
   return ((data ?? []) as Record<string, unknown>[]).map((row) => ({
@@ -49,6 +52,6 @@ export async function closePreviousPeriod(now: Date = new Date()): Promise<{
   batches: ClosedBatchSummary[];
 }> {
   const { periodStart, periodEnd } = previousPayoutPeriod(now);
-  const batches = await closePayoutPeriod({ periodStart, periodEnd });
+  const batches = await closePayoutPeriod({ periodStart, periodEnd, includeEarlier: true });
   return { periodStart, periodEnd, batches };
 }
