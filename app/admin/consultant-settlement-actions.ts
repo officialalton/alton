@@ -6,6 +6,7 @@
 // 계산하지 않고 관리자가 직접 입력·확정한다(사용자 확정 정책) — 금액 변경·
 // 상태 변경은 전부 consultant_payout_period_events에 기록한다.
 
+import { listConsultantsAction } from "./consultant-assignment-actions";
 import { requireAdminOrCapability, requirePayoutAccountStaff } from "@/lib/admin-auth";
 import { PAYOUT_ACCOUNT_ERROR_KO, validatePayoutAccountInput, type PayoutAccountInputRaw } from "@/lib/payout/account-validation";
 import { createAdminClient } from "@/lib/supabase-admin";
@@ -74,6 +75,16 @@ export async function getConsultantPayoutAccountAction(consultantId: string): Pr
   };
 }
 
+/**
+ * 정산 > 컨설턴트 선택 목록: 삭제된 계정(인증 사용자가 없는 프로필)과 컨설턴트 프로필이 아닌 잔여 행은 제외한다.
+ * 컨설턴트에게는 계정 종료 상태 컬럼이 없어, "인증 계정이 존재하는 컨설턴트"를 활성으로 본다(신규 배정 중단(deactivated)은 남긴다 —
+ * 이미 번 정산을 받을 수 있어야 한다).
+ */
+export async function listPayoutConsultantsAction() {
+  const all = await listConsultantsAction();
+  return all.filter((c) => c.email !== null);
+}
+
 export type SaveConsultantAccountResult = { status: "saved"; changedFields: string[] } | { status: "invalid"; message: string };
 
 /** 컨설턴트를 대신해 수취 계좌를 입력·수정한다(정산권한·마스터). 이력(끝 4자리만)과 본인 알림은 DB 함수가 남긴다. */
@@ -83,6 +94,9 @@ export async function saveConsultantPayoutAccountByAdminAction(consultantId: str
   if (!validated.ok) return { status: "invalid", message: PAYOUT_ACCOUNT_ERROR_KO[validated.code] ?? validated.message };
   const v = validated.value;
   const admin = createAdminClient();
+  // 서버에서 막는다: 삭제된(인증 계정이 없는) 컨설턴트에는 대신 입력할 수 없다.
+  const { data: authUser } = await admin.auth.admin.getUserById(consultantId);
+  if (!authUser?.user) return { status: "invalid", message: "삭제되었거나 존재하지 않는 계정에는 계좌를 입력할 수 없습니다." };
   const { data, error } = await admin.rpc("save_consultant_payout_account", {
     p_consultant_id: consultantId,
     p_actor_id: actorUserId,

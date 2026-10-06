@@ -1,16 +1,18 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { staffMock, rpcMock } = vi.hoisted(() => ({ staffMock: vi.fn(), rpcMock: vi.fn() }));
+const { staffMock, rpcMock, getUserMock, listConsultantsMock } = vi.hoisted(() => ({ staffMock: vi.fn(), rpcMock: vi.fn(), getUserMock: vi.fn(), listConsultantsMock: vi.fn() }));
+vi.mock("./consultant-assignment-actions", () => ({ listConsultantsAction: listConsultantsMock }));
 vi.mock("@/lib/admin-auth", () => ({ requireAdminOrCapability: vi.fn(), requirePayoutAccountStaff: staffMock }));
-vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock, from: vi.fn() }) }));
+vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock, from: vi.fn(), auth: { admin: { getUserById: getUserMock } } }) }));
 
-import { revealConsultantPayoutAccountAction, saveConsultantPayoutAccountByAdminAction } from "./consultant-settlement-actions";
+import { listPayoutConsultantsAction, revealConsultantPayoutAccountAction, saveConsultantPayoutAccountByAdminAction } from "./consultant-settlement-actions";
 
 const INPUT = { accountHolderName: "지만", bankName: "국민은행", accountNumber: "110-123-456789", currency: "KRW", country: "KR" };
 
 beforeEach(() => {
   vi.clearAllMocks();
   staffMock.mockResolvedValue({ actorUserId: "admin-1" });
+  getUserMock.mockResolvedValue({ data: { user: { id: "c1" } } });
 });
 
 describe("컨설턴트 계좌 관리자 액션 — 권한·검증·위임", () => {
@@ -44,5 +46,24 @@ describe("컨설턴트 계좌 관리자 액션 — 권한·검증·위임", () =
     const r = await revealConsultantPayoutAccountAction("c1", " 수동 송금 ");
     expect(rpcMock).toHaveBeenLastCalledWith("reveal_consultant_payout_account", { p_consultant_id: "c1", p_actor_id: "admin-1", p_reason: "수동 송금" });
     expect(r.accountNumber).toBe("110123456789");
+  });
+});
+
+describe("삭제된 컨설턴트 제외", () => {
+  it("목록에서 인증 계정이 없는(삭제된) 컨설턴트는 빠진다", async () => {
+    listConsultantsMock.mockResolvedValue([
+      { id: "c1", name: "활성", email: "a@x.com", students: [] },
+      { id: "c-del", name: null, email: null, students: [] },
+    ]);
+    expect((await listPayoutConsultantsAction()).map((c) => c.id)).toEqual(["c1"]);
+  });
+
+  it("삭제된 계정에는 대신 입력할 수 없다(서버 차단, DB 호출 없음)", async () => {
+    getUserMock.mockResolvedValue({ data: { user: null } });
+    expect(await saveConsultantPayoutAccountByAdminAction("c-del", INPUT)).toEqual({
+      status: "invalid",
+      message: "삭제되었거나 존재하지 않는 계정에는 계좌를 입력할 수 없습니다.",
+    });
+    expect(rpcMock).not.toHaveBeenCalled();
   });
 });

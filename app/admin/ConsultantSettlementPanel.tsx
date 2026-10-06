@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { listConsultantsAction, type ConsultantWithStudents } from "./consultant-assignment-actions";
+import type { ConsultantWithStudents } from "./consultant-assignment-actions";
 import {
   getConsultantPayoutAccountAction,
   listConsultantPayoutPeriodsAction,
@@ -9,6 +9,7 @@ import {
   createConsultantPayoutPeriodAction,
   updateConsultantPayoutPeriodAmountAction,
   updateConsultantPayoutPeriodStatusAction,
+  listPayoutConsultantsAction,
   revealConsultantPayoutAccountAction,
   saveConsultantPayoutAccountByAdminAction,
   type ConsultantPayoutAccountAdminView,
@@ -47,7 +48,7 @@ export default function ConsultantSettlementPanel() {
 
   useEffect(() => {
     void getPayoutAccountStaffPermissionAction().then((p) => setCanManageAccount(p.canManage)).catch(() => setCanManageAccount(false));
-    listConsultantsAction()
+    listPayoutConsultantsAction()
       .then(setConsultants)
       .catch((e) => setError(e instanceof Error ? e.message : "컨설턴트 목록을 불러오지 못했습니다."));
   }, []);

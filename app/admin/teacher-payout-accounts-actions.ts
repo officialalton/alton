@@ -18,6 +18,13 @@ import { PAYOUT_ACCOUNT_ERROR_KO, validatePayoutAccountInput, type PayoutAccount
 
 const PAYOUT_CAPABILITY = "정산권한";
 
+/**
+ * 수취 계좌를 다루는 교사 상태. 종료 진행(closure_pending)·종료(closed) 계정과 teachers 행이 없는 프로필(삭제·테스트 잔여물)은
+ * 목록에서 제외하고 대리 입력도 막는다. 활성·대기(pending)·정지(suspended)·비활성(inactive)은 남긴다 — 정지·비활성 교사도
+ * 이미 번 정산을 받을 수 있고, 대기 교사는 등록 단계를 먼저 밟을 수 있기 때문이다.
+ */
+const PAYOUT_ACCOUNT_ELIGIBLE_TEACHER_STATUSES = ["active", "pending", "suspended", "inactive"] as const;
+
 export type TeacherPayoutAccountChange = {
   id: string;
   action: string;
@@ -56,14 +63,28 @@ export async function listTeacherPayoutAccountsAction(): Promise<TeacherPayoutAc
     .order("updated_at", { ascending: false });
   if (error) throw new Error(error.message);
 
-  // 아직 등록하지 않은 교사도 '미등록'으로 보여 준다.
-  const { data: allTeachers, error: teachersError } = await admin.from("profiles").select("id, name").eq("role", "teacher");
+  // 목록 대상: teachers 행이 있고 상태가 종료(closure_pending·closed)가 아닌 교사만. 아직 등록하지 않은 교사는 '미등록'으로 보여 준다.
+  const { data: eligibleTeachers, error: teachersError } = await admin
+    .from("teachers")
+    .select("id")
+    .in("status", [...PAYOUT_ACCOUNT_ELIGIBLE_TEACHER_STATUSES]);
   if (teachersError) throw new Error(teachersError.message);
-  const registeredIds = new Set((accounts ?? []).map((a) => a.teacher_id as string));
-  const missing = (allTeachers ?? []).filter((t) => !registeredIds.has(t.id as string));
-  if (!accounts?.length && missing.length === 0) return [];
+  const eligibleIds = new Set((eligibleTeachers ?? []).map((t) => t.id as string));
+  const eligibleAccounts = (accounts ?? []).filter((a) => eligibleIds.has(a.teacher_id as string));
+  const registeredIds = new Set(eligibleAccounts.map((a) => a.teacher_id as string));
+  const missingIds = Array.from(eligibleIds).filter((id) => !registeredIds.has(id));
+  let allTeachers: { id: string; name: string | null }[] = [];
+  if (missingIds.length > 0) {
+    const { data: missingProfiles, error: missingError } = await selectInChunks(missingIds, (chunk) =>
+      admin.from("profiles").select("id, name").in("id", chunk).eq("role", "teacher")
+    );
+    if (missingError) throw new Error(missingError.message);
+    allTeachers = (missingProfiles ?? []) as { id: string; name: string | null }[];
+  }
+  const missing = allTeachers;
+  if (eligibleAccounts.length === 0 && missing.length === 0) return [];
 
-  const teacherIds = (accounts ?? []).map((a) => a.teacher_id as string);
+  const teacherIds = eligibleAccounts.map((a) => a.teacher_id as string);
   const [{ data: profiles, error: profilesError }, { data: events, error: eventsError }] = await Promise.all([
     selectInChunks(teacherIds, (chunk) => admin.from("profiles").select("id, name").in("id", chunk)),
     selectInChunks(teacherIds, (chunk) => admin
@@ -92,7 +113,7 @@ export async function listTeacherPayoutAccountsAction(): Promise<TeacherPayoutAc
     changesByTeacher.set(e.teacher_id as string, list);
   }
 
-  const registeredItems: TeacherPayoutAccountListItem[] = (accounts ?? []).map((a) => ({
+  const registeredItems: TeacherPayoutAccountListItem[] = eligibleAccounts.map((a) => ({
     teacherId: a.teacher_id as string,
     teacherName: nameById.get(a.teacher_id as string) ?? "",
     registered: true,
@@ -146,9 +167,13 @@ export async function saveTeacherPayoutAccountByAdminAction(
   const v = validated.value;
 
   const admin = createAdminClient();
-  const { data: teacher, error: teacherError } = await admin.from("profiles").select("role").eq("id", teacherId).maybeSingle();
+  const { data: teacher, error: teacherError } = await admin.from("teachers").select("status").eq("id", teacherId).maybeSingle();
   if (teacherError) throw new Error(teacherError.message);
-  if (teacher?.role !== "teacher") return { status: "invalid", message: "교사 계정이 아닙니다." };
+  if (!teacher) return { status: "invalid", message: "교사 계정이 아닙니다." };
+  // 서버에서 막는다(화면 숨김만이 아니다): 종료 진행·종료된 계정에는 대신 입력할 수 없다.
+  if (!(PAYOUT_ACCOUNT_ELIGIBLE_TEACHER_STATUSES as readonly string[]).includes(teacher.status as string)) {
+    return { status: "invalid", message: "종료 처리 중이거나 종료된 계정에는 계좌를 입력할 수 없습니다." };
+  }
 
   // 송금이 진행 중인 동안에는 수취 계좌를 바꾸지 않는다(돈이 나가는 중에 계좌가 바뀌면 설명할 수 없다).
   const { data: inFlight, error: inFlightError } = await admin
