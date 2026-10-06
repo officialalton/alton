@@ -32,7 +32,7 @@ export const ITEM = defineItem({
   prefix: "ifcg", itemId: "linear_inequalities.inequality_from_graph.LN.C",
   hard: [H("repr_shift", 0, "경계선(기울기·절편)과 음영 방향·점선 여부를 서술로 주고 그래프를 고름"), H("chain2", 1, "경계선을 기울기와 지나는 점으로 주고 음영 방향·점선 여부와 함께 그래프를 고름"), H("compose_kind", 2, "원점이 해인지와 점선 여부로 음영 방향을 추론해 그래프를 고름"), H("inverse", 3, "경계선과 해인 점으로부터 음영 방향을 거꾸로 정해 그래프를 고름")],
   em: [
-    { lv: "easy", name: "line_and_shading", sprNo: SPR_NO_PLANE_CHOICE, structure: "경계선과 음영 방향·점선 여부를 서술로 주고 그래프를 고름", extra: "easy: 직접 대조", concepts: ["부등식의 그래프"], gen: mkGen(0, true) },
+    { lv: "easy", name: "line_and_shading", sprNo: SPR_NO_PLANE_CHOICE, structure: "경계선과 음영 방향·점선 여부를 서술로 주고 그래프를 고름", extra: "easy: 직접 대조", concepts: ["부등식의 그래프", "그래프 읽기"], gen: mkGen(0, true) },
     { lv: "medium", name: "line_by_point", sprNo: SPR_NO_PLANE_CHOICE, structure: "경계선을 지나는 점으로 주고 그래프를 고름", extra: "medium: 점으로 절편 구하기", concepts: ["부등식의 그래프", "직선의 식"], gen: mkGen(1, true) },
   ],
 });

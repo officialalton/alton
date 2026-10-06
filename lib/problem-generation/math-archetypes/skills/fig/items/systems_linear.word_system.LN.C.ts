@@ -42,7 +42,7 @@ export const ITEM = defineItem({
   prefix: "wscg", itemId: "systems_linear.word_system.LN.C",
   hard: [H("repr_shift", 0, "두 요금제의 처음 요금·단위당 요금을 서술로 주고 그 연립의 그래프를 고름"), H("chain2", 1, "한 요금제와 두 요금이 같아지는 값을 서술로 주고 그 연립의 그래프를 고름"), H("compose_kind", 2, "한 요금제는 단위당 요금과 한 시점의 요금으로, 다른 요금제는 처음·단위당 요금으로 주고 그래프를 고름"), H("inverse", 3, "두 요금이 같아지는 x 와 한 요금제를 주고 그 연립의 그래프를 고름")],
   em: [
-    { lv: "easy", name: "both_plans", sprNo: SPR_NO_PLANE_CHOICE, structure: "두 요금제를 서술로 주고 그래프를 고름", extra: "easy: 두 직선 대조", concepts: ["연립방정식의 그래프"], gen: mkGen(0, true) },
+    { lv: "easy", name: "both_plans", sprNo: SPR_NO_PLANE_CHOICE, structure: "두 요금제를 서술로 주고 그래프를 고름", extra: "easy: 두 직선 대조", concepts: ["연립방정식의 그래프", "그래프 읽기"], gen: mkGen(0, true) },
     { lv: "medium", name: "rate_point_plan", sprNo: SPR_NO_PLANE_CHOICE, structure: "한 요금제는 한 시점의 요금으로, 다른 요금제는 처음 요금으로 주고 그래프를 고름", extra: "medium: 점으로 처음 요금 구하기", concepts: ["연립방정식의 그래프", "상황의 식 세우기"], gen: mkGen(2, true) },
   ],
 });
