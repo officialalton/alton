@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import type { ConsultantWithStudents } from "./consultant-assignment-actions";
 import {
   getConsultantPayoutAccountAction,
+  getConsultantContractFeeAction,
+  type ConsultantContractFee,
   listConsultantPayoutPeriodsAction,
   listConsultantPayoutPeriodEventsAction,
   createConsultantPayoutPeriodAction,
@@ -20,6 +22,7 @@ import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 import PayoutAccountAdminActions from "./PayoutAccountAdminActions";
 import { getPayoutAccountStaffPermissionAction } from "./teacher-payout-accounts-actions";
+import { compareManualWithSuggestion, suggestConsultantPeriodAmount } from "@/lib/consultant-agreements/suggestion";
 import { COMPANY_TIME_ZONE, payoutDateForPeriodEnd, previousPayoutPeriod } from "@/lib/payout/payout-schedule";
 
 // 2026-09-29 — Consultants 탭에 있던 `정산` 섹션을 Payouts 탭의 `컨설턴트 정산`
@@ -42,6 +45,8 @@ export default function ConsultantSettlementPanel() {
   const [newEnd, setNewEnd] = useState("");
   const [newAmount, setNewAmount] = useState("");
   const [newNote, setNewNote] = useState("");
+  const [newCurrency, setNewCurrency] = useState("KRW");
+  const [contractFee, setContractFee] = useState<ConsultantContractFee>(null);
   const [editingAmountId, setEditingAmountId] = useState<string | null>(null);
   const [editAmount, setEditAmount] = useState("");
   const [eventsByPeriod, setEventsByPeriod] = useState<Record<string, ConsultantPayoutPeriodEvent[]>>({});
@@ -56,6 +61,7 @@ export default function ConsultantSettlementPanel() {
   function reload(consultantId: string) {
     if (!consultantId) return;
     getConsultantPayoutAccountAction(consultantId).then(setAccount).catch(() => setAccount(null));
+    getConsultantContractFeeAction(consultantId).then(setContractFee).catch(() => setContractFee(null));
     listConsultantPayoutPeriodsAction(consultantId)
       .then(setPeriods)
       .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
@@ -75,7 +81,7 @@ export default function ConsultantSettlementPanel() {
         periodStart: newStart,
         periodEnd: newEnd,
         amountMinor: Math.round(Number(newAmount) * 100),
-        currency: "KRW",
+        currency: newCurrency,
         note: newNote || undefined,
       });
       setNewStart("");
@@ -188,9 +194,13 @@ export default function ConsultantSettlementPanel() {
               type="number"
               value={newAmount}
               onChange={(e) => setNewAmount(e.target.value)}
-              placeholder="금액(원)"
+              placeholder="금액"
               className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px] w-28"
             />
+            <select value={newCurrency} onChange={(e) => setNewCurrency(e.target.value)} aria-label="통화" className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px] bg-white">
+              <option value="KRW">KRW</option>
+              <option value="USD">USD</option>
+            </select>
             <input
               value={newNote}
               onChange={(e) => setNewNote(e.target.value)}
@@ -201,6 +211,23 @@ export default function ConsultantSettlementPanel() {
               기간 등록
             </button>
           </form>
+          {contractFee && (() => {
+            const suggestion = suggestConsultantPeriodAmount(contractFee, newStart, newEnd);
+            const warning = compareManualWithSuggestion(suggestion, { amountMajor: newAmount === "" ? null : Number(newAmount), currency: newCurrency });
+            return (
+              <div className="mb-4 text-[12px]" data-testid="contract-suggestion">
+                <p className="text-grey-500">
+                  서명된 계약서 월 보수 {contractFee.currency === "USD" ? (contractFee.monthlyFeeMinor / 100).toLocaleString("en-US") : contractFee.monthlyFeeMinor.toLocaleString("en-US")} {contractFee.currency}
+                  {suggestion.ok ? (
+                    <> · <b className="text-ink" data-testid="suggested-amount">계약 기준 제안 {suggestion.amountMajor.toLocaleString("en-US")} {suggestion.currency}</b> ({suggestion.basis}) — 자동 입력되지 않으며 참고용입니다.</>
+                  ) : (
+                    <> · {suggestion.reason}</>
+                  )}
+                </p>
+                {warning && <p className="text-amber-700 font-bold mt-0.5" data-testid="suggestion-warning">⚠ {warning} (등록은 막지 않습니다)</p>}
+              </div>
+            );
+          })()}
 
           {periods === null ? (
             <p className="text-[13px] text-grey-500">불러오는 중…</p>

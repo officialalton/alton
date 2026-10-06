@@ -66,6 +66,21 @@ describe("prepareConsultantAgreement", () => {
   });
 });
 
+describe("workspace email must be @alton.education", () => {
+  it("blocks preparing/sending when the connected workspace email is on another domain, and shows ✗ in the checklist", () => {
+    for (const email of ["min@gmail.com", "min@alton.education.evil.com", "alton.education"]) {
+      const r = prepareConsultantAgreement({ ...base, workspaceEmail: email, inputs: krInputs });
+      expect(r.ok).toBe(false);
+      if (!r.ok) expect(r.missing.join()).toContain("@alton.education");
+      expect(consultantChecklist({ ...base, workspaceEmail: email, inputs: krInputs }).find((c) => c.key === "workspace")?.ok).toBe(false);
+    }
+  });
+  it("accepts the company domain case-insensitively", () => {
+    const r = prepareConsultantAgreement({ ...base, workspaceEmail: " Min@Alton.Education ", inputs: krInputs });
+    expect(r.ok).toBe(true);
+  });
+});
+
 describe("validateConsultantAgreementInputs", () => {
   it("stores USD as cents and KRW as won, never converting between them", () => {
     const usd = validateConsultantAgreementInputs({ work_country: "us", work_region: "CA", monthly_fee_amount: "3500.50", monthly_fee_currency: "usd" });

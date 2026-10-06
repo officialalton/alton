@@ -52,11 +52,13 @@ export function consultantCurrencyFor(country: string | null | undefined): "KRW"
   return c === "KR" ? "KRW" : c === "US" ? "USD" : null;
 }
 
+const workspaceEmailOk = (email: string | null | undefined) => (email ?? "").trim().toLowerCase().endsWith("@alton.education");
+
 export function consultantChecklist(a: PrepareConsultantArgs): { key: string; label: string; ok: boolean }[] {
   const i = a.inputs ?? EMPTY_CONSULTANT_INPUTS;
   const want = consultantCurrencyFor(i.work_country);
   return [
-    { key: "workspace", label: "컨설턴트 Google 계정 등록·연결 완료", ok: !blank(a.workspaceEmail) },
+    { key: "workspace", label: "컨설턴트 Workspace 계정(@alton.education) 연결 완료", ok: workspaceEmailOk(a.workspaceEmail) },
     {
       key: "location",
       label: "근무 위치 입력(국가·위치·우편 주소·시작일)",
@@ -75,7 +77,7 @@ export function prepareConsultantAgreement(a: PrepareConsultantArgs): PrepareCon
   const checklist = consultantChecklist(a);
   const want = consultantCurrencyFor(i.work_country);
   const bad = (k: string) => !checklist.find((c) => c.key === k)?.ok;
-  if (bad("workspace")) missing.push("컨설턴트 Google 계정 등록·연결");
+  if (bad("workspace")) missing.push("컨설턴트 Workspace 계정(@alton.education) 연결");
   if (blank(i.work_country)) missing.push("실제 근무 국가");
   else if (want === null) missing.push("해당 국가의 보수 통화가 설정되지 않음(현재 KR=KRW, 미국=USD만 지원)");
   if (i.work_country?.toUpperCase() === "US" && blank(i.work_region)) missing.push("근무 주(미국)");

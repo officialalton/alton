@@ -49,6 +49,29 @@ describe("GET /api/cron/close-pending-accounts", () => {
     expect(rpcMock).toHaveBeenCalledWith("close_expired_pending_accounts");
   });
 
+  it("같은 일일 실행에서 레거시 단가 캐시를 동기화한다(별도 크론 항목 없음)", async () => {
+    process.env.CRON_SECRET = "s3cret";
+    const res = await GET(request({ authorization: "Bearer s3cret" }));
+    expect(rpcMock).toHaveBeenCalledWith("sync_teacher_rate_caches");
+    await expect(res.json()).resolves.toMatchObject({ rateCacheSync: "ok" });
+  });
+
+  it("단가 캐시 동기화가 실패해도 폐쇄 결과는 200으로 돌려주고 오류만 표시한다", async () => {
+    process.env.CRON_SECRET = "s3cret";
+    rpcMock.mockImplementation((name: string) =>
+      Promise.resolve(name === "sync_teacher_rate_caches" ? { data: null, error: { message: "boom" } } : { data: 2, error: null })
+    );
+    const res = await GET(request({ authorization: "Bearer s3cret" }));
+    expect(res.status).toBe(200);
+    await expect(res.json()).resolves.toMatchObject({ ok: true, closedCount: 2, rateCacheSync: { error: "boom" } });
+  });
+
+  it("인증이 없으면 동기화도 실행하지 않는다", async () => {
+    delete process.env.CRON_SECRET;
+    await GET(request());
+    expect(rpcMock).not.toHaveBeenCalledWith("sync_teacher_rate_caches");
+  });
+
   it("RPC가 실패해도 예외를 흘리지 않고 500과 사유를 돌려준다", async () => {
     process.env.CRON_SECRET = "s3cret";
     rpcMock.mockResolvedValue({ data: null, error: { message: "permission denied" } });
