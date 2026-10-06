@@ -20,5 +20,10 @@ import { ITEM as nl_cmpC } from "../items/linear_inequalities.compound_inequalit
 import { ITEM as nl_popP } from "../items/inference_margin_error.population_estimate.NL.P";
 import { ITEM as nl_marP } from "../items/inference_margin_error.margin_interval.NL.P";
 import { ITEM as nl_marC } from "../items/inference_margin_error.margin_interval.NL.C";
+import { ITEM as fo_mean } from "../items/one_variable_data.mean.FO.P";
+import { ITEM as fo_median } from "../items/one_variable_data.median.FO.P";
+import { ITEM as fo_grouped_median_interval } from "../items/one_variable_data.grouped_median_interval.FO.P";
+import { ITEM as fo_quartile_percentile_from_plot } from "../items/one_variable_data.quartile_percentile_from_plot.FO.P";
+import { ITEM as fo_relative_cumulative_frequency } from "../items/one_variable_data.relative_cumulative_frequency.FO.P";
 
-export const BUNDLE: LArch[] = [...slMean, ...slMedian, ...slRange, ...slOutlier, ...slQuartile, ...pi_prop, ...pi_ps, ...pi_sw, ...pi_po, ...pi_fw, ...pi_fp, ...pi_sa, ...pi_sv, ...nl_solveP, ...nl_solveC, ...nl_cmpP, ...nl_cmpC, ...nl_popP, ...nl_marP, ...nl_marC];
+export const BUNDLE: LArch[] = [...slMean, ...slMedian, ...slRange, ...slOutlier, ...slQuartile, ...pi_prop, ...pi_ps, ...pi_sw, ...pi_po, ...pi_fw, ...pi_fp, ...pi_sa, ...pi_sv, ...nl_solveP, ...nl_solveC, ...nl_cmpP, ...nl_cmpC, ...nl_popP, ...nl_marP, ...nl_marC, ...fo_mean, ...fo_median, ...fo_grouped_median_interval, ...fo_quartile_percentile_from_plot, ...fo_relative_cumulative_frequency];
