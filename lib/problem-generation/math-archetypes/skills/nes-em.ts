@@ -14,7 +14,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   {
     ...base, id: "nes.root.e_factored_form", kind: "root", difficulty: "easy",
     structure: "이미 인수분해된 (x-r)(x-s)=0 에서 영곱 성질로 근을 읽고 큰 근·작은 근·합을 묻는다",
-    extraThinking: "(easy) 영곱 성질 한 번", concepts: ["영곱 성질"],
+    extraThinking: "(easy) 영곱 성질 한 번", concepts: ["영곱 성질", "문제 조건 해석"],
     generate(rng) {
       const r = rng.int(-8, 8), s = rng.int(-8, 8); if (r === s) throw new GenFail("x"); const ask = rng.pick(["larger", "smaller", "sum"] as const);
       const ans = ask === "larger" ? Math.max(r, s) : ask === "smaller" ? Math.min(r, s) : r + s;
@@ -31,7 +31,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.sum_of_roots.e_equation_sum", kind: "sum_of_roots", difficulty: "easy",
-    structure: "x²+bx+c=0 (정수 근)의 두 해의 합을 묻는다", extraThinking: "(easy) 인수분해 또는 -b 로 합을 읽음", concepts: ["이차방정식 풀이"],
+    structure: "x²+bx+c=0 (정수 근)의 두 해의 합을 묻는다", extraThinking: "(easy) 인수분해 또는 -b 로 합을 읽음", concepts: ["이차방정식 풀이", "문제 조건 해석"],
     generate(rng) {
       const r = rng.int(-8, 9), s = rng.int(-8, 9); const { b, c } = bc(r, s); if (r === s || b === 0 || c === 0) throw new GenFail("x");
       return finishA(rng, {
@@ -46,7 +46,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.product_of_roots.e_equation_product", kind: "product_of_roots", difficulty: "easy",
-    structure: "x²+bx+c=0 (정수 근)의 두 해의 곱을 묻는다", extraThinking: "(easy) 인수분해 또는 c 로 곱을 읽음", concepts: ["이차방정식 풀이"],
+    structure: "x²+bx+c=0 (정수 근)의 두 해의 곱을 묻는다", extraThinking: "(easy) 인수분해 또는 c 로 곱을 읽음", concepts: ["이차방정식 풀이", "문제 조건 해석"],
     generate(rng) {
       const r = rng.int(-8, 9), s = rng.int(-8, 9); const { b, c } = bc(r, s); if (r === s || b === 0 || c === 0) throw new GenFail("x");
       return finishA(rng, {
@@ -61,7 +61,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.num_real_solutions.e_pure_square", kind: "num_real_solutions", difficulty: "easy",
-    structure: "x² = k, x² - k = 0, (x-h)² = k, ax² = ak 꼴에서 실근의 개수(0·1·2)를 묻는다", extraThinking: "(easy) 제곱이 음수가 될 수 없다는 사실로 개수 판정", concepts: ["제곱근과 실근 개수"],
+    structure: "x² = k, x² - k = 0, (x-h)² = k, ax² = ak 꼴에서 실근의 개수(0·1·2)를 묻는다", extraThinking: "(easy) 제곱이 음수가 될 수 없다는 사실로 개수 판정", concepts: ["제곱근과 실근 개수", "문제 조건 해석"],
     generate(rng) {
       const form = rng.int(0, 3); const kind = rng.pick(["neg", "zero", "pos", "pos"] as const); const k = kind === "neg" ? -rng.int(1, 30) : kind === "zero" ? 0 : rng.int(1, 9) ** 2; const h = rng.int(-6, 6); const a = form === 3 ? rng.int(2, 4) : 1;
       const eq = form === 0 ? `x^2 = ${k}` : form === 1 ? `x^2 ${k >= 0 ? "-" : "+"} ${Math.abs(k)} = 0` : form === 2 ? `(${shifted("x", -h)})^2 = ${k}` : `${a}x^2 = ${a * k}`;
@@ -96,7 +96,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.root.m_other_solution", kind: "root", difficulty: "medium",
-    structure: "x²+bx+c=0 의 한 해를 주고 다른 해를 묻는다", extraThinking: "(medium) 근과 계수의 관계 또는 대입 후 인수분해", concepts: ["근과 계수의 관계"],
+    structure: "x²+bx+c=0 의 한 해를 주고 다른 해를 묻는다", extraThinking: "(medium) 근과 계수의 관계 또는 대입 후 인수분해", concepts: ["근과 계수의 관계", "문제 조건 해석"],
     generate(rng) {
       const p = rng.nz(-8, 8), q = rng.nz(-8, 8); if (p === q) throw new GenFail("x"); const { b, c } = bc(p, q);
       return finishA(rng, {
@@ -144,7 +144,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.product_of_roots.m_nonmonic", kind: "product_of_roots", difficulty: "medium",
-    structure: "ax²+bx+c=0 (a=2~5, 정수 근)의 두 해의 곱 또는 합을 묻는다", extraThinking: "(medium) 최고차 계수로 나눈 근과 계수의 관계", concepts: ["근과 계수의 관계"],
+    structure: "ax²+bx+c=0 (a=2~5, 정수 근)의 두 해의 곱 또는 합을 묻는다", extraThinking: "(medium) 최고차 계수로 나눈 근과 계수의 관계", concepts: ["근과 계수의 관계", "문제 조건 해석"],
     generate(rng) {
       const a = rng.int(2, 5), r = rng.int(-6, 7), s = rng.int(-6, 7); if (r === s) throw new GenFail("x"); const b = -a * (r + s), c = a * r * s; if (b === 0 || c === 0) throw new GenFail("x"); const prod = rng.chance(0.6);
       return finishA(rng, {
@@ -193,7 +193,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.parameter_discriminant.m_one_solution_c", kind: "parameter_discriminant", difficulty: "medium",
-    structure: "해가 하나뿐이라는 조건으로 상수항 c(또는 최고차 계수 k)를 판별식 0 으로 구한다", extraThinking: "(medium) 판별식 = 0 을 한 문자에 대해 풀기", concepts: ["판별식"],
+    structure: "해가 하나뿐이라는 조건으로 상수항 c(또는 최고차 계수 k)를 판별식 0 으로 구한다", extraThinking: "(medium) 판별식 = 0 을 한 문자에 대해 풀기", concepts: ["판별식", "문제 조건 해석"],
     generate(rng) {
       const h = rng.int(1, 8), b = rng.pick([-1, 1]) * 2 * h; const lead = rng.chance(0.4); let c = h * h; let k = 1;
       if (lead) { const divs = [1, 2, 3, 4, 6, 9, 12, 18, 36].filter((d) => (h * h) % d === 0 && d <= h * h); c = rng.pick(divs); k = (h * h) / c; if (k <= 0) throw new GenFail("x"); }
@@ -210,7 +210,7 @@ export const NES_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nes.num_real_solutions.m_discriminant_count", kind: "num_real_solutions", difficulty: "medium",
-    structure: "ax²+bx+c=0 의 판별식 부호로 실근의 개수(0·1·2)를 묻는다", extraThinking: "(medium) 판별식 계산과 부호 판정", concepts: ["판별식"],
+    structure: "ax²+bx+c=0 의 판별식 부호로 실근의 개수(0·1·2)를 묻는다", extraThinking: "(medium) 판별식 계산과 부호 판정", concepts: ["판별식", "문제 조건 해석"],
     generate(rng) {
       const a = rng.nz(-4, 4), b = rng.int(-8, 8); const outcome = rng.int(0, 2); const j = rng.int(1, 6);
       // D = b^2 - 4ac : 0 → ac = b^2/4 (b 짝수), >0 → ac < b^2/4, <0 → ac > b^2/4

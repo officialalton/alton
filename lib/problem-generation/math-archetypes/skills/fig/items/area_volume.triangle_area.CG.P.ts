@@ -80,7 +80,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "right_triangle_area", structure: "축에 평행한 두 변을 가진 직각삼각형의 넓이를 구함", extra: "easy: 두 직각변의 곱의 절반", concepts: ["삼각형의 넓이"],
+      lv: "easy", name: "right_triangle_area", structure: "축에 평행한 두 변을 가진 직각삼각형의 넓이를 구함", extra: "easy: 두 직각변의 곱의 절반", concepts: ["삼각형의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const n = names(rng, 3) as [string, string, string]; const x = rng.int(1, 8), y = rng.int(1, 8), w = rng.int(2, 8), h = rng.int(2, 8); if ((w * h) % 2) throw new GenFail("정수"); const A: P2 = [x, y], B: P2 = [x + w, y], C: P2 = [x + w, y + h]; const f = planeFig(trObjs(n, A, B, C), [A, B, C]); const ar = (w * h) / 2;
         return geoInst(rng, { stimulus: cgIntro(rng, sc3(...n)), question: Q_AREA(rng, n.join("")), correct: ar, wrongs: pos([W(w * h, "formula_misuse", "2 로 나누지 않았다."), W(w + h, "formula_misuse", "더했다."), W(ar + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== ar), verificationJs: figJs({ a: n[0], b: n[1], c: n[2] }, f, `${AJ}const A=PA(P.a), B=PA(P.b), C=PA(P.c); return ip(shoe([A,B,C]));`), trace: [[`그림에서 직각변 ${w} 와 ${h} 를 읽는다.`, "Read the legs."], [`넓이 = ${w} × ${h} ÷ 2 이다.`, "Area formula."], [`따라서 ${ar} 이다.`, "State the area."]], variant: "right_triangle_area_easy" }, f);

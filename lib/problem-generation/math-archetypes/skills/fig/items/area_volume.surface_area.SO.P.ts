@@ -71,14 +71,14 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "cube_surface", structure: "정육면체의 모서리가 그림에 있을 때 겉넓이 6e² 을 구함", extra: "easy: 한 면의 넓이 × 6", concepts: ["정육면체의 겉넓이"],
+      lv: "easy", name: "cube_surface", structure: "정육면체의 모서리가 그림에 있을 때 겉넓이 6e² 을 구함", extra: "easy: 한 면의 넓이 × 6", concepts: ["정육면체의 겉넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const e = rng.int(2, 14); const f = soFig("cube", { edge: String(e) }); const c = 6 * e * e;
         return geoInst(rng, { stimulus: soIntro(rng, CUBE_SCENES), question: QS(rng), correct: c, wrongs: pos([W(e * e, "step_missing", "한 면의 넓이만 답했다."), W(e * e * e, "formula_misuse", "부피를 답했다."), W(4 * e * e, "step_missing", "옆면 네 개만 더했다."), W(c + e, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== c), verificationJs: figJs({}, f, `${SO_JS}const e=d('edge'); if (!(e>0)) throw new Error('모서리 라벨 없음'); return 6*e*e;`), trace: [[`그림에서 모서리 ${e} 를 읽는다.`, "Read the label."], [`한 면의 넓이 = ${e}² = ${e * e} 이고 면은 6 개이다.`, "Six equal faces."], [`따라서 ${c} 이다.`, "State the area."]], variant: "cube_surface_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "prism_surface", structure: "직육면체의 세 치수가 그림에 있을 때 겉넓이를 구함", extra: "medium: 세 쌍의 면의 합 × 2", concepts: ["직육면체의 겉넓이"],
+      lv: "medium", name: "prism_surface", structure: "직육면체의 세 치수가 그림에 있을 때 겉넓이를 구함", extra: "medium: 세 쌍의 면의 합 × 2", concepts: ["직육면체의 겉넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const { l, w, h } = dims3(rng); const f = soFig("rectangular_prism", { length: String(l), width: String(w), height: String(h) }); const c = 2 * (l * w + l * h + w * h);
         return geoInst(rng, { stimulus: soIntro(rng, PRISM_SCENES), question: QS(rng), correct: c, wrongs: pos([W(l * w * h, "formula_misuse", "부피를 답했다."), W(l * w + l * h + w * h, "step_missing", "2 를 곱하지 않았다."), W(2 * (l * w + l * h), "step_missing", "한 쌍의 면을 빠뜨렸다."), W(c + 2, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== c), verificationJs: figJs({}, f, `${SO_JS}const l=d('length'), w=d('width'), h=d('height'); if (!(l>0&&w>0&&h>0)) throw new Error('라벨 오류'); return 2*(l*w+l*h+w*h);`), trace: [[`그림에서 길이 ${l}, 너비 ${w}, 높이 ${h} 를 읽는다.`, "Read the labels."], [`겉넓이 = 2(${l}×${w} + ${l}×${h} + ${w}×${h}) 이다.`, "Surface area formula."], [`따라서 ${c} 이다.`, "State the area."]], variant: "prism_surface_medium" }, f);

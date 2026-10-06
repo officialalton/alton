@@ -68,7 +68,7 @@ const RAW = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "semicircle_area_radius", sprNo: SPR_NO_CM, structure: "반원의 반지름이 그림에 있을 때 반원의 넓이를 구함", extra: "easy: ½πr²", concepts: ["부채꼴(반원)의 넓이"],
+      lv: "easy", name: "semicircle_area_radius", sprNo: SPR_NO_CM, structure: "반원의 반지름이 그림에 있을 때 반원의 넓이를 구함", extra: "easy: ½πr²", concepts: ["부채꼴(반원)의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const r = 2 * rng.int(1, 10); const f = wFig("", String(rng.int(3, 20)), String(r)); const c = (r * r) / 2;
         return geoInst(rng, { stimulus: cmIntro(rng, RECT_SEMI, " The semicircle is shaded."), question: Q_PI(rng, "area of the shaded semicircle"), correct: c, fmt: piFmt, wrongs: pos([W(r * r, "step_missing", "원 전체의 넓이를 답했다."), W(r, "formula_misuse", "호의 길이를 답했다."), W(2 * r * r, "formula_misuse", "지름으로 계산했다."), W(c + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== c && Number.isInteger(x.v)), verificationJs: figJs({}, f, `${CM_JS}const r=inn('radius'); if (!(r>0)) throw new Error('반지름 라벨 없음'); return r*r/2;`), trace: [[`그림에서 반지름 ${r} 을 읽는다.`, "Read the radius."], [`반원의 넓이 = ½ × π × ${r}² = ${c}π 이다.`, "Half of πr²."]], variant: "semicircle_area_easy" }, f);

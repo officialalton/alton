@@ -74,7 +74,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "hemisphere", structure: "반구 부분의 부피(⅔πr³)를 구함", extra: "easy: 구의 절반", sprNo: PI_OK, concepts: ["반구의 부피"],
+      lv: "easy", name: "hemisphere", structure: "반구 부분의 부피(⅔πr³)를 구함", extra: "easy: 구의 절반", sprNo: PI_OK, concepts: ["반구의 부피", "문제 조건 해석"],
       gen(rng) {
         const r = R3(rng), h = rng.int(4, 14); const hemi = (2 * r * r * r) / 3; const f = compFig({ radius: String(r), height: String(h) });
         return gInst(rng, {
@@ -86,7 +86,7 @@ export const ITEM = defineItem({
       },
     },
     {
-      lv: "medium", name: "cylinder_part", structure: "원기둥 부분의 부피를 구함", extra: "medium: 높이는 원기둥 부분만", sprNo: PI_OK, concepts: ["원기둥의 부피"],
+      lv: "medium", name: "cylinder_part", structure: "원기둥 부분의 부피를 구함", extra: "medium: 높이는 원기둥 부분만", sprNo: PI_OK, concepts: ["원기둥의 부피", "문제 조건 해석"],
       gen(rng) {
         const r = R3(rng), h = rng.int(4, 14); const f = compFig({ radius: String(r), height: String(h) });
         return gInst(rng, {

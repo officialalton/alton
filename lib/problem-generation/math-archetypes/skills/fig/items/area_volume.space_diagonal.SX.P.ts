@@ -68,7 +68,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "space_diagonal", structure: "세 모서리가 주어진 직육면체의 공간 대각선을 구함", extra: "easy: 세 제곱의 합의 제곱근", concepts: ["공간 대각선"],
+      lv: "easy", name: "space_diagonal", structure: "세 모서리가 주어진 직육면체의 공간 대각선을 구함", extra: "easy: 세 제곱의 합의 제곱근", concepts: ["공간 대각선", "문제 조건 해석"],
       gen(rng) {
         const s = makeBox(rng); const f = boxFig("space", { length: String(s.l), width: String(s.w), height: String(s.h), diag: "x" });
         return gInst(rng, {

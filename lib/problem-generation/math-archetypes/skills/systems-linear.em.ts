@@ -14,7 +14,7 @@ export const SL_EM_ARCHETYPES: Archetype[] = [
   // ---------- easy ----------
   {
     ...base, id: "sl.elimination_value.e_add_equations", kind: "elimination_value", difficulty: "easy",
-    structure: "x + y = s, x − y = d 를 더해 x 를 구한다", extraThinking: "easy 틀", concepts: ["소거법"],
+    structure: "x + y = s, x − y = d 를 더해 x 를 구한다", extraThinking: "easy 틀", concepts: ["소거법", "문제 조건 해석"],
     generate(rng) {
       const x0 = rng.int(-5, 12), y0 = rng.int(-5, 12), s = x0 + y0, d = x0 - y0; if (x0 === y0 || s === 0 && d === 0) throw new GenFail("x");
       const [X, Y] = rng.pick([["x", "y"], ["m", "n"], ["a", "b"]] as const), askX = rng.chance(0.5), swap = rng.chance(0.5), e1 = M(`${X} + ${Y} = ${s}`), e2 = M(`${X} - ${Y} = ${d}`);
@@ -30,7 +30,7 @@ export const SL_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "sl.substitution_solve.e_y_equals_multiple", kind: "substitution_solve", difficulty: "easy",
-    structure: "y = kx 와 x + y = s 를 대입으로 풀어 x 를 구한다", extraThinking: "easy 틀", concepts: ["대입법"],
+    structure: "y = kx 와 x + y = s 를 대입으로 풀어 x 를 구한다", extraThinking: "easy 틀", concepts: ["대입법", "문제 조건 해석"],
     generate(rng) {
       const k = rng.pick([2, 3, 4, 5, -2]), x0 = rng.int(1, 9), y0 = k * x0, s = x0 + y0; if (Math.abs(s) > 60) throw new GenFail("x");
       const swap = rng.chance(0.5), e1 = M(`y = ${k === 1 ? "" : k}x`), e2 = M(`x + y = ${s}`), askX = rng.chance(0.5), ans = askX ? x0 : y0;

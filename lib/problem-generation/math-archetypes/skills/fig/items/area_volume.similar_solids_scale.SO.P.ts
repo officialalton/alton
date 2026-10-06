@@ -80,14 +80,14 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "edge_scale", structure: "정육면체의 모서리가 그림에 있고 닮은 큰 정육면체의 닮음비가 k 일 때 큰 정육면체의 모서리를 구함", extra: "easy: 모서리 × k", concepts: ["닮음비"],
+      lv: "easy", name: "edge_scale", structure: "정육면체의 모서리가 그림에 있고 닮은 큰 정육면체의 닮음비가 k 일 때 큰 정육면체의 모서리를 구함", extra: "easy: 모서리 × k", concepts: ["닮음비", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const e = rng.int(2, 9), k = rng.pick([2, 3, 4]); const f = soFig("cube", { edge: String(e) }); const c = e * k;
         return geoInst(rng, { stimulus: soIntro(rng, CUBE_SCENES, SCALE(rng, "cube", k)), question: rng.pick(["What is the edge length of the larger cube?", "Find the edge length of the larger cube."]), correct: c, wrongs: pos([W(e + k, "formula_misuse", "닮음비를 더했다."), W(e * k * k, "formula_misuse", "닮음비의 제곱을 곱했다."), W(e, "step_missing", "작은 정육면체의 모서리를 답했다."), W(c + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== c), verificationJs: figJs({ k }, f, `${SO_JS}const e=d('edge'); if (!(e>0)) throw new Error('모서리 라벨 없음'); return e*P.k;`), trace: [[`그림에서 모서리 ${e} 를 읽는다.`, "Read the label."], [`큰 정육면체의 모서리 = ${k} × ${e} = ${c} 이다.`, "Scale the edge."]], variant: "similar_cube_edge_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "cube_volume_scale", structure: "정육면체의 모서리가 그림에 있고 닮은 큰 정육면체의 닮음비가 k 일 때 큰 정육면체의 부피를 구함", extra: "medium: (k × 모서리)³", concepts: ["닮음비와 부피비"],
+      lv: "medium", name: "cube_volume_scale", structure: "정육면체의 모서리가 그림에 있고 닮은 큰 정육면체의 닮음비가 k 일 때 큰 정육면체의 부피를 구함", extra: "medium: (k × 모서리)³", concepts: ["닮음비와 부피비", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const e = rng.int(2, 5), k = rng.pick([2, 3]); const f = soFig("cube", { edge: String(e) }); const c = (e * k) ** 3; if (c >= 1000) throw new GenFail("큼");
         return geoInst(rng, { stimulus: soIntro(rng, CUBE_SCENES, SCALE(rng, "cube", k)), question: QV(rng), correct: c, wrongs: pos([W(e * e * e * k, "formula_misuse", "닮음비를 그대로 곱했다."), W(e * e * e * k * k, "formula_misuse", "닮음비의 제곱을 곱했다."), W(e * e * e, "step_missing", "작은 정육면체의 부피만 답했다."), W(c + k, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== c), verificationJs: figJs({ k }, f, `${SO_JS}const e=d('edge'); if (!(e>0)) throw new Error('모서리 라벨 없음'); return Math.pow(e*P.k,3);`), trace: [[`그림에서 모서리 ${e} 를 읽는다.`, "Read the label."], [`큰 정육면체의 모서리 = ${k} × ${e} = ${k * e} 이다.`, "Scale the edge."], [`부피 = ${k * e}³ = ${c} 이다.`, "Cube it."]], variant: "similar_cube_volume_medium" }, f);

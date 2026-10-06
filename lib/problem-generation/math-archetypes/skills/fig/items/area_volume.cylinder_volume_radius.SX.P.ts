@@ -73,7 +73,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "volume", structure: "반지름과 높이가 주어진 원기둥의 부피를 구함", extra: "easy: π r² h", sprNo: PI_OK, concepts: ["원기둥의 부피"],
+      lv: "easy", name: "volume", structure: "반지름과 높이가 주어진 원기둥의 부피를 구함", extra: "easy: π r² h", sprNo: PI_OK, concepts: ["원기둥의 부피", "문제 조건 해석"],
       gen(rng) {
         const s = makeCyl(rng); const k = s.r * s.r * s.h; const f = cylFig({ radius: String(s.r), height: String(s.h), diag: String(s.d) });
         return gInst(rng, {

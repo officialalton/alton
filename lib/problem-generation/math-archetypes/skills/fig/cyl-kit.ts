@@ -74,14 +74,14 @@ export function makeCylItem(itemId: string, dia: boolean) {
     ],
     em: [
       {
-        lv: "easy", name: "base_area", sprNo: SPR_NO_PI_SO, structure: `원기둥의 ${dia ? "지름" : "반지름"}이 그림에 있을 때 밑면의 넓이를 π 로 구함`, extra: "easy: πr²", concepts: ["원의 넓이"],
+        lv: "easy", name: "base_area", sprNo: SPR_NO_PI_SO, structure: `원기둥의 ${dia ? "지름" : "반지름"}이 그림에 있을 때 밑면의 넓이를 π 로 구함`, extra: "easy: πr²", concepts: ["원의 넓이", "문제 조건 해석"],
         gen(rng) { return retry(rng, () => {
           const r = rng.int(2, 13); const f = soFig("cylinder", dimsOf(r, rng.int(3, 20), dia));
           return geoInst(rng, { stimulus: soIntro(rng, CYL_SCENES), question: rng.pick(["What is the area of the circular base, in terms of $\\pi$?", "Find the area of the base in terms of $\\pi$."]), correct: r * r, fmt: piFmt, wrongs: pos([W(2 * r, "formula_misuse", "둘레의 계수를 답했다."), W(4 * r * r, "formula_misuse", "지름을 반지름으로 썼다."), W(r, "step_missing", "반지름을 답했다."), W(r * r + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== r * r), verificationJs: figJs({}, f, `${SO_JS}${RJS}const r=rr(); return r*r;`), trace: [[`그림에서 ${dia ? `지름 ${2 * r}` : `반지름 ${r}`} 을 읽는다.`, "Read the label."], [`넓이 = π × ${r}² = ${r * r}π 이다.`, "Area = πr²."]], variant: "cylinder_base_area_easy" }, f);
         }); },
       },
       {
-        lv: "medium", name: "volume", sprNo: SPR_NO_PI_SO, structure: `원기둥의 ${dia ? "지름" : "반지름"}과 높이가 그림에 있을 때 부피를 구함`, extra: "medium: 밑면의 넓이 × 높이", concepts: ["원기둥의 부피"],
+        lv: "medium", name: "volume", sprNo: SPR_NO_PI_SO, structure: `원기둥의 ${dia ? "지름" : "반지름"}과 높이가 그림에 있을 때 부피를 구함`, extra: "medium: 밑면의 넓이 × 높이", concepts: ["원기둥의 부피", "문제 조건 해석"],
         gen(rng) { return retry(rng, () => {
           const r = rng.int(2, 12), h = rng.int(3, 20); const f = soFig("cylinder", dimsOf(r, h, dia)); const c = r * r * h;
           return geoInst(rng, { stimulus: soIntro(rng, CYL_SCENES), question: Q_VOL_PI(rng), correct: c, fmt: piFmt, wrongs: pos([W(r * r, "step_missing", "밑면의 넓이만 답했다."), W(4 * r * r * h, "formula_misuse", "지름을 반지름으로 썼다."), W(2 * r * h, "formula_misuse", "옆넓이로 계산했다."), W(c + r, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== c), verificationJs: figJs({}, f, `${SO_JS}${RJS}const h=d('height'); if (!(h>0)) throw new Error('높이 라벨 없음'); const r=rr(); return r*r*h;`), trace: [[`그림에서 ${dia ? `지름 ${2 * r}, 반지름 ${r}` : `반지름 ${r}`} 과 높이 ${h} 를 읽는다.`, "Read the labels."], [`부피 = π × ${r}² × ${h} = ${c}π 이다.`, "Volume = πr²h."], [`따라서 ${c}π 이다.`, "State the volume."]], variant: "cylinder_volume_medium" }, f);

@@ -79,14 +79,14 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "horizontal_distance", structure: "같은 높이의 두 점 사이의 거리를 좌표 차로 구함", extra: "easy: |x 좌표의 차|", concepts: ["두 점 사이의 거리"],
+      lv: "easy", name: "horizontal_distance", structure: "같은 높이의 두 점 사이의 거리를 좌표 차로 구함", extra: "easy: |x 좌표의 차|", concepts: ["두 점 사이의 거리", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const [a, b] = names(rng, 2); const y = rng.int(1, 12), x1 = rng.int(1, 8), d = rng.int(2, 8); const A: P2 = [x1, y], B: P2 = [x1 + d, y]; const f = figAB(a, b, A, B);
         return geoInst(rng, { stimulus: cgIntro(rng, scenes2(a, b)), question: Q_DIST(rng, a, b), correct: d, wrongs: pos([W(d + 1, "other", "계산 중 어긋났다."), W(x1 + d, "step_missing", "끝점의 좌표를 답했다."), W(d * 2, "formula_misuse", "두 배로 계산했다."), W(Math.max(1, d - 1), "other", "눈금을 잘못 셌다.")]).filter((x) => x.v !== d), verificationJs: figJs({ a, b }, f, `${CG_JS}const A=PA(P.a), B=PA(P.b); if (A[1]!==B[1]) throw new Error('같은 높이 아님'); return ip(Math.abs(B[0]-A[0]));`), trace: [[`그림에서 ${a}, ${b} 의 좌표를 읽는다.`, "Read the coordinates."], [`두 점의 y 좌표가 같다.`, "Same height."], [`거리 = |${x1 + d} − ${x1}| = ${d} 이다.`, "Difference of the x-coordinates."]], variant: "horizontal_distance_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "distance", structure: "좌표평면의 두 점 A, B 사이의 거리를 구함", extra: "medium: 거리 공식", concepts: ["두 점 사이의 거리"],
+      lv: "medium", name: "distance", structure: "좌표평면의 두 점 A, B 사이의 거리를 구함", extra: "medium: 거리 공식", concepts: ["두 점 사이의 거리", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const [a, b] = names(rng, 2); const { A, B, dx, dy, h } = legPair(rng, SMALL_TRIPLES); const f = figAB(a, b, A, B);
         return geoInst(rng, { stimulus: cgIntro(rng, scenes2(a, b)), question: Q_DIST(rng, a, b), correct: h, wrongs: pos([W(dx + dy, "formula_misuse", "가로·세로 차를 더했다."), W(h * h, "step_missing", "제곱근을 취하지 않았다."), W(Math.abs(dx - dy), "formula_misuse", "차의 차를 구했다."), W(h + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== h), verificationJs: figJs({ a, b }, f, `${CG_JS}const A=PA(P.a), B=PA(P.b); return ip(dist(A,B));`), trace: [[`그림에서 ${a}, ${b} 의 좌표를 읽는다: (${A[0]}, ${A[1]}), (${B[0]}, ${B[1]}).`, "Read the coordinates."], [`거리² = ${dx}² + ${dy}² = ${h * h} 이다.`, "Distance formula."], [`따라서 ${h} 이다.`, "Take the square root."]], variant: "segment_length_medium" }, f);

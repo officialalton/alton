@@ -73,7 +73,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "rectangle_area", structure: "직사각형의 넓이를 꼭짓점 좌표에서 구함", extra: "easy: 가로 × 세로", concepts: ["직사각형의 넓이"],
+      lv: "easy", name: "rectangle_area", structure: "직사각형의 넓이를 꼭짓점 좌표에서 구함", extra: "easy: 가로 × 세로", concepts: ["직사각형의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const n = names(rng, 4); const x = rng.int(1, 6), y = rng.int(1, 6), w = rng.int(3, 9), h = rng.int(2, 7); const pts: P2[] = [[x, y], [x + w, y], [x + w, y + h], [x, y + h]]; const f = shape(n, pts);
         return geoInst(rng, { stimulus: cgIntro(rng, scN(n, "rectangle")), question: Q_AREA(rng), correct: w * h, wrongs: pos([W(2 * (w + h), "formula_misuse", "둘레를 답했다."), W(w + h, "formula_misuse", "더했다."), W(w * h + w, "other", "계산 중 어긋났다.")]).filter((v) => v.v !== w * h), verificationJs: figJs({}, f, `${PJ}const v=vs('G'); if (v.length!==4) throw new Error('사각형 필요'); return ip(shoe(v));`), trace: [[`그림에서 가로 ${w}, 세로 ${h} 를 읽는다.`, "Read the width and height."], [`넓이 = ${w} × ${h} 이다.`, "Area formula."], [`따라서 ${w * h} 이다.`, "State the area."]], variant: "rectangle_area_easy" }, f);

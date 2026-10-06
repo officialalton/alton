@@ -73,7 +73,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "area_from_sides", structure: "직사각형 두 변이 그림에 라벨될 때 넓이를 곱으로 구함", extra: "easy: 가로 × 세로", concepts: ["직사각형의 넓이"],
+      lv: "easy", name: "area_from_sides", structure: "직사각형 두 변이 그림에 라벨될 때 넓이를 곱으로 구함", extra: "easy: 가로 × 세로", concepts: ["직사각형의 넓이", "문제 조건 해석"],
       gen(rng) {
         const [L, Wd] = dims(rng); const v = quadNames(rng); const fig = rectFig(v, String(L), String(Wd)); const A = L * Wd; const u = rng.pick(UNITS);
         return geoInst(rng, { stimulus: intro(rng, v, "", u), question: rng.pick([`What is the area of the rectangle?`, `What is the area of rectangle $${v.join("")}$?`]), correct: A, wrongs: pos([W(2 * (L + Wd), "formula_misuse", "둘레를 답했다."), W(L + Wd, "formula_misuse", "합을 답했다."), W(L * L, "step_missing", "한 변을 제곱했다."), W(A + L, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== A), verificationJs: figJs({}, fig, `${PG_JS}const a=side(V[0],V[1]), b=side(V[1],V[2]); if (!(a>0&&b>0)) throw new Error('변 라벨 없음'); return a*b;`), trace: [rd(v, String(L), String(Wd)), [`넓이 = ${L} × ${Wd} = ${A} 이다.`, "Area = length × width."]], variant: "area_two_sides" }, fig);

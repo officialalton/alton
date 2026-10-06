@@ -69,14 +69,14 @@ const RAW = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "base_area", structure: "직육면체의 길이·너비가 그림에 있을 때 밑면의 넓이를 구함", extra: "easy: 길이 × 너비", concepts: ["직사각형의 넓이"],
+      lv: "easy", name: "base_area", structure: "직육면체의 길이·너비가 그림에 있을 때 밑면의 넓이를 구함", extra: "easy: 길이 × 너비", concepts: ["직사각형의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const { l, w, h } = dims3(rng); const f = f3(l, w, h);
         return geoInst(rng, { stimulus: soIntro(rng, PRISM_SCENES), question: rng.pick([`What is the area of the base of the prism?`, `Find the area of the rectangular base.`]), correct: l * w, wrongs: pos([W(l * w * h, "step_missing", "부피를 답했다."), W(2 * (l + w), "formula_misuse", "둘레를 답했다."), W(l + w, "formula_misuse", "합을 답했다."), W(l * w + h, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== l * w), verificationJs: figJs({}, f, `${SO_JS}const l=d('length'), w=d('width'); if (!(l>0&&w>0)) throw new Error('치수 라벨 없음'); return l*w;`), trace: [[`그림에서 길이 ${l}, 너비 ${w} 를 읽는다.`, "Read the base dimensions."], [`밑면의 넓이 = ${l} × ${w} = ${l * w} 이다.`, "Base area."]], variant: "base_area_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "volume", structure: "직육면체의 세 치수가 그림에 있을 때 부피를 구함", extra: "medium: 밑면의 넓이 × 높이", concepts: ["직육면체의 부피"],
+      lv: "medium", name: "volume", structure: "직육면체의 세 치수가 그림에 있을 때 부피를 구함", extra: "medium: 밑면의 넓이 × 높이", concepts: ["직육면체의 부피", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const { l, w, h } = dims3(rng); const V = l * w * h; const f = f3(l, w, h);
         return geoInst(rng, { stimulus: soIntro(rng, PRISM_SCENES), question: Q_VOL(rng), correct: V, wrongs: pos([W(l * w, "step_missing", "밑면의 넓이만 답했다."), W(l + w + h, "formula_misuse", "합을 답했다."), W(2 * (l * w + l * h + w * h), "formula_misuse", "겉넓이를 답했다."), W(V + l, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== V), verificationJs: figJs({}, f, `${SO_JS}const l=d('length'), w=d('width'), h=d('height'); if (!(l>0&&w>0&&h>0)) throw new Error('치수 라벨 없음'); return l*w*h;`), trace: [[`그림에서 ${l}, ${w}, ${h} 를 읽는다.`, "Read the dimensions."], [`밑면의 넓이 = ${l * w} 이다.`, "Base area."], [`부피 = ${l * w} × ${h} = ${V} 이다.`, "Volume."]], variant: "prism_volume_medium" }, f);

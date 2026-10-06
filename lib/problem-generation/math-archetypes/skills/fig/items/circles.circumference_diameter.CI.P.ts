@@ -70,7 +70,7 @@ const RAW = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "circumference", sprNo: SPR_NO_PI, structure: "그림에 지름 라벨이 있는 원의 둘레를 π 로 구함", extra: "easy: πd", concepts: ["원의 둘레"],
+      lv: "easy", name: "circumference", sprNo: SPR_NO_PI, structure: "그림에 지름 라벨이 있는 원의 둘레를 π 로 구함", extra: "easy: πd", concepts: ["원의 둘레", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const d = rng.int(3, 24); const { A, B, f } = diamFig(rng, d);
         return geoInst(rng, { stimulus: I(rng, A, B), question: rng.pick([`What is the circumference of the circle, in terms of $\\pi$?`, `Find the circumference in terms of $\\pi$.`]), correct: d, fmt: piFmt, wrongs: pos([W(2 * d, "formula_misuse", "지름을 반지름으로 썼다."), W(d / 2, "formula_misuse", "반지름을 곱했다."), W(d * d, "formula_misuse", "제곱을 답했다."), W(d + 2, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== d && Number.isInteger(w.v)), verificationJs: figJs({}, f, `${CI_JS}const dm=CHD.find(c=>c.diameter&&num(c.label)>0); if (!dm) throw new Error('지름 라벨 없음'); return num(dm.label);`), trace: [[`그림에서 지름 ${d} 를 읽는다.`, "Read the diameter."], [`둘레 = πd = ${d}π 이다.`, "Circumference = πd."]], variant: "circumference_diameter_easy" }, f);

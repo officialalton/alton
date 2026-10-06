@@ -69,7 +69,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "area_notch", structure: "큰 직사각형에서 잘린 직사각형을 뺀 L자형의 넓이를 구함", extra: "easy: 전체 − 잘린 부분", concepts: ["합성 도형의 넓이"],
+      lv: "easy", name: "area_notch", structure: "큰 직사각형에서 잘린 직사각형을 뺀 L자형의 넓이를 구함", extra: "easy: 전체 − 잘린 부분", concepts: ["합성 도형의 넓이", "문제 조건 해석"],
       gen(rng) {
         const s = makeL(rng); const A = s.W * s.H - s.a * s.b; const f = lFig(s, { 0: String(s.W), 5: String(s.H), 2: String(s.a), 3: String(s.b) });
         return gInst(rng, {

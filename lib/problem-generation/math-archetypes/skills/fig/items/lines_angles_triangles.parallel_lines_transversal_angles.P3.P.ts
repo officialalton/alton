@@ -118,7 +118,7 @@ export const ITEM = defineItem({
       },
     },
     {
-      lv: "medium", name: "y_from_numeric", structure: "숫자로 주어진 한 각에서 다른 평행선의 각 y 를 구함", extra: "medium: 같음/보각 판정", concepts: ["평행선과 각"],
+      lv: "medium", name: "y_from_numeric", structure: "숫자로 주어진 한 각에서 다른 평행선의 각 y 를 구함", extra: "medium: 같음/보각 판정", concepts: ["평행선과 각", "문제 조건 해석"],
       gen(rng) {
         const s = scene(rng); const f = fig(s, `${s.v1}°`, exprLabel(s.a2, s.b2), "y°");
         return gInst(rng, {

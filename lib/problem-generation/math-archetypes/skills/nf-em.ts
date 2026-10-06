@@ -13,7 +13,7 @@ export const NF_EM_ARCHETYPES: Archetype[] = [
   // ───────── easy ─────────
   {
     ...base, id: "nf.evaluate.e_quad_standard", kind: "evaluate", difficulty: "easy",
-    structure: "표준형 이차함수 f(x)=ax²+bx+c 에서 작은 양의 정수 x 의 함숫값을 구한다", extraThinking: "(easy) 대입·계산", concepts: ["함숫값"],
+    structure: "표준형 이차함수 f(x)=ax²+bx+c 에서 작은 양의 정수 x 의 함숫값을 구한다", extraThinking: "(easy) 대입·계산", concepts: ["함숫값", "문제 조건 해석"],
     generate(rng) {
       const a = rng.pick([1, 1, 2, 3]), b = rng.int(-6, 6), c = rng.int(-9, 9), p = rng.int(1, 5); const v = a * p * p + b * p + c; if (Math.abs(v) > 99) throw new GenFail("x");
       return finishA(rng, {
@@ -28,7 +28,7 @@ export const NF_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nf.evaluate.e_exp_value", kind: "evaluate", difficulty: "easy",
-    structure: "지수함수 f(t)=a·b^t 의 작은 t 에서의 값을 구한다", extraThinking: "(easy) 거듭제곱 계산", concepts: ["지수함수의 값"],
+    structure: "지수함수 f(t)=a·b^t 의 작은 t 에서의 값을 구한다", extraThinking: "(easy) 거듭제곱 계산", concepts: ["지수함수의 값", "문제 조건 해석"],
     generate(rng) {
       const a = rng.int(2, 9), b = rng.pick([2, 3, 4, 5]), t = rng.int(2, 4); const v = a * b ** t; if (v > 999) throw new GenFail("x"); const g = rng.pick(GROW); const [tu] = rng.pick(TS);
       return finishA(rng, {
@@ -43,7 +43,7 @@ export const NF_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nf.vertex_x.e_standard_formula", kind: "vertex_x", difficulty: "easy",
-    structure: "표준형 이차함수의 꼭짓점 x 좌표 -b/(2a) 를 구한다(정수)", extraThinking: "(easy) 꼭짓점 공식 한 번", concepts: ["꼭짓점 공식"],
+    structure: "표준형 이차함수의 꼭짓점 x 좌표 -b/(2a) 를 구한다(정수)", extraThinking: "(easy) 꼭짓점 공식 한 번", concepts: ["꼭짓점 공식", "문제 조건 해석"],
     generate(rng) {
       const a = rng.pick([1, 1, 2, -1, -2]), h = rng.nz(-6, 7), b = -2 * a * h, c = rng.int(-9, 9); if (Math.abs(b) > 30) throw new GenFail("x");
       return finishA(rng, {
@@ -58,7 +58,7 @@ export const NF_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nf.find_x_for_value.e_exp_solve", kind: "find_x_for_value", difficulty: "easy",
-    structure: "a·b^t = V 에서 거듭제곱을 맞춰 t 를 구한다", extraThinking: "(easy) 지수 방정식 한 번", concepts: ["지수 방정식"],
+    structure: "a·b^t = V 에서 거듭제곱을 맞춰 t 를 구한다", extraThinking: "(easy) 지수 방정식 한 번", concepts: ["지수 방정식", "문제 조건 해석"],
     generate(rng) {
       const a = rng.int(1, 9), b = rng.pick([2, 3, 4, 5]), t = rng.int(1, 4); const v = a * b ** t; if (v > 999) throw new GenFail("x"); const g = rng.pick(GROW); const [tu] = rng.pick(TS);
       return finishA(rng, {
@@ -105,7 +105,7 @@ export const NF_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nf.vertex_x.m_symmetry_points", kind: "vertex_x", difficulty: "medium",
-    structure: "포물선이 높이가 같은 두 점 (p, y₀), (q, y₀) 을 지날 때 꼭짓점의 x 좌표를 구한다", extraThinking: "(medium) 대칭축은 두 점의 중점", concepts: ["포물선의 대칭"],
+    structure: "포물선이 높이가 같은 두 점 (p, y₀), (q, y₀) 을 지날 때 꼭짓점의 x 좌표를 구한다", extraThinking: "(medium) 대칭축은 두 점의 중점", concepts: ["포물선의 대칭", "문제 조건 해석"],
     generate(rng) {
       const p = rng.int(-8, 4), q = rng.int(p + 2, 12); if ((p + q) % 2 !== 0) throw new GenFail("x"); const y0 = rng.int(-9, 9); const h = (p + q) / 2; if (Math.abs(h) < 1) throw new GenFail("x");
       return finishA(rng, {
@@ -166,7 +166,7 @@ export const NF_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "nf.interpret_a.m_initial_amount", kind: "interpret_a", difficulty: "medium",
-    structure: "N(t)=a·b^t (b 정수)에서 n 기간 후의 값 V 로 초기값 a 를 구한다", extraThinking: "(medium) V 를 b^n 으로 나눔(초기값 해석)", concepts: ["지수함수의 초기값"],
+    structure: "N(t)=a·b^t (b 정수)에서 n 기간 후의 값 V 로 초기값 a 를 구한다", extraThinking: "(medium) V 를 b^n 으로 나눔(초기값 해석)", concepts: ["지수함수의 초기값", "문제 조건 해석"],
     generate(rng) {
       const a = rng.int(2, 25), b = rng.pick([2, 3, 4]), n = rng.int(2, 4); const V = a * b ** n; if (V > 999) throw new GenFail("x"); const g = rng.pick(GROW); const [tu] = rng.pick(TS);
       return finishA(rng, {

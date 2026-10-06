@@ -15,7 +15,7 @@ export const LF_EM_ARCHETYPES: Archetype[] = [
   // ---------- easy ----------
   {
     ...base, id: "lf.evaluate.e_plug_in", kind: "evaluate", difficulty: "easy",
-    structure: "일차함수의 식이 주어졌을 때 함수값 하나를 계산", extraThinking: "easy 틀", concepts: ["함수값 계산"],
+    structure: "일차함수의 식이 주어졌을 때 함수값 하나를 계산", extraThinking: "easy 틀", concepts: ["함수값 계산", "문제 조건 해석"],
     generate(rng) {
       const a = rng.nz(-6, 7), b = rng.nz(-12, 12), k = rng.nz(-6, 9), n = rng.pick(NAMES), v = rng.pick(VARS), ans = a * k + b;
       const def = M(`${n}(${v}) = ${lin(a, b, v)}`);
@@ -47,7 +47,7 @@ export const LF_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "lf.slope_from_two_points.e_two_points", kind: "slope_from_two_points", difficulty: "easy",
-    structure: "두 점의 좌표로 기울기(정수)를 구한다", extraThinking: "easy 틀", concepts: ["기울기 공식"],
+    structure: "두 점의 좌표로 기울기(정수)를 구한다", extraThinking: "easy 틀", concepts: ["기울기 공식", "문제 조건 해석"],
     generate(rng) {
       const m = rng.nz(-6, 7), x1 = rng.int(-5, 3), dx = rng.int(1, 5), y1 = rng.int(-8, 8), x2 = x1 + dx, y2 = y1 + m * dx; if (Math.abs(y2) > 30) throw new GenFail("x");
       const A = M(`(${x1}, ${y1})`), B = M(`(${x2}, ${y2})`), L = rng.pick(["ℓ", "m", "k", "n", "j"]);

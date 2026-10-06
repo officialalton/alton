@@ -18,7 +18,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   // ───────── easy ─────────
   {
     ...base, id: "ee.polynomial_distribution.e_distribute_single", kind: "polynomial_distribution", difficulty: "easy",
-    structure: "a(x+b) 를 분배해 전개한 식을 고른다", extraThinking: "(easy) 분배법칙 한 번", concepts: ["분배법칙"],
+    structure: "a(x+b) 를 분배해 전개한 식을 고른다", extraThinking: "(easy) 분배법칙 한 번", concepts: ["분배법칙", "문제 조건 해석"],
     generate(rng) {
       const a = rng.pick([-5, -4, -3, -2, 2, 3, 4, 5, 6]), b = rng.nz(-7, 8), v = rng.pick(VARS);
       return finishA(rng, {
@@ -33,7 +33,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.polynomial_distribution.e_combine_like_terms", kind: "polynomial_distribution", difficulty: "easy",
-    structure: "(ax+b) ± (cx+d) 의 동류항을 정리한다", extraThinking: "(easy) 동류항 결합(뺄셈이면 부호 분배)", concepts: ["동류항 정리"],
+    structure: "(ax+b) ± (cx+d) 의 동류항을 정리한다", extraThinking: "(easy) 동류항 결합(뺄셈이면 부호 분배)", concepts: ["동류항 정리", "문제 조건 해석"],
     generate(rng) {
       const a = rng.nz(-6, 7), b = rng.nz(-8, 8), c = rng.nz(-6, 7), d = rng.nz(-8, 8), v = rng.pick(VARS), minus = rng.chance(0.5); const s = minus ? -1 : 1;
       const co = [a + s * c, b + s * d]; if (co[0] === 0 || co[1] === 0) throw new GenFail("x");
@@ -64,7 +64,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.polynomial_distribution.e_factor_common", kind: "polynomial_distribution", difficulty: "easy",
-    structure: "ax + ab 와 같은 식을 공통인수로 묶은 꼴에서 고른다", extraThinking: "(easy) 공통인수", concepts: ["공통인수"],
+    structure: "ax + ab 와 같은 식을 공통인수로 묶은 꼴에서 고른다", extraThinking: "(easy) 공통인수", concepts: ["공통인수", "문제 조건 해석"],
     generate(rng) {
       const a = rng.int(2, 9), b = rng.nz(-7, 8), v = rng.pick(VARS); const f = (m: number, k: number) => M(`${m}(${shifted(v, k)})`);
       return finishA(rng, {
@@ -94,7 +94,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.polynomial_distribution.m_square_binomial", kind: "polynomial_distribution", difficulty: "medium",
-    structure: "(ax+b)² 을 전개한다", extraThinking: "(medium) 완전제곱 전개(가운데 항)", concepts: ["이항식의 제곱"],
+    structure: "(ax+b)² 을 전개한다", extraThinking: "(medium) 완전제곱 전개(가운데 항)", concepts: ["이항식의 제곱", "문제 조건 해석"],
     generate(rng) {
       const a = rng.pick([1, 2, 3, 4]), b = rng.nz(-8, 8), v = rng.pick(VARS); const co = [a * a, 2 * a * b, b * b];
       return finishA(rng, {
@@ -108,7 +108,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.polynomial_distribution.m_difference_squares", kind: "polynomial_distribution", difficulty: "medium",
-    structure: "(ax-b)(ax+b) 를 전개한다(제곱의 차)", extraThinking: "(medium) 가운데 항이 사라지는 곱셈공식", concepts: ["곱셈공식(합차)"],
+    structure: "(ax-b)(ax+b) 를 전개한다(제곱의 차)", extraThinking: "(medium) 가운데 항이 사라지는 곱셈공식", concepts: ["곱셈공식(합차)", "문제 조건 해석"],
     generate(rng) {
       const a = rng.pick([1, 2, 3, 4, 5]), b = rng.int(1, 9), v = rng.pick(VARS); const co = [a * a, 0, -b * b];
       return finishA(rng, {
@@ -122,7 +122,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.polynomial_distribution.m_factor_quadratic", kind: "polynomial_distribution", difficulty: "medium",
-    structure: "x²+bx+c 와 같은 식을 두 이항식의 곱으로 고른다", extraThinking: "(medium) 합이 b, 곱이 c 인 두 수 찾기", concepts: ["이차식 인수분해"],
+    structure: "x²+bx+c 와 같은 식을 두 이항식의 곱으로 고른다", extraThinking: "(medium) 합이 b, 곱이 c 인 두 수 찾기", concepts: ["이차식 인수분해", "문제 조건 해석"],
     generate(rng) {
       const p = rng.nz(-8, 8), r = rng.nz(-8, 8), v = rng.pick(VARS); if (p === r || p + r === 0) throw new GenFail("x"); const fct = (m: number, k: number) => M(`(${shifted(v, m)})(${shifted(v, k)})`);
       return finishA(rng, {
@@ -150,7 +150,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.rational_equivalence.m_add_same_denominator", kind: "rational_equivalence", difficulty: "medium",
-    structure: "분모가 같은 두 분수식의 합을 하나의 분수식으로 정리한다", extraThinking: "(medium) 분자끼리 더하고 분모는 그대로", concepts: ["분수식의 덧셈"],
+    structure: "분모가 같은 두 분수식의 합을 하나의 분수식으로 정리한다", extraThinking: "(medium) 분자끼리 더하고 분모는 그대로", concepts: ["분수식의 덧셈", "문제 조건 해석"],
     generate(rng) {
       const a = rng.nz(-5, 6), b = rng.nz(-6, 6), c = rng.nz(-5, 6), d = rng.nz(-6, 6), k = rng.int(1, 6), v = rng.pick(VARS); const A = a + c, B = b + d; if (A === 0 || B === 0) throw new GenFail("x");
       const den = shifted(v, k); const fr = (n: string, dd: string) => M(`\\frac{${n}}{${dd}}`);
@@ -185,7 +185,7 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "ee.polynomial_distribution.m_exponent_rules", kind: "polynomial_distribution", difficulty: "medium",
-    structure: "(ax^p)(bx^q) 또는 (ax^p)^q 를 지수 법칙으로 정리한다", extraThinking: "(medium) 계수 곱과 지수 합/곱", concepts: ["지수 법칙"],
+    structure: "(ax^p)(bx^q) 또는 (ax^p)^q 를 지수 법칙으로 정리한다", extraThinking: "(medium) 계수 곱과 지수 합/곱", concepts: ["지수 법칙", "문제 조건 해석"],
     generate(rng) {
       const v = rng.pick(VARS), prod = rng.chance(0.55); const a = rng.int(2, 4), p = rng.int(2, 4), b = rng.int(2, 4), qq = rng.int(2, 3);
       const mon = (c: number, e: number) => `${c === 1 ? "" : c}${v}${e === 1 ? "" : `^${e}`}`;

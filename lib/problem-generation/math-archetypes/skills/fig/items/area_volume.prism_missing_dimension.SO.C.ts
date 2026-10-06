@@ -47,7 +47,7 @@ const RAW = defineItem({
     { op: "inverse", sprNo: SPR_NO_SO, structure: "센티미터 치수와 입방센티미터 부피가 주어진 직육면체를 거꾸로 확인해 4개 그림 중에서 고름", extra: "세 치수의 곱이 V 인지 거꾸로 확인해야 함(겉넓이가 V 인 그림이 함정) — medium 은 단위 없는 부피", concepts: ["직육면체의 부피", "역추론", "그림 비교"], gen: one((rng) => build(rng, "liters", "figure_prism_cm3", EX_VOL)) },
   ],
   em: [
-    { lv: "easy", name: "volume_given", sprNo: SPR_NO_SO, structure: "부피가 주어진 직육면체를 4개 그림 중에서 고름", extra: "easy: 세 치수의 곱", concepts: ["직육면체의 부피"], gen: one((rng) => build(rng, "vol", "figure_prism_volume_easy", EX_VOL.slice(0, 3))) },
+    { lv: "easy", name: "volume_given", sprNo: SPR_NO_SO, structure: "부피가 주어진 직육면체를 4개 그림 중에서 고름", extra: "easy: 세 치수의 곱", concepts: ["직육면체의 부피", "문제 조건 해석"], gen: one((rng) => build(rng, "vol", "figure_prism_volume_easy", EX_VOL.slice(0, 3))) },
     { lv: "medium", name: "square_base", sprNo: SPR_NO_SO, structure: "밑면이 정사각형이고 부피가 주어진 직육면체를 고름", extra: "medium: 길이 = 너비 와 부피", concepts: ["직육면체의 부피", "정사각형"], gen: one((rng) => build(rng, "square", "figure_square_base_medium", EX_SQ.slice(0, 3))) },
   ],
 });

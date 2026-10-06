@@ -89,7 +89,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "greatest_x", structure: "삼각형의 두 변 길이가 라벨일 때 셋째 변 x 가 가질 수 있는 가장 큰 정수를 구함", extra: "easy: x < a + b 한 번 적용", concepts: ["삼각형 부등식"],
+      lv: "easy", name: "greatest_x", structure: "삼각형의 두 변 길이가 라벨일 때 셋째 변 x 가 가질 수 있는 가장 큰 정수를 구함", extra: "easy: x < a + b 한 번 적용", concepts: ["삼각형 부등식", "부등식 풀이"],
       gen(rng) {
         const { a, b } = pick2(rng); const { v, fig } = xFig(rng, a, b); const xm = a + b - 1;
         return geoInst(rng, { stimulus: intro(rng, v, rng.pick(S3)), question: rng.pick([`What is the greatest possible value of $x$?`, `What is the largest integer that $x$ can equal?`]), correct: xm, wrongs: [W(a + b, "condition_ignored", "끝값을 포함했다."), W(Math.abs(a - b), "other", "두 변의 차를 답했다."), W(xm - 1, "other", "계산 중 어긋났다."), W(a * b > 99 ? a + b + 2 : a + b - 2, "other", "계산 중 어긋났다.")], verificationJs: figJs({}, fig, `${TI_JS}const nums=L.filter(l=>l!=='x').map(Number); if (nums.length!==2||nums.some(n=>!Number.isFinite(n))) throw new Error('라벨 형식'); return nums[0]+nums[1]-1;`), trace: [rd(a, b), bound, [`x < ${a + b} 이고 x 가 정수이므로 가장 큰 값은 ${xm} 이다.`, "The greatest integer below a + b."]], variant: "greatest_third_side",

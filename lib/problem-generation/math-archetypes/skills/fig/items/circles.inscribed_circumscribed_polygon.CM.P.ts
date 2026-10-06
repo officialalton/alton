@@ -68,14 +68,14 @@ const RAW = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "square_area_radius", structure: "원의 반지름이 그림에 있고 정사각형이 내접할 때 정사각형의 넓이를 구함", extra: "easy: 2r²", concepts: ["내접한 정사각형"],
+      lv: "easy", name: "square_area_radius", structure: "원의 반지름이 그림에 있고 정사각형이 내접할 때 정사각형의 넓이를 구함", extra: "easy: 2r²", concepts: ["내접한 정사각형", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const r = rng.int(2, 16); const f = cs({ radius: String(r) });
         return geoInst(rng, { stimulus: cmIntro(rng, CIRC_SQ), question: Q_AREA(rng, "area of the square"), correct: 2 * r * r, wrongs: pos([W(r * r, "geometry_misapplied", "반지름을 변으로 썼다."), W(4 * r * r, "geometry_misapplied", "지름을 변으로 썼다."), W(8 * r, "formula_misuse", "둘레를 답했다."), W(2 * r * r + 2, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== 2 * r * r), verificationJs: figJs({}, f, `${CM_JS}const r=on('radius'); if (!(r>0)) throw new Error('반지름 라벨 없음'); return 2*r*r;`), trace: [[`그림에서 반지름 ${r} 을 읽는다.`, "Read the radius."], [`대각선 = 지름 = ${2 * r}, 넓이 = ${(2 * r) ** 2} ÷ 2 = ${2 * r * r} 이다.`, "Area from the diagonal."]], variant: "square_area_radius_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "circle_area_radius", sprNo: SPR_NO_CM, structure: "원의 반지름이 그림에 있을 때 원의 넓이를 π 로 구함", extra: "medium: πr²(내접한 정사각형은 무관)", concepts: ["원의 넓이"],
+      lv: "medium", name: "circle_area_radius", sprNo: SPR_NO_CM, structure: "원의 반지름이 그림에 있을 때 원의 넓이를 π 로 구함", extra: "medium: πr²(내접한 정사각형은 무관)", concepts: ["원의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const r = rng.int(2, 16); const f = cs({ radius: String(r) });
         return geoInst(rng, { stimulus: cmIntro(rng, CIRC_SQ), question: Q_PI(rng, "area of the circle"), correct: r * r, fmt: piFmt, wrongs: pos([W(2 * r, "formula_misuse", "둘레의 계수를 답했다."), W(2 * r * r, "formula_misuse", "정사각형의 넓이를 답했다."), W(r, "step_missing", "반지름을 답했다."), W(r * r + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== r * r), verificationJs: figJs({}, f, `${CM_JS}const r=on('radius'); if (!(r>0)) throw new Error('반지름 라벨 없음'); return r*r;`), trace: [[`그림에서 원의 반지름 ${r} 을 읽는다.`, "Read the radius."], [`넓이 = π × ${r}² = ${r * r}π 이다.`, "Area = πr²."], [`정사각형은 이 문제와 무관하다.`, "The inscribed square is not needed."]], variant: "circle_area_radius_medium" }, f);

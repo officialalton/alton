@@ -70,7 +70,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "parallelogram_area", structure: "평행사변형의 밑변과 높이가 그림에 라벨될 때 넓이를 곱으로 구함", extra: "easy: 밑변 × 높이", concepts: ["평행사변형의 넓이"],
+      lv: "easy", name: "parallelogram_area", structure: "평행사변형의 밑변과 높이가 그림에 라벨될 때 넓이를 곱으로 구함", extra: "easy: 밑변 × 높이", concepts: ["평행사변형의 넓이", "문제 조건 해석"],
       gen(rng) {
         const b = rng.int(6, 24), h = rng.int(4, 14); const A = b * h; const v = quadNames(rng); const fig = parFig(v, { ab: String(b), h: String(h) });
         return geoInst(rng, { stimulus: I(rng, v, "par"), question: QA(rng, v), correct: A, wrongs: pos([W(2 * (b + h), "formula_misuse", "둘레를 답했다."), W(b + h, "formula_misuse", "합을 답했다."), W(A / 2, "step_missing", "반으로 나누었다."), W(A + b, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== A), verificationJs: figJs({}, fig, `${PG_JS}const b=side(V[0],V[1]); if (!(b>0&&HT>0)) throw new Error('밑변·높이 라벨 없음'); return b*HT;`), trace: [[`그림에서 밑변 ${b}, 높이 ${h} 를 읽는다.`, "Read the base and the height."], [`넓이 = ${b} × ${h} = ${A} 이다.`, "Parallelogram area = base × height."]], variant: "parallelogram_area_easy" }, fig);

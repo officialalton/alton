@@ -16,7 +16,7 @@ export const L2_EM_ARCHETYPES: Archetype[] = [
   // ---------- easy ----------
   {
     ...base, id: "l2.intersection_x.e_y_form", kind: "intersection_x", difficulty: "easy",
-    structure: "두 식이 y = mx + b 꼴인 연립에서 교점의 x 좌표를 구한다(작은 계수)", extraThinking: "easy 틀", concepts: ["연립방정식의 교점"],
+    structure: "두 식이 y = mx + b 꼴인 연립에서 교점의 x 좌표를 구한다(작은 계수)", extraThinking: "easy 틀", concepts: ["연립방정식의 교점", "문제 조건 해석"],
     generate(rng) {
       const m1 = rng.nz(-3, 3), m2 = rng.nz(-3, 3), x0 = rng.int(-5, 6), b1 = rng.int(-6, 6); if (m1 === m2) throw new GenFail("x");
       const y0 = m1 * x0 + b1, b2 = y0 - m2 * x0; if (Math.abs(b2) > 15) throw new GenFail("x");
@@ -32,7 +32,7 @@ export const L2_EM_ARCHETYPES: Archetype[] = [
   },
   {
     ...base, id: "l2.slope.e_slope_of_equation", kind: "slope", difficulty: "easy",
-    structure: "y = mx + b 꼴의 식에서 기울기를 읽는다", extraThinking: "easy 틀", concepts: ["기울기-절편형"],
+    structure: "y = mx + b 꼴의 식에서 기울기를 읽는다", extraThinking: "easy 틀", concepts: ["기울기-절편형", "문제 조건 해석"],
     generate(rng) {
       const m = rng.nz(-9, 10), b = rng.int(-12, 12), L = rng.pick(["ℓ", "m", "k", "n", "j", "p"]);
       return finish(rng, {

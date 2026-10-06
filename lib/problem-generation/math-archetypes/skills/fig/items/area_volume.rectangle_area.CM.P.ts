@@ -71,7 +71,7 @@ const RAW = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "inner_area", structure: "안쪽 직사각형의 치수가 그림에 있을 때 안쪽 넓이를 구함", extra: "easy: 너비 × 높이", concepts: ["직사각형의 넓이"],
+      lv: "easy", name: "inner_area", structure: "안쪽 직사각형의 치수가 그림에 있을 때 안쪽 넓이를 구함", extra: "easy: 너비 × 높이", concepts: ["직사각형의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const { Wo, Ho, w, h } = dims(rng); const f = fig(String(Wo), String(Ho), String(w), String(h));
         return geoInst(rng, { stimulus: I(rng), question: rng.pick([`What is the area of the inner rectangle?`, `Find the area of the small unshaded rectangle.`]), correct: w * h, wrongs: pos([W(Wo * Ho, "step_missing", "바깥의 넓이를 답했다."), W(Wo * Ho - w * h, "step_missing", "음영의 넓이를 답했다."), W(2 * (w + h), "formula_misuse", "둘레를 답했다."), W(w * h + w, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== w * h), verificationJs: figJs({}, f, `${CM_JS}return inn('width')*inn('height');`), trace: [[`그림에서 안쪽 ${w} × ${h} 를 읽는다.`, "Read the inner dimensions."], [`넓이 = ${w} × ${h} = ${w * h} 이다.`, "Area = width × height."]], variant: "inner_area_easy" }, f);

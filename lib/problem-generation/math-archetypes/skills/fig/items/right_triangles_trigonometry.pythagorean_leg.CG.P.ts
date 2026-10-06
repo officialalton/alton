@@ -76,14 +76,14 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "hypotenuse_from_legs", structure: "한 직각변이 그림에 있고 다른 직각변이 지문에 있을 때 빗변을 구함", extra: "easy: 두 직각변의 제곱의 합의 제곱근", concepts: ["피타고라스 정리"],
+      lv: "easy", name: "hypotenuse_from_legs", structure: "한 직각변이 그림에 있고 다른 직각변이 지문에 있을 때 빗변을 구함", extra: "easy: 두 직각변의 제곱의 합의 제곱근", concepts: ["피타고라스 정리", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const [a, b] = names(rng, 2); const t = mk(rng); const f = planeFig([ptO(a, t.A), ptO(b, t.B), segO("s", a, b)], [t.A, t.B, [t.B[0], t.B[1] + t.b]]);
         return geoInst(rng, { stimulus: cgIntro(rng, sc(a, b), ` The other leg is ${t.b} units long.`), question: rng.pick(["What is the length of the hypotenuse?", "Find the hypotenuse of the triangle.", "How long is the hypotenuse?"]), correct: t.c, wrongs: pos([W(t.a + t.b, "formula_misuse", "직각변을 더했다."), W(t.c * t.c, "step_missing", "제곱근을 취하지 않았다."), W(t.c + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== t.c), verificationJs: figJs({ a, b, o: t.b }, f, `${FJ} return ip(Math.sqrt(L*L+P.o*P.o));`), trace: [[`그림에서 ${a}${b} = ${t.a} 를 읽는다.`, "Read the leg."], [`빗변² = ${t.a}² + ${t.b}² = ${t.c * t.c} 이다.`, "Pythagorean theorem."], [`따라서 ${t.c} 이다.`, "Take the square root."]], variant: "hypotenuse_from_legs_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "other_leg", structure: "한 직각변이 그림에 있고 빗변이 지문에 있을 때 다른 직각변을 구함", extra: "medium: 빗변² − 직각변²", concepts: ["피타고라스 정리"],
+      lv: "medium", name: "other_leg", structure: "한 직각변이 그림에 있고 빗변이 지문에 있을 때 다른 직각변을 구함", extra: "medium: 빗변² − 직각변²", concepts: ["피타고라스 정리", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const [a, b] = names(rng, 2); const t = mk(rng); const f = planeFig([ptO(a, t.A), ptO(b, t.B), segO("s", a, b)], [t.A, t.B, [t.B[0], t.B[1] + t.b]]);
         return geoInst(rng, { stimulus: cgIntro(rng, sc(a, b), ` The hypotenuse is ${t.c} units long.`), question: QB(rng), correct: t.b, wrongs: pos([W(t.c - t.a, "formula_misuse", "빗변에서 직각변을 뺐다."), W(t.c * t.c - t.a * t.a, "step_missing", "제곱근을 취하지 않았다."), W(t.b + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== t.b), verificationJs: figJs({ a, b, c: t.c }, f, `${FJ} return ip(Math.sqrt(P.c*P.c-L*L));`), trace: [[`그림에서 ${a}${b} = ${t.a} 를 읽는다.`, "Read the leg."], [`다른 직각변² = ${t.c}² − ${t.a}² = ${t.b * t.b} 이다.`, "Pythagorean theorem."], [`따라서 ${t.b} 이다.`, "Take the square root."]], variant: "other_leg_medium" }, f);

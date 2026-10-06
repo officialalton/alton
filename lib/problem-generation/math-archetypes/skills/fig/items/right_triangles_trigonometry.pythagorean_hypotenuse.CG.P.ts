@@ -78,7 +78,7 @@ export const ITEM = defineItem({
       }); },
     },
     {
-      lv: "medium", name: "hypotenuse", structure: "좌표평면의 직각삼각형에서 빗변의 길이를 구함", extra: "medium: 피타고라스 정리", concepts: ["피타고라스 정리"],
+      lv: "medium", name: "hypotenuse", structure: "좌표평면의 직각삼각형에서 빗변의 길이를 구함", extra: "medium: 피타고라스 정리", concepts: ["피타고라스 정리", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const n = names(rng, 3) as [string, string, string]; const t = rightTri(rng, SMALL_TRIPLES); const f = fig(n, t);
         return geoInst(rng, { stimulus: cgIntro(rng, sc3(...n)), question: rng.pick([`What is the length of ${n[0]}${n[2]}?`, `Find the length of the hypotenuse of triangle ${n.join("")}.`, `How long is side ${n[0]}${n[2]}?`]), correct: t.c, wrongs: pos([W(t.a + t.b, "formula_misuse", "직각변을 더했다."), W(t.c * t.c, "step_missing", "제곱근을 취하지 않았다."), W(Math.abs(t.a - t.b), "formula_misuse", "직각변의 차를 구했다."), W(t.c + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== t.c), verificationJs: figJs({ a: n[0], b: n[1], c: n[2] }, f, `${HJS} return ip(dist(A,C));`), trace: [[`그림에서 직각변 ${t.a} 와 ${t.b} 를 읽는다.`, "Read the legs."], [`빗변² = ${t.a}² + ${t.b}² = ${t.c * t.c} 이다.`, "Pythagorean theorem."], [`따라서 ${t.c} 이다.`, "Take the square root."]], variant: "hypotenuse_length_medium" }, f);

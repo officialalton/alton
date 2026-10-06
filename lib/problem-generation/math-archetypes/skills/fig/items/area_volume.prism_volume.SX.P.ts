@@ -73,7 +73,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "volume", structure: "두 직각변과 길이가 주어진 삼각기둥의 부피를 구함", extra: "easy: ½ × 두 직각변 × 길이", concepts: ["삼각기둥의 부피"],
+      lv: "easy", name: "volume", structure: "두 직각변과 길이가 주어진 삼각기둥의 부피를 구함", extra: "easy: ½ × 두 직각변 × 길이", concepts: ["삼각기둥의 부피", "문제 조건 해석"],
       gen(rng) {
         const s = makePrism(rng); const V = (s.a * s.b * s.L) / 2; const f = prismFig({ legA: String(s.a), legB: String(s.b), hyp: String(s.c), length: String(s.L) });
         return gInst(rng, {

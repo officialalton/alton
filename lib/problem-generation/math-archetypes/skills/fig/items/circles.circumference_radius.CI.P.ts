@@ -72,14 +72,14 @@ const RAW = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "circumference_from_radius", sprNo: SPR_NO_PI, structure: "그림에 반지름 라벨이 있는 원의 둘레를 π 로 구함", extra: "easy: 2πr", concepts: ["원의 둘레"],
+      lv: "easy", name: "circumference_from_radius", sprNo: SPR_NO_PI, structure: "그림에 반지름 라벨이 있는 원의 둘레를 π 로 구함", extra: "easy: 2πr", concepts: ["원의 둘레", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const r = rng.int(3, 20); const { f } = radiusFig(rng, r);
         return geoInst(rng, { stimulus: I(rng, ""), question: rng.pick([`What is the circumference of the circle, in terms of $\\pi$?`, `Find the circumference in terms of $\\pi$.`]), correct: 2 * r, fmt: piFmt, wrongs: pos([W(r, "formula_misuse", "πr 로 계산했다."), W(r * r, "formula_misuse", "넓이를 답했다."), W(4 * r, "formula_misuse", "지름으로 곱했다."), W(2 * r + 2, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== 2 * r), verificationJs: figJs({}, f, `${CI_JS}return 2*radiusLabel();`), trace: [[`그림에서 반지름 ${r} 을 읽는다.`, "Read the radius."], [`둘레 = 2π × ${r} = ${2 * r}π 이다.`, "Circumference = 2πr."]], variant: "circumference_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "area_from_radius", sprNo: SPR_NO_PI, structure: "그림에 반지름 라벨이 있는 원의 넓이를 π 로 구함", extra: "medium: 반지름 제곱", concepts: ["원의 넓이"],
+      lv: "medium", name: "area_from_radius", sprNo: SPR_NO_PI, structure: "그림에 반지름 라벨이 있는 원의 넓이를 π 로 구함", extra: "medium: 반지름 제곱", concepts: ["원의 넓이", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const r = rng.int(3, 16); const { f } = radiusFig(rng, r);
         return geoInst(rng, { stimulus: I(rng, ""), question: rng.pick([`What is the area of the circle, in terms of $\\pi$?`, `Find the area in terms of $\\pi$.`]), correct: r * r, fmt: piFmt, wrongs: pos([W(2 * r, "formula_misuse", "둘레의 계수를 답했다."), W(r, "step_missing", "반지름을 답했다."), W(2 * r * r, "formula_misuse", "2πr² 으로 계산했다."), W(r * r + 2, "other", "계산 중 어긋났다.")]).filter((w) => w.v !== r * r), verificationJs: figJs({}, f, `${CI_JS}const r=radiusLabel(); return r*r;`), trace: [[`그림에서 반지름 ${r} 을 읽는다.`, "Read the radius."], [`넓이 = π × ${r}² = ${r * r}π 이다.`, "Area = πr²."], [`따라서 ${r * r}π 이다.`, "State the area."]], variant: "area_easy_medium" }, f);

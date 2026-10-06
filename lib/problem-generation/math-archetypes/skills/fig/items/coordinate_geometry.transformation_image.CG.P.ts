@@ -76,14 +76,14 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "translate_x", structure: "삼각형의 한 꼭짓점을 오른쪽으로 평행이동한 점의 x 좌표를 구함", extra: "easy: x 좌표 + 이동량", concepts: ["평행이동"],
+      lv: "easy", name: "translate_x", structure: "삼각형의 한 꼭짓점을 오른쪽으로 평행이동한 점의 x 좌표를 구함", extra: "easy: x 좌표 + 이동량", concepts: ["평행이동", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const n = names(rng, 3); const p = tri(rng, 1, 7); const d = rng.int(2, 6); const idx = rng.int(0, 2); const v = p[idx]; const f = fig(n, p);
         return geoInst(rng, { stimulus: cgIntro(rng, sc3(...(n as [string, string, string])), ` The triangle is translated ${un(d)} to the right.`), question: rng.pick([`What is the $x$-coordinate of ${n[idx]}′, the image of ${n[idx]}?`, `Find the $x$-coordinate of the image of ${n[idx]}.`]), correct: v[0] + d, wrongs: pos([W(v[0], "step_missing", "원래 좌표를 답했다."), W(v[1] + d, "formula_misuse", "y 좌표에 더했다."), W(v[0] + d + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== v[0] + d), verificationJs: figJs({ p: n[idx], d }, f, `${TJ}const V=PA(P.p); return ip(V[0]+P.d);`), trace: [[`그림에서 ${n[idx]} = (${v[0]}, ${v[1]}) 를 읽는다.`, "Read the vertex."], [`x 좌표에 ${d} 를 더한다.`, "Add the shift to x."], [`따라서 ${v[0] + d} 이다.`, "State the coordinate."]], variant: "translate_x_easy" }, f);
       }); },
     },
     {
-      lv: "medium", name: "reflect_swap", structure: "삼각형의 한 꼭짓점을 직선 y = x 에 대해 대칭이동한 점의 x 좌표를 구함", extra: "medium: 좌표를 맞바꿈", concepts: ["대칭이동"],
+      lv: "medium", name: "reflect_swap", structure: "삼각형의 한 꼭짓점을 직선 y = x 에 대해 대칭이동한 점의 x 좌표를 구함", extra: "medium: 좌표를 맞바꿈", concepts: ["대칭이동", "문제 조건 해석"],
       gen(rng) { return retry(rng, () => {
         const n = names(rng, 3); const p = tri(rng, 1, 7); const idx = rng.int(0, 2); const v = p[idx]; const f = fig(n, p);
         return geoInst(rng, { stimulus: cgIntro(rng, sc3(...(n as [string, string, string])), " The triangle is reflected across the line $y = x$."), question: rng.pick([`What is the $x$-coordinate of ${n[idx]}′, the image of ${n[idx]}?`, `Find the $x$-coordinate of the image of ${n[idx]}.`]), correct: v[1], wrongs: pos([W(v[0], "step_missing", "원래 좌표를 답했다."), W(v[0] + v[1], "formula_misuse", "좌표를 더했다."), W(v[1] + 1, "other", "계산 중 어긋났다.")]).filter((x) => x.v !== v[1]), verificationJs: figJs({ p: n[idx] }, f, `${TJ}const V=PA(P.p); return ip(V[1]);`), trace: [[`그림에서 ${n[idx]} = (${v[0]}, ${v[1]}) 를 읽는다.`, "Read the vertex."], [`y = x 에 대한 대칭은 좌표를 맞바꾼다.`, "Swap the coordinates."], [`따라서 ${v[1]} 이다.`, "State the coordinate."]], variant: "reflect_swap_medium" }, f);
