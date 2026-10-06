@@ -9,6 +9,12 @@ import { ITEM as lePg } from "../items/linear_equations_one_var.literal_rearrang
 import { ITEM as ciCircR } from "../items/circles.circumference_radius.CI.P";
 import { ITEM as ciCircD } from "../items/circles.circumference_diameter.CI.P";
 import { ITEM as ciArc } from "../items/circles.arc_length.CI.P";
+import { ITEM as ciSec } from "../items/circles.sector_area.CI.P";
+import { ITEM as ciCfi } from "../items/circles.central_from_inscribed.CI.P";
+import { ITEM as ciIfc } from "../items/circles.inscribed_from_central.CI.P";
+import { ITEM as ciTan } from "../items/circles.tangent_radius_perpendicular.CI.P";
+import { ITEM as ciChord } from "../items/circles.chord_length.CI.P";
+import { ITEM as ciCfiC } from "../items/circles.central_from_inscribed.CI.C";
 import { ITEM as avTrapPg } from "../items/area_volume.trapezoid_parallelogram_area.PG.P";
 
-export const BUNDLE: LArch[] = [...avRectPg, ...avRectPgC, ...avTriPg, ...avTrapPg, ...latPolyPg, ...eePolyPg, ...lePg, ...ciCircR, ...ciCircD, ...ciArc];
+export const BUNDLE: LArch[] = [...avRectPg, ...avRectPgC, ...avTriPg, ...avTrapPg, ...latPolyPg, ...eePolyPg, ...lePg, ...ciCircR, ...ciCircD, ...ciArc, ...ciSec, ...ciCfi, ...ciIfc, ...ciTan, ...ciChord, ...ciCfiC];

@@ -28,3 +28,13 @@ export const ARC_COMBOS = (): [number, number][] => { const out: [number, number
 export const SECTOR_COMBOS = (): [number, number][] => { const out: [number, number][] = []; for (const th of [30, 45, 60, 72, 90, 120, 135, 150, 180, 40, 80]) for (let r = 3; r <= 20; r++) if ((th * r * r) % 360 === 0) out.push([th, r]); return out; };
 /** 라벨(°·라디안 "π/3", "2π/3")을 도(degree)로 읽는 JS — NaN 이면 형식 오류. */
 export const ANG_LABEL_JS = "const degOf=(l)=>{ const t=String(l).replace(/[°\\s]/g,''); let m=/^(\\d+(?:\\.\\d+)?)$/.exec(t); if (m) return Number(m[1]); m=/^(\\d*)π\\/(\\d+)$/.exec(t); if (m) return (m[1]===''?1:Number(m[1]))*180/Number(m[2]); m=/^(\\d*)π$/.exec(t); if (m) return (m[1]===''?1:Number(m[1]))*180; throw new Error('각 라벨 형식 오류: '+l); };\n";
+/**
+ * 중심각 θ(A·B 사이)·원주각 그림: 점 A = a0, B = a0 + θ(반시계). 원주각의 꼭짓점 P 는 큰 호 위(major)면 호 AB 의 반대쪽 한가운데(원주각 θ/2), 작은 호 위(minor)면 호 AB 의 한가운데(원주각 180° − θ/2).
+ 라벨은 inscLabel(원주각)·centLabel(중심각, 생략하면 중심각을 그리지 않는다).
+ */
+export function inscFig(rng: Rng, o: { theta: number; onMajor: boolean; inscLabel?: string; centLabel?: string; a0?: number; arc?: boolean | string }): { f: CircFig; A: string; B: string; P: string } {
+  const [A, B, P] = circNames(rng, 3); const a0 = o.a0 ?? rng.pick([20, 60, 100, 140, 200, 250]); const pAng = o.onMajor ? a0 + o.theta / 2 + 180 : a0 + o.theta / 2;
+  return { A, B, P, f: { type: "circle", points: [...arcPts(A, B, a0, o.theta), { id: P, angle: pAng }], ...(o.arc ? { arcs: [{ from: A, to: B, ...(typeof o.arc === "string" ? { label: o.arc } : {}) }] } : {}), ...(o.centLabel !== undefined ? { centralAngles: [{ between: [A, B] as [string, string], label: o.centLabel }] } : {}), ...(o.inscLabel !== undefined ? { inscribedAngles: [{ at: P, between: [A, B] as [string, string], label: o.inscLabel }] } : {}) } };
+}
+/** 그림 점 각도로 원주각이 가리키는 호(꼭짓점 P 의 반대쪽 호 AB)의 크기(도)를 구하는 JS: arcSubtended(ins) — INS[i]. */
+export const INSC_JS = "const mod=(x)=>((x%360)+360)%360; const subtended=(g)=>{ const a=ang(g.between[0]), b=ang(g.between[1]), p=ang(g.at); const arc=mod(b-a); const pIn=mod(p-a)<arc; return pIn?360-arc:arc; };\n";

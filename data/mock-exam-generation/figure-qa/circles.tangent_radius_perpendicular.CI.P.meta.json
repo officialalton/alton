@@ -1,0 +1,41 @@
+{
+ "itemId": "circles.tangent_radius_perpendicular.CI.P",
+ "generatedAt": "2026-10-06T07:03:18.313Z",
+ "codeHash": "dcb269adef5de6869c20ff0043c7059f83acbc9950e04fb249de1d4111cc08a3",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/circles.tangent_radius_perpendicular.CI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "circles.tangent_radius_perpendicular.CI.P.png",
+   "mobileFile": "circles.tangent_radius_perpendicular.CI.P.m375.png",
+   "archetypeId": "ci.tangent_radius_perpendicular.CI.P.compose_kind",
+   "seed": 11,
+   "signature": "circle",
+   "stimulus": "A designer plans a circular logo. Read each label carefully before computing. A circle with center $O$ is shown, and $V$ lies on the tangent line at $Q$.",
+   "question": "How far is $V$ from the center $O$?",
+   "options": [
+    "49",
+    "41",
+    "42",
+    "360"
+   ],
+   "correctIndex": 1,
+   "answer": "41",
+   "explanation": "(1) 그림에서 반지름 9, 접선 QV = 40 를 읽는다. (2) 접선과 반지름은 접점 Q 에서 수직이다. (3) 삼각형 OQV 는 Q 에서 직각이고 OV 가 빗변이다. (4) OV² = 9² + 40² = 1681 이므로 OV = 41 이다. (5) 따라서 41 이다. 따라서 정답은 41이다.",
+   "structuralIssues": []
+  }
+ ]
+}

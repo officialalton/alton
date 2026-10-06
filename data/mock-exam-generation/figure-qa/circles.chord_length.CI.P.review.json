@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.chord_length.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:03:22Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "110a7b776ff4454dacc2362d902b5ff3ea08852f3a82eb56293aac241afa6a87",
+ "samples": [
+  "circles.chord_length.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "지름 위에 선 직각삼각형 그림(현 라벨·지름 라벨·반지름 라벨 변형) 샘플 + 갤러리 4 연산자 확인: 점 위치가 현의 길이 비율(Δ = 2 asin(b/d))대로 그려지고 라벨·점 이름 겹침 없음(지름 라벨이 선 위에 놓이는 장면 있음). 60° 정삼각형 변형은 반지름 라벨을 중심각 바깥 쪽 반지름에 둠."
+}
