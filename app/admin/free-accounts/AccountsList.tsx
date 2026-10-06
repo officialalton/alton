@@ -27,9 +27,8 @@ export default function AccountsList({ onOpen, refreshKey }: { onOpen: (id: stri
 
   const load = useCallback(() => {
     const my = ++seq.current;
-    setError(null);
     listFreeAccountsAction({ ...f, search: debounced, limit: PAGE, offset: page * PAGE })
-      .then((r) => { if (my === seq.current) setData(r); })
+      .then((r) => { if (my === seq.current) { setData(r); setError(null); } })
       .catch((e) => { if (my === seq.current) setError(e instanceof Error ? e.message : "Couldn't load accounts."); });
   }, [f, debounced, page]);
   // 필터·정렬·페이지·검색이 바뀔 때만 RPC 1회(응시 이력 행은 읽지 않는다).
