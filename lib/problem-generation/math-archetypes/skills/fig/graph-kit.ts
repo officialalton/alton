@@ -44,14 +44,14 @@ export function lineFig(t: SeTopic, X: number, xStep: number, yMax: number, S: n
   };
 }
 
-export type LinGOpts = { topic?: SeTopic; conv?: boolean; mSign?: 1 | -1; /** 점 하나가 y 절편(x=0) 격자점 */ x0Zero?: boolean; /** y 절편이 격자 위가 아님(점은 x>0) */ noZeroX?: boolean; mMax?: number };
+export type LinGOpts = { topic?: SeTopic; conv?: boolean; mSign?: 1 | -1; /** 점 하나가 y 절편(x=0) 격자점 */ x0Zero?: boolean; /** y 절편이 격자 위가 아님(점은 x>0) */ noZeroX?: boolean; mMax?: number; /** y 절편 0(원점을 지나는 비례 관계) — mSign 은 1 로 쓴다 */ bZero?: boolean };
 /** 일차 관계 y = m x + b 의 그래프: 세 격자점에 점이 찍히고 직선은 축 전 구간을 지난다. 값은 모두 0 이상 정수. */
 export function makeLinGraph(rng: Rng, o: LinGOpts = {}): LinGraph {
   const pool = o.conv ? CONV_LIN_G_TOPICS : LIN_G_TOPICS;
   for (let tr = 0; tr < 400; tr++) {
     const t = o.topic ?? rng.pick(o.mSign ? pool.filter((q) => topicSign(q) === o.mSign) : pool); const xStep = rng.pick([1, 1, 2]); const nx = rng.int(5, 8); const X = xStep * nx;
     const sign = topicSign(t); const m = sign * rng.int(2, sign > 0 ? (o.mMax ?? 12) : Math.min(o.mMax ?? 12, 6));
-    const b = sign > 0 ? rng.int(0, 60) : Math.abs(m) * (X + rng.int(3, 6)) + rng.int(0, 20); const top = Math.max(b, b + m * X);
+    const b = o.bZero ? 0 : sign > 0 ? rng.int(0, 60) : Math.abs(m) * (X + rng.int(3, 6)) + rng.int(0, 20); const top = Math.max(b, b + m * X);
     const Ss = [5, 10, 20, 25, 50].filter((S) => { const ym = Math.ceil((top + 1) / S) * S; return ym / S >= 4 && ym / S <= 9; });
     if (!Ss.length) continue; const S = rng.pick(Ss); const yMax = Math.ceil((top + 1) / S) * S;
     if (!isInt(b) || b < 0) continue;
