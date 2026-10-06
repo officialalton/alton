@@ -1,0 +1,23 @@
+{
+ "itemId": "probability.simple.BR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T02:46:57Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "a7b24d3d54ae6384e8423495c4188e3c27f7446a8756093f8ad23263bbc2459d",
+ "samples": [
+  "probability.simple.BR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 값 2(9),3(8),4(3),5(1) → 합 59/21≈2.81, 평균보다 큰 값 3·4·5 의 도수 12 → 12/21=4/7, 메타 정답 4/7 일치. 막대·눈금·축 제목 양호, 375px 판독 가능."
+}

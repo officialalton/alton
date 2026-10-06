@@ -9,5 +9,7 @@ import { ITEM as ovdMedianHG } from "../items/one_variable_data.median.HG.P";
 import { ITEM as pctOfBR } from "../items/percentages.percent_of.BR.P";
 import { ITEM as pctFindBR } from "../items/percentages.find_percent.BR.P";
 import { ITEM as pctChangeBR } from "../items/percentages.percent_change.BR.P";
+import { ITEM as ovdMeanBR } from "../items/one_variable_data.mean.BR.P";
+import { ITEM as probSimpleBR } from "../items/probability.simple.BR.P";
 
-export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR];
+export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR];

@@ -93,3 +93,23 @@ export const twoBarIntro = (rng: Rng, s: TwoScene) => rng.pick([
 ]);
 /** FIGURE(묶음 막대)에서 이름 nm·a(기간 1)·b(기간 2)·idx·pc 를 읽는 JS(TWO_JS 와 같은 변수 이름). */
 export const BAR_TWO_JS = "const nm=FIGURE.categories; const a=FIGURE.series[0].values, b=FIGURE.series[1].values; if (a.some(x=>typeof x!=='number'||x<=0)||b.some(x=>typeof x!=='number')||a.length!==nm.length||b.length!==nm.length) throw new Error('값 오류'); const idx=(k)=>{ const i=nm.indexOf(k); if (i<0) throw new Error('막대 없음'); return i; }; const pc=(i)=>(b[i]-a[i])/a[i]*100;\n";
+
+// ── 도수 막대(값 × 개수): 도수표(FQ)와 같은 장면을 막대로 — 값이 가로축 범주, 막대 높이가 도수 ──
+import { FQ_TOPICS as _FQ, type FqTopic as _FqT } from "./table-kit";
+export type BarFqScene = { t: _FqT; vals: number[]; freqs: number[]; N: number; sum: number; fig: { type: "data"; kind: "bar"; categories: string[]; series: { values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
+export const barFqFig = (t: _FqT, vals: number[], freqs: number[]) => ({ type: "data" as const, kind: "bar" as const, categories: vals.map(String), series: [{ values: freqs }], xTitle: `${t.col} (${t.unit})`, yTitle: `${t.cnt} (${t.ent})`, yMin: 0, yMax: Math.max(...freqs) + 1, yStep: 1 });
+/** 도수 막대 장면: 연속한 k(4~6)개 값, 도수 1~fmax(≤9 — 세로 눈금을 1 칸 간격으로 두어 정확히 읽는다). */
+export function makeBarFq(rng: Rng, o: { k?: number; fmax?: number; topic?: _FqT } = {}): BarFqScene {
+  const t = o.topic ?? rng.pick(_FQ); const span = Math.floor((t.hi - t.lo) / t.step) + 1; const k = Math.min(o.k ?? rng.int(4, 6), span);
+  const start = t.lo + t.step * rng.int(0, span - k); const vals = Array.from({ length: k }, (_, i) => start + t.step * i);
+  const freqs = vals.map(() => rng.int(1, Math.min(9, o.fmax ?? 9))); const N = freqs.reduce((a, b) => a + b, 0); const sum = vals.reduce((a, v, i) => a + v * freqs[i], 0);
+  return { t, vals, freqs, N, sum, fig: barFqFig(t, vals, freqs) };
+}
+/** FIGURE(도수 막대)에서 값·도수·전체·합·목록·중앙값을 읽는 JS(FQ_JS 와 같은 변수 이름). */
+export const BF_JS = "const vals=FIGURE.categories.map(Number), fr=FIGURE.series[0].values; if (vals.some(v=>!Number.isFinite(v))||fr.some(f=>f<0||!Number.isInteger(f))) throw new Error('값·도수 오류'); const N=fr.reduce((a,b)=>a+b,0); const S=vals.reduce((a,v,i)=>a+v*fr[i],0); const list=[]; vals.forEach((v,i)=>{ for(let k=0;k<fr[i];k++) list.push(v); }); list.sort((p,q)=>p-q); const med=list.length%2?list[(list.length-1)/2]:(list[list.length/2-1]+list[list.length/2])/2;\n";
+export const bfIntro = (rng: Rng, s: BarFqScene) => rng.pick([
+  `The graph shown gives the ${s.t.what} for ${s.t.ent} ${s.t.where}. Bar heights give the number of ${s.t.ent} with each value.`,
+  `The graph shown summarizes the ${s.t.what} for a group of ${s.t.ent} ${s.t.where}; bar heights give how many ${s.t.ent} had each value.`,
+  `A survey recorded the ${s.t.what} for ${s.t.ent} ${s.t.where}. The results are shown in the graph, with bar heights counting ${s.t.ent}.`,
+]);
+export const bfRead = (s: BarFqScene): [string, string] => [`그래프에서 값과 막대 높이(도수)를 읽는다: ${s.vals.map((v, i) => `${v}(${s.freqs[i]})`).join(", ")} — 전체 ${s.N}개.`, "Read each value and its bar height."];
