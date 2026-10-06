@@ -1,12 +1,12 @@
 {
  "version": 1,
- "generatedAt": "2026-10-06T15:16:44.891Z",
+ "generatedAt": "2026-10-06T18:53:44.941Z",
  "seedsPerArchetype": 400,
  "ok": false,
  "summary": {
   "items": 303,
-  "pass": 244,
-  "fail": 56,
+  "pass": 300,
+  "fail": 0,
   "unimplemented": 3,
   "blockedRenderer": 0,
   "waived": 0
@@ -26,7 +26,7 @@
   },
   "G9": {
    "ok": false,
-   "note": "시각 검수 pass 244/303(구현 300개 중 244개; 상태: pass 244, incomplete 55, stale 1)"
+   "note": "시각 검수 pass 300/303(구현 300개 중 300개; 상태: pass 300)"
   }
  },
  "items": {
@@ -99,7 +99,7 @@
    }
   },
   "ratios_rates_units.proportion.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -109,12 +109,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "ratios_rates_units.proportion.BR.P": {
@@ -322,7 +320,7 @@
    }
   },
   "probability.simple.VT.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -332,12 +330,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "probability.conditional.TW.P": {
@@ -375,7 +371,7 @@
    }
   },
   "probability.conditional.VT.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -385,12 +381,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "probability.sequential_without_replacement.TB.P": {
@@ -411,7 +405,7 @@
    }
   },
   "probability.sequential_without_replacement.VT.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -421,12 +415,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "probability.sequential_without_replacement.PI.P": {
@@ -464,7 +456,7 @@
    }
   },
   "nonlinear_equations_systems.root.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -474,12 +466,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_equations_systems.root.TB.P": {
@@ -568,7 +558,7 @@
    }
   },
   "nonlinear_equations_systems.num_real_solutions.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -578,12 +568,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_equations_systems.irrational_sum_of_roots.FN.P": {
@@ -701,7 +689,7 @@
    }
   },
   "nonlinear_equations_systems.parameter_discriminant.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -711,12 +699,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_functions.evaluate.TB.P": {
@@ -754,7 +740,7 @@
    }
   },
   "nonlinear_functions.evaluate.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -764,12 +750,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_functions.vertex_x.FN.P": {
@@ -807,7 +791,7 @@
    }
   },
   "nonlinear_functions.vertex_x.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -817,12 +801,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_functions.vertex_y.FN.P": {
@@ -860,7 +842,7 @@
    }
   },
   "nonlinear_functions.vertex_y.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -870,12 +852,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_functions.find_x_for_value.FN.P": {
@@ -930,7 +910,7 @@
    }
   },
   "nonlinear_functions.interpret_a.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -940,12 +920,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "nonlinear_functions.interpret_b.FN.P": {
@@ -966,7 +944,7 @@
    }
   },
   "nonlinear_functions.interpret_b.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -976,12 +954,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_inequalities.solve_one_var.NL.P": {
@@ -1053,7 +1029,7 @@
    }
   },
   "linear_inequalities.point_in_solution.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1063,12 +1039,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_inequalities.point_in_solution.TB.P": {
@@ -1225,7 +1199,7 @@
    }
   },
   "linear_functions.slope_from_two_points.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1235,12 +1209,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_functions.interpret_slope.LN.P": {
@@ -1278,7 +1250,7 @@
    }
   },
   "linear_functions.interpret_slope.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1288,12 +1260,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_functions.interpret_intercept.LN.P": {
@@ -1331,7 +1301,7 @@
    }
   },
   "linear_functions.interpret_intercept.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1341,12 +1311,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_equations_two_var.intersection_x.LN.P": {
@@ -1452,7 +1420,7 @@
    }
   },
   "linear_equations_two_var.slope.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1462,12 +1430,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_equations_two_var.intercept.LN.P": {
@@ -1488,7 +1454,7 @@
    }
   },
   "linear_equations_two_var.intercept.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1498,12 +1464,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_equations_two_var.num_solutions.LN.P": {
@@ -1524,7 +1488,7 @@
    }
   },
   "linear_equations_two_var.num_solutions.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1534,12 +1498,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "systems_linear.substitution_solve.LN.P": {
@@ -1611,7 +1573,7 @@
    }
   },
   "systems_linear.param_no_solution.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1621,12 +1583,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "systems_linear.word_system.TB.P": {
@@ -1664,7 +1624,7 @@
    }
   },
   "systems_linear.word_system.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1674,12 +1634,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "lines_angles_triangles.triangle_angle_sum.TR.P": {
@@ -1819,7 +1777,7 @@
    }
   },
   "lines_angles_triangles.similar_triangles.TN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1829,16 +1787,14 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "lines_angles_triangles.similar_triangles.TR.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1848,12 +1804,10 @@
     "compose_kind"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "lines_angles_triangles.similar_triangles.CG.P": {
@@ -1908,7 +1862,7 @@
    }
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1918,12 +1872,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.pythagorean_leg.TR.P": {
@@ -1978,7 +1930,7 @@
    }
   },
   "right_triangles_trigonometry.trig_ratio.UC.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -1988,16 +1940,14 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.trig_ratio.TC.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -2007,12 +1957,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 stale: 판정 이후 생성기·렌더 코드가 바뀌어 판정이 무효다 — 재검수 대상"
-   ],
+   "failures": [],
    "qa": {
-    "state": "stale",
-    "detail": "판정 이후 생성기·렌더 코드가 바뀌어 판정이 무효다 — 재검수 대상"
+    "state": "pass",
+    "detail": "claude (lead) — E의 지문 문형 변경 후 데스크톱 PNG 재판독, 정답 D(24/25) 수작업 검산 · 2026-10-06T16:00:00Z"
    }
   },
   "one_variable_data.mean.FQ.P": {
@@ -3138,7 +3086,7 @@
    }
   },
   "area_volume.rectangle_area.LS.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3148,12 +3096,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "area_volume.rectangle_area.PG.C": {
@@ -3242,7 +3188,7 @@
    }
   },
   "area_volume.prism_volume.SX.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3252,12 +3198,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "area_volume.prism_missing_dimension.SO.P": {
@@ -3312,7 +3256,7 @@
    }
   },
   "area_volume.cylinder_volume_radius.SX.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3322,12 +3266,10 @@
     "inverse"
    ],
    "sprHard": 1,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "area_volume.cylinder_volume_diameter.SO.P": {
@@ -3348,7 +3290,7 @@
    }
   },
   "area_volume.cylinder_volume_diameter.SX.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3358,12 +3300,10 @@
     "inverse"
    ],
    "sprHard": 1,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "circles.circumference_radius.CI.P": {
@@ -3588,7 +3528,7 @@
    }
   },
   "circles.circle_equation_transform.CG.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3598,12 +3538,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "linear_functions.construct_equation_from_graph.LN.P": {
@@ -3641,7 +3579,7 @@
    }
   },
   "linear_functions.construct_equation_from_graph.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3651,16 +3589,14 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_functions.construct_equation_from_graph.LN.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3670,12 +3606,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "systems_linear.system_from_graph.LN.P": {
@@ -3696,7 +3630,7 @@
    }
   },
   "systems_linear.system_from_graph.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3706,12 +3640,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_inequalities.inequality_from_graph.LN.P": {
@@ -3732,7 +3664,7 @@
    }
   },
   "linear_inequalities.inequality_from_graph.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3742,12 +3674,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   },
   "linear_inequalities.compound_inequality_number_line.NL.P": {
@@ -3819,7 +3749,7 @@
    }
   },
   "nonlinear_functions.exponential_model.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3829,12 +3759,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "nonlinear_functions.exponential_model.TB.C": {
@@ -3906,7 +3834,7 @@
    }
   },
   "nonlinear_functions.function_transformation.FN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3916,16 +3844,14 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "nonlinear_functions.function_transformation.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3935,16 +3861,14 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:50:55Z"
    }
   },
   "nonlinear_functions.function_transformation.FN.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3954,12 +3878,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
@@ -3987,7 +3909,7 @@
    }
   },
   "nonlinear_functions.context_graph_features.FN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3997,12 +3919,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "nonlinear_functions.context_graph_features.TB.P": {
@@ -4023,7 +3943,7 @@
    }
   },
   "nonlinear_functions.rational_asymptote.FN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4033,16 +3953,14 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "nonlinear_functions.rational_asymptote.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4052,12 +3970,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "nonlinear_equations_systems.circle_equation_graph.CG.P": {
@@ -4384,7 +4300,7 @@
    }
   },
   "two_variable_data.model_choice_linear_quadratic_exponential.FN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4394,12 +4310,10 @@
     "inverse"
    ],
    "sprHard": 3,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
    }
   },
   "two_variable_data.intercept_residual_interpretation.SC.P#1": {
@@ -4624,7 +4538,7 @@
    }
   },
   "lines_angles_triangles.parallel_lines_transversal_angles.P3.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4634,12 +4548,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "lines_angles_triangles.vertical_supplementary_angles.PT.P": {
@@ -4694,7 +4606,7 @@
    }
   },
   "lines_angles_triangles.congruent_triangles.TR.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4704,12 +4616,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "lines_angles_triangles.polygon_interior_angle.PG.P": {
@@ -4747,7 +4657,7 @@
    }
   },
   "lines_angles_triangles.nested_similar_parallel.TN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4757,12 +4667,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.special_right_triangles.TR.P": {
@@ -4817,7 +4725,7 @@
    }
   },
   "right_triangles_trigonometry.unit_circle_radian.UC.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4827,16 +4735,14 @@
     "inverse"
    ],
    "sprHard": 1,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.unit_circle_radian.UC.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4846,16 +4752,14 @@
     "compare_scenarios"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.sinusoid_graph.TC.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4865,16 +4769,14 @@
     "inverse"
    ],
    "sprHard": 3,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.sinusoid_graph.TC.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4884,16 +4786,14 @@
     "chain2"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4903,12 +4803,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "area_volume.cone_pyramid_sphere_volume.SO.P": {
@@ -4946,7 +4844,7 @@
    }
   },
   "area_volume.composite_solid.SX.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -4956,12 +4854,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "area_volume.shaded_region_area.CM.P": {
@@ -5033,7 +4929,7 @@
    }
   },
   "area_volume.similar_solids_scale.SO.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -5043,16 +4939,14 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "area_volume.space_diagonal.SX.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -5062,12 +4956,10 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "circles.tangent_radius_perpendicular.CI.P": {
@@ -5207,7 +5099,7 @@
    }
   },
   "coordinate_geometry.transformation_image.CG.B": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -5217,12 +5109,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
    }
   },
   "coordinate_geometry.polygon_area_on_plane.CG.P": {
@@ -5260,7 +5150,7 @@
    }
   },
   "coordinate_geometry.parallel_perpendicular_slopes.LN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -5270,12 +5160,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
    }
   }
  },
@@ -5297,8 +5185,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
   },
   "ratios_rates_units.proportion.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "ratios_rates_units.proportion.BR.P": {
    "state": "pass",
@@ -5349,8 +5237,8 @@
    "detail": "claude-sonnet-5.5 (math-D session) · 2026-10-06T08:00:06Z"
   },
   "probability.simple.VT.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "probability.conditional.TW.P": {
    "state": "pass",
@@ -5361,16 +5249,16 @@
    "detail": "visual-review-agent-SD · 2026-10-05T19:42:48.648Z"
   },
   "probability.conditional.VT.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "probability.sequential_without_replacement.TB.P": {
    "state": "pass",
    "detail": "visual-review-agent-SD · 2026-10-05T19:42:48.650Z"
   },
   "probability.sequential_without_replacement.VT.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "probability.sequential_without_replacement.PI.P": {
    "state": "pass",
@@ -5381,8 +5269,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "nonlinear_equations_systems.root.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_equations_systems.root.TB.P": {
    "state": "pass",
@@ -5405,8 +5293,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "nonlinear_equations_systems.num_real_solutions.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_equations_systems.irrational_sum_of_roots.FN.P": {
    "state": "pass",
@@ -5437,8 +5325,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "nonlinear_equations_systems.parameter_discriminant.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_functions.evaluate.TB.P": {
    "state": "pass",
@@ -5449,8 +5337,8 @@
    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:26:23Z"
   },
   "nonlinear_functions.evaluate.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_functions.vertex_x.FN.P": {
    "state": "pass",
@@ -5461,8 +5349,8 @@
    "detail": "visual-review-agent-SC · 2026-10-05T19:43:04.000Z"
   },
   "nonlinear_functions.vertex_x.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_functions.vertex_y.FN.P": {
    "state": "pass",
@@ -5473,8 +5361,8 @@
    "detail": "visual-review-agent-SC · 2026-10-05T19:43:04.000Z"
   },
   "nonlinear_functions.vertex_y.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_functions.find_x_for_value.FN.P": {
    "state": "pass",
@@ -5489,16 +5377,16 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:14:16Z"
   },
   "nonlinear_functions.interpret_a.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "nonlinear_functions.interpret_b.FN.P": {
    "state": "pass",
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:14:16Z"
   },
   "nonlinear_functions.interpret_b.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_inequalities.solve_one_var.NL.P": {
    "state": "pass",
@@ -5517,8 +5405,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T10:30:00Z"
   },
   "linear_inequalities.point_in_solution.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_inequalities.point_in_solution.TB.P": {
    "state": "pass",
@@ -5557,8 +5445,8 @@
    "detail": "visual-review-agent-SB · 2026-10-05T19:42:52Z"
   },
   "linear_functions.slope_from_two_points.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_functions.interpret_slope.LN.P": {
    "state": "pass",
@@ -5569,8 +5457,8 @@
    "detail": "visual-review-agent-SB · 2026-10-05T19:42:52Z"
   },
   "linear_functions.interpret_slope.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_functions.interpret_intercept.LN.P": {
    "state": "pass",
@@ -5581,8 +5469,8 @@
    "detail": "visual-review-agent-SB · 2026-10-05T19:42:52Z"
   },
   "linear_functions.interpret_intercept.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_equations_two_var.intersection_x.LN.P": {
    "state": "pass",
@@ -5609,24 +5497,24 @@
    "detail": "visual-review-agent-SA · 2026-10-05T19:42:43Z"
   },
   "linear_equations_two_var.slope.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_equations_two_var.intercept.LN.P": {
    "state": "pass",
    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:26:23Z"
   },
   "linear_equations_two_var.intercept.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_equations_two_var.num_solutions.LN.P": {
    "state": "pass",
    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
   },
   "linear_equations_two_var.num_solutions.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "systems_linear.substitution_solve.LN.P": {
    "state": "pass",
@@ -5645,8 +5533,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T12:00:00Z"
   },
   "systems_linear.param_no_solution.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "systems_linear.word_system.TB.P": {
    "state": "pass",
@@ -5657,8 +5545,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T12:00:00Z"
   },
   "systems_linear.word_system.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "lines_angles_triangles.triangle_angle_sum.TR.P": {
    "state": "pass",
@@ -5693,12 +5581,12 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T05:04:14Z"
   },
   "lines_angles_triangles.similar_triangles.TN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "lines_angles_triangles.similar_triangles.TR.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "lines_angles_triangles.similar_triangles.CG.P": {
    "state": "pass",
@@ -5713,8 +5601,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.pythagorean_leg.TR.P": {
    "state": "pass",
@@ -5729,12 +5617,12 @@
    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
   },
   "right_triangles_trigonometry.trig_ratio.UC.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.trig_ratio.TC.P": {
-   "state": "stale",
-   "detail": "판정 이후 생성기·렌더 코드가 바뀌어 판정이 무효다 — 재검수 대상"
+   "state": "pass",
+   "detail": "claude (lead) — E의 지문 문형 변경 후 데스크톱 PNG 재판독, 정답 D(24/25) 수작업 검산 · 2026-10-06T16:00:00Z"
   },
   "one_variable_data.mean.FQ.P": {
    "state": "pass",
@@ -6001,8 +5889,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:12:52Z"
   },
   "area_volume.rectangle_area.LS.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "area_volume.rectangle_area.PG.C": {
    "state": "pass",
@@ -6025,8 +5913,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:22:58Z"
   },
   "area_volume.prism_volume.SX.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "area_volume.prism_missing_dimension.SO.P": {
    "state": "pass",
@@ -6041,16 +5929,16 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:22:59Z"
   },
   "area_volume.cylinder_volume_radius.SX.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "area_volume.cylinder_volume_diameter.SO.P": {
    "state": "pass",
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:22:59Z"
   },
   "area_volume.cylinder_volume_diameter.SX.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "circles.circumference_radius.CI.P": {
    "state": "pass",
@@ -6105,8 +5993,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "circles.circle_equation_transform.CG.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "linear_functions.construct_equation_from_graph.LN.P": {
    "state": "pass",
@@ -6117,28 +6005,28 @@
    "detail": "visual-review-agent-SA · 2026-10-05T19:42:43Z"
   },
   "linear_functions.construct_equation_from_graph.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_functions.construct_equation_from_graph.LN.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "systems_linear.system_from_graph.LN.P": {
    "state": "pass",
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "systems_linear.system_from_graph.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_inequalities.inequality_from_graph.LN.P": {
    "state": "pass",
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "linear_inequalities.inequality_from_graph.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   },
   "linear_inequalities.compound_inequality_number_line.NL.P": {
    "state": "pass",
@@ -6157,8 +6045,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
   },
   "nonlinear_functions.exponential_model.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "nonlinear_functions.exponential_model.TB.C": {
    "state": "pass",
@@ -6177,16 +6065,16 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
   },
   "nonlinear_functions.function_transformation.FN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "nonlinear_functions.function_transformation.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:50:55Z"
   },
   "nonlinear_functions.function_transformation.FN.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
    "state": "unimplemented",
@@ -6197,20 +6085,20 @@
    "detail": "구현되지 않은 조합"
   },
   "nonlinear_functions.context_graph_features.FN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "nonlinear_functions.context_graph_features.TB.P": {
    "state": "pass",
    "detail": "visual-review-agent-SB · 2026-10-05T19:42:52Z"
   },
   "nonlinear_functions.rational_asymptote.FN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "nonlinear_functions.rational_asymptote.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "nonlinear_equations_systems.circle_equation_graph.CG.P": {
    "state": "pass",
@@ -6289,8 +6177,8 @@
    "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
   },
   "two_variable_data.model_choice_linear_quadratic_exponential.FN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:39:58Z"
   },
   "two_variable_data.intercept_residual_interpretation.SC.P#1": {
    "state": "pass",
@@ -6345,8 +6233,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T06:20:52Z"
   },
   "lines_angles_triangles.parallel_lines_transversal_angles.P3.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "lines_angles_triangles.vertical_supplementary_angles.PT.P": {
    "state": "pass",
@@ -6361,8 +6249,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T05:04:14Z"
   },
   "lines_angles_triangles.congruent_triangles.TR.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "lines_angles_triangles.polygon_interior_angle.PG.P": {
    "state": "pass",
@@ -6373,8 +6261,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T05:10:33Z"
   },
   "lines_angles_triangles.nested_similar_parallel.TN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.special_right_triangles.TR.P": {
    "state": "pass",
@@ -6389,24 +6277,24 @@
    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
   },
   "right_triangles_trigonometry.unit_circle_radian.UC.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.unit_circle_radian.UC.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.sinusoid_graph.TC.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.sinusoid_graph.TC.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "right_triangles_trigonometry.similar_right_triangle_altitude.TN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "area_volume.cone_pyramid_sphere_volume.SO.P": {
    "state": "pass",
@@ -6417,8 +6305,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:29:10Z"
   },
   "area_volume.composite_solid.SX.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "area_volume.shaded_region_area.CM.P": {
    "state": "pass",
@@ -6437,12 +6325,12 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:29:10Z"
   },
   "area_volume.similar_solids_scale.SO.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "area_volume.space_diagonal.SX.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "circles.tangent_radius_perpendicular.CI.P": {
    "state": "pass",
@@ -6477,8 +6365,8 @@
    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "coordinate_geometry.transformation_image.CG.B": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
   },
   "coordinate_geometry.polygon_area_on_plane.CG.P": {
    "state": "pass",
@@ -6489,8 +6377,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "coordinate_geometry.parallel_perpendicular_slopes.LN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
   }
  },
  "spr": {
@@ -38123,7 +38011,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 16,
+   "independent": 40,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",

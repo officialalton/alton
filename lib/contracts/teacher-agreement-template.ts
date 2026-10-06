@@ -160,8 +160,8 @@ export function renderCaliforniaTeacherAgreementHtml(p: CaliforniaTeacherAgreeme
 
 function formatRate(rate: TeacherRate | undefined): string {
   if (!rate || !Number.isFinite(rate.amountMinor) || rate.amountMinor <= 0) throw new UnfilledContractError(["Hourly rate"]);
-  if (rate.currency === "USD") return `USD $${(rate.amountMinor / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  if (rate.currency === "KRW") return `KRW ${rate.amountMinor.toLocaleString("en-US")}`;
+  if (rate.currency === "USD") return `USD $${new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(rate.amountMinor / 100)}`;
+  if (rate.currency === "KRW") return `KRW ${new Intl.NumberFormat("en-US").format(rate.amountMinor)}`;
   throw new UnfilledContractError(["Hourly rate currency"]);
 }
 
