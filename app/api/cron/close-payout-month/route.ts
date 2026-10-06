@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { closePreviousMonth } from "@/lib/payout/close-payout-month";
+import { closePreviousPeriod } from "@/lib/payout/close-payout-month";
+import { isPeriodCloseDay } from "@/lib/payout/payout-schedule";
 
 // P4-2(2차) — 자동 월 마감 크론 진입점.
 //
@@ -33,8 +34,13 @@ export async function GET(request: Request) {
     );
   }
 
+  // 크론은 UTC로 매일 17:00(LA 09:00/10:00)에 돈다. 회사 시간대(LA) 날짜가 1일·16일일 때만 마감한다.
+  if (!isPeriodCloseDay(new Date())) {
+    return NextResponse.json({ ok: true, skipped: "not a period close day (America/Los_Angeles)" });
+  }
+
   try {
-    const result = await closePreviousMonth();
+    const result = await closePreviousPeriod();
     console.log(
       JSON.stringify({
         event: "payout_month_auto_closed",
