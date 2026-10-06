@@ -190,10 +190,10 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     // 이제 redeem은 바로 계정을 만들지 않고 로그인 이메일 확인 화면으로 먼저
     // 보낸다(prospect 이메일과 로그인 이메일을 분리 처리하기 위함).
     await expect(page).toHaveURL(/\/consult\/trial-onboarding\/confirm-email/, { timeout: 15000 });
-    await expect(page.getByLabel("로그인 이메일")).toHaveValue(guardianEmail);
+    await expect(page.getByLabel("Sign-in email")).toHaveValue(guardianEmail);
     // 확인은 GET 링크가 아니라 POST(Server Action) 버튼이다 — 메일 스캐너가 링크를
     // 미리 열어도 계정이 만들어지지 않게 하려는 의도적 설계(9a8aaf5).
-    await page.getByRole("button", { name: "이 이메일로 계속" }).click();
+    await page.getByRole("button", { name: "Continue with this email" }).click();
     await expect(page).toHaveURL(/\/set-password/, { timeout: 15000 });
 
     await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
@@ -473,8 +473,8 @@ const RUN = `${Date.now()}-${Math.floor(Math.random() * 10000)}`;
 async function redeemAndCreateAccount(page: import("@playwright/test").Page, baseURL: string | undefined, token: string, expectedEmail: string) {
   await page.goto(`${baseURL}/api/trial-onboarding/redeem?token=${token}`);
   await expect(page).toHaveURL(/\/consult\/trial-onboarding\/confirm-email/, { timeout: 15000 });
-  await expect(page.getByLabel("로그인 이메일")).toHaveValue(expectedEmail);
-  await page.getByRole("button", { name: "이 이메일로 계속" }).click();
+  await expect(page.getByLabel("Sign-in email")).toHaveValue(expectedEmail);
+  await page.getByRole("button", { name: "Continue with this email" }).click();
   await expect(page).toHaveURL(/\/set-password/, { timeout: 15000 });
   await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
   await page.getByLabel("새 비밀번호 확인").fill(DEV_PASSWORD);

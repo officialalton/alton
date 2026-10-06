@@ -17,22 +17,22 @@ function assertGpaSatIntegrity(input: {
   gpaScale: string | null;
 }) {
   if (input.satScore !== null && (input.satScore < 400 || input.satScore > 1600)) {
-    throw new Error("SAT 점수는 400~1600 사이여야 합니다.");
+    throw new Error("SAT score must be between 400 and 1600.");
   }
   if (input.gpa !== null && input.gpa < 0) {
-    throw new Error("GPA는 0 이상이어야 합니다.");
+    throw new Error("GPA cannot be negative.");
   }
   if (input.gpa !== null && input.gpaScale === null) {
-    throw new Error("GPA를 입력하려면 GPA 척도를 함께 선택해야 합니다.");
+    throw new Error("Please select a GPA scale when entering a GPA.");
   }
   if (input.gpa === null && input.gpaScale !== null) {
-    throw new Error("GPA 척도만 선택하고 GPA 값이 없는 상태는 허용되지 않습니다.");
+    throw new Error("A GPA scale cannot be set without a GPA value.");
   }
   if (input.gpaScale !== null && !VALID_GPA_SCALES.has(input.gpaScale)) {
-    throw new Error("GPA 척도는 4.0/4.3/4.5/5.0 중 하나여야 합니다.");
+    throw new Error("GPA scale must be one of 4.0, 4.3, 4.5, or 5.0.");
   }
   if (input.gpa !== null && input.gpaScale !== null && input.gpa > Number(input.gpaScale)) {
-    throw new Error(`GPA 값(${input.gpa})이 선택한 척도(${input.gpaScale})를 초과할 수 없습니다.`);
+    throw new Error(`GPA (${input.gpa}) cannot exceed the selected scale (${input.gpaScale}).`);
   }
 }
 
@@ -84,7 +84,7 @@ export async function addApCourse(input: {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please log in.");
 
   const { error } = await supabase.from("student_ap_courses").insert({
     student_id: user.id,
@@ -120,7 +120,7 @@ export async function addExtracurricularActivity(input: {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please log in.");
 
   const { error } = await supabase.from("student_extracurricular_activities").insert({
     student_id: user.id,

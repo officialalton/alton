@@ -28,9 +28,9 @@ type Activity = {
 };
 
 const AP_STATUS_LABEL: Record<ApCourse["status"], string> = {
-  planned: "이수 예정",
-  taking: "이수 중",
-  completed: "이수 완료",
+  planned: "Planned",
+  taking: "In progress",
+  completed: "Completed",
 };
 
 export default function CompleteProfileForm({
@@ -100,7 +100,7 @@ export default function CompleteProfileForm({
   async function handleAddApCourse() {
     setApError(null);
     if (!apCourseName.trim()) {
-      setApError("과목명을 입력해주세요.");
+      setApError("Please enter a course name.");
       return;
     }
     try {
@@ -124,7 +124,7 @@ export default function CompleteProfileForm({
       setApExamYear("");
       setApScore("");
     } catch (e) {
-      setApError(e instanceof Error ? e.message : "추가에 실패했어요.");
+      setApError(e instanceof Error ? e.message : "Could not add this item.");
     }
   }
 
@@ -142,7 +142,7 @@ export default function CompleteProfileForm({
   async function handleAddActivity() {
     setActivityError(null);
     if (!activityName.trim()) {
-      setActivityError("활동명을 입력해주세요.");
+      setActivityError("Please enter an activity name.");
       return;
     }
     try {
@@ -170,7 +170,7 @@ export default function CompleteProfileForm({
       setActivityEnd("");
       setActivityOngoing(false);
     } catch (e) {
-      setActivityError(e instanceof Error ? e.message : "추가에 실패했어요.");
+      setActivityError(e instanceof Error ? e.message : "Could not add this item.");
     }
   }
 
@@ -190,32 +190,32 @@ export default function CompleteProfileForm({
     setError(null);
 
     if (!hasDateOfBirth && !dateOfBirth) {
-      setError("생년월일은 필수 항목입니다.");
+      setError("Date of birth is required.");
       return;
     }
     if (!schoolName.trim()) {
-      setError("학교명은 필수 항목입니다.");
+      setError("School name is required.");
       return;
     }
     if (!grade.trim()) {
-      setError("학년은 필수 항목입니다.");
+      setError("Grade is required.");
       return;
     }
     if (satScore.trim() !== "") {
       const satValue = Number(satScore);
       if (!Number.isFinite(satValue) || satValue < 400 || satValue > 1600) {
-        setError("SAT 점수는 400~1600 사이여야 합니다.");
+        setError("SAT score must be between 400 and 1600.");
         return;
       }
     }
     if (gpa.trim() !== "") {
       const gpaValue = Number(gpa);
       if (!Number.isFinite(gpaValue) || gpaValue < 0) {
-        setError("GPA는 0 이상이어야 합니다.");
+        setError("GPA cannot be negative.");
         return;
       }
       if (gpaValue > Number(gpaScale)) {
-        setError(`GPA 값이 선택한 척도(${gpaScale})를 초과할 수 없습니다.`);
+        setError(`GPA cannot exceed the selected scale (${gpaScale}).`);
         return;
       }
     }
@@ -234,7 +234,7 @@ export default function CompleteProfileForm({
         });
         router.push("/student");
       } catch (e) {
-        setError(e instanceof Error ? e.message : "저장에 실패했어요.");
+        setError(e instanceof Error ? e.message : "Could not save your profile.");
       }
     });
   }
@@ -243,11 +243,11 @@ export default function CompleteProfileForm({
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label htmlFor="dateOfBirth" className="block text-[13px] font-bold text-ink mb-1.5">
-          생년월일 <span className="text-red">*</span>
+          Date of birth <span className="text-red">*</span>
         </label>
         {hasDateOfBirth ? (
           <p className="text-[13.5px] text-grey-500 px-3.5 py-3 bg-grey-100 rounded-lg">
-            이미 등록되어 있습니다. 변경이 필요하면 보호자 또는 관리자에게 요청해주세요.
+            Already on file. To change it, ask your parent/guardian or contact support.
           </p>
         ) : (
           <input
@@ -264,7 +264,7 @@ export default function CompleteProfileForm({
 
       <div className="mb-4">
         <label htmlFor="schoolName" className="block text-[13px] font-bold text-ink mb-1.5">
-          학교명 <span className="text-red">*</span>
+          School <span className="text-red">*</span>
         </label>
         <input
           id="schoolName"
@@ -273,14 +273,14 @@ export default function CompleteProfileForm({
           required
           value={schoolName}
           onChange={(e) => setSchoolName(e.target.value)}
-          placeholder="예: OO국제학교"
+          placeholder="e.g. Lincoln High School"
           className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
         />
       </div>
 
       <div className="mb-4">
         <label htmlFor="grade" className="block text-[13px] font-bold text-ink mb-1.5">
-          학년 <span className="text-red">*</span>
+          Grade <span className="text-red">*</span>
         </label>
         <input
           id="grade"
@@ -289,7 +289,7 @@ export default function CompleteProfileForm({
           required
           value={grade}
           onChange={(e) => setGrade(e.target.value)}
-          placeholder="예: 10학년"
+          placeholder="e.g. 10th grade"
           className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
         />
       </div>
@@ -297,7 +297,7 @@ export default function CompleteProfileForm({
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
           <label htmlFor="satScore" className="block text-[13px] font-bold text-ink mb-1.5">
-            기존 SAT 점수
+            Current SAT score
           </label>
           <input
             id="satScore"
@@ -307,16 +307,16 @@ export default function CompleteProfileForm({
             max={1600}
             value={satScore}
             onChange={(e) => setSatScore(e.target.value)}
-            placeholder="빈 칸 = 미입력"
+            placeholder="Leave blank if none"
             className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
           />
           <p className="text-[11.5px] text-grey-500 mt-1">
-            응시하지 않았다면 빈 칸으로 두세요(입력 시 400~1600만 유효).
+            Leave blank if you haven&apos;t taken it (400–1600 if entered).
           </p>
         </div>
         <div>
           <label htmlFor="gpa" className="block text-[13px] font-bold text-ink mb-1.5">
-            GPA (선택)
+            GPA (optional)
           </label>
           <div className="flex gap-2">
             <input
@@ -328,7 +328,7 @@ export default function CompleteProfileForm({
               max={Number(gpaScale)}
               value={gpa}
               onChange={(e) => setGpa(e.target.value)}
-              placeholder="예: 3.85"
+              placeholder="e.g. 3.85"
               className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
             />
             <select
@@ -338,10 +338,10 @@ export default function CompleteProfileForm({
               onChange={(e) => setGpaScale(e.target.value)}
               className="px-2.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[13px] text-ink focus:outline-none focus:border-ink"
             >
-              <option value="4.0">4.0 만점</option>
-              <option value="4.3">4.3 만점</option>
-              <option value="4.5">4.5 만점</option>
-              <option value="5.0">5.0 만점</option>
+              <option value="4.0">4.0 scale</option>
+              <option value="4.3">4.3 scale</option>
+              <option value="4.5">4.5 scale</option>
+              <option value="5.0">5.0 scale</option>
             </select>
           </div>
         </div>
@@ -349,7 +349,7 @@ export default function CompleteProfileForm({
 
       {/* AP 이수 상황 — 구조화 리스트 */}
       <div className="mb-5">
-        <label className="block text-[13px] font-bold text-ink mb-1.5">AP 이수 상황 (선택)</label>
+        <label className="block text-[13px] font-bold text-ink mb-1.5">AP courses (optional)</label>
         {apCourses.length > 0 && (
           <ul className="mb-2 space-y-1.5">
             {apCourses.map((c) => (
@@ -359,15 +359,15 @@ export default function CompleteProfileForm({
               >
                 <span>
                   {c.course_name} · {AP_STATUS_LABEL[c.status]}
-                  {c.exam_year ? ` · ${c.exam_year}년` : ""}
-                  {c.score ? ` · ${c.score}점` : ""}
+                  {c.exam_year ? ` · ${c.exam_year}` : ""}
+                  {c.score ? ` · Score ${c.score}` : ""}
                 </span>
                 <button
                   type="button"
                   onClick={() => handleRemoveApCourse(c.id)}
                   className="text-grey-500 hover:text-red text-[12px]"
                 >
-                  삭제
+                  Remove
                 </button>
               </li>
             ))}
@@ -378,7 +378,7 @@ export default function CompleteProfileForm({
             type="text"
             value={apCourseName}
             onChange={(e) => setApCourseName(e.target.value)}
-            placeholder="과목명 (예: AP Calculus BC)"
+            placeholder="Course name (e.g. AP Calculus BC)"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
           />
           <select
@@ -386,9 +386,9 @@ export default function CompleteProfileForm({
             onChange={(e) => setApStatus(e.target.value as ApCourse["status"])}
             className="px-2 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
           >
-            <option value="planned">이수 예정</option>
-            <option value="taking">이수 중</option>
-            <option value="completed">이수 완료</option>
+            <option value="planned">Planned</option>
+            <option value="taking">In progress</option>
+            <option value="completed">Completed</option>
           </select>
         </div>
         <div className="flex gap-2 mb-1.5">
@@ -396,7 +396,7 @@ export default function CompleteProfileForm({
             type="number"
             value={apExamYear}
             onChange={(e) => setApExamYear(e.target.value)}
-            placeholder="시험 연도 (선택)"
+            placeholder="Exam year (optional)"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
           />
           <input
@@ -405,7 +405,7 @@ export default function CompleteProfileForm({
             max={5}
             value={apScore}
             onChange={(e) => setApScore(e.target.value)}
-            placeholder="점수 1~5 (선택)"
+            placeholder="Score 1–5 (optional)"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
           />
           <button
@@ -413,7 +413,7 @@ export default function CompleteProfileForm({
             onClick={handleAddApCourse}
             className="px-3.5 py-2 bg-grey-200 rounded-lg text-[13px] font-bold hover:bg-grey-300"
           >
-            추가
+            Add
           </button>
         </div>
         {apError && <p className="text-[12px] text-red">{apError}</p>}
@@ -421,7 +421,7 @@ export default function CompleteProfileForm({
 
       {/* 비교과 현황 — 구조화 리스트 */}
       <div className="mb-5">
-        <label className="block text-[13px] font-bold text-ink mb-1.5">비교과 활동 현황 (선택)</label>
+        <label className="block text-[13px] font-bold text-ink mb-1.5">Extracurricular activities (optional)</label>
         {activities.length > 0 && (
           <ul className="mb-2 space-y-1.5">
             {activities.map((a) => (
@@ -432,14 +432,14 @@ export default function CompleteProfileForm({
                 <span>
                   {a.activity_name}
                   {a.description ? ` · ${a.description}` : ""}
-                  {a.is_ongoing ? " · 진행 중" : ""}
+                  {a.is_ongoing ? " · Ongoing" : ""}
                 </span>
                 <button
                   type="button"
                   onClick={() => handleRemoveActivity(a.id)}
                   className="text-grey-500 hover:text-red text-[12px]"
                 >
-                  삭제
+                  Remove
                 </button>
               </li>
             ))}
@@ -449,13 +449,13 @@ export default function CompleteProfileForm({
           type="text"
           value={activityName}
           onChange={(e) => setActivityName(e.target.value)}
-          placeholder="활동명 (예: 교내 토론 동아리)"
+          placeholder="Activity name (e.g. Debate Club)"
           className="w-full mb-1.5 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
         />
         <textarea
           value={activityDescription}
           onChange={(e) => setActivityDescription(e.target.value)}
-          placeholder="간단한 설명 (선택)"
+          placeholder="Short description (optional)"
           rows={2}
           className="w-full mb-1.5 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
         />
@@ -479,14 +479,14 @@ export default function CompleteProfileForm({
               checked={activityOngoing}
               onChange={(e) => setActivityOngoing(e.target.checked)}
             />
-            진행 중
+            Ongoing
           </label>
           <button
             type="button"
             onClick={handleAddActivity}
             className="px-3.5 py-2 bg-grey-200 rounded-lg text-[13px] font-bold hover:bg-grey-300"
           >
-            추가
+            Add
           </button>
         </div>
         {activityError && <p className="text-[12px] text-red">{activityError}</p>}
@@ -494,7 +494,7 @@ export default function CompleteProfileForm({
 
       {/* 목표 대학 */}
       <div className="mb-4">
-        <label className="block text-[13px] font-bold text-ink mb-1.5">목표 대학 (선택)</label>
+        <label className="block text-[13px] font-bold text-ink mb-1.5">Target colleges (optional)</label>
         {targetColleges.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-1.5">
             {targetColleges.map((college) => (
@@ -527,7 +527,7 @@ export default function CompleteProfileForm({
                 );
               }
             }}
-            placeholder="대학명을 입력 후 Enter"
+            placeholder="Type a college and press Enter"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
           />
           <button
@@ -539,14 +539,14 @@ export default function CompleteProfileForm({
             }
             className="px-3.5 py-2 bg-grey-200 rounded-lg text-[13px] font-bold hover:bg-grey-300"
           >
-            추가
+            Add
           </button>
         </div>
       </div>
 
       {/* 관심 전공 */}
       <div className="mb-6">
-        <label className="block text-[13px] font-bold text-ink mb-1.5">관심 전공 (선택)</label>
+        <label className="block text-[13px] font-bold text-ink mb-1.5">Intended majors (optional)</label>
         {intendedMajors.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-1.5">
             {intendedMajors.map((major) => (
@@ -579,7 +579,7 @@ export default function CompleteProfileForm({
                 );
               }
             }}
-            placeholder="전공명을 입력 후 Enter"
+            placeholder="Type a major and press Enter"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] focus:outline-none focus:border-ink"
           />
           <button
@@ -591,7 +591,7 @@ export default function CompleteProfileForm({
             }
             className="px-3.5 py-2 bg-grey-200 rounded-lg text-[13px] font-bold hover:bg-grey-300"
           >
-            추가
+            Add
           </button>
         </div>
       </div>
@@ -603,7 +603,7 @@ export default function CompleteProfileForm({
         disabled={isPending}
         className="block w-full text-center bg-red text-white font-bold text-[15px] py-3.5 rounded-lg hover:bg-[#a80e26] disabled:opacity-60"
       >
-        {isPending ? "저장 중..." : "프로필 완성하고 시작하기"}
+        {isPending ? "Saving..." : "Complete profile and get started"}
       </button>
     </form>
   );

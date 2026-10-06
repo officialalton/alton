@@ -6,7 +6,7 @@ export default function SchedulingLinkInvalid() {
     <div role="alert" className="rounded-2xl border-[1.5px] border-grey-200 bg-white px-8 py-14 text-center">
       <p className="text-[18px] font-extrabold text-ink mb-2">{SCHEDULING_LINK_INVALID_MESSAGE}</p>
       <p className="text-[14px] text-grey-500">
-        새 예약 링크가 필요하시면 담당 컨설턴트 또는 ALTON 운영팀에 문의해 주세요.
+        If you need a new scheduling link, contact your consultant or the ALTON EDUCATION team.
       </p>
     </div>
   );

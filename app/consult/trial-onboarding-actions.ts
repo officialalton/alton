@@ -24,7 +24,7 @@ export async function previewTrialOnboardingLink(token: string): Promise<TrialOn
   const { data, error } = await admin.rpc("redeem_trial_onboarding_link", { p_token: token });
   if (error) throw new Error(error.message);
   const row = data?.[0];
-  if (!row) throw new Error("유효하지 않은 온보딩 링크입니다.");
+  if (!row) throw new Error("This onboarding link is invalid.");
   return {
     linkId: row.link_id,
     consultationId: row.consultation_id,

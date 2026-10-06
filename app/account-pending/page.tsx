@@ -25,19 +25,19 @@ export default async function AccountPendingPage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-[21px] font-extrabold text-ink mb-3">
-          체험 배정 대기 중입니다
+          Your trial is being set up
         </h1>
         <p className="text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          관리자의 별도 승인 절차는 없습니다 — 담당 과목·선생님 배정이
-          완료되면 자동으로 다음 단계로 진행되며, 완료 즉시 별도 안내를
-          드립니다.
+          No approval is needed on your end. As soon as your subject and tutor
+          are assigned, you&apos;ll move to the next step automatically and
+          we&apos;ll let you know.
         </p>
         <form action={logout}>
           <button
             type="submit"
             className="block w-full text-center bg-grey-200 text-ink font-bold text-[15px] py-3.5 rounded-lg hover:bg-grey-300"
           >
-            로그아웃
+            Log out
           </button>
         </form>
       </div>

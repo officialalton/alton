@@ -15,9 +15,9 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: "Alton Education — 프리미엄 SAT·AP 비대면 코칭",
+  title: "ALTON EDUCATION — Premium Online SAT & AP Tutoring",
   description:
-    "한국 최상위권 대학원생 튜터와 체계적인 학습 관리 시스템으로, 미국 명문대 진학을 목표로 하는 학생들의 SAT·AP 점수를 확실하게 끌어올립니다.",
+    "Premium 1:1 online SAT and AP tutoring for students in the US and Korea aiming for top US universities. Dedicated tutors from Korea's top graduate programs, feedback after every lesson, and progress the whole family can see.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

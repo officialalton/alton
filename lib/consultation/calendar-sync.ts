@@ -78,20 +78,20 @@ async function sendConsultationCalendarFailureFallbackEmail(params: {
 
   const startsAt = new Date(params.row.starts_at);
   const tz = params.row.customer_timezone ?? DEFAULT_TIMEZONE;
-  const formatted = startsAt.toLocaleString("ko-KR", { timeZone: tz, dateStyle: "full", timeStyle: "short" });
+  const formatted = startsAt.toLocaleString("en-US", { timeZone: tz, dateStyle: "full", timeStyle: "short" });
 
   // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
   // 동의 확인 안내 문구·링크를 뺐다.
   await sendEmail({
     to: params.row.contact_email,
-    subject: "[Alton Education] 상담 일정 안내 (Google 캘린더 초대 발송 실패)",
+    subject: "[ALTON EDUCATION] Your consultation is confirmed (calendar invite pending)",
     html: `
-      <p>${params.row.contact_name}님, 안녕하세요.</p>
-      <p>신청하신 상담 일정이 아래와 같이 확정되었으나, Google 캘린더 초대 발송에 일시적인
-      문제가 있어 이메일로 대신 안내드립니다. 담당자가 곧 다시 시도합니다.</p>
-      <p><b>상담 일시:</b> ${formatted} (${timezoneLabel(tz)})</p>
-      <p>Meet 링크는 준비되는 대로 별도로 안내드리겠습니다.</p>
-      <p>감사합니다.<br/>Alton Education</p>
+      <p>Hello ${params.row.contact_name},</p>
+      <p>Your consultation is confirmed for the time below. We ran into a temporary issue sending the
+      Google Calendar invitation, so we're confirming by email instead. Our team will resend the invite shortly.</p>
+      <p><b>When:</b> ${formatted} (${timezoneLabel(tz)})</p>
+      <p>We'll send your Google Meet link separately as soon as it's ready.</p>
+      <p>Thank you,<br/>ALTON EDUCATION</p>
     `,
   });
 
@@ -129,12 +129,12 @@ async function processOneConsultation(
       reservationId: `consult-${row.id}`,
       startsAt,
       endsAt,
-      summary: `[Alton Education 상담] ${row.contact_name}`,
+      summary: `[ALTON EDUCATION Consultation] ${row.contact_name}`,
       description:
-        `Alton Education 1:1 상담입니다. ` +
-        `일정 변경·취소는 담당자에게 문의해 주세요 — 변경 시 이 캘린더 일정이 자동으로 갱신됩니다.` +
+        `Your 1:1 consultation with ALTON EDUCATION. ` +
+        `To reschedule or cancel, please contact our team — this calendar event will update automatically.` +
         (row.customer_timezone
-          ? `\n상담 일시: ${startsAt.toLocaleString("ko-KR", { timeZone: tz, dateStyle: "full", timeStyle: "short" })} (${timezoneLabel(tz)})`
+          ? `\nWhen: ${startsAt.toLocaleString("en-US", { timeZone: tz, dateStyle: "full", timeStyle: "short" })} (${timezoneLabel(tz)})`
           : ""),
       timezone: tz,
       attendeeEmail: row.contact_email,

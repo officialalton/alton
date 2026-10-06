@@ -11,10 +11,10 @@ describe("LandingCtaLink", () => {
   it("클릭하면 landing_cta_clicked를 cta_name/section과 함께 발생시킨다", () => {
     render(
       <LandingCtaLink href="#consult" ctaName="consult_signup" section="header">
-        상담 신청
+        Book a consultation
       </LandingCtaLink>
     );
-    fireEvent.click(screen.getByText("상담 신청"));
+    fireEvent.click(screen.getByText("Book a consultation"));
     expect(analytics.trackEvent).toHaveBeenCalledWith("landing_cta_clicked", {
       cta_name: "consult_signup",
       section: "header",

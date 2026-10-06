@@ -102,7 +102,7 @@ describe("submitCompleteProfile", () => {
         targetColleges: [],
         intendedMajors: [],
       })
-    ).rejects.toThrow("SAT 점수는 400~1600 사이여야 합니다.");
+    ).rejects.toThrow("SAT score must be between 400 and 1600.");
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -118,7 +118,7 @@ describe("submitCompleteProfile", () => {
         targetColleges: [],
         intendedMajors: [],
       })
-    ).rejects.toThrow("GPA는 0 이상이어야 합니다.");
+    ).rejects.toThrow("GPA cannot be negative.");
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -134,7 +134,7 @@ describe("submitCompleteProfile", () => {
         targetColleges: [],
         intendedMajors: [],
       })
-    ).rejects.toThrow("GPA를 입력하려면 GPA 척도를 함께 선택해야 합니다.");
+    ).rejects.toThrow("Please select a GPA scale when entering a GPA.");
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -150,7 +150,7 @@ describe("submitCompleteProfile", () => {
         targetColleges: [],
         intendedMajors: [],
       })
-    ).rejects.toThrow("GPA 척도만 선택하고 GPA 값이 없는 상태는 허용되지 않습니다.");
+    ).rejects.toThrow("A GPA scale cannot be set without a GPA value.");
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -171,7 +171,7 @@ describe("submitCompleteProfile", () => {
         targetColleges: [],
         intendedMajors: [],
       })
-    ).rejects.toThrow(/초과할 수 없습니다/);
+    ).rejects.toThrow(/cannot exceed the selected scale/);
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -222,7 +222,7 @@ describe("addApCourse / removeApCourse", () => {
     getUserMock.mockResolvedValue({ data: { user: null } });
     await expect(
       addApCourse({ courseName: "AP Bio", status: "planned", examYear: null, score: null })
-    ).rejects.toThrow("로그인이 필요합니다.");
+    ).rejects.toThrow("Please log in.");
   });
 
   it("삭제는 id로 delete().eq()를 호출한다", async () => {

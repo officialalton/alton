@@ -15,12 +15,12 @@ vi.mock("@/lib/analytics/track", () => ({
 // 선택 UI(ConsultSlotPicker)를 없앴다. 이제 "신청만" 접수하고, 배정된
 // 컨설턴트 전용 스케줄링 링크로 고객이 나중에 직접 시간을 고른다.
 function fillRequiredFields() {
-  fireEvent.change(screen.getByLabelText("학부모 이름"), { target: { value: "김민지" } });
-  fireEvent.change(screen.getByLabelText("이메일"), { target: { value: "minji@example.com" } });
+  fireEvent.change(screen.getByLabelText("Parent name"), { target: { value: "김민지" } });
+  fireEvent.change(screen.getByLabelText("Email"), { target: { value: "minji@example.com" } });
 }
 
 function agree() {
-  fireEvent.click(screen.getByText(/개인정보 수집·이용에 동의합니다/).closest("label")!.querySelector("input")!);
+  fireEvent.click(screen.getByText(/I agree to the collection and use of my personal information/).closest("label")!.querySelector("input")!);
 }
 
 describe("ConsultForm", () => {
@@ -31,8 +31,10 @@ describe("ConsultForm", () => {
   it("동의 없이 제출하면 에러 문구를 보여주고 서버 액션을 호출하지 않는다", async () => {
     render(<ConsultForm />);
     fillRequiredFields();
-    fireEvent.click(screen.getByText("상담 신청하기"));
-    expect(await screen.findByText("개인정보 수집·이용에 동의해주세요.")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Request a consultation"));
+    expect(
+      await screen.findByText("Please agree to the collection and use of your personal information.")
+    ).toBeInTheDocument();
     expect(actions.submitHomepageConsultRequest).not.toHaveBeenCalled();
   });
 
@@ -41,15 +43,15 @@ describe("ConsultForm", () => {
     render(<ConsultForm />);
     fillRequiredFields();
     agree();
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.click(screen.getByText("Request a consultation"));
 
     await waitFor(() =>
       expect(actions.submitHomepageConsultRequest).toHaveBeenCalledWith(
         expect.objectContaining({ parentName: "김민지", email: "minji@example.com" })
       )
     );
-    expect(await screen.findByText("상담 신청이 접수되었습니다.")).toBeInTheDocument();
-    expect(screen.getByText(/담당 컨설턴트가 배정되면 예약 링크를/)).toBeInTheDocument();
+    expect(await screen.findByText("Your consultation request has been received.")).toBeInTheDocument();
+    expect(screen.getByText(/Once a consultant is assigned, we'll email you a booking link/)).toBeInTheDocument();
   });
 
   it("서버 액션이 실패하면 에러 메시지를 보여준다", async () => {
@@ -59,7 +61,7 @@ describe("ConsultForm", () => {
     render(<ConsultForm />);
     fillRequiredFields();
     agree();
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.click(screen.getByText("Request a consultation"));
 
     expect(
       await screen.findByText("이미 처리 대기 중인 상담 신청이 있습니다. 관리자가 확인할 때까지 기다려 주세요.")
@@ -69,9 +71,9 @@ describe("ConsultForm", () => {
 
   it("폼 포커스마다 consultation_started를 같은 onceKey로 호출한다(트래커의 dedup이 중복을 걸러낼 수 있게)", () => {
     render(<ConsultForm />);
-    fireEvent.focus(screen.getByLabelText("학부모 이름"));
-    fireEvent.focus(screen.getByLabelText("이메일"));
-    fireEvent.focus(screen.getByLabelText("학부모 이름"));
+    fireEvent.focus(screen.getByLabelText("Parent name"));
+    fireEvent.focus(screen.getByLabelText("Email"));
+    fireEvent.focus(screen.getByLabelText("Parent name"));
 
     const startedCalls = vi
       .mocked(analytics.trackEvent)
@@ -88,7 +90,7 @@ describe("ConsultForm", () => {
     render(<ConsultForm />);
     fillRequiredFields();
     agree();
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.click(screen.getByText("Request a consultation"));
 
     await waitFor(() =>
       expect(analytics.trackEvent).toHaveBeenCalledWith(
@@ -104,7 +106,7 @@ describe("ConsultForm", () => {
     render(<ConsultForm />);
     fillRequiredFields();
     agree();
-    fireEvent.click(screen.getByText("상담 신청하기"));
+    fireEvent.click(screen.getByText("Request a consultation"));
 
     await waitFor(() => expect(analytics.trackEvent).toHaveBeenCalled());
     const submittedCall = vi

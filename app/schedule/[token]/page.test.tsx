@@ -9,12 +9,13 @@ vi.mock("@/lib/consultation/scheduling-link", async (orig) => ({
 vi.mock("./ScheduleForm", () => ({ default: () => <div>SCHEDULE_FORM</div> }));
 
 import Page from "./page";
+import { SCHEDULING_LINK_INVALID_MESSAGE } from "@/lib/consultation/scheduling-link";
 
 describe("/schedule/[token]", () => {
   it("무효·만료 토큰은 폼 대신 안내 문구", async () => {
     checkMock.mockResolvedValue("invalid");
     render(await Page({ params: Promise.resolve({ token: "bogus" }) }));
-    expect(screen.getByText("유효하지 않거나 만료된 예약 링크입니다.")).toBeInTheDocument();
+    expect(screen.getByText(SCHEDULING_LINK_INVALID_MESSAGE)).toBeInTheDocument();
     expect(screen.queryByText("SCHEDULE_FORM")).toBeNull();
   });
 

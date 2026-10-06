@@ -26,15 +26,15 @@ export default function SetPasswordPage() {
     const consent = form.get("consent");
 
     if (password.length < 8) {
-      setError("비밀번호는 8자 이상이어야 해요.");
+      setError("Password must be at least 8 characters.");
       return;
     }
     if (password !== confirm) {
-      setError("비밀번호가 서로 일치하지 않아요.");
+      setError("Passwords do not match.");
       return;
     }
     if (!consent) {
-      setError("이용약관 및 개인정보처리방침에 동의해주세요.");
+      setError("Please agree to the Terms of Service and Privacy Policy.");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function SetPasswordPage() {
       });
       if (verifyError) {
         setSubmitting(false);
-        setError("링크가 만료되었거나 이미 사용됐어요. 다시 요청해주세요.");
+        setError("This link has expired or was already used. Please request a new one.");
         return;
       }
     } else if (access_token && refresh_token) {
@@ -83,7 +83,7 @@ export default function SetPasswordPage() {
       }
     } else {
       setSubmitting(false);
-      setError("링크가 만료되었거나 유효하지 않아요. 다시 요청해주세요.");
+      setError("This link has expired or is invalid. Please request a new one.");
       return;
     }
 
@@ -115,22 +115,22 @@ export default function SetPasswordPage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">
-          새 비밀번호 설정
+          Set a new password
         </h1>
         <p className="text-center text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          임시 비밀번호로 로그인하셨습니다.
+          You&apos;re signed in with a temporary link.
           <br />
-          계속하려면 본인만의 비밀번호를 설정해주세요.
+          Create your own password to continue.
         </p>
 
         <div className="flex gap-2.5 bg-yellow-bg border border-[#F2D98A] rounded-lg px-3.5 py-3 text-[12.5px] text-[#7A5C05] leading-[1.6] mb-[22px]">
-          최초 로그인 시 1회만 진행되며, 설정 후 역할에 맞는 포털로 자동 이동합니다.
+          This only happens on your first login. Once set, you&apos;ll be taken to your portal automatically.
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="password" className="block text-[13px] font-bold text-ink mb-1.5">
-              새 비밀번호
+              New password
             </label>
             <input
               id="password"
@@ -138,33 +138,33 @@ export default function SetPasswordPage() {
               type="password"
               required
               minLength={8}
-              placeholder="8자 이상"
+              placeholder="At least 8 characters"
               className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
             />
           </div>
           <div className="mb-4">
             <label htmlFor="confirm" className="block text-[13px] font-bold text-ink mb-1.5">
-              새 비밀번호 확인
+              Confirm new password
             </label>
             <input
               id="confirm"
               name="confirm"
               type="password"
               required
-              placeholder="다시 입력"
+              placeholder="Re-enter password"
               className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
             />
           </div>
           {showReferralField && (
             <div className="mb-4">
               <label htmlFor="referral" className="block text-[13px] font-bold text-ink mb-1.5">
-                추천인 코드 (선택)
+                Referral code (optional)
               </label>
               <input
                 id="referral"
                 name="referral"
                 type="text"
-                placeholder="예: ALTON-MINJI82"
+                placeholder="e.g. ALTON-MINJI82"
                 className="w-full px-3.5 py-3 border-[1.5px] border-grey-200 rounded-lg text-[14.5px] text-ink focus:outline-none focus:border-ink"
               />
             </div>
@@ -172,7 +172,7 @@ export default function SetPasswordPage() {
 
           <label className="flex items-start gap-2 text-[12.5px] text-grey-500 leading-[1.5] mb-[22px]">
             <input name="consent" type="checkbox" className="mt-0.5" />
-            이용약관 및 개인정보처리방침에 동의합니다 (필수)
+            I agree to the Terms of Service and Privacy Policy (required)
           </label>
 
           {error && <p className="text-[13px] text-red mb-4">{error}</p>}
@@ -182,7 +182,7 @@ export default function SetPasswordPage() {
             disabled={submitting}
             className="block w-full text-center bg-red text-white font-bold text-[15px] py-3.5 rounded-lg hover:bg-[#a80e26] disabled:opacity-60"
           >
-            {submitting ? "설정 중..." : "비밀번호 설정하고 계속하기"}
+            {submitting ? "Saving..." : "Set password and continue"}
           </button>
         </form>
       </div>

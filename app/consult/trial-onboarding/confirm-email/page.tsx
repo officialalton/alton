@@ -14,7 +14,7 @@ export default async function ConfirmEmailPage({
   if (!token) {
     return (
       <main className="max-w-md mx-auto px-6 py-16">
-        <p className="text-[14px] text-ink">유효하지 않은 온보딩 링크입니다.</p>
+        <p className="text-[14px] text-ink">This onboarding link is invalid.</p>
       </main>
     );
   }
@@ -26,7 +26,7 @@ export default async function ConfirmEmailPage({
     return (
       <main className="max-w-md mx-auto px-6 py-16">
         <p className="text-[14px] text-ink">
-          유효하지 않거나 만료된 온보딩 링크입니다. 관리자에게 재발급을 요청해주세요.
+          This onboarding link is invalid or has expired. Please contact our team to request a new one.
         </p>
       </main>
     );
@@ -34,11 +34,11 @@ export default async function ConfirmEmailPage({
 
   return (
     <main className="max-w-md mx-auto px-6 py-16">
-      <div className="text-[11.5px] font-bold text-grey-500 mb-2">온보딩 · 1단계</div>
-      <h1 className="text-[18px] font-extrabold text-ink mb-2">로그인 이메일 확인</h1>
+      <div className="text-[11.5px] font-bold text-grey-500 mb-2">Onboarding · Step 1</div>
+      <h1 className="text-[18px] font-extrabold text-ink mb-2">Confirm your sign-in email</h1>
       <p className="text-[13px] text-grey-500 mb-6">
-        {preview.studentName} 학생의 보호자({preview.guardianName})님, 앞으로 Alton
-        Education에 로그인할 때 사용할 이메일을 확인해주세요.
+        Hi {preview.guardianName}, parent of {preview.studentName} — please confirm the email address
+        you&apos;ll use to sign in to ALTON EDUCATION.
       </p>
       <ConfirmEmailForm token={token} linkId={preview.linkId} defaultEmail={preview.guardianEmail} />
     </main>

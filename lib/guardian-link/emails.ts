@@ -11,7 +11,7 @@ function layout(body: string): string {
   return `
       ${body}
       <p style="color:#777;font-size:12px;margin-top:28px;">If you weren't expecting this email, you can safely ignore it.</p>
-      <p>Alton Education</p>
+      <p>ALTON EDUCATION</p>
   `;
 }
 
@@ -20,10 +20,10 @@ export async function sendGuardianLinkInviteEmail(params: { to: string; studentF
   const name = escapeHtml(params.studentFirstName || "Your student");
   await sendEmail({
     to: params.to,
-    subject: `[Alton Education] ${name} would like to connect you as their parent`,
+    subject: `[ALTON EDUCATION] ${name} would like to connect you as their parent`,
     html: layout(`
       <p>Hello,</p>
-      <p><strong>${name}</strong> has been studying with Alton Education's free SAT practice and would like to talk
+      <p><strong>${name}</strong> has been studying with ALTON EDUCATION's free SAT practice and would like to talk
       with a tutor. To continue, ${name} asked us to connect you as their parent or guardian.</p>
       <p>After you connect, you'll be able to see ${name}'s practice-test results and schedule a free consultation
       with one of our admissions consultants.</p>
@@ -41,10 +41,10 @@ export async function sendLinkedGuardianBookingNoticeEmail(params: { to: string;
   const greeting = params.guardianName ? `Hello ${escapeHtml(params.guardianName)},` : "Hello,";
   await sendEmail({
     to: params.to,
-    subject: `[Alton Education] ${name} would like to talk with a tutor`,
+    subject: `[ALTON EDUCATION] ${name} would like to talk with a tutor`,
     html: layout(`
       <p>${greeting}</p>
-      <p><strong>${name}</strong> has been using Alton's free SAT practice and would like to talk with a tutor.
+      <p><strong>${name}</strong> has been using ALTON EDUCATION's free SAT practice and would like to talk with a tutor.
       You're already connected as ${name}'s parent, so you can book a free consultation from your parent portal.</p>
       <p style="margin: 24px 0;">
         <a href="${params.portalUrl}" style="${BUTTON_STYLE}">Open the parent portal</a>
@@ -60,8 +60,8 @@ export async function sendGuardianLinkReminderEmail(params: { to: string; kind: 
   await sendEmail({
     to: params.to,
     subject: isUnbooked
-      ? `[Alton Education] Reminder: pick a time for ${name}'s consultation`
-      : `[Alton Education] Reminder: ${name} is waiting for you to connect`,
+      ? `[ALTON EDUCATION] Reminder: pick a time for ${name}'s consultation`
+      : `[ALTON EDUCATION] Reminder: ${name} is waiting for you to connect`,
     html: layout(
       isUnbooked
         ? `
@@ -72,7 +72,7 @@ export async function sendGuardianLinkReminderEmail(params: { to: string; kind: 
     `
         : `
       <p>Hello,</p>
-      <p>${name} invited you to connect as their parent on Alton Education a few days ago. The invitation is still open.</p>
+      <p>${name} invited you to connect as their parent on ALTON EDUCATION a few days ago. The invitation is still open.</p>
       <p style="margin: 24px 0;"><a href="${params.url}" style="${BUTTON_STYLE}">Review and connect</a></p>
     `,
     ),

@@ -21,7 +21,7 @@ export async function confirmTrialOnboardingLinkAction(token: string): Promise<v
   const { data, error } = await admin.rpc("redeem_trial_onboarding_link", { p_token: token });
   const redeemed = data?.[0];
   if (error || !redeemed) {
-    redirect(redirectWithError("유효하지 않거나 만료된 온보딩 링크입니다.").redirectPath);
+    redirect(redirectWithError("This onboarding link is invalid or has expired.").redirectPath);
   }
 
   const result = await createGuardianAndStudentThenRedirect({
@@ -43,7 +43,7 @@ export async function confirmTrialOnboardingEmailChangeAction(token: string): Pr
   });
   const confirmed = confirmData?.[0];
   if (confirmError || !confirmed) {
-    redirect(redirectWithError("유효하지 않거나 만료된 확인 링크입니다.").redirectPath);
+    redirect(redirectWithError("This confirmation link is invalid or has expired.").redirectPath);
   }
 
   const { data: link, error: linkError } = await admin
@@ -52,7 +52,7 @@ export async function confirmTrialOnboardingEmailChangeAction(token: string): Pr
     .eq("id", confirmed.link_id)
     .maybeSingle();
   if (linkError || !link) {
-    redirect(redirectWithError("온보딩 정보를 찾을 수 없습니다. 관리자에게 문의해주세요.").redirectPath);
+    redirect(redirectWithError("We couldn't find your onboarding information. Please contact our team.").redirectPath);
   }
 
   const result = await createGuardianAndStudentThenRedirect({

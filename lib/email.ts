@@ -28,11 +28,11 @@ export async function sendEmail(params: {
     // SMTP 미설정 시 조용히 성공 반환하면 호출부의 try/catch가 "발송 성공"으로
     // 착각해 notice_delivery_status를 'sent'로 기록하는 실제 버그로 이어졌다
     // (2026-09-05 코드 점검 발견) — 반드시 실패로 처리되도록 throw한다.
-    throw new Error("SMTP_HOST가 설정되지 않아 이메일을 보낼 수 없습니다.");
+    throw new Error("Email could not be sent because SMTP_HOST is not configured.");
   }
 
   await transport.sendMail({
-    from: process.env.EMAIL_FROM ?? "Alton Education <notify@alton.education>",
+    from: process.env.EMAIL_FROM ?? "ALTON EDUCATION <notify@alton.education>",
     to: params.to,
     subject: params.subject,
     html: params.html,

@@ -51,7 +51,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
   const existingGuardianId = await admin.rpc("find_auth_user_id_by_email", { p_email: params.guardianEmail });
   if (existingGuardianId.error) {
     console.error("기존 보호자 계정 확인 실패:", params.guardianEmail, existingGuardianId.error);
-    return redirectWithError("계정 확인에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("We couldn't verify your account. Please contact our team.");
   }
   if (existingGuardianId.data) {
     const hasProfile = await admin
@@ -74,7 +74,7 @@ export async function createGuardianAndStudentThenRedirect(params: {
     // 쓸 수 있는 증거로 판정한다(사용자가 조작 가능한 값은 신뢰하지 않음).
     const owned = await verifyOrphanOwnership(admin, existingGuardianId.data as string, params.linkId);
     if (!owned) {
-      return redirectWithError("이미 사용 중인 이메일입니다. 관리자에게 문의해주세요.");
+      return redirectWithError("This email address is already in use. Please contact our team.");
     }
     // 이 온보딩이 직전 시도에서 만든 고아 계정임이 증명됐다 — claim을 잡고
     // (동시 재시도 직렬화) 이 계정을 재사용해 이어서 완료한다.
@@ -140,18 +140,18 @@ async function withClaim(
   }
   const claim = claimData?.[0];
   if (!claim) {
-    return redirectWithError("유효하지 않은 온보딩 링크입니다.");
+    return redirectWithError("This onboarding link is invalid.");
   }
   if (claim.action === "busy") {
-    return redirectWithError("지금 다른 요청이 이 링크를 처리하고 있습니다. 잠시 후 다시 시도해주세요.");
+    return redirectWithError("This link is being processed by another request. Please try again in a moment.");
   }
   if (claim.action === "already_redeemed") {
     if (!claim.redeemed_auth_user_id) {
-      return redirectWithError("계정 상태를 확인할 수 없습니다. 관리자에게 문의해주세요.");
+      return redirectWithError("We couldn't verify your account status. Please contact our team.");
     }
     const { data: userData, error: userError } = await admin.auth.admin.getUserById(claim.redeemed_auth_user_id);
     if (userError || userData?.user?.email?.toLowerCase() !== params.guardianEmail.toLowerCase()) {
-      return redirectWithError("이 링크와 연결된 계정 정보가 일치하지 않습니다. 관리자에게 문의해주세요.");
+      return redirectWithError("The account linked to this invitation doesn't match. Please contact our team.");
     }
     return generateGuardianRecoveryRedirect(admin, params.guardianEmail);
   }
@@ -188,7 +188,7 @@ async function withClaim(
         // 넘어가지 않고 충돌로 처리한다.
         console.error("보호자 Auth 계정 생성 실패:", params.guardianEmail, guardianCreateError);
         await releaseFinalizeClaim(admin, params.linkId, claimId);
-        return redirectWithError("보호자 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+        return redirectWithError("We couldn't create your parent account. Please contact our team.");
       }
       guardianAuthUserId = guardianCreated.user.id;
       const recorded = await admin.rpc("record_pending_guardian_account", {
@@ -205,7 +205,7 @@ async function withClaim(
         await admin.auth.admin.deleteUser(guardianAuthUserId).catch((e) => {
           console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);
         });
-        return redirectWithError("처리 중 충돌이 발생했습니다. 다시 시도해주세요.");
+        return redirectWithError("Something went wrong while processing your request. Please try again.");
       }
     }
 
@@ -213,15 +213,15 @@ async function withClaim(
   } catch (e) {
     await releaseFinalizeClaim(admin, params.linkId, claimId);
     console.error("온보딩 finalize 중 예외:", params.linkId, e);
-    return redirectWithError("계정 생성 중 오류가 발생했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("An error occurred while creating your account. Please contact our team.");
   }
 }
 
 function mapClaimError(message: string): string {
-  if (message.includes("revoked_link")) return "취소된 온보딩 링크입니다. 관리자에게 문의해주세요.";
-  if (message.includes("expired_link")) return "만료된 온보딩 링크입니다. 관리자에게 재발급을 요청해주세요.";
-  if (message.includes("invalid_link_status")) return "이미 처리됐거나 유효하지 않은 온보딩 링크입니다.";
-  return "유효하지 않은 온보딩 링크입니다.";
+  if (message.includes("revoked_link")) return "This onboarding link has been canceled. Please contact our team.";
+  if (message.includes("expired_link")) return "This onboarding link has expired. Please contact our team to request a new one.";
+  if (message.includes("invalid_link_status")) return "This onboarding link has already been used or is invalid.";
+  return "This onboarding link is invalid.";
 }
 
 async function releaseFinalizeClaim(
@@ -243,7 +243,7 @@ async function generateGuardianRecoveryRedirect(
     email: guardianEmail,
   });
   if (linkError || !linkData?.properties?.hashed_token) {
-    return redirectWithError("로그인 링크 생성에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("We couldn't create your sign-in link. Please contact our team.");
   }
   return {
     redirectPath: `/set-password?role=parent&token_hash=${encodeURIComponent(linkData.properties.hashed_token)}&type=recovery`,
@@ -265,7 +265,7 @@ async function finalizeWithGuardian(
   if (studentsError || !students?.length) {
     console.error("온보딩 학생 명단 조회 실패:", params.linkId, studentsError);
     if (isNewGuardian && claimId) await releaseFinalizeClaim(admin, params.linkId, claimId);
-    return redirectWithError("온보딩 학생 명단을 찾을 수 없습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("We couldn't find the student information for this invitation. Please contact our team.");
   }
 
   const finalizeItems: { link_student_id: string; child_auth_user_id: string }[] = [];
@@ -310,7 +310,7 @@ async function finalizeWithGuardian(
       console.error("고아 보호자 Auth 계정 정리 실패:", guardianAuthUserId, e);
     });
     if (claimId) await releaseFinalizeClaim(admin, params.linkId, claimId);
-    return redirectWithError("학생 계정 생성에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("We couldn't create the student account. Please contact our team.");
   }
 
   const { data: finalizeData, error: finalizeError } = await admin.rpc("finalize_trial_onboarding_students", {
@@ -336,7 +336,7 @@ async function finalizeWithGuardian(
       )
     );
     if (isNewGuardian && claimId) await releaseFinalizeClaim(admin, params.linkId, claimId);
-    return redirectWithError("계정 연결에 실패했습니다. 관리자에게 문의해주세요.");
+    return redirectWithError("We couldn't link the accounts. Please contact our team.");
   }
   const finalizeRow = finalizeData?.[0];
   // 직접생성 계정 완료 → direct_account_created(DB가 큐잉) 계약을 응답 뒤에서 바로 발송.
@@ -367,10 +367,10 @@ async function finalizeWithGuardian(
     // 실패)로만 "새로 처리됨" 여부를 판단한다.
     const somethingNewThisCall = createdStudentAuthIdsThisRequest.length > 0 || (finalizeRow?.failed_count ?? 0) > 0;
     const label = !somethingNewThisCall
-      ? "이미 등록된 계정입니다. 기존 계정으로 로그인해주세요."
+      ? "This account is already registered. Please sign in with your existing account."
       : finalizeRow && finalizeRow.failed_count > 0
-        ? `자녀가 추가로 연결됐습니다(${finalizeRow.failed_count}명은 실패 — 관리자 재시도 필요). 기존 계정으로 로그인해주세요.`
-        : "자녀가 추가로 연결됐습니다. 기존 계정으로 로그인해주세요.";
+        ? `Your child has been added to your account (${finalizeRow.failed_count} could not be added — our team will retry). Please sign in with your existing account.`
+        : "Your child has been added to your account. Please sign in with your existing account.";
     return { redirectPath: "/login?notice=" + encodeURIComponent(label) };
   }
 
@@ -419,19 +419,19 @@ async function sendStudentSetPasswordEmail(
   try {
     await sendEmail({
       to: params.studentEmail,
-      subject: "[Alton Education] 학생 계정 비밀번호 설정",
+      subject: "[ALTON EDUCATION] Set up your student account password",
       html: `
-        <p>안녕하세요, ${escapeHtml(params.studentName)}님.</p>
-        <p>Alton Education 학생 계정이 생성되었습니다.</p>
+        <p>Hello ${escapeHtml(params.studentName)},</p>
+        <p>Your ALTON EDUCATION student account has been created. Click the button below to set your password.</p>
         <p style="margin: 24px 0;">
           <a href="${setPasswordUrl}"
              style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
                     font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
-            비밀번호 설정하기
+            Set your password
           </a>
         </p>
-        <p>본인이 요청하지 않았다면 이 메일을 무시하세요.</p>
-        <p>감사합니다.<br/>Alton Education</p>
+        <p>If you weren't expecting this email, you can safely ignore it.</p>
+        <p>Thank you,<br/>ALTON EDUCATION</p>
       `,
     });
   } catch (e) {

@@ -153,7 +153,7 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(res.redirectPath).toContain("/login?error=");
-    expect(decodeURIComponent(res.redirectPath)).toContain("다른 요청");
+    expect(decodeURIComponent(res.redirectPath)).toContain("another request");
   });
 
   it("이미 redeemed된 링크(같은 이메일로 이미 성공)는 계정을 다시 만들지 않고 로그인 링크로 안내한다", async () => {
@@ -189,7 +189,7 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(generateLinkMock).not.toHaveBeenCalled();
-    expect(decodeURIComponent(res.redirectPath)).toContain("일치하지 않습니다");
+    expect(decodeURIComponent(res.redirectPath)).toContain("doesn't match");
   });
 
   it("보호자 계정 생성 후 학생 계정 생성이 실패해도 재시도 시 pending_guardian_auth_user_id를 재사용해 보호자 계정을 중복 생성하지 않는다", async () => {
@@ -226,7 +226,7 @@ describe("createGuardianAndStudentThenRedirect — 온보딩 링크 재사용(cl
     expect(deleteUserMock).toHaveBeenCalledWith("guardian-id");
     // claim을 잃었으므로 학생 계정 생성으로 진행하지 않는다.
     expect(createUserMock).toHaveBeenCalledTimes(1);
-    expect(decodeURIComponent(res.redirectPath)).toContain("충돌");
+    expect(decodeURIComponent(res.redirectPath)).toContain("Something went wrong");
   });
 });
 
@@ -277,7 +277,7 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
 
     expect(createUserMock).not.toHaveBeenCalled();
     expect(rpcMock).not.toHaveBeenCalledWith("claim_trial_onboarding_link_finalize", expect.anything());
-    expect(decodeURIComponent(res.redirectPath)).toContain("이미 사용 중인 이메일");
+    expect(decodeURIComponent(res.redirectPath)).toContain("already in use");
   });
 
   it("사용자가 로그인 후 스스로 고쳐 쓸 수 있는 user_metadata에 가짜 trial_onboarding_link_id를 넣어도 소유 증거로 인정하지 않는다(app_metadata만 신뢰)", async () => {
@@ -308,7 +308,7 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(createUserMock).not.toHaveBeenCalled();
-    expect(decodeURIComponent(res.redirectPath)).toContain("이미 사용 중인 이메일");
+    expect(decodeURIComponent(res.redirectPath)).toContain("already in use");
   });
 
   it("app_metadata는 일치해도 이 계정이 다른 온보딩 링크의 pending/redeemed 계정으로도 걸려 있으면(교차 링크) 재사용을 거부한다", async () => {
@@ -335,7 +335,7 @@ describe("createGuardianAndStudentThenRedirect — 고아 Auth 계정 복구(부
     const res = await createGuardianAndStudentThenRedirect(BASE_PARAMS);
 
     expect(createUserMock).not.toHaveBeenCalled();
-    expect(decodeURIComponent(res.redirectPath)).toContain("이미 사용 중인 이메일");
+    expect(decodeURIComponent(res.redirectPath)).toContain("already in use");
   });
 });
 
@@ -548,8 +548,8 @@ describe("createGuardianAndStudentThenRedirect — 이미 완료된 링크를 �
 
     expect(createUserMock).not.toHaveBeenCalled();
     const notice = decodeURIComponent(res.redirectPath);
-    expect(notice).toContain("이미 등록된 계정입니다");
-    expect(notice).not.toContain("추가로 연결됐습니다");
+    expect(notice).toContain("already registered");
+    expect(notice).not.toContain("has been added");
   });
 });
 

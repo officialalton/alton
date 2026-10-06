@@ -10,6 +10,8 @@ vi.mock("@/app/schedule-actions", () => ({ listOpenSlotsForTokenAction: listMock
 
 import ScheduleForm from "./ScheduleForm";
 import { SCHEDULE_TIMEZONE_STORAGE_KEY } from "@/lib/schedule-timezone";
+import { timezoneLabel } from "@/lib/timezone";
+import { fmtDateTime } from "@/lib/format-datetime";
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
@@ -69,15 +71,15 @@ describe("ScheduleForm — 시간대 선택", () => {
   it("첫 방문은 브라우저 시간대(서울)로 바뀌고 선택기가 보인다", async () => {
     mockBrowserZone("Asia/Seoul");
     render(<ScheduleForm token="t" />);
-    const select = (await screen.findByLabelText("표시 시간대")) as HTMLSelectElement;
+    const select = (await screen.findByLabelText("Time zone")) as HTMLSelectElement;
     await waitFor(() => expect(select.value).toBe("Asia/Seoul"));
-    expect(screen.getByText(/표시 시간대: 서울/)).toBeInTheDocument();
+    expect(screen.getByText(`Time zone: ${timezoneLabel("Asia/Seoul")}`)).toBeInTheDocument();
   });
 
   it("선택을 바꾸면 날짜 경계가 그 시간대로 다시 계산되고 localStorage 에 저장된다", async () => {
     mockBrowserZone("America/Los_Angeles");
     render(<ScheduleForm token="t" />);
-    const select = (await screen.findByLabelText("표시 시간대")) as HTMLSelectElement;
+    const select = (await screen.findByLabelText("Time zone")) as HTMLSelectElement;
     await waitFor(() => expect(select.value).toBe("America/Los_Angeles"));
     expect(badgeDayNumbers()).toContain(dayIn("America/Los_Angeles"));
     fireEvent.change(select, { target: { value: "Asia/Seoul" } });
@@ -90,7 +92,7 @@ describe("ScheduleForm — 시간대 선택", () => {
     mockBrowserZone("Asia/Seoul");
     window.localStorage.setItem(SCHEDULE_TIMEZONE_STORAGE_KEY, "America/Chicago");
     render(<ScheduleForm token="t" />);
-    const select = (await screen.findByLabelText("표시 시간대")) as HTMLSelectElement;
+    const select = (await screen.findByLabelText("Time zone")) as HTMLSelectElement;
     await waitFor(() => expect(select.value).toBe("America/Chicago"));
   });
 
@@ -98,7 +100,7 @@ describe("ScheduleForm — 시간대 선택", () => {
     mockBrowserZone("Asia/Seoul");
     installStorage({ throws: true });
     render(<ScheduleForm token="t" />);
-    const select = (await screen.findByLabelText("표시 시간대")) as HTMLSelectElement;
+    const select = (await screen.findByLabelText("Time zone")) as HTMLSelectElement;
     await waitFor(() => expect(select.value).toBe("Asia/Seoul"));
     expect(() => fireEvent.change(select, { target: { value: "America/Denver" } })).not.toThrow();
     expect(select.value).toBe("America/Denver");
@@ -108,15 +110,17 @@ describe("ScheduleForm — 시간대 선택", () => {
     mockBrowserZone("Asia/Seoul");
     redeemMock.mockResolvedValue({ ok: true });
     render(<ScheduleForm token="t" />);
-    const select = (await screen.findByLabelText("표시 시간대")) as HTMLSelectElement;
+    const select = (await screen.findByLabelText("Time zone")) as HTMLSelectElement;
     await waitFor(() => expect(select.value).toBe("Asia/Seoul"));
     fireEvent.click(badgeButton());
-    fireEvent.click(await screen.findByRole("button", { name: /오[전후]/ }));
-    fireEvent.click(screen.getByText("이 시간으로 확정하기"));
-    await waitFor(() => expect(screen.getByText("상담 일정이 확정되었습니다.")).toBeInTheDocument());
+    fireEvent.click(await screen.findByRole("button", { name: /\b(AM|PM)\b/ }));
+    fireEvent.click(screen.getByText("Confirm this time"));
+    await waitFor(() => expect(screen.getByText("Your consultation is booked.")).toBeInTheDocument());
     expect(redeemMock).toHaveBeenCalledWith("t", SLOT, "Asia/Seoul");
-    expect(screen.getByTestId("schedule-confirmed-time").textContent).toContain("서울");
-    expect(screen.getByTestId("schedule-confirmed-time").textContent).toContain("오전 12:00");
+    expect(screen.getByTestId("schedule-confirmed-time").textContent).toContain(timezoneLabel("Asia/Seoul"));
+    expect(screen.getByTestId("schedule-confirmed-time").textContent).toContain(
+      fmtDateTime(SLOT, { dateStyle: "full", timeStyle: "short" }, "Asia/Seoul"),
+    );
   });
 });
 

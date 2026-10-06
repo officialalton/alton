@@ -44,6 +44,6 @@ describe("previewTrialOnboardingLink", () => {
 
   it("링크가 없으면 에러를 던진다", async () => {
     adminRpcMock.mockResolvedValue({ data: [], error: null });
-    await expect(previewTrialOnboardingLink("bad")).rejects.toThrow("유효하지 않은 온보딩 링크");
+    await expect(previewTrialOnboardingLink("bad")).rejects.toThrow("This onboarding link is invalid");
   });
 });

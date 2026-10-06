@@ -47,13 +47,13 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
     if (signUpError) {
       const msg = signUpError.message.toLowerCase();
       if (msg.includes("already registered") || msg.includes("already been registered")) {
-        setError("이미 가입된 이메일입니다. 로그인하거나 비밀번호 재설정을 이용해 주세요.");
+        setError("This email is already registered. Please log in or reset your password.");
       } else if (msg.includes("password")) {
-        setError(`비밀번호가 너무 약합니다. ${MIN_PASSWORD_LENGTH}자 이상, 영문과 숫자를 포함해 주세요.`);
+        setError(`Password is too weak. Use at least ${MIN_PASSWORD_LENGTH} characters with letters and numbers.`);
       } else if (msg.includes("rate limit") || msg.includes("too many")) {
-        setError("요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.");
+        setError("Too many requests. Please try again in a moment.");
       } else {
-        setError("가입 요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.");
+        setError("We couldn't process your sign-up. Please try again in a moment.");
       }
       return;
     }
@@ -65,14 +65,14 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
   if (sentTo) {
     return (
       <div className="text-[14px] text-ink leading-[1.7]">
-        <p className="font-bold text-[15px] mb-2">확인 메일을 보냈습니다</p>
+        <p className="font-bold text-[15px] mb-2">Check your email</p>
         <p>
-          <span className="font-semibold">{sentTo}</span>으로 보낸 메일의 링크를 열어 가입을 마무리해 주세요.
+          We sent a confirmation link to <span className="font-semibold">{sentTo}</span>. Open it to finish signing up.
         </p>
         <p className="text-grey-500 text-[13px] mt-3">
-          메일이 오지 않으면 스팸함을 확인해 주세요. 이미 가입된 이메일이라면 메일이 오지 않습니다 —{" "}
-          <a href="/login" className="text-red font-bold">로그인</a> 또는{" "}
-          <a href="/reset-password" className="text-red font-bold">비밀번호 재설정</a>을 이용해 주세요.
+          Don&apos;t see it? Check your spam folder. If this email is already registered, no email will be sent —{" "}
+          <a href="/login" className="text-red font-bold">log in</a> or{" "}
+          <a href="/reset-password" className="text-red font-bold">reset your password</a> instead.
         </p>
       </div>
     );
@@ -82,47 +82,47 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
     <form onSubmit={handleSubmit} noValidate>
       <div className="mb-4">
         <label htmlFor="name" className="block text-[13px] font-bold text-ink mb-1.5">
-          이름 <span className="text-red">*</span>
+          Name <span className="text-red">*</span>
         </label>
         <input id="name" name="name" type="text" required autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} disabled={submitting} className={inputClass} />
       </div>
       <div className="mb-4">
         <label htmlFor="email" className="block text-[13px] font-bold text-ink mb-1.5">
-          이메일 <span className="text-red">*</span>
+          Email <span className="text-red">*</span>
         </label>
         <input id="email" name="email" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={submitting} className={inputClass} />
       </div>
       <div className="mb-4">
         <label htmlFor="password" className="block text-[13px] font-bold text-ink mb-1.5">
-          비밀번호 <span className="text-red">*</span>
+          Password <span className="text-red">*</span>
         </label>
         <input id="password" name="password" type="password" required autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={submitting} className={inputClass} />
-        <p className="text-[12px] text-grey-500 mt-1">{MIN_PASSWORD_LENGTH}자 이상, 영문과 숫자 포함</p>
+        <p className="text-[12px] text-grey-500 mt-1">At least {MIN_PASSWORD_LENGTH} characters, with letters and numbers</p>
       </div>
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div>
           <label htmlFor="birthdate" className="block text-[13px] font-bold text-ink mb-1.5">
-            생년월일 <span className="text-red">*</span>
+            Date of birth <span className="text-red">*</span>
           </label>
           <input id="birthdate" name="birthdate" type="date" required value={birthdate} onChange={(e) => setBirthdate(e.target.value)} disabled={submitting} className={inputClass} />
         </div>
         <div>
           <label htmlFor="grade" className="block text-[13px] font-bold text-ink mb-1.5">
-            학년 <span className="text-red">*</span>
+            Grade <span className="text-red">*</span>
           </label>
-          <input id="grade" name="grade" type="text" required placeholder="예: 10학년" value={grade} onChange={(e) => setGrade(e.target.value)} disabled={submitting} className={inputClass} />
+          <input id="grade" name="grade" type="text" required placeholder="e.g. 10th grade" value={grade} onChange={(e) => setGrade(e.target.value)} disabled={submitting} className={inputClass} />
         </div>
       </div>
       <div className="mb-4">
         <label htmlFor="school" className="block text-[13px] font-bold text-ink mb-1.5">
-          학교 <span className="text-grey-400 font-normal">(선택)</span>
+          School <span className="text-grey-400 font-normal">(optional)</span>
         </label>
         <input id="school" name="school" type="text" value={school} onChange={(e) => setSchool(e.target.value)} disabled={submitting} className={inputClass} />
       </div>
       <label className="flex items-start gap-2 text-[13px] text-ink mb-5 leading-[1.6]">
         <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} disabled={submitting} className="mt-1" />
         <span>
-          이용약관과 개인정보 처리방침(버전 {STUDENT_TERMS_VERSION})에 동의합니다. <span className="text-red">*</span>
+          I agree to the Terms of Service and Privacy Policy (version {STUDENT_TERMS_VERSION}). <span className="text-red">*</span>
         </span>
       </label>
 
@@ -133,7 +133,7 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
       )}
 
       <button type="submit" disabled={submitting} className="block w-full text-center bg-red text-white font-bold text-[15px] py-3.5 rounded-lg hover:bg-[#a80e26] disabled:opacity-60">
-        {submitting ? "처리 중..." : "확인 메일 받기"}
+        {submitting ? "Sending..." : "Send confirmation email"}
       </button>
     </form>
   );

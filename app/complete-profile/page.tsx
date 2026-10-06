@@ -67,12 +67,12 @@ export default async function CompleteProfilePage() {
           ALTON <span className="text-red">EDUCATION</span>
         </div>
         <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">
-          프로필을 완성해주세요
+          Complete your profile
         </h1>
         <p className="text-center text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          아래 정보를 입력해야 학생 포털을 이용할 수 있습니다.
+          Fill in the details below to access the student portal.
           <br />
-          최초 1회만 진행되며, 이후 필요 시 정보를 다시 수정할 수 있습니다.
+          You only do this once, and you can update it later if needed.
         </p>
 
         <CompleteProfileForm
@@ -93,7 +93,7 @@ export default async function CompleteProfilePage() {
             type="submit"
             className="block w-full text-center text-grey-500 text-[12.5px] py-2 hover:underline"
           >
-            로그아웃
+            Log out
           </button>
         </form>
       </div>

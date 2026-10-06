@@ -18,7 +18,7 @@ export default async function ConfirmEmailChangePage({
   if (!token) {
     return (
       <main className="max-w-md mx-auto px-6 py-16">
-        <p className="text-[14px] text-ink">유효하지 않은 확인 링크입니다.</p>
+        <p className="text-[14px] text-ink">This confirmation link is invalid.</p>
       </main>
     );
   }
@@ -32,7 +32,7 @@ export default async function ConfirmEmailChangePage({
     return (
       <main className="max-w-md mx-auto px-6 py-16">
         <p className="text-[14px] text-ink">
-          유효하지 않거나 만료된 확인 링크입니다. 관리자에게 재발급을 요청해주세요.
+          This confirmation link is invalid or has expired. Please contact our team to request a new one.
         </p>
       </main>
     );
@@ -46,18 +46,18 @@ export default async function ConfirmEmailChangePage({
   if (linkError || !link) {
     return (
       <main className="max-w-md mx-auto px-6 py-16">
-        <p className="text-[14px] text-ink">온보딩 정보를 찾을 수 없습니다. 관리자에게 문의해주세요.</p>
+        <p className="text-[14px] text-ink">We couldn&apos;t find your onboarding information. Please contact our team.</p>
       </main>
     );
   }
 
   return (
     <main className="max-w-md mx-auto px-6 py-16">
-      <div className="text-[11.5px] font-bold text-grey-500 mb-2">온보딩 · 이메일 변경 확인</div>
-      <h1 className="text-[18px] font-extrabold text-ink mb-2">새 로그인 이메일 확인</h1>
+      <div className="text-[11.5px] font-bold text-grey-500 mb-2">Onboarding · Email change confirmed</div>
+      <h1 className="text-[18px] font-extrabold text-ink mb-2">Confirm your new sign-in email</h1>
       <p className="text-[13px] text-grey-500 mb-6">
-        {link.student_name} 학생의 보호자({link.guardian_name})님, 앞으로 Alton Education에 로그인할 때
-        사용할 이메일이 아래 주소로 확인됐습니다.
+        Hi {link.guardian_name}, parent of {link.student_name} — the email address below has been confirmed
+        as the one you&apos;ll use to sign in to ALTON EDUCATION.
       </p>
       <ConfirmEmailChangeForm token={token} confirmedEmail={peeked.requested_email} />
     </main>

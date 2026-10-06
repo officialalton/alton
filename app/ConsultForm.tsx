@@ -37,7 +37,7 @@ export default function ConsultForm() {
     e.preventDefault();
     setError(null);
     if (!agreed) {
-      setError("개인정보 수집·이용에 동의해주세요.");
+      setError("Please agree to the collection and use of your personal information.");
       return;
     }
     setSubmitting(true);
@@ -58,7 +58,7 @@ export default function ConsultForm() {
         { onceKey: submissionNonceRef.current! }
       );
     } catch (err) {
-      setError(err instanceof Error ? err.message : "신청에 실패했습니다.");
+      setError(err instanceof Error ? err.message : "We couldn't submit your request. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -68,11 +68,11 @@ export default function ConsultForm() {
     return (
       <div className="rounded-2xl border-[1.5px] border-grey-200 bg-white px-8 py-14 text-center">
         <p className="text-[18px] font-extrabold text-ink mb-2">
-          상담 신청이 접수되었습니다.
+          Your consultation request has been received.
         </p>
         <p className="text-[14px] text-grey-500">
-          담당 컨설턴트가 배정되면 예약 링크를 이메일로 보내드립니다. 그 링크에서
-          직접 편한 시간을 고르시면 상담이 확정됩니다.
+          Once a consultant is assigned, we&apos;ll email you a booking link. Pick a time
+          that works for you there, and your consultation is confirmed.
         </p>
       </div>
     );
@@ -85,7 +85,7 @@ export default function ConsultForm() {
       className="rounded-2xl border-[1.5px] border-grey-200 bg-white px-6 py-8 sm:px-10 sm:py-10"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-        <Field label="학부모 이름">
+        <Field label="Parent name">
           <input
             required
             value={parentName}
@@ -93,15 +93,15 @@ export default function ConsultForm() {
             className={INPUT_CLASS}
           />
         </Field>
-        <Field label="연락처">
+        <Field label="Phone">
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="+1 또는 010-..."
+            placeholder="+1 or 010-..."
             className={INPUT_CLASS}
           />
         </Field>
-        <Field label="이메일">
+        <Field label="Email">
           <input
             required
             type="email"
@@ -110,17 +110,17 @@ export default function ConsultForm() {
             className={INPUT_CLASS}
           />
         </Field>
-        <Field label="학년">
+        <Field label="Student's grade">
           <input
             value={studentGrade}
             onChange={(e) => setStudentGrade(e.target.value)}
-            placeholder="예: 10학년"
+            placeholder="e.g. 10th grade"
             className={INPUT_CLASS}
           />
         </Field>
       </div>
 
-      <Field label="어떤 점이 고민이신가요? (선택)">
+      <Field label="What would you like help with? (optional)">
         <textarea
           value={concerns}
           onChange={(e) => setConcerns(e.target.value)}
@@ -135,8 +135,9 @@ export default function ConsultForm() {
           onChange={(e) => setAgreed(e.target.checked)}
           className="mt-0.5"
         />
-        상담 진행을 위한 개인정보 수집·이용에 동의합니다. (이름, 연락처, 이메일 —
-        상담 목적 외 사용하지 않으며 상담 종료 후 일정 기간 보관 후 파기)
+        I agree to the collection and use of my personal information for this consultation.
+        (Name, phone, and email are used only for the consultation and deleted after a
+        retention period once it ends.)
       </label>
 
       {error && <p className="text-[13px] text-red mt-3">{error}</p>}
@@ -146,7 +147,7 @@ export default function ConsultForm() {
         disabled={submitting}
         className="mt-6 w-full sm:w-auto px-8 py-3.5 rounded-xl bg-red text-white text-[15px] font-bold disabled:opacity-50"
       >
-        {submitting ? "신청 중..." : "상담 신청하기"}
+        {submitting ? "Submitting..." : "Request a consultation"}
       </button>
 
     </form>

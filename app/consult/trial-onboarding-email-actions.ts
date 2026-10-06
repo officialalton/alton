@@ -25,7 +25,7 @@ export async function requestLoginEmailChangeAction(
   });
   if (error) return { status: "error", error: error.message };
   const row = data?.[0];
-  if (!row) return { status: "error", error: "요청을 처리하지 못했습니다." };
+  if (!row) return { status: "error", error: "We couldn't process your request." };
   if (row.conflict) return { status: "conflict" };
 
   const origin = await currentRequestOrigin();
@@ -33,12 +33,12 @@ export async function requestLoginEmailChangeAction(
 
   await sendEmail({
     to: newEmail,
-    subject: "[Alton Education] 로그인 이메일 확인",
+    subject: "[ALTON EDUCATION] Confirm your sign-in email",
     html: `
-      <p>안녕하세요,</p>
-      <p>이 주소를 Alton Education 로그인 이메일로 사용하려면 아래 링크를 클릭해 확인해주세요.</p>
+      <p>Hello,</p>
+      <p>To use this address as your ALTON EDUCATION sign-in email, please confirm by clicking the link below.</p>
       <p><a href="${confirmUrl}">${confirmUrl}</a></p>
-      <p>본인이 요청하지 않았다면 이 메일을 무시하셔도 됩니다.</p>
+      <p>If you weren't expecting this email, you can safely ignore it.</p>
     `,
   });
 

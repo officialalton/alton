@@ -47,13 +47,13 @@ describe("CompleteProfileForm", () => {
 
   it("생년월일 미등록이면 필수 표시와 입력칸을 보여준다", () => {
     render(<CompleteProfileForm {...baseProps()} />);
-    expect(screen.getByLabelText(/생년월일/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Date of birth/)).toBeInTheDocument();
   });
 
   it("생년월일이 이미 등록돼 있으면 입력칸 대신 안내 문구를 보여준다(자가수정 차단 정책 유지)", () => {
     render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
     expect(
-      screen.getByText(/이미 등록되어 있습니다. 변경이 필요하면 보호자 또는 관리자에게/)
+      screen.getByText(/Already on file. To change it, ask your parent\/guardian/)
     ).toBeInTheDocument();
   });
 
@@ -65,7 +65,7 @@ describe("CompleteProfileForm", () => {
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText("학교명은 필수 항목입니다.")).toBeInTheDocument();
+      expect(screen.getByText("School name is required.")).toBeInTheDocument();
     });
     expect(submitCompleteProfileMock).not.toHaveBeenCalled();
   });
@@ -73,8 +73,8 @@ describe("CompleteProfileForm", () => {
   it("필수 항목을 채우면 submitCompleteProfile을 호출하고 /student로 이동한다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
 
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
@@ -92,10 +92,10 @@ describe("CompleteProfileForm", () => {
   it("AP 과목 추가 버튼이 addApCourse를 호출한다", async () => {
     render(<CompleteProfileForm {...baseProps()} />);
 
-    fireEvent.change(screen.getByPlaceholderText("과목명 (예: AP Calculus BC)"), {
+    fireEvent.change(screen.getByPlaceholderText("Course name (e.g. AP Calculus BC)"), {
       target: { value: "AP Physics" },
     });
-    fireEvent.click(screen.getAllByText("추가")[0]);
+    fireEvent.click(screen.getAllByText("Add")[0]);
 
     await waitFor(() => {
       expect(addApCourseMock).toHaveBeenCalledWith(
@@ -106,7 +106,7 @@ describe("CompleteProfileForm", () => {
 
   it("목표 대학 태그를 Enter로 추가할 수 있다", () => {
     render(<CompleteProfileForm {...baseProps()} />);
-    const input = screen.getByPlaceholderText("대학명을 입력 후 Enter");
+    const input = screen.getByPlaceholderText("Type a college and press Enter");
     fireEvent.change(input, { target: { value: "Stanford" } });
     fireEvent.keyDown(input, { key: "Enter" });
 
@@ -115,35 +115,35 @@ describe("CompleteProfileForm", () => {
 
   it("SAT가 400 미만이면 제출을 막는다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
-    fireEvent.change(screen.getByLabelText(/기존 SAT 점수/), { target: { value: "399" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/Current SAT score/), { target: { value: "399" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText("SAT 점수는 400~1600 사이여야 합니다.")).toBeInTheDocument();
+      expect(screen.getByText("SAT score must be between 400 and 1600.")).toBeInTheDocument();
     });
     expect(submitCompleteProfileMock).not.toHaveBeenCalled();
   });
 
   it("SAT가 1600 초과면 제출을 막는다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
-    fireEvent.change(screen.getByLabelText(/기존 SAT 점수/), { target: { value: "1601" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/Current SAT score/), { target: { value: "1601" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText("SAT 점수는 400~1600 사이여야 합니다.")).toBeInTheDocument();
+      expect(screen.getByText("SAT score must be between 400 and 1600.")).toBeInTheDocument();
     });
     expect(submitCompleteProfileMock).not.toHaveBeenCalled();
   });
 
   it("SAT 유효 범위(400~1600) 내 값은 그대로 통과한다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
-    fireEvent.change(screen.getByLabelText(/기존 SAT 점수/), { target: { value: "1200" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/Current SAT score/), { target: { value: "1200" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
@@ -155,34 +155,34 @@ describe("CompleteProfileForm", () => {
 
   it("GPA가 선택한 척도(기본 4.0)를 초과하면 제출을 막는다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
     fireEvent.change(screen.getByLabelText(/^GPA/), { target: { value: "4.3" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText("GPA 값이 선택한 척도(4.0)를 초과할 수 없습니다.")).toBeInTheDocument();
+      expect(screen.getByText("GPA cannot exceed the selected scale (4.0).")).toBeInTheDocument();
     });
     expect(submitCompleteProfileMock).not.toHaveBeenCalled();
   });
 
   it("2026-09-06: GPA에 음수를 입력하면 제출을 막는다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
     fireEvent.change(screen.getByLabelText(/^GPA/), { target: { value: "-0.1" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText("GPA는 0 이상이어야 합니다.")).toBeInTheDocument();
+      expect(screen.getByText("GPA cannot be negative.")).toBeInTheDocument();
     });
     expect(submitCompleteProfileMock).not.toHaveBeenCalled();
   });
 
   it("GPA와 척도를 함께 선택하면 gpaScale과 함께 제출한다", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
     fireEvent.change(screen.getByLabelText(/^GPA/), { target: { value: "3.9" } });
     fireEvent.change(container.querySelector("#gpaScale")!, { target: { value: "4.3" } });
     fireEvent.submit(container.querySelector("form")!);
@@ -196,8 +196,8 @@ describe("CompleteProfileForm", () => {
 
   it("GPA를 비워두면 gpaScale도 null로 제출한다(척도만 남는 상태 방지)", async () => {
     const { container } = render(<CompleteProfileForm {...baseProps({ hasDateOfBirth: true })} />);
-    fireEvent.change(screen.getByLabelText(/학교명/), { target: { value: "OO국제학교" } });
-    fireEvent.change(screen.getByLabelText(/학년/), { target: { value: "10학년" } });
+    fireEvent.change(screen.getByLabelText(/School/), { target: { value: "OO국제학교" } });
+    fireEvent.change(screen.getByLabelText(/Grade/), { target: { value: "10학년" } });
     fireEvent.submit(container.querySelector("form")!);
 
     await waitFor(() => {

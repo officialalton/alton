@@ -27,18 +27,18 @@ export async function GET(request: NextRequest) {
     request.nextUrl.searchParams.get("error_description") ??
     request.nextUrl.searchParams.get("error");
   if (oauthError) {
-    return NextResponse.redirect(loginError(siteUrl, "Google 로그인이 취소되었거나 실패했습니다."));
+    return NextResponse.redirect(loginError(siteUrl, "Google sign-in was cancelled or failed."));
   }
 
   const code = request.nextUrl.searchParams.get("code");
   if (!code) {
-    return NextResponse.redirect(loginError(siteUrl, "Google 로그인에 실패했습니다."));
+    return NextResponse.redirect(loginError(siteUrl, "Google sign-in failed."));
   }
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   if (error || !data.session || !data.user) {
-    return NextResponse.redirect(loginError(siteUrl, "Google 로그인에 실패했습니다."));
+    return NextResponse.redirect(loginError(siteUrl, "Google sign-in failed."));
   }
 
   const authUserId = data.user.id;
@@ -47,7 +47,7 @@ export async function GET(request: NextRequest) {
 
   if (!email || !googleUserId) {
     await supabase.auth.signOut();
-    return NextResponse.redirect(loginError(siteUrl, "Google 계정 정보를 확인할 수 없습니다."));
+    return NextResponse.redirect(loginError(siteUrl, "We couldn't read your Google account details."));
   }
 
   const { data: profile } = await supabase
@@ -72,8 +72,8 @@ export async function GET(request: NextRequest) {
     return linkAsConsultant({ supabase, siteUrl, authUserId, email, googleUserId, provisioningId: consultantMatch.id, name: staffName(data.user, email) });
   }
 
-  await rejectAndCleanup(supabase, authUserId, `사전 등록되지 않은 Google 계정 (email_hash=${hashIdentifier(email)})`);
-  return NextResponse.redirect(loginError(siteUrl, "등록되지 않은 계정입니다. 관리자에게 문의해주세요."));
+  await rejectAndCleanup(supabase, authUserId, `Google account not pre-registered (email_hash=${hashIdentifier(email)})`);
+  return NextResponse.redirect(loginError(siteUrl, "This account is not registered. Please contact an administrator."));
 }
 
 async function routeExistingProfile(params: {
@@ -93,7 +93,7 @@ async function routeExistingProfile(params: {
       return NextResponse.redirect(
         loginError(
           siteUrl,
-          "이 Google 계정은 관리자 계정에 연결되어 있지 않습니다. 먼저 관리자 화면에서 Google 계정을 연결해주세요."
+          "This Google account is not linked to an admin account. Link it from the admin portal first."
         )
       );
     }
@@ -107,7 +107,7 @@ async function routeExistingProfile(params: {
   // 학생/학부모 등 스태프가 아닌 본인 계정 — 남의 계정이 아니므로 삭제하지
   // 않고 세션만 종료한다.
   await supabase.auth.signOut();
-  return NextResponse.redirect(loginError(siteUrl, "직원(선생님·관리자·컨설턴트) 계정이 아닙니다."));
+  return NextResponse.redirect(loginError(siteUrl, "This is not a staff (tutor, admin, or consultant) account."));
 }
 
 async function findTeacherProvisioning(
@@ -141,7 +141,7 @@ async function linkAsTeacher(params: {
   });
   if (linkError) {
     await rejectAndCleanup(supabase, authUserId, linkError.message);
-    return NextResponse.redirect(loginError(siteUrl, "계정 연결에 실패했습니다: " + linkError.message));
+    return NextResponse.redirect(loginError(siteUrl, "Could not link the account: " + linkError.message));
   }
   return NextResponse.redirect(`${siteUrl}/teacher`);
 }
@@ -175,7 +175,7 @@ async function linkAsConsultant(params: {
   });
   if (linkError) {
     await rejectAndCleanup(supabase, authUserId, linkError.message);
-    return NextResponse.redirect(loginError(siteUrl, "계정 연결에 실패했습니다: " + linkError.message));
+    return NextResponse.redirect(loginError(siteUrl, "Could not link the account: " + linkError.message));
   }
   return NextResponse.redirect(`${siteUrl}/consultant`);
 }

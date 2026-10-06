@@ -6,15 +6,15 @@ describe("ResetPasswordPage", () => {
   it("renders the request form by default", async () => {
     render(await ResetPasswordPage({ searchParams: Promise.resolve({}) }));
     expect(
-      screen.getByRole("heading", { name: "비밀번호 재설정" })
+      screen.getByRole("heading", { name: "Reset your password" })
     ).toBeInTheDocument();
-    expect(screen.getByLabelText("이메일")).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
   });
 
   it("shows a confirmation message once sent", async () => {
     render(
       await ResetPasswordPage({ searchParams: Promise.resolve({ sent: "1" }) })
     );
-    expect(screen.getByText(/재설정 링크를 보냈어요/)).toBeInTheDocument();
+    expect(screen.getByText(/We sent a reset link/)).toBeInTheDocument();
   });
 });

@@ -20,7 +20,7 @@ export async function signInWithGoogleForStaff(): Promise<void> {
     },
   });
   if (error || !data.url) {
-    throw new Error(error?.message ?? "Google 로그인을 시작할 수 없습니다.");
+    throw new Error(error?.message ?? "Could not start Google sign-in.");
   }
   redirect(data.url);
 }

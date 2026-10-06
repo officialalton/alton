@@ -18,7 +18,7 @@ export async function provisionFreeMemberAction(): Promise<ProvisionResult> {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    return { ok: false, message: "세션이 없습니다. 이메일의 링크를 다시 열어 주세요." };
+    return { ok: false, message: "No active session. Please open the link from your email again." };
   }
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
@@ -30,7 +30,7 @@ export async function provisionFreeMemberAction(): Promise<ProvisionResult> {
   const meta = readSignupMetadata(user);
   if (!meta) {
     await supabase.auth.signOut();
-    return { ok: false, message: "셀프 가입 정보를 확인할 수 없습니다. 처음부터 다시 가입해 주세요." };
+    return { ok: false, message: "We couldn't verify your sign-up details. Please sign up again from the start." };
   }
 
   const { error } = await supabase.rpc("provision_free_member", {
@@ -47,7 +47,7 @@ export async function provisionFreeMemberAction(): Promise<ProvisionResult> {
   // 프로비저닝 직후 권한 근거가 실제로 서 있는지 확인(무료 집합의 대표 키). 실패하면 홈 진입 전에 드러난다.
   const access = await loadStudentFeatureAccess(supabase, user.id);
   if (!hasFeature(access, "mock_exam")) {
-    return { ok: false, message: "계정이 만들어졌지만 권한을 확인하지 못했습니다. 다시 로그인해 주세요." };
+    return { ok: false, message: "Your account was created, but we couldn't confirm its access. Please log in again." };
   }
   return { ok: true, redirectTo: "/student" };
 }

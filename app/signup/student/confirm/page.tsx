@@ -29,7 +29,7 @@ export default function StudentSignupConfirmPage() {
       });
       if (verifyError) {
         setSubmitting(false);
-        setError("링크가 만료되었거나 이미 사용됐습니다. 가입 화면에서 다시 시도해 주세요.");
+        setError("This link has expired or was already used. Please try again from the sign-up page.");
         return;
       }
     } else {
@@ -39,7 +39,7 @@ export default function StudentSignupConfirmPage() {
       } = await supabase.auth.getUser();
       if (!user) {
         setSubmitting(false);
-        setError("링크가 유효하지 않습니다. 가입 화면에서 다시 시도해 주세요.");
+        setError("This link is invalid. Please try again from the sign-up page.");
         return;
       }
     }
@@ -59,11 +59,11 @@ export default function StudentSignupConfirmPage() {
         <div className="text-center font-extrabold text-lg tracking-[0.02em] text-ink mb-1.5">
           ALTON <span className="text-red">EDUCATION</span>
         </div>
-        <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">이메일 확인</h1>
+        <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">Confirm your email</h1>
         <p className="text-center text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          아래 버튼을 누르면 이메일 확인이 완료되고
+          Click the button below to confirm your email
           <br />
-          무료 학습 회원으로 바로 시작합니다.
+          and get started as a free member.
         </p>
         {error && (
           <p role="alert" className="text-[13px] text-red mb-4">
@@ -76,11 +76,11 @@ export default function StudentSignupConfirmPage() {
           disabled={submitting}
           className="block w-full text-center bg-red text-white font-bold text-[15px] py-3.5 rounded-lg hover:bg-[#a80e26] disabled:opacity-60"
         >
-          {submitting ? "확인 중..." : "이메일 확인하고 시작하기"}
+          {submitting ? "Confirming..." : "Confirm email and get started"}
         </button>
         <p className="text-center text-[13px] text-grey-500 mt-[22px]">
           <a href="/signup/student" className="text-red font-bold">
-            가입 화면으로
+            Back to sign-up
           </a>
         </p>
       </div>

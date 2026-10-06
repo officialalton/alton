@@ -15,18 +15,18 @@ export async function GET(request: NextRequest) {
     request.nextUrl.searchParams.get("error_description") ??
     request.nextUrl.searchParams.get("error");
   if (oauthError) {
-    return NextResponse.redirect(linkError(siteUrl, "Google 계정 연결이 취소되었거나 실패했습니다."));
+    return NextResponse.redirect(linkError(siteUrl, "Google account linking was cancelled or failed."));
   }
 
   const code = request.nextUrl.searchParams.get("code");
   if (!code) {
-    return NextResponse.redirect(linkError(siteUrl, "Google 계정 연결에 실패했습니다."));
+    return NextResponse.redirect(linkError(siteUrl, "Could not link the Google account."));
   }
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);
   if (error || !data.session || !data.user) {
-    return NextResponse.redirect(linkError(siteUrl, "Google 계정 연결에 실패했습니다."));
+    return NextResponse.redirect(linkError(siteUrl, "Could not link the Google account."));
   }
 
   const { data: profile } = await supabase
@@ -36,13 +36,13 @@ export async function GET(request: NextRequest) {
     .single();
 
   if (profile?.role !== "admin") {
-    return NextResponse.redirect(linkError(siteUrl, "관리자 계정에서만 Google 계정을 연결할 수 있습니다."));
+    return NextResponse.redirect(linkError(siteUrl, "Only admin accounts can link a Google account."));
   }
 
   const googleUserId = extractGoogleUserId(data.user);
   const email = data.user.email;
   if (!googleUserId || !email) {
-    return NextResponse.redirect(linkError(siteUrl, "Google 계정 정보를 확인할 수 없습니다."));
+    return NextResponse.redirect(linkError(siteUrl, "We couldn't read your Google account details."));
   }
 
   const { error: linkErr } = await supabase.rpc("link_admin_google_identity", {

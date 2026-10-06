@@ -26,7 +26,7 @@ export default function ConfirmEmailChangeForm({
       }}
     >
       <label htmlFor="confirmed-email" className="block text-[11.5px] font-semibold text-grey-500 mb-1">
-        로그인 이메일
+        Sign-in email
       </label>
       <input
         id="confirmed-email"
@@ -40,7 +40,7 @@ export default function ConfirmEmailChangeForm({
         disabled={isPending}
         className="inline-block text-[13px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-60"
       >
-        {isPending ? "처리 중..." : "이 이메일로 계속"}
+        {isPending ? "Processing..." : "Continue with this email"}
       </button>
     </form>
   );

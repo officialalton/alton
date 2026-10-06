@@ -8,12 +8,12 @@ import { sendEmail } from "@/lib/email";
 export async function sendConsultationRejectionEmail(params: { contact_name: string; contact_email: string }): Promise<void> {
   await sendEmail({
     to: params.contact_email,
-    subject: "[Alton Education] 상담 신청 안내",
+    subject: "[ALTON EDUCATION] About your consultation request",
     html: `
-      <p>${params.contact_name}님, 안녕하세요.</p>
-      <p>신청해 주신 상담이 이번에는 진행이 어렵게 되었습니다. 자세한 사항은 담당자에게
-      문의해 주세요.</p>
-      <p>감사합니다.<br/>Alton Education</p>
+      <p>Hello ${params.contact_name},</p>
+      <p>Unfortunately, we're unable to move forward with the consultation you requested at this time.
+      If you have any questions, please reach out to our team.</p>
+      <p>Thank you,<br/>ALTON EDUCATION</p>
     `,
   });
 }
@@ -30,19 +30,19 @@ export async function sendConsultationSchedulingLinkEmail(params: {
 }): Promise<void> {
   await sendEmail({
     to: params.contact_email,
-    subject: "[Alton Education] 상담 시간을 선택해 주세요",
+    subject: "[ALTON EDUCATION] Pick a time for your consultation",
     html: `
-      <p>${params.contact_name}님, 안녕하세요.</p>
-      <p>담당 컨설턴트 ${params.consultant_name}님이 배정되었습니다. 아래 버튼에서
-      편한 상담 시간을 직접 골라 주세요.</p>
+      <p>Hello ${params.contact_name},</p>
+      <p>${params.consultant_name} will be your admissions consultant. Use the button below to
+      choose a consultation time that works for you.</p>
       <p style="margin: 24px 0;">
         <a href="${params.scheduling_url}"
            style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
                   font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
-          상담 일정 선택하기
+          Choose a consultation time
         </a>
       </p>
-      <p>감사합니다.<br/>Alton Education</p>
+      <p>Thank you,<br/>ALTON EDUCATION</p>
     `,
   });
 }

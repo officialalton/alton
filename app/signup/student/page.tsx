@@ -34,24 +34,24 @@ export default async function StudentSignupPage({
         <div className="text-center font-extrabold text-lg tracking-[0.02em] text-ink mb-1.5">
           ALTON <span className="text-red">EDUCATION</span>
         </div>
-        <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">무료 학습 회원 가입</h1>
+        <h1 className="text-center text-[21px] font-extrabold text-ink mb-2">Free Student Sign-Up</h1>
         <p className="text-center text-[13.5px] text-grey-500 mb-8 leading-[1.6]">
-          SAT 모의고사와 오답노트·단어장을 무료로 이용하세요.
+          Free SAT practice tests, error logs, and vocab lists.
           <br />
-          만 13세 이상 학생 본인만 가입할 수 있습니다.
+          Students must be 13 or older and sign up themselves.
         </p>
 
         <SignupForm initialError={error} />
 
         <p className="text-center text-[13px] text-grey-500 mt-[22px] leading-[1.7]">
-          이미 계정이 있으신가요?{" "}
+          Already have an account?{" "}
           <a href="/login" className="text-red font-bold">
-            로그인
+            Log in
           </a>
           <br />
-          만 13세 미만이거나 보호자와 함께 과외를 알아보시나요?{" "}
+          Under 13, or exploring tutoring with a parent?{" "}
           <Link href="/#consult" className="text-red font-bold">
-            상담 신청
+            Request a consultation
           </Link>
         </p>
       </div>

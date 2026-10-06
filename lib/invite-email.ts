@@ -2,8 +2,8 @@ import { sendEmail } from "./email";
 import { currentRequestOrigin } from "./request-origin";
 
 const ROLE_LABEL: Record<"parent" | "student", string> = {
-  parent: "보호자",
-  student: "학생(자녀)",
+  parent: "parent",
+  student: "student",
 };
 
 export async function sendWorkspaceProvisioningEmail(params: {
@@ -15,13 +15,13 @@ export async function sendWorkspaceProvisioningEmail(params: {
 
   await sendEmail({
     to: params.to,
-    subject: "[Alton Education] Google Workspace 계정이 발급되었습니다",
+    subject: "[ALTON EDUCATION] Your Google Workspace account is ready",
     html: `
-      <p>안녕하세요.</p>
-      <p>Alton Education Google Workspace 계정이 발급되었습니다: <strong>${params.workspaceEmail}</strong></p>
-      <p>먼저 <a href="https://accounts.google.com">accounts.google.com</a>에서 위 계정으로 로그인해 초기 비밀번호를 변경해주세요.</p>
-      <p>비밀번호 변경 후 <a href="${loginUrl}">여기</a>에서 "Google로 로그인"을 눌러 Alton Education 계정을 연결해주세요.</p>
-      <p>감사합니다.<br/>Alton Education</p>
+      <p>Hello,</p>
+      <p>Your ALTON EDUCATION Google Workspace account has been created: <strong>${params.workspaceEmail}</strong></p>
+      <p>First, sign in with this account at <a href="https://accounts.google.com">accounts.google.com</a> and change the temporary password.</p>
+      <p>Once your password is updated, go <a href="${loginUrl}">here</a> and choose "Sign in with Google" to link your ALTON EDUCATION account.</p>
+      <p>Thank you,<br/>ALTON EDUCATION</p>
     `,
   });
 }
@@ -37,13 +37,13 @@ export async function sendInviteEmail(params: {
 
   await sendEmail({
     to: params.to,
-    subject: "[Alton Education] 계정 초대",
+    subject: "[ALTON EDUCATION] You're invited to join",
     html: `
-      <p>안녕하세요, ${params.name}님.</p>
-      <p>Alton Education ${ROLE_LABEL[params.role]} 계정으로 초대되었습니다.</p>
-      <p><a href="${acceptUrl}">여기를 눌러 초대를 수락하세요</a></p>
-      <p>이 링크는 7일간 유효합니다. 본인이 요청하지 않았다면 이 메일을 무시하세요.</p>
-      <p>감사합니다.<br/>Alton Education</p>
+      <p>Hello ${params.name},</p>
+      <p>You've been invited to create a ${ROLE_LABEL[params.role]} account on ALTON EDUCATION.</p>
+      <p><a href="${acceptUrl}">Click here to accept your invitation</a></p>
+      <p>This link is valid for 7 days. If you weren't expecting this email, you can safely ignore it.</p>
+      <p>Thank you,<br/>ALTON EDUCATION</p>
     `,
   });
 }

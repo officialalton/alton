@@ -61,9 +61,9 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
   }
   const tzSelector = (
     <label className="block mb-3">
-      <span className="block text-[12px] font-bold text-grey-500 mb-1">표시 시간대: {displayTimezoneLabel(tz)}</span>
+      <span className="block text-[12px] font-bold text-grey-500 mb-1">Time zone: {displayTimezoneLabel(tz)}</span>
       <select
-        aria-label="표시 시간대"
+        aria-label="Time zone"
         value={tz}
         onChange={(e) => changeTimezone(e.target.value)}
         className="w-full rounded-lg border-[1.5px] border-grey-200 bg-white px-3 py-2 text-[13px] text-ink"
@@ -89,7 +89,7 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
     const to = new Date(from.getTime() + rangeDays * 24 * 60 * 60 * 1000);
     fetchSlots(from.toISOString(), to.toISOString())
       .then((rows) => setSlots(rows))
-      .catch((e) => setError(e instanceof Error ? e.message : "가능한 시간을 불러오지 못했습니다."))
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load available times."))
       .finally(() => setLoading(false));
   }, [fetchSlots, rangeDays]);
 
@@ -128,7 +128,7 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
     return (
       <div>
         {tzSelector}
-        <p className="text-[13px] text-grey-500" role="status">가능한 시간을 불러오는 중...</p>
+        <p className="text-[13px] text-grey-500" role="status">Loading available times...</p>
       </div>
     );
   }
@@ -143,7 +143,7 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
           onClick={load}
           className="text-[12.5px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5"
         >
-          다시 시도
+          Try again
         </button>
       </div>
     );
@@ -163,11 +163,11 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
         </div>
         <div data-testid="consult-slot-times">
           {!selectedDateKey ? (
-            <p className="text-[13px] text-grey-500">캘린더에서 날짜를 먼저 선택해주세요.</p>
+            <p className="text-[13px] text-grey-500">Pick a date on the calendar first.</p>
           ) : slotsForSelectedDate.length === 0 ? (
-            <p className="text-[13px] text-grey-500">선택하신 날짜에는 신청 가능한 시간이 없습니다. 다른 날짜를 선택해주세요.</p>
+            <p className="text-[13px] text-grey-500">No open times on this date. Please choose another day.</p>
           ) : (
-            <div className="flex flex-wrap gap-2" role="group" aria-label="상담 희망 시간 선택">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Choose a consultation time">
               {slotsForSelectedDate.map((s) => {
                 const isSelected = s.startsAt === selectedStartsAt;
                 return (
@@ -181,7 +181,7 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
                       (isSelected ? "bg-ink text-white border-ink" : "border-grey-200 text-ink hover:bg-grey-100")
                     }
                   >
-                    {new Intl.DateTimeFormat("ko-KR", {
+                    {new Intl.DateTimeFormat("en-US", {
                       timeZone: tz,
                       hour: "numeric",
                       minute: "2-digit",
@@ -197,8 +197,8 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
 
       {selectedStartsAt && (
         <p className="text-[13px] font-bold text-ink mt-3" data-testid="consult-slot-confirmation">
-          선택됨:{" "}
-          {new Intl.DateTimeFormat("ko-KR", {
+          Selected:{" "}
+          {new Intl.DateTimeFormat("en-US", {
             timeZone: tz,
             dateStyle: "medium",
             timeStyle: "short",

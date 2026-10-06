@@ -35,9 +35,9 @@ describe("LoginPage", () => {
   it("renders the login form", async () => {
     const { default: LoginPage } = await import("./page");
     render(await LoginPage({ searchParams: Promise.resolve({}) }));
-    expect(screen.getByRole("heading", { name: "로그인" })).toBeInTheDocument();
-    expect(screen.getByLabelText("이메일")).toBeInTheDocument();
-    expect(screen.getByLabelText("비밀번호")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Log in" })).toBeInTheDocument();
+    expect(screen.getByLabelText("Email")).toBeInTheDocument();
+    expect(screen.getByLabelText("Password")).toBeInTheDocument();
   });
 
   it("shows the error message from searchParams", async () => {
@@ -69,7 +69,7 @@ describe("LoginPage", () => {
     const { default: LoginPage } = await import("./page");
     render(await LoginPage({ searchParams: Promise.resolve({}) }));
 
-    expect(screen.getByRole("heading", { name: "로그인" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Log in" })).toBeInTheDocument();
     expect(redirectMock).not.toHaveBeenCalled();
   });
 });
