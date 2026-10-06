@@ -38,6 +38,8 @@ export const ADMIN_NAV_TAB_IDS = [
   // 메신저. 컨설턴트 서브탭은 기존 Consultants 탭 안에 있던 내부 문의를
   // 옮겨온 것(같은 테이블·같은 액션).
   "messenger",
+  // 2026-10-07 — 보존: legal hold(법적 보류)·Drive 삭제 대기열. 조회는 관리자 전원, 쓰기는 지정자·마스터(DB 함수가 최종 방어선).
+  "retention",
 ] as const;
 
 // "개발 로그"는 내비게이션에는 없지만 ?tab=devlog 직접 접근으로 열람 가능한

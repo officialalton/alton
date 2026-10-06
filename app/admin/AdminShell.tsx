@@ -39,6 +39,7 @@ import MatchingTab from "./MatchingTab";
 import type { MatchingTeacherCandidate, MatchingStudentItem } from "./matching-data";
 import WorkspaceTab from "./WorkspaceTab";
 import DocumentsTab from "./DocumentsTab";
+import RetentionTab from "./RetentionTab";
 import type { WorkspaceProvisioningItem } from "./workspace-data";
 import EntitlementLedgerTab from "./EntitlementLedgerTab";
 import type { EntitlementProductListItem, ProductVersionListItem } from "./entitlement-data";
@@ -83,6 +84,7 @@ const NAV_ITEMS = [
   { id: "consultants", label: "Consultants", icon: "consultations" },
   // 관리자 포털 정리 항목 2(2026-09-23) — Teachers/Consultants 내부 문의.
   { id: "messenger", label: "Messenger", icon: "inquiries" },
+  { id: "retention", label: "Retention", icon: "settings" },
 ] as const;
 
 // 2026-09-10(UI/UX 1차 리뷰 지적) — "개발 로그"는 일반 운영 업무 중 볼 메뉴가
@@ -246,6 +248,7 @@ export default function AdminShell({
     "documents",
     "workspace",
     "admin-accounts",
+    "retention",
   ];
   const CONTENT_IDS: TabId[] = ["catalog", "problem-bank", "mock-exam", "error-reports"];
   // 2026-09-22(관리자 계정 구조) — "Admins"는 마스터(official@alton.education)만
@@ -484,6 +487,8 @@ export default function AdminShell({
             />
           ) : activeTab === "documents" ? (
             <DocumentsTab />
+          ) : activeTab === "retention" ? (
+            <RetentionTab />
           ) : activeTab === "workspace" ? (
             <WorkspaceTab provisionings={workspaceProvisionings} />
           ) : activeTab === "admin-accounts" ? (
