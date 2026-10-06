@@ -1,0 +1,49 @@
+# Parent Notice and Consent for a Child Under 13
+
+Alton Education LLC | Effective October 6, 2026
+
+## Operator and Child
+
+ALTON provides practice tests, results and weakness analysis, a mistake notebook, vocabulary learning, approved study materials, and separately purchased tutoring. Contact official@alton.education for privacy questions and parent requests.
+
+Child legal name: ____________________
+Child date of birth: ____________________
+Parent or legal guardian name and contact: ____________________
+
+## Information and Purposes
+
+With verified parental consent, ALTON collects the child's name, account identifiers, email where used, date of birth, grade, optional school, practice attempts, answers, scores, saved questions, vocabulary progress, study notes and whiteboard work, service communications, and necessary usage and security data. These support account operation, instruction, grading, learning progress, safety, and service administration. Parent verification information is used to establish authority and consent and is not used for unrelated marketing.
+
+Registration does not guarantee operational acceptance or access before verification. ALTON obtains legally required verifiable parental consent before covered collection, use, or disclosure. Only information allowed for requesting consent or another lawful exception may be collected beforehand. Free registration does not create a tutoring contract, lesson credits, teacher assignment, or payment.
+
+## Regular-Lesson Recording and AI Processing
+
+Video Recording, Audio Recording, Transcription, and AI Lesson Notes
+
+Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded.
+
+The signing participant expressly consents to these activities for authorized regular lessons. A parent or legal guardian authorizes processing of the named child's participation within their lawful authority. ALTON provides notice before recording and obtains consent from all participants as required by applicable law. Additional attendees must receive notice and give required consent before capture begins. A parent signature does not substitute for another participant's consent. Recording must not start until the applicable agreement, required parental verification, and participant consent are complete.
+
+ALTON uses designated Google Workspace, Meet, Drive, and Gemini services and authorized providers acting for the stated purposes. Recordings, transcripts, and AI notes are stored with restricted access. Authorized teachers and staff may access them for their duties. Students and verified guardians may view lesson artifacts made available to their accounts; this does not grant unrestricted download, redistribution, or access to another family's records or private student notes and whiteboards. No public posting, unrelated advertising, sale, or unrestricted model training is authorized by this consent.
+
+ALTON keeps these records only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording.
+
+AI notes and transcripts may contain omissions, speaker errors, or inaccuracies. Corrections may be requested. AI output alone does not conclusively determine attendance, wages, fees, refunds, or disputes. Material changes receive updated notice and renewed consent when required.
+
+## Providers and Disclosure
+
+Necessary providers include Supabase for authentication and storage, Vercel for hosting, Google Workspace/Meet/Drive/Gemini for authorized lesson services, DocuSign for signatures, Stripe for payments, and the designated service-email provider. Authorized teachers and staff receive information needed for their duties. Verified linked guardians receive permitted learning results and lesson artifacts. Private personal notes and whiteboards are not generally exposed to guardians. Information is not sold or shared for targeted advertising. No disclosure unrelated to the service is authorized by this form. Information may be processed in the United States and provider processing locations, with applicable safeguards.
+
+## Parent Rights and Retention
+
+You may review your child's information, request correction or deletion, and refuse further collection or withdraw consent by contacting official@alton.education. ALTON verifies authority and responds within applicable deadlines. Withdrawal may prevent delivery of features requiring that processing but does not authorize a forfeiture of statutory rights. A 30-day account-closure workflow does not postpone privacy-request deadlines. Child information is retained only for the disclosed purposes and as legally required, then securely deleted; it is not retained indefinitely for possible future use.
+
+## Parent Authorization
+
+I am the named child's parent or legal guardian and have authority to consent. I have received this notice and the Privacy Policy. I authorize the collection, use, storage, and necessary service-provider disclosure described above. For regular paid lessons, I expressly authorize video recording, audio recording, speech-to-text transcription and storage, and AI meeting notes and summaries and their storage. This consent does not authorize recording initial consultations or trial lessons, public publication, sale, targeted advertising, or unrelated disclosures.
+
+Parent signature: ____________________  Date: __________
+Child/account reference: ____________________
+Consent version: U13-EN-2026-10-06
+
+ALTON completes the applicable parental verification process before enabling covered collection. Signing this form alone does not bypass that process.
