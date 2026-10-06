@@ -19,7 +19,7 @@ export function makeExtScene(rng: Rng, o: { rMin?: number; rMax?: number } = {})
   const rem = ([0, 1, 2].filter((i) => i !== at)) as [number, number];
   for (let tr = 0; tr < 200; tr++) {
     const r0 = rng.int(o.rMin ?? 36, o.rMax ?? 80), r1 = rng.int(o.rMin ?? 36, o.rMax ?? 80); const outer = r0 + r1; const inner = 180 - outer;
-    if (r0 === r1 || inner < 20 || inner > 100) continue;
+    if (r0 === r1 || inner < 20 || inner > 100 || inner === 90) continue;
     return { v, at, from, rem, end, r: [r0, r1], inner, outer };
   }
   throw new GenFail("바깥각 장면 표집 실패");
