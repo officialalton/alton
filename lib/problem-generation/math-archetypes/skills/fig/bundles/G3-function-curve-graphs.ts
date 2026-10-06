@@ -25,6 +25,12 @@ import { ITEM as ssLN } from "../items/systems_linear.substitution_solve.LN.P";
 import { ITEM as ssEV } from "../items/systems_linear.elimination_value.LN.P";
 import { ITEM as ssPN } from "../items/systems_linear.param_no_solution.LN.P";
 import { ITEM as ssWS } from "../items/systems_linear.word_system.LN.P";
+import { ITEM as rruP } from "../items/ratios_rates_units.proportion.LN.P";
+import { ITEM as rruC } from "../items/ratios_rates_units.chained_conversion.LN.P";
+import { ITEM as leoW } from "../items/linear_equations_one_var.word_problem_translate.LN.P";
+import { ITEM as nfEM } from "../items/nonlinear_functions.exponential_model.FN.P";
+import { ITEM as pcFN } from "../items/percentages.compound_change.FN.P";
+import { ITEM as nfEL } from "../items/nonlinear_functions.exponential_vs_linear_growth.FN.P";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL];
 
