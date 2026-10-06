@@ -90,3 +90,4 @@ FAMILY_KIT.SL = [`${AR}/skills/fig/sl-kit.ts`];
 FAMILY_KIT.PI = [`${AR}/skills/fig/pi-kit.ts`];
 FAMILY_KIT.NL = [`${AR}/skills/fig/nl-kit.ts`];
 FAMILY_KIT.FO = [`${AR}/skills/fig/fo-kit.ts`];
+FAMILY_KIT.SB = [`${AR}/skills/fig/sb-kit.ts`];
