@@ -3,6 +3,8 @@ import { Icon } from "./landing-icons";
 import { CtaButton, Eyebrow, PublicFooter, PublicHeader, SplitTitle, sentenceCase } from "./components/public/PublicShell";
 import { publicFontClass } from "./components/public/fonts";
 import { heroHeadline } from "@/lib/landing/claims";
+import DirectorPortrait from "./components/public/DirectorPortrait";
+import { DIRECTOR, DIRECTOR_INTERVIEW } from "@/lib/landing/director";
 import { EXPERT, FAQ, FEATURES, FINAL_CTA, HERO, NEXT_STEP } from "@/lib/landing/copy";
 import type { LandingDestinations } from "@/lib/landing/cta";
 
@@ -134,6 +136,15 @@ export default function LandingView({ dest }: { dest: LandingDestinations }) {
               <h2 className="p-h2"><SplitTitle text={EXPERT.title} /></h2>
               <p className="p-lede">{EXPERT.body}</p>
               <p className="p-body">{EXPERT.experience}</p>
+              <a href={`#${DIRECTOR.anchor}`} className="p-advisor">
+                <DirectorPortrait />
+                <span className="flex flex-col gap-1">
+                  <span className="p-label">{DIRECTOR.advisorLabel}</span>
+                  <strong className="text-[16px]">{DIRECTOR.name}</strong>
+                  <span className="text-[14px] leading-[1.5] text-[var(--p-slate)]">{DIRECTOR.advisorLine}</span>
+                  <span className="p-link text-[14px]">{DIRECTOR.advisorLink} <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {EXPERT.cards.map((c, i) => (
@@ -147,6 +158,34 @@ export default function LandingView({ dest }: { dest: LandingDestinations }) {
             <div className="flex flex-col sm:flex-row gap-3">
               <CtaButton href={dest.premium} ctaName="premium" section="expert">{EXPERT.premiumCta}</CtaButton>
               <CtaButton href={dest.consult} ctaName="consult" section="expert" variant="secondary">{EXPERT.consultCta}</CtaButton>
+            </div>
+          </div>
+        </section>
+
+        {/* Meet Chrisy Kim (paper) */}
+        <section id={DIRECTOR.anchor} className="p-section scroll-mt-20">
+          <div className="p-wrap grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
+            <div className="flex flex-col gap-6 max-w-[380px]">
+              <DirectorPortrait />
+              <div className="flex flex-col gap-2">
+                <strong className="p-h3">{DIRECTOR.name}</strong>
+                <span className="p-label">{DIRECTOR.title}</span>
+                <p className="p-body">{DIRECTOR.credential}</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-6">
+                <Eyebrow>{DIRECTOR.eyebrow}</Eyebrow>
+                <h2 className="p-h2">Meet <em>Chrisy Kim</em></h2>
+              </div>
+              <div className="p-qa">
+                {DIRECTOR_INTERVIEW.map((x) => (
+                  <div key={x.q}>
+                    <h3>{x.q}</h3>
+                    <p className="p-body">{x.a}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
