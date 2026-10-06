@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:20:00Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "2d60cce3aaedc989c9f076e4b0d39875abdb6ec5044b4f8c0800477ff4e2c567",
+ "codeHash": "b09849031ed98d4509ab97ad6749126146069479dc2e89383aa52d3b4e19563d",
  "samples": [
   "linear_inequalities.inequality_from_graph.LN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "순수 함수 그래프(축 제목 x·y): 표시점이 곡선·직선 위, 곡선 라벨은 지문이 가리킬 때만. 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판(^, \\\\sqrt 는 앱에서 KaTeX)."
+ "notes": "순수 함수 그래프(축 제목 x·y): 표시점이 곡선·직선 위, 곡선 라벨은 지문이 가리킬 때만. 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판(^, \\\\sqrt 는 앱에서 KaTeX). 렌더러가 곡선·직선에 가려지는 눈금 숫자에 흰 테두리를 둘러 다시 그린다(2026-10-06)."
 }

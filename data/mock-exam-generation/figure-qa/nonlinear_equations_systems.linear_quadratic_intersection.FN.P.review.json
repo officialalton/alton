@@ -3,7 +3,7 @@
  "verdict": "defect",
  "reviewedAt": "2026-10-06T08:20:00Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "31295090aa33ccfb966d03f79b81711369f654981af2275680ab0be009a652ce",
+ "codeHash": "20da5474b536c6dbbddb43ab90650eb1ee2bfdafc98892e86872df742fe79cfe",
  "samples": [
   "nonlinear_equations_systems.linear_quadratic_intersection.FN.P.png"
  ],
@@ -22,7 +22,7 @@
   {
    "sample": "nonlinear_equations_systems.linear_quadratic_intersection.FN.P.png",
    "check": "labels_placed_and_legible",
-   "description": "가파른 직선이 원점 'O'·눈금 숫자 '-4', '-8' 을 가린다"
+   "description": "가파른 직선이 원점 'O' 라벨을 가린다(눈금 숫자는 렌더러 흰 테두리로 읽힘)"
   }
  ],
  "notes": "순수 함수 그래프(축 제목 x·y): 표시점이 곡선·직선 위, 곡선 라벨은 지문이 가리킬 때만. 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판(^, \\\\sqrt 는 앱에서 KaTeX)."

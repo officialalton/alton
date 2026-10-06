@@ -292,8 +292,11 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
   const ex = every(xs.length), ey = every(ys.length);
   // 눈금 숫자는 (간격 × 건너뛰기) 의 배수에만 — 인덱스 기준이면 -8, -5, -2, 1 … 처럼 0 을 지나지 않는 숫자가 나온다(E2E 실례).
   const onGrid = (v: number, unit: number) => Math.abs(v / unit - Math.round(v / unit)) < 1e-9;
-  xs.forEach((x) => { if (Math.abs(x - axX) > 1e-9 && onGrid(x, xStep * ex)) sheet.raw(`<text x="${f(sx(x))}" y="${f(sy(axY) + 15)}" font-family="${FONT}" font-size="12" text-anchor="middle" fill="#111">${f(x)}</text>`); });
-  ys.forEach((y) => { if (Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)) sheet.raw(`<text x="${f(sx(axX) - 6)}" y="${f(sy(y) + 4)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111">${f(y)}</text>`); });
+  // 눈금 숫자는 위치를 기록해 두었다가, 곡선·직선과 겹치는 숫자만 객체를 그린 뒤 비켜 놓는다(겹치지 않으면 출력 불변).
+  const tickLabels: { idx: number; x: number; y: number; t: string; anchor: "middle" | "end"; side: "x" | "y" }[] = [];
+  const tickSvg = (x: number, y: number, t: string, anchor: "middle" | "end") => `<text x="${f(x)}" y="${f(y)}" font-family="${FONT}" font-size="12" text-anchor="${anchor}" fill="#111">${t}</text>`;
+  xs.forEach((x) => { if (Math.abs(x - axX) > 1e-9 && onGrid(x, xStep * ex)) { tickLabels.push({ idx: sheet.out.length, x: sx(x), y: sy(axY) + 15, t: f(x), anchor: "middle", side: "x" }); sheet.raw(tickSvg(sx(x), sy(axY) + 15, f(x), "middle")); } });
+  ys.forEach((y) => { if (Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)) { tickLabels.push({ idx: sheet.out.length, x: sx(axX) - 6, y: sy(y) + 4, t: f(y), anchor: "end", side: "y" }); sheet.raw(tickSvg(sx(axX) - 6, sy(y) + 4, f(y), "end")); } });
   if (axX === 0 && axY === 0) sheet.raw(`<text x="${f(sx(0) - 5)}" y="${f(sy(0) + 14)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111" font-style="italic">O</text>`);
   sheet.raw(`<text data-axis-name="x" x="${f(sx(ax.max) + 9)}" y="${f(sy(axY) + 4.5)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="start" fill="#111">${ax.label ?? "x"}</text>`);
   sheet.raw(`<text data-axis-name="y" x="${f(sx(axX))}" y="${f(sy(ay.max) - 10)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="middle" fill="#111">${ay.label ?? "y"}</text>`);
@@ -508,6 +511,20 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
     if (o.label) labelJobs.push({ text: o.label, anchor: p, color, what: `점 ${o.id} 라벨`, prefer: around(p, 15) });
     altParts.push(`점 ${o.label ?? o.id} (${x}, ${y})`);
   });
+  // ---- 눈금 숫자가 곡선·직선에 가려지면 그 숫자만 비켜 놓는다(렌더러 규칙 — 겹침이 없으면 아무것도 바꾸지 않는다).
+  {
+    const segs = (sheet as unknown as { segments: [Pt, Pt][] }).segments.slice(2); // 앞의 둘은 두 축
+    const boxOf = (l: { x: number; y: number; t: string; anchor: "middle" | "end" }): [number, number, number, number] => { const w = labelWidth(l.t, 12); const x0 = l.anchor === "middle" ? l.x - w / 2 : l.x - w; return [x0 - 1.5, l.y - 10.5, x0 + w + 1.5, l.y + 3.5]; };
+    const hits = (b: [number, number, number, number]) => segs.some(([p, q]) => { const n = Math.max(2, Math.ceil(Math.hypot(q[0] - p[0], q[1] - p[1]) / 2)); for (let i = 0; i <= n; i++) { const x = p[0] + ((q[0] - p[0]) * i) / n, y = p[1] + ((q[1] - p[1]) * i) / n; if (x >= b[0] && x <= b[2] && y >= b[1] && y <= b[3]) return true; } return false; });
+    // 곡선·직선에 가려지는 눈금 숫자는 제자리에서 흰 테두리를 두르고 객체 위에 다시 그린다(눈금 옆 자리는 그대로라 어느 눈금인지 헷갈리지 않는다).
+    const late: string[] = [];
+    for (const l of tickLabels) {
+      if (!hits(boxOf(l))) continue;
+      sheet.out[l.idx] = "";
+      late.push(`<text x="${f(l.x)}" y="${f(l.y)}" font-family="${FONT}" font-size="12" text-anchor="${l.anchor}" fill="#111" stroke="#fff" stroke-width="3.2" stroke-linejoin="round" paint-order="stroke">${l.t}</text>`);
+    }
+    for (const t of late) sheet.raw(t);
+  }
   for (const job of labelJobs) {
     const spot = sheet.firstFree(job.prefer, job.text, 13); // label() 이 그리는 크기(13)와 같은 상자로 본다
     if (!spot) { issues.push({ code: "label_collision", message: `${job.what} '${job.text}' 를 겹치지 않게 놓을 자리가 없습니다 — 축 범위를 넓히거나 라벨을 줄이세요.` }); continue; }

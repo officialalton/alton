@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:20:00Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "2c9d4527e3fd6a73dec4f69a1b76ab80b8b289477d86ebfa682cd6c8acc966f4",
+ "codeHash": "11eabf9d7e9aabbf1ebb0fa7c58a90475ac8a99125fd0f4d0b4bf2f1668a80f5",
  "samples": [
   "nonlinear_equations_systems.num_real_solutions.FN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "순수 함수 그래프(축 제목 x·y): 표시점이 곡선·직선 위, 곡선 라벨은 지문이 가리킬 때만. 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판(^, \\\\sqrt 는 앱에서 KaTeX)."
+ "notes": "순수 함수 그래프(축 제목 x·y): 표시점이 곡선·직선 위, 곡선 라벨은 지문이 가리킬 때만. 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판(^, \\\\sqrt 는 앱에서 KaTeX). 렌더러가 곡선·직선에 가려지는 눈금 숫자에 흰 테두리를 둘러 다시 그린다(2026-10-06)."
 }
