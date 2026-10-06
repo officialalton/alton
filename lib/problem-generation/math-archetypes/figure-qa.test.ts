@@ -131,3 +131,20 @@ describe("표 계열(1단계): 일반 표·문장형 자료의 구조 검사와 
     const cellOnly = { ...i0, figure: tamperFigure(i0.figure, "cell") }; expect(JSON.stringify(cellOnly.figure)).not.toBe(JSON.stringify(i0.figure));
   });
 });
+
+describe("그래프 계열(G 묶음): 좌표평면 직선(line)의 비율 충실도 검사와 변조", () => {
+  const spec = { type: "plane", axes: { x: { min: 0, max: 10, step: 2, title: "Time (hours)" }, y: { min: 0, max: 60, step: 10, title: "Cost (dollars)" } }, objects: [{ id: "L1", kind: "line", through: [[0, 20], [10, 50]] }, { id: "L2", kind: "line", through: [[0, 50], [10, 10]] }] } as Spec;
+  const svg = renderFigureSvg(spec as unknown as FigureSpec);
+  it("원본 두 직선은 통과", () => expect(checkRenderedFigure(spec, svg)).toEqual([]));
+  it("(a) 한 직선의 끝점을 위로 옮겨 그리면(기울기 불일치) line_mismatch", () => {
+    const bad = svg.replace(/(<polyline points="[^"]+ )([\d.]+),([\d.]+)(" fill="none" stroke="#111")/, (_m, a, x, y, c) => `${a}${x},${Number(y) - 30}${c}`);
+    expect(bad).not.toBe(svg); expect(codes(checkRenderedFigure(spec, bad))).toContain("line_mismatch");
+  });
+  it("(d) 직선이 그려지지 않으면 render_empty", () => {
+    const bad = svg.replace(/<polyline points="[^"]+" fill="none" stroke="#C8102E"[^>]*\/>/, "");
+    expect(bad).not.toBe(svg); expect(codes(checkRenderedFigure(spec, bad))).toContain("render_empty");
+  });
+  it("자료 변조: 직선 좌표(through)도 변조 대상이다(DATA_KEYS)", () => {
+    const mut = tamperFigure(spec, "add") as Spec; expect(JSON.stringify(mut)).not.toBe(JSON.stringify(spec));
+  });
+});

@@ -129,6 +129,21 @@ function checkPlaneScatter(spec: Spec, svg: string, issues: QaIssue[]) {
   checkScatterFidelity({ type: "data", kind: "scatter", points: obj.points, fitLine: obj.fitLine } as unknown as Spec, svg, issues);
 }
 
+/** 좌표평면의 직선 객체(line): 그려진 선분의 두 끝이 눈금 기준으로 데이터의 직선 y = mx + b 위에 있는가. 색은 객체 순서(엔진의 COLORS)를 따른다. */
+const PLANE_COLORS = ["#111", "#C8102E", "#1B6FB0", "#0f7b4a"];
+function checkPlaneLines(spec: Spec, svg: string, issues: QaIssue[]) {
+  const objs = spec.objects as { kind: string; through?: unknown[]; slope?: number; intercept?: number }[]; const lns = objs.map((o, i) => ({ o, i })).filter(({ o }) => o.kind === "line");
+  if (!lns.length) return; const sc = readScale(svg); if (!sc.x || !sc.y) return; const pls = polylines(svg);
+  for (const { o, i } of lns) {
+    let m: number, b: number;
+    if (Array.isArray(o.through) && o.through.length === 2 && o.through.every((p) => Array.isArray(p) && p.length === 2)) { const [p, q] = o.through as [number, number][]; if (p[0] === q[0]) continue; m = (q[1] - p[1]) / (q[0] - p[0]); b = p[1] - m * p[0]; }
+    else if (typeof o.slope === "number" && typeof o.intercept === "number") { m = o.slope; b = o.intercept; } else continue;
+    const pl = pls.find((q) => q.stroke === PLANE_COLORS[i % 4] && q.pts.length === 2);
+    if (!pl) { issues.push({ code: "render_empty", message: `직선 ${i + 1}번이 그려지지 않았습니다.` }); continue; }
+    for (const [pxx, pyy] of pl.pts) { const x = sc.x.a * pxx + sc.x.b, y = sc.y.a * pyy + sc.y.b; if (Math.abs(y - (m * x + b)) > Math.abs(sc.y.a) * 1.5) { issues.push({ code: "line_mismatch", message: `직선 ${i + 1}번의 끝점 (${x.toFixed(1)}, ${y.toFixed(1)}) 이 데이터의 직선 y = ${m}x + ${b} 위에 있지 않습니다(기울기·절편 불일치).` }); break; } }
+  }
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -138,7 +153,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "statement") { checkStatement(spec, markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "scatter") { checkAxes(spec, markup, issues, false); checkScatterFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "line") { checkAxes({ ...spec, xTitle: spec.xTitle, yTitle: spec.yTitle }, markup, issues, false); checkLineChartFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
-  if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkPlaneLines(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   return issues;
 }
 

@@ -4,5 +4,7 @@ import { ITEM as lfEvaluate } from "../items/linear_functions.evaluate.LN.P";
 import { ITEM as lfFindX } from "../items/linear_functions.find_x_for_value.LN.P";
 import { ITEM as lfSlope } from "../items/linear_functions.slope_from_two_points.LN.P";
 import { ITEM as lfInterpSlope } from "../items/linear_functions.interpret_slope.LN.P";
+import { ITEM as lfInterpIntercept } from "../items/linear_functions.interpret_intercept.LN.P";
+import { ITEM as lfConstruct } from "../items/linear_functions.construct_equation_from_graph.LN.P";
 
-export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope];
+export const BUNDLE: LArch[] = [...lfEvaluate, ...lfFindX, ...lfSlope, ...lfInterpSlope, ...lfInterpIntercept, ...lfConstruct];
