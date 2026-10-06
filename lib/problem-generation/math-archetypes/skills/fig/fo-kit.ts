@@ -11,18 +11,18 @@ import { gInst } from "./graph-kit";
 import { renderFreqChart, type FreqChartSpec } from "@/lib/problem-figures/templates/freq-chart";
 
 const f = fmtNum;
-export type FoTopic = { what: string; ent: string; where: string; unit: string; xName: string; lo0: number[]; w: number[] };
+export type FoTopic = { ph: string; what: string; ent: string; where: string; unit: string; xName: string; lo0: number[]; w: number[] };
 export const FO_TOPICS: FoTopic[] = [
-  { what: "scores on a math test", ent: "students", where: "in a class", unit: "points", xName: "Test score", lo0: [20, 30, 40, 50], w: [10] },
-  { what: "times to finish a race", ent: "runners", where: "in a city race", unit: "minutes", xName: "Finish time", lo0: [20, 30, 40], w: [5, 10] },
-  { what: "weights of packages", ent: "packages", where: "at a shipping center", unit: "pounds", xName: "Package weight", lo0: [0, 10, 20], w: [5, 10] },
-  { what: "daily numbers of visitors", ent: "days", where: "at a museum", unit: "visitors", xName: "Daily visitors", lo0: [100, 200, 300], w: [50, 100] },
-  { what: "heights of plants", ent: "plants", where: "in a greenhouse", unit: "centimeters", xName: "Plant height", lo0: [10, 20, 30], w: [5, 10] },
-  { what: "lengths of phone calls", ent: "calls", where: "at a help desk", unit: "minutes", xName: "Call length", lo0: [0, 5, 10], w: [5, 10] },
-  { what: "waiting times for appointments", ent: "patients", where: "at a clinic", unit: "minutes", xName: "Waiting time", lo0: [0, 10, 20], w: [10, 20] },
-  { what: "distances jumped in a contest", ent: "athletes", where: "in a school meet", unit: "inches", xName: "Jump distance", lo0: [60, 80, 100], w: [10, 20] },
-  { what: "battery lives", ent: "phones", where: "in a product test", unit: "hours", xName: "Battery life", lo0: [10, 20, 30], w: [5, 10] },
-  { what: "monthly electricity bills", ent: "households", where: "in a neighborhood", unit: "dollars", xName: "Monthly bill", lo0: [40, 60, 80], w: [20] },
+  { ph: "the scores on a math test for students in a class", what: "scores on a math test", ent: "students", where: "in a class", unit: "points", xName: "Test score", lo0: [20, 30, 40, 50], w: [10] },
+  { ph: "the times to finish a city race for runners", what: "times to finish a race", ent: "runners", where: "in a city race", unit: "minutes", xName: "Finish time", lo0: [20, 30, 40], w: [5, 10] },
+  { ph: "the weights of packages at a shipping center", what: "weights of packages", ent: "packages", where: "at a shipping center", unit: "pounds", xName: "Package weight", lo0: [0, 10, 20], w: [5, 10] },
+  { ph: "the daily numbers of visitors at a museum", what: "daily numbers of visitors", ent: "days", where: "at a museum", unit: "visitors", xName: "Daily visitors", lo0: [100, 200, 300], w: [50, 100] },
+  { ph: "the heights of plants in a greenhouse", what: "heights of plants", ent: "plants", where: "in a greenhouse", unit: "centimeters", xName: "Plant height", lo0: [10, 20, 30], w: [5, 10] },
+  { ph: "the lengths of phone calls at a help desk", what: "lengths of phone calls", ent: "calls", where: "at a help desk", unit: "minutes", xName: "Call length", lo0: [0, 5, 10], w: [5, 10] },
+  { ph: "the waiting times for patients at a clinic", what: "waiting times for appointments", ent: "patients", where: "at a clinic", unit: "minutes", xName: "Waiting time", lo0: [0, 10, 20], w: [10, 20] },
+  { ph: "the distances jumped by athletes in a school meet", what: "distances jumped in a contest", ent: "athletes", where: "in a school meet", unit: "inches", xName: "Jump distance", lo0: [60, 80, 100], w: [10, 20] },
+  { ph: "the battery lives of phones in a product test", what: "battery lives", ent: "phones", where: "in a product test", unit: "hours", xName: "Battery life", lo0: [10, 20, 30], w: [5, 10] },
+  { ph: "the monthly electricity bills of households in a neighborhood", what: "monthly electricity bills", ent: "households", where: "in a neighborhood", unit: "dollars", xName: "Monthly bill", lo0: [40, 60, 80], w: [20] },
 ];
 export type FoScene = { t: FoTopic; bins: { from: number; to: number; count: number }[]; N: number; u: number; w: number; cum: number[]; mids: number[]; fig: FreqChartSpec; kind: "polygon" | "ogive"; percent: boolean };
 const partitions = (rng: Rng, k: number): number[] => { for (let t = 0; t < 200; t++) { const c = Array.from({ length: k }, () => 1); let left = 10 - k; while (left > 0) { c[rng.int(0, k - 1)]++; left--; } if (Math.max(...c) <= 5) return c; } throw new GenFail("분할"); };
@@ -44,10 +44,10 @@ export const LEADS = [
 ];
 const KIND_NAME = { polygon: "frequency polygon", ogive: "cumulative frequency graph" } as const;
 export const foIntro = (rng: Rng, s: FoScene) => { const g = s.kind === "ogive" && s.percent ? "cumulative percent graph" : KIND_NAME[s.kind]; return rng.pick([
-  `The ${g} shown summarizes the ${s.t.what} for ${s.t.ent} ${s.t.where}. The data are grouped into classes of width ${s.w}.`,
-  `A ${g} is shown for the ${s.t.what} of ${s.t.ent} ${s.t.where}, with every class ${s.w} ${s.t.unit} wide.`,
-  `The ${s.t.what} for a group of ${s.t.ent} ${s.t.where} are grouped into classes ${s.w} ${s.t.unit} wide and displayed in the ${g} shown.`,
-  `In the ${g} shown, the ${s.t.what} for ${s.t.ent} ${s.t.where} are organized into equal classes of width ${s.w}.`,
+  `The ${g} shown summarizes ${s.t.ph}. The data are grouped into classes of width ${s.w}.`,
+  `A ${g} is shown for ${s.t.ph}, with every class ${s.w} ${s.t.unit} wide.`,
+  `${s.t.ph.charAt(0).toUpperCase() + s.t.ph.slice(1)} are grouped into classes ${s.w} ${s.t.unit} wide and displayed in the ${g} shown.`,
+  `In the ${g} shown, ${s.t.ph} are organized into equal classes of width ${s.w}.`,
 ]); };
 export const foRead = (s: FoScene): [string, string] => [s.kind === "polygon" ? `도수다각형에서 계급별 도수를 읽는다: ${s.bins.map((b) => `${b.from}~${b.to}: ${b.count}`).join(", ")} — 전체 ${s.N}.` : s.percent ? `누적 상대도수 그래프에서 각 경계의 누적 %를 읽는다: ${s.bins.map((b, i) => `${b.to}: ${s.cum[i] * 10 / s.u}%`).join(", ")}.` : `누적도수 그래프에서 각 경계의 누적 도수를 읽는다: ${s.bins.map((b, i) => `${b.to}: ${s.cum[i]}`).join(", ")}.`, "Read the values from the graph."];
 const pos = (ws: ReturnType<typeof W>[]) => ws.filter((w) => w.v >= 0);

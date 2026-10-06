@@ -1,0 +1,43 @@
+{
+ "itemId": "percentages.find_whole.PI.P",
+ "generatedAt": "2026-10-06T07:57:46.345Z",
+ "codeHash": "37bb92323b57c7a33474f998c5e42dd6c2b101420b193e0e63f887fc4ad6aaef",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/pie.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.find_whole.PI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pi-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.find_whole.PI.P.png",
+   "mobileFile": "percentages.find_whole.PI.P.m375.png",
+   "archetypeId": "pct.find_whole.PI.P.inverse",
+   "seed": 11,
+   "signature": "pie",
+   "stimulus": "In the pie chart shown, each section represents one category of the main way the employees of a company travel to work. The size of each section is labeled as a percent of the whole. 192 of the employees are in the category \"Car\". The pie chart contains the data needed for this question.",
+   "question": "How many of the employees are in the categories \"Bicycle\" and \"Carpool\" combined?",
+   "options": [
+    "480",
+    "192",
+    "288",
+    "232"
+   ],
+   "correctIndex": 1,
+   "answer": "192",
+   "explanation": "(1) 원그래프에서 각 부채꼴의 값을 읽는다: Train 20%, Carpool 10%, Car 40%, Bicycle 30%. (2) Car 는 40% 이고 192 이다. (3) 전체 = 192 ÷ 0.4 = 480 이다. (4) Bicycle + Carpool = 40% 이다. (5) 480 × 0.4 = 192 이다. (6) 따라서 답은 192 이다. 따라서 정답은 192이다.",
+   "structuralIssues": []
+  }
+ ]
+}

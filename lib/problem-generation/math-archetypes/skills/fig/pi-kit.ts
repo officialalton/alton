@@ -263,10 +263,10 @@ export const sectorAreaItem = () => defineItem({
 // ───────────────────────── probability.spinner_expected_value.PI.P ─────────────────────────
 const PRIZES = [0, 1, 2, 3, 5, 8, 10, 15, 20, 25, 50];
 const SP_TOPICS = [
-  { game: "a carnival game", where: "at a school carnival", title: "Carnival spinner" }, { game: "an arcade game", where: "in a game room", title: "Arcade spinner" }, { game: "a classroom reward game", where: "in a math class", title: "Reward spinner" },
-  { game: "a fundraiser game", where: "at a charity event", title: "Fundraiser spinner" }, { game: "a board game", where: "on family game night", title: "Board game spinner" }, { game: "a quiz-show game", where: "on a school radio show", title: "Quiz show spinner" },
-  { game: "a county fair game", where: "at a county fair", title: "Fair spinner" }, { game: "a library reading game", where: "during a reading week", title: "Reading spinner" }, { game: "a science museum game", where: "at a science museum", title: "Museum spinner" },
-  { game: "a video-game bonus wheel", where: "in a puzzle app", title: "Bonus wheel" }, { game: "a pep rally game", where: "at a pep rally", title: "Rally spinner" }, { game: "a bake sale game", where: "at a bake sale", title: "Bake sale spinner" },
+  { game: "a prize game", where: "at a school carnival", title: "Carnival spinner" }, { game: "a points game", where: "in a game room", title: "Arcade spinner" }, { game: "a reward game", where: "in a math class", title: "Reward spinner" },
+  { game: "a prize game", where: "at a charity event", title: "Fundraiser spinner" }, { game: "a points game", where: "on family game night", title: "Board game spinner" }, { game: "a reward game", where: "on a school radio show", title: "Quiz show spinner" },
+  { game: "a prize game", where: "at a county fair", title: "Fair spinner" }, { game: "a points game", where: "during a reading week", title: "Reading spinner" }, { game: "a reward game", where: "at a science museum", title: "Museum spinner" },
+  { game: "a prize game", where: "in a puzzle app", title: "Bonus wheel" }, { game: "a points game", where: "at a pep rally", title: "Rally spinner" }, { game: "a reward game", where: "at a bake sale", title: "Bake sale spinner" },
 ];
 type SpScene = { t: (typeof SP_TOPICS)[number]; names: string[]; pct: number[]; vals: number[]; k: number; fig: PieSpec; ev: number };
 function makeSpinner(rng: Rng): SpScene {

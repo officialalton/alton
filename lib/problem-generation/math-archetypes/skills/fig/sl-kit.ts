@@ -9,26 +9,26 @@ import { figJs } from "../../figure-kit";
 import { defineItem, type HardDef, type EmDef } from "./item-kit";
 import { gInst } from "./graph-kit";
 
-export type SlTopic = { what: string; ent: string; where: string; unit: string; title: string; lo: number; hi: number; decUnit?: string };
+export type SlTopic = { ph: string; what: string; ent: string; where: string; unit: string; title: string; lo: number; hi: number; decUnit?: string };
 export const SL_TOPICS: SlTopic[] = [
-  { what: "times to finish a puzzle", ent: "players", where: "in a game club", unit: "minutes", title: "Puzzle times", lo: 1, hi: 6 },
-  { what: "scores on a quiz", ent: "students", where: "in a class", unit: "points", title: "Quiz scores", lo: 4, hi: 9 },
-  { what: "ages of the members", ent: "members", where: "of a hiking club", unit: "years", title: "Member ages", lo: 2, hi: 7 },
-  { what: "number of customers each day", ent: "days", where: "at a cafe", unit: "customers", title: "Daily customers", lo: 2, hi: 8 },
-  { what: "lengths of phone calls", ent: "calls", where: "at a help desk", unit: "minutes", title: "Call lengths", lo: 1, hi: 6 },
-  { what: "heights of plants", ent: "plants", where: "in a greenhouse", unit: "centimeters", title: "Plant heights", lo: 2, hi: 8 },
-  { what: "weights of packages", ent: "packages", where: "at a shipping center", unit: "pounds", title: "Package weights", lo: 1, hi: 6 },
-  { what: "number of pages read each week", ent: "weeks", where: "by a reader", unit: "pages", title: "Pages read", lo: 3, hi: 8 },
-  { what: "waiting times for appointments", ent: "patients", where: "at a clinic", unit: "minutes", title: "Waiting times", lo: 1, hi: 6 },
-  { what: "distances jumped in a contest", ent: "athletes", where: "in a school meet", unit: "inches", title: "Jump distances", lo: 3, hi: 8 },
-  { what: "number of emails received each day", ent: "days", where: "by an office", unit: "emails", title: "Daily emails", lo: 2, hi: 7 },
-  { what: "battery lives", ent: "phones", where: "in a product test", unit: "hours", title: "Battery lives", lo: 2, hi: 7 },
+  { ph: "the times to finish a puzzle for players in a game club", what: "times to finish a puzzle", ent: "players", where: "in a game club", unit: "minutes", title: "Puzzle times", lo: 1, hi: 6 },
+  { ph: "the scores on a quiz for students in a class", what: "scores on a quiz", ent: "students", where: "in a class", unit: "points", title: "Quiz scores", lo: 4, hi: 9 },
+  { ph: "the ages of the members of a hiking club", what: "ages of the members", ent: "members", where: "of a hiking club", unit: "years", title: "Member ages", lo: 2, hi: 7 },
+  { ph: "the number of customers each day at a cafe", what: "number of customers each day", ent: "days", where: "at a cafe", unit: "customers", title: "Daily customers", lo: 2, hi: 8 },
+  { ph: "the lengths of phone calls at a help desk", what: "lengths of phone calls", ent: "calls", where: "at a help desk", unit: "minutes", title: "Call lengths", lo: 1, hi: 6 },
+  { ph: "the heights of plants in a greenhouse", what: "heights of plants", ent: "plants", where: "in a greenhouse", unit: "centimeters", title: "Plant heights", lo: 2, hi: 8 },
+  { ph: "the weights of packages at a shipping center", what: "weights of packages", ent: "packages", where: "at a shipping center", unit: "pounds", title: "Package weights", lo: 1, hi: 6 },
+  { ph: "the number of pages read each week by a reader", what: "number of pages read each week", ent: "weeks", where: "by a reader", unit: "pages", title: "Pages read", lo: 3, hi: 8 },
+  { ph: "the waiting times for patients at a clinic", what: "waiting times for appointments", ent: "patients", where: "at a clinic", unit: "minutes", title: "Waiting times", lo: 1, hi: 6 },
+  { ph: "the distances jumped by athletes in a school meet", what: "distances jumped in a contest", ent: "athletes", where: "in a school meet", unit: "inches", title: "Jump distances", lo: 3, hi: 8 },
+  { ph: "the number of emails received each day by an office", what: "number of emails received each day", ent: "days", where: "by an office", unit: "emails", title: "Daily emails", lo: 2, hi: 7 },
+  { ph: "the battery lives of phones in a product test", what: "battery lives", ent: "phones", where: "in a product test", unit: "hours", title: "Battery lives", lo: 2, hi: 7 },
 ];
 export const SL_DEC_TOPICS: SlTopic[] = [
-  { what: "masses of rock samples", ent: "samples", where: "from a quarry", unit: "kilograms", title: "Sample masses", lo: 1, hi: 8 },
-  { what: "lengths of leaves", ent: "leaves", where: "from one tree", unit: "inches", title: "Leaf lengths", lo: 1, hi: 8 },
-  { what: "rainfall amounts", ent: "days", where: "in a rainy month", unit: "centimeters", title: "Daily rainfall", lo: 1, hi: 8 },
-  { what: "race times", ent: "runners", where: "in a sprint", unit: "seconds", title: "Race times", lo: 1, hi: 8 },
+  { ph: "the masses of rock samples from a quarry", what: "masses of rock samples", ent: "samples", where: "from a quarry", unit: "kilograms", title: "Sample masses", lo: 1, hi: 8 },
+  { ph: "the lengths of leaves from one tree", what: "lengths of leaves", ent: "leaves", where: "from one tree", unit: "inches", title: "Leaf lengths", lo: 1, hi: 8 },
+  { ph: "the amounts of rainfall on days in a rainy month", what: "rainfall amounts", ent: "days", where: "in a rainy month", unit: "centimeters", title: "Daily rainfall", lo: 1, hi: 8 },
+  { ph: "the race times of runners in a sprint", what: "race times", ent: "runners", where: "in a sprint", unit: "seconds", title: "Race times", lo: 1, hi: 8 },
 ];
 
 export type SlScene = { t: SlTopic; vals: number[]; n: number; unit10: 10 | 1; fig: { type: "stem_leaf"; title: string; stemUnit: 10 | 1; unit: string; stems: { stem: number; leaves: number[] }[] } };
@@ -63,15 +63,16 @@ export function makeSL(rng: Rng, o: SlOpts = {}): SlScene {
 }
 export const SL_JS = "const v=[]; for (const r of FIGURE.stems) for (const l of r.leaves) v.push(Math.round((r.stem*FIGURE.stemUnit + l*FIGURE.stemUnit/10)*10)/10); v.sort((a,b)=>a-b); const n=v.length, sv=v; const r6=(x)=>Math.round(x*1e6)/1e6; const S=r6(v.reduce((a,b)=>a+b,0)); const med=(a)=>{ a=[...a].sort((x,y)=>x-y); const m=a.length; return m%2?a[(m-1)/2]:(a[m/2-1]+a[m/2])/2; }; const md=med(sv); const q1=med(sv.slice(0,Math.floor(n/2))), q3=med(sv.slice(Math.ceil(n/2)));\n";
 export const rd = (j: string) => `${SL_JS}${j}`;
+const capP = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
 export const slIntro = (rng: Rng, s: SlScene) => rng.pick([
-  `The stem-and-leaf plot shown gives the ${s.t.what} for ${s.t.ent} ${s.t.where}.`,
-  `A stem-and-leaf plot is shown for the ${s.t.what} of ${s.t.ent} ${s.t.where}. Each leaf is one value.`,
-  `The ${s.t.what} for a group of ${s.t.ent} ${s.t.where} are displayed in the stem-and-leaf plot shown.`,
-  `In the stem-and-leaf plot shown, each leaf represents one of the ${s.t.what} for ${s.t.ent} ${s.t.where}.`,
-  `Data were collected on the ${s.t.what} for ${s.t.ent} ${s.t.where}, and the results are organized in the stem-and-leaf plot shown.`,
-  `Researchers recorded the ${s.t.what} of ${s.t.ent} ${s.t.where}. Every recorded value appears as a leaf in the stem-and-leaf plot shown.`,
-  `For a class project, a student displayed the ${s.t.what} for ${s.t.ent} ${s.t.where} in the stem-and-leaf plot shown.`,
-  `Each leaf in the stem-and-leaf plot shown stands for a single entry among the ${s.t.what} for ${s.t.ent} ${s.t.where}.`,
+  `The stem-and-leaf plot shown gives ${s.t.ph}.`,
+  `A stem-and-leaf plot is shown for ${s.t.ph}. Each leaf is one value.`,
+  `${capP(s.t.ph)} are displayed in the stem-and-leaf plot shown.`,
+  `In the stem-and-leaf plot shown, each leaf represents one of ${s.t.ph}.`,
+  `Data were collected on ${s.t.ph}, and the results are organized in the stem-and-leaf plot shown.`,
+  `Researchers recorded ${s.t.ph}. Every recorded value appears as a leaf in the stem-and-leaf plot shown.`,
+  `For a class project, a student displayed ${s.t.ph} in the stem-and-leaf plot shown.`,
+  `Each leaf in the stem-and-leaf plot shown stands for a single entry among ${s.t.ph}.`,
 ]);
 /** 문장 변주(독립 변형 수를 늘리는 중립 문장) — 정보를 더하지 않고 말투만 바꾼다. */
 export const LEADS = [

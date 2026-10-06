@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.grouped_median_interval.FO.P",
+ "generatedAt": "2026-10-06T07:57:46.375Z",
+ "codeHash": "81ea188d1dbcf5c3d40c77c4fff23c555cb833c22999559996264f98dd0b8605",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/freq-chart.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/fo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.grouped_median_interval.FO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.grouped_median_interval.FO.P.png",
+   "mobileFile": "one_variable_data.grouped_median_interval.FO.P.m375.png",
+   "archetypeId": "ovd.grouped_median_interval.FO.P.chain2",
+   "seed": 11,
+   "signature": "freq_chart:polygon",
+   "stimulus": "In the frequency polygon shown, the battery lives of phones in a product test are organized into equal classes of width 5. Refer to the graph when answering the question that follows.",
+   "question": "In which class does the median lie? Give the lower limit of that class, in hours.",
+   "options": [
+    "20",
+    "30",
+    "15",
+    "25"
+   ],
+   "correctIndex": 0,
+   "answer": "20",
+   "explanation": "(1) 도수다각형에서 계급별 도수를 읽는다: 10~15: 4, 15~20: 4, 20~25: 16, 25~30: 4, 30~35: 4, 35~40: 8 — 전체 40. (2) 누적 도수: 4, 8, 24, 28, 32, 40 이다. (3) 전체 40 개이므로 중앙값 위치는 20.5 번째이다. (4) 누적이 처음 그 이상인 계급은 20~25 이다. (5) 따라서 답은 20 이다. 따라서 정답은 20이다.",
+   "structuralIssues": []
+  }
+ ]
+}

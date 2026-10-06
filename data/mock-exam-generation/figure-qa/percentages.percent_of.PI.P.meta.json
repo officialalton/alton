@@ -1,0 +1,43 @@
+{
+ "itemId": "percentages.percent_of.PI.P",
+ "generatedAt": "2026-10-06T07:57:46.343Z",
+ "codeHash": "7283536ec90acb079ab54a4ef9730e521fc6f5f9c72d2658cc61bfddeae3158c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/pie.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.percent_of.PI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pi-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.percent_of.PI.P.png",
+   "mobileFile": "percentages.percent_of.PI.P.m375.png",
+   "archetypeId": "pct.percent_of.PI.P.chain2",
+   "seed": 11,
+   "signature": "pie",
+   "stimulus": "The pie chart shown summarizes the main way the employees of a company travel to work. Each section is one category. A total of 300 employees are represented. The size of each section is labeled as a percent of the whole. The sections of the pie chart together make up the whole.",
+   "question": "What is the total number of employees who use either Walking or Car?",
+   "options": [
+    "135",
+    "30",
+    "165",
+    "105"
+   ],
+   "correctIndex": 0,
+   "answer": "135",
+   "explanation": "(1) 원그래프에서 각 부채꼴의 값을 읽는다: Car 35%, Carpool 25%, Bus 30%, Walking 10%. (2) Walking 는 10%, Car 는 35% 이다. (3) 합 = 45% = 0.45 이다. (4) 300 × 0.45 = 135 이다. (5) 따라서 답은 135 이다. 따라서 정답은 135이다.",
+   "structuralIssues": []
+  }
+ ]
+}

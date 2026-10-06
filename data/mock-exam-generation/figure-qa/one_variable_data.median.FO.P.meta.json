@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.median.FO.P",
+ "generatedAt": "2026-10-06T07:57:46.373Z",
+ "codeHash": "caa5f4e7b57a2f20fea0793762ddeb251e8f389fd803e4268dfec13b6f97613f",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/freq-chart.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/fo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.median.FO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.median.FO.P.png",
+   "mobileFile": "one_variable_data.median.FO.P.m375.png",
+   "archetypeId": "ovd.median.FO.P.chain2",
+   "seed": 11,
+   "signature": "freq_chart:ogive",
+   "stimulus": "In the cumulative frequency graph shown, the times to finish a city race for runners are organized into equal classes of width 10. The classes are all the same width.",
+   "question": "How many of the values are in the class that contains the median?",
+   "options": [
+    "10",
+    "18",
+    "2",
+    "8"
+   ],
+   "correctIndex": 3,
+   "answer": "8",
+   "explanation": "(1) 누적도수 그래프에서 각 경계의 누적 도수를 읽는다: 30: 2, 40: 8, 50: 10, 60: 18, 70: 20. (2) 전체 20 개이므로 중앙값은 10.5 번째 값 근처이다. (3) 누적 도수가 처음 10.5 이상이 되는 계급은 50~60 이다. (4) 그 계급의 도수 = 18 - 10 = 8 이다. (5) 따라서 답은 8 이다. 따라서 정답은 8이다.",
+   "structuralIssues": []
+  }
+ ]
+}

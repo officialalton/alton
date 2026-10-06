@@ -12,18 +12,18 @@ import { gInst } from "./graph-kit";
 import { renderStackedBar, type StackedBarSpec } from "@/lib/problem-figures/templates/stacked-bar";
 
 const f = fmtNum;
-export type SbTopic = { ent: string; what: string; where: string; rowHead: string; rowNoun: string; rows: string[]; cols: string[]; yUnit: string };
+export type SbTopic = { ent: string; what: string; where: string; rowHead: string; rowNoun: string; axisUnit: string; rows: string[]; cols: string[]; yUnit: string };
 export const SB_TOPICS: SbTopic[] = [
-  { ent: "students", what: "how students travel to school", where: "at a high school", rowHead: "Grade", rowNoun: "grade level", rows: ["Grade 9", "Grade 10", "Grade 11", "Grade 12"], cols: ["Bus", "Walk", "Car", "Bike"], yUnit: "students" },
-  { ent: "customers", what: "how customers paid", where: "at a store", rowHead: "Day", rowNoun: "day of week", rows: ["Friday", "Saturday", "Sunday"], cols: ["Cash", "Card", "Phone"], yUnit: "customers" },
-  { ent: "residents", what: "the type of home residents live in", where: "in a town", rowHead: "District", rowNoun: "district", rows: ["North", "South", "East", "West"], cols: ["House", "Apartment", "Condo"], yUnit: "residents" },
-  { ent: "members", what: "which activity members chose", where: "at a community center", rowHead: "Age group", rowNoun: "age group", rows: ["Under 20", "20 to 39", "40 to 59", "60 and over"], cols: ["Fitness", "Art", "Music"], yUnit: "members" },
-  { ent: "voters", what: "how voters answered a survey question", where: "in a county", rowHead: "Town", rowNoun: "town", rows: ["Ashford", "Brook", "Cedar"], cols: ["Yes", "No", "Undecided"], yUnit: "voters" },
-  { ent: "readers", what: "the format of the books readers borrowed", where: "from a library", rowHead: "Month", rowNoun: "month", rows: ["March", "April", "May"], cols: ["Print", "Audio", "E-book"], yUnit: "readers" },
-  { ent: "visitors", what: "which exhibit visitors saw first", where: "at a museum", rowHead: "Season", rowNoun: "season", rows: ["Spring", "Summer", "Fall", "Winter"], cols: ["Space", "Ocean", "Dinosaurs"], yUnit: "visitors" },
-  { ent: "employees", what: "how employees commute", where: "at a company", rowHead: "Office", rowNoun: "office", rows: ["Main", "Harbor", "Hillside"], cols: ["Train", "Drive", "Bike", "Walk"], yUnit: "employees" },
-  { ent: "patients", what: "which clinic service patients used", where: "at a health clinic", rowHead: "Clinic", rowNoun: "clinic", rows: ["Downtown", "Lakeside", "Westgate"], cols: ["Checkup", "Vaccine", "Lab test"], yUnit: "patients" },
-  { ent: "players", what: "which position players play", where: "in a youth league", rowHead: "Team", rowNoun: "team", rows: ["Hawks", "Wolves", "Bears", "Eagles"], cols: ["Forward", "Midfield", "Defense"], yUnit: "players" },
+  { ent: "students", what: "how students travel to school", where: "at a high school", rowHead: "Grade", axisUnit: "grade level", rowNoun: "grade level", rows: ["Grade 9", "Grade 10", "Grade 11", "Grade 12"], cols: ["Bus", "Walk", "Car", "Bike"], yUnit: "students" },
+  { ent: "customers", what: "how customers paid", where: "at a store", rowHead: "Day", axisUnit: "day", rowNoun: "day of week", rows: ["Friday", "Saturday", "Sunday"], cols: ["Cash", "Card", "Phone"], yUnit: "customers" },
+  { ent: "residents", what: "the type of home residents live in", where: "in a town", rowHead: "District", axisUnit: "area", rowNoun: "district", rows: ["North", "South", "East", "West"], cols: ["House", "Apartment", "Condo"], yUnit: "residents" },
+  { ent: "members", what: "which activity members chose", where: "at a community center", rowHead: "Age group", axisUnit: "years", rowNoun: "age group", rows: ["Under 20", "20 to 39", "40 to 59", "60 and over"], cols: ["Fitness", "Art", "Music"], yUnit: "members" },
+  { ent: "voters", what: "how voters answered a survey question", where: "in a county", rowHead: "Town", axisUnit: "name", rowNoun: "town", rows: ["Ashford", "Brook", "Cedar"], cols: ["Yes", "No", "Undecided"], yUnit: "voters" },
+  { ent: "readers", what: "the format of the books readers borrowed", where: "from a library", rowHead: "Month", axisUnit: "name", rowNoun: "month", rows: ["March", "April", "May"], cols: ["Print", "Audio", "E-book"], yUnit: "readers" },
+  { ent: "visitors", what: "which exhibit visitors saw first", where: "at a museum", rowHead: "Season", axisUnit: "name", rowNoun: "season", rows: ["Spring", "Summer", "Fall", "Winter"], cols: ["Space", "Ocean", "Dinosaurs"], yUnit: "visitors" },
+  { ent: "employees", what: "how employees commute", where: "at a company", rowHead: "Office", axisUnit: "name", rowNoun: "office", rows: ["Main", "Harbor", "Hillside"], cols: ["Train", "Drive", "Bike", "Walk"], yUnit: "employees" },
+  { ent: "patients", what: "which clinic service patients used", where: "at a health clinic", rowHead: "Clinic", axisUnit: "name", rowNoun: "clinic", rows: ["Downtown", "Lakeside", "Westgate"], cols: ["Checkup", "Vaccine", "Lab test"], yUnit: "patients" },
+  { ent: "players", what: "which position players play", where: "in a youth league", rowHead: "Team", axisUnit: "name", rowNoun: "team", rows: ["Hawks", "Wolves", "Bears", "Eagles"], cols: ["Forward", "Midfield", "Defense"], yUnit: "players" },
 ];
 export type SbScene = { t: SbTopic; rows: string[]; cols: string[]; U: number; units: number[][]; fig: StackedBarSpec; v: (r: number, c: number) => number; tot: (r: number) => number };
 const U_CHOICES = [5, 10, 20, 25, 50];
@@ -34,7 +34,7 @@ export function makeSB(rng: Rng, o: { nr?: number; nc?: number; distinct?: boole
     const units = rows.map(() => cols.map(() => rng.int(1, 3))); if (units.some((r) => r.reduce((a, b) => a + b, 0) > 8)) continue;
     if (o.distinct) { const flat = units.flat(); if (new Set(flat).size < Math.min(flat.length, 3)) continue; }
     const maxTot = Math.max(...units.map((r) => r.reduce((a, b) => a + b, 0)));
-    const fig: StackedBarSpec = { type: "stacked_bar", title: t.what.charAt(0).toUpperCase() + t.what.slice(1), categories: rows, series: cols.map((name, j) => ({ name, values: units.map((r) => r[j] * U) })), xTitle: `${t.rowHead} (${t.rowNoun})`, yTitle: `${t.yUnit.charAt(0).toUpperCase() + t.yUnit.slice(1)} (count)`, yStep: U, yMax: (maxTot + 1) * U, showValues: true };
+    const fig: StackedBarSpec = { type: "stacked_bar", title: t.what.charAt(0).toUpperCase() + t.what.slice(1), categories: rows, series: cols.map((name, j) => ({ name, values: units.map((r) => r[j] * U) })), xTitle: `${t.rowHead} (${t.axisUnit})`, yTitle: `${t.yUnit.charAt(0).toUpperCase() + t.yUnit.slice(1)} (count)`, yStep: U, yMax: (maxTot + 1) * U, showValues: true };
     if (fig.title!.length > 60) fig.title = fig.title!.slice(0, 60);
     if (renderStackedBar(fig).issues.length) continue;
     return { t, rows, cols, U, units, fig, v: (r, c) => units[r][c] * U, tot: (r) => units[r].reduce((a, b) => a + b, 0) * U };
@@ -50,7 +50,7 @@ export const SLEADS = [
 export const sbIntro = (rng: Rng, s: SbScene) => rng.pick([
   `The stacked bar graph shown gives ${s.t.what} ${s.t.where}. Each bar is one ${s.t.rowNoun}.`,
   `A stacked bar graph is shown for ${s.t.what} ${s.t.where}; the segments of each bar show the number of ${s.t.ent} in each category.`,
-  `The numbers of ${s.t.ent} for ${s.t.what} ${s.t.where} are displayed in the stacked bar graph shown, with one bar for each ${s.t.rowNoun}.`,
+  `The stacked bar graph shown displays ${s.t.what} ${s.t.where}, with one bar for each ${s.t.rowNoun}.`,
   `In the stacked bar graph shown, each bar represents one ${s.t.rowNoun}, and its segments show ${s.t.what} ${s.t.where}.`,
 ]);
 export const sbRead = (s: SbScene): [string, string] => [`그래프의 조각 값을 읽는다: ${s.rows.map((r, i) => `${r}(${s.cols.map((c, j) => `${c} ${s.v(i, j)}`).join(", ")})`).join("; ")}.`, "Read the value of every segment."];
@@ -154,7 +154,7 @@ function makePC(rng: Rng): PcScene {
     const maxTot = Math.max(...units.map((r) => r.reduce((a, b) => a + b, 0)));
     const fig: StackedBarSpec = { type: "stacked_bar", title: tp.what.charAt(0).toUpperCase() + tp.what.slice(1), categories: [...per], series: tp.cols.map((name, j) => ({ name, values: units.map((r) => r[j] * U) })), xTitle: "Period (time)", yTitle: `${tp.yUnit.charAt(0).toUpperCase() + tp.yUnit.slice(1)} (count)`, yStep: U, yMax: (maxTot + 1) * U, showValues: true };
     if (renderStackedBar(fig).issues.length) continue;
-    const t: SbTopic = { ent: tp.ent, what: tp.what, where: tp.where, rowHead: "Period", rowNoun: "period", rows: [...per], cols: tp.cols, yUnit: tp.yUnit };
+    const t: SbTopic = { ent: tp.ent, what: tp.what, where: tp.where, rowHead: "Period", axisUnit: "time", rowNoun: "period", rows: [...per], cols: tp.cols, yUnit: tp.yUnit };
     return { t, rows: [...per], cols: tp.cols, U, units, fig, v: (r, c) => units[r][c] * U, tot: (r) => units[r].reduce((a, b) => a + b, 0) * U, per };
   }
   throw new GenFail("퍼센트 변화 장면");

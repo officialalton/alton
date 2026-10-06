@@ -1,0 +1,43 @@
+{
+ "itemId": "one_variable_data.median.SL.P",
+ "generatedAt": "2026-10-06T07:57:46.326Z",
+ "codeHash": "b0269688967d9656913c9623cf5f52f3e454dc9e0e668a7db5417572b26aa45c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stem-leaf.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.median.SL.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.median.SL.P.png",
+   "mobileFile": "one_variable_data.median.SL.P.m375.png",
+   "archetypeId": "ovd.median.SL.P.chain2",
+   "seed": 11,
+   "signature": "stem_leaf",
+   "stimulus": "Researchers recorded the battery lives of phones in a product test. Every recorded value appears as a leaf in the stem-and-leaf plot shown. After a review, the 3 greatest values are removed from the data. Keep in mind that each row of the plot lists the values for one stem.",
+   "question": "What is the median, in hours, of the data after the removal?",
+   "options": [
+    "63",
+    "71",
+    "67",
+    "68"
+   ],
+   "correctIndex": 0,
+   "answer": "63",
+   "explanation": "(1) 줄기-잎 그림에서 모든 값을 읽는다: 53, 55, 57, 59, 62, 64, 67, 67, 69, 71, 72, 73, 79 — 전체 13개. (2) 가장 큰 3 개를 빼면 10 개가 남는다: 53, 55, 57, 59, 62, 64, 67, 67, 69, 71. (3) 가운데 두 값의 평균이 중앙값이다. (4) 중앙값 = 63 이다. (5) 따라서 답은 63 이다. 따라서 정답은 63이다.",
+   "structuralIssues": []
+  }
+ ]
+}

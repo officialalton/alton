@@ -1,0 +1,44 @@
+{
+ "itemId": "two_variable_data.row_total.SB.P",
+ "generatedAt": "2026-10-06T07:57:46.383Z",
+ "codeHash": "55623e64279ce449f4028a8fb5ab6b8a7598550345ab4b9a8dd833b02ba78bd1",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stacked-bar.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.row_total.SB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sb-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.row_total.SB.P.png",
+   "mobileFile": "two_variable_data.row_total.SB.P.m375.png",
+   "archetypeId": "tvd.row_total.SB.P.chain2",
+   "seed": 11,
+   "signature": "stacked_bar",
+   "stimulus": "The stacked bar graph shown displays which activity members chose at a community center, with one bar for each age group. Base your answer on the data the graph displays.",
+   "question": "How many members are in 40 to 59 and Under 20 combined?",
+   "options": [
+    "850",
+    "250",
+    "350",
+    "600"
+   ],
+   "correctIndex": 3,
+   "answer": "600",
+   "explanation": "(1) 그래프의 조각 값을 읽는다: Under 20(Fitness 150, Art 50, Music 150); 20 to 39(Fitness 50, Art 50, Music 150); 40 to 59(Fitness 150, Art 50, Music 50). (2) 40 to 59 의 합계 = 150 + 50 + 50 = 250 이다. (3) Under 20 의 합계 = 150 + 50 + 150 = 350 이다. (4) 합 = 600 이다. (5) 따라서 답은 600 이다. 따라서 정답은 600이다.",
+   "structuralIssues": []
+  }
+ ]
+}
