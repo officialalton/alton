@@ -446,7 +446,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   return issues;
 }
 
-const tickSig = (svg: string) => { const s = readScale(svg); return JSON.stringify([s.xTicks, s.yTicks]); };
+const tickSig = (svg: string) => { const s = readScale(svg); const srt = (a: number[]) => [...a].sort((p, q) => p - q); return JSON.stringify([srt(s.xTicks), srt(s.yTicks)]); }; // 가려진 눈금 숫자는 객체 위에 다시 그려져 문서 순서가 바뀔 수 있어 정렬해 비교한다
 /** 복수 그림(figure_set 자료 / figure_choice 선택지): 같은 단위·같은 축척(눈금)·같은 크기여야 한다. */
 export function checkMultiFigure(children: Spec[], kind: "figure_set" | "figure_choice", textForLabels?: string): QaIssue[] {
   const issues: QaIssue[] = []; const svgs = children.map((c) => renderFigureSvg(c as unknown as FigureSpec, textForLabels === undefined ? undefined : { text: textForLabels }));
