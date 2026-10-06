@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { agreementCoversFourItems, agreementKindForForm } from "@/lib/legal/recording-scope";
 import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
 import { selectInChunks } from "@/lib/select-in-chunks";
 
@@ -51,6 +52,8 @@ export type TeacherListItem = {
   hourlyRateKrw: number | null;
   /** latest teacher agreement status; one batched query for the whole list */
   agreementStatus?: TeacherAgreementStatus;
+  /** signed agreement predates the four-item recording scope: amended agreement / re-consent required */
+  agreementAmendmentRequired?: boolean;
 };
 
 export type CreditTransaction = {
@@ -357,10 +360,10 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     assignedSubjectIdsByTeacher.set(t.teacher_id, list);
   }
 
-  const { data: agreementRows } = await selectInChunks<{ teacher_id: string; status: string; docusign_envelope_status: string | null; sent_at: string | null }>(teacherIds, (chunk) =>
-    supabase.from("teacher_contracts").select("teacher_id, status, docusign_envelope_status, sent_at").in("teacher_id", chunk).in("agreement_form", [...MAIN_TEACHER_FORMS])
+  const { data: agreementRows } = await selectInChunks<{ teacher_id: string; status: string; docusign_envelope_status: string | null; sent_at: string | null; agreement_form: string | null; template_version: string | null }>(teacherIds, (chunk) =>
+    supabase.from("teacher_contracts").select("teacher_id, status, docusign_envelope_status, sent_at, agreement_form, template_version").in("teacher_id", chunk).in("agreement_form", [...MAIN_TEACHER_FORMS])
   );
-  const latestAgreement = new Map<string, { status: string; docusign_envelope_status: string | null; sent_at: string | null }>();
+  const latestAgreement = new Map<string, { status: string; docusign_envelope_status: string | null; sent_at: string | null; agreement_form: string | null; template_version: string | null }>();
   for (const r of agreementRows ?? []) {
     const prev = latestAgreement.get(r.teacher_id);
     if (!prev || (r.sent_at ?? "") > (prev.sent_at ?? "")) latestAgreement.set(r.teacher_id, r);
@@ -379,6 +382,9 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     assignedSubjectIds: assignedSubjectIdsByTeacher.get(t.id) ?? [],
     hourlyRateKrw: t.hourly_rate_krw,
     agreementStatus: deriveAgreementStatus(latestAgreement.get(t.id)),
+    agreementAmendmentRequired:
+      deriveAgreementStatus(latestAgreement.get(t.id)) === "signed" &&
+      !agreementCoversFourItems(agreementKindForForm(latestAgreement.get(t.id)?.agreement_form) ?? "teacher", latestAgreement.get(t.id)?.template_version),
   }));
 }
 

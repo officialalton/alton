@@ -223,6 +223,11 @@ export default function TeacherAgreementSection({ teacherId }: { teacherId: stri
           {state.status === "signed" && (
             <div className="mb-1">
               <p className="text-[12px] text-green">서명 완료본은 수정할 수 없습니다.</p>
+              {state.amendmentRequired && (
+                <p className="text-[12px] text-red" data-testid="teacher-agreement-amendment-required">
+                  개정 계약·재동의 필요 — 이 서명본은 녹화·전사·AI 노트 4개 동의 항목이 들어가기 전 문구입니다. 새 문구의 계약으로 다시 서명받기 전에는 해당 처리가 시작되지 않습니다(자동 안내 발송 없음).
+                </p>
+              )}
               <RateAddendumBox teacherId={teacherId} />
               <p className="text-[12px] text-grey-600 mt-1" data-testid="teacher-agreement-archive">
                 서명본 보관(Drive):{" "}

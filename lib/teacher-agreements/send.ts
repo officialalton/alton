@@ -4,6 +4,7 @@ import { assertDocusignSandboxBaseUri, createEnvelope } from "@/lib/docusign";
 import { loadCurrentTeacherRate } from "./rate";
 import { agreementChecklist, prepareTeacherAgreement, type PrepareResult, type TeacherAgreementInputs } from "./prepare";
 
+import { agreementCoversFourItems, agreementKindForForm } from "@/lib/legal/recording-scope";
 import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "./status";
 export type { TeacherAgreementStatus };
 
@@ -20,6 +21,8 @@ export type TeacherAgreementState = {
   /** per-requirement ✓/✗ for the admin panel; send is enabled only when every item is ok */
   checklist: { key: string; label: string; ok: boolean }[];
   ready: boolean;
+  /** signed on a text version without the four recording-consent items: an amended agreement / re-consent is required (no notice is sent automatically) */
+  amendmentRequired: boolean;
 };
 
 const INPUT_COLUMNS =
@@ -51,7 +54,7 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
   const basics = await loadBasics(admin, teacherId);
   const { data: rows } = await admin
     .from("teacher_contracts")
-    .select("status, docusign_envelope_status, sent_at, signed_at, agreement_form, drive_sync_status, drive_last_error, drive_retry_count")
+    .select("status, docusign_envelope_status, sent_at, signed_at, agreement_form, template_version, drive_sync_status, drive_last_error, drive_retry_count")
     .eq("teacher_id", teacherId)
     .in("agreement_form", [...MAIN_TEACHER_FORMS])
     .order("sent_at", { ascending: false })
@@ -75,6 +78,7 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
     inputs: basics.inputs,
     missing,
     checklist: agreementChecklist(basics),
+    amendmentRequired: status === "signed" && !agreementCoversFourItems(agreementKindForForm(latest?.agreement_form as string | undefined) ?? "teacher", latest?.template_version as string | undefined),
     ready: prepared.ok && agreementChecklist(basics).every((c) => c.ok) && (status === "not_sent" || status === "declined" || status === "voided"),
   };
 }

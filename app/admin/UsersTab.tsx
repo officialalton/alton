@@ -457,7 +457,7 @@ export default function UsersTab({
                 <span className="text-[13.5px] font-bold text-ink">{t.name}</span>
                 <span className="flex gap-1.5">
                   <span data-testid="teacher-contract-chip" className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-grey-200 text-grey-600">
-                    계약: {AGREEMENT_CHIP[t.agreementStatus ?? "not_sent"]}
+                    계약: {AGREEMENT_CHIP[t.agreementStatus ?? "not_sent"]}{t.agreementAmendmentRequired ? " · 개정·재동의 필요" : ""}
                   </span>
                   <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
                     {TEACHER_STATUS_LABEL[t.status] ?? t.status}

@@ -126,7 +126,11 @@ describe("ConsentTab", () => {
       { studentId: "student2", name: "이서아", isUnder13: false, dobKnown: true, hasValidConsent: true, latestConsent: null },
     ];
     render(<ConsentTab activePolicy={activePolicy}>{children}</ConsentTab>);
-    expect(screen.getByTestId("smart-notes-contract-notice")).toBeInTheDocument();
+    const notice = screen.getByTestId("smart-notes-contract-notice");
+    expect(notice).toBeInTheDocument();
+    expect(notice.textContent).toContain("video and audio recording are not currently provided");
+    expect(notice.textContent).toContain("First consultations and all trial lessons are always excluded");
+    expect(notice.textContent).not.toMatch(/Regular paid lessons include video recording/);
     expect(screen.queryByText(/Using · Turn off/)).not.toBeInTheDocument();
     expect(screen.queryByText(/Not using · Turn on/)).not.toBeInTheDocument();
     expect(screen.queryByTestId("ai-notes-card-student2")).not.toBeInTheDocument();
