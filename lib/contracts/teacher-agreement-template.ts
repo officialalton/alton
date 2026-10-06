@@ -29,6 +29,8 @@ export type TeacherWorkLocation = {
   country: string | null | undefined;
   /** U.S. state or territory (code or name) when country is US. */
   region?: string | null;
+  /** contractor (default) or employee. Employee is only available in California. */
+  engagementType?: "contractor" | "employee" | null;
 };
 
 export type TeacherAgreementSelection =
@@ -38,8 +40,13 @@ export type TeacherAgreementSelection =
 export function selectTeacherAgreementForm(location: TeacherWorkLocation): TeacherAgreementSelection {
   const country = (location.country ?? "").trim().toUpperCase();
   if (!country) return { form: null, reason: "The actual work country has not been provided." };
-  // Owner decision 2026-10-06: every teacher is an independent contractor. The California employment form stays in the repo
-  // (renderCaliforniaTeacherAgreementHtml) but is not selected by default.
+  // Default engagement is contractor (owner decision 2026-10-06); the California employment form is selected only for an
+  // explicitly marked employee working in California.
+  if (location.engagementType === "employee") {
+    const region = (location.region ?? "").trim().toLowerCase();
+    if (country === "US" && (region === "ca" || region === "california")) return { form: "california_employment", templateVersion: TEACHER_CALIFORNIA_TEMPLATE_VERSION };
+    return { form: null, reason: "The employee agreement is available only for work performed in California." };
+  }
   if (country === "KR") return { form: "non_us_services", templateVersion: TEACHER_NON_US_TEMPLATE_VERSION };
   if (country === "US") return { form: "us_contractor_services", templateVersion: TEACHER_US_CONTRACTOR_TEMPLATE_VERSION };
   return { form: null, reason: "The pay currency and agreement form are not configured for this work country." };

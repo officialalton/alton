@@ -20,14 +20,15 @@ const STATUS_LABEL: Record<TeacherAgreementState["status"], string> = {
 
 type Field = { key: keyof TeacherAgreementInputs; label: string; placeholder?: string; multiline?: boolean; type?: string };
 const FIELDS: Field[] = [
+  { key: "engagement_type", label: "계약 형태" },
   { key: "work_country", label: "실제 근무 국가(2자리 코드)", placeholder: "US, KR ..." },
   { key: "work_region", label: "근무 주(미국인 경우)", placeholder: "CA" },
   { key: "work_location_detail", label: "근무 위치(캘리포니아 근무지 또는 도시)" },
   { key: "mailing_address", label: "우편 주소" },
   { key: "start_date", label: "시작일", type: "date" },
   { key: "supervisor_name", label: "감독자(Supervisor) 이름 — 캘리포니아 전용" },
-  { key: "prior_materials", label: "기존 자료(없으면 None)", multiline: true },
-  { key: "payment_details", label: "지급 방법·수령 정보 — 해외 전용", multiline: true },
+  { key: "prior_materials", label: "기존 자료(비워 두면 None으로 기재)", multiline: true },
+  { key: "payment_details", label: "지급 방법·수령 정보 — 방법, 통화, 수령인 이름, 계좌 끝 4자리까지만(전체 계좌·세금번호 금지)", multiline: true },
 ];
 
 export default function TeacherAgreementSection({ teacherId }: { teacherId: string }) {
@@ -80,12 +81,28 @@ export default function TeacherAgreementSection({ teacherId }: { teacherId: stri
         <>
           <p className="text-[13px] text-ink mb-2">
             상태: <strong data-testid="teacher-agreement-status">{STATUS_LABEL[state.status]}</strong>
-            {state.form ? ` · ${state.form === "california_employment" ? "캘리포니아 고용계약" : "해외 서비스 계약"}` : ""}
+            {state.form ? ` · ${state.form === "california_employment" ? "캘리포니아 고용계약" : state.form === "us_contractor_services" ? "미국 프리랜서 계약" : "해외(한국) 서비스 계약"}` : ""}
           </p>
           {state.status !== "signed" && (
             <>
               <div className="grid gap-2 mb-3">
-                {FIELDS.map((f) => (
+                {FIELDS.map((f) =>
+                  f.key === "engagement_type" ? (
+                    <label key={f.key} className="text-[12px] text-grey-600 font-semibold">
+                      {f.label}
+                      <select
+                        value={form.engagement_type || "contractor"}
+                        onChange={(e) => setForm({ ...form, engagement_type: e.target.value })}
+                        className="block w-full mt-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] font-normal"
+                      >
+                        <option value="contractor">프리랜서(독립 계약자) — 기본</option>
+                        <option value="employee">직원(employee) — 캘리포니아 근무자만</option>
+                      </select>
+                      <span className="block text-[11px] text-grey-500 font-normal mt-1">
+                        근로자성 오분류 위험이 있으니, 업무 지시·통제 수준을 확인한 뒤 선택하세요. 직원으로 선택하면 캘리포니아 고용계약서가 사용됩니다.
+                      </span>
+                    </label>
+                  ) : (
                   <label key={f.key} className="text-[12px] text-grey-600 font-semibold">
                     {f.label}
                     {f.multiline ? (
@@ -105,7 +122,8 @@ export default function TeacherAgreementSection({ teacherId }: { teacherId: stri
                       />
                     )}
                   </label>
-                ))}
+                  )
+                )}
               </div>
               <div className="flex gap-2 mb-2">
                 <button

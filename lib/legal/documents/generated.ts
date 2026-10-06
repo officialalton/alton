@@ -201,14 +201,14 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Retention schedule. ALTON keeps records for these periods, and longer only where required by law, an active dispute or legal hold, or an accounting or safety need:"
+            "text": "Retention schedule. ALTON keeps records for these periods. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months:"
           },
           {
             "t": "ul",
             "items": [
               "Contracts, pricing, and consent records; payments, refunds, and the lesson-credit ledger; and teacher and consultant payout and pay records: 7 years after the contract or transaction ends.",
               "Attendance, bookings, lesson-credit history, and learning history (homework, note results, reviews, confirmed attendance, and quality-review outcomes): 3 years after the last lesson. Free-member learning records: 3 years after last activity.",
-              "Lesson recordings (video and audio), transcripts, AI lesson notes and summaries, and lesson materials: 1 year after the last lesson. This also applies if recordings are later offered on demand.",
+              "Lesson transcripts and AI lesson notes (Smart Notes): eligible for deletion 1 year after each lesson, regardless of continued enrolment; lesson materials: 1 year after the last lesson. Lesson video and audio recordings are not currently provided; if offered in the future, they are kept for the same period. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies.",
               "Chat and consultation records: 2 years after the matter ends.",
               "Security and access audit logs: 1 year after creation. Notifications: 90 days.",
               "Account closure: a 30-day period in which a closure request can be cancelled; deleted data in backups is removed within 35 days. A closed account keeps only what a retention basis above requires, with restricted access."
@@ -225,7 +225,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
+            "text": "Regular paid lessons include conversion of speech into a text transcript, storage of transcripts, and AI-assisted preparation and storage of lesson notes and summaries (Smart Notes). Lesson video recording and audio recording, and storage of recordings, are not currently provided; if ALTON offers them in the future, this clause also covers them, and ALTON confirms the applicable consents before any recording is activated. Lesson content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
           },
           {
             "t": "p",
@@ -237,7 +237,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
+            "text": "Each lesson's transcript and Smart Notes become eligible for deletion one year after that lesson, regardless of continued enrolment (the full retention schedule appears in the Privacy Policy), and lesson materials are kept for 1 year after the last lesson. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
           },
           {
             "t": "p",
@@ -434,7 +434,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
+            "text": "Regular paid lessons include conversion of speech into a text transcript, storage of transcripts, and AI-assisted preparation and storage of lesson notes and summaries (Smart Notes). Lesson video recording and audio recording, and storage of recordings, are not currently provided; if ALTON offers them in the future, this clause also covers them, and ALTON confirms the applicable consents before any recording is activated. Lesson content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
           },
           {
             "t": "p",
@@ -446,7 +446,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
+            "text": "Each lesson's transcript and Smart Notes become eligible for deletion one year after that lesson, regardless of continued enrolment (the full retention schedule appears in the Privacy Policy), and lesson materials are kept for 1 year after the last lesson. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
           },
           {
             "t": "p",
@@ -498,7 +498,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "Upon separation, the Company pays final wages and accrued amounts within applicable statutory deadlines. The Employee must return Company property and cooperate with a reasonable handover; payment of earned wages is not conditioned on handover or a release. Student information must remain protected after separation. Any continuing obligations apply only to the extent lawful."
+            "text": "Upon separation, the Company pays final wages and accrued amounts within applicable statutory deadlines. Final pay follows applicable law separately from the regular paydays. No advance-notice requirement is a condition of resignation or a reason to hold final pay. The Employee must return Company property and cooperate with a reasonable handover; payment of earned wages is not conditioned on handover or a release. Student information must remain protected after separation. Any continuing obligations apply only to the extent lawful."
           }
         ]
       },
@@ -638,7 +638,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "The Teacher provides accurate tax-status documentation applicable to their circumstances, including Form W-8BEN when appropriate, and notifies the Company of changes. The Company makes any legally required withholding and reporting and provides supporting records. Neither an IRS form nor foreign citizenship alone determines worker classification."
+            "text": "The Teacher is responsible for the taxes that apply to the Teacher. The Company complies with its own statutory withholding and reporting obligations where applicable. Tax forms and related documentation are handled outside this Agreement."
           },
           {
             "t": "p",
@@ -660,7 +660,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
+            "text": "Regular paid lessons include conversion of speech into a text transcript, storage of transcripts, and AI-assisted preparation and storage of lesson notes and summaries (Smart Notes). Lesson video recording and audio recording, and storage of recordings, are not currently provided; if ALTON offers them in the future, this clause also covers them, and ALTON confirms the applicable consents before any recording is activated. Lesson content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
           },
           {
             "t": "p",
@@ -672,7 +672,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
+            "text": "Each lesson's transcript and Smart Notes become eligible for deletion one year after that lesson, regardless of continued enrolment (the full retention schedule appears in the Privacy Policy), and lesson materials are kept for 1 year after the last lesson. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
           },
           {
             "t": "p",
@@ -850,7 +850,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Regular paid lessons include video recording, audio recording, conversion of speech into a text transcript, storage of recordings and transcripts, and AI-assisted preparation and storage of lesson notes and summaries. Recorded content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
+            "text": "Regular paid lessons include conversion of speech into a text transcript, storage of transcripts, and AI-assisted preparation and storage of lesson notes and summaries (Smart Notes). Lesson video recording and audio recording, and storage of recordings, are not currently provided; if ALTON offers them in the future, this clause also covers them, and ALTON confirms the applicable consents before any recording is activated. Lesson content may include participant images, voices, names, spoken questions and answers, shared lesson screens, instructional materials, and meeting metadata. These processes support instruction, review, preparation, quality and safety management, and teacher handover. They are required components of regular lessons; initial consultations and trial lessons are excluded."
           },
           {
             "t": "p",
@@ -862,7 +862,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Recordings, transcripts, AI notes, and lesson materials are kept for 1 year after the last lesson (the full retention schedule appears in the Privacy Policy), and longer only where required by law, an active dispute or legal hold, or an accounting or safety need. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
+            "text": "Each lesson's transcript and Smart Notes become eligible for deletion one year after that lesson, regardless of continued enrolment (the full retention schedule appears in the Privacy Policy), and lesson materials are kept for 1 year after the last lesson. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies. Other records are kept only as reasonably necessary for the stated purposes, the student's service relationship, and applicable legal obligations or claims. Records no longer needed are securely deleted, subject to lawful preservation requirements. Parents and participants may request access, correction, deletion, or withdrawal of consent at official@alton.education. Withdrawal applies prospectively and does not make prior authorized processing unlawful. ALTON stops affected processing as required and resolves future lessons and unused paid credits under the applicable agreement without imposing a penalty for exercising statutory rights. Free learning access is not conditioned on agreeing to lesson recording."
           },
           {
             "t": "p",
@@ -888,14 +888,14 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "Retention schedule. ALTON keeps records for these periods, and longer only where required by law, an active dispute or legal hold, or an accounting or safety need:"
+            "text": "Retention schedule. ALTON keeps records for these periods. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months:"
           },
           {
             "t": "ul",
             "items": [
               "Contracts, pricing, and consent records; payments, refunds, and the lesson-credit ledger; and teacher and consultant payout and pay records: 7 years after the contract or transaction ends.",
               "Attendance, bookings, lesson-credit history, and learning history (homework, note results, reviews, confirmed attendance, and quality-review outcomes): 3 years after the last lesson. Free-member learning records: 3 years after last activity.",
-              "Lesson recordings (video and audio), transcripts, AI lesson notes and summaries, and lesson materials: 1 year after the last lesson. This also applies if recordings are later offered on demand.",
+              "Lesson transcripts and AI lesson notes (Smart Notes): eligible for deletion 1 year after each lesson, regardless of continued enrolment; lesson materials: 1 year after the last lesson. Lesson video and audio recordings are not currently provided; if offered in the future, they are kept for the same period. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies.",
               "Chat and consultation records: 2 years after the matter ends.",
               "Security and access audit logs: 1 year after creation. Notifications: 90 days.",
               "Account closure: a 30-day period in which a closure request can be cancelled; deleted data in backups is removed within 35 days. A closed account keeps only what a retention basis above requires, with restricted access."

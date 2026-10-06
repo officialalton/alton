@@ -20,7 +20,7 @@ export type TeacherAgreementState = {
 };
 
 const INPUT_COLUMNS =
-  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, payment_details";
+  "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, payment_details, engagement_type";
 
 async function loadBasics(admin: SupabaseClient, teacherId: string) {
   const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }, rate] = await Promise.all([

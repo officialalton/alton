@@ -10,6 +10,7 @@ import {
 import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { COMPANY_NAME } from "@/lib/legal";
 import { UnfilledContractError } from "@/lib/legal/guard";
+import { sensitiveNumberProblem } from "./validate-inputs";
 import { TEACHER_APPROVER } from "./schedule-defaults";
 
 export type TeacherAgreementInputs = {
@@ -21,6 +22,8 @@ export type TeacherAgreementInputs = {
   supervisor_name: string | null;
   prior_materials: string | null;
   payment_details: string | null;
+  /** contractor (default) or employee — selects the agreement form together with the work location. */
+  engagement_type: "contractor" | "employee";
 };
 
 export const EMPTY_INPUTS: TeacherAgreementInputs = {
@@ -32,6 +35,7 @@ export const EMPTY_INPUTS: TeacherAgreementInputs = {
   supervisor_name: null,
   prior_materials: null,
   payment_details: null,
+  engagement_type: "contractor",
 };
 
 export type PrepareArgs = {
@@ -73,10 +77,15 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (!a.workspaceProvisioned || !email.endsWith("@alton.education")) missing.push("Workspace 계정(@alton.education) 생성 완료");
   if (blank(i.work_country)) missing.push("실제 근무 국가");
 
-  const selection = selectTeacherAgreementForm({ country: i.work_country, region: i.work_region });
+  const selection = selectTeacherAgreementForm({ country: i.work_country, region: i.work_region, engagementType: i.engagement_type });
   if (selection.form === null) {
     if (!blank(i.work_country)) {
-      missing.push("해당 국가의 보수 통화·계약서 양식이 설정되지 않음(현재 KR=KRW, 미국=USD만 지원)");
+      const emp = i.engagement_type === "employee";
+      missing.push(
+        emp
+          ? "직원(employee) 계약은 미국 캘리포니아 근무자만 지원합니다"
+          : "해당 국가의 보수 통화·계약서 양식이 설정되지 않음(현재 KR=KRW, 미국=USD만 지원)"
+      );
     }
     return { ok: false, missing, form: null };
   }
@@ -87,11 +96,11 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
   if (blank(i.mailing_address)) missing.push("우편 주소");
   if (blank(i.start_date)) missing.push("시작일");
   if (blank(i.work_location_detail)) missing.push(form === "california_employment" ? "캘리포니아 근무 위치" : "근무 도시·지역");
-  if (blank(i.prior_materials)) missing.push("기존 자료(없으면 None 입력)");
   if (form === "california_employment") {
     if (blank(i.supervisor_name)) missing.push("감독자(Supervisor) 이름");
   } else {
     if (blank(i.payment_details)) missing.push("지급 방법·수령 정보");
+    else if (sensitiveNumberProblem(i.payment_details!)) missing.push("지급 정보에 전체 계좌·세금번호 포함 — 끝 4자리까지만 입력");
   }
   if (form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) missing.push("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
   if (missing.length > 0) return { ok: false, missing, form };
@@ -109,7 +118,7 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
     teacherEmail: email,
     teacherAddress: i.mailing_address!,
     effectiveDate: i.start_date!,
-    priorMaterials: i.prior_materials!,
+    priorMaterials: blank(i.prior_materials) ? "None" : i.prior_materials!,
     companyApproval,
   };
   try {

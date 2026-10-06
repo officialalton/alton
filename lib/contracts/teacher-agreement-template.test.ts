@@ -21,6 +21,9 @@ describe("selectTeacherAgreementForm", () => {
   it("chooses by actual work location only", () => {
     // All teachers are independent contractors; the California employment form is kept but never selected.
     expect(selectTeacherAgreementForm({ country: "US", region: "CA" })).toMatchObject({ form: "us_contractor_services" });
+    expect(selectTeacherAgreementForm({ country: "US", region: "CA", engagementType: "employee" })).toMatchObject({ form: "california_employment" });
+    expect(selectTeacherAgreementForm({ country: "US", region: "TX", engagementType: "employee" }).form).toBeNull();
+    expect(selectTeacherAgreementForm({ country: "KR", engagementType: "employee" }).form).toBeNull();
     expect(selectTeacherAgreementForm({ country: "us", region: "TX" })).toMatchObject({ form: "us_contractor_services" });
     expect(selectTeacherAgreementForm({ country: "KR" })).toMatchObject({ form: "non_us_services" });
     expect(selectTeacherAgreementForm({ country: "JP" }).form).toBeNull();

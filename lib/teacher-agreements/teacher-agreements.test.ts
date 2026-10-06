@@ -27,6 +27,7 @@ const caInputs: TeacherAgreementInputs = {
   supervisor_name: "Do Kyung Kim",
   prior_materials: "None",
   payment_details: null,
+  engagement_type: "employee",
 };
 const krInputs: TeacherAgreementInputs = {
   ...caInputs,
@@ -35,20 +36,33 @@ const krInputs: TeacherAgreementInputs = {
   work_location_detail: "Seoul",
   supervisor_name: null,
   payment_details: "Bank transfer to the account on file",
+  engagement_type: "contractor",
 };
 const base = { rate: { amountMinor: 50000, currency: "KRW" as const }, teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
 
 describe("prepareTeacherAgreement", () => {
-  it("blocks US teachers (California included) with a Korean message until the contractor text exists", () => {
+  it("contractor US (CA included) is blocked with a Korean message until the contractor text exists", () => {
     const usRate = { amountMinor: 5000, currency: "USD" as const };
     for (const region of ["CA", "TX"]) {
-      const r = prepareTeacherAgreement({ ...base, rate: usRate, inputs: { ...caInputs, work_region: region } });
+      const r = prepareTeacherAgreement({ ...base, rate: usRate, inputs: { ...caInputs, engagement_type: "contractor", payment_details: "ACH, USD", work_region: region } });
       expect(r.ok).toBe(false);
       if (!r.ok) {
         expect(r.form).toBe("us_contractor_services");
         expect(r.missing).toContain("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
       }
     }
+  });
+  it("employee in California gets the employment agreement with the USD rate; employee elsewhere is blocked", () => {
+    const usRate = { amountMinor: 5000, currency: "USD" as const };
+    const ok = prepareTeacherAgreement({ ...base, rate: usRate, inputs: caInputs });
+    expect(ok.ok && ok.form).toBe("california_employment");
+    if (ok.ok) expect(ok.html).toContain("USD $50.00 per hour of compensable time");
+    const tx = prepareTeacherAgreement({ ...base, rate: usRate, inputs: { ...caInputs, work_region: "TX" } });
+    expect(!tx.ok && tx.missing.join()).toContain("캘리포니아");
+  });
+  it("renders None when no prior materials were entered", () => {
+    const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, prior_materials: null } });
+    expect(r.ok).toBe(true);
   });
   it("requires the currency to match the work country", () => {
     const r = prepareTeacherAgreement({ ...base, rate: { amountMinor: 5000, currency: "USD" }, inputs: krInputs });
@@ -85,6 +99,17 @@ describe("prepareTeacherAgreement", () => {
   it("blocks when internal wording leaks into an input", () => {
     const r = prepareTeacherAgreement({ ...base, inputs: { ...krInputs, mailing_address: "TBD pending legal review" } });
     expect(r.ok).toBe(false);
+  });
+});
+
+describe("validateTeacherAgreementInputs payment details", () => {
+  it("rejects full account or tax numbers but allows the last 4 digits", () => {
+    expect(validateTeacherAgreementInputs({ payment_details: "Bank transfer, KRW, Sora Park, account ending 1234" }).ok).toBe(true);
+    expect(validateTeacherAgreementInputs({ payment_details: "Account 1002-345-678901" }).ok).toBe(false);
+    expect(validateTeacherAgreementInputs({ payment_details: "SSN 123-45-6789" }).ok).toBe(false);
+    expect(validateTeacherAgreementInputs({ engagement_type: "boss" }).ok).toBe(false);
+    const d = validateTeacherAgreementInputs({});
+    expect(d.ok && d.value.engagement_type).toBe("contractor");
   });
 });
 

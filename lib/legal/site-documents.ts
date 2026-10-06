@@ -15,11 +15,11 @@ const ul = (...items: string[]): SiteBlock => ({ t: "ul", items });
 const MEDIA_BLOCKS: SiteBlock[] = [{ t: "h3", text: RECORDING_CLAUSE_HEADING }, ...RECORDING_CLAUSE_PARAGRAPHS.map((text) => p(text))];
 
 export const RETENTION_INTRO =
-  "Retention schedule. ALTON keeps records for these periods, and longer only where required by law, an active dispute or legal hold, or an accounting or safety need:";
+  "Retention schedule. ALTON keeps records for these periods. Preservation exceptions are limited to what is necessary for a legal requirement, an active dispute or legal hold, or an accounting or safety need, and are reviewed at least every 12 months:";
 export const RETENTION_ITEMS: string[] = [
   "Contracts, pricing, and consent records; payments, refunds, and the lesson-credit ledger; and teacher and consultant payout and pay records: 7 years after the contract or transaction ends.",
   "Attendance, bookings, lesson-credit history, and learning history (homework, note results, reviews, confirmed attendance, and quality-review outcomes): 3 years after the last lesson. Free-member learning records: 3 years after last activity.",
-  "Lesson recordings (video and audio), transcripts, AI lesson notes and summaries, and lesson materials: 1 year after the last lesson. This also applies if recordings are later offered on demand.",
+  "Lesson transcripts and AI lesson notes (Smart Notes): eligible for deletion 1 year after each lesson, regardless of continued enrolment; lesson materials: 1 year after the last lesson. Lesson video and audio recordings are not currently provided; if offered in the future, they are kept for the same period. Children's information is deleted earlier when its purpose is achieved or a parent requests deletion, except where a preservation exception applies.",
   "Chat and consultation records: 2 years after the matter ends.",
   "Security and access audit logs: 1 year after creation. Notifications: 90 days.",
   "Account closure: a 30-day period in which a closure request can be cancelled; deleted data in backups is removed within 35 days. A closed account keeps only what a retention basis above requires, with restricted access.",
