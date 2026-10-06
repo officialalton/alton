@@ -4,7 +4,7 @@ import { assertDocusignSandboxBaseUri, createEnvelope } from "@/lib/docusign";
 import { loadCurrentTeacherRate } from "./rate";
 import { agreementChecklist, prepareTeacherAgreement, type PrepareResult, type TeacherAgreementInputs } from "./prepare";
 
-import { deriveAgreementStatus, type TeacherAgreementStatus } from "./status";
+import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "./status";
 export type { TeacherAgreementStatus };
 
 export type TeacherAgreementState = {
@@ -25,7 +25,7 @@ export type TeacherAgreementState = {
 const INPUT_COLUMNS =
   "work_country, work_region, work_location_detail, mailing_address, start_date, supervisor_name, prior_materials, engagement_type";
 
-async function loadBasics(admin: SupabaseClient, teacherId: string) {
+export async function loadBasics(admin: SupabaseClient, teacherId: string) {
   const [{ data: teacher }, { data: profile }, { data: prov }, { data: inputs }, rate, { data: payout }] = await Promise.all([
     admin.from("teachers").select("workspace_email").eq("id", teacherId).maybeSingle(),
     admin.from("profiles").select("name").eq("id", teacherId).maybeSingle(),
@@ -53,7 +53,7 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
     .from("teacher_contracts")
     .select("status, docusign_envelope_status, sent_at, signed_at, agreement_form, drive_sync_status, drive_last_error, drive_retry_count")
     .eq("teacher_id", teacherId)
-    .not("agreement_form", "is", null)
+    .in("agreement_form", [...MAIN_TEACHER_FORMS])
     .order("sent_at", { ascending: false })
     .limit(1);
   const latest = rows?.[0];
@@ -102,7 +102,7 @@ export async function sendTeacherAgreementInternal(
     .from("teacher_contracts")
     .select("id, status, docusign_envelope_status")
     .eq("teacher_id", params.teacherId)
-    .not("agreement_form", "is", null);
+    .in("agreement_form", [...MAIN_TEACHER_FORMS]);
   if ((open ?? []).some((r) => r.status === "signed")) throw new Error("이미 서명 완료된 선생님 계약서가 있습니다.");
   if ((open ?? []).some((r) => r.status === "sent" && ["sent", "delivered"].includes(r.docusign_envelope_status as string))) {
     throw new Error("이미 발송되어 서명 대기 중인 계약서가 있습니다.");

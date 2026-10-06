@@ -54,10 +54,7 @@ export async function recordAcceptedRate(
     current = await loadCurrentTeacherRate(admin, contract.teacher_id);
   }
   if (!current) return;
-  const { error } = await admin
-    .from("teacher_rate_history")
-    .update({ agreement_contract_id: contract.id })
-    .eq("id", current.id)
-    .is("agreement_contract_id", null);
+  // The history table is trigger-protected; linking goes through the sanctioned SQL function.
+  const { error } = await admin.rpc("link_teacher_rate_agreement", { p_history_id: current.id, p_contract_id: contract.id });
   if (error) throw new Error(error.message);
 }

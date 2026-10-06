@@ -1,10 +1,14 @@
 import { describe, expect, it } from "vitest";
+import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
+import { assertNoUnreplacedInputDescriptions, findUnreplacedInputDescriptions } from "@/lib/legal/guard";
 import { UnfilledContractError } from "@/lib/legal/guard";
 import {
   renderCaliforniaTeacherAgreementHtml,
   renderNonUsTeacherAgreementHtml,
   selectTeacherAgreementForm,
   renderUsContractorTeacherAgreementHtml,
+  renderConsultantAgreementHtml,
+  renderRateAddendumHtml,
 } from "./teacher-agreement-template";
 
 const approval = { companyEntityName: "Alton Education LLC", approverName: "Do Kyung Kim", approverTitle: "CEO", approvedAtLabel: "October 6, 2026 at 9:00 AM UTC", documentIdentifier: "t1" };
@@ -53,9 +57,52 @@ describe("teacher agreement rendering", () => {
     expect(html).toContain("paid no later than the 26th of the same month");
     expect(html).not.toMatch(/_{3,}|\[[^\]]+\]|draft/i);
   });
-  it("renders the system USD rate in the California form and blocks the contractor form until its text exists", () => {
+  it("renders the system USD rate in the California form", () => {
     expect(renderCaliforniaTeacherAgreementHtml(ca)).toContain("USD $50.00 per hour of compensable time");
-    expect(() => renderUsContractorTeacherAgreementHtml({ ...common, actualWorkCountryAndLocation: "US, TX", paymentMethodAndRecipientDetails: "ACH", lessonRate: { amountMinor: 5000, currency: "USD" } })).toThrow(UnfilledContractError);
+  });
+  const us = { ...common, actualWorkCountryAndLocation: "United States, CA — San Jose", paymentMethodAndRecipientDetails: "Bank transfer (wire) to the recipient account on file. Recipient: Sora Park; bank: Chase; account ending 4321; currency: USD", lessonRate: { amountMinor: 5000, currency: "USD" as const } };
+  it("renders the US contractor agreement with real values, anchors and Schedule B", () => {
+    const html = renderUsContractorTeacherAgreementHtml(us);
+    expect(html).toContain("Lesson fee: USD $50.00 per 60 recognized minutes");
+    expect(html).toContain("Teacher legal name, address, and email: Sora Park; 1 Main St; sora@example.com");
+    expect(html).toContain("Payment method and recipient details: Bank transfer (wire) to the recipient account on file. Recipient: Sora Park");
+    expect(html.match(/\/sig1\//g)).toHaveLength(1);
+    expect(html.match(/\/date1\//g)).toHaveLength(1);
+    expect(html).toContain("Company electronic approval: recorded");
+    expect(html).not.toMatch(/Identified in the executed|recorded in the executed (payment|work|recipient)|identified here in the executed/);
+    expect(html).toContain("<p>None</p>");
+    expect(html).not.toContain("List retained materials");
+  });
+  const consultant = { ...common, actualWorkCountryAndLocation: "South Korea, Seoul", paymentMethodAndRecipientDetails: "Bank transfer (wire) to the recipient account on file.", monthlyFee: { amountMinor: 2000000, currency: "KRW" as const }, monthlyServiceScope: "Admissions roadmap and monthly parent meetings" };
+  it("renders the consultant agreement: monthly fee, scope, consultant signs at the signature anchor", () => {
+    const html = renderConsultantAgreementHtml(consultant);
+    expect(html).toContain("Monthly fee: KRW 2,000,000 per month");
+    expect(html).toContain("Monthly service scope: Admissions roadmap and monthly parent meetings");
+    expect(html).toContain("Consultant name: Sora Park");
+    expect(html).toContain("Consultant signature: /sig1/");
+    expect(html.match(/\/sig1\//g)).toHaveLength(1);
+    expect(html.match(/\/date1\//g)).toHaveLength(1);
+    expect(html).not.toMatch(/Accepted monthly amount|Accepted scope and deliverables/);
+  });
+  it("renders the rate change addendum with previous/new rate and existing agreement reference", () => {
+    const html = renderRateAddendumHtml({ ...common, actualWorkCountryAndLocation: "South Korea, Seoul", existingAgreementId: "11111111-2222-3333-4444-555555555555", existingAgreementSignedDate: "2026-11-02", previousRate: { amountMinor: 50000, currency: "KRW" }, newRate: { amountMinor: 60000, currency: "KRW" }, effectiveDate: "2027-01-01" });
+    expect(html).toContain("Existing agreement ID: 11111111-2222-3333-4444-555555555555");
+    expect(html).toContain("Previous hourly rate and currency: KRW 50,000 per 60 recognized minutes");
+    expect(html).toContain("New hourly rate and currency: KRW 60,000 per 60 recognized minutes");
+    expect(html).toContain("Effective date: January 1, 2027");
+    expect(html).toContain("Teacher signature: /sig1/");
+    expect(html).not.toMatch(/Identifier of the executed|Recorded signature completion|Newly accepted amount/);
+  });
+  it("fails when an input description from the source would remain (unreplaced check)", () => {
+    expect(() => assertNoUnreplacedInputDescriptions("Lesson fee: Teacher's accepted hourly rate per 60 recognized minutes")).toThrow(UnfilledContractError);
+    expect(() => assertNoUnreplacedInputDescriptions("Existing agreement ID: Identifier of the executed Existing Agreement.")).toThrow(UnfilledContractError);
+    for (const key of ["teacherUsContractor", "consultantServices", "teacherRateAddendum"] as const) {
+      expect(findUnreplacedInputDescriptions(JSON.stringify(GENERATED_LEGAL_DOCUMENTS[key])).length).toBeGreaterThan(0);
+    }
+  });
+  it("rejects a bad rate in the contractor forms", () => {
+    expect(() => renderUsContractorTeacherAgreementHtml({ ...us, lessonRate: { amountMinor: 0, currency: "USD" } })).toThrow(UnfilledContractError);
+    expect(() => renderConsultantAgreementHtml({ ...consultant, monthlyServiceScope: " " })).toThrow(UnfilledContractError);
   });
   it("never invents unresolved commercial values", () => {
     expect(() => renderNonUsTeacherAgreementHtml({ ...nonUs, paymentMethodAndRecipientDetails: " " })).toThrow(UnfilledContractError);

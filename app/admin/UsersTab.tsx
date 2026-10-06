@@ -505,8 +505,13 @@ export default function UsersTab({
             >
               <div className="flex items-center justify-between">
                 <span className="text-[13.5px] font-bold text-ink">{c.name ?? "이름 없음"}</span>
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
-                  담당 {c.students.length}명
+                <span className="flex gap-1.5">
+                  <span data-testid="consultant-contract-chip" className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-grey-200 text-grey-600">
+                    계약: {AGREEMENT_CHIP[c.agreementStatus ?? "not_sent"]}
+                  </span>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
+                    담당 {c.students.length}명
+                  </span>
                 </span>
               </div>
               <div className="text-[12px] text-grey-500 mt-0.5">{c.email ?? "이메일 없음"}</div>

@@ -8,6 +8,7 @@ import {
   assignStudentToConsultantAction,
   type ConsultantDetail,
 } from "./consultant-assignment-actions";
+import ConsultantAgreementSection from "./ConsultantAgreementSection";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 
@@ -187,6 +188,8 @@ export default function ConsultantDetailPanel({
               </button>
             </div>
           ))}
+
+          <ConsultantAgreementSection consultantId={consultantId} />
 
           <h3 className="text-[13px] font-extrabold text-ink mb-2 mt-5">배정 이력</h3>
           {detail.history.length === 0 && <p className="text-[12.5px] text-grey-500">이력이 없습니다.</p>}

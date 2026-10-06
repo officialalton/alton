@@ -12,6 +12,7 @@ type ArchiveRow = {
   drive_retry_count: number;
   template_version: string | null;
   signed_at: string | null;
+  agreement_form?: string | null;
 };
 
 export type ArchiveResult = { attempted: number; succeeded: number; failed: number; manualReview: number };
@@ -24,7 +25,7 @@ export type ArchiveResult = { attempted: number; succeeded: number; failed: numb
 export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts?: { teacherId?: string }): Promise<ArchiveResult> {
   let q = admin
     .from("teacher_contracts")
-    .select("id, teacher_id, docusign_envelope_id, drive_retry_count, template_version, signed_at")
+    .select("id, teacher_id, docusign_envelope_id, drive_retry_count, template_version, signed_at, agreement_form")
     .eq("status", "signed")
     .in("drive_sync_status", ["queued", "retryable_failed"])
     .not("docusign_envelope_id", "is", null);
@@ -53,12 +54,12 @@ export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts
           contractId: row.id,
           artifactType: certificate ? "certificate_of_completion" : "signed_document",
           fileBuffer,
-          fileName: archiveFileName({ contractType: "teacher_agreement", contractId: row.id, version, signedAt, certificate }),
+          fileName: archiveFileName({ contractType: row.agreement_form === "teacher_rate_addendum" ? "teacher_amendment" : "teacher_agreement", contractId: row.id, version, signedAt, certificate }),
           destination: {
             kind: "teacher",
             personId: row.teacher_id,
             personName,
-            identity: { contractId: row.id, docKind: certificate ? "certificate_of_completion" : "signed_document", contractType: "teacher_agreement" },
+            identity: { contractId: row.id, docKind: certificate ? "certificate_of_completion" : "signed_document", contractType: row.agreement_form === "teacher_rate_addendum" ? "teacher_amendment" : "teacher_agreement" },
           },
         });
       // Each upload is deduplicated by contract id + kind, so a retry after a partial failure never duplicates the first file.

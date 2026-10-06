@@ -12,6 +12,12 @@ import {
   type TeacherAgreementState,
 } from "@/lib/teacher-agreements/send";
 import { retryTeacherAgreementArchive } from "@/lib/teacher-agreements/archive";
+import {
+  loadRateAddendumState,
+  RateAddendumNotReadyError,
+  sendRateAddendumInternal,
+  type RateAddendumState,
+} from "@/lib/teacher-agreements/addendum";
 import { validateTeacherAgreementInputs } from "@/lib/teacher-agreements/validate-inputs";
 import type { TeacherAgreementInputs } from "@/lib/teacher-agreements/prepare";
 
@@ -73,5 +79,44 @@ export async function retryTeacherAgreementArchiveAction(teacherId: string): Pro
     return { ok: true, data: await loadTeacherAgreementState(admin, teacherId) };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "보관 재시도에 실패했습니다." };
+  }
+}
+
+export async function getRateAddendumStateAction(teacherId: string): Promise<TeacherAgreementActionResult<RateAddendumState>> {
+  try {
+    await requireAdmin();
+    return { ok: true, data: await loadRateAddendumState(createAdminClient(), teacherId) };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "합의서 상태를 불러오지 못했습니다." };
+  }
+}
+
+/**
+ * 시급 변경 합의서 발송. 시스템의 시급은 여기서 바뀌지 않는다 — 선생님 서명 완료(회사 승인은 문서에 이미 기록됨) 웹훅이
+ * 적용 시작일부터 새 시급을 teacher_rate_history에 기록한다.
+ */
+export async function sendRateAddendumAction(
+  teacherId: string,
+  raw: { amount: string; currency: string; effectiveDate: string }
+): Promise<TeacherAgreementActionResult<RateAddendumState>> {
+  try {
+    const { adminUserId } = await requireAdmin();
+    const currency = raw.currency === "USD" ? "USD" : raw.currency === "KRW" ? "KRW" : null;
+    const amount = Number(raw.amount);
+    if (!currency || !Number.isFinite(amount) || amount <= 0) return { ok: false, error: "새 시급과 통화를 올바르게 입력하세요." };
+    const newAmountMinor = currency === "USD" ? Math.round(amount * 100) : Math.round(amount);
+    const admin = createAdminClient();
+    const siteUrl = await currentRequestOrigin();
+    await sendRateAddendumInternal(admin, {
+      teacherId,
+      actorUserId: adminUserId,
+      webhookUrl: appendVercelProtectionBypass(`${siteUrl}/api/webhooks/docusign`),
+      input: { newAmountMinor, newCurrency: currency, effectiveDate: raw.effectiveDate },
+    });
+    revalidatePath("/admin");
+    return { ok: true, data: await loadRateAddendumState(admin, teacherId) };
+  } catch (e) {
+    if (e instanceof RateAddendumNotReadyError) return { ok: false, error: e.message };
+    return { ok: false, error: e instanceof Error ? e.message : "발송에 실패했습니다." };
   }
 }

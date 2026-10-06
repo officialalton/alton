@@ -41,14 +41,16 @@ const krInputs: TeacherAgreementInputs = {
 const base = { payoutAccount: { holderName: "Sora Park", bankName: "Shinhan Bank", last4: "1234", currency: "KRW" }, rate: { amountMinor: 50000, currency: "KRW" as const }, teacherName: "Sora Park", workspaceEmail: "sora@alton.education", workspaceProvisioned: true };
 
 describe("prepareTeacherAgreement", () => {
-  it("contractor US (CA included) is blocked with a Korean message until the contractor text exists", () => {
+  it("contractor US (CA included) renders the US contractor agreement with the system USD rate", () => {
     const usRate = { amountMinor: 5000, currency: "USD" as const };
+    const usPayout = { holderName: "Sora Park", bankName: "Chase", last4: "4321", currency: "USD" };
     for (const region of ["CA", "TX"]) {
-      const r = prepareTeacherAgreement({ ...base, rate: usRate, inputs: { ...caInputs, engagement_type: "contractor", work_region: region } });
-      expect(r.ok).toBe(false);
-      if (!r.ok) {
-        expect(r.form).toBe("us_contractor_services");
-        expect(r.missing).toContain("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
+      const r = prepareTeacherAgreement({ ...base, rate: usRate, payoutAccount: usPayout, inputs: { ...caInputs, engagement_type: "contractor", work_region: region } });
+      expect(r.ok && r.form).toBe("us_contractor_services");
+      if (r.ok) {
+        expect(r.html).toContain("Lesson fee: USD $50.00 per 60 recognized minutes");
+        expect(r.html).toContain("account ending 4321; currency: USD");
+        expect(r.html).toContain("/sig1/");
       }
     }
   });
@@ -304,13 +306,13 @@ describe("rate flow", () => {
   it("links the current rate to the contract without creating a duplicate", async () => {
     const a = rateAdmin({ id: "r1", amount_minor: 50000, currency: "KRW" });
     await recordAcceptedRate(a as never, contract);
-    expect(a.calls.rpc).toHaveLength(0);
-    expect(a.calls.updates).toEqual([{ agreement_contract_id: "c1" }]);
+    expect(a.calls.rpc).toEqual([["link_teacher_rate_agreement", { p_history_id: "r1", p_contract_id: "c1" }]]);
   });
   it("creates a history row with the accepted value when the current rate differs", async () => {
     const a = rateAdmin({ id: "r1", amount_minor: 40000, currency: "KRW" });
     await recordAcceptedRate(a as never, contract);
     expect(a.calls.rpc[0]).toEqual(["set_teacher_rate", { p_teacher_id: "t1", p_amount_minor: 50000, p_currency: "KRW" }]);
+    expect(a.calls.rpc.at(-1)).toEqual(["link_teacher_rate_agreement", expect.objectContaining({ p_contract_id: "c1" })]);
   });
   it("locks the rate while an agreement is open or signed", async () => {
     expect(await loadTeacherRateLock(rateAdmin(null, [{ status: "sent", docusign_envelope_status: "sent" }]) as never, "t1")).toBe("open_agreement");
@@ -327,8 +329,8 @@ describe("agreement checklist and list status", () => {
     expect(bad.filter((c) => !c.ok).map((c) => c.key).sort()).toEqual(["location", "rate", "workspace"]);
     const wrongCurrency = agreementChecklist({ ...base, rate: { amountMinor: 5000, currency: "USD" }, inputs: krInputs });
     expect(wrongCurrency.find((c) => c.key === "rate")?.ok).toBe(false);
-    const us = agreementChecklist({ ...base, rate: { amountMinor: 5000, currency: "USD" }, inputs: { ...krInputs, work_country: "US", work_region: "TX" } });
-    expect(us.find((c) => c.key === "engagement")?.ok).toBe(false);
+    const jp = agreementChecklist({ ...base, inputs: { ...krInputs, work_country: "JP" } });
+    expect(jp.find((c) => c.key === "engagement")?.ok).toBe(false);
   });
   it("derives the chip status", () => {
     expect(deriveAgreementStatus(null)).toBe("not_sent");

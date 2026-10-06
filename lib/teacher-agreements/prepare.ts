@@ -7,7 +7,6 @@ import {
   selectTeacherAgreementForm,
   type TeacherAgreementForm,
 } from "@/lib/contracts/teacher-agreement-template";
-import { GENERATED_LEGAL_DOCUMENTS } from "@/lib/legal/documents/generated";
 import { COMPANY_NAME } from "@/lib/legal";
 import { UnfilledContractError } from "@/lib/legal/guard";
 import { sensitiveNumberProblem } from "./validate-inputs";
@@ -72,7 +71,7 @@ export function countryName(code: string): string {
   }
 }
 
-function englishUtc(d: Date): string {
+export function englishUtc(d: Date): string {
   return `${d.toLocaleString("en-US", { timeZone: "UTC", dateStyle: "long", timeStyle: "short" })} UTC`;
 }
 
@@ -109,7 +108,6 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
     if (!a.payoutAccount) missing.push("수취 계좌 미등록 — 정산 > 수취 계좌에서 등록(선생님 또는 관리자)");
     else if (a.rate && a.payoutAccount.currency !== a.rate.currency) missing.push(`수취 계좌 통화(${a.payoutAccount.currency})가 시급 통화(${a.rate.currency})와 다릅니다`);
   }
-  if (form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) missing.push("미국(캘리포니아 외) 프리랜서 계약서 양식 준비 중");
   if (missing.length > 0) return { ok: false, missing, form };
 
   if (!blank(i.prior_materials) && sensitiveNumberProblem(i.prior_materials!)) missing.push("기존 자료에 긴 숫자열(계좌·세금번호 등) 포함");
@@ -172,7 +170,7 @@ export function agreementChecklist(a: PrepareArgs): { key: string; label: string
   const items = [
     { key: "workspace", label: "Workspace 계정(@alton.education) 발급 완료", ok: a.workspaceProvisioned && email.endsWith("@alton.education") },
     { key: "location", label: "근무 위치 입력(국가·위치·우편 주소·시작일)", ok: location },
-    { key: "engagement", label: "계약 형태 선택 및 양식 사용 가능", ok: sel.form !== null && !(sel.form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) },
+    { key: "engagement", label: "계약 형태 선택 및 양식 사용 가능", ok: sel.form !== null },
     { key: "rate", label: `시급·통화 등록(${sel.form ? want : "통화 확인 필요"})`, ok: !!a.rate && a.rate.amountMinor > 0 && !!sel.form && a.rate.currency === want },
   ];
   if (sel.form === "california_employment") items.push({ key: "supervisor", label: "감독자 이름", ok: !blank(i.supervisor_name) });

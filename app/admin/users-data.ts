@@ -1,6 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { deriveAgreementStatus, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
+import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
 import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type ParentListItem = {
@@ -358,7 +358,7 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
   }
 
   const { data: agreementRows } = await selectInChunks<{ teacher_id: string; status: string; docusign_envelope_status: string | null; sent_at: string | null }>(teacherIds, (chunk) =>
-    supabase.from("teacher_contracts").select("teacher_id, status, docusign_envelope_status, sent_at").in("teacher_id", chunk).not("agreement_form", "is", null)
+    supabase.from("teacher_contracts").select("teacher_id, status, docusign_envelope_status, sent_at").in("teacher_id", chunk).in("agreement_form", [...MAIN_TEACHER_FORMS])
   );
   const latestAgreement = new Map<string, { status: string; docusign_envelope_status: string | null; sent_at: string | null }>();
   for (const r of agreementRows ?? []) {

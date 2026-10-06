@@ -6,8 +6,11 @@ import {
   saveTeacherAgreementInputsAction,
   sendTeacherAgreementAction,
   retryTeacherAgreementArchiveAction,
+  getRateAddendumStateAction,
+  sendRateAddendumAction,
 } from "./teacher-agreement-actions";
 import type { TeacherAgreementState } from "@/lib/teacher-agreements/send";
+import type { RateAddendumState } from "@/lib/teacher-agreements/addendum";
 import type { TeacherAgreementInputs } from "@/lib/teacher-agreements/prepare";
 
 const STATUS_LABEL: Record<TeacherAgreementState["status"], string> = {
@@ -29,6 +32,67 @@ const FIELDS: Field[] = [
   { key: "supervisor_name", label: "감독자(Supervisor) 이름 — 캘리포니아 전용" },
   { key: "prior_materials", label: "기존 자료(비워 두면 None으로 기재)", multiline: true },
 ];
+
+function RateAddendumBox({ teacherId }: { teacherId: string }) {
+  const [st, setSt] = useState<RateAddendumState | null>(null);
+  const [f, setF] = useState({ amount: "", currency: "KRW", effectiveDate: "" });
+  const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    let alive = true;
+    getRateAddendumStateAction(teacherId).then((r) => alive && r.ok && setSt(r.data));
+    return () => {
+      alive = false;
+    };
+  }, [teacherId]);
+  if (!st) return null;
+  return (
+    <div className="mt-3 border-t border-grey-200 pt-3" data-testid="rate-addendum-box">
+      <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1">시급 변경 합의서</div>
+      <p className="text-[12px] text-grey-600 mb-2">
+        서명된 계약의 시급은 직접 바꿀 수 없습니다. 합의서를 보내 선생님이 서명하면 적용 시작일부터 새 시급이 적용되고, 그 전 수업은 기존 시급으로 정산됩니다.
+      </p>
+      {st.latest && (
+        <p className="text-[12px] text-ink mb-2">
+          최근 합의서: {st.latest.status === "signed" ? "서명 완료" : st.latest.status === "sent" ? "서명 대기" : st.latest.status === "declined" ? "거부" : "무효"}
+          {st.latest.effectiveDate ? ` · 적용 시작 ${st.latest.effectiveDate}` : ""}
+        </p>
+      )}
+      {st.blockers.map((b) => (
+        <p key={b} className="text-[12px] text-red">{b}</p>
+      ))}
+      {st.canCreate && (
+        <div className="grid gap-2">
+          <div className="flex gap-2">
+            <select value={f.currency} onChange={(e) => setF({ ...f, currency: e.target.value })} className="px-2 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]">
+              <option value="KRW">KRW (원)</option>
+              <option value="USD">USD ($)</option>
+            </select>
+            <input type="number" step="any" min="0" placeholder="새 시급" value={f.amount} onChange={(e) => setF({ ...f, amount: e.target.value })} className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]" />
+            <input type="date" value={f.effectiveDate} onChange={(e) => setF({ ...f, effectiveDate: e.target.value })} className="px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]" />
+          </div>
+          <button
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              setMsg(null);
+              const r = await sendRateAddendumAction(teacherId, f).catch(() => ({ ok: false as const, error: "발송에 실패했습니다." }));
+              if (r.ok) {
+                setSt(r.data);
+                setMsg({ kind: "ok", text: "✓ 합의서를 발송했습니다(자동 적용은 서명 완료 후)" });
+              } else setMsg({ kind: "err", text: r.error });
+              setBusy(false);
+            }}
+            className="text-[12px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50 justify-self-start"
+          >
+            시급 변경 합의서 발송
+          </button>
+        </div>
+      )}
+      {msg && <p className={`text-[12px] mt-1 ${msg.kind === "ok" ? "text-green" : "text-red"}`}>{msg.text}</p>}
+    </div>
+  );
+}
 
 export default function TeacherAgreementSection({ teacherId }: { teacherId: string }) {
   const [state, setState] = useState<TeacherAgreementState | null>(null);
@@ -159,6 +223,7 @@ export default function TeacherAgreementSection({ teacherId }: { teacherId: stri
           {state.status === "signed" && (
             <div className="mb-1">
               <p className="text-[12px] text-green">서명 완료본은 수정할 수 없습니다.</p>
+              <RateAddendumBox teacherId={teacherId} />
               <p className="text-[12px] text-grey-600 mt-1" data-testid="teacher-agreement-archive">
                 서명본 보관(Drive):{" "}
                 {state.archive?.status === "succeeded"
