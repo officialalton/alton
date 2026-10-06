@@ -7,8 +7,8 @@ export default function TeacherMaterialsLibraryTab({ tree }: { tree: LibrarySubj
   return (
     <MaterialLibraryTree
       subjects={tree}
-      description="내가 담당하는 과목의 공개된 교재를 단원·키워드 순서로 모아봅니다."
-      emptyMessage="아직 공개된 교재가 없어요. 관리자가 교재를 공개하면 여기 보여드릴게요."
+      description="Published materials for the subjects you teach, organized by unit and keyword."
+      emptyMessage="No published materials yet. They will appear here once an admin publishes them."
       docHref={(docId) => `/materials/${docId}`}
     />
   );

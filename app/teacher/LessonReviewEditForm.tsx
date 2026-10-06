@@ -29,8 +29,8 @@ export default function LessonReviewEditForm({
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
       <div className="text-[11.5px] font-semibold text-grey-500 mb-3 bg-grey-50 rounded px-2.5 py-2">
-        이미 보호자·학생 화면에 공개된 리뷰입니다. 정정하면 이전 내용은 수정 이력으로 보관되고, 지금
-        입력한 내용으로 바로 교체됩니다.
+        This review is already visible to the parent and student. Saving an edit keeps the previous version in the
+        edit history and replaces it immediately with what you enter now.
       </div>
 
       {categories.map((c) => (
@@ -52,7 +52,7 @@ export default function LessonReviewEditForm({
       ))}
 
       <label htmlFor={inputId} className="block text-[11.5px] font-semibold text-grey-500 mb-1">
-        고객에게 보여줄 종합 의견
+        Overall comments for the family
       </label>
       <textarea
         id={inputId}
@@ -79,7 +79,7 @@ export default function LessonReviewEditForm({
           }}
           className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          {busy ? "정정 중..." : "정정 저장"}
+          {busy ? "Saving…" : "Save edit"}
         </button>
       </div>
     </div>

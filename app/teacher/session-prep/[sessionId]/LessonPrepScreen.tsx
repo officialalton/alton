@@ -24,21 +24,21 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
           onClick={() => router.push("/teacher?tab=lessons")}
           className="text-[13px] text-grey-500 font-semibold mb-4"
         >
-          ← 수업 목록으로
+          ← Back to lessons
         </button>
         <h2 className="text-[19px] font-extrabold text-ink mb-1">
-          {context.studentName ? `${context.studentName} 학생` : "이 수업"}
+          {context.studentName ? context.studentName : "This lesson"}
           {when ? ` · ${when}` : ""}
         </h2>
         <p className="text-[13px] leading-[1.7] text-grey-500 mt-2">
-          이 수업에 연결된 회차가 없습니다. 커리큘럼에서 다룰 회차를 골라 준비한 뒤,
-          그 화면에서 이 수업에 연결하세요.
+          No session is linked to this lesson yet. Pick and prepare the session to cover in the curriculum,
+          then link it to this lesson from that screen.
         </p>
         <button
           onClick={() => router.push("/teacher?tab=curriculum")}
           className="mt-4 text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
         >
-          커리큘럼으로 가기
+          Go to curriculum
         </button>
       </div>
     );
@@ -49,7 +49,7 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
       <div className="border-b-[1.5px] border-grey-200 px-5 sm:px-8 py-4">
         <div className="max-w-[760px] mx-auto">
           <div className="text-[12.5px] text-grey-500 font-semibold">
-            {context.studentName ? `${context.studentName} 학생 · ` : ""}
+            {context.studentName ? `${context.studentName} · ` : ""}
             {context.subjectName}
             {when ? ` · ${when}` : ""}
           </div>
@@ -61,12 +61,12 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
                 onClick={() => router.push(`/session/${context.sessionId}`)}
                 className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
               >
-                수업 기록 →
+                Lesson record →
               </button>
             )}
             {context.frozen && (
               <span className="text-[11.5px] text-grey-500">
-                이미 시작한 수업입니다 — 준비 내용은 시작 시점으로 고정되었습니다.
+                This lesson has already started — the prep was frozen at the start time.
               </span>
             )}
           </div>
@@ -75,7 +75,7 @@ export default function LessonPrepScreen({ context }: { context: SessionPrepCont
 
       <UnitPrepPanel
         overlayUnitId={context.linkedUnitId}
-        unitTitle={context.linkedUnitTitle ?? "이 수업의 회차"}
+        unitTitle={context.linkedUnitTitle ?? "Session for this lesson"}
         studentName={context.studentName}
         subjectName={context.subjectName}
         onBack={() => router.push("/teacher?tab=lessons")}

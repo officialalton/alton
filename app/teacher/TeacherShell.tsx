@@ -49,22 +49,22 @@ import {
 // 2026-09-19(UI 통일화) — 좌측 네비게이션 라벨은 전부 영어로 통일한다(Acely
 // 레퍼런스). 탭 안 본문의 한국어 텍스트는 유지, 라벨만 영어로 바꾼다.
 const NAV_ITEMS = [
-  { id: "home", label: "홈", icon: "home" },
+  { id: "home", label: "Home", icon: "home" },
   // R15-A(3/3, 2026-09-23) — 컨설턴트가 보낸 구조화된 배정 요청(수락 전에는
   // 실제 배정이 생기지 않는다)을 확인·응답하는 화면.
-  { id: "assignment-requests", label: "배정 요청", icon: "students" },
-  { id: "assignments", label: "내 학생", icon: "students" },
-  { id: "homework", label: "과제", icon: "assignments" },
-  { id: "lesson-schedule", label: "일정", icon: "schedule" },
-  { id: "availability", label: "가능 시간", icon: "availability" },
-  { id: "curriculum", label: "커리큘럼", icon: "curriculum" },
-  { id: "materials", label: "교재", icon: "materials" },
-  { id: "vocab", label: "단어장", icon: "vocabulary" },
+  { id: "assignment-requests", label: "Assignment Requests", icon: "students" },
+  { id: "assignments", label: "My Students", icon: "students" },
+  { id: "homework", label: "Homework", icon: "assignments" },
+  { id: "lesson-schedule", label: "Schedule", icon: "schedule" },
+  { id: "availability", label: "Availability", icon: "availability" },
+  { id: "curriculum", label: "Curriculum", icon: "curriculum" },
+  { id: "materials", label: "Materials", icon: "materials" },
+  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
   // P4-2(2026-09-12) — 교사가 본인 정산 내역·지급 예정액·수취 계좌·제출 서류를
   // 한 곳에서 찾을 수 있게 하는 진입점.
-  { id: "settlement", label: "정산", icon: "payouts" },
+  { id: "settlement", label: "Payouts", icon: "payouts" },
   // 2026-09-21(UAT 지적) — 모의고사 배정은 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
-  { id: "mock-exam", label: "모의고사", icon: "mockExam" },
+  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
 ] as const;
 
 type TabId = (typeof NAV_ITEMS)[number]["id"];
@@ -204,7 +204,7 @@ export default function TeacherShell({
             <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
               {dashboard.teacherName.charAt(0)}
             </div>
-            <span className="flex-1 text-left truncate">{dashboard.teacherName} 선생님</span>
+            <span className="flex-1 text-left truncate">{dashboard.teacherName}</span>
             <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
@@ -216,12 +216,12 @@ export default function TeacherShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                시간대 설정
+                Time zone settings
               </button>
               <div className="h-px bg-brand-border my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
-                  로그아웃
+                  Log out
                 </button>
               </form>
             </div>
@@ -251,7 +251,7 @@ export default function TeacherShell({
             onClick={() => setAccountMenuOpen((v) => !v)}
             className="text-[13px] font-semibold text-navy"
           >
-            {dashboard.teacherName} 선생님 ▾
+            {dashboard.teacherName} ▾
           </button>
           {accountMenuOpen && (
             <div className="absolute top-full right-4 mt-1 w-40 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
@@ -262,12 +262,12 @@ export default function TeacherShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                시간대 설정
+                Time zone settings
               </button>
               <div className="h-px bg-brand-border my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
-                  로그아웃
+                  Log out
                 </button>
               </form>
             </div>
@@ -290,7 +290,7 @@ export default function TeacherShell({
               onClick={() => setTimezoneModalOpen(true)}
               className="shrink-0 rounded-lg bg-red px-3.5 py-2 text-[13px] font-semibold text-white"
             >
-              시간대 설정하기
+              Set time zone
             </button>
           </div>
         )}
@@ -309,8 +309,8 @@ export default function TeacherShell({
             activeTab === "lesson-schedule" ? (
               <UnderlineSubTabs
                 items={[
-                  { id: "upcoming", label: "예정 수업" },
-                  { id: "past", label: "지난 수업" },
+                  { id: "upcoming", label: "Upcoming" },
+                  { id: "past", label: "Past" },
                 ]}
                 activeId={lessonSubtab}
                 onSelect={setLessonSubtab}
@@ -318,8 +318,8 @@ export default function TeacherShell({
             ) : activeTab === "assignments" ? (
               <UnderlineSubTabs
                 items={[
-                  { id: "active", label: `배정 중 (${currentAssignments.length})` },
-                  { id: "past", label: `배정 종료 (${pastAssignments.length})` },
+                  { id: "active", label: `Active (${currentAssignments.length})` },
+                  { id: "past", label: `Ended (${pastAssignments.length})` },
                 ]}
                 activeId={assignmentsSubtab}
                 onSelect={setAssignmentsSubtab}
@@ -391,7 +391,7 @@ export default function TeacherShell({
             <TeacherMockExamTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
-              {activeLabel} 탭은 준비 중입니다.
+              {activeLabel} is coming soon.
             </div>
           )}
         </PageFrame>

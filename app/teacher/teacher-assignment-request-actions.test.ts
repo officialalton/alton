@@ -50,7 +50,7 @@ describe("respondTeacherAssignmentRequestAction — 메신저 시스템 메시�
     expect(result.consultantId).toBe("consultant1");
     expect(postSystemMessageMock).toHaveBeenCalledWith({
       consultantId: "consultant1",
-      body: expect.stringContaining("수락"),
+      body: expect.stringContaining("accepted"),
     });
   });
 
@@ -64,7 +64,7 @@ describe("respondTeacherAssignmentRequestAction — 메신저 시스템 메시�
 
     expect(postSystemMessageMock).toHaveBeenCalledWith({
       consultantId: "consultant1",
-      body: expect.stringContaining("거절"),
+      body: expect.stringContaining("declined"),
     });
     expect(postSystemMessageMock.mock.calls[0][0].body).toContain("일정 불가");
   });

@@ -26,10 +26,10 @@ async function requireTeacherOrAdmin() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
   if (profile?.role !== "teacher" && profile?.role !== "admin") {
-    throw new Error("선생님·관리자만 회차를 준비할 수 있습니다.");
+    throw new Error("Only teachers and admins can prepare sessions.");
   }
   return { supabase, user };
 }
@@ -114,7 +114,7 @@ export async function addUnitPrepItem(
     .select("id")
     .eq("overlay_unit_id", overlayUnitId)
     .maybeSingle();
-  if (!prep) throw new Error("이 회차의 준비를 찾을 수 없습니다.");
+  if (!prep) throw new Error("Prep for this session couldn't be found.");
 
   const { data: last } = await supabase
     .from("curriculum_unit_prep_items")
@@ -404,7 +404,7 @@ export async function composeUnitPrepProblems(
     .eq("overlay_unit_id", overlayUnitId);
   const keywordIds = Array.from(new Set((keywordRows ?? []).map((k) => k.keyword_id as string)));
   if (!keywordIds.length) {
-    return { ok: false, error: "이 회차에 아직 키워드가 없습니다. 키워드를 먼저 선택하세요." };
+    return { ok: false, error: "This session has no keywords yet. Pick a keyword first." };
   }
 
   const { data: prep } = await supabase
@@ -412,7 +412,7 @@ export async function composeUnitPrepProblems(
     .select("id")
     .eq("overlay_unit_id", overlayUnitId)
     .maybeSingle();
-  if (!prep) return { ok: false, error: "이 회차의 준비를 찾을 수 없습니다." };
+  if (!prep) return { ok: false, error: "Prep for this session couldn't be found." };
 
   const { data: candidateRows } = await selectInChunks(keywordIds, (chunk) => supabase
     .from("problem_auto_composition_candidates")
@@ -433,7 +433,7 @@ export async function composeUnitPrepProblems(
     .delete()
     .eq("prep_id", prep.id)
     .eq("content_type", "problem");
-  if (deleteError) return { ok: false, error: "기존 문제 구성을 정리하지 못했습니다." };
+  if (deleteError) return { ok: false, error: "Couldn't clear the existing problem composition." };
 
   if (picked.length > 0) {
     const { error: insertError } = await supabase.from("curriculum_unit_prep_items").insert(
@@ -444,7 +444,7 @@ export async function composeUnitPrepProblems(
         position: index + 1,
       }))
     );
-    if (insertError) return { ok: false, error: "문제 구성을 저장하지 못했습니다." };
+    if (insertError) return { ok: false, error: "Couldn't save the problem composition." };
   }
 
   return { ok: true, composedCount: picked.length, availableCount };
@@ -548,10 +548,10 @@ export async function loadUnitComposition(overlayUnitId: string): Promise<UnitCo
   return {
     // 과목 키워드 목록에서 이름을 찾는다. 못 찾으면(비활성 등) 목록에서 빼지 않고
     // 붙어 있다는 사실을 그대로 보여준다 — 조용히 사라지면 왜 후보가 저런지 모른다.
-    keywords: keywordIds.map((id) => ({ id, label: byId.get(id) ?? "(더 이상 쓰지 않는 키워드)" })),
+    keywords: keywordIds.map((id) => ({ id, label: byId.get(id) ?? "(retired keyword)" })),
     materials: (materialRows ?? []).map((m) => ({
       curriculumDocId: m.curriculum_doc_id as string,
-      title: titleById.get(m.curriculum_doc_id as string) ?? "(제목 없음)",
+      title: titleById.get(m.curriculum_doc_id as string) ?? "(Untitled)",
       position: m.position as number,
       source: (m.source as "auto" | "manual") ?? "manual",
     })),
@@ -570,7 +570,7 @@ export async function addUnitKeyword(
     .from("curriculum_overlay_unit_keywords")
     .insert({ overlay_unit_id: overlayUnitId, keyword_id: keywordId });
   // 이미 붙어 있는 것은 오류가 아니다 — 원하는 상태가 이미 맞다.
-  if (error && error.code !== "23505") return { ok: false, error: "키워드를 붙이지 못했습니다." };
+  if (error && error.code !== "23505") return { ok: false, error: "Couldn't attach the keyword." };
   return { ok: true };
 }
 
@@ -584,7 +584,7 @@ export async function removeUnitKeyword(
     .delete()
     .eq("overlay_unit_id", overlayUnitId)
     .eq("keyword_id", keywordId);
-  if (error) return { ok: false, error: "키워드를 떼지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't remove the keyword." };
   return { ok: true };
 }
 
@@ -602,7 +602,7 @@ export async function inheritUnitDefaults(overlayUnitId: string): Promise<
   const { data, error } = await supabase
     .rpc("inherit_unit_defaults_from_template", { p_overlay_unit_id: overlayUnitId })
     .maybeSingle();
-  if (error) return { ok: false, error: "기본 구성을 가져오지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't import the defaults." };
   const row = data as {
     keywords_added?: number;
     materials_added?: number;
@@ -642,13 +642,13 @@ export async function moveUnitMaterial(
     .update({ position: b.position })
     .eq("overlay_unit_id", overlayUnitId)
     .eq("curriculum_doc_id", a.curriculum_doc_id);
-  if (error) return { ok: false, error: "순서를 바꾸지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't reorder." };
   const { error: secondError } = await supabase
     .from("curriculum_overlay_unit_materials")
     .update({ position: a.position })
     .eq("overlay_unit_id", overlayUnitId)
     .eq("curriculum_doc_id", b.curriculum_doc_id);
-  if (secondError) return { ok: false, error: "순서를 바꾸지 못했습니다." };
+  if (secondError) return { ok: false, error: "Couldn't reorder." };
   return { ok: true };
 }
 
@@ -667,14 +667,14 @@ export async function removeUnitMaterial(
     .from("curriculum_overlay_unit_material_exclusions")
     .insert({ overlay_unit_id: overlayUnitId, curriculum_doc_id: curriculumDocId, created_by: user.id });
   if (excludeError && excludeError.code !== "23505") {
-    return { ok: false, error: "교재를 빼지 못했습니다." };
+    return { ok: false, error: "Couldn't remove the material." };
   }
   const { error } = await supabase
     .from("curriculum_overlay_unit_materials")
     .delete()
     .eq("overlay_unit_id", overlayUnitId)
     .eq("curriculum_doc_id", curriculumDocId);
-  if (error) return { ok: false, error: "교재를 빼지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't remove the material." };
   return { ok: true };
 }
 
@@ -757,7 +757,7 @@ export async function previewUnitMaterial(
       .order("position", { ascending: true }),
   ]);
   return {
-    title: (doc?.title as string) ?? "(제목 없음)",
+    title: (doc?.title as string) ?? "(Untitled)",
     sectionTitles: (sections ?? []).map((s) => s.title as string),
   };
 }
@@ -783,9 +783,9 @@ export async function addUnitMaterial(
     .select("status")
     .eq("id", curriculumDocId)
     .maybeSingle();
-  if (!doc) return { ok: false, error: "존재하지 않는 교재입니다." };
+  if (!doc) return { ok: false, error: "This material doesn't exist." };
   if (doc.status !== "published") {
-    return { ok: false, error: "배포된 교재만 담을 수 있습니다." };
+    return { ok: false, error: "Only published materials can be added." };
   }
 
   await supabase
@@ -803,7 +803,7 @@ export async function addUnitMaterial(
       created_by: user.id,
     });
   // 이미 담겨 있는 것은 오류가 아니다.
-  if (error && error.code !== "23505") return { ok: false, error: "교재를 담지 못했습니다." };
+  if (error && error.code !== "23505") return { ok: false, error: "Couldn't add the material." };
   return { ok: true };
 }
 

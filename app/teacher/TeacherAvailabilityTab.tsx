@@ -10,7 +10,7 @@ import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { todayKeyInTimezone, dateKeysCoveredByInterval, dayOfWeekForDateKey, buildMonthGrid } from "@/lib/calendar-date-utils";
 import { computeOpenWindowsForDate, type AvailabilityException } from "@/lib/booking/slot-search";
 
-const DAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
+const DAY_LABELS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export type TeacherAvailabilityTabProps = {
   initialRules: TeacherAvailabilityRuleRow[];
@@ -257,7 +257,7 @@ export default function TeacherAvailabilityTab({
 
   async function handleAddPartialException(kind: "blocked" | "available") {
     if (partialEndTimeLocal <= partialStartTimeLocal) {
-      setError("종료 시각은 시작 시각 이후여야 합니다.");
+      setError("End time must be after start time.");
       return;
     }
     setSubmitting(true);
@@ -269,7 +269,7 @@ export default function TeacherAvailabilityTab({
         endTimeLocal: partialEndTimeLocal,
       });
       setMessage(
-        `${selectedDateKey} ${partialStartTimeLocal}~${partialEndTimeLocal} ${kind === "blocked" ? "휴무" : "임시 오픈"}(부분 시간) 등록됐습니다.`
+        `${selectedDateKey} ${partialStartTimeLocal}–${partialEndTimeLocal} ${kind === "blocked" ? "time off" : "extra availability"} (partial) saved.`
       );
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -284,7 +284,7 @@ export default function TeacherAvailabilityTab({
     try {
       await onRemoveException(exceptionId);
       setExceptions((prev) => prev.filter((e) => e.id !== exceptionId));
-      setMessage("부분 시간 예외가 삭제됐습니다.");
+      setMessage("Partial-time exception deleted.");
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -298,7 +298,7 @@ export default function TeacherAvailabilityTab({
     setMessage(null);
     try {
       await addExceptionForDate(selectedDateKey, kind);
-      setMessage(`${selectedDateKey} ${kind === "blocked" ? "휴무" : "임시 오픈"} 등록됐습니다.`);
+      setMessage(`${selectedDateKey} ${kind === "blocked" ? "time off" : "extra availability"} saved.`);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -313,7 +313,7 @@ export default function TeacherAvailabilityTab({
     try {
       await onRemoveException(selectedException.id);
       setExceptions((prev) => prev.filter((e) => e.id !== selectedException.id));
-      setMessage(`${selectedDateKey} 예외가 삭제됐습니다.`);
+      setMessage(`Exception on ${selectedDateKey} deleted.`);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -323,7 +323,7 @@ export default function TeacherAvailabilityTab({
 
   async function handleAddRangeBlocked() {
     if (rangeEndDateKey < selectedDateKey) {
-      setError("종료일은 시작일 이후여야 합니다.");
+      setError("End date must be on or after the start date.");
       return;
     }
     setSubmitting(true);
@@ -337,7 +337,7 @@ export default function TeacherAvailabilityTab({
         cursor = addDaysToKey(cursor, 1);
         count += 1;
       }
-      setMessage(`${selectedDateKey}~${rangeEndDateKey} 기간 휴무 ${count}일 등록됐습니다.`);
+      setMessage(`Time off saved for ${count} day(s), ${selectedDateKey} to ${rangeEndDateKey}.`);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -359,7 +359,7 @@ export default function TeacherAvailabilityTab({
           count += 1;
         }
       }
-      setMessage(count > 0 ? `지난달 예외 ${count}건을 이번 달로 복사했습니다.` : "지난달에 복사할 예외가 없습니다.");
+      setMessage(count > 0 ? `Copied ${count} exception(s) from last month.` : "No exceptions from last month to copy.");
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -372,8 +372,8 @@ export default function TeacherAvailabilityTab({
       <UnderlineSubTabs
         className="mb-5"
         items={[
-          { id: "recurring", label: "반복 일정 등록" },
-          { id: "exception", label: "휴무 일정 등록" },
+          { id: "recurring", label: "Recurring Hours" },
+          { id: "exception", label: "Time Off" },
         ]}
         activeId={subtab}
         onSelect={setSubtab}
@@ -384,7 +384,7 @@ export default function TeacherAvailabilityTab({
           {TEACHER_TIMEZONE_REQUIRED_MESSAGE}
           {onOpenTimezoneSettings && (
             <button type="button" onClick={onOpenTimezoneSettings} className="ml-2 underline">
-              시간대 설정하기
+              Set time zone
             </button>
           )}
         </div>
@@ -395,7 +395,7 @@ export default function TeacherAvailabilityTab({
       {subtab === "recurring" && (
       <>
       <div className="flex items-center justify-between mb-2.5">
-        <h2 className="text-[15px] font-bold text-ink">반복 가능 시간(주간 템플릿)</h2>
+        <h2 className="text-[15px] font-bold text-ink">Recurring availability (weekly template)</h2>
         <div className="flex gap-1">
           {(["grid", "list"] as const).map((v) => (
             <button
@@ -406,7 +406,7 @@ export default function TeacherAvailabilityTab({
                 (rulesView === v ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
               }
             >
-              {v === "grid" ? "주간 그리드" : "목록"}
+              {v === "grid" ? "Week grid" : "List"}
             </button>
           ))}
         </div>
@@ -414,46 +414,46 @@ export default function TeacherAvailabilityTab({
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-6">
         <div className="flex gap-2 items-end flex-wrap">
           <div>
-            <label className="block text-[11px] font-bold text-grey-500 mb-1">요일</label>
+            <label className="block text-[11px] font-bold text-grey-500 mb-1">Day</label>
             <select className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]" value={dayOfWeek} onChange={(e) => setDayOfWeek(Number(e.target.value))}>
               {DAY_LABELS.map((label, idx) => (
-                <option key={idx} value={idx}>{label}요일</option>
+                <option key={idx} value={idx}>{label}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="block text-[11px] font-bold text-grey-500 mb-1">시작</label>
+            <label className="block text-[11px] font-bold text-grey-500 mb-1">Start</label>
             <input type="time" className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]" value={startTimeLocal} onChange={(e) => setStartTimeLocal(e.target.value)} />
           </div>
           <div>
-            <label className="block text-[11px] font-bold text-grey-500 mb-1">종료</label>
+            <label className="block text-[11px] font-bold text-grey-500 mb-1">End</label>
             <input type="time" className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[13px]" value={endTimeLocal} onChange={(e) => setEndTimeLocal(e.target.value)} />
           </div>
           <button disabled={submitting} onClick={handleAddRule} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-            추가
+            Add
           </button>
         </div>
       </div>
 
       {rules.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">등록된 반복 가능 시간이 없습니다.</div>
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">No recurring availability yet.</div>
       ) : rulesView === "grid" ? (
         <div className="mb-8">
           <WeeklyAvailabilityGrid
             rules={rules.map((r) => ({ id: r.id, weekday: r.dayOfWeek, startTime: r.startTimeLocal, endTime: r.endTimeLocal }))}
             onDeleteRule={(ruleId) => handleRemoveRule(ruleId)}
           />
-          <p className="text-[11px] text-grey-500 mt-1">블록을 클릭하면 해당 가능 시간이 삭제됩니다.</p>
+          <p className="text-[11px] text-grey-500 mt-1">Click a block to delete that time slot.</p>
         </div>
       ) : (
         <div className="mb-8">
           {rules.map((r) => (
             <div key={r.id} className="flex items-center justify-between border-b border-grey-200 py-2.5 text-[13px]">
               <span>
-                {DAY_LABELS[r.dayOfWeek]}요일 {r.startTimeLocal}~{r.endTimeLocal}
+                {DAY_LABELS[r.dayOfWeek]} {r.startTimeLocal}–{r.endTimeLocal}
               </span>
               <button disabled={submitting} onClick={() => handleRemoveRule(r.id)} className="text-[12px] font-bold text-red disabled:opacity-50">
-                삭제
+                Delete
               </button>
             </div>
           ))}
@@ -464,7 +464,7 @@ export default function TeacherAvailabilityTab({
 
       {subtab === "exception" && (
       <>
-      <h2 className="text-[15px] font-bold text-ink mb-2.5">날짜별 예외(월간 달력)</h2>
+      <h2 className="text-[15px] font-bold text-ink mb-2.5">Date exceptions (monthly calendar)</h2>
       <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,280px)_1fr] gap-4 mb-4">
         <div className="border-[1.5px] border-grey-200 rounded-xl p-3">
           <MonthCalendar
@@ -484,16 +484,16 @@ export default function TeacherAvailabilityTab({
           <div className="text-[13px] font-bold text-ink mb-2">{selectedDateKey}</div>
           {hasExternalBusyOnSelectedDate && (
             <div className="mb-2 text-[12px] font-semibold px-2 py-1 rounded-full bg-grey-100 text-grey-500 inline-block">
-              외부 일정 있음(예약 불가)
+              External event (unavailable)
             </div>
           )}
           {selectedException ? (
             <div className="mb-3">
               <span className="text-[12px] font-semibold px-2 py-1 rounded-full bg-grey-100 text-grey-500 mr-2">
-                {selectedException.kind === "blocked" ? "휴무(종일)" : "임시 오픈(종일)"}
+                {selectedException.kind === "blocked" ? "Time off (all day)" : "Extra availability (all day)"}
               </span>
               <button disabled={submitting} onClick={handleRemoveExceptionForSelectedDate} className="text-[12px] font-bold text-red disabled:opacity-50">
-                이 예외 삭제
+                Delete this exception
               </button>
             </div>
           ) : (
@@ -503,31 +503,31 @@ export default function TeacherAvailabilityTab({
                 onClick={() => handleAddExceptionForSelectedDate("blocked")}
                 className="text-[12px] font-bold bg-ink text-white rounded-lg px-3 py-1.5 disabled:opacity-50"
               >
-                이 날짜 휴무로
+                Mark this date as time off
               </button>
               <button
                 disabled={submitting}
                 onClick={() => handleAddExceptionForSelectedDate("available")}
                 className="text-[12px] font-bold border-[1.5px] border-ink text-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
               >
-                이 날짜 임시 오픈으로
+                Open this date (extra availability)
               </button>
             </div>
           )}
 
           <div className="border-t border-grey-200 pt-3 mb-3" data-testid="teacher-day-timeline">
             <div className="text-[11px] font-bold text-grey-500 mb-1">
-              이 날짜의 실제 오픈 시간(반복 규칙 + 예외 반영)
+              Open hours on this date (recurring rules + exceptions)
             </div>
             {openWindowsForSelectedDate.length === 0 ? (
               <div className="text-[12px] text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-2">
-                이 날짜는 열린 시간이 없습니다(휴무 또는 반복 가능시간 없음).
+                No open hours on this date (time off or no recurring availability).
               </div>
             ) : (
               <div className="flex flex-wrap gap-1.5 mb-2">
                 {openWindowsForSelectedDate.map((w) => (
                   <span key={`${w.startTimeLocal}-${w.endTimeLocal}`} className="text-[11.5px] text-ink border border-grey-200 rounded px-2 py-1">
-                    {w.startTimeLocal}~{w.endTimeLocal}
+                    {w.startTimeLocal}–{w.endTimeLocal}
                   </span>
                 ))}
               </div>
@@ -538,24 +538,24 @@ export default function TeacherAvailabilityTab({
                 {partialExceptionsForSelectedDate.map((ex) => (
                   <div key={ex.id} className="flex items-center justify-between text-[12px] py-1">
                     <span className="text-grey-500">
-                      {ex.kind === "blocked" ? "부분 휴무" : "부분 임시 오픈"}: {ex.startTimeLocal}~{ex.endTimeLocal}
+                      {ex.kind === "blocked" ? "Partial time off" : "Partial extra availability"}: {ex.startTimeLocal}–{ex.endTimeLocal}
                     </span>
                     <button
                       disabled={submitting}
                       onClick={() => handleRemovePartialException(ex.id)}
                       className="text-[12px] font-bold text-red disabled:opacity-50"
                     >
-                      삭제
+                      Delete
                     </button>
                   </div>
                 ))}
               </div>
             )}
 
-            <div className="text-[10px] font-bold text-grey-500 mb-1">부분 시간대만 조정</div>
+            <div className="text-[10px] font-bold text-grey-500 mb-1">Adjust a partial time range</div>
             <div className="flex gap-2 items-end flex-wrap">
               <div>
-                <label className="block text-[10px] text-grey-500 mb-1">시작</label>
+                <label className="block text-[10px] text-grey-500 mb-1">Start</label>
                 <input
                   type="time"
                   className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
@@ -564,7 +564,7 @@ export default function TeacherAvailabilityTab({
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-grey-500 mb-1">종료</label>
+                <label className="block text-[10px] text-grey-500 mb-1">End</label>
                 <input
                   type="time"
                   className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
@@ -577,23 +577,23 @@ export default function TeacherAvailabilityTab({
                 onClick={() => handleAddPartialException("blocked")}
                 className="text-[12px] font-bold bg-ink text-white rounded-lg px-3 py-1.5 disabled:opacity-50"
               >
-                이 시간대만 휴무로
+                Block this time range
               </button>
               <button
                 disabled={submitting}
                 onClick={() => handleAddPartialException("available")}
                 className="text-[12px] font-bold border-[1.5px] border-ink text-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
               >
-                이 시간대만 임시 오픈으로
+                Open this time range
               </button>
             </div>
           </div>
 
           <div className="border-t border-grey-200 pt-3 mb-3">
-            <div className="text-[11px] font-bold text-grey-500 mb-1">기간 휴무(월 단위 일괄)</div>
+            <div className="text-[11px] font-bold text-grey-500 mb-1">Time off for a date range</div>
             <div className="flex gap-2 items-end flex-wrap">
               <div>
-                <label className="block text-[10px] text-grey-500 mb-1">종료일</label>
+                <label className="block text-[10px] text-grey-500 mb-1">End date</label>
                 <input
                   type="date"
                   className="border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 text-[12px]"
@@ -603,13 +603,13 @@ export default function TeacherAvailabilityTab({
                 />
               </div>
               <button disabled={submitting} onClick={handleAddRangeBlocked} className="text-[12px] font-bold bg-ink text-white rounded-lg px-3 py-1.5 disabled:opacity-50">
-                {selectedDateKey}~{rangeEndDateKey} 전체 휴무 등록
+                Block {selectedDateKey} to {rangeEndDateKey}
               </button>
             </div>
           </div>
 
           <button disabled={submitting} onClick={handleCopyPreviousMonth} className="text-[12px] font-bold text-ink underline disabled:opacity-50">
-            지난달 예외 이번 달로 복사
+            Copy last month&apos;s exceptions to this month
           </button>
         </div>
       </div>

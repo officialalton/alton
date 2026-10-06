@@ -25,7 +25,7 @@ export type TimeOffConflict = {
 
 async function requireConsultant() {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "consultant") throw new Error("컨설턴트만 접근할 수 있습니다.");
+  if (profile?.role !== "consultant") throw new Error("Only consultants can access this.");
   return { userId: user.id, supabase };
 }
 
@@ -78,10 +78,10 @@ async function findConflicts(
   for (const m of meetings ?? []) {
     const rel = m.child as { name: string | null } | { name: string | null }[] | null;
     const child = Array.isArray(rel) ? rel[0] : rel;
-    conflicts.push({ kind: "meeting_request", label: child?.name ?? "학생 일정", startsAt: m.starts_at });
+    conflicts.push({ kind: "meeting_request", label: child?.name ?? "Student meeting", startsAt: m.starts_at });
   }
   for (const c of consultations ?? []) {
-    conflicts.push({ kind: "consultation", label: c.contact_name ?? "상담", startsAt: c.starts_at });
+    conflicts.push({ kind: "consultation", label: c.contact_name ?? "Consultation", startsAt: c.starts_at });
   }
   return conflicts;
 }
@@ -94,7 +94,7 @@ export async function createMyTimeOffAction(params: {
 }): Promise<{ conflicts: TimeOffConflict[] } | { id: string }> {
   const { userId, supabase } = await requireConsultant();
   if (new Date(params.endsAt) <= new Date(params.startsAt)) {
-    throw new Error("종료 시각은 시작 시각보다 나중이어야 합니다.");
+    throw new Error("End time must be after the start time.");
   }
 
   const conflicts = await findConflicts(supabase, userId, params.startsAt, params.endsAt);

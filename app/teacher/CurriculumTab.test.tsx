@@ -98,14 +98,14 @@ const baseProps = {
 describe("CurriculumTab", () => {
   it("기본 서브탭은 내 과목이다", () => {
     render(<CurriculumTab {...baseProps} />);
-    expect(screen.getByText("담당 중인 과목이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No subjects assigned yet.")).toBeInTheDocument();
   });
 
   it("학생별 서브탭에서 학생을 고르면 그 학생의 과목이 보인다", () => {
     render(<CurriculumTab {...baseProps} />);
-    fireEvent.click(screen.getByText("학생별"));
+    fireEvent.click(screen.getByText("By Student"));
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
-    expect(screen.getByText("8/12회차")).toBeInTheDocument();
+    expect(screen.getByText("Session 8/12")).toBeInTheDocument();
   });
 
   it("과목을 클릭하면 커리큘럼 상세로 이동한다(온디맨드 조회)", async () => {
@@ -114,7 +114,7 @@ describe("CurriculumTab", () => {
       memos: [],
     });
     render(<CurriculumTab {...baseProps} />);
-    fireEvent.click(screen.getByText("학생별"));
+    fireEvent.click(screen.getByText("By Student"));
     fireEvent.click(screen.getByText("SAT Math"));
     expect(loadLegacyCurriculumDetail).toHaveBeenCalledWith("e1");
     await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
@@ -148,12 +148,12 @@ describe("CurriculumTab", () => {
     render(
       <CurriculumTab {...baseProps} students={v3OnlyStudents} />
     );
-    fireEvent.click(screen.getByText("학생별"));
+    fireEvent.click(screen.getByText("By Student"));
 
     // 레거시 curricula가 비어 있어도(v3 전용 배정) "아직 배정된 커리큘럼이
     // 없습니다"가 아니라 실제 과목이 보여야 한다 — 회귀 시 이 지점에서 실패.
     expect(
-      screen.queryByText("아직 배정된 커리큘럼이 없습니다.")
+      screen.queryByText("No curriculum assigned yet.")
     ).not.toBeInTheDocument();
     expect(screen.getByText("SAT English")).toBeInTheDocument();
     // C-1(2026-09-10) — 단순 "운영 커리큘럼" 표기·"0/0회차" 대신
@@ -166,7 +166,7 @@ describe("CurriculumTab", () => {
     // v3 운영 커리큘럼 화면(loadStudentCurriculumPanelData 경유)으로 가야 한다.
     expect(loadStudentCurriculumPanelData).toHaveBeenCalledWith("se-v3-1", "sub2");
     await waitFor(() =>
-      expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument()
+      expect(screen.getByText("Student Curriculum")).toBeInTheDocument()
     );
   });
 
@@ -202,12 +202,12 @@ describe("CurriculumTab", () => {
 
     expect(loadStudentCurriculumPanelData).toHaveBeenCalledWith("se1", "sub1");
     expect(onOperatingCurriculumJumpConsumed).toHaveBeenCalled();
-    await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Student Curriculum")).toBeInTheDocument());
   });
 
   it("R9 Task 3 UI 배선 — 담당이 아닌 학생의 운영 커리큘럼으로 진입을 시도하면 로더가 에러를 보여준다(원본 데이터 노출 없음)", async () => {
     (loadStudentCurriculumPanelData as ReturnType<typeof vi.fn>).mockRejectedValue(
-      new Error("담당 학생의 커리큘럼만 조정할 수 있습니다.")
+      new Error("You can only adjust curricula for your assigned students.")
     );
 
     render(
@@ -218,9 +218,9 @@ describe("CurriculumTab", () => {
     );
 
     await waitFor(() =>
-      expect(screen.getByText("담당 학생의 커리큘럼만 조정할 수 있습니다.")).toBeInTheDocument()
+      expect(screen.getByText("You can only adjust curricula for your assigned students.")).toBeInTheDocument()
     );
-    expect(screen.queryByText("학생 운영 커리큘럼")).toBeNull();
+    expect(screen.queryByText("Student Curriculum")).toBeNull();
   });
 
   // 2026-09-11(제품 오너 지적 — 캐시 정확성) — "운영 커리큘럼 관리"↔"세션
@@ -243,7 +243,7 @@ describe("CurriculumTab", () => {
         operatingCurriculumJumpTo={{ subjectEnrollmentId: "se1", subjectId: "sub1", studentName: "지훈", subjectName: "SAT Math" }}
       />
     );
-    await waitFor(() => expect(screen.getByText("학생 운영 커리큘럼")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Student Curriculum")).toBeInTheDocument());
     expect(mockFn).toHaveBeenCalledTimes(1);
 
     // P2/P3(2026-09-12) — 준비 화면은 회차 준비 하나로 통일했다. 별도

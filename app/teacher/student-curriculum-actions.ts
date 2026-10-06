@@ -16,7 +16,7 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
 
   // 2026-09-11(응답 속도 개선) — profile 조회와 담당 배정 조회는 서로
   // 의존하지 않는다(둘 다 user.id만 있으면 됨) — 순차 왕복 대신 병렬로
@@ -36,8 +36,8 @@ async function requireAssignedTeacherOrAdmin(subjectEnrollmentId: string) {
   ]);
 
   if (profile?.role === "admin") return { supabase, user };
-  if (profile?.role !== "teacher") throw new Error("선생님만 사용할 수 있습니다.");
-  if (!assignment) throw new Error("담당 학생의 커리큘럼만 조정할 수 있습니다.");
+  if (profile?.role !== "teacher") throw new Error("Only teachers can use this.");
+  if (!assignment) throw new Error("You can only adjust curricula for your assigned students.");
 
   return { supabase, user };
 }
@@ -100,7 +100,7 @@ export async function ensureActiveOverlay(subjectEnrollmentId: string): Promise<
   try {
     ({ supabase } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId));
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "이 학생의 커리큘럼을 열 권한이 없습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "You don't have permission to open this student's curriculum." };
   }
 
   const { data, error } = await supabase.rpc("ensure_active_curriculum_overlay", {
@@ -108,7 +108,7 @@ export async function ensureActiveOverlay(subjectEnrollmentId: string): Promise<
   });
   if (error) {
     console.error(JSON.stringify({ event: "ensure_overlay_failed", subjectEnrollmentId, message: error.message }));
-    return { ok: false, error: readableDbError(error.message, "학생 커리큘럼을 준비하지 못했습니다.") };
+    return { ok: false, error: readableDbError(error.message, "Couldn't set up the student curriculum.") };
   }
   return { ok: true, overlayId: data as string };
 }
@@ -148,7 +148,7 @@ export async function addCanonicalUnit(
   // 사유(RLS·트리거 메시지)가 사라진다. 사유를 값으로 돌려주고 화면이 보여준다.
   if (error) {
     console.error(JSON.stringify({ event: "overlay_unit_add_failed", sourceUnitId, message: error.message }));
-    return { ok: false, error: readableDbError(error.message, "단원을 불러오지 못했습니다.") };
+    return { ok: false, error: readableDbError(error.message, "Couldn't add the unit.") };
   }
   return { ok: true, unit: mapUnitRow(data) };
 }
@@ -158,7 +158,7 @@ export async function addCanonicalUnit(
  * RLS 거절은 권한 문구로, 그 밖은 원문 앞에 짧은 설명을 붙인다.
  */
 function readableDbError(message: string, fallback: string): string {
-  if (/row-level security/i.test(message)) return "이 학생의 커리큘럼을 고칠 권한이 없습니다(담당 선생님·관리자만).";
+  if (/row-level security/i.test(message)) return "You don't have permission to edit this student's curriculum (assigned teacher or admin only).";
   if (/[가-힣]/.test(message)) return message.replace(/^.*?:\s*/, "");
   return `${fallback} (${message.slice(0, 160)})`;
 }
@@ -393,7 +393,7 @@ export async function previewAdditionalStudyUnitInsert(
   try {
     ({ user } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId));
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "이 학생의 커리큘럼을 열 권한이 없습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "You don't have permission to open this student's curriculum." };
   }
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("preview_additional_study_unit_insert", {
@@ -424,7 +424,7 @@ export async function insertAdditionalStudyUnit(
   try {
     ({ user } = await requireAssignedTeacherOrAdmin(subjectEnrollmentId));
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "이 학생의 커리큘럼을 조정할 권한이 없습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "You don't have permission to adjust this student's curriculum." };
   }
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("insert_additional_study_unit", {

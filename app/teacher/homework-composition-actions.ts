@@ -49,7 +49,7 @@ async function requireAssignedTeacherOrAdminForSession(sessionId: string): Promi
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
 
   const { data: session, error: sessionError } = await supabase
     .from("sessions")
@@ -57,7 +57,7 @@ async function requireAssignedTeacherOrAdminForSession(sessionId: string): Promi
     .eq("id", sessionId)
     .maybeSingle();
   if (sessionError) throw new Error(sessionError.message);
-  if (!session) throw new Error("세션을 찾을 수 없습니다.");
+  if (!session) throw new Error("Session not found.");
 
   const { data: enrollment, error: enrollmentError } = await supabase
     .from("subject_enrollments")
@@ -65,12 +65,12 @@ async function requireAssignedTeacherOrAdminForSession(sessionId: string): Promi
     .eq("id", session.subject_enrollment_id as string)
     .maybeSingle();
   if (enrollmentError) throw new Error(enrollmentError.message);
-  if (!enrollment) throw new Error("수강 정보를 찾을 수 없습니다.");
+  if (!enrollment) throw new Error("Enrollment not found.");
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
 
   if (profile?.role !== "admin") {
-    if (profile?.role !== "teacher") throw new Error("선생님만 사용할 수 있습니다.");
+    if (profile?.role !== "teacher") throw new Error("Only teachers can use this.");
     // 앱 레벨 선인가 — 실제 방어선은 RLS(is_session_teacher_v3)다.
     const { data: assignment } = await supabase
       .from("teacher_assignments")
@@ -79,7 +79,7 @@ async function requireAssignedTeacherOrAdminForSession(sessionId: string): Promi
       .eq("teacher_id", user.id)
       .in("status", ["planned", "active"])
       .maybeSingle();
-    if (!assignment) throw new Error("담당 학생의 세션에만 과제를 구성할 수 있습니다.");
+    if (!assignment) throw new Error("You can only compose homework for sessions of students assigned to you.");
   }
 
   return {

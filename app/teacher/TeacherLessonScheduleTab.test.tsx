@@ -62,7 +62,7 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No upcoming lessons.")).toBeInTheDocument();
   });
 
   it("예정 수업 목록에 수업이 표시된다", () => {
@@ -81,8 +81,8 @@ describe("TeacherLessonScheduleTab", () => {
     );
     expect(screen.getByText("지훈")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
-    expect(screen.getByText("정규")).toBeInTheDocument();
-    expect(screen.getByText(/120분/)).toBeInTheDocument();
+    expect(screen.getByText("Regular")).toBeInTheDocument();
+    expect(screen.getByText(/120 min/)).toBeInTheDocument();
   });
 
   it("'수업 준비'는 각 수업 카드의 정확한 sessionId로만 진입하고, 다른 수업으로 이동하지 않는다", () => {
@@ -108,8 +108,8 @@ describe("TeacherLessonScheduleTab", () => {
     );
 
     // 2026-09-14 — 시작 전 수업에는 '수업 준비' 하나만 있다. '수업 열기'는 없다.
-    expect(screen.queryByText("수업 열기")).not.toBeInTheDocument();
-    const prepButtons = screen.getAllByText("수업 준비");
+    expect(screen.queryByText("Open lesson")).not.toBeInTheDocument();
+    const prepButtons = screen.getAllByText("Lesson prep");
     expect(prepButtons).toHaveLength(2);
 
     fireEvent.click(prepButtons[1]);
@@ -146,7 +146,7 @@ describe("TeacherLessonScheduleTab", () => {
     );
 
     // 지난 수업 카드에는 준비할 것이 없으므로 버튼이 붙지 않는다.
-    const prepButtons = screen.getAllByText("수업 준비");
+    const prepButtons = screen.getAllByText("Lesson prep");
     expect(prepButtons).toHaveLength(1);
 
     fireEvent.click(prepButtons[0]);
@@ -171,10 +171,10 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    expect(screen.queryByText("수업 종료(완료)")).not.toBeInTheDocument();
-    expect(screen.queryByText(/학생 노쇼 확정/)).not.toBeInTheDocument();
+    expect(screen.queryByText("End lesson (completed)")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Confirm student no-show/)).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("수업 시작"));
+    fireEvent.click(screen.getByText("Start lesson"));
     await waitFor(() => expect(onStartSession).toHaveBeenCalledWith("s1"));
     await waitFor(() => expect(onRefresh).toHaveBeenCalled());
   });
@@ -197,7 +197,7 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    fireEvent.click(screen.getByText("수업 시작"));
+    fireEvent.click(screen.getByText("Start lesson"));
 
     // 빈 탭을 연 뒤 location.href를 나중에 설정하는 패턴은 완전히 제거됐다
     // ("noopener"가 있으면 window.open()이 null을 반환해 location.href 대입이
@@ -216,7 +216,7 @@ describe("TeacherLessonScheduleTab", () => {
     const openSpy = vi.spyOn(window, "open").mockReturnValue(null);
     const onStartSession = vi.fn().mockResolvedValue({
       ok: false,
-      error: "본인 수업만 시작할 수 있습니다.",
+      error: "You can only start your own lessons.",
     });
     render(
       <TeacherLessonScheduleTab
@@ -232,8 +232,8 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    fireEvent.click(screen.getByText("수업 시작"));
-    await waitFor(() => expect(screen.getByText("본인 수업만 시작할 수 있습니다.")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("Start lesson"));
+    await waitFor(() => expect(screen.getByText("You can only start your own lessons.")).toBeInTheDocument());
     expect(screen.queryByText(/Minified React error/)).not.toBeInTheDocument();
     // 2026-09-09(제품 오너 지시): 더는 핸들을 붙잡고 있다가 닫는 방식이 아니라
     // Meet URL을 window.open()에 직접 전달하므로, 시작 실패와 무관하게 클릭
@@ -264,7 +264,7 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    fireEvent.click(screen.getByText("수업 종료(완료)"));
+    fireEvent.click(screen.getByText("End lesson (completed)"));
     await waitFor(() => expect(confirmSpy).toHaveBeenCalled());
     await waitFor(() =>
       expect(onFinalizeSession).toHaveBeenLastCalledWith({
@@ -296,13 +296,13 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    fireEvent.click(screen.getByText("수업 종료(완료)"));
+    fireEvent.click(screen.getByText("End lesson (completed)"));
     await waitFor(() =>
       expect(onFinalizeSession).toHaveBeenCalledWith({ sessionId: "s1", outcome: "completed", reason: "선생님 수업 종료" })
     );
 
-    fireEvent.click(screen.getByText(/학생 노쇼 확정/));
-    fireEvent.click(screen.getByText("확정"));
+    fireEvent.click(screen.getByText(/Confirm student no-show/));
+    fireEvent.click(screen.getByText("Confirm"));
     await waitFor(() =>
       expect(onFinalizeSession).toHaveBeenCalledWith({
         sessionId: "s1",
@@ -327,8 +327,8 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.queryByText("수업 시작")).not.toBeInTheDocument();
-    expect(screen.queryByText("수업 종료(완료)")).not.toBeInTheDocument();
+    expect(screen.queryByText("Start lesson")).not.toBeInTheDocument();
+    expect(screen.queryByText("End lesson (completed)")).not.toBeInTheDocument();
   });
 
   it("체험 수업은 '체험' 배지를 보여주고, Smart Notes가 연결됐으면 링크를 보여준다", () => {
@@ -351,9 +351,9 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.getByText("체험")).toBeInTheDocument();
-    expect(screen.getByText(/60분/)).toBeInTheDocument();
-    const link = screen.getByText("Smart Notes 보기");
+    expect(screen.getByText("Trial")).toBeInTheDocument();
+    expect(screen.getByText(/60 min/)).toBeInTheDocument();
+    const link = screen.getByText("View Smart Notes");
     expect(link.closest("a")).toHaveAttribute("href", "https://drive.google.com/file/d/drive-file-1/view");
   });
 
@@ -371,7 +371,7 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.queryByText("Smart Notes 보기")).not.toBeInTheDocument();
+    expect(screen.queryByText("View Smart Notes")).not.toBeInTheDocument();
   });
 
   it("취소하면 onCancel이 호출되고 onRefresh가 실행된다", async () => {
@@ -380,8 +380,8 @@ describe("TeacherLessonScheduleTab", () => {
     render(
       <TeacherLessonScheduleTab lessons={[lesson]} exceptions={[]} timezone="America/Los_Angeles" onCancel={onCancel} onRefresh={onRefresh} onLoadExternalBusy={vi.fn().mockResolvedValue([])} onStartSession={vi.fn()} onFinalizeSession={vi.fn()} onResolveLateness={vi.fn()} />
     );
-    fireEvent.click(screen.getByText("취소"));
-    fireEvent.click(screen.getByText("취소 확정"));
+    fireEvent.click(screen.getByText("Cancel"));
+    fireEvent.click(screen.getByText("Confirm cancellation"));
     await waitFor(() => expect(onCancel).toHaveBeenCalledWith("r1", "선생님 취소"));
     expect(onRefresh).toHaveBeenCalled();
   });
@@ -400,7 +400,7 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.getByText("관리자 확인 필요(외부 변경 감지)")).toBeInTheDocument();
+    expect(screen.getByText("Needs admin review (external change detected)")).toBeInTheDocument();
   });
 
   it("월간 뷰에서 외부 바쁨 블록이 있는 날짜에 표시가 붙고, 선택 시 목록에 노출된다(제목·내용 없음)", async () => {
@@ -423,14 +423,14 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
     await waitFor(() => expect(onLoadExternalBusy).toHaveBeenCalled());
-    fireEvent.click(screen.getByText("월간"));
-    await waitFor(() => expect(screen.getByLabelText("다음 달")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("Month"));
+    await waitFor(() => expect(screen.getByLabelText("Next month")).toBeInTheDocument());
 
     const day10 = screen.getAllByText("10").find((el) => el.closest("button"));
     fireEvent.click(day10!.closest("button")!);
 
-    await waitFor(() => expect(screen.getByText("외부 일정(예약 불가)")).toBeInTheDocument());
-    expect(screen.getByText(/^외부 일정 ·/)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("External events (unavailable)")).toBeInTheDocument());
+    expect(screen.getByText(/^External event ·/)).toBeInTheDocument();
   });
 
   it("외부 바쁨 블록 조회가 실패해도(미승인 등) 화면은 정상 렌더링된다", async () => {
@@ -448,13 +448,13 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No upcoming lessons.")).toBeInTheDocument();
   });
 
   it("M4 골든패스 실사용 버그 #3/#4 — '예정 수업 목록'은 이번 주로 제한하지 않고 다음 주 이후 예정 수업도 그대로 보여준다", () => {
     // 실사용 버그 리포트: 선생님 포털 "수업 일정" 탭의 "금주 목록"(이번 주로 필터링)에
     // 표시된 날짜 범위(예: 9/6~9/12) 밖의 9/16 수업이 목록에 나타난다는 지적이 있었다.
-    // 제품 오너 결정: "금주" 제한 자체를 없애고 "예정 수업 목록"으로 개명해 오늘 이후
+    // 제품 오너 결정: "금주" 제한 자체를 없애고 "Upcoming list"으로 개명해 오늘 이후
     // 예정된 모든 수업을 보여주기로 했다 — 그러면 이 시나리오는 애초에 "버그"가 아니라
     // 기대 동작이 된다. 이 테스트는 이번 주 범위를 벗어난 다음 주 수업도 목록에 그대로
     // 나타나는지 고정 검증한다.
@@ -480,7 +480,7 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.getByText("예정 수업 목록")).toBeInTheDocument();
+    expect(screen.getByText("Upcoming list")).toBeInTheDocument();
     expect(screen.getByText("지훈")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
     vi.useRealTimers();
@@ -525,14 +525,14 @@ describe("TeacherLessonScheduleTab", () => {
     // (2026-09-17 정정 — 이전에는 체험 리뷰 미확정 시 예정된 수업에 남아있었다).
     // 리뷰 작성 버튼 자체는 2026-09-17(제품 오너 피드백)부터 체험/정규 모두에
     // 뜬다(체험 전용 제한 폐기) — 둘 다 완료(completed)+리뷰 미확정이므로 두
-    // 카드 모두 "수업 리뷰 작성" 버튼이 있다.
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
-    expect(screen.getByText(/지난 수업 \(2\)/)).toBeInTheDocument();
-    expect(screen.queryByText("정규")).not.toBeInTheDocument();
-    expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText(/지난 수업 \(2\)/));
-    expect(screen.getByText("정규")).toBeInTheDocument();
-    expect(screen.getAllByText("수업 리뷰 작성")).toHaveLength(2);
+    // 카드 모두 "Write lesson review" 버튼이 있다.
+    expect(screen.getByText("No upcoming lessons.")).toBeInTheDocument();
+    expect(screen.getByText(/Past lessons \(2\)/)).toBeInTheDocument();
+    expect(screen.queryByText("Regular")).not.toBeInTheDocument();
+    expect(screen.queryByText("Write lesson review")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Past lessons \(2\)/));
+    expect(screen.getByText("Regular")).toBeInTheDocument();
+    expect(screen.getAllByText("Write lesson review")).toHaveLength(2);
     vi.useRealTimers();
   });
 
@@ -575,15 +575,15 @@ describe("TeacherLessonScheduleTab", () => {
 
     // 2026-09-17(정정) — 종료 처리된 체험 수업은 이제 지난 수업(접힌 섹션)에
     // 있으므로 펼친 뒤에 리뷰 작성 버튼을 찾는다.
-    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
-    fireEvent.click(screen.getByText("수업 리뷰 작성"));
+    fireEvent.click(screen.getByText(/Past lessons \(1\)/));
+    fireEvent.click(screen.getByText("Write lesson review"));
     await waitFor(() => expect(listMySessionsNeedingReview).toHaveBeenCalled());
-    expect(await screen.findByText("수업 리뷰 작성", { selector: "h2" })).toBeInTheDocument();
+    expect(await screen.findByText("Write Lesson Review", { selector: "h2" })).toBeInTheDocument();
 
-    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
+    const textarea = await screen.findByLabelText("Overall comments for the family");
     fireEvent.change(textarea, { target: { value: "체험 수업 리뷰 내용" } });
-    fireEvent.click(screen.getByRole("button", { name: "공개 확정" }));
-    fireEvent.click(screen.getByRole("button", { name: "네, 공개합니다" }));
+    fireEvent.click(screen.getByRole("button", { name: "Publish" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, publish" }));
 
     await waitFor(() =>
       expect(finalizeLessonReview).toHaveBeenCalledWith({
@@ -591,7 +591,7 @@ describe("TeacherLessonScheduleTab", () => {
         finalText: "체험 수업 리뷰 내용",
       })
     );
-    await waitFor(() => expect(screen.queryByText("수업 리뷰 작성", { selector: "h2" })).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByText("Write Lesson Review", { selector: "h2" })).not.toBeInTheDocument());
     expect(onRefresh).toHaveBeenCalled();
   });
 
@@ -629,11 +629,11 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
-    fireEvent.click(screen.getByText("수업 리뷰 작성"));
-    await screen.findByText("수업 리뷰 작성", { selector: "h2" });
-    fireEvent.click(screen.getByText("닫기"));
-    expect(screen.queryByText("수업 리뷰 작성", { selector: "h2" })).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Past lessons \(1\)/));
+    fireEvent.click(screen.getByText("Write lesson review"));
+    await screen.findByText("Write Lesson Review", { selector: "h2" });
+    fireEvent.click(screen.getByText("Close"));
+    expect(screen.queryByText("Write Lesson Review", { selector: "h2" })).not.toBeInTheDocument();
     expect(finalizeLessonReview).not.toHaveBeenCalled();
   });
 
@@ -657,7 +657,7 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    expect(screen.queryByText("수업 리뷰 작성")).not.toBeInTheDocument();
+    expect(screen.queryByText("Write lesson review")).not.toBeInTheDocument();
   });
 
   it("2026-09-17(제품 오너 피드백): 완료된 정규 수업도 체험과 동일하게 '수업 리뷰 작성' 버튼을 보여준다(체험 전용 제한 폐기)", () => {
@@ -680,8 +680,8 @@ describe("TeacherLessonScheduleTab", () => {
         onResolveLateness={vi.fn()}
       />
     );
-    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
-    expect(screen.getByText("수업 리뷰 작성")).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Past lessons \(1\)/));
+    expect(screen.getByText("Write lesson review")).toBeInTheDocument();
   });
 
   it("확정된 체험 리뷰는 '리뷰 수정' 버튼으로 정정할 수 있고, 정정 시 teacherEditFinalizedLessonReview가 호출된다", async () => {
@@ -721,14 +721,14 @@ describe("TeacherLessonScheduleTab", () => {
       />
     );
 
-    fireEvent.click(screen.getByText(/지난 수업 \(1\)/));
-    fireEvent.click(screen.getByText("리뷰 수정"));
-    expect(await screen.findByText("수업 리뷰 정정", { selector: "h2" })).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Past lessons \(1\)/));
+    fireEvent.click(screen.getByText("Edit review"));
+    expect(await screen.findByText("Edit Lesson Review", { selector: "h2" })).toBeInTheDocument();
 
-    const textarea = await screen.findByLabelText("고객에게 보여줄 종합 의견");
+    const textarea = await screen.findByLabelText("Overall comments for the family");
     expect(textarea).toHaveValue("확정된 리뷰 내용");
     fireEvent.change(textarea, { target: { value: "정정된 리뷰 내용" } });
-    fireEvent.click(screen.getByRole("button", { name: "정정 저장" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save edit" }));
 
     await waitFor(() =>
       expect(teacherEditFinalizedLessonReview).toHaveBeenCalledWith({
@@ -737,7 +737,7 @@ describe("TeacherLessonScheduleTab", () => {
         categoryNotes: { overall: "" },
       })
     );
-    await waitFor(() => expect(screen.queryByText("수업 리뷰 정정", { selector: "h2" })).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByText("Edit Lesson Review", { selector: "h2" })).not.toBeInTheDocument());
     expect(onRefresh).toHaveBeenCalled();
   });
 });

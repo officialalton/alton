@@ -96,9 +96,9 @@ describe("학생 열람 공통 서버 액션", () => {
     as("teacher", { teaches_student: true });
     await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("통계");
     as("parent");
-    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("자녀만");
+    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("your own child");
     as("consultant");
-    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("담당 학생만");
+    await expect(loadStaffViewStatsAction("s1")).rejects.toThrow("students assigned to you");
   });
 
   it("할 일 추가: 선생님·컨설턴트 허용, 관리자·학부모 거절, 빈 제목 거절", async () => {
@@ -111,11 +111,11 @@ describe("학생 열람 공통 서버 액션", () => {
     await expect(createStudentViewTaskAction("s1", "  ")).rejects.toThrow("제목");
     data.create.mockClear();
     as("admin");
-    await expect(createStudentViewTaskAction("s1", "x")).rejects.toThrow("수정할 수 없습니다");
+    await expect(createStudentViewTaskAction("s1", "x")).rejects.toThrow("can't make changes");
     as("parent", { is_guardian_of: true });
-    await expect(createStudentViewTaskAction("s1", "x")).rejects.toThrow("수정할 수 없습니다");
+    await expect(createStudentViewTaskAction("s1", "x")).rejects.toThrow("can't make changes");
     as("teacher");
-    await expect(createStudentViewTaskAction("s1", "x")).rejects.toThrow("현재 담당 중인");
+    await expect(createStudentViewTaskAction("s1", "x")).rejects.toThrow("students you currently teach");
     expect(data.create).not.toHaveBeenCalled();
   });
 

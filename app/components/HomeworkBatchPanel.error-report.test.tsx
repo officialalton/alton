@@ -83,26 +83,26 @@ describe("HomeworkBatchPanel — 오류 판정 조정 안내", () => {
     expect(screen.queryByTestId("problem-error-adjusted")).toBeNull();
     pre.unmount();
     render(<HomeworkBatchPanel batches={[{ ...batchOf(graded), items: [mcItem({ ...graded, grade: "correct" })] }]} viewerRole="student" />);
-    fireEvent.click(screen.getByRole("button", { name: "지난 과제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Past" }));
     fireEvent.click(screen.getByText("9월 15일 과제"));
-    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("문항 오류로 채점이 조정되었습니다.");
+    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("The grade was adjusted because of a question error.");
   });
 
   it("선생님은 '조정 대상'을 보고 재채점하면 서버 액션을 부르고 표시가 사라진다", async () => {
     render(<HomeworkBatchPanel batches={[batchOf({ ...graded, errorAdjustmentPending: true })]} viewerRole="teacher" />);
-    fireEvent.click(screen.getByRole("button", { name: "지난 과제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Past" }));
     fireEvent.click(screen.getByText("9월 15일 과제"));
     expect(screen.getByTestId("problem-error-pending")).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "정답으로 다시 채점" }));
+    fireEvent.click(screen.getByRole("button", { name: "Regrade as correct" }));
     await waitFor(() => expect(regrade).toHaveBeenCalledWith("b1", "p1", "correct"));
     await waitFor(() => expect(screen.queryByTestId("problem-error-pending")).toBeNull());
   });
 
   it("학생에게는 '조정 대상' 재채점 UI가 보이지 않는다", () => {
     render(<HomeworkBatchPanel batches={[batchOf({ ...graded, errorAdjustmentPending: true })]} viewerRole="student" />);
-    fireEvent.click(screen.getByRole("button", { name: "지난 과제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Past" }));
     fireEvent.click(screen.getByText("9월 15일 과제"));
     expect(screen.queryByTestId("problem-error-pending")).toBeNull();
-    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("선생님이 채점을 다시 확인하고 있어요.");
+    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("your teacher is re-checking the grade.");
   });
 });

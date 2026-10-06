@@ -29,7 +29,7 @@ export default async function ConsultantHomePage({
   return (
     <ViewerTimezoneProvider timezone={viewerTimezone}>
     <ConsultantShell
-      consultantName={profile?.name ?? "컨설턴트"}
+      consultantName={profile?.name ?? "Consultant"}
       students={students}
       endedStudents={endedStudents}
       assignedConsultations={assignedConsultations}

@@ -18,13 +18,13 @@ import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inq
 async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: string): Promise<string> {
   const { data, error } = await supabase.rpc("household_id_for_assigned_student", { p_student_id: studentId });
   if (error) throw new Error(error.message);
-  if (!data) throw new Error("이 학생이 속한 household를 찾을 수 없습니다.");
+  if (!data) throw new Error("Couldn't find the household for this student.");
   return data as string;
 }
 
 async function requireConsultant(): Promise<{ supabase: SupabaseClient; userId: string }> {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "consultant") throw new Error("컨설턴트만 접근할 수 있습니다.");
+  if (profile?.role !== "consultant") throw new Error("Only consultants can access this.");
   return { supabase, userId: user.id };
 }
 
@@ -60,7 +60,7 @@ export async function startConsultantInquiryAction(
   subject?: string
 ): Promise<{ inquiryId: string }> {
   const { supabase, userId } = await requireConsultant();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const householdId = await requireStudentHouseholdId(supabase, studentId);
   const { data: inquiry, error: inquiryError } = await supabase
     .from("household_inquiries")
@@ -102,7 +102,7 @@ export async function sendConsultantInquiryMessageAction(
   body: string
 ): Promise<void> {
   const { supabase, userId } = await requireConsultant();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const householdId = await requireStudentHouseholdId(supabase, studentId);
   const { error } = await supabase.from("household_messages").insert({
     household_id: householdId,
@@ -111,7 +111,7 @@ export async function sendConsultantInquiryMessageAction(
     sender_role: "consultant",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message.includes("household_inquiries") ? "종료된 문의입니다." : error.message);
+  if (error) throw new Error(error.message.includes("household_inquiries") ? "This thread has been closed." : error.message);
 }
 
 export async function getConsultantMessengerUnreadCountAction(studentId: string): Promise<number> {

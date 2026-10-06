@@ -12,33 +12,33 @@ import { fmtDate } from "@/lib/format-datetime";
 // 발송·재발송·무효화 등 쓰기 액션은 두지 않는다(조회 전용).
 
 const CONTRACT_STATUS_LABEL: Record<string, string> = {
-  draft: "작성 중",
-  ready: "발송 준비",
-  sent: "발송됨",
-  awaiting_signature: "서명 대기",
-  signed: "서명 완료",
-  active: "이용 중",
-  termination_pending: "해지 진행",
-  terminated: "해지됨",
-  void: "무효",
-  superseded: "대체됨",
-  expired: "만료",
+  draft: "Draft",
+  ready: "Ready to send",
+  sent: "Sent",
+  awaiting_signature: "Awaiting signature",
+  signed: "Signed",
+  active: "Active",
+  termination_pending: "Termination pending",
+  terminated: "Terminated",
+  void: "Void",
+  superseded: "Superseded",
+  expired: "Expired",
 };
 
 const ENVELOPE_STATUS_LABEL: Record<string, string> = {
-  sent: "발송",
-  delivered: "열람",
-  completed: "서명 완료",
-  declined: "서명 거절",
-  voided: "무효 처리",
+  sent: "Sent",
+  delivered: "Viewed",
+  completed: "Signed",
+  declined: "Declined",
+  voided: "Voided",
 };
 
 const ARTIFACT_LABEL: Record<string, string> = {
-  queued: "보관 대기",
-  processing: "보관 중",
-  succeeded: "보관 완료",
-  retryable_failed: "보관 실패(재시도 가능)",
-  manual_review: "보관 실패(확인 필요)",
+  queued: "Archive queued",
+  processing: "Archiving",
+  succeeded: "Archived",
+  retryable_failed: "Archive failed (retryable)",
+  manual_review: "Archive failed (needs review)",
 };
 
 function formatDate(value: string | null, tz: string): string {
@@ -59,13 +59,13 @@ export default function DocumentsPanel() {
   function messageForReason(reason: string | undefined): string {
     switch (reason) {
       case "not_found":
-        return "문서를 찾을 수 없거나 열람 권한이 없습니다.";
+        return "Document not found or you don't have permission to view it.";
       case "not_stored":
-        return "아직 보관이 끝나지 않아 내려받을 수 없습니다.";
+        return "Archiving isn't finished yet, so it can't be downloaded.";
       case "fetch_failed":
-        return "지금은 내려받을 수 없습니다. 잠시 뒤 다시 시도해 주세요.";
+        return "Download isn't available right now. Please try again later.";
       default:
-        return "내려받지 못했습니다.";
+        return "Couldn't download.";
     }
   }
 
@@ -78,7 +78,7 @@ export default function DocumentsPanel() {
         if (!cancelled) setRows(next);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "계약을 불러오지 못했습니다.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load contracts.");
       });
     return () => {
       cancelled = true;
@@ -87,7 +87,7 @@ export default function DocumentsPanel() {
 
   async function handleDownload(row: ContractArchiveRow) {
     if (!row.signedArtifactId) return;
-    setDownloadState((prev) => ({ ...prev, [row.contractId]: "내려받는 중…" }));
+    setDownloadState((prev) => ({ ...prev, [row.contractId]: "Downloading…" }));
     try {
       const res = await fetch(`/api/consultant/contract-artifacts/${row.signedArtifactId}`);
       if (!res.ok) {
@@ -99,10 +99,10 @@ export default function DocumentsPanel() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `계약-${row.studentName || row.contractId}.pdf`;
+      a.download = `contract-${row.studentName || row.contractId}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
-      setDownloadState((prev) => ({ ...prev, [row.contractId]: "내려받기를 시작했습니다." }));
+      setDownloadState((prev) => ({ ...prev, [row.contractId]: "Download started." }));
     } catch {
       setDownloadState((prev) => ({ ...prev, [row.contractId]: messageForReason("fetch_failed") }));
     }
@@ -115,34 +115,34 @@ export default function DocumentsPanel() {
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="학생·보호자 이름으로 찾기"
-          aria-label="학생·보호자 이름으로 찾기"
+          placeholder="Search by student or parent name"
+          aria-label="Search by student or parent name"
           className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 min-w-[200px]"
         />
       </div>
 
       {error && <p className="text-[13px] text-red mb-3">{error}</p>}
-      {rows === null && !error && <p className="text-[13px] text-grey-500">불러오는 중…</p>}
-      {rows?.length === 0 && <p className="text-[13px] text-grey-500">담당 학생·가족의 계약 문서가 없습니다.</p>}
+      {rows === null && !error && <p className="text-[13px] text-grey-500">Loading…</p>}
+      {rows?.length === 0 && <p className="text-[13px] text-grey-500">No contract documents for your students or families yet.</p>}
 
       {rows?.map((row) => {
         const isOpen = openId === row.contractId;
         return (
           <div key={row.contractId} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
             <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className="text-[14px] font-bold text-ink">{row.studentName || "이름 없음"}</span>
-              {row.guardianName && <span className="text-[12px] text-grey-500">보호자 {row.guardianName}</span>}
+              <span className="text-[14px] font-bold text-ink">{row.studentName || "Unnamed"}</span>
+              {row.guardianName && <span className="text-[12px] text-grey-500">Parent {row.guardianName}</span>}
               <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">
                 {CONTRACT_STATUS_LABEL[row.status] ?? row.status}
               </span>
-              {row.latestVersionNumber !== null && <span className="text-[11px] text-grey-500">{row.latestVersionNumber}차</span>}
+              {row.latestVersionNumber !== null && <span className="text-[11px] text-grey-500">v{row.latestVersionNumber}</span>}
               <span className="text-[11px] text-grey-500 ml-auto">{formatDate(row.createdAt, tz)}</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] text-grey-500">
-              <span>서명 {row.envelopeStatus ? (ENVELOPE_STATUS_LABEL[row.envelopeStatus] ?? row.envelopeStatus) : "—"}</span>
-              <span>회사 서명 {row.companySignedAt ? "완료" : "전"}</span>
-              <span>서명본 {row.signedArtifactSyncStatus ? (ARTIFACT_LABEL[row.signedArtifactSyncStatus] ?? row.signedArtifactSyncStatus) : "없음"}</span>
+              <span>Signature {row.envelopeStatus ? (ENVELOPE_STATUS_LABEL[row.envelopeStatus] ?? row.envelopeStatus) : "—"}</span>
+              <span>Company signature {row.companySignedAt ? "done" : "pending"}</span>
+              <span>Signed copy {row.signedArtifactSyncStatus ? (ARTIFACT_LABEL[row.signedArtifactSyncStatus] ?? row.signedArtifactSyncStatus) : "none"}</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -150,15 +150,15 @@ export default function DocumentsPanel() {
                 onClick={() => setOpenId(isOpen ? null : row.contractId)}
                 className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
               >
-                {isOpen ? "접기" : "자세히"}
+                {isOpen ? "Collapse" : "Details"}
               </button>
               {row.signedArtifactDownloadable ? (
                 <button onClick={() => void handleDownload(row)} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white">
-                  서명본 내려받기
+                  Download signed copy
                 </button>
               ) : (
                 <span className="text-[11.5px] text-grey-500">
-                  {row.signedArtifactId ? "아직 보관되지 않아 내려받을 수 없습니다" : "서명본이 아직 없습니다"}
+                  {row.signedArtifactId ? "Not archived yet, so it can't be downloaded" : "No signed copy yet"}
                 </span>
               )}
               {downloadState[row.contractId] && <span className="text-[11.5px] text-grey-500">{downloadState[row.contractId]}</span>}
@@ -166,11 +166,11 @@ export default function DocumentsPanel() {
 
             {isOpen && (
               <dl className="mt-3 pt-3 border-t border-grey-100 text-[12px] text-grey-500 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1">
-                <dt className="font-bold">최신 버전</dt>
-                <dd>{row.latestVersionNumber !== null ? `${row.latestVersionNumber}차` : "아직 없음"}</dd>
-                <dt className="font-bold">서명 상태 갱신</dt>
+                <dt className="font-bold">Latest version</dt>
+                <dd>{row.latestVersionNumber !== null ? `v${row.latestVersionNumber}` : "None yet"}</dd>
+                <dt className="font-bold">Signature status updated</dt>
                 <dd>{formatDate(row.envelopeStatusUpdatedAt, tz)}</dd>
-                <dt className="font-bold">회사 서명일</dt>
+                <dt className="font-bold">Company signed on</dt>
                 <dd>{formatDate(row.companySignedAt, tz)}</dd>
               </dl>
             )}

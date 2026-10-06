@@ -49,13 +49,13 @@ export default function LessonReviewForm({
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
       <label htmlFor={`${inputId}-ai`} className="block text-[11.5px] font-semibold text-grey-500 mb-1">
-        AI 미팅록 기반 자동 요약(붙여넣기)
+        AI meeting-notes summary (paste)
       </label>
       <textarea
         id={`${inputId}-ai`}
         className="w-full border border-grey-300 rounded px-2 py-1.5 text-[13px] mb-3"
         rows={3}
-        placeholder="Smart Notes 검토 후 요약을 붙여넣으세요(선택 — 고객에게 직접 노출되지 않고 선생님 작성 참고용)"
+        placeholder="Paste a summary after reviewing Smart Notes (optional — not shown to the family; for your reference only)"
         value={aiSummary}
         onChange={(e) => setAiSummary(e.target.value)}
       />
@@ -81,13 +81,13 @@ export default function LessonReviewForm({
       ))}
 
       <label htmlFor={inputId} className="block text-[11.5px] font-semibold text-grey-500 mb-1">
-        고객에게 보여줄 종합 의견
+        Overall comments for the family
       </label>
       <textarea
         id={inputId}
         className="w-full border border-grey-300 rounded px-2 py-1.5 text-[13px]"
         rows={4}
-        placeholder="예: 기초 개념 이해도가 우수하고, 문제 풀이 속도가 빠릅니다. 정규 진행을 추천합니다."
+        placeholder="e.g. Strong grasp of core concepts and fast problem solving. I recommend continuing with regular lessons."
         value={draftText}
         onChange={(e) => {
           setDraftText(e.target.value);
@@ -112,7 +112,7 @@ export default function LessonReviewForm({
           }}
           className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
         >
-          초안 저장(비공개)
+          Save draft (private)
         </button>
         <button
           type="button"
@@ -120,13 +120,13 @@ export default function LessonReviewForm({
           onClick={() => setShowPreview((v) => !v)}
           className="text-[12px] font-semibold px-3 py-1.5 rounded-lg text-ink underline disabled:opacity-50 disabled:no-underline"
         >
-          {showPreview ? "미리보기 닫기" : "고객 화면 미리보기"}
+          {showPreview ? "Close preview" : "Preview family view"}
         </button>
       </div>
 
       {showPreview && (
         <div className="mt-2.5 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
-          <div className="text-[11px] font-bold text-grey-500 mb-1">보호자·학생 화면에는 이렇게 보입니다</div>
+          <div className="text-[11px] font-bold text-grey-500 mb-1">This is how it appears to the parent and student</div>
           {categories.map((c) =>
             categoryNotes[c.key]?.trim() ? (
               <div key={c.key} className="mb-1.5">
@@ -145,12 +145,12 @@ export default function LessonReviewForm({
           onClick={() => setConfirmingFinalize(true)}
           className="text-[12px] font-bold px-3 py-1.5 mt-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          공개 확정
+          Publish
         </button>
       ) : (
         <div className="mt-2.5 bg-grey-50 rounded-lg px-3.5 py-3">
           <p className="text-[12px] text-ink mb-2">
-            확정하면 위 내용이 보호자·학생 화면에 바로 공개됩니다. 계속할까요?
+            Publishing makes the content above visible to the parent and student right away. Continue?
           </p>
           <div className="flex gap-2">
             <button
@@ -172,14 +172,14 @@ export default function LessonReviewForm({
               }}
               className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
             >
-              {busy ? "처리 중..." : "네, 공개합니다"}
+              {busy ? "Publishing…" : "Yes, publish"}
             </button>
             <button
               disabled={busy}
               onClick={() => setConfirmingFinalize(false)}
               className="text-[12px] font-semibold px-3.5 py-1.5 rounded-lg text-grey-500"
             >
-              취소
+              Cancel
             </button>
           </div>
         </div>

@@ -60,7 +60,7 @@ describe("composeHomeworkFromSession — 인가", () => {
         includeUsedInLesson: false,
         includeAlreadyAttempted: false,
       })
-    ).rejects.toThrow("담당 학생의 세션에만 과제를 구성할 수 있습니다.");
+    ).rejects.toThrow("You can only compose homework for sessions of students assigned to you.");
   });
 
   it("존재하지 않는 세션이면 거부한다", async () => {
@@ -71,7 +71,7 @@ describe("composeHomeworkFromSession — 인가", () => {
         includeUsedInLesson: false,
         includeAlreadyAttempted: false,
       })
-    ).rejects.toThrow("세션을 찾을 수 없습니다.");
+    ).rejects.toThrow("Session not found.");
     state.session = { id: "sess1", subject_enrollment_id: "enr1" };
   });
 

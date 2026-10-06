@@ -83,7 +83,7 @@ import { fmtDate, fmtDateTime, fmtTime } from "@/lib/format-datetime";
 
 type NavId = "students" | "assignments" | "schedule" | "documents" | "profile" | "settlement" | "staff-messages" | "college-explore";
 
-const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
+const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // 컨설턴트 포지션(2026-09-22, 가볍게 시작) — 담당 학생 목록 + 로드맵(쓰기),
 // 신규 배정 요청(스펙 §Screen Scope "New assignments"), 본인 가능시간(Schedule,
@@ -142,11 +142,11 @@ export default function ConsultantShell({
         </div>
         <button
           type="button"
-          aria-label="메뉴 열기"
+          aria-label="Open menu"
           onClick={() => setMobileNavOpen(true)}
           className="text-[13px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200"
         >
-          메뉴
+          Menu
         </button>
       </div>
       {mobileNavOpen && (
@@ -279,7 +279,7 @@ export default function ConsultantShell({
             <div className="w-7 h-7 rounded-full bg-grey-100 text-ink font-extrabold text-[12px] flex items-center justify-center shrink-0">
               {consultantName.charAt(0)}
             </div>
-            <span className="flex-1 text-left truncate">{consultantName} 컨설턴트님</span>
+            <span className="flex-1 text-left truncate">{consultantName}</span>
           </button>
           {accountMenuOpen && (
             <div className="absolute bottom-full left-0 mb-1 w-full bg-white border-[1.5px] border-grey-200 rounded-lg shadow-sm py-1.5 z-30">
@@ -296,7 +296,7 @@ export default function ConsultantShell({
               <div className="h-px bg-grey-200 my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-red">
-                  로그아웃
+                  Log out
                 </button>
               </form>
             </div>
@@ -325,7 +325,7 @@ export default function ConsultantShell({
         ) : selectedId !== null ? (
           <StudentPanel
             studentId={selectedId}
-            studentName={students.find((s) => s.id === selectedId)?.name ?? "학생"}
+            studentName={students.find((s) => s.id === selectedId)?.name ?? "Student"}
             onBack={() => setSelectedId(null)}
           />
         ) : selectedEndedId !== null ? (
@@ -388,9 +388,9 @@ function MyKanbanSection() {
 
   return (
     <div className="px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">신규 배정</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">New Assignments</h1>
       {!catalog ? (
-        <p className="text-[13px] text-grey-500">불러오는 중...</p>
+        <p className="text-[13px] text-grey-500">Loading...</p>
       ) : (
         <ConsultationKanbanBoard
           subjects={catalog.subjects}
@@ -428,9 +428,9 @@ function PendingOnboardingStudentsSection() {
 
   return (
     <div className="mt-8">
-      <h2 className="text-[15px] font-extrabold text-ink mb-1">가입 대기</h2>
+      <h2 className="text-[15px] font-extrabold text-ink mb-1">Pending Signup</h2>
       <p className="text-[12px] text-grey-500 mb-3">
-        관리자가 계정 생성 안내를 발송했고 내가 담당인 학생입니다. 상담 신청 건이 아닙니다.
+        Students assigned to you whose account-setup notice has been sent by an admin. These are not consultation requests.
       </p>
       <div className="flex flex-col gap-2 max-w-[420px]">
         {students.map((s) => (
@@ -439,18 +439,18 @@ function PendingOnboardingStudentsSection() {
               {s.studentName} <span className="font-normal text-grey-500">({s.studentEmail})</span>
             </div>
             <div className="text-[11.5px] text-grey-500 mt-1">
-              보호자: {s.guardianName}({s.guardianEmail})
+              Parent: {s.guardianName} ({s.guardianEmail})
             </div>
             <div className="text-[11.5px] text-grey-500 mt-0.5">
               {s.linkStatus === "pending"
                 ? s.noticeDeliveryStatus === "sent"
-                  ? "안내 발송됨 — 보호자 확인 대기"
-                  : "안내 발송 대기"
+                  ? "Notice sent — waiting for parent confirmation"
+                  : "Notice pending"
                 : s.linkStatus === "redeemed"
-                  ? "보호자 확인 완료 — 계정 생성 진행 중"
+                  ? "Parent confirmed — account setup in progress"
                   : s.linkStatus === "expired"
-                    ? "안내 링크 만료됨"
-                    : "취소됨"}
+                    ? "Notice link expired"
+                    : "Cancelled"}
             </div>
             {/* R15-A(3/3) — 계정이 아직 없어도 선생님에게 사전 문의는 보낼 수
                 있다(수락해도 실제 배정은 계정 생성 후에만 확정된다). */}
@@ -470,7 +470,7 @@ function PendingOnboardingStudentsSection() {
                 className="mt-2 text-[11.5px] font-bold text-ink underline"
                 onClick={() => setRequestingFor(s.linkStudentId)}
               >
-                선생님에게 사전 문의
+                Pre-request a teacher
               </button>
             )}
           </div>
@@ -481,12 +481,12 @@ function PendingOnboardingStudentsSection() {
 }
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
-  requested: "신청됨",
-  confirming: "확인 중",
-  scheduling: "일정 조율 중",
-  scheduled: "일정 확정",
-  completed: "완료",
-  cancelled: "거절됨",
+  requested: "Requested",
+  confirming: "Confirming",
+  scheduling: "Scheduling",
+  scheduled: "Scheduled",
+  completed: "Completed",
+  cancelled: "Declined",
 };
 
 function formatMeetingDateTime(iso: string | null, tz: string): string {
@@ -550,9 +550,9 @@ function sessionTimingLabel(startsAtIso: string): { label: string; canStart: boo
   const start = new Date(startsAtIso).getTime();
   const end = start + 60 * 60 * 1000;
   const now = Date.now();
-  if (now < start) return { label: "시작 전", canStart: false };
-  if (now > end) return { label: "종료됨", canStart: false };
-  return { label: "진행 중", canStart: true };
+  if (now < start) return { label: "Not started", canStart: false };
+  if (now > end) return { label: "Ended", canStart: false };
+  return { label: "In progress", canStart: true };
 }
 
 function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultations: IntakeConsultation[] }) {
@@ -572,7 +572,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
   function reload() {
     listMyAssignedMeetingRequestsAction()
       .then(setMeetings)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }
 
   useEffect(() => {
@@ -597,7 +597,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
 
   async function handleConfirm(meetingRequestId: string) {
     if (!editStart || !editEnd) {
-      setError("시작·종료 시각을 모두 입력해주세요.");
+      setError("Please enter both start and end times.");
       return;
     }
     setBusyId(meetingRequestId);
@@ -611,7 +611,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
       setEditingId(null);
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "확정에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't confirm.");
     } finally {
       setBusyId(null);
     }
@@ -624,7 +624,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
       await cancelMyMeetingRequestAction(meetingRequestId);
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "거절에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't decline.");
     } finally {
       setBusyId(null);
     }
@@ -638,7 +638,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
     <div>
       {confirmedConsultations.length > 0 && (
         <div className="mb-6">
-          <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">확정된 상담 일정</div>
+          <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Confirmed Consultations</div>
           <div className="space-y-2">
             {confirmedConsultations.map((c) => {
               const timing = c.startsAt ? sessionTimingLabel(c.startsAt) : null;
@@ -646,7 +646,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                 <div key={c.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
                   <div className="flex items-center justify-between">
                     <span className="text-[13px] font-bold text-ink">{c.contactName}</span>
-                    <span className="text-[11px] text-grey-500">{timing?.label ?? "상담"}</span>
+                    <span className="text-[11px] text-grey-500">{timing?.label ?? "Consultation"}</span>
                   </div>
                   {c.startsAt && (
                     <div className="text-[12px] text-grey-500 mt-1">{formatMeetingDateTime(c.startsAt, tz)}</div>
@@ -656,7 +656,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                       onClick={() => setSession({ kind: "consultation", id: c.id, label: c.contactName, startsAt: c.startsAt! })}
                       className="mt-2 text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white"
                     >
-                      상담 시작
+                      Start consultation
                     </button>
                   )}
                 </div>
@@ -665,37 +665,37 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
           </div>
         </div>
       )}
-      <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">학생 일정 요청</div>
+      <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Student Meeting Requests</div>
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
       {meetings === null ? (
-        <p className="text-[13px] text-grey-500">불러오는 중...</p>
+        <p className="text-[13px] text-grey-500">Loading...</p>
       ) : meetings.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          아직 신청된 일정이 없습니다.
+          No meeting requests yet.
         </div>
       ) : (
         <div className="space-y-2.5">
           {meetings.map((m) => (
             <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
               <div className="flex items-center justify-between">
-                <span className="text-[13px] font-bold text-ink">{m.studentName ?? "학생"}</span>
+                <span className="text-[13px] font-bold text-ink">{m.studentName ?? "Student"}</span>
                 <span className="text-[11px] text-grey-500">{MEETING_STATUS_LABEL[m.status] ?? m.status}</span>
               </div>
-              {m.content && <div className="text-[12px] text-grey-600 mt-1">사유: {m.content}</div>}
+              {m.content && <div className="text-[12px] text-grey-600 mt-1">Reason: {m.content}</div>}
               {m.startsAt && (
-                <div className="text-[12px] text-grey-500 mt-1">희망 시간: {formatMeetingDateTime(m.startsAt, tz)}</div>
+                <div className="text-[12px] text-grey-500 mt-1">Requested time: {formatMeetingDateTime(m.startsAt, tz)}</div>
               )}
               {m.googleMeetLink && (
                 <a href={m.googleMeetLink} target="_blank" rel="noreferrer" className="inline-block mt-1 text-[12px] font-semibold text-ink underline">
-                  Google Meet 링크
+                  Google Meet link
                 </a>
               )}
               {m.status === "scheduled" && m.startsAt && sessionTimingLabel(m.startsAt).canStart && (
                 <button
-                  onClick={() => setSession({ kind: "meeting_request", id: m.id, label: m.studentName ?? "학생", startsAt: m.startsAt! })}
+                  onClick={() => setSession({ kind: "meeting_request", id: m.id, label: m.studentName ?? "Student", startsAt: m.startsAt! })}
                   className="mt-2 text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white"
                 >
-                  상담 시작
+                  Start consultation
                 </button>
               )}
               {(m.status === "requested" || m.status === "confirming" || m.status === "scheduling") && (
@@ -721,10 +721,10 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                         onClick={() => handleConfirm(m.id)}
                         className="text-[12px] font-bold px-3 py-1 rounded-lg bg-ink text-white disabled:opacity-50"
                       >
-                        확정
+                        Confirm
                       </button>
                       <button type="button" onClick={() => setEditingId(null)} className="text-[12px] font-bold text-grey-500">
-                        취소
+                        Cancel
                       </button>
                     </div>
                   ) : (
@@ -734,7 +734,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                         onClick={() => startEdit(m)}
                         className="text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink"
                       >
-                        확정/시간 조정
+                        Confirm / adjust time
                       </button>
                       <button
                         type="button"
@@ -742,7 +742,7 @@ function UpcomingSchedulePanel({ assignedConsultations }: { assignedConsultation
                         onClick={() => handleCancel(m.id)}
                         className="text-[12px] font-bold px-3 py-1 rounded-lg text-red disabled:opacity-50"
                       >
-                        거절
+                        Decline
                       </button>
                     </div>
                   )}
@@ -786,26 +786,26 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
       await fn();
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "처리에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't complete the action.");
     } finally {
       setBusy(false);
     }
   }
 
-  if (!review) return <p className="text-[12px] text-grey-500 mt-2">리뷰를 불러오는 중...</p>;
+  if (!review) return <p className="text-[12px] text-grey-500 mt-2">Loading review...</p>;
 
   const isFinal = review.status === "final";
 
   return (
     <div className="mt-3 border-t border-grey-200 pt-3">
-      <h4 className="text-[12.5px] font-extrabold text-ink mb-1">상담 리뷰</h4>
+      <h4 className="text-[12.5px] font-extrabold text-ink mb-1">Consultation Review</h4>
       {error && <p className="text-[12px] text-red mb-1">{error}</p>}
       <textarea
-        aria-label="상담 리뷰 내용"
+        aria-label="Consultation review content"
         value={text}
         onChange={(e) => setText(e.target.value)}
         className="w-full px-2.5 py-2 border-[1.5px] border-grey-200 rounded-lg text-[12.5px] min-h-[90px]"
-        placeholder="학부모에게 보여줄 상담 리뷰를 작성해주세요"
+        placeholder="Write the consultation review that parents will see"
       />
       <div className="flex gap-2 mt-2">
         {!isFinal && (
@@ -815,7 +815,7 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
             onClick={() => run(() => saveMyMeetingRequestReviewDraftAction(meetingRequestId, text))}
             className="text-[11.5px] font-bold text-ink border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
           >
-            초안 저장
+            Save draft
           </button>
         )}
         <button
@@ -830,13 +830,13 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
           }
           className="text-[11.5px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
         >
-          {isFinal ? "확정본 수정" : "확정하기"}
+          {isFinal ? "Edit final" : "Finalize"}
         </button>
       </div>
       {isFinal && (
         <p className="text-[11px] text-grey-500 mt-1">
-          확정일 {review.finalizedAt ? fmtDateTime(review.finalizedAt, undefined, tz) : "-"}
-          {review.adminEditedAt && ` · 최종 수정 ${fmtDateTime(review.adminEditedAt, undefined, tz)}`}
+          Finalized {review.finalizedAt ? fmtDateTime(review.finalizedAt, undefined, tz) : "-"}
+          {review.adminEditedAt && ` · Last edited ${fmtDateTime(review.adminEditedAt, undefined, tz)}`}
         </p>
       )}
       {isFinal && (
@@ -849,15 +849,15 @@ function ConsultantMeetingReviewPanel({ meetingRequestId }: { meetingRequestId: 
             }}
             className="text-[11px] font-semibold text-grey-500 underline"
           >
-            {showEdits ? "수정 이력 접기" : "수정 이력 보기"}
+            {showEdits ? "Hide edit history" : "Show edit history"}
           </button>
           {showEdits && (
             <div className="mt-1 space-y-1">
-              {edits.length === 0 && <p className="text-[11px] text-grey-500">수정 이력이 없습니다(아직 확정 후 수정된 적 없음).</p>}
+              {edits.length === 0 && <p className="text-[11px] text-grey-500">No edit history (not edited since finalizing).</p>}
               {edits.map((e) => (
                 <div key={e.id} className="text-[11px] text-grey-500 border-l-2 border-grey-200 pl-2">
-                  {fmtDateTime(e.editedAt, undefined, tz)} · {e.editedByName ?? "컨설턴트"}
-                  {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">이전 내용: {e.previousFinalText}</div>}
+                  {fmtDateTime(e.editedAt, undefined, tz)} · {e.editedByName ?? "Consultant"}
+                  {e.previousFinalText && <div className="text-grey-700 mt-0.5 whitespace-pre-wrap">Previous: {e.previousFinalText}</div>}
                 </div>
               ))}
             </div>
@@ -906,7 +906,7 @@ function ConsultationSessionView({
       await saveMySessionNoteAction({ sourceKind: session.kind, sourceId: session.id, note, nextAction });
       setSavedAt(new Date().toISOString());
     } catch (e) {
-      setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't save.");
     } finally {
       setBusy(false);
     }
@@ -925,25 +925,25 @@ function ConsultationSessionView({
 
   const grouped = new Map<string, ConsultationMaterialForSession[]>();
   for (const m of materials ?? []) {
-    const key = m.category ?? "기타";
+    const key = m.category ?? "Other";
     grouped.set(key, [...(grouped.get(key) ?? []), m]);
   }
 
   return (
     <div className="max-w-[760px] px-8 py-8">
       <button onClick={onExit} className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 mb-3">
-        ← Schedule로
+        ← Back to Schedule
       </button>
-      <h1 className="text-[18px] font-extrabold text-ink mb-1">{session.label}님 상담 세션</h1>
-      <div className="text-[12px] text-grey-500 mb-6">{formatMeetingDateTime(session.startsAt, tz)} · 진행 중</div>
+      <h1 className="text-[18px] font-extrabold text-ink mb-1">Consultation Session — {session.label}</h1>
+      <div className="text-[12px] text-grey-500 mb-6">{formatMeetingDateTime(session.startsAt, tz)} · In progress</div>
 
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <h3 className="text-[13px] font-bold text-ink mb-2">상담 자료</h3>
+          <h3 className="text-[13px] font-bold text-ink mb-2">Materials</h3>
           {materials === null ? (
-            <p className="text-[13px] text-grey-500">불러오는 중…</p>
+            <p className="text-[13px] text-grey-500">Loading…</p>
           ) : materials.length === 0 ? (
-            <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 자료가 없습니다.</div>
+            <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No materials yet.</div>
           ) : (
             Array.from(grouped.entries()).map(([category, items]) => (
               <div key={category} className="mb-4">
@@ -964,25 +964,25 @@ function ConsultationSessionView({
         </div>
 
         <div>
-          <h3 className="text-[13px] font-bold text-ink mb-2">상담 메모</h3>
+          <h3 className="text-[13px] font-bold text-ink mb-2">Notes</h3>
           {error && <div className="mb-2 text-[12px] font-semibold text-red bg-red/5 rounded-lg px-3 py-2">{error}</div>}
           <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            placeholder="상담 내용을 기록해주세요"
+            placeholder="Record what was discussed"
             className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[100px] mb-3"
           />
-          <h3 className="text-[13px] font-bold text-ink mb-2">다음 행동</h3>
+          <h3 className="text-[13px] font-bold text-ink mb-2">Next Steps</h3>
           <textarea
             value={nextAction}
             onChange={(e) => setNextAction(e.target.value)}
-            placeholder="다음에 할 일을 적어주세요"
+            placeholder="Write down the next steps"
             className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[60px] mb-3"
           />
           <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-            저장
+            Save
           </button>
-          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">{fmtDateTime(savedAt, undefined, tz)} 저장됨</span>}
+          {savedAt && <span className="ml-2 text-[11.5px] text-grey-500">Saved {fmtDateTime(savedAt, undefined, tz)}</span>}
         </div>
       </div>
     </div>
@@ -1001,7 +1001,7 @@ function AvailabilityPanel() {
   function reload() {
     listMyAvailabilityRulesAction()
       .then(setRules)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }
   useEffect(() => {
     reload();
@@ -1016,7 +1016,7 @@ function AvailabilityPanel() {
       await setMyAcceptingNewWorkAction(next);
       setAcceptingNewWork(next);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "설정을 바꾸지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't update the setting.");
     } finally {
       setBusy(false);
     }
@@ -1029,7 +1029,7 @@ function AvailabilityPanel() {
       await addMyAvailabilityRuleAction({ weekday, startTime, endTime });
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "등록하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't add.");
     } finally {
       setBusy(false);
     }
@@ -1050,16 +1050,16 @@ function AvailabilityPanel() {
   return (
     <div>
       <p className="text-[12.5px] text-grey-500 mb-5">
-        여기서 등록한 시간대만 배정된 고객에게 예약 가능 시간으로 보여집니다.
+        Only the time slots you add here are shown to your assigned clients as bookable times.
       </p>
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
 
       {acceptingNewWork !== null && (
         <div className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-6">
           <div>
-            <div className="text-[13px] font-bold text-ink">신규 배정 받기</div>
+            <div className="text-[13px] font-bold text-ink">Accept New Assignments</div>
             <div className="text-[11.5px] text-grey-500">
-              {acceptingNewWork ? "자동배정 대상에 포함됩니다." : "자동배정 대상에서 제외됩니다(관리자 수동 배정은 계속 받을 수 있습니다)."}
+              {acceptingNewWork ? "You are included in auto-assignment." : "You are excluded from auto-assignment (admins can still assign you manually)."}
             </div>
           </div>
           <button
@@ -1070,7 +1070,7 @@ function AvailabilityPanel() {
               (acceptingNewWork ? "bg-ink text-white" : "border-[1.5px] border-grey-200 text-ink")
             }
           >
-            {acceptingNewWork ? "받는 중" : "받지 않음"}
+            {acceptingNewWork ? "Accepting" : "Not accepting"}
           </button>
         </div>
       )}
@@ -1085,7 +1085,7 @@ function AvailabilityPanel() {
         <select value={weekday} onChange={(e) => setWeekday(Number(e.target.value))} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
           {WEEKDAY_LABELS.map((label, i) => (
             <option key={i} value={i}>
-              {label}요일
+              {label}
             </option>
           ))}
         </select>
@@ -1095,7 +1095,7 @@ function AvailabilityPanel() {
           onChange={(e) => setStartTime(e.target.value)}
           className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
         />
-        <span className="text-[13px] text-grey-500">~</span>
+        <span className="text-[13px] text-grey-500">–</span>
         <input
           type="time"
           value={endTime}
@@ -1103,22 +1103,22 @@ function AvailabilityPanel() {
           className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
         />
         <button type="submit" disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-          추가
+          Add
         </button>
       </form>
 
       {rules === null ? (
-        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+        <p className="text-[13px] text-grey-500">Loading…</p>
       ) : activeRules.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 가능시간이 없습니다.</div>
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No availability added yet.</div>
       ) : (
         activeRules.map((r) => (
           <div key={r.id} className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2">
             <span className="text-[13px] font-semibold text-ink">
-              {WEEKDAY_LABELS[r.weekday]}요일 {r.startTime.slice(0, 5)} ~ {r.endTime.slice(0, 5)}
+              {WEEKDAY_LABELS[r.weekday]} {r.startTime.slice(0, 5)} – {r.endTime.slice(0, 5)}
             </span>
             <button disabled={busy} onClick={() => handleDeactivate(r.id)} className="text-[12px] font-bold text-red disabled:opacity-50">
-              삭제
+              Delete
             </button>
           </div>
         ))
@@ -1145,7 +1145,7 @@ function TimeOffPanel() {
   function reload() {
     listMyTimeOffAction()
       .then(setItems)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }
   useEffect(() => {
     reload();
@@ -1153,7 +1153,7 @@ function TimeOffPanel() {
 
   async function handleAdd() {
     if (!date) {
-      setError("날짜를 선택해주세요.");
+      setError("Please select a date.");
       return;
     }
     const startsAt = allDay ? `${date}T00:00:00` : `${date}T${startTime}:00`;
@@ -1176,7 +1176,7 @@ function TimeOffPanel() {
       setReason("");
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "등록하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't add.");
     } finally {
       setBusy(false);
     }
@@ -1197,7 +1197,7 @@ function TimeOffPanel() {
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
       {conflicts && conflicts.length > 0 && (
         <div className="mb-4 text-[13px] text-red bg-red/5 rounded-lg px-4 py-3">
-          <div className="font-bold mb-1">이미 확정된 일정과 겹쳐 등록할 수 없습니다.</div>
+          <div className="font-bold mb-1">This overlaps a confirmed meeting and cannot be added.</div>
           <ul className="list-disc list-inside">
             {conflicts.map((c, i) => (
               <li key={i}>
@@ -1207,7 +1207,7 @@ function TimeOffPanel() {
             ))}
           </ul>
           <div className="mt-1 text-grey-600">
-            Upcoming 탭에서 해당 일정을 먼저 변경·거절한 뒤 다시 등록해주세요.
+            Reschedule or decline that meeting in the Upcoming tab first, then try again.
           </div>
         </div>
       )}
@@ -1215,12 +1215,12 @@ function TimeOffPanel() {
         <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
         <label className="flex items-center gap-1.5 text-[12.5px] text-ink">
           <input type="checkbox" checked={allDay} onChange={(e) => setAllDay(e.target.checked)} />
-          종일
+          All day
         </label>
         {!allDay && (
           <>
             <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
-            <span className="text-[13px] text-grey-500">~</span>
+            <span className="text-[13px] text-grey-500">–</span>
             <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
           </>
         )}
@@ -1229,18 +1229,18 @@ function TimeOffPanel() {
         <input
           value={reason}
           onChange={(e) => setReason(e.target.value)}
-          placeholder="사유(선택)"
+          placeholder="Reason (optional)"
           className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
         />
         <button type="button" disabled={busy} onClick={handleAdd} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-          등록
+          Add
         </button>
       </div>
 
       {items === null ? (
-        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+        <p className="text-[13px] text-grey-500">Loading…</p>
       ) : items.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">등록된 휴무가 없습니다.</div>
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No time off added yet.</div>
       ) : (
         items.map((t) => (
           <div key={t.id} className="flex items-center justify-between border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2">
@@ -1248,12 +1248,12 @@ function TimeOffPanel() {
               <span className="text-[13px] font-semibold text-ink">
                 {t.allDay
                   ? fmtDate(t.startsAt, undefined, tz)
-                  : `${formatMeetingDateTime(t.startsAt, tz)} ~ ${fmtTime(t.endsAt, { hour: "2-digit", minute: "2-digit" }, tz)}`}
+                  : `${formatMeetingDateTime(t.startsAt, tz)} – ${fmtTime(t.endsAt, { hour: "2-digit", minute: "2-digit" }, tz)}`}
               </span>
               {t.reason && <div className="text-[11.5px] text-grey-500 mt-0.5">{t.reason}</div>}
             </div>
             <button disabled={busy} onClick={() => handleCancel(t.id)} className="text-[12px] font-bold text-red disabled:opacity-50">
-              취소
+              Cancel
             </button>
           </div>
         ))
@@ -1262,16 +1262,16 @@ function TimeOffPanel() {
   );
 }
 
-const GENDER_LABEL: Record<string, string> = { male: "남성", female: "여성", unspecified: "선택 안 함" };
+const GENDER_LABEL: Record<string, string> = { male: "Male", female: "Female", unspecified: "Prefer not to say" };
 
 // 흔히 쓰이는 시간대만 우선 제공한다(전체 IANA 목록은 과함) — 필요해지면
 // 검색 가능한 콤보박스로 바꾼다.
 const TIMEZONE_OPTIONS = [
-  { value: "Asia/Seoul", label: "서울(KST, UTC+9)" },
-  { value: "America/Los_Angeles", label: "로스앤젤레스(PT)" },
-  { value: "America/Denver", label: "덴버(MT)" },
-  { value: "America/Chicago", label: "시카고(CT)" },
-  { value: "America/New_York", label: "뉴욕(ET)" },
+  { value: "Asia/Seoul", label: "Seoul (KST, UTC+9)" },
+  { value: "America/Los_Angeles", label: "Los Angeles (PT)" },
+  { value: "America/Denver", label: "Denver (MT)" },
+  { value: "America/Chicago", label: "Chicago (CT)" },
+  { value: "America/New_York", label: "New York (ET)" },
 ];
 
 // Phase B(4, 2026-09-23) — Profile 탭. 이름·생년월일·입사일은 조회만
@@ -1294,7 +1294,7 @@ function ProfilePanel() {
         setCareerBio(p.careerBio ?? "");
         setTimezone(p.timezone ?? "Asia/Seoul");
       })
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }, []);
 
   async function handleSave() {
@@ -1305,7 +1305,7 @@ function ProfilePanel() {
       setSaved(true);
       setTimeout(() => setSaved(false), 2000);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "저장하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't save.");
     } finally {
       setBusy(false);
     }
@@ -1315,7 +1315,7 @@ function ProfilePanel() {
     return (
       <div className="max-w-[560px] px-8 py-8">
         <h1 className="text-[20px] font-extrabold text-ink mb-5">Profile</h1>
-        {error ? <p className="text-[13px] text-red">{error}</p> : <p className="text-[13px] text-grey-500">불러오는 중…</p>}
+        {error ? <p className="text-[13px] text-red">{error}</p> : <p className="text-[13px] text-grey-500">Loading…</p>}
       </div>
     );
   }
@@ -1324,22 +1324,22 @@ function ProfilePanel() {
     <div className="max-w-[560px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-5">Profile</h1>
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
-      {saved && <div className="mb-4 text-[13px] font-semibold text-green bg-green/10 rounded-lg px-4 py-3">저장되었습니다.</div>}
+      {saved && <div className="mb-4 text-[13px] font-semibold text-green bg-green/10 rounded-lg px-4 py-3">Saved.</div>}
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-5 bg-grey-100">
-        <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">회사 기준 정보(관리자만 수정)</div>
+        <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Company Records (admin-only edits)</div>
         <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-[13px]">
-          <dt className="font-bold text-grey-500">이름</dt>
-          <dd className="text-ink">{profile.name ?? "미입력"}</dd>
-          <dt className="font-bold text-grey-500">생년월일</dt>
-          <dd className="text-ink">{profile.dateOfBirth ?? "미입력"}</dd>
-          <dt className="font-bold text-grey-500">입사일</dt>
-          <dd className="text-ink">{profile.hireDate ?? "미입력"}</dd>
+          <dt className="font-bold text-grey-500">Name</dt>
+          <dd className="text-ink">{profile.name ?? "Not set"}</dd>
+          <dt className="font-bold text-grey-500">Date of birth</dt>
+          <dd className="text-ink">{profile.dateOfBirth ?? "Not set"}</dd>
+          <dt className="font-bold text-grey-500">Hire date</dt>
+          <dd className="text-ink">{profile.hireDate ?? "Not set"}</dd>
         </dl>
       </div>
 
       <div className="mb-4">
-        <label className="text-[11px] font-bold text-grey-500 mb-1 block">성별</label>
+        <label className="text-[11px] font-bold text-grey-500 mb-1 block">Gender</label>
         <select value={gender} onChange={(e) => setGender(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
           {Object.entries(GENDER_LABEL).map(([value, label]) => (
             <option key={value} value={value}>
@@ -1350,18 +1350,18 @@ function ProfilePanel() {
       </div>
 
       <div className="mb-4">
-        <label className="text-[11px] font-bold text-grey-500 mb-1 block">이력</label>
+        <label className="text-[11px] font-bold text-grey-500 mb-1 block">Bio</label>
         <textarea
           value={careerBio}
           onChange={(e) => setCareerBio(e.target.value)}
           rows={4}
-          placeholder="학력·경력 등을 자유롭게 적어주세요."
+          placeholder="Education, experience, etc."
           className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px]"
         />
       </div>
 
       <div className="mb-6">
-        <label className="text-[11px] font-bold text-grey-500 mb-1 block">시간대</label>
+        <label className="text-[11px] font-bold text-grey-500 mb-1 block">Time zone</label>
         <select value={timezone} onChange={(e) => setTimezone(e.target.value)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
           {TIMEZONE_OPTIONS.map((t) => (
             <option key={t.value} value={t.value}>
@@ -1369,11 +1369,11 @@ function ProfilePanel() {
             </option>
           ))}
         </select>
-        <p className="text-[11.5px] text-grey-500 mt-1">일정 표시에 이 시간대를 사용합니다.</p>
+        <p className="text-[11.5px] text-grey-500 mt-1">Schedules are displayed in this time zone.</p>
       </div>
 
       <button onClick={handleSave} disabled={busy} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-        저장
+        Save
       </button>
     </div>
   );
@@ -1396,7 +1396,7 @@ function StaffMessagesPanel() {
   function reloadInquiries() {
     listMyStaffInquiriesAction()
       .then(setInquiries)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }
   useEffect(() => {
     reloadInquiries();
@@ -1408,7 +1408,7 @@ function StaffMessagesPanel() {
     setMessages(null);
     listMyStaffMessagesAction(id)
       .then(setMessages)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }
 
   async function handleStart() {
@@ -1422,7 +1422,7 @@ function StaffMessagesPanel() {
       reloadInquiries();
       openInquiry(inquiryId);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "시작하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't start.");
     } finally {
       setBusy(false);
     }
@@ -1438,7 +1438,7 @@ function StaffMessagesPanel() {
       openInquiry(selectedId);
       reloadInquiries();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "전송하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't send.");
     } finally {
       setBusy(false);
     }
@@ -1449,22 +1449,22 @@ function StaffMessagesPanel() {
   return (
     <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[20px] font-extrabold text-ink mb-1">Admin Messages</h1>
-      <p className="text-[12.5px] text-grey-500 mb-5">관리자와의 내부 대화입니다. 가족·학생에게는 보이지 않습니다.</p>
+      <p className="text-[12.5px] text-grey-500 mb-5">Internal conversation with admins. Not visible to families or students.</p>
       {error && <div className="mb-4 text-[13px] font-semibold text-red bg-red/5 rounded-lg px-4 py-3">{error}</div>}
 
       {!selectedId && (
         <div className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
-          <h3 className="text-[13.5px] font-bold text-ink mb-2">새 대화 시작</h3>
+          <h3 className="text-[13.5px] font-bold text-ink mb-2">Start New Conversation</h3>
           <input
             value={newSubject}
             onChange={(e) => setNewSubject(e.target.value)}
-            placeholder="주제(선택)"
+            placeholder="Subject (optional)"
             className="w-full mb-2 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
           />
           <textarea
             value={newBody}
             onChange={(e) => setNewBody(e.target.value)}
-            placeholder="이슈 보고·문의 내용을 입력해주세요"
+            placeholder="Describe the issue or question"
             className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] min-h-[80px]"
           />
           <button
@@ -1472,7 +1472,7 @@ function StaffMessagesPanel() {
             disabled={busy || !newBody.trim()}
             className="mt-2 text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50"
           >
-            보내기
+            Send
           </button>
         </div>
       )}
@@ -1480,11 +1480,11 @@ function StaffMessagesPanel() {
       {selectedId ? (
         <div>
           <button onClick={() => setSelectedId(null)} className="text-[12.5px] font-semibold text-grey-500 mb-3">
-            ← 목록으로
+            ← Back to list
           </button>
-          <h3 className="text-[14px] font-bold text-ink mb-3">{selected?.subject ?? "제목 없음"}</h3>
+          <h3 className="text-[14px] font-bold text-ink mb-3">{selected?.subject ?? "No subject"}</h3>
           {messages === null ? (
-            <p className="text-[13px] text-grey-500">불러오는 중…</p>
+            <p className="text-[13px] text-grey-500">Loading…</p>
           ) : (
             <div className="space-y-2 mb-4">
               {messages.map((m) => (
@@ -1492,7 +1492,7 @@ function StaffMessagesPanel() {
                   key={m.id}
                   className={"rounded-xl px-3 py-2 text-[13px] max-w-[80%] " + (m.senderRole === "consultant" ? "bg-ink text-white ml-auto" : "bg-grey-100 text-ink")}
                 >
-                  <div className="text-[10.5px] font-bold opacity-70 mb-0.5">{m.senderRole === "consultant" ? "나" : "관리자"}</div>
+                  <div className="text-[10.5px] font-bold opacity-70 mb-0.5">{m.senderRole === "consultant" ? "Me" : "Admin"}</div>
                   {m.body}
                 </div>
               ))}
@@ -1503,24 +1503,24 @@ function StaffMessagesPanel() {
               <input
                 value={replyBody}
                 onChange={(e) => setReplyBody(e.target.value)}
-                placeholder="답장하기"
+                placeholder="Reply"
                 className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") void handleReply();
                 }}
               />
               <button onClick={handleReply} disabled={busy || !replyBody.trim()} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-                전송
+                Send
               </button>
             </div>
           ) : (
-            <p className="text-[12px] text-grey-500">종료된 대화입니다.</p>
+            <p className="text-[12px] text-grey-500">This conversation has been closed.</p>
           )}
         </div>
       ) : inquiries === null ? (
-        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+        <p className="text-[13px] text-grey-500">Loading…</p>
       ) : inquiries.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">아직 대화가 없습니다.</div>
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No conversations yet.</div>
       ) : (
         inquiries.map((i) => (
           <button
@@ -1529,8 +1529,8 @@ function StaffMessagesPanel() {
             className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between"
           >
             <div>
-              <div className="text-[13px] font-bold text-ink">{i.subject ?? "제목 없음"}</div>
-              <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "진행 중" : "종료됨"}</div>
+              <div className="text-[13px] font-bold text-ink">{i.subject ?? "No subject"}</div>
+              <div className="text-[11.5px] text-grey-500">{i.status === "open" ? "Open" : "Closed"}</div>
             </div>
             <span className="text-[11px] text-grey-500">{fmtDateTime(i.lastMessageAt, undefined, tz)}</span>
           </button>
@@ -1572,7 +1572,7 @@ function StudentList({
   if (students.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        아직 배정된 학생이 없습니다.
+        No students assigned yet.
       </div>
     );
   }
@@ -1584,7 +1584,7 @@ function StudentList({
           onClick={() => onSelect(s.id)}
           className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5 flex items-center justify-between"
         >
-          <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
+          <span className="text-[13.5px] font-bold text-ink">{s.name ?? "Unnamed"}</span>
           {(unreadByStudent[s.id] ?? 0) > 0 && (
             <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red text-white text-[10px] font-bold flex items-center justify-center">
               {unreadByStudent[s.id] > 9 ? "9+" : unreadByStudent[s.id]}
@@ -1613,7 +1613,7 @@ function EndedStudentList({
   if (students.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        배정이 종료된 학생이 없습니다.
+        No ended assignments yet.
       </div>
     );
   }
@@ -1626,8 +1626,8 @@ function EndedStudentList({
           className="w-full text-left border-[1.5px] border-grey-200 rounded-xl px-5 py-3.5 mb-2.5"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[13.5px] font-bold text-ink">{s.name ?? "이름 없음"}</span>
-            <span className="text-[11px] text-grey-500">{fmtDate(s.endedAt, undefined, tz)} 종료</span>
+            <span className="text-[13.5px] font-bold text-ink">{s.name ?? "Unnamed"}</span>
+            <span className="text-[11px] text-grey-500">Ended {fmtDate(s.endedAt, undefined, tz)}</span>
           </div>
           {s.reason && <div className="text-[12px] text-grey-500 mt-1">{s.reason}</div>}
         </button>
@@ -1646,17 +1646,17 @@ function EndedStudentPanel({ student, onBack }: { student: EndedConsultantStuden
       >
         ← Students
       </button>
-      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-1">{student.name ?? "이름 없음"}</h1>
+      <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-1">{student.name ?? "Unnamed"}</h1>
       <div className="text-[12px] text-grey-500 mb-4">
-        {fmtDateTime(student.endedAt, undefined, tz)}에 담당이 종료됨
+        Assignment ended {fmtDateTime(student.endedAt, undefined, tz)}
       </div>
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 bg-grey-100">
-        <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">종료 사유</div>
-        <div className="text-[13px] text-ink">{student.reason ?? "기록된 사유 없음"}</div>
+        <div className="text-[11px] font-bold text-grey-500 uppercase tracking-wide mb-2">Reason for Ending</div>
+        <div className="text-[13px] text-ink">{student.reason ?? "No reason recorded"}</div>
       </div>
       <div className="text-[12px] text-grey-500 mt-4">
-        배정이 종료된 학생은 기록 조회만 가능합니다. 로드맵·보드·메신저 등 실시간 정보는 현재 담당
-        컨설턴트만 접근할 수 있습니다.
+        Ended assignments are read-only. Live information such as the roadmap, board, and messages is available
+        only to the current consultant.
       </div>
     </div>
   );
@@ -1679,14 +1679,14 @@ function StudentPanel({
         onClick={onBack}
         className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
-        ← 담당 학생 목록
+        ← My Students
       </button>
       <h1 className="text-[18px] font-extrabold text-ink mt-2 mb-4">{studentName}</h1>
       <StaffStudentViews
         studentId={studentId}
         extraTabs={[
           { id: "roadmap", label: "Roadmap", render: () => <StudentRoadmapPanel studentId={studentId} /> },
-          { id: "messenger", label: "메신저", render: () => <ConsultantMessengerPanel key={studentId} studentId={studentId} /> },
+          { id: "messenger", label: "Messages", render: () => <ConsultantMessengerPanel key={studentId} studentId={studentId} /> },
         ]}
       />
     </div>
@@ -1707,14 +1707,14 @@ function StudentRoadmapPanel({ studentId }: { studentId: string }) {
         if (!cancelled) setState({ status: "ready", data });
       })
       .catch((e) => {
-        if (!cancelled) setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+        if (!cancelled) setState({ status: "error", message: e instanceof Error ? e.message : "Couldn't load." });
       });
     return () => {
       cancelled = true;
     };
   }, [studentId]);
 
-  if (state.status === "loading") return <div className="py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+  if (state.status === "loading") return <div className="py-8 text-[13px] text-grey-500">Loading...</div>;
   if (state.status === "error") return <div className="py-8 text-[13px] text-red">{state.message}</div>;
   return <RoadmapView data={state.data} canProposeSourceUrl />;
 }
@@ -1741,7 +1741,7 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
   function loadInquiries() {
     listConsultantInquiriesAction(studentId)
       .then(setInquiries)
-      .catch((e) => setError(e instanceof Error ? e.message : "문의 목록을 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load threads."));
   }
 
   useEffect(() => {
@@ -1777,20 +1777,20 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
           onClick={() => setComposing(true)}
           className="text-[12px] font-bold text-white bg-ink rounded-lg px-3.5 py-1.5 mb-3"
         >
-          + 새 대화 시작
+          + New conversation
         </button>
       ) : (
         <div className="border-[1.5px] border-grey-200 rounded-xl p-3 mb-3 space-y-1.5">
           <input
             value={newSubject}
             onChange={(e) => setNewSubject(e.target.value)}
-            placeholder="주제(선택)"
+            placeholder="Subject (optional)"
             className="w-full border border-grey-200 rounded px-2 py-1 text-[12.5px]"
           />
           <textarea
             value={newBody}
             onChange={(e) => setNewBody(e.target.value)}
-            placeholder="메시지 내용"
+            placeholder="Message"
             className="w-full border border-grey-200 rounded px-2 py-1.5 text-[12.5px] min-h-[54px]"
           />
           <div className="flex gap-2">
@@ -1808,17 +1808,17 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
                   loadInquiries();
                   setOpenId(inquiryId);
                 } catch (e) {
-                  setError(e instanceof Error ? e.message : "대화를 시작하지 못했습니다.");
+                  setError(e instanceof Error ? e.message : "Couldn't start the conversation.");
                 } finally {
                   setStarting(false);
                 }
               }}
               className="text-[12px] font-bold text-white bg-ink rounded-lg px-3.5 py-1.5 disabled:opacity-50"
             >
-              {starting ? "보내는 중..." : "보내기"}
+              {starting ? "Sending..." : "Send"}
             </button>
             <button type="button" className="text-[12px] font-semibold text-grey-500" onClick={() => setComposing(false)}>
-              취소
+              Cancel
             </button>
           </div>
         </div>
@@ -1835,15 +1835,15 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
               (subTab === t ? "bg-ink text-white" : "bg-grey-100 text-grey-600")
             }
           >
-            {t === "open" ? "진행 중 문의" : "지난 문의"}
+            {t === "open" ? "Open threads" : "Past threads"}
           </button>
         ))}
       </div>
 
-      {inquiries === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+      {inquiries === null && !error && <p className="text-[13px] text-grey-500">Loading...</p>}
       {inquiries && visible.length === 0 && (
         <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          {subTab === "open" ? "진행 중인 문의가 없습니다." : "지난 문의가 없습니다."}
+          {subTab === "open" ? "No open threads yet." : "No past threads yet."}
         </p>
       )}
       {inquiries && visible.length > 0 && (
@@ -1859,7 +1859,7 @@ function ConsultantMessengerPanel({ studentId }: { studentId: string }) {
                   {i.subject && <p className="text-[12.5px] font-bold text-ink truncate">{i.subject}</p>}
                   <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
                   <p className="text-[11px] text-grey-500 mt-0.5">
-                    {i.status === "closed" ? `종료됨 · ${formatMessengerDateTime(i.closedAt, tz)}` : `최근 메시지 ${formatMessengerDateTime(i.lastMessageAt, tz)}`}
+                    {i.status === "closed" ? `Closed · ${formatMessengerDateTime(i.closedAt, tz)}` : `Last message ${formatMessengerDateTime(i.lastMessageAt, tz)}`}
                   </p>
                 </div>
                 <span className="text-[11px] font-bold text-grey-400 shrink-0">›</span>
@@ -1891,7 +1891,7 @@ function ConsultantInquiryDetail({
   function loadMessages() {
     listConsultantInquiryMessagesAction(inquiry.id)
       .then(setMessages)
-      .catch((e) => setError(e instanceof Error ? e.message : "메시지를 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load messages."));
   }
 
   useEffect(() => {
@@ -1908,7 +1908,7 @@ function ConsultantInquiryDetail({
       setDraft("");
       loadMessages();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "전송에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't send.");
     } finally {
       setSending(false);
     }
@@ -1921,28 +1921,28 @@ function ConsultantInquiryDetail({
         onClick={onBack}
         className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform mb-4"
       >
-        ← 문의 목록으로
+        ← Back to threads
       </button>
       {readOnly && (
         <p className="text-[12px] font-bold text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-3">
-          종료된 문의입니다({formatMessengerDateTime(inquiry.closedAt, tz)}) — 읽기 전용입니다.
+          This thread was closed ({formatMessengerDateTime(inquiry.closedAt, tz)}) — read-only.
         </p>
       )}
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
-        {messages === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+        {messages === null && !error && <p className="text-[13px] text-grey-500">Loading...</p>}
         {messages && messages.length > 0 && (
           <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
             {messages.map((m) => {
               const isMine = m.senderRole === "consultant";
               const label =
                 m.senderRole === "guardian"
-                  ? "보호자"
+                  ? "Parent"
                   : m.senderRole === "admin"
-                    ? "관리자"
+                    ? "Admin"
                     : m.senderRole === "student"
-                      ? "학생"
-                      : "나";
+                      ? "Student"
+                      : "Me";
               return (
                 <div
                   key={m.id}
@@ -1960,10 +1960,10 @@ function ConsultantInquiryDetail({
         {!readOnly && (
           <div className="flex gap-2">
             <textarea
-              aria-label="메시지 내용"
+              aria-label="Message"
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
-              placeholder="메시지를 입력해주세요"
+              placeholder="Type a message"
               className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
             />
             <button
@@ -1972,7 +1972,7 @@ function ConsultantInquiryDetail({
               onClick={handleSend}
               className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
             >
-              전송
+              Send
             </button>
           </div>
         )}

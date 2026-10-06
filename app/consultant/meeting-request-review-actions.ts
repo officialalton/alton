@@ -37,12 +37,12 @@ async function requireAssignedConsultant(supabaseClient: Awaited<ReturnType<type
     .eq("consultant_id", userId)
     .maybeSingle();
   if (error) throw new Error(error.message);
-  if (!data) throw new Error("담당 컨설턴트가 아닙니다.");
+  if (!data) throw new Error("You are not the assigned consultant.");
 }
 
 async function requireConsultant() {
   const { user, profile, supabase } = await requireUser();
-  if (profile?.role !== "consultant") throw new Error("컨설턴트만 접근할 수 있습니다.");
+  if (profile?.role !== "consultant") throw new Error("Only consultants can access this.");
   return { userId: user.id, supabase };
 }
 
@@ -113,7 +113,7 @@ export async function saveMyMeetingRequestReviewDraftAction(meetingRequestId: st
 export async function finalizeMyMeetingRequestReviewAction(meetingRequestId: string, finalText: string): Promise<void> {
   const { userId, supabase } = await requireConsultant();
   await requireAssignedConsultant(supabase, userId, meetingRequestId);
-  if (!finalText.trim()) throw new Error("확정할 리뷰 내용을 입력해주세요.");
+  if (!finalText.trim()) throw new Error("Please enter the review content to finalize.");
   const { error } = await supabase.rpc("finalize_meeting_request_review", {
     p_meeting_request_id: meetingRequestId,
     p_final_text: finalText,
@@ -124,7 +124,7 @@ export async function finalizeMyMeetingRequestReviewAction(meetingRequestId: str
 export async function editMyFinalizedMeetingRequestReviewAction(meetingRequestId: string, finalText: string): Promise<void> {
   const { userId, supabase } = await requireConsultant();
   await requireAssignedConsultant(supabase, userId, meetingRequestId);
-  if (!finalText.trim()) throw new Error("수정할 리뷰 내용을 입력해주세요.");
+  if (!finalText.trim()) throw new Error("Please enter the updated review content.");
   const { error } = await supabase.rpc("admin_edit_meeting_request_review", {
     p_meeting_request_id: meetingRequestId,
     p_final_text: finalText,

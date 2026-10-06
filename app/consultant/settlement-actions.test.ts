@@ -53,7 +53,7 @@ describe("saveMyPayoutAccountAction", () => {
   it("계좌번호가 4자리 미만이면 invalid", async () => {
     requireConsultantMock.mockResolvedValue({ user: { id: "c1" }, supabase: {} });
     const result = await saveMyPayoutAccountAction({ accountHolderName: "지만", bankName: "국민", accountNumber: "12", currency: "KRW" });
-    expect(result).toEqual({ status: "invalid", message: "계좌번호를 정확히 입력해주세요(숫자 4자리 이상)." });
+    expect(result).toEqual({ status: "invalid", message: "Please enter a valid account number (at least 4 digits)." });
   });
 
   it("정상 입력이면 저장하고 이력을 남긴다", async () => {

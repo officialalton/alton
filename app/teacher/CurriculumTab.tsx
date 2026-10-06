@@ -122,8 +122,8 @@ export default function CurriculumTab({
       <UnderlineSubTabs
         className="mb-5"
         items={[
-          { id: "mine", label: "내 과목" },
-          { id: "students", label: "학생별" },
+          { id: "mine", label: "My Subjects" },
+          { id: "students", label: "By Student" },
         ]}
         activeId={subtab}
         onSelect={setSubtab}
@@ -199,7 +199,7 @@ function useStudentCurriculumPanelData(
         if (!cancelled) {
           setState({
             status: "error",
-            message: e instanceof Error ? e.message : "불러오지 못했습니다.",
+            message: e instanceof Error ? e.message : "Couldn't load.",
           });
         }
       });
@@ -241,16 +241,16 @@ function StudentCurriculumOperatingView({
     <div className="max-w-[640px] px-8 pt-8">
       <div className="flex items-center justify-between px-6">
         <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
-          ← 뒤로
+          ← Back
         </button>
       </div>
       {/* 2026-09-10(P0-2) — "이 세션"이 어느 학생·과목인지 화면 상단에서 바로
           알 수 있게 표시(내부 용어 대신 식별 정보). */}
       <div className="px-6 text-[12px] text-grey-500 font-semibold mt-1">
-        {studentName} 학생 · {subjectName}
+        {studentName} / {subjectName}
       </div>
       {state.status === "loading" && (
-        <div className="px-6 py-8 text-[13px] text-grey-500">불러오는 중...</div>
+        <div className="px-6 py-8 text-[13px] text-grey-500">Loading…</div>
       )}
       {state.status === "error" && (
         <div className="px-6 py-8 text-[13px] text-red">{state.message}</div>
@@ -296,14 +296,14 @@ function LegacyCurriculumView({
       .then((result) => {
         if (cancelled) return;
         if (!result) {
-          setState({ status: "error", message: "커리큘럼을 찾을 수 없습니다." });
+          setState({ status: "error", message: "Curriculum not found." });
           return;
         }
         setState({ status: "ready", data: result.curriculum, memos: result.memos });
       })
       .catch((e) => {
         if (!cancelled) {
-          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+          setState({ status: "error", message: e instanceof Error ? e.message : "Couldn't load." });
         }
       });
     return () => {
@@ -312,13 +312,13 @@ function LegacyCurriculumView({
   }, [enrollmentId]);
 
   if (state.status === "loading") {
-    return <div className="max-w-[640px] px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+    return <div className="max-w-[640px] px-8 py-8 text-[13px] text-grey-500">Loading…</div>;
   }
   if (state.status === "error") {
     return (
       <div className="max-w-[640px] px-8 py-8">
         <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
-          ← 뒤로
+          ← Back
         </button>
         <p className="text-[13px] text-red">{state.message}</p>
       </div>
@@ -351,7 +351,7 @@ function LegacyReviewView({ sessionId, onBack }: { sessionId: string; onBack: ()
       })
       .catch((e) => {
         if (!cancelled) {
-          setState({ status: "error", message: e instanceof Error ? e.message : "불러오지 못했습니다." });
+          setState({ status: "error", message: e instanceof Error ? e.message : "Couldn't load." });
         }
       });
     return () => {
@@ -360,13 +360,13 @@ function LegacyReviewView({ sessionId, onBack }: { sessionId: string; onBack: ()
   }, [sessionId]);
 
   if (state.status === "loading") {
-    return <div className="max-w-[640px] px-8 py-8 text-[13px] text-grey-500">불러오는 중...</div>;
+    return <div className="max-w-[640px] px-8 py-8 text-[13px] text-grey-500">Loading…</div>;
   }
   if (state.status === "error") {
     return (
       <div className="max-w-[640px] px-8 py-8">
         <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
-          ← 뒤로
+          ← Back
         </button>
         <p className="text-[13px] text-red">{state.message}</p>
       </div>
@@ -389,7 +389,7 @@ function StatusLabel(s: RosterSubject) {
   // 그대로 둔다(단원 오버레이 개념 자체가 없는 별도 데이터 모델).
   return s.source === "v3"
     ? formatCurriculumProgressLabel({ totalUnits: s.totalSessions, doneUnits: s.currentSession, sourceLabel: null })
-    : `${s.currentSession}/${s.totalSessions}회차`;
+    : `Session ${s.currentSession}/${s.totalSessions}`;
 }
 
 function StudentSubjectPicker({
@@ -406,7 +406,7 @@ function StudentSubjectPicker({
   if (students.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        담당 중인 학생이 없습니다.
+        No students assigned yet.
       </div>
     );
   }
@@ -440,7 +440,7 @@ function StudentSubjectPicker({
 
       {subjectsForStudent.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          아직 배정된 커리큘럼이 없습니다.
+          No curriculum assigned yet.
         </div>
       ) : (
         subjectsForStudent.map((s) => (

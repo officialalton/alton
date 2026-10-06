@@ -45,7 +45,7 @@ export async function listMyStaffInquiriesAction(): Promise<ConsultantAdminInqui
 
 export async function startMyStaffInquiryAction(body: string, subject?: string): Promise<{ inquiryId: string }> {
   const { user, supabase } = await requireConsultant();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const { data: inquiry, error: inquiryError } = await supabase
     .from("consultant_admin_inquiries")
     .insert({ consultant_id: user.id, opened_by: user.id, opened_by_role: "consultant", subject: subject?.trim() || null })
@@ -75,14 +75,14 @@ export async function listMyStaffMessagesAction(inquiryId: string): Promise<Cons
 
 export async function sendMyStaffMessageAction(inquiryId: string, body: string): Promise<void> {
   const { user, supabase } = await requireConsultant();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const { error } = await supabase.from("consultant_admin_messages").insert({
     inquiry_id: inquiryId,
     sender_id: user.id,
     sender_role: "consultant",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message.includes("consultant_admin_inquiries") ? "종료된 문의입니다." : error.message);
+  if (error) throw new Error(error.message.includes("consultant_admin_inquiries") ? "This thread has been closed." : error.message);
 }
 
 export async function getMyStaffMessengerUnreadCountAction(): Promise<number> {

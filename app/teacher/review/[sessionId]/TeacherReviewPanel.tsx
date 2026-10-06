@@ -6,10 +6,10 @@ import { submitReview } from "./review-actions";
 import type { ExistingReview, ReviewCategoryId, ReviewRating, SessionReviewContext } from "./review-data";
 
 const CATEGORY_LABEL: Record<ReviewCategoryId, string> = {
-  concept: "개념 이해도",
-  problemsolving: "문제 해결 능력",
-  participation: "수업 참여도",
-  homework: "과제 수행도",
+  concept: "Concept understanding",
+  problemsolving: "Problem solving",
+  participation: "Class participation",
+  homework: "Homework completion",
 };
 
 const CATEGORY_IDS = Object.keys(CATEGORY_LABEL) as ReviewCategoryId[];
@@ -86,17 +86,17 @@ export default function TeacherReviewPanel({
         onClick={() => router.push("/teacher?tab=lesson-schedule")}
         className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
-        ← 뒤로
+        ← Back
       </button>
 
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 리뷰 작성</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">Write Lesson Review</h1>
       <p className="text-[13px] text-grey-500 mb-6">
-        {context.studentName} · {context.subjectName} · {context.sessionNumber}회차
+        {context.studentName} · {context.subjectName} · Session {context.sessionNumber}
         {context.unitTitle ? ` · ${context.unitTitle}` : ""}
       </p>
 
       <div className="mb-6">
-        <h2 className="text-[14px] font-bold text-ink mb-3">카테고리별 평가</h2>
+        <h2 className="text-[14px] font-bold text-ink mb-3">Ratings by category</h2>
         {CATEGORY_IDS.map((id) => (
           <div
             key={id}
@@ -125,7 +125,7 @@ export default function TeacherReviewPanel({
                   [id]: { ...prev[id], text: e.target.value },
                 }))
               }
-              placeholder="코멘트(선택)"
+              placeholder="Comment (optional)"
               className="w-full min-h-[56px] px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
             />
           </div>
@@ -133,9 +133,9 @@ export default function TeacherReviewPanel({
       </div>
 
       <div className="mb-6">
-        <h2 className="text-[14px] font-bold text-ink mb-3">종합 정리</h2>
-        <Field label="오늘 배운 것" value={teacherSummary} onChange={setTeacherSummary} required />
-        <Field label="최종 정리" value={nextPlan} onChange={setNextPlan} required />
+        <h2 className="text-[14px] font-bold text-ink mb-3">Summary</h2>
+        <Field label="What we covered today" value={teacherSummary} onChange={setTeacherSummary} required />
+        <Field label="Final notes" value={nextPlan} onChange={setNextPlan} required />
       </div>
 
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
@@ -144,16 +144,16 @@ export default function TeacherReviewPanel({
         onClick={() => void handleSubmit()}
         className="text-[13px] font-bold px-5 py-2.5 rounded-lg bg-green text-white disabled:opacity-50"
       >
-        {submitting ? "제출 중..." : "리뷰 제출"}
+        {submitting ? "Submitting…" : "Submit review"}
       </button>
       {!canSubmit && !submitted && (
         <p className="text-[12px] text-grey-500 mt-2">
-          모든 카테고리 평가 선택, &ldquo;오늘 배운 것&rdquo;·&ldquo;최종 정리&rdquo; 작성 후 제출할 수 있습니다.
+          Rate every category and fill in &ldquo;What we covered today&rdquo; and &ldquo;Final notes&rdquo; to submit.
         </p>
       )}
       {submitted && (
         <span className="ml-3 text-[12.5px] font-semibold text-green">
-          ✓ 제출되었습니다
+          ✓ Submitted
         </span>
       )}
     </div>

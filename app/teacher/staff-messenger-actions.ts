@@ -43,7 +43,7 @@ export async function listMyTeacherStaffInquiriesAction(): Promise<TeacherAdminI
 
 export async function startMyTeacherStaffInquiryAction(body: string, subject?: string): Promise<{ inquiryId: string }> {
   const { user, supabase } = await requireUser();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const { data: inquiry, error: inquiryError } = await supabase
     .from("teacher_admin_inquiries")
     .insert({ teacher_id: user.id, opened_by: user.id, opened_by_role: "teacher", subject: subject?.trim() || null })
@@ -73,12 +73,12 @@ export async function listMyTeacherStaffMessagesAction(inquiryId: string): Promi
 
 export async function sendMyTeacherStaffMessageAction(inquiryId: string, body: string): Promise<void> {
   const { user, supabase } = await requireUser();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const { error } = await supabase.from("teacher_admin_messages").insert({
     inquiry_id: inquiryId,
     sender_id: user.id,
     sender_role: "teacher",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message.includes("teacher_admin_inquiries") ? "종료된 문의입니다." : error.message);
+  if (error) throw new Error(error.message.includes("teacher_admin_inquiries") ? "This thread is closed." : error.message);
 }

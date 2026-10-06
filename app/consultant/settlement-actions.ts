@@ -82,13 +82,13 @@ export async function saveMyPayoutAccountAction(input: PayoutAccountInput): Prom
   const bankName = input.bankName.trim();
   const accountNumber = input.accountNumber.trim();
   const currency = (input.currency || "KRW").trim().toUpperCase();
-  if (!accountHolderName) return { status: "invalid", message: "예금주를 입력해주세요." };
-  if (!bankName) return { status: "invalid", message: "은행명을 입력해주세요." };
+  if (!accountHolderName) return { status: "invalid", message: "Please enter the account holder name." };
+  if (!bankName) return { status: "invalid", message: "Please enter the bank name." };
   if (accountNumber.replace(/\D/g, "").length < 4) {
-    return { status: "invalid", message: "계좌번호를 정확히 입력해주세요(숫자 4자리 이상)." };
+    return { status: "invalid", message: "Please enter a valid account number (at least 4 digits)." };
   }
   if (!/^[A-Z]{3}$/.test(currency)) {
-    return { status: "invalid", message: "통화 코드는 3자리 영문이어야 합니다(예: KRW)." };
+    return { status: "invalid", message: "Currency code must be 3 letters (e.g. KRW)." };
   }
 
   const admin = createAdminClient();

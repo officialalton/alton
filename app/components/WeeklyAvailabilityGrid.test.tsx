@@ -13,8 +13,8 @@ describe("WeeklyAvailabilityGrid", () => {
       />
     );
     expect(screen.getByTestId("weekly-availability-grid")).toBeInTheDocument();
-    expect(screen.getByTestId("availability-block-r1")).toHaveTextContent("10:00~17:00");
-    expect(screen.getByTestId("availability-block-r2")).toHaveTextContent("19:00~23:00");
+    expect(screen.getByTestId("availability-block-r1")).toHaveTextContent("10:00–17:00");
+    expect(screen.getByTestId("availability-block-r2")).toHaveTextContent("19:00–23:00");
   });
 
   it("블록을 클릭하면 onDeleteRule이 해당 규칙 id로 호출된다", () => {

@@ -20,7 +20,7 @@ async function requireOwnsLegacyEnrollment(enrollmentId: string) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
 
   const [{ data: profile }, { data: enrollment }] = await Promise.all([
     supabase.from("profiles").select("role").eq("id", user.id).single(),
@@ -30,10 +30,10 @@ async function requireOwnsLegacyEnrollment(enrollmentId: string) {
       .eq("id", enrollmentId)
       .maybeSingle(),
   ]);
-  if (!enrollment) throw new Error("존재하지 않는 수강입니다.");
+  if (!enrollment) throw new Error("This enrollment doesn't exist.");
   if (profile?.role === "admin") return { supabase, user, enrollment };
-  if (profile?.role !== "teacher") throw new Error("선생님만 사용할 수 있습니다.");
-  if (enrollment.teacher_id !== user.id) throw new Error("담당 학생의 커리큘럼만 조회할 수 있습니다.");
+  if (profile?.role !== "teacher") throw new Error("Only teachers can use this.");
+  if (enrollment.teacher_id !== user.id) throw new Error("You can only view curricula for your assigned students.");
   return { supabase, user, enrollment };
 }
 
@@ -67,21 +67,21 @@ async function requireOwnsLegacySession(sessionId: string) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
 
   const { data: session } = await supabase
     .from("legacy_sessions")
     .select("id, enrollment_id, enrollment:enrollments(student_id, teacher_id)")
     .eq("id", sessionId)
     .maybeSingle();
-  if (!session) throw new Error("존재하지 않는 세션입니다.");
+  if (!session) throw new Error("This session doesn't exist.");
   const enrollment = Array.isArray(session.enrollment) ? session.enrollment[0] : session.enrollment;
-  if (!enrollment) throw new Error("존재하지 않는 수강입니다.");
+  if (!enrollment) throw new Error("This enrollment doesn't exist.");
 
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
   if (profile?.role !== "admin") {
-    if (profile?.role !== "teacher") throw new Error("선생님만 사용할 수 있습니다.");
-    if (enrollment.teacher_id !== user.id) throw new Error("담당 학생의 리뷰만 조회할 수 있습니다.");
+    if (profile?.role !== "teacher") throw new Error("Only teachers can use this.");
+    if (enrollment.teacher_id !== user.id) throw new Error("You can only view reviews for your assigned students.");
   }
   return { supabase, studentId: enrollment.student_id as string };
 }

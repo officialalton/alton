@@ -213,7 +213,7 @@ export default function CompositionPanel({
       ...prev,
       {
         curriculumDocId: docId,
-        title: titleById.get(docId) ?? "(제목 없음)",
+        title: titleById.get(docId) ?? "(Untitled)",
         position: (prev[prev.length - 1]?.position ?? 0) + 1,
         source: "manual",
       },
@@ -269,10 +269,10 @@ export default function CompositionPanel({
         )}
 
       <section className="mb-7">
-        <h2 className="text-[13px] font-bold text-ink mb-1">키워드</h2>
+        <h2 className="text-[13px] font-bold text-ink mb-1">Keywords</h2>
         {composition.subjectKeywords.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-3">
-            이 과목에 등록된 키워드가 없습니다.
+            No keywords registered for this subject yet.
           </p>
         ) : (
           <div className="flex flex-wrap gap-1.5">
@@ -300,18 +300,18 @@ export default function CompositionPanel({
 
       <section>
         <div className="flex items-center justify-between mb-1">
-          <h2 className="text-[13px] font-bold text-ink">교재</h2>
+          <h2 className="text-[13px] font-bold text-ink">Materials</h2>
           <button
             onClick={() => setShowPicker((v) => !v)}
             className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
           >
-            {showPicker ? "닫기" : "직접 담기"}
+            {showPicker ? "Close" : "Add manually"}
           </button>
         </div>
 
         {materials.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-            아직 담긴 교재가 없습니다. 키워드를 붙이거나 직접 담아 주세요.
+            No materials added yet. Attach a keyword or add materials manually.
           </p>
         ) : (
           materials.map((m, idx) => (
@@ -330,7 +330,7 @@ export default function CompositionPanel({
                       : "bg-ink/5 text-ink")
                   }
                 >
-                  {m.source === "auto" ? "키워드에서 자동" : "직접 담음"}
+                  {m.source === "auto" ? "Auto from keyword" : "Added manually"}
                 </span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -352,7 +352,7 @@ export default function CompositionPanel({
                   onClick={() => handleRemoveMaterial(m.curriculumDocId)}
                   className="text-[12px] font-semibold text-red"
                 >
-                  빼기
+                  Remove
                 </button>
               </div>
             </div>
@@ -362,7 +362,7 @@ export default function CompositionPanel({
         {showPicker && (
           <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3 mt-3">
             {pickable.length === 0 ? (
-              <p className="text-[12.5px] text-grey-500">담을 수 있는 교재가 없습니다.</p>
+              <p className="text-[12.5px] text-grey-500">No materials available to add.</p>
             ) : (
               pickable.map((p) => (
                 <div key={p.curriculumDocId} className="flex items-center gap-3 py-1.5">
@@ -370,7 +370,7 @@ export default function CompositionPanel({
                     <div className="text-[12.5px] text-ink truncate">
                       {p.kind !== "html" && (
                         <span className="text-[10px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5 mr-1.5 align-middle">
-                          {p.kind === "pdf" ? "PDF" : "영상"}
+                          {p.kind === "pdf" ? "PDF" : "Video"}
                         </span>
                       )}
                       {p.title}
@@ -380,13 +380,13 @@ export default function CompositionPanel({
                     )}
                   </div>
                   {pickedIds.has(p.curriculumDocId) ? (
-                    <span className="text-[11.5px] text-grey-300 font-semibold shrink-0">담김</span>
+                    <span className="text-[11.5px] text-grey-300 font-semibold shrink-0">Added</span>
                   ) : (
                     <button
                       onClick={() => handleAddMaterial(p.curriculumDocId)}
                       className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink shrink-0"
                     >
-                      담기
+                      Add
                     </button>
                   )}
                 </div>
@@ -400,13 +400,13 @@ export default function CompositionPanel({
           세 계층 모두 여기서 담고 뺀다. 담기는 자리만 다르다(학생 층은 준비안). */}
       <section className="mt-7">
         <h2 className="text-[13px] font-bold text-ink mb-1">
-          문제
+          Problems
           <span className="text-grey-300 font-semibold ml-1.5">{composedProblems.length}</span>
         </h2>
 
         {composedProblems.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
-            아직 담긴 문제가 없습니다. 아래 후보에서 고르세요.
+            No problems added yet. Pick from the candidates below.
           </p>
         ) : (
           <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
@@ -415,12 +415,12 @@ export default function CompositionPanel({
                 <span className="text-[12.5px] text-ink flex-1 min-w-0 truncate">{p.label}</span>
                 {p.source === "auto" && (
                   <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
-                    키워드에서 자동
+                    Auto from keyword
                   </span>
                 )}
                 {!p.problemVersionId && (
                   <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-500 shrink-0">
-                    버전 미기록
+                    Version not recorded
                   </span>
                 )}
                 {p.difficulty && (
@@ -433,7 +433,7 @@ export default function CompositionPanel({
                   onClick={() => void dropProblem(p.problemId)}
                   className="text-[11.5px] font-bold text-red shrink-0 disabled:opacity-50"
                 >
-                  빼기
+                  Remove
                 </button>
               </li>
             ))}
@@ -441,7 +441,7 @@ export default function CompositionPanel({
         )}
 
         <div className="mt-5 mb-1 flex items-center justify-between">
-          <h3 className="text-[12.5px] font-bold text-ink">더 담기</h3>
+          <h3 className="text-[12.5px] font-bold text-ink">Add more</h3>
           {pickableProblems.length > 0 && (
             <button
               type="button"
@@ -449,7 +449,7 @@ export default function CompositionPanel({
               onClick={() => void takeProblems(pickableProblems.slice(0, 20).map((p) => p.problemId))}
               className="text-[11.5px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
             >
-              {Math.min(20, pickableProblems.length)}개 한 번에 담기
+              Add {Math.min(20, pickableProblems.length)} at once
             </button>
           )}
         </div>
@@ -460,14 +460,14 @@ export default function CompositionPanel({
         )}
         {skillsInPool.length > 0 && (
           <label className="flex flex-wrap items-center gap-2 text-[12px] text-ink mb-2">
-            <span className="text-grey-500">세부 기술</span>
+            <span className="text-grey-500">Skill</span>
             <select
-              aria-label="세부 기술로 좁히기"
+              aria-label="Filter by skill"
               value={skillFilter}
               onChange={(e) => setSkillFilter(e.target.value)}
               className="text-[12px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1 max-w-[320px]"
             >
-              <option value="">모두 ({pickableAll.length})</option>
+              <option value="">All ({pickableAll.length})</option>
               {skillsInPool.map((k) => (
                 <option key={k.code} value={k.code}>
                   {k.label} ({pickableAll.filter((p) => p.skillCode === k.code).length})
@@ -479,10 +479,10 @@ export default function CompositionPanel({
         {pickableProblems.length === 0 ? (
           <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
             {keywordIds.length === 0
-              ? "키워드를 붙이면 해당하는 문제가 여기에 모입니다."
+              ? "Attach a keyword and matching problems will appear here."
               : skillFilter
-                ? "이 기술의 문제는 더 없습니다."
-                : "더 담을 문제가 없습니다."}
+                ? "No more problems for this skill."
+                : "No more problems to add."}
           </p>
         ) : (
           <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
@@ -495,7 +495,7 @@ export default function CompositionPanel({
                       type="button"
                       onClick={() => setPreviewId(open ? null : p.problemId)}
                       aria-expanded={open}
-                      title={open ? "미리보기 닫기" : "문제 미리보기"}
+                      title={open ? "Close preview" : "Preview problem"}
                       className="text-[12.5px] text-ink flex-1 min-w-0 truncate text-left hover:underline"
                     >
                       {p.label}
@@ -515,7 +515,7 @@ export default function CompositionPanel({
                       onClick={() => void takeProblem(p.problemId)}
                       className="text-[11.5px] font-bold text-ink shrink-0 disabled:opacity-50"
                     >
-                      담기
+                      Add
                     </button>
                   </div>
                   {open && <ProblemPreview problem={p} />}
@@ -557,7 +557,7 @@ function ProblemPreview({ problem }: { problem: KeywordProblem }) {
   if (!pv) {
     return (
       <p className="mt-2 text-[12px] text-grey-500" data-testid="problem-preview">
-        공개된 버전을 읽을 수 없어 미리보기를 보여줄 수 없습니다.
+Couldn&apos;t read the published version, so no preview is available.
       </p>
     );
   }
@@ -565,7 +565,7 @@ function ProblemPreview({ problem }: { problem: KeywordProblem }) {
     <div className="mt-2 rounded-lg bg-grey-100 px-4 py-3" data-testid="problem-preview">
       <ProblemFigure spec={pv.figure} text={problemText(pv.passage, pv.options)} className="mb-2" />
       <LearningText
-        text={stripInlineOptions(pv.passage, pv.options) || "(본문 없음)"}
+        text={stripInlineOptions(pv.passage, pv.options) || "(No passage)"}
         className="learning-body text-[13px] leading-[1.7] text-ink"
       />
       {pv.options.length > 0 && (
@@ -617,15 +617,15 @@ function LessonSection({ unitId }: { unitId: string }) {
 
   return (
     <section className="mt-7">
-      <h2 className="text-[13px] font-bold text-ink mb-1">예정된 수업</h2>
+      <h2 className="text-[13px] font-bold text-ink mb-1">Upcoming lessons</h2>
 
       {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
 
       {lessons === null ? (
-        <p className="text-[12.5px] text-grey-500">불러오는 중...</p>
+        <p className="text-[12.5px] text-grey-500">Loading…</p>
       ) : lessons.length === 0 ? (
         <p className="text-[12.5px] text-grey-500 bg-grey-100 rounded-lg px-4 py-4">
-          아직 이 학생의 예정된 수업이 없습니다. 수업이 잡히면 여기에 나타납니다.
+          No upcoming lessons for this student yet. They&apos;ll appear here once booked.
         </p>
       ) : (
         <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
@@ -642,7 +642,7 @@ function LessonSection({ unitId }: { unitId: string }) {
                   }}
                   className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
                 >
-                  수업 시작
+                  Start lesson
                 </button>
               ) : (
                 <button
@@ -654,7 +654,7 @@ function LessonSection({ unitId }: { unitId: string }) {
                   }}
                   className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                 >
-                  이 수업에 연결
+                  Link to this lesson
                 </button>
               )}
             </li>
@@ -666,7 +666,7 @@ function LessonSection({ unitId }: { unitId: string }) {
 }
 
 function formatLessonDate(startsAt: string | null, tz: string): string {
-  if (!startsAt) return "시간 미정";
+  if (!startsAt) return "Time TBD";
   const d = new Date(startsAt);
   return fmtDateTime(d, {
     month: "long",

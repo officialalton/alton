@@ -44,18 +44,18 @@ describe("수업에서 들어온 준비 화면", () => {
 
   it("어떤 수업인지 학생·과목·일시로 식별한다", () => {
     render(<LessonPrepScreen context={linked} />);
-    expect(screen.getByText(/지훈 학생 · SAT Math/)).toBeInTheDocument();
+    expect(screen.getByText(/지훈 · SAT Math/)).toBeInTheDocument();
   });
 
   it("시작 전에는 세션뷰로 건너뛰는 버튼이 없고, 시작한 수업이면 '수업 기록'으로 간다", () => {
     render(<LessonPrepScreen context={linked} />);
     expect(screen.queryByText("수업 열기")).not.toBeInTheDocument();
-    expect(screen.queryByText("수업 기록 →")).not.toBeInTheDocument();
+    expect(screen.queryByText("Lesson record →")).not.toBeInTheDocument();
   });
 
   it("이미 시작한 수업은 '수업 기록'으로 세션뷰에 들어간다", () => {
     render(<LessonPrepScreen context={{ ...linked, frozen: true }} />);
-    fireEvent.click(screen.getByText("수업 기록 →"));
+    fireEvent.click(screen.getByText("Lesson record →"));
     expect(pushMock).toHaveBeenCalledWith("/session/sess-1");
   });
 
@@ -68,7 +68,7 @@ describe("수업에서 들어온 준비 화면", () => {
 
   it("이미 시작한 수업이면 고정됐다고 알려준다", () => {
     render(<LessonPrepScreen context={{ ...linked, frozen: true }} />);
-    expect(screen.getByText(/시작 시점으로 고정되었습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/frozen at the start time/)).toBeInTheDocument();
   });
 
   it("연결된 회차가 없으면 준비 화면 대신 안내와 이동 경로를 준다", () => {
@@ -76,8 +76,8 @@ describe("수업에서 들어온 준비 화면", () => {
       <LessonPrepScreen context={{ ...linked, linkedUnitId: null, linkedUnitTitle: null }} />
     );
     expect(screen.queryByTestId("unit-prep-panel")).not.toBeInTheDocument();
-    expect(screen.getByText(/연결된 회차가 없습니다/)).toBeInTheDocument();
-    fireEvent.click(screen.getByText("커리큘럼으로 가기"));
+    expect(screen.getByText(/No session is linked to this lesson/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Go to curriculum"));
     expect(pushMock).toHaveBeenCalledWith("/teacher?tab=curriculum");
   });
 

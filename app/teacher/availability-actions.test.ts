@@ -70,7 +70,7 @@ describe("addTeacherAvailabilityRule", () => {
     const { addTeacherAvailabilityRule } = await import("./availability-actions");
     await expect(
       addTeacherAvailabilityRule({ dayOfWeek: 1, startTimeLocal: "09:00", endTimeLocal: "17:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01" })
-    ).rejects.toThrow("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+    ).rejects.toThrow("An overlapping time range already exists for this day.");
   });
 
   it("같은 요일·겹치는 유효기간 안에서 시간대가 겹치면 insert 전에 클라이언트(서버 액션) 레벨에서 에러를 던진다", async () => {
@@ -81,7 +81,7 @@ describe("addTeacherAvailabilityRule", () => {
     const { addTeacherAvailabilityRule } = await import("./availability-actions");
     await expect(
       addTeacherAvailabilityRule({ dayOfWeek: 1, startTimeLocal: "16:00", endTimeLocal: "20:00", timezone: "America/Los_Angeles", effectiveFrom: "2026-01-01" })
-    ).rejects.toThrow("같은 요일에 겹치는 시간대가 이미 등록되어 있습니다.");
+    ).rejects.toThrow("An overlapping time range already exists for this day.");
     expect(insertSelectSingleMock).not.toHaveBeenCalled();
   });
 

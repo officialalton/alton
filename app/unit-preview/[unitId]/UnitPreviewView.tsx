@@ -46,14 +46,14 @@ export default function UnitPreviewView({
             onClick={() => router.push(backHref)}
             className="text-[13px] font-semibold text-grey-600 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
           >
-            ← 뒤로
+            ← Back
           </button>
-          <nav className="flex gap-1.5" aria-label="탭">
+          <nav className="flex gap-1.5" aria-label="Tabs">
             <TabButton active={tab === "material"} onClick={() => setTab("material")}>
-              교재
+              Materials
             </TabButton>
             <TabButton active={tab === "problems"} onClick={() => setTab("problems")}>
-              문제
+              Problems
             </TabButton>
           </nav>
         </div>
@@ -62,28 +62,28 @@ export default function UnitPreviewView({
       <section className="border-b-[1.5px] border-grey-200 px-5 sm:px-8 py-5">
         <div className="max-w-[960px] mx-auto">
           <p className="text-[12.5px] text-grey-500 mb-1">
-            {[studentName ? `${studentName} 학생` : null, subjectName].filter(Boolean).join(" · ")}
+            {[studentName ? studentName : null, subjectName].filter(Boolean).join(" / ")}
           </p>
           <div className="flex flex-wrap items-center gap-3 mb-1.5">
             <h1 className="text-[22px] font-extrabold text-ink">{preview.unitTitle}</h1>
             <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-grey-500">
-              {preview.frozen ? "수업함" : "수업 전"}
+              {preview.frozen ? "Taught" : "Before lesson"}
             </span>
           </div>
           <p className="text-[13.5px] text-ink">
-            {preview.goal ? preview.goal : "이 회차의 목표가 아직 적히지 않았습니다."}
+            {preview.goal ? preview.goal : "No goal has been written for this session yet."}
           </p>
           <p className="text-[12px] text-grey-500 mt-2">
             {preview.frozen
-              ? "이 회차는 이미 수업에서 다뤘습니다. 그때 쓴 내용을 그대로 보여줍니다."
-              : "수업 전까지 자료가 변경될 수 있습니다. 정답과 해설은 수업에서 확인합니다."}
+              ? "This session has already been taught. You're seeing the content exactly as it was used."
+              : "Materials may change until the lesson. Answers and explanations are revealed in the lesson."}
           </p>
           {preview.sessionId && (
             <button
               onClick={() => router.push(`/session/${preview.sessionId}`)}
               className="text-[12.5px] font-bold text-blue mt-2"
             >
-              {preview.frozen ? "수업 기록 →" : "예약된 수업 →"}
+              {preview.frozen ? "Lesson record →" : "Scheduled lesson →"}
             </button>
           )}
         </div>
@@ -125,8 +125,8 @@ function MaterialList({ materials }: { materials: UnitPreview["materials"] }) {
   if (materials.length === 0) {
     return (
       <div className="max-w-[760px] mx-auto px-6 py-12 text-center">
-        <p className="text-[14px] font-bold text-ink mb-1">아직 준비된 교재가 없습니다</p>
-        <p className="text-[12.5px] text-grey-500">선생님이 담으면 여기에 나타납니다.</p>
+        <p className="text-[14px] font-bold text-ink mb-1">No materials yet</p>
+        <p className="text-[12.5px] text-grey-500">They&apos;ll appear here once the teacher adds them.</p>
       </div>
     );
   }
@@ -141,10 +141,10 @@ function MaterialList({ materials }: { materials: UnitPreview["materials"] }) {
               href={`/materials/${m.curriculumDocId}`}
               className="inline-flex items-center gap-2 text-[13px] font-bold text-ink border-[1.5px] border-grey-200 rounded-xl px-4 py-2.5"
             >
-              {m.kind === "pdf" ? `📄 PDF${m.pageCount ? ` · ${m.pageCount}쪽` : ""}` : "▶ 영상"} · 열기 →
+              {m.kind === "pdf" ? `📄 PDF${m.pageCount ? ` (${m.pageCount} pages)` : ""}` : "▶ Video"} / Open →
             </a>
           ) : m.sections.length === 0 ? (
-            <p className="text-[13px] text-grey-500">내용이 없는 교재입니다.</p>
+            <p className="text-[13px] text-grey-500">This material has no content.</p>
           ) : (
             m.sections.map((s) => (
               <section key={s.id} className="mb-6">
@@ -166,15 +166,15 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
   if (problems.length === 0) {
     return (
       <div className="max-w-[760px] mx-auto px-6 py-12 text-center">
-        <p className="text-[14px] font-bold text-ink mb-1">아직 준비된 문제가 없습니다</p>
-        <p className="text-[12.5px] text-grey-500">선생님이 담으면 여기에 나타납니다.</p>
+        <p className="text-[14px] font-bold text-ink mb-1">No problems yet</p>
+        <p className="text-[12.5px] text-grey-500">They&apos;ll appear here once the teacher adds them.</p>
       </div>
     );
   }
   return (
     <div className="max-w-[760px] mx-auto px-5 sm:px-8 py-7">
       <p className="text-[12.5px] text-grey-500 mb-4">
-        미리 읽어 볼 수 있습니다. 풀이와 제출은 수업에서 합니다.
+You can read ahead here. Solving and submitting happen in the lesson.
       </p>
       {problems.map((p, index) => (
         <article
@@ -182,9 +182,9 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
           className="border-[1.5px] border-grey-200 rounded-2xl px-5 sm:px-7 py-6 mb-5"
         >
           <header className="flex items-center gap-2 mb-4">
-            <span className="text-[14px] font-extrabold text-ink">문제 {index + 1}</span>
+            <span className="text-[14px] font-extrabold text-ink">Problem {index + 1}</span>
             <span className="text-[10.5px] font-bold rounded-full px-2 py-0.5 bg-grey-100 text-grey-500">
-              수업 전 미리보기
+              Pre-lesson preview
             </span>
           </header>
           {p.passage ? (
@@ -193,7 +193,7 @@ function ProblemList({ problems }: { problems: UnitPreview["problems"] }) {
               className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
             />
           ) : (
-            <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
+            <p className="text-[13px] text-grey-500 mb-4">This problem has no passage.</p>
           )}
           {/* 2026-09-17(UAT 지적) — 그래프가 필요한 문제(Math)는 그림 없이 보여주면
               풀 수 없다. 실제 수업(세션뷰)과 같은 렌더러(ProblemFigure)를 그대로 쓴다. */}

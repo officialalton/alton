@@ -86,7 +86,7 @@ export async function addTemplateUnit(
     .insert({
       template_id: templateId,
       position: nextPosition,
-      unit_title: "새 회차",
+      unit_title: "New session",
     })
     .select("id, position, unit_title, note, teacher_comment, source_unit_id")
     .single();
@@ -127,7 +127,7 @@ export async function addTemplateUnitKeyword(
     console.error(
       JSON.stringify({ event: "teacher_unit_keyword_add_failed", message: error.message })
     );
-    return { ok: false, error: "키워드를 붙이지 못했습니다." };
+    return { ok: false, error: "Couldn't attach the keyword." };
   }
   return { ok: true };
 }
@@ -146,7 +146,7 @@ export async function removeTemplateUnitKeyword(
     console.error(
       JSON.stringify({ event: "teacher_unit_keyword_remove_failed", message: error.message })
     );
-    return { ok: false, error: "키워드를 떼지 못했습니다." };
+    return { ok: false, error: "Couldn't remove the keyword." };
   }
   return { ok: true };
 }
@@ -170,7 +170,7 @@ export async function inheritUnitDefaults(
     console.error(
       JSON.stringify({ event: "teacher_unit_inherit_failed", message: error.message })
     );
-    return { ok: false, error: "기준본에서 가져오지 못했습니다." };
+    return { ok: false, error: "Couldn't import from the base curriculum." };
   }
   const row = Array.isArray(data) ? data[0] : data;
 
@@ -212,7 +212,7 @@ export async function inheritTemplateDefaults(
     console.error(
       JSON.stringify({ event: "teacher_template_inherit_failed", message: error.message })
     );
-    return { ok: false, error: "기준본에서 가져오지 못했습니다." };
+    return { ok: false, error: "Couldn't import from the base curriculum." };
   }
 
   const rows = (data ?? []) as { unit_id: string; keywords_added: number }[];

@@ -29,8 +29,8 @@ const context: SessionReviewContext = {
 describe("TeacherReviewPanel", () => {
   it("과목/회차 정보와 4개 카테고리·5단계 버튼을 보여준다", () => {
     render(<TeacherReviewPanel context={context} existingReview={null} />);
-    expect(screen.getByText(/지훈 · SAT Math · 8회차/)).toBeInTheDocument();
-    ["개념 이해도", "문제 해결 능력", "수업 참여도", "과제 수행도"].forEach((label) =>
+    expect(screen.getByText(/지훈 · SAT Math · Session 8/)).toBeInTheDocument();
+    ["Concept understanding", "Problem solving", "Class participation", "Homework completion"].forEach((label) =>
       expect(screen.getByText(label)).toBeInTheDocument()
     );
     ["Below", "Partial", "Average", "Excellent", "Outstanding"].forEach((label) =>
@@ -40,7 +40,7 @@ describe("TeacherReviewPanel", () => {
 
   it("모든 카테고리 평가와 필수 텍스트를 채우기 전에는 제출 버튼이 비활성 상태다", () => {
     render(<TeacherReviewPanel context={context} existingReview={null} />);
-    expect(screen.getByText("리뷰 제출")).toBeDisabled();
+    expect(screen.getByText("Submit review")).toBeDisabled();
   });
 
   it("기존 리뷰가 있으면 기존 값·평가로 채워서 보여준다", () => {
@@ -67,26 +67,26 @@ describe("TeacherReviewPanel", () => {
     vi.mocked(actions.submitReview).mockResolvedValue(undefined);
     render(<TeacherReviewPanel context={context} existingReview={null} />);
 
-    for (const label of ["개념 이해도", "문제 해결 능력", "수업 참여도", "과제 수행도"]) {
+    for (const label of ["Concept understanding", "Problem solving", "Class participation", "Homework completion"]) {
       const card = screen.getByText(label).closest("div")!.parentElement!;
       fireEvent.click(within(card).getByText("Average"));
     }
-    fireEvent.change(screen.getByText("오늘 배운 것").parentElement!.querySelector("textarea")!, {
+    fireEvent.change(screen.getByText("What we covered today").parentElement!.querySelector("textarea")!, {
       target: { value: "이차방정식 개념" },
     });
-    fireEvent.change(screen.getByText("최종 정리").parentElement!.querySelector("textarea")!, {
+    fireEvent.change(screen.getByText("Final notes").parentElement!.querySelector("textarea")!, {
       target: { value: "다음 회차는 함수" },
     });
 
-    expect(screen.getByText("리뷰 제출")).not.toBeDisabled();
-    fireEvent.click(screen.getByText("리뷰 제출"));
+    expect(screen.getByText("Submit review")).not.toBeDisabled();
+    fireEvent.click(screen.getByText("Submit review"));
     await waitFor(() => expect(actions.submitReview).toHaveBeenCalled());
     const [sessionId, fields] = vi.mocked(actions.submitReview).mock.calls[0];
     expect(sessionId).toBe("s1");
     expect(fields.categories.concept.rating).toBe("average");
     expect(fields.teacherSummary).toBe("이차방정식 개념");
     expect(fields.nextPlan).toBe("다음 회차는 함수");
-    await waitFor(() => expect(screen.getByText("✓ 제출되었습니다")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("✓ Submitted")).toBeInTheDocument());
   });
 });
 

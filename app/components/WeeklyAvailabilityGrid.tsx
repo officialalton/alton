@@ -5,7 +5,7 @@
 // start/end time)을 Google Calendar 주간 뷰와 같은 형태(요일 7열, 시간축 행, 색칠된
 // 블록)로 렌더링한다. 새 달력 위젯이나 라이브러리를 쓰지 않고 순수 CSS grid로 구현.
 
-const DAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
+const DAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export type WeeklyAvailabilityRule = {
   id: string;
@@ -80,12 +80,12 @@ export default function WeeklyAvailabilityGrid({
                     key={r.id}
                     type="button"
                     data-testid={`availability-block-${r.id}`}
-                    title={onDeleteRule ? `${r.startTime}~${r.endTime} (클릭해서 삭제)` : `${r.startTime}~${r.endTime}`}
+                    title={onDeleteRule ? `${r.startTime}–${r.endTime} (click to delete)` : `${r.startTime}–${r.endTime}`}
                     onClick={() => onDeleteRule?.(r.id)}
                     className="absolute left-0.5 right-0.5 rounded-md bg-blue/20 hover:bg-red/20 border border-blue text-[10px] font-semibold text-ink px-1 overflow-hidden text-left cursor-pointer"
                     style={{ top: `${top}%`, height: `${bottom - top}%` }}
                   >
-                    {r.startTime}~{r.endTime}
+                    {r.startTime}–{r.endTime}
                   </button>
                 );
               })}

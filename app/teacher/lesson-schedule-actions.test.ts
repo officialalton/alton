@@ -53,7 +53,7 @@ describe("startMyLessonSession", () => {
     sessionMaybeSingleMock.mockResolvedValue({ data: { teacher_id: "other-teacher" } });
     const { startMyLessonSession } = await import("./lesson-schedule-actions");
     const result = await startMyLessonSession("s1");
-    expect(result).toEqual({ ok: false, error: "본인 수업만 시작할 수 있습니다." });
+    expect(result).toEqual({ ok: false, error: "You can only start your own lessons." });
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -61,7 +61,7 @@ describe("startMyLessonSession", () => {
     sessionMaybeSingleMock.mockResolvedValue({ data: null });
     const { startMyLessonSession } = await import("./lesson-schedule-actions");
     const result = await startMyLessonSession("missing");
-    expect(result).toEqual({ ok: false, error: "본인 수업만 시작할 수 있습니다." });
+    expect(result).toEqual({ ok: false, error: "You can only start your own lessons." });
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -96,7 +96,7 @@ describe("finalizeMyLessonSession", () => {
     sessionMaybeSingleMock.mockResolvedValue({ data: { teacher_id: "other-teacher" } });
     const { finalizeMyLessonSession } = await import("./lesson-schedule-actions");
     const result = await finalizeMyLessonSession({ sessionId: "s1", outcome: "completed", reason: "종료" });
-    expect(result).toEqual({ ok: false, error: "본인 수업만 종료할 수 있습니다." });
+    expect(result).toEqual({ ok: false, error: "You can only end your own lessons." });
     expect(rpcMock).not.toHaveBeenCalled();
   });
 
@@ -136,7 +136,7 @@ describe("resolveMyLessonLateness", () => {
       agreedExtendMinutes: 10,
       reason: "지각 합의 연장",
     });
-    expect(result).toEqual({ ok: false, error: "본인 수업만 연장할 수 있습니다." });
+    expect(result).toEqual({ ok: false, error: "You can only extend your own lessons." });
     expect(rpcMock).not.toHaveBeenCalled();
   });
 

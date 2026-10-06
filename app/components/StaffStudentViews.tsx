@@ -16,7 +16,7 @@ import {
 } from "./staff-student-view-actions";
 
 export type ViewId = "overview" | "board" | "stats";
-const TAB_LABEL: Record<ViewId, string> = { overview: "오버뷰", board: "보드", stats: "통계" };
+const TAB_LABEL: Record<ViewId, string> = { overview: "Overview", board: "Board", stats: "Stats" };
 
 export type ExtraStudentViewTab = { id: string; label: string; render: () => ReactNode };
 
@@ -49,7 +49,7 @@ export default function StaffStudentViews({
         setError(r.error);
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : "불러오지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't load this view.");
     }
   }, [studentId]);
 
@@ -98,7 +98,7 @@ export default function StaffStudentViews({
       {error ? (
         <p role="alert" className="py-8 text-[13px] text-red">{error}</p>
       ) : cards === null || !access ? (
-        <p className="py-8 text-[13px] text-grey-500">불러오는 중...</p>
+        <p className="py-8 text-[13px] text-grey-500">Loading…</p>
       ) : extra ? (
         extra.render()
       ) : tab === "stats" ? (
@@ -140,7 +140,7 @@ function BoardPanel({
       await fn();
       await onReload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "처리하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't complete that action.");
     } finally {
       setBusy(false);
     }
@@ -165,16 +165,16 @@ function BoardPanel({
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="+ 할 일 추가"
+            placeholder="+ Add a task"
             className="flex-1 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
           />
           <button type="submit" disabled={busy || !title.trim()} className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50">
-            추가
+            Add
           </button>
         </form>
       )}
       {cards.length === 0 && access.actions.length === 0 ? (
-        <p className="py-8 text-[13px] text-grey-500">표시할 항목이 없습니다.</p>
+        <p className="py-8 text-[13px] text-grey-500">No items to show yet.</p>
       ) : (
         <BoardColumnsView
           cards={cards}

@@ -44,7 +44,7 @@ describe("loadLegacyCurriculumDetail", () => {
 
     const { loadLegacyCurriculumDetail } = await import("./legacy-curriculum-actions");
     await expect(loadLegacyCurriculumDetail("en1")).rejects.toThrow(
-      "담당 학생의 커리큘럼만 조회할 수 있습니다."
+      "You can only view curricula for your assigned students."
     );
   });
 
@@ -53,6 +53,6 @@ describe("loadLegacyCurriculumDetail", () => {
     fromMock.mockImplementation(tableMock({}));
 
     const { loadLegacyCurriculumDetail } = await import("./legacy-curriculum-actions");
-    await expect(loadLegacyCurriculumDetail("en1")).rejects.toThrow("로그인이 필요합니다.");
+    await expect(loadLegacyCurriculumDetail("en1")).rejects.toThrow("Please sign in.");
   });
 });

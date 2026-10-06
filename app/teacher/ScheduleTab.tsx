@@ -9,8 +9,8 @@ import { fmtIntl } from "@/lib/format-datetime";
 type ReportType = "teacher_late" | "student_no_show_reported";
 
 const REPORT_TYPE_LABEL: Record<ReportType, string> = {
-  teacher_late: "본인 지각",
-  student_no_show_reported: "학생 노쇼",
+  teacher_late: "I was late",
+  student_no_show_reported: "Student no-show",
 };
 
 export type ReportSessionIssueParams = {
@@ -35,7 +35,7 @@ export default function ScheduleTab({
 
   return (
     <div className="max-w-[640px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">수업</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">Lessons</h1>
 
       <div className="flex gap-4 mb-5 border-b border-grey-200">
         {(["upcoming", "past"] as const).map((id) => (
@@ -49,18 +49,18 @@ export default function ScheduleTab({
                 : "text-grey-500 border-transparent")
             }
           >
-            {id === "upcoming" ? "예정된 수업" : "지난 수업"}
+            {id === "upcoming" ? "Upcoming" : "Past"}
           </button>
         ))}
       </div>
 
       {subtab === "upcoming" ? (
-        <LessonList lessons={upcoming} emptyText="예정된 수업이 없습니다." actionLabel="수업 준비" />
+        <LessonList lessons={upcoming} emptyText="No upcoming lessons." actionLabel="Lesson prep" />
       ) : (
         <LessonList
           lessons={past}
-          emptyText="지난 수업이 없습니다."
-          actionLabel="수업 기록"
+          emptyText="No past lessons."
+          actionLabel="Lesson record"
           reviewedSessionIds={reviewedSessionIds}
           onReportSessionIssue={onReportSessionIssue}
         />
@@ -140,7 +140,7 @@ function LessonList({
             {formatKoreanDateTime(lesson.scheduledAt, tz)}
           </div>
           <div className="text-[13px] font-bold text-ink mb-1.5">
-            {lesson.studentName} · {lesson.subjectName} · {lesson.sessionNumber}회차
+            {lesson.studentName} · {lesson.subjectName} · Session {lesson.sessionNumber}
             {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
           </div>
           <div className="flex items-center gap-4">
@@ -155,20 +155,20 @@ function LessonList({
                 onClick={() => router.push(`/teacher/review/${lesson.sessionId}`)}
                 className="text-[12px] font-semibold text-blue"
               >
-                {reviewedSet.has(lesson.sessionId) ? "리뷰 수정" : "리뷰 작성"}
+                {reviewedSet.has(lesson.sessionId) ? "Edit review" : "Write review"}
               </button>
             )}
             {onReportSessionIssue &&
               reportingSessionId !== lesson.sessionId &&
               (reportedSessionIds.has(lesson.sessionId) ? (
-                <span className="text-[12px] font-semibold text-grey-500">신고 접수됨</span>
+                <span className="text-[12px] font-semibold text-grey-500">Report submitted</span>
               ) : (
                 <button
                   disabled={submitting}
                   onClick={() => openReportForm(lesson.sessionId)}
                   className="text-[12px] font-semibold text-red disabled:opacity-50"
                 >
-                  지각·노쇼 신고
+                  Report late / no-show
                 </button>
               ))}
           </div>
@@ -177,7 +177,7 @@ function LessonList({
           )}
           {reportingSessionId === lesson.sessionId && (
             <div className="mt-3 border-t border-grey-200 pt-3">
-              <label className="block text-[11px] font-bold text-grey-500 mb-1">신고 유형</label>
+              <label className="block text-[11px] font-bold text-grey-500 mb-1">Report type</label>
               <select
                 className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                 value={reportType}
@@ -191,23 +191,23 @@ function LessonList({
               </select>
               {reportType === "teacher_late" && (
                 <>
-                  <label className="block text-[11px] font-bold text-grey-500 mb-1">지각 시간(분)</label>
+                  <label className="block text-[11px] font-bold text-grey-500 mb-1">Minutes late</label>
                   <input
                     type="number"
                     min={1}
                     className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                     value={minutesLate}
                     onChange={(e) => setMinutesLate(e.target.value)}
-                    placeholder="예: 10"
+                    placeholder="e.g. 10"
                   />
                 </>
               )}
-              <label className="block text-[11px] font-bold text-grey-500 mb-1">상세 내용(선택)</label>
+              <label className="block text-[11px] font-bold text-grey-500 mb-1">Details (optional)</label>
               <input
                 className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="상황을 알려주세요"
+                placeholder="Describe what happened"
               />
               <div className="flex gap-2 justify-end">
                 <button
@@ -215,14 +215,14 @@ function LessonList({
                   onClick={() => setReportingSessionId(null)}
                   className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                 >
-                  닫기
+                  Close
                 </button>
                 <button
                   disabled={submitting || (reportType === "teacher_late" && !minutesLate)}
                   onClick={() => handleSubmitReport(lesson.sessionId)}
                   className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
                 >
-                  신고 제출
+                  Submit report
                 </button>
               </div>
             </div>

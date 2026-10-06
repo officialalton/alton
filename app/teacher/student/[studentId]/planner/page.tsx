@@ -23,7 +23,7 @@ export default async function TeacherStudentPlannerPage({
   if (profile?.role !== "teacher" && profile?.role !== "admin") {
     return (
       <div className="max-w-[640px] mx-auto px-6 py-8 text-[13px] text-grey-500">
-        접근 권한이 없습니다.
+        You don&apos;t have permission to view this.
       </div>
     );
   }
@@ -39,9 +39,9 @@ export default async function TeacherStudentPlannerPage({
           href={backHref}
           className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform inline-block"
         >
-          ← 뒤로
+          ← Back
         </Link>
-        <h1 className="text-[18px] font-extrabold text-ink mt-2">{student?.name ?? "학생"} 학습 플래너</h1>
+        <h1 className="text-[18px] font-extrabold text-ink mt-2">{student?.name ?? "Student"} — Study Planner</h1>
 
         <TeacherPlannerBoard studentId={studentId} initialTab={initialTab} />
       </div>
