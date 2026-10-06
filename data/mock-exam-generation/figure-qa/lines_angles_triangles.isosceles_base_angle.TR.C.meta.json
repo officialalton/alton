@@ -1,0 +1,46 @@
+{
+ "itemId": "lines_angles_triangles.isosceles_base_angle.TR.C",
+ "generatedAt": "2026-10-06T06:09:41.514Z",
+ "codeHash": "f798272c76508f589669dc0e8498eec6af586656f7d186da5c7a1f59b46bfa04",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.isosceles_base_angle.TR.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/trc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.isosceles_base_angle.TR.C.png",
+   "mobileFile": "lines_angles_triangles.isosceles_base_angle.TR.C.m375.png",
+   "archetypeId": "lat.isosceles_base_angle.TR.C.compose_kind",
+   "seed": 11,
+   "signature": "figure_choice[triangle:isosceles]",
+   "stimulus": "A student is drawing a triangle for a geometry assignment. Triangle $DQV$ has $DQ = DV$, and the measure of angle $D$ is 52°.",
+   "question": "Which of the following figures matches the description of triangle $DQV$?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) DQ = DV 이므로 ∠D 가 꼭지각이고 밑각 ∠Q = ∠V 이다. (2) ∠D = 52° 이다. (3) 밑각의 합 = 180° - 52° = 128° 이다. (4) 밑각 = 128° ÷ 2 = 64° 이다. (5) 꼭지각 52°, 밑각 64°·64° 이고 눈금이 DQ, DV 에 붙은 그림을 고른다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}
