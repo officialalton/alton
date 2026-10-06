@@ -2,5 +2,6 @@
 import type { LArch } from "../../../levels-d";
 import { ITEM as pctChangeLG } from "../items/percentages.percent_change.LG.P";
 import { ITEM as pctCompLG } from "../items/percentages.compound_change.LG.P";
+import { ITEM as nfExpLG } from "../items/nonlinear_functions.exponential_vs_linear_growth.LG.P";
 
-export const BUNDLE: LArch[] = [...pctCompLG, ...pctChangeLG];
+export const BUNDLE: LArch[] = [...nfExpLG, ...pctCompLG, ...pctChangeLG];
