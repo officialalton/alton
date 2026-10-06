@@ -42,6 +42,7 @@ import { ITEM as cfgC } from "../items/linear_functions.construct_equation_from_
 import { ITEM as cppC } from "../items/coordinate_geometry.parallel_perpendicular_slopes.LN.C";
 import { ITEM as sfgC } from "../items/systems_linear.system_from_graph.LN.C";
 import { ITEM as ifgC } from "../items/linear_inequalities.inequality_from_graph.LN.C";
+import { ITEM as pisC } from "../items/linear_inequalities.point_in_solution.LN.C";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC];
 
