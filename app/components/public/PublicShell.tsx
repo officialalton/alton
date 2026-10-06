@@ -14,48 +14,45 @@ export function Logo({ dark = false, size = 30 }: { dark?: boolean; size?: numbe
   );
 }
 
-const PRIMARY_BTN =
-  "h-10 px-4 rounded-xl bg-[#C8102E] hover:bg-[#8F0B20] text-white text-[14px] font-semibold flex items-center whitespace-nowrap transition-colors";
-
 export function PublicHeader({ dest }: { dest: LandingDestinations }) {
   const startLabel = dest.signedIn ? "Practice Tests" : "Start Free";
   return (
-    <header className="sticky top-0 z-30 bg-[#F8F5EF]/90 backdrop-blur border-b border-[#E6E1D8]">
-      <div className="max-w-[1440px] mx-auto px-5 md:px-12 lg:px-20 h-[68px] md:h-[76px] flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 bg-[var(--p-paper)] border-b border-[var(--p-line)]">
+      <div className="p-wrap h-[64px] md:h-[72px] flex items-center justify-between gap-4">
         <Link href="/" aria-label="ALTON home" className="flex items-center gap-2.5 no-underline">
           <Logo />
-          <span className="font-[family-name:var(--font-bricolage)] text-[19px] font-bold tracking-[-0.01em] text-[#142240]">ALTON</span>
+          <span className="p-serif text-[26px] leading-none tracking-[-0.01em]">ALTON</span>
         </Link>
-        <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px] font-medium text-[#4F5A6B]">
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-8 text-[14px] font-medium text-[var(--p-slate)]">
           {NAV_ITEMS.map((l) => (
-            <Link key={l.href} href={l.href} className="hover:text-[#142240] transition-colors">
+            <Link key={l.href} href={l.href} className="hover:text-[var(--p-red)] transition-colors">
               {l.label}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
-          <Link href={dest.account.href} className="hidden sm:block text-[14px] font-medium text-[#4F5A6B] hover:text-[#142240]">
+        <div className="flex items-center gap-3 md:gap-5">
+          <Link href={dest.account.href} className="hidden sm:block text-[14px] font-medium text-[var(--p-slate)] hover:text-[var(--p-red)]">
             {dest.account.label}
           </Link>
-          <LandingCtaLink href={dest.freeLearning} ctaName="free_learning" section="header" className={PRIMARY_BTN}>
+          <LandingCtaLink href={dest.freeLearning} ctaName="free_learning" section="header" className="p-btn p-btn-secondary p-btn-sm">
             {startLabel}
           </LandingCtaLink>
-          <details className="lg:hidden relative group">
+          <details className="lg:hidden relative">
             <summary
               aria-label="Menu"
-              className="list-none cursor-pointer h-10 w-10 rounded-xl border border-[#DDD7CC] bg-white flex items-center justify-center [&::-webkit-details-marker]:hidden"
+              className="list-none cursor-pointer h-10 w-10 border border-[var(--p-ink)] flex items-center justify-center [&::-webkit-details-marker]:hidden"
             >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#142240" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                 <path d="M2 4.5h14M2 9h14M2 13.5h14" />
               </svg>
             </summary>
-            <nav aria-label="Mobile" className="absolute right-0 top-12 w-[240px] rounded-2xl border border-[#E6E1D8] bg-white shadow-lg p-2 flex flex-col">
+            <nav aria-label="Mobile" className="absolute right-0 top-12 w-[240px] border border-[var(--p-ink)] bg-[var(--p-paper)] p-2 flex flex-col">
               {NAV_ITEMS.map((l) => (
-                <Link key={l.href} href={l.href} className="px-3 py-2.5 rounded-lg text-[14px] font-medium text-[#142240] hover:bg-[#F8F5EF]">
+                <Link key={l.href} href={l.href} className="px-3 py-3 text-[14px] font-medium hover:text-[var(--p-red)]">
                   {l.label}
                 </Link>
               ))}
-              <Link href={dest.account.href} className="px-3 py-2.5 rounded-lg text-[14px] font-medium text-[#142240] hover:bg-[#F8F5EF] sm:hidden">
+              <Link href={dest.account.href} className="px-3 py-3 text-[14px] font-medium hover:text-[var(--p-red)] sm:hidden">
                 {dest.account.label}
               </Link>
             </nav>
@@ -68,27 +65,27 @@ export function PublicHeader({ dest }: { dest: LandingDestinations }) {
 
 export function PublicFooter() {
   return (
-    <footer className="bg-[#0C1628] text-[#C3CFE2] px-5 md:px-12 lg:px-20 pt-14 pb-10">
-      <div className="max-w-[1440px] mx-auto flex flex-col gap-10">
+    <footer className="border-t border-[var(--p-line)] py-14">
+      <div className="p-wrap flex flex-col gap-10">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
           <div className="flex flex-col gap-3 max-w-[340px]">
             <div className="flex items-center gap-2.5">
-              <Logo dark size={26} />
-              <span className="font-[family-name:var(--font-bricolage)] text-[17px] font-bold text-white">ALTON</span>
+              <Logo size={26} />
+              <span className="p-serif text-[24px] leading-none">ALTON</span>
             </div>
-            <p className="text-[13.5px] leading-[1.7] text-[#97A9C8]">
+            <p className="m-0 text-[14px] leading-[1.7] text-[var(--p-slate)]">
               Free SAT practice and learning tools, with premium tutoring and educational consulting when you need them.
             </p>
           </div>
-          <nav aria-label="Footer" className="grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-3 text-[13.5px]">
+          <nav aria-label="Footer" className="p-mono grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-3 text-[12.5px] text-[var(--p-slate)]">
             {FOOTER_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className="text-[#C3CFE2] hover:text-white">
+              <Link key={l.href} href={l.href} className="hover:text-[var(--p-red)]">
                 {l.label}
               </Link>
             ))}
           </nav>
         </div>
-        <div className="pt-6 border-t border-white/10 text-[12.5px] text-[#97A9C8]">© 2026 Alton Education Inc.</div>
+        <div className="p-mono pt-6 border-t border-[var(--p-line)] text-[12px] text-[var(--p-mute)]">© 2026 Alton Education Inc.</div>
       </div>
     </footer>
   );
@@ -97,10 +94,7 @@ export function PublicFooter() {
 /** 공개 정적 페이지 공용 틀(헤더·푸터·폰트). */
 export function PublicPage({ dest, children }: { dest: LandingDestinations; children: React.ReactNode }) {
   return (
-    <div
-      className={`${publicFontClass} bg-[#F8F5EF] min-h-screen flex flex-col`}
-      style={{ fontFamily: "var(--font-instrument), system-ui, sans-serif" }}
-    >
+    <div className={`${publicFontClass} min-h-screen flex flex-col`}>
       <PublicHeader dest={dest} />
       <main className="flex-1">{children}</main>
       <PublicFooter />
@@ -108,25 +102,49 @@ export function PublicPage({ dest, children }: { dest: LandingDestinations; chil
   );
 }
 
+export function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="p-eyebrow">
+      <span className="p-rule" aria-hidden="true" />
+      <span className="p-eyebrow-text">{children}</span>
+    </div>
+  );
+}
+
+/** 문장형 대소문자 모노 아이브로우용(원문이 전부 대문자인 카피를 문장형으로 보이게 한다). */
+export function sentenceCase(s: string): string {
+  const t = s.toLowerCase().replace(/\b(alton|sat|ap)\b/g, (m) => m.toUpperCase());
+  return t.replace(/(^|\. )([a-z])/g, (_, a: string, b: string) => a + b.toUpperCase());
+}
+
+/** 제목을 첫 문장/쉼표 경계에서 나눠 둘째 줄을 이탤릭으로 렌더한다(카피 문자열은 그대로). */
+export function SplitTitle({ text }: { text: string }) {
+  const m = text.match(/^(.+?[.,])\s+(.+)$/);
+  if (!m) return <>{text}</>;
+  return (
+    <>
+      {m[1]}
+      <br />
+      <em>{m[2]}</em>
+    </>
+  );
+}
+
 export function PageHero({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
   return (
-    <section className="max-w-[1440px] mx-auto px-5 md:px-12 lg:px-20 pt-14 pb-8">
-      <div className="max-w-[760px] flex flex-col gap-4">
-        <span className="font-mono text-[12px] font-medium tracking-[0.08em] text-[#C8102E]">{eyebrow}</span>
-        <h1 className="m-0 font-[family-name:var(--font-bricolage)] font-semibold text-[34px] md:text-[42px] leading-[1.2] tracking-[-0.02em] text-[#142240]">{title}</h1>
-        {intro && <p className="text-[16px] leading-[1.7] text-[#4F5A6B] m-0">{intro}</p>}
+    <section className="p-wrap pt-14 md:pt-20 pb-10">
+      <div className="max-w-[760px] flex flex-col gap-6">
+        <Eyebrow>{sentenceCase(eyebrow)}</Eyebrow>
+        <h1 className="p-h1" style={{ fontSize: "clamp(40px, 9vw, 68px)" }}>{title}</h1>
+        {intro && <p className="p-lede">{intro}</p>}
       </div>
     </section>
   );
 }
 
 export function CtaButton({ href, ctaName, section, variant = "primary", children }: { href: string; ctaName: string; section: string; variant?: "primary" | "secondary"; children: React.ReactNode }) {
-  const cls =
-    variant === "primary"
-      ? "h-12 px-5 rounded-xl bg-[#C8102E] hover:bg-[#8F0B20] text-white text-[15px] font-semibold flex items-center transition-colors"
-      : "h-12 px-5 rounded-xl border border-[#DDD7CC] bg-white text-[#142240] text-[15px] font-semibold flex items-center hover:border-[#142240] transition-colors";
   return (
-    <LandingCtaLink href={href} ctaName={ctaName} section={section} className={cls}>
+    <LandingCtaLink href={href} ctaName={ctaName} section={section} className={`p-btn ${variant === "primary" ? "p-btn-primary" : "p-btn-secondary"}`}>
       {children}
     </LandingCtaLink>
   );
@@ -134,10 +152,8 @@ export function CtaButton({ href, ctaName, section, variant = "primary", childre
 
 export function Prose({ children }: { children: React.ReactNode }) {
   return (
-    <section className="max-w-[1440px] mx-auto px-5 md:px-12 lg:px-20 pb-20">
-      <div className="max-w-[760px] flex flex-col gap-5 text-[15.5px] leading-[1.75] text-[#4F5A6B] [&_h2]:font-[family-name:var(--font-bricolage)] [&_h2]:text-[22px] [&_h2]:font-semibold [&_h2]:text-[#142240] [&_h2]:mt-4 [&_h2]:mb-0 [&_ul]:m-0 [&_ul]:pl-5 [&_li]:mb-1.5 [&_a]:text-[#284DB0] [&_a]:font-semibold">
-        {children}
-      </div>
+    <section className="p-wrap pb-24">
+      <div className="max-w-[760px] p-prose">{children}</div>
     </section>
   );
 }

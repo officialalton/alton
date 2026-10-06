@@ -14,3 +14,5 @@ export const Bricolage_Grotesque = makeFontLoader();
 export const Instrument_Sans = makeFontLoader();
 export const IBM_Plex_Mono = makeFontLoader();
 export const IBM_Plex_Sans_KR = makeFontLoader();
+export const Instrument_Serif = makeFontLoader();
+export const DM_Sans = makeFontLoader();
