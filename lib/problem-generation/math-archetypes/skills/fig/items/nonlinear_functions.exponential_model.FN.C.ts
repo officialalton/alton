@@ -1,0 +1,40 @@
+// nonlinear_functions.exponential_model.FN.C — 지수 곡선 그래프 4개를 선택지로 주고, y 절편·증감·한 칸당 배율·지나는 점 조건 두 개를 모두 만족하는 그래프를 고른다.
+import { GenFail, type OperatorId } from "../../../types";
+import type { Rng } from "../../../rng";
+import { defineItem } from "../item-kit";
+import { C_LEADS, ESTAT, SPR_NO_PLANE_CHOICE, cInst, expFig, oneCond, poolChoices, twoCond } from "../cplane-kit";
+
+const X = 4, Y = 50;
+type Ab = { a: number; f: number; dec: boolean };
+const b = (s: Ab) => (s.dec ? 1 / s.f : s.f);
+const val = (s: Ab, x: number) => s.a * b(s) ** x;
+const POOL: Ab[] = [...[1, 2, 3, 4, 5, 8, 16].flatMap((a) => [2, 3].map((f) => ({ a, f, dec: false }))), ...[4, 8, 16, 32, 48].map((a) => ({ a, f: 2, dec: true }))];
+const mk = (s: Ab) => expFig(X, Y, s.a, b(s));
+const pool = POOL.map(mk);
+const MULT = (s: Ab) => (s.dec ? `divided by ${s.f}` : `multiplied by ${s.f}`);
+const STEMS = ["Four graphs of exponential functions are shown in the $xy$-plane, all with the same axes.", "The four graphs shown are exponential curves drawn on identical $xy$-plane axes.", "Each of the four graphs shown is an exponential curve in the same $xy$-plane.", "Four candidate exponential curves are shown, graphed on one set of axes.", "The choices shown are four exponential graphs that share the same axes."];
+const QS = (c: string) => [`Which of the four graphs shown is an exponential function that ${c}?`, `Which graph shown is the graph of an exponential function that ${c}?`, `Exactly one of the four exponential graphs shown ${c}. Which one is it?`, `Of the graphs shown, which exponential function ${c}?`];
+type B = { clause: string; P: Record<string, number>; A: string; Bj: string; rules: [string, string, string]; ok: Ab; trace: [string, string][]; tag: string };
+const BS = "(s.b < 1 ? 1 / s.b : s.b)", FOK = "(s.b < 1) === (P.dec === 1) && Math.abs(" + BS + " - P.f) < 1e-9";
+function pickOk(rng: Rng, o: { both?: boolean } = {}): Ab { const c = POOL.filter((s) => !o.both || [4, 8, 16].includes(s.a)); return rng.pick(c); }
+const BUILD: Record<string, (rng: Rng) => B> = {
+  ab(rng) { const s = pickOk(rng); return { tag: "intercept_factor", clause: rng.pick([`has a $y$-intercept of ${s.a} and its $y$-value is ${MULT(s)} each time $x$ increases by 1`, `passes through the point with $x$-coordinate 0 and $y$-coordinate ${s.a}, and its value is ${MULT(s)} each time $x$ increases by 1`]), P: { a: s.a, f: s.f, dec: s.dec ? 1 : 0 }, A: "s.a === P.a", Bj: FOK, rules: ["intercept_off", "factor_off", "both_off"], ok: s, trace: [[`y 절편 ${s.a}, 한 칸마다 ${s.dec ? "÷" : "×"} ${s.f}.`, "Intercept and factor."]] }; },
+  point(rng) { const s = pickOk(rng); const xs = [1, 2].filter((x) => val(s, x) <= Y - 3 && Number.isInteger(val(s, x))); if (!xs.length) throw new GenFail("x"); const x1 = rng.pick(xs); const y1 = val(s, x1); return { tag: "point_factor", clause: rng.pick([`passes through the point with $x$-coordinate ${x1} and $y$-coordinate ${y1}, and its value is ${MULT(s)} each time $x$ increases by 1`, `contains the point where $x = ${x1}$ and $y = ${y1}$, and is ${MULT(s)} for each increase of 1 in $x$`]), P: { x1, y1, f: s.f, dec: s.dec ? 1 : 0 }, A: "Math.abs(s.a * Math.pow(s.b, P.x1) - P.y1) < 1e-9", Bj: FOK, rules: ["point_off", "factor_off", "both_off"], ok: s, trace: [[`점 (${x1}, ${y1}) 을 지나고 한 칸마다 ${s.dec ? "÷" : "×"} ${s.f}.`, "A point and the factor."]] }; },
+  dir(rng) { const s = pickOk(rng, { both: true }); return { tag: "intercept_direction", clause: rng.pick([`has a $y$-intercept of ${s.a} and is ${s.dec ? "decreasing" : "increasing"}`, `is ${s.dec ? "decreasing" : "increasing"} and passes through the point with $x$-coordinate 0 and $y$-coordinate ${s.a}`]), P: { a: s.a, up: s.dec ? 0 : 1 }, A: "s.a === P.a", Bj: "(s.b > 1 ? 1 : 0) === P.up", rules: ["intercept_off", "direction_off", "both_off"], ok: s, trace: [[`y 절편 ${s.a}, ${s.dec ? "감소" : "증가"}.`, "Intercept and direction."]] }; },
+  pointDir(rng) { const s = pickOk(rng); const xs = [1, 2].filter((x) => val(s, x) <= Y - 3 && Number.isInteger(val(s, x))); if (!xs.length) throw new GenFail("x"); const x1 = rng.pick(xs); const y1 = val(s, x1); return { tag: "point_direction", clause: rng.pick([`passes through the point with $x$-coordinate ${x1} and $y$-coordinate ${y1} and is ${s.dec ? "decreasing" : "increasing"}`, `is ${s.dec ? "decreasing" : "increasing"} and contains the point where $x = ${x1}$ and $y = ${y1}$`]), P: { x1, y1, up: s.dec ? 0 : 1 }, A: "Math.abs(s.a * Math.pow(s.b, P.x1) - P.y1) < 1e-9", Bj: "(s.b > 1 ? 1 : 0) === P.up", rules: ["point_off", "direction_off", "both_off"], ok: s, trace: [[`점 (${x1}, ${y1}) 을 지나고 ${s.dec ? "감소" : "증가"}.`, "A point and the direction."]] }; },
+};
+const OPS: OperatorId[] = ["repr_shift", "chain2", "compose_kind", "inverse"];
+const MENU = ["ab", "point", "dir", "pointDir"];
+const make = (rng: Rng, key: string) => { const bd = BUILD[key](rng); const c = twoCond(ESTAT, bd.A, bd.Bj, bd.rules); const ch = poolChoices(rng, { ok: mk(bd.ok), pool, P: bd.P, ...c }); return { ch, bd, c }; };
+
+export const ITEM = defineItem({
+  prefix: "emcc", itemId: "nonlinear_functions.exponential_model.FN.C",
+  hard: MENU.map((key, i) => ({ op: OPS[i], sprNo: SPR_NO_PLANE_CHOICE, structure: `지수 곡선 조건(${key}) 두 개를 서술로 주고 두 조건을 모두 만족하는 그래프를 4개 중에서 고름`, extra: "두 조건을 각각 따져 네 그래프를 대조해야 함(조건 하나만 맞는 그래프가 함정)", concepts: ["지수 그래프", "y 절편", "한 칸당 배율"],
+    gen(rng: Rng) { const { ch, bd, c } = make(rng, key); return cInst(rng, ch, { stimulus: `${rng.pick(C_LEADS)}${rng.pick(STEMS)}`, question: rng.pick(QS(bd.clause)), P: bd.P, ...c, variant: `exp_${bd.tag}`, trace: [...bd.trace, ["각 그래프의 y 절편과 증가·감소, 지나는 점을 읽는다.", "Read the intercept, the direction, and points of each graph."], ["첫째 조건을 어긴 그래프를 지운다.", "Eliminate the graphs that fail the first condition."], ["둘째 조건을 어긴 그래프를 지운다.", "Eliminate the graphs that fail the second condition."], ["남은 그래프가 정답이다.", "The remaining graph is the answer."]] }, ["다른 그래프는 조건 하나 이상이 어긋난다.", "Each other graph violates at least one condition."]); } })),
+  em: [
+    { lv: "easy" as const, name: "intercept_only", sprNo: SPR_NO_PLANE_CHOICE, structure: "y 절편 하나로 그래프 4개 중 고름", extra: "easy: 한 조건", concepts: ["지수 그래프", "y 절편"],
+      gen(rng: Rng) { const s = pickOk(rng); const P = { a: s.a }; const c = oneCond(ESTAT, "s.a", "P.a", "1"); const ch = poolChoices(rng, { ok: mk(s), pool, P, ...c }); return cInst(rng, ch, { stimulus: `${rng.pick(C_LEADS)}${rng.pick(STEMS)}`, question: rng.pick([`Which of the four graphs shown is an exponential function with a $y$-intercept of ${s.a}?`, `Which exponential graph shown passes through the point with $x$-coordinate 0 and $y$-coordinate ${s.a}?`]), P, ...c, variant: "exp_intercept_only", trace: [[`y 절편이 ${s.a} 인 그래프를 찾는다.`, "Find the graph with the given intercept."], ["나머지 그래프는 y 절편이 달라 지운다.", "Eliminate the other intercepts."]] }, ["y 절편이 다른 그래프는 정답이 아니다.", "Other intercepts are wrong."]); } },
+    { lv: "medium" as const, name: "medium_dir", sprNo: SPR_NO_PLANE_CHOICE, structure: "y 절편과 증감 두 조건으로 그래프 4개 중 고름", extra: "medium: 두 조건", concepts: ["지수 그래프", "y 절편", "증가·감소"],
+      gen(rng: Rng) { const { ch, bd, c } = make(rng, "dir"); return cInst(rng, ch, { stimulus: `${rng.pick(C_LEADS)}${rng.pick(STEMS)}`, question: rng.pick(QS(bd.clause)), P: bd.P, ...c, variant: "exp_intercept_direction_med", trace: [...bd.trace, ["조건을 어긴 그래프를 지운다.", "Eliminate the graphs that fail a condition."], ["남은 그래프가 정답이다.", "The remaining graph is the answer."]] }, ["다른 그래프는 조건 하나 이상이 어긋난다.", "Each other graph violates at least one condition."]); } },
+  ],
+});
