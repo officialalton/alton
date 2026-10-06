@@ -13,7 +13,7 @@ export default function FamilyReviewCard({ review }: { review: FamilyLessonRevie
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
       <div className="flex items-center justify-between">
         <span className="text-[12px] font-bold text-ink">
-          {review.lessonType === "trial" ? "체험 수업" : "정규 수업"} 리뷰
+          {review.lessonType === "trial" ? "Trial lesson" : "Regular lesson"} review
         </span>
         <span className="text-[11px] text-grey-500">
           {fmtDate(review.finalizedAt, undefined, tz)}
@@ -36,7 +36,7 @@ export default function FamilyReviewCard({ review }: { review: FamilyLessonRevie
           rel="noreferrer"
           className="inline-block mt-2 text-[12px] font-semibold text-ink underline"
         >
-          미팅록 보기
+          View meeting notes
         </a>
       )}
     </div>

@@ -5,17 +5,17 @@ import { loadMyBoardCardsAction } from "./board-actions";
 import { boardColumnOf, type BoardCard, type BoardColumn } from "@/lib/board/types";
 
 const COLUMN_LABEL: Record<BoardColumn, string> = {
-  overdue: "기한 경과",
-  backlog: "백로그",
-  in_progress: "진행중",
-  done: "완료",
+  overdue: "Overdue",
+  backlog: "Backlog",
+  in_progress: "In Progress",
+  done: "Done",
 };
 
 const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
-  homework: "과제",
-  mock_exam: "모의고사",
-  vocab_quiz: "단어시험",
-  manual: "할 일",
+  homework: "Assignments",
+  mock_exam: "Mock Exams",
+  vocab_quiz: "Vocabulary Quizzes",
+  manual: "To-dos",
 };
 
 // Student Success Planner — Overview 탭(2026-09-21 승인 계획의 일부, 1차 버전).
@@ -31,12 +31,12 @@ export default function PlannerOverviewView({ cards: cardsProp }: { cards?: Boar
     if (cardsProp) return;
     loadMyBoardCardsAction()
       .then(setCards)
-      .catch((e) => setError(e instanceof Error ? e.message : "요약을 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load the summary."));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) return <p className="text-[13px] text-red">{error}</p>;
-  if (cards === null) return <p className="text-[13px] text-grey-500">불러오는 중…</p>;
+  if (cards === null) return <p className="text-[13px] text-grey-500">Loading…</p>;
 
   const nowIso = new Date().toISOString();
   const columnCounts: Record<BoardColumn, number> = { overdue: 0, backlog: 0, in_progress: 0, done: 0 };
@@ -60,7 +60,7 @@ export default function PlannerOverviewView({ cards: cardsProp }: { cards?: Boar
       </div>
 
       <div className="mb-6">
-        <div className="text-[12px] font-bold text-grey-500 mb-1">전체 완료율</div>
+        <div className="text-[12px] font-bold text-grey-500 mb-1">Overall completion</div>
         <div className="text-[20px] font-extrabold text-ink">
           {completionRate === null ? "—" : `${completionRate}%`}
           <span className="text-[12px] font-semibold text-grey-400 ml-2">
@@ -70,7 +70,7 @@ export default function PlannerOverviewView({ cards: cardsProp }: { cards?: Boar
       </div>
 
       <div>
-        <div className="text-[12px] font-bold text-grey-500 mb-2">종류별 항목 수</div>
+        <div className="text-[12px] font-bold text-grey-500 mb-2">Items by type</div>
         <div className="flex flex-col gap-1.5">
           {(Object.keys(SOURCE_LABEL) as BoardCard["sourceType"][]).map((src) => (
             <div key={src} className="flex items-center justify-between text-[13px] border-b border-grey-100 py-1.5">

@@ -33,7 +33,7 @@ function ChosenAnswer({ item }: { item: HomeworkBatchItem }) {
   if (item.format === "mc" && item.options && item.response !== null) {
     return <LearningText text={item.options[Number(item.response)]} />;
   }
-  return <>{item.response || "(Not submitted)"}</>;
+  return <>{item.response || "(not submitted)"}</>;
 }
 
 /** 2026-09-16 — 과제 배치 목록 + 배치 하나를 눌렀을 때의 목차·슬라이드 화면. 수업(세션)과 무관하게
@@ -83,7 +83,7 @@ export default function HomeworkBatchPanel({
   if (batches.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        {viewerRole === "student" ? "No homework issued yet." : "You haven't issued any homework yet."}
+        {viewerRole === "student" ? "No assignments have been issued yet." : "No assignments issued yet."}
       </div>
     );
   }
@@ -104,10 +104,10 @@ export default function HomeworkBatchPanel({
 
       {subTab === "upcoming" ? (
         upcoming.length === 0 ? (
-          <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No upcoming homework.</div>
+          <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No upcoming assignments.</div>
         ) : (
           <div>
-            <div className="flex gap-2 mb-4 overflow-x-auto border-b border-grey-200" role="tablist" aria-label="Homework batches">
+            <div className="flex gap-2 mb-4 overflow-x-auto border-b border-grey-200" role="tablist" aria-label="Assignment batches">
               {upcoming.map((b) => {
                 const total = b.items.length;
                 const answered = b.items.filter((i) => i.submittedAt).length;
@@ -142,7 +142,7 @@ export default function HomeworkBatchPanel({
         )
       ) : pastDetail ? (
         <div>
-          <button onClick={() => setPastDetailId(null)} className="text-[12px] font-semibold text-grey-500 mb-3">← Back to past homework</button>
+          <button onClick={() => setPastDetailId(null)} className="text-[12px] font-semibold text-grey-500 mb-3">← Back to past assignments</button>
           {isMathBatch(pastDetail) && (
             <div className="mb-3">
               <MockExamToolButtons calculatorAllowed referenceSheetAllowed open={mathToolsOpen} onToggle={toggleMathTools} />
@@ -166,7 +166,7 @@ function PastBatchList({ batches, onOpen }: { batches: HomeworkBatch[]; onOpen: 
   const filtered = subjectFilter === "all" ? batches : batches.filter((b) => b.subjectId === subjectFilter);
 
   if (batches.length === 0) {
-    return <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No past homework yet.</div>;
+    return <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No past assignments.</div>;
   }
 
   return (
@@ -199,7 +199,7 @@ function PastBatchList({ batches, onOpen }: { batches: HomeworkBatch[]; onOpen: 
             className="w-full text-left border border-grey-200 rounded-xl px-4 py-3 mb-2 flex items-center justify-between hover:bg-grey-100"
           >
             <span className="text-[13px] font-bold text-ink">{b.label}</span>
-            <span className="text-[12.5px] text-grey-500">{b.items.length} questions / <span className="font-bold text-ink">{correct}/{b.items.length} correct</span></span>
+            <span className="text-[12.5px] text-grey-500">{b.items.length} {b.items.length === 1 ? "question" : "questions"} · <span className="font-bold text-ink">{correct}/{b.items.length} correct</span></span>
           </button>
         );
       })}
@@ -336,7 +336,7 @@ function BatchRunner({
                   (idx === i ? "bg-ink text-white font-bold" : it.graded ? (it.grade === "correct" ? "bg-green/10 text-green" : "bg-red-bg text-red") : pendingGrade ? "bg-grey-100 text-ink" : "text-grey-500")
                 }
               >
-                <span>Q{it.position}</span>
+                <span>Question {it.position}</span>
                 {pendingGrade && <span className={"text-[10px] font-bold " + (idx === i ? "text-white/80" : "text-grey-500")}>Awaiting grading</span>}
               </button>
             );
@@ -346,7 +346,7 @@ function BatchRunner({
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[12px] font-bold text-grey-500">Q{item.position} / {FORMAT_LABEL[item.format]}</span>
+          <span className="text-[12px] font-bold text-grey-500">Question {item.position} · {FORMAT_LABEL[item.format]}</span>
           <div className="flex items-center gap-2">
             {viewerRole === "student" && (
               <button
@@ -400,12 +400,12 @@ function BatchRunner({
         {/* 문항 오류 판정으로 채점이 조정된 문항 — 학생·보호자는 채점 뒤에만, 선생님은 '조정 대상'으로 본다. */}
         {item.graded && viewerRole === "student" && item.errorAdjustedAt && (
           <div role="note" data-testid="problem-error-adjusted" className="mb-3 rounded-xl border border-green bg-green/10 px-4 py-2.5 text-[12.5px] font-semibold text-green">
-            {item.errorAdjustmentPending ? "A question error was confirmed and your teacher is re-checking the grade." : "The grade was adjusted because of a question error."}
+            {item.errorAdjustmentPending ? "A problem error was confirmed and your teacher is re-checking the grade." : "The grade was adjusted due to a problem error."}
           </div>
         )}
         {viewerRole === "teacher" && item.errorAdjustmentPending && (
           <div role="note" data-testid="problem-error-pending" className="mb-3 rounded-xl border border-yellow bg-yellow-bg px-4 py-2.5 text-[12.5px] font-semibold text-ink">
-            <p>Needs adjustment — this question was ruled defective, so everyone is marked correct. Your manual grade is unchanged; please regrade.</p>
+            <p>Needs adjustment — this question was ruled an error and should be marked correct for everyone. Your manual grade is unchanged; please regrade.</p>
             <div className="mt-2 flex flex-wrap gap-2">
               <button type="button" disabled={regrading} onClick={() => void regrade("correct")} className="rounded-lg border-[1.5px] border-green px-3 py-1 text-[12px] font-bold text-green disabled:opacity-50">Regrade as correct</button>
               <button type="button" disabled={regrading} onClick={() => void regrade("incorrect")} className="rounded-lg border-[1.5px] border-red px-3 py-1 text-[12px] font-bold text-red disabled:opacity-50">Keep as incorrect</button>
@@ -513,7 +513,7 @@ function BatchRunner({
                 >
                   Mark incorrect
                 </button>
-                {item.autoCorrect !== null && <span className="text-[11px] text-grey-400">(Auto-graded: {item.autoCorrect ? "correct" : "incorrect"})</span>}
+                {item.autoCorrect !== null && <span className="text-[11px] text-grey-400">(auto: {item.autoCorrect ? "correct" : "incorrect"})</span>}
               </div>
             ) : (
               <p className={"text-[13px] font-bold mb-2 " + (item.grade === "correct" ? "text-green" : "text-red")}>{item.grade === "correct" ? "Correct" : "Incorrect"}</p>
@@ -552,7 +552,7 @@ function BatchRunner({
             disabled={grading}
             className="mt-4 text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
           >
-            {grading ? "Grading…" : "Mark all as graded"}
+            {grading ? "Grading…" : "Finish grading (all)"}
           </button>
         )}
         {error && viewerRole === "teacher" && <p className="text-[12px] text-red mt-2">{error}</p>}

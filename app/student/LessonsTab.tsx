@@ -11,7 +11,7 @@ import CurriculumView from "./CurriculumView";
 import ReviewPanel from "./ReviewPanel";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtIntl } from "@/lib/format-datetime";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 type SubView =
   | { type: "list" }
@@ -81,8 +81,8 @@ export default function LessonsTab({
         <UnderlineSubTabs
           className="mb-5"
           items={[
-            { id: "upcoming", label: "예정된 수업" },
-            { id: "past", label: "지난 수업" },
+            { id: "upcoming", label: "Upcoming" },
+            { id: "past", label: "Past" },
           ]}
           activeId={subtab}
           onSelect={setSubtab}
@@ -123,7 +123,7 @@ function UpcomingList({
   if (lessons.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        예정된 수업이 없습니다.
+        No upcoming lessons.
       </div>
     );
   }
@@ -152,7 +152,7 @@ function UpcomingList({
                 className="text-[13px] font-bold text-ink hover:underline text-left"
               >
                 {lesson.subjectName}
-                {lesson.sessionNumber != null ? ` · ${lesson.sessionNumber}회차` : ""}
+                {lesson.sessionNumber != null ? ` · Session ${lesson.sessionNumber}` : ""}
                 {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
               </button>
             </div>
@@ -163,7 +163,7 @@ function UpcomingList({
               onClick={() => router.push(`/session/${lesson.sessionId}`)}
               className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white"
             >
-              {state === "live" ? "수업 입장" : "수업 준비"}
+              {state === "live" ? "Join lesson" : "Prepare"}
             </button>
           </div>
         );
@@ -189,7 +189,7 @@ function PastList({
   if (lessons.length === 0) {
     return (
       <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        지난 수업이 없습니다.
+        No past lessons.
       </div>
     );
   }
@@ -210,7 +210,7 @@ function PastList({
               className="text-[13px] font-bold text-ink hover:underline text-left"
             >
               {lesson.subjectName}
-              {lesson.sessionNumber != null ? ` · ${lesson.sessionNumber}회차` : ""}
+              {lesson.sessionNumber != null ? ` · Session ${lesson.sessionNumber}` : ""}
               {lesson.unitTitle ? ` · ${lesson.unitTitle}` : ""}
             </button>
           </div>
@@ -222,14 +222,14 @@ function PastList({
               onClick={() => router.push(`/session/${lesson.sessionId}`)}
               className="text-[12px] font-semibold text-blue"
             >
-              수업 기록
+              Lesson record
             </button>
             <button
               onClick={() => onReview(lesson.sessionId)}
               className="text-[12px] font-semibold text-blue"
             >
-              리뷰 보기
-              {reviews[lesson.sessionId] ? "" : " (미작성)"}
+              View review
+              {reviews[lesson.sessionId] ? "" : " (not yet written)"}
             </button>
           </div>
         </div>
@@ -240,8 +240,8 @@ function PastList({
 
 function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
-  return fmtIntl(new Date(iso), {
-    month: "long",
+  return fmtIntlEn(new Date(iso), {
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",

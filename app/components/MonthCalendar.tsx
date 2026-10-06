@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { buildMonthGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 
 const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const MONTH_LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export type DayBadge = { count: number; tone?: "ink" | "grey" | "red" | "green" };
 
@@ -69,7 +69,7 @@ export default function MonthCalendar({
           ‹
         </button>
         <div className="text-[13px] font-bold text-ink">
-          {MONTH_NAMES[month]} {year}
+          {MONTH_LABELS[month]} {year}
         </div>
         <button onClick={goNextMonth} className="text-[13px] font-bold text-grey-500 px-2 py-1" aria-label="Next month">
           ›
@@ -92,7 +92,7 @@ export default function MonthCalendar({
               onClick={() => onSelectDate(cell.dateKey)}
               aria-pressed={isSelected}
               aria-label={`Day ${cell.day}`}
-              title={hasExternalBusy ? "External event (unavailable for booking)" : undefined}
+              title={hasExternalBusy ? "External event (unavailable)" : undefined}
               className={
                 "aspect-square rounded-lg text-[12px] flex flex-col items-center justify-center gap-0.5 " +
                 (isSelected

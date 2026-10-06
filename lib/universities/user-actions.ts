@@ -20,7 +20,7 @@ export async function proposeUniversitySourceUrl(input: {
 }): Promise<void> {
   const { user, profile, supabase } = await requireStudentFeature("college");
   if (profile?.role !== "consultant" && profile?.role !== "admin") {
-    throw new Error("컨설턴트 또는 관리자만 출처 URL을 제안할 수 있습니다.");
+    throw new Error("Only consultants or admins can suggest source URLs.");
   }
   const { error } = await supabase.from("university_source_urls").insert({
     university_id: input.universityId,
@@ -78,7 +78,7 @@ export async function reportUniversityDataIssue(input: {
   message: string;
 }): Promise<void> {
   const { user, profile, supabase } = await requireStudentFeature("college");
-  if (!input.message.trim()) throw new Error("신고 내용을 입력해 주세요.");
+  if (!input.message.trim()) throw new Error("Please describe the issue.");
   const { error } = await supabase.from("university_data_reports").insert({
     university_id: input.universityId ?? null,
     field_path: input.fieldPath ?? null,

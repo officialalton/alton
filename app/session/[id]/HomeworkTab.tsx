@@ -39,7 +39,7 @@ export default function HomeworkTab({
             onClick={() => setShowIssue((v) => !v)}
             className={"text-[12.5px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] " + (showIssue ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
           >
-            과제 생성
+            Create assignment
           </button>
           {showIssue && (
             <div className="mt-3">
@@ -52,14 +52,14 @@ export default function HomeworkTab({
 
       {initialItems.length > 0 && (
         <section className="mt-6 border-t border-grey-200 pt-6">
-          <h2 className="text-[13px] font-bold text-ink mb-1">예전 과제 기록</h2>
-          <p className="text-[12px] text-grey-500 mb-3">이전 방식으로 낸 과제입니다. 읽기만 합니다.</p>
+          <h2 className="text-[13px] font-bold text-ink mb-1">Legacy assignment records</h2>
+          <p className="text-[12px] text-grey-500 mb-3">Assignments issued the old way. Read-only.</p>
           {initialItems.map((item) => (
             <div key={item.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-3">
               <h3 className="text-[14px] font-bold text-ink mb-1">{item.title}</h3>
               {item.description && <p className="text-[13px] text-grey-500 leading-[1.6] mb-2">{item.description}</p>}
-              <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mt-2">학생 답안</div>
-              <div className="text-[13px] text-ink whitespace-pre-wrap">{item.studentAnswer || "제출하지 않았습니다."}</div>
+              <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mt-2">Student answer</div>
+              <div className="text-[13px] text-ink whitespace-pre-wrap">{item.studentAnswer || "Not submitted."}</div>
             </div>
           ))}
         </section>

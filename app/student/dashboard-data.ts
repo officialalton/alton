@@ -172,7 +172,7 @@ export async function loadDashboardData(
       : null;
 
   return {
-    studentName: profile?.name ?? "학생",
+    studentName: profile?.name ?? "Student",
     upcoming: upcoming.slice(0, 3),
     calendarByDay,
     calendarYear,

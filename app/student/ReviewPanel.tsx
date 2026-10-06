@@ -5,10 +5,10 @@ import { submitStudentFeedback } from "./review-actions";
 import type { ReviewData, StudentFeedback } from "./review-data";
 
 const CATEGORY_LABEL: Record<string, string> = {
-  concept: "개념 이해",
-  problemsolving: "문제 해결력",
-  participation: "수업 참여도",
-  homework: "과제 수행",
+  concept: "Concept understanding",
+  problemsolving: "Problem solving",
+  participation: "Class participation",
+  homework: "Homework completion",
 };
 
 const RATING_LABEL: Record<string, string> = {
@@ -38,13 +38,13 @@ export default function ReviewPanel({
         onClick={onBack}
         className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
-        ← 뒤로
+        ← Back
       </button>
-      <h1 className="text-[20px] font-extrabold text-ink mb-5">수업 리뷰</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-5">Lesson Review</h1>
 
       {!review ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-6">
-          아직 선생님이 리포트를 작성하지 않았습니다.
+          Your teacher hasn&apos;t written a report yet.
         </div>
       ) : (
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-6">
@@ -64,12 +64,12 @@ export default function ReviewPanel({
             </div>
           ))}
           {review.teacherSummary && (
-            <Field label="오늘 배운 것" text={review.teacherSummary} />
+            <Field label="What we covered" text={review.teacherSummary} />
           )}
-          {review.strength && <Field label="잘한 점" text={review.strength} />}
-          {review.improve && <Field label="보완할 점" text={review.improve} />}
+          {review.strength && <Field label="Strengths" text={review.strength} />}
+          {review.improve && <Field label="Areas to improve" text={review.improve} />}
           {review.nextPlan && (
-            <Field label="최종 정리" text={review.nextPlan} />
+            <Field label="Wrap-up" text={review.nextPlan} />
           )}
         </div>
       )}
@@ -86,10 +86,10 @@ export default function ReviewPanel({
 function FeedbackReadOnly({ feedback }: { feedback: StudentFeedback | null }) {
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
-      <h2 className="text-[14px] font-bold text-ink mb-3">학생 만족도</h2>
+      <h2 className="text-[14px] font-bold text-ink mb-3">Student Rating</h2>
       {!feedback || feedback.rating === null ? (
         <p className="text-[13px] text-grey-500">
-          학생이 아직 평가를 남기지 않았습니다.
+          The student hasn&apos;t left a rating yet.
         </p>
       ) : (
         <>
@@ -146,7 +146,7 @@ function FeedbackForm({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
-      <h2 className="text-[14px] font-bold text-ink mb-3">이 수업은 어떠셨나요?</h2>
+      <h2 className="text-[14px] font-bold text-ink mb-3">How was this lesson?</h2>
       <div className="flex gap-1.5 mb-3">
         {[1, 2, 3, 4, 5].map((n) => (
           <button
@@ -161,7 +161,7 @@ function FeedbackForm({
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        placeholder="수업에 대한 의견을 남겨주세요 (선택)"
+        placeholder="Share your thoughts about the lesson (optional)"
         className="w-full min-h-[70px] px-3 py-2.5 border-[1.5px] border-grey-200 rounded-lg text-[13px] mb-3"
       />
       <button
@@ -169,11 +169,11 @@ function FeedbackForm({
         onClick={handleSubmit}
         className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
       >
-        {saving ? "저장 중..." : "제출하기"}
+        {saving ? "Saving..." : "Submit"}
       </button>
       {saved && (
         <span className="ml-3 text-[12px] font-semibold text-green">
-          ✓ 제출되었습니다
+          ✓ Submitted
         </span>
       )}
     </div>

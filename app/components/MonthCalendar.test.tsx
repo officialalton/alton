@@ -44,7 +44,7 @@ describe("MonthCalendar", () => {
     );
     const button = screen.getByText("15").closest("button");
     expect(button?.className).toContain("underline");
-    expect(button?.getAttribute("title")).toBe("External event (unavailable for booking)");
+    expect(button?.getAttribute("title")).toBe("External event (unavailable)");
   });
 
   it("이전/다음 달 버튼으로 표시 월이 바뀐다", () => {

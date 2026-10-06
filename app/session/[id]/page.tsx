@@ -152,7 +152,7 @@ export default async function SessionPage({
     <SessionShell
       sessionId={session.id}
       studentId={session.studentId}
-      unitTitle={session.unitTitle ?? `${session.sessionNumber}회차`}
+      unitTitle={session.unitTitle ?? `Session ${session.sessionNumber}`}
       subjectName={session.subjectName}
       studentName={session.studentName}
       sessionNumber={session.sessionNumber}

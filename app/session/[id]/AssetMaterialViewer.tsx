@@ -180,7 +180,7 @@ export default function AssetMaterialViewer({
         if (layer && layer.hasUnsaved()) {
           const ok = await layer.flush();
           if (!ok) {
-            setNavError("저장되지 않은 필기가 있어 이동하지 않았습니다. 저장을 다시 시도한 뒤 이동하세요.");
+            setNavError("You have unsaved notes, so navigation was cancelled. Retry saving, then move on.");
             return;
           }
         }
@@ -204,7 +204,7 @@ export default function AssetMaterialViewer({
     <div className="md:grid md:grid-cols-[220px_1fr]" data-testid="asset-material-viewer">
       <nav className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto">
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-          자료 목차
+          Materials
         </div>
         {assets.map((a, i) => {
           const active = i === pos.assetIndex;
@@ -271,7 +271,7 @@ export default function AssetMaterialViewer({
 
         {prevPosition(assets, pos) && (
           <button
-            aria-label="이전 페이지"
+            aria-label="Previous page"
             onClick={() => void guardedGo(prevPosition(assets, pos))}
             className="absolute bottom-4 left-4 sm:left-6 z-10 w-11 h-11 rounded-full bg-white/70 backdrop-blur-sm border border-white/60 shadow text-[18px] font-bold text-ink"
           >
@@ -280,7 +280,7 @@ export default function AssetMaterialViewer({
         )}
         {nextPosition(assets, pos) && (
           <button
-            aria-label={asset.kind === "pdf" && pos.page >= total ? "다음 자료" : "다음 페이지"}
+            aria-label={asset.kind === "pdf" && pos.page >= total ? "Next material" : "Next page"}
             onClick={() => void guardedGo(nextPosition(assets, pos))}
             className="absolute bottom-4 right-4 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/70 backdrop-blur-sm border border-white/60 shadow text-[18px] font-bold text-ink"
           >
@@ -292,7 +292,7 @@ export default function AssetMaterialViewer({
         {urlError && <p className="text-[12.5px] text-red mb-2">{urlError}</p>}
         {renderError && <p className="text-[12.5px] text-red mb-2">{renderError}</p>}
         {asset.unavailable && (
-          <p className="text-[12.5px] text-grey-500 mb-2">이 자료의 고정 사본이 기록되지 않아 표시할 수 없습니다.</p>
+          <p className="text-[12.5px] text-grey-500 mb-2">This material can&apos;t be shown because no fixed copy was recorded.</p>
         )}
 
         {asset.kind === "pdf" && tipAccess === "edit" && (
@@ -304,10 +304,10 @@ export default function AssetMaterialViewer({
               data-testid="pdf-tip-edit-toggle"
               className={"text-[12.5px] font-bold px-3 py-1.5 rounded border " + (tipEditing ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")}
             >
-              {tipEditing ? "팁 편집 끝내기" : "팁 편집"}
+              {tipEditing ? "Finish editing tips" : "Edit tips"}
             </button>
             {tipEditing && tipSaveState === "error" && (
-              <span className="ml-2 text-[12px] text-red">팁이 저장되지 않았습니다. 연결을 확인하고 다시 시도하세요.</span>
+              <span className="ml-2 text-[12px] text-red">Tips weren&apos;t saved. Check your connection and try again.</span>
             )}
           </div>
         )}
@@ -324,7 +324,7 @@ export default function AssetMaterialViewer({
 
         <div ref={frameRef} className="relative w-full overflow-auto flex justify-center" style={{ minHeight: fitHeight || undefined }}>
           {asset.kind === "video" ? (
-            signed ? <VideoMaterialPlayer url={signed.url} mimeType={signed.mimeType} title={asset.title} /> : <p className="text-[12.5px] text-grey-500">자료를 불러오는 중…</p>
+            signed ? <VideoMaterialPlayer url={signed.url} mimeType={signed.mimeType} title={asset.title} /> : <p className="text-[12.5px] text-grey-500">Loading material…</p>
           ) : signed ? (
             <div className="relative inline-block">
               <PdfPageCanvas
@@ -359,7 +359,7 @@ export default function AssetMaterialViewer({
                   className="absolute top-2 left-2 z-[8] text-[11.5px] font-bold px-2 py-1 rounded-lg bg-white/70 backdrop-blur-sm border shadow-sm"
                   style={{ color: "#7B3FA0", borderColor: "rgba(123,63,160,0.4)" }}
                 >
-                  {tipVisible ? "교사용 팁 숨기기" : "교사용 팁 보기"}
+                  {tipVisible ? "Hide teacher tips" : "Show teacher tips"}
                 </button>
               )}
               {canAnnotate && sessionId && (
@@ -377,11 +377,11 @@ export default function AssetMaterialViewer({
               )}
             </div>
           ) : (
-            <p className="text-[12.5px] text-grey-500">자료를 불러오는 중…</p>
+            <p className="text-[12.5px] text-grey-500">Loading material…</p>
           )}
         </div>
         {saveState === "error" && (
-          <p className="text-[12px] text-red mt-2">필기가 저장되지 않았습니다. 연결을 확인하고 다시 시도하세요.</p>
+          <p className="text-[12px] text-red mt-2">Notes weren&apos;t saved. Check your connection and try again.</p>
         )}
       </div>
     </div>

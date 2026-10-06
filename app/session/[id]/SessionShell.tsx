@@ -29,7 +29,7 @@ import type { HomeworkBatch } from "@/lib/homework-batch-data";
 import type { StrokePayload } from "./annotation-events-types";
 import { finalizeMyLessonSession } from "@/app/teacher/lesson-schedule-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtIntl } from "@/lib/format-datetime";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 // R9(Task 4) — 세션 중 신규 문제 생성 탭("문제 생성")은 여기서 제거됐다.
 // AI 문제 생성은 이제 관리자 콘텐츠 에디터(app/admin/CurriculumDocEditor.tsx)
@@ -40,19 +40,19 @@ import { fmtIntl } from "@/lib/format-datetime";
 // (교재 설명 → 화이트보드 필기 → 단어 확인 → 즉석 문제 → 끝나고 과제 확인).
 // 아직 구현되지 않은 "보충 자료" 탭은 노출하지 않는다(백엔드 준비되면 다시 추가).
 const TABS = [
-  { id: "material", label: "교재", teacherOnly: false },
+  { id: "material", label: "Material", teacherOnly: false },
   // P3 4단계 — 이 수업에 고정된 문제를 읽고 푸는 화면. 문제마다 풀이판이 붙는다.
-  { id: "problems", label: "문제", teacherOnly: false },
+  { id: "problems", label: "Problems", teacherOnly: false },
   // 2026-09-14 UAT — '연습장' 탭은 문제 아래 연습장으로 대체돼 없앴고, '문제 기록'은 학생
   // 포털에서만 본다(수업 화면에서는 필요 없다).
-  { id: "vocab", label: "단어장", teacherOnly: false },
-  { id: "homework", label: "과제", teacherOnly: false },
+  { id: "vocab", label: "Vocabulary", teacherOnly: false },
+  { id: "homework", label: "Assignments", teacherOnly: false },
   // 2026-09-21(UAT 지적) — 모의고사도 단어장처럼 별도 라우트로 나가지 않고 이 탭
   // 안에서 그대로 응시·결과를 본다.
-  { id: "mock-exam", label: "모의고사", teacherOnly: false },
+  { id: "mock-exam", label: "Mock Exam", teacherOnly: false },
   // 4절 — 별도 준비 페이지를 없애고 준비를 수업 화면 안으로 넣는다. 선생님·관리자만
   // 보이고, 이 수업이 다루는 회차가 있을 때만 나타난다.
-  { id: "prep", label: "수업 준비", teacherOnly: true },
+  { id: "prep", label: "Lesson Prep", teacherOnly: true },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -61,10 +61,10 @@ type TabId = (typeof TABS)[number]["id"];
 const DEFAULT_TAB: TabId = "material";
 
 const VIEWER_LABEL: Record<SessionViewViewer, string> = {
-  student: "학생",
-  teacher: "선생님",
-  parent: "학부모 (읽기전용)",
-  admin: "관리자 (읽기전용)",
+  student: "Student",
+  teacher: "Teacher",
+  parent: "Parent (read-only)",
+  admin: "Admin (read-only)",
 };
 
 export default function SessionShell({
@@ -276,13 +276,13 @@ export default function SessionShell({
           ? {
               sessionId,
               outcome: "completed",
-              reason: "학생 사유 조기 종료",
+              reason: "Ended early (student reason)",
               earlyEndReason: "student_reason",
             }
           : {
               sessionId,
               outcome: "completed",
-              reason: "선생님 수업 종료",
+              reason: "Ended by teacher",
             }
       );
       if (!result.ok) {
@@ -318,18 +318,18 @@ export default function SessionShell({
             onClick={() => router.push(backHref)}
             className="text-[13px] text-white font-semibold whitespace-nowrap border border-white/25 rounded-lg px-3 py-1.5 hover:bg-white/10 active:scale-95 transition-transform"
           >
-            ← 나가기
+            ← Exit
           </button>
           {/* P2/P3 5단계 — 학생·과목·회차·목표는 바로 아래 LessonContextHeader가
               한 번만 보여준다. 여기서 같은 내용을 또 쓰면 좁은 화면에서 두 줄이
               겹쳐 읽기 어려워진다. 상단 바에는 나가기와 탭만 남긴다. */}
           <div className="text-[13px] font-bold text-white whitespace-nowrap">
-            {sessionNumber}회차
+            Session {sessionNumber}
           </div>
           {/* 2026-09-14 제품 오너 — 준비 중·예정 일시는 별도 노란 줄이 아니라 회차 옆에. */}
           {state === "prep" && (
             <span className="text-[12.5px] text-[#97A9C8] whitespace-nowrap" data-testid="prep-schedule">
-              🗓 수업 준비 중{scheduledLabel ? ` · ${scheduledLabel} 예정` : ""}
+              🗓 Preparing lesson{scheduledLabel ? ` · scheduled ${scheduledLabel}` : ""}
             </span>
           )}
         </div>
@@ -355,7 +355,7 @@ export default function SessionShell({
               onClick={() => setTipsVisible((v) => !v)}
               className="text-[12px] font-semibold px-3 py-1.5 rounded-lg border border-white/25 text-white"
             >
-              💡 티칭 팁 {tipsVisible ? "숨기기" : "보기"}
+              💡 {tipsVisible ? "Hide" : "Show"} teaching tips
             </button>
           )}
           {smartNotesUrl && (viewerRole === "student" || viewerRole === "parent") && (
@@ -365,7 +365,7 @@ export default function SessionShell({
               rel="noopener noreferrer"
               className="text-[12px] font-semibold text-[#97A9C8] whitespace-nowrap hover:text-white"
             >
-              📄 미팅록 보기
+              📄 View meeting notes
             </a>
           )}
           {isTeacher && (
@@ -373,7 +373,7 @@ export default function SessionShell({
               href={`/teacher/student/${studentId}/roadmap?returnTo=${encodeURIComponent(`/session/${sessionId}`)}`}
               className="text-[12px] font-semibold text-[#97A9C8] whitespace-nowrap hover:text-white"
             >
-              🧭 학생 프로필·로드맵 보기
+              🧭 Student profile & roadmap
             </a>
           )}
           <span className="text-[12px] font-bold px-3.5 py-1.5 rounded-full bg-brand-red text-white whitespace-nowrap">
@@ -399,10 +399,10 @@ export default function SessionShell({
           <div className="bg-white rounded-xl px-6 py-5 max-w-[360px] w-full">
             {!isEarlyEnd() ? (
               <>
-                <div className="text-[15px] font-bold text-ink mb-2">수업을 종료할까요?</div>
+                <div className="text-[15px] font-bold text-ink mb-2">End this lesson?</div>
                 <p className="text-[13px] text-grey-500 mb-4">
-                  {studentName} 학생과의 수업을 지금({formatKoreanTime(new Date(), tz)}) 종료 처리합니다.
-                  종료 후에는 이 수업을 다시 진행 중 상태로 되돌릴 수 없습니다.
+                  The lesson with {studentName} will be marked as ended now ({formatKoreanTime(new Date(), tz)}).
+                  Once ended, this lesson cannot be set back to in progress.
                 </p>
                 {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
                 <div className="flex justify-end gap-2">
@@ -411,44 +411,44 @@ export default function SessionShell({
                     disabled={endingLesson}
                     className="text-[13px] font-semibold text-grey-500 px-3 py-2 disabled:opacity-50"
                   >
-                    취소
+                    Cancel
                   </button>
                   <button
                     onClick={handleConfirmEndLesson}
                     disabled={endingLesson}
                     className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg disabled:opacity-50"
                   >
-                    {endingLesson ? "종료 처리 중..." : "수업 종료"}
+                    {endingLesson ? "Ending..." : "End lesson"}
                   </button>
                 </div>
               </>
             ) : earlyEndReasonChoice === null ? (
               <>
                 <div className="text-[15px] font-bold text-ink mb-2">
-                  예정 종료 시각 전입니다 — 조기 종료 사유를 선택하세요
+                  It&apos;s before the scheduled end time — choose a reason for ending early
                 </div>
                 <p className="text-[13px] text-grey-500 mb-4">
-                  {studentName} 학생과의 수업이 아직 예정 종료 시각({endLabel ?? "-"})
-                  전입니다. 실제 사유에 맞는 항목을 선택해주세요.
+                  The lesson with {studentName} hasn&apos;t reached its scheduled end time ({endLabel ?? "-"}) yet.
+                  Pick the option that matches what actually happened.
                 </p>
                 <div className="flex flex-col gap-2 mb-4">
                   <button
                     onClick={() => setEarlyEndReasonChoice("student_reason")}
                     className="text-left text-[13px] font-semibold text-ink border-[1.5px] border-grey-200 rounded-lg px-3.5 py-2.5"
                   >
-                    학생 사유(조퇴 등)
+                    Student reason (left early, etc.)
                   </button>
                   <button
                     onClick={() => setEarlyEndReasonChoice("teacher_fault")}
                     className="text-left text-[13px] font-semibold text-ink border-[1.5px] border-grey-200 rounded-lg px-3.5 py-2.5"
                   >
-                    선생님 사유(지각 등)
+                    Teacher reason (late start, etc.)
                   </button>
                   <button
                     onClick={() => setEarlyEndReasonChoice("service_incident")}
                     className="text-left text-[13px] font-semibold text-ink border-[1.5px] border-grey-200 rounded-lg px-3.5 py-2.5"
                   >
-                    서비스 장애(Meet 연결 등)
+                    Service issue (Meet connection, etc.)
                   </button>
                 </div>
                 <div className="flex justify-end">
@@ -456,17 +456,17 @@ export default function SessionShell({
                     onClick={() => setShowEndLessonConfirm(false)}
                     className="text-[13px] font-semibold text-grey-500 px-3 py-2"
                   >
-                    취소
+                    Cancel
                   </button>
                 </div>
               </>
             ) : earlyEndReasonChoice === "student_reason" ? (
               <>
-                <div className="text-[15px] font-bold text-ink mb-2">학생 사유로 종료할까요?</div>
+                <div className="text-[15px] font-bold text-ink mb-2">End for a student reason?</div>
                 <p className="text-[13px] text-grey-500 mb-4">
-                  {studentName} 학생과의 수업을 학생 사유(조퇴 등)로 지금(
-                  {formatKoreanTime(new Date(), tz)}) 종료 처리합니다. 원장에 조기 종료
-                  사유가 &quot;학생 사유&quot;로 기록됩니다.
+                  The lesson with {studentName} will be marked as ended now (
+                  {formatKoreanTime(new Date(), tz)}) for a student reason (left early, etc.). The ledger will
+                  record the early-end reason as &quot;student reason&quot;.
                 </p>
                 {endLessonError && <p className="text-[12px] text-red mb-3">{endLessonError}</p>}
                 <div className="flex justify-end gap-2">
@@ -475,60 +475,60 @@ export default function SessionShell({
                     disabled={endingLesson}
                     className="text-[13px] font-semibold text-grey-500 px-3 py-2 disabled:opacity-50"
                   >
-                    ← 사유 다시 선택
+                    ← Choose another reason
                   </button>
                   <button
                     onClick={handleConfirmEndLesson}
                     disabled={endingLesson}
                     className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg disabled:opacity-50"
                   >
-                    {endingLesson ? "종료 처리 중..." : "수업 종료"}
+                    {endingLesson ? "Ending..." : "End lesson"}
                   </button>
                 </div>
               </>
             ) : earlyEndReasonChoice === "teacher_fault" ? (
               <>
-                <div className="text-[15px] font-bold text-ink mb-2">이 화면에서는 종료할 수 없어요</div>
+                <div className="text-[15px] font-bold text-ink mb-2">This can&apos;t be ended from here</div>
                 <p className="text-[13px] text-grey-500 mb-4">
-                  선생님 귀책(지각 등)으로 일찍 끝난 경우, 이 화면이 아니라
-                  &quot;수업 일정&quot; 탭의 &quot;지각 당일 연장&quot;에서 처리해주세요. 여기서는
-                  수업이 종료 처리되지 않습니다.
+                  If the lesson ended early for a teacher reason (late start, etc.), handle it under
+                  &quot;Same-day extension&quot; in the &quot;Lesson Schedule&quot; tab instead. The lesson
+                  will not be marked as ended here.
                 </p>
                 <div className="flex justify-end gap-2">
                   <button
                     onClick={() => setEarlyEndReasonChoice(null)}
                     className="text-[13px] font-semibold text-grey-500 px-3 py-2"
                   >
-                    ← 사유 다시 선택
+                    ← Choose another reason
                   </button>
                   <button
                     onClick={() => setShowEndLessonConfirm(false)}
                     className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg"
                   >
-                    확인
+                    OK
                   </button>
                 </div>
               </>
             ) : (
               <>
-                <div className="text-[15px] font-bold text-ink mb-2">이 화면에서는 종료할 수 없어요</div>
+                <div className="text-[15px] font-bold text-ink mb-2">This can&apos;t be ended from here</div>
                 <p className="text-[13px] text-grey-500 mb-4">
-                  서비스 장애(Meet 연결 실패 등)로 일찍 끝난 경우, 관리자에게
-                  장애 판정을 요청해주세요. 여기서는 수업이 종료 처리되지
-                  않습니다.
+                  If the lesson ended early because of a service issue (Meet connection failure, etc.),
+                  ask an admin to review it as an incident. The lesson will not be marked as ended
+                  here.
                 </p>
                 <div className="flex justify-end gap-2">
                   <button
                     onClick={() => setEarlyEndReasonChoice(null)}
                     className="text-[13px] font-semibold text-grey-500 px-3 py-2"
                   >
-                    ← 사유 다시 선택
+                    ← Choose another reason
                   </button>
                   <button
                     onClick={() => setShowEndLessonConfirm(false)}
                     className="text-[13px] font-bold text-white bg-ink px-4 py-2 rounded-lg"
                   >
-                    확인
+                    OK
                   </button>
                 </div>
               </>
@@ -594,8 +594,8 @@ export default function SessionShell({
               // 명시적으로 지금 구성으로 다시 고정할 수 있다. 자동으로는 바뀌지 않는다.
               <div className="mx-8 mt-6 border-[1.5px] border-grey-200 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3" data-testid="repin-live">
                 <p className="text-[12.5px] text-ink flex-1 min-w-[240px]">
-                  이 수업은 <b>시작 시점의 구성이 고정</b>돼 있습니다. 아래에서 바꾼 교재·문제를 이 수업에 적용하려면 <b>수업 구성 변경</b>을 누르세요.
-                  학생이 이미 사용한 항목·필기·답안은 남습니다.
+                  This lesson&apos;s content was <b>locked when it started</b>. To apply the materials and problems you change below to this lesson, click <b>Update lesson content</b>.
+                  Items the student has already used, along with notes and answers, are kept.
                 </p>
                 <button
                   type="button"
@@ -609,7 +609,7 @@ export default function SessionShell({
                   }}
                   className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
                 >
-                  {repin === "running" ? "바꾸는 중…" : "수업 구성 변경"}
+                  {repin === "running" ? "Updating…" : "Update lesson content"}
                 </button>
                 {typeof repin === "object" && <p className="text-[12px] text-red w-full">{repin.error}</p>}
               </div>
@@ -627,7 +627,7 @@ export default function SessionShell({
             scopeNotice={
               state === "prep"
                 ? null
-                : "이 수업은 시작 당시의 교재·문제 구성을 사용합니다. 여기서 수정하는 회차 구성은 이 수업의 콘텐츠와 필기·답안·피드백을 바꾸지 않으며, 이 회차를 쓰는 아직 시작하지 않은 수업에 적용됩니다."
+                : "This lesson uses the materials and problems as they were when it started. Changes you make to the session plan here don't affect this lesson's content, notes, answers, or feedback; they apply to lessons on this session that haven't started yet."
             }
           />
           </>
@@ -654,18 +654,18 @@ function StatusBar({
     return (
       <div className="flex items-center justify-between gap-4 px-6 py-2.5 bg-green-bg text-[13.5px] flex-wrap">
         <span>
-          🟢 <b>Google Meet 연결됨</b>
-          {endLabel ? ` · 종료 예정 ${endLabel}` : ""}
+          🟢 <b>Google Meet connected</b>
+          {endLabel ? ` · ends at ${endLabel}` : ""}
         </span>
         <span className="flex items-center gap-4">
           {viewerRole === "student" && (
             <button
               onClick={() =>
-                alert("노쇼가 접수되었습니다. 관리자에게 알림이 전송됩니다.")
+                alert("No-show reported. An admin will be notified.")
               }
               className="text-red font-semibold"
             >
-              선생님이 안 보이시나요? (노쇼 알림)
+              Can&apos;t see your teacher? (Report no-show)
             </button>
           )}
           {viewerRole === "teacher" && (
@@ -673,7 +673,7 @@ function StatusBar({
               onClick={onRequestEndLesson}
               className="bg-ink text-white font-bold text-[13px] px-4 py-1.5 rounded-md"
             >
-              수업 종료
+              End lesson
             </button>
           )}
         </span>
@@ -684,7 +684,7 @@ function StatusBar({
   if (state === "completed") {
     return (
       <div className="px-6 py-2.5 bg-grey-100 text-[13.5px]">
-        ✅ <b>완료된 수업</b>입니다
+        ✅ This lesson is <b>completed</b>
       </div>
     );
   }
@@ -695,8 +695,8 @@ function StatusBar({
 
 function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return null;
-  return fmtIntl(new Date(iso), {
-    month: "long",
+  return fmtIntlEn(new Date(iso), {
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
@@ -705,7 +705,7 @@ function formatKoreanDateTime(iso: string | null, tz: string) {
 }
 
 function formatKoreanTime(date: Date, tz: string) {
-  return fmtIntl(date, {
+  return fmtIntlEn(date, {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,

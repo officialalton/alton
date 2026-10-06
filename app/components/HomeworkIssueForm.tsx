@@ -50,7 +50,7 @@ export default function HomeworkIssueForm({
     setBusy(false);
     if (!r.ok) { setError(r.error); return; }
     setCounts({});
-    setNotice(`Issued ${r.value.problemCount} homework question${r.value.problemCount === 1 ? "" : "s"}. The student can see it right away.`);
+    setNotice(`Issued an assignment with ${r.value.problemCount} ${r.value.problemCount === 1 ? "question" : "questions"}. It is visible in the student portal now.`);
     onIssued?.();
   }
 
@@ -58,9 +58,9 @@ export default function HomeworkIssueForm({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5">
-      <p className="text-[12.5px] font-bold text-grey-500 mb-2">Questions per keyword</p>
+      <p className="text-[12.5px] font-bold text-grey-500 mb-2">Count per keyword</p>
       {keywords.length === 0 ? (
-        <p className="text-[12.5px] text-grey-500">No keywords in the subjects this student is enrolled in.</p>
+        <p className="text-[12.5px] text-grey-500">No keywords are available for this student&apos;s subjects.</p>
       ) : (
         <ul className="divide-y divide-grey-100 mb-3">
           {keywords.map((k) => (
@@ -85,7 +85,7 @@ export default function HomeworkIssueForm({
         onClick={() => void issue()}
         className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-40"
       >
-        {busy ? "Issuing…" : `Issue homework (${totalRequested})`}
+        {busy ? "Issuing…" : `Issue assignment (${totalRequested})`}
       </button>
     </div>
   );

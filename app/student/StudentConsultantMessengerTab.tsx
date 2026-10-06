@@ -15,11 +15,11 @@ import {
 } from "./consultant-messenger-actions";
 import type { HouseholdInquirySummary, HouseholdMessage } from "@/app/parent/inquiry-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateTimeEn } from "@/lib/format-datetime-en";
 
 function formatDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
+  return fmtDateTimeEn(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 export default function StudentConsultantMessengerTab() {
@@ -34,7 +34,7 @@ export default function StudentConsultantMessengerTab() {
   function loadInquiries() {
     listMyHouseholdInquiriesAction()
       .then(setInquiries)
-      .catch((e) => setError(e instanceof Error ? e.message : "문의 목록을 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Could not load inquiries."));
   }
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function StudentConsultantMessengerTab() {
       loadInquiries();
       setOpenId(inquiryId);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "문의를 시작하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Could not start the inquiry.");
     } finally {
       setStarting(false);
     }
@@ -76,20 +76,20 @@ export default function StudentConsultantMessengerTab() {
   return (
     <div>
       <p className="text-[12.5px] text-grey-500 mb-4">
-        담당 컨설턴트·관리자와 대화할 수 있습니다. 문의마다 별도 대화창으로 관리되고, 종료되면 지난
-        문의로 넘어갑니다. 이 대화는 가족(보호자)도 함께 볼 수 있습니다.
+        Chat with your consultant and the ALTON team. Each inquiry has its own thread; once closed, it moves to
+        past inquiries. Your parent can also see this conversation.
       </p>
 
       {error && <p className="text-[12.5px] text-red mb-3">{error}</p>}
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
-        <div className="text-[12.5px] font-bold text-grey-500 mb-2">새 문의 시작하기</div>
+        <div className="text-[12.5px] font-bold text-grey-500 mb-2">Start a new inquiry</div>
         <div className="flex gap-2">
           <textarea
-            aria-label="새 문의 내용"
+            aria-label="New inquiry message"
             value={newBody}
             onChange={(e) => setNewBody(e.target.value)}
-            placeholder="문의 내용을 입력해주세요"
+            placeholder="Type your inquiry"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
           />
           <button
@@ -98,7 +98,7 @@ export default function StudentConsultantMessengerTab() {
             onClick={handleStart}
             className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
           >
-            문의하기
+            Send inquiry
           </button>
         </div>
       </section>
@@ -115,15 +115,15 @@ export default function StudentConsultantMessengerTab() {
               (subTab === t ? "bg-ink text-white" : "bg-grey-100 text-grey-600")
             }
           >
-            {t === "open" ? "진행 중 문의" : "지난 문의"}
+            {t === "open" ? "Open inquiries" : "Past inquiries"}
           </button>
         ))}
       </div>
 
-      {inquiries === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+      {inquiries === null && !error && <p className="text-[13px] text-grey-500">Loading...</p>}
       {inquiries && visible.length === 0 && (
         <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          {subTab === "open" ? "진행 중인 문의가 없습니다." : "지난 문의가 없습니다."}
+          {subTab === "open" ? "No open inquiries." : "No past inquiries."}
         </p>
       )}
       {inquiries && visible.length > 0 && (
@@ -138,7 +138,7 @@ export default function StudentConsultantMessengerTab() {
                 <div className="min-w-0">
                   <p className="text-[13px] text-ink truncate">{i.firstMessage}</p>
                   <p className="text-[11px] text-grey-500 mt-0.5">
-                    {i.status === "closed" ? `종료됨 · ${formatDateTime(i.closedAt, tz)}` : `최근 메시지 ${formatDateTime(i.lastMessageAt, tz)}`}
+                    {i.status === "closed" ? `Closed · ${formatDateTime(i.closedAt, tz)}` : `Last message ${formatDateTime(i.lastMessageAt, tz)}`}
                   </p>
                 </div>
                 <span className="text-[11px] font-bold text-grey-400 shrink-0">›</span>
@@ -162,7 +162,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
   function loadMessages() {
     listMyHouseholdInquiryMessagesAction(inquiry.id)
       .then(setMessages)
-      .catch((e) => setError(e instanceof Error ? e.message : "메시지를 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Could not load messages."));
   }
 
   useEffect(() => {
@@ -179,7 +179,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
       setDraft("");
       loadMessages();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "전송에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Could not send the message.");
     } finally {
       setSending(false);
     }
@@ -188,29 +188,29 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
   return (
     <div className="max-w-[720px] px-5 py-6">
       <button type="button" onClick={onBack} className="text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform mb-4">
-        ← 문의 목록으로
+        ← Back to inquiries
       </button>
       {readOnly && (
         <p className="text-[12px] font-bold text-grey-500 bg-grey-100 rounded-lg px-3 py-2 mb-3">
-          종료된 문의입니다({formatDateTime(inquiry.closedAt, tz)}) — 읽기 전용이며, 이어서 문의하려면 목록에서 새 문의를 시작해주세요.
+          This inquiry is closed ({formatDateTime(inquiry.closedAt, tz)}) — it&apos;s read-only. To continue, start a new inquiry from the list.
         </p>
       )}
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
-        {messages === null && !error && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+        {messages === null && !error && <p className="text-[13px] text-grey-500">Loading...</p>}
         {messages && messages.length > 0 && (
           <div className="space-y-2 mb-3 max-h-[420px] overflow-y-auto">
             {messages.map((m) => {
               const isMine = m.senderRole === "student";
               const label =
                 m.senderRole === "admin"
-                  ? "관리자"
+                  ? "ALTON team"
                   : m.senderRole === "consultant"
-                    ? "담당 컨설턴트"
+                    ? "Consultant"
                     : m.senderRole === "guardian"
-                      ? "보호자"
-                      : "나";
+                      ? "Parent"
+                      : "Me";
               return (
                 <div
                   key={m.id}
@@ -228,10 +228,10 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
         {!readOnly && (
           <div className="flex gap-2">
             <textarea
-              aria-label="메시지 내용"
+              aria-label="Message"
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
-              placeholder="메시지를 입력해주세요"
+              placeholder="Type a message"
               className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[54px]"
             />
             <button
@@ -240,7 +240,7 @@ function InquiryDetail({ inquiry, onBack }: { inquiry: HouseholdInquirySummary; 
               onClick={handleSend}
               className="px-4 py-2 rounded-lg bg-ink text-white text-[13px] font-bold disabled:opacity-50 self-end"
             >
-              전송
+              Send
             </button>
           </div>
         )}

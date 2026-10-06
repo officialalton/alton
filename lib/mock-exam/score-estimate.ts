@@ -10,7 +10,7 @@
 // 아래 ANCHORS/너비 규칙만 교체하면 된다.
 
 export const SCORE_MODEL_VERSION = "v1-adaptive";
-export const SCORE_DISCLAIMER = "실제 SAT·College Board 점수와 동등하지 않은 학습 진단 결과입니다. 예상 점수 범위는 내부 추정치입니다.";
+export const SCORE_DISCLAIMER = "These results are a learning diagnostic and are not equivalent to an official SAT / College Board score. Score ranges are internal estimates.";
 
 /** 학생 결과 화면(영어 UI)용 — 2026-10-02 UAT B1. */
 export const SCORE_DISCLAIMER_EN =

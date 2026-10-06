@@ -61,9 +61,9 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
   }
   const tzSelector = (
     <label className="block mb-3">
-      <span className="block text-[12px] font-bold text-grey-500 mb-1">Time zone: {displayTimezoneLabel(tz)}</span>
+      <span className="block text-[12px] font-bold text-grey-500 mb-1">Display timezone: {displayTimezoneLabel(tz)}</span>
       <select
-        aria-label="Time zone"
+        aria-label="Display timezone"
         value={tz}
         onChange={(e) => changeTimezone(e.target.value)}
         className="w-full rounded-lg border-[1.5px] border-grey-200 bg-white px-3 py-2 text-[13px] text-ink"
@@ -89,7 +89,7 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
     const to = new Date(from.getTime() + rangeDays * 24 * 60 * 60 * 1000);
     fetchSlots(from.toISOString(), to.toISOString())
       .then((rows) => setSlots(rows))
-      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load available times."))
+      .catch((e) => setError(e instanceof Error ? e.message : "Could not load available times."))
       .finally(() => setLoading(false));
   }, [fetchSlots, rangeDays]);
 
@@ -163,9 +163,9 @@ const ConsultSlotPicker = forwardRef<ConsultSlotPickerHandle, ConsultSlotPickerP
         </div>
         <div data-testid="consult-slot-times">
           {!selectedDateKey ? (
-            <p className="text-[13px] text-grey-500">Pick a date on the calendar first.</p>
+            <p className="text-[13px] text-grey-500">Select a date on the calendar first.</p>
           ) : slotsForSelectedDate.length === 0 ? (
-            <p className="text-[13px] text-grey-500">No open times on this date. Please choose another day.</p>
+            <p className="text-[13px] text-grey-500">No times are available on that date. Please pick another date.</p>
           ) : (
             <div className="flex flex-wrap gap-2" role="group" aria-label="Choose a consultation time">
               {slotsForSelectedDate.map((s) => {

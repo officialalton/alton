@@ -14,9 +14,9 @@ import AutoGrowTextarea from "@/app/session/[id]/AutoGrowTextarea";
 import AssetMaterialViewer from "@/app/session/[id]/AssetMaterialViewer";
 
 const DIFF_LABEL: Record<string, string> = {
-  easy: "쉬움",
-  medium: "보통",
-  hard: "어려움",
+  easy: "Easy",
+  medium: "Medium",
+  hard: "Hard",
 };
 
 const DIFF_COLOR: Record<string, string> = {
@@ -94,7 +94,7 @@ function AssetLibraryDocView({
       <div className="border-b-[1.5px] border-grey-200 px-5 sm:px-8 py-4">
         <h1 className="text-[18px] font-extrabold text-ink">{doc.title}</h1>
         <p className="text-[12px] text-grey-500 mt-1">
-          {doc.kind === "pdf" ? `PDF${doc.asset?.pageCount ? ` · ${doc.asset.pageCount}쪽` : ""}` : "영상"} · 지금 공개된 버전
+          {doc.kind === "pdf" ? `PDF${doc.asset?.pageCount ? ` · ${doc.asset.pageCount} ${doc.asset.pageCount === 1 ? "page" : "pages"}` : ""}` : "Video"} · Current published version
         </p>
       </div>
       {doc.asset ? (
@@ -114,7 +114,7 @@ function AssetLibraryDocView({
           tipAccess={viewerRole === "admin" ? "edit" : "none"}
         />
       ) : (
-        <p className="px-8 py-10 text-[13px] text-grey-500">이 자료의 공개 버전이 기록되지 않았습니다.</p>
+        <p className="px-8 py-10 text-[13px] text-grey-500">No published version has been recorded for this material.</p>
       )}
     </div>
   );
@@ -196,7 +196,7 @@ function HtmlLibraryDocView({
       <AdjacentNav prevDoc={prevDoc} nextDoc={nextDoc} />
       <div className="border-b border-grey-200 px-6 py-3">
         <div className="text-[11px] font-bold text-grey-500 mb-0.5">
-          📖 교재 라이브러리
+          📖 Material Library
         </div>
         <div className="text-[15px] font-bold text-ink">{doc.title}</div>
       </div>
@@ -204,7 +204,7 @@ function HtmlLibraryDocView({
       <div className="grid grid-cols-[220px_1fr]">
         <nav className="border-r border-grey-200 p-4 sticky top-0 self-start h-[calc(100vh-56px)] overflow-y-auto">
           <div className="text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-            목차
+            Contents
           </div>
           {doc.sections.map((s) => (
             <button
@@ -241,7 +241,7 @@ function HtmlLibraryDocView({
               {isTeacherLikeRole(viewerRole) && s.teachingTip && (
                 <div className="mt-3 text-[12.5px] leading-[1.65] bg-yellow-bg border border-[#F2D98A] rounded-[10px] px-4 py-3.5 text-[#6B5300]">
                   <b className="block text-[11px] uppercase tracking-wide text-[#4A3900] mb-1.5">
-                    💡 티칭 팁 (선생님 전용)
+                    💡 Teaching tip (teachers only)
                   </b>
                   <div
                     className="[&_b]:font-bold"
@@ -301,7 +301,7 @@ function LibraryProblemCard({
     try {
       const result = await retryMcAttempt(problem.id, selected);
       if (!result.done) {
-        setMessage("오답입니다. 다시 선택해보세요.");
+        setMessage("Incorrect. Try again.");
         setTimeout(() => {
           setSelected(null);
           setMessage(null);
@@ -310,10 +310,10 @@ function LibraryProblemCard({
         setDone(true);
         setRevealedCorrectIndex(result.correctIndex ?? null);
         setRevealedExplanation(result.explanation ?? "");
-        setMessage(result.correct ? "정답입니다!" : "정답을 확인하세요.");
+        setMessage(result.correct ? "Correct!" : "Check the correct answer.");
       }
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "채점 중 오류가 발생했어요.");
+      setMessage(e instanceof Error ? e.message : "Something went wrong while grading.");
     } finally {
       setSubmitting(false);
     }
@@ -327,7 +327,7 @@ function LibraryProblemCard({
       setSubmittedResponse(essayText.trim());
       setRevealedExplanation(result.explanation ?? "");
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "제출 중 오류가 발생했어요.");
+      setMessage(e instanceof Error ? e.message : "Something went wrong while submitting.");
     } finally {
       setSubmitting(false);
     }
@@ -341,7 +341,7 @@ function LibraryProblemCard({
       setSubmittedResponse(dataUrl);
       setRevealedExplanation(result.explanation ?? "");
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "제출 중 오류가 발생했어요.");
+      setMessage(e instanceof Error ? e.message : "Something went wrong while submitting.");
     } finally {
       setSubmitting(false);
     }
@@ -374,7 +374,7 @@ function LibraryProblemCard({
           ))}
         {isTeacherLike && problem.format === "mc" && problem.correctIndex !== null && (
           <span className="ml-auto text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-[#0b2545] text-white">
-            정답: {String.fromCharCode(65 + problem.correctIndex)}
+            Answer: {String.fromCharCode(65 + problem.correctIndex)}
           </span>
         )}
       </div>
@@ -385,7 +385,7 @@ function LibraryProblemCard({
 
       {!isStudent && !isTeacherLike && (
         <p className="text-[12.5px] text-grey-500">
-          이 문제는 학생 계정으로 로그인해야 풀 수 있습니다.
+          Sign in with a student account to solve this problem.
         </p>
       )}
 
@@ -428,7 +428,7 @@ function LibraryProblemCard({
                 onClick={handleGradeMc}
                 className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
               >
-                채점하기
+                Check answer
               </button>
               {message && (
                 <span className="text-[12.5px] text-grey-500">{message}</span>
@@ -466,7 +466,7 @@ function LibraryProblemCard({
               <AutoGrowTextarea
                 value={essayText}
                 onChange={setEssayText}
-                placeholder="답안을 입력하세요"
+                placeholder="Write your answer"
               />
               <div className="mt-3">
                 <button
@@ -474,7 +474,7 @@ function LibraryProblemCard({
                   onClick={handleSubmitEssay}
                   className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
                 >
-                  제출하기
+                  Submit
                 </button>
               </div>
             </>
@@ -496,7 +496,7 @@ function LibraryProblemCard({
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={submittedResponse}
-              alt="제출한 풀이"
+              alt="Submitted work"
               className="border border-grey-200 rounded-lg max-w-full"
             />
           )}
@@ -506,7 +506,7 @@ function LibraryProblemCard({
       {showAnswer && (
         <div className="bg-[#EDF2FB] rounded-[10px] px-4 py-3.5 text-[13px] text-[#1c2f4d] leading-[1.65] mt-3.5">
           <b className="block text-[11px] uppercase tracking-wide text-[#0b2545] mb-1">
-            해설
+            Explanation
           </b>
           {isTeacherLike ? problem.explanation : revealedExplanation}
         </div>

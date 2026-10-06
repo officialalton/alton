@@ -76,7 +76,7 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
       workId: `mock:${a.attempt_id}:${a.set_item_id}`,
       sessionId: a.attempt_id as string,
       source: "mock_exam",
-      subjectName: "모의고사",
+      subjectName: "Mock Exam",
       startsAt: (attempt?.submitted_at as string | null) ?? (attempt?.graded_at as string | null) ?? null,
       unitTitle: (examSet?.name as string | undefined) ?? null,
       format,

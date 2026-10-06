@@ -4,11 +4,11 @@ import { useState } from "react";
 import { requestParentPayment } from "./credits-actions";
 import type { CreditsData } from "./credits-data";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtIntl } from "@/lib/format-datetime";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 function formatDate(iso: string | null, tz: string): string {
   if (!iso) return "-";
-  return fmtIntl(new Date(iso), { year: "numeric", month: "long", day: "numeric" }, tz);
+  return fmtIntlEn(new Date(iso), { year: "numeric", month: "long", day: "numeric" }, tz);
 }
 
 export default function CreditsTab({ data }: { data: CreditsData }) {
@@ -25,7 +25,7 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
       const { guardianName } = await requestParentPayment();
       setConfirmedFor(guardianName);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "요청에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Request failed.");
     } finally {
       setRequesting(false);
     }
@@ -34,19 +34,19 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
   return (
     <div className="max-w-[480px]">
       <p className="text-[13px] text-grey-500 mb-5">
-        보유한 수업권 현황을 확인하세요. 충전은 학부모 계정에서 진행됩니다.
+        Check your lesson credits here. Purchases are made from the parent account.
       </p>
 
       {(data.regularRemaining > 0 || data.trialEntitlement) && (
         <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4">
-          <h2 className="text-[14px] font-bold text-ink mb-3">보유 수업권</h2>
+          <h2 className="text-[14px] font-bold text-ink mb-3">Your Lesson Credits</h2>
           {data.regularRemaining > 0 && (
             <div className="mb-3">
               <div className="text-[13px] font-bold text-ink">
-                정규수업권 잔여 {data.regularRemaining}회
+                {data.regularRemaining} regular {data.regularRemaining === 1 ? "lesson" : "lessons"} remaining
               </div>
               <div className="text-[12px] text-grey-500">
-                가장 빠른 만료일: {formatDate(data.regularNearestExpiry, tz)}
+                Earliest expiry: {formatDate(data.regularNearestExpiry, tz)}
               </div>
             </div>
           )}
@@ -55,10 +55,10 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
               잔여가 0이 되면(체험 수업 예약에 소진됨) 그냥 사라진다. */}
           {data.trialEntitlement && (
             <div className="border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
-              <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
+              <p className="text-[12px] font-bold text-ink">1 trial lesson credit (60 min) available</p>
               <p className="text-[11.5px] text-grey-500 mt-0.5">
-                만료 {formatDate(data.trialEntitlement.expiresAt, tz)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
-                예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
+                The trial lesson must start by {formatDate(data.trialEntitlement.expiresAt, tz)} (bookings after that date cannot
+                use it) · Separate from regular credits; cannot be purchased, refunded, or transferred.
               </p>
             </div>
           )}
@@ -66,11 +66,11 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
       )}
 
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
-        <h2 className="text-[14px] font-bold text-ink mb-3">수업권 현황</h2>
+        <h2 className="text-[14px] font-bold text-ink mb-3">Credit Balance</h2>
         <div className="text-[28px] font-extrabold text-ink">
           {data.balance}
           <span className="text-[14px] font-semibold text-grey-500 ml-1.5">
-            장 보유
+            {data.balance === 1 ? "credit" : "credits"}
           </span>
         </div>
 
@@ -80,17 +80,17 @@ export default function CreditsTab({ data }: { data: CreditsData }) {
             onClick={handleRequest}
             className="w-full mt-3.5 text-[13px] font-bold px-4 py-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
           >
-            {requesting ? "요청 중..." : "부모님께 결제 요청"}
+            {requesting ? "Sending..." : "Ask parent to purchase"}
           </button>
         ) : (
           <p className="text-[12px] text-grey-500 mt-3.5">
-            연결된 학부모 계정이 없어 결제 요청을 보낼 수 없습니다.
+            No linked parent account, so a purchase request cannot be sent.
           </p>
         )}
 
         {confirmedFor && (
           <p className="text-[13px] font-semibold text-green mt-3">
-            {confirmedFor} 학부모님께 수업권 충전 요청 알림을 보냈습니다.
+            A credit purchase request was sent to {confirmedFor}.
           </p>
         )}
         {error && (

@@ -72,11 +72,11 @@ export function VocabSaveToggleBar({ controller }: { controller: VocabSaveContro
         aria-pressed={saveMode}
         className={`rounded px-2 py-1 text-[11.5px] font-bold ${saveMode ? "bg-ink text-white" : "text-ink"}`}
       >
-        {saveMode ? "📖 단어 저장 끄기" : "📖 단어 저장 켜기"}
+        {saveMode ? "📖 Word saving off" : "📖 Word saving on"}
       </button>
       {saveMode && folders && !addingFolder && (
         <select
-          aria-label="저장할 폴더"
+          aria-label="Folder to save to"
           value={folderId ?? ""}
           onChange={(e) => onFolderSelect(e.target.value)}
           className="text-[11px] border border-grey-200 rounded px-1 py-0.5 bg-white max-w-[110px]"
@@ -86,7 +86,7 @@ export function VocabSaveToggleBar({ controller }: { controller: VocabSaveContro
               {f.name}
             </option>
           ))}
-          <option value="__new__">+ 새 폴더</option>
+          <option value="__new__">+ New folder</option>
         </select>
       )}
       {saveMode && addingFolder && (
@@ -101,11 +101,11 @@ export function VocabSaveToggleBar({ controller }: { controller: VocabSaveContro
             autoFocus
             value={newFolderName}
             onChange={(e) => setNewFolderName(e.target.value)}
-            placeholder="새 폴더 이름"
+            placeholder="New folder name"
             className="text-[11px] border border-grey-200 rounded px-1 py-0.5 w-20"
           />
           <button type="submit" className="text-[11px] font-bold text-ink">
-            추가
+            Add
           </button>
         </form>
       )}

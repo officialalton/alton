@@ -18,15 +18,15 @@ describe("BoardColumnsView 카드 상세(감사 필드)", () => {
       />,
     );
     const text = screen.getByTestId("board-card-audit").textContent ?? "";
-    expect(text).toContain("생성: 김선생 · 2026. 09. 20. 10:30");
-    expect(text).toContain("최종 편집: 박컨설턴트 · 2026. 09. 21. 14:05");
+    expect(text).toContain("Created: 김선생 · 09/20/2026, 10:30");
+    expect(text).toContain("Last edited: 박컨설턴트 · 09/21/2026, 14:05");
   });
 
   it("편집자·편집일을 모르는 기존 할 일은 '알 수 없음'으로 표시한다", () => {
     render(<BoardColumnsView cards={[manual({ audit: { createdByName: null, createdAt: "2026-09-20T01:30:00Z", updatedByName: null, updatedAt: null } })]} />);
     const text = screen.getByTestId("board-card-audit").textContent ?? "";
-    expect(text).toContain("생성: 알 수 없음");
-    expect(text).toContain("최종 편집: 알 수 없음 · 알 수 없음");
+    expect(text).toContain("Created: Unknown");
+    expect(text).toContain("Last edited: Unknown · Unknown");
   });
 
   it("자동 카드(감사 정보 없음)에는 상세를 만들지 않는다", () => {

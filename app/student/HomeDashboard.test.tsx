@@ -26,7 +26,7 @@ describe("HomeDashboard", () => {
         onShowLessons={vi.fn()}
       />
     );
-    expect(screen.getByText("예정된 수업이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No upcoming lessons.")).toBeInTheDocument();
   });
 
   it("예정된 수업이 있으면 목록에 보여준다", () => {
@@ -51,7 +51,7 @@ describe("HomeDashboard", () => {
         onShowLessons={vi.fn()}
       />
     );
-    expect(screen.getByText(/SAT Math · 8회차/)).toBeInTheDocument();
+    expect(screen.getByText(/SAT Math · Session 8/)).toBeInTheDocument();
     expect(screen.getByText("박서연")).toBeInTheDocument();
   });
 
@@ -81,7 +81,7 @@ describe("HomeDashboard", () => {
       />
     );
     fireEvent.click(screen.getByText("15"));
-    expect(screen.getByText("SAT Math · 8회차")).toBeInTheDocument();
+    expect(screen.getByText("SAT Math · Session 8")).toBeInTheDocument();
   });
 
   it("전체 보기 버튼(예정 수업)이 콜백을 호출한다", () => {
@@ -89,7 +89,7 @@ describe("HomeDashboard", () => {
     // 제거됐다(Home에서 이미 보이므로 별도 탭이 불필요). 예정 수업 쪽만 남는다.
     const onShowLessons = vi.fn();
     render(<HomeDashboard studentName="지훈" data={baseData} onShowLessons={onShowLessons} />);
-    fireEvent.click(screen.getByText("전체 보기 →"));
+    fireEvent.click(screen.getByText("View all →"));
     expect(onShowLessons).toHaveBeenCalled();
   });
 
@@ -112,8 +112,8 @@ describe("HomeDashboard", () => {
     render(
       <HomeDashboard studentName="지훈" data={data} onShowLessons={vi.fn()} />
     );
-    expect(screen.getByText("오늘 수업")).toBeInTheDocument();
-    fireEvent.click(screen.getByText("입장하기 →"));
+    expect(screen.getByText("Today's lesson")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Join →"));
     expect(pushMock).toHaveBeenCalledWith("/session/today-session");
   });
 
@@ -136,7 +136,7 @@ describe("HomeDashboard", () => {
     render(
       <HomeDashboard studentName="지훈" data={data} onShowLessons={vi.fn()} />
     );
-    expect(screen.queryByText("오늘 수업")).not.toBeInTheDocument();
-    expect(screen.getByText(/다음 수업까지 D-/)).toBeInTheDocument();
+    expect(screen.queryByText("Today's lesson")).not.toBeInTheDocument();
+    expect(screen.getByText(/until your next lesson/)).toBeInTheDocument();
   });
 });

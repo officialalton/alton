@@ -43,15 +43,15 @@ export async function retryMcAttempt(
 
   // RLS 로 볼 수 있는 문제인지 확인 뒤 정답·해설은 서버 admin 으로(컬럼 권한 회수, 20261904000000).
   const { data: visible } = await supabase.from("problems").select("id").eq("id", problemId).single();
-  if (!visible) throw new Error("문제를 찾을 수 없습니다.");
+  if (!visible) throw new Error("Problem not found.");
   const problem = (await loadLegacyProblemAnswers([problemId])).get(problemId);
-  if (!problem) throw new Error("문제를 찾을 수 없습니다.");
+  if (!problem) throw new Error("Problem not found.");
 
   const prior = await countRetryAttempts(supabase, userId, problemId);
   const wrongSoFar = prior.filter((a) => a.correct === false).length;
   const alreadyCorrect = prior.some((a) => a.correct === true);
   if (alreadyCorrect || wrongSoFar >= 3) {
-    throw new Error("이미 채점이 끝난 문제입니다.");
+    throw new Error("This problem has already been graded.");
   }
 
   const correct = problem.correctIndex === selectedIndex;
@@ -84,7 +84,7 @@ async function retryOnceGraded(
   const { supabase, userId } = await requireUser();
 
   const { data: visible } = await supabase.from("problems").select("id, format").eq("id", problemId).single();
-  if (!visible) throw new Error("문제를 찾을 수 없습니다.");
+  if (!visible) throw new Error("Problem not found.");
   const answer = (await loadLegacyProblemAnswers([problemId])).get(problemId);
 
   const { error } = await supabase.from("session_problem_attempts").insert({
@@ -103,7 +103,7 @@ async function retryOnceGraded(
 }
 
 export async function retryEssayAttempt(problemId: string, text: string) {
-  if (!text.trim()) throw new Error("답안을 입력해주세요.");
+  if (!text.trim()) throw new Error("Please enter an answer.");
   return retryOnceGraded(problemId, text.trim(), "essay");
 }
 
@@ -116,7 +116,7 @@ export async function saveTeacherPick(
   reasons: string[],
   reasonText: string | null
 ) {
-  if (reasons.length === 0) throw new Error("사유를 하나 이상 선택해주세요.");
+  if (reasons.length === 0) throw new Error("Please select at least one reason.");
   const { supabase, userId } = await requireUser();
   const { error } = await supabase.from("teacher_problem_tags").upsert(
     {

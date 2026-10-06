@@ -61,7 +61,7 @@ export default function RoadmapView({
         setSavedFlash(true);
         setTimeout(() => setSavedFlash(false), 2000);
       } catch (e) {
-        setError(e instanceof Error ? e.message : "Couldn't save.");
+        setError(e instanceof Error ? e.message : "Failed to save.");
       }
     });
   }
@@ -78,7 +78,7 @@ export default function RoadmapView({
           맥락 요약으로 보여준다. */}
       {subTab !== "profile" && (
       <div className={cardClass}>
-        <div className={cardTitleClass}>Roadmap summary</div>
+        <div className={cardTitleClass}>Roadmap Summary</div>
         <div className="grid grid-cols-2 gap-3 text-[12.5px]">
           <div>
             <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Profile completeness</div>
@@ -94,7 +94,7 @@ export default function RoadmapView({
             <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Target colleges / majors</div>
             <div className="font-bold text-ink">
               {[...data.collegeInterests.targetColleges.slice(0, 2), ...data.collegeInterests.intendedMajors.slice(0, 1)]
-                .join(", ") || "Not entered"}
+                .join(" · ") || "Not entered"}
             </div>
           </div>
           <div>
@@ -118,7 +118,7 @@ export default function RoadmapView({
         items={[
           { id: "profile", label: "Profile" },
           { id: "roadmap", label: "Roadmap" },
-          { id: "colleges", label: "College Explore" },
+          { id: "colleges", label: "College Explorer" },
         ]}
         activeId={subTab}
         onSelect={setSubTab}
@@ -199,7 +199,7 @@ function ProfileSections({
           <div className="text-[12.5px] space-y-1">
             <div>Expected graduation year: {data.academicProfile.graduationYear ?? "Not entered"}</div>
             <div>Curriculum: {data.academicProfile.curriculumType ?? "Not entered"}</div>
-            <div>Current subjects: {data.academicProfile.currentSubjects.join(", ") || "Not entered"}</div>
+            <div>Current courses: {data.academicProfile.currentSubjects.join(", ") || "Not entered"}</div>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
@@ -216,13 +216,13 @@ function ProfileSections({
               <label className={labelClass}>Curriculum</label>
               <input
                 className={inputClass}
-                placeholder="e.g. Korean public / US / IB"
+                placeholder="e.g. Korean public / American / IB"
                 value={curriculumType}
                 onChange={(e) => setCurriculumType(e.target.value)}
               />
             </div>
             <div className="col-span-2">
-              <label className={labelClass}>Current subjects (comma-separated)</label>
+              <label className={labelClass}>Current courses (comma-separated)</label>
               <input className={inputClass} value={currentSubjects} onChange={(e) => setCurrentSubjects(e.target.value)} />
             </div>
             <div className="col-span-2">
@@ -264,7 +264,7 @@ function ProfileSections({
 
       {profileSubTab === "colleges" && (
       <div className={cardClass}>
-        <div className={cardTitleClass}>3. Interests and college goals</div>
+        <div className={cardTitleClass}>3. Interests & College Goals</div>
         {readOnly ? (
           <div className="text-[12.5px] space-y-1">
             <div>Intended majors: {data.collegeInterests.intendedMajors.join(", ") || "Not entered"}</div>
@@ -355,12 +355,12 @@ function ProfileSummaryCard({ data }: { data: RoadmapData }) {
   return (
     <>
       <div className={cardClass}>
-        <div className={cardTitleClass}>Academic summary</div>
+        <div className={cardTitleClass}>Academic Summary</div>
         <div className="grid grid-cols-2 gap-3 text-[12.5px]">
           <div>
-            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Grade / School</div>
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Grade · School</div>
             <div className="font-bold text-ink">
-              {data.grade ?? "Not entered"} / {data.schoolName ?? "Not entered"}
+              {data.grade ?? "Not entered"} · {data.schoolName ?? "Not entered"}
             </div>
           </div>
           <div>
@@ -370,23 +370,23 @@ function ProfileSummaryCard({ data }: { data: RoadmapData }) {
             </div>
           </div>
           <div>
-            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Curriculum / Graduation</div>
+            <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Curriculum · Graduation</div>
             <div className="font-bold text-ink">
               {data.academicProfile.curriculumType ?? "Not entered"}
-              {data.academicProfile.graduationYear ? ` / ${data.academicProfile.graduationYear}` : ""}
+              {data.academicProfile.graduationYear ? ` · ${data.academicProfile.graduationYear}` : ""}
             </div>
           </div>
           <div>
             <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Courses</div>
             <div className="font-bold text-ink">
-              {activeCourses.length} in progress, {completedCourses.length} completed
+              Taking {activeCourses.length} · Completed {completedCourses.length}
             </div>
           </div>
           <div className="col-span-2">
             <div className="text-grey-300 text-[10.5px] font-bold mb-0.5">Latest test score</div>
             <div className="font-bold text-ink">
               {latestTest
-                ? `${latestTest.testType} ${latestTest.score ?? "-"} (${latestTest.testDate ?? "date not entered"})`
+                ? `${latestTest.testType} ${latestTest.score ?? "-"} (${latestTest.testDate ?? "no date"})`
                 : "Not entered"}
             </div>
           </div>
@@ -394,7 +394,7 @@ function ProfileSummaryCard({ data }: { data: RoadmapData }) {
       </div>
 
       <div className={cardClass}>
-        <div className={cardTitleClass}>College interests summary</div>
+        <div className={cardTitleClass}>College Interests Summary</div>
         <div className="text-[12.5px] space-y-1">
           <div>Intended majors: {data.collegeInterests.intendedMajors.join(", ") || "Not entered"}</div>
           <div>Target colleges: {data.collegeInterests.targetColleges.join(", ") || "Not entered"}</div>
@@ -403,7 +403,7 @@ function ProfileSummaryCard({ data }: { data: RoadmapData }) {
       </div>
 
       <div className={cardClass}>
-        <div className={cardTitleClass}>Activities, awards, and prep summary</div>
+        <div className={cardTitleClass}>Activities · Awards · Prep Summary</div>
         <div className="text-[12.5px] space-y-1">
           <div>Activities: {data.activities.length}</div>
           <div>Awards: {data.awards.length}</div>
@@ -417,7 +417,7 @@ function ProfileSummaryCard({ data }: { data: RoadmapData }) {
 }
 
 const COURSE_STATUS_LABELS: Record<"taking" | "completed", string> = {
-  taking: "In progress",
+  taking: "Taking",
   completed: "Completed",
 };
 
@@ -485,9 +485,9 @@ function CoursesCard({
         <div key={c.id} className="flex items-center justify-between text-[12.5px] border-b border-grey-100 py-1.5">
           <div>
             <span className="font-bold text-ink">{c.courseName}</span>
-            <span className="text-grey-500"> / {COURSE_STATUS_LABELS[c.status]}</span>
-            {c.score && <span className="text-grey-500"> / Score {c.score}</span>}
-            {c.academicYear && <span className="text-grey-500"> / {c.academicYear}</span>}
+            <span className="text-grey-500"> · {COURSE_STATUS_LABELS[c.status]}</span>
+            {c.score && <span className="text-grey-500"> · Score {c.score}</span>}
+            {c.academicYear && <span className="text-grey-500"> · {c.academicYear}</span>}
             {c.gradeLevel && <span className="text-grey-500"> · {c.gradeLevel}</span>}
           </div>
           {!readOnly && (
@@ -511,7 +511,7 @@ function CoursesCard({
         <div className="grid grid-cols-2 gap-2 mt-3">
           <input className={inputClass} placeholder="Course name" value={courseName} onChange={(e) => setCourseName(e.target.value)} />
           <select className={inputClass} value={status} onChange={(e) => setStatus(e.target.value as "taking" | "completed")}>
-            <option value="taking">In progress</option>
+            <option value="taking">Taking</option>
             <option value="completed">Completed</option>
           </select>
           <input className={inputClass} placeholder="Score" value={score} onChange={(e) => setScore(e.target.value)} />
@@ -524,7 +524,7 @@ function CoursesCard({
           />
           <input
             className={inputClass}
-            placeholder="Grade taken (e.g. 10th)"
+            placeholder="Grade taken (e.g. Grade 10)"
             value={gradeLevel}
             onChange={(e) => setGradeLevel(e.target.value)}
           />
@@ -572,7 +572,7 @@ function GradesCard({
 
   return (
     <div className={cardClass}>
-      <div className={cardTitleClass}>1. Grade, school, and GPA</div>
+      <div className={cardTitleClass}>1. Grade · School · GPA</div>
       {readOnly ? (
         <div className="text-[12.5px] space-y-1">
           <div>Grade: {data.grade ?? "Not entered"}</div>
@@ -590,7 +590,7 @@ function GradesCard({
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className={labelClass}>Grade</label>
-            <input className={inputClass} placeholder="e.g. 11th grade" value={grade} onChange={(e) => setGrade(e.target.value)} />
+            <input className={inputClass} placeholder="e.g. Grade 11" value={grade} onChange={(e) => setGrade(e.target.value)} />
           </div>
           <div>
             <label className={labelClass}>School</label>
@@ -646,7 +646,7 @@ function GradesCard({
               }}
             />
             <label htmlFor="no-class-rank" className="text-[12px] text-grey-500">
-              My school doesn&apos;t rank students
+              My school does not rank students
             </label>
           </div>
           <div className="col-span-2">
@@ -677,7 +677,7 @@ function GradesCard({
   );
 }
 
-const SPECIAL_SCHOOL_OPTIONS = ["HBCU", "여대", "군사학교", "인문대(Liberal Arts)", "본국 내 학교만", "기타"];
+const SPECIAL_SCHOOL_OPTIONS = ["HBCU", "Women's college", "Military academy", "Liberal arts college", "Home-country schools only", "Other"];
 
 function DemographicsCard({
   data,
@@ -718,7 +718,7 @@ function DemographicsCard({
     <div className={cardClass}>
       <div className={cardTitleClass}>0. Demographics (optional)</div>
       <p className="text-[11.5px] text-grey-500 mb-2">
-        All fields are optional and are not visible to teachers (only the student, parents, and admins can see them).
+        All fields are optional and are not visible to teachers (only the student, parents, and admins can view them).
       </p>
       <div className="grid grid-cols-2 gap-3">
         <div>
@@ -759,7 +759,7 @@ function DemographicsCard({
           </select>
         </div>
         <div>
-          <label className={labelClass}>Max annual budget (USD)</label>
+          <label className={labelClass}>Maximum annual budget (USD)</label>
           <input className={inputClass} type="number" min={0} value={maxAnnualBudget} onChange={(e) => setMaxAnnualBudget(e.target.value)} />
         </div>
         <div>
@@ -794,7 +794,7 @@ function DemographicsCard({
           <input className={inputClass} value={legacySchools} onChange={(e) => setLegacySchools(e.target.value)} />
         </div>
         <div>
-          <label className={labelClass}>Religious affiliation</label>
+          <label className={labelClass}>Religion</label>
           <input className={inputClass} value={religiousAffiliation} onChange={(e) => setReligiousAffiliation(e.target.value)} />
         </div>
         <div className="col-span-2">
@@ -871,22 +871,22 @@ function TestRecordsCard({
   const [scoreScience, setScoreScience] = useState("");
 
   const kindLabel: Record<TestRecordKind, string> = {
-    actual: "Past score",
+    actual: "Test history",
     target: "Target score",
-    planned: "Next test plan",
+    planned: "Next planned test",
   };
 
   return (
     <div className={cardClass}>
-      <div className={cardTitleClass}>2. Test scores</div>
+      <div className={cardTitleClass}>2. Test Scores</div>
       <div className="space-y-2 mb-3">
-        {data.testRecords.length === 0 && <div className="text-[12.5px] text-grey-300">No test records yet.</div>}
+        {data.testRecords.length === 0 && <div className="text-[12.5px] text-grey-300">No test records added yet.</div>}
         {data.testRecords.map((r) => (
           <div key={r.id} className="flex items-center justify-between text-[12.5px] border-b border-grey-100 pb-1.5">
             <div>
               <span className="font-bold text-ink">{r.testType}</span> · {kindLabel[r.recordKind]}
               {r.testDate && <span className="text-grey-500"> · {r.testDate}</span>}
-              {r.score !== null && <span className="text-grey-500"> / Total {r.score}</span>}
+              {r.score !== null && <span className="text-grey-500"> · Total {r.score}</span>}
               {(r.scoreMath !== null || r.scoreReadingWriting !== null || r.scoreEnglish !== null || r.scoreScience !== null) && (
                 <span className="text-grey-300">
                   {" "}
@@ -922,9 +922,9 @@ function TestRecordsCard({
             value={recordKind}
             onChange={(e) => setRecordKind(e.target.value as TestRecordKind)}
           >
-            <option value="actual">Past score</option>
+            <option value="actual">Test history</option>
             <option value="target">Target score</option>
-            <option value="planned">Next test plan</option>
+            <option value="planned">Next planned test</option>
           </select>
           <input className={inputClass} type="date" value={testDate} onChange={(e) => setTestDate(e.target.value)} />
           <input
@@ -1033,7 +1033,7 @@ function ApExamsSection({
   return (
     <div className="mt-4 pt-3 border-t border-grey-100">
       <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
-        AP exams (optional)
+        AP Exams (optional)
       </div>
       {data.apExams.length === 0 && <div className="text-[12.5px] text-grey-300 mb-2">No AP exams added yet.</div>}
       {data.apExams.map((a) => (
@@ -1041,7 +1041,7 @@ function ApExamsSection({
           <div>
             <span className="font-bold text-ink">{a.courseName}</span>
             {a.examYear && <span className="text-grey-500"> · {a.examYear}</span>}
-            {a.score !== null && <span className="text-grey-500"> / Score {a.score}</span>}
+            {a.score !== null && <span className="text-grey-500"> · Score {a.score}</span>}
           </div>
           {!readOnly && (
             <button
@@ -1064,7 +1064,7 @@ function ApExamsSection({
             onChange={(e) => setCourseName(e.target.value)}
           />
           <input className={inputClass} type="number" placeholder="Year" value={examYear} onChange={(e) => setExamYear(e.target.value)} />
-          <input className={inputClass} type="number" min={1} max={5} placeholder="Score (1–5)" value={apScore} onChange={(e) => setApScore(e.target.value)} />
+          <input className={inputClass} type="number" min={1} max={5} placeholder="Score (1-5)" value={apScore} onChange={(e) => setApScore(e.target.value)} />
           <div className="col-span-3">
             <button
               type="button"
@@ -1115,7 +1115,7 @@ function ActivitiesAndAwardsCard({
 
   return (
     <div className={cardClass}>
-      <div className={cardTitleClass}>4. Activities and awards</div>
+      <div className={cardTitleClass}>4. Activities & Awards</div>
       <div className="text-[11px] font-bold text-grey-300 mt-2 mb-1">Activities</div>
       {data.activities.length === 0 && <div className="text-[12.5px] text-grey-300 mb-2">No activities added yet.</div>}
       {data.activities.map((a) => (
@@ -1124,7 +1124,7 @@ function ActivitiesAndAwardsCard({
             <span className="font-bold text-ink">{a.activityName}</span>
             {a.field && <span className="text-grey-500"> · {a.field}</span>}
             {a.role && <span className="text-grey-500"> · {a.role}</span>}
-            {a.tier && <span className="text-grey-500"> / {ACTIVITY_TIER_LABELS[a.tier]}</span>}
+            {a.tier && <span className="text-grey-500"> · {ACTIVITY_TIER_LABELS[a.tier]}</span>}
             {a.leadershipSummary && <div className="text-grey-300 text-[11.5px]">Leadership: {a.leadershipSummary}</div>}
             {a.achievementSummary && <div className="text-grey-300 text-[11.5px]">Achievements: {a.achievementSummary}</div>}
           </div>
@@ -1223,7 +1223,7 @@ function ActivitiesAndAwardsCard({
           />
           <input
             className={inputClass}
-            placeholder="Level (school, national, etc.)"
+            placeholder="Level (school / national, etc.)"
             value={awardLevel}
             onChange={(e) => setAwardLevel(e.target.value)}
           />
@@ -1272,7 +1272,7 @@ function PrepStatusCard({
 
   return (
     <div className={cardClass}>
-      <div className={cardTitleClass}>5. Prep status</div>
+      <div className={cardTitleClass}>5. Prep Status</div>
       <div className="space-y-2">
         {data.prepItems.map((item) => (
           <div key={item.id} className="flex items-center justify-between text-[12.5px] border-b border-grey-100 pb-1.5">
@@ -1280,7 +1280,7 @@ function PrepStatusCard({
               <span className="font-bold text-ink">
                 {item.itemType === "other" ? item.customLabel : PREP_ITEM_LABELS[item.itemType]}
               </span>
-              {item.notes && <span className="text-grey-300"> / {item.notes}</span>}
+              {item.notes && <span className="text-grey-300"> · {item.notes}</span>}
             </div>
             {readOnly ? (
               <span className="text-[11px] font-bold text-grey-500">{PREP_STATUS_LABELS[item.status]}</span>
@@ -1398,7 +1398,7 @@ function GoalsCard({
         <div className="col-span-2">
           <label className={labelClass}>Target colleges</label>
           <div className="text-[12.5px] text-ink">
-            {data.collegeInterests.targetColleges.join(", ") || "Not entered (fill in under 'Interests and college goals')"}
+            {data.collegeInterests.targetColleges.join(", ") || "Not entered (fill in under 'Interests & College Goals' above)"}
           </div>
         </div>
         {readOnly ? (
@@ -1412,7 +1412,7 @@ function GoalsCard({
               <div className="text-[12.5px] text-ink">{data.academicProfile.targetSat ?? "Not entered"}</div>
             </div>
             <div>
-              <div className={labelClass}>Target number of APs</div>
+              <div className={labelClass}>Target AP count</div>
               <div className="text-[12.5px] text-ink">{data.academicProfile.targetApCount ?? "Not entered"}</div>
             </div>
             <div className="col-span-2">
@@ -1431,7 +1431,7 @@ function GoalsCard({
               <input className={inputClass} type="number" min={400} max={1600} value={targetSat} onChange={(e) => setTargetSat(e.target.value)} />
             </div>
             <div>
-              <label className={labelClass}>Target number of APs</label>
+              <label className={labelClass}>Target AP count</label>
               <input className={inputClass} type="number" min={0} value={targetApCount} onChange={(e) => setTargetApCount(e.target.value)} />
             </div>
             <div className="col-span-2">
@@ -1519,7 +1519,7 @@ function RoadmapSection({
         className="mb-4"
       />
       <div className={cardClass}>
-        <div className={cardTitleClass}>Monthly and semester milestones</div>
+        <div className={cardTitleClass}>Monthly & Semester Milestones</div>
         {sorted.length === 0 && <div className="text-[12.5px] text-grey-300">No milestones added yet.</div>}
         <div className="space-y-3">
           {sorted.map((m) => (
@@ -1568,7 +1568,7 @@ function RoadmapSection({
                 )}
               </div>
               <div className="text-[11.5px] text-grey-300 mt-0.5">
-                {m.targetPeriod || m.targetDate || "Timing TBD"}
+                {m.targetPeriod || m.targetDate || "Date TBD"}
               </div>
               {m.description && <div className="text-[12.5px] text-grey-500 mt-1">{m.description}</div>}
               {m.notes && <div className="text-[12px] text-grey-300 mt-1">Notes: {m.notes}</div>}
@@ -1580,7 +1580,7 @@ function RoadmapSection({
             <input className={inputClass} placeholder="Task (title)" value={title} onChange={(e) => setTitle(e.target.value)} />
             <input
               className={inputClass}
-              placeholder="Timing (e.g. November 2026)"
+              placeholder="When (e.g. November 2026)"
               value={targetPeriod}
               onChange={(e) => setTargetPeriod(e.target.value)}
             />
@@ -1619,7 +1619,7 @@ function RoadmapSection({
       </div>
 
       <div className={cardClass}>
-        <div className={cardTitleClass}>AI monthly review</div>
+        <div className={cardTitleClass}>AI Monthly Review</div>
         <div className="text-[12.5px] text-grey-300">
           {data.latestMonthlyReview?.status === "generated"
             ? data.latestMonthlyReview.content

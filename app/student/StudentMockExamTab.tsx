@@ -30,7 +30,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         if (!cancelled) setOverview(o);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "모의고사 목록을 불러오지 못했습니다.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load the mock exam list.");
       });
     return () => {
       cancelled = true;
@@ -58,22 +58,22 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
     setDetailError(null);
     loadMockExamAttemptDetailAction(id)
       .then((d) => setDetail(d))
-      .catch((e) => setDetailError(e instanceof Error ? e.message : "결과를 불러오지 못했습니다."));
+      .catch((e) => setDetailError(e instanceof Error ? e.message : "Couldn't load the results."));
   }
 
   if (error) return <p className="text-[13px] text-red">{error}</p>;
-  if (overview === null) return <p className="text-[13px] text-grey-500">불러오는 중…</p>;
+  if (overview === null) return <p className="text-[13px] text-grey-500">Loading…</p>;
 
   if (openId) {
     return (
       <div>
         <button type="button" onClick={() => setOpenId(null)} className="mb-3 text-[12px] font-semibold text-grey-500">
-          ← 모의고사 목록으로
+          ← Back to Mock Exams
         </button>
         {detailError ? (
           <p className="text-[13px] text-red">{detailError}</p>
         ) : !detail ? (
-          <p className="text-[13px] text-grey-500">불러오는 중…</p>
+          <p className="text-[13px] text-grey-500">Loading…</p>
         ) : (
           <MockExamResultView attempt={detail} readOnly={false} />
         )}

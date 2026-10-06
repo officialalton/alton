@@ -389,7 +389,7 @@ export async function getUniversityDetailForStudent(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   return loadUniversityDetail(createAdminClient(), universityId);
 }
 
@@ -871,7 +871,7 @@ export async function loadAdmissionMetrics(universityId: string): Promise<Admiss
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   const db = createAdminClient();
   const { data, error } = await db
     .from("university_admission_metrics")
@@ -1055,7 +1055,7 @@ export async function loadUniversityEssayPrompts(universityId: string, cycleYear
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   const db = createAdminClient();
   let query = db
     .from("university_essay_prompts")
@@ -1204,7 +1204,7 @@ const AFFILIATION_COLUMNS = "id, university_id, kind, label, division, source_ur
 export async function loadUniversityAffiliations(universityId: string): Promise<UniversityAffiliation[]> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   const db = createAdminClient();
   const { data, error } = await db
     .from("university_affiliations")
@@ -1294,7 +1294,7 @@ const DEMOGRAPHIC_COLUMNS = "id, university_id, cycle_year, category, population
 export async function loadUniversityDemographics(universityId: string): Promise<UniversityDemographic[]> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   const db = createAdminClient();
   const { data, error } = await db
     .from("university_demographics")
@@ -1391,7 +1391,7 @@ const FINANCIAL_AID_PROGRAM_COLUMNS =
 export async function loadUniversityFinancialAidPrograms(universityId: string): Promise<UniversityFinancialAidProgram[]> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("로그인이 필요합니다.");
+  if (!user) throw new Error("Please sign in.");
   const db = createAdminClient();
   const { data, error } = await db
     .from("university_financial_aid_programs")

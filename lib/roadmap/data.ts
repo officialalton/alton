@@ -265,7 +265,7 @@ export async function loadRoadmapData(
 
   return {
     studentId,
-    studentName: profileRes.data?.name ?? "학생",
+    studentName: profileRes.data?.name ?? "Student",
     grade: studentRes.data?.grade ?? null,
     memberType: studentRes.data?.member_type === "free" ? "free" : "tutoring",
     schoolName: studentRes.data?.school_name ?? null,

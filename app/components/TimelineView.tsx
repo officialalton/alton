@@ -37,7 +37,7 @@ export default function TimelineView({
     return (
       <div>
         {undated.length === 0 ? (
-          <p className="text-[13px] text-grey-400">표시할 항목이 없습니다.</p>
+          <p className="text-[13px] text-grey-400">Nothing to show.</p>
         ) : (
           <UndatedSection cards={undated} disableLinks={disableLinks} />
         )}
@@ -142,7 +142,7 @@ function GanttRow({
 function UndatedSection({ cards, disableLinks }: { cards: BoardCard[]; disableLinks?: boolean }) {
   return (
     <div className="mb-3">
-      <div className="text-[11px] font-bold text-grey-400 mb-1.5">기한 없음 ({cards.length})</div>
+      <div className="text-[11px] font-bold text-grey-400 mb-1.5">No due date ({cards.length})</div>
       <div className="flex flex-wrap gap-1.5">
         {cards.map((card) => {
           const chip = (

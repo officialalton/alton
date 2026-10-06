@@ -42,7 +42,7 @@ describe("ChatPanel", () => {
       />
     );
     expect(screen.getByText("이번 주 과제 확인 부탁해요")).toBeInTheDocument();
-    expect(screen.getByText("선생님")).toBeInTheDocument();
+    expect(screen.getByText("Teacher")).toBeInTheDocument();
   });
 
   it("메시지를 보내면 실제 액션을 호출하고 목록에 추가한다", async () => {
@@ -60,10 +60,10 @@ describe("ChatPanel", () => {
         onBack={vi.fn()}
       />
     );
-    fireEvent.change(screen.getByPlaceholderText("메시지를 입력하세요"), {
+    fireEvent.change(screen.getByPlaceholderText("Type a message"), {
       target: { value: "네 확인했습니다" },
     });
-    fireEvent.click(screen.getByText("전송"));
+    fireEvent.click(screen.getByText("Send"));
     await waitFor(() =>
       expect(chatActions.sendChatMessage).toHaveBeenCalledWith("th1", "네 확인했습니다")
     );
@@ -81,6 +81,6 @@ describe("ChatPanel", () => {
         onBack={vi.fn()}
       />
     );
-    expect(screen.getByText("전송")).toBeDisabled();
+    expect(screen.getByText("Send")).toBeDisabled();
   });
 });

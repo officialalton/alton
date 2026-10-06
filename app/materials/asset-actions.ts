@@ -24,7 +24,7 @@ export async function getAssetVersionUrlAction(versionId: string): Promise<Asset
     .select("id, snapshot")
     .eq("id", versionId)
     .maybeSingle();
-  if (!version) return { ok: false, error: "이 자료를 볼 수 없습니다." };
+  if (!version) return { ok: false, error: "You can't view this material." };
 
   const snapshot = version.snapshot as {
     kind?: string;
@@ -32,7 +32,7 @@ export async function getAssetVersionUrlAction(versionId: string): Promise<Asset
   } | null;
   const asset = snapshot?.asset;
   if (!snapshot?.kind || snapshot.kind === "html" || !asset?.bucket || !asset?.path) {
-    return { ok: false, error: "이 버전에는 고정 사본이 기록되지 않았습니다." };
+    return { ok: false, error: "No fixed copy was recorded for this version." };
   }
 
   const admin = createAdminClient();
@@ -41,7 +41,7 @@ export async function getAssetVersionUrlAction(versionId: string): Promise<Asset
     .createSignedUrl(asset.path, EXPIRES_IN_SECONDS);
   if (error || !signed?.signedUrl) {
     console.error(JSON.stringify({ event: "curriculum_asset_sign_failed", versionId, message: error?.message }));
-    return { ok: false, error: "자료 주소를 만들지 못했습니다. 다시 시도해주세요." };
+    return { ok: false, error: "Couldn't create a link to the material. Please try again." };
   }
   return {
     ok: true,

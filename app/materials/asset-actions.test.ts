@@ -31,7 +31,7 @@ describe("getAssetVersionUrlAction", () => {
     mockRequire.mockResolvedValue({ supabase: sessionClient() });
     mockMaybeSingle.mockResolvedValue({ data: null });
     mockCreateSignedUrl.mockClear();
-    expect(await getAssetVersionUrlAction("private-version")).toEqual({ ok: false, error: "이 자료를 볼 수 없습니다." });
+    expect(await getAssetVersionUrlAction("private-version")).toEqual({ ok: false, error: "You can't view this material." });
     expect(mockCreateSignedUrl).not.toHaveBeenCalled();
   });
 

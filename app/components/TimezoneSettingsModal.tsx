@@ -88,7 +88,7 @@ export default function TimezoneSettingsModal({
       // 저장이 끝나면 창을 닫는다(반영은 refresh로 바로 된다).
       onClose();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Couldn't save your settings.");
+      setError(e instanceof Error ? e.message : "Failed to save");
     } finally {
       setSaving(false);
     }
@@ -98,7 +98,7 @@ export default function TimezoneSettingsModal({
     <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-xl border-[1.5px] border-grey-200 w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-[15px] font-bold text-ink">Time zone settings</h2>
+          <h2 className="text-[15px] font-bold text-ink">Timezone settings</h2>
           <button
             type="button"
             onClick={onClose}
@@ -110,14 +110,14 @@ export default function TimezoneSettingsModal({
         </div>
 
         {loading ? (
-          <p className="text-[13px] text-grey-400 py-6 text-center">Loading…</p>
+          <p className="text-[13px] text-grey-400 py-6 text-center">Loading...</p>
         ) : (
           <>
             {showHouseholdDefault && (
               <div className="mb-5">
-                <p className="text-[12.5px] font-semibold text-ink mb-1">Family default time zone</p>
+                <p className="text-[12.5px] font-semibold text-ink mb-1">Family default timezone</p>
                 <p className="text-[11.5px] text-grey-400 mb-2">
-                  Family members who haven&apos;t set a personal time zone will see schedules in this time zone.
+                  Schedules are shown in this timezone for family members who have not set a personal timezone.
                   {!isPrimaryGuardian && " (Only the primary parent can change this.)"}
                 </p>
                 <select
@@ -134,13 +134,13 @@ export default function TimezoneSettingsModal({
             )}
 
             <div className="mb-5">
-              <p className="text-[12.5px] font-semibold text-ink mb-1">My time zone</p>
+              <p className="text-[12.5px] font-semibold text-ink mb-1">My personal timezone</p>
               <p className="text-[11.5px] text-grey-400 mb-2">
                 {suggested && !done
-                  ? "We pre-selected the time zone detected from your browser. Check that it's correct and save."
+                  ? "We preselected the timezone detected from your browser. Check it and save."
                   : hasOverride
-                  ? "You've set a personal time zone. It stays even if the family default changes."
-                  : "You're following the family default. Selecting a different time zone sets it as your personal time zone."}
+                  ? "You set a personal timezone. It stays even if the family default changes."
+                  : "You are following the family default. Selecting a different timezone sets it as your personal timezone."}
               </p>
               <select
                 value={personal}
@@ -181,7 +181,7 @@ export default function TimezoneSettingsModal({
             disabled={saving || loading}
             className="px-4 py-2 rounded-lg bg-red text-white text-[13px] font-semibold disabled:opacity-50"
           >
-            {saving ? "Saving…" : "Save"}
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
       </div>

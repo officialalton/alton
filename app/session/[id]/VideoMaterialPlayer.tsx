@@ -29,7 +29,7 @@ export default function VideoMaterialPlayer({ url, mimeType, title }: { url: str
         aria-label={title}
       >
         <source src={url} type={mimeType} />
-        이 브라우저는 영상을 재생하지 못합니다.
+        Your browser can&apos;t play this video.
       </video>
     </div>
   );

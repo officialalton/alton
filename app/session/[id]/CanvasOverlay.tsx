@@ -387,23 +387,23 @@ export default function CanvasOverlay({
             (showAnnotations ? "border-grey-200 text-ink" : "bg-ink text-white border-ink")
           }
         >
-          {showAnnotations ? "필기 숨기고 넓게 읽기" : "필기 보기"}
+          {showAnnotations ? "Hide notes for wider reading" : "Show notes"}
         </button>
         {!writable && canDraw && !isPrivate && (
           <span className="text-[11px] text-grey-500">
-            선생님이 함께 보며 설명하는 필기입니다 — 내 필기는 “나만 보는 필기”에 남겨요
+            These are your teacher&apos;s shared notes — keep your own in &quot;My private notes&quot;
           </span>
         )}
         {layoutPinned && layoutScale < 1 && (
           <>
             <span className="text-[11px] text-grey-500">
-              필기 위치를 지키려고 본문을 축소해서 보여주고 있어요
+              Content is scaled down to keep your notes in place
             </span>
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setZoom((z) => Math.max(1, Math.round((z - 0.25) * 100) / 100))}
                 disabled={zoom <= 1}
-                aria-label="작게 보기"
+                aria-label="Zoom out"
                 className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-grey-200 disabled:opacity-40"
               >
                 －
@@ -414,7 +414,7 @@ export default function CanvasOverlay({
               <button
                 onClick={() => setZoom((z) => Math.min(3, Math.round((z + 0.25) * 100) / 100))}
                 disabled={zoom >= 3}
-                aria-label="크게 보기"
+                aria-label="Zoom in"
                 className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-grey-200 disabled:opacity-40"
               >
                 ＋
@@ -426,14 +426,14 @@ export default function CanvasOverlay({
 
       {writable && showAnnotations && !contentReady && (
         <p className="text-[11.5px] text-grey-500 mb-2">
-          교재의 그림을 불러오는 중입니다 — 다 불러온 뒤에 필기해야 위치가 어긋나지 않아요.
+          Loading images in this material — wait until they finish so your notes stay aligned.
         </p>
       )}
 
       {writable && showAnnotations && contentReady && imageProblem && (
         <p className="text-[11.5px] text-grey-500 mb-2">
-          일부 그림을 불러오지 못했습니다. 그대로 필기할 수 있지만, 그림이 나중에
-          나타나면 위치가 밀릴 수 있어요.{" "}
+          Some images failed to load. You can still write notes, but they may shift
+          if the images appear later.{" "}
           <button
             onClick={() => {
               setContentReady(false);
@@ -442,7 +442,7 @@ export default function CanvasOverlay({
             }}
             className="font-bold text-ink underline"
           >
-            다시 불러오기
+            Reload
           </button>
         </p>
       )}
@@ -456,7 +456,7 @@ export default function CanvasOverlay({
               (drawMode ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
             }
           >
-            ✏️ 필기 모드
+            ✏️ Drawing mode
           </button>
           {drawMode && (
             <>
@@ -478,20 +478,20 @@ export default function CanvasOverlay({
                   onClick={() => setTool("pen")}
                   className={"px-3 py-1 " + (tool === "pen" ? "bg-grey-100 text-ink" : "text-grey-500")}
                 >
-                  펜
+                  Pen
                 </button>
                 <button
                   onClick={() => setTool("eraser")}
                   className={"px-3 py-1 " + (tool === "eraser" ? "bg-grey-100 text-ink" : "text-grey-500")}
                 >
-                  지우개
+                  Eraser
                 </button>
               </div>
               <button
                 onClick={handleClearAll}
                 className="text-[12px] font-bold px-3 py-1.5 rounded-lg border border-grey-200"
               >
-                전체 지우기
+                Clear all
               </button>
             </>
           )}
@@ -499,17 +499,17 @@ export default function CanvasOverlay({
               공유되지 않는다는 사실도 화면에서 읽혀야 한다. */}
           {isPrivate && (
             <span className="text-[11px] font-semibold text-grey-500">
-              나만 보는 필기
+              My private notes
             </span>
           )}
           {saveError ? (
             <span className="text-[11px] font-bold text-red">
-              저장하지 못했습니다 — 잠시 뒤 다시 그리면 저장됩니다
+              Couldn&apos;t save — draw again in a moment and it will save
             </span>
           ) : (
             saved && (
               <span className="text-[11px] font-bold text-green">
-                ✓ 이번 수업 필기 저장됨
+                ✓ Notes saved for this lesson
               </span>
             )
           )}

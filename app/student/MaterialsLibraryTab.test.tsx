@@ -55,7 +55,7 @@ describe("MaterialsLibraryTab", () => {
   it("교재가 없으면 안내 문구를 보여준다", () => {
     render(<MaterialsLibraryTab tree={[]} />);
     expect(
-      screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
+      screen.getByText("No materials have been assigned yet. Your teacher will have them ready soon.")
     ).toBeInTheDocument();
   });
 });

@@ -76,7 +76,7 @@ async function drawOne(x = 10) {
 
 async function enableDrawing() {
   // 저장된 획을 읽어 오기 전에는 '필기 준비 중…' — 버튼 글자가 바뀌기를 기다린다(호출 여부만 보면 레이스).
-  fireEvent.click(await screen.findByRole("button", { name: "✏️ 필기 시작" }));
+  fireEvent.click(await screen.findByRole("button", { name: "✏️ Start drawing" }));
 }
 
 describe("PDF 페이지 필기 레이어", () => {
@@ -85,7 +85,7 @@ describe("PDF 페이지 필기 레이어", () => {
     expect(screen.getByTestId("pdf-page-annotation-layer").className).toContain("pointer-events-none");
     expect(screen.getByTestId("pdf-input-layer").className).toContain("pointer-events-none");
     // 도구 막대는 눌러야 하니 스스로는 클릭을 받는다.
-    expect(screen.getByRole("button", { name: /필기/ }).closest("div")!.className).toContain("pointer-events-auto");
+    expect(screen.getByRole("button", { name: /drawing|Preparing notes/ }).closest("div")!.className).toContain("pointer-events-auto");
   });
 
   it("한 획은 eventId 를 달고 이 페이지의 대상으로만 저장된다", async () => {
@@ -180,13 +180,13 @@ describe("PDF 페이지 필기 레이어", () => {
     await act(async () => {
       expect(await ref.current!.flush()).toBe(false);
     });
-    expect(screen.getByTestId("pdf-save-state")).toHaveTextContent("저장 안 됨");
+    expect(screen.getByTestId("pdf-save-state")).toHaveTextContent("Not saved");
     expect(ref.current?.hasUnsaved()).toBe(true);
 
     vi.mocked(actions.appendPageStrokeEvents).mockImplementationOnce(async ({ segments }) => ({
       savedEventIds: segments.map((s) => s.eventId!),
     }));
-    fireEvent.click(screen.getByRole("button", { name: "다시 시도" }));
+    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
     await waitFor(() => expect(ref.current?.hasUnsaved()).toBe(false));
     // 재시도는 같은 eventId 를 다시 보낸다 — 서버가 중복을 막는 근거.
     const [first, second] = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
@@ -197,7 +197,7 @@ describe("PDF 페이지 필기 레이어", () => {
     render(<PdfPageAnnotationLayer target={target(1)} role="reader" width={600} height={800} />);
     await waitFor(() => expect(actions.loadPageStrokes).toHaveBeenCalledTimes(2));
     expect(screen.queryByTestId("pdf-input-layer")).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /필기 시작/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Start drawing/ })).not.toBeInTheDocument();
     expect(screen.getByTestId("pdf-teacher-layer")).toBeInTheDocument();
     expect(screen.getByTestId("pdf-student-layer")).toBeInTheDocument();
   });
@@ -210,7 +210,7 @@ describe("PDF 페이지 필기 레이어", () => {
     const ref = createRef<PdfPageAnnotationHandle>();
     render(<PdfPageAnnotationLayer ref={ref} target={target(1)} role="teacher" viewerUserId="t1" width={600} height={800} />);
     await enableDrawing();
-    fireEvent.click(screen.getByRole("button", { name: "T 텍스트" }));
+    fireEvent.click(screen.getByRole("button", { name: "T Text" }));
     fireEvent.pointerDown(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
     fireEvent.pointerUp(screen.getByTestId("pdf-input-layer"), { clientX: 120, clientY: 40 });
     const box = screen.getByTestId("pdf-text-input");
@@ -239,7 +239,7 @@ describe("PDF 페이지 필기 레이어", () => {
     await enableDrawing();
     await drawOne();
     await act(async () => {
-      fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
+      fireEvent.click(screen.getByRole("button", { name: "Clear all" }));
     });
     await waitFor(() => expect(actions.appendPageStrokeEvents).toHaveBeenCalledTimes(2));
     const calls = vi.mocked(actions.appendPageStrokeEvents).mock.calls;
@@ -256,7 +256,7 @@ describe("PDF 페이지 필기 레이어", () => {
     window.confirm = vi.fn(() => false);
     render(<PdfPageAnnotationLayer target={target(1)} role="student" viewerUserId="s1" width={600} height={800} />);
     await enableDrawing();
-    fireEvent.click(screen.getByRole("button", { name: "전체 지우기" }));
+    fireEvent.click(screen.getByRole("button", { name: "Clear all" }));
     expect(actions.appendPageStrokeEvents).not.toHaveBeenCalled();
   });
 

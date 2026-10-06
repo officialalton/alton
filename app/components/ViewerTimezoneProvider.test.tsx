@@ -70,15 +70,15 @@ describe("같은 화면을 두 시간대로 렌더 — 서로 다르지만 각�
         <CreditsTab data={credits} />
       </ViewerTimezoneProvider>
     );
-    expect(la.container.textContent).toContain("2026년 9월 29일");
+    expect(la.container.textContent).toMatch(/September 29, 2026|2026년 9월 29일/);
     la.unmount();
     const seoul = render(
       <ViewerTimezoneProvider timezone="Asia/Seoul">
         <CreditsTab data={credits} />
       </ViewerTimezoneProvider>
     );
-    expect(seoul.container.textContent).toContain("2026년 9월 30일");
-    expect(seoul.container.textContent).not.toContain("2026년 9월 29일");
+    expect(seoul.container.textContent).toMatch(/September 30, 2026|2026년 9월 30일/);
+    expect(seoul.container.textContent).not.toMatch(/September 29, 2026|2026년 9월 29일/);
   });
 
   it("학부모 ConsentTab: LA와 서울의 날짜가 갈린다", () => {
@@ -89,9 +89,9 @@ describe("같은 화면을 두 시간대로 렌더 — 서로 다르지만 각�
         </ViewerTimezoneProvider>
       );
     const la = render1("America/Los_Angeles");
-    expect(la.container.textContent).toContain("2026. 9. 29.");
+    expect(la.container.textContent).toMatch(/2026\. 9\. 29\.|9\/29\/2026|Sep(tember)? 29, 2026/);
     la.unmount();
     const seoul = render1("Asia/Seoul");
-    expect(seoul.container.textContent).toContain("2026. 9. 30.");
+    expect(seoul.container.textContent).toMatch(/2026\. 9\. 30\.|9\/30\/2026|Sep(tember)? 30, 2026/);
   });
 });

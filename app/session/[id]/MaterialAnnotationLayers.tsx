@@ -321,7 +321,7 @@ export default function MaterialAnnotationLayers({
             (showStudent ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
           }
         >
-          학생 필기
+          Student notes
         </button>
         <button
           onClick={() => setShowTeacher((v) => !v)}
@@ -331,7 +331,7 @@ export default function MaterialAnnotationLayers({
             (showTeacher ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
           }
         >
-          선생님 필기
+          Teacher notes
         </button>
 
         {writable && (
@@ -339,13 +339,13 @@ export default function MaterialAnnotationLayers({
             onClick={() => setDrawMode((v) => !v)}
             aria-pressed={drawMode}
             disabled={!myLayerVisible}
-            title={!myLayerVisible ? "내 레이어를 켜야 필기할 수 있어요" : undefined}
+            title={!myLayerVisible ? "Turn on your layer to draw" : undefined}
             className={
               "text-[12px] font-bold px-3.5 py-1.5 rounded-full border-[1.5px] disabled:opacity-40 " +
               (drawMode ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
             }
           >
-            ✏️ 필기 모드
+            ✏️ Drawing mode
           </button>
         )}
 
@@ -355,7 +355,7 @@ export default function MaterialAnnotationLayers({
               {COLORS.map((c) => (
                 <button
                   key={c}
-                  aria-label={`색 ${c}`}
+                  aria-label={`Color ${c}`}
                   onClick={() => {
                     setColor(c);
                     setTool("pen");
@@ -376,23 +376,23 @@ export default function MaterialAnnotationLayers({
                 (tool === "eraser" ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
               }
             >
-              지우개
+              Eraser
             </button>
             <span className="text-[11px] font-semibold text-grey-500">
-              {role === "student" ? "학생 필기로 기록됩니다" : "선생님 필기로 기록됩니다"}
+              {role === "student" ? "Saved as student notes" : "Saved as teacher notes"}
             </span>
           </>
         )}
 
         {!writable && (
-          <span className="text-[11px] text-grey-500">보호자는 읽기 전용입니다</span>
+          <span className="text-[11px] text-grey-500">Parents have read-only access</span>
         )}
 
-        {saveState === "saving" && <span className="text-[11px] text-grey-500">저장 중…</span>}
-        {saveState === "saved" && <span className="text-[11px] font-bold text-green">✓ 저장됨</span>}
+        {saveState === "saving" && <span className="text-[11px] text-grey-500">Saving…</span>}
+        {saveState === "saved" && <span className="text-[11px] font-bold text-green">✓ Saved</span>}
         {saveState === "error" && (
           <span className="text-[11px] font-bold text-red">
-            저장하지 못했습니다 — 계속 그리면 다시 시도합니다
+            Couldn&apos;t save — keep drawing and it will retry
           </span>
         )}
 
@@ -401,7 +401,7 @@ export default function MaterialAnnotationLayers({
             <button
               onClick={() => setZoom((z) => Math.max(1, Math.round((z - 0.25) * 100) / 100))}
               disabled={zoom <= 1}
-              aria-label="작게 보기"
+              aria-label="Zoom out"
               className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-grey-200 disabled:opacity-40"
             >
               －
@@ -412,7 +412,7 @@ export default function MaterialAnnotationLayers({
             <button
               onClick={() => setZoom((z) => Math.min(3, Math.round((z + 0.25) * 100) / 100))}
               disabled={zoom >= 3}
-              aria-label="크게 보기"
+              aria-label="Zoom in"
               className="text-[12px] font-bold px-2.5 py-1 rounded-lg border border-grey-200 disabled:opacity-40"
             >
               ＋
@@ -423,13 +423,13 @@ export default function MaterialAnnotationLayers({
 
       {writable && !contentReady && (
         <p className="text-[11.5px] text-grey-500 mb-2">
-          교재의 그림을 불러오는 중입니다 — 다 불러온 뒤에 필기해야 위치가 어긋나지 않아요.
+          Loading images in this material — wait until they finish so your notes stay aligned.
         </p>
       )}
       {writable && contentReady && imageProblem && (
         <p className="text-[11.5px] text-grey-500 mb-2">
-          일부 그림을 불러오지 못했습니다. 그대로 필기할 수 있지만, 그림이 나중에 나타나면
-          위치가 밀릴 수 있어요.{" "}
+          Some images failed to load. You can still write notes, but they may shift
+          if the images appear later.{" "}
           <button
             onClick={() => {
               setContentReady(false);
@@ -438,7 +438,7 @@ export default function MaterialAnnotationLayers({
             }}
             className="font-bold text-ink underline"
           >
-            다시 불러오기
+            Reload
           </button>
         </p>
       )}

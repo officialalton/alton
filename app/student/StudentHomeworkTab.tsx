@@ -9,7 +9,7 @@ export default function StudentHomeworkTab({ batches }: { batches: HomeworkBatch
   return (
     <div className="max-w-[760px] min-w-0">
       <p className="text-[13px] text-grey-500 mb-4">
-        선생님이 낸 과제입니다. 답을 제출하면 선생님이 채점한 뒤 정답과 해설이 열립니다.
+        Assignments from your teacher. Once you submit your answers and your teacher grades them, the answers and explanations will unlock.
       </p>
       <HomeworkBatchPanel batches={batches} viewerRole="student" />
     </div>

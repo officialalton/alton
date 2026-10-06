@@ -24,13 +24,13 @@ async function findStudentHouseholdId(supabase: SupabaseClient, studentId: strin
 
 async function requireStudentHouseholdId(supabase: SupabaseClient, studentId: string): Promise<string> {
   const householdId = await findStudentHouseholdId(supabase, studentId);
-  if (!householdId) throw new Error("소속된 household가 없습니다. 관리자에게 문의해주세요.");
+  if (!householdId) throw new Error("No household is linked to your account. Please contact ALTON support.");
   return householdId;
 }
 
 async function requireStudent(): Promise<{ supabase: SupabaseClient; userId: string }> {
   const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
-  if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
+  if (profile?.role !== "student") throw new Error("Only students can access this.");
   return { supabase, userId: user.id };
 }
 
@@ -77,7 +77,7 @@ export async function listMyHouseholdInquiryMessagesAction(inquiryId: string): P
 
 export async function startMyHouseholdInquiryAction(body: string, subject?: string): Promise<{ inquiryId: string }> {
   const { supabase, userId } = await requireStudent();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const householdId = await requireStudentHouseholdId(supabase, userId);
   const { data: inquiry, error: inquiryError } = await supabase
     .from("household_inquiries")
@@ -98,7 +98,7 @@ export async function startMyHouseholdInquiryAction(body: string, subject?: stri
 
 export async function sendMyHouseholdInquiryMessageAction(inquiryId: string, body: string): Promise<void> {
   const { supabase, userId } = await requireStudent();
-  if (!body.trim()) throw new Error("내용을 입력해주세요.");
+  if (!body.trim()) throw new Error("Please enter a message.");
   const householdId = await requireStudentHouseholdId(supabase, userId);
   const { error } = await supabase.from("household_messages").insert({
     household_id: householdId,
@@ -107,7 +107,7 @@ export async function sendMyHouseholdInquiryMessageAction(inquiryId: string, bod
     sender_role: "student",
     body: body.trim(),
   });
-  if (error) throw new Error(error.message.includes("household_inquiries") ? "종료된 문의입니다. 새 문의를 시작해주세요." : error.message);
+  if (error) throw new Error(error.message.includes("household_inquiries") ? "This inquiry is closed. Please start a new inquiry." : error.message);
 }
 
 // 가구가 아직 없는 학생 계정은 읽지 않은 메시지가 없다 — 셸이 매 페이지 부르는 배지 조회라

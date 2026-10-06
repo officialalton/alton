@@ -6,11 +6,11 @@ import { getLessonReviewsForFamily, type FamilyLessonReview } from "@/app/parent
 import CurriculumOverlayView from "./CurriculumOverlayView";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate } from "@/lib/format-datetime";
+import { fmtDateEn } from "@/lib/format-datetime-en";
 
 const LESSON_TYPE_LABEL: Record<FamilyLessonReview["lessonType"], string> = {
-  trial: "체험",
-  regular: "정규",
+  trial: "Trial",
+  regular: "Regular",
 };
 
 // 2026-09-17(제품 오너 피드백) — 체험 수업으로만 제한하지 않는다: 완료된 모든
@@ -39,13 +39,13 @@ function LessonReviewsDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: st
         onClick={() => setOpen((v) => !v)}
         className="text-[12px] font-semibold text-blue"
       >
-        {open ? "리뷰 닫기" : `수업 리뷰 보기 (${reviews.length})`}
+        {open ? "Hide reviews" : `View lesson reviews (${reviews.length})`}
       </button>
       {open &&
         reviews.map((review) => (
           <div key={review.reviewId} className="mt-2 bg-grey-50 rounded-lg px-3 py-2.5 border border-grey-200">
             <div className="text-[11.5px] font-bold text-grey-500 mb-1">
-              {LESSON_TYPE_LABEL[review.lessonType]} 수업 리뷰 (선생님 확정)
+              {LESSON_TYPE_LABEL[review.lessonType]} lesson review (finalized by teacher)
             </div>
             {review.categoryNotes.map((c) => (
               <div key={c.key} className="mb-1.5">
@@ -58,11 +58,11 @@ function LessonReviewsDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: st
             {/* 확정된 리뷰에 한해서만 이 컴포넌트가 렌더되므로(getLessonReviewsForFamily가
                 final 행만 반환) 미팅록도 항상 확정 이후 것만 노출된다. */}
             <div className="mt-2.5 pt-2.5 border-t border-grey-200">
-              <div className="text-[10.5px] font-bold text-grey-400 mb-1">미팅록 요약</div>
+              <div className="text-[10.5px] font-bold text-grey-400 mb-1">Meeting record summary</div>
               {review.aiSummary ? (
                 <p className="text-[12.5px] text-ink whitespace-pre-wrap mb-1.5">{review.aiSummary}</p>
               ) : (
-                <p className="text-[12px] text-grey-400 mb-1.5">등록된 미팅록이 없습니다.</p>
+                <p className="text-[12px] text-grey-400 mb-1.5">No meeting record available.</p>
               )}
               {review.meetingRecordLink && (
                 <a
@@ -71,7 +71,7 @@ function LessonReviewsDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: st
                   rel="noreferrer"
                   className="text-[12px] font-semibold text-blue underline"
                 >
-                  미팅록 원본 보기(열람 전용)
+                  View original meeting record (read-only)
                 </a>
               )}
             </div>
@@ -82,16 +82,16 @@ function LessonReviewsDisplay({ subjectEnrollmentId }: { subjectEnrollmentId: st
 }
 
 const STATUS_LABEL: Record<SubjectEnrollmentView["status"], string> = {
-  planned: "예정",
-  active: "수강중",
-  paused: "일시중지",
-  completed: "완료",
-  terminated: "종료",
+  planned: "Planned",
+  active: "Active",
+  paused: "Paused",
+  completed: "Completed",
+  terminated: "Ended",
 };
 
 function formatDate(iso: string | null, tz: string): string {
   if (!iso) return "-";
-  return fmtDate(iso, {
+  return fmtDateEn(iso, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -143,8 +143,8 @@ export default function EnrollmentTab({
       <UnderlineSubTabs
         className="mb-5"
         items={[
-          { id: "active", label: "수강중" },
-          { id: "ended", label: "수강 종료" },
+          { id: "active", label: "Active" },
+          { id: "ended", label: "Ended" },
         ]}
         activeId={subTab}
         onSelect={setSubTab}
@@ -152,7 +152,7 @@ export default function EnrollmentTab({
 
       {visibleEnrollments.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          {subTab === "ended" ? "종료된 과목 수강이 없습니다." : "등록된 과목 수강이 없습니다."}
+          {subTab === "ended" ? "No ended courses." : "No enrolled courses."}
         </div>
       ) : (
         visibleEnrollments.map((e) => (
@@ -182,27 +182,27 @@ export default function EnrollmentTab({
             {e.currentTeacher ? (
               <>
                 <div className="text-[13px] text-ink mb-1">
-                  담당 선생님: <span className="font-semibold">{e.currentTeacher.teacherName}</span>
+                  Teacher: <span className="font-semibold">{e.currentTeacher.teacherName}</span>
                 </div>
                 <div className="text-[12px] text-grey-500">
-                  {formatDate(e.currentTeacher.effectiveFrom, tz)}부터
+                  Since {formatDate(e.currentTeacher.effectiveFrom, tz)}
                 </div>
               </>
             ) : e.history.length > 0 ? (
               <div className="text-[13px] text-ink mb-1">
-                마지막 담당 선생님:{" "}
+                Last teacher:{" "}
                 <span className="font-semibold">{e.history[0].teacherName}</span>
               </div>
             ) : (
               <div className="text-[13px] text-ink mb-1">
-                담당 선생님: <span className="font-semibold">배정 전</span>
+                Teacher: <span className="font-semibold">Not assigned yet</span>
               </div>
             )}
 
             {e.upcomingTeacherChange && (
               <div className="mt-2 text-[12px] font-semibold text-red bg-red/5 rounded-lg px-3 py-2">
-                {formatDate(e.upcomingTeacherChange.effectiveFrom, tz)}부터{" "}
-                {e.upcomingTeacherChange.teacherName} 선생님으로 변경 예정
+                Changing to {e.upcomingTeacherChange.teacherName} from{" "}
+                {formatDate(e.upcomingTeacherChange.effectiveFrom, tz)}
               </div>
             )}
 
@@ -211,7 +211,7 @@ export default function EnrollmentTab({
               onClick={() => setOpenCurriculum({ enrollmentId: e.id, subjectName: e.subjectName })}
               className="text-[12px] font-semibold text-blue mt-1"
             >
-              커리큘럼 보기 →
+              View curriculum →
             </button>
 
             <LessonReviewsDisplay subjectEnrollmentId={e.id} />
@@ -219,7 +219,7 @@ export default function EnrollmentTab({
             {e.history.length > 0 && (
               <details className="mt-2.5">
                 <summary className="text-[12px] font-semibold text-grey-500 cursor-pointer">
-                  이전 선생님 변경 이력 ({e.history.length})
+                  Previous teacher history ({e.history.length})
                 </summary>
                 <div className="mt-1.5 space-y-1.5">
                   {e.history.map((h) => (
@@ -227,7 +227,7 @@ export default function EnrollmentTab({
                       key={h.id}
                       className="text-[12px] text-grey-500 border-l-2 border-grey-200 pl-2.5"
                     >
-                      {h.teacherName} — {formatDate(h.effectiveFrom, tz)} ~{" "}
+                      {h.teacherName} — {formatDate(h.effectiveFrom, tz)} –{" "}
                       {formatDate(h.effectiveUntil, tz)}
                       {h.reason ? ` (${h.reason})` : ""}
                     </div>

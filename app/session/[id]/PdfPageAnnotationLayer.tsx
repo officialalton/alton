@@ -291,7 +291,7 @@ export default forwardRef<
    */
   async function clearMine(): Promise<void> {
     if (!myScope) return;
-    if (typeof window !== "undefined" && !window.confirm("이 페이지의 내 필기를 모두 지울까요?")) return;
+    if (typeof window !== "undefined" && !window.confirm("Clear all of your notes on this page?")) return;
     await flush();
     if (myScope === "teacher_shared") teacherStrokesRef.current = [];
     else studentStrokesRef.current = [];
@@ -385,7 +385,7 @@ export default forwardRef<
       {textDraft && myScope && width > 0 && (
         <textarea
           autoFocus
-          aria-label="텍스트 필기"
+          aria-label="Text note"
           data-testid="pdf-text-input"
           value={textDraft.value}
           onChange={(e) => setTextDraft((d) => (d ? { ...d, value: e.target.value } : d))}
@@ -399,7 +399,7 @@ export default forwardRef<
               commitText();
             }
           }}
-          placeholder="입력 후 Enter (줄바꿈은 Shift+Enter)"
+          placeholder="Type, then press Enter (Shift+Enter for a new line)"
           className="absolute pointer-events-auto bg-white/90 border-2 border-red rounded px-1.5 py-1 outline-none resize-none font-semibold text-ink shadow-md"
           style={{
             zIndex: 9,
@@ -429,19 +429,19 @@ export default forwardRef<
               aria-pressed={drawMode}
               className={"text-[11.5px] font-bold px-2 py-1 rounded disabled:opacity-60 " + (drawMode ? "bg-ink text-white" : "text-ink")}
             >
-              {!loaded ? "필기 준비 중…" : drawMode ? "✏️ 필기 끄기" : "✏️ 필기 시작"}
+              {!loaded ? "Preparing notes…" : drawMode ? "✏️ Stop drawing" : "✏️ Start drawing"}
             </button>
             {drawMode && (
               <>
-                <button type="button" onClick={() => setTool("pen")} aria-pressed={tool === "pen"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "pen" ? "bg-grey-100 font-bold" : "")}>펜</button>
-                <button type="button" onClick={() => setTool("eraser")} aria-pressed={tool === "eraser"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "eraser" ? "bg-grey-100 font-bold" : "")}>지우개</button>
-                <button type="button" onClick={() => setTool("text")} aria-pressed={tool === "text"} title="클릭한 자리에 글을 쓴다" className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "text" ? "bg-grey-100 font-bold" : "")}>T 텍스트</button>
-                <button type="button" onClick={() => void clearMine()} title="이 페이지의 내 필기를 모두 지운다" className="text-[11.5px] px-1.5 py-1 rounded text-red">전체 지우기</button>
+                <button type="button" onClick={() => setTool("pen")} aria-pressed={tool === "pen"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "pen" ? "bg-grey-100 font-bold" : "")}>Pen</button>
+                <button type="button" onClick={() => setTool("eraser")} aria-pressed={tool === "eraser"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "eraser" ? "bg-grey-100 font-bold" : "")}>Eraser</button>
+                <button type="button" onClick={() => setTool("text")} aria-pressed={tool === "text"} title="Write text where you click" className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "text" ? "bg-grey-100 font-bold" : "")}>T Text</button>
+                <button type="button" onClick={() => void clearMine()} title="Clear all of your notes on this page" className="text-[11.5px] px-1.5 py-1 rounded text-red">Clear all</button>
                 {COLORS.map((c) => (
                   <button
                     key={c}
                     type="button"
-                    aria-label={`색 ${c}`}
+                    aria-label={`Color ${c}`}
                     aria-pressed={color === c}
                     onClick={() => setColor(c)}
                     className={"w-4 h-4 rounded-full border-2 " + (color === c ? "border-ink" : "border-transparent")}
@@ -454,24 +454,24 @@ export default forwardRef<
         )}
         {myScope && drawMode && tool === "text" && !textDraft && (
           <span className="text-[11px] font-semibold text-ink bg-yellow-50 border border-yellow-200 rounded px-1.5 py-0.5" data-testid="pdf-text-hint">
-            페이지에서 글을 놓을 자리를 클릭하세요
+            Click where you want to place the text
           </span>
         )}
         <label className="text-[11px] text-grey-500 flex items-center gap-1">
-          <input type="checkbox" checked={showTeacher} onChange={(e) => setShowTeacher(e.target.checked)} /> 선생님
+          <input type="checkbox" checked={showTeacher} onChange={(e) => setShowTeacher(e.target.checked)} /> Teacher
         </label>
         <label className="text-[11px] text-grey-500 flex items-center gap-1">
-          <input type="checkbox" checked={showStudent} onChange={(e) => setShowStudent(e.target.checked)} /> 학생
+          <input type="checkbox" checked={showStudent} onChange={(e) => setShowStudent(e.target.checked)} /> Student
         </label>
         <span
           data-testid="pdf-save-state"
           className={"text-[11px] font-semibold " + (saveState === "error" ? "text-red" : "text-grey-500")}
         >
-          {saveState === "saving" ? "저장 중…" : saveState === "saved" ? "저장됨" : saveState === "error" ? "저장 안 됨" : ""}
+          {saveState === "saving" ? "Saving…" : saveState === "saved" ? "Saved" : saveState === "error" ? "Not saved" : ""}
         </span>
         {saveState === "error" && (
           <button type="button" onClick={() => void flush()} className="text-[11px] font-bold text-red underline">
-            다시 시도
+            Retry
           </button>
         )}
       </div>

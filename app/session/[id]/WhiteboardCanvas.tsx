@@ -126,7 +126,7 @@ export default function WhiteboardCanvas({
       strokesRef.current = pixelStrokes;
       setErrorMsg(null);
     } catch (e) {
-      setErrorMsg(e instanceof Error ? e.message : "화이트보드를 불러오지 못했습니다.");
+      setErrorMsg(e instanceof Error ? e.message : "Couldn't load the whiteboard.");
     }
   }, [isV3, sessionId, clearCanvasLocal, toPixel, drawSegment]);
 
@@ -285,7 +285,7 @@ export default function WhiteboardCanvas({
         // setErrorMsg(null)을 호출하므로, 사용자에게 실패를 알리는 메시지는 반드시
         // replay가 끝난 "다음"에 설정해야 덮어써지지 않는다.
         await replayAndRedraw();
-        setErrorMsg(e instanceof Error ? e.message : "필기를 저장하지 못했습니다.");
+        setErrorMsg(e instanceof Error ? e.message : "Couldn't save your drawing.");
       }
     } else {
       scheduleSave();
@@ -293,12 +293,12 @@ export default function WhiteboardCanvas({
   }
 
   async function handleClearAll() {
-    if (!confirm("화이트보드를 전체 지우시겠습니까?")) return;
+    if (!confirm("Clear the entire whiteboard?")) return;
     if (isV3) {
       if (!canClearAll) {
         // 방어적 가드 — canClearAll이 false면 버튼 자체를 렌더링하지 않으므로
         // 정상 흐름에서는 도달하지 않는다. DB(RLS)도 동일하게 최종 강제한다.
-        setErrorMsg("선생님만 전체 지우기를 할 수 있습니다.");
+        setErrorMsg("Only the teacher can clear the whiteboard.");
         return;
       }
       clearCanvasLocal();
@@ -311,7 +311,7 @@ export default function WhiteboardCanvas({
         // 실패 메시지는 반드시 replay 이후에 설정해야 덮어써지지 않는다(위
         // handlePointerUp과 동일한 이유 — R9 corrective).
         await replayAndRedraw(); // 서버가 거부했으면 로컬 낙관적 삭제를 되돌린다.
-        setErrorMsg(e instanceof Error ? e.message : "전체 지우기에 실패했습니다.");
+        setErrorMsg(e instanceof Error ? e.message : "Couldn't clear the whiteboard.");
       }
     } else {
       clearCanvasLocal();
@@ -324,7 +324,7 @@ export default function WhiteboardCanvas({
   return (
     <div>
       <p className="text-[13px] text-grey-500 mb-3">
-        아래로 계속 스크롤하며 필기할 수 있습니다.
+        Keep scrolling down to draw more.
       </p>
 
       {canDraw && (
@@ -336,7 +336,7 @@ export default function WhiteboardCanvas({
               (drawMode ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
             }
           >
-            ✏️ 필기 모드
+            ✏️ Drawing mode
           </button>
           {drawMode && (
             <>
@@ -358,13 +358,13 @@ export default function WhiteboardCanvas({
                   onClick={() => setTool("pen")}
                   className={"px-3 py-1 " + (tool === "pen" ? "bg-grey-100 text-ink" : "text-grey-500")}
                 >
-                  펜
+                  Pen
                 </button>
                 <button
                   onClick={() => setTool("eraser")}
                   className={"px-3 py-1 " + (tool === "eraser" ? "bg-grey-100 text-ink" : "text-grey-500")}
                 >
-                  지우개
+                  Eraser
                 </button>
               </div>
               {/* v3는 canClearAll(선생님/관리자)일 때만, 레거시는 기존처럼 항상 노출 */}
@@ -373,14 +373,14 @@ export default function WhiteboardCanvas({
                   onClick={handleClearAll}
                   className="text-[12px] font-bold px-3 py-1.5 rounded-lg border border-grey-200"
                 >
-                  전체 지우기
+                  Clear all
                 </button>
               )}
             </>
           )}
           {saved && (
             <span className="text-[11px] font-bold text-green">
-              ✓ 저장됨
+              ✓ Saved
             </span>
           )}
           {errorMsg && (

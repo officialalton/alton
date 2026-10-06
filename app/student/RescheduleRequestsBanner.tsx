@@ -18,9 +18,9 @@ export type PendingReschedule = {
 };
 
 function formatDateTime(iso: string, timezone: string): string {
-  return new Intl.DateTimeFormat("ko-KR", {
+  return new Intl.DateTimeFormat("en-US", {
     timeZone: timezone,
-    month: "long",
+    month: "short",
     day: "numeric",
     weekday: "short",
     hour: "numeric",
@@ -59,7 +59,7 @@ export default function RescheduleRequestsBanner({
       await onRespond(requestId, accept);
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "처리에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "Could not process the request.");
     } finally {
       setBusyId(null);
     }
@@ -72,11 +72,11 @@ export default function RescheduleRequestsBanner({
       {error && <p className="text-[12.5px] text-red">{error}</p>}
       {requests.map((r) => (
         <div key={r.id} className="border-[1.5px] border-red/30 bg-red/5 rounded-xl px-4 py-3">
-          <div className="text-[13px] font-bold text-ink">선생님이 수업 시간 변경을 제안했습니다</div>
+          <div className="text-[13px] font-bold text-ink">Your teacher proposed a new lesson time</div>
           <div className="text-[12.5px] text-grey-600 mt-1">
-            제안된 시간: {formatDateTime(r.proposedStartsAt, timezone)}
+            Proposed time: {formatDateTime(r.proposedStartsAt, timezone)}
           </div>
-          {r.reason && <div className="text-[12px] text-grey-500 mt-0.5">사유: {r.reason}</div>}
+          {r.reason && <div className="text-[12px] text-grey-500 mt-0.5">Reason: {r.reason}</div>}
           <div className="flex gap-2 mt-2.5">
             <button
               type="button"
@@ -84,7 +84,7 @@ export default function RescheduleRequestsBanner({
               onClick={() => handleRespond(r.id, true)}
               className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
             >
-              수락
+              Accept
             </button>
             <button
               type="button"
@@ -92,7 +92,7 @@ export default function RescheduleRequestsBanner({
               onClick={() => handleRespond(r.id, false)}
               className="text-[12px] font-bold text-grey-600 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 disabled:opacity-50"
             >
-              거절(기존 시간 유지)
+              Decline (keep current time)
             </button>
           </div>
         </div>

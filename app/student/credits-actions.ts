@@ -13,7 +13,7 @@ export async function requestParentPayment(): Promise<{ guardianName: string }> 
     .eq("profile_id", user.id)
     .eq("role", "child")
     .maybeSingle();
-  if (!childMembership) throw new Error("연결된 학부모 계정이 없습니다.");
+  if (!childMembership) throw new Error("No linked parent account.");
 
   const { data: guardian } = await supabase
     .from("household_members")
@@ -23,18 +23,18 @@ export async function requestParentPayment(): Promise<{ guardianName: string }> 
     .order("is_primary", { ascending: false })
     .limit(1)
     .maybeSingle();
-  if (!guardian) throw new Error("연결된 학부모 계정이 없습니다.");
+  if (!guardian) throw new Error("No linked parent account.");
 
   const guardianName = extractName(guardian.profile);
 
   const { error } = await supabase.from("parent_requests").insert({
     parent_id: guardian.profile_id,
     student_id: user.id,
-    text: "수업권 충전을 요청합니다.",
+    text: "Requesting a lesson credit purchase.",
   });
   if (error) throw new Error(error.message);
 
-  return { guardianName: guardianName || "학부모" };
+  return { guardianName: guardianName || "Parent" };
 }
 
 function extractName(rel: unknown): string {

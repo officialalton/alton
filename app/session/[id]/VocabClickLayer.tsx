@@ -98,16 +98,16 @@ export default function VocabClickLayer({
     const word = popup.word;
     setBusy(true);
     setPopup(null);
-    setStatus(`"${word}" — AI가 뜻을 정리하는 중...`);
+    setStatus(`"${word}" — AI is writing the definition...`);
     try {
       const result = await addVocabWord(studentId, sessionId, word, controller.folderId);
       setStatus(
         result.alreadyExisted
-          ? `"${word}"는 이미 단어장에 있어요.`
-          : `✓ "${word}" 단어장에 추가됨`
+          ? `"${word}" is already in your vocabulary.`
+          : `✓ "${word}" added to vocabulary`
       );
     } catch (err) {
-      setStatus(err instanceof Error ? err.message : "저장 중 오류가 발생했어요.");
+      setStatus(err instanceof Error ? err.message : "Something went wrong while saving.");
     } finally {
       setBusy(false);
       setTimeout(() => setStatus(null), 2500);
@@ -133,7 +133,7 @@ export default function VocabClickLayer({
             confirmAdd();
           }}
         >
-          + &quot;{popup.word}&quot; 단어장에 추가
+          + Add &quot;{popup.word}&quot; to vocabulary
         </div>
       )}
 

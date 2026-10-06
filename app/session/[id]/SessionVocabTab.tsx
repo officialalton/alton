@@ -27,7 +27,7 @@ export default function SessionVocabTab({
     <div className="max-w-[640px] px-8 py-8">
       {isTeacher && (
         <p className="text-[13px] text-grey-500 mb-5">
-          학생 단어장을 그대로 보여줍니다. 여기서 바로 즉석 시험을 낼 수 있습니다.
+          This is the student&apos;s vocabulary list. You can start a quick quiz right here.
         </p>
       )}
 
@@ -38,13 +38,13 @@ export default function SessionVocabTab({
               onClick={() => setTool((v) => (v === "assign" ? null : "assign"))}
               className={"text-[12.5px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] " + (tool === "assign" ? "border-ink bg-ink text-white" : "border-ink text-ink")}
             >
-              단어 배정
+              Assign words
             </button>
             <button
               onClick={() => setTool((v) => (v === "quiz" ? null : "quiz"))}
               className={"text-[12.5px] font-bold px-3.5 py-2 rounded-lg border-[1.5px] " + (tool === "quiz" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
             >
-              즉석 시험(시험보기)
+              Quick quiz
             </button>
           </div>
 
@@ -103,10 +103,10 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-5">
-      <p className="text-[12.5px] font-bold text-grey-500 mb-2">공용 단어장에서 검색해 학생 단어장에 배정</p>
+      <p className="text-[12.5px] font-bold text-grey-500 mb-2">Search the shared word bank and assign to the student&apos;s list</p>
       <div className="flex gap-2 mb-3">
-        <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="영단어 검색" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px] flex-1" />
-        <button onClick={() => void search()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white">검색</button>
+        <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search words" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px] flex-1" />
+        <button onClick={() => void search()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white">Search</button>
       </div>
       {results.length > 0 && (
         <div className="flex flex-col gap-1.5 mb-3 max-h-[220px] overflow-y-auto">
@@ -125,7 +125,7 @@ function LibraryAssign({ studentId, onAssigned }: { studentId: string; onAssigne
         </div>
       )}
       <button disabled={selected.size === 0 || busy} onClick={() => void assign()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-green text-white disabled:opacity-40">
-        {busy ? "배정 중…" : `${selected.size}개 배정`}
+        {busy ? "Assigning…" : `Assign ${selected.size}`}
       </button>
     </div>
   );

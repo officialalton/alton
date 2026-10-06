@@ -53,28 +53,28 @@ describe("교사용 팁 레이어", () => {
 
   it("편집: 로딩 → 빈 안내, 쓰기 시작 후 획이 eventId 와 함께 저장된다", async () => {
     render(<PdfTipLayer versionId="v1" page={1} mode="edit" viewerUserId="admin1" width={600} height={800} />);
-    expect(screen.getByRole("button", { name: "팁 불러오는 중…" })).toBeDisabled();
-    expect(await screen.findByTestId("pdf-tip-empty")).toHaveTextContent("이 쪽에는 팁이 없습니다.");
-    fireEvent.click(await screen.findByRole("button", { name: "✏️ 팁 쓰기 시작" }));
+    expect(screen.getByRole("button", { name: "Loading tips…" })).toBeDisabled();
+    expect(await screen.findByTestId("pdf-tip-empty")).toHaveTextContent("No tips on this page.");
+    fireEvent.click(await screen.findByRole("button", { name: "✏️ Start writing tips" }));
     await drawOne();
     await waitFor(() => expect(tipActions.appendPdfTipEvents).toHaveBeenCalledTimes(1), { timeout: 2000 });
     const call = vi.mocked(tipActions.appendPdfTipEvents).mock.calls[0][0];
     expect(call.versionId).toBe("v1");
     expect(call.pageNumber).toBe(1);
     expect(call.segments[0].eventId).toMatch(/[0-9a-f-]{36}/);
-    expect(await screen.findByText("저장됨")).toBeInTheDocument();
+    expect(await screen.findByText("Saved")).toBeInTheDocument();
   });
 
   it("저장이 실패하면 '저장 안 됨'과 다시 시도가 보이고, 재시도는 같은 eventId 로 다시 보낸다(중복 방지)", async () => {
     vi.mocked(tipActions.appendPdfTipEvents).mockRejectedValueOnce(new Error("network"));
     const ref = createRef<PdfTipLayerHandle>();
     render(<PdfTipLayer ref={ref} versionId="v1" page={1} mode="edit" viewerUserId="admin1" width={600} height={800} />);
-    fireEvent.click(await screen.findByRole("button", { name: "✏️ 팁 쓰기 시작" }));
+    fireEvent.click(await screen.findByRole("button", { name: "✏️ Start writing tips" }));
     await drawOne();
-    await waitFor(() => expect(screen.getByText("저장 안 됨")).toBeInTheDocument(), { timeout: 2000 });
+    await waitFor(() => expect(screen.getByText("Not saved")).toBeInTheDocument(), { timeout: 2000 });
     expect(ref.current?.hasUnsaved()).toBe(true);
     const firstId = vi.mocked(tipActions.appendPdfTipEvents).mock.calls[0][0].segments[0].eventId;
-    fireEvent.click(screen.getByRole("button", { name: "다시 시도" }));
+    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
     await waitFor(() => expect(tipActions.appendPdfTipEvents).toHaveBeenCalledTimes(2));
     expect(vi.mocked(tipActions.appendPdfTipEvents).mock.calls[1][0].segments[0].eventId).toBe(firstId);
     await waitFor(() => expect(ref.current?.hasUnsaved()).toBe(false));
@@ -83,7 +83,7 @@ describe("교사용 팁 레이어", () => {
   it("조회 실패면 오류 안내를 보이되 쓰기는 가능하다", async () => {
     vi.mocked(tipActions.loadPdfTipStrokes).mockRejectedValueOnce(new Error("x"));
     render(<PdfTipLayer versionId="v1" page={1} mode="edit" viewerUserId="admin1" width={600} height={800} />);
-    expect(await screen.findByTestId("pdf-tip-load-error")).toHaveTextContent("팁을 불러오지 못했습니다.");
-    expect(screen.getByRole("button", { name: "✏️ 팁 쓰기 시작" })).toBeEnabled();
+    expect(await screen.findByTestId("pdf-tip-load-error")).toHaveTextContent("Couldn't load tips.");
+    expect(screen.getByRole("button", { name: "✏️ Start writing tips" })).toBeEnabled();
   });
 });

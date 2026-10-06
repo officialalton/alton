@@ -17,7 +17,7 @@ describe("loadMyStatsAction", () => {
   it("학생이 아니면 거절", async () => {
     for (const role of ["parent", "teacher", "admin", "consultant"]) {
       state.role = role;
-      await expect(loadMyStatsAction()).rejects.toThrow("학생만");
+      await expect(loadMyStatsAction()).rejects.toThrow("Only students");
     }
     expect(loader).not.toHaveBeenCalled();
     state.role = "student";

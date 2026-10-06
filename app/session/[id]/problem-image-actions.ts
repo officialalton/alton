@@ -12,12 +12,12 @@ export type ProblemImageUrlResult = { ok: true; url: string; expiresInSeconds: n
 
 export async function getProblemImageUrlAction(bucket: string, path: string): Promise<ProblemImageUrlResult> {
   const { supabase } = await requireUser();
-  if (bucket !== "problem-assets" || !path || path.includes("..")) return { ok: false, error: "잘못된 그림 경로입니다." };
+  if (bucket !== "problem-assets" || !path || path.includes("..")) return { ok: false, error: "Invalid image path." };
   // problem_versions 는 정답이 들어 있어 학생이 직접 읽지 못한다 — 열람 가능 여부는 함수로 확인한다.
   const { data: visible } = await supabase.rpc("problem_figure_visible", { p_path: path });
-  if (visible !== true) return { ok: false, error: "이 그림을 볼 수 없습니다." };
+  if (visible !== true) return { ok: false, error: "You can't view this image." };
   const admin = createAdminClient();
   const { data: signed, error } = await admin.storage.from(bucket).createSignedUrl(path, EXPIRES_IN_SECONDS);
-  if (error || !signed?.signedUrl) return { ok: false, error: "그림 주소를 만들지 못했습니다." };
+  if (error || !signed?.signedUrl) return { ok: false, error: "Couldn't create the image URL." };
   return { ok: true, url: signed.signedUrl, expiresInSeconds: EXPIRES_IN_SECONDS };
 }

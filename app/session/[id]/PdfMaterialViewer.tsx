@@ -148,7 +148,7 @@ export default function PdfPageCanvas({
         if (disposed || generation !== generationRef.current) return;
         const name = (e as { name?: string })?.name;
         if (name === "RenderingCancelledException") return;
-        onError(e instanceof Error ? e.message : "PDF 를 그리지 못했습니다.");
+        onError(e instanceof Error ? e.message : "Couldn't render the PDF.");
       }
     })();
 

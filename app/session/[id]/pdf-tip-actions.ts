@@ -62,7 +62,7 @@ export type PdfTipStateResult = { ok: true; state: PdfTipReviewState } | { ok: f
 export async function getPdfTipReviewStateAction(versionId: string): Promise<PdfTipStateResult> {
   const { supabase } = await requireUser();
   const { data, error } = await supabase.rpc("pdf_tip_review_state", { p_version_id: versionId });
-  if (error) return { ok: false, error: "팁 상태를 불러오지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't load tip status." };
   return { ok: true, state: data as PdfTipReviewState };
 }
 
@@ -80,7 +80,7 @@ export async function listPdfTipSourceVersionsAction(
     .eq("curriculum_doc_id", docId)
     .neq("id", currentVersionId)
     .order("version_number", { ascending: false });
-  if (error) return { ok: false, error: "이전 버전을 불러오지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't load previous versions." };
   return {
     ok: true,
     versions: (data ?? []).map((v) => ({
@@ -124,13 +124,13 @@ export async function copyPdfTipsFromVersionAction(params: {
 export async function markPdfTipPageReviewedAction(versionId: string, pageNumber: number): Promise<{ ok: boolean; error?: string }> {
   const { supabase } = await requireUser();
   const { error } = await supabase.rpc("mark_pdf_tip_page_reviewed", { p_version_id: versionId, p_page_number: pageNumber });
-  return error ? { ok: false, error: "확인 처리하지 못했습니다." } : { ok: true };
+  return error ? { ok: false, error: "Couldn't mark as reviewed." } : { ok: true };
 }
 
 export async function markPdfTipVersionReviewedAction(versionId: string): Promise<{ ok: boolean; count?: number; error?: string }> {
   const { supabase } = await requireUser();
   const { data, error } = await supabase.rpc("mark_pdf_tip_version_reviewed", { p_version_id: versionId });
-  return error ? { ok: false, error: "전체 확인 처리하지 못했습니다." } : { ok: true, count: Number(data ?? 0) };
+  return error ? { ok: false, error: "Couldn't mark all pages as reviewed." } : { ok: true, count: Number(data ?? 0) };
 }
 
 export async function copyPdfTipsMappedAction(params: {

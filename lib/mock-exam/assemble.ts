@@ -39,9 +39,9 @@ export class AssemblyError extends Error {}
  * 반올림 합이 총 문항 수와 어긋나지 않게 보정).
  */
 export function allocateCounts(weights: { key: string; weightPct: number }[], totalCount: int): Record<string, number> {
-  if (totalCount < 0) throw new AssemblyError("총 문항 수는 0 이상이어야 합니다.");
+  if (totalCount < 0) throw new AssemblyError("Total question count must be 0 or more.");
   const totalWeight = weights.reduce((sum, w) => sum + w.weightPct, 0);
-  if (totalWeight <= 0) throw new AssemblyError("비중 합이 0보다 커야 합니다.");
+  if (totalWeight <= 0) throw new AssemblyError("Weights must add up to more than 0.");
 
   const raw = weights.map((w) => ({ key: w.key, exact: (w.weightPct / totalWeight) * totalCount }));
   const floors = raw.map((r) => ({ key: r.key, floor: Math.floor(r.exact), remainder: r.exact - Math.floor(r.exact) }));

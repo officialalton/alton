@@ -69,7 +69,7 @@ function renderLayers(role: "student" | "teacher" | "reader", viewerUserId: stri
       <p>본문</p>
     </MaterialAnnotationLayers>
   );
-  const toggle = screen.queryByText("✏️ 필기 모드");
+  const toggle = screen.queryByText("✏️ Drawing mode");
   if (toggle) fireEvent.click(toggle);
   return screen.getByTestId("material-annotation-canvas") as HTMLCanvasElement;
 }
@@ -95,18 +95,18 @@ describe("교재 필기 — 두 레이어를 각자 켜고 끈다", () => {
           <p>본문</p>
         </MaterialAnnotationLayers>
       );
-      expect(screen.getByText("학생 필기")).toBeInTheDocument();
-      expect(screen.getByText("선생님 필기")).toBeInTheDocument();
+      expect(screen.getByText("Student notes")).toBeInTheDocument();
+      expect(screen.getByText("Teacher notes")).toBeInTheDocument();
       unmount();
     }
   });
 
   it("토글은 켜고 끌 수 있고 기본값은 둘 다 켬이다", () => {
     renderLayers("student");
-    const student = screen.getByText("학생 필기");
+    const student = screen.getByText("Student notes");
     expect(student).toHaveAttribute("aria-pressed", "true");
     fireEvent.click(student);
-    expect(screen.getByText("학생 필기")).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByText("Student notes")).toHaveAttribute("aria-pressed", "false");
   });
 
   it("내 레이어를 끄면 필기할 수 없다(방금 그은 획이 사라진 것처럼 보이면 안 된다)", () => {
@@ -122,15 +122,15 @@ describe("교재 필기 — 두 레이어를 각자 켜고 끈다", () => {
         <p>본문</p>
       </MaterialAnnotationLayers>
     );
-    fireEvent.click(screen.getByText("학생 필기"));
-    expect(screen.getByText("✏️ 필기 모드")).toBeDisabled();
+    fireEvent.click(screen.getByText("Student notes"));
+    expect(screen.getByText("✏️ Drawing mode")).toBeDisabled();
   });
 });
 
 describe("작성 권한 — 각자 자기 레이어만", () => {
   it("학생이 그리면 학생 필기 레이어로 저장된다", async () => {
     const canvas = renderLayers("student");
-    expect(screen.getByText("학생 필기로 기록됩니다")).toBeInTheDocument();
+    expect(screen.getByText("Saved as student notes")).toBeInTheDocument();
     drawOneSegment(canvas);
     await act(async () => {
       await vi.advanceTimersByTimeAsync(700);
@@ -142,7 +142,7 @@ describe("작성 권한 — 각자 자기 레이어만", () => {
 
   it("교사가 그리면 선생님 필기 레이어로 저장된다", async () => {
     const canvas = renderLayers("teacher");
-    expect(screen.getByText("선생님 필기로 기록됩니다")).toBeInTheDocument();
+    expect(screen.getByText("Saved as teacher notes")).toBeInTheDocument();
     drawOneSegment(canvas);
     await act(async () => {
       await vi.advanceTimersByTimeAsync(700);
@@ -154,8 +154,8 @@ describe("작성 권한 — 각자 자기 레이어만", () => {
 
   it("보호자는 읽기 전용이라 도구가 없고 아무것도 나가지 않는다", async () => {
     const canvas = renderLayers("reader");
-    expect(screen.queryByText("✏️ 필기 모드")).not.toBeInTheDocument();
-    expect(screen.getByText("보호자는 읽기 전용입니다")).toBeInTheDocument();
+    expect(screen.queryByText("✏️ Drawing mode")).not.toBeInTheDocument();
+    expect(screen.getByText("Parents have read-only access")).toBeInTheDocument();
     drawOneSegment(canvas);
     await act(async () => {
       await vi.advanceTimersByTimeAsync(700);
@@ -220,7 +220,7 @@ describe("미저장 필기 보관 — 계정·레이어별", () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(700);
     });
-    expect(screen.getByText(/저장하지 못했습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/Couldn't save/)).toBeInTheDocument();
     expect(store.has("alton:unsaved-strokes:u-1:s1:doc-1:student_shared")).toBe(true);
   });
 });

@@ -10,7 +10,7 @@ import {
   saveVocabQuizProgressAction, retakeVocabQuizAction,
 } from "./vocab-library-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateEn as fmtDate, fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
 
 type SourceKey = "custom" | `book:${string}`;
 const ALPHA_RANGES: [string, string][] = [["A", "C"], ["D", "F"], ["G", "I"], ["J", "L"], ["M", "O"], ["P", "R"], ["S", "U"], ["V", "Z"]];
@@ -31,8 +31,8 @@ export default function VocabLibraryTab({
       <UnderlineSubTabs
         className="mb-5"
         items={[
-          { id: "words", label: "단어장" },
-          { id: "quiz", label: "시험" },
+          { id: "words", label: "Vocabulary" },
+          { id: "quiz", label: "Quiz" },
         ]}
         activeId={tab}
         onSelect={setTab}
@@ -67,7 +67,7 @@ type DisplayWord = {
 };
 
 function englishGloss(synonymWords: string[] | null): string {
-  return synonymWords && synonymWords.length ? synonymWords.join(", ") : "(영어 뜻 없음)";
+  return synonymWords && synonymWords.length ? synonymWords.join(", ") : "(No English definition)";
 }
 
 function WordsPanel({
@@ -164,7 +164,7 @@ function WordsPanel({
   }
 
   async function makeFolder() {
-    const name = window.prompt("새 폴더 이름");
+    const name = window.prompt("New folder name");
     if (!name?.trim()) return;
     const r = await createVocabFolderAction(name);
     if (r.ok) setFolders((prev) => [...prev, { id: r.value.id, name: r.value.name, isDefault: false }]);
@@ -178,7 +178,7 @@ function WordsPanel({
           onClick={() => { setSelected("custom"); setPage(0); }}
           className={"text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (selected === "custom" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
         >
-          내 단어장 ({myWords.length})
+          My Vocabulary ({myWords.length})
         </button>
         {books.map((b) => (
           <button
@@ -193,12 +193,12 @@ function WordsPanel({
 
       {selected === "custom" && (
         <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className="text-[11px] font-bold text-grey-400 uppercase">폴더</span>
+          <span className="text-[11px] font-bold text-grey-400 uppercase">Folder</span>
           <button
             onClick={() => setFolderFilter("all")}
             className={"text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] " + (folderFilter === "all" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
           >
-            전체
+            All
           </button>
           {folders.map((f) => (
             <button
@@ -211,7 +211,7 @@ function WordsPanel({
           ))}
           {!readOnly && (
             <button onClick={() => void makeFolder()} disabled={addingFolder} className="text-[12px] font-bold px-2.5 py-1 rounded-lg border-[1.5px] border-dashed border-grey-300 text-grey-500">
-              + 새 폴더
+              + New folder
             </button>
           )}
         </div>
@@ -219,38 +219,38 @@ function WordsPanel({
 
       <div className="flex flex-wrap items-center gap-2 mb-3">
         <button onClick={() => setShowKorean((v) => !v)} className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink">
-          {showKorean ? "한글 뜻 숨기기" : "한글 뜻 보기"}
+          {showKorean ? "Hide Korean meaning" : "Show Korean meaning"}
         </button>
         <button
           onClick={() => setHideMode((m) => { const next = m === "definition" ? "none" : "definition"; if (next !== "none") setRevealedKeys(new Set()); return next; })}
           className={"text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (hideMode === "definition" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
         >
-          뜻 가리기
+          Hide definitions
         </button>
         <button
           onClick={() => setHideMode((m) => { const next = m === "word" ? "none" : "word"; if (next !== "none") setRevealedKeys(new Set()); return next; })}
           className={"text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (hideMode === "word" ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
         >
-          단어 가리기
+          Hide words
         </button>
         <button
           onClick={() => setRandomOrder((v) => { const next = !v; if (next) reshuffle(); return next; })}
           className={"text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (randomOrder ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
         >
-          랜덤 순서로 보기
+          Shuffle order
         </button>
         {randomOrder && (
-          <button onClick={reshuffle} className="text-[12px] font-semibold text-grey-500">다시 섞기</button>
+          <button onClick={reshuffle} className="text-[12px] font-semibold text-grey-500">Reshuffle</button>
         )}
         {selected === "custom" && !readOnly && (
           <button onClick={() => setAdding(true)} className="ml-auto text-[12px] font-bold px-3 py-1.5 rounded-lg bg-green text-white">
-            + 단어 추가
+            + Add word
           </button>
         )}
       </div>
 
       <div className="flex flex-wrap items-center gap-1.5 mb-4">
-        <button onClick={() => { setAlphaRange(null); setPage(0); }} className={"text-[11.5px] font-bold px-2 py-1 rounded-md " + (!alphaRange ? "bg-ink text-white" : "bg-grey-100 text-grey-500")}>전체</button>
+        <button onClick={() => { setAlphaRange(null); setPage(0); }} className={"text-[11.5px] font-bold px-2 py-1 rounded-md " + (!alphaRange ? "bg-ink text-white" : "bg-grey-100 text-grey-500")}>All</button>
         {ALPHA_RANGES.map(([from, to]) => (
           <button
             key={from}
@@ -271,13 +271,13 @@ function WordsPanel({
       )}
 
       {selected === "custom" && myWords.length === 0 ? (
-        <Empty text="아직 추가한 단어가 없어요. '+ 단어 추가'를 눌러보세요." />
+        <Empty text="No words added yet. Tap '+ Add word' to get started." />
       ) : selected !== "custom" && loadingBook && !libWords[selected] ? (
-        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+        <p className="text-[13px] text-grey-500">Loading…</p>
       ) : selected !== "custom" && !libWords[selected]?.length ? (
-        <Empty text="이 권에는 아직 등록된 단어가 없어요." />
+        <Empty text="This book has no words yet." />
       ) : ordered.length === 0 ? (
-        <Empty text="이 범위에는 단어가 없어요." />
+        <Empty text="No words in this range." />
       ) : (
         <>
           {pageWords.map((w) => (
@@ -323,14 +323,14 @@ function WordsPanel({
                   onClick={() => { setPageSize(size); setPage(0); }}
                   className={"text-[11.5px] font-bold px-2 py-1 rounded-md " + (pageSize === size ? "bg-ink text-white" : "bg-grey-100 text-grey-500")}
                 >
-                  {size}개씩
+                  {size} per page
                 </button>
               ))}
             </div>
             <div className="flex items-center gap-2">
-              <button disabled={pageSafe === 0} onClick={() => setPage((p) => p - 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">이전</button>
+              <button disabled={pageSafe === 0} onClick={() => setPage((p) => p - 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">Previous</button>
               <span className="text-[12px] text-grey-500">{pageSafe + 1} / {totalPages}</span>
-              <button disabled={pageSafe >= totalPages - 1} onClick={() => setPage((p) => p + 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">다음</button>
+              <button disabled={pageSafe >= totalPages - 1} onClick={() => setPage((p) => p + 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">Next</button>
             </div>
           </div>
         </>
@@ -367,13 +367,13 @@ function WordRow({
           className={"flex-1 text-[13.5px] text-ink " + (defHidden ? "blur-sm select-none cursor-pointer" : "")}
           onClick={() => defHidden && onToggleReveal()}
         >
-          {defHidden ? "가려짐 (클릭해서 보기)" : showKorean ? (w.definitionKo || "(한글 뜻 없음)") : w.definitionEn}
+          {defHidden ? "Hidden (click to reveal)" : showKorean ? (w.definitionKo || "(No Korean meaning)") : w.definitionEn}
         </div>
         <div className="relative shrink-0">
           <button
             onClick={() => !readOnly && setFolderMenuOpen((v) => !v)}
             disabled={readOnly}
-            title={currentFolder ? `저장됨: ${currentFolder.name}` : "내 단어장에 저장"}
+            title={currentFolder ? `Saved in: ${currentFolder.name}` : "Save to My Vocabulary"}
             className={"text-[16px] leading-none " + (w.myWordId ? "text-yellow-500" : "text-grey-300")}
           >
             ★
@@ -394,38 +394,38 @@ function WordRow({
                   onClick={() => { onSetFolder(null); setFolderMenuOpen(false); }}
                   className="block w-full text-left px-3 py-1.5 text-[12px] text-red border-t border-grey-100 mt-1"
                 >
-                  {w.libraryWordId ? "저장 취소" : "폴더 없음으로"}
+                  {w.libraryWordId ? "Remove" : "No folder"}
                 </button>
               )}
             </div>
           )}
         </div>
         <button onClick={() => setDetailOpen((v) => !v)} className="shrink-0 text-[12px] font-semibold text-grey-500">
-          {detailOpen ? "접기" : "상세"}
+          {detailOpen ? "Less" : "Details"}
         </button>
         {onDelete && (
-          <button onClick={onDelete} className="shrink-0 text-[12px] font-semibold text-red">삭제</button>
+          <button onClick={onDelete} className="shrink-0 text-[12px] font-semibold text-red">Delete</button>
         )}
       </div>
       {detailOpen && (
         <div className="mt-2 pl-[142px] space-y-1.5">
-          {showKorean && !defHidden && <p className="text-[12.5px] text-grey-500">한글 뜻: {w.definitionKo || "(없음)"}</p>}
+          {showKorean && !defHidden && <p className="text-[12.5px] text-grey-500">Korean meaning: {w.definitionKo || "(None)"}</p>}
           {(w.example1 || w.example2) && (
             <div className="text-[12.5px] text-grey-500 space-y-0.5">
-              {w.example1 && <p>예문 1: {w.example1}</p>}
-              {w.example2 && <p>예문 2: {w.example2}</p>}
+              {w.example1 && <p>Example 1: {w.example1}</p>}
+              {w.example2 && <p>Example 2: {w.example2}</p>}
             </div>
           )}
           <div className="flex flex-wrap gap-3">
             {w.synonymWords?.length ? (
               <div className="flex flex-wrap gap-1 items-center">
-                <span className="text-[10.5px] font-bold text-grey-300 uppercase">유사어</span>
+                <span className="text-[10.5px] font-bold text-grey-300 uppercase">Synonyms</span>
                 {w.synonymWords.map((s) => <span key={s} className="text-[10.5px] font-bold px-2 py-0.5 rounded-lg bg-grey-100 text-grey-500">{s}</span>)}
               </div>
             ) : null}
             {w.antonymWords?.length ? (
               <div className="flex flex-wrap gap-1 items-center">
-                <span className="text-[10.5px] font-bold text-grey-300 uppercase">반의어</span>
+                <span className="text-[10.5px] font-bold text-grey-300 uppercase">Antonyms</span>
                 {w.antonymWords.map((s) => <span key={s} className="text-[10.5px] font-bold px-2 py-0.5 rounded-lg bg-red-bg text-red">{s}</span>)}
               </div>
             ) : null}
@@ -444,7 +444,7 @@ function AddWordForm({ folders, onCancel, onAdded }: { folders: VocabFolder[]; o
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   async function submit() {
-    if (!word.trim()) { setError("단어를 입력하세요."); return; }
+    if (!word.trim()) { setError("Enter a word."); return; }
     setBusy(true);
     const r = await addMyVocabWordAction({ word, definition, example, folderId });
     setBusy(false);
@@ -454,17 +454,17 @@ function AddWordForm({ folders, onCancel, onAdded }: { folders: VocabFolder[]; o
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-4">
       <div className="flex flex-col gap-2">
-        <input value={word} onChange={(e) => setWord(e.target.value)} placeholder="단어" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
-        <input value={definition} onChange={(e) => setDefinition(e.target.value)} placeholder="뜻(선택)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
-        <input value={example} onChange={(e) => setExample(e.target.value)} placeholder="예문(선택)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+        <input value={word} onChange={(e) => setWord(e.target.value)} placeholder="Word" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+        <input value={definition} onChange={(e) => setDefinition(e.target.value)} placeholder="Definition (optional)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
+        <input value={example} onChange={(e) => setExample(e.target.value)} placeholder="Example (optional)" className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]" />
         <select value={folderId ?? ""} onChange={(e) => setFolderId(e.target.value || null)} className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]">
-          <option value="">폴더 없음</option>
+          <option value="">No folder</option>
           {folders.map((f) => <option key={f.id} value={f.id}>{f.name}</option>)}
         </select>
         {error && <p className="text-[12px] text-red">{error}</p>}
         <div className="flex gap-2">
-          <button disabled={busy} onClick={() => void submit()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">추가</button>
-          <button onClick={onCancel} className="text-[12px] font-semibold text-grey-500">취소</button>
+          <button disabled={busy} onClick={() => void submit()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50">Add</button>
+          <button onClick={onCancel} className="text-[12px] font-semibold text-grey-500">Cancel</button>
         </div>
       </div>
     </div>
@@ -528,13 +528,13 @@ function QuizPanel({
 
   function sourceLabel(q: VocabQuiz): string {
     const parts: string[] = [];
-    if (q.source.customWords) parts.push("내 단어장");
+    if (q.source.customWords) parts.push("My Vocabulary");
     for (const bid of q.source.bookIds) {
       const b = books.find((bk) => bk.id === bid);
       if (b) parts.push(b.title.split(" — ")[0]);
     }
-    if (q.source.folderIds.length > 0) parts.push(`폴더 ${q.source.folderIds.length}개`);
-    return parts.length > 0 ? parts.join(", ") : "전체";
+    if (q.source.folderIds.length > 0) parts.push(`${q.source.folderIds.length} ${q.source.folderIds.length === 1 ? "folder" : "folders"}`);
+    return parts.length > 0 ? parts.join(", ") : "All";
   }
 
   if (!readOnly && active) return <QuizRunner quiz={active} onDone={handleQuizDone} onProgress={handleQuizProgress} onExit={() => setActive(null)} />;
@@ -542,13 +542,13 @@ function QuizPanel({
   return (
     <div>
       {readOnly ? null : !creating ? (
-        <button onClick={() => setCreating(true)} className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white mb-4">시험 만들기</button>
+        <button onClick={() => setCreating(true)} className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white mb-4">Create quiz</button>
       ) : (
         <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5 mb-4">
-          <p className="text-[12px] font-bold text-grey-500 mb-2">시험 볼 단어장 선택(선택지는 전부 영어입니다)</p>
+          <p className="text-[12px] font-bold text-grey-500 mb-2">Choose which words to quiz (answer choices are in English)</p>
           <div className="flex flex-wrap gap-2 mb-2">
             <label className="text-[12.5px] flex items-center gap-1.5">
-              <input type="checkbox" checked={sources.has("custom")} onChange={() => toggleSource("custom")} /> 내 단어장 전체
+              <input type="checkbox" checked={sources.has("custom")} onChange={() => toggleSource("custom")} /> All of My Vocabulary
             </label>
             {books.map((b) => (
               <label key={b.id} className="text-[12.5px] flex items-center gap-1.5">
@@ -558,7 +558,7 @@ function QuizPanel({
           </div>
           {folders.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-[11px] font-bold text-grey-400 uppercase self-center">폴더만</span>
+              <span className="text-[11px] font-bold text-grey-400 uppercase self-center">Folders only</span>
               {folders.map((f) => (
                 <label key={f.id} className="text-[12.5px] flex items-center gap-1.5">
                   <input type="checkbox" checked={folderIds.has(f.id)} onChange={() => toggleFolder(f.id)} /> {f.name}
@@ -567,20 +567,20 @@ function QuizPanel({
             </div>
           )}
           <label className="text-[12.5px] flex items-center gap-2 mb-3">
-            문항 수
+            Number of questions
             <input type="number" min={1} max={50} value={count} onChange={(e) => setCount(Number(e.target.value) || 10)} className="w-16 border-[1.5px] border-grey-200 rounded-lg px-2 py-1" />
           </label>
           {error && <p className="text-[12px] text-red mb-2">{error}</p>}
           <div className="flex gap-2">
-            <button onClick={() => void makeQuiz()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white">만들기</button>
-            <button onClick={() => setCreating(false)} className="text-[12px] font-semibold text-grey-500">취소</button>
+            <button onClick={() => void makeQuiz()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white">Create</button>
+            <button onClick={() => setCreating(false)} className="text-[12px] font-semibold text-grey-500">Cancel</button>
           </div>
         </div>
       )}
 
-      <p className="text-[12px] font-bold text-grey-500 mb-2">이력</p>
+      <p className="text-[12px] font-bold text-grey-500 mb-2">History</p>
       {quizzes.length === 0 ? (
-        <Empty text="아직 본 시험이 없어요." />
+        <Empty text="No quizzes taken yet." />
       ) : (
         quizzes.map((q) => {
           const answeredSoFar = q.answers?.filter((a) => a !== null).length ?? 0;
@@ -588,29 +588,29 @@ function QuizPanel({
             <div key={q.id} className="border border-grey-200 rounded-xl px-4 py-3 mb-2">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[13px] font-bold text-ink">
-                  {fmtDate(q.createdAt, { month: "numeric", day: "numeric" }, tz)} · {q.wordCount}문항 · {sourceLabel(q)}
-                  {q.assignedByTeacher && <span className="text-[11px] text-grey-500 font-normal"> (선생님이 냄)</span>}
+                  {fmtDate(q.createdAt, { month: "numeric", day: "numeric" }, tz)} · {q.wordCount} {q.wordCount === 1 ? "question" : "questions"} · {sourceLabel(q)}
+                  {q.assignedByTeacher && <span className="text-[11px] text-grey-500 font-normal"> (assigned by teacher)</span>}
                 </span>
                 <span className="text-[12.5px] font-bold text-ink">
                   {/* 2026-09-21(UAT 지적) — "진행 중 1/4"가 맞은 개수/지금까지 답한 개수라 문항 수(10문항)와
                       안 맞아 보였다(분모가 전체가 아니라 그때그때 바뀌는 응답 수였다). 진행 중에는 정오
                       대신 "지금까지 답한 문항/전체 문항"으로 보여준다 — 정답 여부는 끝나야 의미가 있다. */}
                   {q.status === "completed"
-                    ? `${q.score}/${q.total}점`
+                    ? `Score ${q.score}/${q.total}`
                     : q.status === "in_progress"
-                      ? `${answeredSoFar}/${q.wordCount}문항 답함`
-                      : "응시 전"}
+                      ? `${answeredSoFar}/${q.wordCount} answered`
+                      : "Not started"}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 {q.dueAt && q.status !== "completed" && (
-                  <span className="text-[11px] text-red">마감 {fmtDateTime(q.dueAt, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz)}</span>
+                  <span className="text-[11px] text-red">Due {fmtDateTime(q.dueAt, { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }, tz)}</span>
                 )}
                 {!readOnly && (
                   <div className="ml-auto flex gap-2">
-                    {q.status === "pending" && <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">응시하기</button>}
-                    {q.status === "in_progress" && <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">계속 풀기</button>}
-                    {q.status !== "pending" && <button onClick={() => void retake(q)} className="text-[12px] font-bold text-grey-500">다시 풀기</button>}
+                    {q.status === "pending" && <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">Start</button>}
+                    {q.status === "in_progress" && <button onClick={() => setActive(q)} className="text-[12px] font-bold text-green">Continue</button>}
+                    {q.status !== "pending" && <button onClick={() => void retake(q)} className="text-[12px] font-bold text-grey-500">Retake</button>}
                   </div>
                 )}
               </div>
@@ -690,12 +690,12 @@ export function QuizRunner({
     const wrongItems = quiz.items.filter((it, idx) => result.finalAnswers[idx] !== it.correctIndex);
     return (
       <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-5">
-        <h3 className="text-[18px] font-extrabold text-ink mb-1">결과: {result.score} / {result.total}</h3>
+        <h3 className="text-[18px] font-extrabold text-ink mb-1">Result: {result.score} / {result.total}</h3>
         {wrongItems.length === 0 ? (
-          <p className="text-[13px] text-green font-bold mt-2">전부 맞혔습니다.</p>
+          <p className="text-[13px] text-green font-bold mt-2">All correct!</p>
         ) : (
           <>
-            <p className="text-[12.5px] text-grey-500 mt-1 mb-3">틀린 단어는 내 단어장의 “오답 노트” 폴더에 자동 저장됐습니다. 다시 맞히면 폴더에서 빠집니다.</p>
+            <p className="text-[12.5px] text-grey-500 mt-1 mb-3">Missed words were saved to the “오답 노트” (Missed Words) folder in My Vocabulary. They leave the folder once you get them right.</p>
             {wrongItems.map((it) => (
               <div key={it.word} className="border border-grey-200 rounded-lg px-3.5 py-3 mb-2">
                 <div className="flex items-center justify-between">
@@ -704,8 +704,8 @@ export function QuizRunner({
                 </div>
                 {(it.example1 || it.example2) && (
                   <div className="text-[12px] text-grey-500 mt-1.5 space-y-0.5">
-                    {it.example1 && <p>예문 1: {it.example1}</p>}
-                    {it.example2 && <p>예문 2: {it.example2}</p>}
+                    {it.example1 && <p>Example 1: {it.example1}</p>}
+                    {it.example2 && <p>Example 2: {it.example2}</p>}
                   </div>
                 )}
               </div>
@@ -716,7 +716,7 @@ export function QuizRunner({
           onClick={() => onDone({ ...quiz, status: "completed", score: result.score, total: result.total, answers: result.finalAnswers })}
           className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white mt-3"
         >
-          확인
+          OK
         </button>
       </div>
     );
@@ -727,12 +727,12 @@ export function QuizRunner({
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-5">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[12px] font-bold text-grey-500">{i + 1} / {quiz.items.length} · 현재 {runningScore}점</span>
+        <span className="text-[12px] font-bold text-grey-500">{i + 1} / {quiz.items.length} · Score {runningScore}</span>
         <span className="flex items-center gap-2">
-          {saveStatus === "saving" && <span className="text-[11px] text-grey-400">저장 중...</span>}
-          {saveStatus === "saved" && <span className="text-[11px] text-grey-400">저장됨</span>}
-          <button onClick={() => void saveProgress(answers)} className="text-[12px] font-semibold text-ink">저장하기</button>
-          <button onClick={onExit} className="text-[12px] text-grey-500">나가기</button>
+          {saveStatus === "saving" && <span className="text-[11px] text-grey-400">Saving...</span>}
+          {saveStatus === "saved" && <span className="text-[11px] text-grey-400">Saved</span>}
+          <button onClick={() => void saveProgress(answers)} className="text-[12px] font-semibold text-ink">Save</button>
+          <button onClick={onExit} className="text-[12px] text-grey-500">Exit</button>
         </span>
       </div>
       <div className="flex items-center justify-between mb-4">
@@ -745,7 +745,7 @@ export function QuizRunner({
             savedWords.has(item.word) ? "border-green text-green" : "border-grey-200 text-ink"
           }`}
         >
-          {savedWords.has(item.word) ? "저장됨" : savingWord ? "저장 중..." : "단어 저장"}
+          {savedWords.has(item.word) ? "Saved" : savingWord ? "Saving..." : "Save word"}
         </button>
       </div>
       <div className="flex flex-col gap-2 mb-4">
@@ -766,18 +766,18 @@ export function QuizRunner({
               className={"text-left text-[13.5px] px-3.5 py-2.5 rounded-[10px] border-[1.5px] disabled:cursor-default " + cls}
             >
               {opt}
-              {showFeedback && isCorrect && <span className="ml-2 text-green font-bold">✓ 정답</span>}
-              {showFeedback && isPicked && !isCorrect && <span className="ml-2 text-red font-bold">✗ 오답</span>}
+              {showFeedback && isCorrect && <span className="ml-2 text-green font-bold">✓ Correct</span>}
+              {showFeedback && isPicked && !isCorrect && <span className="ml-2 text-red font-bold">✗ Incorrect</span>}
             </button>
           );
         })}
       </div>
       <div className="flex justify-between">
-        <button disabled={i === 0} onClick={() => setI((v) => v - 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">이전</button>
+        <button disabled={i === 0} onClick={() => setI((v) => v - 1)} className="text-[12px] font-semibold text-grey-500 disabled:opacity-30">Previous</button>
         {i < quiz.items.length - 1 ? (
-          <button disabled={picked === null} onClick={() => setI((v) => v + 1)} className="text-[12px] font-bold text-ink disabled:opacity-30">다음</button>
+          <button disabled={picked === null} onClick={() => setI((v) => v + 1)} className="text-[12px] font-bold text-ink disabled:opacity-30">Next</button>
         ) : (
-          <button disabled={!allAnswered || submitting} onClick={() => void submit()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-green text-white disabled:opacity-50">제출</button>
+          <button disabled={!allAnswered || submitting} onClick={() => void submit()} className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-green text-white disabled:opacity-50">Submit</button>
         )}
       </div>
     </div>

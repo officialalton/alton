@@ -7,13 +7,13 @@ import type { MockExamListRow, MockExamListState } from "@/lib/mock-exam/open-li
 // 2026-10-01 — 배정 없음: 공개된 세트는 모든 활성 학생에게 보이고 학생이 직접 시작한다.
 
 const STATE_LABEL: Record<MockExamListState, string> = {
-  not_started: "미응시",
-  in_progress: "진행 중",
-  submitted: "채점 중",
-  graded: "완료",
+  not_started: "Not started",
+  in_progress: "In progress",
+  submitted: "Grading",
+  graded: "Completed",
 };
 
-const TIER_LABEL: Record<string, string> = { foundation: "기본", standard: "표준", advanced: "상위" };
+const TIER_LABEL: Record<string, string> = { foundation: "Foundation", standard: "Standard", advanced: "Advanced" };
 
 export default function MockExamOpenList({
   rows,
@@ -22,7 +22,7 @@ export default function MockExamOpenList({
   onStart,
   onOpenResult,
   resultHref,
-  emptyText = "공개된 모의고사가 없습니다.",
+  emptyText = "No mock exams are available yet.",
 }: {
   rows: MockExamListRow[];
   readOnly: boolean;
@@ -43,12 +43,12 @@ export default function MockExamOpenList({
           <div className="flex flex-wrap items-center gap-2">
             <p className="text-[14px] font-bold">{r.name}</p>
             <span className="rounded-full bg-grey-100 px-2 py-0.5 text-[10.5px] font-bold text-grey-600">{TIER_LABEL[r.difficultyTier] ?? r.difficultyTier}</span>
-            {r.archived && <span className="text-[10.5px] text-grey-400">지난 시험</span>}
+            {r.archived && <span className="text-[10.5px] text-grey-400">Past exam</span>}
           </div>
           {r.description && <p className="mt-1 text-[12px] text-grey-500">{r.description}</p>}
           <p className="mt-1 text-[12.5px] text-grey-500">
             {STATE_LABEL[r.state]}
-            {r.state === "graded" && r.attempt && r.attempt.correctCount !== null && ` · ${r.attempt.correctCount}/${r.attempt.totalCount} 정답`}
+            {r.state === "graded" && r.attempt && r.attempt.correctCount !== null && ` · ${r.attempt.correctCount}/${r.attempt.totalCount} correct`}
           </p>
           <Action row={r} readOnly={readOnly} busy={busyKey === r.key} onStart={onStart} onOpenResult={onOpenResult} resultHref={resultHref} />
         </li>
@@ -76,14 +76,14 @@ function Action({
   const a = row.attempt;
   if (row.state === "graded" || row.state === "submitted") {
     if (!a) return null;
-    if (resultHref) return row.state === "graded" ? <Link href={resultHref(a.id)} className={cls}>상세 결과 보기</Link> : null;
-    return onOpenResult ? <button type="button" className={cls} onClick={() => onOpenResult(a.id)}>결과 보기</button> : null;
+    if (resultHref) return row.state === "graded" ? <Link href={resultHref(a.id)} className={cls}>View detailed results</Link> : null;
+    return onOpenResult ? <button type="button" className={cls} onClick={() => onOpenResult(a.id)}>View results</button> : null;
   }
   if (readOnly) return null;
-  if (row.state === "in_progress" && a) return <Link href={`/student/mock-exam/${a.id}`} className={cls}>이어서 하기</Link>;
+  if (row.state === "in_progress" && a) return <Link href={`/student/mock-exam/${a.id}`} className={cls}>Continue</Link>;
   return (
     <button type="button" className={cls} disabled={busy} onClick={() => onStart?.(row)}>
-      {busy ? "시작하는 중…" : "시작"}
+      {busy ? "Starting…" : "Start"}
     </button>
   );
 }

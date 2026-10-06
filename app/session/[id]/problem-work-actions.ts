@@ -114,7 +114,7 @@ export async function openProblemWork(params: {
     : session?.subject_enrollment;
   const childId = (enrollment as { child_id?: string } | null)?.child_id;
   if (!session || childId !== params.studentId) {
-    throw new Error("이 수업의 풀이판이 아닙니다.");
+    throw new Error("This work board doesn't belong to this lesson.");
   }
   const isOwner = user.id === params.studentId;
   const isTeacher = user.id === session.teacher_id;
@@ -124,7 +124,7 @@ export async function openProblemWork(params: {
     const { data: guardianOk } = await supabase.rpc("is_session_guardian_v3", {
       p_session_id: params.sessionId,
     });
-    if (!guardianOk) throw new Error("이 풀이판을 열 권한이 없습니다.");
+    if (!guardianOk) throw new Error("You don't have permission to open this work board.");
   }
   // 재풀이는 학생 본인만 시작한다 — 교사가 학생의 풀이 회차를 늘리지 않는다.
   const newAttempt = Boolean(params.newAttempt) && isOwner;
@@ -312,9 +312,9 @@ export async function answerMcChoice(params: {
   source?: ProblemSource;
 }): Promise<ActionResult> {
   const { user } = await requireUser();
-  if (user.id !== params.studentId) return { ok: false, error: "본인 문제만 답할 수 있습니다." };
+  if (user.id !== params.studentId) return { ok: false, error: "You can only answer your own problems." };
   if (!Number.isInteger(params.choiceIndex) || params.choiceIndex < 0) {
-    return { ok: false, error: "선택지가 올바르지 않습니다." };
+    return { ok: false, error: "Invalid choice." };
   }
   const admin = createAdminClient();
   // 이 수업의 학생인지 — 풀이판 열기와 같은 검사.
@@ -327,7 +327,7 @@ export async function answerMcChoice(params: {
     ? session?.subject_enrollment[0]
     : session?.subject_enrollment;
   if ((enrollment as { child_id?: string } | null)?.child_id !== params.studentId) {
-    return { ok: false, error: "이 수업의 문제가 아닙니다." };
+    return { ok: false, error: "This problem doesn't belong to this lesson." };
   }
   const { data: workId, error } = await admin.rpc("start_problem_work", {
     p_session_id: params.sessionId,
@@ -359,8 +359,8 @@ export async function answerSprText(params: {
   source?: ProblemSource;
 }): Promise<ActionResult> {
   const text = params.text.trim();
-  if (!text) return { ok: false, error: "답을 입력하세요." };
-  if (text.length > 12) return { ok: false, error: "답은 12자 안으로 적어 주세요(양수 5자·음수 6자 규칙)." };
+  if (!text) return { ok: false, error: "Please enter an answer." };
+  if (text.length > 12) return { ok: false, error: "Keep the answer within 12 characters (5 for positive values, 6 for negative)." };
   return saveTextAnswer({ ...params, text });
 }
 
@@ -376,7 +376,7 @@ export async function answerEssayText(params: {
   text: string;
   source?: ProblemSource;
 }): Promise<ActionResult> {
-  if (params.text.length > 20000) return { ok: false, error: "답이 너무 깁니다(20,000자 안)." };
+  if (params.text.length > 20000) return { ok: false, error: "The answer is too long (max 20,000 characters)." };
   return saveTextAnswer(params);
 }
 
@@ -388,7 +388,7 @@ async function saveTextAnswer(params: {
   source?: ProblemSource;
 }): Promise<ActionResult> {
   const { user } = await requireUser();
-  if (user.id !== params.studentId) return { ok: false, error: "본인 문제만 답할 수 있습니다." };
+  if (user.id !== params.studentId) return { ok: false, error: "You can only answer your own problems." };
   const text = params.text;
   const admin = createAdminClient();
   const { data: session } = await admin
@@ -398,7 +398,7 @@ async function saveTextAnswer(params: {
     .maybeSingle();
   const enrollment = Array.isArray(session?.subject_enrollment) ? session?.subject_enrollment[0] : session?.subject_enrollment;
   if ((enrollment as { child_id?: string } | null)?.child_id !== params.studentId) {
-    return { ok: false, error: "이 수업의 문제가 아닙니다." };
+    return { ok: false, error: "This problem doesn't belong to this lesson." };
   }
   const { data: workId, error } = await admin.rpc("start_problem_work", {
     p_session_id: params.sessionId,

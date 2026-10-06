@@ -47,7 +47,7 @@ export default function HomeTab({
   function reload() {
     loadMyBoardCardsAction()
       .then(setCards)
-      .catch((e) => setError(e instanceof Error ? e.message : "보드를 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Could not load the board."));
   }
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function HomeTab({
       setNewDueStart("");
       setNewDueEnd("");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "할 일을 추가하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Could not add the task.");
     } finally {
       setAdding(false);
     }
@@ -83,7 +83,7 @@ export default function HomeTab({
       // 서버가 기록한 최종 편집자·편집 시각을 카드에 반영하려고 다시 읽는다(낙관적 갱신은 상태만 바꿈).
       reload();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "상태를 바꾸지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Could not update the status.");
       reload();
     }
   }
@@ -93,21 +93,21 @@ export default function HomeTab({
     try {
       await deleteMyManualTaskAction(cardId);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "삭제하지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Could not delete.");
       reload();
     }
   }
 
   return (
     <div className="px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-4">{studentName}의 학습 현황</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-4">{studentName}&apos;s Learning Overview</h1>
       <UnderlineSubTabs
         className="mb-5"
         items={[
           { id: "overview", label: "Overview" },
           { id: "todo", label: "TODO" },
           { id: "review", label: "Review" },
-          { id: "stats", label: "통계" },
+          { id: "stats", label: "Stats" },
         ]}
         activeId={subtab}
         onSelect={setSubtab}
@@ -117,7 +117,7 @@ export default function HomeTab({
       {subtab === "stats" ? (
         <StatsPanel load={loadMyStatsAction} />
       ) : cards === null ? (
-        <p className="text-[13px] text-grey-500">불러오는 중…</p>
+        <p className="text-[13px] text-grey-500">Loading…</p>
       ) : subtab === "overview" ? (
         <div>
           <div className="max-w-[280px] mb-6">
@@ -137,14 +137,14 @@ export default function HomeTab({
             <input
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              placeholder="+ 할 일 추가"
+              placeholder="+ Add a task"
               className="flex-1 min-w-[160px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 text-[13px]"
             />
             <input
               type="date"
               value={newDueStart}
               onChange={(e) => setNewDueStart(e.target.value)}
-              title="시작일(선택)"
+              title="Start date (optional)"
               className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
             />
             <span className="text-[13px] text-grey-400">~</span>
@@ -152,7 +152,7 @@ export default function HomeTab({
               type="date"
               value={newDueEnd}
               onChange={(e) => setNewDueEnd(e.target.value)}
-              title="마감일(선택)"
+              title="Due date (optional)"
               className="border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1.5 text-[13px]"
             />
             <button
@@ -160,7 +160,7 @@ export default function HomeTab({
               disabled={adding || !newTitle.trim()}
               className="text-[13px] font-bold bg-ink text-white rounded-lg px-4 py-1.5 disabled:opacity-50"
             >
-              추가
+              Add
             </button>
           </form>
           <div className="flex gap-1.5 mb-3">
@@ -169,14 +169,14 @@ export default function HomeTab({
               onClick={() => setBoardView("board")}
               className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${boardView === "board" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
             >
-              보드
+              Board
             </button>
             <button
               type="button"
               onClick={() => setBoardView("timeline")}
               className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${boardView === "timeline" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
             >
-              타임라인
+              Timeline
             </button>
           </div>
           {boardView === "board" ? (
@@ -206,23 +206,23 @@ function HomeReviewPanel() {
   useEffect(() => {
     getMyLessonReviewsAction()
       .then(setReviews)
-      .catch((e) => setError(e instanceof Error ? e.message : "리뷰를 불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Could not load reviews."));
   }, []);
 
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-[14px] font-bold text-ink mb-1.5">월간 종합 리뷰</h2>
-        <p className="text-[13px] text-grey-500">아직 생성된 월간 종합 리뷰가 없습니다. 준비 중입니다.</p>
+        <h2 className="text-[14px] font-bold text-ink mb-1.5">Monthly Review</h2>
+        <p className="text-[13px] text-grey-500">No monthly review has been generated yet. Coming soon.</p>
       </div>
 
       <div>
-        <h2 className="text-[14px] font-bold text-ink mb-3">수업 리뷰</h2>
+        <h2 className="text-[14px] font-bold text-ink mb-3">Lesson Reviews</h2>
         {error && <p className="text-[13px] text-red mb-2">{error}</p>}
         {reviews === null ? (
-          <p className="text-[13px] text-grey-500">불러오는 중...</p>
+          <p className="text-[13px] text-grey-500">Loading...</p>
         ) : reviews.filter((r) => r.meetingRecordLink).length === 0 ? (
-          <p className="text-[13px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>
+          <p className="text-[13px] text-grey-500">No lessons with a finalized meeting record yet.</p>
         ) : (
           <div className="space-y-3">
             {reviews

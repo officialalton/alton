@@ -74,6 +74,6 @@ describe("selectPolicyForAttempt — 정책 버전 변경은 새 응시에만", 
 describe("describePolicy", () => {
   it("표시용 문구", () => {
     expect(describePolicy({ section: "rw", thresholdType: "correct_ratio", thresholdValue: 0.65, version: 1, active: true })).toContain("65%");
-    expect(describePolicy({ section: "math", thresholdType: "correct_count", thresholdValue: 15, version: 1, active: true })).toContain("15개");
+    expect(describePolicy({ section: "math", thresholdType: "correct_count", thresholdValue: 15, version: 1, active: true })).toContain("15 or more");
   });
 });

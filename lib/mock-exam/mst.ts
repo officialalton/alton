@@ -9,7 +9,7 @@ export const MST_MODULE_ORDER: MstModuleKey[] = ["rw_m1", "rw_m2", "break", "mat
 export const MST_MODULE_LABELS: Record<MstModuleKey, string> = {
   rw_m1: "Reading and Writing · Module 1",
   rw_m2: "Reading and Writing · Module 2",
-  break: "휴식",
+  break: "Break",
   math_m1: "Math · Module 1",
   math_m2: "Math · Module 2",
 };

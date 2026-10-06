@@ -81,7 +81,7 @@ function Inline({ parts }: { parts: ContentPart[] }) {
             <span
               key={i}
               data-testid="rw-blank"
-              aria-label="빈칸"
+              aria-label="Blank"
               className="inline-block min-w-[7ch] border-b-[1.5px] border-ink align-baseline mx-0.5"
             >
               &nbsp;
@@ -99,7 +99,7 @@ function Inline({ parts }: { parts: ContentPart[] }) {
           return (
             <span
               key={i}
-              title="수식을 읽을 수 없습니다"
+              title="Couldn't render this expression"
               className="whitespace-pre-wrap underline decoration-red decoration-dotted underline-offset-4"
             >
               {part.source}

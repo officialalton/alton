@@ -19,20 +19,20 @@ import {
 } from "./consultant-schedule-actions";
 import type { MeetingRequest, GuardianMeetingRequestReview } from "@/app/parent/inquiry-actions";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateTimeEn } from "@/lib/format-datetime-en";
 
 const MEETING_STATUS_LABEL: Record<string, string> = {
-  requested: "신청됨",
-  confirming: "확인 중",
-  scheduling: "일정 조율 중",
-  scheduled: "일정 확정",
-  completed: "완료",
-  cancelled: "취소됨",
+  requested: "Requested",
+  confirming: "Under review",
+  scheduling: "Scheduling",
+  scheduled: "Scheduled",
+  completed: "Completed",
+  cancelled: "Cancelled",
 };
 
 function formatDateTime(iso: string | null, tz: string): string {
   if (!iso) return "";
-  return fmtDateTime(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
+  return fmtDateTimeEn(iso, { dateStyle: "medium", timeStyle: "short" }, tz);
 }
 
 export default function StudentConsultantTab() {
@@ -48,12 +48,12 @@ export default function StudentConsultantTab() {
   return (
     <div className="max-w-[720px] px-8 py-8">
       <h1 className="text-[18px] font-extrabold text-ink mb-1">Consultant</h1>
-      {consultant && <p className="text-[12.5px] text-grey-500 mb-4">담당 컨설턴트: {consultant.name ?? "이름 미입력"}</p>}
+      {consultant && <p className="text-[12.5px] text-grey-500 mb-4">Your consultant: {consultant.name ?? "Name not set"}</p>}
       <PillSubTabs
         items={[
-          { id: "messenger", label: "메신저" },
-          { id: "schedule", label: "일정 잡기" },
-          { id: "history", label: "신청 내역" },
+          { id: "messenger", label: "Messenger" },
+          { id: "schedule", label: "Schedule" },
+          { id: "history", label: "Requests" },
         ]}
         activeId={subTab}
         onSelect={setSubTab}
@@ -78,11 +78,11 @@ function ScheduleRequestPanel({ consultant }: { consultant: MyAssignedConsultant
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  if (consultant === undefined) return <p className="text-[13px] text-grey-500">불러오는 중...</p>;
+  if (consultant === undefined) return <p className="text-[13px] text-grey-500">Loading...</p>;
   if (consultant === null) {
     return (
       <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-        아직 담당 컨설턴트가 배정되지 않았습니다.
+        A consultant hasn&apos;t been assigned yet.
       </p>
     );
   }
@@ -90,11 +90,11 @@ function ScheduleRequestPanel({ consultant }: { consultant: MyAssignedConsultant
   async function handleSubmit() {
     setError(null);
     if (!slotStartsAt) {
-      setError("희망 시간을 먼저 선택해주세요.");
+      setError("Please select a preferred time first.");
       return;
     }
     if (!reason.trim()) {
-      setError("상담 사유를 입력해주세요.");
+      setError("Please enter a reason for the consultation.");
       return;
     }
     setSubmitting(true);
@@ -116,12 +116,12 @@ function ScheduleRequestPanel({ consultant }: { consultant: MyAssignedConsultant
   return (
     <div>
       <p className="text-[12.5px] text-grey-500 mb-4">
-        담당 컨설턴트의 가능 시간 중 하나를 선택하고 사유를 적어 신청합니다. 신청 후 컨설턴트가 확인하고
-        확정해줍니다 — 확정 전까지는 &ldquo;신청 내역&rdquo;에서 대기 상태로 표시됩니다.
+        Pick one of your consultant&apos;s available times and add a reason. Your consultant will review and
+        confirm — until then it shows as pending under &ldquo;Requests&rdquo;.
       </p>
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4 mb-5">
-        <h3 className="text-[13.5px] font-bold text-ink mb-3">희망 시간(60분)</h3>
+        <h3 className="text-[13.5px] font-bold text-ink mb-3">Preferred time (60 min)</h3>
         <ConsultSlotPicker
           fetchSlots={(fromIso, toIso) => listOpenSlotsForMyConsultantAction(consultant!.id, fromIso, toIso)}
           selectedStartsAt={slotStartsAt}
@@ -134,15 +134,15 @@ function ScheduleRequestPanel({ consultant }: { consultant: MyAssignedConsultant
 
       <section className="border-[1.5px] border-grey-200 rounded-xl p-4">
         {error && <p className="text-[12.5px] text-red mb-2">{error}</p>}
-        {submitted && <p className="text-[12.5px] text-green-600 mb-2">신청이 접수되었습니다.</p>}
+        {submitted && <p className="text-[12.5px] text-green-600 mb-2">Your request has been submitted.</p>}
         <textarea
-          aria-label="상담 사유"
+          aria-label="Reason for consultation"
           value={reason}
           onChange={(e) => {
             setReason(e.target.value);
             setSubmitted(false);
           }}
-          placeholder="상담 사유를 입력해주세요"
+          placeholder="Enter a reason for the consultation"
           className="w-full px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px] min-h-[120px]"
         />
         <button
@@ -151,7 +151,7 @@ function ScheduleRequestPanel({ consultant }: { consultant: MyAssignedConsultant
           onClick={handleSubmit}
           className="mt-3 px-6 py-2.5 rounded-xl bg-red text-white text-[13px] font-bold disabled:opacity-50"
         >
-          {submitting ? "신청 중..." : "신청하기"}
+          {submitting ? "Submitting..." : "Submit request"}
         </button>
       </section>
     </div>
@@ -168,14 +168,14 @@ function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
       .catch(() => setReview(null));
   }, [meetingRequestId]);
 
-  if (review === undefined) return <p className="text-[12px] text-grey-500 mt-2">리뷰를 불러오는 중...</p>;
-  if (review === null) return <p className="text-[12px] text-grey-500 mt-2">아직 확정된 리뷰가 없습니다.</p>;
+  if (review === undefined) return <p className="text-[12px] text-grey-500 mt-2">Loading review...</p>;
+  if (review === null) return <p className="text-[12px] text-grey-500 mt-2">No finalized review yet.</p>;
 
   return (
     <div className="mt-2 border-t border-grey-200 pt-2">
-      <h4 className="text-[12px] font-bold text-ink mb-1">상담 리뷰</h4>
+      <h4 className="text-[12px] font-bold text-ink mb-1">Consultation Review</h4>
       <p className="text-[12.5px] text-ink whitespace-pre-wrap">{review.finalText}</p>
-      {review.finalizedAt && <p className="text-[11px] text-grey-500 mt-1">확정일 {formatDateTime(review.finalizedAt, tz)}</p>}
+      {review.finalizedAt && <p className="text-[11px] text-grey-500 mt-1">Finalized {formatDateTime(review.finalizedAt, tz)}</p>}
       {review.driveLink && (
         <a
           href={`https://drive.google.com/file/d/${review.driveLink.driveFileId}/view`}
@@ -183,7 +183,7 @@ function CompletedReview({ meetingRequestId }: { meetingRequestId: string }) {
           rel="noreferrer"
           className="inline-block mt-2 text-[12px] font-semibold text-ink underline"
         >
-          미팅록 보기
+          View meeting record
         </a>
       )}
     </div>
@@ -201,9 +201,9 @@ function MeetingHistoryPanel() {
 
   return (
     <div>
-      {meetings === null && <p className="text-[13px] text-grey-500">불러오는 중...</p>}
+      {meetings === null && <p className="text-[13px] text-grey-500">Loading...</p>}
       {meetings && meetings.length === 0 && (
-        <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">신청한 일정이 없습니다.</p>
+        <p className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No requests yet.</p>
       )}
       {meetings && meetings.length > 0 && (
         <div className="space-y-2">
@@ -211,9 +211,9 @@ function MeetingHistoryPanel() {
             <div key={m.id} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
               <div className="flex items-center justify-between">
                 <span className="text-[13px] font-bold text-ink">{MEETING_STATUS_LABEL[m.status] ?? m.status}</span>
-                <span className="text-[11px] text-grey-500">신청일 {formatDateTime(m.createdAt, tz)}</span>
+                <span className="text-[11px] text-grey-500">Requested {formatDateTime(m.createdAt, tz)}</span>
               </div>
-              {m.content && <div className="text-[12px] text-grey-500 mt-0.5">사유: {m.content}</div>}
+              {m.content && <div className="text-[12px] text-grey-500 mt-0.5">Reason: {m.content}</div>}
               {m.startsAt && <div className="text-[12px] text-grey-500 mt-0.5">🗓 {formatDateTime(m.startsAt, tz)}</div>}
               {m.googleMeetLink && (
                 <a
@@ -222,7 +222,7 @@ function MeetingHistoryPanel() {
                   rel="noreferrer"
                   className="inline-block mt-1 text-[12px] font-semibold text-ink underline"
                 >
-                  Google Meet 링크
+                  Google Meet link
                 </a>
               )}
               {m.status === "completed" && (
@@ -232,7 +232,7 @@ function MeetingHistoryPanel() {
                     onClick={() => setExpandedId(expandedId === m.id ? null : m.id)}
                     className="mt-2 text-[11.5px] font-bold text-ink underline block"
                   >
-                    {expandedId === m.id ? "리뷰 접기" : "리뷰 보기"}
+                    {expandedId === m.id ? "Hide review" : "View review"}
                   </button>
                   {expandedId === m.id && <CompletedReview meetingRequestId={m.id} />}
                 </>
