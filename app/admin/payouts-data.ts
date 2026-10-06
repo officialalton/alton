@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { previousPayoutPeriod } from "@/lib/payout/payout-schedule";
 
 export type PayoutPeriod = { periodStart: string; periodEnd: string };
 
@@ -26,20 +27,9 @@ export type PayoutListItem = {
   paidAt: string | null;
 };
 
-function toDateOnly(d: Date): string {
-  return d.toISOString().slice(0, 10);
-}
-
+// 월 2회 정산(2026-10-06) — "직전에 끝난 정산 기간"(1~15일 또는 16일~말일).
 export function previousMonthRange(now: Date): PayoutPeriod {
-  const firstOfThisMonth = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
-  const lastOfPrevMonth = new Date(firstOfThisMonth.getTime() - 1);
-  const firstOfPrevMonth = new Date(
-    Date.UTC(lastOfPrevMonth.getUTCFullYear(), lastOfPrevMonth.getUTCMonth(), 1)
-  );
-  return {
-    periodStart: toDateOnly(firstOfPrevMonth),
-    periodEnd: toDateOnly(lastOfPrevMonth),
-  };
+  return previousPayoutPeriod(now);
 }
 
 function extractName(rel: unknown): string {

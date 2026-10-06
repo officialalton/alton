@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { SCORE_DISCLAIMER_EN, type ScoreRange } from "@/lib/mock-exam/score-estimate";
 import { accuracySummary, buildScorePoints, excludedCounts, groupFacts, summarize, type AttemptFacts, type Metric } from "@/lib/mock-exam/score-aggregate";
 
-export const fmtRange = (r: ScoreRange | null) => (r ? `${r.low.toLocaleString("en-US")}–${r.high.toLocaleString("en-US")}` : "—");
+export const fmtRange = (r: ScoreRange | null) => (r ? `${new Intl.NumberFormat("en-US").format(r.low)}–${new Intl.NumberFormat("en-US").format(r.high)}` : "—");
 const METRICS: { id: Metric; label: string }[] = [
   { id: "total", label: "SAT Total" },
   { id: "rw", label: "Reading & Writing" },

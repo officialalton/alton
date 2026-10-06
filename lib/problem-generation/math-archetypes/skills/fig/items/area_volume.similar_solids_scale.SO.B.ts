@@ -5,13 +5,20 @@ import type { Rng } from "../../../rng";
 import { defineItem } from "../item-kit";
 import { keyBundle, SPR_NO_B } from "../b-kit";
 import { TAILS } from "../sx-kit";
-import { INTRO_TAILS, LEADS_G, SOLID_KEY_JS, rngSolid, solidFig, type SolidKind } from "../ln-b-kit";
+import { SOLID_KEY_JS, rngSolid, solidFig, type SolidKind } from "../ln-b-kit";
 
 const KINDS: SolidKind[] = ["cylinder", "cone"];
 const NOUN: Record<SolidKind, string> = { cylinder: "cylinder", cone: "cone", rectangular_prism: "rectangular prism" };
-const intro = (rng: Rng, kind: SolidKind, extra = "") => `${rng.pick(LEADS_G).replace("graph", "figure")}${rng.pick([
+const LEADS_S = ["", "", "A student studies solids in a geometry class. ", "A teacher draws a solid on the board. ", "A designer sketches a figure of a solid. ", "In a practice set, a solid is shown. ", "An engineer models an object as a solid. "];
+const TAILS_S = [
+  "The first figure is the given solid, and four candidate solids are shown as choices.",
+  "Use the given figure to answer the question, and compare the four choices shown.",
+  "The given figure is drawn first. Each of the four choices is a solid drawn below it.",
+  "Four possible solids are shown below the given figure; their dimensions are labeled in the figure.",
+];
+const intro = (rng: Rng, kind: SolidKind, extra = "") => `${rng.pick(LEADS_S)}${rng.pick([
   `A ${NOUN[kind]} with labeled dimensions is shown in the given figure.`, `The given figure shows a ${NOUN[kind]}; its dimensions are labeled in the same unit.`, `The first figure is a ${NOUN[kind]} whose dimensions are labeled. Four more solids are shown as the choices.`, `A ${NOUN[kind]} is drawn first, with the lengths of its dimensions labeled, followed by four candidate solids.`, `In the given figure, the dimensions of a ${NOUN[kind]} are labeled in one unit.`,
-])} ${rng.pick(INTRO_TAILS).replace(/graphs?/g, "figures").replace("$xy$-plane", "page")} ${rng.pick(TAILS)}${extra}`;
+])} ${rng.pick(TAILS_S)} ${rng.pick(TAILS)}${extra}`;
 const rd = (kind: SolidKind): [string, string] => [`기준 입체(${NOUN[kind]})의 치수 라벨을 읽는다.`, "Read the dimensions of the given solid."];
 const Q = (kind: SolidKind) => [`Which of the following ${NOUN[kind]}s is similar to the ${NOUN[kind]} in the given figure?`, `Which one of the four solids is similar to the given ${NOUN[kind]}?`, `Which ${NOUN[kind]} below has the same shape as the given one, only larger or smaller?`];
 const sc = (d: number[], k: number) => d.map((x) => x * k);

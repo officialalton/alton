@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
+import { payoutPeriodOfDate, PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF, type PayoutPeriodInfo } from "@/lib/payout/payout-schedule";
 
 // P4-2 — 교사 본인 정산 조회 데이터 계층.
 // 착수 정리: docs/2026-09-12-p4-2-teacher-settlement-plan.md
@@ -14,7 +15,7 @@ import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 // admin 클라이언트를 쓰지 않는다.
 //
 // 정산 월 기준: generate_payout_batches()가 예약 시작일(reservations.starts_at)
-// 기준으로 기간을 묶으므로 여기서도 같은 기준을 쓴다. 지급 예정 월은 그 익월이다.
+// 기준으로 기간을 묶으므로 여기서도 같은 기준을 쓴다. 정산 기간은 월 2회(1~15일 → 같은 달 20일, 16일~말일 → 다음 달 5일)다.
 
 // 저장된 계좌번호의 표시 규칙 — 서버가 내려보내는 유일한 형태다.
 // "use server" 파일은 async 함수만 export할 수 있어 동기 헬퍼는 여기에 둔다
@@ -100,8 +101,14 @@ export type SettlementExternalTransfer = {
 export type SettlementMonth = {
   /** 수업이 있었던 월 — 'YYYY-MM' */
   settlementMonth: string;
-  /** 지급 예정 월 — 수업 월의 익월, 'YYYY-MM' */
+  /** 지급 예정 월('YYYY-MM') — 명목 지급일이 속한 달 */
   payoutMonth: string;
+  /** 정산 기간 키 'YYYY-MM-H1'|'YYYY-MM-H2'(알 수 없으면 'unknown') */
+  periodKey: string;
+  periodStart: string | null;
+  periodEnd: string | null;
+  /** 예상 지급일 — 명목 5일·20일을 직전 영업일로 보정한 값. */
+  nominalPayoutDate: string | null;
   currency: string;
   status: SettlementStatus;
   /** 시스템이 수업별로 자동 산정한 합계(관리자가 고칠 수 없는 값). */
@@ -135,20 +142,16 @@ export type TeacherSettlement = {
   approvedTotalsByCurrency: Record<string, number>;
   /** 지급 완료 금액(통화별). */
   paidTotalsByCurrency: Record<string, number>;
-  /** 다음 지급 예정 월 — 예정 금액이 있는 가장 이른 월의 익월. 없으면 null. */
+  /** 다음 지급 예정 월('YYYY-MM') — nextPayoutDate가 속한 달. 없으면 null. */
   nextPayoutMonth: string | null;
+  /** 다음 명목 지급일 — 예정 금액이 있는 가장 이른 정산 기간의 지급일. 없으면 null. */
+  nextPayoutDate: string | null;
   /** 이 화면이 원장을 읽은 시각(ISO). "마지막 갱신 시각"으로 표시한다. */
   refreshedAt: string;
 };
 
-// P4-2(UAT 후속, 2026-09-12 제품 오너 확정) — 지급일은 **수업 월의 익월 10일** 고정이다.
-export const PAYOUT_DAY_OF_MONTH = 10;
-
-/** 'YYYY-MM' 지급 예정 월 → 'YYYY-MM-DD' 지급일. */
-export function payoutDateOf(payoutMonth: string): string | null {
-  if (!/^\d{4}-\d{2}$/.test(payoutMonth)) return null;
-  return `${payoutMonth}-${String(PAYOUT_DAY_OF_MONTH).padStart(2, "0")}`;
-}
+// 2026-10-06(제품 오너 확정) — 월 2회 지급: 1~15일분은 같은 달 20일, 16일~말일분은 다음 달 5일.
+export { PAYOUT_DAY_FIRST_HALF, PAYOUT_DAY_SECOND_HALF };
 
 function monthKey(iso: string): string {
   return iso.slice(0, 7);
@@ -176,6 +179,7 @@ export async function loadTeacherSettlement(
     approvedTotalsByCurrency: {},
     paidTotalsByCurrency: {},
     nextPayoutMonth: null,
+    nextPayoutDate: null,
     refreshedAt,
   };
 
@@ -312,13 +316,12 @@ export async function loadTeacherSettlement(
     // 그 외에 예약 시작일을 모르는 예외적 데이터는 금액이 화면에서 사라지지 않도록
     // 'unknown' 버킷에 남긴다.
     const isAdjustment = !item.session_id;
-    const settlementMonth = startsAt
-      ? monthKey(startsAt)
-      : isAdjustment && item.created_at
-        ? monthKey(item.created_at as string)
-        : "unknown";
+    const periodDate = startsAt ?? (isAdjustment && item.created_at ? (item.created_at as string) : null);
+    const period: PayoutPeriodInfo | null = periodDate ? payoutPeriodOfDate(periodDate) : null;
+    const settlementMonth = period ? monthKey(period.periodStart) : "unknown";
+    const periodKey = period ? period.periodKey : "unknown";
     const currency = item.currency as string;
-    const key = `${settlementMonth}|${currency}|${status}`;
+    const key = `${periodKey}|${currency}|${status}`;
 
     const enrollment = session?.subject_enrollment_id
       ? enrollmentById.get(session.subject_enrollment_id as string)
@@ -348,7 +351,11 @@ export async function loadTeacherSettlement(
     } else {
       byMonthCurrency.set(key, {
         settlementMonth,
-        payoutMonth: settlementMonth === "unknown" ? "unknown" : nextMonthKey(settlementMonth),
+        payoutMonth: period ? monthKey(period.payoutDate) : "unknown",
+        periodKey,
+        periodStart: period?.periodStart ?? null,
+        periodEnd: period?.periodEnd ?? null,
+        nominalPayoutDate: period?.payoutDate ?? null,
         currency,
         status,
         autoCalculatedAmountMinor: isAdjustment ? 0 : line.amountMinor,
@@ -375,20 +382,21 @@ export async function loadTeacherSettlement(
   }
 
   const months = Array.from(byMonthCurrency.values()).sort((a, b) =>
-    a.settlementMonth === b.settlementMonth
+    a.periodKey === b.periodKey
       ? a.currency.localeCompare(b.currency)
-      : b.settlementMonth.localeCompare(a.settlementMonth)
+      : b.periodKey.localeCompare(a.periodKey)
   );
   for (const m of months) {
     m.lines.sort((a, b) => (a.sessionDate ?? "").localeCompare(b.sessionDate ?? ""));
   }
 
-  // 다음 지급 예정 월 = 아직 확정되지 않은(예정) 금액이 있는 가장 이른 수업 월의 익월.
-  const scheduledMonths = months
-    .filter((m) => m.status === "scheduled" && m.settlementMonth !== "unknown")
-    .map((m) => m.settlementMonth)
+  // 다음 지급 예정일 = 아직 확정되지 않은(예정) 금액이 있는 가장 이른 정산 기간의 지급일.
+  const scheduledPeriods = months
+    .filter((m) => m.status === "scheduled" && m.nominalPayoutDate)
+    .map((m) => m.nominalPayoutDate as string)
     .sort();
-  const nextPayoutMonth = scheduledMonths.length ? nextMonthKey(scheduledMonths[0]) : null;
+  const nextPayoutDate = scheduledPeriods[0] ?? null;
+  const nextPayoutMonth = nextPayoutDate ? monthKey(nextPayoutDate) : null;
 
   return {
     months,
@@ -397,6 +405,7 @@ export async function loadTeacherSettlement(
     approvedTotalsByCurrency,
     paidTotalsByCurrency,
     nextPayoutMonth,
+    nextPayoutDate,
     refreshedAt,
   };
 }

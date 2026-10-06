@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { runAutoPayoutDispatch } from "@/lib/payout/auto-dispatch";
+import { isPayoutDay } from "@/lib/payout/payout-schedule";
 
-// P4-2 — 자동 송금 크론 진입점(매월 10일 03:00 UTC).
+// P4-2 — 자동 송금 크론 진입점(매일 17:00 UTC, LA 날짜 5·20일에만 처리).
 //
 // 월 마감 크론과 같은 fail-closed 규칙이다: CRON_SECRET이 없으면 아무것도 하지 않는다.
 // 그리고 그 위에 지급 경계가 하나 더 있다 — real_disbursement_enabled()가 false면
@@ -28,6 +29,11 @@ export async function GET(request: Request) {
       { ok: false, error: "disabled: PAYOUT_CRON_ENABLED=true가 아니면 정산 크론은 실행하지 않습니다." },
       { status: 503 }
     );
+  }
+
+  // 크론은 UTC 매일 17:00. 회사 시간대(LA) 날짜가 5일·20일일 때만 송금 대상을 처리한다.
+  if (!isPayoutDay(new Date())) {
+    return NextResponse.json({ ok: true, skipped: "not a payout day (America/Los_Angeles)" });
   }
 
   try {

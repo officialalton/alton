@@ -53,7 +53,11 @@ const SETTLEMENT = {
   months: [
     {
       settlementMonth: "2026-09",
-      payoutMonth: "2026-10",
+      payoutMonth: "2026-09",
+      periodKey: "2026-09-H1",
+      periodStart: "2026-09-01",
+      periodEnd: "2026-09-15",
+      nominalPayoutDate: "2026-09-20",
       currency: "KRW",
       status: "scheduled" as const,
       autoCalculatedAmountMinor: 160000,
@@ -93,7 +97,8 @@ const SETTLEMENT = {
   inReviewTotalsByCurrency: { KRW: 40000 },
   approvedTotalsByCurrency: { KRW: 80000 },
   paidTotalsByCurrency: { KRW: 200000 },
-  nextPayoutMonth: "2026-10",
+  nextPayoutMonth: "2026-09",
+  nextPayoutDate: "2026-09-20",
   refreshedAt: "2026-09-12T03:00:00.000Z",
 };
 
@@ -134,7 +139,7 @@ describe("SettlementTab — 예정액 요약", () => {
 
   it("매월 10일 전월분 지급 안내와 갱신 시각·변동 안내를 보여준다", async () => {
     render(<SettlementTab />);
-    expect(await screen.findByText(/Lessons are paid on the 10th of the following month/)).toBeInTheDocument();
+    expect(await screen.findByText(/Payouts are made twice a month, on the 5th and the 20th/)).toBeInTheDocument();
     // 2026-09-12: "승인 시점에 정해집니다" 문구는 제품 오너 요청으로 제거했다.
     expect(screen.queryByText(/is set at the time of transfer approval/)).not.toBeInTheDocument();
     expect(screen.getByText(/Last updated:/)).toBeInTheDocument();
@@ -155,14 +160,14 @@ describe("SettlementTab — 예정액 요약", () => {
   it("마감 뒤 변동은 승인된 금액을 고치지 않고 다음 정산월 조정으로 간다고 안내한다", async () => {
     render(<SettlementTab />);
     expect(
-      await screen.findByText(/the approved amount is not edited; the difference is applied as an adjustment in the next payout month/)
+      await screen.findByText(/the approved amount is not edited; the difference is applied as an adjustment in the next payout period/)
     ).toBeInTheDocument();
   });
 
   it("월 행을 펼치면 수업별 산출 근거를 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    const row = await screen.findByTestId("settlement-month-2026-09|KRW|scheduled");
+    const row = await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled");
     fireEvent.click(row);
     expect(await screen.findByText("김학생")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
@@ -172,9 +177,9 @@ describe("SettlementTab — 예정액 요약", () => {
   it("자동 산정 수업 합계·관리자 조정액·최종 금액을 분리해 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled"));
 
-    const key = "2026-09|KRW|scheduled";
+    const key = "2026-09-H1|KRW|scheduled";
     expect(await screen.findByTestId(`auto-${key}`)).toHaveTextContent("₩160,000");
     expect(screen.getByTestId(`adjust-${key}`)).toHaveTextContent("-₩10,000");
     expect(screen.getByTestId(`final-${key}`)).toHaveTextContent("₩150,000");
@@ -183,9 +188,9 @@ describe("SettlementTab — 예정액 요약", () => {
   it("지급 예정일과 자동 송금 여부를 상세에 구분해 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled"));
 
-    const key = "2026-09|KRW|scheduled";
+    const key = "2026-09-H1|KRW|scheduled";
     expect(await screen.findByTestId(`sched-${key}`)).toHaveTextContent("Oct 10, 2026");
     expect(screen.getByTestId(`auto-dispatch-${key}`)).toHaveTextContent("Yes");
   });
@@ -223,16 +228,16 @@ describe("SettlementTab — 예정액 요약", () => {
     });
     render(<SettlementTab />);
     await openSubtab("history");
-    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|paid"));
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|paid"));
 
     expect(await screen.findByTestId("date-change-dc1")).toHaveTextContent("은행 점검으로 연기");
-    expect(screen.getByTestId("external-2026-09|KRW|paid")).toHaveTextContent("Direct bank transfer");
+    expect(screen.getByTestId("external-2026-09-H1|KRW|paid")).toHaveTextContent("Direct bank transfer");
   });
 
   it("관리자 조정 내역의 사유와 금액을 교사도 볼 수 있다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    fireEvent.click(await screen.findByTestId("settlement-month-2026-09|KRW|scheduled"));
+    fireEvent.click(await screen.findByTestId("settlement-month-2026-09-H1|KRW|scheduled"));
     expect(await screen.findByTestId("adjust-reason-adj1")).toHaveTextContent("교통비 차감");
     expect(screen.getByTestId("adjust-reason-adj1")).toHaveTextContent("-₩10,000");
   });
@@ -261,6 +266,7 @@ describe("SettlementTab — 예정액 요약", () => {
       approvedTotalsByCurrency: {},
       paidTotalsByCurrency: {},
       nextPayoutMonth: null,
+      nextPayoutDate: null,
       refreshedAt: "2026-09-12T03:00:00.000Z",
     });
     render(<SettlementTab />);

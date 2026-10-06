@@ -23,7 +23,7 @@ export const ITEM_KIT: Record<string, string[]> = { "two_variable_data.model_cho
 const E_KIT: Record<string, string[]> = { UC: [`${AR}/skills/fig/uc-kit.ts`], TC: [`${AR}/skills/fig/tc-kit.ts`], VT: [`${AR}/skills/fig/vt-kit.ts`], TN: [`${AR}/skills/fig/tn-kit.ts`], SX: [`${AR}/skills/fig/sx-kit.ts`], LS: [`${AR}/skills/fig/ls-kit.ts`], P3: [`${AR}/skills/fig/tri-kit.ts`] };
 export function archetypeSourceFor(itemId: string, root = process.cwd()): string[] {
   const [skill, kind, fig, loc] = itemId.split(".");
-  const own = `${ITEM_DIR}/${itemId.replace(/#/g, "_")}.ts`; // 같은 조합이 둘이면 id 에 #n — 파일 이름은 #(모듈 경로의 해시)를 피해 _n
+  const own = `${ITEM_DIR}/${itemId}.ts`;
   if (skill !== "two_variable_data" || existsSync(path.join(root, own))) {
     if (!existsSync(path.join(root, own))) throw new Error(`시각 검수 해시 규칙이 없는 조합(조합 파일 ${own} 없음): ${itemId}`);
     return [own, `${AR}/skills/fig/item-kit.ts`, ...(FAMILY_KIT[fig] ?? []), ...(E_KIT[fig] ?? []), ...(ITEM_KIT[itemId] ?? [])];

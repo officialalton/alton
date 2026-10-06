@@ -110,8 +110,10 @@ function renderTree(spec: TreeSpec) {
   const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
   const seg = (a: [number, number], b: [number, number], label: string, up: boolean) => {
     out.push(`<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="#111" stroke-width="2" stroke-linecap="round"/>`);
-    const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2; const w = labelWidth(label, 14), h = 16; const dy = Math.abs(b[1] - a[1]) < 4 ? -13 : up ? -11 : 11;
-    const cx = mx + (b[1] > a[1] ? -4 : 4) * (Math.abs(b[1] - a[1]) < 4 ? 0 : 1) - (b[1] - a[1]) * 0.1, cy = my + dy;
+    const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2; const w = labelWidth(label, 14), h = 16;
+    // 가지에 수직인 방향(위쪽 법선)으로 띄운다 — 가지가 기울어도 라벨이 선에 닿지 않는다. 위로 가는 가지는 선 위쪽, 아래로 가는 가지는 선 아래쪽에 둔다.
+    const ex = b[0] - a[0], ey = b[1] - a[1], len = Math.hypot(ex, ey) || 1; let nx = -ey / len, ny = ex / len; if (ny > 0) { nx = -nx; ny = -ny; } if (!up && Math.abs(ey) >= 4) { nx = -nx; ny = -ny; }
+    const off = 10 + (Math.abs(nx) * w) / 2 + Math.abs(ny) * 8; const cx = mx + nx * off, cy = my + ny * off;
     const box = { x1: cx - w / 2, y1: cy - h / 2, x2: cx + w / 2, y2: cy + h / 2 };
     if (box.x1 < 2 || box.x2 > W - 2 || box.y1 < 2 || box.y2 > H - 2) issues.push({ code: "clipped", message: `가지 라벨 '${label}' 가 그림 밖으로 나갑니다.` });
     if (placed.some((q) => box.x1 < q.x2 + 1 && q.x1 < box.x2 + 1 && box.y1 < q.y2 + 1 && q.y1 < box.y2 + 1)) issues.push({ code: "label_collision", message: `가지 라벨 '${label}' 가 다른 라벨과 겹칩니다.` });
