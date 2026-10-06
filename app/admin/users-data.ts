@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
 import { selectInChunks } from "@/lib/select-in-chunks";
 
 export type ParentListItem = {
@@ -48,6 +49,8 @@ export type TeacherListItem = {
   subjectNames: string[];
   assignedSubjectIds: string[];
   hourlyRateKrw: number | null;
+  /** latest teacher agreement status; one batched query for the whole list */
+  agreementStatus?: TeacherAgreementStatus;
 };
 
 export type CreditTransaction = {
@@ -354,6 +357,15 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     assignedSubjectIdsByTeacher.set(t.teacher_id, list);
   }
 
+  const { data: agreementRows } = await selectInChunks<{ teacher_id: string; status: string; docusign_envelope_status: string | null; sent_at: string | null }>(teacherIds, (chunk) =>
+    supabase.from("teacher_contracts").select("teacher_id, status, docusign_envelope_status, sent_at").in("teacher_id", chunk).in("agreement_form", [...MAIN_TEACHER_FORMS])
+  );
+  const latestAgreement = new Map<string, { status: string; docusign_envelope_status: string | null; sent_at: string | null }>();
+  for (const r of agreementRows ?? []) {
+    const prev = latestAgreement.get(r.teacher_id);
+    if (!prev || (r.sent_at ?? "") > (prev.sent_at ?? "")) latestAgreement.set(r.teacher_id, r);
+  }
+
   const emailById = await loadEmailById(teacherIds);
 
   return teachers.map((t) => ({
@@ -366,6 +378,7 @@ export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherLis
     subjectNames: subjectsByTeacher.get(t.id) ?? [],
     assignedSubjectIds: assignedSubjectIdsByTeacher.get(t.id) ?? [],
     hourlyRateKrw: t.hourly_rate_krw,
+    agreementStatus: deriveAgreementStatus(latestAgreement.get(t.id)),
   }));
 }
 

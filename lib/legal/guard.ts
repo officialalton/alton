@@ -44,3 +44,34 @@ export function assertLegalTextClean(htmlOrText: string, opts?: { allowedAnchors
   const problems = findLegalTextProblems(htmlToText(htmlOrText), opts);
   if (problems.length > 0) throw new UnfilledContractError(problems);
 }
+
+/**
+ * Source documents describe each filled-in value ("Identified in the executed ... details", "Accepted monthly amount and
+ * currency recorded ..."). Those descriptions must be replaced by the real per-agreement value before sending; this
+ * returns every description that is still present in a rendered document.
+ */
+const INPUT_DESCRIPTION_PATTERNS: RegExp[] = [
+  /Identified in the executed/i,
+  /Identifier of the executed/i,
+  /Recorded signature completion date/i,
+  /Previously accepted amount per/i,
+  /Newly accepted amount per/i,
+  /Prospective start date recorded/i,
+  /service commencement date recorded/i,
+  /Accepted monthly amount and currency recorded/i,
+  /Accepted scope and deliverables recorded/i,
+  /are recorded in the executed (payment|compensation|assignment|work|recipient)/i,
+  /identified here in the executed Agreement/i,
+  /authorized representative and authenticated Company electronic approval, including/i,
+  /(Lesson fee|Monthly fee): (Teacher's accepted|Accepted)/i,
+];
+
+export function findUnreplacedInputDescriptions(htmlOrText: string): string[] {
+  const t = htmlToText(htmlOrText);
+  return INPUT_DESCRIPTION_PATTERNS.filter((re) => re.test(t)).map((re) => `unreplaced input description matching ${re}`);
+}
+
+export function assertNoUnreplacedInputDescriptions(htmlOrText: string): void {
+  const problems = findUnreplacedInputDescriptions(htmlOrText);
+  if (problems.length > 0) throw new UnfilledContractError(problems);
+}

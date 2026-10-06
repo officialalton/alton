@@ -9,7 +9,6 @@ const LIMITS: Record<TextKey, [number, number]> = {
   start_date: [10, 10],
   supervisor_name: [2, 120],
   prior_materials: [2, 2000],
-  payment_details: [2, 500],
 };
 
 const LABEL: Record<TextKey, string> = {
@@ -20,7 +19,6 @@ const LABEL: Record<TextKey, string> = {
   start_date: "시작일",
   supervisor_name: "감독자 이름",
   prior_materials: "기존 자료",
-  payment_details: "지급 방법·수령 정보",
 };
 
 export type ValidatedInputs = { ok: true; value: TeacherAgreementInputs } | { ok: false; error: string };
@@ -47,7 +45,7 @@ export function validateTeacherAgreementInputs(raw: Partial<Record<keyof Teacher
         return { ok: false, error: "시작일은 YYYY-MM-DD 형식의 올바른 날짜여야 합니다." };
       }
     }
-    if (key === "payment_details") {
+    if (key === "prior_materials") {
       const bad = sensitiveNumberProblem(v);
       if (bad) return { ok: false, error: bad };
     }

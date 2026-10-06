@@ -4,6 +4,7 @@ import { loadMyAssignedConsultations } from "./intake-data";
 import { ViewerTimezoneProvider } from "@/app/components/ViewerTimezoneProvider";
 import { loadViewerTimezone } from "@/lib/viewer-timezone";
 import ConsultantShell from "./ConsultantShell";
+import ConsultantAgreementNotice from "./ConsultantAgreementNotice";
 
 // 컨설턴트 포지션(2026-09-22 사용자 지시) — 관리자와 완전히 별도인 role·포털.
 // 담당 학생을 배정받아 로드맵(상담·에세이 진행 상황 포함)을 직접 작업한다.
@@ -30,6 +31,7 @@ export default async function ConsultantHomePage({
   const viewerTimezone = await loadViewerTimezone(supabase, user.id, profile);
   return (
     <ViewerTimezoneProvider timezone={viewerTimezone}>
+    <ConsultantAgreementNotice />
     <ConsultantShell
       consultantName={profile?.name ?? "Consultant"}
       students={students}

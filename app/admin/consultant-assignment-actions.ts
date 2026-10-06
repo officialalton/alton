@@ -17,11 +17,15 @@ import { friendlyDbMessage } from "@/lib/booking/overlap-errors";
 // — 여기에 상담 요청(consultations) 레벨 인테이크 큐 배정도 추가한다. 자동배정
 // 모드는 Phase 2로 미룬다 — 지금은 관리자가 큐에서 컨설턴트를 직접 고른다.
 
+import { deriveAgreementStatus, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
+
 export type ConsultantWithStudents = {
   id: string;
   name: string | null;
   email: string | null;
   students: { id: string; name: string | null }[];
+  /** latest consultant agreement status (one batched query for the list) */
+  agreementStatus?: TeacherAgreementStatus;
 };
 
 export async function listConsultantsAction(): Promise<ConsultantWithStudents[]> {
@@ -50,11 +54,25 @@ export async function listConsultantsAction(): Promise<ConsultantWithStudents[]>
     })
   );
 
+  const { data: agreementRows } = rows.length
+    ? await admin
+        .from("teacher_contracts")
+        .select("teacher_id, status, docusign_envelope_status, sent_at")
+        .eq("agreement_form", "consultant_services")
+        .in("teacher_id", rows.map((c) => c.id as string))
+    : { data: [] as { teacher_id: string; status: string; docusign_envelope_status: string | null; sent_at: string | null }[] };
+  const latestAgreement = new Map<string, { status: string; docusign_envelope_status: string | null; sent_at: string | null }>();
+  for (const r of agreementRows ?? []) {
+    const prev = latestAgreement.get(r.teacher_id as string);
+    if (!prev || ((r.sent_at as string | null) ?? "") > (prev.sent_at ?? "")) latestAgreement.set(r.teacher_id as string, r as never);
+  }
+
   return rows.map((c, i) => ({
     id: c.id as string,
     name: c.name as string | null,
     email: emails[i],
     students: byConsultant.get(c.id as string) ?? [],
+    agreementStatus: deriveAgreementStatus(latestAgreement.get(c.id as string)),
   }));
 }
 

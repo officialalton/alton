@@ -68,6 +68,8 @@ const STATUS_LABEL_PARENT: Record<string, string> = {
   closed: "폐쇄됨",
 };
 
+const AGREEMENT_CHIP = { not_sent: "미발송", sent: "발송됨", signed: "서명 완료", declined: "거부", voided: "무효" } as const;
+
 export default function UsersTab({
   subjects,
 }: {
@@ -453,8 +455,13 @@ export default function UsersTab({
             >
               <div className="flex items-center justify-between">
                 <span className="text-[13.5px] font-bold text-ink">{t.name}</span>
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
-                  {TEACHER_STATUS_LABEL[t.status] ?? t.status}
+                <span className="flex gap-1.5">
+                  <span data-testid="teacher-contract-chip" className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-grey-200 text-grey-600">
+                    계약: {AGREEMENT_CHIP[t.agreementStatus ?? "not_sent"]}
+                  </span>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
+                    {TEACHER_STATUS_LABEL[t.status] ?? t.status}
+                  </span>
                 </span>
               </div>
               <div className="text-[12px] text-grey-500 mt-0.5">
@@ -498,8 +505,13 @@ export default function UsersTab({
             >
               <div className="flex items-center justify-between">
                 <span className="text-[13.5px] font-bold text-ink">{c.name ?? "이름 없음"}</span>
-                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
-                  담당 {c.students.length}명
+                <span className="flex gap-1.5">
+                  <span data-testid="consultant-contract-chip" className="text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-grey-200 text-grey-600">
+                    계약: {AGREEMENT_CHIP[c.agreementStatus ?? "not_sent"]}
+                  </span>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-grey-100 text-ink">
+                    담당 {c.students.length}명
+                  </span>
                 </span>
               </div>
               <div className="text-[12px] text-grey-500 mt-0.5">{c.email ?? "이메일 없음"}</div>
