@@ -1,10 +1,18 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { downloadCompletedDocument } from "@/lib/docusign";
 import { uploadArtifactToDrive } from "@/lib/drive-artifacts";
+import { teacherAgreementFileName } from "@/lib/drive/archive-config";
 
 const MAX_RETRIES = 5;
 
-type ArchiveRow = { id: string; teacher_id: string; docusign_envelope_id: string; drive_retry_count: number };
+type ArchiveRow = {
+  id: string;
+  teacher_id: string;
+  docusign_envelope_id: string;
+  drive_retry_count: number;
+  template_version: string | null;
+  signed_at: string | null;
+};
 
 export type ArchiveResult = { attempted: number; succeeded: number; failed: number; manualReview: number };
 
@@ -16,7 +24,7 @@ export type ArchiveResult = { attempted: number; succeeded: number; failed: numb
 export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts?: { teacherId?: string }): Promise<ArchiveResult> {
   let q = admin
     .from("teacher_contracts")
-    .select("id, teacher_id, docusign_envelope_id, drive_retry_count")
+    .select("id, teacher_id, docusign_envelope_id, drive_retry_count, template_version, signed_at")
     .eq("status", "signed")
     .in("drive_sync_status", ["queued", "retryable_failed"])
     .not("docusign_envelope_id", "is", null);
@@ -37,17 +45,24 @@ export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts
     result.attempted += 1;
     try {
       const fileBuffer = await downloadCompletedDocument(row.docusign_envelope_id);
-      const { driveFileId } = await uploadArtifactToDrive({
+      const { data: profile } = await admin.from("profiles").select("name").eq("id", row.teacher_id).maybeSingle();
+      const { driveFileId, personFolderId } = await uploadArtifactToDrive({
         contractId: row.id,
         artifactType: "signed_document",
         fileBuffer,
-        fileName: `teacher-agreement-${row.teacher_id}-${row.id}.pdf`,
+        fileName: teacherAgreementFileName({
+          templateVersion: row.template_version ?? "unversioned",
+          signedAt: row.signed_at ?? new Date().toISOString(),
+          envelopeId: row.docusign_envelope_id,
+        }),
+        destination: { kind: "teacher", personId: row.teacher_id, personName: (profile?.name as string | undefined) ?? "Teacher" },
       });
       await admin
         .from("teacher_contracts")
         .update({
           drive_sync_status: "succeeded",
           drive_file_id: driveFileId,
+          drive_folder_id: personFolderId ?? null,
           drive_synced_at: new Date().toISOString(),
           drive_last_error: null,
           document_url: `https://drive.google.com/file/d/${driveFileId}/view`,
