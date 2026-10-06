@@ -8,7 +8,7 @@ import { defineItem } from "../item-kit";
 import { pickFn } from "./_t5-kit";
 import { makeQuadVertex, QX_JS, quadMarkedIntro, quadXRead, quadVertexIntro } from "../pure-fn-kit";
 
-const FORM = (fn: string) => `$${fn}(x) = ax^2 + bx + c$, where $a$, $b$, and $c$ are constants`;
+const FORM = (fn: string) => `$${fn}(x) = ax² + bx + c$, where $a$, $b$, and $c$ are constants`;
 const vertexIntro = (rng: Rng, fn: string) => quadVertexIntro(rng, fn);
 const AQ = (rng: Rng) => rng.pick(["What is the value of $a$?", "What is $a$?", "What is the value of the constant $a$?"]);
 
@@ -34,7 +34,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any" }); const k = rng.pick([-3, -2, 2, 3, 4]); const ans = k * q.A;
         return figInst(rng, {
-          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${k} ${fn}(x)$ can be rewritten as $ax^2 + bx + c$, where $a$, $b$, and $c$ are constants; $a$ is the leading coefficient.`, question: AQ(rng), correct: ans,
+          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${k} ${fn}(x)$ can be rewritten as $ax² + bx + c$, where $a$, $b$, and $c$ are constants; $a$ is the leading coefficient.`, question: AQ(rng), correct: ans,
           wrongs: [W(q.A, "step_missing", `${fn} 의 a 를 그대로 답했다.`), W(q.A + k, "formula_misuse", "상수배 대신 더했다."), W(-ans, "sign_error", "부호를 바꿨다."), W(k * q.B, "formula_misuse", "일차항 계수의 상수배를 답했다."), W(ans + 1, "other", "어긋났다.")].filter((w) => w.v !== ans),
           verificationJs: figJs({ k }, q.fig, `${QX_JS}return P.k * A;`),
           trace: [...quadXRead(q), [`${k}(${fmtNum(q.A)}x² + ${fmtNum(q.B)}x + ${fmtNum(q.C)}) 이므로 이차항 계수는 ${k} × ${fmtNum(q.A)} = ${fmtNum(ans)} 이다.`, "Multiply every coefficient by k."]], variant: "a_after_scaling",
@@ -47,7 +47,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any" }); const ans = q.A + q.K; if (ans === q.A || ans === q.K) throw new GenFail("tie");
         return figInst(rng, {
-          stimulus: `${quadMarkedIntro(rng, fn)} The function can be written in the form $${fn}(x) = a(x - h)^2 + k$, where $a$, $h$, and $k$ are constants.`, question: rng.pick([`What is the value of $a + k$?`, `What is the sum of $a$ and $k$?`]), correct: ans,
+          stimulus: `${quadMarkedIntro(rng, fn)} The function can be written in the form $${fn}(x) = a(x - h)² + k$, where $a$, $h$, and $k$ are constants.`, question: rng.pick([`What is the value of $a + k$?`, `What is the sum of $a$ and $k$?`]), correct: ans,
           wrongs: [W(q.A, "step_missing", "a 만 답했다."), W(q.K, "step_missing", "k 만 답했다."), W(q.A + q.H, "formula_misuse", "a + h 를 답했다."), W(q.A - q.K, "sign_error", "k 의 부호를 바꿨다."), W(ans + 1, "other", "어긋났다.")].filter((w) => w.v !== ans),
           verificationJs: figJs({}, q.fig, `${QX_JS}return A + K;`),
           trace: [...quadXRead(q), [`꼭짓점은 (${fmtNum(q.H)}, ${fmtNum(q.K)}) 이므로 h = ${fmtNum(q.H)}, k = ${fmtNum(q.K)} 이다.`, "Find the vertex."], [`a + k = ${fmtNum(q.A)} + (${fmtNum(q.K)}) = ${fmtNum(ans)} 이다.`, "Add a and k."]], variant: "a_plus_k",
@@ -60,10 +60,10 @@ export const ITEM = defineItem({
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any" }); const s = rng.nz(-5, 5), t = rng.nz(-6, 6); const se = s > 0 ? `x - ${s}` : `x + ${-s}`; const te = t > 0 ? `+ ${t}` : `- ${-t}`;
         return figInst(rng, {
-          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${fn}(${se}) ${te}$ can be rewritten as $ax^2 + bx + c$, where $a$, $b$, and $c$ are constants; $a$ is the leading coefficient.`, question: AQ(rng), correct: q.A,
+          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${fn}(${se}) ${te}$ can be rewritten as $ax² + bx + c$, where $a$, $b$, and $c$ are constants; $a$ is the leading coefficient.`, question: AQ(rng), correct: q.A,
           wrongs: [W(q.A + s, "formula_misuse", "수평 이동량을 더했다."), W(q.A + t, "formula_misuse", "수직 이동량을 더했다."), W(-q.A, "sign_error", "부호를 바꿨다."), W(q.A * 2, "formula_misuse", "두 배로 계산했다."), W(q.A + s + t, "formula_misuse", "이동량을 모두 더했다.")].filter((w) => w.v !== q.A),
           verificationJs: figJs({ s, t }, q.fig, `${QX_JS}return A;`),
-          trace: [...quadXRead(q), [`${fn}(${se}) ${te} 를 전개하면 x² 의 계수는 ${fn} 의 a 와 같다.`, "Shifting does not change the x^2 coefficient."], [`a = ${fmtNum(q.A)} 이다.`, "The leading coefficient is unchanged."]], variant: "a_after_shift",
+          trace: [...quadXRead(q), [`${fn}(${se}) ${te} 를 전개하면 x² 의 계수는 ${fn} 의 a 와 같다.`, "Shifting does not change the x² coefficient."], [`a = ${fmtNum(q.A)} 이다.`, "The leading coefficient is unchanged."]], variant: "a_after_shift",
         }, q.fig);
       },
     },
@@ -73,7 +73,7 @@ export const ITEM = defineItem({
       lv: "easy", name: "unit_a_vertex", structure: "꼭짓점이 표시된 포물선(a = ±1)에서 열린 방향과 폭으로 a 를 읽음", extra: "easy: 꼭짓점에서 한 칸 옆의 높이", concepts: ["포물선 그래프", "꼭짓점형", "이차항 계수"],
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any", vertex: true, aPool: [-1, 1] });
-        return figInst(rng, { stimulus: `${vertexIntro(rng, fn)} The function is defined by $${fn}(x) = a(x - h)^2 + k$, where $a$, $h$, and $k$ are constants.`, question: AQ(rng), correct: q.A, wrongs: [W(-q.A, "sign_error", "열린 방향을 반대로 보았다."), W(q.A * 2, "formula_misuse", "두 배로 계산했다."), W(q.H, "axis_misread", "꼭짓점 x 를 답했다."), W(q.K, "axis_misread", "꼭짓점 y 를 답했다.")].filter((w) => w.v !== q.A), verificationJs: figJs({}, q.fig, `${QX_JS}return A;`), trace: [[`표시된 꼭짓점은 (${q.H}, ${q.K}) 이다.`, "Read the vertex."], [`꼭짓점에서 한 칸 옆의 점의 높이 차가 ${fmtNum(q.A)} 이므로 a = ${fmtNum(q.A)} 이다.`, "One unit from the vertex the graph changes by a."]], variant: "a_unit_vertex",
+        return figInst(rng, { stimulus: `${vertexIntro(rng, fn)} The function is defined by $${fn}(x) = a(x - h)² + k$, where $a$, $h$, and $k$ are constants.`, question: AQ(rng), correct: q.A, wrongs: [W(-q.A, "sign_error", "열린 방향을 반대로 보았다."), W(q.A * 2, "formula_misuse", "두 배로 계산했다."), W(q.H, "axis_misread", "꼭짓점 x 를 답했다."), W(q.K, "axis_misread", "꼭짓점 y 를 답했다.")].filter((w) => w.v !== q.A), verificationJs: figJs({}, q.fig, `${QX_JS}return A;`), trace: [[`표시된 꼭짓점은 (${q.H}, ${q.K}) 이다.`, "Read the vertex."], [`꼭짓점에서 한 칸 옆의 점의 높이 차가 ${fmtNum(q.A)} 이므로 a = ${fmtNum(q.A)} 이다.`, "One unit from the vertex the graph changes by a."]], variant: "a_unit_vertex",
         }, q.fig);
       },
     },
@@ -81,7 +81,7 @@ export const ITEM = defineItem({
       lv: "medium", name: "vertex_form_point", structure: "꼭짓점과 한 점이 표시된 포물선에서 꼭짓점형에 점을 대입해 a 를 구함", extra: "medium: (y - k) ÷ (x - h)²", concepts: ["포물선 그래프", "꼭짓점형", "대입"],
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any", vertex: true });
-        return figInst(rng, { stimulus: `${vertexIntro(rng, fn)} The function is defined by $${fn}(x) = a(x - h)^2 + k$, where $a$, $h$, and $k$ are constants.`, question: AQ(rng), correct: q.A, wrongs: [W(-q.A, "sign_error", "부호를 바꿨다."), W(q.A * 2, "formula_misuse", "두 배로 계산했다."), W(q.A * 4, "formula_misuse", "(x - h) 를 제곱하지 않았다."), W(q.H, "axis_misread", "꼭짓점 x 를 답했다.")].filter((w) => w.v !== q.A), verificationJs: figJs({}, q.fig, `${QX_JS}return A;`), trace: [[`표시된 꼭짓점은 (${q.H}, ${q.K}) 이다.`, "Read the vertex."], [`다른 표시점 (${q.xs.find((x) => x !== q.H)}, ${q.ys[q.xs.findIndex((x) => x !== q.H)]}) 을 y = a(x - ${q.H})² + (${q.K}) 에 대입한다.`, "Substitute another marked point."], [`a = ${fmtNum(q.A)} 이다.`, "Solve for a."]], variant: "a_vertex_form_point",
+        return figInst(rng, { stimulus: `${vertexIntro(rng, fn)} The function is defined by $${fn}(x) = a(x - h)² + k$, where $a$, $h$, and $k$ are constants.`, question: AQ(rng), correct: q.A, wrongs: [W(-q.A, "sign_error", "부호를 바꿨다."), W(q.A * 2, "formula_misuse", "두 배로 계산했다."), W(q.A * 4, "formula_misuse", "(x - h) 를 제곱하지 않았다."), W(q.H, "axis_misread", "꼭짓점 x 를 답했다.")].filter((w) => w.v !== q.A), verificationJs: figJs({}, q.fig, `${QX_JS}return A;`), trace: [[`표시된 꼭짓점은 (${q.H}, ${q.K}) 이다.`, "Read the vertex."], [`다른 표시점 (${q.xs.find((x) => x !== q.H)}, ${q.ys[q.xs.findIndex((x) => x !== q.H)]}) 을 y = a(x - ${q.H})² + (${q.K}) 에 대입한다.`, "Substitute another marked point."], [`a = ${fmtNum(q.A)} 이다.`, "Solve for a."]], variant: "a_vertex_form_point",
         }, q.fig);
       },
     },

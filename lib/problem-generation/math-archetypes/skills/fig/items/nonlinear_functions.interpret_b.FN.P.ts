@@ -8,7 +8,7 @@ import { defineItem } from "../item-kit";
 import { pickFn } from "./_t5-kit";
 import { makeQuadVertex, QX_JS, quadMarkedIntro, quadXRead, quadVertexIntro } from "../pure-fn-kit";
 
-const FORM = (fn: string) => `$${fn}(x) = ax^2 + bx + c$, where $a$, $b$, and $c$ are constants`;
+const FORM = (fn: string) => `$${fn}(x) = ax² + bx + c$, where $a$, $b$, and $c$ are constants`;
 const vertexIntro = (rng: Rng, fn: string) => quadVertexIntro(rng, fn);
 const BQ = (rng: Rng) => rng.pick(["What is the value of $b$?", "What is $b$?", "What is the value of the constant $b$?"]);
 
@@ -34,7 +34,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any" }); const s = rng.nz(-4, 4); const ans = q.B - 2 * q.A * s; if (ans === q.B) throw new GenFail("same"); const se = s > 0 ? `x - ${s}` : `x + ${-s}`;
         return figInst(rng, {
-          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${fn}(${se})$ can be rewritten as $ax^2 + bx + c$, where $a$, $b$, and $c$ are constants; $b$ is the coefficient of $x$.`, question: BQ(rng), correct: ans,
+          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${fn}(${se})$ can be rewritten as $ax² + bx + c$, where $a$, $b$, and $c$ are constants; $b$ is the coefficient of $x$.`, question: BQ(rng), correct: ans,
           wrongs: [W(q.B, "condition_ignored", `${fn} 의 b 를 그대로 답했다.`), W(q.B + 2 * q.A * s, "sign_error", "이동 방향을 반대로 했다."), W(q.B - q.A * s, "formula_misuse", "2 를 빠뜨렸다."), W(-ans, "sign_error", "부호를 바꿨다."), W(ans + 1, "other", "어긋났다.")].filter((w) => w.v !== ans),
           verificationJs: figJs({ s }, q.fig, `${QX_JS}return B - 2 * A * P.s;`),
           trace: [...quadXRead(q), [`${fmtNum(q.A)}(${se})² + ${fmtNum(q.B)}(${se}) + ${fmtNum(q.C)} 를 전개한다.`, "Expand the expression."], [`x 의 계수는 ${fmtNum(q.B)} - 2(${fmtNum(q.A)})(${s}) = ${fmtNum(ans)} 이다.`, "Collect the x terms."]], variant: "b_after_shift",
@@ -47,7 +47,7 @@ export const ITEM = defineItem({
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadVertex(rng, fn, { disc: "any" }); const m = rng.nz(-6, 6); const ans = q.B + m; if (ans === 0 || Math.abs(m) < 2) throw new GenFail("m"); const me = m < 0 ? `- ${-m}x` : `+ ${m}x`;
         return figInst(rng, {
-          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${fn}(x) ${me}$ can be rewritten as $ax^2 + bx + c$, where $a$, $b$, and $c$ are constants; $b$ is the coefficient of $x$.`, question: BQ(rng), correct: ans,
+          stimulus: `${quadMarkedIntro(rng, fn)} The expression $${fn}(x) ${me}$ can be rewritten as $ax² + bx + c$, where $a$, $b$, and $c$ are constants; $b$ is the coefficient of $x$.`, question: BQ(rng), correct: ans,
           wrongs: [W(q.B, "condition_ignored", `${fn} 의 b 를 그대로 답했다.`), W(m, "step_missing", "m 만 답했다."), W(q.B - m, "sign_error", "m 의 부호를 반대로 더했다."), W(-ans, "sign_error", "부호를 바꿨다."), W(ans + 1, "other", "어긋났다.")].filter((w) => w.v !== ans),
           verificationJs: figJs({ m }, q.fig, `${QX_JS}return B + P.m;`),
           trace: [...quadXRead(q), [`${fmtNum(q.A)}x² + (${fmtNum(q.B)} + (${m}))x + ${fmtNum(q.C)} 이다.`, "Combine the linear terms."], [`b = ${fmtNum(ans)} 이다.`, "Read the linear coefficient."]], variant: "b_after_linear_term",

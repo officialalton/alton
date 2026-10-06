@@ -1,9 +1,9 @@
 {
  "itemId": "nonlinear_functions.interpret_a.FN.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T08:20:00Z",
+ "reviewedAt": "2026-10-06T11:14:16Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "71c61dad8f3f538fac63324093b6fa8013652f4cbb06cb680d111fdeb2c616ff",
+ "codeHash": "15ee120cdd30e3017d7df57e63eef34cfcb97a3f1575cfd7731c31608a60e613",
  "samples": [
   "nonlinear_functions.interpret_a.FN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "순수 함수 그래프(축 제목 x·y): 표시점이 곡선·직선 위, 곡선 라벨은 지문이 가리킬 때만. 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판(^, \\\\sqrt 는 앱에서 KaTeX). 렌더러가 곡선·직선에 가려지는 눈금 숫자에 흰 테두리를 둘러 다시 그린다(2026-10-06)."
+ "notes": "x^2 표기를 x²로 정정한 재생성본 PNG를 읽고 재서명. 문제 문장·표식 점·선지 양호."
 }
