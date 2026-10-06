@@ -55,6 +55,7 @@ import { ITEM as nftC } from "../items/nonlinear_functions.function_transformati
 import { ITEM as ftfpP } from "../items/nonlinear_functions.function_transformation.FN.P";
 import { ITEM as cgfpP } from "../items/nonlinear_functions.context_graph_features.FN.P";
 import { ITEM as rafpP } from "../items/nonlinear_functions.rational_asymptote.FN.P";
+import { ITEM as mcfpP } from "../items/two_variable_data.model_choice_linear_quadratic_exponential.FN.P";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC, ...ftfpP, ...cgfpP, ...rafpP];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC, ...ftfpP, ...cgfpP, ...rafpP, ...mcfpP];
 
