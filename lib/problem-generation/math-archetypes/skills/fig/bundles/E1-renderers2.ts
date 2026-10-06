@@ -9,5 +9,8 @@ import { ITEM as tcSinC } from "../items/right_triangles_trigonometry.sinusoid_g
 import { ITEM as vtSimple } from "../items/probability.simple.VT.P";
 import { ITEM as vtCond } from "../items/probability.conditional.VT.P";
 import { ITEM as vtSeq } from "../items/probability.sequential_without_replacement.VT.P";
+import { ITEM as tnSim } from "../items/lines_angles_triangles.similar_triangles.TN.P";
+import { ITEM as tnNest } from "../items/lines_angles_triangles.nested_similar_parallel.TN.P";
+import { ITEM as tnAlt } from "../items/right_triangles_trigonometry.similar_right_triangle_altitude.TN.P";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt];

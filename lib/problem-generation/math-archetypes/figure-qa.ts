@@ -337,6 +337,30 @@ function checkVennTreeFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   for (const [what, a] of [["첫 단계", br], ...br.map((b, i) => [`가지 ${i + 1} 의 둘째 단계`, b.next] as const)] as [string, { label: string }[]][]) { const s = sum(a); if (s !== null && Math.abs(s - 1) > 1e-9) issues.push({ code: "render_value_mismatch", message: `${what} 형제 가지의 확률 합이 ${s.toFixed(3)} 로 1 이 아닙니다.` }); }
 }
 
+
+// ───────────────────────── 삼각형 중첩(triangle_nested) 충실도 ─────────────────────────
+function checkTriNestedFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const S = spec as unknown as { kind: "parallel" | "altitude"; vertices: string[]; points: string[]; sides?: { between: [string, string]; label?: string }[] };
+  const dots = [...svg.matchAll(/<circle\b([^>]*)\/?>/g)].map((m) => ({ x: Number(attr(m[1], "cx")), y: Number(attr(m[1], "cy")), r: Number(attr(m[1], "r")) })).filter((c) => Math.abs(c.r - 2.8) < 1e-6);
+  const names = [...S.vertices, ...S.points]; if (dots.length !== names.length) { issues.push({ code: "render_empty", message: `그려진 점 ${dots.length}개 ≠ 데이터 점 ${names.length}개.` }); return; }
+  const ts = texts(svg).filter((t) => t.size >= 14 && names.includes(t.text)); const at = new Map<string, [number, number]>();
+  for (const n of names) { const tx = ts.find((t) => t.text === n); if (!tx) { issues.push({ code: "label_missing", message: `점 이름 '${n}' 이 그려지지 않았습니다.` }); return; } let best = dots[0], bd = Infinity; for (const d of dots) { const q = Math.hypot(d.x - tx.x, d.y - tx.y); if (q < bd) { bd = q; best = d; } } at.set(n, [best.x, best.y]); }
+  if (new Set([...at.values()].map((p) => p.join(","))).size !== names.length) return;
+  const len = (a: string, b: string) => Math.hypot(at.get(a)![0] - at.get(b)![0], at.get(a)![1] - at.get(b)![1]);
+  const dir = (a: string, b: string) => Math.atan2(at.get(b)![1] - at.get(a)![1], at.get(b)![0] - at.get(a)![0]);
+  const [v0, v1, v2] = S.vertices;
+  if (S.kind === "parallel") {
+    let d = Math.abs(dir(S.points[0], S.points[1]) - dir(v1, v2)) * 180 / Math.PI; d = Math.min(d, 180 - d); if (d > 1.5) issues.push({ code: "render_value_mismatch", message: `${S.points.join("")} 가 ${v1}${v2} 와 평행하게 그려지지 않았습니다(${d.toFixed(1)}° 어긋남).` });
+    const lines0 = lines(svg).filter((l) => l.stroke === "#111"); void lines0;
+  } else {
+    const dc = dir(S.points[0], v2), ab = dir(v0, v1); let d = Math.abs(dc - ab) * 180 / Math.PI; d = Math.abs(d - 90); if (d > 1.5) issues.push({ code: "render_value_mismatch", message: `수선 ${v2}${S.points[0]} 가 ${v0}${v1} 에 수직으로 그려지지 않았습니다.` });
+    const g = Math.abs(dir(v2, v0) - dir(v2, v1)) * 180 / Math.PI; if (Math.abs(g - 90) > 2) issues.push({ code: "render_value_mismatch", message: `${v2} 의 각이 직각으로 그려지지 않았습니다.` });
+  }
+  // 숫자 길이 라벨은 그려진 길이와 비례해야 한다
+  const num = (S.sides ?? []).map((q) => ({ v: /^\d+(?:\.\d+)?$/.test((q.label ?? "").trim()) ? Number(q.label) : null, a: q.between[0], b: q.between[1] })).filter((q) => q.v !== null && at.has(q.a) && at.has(q.b)) as { v: number; a: string; b: string }[];
+  if (!(spec as { notToScale?: boolean }).notToScale) for (let i = 1; i < num.length; i++) { const r0 = len(num[0].a, num[0].b) / num[0].v, ri = len(num[i].a, num[i].b) / num[i].v; if (Math.abs(ri / r0 - 1) > 0.07) { issues.push({ code: "render_value_mismatch", message: `변 ${num[i].a}${num[i].b} 의 길이 비율이 변 ${num[0].a}${num[0].b} 와 라벨 ${num[i].v}:${num[0].v} 에 맞지 않게 그려졌습니다.` }); break; } }
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -351,6 +375,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
+  if (spec.type === "triangle_nested") { checkTriNestedFidelity(spec, markup, issues); return issues; }
   if (spec.type === "venn_tree") { checkVennTreeFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "trig_curve") { checkTrigCurveFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "unit_circle") { checkUnitCircleFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }

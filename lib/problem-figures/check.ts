@@ -12,6 +12,7 @@ import { lintSolidAgainstText, renderSolid } from "./templates/solid";
 import { lintCompositeAgainstText, renderComposite } from "./templates/composite";
 import { lintUnitCircleAgainstText, renderUnitCircle } from "./templates/unit-circle";
 import { lintTrigCurveAgainstText, renderTrigCurve } from "./templates/trig-curve";
+import { lintTriNestedAgainstText, renderTriNested } from "./templates/triangle-nested";
 import { lintVennTreeAgainstText, renderVennTree } from "./templates/venn-tree";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
 import { renderFigureSvg } from "./render";
@@ -106,6 +107,11 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "composite") {
     const r = renderComposite(spec);
     issues.push(...r.issues, ...lintCompositeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "triangle_nested") {
+    const r = renderTriNested(spec);
+    issues.push(...r.issues, ...lintTriNestedAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "venn_tree") {
