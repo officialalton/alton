@@ -1,0 +1,45 @@
+{
+ "itemId": "ratios_rates_units.proportion.BR.P",
+ "generatedAt": "2026-10-06T05:58:57.734Z",
+ "codeHash": "b3475965054c38d4da2fca2e2a5054a8ac033efb761b89a6439ceb5c6de99424",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_t4-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/ratios_rates_units.proportion.BR.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "ratios_rates_units.proportion.BR.P.png",
+   "mobileFile": "ratios_rates_units.proportion.BR.P.m375.png",
+   "archetypeId": "rru.proportion.BR.P.chain2",
+   "seed": 11,
+   "signature": "data:bar",
+   "stimulus": "A school club makes lemonade using the amounts in the graph, which make the number of jugs stated in its title. The ingredients stay in the same ratio for any amount.",
+   "question": "How many cups of ingredients in all are needed to make 7 jugs?",
+   "options": [
+    "23",
+    "161",
+    "28",
+    "80.5"
+   ],
+   "correctIndex": 3,
+   "answer": "80.5",
+   "explanation": "(1) 막대그래프: 2 jugs 기준, Ice 1, Water 7, Lemon juice 8, Mint tea 2, Syrup 5. (2) 배율 = 7 ÷ 2 이다. (3) 기준 합 = 1 + 7 + 8 + 2 + 5 = 23 이다. (4) 필요한 합 = 23 × 7 ÷ 2 = 80.5 이다. (5) 따라서 80.5 cups 이다. 따라서 정답은 80.5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

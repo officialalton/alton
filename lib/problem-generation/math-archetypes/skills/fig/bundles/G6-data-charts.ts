@@ -26,5 +26,6 @@ import { ITEM as ovdMedianBXC } from "../items/one_variable_data.median.BX.C";
 import { ITEM as ovdGroupedHGC } from "../items/one_variable_data.grouped_median_interval.HG.C";
 import { ITEM as ovdSpreadHGC } from "../items/one_variable_data.spread_comparison.HG.C";
 import { ITEM as pctFindWholeBR } from "../items/percentages.find_whole.BR.P";
+import { ITEM as rruPropBR } from "../items/ratios_rates_units.proportion.BR.P";
 
-export const BUNDLE: LArch[] = [...pctFindWholeBR, ...ovdGroupedHGC, ...ovdSpreadHGC, ...ovdMedianBXC, ...ovdMeanDPC, ...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG, ...ovdRelcumHG];
+export const BUNDLE: LArch[] = [...rruPropBR, ...pctFindWholeBR, ...ovdGroupedHGC, ...ovdSpreadHGC, ...ovdMedianBXC, ...ovdMeanDPC, ...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG, ...ovdRelcumHG];
