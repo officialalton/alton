@@ -9,7 +9,7 @@ export { expand, medianOfList };
 
 // ───────────────────────── 점도표(DP) ─────────────────────────
 export type DotScene = { t: FqTopic; vals: number[]; freqs: number[]; N: number; sum: number; fig: { type: "data"; kind: "dot_plot"; dots: { value: number; count: number }[]; xTitle: string } };
-export const dotFig = (t: FqTopic, vals: number[], freqs: number[]) => ({ type: "data" as const, kind: "dot_plot" as const, dots: vals.map((v, i) => ({ value: v, count: freqs[i] })), xTitle: `${t.col} (${t.unit})` });
+export const dotFig = (t: FqTopic, vals: number[], freqs: number[]) => ({ type: "data" as const, kind: "dot_plot" as const, dots: vals.map((v, i) => ({ value: v, count: freqs[i] })), xTitle: titleWith(t.col, t.unit) });
 /** 점도표용 주제: 값의 범위가 6 이상이어야 엔진이 정수 눈금(간격 1·2)을 쓴다(범위가 좁으면 0.5 눈금이 나와 어색하다). */
 export const DOT_TOPICS: FqTopic[] = FQ_TOPICS.filter((t) => t.hi - t.lo >= 6);
 /** 점도표: 연속한 k 개 값(간격 step)이고 값 범위(최대-최소)가 6 이상·눈금 20 칸 이하. 점 개수 1~fmax(≤9; 엔진은 값마다 15 개까지). */
@@ -47,7 +47,7 @@ export const dlRead = (s: DotList): [string, string] => [`점도표에서 점의
 // 개수 장면(행 이름 × 개수, _t4-kit)을 막대로 그린다. 막대 높이를 눈금(격자선)에서 정확히 읽도록 값은 세로 눈금 간격의 배수로만 만든다.
 import { COUNT_TOPICS, retry, lcFirst, type CountTopic, type CountScene } from "./items/_t4-kit";
 export type BarScene = CountScene & { yStep: number; yMax: number; fig: { type: "data"; kind: "bar"; categories: string[]; series: { values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
-export const barFig = (s: { t: CountTopic; names: string[]; vals: number[]; yStep: number; yMax: number }) => ({ type: "data" as const, kind: "bar" as const, categories: s.names, series: [{ values: s.vals }], xTitle: s.t.rowHead, yTitle: `${s.t.col} (${s.t.unit})`, yMin: 0, yMax: s.yMax, yStep: s.yStep });
+export const barFig = (s: { t: CountTopic; names: string[]; vals: number[]; yStep: number; yMax: number }) => ({ type: "data" as const, kind: "bar" as const, categories: s.names, series: [{ values: s.vals }], xTitle: s.t.rowHead, yTitle: titleWith(s.t.col, s.t.unit), yMin: 0, yMax: s.yMax, yStep: s.yStep });
 /** 범주 이름에 숫자가 있으면(Route 1·Line 2) 지문이 두 범주를 말할 때 엔진의 값 대조(lint)가 다른 범주의 숫자를 값으로 오인하고, 이름이 길면(12자 초과) 축 아래에 놓이지 않는다. */
 export const BAR_TOPICS = COUNT_TOPICS.filter((t) => t.rows.every((r) => !/\d/.test(r) && r.length <= 12));
 const Y_STEPS = [5, 10, 20, 25, 40, 50, 100, 200];
@@ -71,7 +71,7 @@ export const BAR_ROW_JS = "const nm=FIGURE.categories; const v=FIGURE.series[0].
 // ── 두 기간 묶음 막대(범례 있음): 기간 1·기간 2 의 값이 모두 세로 눈금 간격의 배수 ──
 import { PERIODS, pLow, type TwoScene } from "./items/_t4-kit";
 export type TwoBar = TwoScene & { yStep: number; yMax: number; fig: { type: "data"; kind: "bar"; categories: string[]; series: { name: string; values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
-export const twoBarFig = (s: { t: CountTopic; names: string[]; vals: number[]; v2: number[]; p: [string, string]; yStep: number; yMax: number }) => ({ type: "data" as const, kind: "bar" as const, categories: s.names, series: [{ name: s.p[0], values: s.vals }, { name: s.p[1], values: s.v2 }], xTitle: s.t.rowHead, yTitle: `${s.t.col} (${s.t.unit})`, yMin: 0, yMax: s.yMax, yStep: s.yStep });
+export const twoBarFig = (s: { t: CountTopic; names: string[]; vals: number[]; v2: number[]; p: [string, string]; yStep: number; yMax: number }) => ({ type: "data" as const, kind: "bar" as const, categories: s.names, series: [{ name: s.p[0], values: s.vals }, { name: s.p[1], values: s.v2 }], xTitle: s.t.rowHead, yTitle: titleWith(s.t.col, s.t.unit), yMin: 0, yMax: s.yMax, yStep: s.yStep });
 /** 두 기간 막대 장면: 막대 높이는 눈금 칸 수(1~10)의 정수배, 행마다 변화율이 pcts 안에 든다(칸 수 a→b 의 정확한 퍼센트 변화). */
 export function twoSceneBar(rng: Rng, n: number, pcts: number[]): TwoBar {
   const t = rng.pick(BAR_TOPICS); const names = rng.shuffle(t.rows).slice(0, n).sort((a, b) => t.rows.indexOf(a) - t.rows.indexOf(b)); const p = rng.pick(PERIODS.filter((q) => q.every((x) => !/\d/.test(x)))) as [string, string];
@@ -96,8 +96,9 @@ export const BAR_TWO_JS = "const nm=FIGURE.categories; const a=FIGURE.series[0].
 
 // ── 도수 막대(값 × 개수): 도수표(FQ)와 같은 장면을 막대로 — 값이 가로축 범주, 막대 높이가 도수 ──
 import { FQ_TOPICS as _FQ, type FqTopic as _FqT } from "./table-kit";
+import { titleWith } from "./axis-title";
 export type BarFqScene = { t: _FqT; vals: number[]; freqs: number[]; N: number; sum: number; fig: { type: "data"; kind: "bar"; categories: string[]; series: { values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
-export const barFqFig = (t: _FqT, vals: number[], freqs: number[]) => ({ type: "data" as const, kind: "bar" as const, categories: vals.map(String), series: [{ values: freqs }], xTitle: `${t.col} (${t.unit})`, yTitle: `${t.cnt} (${t.ent})`, yMin: 0, yMax: Math.max(...freqs) + 1, yStep: 1 });
+export const barFqFig = (t: _FqT, vals: number[], freqs: number[]) => ({ type: "data" as const, kind: "bar" as const, categories: vals.map(String), series: [{ values: freqs }], xTitle: titleWith(t.col, t.unit), yTitle: titleWith(t.cnt, t.ent), yMin: 0, yMax: Math.max(...freqs) + 1, yStep: 1 });
 /** 도수 막대 장면: 연속한 k(4~6)개 값, 도수 1~fmax(≤9 — 세로 눈금을 1 칸 간격으로 두어 정확히 읽는다). */
 export function makeBarFq(rng: Rng, o: { k?: number; fmax?: number; topic?: _FqT } = {}): BarFqScene {
   const t = o.topic ?? rng.pick(_FQ); const span = Math.floor((t.hi - t.lo) / t.step) + 1; const k = Math.min(o.k ?? rng.int(4, 6), span);
@@ -145,7 +146,7 @@ export function makeBox(rng: Rng, o: { groups?: 1 | 2; topic?: BoxTopic; /** 한
   const boxes: BoxFive[] = []; const b1 = five(0, R); if (!b1) throw new GenFail("상자 표집 실패"); boxes.push(b1);
   if (g === 2) { for (let tr = 0; tr < 40; tr++) { const lo = rng.int(0, 2), hi = rng.int(R - 2, R); if (hi - lo < 4) continue; const b = five(lo, hi); if (b && JSON.stringify(b) !== JSON.stringify(b1)) { boxes.push(b); break; } } if (boxes.length < 2) throw new GenFail("둘째 상자 표집 실패"); }
   const names = g === 2 ? [...t.names] : [t.ent.charAt(0).toUpperCase() + t.ent.slice(1)];
-  return { t, s, R, boxes, names, fig: { type: "data", kind: "boxplot", boxes: boxes.map((b, i) => ({ name: names[i], ...b })), xTitle: `${t.col} (${t.unit})` } };
+  return { t, s, R, boxes, names, fig: { type: "data", kind: "boxplot", boxes: boxes.map((b, i) => ({ name: names[i], ...b })), xTitle: titleWith(t.col, t.unit) } };
 }
 /** FIGURE(상자그림)에서 상자 배열 B 와 다섯 수 이름 배열 K 를 읽는 JS. 값이 min ≤ q1 ≤ median ≤ q3 ≤ max 가 아니면 던진다. */
 export const BX_JS = "const B=FIGURE.boxes; if (!B||!B.length) throw new Error('상자 없음'); for (const b of B) { const v=[b.min,b.q1,b.median,b.q3,b.max]; if (v.some(x=>typeof x!=='number')) throw new Error('값 오류'); for (let i=1;i<5;i++) if (v[i]<v[i-1]) throw new Error('다섯 수 순서 오류'); } const K=['min','q1','median','q3','max'];\n";

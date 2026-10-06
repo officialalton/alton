@@ -11,6 +11,7 @@ import {
 } from "../figure-kit";
 import type { SeTopic, TwTopic } from "../figure-topics";
 import type { ChoiceDecl } from "../types";
+import { titleWith } from "./fig/axis-title";
 
 const SKILL = "two_variable_data";
 const lc = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
@@ -444,7 +445,7 @@ const asCOps: COp[] = [
 export const FIG_ASSOC_SCC = buildC("association_direction_strength", "SC", "C", asCOps, false, SPR_NO_CHOICE);
 
 // ── P: 산점도 하나 + 서술 선지 ──
-export const mkAssocFig = (t: SeTopic, pts: Pt[], extra: Record<string, unknown> = {}) => ({ type: "data", kind: "scatter", xTitle: `${t.xa} (${t.xu})`, yTitle: `${t.ya} (${t.yu})`, points: pts, yMin: 0, yMax: 100, yStep: 20, ...extra });
+export const mkAssocFig = (t: SeTopic, pts: Pt[], extra: Record<string, unknown> = {}) => ({ type: "data", kind: "scatter", xTitle: titleWith(t.xa, t.xu), yTitle: titleWith(t.ya, t.yu), points: pts, yMin: 0, yMax: 100, yStep: 20, ...extra });
 const optsFor = (rng: Rng, c: AClass): { texts: string[]; correctIndex: number } => {
   const pool = new Map<string, AClass>(); const dir = c.startsWith("pos") ? "pos" : "neg";
   const cands: AClass[] = [flip(c), ...(c === "none" ? (["pos_strong", "neg_strong", "pos_weak"] as AClass[]) : (["strong", "moderate", "weak"].filter((s) => s !== strWord(c)).map((s) => `${dir}_${s}`) as AClass[])), "none"];

@@ -6,6 +6,7 @@ import { GenFail, type Instance } from "./types";
 import type { Rng } from "./rng";
 import { finish, type Draft } from "./text";
 import { SE_TOPICS, TW_TOPICS, type SeTopic, type TwTopic } from "./figure-topics";
+import { titleWith } from "./skills/fig/axis-title";
 
 export const cap1 = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const isInt = Number.isInteger;
@@ -65,7 +66,7 @@ export type LineSrc = {
 };
 export const SC_JS = "const m=FIGURE.fitLine.slope, b=FIGURE.fitLine.intercept;\n";
 export const LG_JS = "const xs=FIGURE.categories.map(Number), ys=FIGURE.series[0].values; const m=(ys[ys.length-1]-ys[0])/(xs[xs.length-1]-xs[0]); const b=ys[0]-m*xs[0];\n";
-const axisTitle = (a: string, u: string) => `${a} (${u})`;
+const axisTitle = (a: string, u: string) => titleWith(a, u);
 
 /** frac: 기울기가 분수(소수)가 되는 장면만(정수 조건 개수 세기용). */
 export type ScOpts = { topic?: SeTopic; n?: number; convNote?: boolean; frac?: boolean };
