@@ -191,6 +191,19 @@ export function formatPeriodLabelEn(periodStart: string, periodEnd: string): str
   return `${formatDateOnlyEn(periodStart)} – ${formatDateOnlyEn(periodEnd, true)}`;
 }
 
+/**
+ * 정산 기간 한 줄 라벨(지급 상태 반영). 지급 완료가 아니고 기한(회사 시간대 날짜)이 이미 지났으면 과거 날짜를 "paid by"로 두지 않고
+ * "Was due Sep 25, 2026 — processing"으로 보여 준다. now는 테스트에서 고정할 수 있다.
+ */
+export function formatPeriodStatusEn(periodStart: string, periodEnd: string, paid: boolean, now: Date = new Date()): { label: string; overdue: boolean } {
+  const deadline = payoutDateForPeriodEnd(periodEnd);
+  const today = companyDateOf(now);
+  if (!paid && deadline && today && deadline < today) {
+    return { label: `${formatPeriodLabelEn(periodStart, periodEnd)} · Was due ${formatDateOnlyEn(deadline, true)} — processing`, overdue: true };
+  }
+  return { label: formatPeriodWithPayoutEn(periodStart, periodEnd), overdue: false };
+}
+
 /** "Oct 1–15, 2026 → paid Oct 20". 지급일은 명목 규칙(10일·26일)에서 계산한다. */
 export function formatPeriodWithPayoutEn(periodStart: string, periodEnd: string, payoutDate?: string | null): string {
   const pay = payoutDate ?? payoutDateForPeriodEnd(periodEnd);

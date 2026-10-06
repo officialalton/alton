@@ -74,3 +74,18 @@ describe("컨설턴트 Settlement — 수취 계좌", () => {
     expect(screen.queryByTestId("payout-notices")).not.toBeInTheDocument();
   });
 });
+
+describe("컨설턴트 Settlement — 기한 경과 표기", () => {
+  it("확정(미지급)인데 기한이 지난 기간은 'Was due … — processing'과 Overdue 배지로 보인다", async () => {
+    m.getAccount.mockResolvedValue(SAVED);
+    m.periods.mockResolvedValue([
+      { id: "p-old", periodStart: "2020-01-01", periodEnd: "2020-01-15", amountMinor: 100000, currency: "KRW", status: "confirmed", note: null, confirmedAt: null, paidAt: null },
+      { id: "p-paid", periodStart: "2020-02-01", periodEnd: "2020-02-15", amountMinor: 100000, currency: "KRW", status: "paid", note: null, confirmedAt: null, paidAt: null },
+    ]);
+    render(<SettlementPanel />);
+    expect(await screen.findByText(/Was due Jan 24, 2020 — processing/)).toBeInTheDocument();
+    expect(screen.getByText("Overdue — processing")).toBeInTheDocument();
+    expect(screen.getByText("Paid")).toBeInTheDocument();
+    expect(screen.queryByText("Upcoming payout")).not.toBeInTheDocument();
+  });
+});
