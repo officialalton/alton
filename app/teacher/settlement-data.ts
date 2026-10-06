@@ -179,6 +179,7 @@ export async function loadTeacherSettlement(
     approvedTotalsByCurrency: {},
     paidTotalsByCurrency: {},
     nextPayoutMonth: null,
+    nextPayoutDate: null,
     refreshedAt,
   };
 

@@ -147,6 +147,7 @@ export default function SettlementTab() {
               approvedTotalsByCurrency: {},
               paidTotalsByCurrency: {},
               nextPayoutMonth: null,
+              nextPayoutDate: null,
               refreshedAt: new Date().toISOString(),
             }
         );
