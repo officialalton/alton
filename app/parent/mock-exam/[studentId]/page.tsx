@@ -12,7 +12,7 @@ export default async function ParentMockExamListPage({ params }: { params: Promi
 
   return (
     <main className="mx-auto max-w-2xl px-4 py-6">
-      <h1 className="mb-4 text-[18px] font-extrabold">Mock Exams</h1>
+      <h1 className="mb-4 text-[18px] font-extrabold">Practice Tests</h1>
       <MockExamOpenList rows={rows} readOnly resultHref={(attemptId) => `/parent/mock-exam/${studentId}/${attemptId}`} />
     </main>
   );

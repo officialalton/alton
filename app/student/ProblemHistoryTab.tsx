@@ -87,7 +87,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
           label="Source"
           value={sourceFilter}
           onChange={(v) => setSourceFilter(v as "all" | "lesson" | "homework" | "mock_exam")}
-          options={[["all", "All"], ["lesson", "Lesson"], ["homework", "Assignment"], ["mock_exam", "Mock Exam"]]}
+          options={[["all", "All"], ["lesson", "Lesson"], ["homework", "Assignment"], ["mock_exam", "Practice Test"]]}
         />
       </div>
 
@@ -133,7 +133,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                 >
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">{FORMAT_LABEL[e.format]}</span>
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">
-                    {e.source === "homework" ? "Assignment" : e.source === "mock_exam" ? "Mock Exam" : "Lesson"}
+                    {e.source === "homework" ? "Assignment" : e.source === "mock_exam" ? "Practice Test" : "Lesson"}
                   </span>
                   <GradeBadge entry={e} />
                   {e.skillCode && (

@@ -110,7 +110,7 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    ["Home", "Lesson Credits", "Courses", "Lessons", "Mock Exams", "Consultations", "Vocabulary", "Assignments"].forEach((label) =>
+    ["Home", "Lesson Credits", "Courses", "Lessons", "Practice Tests", "Consultations", "Vocabulary Builder", "Assignments"].forEach((label) =>
       expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     // 2026-09-17/18 IA 재구성: 지인 추천/통계(독립 탭)/동의/가족/교재는
@@ -431,7 +431,7 @@ describe("ParentShell", () => {
   // 2026-09-22(사용자 지시) — "모의고사"는 이제 홈 서브탭이 아니라 좌측
   // 독립 nav("모의고사")다. 여전히 별도 라우트로 이동하지 않고 탭 안에서
   // 현재 선택된 자녀의 응시 목록을 바로 보여준다.
-  it("Mock Exams 탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
+  it("Practice Tests 탭을 누르면 라우트 이동 없이 탭 안에서 자녀 응시 목록을 보여준다", async () => {
     pushMock.mockClear();
     render(
       <ParentShell
@@ -442,9 +442,9 @@ describe("ParentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
+    fireEvent.click(screen.getAllByText("Practice Tests")[0]);
     expect(pushMock).not.toHaveBeenCalledWith("/parent/mock-exam/s1");
-    expect(await screen.findByText("No mock exams are available yet.")).toBeInTheDocument();
+    expect(await screen.findByText("No practice tests are available yet.")).toBeInTheDocument();
   });
 
   it("현재 활성 탭에는 aria-current가 붙고, 탭 전환 시 이동한다", () => {

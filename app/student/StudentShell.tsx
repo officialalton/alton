@@ -75,11 +75,11 @@ const NAV_ITEMS = [
   // 2026-09-21(UAT 지적) — 모의고사 목록은 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
   // 실제 응시/결과 화면(/student/mock-exam/[attemptId])만 전체 화면 독립 라우트로 남긴다.
   // 2026-09-22(사용자 지시) — Assignments보다 위로.
-  { id: "mock-exam", label: "Mock Exams", icon: "mockExam" },
+  { id: "mock-exam", label: "Practice Tests", icon: "mockExam" },
   { id: "homework", label: "Assignments", icon: "assignments" },
-  { id: "problemlog", label: "Practice", icon: "practice" },
-  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
-  { id: "materials", label: "Materials", icon: "materials" },
+  { id: "problemlog", label: "Mistake Notebook", icon: "practice" },
+  { id: "vocab", label: "Vocabulary Builder", icon: "vocabulary" },
+  { id: "materials", label: "Study Materials", icon: "materials" },
   // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 Home에 이미
   // 있어 제거(NAV_ITEMS에서 뺐다 — CreditsTab은 계정 팝업에서 계속 쓴다).
 ] as const;

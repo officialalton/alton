@@ -22,7 +22,7 @@ export default function MockExamOpenList({
   onStart,
   onOpenResult,
   resultHref,
-  emptyText = "No mock exams are available yet.",
+  emptyText = "No practice tests are available yet.",
 }: {
   rows: MockExamListRow[];
   readOnly: boolean;

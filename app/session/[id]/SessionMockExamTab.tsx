@@ -45,7 +45,7 @@ export default function SessionMockExamTab({
         if (!cancelled) setAttempts(rows);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load mock exams.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load practice tests.");
       });
     return () => {
       cancelled = true;
@@ -72,7 +72,7 @@ export default function SessionMockExamTab({
           onClick={() => setOpenId(null)}
           className="mb-4 rounded-lg border-[1.5px] border-grey-200 px-3 py-1.5 text-[13px] font-semibold text-grey-600 hover:bg-grey-100 active:scale-95"
         >
-          ← Back to mock exams
+          ← Back to practice tests
         </button>
         {!detail ? (
           <p className="text-[13px] text-grey-500">Loading…</p>
@@ -92,7 +92,7 @@ export default function SessionMockExamTab({
   }
 
   if (attempts === null) return <p className="p-6 text-[13px] text-grey-500">Loading…</p>;
-  if (attempts.length === 0) return <p className="p-6 text-[13px] text-grey-500">No mock exams started yet. Published exams can be started from the Mock Exams tab in the student portal.</p>;
+  if (attempts.length === 0) return <p className="p-6 text-[13px] text-grey-500">No practice tests started yet. Published exams can be started from the Practice Tests tab in the student portal.</p>;
 
   return (
     <div className="mx-auto max-w-[720px] px-6 py-6">

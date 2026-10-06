@@ -49,7 +49,7 @@ describe("StatsTab — 역할별 노출", () => {
     expect(screen.queryByText("Strengths by domain")).toBeNull();
     expect(screen.queryByText(/Teacher Feedback \(Admin\)/)).toBeNull();
     expect(screen.getByText("Learning Progress")).toBeInTheDocument();
-    expect(screen.getByText("Mock Exams")).toBeInTheDocument();
+    expect(screen.getByText("Practice Tests")).toBeInTheDocument();
     expect(screen.getByText("Lesson Credits")).toBeInTheDocument();
     expect(screen.getByText("Linear functions")).toBeInTheDocument();
     expect(screen.getByText(/Last 4 weeks ▲/)).toBeInTheDocument();
@@ -73,7 +73,7 @@ describe("StatsTab — 역할별 노출", () => {
       overdue: { homework: 0, vocabQuiz: 0, mockExam: 0, manual: 0 }, habits: [], vocabQuizzes: [], ops: [], staff: null };
     render(<StatsTab data={{ attendanceRate: null, bySubject: [], extended: buildExtendedStats(empty, "family") }} />);
     expect(screen.getByText("No graded problems yet.")).toBeInTheDocument();
-    expect(screen.getByText("No graded mock exams yet.")).toBeInTheDocument();
+    expect(screen.getByText("No graded practice tests yet.")).toBeInTheDocument();
     expect(screen.getByText("No assignments yet.")).toBeInTheDocument();
     expect(screen.getByText("No study activity recorded in the last 12 weeks.")).toBeInTheDocument();
     expect(screen.getByText("No lessons in the last 6 months.")).toBeInTheDocument();
