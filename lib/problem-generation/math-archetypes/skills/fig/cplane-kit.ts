@@ -8,7 +8,7 @@ import { lineChoice, parabola } from "./ln-b-kit";
 
 export { cInst, oneCond, poolChoices, twoCond, SPR_NO_DATA_CHOICE } from "./data-c-kit";
 export const SPR_NO_PLANE_CHOICE = "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다";
-export const C_LEADS = ["", "", "A student is studying graphs in an algebra class. ", "A teacher sketches possible graphs on a grid. ", "A graphing program draws four candidate graphs. ", "In a practice set, four graphs are shown in the $xy$-plane. ", "A designer compares four curves on a coordinate grid. "];
+export const C_LEADS = ["", "", "A student is studying graphs in an algebra class. ", "A teacher sketches possible graphs on a grid. ", "A graphing program draws candidate graphs for a worksheet. ", "In a practice set, students compare graphs in the $xy$-plane. ", "A designer compares curves on a coordinate grid. "];
 export const C_Q = (what: string) => [`Which of the following graphs shown ${what}?`, `Which one of the four graphs shown ${what}?`, `Which graph shown ${what}?`];
 export const R_SET = [6, 8, 10];
 

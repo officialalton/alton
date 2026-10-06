@@ -1,9 +1,9 @@
 {
  "itemId": "coordinate_geometry.parallel_perpendicular_slopes.LN.C",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T11:05:17Z",
+ "reviewedAt": "2026-10-06T11:12:55Z",
  "reviewer": "claude-sonnet-5.5 (math-A session)",
- "codeHash": "ed2ea7f3fdf45f900930e386fbb4312b9b5f2f4717f45a2632cc171134024347",
+ "codeHash": "736178e1669130b14af9156ddb49952328c4f8b7e4c11ca291fa1fc7eb721432",
  "samples": [
   "coordinate_geometry.parallel_perpendicular_slopes.LN.C.png",
   "coordinate_geometry.parallel_perpendicular_slopes.LN.C.m375.png"
@@ -20,5 +20,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "데스크톱·375px 확인: 선택지 4개 도형이 서술 조건 두 개 중 정확히 하나·둘을 어기는 오답과 구별되고, 정답 도형이 서술을 모두 만족함. 축·눈금·라벨 겹침 없음. 지문 도입 문장이 두 개 연이어 나오는 경우가 있어 폴리싱 라운드 후보."
+ "notes": "리드 문장 중복 수정 후 재생성본을 데스크톱 PNG 21장 전부 읽고, 375px는 계열별(직선·부등식·포물선) 4장 확인. 선택지 4개 중 서술 조건을 모두 만족하는 도형이 하나, 오답은 조건 일부 위반. 축·눈금·라벨 양호. FN.C 계수 문항은 x² 유니코드 표기로 변경."
 }
