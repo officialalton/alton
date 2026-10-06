@@ -1,5 +1,6 @@
 // linear_equations_two_var.slope.LN.P — 순수 함수 그래프(축 제목 x·y)로 주어진 직선의 기울기로 다른 직선·식의 계수를 구한다(표 버전 .TB.P 의 그래프판).
 import { GenFail } from "../../../types";
+import type { Rng } from "../../../rng";
 import { fmtNum, lin } from "../../../text";
 import { W } from "../../d-kit";
 import { figInst, figJs } from "../../../figure-kit";
