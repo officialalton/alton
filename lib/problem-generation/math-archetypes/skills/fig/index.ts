@@ -20,5 +20,5 @@ import { BUNDLE as G8 } from "./bundles/G8-polygon-circle-composite";
 import { BUNDLE as G9 } from "./bundles/G9-coordinate-geometry";
 import { BUNDLE as G10 } from "./bundles/G10-solids";
 
-export const FIG_ALL: LArch[] = [...T1, ...T2, ...T3, ...T4, ...T5, ...T6, ...T7, ...T8, G1, G2, G3, G4, G5, G6, G7, G8, G9, G10];
+export const FIG_ALL: LArch[] = [...T1, ...T2, ...T3, ...T4, ...T5, ...T6, ...T7, ...T8, ...G1, ...G2, ...G3, ...G4, ...G5, ...G6, ...G7, ...G8, ...G9, ...G10];
 export const FIG_HARD: LArch[] = FIG_ALL.filter((a) => a.level === "hard");
