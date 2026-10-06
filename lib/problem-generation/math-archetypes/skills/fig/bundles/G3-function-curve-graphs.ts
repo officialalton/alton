@@ -19,6 +19,8 @@ import { ITEM as cgPP } from "../items/coordinate_geometry.parallel_perpendicula
 import { ITEM as sysFG } from "../items/systems_linear.system_from_graph.LN.P";
 import { ITEM as liFG } from "../items/linear_inequalities.inequality_from_graph.LN.P";
 import { ITEM as liPS } from "../items/linear_inequalities.point_in_solution.LN.P";
+import { ITEM as leoS } from "../items/linear_equations_one_var.solve.LN.P";
+import { ITEM as liSO } from "../items/linear_inequalities.solve_one_var.LN.P";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO];
 

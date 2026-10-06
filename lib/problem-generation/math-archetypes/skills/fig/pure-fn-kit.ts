@@ -94,7 +94,7 @@ const latticePts = (rng: Rng, R: number, m: number, b: number): number[] | null 
   if (cand.length < 3) return null; return rng.shuffle(cand).slice(0, 3).sort((p, q) => p - q);
 };
 /** 교점이 정수 (xi, yi) 인 두 직선(점은 찍지 않고 직선만 그린다 — 직선은 격자점 두 개를 지난다). inside 면 교점이 그림 안의 격자점, 아니면 x 가 그림 밖(|xi| > R). */
-export function makePureLines(rng: Rng, o: { inside?: boolean } = {}): PureLines {
+export function makePureLines(rng: Rng, o: { inside?: boolean; labels?: [string, string] } = {}): PureLines {
   for (let tr = 0; tr < 3000; tr++) {
     const R = rng.pick([6, 8, 10]); const m1 = rng.pick([-4, -3, -2, -1, 1, 2, 3, 4]); const m2 = rng.pick([-4, -3, -2, -1, 1, 2, 3, 4]); if (m1 === m2) continue;
     const b1 = rng.int(-(R - 2), R - 2), b2 = rng.int(-(R - 2), R - 2); if (!crossSafe(b1, R) || !crossSafe(b2, R) || b1 === b2) continue;
@@ -103,8 +103,8 @@ export function makePureLines(rng: Rng, o: { inside?: boolean } = {}): PureLines
     if (o.inside ? !(clearOfLabels(xi, yi, R)) : !(Math.abs(xi) > R)) continue;
     const c1 = latticePts(rng, R, m1, b1), c2 = latticePts(rng, R, m2, b2); if (!c1 || !c2) continue;
     const xs1 = [c1[0], c1[2]], xs2 = [c2[0], c2[2]]; const ys1 = xs1.map((x) => m1 * x + b1), ys2 = xs2.map((x) => m2 * x + b2);
-    const obj = (id: string, xs: number[], ys: number[]) => ({ id, kind: "line", through: [[xs[0], ys[0]], [xs[1], ys[1]]] });
-    return { m1, b1, m2, b2, xs1, ys1, xs2, ys2, xi, yi, R, fig: { type: "plane", axes: pureAxes(R), objects: [obj("A1", xs1, ys1), obj("B1", xs2, ys2)] } as unknown as PlaneFig };
+    const obj = (id: string, xs: number[], ys: number[], label?: string) => ({ id, kind: "line", through: [[xs[0], ys[0]], [xs[1], ys[1]]], ...(label ? { label } : {}) });
+    return { m1, b1, m2, b2, xs1, ys1, xs2, ys2, xi, yi, R, fig: { type: "plane", axes: pureAxes(R), objects: [obj("A1", xs1, ys1, o.labels?.[0]), obj("B1", xs2, ys2, o.labels?.[1])] } as unknown as PlaneFig };
   }
   throw new GenFail("순수 두 직선 장면 표집 실패");
 }

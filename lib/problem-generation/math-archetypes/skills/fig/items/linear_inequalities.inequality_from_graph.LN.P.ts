@@ -24,7 +24,7 @@ export const ITEM = defineItem({
         const s = makePureIneq(rng); const x0 = rng.nz(-8, 8); const v = s.m * x0 + s.b; const ans = edgeY(s.m, s.b, x0, s.above, s.strict); if (Math.abs(v) > 60) throw new GenFail("v");
         return figInst(rng, {
           stimulus: piIntro(rng), question: edgeQ(rng, s.above, x0), correct: ans,
-          wrongs: [W(v, "boundary_error", "경계선 위의 값을 그대로 답했다(점선이면 해가 아니다)."), W(s.above ? v - 1 : v + 1, "boundary_error", "음영 방향을 반대로 보았다."), W(edgeY(s.m, s.b, x0, s.above, !s.strict), "boundary_error", "점선·실선을 반대로 읽었다."), W(-v, "sign_error", "부호를 바꿨다."), W(ans + (s.above ? 2 : -2), "other", "어긋났다.")].filter((w) => isInt(w.v) && w.v !== ans),
+          wrongs: [W(v, "condition_ignored", "경계선 위의 값을 그대로 답했다(점선이면 해가 아니다)."), W(s.above ? v - 1 : v + 1, "condition_ignored", "음영 방향을 반대로 보았다."), W(edgeY(s.m, s.b, x0, s.above, !s.strict), "condition_ignored", "점선·실선을 반대로 읽었다."), W(-v, "sign_error", "부호를 바꿨다."), W(ans + (s.above ? 2 : -2), "other", "어긋났다.")].filter((w) => isInt(w.v) && w.v !== ans),
           verificationJs: figJs({ x0 }, s.fig, `${PI_JS}const v=m*P.x0+b; return above ? v+(strict?1:0) : v-(strict?1:0);`),
           trace: [...piRead(s), [`x = ${x0} 일 때 경계선의 y 는 ${s.m} × ${x0} + (${s.b}) = ${v} 이다.`, "Evaluate the boundary at x0."], [`${s.above ? "가장 작은" : "가장 큰"} 정수 y 는 ${ans} 이다.`, "Pick the boundary integer allowed by the inequality."]], variant: "edge_integer_y",
         }, s.fig);
@@ -52,7 +52,7 @@ export const ITEM = defineItem({
         let nAll = 0; for (let y = lo; y <= hi; y++) if (s.above ? y >= v : y <= v) nAll++;
         return figInst(rng, {
           stimulus: piIntro(rng), question: rng.pick([`For how many integer values of $y$ with $${lo} \\le y \\le ${hi}$ is the point $(${x0}, y)$ in the solution set?`, `How many integers $y$ with $${lo} \\le y \\le ${hi}$ make $(${x0}, y)$ a solution of the inequality?`, `The point $(${x0}, y)$ is a solution when $y$ is an integer from ${lo} to ${hi}, inclusive, only for certain values. How many such values of $y$ are there?`]), correct: n,
-          wrongs: [W(nAll === n ? n + 1 : nAll, "boundary_error", "경계선 위의 점을 항상 포함했다."), W(hi - lo + 1 - n, "sign_error", "반대쪽 영역을 셌다."), W(n - 1, "boundary_error", "끝 값을 하나 빠뜨렸다."), W(n + 1, "boundary_error", "끝 값을 하나 더 포함했다."), W(hi - lo + 1, "condition_ignored", "범위의 모든 정수를 셌다.")].filter((w) => isInt(w.v) && w.v !== n && w.v >= 0),
+          wrongs: [W(nAll === n ? n + 1 : nAll, "condition_ignored", "경계선 위의 점을 항상 포함했다."), W(hi - lo + 1 - n, "sign_error", "반대쪽 영역을 셌다."), W(n - 1, "condition_ignored", "끝 값을 하나 빠뜨렸다."), W(n + 1, "condition_ignored", "끝 값을 하나 더 포함했다."), W(hi - lo + 1, "condition_ignored", "범위의 모든 정수를 셌다.")].filter((w) => isInt(w.v) && w.v !== n && w.v >= 0),
           verificationJs: figJs({ x0, lo, hi }, s.fig, `${PI_JS}const v=m*P.x0+b; let n=0; for (let y=P.lo;y<=P.hi;y++) { if (above ? (strict ? y>v : y>=v) : (strict ? y<v : y<=v)) n++; } return n;`),
           trace: [...piRead(s), [`x = ${x0} 일 때 경계선의 y 는 ${v} 이다.`, "Evaluate the boundary at x0."], [`${lo} ≤ y ≤ ${hi} 중 해가 되는 정수는 ${n}개이다.`, "Count the allowed integers."]], variant: "count_integer_y",
         }, s.fig);
@@ -65,7 +65,7 @@ export const ITEM = defineItem({
         const s = makePureIneq(rng); const x0 = rng.nz(-6, 6); const v = s.m * x0 + s.b; if (Math.abs(v) > 40) throw new GenFail("v"); const k = edgeY(s.m, s.b, x0, s.above, s.strict);
         return figInst(rng, {
           stimulus: `${piIntro(rng)} ${rng.pick([`The point $(${x0}, k)$ is in the solution set, where $k$ is an integer.`, `For an integer $k$, the point $(${x0}, k)$ is a solution of the inequality.`, `The ordered pair $(${x0}, k)$, where $k$ is an integer, satisfies the inequality.`])}`, question: s.above ? rng.pick([`What is the least possible value of $k$?`, `What is the smallest integer $k$ for which this is true?`, `What is the minimum value $k$ can have?`]) : rng.pick([`What is the greatest possible value of $k$?`, `What is the largest integer $k$ for which this is true?`, `What is the maximum value $k$ can have?`]), correct: k,
-          wrongs: [W(v, "boundary_error", "경계값을 그대로 답했다."), W(s.above ? v - 1 : v + 1, "boundary_error", "음영 방향을 반대로 보았다."), W(edgeY(s.m, s.b, x0, s.above, !s.strict), "boundary_error", "점선·실선을 반대로 읽었다."), W(-v, "sign_error", "부호를 바꿨다."), W(k + (s.above ? 2 : -2), "other", "어긋났다.")].filter((w) => isInt(w.v) && w.v !== k),
+          wrongs: [W(v, "condition_ignored", "경계값을 그대로 답했다."), W(s.above ? v - 1 : v + 1, "condition_ignored", "음영 방향을 반대로 보았다."), W(edgeY(s.m, s.b, x0, s.above, !s.strict), "condition_ignored", "점선·실선을 반대로 읽었다."), W(-v, "sign_error", "부호를 바꿨다."), W(k + (s.above ? 2 : -2), "other", "어긋났다.")].filter((w) => isInt(w.v) && w.v !== k),
           verificationJs: figJs({ x0 }, s.fig, `${PI_JS}const v=m*P.x0+b; return above ? v+(strict?1:0) : v-(strict?1:0);`),
           trace: [...piRead(s), [`x = ${x0} 일 때 경계선의 y 는 ${v} 이다.`, "Evaluate the boundary at x0."], [`${s.above ? "가능한 가장 작은" : "가능한 가장 큰"} 정수 k 는 ${k} 이다.`, "Pick the boundary integer allowed by the inequality."]], variant: "k_extreme_integer",
         }, s.fig);
