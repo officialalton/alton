@@ -1,0 +1,79 @@
+[
+ {
+  "gid": "handmade-tower-single-observer-01",
+  "runId": "content-topup-math-tower",
+  "skill": "right_triangles_trigonometry",
+  "domain": "geometry_trig",
+  "examSystem": "sat_math",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "format": "mc",
+   "figure": {
+    "type": "triangle",
+    "vertices": [
+     "T",
+     "B",
+     "P"
+    ],
+    "kind": "right",
+    "rightAngleAt": "B",
+    "horizontal": [
+     "B",
+     "P"
+    ],
+    "sides": [
+     {
+      "between": [
+       "B",
+       "P"
+      ],
+      "label": "25 m"
+     }
+    ],
+    "angles": [
+     {
+      "at": "P",
+      "label": "60°",
+      "value": 60
+     }
+    ]
+   },
+   "passage": "A vertical tower stands on level ground. Point $P$ is on the ground $25$ meters from the base $B$ of the tower. From $P$, the angle of elevation to the top $T$ of the tower is $60^\\circ$.\n\nWhat is the height of the tower, in meters?",
+   "stimulus": "A vertical tower stands on level ground. Point $P$ is on the ground $25$ meters from the base $B$ of the tower. From $P$, the angle of elevation to the top $T$ of the tower is $60^\\circ$.",
+   "question": "What is the height of the tower, in meters?",
+   "needsFigure": true,
+   "options": [
+    "$25\\sqrt{3}$",
+    "$\\dfrac{25\\sqrt{3}}{3}$",
+    "$50$",
+    "$25\\sqrt{2}$"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "statements": null,
+   "explanation": "삼각형 $TBP$는 $B$에서 직각인 직각삼각형이고, $P$에서의 고도각이 $60^\\circ$이므로 $\\tan 60^\\circ = \\dfrac{TB}{BP}$이다. $\\tan 60^\\circ = \\sqrt{3}$, $BP = 25$이므로 $TB = 25\\sqrt{3}$ 미터이다. 따라서 정답은 A번이다.",
+   "explanationEn": "Triangle $TBP$ is a right triangle with the right angle at $B$, and the angle of elevation at $P$ is $60^\\circ$, so $\\tan 60^\\circ = \\dfrac{TB}{BP}$. Since $\\tan 60^\\circ = \\sqrt{3}$ and $BP = 25$, the height is $TB = 25\\sqrt{3}$ meters. Choice B results from using $\\dfrac{BP}{TB}$ instead of $\\dfrac{TB}{BP}$. Therefore, the correct answer is A.",
+   "difficulty": "medium",
+   "difficultyRationale": "",
+   "design": null,
+   "evidenceTarget": null,
+   "evidenceSpan": null,
+   "answerRationale": null,
+   "distractorErrorTypes": null
+  },
+  "quality": {
+   "handwritten": true,
+   "replaces": "fa5c4f8f (two-observation-point tower item, archived: figure could not show the second observation point)",
+   "verification": {
+    "method": "numeric",
+    "tan60_deg": 43.30127018922192,
+    "25*sqrt(3)": 43.30127018922193,
+    "inverse_ratio_25/sqrt(3)": 14.433756729740645,
+    "figureCheck": "validateTriangle ok; rendered B-T vertical 184px, B-P horizontal 106.23px, ratio 1.732 = tan 60"
+   },
+   "generatedBy": "claude-sonnet-5-5 (hand-written)"
+  }
+ }
+]
