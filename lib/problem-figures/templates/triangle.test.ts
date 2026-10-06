@@ -65,3 +65,13 @@ describe("템플릿 2 — 거부", () => {
     expect(r.issues.some((i) => i.code === "label_collision" || i.code === "clipped")).toBe(true);
   });
 });
+
+describe("식 라벨('x + 4'·'2x')은 숫자 길이로 읽지 않는다(2026-10-06)", () => {
+  const lines = (svg: string) => (svg.match(/<line [^>]*stroke-width="2"[^>]*\/>/g) ?? []).join("");
+  const mk = (base: string) => renderTriangle(T({ notToScale: false, kind: "scalene", sides: [{ between: ["B", "C"], label: base }], altitude: { from: "A", foot: "D", label: "12" } }));
+  it("밑변 'x + 4' 는 라벨이 없을 때와 같은 기본 모양, 숫자 '4' 는 밑변:높이 = 4:12 로 그린다", () => {
+    expect(lines(mk("x + 4").svg)).toBe(lines(renderTriangle(T({ notToScale: false, kind: "scalene", altitude: { from: "A", foot: "D", label: "12" } })).svg));
+    expect(lines(mk("4").svg)).not.toBe(lines(mk("x + 4").svg));
+    expect(lines(mk("2x").svg)).toBe(lines(mk("x + 4").svg));
+  });
+});

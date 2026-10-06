@@ -92,6 +92,8 @@ export function validateTriangle(input: unknown): { ok: true; spec: TriangleSpec
 /** side/altitude 라벨을 순수 숫자로 파싱(변수 라벨이면 null). */
 function parseLabel(t?: string): number | null {
   if (!t) return null;
+  // 'x + 4'·'2x' 같은 식 라벨은 숫자 길이가 아니다(예전엔 숫자만 뽑아 4·2 로 읽어 그림 비율이 틀어졌다).
+  if (/\d[a-zA-Z]|[a-zA-Z]\s*[+\-−*/]|[+\-−*/]\s*[a-zA-Z]/.test(t)) return null;
   const n = Number(t.trim().replace(/[^0-9.]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : null;
 }
