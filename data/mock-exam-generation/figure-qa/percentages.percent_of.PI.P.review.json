@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T08:00:06Z",
  "reviewer": "claude-sonnet-5.5 (math-D session)",
- "codeHash": "7283536ec90acb079ab54a4ef9730e521fc6f5f9c72d2658cc61bfddeae3158c",
+ "codeHash": "a746d95e208975c60f7d41da0d3d2229dcf80d0dbf21bb0b3681d230dae086fc",
  "samples": [
   "percentages.percent_of.PI.P.png"
  ],
@@ -19,5 +19,5 @@
   "choice_distinct_one_rule": "n/a"
  },
  "defects": [],
- "notes": "원그래프: 부채꼴 각도가 값에 비례, 라벨이 자기 부채꼴 바깥에 겹침 없이 배치, 데스크톱·375px 읽음. 스냅샷은 LaTeX 미조판(k\\pi 가 원문으로 보임 — 앱에서는 KaTeX)."
+ "notes": "원그래프: 부채꼴 각도가 값에 비례, 라벨이 자기 부채꼴 바깥에 겹침 없이 배치, 데스크톱·375px 읽음. 스냅샷은 LaTeX 미조판(k\\pi 가 원문으로 보임 — 앱에서는 KaTeX). [재스탬프: easy/medium 문구 변형 추가, 샘플 본문·렌더 동일 확인]"
 }
