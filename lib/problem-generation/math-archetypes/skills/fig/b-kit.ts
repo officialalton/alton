@@ -27,3 +27,17 @@ export function bundle(rng: Rng, o: { stimulus: string; question: string; stem: 
   return bundleInst(rng, { stimulus: o.stimulus, question: o.question, stem: o.stem, choices, correctIndex, rules, P: o.P, predicateJs: o.predicateJs, diagnoseJs: o.diagnoseJs, trace: o.trace, variant: o.variant });
 }
 export const SPR_NO_B = "정답이 선택지(그림 4개 중 하나)를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다";
+
+// ───────────────────────── 키 기반 B형(좌표평면·입체 변환) ─────────────────────────
+/**
+ * 기준 그림(STEM)에서 정답 그림의 '정규 키'를 식으로 다시 계산하고(semanticJs → EXPECT), 선택지는 KEY(c) 로 읽어 비교한다.
+ * 오답은 규칙 표(P.table = "키|규칙;…", 문자열이라 P 의 인쇄 검사 대상이 아님)로 진단한다 — 오답 규칙은 모두 정답과 다른 키를 가진 그림이어야 한다.
+ */
+export function keyBundle(rng: Rng, o: { stimulus: string; question: string; stem: unknown; correct: { fig: unknown; key: string }; wrongs: { fig: unknown; key: string; rule: string }[]; P: Record<string, number | string>; keyJs: string; semanticJs: string; trace: [string, string][]; variant: string }): Instance {
+  if (new Set([o.correct.key, ...o.wrongs.map((w) => w.key)]).size !== 4) throw new GenFail("선택지 키 중복");
+  const table = o.wrongs.map((w) => `${w.key}|${w.rule}`).join(";");
+  const P = { ...o.P, table };
+  const predicateJs = `${o.keyJs}\n${o.semanticJs}\nreturn KEY(c)===EXPECT;`;
+  const diagnoseJs = `${o.keyJs}\nconst T=Object.fromEntries(String(P.table).split(';').map(x=>{ const i=x.lastIndexOf('|'); return [x.slice(0,i), x.slice(i+1)]; })); return T[KEY(c)]||null;`;
+  return bundle(rng, { stimulus: o.stimulus, question: o.question, stem: o.stem, correct: o.correct.fig, wrong: o.wrongs.map((w) => ({ fig: w.fig, rule: w.rule })), P, predicateJs, diagnoseJs, trace: o.trace, variant: o.variant });
+}

@@ -22,5 +22,6 @@ import { ITEM as lsArea } from "../items/area_volume.rectangle_area.LS.P";
 import { ITEM as p3Item } from "../items/lines_angles_triangles.parallel_lines_transversal_angles.P3.P";
 import { ITEM as trbSim } from "../items/lines_angles_triangles.similar_triangles.TR.B";
 import { ITEM as trbCong } from "../items/lines_angles_triangles.congruent_triangles.TR.B";
+import { ITEM as lnB } from "../items/linear_functions.construct_equation_from_graph.LN.B";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong, ...lnB];
