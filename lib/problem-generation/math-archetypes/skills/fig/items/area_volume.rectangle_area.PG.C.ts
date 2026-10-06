@@ -56,7 +56,7 @@ function build(rng: Rng, s: Scene, variant: string) {
   const all = pc.choices as PolyFig[]; const maxA = Math.max(...all.map((f) => Number(f.sideLabels![0].label))), maxB = Math.max(...all.map((f) => Number(f.sideLabels![1].label))); const px = Math.round(Math.min(220 / maxA, 170 / maxB) * 100) / 100;
   const minPx = Math.min(...all.flatMap((f) => [Number(f.sideLabels![0].label), Number(f.sideLabels![1].label)])) * px; if (minPx < 40) throw new GenFail("가장 작은 변이 너무 짧게 그려짐");
   const choices = all.map((f) => ({ ...f, pxPerUnit: px }));
-  return guard(choiceInst(rng, { stimulus: `${rng.pick(PG_LEAD)}${s.text} ${rng.pick(UNITS)}`.trim().replace(/ {2,}/g, " "), question: Q(rng, s.v.join("")), choices, correctIndex, rules, P: s.P, predicateJs: PRED, diagnoseJs: DIAG, trace: s.explain, variant, explainKo: "", explainEn: "" }));
+  return guard(choiceInst(rng, { stimulus: `${rng.pick(PG_LEAD)}${s.text} ${rng.pick(UNITS)}`.trim().replace(/ {2,}/g, " "), question: Q(rng, s.v.join("")), choices, correctIndex, rules, P: s.P as Record<string, string | number>, predicateJs: PRED, diagnoseJs: DIAG, trace: s.explain, variant, explainKo: "", explainEn: "" }));
 }
 const one = (f: (rng: Rng) => Scene, variant: string) => (rng: Rng) => retry(rng, () => build(rng, f(rng), variant), 40);
 

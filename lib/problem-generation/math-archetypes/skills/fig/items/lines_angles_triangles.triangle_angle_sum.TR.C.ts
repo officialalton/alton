@@ -58,7 +58,7 @@ function chainAB(rng: Rng): Scene {
 function build(rng: Rng, s: Scene, variant: string) {
   const ok = scaleneFig(s.v, s.t); const cands = [...genericTriCands(s.v, s.t), ...(s.extra ?? [])]; const diag = diagBody(s.spec ?? "");
   const { choices, correctIndex, rules } = triChoices(rng, ok, cands, s.P, s.pred, diag);
-  return guard(choiceInst(rng, { stimulus: LEAD[rng.int(0, LEAD.length - 1)] + s.text, question: Q(rng, name(s.v)), choices, correctIndex, rules, P: s.P, predicateJs: `${M_JS}${s.pred}`, diagnoseJs: diag, trace: s.explain, variant, explainKo: "", explainEn: "" }));
+  return guard(choiceInst(rng, { stimulus: LEAD[rng.int(0, LEAD.length - 1)] + s.text, question: Q(rng, name(s.v)), choices, correctIndex, rules, P: s.P as Record<string, string | number>, predicateJs: `${M_JS}${s.pred}`, diagnoseJs: diag, trace: s.explain, variant, explainKo: "", explainEn: "" }));
 }
 const one = (f: (rng: Rng) => Scene, variant: string) => (rng: Rng) => { for (let i = 0; i < 40; i++) { try { return build(rng, f(rng), variant); } catch (e) { if (!(e instanceof GenFail)) throw e; } } throw new GenFail("삼각형 선택지 표집 실패"); };
 
