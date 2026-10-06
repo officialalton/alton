@@ -29,7 +29,7 @@ export function makeCub(rng: Rng, fn: string | undefined, o: { aPool?: number[];
     const rs = rng.shuffle(pool).slice(0, 3).sort((p, q) => p - q) as [number, number, number]; if (rs.length < 3 || rs[1] - rs[0] < 2 || rs[2] - rs[1] < 2) continue;
     const ext = cubExt(A, rs); const sc = pickScale(ext); if (!sc) continue; const [Y, sy] = sc; const f = cubFn(A, rs);
     const y0 = f(0); if (Math.abs(y0) > Y * 0.95 || Math.abs(y0) < 0.12 * Y) continue; // y 절편이 그림 안에 있고 원점·눈금 숫자와 겹치지 않는 자리
-    const cand: number[] = []; for (let x = -X + 1; x <= X - 1; x++) if (!rs.includes(x) && x !== 0 && Math.abs(f(x)) <= Y * 0.9 && Math.abs(f(x)) >= (x % 3 === 0 ? 0.22 : 0.12) * Y) cand.push(x); // x 눈금 숫자(±3, ±6) 아래에 점이 겹치지 않게
+    const cand: number[] = []; for (let x = -X + 1; x <= X - 1; x++) if (!rs.includes(x) && Math.abs(x) >= 2 && Math.abs(f(x)) <= Y * 0.9 && Math.abs(f(x)) >= (x % 3 === 0 ? 0.22 : 0.12) * Y) cand.push(x); // x 눈금 숫자(±3, ±6) 아래에 점이 겹치지 않게
     const n = o.nPts ?? 3; const xs: number[] = []; for (const x of rng.shuffle(cand)) { if (xs.every((u) => f(u) !== f(x))) xs.push(x); if (xs.length === n) break; } if (xs.length < n) continue; xs.sort((p, q) => p - q);
     const ys = xs.map(f); const { B, C, D } = coefs(A, rs);
     return { A, rs, X, Y, sy, ext, f, B, C, D, xs, ys, fig: cubicFig(X, Y, sy, A, rs, n > 0 ? xs.map((x, i) => [x, ys[i]] as [number, number]) : null, fn) };
