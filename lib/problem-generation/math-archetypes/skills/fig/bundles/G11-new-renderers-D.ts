@@ -17,5 +17,8 @@ import { ITEM as nl_solveP } from "../items/linear_inequalities.solve_one_var.NL
 import { ITEM as nl_solveC } from "../items/linear_inequalities.solve_one_var.NL.C";
 import { ITEM as nl_cmpP } from "../items/linear_inequalities.compound_inequality_number_line.NL.P";
 import { ITEM as nl_cmpC } from "../items/linear_inequalities.compound_inequality_number_line.NL.C";
+import { ITEM as nl_popP } from "../items/inference_margin_error.population_estimate.NL.P";
+import { ITEM as nl_marP } from "../items/inference_margin_error.margin_interval.NL.P";
+import { ITEM as nl_marC } from "../items/inference_margin_error.margin_interval.NL.C";
 
-export const BUNDLE: LArch[] = [...slMean, ...slMedian, ...slRange, ...slOutlier, ...slQuartile, ...pi_prop, ...pi_ps, ...pi_sw, ...pi_po, ...pi_fw, ...pi_fp, ...pi_sa, ...pi_sv, ...nl_solveP, ...nl_solveC, ...nl_cmpP, ...nl_cmpC];
+export const BUNDLE: LArch[] = [...slMean, ...slMedian, ...slRange, ...slOutlier, ...slQuartile, ...pi_prop, ...pi_ps, ...pi_sw, ...pi_po, ...pi_fw, ...pi_fp, ...pi_sa, ...pi_sv, ...nl_solveP, ...nl_solveC, ...nl_cmpP, ...nl_cmpC, ...nl_popP, ...nl_marP, ...nl_marC];
