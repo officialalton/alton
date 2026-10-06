@@ -67,3 +67,19 @@ export function quadSmall(rng: Rng) {
   }
   throw new GenFail("작은 포물선 표집 실패");
 }
+
+// ───────── 입체(닮은 입체) ─────────
+export type SolidKind = "cylinder" | "cone" | "rectangular_prism";
+export const SOLID_DIMS: Record<SolidKind, string[]> = { cylinder: ["radius", "height"], cone: ["radius", "height"], rectangular_prism: ["length", "width", "height"] };
+export const solidFig = (kind: SolidKind, dims: number[]) => {
+  const names = SOLID_DIMS[kind]; if (dims.length !== names.length) throw new GenFail("치수 수");
+  if (dims.some((d) => !Number.isInteger(d) || d <= 0 || d > 99)) throw new GenFail("치수 범위");
+  return { fig: { type: "solid" as const, kind, dims: Object.fromEntries(names.map((n, i) => [n, String(dims[i])])) }, key: `${kind}|${dims.join("|")}` };
+};
+export const SOLID_KEY_JS = `const NAMES={cylinder:['radius','height'],cone:['radius','height'],rectangular_prism:['length','width','height']};
+const DIMS=(c)=>{ const n=NAMES[c.kind]; if(!n) throw new Error('지원하지 않는 입체'); return n.map(k=>{ const v=Number(c.dims[k]); if(!Number.isFinite(v)) throw new Error('치수 해석 불가'); return v; }); };
+const KEY=(c)=>c.kind+'|'+DIMS(c).join('|');
+const STEMS=()=>{ if(!STEM||STEM.type!=='solid') throw new Error('기준 입체 필요'); return {kind:STEM.kind, d:DIMS(STEM)}; };
+const fmtS=(kind,d)=>kind+'|'+d.map(v=>Math.round(v*1e6)/1e6).join('|');
+`;
+export const rngSolid = (rng: Rng, kind: SolidKind): number[] => (kind === "rectangular_prism" ? [rng.int(2, 5), rng.int(2, 6), rng.int(2, 6)] : [rng.int(2, 5), rng.int(3, 8)]);
