@@ -14,6 +14,18 @@ const ul = (...items: string[]): SiteBlock => ({ t: "ul", items });
 
 const MEDIA_BLOCKS: SiteBlock[] = [{ t: "h3", text: RECORDING_CLAUSE_HEADING }, ...RECORDING_CLAUSE_PARAGRAPHS.map((text) => p(text))];
 
+export const RETENTION_INTRO =
+  "Retention schedule. ALTON keeps records for these periods, and longer only where required by law, an active dispute or legal hold, or an accounting or safety need:";
+export const RETENTION_ITEMS: string[] = [
+  "Contracts, pricing, and consent records; payments, refunds, and the lesson-credit ledger; and teacher and consultant payout and pay records: 7 years after the contract or transaction ends.",
+  "Attendance, bookings, lesson-credit history, and learning history (homework, note results, reviews, confirmed attendance, and quality-review outcomes): 3 years after the last lesson. Free-member learning records: 3 years after last activity.",
+  "Lesson recordings (video and audio), transcripts, AI lesson notes and summaries, and lesson materials: 1 year after the last lesson. This also applies if recordings are later offered on demand.",
+  "Chat and consultation records: 2 years after the matter ends.",
+  "Security and access audit logs: 1 year after creation. Notifications: 90 days.",
+  "Account closure: a 30-day period in which a closure request can be cancelled; deleted data in backups is removed within 35 days. A closed account keeps only what a retention basis above requires, with restricted access.",
+];
+const RETENTION_BLOCKS: SiteBlock[] = [p(RETENTION_INTRO), ul(...RETENTION_ITEMS)];
+
 const REQUESTS_PARAGRAPH = p(
   `Contact ${MAIL} for access, correction, deletion, account closure, or withdrawal requests. Applicable statutory rights and response deadlines prevail. Account deactivation is not a promise that all records have been deleted. Required records and legal holds are retained only as needed. Material processing changes require renewed consent when applicable; continued website use alone does not authorize a new recording practice.`
 );
@@ -146,6 +158,7 @@ export const TERMS_SECTIONS: SiteSection[] = [
     ],
   },
   { id: "lesson-media", title: "Regular-lesson media and AI records", blocks: MEDIA_BLOCKS },
+  { id: "retention-schedule", title: "Retention schedule", blocks: RETENTION_BLOCKS },
   { id: "privacy-requests", title: "Privacy requests", blocks: [REQUESTS_PARAGRAPH] },
   { id: "contact", title: "Contact us", blocks: [p(`Alton Education LLC — ${MAIL}`)] },
 ];
@@ -238,7 +251,7 @@ export const PRIVACY_SECTIONS: SiteSection[] = [
     title: "Retention and account closure",
     blocks: [
       p(
-        "We keep account and learning records while your account is active. If an account is closed, it first enters a 30-day pending period and is then deactivated. Contract and payment records are kept for as long as the law requires."
+        "We keep account and learning records while your account is active. If an account is closed, it first enters a 30-day pending period and is then deactivated. Retention periods are set out in the Retention Schedule below."
       ),
     ],
   },
@@ -268,6 +281,7 @@ export const PRIVACY_SECTIONS: SiteSection[] = [
     ],
   },
   { id: "lesson-media", title: "Regular-lesson media and AI records", blocks: MEDIA_BLOCKS },
+  { id: "retention-schedule", title: "Retention schedule", blocks: RETENTION_BLOCKS },
   { id: "privacy-requests", title: "Privacy requests", blocks: [REQUESTS_PARAGRAPH] },
   { id: "contact", title: "Contact us", blocks: [p(`Alton Education LLC — ${MAIL}`)] },
 ];
