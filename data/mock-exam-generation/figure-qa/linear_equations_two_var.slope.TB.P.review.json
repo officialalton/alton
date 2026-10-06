@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:43Z",
   "reviewer": "visual-review-agent-SA",
-  "codeHash": "98303319d50e2c1a0ef1add5f969b5ecde2a54e046d24c256beb65f960ef1c34",
+  "codeHash": "ebbec19b695adc05b09c5498bb342f9fbfa0bed70d30e4f91f60beeccaa9687b",
   "samples": [
     "linear_equations_two_var.slope.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "기울기 6/3=2 = -a/3 → a=-6 = C. 표의 선 ℓ 은 본문 기호이며 그림 라벨 아님. 풀림."
+  "notes": "기울기 6/3=2 = -a/3 → a=-6 = C. 표의 선 ℓ 은 본문 기호이며 그림 라벨 아님. 풀림.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

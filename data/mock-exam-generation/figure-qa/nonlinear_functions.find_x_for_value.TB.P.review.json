@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:43:04.000Z",
   "reviewer": "visual-review-agent-SC",
-  "codeHash": "2b0c0264a30ee1d717e6aeff065d9a4943f4246ac5b8d256c697cfe1b56b09e1",
+  "codeHash": "54d221d16ddc3a4b6b1811f8eaa9824bcf053ea4fb3975853123785882acdc63",
   "samples": [
     "nonlinear_functions.find_x_for_value.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "p(10..15)=6,16,28,42,58,76; 2nd diff 2 => p=x^2-11x+16; p=-2 => (x-2)(x-9)=0, larger=9 = meta. Table only, no line labels affected by new rule. Nit: snapshot shows x_1/x_2 as plain text (snapshot page does not render subscripts). Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+  "notes": "p(10..15)=6,16,28,42,58,76; 2nd diff 2 => p=x^2-11x+16; p=-2 => (x-2)(x-9)=0, larger=9 = meta. Table only, no line labels affected by new rule. Nit: snapshot shows x_1/x_2 as plain text (snapshot page does not render subscripts). Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

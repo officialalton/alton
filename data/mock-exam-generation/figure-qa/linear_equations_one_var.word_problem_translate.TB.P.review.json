@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:43Z",
   "reviewer": "visual-review-agent-SA",
-  "codeHash": "271ecf495b92b4ab522c70758c9b7a296274a8fdc3c08f9cfee9957c126e4d3c",
+  "codeHash": "351b00db3a1b0b222945b0e2fd3ffea77ceba8e815639798bced5e63dba322db",
   "samples": [
     "linear_equations_one_var.word_problem_translate.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "30+13d=20+15d → d=5 = B. Go Cars 행은 무관 자료(의도된 방해). 풀림."
+  "notes": "30+13d=20+15d → d=5 = B. Go Cars 행은 무관 자료(의도된 방해). 풀림.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

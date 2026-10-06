@@ -67,7 +67,7 @@ describe("TeacherTab", () => {
       />
     );
     expect(screen.getByText("박서연 선생님")).toBeInTheDocument();
-    expect(screen.getByText(/SAT Math · 진행 8 \/ 전체 12회차/)).toBeInTheDocument();
+    expect(screen.getByText(/SAT Math · Progress 8 \/ 12 sessions/)).toBeInTheDocument();
     expect(screen.getByText("교사 운영 커리큘럼 기준")).toBeInTheDocument();
   });
 

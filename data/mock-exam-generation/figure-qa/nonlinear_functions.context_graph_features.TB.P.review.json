@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "e1e4c4e6ee27f008c40b826b4a7848360476868a81608fb547f98daf11ff3d04",
+  "codeHash": "46e189f1626877529b938718fb41d6ff2f7b4d477bc9f31bc6687f39498329cd",
   "samples": [
     "nonlinear_functions.context_graph_features.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "대칭축 x=3.5(값 218,218 사이), 최댓값 222 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "대칭축 x=3.5(값 218,218 사이), 최댓값 222 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

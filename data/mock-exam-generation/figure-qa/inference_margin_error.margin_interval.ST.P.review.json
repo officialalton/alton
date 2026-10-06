@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:43Z",
   "reviewer": "visual-review-agent-SA",
-  "codeHash": "522e9ba4da3ad4c67b2613aa430928b36c4f376586ebea61fcc3a1cfbbc732fa",
+  "codeHash": "099f2ce75a42884c820b11b742b76b1f6077400774b64659f7f4eaaef785adc5",
   "samples": [
     "inference_margin_error.margin_interval.ST.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "구간 45~55% → 표본 비율 50%, 500×0.5=250 = C. 풀림."
+  "notes": "구간 45~55% → 표본 비율 50%, 500×0.5=250 = C. 풀림.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:43Z",
   "reviewer": "visual-review-agent-SA",
-  "codeHash": "28e867a895e43fd10ae4cda73caeb5213059cc4caaa1c6c7d9bdec6d9bb14a60",
+  "codeHash": "5470c2557e4d98b173d0cb05697e73c0238cf6267ea68fbae1b3eec30517279f",
   "samples": [
     "evaluating_statistical_claims.sampling_generalization.ST.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "표: 한 중학교 명단에서 무작위 → 해당 중학교 교사에게만 일반화 = C. 풀림. Nit: 모바일 열 폭 양호."
+  "notes": "표: 한 중학교 명단에서 무작위 → 해당 중학교 교사에게만 일반화 = C. 풀림. Nit: 모바일 열 폭 양호.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

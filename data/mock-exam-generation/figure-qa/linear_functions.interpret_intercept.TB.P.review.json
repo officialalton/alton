@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "24c99ddfa49d0d8ef93596ef7c36ca5fe5d734db5d4dbec1032b33c825279dfb",
+  "codeHash": "1a1b19a47161ab85b36d94dc5f15973bea4ca43b640cd13692b7d754a716cf94",
   "samples": [
     "linear_functions.interpret_intercept.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "표 (3,10),(4,12) 기울기 2, x=0 값 10-6=4 → C. 일치. 선/곡선 라벨 없음(새 규칙 무관). 정답 C 유일. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "표 (3,10),(4,12) 기울기 2, x=0 값 10-6=4 → C. 일치. 선/곡선 라벨 없음(새 규칙 무관). 정답 C 유일. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

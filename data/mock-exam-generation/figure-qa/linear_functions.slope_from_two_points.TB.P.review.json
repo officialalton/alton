@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "92525097b78c1ae16b524962e433d73794fe1567131eb2179e17690724706bfa",
+  "codeHash": "411b65eab384886b1b98313ebaeade4ebc2607caae4e59c529c57b94082fb1bc",
   "samples": [
     "linear_functions.slope_from_two_points.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "기울기 12 MB/min, 1 min=60 s → 0.2 → A. 환산식 표 위에 표시. nit: 질문 문구 'number of minutes ... measured in seconds'가 다소 어색. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "기울기 12 MB/min, 1 min=60 s → 0.2 → A. 환산식 표 위에 표시. nit: 질문 문구 'number of minutes ... measured in seconds'가 다소 어색. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

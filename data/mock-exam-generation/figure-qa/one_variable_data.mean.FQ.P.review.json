@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:43:04.000Z",
   "reviewer": "visual-review-agent-SC",
-  "codeHash": "bb17854f88afaa5594709b0548051c1e139acc93db08cd1dd4a7a9b02cde282a",
+  "codeHash": "8db76e489051d6816bb989a53df1b1ad6c064d4cd55e964679c7495d07c69490",
   "samples": [
     "one_variable_data.mean.FQ.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "sum=5+18+42+72=137, n=19; (137+4v)=7*23=161 => v=6 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+  "notes": "sum=5+18+42+72=137, n=19; (137+4v)=7*23=161 => v=6 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

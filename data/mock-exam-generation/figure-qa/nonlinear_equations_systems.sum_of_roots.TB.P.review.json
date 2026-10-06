@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "97628e9ad2c4d213e8099f6a496d8b9df1c425f2b96dcf23d531b962c6ff2b22",
+  "codeHash": "f856e6117391e6624cd824dbd0b05f6d6152cc271b30e8edce9d9f83fe7fe5c6",
   "samples": [
     "nonlinear_equations_systems.sum_of_roots.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "a=1, b=6 → 근의 합 -6 → D. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "a=1, b=6 → 근의 합 -6 → D. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "00aee45efd84d811e1284b88b7ef88054230e3adea8848331d0ef7d06fedf0d4",
+  "codeHash": "75c75e6f54342ecdcbdfdb7423f601651bcad9d31b96a303a64de81bcb82d3e2",
   "samples": [
     "nonlinear_functions.exponential_model.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "x=1→14, 비 2 → a=14/2=7 → D. 일치. nit: y=a(b)^x 평문 표기. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "x=1→14, 비 2 → a=14/2=7 → D. 일치. nit: y=a(b)^x 평문 표기. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

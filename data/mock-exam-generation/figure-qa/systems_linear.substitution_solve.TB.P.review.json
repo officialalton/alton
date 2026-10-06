@@ -1,23 +1,25 @@
 {
- "itemId": "systems_linear.substitution_solve.TB.P",
- "verdict": "pass",
- "reviewedAt": "2026-10-05T19:42:48.651Z",
- "reviewer": "visual-review-agent-SD",
- "codeHash": "d2fe74263ea24da7347dea136271eb4fb0de538cea4238e16a4dc4975c027567",
- "samples": [
-  "systems_linear.substitution_solve.TB.P.png"
- ],
- "checklist": {
-  "figure_present": "pass",
-  "proportion_matches_values": "pass",
-  "labels_placed_and_legible": "pass",
-  "multi_figure_consistent": "n/a",
-  "text_matches_figure_and_solvable": "pass",
-  "axes_ticks_units_legend": "pass",
-  "choice_distinct_one_rule": "n/a",
-  "sat_visual_style": "pass",
-  "mobile_375_readable": "pass"
- },
- "defects": [],
- "notes": "slope 2, y=2x-12; -2x-4(2x-12)=-52 -> x=10 = B."
+  "itemId": "systems_linear.substitution_solve.TB.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:48.651Z",
+  "reviewer": "visual-review-agent-SD",
+  "codeHash": "a41dacdc2e1bdd046a2f9905d15d3a3c880e7688695bc0c9f6c007bd63af1807",
+  "samples": [
+    "systems_linear.substitution_solve.TB.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "slope 2, y=2x-12; -2x-4(2x-12)=-52 -> x=10 = B.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

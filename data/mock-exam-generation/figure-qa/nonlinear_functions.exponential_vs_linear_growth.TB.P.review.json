@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "4a87476a92d7e053303477f430b2c5f87b0891f573b000ba9bdc92d3f08e1a93",
+  "codeHash": "988124eb078cde3be9bbb7a9048a2f1d84b48fa388b82a1d77db5031c92a6c83",
   "samples": [
     "nonlinear_functions.exponential_vs_linear_growth.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "A=35x+77, B=6·2^x; x=5 252>192, x=6 287<384 → 6 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "A=35x+77, B=6·2^x; x=5 252>192, x=6 287<384 → 6 → A. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

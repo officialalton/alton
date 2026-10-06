@@ -71,7 +71,7 @@ describe("CurriculumOverlayView — 학생·학부모 공용 읽기 전용 v3 �
     expect(screen.getByText("Completed")).toBeInTheDocument();
     expect(screen.getByText("In Progress")).toBeInTheDocument();
     expect(screen.getByText("Upcoming")).toBeInTheDocument();
-    expect(screen.getByText(/진행 1 \/ 전체 3회차/)).toBeInTheDocument();
+    expect(screen.getByText(/Progress 1 \/ 3 sessions/)).toBeInTheDocument();
   });
 
   it("편집 버튼(순서변경/제외/키워드토글/단원추가)을 전혀 렌더링하지 않는다", async () => {

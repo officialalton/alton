@@ -1,23 +1,25 @@
 {
- "itemId": "probability.conditional.TW.P",
- "verdict": "pass",
- "reviewedAt": "2026-10-05T19:42:48.650Z",
- "reviewer": "visual-review-agent-SD",
- "codeHash": "9c85e5b5e050ce0bf4de42e4886c5327a9b44c97f5d34384debcfc4cee9def1d",
- "samples": [
-  "probability.conditional.TW.P.png"
- ],
- "checklist": {
-  "figure_present": "pass",
-  "proportion_matches_values": "pass",
-  "labels_placed_and_legible": "pass",
-  "multi_figure_consistent": "n/a",
-  "text_matches_figure_and_solvable": "pass",
-  "axes_ticks_units_legend": "pass",
-  "choice_distinct_one_rule": "n/a",
-  "sat_visual_style": "pass",
-  "mobile_375_readable": "pass"
- },
- "defects": [],
- "notes": "5/8 - 19/33 = 13/264 = B."
+  "itemId": "probability.conditional.TW.P",
+  "verdict": "pass",
+  "reviewedAt": "2026-10-05T19:42:48.650Z",
+  "reviewer": "visual-review-agent-SD",
+  "codeHash": "5d4b36073bc1c7a2b88a816446a63fe4dd401816799c8a4fc1cb3859b7434749",
+  "samples": [
+    "probability.conditional.TW.P.png"
+  ],
+  "checklist": {
+    "figure_present": "pass",
+    "proportion_matches_values": "pass",
+    "labels_placed_and_legible": "pass",
+    "multi_figure_consistent": "n/a",
+    "text_matches_figure_and_solvable": "pass",
+    "axes_ticks_units_legend": "pass",
+    "choice_distinct_one_rule": "n/a",
+    "sat_visual_style": "pass",
+    "mobile_375_readable": "pass"
+  },
+  "defects": [],
+  "notes": "5/8 - 19/33 = 13/264 = B.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

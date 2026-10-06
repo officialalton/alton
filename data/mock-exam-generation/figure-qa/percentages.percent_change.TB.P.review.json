@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:43:04.000Z",
   "reviewer": "visual-review-agent-SC",
-  "codeHash": "78445accd415b6a21193f2ca8793157cc516cea6cc9c759986a87b098311c271",
+  "codeHash": "e88134bc97f21badde03f7bf61d36564767b122475bd4c538d6e8e28c575ccef",
   "samples": [
     "percentages.percent_change.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "increases 30%,25%,40%,5%,20% => 40 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+  "notes": "increases 30%,25%,40%,5%,20% => 40 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

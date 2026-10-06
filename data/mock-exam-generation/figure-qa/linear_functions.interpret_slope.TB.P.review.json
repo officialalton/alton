@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "f9e1af43e496c8a0293aadc4688f348b46a327f6632cee5edf6a16ecb23f7fb8",
+  "codeHash": "05e5484a8189a40f71dd94ed43c24dd95aa759876bfa032dfaf22b739ffda093",
   "samples": [
     "linear_functions.interpret_slope.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "(6,26),(8,34) 기울기 4/song → B. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "(6,26),(8,34) 기울기 4/song → B. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

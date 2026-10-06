@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:52Z",
   "reviewer": "visual-review-agent-SB",
-  "codeHash": "90e523ad9c289ba0f35f05bf244c0f63e15fbe4fb5de058422ca1cabc80edda7",
+  "codeHash": "1996cf2299148f4a24402d0d304bef601a9051852a0b7ce305a06091c4976c4c",
   "samples": [
     "nonlinear_functions.exponential_model.TB.C.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "32,48,72,108 (x1.5) 표 C가 정답. A 반대 배율, B 한 주기 밀림, D 등차(가산). 4개 표 모두 보임. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음."
+  "notes": "32,48,72,108 (x1.5) 표 C가 정답. A 반대 배율, B 한 주기 밀림, D 등차(가산). 4개 표 모두 보임. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

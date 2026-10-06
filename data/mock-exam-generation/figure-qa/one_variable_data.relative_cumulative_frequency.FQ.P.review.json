@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:43:04.000Z",
   "reviewer": "visual-review-agent-SC",
-  "codeHash": "ae39dd6af61913d2f41f91d0df372cda63b8756a28804bb402642dc8f44a6cf4",
+  "codeHash": "03e9f8c2e14e247fb534632a0fcae0a80c6473bdf9af30faf9efdf61cd6cde61",
   "samples": [
     "one_variable_data.relative_cumulative_frequency.FQ.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "n=50, 10 at value 5; (10+x)/(50+x)=0.5 => x=30 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+  "notes": "n=50, 10 at value 5; (10+x)/(50+x)=0.5 => x=30 = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

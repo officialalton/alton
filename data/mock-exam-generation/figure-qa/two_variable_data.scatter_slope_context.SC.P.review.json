@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:35.612Z",
   "reviewer": "visual-review-agent-SE",
-  "codeHash": "478ba1fd9d4cb675e27cf9201fecf0da203fc744c34d9d97556639154b3394b2",
+  "codeHash": "0deecda60f0c96e87fbba8c55e471ed7cf0aa2796a459323928d73529da0d31f",
   "samples": [
     "two_variable_data.scatter_slope_context.SC.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved from image: slope -4 mi/wk, 14d=2wk -> 8 (B). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact."
+  "notes": "Solved from image: slope -4 mi/wk, 14d=2wk -> 8 (B). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

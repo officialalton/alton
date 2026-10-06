@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:43:04.000Z",
   "reviewer": "visual-review-agent-SC",
-  "codeHash": "57b93fcb9181e075fd3dce29021b6153fb281296d1a560ed542612df3a756867",
+  "codeHash": "a18414ab539e2890f6fdf96851458cbb3014dc0b3fe3b0c99804288585df926c",
   "samples": [
     "nonlinear_functions.vertex_y.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "diffs 15,21,27,33,39 => a=3, vertex x=5, f(5)=39-9-3=27 = meta (min). Table only; no line labels. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+  "notes": "diffs 15,21,27,33,39 => a=3, vertex x=5, f(5)=39-9-3=27 = meta (min). Table only; no line labels. Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

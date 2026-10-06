@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:35.610Z",
   "reviewer": "visual-review-agent-SE",
-  "codeHash": "8b69dc7503eb219b76804a8536a4f16b843d02f4156b05327578ec5ae819d2b2",
+  "codeHash": "a63e0b29f82bb2f9eff148856c7786d414aa697fb9d027b9be8e12ec731239a2",
   "samples": [
     "two_variable_data.row_total.TW.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "Solved from image: (96+x)/(195+x)=.55 -> x=25 (C). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact."
+  "notes": "Solved from image: (96+x)/(195+x)=.55 -> x=25 (C). Matches meta answer. Post label-rule change: no text refers to an undrawn line label; axes, ticks, titles, point positions intact.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

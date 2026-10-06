@@ -95,7 +95,7 @@ describe("뷰어 시간대 hydration 일관성 (서버 UTC / 브라우저 서울
         <ConsentTab {...{ children: [child], activePolicy: null }} />
       </ViewerTimezoneProvider>
     );
-    expect(r.html).toContain("2026. 9. 29.");
+    expect(r.html).toMatch(/(Sep(tember)? 29, 2026|9\/29\/2026)/);
     expect(r.errors).toEqual([]);
   });
 

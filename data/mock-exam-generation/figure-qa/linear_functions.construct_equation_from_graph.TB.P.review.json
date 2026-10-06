@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:43Z",
   "reviewer": "visual-review-agent-SA",
-  "codeHash": "0a4ef9bf3c9426e73b0dc59aa666c3469733b1d1dff93da2009859879fbb66dd",
+  "codeHash": "109b082ba0b15bcc718b48ebb81d20bfa05fd9306e69581eed9578027f0c06ec",
   "samples": [
     "linear_functions.construct_equation_from_graph.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "기울기 2, 절편 53-30=23 → y=2x+23 = A. Nit(비차단): '남은 높이'가 날수에 따라 증가해 현실성 낮음(양초는 줄어야 함); 풀이에는 지장 없음."
+  "notes": "기울기 2, 절편 53-30=23 → y=2x+23 = A. Nit(비차단): '남은 높이'가 날수에 따라 증가해 현실성 낮음(양초는 줄어야 함); 풀이에는 지장 없음.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

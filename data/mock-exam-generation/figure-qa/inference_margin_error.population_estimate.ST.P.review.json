@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:42:43Z",
   "reviewer": "visual-review-agent-SA",
-  "codeHash": "be9947512609ab0343e39e17b7364da7292bb9c0ebb620323d3b86cbd0936470",
+  "codeHash": "e4b0d52d23d3c91453ee7fe0722dee8cf65d1dc6e72031db99fe0ae12ea1199e",
   "samples": [
     "inference_margin_error.population_estimate.ST.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "yes=400-227-33=140, 140/400×9000=3150 = B. 풀림."
+  "notes": "yes=400-227-33=140, 140/400×9000=3150 = B. 풀림.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

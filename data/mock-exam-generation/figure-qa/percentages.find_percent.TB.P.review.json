@@ -3,7 +3,7 @@
   "verdict": "pass",
   "reviewedAt": "2026-10-05T19:43:04.000Z",
   "reviewer": "visual-review-agent-SC",
-  "codeHash": "b49b2a65d997e4fc42d059c303ff65146041895113b41a7022ae98fd34e4070d",
+  "codeHash": "1b3238f5b542c1ba6dc3c78e46b563ece331690c7e771dd9093407c0669a807d",
   "samples": [
     "percentages.find_percent.TB.P.png"
   ],
@@ -19,5 +19,7 @@
     "mobile_375_readable": "pass"
   },
   "defects": [],
-  "notes": "total 500; (110+190)/500=60% = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn."
+  "notes": "total 500; (110+190)/500=60% = meta. Re-review after label rule change: table items, no line/curve labels referenced or drawn.",
+  "restampedAt": "2026-10-05T00:00:00Z",
+  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }
