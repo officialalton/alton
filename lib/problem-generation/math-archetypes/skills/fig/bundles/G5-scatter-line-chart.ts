@@ -6,5 +6,6 @@ import { ITEM as nfExpLG } from "../items/nonlinear_functions.exponential_vs_lin
 import { ITEM as tvdResid1 } from "../items/two_variable_data.intercept_residual_interpretation.SC.P_1";
 import { ITEM as tvdResid2 } from "../items/two_variable_data.intercept_residual_interpretation.SC.P_2";
 import { ITEM as tvdOutlierP } from "../items/two_variable_data.outlier_influence_on_fit.SC.P";
+import { ITEM as tvdOutlierC } from "../items/two_variable_data.outlier_influence_on_fit.SC.C";
 
-export const BUNDLE: LArch[] = [...tvdOutlierP, ...tvdResid1, ...tvdResid2, ...nfExpLG, ...pctCompLG, ...pctChangeLG];
+export const BUNDLE: LArch[] = [...tvdOutlierC, ...tvdOutlierP, ...tvdResid1, ...tvdResid2, ...nfExpLG, ...pctCompLG, ...pctChangeLG];
