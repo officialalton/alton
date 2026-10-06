@@ -1,25 +1,25 @@
 {
-  "itemId": "nonlinear_equations_systems.linear_quadratic_intersection.TB.P",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-05T19:42:52Z",
-  "reviewer": "visual-review-agent-SB",
-  "codeHash": "2cfd469d34a8845695e770ded5cce3b7b58877b18f5a9b1f60064d4f3005d2eb",
-  "samples": [
-    "nonlinear_equations_systems.linear_quadratic_intersection.TB.P.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "n/a",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "n/a",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "2계 차분 2, q=x²+4x-15, q=3x-9 → x²+x-6=0 → x=-3,2 → 큰 값 2 → D. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
-  "restampedAt": "2026-10-05T00:00:00Z",
-  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+ "itemId": "nonlinear_equations_systems.linear_quadratic_intersection.TB.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:52Z",
+ "reviewer": "visual-review-agent-SB",
+ "codeHash": "bed2d5281a45f307c85c02869b69e5ced1b452db4a8ef2e775c9af01712371e8",
+ "samples": [
+  "nonlinear_equations_systems.linear_quadratic_intersection.TB.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "2계 차분 2, q=x²+4x-15, q=3x-9 → x²+x-6=0 → x=-3,2 → 큰 값 2 → D. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

@@ -1,25 +1,25 @@
 {
-  "itemId": "equivalent_expressions.polynomial_distribution.TB.P",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-05T19:42:43Z",
-  "reviewer": "visual-review-agent-SA",
-  "codeHash": "e252077f46bc716171c6ca4e3ff1405a737f6a0af2a03f25344ba5e76af21a9e",
-  "samples": [
-    "equivalent_expressions.polynomial_distribution.TB.P.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "n/a",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "n/a",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "그림만으로 p(1..5)=-9,-6,-5,-6,-9, 2계 차분 -2 → a=-1, b=6 = 정답 A. Nit(비차단): 스냅샷 지문의 ax^2 가 LaTeX 미변환 평문(앱은 수식 렌더 경로). 곡선 라벨 없음 — 신규 라벨 규칙 영향 없음.",
-  "restampedAt": "2026-10-05T00:00:00Z",
-  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+ "itemId": "equivalent_expressions.polynomial_distribution.TB.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:43Z",
+ "reviewer": "visual-review-agent-SA",
+ "codeHash": "4a0bc5bb47304f9f9a25e77798c8a2d965e7b506296551d5ce8d88f28fb11ac1",
+ "samples": [
+  "equivalent_expressions.polynomial_distribution.TB.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만으로 p(1..5)=-9,-6,-5,-6,-9, 2계 차분 -2 → a=-1, b=6 = 정답 A. Nit(비차단): 스냅샷 지문의 ax^2 가 LaTeX 미변환 평문(앱은 수식 렌더 경로). 곡선 라벨 없음 — 신규 라벨 규칙 영향 없음.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

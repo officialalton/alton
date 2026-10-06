@@ -29,7 +29,7 @@ describe.skipIf(!process.env.FIGURE_QA_SNAPSHOT)("시각 검수 스냅샷(HTML·
       const meta: QaMeta = { itemId, generatedAt: new Date().toISOString(), codeHash: hash, sources: files, samples: [] };
       for (const s of samples) {
         const markup = renderToStaticMarkup(createElement(ProblemFigure, { spec: s.inst.figure, text: problemText(s.inst.stimulus, s.inst.question, s.inst.options) }));
-        const base = s.file.replace(/\.png$/, ""); writeFileSync(path.join(process.cwd(), QA_HTML_DIR, `${base}.html`), page(s.inst.stimulus, markup, s.inst.question, s.inst.options.length ? (s.inst.answerKind === "index" && (s.inst.figure as { type?: string } | null)?.type === "figure_choice" ? s.inst.options.map((o) => `Choice ${o}`) : s.inst.options) : [], base));
+        const base = s.file.replace(/\.png$/, ""); writeFileSync(path.join(process.cwd(), QA_HTML_DIR, `${base}.html`), page(s.inst.stimulus, markup, s.inst.question, s.inst.options.length ? (s.inst.answerKind === "index" && ["figure_choice", "figure_bundle"].includes((s.inst.figure as { type?: string } | null)?.type ?? "") ? s.inst.options.map((o) => `Choice ${o}`) : s.inst.options) : [], base));
         const answer = s.inst.format === "spr" ? (s.inst.answers ?? []).join(" / ") : s.inst.options[s.inst.correctIndex];
         meta.samples.push({ file: s.file, mobileFile: `${base}.m375.png`, archetypeId: s.a.id, seed: s.seed, signature: s.signature, stimulus: s.inst.stimulus, question: s.inst.question, options: s.inst.options, correctIndex: s.inst.correctIndex, answer, explanation: s.inst.explanation, structuralIssues: checkInstanceFigureQa(s.inst) });
         n++;
