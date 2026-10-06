@@ -149,3 +149,23 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
     throw e;
   }
 }
+
+/** Requirement-by-requirement view of prepareTeacherAgreement() for the admin panel (Korean labels). */
+export function agreementChecklist(a: PrepareArgs): { key: string; label: string; ok: boolean }[] {
+  const i = a.inputs ?? EMPTY_INPUTS;
+  const email = (a.workspaceEmail ?? "").trim().toLowerCase();
+  const sel = selectTeacherAgreementForm({ country: i.work_country, region: i.work_region, engagementType: i.engagement_type });
+  const want = sel.form === "california_employment" || sel.form === "us_contractor_services" ? "USD" : "KRW";
+  const location =
+    !blank(i.work_country) && !blank(i.work_location_detail) && !blank(i.mailing_address) && !blank(i.start_date) &&
+    (i.work_country?.toUpperCase() !== "US" || !blank(i.work_region));
+  const items = [
+    { key: "workspace", label: "Workspace 계정(@alton.education) 발급 완료", ok: a.workspaceProvisioned && email.endsWith("@alton.education") },
+    { key: "location", label: "근무 위치 입력(국가·위치·우편 주소·시작일)", ok: location },
+    { key: "engagement", label: "계약 형태 선택 및 양식 사용 가능", ok: sel.form !== null && !(sel.form === "us_contractor_services" && !GENERATED_LEGAL_DOCUMENTS.teacherUsContractor) },
+    { key: "rate", label: `시급·통화 등록(${sel.form ? want : "통화 확인 필요"})`, ok: !!a.rate && a.rate.amountMinor > 0 && !!sel.form && a.rate.currency === want },
+  ];
+  if (sel.form === "california_employment") items.push({ key: "supervisor", label: "감독자 이름", ok: !blank(i.supervisor_name) });
+  else items.push({ key: "payment", label: "지급 방법·수령 정보(전체 계좌번호 제외)", ok: !blank(i.payment_details) && !sensitiveNumberProblem(i.payment_details!) });
+  return items;
+}

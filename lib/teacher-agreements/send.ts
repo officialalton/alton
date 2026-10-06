@@ -2,9 +2,10 @@ import { randomUUID } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { assertDocusignSandboxBaseUri, createEnvelope } from "@/lib/docusign";
 import { loadCurrentTeacherRate } from "./rate";
-import { prepareTeacherAgreement, type PrepareResult, type TeacherAgreementInputs } from "./prepare";
+import { agreementChecklist, prepareTeacherAgreement, type PrepareResult, type TeacherAgreementInputs } from "./prepare";
 
-export type TeacherAgreementStatus = "not_sent" | "sent" | "signed" | "declined" | "voided";
+import { deriveAgreementStatus, type TeacherAgreementStatus } from "./status";
+export type { TeacherAgreementStatus };
 
 export type TeacherAgreementState = {
   status: TeacherAgreementStatus;
@@ -16,6 +17,8 @@ export type TeacherAgreementState = {
   inputs: TeacherAgreementInputs | null;
   /** empty = ready to send */
   missing: string[];
+  /** per-requirement ✓/✗ for the admin panel; send is enabled only when every item is ok */
+  checklist: { key: string; label: string; ok: boolean }[];
   ready: boolean;
 };
 
@@ -50,13 +53,7 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
     .order("sent_at", { ascending: false })
     .limit(1);
   const latest = rows?.[0];
-  let status: TeacherAgreementStatus = "not_sent";
-  if (latest) {
-    if (latest.status === "signed") status = "signed";
-    else if (latest.docusign_envelope_status === "declined") status = "declined";
-    else if (latest.docusign_envelope_status === "voided") status = "voided";
-    else status = "sent";
-  }
+  const status: TeacherAgreementStatus = deriveAgreementStatus(latest);
   const prepared = prepareTeacherAgreement(basics);
   const missing = prepared.ok ? [] : prepared.missing;
   return {
@@ -73,7 +70,8 @@ export async function loadTeacherAgreementState(admin: SupabaseClient, teacherId
       : null,
     inputs: basics.inputs,
     missing,
-    ready: prepared.ok && (status === "not_sent" || status === "declined" || status === "voided"),
+    checklist: agreementChecklist(basics),
+    ready: prepared.ok && agreementChecklist(basics).every((c) => c.ok) && (status === "not_sent" || status === "declined" || status === "voided"),
   };
 }
 

@@ -141,6 +141,13 @@ export default function TeacherAgreementSection({ teacherId }: { teacherId: stri
                   계약서 발송
                 </button>
               </div>
+              <ul className="mb-2 text-[12px]" data-testid="teacher-agreement-checklist">
+                {state.checklist.map((c) => (
+                  <li key={c.key} className={c.ok ? "text-green" : "text-red"}>
+                    {c.ok ? "✓" : "✗"} {c.label}
+                  </li>
+                ))}
+              </ul>
               {state.missing.length > 0 ? (
                 <p className="text-[12px] text-red" data-testid="teacher-agreement-missing">
                   발송 전 필요한 입력: {state.missing.join(", ")}

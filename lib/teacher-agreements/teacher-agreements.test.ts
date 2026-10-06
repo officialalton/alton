@@ -16,6 +16,8 @@ import { sendTeacherAgreementInternal, TeacherAgreementNotReadyError } from "./s
 import { validateTeacherAgreementInputs } from "./validate-inputs";
 import { archiveSignedTeacherAgreements } from "./archive";
 import { applyTeacherAgreementEnvelopeEvent } from "./webhook";
+import { deriveAgreementStatus } from "./status";
+import { agreementChecklist } from "./prepare";
 import { recordAcceptedRate, loadTeacherRateLock } from "./rate";
 
 const caInputs: TeacherAgreementInputs = {
@@ -307,5 +309,24 @@ describe("rate flow", () => {
     expect(await loadTeacherRateLock(rateAdmin(null, [{ status: "sent", docusign_envelope_status: "sent" }]) as never, "t1")).toBe("open_agreement");
     expect(await loadTeacherRateLock(rateAdmin(null, [{ status: "signed", docusign_envelope_status: "completed" }]) as never, "t1")).toBe("signed_agreement");
     expect(await loadTeacherRateLock(rateAdmin(null, [{ status: "sent", docusign_envelope_status: "declined" }]) as never, "t1")).toBeNull();
+  });
+});
+
+describe("agreement checklist and list status", () => {
+  it("is all-ok only when the send path is ready, and names the failing items", () => {
+    const ok = agreementChecklist({ ...base, inputs: krInputs });
+    expect(ok.every((c) => c.ok)).toBe(true);
+    const bad = agreementChecklist({ ...base, workspaceProvisioned: false, rate: null, inputs: { ...krInputs, mailing_address: null } });
+    expect(bad.filter((c) => !c.ok).map((c) => c.key).sort()).toEqual(["location", "rate", "workspace"]);
+    const wrongCurrency = agreementChecklist({ ...base, rate: { amountMinor: 5000, currency: "USD" }, inputs: krInputs });
+    expect(wrongCurrency.find((c) => c.key === "rate")?.ok).toBe(false);
+    const us = agreementChecklist({ ...base, rate: { amountMinor: 5000, currency: "USD" }, inputs: { ...krInputs, work_country: "US", work_region: "TX" } });
+    expect(us.find((c) => c.key === "engagement")?.ok).toBe(false);
+  });
+  it("derives the chip status", () => {
+    expect(deriveAgreementStatus(null)).toBe("not_sent");
+    expect(deriveAgreementStatus({ status: "sent", docusign_envelope_status: "delivered" })).toBe("sent");
+    expect(deriveAgreementStatus({ status: "signed", docusign_envelope_status: "completed" })).toBe("signed");
+    expect(deriveAgreementStatus({ status: "sent", docusign_envelope_status: "declined" })).toBe("declined");
   });
 });
