@@ -54,9 +54,9 @@ export async function loadFreeMembersOverviewAction(): Promise<FreeMembersOvervi
 
   const { data: students, error: sErr } = await admin
     .from("students")
-    .select("id, created_at")
+    .select("id, joined_at")
     .eq("member_type", "free")
-    .order("created_at", { ascending: false })
+    .order("joined_at", { ascending: false })
     .limit(MEMBER_LIMIT);
   if (sErr) throw new Error(sErr.message);
   const ids = (students ?? []).map((s) => s.id as string);
@@ -115,7 +115,7 @@ export async function loadFreeMembersOverviewAction(): Promise<FreeMembersOvervi
       id: s.id as string,
       name: nameById.get(s.id as string) ?? "",
       email: emails.get(s.id as string) ?? "",
-      signedUpAt: (s.created_at as string) ?? null,
+      signedUpAt: (s.joined_at as string) ?? null,
       attempts: attemptsBy.get(s.id as string) ?? 0,
       interestStatus: openInterestByStudent.get(s.id as string) ?? null,
     })),
