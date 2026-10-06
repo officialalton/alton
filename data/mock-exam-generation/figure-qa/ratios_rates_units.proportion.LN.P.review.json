@@ -1,0 +1,23 @@
+{
+ "itemId": "ratios_rates_units.proportion.LN.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T14:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-A session)",
+ "codeHash": "12e673de45eec792a0214d97332a57595b3906d718c88939061122f1ccc90525",
+ "samples": [
+  "ratios_rates_units.proportion.LN.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "데스크톱 확인·샘플 정답 수작업 검산(지수 곡선은 양의 y 비대칭 축). 375px는 같은 레이아웃이라 동일 판정(직접 확인 아님)."
+}
