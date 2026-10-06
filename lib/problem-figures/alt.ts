@@ -8,6 +8,8 @@ import { renderCircle } from "./templates/circle";
 import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
+import { renderUnitCircle } from "./templates/unit-circle";
+import { renderTrigCurve } from "./templates/trig-curve";
 
 export function figureAlt(spec: FigureSpec): string | undefined {
   switch (spec.type) {
@@ -19,6 +21,8 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "polygon": return renderPolygon(spec).alt;
     case "solid": return renderSolid(spec).alt;
     case "composite": return renderComposite(spec).alt;
+    case "unit_circle": return renderUnitCircle(spec).alt;
+    case "trig_curve": return renderTrigCurve(spec).alt;
     case "image": return spec.alt;
     default: return undefined;
   }

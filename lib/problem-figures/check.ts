@@ -10,6 +10,8 @@ import { lintCircleAgainstText, renderCircle } from "./templates/circle";
 import { lintPolygonAgainstText, renderPolygon } from "./templates/polygon";
 import { lintSolidAgainstText, renderSolid } from "./templates/solid";
 import { lintCompositeAgainstText, renderComposite } from "./templates/composite";
+import { lintUnitCircleAgainstText, renderUnitCircle } from "./templates/unit-circle";
+import { lintTrigCurveAgainstText, renderTrigCurve } from "./templates/trig-curve";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
 import { renderFigureSvg } from "./render";
 import { figureAlt } from "./alt";
@@ -103,6 +105,16 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "composite") {
     const r = renderComposite(spec);
     issues.push(...r.issues, ...lintCompositeAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "trig_curve") {
+    const r = renderTrigCurve(spec);
+    issues.push(...r.issues, ...lintTrigCurveAgainstText(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "unit_circle") {
+    const r = renderUnitCircle(spec);
+    issues.push(...r.issues, ...lintUnitCircleAgainstText(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "solid") {
