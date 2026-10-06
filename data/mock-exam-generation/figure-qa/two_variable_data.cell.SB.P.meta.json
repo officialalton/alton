@@ -1,0 +1,44 @@
+{
+ "itemId": "two_variable_data.cell.SB.P",
+ "generatedAt": "2026-10-06T08:44:35.659Z",
+ "codeHash": "804e621126d423880ddd3d702c85dbc4560ad949a53ee271d836aaf81d3ffb7f",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_chart.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/stacked-bar.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.cell.SB.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sb-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.cell.SB.P.png",
+   "mobileFile": "two_variable_data.cell.SB.P.m375.png",
+   "archetypeId": "tvd.cell.SB.P.chain2",
+   "seed": 11,
+   "signature": "stacked_bar",
+   "stimulus": "The stacked bar graph shown gives how voters answered a survey question in a county. Each bar is one town. Examine the graph and then answer the question below.",
+   "question": "What is the combined number of voters in Brook in the \"No\" and \"Undecided\" categories?",
+   "options": [
+    "25",
+    "10",
+    "5",
+    "20"
+   ],
+   "correctIndex": 3,
+   "answer": "20",
+   "explanation": "(1) 그래프의 조각 값을 읽는다: Ashford(Yes 10, No 10, Undecided 5); Brook(Yes 5, No 10, Undecided 10); Cedar(Yes 15, No 10, Undecided 10). (2) Brook 의 No = 10 이다. (3) Brook 의 Undecided = 10 이다. (4) 합 = 20 이다. (5) 따라서 답은 20 이다. 따라서 정답은 20이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "itemId": "inference_margin_error.margin_interval.NL.C",
+ "generatedAt": "2026-10-06T08:44:35.648Z",
+ "codeHash": "1f5918e0ad089ca926d194f53c2b55a60b705a0f9e2dfe427ccb0310a59be91f",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-figures/templates/number-line.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/inference_margin_error.margin_interval.NL.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/nl-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "inference_margin_error.margin_interval.NL.C.png",
+   "mobileFile": "inference_margin_error.margin_interval.NL.C.m375.png",
+   "archetypeId": "ime.margin_interval.NL.C.constraint_select",
+   "seed": 11,
+   "signature": "figure_choice[number_line]",
+   "stimulus": "In a survey about a proposed library, a random sample of residents was selected. The sample percent was 50 percent, with a margin of error of 3 percentage points. The plausible interval for the percent of all residents of Millbrook who support building a new library is the sample percent plus or minus the margin of error. The graphs are shown on number lines below. Answer the question using only the number line shown.",
+   "question": "Which of the following graphs shows the plausible interval?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 3,
+   "answer": "D",
+   "explanation": "(1) 표본 % = 50, 오차범위 = 3 이다. (2) 구간 = 50 ± 3 = 47 ~ 53 이다. (3) 결과를 그림과 다시 대조해 확인한다. (4) 결과를 그림과 다시 대조해 확인한다. (5) 따라서 답은 47% ~ 53% 이다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

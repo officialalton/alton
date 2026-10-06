@@ -1,3 +1,4 @@
+import { US_BANK_HOLIDAYS } from "./us-bank-holidays";
 import { execFileSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
 
@@ -73,7 +74,8 @@ describe("next_scheduled_payout_date() — 5일·20일 슬롯(America/Los_Angele
               next_scheduled_payout_date('2026-12-20T16:00:00Z'::timestamptz),
               next_scheduled_payout_date('2026-12-31T23:00:00Z'::timestamptz);`
     ).split("|");
-    expect(row).toEqual(["2026-09-05", "2026-09-05", "2026-09-20", "2027-01-05", "2027-01-05"]);
+    // 2026-09-05는 토요일(Labor Day 주말) → 금요일 9/4, 9/20은 일요일 → 9/18.
+    expect(row).toEqual(["2026-09-04", "2026-09-18", "2026-09-18", "2027-01-05", "2027-01-05"]);
   });
 
   it("기간 명목 지급일(1~15일→20일, 16일~말일→다음 달 5일)보다 일찍 잡히지 않는다", () => {
@@ -83,6 +85,12 @@ describe("next_scheduled_payout_date() — 5일·20일 슬롯(America/Los_Angele
               scheduled_payout_date_for_batch('2026-10-31', '2026-11-01T00:00:00Z'::timestamptz);`
     ).split("|");
     expect(row).toEqual(["2026-10-20", "2026-11-05", "2026-11-05"]);
+  });
+
+  it("지급일 보정: 주말·연방 은행 휴일은 직전 영업일, SQL 휴일 표는 TS 표와 같다", () => {
+    expect(psql(`select payout_business_day_on_or_before('2026-09-07'), payout_business_day_on_or_before('2026-01-19'), payout_business_day_on_or_before('2026-10-20');`)).toBe("2026-09-04|2026-01-16|2026-10-20");
+    const sqlDates = psql(`select string_agg(holiday_date::text, ',' order by holiday_date) from payout_bank_holidays;`);
+    expect(sqlDates.split(",")).toEqual([...US_BANK_HOLIDAYS]);
   });
 
   it("기간 경계는 LA 날짜: UTC 10월 1일 03:00 수업은 9월 후반기에 들어간다", () => {

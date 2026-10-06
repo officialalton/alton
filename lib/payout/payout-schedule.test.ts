@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { US_BANK_HOLIDAYS, US_BANK_HOLIDAYS_LAST_YEAR } from "./us-bank-holidays";
 import {
+  shiftToBusinessDay,
+  nominalPayoutDateForPeriodEnd,
+  formatPeriodWithPayoutEn as fmtPeriod,
   COMPANY_TIME_ZONE,
   companyDateOf,
   isPayoutDay,
@@ -14,7 +18,7 @@ import {
 
 describe("payoutPeriodOfDate", () => {
   it("경계: 1일·15일은 전반기, 16일은 후반기", () => {
-    expect(payoutPeriodOfDate("2026-09-01")).toMatchObject({ periodKey: "2026-09-H1", periodStart: "2026-09-01", periodEnd: "2026-09-15", payoutDate: "2026-09-20" });
+    expect(payoutPeriodOfDate("2026-09-01")).toMatchObject({ periodKey: "2026-09-H1", periodStart: "2026-09-01", periodEnd: "2026-09-15", nominalPayoutDate: "2026-09-20", payoutDate: "2026-09-18" });
     expect(payoutPeriodOfDate("2026-09-15")?.periodKey).toBe("2026-09-H1");
     expect(payoutPeriodOfDate("2026-09-16")).toMatchObject({ periodKey: "2026-09-H2", periodStart: "2026-09-16", periodEnd: "2026-09-30", payoutDate: "2026-10-05" });
   });
@@ -22,7 +26,7 @@ describe("payoutPeriodOfDate", () => {
   it("월말: 30일·31일·2월(평년·윤년)", () => {
     expect(payoutPeriodOfDate("2026-10-31")).toMatchObject({ periodEnd: "2026-10-31", payoutDate: "2026-11-05" });
     expect(payoutPeriodOfDate("2026-02-28")).toMatchObject({ periodEnd: "2026-02-28", payoutDate: "2026-03-05" });
-    expect(payoutPeriodOfDate("2028-02-29")).toMatchObject({ periodStart: "2028-02-16", periodEnd: "2028-02-29", payoutDate: "2028-03-05" });
+    expect(payoutPeriodOfDate("2028-02-29")).toMatchObject({ periodStart: "2028-02-16", periodEnd: "2028-02-29", nominalPayoutDate: "2028-03-05", payoutDate: "2028-03-03" });
   });
 
   it("12월 후반기는 다음 해 1월 5일에 지급한다", () => {
@@ -64,7 +68,7 @@ describe("payoutPeriodOfDate", () => {
 
 describe("payoutDateForPeriodEnd", () => {
   it("15일 이하 종료는 같은 달 20일, 그 외(말일)는 다음 달 5일 — 기존 월 단위 묶음도 5일", () => {
-    expect(payoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-20");
+    expect(payoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-18"); // 20일이 일요일 → 금요일
     expect(payoutDateForPeriodEnd("2026-09-30")).toBe("2026-10-05");
     expect(payoutDateForPeriodEnd("2026-12-31")).toBe("2027-01-05");
   });
@@ -98,8 +102,12 @@ describe("cron day gates (LA)", () => {
   it("매일 17:00 UTC 크론에서 LA 날짜로 마감일·지급일을 가린다", () => {
     expect(isPeriodCloseDay(new Date("2026-10-01T17:00:00.000Z"))).toBe(true);
     expect(isPeriodCloseDay(new Date("2026-10-16T17:00:00.000Z"))).toBe(true);
-    expect(isPeriodCloseDay(new Date("2026-10-02T17:00:00.000Z"))).toBe(false);
-    expect(isPayoutDay(new Date("2026-11-05T17:00:00.000Z"))).toBe(true); // PST 09:00
+    // 마감일을 놓쳐도 3일 창 안에서 따라잡는다(멱등). 창 밖은 false.
+    expect(isPeriodCloseDay(new Date("2026-10-03T17:00:00.000Z"))).toBe(true);
+    expect(isPeriodCloseDay(new Date("2026-10-18T17:00:00.000Z"))).toBe(true);
+    expect(isPeriodCloseDay(new Date("2026-10-04T17:00:00.000Z"))).toBe(false);
+    expect(isPeriodCloseDay(new Date("2026-10-19T17:00:00.000Z"))).toBe(false);
+    expect(isPayoutDay(new Date("2026-11-05T17:00:00.000Z"))).toBe(true); // PST 09:00 (목)
     expect(isPayoutDay(new Date("2026-10-20T17:00:00.000Z"))).toBe(true); // PDT 10:00
     expect(isPayoutDay(new Date("2026-10-21T17:00:00.000Z"))).toBe(false);
     // UTC 날짜가 5일이어도 LA가 4일이면 지급일이 아니다.
@@ -123,5 +131,59 @@ describe("period labels", () => {
     expect(formatPeriodWithPayoutEn("2026-10-16", "2026-10-31")).toBe("Oct 16–31, 2026 → paid Nov 5");
     expect(formatPeriodWithPayoutEn("2026-12-16", "2026-12-31")).toBe("Dec 16–31, 2026 → paid Jan 5");
     expect(formatPeriodLabelEn("2026-10-20", "2026-11-03")).toBe("Oct 20 – Nov 3, 2026");
+  });
+});
+
+describe("지급일 보정 — 주말·미국 연방 은행 휴일이면 직전 영업일", () => {
+  it("평일이면 그대로", () => {
+    expect(shiftToBusinessDay("2026-10-20")).toBe("2026-10-20"); // 화
+  });
+  it("토요일·일요일은 금요일로", () => {
+    expect(shiftToBusinessDay("2026-09-05")).toBe("2026-09-04"); // 토
+    expect(shiftToBusinessDay("2026-09-20")).toBe("2026-09-18"); // 일
+  });
+  it("월요일 휴일(Labor Day 9/7, MLK 1/19)이면 금요일까지 거슬러 간다", () => {
+    expect(shiftToBusinessDay("2026-09-07")).toBe("2026-09-04");
+    expect(shiftToBusinessDay("2026-01-19")).toBe("2026-01-16");
+    // 2027-01-20(수)은 MLK(1/18) 이후라 그대로
+    expect(shiftToBusinessDay("2027-01-20")).toBe("2027-01-20");
+  });
+  it("2026-02-20(금)은 Presidents Day(2/16)와 무관, 2027-02-20(토)은 금요일로", () => {
+    expect(shiftToBusinessDay("2026-02-20")).toBe("2026-02-20");
+    expect(shiftToBusinessDay("2027-02-20")).toBe("2027-02-19");
+  });
+  it("추수감사절 주간: 11월 5일/20일은 영향 없고, 휴일 자체(11/26)는 수요일로", () => {
+    expect(shiftToBusinessDay("2026-11-20")).toBe("2026-11-20");
+    expect(shiftToBusinessDay("2026-11-26")).toBe("2026-11-25");
+  });
+  it("1월 1일(휴일)과 1월 5일(지급일) 구분 — 12/16~12/31분은 1/5(화) 그대로", () => {
+    expect(shiftToBusinessDay("2027-01-01")).toBe("2026-12-31");
+    expect(payoutDateForPeriodEnd("2026-12-31")).toBe("2027-01-05");
+    // 2028-01-05는 수요일, 2028-01-01(토)은 표에 없으므로(토요일 휴일 비관측) 영향 없음.
+    expect(payoutDateForPeriodEnd("2027-12-31")).toBe("2028-01-05");
+  });
+  it("12월 말 → 1월 경계: 연말 휴일(12/25)과 일요일 12/20", () => {
+    expect(shiftToBusinessDay("2026-12-25")).toBe("2026-12-24");
+    expect(payoutDateForPeriodEnd("2026-12-15")).toBe("2026-12-18"); // 12/20 일요일
+  });
+  it("명목 날짜는 보정하지 않는다", () => {
+    expect(nominalPayoutDateForPeriodEnd("2026-09-15")).toBe("2026-09-20");
+    expect(payoutPeriodOfDate("2026-09-03")).toMatchObject({ nominalPayoutDate: "2026-09-20", payoutDate: "2026-09-18" });
+  });
+  it("라벨: 당겨진 경우 요일 표기", () => {
+    expect(fmtPeriod("2026-09-01", "2026-09-15")).toBe("Sep 1–15, 2026 → paid Sep 18 (Fri)");
+    expect(fmtPeriod("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 20");
+  });
+  it("크론 게이트는 보정된 날에 켜진다(토요일 9/5가 아니라 금요일 9/4)", () => {
+    expect(isPayoutDay(new Date("2026-09-04T17:00:00.000Z"))).toBe(true);
+    expect(isPayoutDay(new Date("2026-09-05T17:00:00.000Z"))).toBe(false);
+    expect(isPayoutDay(new Date("2026-09-18T17:00:00.000Z"))).toBe(true);
+    expect(isPayoutDay(new Date("2026-09-20T17:00:00.000Z"))).toBe(false);
+    expect(isPayoutDay(new Date("2026-10-20T17:00:00.000Z"))).toBe(true);
+  });
+  it("휴일 표는 2026–2030 전 연도를 덮고 모두 평일이다", () => {
+    expect(US_BANK_HOLIDAYS_LAST_YEAR).toBe(2030);
+    for (const y of [2026, 2027, 2028, 2029, 2030]) expect(US_BANK_HOLIDAYS.filter((d) => d.startsWith(String(y))).length).toBeGreaterThanOrEqual(9);
+    for (const d of US_BANK_HOLIDAYS) expect([0, 6]).not.toContain(new Date(`${d}T12:00:00Z`).getUTCDay());
   });
 });

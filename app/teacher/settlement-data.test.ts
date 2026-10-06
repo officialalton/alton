@@ -126,8 +126,8 @@ describe("loadTeacherSettlement", () => {
     expect(result.inReviewTotalsByCurrency).toEqual({ KRW: 10000 });
     expect(result.approvedTotalsByCurrency).toEqual({ KRW: 30000 });
     expect(result.paidTotalsByCurrency).toEqual({ KRW: 20000 });
-    // 예정 금액이 있는 가장 이른 정산 기간(2026-09-01~15, LA 기준)의 지급일 9월 20일.
-    expect(result.nextPayoutDate).toBe("2026-09-20");
+    // 예정 금액이 있는 가장 이른 정산 기간(2026-09-01~15, LA 기준)의 지급일(9/20 일요일 → 9/18).
+    expect(result.nextPayoutDate).toBe("2026-09-18"); // 20일 일요일 → 직전 영업일
     expect(result.nextPayoutMonth).toBe("2026-09");
   });
 

@@ -194,7 +194,7 @@ export default function ConsultantSettlementPanel() {
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-[13px] font-bold text-ink">
                     {p.periodStart} ~ {p.periodEnd}
-                    {payoutDateForPeriodEnd(p.periodEnd) ? ` (명목 지급일 ${payoutDateForPeriodEnd(p.periodEnd)})` : ""}
+                    {payoutDateForPeriodEnd(p.periodEnd) ? ` (예상 지급일 ${payoutDateForPeriodEnd(p.periodEnd)})` : ""}
                   </span>
                   <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">
                     {p.status === "draft" ? "작성 중(컨설턴트에게 안 보임)" : p.status === "confirmed" ? "지급 예정" : "지급 완료"}

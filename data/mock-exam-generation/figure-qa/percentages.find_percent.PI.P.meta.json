@@ -1,0 +1,43 @@
+{
+ "itemId": "percentages.find_percent.PI.P",
+ "generatedAt": "2026-10-06T08:44:35.632Z",
+ "codeHash": "1fc93a4b81cb44d7d5f9aaa07aafb31cf5c64133852cce6bd56df768e9ed674d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/d-registry.ts",
+  "lib/problem-figures/templates/pie.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/percentages.find_percent.PI.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pi-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "percentages.find_percent.PI.P.png",
+   "mobileFile": "percentages.find_percent.PI.P.m375.png",
+   "archetypeId": "pct.find_percent.PI.P.chain2",
+   "seed": 11,
+   "signature": "pie",
+   "stimulus": "In the pie chart shown, each section represents one category of the favorite activity chosen by the visitors to a park. The size of each section is labeled with the number of visitors it represents. Refer to the pie chart when answering the question that follows.",
+   "question": "What percent of the visitors chose Hiking or Picnics?",
+   "options": [
+    "40",
+    "15",
+    "25",
+    "60"
+   ],
+   "correctIndex": 0,
+   "answer": "40",
+   "explanation": "(1) 원그래프에서 각 부채꼴의 값을 읽는다: Picnics 100, Hiking 60, Kayaking 160, Biking 80. (2) 전체 = 100 + 60 + 160 + 80 = 400 이다. (3) 두 부채꼴의 합 = 60 + 100 = 160 이다. (4) 160 ÷ 400 = 0.4 이다. (5) 퍼센트 = 40% 이다. (6) 따라서 답은 40 이다. 따라서 정답은 40이다.",
+   "structuralIssues": []
+  }
+ ]
+}

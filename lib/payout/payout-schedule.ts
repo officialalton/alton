@@ -6,11 +6,14 @@
 // 이전의 UTC 기준(reservations.starts_at::date)은 폐기됐고, DB 함수도 같은
 // 시간대로 환산한다(20262100000046). 크론은 UTC로 도니 작업 안에서 LA 날짜를 계산한다.
 //
-// 지급일이 주말·공휴일일 때 앞당기거나 미루는 규칙은 확정되지 않았다 — 이 모듈은
-// **명목 날짜(5일·20일)** 만 계산한다. SQL의 payout_nominal_date()와 같은 규칙이다.
+// 지급일 보정(2026-10-06 오너 위임 확정): 명목 5일·20일이 주말 또는 미국 연방 은행 휴일이면
+// **직전 영업일**에 지급한다(shiftToBusinessDay). 계약서에는 명목 날짜와 이 보정 문장이 함께 들어간다.
+// SQL의 payout_business_day_on_or_before()와 같은 규칙이다.
 
 /** 정산·지급 판정의 단일 시간대. SQL 함수의 'America/Los_Angeles' 리터럴과 같아야 한다. */
 export const COMPANY_TIME_ZONE = "America/Los_Angeles";
+
+import { isUsBankHoliday } from "./us-bank-holidays";
 
 export const PAYOUT_DAY_FIRST_HALF = 20; // 1~15일분 → 같은 달 20일
 export const PAYOUT_DAY_SECOND_HALF = 5; // 16일~말일분 → 다음 달 5일
@@ -20,9 +23,30 @@ export type PayoutPeriodRange = { periodStart: string; periodEnd: string };
 export type PayoutPeriodInfo = PayoutPeriodRange & {
   /** 'YYYY-MM-H1' | 'YYYY-MM-H2' */
   periodKey: string;
-  /** 명목 지급일 'YYYY-MM-DD' */
+  /** 실제 지급일(명목일을 직전 영업일로 보정한 값) 'YYYY-MM-DD' */
   payoutDate: string;
+  /** 명목 지급일(5일·20일) */
+  nominalPayoutDate: string;
 };
+
+function addDays(dateOnly: string, delta: number): string {
+  const p = parseDateOnly(dateOnly) as { y: number; m: number; d: number };
+  const t = new Date(Date.UTC(p.y, p.m - 1, p.d + delta));
+  return ymd(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate());
+}
+
+/** 주말·미국 연방 은행 휴일이면 직전 영업일로 당긴다. 잘못된 입력은 그대로 돌려준다. */
+export function shiftToBusinessDay(dateOnly: string): string {
+  if (!parseDateOnly(dateOnly)) return dateOnly;
+  let cur = dateOnly;
+  for (let i = 0; i < 10; i++) {
+    const p = parseDateOnly(cur) as { y: number; m: number; d: number };
+    const dow = new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay();
+    if (dow !== 0 && dow !== 6 && !isUsBankHoliday(cur)) return cur;
+    cur = addDays(cur, -1);
+  }
+  return cur;
+}
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const ymd = (y: number, m1: number, d: number) => `${y}-${pad(m1)}-${pad(d)}`;
@@ -65,7 +89,8 @@ export function payoutPeriodOfDate(dateOrIso: string): PayoutPeriodInfo | null {
       periodKey: `${p.y}-${pad(p.m)}-H1`,
       periodStart: ymd(p.y, p.m, 1),
       periodEnd: ymd(p.y, p.m, 15),
-      payoutDate: ymd(p.y, p.m, PAYOUT_DAY_FIRST_HALF),
+      payoutDate: shiftToBusinessDay(ymd(p.y, p.m, PAYOUT_DAY_FIRST_HALF)),
+      nominalPayoutDate: ymd(p.y, p.m, PAYOUT_DAY_FIRST_HALF),
     };
   }
   const n = nextMonth(p.y, p.m);
@@ -73,17 +98,24 @@ export function payoutPeriodOfDate(dateOrIso: string): PayoutPeriodInfo | null {
     periodKey: `${p.y}-${pad(p.m)}-H2`,
     periodStart: ymd(p.y, p.m, 16),
     periodEnd: ymd(p.y, p.m, lastDayOf(p.y, p.m)),
-    payoutDate: ymd(n.y, n.m, PAYOUT_DAY_SECOND_HALF),
+    payoutDate: shiftToBusinessDay(ymd(n.y, n.m, PAYOUT_DAY_SECOND_HALF)),
+    nominalPayoutDate: ymd(n.y, n.m, PAYOUT_DAY_SECOND_HALF),
   };
 }
 
-/** 기간 종료일 기준 명목 지급일(SQL payout_nominal_date와 동일). 말일이 15일 이하면 같은 달 20일. */
-export function payoutDateForPeriodEnd(periodEnd: string): string | null {
+/** 기간 종료일 기준 명목 지급일(5일·20일, 보정 전). */
+export function nominalPayoutDateForPeriodEnd(periodEnd: string): string | null {
   const p = parseDateOnly(periodEnd);
   if (!p) return null;
   if (p.d <= 15) return ymd(p.y, p.m, PAYOUT_DAY_FIRST_HALF);
   const n = nextMonth(p.y, p.m);
   return ymd(n.y, n.m, PAYOUT_DAY_SECOND_HALF);
+}
+
+/** 기간 종료일 기준 실제 지급일(SQL payout_nominal_date와 동일 — 직전 영업일 보정 포함). */
+export function payoutDateForPeriodEnd(periodEnd: string): string | null {
+  const nominal = nominalPayoutDateForPeriodEnd(periodEnd);
+  return nominal ? shiftToBusinessDay(nominal) : null;
 }
 
 /** 주어진 시각(기본: 지금)의 회사(LA) 날짜 기준으로 "직전에 끝난" 정산 기간. 16일 이후면 1~15일, 그 전이면 지난달 16일~말일. */
@@ -120,6 +152,12 @@ export function formatDateOnlyEn(dateOnly: string, withYear = false): string {
   return `${MONTH_ABBR[p.m - 1]} ${p.d}${withYear ? `, ${p.y}` : ""}`;
 }
 
+export function weekdayEn(dateOnly: string): string {
+  const p = parseDateOnly(dateOnly);
+  if (!p) return "";
+  return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay()];
+}
+
 /** 정산 기간 라벨. 표준 반월 기간이면 "Oct 1–15, 2026", 아니면 "Oct 1 – Nov 3, 2026" 형태. */
 export function formatPeriodLabelEn(periodStart: string, periodEnd: string): string {
   const s = parseDateOnly(periodStart);
@@ -133,17 +171,26 @@ export function formatPeriodLabelEn(periodStart: string, periodEnd: string): str
 export function formatPeriodWithPayoutEn(periodStart: string, periodEnd: string, payoutDate?: string | null): string {
   const pay = payoutDate ?? payoutDateForPeriodEnd(periodEnd);
   const label = formatPeriodLabelEn(periodStart, periodEnd);
-  return pay ? `${label} → paid ${formatDateOnlyEn(pay)}` : label;
+  const nominal = nominalPayoutDateForPeriodEnd(periodEnd);
+  // 보정으로 날짜가 당겨진 경우에는 요일을 함께 보여 준다("paid Oct 16 (Fri)").
+  const shifted = pay && nominal && pay !== nominal;
+  return pay ? `${label} → paid ${formatDateOnlyEn(pay)}${shifted ? ` (${weekdayEn(pay)})` : ""}` : label;
 }
 
-/** 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 마감일(1일·16일)이면 true. */
+/**
+ * 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 마감 창(1~3일·16~18일)이면 true.
+ * 마감일(1일·16일)에 크론이 한 번 빠져도 다음 날 따라잡도록 3일 창을 둔다. 마감은 멱등이다
+ * (DB의 close_payout_period가 이미 묶인 항목을 다시 담지 않는다).
+ */
 export function isPeriodCloseDay(now: Date = new Date()): boolean {
   const d = Number((companyDateOf(now) ?? "").slice(8, 10));
-  return d === 1 || d === 16;
+  return (d >= 1 && d <= 3) || (d >= 16 && d <= 18);
 }
 
-/** 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 지급일(5일·20일)이면 true. */
+/** 크론(UTC) 안에서 호출: 이 시각의 LA 날짜가 (보정된) 지급일이면 true. 크론은 매일 17:00 UTC에 돈다. */
 export function isPayoutDay(now: Date = new Date()): boolean {
-  const d = Number((companyDateOf(now) ?? "").slice(8, 10));
-  return d === PAYOUT_DAY_SECOND_HALF || d === PAYOUT_DAY_FIRST_HALF;
+  const today = companyDateOf(now);
+  const p = today ? parseDateOnly(today) : null;
+  if (!today || !p) return false;
+  return [PAYOUT_DAY_SECOND_HALF, PAYOUT_DAY_FIRST_HALF].some((d) => shiftToBusinessDay(ymd(p.y, p.m, d)) === today);
 }

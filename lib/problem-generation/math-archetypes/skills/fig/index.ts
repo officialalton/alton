@@ -19,7 +19,8 @@ import { BUNDLE as G7 } from "./bundles/G7-triangles-parallel";
 import { BUNDLE as G8 } from "./bundles/G8-polygon-circle-composite";
 import { BUNDLE as G9 } from "./bundles/G9-coordinate-geometry";
 import { BUNDLE as G10 } from "./bundles/G10-solids";
+import { BUNDLE as G11 } from "./bundles/G11-new-renderers-D";
 import { BUNDLE as E1 } from "./bundles/E1-renderers2";
 
-export const FIG_ALL: LArch[] = [...T1, ...T2, ...T3, ...T4, ...T5, ...T6, ...T7, ...T8, ...G1, ...G2, ...G3, ...G4, ...G5, ...G6, ...G7, ...G8, ...G9, ...G10, ...E1];
+export const FIG_ALL: LArch[] = [...T1, ...T2, ...T3, ...T4, ...T5, ...T6, ...T7, ...T8, ...G1, ...G2, ...G3, ...G4, ...G5, ...G6, ...G7, ...G8, ...G9, ...G10, ...G11, ...E1];
 export const FIG_HARD: LArch[] = FIG_ALL.filter((a) => a.level === "hard");

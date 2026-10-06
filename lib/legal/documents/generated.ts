@@ -403,7 +403,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
           },
           {
             "t": "p",
-            "text": "The regular payroll period and designated paydays are stated in Schedule A and the required wage notice. Payroll deductions are limited to those permitted by law. Student refunds, cancellations, business losses, or disputed lesson credits do not authorize unlawful deductions from wages."
+            "text": "The regular payroll period and designated paydays are stated in Schedule A and the required wage notice. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. Payroll deductions are limited to those permitted by law. Student refunds, cancellations, business losses, or disputed lesson credits do not authorize unlawful deductions from wages."
           }
         ]
       },
@@ -625,7 +625,7 @@ export const GENERATED_LEGAL_DOCUMENTS: Record<"parentAgreement" | "teacherCalif
         "blocks": [
           {
             "t": "p",
-            "text": "Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid on the 20th of the same month; services performed from the 16th through the last day of a month are paid on the 5th of the following month. The Company provides a statement for each pay period on or before the payment date. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim."
+            "text": "Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid on the 20th of the same month; services performed from the 16th through the last day of a month are paid on the 5th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim."
           },
           {
             "t": "p",

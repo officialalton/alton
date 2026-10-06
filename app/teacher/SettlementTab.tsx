@@ -66,11 +66,11 @@ function formatAmount(minor: number, currency: string): string {
 }
 
 // P4-2(UAT 후속, 2026-09-12) — 상태별로 지급 일정을 다르게 말한다.
-// 검토 중인 건에 "지급 예정일 10월 10일"만 덩그러니 보이면, 10일이 지난 뒤에도
+// 검토 중인 건에 "지급 예정일 10월 20일"만 덩그러니 보이면, 그 날이 지난 뒤에도
 // 같은 날짜가 남아 지급 시점을 오해하게 된다 — 검토 중에는 "검토 완료 후 지급"을
 // 앞세우고 예정일은 괄호로만 덧붙인다.
 // 'YYYY-MM-DD' 날짜 문자열은 new Date()로 파싱하면 UTC 자정이 되고, 그걸 로컬
-// 시간대로 렌더하면 하루 밀린다(지급 예정일 10월 10일이 10월 9일로 보였다).
+// 시간대로 렌더하면 하루 밀린다(지급 예정일 10월 20일이 19일로 보일 수 있다).
 // 날짜만 있는 값은 시간대 변환 없이 그대로 표기한다.
 const MONTH_NAMES = [
   "January", "February", "March", "April", "May", "June",
@@ -86,7 +86,7 @@ function formatDateOnly(dateOnly: string): string {
 }
 
 // 지급 예정일은 승인 시점에 묶음에 저장된다. **저장된 값이 있을 때만 구체적인
-// 날짜를 보여준다** — 승인 전에는 아직 정해지지 않았으므로 "매월 10일" 규칙만 안내한다.
+// 날짜를 보여준다** — 승인 전에는 아직 정해지지 않았으므로 명목 지급일(5일·20일)은 기간 규칙으로만 안내한다.
 function payoutScheduleLabel(m: SettlementMonth, tz: string): string {
   if (m.status === "paid") {
     // 외부 송금일은 날짜만 있는 값, paid_at은 시각까지 있는 값이라 표기 방법이 다르다.
@@ -203,6 +203,7 @@ export default function SettlementTab() {
           </div>
           {settlement.nextPayoutDate && <div>Next payout date: {formatDateOnly(settlement.nextPayoutDate)}</div>}
           <div>Pay periods and payout dates follow Pacific Time (America/Los_Angeles).</div>
+          <div>If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day.</div>
           <div>Last updated: {fmtDateTime(settlement.refreshedAt, undefined, tz)}</div>
           <div>Amounts may change until finalized, depending on lesson outcomes and adjustments.</div>
           <div>Gross totals before taxes, fees, or other deductions.</div>

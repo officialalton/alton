@@ -10,7 +10,7 @@ export const QA_HTML_DIR = path.join(QA_DIR, "_html");
 const AR = "lib/problem-generation/math-archetypes";
 const FG = "lib/problem-figures";
 const COMMON = [`${AR}/figure-kit.ts`, `${AR}/figure-topics.ts`, `${AR}/skills/tvd-fig-levels.ts`, `${FG}/render.ts`, `${FG}/label-rule.ts`, `${FG}/templates/_layout.ts`, "app/session/[id]/ProblemFigure.tsx", `${AR}/figure-qa-snapshot.test.ts`, `${AR}/figure-qa-samples.ts`, "scripts/mock-exam-generation/figure-qa-render.mjs"];
-const RENDERER: Record<string, string[]> = { data: [`${FG}/templates/data.ts`], plane: [`${FG}/templates/coordinate-plane.ts`], unit_circle: [`${FG}/templates/unit-circle.ts`], trig_curve: [`${FG}/templates/trig-curve.ts`], venn_tree: [`${FG}/templates/venn-tree.ts`], triangle_nested: [`${FG}/templates/triangle-nested.ts`], solid_x: [`${FG}/templates/solid-x.ts`], l_shape: [`${FG}/templates/l-shape.ts`], parallel_three: [`${FG}/templates/parallel-three.ts`], figure_bundle: [`${FG}/templates/figure-bundle.ts`, `${FG}/templates/figure-choice.ts`], figure_choice: [`${FG}/templates/figure-choice.ts`], figure_set: [`${FG}/templates/figure-choice.ts`] };
+const RENDERER: Record<string, string[]> = { data: [`${FG}/templates/data.ts`], plane: [`${FG}/templates/coordinate-plane.ts`], unit_circle: [`${FG}/templates/unit-circle.ts`], trig_curve: [`${FG}/templates/trig-curve.ts`], venn_tree: [`${FG}/templates/venn-tree.ts`], triangle_nested: [`${FG}/templates/triangle-nested.ts`], solid_x: [`${FG}/templates/solid-x.ts`], l_shape: [`${FG}/templates/l-shape.ts`], parallel_three: [`${FG}/templates/parallel-three.ts`], figure_bundle: [`${FG}/templates/figure-bundle.ts`, `${FG}/templates/figure-choice.ts`], figure_choice: [`${FG}/templates/figure-choice.ts`], figure_set: [`${FG}/templates/figure-choice.ts`] , number_line: [`${FG}/templates/number-line.ts`, `${FG}/templates/d-registry.ts`], stem_leaf: [`${FG}/templates/stem-leaf.ts`, `${FG}/templates/d-registry.ts`], pie: [`${FG}/templates/pie.ts`, `${FG}/templates/d-registry.ts`], freq_chart: [`${FG}/templates/freq-chart.ts`, `${FG}/templates/_chart.ts`, `${FG}/templates/d-registry.ts`], stacked_bar: [`${FG}/templates/stacked-bar.ts`, `${FG}/templates/_chart.ts`, `${FG}/templates/d-registry.ts`] };
 
 /** 항목 id → 원형 정의 파일(이 파일럿의 two_variable_data 자료 원형). 새 skill 파일이 생기면 여기에 규칙을 더한다. */
 /** 1단계 이후 규칙: 조합 하나 = 파일 하나(`skills/fig/items/<조합ID>.ts`) + 그 자료 계열의 공용 장면 키트. 조합 파일을 고쳐도 다른 조합의 판정은 유지된다. */
@@ -50,6 +50,7 @@ FAMILY_KIT.PT = [GEO_PT_KIT, ...FAMILY_KIT.PT];
 FAMILY_KIT.SO = [`${AR}/skills/fig/so-kit.ts`, `${AR}/skills/fig/pg-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, ...(FAMILY_KIT.SO ?? [])];
 const CYL_KIT = `${AR}/skills/fig/cyl-kit.ts`; for (const id of ["area_volume.cylinder_volume_radius.SO.P", "area_volume.cylinder_volume_diameter.SO.P"]) ITEM_KIT[id] = [CYL_KIT, ...(ITEM_KIT[id] ?? [])];
 FAMILY_KIT.PG = [`${AR}/skills/fig/pg-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, ...FAMILY_KIT.PG];
+FAMILY_KIT.CG = [`${AR}/skills/fig/cg-kit.ts`, `${AR}/skills/fig/cgc-kit.ts`, `${AR}/skills/fig/ext-kit.ts`, `${AR}/skills/fig/pg-kit.ts`, ...(FAMILY_KIT.CG ?? [])];
 export const GEO_TR_ITEMS: string[] = ["lines_angles_triangles.similar_triangles.TR.P", "lines_angles_triangles.congruent_triangles.TR.P", "lines_angles_triangles.triangle_inequality.TR.P", "area_volume.triangle_area.TR.P", "lines_angles_triangles.exterior_angle.TR.P", "lines_angles_triangles.vertical_supplementary_angles.TR.P", "lines_angles_triangles.triangle_angle_sum.TR.C", "lines_angles_triangles.isosceles_base_angle.TR.C"];
 for (const id of GEO_TR_ITEMS) ITEM_KIT[id] = [GEO_KIT, ...(ITEM_KIT[id] ?? [])];
 const CR_KIT = `${AR}/skills/fig/geo-cr-kit.ts`;
@@ -84,3 +85,10 @@ export function reviewStatus(itemId: string, current: { hash: string }, root = p
   if (rv.verdict !== "pass" || Object.values(rv.checklist).includes("fail") || rv.defects.length) return { state: "defect", detail: `결함 ${rv.defects.length}건: ${rv.defects.map((d) => d.description).join(" / ").slice(0, 160)}`, review: rv };
   return { state: "pass", detail: `${rv.reviewer} · ${rv.reviewedAt}`, review: rv };
 }
+
+// 새 렌더러 계열(math-D) 공용 키트 — 계열 키트를 고치면 그 계열 조합만 재검수 대상이 된다.
+FAMILY_KIT.SL = [`${AR}/skills/fig/sl-kit.ts`];
+FAMILY_KIT.PI = [`${AR}/skills/fig/pi-kit.ts`];
+FAMILY_KIT.NL = [`${AR}/skills/fig/nl-kit.ts`];
+FAMILY_KIT.FO = [`${AR}/skills/fig/fo-kit.ts`];
+FAMILY_KIT.SB = [`${AR}/skills/fig/sb-kit.ts`];

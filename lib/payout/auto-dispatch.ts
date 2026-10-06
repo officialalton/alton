@@ -1,7 +1,7 @@
 // P4-2 — 자동 송금 실행 오케스트레이션.
 //
 // 확정 정책: 송금 승인된 묶음은 지정된 **지급 예정일**에 자동 송금 대상이 된다.
-// 실행 시각은 기존 정산 기준과 같은 **매월 5일·20일(회사 시간대 America/Los_Angeles 날짜, 크론은 매일 17:00 UTC에 돌며 LA 날짜로 걸러냄)**(월 2회 정산, 2026-10-06 오너 확정).
+// 대상은 **지급 예정일(승인 시 확정된 5일·20일 보정일, 관리자가 바꾼 날짜 포함) <= 오늘(회사 시간대 LA 날짜)**인 묶음이다. 크론은 매일 돌고 날짜 게이트가 없어 하루 빠져도 다음 실행이 따라잡는다.
 //
 // **게이트가 닫혀 있으면 아무것도 하지 않는다.** real_disbursement_enabled()가
 // false면 상태를 바꾸지도, dispatch_idempotency_key를 만들지도 않는다 —
@@ -28,9 +28,6 @@ export type AutoDispatchResult = {
   skippedGateClosedCount: number;
   skippedGlobalOff: boolean;
 };
-
-/** 자동 송금 실행일(회사 시간대 날짜). */
-export const AUTO_DISPATCH_DAYS_OF_MONTH = [5, 20] as const;
 
 export async function runAutoPayoutDispatch(now: Date = new Date()): Promise<AutoDispatchResult> {
   const admin = createAdminClient();
@@ -80,17 +77,24 @@ export async function runAutoPayoutDispatch(now: Date = new Date()): Promise<Aut
     return result;
   }
 
+  // 한 묶음의 실패가 나머지 묶음을 막지 않게 하고, 실패는 실행 기록에 남긴 뒤 마지막에 던진다
+  // (다음 실행이 같은 묶음을 다시 시도한다 — dispatch는 key 1회 발급이라 재시도가 안전하다).
+  const failures: string[] = [];
   for (const batch of batches) {
     const { error } = await admin.rpc("dispatch_payout_batch", {
       p_batch_id: batch.batch_id as string,
       p_provider: TEACHER_PAYOUT_PROVIDER,
       p_requested_by: null,
     });
-    if (error) throw new Error(error.message);
+    if (error) {
+      failures.push(`${batch.batch_id as string}: ${error.message}`);
+      continue;
+    }
     result.dispatchedCount += 1;
   }
 
-  await recordRun(admin, result);
+  await recordRun(admin, result, failures.length ? failures.join("; ") : undefined);
+  if (failures.length) throw new Error(failures.join("; "));
   return result;
 }
 

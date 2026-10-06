@@ -35,6 +35,7 @@ describe("teacher agreement rendering", () => {
     expect(html).toContain("Pacific Time (America/Los_Angeles)");
     expect(html).toContain("paid on the 20th of the same month");
     expect(html).toContain("5th of the following month");
+    expect(html).toContain("payment is made on the preceding business day");
     expect(html).toContain("/sig1/");
     for (const p of ["video recording", "audio recording", "text transcript", "AI-assisted preparation"]) expect(html).toContain(p);
     expect(html).not.toMatch(/_{3,}|\[[^\]]+\]|draft/i);
@@ -44,6 +45,7 @@ describe("teacher agreement rendering", () => {
     expect(html).toContain("Services Outside the United States");
     expect(html).toContain("Termination notice period: 30 days");
     expect(html).toContain("Borne by the Company");
+    expect(html).toContain("payment is made on the preceding business day");
     expect(html).toContain("paid on the 20th of the same month");
     expect(html).not.toMatch(/_{3,}|\[[^\]]+\]|draft/i);
   });

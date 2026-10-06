@@ -26,6 +26,7 @@ export async function applyTeacherAgreementEnvelopeEvent(
   if (envelopeStatus === "completed") {
     patch.status = "signed";
     patch.signed_at = nowIso;
+    patch.drive_sync_status = "queued";
     if (!row.document_url) patch.document_url = `docusign-envelope:${envelopeId}`;
   }
   const { error } = await admin.from("teacher_contracts").update(patch).eq("id", row.id).neq("status", "signed");

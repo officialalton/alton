@@ -15,6 +15,7 @@ import { renderSolidX } from "./templates/solid-x";
 import { renderTriNested } from "./templates/triangle-nested";
 import { renderVennTree } from "./templates/venn-tree";
 import { renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
+import { isDSpec, renderD } from "./templates/d-registry";
 import { renderFigureBundle } from "./templates/figure-bundle";
 import { figureAlt } from "./alt";
 import { pruneUnmentionedLineLabels } from "./label-rule";
@@ -69,6 +70,7 @@ export function renderFigureSvg(specIn: FigureSpec, opts?: { text?: string }): s
   if (spec.type === "polygon") return renderPolygon(spec).svg;
   if (spec.type === "solid") return renderSolid(spec).svg;
   if (spec.type === "composite") return renderComposite(spec).svg;
+  if (isDSpec(spec)) return renderD(spec).svg;
   if (spec.type === "unit_circle") return renderUnitCircle(spec).svg;
   if (spec.type === "trig_curve") return renderTrigCurve(spec).svg;
   if (spec.type === "venn_tree") return renderVennTree(spec).svg;
