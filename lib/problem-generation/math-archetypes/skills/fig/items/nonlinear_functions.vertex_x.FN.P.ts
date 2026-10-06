@@ -6,7 +6,7 @@ import { W } from "../../d-kit";
 import { figInst, figJs } from "../../../figure-kit";
 import { defineItem } from "../item-kit";
 import { pickFn } from "./_t5-kit";
-import { makeQuadG, quadGIntro, quadGRead, QUADG_JS } from "../pure-kit";
+import { makeQuadG, pairXs, quadGIntro, quadGRead, QUADG_JS } from "../pure-kit";
 
 const vq = (fn: string, rng: Rng) => rng.pick([`What is the $x$-coordinate of the vertex of the graph of $y = ${fn}(x)$?`, `What is the $x$-coordinate of the vertex of the parabola shown?`, `The graph of $y = ${fn}(x)$ is a parabola. What is the $x$-coordinate of its vertex?`, `At what value of $x$ does the graph of $${fn}$ reach its ${"vertex"}?`, `What is the $x$-coordinate of the turning point of the graph of $${fn}$?`]);
 
@@ -35,7 +35,7 @@ export const ITEM = defineItem({
           stimulus: `${quadGIntro(rng, fn)} The equation $${fn}(x) = ${fn}(${t})$ has two solutions. One solution is $x = ${t}$.`, question: rng.pick([`What is the other solution?`, `What is the other value of $x$ that satisfies the equation?`]), correct: ans,
           wrongs: [W(-t, "sign_error", "t 의 부호만 바꿨다."), W(q.H, "step_missing", "대칭축을 답했다."), W(q.H - t, "formula_misuse", "h - t 로 계산했다."), W(2 * q.H + t, "sign_error", "2h + t 로 계산했다."), W(ans + 1, "other", "한 칸 어긋났다.")].filter((w) => w.v !== ans),
           verificationJs: figJs({ t }, q.fig, `${QUADG_JS}return 2 * H - P.t;`),
-          trace: [...quadGRead(q), [`같은 높이의 두 표시점 x = ${q.xs[0]}, ${q.xs[1]} 의 가운데로 축은 x = ${fmtNum(q.H)} 이다.`, "The axis lies midway between equal-height points."], [`다른 해 = 2 × ${fmtNum(q.H)} - ${t} = ${fmtNum(ans)} 이다.`, "Reflect t across the axis."]], variant: "reflect_across_axis",
+          trace: [...quadGRead(q), [`같은 높이의 두 표시점 x = ${pairXs(q)[0]}, ${pairXs(q)[1]} 의 가운데로 축은 x = ${fmtNum(q.H)} 이다.`, "The axis lies midway between equal-height points."], [`다른 해 = 2 × ${fmtNum(q.H)} - ${t} = ${fmtNum(ans)} 이다.`, "Reflect t across the axis."]], variant: "reflect_across_axis",
         }, q.fig);
       },
     },
@@ -82,7 +82,7 @@ export const ITEM = defineItem({
       lv: "medium", name: "axis_from_pair", structure: "같은 높이의 두 표시점으로 포물선의 축(꼭짓점 x)을 구함", extra: "medium: 쌍의 가운데", concepts: ["포물선의 대칭", "꼭짓점"],
       gen(rng) {
         const fn = pickFn(rng); const q = makeQuadG(rng, fn, { pair: true });
-        return figInst(rng, { stimulus: quadGIntro(rng, fn), question: vq(fn, rng), correct: q.H, wrongs: [W(q.xs[0], "axis_misread", "표시점 하나의 x 를 답했다."), W(q.xs[1], "axis_misread", "표시점 하나의 x 를 답했다."), W(-q.H, "sign_error", "부호를 바꿨다."), W(q.xs[0] + q.xs[1], "formula_misuse", "두 x 의 합을 답했다.")].filter((w) => w.v !== q.H), verificationJs: figJs({}, q.fig, `${QUADG_JS}return H;`), trace: [...quadGRead(q), [`같은 높이의 두 표시점 x = ${q.xs[0]}, ${q.xs[1]} 의 가운데가 축이다.`, "Midpoint of equal-height points."]], variant: "axis_from_pair",
+        return figInst(rng, { stimulus: quadGIntro(rng, fn), question: vq(fn, rng), correct: q.H, wrongs: [W(pairXs(q)[0], "axis_misread", "표시점 하나의 x 를 답했다."), W(pairXs(q)[1], "axis_misread", "표시점 하나의 x 를 답했다."), W(-q.H, "sign_error", "부호를 바꿨다."), W(pairXs(q)[0] + pairXs(q)[1], "formula_misuse", "두 x 의 합을 답했다.")].filter((w) => w.v !== q.H), verificationJs: figJs({}, q.fig, `${QUADG_JS}return H;`), trace: [...quadGRead(q), [`같은 높이의 두 표시점 x = ${pairXs(q)[0]}, ${pairXs(q)[1]} 의 가운데가 축이다.`, "Midpoint of equal-height points."]], variant: "axis_from_pair",
         }, q.fig);
       },
     },

@@ -5,6 +5,8 @@ import type { Rng } from "../../rng";
 import type { PlaneFig } from "./graph-kit";
 
 export { GL_JS } from "./graph-kit";
+/** 표시점이 축 눈금 숫자·원점 라벨·그림 테두리와 겹치지 않는 자리인가(축에서 한 칸 이상, 테두리에서 한 칸 이상). */
+export const clearOfLabels = (x: number, y: number, R: number) => Math.abs(x) >= 2 && Math.abs(y) >= 2 && Math.abs(y) <= R - 1 && Math.abs(x) <= R - 1;
 export type PureLine = { m: number; b: number; xs: number[]; ys: number[]; d: number; R: number; fig: PlaneFig };
 export type PureOpts = { ms?: number[]; /** y 절편이 격자 위(점 중 하나가 x=0) */ x0?: boolean; bNonZero?: boolean };
 export const pureAxes = (R: number) => { const step = R > 8 ? 2 : 1; return { x: { min: -R, max: R, step, title: "x" }, y: { min: -R, max: R, step, title: "y" } }; };
@@ -12,7 +14,7 @@ export const pureAxes = (R: number) => { const step = R > 8 ? 2 : 1; return { x:
 export function makePureLine(rng: Rng, o: PureOpts = {}): PureLine {
   for (let tr = 0; tr < 500; tr++) {
     const R = rng.pick([6, 8, 10]); const m = rng.pick(o.ms ?? [-4, -3, -2, -1, 1, 2, 3, 4]); const b = rng.int(-(R - 1), R - 1); if (b === 0) continue;
-    const cand: number[] = []; for (let x = -R; x <= R; x++) { const y = m * x + b; if (Math.abs(y) <= R && !(Math.abs(x) <= 1 && Math.abs(y) <= 1)) cand.push(x); }
+    const cand: number[] = []; for (let x = -R; x <= R; x++) { const y = m * x + b; if (Math.abs(y) <= R && (clearOfLabels(x, y, R) || (o.x0 && x === 0 && Math.abs(y) >= 2 && Math.abs(y) <= R - 1))) cand.push(x); }
     if (o.x0 && !cand.includes(0)) continue; const pool = o.x0 ? cand.filter((x) => x !== 0) : cand;
     if (pool.length < (o.x0 ? 2 : 3)) continue;
     const pick = (o.x0 ? [0, ...rng.shuffle(pool).slice(0, 2)] : rng.shuffle(pool).slice(0, 3)).sort((p, q) => p - q);
@@ -42,9 +44,9 @@ export function makeQuadG(rng: Rng, fn: string, o: QuadGOpts = {}): QuadG {
     const R = rng.pick([6, 8, 10]); const A = rng.pick(o.aPool ?? [-2, -1, 1, 2]); const H = rng.int(-3, 3); const K = A > 0 ? rng.int(-(R - 3), 0) : rng.int(0, R - 3);
     if (A > 0 && Math.abs(H + Math.sqrt((R - K) / A)) < 2.5) continue; // 곡선 오른쪽 끝이 위 가장자리를 y 축 근처에서 벗어나면 곡선 라벨이 y 축 제목과 겹친다
     const B = -2 * A * H, C = A * H * H + K; const y = (x: number) => A * x * x + B * x + C;
-    const cand: number[] = []; for (let x = -R; x <= R; x++) if (Math.abs(y(x)) <= R && !(Math.abs(x) <= 1 && Math.abs(y(x)) <= 1)) cand.push(x); // 원점 라벨 O 와 겹치는 점 제외
+    const cand: number[] = []; for (let x = -R; x <= R; x++) if (Math.abs(y(x)) <= R && clearOfLabels(x, y(x), R)) cand.push(x);
     let xs: number[];
-    if (o.vertex && Math.abs(H) <= 1 && Math.abs(K) <= 1) continue;
+    if (o.vertex && !clearOfLabels(H, K, R)) continue;
     if (o.vertex) { const others = rng.shuffle(cand.filter((x) => x !== H)).slice(0, 2); xs = [H, ...others]; }
     else if (o.pair) { const ds = [1, 2, 3].filter((d) => cand.includes(H - d) && cand.includes(H + d)); if (!ds.length) continue; const d = rng.pick(ds); const rest = cand.filter((x) => x !== H && Math.abs(x - H) !== d); if (!rest.length) continue; xs = [H - d, H + d, rng.pick(rest)]; }
     else { const pool = rng.shuffle(cand.filter((x) => x !== H)); xs = []; for (const x of pool) { if (xs.every((u) => y(u) !== y(x))) xs.push(x); if (xs.length === 3) break; } if (xs.length < 3) continue; }
@@ -56,7 +58,7 @@ export function makeQuadG(rng: Rng, fn: string, o: QuadGOpts = {}): QuadG {
   throw new GenFail("포물선 장면 표집 실패");
 }
 /** FIGURE 에서 이차식 A, B, C, 꼭짓점 H, K 를 세우고 점이 곡선 위가 아니면 던진다. */
-export const QUADG_JS = "const QF=FIGURE.objects.find(o=>o.kind==='function'&&o.fn==='quadratic'); const QS=FIGURE.objects.find(o=>o.kind==='scatter'); const A=QF.params[0],B=QF.params[1],C=QF.params[2]; if(!(Math.abs(A)>0)) throw new Error('A=0'); for (const p of QS.points) if (Math.abs(A*p[0]*p[0]+B*p[0]+C-p[1])>1e-9) throw new Error('점이 곡선 위에 없음'); const H=-B/(2*A), K=C-B*B/(4*A);\n";
+export const QUADG_JS = "const QF=FIGURE.objects.find(o=>o.kind==='function'&&o.fn==='quadratic'); const QS=FIGURE.objects.find(o=>o.kind==='scatter'); const A=QF.params[0],B=QF.params[1],C=QF.params[2]; if(!(Math.abs(A)>0)) throw new Error('A=0'); for (const p of QS.points) if (Math.abs(A*p[0]*p[0]+B*p[0]+C-p[1])>1e-9) throw new Error('점이 곡선 위에 없음'); const H=-B/(2*A), K=C-B*B/(4*A); const f=(x)=>A*x*x+B*x+C;\n";
 export const quadGRead = (q: QuadG): [string, string][] => [
   [`그래프에 표시된 점을 읽는다: ${q.xs.map((x, i) => `(${x}, ${q.ys[i]})`).join(", ")}.`, "Read the marked points on the graph."],
   [`y = ax² + bx + c 에 세 점을 대입해 세 식을 만든다.`, "Substitute the three points."],
@@ -71,3 +73,5 @@ export const quadGIntro = (rng: Rng, fn: string) => rng.pick(["", "", "A student
   `A quadratic function $${fn}$ is graphed in the $xy$-plane shown. Points on the graph are marked.`,
   `Three marked points lie on the graph of $y = ${fn}(x)$ shown in the $xy$-plane, where $${fn}$ is a quadratic function.`,
 ]);
+/** 표시점 중 같은 높이를 갖는 대칭 쌍의 x 두 개(작은 것부터). 쌍이 없으면 빈 배열. */
+export const pairXs = (q: QuadG): number[] => q.xs.filter((_, i) => q.ys.some((y, j) => j !== i && y === q.ys[i]));

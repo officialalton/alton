@@ -1,7 +1,7 @@
 {
  "itemId": "linear_equations_two_var.slope.LN.P",
- "generatedAt": "2026-10-06T04:19:03.977Z",
- "codeHash": "64cb0e2f3bd34eeb74247725a8e4d821060d751b1963300df317d729e04c5524",
+ "generatedAt": "2026-10-06T04:25:57.751Z",
+ "codeHash": "9182522e1fb0a5f87c9b66820a61613360000a24f328fe5b952ecadc48203350",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -27,17 +27,17 @@
    "archetypeId": "l2g.slope.LN.P.repr_shift",
    "seed": 11,
    "signature": "plane",
-   "stimulus": "The line shown in the $xy$-plane passes through the marked points. The line shown is the graph of $ax + 4y = c$, where $a$ and $c$ are constants.",
-   "question": "What is the value of the constant $a$?",
+   "stimulus": "A designer sketches a straight edge on graph paper. The line shown in the $xy$-plane passes through the marked points. The equation $ax + 6y = c$, where $a$ and $c$ are constants, defines the line shown.",
+   "question": "Based on the graph, what is $a$?",
    "options": [
-    "8",
-    "-8",
-    "-2",
-    "2"
+    "6",
+    "1",
+    "-6",
+    "-1"
    ],
    "correctIndex": 0,
-   "answer": "8",
-   "explanation": "(1) 그래프에 표시된 두 점 (-5, 5) 과 (-4, 3) 을 읽는다. (2) 기울기 = (3 - (5)) ÷ (-4 - (-5)) = -2 이다. (3) 4y = -ax + c 이므로 y = (-a/4)x + c/4 이다. (4) 기울기 -a/4 = -2 이다. (5) a = -4 × -2 = 8 이다. 따라서 정답은 8이다.",
+   "answer": "6",
+   "explanation": "(1) 그래프에 표시된 두 점 (-5, 9) 과 (-3, 7) 을 읽는다. (2) 기울기 = (7 - (9)) ÷ (-3 - (-5)) = -1 이다. (3) 6y = -ax + c 이므로 y = (-a/6)x + c/6 이다. (4) 기울기 -a/6 = -1 이다. (5) a = -6 × -1 = 6 이다. 따라서 정답은 6이다.",
    "structuralIssues": []
   }
  ]

@@ -1,9 +1,9 @@
 {
  "itemId": "nonlinear_functions.vertex_x.FN.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T04:11:33Z",
+ "reviewedAt": "2026-10-06T04:26:23Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "1c26eff71892b0a7a9d5e7a03f0916bdc3e3adcca2f394879fbbb0e9dedd5c5f",
+ "codeHash": "b9d8d3746e19a7b526096878331fa12123db8f6dcf35a8ffcbb05a4a177ff2c8",
  "samples": [
   "nonlinear_functions.vertex_x.FN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "순수 포물선 그래프(축 제목 x·y): 점이 곡선 위·검정 점, 곡선 라벨 q 가 y 축 제목과 겹치지 않음(생성기에서 배제), 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판."
+ "notes": "순수 함수 그래프(축 제목 x·y, 오너 승인 2026-10-05): 표시점이 곡선·직선 위, 축 눈금·원점 라벨·테두리와 겹치지 않는 자리(생성기 규칙), 검정 점, 곡선 라벨은 지문이 가리킬 때만, 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판."
 }
