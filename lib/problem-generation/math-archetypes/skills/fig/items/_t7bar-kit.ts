@@ -33,7 +33,7 @@ export const respRead = (r: RespScene): [string, string] => [`막대그래프에
 // ── 표본 크기 막대(Survey A·B·C): 표본 크기가 단위 u 의 제곱수 배 ──
 export type SizeScene = { s: Surv; u: number; yStep: number; ratios: number[]; names: string[]; vals: number[]; fig: { type: "data"; kind: "bar"; categories: string[]; series: { values: number[] }[]; xTitle: string; yTitle: string; yMin: number; yMax: number; yStep: number } };
 export function sizeScene(rng: Rng, ratios: number[]): SizeScene {
-  const s = rng.pick(SURVEYS); const u = rng.pick([50, 100, 200, 250]); const names = ["Survey A", "Survey B", "Survey C"].slice(0, ratios.length); const order = rng.shuffle([...ratios.keys()]);
+  const s = rng.pick(SURVEYS); const u = rng.pick([50, 100, 200, 250]); const names = ["A", "B", "C"].slice(0, ratios.length); const order = rng.shuffle([...ratios.keys()]);
   const rs = order.map((i) => ratios[i]); const vals = rs.map((r) => r * u); const yStep = u; const yMax = (Math.max(...rs) + 1) * u;
   return { s, u, yStep, ratios: rs, names, vals, fig: { type: "data", kind: "bar", categories: names, series: [{ values: vals }], xTitle: "Survey", yTitle: `Sample size (${s.ent})`, yMin: 0, yMax, yStep } };
 }
