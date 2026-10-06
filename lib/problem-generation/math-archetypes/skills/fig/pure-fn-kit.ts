@@ -7,7 +7,7 @@ import { clearOfLabels, pureAxes } from "./pure-kit";
 import { fmtNum } from "../../text";
 
 export type QuadX = { fn: string; A: number; B: number; C: number; H: number; K: number; D: number; xs: number[]; ys: number[]; R: number; fig: PlaneFig; p?: number; q?: number };
-export type QuadXOpts = { /** 표시점 개수(기본 3, 0이면 곡선만) */ nPts?: number; /** 표시점에 꼭짓점 포함 */ vertex?: boolean; /** 같은 높이 쌍 포함 */ pair?: boolean; /** 표시점은 y 값이 서로 다름(기본 true) */ distinctY?: boolean; /** 곡선 위에 직선 추가 객체 */ extra?: Record<string, unknown>[]; /** 축 절편의 라벨 겹침 검사를 생략(교점을 그림 밖에 둬야 하는 장면용) */ loose?: boolean };
+export type QuadXOpts = { /** 표시점 개수(기본 3, 0이면 곡선만) */ nPts?: number; /** 표시점에 꼭짓점 포함 */ vertex?: boolean; /** 같은 높이 쌍 포함 */ pair?: boolean; /** 표시점은 y 값이 서로 다름(기본 true) */ distinctY?: boolean; /** 곡선 위에 직선 추가 객체 */ extra?: Record<string, unknown>[]; /** 축 절편의 라벨 겹침 검사를 생략(교점을 그림 밖에 둬야 하는 장면용) */ loose?: boolean; /** 표시점을 x ≥ 1, y ≥ 1 인 1사분면에서만 고름(상황 그래프) */ nonneg?: boolean };
 /** 양의 정수 D 가 완전제곱이 아닌가. */
 export const isIrr = (D: number) => D > 0 && Math.round(Math.sqrt(D)) ** 2 !== D;
 /** 축 위의 교차점(x 절편·y 절편)이 원점 'O' 라벨이나 축 눈금 숫자(±R/2, ±R)와 겹치지 않는 자리인가. */
@@ -32,7 +32,7 @@ export function quadFig(rng: Rng, fn: string, A: number, B: number, C: number, R
   { const dx = Math.sqrt(Math.max(0, ((A > 0 ? R : -R) - K) / A)); if (Math.abs(H + dx) < 2.5) return null; } // 곡선 오른쪽 끝이 그림 위·아래 끝을 벗어나는 자리가 y 축 눈금·제목 근처인 경우 제외(pure-kit 규칙의 아래로 열린 포물선 확장)
   if (!o.loose && !crossSafe(C, R, !!o.vertex)) return null; // y 절편이 원점·눈금 숫자와 겹침
   if (!o.loose && B * B - 4 * A * C >= 0) { const sq = Math.sqrt(B * B - 4 * A * C); if (!crossSafe((-B + sq) / (2 * A), R, !!o.vertex) || !crossSafe((-B - sq) / (2 * A), R, !!o.vertex)) return null; } // x 절편이 원점·눈금 숫자와 겹침
-  const cand: number[] = []; for (let x = -R; x <= R; x++) if (Math.abs(y(x)) <= R && clearOfLabels(x, y(x), R)) cand.push(x);
+  const cand: number[] = []; for (let x = -R; x <= R; x++) if (o.nonneg ? (x >= 1 && x <= R - 1 && y(x) >= 1 && y(x) <= R - 1) : (Math.abs(y(x)) <= R && clearOfLabels(x, y(x), R))) cand.push(x);
   const n = o.nPts ?? 3; let xs: number[] = [];
   if (n > 0) {
     if (o.vertex) { if (!Number.isInteger(H) || !clearOfLabels(H, K, R)) return null; xs = [H, ...rng.shuffle(cand.filter((x) => x !== H)).slice(0, n - 1)]; }

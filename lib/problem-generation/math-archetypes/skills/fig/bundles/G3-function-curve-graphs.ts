@@ -52,6 +52,8 @@ import { ITEM as nvyC } from "../items/nonlinear_functions.vertex_y.FN.C";
 import { ITEM as naC } from "../items/nonlinear_functions.interpret_a.FN.C";
 import { ITEM as nbC } from "../items/nonlinear_functions.interpret_b.FN.C";
 import { ITEM as nftC } from "../items/nonlinear_functions.function_transformation.FN.C";
+import { ITEM as ftfpP } from "../items/nonlinear_functions.function_transformation.FN.P";
+import { ITEM as cgfpP } from "../items/nonlinear_functions.context_graph_features.FN.P";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC, ...ftfpP, ...cgfpP];
 
