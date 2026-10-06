@@ -58,6 +58,8 @@ import { ITEM as rafpP } from "../items/nonlinear_functions.rational_asymptote.F
 import { ITEM as mcfpP } from "../items/two_variable_data.model_choice_linear_quadratic_exponential.FN.P";
 import { ITEM as emccC } from "../items/nonlinear_functions.exponential_model.FN.C";
 import { ITEM as raccC } from "../items/nonlinear_functions.rational_asymptote.FN.C";
+import { ITEM as wscC } from "../items/systems_linear.word_system.LN.C";
+import { ITEM as prcC } from "../items/ratios_rates_units.proportion.LN.C";
 
-export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC, ...ftfpP, ...cgfpP, ...rafpP, ...mcfpP, ...emccC, ...raccC];
+export const BUNDLE: LArch[] = [...nfVertexX, ...nfVertexY, ...nfEval, ...nfFindX, ...nesRoot, ...nesSum, ...nesProd, ...nesNum, ...nesISum, ...nesIProd, ...nesLQ, ...nfIa, ...nfIb, ...nesPD, ...nesRad, ...cgPP, ...sysFG, ...liFG, ...liPS, ...leoS, ...liSO, ...ssLN, ...ssEV, ...ssPN, ...ssWS, ...rruP, ...rruC, ...leoW, ...nfEM, ...pcFN, ...nfEL, ...sftC, ...isC, ...iiC, ...l2sC, ...l2iC, ...l2nC, ...spnC, ...cfgC, ...cppC, ...sfgC, ...ifgC, ...pisC, ...nrC, ...nnC, ...npC, ...neC, ...nvxC, ...nvyC, ...naC, ...nbC, ...nftC, ...ftfpP, ...cgfpP, ...rafpP, ...mcfpP, ...emccC, ...raccC, ...wscC, ...prcC];
 
