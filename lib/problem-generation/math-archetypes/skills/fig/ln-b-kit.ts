@@ -3,7 +3,7 @@ import { GenFail } from "../../types";
 import type { Rng } from "../../rng";
 import { pureAxes, clearOfLabels } from "./pure-kit";
 
-export const LEADS_G = ["", "", "A student studies graphs in an algebra class. ", "A teacher draws a graph on the board. ", "A graphing program plots a figure. ", "In a practice set, a graph is shown in the $xy$-plane. ", "A designer sketches a figure on a coordinate grid. ", "An engineer plots a line on a grid. "];
+export const LEADS_G = ["", "", "A student studies graphs in an algebra class. ", "A teacher draws a graph on the board. ", "A graphing program plots a figure. ", "In a practice set, a graph is shown in the $xy$-plane. ", "A designer sketches a figure on a coordinate grid. ", "An engineer plots a graph on a grid. "];
 export const INTRO_TAILS = [
   "The first graph is the given figure, and four graphs with the same axes are shown as choices.",
   "Use the given graph to answer the question, and compare the four choices, which all use the same axes.",

@@ -98,7 +98,8 @@ export function renderTrigCurve(spec: TrigCurveSpec): { svg: string; alt: string
   out.push(`<line x1="${f(sx(axX))}" y1="${f(H - PADB)}" x2="${f(sx(axX))}" y2="${PADT - 16}" stroke="#111" stroke-width="1.8" marker-end="url(#tc-ax)"/>`);
   // 눈금 숫자: 가로는 같은 줄에 가운데 정렬, 세로는 오른쪽 정렬(글자 y = 격자선 + 4)
   const fmtX = spec.xUnit === "pi" ? piLabel : numLabel;
-  const xLabelY = sy(axY) + 15;
+  // 가로축이 그래프 가운데를 지나면 곡선이 눈금 숫자를 가로지르므로 숫자는 그림 아래 가장자리에 둔다.
+  const xLabelY = (axY > y0 + 1e-9 ? H - PADB : sy(axY)) + 15;
   const everyX = xs.length > 14 ? 2 : 1;
   xs.forEach((x, i) => { if (Math.abs(x - axX) < 1e-9 || i % everyX !== 0) return; out.push(`<text x="${f(sx(x))}" y="${f(xLabelY)}" text-anchor="middle" fill="#111" stroke="#fff" stroke-width="3" paint-order="stroke">${fmtX(x)}</text>`); });
   const everyY = ys.length > 12 ? 2 : 1;
