@@ -1,0 +1,45 @@
+{
+ "itemId": "one_variable_data.median.HG.P",
+ "generatedAt": "2026-10-06T03:08:17.504Z",
+ "codeHash": "b207c4a6d9992657eb0f410b577bd8385cfc22f8f994a634f11577fd1e952167",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/hist-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.median.HG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.median.HG.P.png",
+   "mobileFile": "one_variable_data.median.HG.P.m375.png",
+   "archetypeId": "ovd.median.HG.P.compose_kind",
+   "seed": 11,
+   "signature": "data:histogram",
+   "stimulus": "The distances thrown in a contest for throws at a field day are summarized in the histogram shown. Estimate with the midpoint of each interval standing for all the values in it.",
+   "question": "By how many feet does the mean of the data differ from the median of the data?",
+   "options": [
+    "5",
+    "50",
+    "45",
+    "0"
+   ],
+   "correctIndex": 0,
+   "answer": "5",
+   "explanation": "(1) 히스토그램에서 막대의 구간과 높이를 읽고 중점을 값으로 본다: 35(7), 45(10), 55(4), 65(9) — 전체 30개. (2) 합 = 1500, 평균 = 1500 ÷ 30 = 50 이다. (3) 전체 30 개이므로 중앙값은 15 번째와 16 번째 값의 평균이다. (4) 누적 점 개수: 35→7, 45→17, 55→21, 65→30 이다. (5) 중앙값 = 45 이다. (6) 차 = |50 - 45| = 5 이다. 따라서 정답은 5이다.",
+   "structuralIssues": []
+  }
+ ]
+}

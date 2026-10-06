@@ -131,3 +131,73 @@ describe("표 계열(1단계): 일반 표·문장형 자료의 구조 검사와 
     const cellOnly = { ...i0, figure: tamperFigure(i0.figure, "cell") }; expect(JSON.stringify(cellOnly.figure)).not.toBe(JSON.stringify(i0.figure));
   });
 });
+
+describe("그래프 계열(G 묶음): 좌표평면 직선(line)의 비율 충실도 검사와 변조", () => {
+  const spec = { type: "plane", axes: { x: { min: 0, max: 10, step: 2, title: "Time (hours)" }, y: { min: 0, max: 60, step: 10, title: "Cost (dollars)" } }, objects: [{ id: "L1", kind: "line", through: [[0, 20], [10, 50]] }, { id: "L2", kind: "line", through: [[0, 50], [10, 10]] }] } as Spec;
+  const svg = renderFigureSvg(spec as unknown as FigureSpec);
+  it("원본 두 직선은 통과", () => expect(checkRenderedFigure(spec, svg)).toEqual([]));
+  it("(a) 한 직선의 끝점을 위로 옮겨 그리면(기울기 불일치) line_mismatch", () => {
+    const bad = svg.replace(/(<polyline points="[^"]+ )([\d.]+),([\d.]+)(" fill="none" stroke="#111")/, (_m, a, x, y, c) => `${a}${x},${Number(y) - 30}${c}`);
+    expect(bad).not.toBe(svg); expect(codes(checkRenderedFigure(spec, bad))).toContain("line_mismatch");
+  });
+  it("(d) 직선이 그려지지 않으면 render_empty", () => {
+    const bad = svg.replace(/<polyline points="[^"]+" fill="none" stroke="#C8102E"[^>]*\/>/, "");
+    expect(bad).not.toBe(svg); expect(codes(checkRenderedFigure(spec, bad))).toContain("render_empty");
+  });
+  it("자료 변조: 직선 좌표(through)도 변조 대상이다(DATA_KEYS)", () => {
+    const mut = tamperFigure(spec, "add") as Spec; expect(JSON.stringify(mut)).not.toBe(JSON.stringify(spec));
+  });
+});
+
+describe("그래프 계열(G6): 막대·히스토그램·점도표·상자그림의 비율 충실도 검사와 돌연변이", () => {
+  const bar = { type: "data", kind: "bar", categories: ["Mon", "Tue", "Wed"], series: [{ values: [12, 20, 8] }], xTitle: "Day (day)", yTitle: "Visitors (people)", yMin: 0, yMax: 24, yStep: 4 } as Spec;
+  const hist = { type: "data", kind: "histogram", bins: [{ from: 0, to: 10, count: 3 }, { from: 10, to: 20, count: 7 }, { from: 20, to: 30, count: 5 }], xTitle: "Time (minutes)", yTitle: "Frequency (students)" } as Spec;
+  const dot = { type: "data", kind: "dot_plot", dots: [{ value: 1, count: 3 }, { value: 2, count: 5 }, { value: 4, count: 2 }], xTitle: "Books (books)" } as Spec;
+  const box = { type: "data", kind: "boxplot", boxes: [{ name: "Class A", min: 2, q1: 5, median: 8, q3: 12, max: 20 }, { name: "Class B", min: 4, q1: 6, median: 9, q3: 11, max: 15 }], xTitle: "Score (points)" } as Spec;
+  const R = (s: Spec) => renderFigureSvg(s as unknown as FigureSpec);
+  it("원본은 모두 통과", () => { for (const s of [bar, hist, dot, box]) expect(checkRenderedFigure(s, R(s)), String(s.kind)).toEqual([]); });
+  it("(a) 막대 높이를 눈금 대비 늘려 그리면 값 불일치", () => {
+    const svg = R(bar); const bad = svg.replace(/(<rect x="[^"]+" y=")([\d.]+)(" width="[^"]+" height=")([\d.]+)/, (_m, a, y, b, h) => `${a}${Number(y) - 30}${b}${Number(h) + 30}`); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(bar, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 히스토그램 막대의 너비·위치가 구간과 다르면 값 불일치", () => {
+    const svg = R(hist); const bad = svg.replace(/(<rect x=")([\d.]+)(" y="[^"]+" width=")([\d.]+)/, (_m, a, x, b, w) => `${a}${x}${b}${Number(w) * 0.7}`); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(hist, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 점도표의 점 하나를 지우면 점 개수 불일치", () => {
+    const svg = R(dot); const bad = svg.replace(/<circle cx="[^"]+" cy="[^"]+" r="6" fill="#111"\/>/, ""); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(dot, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 상자그림의 중앙값 선을 옮기면 값 불일치", () => {
+    const svg = R(box); const bad = svg.replace(/(<line x1=")([\d.]+)(" y1="[\d.]+" x2=")([\d.]+)(" y2="[\d.]+" stroke="#111" stroke-width="2.2")/, (_m, a, x1, b, x2, c) => `${a}${Number(x1) + 20}${b}${Number(x2) + 20}${c}`); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(box, bad))).toContain("render_value_mismatch");
+  });
+  it("(a) 묶음 막대(범례 있음)의 둘째 계열 막대를 늘려 그리면 값 불일치, 범례 견본은 막대로 세지 않는다", () => {
+    const g2 = { ...bar, series: [{ name: "Last year", values: [12, 20, 8] }, { name: "This year", values: [16, 8, 12] }] } as Spec; const svg = R(g2);
+    expect(checkRenderedFigure(g2, svg)).toEqual([]);
+    const reds = [...svg.matchAll(/<rect x="[^"]+" y="([\d.]+)" width="[^"]+" height="([\d.]+)" fill="#C8102E"\/>/g)]; const last = reds[reds.length - 1]; // 마지막 빨간 사각형 = 막대(범례 견본이 아님)
+    const bad = svg.replace(last[0], last[0].replace(`y="${last[1]}"`, `y="${Number(last[1]) - 30}"`).replace(`height="${last[2]}"`, `height="${Number(last[2]) + 30}"`)); expect(bad).not.toBe(svg);
+    expect(codes(checkRenderedFigure(g2, bad))).toContain("render_value_mismatch");
+  });
+  it("(b) 축 제목의 단위(괄호)가 빠지면 잡는다", () => { expect(codes(checkRenderedFigure({ ...bar, yTitle: "Visitors" }, R({ ...bar, yTitle: "Visitors" })))).toContain("unit_missing_in_title"); });
+  it("(d) 범주 이름이 그려지지 않으면 잡는다", () => { const svg = R(bar); expect(codes(checkRenderedFigure(bar, svg.replace(">Tue<", "><")))).toContain("category_label_missing"); });
+});
+
+describe("그래프 계열(G7): 삼각형의 각·변 비율 충실도 검사와 돌연변이", () => {
+  const ang = { type: "triangle", vertices: ["A", "B", "C"], angles: [{ at: "A", label: "(2x + 10)°", value: 50 }, { at: "B", label: "(3x - 5)°", value: 70 }, { at: "C", label: "(x + 20)°", value: 60 }] } as Spec;
+  const rt = { type: "triangle", vertices: ["P", "Q", "R"], kind: "right", rightAngleAt: "Q", horizontal: ["Q", "R"], sides: [{ between: ["Q", "R"], label: "12" }, { between: ["P", "Q"], label: "5" }, { between: ["P", "R"], label: "x" }] } as Spec;
+  const R = (s: Spec) => renderFigureSvg(s as unknown as FigureSpec);
+  it("원본은 통과", () => { expect(checkRenderedFigure(ang, R(ang))).toEqual([]); expect(checkRenderedFigure(rt, R(rt))).toEqual([]); });
+  it("(a) 각의 참값(value)과 다르게 그려진 삼각형은 잡는다(그림에 40°·꼭지각 120° 로 그리기)", () => {
+    const bad = { ...ang, angles: [{ at: "A", label: "(2x + 10)°", value: 50 }, { at: "B", label: "(3x - 5)°", value: 70 }, { at: "C", label: "(x + 20)°", value: 60 }] } as Spec;
+    const svg = R(bad).replace(/<line x1="([\d.]+)" y1="([\d.]+)" x2="([\d.]+)" y2="([\d.]+)" stroke="#111" stroke-width="2"/, (_m, a, b, c, d) => `<line x1="${Number(a) + 25}" y1="${b}" x2="${c}" y2="${d}" stroke="#111" stroke-width="2"`);
+    expect(codes(checkRenderedFigure(bad, svg))).toContain("render_value_mismatch");
+  });
+  it("(a) 두 직각변 라벨 12:5 의 비율과 다르게 그려지면 잡는다", () => {
+    const svg = R(rt).replace(/(<line x1="58" y1=")([\d.]+)(" x2="58" y2=")([\d.]+)/, (_m, a, y1, b, y2) => `${a}${Number(y1) - 40}${b}${y2}`);
+    expect(svg).not.toBe(R(rt)); expect(codes(checkRenderedFigure(rt, svg))).toContain("render_value_mismatch");
+  });
+  it("'label' 변조: 숫자가 든 첫 라벨의 마지막 정수가 바뀐다", () => {
+    const m = tamperFigure(rt, "label") as { sides: { label: string }[] }; expect(m.sides[0].label).toBe("13");
+  });
+});

@@ -1,0 +1,23 @@
+{
+ "itemId": "linear_equations_two_var.intersection_y.LN.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:08:35Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "284c729381ead93fa2f7f71a9d2b1c3348c0eea64292d5094ba8661b98dbe6a1",
+ "samples": [
+  "linear_equations_two_var.intersection_y.LN.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Oak (0,0),(6,48) 기울기 8, Maple (0,60),(5,70) 기울기 2 → 8x=2x+60 → x=10, y=80, 메타 정답 80 일치. 보조 확인: 그림 안 교점(easy) 샘플도 별도 렌더해 교점이 격자선 교차점에 놓임을 확인. 라벨은 각 직선 옆에 같은 색, 눈금·축 제목 양호, 375px 판독 가능. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+}

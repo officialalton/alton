@@ -1,0 +1,43 @@
+{
+ "itemId": "linear_equations_two_var.intersection_sum.LN.P",
+ "generatedAt": "2026-10-06T03:08:17.483Z",
+ "codeHash": "2c824c64d859310cfbacdd74e90bf110de534090034ffe751a1a577b3bd269c1",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/coordinate-plane.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/linear_equations_two_var.intersection_sum.LN.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "linear_equations_two_var.intersection_sum.LN.P.png",
+   "mobileFile": "linear_equations_two_var.intersection_sum.LN.P.m375.png",
+   "archetypeId": "l2.intersection_sum.LN.P.compose_kind",
+   "seed": 11,
+   "signature": "plane",
+   "stimulus": "The graph shown compares the order costs at two print shops. For each, the relationship with the number of shirts printed is linear.",
+   "question": "If both relationships continue, Printer A and Printer B are equal when the number of shirts printed is $x$ and the order cost is $y$ dollars. What is the value of $x + y$?",
+   "options": [
+    "20",
+    "90",
+    "50",
+    "70"
+   ],
+   "correctIndex": 1,
+   "answer": "90",
+   "explanation": "(1) Printer A: 그래프에서 y 절편 10 과 격자점을 읽어 기울기 3 을 구한다. (2) Printer B: 그래프에서 y 절편 50 과 격자점을 읽어 기울기 1 를 구한다. (3) 3x + 10 = 1x + 50 로 놓는다. (4) x = 20 이다. (5) y = 3·20 + 10 = 70 이다. (6) x + y = 20 + 70 = 90 이다. 따라서 정답은 90이다.",
+   "structuralIssues": []
+  }
+ ]
+}

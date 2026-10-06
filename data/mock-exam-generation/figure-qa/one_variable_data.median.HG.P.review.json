@@ -1,0 +1,23 @@
+{
+ "itemId": "one_variable_data.median.HG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:08:35Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "b207c4a6d9992657eb0f410b577bd8385cfc22f8f994a634f11577fd1e952167",
+ "samples": [
+  "one_variable_data.median.HG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: 30-40:7, 40-50:10, 50-60:4, 60-70:9 → 중점 합 1500/30=50(평균), 중앙값 15·16번째 모두 40-50 구간(중점 45) → 차 5, 메타 정답 5 일치. 막대·눈금·축 제목 양호. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+}

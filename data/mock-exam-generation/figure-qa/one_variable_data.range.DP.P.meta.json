@@ -1,0 +1,44 @@
+{
+ "itemId": "one_variable_data.range.DP.P",
+ "generatedAt": "2026-10-06T03:08:17.497Z",
+ "codeHash": "0518110aa32447d36fa3f1a0f46723929eaf1bee7e62399a165e598bf0d44f2d",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.range.DP.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.range.DP.P.png",
+   "mobileFile": "one_variable_data.range.DP.P.m375.png",
+   "archetypeId": "ovd.range.DP.P.inverse",
+   "seed": 11,
+   "signature": "data:dot_plot",
+   "stimulus": "The dot plot shown summarizes the number of eggs in each nest for a group of nests in a bird survey. Each dot stands for one of them. A new value, larger than all the values in the dot plot, is added to the data. The range of the new data is 24 eggs.",
+   "question": "What value, in eggs, was added?",
+   "options": [
+    "24",
+    "31",
+    "18",
+    "25"
+   ],
+   "correctIndex": 3,
+   "answer": "25",
+   "explanation": "(1) 점도표에서 점의 위치를 읽는다: 1(9개), 2(8개), 3(5개), 4(6개), 5(1개), 6(8개), 7(5개) — 전체 42개. (2) 최댓값 7, 최솟값 1 이다. (3) 원래 범위 = 7 - 1 = 6 이다. (4) 새 값이 가장 크므로 새 범위 = 새 값 - 1 이다. (5) 새 값 = 1 + 24 = 25 이다. 따라서 정답은 25이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "itemId": "percentages.percent_change.BR.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T03:08:35Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "f5ed282d74bc58c09bd62833761165036ec3884abd07f140dc14b3f5c6d77615",
+ "samples": [
+  "percentages.percent_change.BR.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Rialto 20→30(50%), Strand 50→80(60%), Majestic 60→90(50%), Lyric 80→100(25%), Orpheum 40→70(75%) → 최대 퍼센트 증가 75, 메타 정답 75 일치. 두 계열 색·범례, 막대 높이가 격자선과 일치, 375px 에서 범례·막대·눈금 판독 가능(가로축 제목이 막대와 떨어져 있으나 판독에 지장 없음). [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인] [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
+}

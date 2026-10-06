@@ -1,0 +1,45 @@
+{
+ "itemId": "one_variable_data.grouped_median_interval.HG.P",
+ "generatedAt": "2026-10-06T03:08:17.499Z",
+ "codeHash": "9362032bb69de961ce5beb803d211be892a3d039cbe4e56e9559401c5de0cebc",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/hist-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.grouped_median_interval.HG.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.grouped_median_interval.HG.P.png",
+   "mobileFile": "one_variable_data.grouped_median_interval.HG.P.m375.png",
+   "archetypeId": "ovd.grouped_median_interval.HG.P.chain2",
+   "seed": 11,
+   "signature": "data:histogram",
+   "stimulus": "The histogram shown gives the daily high temperatures for days in one city over a season, grouped into intervals. Each bar includes its left endpoint but not its right endpoint. Afterward, 9 more days are added, and all of them fall in the highest interval in the histogram.",
+   "question": "What is the least value of the interval that contains the median for the new data?",
+   "options": [
+    "59",
+    "55",
+    "60",
+    "50"
+   ],
+   "correctIndex": 1,
+   "answer": "55",
+   "explanation": "(1) 히스토그램에서 막대의 구간과 높이를 읽는다: 40–45(1), 45–50(6), 50–55(7), 55–60(9), 60–65(3) — 전체 26개. (2) 가장 높은 구간의 도수가 3 에서 12 로 늘어난다. (3) 새 전체 개수 = 26 + 9 = 35 이다. (4) 전체 35 개이므로 중앙값은 18 번째 값이다. (5) 누적 도수: 40–45→1, 45–50→7, 50–55→14, 55–60→23, 60–65→35 이다. (6) 중앙값은 55–60 구간에 있으므로 하한은 55 이다. 따라서 정답은 55이다.",
+   "structuralIssues": []
+  }
+ ]
+}

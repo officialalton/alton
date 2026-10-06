@@ -1,0 +1,25 @@
+// 묶음 G6 — 막대·히스토그램·상자·점도표(BR·HG·BX·DP 30조합) — data.bar/histogram/boxplot/dot_plot. 조합 파일(items/<조합ID>.ts)의 ITEM 을 여기에 펼친다.
+import type { LArch } from "../../../levels-d";
+import { ITEM as ovdMeanDP } from "../items/one_variable_data.mean.DP.P";
+import { ITEM as ovdMedianDP } from "../items/one_variable_data.median.DP.P";
+import { ITEM as ovdRangeDP } from "../items/one_variable_data.range.DP.P";
+import { ITEM as ovdGroupedHG } from "../items/one_variable_data.grouped_median_interval.HG.P";
+import { ITEM as ovdMeanHG } from "../items/one_variable_data.mean.HG.P";
+import { ITEM as ovdMedianHG } from "../items/one_variable_data.median.HG.P";
+import { ITEM as pctOfBR } from "../items/percentages.percent_of.BR.P";
+import { ITEM as pctFindBR } from "../items/percentages.find_percent.BR.P";
+import { ITEM as pctChangeBR } from "../items/percentages.percent_change.BR.P";
+import { ITEM as ovdMeanBR } from "../items/one_variable_data.mean.BR.P";
+import { ITEM as probSimpleBR } from "../items/probability.simple.BR.P";
+import { ITEM as ovdMedianBX } from "../items/one_variable_data.median.BX.P";
+import { ITEM as ovdRangeBX } from "../items/one_variable_data.range.BX.P";
+import { ITEM as ovdSpreadBX } from "../items/one_variable_data.spread_comparison.BX.P";
+import { ITEM as ovdOutlierBX } from "../items/one_variable_data.outlier_effect.BX.P";
+import { ITEM as ovdQuartileBX } from "../items/one_variable_data.quartile_percentile_from_plot.BX.P";
+import { ITEM as ovdSpreadDP } from "../items/one_variable_data.spread_comparison.DP.P";
+import { ITEM as ovdOutlierDP } from "../items/one_variable_data.outlier_effect.DP.P";
+import { ITEM as ovdRangeHG } from "../items/one_variable_data.range.HG.P";
+import { ITEM as ovdSpreadHG } from "../items/one_variable_data.spread_comparison.HG.P";
+import { ITEM as ovdRelcumHG } from "../items/one_variable_data.relative_cumulative_frequency.HG.P";
+
+export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG, ...ovdRelcumHG];

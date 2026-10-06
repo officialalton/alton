@@ -1,0 +1,46 @@
+{
+ "itemId": "one_variable_data.spread_comparison.DP.P",
+ "generatedAt": "2026-10-06T03:08:17.524Z",
+ "codeHash": "9cfd72d618d6ffc6401207b908776b0e4c9e0151f113b2066d23283f748db06c",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/dot2-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.spread_comparison.DP.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.spread_comparison.DP.P.png",
+   "mobileFile": "one_variable_data.spread_comparison.DP.P.m375.png",
+   "archetypeId": "ovd.spread_comparison.DP.P.compare_scenarios",
+   "seed": 11,
+   "signature": "figure_set[data:dot_plot]",
+   "stimulus": "The dot plots shown compare Sample A and Sample B using the number of hours of sleep each student got for students in a health study; each dot is one of them.",
+   "question": "By how many hours do the ranges of the two samples differ?",
+   "options": [
+    "0",
+    "9",
+    "6",
+    "3"
+   ],
+   "correctIndex": 3,
+   "answer": "3",
+   "explanation": "(1) 두 점도표에서 점이 있는 값을 읽는다: Sample A 4~10, Sample B 7~10. (2) 범위: Sample A 10 - 4 = 6, Sample B 10 - 7 = 3 이다. (3) 차 = |6 - 3| = 3 이다. (4) 점이 하나도 없는 값은 범위에 들어가지 않는다. (5) 따라서 3 hours 만큼 다르다. 따라서 정답은 3이다.",
+   "structuralIssues": []
+  }
+ ]
+}

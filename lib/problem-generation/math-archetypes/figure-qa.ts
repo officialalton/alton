@@ -129,6 +129,98 @@ function checkPlaneScatter(spec: Spec, svg: string, issues: QaIssue[]) {
   checkScatterFidelity({ type: "data", kind: "scatter", points: obj.points, fitLine: obj.fitLine } as unknown as Spec, svg, issues);
 }
 
+
+// ───────── 자료 그래프(data.bar·histogram·dot_plot·boxplot) 충실도 ─────────
+const rects = (svg: string) => [...svg.matchAll(/<rect\b([^>]*)\/?>/g)].map((m) => ({ x: Number(attr(m[1], "x")), y: Number(attr(m[1], "y")), w: Number(attr(m[1], "width")), h: Number(attr(m[1], "height")), fill: attr(m[1], "fill") ?? "" }));
+const DATA_COLORS = ["#111", "#C8102E", "#1B6FB0", "#0f7b4a"];
+/** 눈금 숫자(수치 축)·축 제목·단위 검사 — xNum/yNum 은 그 축이 수치 눈금을 가지는가(막대의 가로축은 범주라 제외). */
+function checkChartAxes(spec: Spec, svg: string, issues: QaIssue[], o: { xNum: boolean; yNum: boolean; xTitle: boolean; yTitle: boolean; /** 가로축 제목에 단위(괄호)를 요구하는가 — 범주 축은 단위가 없다. */ xUnit?: boolean }) {
+  const sc = readScale(svg);
+  if (o.yNum) { if (!sc.y || sc.yTicks.length < 3) issues.push({ code: "axis_ticks_missing", message: `세로축 눈금 숫자가 ${sc.yTicks.length}개뿐입니다(3개 이상 필요).` }); else if (sc.y.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `세로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${sc.y.maxRes.toFixed(1)}px).` }); }
+  if (o.xNum) { if (!sc.x || sc.xTicks.length < 3) issues.push({ code: "axis_ticks_missing", message: `가로축 눈금 숫자가 ${sc.xTicks.length}개뿐입니다(3개 이상 필요).` }); else if (sc.x.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `가로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${sc.x.maxRes.toFixed(1)}px).` }); }
+  const want: [string, string | undefined, boolean][] = [["가로", spec.xTitle as string | undefined, o.xTitle], ["세로", spec.yTitle as string | undefined, o.yTitle]];
+  for (const [n, t, need] of want) { if (!need) continue; if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t) && !(n === "가로" && o.xUnit === false)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+}
+const tolY = (sc: NonNullable<ReturnType<typeof fit>>) => Math.abs(sc.a) * 1.5;
+
+function checkBarFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const cats = spec.categories as string[]; const series = spec.series as { values: number[] }[]; const sc = readScale(svg); const rs = rects(svg);
+  for (const c of cats) if (!texts(svg).some((t) => t.text.trim() === c.trim())) issues.push({ code: "category_label_missing", message: `범주 이름 '${c}' 가 그려지지 않았습니다.` });
+  if (!sc.y) return;
+  const axisLn = lines(svg).filter((l) => l.stroke === "#111" && Math.abs(l.y1 - l.y2) < 1e-6).sort((a, b) => Math.abs(b.x2 - b.x1) - Math.abs(a.x2 - a.x1))[0]; const base = axisLn?.y1;
+  series.forEach((se, si) => {
+    const bars = rs.filter((r) => r.fill === DATA_COLORS[si % 4] && r.w > 4 && r.h >= 0 && (base === undefined || Math.abs(r.y + r.h - base) < 1.5)).sort((a, b) => a.x - b.x); // 범례 견본은 밑변이 축 위에 있지 않다
+    if (bars.length !== se.values.length) { issues.push({ code: bars.length === 0 ? "render_empty" : "render_value_mismatch", message: `계열 ${si + 1} 의 막대 ${bars.length}개 ≠ 데이터 ${se.values.length}개.` }); return; }
+    bars.forEach((b, i) => { const got = sc.y!.a * b.y + sc.y!.b; if (Math.abs(got - se.values[i]) > tolY(sc.y!)) issues.push({ code: "render_value_mismatch", message: `'${cats[i]}' 막대의 높이가 눈금 기준 ${got.toFixed(1)} 로 그려졌지만 데이터는 ${se.values[i]} 입니다(길이·값 비율 불일치).` }); });
+  });
+}
+function checkHistogramFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const bins = spec.bins as { from: number; to: number; count: number }[]; const sc = readScale(svg); const bars = rects(svg).filter((r) => r.fill === "#1B6FB0").sort((a, b) => a.x - b.x);
+  if (bars.length !== bins.length) { issues.push({ code: bars.length === 0 ? "render_empty" : "render_value_mismatch", message: `막대 ${bars.length}개 ≠ 구간 ${bins.length}개.` }); return; }
+  bars.forEach((b, i) => {
+    if (sc.y) { const got = sc.y.a * b.y + sc.y.b; if (Math.abs(got - bins[i].count) > tolY(sc.y)) issues.push({ code: "render_value_mismatch", message: `구간 ${bins[i].from}~${bins[i].to} 의 막대 높이가 눈금 기준 ${got.toFixed(1)} 이지만 도수는 ${bins[i].count} 입니다.` }); }
+    if (sc.x) { const l = sc.x.a * b.x + sc.x.b, r = sc.x.a * (b.x + b.w) + sc.x.b, tol = Math.abs(sc.x.a) * 1.5; if (Math.abs(l - bins[i].from) > tol || Math.abs(r - bins[i].to) > tol) issues.push({ code: "render_value_mismatch", message: `구간 ${bins[i].from}~${bins[i].to} 의 막대가 눈금 기준 ${l.toFixed(1)}~${r.toFixed(1)} 에 그려졌습니다(너비·위치 불일치).` }); }
+  });
+}
+function checkDotPlotFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const dots = spec.dots as { value: number; count: number }[]; const sc = readScale(svg); const cs = [...svg.matchAll(/<circle\b([^>]*)\/?>/g)].map((m) => ({ cx: Number(attr(m[1], "cx")), r: Number(attr(m[1], "r")) })).filter((c) => c.r === 6);
+  const total = dots.reduce((a, d) => a + d.count, 0); if (cs.length !== total) { issues.push({ code: cs.length === 0 ? "render_empty" : "render_value_mismatch", message: `그려진 점 ${cs.length}개 ≠ 데이터 점 ${total}개.` }); return; }
+  if (!sc.x) return; const got = new Map<number, number>(); for (const c of cs) { const v = Math.round((sc.x.a * c.cx + sc.x.b) * 1000) / 1000; got.set(v, (got.get(v) ?? 0) + 1); }
+  for (const d of dots.filter((q) => q.count > 0)) { const hit = [...got.entries()].find(([v]) => Math.abs(v - d.value) <= Math.abs(sc.x!.a) * 1.5); if (!hit || hit[1] !== d.count) issues.push({ code: "render_value_mismatch", message: `값 ${d.value} 에 그려진 점 ${hit ? hit[1] : 0}개 ≠ 데이터 ${d.count}개.` }); }
+}
+function checkBoxplotFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const boxes = spec.boxes as { name: string; min: number; q1: number; median: number; q3: number; max: number }[]; const sc = readScale(svg); if (!sc.x) return;
+  const rs = rects(svg).filter((r) => r.fill === "#fff" && r.h > 4).sort((a, b) => a.y - b.y); const ls = lines(svg).filter((l) => l.stroke === "#111" && Math.abs(l.y1 - l.y2) < 1e-6);
+  if (rs.length !== boxes.length) { issues.push({ code: rs.length === 0 ? "render_empty" : "render_value_mismatch", message: `상자 ${rs.length}개 ≠ 데이터 ${boxes.length}개.` }); return; }
+  const val = (px: number) => sc.x!.a * px + sc.x!.b; const tol = Math.abs(sc.x.a) * 1.5;
+  boxes.forEach((b, i) => {
+    const r = rs[i]; const cy = r.y + r.h / 2; const bad: string[] = [];
+    if (Math.abs(val(r.x) - b.q1) > tol) bad.push(`Q1 ${val(r.x).toFixed(1)}≠${b.q1}`); if (Math.abs(val(r.x + r.w) - b.q3) > tol) bad.push(`Q3 ${val(r.x + r.w).toFixed(1)}≠${b.q3}`);
+    const med = lines(svg).find((l) => Math.abs(l.x1 - l.x2) < 1e-6 && l.stroke === "#111" && Math.abs(l.y1 - r.y) < 0.6 && Math.abs(l.y2 - (r.y + r.h)) < 0.6); if (!med) bad.push("중앙값 선 없음"); else if (Math.abs(val(med.x1) - b.median) > tol) bad.push(`중앙값 ${val(med.x1).toFixed(1)}≠${b.median}`);
+    const wl = ls.filter((l) => Math.abs(l.y1 - cy) < 0.6); const lo = Math.min(...wl.map((l) => Math.min(l.x1, l.x2))), hi = Math.max(...wl.map((l) => Math.max(l.x1, l.x2)));
+    if (!wl.length) bad.push("수염 없음"); else { if (Math.abs(val(lo) - b.min) > tol) bad.push(`최솟값 ${val(lo).toFixed(1)}≠${b.min}`); if (Math.abs(val(hi) - b.max) > tol) bad.push(`최댓값 ${val(hi).toFixed(1)}≠${b.max}`); }
+    if (bad.length) issues.push({ code: "render_value_mismatch", message: `상자 '${b.name}': ${bad.join(", ")} (그려진 값 ≠ 데이터).` });
+  });
+}
+
+/** 좌표평면의 직선 객체(line): 그려진 선분의 두 끝이 눈금 기준으로 데이터의 직선 y = mx + b 위에 있는가. 색은 객체 순서(엔진의 COLORS)를 따른다. */
+const PLANE_COLORS = ["#111", "#C8102E", "#1B6FB0", "#0f7b4a"];
+function checkPlaneLines(spec: Spec, svg: string, issues: QaIssue[]) {
+  const objs = spec.objects as { kind: string; through?: unknown[]; slope?: number; intercept?: number }[]; const lns = objs.map((o, i) => ({ o, i })).filter(({ o }) => o.kind === "line");
+  if (!lns.length) return; const sc = readScale(svg); if (!sc.x || !sc.y) return; const pls = polylines(svg);
+  for (const { o, i } of lns) {
+    let m: number, b: number;
+    if (Array.isArray(o.through) && o.through.length === 2 && o.through.every((p) => Array.isArray(p) && p.length === 2)) { const [p, q] = o.through as [number, number][]; if (p[0] === q[0]) continue; m = (q[1] - p[1]) / (q[0] - p[0]); b = p[1] - m * p[0]; }
+    else if (typeof o.slope === "number" && typeof o.intercept === "number") { m = o.slope; b = o.intercept; } else continue;
+    const pl = pls.find((q) => q.stroke === PLANE_COLORS[i % 4] && q.pts.length === 2);
+    if (!pl) { issues.push({ code: "render_empty", message: `직선 ${i + 1}번이 그려지지 않았습니다.` }); continue; }
+    for (const [pxx, pyy] of pl.pts) { const x = sc.x.a * pxx + sc.x.b, y = sc.y.a * pyy + sc.y.b; if (Math.abs(y - (m * x + b)) > Math.abs(sc.y.a) * 1.5) { issues.push({ code: "line_mismatch", message: `직선 ${i + 1}번의 끝점 (${x.toFixed(1)}, ${y.toFixed(1)}) 이 데이터의 직선 y = ${m}x + ${b} 위에 있지 않습니다(기울기·절편 불일치).` }); break; } }
+  }
+}
+
+// ───────── 삼각형(triangle) 충실도 ─────────
+const parseAng = (t?: string): number | null => { if (!t) return null; const m = t.trim().match(/^(\d+(?:\.\d+)?)\s*(?:°|degrees?)?$/i); return m ? Number(m[1]) : null; };
+const parseSideNum = (t?: string): number | null => { if (!t) return null; const m = t.trim().match(/^(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : null; };
+/** 그려진 삼각형(굵기 2 의 검은 선 3 개)의 꼭짓점을 이름(이탤릭 글자)과 짝지어 각·변 길이를 읽고, 데이터의 각(value·숫자 라벨)·직각·숫자 변 라벨과 맞는지 본다. 두 번째 삼각형은 보지 않는다. */
+function checkTriangleFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const segs = [...svg.matchAll(/<line\b([^>]*)\/?>/g)].map((m) => ({ x1: Number(attr(m[1], "x1")), y1: Number(attr(m[1], "y1")), x2: Number(attr(m[1], "x2")), y2: Number(attr(m[1], "y2")), w: attr(m[1], "stroke-width"), stroke: attr(m[1], "stroke") })).filter((l) => l.stroke === "#111" && l.w === "2");
+  if (segs.length < 3) { issues.push({ code: "render_empty", message: "삼각형의 변이 3 개 그려지지 않았습니다." }); return; }
+  const pts: [number, number][] = []; const add = (x: number, y: number) => { if (!pts.some((p) => Math.hypot(p[0] - x, p[1] - y) < 0.6)) pts.push([x, y]); };
+  for (const l of segs.slice(0, 3)) { add(l.x1, l.y1); add(l.x2, l.y2); }
+  if (pts.length !== 3) { issues.push({ code: "render_value_mismatch", message: `삼각형의 꼭짓점이 ${pts.length} 개로 읽힙니다.` }); return; }
+  const names = (spec.vertices as string[]) ?? []; const it = texts(svg).filter((t) => names.includes(t.text) && t.size >= 14);
+  const at = new Map<string, [number, number]>(); for (const n of names) { const tx = it.find((t) => t.text === n); if (!tx) continue; let best = pts[0], bd = Infinity; for (const p of pts) { const d = Math.hypot(p[0] - tx.x, p[1] - tx.y); if (d < bd) { bd = d; best = p; } } at.set(n, best); }
+  if (at.size !== 3 || new Set([...at.values()].map((p) => p.join(","))).size !== 3) return; // 꼭짓점 이름 위치가 모호하면(이름 글자 없음) 건너뜀
+  const ang = (v: string) => { const [o, ...rest] = [at.get(v)!, ...[...at.entries()].filter(([k]) => k !== v).map(([, p]) => p)]; const a = Math.atan2(rest[0][1] - o[1], rest[0][0] - o[0]), b = Math.atan2(rest[1][1] - o[1], rest[1][0] - o[0]); let d = Math.abs(a - b) * 180 / Math.PI; if (d > 180) d = 360 - d; return d; };
+  const len = (u: string, v: string) => Math.hypot(at.get(u)![0] - at.get(v)![0], at.get(u)![1] - at.get(v)![1]);
+  for (const a of ((spec.angles as { at: string; label?: string; value?: number }[]) ?? [])) { const want = typeof a.value === "number" ? a.value : parseAng(a.label); if (want === null || !at.has(a.at)) continue; const got = ang(a.at); if (Math.abs(got - want) > 2.5) issues.push({ code: "render_value_mismatch", message: `꼭짓점 ${a.at} 의 각이 ${got.toFixed(1)}° 로 그려졌지만 데이터는 ${want}° 입니다(그림이 참값과 다름).` }); }
+  const ra = spec.rightAngleAt as string | undefined; if (ra && at.has(ra)) { const got = ang(ra); if (Math.abs(got - 90) > 2.5) issues.push({ code: "render_value_mismatch", message: `직각 꼭짓점 ${ra} 의 각이 ${got.toFixed(1)}° 로 그려졌습니다.` }); }
+  if (!spec.notToScale) {
+    const sides = ((spec.sides as { between: [string, string]; label?: string }[]) ?? []).map((q) => ({ v: parseSideNum(q.label), a: q.between[0], b: q.between[1] })).filter((q) => q.v !== null && at.has(q.a) && at.has(q.b)) as { v: number; a: string; b: string }[];
+    for (let i = 1; i < sides.length; i++) { const r0 = len(sides[0].a, sides[0].b) / sides[0].v, ri = len(sides[i].a, sides[i].b) / sides[i].v; if (Math.abs(ri / r0 - 1) > 0.06) { issues.push({ code: "render_value_mismatch", message: `변 ${sides[i].a}${sides[i].b} 의 길이 비율이 변 ${sides[0].a}${sides[0].b} 와 라벨 ${sides[i].v}:${sides[0].v} 에 맞지 않게 그려졌습니다(${(ri / r0).toFixed(2)} 배).` }); break; } }
+  }
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -138,7 +230,12 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "statement") { checkStatement(spec, markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "scatter") { checkAxes(spec, markup, issues, false); checkScatterFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "line") { checkAxes({ ...spec, xTitle: spec.xTitle, yTitle: spec.yTitle }, markup, issues, false); checkLineChartFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
-  if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "bar") { checkChartAxes(spec, markup, issues, { xNum: false, yNum: true, xTitle: true, yTitle: true, xUnit: false }); checkBarFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "histogram") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: true, xTitle: true, yTitle: true }); checkHistogramFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
+  if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
+  if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkPlaneLines(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   return issues;
 }
 
@@ -147,7 +244,7 @@ const tickSig = (svg: string) => { const s = readScale(svg); return JSON.stringi
 export function checkMultiFigure(children: Spec[], kind: "figure_set" | "figure_choice", textForLabels?: string): QaIssue[] {
   const issues: QaIssue[] = []; const svgs = children.map((c) => renderFigureSvg(c as unknown as FigureSpec, textForLabels === undefined ? undefined : { text: textForLabels }));
   children.forEach((c, i) => checkRenderedFigure(c, svgs[i]).forEach((q) => issues.push({ code: q.code, message: `${kind === "figure_choice" ? "선택지" : "자료"} ${"ABCD"[i]}: ${q.message}` })));
-  const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar")) || c.type === "plane");
+  const graphs = children.every((c) => (c.type === "data" && (c.kind === "scatter" || c.kind === "line" || c.kind === "bar" || c.kind === "dot_plot" || c.kind === "histogram" || c.kind === "boxplot")) || c.type === "plane");
   if (graphs) {
     if (new Set(svgs.map(tickSig)).size > 1) issues.push({ code: kind === "figure_choice" ? "choice_axes_differ" : "scale_mismatch_between_figures", message: "복수 그림의 눈금(축척)이 서로 다릅니다 — 같은 단위의 값은 같은 축척으로 그려야 합니다." });
     if (new Set(svgs.map(viewBox)).size > 1) issues.push({ code: "choice_size_differ", message: "복수 그림의 크기가 서로 다릅니다." });
