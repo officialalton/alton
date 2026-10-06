@@ -264,6 +264,8 @@
   | 완전 삭제(즉시/단기) | `notifications` | 생성 90일 후 | `retention_delete_expired_notifications` |
   | PII 비식별화(통계 유지) | `consult_requests` | completed 후 2년 | `retention_anonymize_expired_consult_requests` |
   | 별도 보존기간 뒤 삭제(보안 로그) | `session_access_events` | 1년 | `retention_delete_expired_access_logs` |
+  | 채팅·문의 메시지 삭제(2026-10-06) | `subject_thread_messages`(archived 스레드)·`teacher_admin_messages`(closed 문의) | 종료 후 2년 | `retention_delete_expired_subject_thread_messages`·`retention_delete_expired_teacher_admin_messages` (배치 비활성 유지) |
+  | legal hold·Smart Notes 삭제 큐(2026-10-06) | `legal_holds`, `retention_deletion_targets`, `retention_policies` | 수업 종료 +1년(자료), hold는 전 경로 검사, 설정은 지정자(`legal_hold_holder`)만·타 관리자는 요청 | 설계: `docs/2026-10-06-retention-implementation-design.md`, 보류 항목 `docs/2026-10-06-retention-deferred-designs.md` (배치·Drive 삭제 플래그 닫힘) |
   | 접근 차단 후 보존(계정 폐쇄) | `students`/`teachers`/`parents` | closed 전환 즉시 | (기존) `ClosedAccountAccessGate` |
 
   오케스트레이터 `run_data_retention_batch()` + cron `/api/cron/data-retention-batch`는
