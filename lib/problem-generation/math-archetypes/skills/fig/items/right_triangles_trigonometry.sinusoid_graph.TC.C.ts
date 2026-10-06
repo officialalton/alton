@@ -38,6 +38,16 @@ function build(rng: Rng, sc: Sc, o: { stim: string; question: string; trace: [st
   return choiceInst(rng, { stimulus: o.stim, question: o.question, choices, correctIndex, rules, P: o.P ?? { fn: sc.kind, A: sc.A, T: sc.T, k: sc.k }, predicateJs: o.pred ?? PRED, diagnoseJs: DIAG, trace: o.trace, variant: o.variant, explainKo: o.ko, explainEn: o.en });
 }
 const Q = ["Which of the following graphs represents the function?", "Which graph shown below could represent this function?", "Which of the graphs matches the function described above?"];
+const EQ_FRAME = (rng: Rng, sc: Sc, fn: string, form: string) => {
+  const eq = `$${fn}(t) = ${sc.A}\\${form}\\left(${piTex(sc.T)}t\\right) + ${sc.k}$`;
+  return rng.pick([
+    `The function $${fn}$ models ${sc.ctx.ent}: ${eq}, where $t$ is time in ${sc.ctx.xu}. Four graphs are shown.`,
+    `A model of ${sc.ctx.ent} is given by ${eq}, with $t$ measured in ${sc.ctx.xu}. The choices show four graphs.`,
+    `Let ${eq} model ${sc.ctx.ent}, where $t$ is in ${sc.ctx.xu}. Each of the four graphs below uses the same axes.`,
+    `Data on ${sc.ctx.ent} are fit by the equation ${eq}, with time $t$ in ${sc.ctx.xu}. Four candidate graphs are shown.`,
+    `The equation ${eq} describes ${sc.ctx.ent}, where $t$ is time in ${sc.ctx.xu}. Four graphs appear below.`,
+  ]);
+};
 const lead = (rng: Rng, sc: Sc) => `${sc.ctx.lead} `;
 const trSteps = (sc: Sc): [string, string][] => [[`진폭 ${sc.A}, 중심선 y = ${sc.k}, 주기 ${sc.T} 를 구한다.`, "Find amplitude, midline, and period."], [`${sc.kind === "cos" ? "코사인형은 t = 0 에서 최댓값" : "사인형은 t = 0 에서 중심선"} 이다.`, "The form fixes the starting point."], [`최댓값 ${sc.k + sc.A}, 최솟값 ${sc.k - sc.A} 이다.`, "Maximum and minimum."], [`네 그래프 중 진폭·중심선·주기가 모두 맞는 것을 고른다.`, "Match all three."]];
 const fin: [string, string] = ["다른 그래프는 진폭, 주기, 중심선 중 하나만 다르다.", "Each other graph differs in exactly one feature."];
@@ -84,14 +94,14 @@ export const ITEM = defineItem({
       lv: "easy", name: "equation_cos", structure: "코사인 식의 진폭·주기·중심선에 맞는 그래프를 고름", extra: "easy: 식의 계수를 그대로 읽음", sprNo: SPR_NO, concepts: ["삼각함수 그래프", "식 → 그래프"],
       gen(rng) {
         const sc = scene(rng, { kind: "cos" }); sc.k = sc.A + rng.int(1, 4); const fn = rng.pick(FN);
-        return build(rng, sc, { stim: `${lead(rng, sc)}The function $${fn}$ models ${sc.ctx.ent}: $${fn}(t) = ${sc.A}\\cos\\left(${piTex(sc.T)}t\\right) + ${sc.k}$, where $t$ is time in ${sc.ctx.xu}. Four graphs are shown.`, question: rng.pick(Q), trace: [[`식에서 진폭 ${sc.A}, 중심선 y = ${sc.k}, 주기 ${sc.T} 를 읽는다.`, "Read the three features."], [`t = 0 에서 최댓값 ${sc.k + sc.A} 이다.`, "Cosine starts at the maximum."]], P: { fn: sc.kind, A: sc.A, hT: sc.T / 2, k: sc.k }, pred: PRED_HT, variant: "easy_equation_cos", ko: "식에서 읽은 값에 맞는 그래프를 고른다.", en: "Choose the matching graph." });
+        return build(rng, sc, { stim: `${lead(rng, sc)}${EQ_FRAME(rng, sc, fn, "cos")}`, question: rng.pick(Q), trace: [[`식에서 진폭 ${sc.A}, 중심선 y = ${sc.k}, 주기 ${sc.T} 를 읽는다.`, "Read the three features."], [`t = 0 에서 최댓값 ${sc.k + sc.A} 이다.`, "Cosine starts at the maximum."]], P: { fn: sc.kind, A: sc.A, hT: sc.T / 2, k: sc.k }, pred: PRED_HT, variant: "easy_equation_cos", ko: "식에서 읽은 값에 맞는 그래프를 고른다.", en: "Choose the matching graph." });
       },
     },
     {
       lv: "medium", name: "equation_sin", structure: "사인 식의 진폭·주기·중심선에 맞는 그래프를 고름", extra: "medium: 사인형의 시작점", sprNo: SPR_NO, concepts: ["삼각함수 그래프", "식 → 그래프", "사인형"],
       gen(rng) {
         const sc = scene(rng, { kind: "sin" }); sc.k = sc.A + rng.int(1, 4); const fn = rng.pick(FN);
-        return build(rng, sc, { stim: `${lead(rng, sc)}The function $${fn}$ models ${sc.ctx.ent}: $${fn}(t) = ${sc.A}\\sin\\left(${piTex(sc.T)}t\\right) + ${sc.k}$, where $t$ is time in ${sc.ctx.xu}. Four graphs are shown.`, question: rng.pick(Q), trace: [[`식에서 진폭 ${sc.A}, 중심선 y = ${sc.k}, 주기 ${sc.T} 를 읽는다.`, "Read the three features."], [`사인형이므로 t = 0 에서 중심선 ${sc.k} 을 올라가며 지난다.`, "Sine starts at the midline."], [`최댓값 ${sc.k + sc.A}, 최솟값 ${sc.k - sc.A} 이다.`, "Maximum and minimum."]], P: { fn: sc.kind, A: sc.A, hT: sc.T / 2, k: sc.k }, pred: PRED_HT, variant: "med_equation_sin", ko: "식에서 읽은 값에 맞는 그래프를 고른다.", en: "Choose the matching graph." });
+        return build(rng, sc, { stim: `${lead(rng, sc)}${EQ_FRAME(rng, sc, fn, "sin")}`, question: rng.pick(Q), trace: [[`식에서 진폭 ${sc.A}, 중심선 y = ${sc.k}, 주기 ${sc.T} 를 읽는다.`, "Read the three features."], [`사인형이므로 t = 0 에서 중심선 ${sc.k} 을 올라가며 지난다.`, "Sine starts at the midline."], [`최댓값 ${sc.k + sc.A}, 최솟값 ${sc.k - sc.A} 이다.`, "Maximum and minimum."]], P: { fn: sc.kind, A: sc.A, hT: sc.T / 2, k: sc.k }, pred: PRED_HT, variant: "med_equation_sin", ko: "식에서 읽은 값에 맞는 그래프를 고른다.", en: "Choose the matching graph." });
       },
     },
   ],
