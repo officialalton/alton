@@ -6,6 +6,7 @@ import { listOpenSlotsForTokenAction, redeemSchedulingLinkAction } from "@/app/s
 import SchedulingLinkInvalid from "./SchedulingLinkInvalid";
 import { DEFAULT_TIMEZONE, timezoneLabel } from "@/lib/timezone";
 import { fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
+import { trackEvent } from "@/lib/analytics/track";
 import { detectInitialScheduleTimezone, saveScheduleTimezone } from "@/lib/schedule-timezone";
 
 export default function ScheduleForm({ token }: { token: string }) {
@@ -56,6 +57,7 @@ export default function ScheduleForm({ token }: { token: string }) {
       if (r.ok) {
         setConfirmedSlot(selectedSlot);
         setConfirmed(true);
+        trackEvent("consult_booked", { entry_point: "schedule_link" });
       } else if (r.reason === "invalid_link") {
         setLinkInvalid(true);
       } else {

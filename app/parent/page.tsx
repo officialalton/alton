@@ -81,7 +81,7 @@ export default async function ParentHomePage({
     // 2026-10-05 무료 회원 S4 — 자녀 배지·상담 탭 배너(+2 쿼리, 실패해도 포털은 뜬다).
     loadFreeMemberFamilyStatus(supabase, children.map((c) => c.studentId)).catch((e) => {
       console.error(JSON.stringify({ type: "parent_free_member_status_failed", error: e instanceof Error ? e.message : String(e) }));
-      return { freeMemberChildIds: [], consults: [] };
+      return { freeMemberChildIds: [], consults: [], summarySharedChildren: [] };
     }),
   ]);
 

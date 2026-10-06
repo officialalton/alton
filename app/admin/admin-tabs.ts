@@ -7,6 +7,8 @@
 export const ADMIN_NAV_TAB_IDS = [
   "home",
   "users",
+  // 2026-10-05 무료 회원(S5) — 목록·상담 관심 큐·보호자 연결 수동 검토.
+  "free-members",
   "matching",
   "consult",
   "catalog",

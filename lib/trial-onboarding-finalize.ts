@@ -347,7 +347,15 @@ async function finalizeWithGuardian(
   const { data: refreshedStudents } = await admin.rpc("get_trial_onboarding_link_students", {
     p_link_id: params.linkId,
   });
+  // 기존 무료 회원 자녀(is_existing_child)는 이미 비밀번호가 있는 계정이다 — 설정 초대를 보내지 않는다.
+  const { data: existingChildRows } = await admin
+    .from("trial_onboarding_link_students")
+    .select("id")
+    .eq("link_id", params.linkId)
+    .eq("is_existing_child", true);
+  const existingChildLinkIds = new Set((existingChildRows ?? []).map((r) => r.id));
   for (const s of refreshedStudents ?? []) {
+    if (existingChildLinkIds.has(s.id)) continue;
     if (s.status === "created" && s.child_auth_user_id && s.invite_status !== "sent") {
       await sendStudentSetPasswordEmail(admin, {
         linkStudentId: s.id,
