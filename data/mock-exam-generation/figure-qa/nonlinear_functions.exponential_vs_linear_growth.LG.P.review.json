@@ -1,0 +1,23 @@
+{
+ "itemId": "nonlinear_functions.exponential_vs_linear_growth.LG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:00:00Z",
+ "reviewer": "claude-sonnet-5.5 (math-C session)",
+ "codeHash": "d6a9a291a4cde0339a52934ef1938cb17209adc699d501dd145f14829615e59e",
+ "samples": [
+  "nonlinear_functions.exponential_vs_linear_growth.LG.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "그림만 보고 풀이: Account A 140,160,180,200(+20, 일차), Account B 20,40,80,160(×2, 지수) → 4주에 일차 220 < 지수 320 처음 역전 (A번 보기 4). 두 선 색·범례 구분, 20 간격 눈금과 점 일치, 375px 판독 가능. (메타 정답: 4)"
+}

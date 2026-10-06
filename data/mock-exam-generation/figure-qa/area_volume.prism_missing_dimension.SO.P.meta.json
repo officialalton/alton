@@ -1,0 +1,44 @@
+{
+ "itemId": "area_volume.prism_missing_dimension.SO.P",
+ "generatedAt": "2026-10-06T07:21:07.984Z",
+ "codeHash": "f7eea184e2cb53698a4c4ab61b0fac28af909a6a341801bb91af1e28418923bd",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.prism_missing_dimension.SO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.prism_missing_dimension.SO.P.png",
+   "mobileFile": "area_volume.prism_missing_dimension.SO.P.m375.png",
+   "archetypeId": "av.prism_missing_dimension.SO.P.compose_kind",
+   "seed": 11,
+   "signature": "solid:rectangular_prism",
+   "stimulus": "A craftsperson builds the object shown. A calculator is not necessary. The figure shows a rectangular box with its length, width, and height labeled. The volume of the prism is 660 cubic units.",
+   "question": "What is the value of $x$?",
+   "options": [
+    "600",
+    "11",
+    "12",
+    "33"
+   ],
+   "correctIndex": 1,
+   "answer": "11",
+   "explanation": "(1) 그림에서 길이 20, 너비 3, 높이 x 를 읽고 부피 660 는 지문에서 안다. (2) 밑면의 넓이 = 20 × 3 = 60 이다. (3) 660 = 60 × x 이다. (4) x = 660 ÷ 60 이다. (5) 따라서 11 이다. 따라서 정답은 11이다.",
+   "structuralIssues": []
+  }
+ ]
+}

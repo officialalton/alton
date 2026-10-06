@@ -12,7 +12,7 @@ import { ARCHETYPES } from "./registry";
 import { sprCapability } from "./spr-capability";
 
 const SEEDS = Number(process.env.GATE_SEEDS ?? 40);
-const PILOT = FIGURE_ITEMS.filter((r) => r.skill === "two_variable_data" && figureArchetypes().some((a) => a.figureItem === r.id));
+const PILOT = FIGURE_ITEMS.filter((r) => r.skill === "two_variable_data" && FTVD_HARD.some((a) => a.figureItem === r.id)); // 파일럿 = tvd-fig-*.ts 의 원형(skills/fig/items 의 two_variable_data 조합은 1단계 이후 STAGED)
 /** 1단계 이후 구현 조합(skills/fig) — 시각 검수(G9) 판정 전이라 G9 만 남은 상태여야 한다. */
 const STAGED = FIGURE_ITEMS.filter((r) => FIG_HARD.some((a) => a.figureItem === r.id));
 

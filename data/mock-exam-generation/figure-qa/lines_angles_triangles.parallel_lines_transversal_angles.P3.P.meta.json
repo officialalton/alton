@@ -1,0 +1,42 @@
+{
+ "itemId": "lines_angles_triangles.parallel_lines_transversal_angles.P3.P",
+ "generatedAt": "2026-10-06T07:32:59.427Z",
+ "codeHash": "0c3034793e0ede2a0542ab50f27e0b4c216697a2f733c31c709e2d47cb98a31b",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/parallel-three.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/lines_angles_triangles.parallel_lines_transversal_angles.P3.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/tri-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "lines_angles_triangles.parallel_lines_transversal_angles.P3.P.png",
+   "mobileFile": "lines_angles_triangles.parallel_lines_transversal_angles.P3.P.m375.png",
+   "archetypeId": "lat.parallel_lines_transversal_angles.P3.P.chain2",
+   "seed": 11,
+   "signature": "parallel_three",
+   "stimulus": "In the figure shown, lines $a$, $b$, and $c$ are parallel, and line $w$ crosses all three of them. Look at which edges and segments are labeled in the figure before you decide which relationship between them to use.",
+   "question": "What is $y$?",
+   "options": [
+    "22",
+    "128",
+    "62",
+    "52"
+   ],
+   "correctIndex": 3,
+   "answer": "52",
+   "explanation": "(1) 그림에서 두 식 각 (x+30)°, (4x+40)° 와 y° 라벨을 읽는다. (2) 평행선이므로 두 각은 보각(합이 180°)이다: (x+30)° + (4x+40)° = 180° 에서 x = 22 이다. (3) 첫 식의 각 = x×22+30 = 52° 이다. (4) y° 는 첫 각과 같은 크기이므로 y = 52 이다. (5) 따라서 52 이다. 따라서 정답은 52이다.",
+   "structuralIssues": []
+  }
+ ]
+}

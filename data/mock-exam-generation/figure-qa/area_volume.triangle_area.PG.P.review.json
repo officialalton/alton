@@ -1,0 +1,24 @@
+{
+ "itemId": "area_volume.triangle_area.PG.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:44:29Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "4cb2c5288ae020190bb2d467858b26994d61dcd7f5df9bd2b932939efe203695",
+ "samples": [
+  "area_volume.triangle_area.PG.P.png",
+  "area_volume.triangle_area.PG.P~chain2.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "평행사변형·직사각형에 대각선이 그려진 그림 샘플 데스크톱·375px 확인: 대각선·높이(점선+직각)·변 라벨·꼭짓점 이름 겹침 없음, 고정 모양 도형은 notToScale 'Note' 표기. 삼각형 ABC 의 밑변·높이가 라벨과 일치(예: 밑변 12, 높이 11 → 66). 갤러리(4 연산자·시드 1)로 직사각형 대각선 라벨 25·점선 높이 h 확인. [재스탬프: 키트 해시 등록으로 코드 해시만 갱신, 샘플 PNG 바이트 동일]"
+}

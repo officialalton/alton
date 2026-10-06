@@ -1,0 +1,23 @@
+{
+ "itemId": "lines_angles_triangles.triangle_angle_sum.TR.C",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T06:09:52Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "b1454d61a869ec82efe963b2558284823be2d8e53af749177ded89b8dfc61580",
+ "samples": [
+  "lines_angles_triangles.triangle_angle_sum.TR.C.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "pass",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "pass",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "삼각형 선택지 4개(각 라벨 숫자, 합 180°) 샘플 데스크톱·375px 확인: 정답만 지문 조건을 만족, 오답은 자리 맞바꿈·이동 규칙, 네 그림 크기·배치 동일, 라벨 겹침 없음(재스탬프: 코드 해시 갱신)."
+}

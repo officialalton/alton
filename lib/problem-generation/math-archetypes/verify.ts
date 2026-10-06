@@ -125,7 +125,7 @@ export function verifyInstance(a: Archetype, inst: Instance): VerifyResult {
     } catch (e) { failures.push(`verification_js 실패: ${(e as Error).message}`); }
     const pm = inst.verificationJs.match(/^const P = (\{.*\});/);
     if (pm) { try { const P = JSON.parse(pm[1]) as { options?: string[] }; if (P.options && JSON.stringify(P.options) !== JSON.stringify(inst.options)) failures.push("verification_js 가 인쇄된 선지를 그대로 읽지 않음"); } catch { failures.push("verification_js 상수 P 를 해석할 수 없음"); } }
-    if (inst.figure && (inst.figure as { type?: string }).type === "figure_choice") failures.push(...checkChoiceInstance(inst, verified));
+    if (inst.figure && ["figure_choice", "figure_bundle"].includes((inst.figure as { type?: string }).type ?? "")) failures.push(...checkChoiceInstance(inst, verified));
   } else {
     if (inst.options.length !== 4) failures.push(`선택지 ${inst.options.length}개`);
     if (new Set(inst.options.map((o) => o.trim())).size !== inst.options.length) failures.push("선택지 문자열 중복");

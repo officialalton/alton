@@ -20,6 +20,8 @@ const Card = ({ title, children }: { title: string; children: React.ReactNode })
 const Row = ({ k, v }: { k: string; v: React.ReactNode }) => (
   <div className="flex justify-between gap-4 text-[12.5px] py-0.5"><span className="text-grey-500">{k}</span><span className="text-ink text-right">{v}</span></div>
 );
+const ev = (v: "not_tracked" | { opens: number; lastAt: string | null }, since: string | null) =>
+  v === "not_tracked" ? <NotTracked /> : <>{v.opens} opens{v.lastAt ? ` (last ${d(v.lastAt)})` : ""}{since ? <span className="text-grey-400"> · tracking since {d(since)}</span> : null}</>;
 const NotTracked = () => <span className="text-grey-400 italic">Not tracked yet</span>;
 const d = (iso: string | null) => (iso ? iso.slice(0, 10) : "—");
 
@@ -112,12 +114,13 @@ export default function AccountDetail({ studentId, onBack, onChanged }: { studen
         {!usage ? <p className="text-[12.5px] text-grey-500">Loading…</p> : (
           <>
             <Row k="Mistake notebook — saved questions" v={usage.mistakeNotebook.savedCount} />
-            <Row k="Mistake notebook — reviewed" v={<NotTracked />} />
+            <Row k="Mistake notebook — reviewed" v={ev(usage.mistakeNotebook.reviewed, usage.tracking.learningEventsSince)} />
             <Row k="Vocabulary — words saved" v={`${usage.vocabulary.wordsSaved} (last ${d(usage.vocabulary.lastWordAt)})`} />
             <Row k="Vocabulary — quizzes completed" v={`${usage.vocabulary.quizzesCompleted}${usage.vocabulary.avgQuizPct !== null ? ` · avg ${usage.vocabulary.avgQuizPct}%` : ""}`} />
-            <Row k="Vocabulary — flashcard study" v={<NotTracked />} />
+            <Row k="Vocabulary — study tab opens" v={ev(usage.vocabulary.flashcardStudy, usage.tracking.learningEventsSince)} />
             <Row k="Materials — documents opened" v={`${usage.materials.docsOpened} (last ${d(usage.materials.lastReadAt)})`} />
-            <Row k="Materials — views / time spent" v={<NotTracked />} />
+            <Row k="Materials — views" v={ev(usage.materials.views, usage.tracking.learningEventsSince)} />
+            <Row k="Materials — time spent" v={<NotTracked />} />
           </>
         )}
       </Card>

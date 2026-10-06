@@ -11,3 +11,13 @@ export async function touchActivityAction(): Promise<void> {
     /* 하트비트 실패는 무시 */
   }
 }
+
+/** 학습 이용 이벤트(오답노트·단어·자료 열람). 10분 디듀프는 DB가 보장, 실패는 무시. */
+export async function logLearningEventAction(kind: "mistake_review_opened" | "vocab_study_opened", refId?: string): Promise<void> {
+  try {
+    const supabase = await createClient();
+    await supabase.rpc("log_learning_event", { p_kind: kind, p_ref_id: refId ?? null });
+  } catch {
+    /* 추적 실패는 무시 */
+  }
+}

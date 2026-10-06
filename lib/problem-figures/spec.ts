@@ -72,6 +72,22 @@ import type { SolidSpec } from "./templates/solid";
 import { validateSolid } from "./templates/solid";
 import type { CompositeSpec } from "./templates/composite";
 import { validateComposite } from "./templates/composite";
+import type { ParallelThreeSpec } from "./templates/parallel-three";
+import { validateParallelThree } from "./templates/parallel-three";
+import type { LShapeSpec } from "./templates/l-shape";
+import { validateLShape } from "./templates/l-shape";
+import type { SolidXSpec } from "./templates/solid-x";
+import { validateSolidX } from "./templates/solid-x";
+import type { TriNestedSpec } from "./templates/triangle-nested";
+import { validateTriNested } from "./templates/triangle-nested";
+import type { VennTreeSpec } from "./templates/venn-tree";
+import { validateVennTree } from "./templates/venn-tree";
+import type { TrigCurveSpec } from "./templates/trig-curve";
+import { validateTrigCurve } from "./templates/trig-curve";
+import type { UnitCircleSpec } from "./templates/unit-circle";
+import { validateUnitCircle } from "./templates/unit-circle";
+import type { FigureBundleSpec } from "./templates/figure-bundle";
+import { validateFigureBundle } from "./templates/figure-bundle";
 import type { FigureChoiceSpec, FigureSetSpec } from "./templates/figure-choice";
 import { validateFigureChoice, validateFigureSet } from "./templates/figure-choice";
 
@@ -79,10 +95,10 @@ import { validateFigureChoice, validateFigureSet } from "./templates/figure-choi
  * 2026-09-14 표준 렌더링 엔진: `geometry`(좌표 자유 입력)는 **레거시** — 읽기·표시만 하고 새 저장·공개는 막는다(재생성 필요).
  * 새 도형은 템플릿(`parallel_transversal`, …)으로 관계만 받는다.
  */
-export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec | DataSpec | CircleSpec | PolygonSpec | SolidSpec | CompositeSpec | FigureChoiceSpec | FigureSetSpec;
+export type FigureSpec = CoordinatePlaneSpec | GeometrySpec | ImageFigureSpec | ParallelTransversalSpec | TriangleSpec | PlaneSpec | DataSpec | CircleSpec | PolygonSpec | SolidSpec | CompositeSpec | UnitCircleSpec | TrigCurveSpec | VennTreeSpec | TriNestedSpec | SolidXSpec | LShapeSpec | ParallelThreeSpec | FigureBundleSpec | FigureChoiceSpec | FigureSetSpec;
 /** 표준 템플릿 — AI 가 낼 수 있는 도형·자료 데이터 type. */
-export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "plane", "data"];
-export const GEOMETRY_TEMPLATE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite"];
+export const TEMPLATE_FIGURE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "trig_curve", "venn_tree", "triangle_nested", "solid_x", "l_shape", "parallel_three", "plane", "data"];
+export const GEOMETRY_TEMPLATE_TYPES: readonly string[] = ["parallel_transversal", "triangle", "circle", "polygon", "solid", "composite", "unit_circle", "triangle_nested", "solid_x", "l_shape", "parallel_three"];
 /** 레거시(좌표 자유 입력) — 표시만, 새 공개 불가(2026-09-14 템플릿 3 이후 coordinate_plane 도 레거시). */
 export const LEGACY_FIGURE_TYPES: readonly string[] = ["geometry", "coordinate_plane"];
 
@@ -129,7 +145,15 @@ export function validateFigureSpec(input: unknown): { ok: true; spec: FigureSpec
   if (s.type === "polygon") return validatePolygon(s);
   if (s.type === "solid") return validateSolid(s);
   if (s.type === "composite") return validateComposite(s);
+  if (s.type === "unit_circle") return validateUnitCircle(s);
+  if (s.type === "trig_curve") return validateTrigCurve(s);
+  if (s.type === "venn_tree") return validateVennTree(s);
+  if (s.type === "triangle_nested") return validateTriNested(s);
+  if (s.type === "solid_x") return validateSolidX(s);
+  if (s.type === "l_shape") return validateLShape(s);
+  if (s.type === "parallel_three") return validateParallelThree(s);
   if (s.type === "figure_choice") return validateFigureChoice(s, validateFigureSpec);
+  if (s.type === "figure_bundle") return validateFigureBundle(s, validateFigureSpec);
   if (s.type === "figure_set") return validateFigureSet(s, validateFigureSpec);
   if (s.type === "geometry") {
     if (!Array.isArray(s.shapes) || s.shapes.length === 0) return { ok: false, error: "shapes 배열이 없습니다." };

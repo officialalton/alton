@@ -1,0 +1,43 @@
+{
+ "itemId": "right_triangles_trigonometry.unit_circle_radian.UC.C",
+ "generatedAt": "2026-10-06T07:32:59.395Z",
+ "codeHash": "97f714a521af6db99c187e0f8be19683a41d92f9b41fe7d6f893393ed55d23ae",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-figures/templates/unit-circle.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.unit_circle_radian.UC.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/uc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.unit_circle_radian.UC.C.png",
+   "mobileFile": "right_triangles_trigonometry.unit_circle_radian.UC.C.m375.png",
+   "archetypeId": "rtt.unit_circle_radian.UC.C.repr_shift",
+   "seed": 11,
+   "signature": "figure_choice[unit_circle]",
+   "stimulus": "In a lab handout about periodic motion, the following circle appears. The choices show the unit circle with an angle $\\alpha$ in standard position and its terminal side through $R$. The measure of angle $\\alpha$ is $120^\\circ$.",
+   "question": "Which of the figures shows the angle described above in standard position?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 0,
+   "answer": "A",
+   "explanation": "(1) 각 α = 120° 이므로 II사분면이고 반사각은 60° 이다. (2) 양의 x축에서 반시계 방향으로 120° 만큼 회전한 끝변을 찾는다. (3) 정답 그림은 점이 II사분면에 있고 x축과 60° 를 이룬다. (4) 다른 그림은 x축 대칭·y축 대칭·원점 대칭 위치의 각이다. (5) 네 그림은 같은 반사각을 공유하므로 사분면까지 확인해야 한다. 따라서 정답은 A이다.",
+   "structuralIssues": []
+  }
+ ]
+}

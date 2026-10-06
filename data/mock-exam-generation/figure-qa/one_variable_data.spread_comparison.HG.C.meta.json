@@ -1,0 +1,48 @@
+{
+ "itemId": "one_variable_data.spread_comparison.HG.C",
+ "generatedAt": "2026-10-06T05:02:02.019Z",
+ "codeHash": "e43a38b5c2ac6998a8a8034c2cd62c1db91601be5a12a348ccff517159645dd7",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/hist-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/hist-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.spread_comparison.HG.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.spread_comparison.HG.C.png",
+   "mobileFile": "one_variable_data.spread_comparison.HG.C.m375.png",
+   "archetypeId": "ovd.spread_comparison.HG.C.compare_scenarios",
+   "seed": 11,
+   "signature": "figure_choice[data:histogram]",
+   "stimulus": "Four possible histograms of the reaction times of drivers for drivers in a safety study are shown. The intervals are the same in every histogram, and each includes its left endpoint only. The greatest possible range of the data is 50 hundredths of a second, and there are 29 values in all.",
+   "question": "Which of the following histograms could show these data?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 도수가 0 이 아닌 가장 왼쪽·오른쪽 막대의 바깥 경계 차가 50 인 그림을 찾는다. (2) 막대 높이의 합이 29 인지 확인한다. (3) 조건을 만족하지 못하는 히스토그램을 하나씩 지워 나간다. (4) 정답 히스토그램: 40–50(5), 50–60(1), 60–70(8), 70–80(8), 80–90(7), 90–100(0). (5) 다른 히스토그램은 조건 하나 이상이 어긋난다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "itemId": "circles.tangent_radius_perpendicular.CI.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:03:22Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "dcb269adef5de6869c20ff0043c7059f83acbc9950e04fb249de1d4111cc08a3",
+ "samples": [
+  "circles.tangent_radius_perpendicular.CI.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "접선·반지름 그림(직각 표시, 접선 길이 라벨, 지름 변형, notToScale 표기) 샘플 데스크톱·375px + 갤러리 4 연산자 확인: 접선과 반지름의 직각 표시·점 이름·라벨 겹침 없음, 접선 길이는 비율이 아니므로 'Note' 표기."
+}
