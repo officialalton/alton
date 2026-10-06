@@ -16,7 +16,7 @@ export default async function ContactPage() {
       <PageHero eyebrow="CONTACT" title="Get in touch" />
       <Prose>
         <p>
-          Questions about your account or ALTON? Email <a href="mailto:hello@altonedu.com">hello@altonedu.com</a>.
+          Questions about your account or ALTON? Email <a href="mailto:official@alton.education">official@alton.education</a>.
         </p>
         <p>
           Interested in tutoring or educational consulting? <a href={dest.consult}>Request a consultation</a>.

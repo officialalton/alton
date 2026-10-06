@@ -1,0 +1,62 @@
+{
+ "itemId": "two_variable_data.outlier_influence_on_fit.SC.P",
+ "generatedAt": "2026-10-06T06:19:25.705Z",
+ "codeHash": "31caa8ecc5210569a382b7d4c7a961fe35c9f3f44e877b7ff352be3fa6419e33",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/_sc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/two_variable_data.outlier_influence_on_fit.SC.P.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "two_variable_data.outlier_influence_on_fit.SC.P.png",
+   "mobileFile": "two_variable_data.outlier_influence_on_fit.SC.P.m375.png",
+   "archetypeId": "tvd.outlier_influence_on_fit.SC.P.repr_shift",
+   "seed": 11,
+   "signature": "data:scatter",
+   "stimulus": "A scatterplot of 10 observations relates the price of a ticket to the number of tickets sold. The line of best fit shown was computed from all 10 points, including one outlier.",
+   "question": "If the outlier is removed, which of the following is true about the new line of best fit?",
+   "options": [
+    "The slope of the line of best fit would decrease, and the data would fit the line more closely.",
+    "The slope of the line of best fit would increase, and the data would fit the line less closely.",
+    "The slope of the line of best fit would decrease, and the data would fit the line less closely.",
+    "The slope of the line of best fit would increase, and the data would fit the line more closely."
+   ],
+   "correctIndex": 3,
+   "answer": "The slope of the line of best fit would increase, and the data would fit the line more closely.",
+   "explanation": "(1) 그림에서 이상치(추세선에서 가장 먼 점)를 찾는다. (2) 이상치가 추세선보다 아래에 있고 오른쪽 끝이라 기울기를 줄인다. (3) 이상치를 빼면 기울기는 커진다. (4) 나머지 점은 직선에 더 가깝게 놓인다(상관이 강해진다). (5) 따라서 두 가지를 모두 맞게 말한 서술이 정답이다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "two_variable_data.outlier_influence_on_fit.SC.P~compare_scenarios.png",
+   "mobileFile": "two_variable_data.outlier_influence_on_fit.SC.P~compare_scenarios.m375.png",
+   "archetypeId": "tvd.outlier_influence_on_fit.SC.P.compare_scenarios",
+   "seed": 11,
+   "signature": "figure_set[data:scatter]",
+   "stimulus": "Graph A and Graph B each show data on the number of days since a loaf was baked and the loaf's freshness score for 10 data points, with the line of best fit for all 10 points. Each graph has one outlier.",
+   "question": "Removing the outlier from which graph would change its line of best fit's slope more?",
+   "options": [
+    "It cannot be determined from the graphs.",
+    "Graph A changes more, because its outlier is closer to the middle.",
+    "The slope changes by the same amount in both graphs.",
+    "Graph B changes more, because its outlier is at the far end of the x-values."
+   ],
+   "correctIndex": 3,
+   "answer": "Graph B changes more, because its outlier is at the far end of the x-values.",
+   "explanation": "(1) 각 그래프에서 추세선에서 가장 먼 점을 이상치로 찾는다. (2) Graph B 의 이상치는 x 의 오른쪽 끝에, Graph A 의 이상치는 가운데에 있다. (3) x 의 끝에 있는 점은 기울기에 지렛대처럼 작용해 더 크게 끈다. (4) 이상치가 벗어난 정도는 같으므로 x 위치가 영향을 가른다. (5) 따라서 Graph B 이다. 따라서 정답은 D이다.",
+   "structuralIssues": []
+  }
+ ]
+}

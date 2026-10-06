@@ -21,5 +21,14 @@ import { ITEM as ovdOutlierDP } from "../items/one_variable_data.outlier_effect.
 import { ITEM as ovdRangeHG } from "../items/one_variable_data.range.HG.P";
 import { ITEM as ovdSpreadHG } from "../items/one_variable_data.spread_comparison.HG.P";
 import { ITEM as ovdRelcumHG } from "../items/one_variable_data.relative_cumulative_frequency.HG.P";
+import { ITEM as ovdMeanDPC } from "../items/one_variable_data.mean.DP.C";
+import { ITEM as ovdMedianBXC } from "../items/one_variable_data.median.BX.C";
+import { ITEM as ovdGroupedHGC } from "../items/one_variable_data.grouped_median_interval.HG.C";
+import { ITEM as ovdSpreadHGC } from "../items/one_variable_data.spread_comparison.HG.C";
+import { ITEM as pctFindWholeBR } from "../items/percentages.find_whole.BR.P";
+import { ITEM as rruPropBR } from "../items/ratios_rates_units.proportion.BR.P";
+import { ITEM as imePopBR } from "../items/inference_margin_error.population_estimate.BR.P";
+import { ITEM as imeSizeBR } from "../items/inference_margin_error.sample_size_effect.BR.P";
+import { ITEM as escCausalBR } from "../items/evaluating_statistical_claims.causal_vs_association.BR.P";
 
-export const BUNDLE: LArch[] = [...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG, ...ovdRelcumHG];
+export const BUNDLE: LArch[] = [...escCausalBR, ...imeSizeBR, ...imePopBR, ...rruPropBR, ...pctFindWholeBR, ...ovdGroupedHGC, ...ovdSpreadHGC, ...ovdMedianBXC, ...ovdMeanDPC, ...ovdMeanDP, ...ovdMedianDP, ...ovdRangeDP, ...ovdGroupedHG, ...ovdMeanHG, ...ovdMedianHG, ...pctOfBR, ...pctFindBR, ...pctChangeBR, ...ovdMeanBR, ...probSimpleBR, ...ovdMedianBX, ...ovdRangeBX, ...ovdSpreadBX, ...ovdOutlierBX, ...ovdQuartileBX, ...ovdSpreadDP, ...ovdOutlierDP, ...ovdRangeHG, ...ovdSpreadHG, ...ovdRelcumHG];

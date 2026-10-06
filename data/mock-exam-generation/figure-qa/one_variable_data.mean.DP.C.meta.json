@@ -1,0 +1,46 @@
+{
+ "itemId": "one_variable_data.mean.DP.C",
+ "generatedAt": "2026-10-06T05:02:02.051Z",
+ "codeHash": "92fc1fa5819c9ee005606cc5449f8df8693d9a838830c32f316cc155ee365513",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/data.ts",
+  "lib/problem-figures/templates/figure-choice.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-c-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/data-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/graph-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/one_variable_data.mean.DP.C.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/table-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "one_variable_data.mean.DP.C.png",
+   "mobileFile": "one_variable_data.mean.DP.C.m375.png",
+   "archetypeId": "ovd.mean.DP.C.inverse",
+   "seed": 11,
+   "signature": "figure_choice[data:dot_plot]",
+   "stimulus": "A survey of people at a gym asked about the number of times each person exercised last week. Each dot in a plot below stands for one of them. There are 28 values, and their mean is 3 workouts.",
+   "question": "Which of the dot plots shown matches this description?",
+   "options": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "correctIndex": 2,
+   "answer": "C",
+   "explanation": "(1) 평균이 3 이고 개수가 28 이므로 합은 3 × 28 = 84 이어야 한다. (2) 각 점도표에서 점 개수의 합이 28 인지, 값×점 개수의 합이 84 인지 확인한다. (3) 조건을 만족하지 못하는 점도표를 하나씩 지워 나간다. (4) 정답 점도표: 0(4), 1(3), 2(6), 3(2), 4(6), 5(3), 6(4). (5) 다른 점도표는 조건 하나 이상이 어긋난다. 따라서 정답은 C이다.",
+   "structuralIssues": []
+  }
+ ]
+}

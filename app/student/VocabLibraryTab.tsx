@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { logLearningEventAction } from "./activity-actions";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import type { MyVocabWord, LibraryBook, LibraryWord, VocabQuiz, VocabQuizItem, VocabFolder } from "./vocab-library-data";
 import {
@@ -24,6 +25,8 @@ export default function VocabLibraryTab({
   /** 보호자 등 읽기 전용 뷰어 — 단어 CRUD·폴더 생성·시험 만들기/응시 버튼이 전부 숨는다. */
   readOnly?: boolean;
 }) {
+  // 2026-10-06 S6 — 단어 탭 열람 기록(읽기 전용 뷰어는 제외).
+  useEffect(() => { if (!readOnly) void logLearningEventAction("vocab_study_opened"); }, [readOnly]);
   const [tab, setTab] = useState<"words" | "quiz">("words");
   const [myWords, setMyWords] = useState(initialMyWords);
   const [folders, setFolders] = useState(initialFolders);
