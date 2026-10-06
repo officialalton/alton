@@ -13,6 +13,7 @@ vi.mock("@/lib/regular-contract-send", () => ({
 
 const ORIGINAL_ENV = process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function fakeAdmin(overrides: Record<string, unknown> = {}) {
   const updateEqMock = vi.fn().mockResolvedValue({ error: null });
   return {
@@ -32,61 +33,74 @@ function fakeAdmin(overrides: Record<string, unknown> = {}) {
   };
 }
 
-describe("isContractAutoDispatchEnabled / dispatchOneContractJob — 기본 비활성 안전장치", () => {
+function settingAdmin(result: { data?: unknown; error?: { message: string } | null } | "throw") {
+  const maybeSingle = vi.fn(async () => {
+    if (result === "throw") throw new Error("boom");
+    return { data: result.data ?? null, error: result.error ?? null };
+  });
+  const from = vi.fn(() => ({ select: () => ({ eq: () => ({ maybeSingle }) }) }));
+  return { from, auth: { admin: { getUserById: vi.fn() } } };
+}
+
+describe("isContractAutoDispatchEnabled — DB 설정 + env 비상 정지 + fail-safe", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     delete process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
+    vi.spyOn(console, "error").mockImplementation(() => {});
   });
   afterEach(() => {
+    vi.restoreAllMocks();
     if (ORIGINAL_ENV === undefined) delete process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
     else process.env.CONTRACT_AUTO_DISPATCH_ENABLED = ORIGINAL_ENV;
   });
 
-  it("환경변수가 없으면 isContractAutoDispatchEnabled()는 false다", async () => {
+  it("DB 설정이 켜짐이면 env가 없어도 true", async () => {
     const { isContractAutoDispatchEnabled } = await import("./dispatcher");
-    expect(isContractAutoDispatchEnabled()).toBe(false);
+    expect(await isContractAutoDispatchEnabled(settingAdmin({ data: { auto_dispatch_enabled: true } }) as never)).toBe(true);
   });
-
-  it("환경변수가 'true'가 아닌 값(예: '1', 'TRUE')이어도 비활성으로 취급한다", async () => {
-    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "1";
+  it("DB 설정이 꺼짐이면 false", async () => {
     const { isContractAutoDispatchEnabled } = await import("./dispatcher");
-    expect(isContractAutoDispatchEnabled()).toBe(false);
-
-    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "TRUE";
-    vi.resetModules();
-    const { isContractAutoDispatchEnabled: reloaded } = await import("./dispatcher");
-    expect(reloaded()).toBe(false);
+    expect(await isContractAutoDispatchEnabled(settingAdmin({ data: { auto_dispatch_enabled: false } }) as never)).toBe(false);
   });
+  it("env가 정확히 'false'면 DB가 켜짐이어도 false(DB는 읽지도 않는다)", async () => {
+    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "false";
+    const { isContractAutoDispatchEnabled } = await import("./dispatcher");
+    const admin = settingAdmin({ data: { auto_dispatch_enabled: true } });
+    expect(await isContractAutoDispatchEnabled(admin as never)).toBe(false);
+    expect(admin.from).not.toHaveBeenCalled();
+  });
+  it("env가 'true'여도 DB가 꺼짐이면 false(env는 켜는 힘이 없다)", async () => {
+    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "true";
+    const { isContractAutoDispatchEnabled } = await import("./dispatcher");
+    expect(await isContractAutoDispatchEnabled(settingAdmin({ data: { auto_dispatch_enabled: false } }) as never)).toBe(false);
+  });
+  it("DB 조회 오류·예외·행 없음이면 비활성 + 로그", async () => {
+    const { isContractAutoDispatchEnabled } = await import("./dispatcher");
+    expect(await isContractAutoDispatchEnabled(settingAdmin({ error: { message: "x" } }) as never)).toBe(false);
+    expect(await isContractAutoDispatchEnabled(settingAdmin("throw") as never)).toBe(false);
+    expect(await isContractAutoDispatchEnabled(settingAdmin({ data: null }) as never)).toBe(false);
+    expect(console.error).toHaveBeenCalledWith(expect.stringContaining("contract_dispatch_setting_read_failed"));
+  });
+});
 
-  it("비활성 상태에서 dispatchOneContractJob()은 sendRegularContractForSubjectEnrollment를 절대 호출하지 않는다", async () => {
+describe("비활성이면 DocuSign 발송 함수는 절대 호출되지 않는다", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    delete process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
+  });
+  it("dispatchOneContractJob → disabled, 상태 업데이트 없음", async () => {
     const { dispatchOneContractJob } = await import("./dispatcher");
-    const admin = fakeAdmin();
-    const result = await dispatchOneContractJob(admin as never, {
-      id: "job-1",
-      child_id: "child-1",
-      subject_enrollment_id: "se-1",
-    });
-
+    const admin = settingAdmin({ data: { auto_dispatch_enabled: false } });
+    const result = await dispatchOneContractJob(admin as never, { id: "j", child_id: "c", subject_enrollment_id: "s" });
     expect(result).toEqual({ outcome: "disabled" });
     expect(sendRegularContractMock).not.toHaveBeenCalled();
-    // 상태 업데이트조차 시도하지 않는다 — 큐 행은 'queued' 그대로 남는다.
-    expect(admin.from).not.toHaveBeenCalled();
+    expect(admin.from).toHaveBeenCalledTimes(1); // 설정 조회만
   });
-
-  it("비활성 상태에서 processContractDispatchQueue()는 큐를 조회하지도 않고 즉시 반환한다", async () => {
+  it("processContractDispatchQueue → 큐 조회·claim 없이 반환", async () => {
     const { processContractDispatchQueue } = await import("./dispatcher");
-    const admin = fakeAdmin();
-    const result = await processContractDispatchQueue(admin as never);
-
-    expect(result).toEqual({ enabled: false, processed: 0, sent: 0, failed: 0 });
+    const admin = { ...settingAdmin({ data: { auto_dispatch_enabled: false } }), rpc: vi.fn() };
+    expect(await processContractDispatchQueue(admin as never)).toEqual({ enabled: false, processed: 0, sent: 0, failed: 0 });
+    expect(admin.rpc).not.toHaveBeenCalled();
     expect(sendRegularContractMock).not.toHaveBeenCalled();
-    expect(admin.from).not.toHaveBeenCalled();
-  });
-
-  it("환경변수가 정확히 'true'면 활성 상태로 판정한다(실제 발송 여부는 이 테스트의 관심사 아님)", async () => {
-    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "true";
-    vi.resetModules();
-    const { isContractAutoDispatchEnabled } = await import("./dispatcher");
-    expect(isContractAutoDispatchEnabled()).toBe(true);
   });
 });

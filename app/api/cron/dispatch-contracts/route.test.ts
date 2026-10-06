@@ -1,7 +1,22 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const { rpcMock, sendMock } = vi.hoisted(() => ({ rpcMock: vi.fn(), sendMock: vi.fn() }));
-vi.mock("@/lib/supabase-admin", () => ({ createAdminClient: () => ({ rpc: rpcMock }) }));
+const { settingState } = vi.hoisted(() => ({ settingState: { enabled: true as boolean | "error" } }));
+vi.mock("@/lib/supabase-admin", () => ({
+  createAdminClient: () => ({
+    rpc: rpcMock,
+    from: () => ({
+      select: () => ({
+        eq: () => ({
+          maybeSingle: async () =>
+            settingState.enabled === "error"
+              ? { data: null, error: { message: "db down" } }
+              : { data: { auto_dispatch_enabled: settingState.enabled }, error: null },
+        }),
+      }),
+    }),
+  }),
+}));
 vi.mock("@/lib/regular-contract-send", () => ({
   sendRegularContractForSubjectEnrollment: (...a: unknown[]) => sendMock(...a),
 }));
@@ -14,6 +29,8 @@ const req = (h: Record<string, string> = {}) => new Request("https://x.test/api/
 
 beforeEach(() => {
   vi.clearAllMocks();
+  settingState.enabled = true;
+  vi.spyOn(console, "error").mockImplementation(() => {});
   rpcMock.mockResolvedValue({ data: [], error: null });
 });
 afterEach(() => {
@@ -33,18 +50,32 @@ describe("GET /api/cron/dispatch-contracts", () => {
     process.env.CRON_SECRET = "s";
     expect((await GET(req({ authorization: "Bearer no" }))).status).toBe(401);
   });
-  it("발송 플래그가 꺼져 있으면 큐를 claim하지도 발송하지도 않는다", async () => {
+  it("관리자 설정이 꺼져 있으면 큐를 claim하지도 발송하지도 않는다", async () => {
     process.env.CRON_SECRET = "s";
-    delete process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
+    settingState.enabled = false;
     const res = await GET(req({ authorization: "Bearer s" }));
     expect(res.status).toBe(200);
     await expect(res.json()).resolves.toMatchObject({ ok: true, enabled: false, processed: 0 });
     expect(rpcMock).not.toHaveBeenCalled();
     expect(sendMock).not.toHaveBeenCalled();
   });
-  it("플래그가 켜져 있으면 claim RPC로 큐를 처리한다", async () => {
+  it("설정 조회 실패면 fail-safe로 비활성", async () => {
     process.env.CRON_SECRET = "s";
-    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "true";
+    settingState.enabled = "error";
+    const res = await GET(req({ authorization: "Bearer s" }));
+    await expect(res.json()).resolves.toMatchObject({ enabled: false });
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+  it("env가 'false'(비상 정지)면 설정이 켜져 있어도 처리하지 않는다", async () => {
+    process.env.CRON_SECRET = "s";
+    process.env.CONTRACT_AUTO_DISPATCH_ENABLED = "false";
+    const res = await GET(req({ authorization: "Bearer s" }));
+    await expect(res.json()).resolves.toMatchObject({ enabled: false });
+    expect(rpcMock).not.toHaveBeenCalled();
+  });
+  it("설정이 켜져 있으면(env 없음) claim RPC로 큐를 처리한다", async () => {
+    process.env.CRON_SECRET = "s";
+    delete process.env.CONTRACT_AUTO_DISPATCH_ENABLED;
     const res = await GET(req({ authorization: "Bearer s" }));
     await expect(res.json()).resolves.toMatchObject({ ok: true, enabled: true, processed: 0 });
     expect(rpcMock).toHaveBeenCalledWith("claim_contract_dispatch_jobs", { p_limit: 50 });

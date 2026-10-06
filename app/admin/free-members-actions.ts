@@ -1,20 +1,11 @@
 "use server";
 
-// 2026-10-05 무료 회원 S5 — 관리자 "무료 회원" 탭 데이터. 읽기 전용(쓰기 없음).
-// 학습 상세는 열지 않는다: 목록은 가입일·응시 횟수·관심 상태만 보여준다.
+// 2026-10-05 무료 회원 S5 → 2026-10-06 Free Accounts "Review queue"(상담 관심·보호자 연결 수동 검토·초대 이벤트). 읽기 전용.
+// 회원 목록은 admin_free_accounts_list RPC(free-accounts-actions.ts)로 이관 — 전 회원 응시 행을 읽던 경로는 삭제했다.
 
-import { requireAdmin } from "@/lib/admin-auth";
+import { requireAdminOrCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
-import { loadEmailById } from "./users-data";
 
-export type FreeMemberRow = {
-  id: string;
-  name: string;
-  email: string;
-  signedUpAt: string | null;
-  attempts: number;
-  interestStatus: string | null;
-};
 export type FreeMemberInterestRow = {
   id: string;
   studentId: string;
@@ -40,7 +31,6 @@ export type GuardianLinkEventRow = {
   createdAt: string;
 };
 export type FreeMembersOverview = {
-  members: FreeMemberRow[];
   interests: FreeMemberInterestRow[];
   manualReview: GuardianLinkReviewRow[];
   events: GuardianLinkEventRow[];
@@ -49,21 +39,10 @@ export type FreeMembersOverview = {
 const MEMBER_LIMIT = 200;
 
 export async function loadFreeMembersOverviewAction(): Promise<FreeMembersOverview> {
-  await requireAdmin();
+  await requireAdminOrCapability("학생관리");
   const admin = createAdminClient();
 
-  const { data: students, error: sErr } = await admin
-    .from("students")
-    .select("id, joined_at")
-    .eq("member_type", "free")
-    .order("joined_at", { ascending: false })
-    .limit(MEMBER_LIMIT);
-  if (sErr) throw new Error(sErr.message);
-  const ids = (students ?? []).map((s) => s.id as string);
-
-  const [profilesRes, attemptsRes, interestsRes, invitesRes, emails] = await Promise.all([
-    ids.length ? admin.from("profiles").select("id, name").in("id", ids) : Promise.resolve({ data: [], error: null }),
-    ids.length ? admin.from("mock_exam_attempts").select("student_id").in("student_id", ids) : Promise.resolve({ data: [], error: null }),
+  const [interestsRes, invitesRes] = await Promise.all([
     admin
       .from("student_consult_interests")
       .select("id, student_id, status, entry_point, consultation_id, created_at")
@@ -74,20 +53,11 @@ export async function loadFreeMembersOverviewAction(): Promise<FreeMembersOvervi
       .select("id, student_id, email_normalized, status, manual_review_reason, created_at")
       .order("created_at", { ascending: false })
       .limit(MEMBER_LIMIT),
-    loadEmailById(ids),
   ]);
-  for (const r of [profilesRes, attemptsRes, interestsRes, invitesRes]) if (r.error) throw new Error(r.error.message);
-
-  const nameById = new Map((profilesRes.data ?? []).map((p) => [p.id as string, (p.name as string) ?? ""]));
-  const attemptsBy = new Map<string, number>();
-  for (const a of attemptsRes.data ?? []) attemptsBy.set(a.student_id as string, (attemptsBy.get(a.student_id as string) ?? 0) + 1);
+  for (const r of [interestsRes, invitesRes]) if (r.error) throw new Error(r.error.message);
+  const nameById = new Map<string, string>();
 
   const interests = interestsRes.data ?? [];
-  const openInterestByStudent = new Map<string, string>();
-  for (const i of interests) {
-    if (!openInterestByStudent.has(i.student_id as string)) openInterestByStudent.set(i.student_id as string, i.status as string);
-  }
-
   // 관심·초대 행의 학생 이름(무료 회원 목록 밖 학생 — 이미 전환된 학생 — 도 이름은 필요).
   const otherIds = Array.from(
     new Set([...interests.map((i) => i.student_id as string), ...(invitesRes.data ?? []).map((i) => i.student_id as string)])
@@ -111,14 +81,6 @@ export async function loadFreeMembersOverviewAction(): Promise<FreeMembersOvervi
   if (eErr) throw new Error(eErr.message);
 
   return {
-    members: (students ?? []).map((s) => ({
-      id: s.id as string,
-      name: nameById.get(s.id as string) ?? "",
-      email: emails.get(s.id as string) ?? "",
-      signedUpAt: (s.joined_at as string) ?? null,
-      attempts: attemptsBy.get(s.id as string) ?? 0,
-      interestStatus: openInterestByStudent.get(s.id as string) ?? null,
-    })),
     interests: interests
       .filter((i) => !["cancelled", "expired"].includes(i.status as string))
       .map((i) => ({

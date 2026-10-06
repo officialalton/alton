@@ -7,7 +7,7 @@ const { adminRpcMock, adminFromMock, companySignOffMock, sendContractMock, sendE
   sendContractMock: vi.fn(),
   sendEmailMock: vi.fn(),
   recordOrGetCompanyApprovalMock: vi.fn().mockResolvedValue({
-    companyEntityName: "Alton Education Inc.",
+    companyEntityName: "Alton Education LLC",
     approverName: "테스트 관리자",
     approverTitle: "CEO",
     approvedAtLabel: "2026. 9. 5. 오전 9:00",

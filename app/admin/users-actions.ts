@@ -238,10 +238,13 @@ async function legacyInviteTeacherByEmail(params: {
 // transition_account_status()가 유일한 정상 경로다(R2 §5.7) — 허용된 전이만
 // 통과시키고(예: pending→active, active↔suspended) 감사 이력을 남긴다.
 // students/teachers/parents.status 직접 UPDATE는 DB 트리거가 전부 차단한다.
+// transition_account_status RPC는 closure_pending/closed도 이미 허용한다(2026-10-06 Free Accounts에서 TS 타입만 확장).
+export type AccountStatusTarget = "active" | "pending" | "suspended" | "inactive" | "closure_pending" | "closed";
+
 async function transitionAccountStatus(
   supabase: Awaited<ReturnType<typeof requireAdmin>>["supabase"],
   profileId: string,
-  status: "active" | "pending" | "suspended" | "inactive",
+  status: AccountStatusTarget,
   reason?: string
 ): Promise<void> {
   const { error } = await supabase.rpc("transition_account_status", {
@@ -254,10 +257,11 @@ async function transitionAccountStatus(
 
 export async function setStudentStatus(
   studentId: string,
-  status: "active" | "pending" | "suspended" | "inactive"
+  status: AccountStatusTarget,
+  reason?: string
 ): Promise<void> {
   const { supabase } = await requireAdmin();
-  await transitionAccountStatus(supabase, studentId, status);
+  await transitionAccountStatus(supabase, studentId, status, reason);
 }
 
 export async function setParentStatus(
