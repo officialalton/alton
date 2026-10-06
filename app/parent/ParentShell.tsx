@@ -76,20 +76,20 @@ import { fmtDateTime } from "@/lib/format-datetime";
 const NAV_ITEMS = [
   // 2026-09-22(사용자 지시) — 별도 "Planner" nav 대신 Home 탭 서브탭
   // (Overview/TODO/Done)으로 흡수한다 — 학생 포털과 같은 구조("뷰 통일").
-  { id: "home", label: "홈", icon: "home" },
-  { id: "roadmap", label: "로드맵", icon: "roadmap" },
-  { id: "entitlements", label: "수강권", icon: "credits" },
-  { id: "enrollment", label: "수강 과목", icon: "courses" },
-  { id: "lessons", label: "수업", icon: "classes" },
+  { id: "home", label: "Home", icon: "home" },
+  { id: "roadmap", label: "Roadmap", icon: "roadmap" },
+  { id: "entitlements", label: "Lesson Credits", icon: "credits" },
+  { id: "enrollment", label: "Courses", icon: "courses" },
+  { id: "lessons", label: "Lessons", icon: "classes" },
   // 2026-09-19(UAT 반영, 제품 오너 결정) — 2026-09-17 R13에서 "예약 독립 탭
   // 제거 → 수업 탭 안 버튼으로 흡수"로 정리했던 것을 이번에 다시 되돌린다.
   // 독립 탭으로 예약 화면(LessonBookingTab)을 그대로 연다.
-  { id: "bookings", label: "예약", icon: "bookings" },
+  { id: "bookings", label: "Bookings", icon: "bookings" },
   // 2026-09-22(사용자 지시) — 홈 서브탭에서 빼서 독립 좌측 nav로 옮긴다(읽기 전용).
-  { id: "mockExam", label: "모의고사", icon: "mockExam" },
-  { id: "consult", label: "상담", icon: "consultations" },
-  { id: "vocab", label: "단어장", icon: "vocabulary" },
-  { id: "homework", label: "과제", icon: "assignments" },
+  { id: "mockExam", label: "Mock Exams", icon: "mockExam" },
+  { id: "consult", label: "Consultations", icon: "consultations" },
+  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
+  { id: "homework", label: "Assignments", icon: "assignments" },
 ] as const;
 
 // 메인 내비에는 더 이상 그리지 않지만(사이드바/모바일 목록에서 숨김),
@@ -336,7 +336,7 @@ export default function ParentShell({
             <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
               {parentName.charAt(0)}
             </div>
-            <span className="flex-1 text-left truncate">{parentName} 학부모님</span>
+            <span className="flex-1 text-left truncate">{parentName}</span>
             <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
@@ -348,7 +348,7 @@ export default function ParentShell({
                 }}
                 className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                동의
+                Consent
                 {consentBadgeCount > 0 && (
                   <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-brand-red text-white text-[10.5px] font-bold flex items-center justify-center">
                     {consentBadgeCount}
@@ -362,7 +362,7 @@ export default function ParentShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                지인 추천
+                Refer a Friend
               </button>
               <div className="h-px bg-brand-border my-1" />
               <button
@@ -372,12 +372,12 @@ export default function ParentShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                시간대 설정
+                Time Zone
               </button>
               <div className="h-px bg-brand-border my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
-                  로그아웃
+                  Log Out
                 </button>
               </form>
             </div>
@@ -398,12 +398,12 @@ export default function ParentShell({
         <div className="fixed inset-0 z-40 bg-black/30 flex items-center justify-center p-4">
           <div className="bg-white rounded-xl max-w-md w-full max-h-[80vh] overflow-y-auto">
             <div className="flex items-center justify-between px-4 py-3 border-b border-brand-border">
-              <span className="text-[14px] font-bold text-navy">지인 추천</span>
+              <span className="text-[14px] font-bold text-navy">Refer a Friend</span>
               <button
                 onClick={() => setCreditsModalOpen(false)}
                 className="text-[13px] font-semibold text-brand-body"
               >
-                닫기
+                Close
               </button>
             </div>
             <CreditsTab data={credits} />
@@ -446,7 +446,7 @@ export default function ParentShell({
               onClick={() => setAccountMenuOpen((v) => !v)}
               className="text-[13px] font-semibold text-navy"
             >
-              {parentName} 학부모님 ▾
+              {parentName} ▾
             </button>
             {accountMenuOpen && (
               <div className="absolute top-full right-0 mt-1 w-48 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
@@ -457,7 +457,7 @@ export default function ParentShell({
                   }}
                   className="w-full flex items-center justify-between px-3.5 py-2 text-[13px] font-semibold text-navy"
                 >
-                  동의
+                  Consent
                   {consentBadgeCount > 0 && (
                     <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-brand-red text-white text-[10.5px] font-bold flex items-center justify-center">
                       {consentBadgeCount}
@@ -471,7 +471,7 @@ export default function ParentShell({
                   }}
                   className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
                 >
-                  지인 추천
+                  Refer a Friend
                 </button>
                 <div className="h-px bg-brand-border my-1" />
                 <button
@@ -481,12 +481,12 @@ export default function ParentShell({
                   }}
                   className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
                 >
-                  시간대 설정
+                  Time Zone
                 </button>
                 <div className="h-px bg-brand-border my-1" />
                 <form action={logout}>
                   <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
-                    로그아웃
+                    Log Out
                   </button>
                 </form>
               </div>
@@ -512,7 +512,7 @@ export default function ParentShell({
                   { id: "overview", label: "Overview" },
                   { id: "todo", label: "Board" },
                   { id: "review", label: "Review" },
-                  { id: "stats", label: "통계" },
+                  { id: "stats", label: "Stats" },
                 ]}
                 activeId={homeSubTab}
                 onSelect={(id) => setHomeSubTab(id as typeof homeSubTab)}
@@ -520,9 +520,9 @@ export default function ParentShell({
             ) : activeTab === "consult" ? (
               <UnderlineSubTabs
                 items={[
-                  { id: "messenger", label: "메신저" },
-                  { id: "request", label: "상담 신청" },
-                  { id: "history", label: "상담 내역" },
+                  { id: "messenger", label: "Messages" },
+                  { id: "request", label: "Request" },
+                  { id: "history", label: "History" },
                 ]}
                 activeId={consultSubTab}
                 onSelect={setConsultSubTab}
@@ -533,8 +533,8 @@ export default function ParentShell({
               // 옮겼다(예약 탭 부활, 제품 오너 결정). 여기는 예정/지난 조회만.
               <UnderlineSubTabs
                 items={[
-                  { id: "upcoming", label: "예정 수업" },
-                  { id: "past", label: "지난 수업" },
+                  { id: "upcoming", label: "Upcoming" },
+                  { id: "past", label: "Past" },
                 ]}
                 activeId={lessonsSubTab}
                 onSelect={setLessonsSubTab}
@@ -556,7 +556,7 @@ export default function ParentShell({
                 </div>
               ) : homeSubTab === "overview" ? (
                 childBoardCards === null ? (
-                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                  <p className="p-8 text-[14px] text-grey-500">Loading...</p>
                 ) : (
                   <div className="px-6 py-5">
                     <PlannerOverviewView cards={childBoardCards} />
@@ -567,7 +567,7 @@ export default function ParentShell({
                 // 다시 Board(구 TODO) 하나로 합친다(전체 칼럼: 기한 경과/백로그/
                 // 진행중/완료).
                 childBoardCards === null ? (
-                  <p className="p-8 text-[14px] text-grey-500">불러오는 중...</p>
+                  <p className="p-8 text-[14px] text-grey-500">Loading...</p>
                 ) : (
                   <div className="px-6 py-5">
                     <div className="flex gap-1.5 mb-3">
@@ -576,14 +576,14 @@ export default function ParentShell({
                         onClick={() => setHomeBoardView("board")}
                         className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${homeBoardView === "board" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
                       >
-                        보드
+                        Board
                       </button>
                       <button
                         type="button"
                         onClick={() => setHomeBoardView("timeline")}
                         className={`text-[12px] font-bold px-3 py-1.5 rounded-lg ${homeBoardView === "timeline" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
                       >
-                        타임라인
+                        Timeline
                       </button>
                     </div>
                     {homeBoardView === "board" ? (
@@ -614,16 +614,16 @@ export default function ParentShell({
                 // 하나로 합친다.
                 <div className="px-6 py-5 space-y-8">
                   <div>
-                    <h2 className="text-[14px] font-bold text-ink mb-1.5">월간 종합 리뷰</h2>
-                    <p className="text-[13px] text-grey-500">아직 생성된 월간 종합 리뷰가 없습니다. 준비 중입니다.</p>
+                    <h2 className="text-[14px] font-bold text-ink mb-1.5">Monthly Summary Review</h2>
+                    <p className="text-[13px] text-grey-500">No monthly summary review has been generated yet. Coming soon.</p>
                   </div>
 
                   <div>
-                    <h2 className="text-[14px] font-bold text-ink mb-3">수업 리뷰</h2>
+                    <h2 className="text-[14px] font-bold text-ink mb-3">Lesson Reviews</h2>
                     {familyReviews === null ? (
-                      <p className="text-[13px] text-grey-500">불러오는 중...</p>
+                      <p className="text-[13px] text-grey-500">Loading...</p>
                     ) : familyReviews.filter((r) => r.meetingRecordLink).length === 0 ? (
-                      <p className="text-[13px] text-grey-500">확정된 미팅록이 있는 수업이 아직 없습니다.</p>
+                      <p className="text-[13px] text-grey-500">No lessons with a finalized meeting record yet.</p>
                     ) : (
                       <div className="space-y-3">
                         {familyReviews
@@ -637,11 +637,11 @@ export default function ParentShell({
                   </div>
 
                   <div>
-                    <h2 className="text-[14px] font-bold text-ink mb-3">상담 리뷰</h2>
+                    <h2 className="text-[14px] font-bold text-ink mb-3">Consultation Reviews</h2>
                     {consultReviews === null ? (
-                      <p className="text-[13px] text-grey-500">불러오는 중...</p>
+                      <p className="text-[13px] text-grey-500">Loading...</p>
                     ) : consultReviews.length === 0 ? (
-                      <p className="text-[13px] text-grey-500">아직 확정된 상담 리뷰가 없습니다.</p>
+                      <p className="text-[13px] text-grey-500">No finalized consultation reviews yet.</p>
                     ) : (
                       <div className="space-y-3">
                         {consultReviews.map((r) => (
@@ -659,7 +659,7 @@ export default function ParentShell({
             roadmap && roadmap.studentId === currentChildId ? (
               <RoadmapView data={roadmap} />
             ) : (
-              <div className="p-8 text-[14px] text-grey-500">불러오는 중…</div>
+              <div className="p-8 text-[14px] text-grey-500">Loading…</div>
             )
           ) : activeTab === "enrollment" ? (
             <ParentEnrollmentTab childrenEnrollments={childrenSubjectEnrollments} />
@@ -723,7 +723,7 @@ export default function ParentShell({
             )
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
-              {activeLabel} 탭은 준비 중입니다.
+              The {activeLabel} tab is coming soon.
             </div>
           )}
         </PageFrame>
@@ -741,7 +741,7 @@ function ConsultationReviewCard({ review }: { review: HomeConsultationReview }) 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3">
       <div className="flex items-center justify-between">
-        <span className="text-[12px] font-bold text-ink">상담 리뷰</span>
+        <span className="text-[12px] font-bold text-ink">Consultation Review</span>
         <span className="text-[11px] text-grey-500">
           {review.startsAt ? fmtDateTime(review.startsAt, { dateStyle: "medium", timeStyle: "short" }, tz) : "-"}
         </span>
@@ -754,10 +754,10 @@ function ConsultationReviewCard({ review }: { review: HomeConsultationReview }) 
           rel="noreferrer"
           className="inline-block mt-2 text-[12px] font-semibold text-ink underline"
         >
-          미팅록 보기
+          View meeting record
         </a>
       ) : (
-        <p className="mt-2 text-[11px] text-grey-500">미팅록이 없습니다.</p>
+        <p className="mt-2 text-[11px] text-grey-500">No meeting record available.</p>
       )}
     </div>
   );

@@ -82,9 +82,9 @@ export type ParentEntitlementsData = {
 };
 
 const PRODUCT_NAMES: Record<string, string> = {
-  lesson_pack_1: "단건 수업권",
-  lesson_pack_10: "10회 패키지 수업권",
-  lesson_pack_20: "20회 패키지 수업권",
+  lesson_pack_1: "Single Lesson",
+  lesson_pack_10: "10-Lesson Package",
+  lesson_pack_20: "20-Lesson Package",
 };
 
 function productDisplayName(code: string): string {
@@ -265,7 +265,7 @@ export async function loadParentEntitlementsData(
       childId: child.studentId,
       childName: child.name,
       eligibleForPurchase: eligible,
-      ineligibleReason: eligible ? null : "결제 가능한(active) 계약이 없습니다.",
+      ineligibleReason: eligible ? null : "No active contract. Purchases require an active contract.",
       totalRemaining,
       nearestExpiry,
       balances,

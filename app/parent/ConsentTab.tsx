@@ -34,7 +34,7 @@ export default function ConsentTab({
       await consentForChild(studentId, activePolicy.id);
       router.refresh();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "동의 처리에 실패했습니다.");
+      setError(e instanceof Error ? e.message : "We couldn't record your consent.");
     } finally {
       setBusyStudentId(null);
     }
@@ -47,9 +47,9 @@ export default function ConsentTab({
 
   return (
     <div className="max-w-[560px] px-8 py-8">
-      <h1 className="text-[20px] font-extrabold text-ink mb-2">보호자 동의</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-2">Parental Consent</h1>
       <p className="text-[13px] text-grey-500 mb-5 leading-[1.6]">
-        만 13세 미만 자녀는 서비스 이용을 위해 보호자의 동의가 필요합니다.
+        Children under 13 need a parent or guardian's consent to use the service.
       </p>
 
       {error && (
@@ -60,7 +60,7 @@ export default function ConsentTab({
 
       {minors.length === 0 ? (
         <p className="text-[13px] text-grey-400">
-          동의가 필요한 만 13세 미만 자녀가 없습니다.
+          No children under 13 require consent.
         </p>
       ) : (
         <div className="space-y-4">
@@ -80,15 +80,15 @@ export default function ConsentTab({
                       : "bg-red/10 text-red")
                   }
                 >
-                  {child.hasValidConsent ? "동의 완료" : "동의 필요"}
+                  {child.hasValidConsent ? "Consent given" : "Consent needed"}
                 </span>
               </div>
 
               {child.latestConsent && (
                 <p className="text-[12.5px] text-grey-500 mb-3">
-                  최근 처리: {child.latestConsent.policyVersionTitle} ·{" "}
+                  Latest: {child.latestConsent.policyVersionTitle} ·{" "}
                   {fmtDate(child.latestConsent.consentedAt, undefined, tz)}
-                  {child.latestConsent.revokedAt && " (철회됨)"}
+                  {child.latestConsent.revokedAt && " (revoked)"}
                 </p>
               )}
 
@@ -101,7 +101,7 @@ export default function ConsentTab({
                     }
                     className="text-ink underline font-semibold"
                   >
-                    {activePolicy.title} 원문 보기
+                    View {activePolicy.title}
                   </button>
                 </p>
               )}
@@ -112,7 +112,7 @@ export default function ConsentTab({
                   disabled
                   className="text-[13px] font-bold text-grey-400 border border-grey-200 rounded-lg px-4 py-2 opacity-50"
                 >
-                  동의 완료
+                  Consent given
                 </button>
               ) : (
                 <button
@@ -121,7 +121,7 @@ export default function ConsentTab({
                   onClick={() => handleConsent(child.studentId)}
                   className="text-[13px] font-bold text-white bg-ink rounded-lg px-4 py-2 disabled:opacity-50"
                 >
-                  {activePolicy ? `${activePolicy.title}에 동의` : "동의 가능한 정책 없음"}
+                  {activePolicy ? `Agree to ${activePolicy.title}` : "No policy available"}
                 </button>
               )}
             </div>
@@ -133,9 +133,9 @@ export default function ConsentTab({
         data-testid="smart-notes-contract-notice"
         className="text-[12.5px] text-grey-500 leading-[1.6] mt-9 border-t border-grey-200 pt-5"
       >
-        ALTON 정규수업은 수업 품질과 진도 관리를 위해 Google Meet의 AI 수업 회의록을 사용합니다.
-        자세한 처리 범위는 가족 서비스 이용계약에서 확인할 수 있습니다. 가족계약은 정기구매나
-        일정 기간의 수업 구매를 의무화하지 않으며, 필요할 때 수업권을 구매해 이용할 수 있습니다.
+        ALTON EDUCATION regular lessons use Google Meet&apos;s AI meeting notes to support lesson quality and progress
+        tracking. See the Family Service Agreement for details on how this data is handled. The family agreement does
+        not require a subscription or any minimum purchase; lesson credits can be bought whenever you need them.
       </p>
 
       {docModal && (
@@ -155,7 +155,7 @@ export default function ConsentTab({
                 onClick={() => setDocModal(null)}
                 className="text-[13px] font-bold text-grey-400"
               >
-                닫기
+                Close
               </button>
             </div>
             <div className="px-5 py-5 overflow-y-auto text-[13px] text-grey-500 leading-[1.6]">
@@ -166,7 +166,7 @@ export default function ConsentTab({
                   className="w-full h-[50vh] border-0"
                 />
               ) : (
-                "원문 준비 중입니다."
+                "Document coming soon."
               )}
             </div>
           </div>

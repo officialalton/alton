@@ -18,25 +18,25 @@ function formatDate(iso: string | null, tz: string): string {
 }
 
 const STATUS_LABEL: Record<string, string> = {
-  created: "결제 대기",
-  pending: "결제 처리 중",
-  succeeded: "결제 완료",
-  confirmed: "결제 완료",
-  failed: "결제 실패",
-  cancelled: "결제 취소",
+  created: "Awaiting payment",
+  pending: "Processing payment",
+  succeeded: "Paid",
+  confirmed: "Paid",
+  failed: "Payment failed",
+  cancelled: "Payment cancelled",
 };
 
 // Stripe dispute.status 표시용 — 원문 값을 그대로 저장하므로(신규 상태 추가돼도
 // 스키마 변경 불필요) 매핑에 없는 값은 원문을 그대로 보여준다.
 const DISPUTE_STATUS_LABEL: Record<string, string> = {
-  warning_needs_response: "분쟁 경고 · 대응 필요",
-  warning_under_review: "분쟁 경고 · 검토 중",
-  warning_closed: "분쟁 경고 · 종결",
-  needs_response: "분쟁 진행 중 · 대응 필요",
-  under_review: "분쟁 검토 중",
-  charge_refunded: "분쟁 · 환불 처리됨",
-  won: "분쟁 · 승소(정상 유지)",
-  lost: "분쟁 · 패소",
+  warning_needs_response: "Dispute warning · Response needed",
+  warning_under_review: "Dispute warning · Under review",
+  warning_closed: "Dispute warning · Closed",
+  needs_response: "Dispute open · Response needed",
+  under_review: "Dispute under review",
+  charge_refunded: "Dispute · Refunded",
+  won: "Dispute · Won (charge upheld)",
+  lost: "Dispute · Lost",
 };
 
 const CLOSED_DISPUTE_STATUSES = new Set(["won", "lost", "charge_refunded", "warning_closed"]);
@@ -76,7 +76,7 @@ export default function EntitlementsTab({
       });
       window.location.href = url;
     } catch (e) {
-      setError(e instanceof Error ? e.message : "결제를 시작할 수 없습니다.");
+      setError(e instanceof Error ? e.message : "Unable to start checkout.");
       setLoading(false);
     }
   }
@@ -86,8 +86,8 @@ export default function EntitlementsTab({
       <UnderlineSubTabs
         className="mb-5"
         items={[
-          { id: "status", label: "현황" },
-          { id: "purchase", label: "구매" },
+          { id: "status", label: "Overview" },
+          { id: "purchase", label: "Buy" },
         ]}
         activeId={subTab}
         onSelect={setSubTab}
@@ -95,12 +95,12 @@ export default function EntitlementsTab({
 
       {purchaseStatus === "success" && (
         <div className="bg-green/10 text-green text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
-          결제 완료, 수업권이 지급되었습니다.
+          Payment complete. Your lesson credits have been added.
         </div>
       )}
       {purchaseStatus === "cancelled" && (
         <div className="bg-grey-100 text-grey-500 text-[13px] font-semibold rounded-lg px-4 py-3 mb-4">
-          결제가 취소되었습니다. 다시 시도해주세요.
+          Payment was cancelled. Please try again.
         </div>
       )}
 
@@ -108,10 +108,10 @@ export default function EntitlementsTab({
       <>
       {/* 구매 전 확인 */}
       <section className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4">
-        <h2 className="text-[14px] font-bold text-ink mb-3">구매 전 확인</h2>
+        <h2 className="text-[14px] font-bold text-ink mb-3">Before You Buy</h2>
 
         {data.prices.length === 0 ? (
-          <p className="text-[12px] text-grey-500">현재 판매 중인 상품이 없습니다.</p>
+          <p className="text-[12px] text-grey-500">No packages are available for purchase right now.</p>
         ) : (
           <div className="grid grid-cols-2 gap-2 mb-4">
             {data.prices.map((p) => (
@@ -127,14 +127,14 @@ export default function EntitlementsTab({
               >
                 <div className="text-[13px] font-bold text-ink">{p.productName}</div>
                 <div className="text-[12px] text-grey-500 mt-0.5">
-                  {p.quantity}회 · 유효기간 {p.validityMonths}개월
+                  {p.quantity} lessons · valid for {p.validityMonths} months
                 </div>
                 <div className="text-[16px] font-extrabold text-ink mt-1.5">
                   {formatMoney(p.packagePriceMinor, p.currency)}
                 </div>
                 {p.discountPercent > 0 && (
                   <div className="text-[11px] text-red font-semibold mt-0.5">
-                    {p.discountPercent}% 할인 (-{formatMoney(p.discountMinor, p.currency)})
+                    {p.discountPercent}% off (-{formatMoney(p.discountMinor, p.currency)})
                   </div>
                 )}
               </button>
@@ -143,10 +143,10 @@ export default function EntitlementsTab({
         )}
 
         <div className="bg-grey-100 rounded-lg px-3.5 py-3 mb-4 text-[11.5px] text-grey-500 leading-[1.6]">
-          환불액 = 실제 패키지 결제금액 − (소진 횟수 × 구매 당시 실제 단건 판매가)
+          Refund amount = package price paid − (lessons used × single-lesson price at time of purchase)
         </div>
 
-        <h3 className="text-[13px] font-bold text-ink mb-2">자녀 선택</h3>
+        <h3 className="text-[13px] font-bold text-ink mb-2">Select a Child</h3>
         <div className="flex flex-wrap gap-2 mb-4">
           {data.children.map((c) => (
             <button
@@ -164,7 +164,7 @@ export default function EntitlementsTab({
               }
             >
               {c.childName}
-              {!c.eligibleForPurchase && " (구매 불가)"}
+              {!c.eligibleForPurchase && " (not eligible)"}
             </button>
           ))}
         </div>
@@ -184,7 +184,7 @@ export default function EntitlementsTab({
           }
           className="text-[13px] font-bold text-white bg-ink rounded-lg px-4 py-2.5 w-full disabled:opacity-50"
         >
-          {loading ? "이동 중…" : "구매하기"}
+          {loading ? "Redirecting…" : "Buy Now"}
         </button>
       </section>
       </>
@@ -198,28 +198,28 @@ export default function EntitlementsTab({
           key={c.childId}
           className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 mb-4"
         >
-          <h2 className="text-[14px] font-bold text-ink mb-3">{c.childName}의 수업권</h2>
+          <h2 className="text-[14px] font-bold text-ink mb-3">{c.childName}&apos;s Lesson Credits</h2>
 
           <div className="flex items-baseline gap-4 mb-4">
             <div>
               <div className="text-[24px] font-extrabold text-ink">
                 {c.totalRemaining}
-                <span className="text-[13px] font-semibold text-grey-500 ml-1">회 잔여</span>
+                <span className="text-[13px] font-semibold text-grey-500 ml-1">lessons left</span>
               </div>
             </div>
             <div className="text-[12px] text-grey-500">
-              가장 빠른 만료일: {formatDate(c.nearestExpiry, tz)}
+              Earliest expiration: {formatDate(c.nearestExpiry, tz)}
             </div>
           </div>
 
           {c.balances.length > 0 && (
             <div className="mb-4">
-              <h3 className="text-[12px] font-bold text-grey-500 mb-1.5">보유 수업권 내역</h3>
+              <h3 className="text-[12px] font-bold text-grey-500 mb-1.5">Credit Balances</h3>
               <ul className="text-[12px] text-grey-500 space-y-1">
                 {c.balances.map((b) => (
                   <li key={b.grantId} className="flex justify-between">
-                    <span>잔여 {b.remaining}회</span>
-                    <span>만료 {formatDate(b.expiresAt, tz)}</span>
+                    <span>{b.remaining} lessons left</span>
+                    <span>Expires {formatDate(b.expiresAt, tz)}</span>
                   </li>
                 ))}
               </ul>
@@ -230,17 +230,17 @@ export default function EntitlementsTab({
               합산하지 않고 별도 카드로 보여준다 — 수업 시간이 달라 오해를 줄 수 있다. */}
           {c.trialEntitlement && (
             <div className="mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-2.5 bg-grey-50">
-              <p className="text-[12px] font-bold text-ink">체험수업권(60분) 1회 보유 중</p>
+              <p className="text-[12px] font-bold text-ink">1 trial lesson credit (60 min) available</p>
               <p className="text-[11.5px] text-grey-500 mt-0.5">
-                만료 {formatDate(c.trialEntitlement.expiresAt, tz)}까지 체험 수업이 시작해야 사용할 수 있습니다(그 이후로는
-                예약해도 사용할 수 없습니다) · 정규수업권과 별개이며 구매·환불·양도가 불가능합니다.
+                The trial lesson must start by {formatDate(c.trialEntitlement.expiresAt, tz)} to use this credit (bookings after
+                that date cannot use it). It is separate from regular lesson credits and cannot be purchased, refunded, or transferred.
               </p>
             </div>
           )}
 
-          <h3 className="text-[12px] font-bold text-grey-500 mb-1.5">구매/영수증 내역</h3>
+          <h3 className="text-[12px] font-bold text-grey-500 mb-1.5">Purchases & Receipts</h3>
           {c.purchases.length === 0 ? (
-            <p className="text-[12px] text-grey-500">구매 내역이 없습니다.</p>
+            <p className="text-[12px] text-grey-500">No purchases yet.</p>
           ) : (
             <ul className="space-y-1.5">
               {c.purchases.map((r) => (
@@ -257,7 +257,7 @@ export default function EntitlementsTab({
                     <span className="text-[12px] text-grey-500">
                       {STATUS_LABEL[r.status] ?? r.status}
                       {r.disputeStatus && !CLOSED_DISPUTE_STATUSES.has(r.disputeStatus) && (
-                        <span className="ml-1.5 text-red font-semibold">· 분쟁 진행 중</span>
+                        <span className="ml-1.5 text-red font-semibold">· Dispute open</span>
                       )}
                     </span>
                   </button>
@@ -277,31 +277,31 @@ export default function EntitlementsTab({
 function ReceiptDetail({ receipt: r }: { receipt: PurchaseReceipt }) {
   const tz = useViewerTimezone();
   const rows: [string, string][] = [
-    ["주문/결제 ID", r.purchaseId],
-    ["계약 ID", r.contractId],
-    ["계약 버전", r.contractVersionNumber != null ? String(r.contractVersionNumber) : "—"],
-    ["상품명", r.productName],
-    ["수업형태", r.lessonTypeLabel ?? "—"],
-    ["수업시간", r.lessonDurationMinutes != null ? `${r.lessonDurationMinutes}분` : "—"],
-    ["수량", `${r.quantity}회`],
-    ["단건 실제 판매가", formatMoney(r.unitPriceMinor, r.currency)],
-    ["패키지 가격", formatMoney(r.packagePriceMinor, r.currency)],
+    ["Order / payment ID", r.purchaseId],
+    ["Contract ID", r.contractId],
+    ["Contract version", r.contractVersionNumber != null ? String(r.contractVersionNumber) : "—"],
+    ["Product", r.productName],
+    ["Lesson type", r.lessonTypeLabel ?? "—"],
+    ["Lesson length", r.lessonDurationMinutes != null ? `${r.lessonDurationMinutes} min` : "—"],
+    ["Quantity", `${r.quantity} lessons`],
+    ["Single-lesson price", formatMoney(r.unitPriceMinor, r.currency)],
+    ["Package price", formatMoney(r.packagePriceMinor, r.currency)],
     [
-      "할인액/할인율",
+      "Discount",
       `${formatMoney(r.discountMinor, r.currency)} (${r.discountPercent}%)`,
     ],
-    ["세금", formatMoney(r.taxMinor, r.currency)],
-    ["최종 결제금액", formatMoney(r.totalMinor, r.currency)],
-    ["통화", r.currency],
-    ["유효기간", `${r.validityMonths}개월`],
-    ["만료일", formatDate(r.expiresAt, tz)],
-    ["가격 정책 버전", r.pricePolicyVersion ?? "—"],
-    ["환불 정책 버전", r.refundPolicyVersion ?? "—"],
-    ["약관 버전", r.termsVersion ?? "—"],
-    ["결제 상태", STATUS_LABEL[r.status] ?? r.status],
-    ["분쟁 상태", r.disputeStatus ? (DISPUTE_STATUS_LABEL[r.disputeStatus] ?? r.disputeStatus) : "없음"],
-    ["결제대행사 거래 ID", r.stripePaymentIntentId ?? r.stripeCheckoutSessionId ?? "—"],
-    ["구매 확인 시각", r.confirmedAt ? fmtDateTime(r.confirmedAt, undefined, tz) : "미확인"],
+    ["Tax", formatMoney(r.taxMinor, r.currency)],
+    ["Total charged", formatMoney(r.totalMinor, r.currency)],
+    ["Currency", r.currency],
+    ["Validity", `${r.validityMonths} months`],
+    ["Expires", formatDate(r.expiresAt, tz)],
+    ["Price policy version", r.pricePolicyVersion ?? "—"],
+    ["Refund policy version", r.refundPolicyVersion ?? "—"],
+    ["Terms version", r.termsVersion ?? "—"],
+    ["Payment status", STATUS_LABEL[r.status] ?? r.status],
+    ["Dispute status", r.disputeStatus ? (DISPUTE_STATUS_LABEL[r.disputeStatus] ?? r.disputeStatus) : "None"],
+    ["Payment processor transaction ID", r.stripePaymentIntentId ?? r.stripeCheckoutSessionId ?? "—"],
+    ["Confirmed at", r.confirmedAt ? fmtDateTime(r.confirmedAt, undefined, tz) : "Not confirmed"],
   ];
 
   return (
