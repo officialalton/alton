@@ -7,7 +7,7 @@ import {
 } from "@/lib/contracts/teacher-agreement-template";
 import { COMPANY_NAME } from "@/lib/legal";
 import { UnfilledContractError } from "@/lib/legal/guard";
-import { TEACHER_APPROVER, TEACHER_SCHEDULE_DEFAULTS } from "./schedule-defaults";
+import { TEACHER_APPROVER } from "./schedule-defaults";
 
 export type TeacherAgreementInputs = {
   work_country: string | null;
@@ -113,15 +113,12 @@ export function prepareTeacherAgreement(a: PrepareArgs): PrepareResult {
             ...common,
             californiaWorkLocation: i.work_location_detail!,
             supervisor: i.supervisor_name!,
-            payrollPeriodAndPaydays: TEACHER_SCHEDULE_DEFAULTS.californiaPayrollPeriodAndPaydays,
           })
         : renderNonUsTeacherAgreementHtml({
             ...common,
             actualWorkCountryAndLocation: `${countryName(i.work_country!)} — ${i.work_location_detail!}`,
             nonLessonServicesScopeAndCompensation: i.non_lesson_terms!,
             paymentMethodAndRecipientDetails: i.payment_details!,
-            transferAndConversionFeeAllocation: TEACHER_SCHEDULE_DEFAULTS.transferAndConversionFeeAllocation,
-            terminationNoticePeriod: TEACHER_SCHEDULE_DEFAULTS.terminationNoticePeriod,
           });
     return { ok: true, form, templateVersion: selection.templateVersion, html, recipientEmail: email, agreementId };
   } catch (e) {

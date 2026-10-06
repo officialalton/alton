@@ -10,7 +10,6 @@ import { prepareTeacherAgreement, type TeacherAgreementInputs } from "./prepare"
 import { sendTeacherAgreementInternal, TeacherAgreementNotReadyError } from "./send";
 import { validateTeacherAgreementInputs } from "./validate-inputs";
 import { applyTeacherAgreementEnvelopeEvent } from "./webhook";
-import { TEACHER_SCHEDULE_DEFAULTS } from "./schedule-defaults";
 
 const caInputs: TeacherAgreementInputs = {
   work_country: "US",
@@ -40,7 +39,8 @@ describe("prepareTeacherAgreement", () => {
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     expect(r.form).toBe("california_employment");
-    expect(r.html).toContain(TEACHER_SCHEDULE_DEFAULTS.californiaPayrollPeriodAndPaydays);
+    expect(r.html).toContain("Pacific Time");
+    expect(r.html).toContain("20th");
     expect(r.recipientEmail).toBe("sora@alton.education");
     expect(r.html).toContain("/sig1/");
     expect(r.html).not.toMatch(/_{3,}|\[[^\]]+\]/);
@@ -50,7 +50,8 @@ describe("prepareTeacherAgreement", () => {
     expect(r.ok && r.form).toBe("non_us_services");
     if (r.ok) {
       expect(r.html).toContain("South Korea");
-      expect(r.html).toContain("30 days&#039; written notice");
+      expect(r.html).toMatch(/30 days/);
+      expect(r.html).toContain("Pacific Time");
     }
   });
   it("lists every missing input and never sends a blank form", () => {
