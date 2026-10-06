@@ -11,7 +11,9 @@ describe.skipIf(!process.env.ITEMS)("조합 단위 스윕", () => {
       const fmts = a.level === "hard" && sprCapability(a).capable ? (["mc", "spr"] as const) : (["mc"] as const);
       for (const f of fmts) {
         const r = sweepFigureArchetype(a, Number(process.env.N ?? 60), f, { mutationSeeds: 12 });
-        const ng = r.genFail || r.thrown || r.verifyFail || r.qaFail || r.produced === 0 || r.mutantsCaught / Math.max(1, r.mutants) < 0.97 || r.keyCaught < r.keyTotal || r.dup200 > Math.ceil(Math.min(200, r.produced) * 0.02);
+        const ng = r.genFail || r.thrown || r.verifyFail || r.qaFail || r.produced === 0 || r.mutantsCaught / Math.max(1, r.mutants) < 0.97 || r.keyCaught < r.keyTotal || r.dup200 > Math.ceil(Math.min(200, r.produced) * 0.02)
+          || (a.level === "hard" && f === "mc" && Number(process.env.N ?? 60) >= 400 && r.independent < 30) // G7 독립 변형(게이트와 같은 기준)
+          || (f === "mc" && r.produced >= 100 && !a.qualitative && (Math.max(...r.slots) / r.slots.reduce((x, y) => x + y, 0) > 0.4 || Math.min(...r.slots) / r.slots.reduce((x, y) => x + y, 0) < 0.12)); // G7 정답 자리 편향
         const line = `${ng ? "XX" : "ok"} ${a.id}(${f}) prod ${r.produced} gf ${r.genFail} th ${r.thrown} vf ${r.verifyFail} qa ${r.qaFail} mut ${r.mutantsCaught}/${r.mutants} key ${r.keyCaught}/${r.keyTotal} dup ${r.dup200} ind ${r.independent} slots ${r.slots.join("/")}`;
         console.log(ng ? `${line}\n   ${[...r.failSamples, ...r.qaSamples].join("\n   ")}` : line); if (ng) bad.push(a.id);
       }
