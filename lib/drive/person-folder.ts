@@ -60,3 +60,17 @@ export async function findOrCreatePersonFolder(
   }
   return winner.id;
 }
+
+/**
+ * Logical-identity dedupe inside a person folder: the same contract id + document kind is never uploaded twice,
+ * whatever the file is called. Returns the existing file id or null.
+ */
+export async function findFileByIdentity(token: string, folderId: string, contractId: string, docKind: string): Promise<string | null> {
+  const q = encodeURIComponent(
+    `trashed=false and '${folderId}' in parents` +
+      ` and appProperties has { key='altonContractId' and value='${contractId}' }` +
+      ` and appProperties has { key='altonDocKind' and value='${docKind}' }`
+  );
+  const res = await driveFetch(`${DRIVE_API}/files?q=${q}&includeItemsFromAllDrives=true&supportsAllDrives=true&orderBy=createdTime&fields=files(id)`, token);
+  return ((await res.json()) as { files?: { id: string }[] }).files?.[0]?.id ?? null;
+}

@@ -71,7 +71,7 @@ beforeEach(() => {
   downloadCompletedDocumentMock.mockResolvedValue(Buffer.from("real-signed-doc-bytes"));
   downloadCertificateOfCompletionMock.mockResolvedValue(Buffer.from("real-cert-bytes"));
   contractVersionsSelectChainMock.mockResolvedValue({
-    data: [{ docusign_envelope_id: "env-1", docusign_envelope_status: "completed", version_number: 1, template_version: "0.3-EN-CA", docusign_status_updated_at: "2026-11-02T10:00:00Z" }],
+    data: [{ id: "cv-1", docusign_envelope_id: "env-1", docusign_envelope_status: "completed", version_number: 1, template_version: "0.3-EN-CA", docusign_status_updated_at: "2026-11-02T10:00:00Z" }],
     error: null,
   });
   driveArtifactsUpdateEqMock.mockResolvedValue({ error: null });
@@ -92,7 +92,8 @@ describe("processQueuedDriveArtifacts", () => {
       .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [] }) })
       .mockResolvedValueOnce({ ok: true, json: async () => ({ id: "pf1" }) })
       .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [{ id: "pf1", name: "Min Kim (guardian)" }] }) })
-      // findExistingFileInFolder: not found
+      // identity lookup miss, then name lookup miss
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [] }) })
       .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [] }) })
       // upload
       .mockResolvedValueOnce({ ok: true, json: async () => ({ id: "drivefile1" }) });
@@ -104,12 +105,12 @@ describe("processQueuedDriveArtifacts", () => {
     expect(result).toEqual({ attempted: 1, succeeded: 1, failed: 0, manualReview: 0, skippedRace: 0 });
     expect(downloadCompletedDocumentMock).toHaveBeenCalledWith("env-1");
     // 업로드에 전달된 실제 바디에 실 버퍼 내용이 들어있는지 확인 (Buffer.alloc(0) 아님).
-    // list(0) create(1) relist(2) findFile(3) upload(4)
+    // list(0) create(1) relist(2) identity(3) name(4) upload(5)
     const createBody = JSON.parse(fetchMock.mock.calls[1][1].body as string);
     expect(createBody).toMatchObject({ appProperties: { altonPersonId: "guardian-1234-abcd", altonKind: "family" }, parents: ["1q0PbjWndFGIF_-GoXaFdMICwI8woxz3f"] });
     expect(createBody.name).toBe("Min Kim (guardian)");
-    const uploadCallBody = fetchMock.mock.calls[4][1].body as Buffer;
-    expect(uploadCallBody.toString("binary")).toContain("Family-Agreement_Min-Kim_0.3-EN-CA_2026-11-02_env1.pdf");
+    const uploadCallBody = fetchMock.mock.calls[5][1].body as Buffer;
+    expect(uploadCallBody.toString("binary")).toContain("family_agreement_cv-1_0.3-EN-CA_2026-11-02.pdf");
     expect(uploadCallBody.toString("binary")).toContain("real-signed-doc-bytes");
     expect(driveArtifactsUpdateEqMock).toHaveBeenCalledWith("id", "da1");
   });
@@ -124,6 +125,7 @@ describe("processQueuedDriveArtifacts", () => {
     const fetchMock = vi
       .fn()
       .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [{ id: "pf1", name: "Min Kim (guardian)" }] }) })
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [] }) })
       .mockResolvedValueOnce({ ok: true, json: async () => ({ files: [] }) })
       .mockResolvedValueOnce({ ok: true, json: async () => ({ id: "drivefile2" }) });
     vi.stubGlobal("fetch", fetchMock);

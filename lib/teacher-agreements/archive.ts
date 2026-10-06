@@ -1,7 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { downloadCompletedDocument } from "@/lib/docusign";
+import { downloadCertificateOfCompletion, downloadCompletedDocument } from "@/lib/docusign";
 import { uploadArtifactToDrive } from "@/lib/drive-artifacts";
-import { teacherAgreementFileName } from "@/lib/drive/archive-config";
+import { archiveFileName } from "@/lib/drive/archive-config";
 
 const MAX_RETRIES = 5;
 
@@ -44,25 +44,33 @@ export async function archiveSignedTeacherAgreements(admin: SupabaseClient, opts
     if (!claimed || claimed.length === 0) continue; // another worker owns it
     result.attempted += 1;
     try {
-      const fileBuffer = await downloadCompletedDocument(row.docusign_envelope_id);
       const { data: profile } = await admin.from("profiles").select("name").eq("id", row.teacher_id).maybeSingle();
-      const { driveFileId, personFolderId } = await uploadArtifactToDrive({
-        contractId: row.id,
-        artifactType: "signed_document",
-        fileBuffer,
-        fileName: teacherAgreementFileName({
-          templateVersion: row.template_version ?? "unversioned",
-          signedAt: row.signed_at ?? new Date().toISOString(),
-          envelopeId: row.docusign_envelope_id,
-        }),
-        destination: { kind: "teacher", personId: row.teacher_id, personName: (profile?.name as string | undefined) ?? "Teacher" },
-      });
+      const personName = (profile?.name as string | undefined) ?? "Teacher";
+      const version = row.template_version ?? "unversioned";
+      const signedAt = row.signed_at ?? new Date().toISOString();
+      const put = (certificate: boolean, fileBuffer: Buffer) =>
+        uploadArtifactToDrive({
+          contractId: row.id,
+          artifactType: certificate ? "certificate_of_completion" : "signed_document",
+          fileBuffer,
+          fileName: archiveFileName({ contractType: "teacher_agreement", contractId: row.id, version, signedAt, certificate }),
+          destination: {
+            kind: "teacher",
+            personId: row.teacher_id,
+            personName,
+            identity: { contractId: row.id, docKind: certificate ? "certificate_of_completion" : "signed_document", contractType: "teacher_agreement" },
+          },
+        });
+      // Each upload is deduplicated by contract id + kind, so a retry after a partial failure never duplicates the first file.
+      const { driveFileId, personFolderId } = await put(false, await downloadCompletedDocument(row.docusign_envelope_id));
+      const { driveFileId: certificateFileId } = await put(true, await downloadCertificateOfCompletion(row.docusign_envelope_id));
       await admin
         .from("teacher_contracts")
         .update({
           drive_sync_status: "succeeded",
           drive_file_id: driveFileId,
           drive_folder_id: personFolderId ?? null,
+          drive_certificate_file_id: certificateFileId,
           drive_synced_at: new Date().toISOString(),
           drive_last_error: null,
           document_url: `https://drive.google.com/file/d/${driveFileId}/view`,

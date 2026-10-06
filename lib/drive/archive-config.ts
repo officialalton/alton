@@ -37,17 +37,19 @@ export function isoDate(d: string | Date): string {
   return (typeof d === "string" ? new Date(d) : d).toISOString().slice(0, 10);
 }
 
-export function teacherAgreementFileName(p: { templateVersion: string; signedAt: string; envelopeId: string }): string {
-  return `Teacher-Agreement_${sanitizeDriveName(p.templateVersion, "v")}_${isoDate(p.signedAt)}_${shortId(p.envelopeId)}.pdf`;
-}
+export type ArchiveContractType = "family_agreement" | "teacher_agreement" | "family_amendment" | "teacher_amendment";
 
-export function familyAgreementFileName(p: {
-  studentName: string;
-  templateVersion: string;
-  signedAt: string;
-  envelopeId: string;
-  artifactType: "signed_document" | "certificate_of_completion";
+/**
+ * `{contract_type}_{contract_id}_{version}_{signed_date}.pdf` (certificate: `..._{signed_date}_certificate.pdf`).
+ * Deliberately contains no names, emails, birth dates or account numbers — only our own ids, the template version and the date.
+ */
+export function archiveFileName(p: {
+  contractType: ArchiveContractType;
+  contractId: string;
+  version: string;
+  signedAt: string | Date;
+  certificate?: boolean;
 }): string {
-  const prefix = p.artifactType === "signed_document" ? "Family-Agreement" : "Family-Agreement-Certificate";
-  return `${prefix}_${sanitizeDriveName(p.studentName, "Student").replace(/ /g, "-")}_${sanitizeDriveName(p.templateVersion, "v")}_${isoDate(p.signedAt)}_${shortId(p.envelopeId)}.pdf`;
+  const safe = (v: string) => v.replace(/[^A-Za-z0-9._-]/g, "-");
+  return `${p.contractType}_${safe(p.contractId)}_${safe(p.version)}_${isoDate(p.signedAt)}${p.certificate ? "_certificate" : ""}.pdf`;
 }
