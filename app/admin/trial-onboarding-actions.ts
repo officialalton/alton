@@ -90,6 +90,8 @@ export type TrialOnboardingStudentInput = {
   email: string;
   grade?: string;
   subject?: string;
+  /** 2026-10-05 무료 회원 S5 — 상담의 기존 무료 회원 자녀(consultations.child_id)를 연결하는 행. 서버가 다시 검증한다. */
+  existingChildId?: string;
 };
 
 // 과도한 이메일 검증 라이브러리 없이 형식 오류만 걸러내는 최소 정규식 —
@@ -149,6 +151,33 @@ export async function sendTrialOnboardingNoticeAction(params: {
   }
 }
 
+// 상담에 연결된 기존 무료 회원 자녀를 찾는다(source='free_member' ∧ child_id ∧ member_type='free').
+// 이미 과외 전환된 학생이면 null — 같은 자녀를 두 번 연결하지 않는다.
+async function resolveExistingFreeMemberChild(
+  admin: ReturnType<typeof createAdminClient>,
+  consultationId: string
+): Promise<{ id: string; name: string; email: string; grade: string | null } | null> {
+  const { data: c } = await admin.from("consultations").select("child_id, source").eq("id", consultationId).maybeSingle();
+  if (!c?.child_id || c.source !== "free_member") return null;
+  const { data: st } = await admin.from("students").select("member_type, grade").eq("id", c.child_id).maybeSingle();
+  if (!st || st.member_type !== "free") return null;
+  const [{ data: profile }, { data: authUser }] = await Promise.all([
+    admin.from("profiles").select("name").eq("id", c.child_id).maybeSingle(),
+    admin.auth.admin.getUserById(c.child_id),
+  ]);
+  const email = authUser?.user?.email;
+  if (!email) return null;
+  return { id: c.child_id, name: profile?.name ?? email, email, grade: st.grade ?? null };
+}
+
+// 관리자 폼용 — 상담이 기존 무료 회원 자녀에 연결돼 있으면 그 정보를 돌려준다.
+export async function loadExistingFreeMemberChildAction(
+  consultationId: string
+): Promise<{ id: string; name: string; email: string; grade: string | null } | null> {
+  await requireAdminOrCapability(CONSULT_CAPABILITY);
+  return resolveExistingFreeMemberChild(createAdminClient(), consultationId);
+}
+
 async function sendTrialOnboardingNoticeInternal(params: {
   consultationId: string;
   guardianEmail: string;
@@ -173,6 +202,25 @@ async function sendTrialOnboardingNoticeInternal(params: {
   // 발송, 이벤트 로그)에 일관되게 쓴다.
   params = { ...params, guardianEmail: params.guardianEmail.trim() };
 
+  // 2026-10-05 무료 회원 S5 — 상담이 무료 회원의 보호자 초대 수락으로 만들어진 경우(source='free_member',
+  // child_id 설정) 그 자녀는 새 계정을 만들지 않고 기존 학생 계정을 재사용한다. child_id 가 없는
+  // 기존(신규 고객) 상담은 이 블록을 전혀 타지 않는다.
+  const existingChild = await resolveExistingFreeMemberChild(admin, params.consultationId);
+  if (existingChild) {
+    const rest = params.students.filter(
+      (s) => s.existingChildId !== existingChild.id && s.email.trim().toLowerCase() !== existingChild.email.toLowerCase()
+    );
+    params = {
+      ...params,
+      students: [
+        { name: existingChild.name, email: existingChild.email, grade: existingChild.grade ?? undefined, existingChildId: existingChild.id },
+        ...rest.map((s) => ({ ...s, existingChildId: undefined })),
+      ],
+    };
+  } else {
+    params = { ...params, students: params.students.map((s) => ({ ...s, existingChildId: undefined })) };
+  }
+
   // 재사용 가능한 pending 링크가 이미 있는지 먼저 확인(중복 발급/중복 발송 방지).
   const { data: existingLink } = await admin
     .from("trial_onboarding_links")
@@ -191,6 +239,7 @@ async function sendTrialOnboardingNoticeInternal(params: {
     email: s.email.trim(),
     grade: s.grade?.trim() || null,
     subject: s.subject?.trim() || null,
+    ...(s.existingChildId ? { existing_child_id: s.existingChildId } : {}),
   }));
 
   if (existingLink) {
@@ -207,7 +256,8 @@ async function sendTrialOnboardingNoticeInternal(params: {
   // 중복되는지 확인한다. 발급 후 충돌은 기존 부분 실패·재시도 경로가 담당한다.
   const collisions = await findExistingAuthEmailCollisions(
     admin,
-    params.students.map((s) => ({ name: s.name.trim(), email: s.email.trim() }))
+    params.students.map((s) => ({ name: s.name.trim(), email: s.email.trim() })),
+    { excludeEmails: existingChild ? [existingChild.email] : [] }
   );
   if (collisions.length > 0) {
     return { status: "duplicate_emails", collisions };

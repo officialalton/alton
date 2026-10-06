@@ -5,6 +5,8 @@ export type SubjectKeyword = {
   id: string;
   label: string;
   status: string;
+  domainCode?: string | null;
+  skillCode?: string | null;
 };
 
 export type SubjectUnit = {
@@ -54,7 +56,7 @@ export async function loadSubjectCatalog(
       .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
     selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_keywords")
-      .select("id, subject_id, label, status")
+      .select("id, subject_id, label, status, domain_code, skill_code")
       .in("subject_id", chunk)
       .order("label", { ascending: true }), { sort: orderComparator(["label", true]) }),
   ]);
@@ -77,7 +79,7 @@ export async function loadSubjectCatalog(
   const keywordsBySubject = new Map<string, SubjectKeyword[]>();
   for (const k of keywords ?? []) {
     const list = keywordsBySubject.get(k.subject_id) ?? [];
-    list.push({ id: k.id, label: k.label, status: k.status });
+    list.push({ id: k.id, label: k.label, status: k.status, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null });
     keywordsBySubject.set(k.subject_id, list);
   }
 

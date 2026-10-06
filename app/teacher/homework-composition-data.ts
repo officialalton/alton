@@ -7,7 +7,7 @@ import { selectInChunks } from "@/lib/select-in-chunks";
 // 와는 별개로, "이 세션에서 다룬 단원들의 키워드로 좁혀서 고르게" 하는 UI
 // 편의용 데이터일 뿐이다.
 
-export type HomeworkKeywordOption = { id: string; label: string };
+export type HomeworkKeywordOption = { id: string; label: string; domainCode?: string | null; skillCode?: string | null };
 
 export async function loadSessionKeywordOptions(
   supabase: SupabaseClient,
@@ -35,11 +35,11 @@ export async function loadSessionKeywordOptions(
 
   const { data: keywords, error: subjectKeywordError } = await selectInChunks(keywordIds, (chunk) => supabase
     .from("subject_keywords")
-    .select("id, label")
+    .select("id, label, domain_code, skill_code")
     .in("id", chunk));
   if (subjectKeywordError) throw new Error(subjectKeywordError.message);
 
-  return (keywords ?? []).map((k) => ({ id: k.id as string, label: k.label as string }));
+  return (keywords ?? []).map((k) => ({ id: k.id as string, label: k.label as string, domainCode: (k.domain_code as string | null) ?? null, skillCode: (k.skill_code as string | null) ?? null }));
 }
 
 // Gap 2 (2026-09-08, 제품 오너 리뷰) — 담당 선생님/관리자가 이 세션에서 발급한

@@ -74,7 +74,7 @@ describe("GuardianLinkClient — 상태별 화면(영어)", () => {
     const shared = screen.getByTestId("shared-items").querySelectorAll("li");
     expect(Array.from(shared).map((li) => li.textContent)).toEqual([...SHARED_ITEMS]);
     expect(screen.getByTestId("not-shared-items").querySelectorAll("li")).toHaveLength(NOT_SHARED_ITEMS.length);
-    expect(SHARED_ITEMS.join(" ")).not.toMatch(/notes|annotation/i);
+    expect(SHARED_ITEMS.join(" ")).not.toMatch(/notes|annotation|whiteboard/i);
     const btn = screen.getByRole("button", { name: "Connect and continue" });
     expect(btn).toBeDisabled();
     fireEvent.click(screen.getByRole("checkbox"));

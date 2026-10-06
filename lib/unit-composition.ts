@@ -141,7 +141,7 @@ export const LAYERS: Record<PrepLayer, LayerSpec> = {
   },
 };
 
-export type UnitKeyword = { id: string; label: string };
+export type UnitKeyword = { id: string; label: string; domainCode?: string | null; skillCode?: string | null };
 
 export type UnitMaterial = {
   curriculumDocId: string;
@@ -355,7 +355,7 @@ export async function loadComposition(
         scope.subjectId
           ? await supabase
               .from("subject_keywords")
-              .select("id, label")
+              .select("id, label, domain_code, skill_code")
               .eq("subject_id", scope.subjectId)
               .eq("status", "active")
               .order("label", { ascending: true })
@@ -404,6 +404,8 @@ export async function loadComposition(
     subjectKeywords: (subjectKeywordRows ?? []).map((k) => ({
       id: k.id as string,
       label: k.label as string,
+      domainCode: ((k as { domain_code?: string | null }).domain_code ?? null),
+      skillCode: ((k as { skill_code?: string | null }).skill_code ?? null),
     })),
     hasInheritableDefaults: Boolean(scope.sourceUnitId),
     goal: scope.goal,

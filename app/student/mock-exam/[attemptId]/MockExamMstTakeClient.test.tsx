@@ -314,4 +314,16 @@ describe("MockExamMstTakeClient", () => {
     expect(first.className).toMatch(/bg-yellow/);
     expect(first.querySelector(".bg-yellow")).toBeNull();
   });
+
+  it("화이트보드를 열어도 왼쪽 지문 칸을 줄이지 않고, 지문 칸은 가로 스크롤된다(표·그림 잘림 방지)", async () => {
+    await renderClient();
+    await act(async () => {});
+    const main = screen.getByTestId("mst-panes").parentElement as HTMLElement;
+    expect(screen.getByTestId("mst-pane-left").className).toContain("overflow-x-auto");
+    await act(async () => {
+      fireEvent.click(screen.getByTestId("mst-whiteboard-toggle"));
+    });
+    expect(screen.getByTestId("mst-whiteboard")).toBeInTheDocument();
+    expect(main.style.marginRight).toBe("");
+  });
 });

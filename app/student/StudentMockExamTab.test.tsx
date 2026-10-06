@@ -62,7 +62,7 @@ describe("StudentMockExamTab (공개 세트 목록)", () => {
 
   it("공개 세트가 없으면 빈 상태", () => {
     render(<StudentMockExamTab initialOverview={{ catalog: [], attempts: [] }} />);
-    expect(screen.getByText("No mock exams are available yet.")).toBeInTheDocument();
+    expect(screen.getByText("No practice tests are available yet.")).toBeInTheDocument();
   });
 });
 

@@ -137,7 +137,7 @@ Home, Roadmap, Courses(`enrollment`), Classes, My Teacher, Consultant, Mock Exam
      · 계정 없음  → 토큰으로 메일 소유 입증(기존 trial-onboarding과 같은 방식) → 보호자 계정 생성(email_confirm) → 비밀번호 설정
      · 계정 있음(이메일 일치) → 로그인 후 진행 (자동 연결 금지)
      · 로그인 계정 이메일 ≠ 초대 이메일 → 거절 + 안내(학생에게 올바른 이메일로 재초대 요청)
- → ④ 수락 화면: "연결하면 공유되는 정보"를 명시(모의고사 응시·결과·단어장·오답 기록, 보호자 포털 권한 범위) + 체크박스 동의
+ → ④ 수락 화면: "연결하면 공유되는 정보"를 명시(공유: 모의고사 응시·점수·영역별 결과와 학생의 문항별 답안·해설, 단어장·오답 기록 / 비공유: 학생의 개인 메모·하이라이트·주석·화이트보드 필기. 2026-10-05 오너 정책 변경: 보호자는 학생의 개별 답안을 볼 수 있다) + 체크박스 동의 + 체크박스 동의
  → ⑤ accept_guardian_link_invite(): household 연결 + 상담 요청 생성 + (가능하면) 컨설턴트 배정 + 예약 링크 발급
  → ⑥ 즉시 /schedule/[token] 로 이동(기존 예약 화면 재사용) → redeem_consultation_scheduling_link → Calendar/Meet 확정 메일(기존)
  → ⑦ 이후 기존: 상담 → 체험 → 계약
@@ -163,6 +163,7 @@ Home, Roadmap, Courses(`enrollment`), Classes, My Teacher, Consultant, Mock Exam
 6. 상담 요청 생성: 이미 같은 보호자 이메일 또는 같은 `child_id`로 `status in ('requested','scheduled')` 상담이 있으면 **새로 만들지 않고 그 상담에 `child_id`/`household_id`만 채운다**(중복 방지). 없으면 `consultations(source='free_member', status='requested', child_id, household_id, prospect_contact_id, contact_email=보호자 이메일)`.
 7. 컨설턴트 자동 배정: `submit_homepage_consult_request` 안의 자동 배정 로직을 공용 함수 `_auto_assign_consultation(consultation_id)`로 추출해 재사용(5절). 배정되면 `consultation_scheduling_links`를 즉시 생성해 토큰 반환(수동 "링크 보내기" 안전장치의 의도적 예외 — **6절 충돌 #3, 결정 7-5**). 배정 불가(설정 꺼짐/후보 없음) → 상담은 `requested` 미배정으로 큐에 남고 보호자 화면은 "담당자 배정 후 안내" + 배정 시 기존 `sendConsultationSchedulingLinkAction` 경로로 메일.
 8. `learning_summary_grants`(3.5) 행 생성(동의 시각·범위 `summary_v1`).
+   - **보호자 동의 문구(2026-10-05 변경)**: 공유 = "Practice-test attempts, scores, section breakdowns and your student's individual answers and explanations" 등. 비공유 = "Your student's private notes, highlights, annotations and whiteboard scratch work" 만. 보호자는 `_mock_exam_can_view`로 응시·문항별 답안을 이미 열람할 수 있다(DB 동작과 일치). 단 `load_mock_exam_annotations`/`load_problem_note_strokes` RPC는 현재 `is_guardian_of`를 허용한다 — 문구와 불일치, 오너 결정 대기.
 9. **하지 않는 것**(테스트로 고정): `consultant_assignments` 생성, 체험권/계약/크레딧 생성, `member_type` 변경, `subject_enrollments`·`teacher_assignments` 생성, 칸반 카드 생성, 계약 큐잉(`consultations.outcome`은 null).
 
 **보호자 사전 정보 비공개**: 수락 전에는 보호자에게 학생 이름·학년(초대 메일 문구에 필요한 최소)만 노출. `guardian_link_invites`는 RLS로 학생 본인(생성자)·관리자만 select, 보호자는 토큰 RPC로만.
@@ -174,7 +175,7 @@ Home, Roadmap, Courses(`enrollment`), Classes, My Teacher, Consultant, Mock Exam
 ### 3.5 컨설턴트가 볼 수 있는 학습 요약과 접근 조건
 
 - 조건(모두 충족): (a) `learning_summary_grants` 활성(보호자 수락 시 동의, 철회 가능), (b) 해당 학생의 상담(`consultations.child_id`)이 존재하고 **그 컨설턴트가 `admissions_consultant_id`**, (c) 상담 상태가 `requested/scheduled/completed`(취소·종료 후 N일 이후 만료), (d) 열람은 감사 기록(`document-access-audit`와 같은 패턴).
-- 범위 `summary_v1`(집계만): 최근 응시 N회의 총점 추정·영역별 정답률, 약점 상위 영역/세부기술 5개, 응시 횟수·마지막 활동일, 단어장 규모(숫자). **제외**: 문항별 답안·필기·메모·하이라이트·오답노트 본문·단어 목록·프로필 민감 항목(성적/GPA는 이미 학생이 입력한 경우에 한해 로드맵 정책 따름).
+- 컨설턴트 요약 문구: "a short summary (counts and weakest areas)". 범위 `summary_v1`(집계만): 최근 응시 N회의 총점 추정·영역별 정답률, 약점 상위 영역/세부기술 5개, 응시 횟수·마지막 활동일, 단어장 규모(숫자). **제외**: 문항별 답안·필기·메모·하이라이트·오답노트 본문·단어 목록·프로필 민감 항목(성적/GPA는 이미 학생이 입력한 경우에 한해 로드맵 정책 따름).
 - 구현: `_mock_exam_can_view`는 건드리지 않고 신규 SECURITY DEFINER RPC `free_member_learning_summary(student_id)` 하나로 제공. **전환 전에는 `consultant_assignments`를 만들지 않는다**(만들면 `is_assigned_consultant_of`로 `_mock_exam_can_view`·단어장 폴더·칸반 등 전부 열려 요약 범위를 넘는다). 전환(체험 온보딩 최종화) 후 기존 정책이 적용됨.
 
 ### 3.6 무료 회원 화면 (UI 기준, 마일스톤 종료 때 폴리싱)

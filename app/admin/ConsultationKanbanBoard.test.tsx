@@ -48,6 +48,7 @@ vi.mock("./consultation-scheduling-actions", () => ({
 const manuallyCompleteContractActionMock = vi.fn();
 vi.mock("./trial-onboarding-actions", () => ({
   sendTrialOnboardingNoticeAction: vi.fn(),
+  loadExistingFreeMemberChildAction: vi.fn().mockResolvedValue(null),
   sendRegularContractOneClickAction: vi.fn(),
   confirmTrialIntentAction: vi.fn(),
   planTrialSubjectAndAssignTeacherAction: (params: unknown) => planTrialSubjectAndAssignTeacherActionMock(params),

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail, MockExamOverview } from "@/lib/mock-exam/attempt-data";
 import { buildMockExamListRows, type MockExamListRow } from "@/lib/mock-exam/open-list";
+import { trackEvent } from "@/lib/analytics/track";
 import { startMockExamAction } from "@/lib/mock-exam/attempt-actions";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
 import { loadMyMockExamOverviewAction, loadMockExamAttemptDetailAction } from "./mock-exam-tab-actions";
@@ -30,7 +31,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         if (!cancelled) setOverview(o);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load the mock exam list.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load the practice test list.");
       });
     return () => {
       cancelled = true;
@@ -49,6 +50,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
       setStartError(r.error);
       return;
     }
+    trackEvent("practice_test_started", { entry_point: "practice_tests_tab" });
     router.push(`/student/mock-exam/${r.value.attemptId}`);
   }
 
@@ -68,7 +70,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
     return (
       <div>
         <button type="button" onClick={() => setOpenId(null)} className="mb-3 text-[12px] font-semibold text-grey-500">
-          ← Back to Mock Exams
+          ← Back to Practice Tests
         </button>
         {detailError ? (
           <p className="text-[13px] text-red">{detailError}</p>

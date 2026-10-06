@@ -174,7 +174,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
           {attempt.status === "graded" ? "Grading is complete." : "Submitted. Check your results."}
         </p>
         <button type="button" className="mt-3 text-[13px] text-grey-500 underline" onClick={() => router.push("/student?tab=mock-exam")}>
-          Back to Mock Exams
+          Back to Practice Tests
         </button>
       </div>
     );

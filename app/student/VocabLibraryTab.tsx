@@ -704,7 +704,7 @@ export function QuizRunner({
           <p className="text-[13px] text-green font-bold mt-2">All correct!</p>
         ) : (
           <>
-            <p className="text-[12.5px] text-grey-500 mt-1 mb-3">Missed words were saved to the “오답 노트” (Missed Words) folder in My Vocabulary. They leave the folder once you get them right.</p>
+            <p className="text-[12.5px] text-grey-500 mt-1 mb-3">Missed words were saved to the “Missed Words” folder in My Vocabulary. They leave the folder once you get them right.</p>
             {wrongItems.map((it) => (
               <div key={it.word} className="border border-grey-200 rounded-lg px-3.5 py-3 mb-2">
                 <div className="flex items-center justify-between">

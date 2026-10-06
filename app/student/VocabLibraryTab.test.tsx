@@ -21,7 +21,7 @@ vi.mock("./vocab-library-actions", () => ({
   retakeVocabQuizAction: (...args: unknown[]) => retakeVocabQuizAction(...args),
 }));
 
-const folders: VocabFolder[] = [{ id: "f1", name: "오답 노트", isDefault: true }];
+const folders: VocabFolder[] = [{ id: "f1", name: "Missed Words", isDefault: true }];
 saveVocabQuizProgressAction.mockResolvedValue({ ok: true, value: undefined });
 retakeVocabQuizAction.mockResolvedValue({ ok: true, value: undefined });
 
@@ -37,7 +37,7 @@ describe("VocabLibraryTab — 시험 만들기·채점 흐름", () => {
     render(<VocabLibraryTab myWords={[]} books={[]} quizzes={[]} folders={folders} />);
     fireEvent.click(screen.getByText("Quiz"));
     fireEvent.click(screen.getByText("Create quiz"));
-    fireEvent.click(screen.getByLabelText("오답 노트"));
+    fireEvent.click(screen.getByLabelText("Missed Words"));
     fireEvent.click(screen.getByText("Create"));
     await waitFor(() => expect(createVocabQuizAction).toHaveBeenCalledWith(expect.objectContaining({ folderIds: ["f1"] })));
     expect(screen.getByText("abate")).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe("VocabLibraryTab — 시험 만들기·채점 흐름", () => {
     fireEvent.click(screen.getByText("Submit"));
     await waitFor(() => expect(screen.getByText("Result: 0 / 1")).toBeInTheDocument());
     expect(screen.getByText(/The storm began to abate\./)).toBeInTheDocument();
-    expect(screen.getByText(/오답 노트/)).toBeInTheDocument();
+    expect(screen.getByText(/Missed Words/)).toBeInTheDocument();
   });
 });
 

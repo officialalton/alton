@@ -1,5 +1,6 @@
 "use client";
 
+import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -477,12 +478,15 @@ export default function StudentCurriculumPanel({
               <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1.5">
                 Keywords — used to find materials and problems for this unit during lesson prep
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {library.keywords.map((k) => {
+              <GroupedKeywordList
+                items={library.keywords}
+                selectedIds={u.keywordIds}
+                renderItem={(k) => {
                   const active = u.keywordIds.includes(k.id);
                   return (
                     <button
                       key={k.id}
+                      aria-pressed={active}
                       onClick={() => handleToggleKeyword(u.id, k.id)}
                       className={
                         "text-[11.5px] font-semibold px-2.5 py-1 rounded-full border-[1.5px] " +
@@ -492,8 +496,8 @@ export default function StudentCurriculumPanel({
                       {k.label}
                     </button>
                   );
-                })}
-              </div>
+                }}
+              />
             </div>
           )}
 

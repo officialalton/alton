@@ -81,11 +81,11 @@ describe("problem_note_strokes — 모의고사 필기 저장/열람 RPC", () =>
     );
     expect(teacherView).toHaveLength(1);
 
-    // 보호자도 읽을 수 있다.
+    // 보호자는 모의고사 개인 필기를 볼 수 없다(2026-10-06 오너 정책: 답안은 공유, 필기·화이트보드는 비공유) — 오류가 아니라 빈 값.
     const guardianView = JSON.parse(
       asUser(GUARDIAN_ID, `select load_problem_note_strokes('mock_exam', '${attemptId}', '${setItemId}', '${STUDENT_ID}')::text;`),
     );
-    expect(guardianView).toHaveLength(1);
+    expect(guardianView).toHaveLength(0);
 
     // 무관한 학생은 저장도 열람도 못 한다.
     expect(fails(() => asUser(otherStudentId, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${setItemId}', '${strokes}'::jsonb);`))).toContain(

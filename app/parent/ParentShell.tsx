@@ -34,6 +34,7 @@ import type { ChildConsentStatus, ConsentPolicyOption } from "./consent-data";
 import ConsultationRequestTab from "./ConsultationRequestTab";
 import ConsultationHistoryTab from "./ConsultationHistoryTab";
 import FreeMemberConsultBanner from "./FreeMemberConsultBanner";
+import LearningSummarySharingCard from "./LearningSummarySharingCard";
 import type { FreeMemberFamilyStatus } from "./free-member-data";
 import MessengerTab from "./MessengerTab";
 import { getMessengerUnreadCount } from "./inquiry-actions";
@@ -86,9 +87,9 @@ const NAV_ITEMS = [
   // 독립 탭으로 예약 화면(LessonBookingTab)을 그대로 연다.
   { id: "bookings", label: "Bookings", icon: "bookings" },
   // 2026-09-22(사용자 지시) — 홈 서브탭에서 빼서 독립 좌측 nav로 옮긴다(읽기 전용).
-  { id: "mockExam", label: "Mock Exams", icon: "mockExam" },
+  { id: "mockExam", label: "Practice Tests", icon: "mockExam" },
   { id: "consult", label: "Consultations", icon: "consultations" },
-  { id: "vocab", label: "Vocabulary", icon: "vocabulary" },
+  { id: "vocab", label: "Vocabulary Builder", icon: "vocabulary" },
   { id: "homework", label: "Assignments", icon: "assignments" },
 ] as const;
 
@@ -714,6 +715,7 @@ export default function ParentShell({
             consultSubTab === "request" ? (
               <>
                 {freeMemberStatus && <FreeMemberConsultBanner consults={freeMemberStatus.consults} />}
+                {freeMemberStatus && <LearningSummarySharingCard items={freeMemberStatus.summarySharedChildren} />}
                 <ConsultationRequestTab />
               </>
             ) : consultSubTab === "history" ? (

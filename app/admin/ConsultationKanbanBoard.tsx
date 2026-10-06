@@ -45,6 +45,7 @@ import {
   type DuplicateConsultationCandidate,
 } from "./consultation-actions";
 import LessonReviewAdminEditor from "./LessonReviewAdminEditor";
+import FreeMemberSummaryCard from "@/app/consultant/FreeMemberSummaryCard";
 import TrialOnboardingStudentsForm from "./TrialOnboardingStudentsForm";
 import TrialOnboardingLinkProgress from "./TrialOnboardingLinkProgress";
 import type { AdminSubject } from "./subject-data";
@@ -493,6 +494,7 @@ function ConsultationCardDetailPanel({
             household 연결, 학생별 카드 생성)는 체험/정규 여부와 무관한 범용
             절차라 TrialOnboardingStudentsForm/발송 액션을 그대로 재사용한다
             (이름에 "trial"이 있어도 실질은 온보딩 범용 로직 — 리네임은 범위 밖). */}
+        {c.source === "free_member" && c.child_id && <FreeMemberSummaryCard studentId={c.child_id} />}
         {!isAccountCreation && (c.outcome === "trial_recommended" || c.outcome === "regular_recommended") && (
           <div className="mb-3 space-y-2 border-[1.5px] border-ink rounded-lg px-3 py-2.5 bg-grey-100/50">
             <div className="text-[11.5px] font-bold text-ink">
@@ -536,6 +538,7 @@ function ConsultationCardDetailPanel({
                   defaultGuardianEmail={detail.guardianEmail ?? c.contact_email ?? ""}
                   defaultGuardianName={detail.guardianName ?? c.contact_name ?? ""}
                   defaultStudentGrade={c.student_grade ?? ""}
+                  existingChildId={c.child_id}
                   submitLabel={c.outcome === "regular_recommended" ? "정규 등록 온보딩 안내 발송" : "체험 온보딩 안내 발송"}
                   noticeDeliveryStatus={detail.noticeDeliveryStatus}
                   noticeSendError={detail.noticeSendError}

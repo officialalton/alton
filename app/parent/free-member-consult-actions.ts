@@ -16,3 +16,11 @@ export async function reissueFreeMemberSchedulingLinkAction(consultationId: stri
   if (typeof data !== "string" || !data) return { ok: false, error: "We couldn't open the scheduling page. Please try again." };
   return { ok: true, path: `/schedule/${data}` };
 }
+
+// 2026-10-05 무료 회원 S5 — 보호자가 학습 요약 공유(컨설턴트 열람)를 철회한다. RPC가 household guardian/관리자만 허용한다.
+export async function revokeLearningSummarySharingAction(studentId: string): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireUser();
+  const { error } = await supabase.rpc("revoke_learning_summary_grant", { p_student_id: studentId });
+  if (error) return { ok: false, error: "We couldn't stop sharing right now. Please try again." };
+  return { ok: true };
+}

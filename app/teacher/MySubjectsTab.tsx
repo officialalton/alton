@@ -1,5 +1,6 @@
 "use client";
 
+import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
 import { useState } from "react";
 import {
   createMyTemplate,
@@ -344,8 +345,10 @@ function TemplateEditor({
                 subject keywords.
               </p>
             ) : (
-              <div className="flex flex-wrap gap-1.5">
-                {subject.keywords.map((k) => {
+              <GroupedKeywordList
+                items={subject.keywords}
+                selectedIds={u.keywordIds}
+                renderItem={(k) => {
                   const attached = u.keywordIds.includes(k.id);
                   return (
                     <button
@@ -362,8 +365,8 @@ function TemplateEditor({
                       {k.label}
                     </button>
                   );
-                })}
-              </div>
+                }}
+              />
             )}
             {u.keywordIds.length === 0 && subject.keywords.length > 0 && (
               <p className="text-[11.5px] text-grey-500 mt-1.5">

@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { formatGradeLabel, plainName } from "@/lib/guardian-link/grade-label";
 import { trackEvent } from "@/lib/analytics/track";
 import { acceptGuardianLinkAction, createGuardianAccountFromLinkAction, rememberGuardianLinkReturnAction, type ClaimResult } from "./actions";
 
@@ -9,13 +10,13 @@ import { acceptGuardianLinkAction, createGuardianAccountFromLinkAction, remember
 // 공유 항목 목록(§3.3 ④)은 SHARED_ITEMS 상수 하나로 고정한다(테스트가 스냅샷).
 
 export const SHARED_ITEMS = [
-  "Practice-test attempts, scores, and section breakdowns",
+  "Practice-test attempts, scores, section breakdowns and your student's individual answers and explanations",
   "Weak areas by domain and skill (aggregated)",
   "Saved practice problems and vocabulary list size",
   "Basic profile: name, grade, and school (if provided)",
 ] as const;
 
-export const NOT_SHARED_ITEMS = ["Your student's private notes, highlights, and annotations", "Individual answer responses"] as const;
+export const NOT_SHARED_ITEMS = ["Your student's private notes, highlights, annotations and whiteboard scratch work"] as const;
 
 export default function GuardianLinkClient({ token, claim }: { token: string; claim: ClaimResult }) {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function GuardianLinkClient({ token, claim }: { token: string; cl
   const [pending, startTransition] = useTransition();
   const [review, setReview] = useState<string | null>(null);
 
-  const student = claim.studentFirstName || "Your student";
+  const student = plainName(claim.studentFirstName) || "Your student";
 
   if (claim.status === "invalid") return <Card title="This link isn't valid">Check that you opened the full link from the email, or ask {student} to send a new invitation.</Card>;
   if (claim.status === "expired") return <Card title="This invitation has expired">Invitations are valid for 7 days. Ask {student} to send a new one from their Alton account.</Card>;
@@ -59,7 +60,7 @@ export default function GuardianLinkClient({ token, claim }: { token: string; cl
       <p className="text-[12px] font-bold text-red mb-1">Parent connection</p>
       <h1 className="text-[20px] font-extrabold text-ink mb-2">
         {student}
-        {claim.studentGrade ? ` (Grade ${claim.studentGrade})` : ""} invited you to connect
+        {formatGradeLabel(claim.studentGrade) ? ` (${formatGradeLabel(claim.studentGrade)})` : ""} invited you to connect
       </h1>
       <p className="text-[13px] text-grey-600 leading-[1.7] mb-4">
         {student} has been using Alton&apos;s free SAT practice and would like to talk with a tutor. Connecting lets you see their results and book a free

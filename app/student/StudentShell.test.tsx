@@ -183,10 +183,10 @@ describe("StudentShell", () => {
       />
     );
     // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 제거(Home에서
-    // 이미 보임). Mock Exams가 Assignments 위로 옮겨졌다. Planner는 별도 nav 없이
+    // 이미 보임). Practice Tests가 Assignments 위로 옮겨졌다. Planner는 별도 nav 없이
     // Home 탭 서브탭(Overview/TODO/Done)으로 흡수됐다. 캘린더·예정 수업은 Classes의
     // "수업 일정" 서브탭으로 옮겨졌다.
-    ["Home", "Courses", "Classes", "My Teacher", "Mock Exams", "Assignments", "Practice", "Vocabulary", "Materials"].forEach(
+    ["Home", "Courses", "Classes", "My Teacher", "Practice Tests", "Assignments", "Mistake Notebook", "Vocabulary Builder", "Study Materials"].forEach(
       (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("Performance")).toBeNull();
@@ -252,7 +252,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Vocabulary")[0]);
+    fireEvent.click(screen.getAllByText("Vocabulary Builder")[0]);
     expect(
       screen.getByText("No words added yet. Tap '+ Add word' to get started.")
     ).toBeInTheDocument();
@@ -267,7 +267,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Practice")[0]);
+    fireEvent.click(screen.getAllByText("Mistake Notebook")[0]);
     expect(screen.getByText("No problems match these filters.")).toBeInTheDocument();
   });
 
@@ -312,7 +312,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Materials")[0]);
+    fireEvent.click(screen.getAllByText("Study Materials")[0]);
     expect(
       screen.getByText("No materials have been assigned yet. Your teacher will have them ready soon.")
     ).toBeInTheDocument();
@@ -344,7 +344,7 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Mock Exams")[0]);
+    fireEvent.click(screen.getAllByText("Practice Tests")[0]);
     // 2026-09-21 — 모의고사는 이제 독립 라우트가 아니라 일반 탭이다(좌측 네비 유지).
     expect(pushMock).toHaveBeenCalledWith("?tab=mock-exam", { scroll: false });
   });

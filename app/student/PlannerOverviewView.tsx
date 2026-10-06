@@ -13,7 +13,7 @@ const COLUMN_LABEL: Record<BoardColumn, string> = {
 
 const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
   homework: "Assignments",
-  mock_exam: "Mock Exams",
+  mock_exam: "Practice Tests",
   vocab_quiz: "Vocabulary Quizzes",
   manual: "To-dos",
 };

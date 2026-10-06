@@ -205,3 +205,20 @@ describe("StudentCurriculumPanel — 2026-09-18 회차 카드 배지·추가 학
     expect(screen.queryByText("변경 확인")).not.toBeInTheDocument();
   });
 });
+
+describe("StudentCurriculumPanel — 키워드 도메인 그룹", () => {
+  it("도메인 제목 아래 칩이 묶이고 선택 상태가 aria-pressed 로 드러난다", () => {
+    const grouped: EligibleLibrary = {
+      ...library,
+      keywords: [
+        { id: "kw1", label: "이차방정식", domainCode: "advanced_math" },
+        { id: "kw2", label: "판별식" },
+      ],
+    };
+    render(<StudentCurriculumPanel subjectEnrollmentId="se1" initial={initial} library={grouped} />);
+    expect(screen.getByText("Advanced Math")).toBeInTheDocument();
+    expect(screen.getByText("Other")).toBeInTheDocument();
+    expect(screen.getByText("이차방정식", { selector: "button" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("판별식", { selector: "button" })).toHaveAttribute("aria-pressed", "false");
+  });
+});

@@ -298,3 +298,21 @@ describe("템플릿 전체 보정", () => {
     expect(screen.queryByText(/sessions have no keywords yet/)).not.toBeInTheDocument();
   });
 });
+
+describe("회차 키워드 — 도메인 그룹", () => {
+  it("SAT 도메인 제목 아래 칩이 묶이고 선택 상태가 유지된다", () => {
+    const subject: MySubject = {
+      subjectId: "sub7", subjectName: "SAT Math", templateId: "tpl7", archived: false,
+      keywords: [
+        { id: "k1", label: "Linear equations", domainCode: "algebra" },
+        { id: "k2", label: "Legacy" },
+      ],
+      units: [{ id: "u1", position: 1, unitTitle: "1회차", note: null, teacherComment: null, keywordIds: ["k1"], linkedToCatalog: true }],
+    };
+    render(<MySubjectsTab initialSubjects={[subject]} />);
+    fireEvent.click(screen.getByText("Edit"));
+    expect(screen.getByText("Algebra")).toBeInTheDocument();
+    expect(screen.getByText("Other")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Linear equations" })).toHaveAttribute("aria-pressed", "true");
+  });
+});

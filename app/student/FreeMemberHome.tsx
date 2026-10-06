@@ -36,13 +36,13 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
         <p className="text-[12px] font-bold text-brand-red mb-1">Free member</p>
         <h2 className="text-[20px] font-extrabold text-navy mb-2">Welcome, {studentName}</h2>
         <p className="text-[13.5px] text-grey-500 leading-[1.7]">
-          Take a free mock exam and review your results and explanations. Save missed questions to Practice and unfamiliar words to Vocabulary for review.
+          Take a free practice test and review your results and explanations. Save missed questions to your Mistake Notebook and unfamiliar words to your Vocabulary Builder for review.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 mb-4">
         <section className="rounded-xl bg-white border border-brand-border p-5" data-testid="free-home-next-exam">
-          <h3 className="text-[13px] font-bold text-navy mb-2">Next Mock Exam</h3>
+          <h3 className="text-[13px] font-bold text-navy mb-2">Next Practice Test</h3>
           {nextExam ? (
             <>
               <p className="text-[15px] font-extrabold text-ink">{nextExam.name}</p>
@@ -50,12 +50,12 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
                 {inProgress ? "In progress — continue" : nextExam.format === "mst" ? "Adaptive, 4 modules" : "Fixed form"}
               </p>
               <button type="button" onClick={() => onSelectTab("mock-exam")} className="mt-3 px-4 py-2.5 rounded-lg bg-brand-red text-white text-[13px] font-bold">
-                {inProgress ? "Continue" : "Start mock exam"}
+                {inProgress ? "Continue" : "Start practice test"}
               </button>
             </>
           ) : (
             <p className="text-[13px] text-grey-500">
-              {catalog.length === 0 ? "No free mock exams are available right now." : "You have taken all available free mock exams."}
+              {catalog.length === 0 ? "No free practice tests are available right now." : "You have taken all available free practice tests."}
             </p>
           )}
         </section>
@@ -73,7 +73,7 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
               </Link>
             </>
           ) : (
-            <p className="text-[13px] text-grey-500">No graded attempts yet. Take your first mock exam.</p>
+            <p className="text-[13px] text-grey-500">No graded attempts yet. Take your first practice test.</p>
           )}
         </section>
       </div>
@@ -103,11 +103,11 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
 
       <div className="grid gap-4 md:grid-cols-2 mb-4">
         <button type="button" onClick={() => onSelectTab("problemlog")} className="rounded-xl bg-white border border-brand-border p-5 text-left">
-          <p className="text-[13px] font-bold text-navy">Practice</p>
-          <p className="text-[12px] text-grey-500 mt-0.5">Retry questions saved from your mock exams.</p>
+          <p className="text-[13px] font-bold text-navy">Mistake Notebook</p>
+          <p className="text-[12px] text-grey-500 mt-0.5">Retry questions saved from your practice tests.</p>
         </button>
         <button type="button" onClick={() => onSelectTab("vocab")} className="rounded-xl bg-white border border-brand-border p-5 text-left">
-          <p className="text-[13px] font-bold text-navy">Vocabulary</p>
+          <p className="text-[13px] font-bold text-navy">Vocabulary Builder</p>
           <p className="text-[12px] text-grey-500 mt-0.5">Your word list, the word library, and vocabulary quizzes.</p>
         </button>
       </div>

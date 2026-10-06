@@ -121,9 +121,9 @@ function MockSection({ x }: { x: ExtendedStats }) {
   const ranged = points.filter((p) => p.total);
   const last = ranged[ranged.length - 1];
   return (
-    <Section title="Mock Exams" hint="Graded attempts only, up to the last 12." wide>
+    <Section title="Practice Tests" hint="Graded attempts only, up to the last 12." wide>
       {points.length === 0 ? (
-        <Empty>No graded mock exams yet.</Empty>
+        <Empty>No graded practice tests yet.</Empty>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
           <div>
@@ -138,7 +138,7 @@ function MockSection({ x }: { x: ExtendedStats }) {
                 <p className="text-[11px] text-grey-500 mt-1">{SCORE_DISCLAIMER}</p>
               </>
             ) : (
-              <Empty>The estimated score range appears once an adaptive mock exam has been graded.</Empty>
+              <Empty>The estimated score range appears once an adaptive practice test has been graded.</Empty>
             )}
           </div>
           <div>
