@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-06T13:07:24.357Z",
+ "generatedAt": "2026-10-06T15:16:44.891Z",
  "seedsPerArchetype": 400,
  "ok": false,
  "summary": {
@@ -26,7 +26,7 @@
   },
   "G9": {
    "ok": false,
-   "note": "시각 검수 pass 244/303(구현 300개 중 244개; 상태: pass 244, incomplete 56)"
+   "note": "시각 검수 pass 244/303(구현 300개 중 244개; 상태: pass 244, incomplete 55, stale 1)"
   }
  },
  "items": {
@@ -250,7 +250,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T06:44:29Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "probability.simple.TW.P": {
@@ -1870,7 +1870,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.TR.P": {
@@ -1904,7 +1904,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P": {
@@ -1957,7 +1957,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:59Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "right_triangles_trigonometry.trig_ratio.TR.P": {
@@ -2008,11 +2008,11 @@
    ],
    "sprHard": 4,
    "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "G9 시각 검수 stale: 판정 이후 생성기·렌더 코드가 바뀌어 판정이 무효다 — 재검수 대상"
    ],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "stale",
+    "detail": "판정 이후 생성기·렌더 코드가 바뀌어 판정이 무효다 — 재검수 대상"
    }
   },
   "one_variable_data.mean.FQ.P": {
@@ -3204,7 +3204,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "area_volume.triangle_area.PG.P": {
@@ -3567,7 +3567,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "circles.circle_equation_transform.CG.C": {
@@ -3584,7 +3584,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "circles.circle_equation_transform.CG.B": {
@@ -4074,7 +4074,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "nonlinear_equations_systems.circle_equation_graph.CG.C": {
@@ -4091,7 +4091,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "one_variable_data.spread_comparison.HG.P": {
@@ -5118,7 +5118,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "circles.circle_equation_complete_square.CG.C": {
@@ -5135,7 +5135,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "circles.inscribed_circumscribed_polygon.CM.P": {
@@ -5169,7 +5169,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "coordinate_geometry.transformation_image.CG.P": {
@@ -5186,7 +5186,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "coordinate_geometry.transformation_image.CG.C": {
@@ -5203,7 +5203,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "coordinate_geometry.transformation_image.CG.B": {
@@ -5239,7 +5239,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+    "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
    }
   },
   "coordinate_geometry.parallel_perpendicular_slopes.LN.P": {
@@ -5330,7 +5330,7 @@
   },
   "linear_equations_one_var.literal_rearrange.PG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T06:44:29Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "probability.simple.TW.P": {
    "state": "pass",
@@ -5702,7 +5702,7 @@
   },
   "lines_angles_triangles.similar_triangles.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.TR.P": {
    "state": "pass",
@@ -5710,7 +5710,7 @@
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "right_triangles_trigonometry.pythagorean_hypotenuse.SX.P": {
    "state": "incomplete",
@@ -5722,7 +5722,7 @@
   },
   "right_triangles_trigonometry.pythagorean_leg.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:59Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "right_triangles_trigonometry.trig_ratio.TR.P": {
    "state": "pass",
@@ -5733,8 +5733,8 @@
    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
   },
   "right_triangles_trigonometry.trig_ratio.TC.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "stale",
+   "detail": "판정 이후 생성기·렌더 코드가 바뀌어 판정이 무효다 — 재검수 대상"
   },
   "one_variable_data.mean.FQ.P": {
    "state": "pass",
@@ -6014,7 +6014,7 @@
   },
   "area_volume.triangle_area.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "area_volume.triangle_area.PG.P": {
    "state": "pass",
@@ -6098,11 +6098,11 @@
   },
   "circles.circle_equation_transform.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "circles.circle_equation_transform.CG.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "circles.circle_equation_transform.CG.B": {
    "state": "incomplete",
@@ -6214,11 +6214,11 @@
   },
   "nonlinear_equations_systems.circle_equation_graph.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "nonlinear_equations_systems.circle_equation_graph.CG.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "one_variable_data.spread_comparison.HG.P": {
    "state": "pass",
@@ -6454,11 +6454,11 @@
   },
   "circles.circle_equation_complete_square.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "circles.circle_equation_complete_square.CG.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "circles.inscribed_circumscribed_polygon.CM.P": {
    "state": "pass",
@@ -6466,15 +6466,15 @@
   },
   "coordinate_geometry.distance_midpoint.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "coordinate_geometry.transformation_image.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "coordinate_geometry.transformation_image.CG.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "coordinate_geometry.transformation_image.CG.B": {
    "state": "incomplete",
@@ -6482,7 +6482,7 @@
   },
   "coordinate_geometry.polygon_area_on_plane.CG.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T07:58:58Z"
+   "detail": "claude-sonnet-5.5 (math-B session) · 2026-10-06T14:48:50Z"
   },
   "coordinate_geometry.parallel_perpendicular_slopes.LN.P": {
    "state": "pass",
@@ -11103,16 +11103,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 20,
+   "independent": 120,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    108,
     103,
+    107,
     96,
-    93
+    94
    ]
   },
   {
@@ -11123,16 +11123,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 15,
+   "independent": 89,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    100,
-    91,
     109,
-    100
+    97,
+    93,
+    101
    ]
   },
   {
@@ -13623,7 +13623,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 16,
+   "independent": 52,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -13643,7 +13643,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 79,
+   "independent": 100,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -14743,7 +14743,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 16,
+   "independent": 49,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -14763,7 +14763,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 77,
+   "independent": 97,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -16063,7 +16063,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 14,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -16083,7 +16083,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 70,
+   "independent": 86,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -16583,7 +16583,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 15,
+   "independent": 52,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -16603,7 +16603,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 67,
+   "independent": 87,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -17103,7 +17103,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 14,
+   "independent": 51,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -17123,7 +17123,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 100,
+   "independent": 113,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -17623,7 +17623,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 14,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -17643,7 +17643,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 98,
+   "independent": 123,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -18343,7 +18343,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 13,
+   "independent": 48,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -18363,7 +18363,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 53,
+   "independent": 64,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -18663,7 +18663,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 14,
+   "independent": 49,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -18683,7 +18683,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 52,
+   "independent": 71,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -18843,16 +18843,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 12,
+   "independent": 48,
    "dup200": 0,
-   "dupAll": "1/400",
+   "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    105,
-    89,
-    110,
-    96
+    107,
+    93,
+    100,
+    100
    ]
   },
   {
@@ -19143,7 +19143,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 28,
+   "independent": 55,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -19163,7 +19163,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 29,
+   "independent": 54,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21223,7 +21223,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 18,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21703,7 +21703,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 16,
+   "independent": 51,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22183,7 +22183,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 18,
+   "independent": 57,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -23503,7 +23503,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 19,
+   "independent": 49,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -23823,7 +23823,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 18,
+   "independent": 51,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -24143,7 +24143,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 17,
+   "independent": 54,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -24363,16 +24363,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 29,
+   "independent": 99,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    100,
-    96,
-    105,
-    99
+    101,
+    89,
+    103,
+    107
    ]
   },
   {
@@ -24763,16 +24763,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 28,
+   "independent": 96,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    105,
-    90,
-    105,
-    100
+    95,
+    103,
+    86,
+    116
    ]
   },
   {
@@ -25063,7 +25063,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 17,
+   "independent": 54,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -28983,7 +28983,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 48,
+   "independent": 71,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29003,8 +29003,8 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 62,
-   "dup200": 2,
+   "independent": 92,
+   "dup200": 3,
    "dupAll": "4/400",
    "mutants": "12/12",
    "keySwap": "12/12",
@@ -29023,7 +29023,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 43,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29043,7 +29043,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 54,
+   "independent": 82,
    "dup200": 0,
    "dupAll": "2/400",
    "mutants": "12/12",
@@ -29103,7 +29103,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 32,
+   "independent": 49,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29123,9 +29123,9 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 40,
+   "independent": 60,
    "dup200": 0,
-   "dupAll": "1/400",
+   "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
@@ -29143,7 +29143,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 49,
+   "independent": 72,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29163,7 +29163,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 46,
+   "independent": 74,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -41303,16 +41303,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 26,
+   "independent": 126,
    "dup200": 0,
-   "dupAll": "2/400",
+   "dupAll": "1/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    101,
     109,
-    91,
-    99
+    98,
+    97,
+    96
    ]
   },
   {
@@ -45863,7 +45863,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 106,
+   "independent": 105,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46403,7 +46403,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 18,
+   "independent": 57,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -47363,16 +47363,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 29,
+   "independent": 69,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    93,
+    90,
+    101,
     86,
-    117,
-    104
+    123
    ]
   },
   {
@@ -47983,7 +47983,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 10,
+   "independent": 40,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -48703,16 +48703,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 18,
+   "independent": 45,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    103,
-    92,
-    93,
-    112
+    95,
+    112,
+    91,
+    102
    ]
   },
   {
@@ -48943,16 +48943,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 30,
+   "independent": 94,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    100,
-    108,
-    96,
-    96
+    109,
+    95,
+    98,
+    98
    ]
   },
   {
@@ -48963,16 +48963,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 31,
+   "independent": 99,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    90,
-    104,
-    100,
-    106
+    96,
+    96,
+    94,
+    114
    ]
   },
   {
@@ -48983,16 +48983,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 31,
+   "independent": 94,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    90,
-    116,
     93,
-    101
+    108,
+    113,
+    86
    ]
   },
   {
@@ -49023,7 +49023,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 14,
+   "independent": 49,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -49043,16 +49043,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 30,
+   "independent": 119,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    97,
     96,
-    91,
-    116
+    99,
+    103,
+    102
    ]
   },
   {
@@ -49743,9 +49743,9 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 26,
+   "independent": 40,
    "dup200": 0,
-   "dupAll": "1/400",
+   "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
@@ -49763,7 +49763,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 22,
+   "independent": 43,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -49863,7 +49863,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 10,
+   "independent": 40,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53403,16 +53403,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 27,
+   "independent": 93,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    98,
-    96,
-    88,
-    118
+    93,
+    109,
+    101,
+    97
    ]
   },
   {
@@ -53423,16 +53423,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 29,
-   "dup200": 1,
-   "dupAll": "4/400",
+   "independent": 103,
+   "dup200": 0,
+   "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    81,
-    102,
-    110,
-    107
+    96,
+    90,
+    101,
+    113
    ]
   },
   {
@@ -54243,16 +54243,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 24,
+   "independent": 73,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    99,
-    95,
-    124,
-    82
+    97,
+    92,
+    92,
+    119
    ]
   },
   {
@@ -54263,16 +54263,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 26,
+   "independent": 78,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    99,
-    110,
-    83,
-    108
+    116,
+    105,
+    89,
+    90
    ]
   },
   {
@@ -58223,16 +58223,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 20,
+   "independent": 65,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
+    114,
+    98,
     101,
-    111,
-    96,
-    92
+    87
    ]
   },
   {
@@ -58243,16 +58243,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 19,
+   "independent": 61,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    100,
-    91,
-    97,
-    112
+    103,
+    93,
+    93,
+    111
    ]
   },
   {
@@ -61883,7 +61883,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 16,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",

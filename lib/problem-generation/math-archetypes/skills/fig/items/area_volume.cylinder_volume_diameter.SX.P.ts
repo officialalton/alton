@@ -46,7 +46,7 @@ export const ITEM = defineItem({
       },
     },
     {
-      op: "compare_scenarios", structure: "옆넓이와 두 밑넓이의 합의 차를 구함", extra: "높이와 반지름을 구해 두 넓이를 따로 구해 빼야 함(옆넓이만 답하는 함정) — medium 은 한 넓이",
+      op: "compare_scenarios", structure: "옆넓이와 두 밑넓이의 합을 각각 구한 뒤 그 차를 계산해 답을 구함", extra: "높이와 반지름을 구해 두 넓이를 따로 구해 빼야 함(옆넓이만 답하는 함정) — medium 은 한 넓이",
       sprNo: PI_OK, concepts: ["원기둥의 겉넓이", "두 넓이 비교", "피타고라스 정리"],
       gen(rng) {
         const s = makeCyl(rng); if (s.h <= s.r) throw new GenFail("h>r"); const k = 2 * s.r * (s.h - s.r); const f = cylFig({ diameter: String(2 * s.r), diag: String(s.d), height: "x" });

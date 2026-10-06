@@ -108,7 +108,7 @@ export const ITEM = defineItem({
   ],
   em: [
     {
-      lv: "easy", name: "area_from_base_height", structure: "삼각형 그림의 밑변과 높이(수선) 라벨로 넓이를 구함", extra: "easy: ½ × 밑변 × 높이 한 번 적용", concepts: ["삼각형의 넓이"],
+      lv: "easy", name: "area_from_base_height", structure: "삼각형 그림의 밑변과 높이(수선) 라벨로 넓이를 구함", extra: "easy: ½ × 밑변 × 높이 한 번 적용", concepts: ["삼각형의 넓이", "밑변과 높이"],
       gen(rng) {
         const { t, b, h } = plain(rng); const area = (b * h) / 2; const fig = { type: "triangle", ...areaBody(t, { base: String(b), alt: String(h) }) };
         const stim = intro(rng, t);
