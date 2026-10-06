@@ -10,6 +10,8 @@ import type { FigureSpec } from "@/lib/problem-figures/spec";
 import type { Instance } from "./types";
 import { mentionsFigure } from "./figure-verify";
 import { checkDFigure } from "./figure-qa-d";
+import { titleNamesUnit } from "./skills/fig/axis-title";
+
 
 export type QaIssue = { code: string; message: string };
 type Spec = Record<string, unknown> & { type: string; kind?: string };
@@ -89,7 +91,7 @@ function checkAxes(spec: Spec, svg: string, issues: QaIssue[], isPlane: boolean)
   }
   // 축 제목·단위
   const xt = (spec.xTitle ?? (spec.axes as { x?: { title?: string } } | undefined)?.x?.title) as string | undefined, yt = (spec.yTitle ?? (spec.axes as { y?: { title?: string } } | undefined)?.y?.title) as string | undefined;
-  for (const [n, t] of [["가로", xt], ["세로", yt]] as const) { if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t) && !(isPlane && t.trim() === (n === "가로" ? "x" : "y"))) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+  for (const [n, t] of [["가로", xt], ["세로", yt]] as const) { if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!titleNamesUnit(t) && !(isPlane && t.trim() === (n === "가로" ? "x" : "y"))) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
   // 순수 함수 그래프(실생활 맥락 없음)는 축 제목 'x'/'y' 를 허용한다(오너 승인 2026-10-05) — 제목 자체는 여전히 필수이고 그려져야 한다.
 }
 
@@ -140,7 +142,7 @@ function checkChartAxes(spec: Spec, svg: string, issues: QaIssue[], o: { xNum: b
   if (o.yNum) { if (!sc.y || sc.yTicks.length < 3) issues.push({ code: "axis_ticks_missing", message: `세로축 눈금 숫자가 ${sc.yTicks.length}개뿐입니다(3개 이상 필요).` }); else if (sc.y.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `세로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${sc.y.maxRes.toFixed(1)}px).` }); }
   if (o.xNum) { if (!sc.x || sc.xTicks.length < 3) issues.push({ code: "axis_ticks_missing", message: `가로축 눈금 숫자가 ${sc.xTicks.length}개뿐입니다(3개 이상 필요).` }); else if (sc.x.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `가로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${sc.x.maxRes.toFixed(1)}px).` }); }
   const want: [string, string | undefined, boolean][] = [["가로", spec.xTitle as string | undefined, o.xTitle], ["세로", spec.yTitle as string | undefined, o.yTitle]];
-  for (const [n, t, need] of want) { if (!need) continue; if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!/\([^)]+\)/.test(t) && !(n === "가로" && o.xUnit === false)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+  for (const [n, t, need] of want) { if (!need) continue; if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (!titleNamesUnit(t) && !(n === "가로" && o.xUnit === false)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
 }
 const tolY = (sc: NonNullable<ReturnType<typeof fit>>) => Math.abs(sc.a) * 1.5;
 
@@ -299,7 +301,7 @@ function checkTrigCurveFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   if (!fy) issues.push({ code: "axis_ticks_missing", message: "세로축 눈금 숫자가 없습니다." });
   else if (fy.maxRes > 1.5) issues.push({ code: "render_scale_nonlinear", message: `세로축 눈금 숫자의 위치가 일정한 간격이 아닙니다(잔차 ${fy.maxRes.toFixed(1)}px).` });
   // 축 제목·단위(순수 xy 그래프는 'x'/'y' 허용 — 오너 승인 2026-10-05)
-  for (const [n, t, pure] of [["가로", S.xTitle, "x"], ["세로", S.yTitle, "y"]] as const) { if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (t.trim() !== pure && !/\([^)]+\)/.test(t)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+  for (const [n, t, pure] of [["가로", S.xTitle, "x"], ["세로", S.yTitle, "y"]] as const) { if (!t) issues.push({ code: "axis_title_missing", message: `${n}축 제목이 없습니다.` }); else if (t.trim() !== pure && !titleNamesUnit(t)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
   if (!fx || !fy) return;
   // 곡선: 그려진 폴리라인의 모든 표본이 식 위에 있는가
   const pl = polylines(svg).find((q) => q.stroke === "#111" && q.pts.length > 100);

@@ -5,6 +5,7 @@ import { numberLineTicks, NL, type NumberLineSpec } from "@/lib/problem-figures/
 import { pieLabelText, PIE, type PieSpec } from "@/lib/problem-figures/templates/pie";
 import { slKey, type StemLeafSpec } from "@/lib/problem-figures/templates/stem-leaf";
 import { stackedTotals, type StackedBarSpec } from "@/lib/problem-figures/templates/stacked-bar";
+import { titleNamesUnit } from "./skills/fig/axis-title";
 
 export type QaIssue = { code: string; message: string };
 const NUM = /^-?\d[\d,]*(\.\d+)?$/;
@@ -129,7 +130,7 @@ function checkPie(spec: PieSpec, svg: string, issues: QaIssue[]) {
 
 // ───────── 도수다각형·누적도수곡선 ─────────
 function checkAxisTitles(spec: { xTitle: string; yTitle: string }, svg: string, issues: QaIssue[]) {
-  for (const [n, t] of [["가로", spec.xTitle], ["세로", spec.yTitle]] as const) { if (!/\([^)]+\)/.test(t)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
+  for (const [n, t] of [["가로", spec.xTitle], ["세로", spec.yTitle]] as const) { if (!titleNamesUnit(t)) issues.push({ code: "unit_missing_in_title", message: `${n}축 제목 '${t}' 에 단위(괄호)가 없습니다.` }); else if (!texts(svg).some((q) => q.text.replace(/\s+/g, " ") === t.replace(/\s+/g, " "))) issues.push({ code: "axis_title_missing", message: `${n}축 제목 '${t}' 가 그림에 그려지지 않았습니다.` }); }
 }
 function checkFreqChart(spec: FreqChartSpec, svg: string, issues: QaIssue[]) {
   const sc = scales(svg);
