@@ -85,7 +85,7 @@ export function PublicFooter() {
             ))}
           </nav>
         </div>
-        <div className="p-mono pt-6 border-t border-[var(--p-line)] text-[12px] text-[var(--p-mute)]">© 2026 Alton Education Inc.</div>
+        <div className="p-mono pt-6 border-t border-[var(--p-line)] text-[12px] text-[var(--p-mute)]">© 2026 Alton Education LLC</div>
       </div>
     </footer>
   );
