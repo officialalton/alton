@@ -12,15 +12,23 @@ import {
 import { selectInChunks } from "@/lib/select-in-chunks";
 
 // 2026-09-28 — 초기 고객 절차 단순화 4단계: 관리자 화면용 outbox 조회·실행 액션.
-// 실제 DocuSign 발송은 CONTRACT_AUTO_DISPATCH_ENABLED=true일 때만 일어난다
-// (기본 비활성 — 사용자 지시: 실제 고객 발송 활성화는 별도 승인 필요).
+// 실제 DocuSign 발송은 관리자 설정(contract_dispatch_settings, 기본 ON)이 켜져 있고
+// 환경변수 CONTRACT_AUTO_DISPATCH_ENABLED가 "false"(비상 정지)가 아닐 때만 일어난다.
 
 export type ContractDispatchJobListItem = ContractDispatchJobRow & {
   childName: string | null;
 };
 
+export type ContractDispatchSettingInfo = {
+  enabled: boolean;
+  updatedAt: string | null;
+  updatedByName: string | null;
+};
+
 export async function listContractDispatchJobs(): Promise<{
   autoDispatchEnabled: boolean;
+  envHardStop: boolean;
+  setting: ContractDispatchSettingInfo;
   jobs: ContractDispatchJobListItem[];
 }> {
   await requireAdmin();
@@ -40,10 +48,35 @@ export async function listContractDispatchJobs(): Promise<{
     for (const p of profiles ?? []) childNameById.set(p.id, p.name);
   }
 
+  const { data: st } = await admin
+    .from("contract_dispatch_settings")
+    .select("auto_dispatch_enabled, updated_at, updated_by")
+    .eq("id", true)
+    .maybeSingle();
+  let updatedByName: string | null = null;
+  if (st?.updated_by) {
+    const { data: who } = await admin.from("profiles").select("name").eq("id", st.updated_by).maybeSingle();
+    updatedByName = who?.name ?? null;
+  }
+  const setting: ContractDispatchSettingInfo = {
+    enabled: st?.auto_dispatch_enabled === true,
+    updatedAt: st?.updated_by ? st.updated_at : null,
+    updatedByName,
+  };
+
   return {
-    autoDispatchEnabled: isContractAutoDispatchEnabled(),
+    autoDispatchEnabled: await isContractAutoDispatchEnabled(admin),
+    envHardStop: process.env.CONTRACT_AUTO_DISPATCH_ENABLED === "false",
+    setting,
     jobs: rows.map((r) => ({ ...r, childName: childNameById.get(r.child_id) ?? null })),
   };
+}
+
+/** 자동 발송 켜기/끄기 — 관리자만(RPC가 is_admin 검사 + 감사 기록). */
+export async function setContractAutoDispatchEnabledAction(enabled: boolean): Promise<void> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("set_contract_auto_dispatch_enabled", { p_enabled: enabled });
+  if (error) throw new Error(error.message);
 }
 
 /** 큐에 쌓인 작업을 일괄 처리한다(비활성 상태면 아무것도 안 하고 그 사실만 반환). */

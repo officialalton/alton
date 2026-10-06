@@ -1,17 +1,25 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { CONTRACT_SEND_IN_PROGRESS_ERROR, sendRegularContractForSubjectEnrollment } from "@/lib/regular-contract-send";
 
-// 2026-09-28 — 초기 고객 절차 단순화 4단계: contract_dispatch_jobs 워커.
-// (docs/2026-09-26-consent-contract-simplification-implementation-plan.md)
-//
-// 실제 DocuSign 발송은 이 세션 범위에서 기본 비활성이다 — 사용자 지시:
-// "실제 고객에게 계약서·이메일을 보내는 기능 활성화만 보류". 환경변수
-// CONTRACT_AUTO_DISPATCH_ENABLED가 정확히 "true"일 때만 실제 발송을 시도한다.
-// 꺼져 있으면 큐는 계속 쌓이되(트리거가 이미 큐잉함) 아무것도 발송하지 않고
-// 그 사실을 결과에 명시한다 — 관리자 화면이 이 값을 보고 "자동 발송
-// 비활성화됨" 배너를 보여준다.
-export function isContractAutoDispatchEnabled(): boolean {
-  return process.env.CONTRACT_AUTO_DISPATCH_ENABLED === "true";
+// 2026-10-06 오너 결정: 자동 발송은 기본 ON이며 관리자가 contract_dispatch_settings로 켜고 끈다.
+// 환경변수 CONTRACT_AUTO_DISPATCH_ENABLED가 정확히 "false"면 DB와 무관하게 강제 정지(비상 스위치).
+// DB 조회가 실패하면 fail-safe로 비활성 취급하고 로그를 남긴다.
+export async function isContractAutoDispatchEnabled(admin: SupabaseClient): Promise<boolean> {
+  if (process.env.CONTRACT_AUTO_DISPATCH_ENABLED === "false") return false;
+  try {
+    const { data, error } = await admin
+      .from("contract_dispatch_settings")
+      .select("auto_dispatch_enabled")
+      .eq("id", true)
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    return data?.auto_dispatch_enabled === true;
+  } catch (e) {
+    console.error(
+      JSON.stringify({ event: "contract_dispatch_setting_read_failed", error: e instanceof Error ? e.message : String(e) })
+    );
+    return false;
+  }
 }
 
 // 승인자 표시는 기존 수동/자동 발송 경로(app/parent/trial-conversion-actions.ts,
@@ -88,7 +96,7 @@ export async function dispatchOneContractJob(
   admin: SupabaseClient,
   job: Pick<ContractDispatchJobRow, "id" | "child_id" | "subject_enrollment_id">
 ): Promise<DispatchOneResult> {
-  if (!isContractAutoDispatchEnabled()) {
+  if (!(await isContractAutoDispatchEnabled(admin))) {
     return { outcome: "disabled" };
   }
 
@@ -205,7 +213,7 @@ export async function processContractDispatchQueue(
   admin: SupabaseClient,
   opts?: { childIds?: string[] }
 ): Promise<{ enabled: boolean; processed: number; sent: number; failed: number }> {
-  if (!isContractAutoDispatchEnabled()) {
+  if (!(await isContractAutoDispatchEnabled(admin))) {
     return { enabled: false, processed: 0, sent: 0, failed: 0 };
   }
 

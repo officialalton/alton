@@ -96,3 +96,16 @@
 .public-theme .p-consult select { border-radius: 0; border: 1px solid var(--p-ink); background: #fff; font-size: 15px; }
 .public-theme .p-consult button[type="submit"] { border-radius: 0; background: var(--p-ink); min-height: 56px; }
 .public-theme .p-consult button[type="submit"]:hover { background: var(--p-red); }
+
+/* Meet Chrisy Kim */
+.public-theme .p-portrait { position: relative; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border: 1px solid var(--p-line); background: var(--p-skeleton); }
+.public-theme .p-portrait-fallback { display: flex; align-items: center; justify-content: center; background: var(--p-ink); color: #f7f6f2; border-color: var(--p-ink); }
+.public-theme .p-portrait-fallback span { font-size: clamp(64px, 14vw, 112px); letter-spacing: -0.03em; }
+.public-theme .p-advisor { display: flex; align-items: center; gap: 16px; border: 1px solid var(--p-line); padding: 14px 16px; text-decoration: none; max-width: 520px; transition: border-color .15s; }
+.public-theme .p-advisor:hover { border-color: var(--p-ink); }
+.public-theme .p-advisor .p-portrait { width: 56px; flex: none; }
+.public-theme .p-advisor .p-portrait-fallback span { font-size: 20px; }
+.public-theme .p-qa { display: flex; flex-direction: column; }
+.public-theme .p-qa > div { border-top: 1px solid var(--p-line); padding: 26px 0; display: grid; gap: 10px; }
+.public-theme .p-qa > div:last-child { border-bottom: 1px solid var(--p-line); }
+.public-theme .p-qa h3 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--p-ink); }
