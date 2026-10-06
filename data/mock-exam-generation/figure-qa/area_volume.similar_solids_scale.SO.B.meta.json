@@ -1,7 +1,7 @@
 {
  "itemId": "area_volume.similar_solids_scale.SO.B",
- "generatedAt": "2026-10-06T07:23:14.269Z",
- "codeHash": "f663245c14d6a29ea8fc52b2f55ed3c3054b93b38acdfddfaf4189197c6edae8",
+ "generatedAt": "2026-10-06T07:32:59.444Z",
+ "codeHash": "aa7b1cc5119fa0f20ee03444958d308d00974658ba5bbb180d58dc5dd5f7ce6c",
  "sources": [
   "app/session/[id]/ProblemFigure.tsx",
   "lib/problem-figures/label-rule.ts",
@@ -25,7 +25,7 @@
    "archetypeId": "av.similar_solids_scale.SO.B.repr_shift",
    "seed": 11,
    "signature": "figure_bundle[solid:cylinder>solid:cylinder]",
-   "stimulus": "A student studies figures in an algebra class. A cylinder is drawn first, with the lengths of its dimensions labeled, followed by four candidate solids. The first figures is the given figure, and four figures with the same axes are shown as choices. Look at which edges and segments are labeled in the figure before you decide which relationship between them to use. The scale factor from the given cylinder to the cylinder in the correct choice is 2.",
+   "stimulus": "A student studies solids in a geometry class. A cylinder is drawn first, with the lengths of its dimensions labeled, followed by four candidate solids. The first figure is the given solid, and four candidate solids are shown as choices. Look at which edges and segments are labeled in the figure before you decide which relationship between them to use. The scale factor from the given cylinder to the cylinder in the correct choice is 2.",
    "question": "Which one of the four solids is similar to the given cylinder?",
    "options": [
     "A",
@@ -44,7 +44,7 @@
    "archetypeId": "av.similar_solids_scale.SO.B.compose_kind",
    "seed": 11,
    "signature": "figure_bundle[solid:cone>solid:cone]",
-   "stimulus": "A figureing program plots a figure. In the given figure, the dimensions of a cone are labeled in one unit. The first figures is the given figure, and four figures with the same axes are shown as choices. Read each label in the figure as a length in the same unit, and then work out the quantity asked for below. The volume of the cone in the correct choice is 8 times the volume of the given cone.",
+   "stimulus": "A teacher draws a solid on the board. In the given figure, the dimensions of a cone are labeled in one unit. The first figure is the given solid, and four candidate solids are shown as choices. Read each label in the figure as a length in the same unit, and then work out the quantity asked for below. The volume of the cone in the correct choice is 8 times the volume of the given cone.",
    "question": "Which cone below has the same shape as the given one, only larger or smaller?",
    "options": [
     "A",
