@@ -77,7 +77,7 @@ describe("뷰어 시간대 hydration 일관성 (서버 UTC / 브라우저 서울
         <CreditsTab data={data} />
       </ViewerTimezoneProvider>
     );
-    expect(r.html).toContain("2026년 9월 29일");
+    expect(r.html).toMatch(/Sep(tember)? 29, 2026/);
     expect(r.errors).toEqual([]);
   });
 
@@ -123,8 +123,8 @@ describe("뷰어 시간대 hydration 일관성 (서버 UTC / 브라우저 서울
         />
       </ViewerTimezoneProvider>
     );
-    expect(r.html).toContain("9월 29일");
-    expect(r.html).not.toContain("9월 30일");
+    expect(r.html).toMatch(/Sep(tember)? 29/);
+    expect(r.html).not.toMatch(/Sep(tember)? 30/);
     expect(r.errors).toEqual([]);
   });
 });

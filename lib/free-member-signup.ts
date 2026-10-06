@@ -63,28 +63,28 @@ export type SignupValidation =
 
 export function validateStudentSignup(input: StudentSignupInput, today: Date = new Date()): SignupValidation {
   const name = input.name.trim();
-  if (!name) return { ok: false, field: "name", message: "이름을 입력해 주세요." };
+  if (!name) return { ok: false, field: "name", message: "Please enter your name." };
   const email = input.email.trim().toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, field: "email", message: "이메일 형식이 올바르지 않습니다." };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, field: "email", message: "Please enter a valid email address." };
   if (input.password.length < MIN_PASSWORD_LENGTH) {
-    return { ok: false, field: "password", message: `비밀번호는 ${MIN_PASSWORD_LENGTH}자 이상이어야 합니다.` };
+    return { ok: false, field: "password", message: `Your password must be at least ${MIN_PASSWORD_LENGTH} characters.` };
   }
   if (!/[A-Za-z]/.test(input.password) || !/\d/.test(input.password)) {
-    return { ok: false, field: "password", message: "비밀번호는 영문과 숫자를 모두 포함해야 합니다." };
+    return { ok: false, field: "password", message: "Your password must include both letters and numbers." };
   }
   const age = ageOnDate(input.birthdate, today);
-  if (age === null) return { ok: false, field: "birthdate", message: "생년월일을 올바르게 입력해 주세요." };
-  if (age < 0) return { ok: false, field: "birthdate", message: "생년월일이 올바르지 않습니다." };
+  if (age === null) return { ok: false, field: "birthdate", message: "Please enter a valid date of birth." };
+  if (age < 0) return { ok: false, field: "birthdate", message: "That date of birth is not valid." };
   if (age < MIN_SIGNUP_AGE) {
     return {
       ok: false,
       field: "birthdate",
-      message: `만 ${MIN_SIGNUP_AGE}세 미만은 직접 가입할 수 없습니다. 보호자가 상담을 신청해 주세요.`,
+      message: `You must be at least ${MIN_SIGNUP_AGE} to sign up on your own. A parent or guardian can request a consultation instead.`,
     };
   }
   const grade = input.grade.trim();
-  if (!grade) return { ok: false, field: "grade", message: "학년을 입력해 주세요." };
-  if (!input.termsAccepted) return { ok: false, field: "termsAccepted", message: "이용약관과 개인정보 처리방침에 동의해 주세요." };
+  if (!grade) return { ok: false, field: "grade", message: "Please enter your grade." };
+  if (!input.termsAccepted) return { ok: false, field: "termsAccepted", message: "Please agree to the Terms of Service and Privacy Policy." };
   const school = (input.school ?? "").trim();
   return {
     ok: true,

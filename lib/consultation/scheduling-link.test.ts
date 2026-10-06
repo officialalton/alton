@@ -34,7 +34,7 @@ describe("toSchedulingLinkFailure", () => {
     expect(toSchedulingLinkFailure({ code: "23P01", message: "conflicting key value violates exclusion constraint" }, "x")).toEqual({
       ok: false,
       reason: "unavailable",
-      error: "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.",
+      error: "That time is no longer available. Please choose another time.",
     });
   });
 });

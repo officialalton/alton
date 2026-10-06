@@ -48,7 +48,7 @@ describe("validateStudentSignup", () => {
   it("만 13세 미만은 차단하고 상담 경로를 안내한다(생일 당일은 허용)", () => {
     const under = validateStudentSignup({ ...base, birthdate: "2013-10-06" }, TODAY);
     expect(under).toMatchObject({ ok: false, field: "birthdate" });
-    expect((under as { message: string }).message).toContain("보호자가 상담");
+    expect((under as { message: string }).message).toContain("parent or guardian");
     expect(validateStudentSignup({ ...base, birthdate: "2013-10-05" }, TODAY).ok).toBe(true);
   });
 

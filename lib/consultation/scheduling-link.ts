@@ -4,10 +4,10 @@ import { createAdminClient } from "@/lib/supabase-admin";
 // 토큰 검증은 DB RPC 안에서만 하고, 무효/만료면 RPC 가 아래 문구로 raise 한다
 // (20261454000000_r_consultant_scheduling_link.sql). 서버 액션이 throw 하면 프로덕션은
 // 문구를 가리고 일반 오류만 보이므로, 판정은 결과값으로 돌려 화면에서 직접 안내한다.
-export const SCHEDULING_LINK_INVALID_MESSAGE = "유효하지 않거나 만료된 예약 링크입니다.";
-export const SCHEDULING_LINK_UNAVAILABLE_MESSAGE = "예약 정보를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
+export const SCHEDULING_LINK_INVALID_MESSAGE = "This scheduling link is invalid or has expired.";
+export const SCHEDULING_LINK_UNAVAILABLE_MESSAGE = "We couldn't load the scheduling details. Please try again in a moment.";
 
-export const SCHEDULING_LINK_SLOT_TAKEN_MESSAGE = "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.";
+export const SCHEDULING_LINK_SLOT_TAKEN_MESSAGE = "That time is no longer available. Please choose another time.";
 
 export type SchedulingLinkFailure = { ok: false; reason: "invalid_link" | "unavailable"; error: string };
 

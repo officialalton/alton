@@ -140,7 +140,7 @@ export default function SettlementPanel() {
               </span>
               <span className="text-[10.5px] font-bold text-grey-500 bg-grey-100 rounded-full px-2 py-0.5">{STATUS_LABEL[p.status] ?? p.status}</span>
             </div>
-            <div className="text-[13px] text-ink mt-1">{(p.amountMinor / 100).toLocaleString("en-US")} {p.currency}</div>
+            <div className="text-[13px] text-ink mt-1">{new Intl.NumberFormat("en-US").format(p.amountMinor / 100)} {p.currency}</div>
             {p.note && <div className="text-[12px] text-grey-500 mt-1">{p.note}</div>}
           </div>
         ))

@@ -25,9 +25,9 @@ const EMPTY_PROGRESS: CurriculumOverlayProgress = { totalUnits: 0, doneUnits: 0,
 
 /** 진도를 화면 문구로 변환한다 — 세 화면(교사/학생/관리자)이 전부 이 함수 하나만 쓴다. */
 export function formatCurriculumProgressLabel(p: CurriculumOverlayProgress): string {
-  if (p.totalUnits === 0) return "진도 미시작 · 회차 0개";
-  if (p.doneUnits === 0) return `진도 미시작 · 회차 ${p.totalUnits}개`;
-  return `진행 ${p.doneUnits} / 전체 ${p.totalUnits}회차`;
+  if (p.totalUnits === 0) return "Not started · 0 sessions";
+  if (p.doneUnits === 0) return `Not started · ${p.totalUnits} sessions`;
+  return `Progress ${p.doneUnits} / ${p.totalUnits} sessions`;
 }
 
 export async function loadCurriculumOverlayProgressByEnrollment(

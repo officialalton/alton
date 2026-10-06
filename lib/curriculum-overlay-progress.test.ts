@@ -20,21 +20,21 @@ function makeSupabaseMock(overlays: unknown[], units: unknown[]) {
 }
 
 describe("formatCurriculumProgressLabel", () => {
-  it("전체 단원이 0개면 '진도 미시작 · 회차 0개'", () => {
+  it("전체 단원이 0개면 'Not started · 0 sessions'", () => {
     expect(formatCurriculumProgressLabel({ totalUnits: 0, doneUnits: 0, sourceLabel: null })).toBe(
-      "진도 미시작 · 회차 0개"
+      "Not started · 0 sessions"
     );
   });
 
   it("수업 전(완료 0)이면 '진도 미시작 · 회차 N개'", () => {
     expect(formatCurriculumProgressLabel({ totalUnits: 12, doneUnits: 0, sourceLabel: "공통 커리큘럼 기준" })).toBe(
-      "진도 미시작 · 회차 12개"
+      "Not started · 12 sessions"
     );
   });
 
   it("진행 중이면 '진행 N / 전체 M회차'이고 '0/0회차'나 단순 '운영 커리큘럼' 표기가 없다", () => {
     const label = formatCurriculumProgressLabel({ totalUnits: 12, doneUnits: 3, sourceLabel: "교사 운영 커리큘럼 기준" });
-    expect(label).toBe("진행 3 / 전체 12회차");
+    expect(label).toBe("Progress 3 / 12 sessions");
     expect(label).not.toContain("0/0");
     expect(label).not.toBe("운영 커리큘럼");
   });

@@ -28,7 +28,7 @@ describe("예약 링크 서버 액션 — throw 대신 결과값", () => {
   it("무효·만료 토큰: throw 하지 않고 invalid_link + 안내 문구", async () => {
     rpcMock.mockResolvedValue({ data: null, error: INVALID });
     const r = await listOpenSlotsForTokenAction("bogus", "a", "b");
-    expect(r).toEqual({ ok: false, reason: "invalid_link", error: "유효하지 않거나 만료된 예약 링크입니다." });
+    expect(r).toEqual({ ok: false, reason: "invalid_link", error: "This scheduling link is invalid or has expired." });
     expect(await redeemSchedulingLinkAction("bogus", "a")).toMatchObject({ ok: false, reason: "invalid_link" });
   });
 

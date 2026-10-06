@@ -325,7 +325,7 @@ export default function CurriculumDocsTab({
                   {d.rightsStatus === "confirmed" && (
                     <span>
                       확인: {d.rightsConfirmedByName ?? "방금"}
-                      {d.rightsConfirmedAt ? ` · ${new Date(d.rightsConfirmedAt).toLocaleString("ko-KR")}` : ""}
+                      {d.rightsConfirmedAt ? ` · ${new Date(d.rightsConfirmedAt).toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })}` : ""}
                     </span>
                   )}
                   <input

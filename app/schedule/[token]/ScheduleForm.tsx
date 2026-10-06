@@ -5,7 +5,7 @@ import ConsultSlotPicker, { type ConsultSlotPickerHandle } from "@/app/component
 import { listOpenSlotsForTokenAction, redeemSchedulingLinkAction } from "@/app/schedule-actions";
 import SchedulingLinkInvalid from "./SchedulingLinkInvalid";
 import { DEFAULT_TIMEZONE, timezoneLabel } from "@/lib/timezone";
-import { fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
 import { detectInitialScheduleTimezone, saveScheduleTimezone } from "@/lib/schedule-timezone";
 
 export default function ScheduleForm({ token }: { token: string }) {

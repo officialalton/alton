@@ -19,14 +19,14 @@ export function resolveUserTimezone(params: {
 // 모두 포함하고, 한국 시간대를 더한다. 전체 IANA 타임존 목록을 그대로 나열하지는
 // 않는다(과도한 설계 금지) — 미국 내 실제로 쓰이는 지역 표준시만 명시적으로 나열.
 export const TIMEZONE_OPTIONS: { value: string; label: string }[] = [
-  { value: "Asia/Seoul", label: "서울 (Asia/Seoul)" },
-  { value: "America/New_York", label: "뉴욕 — 동부(ET) (America/New_York)" },
-  { value: "America/Chicago", label: "시카고 — 중부(CT) (America/Chicago)" },
-  { value: "America/Denver", label: "덴버 — 산악(MT) (America/Denver)" },
-  { value: "America/Phoenix", label: "피닉스 — 산악, 서머타임 없음(MST) (America/Phoenix)" },
-  { value: "America/Los_Angeles", label: "로스앤젤레스 — 태평양(PT) (America/Los_Angeles)" },
-  { value: "America/Anchorage", label: "앵커리지 — 알래스카(AKT) (America/Anchorage)" },
-  { value: "Pacific/Honolulu", label: "호놀룰루 — 하와이(HST) (Pacific/Honolulu)" },
+  { value: "Asia/Seoul", label: "Seoul (Asia/Seoul)" },
+  { value: "America/New_York", label: "New York — Eastern (ET) (America/New_York)" },
+  { value: "America/Chicago", label: "Chicago — Central (CT) (America/Chicago)" },
+  { value: "America/Denver", label: "Denver — Mountain (MT) (America/Denver)" },
+  { value: "America/Phoenix", label: "Phoenix — Mountain, no DST (MST) (America/Phoenix)" },
+  { value: "America/Los_Angeles", label: "Los Angeles — Pacific (PT) (America/Los_Angeles)" },
+  { value: "America/Anchorage", label: "Anchorage — Alaska (AKT) (America/Anchorage)" },
+  { value: "Pacific/Honolulu", label: "Honolulu — Hawaii (HST) (Pacific/Honolulu)" },
 ];
 
 export function timezoneLabel(timezone: string): string {

@@ -158,7 +158,7 @@ describe("CurriculumTab", () => {
     expect(screen.getByText("SAT English")).toBeInTheDocument();
     // C-1(2026-09-10) — 단순 "운영 커리큘럼" 표기·"0/0회차" 대신
     // curriculum_overlay_units 기준 진도 문구를 보여준다.
-    expect(screen.getByText("진도 미시작 · 회차 0개")).toBeInTheDocument();
+    expect(screen.getByText("Not started · 0 sessions")).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("SAT English"));
 
