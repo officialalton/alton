@@ -67,3 +67,8 @@ export function reviewStatus(itemId: string, current: { hash: string }, root = p
   if (rv.verdict !== "pass" || Object.values(rv.checklist).includes("fail") || rv.defects.length) return { state: "defect", detail: `결함 ${rv.defects.length}건: ${rv.defects.map((d) => d.description).join(" / ").slice(0, 160)}`, review: rv };
   return { state: "pass", detail: `${rv.reviewer} · ${rv.reviewedAt}`, review: rv };
 }
+
+// 새 렌더러 계열(math-D) 공용 키트 — 계열 키트를 고치면 그 계열 조합만 재검수 대상이 된다.
+FAMILY_KIT.SL = [`${AR}/skills/fig/sl-kit.ts`];
+FAMILY_KIT.PI = [`${AR}/skills/fig/pi-kit.ts`];
+FAMILY_KIT.NL = [`${AR}/skills/fig/nl-kit.ts`];
