@@ -95,11 +95,11 @@ function payoutScheduleLabel(m: SettlementMonth, tz: string): string {
   }
   if (m.scheduledPayoutDate) {
     const dateLabel = formatDateOnly(m.scheduledPayoutDate);
-    return m.status === "in_review" ? `Paid after review (scheduled ${dateLabel})` : `Scheduled payout ${dateLabel}`;
+    return m.status === "in_review" ? `Paid after review (by ${dateLabel})` : `Paid by ${dateLabel}`;
   }
   // 아직 승인 전이라 예정일이 정해지지 않았다(명목 지급일은 기간 규칙에서 안내).
-  if (m.status === "in_review") return "In review – the payout date is set once approved";
-  return "The payout date is set after approval";
+  if (m.status === "in_review") return "In review – the payout deadline is set once approved";
+  return "The payout deadline is set after approval";
 }
 
 function formatMonth(key: string): string {
@@ -201,9 +201,9 @@ export default function SettlementTab() {
             </b>{" "}
             (Lessons from the 1st–15th are paid no later than the {PAYOUT_DAY_FIRST_HALF}th of the same month; lessons from the 16th–end of month are paid no later than the {PAYOUT_DAY_SECOND_HALF}th of the next month. e.g. {formatPeriodWithPayoutEn("2026-10-01", "2026-10-15").replace(/, 2026/, "")})
           </div>
-          {settlement.nextPayoutDate && <div>Next payout date: {formatDateOnly(settlement.nextPayoutDate)}</div>}
+          {settlement.nextPayoutDate && <div>Next payout deadline: Paid by {formatDateOnly(settlement.nextPayoutDate)}</div>}
           <div>Pay periods and payout dates follow Pacific Time (America/Los_Angeles).</div>
-          <div>The payout date is the day the Company sends the transfer; when the funds arrive in your account depends on your bank.</div>
+          <div>The payout deadline is the date the money should be in your account. The Company sends the transfer a few business days earlier to allow for bank processing.</div>
           <div>If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day.</div>
           <div>Last updated: {fmtDateTime(settlement.refreshedAt, undefined, tz)}</div>
           <div>Amounts may change until finalized, depending on lesson outcomes and adjustments.</div>
@@ -294,7 +294,7 @@ export default function SettlementTab() {
                     </dl>
                     <dl className="text-[11.5px] text-grey-500 mb-2 space-y-0.5">
                       <div className="flex justify-between">
-                        <dt>Scheduled payout date</dt>
+                        <dt>Paid by</dt>
                         <dd data-testid={`sched-${key}`}>
                           {m.scheduledPayoutDate ? formatDateOnly(m.scheduledPayoutDate) : "Set after approval"}
                         </dd>

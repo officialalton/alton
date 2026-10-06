@@ -202,7 +202,7 @@ describe("SettlementTab — 예정액 요약", () => {
     });
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/The payout date is set after approval/)).toBeInTheDocument();
+    expect(await screen.findByText(/The payout deadline is set after approval/)).toBeInTheDocument();
   });
 
   it("지급 예정일 변경 이력과 은행 직접 송금 사실을 교사도 볼 수 있다", async () => {
@@ -249,13 +249,13 @@ describe("SettlementTab — 예정액 요약", () => {
     });
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/Paid after review \(scheduled Oct 10, 2026\)/)).toBeInTheDocument();
+    expect(await screen.findByText(/Paid after review \(by Oct 10, 2026\)/)).toBeInTheDocument();
   });
 
   it("예정 건은 지급 예정일을 그대로 보여준다", async () => {
     render(<SettlementTab />);
     await openSubtab("history");
-    expect(await screen.findByText(/Scheduled payout Oct 10, 2026/)).toBeInTheDocument();
+    expect(await screen.findByText(/Paid by Oct 10, 2026/)).toBeInTheDocument();
   });
 
   it("정산 내역이 없으면 빈 상태 문구를 보여준다", async () => {

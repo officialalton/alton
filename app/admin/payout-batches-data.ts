@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT, transferRequestDate } from "@/lib/payout/payout-schedule";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // R10 Task C — v3 payout_batches 관리자 화면 데이터 계층.
@@ -53,6 +54,10 @@ export type PayoutBatchListItem = {
   failureReason: string | null;
   // P4-2: 지급 예정일은 저장값이다(화면에서 계산하지 않는다).
   scheduledPayoutDate: string | null;
+  /** 송금 요청 예정일 = 지급 기한 − N영업일(payout_settings, 기본 3). 기한이 없으면 null. */
+  transferRequestDate: string | null;
+  /** 승인이 늦어 계획된 송금 요청일을 지키지 못하는 묶음. */
+  deadlineAtRisk: boolean;
   autoDispatchEnabled: boolean;
   externalTransferRecordedAt: string | null;
   items: PayoutBatchItem[];
@@ -63,7 +68,7 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
   const { data: batches } = await supabase
     .from("payout_batches")
     .select(
-      "id, teacher_id, period_start, period_end, currency, status, created_at, approved_at, paid_at, failure_reason, scheduled_payout_date, auto_dispatch_enabled, external_transfer_recorded_at"
+      "id, teacher_id, period_start, period_end, currency, status, created_at, approved_at, paid_at, failure_reason, scheduled_payout_date, deadline_at_risk, auto_dispatch_enabled, external_transfer_recorded_at"
     )
     .order("created_at", { ascending: false });
   if (!batches || batches.length === 0) return [];
@@ -124,6 +129,10 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
     auditByBatch.set(a.batch_id, list);
   }
 
+  // 송금 요청일 계산에 쓰는 N(영업일). 설정 한 곳(payout_settings)에서 읽고, 없으면 기본값.
+  const { data: settingsRow } = await supabase.from("payout_settings").select("transfer_lead_business_days").eq("id", true).maybeSingle();
+  const lead = Number((settingsRow as { transfer_lead_business_days?: number } | null)?.transfer_lead_business_days ?? PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT);
+
   return batches.map((b) => {
     const batchItems = itemsByBatch.get(b.id) ?? [];
     return {
@@ -141,6 +150,8 @@ export async function loadPayoutBatches(supabase: SupabaseClient): Promise<Payou
       paidAt: b.paid_at,
       failureReason: b.failure_reason ?? null,
       scheduledPayoutDate: (b.scheduled_payout_date as string | null) ?? null,
+      transferRequestDate: b.scheduled_payout_date ? transferRequestDate(b.scheduled_payout_date as string, lead) : null,
+      deadlineAtRisk: b.deadline_at_risk === true,
       autoDispatchEnabled: b.auto_dispatch_enabled !== false,
       externalTransferRecordedAt: (b.external_transfer_recorded_at as string | null) ?? null,
       items: batchItems,

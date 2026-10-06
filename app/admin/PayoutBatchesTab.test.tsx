@@ -54,6 +54,8 @@ const batches: PayoutBatchListItem[] = [
     paidAt: null,
     failureReason: null,
     scheduledPayoutDate: null,
+    transferRequestDate: null,
+    deadlineAtRisk: false,
     autoDispatchEnabled: true,
     externalTransferRecordedAt: null,
     items: [],
@@ -110,6 +112,8 @@ function makeBatch(status: PayoutBatchListItem["status"]): PayoutBatchListItem {
     paidAt: null,
     failureReason: status === "failed" ? "테스트 사유" : null,
     scheduledPayoutDate: status === "approved" ? "2026-10-10" : null,
+    transferRequestDate: null,
+    deadlineAtRisk: false,
     autoDispatchEnabled: true,
     externalTransferRecordedAt: null,
     items: [],
@@ -203,6 +207,15 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
     expect(notice).toHaveTextContent("예정일이 없으면 자동 송금 대상에서 빠집니다");
     fireEvent.click(screen.getByTestId("ensure-date-b-approved"));
     await waitFor(() => expect(ensureDateMock).toHaveBeenCalledWith("b-approved"));
+  });
+
+  it("지급 기한과 송금 요청 예정일을 구분해 보여주고, 기한 위험이면 경고와 즉시 지급 버튼을 보인다", async () => {
+    listMock.mockResolvedValue([approvedBatch({ scheduledPayoutDate: "2026-10-26", transferRequestDate: "2026-10-21", deadlineAtRisk: true })]);
+    render(<PayoutBatchesTab initialBatches={[]} />);
+    fireEvent.click(await screen.findByText("상세"));
+    expect(screen.getByTestId("sched-b-approved")).toHaveTextContent("2026-10-26");
+    expect(screen.getByTestId("request-date-b-approved")).toHaveTextContent("2026-10-21");
+    expect(screen.getByTestId("deadline-risk-b-approved")).toHaveTextContent("기한 위험");
   });
 
   it("예정일이 있으면 미정 안내를 띄우지 않는다", async () => {

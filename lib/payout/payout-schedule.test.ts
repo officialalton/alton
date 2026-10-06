@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { US_BANK_HOLIDAYS, US_BANK_HOLIDAYS_LAST_YEAR } from "./us-bank-holidays";
 import {
   shiftToBusinessDay,
+  transferRequestDate,
+  PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT,
   nominalPayoutDateForPeriodEnd,
   formatPeriodWithPayoutEn as fmtPeriod,
   COMPANY_TIME_ZONE,
@@ -125,11 +127,11 @@ describe("periodForPayoutDate", () => {
 });
 
 describe("period labels", () => {
-  it("표준 반월 기간과 지급일을 'Oct 1–15, 2026 → paid Oct 26'로 표기한다", async () => {
+  it("표준 반월 기간과 지급일을 'Oct 1–15, 2026 → paid by Oct 26'로 표기한다", async () => {
     const { formatPeriodWithPayoutEn, formatPeriodLabelEn } = await import("./payout-schedule");
-    expect(formatPeriodWithPayoutEn("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 26");
-    expect(formatPeriodWithPayoutEn("2026-10-16", "2026-10-31")).toBe("Oct 16–31, 2026 → paid Nov 10");
-    expect(formatPeriodWithPayoutEn("2026-12-16", "2026-12-31")).toBe("Dec 16–31, 2026 → paid Jan 8 (Fri)");
+    expect(formatPeriodWithPayoutEn("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid by Oct 26");
+    expect(formatPeriodWithPayoutEn("2026-10-16", "2026-10-31")).toBe("Oct 16–31, 2026 → paid by Nov 10");
+    expect(formatPeriodWithPayoutEn("2026-12-16", "2026-12-31")).toBe("Dec 16–31, 2026 → paid by Jan 8 (Fri)");
     expect(formatPeriodLabelEn("2026-10-20", "2026-11-03")).toBe("Oct 20 – Nov 3, 2026");
   });
 });
@@ -171,8 +173,8 @@ describe("지급일 보정 — 주말·미국 연방 은행 휴일이면 직전 
     expect(payoutPeriodOfDate("2026-09-03")).toMatchObject({ nominalPayoutDate: "2026-09-26", payoutDate: "2026-09-25" });
   });
   it("라벨: 당겨진 경우 요일 표기", () => {
-    expect(fmtPeriod("2026-09-01", "2026-09-15")).toBe("Sep 1–15, 2026 → paid Sep 25 (Fri)");
-    expect(fmtPeriod("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid Oct 26");
+    expect(fmtPeriod("2026-09-01", "2026-09-15")).toBe("Sep 1–15, 2026 → paid by Sep 25 (Fri)");
+    expect(fmtPeriod("2026-10-01", "2026-10-15")).toBe("Oct 1–15, 2026 → paid by Oct 26");
   });
   it("크론 게이트는 보정된 날에 켜진다(토요일 9/26이 아니라 금요일 9/25)", () => {
     expect(isPayoutDay(new Date("2026-09-25T17:00:00.000Z"))).toBe(true);
@@ -185,5 +187,37 @@ describe("지급일 보정 — 주말·미국 연방 은행 휴일이면 직전 
     expect(US_BANK_HOLIDAYS_LAST_YEAR).toBe(2030);
     for (const y of [2026, 2027, 2028, 2029, 2030]) expect(US_BANK_HOLIDAYS.filter((d) => d.startsWith(String(y))).length).toBeGreaterThanOrEqual(9);
     for (const d of US_BANK_HOLIDAYS) expect([0, 6]).not.toContain(new Date(`${d}T12:00:00Z`).getUTCDay());
+  });
+});
+
+describe("송금 요청일 = 지급 기한 − N영업일", () => {
+  it("기본 3영업일: 월요일 기한은 지난 수요일", () => {
+    expect(transferRequestDate("2026-10-26")).toBe("2026-10-21");
+  });
+  it("주말을 건너뛴다: 금요일 기한 1/8 → 화요일 1/5", () => {
+    expect(transferRequestDate("2027-01-08")).toBe("2027-01-05");
+  });
+  it("은행 휴일을 건너뛴다: Thanksgiving(11/26) 다음 영업일 기한 11/27 → 11/24(화)", () => {
+    expect(transferRequestDate("2026-11-27")).toBe("2026-11-23");
+  });
+  it("Labor Day 9/7 직후: 9/9(수) 기한 → 9/3(목)", () => {
+    expect(transferRequestDate("2026-09-09")).toBe("2026-09-03");
+  });
+  it("기한이 휴일이면 먼저 직전 영업일로 보정한 뒤 센다(11/26 → 11/25 → 11/20)", () => {
+    expect(transferRequestDate("2026-11-26")).toBe("2026-11-20");
+  });
+  it("월말·연말 경계: 12/31 기한 → 12/28", () => {
+    expect(transferRequestDate("2026-12-31")).toBe("2026-12-28");
+    expect(transferRequestDate("2027-01-04")).toBe("2026-12-29");
+  });
+  it("N을 바꿀 수 있다(0은 당일, 5영업일)", () => {
+    expect(transferRequestDate("2026-10-26", 0)).toBe("2026-10-26");
+    expect(transferRequestDate("2026-10-26", 5)).toBe("2026-10-19");
+  });
+  it("DST 전환 주(3월 8일)에도 날짜 산술이 UTC 달력이라 흔들리지 않는다", () => {
+    expect(transferRequestDate("2026-03-10")).toBe("2026-03-05");
+  });
+  it("기본 N은 SQL 설정 기본값과 같다", () => {
+    expect(PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT).toBe(3);
   });
 });
