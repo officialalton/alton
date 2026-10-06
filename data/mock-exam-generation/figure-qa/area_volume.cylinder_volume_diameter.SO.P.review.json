@@ -1,0 +1,23 @@
+{
+ "itemId": "area_volume.cylinder_volume_diameter.SO.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T07:22:59Z",
+ "reviewer": "claude-sonnet-5.5 (math-B session)",
+ "codeHash": "facecd096b5eef5f01df38dcaec376b641dc86e17bebb9c909ef09f4003c6233",
+ "samples": [
+  "area_volume.cylinder_volume_diameter.SO.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "데스크톱·375px PNG 직접 확인: 입체 치수 라벨이 대응 모서리에 놓이고 읽힘, 비례 not-to-scale 주석, 정답이 라벨 값과 일치. 원기둥 치수 라벨이 윗면 타원 호에 근접하나 판독 가능."
+}
