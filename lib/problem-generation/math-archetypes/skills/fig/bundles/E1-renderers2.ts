@@ -7,5 +7,7 @@ import { ITEM as tcTrig } from "../items/right_triangles_trigonometry.trig_ratio
 import { ITEM as tcSin } from "../items/right_triangles_trigonometry.sinusoid_graph.TC.P";
 import { ITEM as tcSinC } from "../items/right_triangles_trigonometry.sinusoid_graph.TC.C";
 import { ITEM as vtSimple } from "../items/probability.simple.VT.P";
+import { ITEM as vtCond } from "../items/probability.conditional.VT.P";
+import { ITEM as vtSeq } from "../items/probability.sequential_without_replacement.VT.P";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq];
