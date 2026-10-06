@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { logout } from "@/app/login/actions";
+import { touchActivityAction } from "./activity-actions";
 import TimezoneSettingsModal from "@/app/components/TimezoneSettingsModal";
 import MobileBottomNav from "@/app/components/MobileBottomNav";
 import HomeTab from "./HomeTab";
@@ -187,6 +188,19 @@ export default function StudentShell({
     if (isFreeMember) return; // 무료 회원은 household 메신저가 없다(S1).
     getMyHouseholdMessengerUnreadCountAction().then(setMessengerUnread).catch(() => {});
   }, [activeTab, isFreeMember]);
+
+  // 2026-10-06 Free Accounts — 학생 포털 진입 하트비트(last_active_at). 10분 이내 재호출은 sessionStorage로 건너뛰고,
+  // 서버(DB)도 10분 쓰로틀을 한 번 더 건다. 실패해도 화면에 영향 없음.
+  useEffect(() => {
+    try {
+      const last = Number(sessionStorage.getItem("alton:activity-ping") ?? 0);
+      if (Date.now() - last < 10 * 60 * 1000) return;
+      sessionStorage.setItem("alton:activity-ping", String(Date.now()));
+    } catch {
+      /* 저장소 접근 불가 — 그대로 호출 */
+    }
+    void touchActivityAction();
+  }, []);
 
   // 2026-09-10(P0-3 2차) — 공용 포털 내비게이션 결함: activeTab이 마운트
   // 시점의 initialTab으로만 초기화돼, 브라우저 뒤로가기/앞으로가기로 URL이

@@ -1,4 +1,4 @@
-import { estimateScore, type ScoreEstimate } from "@/lib/mock-exam/score-estimate";
+import { estimateAttempt } from "@/lib/mock-exam/score-aggregate";
 import type {
   EntitlementStats, ExtendedStats, HabitStats, HomeworkStats, MockStats, OpsStats, RawStatsAggregate,
   SkillStats, StatsTier, TeacherOpsStats, WeakSkill,
@@ -59,19 +59,21 @@ export function computeMockStats(raw: RawStatsAggregate["mock"], tier: StatsTier
   const points = raw.map((a) => {
     const total = a.sections.reduce((s, x) => s + num(x.total), 0);
     const correct = a.sections.reduce((s, x) => s + num(x.correct), 0);
-    let est: ScoreEstimate | null = null;
-    if (a.format === "mst") {
-      est = estimateScore(
-        a.sections.map((x) => ({ section: x.section, total: num(x.total), correct: num(x.correct) })),
-        { rw: a.rwRoute, math: a.mathRoute },
-      );
-    }
+    // 점수 추정은 공유 집계 모듈(lib/mock-exam/score-aggregate.ts)만 거친다 — 관리자 화면과 숫자가 일치해야 한다.
+    const sec = (k: "rw" | "math") => {
+      const x = a.sections.find((y) => y.section === k);
+      return { total: x ? num(x.total) : 0, correct: x ? num(x.correct) : null, complete: !!x, route: k === "rw" ? a.rwRoute : a.mathRoute };
+    };
+    const est = estimateAttempt({
+      attemptId: a.attemptId, examName: "", track: "sat", apSubject: null, format: a.format === "mst" ? "mst" : "fixed",
+      status: "graded", startedAt: null, gradedAt: a.gradedAt, attemptSeq: 1, sections: { rw: sec("rw"), math: sec("math") },
+    });
     return {
       gradedAt: a.gradedAt,
       accuracyPct: pct(correct, total),
-      total: est ? { ...est.total } : null,
-      rw: tier === "family" ? null : est ? { ...est.rw } : null,
-      math: tier === "family" ? null : est ? { ...est.math } : null,
+      total: est.total ? { ...est.total } : null,
+      rw: tier === "family" ? null : est.rw ? { ...est.rw } : null,
+      math: tier === "family" ? null : est.math ? { ...est.math } : null,
     };
   });
   const out: MockStats = { points };

@@ -7,6 +7,7 @@ import type { CreditTransaction, StudentListItem } from "./users-data";
 import SubjectEnrollmentPanel from "./SubjectEnrollmentPanel";
 import type { AdminSubject } from "./subject-data";
 import StaffStudentViews from "@/app/components/StaffStudentViews";
+import StudentMockScoresCard from "./StudentMockScoresCard";
 
 const STATUS_LABEL: Record<string, string> = {
   active: "활성",
@@ -200,6 +201,7 @@ export default function StudentDetailPanel({
           학생 화면 열람 (오버뷰·보드·통계, 읽기 전용)
         </summary>
         <div className="mt-3">
+          <StudentMockScoresCard studentId={student.id} />
           <StaffStudentViews studentId={student.id} />
         </div>
       </details>
