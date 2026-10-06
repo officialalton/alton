@@ -35,9 +35,9 @@ export const SPR_NO_B = "정답이 선택지(그림 4개 중 하나)를 고르�
  */
 export function keyBundle(rng: Rng, o: { stimulus: string; question: string; stem: unknown; correct: { fig: unknown; key: string }; wrongs: { fig: unknown; key: string; rule: string }[]; P: Record<string, number | string>; keyJs: string; semanticJs: string; trace: [string, string][]; variant: string }): Instance {
   if (new Set([o.correct.key, ...o.wrongs.map((w) => w.key)]).size !== 4) throw new GenFail("선택지 키 중복");
-  const table = o.wrongs.map((w) => `${w.key}|${w.rule}`).join(";");
+  const table = o.wrongs.map((w) => `${w.key}|${w.rule}`).join("\n");
   const P = { ...o.P, table };
   const predicateJs = `${o.keyJs}\n${o.semanticJs}\nreturn KEY(c)===EXPECT;`;
-  const diagnoseJs = `${o.keyJs}\nconst T=Object.fromEntries(String(P.table).split(';').map(x=>{ const i=x.lastIndexOf('|'); return [x.slice(0,i), x.slice(i+1)]; })); return T[KEY(c)]||null;`;
+  const diagnoseJs = `${o.keyJs}\nconst T=Object.fromEntries(String(P.table).split('\\n').map(x=>{ const i=x.lastIndexOf('|'); return [x.slice(0,i), x.slice(i+1)]; })); return T[KEY(c)]||null;`;
   return bundle(rng, { stimulus: o.stimulus, question: o.question, stem: o.stem, correct: o.correct.fig, wrong: o.wrongs.map((w) => ({ fig: w.fig, rule: w.rule })), P, predicateJs, diagnoseJs, trace: o.trace, variant: o.variant });
 }

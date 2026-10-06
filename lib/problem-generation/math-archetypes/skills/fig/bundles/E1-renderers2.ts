@@ -24,5 +24,7 @@ import { ITEM as trbSim } from "../items/lines_angles_triangles.similar_triangle
 import { ITEM as trbCong } from "../items/lines_angles_triangles.congruent_triangles.TR.B";
 import { ITEM as lnB } from "../items/linear_functions.construct_equation_from_graph.LN.B";
 import { ITEM as fnB } from "../items/nonlinear_functions.function_transformation.FN.B";
+import { ITEM as cgCirc } from "../items/circles.circle_equation_transform.CG.B";
+import { ITEM as cgImg } from "../items/coordinate_geometry.transformation_image.CG.B";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong, ...lnB, ...fnB];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple, ...vtCond, ...vtSeq, ...tnSim, ...tnNest, ...tnAlt, ...sxPyth, ...sxSpace, ...sxPrism, ...sxCylR, ...sxCylD, ...sxComp, ...lsArea, ...p3Item, ...trbSim, ...trbCong, ...lnB, ...fnB, ...cgCirc, ...cgImg];
