@@ -8,5 +8,6 @@ import { ITEM as tvdResid2 } from "../items/two_variable_data.intercept_residual
 import { ITEM as tvdOutlierP } from "../items/two_variable_data.outlier_influence_on_fit.SC.P";
 import { ITEM as tvdOutlierC } from "../items/two_variable_data.outlier_influence_on_fit.SC.C";
 import { ITEM as tvdModelP } from "../items/two_variable_data.model_choice_linear_quadratic_exponential.SC.P";
+import { ITEM as tvdModelC } from "../items/two_variable_data.model_choice_linear_quadratic_exponential.SC.C";
 
-export const BUNDLE: LArch[] = [...tvdModelP, ...tvdOutlierC, ...tvdOutlierP, ...tvdResid1, ...tvdResid2, ...nfExpLG, ...pctCompLG, ...pctChangeLG];
+export const BUNDLE: LArch[] = [...tvdModelC, ...tvdModelP, ...tvdOutlierC, ...tvdOutlierP, ...tvdResid1, ...tvdResid2, ...nfExpLG, ...pctCompLG, ...pctChangeLG];
