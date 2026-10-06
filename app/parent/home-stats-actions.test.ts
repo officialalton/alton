@@ -24,7 +24,7 @@ describe("getParentChildStats — 학부모 = 학생 본인과 같은 범위", (
   });
   it("자녀가 아니면 거절하고 조회하지 않는다", async () => {
     state.guardian = false;
-    await expect(getParentChildStats("other")).rejects.toThrow("자녀만");
+    await expect(getParentChildStats("other")).rejects.toThrow("You can only view your own child.");
     expect(loader).not.toHaveBeenCalled();
   });
   it("학부모가 아닌 역할은 거절", async () => {

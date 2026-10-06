@@ -14,16 +14,16 @@ describe("과거 수업의 고정 교재 표시", () => {
 
   it("문제만 있는 수업은 오류가 아니다 — 교재가 없다고만 말한다", () => {
     expect(frozenMaterialNotice("completed", "frozen_without_materials")).toBe(
-      "이 수업에는 고정된 교재가 없습니다. 문제만으로 진행한 수업일 수 있습니다."
+      "This lesson has no fixed material. It may have been taught with problems only."
     );
   });
 
   it("고정 기록이 없으면 '없었다'가 아니라 '확인할 수 없다'고 말한다", () => {
     expect(frozenMaterialNotice("live", "no_freeze_record")).toBe(
-      "이 수업의 고정된 교재 구성을 확인할 수 없습니다."
+      "The fixed material for this lesson can't be verified."
     );
     expect(frozenMaterialNotice("completed", "no_freeze_record")).toBe(
-      "이 수업의 고정된 교재 구성을 확인할 수 없습니다."
+      "The fixed material for this lesson can't be verified."
     );
   });
 });

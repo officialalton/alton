@@ -117,7 +117,7 @@ describe("CurriculumTab", () => {
     fireEvent.click(screen.getByText("By Student"));
     fireEvent.click(screen.getByText("SAT Math"));
     expect(loadLegacyCurriculumDetail).toHaveBeenCalledWith("e1");
-    await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Done")).toBeInTheDocument());
   });
 
   it("2026-09-09 UAT 정정 — v3(teacher_assignments+subject_enrollments) 전용 배정 학생도 학생별 탭에서 빈 화면이 아니라 운영 커리큘럼으로 진입한다", async () => {
@@ -181,7 +181,7 @@ describe("CurriculumTab", () => {
         jumpTo={{ studentId: "st1", enrollmentId: "e1" }}
       />
     );
-    await waitFor(() => expect(screen.getByText("완료")).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText("Done")).toBeInTheDocument());
     expect(baseProps.onJumpConsumed).toHaveBeenCalled();
   });
 

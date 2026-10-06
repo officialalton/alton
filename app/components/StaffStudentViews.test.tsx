@@ -33,7 +33,7 @@ describe("StaffStudentViews", () => {
     expect(screen.queryByRole("button", { name: /Delete|Move|Done|Add/ })).toBeNull();
     expect(recordStaffStudentViewAction).toHaveBeenCalledWith("s1", "board");
     fireEvent.click(screen.getByRole("tab", { name: "Stats" }));
-    await screen.findByText("수업 참여율");
+    await screen.findByText("Attendance");
   });
 
   it("선생님: 할 일 추가 폼만(이동·삭제 없음), 통계 탭 없음", async () => {
