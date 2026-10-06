@@ -109,7 +109,7 @@ export function tamperFigure(fig: unknown, mode: TamperMode = "add"): unknown {
   if (mode === "label" || mode === "label_last") {
     // 도형: 숫자가 든 첫(label)·마지막(label_last) 'label'(각·변 라벨)의 마지막 정수를 +1 — 라벨 속 값이 답을 정하는 도형 자료(삼각형·원·다각형·입체)의 변조.
     // 둘을 모두 두는 까닭: 두 직각변을 맞바꿔도 같은 답(둘레·직각변의 합)이 나오는 장면이 있어 첫 라벨만 바꾸면 못 잡는다.
-    const LABEL_KEYS = new Set(["label", "width", "height", "side", "radius", "diameter"]); // 복합 도형(composite)의 치수 문자열도 라벨처럼 변조한다
+    const LABEL_KEYS = new Set(["label", "width", "height", "side", "radius", "diameter", "edge", "length", "slant"]); // 복합 도형(composite)의 치수 문자열도 라벨처럼 변조한다
     const hasDigit = (v: unknown, key = ""): number => (typeof v === "string" ? (LABEL_KEYS.has(key) && /\d/.test(v) ? 1 : 0) : Array.isArray(v) ? v.reduce((n: number, x) => n + hasDigit(x, key), 0) : v && typeof v === "object" ? Object.entries(v as Record<string, unknown>).reduce((n, [k, x]) => n + hasDigit(x, k), 0) : 0);
     const total = hasDigit(fig); if (!total) return fig; const target = mode === "label" ? 1 : total; let seen = 0;
     const walkL = (v: unknown, key = ""): unknown => {

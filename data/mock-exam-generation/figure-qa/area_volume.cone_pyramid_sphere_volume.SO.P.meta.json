@@ -1,0 +1,82 @@
+{
+ "itemId": "area_volume.cone_pyramid_sphere_volume.SO.P",
+ "generatedAt": "2026-10-06T07:28:36.781Z",
+ "codeHash": "224c2b2cb26ff487622123308fbd2356d250602b43ec27e63c0456fd0f36dd78",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/ext-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/geo-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.cone_pyramid_sphere_volume.SO.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/pg-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/so-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.cone_pyramid_sphere_volume.SO.P.png",
+   "mobileFile": "area_volume.cone_pyramid_sphere_volume.SO.P.m375.png",
+   "archetypeId": "av.cone_pyramid_sphere_volume.SO.P.compose_kind",
+   "seed": 11,
+   "signature": "solid:cone",
+   "stimulus": "A teacher shows the class the solid below. In the figure shown, a cone has a labeled base and height.",
+   "question": "Which value gives the volume, written in terms of $\\pi$?",
+   "options": [
+    "$108\\pi$",
+    "$27\\pi$",
+    "$81\\pi$",
+    "$9\\pi$"
+   ],
+   "correctIndex": 1,
+   "answer": "$27\\pi$",
+   "explanation": "(1) 그림에서 반지름 3 과 높이 9 를 읽는다. (2) 밑면의 넓이 = π × 3² = 9π 이다. (3) 기둥의 부피 = 9π × 9 = 81π 이다. (4) 원뿔은 그 3 분의 1 이다. (5) 따라서 27π 이다. 따라서 정답은 $27\\pi$이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.cone_pyramid_sphere_volume.SO.P~chain2.png",
+   "mobileFile": "area_volume.cone_pyramid_sphere_volume.SO.P~chain2.m375.png",
+   "archetypeId": "av.cone_pyramid_sphere_volume.SO.P.chain2",
+   "seed": 11,
+   "signature": "solid:sphere",
+   "stimulus": "A warehouse worker looks at the package shown. All lengths are in centimeters. The figure shows a sphere with its labeled measurement. The sphere is hollow and filled with water exactly halfway.",
+   "question": "Find the volume of the water in terms of $\\pi$.",
+   "options": [
+    "$288\\pi$",
+    "$144\\pi$",
+    "$1152\\pi$",
+    "$72\\pi$"
+   ],
+   "correctIndex": 1,
+   "answer": "$144\\pi$",
+   "explanation": "(1) 그림에서 반지름 6 을 읽는다. (2) 구의 부피 = 4/3 × π × 6³ = 288π 이다. (3) 물은 절반만 찼다. (4) 물의 부피 = 288π ÷ 2 이다. (5) 따라서 144π 이다. 따라서 정답은 $144\\pi$이다.",
+   "structuralIssues": []
+  },
+  {
+   "file": "area_volume.cone_pyramid_sphere_volume.SO.P~repr_shift.png",
+   "mobileFile": "area_volume.cone_pyramid_sphere_volume.SO.P~repr_shift.m375.png",
+   "archetypeId": "av.cone_pyramid_sphere_volume.SO.P.repr_shift",
+   "seed": 11,
+   "signature": "solid:square_pyramid",
+   "stimulus": "Pay attention to the units. A pyramid-shaped monument with a square base is shown, with its measurements labeled. The height, labeled $h$, is three times the length of a base edge.",
+   "question": "The solid holds how much, as a volume?",
+   "options": [
+    "512",
+    "64",
+    "1536",
+    "520"
+   ],
+   "correctIndex": 0,
+   "answer": "512",
+   "explanation": "(1) 그림에서 밑면의 모서리 8 를 읽고 지문에서 높이 = 3 × 모서리 이다. (2) 높이 = 3 × 8 = 24 이다. (3) 밑면의 넓이 = 8² = 64 이다. (4) 부피 = 64 × 24 ÷ 3 이다. (5) 따라서 512 이다. 따라서 정답은 512이다.",
+   "structuralIssues": []
+  }
+ ]
+}
