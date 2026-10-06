@@ -68,10 +68,10 @@ export function evalBasicExpression(expr: string): string {
   if (!cleaned.trim()) return "";
   try {
     const result = Function(`"use strict"; return (${cleaned});`)();
-    if (typeof result !== "number" || !Number.isFinite(result)) return "오류";
+    if (typeof result !== "number" || !Number.isFinite(result)) return "Error";
     return String(Math.round(result * 1e10) / 1e10);
   } catch {
-    return "오류";
+    return "Error";
   }
 }
 

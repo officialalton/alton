@@ -36,18 +36,18 @@ describe("StudentMockExamTab (공개 세트 목록)", () => {
 
   it("미응시·진행 중·완료 상태와 시작·이어서·결과 보기 행동을 보여준다", () => {
     render(<StudentMockExamTab initialOverview={overview} />);
-    expect(screen.getByText("미응시")).toBeInTheDocument();
-    expect(screen.getByText("진행 중")).toBeInTheDocument();
-    expect(screen.getByText(/완료 · 70\/98 정답/)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "시작" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "이어서 하기" }).getAttribute("href")).toBe("/student/mock-exam/a2");
-    expect(screen.getByRole("button", { name: "결과 보기" })).toBeInTheDocument();
+    expect(screen.getByText("Not started")).toBeInTheDocument();
+    expect(screen.getByText("In progress")).toBeInTheDocument();
+    expect(screen.getByText(/Completed · 70\/98 correct/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Start" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Continue" }).getAttribute("href")).toBe("/student/mock-exam/a2");
+    expect(screen.getByRole("button", { name: "View results" })).toBeInTheDocument();
   });
 
   it("시작을 누르면 서버 시작 액션을 부르고 응시 화면으로 이동한다", async () => {
     startAction.mockResolvedValue({ ok: true, value: { attemptId: "new-attempt" } });
     render(<StudentMockExamTab initialOverview={overview} />);
-    fireEvent.click(screen.getByRole("button", { name: "시작" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start" }));
     await waitFor(() => expect(push).toHaveBeenCalledWith("/student/mock-exam/new-attempt"));
     expect(startAction).toHaveBeenCalledWith("s1");
   });
@@ -55,14 +55,14 @@ describe("StudentMockExamTab (공개 세트 목록)", () => {
   it("시작 실패는 오류로 보이고 이동하지 않는다", async () => {
     startAction.mockResolvedValue({ ok: false, error: "공개된 시험만 시작할 수 있습니다." });
     render(<StudentMockExamTab initialOverview={overview} />);
-    fireEvent.click(screen.getByRole("button", { name: "시작" }));
+    fireEvent.click(screen.getByRole("button", { name: "Start" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("공개된 시험만 시작할 수 있습니다.");
     expect(push).not.toHaveBeenCalled();
   });
 
   it("공개 세트가 없으면 빈 상태", () => {
     render(<StudentMockExamTab initialOverview={{ catalog: [], attempts: [] }} />);
-    expect(screen.getByText("공개된 모의고사가 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No mock exams are available yet.")).toBeInTheDocument();
   });
 });
 
@@ -73,9 +73,9 @@ describe("ParentMockExamTab (읽기 전용)", () => {
     const { default: Parent } = await import("@/app/parent/ParentMockExamTab");
     render(<Parent studentId="u" />);
     expect(await screen.findByText("미응시 시험")).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "시작" })).toBeNull();
-    expect(screen.queryByRole("link", { name: "이어서 하기" })).toBeNull();
-    expect(screen.getByRole("link", { name: "상세 결과 보기" }).getAttribute("href")).toBe("/parent/mock-exam/u/a3");
+    expect(screen.queryByRole("button", { name: "Start" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Continue" })).toBeNull();
+    expect(screen.getByRole("link", { name: "View detailed results" }).getAttribute("href")).toBe("/parent/mock-exam/u/a3");
     void ParentMockExamTab;
   });
 });

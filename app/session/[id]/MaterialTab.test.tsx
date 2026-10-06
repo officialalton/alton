@@ -89,7 +89,7 @@ describe("MaterialTab", () => {
       />
     );
     expect(screen.getAllByText("Lesson Overview").length).toBeGreaterThan(0);
-    expect(screen.getByTitle("확인 문제 포함")).toBeInTheDocument();
+    expect(screen.getByTitle("Includes practice problems")).toBeInTheDocument();
   });
 
   it("학생이 오답을 고르면 재도전 메시지가 뜨고, 정답을 고르면 정답 처리된다", async () => {
@@ -118,16 +118,16 @@ describe("MaterialTab", () => {
     );
 
     fireEvent.click(screen.getByText("1"));
-    fireEvent.click(screen.getByText("채점하기"));
+    fireEvent.click(screen.getByText("Check answer"));
     await waitFor(() =>
-      expect(screen.getByText(/오답입니다/)).toBeInTheDocument()
+      expect(screen.getByText(/Incorrect/)).toBeInTheDocument()
     );
 
     await waitFor(() => expect(screen.getByText("0")).toBeInTheDocument());
     fireEvent.click(screen.getByText("0"));
-    fireEvent.click(screen.getByText("채점하기"));
+    fireEvent.click(screen.getByText("Check answer"));
     await waitFor(() =>
-      expect(screen.getByText(/정답입니다/)).toBeInTheDocument()
+      expect(screen.getByText(/Correct!/)).toBeInTheDocument()
     );
   });
 
@@ -141,7 +141,7 @@ describe("MaterialTab", () => {
         tipsVisible={true}
       />
     );
-    expect(screen.getByText("정답: A")).toBeInTheDocument();
+    expect(screen.getByText("Answer: A")).toBeInTheDocument();
     expect(screen.getByText(/학생이 헷갈려하면/)).toBeInTheDocument();
   });
 
@@ -155,7 +155,7 @@ describe("MaterialTab", () => {
         tipsVisible={true}
       />
     );
-    const buttons = screen.getAllByText("사용 처리");
+    const buttons = screen.getAllByText("Mark as used");
     // 섹션 1개 + 문제 1개 = 최소 2개의 명시적 버튼.
     expect(buttons.length).toBeGreaterThanOrEqual(2);
     // 렌더링(탭 열기) 자체는 어떤 mark-used 액션도 호출하지 않는다.
@@ -173,12 +173,12 @@ describe("MaterialTab", () => {
         tipsVisible={true}
       />
     );
-    const [sectionButton] = screen.getAllByText("사용 처리");
+    const [sectionButton] = screen.getAllByText("Mark as used");
     fireEvent.click(sectionButton);
     await waitFor(() =>
       expect(useActions.markMaterialUsedInLesson).toHaveBeenCalledWith("s1", "sec-1")
     );
-    await waitFor(() => expect(screen.getAllByText("사용 처리됨").length).toBeGreaterThan(0));
+    await waitFor(() => expect(screen.getAllByText("Marked as used").length).toBeGreaterThan(0));
   });
 
   it("R9 Task 3: 학생에게는 '사용 처리' 버튼이 보이지 않는다", () => {
@@ -191,7 +191,7 @@ describe("MaterialTab", () => {
         tipsVisible={true}
       />
     );
-    expect(screen.queryByText("사용 처리")).not.toBeInTheDocument();
+    expect(screen.queryByText("Mark as used")).not.toBeInTheDocument();
   });
 
   it("교재가 배정되지 않은 세션에서는 안내 문구를 보여준다", () => {
@@ -205,7 +205,7 @@ describe("MaterialTab", () => {
       />
     );
     expect(
-      screen.getByText("이 세션에는 아직 배정된 교재가 없습니다.")
+      screen.getByText("No material has been assigned to this session yet.")
     ).toBeInTheDocument();
   });
 
@@ -243,7 +243,7 @@ describe("MaterialTab", () => {
         tipsVisible={false}
       />
     );
-    const textarea = screen.getByPlaceholderText("답안을 입력하세요") as HTMLTextAreaElement;
+    const textarea = screen.getByPlaceholderText("Write your answer") as HTMLTextAreaElement;
     Object.defineProperty(textarea, "scrollHeight", { value: 200, configurable: true });
     fireEvent.change(textarea, { target: { value: "긴 답안입니다" } });
     expect(textarea.style.height).toBe("200px");
@@ -270,7 +270,7 @@ describe("파일 자료", () => {
     );
     expect(screen.getByTestId("asset-viewer")).toHaveTextContent("개념 설명.pdf");
     expect(screen.getByTestId("asset-viewer").dataset.session).toBe("s1");
-    expect(screen.queryByText("교재 목차")).not.toBeInTheDocument();
+    expect(screen.queryByText("Contents")).not.toBeInTheDocument();
   });
 
   it("HTML 섹션과 함께 있으면 섹션 아래에 이어서 보인다", () => {

@@ -108,7 +108,7 @@ export async function requestUniversityRefresh(universityId: string): Promise<Re
     .insert({ university_id: universityId, requested_by: user.id, requested_role: profile?.role ?? null })
     .select(JOB_COLUMNS)
     .single();
-  if (insertError || !inserted) throw new Error(insertError?.message ?? "갱신 요청 생성 실패");
+  if (insertError || !inserted) throw new Error(insertError?.message ?? "Failed to create refresh request");
 
   // 4) 전역 동시 실행 수 제한 — 초과 시 'queued'로 남겨두고 여기서 실행하지 않는다
   //    (이 세션에는 별도 백그라운드 워커/폴러가 없다 — 다음 세션 결정 필요 항목 참고).

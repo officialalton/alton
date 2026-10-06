@@ -34,22 +34,22 @@ import type { MyReportStatus } from "@/lib/problem-error-reports/labels";
 import { problemText } from "@/lib/problem-figures/label-rule";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
-  easy: "쉬움",
-  medium: "보통",
-  hard: "어려움",
+  easy: "Easy",
+  medium: "Medium",
+  hard: "Hard",
 };
 
 const FORMAT_LABEL: Record<SessionProblem["format"], string> = {
-  mc: "객관식",
-  spr: "숫자 입력",
-  essay: "서술형",
-  math: "풀이형",
+  mc: "Multiple choice",
+  spr: "Numeric entry",
+  essay: "Written response",
+  math: "Worked solution",
 };
 
 const GRADE_LABEL: Record<ProblemGrade, string> = {
-  correct: "정답",
-  partial: "부분 정답",
-  incorrect: "오답",
+  correct: "Correct",
+  partial: "Partially correct",
+  incorrect: "Incorrect",
 };
 
 /**
@@ -82,7 +82,7 @@ export default function ProblemsPanel({
   /** 수업 문제 / 과제 문제(2026-09-14 과제 v3 통일) — 풀이·채점 흐름은 같고 말과 출처만 다르다. */
   source?: ProblemSource;
 }) {
-  const noun = source === "homework" ? "과제" : "문제";
+  const noun = source === "homework" ? "Assignment" : "Problem";
 
   // 2026-09-14 UAT — 문제 화면 전체(여백 포함)에 교사·학생 공유 필기를 얹는다. PDF 페이지 필기와 같은 레이어이며
   // 대상만 (수업, 문제)다. 수업 문제와 과제 문제가 같은 패널이라 과제 탭에서도 그대로 된다.
@@ -227,7 +227,7 @@ export default function ProblemsPanel({
       setOpenId(problemId);
       setAttempts(await listProblemAttempts({ sessionId, studentId, problemId, source }));
     } catch (e) {
-      setError(e instanceof Error ? e.message : "풀이판을 열지 못했습니다.");
+      setError(e instanceof Error ? e.message : "Couldn't open the work board.");
     } finally {
       setBoardBusy(false);
     }
@@ -368,12 +368,12 @@ export default function ProblemsPanel({
   }
 
   function statusLabel(p: SessionProblem): string {
-    if (p.planned) return "수업 전 미리보기";
-    if (p.graded) return `채점 완료 · ${p.grade ? GRADE_LABEL[p.grade] : ""}`.trim();
-    if (p.format === "mc") return p.myChoice !== null ? "답 저장됨 · 채점 대기" : "아직 풀지 않음";
-    if (p.format === "spr") return p.myText ? "답 저장됨 · 채점 대기" : "아직 풀지 않음";
-    if (p.format === "essay") return p.myText?.trim() ? "쓰는 중 · 채점 대기" : "아직 풀지 않음";
-    return p.solved ? "제출함 · 채점 대기" : p.attempts > 0 ? "푸는 중" : "아직 풀지 않음";
+    if (p.planned) return "Preview before lesson";
+    if (p.graded) return `Graded · ${p.grade ? GRADE_LABEL[p.grade] : ""}`.trim();
+    if (p.format === "mc") return p.myChoice !== null ? "Answer saved · awaiting grading" : "Not started";
+    if (p.format === "spr") return p.myText ? "Answer saved · awaiting grading" : "Not started";
+    if (p.format === "essay") return p.myText?.trim() ? "In progress · awaiting grading" : "Not started";
+    return p.solved ? "Submitted · awaiting grading" : p.attempts > 0 ? "In progress" : "Not started";
   }
 
   function tocBadge(p: SessionProblem): { text: string; className: string } | null {
@@ -385,11 +385,11 @@ export default function ProblemsPanel({
         className: p.grade === "correct" ? "text-green" : p.grade === "partial" ? "text-amber-600" : "text-red",
       };
     }
-    if (p.graded) return { text: "채점됨", className: "text-green" };
+    if (p.graded) return { text: "Graded", className: "text-green" };
     const answered =
       p.format === "mc" ? p.myChoice !== null : p.format === "spr" || p.format === "essay" ? Boolean(p.myText?.trim()) : p.solved;
-    if (answered) return { text: "제출", className: "text-ink" };
-    if (p.attempts > 0) return { text: "푸는 중", className: "text-grey-500" };
+    if (answered) return { text: "Submitted", className: "text-ink" };
+    if (p.attempts > 0) return { text: "In progress", className: "text-grey-500" };
     return null;
   }
 
@@ -397,12 +397,12 @@ export default function ProblemsPanel({
     return (
       <div className="max-w-[760px] mx-auto px-6 py-12 text-center">
         <p className="text-[14px] font-bold text-ink mb-1">
-          {source === "homework" ? "아직 발급된 과제가 없습니다" : "이 수업에는 문제가 없습니다"}
+          {source === "homework" ? "No assignments yet" : "This lesson has no problems"}
         </p>
         <p className="text-[12.5px] text-grey-500">
           {source === "homework"
-            ? "선생님이 발급하면 여기에 나타납니다."
-            : "선생님이 준비한 문제가 수업 시작 시점에 여기에 담깁니다."}
+            ? "Assignments will appear here once your teacher issues them."
+            : "Problems your teacher prepared will appear here when the lesson starts."}
         </p>
       </div>
     );
@@ -411,11 +411,11 @@ export default function ProblemsPanel({
   return (
     <div className="md:grid md:grid-cols-[200px_1fr]">
       <nav
-        aria-label={`${noun} 목차`}
+        aria-label={`${noun} list`}
         className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto"
       >
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-          {noun} 목차
+          {noun} list
         </div>
         {!anyPlanned && (
           // 점수 — 정답만 센다(부분 정답은 세지 않는다). 2026-09-14 UAT.
@@ -423,8 +423,8 @@ export default function ProblemsPanel({
             data-testid="problem-score"
             className="hidden md:block text-[12px] font-bold text-ink px-2.5 py-2 mb-2 border-b border-grey-200"
           >
-            맞은 {noun} <span className="text-green">{problems.filter((p) => p.graded && p.grade === "correct").length}</span> / {problems.length}
-            <span className="text-grey-500 font-semibold"> · 채점 {problems.filter((p) => p.graded).length}</span>
+            Correct <span className="text-green">{problems.filter((p) => p.graded && p.grade === "correct").length}</span> / {problems.length}
+            <span className="text-grey-500 font-semibold"> · graded {problems.filter((p) => p.graded).length}</span>
           </div>
         )}
         {problems.map((p, idx) => {
@@ -478,7 +478,7 @@ export default function ProblemsPanel({
                   savedIds[currentProblem.problemId] ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
                 }`}
               >
-                {savedIds[currentProblem.problemId] ? "저장됨" : "+ 문제 저장"}
+                {savedIds[currentProblem.problemId] ? "Saved" : "+ Save problem"}
               </button>
             )}
             {isStudent && highlightSupported && (
@@ -514,7 +514,7 @@ export default function ProblemsPanel({
               }}
               className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
             >
-              ← 이전 {noun}
+              ← Previous {noun.toLowerCase()}
             </button>
             <button
               type="button"
@@ -525,7 +525,7 @@ export default function ProblemsPanel({
               }}
               className="text-[12px] font-bold px-3 py-1 rounded border border-grey-200 disabled:opacity-40"
             >
-              다음 {noun} →
+              Next {noun.toLowerCase()} →
             </button>
           </div>
         </div>
@@ -569,7 +569,7 @@ export default function ProblemsPanel({
                   {statusLabel(p)}
                 </span>
                 {p.attempts > 1 && (
-                  <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts}번 풀어봄</span>
+                  <span className="text-[10.5px] font-semibold text-grey-500">{p.attempts} attempts</span>
                 )}
               </header>
 
@@ -587,19 +587,19 @@ export default function ProblemsPanel({
               {p.graded && !isTeacherLike && p.errorAdjusted && (
                 <div role="note" data-testid="problem-error-adjusted" className="mb-4 rounded-xl border border-green bg-green/10 px-4 py-2.5 text-[12.5px] font-semibold text-green">
                   {p.errorAdjustmentPending
-                    ? "문항 오류가 확인되어 선생님이 채점을 다시 확인하고 있어요."
-                    : "문항 오류로 채점이 조정되었습니다."}
+                    ? "A problem error was confirmed; your teacher is re-checking the grade."
+                    : "The grade was adjusted because of a problem error."}
                 </div>
               )}
               {isTeacher && p.errorAdjustmentPending && (
                 <div role="note" data-testid="problem-error-pending" className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-yellow bg-yellow-bg px-4 py-2.5 text-[12.5px] font-semibold text-ink">
-                  <span>조정 대상 — 문항 오류 판정으로 이 풀이의 자동 채점이 정답으로 바뀌었습니다. 직접 채점한 결과는 그대로이니 다시 채점해 주세요.</span>
+                  <span>Needs review — this response was auto-marked correct after a problem-error ruling. Your manual grade is unchanged, so please re-grade it.</span>
                   <button
                     type="button"
                     onClick={() => setRegrading((prev) => new Set(prev).add(p.problemId))}
                     className="rounded-lg border-[1.5px] border-ink px-3 py-1 text-[12px] font-bold"
                   >
-                    채점 다시 확인
+                    Re-check grade
                   </button>
                 </div>
               )}
@@ -611,7 +611,7 @@ export default function ProblemsPanel({
                     className="learning-body text-[15px] sm:text-[16px] leading-[1.8] text-ink mb-5"
                   />
                 ) : (
-                  <p className="text-[13px] text-grey-500 mb-4">지문이 없는 문제입니다.</p>
+                  <p className="text-[13px] text-grey-500 mb-4">This problem has no passage.</p>
                 )}
 
                 {/* 그래프/도형 선택지(figure_choice)는 선택지 칸 안에 그림을 그린다 — 위에 따로 그리지 않는다.
@@ -632,7 +632,7 @@ export default function ProblemsPanel({
               </div>
               {isStudent && highlightMode && highlightSupported && p.problemId === currentProblem?.problemId && (
                 <button type="button" onClick={() => highlightObjRef.current?.clear()} className="mb-3 text-[11px] font-semibold text-grey-500 underline">
-                  하이라이트 지우기
+                  Clear highlights
                 </button>
               )}
 
@@ -683,10 +683,10 @@ export default function ProblemsPanel({
                           ) : (
                             <LearningText text={opt} className="learning-body inline" />
                           )}
-                          {correct && <span className="ml-2 text-[11px] font-bold text-green">정답</span>}
+                          {correct && <span className="ml-2 text-[11px] font-bold text-green">Correct</span>}
                           {mine && (
                             <span className="ml-2 text-[11px] font-bold text-grey-500">
-                              {isStudent ? "내 답" : "학생 답"}
+                              {isStudent ? "My answer" : "Student's answer"}
                             </span>
                           )}
                         </button>
@@ -699,20 +699,20 @@ export default function ProblemsPanel({
               {isSpr && !p.planned && (
                 <div className="mb-4" data-testid="spr-answer">
                   <p className="text-[11.5px] text-grey-500 mb-1.5" data-testid="spr-input-hint">
-                    정수, 소수, 또는 분수로 입력하세요(예: 3.5 또는 7/2). 대분수는 입력할 수 없습니다.
+                    Enter an integer, decimal, or fraction (e.g. 3.5 or 7/2). Mixed numbers are not accepted.
                   </p>
                   <div className="flex flex-wrap items-center gap-2">
-                    <label className="text-[12.5px] font-bold text-ink" htmlFor={`spr-${p.problemId}`}>답</label>
+                    <label className="text-[12.5px] font-bold text-ink" htmlFor={`spr-${p.problemId}`}>Answer</label>
                     <input
                       id={`spr-${p.problemId}`}
-                      aria-label="숫자 답"
+                      aria-label="Numeric answer"
                       value={sprDraft[p.problemId] ?? p.myText ?? ""}
                       disabled={!isStudent || p.graded || busy}
                       onChange={(e) => setSprDraft((d) => ({ ...d, [p.problemId]: e.target.value }))}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") void saveSpr(p);
                       }}
-                      placeholder="예: 7/2 또는 3.5"
+                      placeholder="e.g. 7/2 or 3.5"
                       inputMode="decimal"
                       className="text-[14px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 w-[160px] disabled:bg-grey-100"
                     />
@@ -723,16 +723,16 @@ export default function ProblemsPanel({
                         onClick={() => void saveSpr(p)}
                         className="text-[12.5px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
                       >
-                        답 저장
+                        Save answer
                       </button>
                     )}
-                    {p.myText && !isStudent && <span className="text-[12px] text-grey-500">학생 답</span>}
+                    {p.myText && !isStudent && <span className="text-[12px] text-grey-500">Student&apos;s answer</span>}
                     {answerShown(p) && p.acceptedAnswers && p.acceptedAnswers.length > 0 && (
-                      <span className="text-[12.5px] font-bold text-green">정답: {p.acceptedAnswers.join(" 또는 ")}</span>
+                      <span className="text-[12.5px] font-bold text-green">Answer: {p.acceptedAnswers.join(" or ")}</span>
                     )}
                   </div>
                   <p className="text-[11.5px] text-grey-500 mt-1.5">
-                    정수·소수·분수(7/2) 가능. 양수 5자, 음수 6자 안. 기호($, %, 쉼표)는 빼고. 대분수는 가분수나 소수로.
+                    Integers, decimals, or fractions (7/2). Up to 5 characters for positive values, 6 for negative. No symbols ($, %, commas). Write mixed numbers as improper fractions or decimals.
                   </p>
                 </div>
               )}
@@ -740,55 +740,55 @@ export default function ProblemsPanel({
               {isSpr && isStudent && !p.planned && !p.graded && (
                 <p className="text-[12px] text-grey-500 mb-4">
                   {savedChoiceId === p.problemId
-                    ? "답이 저장되었습니다. 채점 전까지는 바꿀 수 있습니다."
-                    : "답을 적고 저장하세요."}{" "}
-                  선생님이 채점하면 정답과 해설이 열립니다.
+                    ? "Your answer is saved. You can change it until it's graded."
+                    : "Enter your answer and save it."}{" "}
+                  The answer and explanation unlock once your teacher grades it.
                 </p>
               )}
 
               {isMc && isStudent && !p.planned && !p.graded && (
                 <p className="text-[12px] text-grey-500 mb-4">
                   {savedChoiceId === p.problemId
-                    ? "답이 저장되었습니다. 채점 전까지는 다른 선택지로 바꿀 수 있습니다."
-                    : "선택지를 고르면 답이 저장됩니다."}{" "}
-                  선생님이 채점하면 정답과 해설이 열립니다.
+                    ? "Your answer is saved. You can pick a different choice until it's graded."
+                    : "Pick a choice to save your answer."}{" "}
+                  The answer and explanation unlock once your teacher grades it.
                 </p>
               )}
               {isEssay && !p.planned && (
                 <div className="mb-4" data-testid="essay-answer">
                   <label className="text-[12.5px] font-bold text-ink block mb-1" htmlFor={`essay-${p.problemId}`}>
-                    답안
+                    Response
                     {isStudent && !p.graded && (
                       <span className="ml-2 text-[11.5px] font-normal text-grey-500">
                         {essaySaved[p.problemId] === "saving"
-                          ? "저장 중…"
+                          ? "Saving…"
                           : essaySaved[p.problemId] === "error"
-                            ? "저장 실패 — 다시 입력하면 다시 저장합니다"
+                            ? "Save failed — keep typing to retry"
                             : essaySaved[p.problemId] === "saved"
-                              ? "저장됨"
-                              : "쓰는 대로 저장됩니다"}
+                              ? "Saved"
+                              : "Saves as you type"}
                       </span>
                     )}
-                    {!isStudent && <span className="ml-2 text-[11.5px] font-normal text-grey-500">학생이 쓴 답</span>}
+                    {!isStudent && <span className="ml-2 text-[11.5px] font-normal text-grey-500">Student&apos;s response</span>}
                   </label>
                   <textarea
                     id={`essay-${p.problemId}`}
-                    aria-label="서술형 답"
+                    aria-label="Written response"
                     value={essayDraft[p.problemId] ?? p.myText ?? ""}
                     readOnly={!isStudent || p.graded}
                     onChange={(e) => editEssay(p, e.target.value)}
-                    placeholder={isStudent ? "여기에 답을 쓰세요." : "학생이 아직 답을 쓰지 않았습니다."}
+                    placeholder={isStudent ? "Write your response here." : "The student hasn't written a response yet."}
                     rows={Math.min(24, Math.max(6, (essayDraft[p.problemId] ?? p.myText ?? "").split("\n").length + 2))}
                     className="w-full text-[14px] leading-[1.7] border-[1.5px] border-grey-200 rounded-xl px-4 py-3 read-only:bg-grey-100 disabled:bg-grey-100"
                   />
                   {isStudent && !p.graded && (
-                    <p className="text-[12px] text-grey-500 mt-1.5">선생님이 채점하면 정답과 해설이 열립니다.</p>
+                    <p className="text-[12px] text-grey-500 mt-1.5">The answer and explanation unlock once your teacher grades it.</p>
                   )}
                 </div>
               )}
               {isMath && isStudent && !p.planned && !p.graded && (
                 <p className="text-[12px] text-grey-500 mb-4">
-                  풀이판에 풀고 제출하세요. 선생님이 채점하면 정답과 해설이 열립니다.
+                  Work it out on the board and submit. The answer and explanation unlock once your teacher grades it.
                 </p>
               )}
 
@@ -808,7 +808,7 @@ export default function ProblemsPanel({
               {p.graded && !isTeacherLike && (
                 <div className="bg-grey-100 rounded-xl px-4 py-3 mb-4">
                   <div className="text-[12.5px] font-bold text-ink">
-                    선생님 채점: {p.grade ? GRADE_LABEL[p.grade] : ""}
+                    Teacher&apos;s grade: {p.grade ? GRADE_LABEL[p.grade] : ""}
                   </div>
                   {p.gradeComment && <p className="text-[13px] text-ink mt-1 whitespace-pre-wrap">{p.gradeComment}</p>}
                 </div>
@@ -825,20 +825,20 @@ export default function ProblemsPanel({
                   aria-pressed={revealed.has(p.problemId)}
                   className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink mb-4"
                 >
-                  {revealed.has(p.problemId) ? "정답·해설 숨기기" : "정답·해설 보기"}
+                  {revealed.has(p.problemId) ? "Hide answer & explanation" : "Show answer & explanation"}
                 </button>
               )}
 
               {answerShown(p) && p.explanation && (
                 <div className="bg-grey-100 rounded-xl px-4 py-3 mb-4">
-                  <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">해설</div>
+                  <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">Explanation</div>
                   <LearningText text={p.explanation} className="learning-body text-[13.5px] leading-[1.75] text-ink" />
                 </div>
               )}
 
               {p.planned ? (
                 <p className="text-[12px] text-grey-500">
-                  수업 시작 전 미리보기입니다. 풀이와 제출은 수업에서 합니다.
+                  This is a preview before the lesson. Solving and submitting happen during the lesson.
                 </p>
               ) : (
                 <>
@@ -850,7 +850,7 @@ export default function ProblemsPanel({
                         onClick={() => (isOpen ? setOpenId(null) : void openBoard(p.problemId))}
                         className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                       >
-                        {isOpen ? "풀이판 닫기" : "✏️ 풀이판 열기"}
+                        {isOpen ? "Close work board" : "✏️ Open work board"}
                       </button>
                     )}
                     {isMath && isOpen && isStudent && (
@@ -860,7 +860,7 @@ export default function ProblemsPanel({
                           onClick={() => void openBoard(p.problemId, true)}
                           className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink disabled:opacity-50"
                         >
-                          다시 풀기
+                          Try again
                         </button>
                         {board && !board.submitted && (
                           <button
@@ -873,7 +873,7 @@ export default function ProblemsPanel({
                                 // 제출하지 않는다 — 저장 안 된 풀이가 "제출 완료"로 보이면 안 된다.
                                 const saved = await boardRef.current?.flush();
                                 if (saved === false) {
-                                  setError("필기를 저장하지 못해 제출하지 않았습니다. 연결을 확인한 뒤 다시 제출하세요.");
+                                  setError("Your work couldn't be saved, so it wasn't submitted. Check your connection and submit again.");
                                   return;
                                 }
                                 await submitProblemWork(board.workId, {});
@@ -882,14 +882,14 @@ export default function ProblemsPanel({
                                 notifyChanged();
                                 void refresh();
                               } catch (e) {
-                                setError(e instanceof Error ? e.message : "제출하지 못했습니다.");
+                                setError(e instanceof Error ? e.message : "Couldn't submit.");
                               } finally {
                                 setBusy(false);
                               }
                             }}
                             className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
                           >
-                            풀이 제출
+                            Submit work
                           </button>
                         )}
                       </>
@@ -898,7 +898,7 @@ export default function ProblemsPanel({
 
                   {isMath && isOpen && board && board.workId === "" && (
                     <p className="mt-4 text-[12.5px] text-grey-500">
-                      학생이 아직 이 문제를 풀기 시작하지 않았습니다. 학생이 풀이판을 열면 여기에서 볼 수 있고, 그때 피드백을 남길 수 있습니다.
+                      The student hasn&apos;t started this problem yet. Once they open the work board you&apos;ll see it here and can leave feedback.
                     </p>
                   )}
 
@@ -907,7 +907,7 @@ export default function ProblemsPanel({
                       {isMath && attempts.length > 1 && (
                         <div className="flex flex-wrap items-center gap-1.5 mb-2">
                           {/* "회차"는 커리큘럼 회차를 가리키는 말이라 여기서는 쓰지 않는다 — 같은 문제를 몇 번째로 푸는지다. */}
-                          <span className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">이전 풀이</span>
+                          <span className="text-[11px] font-bold text-grey-300 uppercase tracking-wide">Previous attempts</span>
                           {attempts.map((a) => (
                             <button
                               key={a.workId}
@@ -918,7 +918,7 @@ export default function ProblemsPanel({
                                 (board.workId === a.workId ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
                               }
                             >
-                              {a.attemptNo}번째
+                              Attempt {a.attemptNo}
                             </button>
                           ))}
                         </div>
@@ -939,11 +939,11 @@ export default function ProblemsPanel({
                         viewerUserId={viewerUserId}
                         readOnlyReason={
                           viewerRole === "parent"
-                            ? "보호자는 읽기 전용입니다"
+                            ? "Parents have read-only access"
                             : isStudent && board.submitted
-                              ? "제출한 풀이는 고칠 수 없습니다 — 다시 풀기로 새 풀이를 시작하세요"
+                              ? "Submitted work can't be edited — use Try again to start a new attempt"
                               : isStudent && p.graded
-                                ? "채점이 끝난 문제입니다"
+                                ? "This problem has been graded"
                                 : undefined
                         }
                       />
@@ -952,47 +952,47 @@ export default function ProblemsPanel({
 
                   {/* 교사 채점 */}
                   {isTeacher && (
-                    <section aria-label="채점" className="mt-6 border-t border-grey-200 pt-4">
-                      <div className="text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider mb-2">채점</div>
+                    <section aria-label="Grading" className="mt-6 border-t border-grey-200 pt-4">
+                      <div className="text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider mb-2">Grading</div>
                       {!p.latestWorkId ? (
-                        <p className="text-[12.5px] text-grey-500">학생이 아직 이 문제를 풀지 않았습니다.</p>
+                        <p className="text-[12.5px] text-grey-500">The student hasn&apos;t answered this problem yet.</p>
                       ) : (
                         <>
                           {isSpr && (
                             <p className="text-[13px] text-ink mb-2">
-                              학생 답: <b>{p.myText ?? "없음"}</b>
+                              Student&apos;s answer: <b>{p.myText ?? "none"}</b>
                               {p.autoCorrect !== null && (
                                 <>
                                   {" "}
-                                  · 자동 채점:{" "}
-                                  <b className={p.autoCorrect ? "text-green" : "text-red"}>{p.autoCorrect ? "정답" : "오답"}</b>
+                                  · Auto-graded:{" "}
+                                  <b className={p.autoCorrect ? "text-green" : "text-red"}>{p.autoCorrect ? "Correct" : "Incorrect"}</b>
                                 </>
                               )}
                             </p>
                           )}
                           {isMc && (
                             <p className="text-[13px] text-ink mb-2">
-                              학생 답: <b>{p.myChoice !== null ? p.myChoice + 1 : "없음"}</b>
+                              Student&apos;s answer: <b>{p.myChoice !== null ? p.myChoice + 1 : "none"}</b>
                               {p.autoCorrect !== null && (
                                 <>
                                   {" "}
-                                  · 자동 채점:{" "}
-                                  <b className={p.autoCorrect ? "text-green" : "text-red"}>{p.autoCorrect ? "정답" : "오답"}</b>
+                                  · Auto-graded:{" "}
+                                  <b className={p.autoCorrect ? "text-green" : "text-red"}>{p.autoCorrect ? "Correct" : "Incorrect"}</b>
                                 </>
                               )}
                             </p>
                           )}
                           {isEssay && (
-                            <p className="text-[12px] text-grey-500 mb-2">학생 답은 위 답안 칸에 있습니다.</p>
+                            <p className="text-[12px] text-grey-500 mb-2">The student&apos;s response is in the response box above.</p>
                           )}
                           {isMath && !isOpen && (
-                            <p className="text-[12px] text-grey-500 mb-2">풀이는 위 &apos;풀이판 열기&apos;로 볼 수 있습니다.</p>
+                            <p className="text-[12px] text-grey-500 mb-2">Use &apos;Open work board&apos; above to see the student&apos;s work.</p>
                           )}
 
                           {p.graded && !regrading.has(p.problemId) ? (
                             <div className="flex flex-wrap items-center gap-2">
                               <span className="text-[12.5px] font-bold text-ink">
-                                채점 완료 · {p.grade ? GRADE_LABEL[p.grade] : ""}
+                                Graded · {p.grade ? GRADE_LABEL[p.grade] : ""}
                               </span>
                               {p.gradeComment && <span className="text-[12.5px] text-grey-500">“{p.gradeComment}”</span>}
                               <button
@@ -1006,12 +1006,12 @@ export default function ProblemsPanel({
                                 }}
                                 className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-grey-200 text-ink"
                               >
-                                다시 채점
+                                Re-grade
                               </button>
                             </div>
                           ) : showGradeForm ? (
                             <div>
-                              <div className="flex flex-wrap gap-1.5 mb-2" role="group" aria-label="채점 결과">
+                              <div className="flex flex-wrap gap-1.5 mb-2" role="group" aria-label="Grade">
                                 {(["correct", "partial", "incorrect"] as ProblemGrade[]).map((g) => {
                                   const selected = draft.grade === g;
                                   return (
@@ -1033,13 +1033,13 @@ export default function ProblemsPanel({
                                 })}
                                 {(isMc || isSpr) && draft.grade === null && p.autoCorrect !== null && (
                                   <span className="text-[11.5px] text-grey-500 self-center">
-                                    고르지 않으면 자동 채점({p.autoCorrect ? "정답" : "오답"})대로 확정합니다.
+                                    If you don&apos;t choose, the auto-grade ({p.autoCorrect ? "correct" : "incorrect"}) will be used.
                                   </span>
                                 )}
                               </div>
                               <textarea
-                                aria-label="선생님 한마디"
-                                placeholder="학생에게 남길 한마디(선택)"
+                                aria-label="Teacher's note"
+                                placeholder="A note for the student (optional)"
                                 value={draft.comment}
                                 onChange={(e) =>
                                   setGradeDraft((d) => ({ ...d, [p.problemId]: { ...draft, comment: e.target.value } }))
@@ -1058,7 +1058,7 @@ export default function ProblemsPanel({
                                   onClick={() => void grade(p)}
                                   className="text-[12.5px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
                                 >
-                                  채점 완료
+                                  Finish grading
                                 </button>
                                 {regrading.has(p.problemId) && (
                                   <button
@@ -1072,11 +1072,11 @@ export default function ProblemsPanel({
                                     }
                                     className="text-[12.5px] font-bold px-4 py-2 rounded-lg border-[1.5px] border-grey-200 text-ink"
                                   >
-                                    취소
+                                    Cancel
                                   </button>
                                 )}
                               </div>
-                              <p className="text-[11.5px] text-grey-500 mt-2">채점을 끝내면 학생에게 정답과 해설이 열립니다.</p>
+                              <p className="text-[11.5px] text-grey-500 mt-2">Finishing grading unlocks the answer and explanation for the student.</p>
                             </div>
                           ) : null}
                         </>

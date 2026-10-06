@@ -265,7 +265,7 @@ export default function StudentShell({
             <div className="w-7 h-7 rounded-full bg-white/10 text-white font-extrabold text-[12px] flex items-center justify-center shrink-0">
               {studentName.charAt(0)}
             </div>
-            <span className="flex-1 text-left truncate">{studentName} 학생님</span>
+            <span className="flex-1 text-left truncate">{studentName}</span>
             <NavIcon name="settings" className="w-4 h-4 shrink-0 text-[#97A9C8]" />
           </button>
           {accountMenuOpen && (
@@ -277,7 +277,7 @@ export default function StudentShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                수강권(Credits)
+                Credits
               </button>
               <button
                 onClick={() => {
@@ -286,12 +286,12 @@ export default function StudentShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                시간대 설정
+                Time zone
               </button>
               <div className="h-px bg-brand-border my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
-                  로그아웃
+                  Log out
                 </button>
               </form>
             </div>
@@ -316,9 +316,9 @@ export default function StudentShell({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="sticky top-0 flex items-center justify-between border-b border-brand-border bg-white px-5 py-3">
-              <span className="text-[14px] font-bold text-navy">수강권(Credits)</span>
+              <span className="text-[14px] font-bold text-navy">Credits</span>
               <button type="button" onClick={() => setCreditsModalOpen(false)} className="text-[12px] font-bold text-brand-body underline">
-                닫기
+                Close
               </button>
             </div>
             <div className="p-5">
@@ -345,7 +345,7 @@ export default function StudentShell({
             onClick={() => setAccountMenuOpen((v) => !v)}
             className="text-[13px] font-semibold text-navy"
           >
-            {studentName} 학생님 ▾
+            {studentName} ▾
           </button>
           {accountMenuOpen && (
             <div className="absolute top-full right-4 mt-1 w-40 bg-white border border-brand-border rounded-xl shadow-lg py-1.5 z-30">
@@ -356,7 +356,7 @@ export default function StudentShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                수강권(Credits)
+                Credits
               </button>
               <button
                 onClick={() => {
@@ -365,12 +365,12 @@ export default function StudentShell({
                 }}
                 className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-navy"
               >
-                시간대 설정
+                Time zone
               </button>
               <div className="h-px bg-brand-border my-1" />
               <form action={logout}>
                 <button className="w-full text-left px-3.5 py-2 text-[13px] font-semibold text-brand-red">
-                  로그아웃
+                  Log out
                 </button>
               </form>
             </div>
@@ -445,7 +445,7 @@ export default function StudentShell({
             <StudentConsultantTab />
           ) : (
             <div className="p-8 text-[14px] text-grey-500">
-              {activeLabel} 탭은 준비 중입니다.
+              The {activeLabel} tab is coming soon.
             </div>
           )}
         </PageFrame>

@@ -32,7 +32,7 @@ describe("StatsTab — 기존 요약", () => {
   it("데이터가 없으면 대시로 보여준다(확장 없음, 만족도 키 있음)", () => {
     render(<StatsTab data={{ attendanceRate: null, satisfactionAvg: null, bySubject: [] }} />);
     expect(screen.getAllByText("—")).toHaveLength(2);
-    expect(screen.getByText("아직 집계할 수업 기록이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No lesson records to summarize yet.")).toBeInTheDocument();
   });
   it("참여율/만족도/과목별 참여율", () => {
     render(<StatsTab data={{ attendanceRate: 92, satisfactionAvg: 4.5, bySubject: [{ subjectName: "SAT Math", pct: 100 }] }} />);
@@ -45,54 +45,54 @@ describe("StatsTab — 기존 요약", () => {
 describe("StatsTab — 역할별 노출", () => {
   it("학생 본인·학부모(family): 만족도·모의고사 강약·선생님 피드백 섹션 없음", () => {
     render(<StatsTab data={data("family")} />);
-    expect(screen.queryByText("선생님 피드백 만족도")).toBeNull();
-    expect(screen.queryByText("영역별 강약")).toBeNull();
-    expect(screen.queryByText(/선생님 피드백 \(관리자\)/)).toBeNull();
-    expect(screen.getByText("학습 성과")).toBeInTheDocument();
-    expect(screen.getByText("모의고사")).toBeInTheDocument();
-    expect(screen.getByText("수업권")).toBeInTheDocument();
+    expect(screen.queryByText("Teacher feedback rating")).toBeNull();
+    expect(screen.queryByText("Strengths by domain")).toBeNull();
+    expect(screen.queryByText(/Teacher Feedback \(Admin\)/)).toBeNull();
+    expect(screen.getByText("Learning Progress")).toBeInTheDocument();
+    expect(screen.getByText("Mock Exams")).toBeInTheDocument();
+    expect(screen.getByText("Lesson Credits")).toBeInTheDocument();
     expect(screen.getByText("Linear functions")).toBeInTheDocument();
-    expect(screen.getByText(/최근 4주 ▲/)).toBeInTheDocument();
+    expect(screen.getByText(/Last 4 weeks ▲/)).toBeInTheDocument();
     expect(document.body.textContent).not.toMatch(/higher|lower|경로|난이도|정책/);
   });
   it("컨설턴트(staff): 만족도·강약 보임, 선생님 피드백(관리자) 없음", () => {
     render(<StatsTab data={data("staff")} />);
-    expect(screen.getByText("선생님 피드백 만족도")).toBeInTheDocument();
-    expect(screen.getByText("영역별 강약")).toBeInTheDocument();
-    expect(screen.queryByText(/선생님 피드백 \(관리자\)/)).toBeNull();
+    expect(screen.getByText("Teacher feedback rating")).toBeInTheDocument();
+    expect(screen.getByText("Strengths by domain")).toBeInTheDocument();
+    expect(screen.queryByText(/Teacher Feedback \(Admin\)/)).toBeNull();
     expect(document.body.textContent).not.toMatch(/higher|lower|경로|정책/);
   });
   it("관리자: 선생님 리뷰 작성 현황·채점 대기 보임", () => {
     render(<StatsTab data={data("admin")} />);
-    expect(screen.getByText("선생님 피드백 (관리자)")).toBeInTheDocument();
+    expect(screen.getByText("Teacher Feedback (Admin)")).toBeInTheDocument();
     expect(screen.getByText("김선생")).toBeInTheDocument();
-    expect(screen.getByText("2건")).toBeInTheDocument();
+    expect(screen.getByText("Awaiting grading").previousElementSibling).toHaveTextContent("2");
   });
   it("빈 확장 데이터: 각 섹션이 빈 상태 문구를 보여준다", () => {
     const empty: RawStatsAggregate = { ...raw, skills: [], skillWeekly: [], entitlements: null, mock: [], homework: { assigned: 0, submitted: 0, onTime: 0, graded: 0, correct: 0, weekly: [] },
       overdue: { homework: 0, vocabQuiz: 0, mockExam: 0, manual: 0 }, habits: [], vocabQuizzes: [], ops: [], staff: null };
     render(<StatsTab data={{ attendanceRate: null, bySubject: [], extended: buildExtendedStats(empty, "family") }} />);
-    expect(screen.getByText("아직 채점된 문제가 없습니다.")).toBeInTheDocument();
-    expect(screen.getByText("채점이 끝난 모의고사가 아직 없습니다.")).toBeInTheDocument();
-    expect(screen.getByText("배정된 과제가 없습니다.")).toBeInTheDocument();
-    expect(screen.getByText("최근 12주 동안 기록된 학습 활동이 없습니다.")).toBeInTheDocument();
-    expect(screen.getByText("최근 6개월 수업 기록이 없습니다.")).toBeInTheDocument();
-    expect(screen.getByText("사용 가능한 수업권이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No graded problems yet.")).toBeInTheDocument();
+    expect(screen.getByText("No graded mock exams yet.")).toBeInTheDocument();
+    expect(screen.getByText("No assignments yet.")).toBeInTheDocument();
+    expect(screen.getByText("No study activity recorded in the last 12 weeks.")).toBeInTheDocument();
+    expect(screen.getByText("No lessons in the last 6 months.")).toBeInTheDocument();
+    expect(screen.getByText("No lesson credits available.")).toBeInTheDocument();
   });
 });
 
 describe("StatsPanel — 로딩·오류·재시도", () => {
   it("로딩 스켈레톤 → 데이터", async () => {
     render(<StatsPanel load={async () => data("family")} />);
-    expect(screen.getByRole("status", { name: "통계 불러오는 중" })).toBeInTheDocument();
-    await screen.findByText("수업 참여율");
+    expect(screen.getByRole("status", { name: "Loading stats" })).toBeInTheDocument();
+    await screen.findByText("Attendance");
   });
   it("오류는 알림과 다시 시도 버튼, 재시도하면 불러온다", async () => {
-    const load = vi.fn().mockRejectedValueOnce(new Error("통계를 불러오지 못했습니다.")).mockResolvedValue(data("family"));
+    const load = vi.fn().mockRejectedValueOnce(new Error("Couldn't load statistics.")).mockResolvedValue(data("family"));
     render(<StatsPanel load={load} />);
-    expect(await screen.findByRole("alert")).toHaveTextContent("통계를 불러오지 못했습니다.");
-    fireEvent.click(screen.getByRole("button", { name: "다시 시도" }));
-    await waitFor(() => expect(screen.getByText("수업 참여율")).toBeInTheDocument());
+    expect(await screen.findByRole("alert")).toHaveTextContent("Couldn't load statistics.");
+    fireEvent.click(screen.getByRole("button", { name: "Try again" }));
+    await waitFor(() => expect(screen.getByText("Attendance")).toBeInTheDocument());
     expect(load).toHaveBeenCalledTimes(2);
   });
 });

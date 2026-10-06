@@ -8,13 +8,13 @@ export default function MaterialsLibraryTab({ tree, isFreeMember = false }: { tr
       subjects={tree}
       description={
         isFreeMember
-          ? "ALTON이 무료로 공개한 학습 자료를 단원·키워드 순서로 모아봅니다."
-          : "내가 듣고 있는 과목의 교재를 단원·키워드 순서로 모아봅니다."
+          ? "Free study materials shared by ALTON EDUCATION, organized by unit and keyword."
+          : "Materials for the subjects you're taking, organized by unit and keyword."
       }
       emptyMessage={
         isFreeMember
-          ? "아직 공개된 무료 자료가 없어요. 자료가 준비되면 여기에서 바로 볼 수 있어요."
-          : "아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요."
+          ? "No free materials have been published yet. They'll show up here as soon as they're ready."
+          : "No materials have been assigned yet. Your teacher will have them ready soon."
       }
       docHref={(docId) => `/materials/${docId}`}
     />

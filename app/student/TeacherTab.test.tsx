@@ -80,7 +80,7 @@ describe("TeacherTab", () => {
         chatThreads={chatThreads}
       />
     );
-    fireEvent.click(screen.getByText("프로필 보기"));
+    fireEvent.click(screen.getByText("View profile"));
     expect(screen.getByText("SAT Math 800점 만점 지도 경험 다수.")).toBeInTheDocument();
   });
 
@@ -93,9 +93,9 @@ describe("TeacherTab", () => {
         chatThreads={chatThreads}
       />
     );
-    fireEvent.click(screen.getByText("프로필 보기"));
-    fireEvent.click(screen.getByText("이 선생님과 진행한 수업 내역 보기"));
-    expect(screen.getByText(/SAT Math · 7회차/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("View profile"));
+    fireEvent.click(screen.getByText("View lessons with this teacher"));
+    expect(screen.getByText(/SAT Math · Session 7/)).toBeInTheDocument();
   });
 
   it("메시지 버튼을 누르면 ChatPanel이 뜬다", () => {
@@ -107,10 +107,10 @@ describe("TeacherTab", () => {
         chatThreads={chatThreads}
       />
     );
-    fireEvent.click(screen.getByText("💬 메시지"));
-    expect(screen.getByText("박서연 선생님과의 메시지")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("💬 Message"));
+    expect(screen.getByText("Messages with 박서연 선생님")).toBeInTheDocument();
     expect(
-      screen.getByText("이 대화는 학부모님과 관리자가 항상 열람할 수 있습니다.")
+      screen.getByText("Your parent and the ALTON team can always view this conversation.")
     ).toBeInTheDocument();
   });
 });

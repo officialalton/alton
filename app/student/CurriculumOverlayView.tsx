@@ -14,11 +14,11 @@ import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress
 // 하나를 공유한다.
 
 const STATUS_LABEL: Record<OverlayUnit["status"], string> = {
-  not_started: "예정",
-  in_progress: "진행중",
-  completed: "완료",
-  reinforcement_needed: "다시 보기",
-  skipped: "건너뜀",
+  not_started: "Upcoming",
+  in_progress: "In Progress",
+  completed: "Completed",
+  reinforcement_needed: "Review Again",
+  skipped: "Skipped",
 };
 
 const STATUS_TONE: Record<OverlayUnit["status"], string> = {
@@ -54,7 +54,7 @@ export default function CurriculumOverlayView({
         if (!cancelled) {
           setState({
             status: "error",
-            message: e instanceof Error ? e.message : "불러오지 못했습니다.",
+            message: e instanceof Error ? e.message : "Couldn't load.",
           });
         }
       });
@@ -75,7 +75,7 @@ export default function CurriculumOverlayView({
   return (
     <div className="max-w-[640px] px-8 py-8">
       <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
-        ← 뒤로
+        ← Back
       </button>
 
       <div className="flex items-center justify-between mb-1.5">
@@ -92,7 +92,7 @@ export default function CurriculumOverlayView({
       </div>
 
       {state.status === "loading" && (
-        <div className="text-[13px] text-grey-500 py-8">불러오는 중...</div>
+        <div className="text-[13px] text-grey-500 py-8">Loading...</div>
       )}
       {state.status === "error" && (
         <div className="text-[13px] text-red py-8">{state.message}</div>
@@ -104,12 +104,12 @@ export default function CurriculumOverlayView({
             <div className="mb-5 space-y-1.5">
               {currentUnit && (
                 <div className="text-[12.5px] text-ink">
-                  <span className="font-bold">현재 단원</span> · {currentUnit.unitTitle}
+                  <span className="font-bold">Current unit</span> · {currentUnit.unitTitle}
                 </div>
               )}
               {nextUnit && (
                 <div className="text-[12.5px] text-grey-500">
-                  <span className="font-bold text-ink">다음 학습</span> · {nextUnit.unitTitle}
+                  <span className="font-bold text-ink">Up next</span> · {nextUnit.unitTitle}
                 </div>
               )}
             </div>
@@ -117,7 +117,7 @@ export default function CurriculumOverlayView({
 
           {units.length === 0 ? (
             <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-              아직 배정된 커리큘럼이 없습니다.
+              No curriculum has been assigned yet.
             </div>
           ) : (
             <div>
@@ -140,7 +140,7 @@ export default function CurriculumOverlayView({
                   </div>
                   {u.note && <p className="text-[12.5px] text-grey-500">{u.note}</p>}
                   {(u.keywordLabels ?? []).length > 0 && (
-                    <div className="flex flex-wrap gap-1 mt-1" aria-label="회차 키워드">
+                    <div className="flex flex-wrap gap-1 mt-1" aria-label="Session keywords">
                       {(u.keywordLabels ?? []).map((k) => (
                         <span key={k} className="text-[11px] font-semibold text-grey-500 border border-grey-200 rounded-full px-2 py-0.5">
                           {k}
@@ -157,7 +157,7 @@ export default function CurriculumOverlayView({
                     href={`/unit-preview/${u.id}`}
                     className="inline-block text-[12px] font-bold text-ink mt-1.5"
                   >
-                    수업 준비 →
+                    Prepare for lesson →
                   </a>
                 </div>
               ))}

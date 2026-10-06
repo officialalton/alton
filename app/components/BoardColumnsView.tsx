@@ -3,51 +3,51 @@
 import Link from "next/link";
 import { boardColumnOf, type BoardCard, type BoardCardStatus, type BoardColumn } from "@/lib/board/types";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate, fmtDateTime } from "@/lib/format-datetime";
+import { fmtDateEn, fmtDateTimeEn } from "@/lib/format-datetime-en";
 
 // Student Success Planner — Board 칼럼 렌더링(학생 포털·학부모 포털 공유).
 // 학생 포털은 수동 할 일에 상태 이동·삭제 버튼을 준다(onMove/onDelete 제공).
 // 학부모 포털은 읽기 전용(둘 다 생략) — 부모는 만들지도, 옮기지도 않는다.
 
 const ALL_COLUMNS: { id: BoardColumn; label: string }[] = [
-  { id: "overdue", label: "기한 경과" },
-  { id: "backlog", label: "백로그" },
-  { id: "in_progress", label: "진행중" },
-  { id: "done", label: "완료" },
+  { id: "overdue", label: "Overdue" },
+  { id: "backlog", label: "Backlog" },
+  { id: "in_progress", label: "In progress" },
+  { id: "done", label: "Done" },
 ];
 
 export const SOURCE_LABEL: Record<BoardCard["sourceType"], string> = {
-  homework: "과제",
-  mock_exam: "모의고사",
-  vocab_quiz: "단어시험",
-  manual: "할 일",
+  homework: "Assignment",
+  mock_exam: "Mock Exam",
+  vocab_quiz: "Vocab Quiz",
+  manual: "To-do",
 };
 
 export function formatDueAt(dueAt: string | null, tz: string): string | null {
   if (!dueAt) return null;
-  return fmtDate(dueAt, { month: "2-digit", day: "2-digit" }, tz);
+  return fmtDateEn(dueAt, { month: "2-digit", day: "2-digit" }, tz);
 }
 
 /** 2026-09-22(사용자 지시) — 항상 노출: 기간이 있으면 "MM/DD~MM/DD", 없으면 단일 마감일, 둘 다 없으면 "마감 없음". */
 export function formatDueRange(dueAt: string | null, dueStartAt: string | null, tz: string): string {
   const end = formatDueAt(dueAt, tz);
-  if (!end) return "마감 없음";
+  if (!end) return "No due date";
   const start = formatDueAt(dueStartAt, tz);
-  return start ? `${start} ~ ${end}` : `마감 ${end}`;
+  return start ? `${start} – ${end}` : `Due ${end}`;
 }
 
 const AUDIT_DT: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false };
 
 /** 수동 할 일 상세 — 누가·언제 만들고 마지막으로 고쳤는지(서버 트리거 기록, 모든 열람 화면 공통). 모르면 '알 수 없음'. */
 export function BoardCardAuditDetail({ audit, tz }: { audit: NonNullable<BoardCard["audit"]>; tz: string }) {
-  const created = `${audit.createdByName ?? "알 수 없음"} · ${fmtDateTime(audit.createdAt, AUDIT_DT, tz)}`;
-  const edited = `${audit.updatedByName ?? "알 수 없음"} · ${audit.updatedAt ? fmtDateTime(audit.updatedAt, AUDIT_DT, tz) : "알 수 없음"}`;
+  const created = `${audit.createdByName ?? "Unknown"} · ${fmtDateTimeEn(audit.createdAt, AUDIT_DT, tz)}`;
+  const edited = `${audit.updatedByName ?? "Unknown"} · ${audit.updatedAt ? fmtDateTimeEn(audit.updatedAt, AUDIT_DT, tz) : "Unknown"}`;
   return (
     <details className="mt-1.5 text-[10.5px] text-grey-500" onClick={(e) => e.stopPropagation()}>
-      <summary className="cursor-pointer font-bold text-grey-400">상세</summary>
+      <summary className="cursor-pointer font-bold text-grey-400">Details</summary>
       <div data-testid="board-card-audit" className="mt-1 space-y-0.5">
-        <div>생성: {created}</div>
-        <div>최종 편집: {edited}</div>
+        <div>Created: {created}</div>
+        <div>Last edited: {edited}</div>
       </div>
     </details>
   );
@@ -93,7 +93,7 @@ export default function BoardColumnsView({
               {colCards.map((card) => (
                 <BoardCardItem key={card.id} card={card} onMove={onMove} onDelete={onDelete} disableLinks={disableLinks} />
               ))}
-              {colCards.length === 0 && <div className="text-[11px] text-grey-400">비어 있음</div>}
+              {colCards.length === 0 && <div className="text-[11px] text-grey-400">Empty</div>}
             </div>
           </div>
         );
@@ -133,11 +133,11 @@ function BoardCardItem({
                 onClick={() => onMove(card.id, s)}
                 className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-2 py-0.5"
               >
-                {s === "backlog" ? "백로그로" : s === "in_progress" ? "진행중으로" : "완료로"}
+                {s === "backlog" ? "To backlog" : s === "in_progress" ? "To in progress" : "To done"}
               </button>
             ))}
           <button onClick={() => onDelete(card.id)} className="text-[10.5px] font-bold text-red ml-auto">
-            삭제
+            Delete
           </button>
         </div>
       )}

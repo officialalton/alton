@@ -63,8 +63,8 @@ export function Sparkline({ points, label, max = 100, unit = "%" }: { points: Sp
   const valued = points.filter((p) => p.y !== null) as { x: string; y: number }[];
   const first = valued[0], last = valued[valued.length - 1];
   const summary = valued.length
-    ? `${label}: ${first.x} ${first.y}${unit}에서 ${last.x} ${last.y}${unit}`
-    : `${label}: 기록 없음`;
+    ? `${label}: ${first.x} ${first.y}${unit} to ${last.x} ${last.y}${unit}`
+    : `${label}: no data`;
   return (
     <div>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-[56px] text-ink" role="img" aria-label={summary} preserveAspectRatio="none">
@@ -86,11 +86,11 @@ export function StackedWeekBars({ weeks }: { weeks: { label: string; parts: { ke
   const shade: Record<string, string> = { homework: "bg-ink", lesson: "bg-grey-500", vocab: "bg-grey-300" };
   return (
     <div className="flex items-end gap-1.5 h-[72px]" role="img"
-      aria-label={"주별 학습 활동량: " + weeks.map((w) => `${w.label} ${w.parts.reduce((a, p) => a + p.value, 0)}건`).join(", ")}>
+      aria-label={"Weekly learning activity: " + weeks.map((w) => `${w.label} ${w.parts.reduce((a, p) => a + p.value, 0)}`).join(", ")}>
       {weeks.map((w) => {
         const total = w.parts.reduce((a, p) => a + p.value, 0);
         return (
-          <div key={w.label} className="flex-1 flex flex-col justify-end h-full" title={`${w.label} · ${total}건`}>
+          <div key={w.label} className="flex-1 flex flex-col justify-end h-full" title={`${w.label} · ${total}`}>
             <div className="flex flex-col-reverse rounded-sm overflow-hidden" style={{ height: `${(total / max) * 100}%`, minHeight: total ? 3 : 0 }}>
               {w.parts.map((p) => p.value > 0 && <div key={p.key} className={shade[p.key] ?? "bg-ink"} style={{ flexGrow: p.value }} />)}
             </div>
@@ -109,7 +109,7 @@ export function RangeTrend({ items, min, max, label }: { items: { x: string; low
   const ys = (v: number) => H - P - ((v - min) / (max - min)) * (H - 2 * P);
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-[84px] text-ink" role="img"
-      aria-label={`${label}: ` + items.map((i) => `${i.x} ${i.low}~${i.high}점`).join(", ")}>
+      aria-label={`${label}: ` + items.map((i) => `${i.x} ${i.low}–${i.high} pts`).join(", ")}>
       <line x1={P} x2={W - P} y1={H - P} y2={H - P} stroke="currentColor" strokeOpacity="0.15" />
       {items.map((it, i) => (
         <g key={i}>
@@ -122,7 +122,7 @@ export function RangeTrend({ items, min, max, label }: { items: { x: string; low
 
 export function StatsSkeleton() {
   return (
-    <div role="status" aria-label="통계 불러오는 중" className="grid gap-4 md:grid-cols-2 animate-pulse">
+    <div role="status" aria-label="Loading stats" className="grid gap-4 md:grid-cols-2 animate-pulse">
       {[0, 1, 2, 3].map((i) => (
         <div key={i} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5 h-[150px]">
           <div className="h-3 w-24 bg-grey-100 rounded mb-4" />

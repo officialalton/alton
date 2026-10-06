@@ -8,10 +8,10 @@ import MockExamResultView from "@/app/student/mock-exam/[attemptId]/MockExamResu
 import TeacherMockExamAttemptViewer from "@/app/teacher/TeacherMockExamAttemptViewer";
 
 const STATUS_LABEL: Record<string, string> = {
-  assigned: "시작 전",
-  in_progress: "진행 중",
-  submitted: "채점 중",
-  graded: "채점 완료",
+  assigned: "Not started",
+  in_progress: "In progress",
+  submitted: "Grading",
+  graded: "Graded",
 };
 
 /** 세션뷰 "모의고사" 탭 — 단어장 탭과 같은 방식으로, 별도 라우트로 나가지 않고 이
@@ -45,7 +45,7 @@ export default function SessionMockExamTab({
         if (!cancelled) setAttempts(rows);
       })
       .catch((e) => {
-        if (!cancelled) setError(e instanceof Error ? e.message : "모의고사 목록을 불러오지 못했습니다.");
+        if (!cancelled) setError(e instanceof Error ? e.message : "Couldn't load mock exams.");
       });
     return () => {
       cancelled = true;
@@ -59,7 +59,7 @@ export default function SessionMockExamTab({
     setError(null);
     loadSessionMockExamAttemptDetailAction(id)
       .then(setDetail)
-      .catch((e) => setError(e instanceof Error ? e.message : "불러오지 못했습니다."));
+      .catch((e) => setError(e instanceof Error ? e.message : "Couldn't load."));
   }
 
   if (error) return <p className="p-6 text-[13px] text-red">{error}</p>;
@@ -72,10 +72,10 @@ export default function SessionMockExamTab({
           onClick={() => setOpenId(null)}
           className="mb-4 rounded-lg border-[1.5px] border-grey-200 px-3 py-1.5 text-[13px] font-semibold text-grey-600 hover:bg-grey-100 active:scale-95"
         >
-          ← 모의고사 목록으로
+          ← Back to mock exams
         </button>
         {!detail ? (
-          <p className="text-[13px] text-grey-500">불러오는 중…</p>
+          <p className="text-[13px] text-grey-500">Loading…</p>
         ) : detail.status === "graded" ? (
           <MockExamResultView
             attempt={detail}
@@ -91,8 +91,8 @@ export default function SessionMockExamTab({
     );
   }
 
-  if (attempts === null) return <p className="p-6 text-[13px] text-grey-500">불러오는 중…</p>;
-  if (attempts.length === 0) return <p className="p-6 text-[13px] text-grey-500">시작한 모의고사가 없습니다. 학생 포털 모의고사 탭에서 공개된 시험을 시작할 수 있습니다.</p>;
+  if (attempts === null) return <p className="p-6 text-[13px] text-grey-500">Loading…</p>;
+  if (attempts.length === 0) return <p className="p-6 text-[13px] text-grey-500">No mock exams started yet. Published exams can be started from the Mock Exams tab in the student portal.</p>;
 
   return (
     <div className="mx-auto max-w-[720px] px-6 py-6">
@@ -102,10 +102,10 @@ export default function SessionMockExamTab({
             <p className="text-[14px] font-bold">{a.examSetName}</p>
             <p className="mt-1 text-[12.5px] text-grey-500">
               {STATUS_LABEL[a.status] ?? a.status}
-              {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} 정답`}
+              {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} correct`}
             </p>
             <button type="button" onClick={() => open(a.id)} className="mt-2 text-[12.5px] font-bold text-ink underline">
-              {a.status === "graded" ? "결과 보기" : isTeacher ? "풀이 보기" : a.status === "assigned" ? "시험 시작" : "이어서 풀기"}
+              {a.status === "graded" ? "View results" : isTeacher ? "View work" : a.status === "assigned" ? "Start exam" : "Continue"}
             </button>
           </li>
         ))}

@@ -32,6 +32,6 @@ describe("getMyHouseholdMessengerUnreadCountAction", () => {
   });
   it("읽음 처리 등 다른 액션은 가구가 없으면 그대로 throw(권한 의미 불변)", async () => {
     state.member = null;
-    await expect(markMyHouseholdMessengerReadAction()).rejects.toThrow("소속된 household");
+    await expect(markMyHouseholdMessengerReadAction()).rejects.toThrow("No household is linked");
   });
 });

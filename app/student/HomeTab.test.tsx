@@ -44,16 +44,16 @@ describe("HomeTab — Home+Planner 통합(2026-09-22 사용자 지시)", () => {
     (loadMyBoardCardsAction as ReturnType<typeof vi.fn>).mockResolvedValue(cards);
     render(<HomeTab studentName="지훈" dashboard={dashboard} />);
 
-    expect(await screen.findByText("전체 완료율")).toBeInTheDocument();
-    expect(screen.queryByText("Lesson")).toBeNull();
-    expect(screen.queryByText("Done")).toBeNull();
+    expect(await screen.findByText("Overall completion")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Lesson" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Done" })).toBeNull();
 
     fireEvent.click(screen.getByText("TODO"));
     expect(await screen.findByText("9월 과제")).toBeInTheDocument();
     expect(await screen.findByText("완료된 할일")).toBeInTheDocument();
 
     fireEvent.click(screen.getByText("Review"));
-    expect(await screen.findByText("수업 리뷰")).toBeInTheDocument();
+    expect(await screen.findByText("Lesson Reviews")).toBeInTheDocument();
   });
 
   it("TODO에서 할 일을 추가/이동/삭제할 수 있다", async () => {
@@ -66,11 +66,11 @@ describe("HomeTab — Home+Planner 통합(2026-09-22 사용자 지시)", () => {
     render(<HomeTab studentName="지훈" dashboard={dashboard} />);
     fireEvent.click(await screen.findByText("TODO"));
 
-    fireEvent.change(screen.getByPlaceholderText("+ 할 일 추가"), { target: { value: "에세이 작성" } });
-    fireEvent.click(screen.getByText("추가"));
+    fireEvent.change(screen.getByPlaceholderText("+ Add a task"), { target: { value: "에세이 작성" } });
+    fireEvent.click(screen.getByText("Add"));
     expect(await screen.findByText("에세이 작성")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("완료로"));
+    fireEvent.click(screen.getByText("To done"));
     await waitFor(() => expect(updateMyManualTaskStatusAction).toHaveBeenCalledWith("m2", "done"));
   });
 
@@ -82,7 +82,7 @@ describe("HomeTab — Home+Planner 통합(2026-09-22 사용자 지시)", () => {
     (updateMyManualTaskStatusAction as ReturnType<typeof vi.fn>).mockResolvedValue(undefined);
     render(<HomeTab studentName="지훈" dashboard={dashboard} />);
     fireEvent.click(await screen.findByText("TODO"));
-    fireEvent.click(await screen.findByText("진행중으로"));
+    fireEvent.click(await screen.findByText("To in progress"));
     await waitFor(() => expect(updateMyManualTaskStatusAction).toHaveBeenCalledWith("m3", "in_progress"));
     await waitFor(() => expect(load.mock.calls.length).toBeGreaterThanOrEqual(2));
   });

@@ -12,7 +12,7 @@ export async function addMyVocabWordAction(input: {
 }): Promise<ActionResult<string>> {
   const { user, supabase } = await requireStudentFeature("vocab");
   const word = input.word.trim();
-  if (!word) return { ok: false, error: "단어를 입력하세요." };
+  if (!word) return { ok: false, error: "Enter a word." };
   const { data, error } = await supabase
     .from("vocab_words")
     .insert({
@@ -23,7 +23,7 @@ export async function addMyVocabWordAction(input: {
     })
     .select("id")
     .single();
-  if (error) return { ok: false, error: "단어를 추가하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't add the word." };
   return { ok: true, value: data.id as string };
 }
 
@@ -40,14 +40,14 @@ export async function updateMyVocabWordAction(
   if (input.synonymWords !== undefined) patch.similar_words = input.synonymWords.filter(Boolean);
   if (input.antonymWords !== undefined) patch.antonym_words = input.antonymWords.filter(Boolean);
   const { error } = await supabase.from("vocab_words").update(patch).eq("id", id);
-  if (error) return { ok: false, error: "단어를 수정하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't update the word." };
   return { ok: true, value: undefined };
 }
 
 export async function deleteMyVocabWordAction(id: string): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("vocab");
   const { error } = await supabase.from("vocab_words").delete().eq("id", id);
-  if (error) return { ok: false, error: "단어를 삭제하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't delete the word." };
   return { ok: true, value: undefined };
 }
 
@@ -56,13 +56,13 @@ export async function deleteMyVocabWordAction(id: string): Promise<ActionResult>
 export async function createVocabFolderAction(name: string): Promise<ActionResult<{ id: string; name: string }>> {
   const { user, supabase } = await requireStudentFeature("vocab");
   const trimmed = name.trim();
-  if (!trimmed) return { ok: false, error: "폴더 이름을 입력하세요." };
+  if (!trimmed) return { ok: false, error: "Enter a folder name." };
   const { data, error } = await supabase
     .from("vocab_word_folders")
     .insert({ student_id: user.id, name: trimmed })
     .select("id, name")
     .single();
-  if (error) return { ok: false, error: error.code === "23505" ? "이미 있는 폴더 이름입니다." : "폴더를 만들지 못했습니다." };
+  if (error) return { ok: false, error: error.code === "23505" ? "A folder with that name already exists." : "Couldn't create the folder." };
   return { ok: true, value: { id: data.id as string, name: data.name as string } };
 }
 
@@ -70,7 +70,7 @@ export async function createVocabFolderAction(name: string): Promise<ActionResul
 export async function setMyVocabWordFolderAction(wordId: string, folderId: string | null): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("vocab");
   const { error } = await supabase.from("vocab_words").update({ folder_id: folderId }).eq("id", wordId);
-  if (error) return { ok: false, error: "폴더를 옮기지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't move to that folder." };
   return { ok: true, value: undefined };
 }
 
@@ -79,15 +79,15 @@ export async function toggleLibraryWordInMyVocabAction(libraryWordId: string, fo
   const { user, supabase } = await requireStudentFeature("vocab");
   if (folderId === null) {
     const { data: lw } = await supabase.from("vocab_library_words").select("word").eq("id", libraryWordId).maybeSingle();
-    if (!lw) return { ok: false, error: "단어를 찾을 수 없습니다." };
+    if (!lw) return { ok: false, error: "Word not found." };
     const { error } = await supabase.from("vocab_words").delete().eq("student_id", user.id).eq("word", lw.word as string);
-    if (error) return { ok: false, error: "저장을 취소하지 못했습니다." };
+    if (error) return { ok: false, error: "Couldn't remove the saved word." };
     return { ok: true, value: undefined };
   }
   const { error } = await supabase.rpc("assign_library_words_to_student", {
     p_student_id: user.id, p_library_word_ids: [libraryWordId], p_folder_id: folderId,
   });
-  if (error) return { ok: false, error: "단어장에 저장하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't save to Vocabulary." };
   return { ok: true, value: undefined };
 }
 
@@ -181,7 +181,7 @@ export async function createVocabQuizAction(input: {
   const pool = await collectWordPool(supabase, user.id, input);
   const items = buildQuizItems(pool, Math.max(1, Math.min(50, input.count)));
   if (items.length === 0) {
-    return { ok: false, error: "영어 유의어가 있는 단어가 4개 이상 있어야 시험을 만들 수 있습니다(선택지가 영어라 유의어가 없는 단어는 낼 수 없습니다)." };
+    return { ok: false, error: "You need at least 4 words with English synonyms to create a quiz (answer choices are in English, so words without synonyms can't be used)." };
   }
   const { data, error } = await supabase
     .from("vocab_quizzes")
@@ -192,7 +192,7 @@ export async function createVocabQuizAction(input: {
     })
     .select("id")
     .single();
-  if (error) return { ok: false, error: "시험을 만들지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't create the quiz." };
   return { ok: true, value: { id: data.id as string, items } };
 }
 
@@ -241,8 +241,8 @@ async function syncWrongAnswersToNotebook(
 export async function saveVocabQuizProgressAction(quizId: string, answers: (number | null)[]): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("vocab");
   const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
-  if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
-  if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
+  if (!quiz) return { ok: false, error: "Quiz not found." };
+  if (quiz.status === "completed") return { ok: false, error: "This quiz has already been graded." };
   const items = quiz.items as VocabQuizItem[];
   const studentId = quiz.owner_id as string;
   const answeredCount = answers.filter((a) => a !== null).length;
@@ -251,7 +251,7 @@ export async function saveVocabQuizProgressAction(quizId: string, answers: (numb
     .from("vocab_quizzes")
     .update({ status: answeredCount > 0 ? "in_progress" : "pending", answers, score, total: items.length })
     .eq("id", quizId);
-  if (error) return { ok: false, error: "진행 상태를 저장하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't save your progress." };
   await syncWrongAnswersToNotebook(supabase, studentId, items, answers);
   return { ok: true, value: undefined };
 }
@@ -263,7 +263,7 @@ export async function retakeVocabQuizAction(quizId: string): Promise<ActionResul
     .from("vocab_quizzes")
     .update({ status: "pending", answers: null, score: null, total: null, submitted_at: null })
     .eq("id", quizId);
-  if (error) return { ok: false, error: "다시 풀기를 시작하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't start the retake." };
   return { ok: true, value: undefined };
 }
 
@@ -271,15 +271,15 @@ export async function retakeVocabQuizAction(quizId: string): Promise<ActionResul
 export async function submitVocabQuizAction(quizId: string, answers: number[]): Promise<ActionResult<{ score: number; total: number }>> {
   const { supabase } = await requireStudentFeature("vocab");
   const { data: quiz } = await supabase.from("vocab_quizzes").select("items, status, owner_id").eq("id", quizId).maybeSingle();
-  if (!quiz) return { ok: false, error: "시험을 찾을 수 없습니다." };
-  if (quiz.status === "completed") return { ok: false, error: "이미 채점된 시험입니다." };
+  if (!quiz) return { ok: false, error: "Quiz not found." };
+  if (quiz.status === "completed") return { ok: false, error: "This quiz has already been graded." };
   const items = quiz.items as VocabQuizItem[];
   const score = items.reduce((acc, item, i) => acc + (answers[i] === item.correctIndex ? 1 : 0), 0);
   const { error } = await supabase
     .from("vocab_quizzes")
     .update({ status: "completed", score, total: items.length, answers, submitted_at: new Date().toISOString() })
     .eq("id", quizId);
-  if (error) return { ok: false, error: "채점 결과를 저장하지 못했습니다." };
+  if (error) return { ok: false, error: "Couldn't save the results." };
 
   const studentId = quiz.owner_id as string;
   await syncWrongAnswersToNotebook(supabase, studentId, items, answers);
@@ -294,13 +294,13 @@ export async function assignVocabQuizAction(input: {
   const { supabase } = await requireStudentFeature("vocab");
   const pool = await collectWordPool(supabase, input.studentId, input);
   const items = buildQuizItems(pool, Math.max(1, Math.min(50, input.count)));
-  if (items.length === 0) return { ok: false, error: "선택한 단어 범위에 영어 유의어가 있는 단어가 4개 이상 있어야 시험을 낼 수 있습니다." };
+  if (items.length === 0) return { ok: false, error: "The selected range needs at least 4 words with English synonyms to assign a quiz." };
   const { data, error } = await supabase.rpc("assign_vocab_quiz", {
     p_session_id: input.sessionId, p_owner_id: input.studentId,
     p_source: { customWords: input.customWords, bookIds: input.bookIds, folderIds: input.folderIds ?? [], difficultyMin: input.difficultyMin ?? null, difficultyMax: input.difficultyMax ?? null },
     p_items: items, p_due_at: input.dueAt ?? null,
   });
-  if (error) return { ok: false, error: "담당하는 학생의 수업에만 단어 시험을 낼 수 있습니다." };
+  if (error) return { ok: false, error: "You can only assign vocabulary quizzes in lessons with your own students." };
   return { ok: true, value: { id: data as string } };
 }
 
@@ -310,7 +310,7 @@ export async function assignLibraryWordsToStudentAction(studentId: string, libra
   const { error } = await supabase.rpc("assign_library_words_to_student", {
     p_student_id: studentId, p_library_word_ids: libraryWordIds, p_folder_id: folderId,
   });
-  if (error) return { ok: false, error: "담당하는 학생에게만 단어를 배정할 수 있습니다." };
+  if (error) return { ok: false, error: "You can only assign words to your own students." };
   return { ok: true, value: undefined };
 }
 

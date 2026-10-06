@@ -15,7 +15,7 @@ export type MyAssignedConsultant = { id: string; name: string | null };
 
 export async function getMyAssignedConsultantAction(): Promise<MyAssignedConsultant | null> {
   const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
-  if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
+  if (profile?.role !== "student") throw new Error("Only students can access this.");
   const { data, error } = await supabase
     .from("consultant_assignments")
     .select("consultant_id, consultant:profiles!consultant_assignments_consultant_id_fkey(name)")
@@ -54,9 +54,9 @@ export async function submitMyConsultantMeetingRequestAction(params: {
 }): Promise<SubmitConsultantMeetingRequestResult> {
   try {
     const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
-    if (profile?.role !== "student") throw new Error("학생만 신청할 수 있습니다.");
-    if (!params.reason?.trim()) throw new Error("상담 사유를 입력해주세요.");
-    if (!params.slotStartsAtIso) throw new Error("희망 시간을 선택해주세요.");
+    if (profile?.role !== "student") throw new Error("Only students can submit a request.");
+    if (!params.reason?.trim()) throw new Error("Please enter a reason for the consultation.");
+    if (!params.slotStartsAtIso) throw new Error("Please select a preferred time.");
 
     const { data: household } = await supabase
       .from("household_members")
@@ -64,7 +64,7 @@ export async function submitMyConsultantMeetingRequestAction(params: {
       .eq("profile_id", user.id)
       .eq("role", "child")
       .maybeSingle();
-    if (!household) throw new Error("소속된 household를 찾을 수 없습니다.");
+    if (!household) throw new Error("Could not find your household.");
 
     const startsAt = new Date(params.slotStartsAtIso);
     const endsAt = new Date(startsAt.getTime() + 60 * 60 * 1000);
@@ -85,13 +85,13 @@ export async function submitMyConsultantMeetingRequestAction(params: {
     if (error) throw new Error(friendlyDbMessage(error));
     return { ok: true };
   } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "신청에 실패했습니다." };
+    return { ok: false, error: e instanceof Error ? e.message : "Request failed." };
   }
 }
 
 export async function listMyConsultantMeetingRequestsAction(): Promise<MeetingRequest[]> {
   const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
-  if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
+  if (profile?.role !== "student") throw new Error("Only students can access this.");
   const { data, error } = await supabase
     .from("meeting_requests")
     .select(
@@ -125,14 +125,14 @@ export async function getMyConsultantMeetingRequestReviewAction(
   meetingRequestId: string
 ): Promise<GuardianMeetingRequestReview | null> {
   const { user, profile, supabase } = await requireStudentFeature("consultant_portal");
-  if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
+  if (profile?.role !== "student") throw new Error("Only students can access this.");
   const { data: owns } = await supabase
     .from("meeting_requests")
     .select("id")
     .eq("id", meetingRequestId)
     .eq("child_id", user.id)
     .maybeSingle();
-  if (!owns) throw new Error("본인이 신청한 일정만 조회할 수 있습니다.");
+  if (!owns) throw new Error("You can only view your own requests.");
 
   const { data: review, error } = await supabase
     .from("meeting_request_reviews")

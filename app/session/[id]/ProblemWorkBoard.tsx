@@ -271,7 +271,7 @@ const ProblemWorkBoard = forwardRef<
     <div>
       <div className="flex flex-wrap items-center gap-2 mb-2">
         <span className="text-[11px] font-bold text-grey-500">
-          {mode === "work" ? `${attemptNo}번째 풀이` : mode === "answer" ? "답안" : "연습장"}
+          {mode === "work" ? `Attempt ${attemptNo}` : mode === "answer" ? "Answer" : "Practice"}
         </span>
         {canDraw ? (
           <>
@@ -279,7 +279,7 @@ const ProblemWorkBoard = forwardRef<
               {COLORS.map((c) => (
                 <button
                   key={c}
-                  aria-label={`색 ${c}`}
+                  aria-label={`Color ${c}`}
                   onClick={() => {
                     setColor(c);
                     setTool("pen");
@@ -300,20 +300,20 @@ const ProblemWorkBoard = forwardRef<
                 (tool === "eraser" ? "bg-ink text-white border-ink" : "border-grey-200 text-ink")
               }
             >
-              지우개
+              Eraser
             </button>
             <span className="text-[11px] font-semibold text-grey-500">
               {drawAsFeedback
-                ? "피드백으로 기록됩니다"
+                ? "Saved as feedback"
                 : mode === "work"
-                  ? "내 풀이로 기록됩니다"
+                  ? "Saved as my work"
                   : mode === "answer"
-                    ? "내 답안으로 기록됩니다"
-                    : "연습장에 기록됩니다"}
+                    ? "Saved as my answer"
+                    : "Saved to practice"}
             </span>
           </>
         ) : (
-          <span className="text-[11.5px] text-grey-500">{readOnlyReason ?? "읽기 전용"}</span>
+          <span className="text-[11.5px] text-grey-500">{readOnlyReason ?? "Read-only"}</span>
         )}
 
         <div className="flex items-center gap-1.5 ml-auto">
@@ -326,7 +326,7 @@ const ProblemWorkBoard = forwardRef<
                 (showStudent ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
               }
             >
-              학생 풀이
+              Student work
             </button>
           )}
           {feedbackStrokes.length > 0 && (
@@ -338,21 +338,21 @@ const ProblemWorkBoard = forwardRef<
                 (showFeedback ? "bg-ink text-white border-ink" : "border-grey-200 text-grey-500")
               }
             >
-              선생님 피드백
+              Teacher feedback
             </button>
           )}
         </div>
         {strokesAfterSubmit.length > 0 && (
           <span className="text-[11px] text-grey-500 w-full">
-            제출한 뒤에 덧그린 필기가 포함되어 있습니다 — 제출 당시 낸 풀이와는 구분해 보관됩니다.
+            Includes strokes added after submitting — they are kept separate from the work as submitted.
           </span>
         )}
 
-        {saveState === "saving" && <span className="text-[11px] text-grey-500">저장 중…</span>}
-        {saveState === "saved" && <span className="text-[11px] font-bold text-green">✓ 저장됨</span>}
+        {saveState === "saving" && <span className="text-[11px] text-grey-500">Saving…</span>}
+        {saveState === "saved" && <span className="text-[11px] font-bold text-green">✓ Saved</span>}
         {saveState === "error" && (
           <span className="text-[11px] font-bold text-red">
-            저장하지 못했습니다 — 계속 그리면 다시 시도합니다
+            Couldn&apos;t save — keep drawing to retry
           </span>
         )}
       </div>

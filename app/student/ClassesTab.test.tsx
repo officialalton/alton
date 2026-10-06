@@ -79,46 +79,46 @@ const baseProps = {
 describe("ClassesTab — '레슨'+'예약' 병합, 예정/지난 서브탭 버그 재현·수정", () => {
   it("예정 수업/지난 수업/수업 일정 서브탭이 있고, 기본은 예정 수업이 보인다", () => {
     render(<ClassesTab {...baseProps} />);
-    expect(screen.getByText("예정 수업")).toBeInTheDocument();
-    expect(screen.getByText("지난 수업")).toBeInTheDocument();
-    expect(screen.getByText("수업 일정")).toBeInTheDocument();
+    expect(screen.getByText("Upcoming")).toBeInTheDocument();
+    expect(screen.getByText("Past")).toBeInTheDocument();
+    expect(screen.getByText("Schedule")).toBeInTheDocument();
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
-    expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
+    expect(screen.getByText(/김선생/)).toBeInTheDocument();
   });
 
   // 2026-09-22(사용자 지시) — Home이 Planner로 바뀌면서 캘린더·예정 수업
   // 위젯이 여기로 옮겨왔다.
   it("'수업 일정' 서브탭을 누르면 캘린더가 보인다", () => {
     render(<ClassesTab {...baseProps} />);
-    fireEvent.click(screen.getByText("수업 일정"));
-    expect(screen.getByText("2026년 9월")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Schedule"));
+    expect(screen.getByText("September 2026")).toBeInTheDocument();
   });
 
   it("'지난 수업' 서브탭을 누르면 실제로 내용이 지난 수업으로 바뀐다(서브탭 전환 버그 재현·수정 고정)", () => {
     render(<ClassesTab {...baseProps} />);
     // 전환 전: 예정 수업(v3)만 보이고 지난 수업 목록은 없다.
     expect(screen.getByText("SAT Math")).toBeInTheDocument();
-    expect(screen.getByText(/김선생 선생님/)).toBeInTheDocument();
-    expect(screen.queryByText("최근 14일 이내 지난 수업이 없습니다.")).toBeNull();
+    expect(screen.getByText(/김선생/)).toBeInTheDocument();
+    expect(screen.queryByText("No past lessons in the last 14 days.")).toBeNull();
 
-    fireEvent.click(screen.getByText("지난 수업"));
+    fireEvent.click(screen.getByText("Past"));
 
     // 전환 후: 지난 수업(v3) 카드가 보이고, 예정 수업 예약 생성 폼은 사라진다.
-    expect(screen.getByText("수업 준비 내역")).toBeInTheDocument();
-    expect(screen.queryByText("수업 예약")).toBeNull();
+    expect(screen.getByText("Lesson prep details")).toBeInTheDocument();
+    expect(screen.queryByText("Book a Lesson")).toBeNull();
 
     // 레거시 커리큘럼 기록 서브섹션도 같은 서브탭(지난 수업)에 동기화된다.
-    fireEvent.click(screen.getByText("커리큘럼 진행·리뷰 (레거시 수업 기록)"));
-    expect(screen.getByText(/7회차/)).toBeInTheDocument();
-    expect(screen.queryByText(/8회차/)).toBeNull();
+    fireEvent.click(screen.getByText("Curriculum progress & reviews (legacy lesson records)"));
+    expect(screen.getByText(/Session 7/)).toBeInTheDocument();
+    expect(screen.queryByText(/Session 8/)).toBeNull();
   });
 
   it("'예정 수업'으로 되돌아가면 레거시 서브섹션도 다시 예정 목록으로 동기화된다", () => {
     render(<ClassesTab {...baseProps} />);
-    fireEvent.click(screen.getByText("지난 수업"));
-    fireEvent.click(screen.getByText("예정 수업"));
-    fireEvent.click(screen.getByText("커리큘럼 진행·리뷰 (레거시 수업 기록)"));
-    expect(screen.getByText(/8회차/)).toBeInTheDocument();
-    expect(screen.queryByText(/7회차/)).toBeNull();
+    fireEvent.click(screen.getByText("Past"));
+    fireEvent.click(screen.getByText("Upcoming"));
+    fireEvent.click(screen.getByText("Curriculum progress & reviews (legacy lesson records)"));
+    expect(screen.getByText(/Session 8/)).toBeInTheDocument();
+    expect(screen.queryByText(/Session 7/)).toBeNull();
   });
 });

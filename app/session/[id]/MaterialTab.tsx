@@ -21,9 +21,9 @@ import { useVocabSaveController, VocabSaveToggleBar } from "./vocab-save-control
 import AutoGrowTextarea from "./AutoGrowTextarea";
 
 const DIFF_LABEL: Record<string, string> = {
-  easy: "쉬움",
-  medium: "보통",
-  hard: "어려움",
+  easy: "Easy",
+  medium: "Medium",
+  hard: "Hard",
 };
 
 export default function MaterialTab({
@@ -102,7 +102,7 @@ export default function MaterialTab({
   if (!material) {
     return (
       <div className="p-8 text-[14px] text-grey-500">
-        이 세션에는 아직 배정된 교재가 없습니다.
+        No material has been assigned to this session yet.
       </div>
     );
   }
@@ -163,7 +163,7 @@ export default function MaterialTab({
                 {s.teachingTip && tipsVisible && viewerRole === "teacher" && (
                   <div className="mt-3 text-[12px] leading-[1.6] bg-yellow-bg border border-[#F2D98A] rounded-[10px] px-3.5 py-3 text-[#6B5300]">
                     <b className="block text-[11px] uppercase tracking-wide text-[#4A3900] mb-1">
-                      티칭 팁
+                      Teaching tip
                     </b>
                     {s.teachingTip}
                   </div>
@@ -189,7 +189,7 @@ export default function MaterialTab({
     <div className="md:grid md:grid-cols-[220px_1fr]">
       <nav className="border-b md:border-b-0 md:border-r border-grey-200 p-4 md:sticky md:top-0 md:self-start md:h-[calc(100vh-56px)] md:overflow-y-auto flex md:block gap-1.5 overflow-x-auto">
         <div className="hidden md:block text-[10.5px] font-extrabold text-grey-300 uppercase tracking-wider px-2 mb-1">
-          교재 목차
+          Contents
         </div>
         {material.sections.map((s) => (
           <button
@@ -210,7 +210,7 @@ export default function MaterialTab({
             />
             {s.title}
             {s.problems.length > 0 && (
-              <span className="ml-auto text-[10px] opacity-70" title="확인 문제 포함">
+              <span className="ml-auto text-[10px] opacity-70" title="Includes practice problems">
                 ✏️
               </span>
             )}
@@ -304,7 +304,7 @@ function MarkUsedButton({
           : "border-grey-200 text-grey-500 hover:bg-grey-100")
       }
     >
-      {state === "done" ? "사용 처리됨" : state === "saving" ? "처리 중…" : "사용 처리"}
+      {state === "done" ? "Marked as used" : state === "saving" ? "Saving…" : "Mark as used"}
     </button>
   );
 }
@@ -343,7 +343,7 @@ function ProblemCard({
       const result = await submitMcAttempt(sessionId, problem.id, selected);
       if (!result.done) {
         setWrongCount((n) => n + 1);
-        setMessage(`오답입니다. 다시 선택해보세요. (${3 - result.attemptNumber}번 남음)`);
+        setMessage(`Incorrect. Try again. (${3 - result.attemptNumber} ${3 - result.attemptNumber === 1 ? "attempt" : "attempts"} left)`);
         setTimeout(() => {
           setSelected(null);
           setMessage(null);
@@ -352,12 +352,12 @@ function ProblemCard({
         setDone(true);
         setMessage(
           result.correct
-            ? `정답입니다! (${result.attemptNumber}번째 시도)`
-            : `정답은 ${String.fromCharCode(65 + (result.correctIndex ?? 0))}번입니다. (${result.attemptNumber}번 시도)`
+            ? `Correct! (attempt ${result.attemptNumber})`
+            : `The correct answer is ${String.fromCharCode(65 + (result.correctIndex ?? 0))}. (${result.attemptNumber} ${result.attemptNumber === 1 ? "attempt" : "attempts"})`
         );
       }
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "채점 중 오류가 발생했어요.");
+      setMessage(e instanceof Error ? e.message : "Something went wrong while grading.");
     } finally {
       setSubmitting(false);
     }
@@ -370,7 +370,7 @@ function ProblemCard({
       await submitEssayAttempt(sessionId, problem.id, essayText);
       setSubmittedResponse(essayText.trim());
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "제출 중 오류가 발생했어요.");
+      setMessage(e instanceof Error ? e.message : "Something went wrong while submitting.");
     } finally {
       setSubmitting(false);
     }
@@ -383,7 +383,7 @@ function ProblemCard({
       await submitMathAttempt(sessionId, problem.id, dataUrl);
       setSubmittedResponse(dataUrl);
     } catch (e) {
-      setMessage(e instanceof Error ? e.message : "제출 중 오류가 발생했어요.");
+      setMessage(e instanceof Error ? e.message : "Something went wrong while submitting.");
     } finally {
       setSubmitting(false);
     }
@@ -411,7 +411,7 @@ function ProblemCard({
 
       {isTeacher && problem.format === "mc" && problem.correctIndex !== null && (
         <div className="inline-block mb-2 text-[11px] font-bold px-2.5 py-1 rounded-md bg-ink text-white">
-          정답: {String.fromCharCode(65 + problem.correctIndex)}
+          Answer: {String.fromCharCode(65 + problem.correctIndex)}
         </div>
       )}
 
@@ -459,7 +459,7 @@ function ProblemCard({
                   onClick={handleGradeMc}
                   className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
                 >
-                  채점하기
+                  Check answer
                 </button>
               )}
               {message && (
@@ -469,7 +469,7 @@ function ProblemCard({
           )}
           {!isStudent && wrongCount > 0 && !done && (
             <p className="text-[12px] text-grey-500 mt-2">
-              학생이 {wrongCount}번 시도했습니다.
+              The student has made {wrongCount} {wrongCount === 1 ? "attempt" : "attempts"}.
             </p>
           )}
         </>
@@ -482,7 +482,7 @@ function ProblemCard({
               <AutoGrowTextarea
                 value={essayText}
                 onChange={setEssayText}
-                placeholder="답안을 입력하세요"
+                placeholder="Write your answer"
               />
               <div className="mt-3">
                 <button
@@ -490,7 +490,7 @@ function ProblemCard({
                   onClick={handleSubmitEssay}
                   className="text-[12px] font-bold px-4 py-2 rounded-lg bg-green text-white disabled:opacity-50"
                 >
-                  제출하기
+                  Submit
                 </button>
               </div>
             </>
@@ -512,7 +512,7 @@ function ProblemCard({
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={submittedResponse}
-              alt="제출한 풀이"
+              alt="Submitted work"
               className="border border-grey-200 rounded-lg max-w-full"
             />
           )}
@@ -521,7 +521,7 @@ function ProblemCard({
 
       {showExplanation && (
         <div className="bg-grey-100 rounded-lg px-3.5 py-3 text-[13px] text-grey-700 leading-[1.6] mt-3">
-          <b className="text-ink">해설</b>
+          <b className="text-ink">Explanation</b>
           <br />
           {problem.explanation}
         </div>

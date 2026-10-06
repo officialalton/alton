@@ -31,7 +31,7 @@ export default function ProblemErrorReportButton({
   initialStatus = null,
   className = "",
   variant = "pill",
-  lang = "ko",
+  lang = "en",
 }: {
   context: ReportContext;
   role: ReporterRole;

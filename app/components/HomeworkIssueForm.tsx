@@ -50,17 +50,17 @@ export default function HomeworkIssueForm({
     setBusy(false);
     if (!r.ok) { setError(r.error); return; }
     setCounts({});
-    setNotice(`과제 ${r.value.problemCount}문항을 발급했습니다. 학생 포털에서 바로 보입니다.`);
+    setNotice(`Issued an assignment with ${r.value.problemCount} ${r.value.problemCount === 1 ? "question" : "questions"}. It is visible in the student portal now.`);
     onIssued?.();
   }
 
-  if (loading) return <p className="text-[13px] text-grey-500">불러오는 중…</p>;
+  if (loading) return <p className="text-[13px] text-grey-500">Loading…</p>;
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3.5">
-      <p className="text-[12.5px] font-bold text-grey-500 mb-2">키워드별 개수</p>
+      <p className="text-[12.5px] font-bold text-grey-500 mb-2">Count per keyword</p>
       {keywords.length === 0 ? (
-        <p className="text-[12.5px] text-grey-500">이 학생이 수강 중인 과목에 키워드가 없습니다.</p>
+        <p className="text-[12.5px] text-grey-500">No keywords are available for this student&apos;s subjects.</p>
       ) : (
         <ul className="divide-y divide-grey-100 mb-3">
           {keywords.map((k) => (
@@ -73,7 +73,7 @@ export default function HomeworkIssueForm({
                 placeholder="0"
                 className="w-[64px] text-[13px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1"
               />
-              <span className="text-grey-500">개</span>
+              <span className="text-grey-500">questions</span>
             </li>
           ))}
         </ul>
@@ -85,7 +85,7 @@ export default function HomeworkIssueForm({
         onClick={() => void issue()}
         className="text-[12.5px] font-bold px-3.5 py-2 rounded-lg bg-ink text-white disabled:opacity-40"
       >
-        {busy ? "발급 중…" : `과제 발급 (${totalRequested})`}
+        {busy ? "Issuing…" : `Issue assignment (${totalRequested})`}
       </button>
     </div>
   );

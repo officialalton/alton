@@ -26,6 +26,6 @@ describe("자료 사이 이동", () => {
   });
 
   it("목차는 자료마다 한 줄, PDF 는 페이지를 편다", () => {
-    expect(tableOfContents(assets).map((t) => t.label)).toEqual(["A", "1쪽", "2쪽", "V", "B", "1쪽"]);
+    expect(tableOfContents(assets).map((t) => t.label)).toEqual(["A", "Page 1", "Page 2", "V", "B", "Page 1"]);
   });
 });

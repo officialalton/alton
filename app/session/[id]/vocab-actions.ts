@@ -45,7 +45,7 @@ async function generateVocabEntry(word: string) {
 
   const toolUse = message.content.find((c) => c.type === "tool_use");
   if (!toolUse || toolUse.type !== "tool_use") {
-    throw new Error("AI 응답을 처리할 수 없습니다.");
+    throw new Error("Couldn't process the AI response.");
   }
   return toolUse.input as {
     definition: string;

@@ -13,9 +13,9 @@ import type {
 // v3 재매칭 후 예약 결함 수정(2026-09-11, 2차 보완) — 실제 계약·수업권 상태를
 // 그대로 구분해 보여준다(추정 금지, 제품 오너 지시).
 const PENDING_ACTIVATION_REASON_LABEL: Record<PendingActivationReason, string> = {
-  contract_pending: "정규 계약 대기 상태입니다. 계약이 확인되면 예약할 수 있습니다.",
-  no_entitlement: "사용 가능한 수업권이 없습니다. 수업권 구매 후 예약할 수 있습니다.",
-  activation_pending: "계약과 수업권이 모두 확인되었습니다. 수강 활성화 처리가 끝나면 곧 예약할 수 있습니다.",
+  contract_pending: "Waiting for the regular contract. You can book once the contract is confirmed.",
+  no_entitlement: "No lesson credits available. You can book after purchasing credits.",
+  activation_pending: "Your contract and lesson credits are confirmed. You can book as soon as enrollment activation is complete.",
 };
 import type { WeeklySeriesOccurrenceResult, BookingActionOutcome } from "@/lib/booking/create-booking";
 import MonthCalendar from "@/app/components/MonthCalendar";
@@ -23,18 +23,18 @@ import { dateKeyInTimezone, todayKeyInTimezone } from "@/lib/calendar-date-utils
 import RescheduleRequestsBanner, { type PendingReschedule } from "./RescheduleRequestsBanner";
 
 const TEACHER_ISSUE_TYPE_LABEL: Record<"teacher_late" | "teacher_no_show_reported", string> = {
-  teacher_late: "선생님 지각",
-  teacher_no_show_reported: "선생님 노쇼",
+  teacher_late: "Teacher was late",
+  teacher_no_show_reported: "Teacher did not show up",
 };
 
 function formatTime(date: Date, timezone: string): string {
-  return new Intl.DateTimeFormat("ko-KR", { timeZone: timezone, hour: "numeric", minute: "2-digit" }).format(date);
+  return new Intl.DateTimeFormat("en-US", { timeZone: timezone, hour: "numeric", minute: "2-digit" }).format(date);
 }
 
 function formatDateTime(iso: string, timezone: string): string {
-  return new Intl.DateTimeFormat("ko-KR", {
+  return new Intl.DateTimeFormat("en-US", {
     timeZone: timezone,
-    month: "long",
+    month: "short",
     day: "numeric",
     weekday: "short",
     hour: "numeric",
@@ -240,7 +240,7 @@ export default function LessonBookingTab({
           setError(result.message);
           return;
         }
-        setMessage("예약이 확정됐습니다.");
+        setMessage("Your booking is confirmed.");
         router.refresh();
         await refetchSlots();
       } else {
@@ -262,8 +262,8 @@ export default function LessonBookingTab({
         const firstFailure = results.find((r) => r.failureReason);
         setMessage(
           firstFailure
-            ? `${succeeded}회 예약 완료 — ${succeeded + 1}회차부터는 "${firstFailure.failureReason}"로 생성되지 않았습니다.`
-            : `${succeeded}회 전부 예약 완료됐습니다.`
+            ? `${succeeded} ${succeeded === 1 ? "lesson" : "lessons"} booked — lessons from #${succeeded + 1} were not created: "${firstFailure.failureReason}".`
+            : `All ${succeeded} lessons booked.`
         );
         router.refresh();
         await refetchSlots();
@@ -276,12 +276,12 @@ export default function LessonBookingTab({
   }
 
   async function handleCancel(reservationId: string) {
-    const reason = cancelReasonDraft.trim() || "사용자 취소";
+    const reason = cancelReasonDraft.trim() || "Cancelled by user";
     setSubmitting(true);
     setError(null);
     try {
       await onCancelBooking(reservationId, reason);
-      setMessage("예약이 취소됐습니다.");
+      setMessage("Your booking was cancelled.");
       setCancellingReservationId(null);
       setCancelReasonDraft("");
       router.refresh();
@@ -326,7 +326,7 @@ export default function LessonBookingTab({
       });
       setReportedSessionIds((prev) => new Set(prev).add(sessionId));
       setReportingSessionId(null);
-      setMessage("신고가 접수됐습니다.");
+      setMessage("Your report has been submitted.");
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -344,12 +344,12 @@ export default function LessonBookingTab({
       )}
       {showUpcoming && !hideHeader && (
         <>
-      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">수업 예약</h1>
+      <h1 className="text-[20px] font-extrabold text-ink mb-1.5">Book a Lesson</h1>
       <p className="text-[13px] text-grey-500 mb-5">
-        최소 24시간 이후부터 최대 8주 이내로 예약할 수 있습니다.
+        You can book from 24 hours ahead up to 8 weeks out.
         {selectedEnrollment
-          ? ` 수업은 ${selectedEnrollment.lessonDurationMinutes}분입니다.`
-          : " 수업은 120분(체험은 60분)입니다."}
+          ? ` Lessons are ${selectedEnrollment.lessonDurationMinutes} minutes.`
+          : " Lessons are 120 minutes (trial lessons are 60 minutes)."}
       </p>
         </>
       )}
@@ -357,8 +357,8 @@ export default function LessonBookingTab({
       {showUpcoming && browserTimezone && browserTimezone !== timezone && !timezoneBannerDismissed && (
         <div className="mb-5 text-[12px] bg-grey-100 rounded-lg px-4 py-3 flex items-center justify-between gap-3">
           <span>
-            현재 브라우저 시간대는 <span className="font-semibold">{browserTimezone}</span>이지만 계정 설정은{" "}
-            <span className="font-semibold">{timezone}</span>입니다. 아래 예약 시간은 계정 설정 시간대 기준으로 표시됩니다.
+            Your browser time zone is <span className="font-semibold">{browserTimezone}</span>, but your account is set to{" "}
+            <span className="font-semibold">{timezone}</span>. Booking times below are shown in your account time zone.
           </span>
           <div className="flex gap-2 shrink-0">
             {onUpdateTimezone && (
@@ -366,11 +366,11 @@ export default function LessonBookingTab({
                 className="text-[12px] font-bold text-ink underline"
                 onClick={() => onUpdateTimezone(browserTimezone).then(() => setTimezoneBannerDismissed(true))}
               >
-                브라우저 시간대로 변경
+                Use browser time zone
               </button>
             )}
             <button className="text-[12px] text-grey-500" onClick={() => setTimezoneBannerDismissed(true)}>
-              닫기
+              Dismiss
             </button>
           </div>
         </div>
@@ -383,7 +383,7 @@ export default function LessonBookingTab({
         <div className="mb-4 text-[12.5px] text-grey-600 bg-grey-100 rounded-lg px-4 py-3 space-y-1">
           {pendingActivationSubjects.map((s) => (
             <div key={s.subjectEnrollmentId}>
-              {s.subjectName} · {s.teacherName} 선생님 — {PENDING_ACTIVATION_REASON_LABEL[s.reason]}
+              {s.subjectName} · {s.teacherName} — {PENDING_ACTIVATION_REASON_LABEL[s.reason]}
             </div>
           ))}
         </div>
@@ -391,8 +391,8 @@ export default function LessonBookingTab({
 
       {showUpcoming && (bookableEnrollments.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-8">
-          아직 선생님 배정이 완료되지 않았어요. 배정이 끝나면 이 화면에서
-          바로 예약할 수 있어요.
+          A teacher hasn&apos;t been assigned yet. Once assignment is complete, you can book
+          right here.
         </div>
       ) : !showBookingForm ? (
         <div className="mb-6">
@@ -400,15 +400,15 @@ export default function LessonBookingTab({
             onClick={() => setShowBookingForm(true)}
             className="text-[12px] font-bold text-ink bg-grey-100 rounded-lg px-3 py-2"
           >
-            + 새 수업 예약하기
+            + Book a new lesson
           </button>
         </div>
       ) : (
         <div className="mb-6">
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-[12px] font-bold text-grey-500">과목·선생님 선택</label>
+            <label className="block text-[12px] font-bold text-grey-500">Select subject & teacher</label>
             <button onClick={() => setShowBookingForm(false)} className="text-[11px] font-semibold text-grey-500">
-              접기
+              Collapse
             </button>
           </div>
           <select
@@ -418,46 +418,46 @@ export default function LessonBookingTab({
           >
             {bookableEnrollments.map((e) => (
               <option key={e.subjectEnrollmentId} value={e.subjectEnrollmentId}>
-                {e.subjectName} · {e.teacherName} 선생님
+                {e.subjectName} · {e.teacherName}
               </option>
             ))}
           </select>
 
           {hasExistingTrialBooking ? (
             <div className="mt-3 text-[12px] text-grey-500 bg-grey-100 rounded-lg px-3 py-2">
-              이미 체험 수업을 예약하셨습니다. 체험 수업은 1회만 예약할 수 있습니다.
+              You&apos;ve already booked your trial lesson. Only one trial lesson can be booked.
             </div>
           ) : selectedEnrollment?.isTrial ? (
-            <div className="mt-3 text-[12px] text-grey-500">체험 수업은 1회만 예약할 수 있습니다.</div>
+            <div className="mt-3 text-[12px] text-grey-500">Only one trial lesson can be booked.</div>
           ) : (
             <div className="flex gap-2 mt-3">
               <button
                 className={`text-[12px] font-bold px-3 py-1.5 rounded-full ${mode === "single" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
                 onClick={() => setMode("single")}
               >
-                1회 예약
+                Single lesson
               </button>
               <button
                 className={`text-[12px] font-bold px-3 py-1.5 rounded-full ${mode === "weekly" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
                 onClick={() => setMode("weekly")}
               >
-                주 1회 반복(최대 8회)
+                Weekly (up to 8 lessons)
               </button>
             </div>
           )}
 
           {!hasExistingTrialBooking && (
           <div className="mt-4">
-            {loadingSlots && <div className="text-[13px] text-grey-500">예약 가능 시간을 불러오는 중…</div>}
+            {loadingSlots && <div className="text-[13px] text-grey-500">Loading available times…</div>}
             {!loadingSlots && slots && slots.length === 0 && (
               <div className="text-[13px] text-grey-500">
-                지금은 열린 시간이 없어요. 다른 날짜를 확인해보시거나 선생님께
-                시간 조율을 요청해보세요.
+                No open times right now. Try another date or ask your teacher
+                to adjust their availability.
               </div>
             )}
             {!loadingSlots && slots && slots.length > 0 && (
               <div className="mb-4">
-                <div className="text-[12px] font-bold text-grey-500 mb-1.5">빠른 추천 시간</div>
+                <div className="text-[12px] font-bold text-grey-500 mb-1.5">Quick picks</div>
                 <div className="flex flex-wrap gap-1.5">
                   {slots.slice(0, 3).map((slot) => (
                     <button
@@ -491,14 +491,14 @@ export default function LessonBookingTab({
                 <div>
                   <div data-testid="selected-date-label" className="text-[12px] font-bold text-grey-500 mb-1.5">
                     {selectedDateKey
-                      ? new Intl.DateTimeFormat("ko-KR", { timeZone: timezone, month: "long", day: "numeric", weekday: "short" }).format(
+                      ? new Intl.DateTimeFormat("en-US", { timeZone: timezone, month: "short", day: "numeric", weekday: "short" }).format(
                           new Date(`${selectedDateKey}T12:00:00Z`)
                         )
-                      : "날짜를 선택하세요"}
+                      : "Select a date"}
                   </div>
                   {selectedDateKey && slotsForSelectedDate.length === 0 && (
                     <div className="text-[13px] text-grey-500">
-                      이 날짜는 열린 시간이 없어요. 다른 날짜를 선택해보세요.
+                      No open times on this date. Try another date.
                     </div>
                   )}
                   <div className="flex flex-wrap gap-1.5">
@@ -526,19 +526,19 @@ export default function LessonBookingTab({
 
           {pendingSlot && (
             <div className="mt-4 border-[1.5px] border-ink rounded-xl px-5 py-4">
-              <div className="text-[13px] font-bold text-ink mb-2">예약 확인</div>
+              <div className="text-[13px] font-bold text-ink mb-2">Confirm booking</div>
               <div className="text-[13px] text-ink mb-1">
-                {selectedEnrollment?.subjectName} · {selectedEnrollment?.teacherName} 선생님
+                {selectedEnrollment?.subjectName} · {selectedEnrollment?.teacherName}
               </div>
               <div className="text-[13px] text-grey-500 mb-3">
                 {mode === "single" || selectedEnrollment?.isTrial
                   ? formatDateTime(pendingSlot.toISOString(), timezone)
-                  : `첫 회차 ${formatDateTime(pendingSlot.toISOString(), timezone)}부터 매주 같은 시간, 최대 8회`}
+                  : `Weekly at the same time starting ${formatDateTime(pendingSlot.toISOString(), timezone)}, up to 8 lessons`}
               </div>
               {mode === "weekly" && !selectedEnrollment?.isTrial && (
                 <div className="mb-3">
                   <div className="text-[11px] font-bold text-grey-500 mb-1">
-                    생성 시도할 날짜(최대 8회 — 선생님 가용시간·수업권 잔여량에 따라 일부만 생성될 수 있습니다)
+                    Dates to be booked (up to 8 — some may not be created depending on teacher availability and remaining credits)
                   </div>
                   <ul className="text-[12px] text-grey-500 list-disc list-inside">
                     {weeklyPreviewDates.map((d) => (
@@ -553,14 +553,14 @@ export default function LessonBookingTab({
                   onClick={() => setPendingSlot(null)}
                   className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                 >
-                  다시 선택
+                  Choose again
                 </button>
                 <button
                   disabled={submitting}
                   onClick={handleConfirmPendingSlot}
                   className="text-[12px] font-bold text-white bg-ink rounded-lg px-3 py-1.5 disabled:opacity-50"
                 >
-                  최종 확정
+                  Confirm
                 </button>
               </div>
             </div>
@@ -570,19 +570,19 @@ export default function LessonBookingTab({
 
       {showUpcoming && (
       <div className="flex items-center justify-between mt-8 mb-2.5">
-        <h2 className="text-[15px] font-bold text-ink">예정된 수업</h2>
+        <h2 className="text-[15px] font-bold text-ink">Upcoming Lessons</h2>
         <div className="flex gap-1.5">
           <button
             onClick={() => setUpcomingView("list")}
             className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${upcomingView === "list" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
           >
-            목록
+            List
           </button>
           <button
             onClick={() => setUpcomingView("calendar")}
             className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${upcomingView === "calendar" ? "bg-ink text-white" : "bg-grey-100 text-grey-500"}`}
           >
-            월간
+            Month
           </button>
         </div>
       </div>
@@ -613,8 +613,8 @@ export default function LessonBookingTab({
           return (
             <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
               {upcomingView === "calendar" && upcomingCalendarDateKey
-                ? "이 날짜에 예정된 수업이 없습니다."
-                : "예정된 수업이 없어요. 위에서 새 수업을 예약해보세요."}
+                ? "No lessons scheduled on this date."
+                : "No upcoming lessons. Book a new lesson above."}
             </div>
           );
         }
@@ -624,7 +624,7 @@ export default function LessonBookingTab({
               <div>
                 {/* 2026-09-22(사용자 지시) — 과목명·선생님명을 한 줄에 붙이지 말고 분리, 과목명이 위. */}
                 <div className="text-[14px] font-bold text-ink">{b.subjectName}</div>
-                <div className="text-[13px] text-grey-600">{b.teacherName} 선생님</div>
+                <div className="text-[13px] text-grey-600">{b.teacherName}</div>
                 <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(b.startsAt, timezone)}</div>
               </div>
               {cancellingReservationId !== b.reservationId && (
@@ -636,7 +636,7 @@ export default function LessonBookingTab({
                   }}
                   className="text-[12px] font-bold text-red disabled:opacity-50"
                 >
-                  취소
+                  Cancel
                 </button>
               )}
             </div>
@@ -647,26 +647,26 @@ export default function LessonBookingTab({
                 onClick={() => router.push(`/session/${b.sessionId}`)}
                 className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
               >
-                수업 준비
+                Prepare
               </button>
               {b.googleMeetLink && (
                 <button
                   onClick={() => handleStartClass(b.sessionId, b.googleMeetLink)}
                   className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-ink text-white"
                 >
-                  수업 시작
+                  Start lesson
                 </button>
               )}
             </div>
             {cancellingReservationId === b.reservationId && (
               <div className="mt-3 border-t border-grey-200 pt-3">
-                <label className="block text-[11px] font-bold text-grey-500 mb-1">취소 사유</label>
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">Reason for cancelling</label>
                 <input
                   autoFocus
                   className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                   value={cancelReasonDraft}
                   onChange={(e) => setCancelReasonDraft(e.target.value)}
-                  placeholder="예: 일정이 바뀌었어요"
+                  placeholder="e.g. My schedule changed"
                 />
                 <div className="flex gap-2 justify-end">
                   <button
@@ -674,14 +674,14 @@ export default function LessonBookingTab({
                     onClick={() => setCancellingReservationId(null)}
                     className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                   >
-                    닫기
+                    Close
                   </button>
                   <button
                     disabled={submitting}
                     onClick={() => handleCancel(b.reservationId)}
                     className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
                   >
-                    취소 확정
+                    Confirm cancellation
                   </button>
                 </div>
               </div>
@@ -692,10 +692,10 @@ export default function LessonBookingTab({
 
       {showPast && (
       <>
-      <h2 className="text-[15px] font-bold text-ink mb-2.5 mt-8">지난 수업</h2>
+      <h2 className="text-[15px] font-bold text-ink mb-2.5 mt-8">Past Lessons</h2>
       {pastSessionsForReport.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          최근 14일 이내 지난 수업이 없습니다.
+          No past lessons in the last 14 days.
         </div>
       ) : (
         pastSessionsForReport.map((s) => (
@@ -703,10 +703,10 @@ export default function LessonBookingTab({
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-[14px] font-bold text-ink flex items-center gap-1.5">
-                  {s.subjectName} · {s.teacherName} 선생님
+                  {s.subjectName} · {s.teacherName}
                   {s.needsReview && (
                     <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-yellow-bg text-ink">
-                      리뷰 작성 필요
+                      Review needed
                     </span>
                   )}
                 </div>
@@ -715,25 +715,25 @@ export default function LessonBookingTab({
                   onClick={() => router.push(`/session/${s.sessionId}`)}
                   className="text-[12px] font-semibold text-blue mt-1"
                 >
-                  수업 준비 내역
+                  Lesson prep details
                 </button>
               </div>
               {reportingSessionId !== s.sessionId &&
                 (reportedSessionIds.has(s.sessionId) ? (
-                  <span className="text-[12px] font-semibold text-grey-500">신고 접수됨</span>
+                  <span className="text-[12px] font-semibold text-grey-500">Report submitted</span>
                 ) : (
                   <button
                     disabled={reportSubmitting}
                     onClick={() => openReportForm(s.sessionId)}
                     className="text-[12px] font-bold text-red disabled:opacity-50"
                   >
-                    지각·노쇼 신고
+                    Report late / no-show
                   </button>
                 ))}
             </div>
             {reportingSessionId === s.sessionId && (
               <div className="mt-3 border-t border-grey-200 pt-3">
-                <label className="block text-[11px] font-bold text-grey-500 mb-1">신고 유형</label>
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">Report type</label>
                 <select
                   className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                   value={reportType}
@@ -747,23 +747,23 @@ export default function LessonBookingTab({
                 </select>
                 {reportType === "teacher_late" && (
                   <>
-                    <label className="block text-[11px] font-bold text-grey-500 mb-1">지각 시간(분)</label>
+                    <label className="block text-[11px] font-bold text-grey-500 mb-1">Minutes late</label>
                     <input
                       type="number"
                       min={1}
                       className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                       value={reportMinutesLate}
                       onChange={(e) => setReportMinutesLate(e.target.value)}
-                      placeholder="예: 10"
+                      placeholder="e.g. 10"
                     />
                   </>
                 )}
-                <label className="block text-[11px] font-bold text-grey-500 mb-1">상세 내용(선택)</label>
+                <label className="block text-[11px] font-bold text-grey-500 mb-1">Details (optional)</label>
                 <input
                   className="w-full border-[1.5px] border-grey-200 rounded-lg px-3 py-2 text-[13px] mb-2"
                   value={reportNotes}
                   onChange={(e) => setReportNotes(e.target.value)}
-                  placeholder="상황을 알려주세요"
+                  placeholder="Tell us what happened"
                 />
                 <div className="flex gap-2 justify-end">
                   <button
@@ -771,14 +771,14 @@ export default function LessonBookingTab({
                     onClick={() => setReportingSessionId(null)}
                     className="text-[12px] font-semibold text-grey-500 disabled:opacity-50"
                   >
-                    닫기
+                    Close
                   </button>
                   <button
                     disabled={reportSubmitting || (reportType === "teacher_late" && !reportMinutesLate)}
                     onClick={() => handleSubmitReport(s.sessionId)}
                     className="text-[12px] font-bold text-white bg-red rounded-lg px-3 py-1.5 disabled:opacity-50"
                   >
-                    신고 제출
+                    Submit report
                   </button>
                 </div>
               </div>

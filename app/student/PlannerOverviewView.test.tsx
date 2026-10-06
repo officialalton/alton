@@ -19,17 +19,17 @@ describe("PlannerOverviewView", () => {
     (loadMyBoardCardsAction as ReturnType<typeof vi.fn>).mockResolvedValue(cards);
     render(<PlannerOverviewView />);
 
-    expect(await screen.findByText("전체 완료율")).toBeInTheDocument();
+    expect(await screen.findByText("Overall completion")).toBeInTheDocument();
     expect(screen.getByText("25%")).toBeInTheDocument();
     expect(screen.getByText("(1/4)")).toBeInTheDocument();
-    expect(screen.getByText("과제")).toBeInTheDocument();
-    expect(screen.getByText("단어시험")).toBeInTheDocument();
+    expect(screen.getByText("Assignments")).toBeInTheDocument();
+    expect(screen.getByText("Vocabulary Quizzes")).toBeInTheDocument();
   });
 
   it("카드가 없으면 완료율은 빈 값(—)이다", async () => {
     (loadMyBoardCardsAction as ReturnType<typeof vi.fn>).mockResolvedValue([]);
     render(<PlannerOverviewView />);
-    await screen.findByText("전체 완료율");
+    await screen.findByText("Overall completion");
     expect(screen.getByText("—")).toBeInTheDocument();
   });
 });

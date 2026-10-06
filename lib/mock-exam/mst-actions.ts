@@ -46,7 +46,7 @@ type MstSupabase = Awaited<ReturnType<typeof requireStudentFeature>>["supabase"]
 
 async function fetchMstState(supabase: MstSupabase, attemptId: string): Promise<ActionResult<MstAttemptState>> {
   const { data, error } = await supabase.rpc("mock_exam_mst_state", { p_attempt_id: attemptId });
-  if (error) return { ok: false, error: toErr(error, "응시 상태를 불러오지 못했습니다.") };
+  if (error) return { ok: false, error: toErr(error, "Could not load the exam state.") };
   return { ok: true, value: normalize(data) };
 }
 
@@ -55,7 +55,7 @@ export async function loadMstAttemptStateAction(attemptId: string): Promise<Acti
     const { supabase } = await requireStudentFeature("mock_exam");
     return await fetchMstState(supabase, attemptId);
   } catch (e) {
-    return { ok: false, error: toErr(e, "응시 상태를 불러오지 못했습니다.") };
+    return { ok: false, error: toErr(e, "Could not load the exam state.") };
   }
 }
 
@@ -64,14 +64,14 @@ export async function startMstAttemptAction(attemptId: string): Promise<ActionRe
   try {
     const { supabase } = await requireStudentFeature("mock_exam");
     const { error } = await supabase.rpc("mock_exam_start_mst", { p_attempt_id: attemptId });
-    if (error) return { ok: false, error: toErr(error, "시험을 시작하지 못했습니다.") };
+    if (error) return { ok: false, error: toErr(error, "Could not start the exam.") };
     // 모듈 타이머는 위 RPC 의 now() 로 시작한다. 그 뒤 서버 작업(로그인 재확인·캐시 갱신)이 끼면 학생 시간에서 빠지므로
     // 같은 클라이언트로 상태를 바로 조회하고 캐시 갱신은 그 뒤에 한다(2026-10-02 UAT: 시작 직후 31:57).
     const state = await fetchMstState(supabase, attemptId);
     revalidatePath("/student");
     return state;
   } catch (e) {
-    return { ok: false, error: toErr(e, "시험을 시작하지 못했습니다.") };
+    return { ok: false, error: toErr(e, "Could not start the exam.") };
   }
 }
 
@@ -81,7 +81,7 @@ export async function submitMstModuleAction(attemptId: string, expectedModule: M
   try {
     const { supabase } = await requireStudentFeature("mock_exam");
     const { error } = await supabase.rpc("mock_exam_submit_module", { p_attempt_id: attemptId, p_expected_module: expectedModule });
-    if (error) return { ok: false, error: toErr(error, "모듈을 제출하지 못했습니다.") };
+    if (error) return { ok: false, error: toErr(error, "Could not submit the module.") };
     // 다음 모듈 타이머도 이 RPC 시각에 시작하므로 시작과 같은 순서를 지킨다(상태 조회 → 캐시 갱신).
     const state = await fetchMstState(supabase, attemptId);
     revalidatePath("/student");
@@ -89,6 +89,6 @@ export async function submitMstModuleAction(attemptId: string, expectedModule: M
     revalidatePath("/parent");
     return state;
   } catch (e) {
-    return { ok: false, error: toErr(e, "모듈을 제출하지 못했습니다.") };
+    return { ok: false, error: toErr(e, "Could not submit the module.") };
   }
 }

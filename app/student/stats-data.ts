@@ -111,6 +111,6 @@ export async function loadStudentStats(
     loadStats(admin, studentId, { includeSatisfaction: tier !== "family" }),
     admin.rpc("student_stats_aggregate", { p_student_id: studentId, p_include_staff: tier === "admin" }),
   ]);
-  if (agg.error) throw new Error("통계를 집계하지 못했습니다.");
+  if (agg.error) throw new Error("Couldn't compute statistics.");
   return { ...base, extended: buildExtendedStats(agg.data as RawStatsAggregate, tier) };
 }

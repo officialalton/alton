@@ -52,14 +52,14 @@ const essayEntry: ProblemLogEntry = {
 describe("ProblemLogTab", () => {
   it("목록에 형식/정답여부/선생님픽 배지를 보여준다", () => {
     render(<ProblemLogTab initialEntries={[mcEntry, essayEntry]} viewerRole="student" />);
-    expect(screen.getAllByText("객관식").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("오답").length).toBeGreaterThan(0);
-    expect(screen.getByText("🏷 선생님 픽")).toBeInTheDocument();
+    expect(screen.getAllByText("Multiple choice").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Incorrect").length).toBeGreaterThan(0);
+    expect(screen.getByText("🏷 Teacher pick")).toBeInTheDocument();
   });
 
   it("정답여부 필터로 오답만 볼 수 있다", () => {
     render(<ProblemLogTab initialEntries={[mcEntry, essayEntry]} viewerRole="student" />);
-    fireEvent.click(screen.getByRole("button", { name: "오답" }));
+    fireEvent.click(screen.getByRole("button", { name: "Incorrect" }));
     expect(screen.getByText(/이차방정식의 해가 아닌 것/)).toBeInTheDocument();
     expect(screen.queryByText(/다음 지문을 요약/)).not.toBeInTheDocument();
   });
@@ -67,12 +67,12 @@ describe("ProblemLogTab", () => {
   it("저장 필터와 학생의 저장 토글이 동작한다", async () => {
     render(<ProblemLogTab initialEntries={[mcEntry, essayEntry]} viewerRole="student" />);
 
-    fireEvent.click(screen.getByText("★ 저장한 문제만"));
+    fireEvent.click(screen.getByText("★ Saved only"));
     expect(screen.getByText(/다음 지문을 요약/)).toBeInTheDocument();
     expect(screen.queryByText(/이차방정식의 해가 아닌 것/)).not.toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("★ 저장한 문제만"));
-    fireEvent.click(screen.getByTitle("저장하기"));
+    fireEvent.click(screen.getByText("★ Saved only"));
+    fireEvent.click(screen.getByTitle("Save"));
     await waitFor(() =>
       expect(problemlogActions.toggleSaveAttempt).toHaveBeenCalledWith("a1", true)
     );
@@ -81,24 +81,24 @@ describe("ProblemLogTab", () => {
   it("학생 화면에서 카드를 펼치면 다시 풀기 버튼이 보이고, 선생님 픽 버튼은 없다", () => {
     render(<ProblemLogTab initialEntries={[mcEntry]} viewerRole="student" />);
     fireEvent.click(screen.getByText(/이차방정식의 해가 아닌 것/));
-    expect(screen.getByText("🔁 다시 풀기")).toBeInTheDocument();
-    expect(screen.queryByText("🏷 선생님 픽")).not.toBeInTheDocument();
+    expect(screen.getByText("🔁 Try again")).toBeInTheDocument();
+    expect(screen.queryByText("🏷 Teacher pick")).not.toBeInTheDocument();
   });
 
   it("선생님 화면에서 카드를 펼치면 선생님 픽 버튼이 보이고, 다시 풀기 버튼은 없다", () => {
     render(<ProblemLogTab initialEntries={[mcEntry]} viewerRole="teacher" />);
     fireEvent.click(screen.getByText(/이차방정식의 해가 아닌 것/));
-    expect(screen.queryByText("🔁 다시 풀기")).not.toBeInTheDocument();
-    const pickButtons = screen.getAllByText("🏷 선생님 픽");
+    expect(screen.queryByText("🔁 Try again")).not.toBeInTheDocument();
+    const pickButtons = screen.getAllByText("🏷 Teacher pick");
     expect(pickButtons.length).toBeGreaterThan(0);
   });
 
   it("선생님은 사유를 선택하고 태깅을 저장할 수 있다", async () => {
     render(<ProblemLogTab initialEntries={[mcEntry]} viewerRole="teacher" />);
     fireEvent.click(screen.getByText(/이차방정식의 해가 아닌 것/));
-    fireEvent.click(screen.getAllByText("🏷 선생님 픽").at(-1)!);
-    fireEvent.click(screen.getByText("로직"));
-    fireEvent.click(screen.getByText("태깅 저장"));
+    fireEvent.click(screen.getAllByText("🏷 Teacher pick").at(-1)!);
+    fireEvent.click(screen.getByText("Logic"));
+    fireEvent.click(screen.getByText("Save tag"));
     await waitFor(() =>
       expect(problemlogActions.saveTeacherPick).toHaveBeenCalledWith("a1", ["로직"], null)
     );

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { LibrarySubjectTree } from "@/lib/subject-material-library";
 
-const KIND_BADGE: Record<string, string> = { pdf: "PDF", video: "영상" };
+const KIND_BADGE: Record<string, string> = { pdf: "PDF", video: "Video" };
 const KIND_ICON: Record<string, string> = { pdf: "📄", video: "🎬", html: "📖" };
 // 2026-09-22(사용자 지시) — 교재별로 실제 파일 색을 다르게 두지 않는 대신, 제목
 // 해시로 표지 색을 결정해 갤러리에서 서로 구분되게 한다(실제 PDF 1페이지 렌더는

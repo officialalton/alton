@@ -57,14 +57,14 @@ describe("교사용 팁 — 선생님 화면", () => {
   it("기본으로 팁 레이어를 보이고 쪽당 1회만 조회하며, 숨기면 조회·레이어가 없고 선택이 기기에 남는다", async () => {
     const { unmount } = render(<AssetMaterialViewer assets={assets} sessionId="s1" role="teacher" viewerUserId="t1" tipAccess="view" />);
     const toggle = await screen.findByTestId("pdf-tip-toggle");
-    expect(toggle).toHaveTextContent("교사용 팁 숨기기");
+    expect(toggle).toHaveTextContent("Hide teacher tips");
     expect(await screen.findByTestId("pdf-tip-layer-root")).toHaveAttribute("data-mode", "view");
     await waitFor(() => expect(tipActions.loadPdfTipStrokes).toHaveBeenCalledTimes(1));
     expect(tipActions.loadPdfTipStrokes).toHaveBeenCalledWith("v1", 1);
 
     fireEvent.click(toggle);
     expect(screen.queryByTestId("pdf-tip-layer-root")).toBeNull();
-    expect(screen.getByTestId("pdf-tip-toggle")).toHaveTextContent("교사용 팁 보기");
+    expect(screen.getByTestId("pdf-tip-toggle")).toHaveTextContent("Show teacher tips");
     expect(tipActions.loadPdfTipStrokes).toHaveBeenCalledTimes(1); // 숨김 = 추가 요청 0
     expect(memory.get("alton:pdf-tip-visible")).toBe("0");
     unmount();
@@ -72,7 +72,7 @@ describe("교사용 팁 — 선생님 화면", () => {
     // 다시 열면 숨김이 유지되고 요청도 없다.
     vi.clearAllMocks();
     render(<AssetMaterialViewer assets={assets} sessionId="s1" role="teacher" viewerUserId="t1" tipAccess="view" />);
-    await waitFor(() => expect(screen.getByTestId("pdf-tip-toggle")).toHaveTextContent("교사용 팁 보기"));
+    await waitFor(() => expect(screen.getByTestId("pdf-tip-toggle")).toHaveTextContent("Show teacher tips"));
     expect(screen.queryByTestId("pdf-tip-layer-root")).toBeNull();
     expect(tipActions.loadPdfTipStrokes).not.toHaveBeenCalled();
   });
@@ -87,7 +87,7 @@ describe("교사용 팁 — 학생·보호자 화면", () => {
     expect(screen.queryByTestId("pdf-tip-edit-toggle")).toBeNull();
     expect(tipActions.loadPdfTipStrokes).not.toHaveBeenCalled();
     expect(tipActions.getPdfTipReviewStateAction).not.toHaveBeenCalled();
-    expect(document.body.textContent).not.toContain("교사용 팁");
+    expect(document.body.textContent).not.toContain("teacher tips");
   });
 
   it("tipAccess 를 주지 않아도(기본값) 비노출이다", async () => {
@@ -104,12 +104,12 @@ describe("교사용 팁 — 관리자 편집", () => {
     expect(screen.queryByTestId("pdf-tip-layer-root")).toBeNull();
     fireEvent.click(await screen.findByTestId("pdf-tip-edit-toggle"));
     expect(await screen.findByTestId("pdf-tip-layer-root")).toHaveAttribute("data-mode", "edit");
-    expect(await screen.findByTestId("pdf-tip-pending-count")).toHaveTextContent("검토 전 1쪽");
-    expect(screen.getByTestId("pdf-tip-count-warning")).toHaveTextContent("쪽수가 달라졌습니다. 페이지가 밀렸는지 확인하세요.");
+    expect(await screen.findByTestId("pdf-tip-pending-count")).toHaveTextContent("1 unreviewed page");
+    expect(screen.getByTestId("pdf-tip-count-warning")).toHaveTextContent("Page count changed. Check whether pages have shifted.");
 
-    fireEvent.click(screen.getByRole("button", { name: "이 쪽 확인" }));
+    fireEvent.click(screen.getByRole("button", { name: "Mark page reviewed" }));
     await waitFor(() => expect(tipActions.markPdfTipPageReviewedAction).toHaveBeenCalledWith("v1", 1));
-    fireEvent.click(screen.getByRole("button", { name: /전체 확인/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Mark all reviewed/ }));
     await waitFor(() => expect(tipActions.markPdfTipVersionReviewedAction).toHaveBeenCalledWith("v1"));
 
     fireEvent.click(screen.getByTestId("pdf-tip-edit-toggle"));

@@ -18,7 +18,7 @@ describe("evalBasicExpression — 모의고사 기본 계산기", () => {
   });
 
   it("0으로 나누거나 잘못된 식은 오류를 표시한다", () => {
-    expect(evalBasicExpression("1/0")).toBe("오류");
-    expect(evalBasicExpression("1+")).toBe("오류");
+    expect(evalBasicExpression("1/0")).toBe("Error");
+    expect(evalBasicExpression("1+")).toBe("Error");
   });
 });

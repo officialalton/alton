@@ -226,7 +226,7 @@ export async function loadPinnedMaterialData(
     // 버전이 기록되지 않았다. 현재 내용으로 대체하지 않는다.
     return {
       docId: docId ?? "",
-      title: "이번 수업 교재",
+      title: "Lesson material",
       sections: [],
       canvasStrokes,
       preservedUnavailable: true,
@@ -285,7 +285,7 @@ export async function loadPinnedMaterialData(
     // 버전은 가리키는데 내용이 비어 있다 — 스냅샷이 불완전하다.
     return {
       docId: docId ?? "",
-      title: title ?? "이번 수업 교재",
+      title: title ?? "Lesson material",
       sections: [],
       canvasStrokes,
       preservedUnavailable: true,
@@ -294,7 +294,7 @@ export async function loadPinnedMaterialData(
 
   return {
     docId: docId ?? "",
-    title: title ?? "이번 수업 교재",
+    title: title ?? "Lesson material",
     sections: ordered,
     canvasStrokes,
     ...(assets.length ? { assets } : {}),
@@ -315,7 +315,7 @@ function assetFromSnapshot(docId: string, versionId: string, snapshot: DocSnapsh
     docId,
     versionId,
     kind,
-    title: snapshot.title ?? "자료",
+    title: snapshot.title ?? "Material",
     pageCount: typeof snapshot.asset?.pageCount === "number" ? snapshot.asset.pageCount : null,
     mimeType: snapshot.asset?.mimeType ?? (kind === "pdf" ? "application/pdf" : "video/mp4"),
     ...(snapshot.asset?.path ? {} : { unavailable: true }),
@@ -439,7 +439,7 @@ export async function loadPlannedMaterialData(
 
   return {
     docId: firstDocId,
-    title: (docs.find((d) => d.id === firstDocId)?.title as string) ?? "이번 회차 교재",
+    title: (docs.find((d) => d.id === firstDocId)?.title as string) ?? "Session material",
     sections: ordered.map((s) => ({
       id: s.id as string,
       title: s.title as string,
@@ -518,8 +518,8 @@ export function frozenMaterialNotice(
   if (state === "prep") return null;
   if (freezeState === "frozen_with_materials") return null;
   if (freezeState === "frozen_without_materials") {
-    return "이 수업에는 고정된 교재가 없습니다. 문제만으로 진행한 수업일 수 있습니다.";
+    return "This lesson has no fixed material. It may have been taught with problems only.";
   }
   // 기록이 없다 — 자료 없이 시작했는지, 기록이 남지 않았는지 구분할 근거가 없다.
-  return "이 수업의 고정된 교재 구성을 확인할 수 없습니다.";
+  return "The fixed material for this lesson can't be verified.";
 }

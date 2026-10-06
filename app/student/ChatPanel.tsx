@@ -82,19 +82,19 @@ export default function ChatPanel({
   return (
     <div className="max-w-[560px] px-8 py-8 flex flex-col h-screen">
       <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
-        ← 뒤로
+        ← Back
       </button>
       <h1 className="text-[16px] font-extrabold text-ink mb-1">
-        {teacherName}과의 메시지
+        Messages with {teacherName}
       </h1>
       <p className="text-[11.5px] text-grey-500 mb-4">
-        이 대화는 학부모님과 관리자가 항상 열람할 수 있습니다.
+        Your parent and the ALTON team can always view this conversation.
       </p>
 
       <div className="flex-1 overflow-y-auto mb-4 min-h-0">
         {messages.length === 0 ? (
           <p className="text-[13px] text-grey-500 text-center py-8">
-            아직 주고받은 메시지가 없습니다.
+            No messages yet.
           </p>
         ) : (
           messages.map((m) => (
@@ -114,7 +114,7 @@ export default function ChatPanel({
                 }
               >
                 <div className="text-[10px] font-bold opacity-60 mb-0.5">
-                  {m.senderRole === "student" ? "나" : "선생님"}
+                  {m.senderRole === "student" ? "Me" : "Teacher"}
                 </div>
                 {m.text}
               </div>
@@ -131,7 +131,7 @@ export default function ChatPanel({
           onKeyDown={(e) => {
             if (e.key === "Enter") handleSend();
           }}
-          placeholder="메시지를 입력하세요"
+          placeholder="Type a message"
           className="flex-1 px-3.5 py-2.5 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
         />
         <button
@@ -139,7 +139,7 @@ export default function ChatPanel({
           onClick={handleSend}
           className="text-[13px] font-bold px-4 py-2.5 rounded-lg bg-ink text-white disabled:opacity-50"
         >
-          전송
+          Send
         </button>
       </div>
     </div>

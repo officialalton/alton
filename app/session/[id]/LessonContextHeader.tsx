@@ -24,7 +24,7 @@ export default function LessonContextHeader({
       <div className="max-w-[760px] mx-auto">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
           <span className="text-[11.5px] font-bold text-grey-500">
-            {studentName ? `${studentName} 학생` : "내 수업"}
+            {studentName ?? "My lesson"}
           </span>
           {trail && <span className="text-[11.5px] text-grey-300">·</span>}
           {trail && <span className="text-[11.5px] font-semibold text-grey-500">{trail}</span>}
@@ -34,18 +34,18 @@ export default function LessonContextHeader({
         </div>
 
         <h1 className="text-[19px] sm:text-[21px] font-extrabold text-ink leading-tight">
-          {context.unitTitle ?? "이번 수업"}
+          {context.unitTitle ?? "This lesson"}
         </h1>
 
         {context.goal ? (
           <p className="text-[13.5px] leading-[1.65] text-grey-500 mt-1.5">{context.goal}</p>
         ) : (
-          <p className="text-[13px] text-grey-400 mt-1.5">이 회차의 목표가 아직 적히지 않았습니다.</p>
+          <p className="text-[13px] text-grey-400 mt-1.5">No goal has been set for this session yet.</p>
         )}
 
         {context.supplementTitles.length > 0 && (
           <p className="text-[12px] text-grey-500 mt-1.5">
-            함께 다루는 회차 · {context.supplementTitles.join(", ")}
+            Also covers · {context.supplementTitles.join(", ")}
           </p>
         )}
       </div>

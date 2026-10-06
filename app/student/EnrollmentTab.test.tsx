@@ -34,8 +34,8 @@ describe("EnrollmentTab — 확정 수업 리뷰 표시(학생/보호자 공용,
     (getLessonReviewsForFamily as ReturnType<typeof vi.fn>).mockResolvedValue([]);
     render(<EnrollmentTab enrollments={[enrollment]} />);
     await waitFor(() => expect(getLessonReviewsForFamily).toHaveBeenCalledWith("se1"));
-    expect(screen.queryByText(/수업 리뷰 보기/)).toBeNull();
-    expect(screen.queryByText(/수업 리뷰 \(선생님 확정\)/)).toBeNull();
+    expect(screen.queryByText(/View lesson reviews/)).toBeNull();
+    expect(screen.queryByText(/lesson review \(finalized by teacher\)/)).toBeNull();
   });
 
   it("확정된 리뷰만 버튼을 눌러야 보여주고, 카테고리별 의견 + 정규 진행 희망 같은 보호자 전용 버튼은 없다", async () => {
@@ -53,14 +53,14 @@ describe("EnrollmentTab — 확정 수업 리뷰 표시(학생/보호자 공용,
     ]);
     render(<EnrollmentTab enrollments={[enrollment]} />);
 
-    const toggle = await screen.findByText("수업 리뷰 보기 (1)");
+    const toggle = await screen.findByText("View lesson reviews (1)");
     expect(screen.queryByText("기초 개념 이해도 우수")).toBeNull();
     fireEvent.click(toggle);
 
     expect(await screen.findByText("기초 개념 이해도 우수")).toBeInTheDocument();
-    expect(screen.getByText("체험 수업 리뷰 (선생님 확정)")).toBeInTheDocument();
+    expect(screen.getByText("Trial lesson review (finalized by teacher)")).toBeInTheDocument();
     expect(screen.getByText("빠른 습득력")).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "정규 진행 희망합니다" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Continue with regular lessons" })).toBeNull();
   });
 
   it("완료된 정규 수업 리뷰도 체험과 함께 목록으로 보여준다(최신순)", async () => {
@@ -88,10 +88,10 @@ describe("EnrollmentTab — 확정 수업 리뷰 표시(학생/보호자 공용,
     ]);
     render(<EnrollmentTab enrollments={[enrollment]} />);
 
-    fireEvent.click(await screen.findByText("수업 리뷰 보기 (2)"));
+    fireEvent.click(await screen.findByText("View lesson reviews (2)"));
 
-    expect(await screen.findByText("정규 수업 리뷰 (선생님 확정)")).toBeInTheDocument();
-    expect(screen.getByText("체험 수업 리뷰 (선생님 확정)")).toBeInTheDocument();
+    expect(await screen.findByText("Regular lesson review (finalized by teacher)")).toBeInTheDocument();
+    expect(screen.getByText("Trial lesson review (finalized by teacher)")).toBeInTheDocument();
     expect(screen.getByText("정규 2회차 종합 의견")).toBeInTheDocument();
     expect(screen.getByText("체험 종합 의견")).toBeInTheDocument();
   });
@@ -111,9 +111,9 @@ describe("EnrollmentTab — 확정 수업 리뷰 표시(학생/보호자 공용,
     ]);
     render(<EnrollmentTab enrollments={[enrollment]} />);
 
-    fireEvent.click(await screen.findByText("수업 리뷰 보기 (1)"));
+    fireEvent.click(await screen.findByText("View lesson reviews (1)"));
 
-    expect(await screen.findByText("미팅록 요약")).toBeInTheDocument();
+    expect(await screen.findByText("Meeting record summary")).toBeInTheDocument();
     expect(screen.getByText("오늘 수업에서는 이차함수 개념을 다뤘습니다.")).toBeInTheDocument();
   });
 
@@ -132,10 +132,10 @@ describe("EnrollmentTab — 확정 수업 리뷰 표시(학생/보호자 공용,
     ]);
     render(<EnrollmentTab enrollments={[enrollment]} />);
 
-    fireEvent.click(await screen.findByText("수업 리뷰 보기 (1)"));
+    fireEvent.click(await screen.findByText("View lesson reviews (1)"));
 
-    expect(await screen.findByText("등록된 미팅록이 없습니다.")).toBeInTheDocument();
-    expect(screen.queryByText("미팅록 원본 보기(열람 전용)")).toBeNull();
+    expect(await screen.findByText("No meeting record available.")).toBeInTheDocument();
+    expect(screen.queryByText("View original meeting record (read-only)")).toBeNull();
   });
 
   it("실제 Drive 권한이 부여된 세션은 '미팅록 원본 보기' 링크를 보여준다", async () => {
@@ -153,9 +153,9 @@ describe("EnrollmentTab — 확정 수업 리뷰 표시(학생/보호자 공용,
     ]);
     render(<EnrollmentTab enrollments={[enrollment]} />);
 
-    fireEvent.click(await screen.findByText("수업 리뷰 보기 (1)"));
+    fireEvent.click(await screen.findByText("View lesson reviews (1)"));
 
-    const link = await screen.findByText("미팅록 원본 보기(열람 전용)");
+    const link = await screen.findByText("View original meeting record (read-only)");
     expect(link.closest("a")).toHaveAttribute("href", "https://drive.google.com/file/d/abc123/view");
   });
 });
@@ -186,14 +186,14 @@ describe("EnrollmentTab — 커리큘럼 보기 진입(v3 읽기 전용)", () =>
     });
 
     render(<EnrollmentTab enrollments={[enrollment]} />);
-    fireEvent.click(await screen.findByText("커리큘럼 보기 →"));
+    fireEvent.click(await screen.findByText("View curriculum →"));
 
     expect(loadMyCurriculumOverlay).toHaveBeenCalledWith("se1");
     expect((await screen.findAllByText("이차방정식", { exact: false })).length).toBeGreaterThan(0);
-    expect(screen.queryByText("커리큘럼 보기 →")).toBeNull();
+    expect(screen.queryByText("View curriculum →")).toBeNull();
 
-    fireEvent.click(screen.getByText("← 뒤로"));
-    expect(await screen.findByText("커리큘럼 보기 →")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("← Back"));
+    expect(await screen.findByText("View curriculum →")).toBeInTheDocument();
   });
 });
 
@@ -224,10 +224,10 @@ describe("EnrollmentTab — 종료된 수강의 담당 교사 표시", () => {
       ],
     };
     render(<EnrollmentTab enrollments={[terminated]} />);
-    fireEvent.click(screen.getByText("수강 종료"));
-    expect(await screen.findByText(/마지막 담당 선생님/)).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Ended"));
+    expect(await screen.findByText(/Last teacher/)).toBeInTheDocument();
     expect(screen.getByText("박서연 선생님")).toBeInTheDocument();
-    expect(screen.queryByText("배정 전")).toBeNull();
+    expect(screen.queryByText("Not assigned yet")).toBeNull();
   });
 
   it("종료 이력조차 없으면(정말 배정된 적 없음) '배정 전'을 그대로 보여준다", async () => {
@@ -242,8 +242,8 @@ describe("EnrollmentTab — 종료된 수강의 담당 교사 표시", () => {
       history: [],
     };
     render(<EnrollmentTab enrollments={[neverAssigned]} />);
-    expect(await screen.findByText("배정 전")).toBeInTheDocument();
-    expect(screen.queryByText(/마지막 담당 선생님/)).toBeNull();
+    expect(await screen.findByText("Not assigned yet")).toBeInTheDocument();
+    expect(screen.queryByText(/Last teacher/)).toBeNull();
   });
 });
 
@@ -259,7 +259,7 @@ describe("EnrollmentTab — 수강중/수강 종료 서브탭(2026-09-18)", () =
 
   it("상단에 '수강 과목' 같은 큰 제목을 더 이상 렌더링하지 않는다", () => {
     render(<EnrollmentTab enrollments={[active]} />);
-    expect(screen.queryByText("수강 과목")).toBeNull();
+    expect(screen.queryByText("Courses")).toBeNull();
   });
 
   it("기본 서브탭('수강중')에는 active/planned/paused만 보이고 종료된 과목은 숨는다", async () => {
@@ -270,7 +270,7 @@ describe("EnrollmentTab — 수강중/수강 종료 서브탭(2026-09-18)", () =
 
   it("'수강 종료' 서브탭을 누르면 completed/terminated만 보인다", async () => {
     render(<EnrollmentTab enrollments={[active, ended]} />);
-    fireEvent.click(screen.getByText("수강 종료"));
+    fireEvent.click(screen.getByText("Ended"));
     expect(await screen.findByText("AP Physics")).toBeInTheDocument();
     expect(screen.queryByText("SAT Math")).toBeNull();
   });

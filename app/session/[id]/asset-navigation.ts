@@ -39,7 +39,7 @@ export function tableOfContents(assets: MaterialAsset[]): TocEntry[] {
     out.push({ label: a.title, position: { assetIndex: i, page: 1 }, isPage: false });
     if (a.kind === "pdf") {
       for (let p = 1; p <= pageCountOf(a); p += 1) {
-        out.push({ label: `${p}쪽`, position: { assetIndex: i, page: p }, isPage: true });
+        out.push({ label: `Page ${p}`, position: { assetIndex: i, page: p }, isPage: true });
       }
     }
   });

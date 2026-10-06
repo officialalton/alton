@@ -13,24 +13,24 @@ export type PrepStatus = "not_started" | "in_progress" | "done";
 export type MilestoneStatus = "todo" | "in_progress" | "done";
 
 export const PREP_ITEM_LABELS: Record<PrepItemType, string> = {
-  essay: "에세이",
-  recommendation: "추천서",
-  portfolio: "포트폴리오",
-  volunteering: "봉사 활동",
-  internship: "인턴십",
-  other: "기타",
+  essay: "Essay",
+  recommendation: "Recommendation letter",
+  portfolio: "Portfolio",
+  volunteering: "Volunteering",
+  internship: "Internship",
+  other: "Other",
 };
 
 export const PREP_STATUS_LABELS: Record<PrepStatus, string> = {
-  not_started: "시작 전",
-  in_progress: "진행 중",
-  done: "완료",
+  not_started: "Not started",
+  in_progress: "In progress",
+  done: "Done",
 };
 
 export const MILESTONE_STATUS_LABELS: Record<MilestoneStatus, string> = {
-  todo: "예정",
-  in_progress: "진행 중",
-  done: "완료",
+  todo: "Planned",
+  in_progress: "In progress",
+  done: "Done",
 };
 
 export interface AcademicProfile {
@@ -97,10 +97,10 @@ export interface Demographics {
 
 export type ActivityTier = "exceptional" | "strong" | "solid" | "standard";
 export const ACTIVITY_TIER_LABELS: Record<ActivityTier, string> = {
-  exceptional: "Exceptional — 전국/국제 최상위 성과",
-  strong: "Strong — 주/지역 상위 또는 학교 내 최고 직책",
-  solid: "Solid — 꾸준한 참여 + 일부 성과",
-  standard: "Standard — 일반 참여",
+  exceptional: "Exceptional — top national/international achievement",
+  strong: "Strong — top state/regional results or highest school leadership role",
+  solid: "Solid — consistent participation with some achievements",
+  standard: "Standard — general participation",
 };
 
 export interface CollegeInterests {

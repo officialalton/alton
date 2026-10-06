@@ -40,38 +40,38 @@ const batchOf = (o: Partial<HomeworkBatchItem> = {}): HomeworkBatch => ({
 describe("HomeworkBatchPanel — 문제 오류 신고 버튼", () => {
   it("학생·선생님에게 신고 버튼이 있고, 내 신고 상태를 패널당 한 번 조회한다", async () => {
     const s = render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="student" />);
-    expect(screen.getByRole("button", { name: "문제 오류 신고" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Report a problem" })).toBeInTheDocument();
     await waitFor(() => expect(mine).toHaveBeenCalledWith(["p1"]));
     s.unmount();
     render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="teacher" />);
-    expect(screen.getByRole("button", { name: "문제 오류 신고" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Report a problem" })).toBeInTheDocument();
     expect(mine).toHaveBeenCalledTimes(2);
   });
 
   it("학부모(읽기 전용)·관리자(reportEnabled=false)에게는 버튼도 상태 조회도 없다", () => {
     const p = render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="student" readOnly />);
-    expect(screen.queryByRole("button", { name: "문제 오류 신고" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Report a problem" })).toBeNull();
     p.unmount();
     render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="teacher" reportEnabled={false} />);
-    expect(screen.queryByRole("button", { name: "문제 오류 신고" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Report a problem" })).toBeNull();
     expect(mine).not.toHaveBeenCalled();
   });
 
   it("해설 오류 유형은 선생님에게만 보인다", () => {
     const s = render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="student" />);
-    fireEvent.click(screen.getByRole("button", { name: "문제 오류 신고" }));
-    expect(screen.getByText("정답 오류")).toBeInTheDocument();
-    expect(screen.queryByText("해설 오류")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Report a problem" }));
+    expect(screen.getByText("Wrong answer key")).toBeInTheDocument();
+    expect(screen.queryByText("Explanation error")).toBeNull();
     s.unmount();
     render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="teacher" />);
-    fireEvent.click(screen.getByRole("button", { name: "문제 오류 신고" }));
-    expect(screen.getByText("해설 오류")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Report a problem" }));
+    expect(screen.getByText("Explanation error")).toBeInTheDocument();
   });
 
   it("내 신고 상태가 버튼 문구로 나온다", async () => {
     mine.mockResolvedValue({ ok: true, value: { p1: "confirmed" } });
     render(<HomeworkBatchPanel batches={[batchOf()]} viewerRole="student" />);
-    await waitFor(() => expect(screen.getByRole("button", { name: /오류가 확인되어 문항이 보관됐어요/ })).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByRole("button", { name: /report was confirmed and the question has been retired/ })).toBeInTheDocument());
   });
 });
 
@@ -83,26 +83,26 @@ describe("HomeworkBatchPanel — 오류 판정 조정 안내", () => {
     expect(screen.queryByTestId("problem-error-adjusted")).toBeNull();
     pre.unmount();
     render(<HomeworkBatchPanel batches={[{ ...batchOf(graded), items: [mcItem({ ...graded, grade: "correct" })] }]} viewerRole="student" />);
-    fireEvent.click(screen.getByRole("button", { name: "지난 과제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Past" }));
     fireEvent.click(screen.getByText("9월 15일 과제"));
-    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("문항 오류로 채점이 조정되었습니다.");
+    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("The grade was adjusted due to a problem error.");
   });
 
   it("선생님은 '조정 대상'을 보고 재채점하면 서버 액션을 부르고 표시가 사라진다", async () => {
     render(<HomeworkBatchPanel batches={[batchOf({ ...graded, errorAdjustmentPending: true })]} viewerRole="teacher" />);
-    fireEvent.click(screen.getByRole("button", { name: "지난 과제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Past" }));
     fireEvent.click(screen.getByText("9월 15일 과제"));
     expect(screen.getByTestId("problem-error-pending")).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "정답으로 다시 채점" }));
+    fireEvent.click(screen.getByRole("button", { name: "Regrade as correct" }));
     await waitFor(() => expect(regrade).toHaveBeenCalledWith("b1", "p1", "correct"));
     await waitFor(() => expect(screen.queryByTestId("problem-error-pending")).toBeNull());
   });
 
   it("학생에게는 '조정 대상' 재채점 UI가 보이지 않는다", () => {
     render(<HomeworkBatchPanel batches={[batchOf({ ...graded, errorAdjustmentPending: true })]} viewerRole="student" />);
-    fireEvent.click(screen.getByRole("button", { name: "지난 과제" }));
+    fireEvent.click(screen.getByRole("button", { name: "Past" }));
     fireEvent.click(screen.getByText("9월 15일 과제"));
     expect(screen.queryByTestId("problem-error-pending")).toBeNull();
-    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("선생님이 채점을 다시 확인하고 있어요.");
+    expect(screen.getByTestId("problem-error-adjusted")).toHaveTextContent("your teacher is re-checking the grade.");
   });
 });

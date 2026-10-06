@@ -191,7 +191,7 @@ export default forwardRef<
   }
 
   async function clearAll(): Promise<void> {
-    if (typeof window !== "undefined" && !window.confirm("이 페이지의 팁을 모두 지울까요?")) return;
+    if (typeof window !== "undefined" && !window.confirm("Clear all tips on this page?")) return;
     await flush();
     savedRef.current = [];
     commitSegment({ x0: 0, y0: 0, x1: 0, y1: 0, color, tool: "clear", w: canvasRef.current?.width });
@@ -265,7 +265,7 @@ export default forwardRef<
       {editable && textDraft && width > 0 && (
         <textarea
           autoFocus
-          aria-label="팁 텍스트"
+          aria-label="Tip text"
           data-testid="pdf-tip-text-input"
           value={textDraft.value}
           onChange={(e) => setTextDraft((d) => (d ? { ...d, value: e.target.value } : d))}
@@ -279,7 +279,7 @@ export default forwardRef<
               commitText();
             }
           }}
-          placeholder="입력 후 Enter (줄바꿈은 Shift+Enter)"
+          placeholder="Type, then press Enter (Shift+Enter for a new line)"
           className="absolute pointer-events-auto bg-white/90 border-2 rounded px-1.5 py-1 outline-none resize-none font-semibold text-ink shadow-md"
           style={{
             zIndex: 9,
@@ -301,7 +301,7 @@ export default forwardRef<
           style={{ zIndex: 8, borderColor: "rgba(123,63,160,0.4)" }}
           data-testid="pdf-tip-toolbar"
         >
-          <span className="text-[11px] font-extrabold" style={{ color: "#7B3FA0" }}>교사용 팁</span>
+          <span className="text-[11px] font-extrabold" style={{ color: "#7B3FA0" }}>Teacher tips</span>
           <button
             type="button"
             disabled={!loaded}
@@ -309,37 +309,37 @@ export default forwardRef<
             aria-pressed={drawMode}
             className={"text-[11.5px] font-bold px-2 py-1 rounded disabled:opacity-60 " + (drawMode ? "bg-ink text-white" : "text-ink")}
           >
-            {!loaded ? "팁 불러오는 중…" : drawMode ? "✏️ 팁 쓰기 끄기" : "✏️ 팁 쓰기 시작"}
+            {!loaded ? "Loading tips…" : drawMode ? "✏️ Stop writing tips" : "✏️ Start writing tips"}
           </button>
           {drawMode && (
             <>
-              <button type="button" onClick={() => setTool("pen")} aria-pressed={tool === "pen"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "pen" ? "bg-grey-100 font-bold" : "")}>펜</button>
-              <button type="button" onClick={() => setTool("eraser")} aria-pressed={tool === "eraser"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "eraser" ? "bg-grey-100 font-bold" : "")}>지우개</button>
-              <button type="button" onClick={() => setTool("text")} aria-pressed={tool === "text"} title="클릭한 자리에 글을 쓴다" className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "text" ? "bg-grey-100 font-bold" : "")}>T 텍스트</button>
-              <button type="button" onClick={() => void clearAll()} title="이 페이지의 팁을 모두 지운다" className="text-[11.5px] px-1.5 py-1 rounded text-red">전체 지우기</button>
+              <button type="button" onClick={() => setTool("pen")} aria-pressed={tool === "pen"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "pen" ? "bg-grey-100 font-bold" : "")}>Pen</button>
+              <button type="button" onClick={() => setTool("eraser")} aria-pressed={tool === "eraser"} className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "eraser" ? "bg-grey-100 font-bold" : "")}>Eraser</button>
+              <button type="button" onClick={() => setTool("text")} aria-pressed={tool === "text"} title="Write text where you click" className={"text-[11.5px] px-1.5 py-1 rounded " + (tool === "text" ? "bg-grey-100 font-bold" : "")}>T Text</button>
+              <button type="button" onClick={() => void clearAll()} title="Clear all tips on this page" className="text-[11.5px] px-1.5 py-1 rounded text-red">Clear all</button>
               {TIP_COLORS.map((c) => (
-                <button key={c} type="button" aria-label={`색 ${c}`} aria-pressed={color === c} onClick={() => setColor(c)} className={"w-4 h-4 rounded-full border-2 " + (color === c ? "border-ink" : "border-transparent")} style={{ backgroundColor: c }} />
+                <button key={c} type="button" aria-label={`Color ${c}`} aria-pressed={color === c} onClick={() => setColor(c)} className={"w-4 h-4 rounded-full border-2 " + (color === c ? "border-ink" : "border-transparent")} style={{ backgroundColor: c }} />
               ))}
             </>
           )}
           {drawMode && tool === "text" && !textDraft && (
-            <span className="text-[11px] font-semibold text-ink bg-yellow-50 border border-yellow-200 rounded px-1.5 py-0.5">페이지에서 글을 놓을 자리를 클릭하세요</span>
+            <span className="text-[11px] font-semibold text-ink bg-yellow-50 border border-yellow-200 rounded px-1.5 py-0.5">Click where you want to place the text</span>
           )}
           <span data-testid="pdf-tip-save-state" className={"text-[11px] font-semibold " + (saveState === "error" ? "text-red" : "text-grey-500")}>
-            {saveState === "saving" ? "저장 중…" : saveState === "saved" ? "저장됨" : saveState === "error" ? "저장 안 됨" : ""}
+            {saveState === "saving" ? "Saving…" : saveState === "saved" ? "Saved" : saveState === "error" ? "Not saved" : ""}
           </span>
           {saveState === "error" && (
-            <button type="button" onClick={() => void flush()} className="text-[11px] font-bold text-red underline">다시 시도</button>
+            <button type="button" onClick={() => void flush()} className="text-[11px] font-bold text-red underline">Retry</button>
           )}
         </div>
       )}
 
       {/* 상태 안내 — 읽기 전용 화면은 조용히(빈·오류는 표시하지 않는다: 교재 사용을 방해하지 않는다). */}
       {editable && loaded && loadError && (
-        <p className="absolute bottom-2 left-2 text-[12px] text-red bg-white/80 rounded px-2 py-1 pointer-events-none" style={{ zIndex: 8 }} data-testid="pdf-tip-load-error">팁을 불러오지 못했습니다.</p>
+        <p className="absolute bottom-2 left-2 text-[12px] text-red bg-white/80 rounded px-2 py-1 pointer-events-none" style={{ zIndex: 8 }} data-testid="pdf-tip-load-error">Couldn&apos;t load tips.</p>
       )}
       {editable && loaded && !loadError && empty && !drawMode && (
-        <p className="absolute bottom-2 left-2 text-[12px] text-grey-500 bg-white/80 rounded px-2 py-1 pointer-events-none" style={{ zIndex: 8 }} data-testid="pdf-tip-empty">이 쪽에는 팁이 없습니다.</p>
+        <p className="absolute bottom-2 left-2 text-[12px] text-grey-500 bg-white/80 rounded px-2 py-1 pointer-events-none" style={{ zIndex: 8 }} data-testid="pdf-tip-empty">No tips on this page.</p>
       )}
     </div>
   );

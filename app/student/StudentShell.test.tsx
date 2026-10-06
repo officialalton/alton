@@ -193,7 +193,7 @@ describe("StudentShell", () => {
     expect(screen.queryByText("Planner")).toBeNull();
     expect(screen.queryByText("레슨")).toBeNull();
     expect(screen.queryByText("예약")).toBeNull();
-    expect(screen.getByText(/지훈의 학습 현황/)).toBeInTheDocument();
+    expect(screen.getByText(/지훈's Learning Overview/)).toBeInTheDocument();
   });
 
   // 2026-09-22(사용자 지시, 재지시로 Done 서브탭 제거) — Home 탭 안에서
@@ -211,9 +211,9 @@ describe("StudentShell", () => {
     );
     expect(screen.getByText("Overview")).toBeInTheDocument();
     fireEvent.click(screen.getByText("TODO"));
-    expect(await screen.findByPlaceholderText("+ 할 일 추가")).toBeInTheDocument();
+    expect(await screen.findByPlaceholderText("+ Add a task")).toBeInTheDocument();
     fireEvent.click(screen.getByText("Review"));
-    expect(await screen.findByText("수업 리뷰")).toBeInTheDocument();
+    expect(await screen.findByText("Lesson Reviews")).toBeInTheDocument();
   });
 
   it("선생님 탭을 누르면 TeacherTab이 렌더링된다", () => {
@@ -226,7 +226,7 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("My Teacher")[0]);
-    expect(screen.getByText("매칭된 선생님이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No teacher has been matched yet.")).toBeInTheDocument();
   });
 
   it("계정 메뉴의 '수강권(Credits)'을 누르면 CreditsTab이 팝업으로 렌더링된다(2026-09-22: 탭에서 계정 팝업으로 이동)", () => {
@@ -238,9 +238,9 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText(/지훈 학생님/)[0]);
-    fireEvent.click(screen.getAllByText("수강권(Credits)")[0]);
-    expect(screen.getByText("장 보유")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText(/^지훈$/)[0]);
+    fireEvent.click(screen.getAllByText("Credits")[0]);
+    expect(screen.getByText("credits")).toBeInTheDocument();
   });
 
   it("단어장 탭을 누르면 VocabLibraryTab이 렌더링된다", () => {
@@ -254,7 +254,7 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getAllByText("Vocabulary")[0]);
     expect(
-      screen.getByText("아직 추가한 단어가 없어요. '+ 단어 추가'를 눌러보세요.")
+      screen.getByText("No words added yet. Tap '+ Add word' to get started.")
     ).toBeInTheDocument();
   });
 
@@ -268,7 +268,7 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("Practice")[0]);
-    expect(screen.getByText("조건에 맞는 문제 기록이 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No problems match these filters.")).toBeInTheDocument();
   });
 
   it("수업 탭을 누르면 ClassesTab이 렌더링되고, 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보인다(레거시 '레슨'/'예약' 탭 제거)", () => {
@@ -281,10 +281,10 @@ describe("StudentShell", () => {
       />
     );
     fireEvent.click(screen.getAllByText("Classes")[0]);
-    expect(screen.getByText("예정 수업")).toBeInTheDocument();
-    expect(screen.getByText("지난 수업")).toBeInTheDocument();
+    expect(screen.getByText("Upcoming")).toBeInTheDocument();
+    expect(screen.getByText("Past")).toBeInTheDocument();
     expect(
-      screen.getByText("아직 선생님 배정이 완료되지 않았어요. 배정이 끝나면 이 화면에서 바로 예약할 수 있어요.")
+      screen.getByText("A teacher hasn't been assigned yet. Once assignment is complete, you can book right here.")
     ).toBeInTheDocument();
   });
 
@@ -299,7 +299,7 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getAllByText("Assignments")[0]);
     expect(
-      screen.getByText(/아직 발급된 과제가 없습니다/)
+      screen.getByText(/No assignments have been issued yet/)
     ).toBeInTheDocument();
   });
 
@@ -314,7 +314,7 @@ describe("StudentShell", () => {
     );
     fireEvent.click(screen.getAllByText("Materials")[0]);
     expect(
-      screen.getByText("아직 배정된 교재가 없어요. 담당 선생님이 곧 준비해드릴 예정이에요.")
+      screen.getByText("No materials have been assigned yet. Your teacher will have them ready soon.")
     ).toBeInTheDocument();
   });
 
@@ -327,8 +327,8 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getByText("지훈 학생님 ▾"));
-    expect(screen.getAllByText("로그아웃").length).toBeGreaterThan(0);
+    fireEvent.click(screen.getByText("지훈 ▾"));
+    expect(screen.getAllByText("Log out").length).toBeGreaterThan(0);
   });
 
   // 2026-09-18(고정형 모의고사 V1 내비 연결) — /student/mock-exam은 StudentShell

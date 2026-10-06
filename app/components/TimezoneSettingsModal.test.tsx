@@ -27,29 +27,29 @@ describe("TimezoneSettingsModal", () => {
   it("저장에 성공하면 화면을 새로고침하고 창을 닫는다", async () => {
     const onClose = vi.fn();
     render(<TimezoneSettingsModal onClose={onClose} showHouseholdDefault={false} />);
-    await screen.findByText("내 개인 시간대");
-    fireEvent.click(screen.getByRole("button", { name: "저장" }));
+    await screen.findByText("My personal timezone");
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
     await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1));
     expect(update).toHaveBeenCalledTimes(1);
     expect(refresh).toHaveBeenCalledTimes(1);
   });
 
   it("저장에 실패하면 창을 닫지 않고 오류를 보인다", async () => {
-    update.mockRejectedValue(new Error("저장에 실패했습니다"));
+    update.mockRejectedValue(new Error("Failed to save"));
     const onClose = vi.fn();
     render(<TimezoneSettingsModal onClose={onClose} showHouseholdDefault={false} />);
-    await screen.findByText("내 개인 시간대");
-    fireEvent.click(screen.getByRole("button", { name: "저장" }));
-    expect(await screen.findByText("저장에 실패했습니다")).toBeInTheDocument();
+    await screen.findByText("My personal timezone");
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    expect(await screen.findByText("Failed to save")).toBeInTheDocument();
     expect(onClose).not.toHaveBeenCalled();
   });
 
   it("'닫기'는 헤더 ✕ 하나뿐이고 아래에는 '취소'와 '저장'이 있다", async () => {
     const onClose = vi.fn();
     render(<TimezoneSettingsModal onClose={onClose} showHouseholdDefault={false} />);
-    await screen.findByText("내 개인 시간대");
-    expect(screen.getAllByRole("button", { name: "닫기" })).toHaveLength(1);
-    fireEvent.click(screen.getByRole("button", { name: "취소" }));
+    await screen.findByText("My personal timezone");
+    expect(screen.getAllByRole("button", { name: "Close" })).toHaveLength(1);
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

@@ -93,7 +93,7 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText(/수업 준비 중/)).toBeInTheDocument();
+    expect(screen.getByText(/Preparing lesson/)).toBeInTheDocument();
   });
 
   it("live 상태에서 학생에게는 노쇼 알림 버튼만 보인다", () => {
@@ -107,11 +107,11 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText(/Google Meet 연결됨/)).toBeInTheDocument();
+    expect(screen.getByText(/Google Meet connected/)).toBeInTheDocument();
     expect(
-      screen.getByText("선생님이 안 보이시나요? (노쇼 알림)")
+      screen.getByText("Can't see your teacher? (Report no-show)")
     ).toBeInTheDocument();
-    expect(screen.queryByText(/수업 종료/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/End lesson/)).not.toBeInTheDocument();
   });
 
   it("2026-09-10(UI/UX 정리 1차): 예정 종료 시각 이후 '수업 종료'를 누르면 확인 모달이 뜨고, 확인해야만 기존 종료 로직이 호출된다", async () => {
@@ -126,22 +126,22 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    const openButton = screen.getByRole("button", { name: "수업 종료" });
+    const openButton = screen.getByRole("button", { name: "End lesson" });
     expect(openButton).not.toBeDisabled();
     fireEvent.click(openButton);
 
     // 확인 모달에 학생명이 표시된다 — 아직 finalize는 호출되지 않는다.
-    expect(screen.getByText(/수업을 종료할까요\?/)).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${baseProps.studentName} 학생과의 수업을`))).toBeInTheDocument();
+    expect(screen.getByText(/End this lesson\?/)).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`The lesson with ${baseProps.studentName}`))).toBeInTheDocument();
     expect(finalizeMyLessonSession).not.toHaveBeenCalled();
 
-    const confirmButtons = screen.getAllByRole("button", { name: "수업 종료" });
+    const confirmButtons = screen.getAllByRole("button", { name: "End lesson" });
     fireEvent.click(confirmButtons[confirmButtons.length - 1]);
     await waitFor(() =>
       expect(finalizeMyLessonSession).toHaveBeenCalledWith({
         sessionId: baseProps.sessionId,
         outcome: "completed",
-        reason: "선생님 수업 종료",
+        reason: "Ended by teacher",
       })
     );
   });
@@ -158,14 +158,14 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
+    fireEvent.click(screen.getByRole("button", { name: "End lesson" }));
 
     expect(
-      screen.getByText("예정 종료 시각 전입니다 — 조기 종료 사유를 선택하세요")
+      screen.getByText("It's before the scheduled end time — choose a reason for ending early")
     ).toBeInTheDocument();
-    expect(screen.getByText("학생 사유(조퇴 등)")).toBeInTheDocument();
-    expect(screen.getByText("선생님 사유(지각 등)")).toBeInTheDocument();
-    expect(screen.getByText("서비스 장애(Meet 연결 등)")).toBeInTheDocument();
+    expect(screen.getByText("Student reason (left early, etc.)")).toBeInTheDocument();
+    expect(screen.getByText("Teacher reason (late start, etc.)")).toBeInTheDocument();
+    expect(screen.getByText("Service issue (Meet connection, etc.)")).toBeInTheDocument();
     expect(finalizeMyLessonSession).not.toHaveBeenCalled();
     expect(confirmSpy).not.toHaveBeenCalled();
   });
@@ -182,18 +182,18 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
-    fireEvent.click(screen.getByText("학생 사유(조퇴 등)"));
+    fireEvent.click(screen.getByRole("button", { name: "End lesson" }));
+    fireEvent.click(screen.getByText("Student reason (left early, etc.)"));
 
-    expect(screen.getByText("학생 사유로 종료할까요?")).toBeInTheDocument();
-    const confirmButtons = screen.getAllByRole("button", { name: "수업 종료" });
+    expect(screen.getByText("End for a student reason?")).toBeInTheDocument();
+    const confirmButtons = screen.getAllByRole("button", { name: "End lesson" });
     fireEvent.click(confirmButtons[confirmButtons.length - 1]);
 
     await waitFor(() =>
       expect(finalizeMyLessonSession).toHaveBeenCalledWith({
         sessionId: baseProps.sessionId,
         outcome: "completed",
-        reason: "학생 사유 조기 종료",
+        reason: "Ended early (student reason)",
         earlyEndReason: "student_reason",
       })
     );
@@ -210,11 +210,11 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
-    fireEvent.click(screen.getByText("선생님 사유(지각 등)"));
+    fireEvent.click(screen.getByRole("button", { name: "End lesson" }));
+    fireEvent.click(screen.getByText("Teacher reason (late start, etc.)"));
 
-    expect(screen.getByText(/지각 당일 연장/)).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "확인" }));
+    expect(screen.getByText(/Same-day extension/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "OK" }));
     expect(finalizeMyLessonSession).not.toHaveBeenCalled();
   });
 
@@ -229,11 +229,11 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 종료" }));
-    fireEvent.click(screen.getByText("서비스 장애(Meet 연결 등)"));
+    fireEvent.click(screen.getByRole("button", { name: "End lesson" }));
+    fireEvent.click(screen.getByText("Service issue (Meet connection, etc.)"));
 
-    expect(screen.getByText(/관리자에게/)).toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "확인" }));
+    expect(screen.getByText(/ask an admin/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "OK" }));
     expect(finalizeMyLessonSession).not.toHaveBeenCalled();
   });
 
@@ -248,7 +248,7 @@ describe("SessionShell — 세션 상태바", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText(/완료된 수업/)).toBeInTheDocument();
+    expect(screen.getByText(/completed/)).toBeInTheDocument();
   });
 });
 
@@ -267,7 +267,7 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.queryByText("문제 생성")).not.toBeInTheDocument();
+    expect(screen.queryByText("Problem Generation")).not.toBeInTheDocument();
 
     rerender(
       <SessionShell
@@ -279,7 +279,7 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.queryByText("문제 생성")).not.toBeInTheDocument();
+    expect(screen.queryByText("Problem Generation")).not.toBeInTheDocument();
   });
 
   it("교재/과제/단어장 탭은 그대로고, 연습장·문제 기록 탭은 없다(2026-09-14 UAT)", () => {
@@ -293,11 +293,11 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText("교재")).toBeInTheDocument();
-    expect(screen.getAllByText("과제").length).toBeGreaterThan(0);
-    expect(screen.getByText("단어장")).toBeInTheDocument();
-    expect(screen.queryByText("연습장")).not.toBeInTheDocument();
-    expect(screen.queryByText("문제 기록")).not.toBeInTheDocument();
+    expect(screen.getByText("Material")).toBeInTheDocument();
+    expect(screen.getAllByText("Assignments").length).toBeGreaterThan(0);
+    expect(screen.getByText("Vocabulary")).toBeInTheDocument();
+    expect(screen.queryByText("Practice")).not.toBeInTheDocument();
+    expect(screen.queryByText("Problem History")).not.toBeInTheDocument();
   });
 
   it("2026-09-10(UI/UX 정리 1차): 기본 활성 탭은 교재다", () => {
@@ -311,7 +311,7 @@ describe("SessionShell — 탭 노출", () => {
         durationMinutes={30}
       />
     );
-    expect(screen.getByText("이 세션에는 아직 배정된 교재가 없습니다.")).toBeInTheDocument();
+    expect(screen.getByText("No material has been assigned to this session yet.")).toBeInTheDocument();
   });
 });
 
@@ -377,7 +377,7 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={prep}
       />
     );
-    expect(screen.queryByRole("button", { name: "수업 준비" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Lesson Prep" })).not.toBeInTheDocument();
   });
 
   it("다룰 회차가 없으면 선생님에게도 빈 탭을 만들지 않는다", () => {
@@ -392,7 +392,7 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={null}
       />
     );
-    expect(screen.queryByRole("button", { name: "수업 준비" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Lesson Prep" })).not.toBeInTheDocument();
   });
 
   it("시작 전에는 적용 범위 안내를 덧붙이지 않는다", () => {
@@ -407,11 +407,11 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={prep}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    fireEvent.click(screen.getByRole("button", { name: "Lesson Prep" }));
     // 시작 전에는 '이미 고정된 수업을 여기서 고치는 것처럼 보이는' 안내를 붙이지
     // 않는다. 구성 설명 자체가 고정 시점을 말하는 것은 그것과 다른 이야기다.
-    expect(screen.queryByText(/이미 시작한 수업/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/고정된 내용에는 반영되지 않습니다/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/already started/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/not reflected in the locked content/)).not.toBeInTheDocument();
   });
 
   it("진행 중인 수업에서는 고정된 내용에 반영되지 않는다고 말한다", () => {
@@ -426,9 +426,9 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={prep}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    fireEvent.click(screen.getByRole("button", { name: "Lesson Prep" }));
     expect(
-      screen.getByText(/필기·답안·피드백을 바꾸지 않으며/)
+      screen.getByText(/don't affect this lesson's content, notes, answers, or feedback/)
     ).toBeInTheDocument();
   });
 
@@ -444,10 +444,10 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={prep}
       />
     );
-    fireEvent.click(screen.getByRole("button", { name: "수업 준비" }));
+    fireEvent.click(screen.getByRole("button", { name: "Lesson Prep" }));
     // 적용 범위를 "앞으로의 수업"이 아니라 대상이 분명하게 쓴다.
     expect(
-      screen.getByText(/이 회차를 쓰는 아직 시작하지 않은 수업에 적용됩니다/)
+      screen.getByText(/apply to lessons on this session that haven't started yet/)
     ).toBeInTheDocument();
   });
 
@@ -466,10 +466,10 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={livePrep}
       />
     );
-    expect(screen.queryByText(/수업 준비 중/)).not.toBeInTheDocument();
-    fireEvent.click(screen.getByText("수업 준비"));
-    expect(screen.getByTestId("repin-live")).toHaveTextContent("시작 시점의 구성이 고정");
-    expect(screen.getByRole("button", { name: "수업 구성 변경" })).toBeInTheDocument();
+    expect(screen.queryByText(/Preparing lesson/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("Lesson Prep"));
+    expect(screen.getByTestId("repin-live")).toHaveTextContent("locked when it started");
+    expect(screen.getByRole("button", { name: "Update lesson content" })).toBeInTheDocument();
   });
 
   it("시작 전 수업의 수업 준비 탭에는 '수업 구성 변경'이 없다", () => {
@@ -485,7 +485,7 @@ describe("SessionShell — 수업 준비 탭", () => {
         prep={livePrep}
       />
     );
-    fireEvent.click(screen.getByText("수업 준비"));
+    fireEvent.click(screen.getByText("Lesson Prep"));
     expect(screen.queryByTestId("repin-live")).not.toBeInTheDocument();
   });
 
@@ -502,10 +502,10 @@ describe("SessionShell — 수업 준비 탭", () => {
       />
     );
     expect(
-      screen.getByRole("button", { name: "과제" })
+      screen.getByRole("button", { name: "Assignments" })
     ).toHaveAttribute("aria-current", "page");
     expect(
-      screen.getByRole("button", { name: "교재" })
+      screen.getByRole("button", { name: "Material" })
     ).not.toHaveAttribute("aria-current");
   });
 });

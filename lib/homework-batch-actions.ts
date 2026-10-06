@@ -2,7 +2,7 @@
 
 import { requireStudentFeature } from "@/lib/feature-access";
 import { loadHomeworkBatch, type HomeworkBatchItem } from "./homework-batch-data";
-import { fmtDate } from "@/lib/format-datetime";
+import { fmtDateEn } from "@/lib/format-datetime-en";
 
 type ActionResult<T = undefined> = { ok: true; value: T } | { ok: false; error: string };
 
@@ -15,7 +15,7 @@ export async function issueHomeworkBatchAction(
   requests: { keywordId: string; count: number }[]
 ): Promise<ActionResult<{ id: string; problemCount: number }>> {
   const wanted = requests.filter((r) => Number.isFinite(r.count) && r.count > 0);
-  if (wanted.length === 0) return { ok: false, error: "키워드별로 낼 개수를 적으세요." };
+  if (wanted.length === 0) return { ok: false, error: "Enter how many questions to assign per keyword." };
   const { user, supabase } = await requireStudentFeature("homework");
 
   const [{ data: teacherProfile }, { data: keywordRow }] = await Promise.all([
@@ -25,8 +25,8 @@ export async function issueHomeworkBatchAction(
   const subjectId = (keywordRow?.subject_id as string | undefined) ?? null;
   const subjectsField = keywordRow?.subjects as unknown as { name: string } | { name: string }[] | null | undefined;
   const subjectName = (Array.isArray(subjectsField) ? subjectsField[0]?.name : subjectsField?.name) ?? null;
-  const dateLabel = fmtDate(new Date(), { month: "long", day: "numeric" });
-  const label = [dateLabel, subjectName, teacherProfile?.name].filter(Boolean).join(" ") || `${dateLabel} 과제`;
+  const dateLabel = fmtDateEn(new Date(), { month: "long", day: "numeric" });
+  const label = [dateLabel, subjectName, teacherProfile?.name].filter(Boolean).join(" ") || `${dateLabel} Homework`;
 
   const { data, error } = await supabase.rpc("issue_homework_batch_v2", {
     p_student_id: studentId, p_label: label,
@@ -48,7 +48,7 @@ export async function issueHomeworkBatchAction(
 export async function submitHomeworkAnswerAction(batchId: string, problemId: string, response: string): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("homework_submit_answer", { p_batch_id: batchId, p_problem_id: problemId, p_response: response });
-  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "답을 저장하지 못했습니다." };
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "Could not save your answer." };
   return { ok: true, value: undefined };
 }
 
@@ -60,8 +60,8 @@ export async function gradeHomeworkBatchAction(
 ): Promise<ActionResult> {
   const { user, supabase } = await requireStudentFeature("homework");
   const batch = await loadHomeworkBatch(supabase, batchId);
-  if (!batch) return { ok: false, error: "과제를 찾을 수 없습니다." };
-  if (batch.teacherId !== user.id) return { ok: false, error: "발급한 교사만 채점할 수 있습니다." };
+  if (!batch) return { ok: false, error: "Homework not found." };
+  if (batch.teacherId !== user.id) return { ok: false, error: "Only the teacher who issued this homework can grade it." };
   const overrideByProblem = new Map(overrides.map((o) => [o.problemId, o]));
   const now = new Date().toISOString();
   const nextItems: HomeworkBatchItem[] = batch.items.map((i) => {
@@ -79,7 +79,7 @@ export async function gradeHomeworkBatchAction(
     };
   });
   const { error } = await supabase.from("homework_batches").update({ items: nextItems }).eq("id", batchId);
-  if (error) return { ok: false, error: "채점을 저장하지 못했습니다." };
+  if (error) return { ok: false, error: "Could not save grading." };
   return { ok: true, value: undefined };
 }
 
@@ -89,7 +89,7 @@ export async function gradeHomeworkBatchAction(
 export async function toggleHomeworkItemSavedToPracticeAction(batchId: string, problemId: string, saved: boolean): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("toggle_homework_item_saved_to_practice", { p_batch_id: batchId, p_problem_id: problemId, p_saved: saved });
-  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "저장하지 못했습니다." };
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "Could not save." };
   return { ok: true, value: undefined };
 }
 
@@ -100,6 +100,6 @@ export async function regradeHomeworkItemAction(
 ): Promise<ActionResult> {
   const { supabase } = await requireStudentFeature("homework");
   const { error } = await supabase.rpc("homework_regrade_item", { p_batch_id: batchId, p_problem_id: problemId, p_grade: grade, p_comment: comment ?? null });
-  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "다시 채점하지 못했습니다." };
+  if (error) return { ok: false, error: error.message.replace(/^[A-Z0-9]{5}:\s*/, "") || "Could not regrade." };
   return { ok: true, value: undefined };
 }

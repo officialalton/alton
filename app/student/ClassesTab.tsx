@@ -63,9 +63,9 @@ export default function ClassesTab({
       <div className="mb-5">
         <UnderlineSubTabs
           items={[
-            { id: "upcoming", label: "예정 수업" },
-            { id: "past", label: "지난 수업" },
-            { id: "schedule", label: "수업 일정" },
+            { id: "upcoming", label: "Upcoming" },
+            { id: "past", label: "Past" },
+            { id: "schedule", label: "Schedule" },
           ]}
           activeId={subtab}
           onSelect={setSubtab}
@@ -107,7 +107,7 @@ export default function ClassesTab({
           <div className="max-w-[640px]">
             <details className="border-t border-grey-200 pt-4 pb-8">
               <summary className="text-[12.5px] font-semibold text-grey-500 cursor-pointer">
-                커리큘럼 진행·리뷰 (레거시 수업 기록)
+                Curriculum progress & reviews (legacy lesson records)
               </summary>
               <div className="mt-3">
                 <LessonsTab

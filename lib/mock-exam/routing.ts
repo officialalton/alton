@@ -44,6 +44,6 @@ export function selectPolicyForAttempt(
 /** 관리자 화면 표시용 한 줄 설명. */
 export function describePolicy(policy: RoutingPolicy): string {
   const value =
-    policy.thresholdType === "correct_ratio" ? `정답률 ${Math.round(policy.thresholdValue * 1000) / 10}% 이상` : `정답 ${policy.thresholdValue}개 이상`;
-  return `Module 1 ${value} → higher, 미만 → lower`;
+    policy.thresholdType === "correct_ratio" ? `${Math.round(policy.thresholdValue * 1000) / 10}% or more correct` : `${policy.thresholdValue} or more correct`;
+  return `Module 1 ${value} → higher, below → lower`;
 }

@@ -88,7 +88,7 @@ export default function TimezoneSettingsModal({
       // 저장이 끝나면 창을 닫는다(반영은 refresh로 바로 된다).
       onClose();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "저장에 실패했습니다");
+      setError(e instanceof Error ? e.message : "Failed to save");
     } finally {
       setSaving(false);
     }
@@ -98,11 +98,11 @@ export default function TimezoneSettingsModal({
     <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center px-4">
       <div className="bg-white rounded-xl border-[1.5px] border-grey-200 w-full max-w-md p-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-[15px] font-bold text-ink">시간대 설정</h2>
+          <h2 className="text-[15px] font-bold text-ink">Timezone settings</h2>
           <button
             type="button"
             onClick={onClose}
-            aria-label="닫기"
+            aria-label="Close"
             className="-mr-1 flex h-8 w-8 items-center justify-center rounded-lg text-[18px] leading-none text-grey-400 hover:bg-grey-50 hover:text-ink"
           >
             ✕
@@ -110,15 +110,15 @@ export default function TimezoneSettingsModal({
         </div>
 
         {loading ? (
-          <p className="text-[13px] text-grey-400 py-6 text-center">불러오는 중...</p>
+          <p className="text-[13px] text-grey-400 py-6 text-center">Loading...</p>
         ) : (
           <>
             {showHouseholdDefault && (
               <div className="mb-5">
-                <p className="text-[12.5px] font-semibold text-ink mb-1">가족 기본 시간대</p>
+                <p className="text-[12.5px] font-semibold text-ink mb-1">Family default timezone</p>
                 <p className="text-[11.5px] text-grey-400 mb-2">
-                  가족 구성원이 개인 시간대를 따로 설정하지 않으면 이 값을 기준으로 일정이 표시됩니다.
-                  {!isPrimaryGuardian && " (주 보호자만 변경할 수 있습니다)"}
+                  Schedules are shown in this timezone for family members who have not set a personal timezone.
+                  {!isPrimaryGuardian && " (Only the primary parent can change this.)"}
                 </p>
                 <select
                   value={household}
@@ -134,13 +134,13 @@ export default function TimezoneSettingsModal({
             )}
 
             <div className="mb-5">
-              <p className="text-[12.5px] font-semibold text-ink mb-1">내 개인 시간대</p>
+              <p className="text-[12.5px] font-semibold text-ink mb-1">My personal timezone</p>
               <p className="text-[11.5px] text-grey-400 mb-2">
                 {suggested && !done
-                  ? "브라우저에서 감지한 시간대를 미리 선택했습니다. 맞는지 확인하고 저장해 주세요."
+                  ? "We preselected the timezone detected from your browser. Check it and save."
                   : hasOverride
-                  ? "개인 시간대를 직접 고정했습니다. 가족 기본값이 바뀌어도 이 값이 유지됩니다."
-                  : "현재 가족 기본값을 따르고 있습니다. 다른 시간대를 선택하면 개인 시간대로 고정됩니다."}
+                  ? "You set a personal timezone. It stays even if the family default changes."
+                  : "You are following the family default. Selecting a different timezone sets it as your personal timezone."}
               </p>
               <select
                 value={personal}
@@ -163,7 +163,7 @@ export default function TimezoneSettingsModal({
                   }}
                   className="mt-2 text-[12px] font-semibold text-grey-500 underline"
                 >
-                  개인 설정 해제 (가족 기본값 따르기)
+                  Clear personal setting (follow family default)
                 </button>
               )}
             </div>
@@ -174,14 +174,14 @@ export default function TimezoneSettingsModal({
 
         <div className="flex justify-end gap-2">
           <button type="button" onClick={onClose} className="px-4 py-2 text-[13px] font-semibold text-grey-500">
-            취소
+            Cancel
           </button>
           <button
             onClick={handleSave}
             disabled={saving || loading}
             className="px-4 py-2 rounded-lg bg-red text-white text-[13px] font-semibold disabled:opacity-50"
           >
-            {saving ? "저장 중..." : "저장"}
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
       </div>

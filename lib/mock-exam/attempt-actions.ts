@@ -29,11 +29,11 @@ export async function startMockExamAction(examSetId: string): Promise<ActionResu
   try {
     const { supabase } = await requireStudentFeature("mock_exam");
     const { data, error } = await supabase.rpc("mock_exam_open_start", { p_exam_set_id: examSetId });
-    if (error) return { ok: false, error: toErr(error, "시험을 시작하지 못했습니다.") };
+    if (error) return { ok: false, error: toErr(error, "Could not start the exam.") };
     revalidatePath("/student");
     return { ok: true, value: { attemptId: data as string } };
   } catch (e) {
-    return { ok: false, error: toErr(e, "시험을 시작하지 못했습니다.") };
+    return { ok: false, error: toErr(e, "Could not start the exam.") };
   }
 }
 
@@ -59,7 +59,7 @@ export async function saveMockExamAnswerAction(
   return callRpc(
     "mock_exam_save_answer",
     { p_attempt_id: attemptId, p_set_item_id: setItemId, p_response: response, p_time_spent_seconds: timeSpentSeconds ?? null },
-    "답을 저장하지 못했습니다.",
+    "Could not save your answer.",
   );
 }
 
@@ -73,19 +73,19 @@ export async function saveMockExamSectionTimeAction(
   return callRpc(
     "mock_exam_save_section_time",
     { p_attempt_id: attemptId, p_section: section, p_remaining_seconds: Math.max(0, Math.floor(remainingSeconds)) },
-    "시간을 저장하지 못했습니다.",
+    "Could not save the time.",
   );
 }
 
 /** 2026-09-22(사용자 지시) — 응시 화면에 들어올 때마다 기록한다(나갔다 다시 들어오는
  * 시간 어뷰징 의심 신호를 교사가 통계로 볼 수 있게). 채점·시험 진행에는 영향 없다. */
 export async function recordMockExamEntryAction(attemptId: string): Promise<ActionResult> {
-  return callRpc("mock_exam_record_entry", { p_attempt_id: attemptId }, "입장 기록에 실패했습니다.");
+  return callRpc("mock_exam_record_entry", { p_attempt_id: attemptId }, "Could not record entry.");
 }
 
 /** 학생이 문항에 "표시"만 남긴다(정답 변경 없음) — 사양 3절 "문항 이동·표시". */
 export async function toggleMockExamFlagAction(attemptId: string, setItemId: string, flagged: boolean): Promise<ActionResult> {
-  return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "표시를 저장하지 못했습니다.");
+  return callRpc("mock_exam_toggle_flag", { p_attempt_id: attemptId, p_set_item_id: setItemId, p_flagged: flagged }, "Could not save the mark.");
 }
 
 /** 2026-10-02(오너 UAT A8) — 학생이 답을 모르고 찍었을 때 스스로 남기는 "찍음" 표시(토글).
@@ -101,7 +101,7 @@ export async function toggleMockExamSavedToPracticeAction(attemptId: string, set
   const r = await callRpc(
     "mock_exam_toggle_saved_to_practice",
     { p_attempt_id: attemptId, p_set_item_id: setItemId, p_saved: saved },
-    "저장하지 못했습니다.",
+    "Could not save.",
   );
   if (r.ok) revalidatePath("/student");
   return r;
@@ -112,7 +112,7 @@ export async function toggleMockExamSavedToPracticeAction(attemptId: string, set
  * 화면으로 전환될 수 있게, 새로 채점된 상세를 같이 돌려준다(클라이언트가 갖고 있던 마스킹된 상태를
  * 그대로 쓰면 아무것도 안 바뀐 것처럼 보이는 문제가 있었다). */
 export async function submitMockExamAttemptAction(attemptId: string): Promise<ActionResult<{ attempt: MockExamAttemptDetail | null }>> {
-  const r = await callRpc("mock_exam_submit", { p_attempt_id: attemptId }, "제출하지 못했습니다.");
+  const r = await callRpc("mock_exam_submit", { p_attempt_id: attemptId }, "Could not submit.");
   if (!r.ok) return r;
   revalidatePath("/student");
   revalidatePath("/teacher");
@@ -126,7 +126,7 @@ export async function submitMockExamAttemptAction(attemptId: string): Promise<Ac
  * 교사가 확정하는 기존 정책을 따른다" — homework_batches 의 gradeHomeworkBatchAction 과 같은 역할).
  * 확정 전까지 학생·학부모에게 정답·해설·정오는 보이지 않는다. */
 export async function finalizeMockExamGradingAction(attemptId: string): Promise<ActionResult> {
-  const r = await callRpc("mock_exam_finalize_grading", { p_attempt_id: attemptId }, "채점 확정에 실패했습니다.");
+  const r = await callRpc("mock_exam_finalize_grading", { p_attempt_id: attemptId }, "Could not finalize grading.");
   if (r.ok) {
     revalidatePath("/teacher");
     revalidatePath("/student");

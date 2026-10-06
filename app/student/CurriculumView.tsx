@@ -7,15 +7,15 @@ import type { CurriculumData, CurriculumUnitStatus } from "./curriculum-data";
 import type { Memo } from "./memo-data";
 
 const STATUS_LABEL: Record<CurriculumUnitStatus, string> = {
-  done: "완료",
-  in_progress: "진행중",
-  upcoming: "예정",
+  done: "Done",
+  in_progress: "In Progress",
+  upcoming: "Upcoming",
 };
 
 const AUTHOR_LABEL: Record<Memo["authorRole"], string> = {
-  teacher: "선생님",
-  student: "학생",
-  admin: "관리자",
+  teacher: "Teacher",
+  student: "Student",
+  admin: "Admin",
 };
 
 export default function CurriculumView({
@@ -39,7 +39,7 @@ export default function CurriculumView({
         onClick={onBack}
         className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
       >
-        ← 뒤로
+        ← Back
       </button>
 
       <div className="flex items-center justify-between mb-1.5">
@@ -47,14 +47,14 @@ export default function CurriculumView({
           {data.subjectName}
         </h1>
         <span className="text-[12px] font-bold px-3 py-1 rounded-full bg-grey-100 text-ink">
-          {data.currentSession} / {data.totalSessions}회차
+          Session {data.currentSession} / {data.totalSessions}
         </span>
       </div>
       <p className="text-[13px] text-grey-500 mb-5">{data.teacherName}</p>
 
       {data.units.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center mb-6">
-          아직 배정된 커리큘럼이 없습니다.
+          No curriculum has been assigned yet.
         </div>
       ) : (
         <div className="mb-6">
@@ -65,7 +65,7 @@ export default function CurriculumView({
             >
               <div className="flex items-center justify-between mb-1">
                 <span className="text-[13px] font-bold text-ink">
-                  {u.position}회차 · {u.unitTitle}
+                  Session {u.position} · {u.unitTitle}
                 </span>
                 <StatusBadge status={u.status} />
               </div>
@@ -78,13 +78,13 @@ export default function CurriculumView({
                     onClick={() => router.push(`/session/${u.sessionId}`)}
                     className="text-[12px] font-semibold text-blue"
                   >
-                    수업 기록
+                    Lesson record
                   </button>
                   <button
                     onClick={() => onReview(u.sessionId!)}
                     className="text-[12px] font-semibold text-blue"
                   >
-                    리뷰 보기
+                    View review
                   </button>
                 </div>
               )}
@@ -93,7 +93,7 @@ export default function CurriculumView({
                   onClick={() => router.push(`/session/${u.sessionId}`)}
                   className="text-[12px] font-semibold text-blue mt-1.5"
                 >
-                  수업 준비 →
+                  Prepare for lesson →
                 </button>
               )}
             </div>
@@ -151,10 +151,10 @@ function MemoCard({
 
   return (
     <div className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4.5">
-      <h2 className="text-[14px] font-bold text-ink mb-3">메모·피드백</h2>
+      <h2 className="text-[14px] font-bold text-ink mb-3">Notes & Feedback</h2>
       {memos.length === 0 ? (
         <p className="text-[12.5px] text-grey-500 mb-3">
-          아직 메모가 없습니다.
+          No notes yet.
         </p>
       ) : (
         memos.map((m) => (
@@ -171,7 +171,7 @@ function MemoCard({
           <input
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="메모를 남겨보세요"
+            placeholder="Leave a note"
             className="flex-1 px-3 py-2 border-[1.5px] border-grey-200 rounded-lg text-[13px]"
           />
           <button
@@ -179,7 +179,7 @@ function MemoCard({
             onClick={handleAdd}
             className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white disabled:opacity-50"
           >
-            추가
+            Add
           </button>
         </div>
       )}

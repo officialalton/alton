@@ -24,7 +24,7 @@ export default function ProblemFigure({ spec, className, text }: { spec: unknown
   if ("error" in result) {
     return (
       <p className={"text-[12px] text-red " + (className ?? "")} data-testid="problem-figure-error">
-        그림 데이터를 읽을 수 없습니다 — {result.error}
+        Couldn&apos;t read the figure data — {result.error}
       </p>
     );
   }
@@ -62,9 +62,9 @@ function FigureImage({ spec, className }: { spec: ImageFigureSpec; className?: s
     };
   }, [spec.bucket, spec.path]);
   if (error) {
-    return <p className={"text-[12px] text-red " + (className ?? "")} data-testid="problem-figure-error">그림을 불러올 수 없습니다 — {error}</p>;
+    return <p className={"text-[12px] text-red " + (className ?? "")} data-testid="problem-figure-error">Couldn&apos;t load the figure — {error}</p>;
   }
-  if (!url) return <div className={"text-[12px] text-grey-500 " + (className ?? "")}>그림을 불러오는 중…</div>;
+  if (!url) return <div className={"text-[12px] text-grey-500 " + (className ?? "")}>Loading figure…</div>;
   return (
     <div className={"problem-figure max-w-full " + (className ?? "")} data-testid="problem-figure">
       {/* eslint-disable-next-line @next/next/no-img-element */}

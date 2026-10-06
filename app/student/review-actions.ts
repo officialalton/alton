@@ -33,7 +33,7 @@ export async function submitStudentFeedback(
 // 넣지 않는다(listGuardianMeetingRequests는 role='parent' 전용).
 export async function getMyLessonReviewsAction(): Promise<FamilyLessonReview[]> {
   const { user, profile, supabase } = await requireStudentFeature("class");
-  if (profile?.role !== "student") throw new Error("학생만 접근할 수 있습니다.");
+  if (profile?.role !== "student") throw new Error("Only students can access this.");
   const { data: enrollments, error } = await supabase
     .from("subject_enrollments")
     .select("id")

@@ -514,7 +514,7 @@ export default function MockExamMstTakeClient({
 
                 <section aria-label="Answer" className="px-8 py-6 md:w-1/2 md:overflow-y-auto" data-testid="mst-pane-right">
                   {item.format === "mc" && item.options ? (
-                    <div role="radiogroup" aria-label="선택지" className="flex flex-col gap-2">
+                    <div role="radiogroup" aria-label="Answer choices" className="flex flex-col gap-2">
                       {item.options.map((opt, idx) => {
                         const chosen = responses[item.setItemId] === String(idx);
                         const struck = (annotations[item.setItemId]?.eliminated ?? []).includes(idx);

@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { buildMonthGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
 
-const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
+const WEEKDAY_LABELS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTH_LABELS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 export type DayBadge = { count: number; tone?: "ink" | "grey" | "red" | "green" };
 
@@ -64,13 +65,13 @@ export default function MonthCalendar({
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
-        <button onClick={goPrevMonth} className="text-[13px] font-bold text-grey-500 px-2 py-1" aria-label="이전 달">
+        <button onClick={goPrevMonth} className="text-[13px] font-bold text-grey-500 px-2 py-1" aria-label="Previous month">
           ‹
         </button>
         <div className="text-[13px] font-bold text-ink">
-          {year}년 {month + 1}월
+          {MONTH_LABELS[month]} {year}
         </div>
-        <button onClick={goNextMonth} className="text-[13px] font-bold text-grey-500 px-2 py-1" aria-label="다음 달">
+        <button onClick={goNextMonth} className="text-[13px] font-bold text-grey-500 px-2 py-1" aria-label="Next month">
           ›
         </button>
       </div>
@@ -90,8 +91,8 @@ export default function MonthCalendar({
               key={cell.dateKey}
               onClick={() => onSelectDate(cell.dateKey)}
               aria-pressed={isSelected}
-              aria-label={`${cell.day}일`}
-              title={hasExternalBusy ? "외부 일정 있음(예약 불가)" : undefined}
+              aria-label={`Day ${cell.day}`}
+              title={hasExternalBusy ? "External event (unavailable)" : undefined}
               className={
                 "aspect-square rounded-lg text-[12px] flex flex-col items-center justify-center gap-0.5 " +
                 (isSelected

@@ -11,7 +11,7 @@ import type { ChatMessage } from "./chat-data";
 import ChatPanel from "./ChatPanel";
 import { formatCurriculumProgressLabel } from "@/lib/curriculum-overlay-progress";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtIntl } from "@/lib/format-datetime";
+import { fmtIntlEn } from "@/lib/format-datetime-en";
 
 type SubView =
   | { type: "list" }
@@ -61,7 +61,7 @@ export default function TeacherTab({
     <div className="max-w-[640px]">
       {teachers.length === 0 ? (
         <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">
-          매칭된 선생님이 없습니다.
+          No teacher has been matched yet.
         </div>
       ) : (
         teachers.map((t) => (
@@ -104,13 +104,13 @@ export default function TeacherTab({
                 onClick={() => setSubView({ type: "profile", teacherId: t.teacherId })}
                 className="text-[12px] font-bold px-4 py-2 rounded-lg border border-grey-200"
               >
-                프로필 보기
+                View profile
               </button>
               <button
                 onClick={() => setSubView({ type: "chat", teacherId: t.teacherId })}
                 className="text-[12px] font-bold px-4 py-2 rounded-lg bg-ink text-white"
               >
-                💬 메시지
+                💬 Message
               </button>
             </div>
           </div>
@@ -136,7 +136,7 @@ function ProfileView({
   return (
     <div className="max-w-[560px] px-8 py-8">
       <button onClick={onBack} className="text-[13px] text-grey-600 font-semibold mb-4 border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform">
-        ← 뒤로
+        ← Back
       </button>
 
       <div className="flex items-center gap-3 mb-4">
@@ -173,10 +173,10 @@ function ProfileView({
           onClick={() => setShowHistory(true)}
           className="text-[12.5px] font-bold px-4 py-2.5 rounded-lg border border-grey-200"
         >
-          이 선생님과 진행한 수업 내역 보기
+          View lessons with this teacher
         </button>
       ) : history.length === 0 ? (
-        <p className="text-[12.5px] text-grey-500">아직 진행한 수업이 없습니다.</p>
+        <p className="text-[12.5px] text-grey-500">No lessons yet.</p>
       ) : (
         history.map((h) => (
           <button
@@ -188,7 +188,7 @@ function ProfileView({
               {formatKoreanDateTime(h.scheduledAt, tz)}
             </div>
             <div className="text-[13px] font-semibold text-ink">
-              {h.subjectName} · {h.sessionNumber}회차
+              {h.subjectName} · Session {h.sessionNumber}
             </div>
           </button>
         ))
@@ -199,8 +199,8 @@ function ProfileView({
 
 function formatKoreanDateTime(iso: string | null, tz: string) {
   if (!iso) return "";
-  return fmtIntl(new Date(iso), {
-    month: "long",
+  return fmtIntlEn(new Date(iso), {
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",

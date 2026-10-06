@@ -57,7 +57,7 @@ describe("LibraryDocView", () => {
   it("제목, 목차, 본문을 보여준다", () => {
     render(<LibraryDocView doc={doc} viewerRole="student" />);
     expect(screen.getByText("이차방정식 개념 정리")).toBeInTheDocument();
-    expect(screen.getByText("목차")).toBeInTheDocument();
+    expect(screen.getByText("Contents")).toBeInTheDocument();
     expect(
       screen.getByText(/판별식을 이용하면 실근의 개수를 알 수 있습니다/)
     ).toBeInTheDocument();
@@ -82,7 +82,7 @@ describe("LibraryDocView", () => {
     });
     render(<LibraryDocView doc={doc} viewerRole="student" />);
     fireEvent.click(screen.getByText("중근"));
-    fireEvent.click(screen.getByText("채점하기"));
+    fireEvent.click(screen.getByText("Check answer"));
     await waitFor(() =>
       expect(problemlogActions.retryMcAttempt).toHaveBeenCalledWith("p1", 1)
     );
@@ -116,7 +116,7 @@ describe("LibraryDocView", () => {
     });
     render(<LibraryDocView doc={redactedDoc} viewerRole="student" />);
     fireEvent.click(screen.getByText("중근"));
-    fireEvent.click(screen.getByText("채점하기"));
+    fireEvent.click(screen.getByText("Check answer"));
     await waitFor(() =>
       expect(problemlogActions.retryMcAttempt).toHaveBeenCalledWith("p1", 1)
     );
@@ -131,7 +131,7 @@ describe("LibraryDocView", () => {
   it("선생님/관리자에게는 정답과 해설이 항상 보이고 입력은 불가능하다", () => {
     render(<LibraryDocView doc={doc} viewerRole="teacher" />);
     expect(screen.getByText("D=0이면 중근을 가집니다.")).toBeInTheDocument();
-    expect(screen.queryByText("채점하기")).not.toBeInTheDocument();
+    expect(screen.queryByText("Check answer")).not.toBeInTheDocument();
   });
 
   it("학부모에게는 정답/해설/선택지가 전부 숨겨지고 안내 문구만 보인다", () => {
@@ -140,7 +140,7 @@ describe("LibraryDocView", () => {
     expect(screen.queryByText("중근")).not.toBeInTheDocument();
     expect(screen.queryByText("D=0이면 중근을 가집니다.")).not.toBeInTheDocument();
     expect(
-      screen.getByText("이 문제는 학생 계정으로 로그인해야 풀 수 있습니다.")
+      screen.getByText("Sign in with a student account to solve this problem.")
     ).toBeInTheDocument();
   });
 

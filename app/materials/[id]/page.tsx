@@ -33,7 +33,7 @@ export default async function MaterialsLibraryPage({
     return (
       <div className="min-h-screen flex items-center justify-center px-5">
         <p className="text-[14px] text-grey-500">
-          교재를 찾을 수 없습니다.
+          Material not found.
         </p>
       </div>
     );

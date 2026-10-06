@@ -151,18 +151,18 @@ export default function ProblemNoteCanvas({
             open ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"
           }`}
         >
-          {readOnly ? (open ? "화이트보드 닫기" : "화이트보드 보기") : open ? "화이트보드 끄기" : "📝 화이트보드"}
+          {readOnly ? (open ? "Hide whiteboard" : "View whiteboard") : open ? "Close whiteboard" : "📝 Whiteboard"}
         </button>
         {open && !readOnly && (
           <button type="button" onClick={handleClear} className="text-[11px] font-semibold text-grey-500 underline">
-            지우기
+            Clear
           </button>
         )}
       </div>
       {open && (
         <div className="mt-2 overflow-hidden rounded-lg border border-grey-200 bg-white">
           {strokes === null ? (
-            <p className="p-3 text-[12px] text-grey-400">불러오는 중…</p>
+            <p className="p-3 text-[12px] text-grey-400">Loading…</p>
           ) : (
             <canvas
               ref={canvasRef}

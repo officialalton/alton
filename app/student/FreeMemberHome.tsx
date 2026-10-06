@@ -33,53 +33,53 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
   return (
     <PageFrame title="Home">
       <div className="rounded-xl bg-white border border-brand-border p-6 mb-4">
-        <p className="text-[12px] font-bold text-brand-red mb-1">무료 학습 회원</p>
-        <h2 className="text-[20px] font-extrabold text-navy mb-2">{studentName} 학생님, 환영합니다</h2>
+        <p className="text-[12px] font-bold text-brand-red mb-1">Free member</p>
+        <h2 className="text-[20px] font-extrabold text-navy mb-2">Welcome, {studentName}</h2>
         <p className="text-[13.5px] text-grey-500 leading-[1.7]">
-          무료 모의고사를 풀고 결과·해설을 확인해 보세요. 틀린 문제는 Practice에, 모르는 단어는 Vocabulary에 모아 복습할 수 있습니다.
+          Take a free mock exam and review your results and explanations. Save missed questions to Practice and unfamiliar words to Vocabulary for review.
         </p>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 mb-4">
         <section className="rounded-xl bg-white border border-brand-border p-5" data-testid="free-home-next-exam">
-          <h3 className="text-[13px] font-bold text-navy mb-2">다음 모의고사</h3>
+          <h3 className="text-[13px] font-bold text-navy mb-2">Next Mock Exam</h3>
           {nextExam ? (
             <>
               <p className="text-[15px] font-extrabold text-ink">{nextExam.name}</p>
               <p className="text-[12px] text-grey-500 mt-0.5">
-                {inProgress ? "응시 중 — 이어서 풀기" : nextExam.format === "mst" ? "적응형 4모듈" : "고정형"}
+                {inProgress ? "In progress — continue" : nextExam.format === "mst" ? "Adaptive, 4 modules" : "Fixed form"}
               </p>
               <button type="button" onClick={() => onSelectTab("mock-exam")} className="mt-3 px-4 py-2.5 rounded-lg bg-brand-red text-white text-[13px] font-bold">
-                {inProgress ? "이어서 풀기" : "모의고사 시작"}
+                {inProgress ? "Continue" : "Start mock exam"}
               </button>
             </>
           ) : (
             <p className="text-[13px] text-grey-500">
-              {catalog.length === 0 ? "지금 공개된 무료 모의고사가 없습니다." : "공개된 무료 모의고사를 모두 응시했습니다."}
+              {catalog.length === 0 ? "No free mock exams are available right now." : "You have taken all available free mock exams."}
             </p>
           )}
         </section>
 
         <section className="rounded-xl bg-white border border-brand-border p-5" data-testid="free-home-latest-result">
-          <h3 className="text-[13px] font-bold text-navy mb-2">최근 결과</h3>
+          <h3 className="text-[13px] font-bold text-navy mb-2">Latest Result</h3>
           {latestGraded ? (
             <>
               <p className="text-[15px] font-extrabold text-ink">
-                {latestGraded.correctCount} / {latestGraded.totalCount} 정답
+                {latestGraded.correctCount} / {latestGraded.totalCount} correct
               </p>
               <p className="text-[12px] text-grey-500 mt-0.5">{latestGraded.examSetName}</p>
               <Link href={`/student/mock-exam/${latestGraded.id}`} className="inline-block mt-3 px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
-                결과 보기
+                View results
               </Link>
             </>
           ) : (
-            <p className="text-[13px] text-grey-500">아직 채점된 응시가 없습니다. 첫 모의고사를 풀어 보세요.</p>
+            <p className="text-[13px] text-grey-500">No graded attempts yet. Take your first mock exam.</p>
           )}
         </section>
       </div>
 
       <section className="rounded-xl bg-white border border-brand-border p-5 mb-4" data-testid="free-home-weaknesses">
-        <h3 className="text-[13px] font-bold text-navy mb-2">약점 영역 TOP 3</h3>
+        <h3 className="text-[13px] font-bold text-navy mb-2">Top 3 Weak Areas</h3>
         {weaknesses.length > 0 ? (
           <ul className="divide-y divide-brand-border">
             {weaknesses.map((w) => (
@@ -96,7 +96,7 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
           </ul>
         ) : (
           <p className="text-[13px] text-grey-500">
-            {gradedAttemptCount === 0 ? "채점된 응시가 쌓이면 자주 틀리는 영역이 여기에 보입니다." : "아직 뚜렷한 약점 영역이 없습니다. 좋아요!"}
+            {gradedAttemptCount === 0 ? "Once you have graded attempts, your most-missed areas will appear here." : "No clear weak areas yet. Nice work!"}
           </p>
         )}
       </section>
@@ -104,11 +104,11 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
       <div className="grid gap-4 md:grid-cols-2 mb-4">
         <button type="button" onClick={() => onSelectTab("problemlog")} className="rounded-xl bg-white border border-brand-border p-5 text-left">
           <p className="text-[13px] font-bold text-navy">Practice</p>
-          <p className="text-[12px] text-grey-500 mt-0.5">모의고사에서 저장한 문제를 다시 풀어 봅니다.</p>
+          <p className="text-[12px] text-grey-500 mt-0.5">Retry questions saved from your mock exams.</p>
         </button>
         <button type="button" onClick={() => onSelectTab("vocab")} className="rounded-xl bg-white border border-brand-border p-5 text-left">
           <p className="text-[13px] font-bold text-navy">Vocabulary</p>
-          <p className="text-[12px] text-grey-500 mt-0.5">내 단어장과 단어 라이브러리, 단어 퀴즈.</p>
+          <p className="text-[12px] text-grey-500 mt-0.5">Your word list, the word library, and vocabulary quizzes.</p>
         </button>
       </div>
 

@@ -49,7 +49,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           href="/student?tab=mock-exam"
           className="mb-4 inline-block text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100 active:scale-95 transition-transform"
         >
-          ← 뒤로
+          ← Back
         </Link>
       )}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">

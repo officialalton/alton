@@ -170,7 +170,7 @@ export async function addApExam(input: {
   score: number | null;
 }) {
   if (input.score !== null && (input.score < 1 || input.score > 5)) {
-    throw new Error("AP 점수는 1~5 사이여야 합니다.");
+    throw new Error("AP score must be between 1 and 5.");
   }
   const supabase = await requireLoggedIn();
   const { error } = await supabase.from("student_ap_courses").insert({
@@ -251,7 +251,7 @@ export async function addTestRecord(input: {
   scoreScience: number | null;
 }) {
   if (input.score !== null && (input.score < 0 || input.score > 1600)) {
-    throw new Error("점수는 0~1600 사이여야 합니다.");
+    throw new Error("Score must be between 0 and 1600.");
   }
   const supabase = await requireLoggedIn();
   const { error } = await supabase.from("student_test_records").insert({
@@ -381,7 +381,7 @@ export async function savePrepItem(input: {
   notes: string | null;
 }) {
   if (input.itemType === "other" && !input.customLabel?.trim()) {
-    throw new Error("기타 항목은 이름을 입력해야 합니다.");
+    throw new Error("Please enter a name for the other item.");
   }
   const supabase = await requireLoggedIn();
   const { error } = await supabase.from("student_prep_items").upsert({
@@ -415,7 +415,7 @@ export async function saveMilestone(input: {
   notes: string | null;
   relatedLinks: string[];
 }) {
-  if (!input.title.trim()) throw new Error("마일스톤 제목은 필수입니다.");
+  if (!input.title.trim()) throw new Error("Milestone title is required.");
   const supabase = await requireLoggedIn();
   if (input.id) {
     const { error } = await supabase

@@ -68,9 +68,9 @@ describe("CurriculumOverlayView — 학생·학부모 공용 읽기 전용 v3 �
     expect((await screen.findAllByText("이차방정식", { exact: false })).length).toBeGreaterThan(0);
     expect(screen.getAllByText("판별식", { exact: false }).length).toBeGreaterThan(0);
     expect(screen.getAllByText("근과 계수의 관계", { exact: false }).length).toBeGreaterThan(0);
-    expect(screen.getByText("완료")).toBeInTheDocument();
-    expect(screen.getByText("진행중")).toBeInTheDocument();
-    expect(screen.getByText("예정")).toBeInTheDocument();
+    expect(screen.getByText("Completed")).toBeInTheDocument();
+    expect(screen.getByText("In Progress")).toBeInTheDocument();
+    expect(screen.getByText("Upcoming")).toBeInTheDocument();
     expect(screen.getByText(/진행 1 \/ 전체 3회차/)).toBeInTheDocument();
   });
 
@@ -95,7 +95,7 @@ describe("CurriculumOverlayView — 학생·학부모 공용 읽기 전용 v3 �
       <CurriculumOverlayView subjectEnrollmentId="se2" subjectName="AP Bio" onBack={() => {}} />
     );
 
-    expect(await screen.findByText("아직 배정된 커리큘럼이 없습니다.")).toBeInTheDocument();
+    expect(await screen.findByText("No curriculum has been assigned yet.")).toBeInTheDocument();
   });
 
   it("뒤로 버튼이 onBack을 호출한다", async () => {
@@ -105,7 +105,7 @@ describe("CurriculumOverlayView — 학생·학부모 공용 읽기 전용 v3 �
       <CurriculumOverlayView subjectEnrollmentId="se1" subjectName="SAT Math" onBack={onBack} />
     );
     await screen.findByText("이차방정식", { exact: false });
-    fireEvent.click(screen.getByText("← 뒤로"));
+    fireEvent.click(screen.getByText("← Back"));
     expect(onBack).toHaveBeenCalled();
   });
 

@@ -7,15 +7,15 @@ import { stripInlineOptions } from "@/lib/problem-text";
 import type { ProblemHistoryEntry } from "./problem-history-data";
 import { SKILL_CODES, domainLabel, domainShort, skillLabel } from "@/lib/problem-taxonomy";
 import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
-import { fmtDate } from "@/lib/format-datetime";
+import { fmtDateEn as fmtDate } from "@/lib/format-datetime-en";
 import { problemText } from "@/lib/problem-figures/label-rule";
 
 // 2026-09-14 — 학생 포털 문제 기록(v3). 수업·과제에서 답한 문제를 한 줄씩. 펼치면 지문·내 답·채점 결과, 채점 뒤엔 정답·해설.
 
-const FORMAT_LABEL: Record<ProblemHistoryEntry["format"], string> = { mc: "객관식", spr: "숫자 입력", essay: "서술형", math: "풀이형" };
-const GRADE_LABEL = { correct: "정답", partial: "부분 정답", incorrect: "오답" } as const;
+const FORMAT_LABEL: Record<ProblemHistoryEntry["format"], string> = { mc: "Multiple choice", spr: "Numeric entry", essay: "Written response", math: "Worked solution" };
+const GRADE_LABEL = { correct: "Correct", partial: "Partially correct", incorrect: "Incorrect" } as const;
 const OPTION_LABELS = ["A", "B", "C", "D", "E", "F"];
-const ALL = "전체";
+const ALL = "All";
 
 type GradeFilter = "all" | "correct" | "partial" | "incorrect" | "pending";
 
@@ -58,42 +58,42 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
   return (
     <div className="max-w-[760px]">
       <p className="text-[13px] text-grey-500 mb-4">
-        수업과 과제에서 답한 문제입니다. 선생님이 채점하면 정답과 해설이 열립니다.
+        Problems you answered in lessons and assignments. Answers and explanations unlock once your teacher grades them.
         {entries.length > 0 && (
           <>
             {" "}
-            맞은 문제 <b className="text-green">{correctCount}</b> / 채점 {gradedCount} / 전체 {entries.length}
+            Correct <b className="text-green">{correctCount}</b> / Graded {gradedCount} / Total {entries.length}
           </>
         )}
       </p>
 
       <div className="flex flex-col gap-2 text-[12.5px] mb-4">
         {subjects.length > 1 && (
-          <Chips label="과목" value={subject} onChange={setSubject} options={[ALL, ...subjects].map((s) => [s, s])} />
+          <Chips label="Subject" value={subject} onChange={setSubject} options={[ALL, ...subjects].map((s) => [s, s])} />
         )}
         <Chips
-          label="채점"
+          label="Grade"
           value={gradeFilter}
           onChange={(v) => setGradeFilter(v as GradeFilter)}
-          options={[["all", "전체"], ["correct", "정답"], ["partial", "부분 정답"], ["incorrect", "오답"], ["pending", "채점 대기"]]}
+          options={[["all", "All"], ["correct", "Correct"], ["partial", "Partial"], ["incorrect", "Incorrect"], ["pending", "Pending"]]}
         />
         <Chips
-          label="형식"
+          label="Format"
           value={formatFilter}
           onChange={(v) => setFormatFilter(v as "all" | ProblemHistoryEntry["format"])}
-          options={[["all", "전체"], ["mc", "객관식"], ["spr", "숫자 입력"], ["essay", "서술형"], ["math", "풀이형"]]}
+          options={[["all", "All"], ["mc", "Multiple choice"], ["spr", "Numeric"], ["essay", "Written"], ["math", "Worked"]]}
         />
         <Chips
-          label="출처"
+          label="Source"
           value={sourceFilter}
           onChange={(v) => setSourceFilter(v as "all" | "lesson" | "homework" | "mock_exam")}
-          options={[["all", "전체"], ["lesson", "수업"], ["homework", "과제"], ["mock_exam", "모의고사"]]}
+          options={[["all", "All"], ["lesson", "Lesson"], ["homework", "Assignment"], ["mock_exam", "Mock Exam"]]}
         />
       </div>
 
       {skillSummary.length > 0 && (
         <section className="mb-4 border-[1.5px] border-grey-200 rounded-xl px-4 py-3" data-testid="skill-summary">
-          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">기술별 성취 (채점된 문제 기준)</div>
+          <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">Skill progress (graded problems)</div>
           <ul className="grid gap-1.5 sm:grid-cols-2">
             {skillSummary.map((k) => (
               <li key={k.code}>
@@ -107,7 +107,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                   <span className="font-bold text-ink">{k.label}</span>
                   <span className="float-right">
                     <b className="text-green">{k.correct}</b> / {k.graded}
-                    {k.total > k.graded && <span className="text-grey-500"> (+{k.total - k.graded} 대기)</span>}
+                    {k.total > k.graded && <span className="text-grey-500"> (+{k.total - k.graded} pending)</span>}
                   </span>
                 </button>
               </li>
@@ -117,7 +117,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
       )}
 
       {filtered.length === 0 ? (
-        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">조건에 맞는 문제 기록이 없습니다.</div>
+        <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No problems match these filters.</div>
       ) : (
         <ul className="border-[1.5px] border-grey-200 rounded-xl divide-y divide-grey-100">
           {filtered.map((e) => {
@@ -133,7 +133,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                 >
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">{FORMAT_LABEL[e.format]}</span>
                   <span className="text-[10.5px] font-bold text-grey-500 border border-grey-200 rounded-full px-1.5 py-0.5">
-                    {e.source === "homework" ? "과제" : e.source === "mock_exam" ? "모의고사" : "수업"}
+                    {e.source === "homework" ? "Assignment" : e.source === "mock_exam" ? "Mock Exam" : "Lesson"}
                   </span>
                   <GradeBadge entry={e} />
                   {e.skillCode && (
@@ -141,7 +141,7 @@ export default function ProblemHistoryTab({ entries }: { entries: ProblemHistory
                       {domainShort(e.satDomain)} › {skillLabel(e.skillCode)}
                     </span>
                   )}
-                  <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(본문 없음)"}</span>
+                  <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(No text)"}</span>
                   <span className="text-[11.5px] text-grey-500 shrink-0">
                     {[e.subjectName, e.unitTitle, e.startsAt ? fmtDate(e.startsAt, undefined, tz) : null].filter(Boolean).join(" · ")}
                   </span>
@@ -176,8 +176,8 @@ function Chips({ label, value, onChange, options }: { label: string; value: stri
 }
 
 function GradeBadge({ entry }: { entry: ProblemHistoryEntry }) {
-  if (!entry.graded) return <span className="text-[11px] font-bold text-grey-500">채점 대기</span>;
-  if (!entry.grade) return <span className="text-[11px] font-bold text-green">채점됨</span>;
+  if (!entry.graded) return <span className="text-[11px] font-bold text-grey-500">Pending</span>;
+  if (!entry.grade) return <span className="text-[11px] font-bold text-green">Graded</span>;
   const cls = entry.grade === "correct" ? "text-green" : entry.grade === "partial" ? "text-amber-600" : "text-red";
   return <span className={"text-[11px] font-bold " + cls}>{GRADE_LABEL[entry.grade]}</span>;
 }
@@ -186,7 +186,7 @@ function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
   return (
     <div className="mt-3 rounded-lg bg-grey-100 px-4 py-3" data-testid="history-detail">
       <ProblemFigure spec={e.figure} text={problemText(e.passage, e.options)} className="mb-2" />
-      <LearningText text={stripInlineOptions(e.passage, e.options) || "(본문 없음)"} className="learning-body text-[13.5px] leading-[1.75] text-ink" />
+      <LearningText text={stripInlineOptions(e.passage, e.options) || "(No text)"} className="learning-body text-[13.5px] leading-[1.75] text-ink" />
       {e.format === "mc" && e.options.length > 0 && (
         <ol className="mt-2 space-y-1">
           {e.options.map((o, i) => {
@@ -202,8 +202,8 @@ function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
               >
                 <span className="font-bold shrink-0">{OPTION_LABELS[i] ?? i + 1}</span>
                 <LearningText text={o} className="learning-body" />
-                {mine && <span className="ml-auto text-[11px] shrink-0">내 답</span>}
-                {correct && !mine && <span className="ml-auto text-[11px] shrink-0">정답</span>}
+                {mine && <span className="ml-auto text-[11px] shrink-0">My answer</span>}
+                {correct && !mine && <span className="ml-auto text-[11px] shrink-0">Correct</span>}
               </li>
             );
           })}
@@ -211,31 +211,31 @@ function HistoryDetail({ entry: e }: { entry: ProblemHistoryEntry }) {
       )}
       {(e.format === "spr" || e.format === "essay") && (
         <p className="mt-2 text-[13px] text-ink whitespace-pre-wrap">
-          <span className="font-bold">내 답: </span>
-          {e.myText?.trim() || "없음"}
+          <span className="font-bold">My answer: </span>
+          {e.myText?.trim() || "None"}
           {e.acceptedAnswers && e.acceptedAnswers.length > 0 && (
             <>
               {" "}
-              <span className="font-bold text-green">· 정답: {e.acceptedAnswers.join(" 또는 ")}</span>
+              <span className="font-bold text-green">· Answer: {e.acceptedAnswers.join(" or ")}</span>
             </>
           )}
         </p>
       )}
-      {e.format === "math" && <p className="mt-2 text-[12.5px] text-grey-500">풀이는 그 수업 화면의 문제 탭에서 풀이판으로 볼 수 있습니다.</p>}
+      {e.format === "math" && <p className="mt-2 text-[12.5px] text-grey-500">You can view your work on the whiteboard in the Problems tab of that lesson.</p>}
       {e.graded && (
         <div className="mt-2 text-[12.5px] text-ink">
-          <span className="font-bold">선생님 채점: </span>
-          {e.grade ? GRADE_LABEL[e.grade] : "채점됨"}
+          <span className="font-bold">Teacher&apos;s grade: </span>
+          {e.grade ? GRADE_LABEL[e.grade] : "Graded"}
           {e.gradeComment && <span className="text-grey-500"> · “{e.gradeComment}”</span>}
         </div>
       )}
       {e.explanation && (
         <div className="mt-2">
-          <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">해설</div>
+          <div className="text-[10.5px] font-bold text-grey-300 uppercase tracking-wide mb-1">Explanation</div>
           <LearningText text={e.explanation} className="learning-body text-[13px] leading-[1.7] text-ink" />
         </div>
       )}
-      {!e.graded && <p className="mt-2 text-[12px] text-grey-500">선생님이 채점하면 정답과 해설이 여기에 열립니다.</p>}
+      {!e.graded && <p className="mt-2 text-[12px] text-grey-500">The answer and explanation will appear here once your teacher grades it.</p>}
     </div>
   );
 }

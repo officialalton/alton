@@ -79,7 +79,7 @@ export async function loadLegacySession(
     .select("id, name")
     .in("id", [enrollment.student_id, enrollment.teacher_id]);
   const studentName =
-    people?.find((p) => p.id === enrollment.student_id)?.name ?? "학생";
+    people?.find((p) => p.id === enrollment.student_id)?.name ?? "Student";
 
   const viewerRole = resolveViewerRole(
     userId,
@@ -167,7 +167,7 @@ export async function loadV3Session(
     studentId,
     teacherId,
     subjectName: (subjectRow as { name?: string } | null)?.name ?? "",
-    studentName: student?.name ?? "학생",
+    studentName: student?.name ?? "Student",
     sessionNumber: 1,
     viewerRole,
     status: V3_ACTIVE_FINAL_STATUSES.has(session.final_status as string)

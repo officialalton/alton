@@ -39,29 +39,29 @@ describe("StudentHomeworkTab — 배치 단위 과제(2026-09-16)", () => {
   it("배치가 발급 날짜·과목·선생님 라벨로 상단 탭에 뜨고, 첫(미채점) 배치가 목차·본문으로 열린다", () => {
     render(<StudentHomeworkTab batches={batches} />);
     expect(screen.getByRole("tab", { name: /9월 15일 수학 김선생/ })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("1문제 남음")).toBeInTheDocument();
-    expect(screen.getByText("과제 1")).toBeInTheDocument();
-    expect(screen.getByText("과제 2")).toBeInTheDocument();
+    expect(screen.getByText("1 left")).toBeInTheDocument();
+    expect(screen.getByText("Question 1")).toBeInTheDocument();
+    expect(screen.getByText("Question 2")).toBeInTheDocument();
     expect(screen.getByText("값은?")).toBeInTheDocument();
   });
 
   it("채점 완료된 배치는 지난 과제 목록에 있고, 누르면 정답 여부를 보여준다", () => {
     render(<StudentHomeworkTab batches={batches} />);
-    fireEvent.click(screen.getByText("지난 과제"));
+    fireEvent.click(screen.getByText("Past"));
     fireEvent.click(screen.getByText("9월 14일 수학 김선생"));
-    expect(screen.getByText("정답")).toBeInTheDocument();
+    expect(screen.getByText("Correct")).toBeInTheDocument();
   });
 
   it("객관식을 클릭하고 제출하면 답을 저장한다", async () => {
     vi.mocked(submitHomeworkAnswerAction).mockResolvedValue({ ok: true, value: undefined });
     render(<StudentHomeworkTab batches={batches} />);
     fireEvent.click(screen.getByText("2"));
-    fireEvent.click(screen.getByText("답 제출"));
+    fireEvent.click(screen.getByText("Submit answer"));
     await waitFor(() => expect(submitHomeworkAnswerAction).toHaveBeenCalledWith("b1", "p1", "1"));
   });
 
   it("배치가 없으면 안내만 보인다", () => {
     render(<StudentHomeworkTab batches={[]} />);
-    expect(screen.getByText(/아직 발급된 과제가 없습니다/)).toBeInTheDocument();
+    expect(screen.getByText(/No assignments have been issued yet/)).toBeInTheDocument();
   });
 });

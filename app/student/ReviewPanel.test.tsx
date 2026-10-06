@@ -24,7 +24,7 @@ describe("ReviewPanel", () => {
       <ReviewPanel sessionId="s1" review={null} myFeedback={null} onBack={vi.fn()} />
     );
     expect(
-      screen.getByText("아직 선생님이 리포트를 작성하지 않았습니다.")
+      screen.getByText("Your teacher hasn't written a report yet.")
     ).toBeInTheDocument();
   });
 
@@ -43,7 +43,7 @@ describe("ReviewPanel", () => {
     );
     const stars = screen.getAllByText("⭐");
     fireEvent.click(stars[3]);
-    fireEvent.click(screen.getByText("제출하기"));
+    fireEvent.click(screen.getByText("Submit"));
     await waitFor(() =>
       expect(reviewActions.submitStudentFeedback).toHaveBeenCalledWith("s1", 4, "")
     );
@@ -60,8 +60,8 @@ describe("ReviewPanel", () => {
       />
     );
     expect(screen.getByText("좋았어요")).toBeInTheDocument();
-    expect(screen.queryByText("제출하기")).not.toBeInTheDocument();
-    expect(screen.queryByPlaceholderText("수업에 대한 의견을 남겨주세요 (선택)")).not.toBeInTheDocument();
+    expect(screen.queryByText("Submit")).not.toBeInTheDocument();
+    expect(screen.queryByPlaceholderText("Share your thoughts about the lesson (optional)")).not.toBeInTheDocument();
   });
 
   it("readOnly인데 학생 평가가 없으면 안내 문구를 보여준다", () => {
@@ -69,7 +69,7 @@ describe("ReviewPanel", () => {
       <ReviewPanel sessionId="s1" review={review} myFeedback={null} onBack={vi.fn()} readOnly />
     );
     expect(
-      screen.getByText("학생이 아직 평가를 남기지 않았습니다.")
+      screen.getByText("The student hasn't left a rating yet.")
     ).toBeInTheDocument();
   });
 });

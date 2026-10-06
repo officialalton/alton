@@ -83,7 +83,7 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
         currentUserId="u1"
       />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
     drawOneSegment();
 
     await waitFor(() => expect(annotationActions.appendStrokeEvents).toHaveBeenCalledTimes(1));
@@ -106,7 +106,7 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
         currentUserId="u1"
       />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
     drawMultiSegmentStroke();
 
     // 세그먼트마다 개별 호출(N번 왕복)이 아니라, 스트로크 전체가 단 한 번의
@@ -139,7 +139,7 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
         currentUserId="u1"
       />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
     drawMultiSegmentStroke(); // 3개 세그먼트 — 단일 호출 실패 시 전부(부분 아님) 되돌려져야 함
 
     // 실패하면 에러 문구가 뜨고, replayAnnotationEvents로 서버 기준(빈 상태)으로 재동기화된다.
@@ -197,8 +197,8 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
         currentUserId="u1"
       />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
-    expect(screen.queryByText("전체 지우기")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
+    expect(screen.queryByText("Clear all")).not.toBeInTheDocument();
   });
 
   it("canClearAll=true(선생님)면 전체 지우기가 appendClearAllEvent를 호출해 성공한다", async () => {
@@ -214,8 +214,8 @@ describe("WhiteboardCanvas — v3 (session_annotation_events)", () => {
         currentUserId="u1"
       />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
-    fireEvent.click(screen.getByText("전체 지우기"));
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
+    fireEvent.click(screen.getByText("Clear all"));
 
     await waitFor(() => expect(annotationActions.appendClearAllEvent).toHaveBeenCalledWith("s1"));
     expect(scratchpadActions.saveWhiteboardStrokes).not.toHaveBeenCalled();
@@ -227,7 +227,7 @@ describe("WhiteboardCanvas — 레거시(legacy_sessions.whiteboard_strokes)", (
     render(
       <WhiteboardCanvas sessionId="s1" initialStrokes={[]} canDraw canClearAll={false} isV3={false} />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
     drawOneSegment();
 
     await waitFor(() => expect(scratchpadActions.saveWhiteboardStrokes).toHaveBeenCalled(), {
@@ -242,7 +242,7 @@ describe("WhiteboardCanvas — 레거시(legacy_sessions.whiteboard_strokes)", (
     render(
       <WhiteboardCanvas sessionId="s1" initialStrokes={[]} canDraw canClearAll={false} isV3={false} />
     );
-    fireEvent.click(screen.getByText("✏️ 필기 모드"));
-    expect(screen.getByText("전체 지우기")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("✏️ Drawing mode"));
+    expect(screen.getByText("Clear all")).toBeInTheDocument();
   });
 });

@@ -162,7 +162,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     return () => clearInterval(persist);
   }, [attempt.id, isSubmitted]);
 
-  if (attempt.items.length === 0) return <p className="text-[13px] text-grey-500">시험 문항이 없습니다.</p>;
+  if (attempt.items.length === 0) return <p className="text-[13px] text-grey-500">This exam has no questions.</p>;
   // 제출 직후(자동 채점 완료) 서버가 돌려준 최신 상세가 있으면 곧바로 결과 화면을 보여준다.
   if (submittedAttempt) {
     return <MockExamResultView attempt={submittedAttempt} readOnly={false} />;
@@ -171,10 +171,10 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
     return (
       <div className="rounded-lg border border-grey-200 bg-white p-6 text-center">
         <p className="text-[15px] font-bold">
-          {attempt.status === "graded" ? "채점이 완료됐습니다." : "제출됐습니다. 채점 결과를 확인해 주세요."}
+          {attempt.status === "graded" ? "Grading is complete." : "Submitted. Check your results."}
         </p>
         <button type="button" className="mt-3 text-[13px] text-grey-500 underline" onClick={() => router.push("/student?tab=mock-exam")}>
-          모의고사 목록으로
+          Back to Mock Exams
         </button>
       </div>
     );
@@ -266,7 +266,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
       {/* 2026-09-21(UAT 지적) — 문항 번호가 하단 가로 점 목록이 아니라 과제 화면처럼 왼쪽에
           세로로 늘어서야 한다. */}
       <nav
-        aria-label="문항 이동"
+        aria-label="Go to question"
         className="flex gap-1 overflow-x-auto lg:w-[72px] lg:flex-shrink-0 lg:flex-col lg:flex-nowrap lg:gap-1.5 lg:overflow-x-hidden lg:overflow-y-auto lg:max-h-[70vh]"
       >
         {sectionItems.map((it, i) => {
@@ -278,7 +278,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               type="button"
               onClick={() => goToIndex(i)}
               aria-current={i === index}
-              title={`${i + 1}번${isAnswered ? " · 응답 완료" : " · 미응답"}${isFlagged ? " · 다시 보기 표시" : ""}`}
+              title={`Question ${i + 1}${isAnswered ? " · Answered" : " · Unanswered"}${isFlagged ? " · Marked for review" : ""}`}
               className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded text-[12px] font-bold lg:w-full ${
                 i === index ? "bg-ink text-white" : isAnswered ? "bg-green/20 text-ink" : "bg-grey-100 text-grey-500"
               }`}
@@ -317,7 +317,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                   data-testid={`mock-exam-section-${s}`}
                 >
                   {s === "rw" ? "R&W" : "Math"}
-                  {locked[s] && " (시간 종료)"}
+                  {locked[s] && " (Time's up)"}
                 </button>
               ))}
           </div>
@@ -340,7 +340,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
 
         {sectionLocked ? (
           <div className="rounded-lg border border-red/40 bg-red/5 p-6 text-center text-[13.5px] text-red">
-            이 섹션의 제한 시간이 끝났습니다. 답은 더 바꿀 수 없습니다.
+            Time is up for this section. Answers can no longer be changed.
           </div>
         ) : current ? (
           // 2026-09-21(UAT 지적) — Math는 선택지 텍스트 길이가 문항마다 달라 카드 가로폭이
@@ -359,7 +359,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                   aria-pressed={flags[current.setItemId]}
                   className={`text-[14px] leading-none ${flags[current.setItemId] ? "text-yellow-600" : "text-grey-300"}`}
                   data-testid="toggle-flag"
-                  title="나중에 다시 보기로 표시"
+                  title="Mark for review"
                 >
                   🔖
                 </button>
@@ -372,19 +372,19 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                     savedToPractice[current.setItemId] ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
                   }`}
                   data-testid="toggle-saved-to-practice"
-                  title="Practice 탭(문제 기록)에 저장"
+                  title="Save to Practice (Problem History)"
                 >
-                  {savedToPractice[current.setItemId] ? "저장됨" : "+ 문제 저장"}
+                  {savedToPractice[current.setItemId] ? "Saved" : "+ Save problem"}
                 </button>
                 {/* "저장됨" 텍스트는 안 보이게(저장 중/실패일 때만 표시). */}
                 {(saveStatus === "saving" || saveStatus === "error") && (
                   <span className="text-[11px] text-grey-400" data-testid="save-status">
-                    {saveStatus === "saving" && "저장 중…"}
+                    {saveStatus === "saving" && "Saving…"}
                     {saveStatus === "error" && (
                       <span className="text-red">
-                        저장 실패{" "}
+                        Save failed{" "}
                         <button type="button" onClick={retrySave} className="underline">
-                          재시도
+                          Retry
                         </button>
                       </span>
                     )}
@@ -400,7 +400,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                     className={`rounded border px-2 py-1 text-[11px] font-bold ${
                       highlightMode ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
                     }`}
-                    title="드래그해서 형광펜으로 표시"
+                    title="Drag to highlight"
                   >
                     Highlight
                   </button>
@@ -432,7 +432,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 onClick={clearHighlights}
                 className="mb-3 text-[11px] font-semibold text-grey-500 underline"
               >
-                하이라이트 지우기
+                Clear highlights
               </button>
             )}
             {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-4" /> : null}
@@ -483,7 +483,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 inputMode="decimal"
                 value={responses[current.setItemId] ?? ""}
                 onChange={(e) => saveCurrent(e.target.value)}
-                placeholder="답을 입력하세요"
+                placeholder="Enter your answer"
                 className="w-full rounded-lg border border-grey-300 px-3 py-2 text-[13.5px]"
                 data-testid="mock-exam-spr-input"
               />
@@ -505,7 +505,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
             onClick={() => goToIndex(Math.max(0, index - 1))}
             className="shrink-0 whitespace-nowrap rounded-lg border border-grey-300 px-4 py-2 text-[13px] font-bold disabled:opacity-40"
           >
-            이전 문항
+            Previous
           </button>
           {current && (
             <span className="ml-auto">
@@ -518,7 +518,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               onClick={() => goToIndex(Math.min(sectionItems.length - 1, index + 1))}
               className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
             >
-              다음 문항
+              Next
             </button>
           ) : !isLastSection ? (
             // 2026-09-21 버그 수정 — 이전엔 "현재 섹션의 마지막 문항"에서 곧바로 제출 모달이 떴다
@@ -535,7 +535,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               }}
               className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
             >
-              다음 영역
+              Next section
             </button>
           ) : (
             <button
@@ -543,7 +543,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               onClick={() => setShowReview(true)}
               className="shrink-0 whitespace-nowrap rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white"
             >
-              검토·제출
+              Review & submit
             </button>
           )}
         </div>
@@ -559,14 +559,14 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
       {showReview && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="w-full max-w-md rounded-lg bg-white p-5">
-            <h3 className="mb-2 text-[15px] font-bold">제출 전 확인</h3>
+            <h3 className="mb-2 text-[15px] font-bold">Before you submit</h3>
             <p className="mb-4 text-[13px] text-grey-600">
-              전체 {attempt.items.length}문항 중 {answeredCount}문항에 답했습니다.
-              {answeredCount < attempt.items.length && " 답하지 않은 문항이 있습니다."} 제출하면 답을 바꿀 수 없습니다.
+              You answered {answeredCount} of {attempt.items.length} questions.
+              {answeredCount < attempt.items.length && " Some questions are unanswered."} Once submitted, answers cannot be changed.
             </p>
             <div className="flex justify-end gap-2">
               <button type="button" onClick={() => setShowReview(false)} className="rounded-lg border border-grey-300 px-4 py-2 text-[13px] font-bold">
-                계속 풀기
+                Keep working
               </button>
               <button
                 type="button"
@@ -575,7 +575,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                 className="rounded-lg bg-red px-4 py-2 text-[13px] font-bold text-white disabled:opacity-50"
                 data-testid="mock-exam-submit"
               >
-                {submitting ? "제출 중…" : "제출하기"}
+                {submitting ? "Submitting…" : "Submit"}
               </button>
             </div>
           </div>
