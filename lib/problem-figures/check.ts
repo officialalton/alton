@@ -18,6 +18,7 @@ import { lintSolidXAgainstText, renderSolidX } from "./templates/solid-x";
 import { lintTriNestedAgainstText, renderTriNested } from "./templates/triangle-nested";
 import { lintVennTreeAgainstText, renderVennTree } from "./templates/venn-tree";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
+import { lintFigureBundle, renderFigureBundle } from "./templates/figure-bundle";
 import { renderFigureSvg } from "./render";
 import { figureAlt } from "./alt";
 
@@ -88,6 +89,12 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (spec.type === "plane") {
     const r = renderPlane(spec);
     issues.push(...r.issues, ...lintPlaneAgainstText(spec, passage, options, correctIndex));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (spec.type === "figure_bundle") {
+    const childCheck = (c: unknown, text: string) => { const r = checkFigure(c, text); return { issues: r.issues, alt: r.alt }; };
+    issues.push(...lintFigureBundle(spec, options, childCheck, { passage, correctIndex }));
+    const r = renderFigureBundle(spec, (c) => renderFigureSvg(c as typeof spec), (c) => figureAlt(c as typeof spec));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "figure_choice") {

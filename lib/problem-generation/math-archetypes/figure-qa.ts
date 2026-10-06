@@ -468,7 +468,8 @@ export function checkInstanceFigureQa(inst: Instance): QaIssue[] {
   // 앱과 같은 규칙으로 그린다: 문제 텍스트(지문·질문·선택지)에 안 나오는 직선·곡선 라벨은 빠진다(label-rule.ts).
   const allText = problemText(inst.stimulus, inst.question, inst.options);
   if (!fig) { if (mentionsFigure(text)) issues.push({ code: "figure_missing", message: "지문이 그림·표를 가리키는데 자료가 없습니다(needsFigure 인데 figure 없음)." }); return issues; }
-  if (fig.type === "figure_choice") { const ch = fig.choices as Spec[]; issues.push(...checkMultiFigure(ch, "figure_choice", allText), ...checkChoiceDistinct(ch)); if (ch.length !== 4) issues.push({ code: "choice_count", message: `선택지 그림 ${ch.length}개` }); }
+  if (fig.type === "figure_bundle") { const st = fig.stem as Spec; const ch = (fig.choices as Spec).choices as Spec[]; issues.push(...checkRenderedFigure(st, renderFigureSvg(st as unknown as FigureSpec, { text: allText })).map((q) => ({ code: q.code, message: `기준 그림: ${q.message}` })), ...checkMultiFigure(ch, "figure_choice", allText), ...checkChoiceDistinct(ch)); if (ch.length !== 4) issues.push({ code: "choice_count", message: `선택지 그림 ${ch.length}개` }); }
+  else if (fig.type === "figure_choice") { const ch = fig.choices as Spec[]; issues.push(...checkMultiFigure(ch, "figure_choice", allText), ...checkChoiceDistinct(ch)); if (ch.length !== 4) issues.push({ code: "choice_count", message: `선택지 그림 ${ch.length}개` }); }
   else if (fig.type === "figure_set") issues.push(...checkMultiFigure((fig.figures as { spec: Spec }[]).map((f) => f.spec), "figure_set", allText));
   else issues.push(...checkRenderedFigure(fig, renderFigureSvg(fig as unknown as FigureSpec, { text: allText })));
   return issues;

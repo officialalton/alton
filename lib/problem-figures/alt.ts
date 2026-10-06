@@ -8,6 +8,7 @@ import { renderCircle } from "./templates/circle";
 import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
+import { renderFigureBundle } from "./templates/figure-bundle";
 import { renderUnitCircle } from "./templates/unit-circle";
 import { renderTrigCurve } from "./templates/trig-curve";
 import { renderParallelThree } from "./templates/parallel-three";
@@ -33,6 +34,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "solid_x": return renderSolidX(spec).alt;
     case "l_shape": return renderLShape(spec).alt;
     case "parallel_three": return renderParallelThree(spec).alt;
+    case "figure_bundle": return renderFigureBundle(spec, () => "", (c) => figureAlt(c as FigureSpec)).alt;
     case "image": return spec.alt;
     default: return undefined;
   }

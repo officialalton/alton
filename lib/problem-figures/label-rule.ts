@@ -42,7 +42,7 @@ export function pruneUnmentionedLineLabels<T>(spec: T, text: string): T {
       const mapped = arr.map((it) => { if (!isObj(it)) return it; const p = pruneObject(it, text); if (JSON.stringify(p) === JSON.stringify(it)) return it; any = true; return p; });
       if (any) set(key, mapped);
     } else {
-      for (const k of Object.keys(v)) if (k === "choices" || k === "figures" || k === "spec") set(k, walk(v[k]));
+      for (const k of Object.keys(v)) if (k === "choices" || k === "figures" || k === "spec" || k === "stem") set(k, walk(v[k]));
     }
     return cur;
   };
