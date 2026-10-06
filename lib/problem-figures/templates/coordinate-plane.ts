@@ -297,6 +297,7 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
   const tickSvg = (x: number, y: number, t: string, anchor: "middle" | "end") => `<text x="${f(x)}" y="${f(y)}" font-family="${FONT}" font-size="12" text-anchor="${anchor}" fill="#111">${t}</text>`;
   xs.forEach((x) => { if (Math.abs(x - axX) > 1e-9 && onGrid(x, xStep * ex)) { tickLabels.push({ idx: sheet.out.length, x: sx(x), y: sy(axY) + 15, t: f(x), anchor: "middle", side: "x" }); sheet.raw(tickSvg(sx(x), sy(axY) + 15, f(x), "middle")); } });
   ys.forEach((y) => { if (Math.abs(y - axY) > 1e-9 && onGrid(y, yStep * ey)) { tickLabels.push({ idx: sheet.out.length, x: sx(axX) - 6, y: sy(y) + 4, t: f(y), anchor: "end", side: "y" }); sheet.raw(tickSvg(sx(axX) - 6, sy(y) + 4, f(y), "end")); } });
+  const originIdx = sheet.out.length;
   if (axX === 0 && axY === 0) sheet.raw(`<text x="${f(sx(0) - 5)}" y="${f(sy(0) + 14)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111" font-style="italic">O</text>`);
   sheet.raw(`<text data-axis-name="x" x="${f(sx(ax.max) + 9)}" y="${f(sy(axY) + 4.5)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="start" fill="#111">${ax.label ?? "x"}</text>`);
   sheet.raw(`<text data-axis-name="y" x="${f(sx(axX))}" y="${f(sy(ay.max) - 10)}" font-family="${FONT}" font-size="${AXIS_NAME_SIZE}" font-weight="700" font-style="italic" text-anchor="middle" fill="#111">${ay.label ?? "y"}</text>`);
@@ -522,6 +523,11 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
       if (!hits(boxOf(l))) continue;
       sheet.out[l.idx] = "";
       late.push(`<text x="${f(l.x)}" y="${f(l.y)}" font-family="${FONT}" font-size="12" text-anchor="${l.anchor}" fill="#111" stroke="#fff" stroke-width="3.2" stroke-linejoin="round" paint-order="stroke">${l.t}</text>`);
+    }
+    // 원점 'O' 도 같은 규칙(가려질 때만 흰 테두리로 다시 그림).
+    if (axX === 0 && axY === 0 && hits(boxOf({ x: sx(0) - 5, y: sy(0) + 14, t: "O", anchor: "end" }))) {
+      sheet.out[originIdx] = "";
+      late.push(`<text x="${f(sx(0) - 5)}" y="${f(sy(0) + 14)}" font-family="${FONT}" font-size="12" text-anchor="end" fill="#111" font-style="italic" stroke="#fff" stroke-width="3.2" stroke-linejoin="round" paint-order="stroke">O</text>`);
     }
     for (const t of late) sheet.raw(t);
   }
