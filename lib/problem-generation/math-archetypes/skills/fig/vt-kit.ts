@@ -90,3 +90,27 @@ const BR=FIGURE.branches; if (BR.length!==2||BR.some(b=>b.next.length!==2)) thro
 const fix=(arr)=>{ const v=arr.map(l=>{ const q=pf(l); return q?q[0]/q[1]:NaN; }); const u=v.map((x,i)=>Number.isNaN(x)?i:-1).filter(i=>i>=0); if (u.length>1) throw new Error('같은 단계에서 모르는 가지 둘 이상'); if (u.length===1) v[u[0]]=1-v.reduce((s,x,i)=>i===u[0]?s:s+x,0); if (Math.abs(v.reduce((s,x)=>s+x,0)-1)>1e-9) throw new Error('형제 가지의 합이 1 이 아님'); return v; };
 const P1=fix(BR.map(b=>b.label)); const P2=BR.map(b=>fix(b.next.map(n=>n.label)));
 `;
+
+// ───────────────────────── 지문 틀 ─────────────────────────
+import type { DistractorKind } from "../../../review";
+export const FWr = (r: Rat, kind: DistractorKind, reason: string) => ({ text: rt(r), kind, reason });
+const VLEAD = ["", "", "A school counselor summarizes a survey. ", "A club coordinator tallies responses. ", "A researcher organizes survey data. ", "A teacher prepares a probability exercise. ", "A town office reviews a questionnaire. ", "A planner records who attends each activity. ", "An analyst sorts the results of a poll. "];
+export const vennIntro = (rng: Rng, s: VennScene, extra = "") => rng.pick(VLEAD) + rng.pick([
+  `The Venn diagram shown classifies ${s.t.ents} ${s.t.where} by whether each ${s.t.ent} ${s.t.aPh} and whether each ${s.t.bPh}.${extra}`,
+  `In the Venn diagram shown, the two circles represent the ${s.t.ents} ${s.t.where} who ${s.t.aPh.replace(/^is /, "are ").replace(/s\b(?= |$)/, "")} and who ${s.t.bPh.replace(/^is /, "are ")}, with the overlap showing those in both.${extra}`,
+  `A survey of ${s.t.ents} ${s.t.where} asked two yes-or-no questions. The Venn diagram shown gives the counts for each region.${extra}`,
+  `Each region of the Venn diagram shown gives the number of ${s.t.ents} ${s.t.where} in that category (${s.t.a}, ${s.t.b}, both, or neither).${extra}`,
+  `The Venn diagram below shows how many ${s.t.ents} ${s.t.where} are in the ${s.t.a} group, the ${s.t.b} group, both, or neither.${extra}`,
+]);
+export const bagIntro = (rng: Rng, s: BagScene, extra = "") => rng.pick(VLEAD.map((x) => (x ? x.replace(/survey|poll|questionnaire/g, "game") : x))) + rng.pick([
+  `A ${s.t.bag} contains ${s.t.items} of two colors, ${s.t.c1.toLowerCase()} and ${s.t.c2.toLowerCase()}. Two ${s.t.items} are ${s.t.drawn} at random without replacement. The tree diagram shown gives the probabilities.${extra}`,
+  `The tree diagram shown models picking two ${s.t.items} one after the other, without replacement, from a ${s.t.bag} of ${s.t.c1.toLowerCase()} and ${s.t.c2.toLowerCase()} ${s.t.items}.${extra}`,
+  `From a ${s.t.bag} holding ${s.t.c1.toLowerCase()} and ${s.t.c2.toLowerCase()} ${s.t.items}, one ${s.t.item} is ${s.t.drawn} and set aside, and then a second ${s.t.item} is ${s.t.drawn}. The tree diagram shows the branch probabilities.${extra}`,
+  `In the tree diagram shown, each branch is labeled with a probability for two ${s.t.items} ${s.t.drawn} without replacement from a ${s.t.bag}.${extra}`,
+]);
+/** 교집합이 x 이고 전체·첫 집합의 확률(P.pn/P.pd)이 주어질 때 x 복원(변수 x, TOT, g). */
+export const INV_JS = `if(!FIGURE||FIGURE.type!=='venn_tree'||FIGURE.kind!=='venn') throw new Error('벤 다이어그램 자료 필요');
+const g=(id)=>{ const r=FIGURE.regions.find(q=>q.id===id); return /^\\d+$/.test(String(r.label))?Number(r.label):NaN; };
+const TOT=Number(FIGURE.total&&FIGURE.total.label); if(!(TOT>0)) throw new Error('전체 개수 필요'); if(!Number.isNaN(g('ab'))) throw new Error('교집합이 x 여야 함');
+const x=P.pn*TOT/P.pd-g('a'); if(!Number.isInteger(x)||x<0) throw new Error('x 해석 불가'); if (g('a')+x+g('b')+g('out')!==TOT) throw new Error('영역 합이 전체와 다름');
+`;

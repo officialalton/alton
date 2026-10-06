@@ -6,5 +6,6 @@ import { ITEM as ucRadC } from "../items/right_triangles_trigonometry.unit_circl
 import { ITEM as tcTrig } from "../items/right_triangles_trigonometry.trig_ratio.TC.P";
 import { ITEM as tcSin } from "../items/right_triangles_trigonometry.sinusoid_graph.TC.P";
 import { ITEM as tcSinC } from "../items/right_triangles_trigonometry.sinusoid_graph.TC.C";
+import { ITEM as vtSimple } from "../items/probability.simple.VT.P";
 
-export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC];
+export const BUNDLE: LArch[] = [...ucTrig, ...ucRad, ...ucRadC, ...tcTrig, ...tcSin, ...tcSinC, ...vtSimple];

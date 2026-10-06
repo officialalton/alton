@@ -10,6 +10,7 @@ import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
 import { renderUnitCircle } from "./templates/unit-circle";
 import { renderTrigCurve } from "./templates/trig-curve";
+import { renderVennTree } from "./templates/venn-tree";
 
 export function figureAlt(spec: FigureSpec): string | undefined {
   switch (spec.type) {
@@ -23,6 +24,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "composite": return renderComposite(spec).alt;
     case "unit_circle": return renderUnitCircle(spec).alt;
     case "trig_curve": return renderTrigCurve(spec).alt;
+    case "venn_tree": return renderVennTree(spec).alt;
     case "image": return spec.alt;
     default: return undefined;
   }

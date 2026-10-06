@@ -308,6 +308,35 @@ function checkTrigCurveFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
   }
 }
 
+
+// ───────────────────────── 벤·수형도(venn_tree) 충실도 ─────────────────────────
+function checkVennTreeFidelity(spec: Spec, svg: string, issues: QaIssue[]) {
+  const ts = texts(svg);
+  if (spec.kind === "venn") {
+    const regs = spec.regions as { id: string; label: string }[]; const cs = [...svg.matchAll(/<circle\b([^>]*)\/?>/g)].map((m) => ({ cx: Number(attr(m[1], "cx")), cy: Number(attr(m[1], "cy")), r: Number(attr(m[1], "r")) })).filter((c) => c.r > 50);
+    if (cs.length !== 2) { issues.push({ code: "render_empty", message: `벤 다이어그램의 원이 ${cs.length}개입니다(2개 필요).` }); return; }
+    const [A, B] = cs.sort((p, q) => p.cx - q.cx); const rect = [...svg.matchAll(/<rect\b([^>]*)\/?>/g)].map((m) => ({ x: Number(attr(m[1], "x")), y: Number(attr(m[1], "y")), w: Number(attr(m[1], "width")), h: Number(attr(m[1], "height")) }))[0];
+    const inC = (c: typeof A, x: number, y: number) => Math.hypot(x - c.cx, y - c.cy) < c.r - 2;
+    const inR = (x: number, y: number) => !rect || (x > rect.x && x < rect.x + rect.w && y > rect.y && y < rect.y + rect.h);
+    const want: Record<string, (x: number, y: number) => boolean> = { a: (x, y) => inC(A, x, y) && !inC(B, x, y), ab: (x, y) => inC(A, x, y) && inC(B, x, y), b: (x, y) => !inC(A, x, y) && inC(B, x, y), out: (x, y) => !inC(A, x, y) && !inC(B, x, y) && inR(x, y) };
+    for (const r of regs) if (!ts.some((t) => t.text === r.label && !t.rotated && want[r.id](t.x, t.y - 5))) issues.push({ code: "render_value_mismatch", message: `영역 ${r.id} 의 값 '${r.label}' 가 그 영역 안에 그려지지 않았습니다.` });
+    const sets = spec.sets as string[]; for (const n of sets) if (!ts.some((t) => t.text === n)) issues.push({ code: "label_missing", message: `집합 이름 '${n}' 이 그려지지 않았습니다.` });
+    const nums = regs.map((r) => (/^\d+$/.test(r.label) ? Number(r.label) : NaN)); const tot = (spec.total as { label: string } | undefined)?.label;
+    if (tot && /^\d+$/.test(tot) && nums.every((v) => !Number.isNaN(v)) && nums.reduce((a, b) => a + b, 0) !== Number(tot)) issues.push({ code: "render_value_mismatch", message: `영역 값의 합 ${nums.reduce((a, b) => a + b, 0)} 이 전체 ${tot} 와 다릅니다.` });
+    return;
+  }
+  const br = spec.branches as { name: string; label: string; next: { name: string; label: string }[] }[];
+  const ls = lines(svg).filter((l) => l.stroke === "#111"); const need = br.length + br.reduce((n, b) => n + b.next.length, 0);
+  if (ls.length !== need) issues.push({ code: "render_value_mismatch", message: `그려진 가지 ${ls.length}개 ≠ 데이터 ${need}개.` });
+  const near = (l: { x1: number; y1: number; x2: number; y2: number }, lab: string) => ts.some((t) => t.text === lab && Math.hypot(t.x - (l.x1 + l.x2) / 2, t.y - 5 - (l.y1 + l.y2) / 2) < 26);
+  const byX = [...ls].sort((p, q) => p.x1 - q.x1); const l1 = byX.filter((l) => l.x1 === Math.min(...ls.map((q) => q.x1))).sort((p, q) => p.y2 - q.y2); const l2 = ls.filter((l) => !l1.includes(l)).sort((p, q) => p.y2 - q.y2);
+  br.forEach((b, i) => { if (l1[i] && !near(l1[i], b.label)) issues.push({ code: "render_value_mismatch", message: `첫 단계 가지 '${b.name}' 의 확률 라벨 '${b.label}' 이 그 가지 옆에 없습니다.` }); if (!ts.some((t) => t.text === b.name)) issues.push({ code: "label_missing", message: `가지 이름 '${b.name}' 이 그려지지 않았습니다.` }); });
+  const flat = br.flatMap((b) => b.next); flat.forEach((n, i) => { if (l2[i] && !near(l2[i], n.label)) issues.push({ code: "render_value_mismatch", message: `둘째 단계 가지 '${n.name}' 의 확률 라벨 '${n.label}' 이 그 가지 옆에 없습니다.` }); });
+  const val = (t: string) => { const m = t.match(/^(\d+)\/(\d+)$/); return m ? Number(m[1]) / Number(m[2]) : /^\d*\.?\d+$/.test(t) ? Number(t) : NaN; };
+  const sum = (a: { label: string }[]) => { const v = a.map((x) => val(x.label)); return v.some(Number.isNaN) ? null : v.reduce((p, q) => p + q, 0); };
+  for (const [what, a] of [["첫 단계", br], ...br.map((b, i) => [`가지 ${i + 1} 의 둘째 단계`, b.next] as const)] as [string, { label: string }[]][]) { const s = sum(a); if (s !== null && Math.abs(s - 1) > 1e-9) issues.push({ code: "render_value_mismatch", message: `${what} 형제 가지의 확률 합이 ${s.toFixed(3)} 로 1 이 아닙니다.` }); }
+}
+
 /** 그림 하나(자식 포함하지 않음)의 구조 검사. */
 export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   const issues: QaIssue[] = [];
@@ -322,6 +351,7 @@ export function checkRenderedFigure(spec: Spec, markup: string): QaIssue[] {
   if (spec.type === "data" && spec.kind === "dot_plot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkDotPlotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "data" && spec.kind === "boxplot") { checkChartAxes(spec, markup, issues, { xNum: true, yNum: false, xTitle: true, yTitle: false }); checkBoxplotFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "triangle") { checkTriangleFidelity(spec, markup, issues); return issues; } // 글자 겹침은 엔진이 라벨 자리를 정할 때 이미 검사한다
+  if (spec.type === "venn_tree") { checkVennTreeFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "trig_curve") { checkTrigCurveFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "unit_circle") { checkUnitCircleFidelity(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
   if (spec.type === "plane") { checkAxes(spec, markup, issues, true); checkPlaneScatter(spec, markup, issues); checkPlaneLines(spec, markup, issues); checkOverlapAndClip(markup, issues); return issues; }
