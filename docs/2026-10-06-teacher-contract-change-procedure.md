@@ -22,3 +22,9 @@
 ## 코드 현황 (참고)
 - 지급 요청일과 실제 지급 완료일은 구분된다. payout_batches에 dispatch_requested_at(송금 요청), provider_pending_at, provider_confirmed_at(제공자 최종 확인), paid_at, external_transfer_recorded_at(외부 송금 기록)이 있고, 상태는 approved, dispatch_requested, provider_pending, paid로 나뉜다. paid는 provider_transaction_id와 provider_confirmed_at(또는 외부 송금 기록)이 있어야만 전이된다. 즉 요청일은 dispatch_requested_at, 완료일은 paid_at 또는 provider_confirmed_at이다.
 - 계약서가 말하는 "지급 기한"을 어느 시각으로 볼지(요청 시점 대 완료 시점)는 아직 정해지지 않았다. 제안: 기한 준수는 송금 요청이 아니라 지급 완료 시각으로 판단한다.
+
+## 녹화·전사·AI 노트 동의 범위(4개 항목) 개정 절차 (2026-10-07)
+- 동의 범위 4항목(영상 녹화, 음성 녹화, 전사, AI 노트·요약, 각 보관 포함)이 들어간 계약 문구 버전은 `lib/legal/recording-scope.ts`에 등록한다(현재: 가족 0.3-EN-CA / 교사 0.2-EN-CA, 0.2-EN, 0.1-EN / 컨설턴트 0.1-EN-CONSULTANT). 문구가 바뀌면 템플릿 버전을 올리고 이 레지스트리에 추가한다.
+- 등록되지 않은 버전으로 서명된 계약은 **덮어쓰거나 소급 적용하지 않는다.** `evaluateLessonCapture`가 `*_scope_outdated`로 차단하고, 관리자 화면(선생님·컨설턴트 계약 패널, 선생님 목록 칩)에 "개정·재동의 필요"를 표시한다. 재동의 안내 발송은 하지 않는다(별도 승인).
+- 절차: (1) 새 버전 문구로 새 계약(개정 계약)을 새 레코드로 발송·서명받는다. 이전 서명본은 보관만 한다. (2) 가족 계약은 `contract_versions`에 새 버전 행으로 기록된다(최신 completed 버전의 `template_version`을 게이트가 본다). (3) 13세 미만은 보호자 동의 정책 버전이 올라가면(`requires_reconsent`) 기존 동의가 자동으로 무효가 되어 `under13_guardian_consent_outdated`로 차단된다. 새 동의는 새 행으로 기록한다.
+- 현재 서명된 실제 계약은 없으므로 적용 대상이 없다.

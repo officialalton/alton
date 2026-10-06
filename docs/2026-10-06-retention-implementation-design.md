@@ -23,6 +23,13 @@
 현재 시스템에는 전사·Smart Notes만 있고 녹화 파일·기능이 없다. `retention_policies.lesson_recordings`는 `no_feature`로 등록해 두었고, 녹화 기능이 생기면 같은 큐(`category='lesson_recording'`)와 같은 수업 종료일+1년 기준에 연결한다.
 동의 범위: 기존 `ai_notes_consent_events`는 선택형 AI 노트 동의(정책 변경으로 계약서 서명 일원화)이고, 전사·Smart Notes 보존·삭제에 대한 별도 동의 레코드는 없다 → 계약서 조항이 유일한 근거. 계약 문안에 "전사·Smart Notes를 수업 종료 후 1년 보관 후 삭제" 포함 여부를 기획자 확인 필요.
 
+### 녹화·전사·AI 노트 동일 규칙 (2026-10-07 지침, migration 20262100000192)
+- 영상 녹화·음성 녹화·전사·AI 노트/요약은 **각 수업 또는 상담 종료일 +1년**에 삭제 대상이 되며 수강 지속·재수강으로 연장하지 않는다. 사용자 문구도 같은 표현("lesson or consultation")으로 통일했다.
+- `retention_policies`: `lesson_ai_artifacts`(전사·Smart Notes, 구현됨)와 `lesson_recordings`(영상·음성, `no_feature`)를 같은 규칙의 산출물 유형으로 등록했다. 신규 산출물은 행 추가 + 같은 큐(`retention_deletion_targets`) 연결만 하면 된다.
+- 외부 저장소(Drive) 삭제 실패는 `failed` + 백오프로 추적·재시도(기존 워커). **파일 연결 정리 전 DB 행 삭제 금지**(Smart Notes는 이미 이 순서로 구현됨, 녹화는 같은 순서를 강제하는 것이 활성화 선행 조건).
+- 상담(consultation) 종료일 기준 산출물: 상담에는 Smart Notes/전사 산출 기능이 아직 없다. 생기면 `consultations` 종료일을 start_event로 하는 큐 적재 함수를 추가한다(미구현).
+- 활성화 선행: 실제 녹화는 `lib/legal/recording-gate.ts`(회차 유형, 서명 계약 문구 버전, 13세 미만 보호자 동의, 추가 참석자)를 통과해야 한다. 이번 작업은 게이트와 동의 문구만 구현했고 녹화·삭제 실행은 하지 않았다.
+
 ### 무료회원 학습 이력 3년 (Q2)
 `students.last_active_at`은 포털 진입 하트비트(`touch_student_activity`, 10분 쓰로틀)라 기준으로 쓰지 않는다. `student_last_learning_activity(student_id)`는 실제 학습 이벤트만 합산한다: 모의고사 응시, 단어 추가·퀴즈 제출, 자료 읽기 위치, `student_learning_events`(학습 화면 열람 기록만 쌓임). 로그인·하트비트·자동 알림은 갱신 사유가 아니다. **삭제 자동화는 아직 없음** — 무엇을 지우고 무엇을 비식별화할지(응시 기록, 오답노트, 단어장) 확정 후 구현.
 과외 학생(출결·학습이력 3년)은 "과외 서비스 종료일"이 필요한데 단일 컬럼이 없다(subject_enrollments 종료 시각 + 계정 상태 조합). 활성 수강이 있으면 학습이력은 보류하되 오래된 수업자료(위 1년 규칙)는 면제하지 않는다. 종료일 정의 확정 전까지 미구현.

@@ -137,6 +137,11 @@ export default function ConsultantAgreementSection({ consultantId }: { consultan
           {state.status === "signed" && (
             <div className="mb-1">
               <p className="text-[12px] text-green">서명 완료본은 수정할 수 없습니다.</p>
+              {state.amendmentRequired && (
+                <p className="text-[12px] text-red" data-testid="consultant-agreement-amendment-required">
+                  개정 계약·재동의 필요 — 새 문구의 계약으로 다시 서명받기 전에는 녹화·전사·AI 노트 처리가 시작되지 않습니다(자동 안내 발송 없음).
+                </p>
+              )}
               <p className="text-[12px] text-grey-600 mt-1" data-testid="consultant-agreement-archive">
                 서명본 보관(Drive):{" "}
                 {state.archive?.status === "succeeded" ? "완료" : state.archive?.status === "manual_review" ? "수동 확인 필요" : state.archive?.status === "retryable_failed" ? `실패 — 재시도 대기(${state.archive.retryCount}회)` : "대기/처리 중"}

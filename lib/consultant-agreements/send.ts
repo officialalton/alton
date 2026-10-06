@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { assertDocusignSandboxBaseUri, createEnvelope } from "@/lib/docusign";
+import { agreementCoversFourItems } from "@/lib/legal/recording-scope";
 import { deriveAgreementStatus, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
 import {
   consultantChecklist,
@@ -18,6 +19,7 @@ export type ConsultantAgreementState = {
   missing: string[];
   checklist: { key: string; label: string; ok: boolean }[];
   ready: boolean;
+  amendmentRequired: boolean;
 };
 
 const INPUT_COLUMNS =
@@ -49,7 +51,7 @@ export async function loadConsultantAgreementState(admin: SupabaseClient, consul
   const basics = await loadConsultantBasics(admin, consultantId);
   const { data: rows } = await admin
     .from("teacher_contracts")
-    .select("status, docusign_envelope_status, sent_at, signed_at, drive_sync_status, drive_last_error, drive_retry_count")
+    .select("status, docusign_envelope_status, sent_at, signed_at, template_version, drive_sync_status, drive_last_error, drive_retry_count")
     .eq("teacher_id", consultantId)
     .eq("agreement_form", "consultant_services")
     .order("sent_at", { ascending: false })
@@ -68,6 +70,7 @@ export async function loadConsultantAgreementState(admin: SupabaseClient, consul
     inputs: basics.inputs ? { ...basics.inputs, monthly_fee_amount: feeAmountText(basics.inputs) } : null,
     missing: prepared.ok ? [] : prepared.missing,
     checklist,
+    amendmentRequired: status === "signed" && !agreementCoversFourItems("consultant", latest?.template_version as string | undefined),
     ready: prepared.ok && checklist.every((c) => c.ok) && (status === "not_sent" || status === "declined" || status === "voided"),
   };
 }

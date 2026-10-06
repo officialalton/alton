@@ -19,6 +19,7 @@ const state = (over: Partial<ConsultantAgreementState>): ConsultantAgreementStat
   inputs: null,
   missing: [],
   ready: false,
+  amendmentRequired: false,
   checklist: [
     { key: "workspace", label: "컨설턴트 Google 계정 등록·연결 완료", ok: true },
     { key: "payout_account", label: "수취 계좌 등록(정산 > 수취 계좌)", ok: false },

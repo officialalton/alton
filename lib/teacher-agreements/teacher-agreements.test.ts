@@ -339,3 +339,13 @@ describe("agreement checklist and list status", () => {
     expect(deriveAgreementStatus({ status: "sent", docusign_envelope_status: "declined" })).toBe("declined");
   });
 });
+
+describe("amended-agreement flag", () => {
+  it("a signed agreement whose text version lacks the four recording-consent items is flagged, a current one is not", async () => {
+    const { agreementCoversFourItems, agreementKindForForm } = await import("@/lib/legal/recording-scope");
+    expect(agreementCoversFourItems(agreementKindForForm("non_us_services") ?? "teacher", "0.2-EN")).toBe(true);
+    expect(agreementCoversFourItems(agreementKindForForm("us_contractor_services") ?? "teacher", "0.1-EN")).toBe(true);
+    expect(agreementCoversFourItems("teacher", "0.1-EN-OLD")).toBe(false);
+    expect(agreementCoversFourItems("teacher", null)).toBe(false);
+  });
+});

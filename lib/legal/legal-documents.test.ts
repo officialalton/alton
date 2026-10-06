@@ -1,4 +1,5 @@
-import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parseContractMarkdown } from "../../scripts/legal-docs/parse-markdown.mjs";
@@ -6,7 +7,6 @@ import { UNDER_13_CONSENT_VERSION, under13NoticeSections } from "@/lib/contracts
 import { GENERATED_LEGAL_DOCUMENTS } from "./documents/generated";
 import { findLegalTextProblems } from "./guard";
 import { inlineToPlainText } from "./inline";
-import { canStartLessonCapture } from "./recording-gate";
 import { RECORDING_CLAUSE_HEADING, RECORDING_CLAUSE_PARAGRAPHS } from "./recording-clause";
 import { PRIVACY_SECTIONS, RETENTION_INTRO, RETENTION_ITEMS, TERMS_SECTIONS, type SiteSection } from "./site-documents";
 
@@ -62,6 +62,8 @@ describe("recording / transcription / AI notes consent is consistent", () => {
     ["parent", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.parentAgreement)],
     ["teacher CA", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.teacherCalifornia)],
     ["teacher non-US", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.teacherNonUs)],
+    ["teacher US contractor", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.teacherUsContractor)],
+    ["consultant", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.consultantServices)],
     ["under-13", JSON.stringify(GENERATED_LEGAL_DOCUMENTS.under13Notice)],
     ["terms", flat(TERMS_SECTIONS)],
     ["privacy", flat(PRIVACY_SECTIONS)],
@@ -69,7 +71,7 @@ describe("recording / transcription / AI notes consent is consistent", () => {
   it.each(docs)("%s carries the identical clause with all four items", (_n, text) => {
     for (const p of RECORDING_CLAUSE_PARAGRAPHS) expect(norm(text)).toContain(norm(p));
     for (const f of four) expect(text).toContain(f);
-    expect(text).toContain("initial consultations and trial lessons are excluded");
+    expect(text).toContain("Initial consultations and all trial lessons, including a trial lesson held after a contract is signed, are always excluded");
     expect(text).toContain("Free learning access is not conditioned on agreeing to lesson recording");
     expect(text).toContain("No public posting, unrelated advertising, sale, or unrestricted model training");
   });
@@ -78,37 +80,61 @@ describe("recording / transcription / AI notes consent is consistent", () => {
   });
 });
 
-describe("recording clause in the contractor documents added 2026-10-07", () => {
-  const newDocs = [
+describe("recording clause: scope, execution rule and retention are identical in every document (2026-10-07 directive)", () => {
+  const all = [
+    ["parent", "parentAgreement"],
+    ["teacher CA", "teacherCalifornia"],
+    ["teacher non-US", "teacherNonUs"],
     ["teacher US contractor", "teacherUsContractor"],
     ["consultant", "consultantServices"],
+    ["under-13", "under13Notice"],
   ] as const;
-  const paragraphsOf = (key: (typeof newDocs)[number][1]) => {
-    const sec = GENERATED_LEGAL_DOCUMENTS[key].sections.find((x: { heading: string | null }) => x.heading?.includes(RECORDING_CLAUSE_HEADING));
+  const paragraphsOf = (key: (typeof all)[number][1]) => {
+    const sec = GENERATED_LEGAL_DOCUMENTS[key].sections.find(
+      (x) => x.heading?.includes(RECORDING_CLAUSE_HEADING) || x.blocks.some((b) => b.t === "h3" && b.text === RECORDING_CLAUSE_HEADING)
+    );
     return (sec?.blocks ?? []).flatMap((b) => (b.t === "p" ? [b.text] : []));
   };
-  it.each(newDocs)("%s keeps the four items, the not-currently-provided statement and the retention wording", (_n, key) => {
-    const text = paragraphsOf(key).join(" ");
-    for (const f of ["video recording", "audio recording", "conversion of speech into a text transcript", "AI-assisted preparation and storage of lesson notes"]) expect(text).toContain(f);
-    expect(text).toContain("are not currently provided");
-    expect(text).toContain("before any recording is activated");
-    expect(text).toContain("eligible for deletion one year after");
-    expect(text).toContain("regardless of continued enrolment");
-    expect(text).toContain("reviewed at least every 12 months");
-    expect(text).toContain("Children's information is deleted earlier");
-    expect(text).toContain("Free learning access is not conditioned on agreeing to lesson recording");
-    expect(text).toContain("No public posting, unrelated advertising, sale, or unrestricted model training");
-    expect(text).not.toMatch(/consent (again )?(before|at) each lesson|per-lesson consent/i);
-  });
-  // KNOWN MISMATCH reported to the planner (2026-10-07): the new documents reword the shared clause (trial lessons and service
-  // consultations included after execution; "session" instead of "lesson"; consultant scope wording). `it.fails` records the
-  // difference without editing confirmed wording; remove the marker once the wording is aligned or the difference is approved.
-  it.fails.each(newDocs)("%s carries the five shared paragraphs identical to the confirmed clause", (_n, key) => {
+  it.each(all)("%s carries the five shared paragraphs verbatim", (_n, key) => {
     const ps = paragraphsOf(key);
     RECORDING_CLAUSE_PARAGRAPHS.forEach((p, i) => expect(ps[i]).toBe(p));
   });
+  it("states consent coverage separately from execution, excludes every trial lesson, and keeps recordings 'not currently provided'", () => {
+    const text = RECORDING_CLAUSE_PARAGRAPHS.join(" ");
+    expect(text).toContain("Consent coverage is separate from execution");
+    expect(text).toContain("always excluded from recording, transcription, and AI lesson notes");
+    expect(text).toContain("including a trial lesson held after a contract is signed");
+    expect(text).toContain("only to regular lessons and follow-up consultations");
+    expect(text).toContain("does not itself start any recording, transcription, or note-taking");
+    expect(text).toContain("are not currently provided");
+    expect(text).toContain("before any recording is activated");
+    expect(text).toContain("Currently provided: transcripts and Smart Notes");
+    expect(text).not.toMatch(/trial lesson held after execution|are being recorded|we record/i);
+  });
+  it("retention: one year after the end date of each lesson or consultation, same wording everywhere", () => {
+    const text = RECORDING_CLAUSE_PARAGRAPHS.join(" ");
+    expect(text).toContain("become eligible for deletion one year after the end date of each lesson or consultation, regardless of continued enrolment or re-enrolment");
+    expect(text).toContain("reviewed at least every 12 months");
+    expect(text).toContain("Children's information is deleted earlier");
+    for (const [, key] of all) expect(JSON.stringify(GENERATED_LEGAL_DOCUMENTS[key])).not.toMatch(/one year after that (lesson|session)/);
+  });
   it("the rate addendum carries no recording clause and no internal wording", () => {
     expect(JSON.stringify(GENERATED_LEGAL_DOCUMENTS.teacherRateAddendum)).not.toMatch(/recording/i);
+  });
+  it("no user-facing document contains Korean text", () => {
+    for (const key of Object.keys(GENERATED_LEGAL_DOCUMENTS) as (keyof typeof GENERATED_LEGAL_DOCUMENTS)[]) expect(JSON.stringify(GENERATED_LEGAL_DOCUMENTS[key])).not.toMatch(/[ㄱ-ㆎ가-힣]/);
+  });
+});
+
+describe("under-13 consent version: source file, constant and DB policy row agree", () => {
+  it("the newest migration row for UNDER_13_CONSENT_VERSION carries the sha256 of the current source file", () => {
+    const dir = path.join(root, "supabase/migrations");
+    const files = readdirSync(dir).filter((f) => readFileSync(path.join(dir, f), "utf8").includes(`'${UNDER_13_CONSENT_VERSION}'`));
+    expect(files.length).toBeGreaterThan(0);
+    const sql = readFileSync(path.join(dir, files[files.length - 1]), "utf8");
+    const hash = createHash("sha256").update(readFileSync(path.join(root, "docs/contracts/under-13-parental-notice-and-consent-en.md"))).digest("hex");
+    expect(sql).toContain(`'${hash}'`);
+    expect(read("under-13-parental-notice-and-consent-en.md")).toContain(`Consent version: ${UNDER_13_CONSENT_VERSION}`);
   });
 });
 
@@ -127,7 +153,7 @@ describe("one unified retention schedule", () => {
     expect(JSON.stringify(GENERATED_LEGAL_DOCUMENTS[k])).toContain("retention schedule in ALTON's Privacy Policy");
   });
   it("recording clause states the 1-year period and no longer says there is no fixed period", () => {
-    expect(RECORDING_CLAUSE_PARAGRAPHS.join(" ")).toContain("eligible for deletion one year after that lesson, regardless of continued enrolment");
+    expect(RECORDING_CLAUSE_PARAGRAPHS.join(" ")).toContain("one year after the end date of each lesson or consultation, regardless of continued enrolment or re-enrolment");
     for (const item of [...RETENTION_ITEMS, ...RECORDING_CLAUSE_PARAGRAPHS]) expect(item).not.toMatch(/no fixed (period|duration)/i);
   });
 });
@@ -164,21 +190,10 @@ describe("user-facing legal text guard", () => {
 describe("under-13 notice", () => {
   it("is versioned, has no paper-form blanks and keeps verification language", () => {
     const text = JSON.stringify(under13NoticeSections());
-    expect(UNDER_13_CONSENT_VERSION).toBe("U13-EN-2026-10-06");
+    expect(UNDER_13_CONSENT_VERSION).toBe("U13-EN-2026-10-07");
     expect(text).not.toMatch(/_{4,}/);
     expect(text).toContain("Signing this form alone does not bypass that process");
     expect(text).toContain("video recording, audio recording, speech-to-text transcription and storage, and AI meeting notes");
   });
 });
 
-describe("canStartLessonCapture", () => {
-  const ok = { lessonKind: "regular", customerAgreementSigned: true, teacherAgreementSigned: true, under13ConsentMissing: false } as const;
-  it("allows only regular lessons with signed agreements", () => {
-    expect(canStartLessonCapture(ok).allowed).toBe(true);
-    expect(canStartLessonCapture({ ...ok, lessonKind: "trial" }).allowed).toBe(false);
-    expect(canStartLessonCapture({ ...ok, lessonKind: "consultation" }).allowed).toBe(false);
-    expect(canStartLessonCapture({ ...ok, customerAgreementSigned: false }).allowed).toBe(false);
-    expect(canStartLessonCapture({ ...ok, teacherAgreementSigned: false }).allowed).toBe(false);
-    expect(canStartLessonCapture({ ...ok, under13ConsentMissing: true }).allowed).toBe(false);
-  });
-});

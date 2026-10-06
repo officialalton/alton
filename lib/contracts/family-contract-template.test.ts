@@ -40,7 +40,7 @@ describe("renderFamilyContractHtml (parent agreement v0.3-EN-CA)", () => {
     for (const phrase of ["video recording", "audio recording", "conversion of speech into a text transcript", "AI-assisted preparation and storage of lesson notes"]) {
       expect(text).toContain(phrase);
     }
-    expect(text).toContain("initial consultations and trial lessons are excluded");
+    expect(text).toContain("Initial consultations and all trial lessons, including a trial lesson held after a contract is signed, are always excluded");
     expect(text).toContain("A parent signature does not substitute for another participant");
   });
 
