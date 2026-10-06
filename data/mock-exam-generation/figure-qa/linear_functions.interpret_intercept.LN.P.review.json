@@ -1,9 +1,9 @@
 {
  "itemId": "linear_functions.interpret_intercept.LN.P",
  "verdict": "pass",
- "reviewedAt": "2026-10-06T02:17:16Z",
+ "reviewedAt": "2026-10-06T02:40:53Z",
  "reviewer": "claude-sonnet-5.5 (math-graphs session)",
- "codeHash": "32b4d8eba7c40ac80f11fdee57f0304f74b53808c1565843f980269ce6b8595f",
+ "codeHash": "4bc7ddf5f0fe194b901f0aeccc0ffc3ef2c1f7752c67c376bbc0e957ebeabc61",
  "samples": [
   "linear_functions.interpret_intercept.LN.P.png"
  ],
@@ -19,5 +19,5 @@
   "mobile_375_readable": "pass"
  },
  "defects": [],
- "notes": "그림만 보고 풀이: 점 (1,50),(3,40),(7,20) → 기울기 -5, y 절편 55 → 서술 A(x=0일 때 55), 메타 정답 A 일치. 점·직선·눈금·축 제목 양호, 서술 선지 4개 구별."
+ "notes": "그림만 보고 풀이: 점 (1,50),(3,40),(7,20) → 기울기 -5, y 절편 55 → 서술 A(x=0일 때 55), 메타 정답 A 일치. 점·직선·눈금·축 제목 양호, 서술 선지 4개 구별. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]"
 }
