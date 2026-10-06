@@ -35,6 +35,9 @@ function buildSupabaseMock({
         }),
       };
     }
+    if (table === "payout_settings") {
+      return { select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { transfer_lead_business_days: 3 } }) }) }) };
+    }
     throw new Error(`unexpected table ${table}`);
   });
   return { from } as unknown as Parameters<typeof loadPayoutBatches>[0];
@@ -114,5 +117,24 @@ describe("loadPayoutBatches", () => {
     // 없으면 "알 수 없음" 대신 "(삭제된 계정)"으로 구분해 보여준다 — 예전에는 관리자
     // 이름을 조회하지 않아 정상 처리 건까지 전부 "알 수 없음"이었다.
     expect(result[0].auditLog[0].actorName).toBe("(삭제된 계정)");
+  });
+
+  it("지급 기한(저장값)에서 송금 요청 예정일을 계산하고 기한 위험 플래그를 그대로 전달한다", async () => {
+    const supabase = buildSupabaseMock({
+      batches: [
+        {
+          id: "b2", teacher_id: "t1", period_start: "2026-10-01", period_end: "2026-10-15", currency: "USD", status: "approved",
+          created_at: "2026-10-16T00:00:00Z", approved_at: "2026-10-23T20:00:00Z", paid_at: null, failure_reason: null,
+          scheduled_payout_date: "2026-10-26", deadline_at_risk: true,
+        },
+      ],
+      profiles: [{ id: "t1", name: "박서연" }],
+      items: [],
+      auditRows: [],
+    });
+    const [b] = await loadPayoutBatches(supabase);
+    expect(b.scheduledPayoutDate).toBe("2026-10-26");
+    expect(b.transferRequestDate).toBe("2026-10-21");
+    expect(b.deadlineAtRisk).toBe(true);
   });
 });

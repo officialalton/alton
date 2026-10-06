@@ -6,7 +6,7 @@ import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
 import { previousMonthRange } from "./payouts-data";
-import { companyDateOf, payoutDateForPeriodEnd } from "@/lib/payout/payout-schedule";
+import { companyDateOf, payoutDateForPeriodEnd, transferRequestDate } from "@/lib/payout/payout-schedule";
 import {
   generatePayoutBatches,
   submitPayoutBatchForReview,
@@ -73,6 +73,7 @@ const AUDIT_ACTION_LABEL: Record<string, string> = {
   adjusted: "금액 조정",
   auto_dispatch_toggled: "자동 송금 설정 변경",
   scheduled_date_changed: "지급 예정일 변경",
+  deadline_at_risk: "⚠ 지급 기한 위험(승인이 늦음)",
   pay_immediately_requested: "즉시 지급 처리(예정일을 오늘로)",
   delayed_payment_alert: "⚠ 법정 기한 초과 지연 지급 — 직원 확인 필요",
   external_transfer_recorded: "외부 송금 완료 기록",
@@ -254,7 +255,7 @@ export default function PayoutBatchesTab({
         setBusyId(null);
         return;
       }
-      if (result.status === "ok") setMessage(`지급 예정일을 ${result.finalDate}로 변경했습니다. 선생님 알림 기록이 남았습니다.`);
+      if (result.status === "ok") setMessage(`지급 기한을 ${result.finalDate}로 변경했습니다(송금 요청 예정일 ${transferRequestDate(result.finalDate)}). 선생님 알림 기록이 남았습니다.`);
       await refresh();
     } catch (e) {
       setMessage(e instanceof Error ? e.message : "처리 실패");
@@ -459,7 +460,7 @@ export default function PayoutBatchesTab({
           {autoDispatchOn ? "끄기" : "켜기"}
         </button>
         <span className="text-[11px] text-grey-400">
-          매월 10일·26일(주말·미국 연방 은행 휴일이면 직전 영업일, America/Los_Angeles 기준)에 지급 예정일이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
+          송금 요청 예정일(지급 기한 − 3영업일, 주말·미국 연방 은행 휴일 제외, America/Los_Angeles 기준)이 도래한 <b>송금 승인</b> 묶음만 자동 처리합니다.
         </span>
       </div>
       <p className="text-[11.5px] text-grey-500 mb-3">
@@ -607,11 +608,18 @@ export default function PayoutBatchesTab({
                   {b.status === "approved" && (
                     <div className="mt-3 pt-3 border-t border-grey-100">
                       <div className="text-[12px] text-grey-500 mb-2">
-                        지급 예정일{" "}
+                        지급 기한(입금 완료){" "}
                         <b data-testid={`sched-${b.id}`}>
                           {b.scheduledPayoutDate ?? "미정"}
                         </b>{" "}
+                        · 송금 요청 예정일{" "}
+                        <b data-testid={`request-date-${b.id}`}>{b.transferRequestDate ?? "미정"}</b>{" "}
                         · 자동 송금 <b>{b.autoDispatchEnabled ? "대상" : "제외"}</b>
+                        {b.deadlineAtRisk && (
+                          <span className="ml-2 text-red font-bold" data-testid={`deadline-risk-${b.id}`}>
+                            ⚠ 기한 위험 — 승인이 늦어 계획된 송금 요청일을 지키지 못합니다. 즉시 지급 처리를 검토하세요.
+                          </span>
+                        )}
                       </div>
 
                       {!b.scheduledPayoutDate && (
@@ -708,19 +716,19 @@ export default function PayoutBatchesTab({
                           <p className="text-[11px] text-grey-400" data-testid={`date-rules-${b.id}`}>
                             변경 사유는 필수이며 과거 날짜·법정 기한({payoutDateForPeriodEnd(b.periodEnd) ?? "-"}) 초과 날짜는 일반 변경으로 처리되지 않습니다.
                             주말·미국 연방 은행 휴일을 고르면 직전 영업일을 제안하고 확인을 받습니다. 오늘 날짜로 잡으면 결제 업체 마감 시간 때문에 입금이 더 늦어질 수 있습니다.
-                            표시 날짜는 <b>송금 요청일</b>이며, 선생님 계좌 <b>입금일</b>은 은행·송금 업체 처리에 따라 달라질 수 있습니다.
+                            입력하는 날짜는 <b>지급 기한(입금 완료 기한)</b>이며, 송금 요청은 기한보다 N영업일(기본 3) 앞선 요청일에 자동으로 나갑니다.
                           </p>
                           {dateWarning[b.id] && (
                             <p className="text-[11.5px] font-bold text-red" data-testid={`date-warning-${b.id}`}>{dateWarning[b.id]}</p>
                           )}
-                          {b.scheduledPayoutDate && b.scheduledPayoutDate < todayLa() && (
+                          {b.scheduledPayoutDate && (b.deadlineAtRisk || b.scheduledPayoutDate < todayLa()) && (
                             <button
                               disabled={busyId === b.id}
                               data-testid={`pay-immediately-${b.id}`}
                               onClick={() => void handlePayImmediately(b)}
                               className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red text-red disabled:opacity-50"
                             >
-                              즉시 지급 처리(지연된 묶음)
+                              즉시 지급 처리(기한 경과·위험 묶음)
                             </button>
                           )}
                           <button

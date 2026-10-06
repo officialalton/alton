@@ -48,6 +48,30 @@ export function shiftToBusinessDay(dateOnly: string): string {
   return cur;
 }
 
+/** 송금 요청일 = 지급 기한 − N영업일. SQL payout_settings.transfer_lead_business_days 기본값과 같아야 한다(통합 테스트가 점검). */
+export const PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT = 3;
+
+function isBusinessDay(dateOnly: string): boolean {
+  return shiftToBusinessDay(dateOnly) === dateOnly;
+}
+
+/** 기준일에서 영업일 n개 앞의 날짜(주말·미국 연방 은행 휴일 제외). */
+export function businessDaysBefore(dateOnly: string, n: number): string {
+  if (!parseDateOnly(dateOnly)) return dateOnly;
+  let cur = dateOnly;
+  let counted = 0;
+  while (counted < n) {
+    cur = addDays(cur, -1);
+    if (isBusinessDay(cur)) counted += 1;
+  }
+  return cur;
+}
+
+/** 지급 기한(입금 완료 기한) → 송금 요청일. 기한이 휴일이면 먼저 직전 영업일로 보정한 뒤 센다. */
+export function transferRequestDate(deadline: string, lead: number = PAYOUT_TRANSFER_LEAD_BUSINESS_DAYS_DEFAULT): string {
+  return businessDaysBefore(shiftToBusinessDay(deadline), lead);
+}
+
 const pad = (n: number) => String(n).padStart(2, "0");
 const ymd = (y: number, m1: number, d: number) => `${y}-${pad(m1)}-${pad(d)}`;
 const lastDayOf = (y: number, m1: number) => new Date(Date.UTC(y, m1, 0)).getUTCDate();
@@ -174,7 +198,7 @@ export function formatPeriodWithPayoutEn(periodStart: string, periodEnd: string,
   const nominal = nominalPayoutDateForPeriodEnd(periodEnd);
   // 보정으로 날짜가 당겨진 경우에는 요일을 함께 보여 준다("paid Oct 16 (Fri)").
   const shifted = pay && nominal && pay !== nominal;
-  return pay ? `${label} → paid ${formatDateOnlyEn(pay)}${shifted ? ` (${weekdayEn(pay)})` : ""}` : label;
+  return pay ? `${label} → paid by ${formatDateOnlyEn(pay)}${shifted ? ` (${weekdayEn(pay)})` : ""}` : label;
 }
 
 /**

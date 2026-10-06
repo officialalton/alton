@@ -125,13 +125,14 @@ describe("자동 송금 대상·중복 송금 방지", () => {
   it("기본 기준일은 LA 날짜이고, 미래 예정일은 대상이 아니며 과거(놓친) 예정일은 대상이다", () => {
     const past = approvedBatch("2031-11-03", "2031-11-20");
     const today = psql(`select (now() at time zone 'America/Los_Angeles')::date;`);
-    const future = psql(`select ((now() at time zone 'America/Los_Angeles')::date + 1);`);
+    const future = psql(`select payout_business_day_on_or_after((now() at time zone 'America/Los_Angeles')::date + 14);`);
     psql(`update payout_batches set scheduled_payout_date = '2020-01-06' where id = '${past}';`);
     const fut = approvedBatch("2031-12-03", future);
     const due = (id: string) => count(`select count(*) from list_due_auto_dispatch_batches() where batch_id = '${id}';`);
     expect(due(past)).toBe(1); // 크론이 며칠 빠졌어도 다음 실행에 따라잡는다
     expect(due(fut)).toBe(0);
-    psql(`update payout_batches set scheduled_payout_date = '${today}' where id = '${fut}';`);
+    // 기한이 가까워져 송금 요청일(기한 − 3영업일)이 오늘 이전이면 대상이다.
+    psql(`update payout_batches set scheduled_payout_date = payout_business_day_on_or_after('${today}') where id = '${fut}';`);
     expect(due(fut)).toBe(1);
   });
 
