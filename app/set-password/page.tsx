@@ -172,7 +172,11 @@ export default function SetPasswordPage() {
 
           <label className="flex items-start gap-2 text-[12.5px] text-grey-500 leading-[1.5] mb-[22px]">
             <input name="consent" type="checkbox" className="mt-0.5" />
-            I agree to the Terms of Service and Privacy Policy (required)
+            <span>
+              I agree to the{" "}
+              <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a> and{" "}
+              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a> (required)
+            </span>
           </label>
 
           {error && <p className="text-[13px] text-red mb-4">{error}</p>}

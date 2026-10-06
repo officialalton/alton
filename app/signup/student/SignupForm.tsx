@@ -122,7 +122,7 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
       <label className="flex items-start gap-2 text-[13px] text-ink mb-5 leading-[1.6]">
         <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} disabled={submitting} className="mt-1" />
         <span>
-          I agree to the Terms of Service and Privacy Policy (version {STUDENT_TERMS_VERSION}). <span className="text-red">*</span>
+          I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a> (version {STUDENT_TERMS_VERSION}). <span className="text-red">*</span>
         </span>
       </label>
 
