@@ -17,6 +17,8 @@ export type PolygonSpec = {
   diagonals?: { between: [string, string]; label?: string }[];
   /** 높이 — 꼭짓점에서 맞은 변(밑변)으로 수선, 점선 + 직각 표시. */
   height?: { from: string; label?: string; foot?: string };
+  /** 직사각형 전용 — 두 변이 숫자 라벨일 때 단위당 화면 길이(px). 선택지처럼 여러 직사각형을 같은 축척으로 나란히 그릴 때 준다(생략하면 그림마다 틀에 맞춰 키운다). */
+  pxPerUnit?: number;
   notToScale?: boolean;
 };
 
@@ -35,6 +37,7 @@ export function validatePolygon(input: unknown): { ok: true; spec: PolygonSpec }
   const vs = s.vertices as string[];
   const has = (v: unknown) => typeof v === "string" && vs.includes(v);
   const adjacent = (a: string, b: string) => { const i = vs.indexOf(a), j = vs.indexOf(b); return (i + 1) % n === j || (j + 1) % n === i; };
+  if (s.pxPerUnit !== undefined && !(typeof s.pxPerUnit === "number" && s.pxPerUnit > 0 && s.pxPerUnit <= 40)) return { ok: false, error: "pxPerUnit 은 0 보다 크고 40 이하인 숫자입니다." };
   for (const sl of (s.sideLabels ?? []) as Record<string, unknown>[]) {
     if (!sl || !Array.isArray(sl.between) || sl.between.length !== 2 || !sl.between.every(has) || sl.between[0] === sl.between[1]) return { ok: false, error: "sideLabels[].between 은 서로 다른 꼭짓점 2개여야 합니다." };
     if (!adjacent(sl.between[0] as string, sl.between[1] as string)) return { ok: false, error: `${(sl.between as string[]).join("")} 은 변이 아닙니다(이웃 꼭짓점이 아님) — 대각선이면 diagonals 에.` };
@@ -79,9 +82,11 @@ function shape(spec: PolygonSpec): Pt[] {
       const wLabel = parseSideLabel(spec, spec.vertices[0], spec.vertices[1]);
       const hLabel = parseSideLabel(spec, spec.vertices[1], spec.vertices[2]);
       if (wLabel !== null && hLabel !== null) {
-        const pxPerUnit = Math.min(MAX_W / wLabel, MAX_H / hLabel);
-        halfW = Math.max(MIN_SIDE, Math.round(wLabel * pxPerUnit)) / 2;
-        fullH = Math.max(MIN_SIDE, Math.round(hLabel * pxPerUnit));
+        const shared = typeof spec.pxPerUnit === "number" && spec.pxPerUnit > 0 ? spec.pxPerUnit : null;
+        const pxPerUnit = shared ?? Math.min(MAX_W / wLabel, MAX_H / hLabel);
+        const minSide = shared ? 24 : MIN_SIDE;
+        halfW = Math.max(minSide, Math.round(wLabel * pxPerUnit)) / 2;
+        fullH = Math.max(minSide, Math.round(hLabel * pxPerUnit));
       }
       return [[cx - halfW, baseY], [cx + halfW, baseY], [cx + halfW, baseY - fullH], [cx - halfW, baseY - fullH]];
     }
