@@ -1,0 +1,42 @@
+{
+ "itemId": "area_volume.cylinder_volume_radius.SX.P",
+ "generatedAt": "2026-10-06T07:23:14.242Z",
+ "codeHash": "be31140675212dd6bedfd2b4a938774f9073a9bd1ac4fb8406c096256e0e6298",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/solid-x.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/area_volume.cylinder_volume_radius.SX.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/sx-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "area_volume.cylinder_volume_radius.SX.P.png",
+   "mobileFile": "area_volume.cylinder_volume_radius.SX.P.m375.png",
+   "archetypeId": "av.cylinder_volume_radius.SX.P.chain2",
+   "seed": 11,
+   "signature": "solid_x:cylinder_section",
+   "stimulus": "A grain bin is modeled by the cylinder in the figure. The dashed rectangle is a cross section through the axis of the cylinder. Read each label in the figure as a length in the same unit, and then work out the quantity asked for below.",
+   "question": "Find the volume of the cylinder in cubic units.",
+   "options": [
+    "$768\\pi$",
+    "$1280\\pi$",
+    "$3072\\pi$",
+    "$96\\pi$"
+   ],
+   "correctIndex": 0,
+   "answer": "$768\\pi$",
+   "explanation": "(1) 그림에서 반지름·대각선 라벨을 읽는다. (2) 단면 직사각형의 가로는 지름 2 × 8 = 16 이다. (3) x² = 20² - 16² = 144 이므로 높이 x = 12 이다. (4) 부피 = π r² h = π × 8² × 12 = 768π 이다. (5) 따라서 768π 이다. 따라서 정답은 $768\\pi$이다.",
+   "structuralIssues": []
+  }
+ ]
+}

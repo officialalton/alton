@@ -1,25 +1,25 @@
 {
-  "itemId": "nonlinear_equations_systems.root.TB.P",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-05T19:42:52Z",
-  "reviewer": "visual-review-agent-SB",
-  "codeHash": "c883e25732a484acc7d5372d6655ce52cc66c0f905b617dd54aecc9f6a4b2994",
-  "samples": [
-    "nonlinear_equations_systems.root.TB.P.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "n/a",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "n/a",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "2계 차분 6 → a=3, b=-48, c=144 → 3(x-4)(x-12) → 큰 근 12 → C. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
-  "restampedAt": "2026-10-05T00:00:00Z",
-  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+ "itemId": "nonlinear_equations_systems.root.TB.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:52Z",
+ "reviewer": "visual-review-agent-SB",
+ "codeHash": "0ee539d83222882e81627fac53d5d3e06513bf72895c5778ac10a30119d6f595",
+ "samples": [
+  "nonlinear_equations_systems.root.TB.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "2계 차분 6 → a=3, b=-48, c=144 → 3(x-4)(x-12) → 큰 근 12 → C. 일치. 표 전용 항목이라 곡선/직선 라벨 제거 규칙의 영향 없음.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

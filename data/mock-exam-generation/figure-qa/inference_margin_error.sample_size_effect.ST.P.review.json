@@ -1,25 +1,25 @@
 {
-  "itemId": "inference_margin_error.sample_size_effect.ST.P",
-  "verdict": "pass",
-  "reviewedAt": "2026-10-05T19:42:43Z",
-  "reviewer": "visual-review-agent-SA",
-  "codeHash": "aecf5289f35414c221a6f5ff747383c492c853abb3bb26126cbc4d715e706b28",
-  "samples": [
-    "inference_margin_error.sample_size_effect.ST.P.png"
-  ],
-  "checklist": {
-    "figure_present": "pass",
-    "proportion_matches_values": "pass",
-    "labels_placed_and_legible": "pass",
-    "multi_figure_consistent": "n/a",
-    "text_matches_figure_and_solvable": "pass",
-    "axes_ticks_units_legend": "pass",
-    "choice_distinct_one_rule": "n/a",
-    "sat_visual_style": "pass",
-    "mobile_375_readable": "pass"
-  },
-  "defects": [],
-  "notes": "오차 2→1 이면 표본 4배 → 150×4=600 = C. 풀림.",
-  "restampedAt": "2026-10-05T00:00:00Z",
-  "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+ "itemId": "inference_margin_error.sample_size_effect.ST.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-05T19:42:43Z",
+ "reviewer": "visual-review-agent-SA",
+ "codeHash": "a5e3d16ad5b75aef05975f34d8b3c83f9647277ad0efb304d3f18421fa2a02fd",
+ "samples": [
+  "inference_margin_error.sample_size_effect.ST.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "오차 2→1 이면 표본 4배 → 150×4=600 = C. 풀림.",
+ "restampedAt": "2026-10-05T00:00:00Z",
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
 }

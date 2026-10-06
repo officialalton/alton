@@ -1,0 +1,42 @@
+{
+ "itemId": "right_triangles_trigonometry.unit_circle_radian.UC.P",
+ "generatedAt": "2026-10-06T07:23:14.214Z",
+ "codeHash": "5be936cb20eeb42d2118f3aad9aa1d85665de083e3f893794b4a0fc3646861dd",
+ "sources": [
+  "app/session/[id]/ProblemFigure.tsx",
+  "lib/problem-figures/label-rule.ts",
+  "lib/problem-figures/render.ts",
+  "lib/problem-figures/templates/_layout.ts",
+  "lib/problem-figures/templates/unit-circle.ts",
+  "lib/problem-generation/math-archetypes/figure-kit.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-samples.ts",
+  "lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts",
+  "lib/problem-generation/math-archetypes/figure-topics.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/item-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/items/right_triangles_trigonometry.unit_circle_radian.UC.P.ts",
+  "lib/problem-generation/math-archetypes/skills/fig/uc-kit.ts",
+  "lib/problem-generation/math-archetypes/skills/tvd-fig-levels.ts",
+  "scripts/mock-exam-generation/figure-qa-render.mjs"
+ ],
+ "samples": [
+  {
+   "file": "right_triangles_trigonometry.unit_circle_radian.UC.P.png",
+   "mobileFile": "right_triangles_trigonometry.unit_circle_radian.UC.P.m375.png",
+   "archetypeId": "rtt.unit_circle_radian.UC.P.chain2",
+   "seed": 11,
+   "signature": "unit_circle",
+   "stimulus": "A ray from the origin through point $B$ on the unit circle makes angle $\\varphi$ with the positive $x$-axis, as shown. The radian measure of $\\varphi$ is written on the arc.",
+   "question": "What is the value of $\\cos\\varphi$?",
+   "options": [
+    "1/2",
+    "$\\sqrt{2}/2$",
+    "$-\\sqrt{3}/2$",
+    "-1/2"
+   ],
+   "correctIndex": 0,
+   "answer": "1/2",
+   "explanation": "(1) 그림에서 호 라벨로 각 φ = 5π/3 라디안을 읽는다. (2) 5π/3 = 300° 이고 반사각은 60° 이다. (3) cos 60° = 1/2 이다. (4) IV사분면에서 코사인의 부호는 양이다. (5) 따라서 1/2 이다. 따라서 정답은 1/2이다.",
+   "structuralIssues": []
+  }
+ ]
+}
