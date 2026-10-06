@@ -485,7 +485,7 @@ export function renderPlane(spec: PlaneSpec): { svg: string; alt: string; issues
     } else if (o.kind === "scatter") {
       for (const [x, y] of o.points) {
         if (!inRange(x, y)) issues.push({ code: "out_of_range", message: `산점도 ${o.id} 의 점 (${x}, ${y}) 이 축 범위 밖입니다.` });
-        sheet.raw(`<circle cx="${f(sx(x))}" cy="${f(sy(y))}" r="3.5" fill="${color}"/>`);
+        sheet.raw(`<circle cx="${f(sx(x))}" cy="${f(sy(y))}" r="3.5" fill="#111"/>`); // 산점도 점은 항상 검정(SAT 지면) — 곡선·직선과 함께 그려도 색이 색인에 끌려가지 않는다
       }
       if (o.fitLine) {
         const ends = clipLine(o.fitLine.slope, o.fitLine.intercept);

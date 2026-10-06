@@ -201,3 +201,12 @@ describe("그래프 계열(G7): 삼각형의 각·변 비율 충실도 검사와
     const m = tamperFigure(rt, "label") as { sides: { label: string }[] }; expect(m.sides[0].label).toBe("13");
   });
 });
+
+describe("순수 함수 그래프: 축 제목 'x'/'y' 는 허용하되 제목 자체는 여전히 필수", () => {
+  const mk = (xt?: string, yt?: string) => ({ type: "plane", axes: { x: { min: -6, max: 6, step: 1, ...(xt ? { title: xt } : {}) }, y: { min: -6, max: 6, step: 1, ...(yt ? { title: yt } : {}) } }, objects: [{ id: "L1", kind: "line", through: [[-2, -1], [2, 3]] }] }) as Spec;
+  const run = (sp: Spec) => codes(checkRenderedFigure(sp, renderFigureSvg(sp as unknown as FigureSpec)));
+  it("x/y 제목은 통과", () => expect(run(mk("x", "y"))).toEqual([]));
+  it("제목이 없으면 axis_title_missing", () => expect(run(mk("x", undefined))).toContain("axis_title_missing"));
+  it("다른 이름의 제목은 여전히 단위 괄호를 요구한다", () => expect(run(mk("t", "y"))).toContain("unit_missing_in_title"));
+  it("가로축 자리에 'y' 제목이면 단위 누락", () => expect(run(mk("y", "x"))).toContain("unit_missing_in_title"));
+});
