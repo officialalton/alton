@@ -1,0 +1,23 @@
+{
+ "itemId": "nonlinear_functions.vertex_x.FN.P",
+ "verdict": "pass",
+ "reviewedAt": "2026-10-06T04:11:33Z",
+ "reviewer": "claude-sonnet-5.5 (math-graphs session)",
+ "codeHash": "1c26eff71892b0a7a9d5e7a03f0916bdc3e3adcca2f394879fbbb0e9dedd5c5f",
+ "samples": [
+  "nonlinear_functions.vertex_x.FN.P.png"
+ ],
+ "checklist": {
+  "figure_present": "pass",
+  "proportion_matches_values": "pass",
+  "labels_placed_and_legible": "pass",
+  "multi_figure_consistent": "n/a",
+  "text_matches_figure_and_solvable": "pass",
+  "axes_ticks_units_legend": "pass",
+  "choice_distinct_one_rule": "n/a",
+  "sat_visual_style": "pass",
+  "mobile_375_readable": "pass"
+ },
+ "defects": [],
+ "notes": "순수 포물선 그래프(축 제목 x·y): 점이 곡선 위·검정 점, 곡선 라벨 q 가 y 축 제목과 겹치지 않음(생성기에서 배제), 데스크톱·375px 확인. 스냅샷은 LaTeX 미조판."
+}
