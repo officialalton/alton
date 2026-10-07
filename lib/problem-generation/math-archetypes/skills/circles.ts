@@ -1,5 +1,6 @@
 // circles hard 원형 28개(세부 패턴 7 × 연산자 4) + easy/medium 원형(lite). 그림 없이 서술·식만으로 성립하는 문항.
 import { GenFail, type Archetype } from "../types";
+import { CI_SPR_B_ARCHETYPES } from "./circles.spr-b";
 import { finish, spin, withParams, M, lin, shifted } from "../text";
 import { paraArch, sem, withOpen, OPEN_GEO, piOpt, piDiff, forbidExcept } from "../c-kit";
 import type { LiteArchetype } from "../c-lite";
@@ -717,7 +718,7 @@ export const CI_ARCHETYPES: Archetype[] = ([
       return sem(out, [], { words: ["integer"], forbid: [] });
     },
   },
- ] as Archetype[]).map(paraArch);
+ ] as Archetype[]).map(paraArch).concat(CI_SPR_B_ARCHETYPES);
 
 // ───────────────────────── easy / medium 원형(lite) — 14개 틀 ─────────────────────────
 export const CI_LITE: LiteArchetype[] = [

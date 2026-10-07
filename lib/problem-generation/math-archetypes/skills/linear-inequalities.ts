@@ -1,5 +1,6 @@
 // linear_inequalities hard 원형 12개(solve_one_var·point_in_solution·table_verification × 연산자 4종). 정답은 모두 수치(개수·정수 값).
 import { GenFail, type Archetype } from "../types";
+import { LI_SPR_B_ARCHETYPES } from "./linear-inequalities.spr-b";
 import { facts, finish, lin, M, spin, withParams } from "../text";
 import { flipOp, H_JS, holds, jsOp, near, OPS, pairList, T, W, floorDiv, ceilDiv, type Op } from "../kit-b";
 
@@ -370,4 +371,5 @@ export const LI_ARCHETYPES: Archetype[] = [
       });
     },
   },
+  ...LI_SPR_B_ARCHETYPES,
 ];

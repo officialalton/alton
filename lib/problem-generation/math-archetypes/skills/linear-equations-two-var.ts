@@ -1,5 +1,6 @@
 // linear_equations_two_var hard 원형 24개(intersection_x·intersection_y·intersection_sum·slope·intercept·num_solutions × 연산자 4종). 정답은 모두 수치.
 import { GenFail, type Archetype } from "../types";
+import { L2_SPR_B_ARCHETYPES } from "./linear-equations-two-var.spr-b";
 import { facts, finish, lin, M, spin, withParams } from "../text";
 import { near, SERVICES, stdEq, T, W } from "../kit-b";
 
@@ -463,6 +464,7 @@ export const L2_ARCHETYPES: Archetype[] = [
       });
     },
   },
+  ...L2_SPR_B_ARCHETYPES,
 ];
 const gcdN = (a: number, b: number): number => (b ? gcdN(b, a % b) : Math.abs(a));
 const pn = pr;
