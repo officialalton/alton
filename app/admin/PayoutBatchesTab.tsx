@@ -396,7 +396,7 @@ export default function PayoutBatchesTab({
     <div className="max-w-[900px]">
       <SettlementSubtabs subtab={subtab} onChange={setSubtab} />
       <p className="text-[13px] text-grey-500 mb-2">
-        선생님 정산 배치입니다. 법인 설립 전이라 이 화면에서는 <b>승인</b>까지만 진행하며, 실제 지급은 이후 별도로 활성화됩니다.
+        선생님 정산 배치입니다. 이 화면에서는 <b>승인</b>까지만 진행하며, 실제 송금은 별도 승인 후 활성화됩니다(송금 스위치는 현재 닫혀 있습니다).
       </p>
       <div className="mb-5 text-[12px] font-bold text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 inline-block">
         🔒 지급 실행(processing/paid)은 DB 레벨에서 잠겨 있습니다 — 승인 이후 상태는 이

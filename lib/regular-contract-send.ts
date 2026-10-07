@@ -50,7 +50,7 @@ async function sendRegularContractUnlocked(
     guardianName: string;
     childName: string;
     // 회사 승인 감사 행(contract_company_approvals)에 남는 승인자 표시 —
-    // 두 경로 모두 현재는 "CEO, Do Kyung Kim" 고정값을 넘긴다.
+    // 두 경로 모두 현재는 "Member, Do Kyung Kim" 고정값을 넘긴다.
     approverName: string;
     approverTitle: string;
     // 승인 행의 approved_by(auth.users FK)에 남길 행위자. 관리자 원클릭

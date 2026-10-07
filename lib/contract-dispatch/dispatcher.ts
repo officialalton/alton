@@ -26,7 +26,7 @@ export async function isContractAutoDispatchEnabled(admin: SupabaseClient): Prom
 // 삭제됨 — app/admin/trial-onboarding-actions.ts의 원클릭 발송)와 동일한
 // 고정값을 그대로 쓴다.
 const AUTO_APPROVER_NAME = "Do Kyung Kim";
-const AUTO_APPROVER_TITLE = "CEO, Do Kyung Kim";
+const AUTO_APPROVER_TITLE = "Member, Do Kyung Kim";
 const MAX_ATTEMPTS_BEFORE_PERMANENT_FAILURE = 5;
 
 export type ContractDispatchJobRow = {

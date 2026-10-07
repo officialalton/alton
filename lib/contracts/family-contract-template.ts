@@ -56,7 +56,7 @@ export function formatIsoDateEn(iso: string): string {
 }
 
 function approverLine(name: string, title: string | null): string {
-  // Admin-entered titles are sometimes "CEO, <name>"; do not print the name twice.
+  // Admin-entered titles are sometimes "Member, <name>"; do not print the name twice.
   const cleaned = (title ?? "").replace(name, "").replace(/^[\s,]+|[\s,]+$/g, "").trim();
   return cleaned ? `${name}, ${cleaned}` : name;
 }

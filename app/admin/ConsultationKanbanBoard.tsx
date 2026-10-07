@@ -820,7 +820,7 @@ function ContractSendForm({
   busy: boolean;
   onSend: (fn: () => Promise<void>) => void;
 }) {
-  const [approverTitle, setApproverTitle] = useState("CEO, Do Kyung Kim");
+  const [approverTitle, setApproverTitle] = useState("Member, Do Kyung Kim");
 
   return (
     <div className="border border-grey-200 rounded-lg p-2.5 space-y-1.5">

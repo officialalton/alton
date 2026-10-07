@@ -510,13 +510,13 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
 
   // 2026-09-06(제품 오너 지적) — 회사 승인자 직함 입력란이 매번 빈 값으로
   // 시작해 관리자가 매번 다시 입력해야 했다. 기본값을 고정한다(수정 가능은 유지).
-  it("회사 승인자 직함 입력란은 'CEO, Do Kyung Kim'으로 기본값이 채워져 있다", async () => {
+  it("회사 승인자 직함 입력란은 'Member, Do Kyung Kim'으로 기본값이 채워져 있다", async () => {
     render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);
 
     fireEvent.click(await screen.findByText("세온장"));
     await screen.findByTestId("consultation-card-detail");
 
-    expect(screen.getByPlaceholderText("회사 승인자 직함(필수)")).toHaveValue("CEO, Do Kyung Kim");
+    expect(screen.getByPlaceholderText("회사 승인자 직함(필수)")).toHaveValue("Member, Do Kyung Kim");
   });
 
   it("Preview DocuSign 게이트로 실패하면 재시도 시 '환경 제약' 메시지를 화면에 보여준다(무피드백 버그 수정)", async () => {
@@ -569,7 +569,7 @@ describe("ConsultationKanbanBoard — 정규 계약 발송 실패 피드백(2026
   });
 
   // 2026-09-06(제품 오너 지적 — 기본값 고정) 이후: 직함 입력란은 이제
-  // "CEO, Do Kyung Kim" 기본값으로 채워져 있어 버튼이 처음부터 활성화돼
+  // "Member, Do Kyung Kim" 기본값으로 채워져 있어 버튼이 처음부터 활성화돼
   // 있다. 비워지면 다시 비활성화되고, 값을 입력하면 활성화됨을 확인한다.
   it("회사 승인자 직함은 기본값이 있어 버튼이 처음부터 활성화되며, 비우면 비활성화·입력하면 다시 활성화된다", async () => {
     render(<ConsultationKanbanBoard subjects={subjects} teacherCandidatesBySubject={teacherCandidatesBySubject} />);

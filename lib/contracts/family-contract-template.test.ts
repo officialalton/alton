@@ -5,7 +5,7 @@ import { DATE_SIGNED_ANCHOR, FAMILY_CONTRACT_TEMPLATE_VERSION, SIGNATURE_ANCHOR,
 const approval = {
   companyEntityName: "Alton Education LLC",
   approverName: "Do Kyung Kim",
-  approverTitle: "CEO, Do Kyung Kim",
+  approverTitle: "Member, Do Kyung Kim",
   approvedAtLabel: "October 6, 2026 at 9:00 AM UTC",
   documentIdentifier: "cv1",
 };
@@ -26,8 +26,8 @@ describe("renderFamilyContractHtml (parent agreement v0.3-EN-CA)", () => {
     expect(html).toContain(`cv-123 / ${FAMILY_CONTRACT_TEMPLATE_VERSION}`);
     expect(html).toContain("Alton Education LLC");
     expect(html).toContain("official@alton.education");
-    expect(html).toContain("Do Kyung Kim, CEO");
-    expect(html).not.toContain("CEO, Do Kyung Kim, CEO");
+    expect(html).toContain("Do Kyung Kim, Member");
+    expect(html).not.toContain("Do Kyung Kim, Member, Do Kyung Kim");
     expect(html.split(SIGNATURE_ANCHOR)).toHaveLength(2);
     expect(html.split(DATE_SIGNED_ANCHOR)).toHaveLength(2);
     expect(html).not.toMatch(/\[[^\]]+\]|_{3,}|\{\{/);

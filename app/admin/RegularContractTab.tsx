@@ -106,7 +106,7 @@ function RegularContractRow({
 }) {
   const tz = useViewerTimezone();
   const [confirming, setConfirming] = useState(false);
-  const [approverTitle, setApproverTitle] = useState("CEO, Do Kyung Kim");
+  const [approverTitle, setApproverTitle] = useState("Member, Do Kyung Kim");
   const [busy, setBusy] = useState(false);
   const [resending, setResending] = useState(false);
   const [resendError, setResendError] = useState<string | null>(null);
