@@ -16,11 +16,11 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { companyDateOf } from "./payout-schedule";
 
-// 2026-09-12(제품 오너 확정) — **교사 정산의 송금 제공자는 Wise 하나뿐이다.**
-// Mercury는 법인 수취 계좌·운영비·법인카드·자금 관리용이며 교사 정산의 자동 송금·
-// 수동 송금·대사·웹훅 경로에 들어가지 않는다. 그래서 provider는 상수이고, 앱 어디에도
-// 제공자를 고르는 입력이 없다(고를 수 있게 두면 언젠가 Mercury가 섞인다).
-export const TEACHER_PAYOUT_PROVIDER = "wise" as const;
+// 2026-10-07(제품 오너 확정) — 교사·컨설턴트 지급은 Mercury로 한다(USD=ACH, KRW=국제송금). 종전 "Wise 전용"(2026-09-12)은 폐기됐다.
+// 이 크론의 dispatch는 **정산 묶음에 "송금 요청됨" 표식(dispatch_requested + 멱등 키)만 남기는 레거시 단계**이며 외부 호출을 하지 않는다.
+// 실제 실행 기록은 payout_attempts(시도)이고, 시도는 사람이 승인한 뒤에만 요청된다(자동 생성·자동 요청 없음).
+// 크론(PAYOUT_CRON_ENABLED)은 시도 모델 연동 전까지 닫아 두는 것을 권장한다(docs/2026-10-07-mercury-ops-checklist.md).
+export const TEACHER_PAYOUT_PROVIDER = "mercury" as const;
 
 export type AutoDispatchResult = {
   dueOn: string;

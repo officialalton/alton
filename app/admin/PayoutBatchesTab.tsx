@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ConsultantSettlementPanel from "./ConsultantSettlementPanel";
+import MercuryPayoutsPanel from "./MercuryPayoutsPanel";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import TeacherPayoutAccountsPanel from "./TeacherPayoutAccountsPanel";
 import type { PayoutBatchListItem } from "./payout-batches-data";
@@ -383,6 +384,15 @@ export default function PayoutBatchesTab({
     );
   }
 
+  if (subtab === "mercury") {
+    return (
+      <div className="max-w-[1100px]">
+        <SettlementSubtabs subtab={subtab} onChange={setSubtab} />
+        <MercuryPayoutsPanel />
+      </div>
+    );
+  }
+
   if (subtab === "accounts") {
     return (
       <div className="max-w-[900px]">
@@ -668,7 +678,7 @@ export default function PayoutBatchesTab({
                             disabled={busyId === b.id}
                             data-testid={`dispatch-now-${b.id}`}
                             onClick={() =>
-                              runBatchAction(b.id, () => dispatchPayoutBatchNow(b.id), "Wise 송금 요청을 보냈습니다.")
+                              runBatchAction(b.id, () => dispatchPayoutBatchNow(b.id), "송금 요청을 보냈습니다.")
                             }
                             className="text-[12px] font-bold px-3 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
                           >
@@ -679,7 +689,7 @@ export default function PayoutBatchesTab({
                             data-testid={`dispatch-disabled-${b.id}`}
                             className="text-[11.5px] text-grey-400 px-3 py-1.5 rounded-lg border border-dashed border-grey-200"
                           >
-                            지금 송금 요청 — Wise 연동 전에는 사용할 수 없습니다
+                            지금 송금 요청 — 송금 연동 전에는 사용할 수 없습니다
                           </span>
                         )}
                       </div>
@@ -759,7 +769,7 @@ export default function PayoutBatchesTab({
                       {openAction[b.id] === "external" && (
                         <div className="mt-2 space-y-2">
                           <p className="text-[11px] text-grey-400">
-                            <b>실제 은행에서 송금을 마친 뒤에만</b> 사용하세요. Wise API를 호출하지 않고 이미
+                            <b>실제 은행에서 송금을 마친 뒤에만</b> 사용하세요. 송금 제공자 API를 호출하지 않고 이미
                             보낸 사실만 기록합니다. 기록하면 지급 완료가 되고 금액·예정일을 더는 바꿀 수 없습니다.
                           </p>
                           <ExternalField
@@ -849,7 +859,7 @@ export default function PayoutBatchesTab({
                     <div className="mt-3 pt-3 border-t border-grey-100">
                       <div className="text-[11px] font-bold text-grey-300 mb-1">지급 실패 기록</div>
                       <p className="text-[11px] text-grey-400 mb-1.5">
-                        Wise 송금 요청 뒤 실패한 건을 사유와 함께 기록합니다. 실패로 기록해도 금액은
+                        송금 요청 뒤 실패한 건을 사유와 함께 기록합니다. 실패로 기록해도 금액은
                         바뀌지 않습니다.
                       </p>
                     <div className="flex items-center gap-2">
@@ -882,7 +892,7 @@ export default function PayoutBatchesTab({
 }
 
 // P4-2 — 정산 탭 서브탭(배치 / 수취 계좌).
-type PayoutSubTab = "batches" | "accounts" | "consultant-settlement";
+type PayoutSubTab = "batches" | "accounts" | "consultant-settlement" | "mercury";
 
 function SettlementSubtabs({
   subtab,
@@ -895,6 +905,7 @@ function SettlementSubtabs({
     { id: "batches", label: "정산 배치" },
     { id: "accounts", label: "수취 계좌" },
     { id: "consultant-settlement", label: "컨설턴트 정산" },
+    { id: "mercury", label: "Mercury payouts" },
   ];
   return <UnderlineSubTabs items={tabs} activeId={subtab} onSelect={onChange} className="mb-4" />;
 }

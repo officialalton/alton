@@ -121,7 +121,7 @@ function makeBatch(status: PayoutBatchListItem["status"]): PayoutBatchListItem {
   };
 }
 
-// 2026-09-12(UAT 후속) — "지급 실패 기록"은 실제 Wise 송금 요청 이후 단계에서만
+// 2026-09-12(UAT 후속) — "지급 실패 기록"은 실제 송금 요청 이후 단계에서만
 // 의미가 있다. 그 전 단계(초안/검토/승인)에는 숨긴다.
 describe("PayoutBatchesTab — 지급 실패 기록은 송금 요청 이후에만 보인다", () => {
   it.each([
@@ -226,7 +226,7 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
     expect(screen.getByTestId("sched-b-approved")).toHaveTextContent("2026-10-10");
   });
 
-  it("Wise 연동 게이트가 닫혀 있으면 '지금 송금 요청'을 실행 버튼으로 두지 않는다", async () => {
+  it("송금 연동 게이트가 닫혀 있으면 '지금 송금 요청'을 실행 버튼으로 두지 않는다", async () => {
     loadSettingsMock.mockResolvedValue({ autoDispatchOn: true, gateOpen: false });
     listMock.mockResolvedValue([approvedBatch()]);
     render(<PayoutBatchesTab initialBatches={[]} />);
@@ -234,7 +234,7 @@ describe("PayoutBatchesTab — 승인 묶음 운영 UX (2026-09-12 UAT 후속)",
 
     await waitFor(() =>
       expect(screen.getByTestId("dispatch-disabled-b-approved")).toHaveTextContent(
-        "Wise 연동 전에는 사용할 수 없습니다"
+        "송금 연동 전에는 사용할 수 없습니다"
       )
     );
     expect(screen.queryByTestId("dispatch-now-b-approved")).not.toBeInTheDocument();

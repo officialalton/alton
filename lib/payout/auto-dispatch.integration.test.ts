@@ -306,10 +306,10 @@ describe("record_external_payout_transfer() — 은행 직접 송금 기록", ()
   });
 });
 
-describe("교사 정산 송금 제공자는 Wise 전용 (2026-09-12 확정)", () => {
+describe("교사 정산 송금 제공자는 Mercury (2026-10-07 확정, Wise 폐기)", () => {
   it("앱의 교사 정산 경로에는 제공자 선택이 없다 — 상수 하나뿐", async () => {
     const { TEACHER_PAYOUT_PROVIDER } = await import("./auto-dispatch");
-    expect(TEACHER_PAYOUT_PROVIDER).toBe("wise");
+    expect(TEACHER_PAYOUT_PROVIDER).toBe("mercury");
   });
 
   it("자동 실행과 수동 실행이 같은 멱등성 키를 재사용해 이중 송금을 막는다", () => {
@@ -364,7 +364,7 @@ describe("기존 승인 묶음 보정 — 자동 송금은 켜지 않는다 (202
     // 2026-02-03 승인 → 기한(2026-02-10).
     expect(psql(`select scheduled_payout_date from payout_batches where id = '${batchId}';`)).toBe("2026-02-10");
     expect(psql(`select count(*) from payout_scheduled_date_events where batch_id = '${batchId}';`)).toBe("1");
-    // **자동 송금은 여전히 제외** — Wise 게이트를 여는 순간 과거 건이 나가면 안 된다.
+    // **자동 송금은 여전히 제외** — 송금 게이트를 여는 순간 과거 건이 나가면 안 된다.
     expect(psql(`select auto_dispatch_enabled from payout_batches where id = '${batchId}';`)).toBe("f");
     expect(psql(`select count(*) from list_due_auto_dispatch_batches('2026-02-10') where batch_id = '${batchId}';`)).toBe("0");
   });
