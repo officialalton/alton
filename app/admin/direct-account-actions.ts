@@ -120,22 +120,22 @@ async function sendDirectOnboardingNoticeInternal(params: {
   const redeemUrl = `${origin}/api/trial-onboarding/redeem?token=${encodeURIComponent(rawToken)}`;
   const studentNamesLabel = studentsPayload.map((s) => escapeHtml(s.name)).join(", ");
   const html = `
-    <p>안녕하세요, ${escapeHtml(guardianName)}님.</p>
-    <p>${studentNamesLabel} 학생의 Alton Education 계정 생성을 위해 아래 버튼을 눌러 계정을 만들어주세요.</p>
+    <p>Hello ${escapeHtml(guardianName)},</p>
+    <p>Please click the button below to create the Alton Education account for ${studentNamesLabel}.</p>
     <p style="margin: 24px 0;">
       <a href="${redeemUrl}"
          style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
                 font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
-        계정 생성하기
+        Create account
       </a>
     </p>
-    <p>이 링크는 72시간 동안 유효합니다.</p>
+    <p>This link is valid for 72 hours.</p>
   `;
   const contentHash = createHash("sha256").update(html).digest("hex");
   const nowIso = new Date().toISOString();
 
   try {
-    await sendEmail({ to: guardianEmail, subject: "[Alton Education] 계정 생성 안내", html });
+    await sendEmail({ to: guardianEmail, subject: "[Alton Education] Create your account", html });
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     await admin

@@ -307,22 +307,22 @@ async function sendTrialOnboardingNoticeInternal(params: {
   const redeemUrl = `${origin}/api/trial-onboarding/redeem?token=${encodeURIComponent(rawToken)}`;
   const studentNamesLabel = studentsPayload.map((s) => escapeHtml(s.name)).join(", ");
   const html = `
-    <p>안녕하세요, ${escapeHtml(params.guardianName)}님.</p>
-    <p>${studentNamesLabel} 학생의 체험 수업 준비를 위해 아래 버튼을 눌러 계정을 만들어주세요.</p>
+    <p>Hello ${escapeHtml(params.guardianName)},</p>
+    <p>To get ready for the trial lesson for ${studentNamesLabel}, please click the button below to create your account.</p>
     <p style="margin: 24px 0;">
       <a href="${redeemUrl}"
          style="display:inline-block;background:#c81e34;color:#ffffff;text-decoration:none;
                 font-weight:bold;font-size:15px;padding:12px 28px;border-radius:8px;">
-        계정 생성하기
+        Create account
       </a>
     </p>
-    <p>이 링크는 72시간 동안 유효합니다.</p>
+    <p>This link is valid for 72 hours.</p>
   `;
   const contentHash = createHash("sha256").update(html).digest("hex");
   const nowIso = new Date().toISOString();
 
   try {
-    await sendEmail({ to: params.guardianEmail, subject: "[Alton Education] 체험 수업 온보딩 안내", html });
+    await sendEmail({ to: params.guardianEmail, subject: "[Alton Education] Get ready for your trial lesson", html });
   } catch (e) {
     const message = e instanceof Error ? e.message : String(e);
     await admin

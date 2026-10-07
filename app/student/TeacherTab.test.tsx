@@ -31,7 +31,7 @@ const teachers: TeacherListItem[] = [
     name: "박서연 선생님",
     school: "서울대학교 수리과학부 재학 · SAT Math 전담",
     subjects: [
-      { subjectName: "SAT Math", currentSession: 8, totalSessions: 12, curriculumSourceLabel: "교사 운영 커리큘럼 기준" },
+      { subjectName: "SAT Math", currentSession: 8, totalSessions: 12, curriculumSourceLabel: "Based on teacher-run curriculum" },
     ],
   },
 ];
@@ -68,7 +68,7 @@ describe("TeacherTab", () => {
     );
     expect(screen.getByText("박서연 선생님")).toBeInTheDocument();
     expect(screen.getByText(/SAT Math · Progress 8 \/ 12 sessions/)).toBeInTheDocument();
-    expect(screen.getByText("교사 운영 커리큘럼 기준")).toBeInTheDocument();
+    expect(screen.getByText("Based on teacher-run curriculum")).toBeInTheDocument();
   });
 
   it("프로필 보기를 누르면 학교/자기소개를 보여준다", () => {

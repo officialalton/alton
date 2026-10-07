@@ -379,7 +379,7 @@ describe("sendTrialOnboardingNoticeAction", () => {
     expect(result.status).toBe("sent");
     expect(sendEmailMock).toHaveBeenCalledTimes(1);
     expect(sendEmailMock).toHaveBeenCalledWith(
-      expect.objectContaining({ to: "g@example.com", subject: expect.stringContaining("온보딩") })
+      expect.objectContaining({ to: "g@example.com", subject: expect.stringContaining("trial lesson") })
     );
   });
 

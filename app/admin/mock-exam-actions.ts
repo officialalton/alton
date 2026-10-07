@@ -661,7 +661,7 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
     attemptId: a.id,
     studentId: a.student_id,
     studentName: nameByStudent.get(a.student_id) ?? null,
-    examSetName: nameBySet.get(a.exam_set_id) ?? "모의고사",
+    examSetName: nameBySet.get(a.exam_set_id) ?? "Mock exam",
     status: a.status,
     startedAt: a.started_at,
     submittedAt: a.submitted_at,

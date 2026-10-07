@@ -364,7 +364,7 @@ export async function scheduleMeetingRequest(params: {
         reservationId: params.meetingRequestId,
         startsAt: startsAtDate,
         endsAt: endsAtDate,
-        summary: `[Alton] 상담 — ${guardian?.name ?? "학부모"}`,
+        summary: `[Alton] Consultation — ${guardian?.name ?? "Parent"}`,
         timezone: "Asia/Seoul",
         attendeeEmail: guardianEmail,
         sendUpdates: "all",

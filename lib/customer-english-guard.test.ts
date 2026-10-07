@@ -16,7 +16,7 @@ const SCAN = [
   "lib/board/data.ts", "lib/booking/authorization.ts", "lib/booking/create-booking.ts", "lib/booking/overlap-errors.ts",
   "lib/booking/calendar-sync.ts", "lib/problem-error-reports/actions.ts",
   "lib/timezone-actions.ts", "lib/student-stats/metrics.ts", "lib/subject-material-library.ts",
-  "lib/legacy-problem-answers.ts", "lib/feature-access.ts",
+  "lib/legacy-problem-answers.ts", "lib/feature-access.ts", "lib/curriculum-overlay-progress.ts",
 ];
 // 허용: 한국어 해설 토글 라벨(해설은 영어 기본+한국어 토글), 서버 에러 메시지 매칭(화면에 표시되지 않음).
 const ALLOW = [">한국어<", "한국어\n", '"제출된 모듈"', '"제출한 시험"'];
@@ -52,6 +52,29 @@ describe("customer-facing source has no Korean string literals", () => {
         if (!HANGUL.test(l) || ALLOW_LINE.some((re) => re.test(l))) return;
         const rest = ALLOW.reduce((t, a) => t.split(a.trim()).join(""), l);
         if (HANGUL.test(rest)) offenders.push(`${f}:${i + 1}: ${l.trim().slice(0, 80)}`);
+      });
+    }
+    expect(offenders).toEqual([]);
+  });
+});
+
+// 관리자 액션·직원용 lib 파일은 한국어 오류 문구가 많아 통째로 스캔하지 않는다. 대신 가족에게 나가는 출력
+// (메일 제목·본문 HTML, 캘린더 이벤트 제목, 학생이 보는 기본 이름)에 해당하는 줄만 검사한다.
+const FAMILY_OUTPUT_FILES = [
+  "app/admin/direct-account-actions.ts", "app/admin/trial-onboarding-actions.ts",
+  "app/admin/inquiry-and-meeting-actions.ts", "lib/consultation/meeting-calendar-sync.ts",
+  "lib/consultation/calendar-sync.ts", "lib/consultation/notifications.ts", "lib/invite-email.ts",
+  "lib/guardian-link/emails.ts", "lib/booking/calendar-sync.ts", "lib/trial-onboarding-finalize.ts",
+  "app/admin/mock-exam-actions.ts",
+];
+const FAMILY_OUTPUT_LINE = /\bsubject:|\bsummary:|\bexamSetName:|^\s*<[a-z]|^\s*<\/|name: guardian\?\.name \?\?|name: .*\?\? "/;
+describe("family-facing outputs from admin/staff modules have no Korean", () => {
+  it("email subjects/HTML, calendar titles and fallback names are English", () => {
+    const offenders: string[] = [];
+    for (const f of FAMILY_OUTPUT_FILES) {
+      const lines = stripComments(readFileSync(path.join(root, f), "utf8")).split("\n");
+      lines.forEach((l, i) => {
+        if (HANGUL.test(l) && FAMILY_OUTPUT_LINE.test(l) && !/console\./.test(l)) offenders.push(`${f}:${i + 1}: ${l.trim().slice(0, 80)}`);
       });
     }
     expect(offenders).toEqual([]);

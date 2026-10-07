@@ -27,13 +27,13 @@ describe("formatCurriculumProgressLabel", () => {
   });
 
   it("수업 전(완료 0)이면 '진도 미시작 · 회차 N개'", () => {
-    expect(formatCurriculumProgressLabel({ totalUnits: 12, doneUnits: 0, sourceLabel: "공통 커리큘럼 기준" })).toBe(
+    expect(formatCurriculumProgressLabel({ totalUnits: 12, doneUnits: 0, sourceLabel: "Based on standard curriculum" })).toBe(
       "Not started · 12 sessions"
     );
   });
 
   it("진행 중이면 '진행 N / 전체 M회차'이고 '0/0회차'나 단순 '운영 커리큘럼' 표기가 없다", () => {
-    const label = formatCurriculumProgressLabel({ totalUnits: 12, doneUnits: 3, sourceLabel: "교사 운영 커리큘럼 기준" });
+    const label = formatCurriculumProgressLabel({ totalUnits: 12, doneUnits: 3, sourceLabel: "Based on teacher-run curriculum" });
     expect(label).toBe("Progress 3 / 12 sessions");
     expect(label).not.toContain("0/0");
     expect(label).not.toBe("운영 커리큘럼");
@@ -56,10 +56,10 @@ describe("loadCurriculumOverlayProgressByEnrollment", () => {
     const progress = getCurriculumOverlayProgress(map, "e1");
     expect(progress.totalUnits).toBe(5);
     expect(progress.doneUnits).toBe(2);
-    expect(progress.sourceLabel).toBe("교사 운영 커리큘럼 기준");
+    expect(progress.sourceLabel).toBe("Based on teacher-run curriculum");
   });
 
-  it("단원 출처에 teacher_template이 하나도 없으면 '공통 커리큘럼 기준'", async () => {
+  it("단원 출처에 teacher_template이 하나도 없으면 'Based on standard curriculum'", async () => {
     const supabase = makeSupabaseMock(
       [{ id: "ov1", subject_enrollment_id: "e1" }],
       [
@@ -68,7 +68,7 @@ describe("loadCurriculumOverlayProgressByEnrollment", () => {
       ]
     );
     const map = await loadCurriculumOverlayProgressByEnrollment(supabase, ["e1"]);
-    expect(getCurriculumOverlayProgress(map, "e1").sourceLabel).toBe("공통 커리큘럼 기준");
+    expect(getCurriculumOverlayProgress(map, "e1").sourceLabel).toBe("Based on standard curriculum");
   });
 
   it("활성 오버레이가 아예 없는 subject_enrollment는 기본값(전체 0)을 반환한다", async () => {

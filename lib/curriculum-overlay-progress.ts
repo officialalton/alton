@@ -18,7 +18,7 @@ export type CurriculumOverlayProgress = {
   /** 이 오버레이 단원들의 다수 출처 — teacher_template이 하나라도 있으면 교사
    * 운영 커리큘럼 기준, 없으면(전부 subject_template/student_added) 공통
    * 커리큘럼 기준으로 본다. 단원이 하나도 없으면(=아직 시딩 안 됨) null. */
-  sourceLabel: "교사 운영 커리큘럼 기준" | "공통 커리큘럼 기준" | null;
+  sourceLabel: "Based on teacher-run curriculum" | "Based on standard curriculum" | null;
 };
 
 const EMPTY_PROGRESS: CurriculumOverlayProgress = { totalUnits: 0, doneUnits: 0, sourceLabel: null };
@@ -74,7 +74,7 @@ export async function loadCurriculumOverlayProgressByEnrollment(
       totalUnits,
       doneUnits: doneByOverlay.get(overlayId) ?? 0,
       sourceLabel:
-        totalUnits === 0 ? null : hasTeacherTemplateByOverlay.get(overlayId) ? "교사 운영 커리큘럼 기준" : "공통 커리큘럼 기준",
+        totalUnits === 0 ? null : hasTeacherTemplateByOverlay.get(overlayId) ? "Based on teacher-run curriculum" : "Based on standard curriculum",
     });
   }
 

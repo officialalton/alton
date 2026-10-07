@@ -58,7 +58,7 @@ async function loadAttendeeEmailAndName(
   let email: string | undefined;
   if (guardianId) email = (await admin.auth.admin.getUserById(guardianId)).data?.user?.email ?? undefined;
   if (!email && row.child_id) email = (await admin.auth.admin.getUserById(row.child_id)).data?.user?.email ?? undefined;
-  return { email, name: guardian?.name ?? "학부모" };
+  return { email, name: guardian?.name ?? "Parent" };
 }
 
 async function syncOne(admin: SupabaseClient, row: MeetingSyncRow): Promise<void> {
@@ -94,7 +94,7 @@ async function syncOne(admin: SupabaseClient, row: MeetingSyncRow): Promise<void
     reservationId: row.id,
     startsAt,
     endsAt,
-    summary: `[Alton] 상담 — ${who.name}`,
+    summary: `[Alton] Consultation — ${who.name}`,
     timezone: MEETING_TIMEZONE,
     attendeeEmail: who.email,
     sendUpdates: "all",
