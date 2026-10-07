@@ -1,8 +1,8 @@
 {
  "version": 1,
- "generatedAt": "2026-10-07T09:03:04.422Z",
+ "generatedAt": "2026-10-07T09:33:29.819Z",
  "seedsPerArchetype": 400,
- "ok": false,
+ "ok": true,
  "summary": {
   "items": 303,
   "pass": 303,
@@ -13,8 +13,8 @@
  },
  "gates": {
   "G1": {
-   "ok": false,
-   "note": "기존 패턴 98개 중 manifest 누락 6, manifest 밖 자료 원형 0, 중복 id 0 (ratios_rates_units.rate_applications, linear_equations_one_var.equation_applications, linear_inequalities.ineq_applications, linear_equations_two_var.line_applications, systems_linear.system_applications)"
+   "ok": true,
+   "note": "기존 패턴 98개 중 manifest 누락 0, manifest 밖 자료 원형 0, 중복 id 0"
   },
   "G10": {
    "ok": true,
