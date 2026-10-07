@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { MercuryPayoutRow } from "./mercury-payout-actions";
 
@@ -16,7 +16,7 @@ const row = (over: Partial<MercuryPayoutRow>): MercuryPayoutRow => ({
 const list = vi.fn();
 vi.mock("./mercury-payout-actions", () => ({
   listMercuryPayoutsAction: (...a: unknown[]) => list(...a),
-  approvePayoutAttemptAction: vi.fn(), confirmReceiptAction: vi.fn(), createResendAttemptAction: vi.fn(), failOrCancelAttemptAction: vi.fn(),
+  approvePayoutAttemptAction: vi.fn(), createResendAttemptAction: vi.fn(), failOrCancelAttemptAction: vi.fn(),
   linkTransactionAction: vi.fn(), markManualAttemptSentAction: vi.fn(), recordActualsAction: vi.fn(), recordReturnAction: vi.fn(), requestPayoutAttemptAction: vi.fn(),
 }));
 import MercuryPayoutsPanel from "./MercuryPayoutsPanel";
@@ -35,11 +35,14 @@ describe("MercuryPayoutsPanel", () => {
     expect((screen.getByRole("button", { name: "Request via Mercury" }) as HTMLButtonElement).disabled).toBe(true);
     expect(screen.getByText("Download reconciliation file")).toBeTruthy();
   });
-  it("sent는 수취 확인 전까지 '지급 완료'로 표시하지 않는다", async () => {
+  it("sent는 지급 완료로 표시하고 수취 확인 입력은 없다(반환 기록만)", async () => {
     list.mockResolvedValue({ ok: true, data: { rows: [row({ status: "sent", sentAt: "2026-10-20T00:00:00Z", providerTransactionId: "tx1" })], gateOpen: true, mercuryEnabled: true } });
     render(<MercuryPayoutsPanel />);
-    await waitFor(() => expect(screen.getByTestId("mercury-status").textContent).toBe("Sent (receipt not confirmed)"));
-    expect(screen.getByText(/receipt not confirmed yet/)).toBeTruthy();
+    await waitFor(() => expect(screen.getByTestId("mercury-status").textContent).toBe("Sent (paid)"));
+    expect(screen.queryByText(/receipt not confirmed/i)).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Details & records" }));
+    expect(screen.queryByText(/Confirm receipt/i)).toBeNull();
+    expect(screen.getAllByText(/Record return/).length).toBeGreaterThan(0);
   });
   it("KRW 정산은 원화 금액과 USD 출금을 따로 표시한다", async () => {
     list.mockResolvedValue({

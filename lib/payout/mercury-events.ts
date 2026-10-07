@@ -1,4 +1,4 @@
-// Mercury 거래 이벤트(웹훅/조회) → 시도 상태 반영(2026-10-07). "sent"까지만 자동이다 — 수취 확인은 사람이 증빙과 함께 기록한다.
+// Mercury 거래 이벤트(웹훅/조회) → 시도 상태 반영(2026-10-07). sent = 지급 완료다(수취 확인 단계 폐지, 2026-10-07). 반환(reversed)만 별도 기록한다.
 import type { AttemptStatus } from "./attempt-state";
 import type { ProviderTransaction } from "./providers/types";
 
