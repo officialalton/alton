@@ -183,7 +183,7 @@ export default function MockExamMstTakeClient({
   }, [state.status, current, fetchedAt]);
 
   async function recoverIfLocked(message: string) {
-    if (!message.includes("제출된 모듈") && !message.includes("제출한 시험") && !/already been submitted/i.test(message)) return;
+    if (!/already been submitted/i.test(message)) return;
     const r = await loadMstAttemptStateAction(state.attemptId);
     if (r.ok) {
       if (r.value.status === "graded") router.refresh();

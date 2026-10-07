@@ -121,7 +121,7 @@ describe("hold/consume/release", () => {
   });
 
   it("wraps duplicate consume error", async () => {
-    rpcMock.mockResolvedValueOnce({ error: { message: "이미 consume되었습니다." } });
+    rpcMock.mockResolvedValueOnce({ error: { message: "Already consumed." } });
     await expect(consumeEntitlementForReservation("res1")).rejects.toThrow("이미 처리된 예약");
   });
 

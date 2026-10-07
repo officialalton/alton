@@ -14,7 +14,7 @@ describe("checkSchedulingLink", () => {
     expect(await checkSchedulingLink("t")).toBe("valid");
   });
   it("무효 토큰 문구 → invalid", async () => {
-    rpcMock.mockResolvedValue({ data: null, error: { code: "P0001", message: "유효하지 않거나 만료된 예약 링크입니다." } });
+    rpcMock.mockResolvedValue({ data: null, error: { code: "P0001", message: "This scheduling link is invalid or has expired." } });
     expect(await checkSchedulingLink("bogus")).toBe("invalid");
   });
   it("그 밖의 오류·예외 → unknown(폼은 그대로 그린다)", async () => {

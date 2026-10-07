@@ -203,7 +203,7 @@ describe("MockExamMstTakeClient", () => {
   });
 
   it("잠긴 모듈 저장 거부 시 서버 상태로 복구한다", async () => {
-    saveMock.mockResolvedValue({ ok: false, error: "이미 제출된 모듈에는 답안을 저장할 수 없습니다." });
+    saveMock.mockResolvedValue({ ok: false, error: "This module has already been submitted, so answers cannot be saved." });
     loadMock.mockResolvedValue({ ok: true, value: state({ currentModule: "rw_m2", modules: [mod("rw_m2", 1000, 2)], items: [item("i3", 1, "rw_m2")] }) });
     await renderClient();
     await act(async () => {

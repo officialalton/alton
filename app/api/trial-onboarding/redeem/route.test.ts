@@ -52,7 +52,7 @@ describe("GET /api/trial-onboarding/redeem", () => {
   });
 
   it("RPC가 오류를 반환하면 /login으로 매핑된 오류 메시지와 함께 보낸다", async () => {
-    rpcMock.mockResolvedValue({ data: null, error: { message: "이미 사용된 링크입니다." } });
+    rpcMock.mockResolvedValue({ data: null, error: { message: "This onboarding link has already been used or has expired." } });
     const { GET } = await import("./route");
     const res = await GET(new Request("https://app.example.com/api/trial-onboarding/redeem?token=abc"));
     expect(res.headers.get("location")).toBe(
