@@ -36,10 +36,10 @@ test.describe("MST 모의고사 — 4모듈 완주 (실브라우저)", () => {
     ] as const;
     plan.forEach(([key, section, pos, format, domain], i) => {
       const pid = psql(
-        `insert into problems (format, passage, subject_id, status, created_by, sat_domain) values ('${format}', 'E2E MST 문항 ${i + 1}', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}', '${domain}') returning id;`,
+        `insert into problems (format, passage, subject_id, status, created_by, sat_domain) values ('${format}', 'E2E MST passage ${i + 1}', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}', '${domain}') returning id;`,
       );
       const content = format === "mc" ? `options = '["Alpha","Beta","Gamma","Delta"]'::jsonb, correct_index = 0` : `answers = '["3.25","13/4"]'::jsonb`;
-      psql(`update problem_versions set ${content}, question = 'E2E 질문 ${i + 1}', explanation = '해설', difficulty = 'medium', status = 'published', published_at = now() where problem_id = '${pid}' and version_no = 1;`);
+      psql(`select set_config('alton.version_content_edit', 'on', true); update problem_versions set ${content}, question = 'E2E question ${i + 1}', explanation = 'E2E explanation', render_check = '{"ok":true,"issues":[]}'::jsonb, explanation_en = 'E2E explanation', difficulty = 'medium', status = 'published', published_at = now() where problem_id = '${pid}' and version_no = 1;`);
       const vid = psql(`select id from problem_versions where problem_id = '${pid}' and version_no = 1;`);
       psql(`insert into mock_exam_set_items (exam_set_id, section, position, problem_id, problem_version_id, sat_domain, difficulty, module_key) values ('${setId}', '${section}', ${pos}, '${pid}', '${vid}', '${domain}', 'medium', '${key}');`);
     });
@@ -65,7 +65,7 @@ test.describe("MST 모의고사 — 4모듈 완주 (실브라우저)", () => {
       }
     };
     expect(fails(`update mock_exam_sets set status = 'published' where id = '${badSet}';`)).toContain("공개할 수 없습니다");
-    expect(fails(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('${STUDENT_ID}', '${badSet}', 'assigned');`)).toContain("배정할 수 없습니다");
+    expect(fails(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('${STUDENT_ID}', '${badSet}', 'assigned');`)).toContain("cannot be assigned");
   });
 
   test("시작 → R&W M1 답변 → 제출 → M2 → (만료 자동 제출) → 휴식 → Math M1 (계산기) → M2 → 결과", async ({ page }) => {
@@ -74,21 +74,21 @@ test.describe("MST 모의고사 — 4모듈 완주 (실브라우저)", () => {
     await page.getByTestId("mst-start").click();
     await expect(page.getByTestId("mst-module-label")).toHaveText("Reading and Writing · Module 1");
     await expect(page.getByTestId("mst-timer")).toContainText("31:");
-    await expect(page.getByText("계산기")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Calculator" })).toHaveCount(0);
 
     await page.getByRole("radio", { name: /Alpha/ }).click();
-    await expect(page.getByLabel("1번 답변함")).toBeVisible();
-    await page.getByText("다음").click();
-    await page.getByText("검토 표시", { exact: true }).click();
-    await expect(page.getByLabel(/^2번.*검토 표시/)).toBeVisible();
+    await expect(page.getByLabel("Question 1, answered")).toBeVisible();
+    await page.getByRole("button", { name: "Next question" }).click();
+    await page.getByRole("button", { name: "Mark for Review" }).click();
+    await expect(page.getByLabel(/^Question 2.*marked for review/)).toBeVisible();
 
     // 재접속 복구: 새로고침 후 같은 모듈·답변·표시 유지
     await page.reload();
     await expect(page.getByTestId("mst-module-label")).toHaveText("Reading and Writing · Module 1");
-    await expect(page.getByLabel("1번 답변함")).toBeVisible();
+    await expect(page.getByLabel("Question 1, answered")).toBeVisible();
 
     await page.getByTestId("mst-submit-module").click();
-    await expect(page.getByRole("dialog")).toContainText("1/2문항에 답했습니다");
+    await expect(page.getByRole("dialog")).toContainText("1 of 2 questions answered");
     await page.getByTestId("mst-submit-confirm").click();
     await expect(page.getByTestId("mst-module-label")).toHaveText("Reading and Writing · Module 2");
     expect(psql(`select locked from mock_exam_attempt_modules where attempt_id = '${attemptId}' and module_key = 'rw_m1';`)).toBe("t");
@@ -102,8 +102,8 @@ test.describe("MST 모의고사 — 4모듈 완주 (실브라우저)", () => {
 
     await page.getByTestId("mst-resume").click();
     await expect(page.getByTestId("mst-module-label")).toHaveText("Math · Module 1");
-    await expect(page.getByText("계산기")).toBeVisible();
-    await page.getByText("다음").click();
+    await expect(page.getByRole("button", { name: "Calculator" })).toBeVisible();
+    await page.getByRole("button", { name: "Next question" }).click();
     await page.getByTestId("mst-spr-input").fill("26/8");
     await expect
       .poll(() => psql(`select coalesce(correct::text, '') from mock_exam_answers a join mock_exam_set_items i on i.id = a.set_item_id where a.attempt_id = '${attemptId}' and i.module_key = 'math_m1' and i.position = 2;`))
@@ -115,17 +115,17 @@ test.describe("MST 모의고사 — 4모듈 완주 (실브라우저)", () => {
     await page.getByTestId("mst-submit-confirm").click();
 
     // 마지막 모듈 제출 → 채점 완료 → 결과 화면(정답 열람 가능), 내부 경로명 미노출
-    await expect(page.getByText("← 뒤로")).toBeVisible();
+    await expect(page.getByText("← Back")).toBeVisible();
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("graded");
     expect(psql(`select count(*) from mock_exam_attempt_modules where attempt_id = '${attemptId}' and locked;`)).toBe("5");
     const body = await page.locator("body").innerText();
-    expect(body).not.toMatch(/higher|lower|고난도/i);
+    expect(body).not.toMatch(/higher|lower/i);
   });
 
   test("완료된 응시 재방문은 결과 화면이며 답안 변경 RPC는 거부된다", async ({ page }) => {
     await loginAs(page, ACCOUNTS.student);
     await page.goto(`/student/mock-exam/${attemptId}`);
-    await expect(page.getByText("← 뒤로")).toBeVisible();
+    await expect(page.getByText("← Back")).toBeVisible();
     await expect(page.getByTestId("mst-submit-module")).toHaveCount(0);
     const itemId = psql(`select i.id from mock_exam_set_items i join mock_exam_attempts a on a.exam_set_id = i.exam_set_id where a.id = '${attemptId}' and i.module_key = 'rw_m1' order by i.position limit 1;`);
     let err = "";
@@ -134,6 +134,6 @@ test.describe("MST 모의고사 — 4모듈 완주 (실브라우저)", () => {
     } catch (e) {
       err = String((e as { stderr?: string }).stderr ?? e);
     }
-    expect(err).toContain("이미 제출한 시험");
+    expect(err).toContain("already been submitted");
   });
 });

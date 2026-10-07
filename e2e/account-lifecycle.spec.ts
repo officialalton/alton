@@ -111,13 +111,13 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetTeacherStatus("suspended");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.teacher);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
 
     await expect(page).toHaveURL(/\/account-suspended/);
     await expect(
-      page.getByRole("heading", { name: "계정이 일시정지되었습니다" })
+      page.getByRole("heading", { name: "Your account is suspended" })
     ).toBeVisible();
   });
 
@@ -127,9 +127,9 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetTeacherStatus("suspended");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.teacher);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
     await expect(page).toHaveURL(/\/account-suspended/);
 
     // 세션은 유지된 채(suspended는 로그아웃시키지 않는다) 다른 포털 경로로
@@ -158,15 +158,15 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetTeacherStatus("closed");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.teacher);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.teacher);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
 
     // resolveAccountDestination()이 supabase.auth.signOut()을 호출한 뒤
     // /login?error=...로 보낸다 — /teacher나 /account-suspended가 아니라
     // 로그인 화면 자체로 돌아와야 한다.
     await expect(page).toHaveURL(/\/login/);
-    await expect(page.getByText(/계정이 폐쇄되어 로그인할 수 없습니다/)).toBeVisible();
+    await expect(page.getByText(/account is closed and cannot sign in/)).toBeVisible();
 
     // 세션이 실제로 로그아웃됐는지: 같은 페이지에서 보호된 경로로 이동하면
     // /login으로 다시 돌아와야 한다(세션이 남아있다면 /account-suspended
@@ -183,9 +183,9 @@ test.describe.serial("R2 계정 상태 전환 — 실제 브라우저 로그인 
     forceSetParentStatus("suspended");
 
     await page.goto("/login");
-    await page.getByLabel("이메일").fill(ACCOUNTS.parent);
-    await page.getByLabel("비밀번호").fill(DEV_PASSWORD);
-    await page.getByRole("button", { name: "로그인", exact: true }).click();
+    await page.getByLabel("Email").fill(ACCOUNTS.parent);
+    await page.getByLabel("Password").fill(DEV_PASSWORD);
+    await page.getByRole("button", { name: "Log in", exact: true }).click();
     await expect(page).toHaveURL(/\/account-suspended/);
 
     transitionParentStatus("active", "e2e: 학부모 재활성화 테스트");

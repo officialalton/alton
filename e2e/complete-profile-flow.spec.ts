@@ -71,10 +71,10 @@ test.describe("학생 프로필 완성 강제 게이트", () => {
     // 시드 학생은 profiles.date_of_birth가 이미 채워져 있어(R2 §4.13 seed 정책)
     // 이 화면에서는 생년월일 입력칸 대신 읽기전용 안내 문구가 보인다 —
     // 학교명/학년만 입력하면 된다.
-    await expect(page.getByText(/이미 등록되어 있습니다/)).toBeVisible();
-    await page.getByLabel(/학교명/).fill("E2E 국제학교");
-    await page.getByLabel(/학년/).fill("11학년");
-    await page.getByRole("button", { name: "프로필 완성하고 시작하기" }).click();
+    await expect(page.getByText(/Already on file/)).toBeVisible();
+    await page.getByLabel(/^School/).fill("E2E 국제학교");
+    await page.getByLabel(/^Grade/).fill("11학년");
+    await page.getByRole("button", { name: "Complete profile and get started" }).click();
 
     await expect(page).toHaveURL(/\/student/);
 

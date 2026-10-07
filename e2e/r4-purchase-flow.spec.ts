@@ -84,7 +84,7 @@ test.describe("R4 — 보호자 수업권 구매 플로우", () => {
     // 명시적으로 전환해야 한다 — 원래 테스트에 이 클릭이 빠져 있었다.
     await loginAs(page, E2E_PARENT);
     await page.goto("/parent?tab=entitlements");
-    await page.getByRole("button", { name: "구매", exact: true }).click();
+    await page.getByRole("button", { name: "Buy", exact: true }).click();
 
     // 2. 라이브 가격이 DB 값과 일치하는지 확인(하드코딩이 아니라 entitlement_product_versions 조회).
     await expect(page.getByText(expectedPriceText, { exact: false }).first()).toBeVisible();
@@ -94,17 +94,17 @@ test.describe("R4 — 보호자 수업권 구매 플로우", () => {
     // 섹션 안으로 범위를 좁힌다.
     const childPickerSection = page
       .locator("section")
-      .filter({ has: page.getByRole("heading", { name: "자녀 선택" }) });
+      .filter({ has: page.getByRole("heading", { name: "Select a Child" }) });
     const eligibleBtn = childPickerSection.getByRole("button", { name: "E2E 구매테스트 자녀(자격O)", exact: true });
     const ineligibleBtn = childPickerSection.getByRole("button", { name: /E2E 구매테스트 자녀\(자격X\)/ });
     await expect(eligibleBtn).toBeEnabled();
     await expect(ineligibleBtn).toBeDisabled();
-    await expect(ineligibleBtn).toHaveText(/구매 불가/);
+    await expect(ineligibleBtn).toHaveText(/not eligible/);
 
     // 4. 자격 있는 자녀 선택 → 단건 상품 선택 → 구매하기.
     await eligibleBtn.click();
-    await childPickerSection.getByRole("button", { name: /단건 수업권/ }).click();
-    const purchaseBtn = page.getByRole("button", { name: /구매하기|이동 중/ });
+    await page.getByRole("button", { name: /Single Lesson/ }).click();
+    const purchaseBtn = page.getByRole("button", { name: /Buy Now|Redirecting/ });
     await expect(purchaseBtn).toBeEnabled();
     await purchaseBtn.click();
 

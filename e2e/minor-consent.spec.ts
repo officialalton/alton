@@ -18,11 +18,11 @@ const E2E_PARENT = "e2e-minor-consent-parent@example.com";
 // 클릭해야 한다(안 그러면 숨은 쪽을 기다리다 타임아웃난다).
 async function logoutViaAccountMenu(page: Page) {
   await page
-    .getByRole("button", { name: /학생님|학부모님/ })
+    .getByRole("button", { name: /E2E 동의테스트 (학생|학부모)/ })
     .filter({ visible: true })
     .first()
     .click();
-  await page.getByRole("button", { name: "로그아웃" }).click();
+  await page.getByRole("button", { name: "Log out" }).click();
   // 로그아웃은 서버 액션(form action)이라 리다이렉트가 비동기로 온다 — 이걸
   // 기다리지 않고 바로 다음 loginAs()의 page.goto("/login")를 호출하면, 그
   // goto가 끝난 직후 지연된 로그아웃 리다이렉트가 다시 도착해 /login에서
@@ -46,7 +46,7 @@ const POLICY_ID = "e2222222-0000-0000-0000-000000000001";
 // 정책 제목 + 에 동의"다. 같은 로컬 DB에서 다른 통합 테스트(vitest)가 더 최신
 // 정책 행을 남길 수 있어 e2e-v1 제목을 고정하지 않고, 어떤 활성 정책이든 그 정책에
 // 동의하는 버튼을 누른다(setup()이 최소 하나의 활성 정책이 있도록 보장한다).
-const CONSENT_BUTTON = /에 동의$/;
+const CONSENT_BUTTON = /^Agree to /;
 
 function setup() {
   const sql = `
@@ -110,7 +110,7 @@ test.describe("R2 Task 6 — 13세 미만 보호자 동의 — 실제 브라우�
     await loginAs(page, E2E_STUDENT);
     await expect(page).toHaveURL(/\/consent-pending/);
     await expect(
-      page.getByRole("heading", { name: "보호자 동의가 필요합니다" })
+      page.getByRole("heading", { name: "Parent or guardian consent required" })
     ).toBeVisible();
     await expect(page.getByText("E2E 동의테스트 학부모", { exact: false })).toBeVisible();
 
@@ -127,13 +127,13 @@ test.describe("R2 Task 6 — 13세 미만 보호자 동의 — 실제 브라우�
 
     await loginAs(page, E2E_PARENT);
     await page.goto("/parent?tab=consent");
-    await expect(page.getByText("동의 필요").first()).toBeVisible();
+    await expect(page.getByText("Consent needed").first()).toBeVisible();
 
     const studentCard = page.getByTestId(`consent-card-${STUDENT_ID}`);
     await studentCard
       .getByRole("button", { name: CONSENT_BUTTON })
       .click();
-    await expect(studentCard.getByText("동의 완료").first()).toBeVisible();
+    await expect(studentCard.getByText("Consent given").first()).toBeVisible();
 
     await logoutViaAccountMenu(page);
     await expect(page).toHaveURL(/\/login/);
@@ -153,7 +153,7 @@ test.describe("R2 Task 6 — 13세 미만 보호자 동의 — 실제 브라우�
     await studentCard
       .getByRole("button", { name: CONSENT_BUTTON })
       .click();
-    await expect(studentCard.getByText("동의 완료").first()).toBeVisible();
+    await expect(studentCard.getByText("Consent given").first()).toBeVisible();
 
     // 동의 확인: 학생이 정상 로그인된다.
     await logoutViaAccountMenu(page);
@@ -168,7 +168,7 @@ test.describe("R2 Task 6 — 13세 미만 보호자 동의 — 실제 브라우�
     revokeConsentAsAdmin();
     await loginAs(page, E2E_PARENT);
     await page.goto("/parent?tab=consent");
-    await expect(studentCard.getByText("동의 필요")).toBeVisible();
+    await expect(studentCard.getByText("Consent needed")).toBeVisible();
 
     // 학생은 다음 로그인부터 다시 /consent-pending으로 막힌다(강제
     // 로그아웃은 아니다 — 이미 로그인된 세션이 있었다면 다음 요청부터).
