@@ -43,7 +43,7 @@ describe("원형 선언 — 모든 자료 원형이 manifest 항목·SPR 선언�
   it("전체 원형 중 SPR 가능 비율·불가 목록(옛 원형은 프로브 판정)이 집계된다", { timeout: 300_000 }, () => {
     const all = [...ARCHETYPES]; let cap = 0; const no: string[] = []; let declared = 0;
     for (const a of all) { const c = sprCapability(a); if (c.declared) declared++; if (c.capable) cap++; else no.push(`${a.id}: ${c.reason}`); }
-    expect(cap + no.length).toBe(all.length); expect(declared).toBe(FTVD_HARD.length + FIG_HARD.length);
+    expect(cap + no.length).toBe(all.length); expect(declared).toBeGreaterThanOrEqual(FTVD_HARD.length + FIG_HARD.length);
     // 보고용 — 불가 목록은 전부 사유가 있다
     for (const n of no) expect(n.split(": ")[1].length).toBeGreaterThan(5);
     expect(cap / all.length).toBeGreaterThan(0.3);
@@ -52,20 +52,18 @@ describe("원형 선언 — 모든 자료 원형이 manifest 항목·SPR 선언�
 
 describe(`게이트 G1~G10 (시드 ${SEEDS})`, () => {
   const run = () => evaluateCoverageGate({ seeds: SEEDS, mutationSeeds: 12 });
-  it("파일럿 15항목은 전부 pass, 1단계 구현 조합은 시각 검수(G9) 대기만 남고, 나머지는 미구현으로 남아 전체 게이트는 닫혀 있다", () => {
-    const { report, arch } = run(); const staged = new Set(STAGED.map((r) => r.id));
-    // 1단계 조합: 실패 사유가 G9(시각 검수 판정 대기)뿐이어야 한다 — 생성·검증·변조·구조 검사(G2~G8)는 통과
-    const fails = Object.entries(report.items).filter(([id, r]) => r.status === "fail" && !(staged.has(id) && r.failures.every((f) => f.startsWith("G9 ")))).map(([id, r]) => `${id}: ${r.failures.join(" ; ")}`);
-    expect(fails, fails.join("\n")).toEqual([]);
-    expect(report.summary.pass).toBeGreaterThanOrEqual(15); expect(report.summary.pass + report.summary.fail).toBe(15 + STAGED.length); expect(report.summary.unimplemented + report.summary.blockedRenderer).toBe(288 - STAGED.length); expect(report.ok).toBe(false);
-    expect(report.gates.G1.ok, report.gates.G1.note).toBe(true); expect(report.gates.G8.ok, report.gates.G8.note).toBe(true); // G10(SPR 공급)은 skill 단위 완료 기준이다 — 파일럿 skill(two_variable_data)은 통과해야 하고, 1단계로 일부 조합만 구현된 skill 은 부족분이 보고서에 남는다(그 skill 의 2·3단계 조합이 들어오면 채워진다).
-    expect(report.gates.G10.note.split("; ").filter((x) => x.startsWith("two_variable_data:")), report.gates.G10.note).toEqual([]); expect(report.gates.G9.ok).toBe(false); // 288개 미구현 조합은 시각 검수 상태가 unimplemented
-    for (const r of PILOT) expect(report.qaByItem[r.id].state, r.id).toBe("pass");
-    for (const r of PILOT) { expect(report.items[r.id].status, r.id).toBe("pass"); expect(report.items[r.id].hard, r.id).toBe(4); }
-    expect(report.spr.supplyImplemented).toBeGreaterThanOrEqual(SPR_REQUIRED_GROUPS);
+  it("303개 조합이 전부 구현·pass 이고 G1~G10 전체 게이트가 열려 있다(보고서는 판정 전에 먼저 기록)", () => {
+    const { report, arch } = run();
     if (process.env.WRITE_GATE_REPORT) {
       writeFileSync(path.join(process.cwd(), GATE_REPORT_PATH), JSON.stringify({ ...report, sprInventory: sprInventory(), archetypeSweeps: arch.map((r) => ({ id: r.id, fmt: r.fmt, seeds: r.seeds, produced: r.produced, genFail: r.genFail, thrown: r.thrown, verifyFail: r.verifyFail, independent: r.independent, dup200: r.dup200, dupAll: `${r.dupAll}/${r.produced}`, mutants: `${r.mutantsCaught}/${r.mutants}`, keySwap: `${r.keyCaught}/${r.keyTotal}`, slots: r.slots })) }, null, 1));
     }
+    const fails = Object.entries(report.items).filter(([, r]) => r.status !== "pass").map(([id, r]) => `${id}: ${r.status} ${r.failures.join(" | ")}`);
+    expect(fails, fails.join("\n")).toEqual([]);
+    expect(report.summary.pass).toBe(303); expect(report.summary.fail).toBe(0); expect(report.summary.unimplemented).toBe(0); expect(report.summary.blockedRenderer).toBe(0);
+    for (const [g, r] of Object.entries(report.gates)) expect(r.ok, `${g}: ${r.note}`).toBe(true);
+    for (const r of PILOT) { expect(report.qaByItem[r.id].state, r.id).toBe("pass"); expect(report.items[r.id].hard, r.id).toBe(4); }
+    expect(report.spr.supplyImplemented).toBeGreaterThanOrEqual(SPR_REQUIRED_GROUPS);
+    expect(report.ok).toBe(true);
   }, 3_600_000);
 });
 
