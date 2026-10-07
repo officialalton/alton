@@ -54,7 +54,9 @@ const fromMock = vi.fn((table: string): any => {
       select: () => ({
         is: () => ({
           not: () => ({
-            lt: () => ({ in: async () => ({ data: consultCandidates, error: null }) }),
+            not: () => ({
+              lt: () => ({ in: async () => ({ data: consultCandidates, error: null }) }),
+            }),
           }),
         }),
       }),

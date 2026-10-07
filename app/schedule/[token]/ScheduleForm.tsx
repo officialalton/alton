@@ -1,5 +1,6 @@
 "use client";
 
+import { FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE, FIRST_CONSULTATION_CONSENT_TEXT } from "@/lib/consultation/first-consultation-consent";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ConsultSlotPicker, { type ConsultSlotPickerHandle } from "@/app/components/ConsultSlotPicker";
 import { listOpenSlotsForTokenAction, redeemSchedulingLinkAction } from "@/app/schedule-actions";
@@ -9,7 +10,8 @@ import { fmtDateTimeEn as fmtDateTime } from "@/lib/format-datetime-en";
 import { trackEvent } from "@/lib/analytics/track";
 import { detectInitialScheduleTimezone, saveScheduleTimezone } from "@/lib/schedule-timezone";
 
-export default function ScheduleForm({ token }: { token: string }) {
+export default function ScheduleForm({ token, needsAiNotesConsent = false }: { token: string; needsAiNotesConsent?: boolean }) {
+  const [aiNotesAgreed, setAiNotesAgreed] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,10 +52,14 @@ export default function ScheduleForm({ token }: { token: string }) {
       setError("Please choose a consultation time.");
       return;
     }
+    if (needsAiNotesConsent && !aiNotesAgreed) {
+      setError(FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE);
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
-      const r = await redeemSchedulingLinkAction(token, selectedSlot, timezone);
+      const r = await redeemSchedulingLinkAction(token, selectedSlot, timezone, needsAiNotesConsent ? aiNotesAgreed : undefined);
       if (r.ok) {
         setConfirmedSlot(selectedSlot);
         setConfirmed(true);
@@ -97,6 +103,13 @@ export default function ScheduleForm({ token }: { token: string }) {
       <p className="text-[13px] text-grey-500 mb-5">Pick a time that works for you from your consultant&apos;s availability (60 minutes).</p>
 
       <ConsultSlotPicker ref={pickerRef} fetchSlots={fetchSlots} timezone={timezone} onTimezoneChange={handleTimezoneChange} selectedStartsAt={selectedSlot || null} onSelect={setSelectedSlot} />
+
+      {needsAiNotesConsent && (
+        <label className="flex items-start gap-2.5 mt-5 text-[12.5px] text-grey-500">
+          <input type="checkbox" checked={aiNotesAgreed} onChange={(e) => setAiNotesAgreed(e.target.checked)} className="mt-0.5" />
+          {FIRST_CONSULTATION_CONSENT_TEXT}
+        </label>
+      )}
 
       {error && <p className="text-[13px] text-red mt-3">{error}</p>}
 

@@ -40,7 +40,8 @@ describe("renderFamilyContractHtml (parent agreement v0.3-EN-CA)", () => {
     for (const phrase of ["video recording", "audio recording", "conversion of speech into a text transcript", "AI-assisted preparation and storage of lesson notes"]) {
       expect(text).toContain(phrase);
     }
-    expect(text).toContain("Initial consultations and all trial lessons, including a trial lesson held after a contract is signed, are always excluded");
+    expect(text).toContain("Trial lessons are always excluded from recording, transcription and AI meeting notes, including after a contract is signed");
+    expect(text).toContain("A first consultation is excluded from video and audio recording and from retained transcripts; AI meeting notes of a first consultation are prepared only where the requester consented when requesting the consultation, are visible only to ALTON staff, and are eligible for deletion one year after the consultation ends.");
     expect(text).toContain("A parent signature does not substitute for another participant");
   });
 

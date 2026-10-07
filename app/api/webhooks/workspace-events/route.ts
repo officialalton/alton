@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { consultationHasAiNotesConsent } from "@/lib/consultation/ai-notes-consent";
 import { OAuth2Client } from "google-auth-library";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { parseWorkspaceEventPayload } from "@/lib/google-workspace-events";
@@ -268,7 +269,13 @@ export async function POST(req: NextRequest) {
       // 잠재고객에게 원본을 자동 공개하지 않는다(요구사항 4) — 이 컬럼은 관리자 전용
       // 경로에서만 노출된다(app/admin/consultation-scheduling-actions.ts, RLS는
       // consultations 자체가 이미 관리자 전용 select 정책).
-      await admin.from("consultations").update({ smart_notes_drive_file_id: driveFileId }).eq("id", consultationId);
+      // 2026-10-07 — 첫 상담 AI 노트는 신청 시 동의(버전·시각 저장)가 있을 때만 연결한다. 동의가 없으면 연결하지 않고
+      // (원본 파일은 이벤트 기록의 1년 보관 큐가 정리한다) 사실만 로그로 남긴다.
+      if (await consultationHasAiNotesConsent(admin, consultationId)) {
+        await admin.from("consultations").update({ smart_notes_drive_file_id: driveFileId }).eq("id", consultationId);
+      } else {
+        console.warn(JSON.stringify({ type: "first_consultation_smart_notes_without_consent", consultationId }));
+      }
     }
     return NextResponse.json({ ok: true });
   }

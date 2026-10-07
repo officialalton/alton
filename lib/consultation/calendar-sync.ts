@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { createCalendarEventWithMeet, patchCalendarEventTime, deleteCalendarEvent } from "@/lib/google-calendar";
 import { extractMeetingCodeFromLink } from "@/lib/google-meet";
 import { sendEmail } from "@/lib/email";
+import { applyConsultationSmartNotesBestEffort } from "./ai-notes-consent";
 import { DEFAULT_TIMEZONE, timezoneLabel } from "@/lib/timezone";
 import { CALENDAR_SYNC_MAX_ATTEMPTS, createCalendarResyncKit, type SyncOutcome } from "./calendar-resync-kit";
 
@@ -39,6 +40,8 @@ type ConsultationRow = {
   google_sync_status: string;
   google_sync_retry_count: number;
   consent_version_id: string | null;
+  /** single request-time consent (personal information + first-consultation AI notes); null = no Smart Notes */
+  ai_notes_consent_version?: string | null;
   confirmation_email_content_hash: string | null;
   admissions_consultant_id: string | null;
   /** 고객이 예약 링크에서 고른 표시 시간대(consultations.customer_timezone, null = 기본값). 모든 동기화 경로가 행에서 읽는다. */
@@ -173,9 +176,12 @@ async function processOneConsultation(
     })
     .eq("id", row.id);
 
-  // 2026-09-28(초기 고객 절차 단순화) — 첫 상담에는 AI 기록을 쓰지 않으므로
-  // Smart Notes 활성화와 Workspace Events 구독을 시도하지 않는다.
-  // (2026-09-29 6단계: 그 코드와 관리자 수동 재시도 경로를 삭제했다.)
+  // 2026-10-07 오너 결정 — 첫 상담 AI 회의록(Smart Notes)은 상담 신청 시 받은 단일 동의(버전·시각이
+  // consultations.ai_notes_consent_version/at에 저장됨)가 있을 때만 켠다. 동의가 없으면 아무것도 켜지 않는다
+  // (영상·음성 녹화와 보관 전사는 첫 상담에 원래 없다). 실패해도 Calendar 동기화 성공은 되돌리지 않는다.
+  if (meetingCode && row.ai_notes_consent_version) {
+    await applyConsultationSmartNotesBestEffort({ admin, consultationId: row.id, organizerEmail, meetingCode });
+  }
   return { createdEventId };
 }
 
@@ -321,6 +327,7 @@ export async function reprocessUnlinkedSmartNotesEvents(): Promise<{ relinked: n
       .from("consultations")
       .select("id")
       .eq("google_meeting_code", row.google_meeting_code ?? "")
+      .not("ai_notes_consent_version", "is", null) // 신청 시 AI 노트 동의가 저장된 상담만 연결
       .maybeSingle();
     if (!consultation) {
       stillUnlinked += 1;

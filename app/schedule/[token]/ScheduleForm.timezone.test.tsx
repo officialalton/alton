@@ -116,7 +116,7 @@ describe("ScheduleForm — 시간대 선택", () => {
     fireEvent.click(await screen.findByRole("button", { name: /\b(AM|PM)\b/ }));
     fireEvent.click(screen.getByText("Confirm this time"));
     await waitFor(() => expect(screen.getByText("Your consultation is booked.")).toBeInTheDocument());
-    expect(redeemMock).toHaveBeenCalledWith("t", SLOT, "Asia/Seoul");
+    expect(redeemMock).toHaveBeenCalledWith("t", SLOT, "Asia/Seoul", undefined);
     expect(screen.getByTestId("schedule-confirmed-time").textContent).toContain(timezoneLabel("Asia/Seoul"));
     expect(screen.getByTestId("schedule-confirmed-time").textContent).toContain(
       fmtDateTime(SLOT, { dateStyle: "full", timeStyle: "short" }, "Asia/Seoul"),

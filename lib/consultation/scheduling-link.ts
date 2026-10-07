@@ -46,3 +46,21 @@ export async function checkSchedulingLink(token: string): Promise<"valid" | "inv
     return "unknown";
   }
 }
+
+/**
+ * True when the consultation behind this link carries no first-consultation AI-notes consent stamp (a request created
+ * internally rather than through the landing form). Then the scheduling page shows the same single consent wording.
+ * Unknown / unreadable => false (never blocks booking on a lookup failure; AI notes then simply stay off).
+ */
+export async function schedulingLinkNeedsAiNotesConsent(token: string): Promise<boolean> {
+  try {
+    const admin = createAdminClient();
+    const { data: link } = await admin.from("consultation_scheduling_links").select("consultation_id").eq("token", token).maybeSingle();
+    const consultationId = (link as { consultation_id?: string } | null)?.consultation_id;
+    if (!consultationId) return false;
+    const { data } = await admin.from("consultations").select("ai_notes_consent_version").eq("id", consultationId).maybeSingle();
+    return !!data && !(data as { ai_notes_consent_version?: string | null }).ai_notes_consent_version;
+  } catch {
+    return false;
+  }
+}

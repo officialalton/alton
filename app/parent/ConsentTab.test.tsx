@@ -129,7 +129,7 @@ describe("ConsentTab", () => {
     const notice = screen.getByTestId("smart-notes-contract-notice");
     expect(notice).toBeInTheDocument();
     expect(notice.textContent).toContain("video and audio recording are not currently provided");
-    expect(notice.textContent).toContain("First consultations and all trial lessons are always excluded");
+    expect(notice.textContent).toContain("Trial lessons are always excluded");
     expect(notice.textContent).not.toMatch(/Regular paid lessons include video recording/);
     expect(screen.queryByText(/Using · Turn off/)).not.toBeInTheDocument();
     expect(screen.queryByText(/Not using · Turn on/)).not.toBeInTheDocument();

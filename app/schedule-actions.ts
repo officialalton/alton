@@ -2,6 +2,7 @@
 
 import { createAdminClient } from "@/lib/supabase-admin";
 import { syncOneConsultationCalendarEvent } from "@/lib/consultation/calendar-sync";
+import { FIRST_CONSULTATION_CONSENT_VERSION } from "@/lib/consultation/first-consultation-consent";
 import { sanitizeTimezone } from "@/lib/schedule-timezone";
 import { toSchedulingLinkFailure, type SchedulingLinkFailure } from "@/lib/consultation/scheduling-link";
 
@@ -30,7 +31,8 @@ export async function listOpenSlotsForTokenAction(
 export async function redeemSchedulingLinkAction(
   token: string,
   startsAtIso: string,
-  timezone?: string
+  timezone?: string,
+  aiNotesConsent?: boolean
 ): Promise<{ ok: true } | SchedulingLinkFailure> {
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("redeem_consultation_scheduling_link", {
@@ -40,6 +42,16 @@ export async function redeemSchedulingLinkAction(
   if (error) return toSchedulingLinkFailure(error, "redeem");
 
   const consultationId = (data as { id: string }).id;
+  // Internally created request without a stamp: the single consent shown on this page (same wording as the landing form)
+  // stamps the wording version + time. An existing stamp is never overwritten.
+  if (aiNotesConsent === true) {
+    const { error: consentError } = await admin
+      .from("consultations")
+      .update({ ai_notes_consent_version: FIRST_CONSULTATION_CONSENT_VERSION, ai_notes_consent_at: new Date().toISOString() })
+      .eq("id", consultationId)
+      .is("ai_notes_consent_version", null);
+    if (consentError) console.error(JSON.stringify({ type: "scheduling_link_ai_notes_consent_save_failed", consultationId, error: consentError.message }));
+  }
   // 요구사항: Calendar/Meet 생성 — 실패해도 일정 확정(DB) 자체는 이미 커밋됐다
   // (google_sync_status만 재처리 대상으로 남는 graceful degradation 원칙,
   // lib/consultation/calendar-sync.ts와 동일).
