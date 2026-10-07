@@ -165,7 +165,7 @@ async function main() {
     const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, intendedSkill: r.planSkill ?? r.skill, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, difficultyStatus: r.difficultyStatus ?? ((r.quality.mockExamGeneration as Record<string, unknown> | undefined)?.difficultyStatus ?? null), review: r.review ?? null } } });
     if (qErr) { await cleanup1(`품질 기록 실패 ${qErr.message}`); continue; }
     stats.created += 1;
-    pool.push({ problemId: problemId as string, key, sh });
+    pool.push({ problemId: problemId as string, key, ek: exactKey(stimulus, question, g.options), sh, group: myGroup });
     existing.set(r.skill, pool);
     if (publish) {
       if (!check.ok) { failures.push(`${r.gid}: 렌더 검사 미통과 — 공개하지 않음 (${check.issues.map((i) => i.code).join(",")})`); continue; }
