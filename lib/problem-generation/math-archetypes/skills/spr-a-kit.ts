@@ -36,7 +36,7 @@ export type ArchSpec = { id: string; skill: string; kind: string; op: OperatorId
 export function mkArch(o: ArchSpec): Archetype {
   return {
     id: `${o.id}.${o.op}`, skill: o.skill, kind: o.kind, operator: o.op, structure: o.structure, extraThinking: o.extra, concepts: o.concepts, mediumSteps: o.mediumSteps,
-    spr: { capable: true, reason: "정답이 하나의 수이고 질문이 선택지를 가리키지 않아 선택지 없이 낼 수 있다" },
+    // spr 선언은 두지 않는다 — 수치 단답이라 sprCapability 의 시드 프로브가 SPR 가능으로 판정한다(선언은 자료 원형 전용).
     generate(rng) { const v = rng.pick(o.vars); return build(rng, v.name, v.gen(rng)); },
   };
 }
