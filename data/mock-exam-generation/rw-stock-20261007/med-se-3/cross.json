@@ -1,0 +1,378 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 10,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 9,
+   "crossScored": 9,
+   "correct": {
+    "agree": 7,
+    "of": 9,
+    "fablePass": 7,
+    "opusPass": 7
+   },
+   "compliance": {
+    "agree": 9,
+    "of": 9,
+    "fablePass": 9,
+    "opusPass": 9
+   },
+   "hardFit": {
+    "agree": 9,
+    "of": 9,
+    "fablePass": 8,
+    "opusPass": 8
+   },
+   "adoptedBoth": 6,
+   "adoptedOneOnly": 1,
+   "yieldBoth": 0.6,
+   "costUsd": 1.279,
+   "costPerAdoptedBoth": 0.213,
+   "fableOnlyPass": 1,
+   "opusOnlyPass": 0
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 6,
+   "rw": 6,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "medium-boundaries-800",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산 완료: 'The bdelloid rotifer, [동격어구], has long puzzled' 구조에서 여는 쉼표와 짝을 이루는 닫는 쉼표가 필요. B·C는 앞부분에 독립절이 없어 불가, D는 쉼표 짝 불일치. 한·영 해설 결론 및 글자 참조 일치, 영어 자연스럽고 한글 없음. 담륜충(bdelloid rotifer)의 건조 생존·수천만 년 무성생식 내용은 사실과 부합. 긴 동격어구(내부에 'able to survive ... at a time' 수식구 포함)를 추적해 주어-동사를 연결해야 하고, 문장 후반의 콜론이 B·C를 그럴듯하게 만들어 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "동격어구가 길어서 앞의 여는 쉼표를 놓치면 D를 고르기 쉽다. 뒤쪽에 이미 콜론이 있는 점도 C를 고르게 만드는 함정이다. 정답을 찾으려면 두 단계를 거쳐야 한다. 먼저 동격어구가 쉼표로 열렸는지 확인하고, 이어서 주어와 동사가 어떻게 연결되는지 판단해야 한다. 따라서 중간 난이도에 적합하다.",
+    "issue": "한국어 해설은 'has puzzled'라고 쓰고 영어 해설은 'has long puzzled'라고 써서 표기가 조금 다르지만, 문제 될 정도는 아니다."
+   },
+   "cost": 0.1310476
+  },
+  {
+   "cid": "medium-boundaries-801",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "핵심 결함: 정답이 유일하지 않다. B는 문법적으로 옳지만, A(\"midnight, and, over the course of the novel, these entries ...\")도 쉼표+등위접속사로 두 독립절을 잇고 삽입구를 쉼표로 감싼 정문이다. SAT boundaries 문항은 오답이 모두 명백한 규범 위반이어야 하는데 A는 위반이 아니므로 문항 자체가 성립하지 않는다. C(쉼표 오류)와 D(구두점 누락)는 적절한 오답. 해설은 한국어·영어 모두 A를 배제하는 타당한 근거를 제시하지 못하고 한국어 해설은 자기모순적이다. 난이도 구조(두 독립절 식별+도입구 쉼표)는 medium에 맞으나, 복수 정답 문제로 사용 불가.",
+    "issue": "한국어 해설이 A에 대해 \"문제가 없어 보인다\", \"형태상 허용될 여지도 있다\"라고 스스로 인정한 뒤 \"다만 가장 명확한 것은 B\"라고 결론지어 자기모순적이다. A를 배제하는 문법적 근거를 제시하지 못하며, 실제로 A(쉼표+and로 독립절 연결, 삽입구를 쉼표로 감쌈)는 표준 영어 규범상 정문이다.The English explanation dismisses A only on the ground that its \"stacked commas make the clause boundary less clear,\" which is a stylistic judgment, not a Standard English conventions error; A is in fact grammatical (comma + coordinating conjunction joining two independent clauses, with the parenthetical \"over the course of the novel\" set off by commas). The English version also diverges from the Korean version, which openly concedes A may be acceptable."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A 'midnight, and, over the course of the novel, these entries...'는 표준 영어에 완전히 맞습니다. 쉼표+등위접속사로 두 독립절을 잇고, 삽입된 도입구를 앞뒤 쉼표로 감싼 구조이기 때문입니다. 그래서 A와 B가 모두 정답이 되어 정답이 하나로 정해지지 않습니다. A를 틀린 선택지로 바꿔야 합니다(예: 'midnight, and over the course of the novel these entries' 대신 'midnight; and, over...' 또는 쉼표를 하나만 남긴 형태).",
+    "issue": "해설이 A를 배제하지 못합니다. A가 '문제가 없어 보인다', '형태상 허용될 여지도 있다'고 스스로 인정하면서도 'B가 가장 명확하다'는 근거 없는 이유로 B를 고릅니다. 이 부분은 논리가 자기모순이고 문장도 엉켜 있습니다.영어 해설은 A를 'stacked commas make the clause boundary less clear'라는 문체상 이유로만 배제합니다. 이는 규칙 위반이 아니므로 SAT 기준의 배제 근거가 될 수 없습니다. A가 문법적으로 옳다는 사실도 감추고 있습니다."
+   },
+   "cost": 0.19915560000000004
+  },
+  {
+   "cid": "medium-boundaries-802",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "explanation_en_too_long"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0288916
+  },
+  {
+   "cid": "medium-boundaries-803",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "\"The new system—though ... noon—soon reshaped\" : 대시로 연 삽입구를 대시로 닫아 주어와 동사를 연결하는 D가 유일하게 올바름. A는 앞부분이 동사 없는 단편이고 대시 미닫힘, B는 병렬할 본동사 없음, C는 대시-쉼표 짝 불일치. 한·영 해설 모두 정답 D와 선택지 참조가 일치하며 오류 없음. 1883년 북미 철도 4개 표준시간대 채택은 사실에 부합. 삽입구 범위를 파악한 뒤 짝 문장부호를 골라야 하므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "1883년 철도 표준시 도입은 사실과 맞다. 대시 짝 맞추기는 전형적인 중간 난이도 문항이다. 삽입구가 길어서 C(쉼표)가 그럴듯한 오답으로 작동한다.",
+    "issue": ""
+   },
+   "cost": 0.12396159999999999
+  },
+  {
+   "cid": "medium-form_structure_sense-800",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 A 검산 완료: 주어 \"the reading rooms\" 뒤 \"of these libraries\"와 삽입 분사구 \"many of them funded ... night\"를 건너뛰면 절에 정동사가 없으므로 과거형 \"offered\"만 적합. B/C는 분사, D는 부정사로 모두 절을 불완전하게 만든다. 삽입구가 길어 B \"offering\"이 \"funded\"와 병렬처럼 보이는 오답 유인이 있어 medium에 적합. 영어 해설은 that 생략 언급 없이 정확함. 유일한 문제는 한국어 해설의 \"that 생략\" 오기.",
+    "issue": "한국어 해설의 \"that절(argues 뒤에 that 생략)\"은 지문과 맞지 않음. 지문에는 \"argues that the reading rooms...\"로 that이 명시되어 있어 생략된 것이 아니다. 정답 근거(주어 \"the reading rooms\"에 대응하는 정동사 부재, A만 정동사)와 선택지 글자 참조 자체는 정확하나, 지문 구조에 대한 설명이 틀려 수험자에게 혼란을 줄 수 있다."
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "The that-clause (with \"that\" omitted) has the subject \"reading rooms,\" followed by an interrupting absolute phrase. Only A works as a finite verb. B and C are tempting if a reader takes them as a continuation of the interrupter, so the item fits the medium level.",
+    "issue": ""
+   },
+   "cost": 0.1371544
+  },
+  {
+   "cid": "medium-form_structure_sense-801",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"Their solution\"(단수) 뒤에 동격구와 관계절이 끼어 있어 정동사 식별 + 수 일치의 두 단계 판단 필요. B \"reduces\"가 유일한 단수 정동사로 정답 확인. C는 인접 복수명사(windscreens/edges) 유인 오답, A/D는 정동사 부재로 배제. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 밀로 고가교 윈드스크린 관련 사실 무리 없음. 표준 SAT medium 수준에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 동격어구와 관계절이 단수 주어와 동사 사이에 끼어 있어, 정동사인지와 수 일치를 함께 판단해야 하는 두 단계 문항이다. 복수형 오답 C는 바로 앞의 복수 명사들 때문에 끌리기 쉬운 함정이다. 밀라우 고가교 방풍막이 바람의 힘을 약 절반으로 줄인다는 서술은 실제 사실과 대체로 맞는다.",
+    "issue": ""
+   },
+   "cost": 0.1179424
+  },
+  {
+   "cid": "medium-form_structure_sense-802",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어 \"The urchins\" + 과거분사구 \"clustered on nearby barren rock\" + 삽입구 \"by contrast\" + 현재분사구 \"offering...\" 뒤에 정동사가 필요하므로 C \"are\"가 맞다. A·D는 비정형, B는 관계절이라 주절 동사가 없다. 해설은 한·영 모두 정답 및 선택지 참조가 일치하고 정확하다. Joshua Smith 연구(2021, PNAS) 내용도 사실과 부합. 다만 \"clustered\"를 정동사로 읽을 가능성이 이론상 존재하나, 쉼표 배치와 \"offering\" 분사구 구조상 축약 관계절로 읽는 것이 표준 해석이므로 문항 성립에 문제는 없음. 긴 수식어 사이에서 주어-동사를 찾는 2단계 판단이 필요해 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "주어와 동사 사이에 긴 분사구 두 개가 끼어 있어 정동사가 빠졌다는 걸 알아채야 풀린다. 오답 셋 모두 그럴듯하므로 medium에 맞다. 내용은 Smith et al.(2021)의 연구 결과와 일치한다.",
+    "issue": ""
+   },
+   "cost": 0.15445240000000002
+  },
+  {
+   "cid": "medium-form_structure_sense-803",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"The collection\"(단수)과 정동사 일치 문제. 전치사구 \"of yellowed ledgers\"와 관계절 \"that he hides beneath the floorboards of his rented room\"이 복수 명사(ledgers, floorboards)로 끝나 A/C가 유인력을 가지며, B는 정동사 부재. D \"becomes\"가 유일하게 옳음(현재시제도 \"hides\", \"keeps\"와 일치). 한·영 해설 모두 정답 D와 선택지 글자 참조가 일치하고 모순 없음, 영어 해설에 한글 없음. 가상 소설·작가로 저작권·사실 오류 문제 없음. 수식어를 건너 진주어를 찾고 수·시제를 확인하는 두 단계 판단이 필요하며 오답 2개가 근접 명사에 근거한 부분적 타당성을 가져 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 수식어(of 구 + 관계절) 뒤에서 주어와 동사의 수를 일치시키는 표준적인 medium 문항이다. 현재 시제 \"keeps\"와도 일관된다.",
+    "issue": "빈칸 바로 앞 명사는 단수 \"room\"이므로 \"ledgers나 floorboards에 맞춘 오류\"라는 설명은 다소 부정확하지만, 결론에는 영향이 없다."
+   },
+   "cost": 0.1291484
+  },
+  {
+   "cid": "medium-form_structure_sense-804",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 \"network\"(단수)와 빈칸 동사의 수 일치 문제. 사이에 \"of fissures, sinkholes, and underground channels\"와 관계절 \"that riddles...\"가 끼어 있어 근접 명사 \"channels\"에 이끌린 B가 매력적 오답으로 기능하며, C는 정동사이지만 복수형, D는 비정동사로 배제된다. 정답 A \"carries\" 검산 결과 옳음. 한국어·영어 해설 모두 같은 결론과 글자 참조를 가지며 모순 없음. 슬로베니아 Karst 지역이 카르스트 지형의 어원이라는 사실도 정확. 두 단계 판단(진짜 주어 식별 + 정동사/시제 확인)이 필요해 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "긴 수식어(of구+관계절)가 주어와 동사 사이에 끼어 있어 표준적인 중간 난이도의 수 일치 문항이다. 해설에서 B 오답이 생기는 이유를 설명하는 부분만 부정확하다.",
+    "issue": "B 해설에서 \"carry\"가 '바로 앞의 복수 명사 channels'에 맞춘 것이라고 하지만, 빈칸 바로 앞 명사는 단수 \"bedrock\"이고 channels는 관계절 앞 of구 안에 있다. '바로 앞'이라는 표현은 사실과 다르다(of구 안의 복수 명사들에 끌린 오답이라고 해야 정확하다). 결론 자체는 맞다.\"matches the nearby noun 'channels'\"도 같은 문제다. 빈칸에 가장 가까운 명사는 \"bedrock\"이다. 그 밖의 내용은 한국어 해설과 일치하고 영어도 자연스럽다."
+   },
+   "cost": 0.1316844
+  },
+  {
+   "cid": "medium-form_structure_sense-805",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "주어 'The Public Libraries Act of 1850'(단수)와 수식 관계절 뒤의 빈칸에 'was adopted'가 유일하게 수·시제·정동사 요건을 모두 충족. A(복수형, 인접 명사 people/councils 유인), D(단수이나 현재완료로 'at first'·'by 1870'·'had taken'의 과거 틀과 불일치), C(분사, 정동사 부재)로 오답 배제 근거 명확. 수 일치 판단 + 시제 문맥 확인의 두 단계가 필요하여 medium 적합. 한국어·영어 해설 모두 정답 B와 글자 참조가 일치하며 모순 없음. 1850년 공공도서관법 및 1870년 보급 현황 서술도 사실과 부합(실제 1870년까지 약 35~50개 도시만 채택).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "긴 관계절이 주어와 동사 사이에 끼어 있어 수 일치를 판단한 뒤 시제까지 확인해야 하므로 두 단계 판단이 필요하다. 오답 A(were)와 D(has been)는 각각 부분적으로 맞는 근거가 있어 medium 난이도에 적합하다. 다만 1870년까지 법을 채택한 도시 수(50곳 미만)는 대체로 그럴듯하지만, 문항 해결에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.12539640000000002
+  }
+ ]
+}

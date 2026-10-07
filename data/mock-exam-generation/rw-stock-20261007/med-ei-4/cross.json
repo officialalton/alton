@@ -1,0 +1,268 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 6,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 6,
+   "crossScored": 6,
+   "correct": {
+    "agree": 6,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 6
+   },
+   "compliance": {
+    "agree": 6,
+    "of": 6,
+    "fablePass": 6,
+    "opusPass": 6
+   },
+   "hardFit": {
+    "agree": 4,
+    "of": 6,
+    "fablePass": 4,
+    "opusPass": 4
+   },
+   "adoptedBoth": 3,
+   "adoptedOneOnly": 2,
+   "yieldBoth": 0.5,
+   "costUsd": 0.777,
+   "costPerAdoptedBoth": 0.259,
+   "fableOnlyPass": 1,
+   "opusOnlyPass": 1
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 4,
+   "rw": 4,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "medium-transitions-1000",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "세미콜론 앞(밝은 색과 독성의 비일관성)과 뒤(밝은 색의 뚜렷한 짝짓기 이점)가 대조 관계이므로 A가 정답. D는 '두 발견' 구조로 인해 부분적으로 그럴듯하고 B도 훑어 읽으면 선택 가능하여 medium 적합. 해설 한·영 일치, 영어 자연스럽고 한글 없음. 실제 종명 사용, 연구자는 가상으로 보이나 문제 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'However'는 '색과 독성 사이에 일관된 연관이 없다'와 '색과 짝짓기 성공 사이에 뚜렷한 연관이 있다'를 대조하므로 정답이다. similarly(둘 다 기존 견해를 흔든다)와 therefore(뒤 문장의 'suggesting' 결론)는 그럴듯한 오답이어서 중간 난이도에 맞다. 다만 앞 문장은 개체군 단위 비교이고 뒤 문장은 개체군 안의 수컷 비교라서 비교 단위가 조금 어긋나지만 정답에는 영향이 없다. 실존 종 O. granulifera에 가상의 연구자를 붙였다. 이 종은 색 변이가 큰 종으로 알려져 있어 큰 문제는 아니다.",
+    "issue": ""
+   },
+   "cost": 0.1334244
+  },
+  {
+   "cid": "medium-transitions-1001",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "앞 문장(평론가들의 '단순한 오마주' 가정)과 뒤 문장(서술 목소리를 기만의 도구로 전환)이 대조 관계이므로 B 'however'가 유일한 논리적 정답. 'simply'가 신호어로 작동하지만 두 문장 간 관계(가정 vs. 반전)를 연결해야 하며, A는 빅토리아식 서술의 예시로 오독할 여지가 있어 부분적 그럴듯함을 가짐. 한국어·영어 해설 모두 결론과 글자 참조가 일치하고 모순 없음. 가상 작가·작품으로 저작권 문제 없음. 문법적으로 'The novel's final chapter, however, reveals'로 자연스럽게 삽입됨.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "가상의 작가·작품으로 보이며 문제없음. 'simply'와 'deliberate deception' 사이의 대조가 명확하고, A(예시: 마지막 장도 빅토리아식 서술을 씀)가 부분적으로 그럴듯해 medium 난이도에 적합함. 다만 C·D는 비교적 쉽게 배제됨.",
+    "issue": ""
+   },
+   "cost": 0.1228164
+  },
+  {
+   "cid": "medium-transitions-1002",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 앞 문장(안쪽 땅 침하, 바깥 하천 바닥 상승) → 뒤 문장(농지가 수로보다 낮아져 배수 곤란)은 명확한 인과 관계이므로 C \"As a result\"가 정답. A는 'worked as intended'와의 대조로 오인 가능하나 직전 문장과는 반전 아님; B는 뒤 문장의 구체성 때문에 매력적이나 사례가 아닌 결과; D는 유사 현상 나열이 아님. 한·영 해설 모두 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 폴더 침하·하천 바닥 상승 현상은 방글라데시 해안 실제 사례와 부합. 지문은 독창적 서술로 저작권 의심 없음. 두 단계 판단(인과 파악 + 'worked as intended' 대조 유혹 배제)이 필요하고 오답 A·B가 부분적 근거를 가지므로 medium에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "인과 관계가 명확하다. B(사례)와 D(유사)는 어느 정도 매력적인 오답이다. 뒤 문장이 구체적이어서 B와 비교해 판단해야 하므로 medium 수준에 맞다. 다만 결과 신호가 강해서 쉬운 편에 가깝다.",
+    "issue": ""
+   },
+   "cost": 0.11427040000000002
+  },
+  {
+   "cid": "medium-transitions-1003",
+   "skill": "transitions",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 문장(운송비 90% 절감 → 농민들의 경로 변경)이 원인, 뒤 문장(1840년대 뉴욕의 수출 비중 우위)이 결과이므로 D 'As a result'가 유일하게 논리적. A는 도입부의 '잘못된 자신감'과의 대조 때문에 매력적인 오답, B·C도 표면적 근거가 있어 medium에 적합. 사실관계(1825년 개통, 약 90% 운임 절감, 펜실베이니아 운하의 고비용·실패)는 통설과 부합하며 역사학자 이름은 가상으로 문제 없음. 'by the 1840s, New York had handled'의 과거완료는 다소 어색하나(was handling이 더 자연스러움) 오류 수준은 아님. 한·영 해설 모두 D 지지, 글자 참조 일치, 영어 해설에 한글 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 원인(경로 변경)에서 뒤 결과(수출 격차)로 이어지므로 인과 관계가 분명하다. 오답 A(첫 문장의 자신감과 대조)와 B(사례처럼 보임)는 그럴듯하게 유인한다. 'by the 1840s, New York had handled'의 과거완료가 약간 어색하지만 허용 범위다. Elena Marsh는 가상 인물로 보인다.",
+    "issue": ""
+   },
+   "cost": 0.1350784
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-1000",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A 검산: 1847년 철도 GMT 채택과 브리스톨의 수년간 지역시 유지(두 분침 시계)를 대조해 '즉시 이뤄지지 않았다'는 목표를 직접 달성. B는 관련 메모를 쓰나 순조로운 확산 인상, D는 브리스톨 시차만 언급하고 '철도 전환 이후에도 유지'라는 핵심 누락, C는 전환 이전 상황만 서술 → 모두 배제 타당. 메모의 사실(1847년 철도시간, 브리스톨 약 10분 차·약 190km, Corn Exchange 두 분침 시계, 1855년 대다수 GMT)은 역사적으로 정확. 한·영 해설 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음. 난이도: B·D가 부분적 근거를 가져 비교가 필요하며 C도 말이 되므로 medium 적합(정답이 다소 명확한 편이나 표준 SAT medium 범위).",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A가 최선의 선택지다. B의 1847→1855 시간 간격도 점진적 변화를 암시할 수는 있지만, 지연을 명시적으로 강조하지 않아 매력적인 오답으로 기능한다. D는 브리스톨 관련 사실을 일부 담고 있으나 '철도 전환 이후에도 유지'라는 핵심이 빠져 있어 비교가 필요하다. 중간 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.15355200000000002
+  },
+  {
+   "cid": "medium-rhetorical_synthesis-1001",
+   "skill": "rhetorical_synthesis",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B is the only choice pairing a benefit (30% CO2 reduction) with a cost (92% strength), satisfying \"trade-off.\" D (two benefits) and A (waste reuse + emissions) are plausible distractors requiring comparison; C is background. Korean and English explanations agree, reference correct letters, and contain no errors. Fictional data consistent across notes; no copyright issue.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": false,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만 이점(CO2 30% 감소)과 대가(강도 92%)를 대비시킴. D는 'not only...but also'로 이점만 나열하는 그럴듯한 오답이고, A는 정확한 근거를 쓰지만 단점이 없다. 중간 난이도에 적합. 메모의 노르웨이 실험은 가상의 내용으로 보임.",
+    "issue": ""
+   },
+   "cost": 0.118326
+  }
+ ]
+}
