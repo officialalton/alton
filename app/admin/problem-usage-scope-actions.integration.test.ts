@@ -32,6 +32,7 @@ function seedProblem(domain: string, difficulty: string, scope: string, skill: s
     insert into problems (format, passage, options, correct_index, explanation, status, difficulty, skill_code, created_by, usage_scope)
     values ('mc', 'Scope ${RUN} ${alpha(seq)} ${domain} ${difficulty} ${scope} passage', '["A","B","C","D"]'::jsonb, 0, 'because', 'confirmed', '${difficulty}', '${skill}', '${adminUserId}', '${scope}')
     returning id;`);
+  psql(`update problem_versions set render_check = '{"ok": true, "issues": []}'::jsonb, explanation_en = 'Because.' where problem_id = '${id}';`);
   return id;
 }
 

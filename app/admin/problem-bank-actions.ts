@@ -1,5 +1,6 @@
 "use server";
 
+import { draftBankGateError } from "@/lib/problem-text-guards";
 import { checkFigure, type RenderCheck } from "@/lib/problem-figures/check";
 import { validateFigureSpec } from "@/lib/problem-figures/spec";
 import { checkContent } from "@/lib/problem-content-check";
@@ -465,7 +466,7 @@ export async function createDraftVersionAction(params: {
   const fullText = composeProblemText(params.passage, params.question ?? null);
   // 2026-09-14 표준 렌더링 검증 — 스키마에 안 맞는 그림·조판할 수 없는 수식은 저장하지 않는다. 그 외 문제(참조 불일치·
   // 충돌·잘림·레거시·선택지 정합)는 저장은 되지만 render_check 에 남고 공개가 막힌다(관리자가 사유를 보고 고친다).
-  const { data: problemRow } = await admin.from("problems").select("format, skill_code, exam_system").eq("id", params.problemId).maybeSingle();
+  const { data: problemRow } = await admin.from("problems").select("format, skill_code, exam_system, usage_scope").eq("id", params.problemId).maybeSingle();
   const format = (problemRow?.format as string | undefined) ?? (params.options ? "mc" : "essay");
 
   // 2026-09-15 제품 오너 — "관리자가 고치는 상황을 원하지 않는다. 초안으로 들어올 때 이미 문제 자체에
@@ -474,6 +475,11 @@ export async function createDraftVersionAction(params: {
   // (b) 정답이 선택지 어디에도 없으면(실제 사례) 아예 **저장을 거부한다** — "오답 보강 대기"처럼 admin이
   // 보는 큐에 절대 들어가지 않는다. AI 배치 생성 경로는 이 거부를 실패로 받아 재생성하고, 수동 작성 경로는
   // 관리자가 그 자리에서 다시 계산해 고쳐야만 저장된다(초안으로 남지 않는다).
+  const gateError = draftBankGateError({
+    examSystem: (problemRow?.exam_system as string | null) ?? null, usageScope: (problemRow?.usage_scope as string | null) ?? null,
+    passage: params.passage, question: params.question ?? null, options: params.options, statements: params.statements ?? null, explanationEn: params.explanationEn ?? null,
+  });
+  if (gateError) return { ok: false, error: gateError };
   let correctIndex = params.correctIndex;
   let explanation = params.explanation;
   let answerFixed = false;
@@ -1000,7 +1006,8 @@ export async function generateBankProblemsAction(params: {
     if (!problem.ok) { failures.push(problem.error); return; }
     const draft = await createDraftVersionAction({
       problemId: problem.value, passage: g.stimulus ?? g.passage, question: g.question ?? null, options: g.options ?? null, correctIndex: g.correctIndex ?? null,
-      explanation: g.explanation, difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
+      explanation: g.explanation, explanationEn: (g as { explanationEn?: string | null }).explanationEn ?? null,
+      difficulty: params.difficulty, answers: g.answers ?? null, figure: g.figure ?? null, statements: g.statements ?? null,
       // 근거 모델(2026-09-17): GeneratedProblem이 evidenceSkill이 아니면 이 필드들은 core.ts에서 이미 null이다.
       evidenceTarget: (g as { evidenceTarget?: string | null }).evidenceTarget ?? null,
       evidenceSpan: (g as { evidenceSpan?: string | null }).evidenceSpan ?? null,

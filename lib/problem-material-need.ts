@@ -7,6 +7,7 @@
 // 문항 체계에 갇히지 않는다 — Reading & Writing 의 Command of Evidence (Quantitative) 도 표·그래프 자료가 필수다.
 // 판정과 이유를 함께 돌려주며, 회차 구성 화면의 안내에도 쓴다(자동 추가·제거 기준은 아니다).
 import { GEOMETRY_TEMPLATE_TYPES } from "./problem-figures/spec";
+import { D_FIGURE_TYPES } from "./problem-figures/templates/d-registry";
 import { SKILL_BY_CODE, skillLabel } from "./problem-taxonomy";
 
 export type MaterialLevel = "required" | "recommended" | "none";
@@ -168,10 +169,12 @@ export function figureSatisfies(kind: MaterialKind | null, figure: unknown): boo
   const t = (figure as { type?: string } | null | undefined)?.type;
   if (!t) return false;
   if (t === "image") return true; // 올린 그림은 어떤 자료든 대신할 수 있다(alt 필수는 별도 검사)
+  // 2026-10-07: 선택지가 자료인 문항(figure_choice/bundle)과 D 템플릿(원·줄기잎·도수표·누적막대 등 자료 그림)도 자료로 인정한다 — 임포트 게이트가 자료를 가진 문항을 거절하던 오탐 보정.
+  if (kind !== "figure_choice" && (t === "figure_choice" || t === "figure_bundle")) return true;
   switch (kind) {
     case "plane": return t === "plane" || t === "trig_curve" || t === "figure_set";
-    case "geometry": return (GEOMETRY_TEMPLATE_TYPES as readonly string[]).includes(t) || t === "figure_set";
-    case "data": return t === "data" || t === "venn_tree" || t === "figure_set";
+    case "geometry": return (GEOMETRY_TEMPLATE_TYPES as readonly string[]).includes(t) || t === "figure_set" || t === "plane";
+    case "data": return t === "data" || t === "venn_tree" || t === "figure_set" || (D_FIGURE_TYPES as readonly string[]).includes(t);
     case "figure_choice": return t === "figure_choice";
     case "figure_set": return t === "figure_set";
   }

@@ -99,3 +99,14 @@ describe("질문 분리", () => {
     expect(effectiveQuestion("Body.", "Q?")).toBe("Q?");
   });
 });
+
+describe("figureSatisfies — 자료를 가진 문항 오탐 보정(2026-10-07)", () => {
+  it("D 템플릿 자료 그림은 data 자료로, 선택지 그림 묶음은 어떤 자료로도 인정한다", async () => {
+    const { figureSatisfies } = await import("./problem-material-need");
+    for (const t of ["pie", "stem_leaf", "freq_chart", "stacked_bar"]) expect(figureSatisfies("data", { type: t })).toBe(true);
+    for (const k of ["plane", "geometry", "data"] as const) { expect(figureSatisfies(k, { type: "figure_choice" })).toBe(true); expect(figureSatisfies(k, { type: "figure_bundle" })).toBe(true); }
+    expect(figureSatisfies("geometry", { type: "plane" })).toBe(true);
+    expect(figureSatisfies("data", null)).toBe(false);
+    expect(figureSatisfies("geometry", { type: "pie" })).toBe(false);
+  });
+});

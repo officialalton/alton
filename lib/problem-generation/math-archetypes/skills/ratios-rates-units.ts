@@ -2,6 +2,7 @@
 import { GenFail, type Archetype } from "../types";
 import { an, cap, facts, finish, spin, withParams } from "../text";
 import { gcd } from "../rng";
+import { RR_SPR_B_ARCHETYPES } from "./ratios-rates-units.spr-b";
 
 const SKILL = "ratios_rates_units";
 const lcm = (a: number, b: number) => (a / gcd(a, b)) * b;
@@ -295,4 +296,5 @@ export const RR_ARCHETYPES: Archetype[] = [
       });
     },
   },
+  ...RR_SPR_B_ARCHETYPES,
 ];

@@ -31,3 +31,27 @@ describe("findHangulInStem / excludeHangulStem (C1)", () => {
     expect(excludeHangulStem(rows).map((r) => r.id)).toEqual([1]);
   });
 });
+
+import { answerKeyError, draftBankGateError } from "./problem-text-guards";
+
+describe("draftBankGateError / answerKeyError (2026-10-06 은행 게이트)", () => {
+  const base = { examSystem: "sat_rw", usageScope: "mock_exam", passage: "p", question: "q", options: ["a", "b"], explanationEn: "En." };
+  it("정상은 null", () => { expect(draftBankGateError(base)).toBeNull(); });
+  it("sat_* 본문·선택지·영어 해설의 한글을 거부한다", () => {
+    expect(draftBankGateError({ ...base, passage: "한글" })).toMatch(/passage/);
+    expect(draftBankGateError({ ...base, options: ["a", "나"] })).toMatch(/options\[1\]/);
+    expect(draftBankGateError({ ...base, explanationEn: "해설" })).toMatch(/explanation_en/);
+  });
+  it("AP 는 한글 검사를 하지 않는다", () => { expect(draftBankGateError({ ...base, examSystem: "ap", passage: "한글" })).toBeNull(); });
+  it("mock_exam/both 는 영어 해설 필수, general 은 아님", () => {
+    expect(draftBankGateError({ ...base, explanationEn: " " })).toMatch(/영어 해설/);
+    expect(draftBankGateError({ ...base, usageScope: "both", explanationEn: null })).toMatch(/영어 해설/);
+    expect(draftBankGateError({ ...base, usageScope: "general", explanationEn: null })).toBeNull();
+  });
+  it("정답 키: 범위·중복", () => {
+    expect(answerKeyError(["a", "b"], 1)).toBeNull();
+    expect(answerKeyError(["a", "b"], 2)).toMatch(/범위/);
+    expect(answerKeyError(["a", "A "], 0)).toMatch(/중복/);
+    expect(answerKeyError(["a"], 0)).toMatch(/2개/);
+  });
+});

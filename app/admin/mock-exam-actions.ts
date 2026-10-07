@@ -111,7 +111,7 @@ function fetchEligiblePage(db: ReturnType<typeof createAdminClient>, domains: st
     .from("problems")
     .select(
       `id, sat_domain, skill_code, format, similarity_group,
-       problem_versions!problem_versions_problem_id_fkey!inner(id, status, difficulty, passage, question, options)`,
+       problem_versions!problem_versions_problem_id_fkey!inner(id, status, difficulty, passage, question, options, statements, explanation_en, render_check)`,
     )
     .in("sat_domain", domains)
     .eq("status", "confirmed")
@@ -146,7 +146,10 @@ async function fetchEligibleProblems(db: ReturnType<typeof createAdminClient>, d
     // 채점 확정이 필요해 이번 라운드의 "제출 즉시 자동 채점" 정책과 맞지 않는다.
     if (row.format !== "mc" && row.format !== "spr") continue;
     // 2026-10-02 UAT C1 — 영어 SAT 시험에 한글 지문·질문·선택지 문항이 섞이지 않게 후보에서 뺀다(해설은 무관).
-    if (findHangulInStem({ passage: version.passage, question: version.question, options: version.options as string[] | null }).length) continue;
+    if (findHangulInStem({ passage: version.passage, question: version.question, options: version.options as string[] | null, statements: (version as { statements?: string[] | null }).statements ?? null }).length) continue;
+    // 2026-10-06 은행 게이트 — 영어 해설이 비었거나 렌더 검사가 통과하지 못한 문항은 조립 후보가 아니다(DB 세트 공개 게이트와 같은 기준).
+    if (!((version as { explanation_en?: string | null }).explanation_en ?? "").trim()) continue;
+    if ((version as { render_check?: { ok?: boolean } | null }).render_check?.ok !== true) continue;
     eligible.push({
       problemId: row.id,
       problemVersionId: version.id,
@@ -422,6 +425,8 @@ export async function assembleMockExamSet(input: AssembleMockExamSetInput): Prom
 
   // 출시 조건(2026-09-28): mst 세트는 조립 직후 모듈·경로별 정원 충족을 검증해 ready/incomplete를 기록한다.
   // incomplete면 공개·배정이 DB 트리거에서 거부되고, 학생은 Module 2에서 막히는 일 없이 애초에 시작할 수 없다.
+  // 2026-10-06 은행 게이트 — 조립 직후 모든 항목을 다시 검증한다(확정·미보관·용도·현재 공개본·한글·영어 해설·렌더 검사).
+  await assertSetItemsReady(db, setRow.id, true);
   const readiness = format === "mst" ? await recordMstReadiness(db, setRow.id, shortfalls) : null;
 
   revalidatePath("/admin");
@@ -519,6 +524,16 @@ export async function getMockExamPoolSummaryAction(): Promise<MockExamPoolRow[]>
   return Array.from(byKey.values()).sort((a, b) => a.satDomain.localeCompare(b.satDomain) || (a.skillCode ?? "").localeCompare(b.skillCode ?? ""));
 }
 
+/** 세트의 모든 항목을 DB 준비도 함수로 검증한다. 문제가 있으면 던지고, archiveOnFail 이면 방금 만든 초안 세트를 보관한다. */
+async function assertSetItemsReady(db: ReturnType<typeof createAdminClient>, examSetId: string, archiveOnFail: boolean): Promise<void> {
+  const { data, error } = await db.rpc("mock_exam_set_item_issues", { p_set_id: examSetId });
+  if (error) throw new Error(error.message);
+  const bad = ((data ?? []) as { problem_id: string; issue: string | null }[]).filter((r) => r.issue);
+  if (!bad.length) return;
+  if (archiveOnFail) await db.from("mock_exam_sets").update({ status: "archived", archived_at: new Date().toISOString() }).eq("id", examSetId);
+  throw new Error(`문제가 있는 문항이 있어 세트를 ${archiveOnFail ? "만들" : "공개할"} 수 없습니다: ${bad.slice(0, 5).map((r) => `${r.problem_id}(${r.issue})`).join(", ")}`);
+}
+
 export async function publishMockExamSet(examSetId: string): Promise<void> {
   const { adminUserId } = await requireAdmin();
   const db = createAdminClient();
@@ -541,6 +556,9 @@ export async function publishMockExamSet(examSetId: string): Promise<void> {
       throw new Error(`문항 구성이 완료되지 않아 공개할 수 없습니다: ${missing.join(", ")}`);
     }
   }
+
+  // 고정형 포함 모든 세트: 공개 직전에 항목을 다시 검증한다(DB 게이트가 최종 방어선).
+  await assertSetItemsReady(db, examSetId, false);
 
   const { count: itemCount, error: countErr } = await db
     .from("mock_exam_set_items")
