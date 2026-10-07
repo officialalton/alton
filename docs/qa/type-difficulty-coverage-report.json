@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T05:34:07.638Z",
+ "generatedAt": "2026-10-07T07:20:16.338Z",
  "seeds": 12,
  "compilerCount": 10,
  "totals": {
@@ -16,9 +16,9 @@
    "cells": 396
   },
   "skills": {
-   "OK": 85,
-   "WEAK": 3,
-   "EMPTY": 2,
+   "OK": 90,
+   "WEAK": 0,
+   "EMPTY": 0,
    "cells": 90
   }
  },
@@ -16096,7 +16096,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 7,
-     "independent": 70,
+     "independent": 71,
      "bySource": {
       "archetype": 72,
       "compiler": 10
@@ -16152,7 +16152,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 8,
-     "independent": 81,
+     "independent": 82,
      "bySource": {
       "archetype": 60,
       "lite": 24,
@@ -16228,7 +16228,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 5,
-     "independent": 51,
+     "independent": 52,
      "bySource": {
       "archetype": 24,
       "lite": 24,
@@ -16246,7 +16246,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 13,
-     "independent": 122,
+     "independent": 124,
      "bySource": {
       "archetype": 144,
       "compiler": 10
@@ -16285,7 +16285,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 5,
-     "independent": 44,
+     "independent": 45,
      "bySource": {
       "archetype": 48,
       "compiler": 10
@@ -16775,7 +16775,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 4,
-     "independent": 35,
+     "independent": 36,
      "bySource": {
       "archetype": 36,
       "compiler": 10
@@ -16792,7 +16792,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 4,
-     "independent": 37,
+     "independent": 36,
      "bySource": {
       "archetype": 36,
       "compiler": 10
@@ -16999,7 +16999,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 4,
-     "independent": 33,
+     "independent": 32,
      "bySource": {
       "archetype": 36,
       "compiler": 10
@@ -17016,7 +17016,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 5,
-     "independent": 45,
+     "independent": 43,
      "bySource": {
       "archetype": 48,
       "compiler": 10
@@ -17033,7 +17033,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 20,
-     "independent": 156,
+     "independent": 155,
      "bySource": {
       "archetype": 191,
       "compiler": 10
@@ -17313,7 +17313,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 13,
-     "independent": 126,
+     "independent": 127,
      "bySource": {
       "archetype": 144,
       "compiler": 10
@@ -17335,7 +17335,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 3,
-     "independent": 22,
+     "independent": 21,
      "bySource": {
       "archetype": 24,
       "compiler": 10
@@ -17352,7 +17352,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 4,
-     "independent": 33,
+     "independent": 34,
      "bySource": {
       "archetype": 36,
       "compiler": 10
@@ -17369,7 +17369,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 13,
-     "independent": 120,
+     "independent": 119,
      "bySource": {
       "archetype": 144,
       "compiler": 10
@@ -17425,7 +17425,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 16,
-     "independent": 120,
+     "independent": 119,
      "bySource": {
       "archetype": 144,
       "compiler": 10
@@ -17783,7 +17783,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 4,
-     "independent": 34,
+     "independent": 35,
      "bySource": {
       "archetype": 36,
       "compiler": 10
@@ -18192,7 +18192,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 3,
-     "independent": 29,
+     "independent": 27,
      "bySource": {
       "archetype": 24,
       "compiler": 10
@@ -19056,7 +19056,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 4,
-     "independent": 36,
+     "independent": 35,
      "bySource": {
       "archetype": 36,
       "compiler": 10
@@ -20599,7 +20599,7 @@
      "verifyFail": 0,
      "qaFail": 0,
      "variants": 6,
-     "independent": 57,
+     "independent": 58,
      "bySource": {
       "archetype": 36,
       "lite": 24,
@@ -23341,31 +23341,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 26,
-     "published": 26,
-     "explEnOk": 26,
+     "live": 30,
+     "published": 30,
+     "explEnOk": 30,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 8,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 25,
-     "published": 16,
-     "explEnOk": 16,
+     "live": 29,
+     "published": 20,
+     "explEnOk": 20,
      "explEnMissing": 0,
-     "mockScope": 10,
+     "mockScope": 14,
      "exposedInSets": 7,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 11,
-     "published": 9,
-     "explEnOk": 9,
+     "live": 15,
+     "published": 13,
+     "explEnOk": 13,
      "explEnMissing": 0,
-     "mockScope": 9,
+     "mockScope": 13,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
@@ -23377,31 +23377,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 32,
-     "published": 32,
-     "explEnOk": 32,
+     "live": 48,
+     "published": 48,
+     "explEnOk": 48,
      "explEnMissing": 0,
-     "mockScope": 2,
+     "mockScope": 18,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 19,
-     "published": 16,
-     "explEnOk": 16,
+     "live": 36,
+     "published": 33,
+     "explEnOk": 33,
      "explEnMissing": 0,
-     "mockScope": 12,
+     "mockScope": 29,
      "exposedInSets": 9,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 14,
-     "published": 12,
-     "explEnOk": 12,
+     "live": 30,
+     "published": 28,
+     "explEnOk": 28,
      "explEnMissing": 0,
-     "mockScope": 12,
+     "mockScope": 28,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
@@ -23413,31 +23413,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 31,
-     "published": 31,
-     "explEnOk": 31,
+     "live": 44,
+     "published": 44,
+     "explEnOk": 44,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 19,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 29,
-     "published": 23,
-     "explEnOk": 23,
+     "live": 41,
+     "published": 35,
+     "explEnOk": 35,
      "explEnMissing": 0,
-     "mockScope": 13,
+     "mockScope": 25,
      "exposedInSets": 11,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 6,
-     "published": 6,
-     "explEnOk": 6,
+     "live": 19,
+     "published": 19,
+     "explEnOk": 19,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 19,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
@@ -23449,31 +23449,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 32,
-     "published": 32,
-     "explEnOk": 32,
+     "live": 42,
+     "published": 42,
+     "explEnOk": 42,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 16,
      "exposedInSets": 4,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 33,
-     "published": 26,
-     "explEnOk": 26,
+     "live": 43,
+     "published": 36,
+     "explEnOk": 36,
      "explEnMissing": 0,
-     "mockScope": 13,
+     "mockScope": 23,
      "exposedInSets": 11,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 8,
-     "published": 6,
-     "explEnOk": 6,
+     "live": 18,
+     "published": 16,
+     "explEnOk": 16,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 16,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
@@ -23485,31 +23485,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 22,
-     "published": 22,
-     "explEnOk": 22,
+     "live": 32,
+     "published": 32,
+     "explEnOk": 32,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 14,
      "exposedInSets": 4,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 25,
-     "published": 24,
-     "explEnOk": 24,
+     "live": 37,
+     "published": 36,
+     "explEnOk": 36,
      "explEnMissing": 0,
-     "mockScope": 11,
+     "mockScope": 23,
      "exposedInSets": 7,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 8,
-     "published": 6,
-     "explEnOk": 6,
+     "live": 30,
+     "published": 28,
+     "explEnOk": 28,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 28,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
@@ -23521,31 +23521,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 22,
-     "published": 22,
-     "explEnOk": 22,
+     "live": 24,
+     "published": 24,
+     "explEnOk": 24,
      "explEnMissing": 0,
-     "mockScope": 8,
+     "mockScope": 10,
      "exposedInSets": 6,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 25,
-     "published": 21,
-     "explEnOk": 21,
+     "live": 27,
+     "published": 23,
+     "explEnOk": 23,
      "explEnMissing": 0,
-     "mockScope": 14,
+     "mockScope": 16,
      "exposedInSets": 13,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 16,
-     "published": 12,
-     "explEnOk": 12,
+     "live": 18,
+     "published": 14,
+     "explEnOk": 14,
      "explEnMissing": 0,
-     "mockScope": 12,
+     "mockScope": 14,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
@@ -23557,31 +23557,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 27,
-     "published": 27,
-     "explEnOk": 27,
+     "live": 44,
+     "published": 44,
+     "explEnOk": 44,
      "explEnMissing": 0,
-     "mockScope": 7,
+     "mockScope": 24,
      "exposedInSets": 6,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 35,
-     "published": 31,
-     "explEnOk": 31,
+     "live": 53,
+     "published": 49,
+     "explEnOk": 49,
      "explEnMissing": 0,
-     "mockScope": 17,
+     "mockScope": 35,
      "exposedInSets": 14,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 10,
-     "published": 6,
-     "explEnOk": 6,
+     "live": 28,
+     "published": 24,
+     "explEnOk": 24,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 24,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
@@ -23593,31 +23593,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 31,
-     "published": 31,
-     "explEnOk": 31,
+     "live": 62,
+     "published": 62,
+     "explEnOk": 62,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 37,
      "exposedInSets": 5,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 38,
-     "published": 23,
-     "explEnOk": 23,
+     "live": 67,
+     "published": 52,
+     "explEnOk": 52,
      "explEnMissing": 0,
-     "mockScope": 13,
+     "mockScope": 42,
      "exposedInSets": 9,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 12,
-     "published": 10,
-     "explEnOk": 10,
+     "live": 43,
+     "published": 41,
+     "explEnOk": 41,
      "explEnMissing": 0,
-     "mockScope": 10,
+     "mockScope": 41,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
@@ -23629,31 +23629,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 37,
-     "published": 37,
-     "explEnOk": 37,
+     "live": 44,
+     "published": 44,
+     "explEnOk": 44,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 13,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 10,
-     "published": 8,
-     "explEnOk": 8,
+     "live": 17,
+     "published": 15,
+     "explEnOk": 15,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 11,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 9,
-     "published": 7,
-     "explEnOk": 7,
+     "live": 28,
+     "published": 26,
+     "explEnOk": 26,
      "explEnMissing": 0,
-     "mockScope": 7,
+     "mockScope": 26,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
@@ -23665,31 +23665,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 22,
-     "published": 22,
-     "explEnOk": 22,
+     "live": 38,
+     "published": 38,
+     "explEnOk": 38,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 20,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 17,
-     "published": 15,
-     "explEnOk": 15,
+     "live": 33,
+     "published": 31,
+     "explEnOk": 31,
      "explEnMissing": 0,
-     "mockScope": 7,
+     "mockScope": 23,
      "exposedInSets": 4,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 7,
-     "published": 5,
-     "explEnOk": 5,
+     "live": 32,
+     "published": 30,
+     "explEnOk": 30,
      "explEnMissing": 0,
-     "mockScope": 5,
+     "mockScope": 30,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
@@ -23701,36 +23701,34 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 23,
-     "published": 23,
-     "explEnOk": 23,
+     "live": 60,
+     "published": 60,
+     "explEnOk": 60,
      "explEnMissing": 0,
-     "mockScope": 3,
+     "mockScope": 40,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 21,
-     "published": 19,
-     "explEnOk": 19,
+     "live": 58,
+     "published": 56,
+     "explEnOk": 56,
      "explEnMissing": 0,
-     "mockScope": 8,
+     "mockScope": 45,
      "exposedInSets": 4,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 4,
-     "published": 2,
-     "explEnOk": 2,
+     "live": 50,
+     "published": 48,
+     "explEnOk": 48,
      "explEnMissing": 0,
-     "mockScope": 2,
+     "mockScope": 48,
      "exposedInSets": 0,
-     "status": "WEAK",
-     "reasons": [
-      "게시 2 < 3"
-     ]
+     "status": "OK",
+     "reasons": []
     }
    }
   },
@@ -23739,31 +23737,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 29,
-     "published": 29,
-     "explEnOk": 29,
+     "live": 54,
+     "published": 54,
+     "explEnOk": 54,
      "explEnMissing": 0,
-     "mockScope": 3,
+     "mockScope": 28,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 11,
-     "published": 8,
-     "explEnOk": 8,
+     "live": 36,
+     "published": 33,
+     "explEnOk": 33,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 29,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 4,
-     "published": 4,
-     "explEnOk": 4,
+     "live": 35,
+     "published": 35,
+     "explEnOk": 35,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 35,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
@@ -23775,36 +23773,34 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 29,
-     "published": 29,
-     "explEnOk": 29,
+     "live": 39,
+     "published": 39,
+     "explEnOk": 39,
      "explEnMissing": 0,
-     "mockScope": 5,
+     "mockScope": 15,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 22,
-     "published": 19,
-     "explEnOk": 19,
+     "live": 31,
+     "published": 28,
+     "explEnOk": 28,
      "explEnMissing": 0,
-     "mockScope": 5,
+     "mockScope": 14,
      "exposedInSets": 2,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 3,
-     "published": 2,
-     "explEnOk": 2,
+     "live": 22,
+     "published": 21,
+     "explEnOk": 21,
      "explEnMissing": 0,
-     "mockScope": 2,
+     "mockScope": 21,
      "exposedInSets": 1,
-     "status": "WEAK",
-     "reasons": [
-      "게시 2 < 3"
-     ]
+     "status": "OK",
+     "reasons": []
     }
    }
   },
@@ -23813,36 +23809,34 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 34,
-     "published": 34,
-     "explEnOk": 34,
+     "live": 42,
+     "published": 42,
+     "explEnOk": 42,
      "explEnMissing": 0,
-     "mockScope": 4,
+     "mockScope": 12,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 18,
-     "published": 15,
-     "explEnOk": 15,
+     "live": 26,
+     "published": 23,
+     "explEnOk": 23,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 14,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 2,
-     "published": 0,
-     "explEnOk": 0,
+     "live": 20,
+     "published": 18,
+     "explEnOk": 18,
      "explEnMissing": 0,
-     "mockScope": 0,
+     "mockScope": 18,
      "exposedInSets": 0,
-     "status": "EMPTY",
-     "reasons": [
-      "게시 문항 0"
-     ]
+     "status": "OK",
+     "reasons": []
     }
    }
   },
@@ -23851,36 +23845,34 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 16,
-     "published": 16,
-     "explEnOk": 16,
+     "live": 21,
+     "published": 21,
+     "explEnOk": 21,
      "explEnMissing": 0,
-     "mockScope": 3,
+     "mockScope": 8,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 13,
-     "published": 11,
-     "explEnOk": 11,
+     "live": 18,
+     "published": 16,
+     "explEnOk": 16,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 11,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 1,
-     "published": 0,
-     "explEnOk": 0,
+     "live": 15,
+     "published": 14,
+     "explEnOk": 14,
      "explEnMissing": 0,
-     "mockScope": 0,
+     "mockScope": 14,
      "exposedInSets": 0,
-     "status": "EMPTY",
-     "reasons": [
-      "게시 문항 0"
-     ]
+     "status": "OK",
+     "reasons": []
     }
    }
   },
@@ -23889,31 +23881,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 26,
-     "published": 26,
-     "explEnOk": 26,
+     "live": 54,
+     "published": 54,
+     "explEnOk": 54,
      "explEnMissing": 0,
-     "mockScope": 0,
+     "mockScope": 28,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 27,
-     "published": 25,
-     "explEnOk": 25,
+     "live": 52,
+     "published": 50,
+     "explEnOk": 50,
      "explEnMissing": 0,
-     "mockScope": 20,
+     "mockScope": 45,
      "exposedInSets": 7,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 14,
-     "published": 12,
-     "explEnOk": 12,
+     "live": 45,
+     "published": 43,
+     "explEnOk": 43,
      "explEnMissing": 0,
-     "mockScope": 12,
+     "mockScope": 43,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
@@ -23925,36 +23917,34 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 29,
-     "published": 29,
-     "explEnOk": 29,
+     "live": 54,
+     "published": 54,
+     "explEnOk": 54,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 31,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 21,
-     "published": 17,
-     "explEnOk": 17,
+     "live": 46,
+     "published": 42,
+     "explEnOk": 42,
      "explEnMissing": 0,
-     "mockScope": 10,
+     "mockScope": 35,
      "exposedInSets": 5,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 3,
-     "published": 2,
-     "explEnOk": 2,
+     "live": 28,
+     "published": 27,
+     "explEnOk": 27,
      "explEnMissing": 0,
-     "mockScope": 2,
+     "mockScope": 27,
      "exposedInSets": 1,
-     "status": "WEAK",
-     "reasons": [
-      "게시 2 < 3"
-     ]
+     "status": "OK",
+     "reasons": []
     }
    }
   },
@@ -23963,31 +23953,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 29,
-     "published": 29,
-     "explEnOk": 29,
+     "live": 45,
+     "published": 45,
+     "explEnOk": 45,
      "explEnMissing": 0,
-     "mockScope": 9,
+     "mockScope": 25,
      "exposedInSets": 3,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 18,
-     "published": 17,
-     "explEnOk": 17,
+     "live": 33,
+     "published": 32,
+     "explEnOk": 32,
      "explEnMissing": 0,
-     "mockScope": 5,
+     "mockScope": 20,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 6,
-     "published": 6,
-     "explEnOk": 6,
+     "live": 29,
+     "published": 29,
+     "explEnOk": 29,
      "explEnMissing": 0,
-     "mockScope": 6,
+     "mockScope": 29,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
@@ -23999,31 +23989,31 @@
    "label": "Math",
    "cells": {
     "easy": {
-     "live": 25,
-     "published": 25,
-     "explEnOk": 25,
+     "live": 47,
+     "published": 47,
+     "explEnOk": 47,
      "explEnMissing": 0,
-     "mockScope": 0,
+     "mockScope": 22,
      "exposedInSets": 0,
      "status": "OK",
      "reasons": []
     },
     "medium": {
-     "live": 21,
-     "published": 20,
-     "explEnOk": 20,
+     "live": 39,
+     "published": 38,
+     "explEnOk": 38,
      "explEnMissing": 0,
-     "mockScope": 10,
+     "mockScope": 28,
      "exposedInSets": 5,
      "status": "OK",
      "reasons": []
     },
     "hard": {
-     "live": 11,
-     "published": 10,
-     "explEnOk": 10,
+     "live": 36,
+     "published": 35,
+     "explEnOk": 35,
      "explEnMissing": 0,
-     "mockScope": 10,
+     "mockScope": 35,
      "exposedInSets": 1,
      "status": "OK",
      "reasons": []
@@ -24435,51 +24425,6 @@
    "status": "WEAK",
    "reasons": [
     "독립 변형 1 < 3"
-   ]
-  },
-  {
-   "matrix": "c.skill(은행)",
-   "id": "one_variable_data",
-   "difficulty": "hard",
-   "status": "WEAK",
-   "reasons": [
-    "게시 2 < 3"
-   ]
-  },
-  {
-   "matrix": "c.skill(은행)",
-   "id": "probability",
-   "difficulty": "hard",
-   "status": "WEAK",
-   "reasons": [
-    "게시 2 < 3"
-   ]
-  },
-  {
-   "matrix": "c.skill(은행)",
-   "id": "inference_margin_error",
-   "difficulty": "hard",
-   "status": "EMPTY",
-   "reasons": [
-    "게시 문항 0"
-   ]
-  },
-  {
-   "matrix": "c.skill(은행)",
-   "id": "evaluating_statistical_claims",
-   "difficulty": "hard",
-   "status": "EMPTY",
-   "reasons": [
-    "게시 문항 0"
-   ]
-  },
-  {
-   "matrix": "c.skill(은행)",
-   "id": "lines_angles_triangles",
-   "difficulty": "hard",
-   "status": "WEAK",
-   "reasons": [
-    "게시 2 < 3"
    ]
   }
  ]

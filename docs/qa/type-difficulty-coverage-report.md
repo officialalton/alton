@@ -1,11 +1,11 @@
 # 문항 유형 × 난이도 커버리지 점검
-생성: 2026-10-07T05:34:07.634Z · 시드/원형 12 · 컴파일러 배치 10 · 소요 140s · 재실행: `npm run check:type-difficulty` (JSON: docs/qa/type-difficulty-coverage-report.json)
+생성: 2026-10-07T07:20:16.336Z · 시드/원형 12 · 컴파일러 배치 10 · 소요 47s · 재실행: `npm run check:type-difficulty` (JSON: docs/qa/type-difficulty-coverage-report.json)
 
 ## 요약
 - (a) 자료 조합 303 × 3: 칸 909 = OK 909 · WEAK 0 · EMPTY 0
 - (b) 종류 132 × 3(원형 있는 종류 132): 칸 396 = OK 395 · WEAK 1 · EMPTY 0
-- (c) skill 30 × 3(Math 19 + RW 11): 칸 90 = OK 85 · WEAK 3 · EMPTY 2 — 원격 비프로덕션 worpsqwqgnspddnrtnvq: 문항 3134·게시 버전 2503·세트 7·세트 항목 534
-- (d) 비어 있거나 약한 칸 6개(아래 목록)
+- (c) skill 30 × 3(Math 19 + RW 11): 칸 90 = OK 90 · WEAK 0 · EMPTY 0 — 원격 비프로덕션 worpsqwqgnspddnrtnvq: 문항 4122·게시 버전 3491·세트 11·세트 항목 1122
+- (d) 비어 있거나 약한 칸 1개(아래 목록)
 
 ## 방법
 - 모의고사 구성과 무관하다. 칸의 판정은 "그 유형·난이도가 존재·산출·건강한가"만 본다.
@@ -326,10 +326,10 @@
 ## (b) 종류 × 난이도
 | skill.kind | easy | medium | hard |
 |---|---|---|---|
-| equivalent_expressions.polynomial_distribution | OK 82/82 i70 | OK 106/106 i93 | OK 154/154 i127 |
-| ratios_rates_units.proportion | OK 94/94 i81 | OK 94/94 i88 | OK 298/298 i257 |
-| ratios_rates_units.chained_conversion | OK 58/58 i50 | OK 58/58 i51 | OK 154/154 i122 |
-| linear_equations_one_var.solve | OK 34/34 i22 | OK 58/58 i44 | OK 106/106 i75 |
+| equivalent_expressions.polynomial_distribution | OK 82/82 i71 | OK 106/106 i93 | OK 154/154 i127 |
+| ratios_rates_units.proportion | OK 94/94 i82 | OK 94/94 i88 | OK 298/298 i257 |
+| ratios_rates_units.chained_conversion | OK 58/58 i50 | OK 58/58 i52 | OK 154/154 i124 |
+| linear_equations_one_var.solve | OK 34/34 i22 | OK 58/58 i45 | OK 106/106 i75 |
 | linear_equations_one_var.word_problem_translate | OK 46/46 i36 | OK 46/46 i37 | OK 154/154 i135 |
 | linear_equations_one_var.literal_rearrange | OK 34/34 i31 | OK 34/34 i34 | OK 106/106 i100 |
 | probability.simple | OK 94/94 i78 | OK 94/94 i83 | OK 298/298 i262 |
@@ -338,32 +338,32 @@
 | nonlinear_equations_systems.root | OK 58/58 i46 | OK 82/82 i69 | OK 202/202 i180 |
 | nonlinear_equations_systems.sum_of_roots | OK 46/46 i36 | OK 46/46 i35 | OK 154/154 i124 |
 | nonlinear_equations_systems.product_of_roots | OK 34/34 i23 | OK 34/34 i24 | OK 106/106 i82 |
-| nonlinear_equations_systems.num_real_solutions | OK 46/46 i35 | OK 46/46 i37 | OK 154/154 i129 |
+| nonlinear_equations_systems.num_real_solutions | OK 46/46 i36 | OK 46/46 i36 | OK 154/154 i129 |
 | nonlinear_equations_systems.irrational_sum_of_roots | OK 22/22 i11 | OK 34/34 i23 | OK 106/106 i82 |
 | nonlinear_equations_systems.irrational_product_of_roots | OK 22/22 i11 | OK 22/22 i10 | OK 106/106 i78 |
 | nonlinear_equations_systems.irrational_root_radical_form | OK 22/22 i11 | OK 22/22 i13 | OK 106/106 i86 |
-| nonlinear_equations_systems.linear_quadratic_intersection | OK 46/46 i33 | OK 58/58 i45 | OK 201/202 i156 |
+| nonlinear_equations_systems.linear_quadratic_intersection | OK 46/46 i32 | OK 58/58 i43 | OK 201/202 i155 |
 | nonlinear_equations_systems.parameter_discriminant | OK 34/34 i23 | OK 46/46 i33 | OK 154/154 i133 |
 | nonlinear_functions.evaluate | OK 70/70 i57 | OK 70/70 i57 | OK 202/202 i172 |
 | nonlinear_functions.vertex_x | OK 58/58 i47 | OK 58/58 i45 | OK 202/202 i178 |
 | nonlinear_functions.vertex_y | OK 46/46 i32 | OK 70/70 i59 | OK 202/202 i165 |
-| nonlinear_functions.find_x_for_value | OK 46/46 i38 | OK 46/46 i35 | OK 154/154 i126 |
-| nonlinear_functions.interpret_a | OK 34/34 i22 | OK 46/46 i33 | OK 154/154 i120 |
-| nonlinear_functions.interpret_b | OK 34/34 i25 | OK 46/46 i35 | OK 154/154 i120 |
+| nonlinear_functions.find_x_for_value | OK 46/46 i38 | OK 46/46 i35 | OK 154/154 i127 |
+| nonlinear_functions.interpret_a | OK 34/34 i21 | OK 46/46 i34 | OK 154/154 i119 |
+| nonlinear_functions.interpret_b | OK 34/34 i25 | OK 46/46 i35 | OK 154/154 i119 |
 | linear_inequalities.solve_one_var | OK 58/58 i40 | OK 82/82 i63 | OK 202/202 i145 |
 | linear_inequalities.point_in_solution | OK 58/58 i40 | OK 58/58 i44 | OK 202/202 i147 |
 | linear_inequalities.table_verification | OK 46/46 i30 | OK 46/46 i35 | OK 154/154 i127 |
 | linear_functions.evaluate | OK 46/46 i36 | OK 46/46 i36 | OK 154/154 i132 |
 | linear_functions.find_x_for_value | OK 46/46 i37 | OK 46/46 i36 | OK 154/154 i128 |
 | linear_functions.slope_from_two_points | OK 58/58 i46 | OK 58/58 i44 | OK 202/202 i171 |
-| linear_functions.interpret_slope | OK 46/46 i34 | OK 58/58 i48 | OK 202/202 i177 |
+| linear_functions.interpret_slope | OK 46/46 i35 | OK 58/58 i48 | OK 202/202 i177 |
 | linear_functions.interpret_intercept | OK 46/46 i37 | OK 58/58 i51 | OK 202/202 i173 |
 | linear_equations_two_var.intersection_x | OK 46/46 i33 | OK 46/46 i33 | OK 154/154 i134 |
 | linear_equations_two_var.intersection_y | OK 22/22 i12 | OK 34/34 i23 | OK 106/106 i83 |
 | linear_equations_two_var.intersection_sum | OK 22/22 i9 | OK 34/34 i22 | OK 106/106 i83 |
 | linear_equations_two_var.slope | OK 58/58 i39 | OK 58/58 i40 | OK 202/202 i162 |
 | linear_equations_two_var.intercept | OK 34/34 i24 | OK 46/46 i34 | OK 154/154 i121 |
-| linear_equations_two_var.num_solutions | OK 46/46 i39 | OK 34/34 i29 | OK 154/154 i125 |
+| linear_equations_two_var.num_solutions | OK 46/46 i39 | OK 34/34 i27 | OK 154/154 i125 |
 | systems_linear.substitution_solve | OK 36/36 i32 | OK 36/36 i31 | OK 144/144 i117 |
 | systems_linear.elimination_value | OK 24/24 i22 | OK 36/36 i29 | OK 96/96 i76 |
 | systems_linear.param_no_solution | OK 24/24 i21 | OK 36/36 i29 | OK 144/144 i121 |
@@ -379,7 +379,7 @@
 | one_variable_data.median | OK 94/94 i77 | OK 106/106 i89 | OK 394/394 i344 |
 | one_variable_data.range | OK 82/82 i66 | OK 70/70 i53 | OK 298/298 i252 |
 | one_variable_data.grouped_median_interval | OK 58/58 i43 | OK 58/58 i46 | OK 250/250 i210 |
-| two_variable_data.cell | OK 46/46 i36 | OK 34/34 i27 | OK 154/154 i132 |
+| two_variable_data.cell | OK 46/46 i35 | OK 34/34 i27 | OK 154/154 i132 |
 | two_variable_data.row_total | OK 46/46 i36 | OK 34/34 i23 | OK 154/154 i133 |
 | two_variable_data.conditional_share | OK 46/46 i37 | OK 58/58 i48 | OK 202/202 i184 |
 | two_variable_data.scatter_equation | OK 36/51 i33 | OK 36/51 i35 | OK 192/217 i170 |
@@ -406,7 +406,7 @@
 | circles.sector_area | OK 70/70 i57 | OK 70/70 i58 | OK 198/202 i169 |
 | circles.central_from_inscribed | OK 58/58 i47 | OK 58/58 i47 | OK 154/154 i131 |
 | circles.inscribed_from_central | OK 46/46 i37 | OK 46/46 i36 | OK 106/106 i97 |
-| circles.circle_equation_transform | OK 70/70 i59 | OK 70/70 i57 | OK 202/202 i169 |
+| circles.circle_equation_transform | OK 70/70 i59 | OK 70/70 i58 | OK 202/202 i169 |
 | linear_functions.construct_equation_from_graph | OK 48/48 i42 | OK 48/48 i43 | OK 192/192 i175 |
 | systems_linear.system_from_graph | OK 24/24 i20 | OK 24/24 i22 | OK 96/96 i71 |
 | linear_inequalities.inequality_from_graph | OK 24/24 i19 | OK 24/24 i21 | OK 96/96 i72 |
@@ -462,25 +462,25 @@
 ## (c) skill × 난이도(은행)
 | skill | 영역 | easy | medium | hard |
 |---|---|---|---|---|
-| linear_equations_one_var | Math | OK 26 m4 x3 | OK 16 m10 x7 | OK 9 m9 x3 |
-| linear_functions | Math | OK 32 m2 x2 | OK 16 m12 x9 | OK 12 m12 x2 |
-| linear_equations_two_var | Math | OK 31 m6 x2 | OK 23 m13 x11 | OK 6 m6 x2 |
-| systems_linear | Math | OK 32 m6 x4 | OK 26 m13 x11 | OK 6 m6 x2 |
-| linear_inequalities | Math | OK 22 m4 x4 | OK 24 m11 x7 | OK 6 m6 x0 |
-| equivalent_expressions | Math | OK 22 m8 x6 | OK 21 m14 x13 | OK 12 m12 x3 |
-| nonlinear_equations_systems | Math | OK 27 m7 x6 | OK 31 m17 x14 | OK 6 m6 x3 |
-| nonlinear_functions | Math | OK 31 m6 x5 | OK 23 m13 x9 | OK 10 m10 x3 |
-| ratios_rates_units | Math | OK 37 m6 x2 | OK 8 m4 x3 | OK 7 m7 x0 |
-| percentages | Math | OK 22 m4 x1 | OK 15 m7 x4 | OK 5 m5 x1 |
-| one_variable_data | Math | OK 23 m3 x1 | OK 19 m8 x4 | WEAK 2 m2 x0 |
-| two_variable_data | Math | OK 29 m3 x0 | OK 8 m4 x1 | OK 4 m4 x1 |
-| probability | Math | OK 29 m5 x0 | OK 19 m5 x2 | WEAK 2 m2 x1 |
-| inference_margin_error | Math | OK 34 m4 x1 | OK 15 m6 x1 | EMPTY (초안 2) |
-| evaluating_statistical_claims | Math | OK 16 m3 x1 | OK 11 m6 x3 | EMPTY (초안 1) |
-| area_volume | Math | OK 26 m0 x0 | OK 25 m20 x7 | OK 12 m12 x1 |
-| lines_angles_triangles | Math | OK 29 m6 x3 | OK 17 m10 x5 | WEAK 2 m2 x1 |
-| right_triangles_trigonometry | Math | OK 29 m9 x3 | OK 17 m5 x1 | OK 6 m6 x0 |
-| circles | Math | OK 25 m0 x0 | OK 20 m10 x5 | OK 10 m10 x1 |
+| linear_equations_one_var | Math | OK 30 m8 x3 | OK 20 m14 x7 | OK 13 m13 x3 |
+| linear_functions | Math | OK 48 m18 x2 | OK 33 m29 x9 | OK 28 m28 x2 |
+| linear_equations_two_var | Math | OK 44 m19 x2 | OK 35 m25 x11 | OK 19 m19 x2 |
+| systems_linear | Math | OK 42 m16 x4 | OK 36 m23 x11 | OK 16 m16 x2 |
+| linear_inequalities | Math | OK 32 m14 x4 | OK 36 m23 x7 | OK 28 m28 x0 |
+| equivalent_expressions | Math | OK 24 m10 x6 | OK 23 m16 x13 | OK 14 m14 x3 |
+| nonlinear_equations_systems | Math | OK 44 m24 x6 | OK 49 m35 x14 | OK 24 m24 x3 |
+| nonlinear_functions | Math | OK 62 m37 x5 | OK 52 m42 x9 | OK 41 m41 x3 |
+| ratios_rates_units | Math | OK 44 m13 x2 | OK 15 m11 x3 | OK 26 m26 x0 |
+| percentages | Math | OK 38 m20 x1 | OK 31 m23 x4 | OK 30 m30 x1 |
+| one_variable_data | Math | OK 60 m40 x1 | OK 56 m45 x4 | OK 48 m48 x0 |
+| two_variable_data | Math | OK 54 m28 x0 | OK 33 m29 x1 | OK 35 m35 x1 |
+| probability | Math | OK 39 m15 x0 | OK 28 m14 x2 | OK 21 m21 x1 |
+| inference_margin_error | Math | OK 42 m12 x1 | OK 23 m14 x1 | OK 18 m18 x0 |
+| evaluating_statistical_claims | Math | OK 21 m8 x1 | OK 16 m11 x3 | OK 14 m14 x0 |
+| area_volume | Math | OK 54 m28 x0 | OK 50 m45 x7 | OK 43 m43 x1 |
+| lines_angles_triangles | Math | OK 54 m31 x3 | OK 42 m35 x5 | OK 27 m27 x1 |
+| right_triangles_trigonometry | Math | OK 45 m25 x3 | OK 32 m20 x1 | OK 29 m29 x0 |
+| circles | Math | OK 47 m22 x0 | OK 38 m28 x5 | OK 35 m35 x1 |
 | central_ideas_details | RW | OK 120 m98 x6 | OK 243 m232 x9 | OK 51 m51 x3 |
 | inferences | RW | OK 21 m6 x2 | OK 17 m11 x11 | OK 4 m4 x1 |
 | command_of_evidence_text | RW | OK 15 m6 x2 | OK 23 m16 x14 | OK 10 m10 x2 |
@@ -497,8 +497,3 @@
 | 매트릭스 | id | 난이도 | 상태 | 사유 |
 |---|---|---|---|---|
 | b.종류 | equivalent_expressions.rational_equivalence | easy | WEAK | 독립 변형 1 < 3 |
-| c.skill(은행) | one_variable_data | hard | WEAK | 게시 2 < 3 |
-| c.skill(은행) | probability | hard | WEAK | 게시 2 < 3 |
-| c.skill(은행) | inference_margin_error | hard | EMPTY | 게시 문항 0 |
-| c.skill(은행) | evaluating_statistical_claims | hard | EMPTY | 게시 문항 0 |
-| c.skill(은행) | lines_angles_triangles | hard | WEAK | 게시 2 < 3 |
