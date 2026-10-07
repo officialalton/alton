@@ -56,6 +56,7 @@ async function seedConfirmedProblem(
       values ('mc', '${label} ${alphaOf(seedSkillCounter)} passage', '["A","B","C","D"]'::jsonb, 0, 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
       returning id;
     `);
+    psql(`update problem_versions set render_check = '{"ok": true, "issues": []}'::jsonb, explanation_en = 'Because.' where problem_id = '${problemId}';`);
     return { problemId };
   }
   // SPR은 problems 테이블에 answers 컬럼이 없다(problem_versions에만 있음) — 트리거가 만든
@@ -66,7 +67,7 @@ async function seedConfirmedProblem(
     values ('spr', '${label} ${alphaOf(seedSkillCounter)} passage', 'because', 'confirmed', '${difficulty}', '${skillCode}', '${adminUserId}')
     returning id;
   `);
-  psql(`update problem_versions set answers = '["5"]'::jsonb where problem_id = '${problemId}' and version_no = 1;`);
+  psql(`update problem_versions set answers = '["5"]'::jsonb, render_check = '{"ok": true, "issues": []}'::jsonb, explanation_en = 'Because.' where problem_id = '${problemId}' and version_no = 1;`);
   return { problemId };
 }
 

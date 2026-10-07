@@ -427,7 +427,7 @@ describe("표준 렌더링 검증 공개 게이트 (20261365) — 검증 통과 
       `insert into problems (format, passage, subject_id, status, created_by) values ('mc', ${quote(passage)}, '${SUBJECT_ID}', 'draft', '${ADMIN_ID}') returning id;`
     );
     return psql(
-      `update problem_versions set options = '["1","2","3","4"]'::jsonb, correct_index = 0, explanation = 'e', passage = ${quote(passage)}, figure = ${figure}::jsonb
+      `update problem_versions set options = '["1","2","3","4"]'::jsonb, correct_index = 0, explanation = 'e', explanation_en = 'e', passage = ${quote(passage)}, figure = ${figure}::jsonb
        where problem_id = '${pid}' and version_no = 1 returning id;`
     );
   }
@@ -481,8 +481,10 @@ describe("표준 렌더링 검증 공개 게이트 (20261365) — 검증 통과 
     expect(psql(`select jsonb_array_length(statements) from problem_versions where id = '${v2}';`)).toBe("2");
   });
 
-  it("그림이 없는 문제는 검증 기록 없이도 공개된다(기존 흐름 유지)", () => {
+  it("그림이 없는 문제도 검증 기록이 있어야 공개된다(2026-10-06 은행 게이트 — render_check 필수)", () => {
     const v = draftWithFigure("null", "What is 2 + 2?");
+    expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("검증 기록이 없습니다");
+    psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
     expect(psql(`select status from problem_versions where id = '${v}';`)).toBe("published");
   });
@@ -563,7 +565,7 @@ describe("spr — 숫자 답 자동 채점·재입력·공개 검사", () => {
       `insert into problems (format, passage, subject_id, status, created_by) values ('spr', 'x + 3 = 10', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
     );
     psql(`insert into problem_keywords (problem_id, keyword_id) values ('${id}', '${kw}');`);
-    psql(`update problem_versions set answers = '${JSON.stringify(answers)}'::jsonb, explanation = 'x = 7' where problem_id = '${id}';`);
+    psql(`update problem_versions set answers = '${JSON.stringify(answers)}'::jsonb, explanation = 'x = 7', explanation_en = 'x = 7' where problem_id = '${id}';`);
     return id;
   }
 
@@ -629,6 +631,7 @@ describe("figure — 그림이 있는 초안은 렌더링 검증을 거쳐야 �
     psql(`select save_problem_draft_version('${id}', '그래프', '["a","b","c","d"]'::jsonb, 1, '해설', 'medium', '${ADMIN_ID}', null, '${fig2}'::jsonb, true);`);
     expect(psql(`select figure_checked from problem_versions where id = '${v}';`)).toBe("f");
     psql(`select mark_problem_figure_checked('${v}', true);`);
+    psql(`update problem_versions set explanation_en = 'Explanation.' where id = '${v}';`);
     expect(fails(() => psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`))).toContain("검증 뒤 그림이 바뀌었습니다");
     psql(`select set_problem_render_check('${v}', '{"ok":true,"renderer":"std-1","issues":[]}'::jsonb);`);
     psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
