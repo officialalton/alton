@@ -66,6 +66,8 @@ export type BulkRequest = {
   strictSpr?: boolean;
   /** 자료 원형이 섞이면 시작 전에 커버리지 게이트 보고서를 확인한다(기본: coverage-gate-report.json). 오너 승인 부분집합은 allowItems. */
   coverageReport?: GateReport | null; allowItems?: string[];
+  /** true 면 같은 원형 인스턴스끼리는 근접 중복 검사에서 제외하고, 정확히 같은 본문만 막는다(2026-10-07 오너 정정). */
+  sameArchetypeOk?: boolean;
 };
 const pushStat = (st: BulkStats, id: string, ok: boolean) => { const r = (st.byArchetype[id] ??= { attempts: 0, accepted: 0 }); r.attempts++; if (ok) r.accepted++; };
 
@@ -78,7 +80,7 @@ export function produceFromArchetypes(archetypes: Archetype[], req: BulkRequest)
   assertCoverageGate(archetypes, { report: req.coverageReport, allowItems: req.allowItems });
   const thr = req.threshold ?? 0.6, cap = req.maxPerGroup ?? 30, maxAttempts = (req.maxAttemptsPerItem ?? 60) * req.count; const q = req.sprQuota ?? 0.25;
   const stats: BulkStats = { attempts: 0, genFail: 0, verifyFail: 0, duplicate: 0, groupCap: 0, accepted: 0, byArchetype: {}, byGroup: {}, format: { quota: q, buckets: {}, shortfalls: [] } };
-  const records: PassedRecord[] = []; const accepted = new Map<string, Set<string>[]>(); const seeds = new Map<string, number>();
+  const records: PassedRecord[] = []; const accepted = new Map<string, { sh: Set<string>; arch: string }[]>(); const exactSeen = new Set<string>(); const seeds = new Map<string, number>();
   const capablePool = new Map<string, Archetype[]>(); const rr = new Map<string, number>(); const shortSeen = new Set<string>();
   const capableIn = (b: string) => { let l = capablePool.get(b); if (!l) { l = archetypes.filter((x) => bucketOf(x) === b && sprCapability(x).capable); capablePool.set(b, l); } return l; };
   let i = 0;
@@ -105,9 +107,12 @@ export function produceFromArchetypes(archetypes: Archetype[], req: BulkRequest)
     if (!v.ok) { stats.verifyFail++; pushStat(stats, a.id, false); continue; }
     const sub = `${a.groupId ?? a.id}/${g.inst.variant}`;
     if ((stats.byGroup[sub] ?? 0) >= cap) { stats.groupCap++; pushStat(stats, a.id, false); continue; }
-    const sh = bodyShingles(g.inst); const pool = [...(accepted.get(a.skill) ?? []), ...(req.existing?.get(a.skill) ?? [])];
-    if (pool.some((p) => jaccard(p, sh) >= thr)) { stats.duplicate++; pushStat(stats, a.id, false); continue; }
-    (accepted.get(a.skill) ?? accepted.set(a.skill, []).get(a.skill)!).push(sh);
+    const sh = bodyShingles(g.inst); const ek = `${g.inst.stimulus}\u0000${g.inst.question}\u0000${g.inst.options.join("\u0001")}`.toLowerCase().replace(/\s+/g, " ");
+    const mine = accepted.get(a.skill) ?? accepted.set(a.skill, []).get(a.skill)!;
+    const dupHit = req.sameArchetypeOk ? (exactSeen.has(ek) || mine.some((p) => p.arch !== a.id && jaccard(p.sh, sh) >= thr) || (req.existing?.get(a.skill) ?? []).some((p) => jaccard(p, sh) >= thr))
+      : [...mine.map((p) => p.sh), ...(req.existing?.get(a.skill) ?? [])].some((p) => jaccard(p, sh) >= thr);
+    if (dupHit) { stats.duplicate++; pushStat(stats, a.id, false); continue; }
+    exactSeen.add(ek); mine.push({ sh, arch: a.id });
     stats.byGroup[sub] = (stats.byGroup[sub] ?? 0) + 1; stats.accepted++; pushStat(stats, a.id, true);
     bs.accepted++; if (fmt === "spr") bs.spr++; bs.target = Math.floor(bs.accepted * q + 0.5 + 1e-9);
     records.push(archetypeRecord(a, g.inst, seed, req.runId, v.verified));
