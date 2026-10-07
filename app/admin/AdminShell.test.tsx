@@ -200,7 +200,7 @@ describe("AdminShell", () => {
 
   it("2026-09-10(UI/UX 1차 리뷰 지적): 모바일 '운영' 드로어를 열어도 '개발 로그'가 보이지 않는다", () => {
     render(<AdminShell {...baseProps} />);
-    fireEvent.click(screen.getByLabelText("메뉴 열기"));
+    fireEvent.click(screen.getByLabelText("Open menu"));
     expect(screen.getByText("운영")).toBeInTheDocument();
     expect(screen.queryByText("개발 로그")).not.toBeInTheDocument();
   });
@@ -295,7 +295,7 @@ describe("AdminShell", () => {
 
     it("모바일 드로어에도 같은 배지가 표시된다", () => {
       render(<AdminShell {...baseProps} initialMessengerUnread={2} />);
-      fireEvent.click(screen.getByLabelText("메뉴 열기"));
+      fireEvent.click(screen.getByLabelText("Open menu"));
       expect(screen.getByTestId("drawer-badge-messenger")).toHaveTextContent("2");
     });
 

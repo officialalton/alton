@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ARCHETYPES } from "./registry";
 import { produceFromArchetypes, produceFromCompilers } from "./bulk";
 import { jaccard, shingles } from "./sweep";
+import realReport from "./coverage-gate-report.json";
 import { checkContent } from "@/lib/problem-content-check";
 import { checkFigure } from "@/lib/problem-figures/check";
 import { composeProblemText } from "@/lib/problem-question";
@@ -92,8 +93,13 @@ describe("produceFromArchetypes — 자료 원형은 게이트를 지킨다", ()
   const fig = ARCHETYPES.filter((a) => a.figureItem === "probability.simple.TW.P");
   it("게이트(전체 ok=false)를 통과하지 못한 채로는 자료 원형 대량 생성을 거부한다", () => {
     expect(fig.length).toBeGreaterThan(0);
-    expect(() => produceFromArchetypes(fig, { runId: "g", count: 4, sprQuota: 0 })).toThrow();
+    expect(() => produceFromArchetypes(fig, { runId: "g", count: 4, sprQuota: 0, coverageReport: { ...(realReport as object), ok: false } as never })).toThrow();
   });
+  it("실제 게이트 보고서가 전체 통과(ok=true)이면 allowItems 없이도 산출한다", () => {
+    expect((realReport as { ok: boolean }).ok).toBe(true);
+    const { records } = produceFromArchetypes(fig, { runId: "g", count: 4, seedStart: 0, sprQuota: 0 });
+    expect(records.length).toBeGreaterThan(0);
+  }, 60_000);
   it("검수를 통과한 조합을 allowItems 로 명시하면 산출한다", () => {
     const { records } = produceFromArchetypes(fig, { runId: "g", count: 8, seedStart: 0, sprQuota: 0, allowItems: ["probability.simple.TW.P"] });
     expect(records).toHaveLength(8);

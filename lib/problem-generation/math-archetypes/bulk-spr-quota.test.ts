@@ -1,5 +1,6 @@
 // 대량 생성기의 형식 쿼터(수량의 25% 는 항상 SPR) — 소량 배치에서도 누적 비율이 25% 에 수렴하고, mc/spr 변형은 같은 유사문항 그룹을 공유한다.
 import { describe, expect, it } from "vitest";
+import realReport from "./coverage-gate-report.json";
 import { FTVD_HARD, FTVD_ALL } from "./skills/two-variable-data-figure";
 import { ARCHETYPES } from "./registry";
 import { produceFromArchetypes, produceFromCompilers, type PassedRecord } from "./bulk";
@@ -97,9 +98,9 @@ describe("컴파일러 경로(easy/medium)도 25% — 단, 컴파일러의 손�
 });
 
 describe("승인 부분집합 — 실제 게이트 보고서로 파일럿 15항목만 연다", () => {
-  it("보고서(coverage-gate-report.json)가 전체 ok=false 이면 allowItems 없이는 거부, 파일럿 15항목을 allowItems 로 주면 20건(SPR 5건) 산출", () => {
+  it("보고서가 ok=false 이면 allowItems 없이는 거부하고, 실제 보고서(전체 통과)로는 파일럿 15항목이 20건(SPR 5건) 산출된다", () => {
     const items = [...new Set(FTVD_HARD.map((a) => a.figureItem!))];
-    expect(() => produceFromArchetypes(FTVD_HARD, { runId: "real", count: 4 })).toThrow(CoverageGateError);
+    expect(() => produceFromArchetypes(FTVD_HARD, { runId: "real", count: 4, coverageReport: { ...(realReport as object), ok: false } as never })).toThrow(CoverageGateError);
     const { records } = produceFromArchetypes(FTVD_HARD, { runId: "real", count: 20, allowItems: items });
     expect(records).toHaveLength(20); expect(sprCount(records)).toBe(sprTarget(20));
     for (const r of records) { const p = r.problem as { figure: unknown }; expect(p.figure).toBeTruthy(); expect((r.quality.mockExamGeneration as { figureItem?: string }).figureItem).toBeTruthy(); }
