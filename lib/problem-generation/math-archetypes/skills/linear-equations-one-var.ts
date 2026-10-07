@@ -1,5 +1,6 @@
 // linear_equations_one_var hard 원형 12개(solve·word_problem_translate·literal_rearrange × 연산자 4종).
 import { GenFail, type Archetype } from "../types";
+import { LE1_SPR_B_ARCHETYPES } from "./linear-equations-one-var.spr-b";
 import { facts, finish, lin, M, pn, spin, withParams } from "../text";
 
 const SKILL = "linear_equations_one_var";
@@ -398,4 +399,5 @@ export const LE_ARCHETYPES: Archetype[] = [
       });
     },
   },
+  ...LE1_SPR_B_ARCHETYPES,
 ];
