@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
   if (!token) {
-    return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent("유효하지 않은 확인 링크입니다."), url));
+    return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent("This confirmation link is not valid."), url));
   }
 
   const admin = createAdminClient();
@@ -25,12 +25,12 @@ export async function GET(request: Request) {
   const peeked = peekData?.[0];
   if (peekError || !peeked) {
     return NextResponse.redirect(
-      new URL("/login?error=" + encodeURIComponent("유효하지 않거나 만료된 확인 링크입니다."), url)
+      new URL("/login?error=" + encodeURIComponent("This confirmation link is invalid or has expired."), url)
     );
   }
   if (peeked.status === "expired") {
     return NextResponse.redirect(
-      new URL("/login?error=" + encodeURIComponent("만료된 확인 링크입니다. 관리자에게 재발급을 요청해주세요."), url)
+      new URL("/login?error=" + encodeURIComponent("This confirmation link has expired. Please ask support to send a new one."), url)
     );
   }
 

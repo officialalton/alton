@@ -13,14 +13,14 @@ export type LibraryTreeDoc = {
 };
 
 export type LibraryTreeKeywordGroup = {
-  /** null = 이 단원에 키워드 없이 걸린 적 없음(안 씀) / "단원 미지정" 묶음 안에서 키워드조차 없는 자료용. */
+  /** null = 이 단원에 키워드 없이 걸린 적 없음(안 씀) / "No unit assigned" 묶음 안에서 키워드조차 없는 자료용. */
   keywordId: string | null;
   label: string;
   docs: LibraryTreeDoc[];
 };
 
 export type LibraryTreeUnitGroup = {
-  /** null = "단원 미지정" 묶음. */
+  /** null = "No unit assigned" 묶음. */
   unitId: string | null;
   unitTitle: string;
   keywordGroups: LibraryTreeKeywordGroup[];
@@ -34,8 +34,8 @@ export type LibrarySubjectTree = {
   flatDocIds: string[];
 };
 
-const UNASSIGNED_UNIT_TITLE = "단원 미지정";
-const NO_KEYWORD_LABEL = "키워드 미지정";
+const UNASSIGNED_UNIT_TITLE = "No unit assigned";
+const NO_KEYWORD_LABEL = "No keyword assigned";
 
 export type BuildSubjectMaterialTreeOptions = {
   /**
@@ -140,7 +140,7 @@ export async function buildSubjectMaterialTree(
       if (keywordGroups.length > 0) unitGroups.push({ unitId: u.id, unitTitle: u.unit_title, keywordGroups });
     }
 
-    // "단원 미지정": 어떤 단원에도 안 붙은 키워드의 자료 + 대표 키워드 자체가 없는 자료.
+    // "No unit assigned": 어떤 단원에도 안 붙은 키워드의 자료 + 대표 키워드 자체가 없는 자료.
     const unassignedGroups: LibraryTreeKeywordGroup[] = [];
     for (const kId of keywordIdsInSubject) {
       if (assignedKeywordIds.has(kId)) continue;

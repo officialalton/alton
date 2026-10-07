@@ -7,9 +7,9 @@ export type OverlapReason = "teacher_overlap" | "student_overlap" | "consultant_
 export type OverlapError = { reason: OverlapReason; message: string };
 
 export const OVERLAP_MESSAGES: Record<OverlapReason, string> = {
-  teacher_overlap: "선택한 시간이 선생님의 다른 수업과 겹칩니다. 다른 시간을 선택해주세요.",
-  student_overlap: "이미 같은 시간에 다른 수업이 있습니다. 다른 시간을 선택해주세요.",
-  consultant_overlap: "같은 컨설턴트의 다른 상담·미팅 일정과 시간이 겹칩니다. 다른 시간을 선택해 주세요.",
+  teacher_overlap: "That time overlaps another lesson with your teacher. Please choose a different time.",
+  student_overlap: "You already have another lesson at that time. Please choose a different time.",
+  consultant_overlap: "That time overlaps another consultation or meeting with the same consultant. Please choose a different time.",
 };
 
 function rawOf(e: unknown): string {

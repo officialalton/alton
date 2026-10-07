@@ -11,7 +11,7 @@ import { resolveUserTimezone, TIMEZONE_OPTIONS } from "@/lib/timezone";
 
 function assertKnownTimezone(timezone: string) {
   if (!TIMEZONE_OPTIONS.some((o) => o.value === timezone)) {
-    throw new Error(`지원하지 않는 시간대입니다: ${timezone}`);
+    throw new Error(`Unsupported time zone: ${timezone}`);
   }
 }
 
@@ -63,7 +63,7 @@ export async function updateMyTimezone(timezone: string | null): Promise<void> {
   if (timezone !== null) assertKnownTimezone(timezone);
 
   const { error } = await supabase.from("profiles").update({ timezone }).eq("id", user.id);
-  if (error) throw new Error(`시간대 저장 실패: ${error.message}`);
+  if (error) throw new Error(`Couldn't save time zone: ${error.message}`);
 }
 
 /** 가족 기본 시간대 저장 — 그 household의 주 보호자만 가능(RPC 내부에서 재검증). */
@@ -75,5 +75,5 @@ export async function updateHouseholdDefaultTimezone(householdId: string, timezo
     p_household_id: householdId,
     p_timezone: timezone,
   });
-  if (error) throw new Error(`가족 기본 시간대 저장 실패: ${error.message}`);
+  if (error) throw new Error(`Couldn't save family default time zone: ${error.message}`);
 }

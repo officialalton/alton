@@ -15,7 +15,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
   if (!token) {
-    return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent("유효하지 않은 온보딩 링크입니다."), url));
+    return NextResponse.redirect(new URL("/login?error=" + encodeURIComponent("This onboarding link is not valid."), url));
   }
   return NextResponse.redirect(
     new URL(`/consult/trial-onboarding/confirm-email?token=${encodeURIComponent(token)}`, url)

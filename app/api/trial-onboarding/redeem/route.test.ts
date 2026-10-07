@@ -56,7 +56,7 @@ describe("GET /api/trial-onboarding/redeem", () => {
     const { GET } = await import("./route");
     const res = await GET(new Request("https://app.example.com/api/trial-onboarding/redeem?token=abc"));
     expect(res.headers.get("location")).toBe(
-      "https://app.example.com/login?error=" + encodeURIComponent("이미 사용된 온보딩 링크입니다.")
+      "https://app.example.com/login?error=" + encodeURIComponent("This onboarding link has already been used.")
     );
   });
 });

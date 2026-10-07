@@ -31,14 +31,14 @@ describe("assertActiveTeacherAssignment", () => {
     const admin = mockAdminWithAssignment(null);
     await expect(
       assertActiveTeacherAssignment(admin, "subject-enrollment-1", "unassigned-teacher")
-    ).rejects.toThrow("이 과목 수강에 현재 배정된 선생님이 아닙니다.");
+    ).rejects.toThrow("You are not the teacher currently assigned to this subject enrollment.");
   });
 
   it("다른(현재 배정되지 않은) 선생님이면 예약을 차단한다 — 쿼리 자체가 teacher_id+status='active'로 좁혀져 있어 배정 종료된/다른 선생님은 항상 null로 돌아온다", async () => {
     const admin = mockAdminWithAssignment(null);
     await expect(
       assertActiveTeacherAssignment(admin, "subject-enrollment-1", "some-other-teacher")
-    ).rejects.toThrow("이 과목 수강에 현재 배정된 선생님이 아닙니다.");
+    ).rejects.toThrow("You are not the teacher currently assigned to this subject enrollment.");
 
     const fromMock = admin.from as unknown as ReturnType<typeof vi.fn>;
     expect(fromMock).toHaveBeenCalledWith("teacher_assignments");

@@ -65,7 +65,7 @@ describe("createMyLessonBooking", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.errorCode).toBe("no_assignment");
-      expect(result.message).not.toMatch(/현재 배정된 선생님이 아닙니다/);
+      expect(result.message).not.toMatch(/not the teacher currently assigned/);
     }
   });
 });
@@ -84,7 +84,7 @@ describe("cancelMyLessonBooking", () => {
     const { cancelMyLessonBooking } = await import("./booking-actions");
     await expect(
       cancelMyLessonBooking({ reservationId: "r1", reason: "x" })
-    ).rejects.toThrow("본인(또는 자녀) 예약만 취소할 수 있습니다.");
+    ).rejects.toThrow("You can only cancel your own (or your child's) bookings.");
     expect(cancelLessonBookingMock).not.toHaveBeenCalled();
   });
 });

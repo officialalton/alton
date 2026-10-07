@@ -16,7 +16,7 @@ describe("MobileDrawerNav", () => {
   it("햄버거 버튼을 누르면 그룹 헤더와 항목이 보이고, 항목을 누르면 onSelect가 호출되며 드로어가 닫힌다", () => {
     const onSelect = vi.fn();
     render(<MobileDrawerNav groups={groups} activeId="home" onSelect={onSelect} />);
-    fireEvent.click(screen.getByLabelText("메뉴 열기"));
+    fireEvent.click(screen.getByLabelText("Open menu"));
     expect(screen.getByText("운영")).toBeInTheDocument();
     expect(screen.getByText("정산 관리")).toBeInTheDocument();
 

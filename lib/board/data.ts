@@ -49,10 +49,10 @@ function vocabQuizStatus(status: VocabQuiz["status"]): BoardCardStatus {
 // 발급 주체가 고정돼 있어 소스 타입으로 바로 정할 수 있다(과제=선생님이 발급,
 // 모의고사=선생님/관리자가 배정, 단어시험=학생 본인이 만든 학습 세션).
 const CREATED_BY_LABEL: Record<BoardManualTask["createdByRole"], string> = {
-  student: "학생 본인",
-  teacher: "담당 선생님",
-  consultant: "담당 컨설턴트",
-  admin: "관리자",
+  student: "Student",
+  teacher: "Teacher",
+  consultant: "Consultant",
+  admin: "Admin",
 };
 
 export function homeworkToBoardCard(batch: HomeworkBatch): BoardCard {
@@ -66,7 +66,7 @@ export function homeworkToBoardCard(batch: HomeworkBatch): BoardCard {
     dueAt: batch.dueAt,
     dueStartAt: null,
     href: "/student?tab=homework",
-    createdByLabel: batch.teacherName ?? "담당 선생님",
+    createdByLabel: batch.teacherName ?? "Teacher",
     audit: null,
   };
 }
@@ -85,7 +85,7 @@ export function mockExamToBoardCard(attempt: MockExamAttemptSummary): BoardCard 
       ? `/student/mock-exam/${attempt.id}`
       : "/student?tab=mock-exam",
     // 배정 폐지(2026-10-01): 학생이 직접 시작한 응시. 기존 배정 응시는 배정한 선생님 이름을 그대로 쓴다.
-    createdByLabel: attempt.assignedByName ?? "학생 본인",
+    createdByLabel: attempt.assignedByName ?? "Student",
     audit: null,
   };
 }
@@ -95,13 +95,13 @@ export function vocabQuizToBoardCard(quiz: VocabQuiz): BoardCard {
     id: `vocab_quiz:${quiz.id}`,
     sourceType: "vocab_quiz",
     sourceId: quiz.id,
-    title: `단어 시험(${quiz.wordCount}단어)`,
+    title: `Vocabulary quiz (${quiz.wordCount} ${quiz.wordCount === 1 ? "word" : "words"})`,
     subtitle: null,
     status: vocabQuizStatus(quiz.status),
     dueAt: quiz.dueAt,
     dueStartAt: null,
     href: "/student?tab=vocab",
-    createdByLabel: "학생 본인",
+    createdByLabel: "Student",
     audit: null,
   };
 }

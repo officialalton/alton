@@ -51,24 +51,24 @@ export function toBookingActionOutcomeError(e: unknown): {
   if (raw.includes("사용 가능한 수업권이 없습니다")) {
     return {
       errorCode: "no_entitlement",
-      message: "사용 가능한 수업권이 없어 예약을 확정할 수 없습니다. 담당자에게 문의해주세요.",
+      message: "You have no lesson credits available, so we can't confirm this booking. Please contact support.",
     };
   }
   if (raw.includes("teacher_freebusy_conflict") || raw.includes("겹치는 일정")) {
     return {
       errorCode: "slot_conflict",
-      message: "선택한 시간이 방금 다른 일정과 겹치게 됐습니다. 다른 시간을 선택해주세요.",
+      message: "The time you selected now conflicts with another event. Please choose a different time.",
     };
   }
   const overlap = parseOverlapError(e);
   if (overlap) return { errorCode: "slot_conflict", message: overlap.message };
-  if (raw.includes("배정") || raw.includes("assignment")) {
+  if (raw.includes("배정") || raw.includes("assignment") || raw.includes("currently assigned")) {
     return {
       errorCode: "no_assignment",
-      message: "선생님 매칭 정보를 확인할 수 없어 예약을 진행할 수 없습니다. 담당자에게 문의해주세요.",
+      message: "We couldn't verify your teacher match, so we can't complete this booking. Please contact support.",
     };
   }
-  return { errorCode: "booking_failed", message: "예약을 확정하지 못했습니다. 잠시 후 다시 시도해주세요." };
+  return { errorCode: "booking_failed", message: "We couldn't confirm your booking. Please try again in a moment." };
 }
 
 function bestEffortSyncCalendarEvent(reservationId: string): void {
@@ -123,7 +123,7 @@ export async function confirmLessonBooking(params: ConfirmBookingParams): Promis
   });
   if (error) throw new Error(error.message);
   const row = Array.isArray(data) ? data[0] : data;
-  if (!row) throw new Error("예약 확정 결과를 받지 못했습니다.");
+  if (!row) throw new Error("We didn't receive a booking confirmation.");
 
   await syncOneReservationCalendarEvent(row.reservation_id as string).catch((e) => {
     console.error(
@@ -223,10 +223,10 @@ export async function cancelLessonBooking(params: CancelBookingParams): Promise<
     // consume됨)에 취소를 시도할 때 발생한다 — app/admin/entitlement-actions.ts의
     // releaseEntitlementForReservation()과 동일한 친화적 메시지로 감싼다.
     if (error.message.includes("이미 consume") || error.message.includes("이미 release")) {
-      throw new Error("이미 진행이 확정된 수업은 취소할 수 없습니다. 새로고침 후 다시 확인해주세요.");
+      throw new Error("A lesson that has already been confirmed as held can't be canceled. Please refresh and check again.");
     }
     if (error.message.includes("확정된 예약만 취소할 수 있습니다")) {
-      throw new Error("이미 취소되었거나 진행된 수업입니다. 새로고침 후 다시 확인해주세요.");
+      throw new Error("This lesson was already canceled or has taken place. Please refresh and check again.");
     }
     throw new Error(error.message);
   }

@@ -92,7 +92,7 @@ describe("createLessonBookingForChild", () => {
         childId: "child1", subjectEnrollmentId: "e1", teacherId: "t1", lessonTypeId: "lt1",
         startsAt: new Date(), durationMinutes: 120,
       })
-    ).rejects.toThrow("본인 가족 구성원이 아닌 자녀");
+    ).rejects.toThrow("You can only book lessons for children in your own family");
     expect(confirmLessonBookingMock).not.toHaveBeenCalled();
   });
 
@@ -157,7 +157,7 @@ describe("cancelLessonBookingForChild", () => {
     const { cancelLessonBookingForChild } = await import("./booking-actions");
     await expect(
       cancelLessonBookingForChild({ reservationId: "r1", childId: "child1", reason: "x" })
-    ).rejects.toThrow("본인 가족 구성원이 아닌 자녀");
+    ).rejects.toThrow("You can only book lessons for children in your own family");
     expect(cancelLessonBookingMock).not.toHaveBeenCalled();
   });
 
@@ -166,7 +166,7 @@ describe("cancelLessonBookingForChild", () => {
     const { cancelLessonBookingForChild } = await import("./booking-actions");
     await expect(
       cancelLessonBookingForChild({ reservationId: "r1", childId: "child1", reason: "x" })
-    ).rejects.toThrow("본인(또는 자녀) 예약만 취소할 수 있습니다.");
+    ).rejects.toThrow("You can only cancel your own (or your child's) bookings.");
     expect(cancelLessonBookingMock).not.toHaveBeenCalled();
   });
 });
@@ -177,7 +177,7 @@ describe("reportTeacherIssueForChild", () => {
     const { reportTeacherIssueForChild } = await import("./booking-actions");
     await expect(
       reportTeacherIssueForChild({ childId: "child1", sessionId: "s1", reportType: "teacher_late", minutesLate: 10 })
-    ).rejects.toThrow("본인 가족 구성원이 아닌 자녀");
+    ).rejects.toThrow("You can only book lessons for children in your own family");
     expect(submitIncidentReportMock).not.toHaveBeenCalled();
   });
 
@@ -186,7 +186,7 @@ describe("reportTeacherIssueForChild", () => {
     const { reportTeacherIssueForChild } = await import("./booking-actions");
     await expect(
       reportTeacherIssueForChild({ childId: "child1", sessionId: "s1", reportType: "teacher_late", minutesLate: 10 })
-    ).rejects.toThrow("본인(또는 자녀) 수업에 대해서만 신고할 수 있습니다.");
+    ).rejects.toThrow("You can only report issues for your own (or your child's) lessons.");
     expect(submitIncidentReportMock).not.toHaveBeenCalled();
   });
 

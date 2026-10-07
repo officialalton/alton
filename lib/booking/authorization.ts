@@ -18,7 +18,7 @@ export async function assertGuardianOfChild(
     .eq("role", "guardian");
   const householdIds = (guardianLinks ?? []).map((l) => l.household_id as string);
   if (householdIds.length === 0) {
-    throw new Error("보호자 권한이 없습니다.");
+    throw new Error("You don't have guardian access.");
   }
   const { data: childLink } = await supabase
     .from("household_members")
@@ -28,7 +28,7 @@ export async function assertGuardianOfChild(
     .in("household_id", householdIds)
     .maybeSingle();
   if (!childLink) {
-    throw new Error("본인 가족 구성원이 아닌 자녀에 대해서는 예약할 수 없습니다.");
+    throw new Error("You can only book lessons for children in your own family.");
   }
 }
 
@@ -55,7 +55,7 @@ export async function assertReservationBelongsToChild(
     : null;
   const actualChildId = (subjectEnrollment as { child_id?: string } | null)?.child_id;
   if (!actualChildId || actualChildId !== childId) {
-    throw new Error("본인(또는 자녀) 예약만 취소할 수 있습니다.");
+    throw new Error("You can only cancel your own (or your child's) bookings.");
   }
 }
 
@@ -81,7 +81,7 @@ export async function assertSessionBelongsToChild(
     : null;
   const actualChildId = (subjectEnrollment as { child_id?: string } | null)?.child_id;
   if (!actualChildId || actualChildId !== childId) {
-    throw new Error("본인(또는 자녀) 수업에 대해서만 신고할 수 있습니다.");
+    throw new Error("You can only report issues for your own (or your child's) lessons.");
   }
 }
 
@@ -98,6 +98,6 @@ export async function assertActiveTeacherAssignment(
     .eq("status", "active")
     .maybeSingle();
   if (!data) {
-    throw new Error("이 과목 수강에 현재 배정된 선생님이 아닙니다.");
+    throw new Error("You are not the teacher currently assigned to this subject enrollment.");
   }
 }

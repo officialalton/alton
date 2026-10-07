@@ -18,14 +18,14 @@ type RpcClient = { rpc: (fn: string, args: Record<string, unknown>) => PromiseLi
 /** 학생 한 명의 기능 키를 조회한다(self-only; 관리자·컨설턴트는 타인 조회 가능 — DB 함수 규칙). */
 export async function loadStudentFeatureAccess(supabase: RpcClient, studentId: string): Promise<FeatureKey[]> {
   const { data, error } = await supabase.rpc("student_feature_access", { p_student_id: studentId });
-  if (error) throw new Error(`student_feature_access 조회 실패: ${error.message}`);
+  if (error) throw new Error(`Couldn't load student_feature_access: ${error.message}`);
   return normalizeFeatureAccess(data);
 }
 
 export class FeatureAccessDeniedError extends Error {
   readonly featureKey: FeatureKey;
   constructor(featureKey: FeatureKey) {
-    super(`이 기능(${featureKey})은 현재 회원 유형에서 이용할 수 없습니다.`);
+    super(`This feature (${featureKey}) isn't available for your membership type.`);
     this.name = "FeatureAccessDeniedError";
     this.featureKey = featureKey;
   }

@@ -80,7 +80,7 @@ describe("requireStudentFeature", () => {
 
   it("RPC 오류는 fail-closed로 전파된다", async () => {
     rpcMock.mockResolvedValue({ data: null, error: { message: "boom" } });
-    await expect(requireStudentFeature("mock_exam")).rejects.toThrow("student_feature_access 조회 실패");
+    await expect(requireStudentFeature("mock_exam")).rejects.toThrow("Couldn't load student_feature_access");
   });
 
   it("학생이 아닌 역할은 RPC를 부르지 않고 기존 requireUser 결과만 돌려준다", async () => {

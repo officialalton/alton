@@ -19,8 +19,8 @@ export async function submitProblemErrorReportAction(input: {
   memo?: string | null;
 }): Promise<Result<{ duplicate: boolean }>> {
   const memo = (input.memo ?? "").trim();
-  if (memo.length > MEMO_MAX) return { ok: false, error: `메모는 ${MEMO_MAX}자 이내로 적어 주세요.` };
-  if (input.reportType === "other" && !memo) return { ok: false, error: "기타 사유는 내용을 적어 주세요." };
+  if (memo.length > MEMO_MAX) return { ok: false, error: `Please keep your note within ${MEMO_MAX} characters.` };
+  if (input.reportType === "other" && !memo) return { ok: false, error: "Please describe the issue when choosing Other." };
   const { supabase } = await requireStudentFeature("problem_report");
   const c = input.context;
   const { data, error } = await supabase.rpc("problem_error_report_submit", {
@@ -34,7 +34,7 @@ export async function submitProblemErrorReportAction(input: {
     p_attempt_id: c.source === "mock_exam" ? c.attemptId : null,
     p_set_item_id: c.source === "mock_exam" ? c.setItemId : null,
   });
-  if (error) return { ok: false, error: toErr(error, "신고를 저장하지 못했습니다.") };
+  if (error) return { ok: false, error: toErr(error, "We couldn't save your report.") };
   return { ok: true, value: { duplicate: Boolean((data as { duplicate?: boolean } | null)?.duplicate) } };
 }
 
@@ -44,7 +44,7 @@ export async function loadMyProblemErrorReportsAction(problemIds: string[]): Pro
   if (ids.length === 0) return { ok: true, value: {} };
   const { supabase } = await requireStudentFeature("problem_report");
   const { data, error } = await supabase.rpc("problem_error_report_mine", { p_problem_ids: ids });
-  if (error) return { ok: false, error: toErr(error, "신고 상태를 불러오지 못했습니다.") };
+  if (error) return { ok: false, error: toErr(error, "We couldn't load your report status.") };
   const out: Record<string, MyReportStatus> = {};
   // 같은 문항에 버전별 신고가 여럿이면 최신(목록이 최신순) 것을 쓴다.
   for (const r of (data ?? []) as { problemId: string; status: MyReportStatus }[]) if (!(r.problemId in out)) out[r.problemId] = r.status;

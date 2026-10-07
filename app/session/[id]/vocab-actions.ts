@@ -37,7 +37,7 @@ async function generateVocabEntry(word: string) {
       return { definition: v.value.definitionKo, definitionEn: v.value.definitionEn, example: entry.example, similar: entry.similar };
     }
   }
-  throw new Error("AI가 영어 뜻을 만들지 못했습니다. 다시 시도해 주세요.");
+  throw new Error("We couldn't generate an English definition. Please try again.");
 }
 
 export async function addVocabWord(

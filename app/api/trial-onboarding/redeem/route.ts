@@ -20,7 +20,7 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get("token");
   if (!token) {
-    return redirectWithError(url, "유효하지 않은 온보딩 링크입니다.");
+    return redirectWithError(url, "This onboarding link is not valid.");
   }
 
   const admin = createAdminClient();
@@ -30,7 +30,7 @@ export async function GET(request: Request) {
   }
   const redeemed = data?.[0];
   if (!redeemed) {
-    return redirectWithError(url, "유효하지 않은 온보딩 링크입니다.");
+    return redirectWithError(url, "This onboarding link is not valid.");
   }
 
   // 이미 로그인된 사용자가 이 링크를 열었다면(다른 계정으로) 본인 확인 없이 새
@@ -59,8 +59,8 @@ function redirectWithError(url: URL, message: string) {
 }
 
 function mapRedeemError(message: string): string {
-  if (message.includes("이미 사용된")) return "이미 사용된 온보딩 링크입니다.";
-  if (message.includes("취소된")) return "취소된 온보딩 링크입니다. 관리자에게 문의해주세요.";
-  if (message.includes("만료된")) return "만료된 온보딩 링크입니다. 관리자에게 재발급을 요청해주세요.";
-  return "유효하지 않은 온보딩 링크입니다.";
+  if (message.includes("이미 사용된")) return "This onboarding link has already been used.";
+  if (message.includes("취소된")) return "This onboarding link was canceled. Please contact support.";
+  if (message.includes("만료된")) return "This onboarding link has expired. Please ask support to send a new one.";
+  return "This onboarding link is not valid.";
 }

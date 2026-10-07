@@ -115,7 +115,7 @@ test("철회된 초대는 실제 브라우저에서 수락 링크를 방문해�
 
   await page.goto(acceptPath(token));
   await expect(page).toHaveURL(/\/login/);
-  await expect(page.getByText(/철회된 초대입니다/)).toBeVisible();
+  await expect(page.getByText(/This invitation was withdrawn/)).toBeVisible();
 });
 
 // 정책 가드: 초대 발송 UI가 다시 열리지 않았는지(관리자 Users 탭의 "+ 초대", 보호자

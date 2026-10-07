@@ -49,18 +49,18 @@ describe("buildSubjectMaterialTree", () => {
     const tree = trees[0];
     expect(tree.subjectName).toBe("SAT Math");
     // 단원 순서: u1(1단원) → u2(2단원) → 단원 미지정
-    expect(tree.units.map((u) => u.unitTitle)).toEqual(["1단원", "2단원", "단원 미지정"]);
+    expect(tree.units.map((u) => u.unitTitle)).toEqual(["1단원", "2단원", "No unit assigned"]);
     expect(tree.units[0].keywordGroups[0]).toMatchObject({ label: "Linear functions", docs: [{ id: "doc1" }] });
     expect(tree.units[1].keywordGroups[0]).toMatchObject({ label: "Circles", docs: [{ id: "doc2" }] });
   });
 
-  it("어떤 단원에도 안 붙은 키워드와 대표 키워드 없는 자료는 '단원 미지정'에 모인다", async () => {
+  it("어떤 단원에도 안 붙은 키워드와 대표 키워드 없는 자료는 'No unit assigned'에 모인다", async () => {
     const supabase = makeSupabaseMock(BASE_TABLES);
     const trees = await buildSubjectMaterialTree(supabase, ["sub1"]);
     const unassigned = trees[0].units.find((u) => u.unitId === null)!;
     const labels = unassigned.keywordGroups.map((g) => g.label);
     expect(labels).toContain("고아 키워드(단원 없음)");
-    expect(labels).toContain("키워드 미지정");
+    expect(labels).toContain("No keyword assigned");
     const noKeywordGroup = unassigned.keywordGroups.find((g) => g.keywordId === null)!;
     expect(noKeywordGroup.docs.map((d) => d.id)).toEqual(["doc3"]);
   });

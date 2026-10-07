@@ -14,7 +14,7 @@ export async function loadLegacyProblemAnswers(problemIds: readonly string[]): P
   const { data, error } = await selectInChunks(problemIds, (chunk) =>
     admin.from("problems").select("id, correct_index, explanation").in("id", chunk)
   );
-  if (error) throw new Error(error.message ?? "문제 정답을 읽지 못했습니다.");
+  if (error) throw new Error(error.message ?? "Couldn't load the problem answers.");
   for (const r of data) {
     out.set(r.id as string, {
       correctIndex: (r.correct_index as number | null) ?? null,

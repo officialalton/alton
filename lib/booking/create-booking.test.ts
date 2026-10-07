@@ -229,7 +229,7 @@ describe("cancelLessonBooking", () => {
     const { cancelLessonBooking } = await import("./create-booking");
     await expect(
       cancelLessonBooking({ reservationId: "r1", cancelledByRole: "teacher", cancelledById: "t1", reason: "x" })
-    ).rejects.toThrow("이미 진행이 확정된 수업은 취소할 수 없습니다.");
+    ).rejects.toThrow("A lesson that has already been confirmed as held can't be canceled.");
   });
 
   it("이미 취소·완료된 예약을 다시 취소하려 하면 친화적 메시지로 감싼다", async () => {
@@ -237,7 +237,7 @@ describe("cancelLessonBooking", () => {
     const { cancelLessonBooking } = await import("./create-booking");
     await expect(
       cancelLessonBooking({ reservationId: "r1", cancelledByRole: "student", cancelledById: "c1", reason: "x" })
-    ).rejects.toThrow("이미 취소되었거나 진행된 수업입니다.");
+    ).rejects.toThrow("This lesson was already canceled or has taken place.");
   });
 
   it("취소 성공 후 google_event_id가 있으면 Calendar 이벤트 삭제를 호출한다", async () => {
@@ -272,11 +272,11 @@ describe("cancelLessonBooking", () => {
 });
 
 describe("toBookingActionOutcomeError — 겹침 안내(2026-09-29)", () => {
-  it("학생 동시간 수업은 친절한 한국어 slot_conflict로 바꾼다", async () => {
+  it("학생 동시간 수업은 친절한 영어 slot_conflict로 바꾼다", async () => {
     const { toBookingActionOutcomeError } = await import("./create-booking");
     const r = toBookingActionOutcomeError(new Error("student_time_overlap: 이미 같은 시간에 다른 수업이 있습니다."));
     expect(r.errorCode).toBe("slot_conflict");
-    expect(r.message).toContain("이미 같은 시간에 다른 수업이 있습니다");
+    expect(r.message).toContain("You already have another lesson at that time");
   });
 
   it("선생님 겹침(teacher_buffer_violation/reservations_no_overlap)은 버퍼 언급 없이 겹침으로 안내한다", async () => {
@@ -284,7 +284,7 @@ describe("toBookingActionOutcomeError — 겹침 안내(2026-09-29)", () => {
     for (const raw of ["teacher_buffer_violation", "conflicting key value violates exclusion constraint \"reservations_no_overlap\""]) {
       const r = toBookingActionOutcomeError(new Error(raw));
       expect(r.errorCode).toBe("slot_conflict");
-      expect(r.message).toContain("겹칩니다");
+      expect(r.message).toContain("overlaps");
       expect(r.message).not.toContain("버퍼");
     }
   });

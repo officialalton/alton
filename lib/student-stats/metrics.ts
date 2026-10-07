@@ -139,7 +139,7 @@ export function computeOpsStats(months: RawStatsAggregate["ops"]): OpsStats {
 export function computeTeacherOps(raw: NonNullable<RawStatsAggregate["staff"]>): TeacherOpsStats {
   return {
     reviews: raw.reviewsByTeacher.map((r) => ({
-      teacherName: r.teacherName ?? "(이름 없음)", sessions: num(r.sessions), finalized: num(r.finalized),
+      teacherName: r.teacherName ?? "(No name)", sessions: num(r.sessions), finalized: num(r.finalized),
       draft: num(r.draft), missing: Math.max(0, num(r.missing)),
       avgHoursToFinalize: r.avgHoursToFinalize === null ? null : num(r.avgHoursToFinalize),
     })),
