@@ -48,7 +48,10 @@ const REASON_LABEL_EN: Record<string, string> = {
   usd_principal_differs_from_contract: "USD principal differs from contract",
   received_currency_differs: "Received currency differs",
 };
-const money = (minor: number | null, cur: string | null) => (minor === null || cur === null ? "—" : `${cur} ${Number(formatMinor(minor, cur)).toLocaleString("en-US", { minimumFractionDigits: cur === "USD" ? 2 : 0 })}`);
+const USD_FORMAT = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const KRW_FORMAT = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const money = (minor: number | null, cur: string | null) =>
+  minor === null || cur === null ? "—" : `${cur} ${(cur === "USD" ? USD_FORMAT : KRW_FORMAT).format(Number(formatMinor(minor, cur)))}`;
 
 type Msg = { tone: "ok" | "error"; text: string } | null;
 
