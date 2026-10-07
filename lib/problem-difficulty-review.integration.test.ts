@@ -382,7 +382,7 @@ describe("풀 집계·자동 구성 후보·목록 일관", () => {
     };
     const draftAndPublish = (id: string, difficulty: string, tagText: string) => {
       const v = psql(`select save_problem_draft_version('${id}', '${RUN} ${alpha(seq)}${tagText} real path', '["ㄱ","ㄴ","ㄷ","ㄹ"]'::jsonb, 2, '해설', '${difficulty}', '${ADMIN_ID}');`);
-      psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+      psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v}'; select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
       return v;
     };
 

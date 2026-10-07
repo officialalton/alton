@@ -98,7 +98,7 @@ function publishedProblem(keywordId: string): string {
   const v = psql(
     `select save_problem_draft_version('${problemId}', '예습용 지문 ${uniq()}', '["가","나","다","라"]'::jsonb, 2, '이건 해설이다', 'medium', '${ADMIN_ID}');`
   );
-  psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+  psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v}'; select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
   return problemId;
 }
 
@@ -186,7 +186,7 @@ describe("학생은 예약·수업 시작 전에도 미리 본다", () => {
     const v2 = psql(
       `select save_problem_draft_version('${problemId}', '고친 지문 ${uniq()}', '["ㄱ","ㄴ","ㄷ","ㄹ"]'::jsonb, 0, '새 해설', 'medium', '${ADMIN_ID}');`
     );
-    psql(`select confirm_and_publish_problem_version('${v2}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v2}'; select confirm_and_publish_problem_version('${v2}', '${ADMIN_ID}');`);
 
     const after = previewAs(STUDENT_ID, overlayUnitId);
     expect(after).toContain("예습용 지문");

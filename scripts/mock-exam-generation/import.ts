@@ -12,7 +12,8 @@
 //           임포트 뒤 scripts/keywords/link-imported.ts --file <같은 파일> --execute 로 공용 키워드에 연결한다.
 //   --cleanup-tag <tag> : 그 표식의 시험 데이터를 삭제(로컬 전용 — 원격 URL 이면 거부).
 import { findResidue } from "../../lib/problem-generation/residue";
-import { dedupeStem } from "../../lib/problem-text-guards";
+import { dedupeStem, answerKeyError, draftBankGateError } from "../../lib/problem-text-guards";
+import { judgeMaterialNeed, materialBlocker } from "../../lib/problem-material-need";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 
@@ -122,6 +123,14 @@ async function main() {
     const rawKey = `${rawStimulus}\u0000${question ?? ""}`; // 예전에 중복 그대로 저장된 레코드와도 같은 문항으로 본다.
     const residue = findResidue({ passage: g.passage as string | undefined, stimulus: g.stimulus as string | undefined, question: g.question as string | undefined, options: g.options as string[] | undefined, explanation: g.explanation as string | undefined, explanationEn: (g as { explanationEn?: string }).explanationEn, statements: g.statements as string[] | undefined });
     if (residue.length) { stats.failed += 1; failures.push(`${r.gid}: 생성 잔재 거절 — ${residue.map((x) => `${x.field}[${x.kind}]:${x.match}`).join(", ")}`); continue; }
+    // 2026-10-06 은행 게이트 — 임포트도 관리자 저장 경로와 같은 검사를 거친다(한글·영어 해설·자료 필수·정답 키).
+    {
+      const keyErr = r.format === "mc" ? answerKeyError(g.options ?? null, g.correctIndex ?? null) : null;
+      const gateErr = draftBankGateError({ examSystem: r.examSystem, usageScope: publish ? "mock_exam" : null, passage: stimulus, question, options: g.options ?? null, statements: g.statements ?? null, explanationEn: (g as { explanationEn?: string | null }).explanationEn ?? null });
+      const matErr = materialBlocker(judgeMaterialNeed({ examSystem: r.examSystem, skillCode: r.skill, text: composeProblemText(stimulus, question) }), g.figure ?? null);
+      const why = keyErr ?? gateErr ?? matErr;
+      if (why) { stats.failed += 1; failures.push(`${r.gid}: 은행 게이트 거절 — ${why}`); continue; }
+    }
     const key = `${stimulus}\u0000${question ?? ""}`;
     const pool = existing.get(r.skill) ?? [];
     if (pool.some((e) => e.key === key || e.key === rawKey)) { stats.skippedExisting += 1; continue; }
@@ -157,7 +166,7 @@ async function main() {
     const { error: cErr } = await admin.rpc("set_problem_render_check", { p_version_id: versionId, p_check: check });
     if (cErr) { await cleanup1(`렌더 검사 기록 실패 ${cErr.message}`); continue; }
     const { error: qErr } = await admin.rpc("set_problem_quality", { p_version_id: versionId, p_quality: { ...r.quality, mockExamGeneration: { ...((r.quality.mockExamGeneration as Record<string, unknown> | undefined) ?? {}), runId: r.runId, gid: r.gid, intendedSkill: r.planSkill ?? r.skill, recipeId: r.recipeId ?? null, recipeCheck: r.recipeCheck ?? null, hardBasis: r.recipeId ? (r.createdVia === "compiler" ? "compiler_archetype" : "recipe") : null, difficultyStatus: r.difficultyStatus ?? ((r.quality.mockExamGeneration as Record<string, unknown> | undefined)?.difficultyStatus ?? null), review: r.review ?? null } } });
-    if (qErr) failures.push(`${r.gid}: 품질 기록 실패 ${qErr.message}`);
+    if (qErr) { await cleanup1(`품질 기록 실패 ${qErr.message}`); continue; }
     stats.created += 1;
     pool.push({ problemId: problemId as string, key, sh });
     existing.set(r.skill, pool);

@@ -1,6 +1,7 @@
 // systems_linear hard 원형 16개(substitution_solve·elimination_value·param_no_solution·word_system × 연산자 4종). 정답은 모두 수치.
 // 카탈로그 밖 세부 패턴이라 kind-catalog.ts 에는 컴파일러 구현 시점에 함께 추가한다(docs/qa/2026-09-30-math-hard-archetypes.md 14절).
 import { GenFail, type Archetype } from "../types";
+import { SL_SPR_B_ARCHETYPES } from "./systems-linear.spr-b";
 import { facts, finish, lin, M, spin, withParams } from "../text";
 import { near, stdEq, T, W } from "../kit-b";
 
@@ -329,4 +330,5 @@ export const SL_ARCHETYPES: Archetype[] = [
       });
     },
   },
+  ...SL_SPR_B_ARCHETYPES,
 ];

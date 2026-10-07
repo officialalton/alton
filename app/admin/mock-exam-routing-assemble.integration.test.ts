@@ -29,7 +29,8 @@ function topUp(domain: string, difficulty: string, format: "mc" | "spr", target:
     psql(
       `select count(distinct coalesce(p.similarity_group, p.id::text)) from problems p join problem_versions v on v.problem_id = p.id and v.status = 'published'
        where p.sat_domain = '${domain}' and p.status = 'confirmed' and p.archived_at is null and p.usage_scope in ('mock_exam','both')
-         and p.format = '${format}' and lower(v.difficulty) = '${difficulty}';`,
+         and p.format = '${format}' and lower(v.difficulty) = '${difficulty}'
+         and (v.render_check->>'ok')::boolean is true and coalesce(btrim(v.explanation_en), '') <> '';`,
     ),
   );
   const need = target - have;
@@ -47,6 +48,7 @@ function topUp(domain: string, difficulty: string, format: "mc" | "spr", target:
   if (format === "spr") {
     psql(`update problem_versions v set answers = '["5"]'::jsonb from problems p where p.id = v.problem_id and p.format = 'spr' and v.answers is null and p.passage like 'R3A %';`);
   }
+  psql(`update problem_versions v set render_check = '{"ok": true, "issues": []}'::jsonb, explanation_en = 'Because.' from problems p where p.id = v.problem_id and p.passage like 'R3A %' and v.render_check is null;`);
 }
 
 describe("MST 라우팅 조립 (실제 로컬 DB)", () => {
