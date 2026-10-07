@@ -38,3 +38,9 @@
    - 보존(최소 식별자만): 계약·가격·동의·결제·환불·원장·정산 귀속 — 법정·회계 보존 기간 동안 계약/거래 식별에 필요한 최소 필드(이름 이니셜 또는 계약 ID, 거래 ID, 금액·일자)만 남기고 접근 제한. **계정 ID 치환만으로는 익명화로 보지 않는다**: 다른 필드로 재식별 가능하면 해당 필드를 함께 제거·일반화.
 5. 처리 결과는 요청 행에 자료군별 완료/보류(사유·기간) 기록, 삭제 실패는 Drive 큐와 같은 재시도·관리자 알림 경로를 쓴다.
 구현 가능한 선행 작업(이번에는 미구현): 요청 테이블+상태머신, 자료군별 삭제 매핑표(테이블 목록)와 dry-run 보고, hold 검사 연동. 정책 확인 필요: 13세 미만 외 미성년(13~17세)의 본인 직접 요청 허용 여부, 최소 식별자 목록의 법무 확정.
+
+## 구현 현황 갱신 (2026-10-07, 마이그레이션 20262100000220 — 데이터 모델·읽기 전용만, 삭제 없음)
+- §1: 건 키는 이미 `household_messages.inquiry_id -> household_inquiries`(status, closed_at, last_message_at)로 존재해 `inquiry_case_id`는 신설하지 않는다(중복). 읽기 전용 `household_message_case_retention_report()`(종료/마지막 메시지+2년, hold 반영)와 `household_messages_without_case_count()`만 추가. 삭제 함수·배치 편입은 보류.
+- §2: `legacy_chat_usage_report()`(건수·마지막 쓰기)만 추가. 폐기·이관 없음.
+- §3: 범위는 `retention_free_member_scope` 데이터 테이블로만 기록(삭제 로직 없음). 학생 프로필은 owner_decision.
+- §4: `child_deletion_requests`(대상 범위·사유·상태·예외 hold/사유/기간)와 RPC `request_child_deletion`(해당 가구 보호자·관리자), `review_child_deletion_request`(관리자), `record_child_deletion_exception`(지정자만, 해당 아동의 활성 legal hold 연결 필수). archive 요청과 연동·연쇄 없음. 삭제 실행·UI 없음.
