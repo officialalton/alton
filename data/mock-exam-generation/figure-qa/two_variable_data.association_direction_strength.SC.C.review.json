@@ -3,7 +3,7 @@
  "verdict": "pass",
  "reviewedAt": "2026-10-06T04:19:11Z",
  "reviewer": "visual-review-agent-SD",
- "codeHash": "f27fc6c1c55a8f25fa99f2636daf62f57c699ce9a71e2d1a24e2ec3046d33915",
+ "codeHash": "4445ad8fc2d39b49bc1eee302428a6b0751143fe82fde42c5a8ccda4f8b48517",
  "samples": [
   "two_variable_data.association_direction_strength.SC.C.png"
  ],
@@ -21,5 +21,6 @@
  "defects": [],
  "notes": "D is the only rising tight cloud (A falls, B flat, C weak/scattered) = D. Best-fit lines are unlabeled and no text refers to them by label: OK with new label rule. [해시 갱신: 공용 키트 해시 규칙 추가로 판정이 무효화되어 재서명 — 샘플 문항·PNG 가 판정 시점과 바이트 동일함을 확인]",
  "restampedAt": "2026-10-05T00:00:00Z",
- "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신"
+ "restampNote": "2026-10-05 영문화로 ProblemFigure.tsx(해시 대상) 문구만 변경 — SVG·PNG 바이트 동일, 해시만 갱신",
+ "leadReread": "2026-10-07 통합 후 데스크톱 PNG 재판독 — 결함 없음(정답 D 강한 양의 연관)"
 }
