@@ -54,7 +54,7 @@ export function toBookingActionOutcomeError(e: unknown): {
       message: "You have no lesson credits available, so we can't confirm this booking. Please contact support.",
     };
   }
-  if (raw.includes("teacher_freebusy_conflict") || raw.includes("겹치는 일정")) {
+  if (raw.includes("teacher_freebusy_conflict")) {
     return {
       errorCode: "slot_conflict",
       message: "The time you selected now conflicts with another event. Please choose a different time.",
@@ -107,7 +107,7 @@ export async function confirmLessonBooking(params: ConfirmBookingParams): Promis
       endsAt,
     });
     if (freeBusy.checked && freeBusy.conflict) {
-      throw new Error("teacher_freebusy_conflict: 선생님의 Google Calendar에 이미 겹치는 일정이 있습니다.");
+      throw new Error("teacher_freebusy_conflict: The teacher's Google Calendar already has an overlapping event.");
     }
   }
 
