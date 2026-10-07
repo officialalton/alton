@@ -108,7 +108,9 @@ export function judgeMaterialNeed(input: {
     return { level: "none", kind: null, geometry: [], alternatives: [], reason: "AP 문항 작성은 준비 중입니다 — 자료 판정을 하지 않습니다." };
   }
 
-  const geometryHits = GEOMETRY_CUE.filter(([re]) => re.test(text)).map(([, t]) => t);
+  // 'Venn diagram'·'tree diagram' 의 diagram 은 도형 단서가 아니다(확률의 데이터 자료) — 도형 단서 판정에서만 구절을 지운다.
+  const geoText = text.replace(/\b(?:venn|tree|probability tree)\s+diagrams?\b/gi, " ");
+  const geometryHits = GEOMETRY_CUE.filter(([re]) => re.test(geoText)).map(([, t]) => t);
   const skill = input.skillCode ? SKILL_BY_CODE.get(input.skillCode) : undefined;
   const isRw = input.examSystem === "sat_rw" || (skill?.domain ?? "").startsWith("rw_");
 
@@ -141,8 +143,8 @@ export function judgeMaterialNeed(input: {
     const m = text.match(CUE.plane)?.[0] ?? "graph";
     return { level: "required", kind: "plane", geometry: [], alternatives: ["plane"], reason: `${subject}이 그래프(${m})를 가리키므로 좌표평면 자료가 필요합니다.`, viaTextCue: true };
   }
-  if (!isRw && CUE.geometry.test(text)) {
-    const m = text.match(CUE.geometry)?.[0] ?? "figure";
+  if (!isRw && CUE.geometry.test(geoText)) {
+    const m = geoText.match(CUE.geometry)?.[0] ?? "figure";
     return { level: "required", kind: "geometry", geometry: geometryHits, alternatives: ["geometry"], reason: `${subject}이 도형(${m})을 가리키므로 도형 자료가 필요합니다.`, viaTextCue: skillDefault?.level !== "required" };
   }
 

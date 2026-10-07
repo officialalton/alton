@@ -16,6 +16,13 @@ describe("자료 필요성 판정", () => {
     const fc = judgeMaterialNeed({ examSystem: "sat_math", skillCode: "linear_functions", text: "Which of the following graphs represents y = 2x + 1?" });
     expect(fc).toMatchObject({ level: "required", kind: "figure_choice" });
   });
+  it("Venn·tree diagram 의 'diagram' 은 도형 단서가 아니다 — 확률은 계속 데이터 자료 필수, 진짜 도형 단서는 그대로", () => {
+    const venn = judgeMaterialNeed({ examSystem: "sat_math", skillCode: "probability", text: "The Venn diagram shows 30 students in two clubs. What is the probability…?" });
+    expect(venn).toMatchObject({ level: "required", kind: "data" });
+    const tree = judgeMaterialNeed({ examSystem: "sat_math", skillCode: "probability", text: "A tree diagram shows two draws without replacement. What is the probability…?" });
+    expect(tree).toMatchObject({ level: "required", kind: "data" });
+    expect(judgeMaterialNeed({ examSystem: "sat_math", skillCode: "area_volume", text: "In the diagram, a circle is inscribed in a square. What is the area?" })).toMatchObject({ level: "required", kind: "geometry" });
+  });
   it("'The graph shows' 는 세부 기술로 가른다 — 함수 기술은 좌표평면, 자료 기술·R&W 는 표·그래프", () => {
     expect(judgeMaterialNeed({ examSystem: "sat_math", skillCode: "linear_functions", text: "The graph shows the line y = 2x + 1. What is the y-intercept?" })).toMatchObject({ level: "required", kind: "plane" });
     expect(judgeMaterialNeed({ examSystem: "sat_math", skillCode: "two_variable_data", text: "The graph shows the heights of 20 plants. What is the median?" })).toMatchObject({ level: "required", kind: "data" });
