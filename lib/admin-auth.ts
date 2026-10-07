@@ -155,3 +155,32 @@ export async function requirePayoutAccountStaff() {
   }
   return { supabase, actorUserId: user.id };
 }
+
+// 2026-10-07(Mercury 지급 통합) — 정산·지급·회계 권한 분리. 마스터 관리자는 전부 허용, 그 외는 해당 capability가 있어야 한다.
+// "view"는 마스터 또는 정산·지급·회계 관련 capability(레거시 '정산권한' 포함) 중 하나면 된다. DB 함수(payout_actor_can 등)가 같은 기준으로 최종 방어한다.
+export type PayoutCapability =
+  | "view"
+  | "payout_settlement_edit"
+  | "payout_settlement_approve"
+  | "payout_request_mercury"
+  | "payout_approve_mercury"
+  | "accounting_reconcile";
+
+export async function requirePayoutCapability(capability: PayoutCapability) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Sign in required.");
+  const { data: profile } = await supabase.from("profiles").select("role, admin_tier").eq("id", user.id).single();
+  if (profile?.role !== "admin") throw new Error("You do not have permission for this action.");
+  if (profile.admin_tier === "master") return { supabase, actorUserId: user.id };
+  if (capability === "view") {
+    const { data: canView } = await supabase.rpc("payout_staff_can_view");
+    if (canView) return { supabase, actorUserId: user.id };
+  } else {
+    const { data: has } = await supabase.rpc("current_user_has_capability", { p_capability: capability });
+    if (has) return { supabase, actorUserId: user.id };
+  }
+  throw new Error(`You do not have permission for this action (requires ${capability}).`);
+}

@@ -12,7 +12,7 @@ import { loadPayoutBatches, type PayoutBatchListItem } from "./payout-batches-da
 //   real_disbursement_enabled() 게이트(기본 false)가 어차피 exception을 던지지만,
 //   "UI가 DB 레이어가 거부할 액션을 아예 제공하지 않는다"는 요구사항에 따라
 //   서버 액션 자체를 만들지 않았다 — 실수로 버튼을 노출해도 호출할 함수가 없다.
-// - 실제 Mercury/Wise 등 provider dispatch 코드는 레포 전체에 없다.
+// - 실제 provider 호출은 lib/payout/providers/mercury.ts(스위치 닫힘)에만 있고 이 파일은 호출하지 않는다.
 
 export async function generatePayoutBatches(periodStart: string, periodEnd: string) {
   await requireAdmin();
@@ -238,7 +238,7 @@ export async function setAutoDispatchEnabled(enabled: boolean): Promise<PayoutAc
 // 실제 송금 여부는 DB의 real_disbursement_enabled() 게이트가 결정한다. 게이트가
 // 닫혀 있으면 dispatch_payout_batch()가 예외를 던지고, 그 사유가 그대로 화면에 뜬다
 // (이 액션이 게이트를 우회하거나 성공한 척하지 않는다).
-// 제공자는 받지 않는다 — 교사 정산은 Wise 전용이다(TEACHER_PAYOUT_PROVIDER).
+// 제공자는 받지 않는다 — 교사 정산 제공자는 Mercury 하나다(TEACHER_PAYOUT_PROVIDER).
 // 자동 실행과 수동 실행이 같은 서비스·같은 멱등성 키(dispatch_idempotency_key)를 쓴다.
 export async function dispatchPayoutBatchNow(batchId: string): Promise<PayoutActionResult> {
   const { adminUserId } = await requireAdmin();

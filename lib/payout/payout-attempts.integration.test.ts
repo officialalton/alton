@@ -403,3 +403,42 @@ describe("대사 뷰·회계 중복 기록 방지·권한", () => {
     expect(sqlDates).toBe(Object.keys(KR_BANK_HOLIDAYS).sort().join(","));
   });
 });
+
+describe("정산 paid 동기화 — 수취 확인이 정산 총액을 채울 때만", () => {
+  function sentAttempt(amount: number) {
+    const t = mkTeacher();
+    const b = mkApprovedBatch(t, "USD", amount, "2026-10-26", settler);
+    mkVerifiedLink(t, "USD");
+    const a = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'mercury');`);
+    psql(`select approve_payout_attempt('${a}', '${approver}');`);
+    gated(`select payout_attempt_transition('${a}', 'awaiting_mercury_approval', '${requester}')`);
+    gated(`select payout_attempt_transition('${a}', 'processing', null)`);
+    psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-${Math.random().toString(36).slice(2, 8)}', '${requester}');`);
+    gated(`select payout_attempt_transition('${a}', 'sent', null)`);
+    return { b, a };
+  }
+  it("게이트가 닫힌 채 수취 확인하면 정산은 paid가 되지 않고 플래그만 남는다", () => {
+    const { b, a } = sentAttempt(11000);
+    psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 11000, 'USD', 'Teacher confirmed', now());`);
+    expect(psql(`select status from payout_batches where id='${b}'`)).toBe("approved");
+    expect(attempt(a, "needs_review_reasons::text")).toMatch(/settlement_not_marked_paid/);
+  });
+  it("게이트가 열려 있고 총액을 채우면 기존 paid 가드를 거쳐 정산이 paid가 된다", () => {
+    const { b, a } = sentAttempt(12000);
+    gated(`select confirm_payout_attempt_receipt('${a}', '${approver}', 12000, 'USD', 'Teacher confirmed', now())`);
+    expect(psql(`select status || ':' || provider || ':' || (provider_confirmed_at is not null) from payout_batches where id='${b}'`)).toBe("paid:mercury:true");
+  });
+  it("부족 수취는 정산을 paid로 만들지 않고, 보충(top-up) 수취까지 채워야 paid가 된다", () => {
+    const { b, a } = sentAttempt(13000);
+    gated(`select confirm_payout_attempt_receipt('${a}', '${approver}', 12900, 'USD', 'Bank shows 129.00', now())`);
+    expect(psql(`select status from payout_batches where id='${b}'`)).toBe("approved");
+    const top = psql(`select create_payout_attempt('${b}', null, 'top_up', '${a}', '${requester}', 'mercury', 100);`);
+    psql(`select approve_payout_attempt('${top}', '${approver}');`);
+    gated(`select payout_attempt_transition('${top}', 'awaiting_mercury_approval', '${requester}')`);
+    gated(`select payout_attempt_transition('${top}', 'processing', null)`);
+    psql(`select link_payout_attempt_transaction('${top}', 'tx-${RUN}-top', '${requester}');`);
+    gated(`select payout_attempt_transition('${top}', 'sent', null)`);
+    gated(`select confirm_payout_attempt_receipt('${top}', '${approver}', 100, 'USD', 'Bank shows 1.00 top-up', now())`);
+    expect(psql(`select status from payout_batches where id='${b}'`)).toBe("paid");
+  });
+});

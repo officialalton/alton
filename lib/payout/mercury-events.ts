@@ -6,7 +6,7 @@ export type EventStore = {
   findByTransactionId(txId: string): Promise<{ id: string; status: AttemptStatus; requested_currency: "USD" | "KRW" } | null>;
   findByRequestId(requestId: string): Promise<{ id: string; status: AttemptStatus; requested_currency: "USD" | "KRW" } | null>;
   linkTransaction(attemptId: string, txId: string): Promise<void>;
-  transition(attemptId: string, to: AttemptStatus, reason?: string): Promise<void>;
+  applyTransition(attemptId: string, to: AttemptStatus, reason?: string): Promise<void>;
   recordActuals(attemptId: string, usdPrincipalMinor: number, usdFeeMinor: number, finalRate: number | null): Promise<void>;
   recordReturn(attemptId: string, returnTxId: string, returnedUsdMinor: number | null, reason: string): Promise<void>;
 };
@@ -42,8 +42,8 @@ export async function applyMercuryTransaction(store: EventStore, tx: ProviderTra
   }
   if (attempt.status === target) return "noop";
   // processing 이전 단계를 건너뛴 이벤트(sent가 먼저 도착)는 단계를 채워서 전이한다.
-  if (target === "sent" && attempt.status === "awaiting_mercury_approval") await store.transition(attempt.id, "processing");
-  await store.transition(attempt.id, target, tx.failureReason ?? undefined);
+  if (target === "sent" && attempt.status === "awaiting_mercury_approval") await store.applyTransition(attempt.id, "processing");
+  await store.applyTransition(attempt.id, target, tx.failureReason ?? undefined);
   return "applied";
 }
 

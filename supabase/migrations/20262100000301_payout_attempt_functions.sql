@@ -367,6 +367,48 @@ begin
 end;
 $$;
 
+-- ───────────────────────── 정산 paid 동기화(수취 확인 합계가 정산 총액 이상일 때만) ─────────────────────────
+-- 기존 paid 가드(provider_transaction_id + provider_confirmed_at)를 그대로 통과시키는 방식으로만 batch를 paid로 옮긴다.
+-- 게이트가 닫혀 있거나 수동(거래 ID 없음)·컨설턴트 정산이면 전이하지 않고 플래그를 남긴다(관리자가 기존 화면에서 마감).
+create or replace function public.sync_payout_settlement_paid(p_attempt uuid, p_actor uuid)
+returns text language plpgsql as $$
+declare
+  a payout_attempts%rowtype; b payout_batches%rowtype;
+  v_total bigint; v_received bigint;
+begin
+  select * into a from payout_attempts where id = p_attempt;
+  if a.settlement_batch_id is null then
+    perform public.payout_attempt_add_flag(p_attempt, 'settlement_not_marked_paid');
+    return 'consultant_manual';
+  end if;
+  select * into b from payout_batches where id = a.settlement_batch_id for update;
+  if b.status = 'paid' then return 'already_paid'; end if;
+  select coalesce(sum(amount_minor), 0) into v_total from payout_items where batch_id = b.id;
+  select coalesce(sum(received_amount_minor), 0) into v_received from payout_attempts
+    where settlement_batch_id = b.id and status = 'receipt_confirmed' and received_currency = b.currency;
+  if v_received < v_total then return 'received_less_than_settlement'; end if;
+  if a.provider = 'manual' or a.provider_transaction_id is null or not public.real_disbursement_enabled() then
+    perform public.payout_attempt_add_flag(p_attempt, 'settlement_not_marked_paid');
+    return 'not_synced';
+  end if;
+  if b.status = 'approved' then
+    perform public.dispatch_payout_batch(b.id, case when a.provider = 'wise' then 'wise' else 'mercury' end, p_actor);
+    select * into b from payout_batches where id = b.id;
+  end if;
+  if b.status = 'dispatch_requested' then
+    perform public.mark_payout_batch_provider_pending(b.id, a.provider_transaction_id);
+    b.status := 'provider_pending';
+  end if;
+  if b.status = 'provider_pending' then
+    perform public.mark_payout_batch_provider_confirmed(b.id, p_actor);
+    perform public.mark_payout_batch_paid(b.id, p_actor);
+    return 'paid';
+  end if;
+  perform public.payout_attempt_add_flag(p_attempt, 'settlement_not_marked_paid');
+  return 'not_synced';
+end;
+$$;
+
 -- ───────────────────────── 수취 확인(증빙 필수) ─────────────────────────
 create or replace function public.confirm_payout_attempt_receipt(
   p_attempt uuid, p_actor uuid, p_received_amount_minor bigint, p_received_currency text,
@@ -401,6 +443,9 @@ begin
   end if;
   perform public.payout_attempt_log(p_attempt, 'receipt_confirmed', 'sent', 'receipt_confirmed', p_actor,
     jsonb_build_object('received_amount_minor', p_received_amount_minor, 'currency', p_received_currency, 'evidence', p_evidence));
+  if a.kind in ('normal', 'resend', 'top_up') then
+    perform public.sync_payout_settlement_paid(p_attempt, p_actor);
+  end if;
 end;
 $$;
 
@@ -446,6 +491,7 @@ begin
   foreach f in array array[
     'payout_attempt_log(uuid,text,text,text,uuid,jsonb)',
     'payout_attempt_add_flag(uuid,text)',
+    'sync_payout_settlement_paid(uuid,uuid)',
     'create_payout_attempt(uuid,uuid,text,uuid,uuid,text,bigint)',
     'approve_payout_attempt(uuid,uuid)',
     'invalidate_payout_attempts(uuid,uuid,uuid,text,text)',

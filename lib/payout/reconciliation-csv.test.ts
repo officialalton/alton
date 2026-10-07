@@ -48,7 +48,7 @@ describe("Mercury 이벤트 반영", () => {
       async findByTransactionId() { return null; },
       async findByRequestId(id) { return id === "r1" ? { id: "a1", status, requested_currency: cur } : null; },
       async linkTransaction(_a, tx) { log.push(`link:${tx}`); },
-      async transition(_a, to) { log.push(`to:${to}`); },
+      async applyTransition(_a, to) { log.push(`to:${to}`); },
       async recordActuals(_a, p, f) { log.push(`actuals:${p}:${f}`); },
       async recordReturn(_a, tx, usd) { log.push(`return:${tx}:${usd}`); },
     };
