@@ -73,8 +73,17 @@ export function feasibleN(pool: EligibleProblem[], W: Weights, maxN: number, rel
 }
 
 /** 전역 고유 선택. pool 은 이미 kept 문항이 빠진 후보. keptCov: 유지 세트가 이미 덮은 `skill|difficulty` 횟수. */
-export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptCov: Map<string, number>, relaxFormat = false) {
+const cmpKey = (a: (number | string)[], b: (number | string)[]) => { for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return a[i] < b[i] ? -1 : 1; return 0; };
+export type GroupLimits = { maxShared?: number; groupCap?: number; keptGroups?: Set<string>[] };
+export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptCov: Map<string, number>, relaxFormat = false, limits: GroupLimits = {}) {
   const slots = buildSlots(W, n, relaxFormat);
+  const maxShared = limits.maxShared ?? 15; const groupCap = limits.groupCap ?? Infinity; const kg = limits.keptGroups ?? [];
+  const groupUse = new Map<string, number>(); for (const g of kg) for (const x of g) groupUse.set(x, (groupUse.get(x) ?? 0) + 1);
+  // 새 세트 s 가 다른 세트(새 세트·유지 세트)와 공유하는 그룹 수 — 유사문항 그룹 g 를 s 에 추가해도 한도를 넘지 않는지.
+  const shared = Array.from({ length: n }, () => new Map<string, number>()); // shared[s].get(other) ; other: `n${t}` | `k${t}`
+  const others = (g: string, s: number) => { const o: string[] = []; setGroups.forEach((sg, t) => { if (t !== s && sg.has(g)) o.push(`n${t}`); }); kg.forEach((sg, t) => { if (sg.has(g)) o.push(`k${t}`); }); return o; };
+  const groupOk = (g: string | null | undefined, s: number) => !g || ((groupUse.get(g) ?? 0) < groupCap && others(g, s).every((o) => (shared[s].get(o) ?? 0) + 1 <= maxShared));
+  const groupAdd = (g: string | null | undefined, s: number, d: 1 | -1) => { if (!g) return; groupUse.set(g, (groupUse.get(g) ?? 0) + d); for (const o of others(g, s)) { shared[s].set(o, (shared[s].get(o) ?? 0) + d); if (o[0] === "n") { const t = Number(o.slice(1)); shared[t].set(`n${s}`, (shared[t].get(`n${s}`) ?? 0) + d); } } };
   const taken = new Set<string>(); const cov = new Map(keptCov);
   const setGroups: Set<string>[] = Array.from({ length: n }, () => new Set());
   const modSkill = new Map<string, number>(); // `${set}|${modKey}|${route}|${domain}|${skill}`
@@ -88,11 +97,11 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
       for (const sl of group) { if ((left.get(sl) ?? 0) <= 0) continue;
         const mk = (c: EligibleProblem) => `${sl.set}|${sl.mod.key}|${sl.mod.route}|${domain}|${c.skillCode ?? ""}`;
         let best: EligibleProblem | null = null, bk: (number | string)[] | null = null;
-        for (const c of cands) { if (taken.has(c.problemId)) continue; if (c.similarityGroup && setGroups[sl.set].has(c.similarityGroup)) continue;
-          const key = [cov.get(`${c.skillCode}|${diff}`) ?? 0, modSkill.get(mk(c)) ?? 0, c.exposureCount ?? 0, c.problemId];
-          if (!bk || key[0] < bk[0] || (key[0] === bk[0] && (key[1] < bk[1] || (key[1] === bk[1] && (key[2] < bk[2] || (key[2] === bk[2] && key[3] < bk[3])))))) { best = c; bk = key; } }
+        for (const c of cands) { if (taken.has(c.problemId)) continue; if (c.similarityGroup && setGroups[sl.set].has(c.similarityGroup)) continue; if (!groupOk(c.similarityGroup, sl.set)) continue;
+          const key: (number | string)[] = [cov.get(`${c.skillCode}|${diff}`) ?? 0, modSkill.get(mk(c)) ?? 0, c.similarityGroup ? groupUse.get(c.similarityGroup) ?? 0 : 0, c.exposureCount ?? 0, c.problemId];
+          if (!bk || cmpKey(key, bk) < 0) { best = c; bk = key; } }
         if (!best) { left.set(sl, 0); failures.push(`${k} set${sl.set + 1} ${sl.mod.key}/${sl.mod.route ?? "-"}: no candidate left (group conflicts)`); continue; }
-        taken.add(best.problemId); if (best.similarityGroup) setGroups[sl.set].add(best.similarityGroup);
+        taken.add(best.problemId); groupAdd(best.similarityGroup, sl.set, 1); if (best.similarityGroup) setGroups[sl.set].add(best.similarityGroup);
         modSkill.set(mk(best), (modSkill.get(mk(best)) ?? 0) + 1); cov.set(`${best.skillCode}|${diff}`, (cov.get(`${best.skillCode}|${diff}`) ?? 0) + 1);
         (chosen.get(sl) ?? chosen.set(sl, []).get(sl)!).push(best); left.set(sl, left.get(sl)! - 1); progress = true; } }
   }
@@ -105,7 +114,8 @@ export function planUnique(pool: EligibleProblem[], W: Weights, n: number, keptC
       for (const [sl, arr] of chosen) { if (done) break; if (sl.cell.difficulty !== d || sl.cell.satDomain !== r.satDomain) continue; if (sl.cell.format && sl.cell.format !== r.format) continue;
         const idx = arr.findIndex((it) => (cov.get(`${it.skillCode}|${d}`) ?? 0) >= 2); if (idx < 0) continue; const old = arr[idx];
         if (r.similarityGroup && r.similarityGroup !== old.similarityGroup && setGroups[sl.set].has(r.similarityGroup)) continue;
-        taken.delete(old.problemId); taken.add(r.problemId); if (old.similarityGroup) setGroups[sl.set].delete(old.similarityGroup); if (r.similarityGroup) setGroups[sl.set].add(r.similarityGroup);
+        if (r.similarityGroup !== old.similarityGroup && !(groupOk(r.similarityGroup, sl.set))) continue;
+        taken.delete(old.problemId); taken.add(r.problemId); if (old.similarityGroup) { if (setGroups[sl.set].delete(old.similarityGroup)) groupAdd(old.similarityGroup, sl.set, -1); } if (r.similarityGroup) { groupAdd(r.similarityGroup, sl.set, 1); setGroups[sl.set].add(r.similarityGroup); }
         cov.set(`${old.skillCode}|${d}`, cov.get(`${old.skillCode}|${d}`)! - 1); cov.set(`${sk}|${d}`, 1); arr[idx] = r; swaps.push(`${old.skillCode}|${d} -> ${sk}|${d} (set${sl.set + 1})`); done = true; } } }
   // 모듈별 정렬·위치 부여(assemble-sim 과 같은 규칙: 난이도 오름차순·problemId, 섹션 안 모듈 오프셋 누적)
   const sets: PlanItem[][] = [];
@@ -127,6 +137,14 @@ export function assertUnique(newSets: { problemId: string; moduleKey?: string; r
       if (inSet.has(it.problemId)) errs.push(`new set ${s + 1}: ${it.problemId} repeated within the set`); inSet.add(it.problemId);
       if (seen.has(it.problemId) && seen.get(it.problemId) !== s) errs.push(`${it.problemId} appears in new sets ${seen.get(it.problemId)! + 1} and ${s + 1}`); seen.set(it.problemId, s); } });
   if (errs.length) throw new Error(`uniqueness violated (${errs.length}): ${errs.slice(0, 5).join("; ")}`);
+}
+/** 오너 규칙 (3)(4): 새 세트 쌍·새-유지 세트 쌍이 공유하는 유사문항 그룹 수 <= maxShared, 같은 그룹의 전체 출현 횟수 <= groupCap. 위반이면 throw. */
+export function assertGroupLimits(newSets: { group: string | null }[][], maxShared = 15, groupCap = Infinity, keptGroups: Set<string>[] = []) {
+  const sets = [...keptGroups, ...newSets.map((it) => new Set(it.map((i) => i.group).filter(Boolean) as string[]))]; const errs: string[] = [];
+  for (let a = 0; a < sets.length; a++) for (let b = a + 1; b < sets.length; b++) { if (a < keptGroups.length && b < keptGroups.length) continue; let c = 0; for (const g of sets[a]) if (sets[b].has(g)) c++; if (c > maxShared) errs.push(`sets ${a + 1}/${b + 1} share ${c} groups (> ${maxShared})`); }
+  const use = new Map<string, number>(); for (const sg of sets) for (const g of sg) use.set(g, (use.get(g) ?? 0) + 1);
+  for (const [g, c] of use) if (c > groupCap) errs.push(`group ${g} used in ${c} sets (> ${groupCap})`);
+  if (errs.length) throw new Error(`group limits violated (${errs.length}): ${errs.slice(0, 5).join("; ")}`);
 }
 function countDupsAcross(sets: Map<string, string[]>) { const m = new Map<string, Set<string>>(); for (const [k, ids] of sets) for (const id of ids) (m.get(id) ?? m.set(id, new Set()).get(id)!).add(k); return [...m.entries()].filter(([, v]) => v.size > 1); }
 
@@ -168,7 +186,10 @@ async function main() {
   const report: any = { requestedN: N, feasibleN: feas, kept: keptSets.map((s) => s.name), keptDuplicatesBetweenKept: countDupsAcross(new Map(keptSets.map((s) => [s.name, keptItems.filter((i: any) => i.exam_set_id === s.id).map((i: any) => i.problem_id)]))).length, maxNByPool: maxNByPool(pool, W, relax), formatRelaxed: relax, relaxedFeasibleN: feasibleN(pool, W, N, true), relaxedShortfallsAtRequestedN: demandVsSupply(pool, buildSlots(W, N, true)), shortfallsAtRequestedN: short, poolSize: pool.length };
   const skills = [...new Set(cands.map((c) => c.skillCode).filter(Boolean))] as string[];
   if (useN > 0) {
-    const r = planUnique(pool, W, useN, keptCov, relax); assertUnique(r.sets, keptIds);
+    const maxShared = Number(arg("--max-shared-groups") ?? 15); const groupCap = arg("--group-cap") ? Number(arg("--group-cap")) : Infinity;
+    const P = new Map<string, any>(dump.problems.map((p: any) => [p.id, p])); const keptGroups = keptSets.map((ks) => new Set<string>(keptItems.filter((i: any) => i.exam_set_id === ks.id).map((i: any) => P.get(i.problem_id)?.similarity_group).filter(Boolean)));
+    const r = planUnique(pool, W, useN, keptCov, relax, { maxShared, groupCap, keptGroups }); assertUnique(r.sets, keptIds);
+    try { assertGroupLimits(r.sets, maxShared, groupCap, keptGroups); } catch (e) { report.groupLimitViolation = (e as Error).message; }
     const all = new Map<string, number>(); for (const it of r.sets.flat()) all.set(it.problemId, (all.get(it.problemId) ?? 0) + 1);
     const miss: string[] = []; for (const sk of skills) for (const d of DIFFS) if (!((r.coverage.get(`${sk}|${d}`)) ?? 0)) miss.push(`${sk}|${d}`);
     const unusedStock = (k: string) => { const [sk, d] = k.split("|"); return pool.filter((c) => c.skillCode === sk && c.difficulty === d && !all.has(c.problemId)).length; };
