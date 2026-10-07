@@ -30,3 +30,19 @@ describe("demandVsSupply / planUnique", () => {
     expect(new Set(r.sets.flat().map((i) => i.problemId)).size).toBe(294);
   });
 });
+
+import { assertGroupLimits } from "./assemble-unique";
+describe("그룹 한도 (오너 규칙 3·4)", () => {
+  const g = (...x: string[]) => x.map((group) => ({ group }));
+  it("쌍 공유 수 초과면 throw", () => { expect(() => assertGroupLimits([g("a", "b", "c"), g("a", "b", "c")], 2)).toThrow(/share 3/); expect(() => assertGroupLimits([g("a", "b"), g("a", "b")], 2)).not.toThrow(); });
+  it("그룹 총 출현 상한", () => { expect(() => assertGroupLimits([g("a"), g("a"), g("a")], 15, 2)).toThrow(/group a used in 3/); });
+  it("유지 세트와의 공유도 센다", () => { expect(() => assertGroupLimits([g("a", "b")], 1, Infinity, [new Set(["a", "b"])])).toThrow(/share 2/); });
+  it("planUnique 는 maxShared 를 지킨다", () => {
+    const W: Weights = { dom: [{ section: "rw", sat_domain: "d1", weight_pct: 100 }, { section: "math", sat_domain: "m1", weight_pct: 100 }], diff: ["easy", "medium", "hard"].flatMap((d, i) => ["rw", "math"].map((s) => ({ section: s, problem_difficulty: d, weight_pct: [25, 50, 25][i] }))) };
+    const mk = (dom: string, d: string): EligibleProblem[] => Array.from({ length: 300 }, (_, i) => ({ problemId: `${dom}-${d}-${i}`, problemVersionId: `v${dom}-${d}-${i}`, satDomain: dom, skillCode: `${dom}_s${i % 3}`, difficulty: d as never, format: "mc" as never, similarityGroup: `g${dom}${d}${i % 80}`, exposureCount: 0 }));
+    const pool = ["d1", "m1"].flatMap((dm) => ["easy", "medium", "hard"].flatMap((d) => mk(dm, d)));
+    const r = planUnique(pool, W, 3, new Map(), true, { maxShared: 15 });
+    expect(() => assertGroupLimits(r.sets, 15)).not.toThrow();
+    expect(() => assertUnique(r.sets, new Set())).not.toThrow();
+  });
+});

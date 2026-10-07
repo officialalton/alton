@@ -11,6 +11,7 @@
 //   키워드: quality.mockExamGeneration.intendedSkill 에 실제 스킬(APP_SKILL_OVERRIDE 이전 planSkill)을 남긴다.
 //           임포트 뒤 scripts/keywords/link-imported.ts --file <같은 파일> --execute 로 공용 키워드에 연결한다.
 //   --cleanup-tag <tag> : 그 표식의 시험 데이터를 삭제(로컬 전용 — 원격 URL 이면 거부).
+import { shingles, findNearDuplicate, exactKey } from "./dup-rule";
 import { findResidue } from "../../lib/problem-generation/residue";
 import { dedupeStem, answerKeyError, draftBankGateError } from "../../lib/problem-text-guards";
 import { judgeMaterialNeed, materialBlocker } from "../../lib/problem-material-need";
@@ -39,12 +40,6 @@ type Rec = {
   createdVia?: string;
   subpattern?: string | null;
 };
-
-const shingles = (t: string) => {
-  const w = t.toLowerCase().replace(/[0-9]+([.,][0-9]+)*/g, "#").replace(/[^a-z#\s]+/g, " ").split(/\s+/).filter(Boolean);
-  const s = new Set<string>(); for (let i = 0; i + 3 <= w.length; i++) s.add(w.slice(i, i + 3).join(" ")); return s;
-};
-const jaccard = (a: Set<string>, b: Set<string>) => { if (!a.size || !b.size) return 0; let x = 0; for (const v of a) if (b.has(v)) x++; return x / (a.size + b.size - x); };
 
 async function main() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -95,16 +90,16 @@ async function main() {
   };
 
   // 기존 문제은행 본문(같은 skill) — 유사도 비교용. 페이지 단위로 읽는다.
-  const existing = new Map<string, { problemId: string; key: string; sh: Set<string> }[]>();
+  const existing = new Map<string, { problemId: string; key: string; ek: string; sh: Set<string>; group: string | null }[]>();
   const skills = [...new Set(recs.map((r) => r.skill))];
   if (!dry || dupCheck) {
     for (const skill of skills) {
-      const list: { problemId: string; key: string; sh: Set<string> }[] = [];
+      const list: { problemId: string; key: string; ek: string; sh: Set<string>; group: string | null }[] = [];
       for (let from = 0; ; from += 1000) {
-        const { data, error } = await admin.from("problem_versions").select("problem_id, passage, question, options, problems!problem_versions_problem_id_fkey!inner(skill_code, archived_at)").eq("problems.skill_code", skill).is("problems.archived_at", null).range(from, from + 999);
+        const { data, error } = await admin.from("problem_versions").select("problem_id, passage, question, options, quality, problems!problem_versions_problem_id_fkey!inner(skill_code, archived_at, similarity_group)").eq("problems.skill_code", skill).is("problems.archived_at", null).range(from, from + 999);
         if (error) throw new Error(`기존 문항 조회 실패: ${error.message}`);
-        for (const v of (data ?? []) as unknown as { problem_id: string; passage: string | null; question: string | null; options: string[] | null }[]) {
-          list.push({ problemId: v.problem_id, key: `${v.passage ?? ""}\u0000${v.question ?? ""}`, sh: shingles(`${v.passage ?? ""} ${v.question ?? ""} ${(v.options ?? []).join(" ")}`) });
+        for (const v of (data ?? []) as unknown as { problem_id: string; passage: string | null; question: string | null; options: string[] | null; quality: { mockExamGeneration?: { archetypeId?: string } } | null; problems: { similarity_group: string | null } | { similarity_group: string | null }[] | null }[]) {
+          const pr = Array.isArray(v.problems) ? v.problems[0] : v.problems; list.push({ problemId: v.problem_id, key: `${v.passage ?? ""}\u0000${v.question ?? ""}`, ek: exactKey(v.passage ?? "", v.question, v.options), group: pr?.similarity_group ?? v.quality?.mockExamGeneration?.archetypeId ?? null, sh: shingles(`${v.passage ?? ""} ${v.question ?? ""} ${(v.options ?? []).join(" ")}`) });
         }
         if (!data || data.length < 1000) break;
       }
@@ -135,8 +130,10 @@ async function main() {
     const pool = existing.get(r.skill) ?? [];
     if (pool.some((e) => e.key === key || e.key === rawKey)) { stats.skippedExisting += 1; continue; }
     const sh = shingles(`${stimulus} ${question ?? ""} ${(g.options ?? []).join(" ")}`);
+    const myGroup = (r.quality.mockExamGeneration as { archetypeId?: string } | undefined)?.archetypeId ?? null;
+    if (pool.some((e) => e.ek === exactKey(stimulus, question, g.options))) { stats.skippedExisting += 1; continue; } // 정확히 같은 문제
     if (dupCheck) {
-      const hit = pool.find((e) => jaccard(sh, e.sh) >= 0.6);
+      const hit = findNearDuplicate(sh, myGroup, pool); // 같은 원형/그룹 인스턴스는 제외, 다른 원형·외부 문항은 0.6 유지
       if (hit) { stats.skippedDuplicate += 1; failures.push(`${r.gid}: 기존 문항과 유사 (${hit.problemId})`); continue; }
     }
     if (dry) { stats.created += 1; continue; }
@@ -148,7 +145,7 @@ async function main() {
       p_difficulty: r.difficulty, p_actor_id: actorId, p_skill_code: r.skill, p_exam_system: r.examSystem, p_ap_subject: null, p_usage_scope: "mock_exam",
     });
     if (pErr || !problemId) { stats.failed += 1; failures.push(`${r.gid}: 문제 생성 실패 ${pErr?.message}`); continue; }
-    await admin.from("problems").update({ created_via: r.createdVia === "compiler" ? "compiler" : "ai_generated", ...(r.subpattern ? { subpattern: r.subpattern } : {}) }).eq("id", problemId as string);
+    await admin.from("problems").update({ created_via: r.createdVia === "compiler" ? "compiler" : "ai_generated", ...(r.subpattern ? { subpattern: r.subpattern } : {}), ...(myGroup ? { similarity_group: myGroup } : {}) }).eq("id", problemId as string);
 
     const fullText = composeProblemText(stimulus, question);
     const contentIssues = checkContent({ format: r.format, passage: fullText, options: g.options ?? null, correctIndex: g.correctIndex ?? null, explanation: g.explanation, answers: g.answers ?? null, statements: g.statements ?? null, skillCode: r.skill, figure: g.figure ?? null });
