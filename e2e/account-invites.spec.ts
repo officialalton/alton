@@ -66,10 +66,10 @@ test("초대 링크로 계정을 만들고 비밀번호를 설정하면 보호�
   await page.goto(acceptPath(token));
   await expect(page).toHaveURL(/\/set-password/);
 
-  await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
-  await page.getByLabel("새 비밀번호 확인").fill(DEV_PASSWORD);
+  await page.getByLabel("New password", { exact: true }).fill(DEV_PASSWORD);
+  await page.getByLabel("Confirm new password").fill(DEV_PASSWORD);
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "비밀번호 설정하고 계속하기" }).click();
+  await page.getByRole("button", { name: "Set password and continue" }).click();
 
   await expect(page).toHaveURL(/\/parent/);
 });

@@ -78,15 +78,15 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
   test("홈페이지 신청 → 접수만 되고(일정 없음) 관리자 미배정 큐에 나타난다", async ({ page, context }) => {
     test.skip(autoAssignOn, "자동배정이 켜져 있어 미배정 큐를 거치지 않는다.");
     await page.goto("/");
-    await page.getByLabel("학부모 이름").fill(PARENT_NAME);
-    await page.getByRole("textbox", { name: "이메일" }).fill(PARENT_EMAIL);
+    await page.getByLabel("Parent name").fill(PARENT_NAME);
+    await page.getByRole("textbox", { name: "Email" }).fill(PARENT_EMAIL);
     // 랜딩 폼에는 더 이상 캘린더/시간 선택이 없다.
     await expect(page.getByTestId("consult-slot-calendar")).toHaveCount(0);
 
     await page.getByRole("checkbox").check();
-    await page.getByRole("button", { name: "상담 신청하기" }).click();
-    await expect(page.getByText("상담 신청이 접수되었습니다.")).toBeVisible();
-    await expect(page.getByText(/담당 컨설턴트가 배정되면 예약 링크를 이메일로 보내드립니다/)).toBeVisible();
+    await page.getByRole("button", { name: "Request a consultation" }).click();
+    await expect(page.getByText("Your consultation request has been received.")).toBeVisible();
+    await expect(page.getByText(/we'll email you a booking link/)).toBeVisible();
 
     const row = psql(
       `select id || '|' || status || '|' || coalesce(starts_at::text, 'null') from consultations where contact_email = '${PARENT_EMAIL}';`
@@ -129,12 +129,12 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
     const customerContext = await browser.newContext();
     const customer = await customerContext.newPage();
     await customer.goto(schedulePath);
-    await expect(customer.getByText("상담 시간을 선택해 주세요")).toBeVisible();
+    await expect(customer.getByText("Choose a consultation time", { exact: true })).toBeVisible();
     const calendar = customer.getByTestId("consult-slot-calendar");
     await expect(calendar).toBeVisible();
     let dayWithSlot = calendar.locator("button:has(span.rounded-full)").first();
     for (let attempt = 0; attempt < 3 && (await dayWithSlot.count()) === 0; attempt++) {
-      await calendar.getByRole("button", { name: "다음 달" }).click();
+      await calendar.getByRole("button", { name: "Next month" }).click();
       dayWithSlot = calendar.locator("button:has(span.rounded-full)").first();
     }
     await expect(dayWithSlot).toBeVisible();
@@ -143,10 +143,10 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
     // 배정된 상담은 컨설턴트별 consultations_no_overlap 이다 — 20261908000000).
     const badgedDays = calendar.locator("button:has(span.rounded-full)");
     await badgedDays.nth(Math.floor(Math.random() * (await badgedDays.count()))).click();
-    const timeButtons = customer.getByRole("group", { name: "상담 희망 시간 선택" }).locator("button");
+    const timeButtons = customer.getByRole("group", { name: "Choose a consultation time" }).locator("button");
     await timeButtons.nth(Math.floor(Math.random() * (await timeButtons.count()))).click();
     await expect(customer.getByTestId("consult-slot-confirmation")).toBeVisible();
-    await customer.getByRole("button", { name: "이 시간으로 확정하기" }).click();
+    await customer.getByRole("button", { name: "Confirm this time" }).click();
     // 확정 자체는 DB 상태로 확인한다. "확정되었습니다" 성공 화면은 아래 별도 테스트가 다룬다.
     await expect
       .poll(() => psql(`select status from consultations where id = '${consultationId}';`), { timeout: 15000 })
@@ -185,11 +185,13 @@ test.describe("M1 — 홈페이지 상담 신청→컨설턴트 배정→예약 
     await expect(calendar).toBeVisible();
     const badgedDays = calendar.locator("button:has(span.rounded-full)");
     await badgedDays.nth(Math.floor(Math.random() * (await badgedDays.count()))).click();
-    const timeButtons = customer.getByRole("group", { name: "상담 희망 시간 선택" }).locator("button");
+    const timeButtons = customer.getByRole("group", { name: "Choose a consultation time" }).locator("button");
     await timeButtons.nth(Math.floor(Math.random() * (await timeButtons.count()))).click();
-    await customer.getByRole("button", { name: "이 시간으로 확정하기" }).click();
+    // 직접 삽입한 상담에는 AI 노트 동의가 없으므로 일정 확정 화면에서 동의 체크박스가 요구된다.
+    await customer.getByRole("checkbox").check();
+    await customer.getByRole("button", { name: "Confirm this time" }).click();
 
-    await expect(customer.getByText("상담 일정이 확정되었습니다.")).toBeVisible({ timeout: 10000 });
+    await expect(customer.getByText("Your consultation is booked.")).toBeVisible({ timeout: 10000 });
     await context.close();
   });
 });

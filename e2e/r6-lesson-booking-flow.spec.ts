@@ -83,18 +83,18 @@ test.describe("R6 — 정규수업 예약 흐름 (실브라우저)", () => {
     // upcomingBookings.length === 0이라(app/student/LessonBookingTab.tsx) —
     // 이 fixture 학생은 예정된 수업이 아직 없으므로 "+ 새 수업 예약하기"를
     // 누를 필요 없이 폼(과목·선생님 선택)이 이미 펼쳐진 채로 로드된다.
-    await expect(page.getByText("과목·선생님 선택")).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText("Select subject & teacher")).toBeVisible({ timeout: 15000 });
 
-    const firstSlotButton = page.locator("button").filter({ hasText: /오전|오후/ }).first();
+    const firstSlotButton = page.locator("button").filter({ hasText: /\d{1,2}:\d{2}\s?(AM|PM)/ }).first();
     await expect(firstSlotButton).toBeVisible({ timeout: 15000 });
     await firstSlotButton.click();
 
     // R6 11/N: 슬롯 클릭은 이제 바로 확정하지 않고 요약 확인 카드를 띄운다(정책 #3
     // "시간 선택 후 요약 확인을 거쳐 최종 확정") — "최종 확정"을 한 번 더 눌러야 한다.
-    await expect(page.getByText("예약 확인")).toBeVisible();
-    await page.getByRole("button", { name: "최종 확정" }).click();
+    await expect(page.getByText("Confirm booking", { exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Confirm", exact: true }).click();
 
-    await expect(page.getByText("예약이 확정됐습니다.")).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText("Your booking is confirmed.")).toBeVisible({ timeout: 15000 });
 
     const reservationId = psql(
       `select id from reservations where subject_enrollment_id = '${enrollmentId}' and status='confirmed' limit 1;`
@@ -111,11 +111,11 @@ test.describe("R6 — 정규수업 예약 흐름 (실브라우저)", () => {
     );
     expect(outboxCount).toBeGreaterThan(0);
 
-    await page.getByRole("button", { name: "취소", exact: true }).first().click();
-    await page.getByPlaceholder("예: 일정이 바뀌었어요").fill("E2E 테스트 취소");
-    await page.getByRole("button", { name: "취소 확정" }).click();
+    await page.getByRole("button", { name: "Cancel", exact: true }).first().click();
+    await page.getByPlaceholder("e.g. My schedule changed").fill("E2E 테스트 취소");
+    await page.getByRole("button", { name: "Confirm cancellation" }).click();
 
-    await expect(page.getByText("예약이 취소됐습니다.")).toBeVisible({ timeout: 15000 });
+    await expect(page.getByText("Your booking was cancelled.")).toBeVisible({ timeout: 15000 });
 
     const releaseAmount = Number(
       psql(`select amount from entitlement_ledger where reservation_id = '${reservationId}' and event_type = 'release';`)

@@ -100,7 +100,24 @@ const regularEndsAt = new Date(new Date(regularStartsAt).getTime() + 120 * 60000
 
 test.describe.configure({ mode: "serial" });
 
+// 2026-10-05 정책: 계약서 자동 발송 기본값은 ON(관리자 토글). 이 스펙은 "게이트 꺼짐이면 아무것도 발송하지
+// 않는다"를 검증하므로, 실행 동안만 DB 토글을 끄고 끝나면 원래 값으로 되돌린다(실제 발송 방지 겸용).
+let previousDispatchGate: string | null = null;
+function forceDispatchGateOff() {
+  previousDispatchGate = psql(`select auto_dispatch_enabled from contract_dispatch_settings where id = true;`);
+  psql(`update contract_dispatch_settings set auto_dispatch_enabled = false where id = true;`);
+}
+function restoreDispatchGate() {
+  if (previousDispatchGate === "t") {
+    psql(`update contract_dispatch_settings set auto_dispatch_enabled = true where id = true;`);
+  }
+  previousDispatchGate = null;
+}
+
 test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라우저)", () => {
+  test.beforeAll(() => forceDispatchGateOff());
+  test.afterAll(() => restoreDispatchGate());
+
   test.skip(!WEBHOOK_SECRET, "DOCUSIGN_WEBHOOK_TOKEN이 로컬 env에 없어 웹훅 시뮬레이션을 할 수 없습니다.");
 
   test.beforeAll(() => {
@@ -196,10 +213,10 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     await page.getByRole("button", { name: "Continue with this email" }).click();
     await expect(page).toHaveURL(/\/set-password/, { timeout: 15000 });
 
-    await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
-    await page.getByLabel("새 비밀번호 확인").fill(DEV_PASSWORD);
+    await page.getByLabel("New password", { exact: true }).fill(DEV_PASSWORD);
+    await page.getByLabel("Confirm new password").fill(DEV_PASSWORD);
     await page.getByRole("checkbox").check();
-    await page.getByRole("button", { name: "비밀번호 설정하고 계속하기" }).click();
+    await page.getByRole("button", { name: "Set password and continue" }).click();
     await page.waitForURL((u) => !u.pathname.startsWith("/set-password"), { timeout: 15000 });
 
     // 계정이 만들어지면 원 상담(가족) 카드는 이력으로 남고, 학생별 온보딩 카드가
@@ -306,27 +323,27 @@ test.describe("M4 — 상담→체험→정규 전환 골든 패스 (실브라�
     // 수업 리뷰(체험/정규 공용)는 배정 탭이 아니라 일정 탭 > 지난 수업 카드의
     // "수업 리뷰 작성" 모달에서 쓴다. 완료된 수업은 시각과 무관하게 지난 수업이다.
     await page.goto("/teacher?tab=lesson-schedule");
-    await page.getByRole("button", { name: "지난 수업" }).click();
+    await page.getByRole("button", { name: "Past", exact: true }).click();
     // 지난 수업은 페이지네이션되고 이전 실행의 세션이 쌓여 있을 수 있어, 학생
     // 필터 칩으로 이번 실행의 학생만 남긴다.
     await page.getByRole("button", { name: studentName, exact: true }).click();
     const lessonCard = page
       .locator("div.border-\\[1\\.5px\\].rounded-xl")
       .filter({ hasText: studentName })
-      .filter({ has: page.getByRole("button", { name: "수업 리뷰 작성" }) })
+      .filter({ has: page.getByRole("button", { name: "Write lesson review" }) })
       .first();
-    await lessonCard.getByRole("button", { name: "수업 리뷰 작성" }).click();
-    const modal = page.locator("div.fixed").filter({ has: page.getByRole("heading", { name: "수업 리뷰 작성" }) });
+    await lessonCard.getByRole("button", { name: "Write lesson review" }).click();
+    const modal = page.locator("div.fixed").filter({ has: page.getByRole("heading", { name: "Write Lesson Review" }) });
     await expect(modal).toBeVisible({ timeout: 60000 });
 
-    await modal.getByLabel("고객에게 보여줄 종합 의견").fill("M4 골든패스 학생과의 체험 수업 — 기초 개념 이해도 우수, 정규 진행 추천.");
+    await modal.getByLabel("Overall comments for the family").fill("M4 골든패스 학생과의 체험 수업 — 기초 개념 이해도 우수, 정규 진행 추천.");
     // 확정하려면 먼저 초안이 저장돼 있어야 한다 — 초안 저장(비공개) → 공개 확정 →
     // 확인 순서로 클릭한다(공개는 되돌릴 수 없는 고객 노출 행동이라 UI가 인라인
     // 확인 단계를 한 번 더 거친다).
-    await modal.getByRole("button", { name: "초안 저장(비공개)" }).click();
-    await expect(modal.getByRole("button", { name: "공개 확정" })).toBeEnabled({ timeout: 15000 });
-    await modal.getByRole("button", { name: "공개 확정" }).click();
-    await modal.getByRole("button", { name: "네, 공개합니다" }).click();
+    await modal.getByRole("button", { name: "Save draft (private)" }).click();
+    await expect(modal.getByRole("button", { name: "Publish" })).toBeEnabled({ timeout: 15000 });
+    await modal.getByRole("button", { name: "Publish" }).click();
+    await modal.getByRole("button", { name: "Yes, publish" }).click();
     await expect(modal).toHaveCount(0, { timeout: 15000 });
 
     const reviewStatus = psql(
@@ -476,10 +493,10 @@ async function redeemAndCreateAccount(page: import("@playwright/test").Page, bas
   await expect(page.getByLabel("Sign-in email")).toHaveValue(expectedEmail);
   await page.getByRole("button", { name: "Continue with this email" }).click();
   await expect(page).toHaveURL(/\/set-password/, { timeout: 15000 });
-  await page.getByLabel("새 비밀번호", { exact: true }).fill(DEV_PASSWORD);
-  await page.getByLabel("새 비밀번호 확인").fill(DEV_PASSWORD);
+  await page.getByLabel("New password", { exact: true }).fill(DEV_PASSWORD);
+  await page.getByLabel("Confirm new password").fill(DEV_PASSWORD);
   await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: "비밀번호 설정하고 계속하기" }).click();
+  await page.getByRole("button", { name: "Set password and continue" }).click();
   await page.waitForURL((u) => !u.pathname.startsWith("/set-password"), { timeout: 15000 });
 }
 
@@ -495,6 +512,9 @@ async function expectQueueRow(page: import("@playwright/test").Page, jobId: stri
 }
 
 test.describe("M4 — 계약 자동 큐잉: 직접 계정 생성 · 정규 바로 진행 (실브라우저)", () => {
+  test.beforeAll(() => forceDispatchGateOff());
+  test.afterAll(() => restoreDispatchGate());
+
   const consultantId = randomUUID();
   const consultantName = `M4큐잉 컨설턴트 ${RUN}`;
   const directGuardianEmail = `m4q-direct-guardian-${RUN}@example.com`;

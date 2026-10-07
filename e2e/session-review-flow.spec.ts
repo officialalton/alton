@@ -15,7 +15,7 @@ import {
 //
 // 2026-09-29 갱신 — 리뷰 작성은 일정 탭(?tab=lesson-schedule) > "지난 수업" 카드의
 // "수업 리뷰 작성" 모달로 옮겨졌고(체험/정규 공용, LessonReviewForm), 초안 저장은
-// 비공개이며 "공개 확정" + 확인("네, 공개합니다")을 거쳐야 학생·보호자 화면에 나온다.
+// 비공개이며 "공개 확정" + 확인("Yes, publish")을 거쳐야 학생·보호자 화면에 나온다.
 // 학생은 Courses(수강 과목) 탭의 "수업 리뷰 보기"에서 확정본을 본다.
 // 공용 시드 선생님/학생 대신 이 스펙 전용 선생님·가족·수업을 만들고 끝나면 지운다.
 
@@ -65,33 +65,33 @@ test.describe("수업 리뷰 작성 → 학생 포털 노출", () => {
   test("선생님이 지난 수업 리뷰를 공개 확정하면, 학생 포털에도 그 리뷰가 그대로 보인다", async ({ page, browser }) => {
     await loginAs(page, teacher.email);
     await page.goto("/teacher?tab=lesson-schedule");
-    await page.getByRole("button", { name: "지난 수업" }).click();
-    await page.getByRole("button", { name: "수업 리뷰 작성" }).first().click();
+    await page.getByRole("button", { name: "Past", exact: true }).click();
+    await page.getByRole("button", { name: "Write lesson review" }).first().click();
 
-    const modal = page.locator("div.fixed").filter({ has: page.getByRole("heading", { name: "수업 리뷰 작성" }) });
+    const modal = page.locator("div.fixed").filter({ has: page.getByRole("heading", { name: "Write Lesson Review" }) });
     await expect(modal).toBeVisible();
-    await modal.getByLabel("고객에게 보여줄 종합 의견").fill(FINAL_TEXT);
+    await modal.getByLabel("Overall comments for the family").fill(FINAL_TEXT);
 
     // 초안 저장은 비공개 — 학생에게는 아직 보이면 안 된다.
-    await modal.getByRole("button", { name: "초안 저장(비공개)" }).click();
-    await expect(modal.getByRole("button", { name: "공개 확정" })).toBeEnabled();
+    await modal.getByRole("button", { name: "Save draft (private)" }).click();
+    await expect(modal.getByRole("button", { name: "Publish" })).toBeEnabled();
     expect(psql(`select status from lesson_reviews where subject_enrollment_id = '${enrollmentId}';`)).toBe("draft");
 
-    await modal.getByRole("button", { name: "공개 확정" }).click();
-    await modal.getByRole("button", { name: "네, 공개합니다" }).click();
+    await modal.getByRole("button", { name: "Publish" }).click();
+    await modal.getByRole("button", { name: "Yes, publish" }).click();
     await expect(modal).toHaveCount(0, { timeout: 15000 });
     expect(psql(`select status from lesson_reviews where subject_enrollment_id = '${enrollmentId}';`)).toBe("final");
 
     // 확정 뒤에는 카드가 "리뷰 수정"으로 바뀐다.
     await page.goto("/teacher?tab=lesson-schedule");
-    await page.getByRole("button", { name: "지난 수업" }).click();
-    await expect(page.getByRole("button", { name: "리뷰 수정" }).first()).toBeVisible();
+    await page.getByRole("button", { name: "Past", exact: true }).click();
+    await expect(page.getByRole("button", { name: "Edit review" }).first()).toBeVisible();
 
     const studentContext = await browser.newContext();
     const studentPage = await studentContext.newPage();
     await loginAs(studentPage, family.children[0].email);
     await studentPage.goto("/student?tab=enrollment");
-    await studentPage.getByRole("button", { name: /수업 리뷰 보기/ }).first().click();
+    await studentPage.getByRole("button", { name: /View lesson reviews/ }).first().click();
     await expect(studentPage.getByText(FINAL_TEXT)).toBeVisible();
     await studentContext.close();
   });

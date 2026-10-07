@@ -147,7 +147,7 @@ test.describe("R5 — 과목 수강/선생님 배정 admin→guardian→teacher 
     await expect(childBlock.getByText("SAT Math")).toBeVisible({ timeout: 15000 });
     await expect(childBlock.getByText(teacher2.name)).toBeVisible();
     // 이전 선생님 변경 이력에 박서연이 남아 있어야 한다.
-    await childBlock.getByText(/이전 선생님 변경 이력/).click();
+    await childBlock.getByText(/Previous teacher history/).click();
     await expect(childBlock.getByText(new RegExp(TEACHER_1_NAME))).toBeVisible();
   });
 
@@ -163,6 +163,6 @@ test.describe("R5 — 과목 수강/선생님 배정 admin→guardian→teacher 
       .filter({ hasText: "SAT Math" })
       .first();
     await expect(row).toBeVisible({ timeout: 15000 });
-    await expect(row.getByText("배정중")).toBeVisible();
+    await expect(row.getByText("Active", { exact: true })).toBeVisible();
   });
 });

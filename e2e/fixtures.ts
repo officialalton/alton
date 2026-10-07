@@ -174,6 +174,13 @@ export function cleanupFamily(family: FixtureFamily) {
     psql(`select count(*) from session_prepared_selections where status = 'pinned' and subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`)
   ) > 0;
 
+  // staff_student_view_log는 INSERT-only(immutable 트리거) 감사 로그다 — 선생님이 이 학생의 개요/보드를
+  // 열면 행이 생기고, 그 행이 profiles를 FK로 잡아 학생 프로필을 물리 삭제할 수 없다. 원장·pinned와
+  // 같은 방식으로 "삭제 대신 종료·void" 경로로 남긴다(이 가족은 이번 실행 전용이라 충돌하지 않는다).
+  const hasStaffViewLog = Number(
+    psql(`select count(*) from staff_student_view_log where student_id in (${idList});`)
+  ) > 0;
+
   psql(`delete from booking_notification_outbox where reservation_id in (select id from reservations where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
   if (!hasLedgerRows && !hasPinnedPreparedSelections) {
     psql(`delete from reservation_cancellations where reservation_id in (select id from reservations where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})));`);
@@ -192,7 +199,7 @@ export function cleanupFamily(family: FixtureFamily) {
   psql(`delete from subject_threads where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList}));`);
   psql(`delete from notifications where recipient_id in (${idList});`);
 
-  if (hasLedgerRows || hasPinnedPreparedSelections) {
+  if (hasLedgerRows || hasPinnedPreparedSelections || hasStaffViewLog) {
     psql(`update teacher_assignments set status = 'ended', effective_until = now() where subject_enrollment_id in (select id from subject_enrollments where child_id in (${idList})) and status = 'active';`);
     psql(`update subject_enrollments set status = 'terminated' where child_id in (${idList}) and status <> 'terminated';`);
     psql(`update contracts set status = 'void', voided_at = now(), void_reason = 'e2e cleanup' where household_id = '${family.householdId}' and status <> 'void';`);
@@ -232,7 +239,7 @@ export function createFixtureTeacher(tag: string): FixtureTeacher {
   const runId = newRunId(tag);
   const id = randomUUID();
   const email = `e2e-${tag}-teacher-${runId}@example.com`;
-  const name = `E2E ${tag} 선생님`;
+  const name = `E2E ${tag} ${runId} 선생님`;
 
   psql(`
     insert into auth.users (
