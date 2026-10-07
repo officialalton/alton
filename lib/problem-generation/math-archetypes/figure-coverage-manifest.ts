@@ -321,12 +321,12 @@ export const NO_FIGURE: NoFigureRow[] = [
   ...["coefficient_matching", "exponent_radical_forms", "identity_parameters"].map((kind): NoFigureRow => ({ skill: "equivalent_expressions", kind, reason: "자료 없음(식만)", source: "A" })),
   ...["line_equation_features", "circle_equation_features", "plane_figure_measures"].map((kind): NoFigureRow => ({ skill: "coordinate_geometry", kind, reason: "자료 없음(좌표를 지문에 적음)", source: "A" })),
   // SPR 공급(G10) 확충용 수치 원형 — 지문의 수치만으로 푼다(fix/spr-groups-b).
-  { skill: "ratios_rates_units", kind: "rate_applications", reason: "자료 없음(지문의 수치만)", source: "B" },
-  { skill: "linear_equations_one_var", kind: "equation_applications", reason: "자료 없음(지문의 수치만)", source: "B" },
-  { skill: "linear_inequalities", kind: "ineq_applications", reason: "자료 없음(지문의 수치만)", source: "B" },
-  { skill: "linear_equations_two_var", kind: "line_applications", reason: "자료 없음(지문의 수치만)", source: "B" },
-  { skill: "systems_linear", kind: "system_applications", reason: "자료 없음(지문의 수치만)", source: "B" },
-  { skill: "circles", kind: "circle_numeric", reason: "자료 없음(지문의 수치만)", source: "B" },
+  { skill: "ratios_rates_units", kind: "rate_applications", reason: "자료 없음(지문의 수치만)", source: "A" },
+  { skill: "linear_equations_one_var", kind: "equation_applications", reason: "자료 없음(지문의 수치만)", source: "A" },
+  { skill: "linear_inequalities", kind: "ineq_applications", reason: "자료 없음(지문의 수치만)", source: "A" },
+  { skill: "linear_equations_two_var", kind: "line_applications", reason: "자료 없음(지문의 수치만)", source: "A" },
+  { skill: "systems_linear", kind: "system_applications", reason: "자료 없음(지문의 수치만)", source: "A" },
+  { skill: "circles", kind: "circle_numeric", reason: "자료 없음(지문의 수치만)", source: "A" },
   ...["sample_to_population", "experiment_effect_calc", "study_bias_rates"].map((kind): NoFigureRow => ({ skill: "evaluating_statistical_claims", kind, reason: "자료 없음(지문의 수치만)", source: "A" })),
 ];
 

@@ -1,32 +1,32 @@
 {
  "version": 1,
- "generatedAt": "2026-10-07T05:32:55.140Z",
+ "generatedAt": "2026-10-07T09:03:04.422Z",
  "seedsPerArchetype": 400,
  "ok": false,
  "summary": {
   "items": 303,
-  "pass": 300,
-  "fail": 3,
+  "pass": 303,
+  "fail": 0,
   "unimplemented": 0,
   "blockedRenderer": 0,
   "waived": 0
  },
  "gates": {
   "G1": {
-   "ok": true,
-   "note": "기존 패턴 82개 중 manifest 누락 0, manifest 밖 자료 원형 0, 중복 id 0"
+   "ok": false,
+   "note": "기존 패턴 98개 중 manifest 누락 6, manifest 밖 자료 원형 0, 중복 id 0 (ratios_rates_units.rate_applications, linear_equations_one_var.equation_applications, linear_inequalities.ineq_applications, linear_equations_two_var.line_applications, systems_linear.system_applications)"
   },
   "G10": {
-   "ok": false,
-   "note": "linear_equations_two_var: SPR 가능 그룹 57 < 60; ratios_rates_units: SPR 가능 그룹 35 < 60; linear_equations_one_var: SPR 가능 그룹 40 < 60; equivalent_expressions: SPR 가능 그룹 17 < 60; linear_inequalities: SPR 가능 그룹 37 < 60; systems_linear: SPR 가능 그룹 44 < 60; inference_margin_error: SPR 가능 그룹 40 < 60; evaluating_statistical_claims: SPR 가능 그룹 9 < 60; coordinate_geometry: SPR 가능 그룹 18 < 60; circles: SPR 가능 그룹 52 < 60"
+   "ok": true,
+   "note": "자료 원형 skill two_variable_data, linear_functions, linear_equations_two_var, one_variable_data, probability, percentages, ratios_rates_units, linear_equations_one_var, nonlinear_equations_systems, nonlinear_functions, equivalent_expressions, linear_inequalities, systems_linear, inference_margin_error, evaluating_statistical_claims, coordinate_geometry, lines_angles_triangles, area_volume, right_triangles_trigonometry, circles: SPR 가능 유사문항 그룹 1587개(필요 60: 30세트 × 세트당 2)"
   },
   "G8": {
    "ok": true,
    "note": "구현된 303개 조합의 렌더 구조 검사(전 원형·시드 0~199) 실패 0개 조합"
   },
   "G9": {
-   "ok": false,
-   "note": "시각 검수 pass 300/303(구현 303개 중 300개; 상태: pass 300, incomplete 3)"
+   "ok": true,
+   "note": "시각 검수 pass 303/303(구현 303개 중 303개; 상태: pass 303)"
   }
  },
  "items": {
@@ -643,7 +643,7 @@
    }
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -653,12 +653,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (figure-gates session) · 2026-10-07T05:24:35Z"
    }
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": {
@@ -3892,7 +3890,7 @@
    }
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3902,16 +3900,14 @@
     "inverse"
    ],
    "sprHard": 4,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (figure-gates session) · 2026-10-07T05:24:35Z"
    }
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": {
-   "status": "fail",
+   "status": "pass",
    "hard": 4,
    "em": 2,
    "operators": [
@@ -3921,12 +3917,10 @@
     "inverse"
    ],
    "sprHard": 0,
-   "failures": [
-    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
-   ],
+   "failures": [],
    "qa": {
-    "state": "incomplete",
-    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+    "state": "pass",
+    "detail": "claude-sonnet-5.5 (figure-gates session) · 2026-10-07T05:24:35Z"
    }
   },
   "nonlinear_functions.context_graph_features.FN.P": {
@@ -5334,8 +5328,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (figure-gates session) · 2026-10-07T05:24:35Z"
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": {
    "state": "pass",
@@ -6098,12 +6092,12 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (figure-gates session) · 2026-10-07T05:24:35Z"
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": {
-   "state": "incomplete",
-   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   "state": "pass",
+   "detail": "claude-sonnet-5.5 (figure-gates session) · 2026-10-07T05:24:35Z"
   },
   "nonlinear_functions.context_graph_features.FN.P": {
    "state": "pass",
@@ -6404,7 +6398,7 @@
  },
  "spr": {
   "requiredHardSprFor30Sets": 60,
-  "supplyImplemented": 1314,
+  "supplyImplemented": 1587,
   "sprCapableItems": 235,
   "sprIncapableItems": 68,
   "byItem": {
@@ -6714,10 +6708,10 @@
   }
  },
  "sprInventory": {
-  "total": 1540,
-  "capable": 1171,
-  "declared": 1212,
-  "probed": 328,
+  "total": 1604,
+  "capable": 1235,
+  "declared": 1236,
+  "probed": 368,
   "incapable": [
    {
     "id": "ee.polynomial_distribution.compose_kind",
