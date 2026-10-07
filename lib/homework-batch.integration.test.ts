@@ -131,7 +131,7 @@ describe("homework_batches RLS — 발급 교사만 직접 보고, 학생 본인
     expect(psql(`select items->0->>'response' from homework_batches where id = '${batchId}';`)).toBe(correctIndex);
     expect(psql(`select items->0->>'autoCorrect' from homework_batches where id = '${batchId}';`)).toBe("true");
     expect(psql(`select items->0->>'graded' from homework_batches where id = '${batchId}';`)).toBe("false");
-    expect(fails(() => asUser(otherStudentId, `select homework_submit_answer('${batchId}', '${problemId}', '0');`))).toContain("본인 과제만");
+    expect(fails(() => asUser(otherStudentId, `select homework_submit_answer('${batchId}', '${problemId}', '0');`))).toContain("your own homework");
   });
 
   it("무관한 교사·무관한 학생에게는 노출되지 않는다", () => {

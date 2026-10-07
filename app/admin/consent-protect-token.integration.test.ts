@@ -137,7 +137,7 @@ describe("protect_guardian_consent() / revoke_guardian_consent() — status_tran
       psql(
         `update guardian_consents set revoked_at = now(), revoked_by = '${ADMIN_ID}', revocation_reason = '토큰 없는 직접 UPDATE' where id = '${consentId}';`
       )
-    ).toThrow(/revoke_guardian_consent\(\)를 통해서만/);
+    ).toThrow(/guardian_consents can only be modified through revoke_guardian_consent\(\)\./);
 
     const stillActive = psql(`select revoked_at is null from guardian_consents where id = '${consentId}';`);
     expect(stillActive).toBe("t");
@@ -154,7 +154,7 @@ describe("protect_guardian_consent() / revoke_guardian_consent() — status_tran
         `set app.bypass_consent_protect = 'true';
          update guardian_consents set revoked_at = now(), revoked_by = '${ADMIN_ID}', revocation_reason = 'legacy guc' where id = '${consentId}';`
       )
-    ).toThrow(/revoke_guardian_consent\(\)를 통해서만/);
+    ).toThrow(/guardian_consents can only be modified through revoke_guardian_consent\(\)\./);
 
     const stillActive = psql(`select revoked_at is null from guardian_consents where id = '${consentId}';`);
     expect(stillActive).toBe("t");
@@ -191,7 +191,7 @@ describe("protect_guardian_consent() / revoke_guardian_consent() — status_tran
         where id = '${consentId}';
         commit;
       `)
-    ).toThrow(/revoke_guardian_consent\(\)를 통해서만/);
+    ).toThrow(/guardian_consents can only be modified through revoke_guardian_consent\(\)\./);
 
     const stillActive = psql(`select revoked_at is null from guardian_consents where id = '${consentId}';`);
     expect(stillActive).toBe("t");

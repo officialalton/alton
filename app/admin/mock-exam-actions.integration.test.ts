@@ -213,7 +213,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     expect(() => psql(`update mock_exam_sets set status = 'published' where id = '${result.examSetId}';`)).toThrow(/공개할 수 없습니다/);
     expect(() =>
       psql(`insert into mock_exam_attempts (student_id, exam_set_id, status) values ('cccccccc-0000-0000-0000-000000000001', '${result.examSetId}', 'assigned');`),
-    ).toThrow(/배정할 수 없습니다/);
+    ).toThrow(/cannot be assigned/);
   }, 180_000); // 문항 100여 개를 psql로 하나씩 심는 시딩이 기본 5초를 넘긴다
 
   it("MST 조립: 풀이 충분하면 ready가 되고 공개·배정이 허용된다", async () => {
@@ -251,7 +251,7 @@ describe("mock-exam-actions (조립·공개, 실제 로컬 DB)", () => {
     } catch (e) {
       err = String((e as { stderr?: string }).stderr ?? e);
     }
-    expect(err).toContain("문항 구성이 완료되지 않아 시작할 수 없습니다");
+    expect(err).toContain("This exam is not fully assembled yet, so it cannot be started. Please contact support.");
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("assigned");
   }, 180_000); // 문항 100여 개를 psql로 하나씩 심는 시딩이 기본 5초를 넘긴다
 

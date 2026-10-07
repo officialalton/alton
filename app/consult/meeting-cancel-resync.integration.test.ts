@@ -194,7 +194,7 @@ describe("취소는 Calendar 이벤트를 지운다", () => {
 
   it("완료된 미팅은 취소할 수 없다(DB), 이미 취소된 미팅 재취소는 멱등", async () => {
     const done = insertMeeting({ status: "completed", event: `ev-${RUN}-done`, sync: "succeeded" });
-    await expect(updateMeetingRequestStatus(done, "cancelled")).rejects.toThrow("완료된 미팅은 취소할 수 없습니다");
+    await expect(updateMeetingRequestStatus(done, "cancelled")).rejects.toThrow("A completed meeting cannot be canceled");
     expect(deleteMock).not.toHaveBeenCalled();
     const id = insertMeeting({ event: `ev-${RUN}-twice`, sync: "succeeded" });
     await updateMeetingRequestStatus(id, "cancelled");
@@ -250,9 +250,9 @@ describe("취소 후 재신청", () => {
 
   it("이미 취소된 미팅·완료된 미팅은 재신청할 수 없고 새 행이 생기지 않는다", async () => {
     const c = insertMeeting({ status: "cancelled" });
-    await expect(cancelAndRerequestMeetingRequest(c)).rejects.toThrow("이미 취소된 미팅");
+    await expect(cancelAndRerequestMeetingRequest(c)).rejects.toThrow("This meeting is already canceled");
     const d = insertMeeting({ status: "completed" });
-    await expect(cancelAndRerequestMeetingRequest(d)).rejects.toThrow("완료된 미팅");
+    await expect(cancelAndRerequestMeetingRequest(d)).rejects.toThrow("A completed meeting");
     expect(psql(`select count(*) from meeting_requests where rescheduled_from_id in ('${c}','${d}')`)).toBe("0");
   });
 

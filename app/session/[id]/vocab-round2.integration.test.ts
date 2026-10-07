@@ -140,7 +140,7 @@ describe("ensure_default_vocab_folder — 학생·담당 교사만 부를 수 �
 
   it("담당이 아닌 교사는 거절된다", () => {
     const out = fails(() => asUser(unrelatedTeacherId, `select ensure_default_vocab_folder('${STUDENT_ID}');`));
-    expect(out).toContain("본인 또는 담당 학생만");
+    expect(out).toContain("Only the student or their assigned teacher can create a folder.");
   });
 });
 

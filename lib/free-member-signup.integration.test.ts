@@ -68,13 +68,13 @@ afterAll(() => {
 describe("provision_free_member", () => {
   it("이메일 미확인 계정은 거절", () => {
     const uid = createAuthUser({ confirmed: false, selfSignup: true, label: "unconfirmed" });
-    expect(fails(() => asUser(uid, PROVISION()))).toContain("이메일 확인이 필요합니다");
+    expect(fails(() => asUser(uid, PROVISION()))).toContain("Email verification is required.");
     expect(psql(`select count(*) from profiles where id = '${uid}';`)).toBe("0");
   });
 
   it("셀프 가입 표식 없는 프로필 없는 Auth 계정(고아)은 거절 — 기존 fail-closed 유지", () => {
     const uid = createAuthUser({ confirmed: true, selfSignup: false, label: "orphan" });
-    expect(fails(() => asUser(uid, PROVISION()))).toContain("셀프 가입 경로");
+    expect(fails(() => asUser(uid, PROVISION()))).toContain("self sign-up");
     expect(psql(`select count(*) from profiles where id = '${uid}';`)).toBe("0");
     // 게이트 함수도 종전대로 unknown.
     expect(asUser(uid, `select current_account_status();`)).toBe("unknown");
@@ -84,8 +84,8 @@ describe("provision_free_member", () => {
     const uid = createAuthUser({ confirmed: true, selfSignup: true, label: "under13" });
     const young = new Date();
     young.setUTCFullYear(young.getUTCFullYear() - 12);
-    expect(fails(() => asUser(uid, PROVISION("어린이", young.toISOString().slice(0, 10))))).toContain("만 13세 미만");
-    expect(fails(() => asUser(uid, `select provision_free_member('어린이', null, '7학년', null, '2026-10-06');`))).toContain("생년월일은 필수");
+    expect(fails(() => asUser(uid, PROVISION("어린이", young.toISOString().slice(0, 10))))).toContain("under 13");
+    expect(fails(() => asUser(uid, `select provision_free_member('어린이', null, '7학년', null, '2026-10-06');`))).toContain("Date of birth is required");
     expect(psql(`select count(*) from profiles where id = '${uid}';`)).toBe("0");
   });
 
@@ -95,7 +95,7 @@ describe("provision_free_member", () => {
 
   it("이미 등록된(과외) 학생이 호출하면 거절하고 아무것도 바꾸지 않는다", () => {
     const before = psql(`select member_type || '|' || status from students where id = '${SEED_STUDENT_ID}';`);
-    expect(fails(() => asUser(SEED_STUDENT_ID, PROVISION()))).toContain("이미 등록된 계정");
+    expect(fails(() => asUser(SEED_STUDENT_ID, PROVISION()))).toContain("already registered");
     expect(psql(`select member_type || '|' || status from students where id = '${SEED_STUDENT_ID}';`)).toBe(before);
     expect(before.startsWith("tutoring|")).toBe(true);
   });

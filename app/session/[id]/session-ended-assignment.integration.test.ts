@@ -98,7 +98,7 @@ describe("담당 종료 선생님의 과거 수업 세션뷰", () => {
   });
 
   it("전제: 종료된 선생님은 teaches_student() 가 거짓이라 모의고사 RPC 가 거부한다(권한 미확대)", async () => {
-    await expect(loadStudentMockExamAttempts(endedTeacher.client, studentId)).rejects.toThrow("권한이 없습니다");
+    await expect(loadStudentMockExamAttempts(endedTeacher.client, studentId)).rejects.toThrow("do not have permission");
   });
 
   it("종료된 선생님도 자기 과거 수업을 정규화해 읽고, 페이지 로더들이 던지지 않는다", async () => {
@@ -124,7 +124,7 @@ describe("담당 종료 선생님의 과거 수업 세션뷰", () => {
   it("무관한 선생님은 세션 자체가 안 보이고(notFound 대상), 모의고사·과제 RPC 도 거부", async () => {
     const s = await loadNormalizedSession(otherTeacher.client, sessionId, otherTeacher.id, "teacher");
     expect(s).toBeNull();
-    await expect(loadStudentMockExamAttempts(otherTeacher.client, studentId)).rejects.toThrow("권한이 없습니다");
-    await expect(loadStudentHomeworkBatches(otherTeacher.client, studentId)).rejects.toThrow("권한이 없습니다");
+    await expect(loadStudentMockExamAttempts(otherTeacher.client, studentId)).rejects.toThrow("do not have permission");
+    await expect(loadStudentHomeworkBatches(otherTeacher.client, studentId)).rejects.toThrow("do not have permission");
   });
 });

@@ -263,7 +263,7 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
         { x0: 0.4, y0: 0.4, x1: 0.5, y1: 0.5, color: "#1A1A1A", tool: "pen", label: "atomic-e" },
       ]).replace(/'/g, "''");
 
-      expect(() => callAppend(TEACHER_ID, segments)).toThrow(/필수 필드/);
+      expect(() => callAppend(TEACHER_ID, segments)).toThrow(/missing required fields/);
 
       // 0건도 남지 않았는지(부분 성공 없음) — atomic-a/atomic-b조차 없어야 한다.
       expect(countForSession()).toBe(before);
@@ -292,7 +292,7 @@ describe("session_annotation_events — append/replay (실제 DB)", () => {
           TEACHER_ID,
           `select * from append_stroke_events('${sessionId}'::uuid, '[]'::jsonb);`
         )
-      ).toThrow(/비어있지 않은/);
+      ).toThrow(/non-empty jsonb array/);
       expect(countForSession()).toBe(before);
     });
   });

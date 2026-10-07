@@ -4,7 +4,8 @@
 
 export function isPermissionDeniedError(err: unknown): boolean {
   const message = err instanceof Error ? err.message : typeof err === "string" ? err : "";
-  return message.includes("권한이 없습니다");
+  // 2026-10-07: DB 메시지가 영어로 바뀌었다('You do not have permission …'). 마이그레이션 적용 전 환경을 위해 한국어도 함께 받는다.
+  return message.includes("권한이 없습니다") || /do not have permission/i.test(message);
 }
 
 export async function emptyOnPermissionDenied<T>(load: Promise<T>, fallback: T): Promise<T> {

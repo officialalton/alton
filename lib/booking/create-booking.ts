@@ -48,7 +48,7 @@ export function toBookingActionOutcomeError(e: unknown): {
   message: string;
 } {
   const raw = e instanceof Error ? e.message : String(e);
-  if (raw.includes("사용 가능한 수업권이 없습니다")) {
+  if (raw.includes("사용 가능한 수업권이 없습니다") || raw.includes("No lesson credits are available")) {
     return {
       errorCode: "no_entitlement",
       message: "You have no lesson credits available, so we can't confirm this booking. Please contact support.",
@@ -222,10 +222,10 @@ export async function cancelLessonBooking(params: CancelBookingParams): Promise<
     // 그대로 화면에 노출되던 문제. 이미 완료·확정 판정이 난 수업(entitlement가 이미
     // consume됨)에 취소를 시도할 때 발생한다 — app/admin/entitlement-actions.ts의
     // releaseEntitlementForReservation()과 동일한 친화적 메시지로 감싼다.
-    if (error.message.includes("이미 consume") || error.message.includes("이미 release")) {
+    if (/이미 (consume|release)|already (consumed|released)|cannot be (consumed|released)/i.test(error.message)) {
       throw new Error("A lesson that has already been confirmed as held can't be canceled. Please refresh and check again.");
     }
-    if (error.message.includes("확정된 예약만 취소할 수 있습니다")) {
+    if (error.message.includes("확정된 예약만 취소할 수 있습니다") || error.message.includes("Only confirmed reservations can be canceled")) {
       throw new Error("This lesson was already canceled or has taken place. Please refresh and check again.");
     }
     throw new Error(error.message);

@@ -70,7 +70,7 @@ afterAll(() => {
 describe("미팅 담당 컨설턴트 배정 (DB RPC)", () => {
   it("관리자 배정 → 시간·이벤트는 생기지 않고, 이후 일정 확정이 가능해진다 + 이력", () => {
     const id = insertMeeting(null, "requested", null, null);
-    expect(psqlErr(`update meeting_requests set status='scheduled', starts_at=${t(0)}, ends_at=${t(1)} where id='${id}';`)).toContain("먼저 담당 컨설턴트를 배정해 주세요");
+    expect(psqlErr(`update meeting_requests set status='scheduled', starts_at=${t(0)}, ends_at=${t(1)} where id='${id}';`)).toContain("Please assign a consultant first");
     psql(assign(ADMIN, id, CA));
     expect(psql(`select consultant_id = '${CA}' and starts_at is null and google_event_id is null from meeting_requests where id='${id}'`)).toBe("t");
     psql(`update meeting_requests set status='scheduled', starts_at=${t(0)}, ends_at=${t(1)} where id='${id}';`);
@@ -110,9 +110,9 @@ describe("미팅 담당 컨설턴트 배정 (DB RPC)", () => {
       psql(`alter table meeting_requests enable trigger meeting_requests_enforce_consultant;`);
     }
     insertMeeting(CA, "scheduled", t(201), t(203));
-    expect(psqlErr(assign(ADMIN, legacy, CA))).toContain("다른 미팅과 시간이 겹칩니다");
+    expect(psqlErr(assign(ADMIN, legacy, CA))).toContain("overlaps another meeting");
     insertConsultation(CB, "scheduled", t(200), t(201));
-    expect(psqlErr(assign(ADMIN, legacy, CB))).toContain("상담 일정과 시간이 겹칩니다");
+    expect(psqlErr(assign(ADMIN, legacy, CB))).toContain("overlaps a consultation");
     expect(psql(`select consultant_id is null and starts_at is not null from meeting_requests where id='${legacy}'`)).toBe("t"); // 옛 행 그대로
   });
 });
@@ -121,16 +121,16 @@ describe("상담 ↔ 미팅 대칭 겹침 (DB)", () => {
   it("같은 컨설턴트: 미팅이 있는 시간에 상담 거절(insert/update), 맞닿음 허용", () => {
     insertMeeting(CA, "scheduled", t(300), t(302));
     expect(psqlErr(`insert into consultations (source, contact_name, contact_email, contact_phone, category, status, requested_at, admissions_consultant_id, starts_at, ends_at)
-      values ('homepage','${TAG}','${TAG}@example.com','010','family','scheduled',now(),'${CA}',${t(301)},${t(303)});`)).toContain("미팅 일정과 시간이 겹칩니다");
+      values ('homepage','${TAG}','${TAG}@example.com','010','family','scheduled',now(),'${CA}',${t(301)},${t(303)});`)).toContain("overlaps another meeting");
     const c = insertConsultation(CA, "requested", null, null);
-    expect(psqlErr(`update consultations set starts_at=${t(301)}, ends_at=${t(302)}, status='scheduled' where id='${c}';`)).toContain("미팅 일정과 시간이 겹칩니다");
+    expect(psqlErr(`update consultations set starts_at=${t(301)}, ends_at=${t(302)}, status='scheduled' where id='${c}';`)).toContain("overlaps another meeting");
     psql(`update consultations set starts_at=${t(302)}, ends_at=${t(303)}, status='scheduled' where id='${c}';`); // 맞닿음
   });
 
   it("상담을 다른 컨설턴트에서 겹치는 컨설턴트로 재배정하면 거절", () => {
     insertMeeting(CB, "scheduled", t(310), t(311));
     const c = insertConsultation(CA, "scheduled", t(310), t(311));
-    expect(psqlErr(`update consultations set admissions_consultant_id='${CB}' where id='${c}';`)).toContain("미팅 일정과 시간이 겹칩니다");
+    expect(psqlErr(`update consultations set admissions_consultant_id='${CB}' where id='${c}';`)).toContain("overlaps another meeting");
   });
 
   it("다른 컨설턴트는 겹쳐도 허용, 취소된 미팅은 무시", () => {

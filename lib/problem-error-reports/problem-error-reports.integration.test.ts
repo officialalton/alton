@@ -105,26 +105,26 @@ describe("신고: 권한·유형·중복·비노출", () => {
     const item = fx.ids.rw_m1[2];
     const s = await mockReport(studentA, attemptA, item, "bad_explanation");
     expect(s.status).toBeGreaterThanOrEqual(400);
-    expect(JSON.stringify(s.json)).toContain("선생님만");
-    expect(JSON.stringify((await mockReport(studentA, attemptA, item, "other")).json)).toContain("내용을 적어");
-    expect(JSON.stringify((await mockReport(studentA, attemptA, item, "other", "  ")).json)).toContain("내용을 적어");
+    expect(JSON.stringify(s.json)).toContain("Only teachers can report an explanation error");
+    expect(JSON.stringify((await mockReport(studentA, attemptA, item, "other")).json)).toContain("Please describe the issue");
+    expect(JSON.stringify((await mockReport(studentA, attemptA, item, "other", "  ")).json)).toContain("Please describe the issue");
     for (const uid of [SEED_GUARDIAN_ID, ADMIN_ID]) {
       const r = await mockReport(uid, attemptA, item, "wrong_key");
       expect(r.status, uid).toBeGreaterThanOrEqual(400);
-      expect(JSON.stringify(r.json)).toContain("학생과 선생님만");
+      expect(JSON.stringify(r.json)).toContain("Only students and teachers can report");
     }
     // 담당 선생님은 해설 오류 신고 가능(담당 학생 응시)
     const t = await mockReport(TEACHER_ID, attemptA, item, "bad_explanation");
     expect(t.status).toBe(200);
     // 담당이 아닌 학생의 응시·남의 응시는 "문항 없음"
     const other = await mockReport(studentB, attemptA, item, "wrong_key");
-    expect(JSON.stringify(other.json)).toContain("문항을 찾을 수 없습니다");
+    expect(JSON.stringify(other.json)).toContain("Question not found.");
   });
 
   it("다른 경로(변형) 문항은 경로를 드러내지 않고 '문항 없음'과 같은 메시지로 거절", async () => {
     const r = await mockReport(studentB, attemptB, fx.ids.rw_higher[0], "wrong_key"); // B 는 lower
     expect(r.status).toBeGreaterThanOrEqual(400);
-    expect(JSON.stringify(r.json)).toContain("문항을 찾을 수 없습니다");
+    expect(JSON.stringify(r.json)).toContain("Question not found.");
     const ok = await mockReport(studentB, attemptB, fx.ids.rw_lower[0], "flawed_problem");
     expect(ok.status).toBe(200);
   });
@@ -529,12 +529,12 @@ describe("수업 과제: 자동 채점 재계산·수동 채점 미덮어쓰기�
     expect((await sessionReport(STUDENT_ID, ctx.mcA, "flawed_problem")).status).toBe(200);
     expect((await sessionReport(TEACHER_ID, ctx.mcA, "bad_explanation")).status).toBe(200);
     expect((await sessionReport(STUDENT_ID, ctx.mcB, "wrong_key")).status).toBe(200);
-    expect(JSON.stringify((await sessionReport(STUDENT_ID, ctx.mcB, "bad_explanation")).json)).toContain("선생님만");
+    expect(JSON.stringify((await sessionReport(STUDENT_ID, ctx.mcB, "bad_explanation")).json)).toContain("Only teachers can report an explanation error");
     for (const uid of [SEED_GUARDIAN_ID, ADMIN_ID]) expect((await sessionReport(uid, ctx.mcA, "wrong_key")).status, uid).toBeGreaterThanOrEqual(400);
     const dup = await sessionReport(STUDENT_ID, ctx.mcA, "wrong_key");
     expect((dup.json as RpcJson).duplicate).toBe(true);
     const outsider = createStudent("erOut", RUN);
-    expect(JSON.stringify((await sessionReport(outsider, ctx.mcA, "wrong_key")).json)).toContain("이 수업의 문제만");
+    expect(JSON.stringify((await sessionReport(outsider, ctx.mcA, "wrong_key")).json)).toContain("Only problems from this lesson");
     // 수업에 없는 문제
     expect((await sessionReport(STUDENT_ID, fx.ids.rw_m1[0] && itemProblem(fx.ids.rw_m1[1])[0], "wrong_key")).status).toBeGreaterThanOrEqual(400);
     expect(psql(`select error_review_needed::text from problems where id = '${ctx.mcA}';`)).toBe("true");
@@ -618,7 +618,7 @@ describe("학부모: 조정된 결과는 읽되 신고는 못 한다(연결된 �
     expect(mine.correctCount).toBe(d.items.filter((x) => x.correct).length);
     const rep = await mockReport(SEED_GUARDIAN_ID, att, item, "wrong_key");
     expect(rep.status).toBeGreaterThanOrEqual(400);
-    expect(JSON.stringify(rep.json)).toContain("학생과 선생님만");
+    expect(JSON.stringify(rep.json)).toContain("Only students and teachers can report");
   });
 });
 

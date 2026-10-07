@@ -112,13 +112,13 @@ describe("모의고사 공개 티어·일일 상한", () => {
     expect(tut).toContain(tutoringSet);
   });
   it("무료 회원은 과외 전용 세트를 시작할 수 없고, 과외 회원은 시작할 수 있다", () => {
-    expect(fails(() => asUser(freeA, `select mock_exam_open_start('${tutoringSet}');`))).toContain("과외 회원에게만");
+    expect(fails(() => asUser(freeA, `select mock_exam_open_start('${tutoringSet}');`))).toContain("tutoring members only");
     expect(asUser(tutoring, `select mock_exam_open_start('${tutoringSet}');`)).toMatch(/^[0-9a-f-]{36}$/);
   });
   it("무료 회원은 하루 2회까지 시작, 3번째는 거절, 이미 시작한 세트 재호출(멱등)은 통과", () => {
     const a1 = asUser(freeA, `select mock_exam_open_start('${freeSet1}');`);
     asUser(freeA, `select mock_exam_open_start('${freeSet2}');`);
-    expect(fails(() => asUser(freeA, `select mock_exam_open_start('${freeSet3}');`))).toContain("하루에 모의고사 2회");
+    expect(fails(() => asUser(freeA, `select mock_exam_open_start('${freeSet3}');`))).toContain("Free members can start up to 2 mock exams per day. Please try again tomorrow.");
     expect(asUser(freeA, `select mock_exam_open_start('${freeSet1}');`)).toBe(a1);
     expect(psql(`select count(*) from mock_exam_attempts where student_id = '${freeA}';`)).toBe("2");
     // 과외 회원에게는 상한이 없다.
@@ -170,10 +170,10 @@ describe("누적 약점 요약 RPC(mock_exam_weakness_summary)", () => {
     expect(out).toBe("1|algebra:1/1,rw_craft_structure:0/2|ALG-LIN:1/1,CS-WIC:0/2");
   });
   it("다른 학생은 거절, 관리자·보호자(연결된 자녀)는 허용", () => {
-    expect(fails(() => asUser(freeA, `select mock_exam_weakness_summary('${freeB}');`))).toContain("권한이 없습니다");
+    expect(fails(() => asUser(freeA, `select mock_exam_weakness_summary('${freeB}');`))).toContain("do not have permission");
     expect(asUser(ADMIN_ID, `select s->>'gradedAttemptCount' from mock_exam_weakness_summary('${freeB}') s;`)).toBe("1");
     expect(asUser(GUARDIAN_ID, `select s->>'attemptCount' from mock_exam_weakness_summary('${SEED_STUDENT}') s;`)).toMatch(/^\d+$/);
-    expect(fails(() => asUser(GUARDIAN_ID, `select mock_exam_weakness_summary('${freeB}');`))).toContain("권한이 없습니다");
+    expect(fails(() => asUser(GUARDIAN_ID, `select mock_exam_weakness_summary('${freeB}');`))).toContain("do not have permission");
   });
 });
 
@@ -192,7 +192,7 @@ describe("과외 전용 쓰기 경로는 무료 회원을 거절(정책·RPC)", 
       expect(err, sql).toMatch(/row-level security|violates|permission denied|does not exist|null value/);
     }
     expect(psql(`select count(*) from student_academic_profile where student_id = '${freeA}';`)).toBe("0");
-    expect(fails(() => asUser(freeA, `select * from list_open_consultant_meeting_slots('${ADMIN_ID}', now(), now() + interval '7 days');`))).toContain("담당 컨설턴트");
+    expect(fails(() => asUser(freeA, `select * from list_open_consultant_meeting_slots('${ADMIN_ID}', now(), now() + interval '7 days');`))).toContain("assigned consultant");
   });
   it("과외 회원(활성 관계)은 같은 로드맵·채팅 쓰기가 통과한다(회귀)", () => {
     asUser(tutoring, `insert into student_academic_profile (student_id, graduation_year) values ('${tutoring}', 2030);`);

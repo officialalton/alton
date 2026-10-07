@@ -99,10 +99,10 @@ describe("mock_exam_open_start — 권한 매트릭스", () => {
   });
 
   it("비활성 학생·학부모·선생님은 거절된다", () => {
-    expect(fails(() => asUser(inactive, `select mock_exam_open_start('${pubSet}');`))).toContain("활성 학생만");
-    expect(fails(() => asUser(GUARDIAN_ID, `select mock_exam_open_start('${pubSet}');`))).toContain("활성 학생만");
-    expect(fails(() => asUser(otherGuardian, `select mock_exam_open_start('${pubSet}');`))).toContain("활성 학생만");
-    expect(fails(() => asUser(TEACHER_ID, `select mock_exam_open_start('${pubSet}');`))).toContain("활성 학생만");
+    expect(fails(() => asUser(inactive, `select mock_exam_open_start('${pubSet}');`))).toContain("active students");
+    expect(fails(() => asUser(GUARDIAN_ID, `select mock_exam_open_start('${pubSet}');`))).toContain("active students");
+    expect(fails(() => asUser(otherGuardian, `select mock_exam_open_start('${pubSet}');`))).toContain("active students");
+    expect(fails(() => asUser(TEACHER_ID, `select mock_exam_open_start('${pubSet}');`))).toContain("active students");
     expect(attemptCount(inactive, pubSet)).toBe(0);
   });
 
@@ -112,10 +112,10 @@ describe("mock_exam_open_start — 권한 매트릭스", () => {
   });
 
   it("미공개(draft)·보관 세트·없는 세트는 시작할 수 없다", () => {
-    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${draftSet}');`))).toContain("공개된 시험만");
-    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${archivedSet}');`))).toContain("공개된 시험만");
-    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${mstDraftSet}');`))).toContain("공개된 시험만");
-    expect(fails(() => asUser(activeB, `select mock_exam_open_start(gen_random_uuid());`))).toContain("존재하지 않는");
+    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${draftSet}');`))).toContain("published exams");
+    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${archivedSet}');`))).toContain("published exams");
+    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${mstDraftSet}');`))).toContain("published exams");
+    expect(fails(() => asUser(activeB, `select mock_exam_open_start(gen_random_uuid());`))).toContain("Exam not found");
     expect(attemptCount(activeB, draftSet) + attemptCount(activeB, archivedSet) + attemptCount(activeB, mstDraftSet)).toBe(0);
   });
 
@@ -159,7 +159,7 @@ describe("기존 배정 응시와 공존", () => {
     const id = asUser(activeA, `select mock_exam_open_start('${set}');`);
     psql(`update mock_exam_sets set status = 'archived', archived_at = now() where id = '${set}';`);
     expect(asUser(activeA, `select mock_exam_open_start('${set}');`)).toBe(id);
-    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${set}');`))).toContain("공개된 시험만");
+    expect(fails(() => asUser(activeB, `select mock_exam_open_start('${set}');`))).toContain("published exams");
   });
 });
 
@@ -178,8 +178,8 @@ describe("mock_exam_open_catalog — 공개 세트 + 본인 응시(N+1 없음)",
   it("보호자·담당 선생님은 자녀·담당 학생 기준으로 읽고, 무관한 사람은 거절된다", () => {
     expect(JSON.parse(asUser(GUARDIAN_ID, `select mock_exam_open_catalog('${STUDENT_ID}')::text;`))).toBeInstanceOf(Array);
     expect(JSON.parse(asUser(TEACHER_ID, `select mock_exam_open_catalog('${STUDENT_ID}')::text;`))).toBeInstanceOf(Array);
-    expect(fails(() => asUser(otherGuardian, `select mock_exam_open_catalog('${activeA}')::text;`))).toContain("권한이 없습니다");
-    expect(fails(() => asUser(activeB, `select mock_exam_open_catalog('${activeA}')::text;`))).toContain("권한이 없습니다");
+    expect(fails(() => asUser(otherGuardian, `select mock_exam_open_catalog('${activeA}')::text;`))).toContain("do not have permission");
+    expect(fails(() => asUser(activeB, `select mock_exam_open_catalog('${activeA}')::text;`))).toContain("do not have permission");
   });
 });
 

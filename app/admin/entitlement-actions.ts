@@ -65,10 +65,10 @@ export async function consumeEntitlementForReservation(reservationId: string): P
   const admin = createAdminClient();
   const { error } = await admin.rpc("consume_entitlement", { p_reservation_id: reservationId });
   if (error) {
-    if (error.message.includes("해당 예약의 hold를 찾을 수 없습니다")) {
+    if ((error.message.includes("해당 예약의 hold를 찾을 수 없습니다") || error.message.includes("No hold found for this reservation"))) {
       throw new Error("이 예약에 대한 수업권 hold를 찾을 수 없습니다. 예약 상태를 확인해주세요.");
     }
-    if (error.message.includes("이미 consume") || error.message.includes("이미 release")) {
+    if (/이미 (consume|release)|already (consumed|released)/i.test(error.message)) {
       throw new Error("이미 처리된 예약입니다(중복 소진/해제 시도).");
     }
     throw new Error(error.message);
@@ -80,10 +80,10 @@ export async function releaseEntitlementForReservation(reservationId: string): P
   const admin = createAdminClient();
   const { error } = await admin.rpc("release_entitlement", { p_reservation_id: reservationId });
   if (error) {
-    if (error.message.includes("해당 예약의 hold를 찾을 수 없습니다")) {
+    if ((error.message.includes("해당 예약의 hold를 찾을 수 없습니다") || error.message.includes("No hold found for this reservation"))) {
       throw new Error("이 예약에 대한 수업권 hold를 찾을 수 없습니다. 예약 상태를 확인해주세요.");
     }
-    if (error.message.includes("이미 release") || error.message.includes("이미 consume")) {
+    if (/이미 (consume|release)|already (consumed|released)/i.test(error.message)) {
       throw new Error("이미 처리된 예약입니다(중복 해제/소진 시도).");
     }
     throw new Error(error.message);

@@ -498,7 +498,7 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     // 제출 시점은 한 번이다.
     expect(
       psqlExpectError(`update session_problem_work set submitted_at = now() where id = '${w}';`)
-    ).toMatch(/이미 제출한 풀이입니다/);
+    ).toMatch(/This attempt has already been submitted, and its submitted notes cannot be changed\. To try again, start a new attempt\./);
     // 객관식 재선택 — 채점 전이면 된다.
     psql(`update session_problem_work set submitted_choice_index = 3 where id = '${w}';`);
     expect(psql(`select submitted_choice_index from session_problem_work where id = '${w}';`)).toBe("3");
@@ -506,16 +506,16 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
     asUser(TEACHER_ID, `select grade_problem_attempt('${w}', 'incorrect', null);`);
     expect(
       psqlExpectError(`update session_problem_work set submitted_choice_index = 0 where id = '${w}';`)
-    ).toMatch(/채점이 끝난 문제의 답은 바꿀 수 없습니다/);
+    ).toMatch(/This problem has already been graded, so the answer cannot be changed\./);
     expect(
       psqlExpectError(`update session_problem_work set submitted_text = '또 바꿈' where id = '${w}';`)
-    ).toMatch(/채점이 끝난 문제의 답은 바꿀 수 없습니다/);
+    ).toMatch(/This problem has already been graded, so the answer cannot be changed\./);
   });
 
   it("본인 풀이만 제출할 수 있고, 다시 눌러도 제출 시점은 한 번이다(객관식 답만 바뀐다)", () => {
     const w = work(freshProblem("submit-guard"));
     expect(psqlExpectError(`select submit_problem_attempt('${w}', '${TEACHER_ID}', 0, null);`)).toMatch(
-      /본인 풀이만/
+      /your own work/
     );
     psql(`select submit_problem_attempt('${w}', '${STUDENT_ID}', 0, null);`);
     const at = psql(`select submitted_at from session_problem_work where id = '${w}';`);

@@ -92,8 +92,8 @@ describe("모의고사 하이라이트·메모·소거 저장", () => {
 
   it("다른 학생은 쓰기·읽기 모두 거부, 테이블 직접 접근도 막힌다", () => {
     const [i1] = itemsByModule.rw_m1;
-    expect(fails(() => asUser(OTHER_STUDENT, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb);`))).toContain("본인 응시만");
-    expect(fails(() => asUser(OTHER_STUDENT, `select load_mock_exam_annotations('${attemptId}', '${i1}');`))).toContain("볼 권한이 없습니다");
+    expect(fails(() => asUser(OTHER_STUDENT, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb);`))).toContain("your own attempt");
+    expect(fails(() => asUser(OTHER_STUDENT, `select load_mock_exam_annotations('${attemptId}', '${i1}');`))).toContain("do not have permission");
     expect(asUser(OTHER_STUDENT, `select count(*) from mock_exam_annotations;`)).toBe("0");
     expect(asUser(STUDENT_ID, `select count(*) from mock_exam_annotations;`)).toBe("0");
   });
@@ -102,16 +102,16 @@ describe("모의고사 하이라이트·메모·소거 저장", () => {
     const [i1] = itemsByModule.rw_m1;
     const [m2] = itemsByModule.rw_m2;
     const longNote = `'[{"id":"h","start":0,"end":3,"text":"abc","note":"${"x".repeat(121)}"}]'::jsonb`;
-    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', ${longNote});`))).toContain("형식");
-    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[{"id":"h","start":5,"end":2,"text":"a"}]'::jsonb);`))).toContain("형식");
-    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb, '[9]'::jsonb);`))).toContain("형식");
-    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${m2}', '[]'::jsonb);`))).toContain("제출된 모듈");
+    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', ${longNote});`))).toContain("format");
+    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[{"id":"h","start":5,"end":2,"text":"a"}]'::jsonb);`))).toContain("format");
+    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb, '[9]'::jsonb);`))).toContain("format");
+    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${m2}', '[]'::jsonb);`))).toContain("already been submitted");
   });
 
   it("모듈 제출 후 쓰기 거부, 저장분은 그대로 읽힌다 — 결과 열람은 본인·관리자", () => {
     const [i1] = itemsByModule.rw_m1;
     asUser(STUDENT_ID, `select mock_exam_submit_module('${attemptId}', 'rw_m1');`);
-    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb);`))).toContain("제출된 모듈");
+    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb);`))).toContain("already been submitted");
     expect(asUser(STUDENT_ID, `select load_mock_exam_annotations('${attemptId}', '${i1}')->'highlights'->0->>'text';`)).toBe("MST g");
     expect(asUser(ADMIN_ID, `select load_mock_exam_annotations('${attemptId}', '${i1}')->'highlights'->0->>'id';`)).toBe("h1");
   });
@@ -120,6 +120,6 @@ describe("모의고사 하이라이트·메모·소거 저장", () => {
     const [i1] = itemsByModule.rw_m1;
     asUser(STUDENT_ID, `select mock_exam_submit_module('${attemptId}', 'rw_m2'); select mock_exam_submit_module('${attemptId}', 'break');
       select mock_exam_submit_module('${attemptId}', 'math_m1'); select mock_exam_submit_module('${attemptId}', 'math_m2');`);
-    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb);`))).toContain("제출한 시험");
+    expect(fails(() => asUser(STUDENT_ID, `select save_mock_exam_annotations('${attemptId}', '${i1}', '[]'::jsonb);`))).toContain("already been submitted");
   });
 });

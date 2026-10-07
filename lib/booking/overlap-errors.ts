@@ -26,13 +26,13 @@ function rawOf(e: unknown): string {
 export function parseOverlapError(e: unknown): OverlapError | null {
   const raw = rawOf(e);
   if (!raw) return null;
-  if (raw.includes("student_time_overlap") || raw.includes("이미 같은 시간에 다른 수업")) {
+  if (raw.includes("student_time_overlap") || raw.includes("이미 같은 시간에 다른 수업") || raw.includes("already have another lesson at the same time")) {
     return { reason: "student_overlap", message: OVERLAP_MESSAGES.student_overlap };
   }
   if (raw.includes("teacher_buffer_violation") || raw.includes("reservations_no_overlap")) {
     return { reason: "teacher_overlap", message: OVERLAP_MESSAGES.teacher_overlap };
   }
-  if (raw.includes("컨설턴트") && raw.includes("겹칩니다")) {
+  if ((raw.includes("컨설턴트") && raw.includes("겹칩니다")) || /overlaps (another meeting|a consultation)/i.test(raw)) {
     return { reason: "consultant_overlap", message: OVERLAP_MESSAGES.consultant_overlap };
   }
   return null;

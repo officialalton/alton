@@ -84,7 +84,7 @@ describe("보호자 로그인 이메일 변경 예외 흐름", () => {
 
   it("미검증 차단: 존재하지 않거나 만료된 토큰으로는 확인이 통과하지 않는다", () => {
     expect(() => psql(`select confirm_trial_login_email_change('this-token-does-not-exist');`)).toThrow(
-      /유효하지 않은 확인 링크/
+      /This confirmation link is not valid\./
     );
   });
 });

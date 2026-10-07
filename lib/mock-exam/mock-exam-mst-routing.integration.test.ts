@@ -162,9 +162,9 @@ describe("경로 결정 — M1 성과에 따라 M2 문항 집합이 다르다", 
     submitModule(hi, hiAttempt, "rw_m1");
     expect(routes(hiAttempt)).toEqual(before);
     // M1 답을 바꾸려 해도 잠김 → 거부(성과가 바뀌어 재라우팅되는 경로 없음)
-    expect(fails(() => asUser(hi, `select mock_exam_save_answer('${hiAttempt}', '${fx.ids.rw_m1[0]}', '1', 1);`))).toContain("제출된 모듈");
+    expect(fails(() => asUser(hi, `select mock_exam_save_answer('${hiAttempt}', '${fx.ids.rw_m1[0]}', '1', 1);`))).toContain("already been submitted");
     // 결정된 경로는 postgres/service 도 바꿀 수 없다.
-    expect(fails(() => psql(`update mock_exam_attempts set rw_m2_route = 'lower' where id = '${hiAttempt}';`))).toContain("바꿀 수 없습니다");
+    expect(fails(() => psql(`update mock_exam_attempts set rw_m2_route = 'lower' where id = '${hiAttempt}';`))).toContain("cannot be changed");
     // 학생은 UPDATE 정책 자체가 없어 0행(변화 없음) — 아래 routes() 로 확인.
     asUser(hi, `update mock_exam_attempts set rw_m2_route = 'lower' where id = '${hiAttempt}';`);
     // 2026-10-01: 교사 배정 RLS 가 제거돼 교사 UPDATE 는 0행(변화 없음), INSERT 는 거절된다. 경로·정책 버전 트리거는 서비스 롤에 대한 최종 방어로 남는다.
@@ -173,15 +173,15 @@ describe("경로 결정 — M1 성과에 따라 M2 문항 집합이 다르다", 
     asUser(TEACHER_ID, `update mock_exam_attempts set rw_m2_route = 'higher' where id = '${guardAttempt}';`);
     asUser(TEACHER_ID, `update mock_exam_attempts set math_m2_route_policy_version = 7 where id = '${guardAttempt}';`);
     const guardSet2 = createRoutingSet({ run: RUN, label: "guard2" });
-    expect(fails(() => asUser(TEACHER_ID, `insert into mock_exam_attempts (student_id, exam_set_id, assigned_by, rw_m2_route) values ('${SEED_STUDENT_ID}', '${guardSet2.setId}', '${TEACHER_ID}', 'higher');`))).toContain("직접 지정");
+    expect(fails(() => asUser(TEACHER_ID, `insert into mock_exam_attempts (student_id, exam_set_id, assigned_by, rw_m2_route) values ('${SEED_STUDENT_ID}', '${guardSet2.setId}', '${TEACHER_ID}', 'higher');`))).toContain("cannot be set directly");
     expect(routes(guardAttempt)).toMatchObject({ rw: "-", math: "-" });
     expect(routes(hiAttempt)).toEqual(before);
   });
 
   it("다른 변형 문항 답 저장·표시는 '문항 없음'과 같은 메시지로 거부(경로 비노출), 자기 변형은 허용", () => {
-    expect(fails(() => asUser(hi, `select mock_exam_save_answer('${hiAttempt}', '${fx.ids.rw_lower[0]}', '0', 1);`))).toContain("문항을 찾을 수 없습니다");
-    expect(fails(() => asUser(hi, `select mock_exam_toggle_flag('${hiAttempt}', '${fx.ids.rw_lower[0]}', true);`))).toContain("문항을 찾을 수 없습니다");
-    expect(fails(() => asUser(lo, `select mock_exam_save_answer('${loAttempt}', '${fx.ids.rw_higher[0]}', '0', 1);`))).toContain("문항을 찾을 수 없습니다");
+    expect(fails(() => asUser(hi, `select mock_exam_save_answer('${hiAttempt}', '${fx.ids.rw_lower[0]}', '0', 1);`))).toContain("Question not found.");
+    expect(fails(() => asUser(hi, `select mock_exam_toggle_flag('${hiAttempt}', '${fx.ids.rw_lower[0]}', true);`))).toContain("Question not found.");
+    expect(fails(() => asUser(lo, `select mock_exam_save_answer('${loAttempt}', '${fx.ids.rw_higher[0]}', '0', 1);`))).toContain("Question not found.");
     asUser(hi, `select mock_exam_save_answer('${hiAttempt}', '${fx.ids.rw_higher[0]}', '0', 1);`);
     expect(psql(`select count(*) from mock_exam_answers where attempt_id = '${hiAttempt}' and set_item_id = '${fx.ids.rw_lower[0]}';`)).toBe("0");
   });

@@ -128,7 +128,7 @@ describe("같은 학생 동시간 수업 금지", () => {
     const t0 = 3 * 24 * 60;
     book(s.childId, s.enrollments[0], teacherA, t0); // [t0, t0+60)
     const dup = psqlErr(`select reservation_id from confirm_lesson_booking('${s.childId}', '${s.enrollments[1]}', '${teacherB}', '${lessonTypeId}', '${iso(t0)}', '${iso(t0 + 60)}', '${RUN}-d1');`);
-    expect(dup).toContain("이미 같은 시간에 다른 수업이 있습니다");
+    expect(dup).toContain("student_time_overlap: You already have another lesson at the same time.");
     const part = psqlErr(`select reservation_id from confirm_lesson_booking('${s.childId}', '${s.enrollments[1]}', '${teacherB}', '${lessonTypeId}', '${iso(t0 + 30)}', '${iso(t0 + 90)}', '${RUN}-d2');`);
     expect(part).toContain("student_time_overlap");
     expect(() => book(s.childId, s.enrollments[1], teacherB, t0 + 60)).not.toThrow(); // 바로 뒤 인접

@@ -169,8 +169,8 @@ describe("모의고사 응시 — 학생이 자기 응시만 답하고 제출할
 
   it("다른 학생은 이 응시의 답을 볼 수도 쓸 수도 없다(RLS·RPC)", () => {
     expect(asUser(otherStudentId, `select count(*) from mock_exam_answers where attempt_id = '${attemptId}';`)).toBe("0");
-    expect(fails(() => asUser(otherStudentId, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '5', null);`))).toContain("본인 응시만");
-    expect(fails(() => asUser(otherStudentId, `select mock_exam_attempt_detail('${attemptId}');`))).toContain("권한이 없습니다");
+    expect(fails(() => asUser(otherStudentId, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '5', null);`))).toContain("your own attempt");
+    expect(fails(() => asUser(otherStudentId, `select mock_exam_attempt_detail('${attemptId}');`))).toContain("do not have permission");
   });
 
   it("spr 답을 RPC 로 저장한 뒤 제출하면 곧바로 자동 채점 확정(graded)되고, 이후 답 변경은 거절된다 — 2026-09-21 제품 오너 지시로 교사 확인 단계 제거", () => {
@@ -178,7 +178,7 @@ describe("모의고사 응시 — 학생이 자기 응시만 답하고 제출할
     expect(psql(`select correct from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${sprItemId}';`)).toBe("t");
     asUser(STUDENT_ID, `select mock_exam_submit('${attemptId}');`);
     expect(psql(`select status from mock_exam_attempts where id = '${attemptId}';`)).toBe("graded");
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '6', null);`))).toContain("이미 제출한");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${sprItemId}', '6', null);`))).toContain("already been submitted");
   });
 
   it("제출 즉시 학생에게 정답·해설이 열린다(자동 채점 확정) — 교사가 별도로 확정할 필요가 없다", () => {

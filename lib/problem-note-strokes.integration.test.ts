@@ -89,10 +89,10 @@ describe("problem_note_strokes — 모의고사 필기 저장/열람 RPC", () =>
 
     // 무관한 학생은 저장도 열람도 못 한다.
     expect(fails(() => asUser(otherStudentId, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${setItemId}', '${strokes}'::jsonb);`))).toContain(
-      "본인 응시",
+      "your own attempts",
     );
     expect(
       fails(() => asUser(otherStudentId, `select load_problem_note_strokes('mock_exam', '${attemptId}', '${setItemId}', '${STUDENT_ID}');`)),
-    ).toContain("권한이 없습니다");
+    ).toContain("do not have permission");
   });
 });

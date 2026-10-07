@@ -43,6 +43,6 @@ export async function assertNoConsultantMeetingOverlap(
   const [m, c] = await Promise.all([meetings, consultations]);
   if (m.error) throw new Error(m.error.message);
   if (c.error) throw new Error(c.error.message);
-  if ((m.count ?? 0) > 0) throw new Error("같은 컨설턴트의 다른 미팅과 시간이 겹칩니다. 다른 시간을 선택해 주세요.");
-  if ((c.count ?? 0) > 0) throw new Error("같은 컨설턴트의 상담 일정과 시간이 겹칩니다. 다른 시간을 선택해 주세요.");
+  if ((m.count ?? 0) > 0) throw new Error("This time overlaps another meeting with the same consultant. Please choose a different time.");
+  if ((c.count ?? 0) > 0) throw new Error("This time overlaps a consultation with the same consultant. Please choose a different time.");
 }

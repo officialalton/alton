@@ -104,8 +104,8 @@ describe("MST 응시 흐름", () => {
   });
 
   it("다른 학생·타인은 시작·상태 조회 불가", () => {
-    expect(fails(() => asUser("cccccccc-0000-0000-0000-000000000002", `select mock_exam_start_mst('${attemptId}');`))).toContain("본인 응시만");
-    expect(fails(() => asUser("cccccccc-0000-0000-0000-000000000002", `select mock_exam_mst_state('${attemptId}');`))).toContain("권한");
+    expect(fails(() => asUser("cccccccc-0000-0000-0000-000000000002", `select mock_exam_start_mst('${attemptId}');`))).toContain("your own attempt");
+    expect(fails(() => asUser("cccccccc-0000-0000-0000-000000000002", `select mock_exam_mst_state('${attemptId}');`))).toContain("permission");
   });
 
   it("답 저장·표시는 현재 모듈에서만; 고정형 submit은 거부", () => {
@@ -113,8 +113,8 @@ describe("MST 응시 흐름", () => {
     const [m2] = itemsByModule.rw_m2;
     asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${i1}', '0', 5); select mock_exam_toggle_flag('${attemptId}', '${i1}', true);`);
     expect(psql(`select correct || '|' || flagged from mock_exam_answers where attempt_id = '${attemptId}' and set_item_id = '${i1}';`)).toBe("true|true");
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${m2}', '0', null);`))).toContain("제출된 모듈");
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_submit('${attemptId}');`))).toContain("모듈 단위로");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${m2}', '0', null);`))).toContain("already been submitted");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_submit('${attemptId}');`))).toContain("module by module");
   });
 
   it("모듈 제출 2회 → 한 번만 잠기고 rw_m2 시작; 잠긴 모듈 쓰기 거부", () => {
@@ -123,8 +123,8 @@ describe("MST 응시 흐름", () => {
     expect(psql(`select current_module from mock_exam_attempts where id = '${attemptId}';`)).toBe("rw_m2");
     expect(psql(`select locked || '|' || auto_submitted || '|' || raw_correct_count from mock_exam_attempt_modules where attempt_id = '${attemptId}' and module_key = 'rw_m1';`)).toBe("true|false|1");
     expect(psql(`select count(*) from mock_exam_attempt_modules where attempt_id = '${attemptId}' and locked;`)).toBe("1");
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${i1}', '1', null);`))).toContain("제출된 모듈");
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_toggle_flag('${attemptId}', '${i1}', false);`))).toContain("제출된 모듈");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_save_answer('${attemptId}', '${i1}', '1', null);`))).toContain("already been submitted");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_toggle_flag('${attemptId}', '${i1}', false);`))).toContain("already been submitted");
   });
 
   it("시간 만료: 다음 상태 조회에서 자동 제출·잠금 후 휴식으로 넘어간다", () => {
