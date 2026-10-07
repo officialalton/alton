@@ -181,6 +181,9 @@ export default function ContractArchivePanel() {
                   : "—"}
               </span>
               <span>회사 서명 {row.companySignedAt ? "완료" : "전"}</span>
+              {row.amendmentRequired && (
+                <span className="font-bold text-red" data-testid="contract-amendment-required">개정 계약·재동의 필요</span>
+              )}
               <span>
                 서명본{" "}
                 {row.signedArtifactSyncStatus
@@ -221,6 +224,12 @@ export default function ContractArchivePanel() {
                 <dd>{row.latestVersionNumber !== null ? `${row.latestVersionNumber}차` : "아직 없음"}</dd>
                 <dt className="font-bold">서명 상태 갱신</dt>
                 <dd>{formatDate(row.envelopeStatusUpdatedAt, tz)}</dd>
+                {row.amendmentRequired && (
+                  <>
+                    <dt className="font-bold">개정 안내</dt>
+                    <dd>이 서명본은 녹화·전사·AI 노트 4개 동의 항목이 들어가기 전 문구입니다. 새 문구의 계약으로 다시 서명받기 전에는 해당 처리가 시작되지 않습니다(자동 안내 발송 없음).</dd>
+                  </>
+                )}
                 <dt className="font-bold">회사 서명</dt>
                 <dd>{row.companySignedAt ? formatDate(row.companySignedAt, tz) : "아직 없음"}</dd>
               </dl>

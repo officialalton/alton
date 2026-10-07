@@ -1,5 +1,7 @@
 "use client";
 
+import AdditionalAttendeesPanel, { TEACHER_ATTENDEE_COPY } from "@/app/components/AdditionalAttendeesPanel";
+import { addMyLessonAttendeeAction, listMyLessonAttendeesAction } from "./attendee-actions";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { TeacherLessonScheduleItem, ExternalBusyBlock, ActionResult } from "./lesson-schedule-actions";
@@ -454,6 +456,13 @@ export default function TeacherLessonScheduleTab({
             </div>
           )}
         </div>
+        {!lesson.isTrial && (
+          <AdditionalAttendeesPanel
+            copy={TEACHER_ATTENDEE_COPY}
+            load={() => listMyLessonAttendeesAction(lesson.sessionId)}
+            onAdd={(i) => addMyLessonAttendeeAction(lesson.sessionId, i)}
+          />
+        )}
         <div className="mt-2 flex items-center gap-2 flex-wrap">
           {lesson.externalChangeStatus !== "none" && (
             <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red/10 text-red">Needs admin review (external change detected)</span>
