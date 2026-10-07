@@ -5,6 +5,8 @@
 // '면담' 서브탭으로 이동했다. 면담 가능시간(가용시간) UI는 list_open_meeting_slots RPC가
 // 제거되어 효과가 없으므로 삭제했다(테이블은 이력용으로 유지).
 
+import AdditionalAttendeesPanel, { ADMIN_ATTENDEE_COPY } from "@/app/components/AdditionalAttendeesPanel";
+import { addAttendeeAction, listAttendeesAction, recordAttendeeStatusAction } from "./attendee-actions";
 import { useEffect, useState } from "react";
 import {
   loadMeetingOperationsDashboardAction,
@@ -152,6 +154,12 @@ export default function MeetingOperationsPanel({ onNeedsActionCount }: { onNeeds
               {m.subject && `주제: ${m.subject} · `}희망 시간: {formatDateTime(m.startsAt, tz)}
             </p>
             {m.content && <p className="text-[12.5px] text-grey-700 mt-1">내용: {m.content}</p>}
+            <AdditionalAttendeesPanel
+              copy={ADMIN_ATTENDEE_COPY}
+              load={() => listAttendeesAction("meeting_request", m.id)}
+              onAdd={(i) => addAttendeeAction("meeting_request", m.id, i)}
+              onRecord={(id, s) => recordAttendeeStatusAction("meeting_request", m.id, id, s)}
+            />
             {m.contactPreference && (
               <p className="text-[12.5px] text-grey-500 mt-0.5">
                 희망 연락: {CONTACT_PREFERENCE_LABEL[m.contactPreference] ?? m.contactPreference}

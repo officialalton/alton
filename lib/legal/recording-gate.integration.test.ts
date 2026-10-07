@@ -1,7 +1,8 @@
 import { execFileSync } from "node:child_process";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createClient } from "@supabase/supabase-js";
-import { evaluateSessionCapture } from "./recording-gate-data";
+import { addAttendee, listAttendees, recordAttendeeStatus } from "@/lib/attendees/attendees";
+import { evaluateConsultationCapture, evaluateSessionCapture } from "./recording-gate-data";
 
 // The capture gate reads EXISTING records only. This test drives it against the real schema (column names, RPCs, status
 // semantics) with a per-run teacher/student, using the same psql shell-out pattern as the other booking integration tests.
@@ -123,5 +124,76 @@ describe("evaluateSessionCapture() against the real records", () => {
     psql(`insert into consent_policy_versions (version, title, content_hash, effective_from, requires_reconsent) values ('gate-test-${Date.now()}', 'gate test', 'x', now() + interval '1 second', true);`);
     psql(`select pg_sleep(1.2);`);
     expect(await codes(minorSessionId)).toEqual(["under13_guardian_consent_outdated"]);
+  });
+});
+
+describe("evaluateConsultationCapture() — follow-up consultations (meeting_requests) and first consultations", () => {
+  const runId = `cons-${Date.now()}`;
+  let consultantId: string;
+  let meetingId: string;
+  let householdId: string;
+
+  beforeAll(() => {
+    consultantId = psql(
+      `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+       values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', 'gate-${runId}@example.com', 'x', now(), '{}', '{}', now(), now()) returning id;`
+    );
+    psql(`insert into profiles (id, role, name) values ('${consultantId}', 'consultant', '게이트 컨설턴트 ${runId}');`);
+    // an adult student with an active family contract on the current text version (reuse the first test's child)
+    householdId = psql(`select household_id from contracts where id = '${contractId}';`);
+    meetingId = psql(
+      `insert into meeting_requests (household_id, child_id, subject, requested_by, status, starts_at, ends_at, consultant_id)
+       values ('${householdId}', '${childId}', 'follow-up ${runId}', '${childId}', 'scheduled', now() + interval '10 days', now() + interval '10 days 1 hour', '${consultantId}') returning id;`
+    );
+  });
+
+  afterAll(() => {
+    psql(`delete from lesson_additional_attendees where meeting_request_id = '${meetingId}';`);
+    psql(`delete from meeting_requests where id = '${meetingId}';`);
+    // signed agreement rows are protected from deletion by design; run-id data stays in the throwaway local DB
+  });
+
+  const codesOf = async () => (await evaluateConsultationCapture(admin, { kind: "follow_up_consultation", id: meetingId })).reasons.map((r) => r.code);
+
+  it("a first consultation is always excluded, whatever else is signed", async () => {
+    const v = await evaluateConsultationCapture(admin, { kind: "first_consultation", id: "00000000-0000-0000-0000-000000000000" });
+    expect(v.allowed).toBe(false);
+    expect(v.reasons.map((r) => r.code)).toEqual(["first_consultation_excluded"]);
+  });
+
+  it("a follow-up consultation needs the consultant agreement (current version), then attendee consent", async () => {
+    expect(await codesOf()).toEqual(["provider_agreement_not_signed"]);
+    psql(`insert into teacher_contracts (teacher_id, doc_type, status, signed_at, agreement_form, template_version) values ('${consultantId}', 'consultant_services', 'signed', now() - interval '1 day', 'consultant_services', '0.0-OLD');`);
+    expect(await codesOf()).toEqual(["provider_agreement_scope_outdated"]);
+    psql(`insert into teacher_contracts (teacher_id, doc_type, status, signed_at, agreement_form, template_version) values ('${consultantId}', 'consultant_services', 'signed', now(), 'consultant_services', '0.1-EN-CONSULTANT');`);
+    expect(await codesOf()).toEqual([]);
+
+    const attendee = psql(`insert into lesson_additional_attendees (meeting_request_id, display_name) values ('${meetingId}', 'Parent relative ${runId}') returning id;`);
+    expect(await codesOf()).toEqual(["additional_attendee_consent_incomplete"]);
+    psql(`update lesson_additional_attendees set notice_given_at = now(), consent_recorded_at = now() where id = '${attendee}';`);
+    expect(await codesOf()).toEqual([]);
+  });
+
+  it("attendees flow end to end: teacher/admin flags, admin records notice then consent, the gate opens only then", async () => {
+    const created = await addAttendee(admin, { kind: "meeting_request", id: meetingId }, { displayName: `Cousin ${runId}`, relationship: "relative" }, consultantId);
+    const att = created.find((a) => a.displayName === `Cousin ${runId}`)!;
+    expect(att.noticeGivenAt).toBeNull();
+    expect(att.consentRecordedAt).toBeNull();
+    expect(await codesOf()).toEqual(["additional_attendee_consent_incomplete"]);
+    await expect(recordAttendeeStatus(admin, att.id, { consent: true }, ADMIN_ID)).rejects.toThrow("안내를 먼저");
+    await recordAttendeeStatus(admin, att.id, { notice: true }, ADMIN_ID);
+    expect(await codesOf()).toEqual(["additional_attendee_consent_incomplete"]);
+    await recordAttendeeStatus(admin, att.id, { consent: true }, ADMIN_ID);
+    expect(await codesOf()).toEqual([]);
+    const after = (await listAttendees(admin, { kind: "meeting_request", id: meetingId })).find((a) => a.id === att.id)!;
+    const first = after.noticeGivenAt;
+    await recordAttendeeStatus(admin, att.id, { notice: true, consent: true }, ADMIN_ID);
+    const again = (await listAttendees(admin, { kind: "meeting_request", id: meetingId })).find((a) => a.id === att.id)!;
+    expect(again.noticeGivenAt).toBe(first); // the first recorded time is kept
+  });
+
+  it("the attendee target must be exactly one of session / meeting request", () => {
+    expect(() => psql(`insert into lesson_additional_attendees (display_name) values ('none');`)).toThrow();
+    expect(() => psql(`insert into lesson_additional_attendees (session_id, meeting_request_id, display_name) values ('${sessionId}', '${meetingId}', 'both');`)).toThrow();
   });
 });

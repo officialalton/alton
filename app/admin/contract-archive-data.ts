@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { agreementCoversFourItems } from "@/lib/legal/recording-scope";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 // P4-3 2단계 — `문서 > 계약` 아카이브 리더.
@@ -22,6 +23,8 @@ export type ContractArchiveRow = {
   envelopeStatus: string | null;
   envelopeStatusUpdatedAt: string | null;
   companySignedAt: string | null;
+  /** 서명된 최신 버전의 문구가 4개 녹화·전사·AI 노트 동의 항목 이전 버전이면 true — 개정 계약·재동의 필요(자동 발송 없음) */
+  amendmentRequired: boolean;
   /** 서명본 산출물. 목록·상세·다운로드가 모두 이 id를 가리킨다. */
   signedArtifactId: string | null;
   signedArtifactSyncStatus: string | null;
@@ -69,7 +72,7 @@ export async function loadContractArchive(
     selectInChunks(contractIds, (chunk) => supabase
       .from("contract_versions")
       .select(
-        "id, contract_id, version_number, version_status, docusign_envelope_status, docusign_status_updated_at, company_signed_at"
+        "id, contract_id, version_number, version_status, docusign_envelope_status, docusign_status_updated_at, company_signed_at, template_version"
       )
       .in("contract_id", chunk)
       .order("version_number", { ascending: false }), { sort: orderComparator(["version_number", false]) }),
@@ -128,6 +131,9 @@ export async function loadContractArchive(
       envelopeStatus: (version?.docusign_envelope_status as string | undefined) ?? null,
       envelopeStatusUpdatedAt: (version?.docusign_status_updated_at as string | undefined) ?? null,
       companySignedAt: (version?.company_signed_at as string | undefined) ?? null,
+      amendmentRequired:
+        (c.status === "active" || version?.docusign_envelope_status === "completed") &&
+        !agreementCoversFourItems("family", version?.template_version as string | undefined),
       signedArtifactId: (artifact?.id as string | undefined) ?? null,
       signedArtifactSyncStatus: syncStatus,
       signedArtifactDownloadable: syncStatus === "succeeded" && Boolean(artifact?.drive_file_id),

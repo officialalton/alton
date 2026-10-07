@@ -5,6 +5,8 @@
 // 일정 변경·취소는 이 화면에서 직접 하지 않고(별도 재검증 체인이 필요), "예약 운영"
 // 탭(BookingReconciliationPanel)의 기존 취소·재처리 기능으로 안내한다 — 조회·필터 전용.
 
+import AdditionalAttendeesPanel, { ADMIN_ATTENDEE_COPY } from "@/app/components/AdditionalAttendeesPanel";
+import { addAttendeeAction, listAttendeesAction, recordAttendeeStatusAction } from "./attendee-actions";
 import { useEffect, useMemo, useState } from "react";
 import MonthCalendar, { type DayBadge } from "@/app/components/MonthCalendar";
 import { dateKeyInTimezone, buildWeekGrid, todayKeyInTimezone } from "@/lib/calendar-date-utils";
@@ -234,6 +236,12 @@ export default function UnifiedScheduleTab({
                 <div className="text-[13px] text-grey-500 mt-0.5">{formatDateTime(l.startsAt, timezone)}</div>
               </div>
             </div>
+            <AdditionalAttendeesPanel
+              copy={ADMIN_ATTENDEE_COPY}
+              load={() => listAttendeesAction("session", l.sessionId)}
+              onAdd={(i) => addAttendeeAction("session", l.sessionId, i)}
+              onRecord={(id, s) => recordAttendeeStatusAction("session", l.sessionId, id, s)}
+            />
             <div className="mt-2 flex items-center gap-2 flex-wrap">
               <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-grey-100 text-grey-500">
                 {SYNC_STATUS_LABEL[l.googleSyncStatus] ?? l.googleSyncStatus}

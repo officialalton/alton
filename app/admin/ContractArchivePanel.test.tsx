@@ -20,12 +20,26 @@ const base: ContractArchiveRow = {
   signedArtifactId: "da-1",
   signedArtifactSyncStatus: "succeeded",
   signedArtifactDownloadable: true,
+  amendmentRequired: false,
 };
 
 beforeEach(() => {
   vi.clearAllMocks();
   (listContractArchiveAction as ReturnType<typeof vi.fn>).mockResolvedValue([base]);
   vi.stubGlobal("fetch", vi.fn());
+});
+
+describe("ContractArchivePanel — amended agreement flag", () => {
+  it("서명된 계약이 4항목 이전 문구 버전이면 '개정 계약·재동의 필요'를 보여주고, 현재 버전이면 보여주지 않는다", async () => {
+    (listContractArchiveAction as ReturnType<typeof vi.fn>).mockResolvedValue([{ ...base, amendmentRequired: true }]);
+    const { unmount } = render(<ContractArchivePanel />);
+    await waitFor(() => expect(screen.getByTestId("contract-amendment-required")).toBeInTheDocument());
+    unmount();
+    (listContractArchiveAction as ReturnType<typeof vi.fn>).mockResolvedValue([base]);
+    render(<ContractArchivePanel />);
+    await waitFor(() => expect(screen.getByText("지훈")).toBeInTheDocument());
+    expect(screen.queryByTestId("contract-amendment-required")).toBeNull();
+  });
 });
 
 describe("ContractArchivePanel", () => {
