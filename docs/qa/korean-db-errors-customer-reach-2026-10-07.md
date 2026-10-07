@@ -320,3 +320,7 @@ Notes on borderline staff-only items:
 - assign_vocab_quiz: only teachers/admin (teaches_student); app masks with English text. Staff-only.
 - reject_guardian_students_mutation, reject_ledger_mutation, protect_account_invite_status, prevent_material_version_reassignment, reject_direct_trial_session_completion, _problem_error_reports_guard: no customer path updates/deletes these rows (customer RPCs only INSERT or use internal guard flags); treated as internal guards.
 - set_primary_guardian, record_manual_guardian_consent, verify_student_date_of_birth: PUBLIC execute but explicit admin-only body gate; no customer UI caller.
+
+## Follow-up: customer-visible non-RAISE strings (migration 20262100000261)
+
+Scanned all public functions for Hangul string literals outside RAISE. Customer-visible (translated, new rows only): schedule_reservation_notifications ('A regular lesson has been scheduled.'), cancel_reservation_notifications ('Your scheduled regular lesson has been cancelled.'), _mock_exam_attempt_detail_v1 fallback exam name ('Mock exam'). Left Korean (staff/audit only): status-event and ledger reasons (admin_*, submit_homepage_consult_request, accept_guardian_link_invite, redeem_consultation_scheduling_link, payout_*, retention markers, capability keys), calendar cleanup flags. Existing notification rows untouched. Not in DB scope: Korean in app-code notification inserts.

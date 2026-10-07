@@ -126,3 +126,25 @@ describe("customer-facing DB functions raise English messages only", () => {
     expect(offenders).toEqual([]);
   });
 });
+
+// Customer-visible strings written by DB functions (in-app notification text, fallback names). New rows only (migration 20262100000261).
+const CUSTOMER_VISIBLE_STRING_FUNCTIONS = ["schedule_reservation_notifications", "cancel_reservation_notifications", "_mock_exam_attempt_detail_v1"];
+
+describe("customer-visible DB-written strings are English", () => {
+  it("no Hangul in string literals of notification/fallback-name functions (comments ignored)", () => {
+    const names = CUSTOMER_VISIBLE_STRING_FUNCTIONS.map((n) => `'${n}'`).join(",");
+    const sql = `select p.proname || E'\\t' || replace(pg_get_functiondef(p.oid), E'\\n', E'\\x01')
+      from pg_proc p join pg_namespace s on s.oid = p.pronamespace
+      where s.nspname = 'public' and p.proname in (${names})`;
+    const out = execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8", maxBuffer: 64 * 1024 * 1024 });
+    const rows = out.split("\n").filter(Boolean);
+    expect(rows.length).toBe(CUSTOMER_VISIBLE_STRING_FUNCTIONS.length);
+    const offenders: string[] = [];
+    for (const row of rows) {
+      const [name, flat] = row.split("\t");
+      const def = flat.split("\x01").map((l) => l.replace(/--.*$/, "")).join("\n");
+      for (const m of def.matchAll(/'(?:[^']|'')*'/g)) if (/[가-힣]/.test(m[0])) offenders.push(`${name}: ${m[0].slice(0, 80)}`);
+    }
+    expect(offenders).toEqual([]);
+  });
+});
