@@ -34,6 +34,9 @@ describe("prepareConsultantAgreement", () => {
     if (!r.ok) return;
     expect(r.recipientEmail).toBe("min@alton.education");
     expect(r.html).toContain("Monthly fee: KRW 2,000,000 per month");
+    expect(r.html).toContain("ALTON initiates the transfer so that payment is received in the recipient&#039;s account by the deadline");
+    expect(r.html).toContain("ALTON bears its own transfer and currency-conversion fees");
+    expect(r.html).not.toMatch(/full statement amount|bears all bank/);
     expect(r.html).toContain("Consultant signature: /sig1/");
     expect(r.html).toContain("account ending 9876; currency: KRW");
     expect(r.html).toContain("<p>None</p>");

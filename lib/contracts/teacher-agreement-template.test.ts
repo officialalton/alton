@@ -52,9 +52,12 @@ describe("teacher agreement rendering", () => {
     const html = renderNonUsTeacherAgreementHtml(nonUs);
     expect(html).toContain("Services Outside the United States");
     expect(html).toContain("Termination notice period: 30 days");
-    expect(html).toContain("Borne by the Company");
-    expect(html).toContain("payment is made on the preceding business day");
-    expect(html).toContain("paid no later than the 26th of the same month");
+    expect(html).toContain("ALTON bears its own transfer and currency-conversion fees");
+    expect(html).toContain("ALTON initiates the transfer so that payment is received in the recipient&#039;s account by the deadline; delays caused by the receiving bank or incorrect account details provided by the recipient are not a breach.");
+    expect(html).toContain("no later than the 26th");
+    expect(html).not.toMatch(/receives the full statement amount|bears all bank|Borne by the Company/);
+    expect(html).toContain("payment is due on the preceding business day");
+    expect(html).toContain("received in the designated recipient account no later than the 26th of the same month");
     expect(html).not.toMatch(/_{3,}|\[[^\]]+\]|draft/i);
   });
   it("renders the system USD rate in the California form", () => {
