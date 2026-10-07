@@ -8,7 +8,7 @@ const base: PayoutListRow = {
   contractual_amount_minor: 1500000, contractual_currency: "KRW", requested_amount_minor: 1500000, requested_currency: "KRW", status: "sent",
   provider_transaction_id: "tx1", payout_request_id: null, sent_at: null, received_confirmed_at: null, actual_usd_principal_minor: 1100000, actual_usd_fee_minor: 11000,
   actual_usd_total_debit_minor: 1111000, quoted_fx_rate: 1350.5, final_fx_rate: 1351.1, received_amount_minor: null, received_currency: null, return_transaction_id: null,
-  returned_usd_minor: null, needs_review_reasons: [], reconciliation_flag: "awaiting_receipt", import_into_books: false,
+  returned_usd_minor: null, needs_review_reasons: [], reconciliation_flag: "ok", import_into_books: false,
   recipient_name: "=HYPERLINK(\"x\")", bank_name: "KB", account_last4: "1234", recipient_status: "verified",
 };
 
@@ -54,7 +54,7 @@ describe("Mercury 이벤트 반영", () => {
     };
     return { store, log };
   }
-  it("sent 이벤트는 sent까지만 — 수취 확인 전이는 만들지 않는다", async () => {
+  it("sent 이벤트는 sent(지급 완료)까지 반영한다 — 수취 확인 전이는 없다", async () => {
     const { store, log } = mkEvents();
     await applyMercuryTransaction(store, { transactionId: "t1", status: "sent", requestId: "r1", amountMinorUsd: 50000, feeMinorUsd: 0 });
     expect(log).toEqual(["link:t1", "actuals:50000:0", "to:processing", "to:sent"]);

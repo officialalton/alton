@@ -18,7 +18,7 @@
 4. 수취인: Mercury **수취인 초대**로 교사·컨설턴트가 직접 입력(USD=ACH, 한국=국제송금). 한국 수취인 폼의 필수 항목 캡처 → 설계 문서 미해결 항목에 기록.
 5. 웹훅: 거래 이벤트(`transaction.created/updated`) 엔드포인트 등록은 서명 검증 구현 후. 서명 방식·재시도 정책을 Mercury에 문의(문서 미기재).
 6. **KRW 첫 거래(소액) 확인 항목**: UI에서 수취 KRW 금액 지정 가능 여부, 견적 환율 고정 시간, 1% 환전 수수료 외 추가 수수료, 수취 KRW 실제 도착액, 소요 시간, 받는 은행 수수료, 거래 객체의 환율·수수료 필드.
-7. 한국 은행 휴일표(2026) 월력요항과 대조·2027 이후 연도 추가(`payout_kr_calendar_years`).
+7. 한국 은행 휴일표: 2026·2027 공식 월력요항 대조 완료, 2028~2030은 산출값(공식 발표 후 재대조), 임시공휴일·선거일 추가 절차는 `docs/2026-10-07-kr-bank-holidays.md`.
 
 ## 3. Mercury Books (오너/회계사)
 1. Books 구독(2026-12-31까지 면제 조건 확인), Mercury 은행 계정 연결 확인.
@@ -35,14 +35,13 @@
 ## 6. 검증 순서
 1. 샌드박스(`MERCURY_API_BASE_URL`을 샌드박스로, 별도 토큰): 수취인 초대 → request-send-money(ACH) → 거래 조회 응답 형태 확인(목록·단건 경로, `requestId`↔거래 연결, 웹훅 지원 여부). 실제 돈 없음. 결과로 `lib/payout/providers/mercury.ts`의 미확정 경로 보정.
 2. **소액 실거래(별도 오너 승인 필요)**: USD ACH 1건(예: 수취인 본인 동의 하의 소액) → 반환·수취 확인 절차까지, 이어서 KRW 국제송금 1건(소액) → 위 2-6 항목 실측.
-3. 실측값으로 `transfer_lead_business_days_krw`, 문구(전액 수령 여부), 보충(top-up) 절차 확정.
+3. 실측값으로 `transfer_lead_business_days_krw`(현재 5), 문구(전액 수령 여부) 확인. 수취 확인 입력은 없으므로 실제 도착액·수수료는 Mercury 거래·은행 화면에서 실측 후 문서에만 기록.
 4. 그 뒤에만 `MERCURY_PAYOUTS_ENABLED`·게이트를 순서대로 열고(Preview → 소액 → 정기), 각 단계 오너 승인.
 
 ## 7. 미결 결정
-- KRW 송금 앞당김 영업일(기본 5) 확정, 첫 지급 후 재조정.
-- 수취 확인 기준: 교사 확인 vs 은행 증빙 vs ACH 반환 가능 기간 경과(ACH 반환은 최대 60일 — 무엇을 "확인"으로 인정할지).
+- (확정 10-07) KRW 송금 앞당김 5 한·미 공통 영업일, 수취 확인 단계 폐지(sent=지급 완료, 반환 시에만 반환 기록·재송금). ACH 반환이 늦게(최대 60일) 와도 반환 기록+재송금으로 처리.
 - 기존 암호화 계좌 저장소 유지 vs Mercury 초대로 일원화 후 폐기(설계 문서 2절 권장: 당분간 참조원 유지).
-- 정산 권한 부여 대상자(`payout_settlement_edit/approve`, `payout_request_mercury`, `payout_approve_mercury`, `accounting_reconcile`) 지정 — 마스터는 전부 가능하나 직무 분리상 마스터 1인이 정산 승인과 지급 승인을 모두 하는 것은 DB가 막음(두 사람 이상 필요).
+- 정산 권한 부여 대상자(`payout_settlement_edit/approve`, `payout_request_mercury`, `payout_approve_mercury`, `accounting_reconcile`) 지정 — 마스터 1명이 정산 승인과 지급 승인을 모두 할 수 있다(직무 분리 설정 `payout_dual_control_required` 기본 꺼짐, 필요 시 마스터가 켬). 승인자는 항상 감사 기록.
 - 컨설턴트 정산 paid 마감은 현재 기존 화면에서 수동(시도의 settlement_not_marked_paid 플래그).
 - 지급 시도 자동 생성 여부(현재 없음 — 사람이 승인된 정산에서 생성).
 - 계약 문구 제안(`docs/2026-10-07-contract-wording-changes.md`) 법무 검토.

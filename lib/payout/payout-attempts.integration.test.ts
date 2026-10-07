@@ -136,7 +136,7 @@ describe("지급 시도 생성 — 정산 ↔ 시도 연결", () => {
   });
 
   it("기한과 송금 예정일은 별개 컬럼이고 SQL·TS 일정 규칙이 같다(주말·미국/한국 휴일 포함)", () => {
-    for (const deadline of ["2026-10-26", "2026-10-12", "2026-09-28", "2026-10-09", "2026-12-25", "2026-02-18"]) {
+    for (const deadline of ["2026-10-26", "2026-10-12", "2026-09-28", "2026-10-09", "2026-12-25", "2026-02-18", "2027-02-09", "2027-09-15", "2028-01-27", "2028-10-05", "2029-09-24", "2030-02-05", "2030-09-12", "2027-05-03"]) {
       const sqlKrw = psql(`select payout_krw_transfer_date('${deadline}');`);
       expect(sqlKrw, `KRW ${deadline}`).toBe(krwTransferDate(deadline).date);
       const sqlUsd = psql(`select payout_transfer_request_date('${deadline}');`);
@@ -147,11 +147,13 @@ describe("지급 시도 생성 — 정산 ↔ 시도 연결", () => {
     expect(psql(`select payout_joint_business_day_on_or_before('2026-09-26');`)).toBe("2026-09-23");
   });
 
-  it("검증되지 않은 연도의 KRW 기한은 unverified_calendar 플래그가 붙는다", () => {
+  it("2031 이후(휴일표 없음) KRW 기한은 unverified_calendar 플래그가 붙고, 2026~2030은 붙지 않는다", () => {
     const t = mkTeacher();
-    const b = mkApprovedBatch(t, "KRW", 100000, "2027-02-26", settler);
+    const b = mkApprovedBatch(t, "KRW", 100000, "2031-02-26", settler);
     const a = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'mercury');`);
     expect(attempt(a, "'unverified_calendar' = any(needs_review_reasons)")).toBe("t");
+    const ok = psql(`select create_payout_attempt('${mkApprovedBatch(mkTeacher(), "KRW", 100000, "2028-10-26", settler)}', null, 'normal', null, '${requester}', 'mercury');`);
+    expect(attempt(ok, "'unverified_calendar' = any(needs_review_reasons)")).toBe("f");
   });
 });
 
@@ -164,20 +166,34 @@ describe("승인·직무 분리·상태 전이", () => {
     return { t, b, a };
   }
 
-  it("정산 승인자·시도 생성자는 같은 건을 지급 승인할 수 없고, 권한 없는 사람도 못 한다", () => {
+  it("직무 분리 기본 꺼짐: 마스터 1명이 정산 승인과 지급 승인을 모두 할 수 있고, 누가 무엇을 승인했는지 이벤트에 남는다. 권한 없는 사람은 못 한다", () => {
+    expect(psql(`select payout_dual_control_required from payout_settings where id`)).toBe("f");
     const { a } = setup();
-    fails(() => psql(`select approve_payout_attempt('${a}', '${settler}');`), /직무 분리/);
     fails(() => psql(`select approve_payout_attempt('${a}', '${plainAdmin}');`), /권한이 없습니다/);
-    // requester는 capability(payout_approve_mercury)가 없어 막힌다 — 생성자 = 승인자 차단은 별도 확인
+    psql(`select approve_payout_attempt('${a}', '${settler}');`); // settler = 정산 승인자이자 마스터
+    expect(attempt(a, "approved_by")).toBe(settler);
+    const detail = psql(`select detail::text from payout_attempt_events where attempt_id='${a}' and event_type='approved'`);
+    expect(detail).toContain(settler);
+    expect(JSON.parse(detail)).toMatchObject({ settlement_approved_by: settler, attempt_created_by: requester, payout_approved_by: settler, dual_control_required: false, same_person_settlement_and_payout: true });
+    psql(`select approve_payout_attempt('${a}', '${settler}');`); // 멱등
+    expect(Number(psql(`select count(*) from payout_attempt_events where attempt_id='${a}' and event_type='approved'`))).toBe(1);
+  });
+
+  it("직무 분리를 켜면(payout_dual_control_required) 정산 승인자·시도 생성자는 지급 승인을 못 하고, 설정은 마스터만 바꾼다", () => {
+    const { a } = setup();
     const both = mkAdmin("both", null, "payout_approve_mercury");
     psql(`insert into supervisor_capabilities (profile_id, capability) values ('${both}', 'payout_request_mercury');`);
-    const t = mkTeacher();
-    const b = mkApprovedBatch(t, "USD", 7000, "2026-10-26", settler);
-    const a2 = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${both}', 'mercury');`);
-    fails(() => psql(`select approve_payout_attempt('${a2}', '${both}');`), /직무 분리/);
-    psql(`select approve_payout_attempt('${a}', '${approver}');`);
+    const b2 = mkApprovedBatch(mkTeacher(), "USD", 7000, "2026-10-26", settler);
+    const a2 = psql(`select create_payout_attempt('${b2}', null, 'normal', null, '${both}', 'mercury');`);
+    fails(() => psql(`select set_payout_dual_control(true, '${approver}');`), /마스터 관리자만/);
+    // 설정은 한 트랜잭션 안에서만 켜고 같은 트랜잭션에서 끈다(다른 테스트 영향 없음)
+    const dualCheck = (sql: string) =>
+      execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", `select set_payout_dual_control(true, '${settler}'); ${sql}; select set_payout_dual_control(false, '${settler}');`], { encoding: "utf-8", stdio: ["ignore", "pipe", "pipe"] });
+    fails(() => dualCheck(`select approve_payout_attempt('${a}', '${settler}')`), /직무 분리가 켜져/);
+    fails(() => dualCheck(`select approve_payout_attempt('${a2}', '${both}')`), /직무 분리가 켜져/);
+    expect(psql(`select payout_dual_control_required from payout_settings where id`)).toBe("f");
+    dualCheck(`select approve_payout_attempt('${a}', '${approver}')`); // 다른 사람은 가능
     expect(attempt(a, "approved_by")).toBe(approver);
-    psql(`select approve_payout_attempt('${a}', '${approver}');`); // 멱등
   });
 
   it("승인 없이·게이트가 닫힌 채로는 요청 단계로 갈 수 없고, 수취인이 verified여야 한다", () => {
@@ -203,7 +219,7 @@ describe("승인·직무 분리·상태 전이", () => {
     expect(Object.keys(ATTEMPT_TRANSITIONS)).toHaveLength(ATTEMPT_STATUSES.length);
   });
 
-  it("sent ≠ 수취 확인: sent는 거래 ID 필요, receipt_confirmed는 증빙·확인자 필요, 증빙 없이는 제약이 막는다", () => {
+  it("sent = 지급 완료: sent는 거래 ID가 필요하고, 수취 확인 단계·함수는 없으며 새 receipt_confirmed 전이는 막힌다", () => {
     const { a } = setup();
     psql(`select approve_payout_attempt('${a}', '${approver}');`);
     gated(`select payout_attempt_transition('${a}', 'awaiting_mercury_approval', '${requester}')`);
@@ -212,25 +228,27 @@ describe("승인·직무 분리·상태 전이", () => {
     psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-1', '${requester}');`);
     gated(`select payout_attempt_transition('${a}', 'sent', null)`);
     expect(attempt(a, "status")).toBe("sent");
-    expect(attempt(a, "received_confirmed_at is null")).toBe("t");
-    fails(() => psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 50000, 'USD', '  ', now());`), /증빙/);
-    fails(() => psql(`update payout_attempts set status = 'receipt_confirmed' where id='${a}';`), /payout_attempts_check/);
-    psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 50000, 'USD', 'Teacher confirmed by email 10/20', now());`);
-    expect(attempt(a, "status")).toBe("receipt_confirmed");
-    expect(attempt(a, "received_confirmed_by")).toBe(approver);
-    psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 50000, 'USD', 'Teacher confirmed by email 10/20', now());`); // 멱등
+    expect(attempt(a, "received_confirmed_at is null and received_evidence is null")).toBe("t"); // 증빙·확인 입력 없음
+    fails(() => psql(`select payout_attempt_transition('${a}', 'receipt_confirmed', null);`), /허용되지 않는 전이/);
+    expect(psql(`select count(*) from pg_proc where proname = 'confirm_payout_attempt_receipt'`)).toBe("0");
+    expect(psql(`select reconciliation_flag from payout_reconciliation_rows where attempt_id='${a}'`)).toBe("missing_actual_usd");
   });
 
-  it("부족 수취·기한 경과 도착은 플래그로 남는다", () => {
-    const { a } = setup("USD", 100000);
-    psql(`select approve_payout_attempt('${a}', '${approver}');`);
-    gated(`select payout_attempt_transition('${a}', 'awaiting_mercury_approval', '${requester}')`);
-    gated(`select payout_attempt_transition('${a}', 'processing', null)`);
-    psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-short', '${requester}');`);
-    gated(`select payout_attempt_transition('${a}', 'sent', null)`);
-    psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 99000, 'USD', 'Bank statement shows 990.00', '2026-10-28T12:00:00Z');`);
-    expect(attempt(a, "needs_review_reasons::text")).toMatch(/short_received/);
-    expect(attempt(a, "needs_review_reasons::text")).toMatch(/late/);
+  it("기한 이후 sent는 late 플래그, 기한 안이면 플래그 없음", () => {
+    const run = (deadline: string) => {
+      const t = mkTeacher();
+      const b = mkApprovedBatch(t, "USD", 3000, deadline, settler);
+      mkVerifiedLink(t, "USD");
+      const a = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'mercury');`);
+      psql(`select approve_payout_attempt('${a}', '${approver}');`);
+      gated(`select payout_attempt_transition('${a}', 'awaiting_mercury_approval', '${requester}')`);
+      gated(`select payout_attempt_transition('${a}', 'processing', null)`);
+      psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-${Math.random().toString(36).slice(2, 8)}', '${requester}');`);
+      gated(`select payout_attempt_transition('${a}', 'sent', null)`);
+      return attempt(a, "needs_review_reasons::text");
+    };
+    expect(run("2026-10-01")).toMatch(/late/);   // 이미 지난 기한
+    expect(run("2099-10-26")).not.toMatch(/late/);
   });
 
   it("거래 ID는 한 번만 연결되고 다른 시도와 중복될 수 없다", () => {
@@ -288,12 +306,11 @@ describe("승인 무효화 — 금액·수취인 변경", () => {
   it("이미 송금된(sent) 시도는 상태를 바꾸지 않고 사후 플래그만 남긴다", () => {
     const t = mkTeacher();
     const b = mkApprovedBatch(t, "USD", 40000, "2026-10-26", settler);
-    mkVerifiedLink(t, "USD");
-    const a = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'mercury');`);
+    // 수동(거래 ID 없음) 경로로 sent까지 보낸다 — 정산 paid로 잠기지 않아 금액 변경 감지를 확인할 수 있다.
+    const a = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'manual');`);
     psql(`select approve_payout_attempt('${a}', '${approver}');`);
     gated(`select payout_attempt_transition('${a}', 'awaiting_mercury_approval', '${requester}')`);
     gated(`select payout_attempt_transition('${a}', 'processing', null)`);
-    psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-exec', '${requester}');`);
     gated(`select payout_attempt_transition('${a}', 'sent', null)`);
     psql(`update payout_items set amount_minor = 45000 where batch_id = '${b}';`);
     expect(attempt(a, "status")).toBe("sent");
@@ -326,6 +343,7 @@ describe("실패·반환·재송금 이력", () => {
     psql(`select record_payout_attempt_return('${a2}', null, 'ret-${RUN}-1', 59985, 'ACH R03 no account');`);
     expect(attempt(a2, "status || ':' || return_transaction_id || ':' || returned_usd_minor")).toBe(`returned:ret-${RUN}-1:59985`);
     expect(attempt(a2, "needs_review_reasons::text")).toMatch(/returned_amount_mismatch/);
+    expect(attempt(a2, "needs_review_reasons::text")).toMatch(/settlement_paid_but_returned/); // sent=paid 이후 반환
     expect(attempt(a2, "provider_transaction_id")).toBe(`tx-${RUN}-resend`); // 원 거래 ID 보존
     psql(`select record_payout_attempt_return('${a2}', null, 'ret-${RUN}-1', 59985, 'ACH R03 no account');`); // 멱등
     fails(() => psql(`select record_payout_attempt_return('${a2}', null, 'ret-other', 1, 'x');`), /이미 다른 반환 거래/);
@@ -347,7 +365,7 @@ describe("실패·반환·재송금 이력", () => {
 });
 
 describe("대사 뷰·회계 중복 기록 방지·권한", () => {
-  it("대사 플래그: ok / awaiting_receipt / missing_actual_usd, USD만 계약-원금 비교, 모든 행 import_into_books=false", () => {
+  it("대사 플래그: ok(sent) / missing_actual_usd, USD만 계약-원금 비교, 모든 행 import_into_books=false", () => {
     const t = mkTeacher();
     const b = mkApprovedBatch(t, "USD", 90000, "2026-10-26", settler);
     mkVerifiedLink(t, "USD");
@@ -360,10 +378,8 @@ describe("대사 뷰·회계 중복 기록 방지·권한", () => {
     const flag = () => psql(`select reconciliation_flag from payout_reconciliation_rows where attempt_id='${a}'`);
     expect(flag()).toBe("missing_actual_usd");
     psql(`select record_payout_attempt_actuals('${a}', 90000, 0, null, null, null, '${requester}');`);
-    expect(flag()).toBe("awaiting_receipt");
-    expect(psql(`select usd_principal_matches_contract from payout_reconciliation_rows where attempt_id='${a}'`)).toBe("t");
-    psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 90000, 'USD', 'Teacher confirmed', now());`);
     expect(flag()).toBe("ok");
+    expect(psql(`select usd_principal_matches_contract from payout_reconciliation_rows where attempt_id='${a}'`)).toBe("t");
     expect(psql(`select count(*) from payout_reconciliation_rows where import_into_books`)).toBe("0");
     // KRW 정산은 USD 원금과 비교하는 열이 null
     const kt = mkTeacher();
@@ -398,47 +414,58 @@ describe("대사 뷰·회계 중복 기록 방지·권한", () => {
     expect(Number(countAs(requester, "payout_attempts"))).toBeGreaterThan(0);
   });
 
-  it("KR 휴일표가 SQL과 TS에서 같다", () => {
-    const sqlDates = psql(`select string_agg(holiday_date::text, ',' order by holiday_date) from payout_kr_bank_holidays where holiday_date between '2026-01-01' and '2026-12-31'`);
+  it("KR 휴일표가 SQL과 TS에서 같고(2026~2030) 연도별 출처 수준이 기록돼 있다", () => {
+    const sqlDates = psql(`select string_agg(holiday_date::text, ',' order by holiday_date) from payout_kr_bank_holidays where holiday_date between '2026-01-01' and '2030-12-31'`);
     expect(sqlDates).toBe(Object.keys(KR_BANK_HOLIDAYS).sort().join(","));
+    expect(psql(`select string_agg(calendar_year || ':' || source_level, ',' order by calendar_year) from payout_kr_calendar_years`)).toBe(
+      "2026:official_wolryeok,2027:official_wolryeok,2028:derived,2029:derived,2030:derived"
+    );
   });
 });
 
-describe("정산 paid 동기화 — 수취 확인이 정산 총액을 채울 때만", () => {
-  function sentAttempt(amount: number) {
+describe("정산 paid 동기화 — sent가 정산 총액을 채울 때만", () => {
+  function pathToSent(amount: number, provider: "mercury" | "manual" = "mercury", kind: "normal" | "top_up" = "normal", batchOverride?: { b: string; orig: string }) {
     const t = mkTeacher();
-    const b = mkApprovedBatch(t, "USD", amount, "2026-10-26", settler);
-    mkVerifiedLink(t, "USD");
-    const a = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'mercury');`);
+    const b = batchOverride?.b ?? mkApprovedBatch(t, "USD", amount, "2026-10-26", settler);
+    if (provider === "mercury" && !batchOverride) mkVerifiedLink(t, "USD");
+    const a = psql(
+      kind === "top_up"
+        ? `select create_payout_attempt('${b}', null, 'top_up', '${batchOverride!.orig}', '${requester}', 'mercury', ${amount});`
+        : `select create_payout_attempt('${b}', null, 'normal', null, '${requester}', '${provider}');`
+    );
     psql(`select approve_payout_attempt('${a}', '${approver}');`);
     gated(`select payout_attempt_transition('${a}', 'awaiting_mercury_approval', '${requester}')`);
     gated(`select payout_attempt_transition('${a}', 'processing', null)`);
-    psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-${Math.random().toString(36).slice(2, 8)}', '${requester}');`);
+    if (provider === "mercury") psql(`select link_payout_attempt_transaction('${a}', 'tx-${RUN}-${Math.random().toString(36).slice(2, 8)}', '${requester}');`);
     gated(`select payout_attempt_transition('${a}', 'sent', null)`);
     return { b, a };
   }
-  it("게이트가 닫힌 채 수취 확인하면 정산은 paid가 되지 않고 플래그만 남는다", () => {
-    const { b, a } = sentAttempt(11000);
-    psql(`select confirm_payout_attempt_receipt('${a}', '${approver}', 11000, 'USD', 'Teacher confirmed', now());`);
+  it("Mercury 거래가 sent가 되면(총액 충족) 기존 paid 가드를 거쳐 정산이 바로 paid가 된다 — 수취 확인 입력 없음", () => {
+    const { b, a } = pathToSent(12000);
+    expect(psql(`select status || ':' || provider || ':' || (provider_confirmed_at is not null) from payout_batches where id='${b}'`)).toBe("paid:mercury:true");
+    expect(attempt(a, "needs_review_reasons::text")).not.toMatch(/settlement_not_marked_paid/);
+  });
+  it("수동(거래 ID 없음) 시도는 sent로 기록되지만 정산 paid 전이는 하지 않고 플래그를 남긴다(sent 기록은 유지)", () => {
+    const { b, a } = pathToSent(11000, "manual");
+    expect(attempt(a, "status")).toBe("sent");
     expect(psql(`select status from payout_batches where id='${b}'`)).toBe("approved");
     expect(attempt(a, "needs_review_reasons::text")).toMatch(/settlement_not_marked_paid/);
   });
-  it("게이트가 열려 있고 총액을 채우면 기존 paid 가드를 거쳐 정산이 paid가 된다", () => {
-    const { b, a } = sentAttempt(12000);
-    gated(`select confirm_payout_attempt_receipt('${a}', '${approver}', 12000, 'USD', 'Teacher confirmed', now())`);
-    expect(psql(`select status || ':' || provider || ':' || (provider_confirmed_at is not null) from payout_batches where id='${b}'`)).toBe("paid:mercury:true");
-  });
-  it("부족 수취는 정산을 paid로 만들지 않고, 보충(top-up) 수취까지 채워야 paid가 된다", () => {
-    const { b, a } = sentAttempt(13000);
-    gated(`select confirm_payout_attempt_receipt('${a}', '${approver}', 12900, 'USD', 'Bank shows 129.00', now())`);
+  it("정산 총액보다 적게 sent된 시도(보충 시도 단독)는 정산을 paid로 만들지 않는다", () => {
+    const t = mkTeacher();
+    const b = mkApprovedBatch(t, "USD", 13000, "2026-10-26", settler);
+    mkVerifiedLink(t, "USD");
+    const orig = psql(`select create_payout_attempt('${b}', null, 'normal', null, '${requester}', 'mercury');`);
+    psql(`select payout_attempt_transition('${orig}', 'cancelled', null, 'test')`);
+    const { a } = pathToSent(100, "mercury", "top_up", { b, orig });
+    expect(attempt(a, "status")).toBe("sent");
     expect(psql(`select status from payout_batches where id='${b}'`)).toBe("approved");
-    const top = psql(`select create_payout_attempt('${b}', null, 'top_up', '${a}', '${requester}', 'mercury', 100);`);
-    psql(`select approve_payout_attempt('${top}', '${approver}');`);
-    gated(`select payout_attempt_transition('${top}', 'awaiting_mercury_approval', '${requester}')`);
-    gated(`select payout_attempt_transition('${top}', 'processing', null)`);
-    psql(`select link_payout_attempt_transaction('${top}', 'tx-${RUN}-top', '${requester}');`);
-    gated(`select payout_attempt_transition('${top}', 'sent', null)`);
-    gated(`select confirm_payout_attempt_receipt('${top}', '${approver}', 100, 'USD', 'Bank shows 1.00 top-up', now())`);
-    expect(psql(`select status from payout_batches where id='${b}'`)).toBe("paid");
+  });
+  it("반환이 생기면 반환 거래가 별도로 기록되고 원 시도는 보존된다(재송금은 새 시도)", () => {
+    const { b, a } = pathToSent(14000);
+    psql(`select record_payout_attempt_return('${a}', null, 'ret-${RUN}-x', 14000, 'ACH R01');`);
+    expect(attempt(a, "status || ':' || return_transaction_id || ':' || (provider_transaction_id is not null)")).toBe(`returned:ret-${RUN}-x:true`);
+    const resend = psql(`select create_payout_attempt('${b}', null, 'resend', '${a}', '${requester}', 'mercury');`);
+    expect(attempt(resend, "kind || ':' || original_attempt_id")).toBe(`resend:${a}`);
   });
 });

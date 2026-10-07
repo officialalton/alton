@@ -13,14 +13,13 @@ import type { AttemptStatus } from "@/lib/payout/attempt-state";
 export type ActionResult<T = undefined> = { ok: true; data?: T; message?: string } | { ok: false; error: string };
 
 const ERROR_EN: Array<[RegExp, string]> = [
-  [/직무 분리/, "Separation of duties: the settlement approver or attempt creator cannot approve this payout."],
+  [/직무 분리/, "Dual control is on: the settlement approver or attempt creator cannot approve this payout."],
   [/real_disbursement_enabled|지급 경계/, "The disbursement gate is closed, so this real-world step is blocked."],
   [/승인되지 않았|재승인/, "This attempt is not approved (or its approval was invalidated). Approve it again first."],
   [/금액이 시도 생성 이후 바뀌었습니다/, "The settlement amount changed after this attempt was created. Create a new attempt."],
   [/재검증/, "The recipient's bank details changed and must be re-verified before approval."],
   [/verified\)되지 않았/, "The Mercury recipient is not verified yet."],
   [/권한이 없습니다/, "You do not have permission for this action."],
-  [/증빙/, "Evidence of receipt is required (at least 5 characters)."],
   [/거래 ID/, "A transaction ID is required or already linked to another record."],
   [/이미 진행 중인 재송금/, "A resend is already in progress for this attempt."],
   [/승인된\(approved\) 정산만|확정된\(confirmed\)/, "Only an approved settlement can have a payout attempt."],
@@ -235,7 +234,7 @@ export async function markManualAttemptSentAction(attemptId: string): Promise<Ac
     if (a.status === "queued") await store.transition(attemptId, "awaiting_mercury_approval", actor);
     if (a.status === "queued" || a.status === "awaiting_mercury_approval") await store.transition(attemptId, "processing", actor);
     await store.transition(attemptId, "sent", actor);
-    return { message: "Marked as sent. Receipt must still be confirmed with evidence." };
+    return { message: "Marked as sent. A sent Mercury transaction counts as paid; record a return only if it comes back." };
   });
 }
 
@@ -252,20 +251,6 @@ export async function recordActualsAction(input: { attemptId: string; usdPrincip
       p_actor: actor,
     });
     return { message: "Actual USD amounts recorded." };
-  });
-}
-
-export async function confirmReceiptAction(input: { attemptId: string; receivedAmountMinor: number; currency: "USD" | "KRW"; evidence: string }): Promise<ActionResult> {
-  return run("payout_approve_mercury", async ({ admin, actor }) => {
-    await rpc(admin, "confirm_payout_attempt_receipt", {
-      p_attempt: input.attemptId,
-      p_actor: actor,
-      p_received_amount_minor: input.receivedAmountMinor,
-      p_received_currency: input.currency,
-      p_evidence: input.evidence,
-      p_received_at: new Date().toISOString(),
-    });
-    return { message: "Receipt confirmed." };
   });
 }
 
@@ -286,5 +271,13 @@ export async function failOrCancelAttemptAction(input: { attemptId: string; to: 
   return run("payout_request_mercury", async ({ admin, actor }) => {
     await rpc(admin, "payout_attempt_transition", { p_attempt: input.attemptId, p_to: input.to, p_actor: actor, p_reason: input.reason });
     return { message: input.to === "failed" ? "Recorded as failed." : "Attempt cancelled." };
+  });
+}
+
+/** 직무 분리(정산 승인자 ≠ 지급 승인자) 설정. 기본 꺼짐. 마스터 관리자만 바꾼다. */
+export async function setPayoutDualControlAction(required: boolean): Promise<ActionResult> {
+  return run("view", async ({ admin, actor }) => {
+    await rpc(admin, "set_payout_dual_control", { p_required: required, p_actor: actor });
+    return { message: required ? "Dual control turned on." : "Dual control turned off." };
   });
 }

@@ -28,9 +28,9 @@ For an accepted regular 120-minute lesson, a student cancellation less than 24 h
 
 ## 5. Statements and Payment
 
-Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are paid no later than the 26th of the same month; services performed from the 16th through the last day of a month are paid no later than the 10th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is made on the preceding business day. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim.
+Settlement is semimonthly, with pay periods and payment dates measured in Pacific Time (America/Los_Angeles). Services performed from the 1st through the 15th of a month are received in the designated recipient account no later than the 26th of the same month; services performed from the 16th through the last day of a month are received in the designated recipient account no later than the 10th of the following month. The Company provides a statement for each pay period on or before the payment date. If a payday falls on a weekend or U.S. federal bank holiday, payment is due on the preceding business day. ALTON initiates the transfer so that payment is received in the recipient's account by the deadline; delays caused by the receiving bank or incorrect account details provided by the recipient are not a breach. The Teacher should report a discrepancy within five business days after receiving the statement; missing that period does not forfeit a valid payment claim.
 
-The statement identifies assignments, recognized minutes, applicable rates, separately payable services, and lawful adjustments. The Company bears all bank, transfer, intermediary, and currency-conversion fees for payments to the Teacher, so the Teacher receives the full statement amount. The payment method is stated in Schedule A. No undisclosed fee or student refund is automatically deducted from earned compensation. Disputed amounts are identified and discussed promptly; undisputed amounts remain payable on schedule.
+The statement identifies assignments, recognized minutes, applicable rates, separately payable services, and lawful adjustments. ALTON bears its own transfer and currency-conversion fees for payments to the Teacher; fees charged by the recipient's bank are not covered. The payment method is stated in Schedule A. No undisclosed fee or student refund is automatically deducted from earned compensation. Disputed amounts are identified and discussed promptly; undisputed amounts remain payable on schedule.
 
 ## 6. Tax and Business Responsibilities
 
@@ -97,9 +97,9 @@ This Agreement, completed schedules, and accepted written assignments govern the
 - Effective date: ____________________
 - Lesson fee: Teacher's accepted hourly rate per 60 recognized minutes
 - Required nonlesson work: Paid at the lesson fee rate by recorded actual minutes (Section 3)
-- Payment method and recipient details: ____________________
-- Payment schedule: Semimonthly (Pacific Time); the 1st–15th is paid no later than the 26th of the same month, and the 16th–end of month is paid no later than the 10th of the following month
-- Transfer, intermediary, and conversion fees: Borne by the Company
+- Payment method and recipient details: Bank transfer (wire) to the recipient account on file; recipient name, bank name, account ending in four digits, and payment currency are recorded in the executed payment details.
+- Payment schedule: Semimonthly (Pacific Time); the 1st–15th is received in the designated recipient account no later than the 26th of the same month, and the 16th–end of month is received in the designated recipient account no later than the 10th of the following month
+- Transfer and conversion fees: ALTON bears its own transfer and currency-conversion fees
 - Termination notice period: 30 days
 
 ## Schedule B — Prior Materials and Licenses
