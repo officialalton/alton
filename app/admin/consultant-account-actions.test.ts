@@ -77,8 +77,8 @@ function feeChain(rows: unknown[]) {
 
 describe("getConsultantContractFeeAction — 서명된 계약의 월 보수", () => {
   it("서명된 계약 스냅샷의 월 보수·통화·시작일을 돌려준다(문자열 bigint도 숫자로)", async () => {
-    fromMock.mockReturnValue(feeChain([{ inputs_snapshot: { monthly_fee_minor: "3100000", monthly_fee_currency: "KRW", start_date: "2026-10-01" }, signed_at: "2026-10-02T00:00:00Z" }]));
-    expect(await getConsultantContractFeeAction("c1")).toEqual({ monthlyFeeMinor: 3100000, currency: "KRW", startDate: "2026-10-01", signedAt: "2026-10-02T00:00:00Z" });
+    fromMock.mockReturnValue(feeChain([{ id: "agr-1", inputs_snapshot: { monthly_fee_minor: "3100000", monthly_fee_currency: "KRW", start_date: "2026-10-01" }, signed_at: "2026-10-02T00:00:00Z" }]));
+    expect(await getConsultantContractFeeAction("c1")).toEqual({ agreementId: "agr-1", monthlyFeeMinor: 3100000, currency: "KRW", startDate: "2026-10-01", endDate: null, signedAt: "2026-10-02T00:00:00Z" });
     expect(fromMock).toHaveBeenCalledWith("teacher_contracts");
   });
   it("서명된 계약이 없거나 보수·통화가 비면 null(제안하지 않는다)", async () => {
