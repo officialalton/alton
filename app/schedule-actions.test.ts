@@ -9,7 +9,7 @@ vi.mock("@/lib/consultation/calendar-sync", () => ({ syncOneConsultationCalendar
 
 import { listOpenSlotsForTokenAction, redeemSchedulingLinkAction } from "./schedule-actions";
 
-const INVALID = { code: "P0001", message: "유효하지 않거나 만료된 예약 링크입니다." };
+const INVALID = { code: "P0001", message: "This scheduling link is invalid or has expired." };
 
 describe("예약 링크 서버 액션 — throw 대신 결과값", () => {
   beforeEach(() => {

@@ -1,0 +1,598 @@
+{
+ "requestedN": 41,
+ "feasibleN": 0,
+ "kept": [
+  "SAT Practice Test 1",
+  "SAT Practice Test 2",
+  "SAT Practice Test 3",
+  "SAT Practice Test 4",
+  "SAT Practice Test 5",
+  "SAT Practice Test 6",
+  "SAT Practice Test 7",
+  "SAT Practice Test 8",
+  "SAT Practice Test 9"
+ ],
+ "keptDuplicatesBetweenKept": 0,
+ "maxNByPool": [
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "easy",
+   "format": "any",
+   "perSet": 4,
+   "supply": 0,
+   "maxSets": 0
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "medium",
+   "format": "any",
+   "perSet": 9,
+   "supply": 3,
+   "maxSets": 0
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "easy",
+   "format": "any",
+   "perSet": 4,
+   "supply": 1,
+   "maxSets": 0
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "medium",
+   "format": "any",
+   "perSet": 15,
+   "supply": 0,
+   "maxSets": 0
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 2,
+   "supply": 0,
+   "maxSets": 0
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "medium",
+   "format": "mc",
+   "perSet": 12,
+   "supply": 20,
+   "maxSets": 1
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "medium",
+   "format": "spr",
+   "perSet": 3,
+   "supply": 12,
+   "maxSets": 4
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "medium",
+   "format": "any",
+   "perSet": 15,
+   "supply": 77,
+   "maxSets": 5
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "medium",
+   "format": "mc",
+   "perSet": 12,
+   "supply": 60,
+   "maxSets": 5
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 2,
+   "supply": 12,
+   "maxSets": 6
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "easy",
+   "format": "spr",
+   "perSet": 2,
+   "supply": 12,
+   "maxSets": 6
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 3,
+   "supply": 23,
+   "maxSets": 7
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "easy",
+   "format": "spr",
+   "perSet": 2,
+   "supply": 14,
+   "maxSets": 7
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "medium",
+   "format": "spr",
+   "perSet": 3,
+   "supply": 21,
+   "maxSets": 7
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "easy",
+   "format": "any",
+   "perSet": 6,
+   "supply": 53,
+   "maxSets": 8
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "medium",
+   "format": "any",
+   "perSet": 15,
+   "supply": 135,
+   "maxSets": 9
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "easy",
+   "format": "mc",
+   "perSet": 4,
+   "supply": 48,
+   "maxSets": 12
+  },
+  {
+   "domain": "geometry_trig",
+   "difficulty": "medium",
+   "format": "mc",
+   "perSet": 6,
+   "supply": 73,
+   "maxSets": 12
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "easy",
+   "format": "mc",
+   "perSet": 4,
+   "supply": 56,
+   "maxSets": 14
+  },
+  {
+   "domain": "problem_solving_data",
+   "difficulty": "medium",
+   "format": "mc",
+   "perSet": 6,
+   "supply": 97,
+   "maxSets": 16
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "easy",
+   "format": "any",
+   "perSet": 4,
+   "supply": 80,
+   "maxSets": 20
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 2,
+   "supply": 50,
+   "maxSets": 25
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 3,
+   "supply": 85,
+   "maxSets": 28
+  },
+  {
+   "domain": "geometry_trig",
+   "difficulty": "easy",
+   "format": "mc",
+   "perSet": 2,
+   "supply": 81,
+   "maxSets": 40
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 3,
+   "supply": 130,
+   "maxSets": 43
+  },
+  {
+   "domain": "problem_solving_data",
+   "difficulty": "easy",
+   "format": "mc",
+   "perSet": 2,
+   "supply": 115,
+   "maxSets": 57
+  },
+  {
+   "domain": "geometry_trig",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 1,
+   "supply": 145,
+   "maxSets": 145
+  },
+  {
+   "domain": "problem_solving_data",
+   "difficulty": "hard",
+   "format": "any",
+   "perSet": 1,
+   "supply": 195,
+   "maxSets": 195
+  }
+ ],
+ "formatRelaxed": false,
+ "relaxedFeasibleN": 0,
+ "relaxedShortfallsAtRequestedN": [
+  {
+   "domain": "advanced_math",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 246,
+   "supply": 60,
+   "extraNeeded": 186
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 123,
+   "supply": 85,
+   "extraNeeded": 38
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 32,
+   "extraNeeded": 583
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 246,
+   "supply": 70,
+   "extraNeeded": 176
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 81,
+   "extraNeeded": 534
+  },
+  {
+   "domain": "geometry_trig",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 246,
+   "supply": 77,
+   "extraNeeded": 169
+  },
+  {
+   "domain": "problem_solving_data",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 246,
+   "supply": 98,
+   "extraNeeded": 148
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 246,
+   "supply": 53,
+   "extraNeeded": 193
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 123,
+   "supply": 23,
+   "extraNeeded": 100
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 77,
+   "extraNeeded": 538
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 164,
+   "supply": 0,
+   "extraNeeded": 164
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 82,
+   "supply": 0,
+   "extraNeeded": 82
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 369,
+   "supply": 3,
+   "extraNeeded": 366
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 164,
+   "supply": 80,
+   "extraNeeded": 84
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 82,
+   "supply": 50,
+   "extraNeeded": 32
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 135,
+   "extraNeeded": 480
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 164,
+   "supply": 1,
+   "extraNeeded": 163
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 82,
+   "supply": 12,
+   "extraNeeded": 70
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 0,
+   "extraNeeded": 615
+  }
+ ],
+ "shortfallsAtRequestedN": [
+  {
+   "domain": "advanced_math",
+   "difficulty": "easy",
+   "format": "mc",
+   "demand": 164,
+   "supply": 48,
+   "extraNeeded": 116
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "easy",
+   "format": "spr",
+   "demand": 82,
+   "supply": 12,
+   "extraNeeded": 70
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 123,
+   "supply": 85,
+   "extraNeeded": 38
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "medium",
+   "format": "mc",
+   "demand": 492,
+   "supply": 20,
+   "extraNeeded": 472
+  },
+  {
+   "domain": "advanced_math",
+   "difficulty": "medium",
+   "format": "spr",
+   "demand": 123,
+   "supply": 12,
+   "extraNeeded": 111
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "easy",
+   "format": "mc",
+   "demand": 164,
+   "supply": 56,
+   "extraNeeded": 108
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "easy",
+   "format": "spr",
+   "demand": 82,
+   "supply": 14,
+   "extraNeeded": 68
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "medium",
+   "format": "mc",
+   "demand": 492,
+   "supply": 60,
+   "extraNeeded": 432
+  },
+  {
+   "domain": "algebra",
+   "difficulty": "medium",
+   "format": "spr",
+   "demand": 123,
+   "supply": 21,
+   "extraNeeded": 102
+  },
+  {
+   "domain": "geometry_trig",
+   "difficulty": "easy",
+   "format": "mc",
+   "demand": 82,
+   "supply": 81,
+   "extraNeeded": 1
+  },
+  {
+   "domain": "geometry_trig",
+   "difficulty": "medium",
+   "format": "mc",
+   "demand": 246,
+   "supply": 73,
+   "extraNeeded": 173
+  },
+  {
+   "domain": "problem_solving_data",
+   "difficulty": "medium",
+   "format": "mc",
+   "demand": 246,
+   "supply": 97,
+   "extraNeeded": 149
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 246,
+   "supply": 53,
+   "extraNeeded": 193
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 123,
+   "supply": 23,
+   "extraNeeded": 100
+  },
+  {
+   "domain": "rw_craft_structure",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 77,
+   "extraNeeded": 538
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 164,
+   "supply": 0,
+   "extraNeeded": 164
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 82,
+   "supply": 0,
+   "extraNeeded": 82
+  },
+  {
+   "domain": "rw_expression_ideas",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 369,
+   "supply": 3,
+   "extraNeeded": 366
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 164,
+   "supply": 80,
+   "extraNeeded": 84
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 82,
+   "supply": 50,
+   "extraNeeded": 32
+  },
+  {
+   "domain": "rw_information_ideas",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 135,
+   "extraNeeded": 480
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "easy",
+   "format": "any",
+   "demand": 164,
+   "supply": 1,
+   "extraNeeded": 163
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "hard",
+   "format": "any",
+   "demand": 82,
+   "supply": 12,
+   "extraNeeded": 70
+  },
+  {
+   "domain": "rw_standard_english",
+   "difficulty": "medium",
+   "format": "any",
+   "demand": 615,
+   "supply": 0,
+   "extraNeeded": 615
+  }
+ ],
+ "poolSize": 1622,
+ "repair": {
+  "total": 0,
+  "noReplacement": 0,
+  "skillFallback": 0
+ }
+}
