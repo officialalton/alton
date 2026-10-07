@@ -236,7 +236,7 @@ export default function ConsultantSettlementPanel() {
                     className="mt-1 text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-ink text-ink"
                     onClick={() => {
                       const note = contractAutoFillNote(contractFee.agreementId, suggestion.basis);
-                      const ok = window.confirm(`계약서 기준으로 금액을 채웁니다.\n\n기간: ${newStart} ~ ${newEnd}\n금액: ${suggestion.amountMajor.toLocaleString("en-US")} ${suggestion.currency}\n근거: ${suggestion.basis}\n계약: ${contractFee.agreementId}\n\n채운 뒤에도 금액·통화를 직접 고칠 수 있고, 메모에 근거가 기록됩니다. 진행할까요?`);
+                      const ok = window.confirm(`계약서 기준으로 금액을 채웁니다.\n\n기간: ${newStart} ~ ${newEnd}\n금액: ${new Intl.NumberFormat("en-US").format(suggestion.amountMajor)} ${suggestion.currency}\n근거: ${suggestion.basis}\n계약: ${contractFee.agreementId}\n\n채운 뒤에도 금액·통화를 직접 고칠 수 있고, 메모에 근거가 기록됩니다. 진행할까요?`);
                       if (!ok) return;
                       setNewAmount(String(suggestion.amountMajor));
                       setNewCurrency(suggestion.currency);
