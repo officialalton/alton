@@ -182,11 +182,11 @@ describe("B4/B5/B6 — 예약 링크 슬롯·확정 가드", () => {
     const after = psql(`select slot_starts_at::text from list_consultant_open_slots('${token}', ${RANGE(300, 300 + 48)})`).split("\n").filter(Boolean);
     expect(after).not.toContain(s1);
     expect(after).toContain(s2);
-    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', '${s1}')`)).toContain("해당 시간에는 상담할 수 없습니다");
+    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', '${s1}')`)).toContain("The consultant is not available at that time. Please choose a different time.");
     // 닫힌 예외(종일 휴무)도 확정 단계에서 막힌다.
     psql(`insert into consult_availability_exceptions (consultant_id, exception_date, is_closed, reason)
       values ('${CONS_A}', ('${s2}'::timestamptz at time zone 'America/Los_Angeles')::date, true, '${TAG}');`);
-    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', '${s2}')`)).toContain("해당 시간에는 상담할 수 없습니다");
+    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', '${s2}')`)).toContain("The consultant is not available at that time. Please choose a different time.");
     expect(psql(`select status from consultations where id = '${id}'`)).toBe("requested");
   });
 
@@ -208,7 +208,7 @@ describe("B4/B5/B6 — 예약 링크 슬롯·확정 가드", () => {
   it("지난 시각은 확정할 수 없다", () => {
     const id = newConsultation("b5", {});
     const token = newLink(id, CONS_A);
-    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', now() - interval '2 hours')`)).toContain("이미 지난 시간");
+    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', now() - interval '2 hours')`)).toContain("in the past");
     expect(psql(`select status from consultations where id = '${id}'`)).toBe("requested");
   });
 
@@ -217,13 +217,13 @@ describe("B4/B5/B6 — 예약 링크 슬롯·확정 가드", () => {
     const token = newLink(id, CONS_A);
     expect(Number(psql(`select count(*) from list_consultant_open_slots('${token}', ${RANGE(500, 548)})`))).toBeGreaterThan(0);
     psql(asUser(ADMIN, `select assign_consultation_owner('${id}', 'admissions_consultant', '${CONS_B}', 'qa');`));
-    expect(psqlErr(`select * from list_consultant_open_slots('${token}', ${RANGE(500, 548)})`)).toContain("유효하지 않거나 만료된");
-    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', '${at(505)}')`)).toContain("담당 컨설턴트가 변경되어");
+    expect(psqlErr(`select * from list_consultant_open_slots('${token}', ${RANGE(500, 548)})`)).toContain("invalid or has expired");
+    expect(psqlErr(`select redeem_consultation_scheduling_link('${token}', '${at(505)}')`)).toContain("The assigned consultant has changed, so this link can no longer be used.");
     // 새 컨설턴트 링크는 정상, 취소된 상담의 링크는 무효.
     const token2 = newLink(id, CONS_B);
     expect(Number(psql(`select count(*) from list_consultant_open_slots('${token2}', ${RANGE(500, 548)})`))).toBeGreaterThan(0);
     psql(asUser(ADMIN, `select admin_reject_consultation('${id}', 'qa');`));
-    expect(psqlErr(`select * from list_consultant_open_slots('${token2}', ${RANGE(500, 548)})`)).toContain("유효하지 않거나 만료된");
+    expect(psqlErr(`select * from list_consultant_open_slots('${token2}', ${RANGE(500, 548)})`)).toContain("invalid or has expired");
   });
 });
 

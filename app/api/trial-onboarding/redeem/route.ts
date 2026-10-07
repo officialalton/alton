@@ -59,8 +59,8 @@ function redirectWithError(url: URL, message: string) {
 }
 
 function mapRedeemError(message: string): string {
-  if (message.includes("이미 사용된")) return "This onboarding link has already been used.";
-  if (message.includes("취소된")) return "This onboarding link was canceled. Please contact support.";
-  if (message.includes("만료된")) return "This onboarding link has expired. Please ask support to send a new one.";
+  if (message.includes("이미 사용된") || /already been used/i.test(message)) return "This onboarding link has already been used.";
+  if (message.includes("취소된") || /been canceled/i.test(message)) return "This onboarding link was canceled. Please contact support.";
+  if (message.includes("만료된") || /has expired/i.test(message)) return "This onboarding link has expired. Please ask support to send a new one.";
   return "This onboarding link is not valid.";
 }

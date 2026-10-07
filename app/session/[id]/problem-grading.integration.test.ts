@@ -154,7 +154,7 @@ describe("객관식 — 클릭이 곧 답, 자동 채점", () => {
     // 객관식은 비워 보내면 자동 채점대로 확정된다.
     expect(psql(`select grade from session_problem_work where id = '${workId}';`)).toBe("incorrect");
     const err = fails(() => psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', 1, null);`));
-    expect(err).toContain("채점이 끝난 문제의 답은 바꿀 수 없습니다");
+    expect(err).toContain("This problem has already been graded, so the answer cannot be changed.");
   });
 });
 
@@ -289,7 +289,7 @@ describe("PDF 페이지 필기 — 전체 지우기(clear_all)와 텍스트 조�
         `select count(*) from append_page_stroke_events('${sessionId}', '[${seg({ tool: "text", text: "  " })}]'::jsonb, 'teacher_shared', '${docId}', '${versionId}', 1);`
       )
     );
-    expect(err).toContain("텍스트 필기에 글이 없습니다");
+    expect(err).toContain("The text note is empty.");
   });
 });
 
@@ -514,14 +514,14 @@ describe("append_problem_page_stroke_events — 문제 위 교사·학생 공유
     asUser(TEACHER_ID, `select issue_homework_items('${sessionId}', array['${hw}']::uuid[]);`);
     expect(call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 30 })], "homework")).toBe("1");
     // 과제 전용 문제는 수업 문맥으로는 못 쓴다 — 수업 문제 필기와 과제 필기는 따로다.
-    expect(fails(() => call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 31 })], "lesson"))).toContain("이 수업의 문제가 아닙니다");
+    expect(fails(() => call(TEACHER_ID, "teacher_shared", hw, [seg({ x0: 31 })], "lesson"))).toContain("This problem does not belong to this lesson.");
     // 같은 수업 문제도 과제 문맥이면 과제 발급이 있어야 한다.
-    expect(fails(() => call(TEACHER_ID, "teacher_shared", mcId, [seg({ x0: 32 })], "homework"))).toContain("이 수업의 과제가 아닙니다");
+    expect(fails(() => call(TEACHER_ID, "teacher_shared", mcId, [seg({ x0: 32 })], "homework"))).toContain("This homework does not belong to this lesson.");
 
     const stranger = psql(
       `insert into problems (format, passage, subject_id, status, created_by) values ('mc', '남의 문제', '${SUBJECT_ID}', 'confirmed', '${TEACHER_ID}') returning id;`
     );
-    expect(fails(() => call(TEACHER_ID, "teacher_shared", stranger, [seg({})]))).toContain("이 수업의 문제가 아닙니다");
+    expect(fails(() => call(TEACHER_ID, "teacher_shared", stranger, [seg({})]))).toContain("This problem does not belong to this lesson.");
 
     const rows = psql(
       `select scope || ':' || event_type from session_annotation_events
@@ -599,7 +599,7 @@ describe("spr — 숫자 답 자동 채점·재입력·공개 검사", () => {
     hw = await loadHomeworkProblems(admin, sessionId, { canSeeAnswers: false, studentId: STUDENT_ID });
     p = hw.find((x) => x.problemId === problemId)!;
     expect(p.acceptedAnswers).toEqual(["7", "7.0"]);
-    expect(fails(() => psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', null, '8');`))).toContain("채점이 끝난 문제의 답은 바꿀 수 없습니다");
+    expect(fails(() => psql(`select submit_problem_attempt('${workId}', '${STUDENT_ID}', null, '8');`))).toContain("This problem has already been graded, so the answer cannot be changed.");
   });
 
   it("정답 목록이 없는 spr 초안은 공개할 수 없다", () => {

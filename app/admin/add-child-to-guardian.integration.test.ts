@@ -192,6 +192,6 @@ describe("P4-1 자녀 추가 — finalize(기존 보호자 분기)", () => {
            '[{"link_student_id":"${linkStudentId}","child_auth_user_id":"${child.id}"}]'::jsonb
          );`
       )
-    ).toThrow(/household를 찾을 수 없습니다/);
+    ).toThrow(/No family is linked to this guardian account\. Please contact support\./);
   });
 });

@@ -240,6 +240,18 @@ describe("cancelLessonBooking", () => {
     ).rejects.toThrow("This lesson was already canceled or has taken place.");
   });
 
+  it("English DB messages (post-2026-10-07 migration) get the same friendly wrapping", async () => {
+    const { cancelLessonBooking } = await import("./create-booking");
+    rpcMock.mockResolvedValue({ error: { message: "A consumed reservation cannot be released." } });
+    await expect(
+      cancelLessonBooking({ reservationId: "r1", cancelledByRole: "teacher", cancelledById: "t1", reason: "x" })
+    ).rejects.toThrow("A lesson that has already been confirmed as held can't be canceled.");
+    rpcMock.mockResolvedValue({ error: { message: "Only confirmed reservations can be canceled (current status: cancelled)." } });
+    await expect(
+      cancelLessonBooking({ reservationId: "r1", cancelledByRole: "student", cancelledById: "c1", reason: "x" })
+    ).rejects.toThrow("This lesson was already canceled or has taken place.");
+  });
+
   it("취소 성공 후 google_event_id가 있으면 Calendar 이벤트 삭제를 호출한다", async () => {
     rpcMock.mockResolvedValue({ error: null });
     reservationLookupMaybeSingleMock.mockResolvedValue({ data: { google_event_id: "g1", owner_profile_id: "t1" } });

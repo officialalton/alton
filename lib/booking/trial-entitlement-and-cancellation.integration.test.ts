@@ -118,7 +118,7 @@ describe("90일 체험수업권 만료 이후 예약 차단", () => {
       psql(
         `select confirm_lesson_booking('${childId}', '${subjectEnrollmentId}', '${TEACHER_ID}', '${trialLessonTypeId}', '${startsAt}', '${endsAt}', 'integration-expired-booking-${Date.now()}');`
       )
-    ).toThrow(/사용 가능한 수업권이 없습니다/);
+    ).toThrow(/No lesson credits are available\./);
     void grantId; // entitlement_ledger/entitlement_grants는 INSERT-only 정리 대상이 아님 — db reset으로 정리.
   });
 

@@ -13,7 +13,7 @@ import { NextResponse } from "next/server";
  */
 export function adminGateDenied(e: unknown): NextResponse {
   const message = e instanceof Error ? e.message : "";
-  const notLoggedIn = message.includes("로그인");
+  const notLoggedIn = message.includes("로그인") || /login required/i.test(message);
   return NextResponse.json(
     { error: notLoggedIn ? "로그인이 필요합니다." : "관리자만 확인할 수 있습니다." },
     { status: notLoggedIn ? 401 : 403 }

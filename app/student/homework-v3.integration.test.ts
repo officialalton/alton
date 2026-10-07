@@ -243,7 +243,7 @@ describe("session_homework_attempts — 본인 답안 초안/제출(corrective)"
     const stderr = psqlExpectError(
       `update session_homework_attempts set response = '"슈퍼유저도 못 고침"'::jsonb where id = '${attemptId}';`
     );
-    expect(stderr).toMatch(/제출된 과제 답안은 더 이상 수정할 수 없습니다/);
+    expect(stderr).toMatch(/A submitted homework answer can no longer be changed/);
     void contractId;
   });
 
@@ -257,7 +257,7 @@ describe("session_homework_attempts — 본인 답안 초안/제출(corrective)"
       `insert into session_homework_attempts (homework_item_id, student_id, response, submitted)
        values ('${itemId}', '${OTHER_STUDENT_ID}', '"몰래 답안"'::jsonb, false);`
     );
-    expect(stderr).toMatch(/본인에게 배정되지 않은 과제에는 답안을 작성할 수 없습니다|row-level security|policy/i);
+    expect(stderr).toMatch(/You cannot answer a homework item that is not assigned to you|row-level security|policy/i);
 
     const count = psql(`select count(*) from session_homework_attempts where homework_item_id = '${itemId}';`);
     expect(count).toBe("0");
@@ -279,7 +279,7 @@ describe("session_homework_attempts — 본인 답안 초안/제출(corrective)"
       `insert into session_homework_attempts (homework_item_id, student_id, response, submitted)
        values ('${itemId}', '${OTHER_STUDENT_ID}', '"위조 시도"'::jsonb, false);`
     );
-    expect(stderr).toMatch(/본인에게 배정되지 않은 과제에는 답안을 작성할 수 없습니다|row-level security|policy/i);
+    expect(stderr).toMatch(/You cannot answer a homework item that is not assigned to you|row-level security|policy/i);
     void contractId;
   });
 

@@ -155,7 +155,7 @@ describe("제거된 공용 슬롯 RPC", () => {
 describe("홈페이지 신청은 시간을 갖지 않는다", () => {
   it("시간을 보내면 거절되고, 시간 없이 보내면 시간 없는 requested 로 접수된다", () => {
     const err = psqlErr(`select submit_homepage_consult_request('${TAG}-h1', '${EMAIL("h1")}', null, '${slot(20)}', '고1', null, null)`);
-    expect(err).toContain("상담 시간은 신청 시 정할 수 없습니다");
+    expect(err).toContain("A consultation time cannot be chosen when submitting the request. Please choose a time from the link sent after a consultant is assigned.");
     const row = psql(
       `select status || '|' || coalesce(starts_at::text, 'null') from submit_homepage_consult_request('${TAG}-h2', '${EMAIL("h2")}', null, null, '고1', null, null)`
     );
@@ -177,12 +177,12 @@ describe("보호자 포털: 배정된 컨설턴트의 슬롯만", () => {
     expect(Number(own)).toBeGreaterThan(0);
     // A 의 규칙은 09~12시(3칸/일), B 의 규칙은 13~16시 — B 의 슬롯을 물으면 거절.
     const err = psqlErr(asUser(GUARDIAN_WITH, `select count(*) from list_open_consultant_meeting_slots('${CONSULTANT_B}', ${RANGE});`));
-    expect(err).toContain("담당 컨설턴트의 상담 가능 시간만 조회할 수 있습니다");
+    expect(err).toContain("Only the assigned consultant's available times can be viewed.");
   });
 
   it("담당 컨설턴트가 없는 보호자는 어떤 컨설턴트의 슬롯도 조회할 수 없다", () => {
     for (const c of [CONSULTANT_A, CONSULTANT_B]) {
-      expect(psqlErr(asUser(GUARDIAN_WITHOUT, `select count(*) from list_open_consultant_meeting_slots('${c}', ${RANGE});`))).toContain("담당 컨설턴트의");
+      expect(psqlErr(asUser(GUARDIAN_WITHOUT, `select count(*) from list_open_consultant_meeting_slots('${c}', ${RANGE});`))).toContain("assigned consultant");
     }
   });
 
@@ -199,7 +199,7 @@ describe("보호자 포털: 배정된 컨설턴트의 슬롯만", () => {
            values ('${HOUSEHOLD_WITHOUT}', '${GUARDIAN_WITHOUT}', '${TAG}', now() + interval '3 days', now() + interval '3 days 1 hour');`
         )
       )
-    ).toMatch(/row-level security|먼저 담당 컨설턴트를 배정해 주세요/); // 20261912000000 트리거가 RLS 보다 먼저 거절
+    ).toMatch(/row-level security|Please assign a consultant first\. A meeting without an assigned consultant cannot be scheduled\./); // 20261912000000 트리거가 RLS 보다 먼저 거절
     psql(
       asUser(
         GUARDIAN_WITHOUT,

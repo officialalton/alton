@@ -157,6 +157,6 @@ describe("finalize_trial_onboarding_existing_guardian() — 재상담: 기존 �
     );
     expect(() =>
       psql(`select finalize_trial_onboarding_existing_guardian('${linkId}', '${teacherId}', '${childId}');`)
-    ).toThrow(/보호자 계정이 아닙니다/);
+    ).toThrow(/This is not a guardian account\./);
   });
 });

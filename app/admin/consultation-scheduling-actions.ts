@@ -215,7 +215,7 @@ export async function rescheduleConsultationRequest(consultationId: string, newS
   if (error) {
     // 사전 검사 이후 레이스로 같은 컨설턴트의 시간이 먼저 잡힌 경우(consultations_no_overlap).
     if (error.code === "23P01") {
-      throw new Error(error.message.includes("미팅") ? error.message : "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.");
+      throw new Error(error.message.includes("미팅") || /\bmeeting\b/i.test(error.message) ? error.message : "이미 다른 상담이 있는 시간입니다. 다른 시간을 선택해 주세요.");
     }
     throw new Error(friendlyDbMessage(error));
   }

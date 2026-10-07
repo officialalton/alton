@@ -259,12 +259,12 @@ describe("PDF 페이지 필기 — 서버가 대상을 검증한다", () => {
 
     expect(
       asUserExpectError(TEACHER_ID, `select append_page_stroke_events('${sessionId}', '${seg()}'::jsonb, 'teacher_shared', '${doc}', '${v}', 3);`)
-    ).toMatch(/페이지 3/);
+    ).toMatch(/Page 3/);
 
     const other = makeAssetDoc("pdf", undefined, true);
     expect(
       asUserExpectError(TEACHER_ID, `select append_page_stroke_events('${sessionId}', '${seg()}'::jsonb, 'teacher_shared', '${other}', '${v}', 1);`)
-    ).toMatch(/공개 버전이 아닙니다/);
+    ).toMatch(/not a published version/);
   });
 
   it("이 수업의 자료가 아니면 거절하고, 담당 아닌 선생님은 정책에서 막힌다", () => {
@@ -276,10 +276,10 @@ describe("PDF 페이지 필기 — 서버가 대상을 검증한다", () => {
 
     expect(
       asUserExpectError(TEACHER_ID, `select append_page_stroke_events('${sessionId}', '${seg()}'::jsonb, 'teacher_shared', '${stray}', '${v2}', 1);`)
-    ).toMatch(/이 수업의 자료가 아닙니다/);
+    ).toMatch(/does not belong to this lesson/);
     expect(
       asUserExpectError(OTHER_TEACHER_ID, `select append_page_stroke_events('${sessionId}', '${seg()}'::jsonb, 'teacher_shared', '${doc}', '${v}', 1);`)
-    ).toMatch(/row-level security|policy|자료가 아닙니다|공개 버전이 아닙니다/);
+    ).toMatch(/row-level security|policy|does not belong to this lesson|not a published version/);
   });
 
   it("학생 필기의 주인은 서버가 정하고, 학생은 교사 범위에 쓰지 못한다", () => {

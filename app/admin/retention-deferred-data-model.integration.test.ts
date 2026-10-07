@@ -67,7 +67,7 @@ describe("레거시 채팅 리포트·무료회원 범위 데이터", () => {
 
 describe("아동 삭제 요청 데이터 모델", () => {
   it("보호자만 요청 가능, 타 가구는 거부, 삭제는 일어나지 않고 archive 요청과 연동되지 않는다", () => {
-    expect(() => run(`${as(STRANGER)} select request_child_deletion('${KID}','${HH}',array['all'],'${RUN} not a member');`)).toThrow(/보호자/);
+    expect(() => run(`${as(STRANGER)} select request_child_deletion('${KID}','${HH}',array['all'],'${RUN} not a member');`)).toThrow(/guardian/);
     const out = lines(run(`
       ${as(GUARD)}
       select request_child_deletion('${KID}','${HH}',array['free_learning','messages'],'${RUN} parent request') is not null;

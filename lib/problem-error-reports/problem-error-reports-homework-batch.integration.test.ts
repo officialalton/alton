@@ -90,15 +90,15 @@ describe("신고: 권한 매트릭스·유형·중복", () => {
   });
 
   it("해설 오류는 선생님만, 기타는 메모 필수, 학부모·관리자·다른 학생·다른 교사·배치 밖 문항은 거부", async () => {
-    expect(JSON.stringify((await report(STUDENT, b1, P.C, "bad_explanation")).json)).toContain("선생님만");
-    expect(JSON.stringify((await report(TEACHER, b1, P.C, "other")).json)).toContain("내용을 적어");
+    expect(JSON.stringify((await report(STUDENT, b1, P.C, "bad_explanation")).json)).toContain("Only teachers can report an explanation error");
+    expect(JSON.stringify((await report(TEACHER, b1, P.C, "other")).json)).toContain("Please describe the issue");
     for (const uid of [SEED_GUARDIAN_ID, ADMIN_ID]) expect((await report(uid, b1, P.C)).status, uid).toBeGreaterThanOrEqual(400);
     // 다른 학생·다른 교사는 남의 배치 존재 여부를 알 수 없다(같은 메시지).
     for (const uid of [OTHER_STUDENT, OTHER_TEACHER]) {
-      expect(JSON.stringify((await report(uid, b1, P.C)).json), uid).toContain("이 과제에 발급된 문제만");
+      expect(JSON.stringify((await report(uid, b1, P.C)).json), uid).toContain("Only problems issued in this homework can be reported.");
     }
     // 배치에 없는 문항
-    expect(JSON.stringify((await report(STUDENT, b1, P.E)).json)).toContain("이 과제에 발급된 문제만");
+    expect(JSON.stringify((await report(STUDENT, b1, P.E)).json)).toContain("Only problems issued in this homework can be reported.");
     // 배치 id 누락
     expect((await report(STUDENT, null, P.C)).status).toBeGreaterThanOrEqual(400);
     expect(psql(`select count(*) from problem_error_reports where problem_id = '${P.C}';`)).toBe("0");

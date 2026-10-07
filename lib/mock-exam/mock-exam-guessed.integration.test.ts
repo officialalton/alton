@@ -91,16 +91,16 @@ describe("찍음(guessed)·필기 잠금·영어 해설", () => {
   it("다른 학생·다음 모듈 문항은 거부", () => {
     const [i1] = itemsByModule.rw_m1;
     const [m2] = itemsByModule.rw_m2;
-    expect(fails(() => asUser("cccccccc-0000-0000-0000-000000000002", `select mock_exam_toggle_guessed('${attemptId}', '${i1}', true);`))).toContain("본인 응시만");
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_toggle_guessed('${attemptId}', '${m2}', true);`))).toContain("제출된 모듈");
-    expect(fails(() => asUser(STUDENT_ID, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${m2}', '[]');`))).toContain("제출된 모듈");
+    expect(fails(() => asUser("cccccccc-0000-0000-0000-000000000002", `select mock_exam_toggle_guessed('${attemptId}', '${i1}', true);`))).toContain("your own attempt");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_toggle_guessed('${attemptId}', '${m2}', true);`))).toContain("already been submitted");
+    expect(fails(() => asUser(STUDENT_ID, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${m2}', '[]');`))).toContain("already been submitted");
   });
 
   it("모듈 제출 후 guessed·필기 변경 거부, 필기 스냅샷은 그대로 읽힌다", () => {
     const [i1] = itemsByModule.rw_m1;
     asUser(STUDENT_ID, `select mock_exam_submit_module('${attemptId}', 'rw_m1');`);
-    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_toggle_guessed('${attemptId}', '${i1}', false);`))).toContain("제출된 모듈");
-    expect(fails(() => asUser(STUDENT_ID, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${i1}', '[]');`))).toContain("제출된 모듈");
+    expect(fails(() => asUser(STUDENT_ID, `select mock_exam_toggle_guessed('${attemptId}', '${i1}', false);`))).toContain("already been submitted");
+    expect(fails(() => asUser(STUDENT_ID, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${i1}', '[]');`))).toContain("already been submitted");
     expect(asUser(STUDENT_ID, `select jsonb_array_length(load_problem_note_strokes('mock_exam', '${attemptId}', '${i1}', null));`)).toBe("1");
   });
 
@@ -115,6 +115,6 @@ describe("찍음(guessed)·필기 잠금·영어 해설", () => {
       `select it->>'guessed' || '|' || (it->>'explanationEn') from mock_exam_attempt_detail('${attemptId}') d, jsonb_array_elements(d->'items') it where it->>'setItemId' = '${i1}';`,
     );
     expect(row).toBe("true|English explanation");
-    expect(fails(() => asUser(STUDENT_ID, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${i1}', '[]');`))).toContain("제출한 시험");
+    expect(fails(() => asUser(STUDENT_ID, `select save_problem_note_strokes('mock_exam', '${attemptId}', '${i1}', '[]');`))).toContain("already been submitted");
   });
 });

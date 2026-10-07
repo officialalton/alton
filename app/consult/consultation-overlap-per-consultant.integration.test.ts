@@ -101,7 +101,7 @@ describe("redeem_consultation_scheduling_link / list_consultant_open_slots", () 
 
     expect(psql(`select status from redeem_consultation_scheduling_link('${tokenB}', '${slot(40)}')`)).toBe("scheduled");
     const err = psqlErr(`select redeem_consultation_scheduling_link('${tokenA}', '${slot(40)}')`);
-    expect(err).toContain("이미 다른 상담이 있는 시간입니다");
+    expect(err).toContain("Another consultation is already scheduled at that time. Please choose a different time.");
     expect(err).not.toContain("consultations_no_overlap");
   });
 

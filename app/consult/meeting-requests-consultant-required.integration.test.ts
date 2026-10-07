@@ -57,11 +57,11 @@ afterAll(() => {
 
 describe("meeting_requests 컨설턴트 필수 (DB)", () => {
   it("컨설턴트 없이는 시간·scheduled 를 가질 수 없다(insert/update)", () => {
-    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status, starts_at, ends_at) values ('${HOUSEHOLD}','${GUARDIAN}','requested',${t(0)},${t(1)});`)).toContain("먼저 담당 컨설턴트를 배정해 주세요");
-    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status) values ('${HOUSEHOLD}','${GUARDIAN}','scheduled');`)).toContain("먼저 담당 컨설턴트를 배정해 주세요");
+    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status, starts_at, ends_at) values ('${HOUSEHOLD}','${GUARDIAN}','requested',${t(0)},${t(1)});`)).toContain("Please assign a consultant first");
+    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status) values ('${HOUSEHOLD}','${GUARDIAN}','scheduled');`)).toContain("Please assign a consultant first");
     const id = insertMeeting(null, "requested", null, null);
-    expect(psqlErr(`update meeting_requests set starts_at=${t(0)}, ends_at=${t(1)} where id='${id}';`)).toContain("먼저 담당 컨설턴트를 배정해 주세요");
-    expect(psqlErr(`update meeting_requests set status='scheduled' where id='${id}';`)).toContain("먼저 담당 컨설턴트를 배정해 주세요");
+    expect(psqlErr(`update meeting_requests set starts_at=${t(0)}, ends_at=${t(1)} where id='${id}';`)).toContain("Please assign a consultant first");
+    expect(psqlErr(`update meeting_requests set status='scheduled' where id='${id}';`)).toContain("Please assign a consultant first");
   });
 
   it("컨설턴트가 있으면 일정이 잡힌다", () => {
@@ -80,20 +80,20 @@ describe("meeting_requests 컨설턴트 필수 (DB)", () => {
     psql(`update meeting_requests set subject='memo', google_sync_status='failed', updated_at=now() where id='${id}';`);
     psql(`update meeting_requests set status='cancelled' where id='${id}';`);
     expect(psql(`select starts_at is not null from meeting_requests where id='${id}'`)).toBe("t");
-    expect(psqlErr(`update meeting_requests set status='requested', starts_at=${t(22)}, ends_at=${t(23)} where id='${id}';`)).toContain("먼저 담당 컨설턴트를 배정해 주세요");
+    expect(psqlErr(`update meeting_requests set status='requested', starts_at=${t(22)}, ends_at=${t(23)} where id='${id}';`)).toContain("Please assign a consultant first");
   });
 
   it("컨설턴트가 다르면 같은 시간 미팅 가능, 같으면 겹침 거절(미팅↔미팅)", () => {
     insertMeeting(CA, "scheduled", t(30), t(32));
     insertMeeting(CB, "scheduled", t(30), t(32));
-    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status, consultant_id, starts_at, ends_at) values ('${HOUSEHOLD}','${GUARDIAN}','scheduled','${CA}',${t(31)},${t(33)});`)).toContain("다른 미팅과 시간이 겹칩니다");
+    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status, consultant_id, starts_at, ends_at) values ('${HOUSEHOLD}','${GUARDIAN}','scheduled','${CA}',${t(31)},${t(33)});`)).toContain("overlaps another meeting");
     insertMeeting(CA, "scheduled", t(32), t(33)); // 맞닿음은 허용
   });
 
   it("같은 컨설턴트의 상담과 겹치면 거절(미팅↔상담), 다른 컨설턴트는 허용", () => {
     psql(`insert into consultations (source, contact_name, contact_email, contact_phone, category, status, requested_at, admissions_consultant_id, starts_at, ends_at)
       values ('homepage','${TAG}','${TAG}@example.com','010','family','scheduled',now(),'${CA}',${t(40)},${t(41)});`);
-    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status, consultant_id, starts_at, ends_at) values ('${HOUSEHOLD}','${GUARDIAN}','requested','${CA}',${t(40)},${t(41)});`)).toContain("상담 일정과 시간이 겹칩니다");
+    expect(psqlErr(`insert into meeting_requests (household_id, requested_by, status, consultant_id, starts_at, ends_at) values ('${HOUSEHOLD}','${GUARDIAN}','requested','${CA}',${t(40)},${t(41)});`)).toContain("overlaps a consultation");
     insertMeeting(CB, "requested", t(40), t(41));
   });
 

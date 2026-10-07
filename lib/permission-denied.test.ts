@@ -14,6 +14,7 @@ describe("emptyOnPermissionDenied", () => {
   });
   it("판별", () => {
     expect(isPermissionDeniedError(new Error("이 학생의 과제를 볼 권한이 없습니다."))).toBe(true);
+    expect(isPermissionDeniedError(new Error("You do not have permission to view this student's homework."))).toBe(true);
     expect(isPermissionDeniedError(new Error("boom"))).toBe(false);
     expect(isPermissionDeniedError(null)).toBe(false);
   });

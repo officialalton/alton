@@ -159,7 +159,7 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
         s,
         `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', 399, null, '{}', '{}', null);`
       )
-    ).toThrow(/SAT 점수는 400~1600 사이여야 합니다/);
+    ).toThrow(/SAT score must be between 400 and 1600/);
   });
 
   it("SAT가 1600 초과면 거부한다", () => {
@@ -169,7 +169,7 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
         s,
         `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', 1601, null, '{}', '{}', null);`
       )
-    ).toThrow(/SAT 점수는 400~1600 사이여야 합니다/);
+    ).toThrow(/SAT score must be between 400 and 1600/);
   });
 
   it("2026-09-06 후속: 과거 'sat_score=0(미입력 표식)' 데이터는 정규화 절차로 null이 되고, 그 뒤에도 400~1600 제약이 정상 적용된다", () => {
@@ -204,7 +204,7 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
         s,
         `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, -0.1, '{}', '{}', '4.0');`
       )
-    ).toThrow(/GPA는 0 이상이어야 합니다/);
+    ).toThrow(/GPA must be 0 or greater/);
   });
 
   it("2026-09-06: GPA 음수는 DB CHECK 제약(students_gpa_non_negative)으로도 차단된다", () => {
@@ -221,7 +221,7 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
         s,
         `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, 3.5, '{}', '{}', null);`
       )
-    ).toThrow(/GPA를 입력하려면 GPA 척도를 함께 선택해야 합니다/);
+    ).toThrow(/To enter a GPA, you must also select a GPA scale/);
   });
 
   it("gpa_scale만 있고 GPA가 없으면 거부한다", () => {
@@ -231,7 +231,7 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
         s,
         `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, null, '{}', '{}', '4.0');`
       )
-    ).toThrow(/GPA 척도만 선택하고 GPA 값이 없는 상태는 허용되지 않습니다/);
+    ).toThrow(/A GPA scale without a GPA value is not allowed/);
   });
 
   it("GPA가 선택한 척도를 초과하면 거부한다(예: 4.0 척도에 4.3)", () => {
@@ -241,7 +241,7 @@ describe("complete_student_profile — 2026-09-05 무결성 보강(SAT 범위/GP
         s,
         `select complete_student_profile('2011-01-01', 'OO고등학교', '10학년', null, 4.3, '{}', '{}', '4.0');`
       )
-    ).toThrow(/GPA 값\(.*\)이 선택한 척도\(.*\)를 초과할 수 없습니다/);
+    ).toThrow(/GPA \(.*\) cannot exceed the selected scale \(.*\)/);
   });
 
   it.each([
