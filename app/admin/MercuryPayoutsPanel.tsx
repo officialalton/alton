@@ -7,7 +7,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   approvePayoutAttemptAction,
-  confirmReceiptAction,
   createResendAttemptAction,
   failOrCancelAttemptAction,
   linkTransactionAction,
@@ -19,7 +18,7 @@ import {
   type MercuryPayoutFilter,
   type MercuryPayoutRow,
 } from "./mercury-payout-actions";
-import { ATTEMPT_STATUS_LABEL_EN, ATTEMPT_STATUSES, type AttemptStatus } from "@/lib/payout/attempt-state";
+import { ATTEMPT_STATUS_LABEL_EN, ATTEMPT_STATUSES, isPayoutCompleted, type AttemptStatus } from "@/lib/payout/attempt-state";
 import { formatDateOnlyEn } from "@/lib/payout/payout-schedule";
 import { formatMinor } from "@/lib/payout/reconciliation-csv";
 
@@ -33,11 +32,9 @@ const FLAG_LABEL_EN: Record<string, string> = {
   missing_transaction: "Missing Mercury transaction ID",
   missing_actual_usd: "Actual USD amounts missing",
   amount_mismatch: "USD principal differs from contract",
-  awaiting_receipt: "Awaiting receipt confirmation",
 };
 const REASON_LABEL_EN: Record<string, string> = {
-  short_received: "Short received",
-  late: "Received after deadline",
+  late: "Sent after deadline",
   recipient_changed: "Bank details changed",
   amount_changed: "Amount changed",
   amount_changed_after_execution: "Amount changed after sending",
@@ -46,7 +43,6 @@ const REASON_LABEL_EN: Record<string, string> = {
   unverified_calendar: "Korean holiday calendar not verified for this year",
   transfer_date_already_passed: "Transfer date already passed",
   usd_principal_differs_from_contract: "USD principal differs from contract",
-  received_currency_differs: "Received currency differs",
 };
 const USD_FORMAT = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const KRW_FORMAT = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -142,7 +138,7 @@ export default function MercuryPayoutsPanel() {
 
       <div className="space-y-2">
         {(rows ?? []).map((r) => {
-          const completed = r.status === "receipt_confirmed";
+          const completed = isPayoutCompleted(r.status);
           const isOpen = openId === r.attemptId;
           return (
             <div key={r.attemptId} className="border-[1.5px] border-grey-200 rounded-xl px-4 py-3" data-testid="mercury-row">
@@ -166,7 +162,6 @@ export default function MercuryPayoutsPanel() {
                 {r.trackingUrl && <a className="underline" href={r.trackingUrl} target="_blank" rel="noreferrer">Tracking</a>}
                 {r.receiptUrl && <a className="underline" href={r.receiptUrl} target="_blank" rel="noreferrer">Receipt</a>}
                 <span>Reconciliation: {FLAG_LABEL_EN[r.reconciliationFlag] ?? r.reconciliationFlag}</span>
-                {r.sentAt && !r.receivedConfirmedAt && <span className="text-amber-700 font-semibold">Sent — receipt not confirmed yet</span>}
               </div>
               {(r.reasons.length > 0 || r.approvalInvalidated) && (
                 <div className="mt-1 flex flex-wrap gap-1">
@@ -213,17 +208,9 @@ export default function MercuryPayoutsPanel() {
                     </div>
                     <button className="font-bold underline" onClick={() => act(r.attemptId, () => recordActualsAction({ attemptId: r.attemptId, usdPrincipal: Number(form[`${r.attemptId}:p`]), usdFee: Number(form[`${r.attemptId}:f`] || 0), quotedRate: form[`${r.attemptId}:q`] ? Number(form[`${r.attemptId}:q`]) : undefined, finalRate: form[`${r.attemptId}:fr`] ? Number(form[`${r.attemptId}:fr`]) : undefined }))}>Record actuals</button>
                   </fieldset>
-                  {r.status === "sent" && (
-                    <fieldset className="border border-grey-200 rounded-lg p-2">
-                      <legend className="px-1 font-bold">Confirm receipt (evidence required)</legend>
-                      <input aria-label="Received amount" placeholder={`Received amount (${r.requestedCurrency})`} className="w-full border border-grey-200 rounded px-2 py-1 mb-1" value={form[`${r.attemptId}:ra`] ?? ""} onChange={(e) => set(`${r.attemptId}:ra`, e.target.value)} />
-                      <input aria-label="Receipt evidence" placeholder="Evidence (e.g. teacher confirmation, bank statement)" className="w-full border border-grey-200 rounded px-2 py-1 mb-1" value={form[`${r.attemptId}:ev`] ?? ""} onChange={(e) => set(`${r.attemptId}:ev`, e.target.value)} />
-                      <button className="font-bold underline" onClick={() => act(r.attemptId, () => confirmReceiptAction({ attemptId: r.attemptId, receivedAmountMinor: Math.round(Number(form[`${r.attemptId}:ra`]) * (r.requestedCurrency === "USD" ? 100 : 1)), currency: r.requestedCurrency, evidence: form[`${r.attemptId}:ev`] ?? "" }))}>Confirm receipt</button>
-                    </fieldset>
-                  )}
                   {(r.status === "sent" || r.status === "receipt_confirmed") && (
                     <fieldset className="border border-grey-200 rounded-lg p-2">
-                      <legend className="px-1 font-bold">Record return</legend>
+                      <legend className="px-1 font-bold">Record return (only if the transfer comes back)</legend>
                       <input aria-label="Return transaction ID" placeholder="Return transaction ID" className="w-full border border-grey-200 rounded px-2 py-1 mb-1" value={form[`${r.attemptId}:rt`] ?? ""} onChange={(e) => set(`${r.attemptId}:rt`, e.target.value)} />
                       <input aria-label="Returned USD" placeholder="Returned USD amount" className="w-full border border-grey-200 rounded px-2 py-1 mb-1" value={form[`${r.attemptId}:ru`] ?? ""} onChange={(e) => set(`${r.attemptId}:ru`, e.target.value)} />
                       <input aria-label="Return reason" placeholder="Reason" className="w-full border border-grey-200 rounded px-2 py-1 mb-1" value={form[`${r.attemptId}:rr`] ?? ""} onChange={(e) => set(`${r.attemptId}:rr`, e.target.value)} />

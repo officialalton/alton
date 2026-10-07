@@ -41,7 +41,7 @@ Wise 계획(교사 정산 Wise 전용, 2026-09-12)을 대체한다. US=USD ACH(�
 
 ### 상태 (시도 단위)
 정산 상태(draft→awaiting approval→settlement approved)는 기존 batch/period 상태를 그대로 사용한다. 시도 상태:
-`queued`(정산 승인됨·송금 요청 전) → `awaiting_mercury_approval` → `processing` → `sent` → `receipt_confirmed`; 분기 `failed`, `returned`, `cancelled`, `needs_review`. **`sent`는 지급 완료가 아니다**: `receipt_confirmed`는 증빙(수취 확인 방식·시각·메모 필수)이 있어야 하며, 정산이 `paid`가 되는 조건에 연결한다(기존 paid 가드는 유지: provider_transaction_id + provider_confirmed_at).
+`queued`(정산 승인됨·송금 요청 전) → `awaiting_mercury_approval` → `processing` → `sent`; 분기 `failed`, `returned`, `cancelled`, `needs_review`. **오너 결정(2026-10-07): 수취 확인 단계 폐지 — Mercury 거래가 sent(completed)이면 지급 완료**로 처리하고 증빙·교사 확인 입력은 없다. 반환이 오는 경우에만 별도 반환 거래를 기록하고 재송금(새 시도)한다. 정산은 sent가 총액을 채우면 기존 paid 가드(provider_transaction_id + provider_confirmed_at)를 거쳐 paid가 된다. `receipt_confirmed`는 과거 이력 행 전용(새 전이 없음, 반환만 가능). paid 정산은 기존 가드상 되돌릴 수 없어, sent 뒤 반환이 오면 시도에 `settlement_paid_but_returned` 플래그를 남기고 resend로 처리한다(시도 이력이 실제 상태의 원본).
 전이는 DB 함수 `payout_attempt_transition()` 한 곳. 허용표 외 전이 거부, 같은 상태로의 재호출은 무동작(멱등), 모든 전이는 `payout_attempt_events`(INSERT-only)에 기록.
 
 ### 수취인 (`payout_recipient_links`)
@@ -51,7 +51,7 @@ Mercury 쪽이 은행정보 원본. ALTON은 `provider_recipient_id`, 계약 ID,
 ## 3. 일정: 기한 vs 송금 예정일
 - 기한: 기존 규칙(26일/10일, 주말·미국 연방 은행 휴일은 직전 영업일, LA).
 - USD ACH: 송금 예정일 = 기한 − N 미국 영업일(설정 `transfer_lead_business_days`, 기본 3).
-- KRW 국제송금: 도착이 기한 이내여야 하므로 **미국·한국 은행이 모두 영업하는 날만 센다**. 도착 목표일 = 기한 이전의 한·미 공통 영업일, 송금 예정일 = 목표일 − `transfer_lead_business_days_krw`(기본 5 공통 영업일: Mercury 1–3영업일 + 한국 은행 입금 여유). **첫 지급 실측 뒤 재조정.** 한국 휴일표(`payout_kr_bank_holidays`)가 해당 연도를 덮지 못하면 `unverified_calendar` 플래그를 달아 관리자 확인을 요구한다(2026년만 검증, 이후 연도는 월력요항 확인 후 추가).
+- KRW 국제송금: 도착이 기한 이내여야 하므로 **미국·한국 은행이 모두 영업하는 날만 센다**. 도착 목표일 = 기한 이전의 한·미 공통 영업일, 송금 예정일 = 목표일 − `transfer_lead_business_days_krw`(5 공통 영업일 확정 — 오너 2026-10-07: Mercury 1–3영업일 + 한국 은행 입금 여유). 첫 지급 실측 뒤 재조정 가능. 한국 휴일표(`payout_kr_bank_holidays`, 2026~2030 입력 — 출처·검증일 `docs/2026-10-07-kr-bank-holidays.md`)가 해당 연도를 덮지 못하면(2031~) `unverified_calendar` 플래그를 달아 관리자 확인을 요구한다(2026년만 검증, 이후 연도는 월력요항 확인 후 추가).
 - 관리자 변경·사유 필수·과거일 금지는 기존 `payout_apply_date_change` 규칙을 따른다(시도에는 복제하지 않고 기한 컬럼만 스냅샷).
 
 ## 4. 멱등성·예외
@@ -71,7 +71,7 @@ Mercury 쪽이 은행정보 원본. ALTON은 `provider_recipient_id`, 계약 ID,
 | `payout_request_mercury` | Mercury 지급 요청 생성·수취인 초대·거래 ID 연결 |
 | `payout_approve_mercury` | 지급 시도 승인·승인 무효 해제(재승인) |
 | `accounting_reconcile` | 대사 파일·지급 목록 다운로드, 대사 확인 표시 |
-기존 `정산권한`은 조회·정산 권한으로 계속 인정(하위 호환), 은행정보 전체 번호는 기존 `payout_account_staff_allowed` 규칙 유지. **같은 사람이 정산 승인과 지급 승인을 모두 하는 것을 DB가 막는다**(approved_by 다르게). 일반 사용자에게 은행정보·타인 보수 노출 없음(`payout_attempts`·링크 RLS: 관리자/capability만, 교사는 본인 시도의 상태 요약만 볼 수 있는 뷰는 이번 범위 밖).
+기존 `정산권한`은 조회·정산 권한으로 계속 인정(하위 호환), 은행정보 전체 번호는 기존 `payout_account_staff_allowed` 규칙 유지. **직무 분리는 설정**(`payout_settings.payout_dual_control_required`, 기본 false; 마스터만 `set_payout_dual_control`로 변경): 기본은 마스터 1명이 정산 승인과 지급 승인을 모두 할 수 있고, 켜면 정산 승인자·시도 생성자는 같은 건의 지급 승인을 못 한다. 어느 쪽이든 승인 이벤트에 정산 승인자·시도 생성자·지급 승인자·동일인 여부가 남는다. 일반 사용자에게 은행정보·타인 보수 노출 없음(`payout_attempts`·링크 RLS: 관리자/capability만, 교사는 본인 시도의 상태 요약만 볼 수 있는 뷰는 이번 범위 밖).
 
 ## 6. 관리자 화면 (영어, 이 지급/회계 영역 한정)
 Payouts → "Mercury payouts" 패널: US(USD)/KR(KRW) 필터, 기간·기한·송금 예정일, 수취인별 금액·통화, 은행정보 등록 상태, 승인/송금/수취 상태, 실제 USD 출금·수수료, Mercury 거래/추적/영수증 링크, 실패·반환·미지급·대사 불일치 목록, **지급 목록 CSV**·**대사 CSV** 다운로드. KRW는 "Download Mercury input list" + 거래 ID 연결 폼. 모든 실행 버튼은 스위치가 닫혀 있으면 비활성 + 이유 표시.
