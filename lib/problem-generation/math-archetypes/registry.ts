@@ -13,6 +13,10 @@ import { TVD_HARD } from "./skills/two-variable-data";
 import { FTVD_HARD } from "./skills/two-variable-data-figure";
 import { FIG_HARD } from "./skills/fig";
 import { IME_HARD } from "./skills/inference-margin-error";
+import { ESC_SPR_A } from "./skills/esc-spr-a";
+import { IME_SPR_A } from "./skills/ime-spr-a";
+import { EE_SPR_A } from "./skills/ee-spr-a";
+import { CG_SPR_A } from "./skills/cg-spr-a";
 import { PCT_ARCHETYPES } from "./skills/percentages";
 import { AV_ARCHETYPES } from "./skills/area-volume";
 import { CI_ARCHETYPES } from "./skills/circles";
@@ -38,6 +42,8 @@ export const ARCHETYPES: Archetype[] = [
   ...FTVD_HARD,
   // --- 자료 원형 1단계 이후(skills/fig: 조합 하나 = 파일 하나) ---
   ...FIG_HARD,
+  // --- SPR 공급(G10) 확충(fix/spr-groups-a) ---
+  ...ESC_SPR_A, ...IME_SPR_A, ...EE_SPR_A, ...CG_SPR_A,
   // --- C 담당(비율·도형 계열) --- (easy/medium 틀은 lite-c.ts 의 LITE_C_ARCHETYPES)
   ...PCT_ARCHETYPES, ...AV_ARCHETYPES, ...CI_ARCHETYPES,
 ];

@@ -25,7 +25,7 @@ describe("담당 D 원형 메타데이터", () => {
     // 정성 판단형(evaluating_statistical_claims)은 풀이 구조가 3가지를 넘으면 2×2 조합 매핑으로 환원되므로 세부 패턴당 3개(보고서 근거).
     // 단, 자료(표) 조합(kind 가 `….ST.P`·`….TB.P` 꼴로 조합 ID 를 달고 있고 figureItem 이 선언된 것)은 상세표의 값을 읽고 계산하는 단계가 붙어 구조가 실제로 달라지므로 게이트 G2(조합당 hard 4·서로 다른 연산자)에 따라 4개다.
     const figKinds = new Set(hard.filter((a) => a.figureItem).map((a) => `${a.skill}.${a.kind}`));
-    for (const [k, ops] of byKind) { const want = k.startsWith("evaluating_statistical_claims.") && !figKinds.has(k) ? 3 : 4; expect(ops.length, k).toBe(want); expect(new Set(ops).size, k).toBe(want); }
+    for (const [k, ops] of byKind) { const qualKind = hard.filter((x) => `${x.skill}.${x.kind}` === k).every((x) => x.qualitative); const want = k.startsWith("evaluating_statistical_claims.") && !figKinds.has(k) && qualKind ? 3 : 4; // 수치 단답 kind(SPR 공급용)는 4개 expect(ops.length, k).toBe(want); expect(new Set(ops).size, k).toBe(want); }
   });
   it("hard 의 mediumSteps 는 medium 컴파일러 실측 단계 이상이다", () => {
     const base = JSON.parse(readFileSync("data/mock-exam-generation/math-medium-baseline.json", "utf-8")) as Record<string, { medium: number }>;

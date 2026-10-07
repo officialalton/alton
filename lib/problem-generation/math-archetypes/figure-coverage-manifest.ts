@@ -316,6 +316,11 @@ export const FIGURE_ITEMS: FigureItemRow[] = [
 /** 자료가 붙지 않는 세부 패턴(서술·식만) — 사유가 있어야 manifest 완전성(G1)을 통과한다. */
 export const NO_FIGURE: NoFigureRow[] = [
   { skill: "equivalent_expressions", kind: "rational_equivalence", reason: "자료 없음(서술·식만)", source: "A" },
+  // SPR 공급(G10) 확충용 수치 원형 — 지문의 수치만으로 푼다(fix/spr-groups-a).
+  { skill: "inference_margin_error", kind: "poll_precision_calc", reason: "자료 없음(지문의 수치만)", source: "A" },
+  ...["coefficient_matching", "exponent_radical_forms", "identity_parameters"].map((kind): NoFigureRow => ({ skill: "equivalent_expressions", kind, reason: "자료 없음(식만)", source: "A" })),
+  ...["line_equation_features", "circle_equation_features", "plane_figure_measures"].map((kind): NoFigureRow => ({ skill: "coordinate_geometry", kind, reason: "자료 없음(좌표를 지문에 적음)", source: "A" })),
+  ...["sample_to_population", "experiment_effect_calc", "study_bias_rates"].map((kind): NoFigureRow => ({ skill: "evaluating_statistical_claims", kind, reason: "자료 없음(지문의 수치만)", source: "A" })),
 ];
 
 /**
