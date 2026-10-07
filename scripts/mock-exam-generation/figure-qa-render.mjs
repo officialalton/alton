@@ -14,7 +14,9 @@ const prefix = process.argv[2] ?? "";
 mkdirSync(outDir, { recursive: true });
 const files = readdirSync(htmlDir).filter((f) => f.endsWith(".html") && f.startsWith(prefix));
 if (!files.length) { console.error("HTML 이 없다 — 먼저 FIGURE_QA_SNAPSHOT=1 npx vitest run lib/problem-generation/math-archetypes/figure-qa-snapshot.test.ts --project unit"); process.exit(1); }
-const browser = await chromium.launch();
+// 같은 HTML 이 실행마다 다른 PNG 바이트를 내던 문제(안티앨리어싱 래스터 비결정, 실측 1~20픽셀 차이) — 결정적 모드로 고정한다.
+export const DETERMINISTIC_ARGS = ["--deterministic-mode", "--force-color-profile=srgb"];
+const browser = await chromium.launch({ args: DETERMINISTIC_ARGS });
 try {
   for (const [name, w, dsf, suffix] of [["desktop", 720, 1.5, ""], ["mobile", 375, 2, ".m375"]]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 800 }, deviceScaleFactor: dsf, colorScheme: "light" });
