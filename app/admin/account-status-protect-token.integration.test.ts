@@ -180,7 +180,7 @@ describe("protect_account_status() / transition_account_status() / merge_account
 
     expect(() =>
       psql(`update students set status = 'active' where id = '${studentId}';`)
-    ).toThrow(/transition_account_status\(\)를 통해서만/);
+    ).toThrow(/can only be changed through transition_account_status\(\)/);
 
     const status = psql(`select status from students where id = '${studentId}';`);
     expect(status).toBe("pending");
@@ -190,12 +190,12 @@ describe("protect_account_status() / transition_account_status() / merge_account
     const teacherId = createTeacher("direct-update-block-teacher");
     expect(() =>
       psql(`update teachers set status = 'inactive' where id = '${teacherId}';`)
-    ).toThrow(/transition_account_status\(\)를 통해서만/);
+    ).toThrow(/can only be changed through transition_account_status\(\)/);
 
     const parentId = createParent("direct-update-block-parent");
     expect(() =>
       psql(`update parents set status = 'active' where id = '${parentId}';`)
-    ).toThrow(/transition_account_status\(\)를 통해서만/);
+    ).toThrow(/can only be changed through transition_account_status\(\)/);
   });
 
   it("③ 레거시 GUC 무효화 — app.bypass_status_protect를 직접 SET해도 새 설계에는 아무 효과가 없다", () => {
@@ -206,7 +206,7 @@ describe("protect_account_status() / transition_account_status() / merge_account
         set app.bypass_status_protect = 'true';
         update students set status = 'active' where id = '${studentId}';
       `)
-    ).toThrow(/transition_account_status\(\)를 통해서만/);
+    ).toThrow(/can only be changed through transition_account_status\(\)/);
 
     const status = psql(`select status from students where id = '${studentId}';`);
     expect(status).toBe("pending");
@@ -230,7 +230,7 @@ describe("protect_account_status() / transition_account_status() / merge_account
         update students set status = 'active' where id = '${studentId}';
         commit;
       `)
-    ).toThrow(/transition_account_status\(\)를 통해서만/);
+    ).toThrow(/can only be changed through transition_account_status\(\)/);
 
     const status = psql(`select status from students where id = '${studentId}';`);
     expect(status).toBe("pending");

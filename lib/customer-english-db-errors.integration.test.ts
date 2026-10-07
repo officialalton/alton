@@ -86,6 +86,24 @@ const CUSTOMER_FACING_FUNCTIONS = [
   "ensure_default_vocab_folder",
   "roadmap_save_grades",
   "problem_error_report_submit",
+  // 20262100000260: reached indirectly (triggers on customer-written tables, nested calls from customer RPCs) or from student actions.
+  "enforce_and_snapshot_teacher_rate",
+  "prevent_direct_final_status_update",
+  "check_annotation_problem_work_consistency",
+  "protect_account_status",
+  "protect_hire_date",
+  "enforce_subject_enrollment_activation_preconditions",
+  "reject_archived_subject_reference",
+  "consultations_require_assigned_consultant",
+  "consultations_block_inactive_consultant",
+  "schedule_reservation_notifications",
+  "extend_entitlement",
+  "upsert_session_payout_item",
+  "grant_trial_entitlement_for_consultation",
+  "grant_trial_entitlement_for_student",
+  "convert_free_member_to_tutoring",
+  "mock_exam_validate_mst_set",
+  "assign_library_words_to_student",
 ];
 
 describe("customer-facing DB functions raise English messages only", () => {

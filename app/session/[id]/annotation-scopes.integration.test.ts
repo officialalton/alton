@@ -600,7 +600,7 @@ describe("③ 문제 풀이 화이트보드 — 풀이판 단위로 분리된다
            (session_id, author_id, event_type, payload, scope, curriculum_doc_id, problem_id, owner_student_id, problem_work_id)
          values ('${sessionId}', '${OTHER_STUDENT_ID}', 'stroke', '{}'::jsonb, 'problem_student', '${docId}', '${target}', '${OTHER_STUDENT_ID}', '${w}');`
       )
-    ).toThrow(/풀이판의 학생과 필기의 소유 학생이 다릅니다/);
+    ).toThrow(/student of the problem work board does not match the owner of the annotation/);
   });
 
   it("풀이판 없이 문제 필기를 남길 수 없다", () => {

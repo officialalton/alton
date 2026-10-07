@@ -125,7 +125,7 @@ describe("assign_library_words_to_student — 공용 단어를 학생 개인 단
 
   it("담당이 아닌 교사는 거절된다", () => {
     const out = fails(() => asUser(unrelatedTeacherId, `select assign_library_words_to_student('${STUDENT_ID}', array['${libraryWordId}']::uuid[], null);`));
-    expect(out).toContain("담당하는 학생에게만");
+    expect(out).toContain("You can only assign words to your own students");
   });
 });
 

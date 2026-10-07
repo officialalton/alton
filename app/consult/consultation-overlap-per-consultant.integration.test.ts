@@ -81,7 +81,7 @@ describe("consultations_no_overlap — 컨설턴트별", () => {
 
   it("컨설턴트 미배정 시간 행은 만들 수 없다(20261910000000 — 미배정 전사 겹침 제약은 제거됨)", () => {
     expect(psqlErr(`insert into consultations (contact_name, contact_email, status, starts_at, ends_at)
-      values ('overlap-${RUN}', '${EMAIL("t3b")}', 'requested', '${slot(20)}', '${slot(21)}')`)).toContain("담당 컨설턴트가 배정되지 않은 상담에는 시간을 지정할 수 없습니다");
+      values ('overlap-${RUN}', '${EMAIL("t3b")}', 'requested', '${slot(20)}', '${slot(21)}')`)).toContain("A time cannot be set on a consultation without an assigned consultant");
     expect(() => insertConsultation("t3c", CONSULTANT_A, 20)).not.toThrow();
   });
 

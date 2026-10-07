@@ -166,7 +166,7 @@ describe("보관된 과목 참조 우회 방지(UI 필터를 거치지 않은 �
         insert into subject_enrollments (child_id, subject_id, contract_id, status)
         values ('${childId}', '${subjectId}', '${contractId}', 'active');
       `)
-    ).toThrow(/보관된 과목에는 새로 연결할 수 없습니다/);
+    ).toThrow(/Cannot link to an archived subject/);
   });
 
   it("보관된 과목으로 새 선생님 커리큘럼 템플릿을 만들 수 없다", () => {
@@ -180,7 +180,7 @@ describe("보관된 과목 참조 우회 방지(UI 필터를 거치지 않은 �
     psql(`insert into teachers (id, status) values ('${teacherId}', 'pending');`);
     expect(() =>
       psql(`insert into teacher_curriculum_templates (teacher_id, subject_id) values ('${teacherId}', '${subjectId}');`)
-    ).toThrow(/보관된 과목에는 새로 연결할 수 없습니다/);
+    ).toThrow(/Cannot link to an archived subject/);
   });
 
   it("보관된 과목으로 새 교재를 만들 수 없다", () => {
@@ -190,14 +190,14 @@ describe("보관된 과목 참조 우회 방지(UI 필터를 거치지 않은 �
         insert into curriculum_docs (subject_id, owner_type, status, title)
         values ('${subjectId}', 'admin', 'published', '보관방지 테스트 교재');
       `)
-    ).toThrow(/보관된 과목에는 새로 연결할 수 없습니다/);
+    ).toThrow(/Cannot link to an archived subject/);
   });
 
   it("보관된 과목으로 새 문제를 만들 수 없다", () => {
     const subjectId = archiveSubjectWithOneEnrollment("problem");
     expect(() =>
       psql(`insert into problems (format, subject_id, status) values ('mc', '${subjectId}', 'draft');`)
-    ).toThrow(/보관된 과목에는 새로 연결할 수 없습니다/);
+    ).toThrow(/Cannot link to an archived subject/);
   });
 });
 

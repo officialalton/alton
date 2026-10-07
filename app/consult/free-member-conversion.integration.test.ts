@@ -163,7 +163,7 @@ describe("무료 회원 → 과외 전환(상담 경로 재사용)", () => {
       `insert into consultations (source, status, contact_name, contact_email, prospect_contact_id, child_id)
        values ('homepage', 'requested', 'g', '${p.email}', '${prospect}', '${s.id}') returning id;`,
     );
-    expect(() => psql(`select convert_free_member_to_tutoring('${s.id}', '${consultationId}')`)).toThrow(/무료 회원 연결 상담이 아닙니다/);
+    expect(() => psql(`select convert_free_member_to_tutoring('${s.id}', '${consultationId}')`)).toThrow(/not the free-member consultation linked to this student/);
     expect(psql(`select member_type from students where id = '${s.id}'`)).toBe("free");
     // 학생 본인(authenticated)은 직접 호출 불가
     expect(() => psqlAsUser(s.id, `select convert_free_member_to_tutoring('${s.id}', '${consultationId}');`)).toThrow(/permission denied/);
