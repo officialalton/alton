@@ -259,7 +259,7 @@ describe("B7 — 컨설턴트 비활성화", () => {
 
   it("비활성 컨설턴트에게는 배정(RPC·직접 UPDATE)·링크 발송이 막힌다", () => {
     expect(psqlErr(asUser(ADMIN, `select assign_consultation_owner('${reqPlain}', 'admissions_consultant', '${CONS_C}', 'x');`))).toContain("비활성화된 컨설턴트");
-    expect(psqlErr(`update consultations set admissions_consultant_id = '${CONS_C}' where id = '${reqPlain}'`)).toContain("비활성화된 컨설턴트");
+    expect(psqlErr(`update consultations set admissions_consultant_id = '${CONS_C}' where id = '${reqPlain}'`)).toContain("deactivated consultant");
     expect(
       psqlErr(`insert into consultation_scheduling_links (consultation_id, consultant_id, token, expires_at) values ('${reqPlain}', '${CONS_C}', 'tok-${RUN}-x', now() + interval '1 day')`)
     ).toContain("비활성화된 컨설턴트");

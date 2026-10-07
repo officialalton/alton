@@ -61,7 +61,7 @@ test.describe("R5 — subject_enrollments/teacher_assignments DB 레벨 검증",
     );
     // 오류 메시지 정정(2026-09-11) — enforce_subject_enrollment_activation_preconditions()의
     // 실제 문구와 어긋나 있던 사전 존재 오류(C-2와 무관, 이 배치에서 함께 정정).
-    expect(err).toMatch(/기본계약이 먼저 active여야/);
+    expect(err).toMatch(/base contract must be active before subject enrollment/);
   });
 
   test("activation allowed once contract active + paid entitlement exist", () => {

@@ -94,7 +94,7 @@ function insertConsultation(name: string, consultant: string | null, startHours:
 describe("DB 강제: 컨설턴트 없이 확정·시간 보유 불가", () => {
   it("컨설턴트 없는 scheduled 는 시간이 없어도 거절된다", () => {
     expect(psqlErr(`insert into consultations (contact_name, contact_email, status) values ('${TAG}', '${EMAIL("s1")}', 'scheduled')`)).toContain(
-      "담당 컨설턴트가 배정되지 않은 상담은 확정할 수 없습니다"
+      "A consultation without an assigned consultant cannot be confirmed"
     );
   });
 
@@ -102,7 +102,7 @@ describe("DB 강제: 컨설턴트 없이 확정·시간 보유 불가", () => {
     expect(
       psqlErr(`insert into consultations (contact_name, contact_email, status, starts_at, ends_at)
         values ('${TAG}', '${EMAIL("s2")}', 'requested', '${slot(1)}', '${slot(2)}')`)
-    ).toContain("시간을 지정할 수 없습니다");
+    ).toContain("A time cannot be set on a consultation");
     expect(() => insertConsultation("s3", null, null, "requested")).not.toThrow();
   });
 
@@ -112,8 +112,8 @@ describe("DB 강제: 컨설턴트 없이 확정·시간 보유 불가", () => {
 
   it("미배정 requested 를 수락(scheduled)하거나 시간을 넣으면 거절된다 — 배정 후에만 가능", () => {
     const id = insertConsultation("s5", null, null, "requested");
-    expect(psqlErr(`update consultations set status = 'scheduled' where id = '${id}'`)).toContain("확정할 수 없습니다");
-    expect(psqlErr(`update consultations set starts_at = '${slot(5)}', ends_at = '${slot(6)}' where id = '${id}'`)).toContain("시간을 지정할 수 없습니다");
+    expect(psqlErr(`update consultations set status = 'scheduled' where id = '${id}'`)).toContain("cannot be confirmed");
+    expect(psqlErr(`update consultations set starts_at = '${slot(5)}', ends_at = '${slot(6)}' where id = '${id}'`)).toContain("A time cannot be set on a consultation");
     psql(`update consultations set admissions_consultant_id = '${CONSULTANT_A}' where id = '${id}'`);
     expect(() => psql(`update consultations set starts_at = '${slot(5)}', ends_at = '${slot(6)}', status = 'scheduled' where id = '${id}'`)).not.toThrow();
   });

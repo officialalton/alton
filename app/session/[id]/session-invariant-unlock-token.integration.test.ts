@@ -120,7 +120,7 @@ describe("prevent_direct_final_status_update() / prevent_material_version_reassi
     try {
       expect(() =>
         psql(`update sessions set final_status = 'live' where id = '${fixture.sessionId}';`)
-      ).toThrow(/reopen_session\(\)\/recomplete_session\(\)로만/);
+      ).toThrow(/through reopen_session\(\) or recomplete_session\(\)/);
     } finally {
       cleanupSessionFixture(fixture);
     }
@@ -146,7 +146,7 @@ describe("prevent_direct_final_status_update() / prevent_material_version_reassi
           set app.bypass_session_lock = 'true';
           update sessions set final_status = 'live' where id = '${fixture.sessionId}';
         `)
-      ).toThrow(/reopen_session\(\)\/recomplete_session\(\)로만/);
+      ).toThrow(/through reopen_session\(\) or recomplete_session\(\)/);
     } finally {
       cleanupSessionFixture(fixture);
     }
@@ -184,7 +184,7 @@ describe("prevent_direct_final_status_update() / prevent_material_version_reassi
           update sessions set final_status = 'live' where id = '${fixture.sessionId}';
           commit;
         `)
-      ).toThrow(/reopen_session\(\)\/recomplete_session\(\)로만/);
+      ).toThrow(/through reopen_session\(\) or recomplete_session\(\)/);
     } finally {
       cleanupSessionFixture(fixture);
     }
