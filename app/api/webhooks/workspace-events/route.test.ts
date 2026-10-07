@@ -315,7 +315,7 @@ describe("POST /api/webhooks/workspace-events", () => {
   // M1 요구사항 4 — Smart Notes 원본을 상담(consultations)에도 자동 연결.
   it("세션 매칭이 안 되면 consultation_id로 매칭을 시도하고, 매칭되면 consultations.smart_notes_drive_file_id를 갱신한다", async () => {
     reservationMaybeSingleMock.mockResolvedValue({ data: null });
-    consultationMaybeSingleMock.mockResolvedValue({ data: { id: "consult-1" } });
+    consultationMaybeSingleMock.mockResolvedValue({ data: { id: "consult-1", ai_notes_consent_version: "FC-AI-EN-2026-10-07" } });
     const { POST } = await import("./route");
     const res = await POST(
       makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never
@@ -325,6 +325,18 @@ describe("POST /api/webhooks/workspace-events", () => {
       expect.objectContaining({ p_session_id: null, p_consultation_id: "consult-1", p_drive_file_id: "drive-file-1", p_linked: true })
     );
     expect(consultationsUpdateEqMock).toHaveBeenCalled();
+  });
+
+  it("첫 상담에 신청 시 AI 노트 동의가 저장돼 있지 않으면 Smart Notes 원본을 상담에 연결하지 않는다", async () => {
+    reservationMaybeSingleMock.mockResolvedValue({ data: null });
+    consultationMaybeSingleMock.mockResolvedValue({ data: { id: "consult-1", ai_notes_consent_version: null } });
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const { POST } = await import("./route");
+    const res = await POST(makeRequest({ smartNote: { name: "conferenceRecords/abc/smartNotes/note1" } }, SMART_NOTE_TYPE) as never);
+    expect(res.status).toBe(200);
+    expect(consultationsUpdateEqMock).not.toHaveBeenCalled();
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining("first_consultation_smart_notes_without_consent"));
+    warnSpy.mockRestore();
   });
 
   it("세션도 상담도 매칭 안 되면 유실시키지 않고 linked=false로 보존한다(관리자 재처리 대상)", async () => {

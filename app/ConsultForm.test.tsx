@@ -33,9 +33,20 @@ describe("ConsultForm", () => {
     fillRequiredFields();
     fireEvent.click(screen.getByText("Request a consultation"));
     expect(
-      await screen.findByText("Please agree to the collection and use of your personal information.")
+      await screen.findByText("Please agree to the collection and use of your personal information and to AI-generated meeting notes of the first consultation.")
     ).toBeInTheDocument();
     expect(actions.submitHomepageConsultRequest).not.toHaveBeenCalled();
+  });
+
+  it("단일 동의 문구가 개인정보 수집·이용과 첫 상담 AI 회의록을 함께 담고, 새 체크박스는 없다", () => {
+    render(<ConsultForm />);
+    expect(screen.getAllByRole("checkbox")).toHaveLength(1);
+    const text = document.body.textContent ?? "";
+    expect(text).toContain("AI-generated meeting notes of the first consultation");
+    expect(text).toContain("visible only to ALTON staff");
+    expect(text).toContain("eligible for deletion one year after the consultation ends");
+    expect(text).toContain("not video or audio recorded, and no transcript is kept");
+    expect(text).toContain("parent or legal guardian");
   });
 
   it("필수 항목을 채우고 동의 후 제출하면 서버 액션이 호출되고 완료 문구가 보인다(슬롯 선택 없음)", async () => {
@@ -47,7 +58,7 @@ describe("ConsultForm", () => {
 
     await waitFor(() =>
       expect(actions.submitHomepageConsultRequest).toHaveBeenCalledWith(
-        expect.objectContaining({ parentName: "김민지", email: "minji@example.com" })
+        expect.objectContaining({ parentName: "김민지", email: "minji@example.com", aiNotesConsent: true })
       )
     );
     expect(await screen.findByText("Your consultation request has been received.")).toBeInTheDocument();

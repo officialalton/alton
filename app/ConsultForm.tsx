@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { submitHomepageConsultRequest } from "./consult-actions";
 import { trackEvent } from "@/lib/analytics/track";
+import { FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE, FIRST_CONSULTATION_CONSENT_TEXT } from "@/lib/consultation/first-consultation-consent";
 
 // M1 — 홈페이지 상담 신청 폼.
 // 2026-09-22(컨설턴트 스펙 Phase 2b, 사용자 승인 "지금 바로 랜딩 폼도 스펙대로
@@ -37,7 +38,7 @@ export default function ConsultForm() {
     e.preventDefault();
     setError(null);
     if (!agreed) {
-      setError("Please agree to the collection and use of your personal information.");
+      setError(FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE);
       return;
     }
     setSubmitting(true);
@@ -48,6 +49,7 @@ export default function ConsultForm() {
         phone,
         studentGrade,
         concerns,
+        aiNotesConsent: true,
         idempotencyKey: `${email.trim().toLowerCase()}-${submissionNonceRef.current}`,
       });
       setSubmitted(true);
@@ -135,9 +137,7 @@ export default function ConsultForm() {
           onChange={(e) => setAgreed(e.target.checked)}
           className="mt-0.5"
         />
-        I agree to the collection and use of my personal information for this consultation.
-        (Name, phone, and email are used only for the consultation and deleted after a
-        retention period once it ends.)
+        {FIRST_CONSULTATION_CONSENT_TEXT}
       </label>
 
       {error && <p className="text-[13px] text-red mt-3">{error}</p>}

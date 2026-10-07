@@ -36,3 +36,5 @@
 - 전체 테스트는 마일스톤 종료 시 새 DB 1회만(중간 병합은 대상 테스트·tsc). 3회 반복은 프로덕션 배포 직전에만 — 10-07 채팅 — guard: 리뷰
 - 계약서 회사 서명자 직함은 Member(Do Kyung Kim, Member) — 구성원 관리 LLC. 회사: Alton Education LLC, California LLC, 등기 주소 1055 Stewart Drive Apt 537 Sunnyvale CA 94085, 법인 설립 완료(10-05)·Mercury 계좌 개설 — 10-07 채팅 — guard: lib/contracts 테스트
 - 지급은 Mercury로 통합(미국 USD ACH, 한국 KRW International Wire), 기존 Wise 계획 폐기. 회계 장부는 Mercury Books, Stripe는 Books 공식 연결. KRW API 미지원이면 목록·수동 처리로 구현, 실거래는 검증 보고 후 별도 승인 — 10-07 채팅 — guard: 지급 중복 방지·권한 테스트
+- 첫 상담 AI 회의록(Smart Notes)은 상담 신청 시 기존 개인정보 동의 체크박스 1개(문구 확장: 개인정보 수집·이용 + 첫 상담 AI 회의록, 관리자 전용 열람, 상담 종료 +1년 삭제 대상, 영상·음성 녹화·보관 전사 없음, 13세 미만은 보호자 동의)로 갈음. 동의 문구 버전·시각을 consultations.ai_notes_consent_version/at에 저장하고, 그 값이 있을 때만 생성·연결 — 10-07 오너 결정(이전 "현행 유지" 줄 대체) — guard: lib/consultation/calendar-sync.test.ts, app/api/webhooks/workspace-events/route.test.ts, app/ConsultForm.test.tsx
+- 체험 수업은 계약 서명 후에도 녹화·전사·AI 노트 전부 제외. 첫 상담은 영상·음성 녹화와 보관 전사 제외(AI 노트만 위 동의로). 녹화 게이트(lib/legal/recording-gate.ts)의 범위는 정규 수업·후속 상담 — 10-07 오너 결정 — guard: lib/legal/recording-gate.test.ts, lib/legal/legal-documents.test.ts

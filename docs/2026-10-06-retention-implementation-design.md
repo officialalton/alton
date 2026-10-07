@@ -28,7 +28,7 @@
 - `retention_policies`: `lesson_ai_artifacts`(전사·Smart Notes, 구현됨)와 `lesson_recordings`(영상·음성, `no_feature`)를 같은 규칙의 산출물 유형으로 등록했다. 신규 산출물은 행 추가 + 같은 큐(`retention_deletion_targets`) 연결만 하면 된다.
 - 외부 저장소(Drive) 삭제 실패는 `failed` + 백오프로 추적·재시도(기존 워커). **파일 연결 정리 전 DB 행 삭제 금지**(Smart Notes는 이미 이 순서로 구현됨, 녹화는 같은 순서를 강제하는 것이 활성화 선행 조건).
 - 상담(consultation) 산출물(2026-10-07, migration 20262100000200): 현재 상담 산출물은 첫 상담 Smart Notes 파일(`consultations.smart_notes_drive_file_id`) 하나다(후속 상담 `meeting_requests`에는 산출물 컬럼 없음). `retention_enqueue_expired_consultation_artifacts`가 `coalesce(ends_at, completed_at, scheduled_at)+1년` 경과분을 같은 큐에 적재(상담·학생·가구·전체 hold 제외)하고, `retention_claim_deletion_targets`가 상담 hold를 다시 확인하며, `retention_finalize_deleted_smart_notes`는 Drive 삭제 성공 후에만 `smart_notes_drive_file_id`를 비운다(그 전에는 컬럼 유지). 적재 함수는 어떤 크론에도 연결하지 않았다(스위치 닫힘).
-- **정책 충돌 보고**: 첫 상담은 "녹화·전사·AI 노트 실행에서 항상 제외"인데, 현재 시스템은 첫 상담에도 별도 상담 동의(consult_consent_versions)로 Smart Notes를 생성해 관리자 전용으로 저장한다. 문구·게이트는 지침대로 제외이고 이 기존 기능은 건드리지 않았다. 유지·중단 결정이 필요하다.
+- **첫 상담 AI 노트 동의(2026-10-07 오너 결정, migration 20262100000230)**: 첫 상담 Smart Notes는 상담 신청 시 단일 동의(문구 버전·시각을 `consultations.ai_notes_consent_version/at`에 저장)가 있을 때만 생성·연결한다. 동의 없이 도착한 원본은 연결하지 않고(로그만), 이벤트 기록(`smart_notes_generation_events`)의 1년 보관 큐가 정리한다. 기존 산출물·관리자 전용 저장·상담 종료 +1년 삭제 규칙은 그대로다.
 - 활성화 선행: 실제 녹화는 `lib/legal/recording-gate.ts`(회차 유형, 서명 계약 문구 버전, 13세 미만 보호자 동의, 추가 참석자)를 통과해야 한다. 이번 작업은 게이트와 동의 문구만 구현했고 녹화·삭제 실행은 하지 않았다.
 
 ### 무료회원 학습 이력 3년 (Q2)

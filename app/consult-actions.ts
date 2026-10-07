@@ -1,6 +1,7 @@
 "use server";
 
 import { createAdminClient } from "@/lib/supabase-admin";
+import { FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE, FIRST_CONSULTATION_CONSENT_VERSION } from "@/lib/consultation/first-consultation-consent";
 
 // M1 — 홈페이지 상담 신청. 레거시 consult_requests에 직접 쓰던 것을 v3
 // consultations(+ prospect_contacts)로 통합했다(요구사항 2·5, master-roadmap-v3.md
@@ -27,11 +28,14 @@ export async function submitHomepageConsultRequest(params: {
   phone: string;
   studentGrade: string;
   concerns: string;
+  /** true only when the requester ticked the single consent checkbox (personal information + first-consultation AI notes) */
+  aiNotesConsent: boolean;
   idempotencyKey: string;
 }): Promise<{ id: string; status: string }> {
   if (!params.parentName.trim() || !params.email.trim()) {
     throw new Error("Name and email are required.");
   }
+  if (params.aiNotesConsent !== true) throw new Error(FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE);
 
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("submit_homepage_consult_request", {
@@ -42,6 +46,7 @@ export async function submitHomepageConsultRequest(params: {
     p_student_grade: params.studentGrade.trim() || null,
     p_concerns: params.concerns.trim() || null,
     p_idempotency_key: params.idempotencyKey,
+    p_ai_notes_consent_version: FIRST_CONSULTATION_CONSENT_VERSION,
   });
   if (error) throw new Error(error.message);
   const row = data as { id: string; status: string };

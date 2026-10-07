@@ -15,12 +15,14 @@ vi.mock("@/lib/google-calendar", () => ({
 }));
 
 const ensureMeetSpaceSmartNotesOnMock = vi.fn();
+const enableMeetSpaceSmartNotesMock = vi.fn();
 vi.mock("@/lib/google-meet", () => ({
   extractMeetingCodeFromLink: (link: string) => {
     const m = link.match(/meet\.google\.com\/([a-z-]+)/);
     return m ? m[1] : null;
   },
   ensureMeetSpaceSmartNotesOn: (p: unknown) => ensureMeetSpaceSmartNotesOnMock(p),
+  enableMeetSpaceSmartNotes: (p: unknown) => enableMeetSpaceSmartNotesMock(p),
 }));
 
 const sendEmailMock = vi.fn().mockResolvedValue(undefined);
@@ -91,6 +93,45 @@ beforeEach(() => {
   };
   createCalendarEventWithMeetMock.mockResolvedValue({ googleEventId: "evt-1", meetLink: "https://meet.google.com/abc-defg-hij" });
   issueTokenMock.mockResolvedValue({ error: null });
+});
+
+describe("첫 상담 AI 회의록(2026-10-07): 신청 시 동의(버전·시각 저장)가 있을 때만 켠다", () => {
+  const useConsultationsOnly = () =>
+    fromMock.mockImplementation((table: string) => {
+      if (table === "consultations") return buildConsultationsTable();
+      throw new Error(`unexpected table ${table}`);
+    });
+
+  it("동의 버전이 저장된 상담은 Meet space의 Smart Notes를 켜고 상태를 applied로 기록한다", async () => {
+    consultationRow!.ai_notes_consent_version = "FC-AI-EN-2026-10-07";
+    enableMeetSpaceSmartNotesMock.mockResolvedValue(undefined);
+    useConsultationsOnly();
+    const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
+    await syncOneConsultationCalendarEvent("consult-1");
+    expect(enableMeetSpaceSmartNotesMock).toHaveBeenCalledWith(expect.objectContaining({ meetingCode: "abc-defg-hij" }));
+    expect(consultationsUpdatePayloads.some((p) => p.smart_notes_config_status === "applied")).toBe(true);
+  });
+
+  it("동의가 없으면 아무것도 켜지 않는다(not_applicable 유지)", async () => {
+    consultationRow!.ai_notes_consent_version = null;
+    useConsultationsOnly();
+    const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
+    await syncOneConsultationCalendarEvent("consult-1");
+    expect(enableMeetSpaceSmartNotesMock).not.toHaveBeenCalled();
+    expect(consultationsUpdatePayloads.some((p) => "smart_notes_config_status" in p)).toBe(false);
+  });
+
+  it("켜기에 실패해도 Calendar 동기화는 성공으로 남고 failed가 기록된다", async () => {
+    consultationRow!.ai_notes_consent_version = "FC-AI-EN-2026-10-07";
+    enableMeetSpaceSmartNotesMock.mockRejectedValue(new Error("meet api down"));
+    const errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    useConsultationsOnly();
+    const { syncOneConsultationCalendarEvent } = await import("./calendar-sync");
+    await syncOneConsultationCalendarEvent("consult-1");
+    expect(consultationsUpdatePayloads.some((p) => p.google_sync_status === "synced")).toBe(true);
+    expect(consultationsUpdatePayloads.some((p) => p.smart_notes_config_status === "failed")).toBe(true);
+    errSpy.mockRestore();
+  });
 });
 
 describe("Calendar 네이티브 초대(2026-09-03 정책 전환 — 요구사항 2·6)", () => {
@@ -189,7 +230,7 @@ describe("Smart Notes 원본 매칭 실패 후 재처리(요구사항 4)", () =>
       }
       if (table === "consultations") {
         return {
-          select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: { id: "consult-2" }, error: null }) }) }),
+          select: () => ({ eq: () => ({ not: () => ({ maybeSingle: async () => ({ data: { id: "consult-2" }, error: null }) }) }) }),
           update: () => ({ eq: consultationUpdateEqMock }),
         };
       }
@@ -216,7 +257,7 @@ describe("Smart Notes 원본 매칭 실패 후 재처리(요구사항 4)", () =>
         };
       }
       if (table === "consultations") {
-        return { select: () => ({ eq: () => ({ maybeSingle: async () => ({ data: null, error: null }) }) }) };
+        return { select: () => ({ eq: () => ({ not: () => ({ maybeSingle: async () => ({ data: null, error: null }) }) }) }) };
       }
       throw new Error(`unexpected table ${table}`);
     });

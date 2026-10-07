@@ -3,6 +3,11 @@
 // start or enable any capture, and there is no per-lesson consent click for ordinary participants — consent comes from the
 // signed customer agreement, the signed teacher/consultant agreement, and (for under-13) the verified guardian consent.
 // A customer's signature is NOT treated as the consent of every attendee: additional attendees are checked separately.
+//
+// Scope: this gate covers REGULAR LESSONS and FOLLOW-UP CONSULTATIONS (video/audio recording, transcription, AI notes).
+// Trial lessons are always excluded. A FIRST consultation is excluded from video/audio recording and retained transcripts; its
+// AI meeting notes are NOT decided here but by the single consent given when the consultation was requested
+// (consultations.ai_notes_consent_version, see lib/consultation/ai-notes-consent.ts), visible to ALTON staff only.
 // Future capture code must call this first; nothing in the app calls it to switch capture on today.
 import { agreementCoversFourItems, type AgreementKind } from "./recording-scope";
 
@@ -51,8 +56,8 @@ export type CaptureVerdict = {
 };
 
 const MESSAGE: Record<CaptureBlockReason, string> = {
-  first_consultation_excluded: "A first consultation is always excluded from recording, transcription, and AI notes.",
-  trial_lesson_excluded: "A trial lesson is always excluded from recording, transcription, and AI notes, including after a contract is signed.",
+  first_consultation_excluded: "A first consultation is excluded from video and audio recording and retained transcripts; its AI meeting notes depend only on the consent given when the consultation was requested.",
+  trial_lesson_excluded: "A trial lesson is always excluded from recording, transcription, and AI meeting notes, including after a contract is signed.",
   customer_agreement_not_signed: "The customer agreement is not signed.",
   customer_agreement_scope_outdated: "The signed customer agreement predates the four-item recording scope; an amended agreement is required.",
   provider_agreement_not_signed: "The teacher or consultant agreement is not signed.",

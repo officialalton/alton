@@ -254,6 +254,7 @@ export async function reconcileMissedSmartNotesEvents(): Promise<{ checked: numb
     .from("consultations")
     .select("id, google_meeting_code")
     .is("smart_notes_drive_file_id", null)
+    .not("ai_notes_consent_version", "is", null) // 동의 없는 상담은 대조·연결하지 않는다
     .not("google_meeting_code", "is", null)
     .lt("starts_at", cutoff)
     .in("status", ["scheduled", "completed"]);

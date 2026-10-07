@@ -71,7 +71,8 @@ describe("recording / transcription / AI notes consent is consistent", () => {
   it.each(docs)("%s carries the identical clause with all four items", (_n, text) => {
     for (const p of RECORDING_CLAUSE_PARAGRAPHS) expect(norm(text)).toContain(norm(p));
     for (const f of four) expect(text).toContain(f);
-    expect(text).toContain("Initial consultations and all trial lessons, including a trial lesson held after a contract is signed, are always excluded");
+    expect(text).toContain("Trial lessons are always excluded from recording, transcription and AI meeting notes, including after a contract is signed");
+    expect(text).toContain("A first consultation is excluded from video and audio recording and from retained transcripts; AI meeting notes of a first consultation are prepared only where the requester consented when requesting the consultation, are visible only to ALTON staff, and are eligible for deletion one year after the consultation ends.");
     expect(text).toContain("Free learning access is not conditioned on agreeing to lesson recording");
     expect(text).toContain("No public posting, unrelated advertising, sale, or unrestricted model training");
   });
@@ -102,9 +103,10 @@ describe("recording clause: scope, execution rule and retention are identical in
   it("states consent coverage separately from execution, excludes every trial lesson, and keeps recordings 'not currently provided'", () => {
     const text = RECORDING_CLAUSE_PARAGRAPHS.join(" ");
     expect(text).toContain("Consent coverage is separate from execution");
-    expect(text).toContain("always excluded from recording, transcription, and AI lesson notes");
-    expect(text).toContain("including a trial lesson held after a contract is signed");
-    expect(text).toContain("only to regular lessons and follow-up consultations");
+    expect(text).toContain("Trial lessons are always excluded from recording, transcription and AI meeting notes");
+    expect(text).toContain("including after a contract is signed");
+    expect(text).toContain("A first consultation is excluded from video and audio recording and from retained transcripts; AI meeting notes of a first consultation are prepared only where the requester consented when requesting the consultation, are visible only to ALTON staff, and are eligible for deletion one year after the consultation ends.");
+    expect(text).toContain("for regular lessons and follow-up consultations apply only after the applicable agreement and all required participant consents are complete");
     expect(text).toContain("does not itself start any recording, transcription, or note-taking");
     expect(text).toContain("are not currently provided");
     expect(text).toContain("before any recording is activated");
@@ -190,7 +192,7 @@ describe("user-facing legal text guard", () => {
 describe("under-13 notice", () => {
   it("is versioned, has no paper-form blanks and keeps verification language", () => {
     const text = JSON.stringify(under13NoticeSections());
-    expect(UNDER_13_CONSENT_VERSION).toBe("U13-EN-2026-10-07");
+    expect(UNDER_13_CONSENT_VERSION).toBe("U13-EN-2026-10-07.2");
     expect(text).not.toMatch(/_{4,}/);
     expect(text).toContain("Signing this form alone does not bypass that process");
     expect(text).toContain("video recording, audio recording, speech-to-text transcription and storage, and AI meeting notes");
