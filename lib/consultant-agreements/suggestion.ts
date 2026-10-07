@@ -39,7 +39,7 @@ export function compareManualWithSuggestion(
   const warnings: string[] = [];
   if (manual.currency !== suggestion.currency) warnings.push(`입력한 통화(${manual.currency})가 계약 통화(${suggestion.currency})와 다릅니다.`);
   if (manual.amountMajor !== null && Number.isFinite(manual.amountMajor) && Math.abs(manual.amountMajor - suggestion.amountMajor) > 0.005) {
-    warnings.push(`입력한 금액이 계약 기준 제안 금액(${suggestion.amountMajor.toLocaleString("en-US")} ${suggestion.currency})과 다릅니다.`);
+    warnings.push(`입력한 금액이 계약 기준 제안 금액(${new Intl.NumberFormat("en-US").format(suggestion.amountMajor)} ${suggestion.currency})과 다릅니다.`);
   }
   return warnings.length ? warnings.join(" ") : null;
 }

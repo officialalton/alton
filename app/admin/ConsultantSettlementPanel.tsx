@@ -217,9 +217,9 @@ export default function ConsultantSettlementPanel() {
             return (
               <div className="mb-4 text-[12px]" data-testid="contract-suggestion">
                 <p className="text-grey-500">
-                  서명된 계약서 월 보수 {contractFee.currency === "USD" ? (contractFee.monthlyFeeMinor / 100).toLocaleString("en-US") : contractFee.monthlyFeeMinor.toLocaleString("en-US")} {contractFee.currency}
+                  서명된 계약서 월 보수 {contractFee.currency === "USD" ? new Intl.NumberFormat("en-US").format(contractFee.monthlyFeeMinor / 100) : new Intl.NumberFormat("en-US").format(contractFee.monthlyFeeMinor)} {contractFee.currency}
                   {suggestion.ok ? (
-                    <> · <b className="text-ink" data-testid="suggested-amount">계약 기준 제안 {suggestion.amountMajor.toLocaleString("en-US")} {suggestion.currency}</b> ({suggestion.basis}) — 자동 입력되지 않으며 참고용입니다.</>
+                    <> · <b className="text-ink" data-testid="suggested-amount">계약 기준 제안 {new Intl.NumberFormat("en-US").format(suggestion.amountMajor)} {suggestion.currency}</b> ({suggestion.basis}) — 자동 입력되지 않으며 참고용입니다.</>
                   ) : (
                     <> · {suggestion.reason}</>
                   )}

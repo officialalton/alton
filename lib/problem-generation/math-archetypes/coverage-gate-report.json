@@ -1,13 +1,13 @@
 {
  "version": 1,
- "generatedAt": "2026-10-06T19:47:15.559Z",
+ "generatedAt": "2026-10-07T03:21:24.651Z",
  "seedsPerArchetype": 400,
  "ok": false,
  "summary": {
   "items": 303,
   "pass": 300,
-  "fail": 0,
-  "unimplemented": 3,
+  "fail": 3,
+  "unimplemented": 0,
   "blockedRenderer": 0,
   "waived": 0
  },
@@ -22,11 +22,11 @@
   },
   "G8": {
    "ok": true,
-   "note": "구현된 300개 조합의 렌더 구조 검사(전 원형·시드 0~199) 실패 0개 조합"
+   "note": "구현된 303개 조합의 렌더 구조 검사(전 원형·시드 0~199) 실패 0개 조합"
   },
   "G9": {
    "ok": false,
-   "note": "시각 검수 pass 300/303(구현 300개 중 300개; 상태: pass 300)"
+   "note": "시각 검수 pass 300/303(구현 303개 중 300개; 상태: pass 300, incomplete 3)"
   }
  },
  "items": {
@@ -95,7 +95,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "ratios_rates_units.proportion.LN.C": {
@@ -231,7 +231,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "linear_equations_one_var.literal_rearrange.PG.P": {
@@ -299,7 +299,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "probability.simple.PI.P": {
@@ -643,15 +643,22 @@
    }
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": {
-   "status": "unimplemented",
-   "hard": 0,
-   "em": 0,
-   "operators": [],
+   "status": "fail",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "repr_shift",
+    "chain2",
+    "compose_kind",
+    "inverse"
+   ],
    "sprHard": 0,
-   "failures": [],
+   "failures": [
+    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   ],
    "qa": {
-    "state": "unimplemented",
-    "detail": "구현되지 않은 조합"
+    "state": "incomplete",
+    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
    }
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": {
@@ -753,7 +760,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "nonlinear_functions.vertex_x.FN.P": {
@@ -1280,7 +1287,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "linear_functions.interpret_intercept.TB.P": {
@@ -1331,7 +1338,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "linear_equations_two_var.intersection_x.TB.P": {
@@ -1365,7 +1372,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "linear_equations_two_var.intersection_sum.LN.P": {
@@ -1382,7 +1389,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "linear_equations_two_var.slope.LN.P": {
@@ -1484,7 +1491,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "linear_equations_two_var.num_solutions.LN.C": {
@@ -1620,7 +1627,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T12:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "systems_linear.word_system.LN.C": {
@@ -1994,7 +2001,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.mean.BR.P": {
@@ -2011,7 +2018,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.mean.HG.P": {
@@ -2096,7 +2103,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T05:10:00Z"
+    "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.median.DP.P": {
@@ -2232,7 +2239,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.range.BX.P": {
@@ -2504,7 +2511,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_equation.LG.P": {
@@ -2521,7 +2528,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_equation.SC.C": {
@@ -2538,7 +2545,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-06T04:19:11Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_predict.SC.P": {
@@ -2555,7 +2562,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.612Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_predict.LG.P": {
@@ -2572,7 +2579,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_slope_context.SC.P": {
@@ -2589,7 +2596,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.612Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_slope_context.LG.P": {
@@ -2623,7 +2630,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "two_variable_data.scatter_count_above.SC.C": {
@@ -2640,7 +2647,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-SE · 2026-10-06T04:19:11Z"
+    "detail": "visual-review-agent-SE · 2026-10-06T23:33:13Z"
    }
   },
   "inference_margin_error.population_estimate.ST.P": {
@@ -2810,7 +2817,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "percentages.percent_of.PI.P": {
@@ -2878,7 +2885,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "percentages.percent_change.BR.P": {
@@ -2895,7 +2902,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "percentages.percent_change.LG.P": {
@@ -2980,7 +2987,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "percentages.find_percent.PI.P": {
@@ -3541,7 +3548,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
    }
   },
   "linear_functions.construct_equation_from_graph.LN.P": {
@@ -3609,7 +3616,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
    }
   },
   "systems_linear.system_from_graph.LN.P": {
@@ -3881,31 +3888,45 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
    }
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
-   "status": "unimplemented",
-   "hard": 0,
-   "em": 0,
-   "operators": [],
-   "sprHard": 0,
-   "failures": [],
+   "status": "fail",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "repr_shift",
+    "chain2",
+    "compose_kind",
+    "inverse"
+   ],
+   "sprHard": 4,
+   "failures": [
+    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   ],
    "qa": {
-    "state": "unimplemented",
-    "detail": "구현되지 않은 조합"
+    "state": "incomplete",
+    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
    }
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": {
-   "status": "unimplemented",
-   "hard": 0,
-   "em": 0,
-   "operators": [],
+   "status": "fail",
+   "hard": 4,
+   "em": 2,
+   "operators": [
+    "repr_shift",
+    "chain2",
+    "compose_kind",
+    "inverse"
+   ],
    "sprHard": 0,
-   "failures": [],
+   "failures": [
+    "G9 시각 검수 incomplete: 판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
+   ],
    "qa": {
-    "state": "unimplemented",
-    "detail": "구현되지 않은 조합"
+    "state": "incomplete",
+    "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
    }
   },
   "nonlinear_functions.context_graph_features.FN.P": {
@@ -4041,7 +4062,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.spread_comparison.BX.P": {
@@ -4143,7 +4164,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.outlier_effect.BX.P": {
@@ -4211,7 +4232,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-D session) · 2026-10-06T08:00:06Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
    }
   },
   "one_variable_data.relative_cumulative_frequency.FQ.P": {
@@ -4296,7 +4317,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
    }
   },
   "two_variable_data.model_choice_linear_quadratic_exponential.FN.P": {
@@ -4381,7 +4402,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
    }
   },
   "probability.spinner_expected_value.PI.P": {
@@ -5112,7 +5133,7 @@
    "failures": [],
    "qa": {
     "state": "pass",
-    "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
    }
   },
   "coordinate_geometry.polygon_area_on_plane.CG.P": {
@@ -5182,7 +5203,7 @@
   },
   "ratios_rates_units.proportion.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "ratios_rates_units.proportion.LN.C": {
    "state": "pass",
@@ -5214,7 +5235,7 @@
   },
   "linear_equations_one_var.word_problem_translate.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T14:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "linear_equations_one_var.literal_rearrange.PG.P": {
    "state": "pass",
@@ -5230,7 +5251,7 @@
   },
   "probability.simple.BR.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "probability.simple.PI.P": {
    "state": "pass",
@@ -5313,8 +5334,8 @@
    "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T08:20:00Z"
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": {
-   "state": "unimplemented",
-   "detail": "구현되지 않은 조합"
+   "state": "incomplete",
+   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
   },
   "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": {
    "state": "pass",
@@ -5338,7 +5359,7 @@
   },
   "nonlinear_functions.evaluate.FN.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T11:12:55Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "nonlinear_functions.vertex_x.FN.P": {
    "state": "pass",
@@ -5462,7 +5483,7 @@
   },
   "linear_functions.interpret_intercept.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "linear_functions.interpret_intercept.TB.P": {
    "state": "pass",
@@ -5474,7 +5495,7 @@
   },
   "linear_equations_two_var.intersection_x.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "linear_equations_two_var.intersection_x.TB.P": {
    "state": "pass",
@@ -5482,11 +5503,11 @@
   },
   "linear_equations_two_var.intersection_y.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "linear_equations_two_var.intersection_sum.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "linear_equations_two_var.slope.LN.P": {
    "state": "pass",
@@ -5510,7 +5531,7 @@
   },
   "linear_equations_two_var.num_solutions.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T04:19:11Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "linear_equations_two_var.num_solutions.LN.C": {
    "state": "pass",
@@ -5542,7 +5563,7 @@
   },
   "systems_linear.word_system.LN.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T12:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "systems_linear.word_system.LN.C": {
    "state": "pass",
@@ -5630,11 +5651,11 @@
   },
   "one_variable_data.mean.DP.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.mean.BR.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.mean.HG.P": {
    "state": "pass",
@@ -5654,7 +5675,7 @@
   },
   "one_variable_data.mean.DP.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T05:10:00Z"
+   "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.median.DP.P": {
    "state": "pass",
@@ -5686,7 +5707,7 @@
   },
   "one_variable_data.range.DP.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.range.BX.P": {
    "state": "pass",
@@ -5750,27 +5771,27 @@
   },
   "two_variable_data.scatter_equation.SC.P": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_equation.LG.P": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_equation.SC.C": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-06T04:19:11Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_predict.SC.P": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.612Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_predict.LG.P": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_slope_context.SC.P": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.612Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_slope_context.LG.P": {
    "state": "pass",
@@ -5778,11 +5799,11 @@
   },
   "two_variable_data.scatter_count_above.SC.P": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-05T19:42:35.611Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "two_variable_data.scatter_count_above.SC.C": {
    "state": "pass",
-   "detail": "visual-review-agent-SE · 2026-10-06T04:19:11Z"
+   "detail": "visual-review-agent-SE · 2026-10-06T23:33:13Z"
   },
   "inference_margin_error.population_estimate.ST.P": {
    "state": "pass",
@@ -5822,7 +5843,7 @@
   },
   "percentages.percent_of.BR.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "percentages.percent_of.PI.P": {
    "state": "pass",
@@ -5838,11 +5859,11 @@
   },
   "percentages.find_whole.BR.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "percentages.percent_change.BR.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "percentages.percent_change.LG.P": {
    "state": "pass",
@@ -5862,7 +5883,7 @@
   },
   "percentages.find_percent.BR.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "percentages.find_percent.PI.P": {
    "state": "pass",
@@ -5994,7 +6015,7 @@
   },
   "circles.circle_equation_transform.CG.B": {
    "state": "pass",
-   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "linear_functions.construct_equation_from_graph.LN.P": {
    "state": "pass",
@@ -6010,7 +6031,7 @@
   },
   "linear_functions.construct_equation_from_graph.LN.B": {
    "state": "pass",
-   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "systems_linear.system_from_graph.LN.P": {
    "state": "pass",
@@ -6074,15 +6095,15 @@
   },
   "nonlinear_functions.function_transformation.FN.B": {
    "state": "pass",
-   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": {
-   "state": "unimplemented",
-   "detail": "구현되지 않은 조합"
+   "state": "incomplete",
+   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
   },
   "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": {
-   "state": "unimplemented",
-   "detail": "구현되지 않은 조합"
+   "state": "incomplete",
+   "detail": "판정이 모든 샘플·모든 체크리스트 항목을 덮지 않는다"
   },
   "nonlinear_functions.context_graph_features.FN.P": {
    "state": "pass",
@@ -6114,7 +6135,7 @@
   },
   "one_variable_data.spread_comparison.DP.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.spread_comparison.BX.P": {
    "state": "pass",
@@ -6138,7 +6159,7 @@
   },
   "one_variable_data.outlier_effect.DP.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-graphs session) · 2026-10-06T03:58:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.outlier_effect.BX.P": {
    "state": "pass",
@@ -6154,7 +6175,7 @@
   },
   "one_variable_data.relative_cumulative_frequency.FO.P": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-D session) · 2026-10-06T08:00:06Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T23:33:13Z"
   },
   "one_variable_data.relative_cumulative_frequency.FQ.P": {
    "state": "pass",
@@ -6174,7 +6195,7 @@
   },
   "two_variable_data.model_choice_linear_quadratic_exponential.SC.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "two_variable_data.model_choice_linear_quadratic_exponential.FN.P": {
    "state": "pass",
@@ -6194,7 +6215,7 @@
   },
   "two_variable_data.outlier_influence_on_fit.SC.C": {
    "state": "pass",
-   "detail": "claude-sonnet-5.5 (math-C session) · 2026-10-06T07:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "probability.spinner_expected_value.PI.P": {
    "state": "pass",
@@ -6366,7 +6387,7 @@
   },
   "coordinate_geometry.transformation_image.CG.B": {
    "state": "pass",
-   "detail": "visual-review-agent-mathE · 2026-10-06T08:00:00Z"
+   "detail": "claude-sonnet-5.5 (math-A session) · 2026-10-06T22:00:59Z"
   },
   "coordinate_geometry.polygon_area_on_plane.CG.P": {
    "state": "pass",
@@ -6383,7 +6404,7 @@
  },
  "spr": {
   "requiredHardSprFor30Sets": 60,
-  "supplyImplemented": 1310,
+  "supplyImplemented": 1314,
   "sprCapableItems": 235,
   "sprIncapableItems": 68,
   "byItem": {
@@ -6423,6 +6444,7 @@
    "nonlinear_equations_systems.irrational_product_of_roots.FN.P": 4,
    "nonlinear_equations_systems.irrational_root_radical_form.FN.P": 4,
    "nonlinear_equations_systems.linear_quadratic_intersection.FN.P": 4,
+   "nonlinear_equations_systems.linear_quadratic_intersection.FN.C": 0,
    "nonlinear_equations_systems.linear_quadratic_intersection.TB.P": 4,
    "nonlinear_equations_systems.parameter_discriminant.FN.P": 4,
    "nonlinear_equations_systems.parameter_discriminant.FN.C": 0,
@@ -6613,6 +6635,8 @@
    "nonlinear_functions.function_transformation.FN.P": 4,
    "nonlinear_functions.function_transformation.FN.C": 0,
    "nonlinear_functions.function_transformation.FN.B": 0,
+   "nonlinear_functions.zeros_end_behavior_polynomial.FN.P": 4,
+   "nonlinear_functions.zeros_end_behavior_polynomial.FN.C": 0,
    "nonlinear_functions.context_graph_features.FN.P": 4,
    "nonlinear_functions.context_graph_features.TB.P": 4,
    "nonlinear_functions.rational_asymptote.FN.P": 4,
@@ -6690,9 +6714,9 @@
   }
  },
  "sprInventory": {
-  "total": 1528,
-  "capable": 1167,
-  "declared": 1200,
+  "total": 1540,
+  "capable": 1171,
+  "declared": 1212,
   "probed": 328,
   "incapable": [
    {
@@ -7502,6 +7526,46 @@
    },
    {
     "id": "prcg.proportion.LN.C.inverse",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "lqcc.linear_quadratic_intersection.FN.C.repr_shift",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "lqcc.linear_quadratic_intersection.FN.C.chain2",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "lqcc.linear_quadratic_intersection.FN.C.compose_kind",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "lqcc.linear_quadratic_intersection.FN.C.inverse",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "zebc.zeros_end_behavior_polynomial.FN.C.repr_shift",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "zebc.zeros_end_behavior_polynomial.FN.C.chain2",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "zebc.zeros_end_behavior_polynomial.FN.C.compose_kind",
+    "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
+    "declared": true
+   },
+   {
+    "id": "zebc.zeros_end_behavior_polynomial.FN.C.inverse",
     "reason": "선택지가 그래프 4개이고 조건에 맞는 그래프를 고르는 것이 문제의 핵심이라 선택지 없이는 성립하지 않는다",
     "declared": true
    },
@@ -9131,7 +9195,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 93,
+   "independent": 94,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -9251,7 +9315,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 52,
+   "independent": 54,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10031,7 +10095,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 53,
+   "independent": 52,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10071,7 +10135,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 41,
+   "independent": 40,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10111,7 +10175,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 43,
+   "independent": 39,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10131,7 +10195,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 51,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -10151,7 +10215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 35,
+   "independent": 34,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10171,7 +10235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 48,
+   "independent": 43,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -10191,7 +10255,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 51,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10211,7 +10275,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 47,
+   "independent": 46,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10651,7 +10715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 133,
+   "independent": 132,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10671,7 +10735,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 86,
+   "independent": 85,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10691,7 +10755,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 100,
+   "independent": 99,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10711,7 +10775,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 85,
+   "independent": 86,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10751,7 +10815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 63,
+   "independent": 62,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -10771,7 +10835,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 74,
+   "independent": 72,
    "dup200": 1,
    "dupAll": "3/400",
    "mutants": "12/12",
@@ -11431,7 +11495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 139,
+   "independent": 137,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11451,7 +11515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 135,
+   "independent": 136,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11471,7 +11535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 129,
+   "independent": 133,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11491,7 +11555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 134,
+   "independent": 136,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11511,7 +11575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 161,
+   "independent": 160,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11531,7 +11595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 157,
+   "independent": 155,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11551,7 +11615,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 58,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11571,7 +11635,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 58,
+   "independent": 57,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11591,7 +11655,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 140,
+   "independent": 138,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -11611,7 +11675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 145,
+   "independent": 144,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -15461,6 +15525,126 @@
     101,
     96,
     106
+   ]
+  },
+  {
+   "id": "lqcc.linear_quadratic_intersection.FN.C.repr_shift",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 39,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    97,
+    94,
+    95,
+    114
+   ]
+  },
+  {
+   "id": "lqcc.linear_quadratic_intersection.FN.C.chain2",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 39,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    95,
+    94,
+    107,
+    104
+   ]
+  },
+  {
+   "id": "lqcc.linear_quadratic_intersection.FN.C.compose_kind",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 40,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    83,
+    98,
+    112,
+    107
+   ]
+  },
+  {
+   "id": "lqcc.linear_quadratic_intersection.FN.C.inverse",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 38,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    106,
+    100,
+    98,
+    96
+   ]
+  },
+  {
+   "id": "lqcc.linear_quadratic_intersection.FN.C.easy_count_only",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 57,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    96,
+    97,
+    102,
+    105
+   ]
+  },
+  {
+   "id": "lqcc.linear_quadratic_intersection.FN.C.med_medium_two_up",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 51,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    106,
+    97,
+    100,
+    97
    ]
   },
   {
@@ -20031,7 +20215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 199,
+   "independent": 200,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20051,7 +20235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 228,
+   "independent": 227,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20091,7 +20275,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 75,
+   "independent": 76,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20131,7 +20315,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 197,
+   "independent": 196,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20151,7 +20335,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 257,
+   "independent": 259,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20191,7 +20375,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 276,
+   "independent": 275,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20431,7 +20615,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 210,
+   "independent": 209,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20471,7 +20655,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 208,
+   "independent": 212,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20491,7 +20675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 259,
+   "independent": 260,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20511,7 +20695,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 245,
+   "independent": 243,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20531,7 +20715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 283,
+   "independent": 285,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20551,7 +20735,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 253,
+   "independent": 254,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -20591,7 +20775,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 281,
+   "independent": 280,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20611,7 +20795,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 242,
+   "independent": 244,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20711,7 +20895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 252,
+   "independent": 250,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20751,7 +20935,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 155,
+   "independent": 154,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20791,7 +20975,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 256,
+   "independent": 251,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -20811,7 +20995,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 243,
+   "independent": 242,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21151,7 +21335,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 116,
+   "independent": 119,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21171,7 +21355,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 241,
+   "independent": 239,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21191,7 +21375,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 265,
+   "independent": 262,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21211,7 +21395,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 124,
+   "independent": 125,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21231,7 +21415,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 173,
+   "independent": 175,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21251,7 +21435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 72,
+   "independent": 73,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21271,7 +21455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 85,
+   "independent": 87,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21291,7 +21475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 156,
+   "independent": 155,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -21631,7 +21815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 105,
+   "independent": 106,
    "dup200": 0,
    "dupAll": "2/400",
    "mutants": "12/12",
@@ -21651,7 +21835,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 204,
+   "independent": 200,
    "dup200": 1,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -21671,7 +21855,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 232,
+   "independent": 229,
    "dup200": 2,
    "dupAll": "6/400",
    "mutants": "12/12",
@@ -21691,7 +21875,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 70,
+   "independent": 68,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21711,7 +21895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 72,
+   "independent": 74,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21731,7 +21915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 56,
+   "independent": 58,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21751,7 +21935,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 69,
+   "independent": 68,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -21791,7 +21975,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 260,
+   "independent": 261,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -22191,7 +22375,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 85,
+   "independent": 84,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22211,7 +22395,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 91,
+   "independent": 90,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22231,7 +22415,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 63,
+   "independent": 62,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22251,7 +22435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 71,
+   "independent": 70,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22271,7 +22455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 41,
+   "independent": 42,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22291,7 +22475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 52,
+   "independent": 53,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22631,7 +22815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22691,7 +22875,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 76,
+   "independent": 74,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22731,7 +22915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 90,
+   "independent": 89,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22811,7 +22995,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 44,
+   "independent": 43,
    "dup200": 1,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -22871,7 +23055,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 34,
+   "independent": 33,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -22891,7 +23075,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 46,
+   "independent": 47,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -23871,7 +24055,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 103,
+   "independent": 104,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -23931,7 +24115,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 67,
+   "independent": 65,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -25271,7 +25455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 89,
+   "independent": 88,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -25351,7 +25535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 92,
+   "independent": 93,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29271,7 +29455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 80,
+   "independent": 79,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29311,7 +29495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 129,
+   "independent": 125,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29331,7 +29515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 144,
+   "independent": 142,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29351,7 +29535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 47,
+   "independent": 39,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29371,7 +29555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 54,
+   "independent": 44,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29391,7 +29575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 68,
+   "independent": 70,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29411,7 +29595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 77,
+   "independent": 76,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29471,7 +29655,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 85,
+   "independent": 84,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29491,7 +29675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 82,
+   "independent": 83,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29531,7 +29715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 113,
+   "independent": 115,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29551,7 +29735,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 118,
+   "independent": 108,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29571,7 +29755,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 131,
+   "independent": 121,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29591,7 +29775,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 74,
+   "independent": 75,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -29631,7 +29815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 104,
+   "independent": 107,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30431,7 +30615,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 70,
+   "independent": 67,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30451,7 +30635,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 92,
+   "independent": 90,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30471,7 +30655,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 178,
+   "independent": 177,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30491,7 +30675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 177,
+   "independent": 176,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30511,7 +30695,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 199,
+   "independent": 200,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30531,7 +30715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 186,
+   "independent": 185,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30611,7 +30795,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 128,
+   "independent": 129,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30631,7 +30815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 114,
+   "independent": 116,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30651,7 +30835,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 145,
+   "independent": 144,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30711,7 +30895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 96,
+   "independent": 93,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30731,7 +30915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 101,
+   "independent": 102,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -30751,7 +30935,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 169,
+   "independent": 167,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31631,7 +31815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 43,
+   "independent": 42,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31651,7 +31835,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 51,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31711,7 +31895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 85,
+   "independent": 84,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31731,7 +31915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 108,
+   "independent": 107,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31751,7 +31935,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 57,
+   "independent": 55,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31911,7 +32095,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 138,
+   "independent": 139,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31931,7 +32115,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 148,
+   "independent": 149,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -31951,7 +32135,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 87,
+   "independent": 64,
    "dup200": 1,
    "dupAll": "2/400",
    "mutants": "12/12",
@@ -31971,7 +32155,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 106,
+   "independent": 88,
    "dup200": 1,
    "dupAll": "9/400",
    "mutants": "12/12",
@@ -31991,7 +32175,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 94,
+   "independent": 62,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -32011,7 +32195,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 103,
+   "independent": 83,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -32031,7 +32215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 131,
+   "independent": 125,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -32051,7 +32235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 159,
+   "independent": 158,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -32091,7 +32275,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 84,
+   "independent": 83,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -33311,7 +33495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 82,
+   "independent": 81,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -33471,7 +33655,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 45,
+   "independent": 44,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -34971,7 +35155,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 117,
+   "independent": 118,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35031,7 +35215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 124,
+   "independent": 123,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35071,7 +35255,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 147,
+   "independent": 145,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35091,7 +35275,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 144,
+   "independent": 143,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35111,7 +35295,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 119,
+   "independent": 117,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35171,7 +35355,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 126,
+   "independent": 128,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35211,7 +35395,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 98,
+   "independent": 97,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35231,7 +35415,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 115,
+   "independent": 116,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35251,7 +35435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 123,
+   "independent": 124,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35271,7 +35455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 146,
+   "independent": 145,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35291,7 +35475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 140,
+   "independent": 139,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35311,7 +35495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 160,
+   "independent": 159,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35331,7 +35515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 115,
+   "independent": 114,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35371,7 +35555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 62,
+   "independent": 61,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35391,7 +35575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 61,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35411,7 +35595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 62,
+   "independent": 61,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35451,7 +35635,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 61,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35491,7 +35675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 99,
+   "independent": 97,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35511,7 +35695,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 173,
+   "independent": 175,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35531,7 +35715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 180,
+   "independent": 181,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35551,7 +35735,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 71,
+   "independent": 72,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35631,7 +35815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 118,
+   "independent": 117,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35651,7 +35835,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 122,
+   "independent": 121,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35711,7 +35895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 148,
+   "independent": 150,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35731,7 +35915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 149,
+   "independent": 151,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35791,7 +35975,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 126,
+   "independent": 125,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35831,7 +36015,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 119,
+   "independent": 118,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -35931,7 +36115,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 106,
+   "independent": 107,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36031,7 +36215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 115,
+   "independent": 114,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36051,7 +36235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 120,
+   "independent": 119,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36091,7 +36275,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 49,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36151,7 +36335,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 67,
+   "independent": 66,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36191,7 +36375,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 135,
+   "independent": 133,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -36251,7 +36435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 113,
+   "independent": 112,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36271,7 +36455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 191,
+   "independent": 190,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36291,7 +36475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 188,
+   "independent": 187,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36311,7 +36495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 176,
+   "independent": 173,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36331,7 +36515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 190,
+   "independent": 188,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36351,7 +36535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 172,
+   "independent": 166,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36371,7 +36555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 183,
+   "independent": 182,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36391,7 +36575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 113,
+   "independent": 112,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36411,7 +36595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 117,
+   "independent": 115,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36431,7 +36615,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 112,
+   "independent": 111,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36451,7 +36635,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 112,
+   "independent": 111,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36471,7 +36655,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 60,
+   "independent": 59,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36491,7 +36675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 60,
+   "independent": 59,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36511,7 +36695,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 60,
+   "independent": 59,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36531,7 +36715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 58,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36551,7 +36735,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 60,
+   "independent": 59,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -36571,7 +36755,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 60,
+   "independent": 59,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -38231,7 +38415,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 137,
+   "independent": 138,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -38251,7 +38435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 137,
+   "independent": 140,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -38291,7 +38475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 125,
+   "independent": 126,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -38311,7 +38495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 137,
+   "independent": 139,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -38391,7 +38575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 138,
+   "independent": 146,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39031,7 +39215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 188,
+   "independent": 189,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39051,7 +39235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 189,
+   "independent": 194,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39111,7 +39295,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 57,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39131,7 +39315,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 70,
+   "independent": 68,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39151,7 +39335,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 170,
+   "independent": 173,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39171,7 +39355,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 200,
+   "independent": 202,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39191,7 +39375,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 193,
+   "independent": 196,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39211,7 +39395,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 184,
+   "independent": 190,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39231,7 +39415,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 261,
+   "independent": 265,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39251,7 +39435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 264,
+   "independent": 269,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39291,7 +39475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 159,
+   "independent": 161,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39311,7 +39495,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 209,
+   "independent": 217,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39331,7 +39515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 233,
+   "independent": 236,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39351,7 +39535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 289,
+   "independent": 294,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39371,7 +39555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 269,
+   "independent": 276,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39391,7 +39575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 255,
+   "independent": 256,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -39411,7 +39595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 302,
+   "independent": 304,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40231,7 +40415,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 211,
+   "independent": 218,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40251,7 +40435,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 215,
+   "independent": 221,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40271,7 +40455,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 135,
+   "independent": 137,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40291,7 +40475,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 137,
+   "independent": 139,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40331,7 +40515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 142,
+   "independent": 143,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40351,7 +40535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 76,
+   "independent": 78,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40371,7 +40555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 88,
+   "independent": 90,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40391,7 +40575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 196,
+   "independent": 202,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -40411,7 +40595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 183,
+   "independent": 190,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45811,7 +45995,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 127,
+   "independent": 102,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45831,7 +46015,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 109,
+   "independent": 81,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45851,7 +46035,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 78,
+   "independent": 55,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45871,7 +46055,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 69,
+   "independent": 48,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45891,7 +46075,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 128,
+   "independent": 99,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45911,7 +46095,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 111,
+   "independent": 85,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45931,7 +46115,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 200,
+   "independent": 197,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -45951,7 +46135,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 200,
+   "independent": 202,
    "dup200": 0,
    "dupAll": "1/400",
    "mutants": "12/12",
@@ -45971,7 +46155,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 185,
+   "independent": 184,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46031,7 +46215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 226,
+   "independent": 224,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46051,7 +46235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 267,
+   "independent": 263,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46331,7 +46515,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 54,
+   "independent": 39,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46351,7 +46535,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 105,
+   "independent": 93,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46371,7 +46555,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 71,
+   "independent": 61,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46391,7 +46575,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 82,
+   "independent": 74,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46411,7 +46595,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 90,
+   "independent": 77,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -46431,7 +46615,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 93,
+   "independent": 77,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -48951,7 +49135,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 90,
+   "independent": 67,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -48971,7 +49155,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 87,
+   "independent": 70,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -48991,7 +49175,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 90,
+   "independent": 67,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -49011,7 +49195,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 41,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -49031,7 +49215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 97,
+   "independent": 72,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -49051,7 +49235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 97,
+   "independent": 74,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -49061,6 +49245,326 @@
     115,
     90,
     96
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.repr_shift",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 35,
+   "dup200": 1,
+   "dupAll": "1/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    102,
+    88,
+    97,
+    113
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.repr_shift",
+   "fmt": "spr",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 44,
+   "dup200": 0,
+   "dupAll": "2/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.chain2",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 41,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    109,
+    87,
+    90,
+    114
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.chain2",
+   "fmt": "spr",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 48,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.compose_kind",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 40,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    94,
+    98,
+    93,
+    115
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.compose_kind",
+   "fmt": "spr",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 46,
+   "dup200": 0,
+   "dupAll": "2/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.inverse",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 48,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    102,
+    103,
+    91,
+    104
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.inverse",
+   "fmt": "spr",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 58,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.easy_sum_of_zeros",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 135,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    97,
+    107,
+    92,
+    104
+   ]
+  },
+  {
+   "id": "zebp.zeros_end_behavior_polynomial.FN.P.med_leading_a",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 35,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    96,
+    94,
+    110,
+    100
+   ]
+  },
+  {
+   "id": "zebc.zeros_end_behavior_polynomial.FN.C.repr_shift",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 39,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    112,
+    91,
+    91,
+    106
+   ]
+  },
+  {
+   "id": "zebc.zeros_end_behavior_polynomial.FN.C.chain2",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 40,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    103,
+    115,
+    86,
+    96
+   ]
+  },
+  {
+   "id": "zebc.zeros_end_behavior_polynomial.FN.C.compose_kind",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 38,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    98,
+    101,
+    90,
+    111
+   ]
+  },
+  {
+   "id": "zebc.zeros_end_behavior_polynomial.FN.C.inverse",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 40,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    95,
+    93,
+    105,
+    107
+   ]
+  },
+  {
+   "id": "zebc.zeros_end_behavior_polynomial.FN.C.easy_end_only",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 33,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    92,
+    118,
+    94,
+    96
+   ]
+  },
+  {
+   "id": "zebc.zeros_end_behavior_polynomial.FN.C.med_medium_two_zeros",
+   "fmt": "mc",
+   "seeds": 400,
+   "produced": 400,
+   "genFail": 0,
+   "thrown": 0,
+   "verifyFail": 0,
+   "independent": 48,
+   "dup200": 0,
+   "dupAll": "0/400",
+   "mutants": "12/12",
+   "keySwap": "12/12",
+   "slots": [
+    106,
+    90,
+    102,
+    102
    ]
   },
   {
@@ -50311,7 +50815,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 96,
+   "independent": 95,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -50331,7 +50835,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 101,
+   "independent": 99,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -50391,7 +50895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 95,
+   "independent": 74,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -50411,7 +50915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 102,
+   "independent": 79,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -50431,16 +50935,16 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 60,
+   "independent": 114,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
    "keySwap": "12/12",
    "slots": [
-    101,
-    98,
-    120,
-    81
+    102,
+    100,
+    85,
+    113
    ]
   },
   {
@@ -50451,7 +50955,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 65,
+   "independent": 121,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -51451,7 +51955,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 170,
+   "independent": 172,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -51471,7 +51975,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 122,
+   "independent": 119,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -51491,7 +51995,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 121,
+   "independent": 122,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -51511,7 +52015,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 88,
+   "independent": 85,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -51551,7 +52055,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 88,
+   "independent": 67,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -51571,7 +52075,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 92,
+   "independent": 90,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52391,7 +52895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 49,
+   "independent": 48,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52411,7 +52915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 56,
+   "independent": 53,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52651,7 +53155,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 58,
+   "independent": 47,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52671,7 +53175,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 33,
+   "independent": 81,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52691,7 +53195,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 55,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52711,7 +53215,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 58,
+   "independent": 55,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52731,7 +53235,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 53,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52771,7 +53275,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 61,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52791,7 +53295,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 59,
+   "independent": 58,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52831,7 +53335,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 61,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -52851,7 +53355,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 61,
+   "independent": 60,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53391,7 +53895,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 118,
+   "independent": 116,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53411,7 +53915,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 149,
+   "independent": 148,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53431,7 +53935,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 153,
+   "independent": 152,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53451,7 +53955,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 111,
+   "independent": 110,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53471,7 +53975,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 113,
+   "independent": 112,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53511,7 +54015,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 115,
+   "independent": 114,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53611,7 +54115,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 109,
+   "independent": 108,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53631,7 +54135,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 103,
+   "independent": 102,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -53651,7 +54155,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 107,
+   "independent": 106,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -61171,7 +61675,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 120,
+   "independent": 88,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -61191,7 +61695,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 112,
+   "independent": 77,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -61211,7 +61715,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 109,
+   "independent": 86,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -61231,7 +61735,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 69,
+   "independent": 50,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -61251,7 +61755,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 133,
+   "independent": 108,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
@@ -61271,7 +61775,7 @@
    "genFail": 0,
    "thrown": 0,
    "verifyFail": 0,
-   "independent": 124,
+   "independent": 90,
    "dup200": 0,
    "dupAll": "0/400",
    "mutants": "12/12",
