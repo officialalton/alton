@@ -135,6 +135,51 @@ export const EE_EM_ARCHETYPES: Archetype[] = [
     },
   },
   {
+    ...base, id: "ee.rational_equivalence.e_cancel_numeric_factor", kind: "rational_equivalence", difficulty: "easy",
+    structure: "(k·a x + k·b)/k 처럼 분자 전체가 분모 상수의 배수인 분수식을 약분한다", extraThinking: "(easy) 분자 모든 항을 상수로 나누기", concepts: ["분수식 약분", "문제 조건 해석"],
+    generate(rng) {
+      const k = rng.int(2, 6), a = rng.nz(-5, 6), b = rng.nz(-7, 8), v = rng.pick(VARS); if (Math.abs(a) === Math.abs(b)) throw new GenFail("x");
+      const num = lin(k * a, k * b, v);
+      return finishA(rng, {
+        stimulus: intro(rng, v) + M(`\\frac{${num}}{${k}}`), question: q(rng as never, v), evalAt: EV(v), correctText: E([a, b], v),
+        wrongTexts: [{ text: E([a, k * b], v), kind: "step_missing", reason: "분모로 x 항만 나누고 상수항은 나누지 않았다." }, { text: E([k * a, b], v), kind: "step_missing", reason: "분모로 상수항만 나누고 x 항은 나누지 않았다." }, { text: E([a, -b], v), kind: "sign_error", reason: "상수항의 부호를 반대로 적었다." }, { text: E([a + k, b + k], v), kind: "formula_misuse", reason: "나누는 대신 분모를 더했다." }, { text: E([a * k, b * k], v), kind: "formula_misuse", reason: "나누는 대신 분모를 곱했다." }],
+        verificationJs: withParams({ k, a, b, x: 3 }, "return (P.k*P.a*P.x+P.k*P.b)/P.k;"),
+        trace: [T(`분자 $${num}$ 의 두 항이 모두 ${k} 의 배수이다.`, "Both terms of the numerator are multiples of the denominator."), T(`각 항을 ${k} 로 나눈다: $${k * a}${v}/${k} = ${a}${v}$, ${k * b}/${k} = ${b}.`, "Divide each term."), T(`결과는 $${poly([a, b], v)}$ 이다.`, "Write the result.")],
+        variant: "cancel_numeric_factor",
+      });
+    },
+  },
+  {
+    ...base, id: "ee.rational_equivalence.e_cancel_monomial", kind: "rational_equivalence", difficulty: "easy",
+    structure: "(a x² + b x)/x 의 공통인수 x 를 약분한다(x≠0)", extraThinking: "(easy) 문자 공통인수로 묶어 약분", concepts: ["공통인수", "약분"],
+    generate(rng) {
+      const a = rng.nz(-5, 6), b = rng.nz(-7, 8), v = rng.pick(VARS); if (a + b === 0 || a === b) throw new GenFail("x");
+      const num = poly([a, b, 0], v);
+      return finishA(rng, {
+        stimulus: intro(rng, v) + M(`\\frac{${num}}{${v}}`) + `, where ${v} is not equal to 0.`, question: q(rng as never, v), evalAt: EV(v), correctText: E([a, b], v),
+        wrongTexts: [{ text: E([a + b, 0], v), kind: "step_missing", reason: "x² 항만 x 로 나누고 둘째 항은 그대로 두었다가 합쳤다." }, { text: E([a, 0], v), kind: "step_missing", reason: "둘째 항을 약분하면서 지워 버렸다." }, { text: E([b, a], v), kind: "formula_misuse", reason: "두 계수의 자리를 바꿨다." }, { text: E([a, -b], v), kind: "sign_error", reason: "상수항의 부호를 반대로 적었다." }, { text: E([a, b, 0], v), kind: "step_missing", reason: "약분하지 않고 분자를 그대로 골랐다." }],
+        verificationJs: withParams({ a, b, x: 3 }, "return (P.a*P.x*P.x+P.b*P.x)/P.x;"),
+        trace: [T(`분자 $${num}$ 의 두 항에 공통인수 $${v}$ 가 있다.`, "Factor out the common variable."), T(`$${v}(${poly([a, b], v)})/${v}$ 에서 $${v}$ 를 약분한다(${v} ≠ 0).`, "Cancel the common factor."), T(`결과는 $${poly([a, b], v)}$ 이다.`, "Write the result.")],
+        variant: "cancel_monomial",
+      });
+    },
+  },
+  {
+    ...base, id: "ee.rational_equivalence.e_fraction_times_binomial", kind: "rational_equivalence", difficulty: "easy",
+    structure: "(p/q)(q x + q s) 처럼 분수 계수를 이항식에 분배한다", extraThinking: "(easy) 분수와 약분을 함께 쓰는 분배", concepts: ["분수 계수 분배", "약분"],
+    generate(rng) {
+      const q0 = rng.int(2, 5), p = rng.pick([-5, -4, -3, -2, 2, 3, 4, 5, 7]), s = rng.nz(-6, 7), v = rng.pick(VARS); if (p % q0 === 0) throw new GenFail("x");
+      const inner = lin(q0, q0 * s, v);
+      return finishA(rng, {
+        stimulus: intro(rng, v) + M(`\\frac{${p}}{${q0}}(${inner})`), question: q(rng as never, v), evalAt: EV(v), correctText: E([p, p * s], v),
+        wrongTexts: [{ text: E([p, q0 * s], v), kind: "step_missing", reason: "분수 계수를 x 항에만 곱하고 상수항에는 곱하지 않았다." }, { text: E([p, p * q0 * s], v), kind: "formula_misuse", reason: "상수항에 분모로 나누지 않고 분자만 곱했다." }, { text: E([p, s], v), kind: "step_missing", reason: "상수항에 분수의 분자를 곱하지 않았다." }, { text: E([p, -p * s], v), kind: "sign_error", reason: "상수항의 부호를 반대로 적었다." }, { text: E([p * q0, p * s], v), kind: "formula_misuse", reason: "x 항의 계수에서 분모로 나누지 않았다." }],
+        verificationJs: withParams({ p, q: q0, s, x: 3 }, "return (P.p/P.q)*(P.q*P.x+P.q*P.s);"),
+        trace: [T(`분수 $\\frac{${p}}{${q0}}$ 를 괄호 안 두 항에 각각 곱한다.`, "Distribute the fraction."), T(`$\\frac{${p}}{${q0}}·${q0}${v} = ${p}${v}$, $\\frac{${p}}{${q0}}·${q0 * s} = ${p * s}$ 이다.`, "Cancel the denominator in each product."), T(`결과는 $${poly([p, p * s], v)}$ 이다.`, "Write the result.")],
+        variant: "fraction_times_binomial",
+      });
+    },
+  },
+  {
     ...base, id: "ee.rational_equivalence.m_cancel_common_factor", kind: "rational_equivalence", difficulty: "medium",
     structure: "(x²+(a+b)x+ab)/(x+a) 를 약분한 식을 고른다(x≠-a)", extraThinking: "(medium) 분자 인수분해 후 약분", concepts: ["인수분해", "약분"],
     generate(rng) {
