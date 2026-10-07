@@ -58,13 +58,16 @@ for (const st of planSets) for (const it of st) bump(`${it.skill}|${it.difficult
 const swaps: string[] = []; const inPlan = new Set(planSets.flat().map((i) => i.problemId));
 for (const sk of ALL_SKILLS) for (const d of ["easy", "medium", "hard"]) {
   if ((covCount.get(`${sk}|${d}`) ?? 0) > 0) continue;
-  const repl = cands.find((c) => c.skillCode === sk && c.difficulty === d && !inPlan.has(c.problemId) && !excludeIds.has(c.problemId)); if (!repl) { swaps.push(`NO_CANDIDATE ${sk}|${d}`); continue; }
+  const repls = cands.filter((c) => c.skillCode === sk && c.difficulty === d && !inPlan.has(c.problemId) && !excludeIds.has(c.problemId)); if (!repls.length) { swaps.push(`NO_CANDIDATE ${sk}|${d}`); continue; }
   let done = false;
+  for (const repl of repls) {
+    if (done) break;
   for (const st of planSets) { if (done) break; const groups = new Set(st.map((i) => i.group).filter(Boolean));
     const tgt = st.find((i) => i.domain === repl.satDomain && i.difficulty === d && i.format === (repl.format ?? "mc") && (covCount.get(`${i.skill}|${i.difficulty}`) ?? 0) >= 2 && !(repl.similarityGroup && groups.has(repl.similarityGroup) && repl.similarityGroup !== i.group));
     if (!tgt) continue;
     bump(`${tgt.skill}|${tgt.difficulty}`, -1); bump(`${sk}|${d}`, 1); inPlan.delete(tgt.problemId); inPlan.add(repl.problemId);
     swaps.push(`swap ${tgt.skill}|${d} -> ${sk}|${d}`); Object.assign(tgt, { versionId: repl.problemVersionId, problemId: repl.problemId, skill: repl.skillCode ?? null, group: repl.similarityGroup ?? null }); cells.add(`${sk}|${d}`); done = true; }
+  }
   if (!done) swaps.push(`NO_SWAP ${sk}|${d}`);
 }
 console.log(swaps.join("\n"));
