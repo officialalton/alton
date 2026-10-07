@@ -211,10 +211,9 @@ describe("모의고사 조립 게이트 — 일반용은 세트 문항이 될 �
     expect(fails(() => add(poolGeneral[0], 1))).toContain("일반용 문제는 모의고사에 넣을 수 없습니다");
     add(poolMock[0], 2);
     add(poolBoth[0], 3);
-    // 이미 담긴 뒤 general 로 바꿔도 세트는 그대로(과거 고정 불변).
-    psql(`update problems set usage_scope = 'general' where id = '${poolMock[0]}';`);
+    // 2026-10-06 — 초안·공개 세트에 이미 담긴 문항은 일반용으로 되돌릴 수 없다(막음). 세트는 그대로.
+    expect(fails(() => psql(`update problems set usage_scope = 'general' where id = '${poolMock[0]}';`))).toContain("일반용으로 바꿀 수 없습니다");
     expect(psql(`select count(*) from mock_exam_set_items where exam_set_id = '${setId}';`)).toBe("2");
-    psql(`update problems set usage_scope = 'mock_exam' where id = '${poolMock[0]}';`);
   });
 });
 

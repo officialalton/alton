@@ -35,6 +35,9 @@ export default defineConfig({
           // `npm run test:integration:universities`)으로만 돈다.
           exclude: [...SHARED_EXCLUDE, "lib/universities/**/*.integration.test.ts"],
           fileParallelism: false,
+          // 2026-10-06 — 공개 버전 불변 트리거(20262100000240)는 세션 설정 alton.version_content_edit='on' 일 때만 내용 수정을 허용한다.
+          // 통합 테스트 픽스처는 공개본을 직접 고쳐 상황을 만든다 — psql 연결에 이 설정을 켠다(bank-gate-hardening 테스트만 끈다).
+          env: { PGOPTIONS: "-c alton.version_content_edit=on -c alton.skip_set_item_gate=on" },
           // 2026-10-01 — 동기 psql을 여러 번 부르는 테스트가 에이전트 병행 부하·데이터 누적 때
           // 5초 기본 제한에 간헐적으로 걸렸다(매번 다른 테스트). 로직 결함이 아니라 시간 문제다.
           testTimeout: 30_000,

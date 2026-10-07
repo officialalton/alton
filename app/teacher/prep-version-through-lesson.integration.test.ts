@@ -129,7 +129,7 @@ function publishedProblem(keywordId: string): { problemId: string; v1: string } 
   const v1 = psql(
     `select save_problem_draft_version('${problemId}', '1판 지문 ${uniq()}', '["가","나","다","라"]'::jsonb, 0, '1판 해설', 'medium', '${ADMIN_ID}');`
   );
-  psql(`select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
+  psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v1}'; select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
   return { problemId, v1 };
 }
 
@@ -137,7 +137,7 @@ function republish(problemId: string, passage: string): string {
   const v = psql(
     `select save_problem_draft_version('${problemId}', '${passage}', '["가","나","다","라"]'::jsonb, 1, '고친 해설', 'medium', '${ADMIN_ID}');`
   );
-  psql(`select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
+  psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v}'; select confirm_and_publish_problem_version('${v}', '${ADMIN_ID}');`);
   return v;
 }
 

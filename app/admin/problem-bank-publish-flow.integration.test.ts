@@ -84,7 +84,7 @@ describe("확인하고 공개 — 한 동작, 한 트랜잭션", () => {
     const id = newProblem();
     const versionId = saveDraft(id, `공개 대상 ${uniq()}`);
 
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
 
     expect(psql(`select status from problem_versions where id = '${versionId}';`)).toBe(
       "published"
@@ -100,7 +100,7 @@ describe("확인하고 공개 — 한 동작, 한 트랜잭션", () => {
   it("별도 검수자가 승인한 것처럼 기록하지 않는다", () => {
     const id = newProblem();
     const versionId = saveDraft(id, `기록 확인 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
 
     const row = psql(
       `select review_kind || '|' || (submitted_by = published_by)::text
@@ -112,11 +112,11 @@ describe("확인하고 공개 — 한 동작, 한 트랜잭션", () => {
   it("같은 버전을 다시 공개해도 아무것도 바뀌지 않는다 — 중복 클릭", () => {
     const id = newProblem();
     const versionId = saveDraft(id, `중복 클릭 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
     const first = psql(`select published_at from problem_versions where id = '${versionId}';`);
 
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
 
     expect(psql(`select published_at from problem_versions where id = '${versionId}';`)).toBe(
       first
@@ -132,13 +132,13 @@ describe("확인하고 공개 — 한 동작, 한 트랜잭션", () => {
   it("지난 공개본은 되살리지 않는다 — 수정 초안을 만들어야 한다", () => {
     const id = newProblem();
     const v1 = saveDraft(id, `1판 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v1}'; select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
     const v2 = saveDraft(id, `2판 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${v2}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v2}'; select confirm_and_publish_problem_version('${v2}', '${ADMIN_ID}');`);
 
     expect(psql(`select status from problem_versions where id = '${v1}';`)).toBe("archived");
     const err = psqlExpectError(
-      `select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`
+      `update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v1}'; select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`
     );
     expect(err).toContain("지난 공개본");
   });
@@ -149,10 +149,10 @@ describe("공개본은 고치지 않는다 — 수정은 새 버전이다", () =
     const id = newProblem();
     const first = `원래 지문 ${uniq()}`;
     const v1 = saveDraft(id, first);
-    psql(`select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v1}'; select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
 
     const v2 = saveDraft(id, `고친 지문 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${v2}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v2}'; select confirm_and_publish_problem_version('${v2}', '${ADMIN_ID}');`);
 
     expect(psql(`select passage from problem_versions where id = '${v1}';`)).toBe(first);
     expect(v2).not.toBe(v1);
@@ -161,7 +161,7 @@ describe("공개본은 고치지 않는다 — 수정은 새 버전이다", () =
   it("작업 중인 초안이 있으면 새 초안을 만들지 않고 그것을 고친다", () => {
     const id = newProblem();
     const v1 = saveDraft(id, `1판 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${v1}'; select confirm_and_publish_problem_version('${v1}', '${ADMIN_ID}');`);
 
     const a = saveDraft(id, `수정 중 ${uniq()}`);
     const b = saveDraft(id, `더 수정 ${uniq()}`);
@@ -178,14 +178,14 @@ describe("키워드 없이도 공개된다 — 다만 구성 후보는 아니다
   it("키워드가 없어도 공개까지 간다", () => {
     const id = newProblem();
     const versionId = saveDraft(id, `키워드 없음 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
     expect(psql(`select status from problems where id = '${id}';`)).toBe("confirmed");
   });
 
   it("그 사유가 no_keyword 로 드러난다", () => {
     const id = newProblem();
     const versionId = saveDraft(id, `사유 확인 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
     expect(
       psql(`select readiness from problem_composition_readiness where problem_id = '${id}';`)
     ).toBe("no_keyword");
@@ -194,7 +194,7 @@ describe("키워드 없이도 공개된다 — 다만 구성 후보는 아니다
   it("키워드를 붙이면 후보가 된다", () => {
     const id = newProblem();
     const versionId = saveDraft(id, `키워드 붙임 ${uniq()}`);
-    psql(`select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
+    psql(`update problem_versions set render_check = coalesce(render_check, '{"ok": true, "issues": []}'::jsonb), explanation_en = coalesce(nullif(explanation_en, ''), 'Test explanation.') where id = '${versionId}'; select confirm_and_publish_problem_version('${versionId}', '${ADMIN_ID}');`);
 
     const keywordId = psql(
       `insert into subject_keywords (subject_id, label) values ('${SUBJECT_ID}', '8차키워드 ${uniq()}') returning id;`
