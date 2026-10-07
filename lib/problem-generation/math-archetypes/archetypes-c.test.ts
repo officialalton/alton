@@ -16,9 +16,9 @@ const HARD_C = ALL_C.filter((a) => !a.figureItem);
 const FIG_C = ALL_C.filter((a) => a.figureItem);
 
 describe("C 담당 hard 원형 구성", () => {
-  it("percentages 20·area_volume 24·circles 28 개, 세부 패턴마다 4개이고 연산자가 모두 다르다", () => {
+  it("percentages 20·area_volume 24·circles 32 개, 세부 패턴마다 4개이고 연산자가 모두 다르다", () => {
     const by = (s: string) => HARD_C.filter((a) => a.skill === s).length;
-    expect(by("percentages")).toBe(20); expect(by("area_volume")).toBe(24); expect(by("circles")).toBe(28);
+    expect(by("percentages")).toBe(20); expect(by("area_volume")).toBe(24); expect(by("circles")).toBe(32); // 28 + G10 SPR 보강(cib.circle_numeric 4개)
     const byKind = new Map<string, string[]>();
     for (const a of HARD_C) byKind.set(`${a.skill}.${a.kind}`, [...(byKind.get(`${a.skill}.${a.kind}`) ?? []), a.operator]);
     for (const [k, ops] of byKind) { expect(ops.length, k).toBe(4); expect(new Set(ops).size, k).toBe(4); }
