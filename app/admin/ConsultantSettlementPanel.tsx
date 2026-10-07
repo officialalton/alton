@@ -22,7 +22,7 @@ import { useViewerTimezone } from "@/app/components/ViewerTimezoneProvider";
 import { fmtDateTime } from "@/lib/format-datetime";
 import PayoutAccountAdminActions from "./PayoutAccountAdminActions";
 import { getPayoutAccountStaffPermissionAction } from "./teacher-payout-accounts-actions";
-import { compareManualWithSuggestion, suggestConsultantPeriodAmount } from "@/lib/consultant-agreements/suggestion";
+import { compareManualWithSuggestion, contractAutoFillNote, findOverlappingPeriods, overlapWarning, suggestConsultantPeriodAmount } from "@/lib/consultant-agreements/suggestion";
 import { COMPANY_TIME_ZONE, payoutDateForPeriodEnd, previousPayoutPeriod } from "@/lib/payout/payout-schedule";
 
 // 2026-09-29 — Consultants 탭에 있던 `정산` 섹션을 Payouts 탭의 `컨설턴트 정산`
@@ -211,6 +211,11 @@ export default function ConsultantSettlementPanel() {
               기간 등록
             </button>
           </form>
+          {(() => {
+            // 이중 계상 방지: 같은 기간과 겹치는 정산이 이미 있으면 경고(차단 아님). 계약 유무와 무관하게 보여 준다.
+            const w = overlapWarning(findOverlappingPeriods(periods ?? [], newStart, newEnd));
+            return w ? <p className="mb-2 text-[12px] text-amber-700 font-bold" data-testid="overlap-warning">⚠ {w}</p> : null;
+          })()}
           {contractFee && (() => {
             const suggestion = suggestConsultantPeriodAmount(contractFee, newStart, newEnd);
             const warning = compareManualWithSuggestion(suggestion, { amountMajor: newAmount === "" ? null : Number(newAmount), currency: newCurrency });
@@ -224,6 +229,23 @@ export default function ConsultantSettlementPanel() {
                     <> · {suggestion.reason}</>
                   )}
                 </p>
+                {suggestion.ok && (
+                  <button
+                    type="button"
+                    data-testid="fill-from-contract"
+                    className="mt-1 text-[12px] font-bold px-3 py-1 rounded-lg border-[1.5px] border-ink text-ink"
+                    onClick={() => {
+                      const note = contractAutoFillNote(contractFee.agreementId, suggestion.basis);
+                      const ok = window.confirm(`계약서 기준으로 금액을 채웁니다.\n\n기간: ${newStart} ~ ${newEnd}\n금액: ${suggestion.amountMajor.toLocaleString("en-US")} ${suggestion.currency}\n근거: ${suggestion.basis}\n계약: ${contractFee.agreementId}\n\n채운 뒤에도 금액·통화를 직접 고칠 수 있고, 메모에 근거가 기록됩니다. 진행할까요?`);
+                      if (!ok) return;
+                      setNewAmount(String(suggestion.amountMajor));
+                      setNewCurrency(suggestion.currency);
+                      setNewNote(note);
+                    }}
+                  >
+                    계약 기준으로 채우기
+                  </button>
+                )}
                 {warning && <p className="text-amber-700 font-bold mt-0.5" data-testid="suggestion-warning">⚠ {warning} (등록은 막지 않습니다)</p>}
               </div>
             );

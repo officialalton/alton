@@ -85,7 +85,7 @@ export async function listPayoutConsultantsAction() {
   return all.filter((c) => c.email !== null);
 }
 
-export type ConsultantContractFee = { monthlyFeeMinor: number; currency: "KRW" | "USD"; startDate: string | null; signedAt: string | null } | null;
+export type ConsultantContractFee = { agreementId: string; monthlyFeeMinor: number; currency: "KRW" | "USD"; startDate: string | null; endDate: string | null; signedAt: string | null } | null;
 
 /**
  * 서명 완료된 컨설턴트 계약서(teacher_contracts.agreement_form='consultant_services', status='signed')의 월 보수·통화·시작일.
@@ -96,7 +96,7 @@ export async function getConsultantContractFeeAction(consultantId: string): Prom
   const admin = createAdminClient();
   const { data, error } = await admin
     .from("teacher_contracts")
-    .select("inputs_snapshot, signed_at")
+    .select("id, inputs_snapshot, signed_at")
     .eq("teacher_id", consultantId)
     .eq("agreement_form", "consultant_services")
     .eq("status", "signed")
@@ -104,11 +104,11 @@ export async function getConsultantContractFeeAction(consultantId: string): Prom
     .limit(1);
   if (error) throw new Error(error.message);
   const row = data?.[0];
-  const snap = (row?.inputs_snapshot ?? null) as { monthly_fee_minor?: number | string | null; monthly_fee_currency?: string | null; start_date?: string | null } | null;
+  const snap = (row?.inputs_snapshot ?? null) as { monthly_fee_minor?: number | string | null; monthly_fee_currency?: string | null; start_date?: string | null; end_date?: string | null } | null;
   const minor = snap?.monthly_fee_minor == null ? NaN : Number(snap.monthly_fee_minor);
   const currency = snap?.monthly_fee_currency;
   if (!snap || !Number.isInteger(minor) || minor <= 0 || (currency !== "KRW" && currency !== "USD")) return null;
-  return { monthlyFeeMinor: minor, currency, startDate: snap.start_date ?? null, signedAt: (row?.signed_at as string | null) ?? null };
+  return { agreementId: row?.id as string, monthlyFeeMinor: minor, currency, startDate: snap.start_date ?? null, endDate: snap.end_date ?? null, signedAt: (row?.signed_at as string | null) ?? null };
 }
 
 export type SaveConsultantAccountResult = { status: "saved"; changedFields: string[] } | { status: "invalid"; message: string };

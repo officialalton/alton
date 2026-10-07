@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { compareManualWithSuggestion, suggestConsultantPeriodAmount } from "./suggestion";
+import { compareManualWithSuggestion, contractAutoFillNote, findOverlappingPeriods, overlapWarning, suggestConsultantPeriodAmount } from "./suggestion";
 
 const KRW = { monthlyFeeMinor: 3_100_000, currency: "KRW" as const, startDate: null };
 const USD = { monthlyFeeMinor: 300_000, currency: "USD" as const, startDate: null };
@@ -48,5 +48,50 @@ describe("compareManualWithSuggestion", () => {
   it("금액 미입력이면 금액 경고를 하지 않고, 제안 없음이면 항상 null", () => {
     expect(compareManualWithSuggestion(s, { amountMajor: null, currency: "KRW" })).toBeNull();
     expect(compareManualWithSuggestion({ ok: false, reason: "x" }, { amountMajor: 5, currency: "KRW" })).toBeNull();
+  });
+});
+
+describe("계약 기준 자동 채움 — 계산 규칙", () => {
+  const FEE = (monthlyFeeMinor: number, over: object = {}) => ({ monthlyFeeMinor, currency: "KRW" as const, startDate: null, ...over });
+  const amt = (r: ReturnType<typeof suggestConsultantPeriodAmount>) => (r.ok ? r.amountMajor : NaN);
+
+  it("반올림 나머지는 달의 마지막(후반) 지급에 붙는다 — 평년 2월과 윤년 2월 모두 합이 월 보수와 같다", () => {
+    const f = FEE(1_000_000);
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-02-01", "2026-02-15"))).toBe(535_714);
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-02-16", "2026-02-28"))).toBe(464_286);
+    expect(amt(suggestConsultantPeriodAmount(f, "2028-02-01", "2028-02-15"))).toBe(517_241);
+    expect(amt(suggestConsultantPeriodAmount(f, "2028-02-16", "2028-02-29"))).toBe(482_759);
+  });
+
+  it("시작 월 일할: 10/10 시작이면 1~15일분은 6일치, 16일~말일분은 16일치", () => {
+    const f = FEE(3_100_000, { startDate: "2026-10-10" });
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-10-01", "2026-10-15"))).toBe(600_000);
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-10-16", "2026-10-31"))).toBe(1_600_000);
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-10-01", "2026-10-31"))).toBe(2_200_000);
+  });
+
+  it("종료 월 일할: 10/20 종료면 16일~말일분은 5일치, 종료 이후 달은 0", () => {
+    const f = FEE(3_100_000, { endDate: "2026-10-20" });
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-10-01", "2026-10-15"))).toBe(1_500_000);
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-10-16", "2026-10-31"))).toBe(500_000);
+    expect(amt(suggestConsultantPeriodAmount(f, "2026-11-01", "2026-11-15"))).toBe(0);
+  });
+
+  it("USD는 센트 계산 후 달러로: 윤년 2월 합이 월 보수와 같다", () => {
+    const f = { monthlyFeeMinor: 300_000, currency: "USD" as const, startDate: null };
+    const a = amt(suggestConsultantPeriodAmount(f, "2028-02-01", "2028-02-15"));
+    const b = amt(suggestConsultantPeriodAmount(f, "2028-02-16", "2028-02-29"));
+    expect(a).toBe(1551.72);
+    expect(Math.round((a + b) * 100)).toBe(300_000);
+  });
+
+  it("메모 형식과 이중 계상 경고", () => {
+    expect(contractAutoFillNote("agr-1", "2026-10 1~15일분(월 보수 × 15/31)")).toBe("from contract agr-1, 2026-10 1~15일분(월 보수 × 15/31)");
+    const existing = [{ periodStart: "2026-10-01", periodEnd: "2026-10-15" }, { periodStart: "2026-09-16", periodEnd: "2026-09-30" }];
+    expect(findOverlappingPeriods(existing, "2026-10-01", "2026-10-15")).toHaveLength(1);
+    expect(findOverlappingPeriods(existing, "2026-10-16", "2026-10-31")).toHaveLength(0);
+    expect(findOverlappingPeriods(existing, "2026-10-10", "2026-10-31")).toHaveLength(1); // 하루라도 겹치면
+    expect(overlapWarning(findOverlappingPeriods(existing, "2026-10-01", "2026-10-15"))).toMatch(/이중 지급/);
+    expect(overlapWarning([])).toBeNull();
   });
 });
