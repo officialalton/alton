@@ -1,5 +1,5 @@
 // 생성기 결함 탐지(결정적, LLM 없음). "렌더링이 되는가"(그림 게이트)와 "자료가 정확한가"를 분리하기 위한 별도 검사.
-// 결함이 하나라도 있으면 이전에 auto_passed 였더라도 게시 대상에서 제외한다(마이그레이션 402 의 defect_flags → review_env_ready=false).
+// 결함이 하나라도 있으면 이전에 auto_passed 였더라도 게시 대상에서 제외한다(마이그레이션 403 의 defect_flags → review_env_ready=false).
 type Json = Record<string, unknown>;
 const isObj = (v: unknown): v is Json => typeof v === "object" && v !== null && !Array.isArray(v);
 

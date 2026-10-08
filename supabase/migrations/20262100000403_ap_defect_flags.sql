@@ -1,4 +1,4 @@
--- 402: 생성기 결함 플래그. "렌더링이 되는가"(render_verified)와 "자료가 정확한가"를 분리한다.
+-- 403: 생성기 결함 플래그. "렌더링이 되는가"(render_verified)와 "자료가 정확한가"를 분리한다.
 -- defect_flags 가 비어 있지 않으면(중괄호 미닫힘 문자열 stimulus, 표 본문 누락·모순, [object Object] 보기 등) 이전에 auto_passed 였더라도
 -- review_env_ready 가 false 가 되어 문제 변환·게시·launch 경로(400 의 가드)가 모두 막힌다. 플래그는 lib/ap-generation/generator-defects.ts 가 계산한다.
 -- 추가형: 컬럼 추가 + 생성 컬럼 식 교체(PG17 SET EXPRESSION). 기존 행·뷰는 그대로 유지된다.
