@@ -64,7 +64,7 @@ export function buildStock(runs: Record<string, RawCand[]>, opts: BuildOpts = {}
   for (const it of live) {
     const k = `${it.family}|${it.kind}|${contentSignature(it)}`; const can = bySig.get(k);
     if (!can) { bySig.set(k, it); it.canonicalKey = it.stockKey; continue; }
-    it.validation = "exact_duplicate"; it.duplicateOf = can.stockKey; it.canonicalKey = can.stockKey; it.duplicateReason = `exact content match with ${can.stockKey}`; it.selectedForSample = false;
+    it.validation = "exact_duplicate"; it.duplicateOf = can.stockKey; it.canonicalKey = can.stockKey; it.duplicateReason = `exact content match with ${can.stockKey}`; it.selectedForSample = false; it.legacyReserve = false;
     if (can.apSubjectCode !== it.apSubjectCode && !can.sharedWith.includes(it.apSubjectCode)) can.sharedWith.push(it.apSubjectCode);
   }
   // 문항군(변형 묶음): 같은 원형+토픽(코드 템플릿의 숫자 변형) 또는 문장 3-gram 유사(>0.8). 반려하지 않는다.

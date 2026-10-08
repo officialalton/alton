@@ -27,7 +27,7 @@ const L: string[] = [];
 const kindName: Record<string, string> = { mc: "MC", frq_bundle: "FRQ" };
 L.push("# AP 문항 은행 재고 보고 (2026-10-08)", "", `기준: 최신 게이트 \`${LATEST_GATE}\` (코드 우선 파이프라인 최종: 결정적 게이트 + Opus 독립 풀이 + Sonnet 5기준 검토 + 난이도 별도 + Fable 표본). 이전 게이트(런1, LLM 생성)로 통과한 항목은 **재검증 필요(needs_revalidation)**이며 자동 승격하지 않는다. 이 보고는 LLM 호출 없이 기존 결과 파일로 계산했다.`, "",
   "## 정의", "", "- **검증 상태**(validation): `rejected` / `needs_revalidation`(최신 게이트 이전 통과) / `auto_passed`(최신 게이트 통과) / `exact_duplicate`(완전 중복, canonical 에 연결·재고 제외).",
-  "- **게시 후 검수 상태**(expert_status): `unreviewed` / `in_review` / `approved` / `issues_reported` — 검수 환경에 게시된 뒤 기존 오류 신고 흐름과 표본 승인으로 추적하며 **게시를 막지 않는다**. **검수 환경 게시 가능 = auto_passed + 그래프 렌더링 + 학생 화면 검증**(현재 둘 다 미완료이므로 0). 프로덕션(launch)은 별도 게이트: 승인 서명 또는 검수 기간 종료 + 미해결 신고 0.",
+  "- **게시 후 검수 상태**(expert_status): `unreviewed` / `in_review` / `approved` / `issues_reported` — 검수 환경에 게시된 뒤 기존 오류 신고 흐름과 표본 승인으로 추적하며 **게시를 막지 않는다**. **검수 환경 게시 가능 = auto_passed + 그래프 렌더링 + 학생 화면 검증**(현재 둘 다 미완료이므로 0). 프로덕션(launch)은 별도 게이트: review_env_ready + 미해결 launch 차단 결함 0(전문가 승인·검수 기간은 조건 아님, 신고 0건은 검수 완료 증거 아님).",
   "- **선택**(selectedForSample)은 별개 속성이며 재고 여부와 무관하다. `legacy reserve`는 샘플에서 선택되지 않은 통과분(과거 표기)이다.",
   "- **문항군(item family)**: 같은 원형·토픽의 숫자/표현 변형 또는 문장 3-gram 유사(>0.8). **반려하지 않으며** 재고에 모두 남기되 군으로 묶는다. **완전 중복(exact)만** 제외한다.",
   `- **칸**(cell) = 토픽 × 주 스킬 × 구조 × 계산기. 칸 채움 = 최신 게이트 통과 문항군별 min(문항 수, ${VARIANT_CAP}). 낡은 통과·숫자 변형만으로는 칸이 채워지지 않는다.`, "- **AB/BC 공유**: AB 재고는 BC 에도 쓸 수 있고(공통 content_key) 합계에서는 소유 과목(AB)에서 **한 번만** 센다. BC 열의 '공유 사용 가능'은 합산에서 제외.", "");

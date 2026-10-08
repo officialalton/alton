@@ -7,7 +7,7 @@
 |---|---|---|
 | `candidate` | 후보 재고(`ap_candidate_items`, 학생 비노출) | 생성 + 자동 게이트 |
 | `review_env` | 검수 환경에 **게시**(`problems` 공개, exam_system='ap') | `review_state = auto_passed` AND `render_verified` AND `screen_verified` (= `review_env_ready`) |
-| `launch` | 프로덕션 공개 | `review_env` 에서 (승인 서명 `expert_status=approved`) 또는 (검수 기간 종료 AND 미해결 신고 0 AND `issues_reported` 아님) — 뷰 `ap_launch_ready_v` |
+| `launch` | 프로덕션 공개 | `review_env` 에서 **최신 자동 게이트 통과(`auto_passed`) + 필수 그래프/자료 렌더링 + 학생 화면 검증(`review_env_ready`) + 미해결 launch 차단 결함 0**(오답 키·복수 정답·조건 누락·그림/표 오류 대장 `ap_launch_blockers`, 그리고 현재 버전의 미해결 `wrong_key`/`flawed_problem` 신고) — 뷰 `ap_launch_ready_v`(마이그레이션 395). 전문가 승인·검수 기간 만료는 조건이 아니다 |
 - 검증 상태(review_state): candidate / rejected / needs_revalidation / auto_passed / exact_duplicate. 선택(`used_in_sample`)·`legacy_reserve`는 별개.
 - 게시 후 검수 상태(expert_status): `unreviewed` / `in_review` / `approved` / `issues_reported`. 신고에서 자동 파생되는 값은 `ap_item_review_status_v.open_reports` 로 확인(수동 값과 함께 사용).
 - 자동 게이트 통과(auto_passed)는 **게시 승인이 아니다**: 렌더링·학생 화면 검증을 끝내야 `review_env_ready`가 true 가 된다. 현재 두 검증 모두 미완료 → 검수 환경 게시 가능 0건.
@@ -15,10 +15,10 @@
 ## 2. 흐름: 후보 → 게시(검수 환경) → 신고 → 수정(새 버전) → 출시
 1. 후보 생성·자동 검수(코드 게이트 → 독립 풀이 → 검토) → `auto_passed`.
 2. 그래프/표 렌더링(`stimulus.data` → 그림) + 학생 화면(영어 UI, 계산기·타이머·접근성) 검증 → `render_verified`, `screen_verified` = true.
-3. `problems`/`problem_versions`로 **게시**(exam_system='ap', ap_subject, 키워드·스킬, 해설 영어 포함). `ap_candidate_items.problem_id/problem_version_id` 연결, `release_tier='review_env'`, `review_period_ends_at` 설정. 기존 문제은행 게이트(영어 해설·render_check·정답 키 필수, 공개 버전 불변)가 그대로 적용된다.
+3. `problems`/`problem_versions`로 **게시**(exam_system='ap', ap_subject, 키워드·스킬, 해설 영어 포함). `ap_candidate_items.problem_id/problem_version_id` 연결, `release_tier='review_env'`. 기존 문제은행 게이트(영어 해설·render_check·정답 키 필수, 공개 버전 불변)가 그대로 적용된다.
 4. 검수자(교사·외부 검수자)는 검수 환경에서 풀고, **기존 오류 신고 흐름**(마이그레이션 `20261940000000` 신고, `…360` 확인/수정됨 분류, 판정 verdict)으로 신고한다. 병렬 신고 시스템은 만들지 않는다.
 5. 관리자가 신고를 확인(`problem_error_report_confirm`) → 문항 수정은 **새 `problem_versions`**(공개 버전 불변 규칙) → 신고는 '수정됨'으로 자동 분류. 해당 후보의 `problem_version_id`를 새 버전으로 갱신, `expert_status`는 `issues_reported` → 수정 후 `in_review`.
-6. 표본 승인(서명) 또는 검수 기간 종료 + 미해결 신고 0 → `ap_launch_ready_v` 에 나타남 → 관리자가 `release_tier='launch'` 로 올림(프로덕션 배포는 별도 오너 승인).
+6. 최신 게이트 + 렌더·학생 화면 검증 + 미해결 차단 결함 0 → `ap_launch_ready_v` 에 나타남 → 관리자가 `release_tier='launch'` 로 올림(프로덕션 배포는 별도 오너 승인). **신고가 없다는 사실을 검수 완료의 증거로 쓰지 않는다**(검수 기한·알림 기능도 두지 않는다). 사후 전문가 검수와 오류 신고는 launch 이후에도 계속되며, 결함이 신고되면 `ap_launch_blockers` 로 분류해 새 버전으로 고친다.
 7. 세트 구성: 세트 조립 시 N개를 고른다(칸 목표·공식 비중). 한 세트의 **look-alike 상한은 세트 단위**로 두고(은행 단위 아님), 같은 문항군에서 세트당 최대 2개.
 
 ## 3. 표식(이전 적재, 삭제 없음) — 오너 실행용
@@ -40,3 +40,9 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 
 ## 4. 점검(파일 vs DB)
 `npx tsx scripts/ap-generation/stock.ts && npx tsx scripts/ap-generation/stock-consistency.ts` (비프로덕션, 읽기 전용): `ap_stock_summary_v` 와 파일 집계를 과목×종류별로 비교, 불일치 시 종료 코드 1. 로컬 검증용 SQL 은 `--emit-sql`(트랜잭션+롤백).
+
+
+## 5. 갱신(마이그레이션 395, 2026-10-08)
+- `legacy_reserve`/`used_in_sample` 은 완전 중복·반려 행에서 false 로 정정하고 불변식(체크 제약)을 추가했다. 요약 뷰는 두 값을 `auto_passed`/`needs_revalidation` 행에서만 센다(파일 집계와 같은 정의).
+- 재고·부족분(`ap_refresh_stock_cells`, `ap_stock_shortfall_v`)은 이 두 컬럼을 읽지 않으므로 영향이 없다. 로컬 전후 비교(783행 적재 → 395 적용): 요약 8행 중 변한 값은 AB MC `legacy_reserve` 93→89 한 곳뿐, ap_stock_cells 130칸 전후 동일(차집합 0/0). 로컬에는 부족분 목표(`ap_stock_targets`)가 없어 shortfall 뷰는 0행이므로 같은 비교를 비프로덕션에서 한 번 더 실행해야 한다(`stock-consistency` 후 shortfall 전후 diff).
+- 394 가 추가했던 `review_period_ends_at`, `signoff_by`, `signoff_at` 컬럼은 제거(로컬에서만 존재, 비어 있음). `ap_launch_blockers` 대장 신설. RLS 는 켜고 정책은 두지 않아 서비스 롤만 접근한다.

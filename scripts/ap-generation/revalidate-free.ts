@@ -46,7 +46,7 @@ for (const it of items) {
     });
   } else {
     const parts = (p.parts as any[]).map((x) => ({ ...x, skill_codes: x.skill_codes ?? [] })); // eslint-disable-line @typescript-eslint/no-explicit-any
-    const pack = { archetype: "legacy", template: p.template ?? "", topic: it.keywordCode, skill: it.skillPrimary, calculator: p.calculator_part ?? "na", title: p.title ?? "", stimulus: p.stimulus ?? { kind: "", description: "" }, parts, total_points: p.total_points, est_minutes: p.est_minutes ?? 15, facts: [] } as FrqPack;
+    const pack = { archetype: "legacy", template: p.template ?? "", topic: it.keywordCode, skill: it.skillPrimary, calculator: p.calculator_part ?? "na", title: p.title ?? "", stimulus: typeof p.stimulus === "string" ? { kind: "text", description: p.stimulus } : (p.stimulus ?? { kind: "", description: "" }), parts, total_points: p.total_points, est_minutes: p.est_minutes ?? 15, facts: [] } as FrqPack;
     fails.structure.push(...gateFrq(it.apSubjectCode, pack, skills), ...calibrateFrq(pack, it.apSubjectCode));
     const r = runPy(p.verification_code); if (!r.ok) fails.computation.push(`verification_${r.err || "error"}`); else { const chk = (r.out?.checks as { part: string; pass: boolean }[]) ?? []; if (!chk.length && !(r.out?.conceptual_parts as unknown[])?.length) fails.computation.push("no_checks"); chk.filter((k) => !k.pass).forEach((k) => fails.computation.push(`part_${k.part}_numeric_check_failed`)); }
   }
