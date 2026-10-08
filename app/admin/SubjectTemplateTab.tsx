@@ -218,6 +218,9 @@ function SubjectDetailEditor({
   onArchived: (reason: string | null) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
+  const [tab, setTab] = useState<"sessions" | "keywords">("sessions");
+  const [openKeywordUnits, setOpenKeywordUnits] = useState<Set<string>>(new Set()); // 회차별 키워드 선택기: 기본 접힘
+  const [allOpen, setAllOpen] = useState(false);
   const [removingUnitId, setRemovingUnitId] = useState<string | null>(null);
   const [keywords, setKeywords] = useState(subject.keywords ?? []);
   const [keywordError, setKeywordError] = useState<string | null>(null);
@@ -328,6 +331,18 @@ function SubjectDetailEditor({
         className="text-[20px] font-extrabold text-ink mb-5 w-full px-2 py-1 border-[1.5px] border-transparent hover:border-grey-200 focus:border-grey-200 rounded-lg -ml-2"
       />
 
+      <UnderlineSubTabs
+        className="mb-4"
+        items={[
+          { id: "sessions", label: "회차 구성" },
+          { id: "keywords", label: "키워드 사전" },
+        ]}
+        activeId={tab}
+        onSelect={setTab}
+      />
+
+      {/* 키워드 사전 탭은 상태를 보존하려고 숨기기만 한다(언마운트하지 않음). */}
+      <div hidden={tab !== "keywords"}>
       {/* 과목 공용 키워드 사전(2026-09-09) — 2026-10-08부터 폴더 기반 관리 화면.
           여기서 만든 키워드가 아래 회차별 태깅, 교사 운영 커리큘럼 오버레이, 교재/문제
           태깅에서 그대로 재사용되는 원본이다(키워드 id는 이름·폴더를 바꿔도 그대로). */}
@@ -345,6 +360,26 @@ function SubjectDetailEditor({
         </p>
       )}
 
+      </div>
+
+      <div hidden={tab !== "sessions"}>
+      {units.length > 0 && (
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-[12px] text-grey-500">
+            {units.length}회차{keywords.length > 0 ? ` · 키워드 ${keywords.length}개` : ""}
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setAllOpen((v) => !v);
+              setOpenKeywordUnits(allOpen ? new Set() : new Set(units.map((x) => x.id)));
+            }}
+            className="text-[12px] font-semibold text-grey-600 border-[1.5px] border-grey-200 rounded-lg px-2.5 py-1"
+          >
+            {allOpen ? "키워드 모두 접기" : "키워드 모두 펼치기"}
+          </button>
+        </div>
+      )}
       {units.map((u, idx) => (
         <div
           key={u.id}
@@ -354,6 +389,7 @@ function SubjectDetailEditor({
             <span className="text-[12px] font-bold text-grey-500 w-14 shrink-0">
               {u.position}회차
             </span>
+            <LessonBadges u={u} />
             <input
               defaultValue={u.unitTitle}
               onBlur={(e) => handleField(u.id, "unitTitle", e.target.value)}
@@ -368,7 +404,19 @@ function SubjectDetailEditor({
           />
           {keywords.length > 0 && (
             <div className="mb-2">
+              <button
+                type="button"
+                aria-expanded={openKeywordUnits.has(u.id)}
+                aria-label={`${u.unitTitle} 회차 키워드 ${openKeywordUnits.has(u.id) ? "접기" : "펼치기"}`}
+                onClick={() => setOpenKeywordUnits((prev) => { const n = new Set(prev); if (n.has(u.id)) n.delete(u.id); else n.add(u.id); return n; })}
+                className="text-[12px] font-semibold text-grey-600 mb-1 focus-visible:outline focus-visible:outline-2 rounded"
+              >
+                <span aria-hidden="true" className="inline-block w-4 text-grey-400">{openKeywordUnits.has(u.id) ? "▾" : "▸"}</span>
+                키워드 {(u.keywordIds ?? []).length}개
+              </button>
+              {openKeywordUnits.has(u.id) && (
               <GroupedKeywordList
+                defaultOpen={false}
                 items={keywords}
                 otherLabel="기타"
                 selectedIds={u.keywordIds ?? []}
@@ -392,6 +440,7 @@ function SubjectDetailEditor({
                   );
                 }}
               />
+              )}
             </div>
           )}
           <div className="flex items-center gap-3">
@@ -434,6 +483,7 @@ function SubjectDetailEditor({
       >
         + 회차 추가
       </button>
+      </div>
 
       <div className="border-t border-grey-200 pt-5">
         {archivedNotice && (
@@ -476,5 +526,22 @@ function SubjectDetailEditor({
         {deleteError && <p className="text-[12px] text-red mt-2">{deleteError}</p>}
       </div>
     </div>
+  );
+}
+
+const KIND_LABEL: Record<string, string> = { content: "내용", unit_review: "단원 복습", exam_prep: "시험 준비" };
+const TRACK_LABEL: Record<string, string> = { compact: "컴팩트", full: "전체 과정" };
+const CHIP = "text-[10.5px] font-bold px-1.5 py-0.5 rounded bg-grey-100 text-grey-600 shrink-0";
+
+/** AP 회차 배지(종류·단원·과정·수업 분). 일반 회차(lessonKind 없음)에는 아무것도 그리지 않는다. */
+function LessonBadges({ u }: { u: SubjectUnit }) {
+  if (!u.lessonKind) return null;
+  return (
+    <span className="flex items-center gap-1" data-testid="lesson-badges">
+      <span className={CHIP}>{KIND_LABEL[u.lessonKind] ?? u.lessonKind}</span>
+      {u.cedUnitCode && <span className={CHIP}>Unit {u.cedUnitCode}</span>}
+      {u.trackSet && <span className={CHIP}>{TRACK_LABEL[u.trackSet] ?? u.trackSet}</span>}
+      {u.estMinutes ? <span className={CHIP}>{u.estMinutes}분</span> : null}
+    </span>
   );
 }

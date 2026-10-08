@@ -36,7 +36,8 @@ export default function KeywordDictionaryManager({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
+  // 2026-10-08: 기본은 전부 접힘(펼친 폴더만 기억). 열 때마다 처음부터 접혀 있다.
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [newKeyword, setNewKeyword] = useState("");
   const [newKeywordFolder, setNewKeywordFolder] = useState<string>("");
   const [addingFolder, setAddingFolder] = useState(false);
@@ -84,13 +85,15 @@ export default function KeywordDictionaryManager({
   const keywordCount = dict.keywords.length;
 
   function toggleSection(key: string) {
-    setCollapsed((prev) => {
+    setExpanded((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
       else next.add(key);
       return next;
     });
   }
+  const expandAll = () => setExpanded(new Set(allSections.map((s) => s.folderId ?? "__other")));
+  const collapseAll = () => setExpanded(new Set());
 
   async function handleAddKeyword() {
     const label = newKeyword.trim();
@@ -195,6 +198,8 @@ export default function KeywordDictionaryManager({
           placeholder="키워드 검색"
           className={FIELD + " flex-1 min-w-[140px]"}
         />
+        <button type="button" onClick={expandAll} className={ICON_BTN}>모두 펼치기</button>
+        <button type="button" onClick={collapseAll} className={ICON_BTN}>모두 접기</button>
         {hasSub && (
           <label className="flex items-center gap-1.5 text-[12px] text-ink">
             <input type="checkbox" checked={showSub} onChange={(e) => setShowSub(e.target.checked)} />
@@ -238,7 +243,7 @@ export default function KeywordDictionaryManager({
       <div className="flex flex-col gap-2" aria-busy={busy}>
         {sections.map((section) => {
           const key = section.folderId ?? "__other";
-          const isOpen = !!query.trim() || !collapsed.has(key);
+          const isOpen = !!query.trim() || expanded.has(key);
           const folderIndex = section.folderId ? dict.folders.findIndex((f) => f.id === section.folderId) : -1;
           const sortedFolderIds = allSections.filter((s) => s.folderId).map((s) => s.folderId as string);
           const sectionIdx = section.folderId ? sortedFolderIds.indexOf(section.folderId) : -1;

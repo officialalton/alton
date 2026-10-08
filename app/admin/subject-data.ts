@@ -19,6 +19,11 @@ export type SubjectUnit = {
   unitTitle: string;
   note: string | null;
   keywordIds?: string[];
+  // AP 회차(20262100000390~): 일반 회차는 모두 null
+  lessonKind?: string | null;
+  trackSet?: string | null;
+  estMinutes?: number | null;
+  cedUnitCode?: string | null;
 };
 
 export type AdminSubject = {
@@ -57,7 +62,7 @@ export async function loadSubjectCatalog(
   const [{ data: units }, { data: keywords }, { data: folderRows }] = await Promise.all([
     selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_template_units")
-      .select("id, subject_id, position, unit_title, note")
+      .select("id, subject_id, position, unit_title, note, lesson_kind, ced_unit_code, est_minutes, track_set")
       .in("subject_id", chunk)
       .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
     selectInChunks(subjectIds, (chunk) => supabase
@@ -110,6 +115,10 @@ export async function loadSubjectCatalog(
       unitTitle: u.unit_title,
       note: u.note,
       keywordIds: keywordIdsByUnit.get(u.id) ?? [],
+      lessonKind: u.lesson_kind ?? null,
+      trackSet: u.track_set ?? null,
+      estMinutes: u.est_minutes ?? null,
+      cedUnitCode: u.ced_unit_code ?? null,
     });
     unitsBySubject.set(u.subject_id, list);
   }

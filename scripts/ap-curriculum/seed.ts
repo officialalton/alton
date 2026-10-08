@@ -9,7 +9,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { connect, selectAll } from "../keywords/db";
 import { buildPlan, diffKeywords, unitDisplayName } from "../../lib/ap-curriculum/plan";
-import { buildLessonPlan, checkLessonPlan, lessonTotals } from "../../lib/ap-curriculum/lessons";
+import { buildLessonPlan, checkLessonPlan, lessonTotals, SCHEDULED_MINUTES_COMPACT } from "../../lib/ap-curriculum/lessons";
 import { validateCurriculum } from "../../lib/ap-curriculum/validate";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
@@ -114,7 +114,7 @@ async function main() {
     const lessons = buildLessonPlan(f, { track });
     const lerrs = checkLessonPlan(f, lessons, { track });
     if (lerrs.length) throw new Error(`회차 계획 오류: ${lerrs.slice(0, 5).join("; ")}`);
-    const { data: tu } = await db.from("subject_template_units").select("id, official_code, position, lesson_kind, track_set").eq("subject_id", subjectId);
+    const { data: tu } = await db.from("subject_template_units").select("id, official_code, position, lesson_kind, track_set, unit_title").eq("subject_id", subjectId);
     const unitCodes = new Set(plan.units.map((u) => u.code));
     // 이전(380) 시드가 만든 CED 단원 단위 행(회차가 아니었던 것)은 정리한다 — 시드 소유 행(source='ced', lesson_kind null, 단원 번호 코드)만.
     const legacy = (tu ?? []).filter((x) => x.lesson_kind === null && x.official_code && unitCodes.has(x.official_code));
@@ -147,9 +147,15 @@ async function main() {
     const taken = new Set(remaining.map((x) => x.position));
     const lessonId = new Map<string, string>(remaining.filter((x) => x.official_code && planCodes.has(x.official_code)).map((x) => [x.official_code as string, x.id]));
     for (const l of lessons) {
-      const meta = { lesson_kind: l.kind, ced_unit_code: l.unitCode, est_minutes: l.estMinutes, track: l.track, track_set: track, suggested_lessons: 1 };
+      const meta = { lesson_kind: l.kind, ced_unit_code: l.unitCode, est_minutes: l.estMinutes, track: l.track, track_set: track, scheduled_minutes: track === "compact" ? SCHEDULED_MINUTES_COMPACT : l.estMinutes, suggested_lessons: 1 };
       const id = lessonId.get(l.code);
-      if (id) { await ok(db.from("subject_template_units").update(meta).eq("id", id), `회차 갱신 ${l.code}`); continue; }
+      if (id) {
+        // 같은 코드의 기존 시드 회차(예: 100분판 compact): 길이·메타 갱신, 제목·메모는 시드가 만든 모양일 때만 새 계획으로 교체(관리자가 바꾼 제목 보존)
+        const cur = (tu ?? []).find((x) => x.id === id) as { unit_title?: string } | undefined;
+        const rename = !cur?.unit_title || /^Unit \d+ · Lesson |^Exam Prep /.test(cur.unit_title) ? { unit_title: l.title, note: l.note } : { note: l.note };
+        await ok(db.from("subject_template_units").update({ ...meta, ...rename }).eq("id", id), `회차 갱신 ${l.code}`);
+        continue;
+      }
       let position = l.position;
       while (taken.has(position)) position += 1000;
       taken.add(position);
@@ -157,6 +163,9 @@ async function main() {
       if (error) throw new Error(`회차 ${l.code}: ${error.message}`);
       lessonId.set(l.code, ins.id);
     }
+    // 재시드: 계획에 있는 회차의 기존 연결을 비우고 새 계획으로 다시 만든다(재배치로 낡은 primary 가 남아 단일-primary 규칙과 충돌하지 않게).
+    const planIds = lessons.map((l) => lessonId.get(l.code) as string);
+    for (let i = 0; i < planIds.length; i += 50) await ok(db.from("subject_template_unit_keywords").delete().in("unit_id", planIds.slice(i, i + 50)), "기존 회차 연결 초기화");
     const links = lessons.flatMap((l) => l.links.map((k) => ({ unit_id: lessonId.get(l.code), keyword_id: idByCode.get(k.contentCode), role: k.role, depth: k.depth })));
     if (links.some((x) => !x.unit_id || !x.keyword_id)) throw new Error("회차 연결 대상 id 누락");
     for (let i = 0; i < links.length; i += 200) await ok(db.from("subject_template_unit_keywords").upsert(links.slice(i, i + 200), { onConflict: "unit_id,keyword_id" }), "회차-키워드 연결");

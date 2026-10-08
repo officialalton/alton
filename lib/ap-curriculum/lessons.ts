@@ -6,17 +6,18 @@
 import type { ApCurriculumFile, ApSubKeyword, ApTopic } from "./types";
 
 export const BASE_MINUTES = 50; // 부하 1.0 = 50분
-export const LESSON_MINUTES = 50; // (호환) 전체 과정 회차 길이
+export const LESSON_MINUTES = 50;
+export const SCHEDULED_MINUTES_COMPACT = 120; // 예약 길이(수업 110 + 휴식 10) // (호환) 전체 과정 회차 길이
 export type LessonTrackSet = "compact" | "full";
 export type LessonOptions = {
   track: LessonTrackSet;
-  minutes: number; // 회차 길이(분)
+  minutes: number; // 수업 시간(분, 휴식 제외). 표준 수업권 = 120분 예약 중 휴식 10분 제외 110
   lightFactor: number; // light 깊이 키워드의 부하 배율(1 = 전부 충분히 가르침)
   examPrepSessions: 3 | 6;
   foldReview: boolean; // true: 단원 복습을 다음 회차 워밍업·단원 마지막 회차 마무리로 접는다
 };
 export const TRACK_DEFAULTS: Record<LessonTrackSet, LessonOptions> = {
-  compact: { track: "compact", minutes: 100, lightFactor: 0.5, examPrepSessions: 3, foldReview: true },
+  compact: { track: "compact", minutes: 110, lightFactor: 0.4, examPrepSessions: 3, foldReview: true },
   full: { track: "full", minutes: 50, lightFactor: 1, examPrepSessions: 6, foldReview: false },
 };
 export const LESSON_MAX_FACTOR = 1.25; // 한 회차 상한 = 용량 × 1.25

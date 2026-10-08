@@ -34,8 +34,24 @@ const dict: KeywordDictionary = {
 beforeEach(() => vi.clearAllMocks());
 
 describe("KeywordDictionaryManager", () => {
+  const expandAll = () => fireEvent.click(screen.getByRole("button", { name: "모두 펼치기" }));
+
+  it("처음에는 모든 폴더가 접혀 있고, 모두 펼치기/모두 접기와 개별 펼치기가 된다", () => {
+    render(<KeywordDictionaryManager subjectId="s" initial={dict} />);
+    expect(screen.queryByText("Words in Context")).not.toBeInTheDocument();
+    expect(screen.getAllByRole("button", { expanded: false }).length).toBeGreaterThanOrEqual(3);
+    fireEvent.click(screen.getByRole("button", { name: /^Craft and Structure.*\(1\)/ }));
+    expect(screen.getByText("Words in Context")).toBeInTheDocument();
+    expect(screen.queryByText("Inferences")).not.toBeInTheDocument();
+    expandAll();
+    expect(screen.getByText("Inferences")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "모두 접기" }));
+    expect(screen.queryByText("Words in Context")).not.toBeInTheDocument();
+  });
+
   it("폴더 섹션과 개수, 기타, 빈 폴더 안내를 보여준다", () => {
     render(<KeywordDictionaryManager subjectId="s" initial={dict} />);
+    expandAll();
     expect(screen.getByText(/키워드 4개 · 폴더 3개/)).toBeInTheDocument();
     const info = screen.getByTestId("keyword-folder-f1");
     expect(within(info).getByText("(2)")).toBeInTheDocument();
@@ -54,6 +70,7 @@ describe("KeywordDictionaryManager", () => {
 
   it("폴더 접기/펼치기", () => {
     render(<KeywordDictionaryManager subjectId="s" initial={dict} />);
+    expandAll();
     fireEvent.click(screen.getByRole("button", { name: /^Craft and Structure.*\(1\)/ }));
     expect(screen.queryByText("Words in Context")).not.toBeInTheDocument();
   });
@@ -64,6 +81,7 @@ describe("KeywordDictionaryManager", () => {
       value: { folders: dict.folders.filter((f) => f.id !== "f2"), keywords: dict.keywords.map((k) => (k.folderId === "f2" ? { ...k, folderId: null } : k)) },
     });
     render(<KeywordDictionaryManager subjectId="s" initial={dict} />);
+    expandAll();
     fireEvent.click(screen.getByLabelText("Craft and Structure 폴더 삭제"));
     expect(screen.getByRole("alertdialog")).toHaveTextContent("삭제되지 않고 “기타”로 이동");
     fireEvent.click(screen.getByRole("button", { name: "폴더 삭제" }));
@@ -74,6 +92,7 @@ describe("KeywordDictionaryManager", () => {
   it("키워드를 폴더로 옮긴다", async () => {
     vi.mocked(actions.moveKeywordToFolder).mockResolvedValue({ ok: true, value: dict });
     render(<KeywordDictionaryManager subjectId="s" initial={dict} />);
+    expandAll();
     fireEvent.click(screen.getByRole("button", { name: "UAT 키워드" }));
     fireEvent.change(screen.getByLabelText("키워드 폴더 이동"), { target: { value: "f1" } });
     await waitFor(() => expect(actions.moveKeywordToFolder).toHaveBeenCalledWith("k4", "f1"));

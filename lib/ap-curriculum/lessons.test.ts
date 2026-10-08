@@ -32,12 +32,12 @@ describe("AP lesson-level template generator", () => {
     expect(t.coreKeywords + t.lightKeywords).toBe(f.units.reduce((n, u) => n + u.topics.reduce((m, tp) => m + tp.subKeywords.length, 0), 0));
   });
 
-  it("compact AB is ~30 lessons (+-10%), BC ~40 (+-10%); full AB stays the 81-lesson course", () => {
+  it("compact AB is ~30 lessons (+-10%), BC ~40 (+-10%), 110 teaching minutes; full AB stays the 81-lesson course", () => {
     const ab = lessonTotals(buildLessonPlan(get("ap_calculus_ab"), { track: "compact" }));
     const bc = lessonTotals(buildLessonPlan(get("ap_calculus_bc"), { track: "compact" }));
     expect(Math.abs(ab.total - 30) / 30).toBeLessThanOrEqual(0.1);
     expect(Math.abs(bc.total - 40) / 40).toBeLessThanOrEqual(0.1);
-    expect(ab.minutes).toBe(100);
+    expect(ab.minutes).toBe(110);
     expect(lessonTotals(buildLessonPlan(get("ap_calculus_ab"), { track: "full" })).total).toBe(81);
   });
 
