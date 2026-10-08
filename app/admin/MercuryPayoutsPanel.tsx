@@ -10,6 +10,7 @@ import {
   createResendAttemptAction,
   failOrCancelAttemptAction,
   linkTransactionAction,
+  checkMercuryConnectionAction,
   listMercuryPayoutsAction,
   markManualAttemptSentAction,
   recordActualsAction,
@@ -58,6 +59,7 @@ export default function MercuryPayoutsPanel() {
   const [mercuryEnabled, setMercuryEnabled] = useState(false);
   const [msg, setMsg] = useState<Msg>(null);
   const [busy, setBusy] = useState<string | null>(null);
+  const [conn, setConn] = useState<{ accounts: { id: string; name: string; kind: string; status: string; last4: string | null }[]; payoutAccountConfigured: boolean } | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [form, setForm] = useState<Record<string, string>>({});
   const [exportRange, setExportRange] = useState({ from: "", to: "" });
@@ -96,6 +98,23 @@ export default function MercuryPayoutsPanel() {
         US teachers and consultants are paid in USD by ACH. Korea-based recipients are paid in KRW by international wire created manually in the Mercury dashboard.
         Contract amounts stay in their contract currency; actual USD debits and fees are recorded separately and never added to KRW totals.
       </p>
+      <div className="mb-3 text-[12px]" data-testid="mercury-connection">
+        <button disabled={busy === "conn"} className="font-bold px-2.5 py-1.5 rounded-lg border-[1.5px] border-ink" onClick={async () => {
+          setBusy("conn"); setMsg(null); setConn(null);
+          const res = await checkMercuryConnectionAction();
+          if (res.ok && res.data) { setConn(res.data); setMsg({ tone: "ok", text: `Mercury read connection OK — ${res.data.accounts.length} account(s) visible.` }); }
+          else setMsg({ tone: "error", text: res.ok ? "No data returned." : res.error });
+          setBusy(null);
+        }}>Check Mercury read connection</button>
+        {conn && (
+          <ul className="mt-2 space-y-1">
+            {conn.accounts.map((a) => (
+              <li key={a.id} className="text-grey-700"><span className="font-bold">{a.name || "(unnamed)"}</span> · {a.kind} · {a.status}{a.last4 ? ` · ••••${a.last4}` : ""} · <code className="bg-grey-100 px-1 rounded">{a.id}</code></li>
+            ))}
+            <li className="text-grey-500">{conn.payoutAccountConfigured ? "MERCURY_PAYOUT_ACCOUNT_ID is set." : "Set MERCURY_PAYOUT_ACCOUNT_ID to the id of the account you pay from."}</li>
+          </ul>
+        )}
+      </div>
       <div className="flex flex-wrap gap-2 mb-3 text-[12px]" data-testid="mercury-switches">
         <span className={`px-2 py-1 rounded-full font-bold ${mercuryEnabled ? "bg-green/10 text-green" : "bg-grey-100 text-grey-500"}`}>Mercury API: {mercuryEnabled ? "enabled" : "closed"}</span>
         <span className={`px-2 py-1 rounded-full font-bold ${gateOpen ? "bg-green/10 text-green" : "bg-grey-100 text-grey-500"}`}>Disbursement gate: {gateOpen ? "open" : "closed"}</span>

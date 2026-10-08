@@ -6,7 +6,7 @@
 import { requirePayoutCapability, type PayoutCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requestAttemptPayout, type RequestOutcome } from "@/lib/payout/attempts";
-import { createMercuryProvider, mercuryConfigFromEnv } from "@/lib/payout/providers/mercury";
+import { checkMercuryReadConnection, createMercuryProvider, mercuryConfigFromEnv, type MercuryAccountSummary } from "@/lib/payout/providers/mercury";
 import { createSupabaseAttemptStore } from "@/lib/payout/supabase-attempt-store";
 import type { AttemptStatus } from "@/lib/payout/attempt-state";
 
@@ -279,5 +279,24 @@ export async function setPayoutDualControlAction(required: boolean): Promise<Act
   return run("view", async ({ admin, actor }) => {
     await rpc(admin, "set_payout_dual_control", { p_required: required, p_actor: actor });
     return { message: required ? "Dual control turned on." : "Dual control turned off." };
+  });
+}
+
+/** Mercury 읽기 전용 연결 확인: 토큰이 유효한지, 어떤 계좌가 보이는지(MERCURY_PAYOUT_ACCOUNT_ID에 쓸 id). 돈은 움직이지 않는다. */
+export async function checkMercuryConnectionAction(): Promise<ActionResult<{ accounts: MercuryAccountSummary[]; payoutAccountConfigured: boolean }>> {
+  return run("accounting_reconcile", async () => {
+    const config = mercuryConfigFromEnv();
+    const res = await checkMercuryReadConnection(config);
+    if (!res.ok) {
+      const text: Record<string, string> = {
+        no_token: "MERCURY_API_TOKEN is not set in this environment.",
+        unauthorized: "Mercury rejected the token (401). Check that the token was copied completely and has not expired.",
+        forbidden: "Mercury refused this request (403). The token may be missing the Fetch Depository Accounts scope.",
+        http_error: `Mercury returned an error (${res.status ?? "?"}).`,
+        network: "Could not reach Mercury (network or timeout).",
+      };
+      throw new Error(text[res.reason]);
+    }
+    return { data: { accounts: res.accounts, payoutAccountConfigured: Boolean(config.accountId) } };
   });
 }

@@ -49,6 +49,42 @@ export function minorToUsdAmount(amountMinor: number): number {
   return Number((amountMinor / 100).toFixed(2));
 }
 
+export type MercuryAccountSummary = { id: string; name: string; kind: string; status: string; last4: string | null };
+export type MercuryReadCheck =
+  | { ok: true; accounts: MercuryAccountSummary[] }
+  | { ok: false; reason: "no_token" | "unauthorized" | "forbidden" | "http_error" | "network"; status?: number };
+
+/** 읽기 전용 연결 확인(GET /accounts). 지급 스위치(MERCURY_PAYOUTS_ENABLED)와 무관하다 — 읽기 토큰으로는 돈이 움직일 수 없다.
+ * 계좌번호는 끝 4자리만 돌려준다. 토큰은 절대 반환·로그하지 않는다. */
+export async function checkMercuryReadConnection(config: Pick<MercuryConfig, "token" | "baseUrl" | "fetchImpl" | "timeoutMs">): Promise<MercuryReadCheck> {
+  if (!config.token) return { ok: false, reason: "no_token" };
+  const base = (config.baseUrl ?? MERCURY_DEFAULT_BASE_URL).replace(/\/$/, "");
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), config.timeoutMs ?? 20_000);
+  try {
+    const res = await (config.fetchImpl ?? fetch)(`${base}/accounts`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${config.token}`, Accept: "application/json" },
+      signal: controller.signal,
+    });
+    if (res.status === 401) return { ok: false, reason: "unauthorized", status: 401 };
+    if (res.status === 403) return { ok: false, reason: "forbidden", status: 403 };
+    if (!res.ok) return { ok: false, reason: "http_error", status: res.status };
+    const json = (await res.json().catch(() => null)) as { accounts?: unknown[] } | null;
+    const list = Array.isArray(json?.accounts) ? json!.accounts! : [];
+    const accounts = list.map((raw) => {
+      const a = (raw ?? {}) as { id?: string; name?: string; nickname?: string; kind?: string; type?: string; status?: string; accountNumber?: string };
+      const num = typeof a.accountNumber === "string" ? a.accountNumber : "";
+      return { id: String(a.id ?? ""), name: String(a.nickname ?? a.name ?? ""), kind: String(a.kind ?? a.type ?? ""), status: String(a.status ?? ""), last4: num.length >= 4 ? num.slice(-4) : null };
+    }).filter((a) => a.id);
+    return { ok: true, accounts };
+  } catch {
+    return { ok: false, reason: "network" };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export function createMercuryProvider(config: MercuryConfig): PayoutProvider {
   const base = (config.baseUrl ?? MERCURY_DEFAULT_BASE_URL).replace(/\/$/, "");
 
