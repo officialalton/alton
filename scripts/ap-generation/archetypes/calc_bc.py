@@ -98,7 +98,7 @@ def param_dydx(rng):
     why = ["Inverts: computes dx/dy.", "Reports dy/dt only.", "Multiplies the two derivatives.", "Sign error."]
     stem = f"A curve is defined by $x(t)={sp.latex(X)}$ and $y(t)={sp.latex(Y)}$. What is $\\dfrac{{dy}}{{dx}}$ at $t={t0}$?"
     key = Opt(fmt(s), True, "dy/dx = (dy/dt)/(dx/dt).", s)
-    return pack("param_dydx", "9.2", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None], rng, est=80, facts=[f"slope={s}"])
+    return pack("param_dydx", "9.1", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None], rng, est=80, facts=[f"slope={s}"])
 
 def param_speed_calc(rng):
     a, b = rnd(rng, 1, 3), rnd(rng, 1, 3); t0 = rng.choice([1.0, 1.5, 2.0])
@@ -107,7 +107,7 @@ def param_speed_calc(rng):
     stem = f"A particle moves in the plane with position $(x(t),y(t))=\\left({sp.latex(X)},\\,{sp.latex(Y)}\\right)$ for $t\\ge 0$. What is the speed of the particle at time $t={t0}$?"
     alt = [(abs(float(xp.subs(t, t0))) + abs(float(yp.subs(t, t0))), "Adds the components instead of using the Pythagorean combination."), (float(yp.subs(t, t0)) / float(xp.subs(t, t0)), "Reports dy/dx."), (math.sqrt(float(X.subs(t, t0)) ** 2 + float(Y.subs(t, t0)) ** 2), "Uses the position magnitude."), (float(xp.subs(t, t0)) ** 2 + float(yp.subs(t, t0)) ** 2, "Forgets the square root.")]
     key = Opt("$%.3f$" % sp_, True, "Speed = sqrt((x')^2+(y')^2).", sp_)
-    return pack("param_speed_calc", "9.4", "1.E", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=85, facts=[f"speed={sp_}"])
+    return pack("param_speed_calc", "9.6", "1.E", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=85, facts=[f"speed={sp_}"])
 
 def polar_area_calc(rng):
     a = rng.choice([1, 2, 3]); b = rng.choice([1, 2]); lo, hi = 0, rng.choice([1.0, math.pi / 2, math.pi])
@@ -116,7 +116,7 @@ def polar_area_calc(rng):
     stem = f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta={lo:g}$ and $\\theta={hi:.4g}$?" if hi != math.pi / 2 and hi != math.pi else f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta=0$ and $\\theta={'\\pi' if hi==math.pi else '\\frac{\\pi}{2}'}$?"
     alt = [(_I.quad(r, lo, hi)[0] * 0.5, "Integrates r instead of r squared."), (_I.quad(lambda th: r(th) ** 2, lo, hi)[0], "Omits the factor 1/2."), (0.5 * _I.quad(lambda th: r(th), lo, hi)[0] ** 2, "Squares the integral instead of integrating the square."), (0.5 * _I.quad(lambda th: (a - b * math.sin(th)) ** 2, lo, hi)[0], "Sign error inside r.")]
     key = Opt("$%.3f$" % A, True, "Area = (1/2) integral of r^2 d theta.", A)
-    return pack("polar_area_calc", "9.9", "1.D", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=90, facts=[f"A={A}"])
+    return pack("polar_area_calc", "9.8", "1.D", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=90, facts=[f"A={A}"])
 
 def series_test(rng):
     fam = rng.choice(["geo", "pseries", "alt_p", "ratio", "nthterm"])
@@ -137,7 +137,7 @@ def series_test(rng):
     why = {"abs": "Absolute convergence holds.", "cond": "Converges, but the series of absolute values diverges.", "div": "Terms or partial sums do not settle.", "nth": "The nth-term test can only show divergence, never convergence."}
     wr = {"abs": "Claims absolute convergence although the absolute series diverges.", "cond": "Treats a series that also converges absolutely as only conditionally convergent.", "div": "Claims divergence for a convergent series.", "nth": why["nth"]}
     opts = [Opt(texts[k], k == truth, why[k] if k == truth else wr[k], None) for k in ["abs", "cond", "div", "nth"]]
-    return pack_fixed("series_test", "10.7", "3.D", "not_allowed", f"Which statement about $\\displaystyle {expr}$ is true?", opts, rng, est=85, facts=[f"{fam}:{truth}"])
+    return pack_fixed("series_test", "10.9", "3.D", "not_allowed", f"Which statement about $\\displaystyle {expr}$ is true?", opts, rng, est=85, facts=[f"{fam}:{truth}"])
 
 def taylor_coeff(rng):
     k = rng.choice([2, 3]); n = rng.choice([3, 4]); form = rng.choice(["exp", "sin", "ln"])
@@ -165,7 +165,7 @@ def radius_interval(rng):
     # 독립 검증: 끝점 부분합 거동
     ph = sum(1.0 / n for n in range(1, 20000)); pa = sum(((-1) ** n) / n for n in range(1, 20000))
     assert ph > 9 and abs(pa + math.log(2)) < 1e-3
-    return pack_fixed("radius_interval", "10.10", "1.E", "not_allowed", f"What is the interval of convergence of $\\displaystyle {expr}$?", opts, rng, est=100, facts=[f"interval=[{lo},{hi})"])
+    return pack_fixed("radius_interval", "10.13", "1.E", "not_allowed", f"What is the interval of convergence of $\\displaystyle {expr}$?", opts, rng, est=100, facts=[f"interval=[{lo},{hi})"])
 
 def geometric_sum(rng):
     a0 = rnd(rng, 2, 8); r = rng.choice([S(1) / 2, S(1) / 3, S(2) / 3, S(1) / 4]); start = rng.choice([0, 1])
@@ -185,7 +185,7 @@ def lagrange_error(rng):
     ds = [S(M) * a ** n / sp.factorial(n), S(M) * a ** (n + 1) / sp.factorial(n), S(M) * a ** (n + 2) / sp.factorial(n + 2), S(M) * a ** (n + 1) / (n + 1)]
     why = ["Uses the wrong power and factorial (degree n instead of n+1).", "Uses n! with the right power.", "Uses a higher order.", "Uses (n+1) instead of (n+1)!."]
     key = Opt(fmt(key_v), True, "M|x|^(n+1)/(n+1)!.", key_v)
-    return pack("lagrange_error", "10.11", "3.D", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why)], rng, est=85, facts=[f"bound={key_v}"])
+    return pack("lagrange_error", "10.12", "3.D", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why)], rng, est=85, facts=[f"bound={key_v}"])
 
 # ---------------------------------------------------------------- BC FRQ
 def frq_series(rng):
@@ -214,7 +214,7 @@ def frq_series(rng):
         part("c", f"Use the first two nonzero terms of the series to approximate $f\\left(\\tfrac{{1}}{{2}}\\right)$. Use the alternating series error bound to find a bound on the absolute error of this approximation.", 2, "calculate", ["3.D", "3.G"],
              f"Approximation {float(approx):.4f}; error ≤ |third term| = {float(bound):.5f}", [row("c1", 1, "Approximation using two terms", [f"{float(approx):.4f}"], nums=True, tol="±0.001"), row("c2", 1, "Error bound is the magnitude of the next term, with the decreasing-terms condition", [f"{float(bound):.5f}", "terms decrease in magnitude"], requires="c1", both=True)]),
         part("d", "Use the first two nonzero terms of the Maclaurin series for $f$ to approximate $\\int_0^{1/2} f(x)\\,dx$.", 1, "calculate", ["1.E"], f"{float(sp.N(integ2)):.4f}", [row("d1", 1, "Answer using term-by-term integration", [f"{float(sp.N(integ2)):.4f}"], nums=True, tol="±0.001")])]
-    return {"archetype": "frq_series", "template": "series_taylor_convergence", "topic": "10.14", "extra_topics": ["10.10", "10.11"], "skill": "1.E", "calculator": "not_allowed", "title": "Maclaurin series, convergence, error bound", "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"approx={approx}", f"bound={bound}", f"integ={integ2}"]}
+    return {"archetype": "frq_series", "template": "series_taylor_convergence", "topic": "10.14", "extra_topics": ["10.13", "10.10"], "skill": "1.E", "calculator": "not_allowed", "title": "Maclaurin series, convergence, error bound", "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"approx={approx}", f"bound={bound}", f"integ={integ2}"]}
 
 def frq_parametric(rng):
     a, b = rnd(rng, 1, 3), rnd(rng, 1, 3); c = rnd(rng, 1, 3)
@@ -235,4 +235,30 @@ def frq_parametric(rng):
         part("b", f"Find an equation for the line tangent to the path of the particle at $t={t0}$.", 2, "calculate", ["1.E"], f"y − {y0} = {slope}(x − {x0})", [row("b1", 1, "Slope dy/dx = y'(t)/x'(t) at t=1", [f"{slope}"], nums=True), row("b2", 1, "Tangent line equation", [f"y - {y0} = {slope}(x - {x0})"], requires="b1")]),
         part("c", f"Find the total distance traveled by the particle from $t=0$ to $t={tmax}$.", 2, "calculate", ["1.D", "1.E"], f"{dist:.3f}", [row("c1", 1, "Integral of the speed with limits 0 and 2", ["∫_0^2 sqrt((x')^2+(y')^2) dt"]), row("c2", 1, "Answer", [f"{dist:.3f}"], requires="c1", nums=True, tol="±0.001")]),
         part("d", f"Find $\\dfrac{{d^2y}}{{dx^2}}$ at $t={t0}$.", 2, "calculate", ["1.E", "2.B"], f"{d2}", [row("d1", 1, "Uses d/dt(dy/dx) divided by dx/dt", ["d/dt(y'/x') / x'"]), row("d2", 1, "Answer", [f"{d2}"], requires="d1", nums=True)])]
-    return {"archetype": "frq_parametric", "template": "parametric_motion_calc", "topic": "9.4", "extra_topics": ["9.2", "9.3"], "skill": "1.E", "calculator": "required", "title": "Parametric motion: speed, tangent, distance, second derivative", "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"speed={sp_t}", f"slope={slope}", f"dist={dist}", f"d2={d2}"]}
+    return {"archetype": "frq_parametric", "template": "parametric_motion_calc", "topic": "9.6", "extra_topics": ["9.1", "9.2", "9.3"], "skill": "1.E", "calculator": "required", "title": "Parametric motion: speed, tangent, distance, second derivative", "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"speed={sp_t}", f"slope={slope}", f"dist={dist}", f"d2={d2}"]}
+
+
+def param_second(rng):
+    a, b, c = rnd(rng, 1, 3), rnd(rng, 1, 4), rnd(rng, 1, 3); t0 = rng.choice([1, 2])
+    X = a * t ** 2 + b * t; Y = t ** 3 - c * t
+    xp, yp = sp.diff(X, t), sp.diff(Y, t)
+    d2 = sp.simplify(sp.diff(yp / xp, t) / xp).subs(t, t0)
+    first = S(yp.subs(t, t0)) / xp.subs(t, t0)
+    ds = [sp.diff(yp / xp, t).subs(t, t0), S(sp.diff(Y, t, 2).subs(t, t0)) / sp.diff(X, t, 2).subs(t, t0), S(sp.diff(Y, t, 2).subs(t, t0)) / xp.subs(t, t0), first]
+    why = ["Differentiates dy/dx with respect to t but forgets to divide by dx/dt.", "Divides y'' by x'' instead of using d/dt(dy/dx) over dx/dt.", "Divides y'' by x' only.", "Reports the first derivative dy/dx."]
+    stem = f"A curve is defined by $x(t)={sp.latex(X)}$ and $y(t)={sp.latex(Y)}$. What is $\\dfrac{{d^2y}}{{dx^2}}$ at $t={t0}$?"
+    key = Opt(fmt(d2), True, "d^2y/dx^2 = d/dt(dy/dx) divided by dx/dt.", d2)
+    return pack("param_second", "9.2", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why)], rng, est=100, facts=[f"d2={d2}"])
+
+def param_arclength_calc(rng):
+    a, b = rnd(rng, 1, 3), rnd(rng, 1, 3); T = rng.choice([1, 2, 3])
+    X = a * t ** 2; Y = b * t ** 3
+    xp, yp = sp.diff(X, t), sp.diff(Y, t)
+    L = _I.quad(lambda v: math.sqrt(float(xp.subs(t, v)) ** 2 + float(yp.subs(t, v)) ** 2), 0, T)[0]
+    wrong1 = _I.quad(lambda v: abs(float(xp.subs(t, v))) + abs(float(yp.subs(t, v))), 0, T)[0]
+    wrong2 = _I.quad(lambda v: float(xp.subs(t, v)) ** 2 + float(yp.subs(t, v)) ** 2, 0, T)[0]
+    wrong3 = math.sqrt(float(X.subs(t, T)) ** 2 + float(Y.subs(t, T)) ** 2)
+    stem = f"A curve is given by $x(t)={sp.latex(X)}$ and $y(t)={sp.latex(Y)}$ for $0\\le t\\le {T}$. What is the length of the curve?"
+    key = Opt("$%.3f$" % L, True, "Integral of sqrt((x')^2+(y')^2) over the interval.", L)
+    ds = [Opt("$%.3f$" % wrong1, False, "Adds the absolute components instead of combining them with a square root.", wrong1), Opt("$%.3f$" % wrong2, False, "Omits the square root.", wrong2), Opt("$%.3f$" % wrong3, False, "Reports the distance of the endpoint from the origin.", wrong3)]
+    return pack("param_arclength_calc", "9.3", "1.D", "required", stem, key, ds + [Opt("$%.3f$" % (L * 2), False, "Doubles the correct length.", L * 2)], rng, est=95, facts=[f"L={L}"])

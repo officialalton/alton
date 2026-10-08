@@ -26,8 +26,8 @@ def cont_piece(rng):
     kk = S(c0 * c0 - m - 1) / c0
     stem = (f"Let $f(x)=\\begin{{cases}} kx+1 & x<{c0}\\\\ x^2-{m} & x\\ge {c0}\\end{{cases}}$. For what value of $k$ is $f$ continuous at $x={c0}$?")
     alt = [S(c0 * c0 + m - 1) / c0, S(c0 * c0 - m), S(2 * c0), S(c0 * c0 - m + 1) / c0]
-    why = ["Adds instead of subtracts the constant when matching the two pieces.", "Forgets the +1 in the left piece.",
-           "Matches the derivatives of the pieces instead of their values.", "Moves the +1 to the wrong side."]
+    why = [f"Matches the pieces with +{m} instead of -{m} in the right piece: {c0}k + 1 = {c0*c0} + {m}.", f"Forgets the +1 in the left piece and reports the right-hand value {c0*c0 - m} as k.",
+           f"Matches the derivatives of the pieces (2x at x = {c0}) instead of their values, giving k = {2*c0}.", f"Moves the +1 to the other side with the wrong sign: {c0}k = {c0*c0} - {m} + 1."]
     key = Opt(fmt(kk), True, "Sets the left-hand limit equal to the value from the right piece.", kk)
     return pack("cont_piece", "1.11", "1.E", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in zip(alt, why)], rng, est=80, facts=[f"k={kk}"])
 
@@ -46,7 +46,7 @@ def ivt(rng):
           Opt(fmt(beyond_hi), False, "Chooses a value above both endpoint values, outside the interval IVT covers.", beyond_hi),
           Opt(fmt(beyond_lo), False, "Chooses a value below both endpoint values, outside the interval IVT covers.", beyond_lo),
           Opt(fmt(f4), False, "Takes the right endpoint value f(4); an endpoint value is not guaranteed at an interior point.", f4)]
-    return pack("ivt", "1.15", "3.D", "not_allowed", stem, key, ds, rng, est=60, facts=[f"between {f0} and {f4}"])
+    return pack("ivt", "1.16", "3.D", "not_allowed", stem, key, ds, rng, est=60, facts=[f"between {f0} and {f4}"])
 
 def lim_alg(rng):
     a = rnd(rng, 2, 7); p = rnd(rng, 1, 5)
@@ -57,9 +57,9 @@ def lim_alg(rng):
     assert L == S(2 * a) / (2 * a + p)
     stem = f"What is $\\displaystyle\\lim_{{x\\to {a}}}\\dfrac{{x^2-{a*a}}}{{x^2+{p}x-{a*a+p*a}}}$?"
     key = Opt(fmt(L), True, "Factors and cancels the common (x-a) factor before substituting.", L)
-    ds = [Opt(fmt(0), False, "Substitutes and reads 0/0 as 0.", 0), Opt("The limit does not exist", False, "Treats 0/0 as undefined and stops.", None),
-          Opt(fmt(S(a) / (2 * a + p)), False, "Cancels incorrectly, losing a factor of 2 from the numerator.", S(a) / (2 * a + p)),
-          Opt(fmt(S(2 * a) / (a + p)), False, "Substitutes x=a into only one factor of the denominator.", S(2 * a) / (a + p))]
+    ds = [Opt(fmt(0), False, "Substitutes x = %d and reads the 0/0 form as the value 0." % a, 0), Opt("The limit does not exist", False, "Substitutes x = %d, gets 0/0, and concludes the limit does not exist instead of factoring." % a, None),
+          Opt(fmt(S(a) / (2 * a + p)), False, "Cancels (x - %d) correctly but then substitutes into x + %d and into the numerator factor x + %d only half of the way, giving %d/%d." % (a, a, a, a, 2 * a + p), S(a) / (2 * a + p)),
+          Opt(fmt(S(2 * a) / (a + p)), False, "Cancels (x - %d) but writes the remaining denominator factor as x + %d instead of x + %d, giving %d/%d." % (a, p, a + p, 2 * a, a + p), S(2 * a) / (a + p))]
     return pack("lim_alg", "1.7", "1.C", "not_allowed", stem, key, ds, rng, est=75, facts=[f"limit={L}"])
 
 # ---------------- Unit 2 ----------------
@@ -71,12 +71,12 @@ def deriv_est_table(rng):
     est = (vals[7] - vals[3]) / 4
     assert est == sp.diff(f, x).subs(x, 5)
     rows = [[str(v), str(vals[v])] for v in xs]
-    stem = "The differentiable function $f$ has the values shown in the table. Using the data, which is the best approximation of $f'(5)$ using the points $x=3$ and $x=7$?"
+    stem = "The differentiable function $f$ has the values shown in the table. Which of the following is the symmetric difference quotient approximation of $f'(5)$ from the table?"
     key = Opt(fmt(est), True, "Symmetric difference quotient over [3, 7].", est)
-    ds = [Opt(fmt((vals[7] - vals[5]) / 2), False, "Uses the forward interval [5, 7] only.", (vals[7] - vals[5]) / 2),
-          Opt(fmt((vals[5] - vals[3]) / 2), False, "Uses the backward interval [3, 5] only.", (vals[5] - vals[3]) / 2),
-          Opt(fmt((vals[7] - vals[3]) / 2), False, "Divides by 2 instead of the interval length 4.", (vals[7] - vals[3]) / 2),
-          Opt(fmt(vals[7] - vals[3]), False, "Forgets to divide by the interval length.", vals[7] - vals[3])]
+    ds = [Opt(fmt((vals[7] - vals[5]) / 2), False, "Uses the one-sided interval [5, 7] instead of the symmetric interval [3, 7].", (vals[7] - vals[5]) / 2),
+          Opt(fmt((vals[5] - vals[3]) / 2), False, "Uses the one-sided interval [3, 5] instead of the symmetric interval [3, 7].", (vals[5] - vals[3]) / 2),
+          Opt(fmt((vals[7] - vals[3]) / 2), False, "Uses the symmetric points 3 and 7 but divides by 2 instead of the interval length 4.", (vals[7] - vals[3]) / 2),
+          Opt(fmt(vals[7] - vals[3]), False, "Uses the symmetric points 3 and 7 but does not divide by the interval length.", vals[7] - vals[3])]
     return pack("deriv_est_table", "2.3", "2.B", "not_allowed", stem, key, ds, rng,
                 stimulus=table_stimulus("Values of f", "x", rows, "f(x)"), est=70, facts=[f"estimate={est}"])
 
@@ -122,10 +122,10 @@ def product_table(rng):
     stem = f"The table gives values of differentiable functions $f$ and $g$ and their derivatives at $x={a}$. If $h(x)=f(x)g(x)+{c}f(x)$, what is $h'({a})$?"
     rows = [["f(%d)" % a, str(f)], ["f'(%d)" % a, str(fp)], ["g(%d)" % a, str(g)], ["g'(%d)" % a, str(gp)]]
     key = Opt(fmt(key_v), True, "Product rule plus the constant-multiple rule.", key_v)
-    ds = [Opt(fmt(fp * gp + c * fp), False, "Multiplies the derivatives f'g' instead of using the product rule.", fp * gp + c * fp),
-          Opt(fmt(fp * g + f * gp + c * f), False, "Differentiates c*f(x) as c*f.", fp * g + f * gp + c * f),
-          Opt(fmt(fp * g + f * gp), False, "Drops the c f'(x) term.", fp * g + f * gp),
-          Opt(fmt(fp * g + c * fp), False, "Omits the f g' term of the product rule.", fp * g + c * fp)]
+    ds = [Opt(fmt(fp * gp + c * fp), False, f"Replaces the product rule with f'(a)g'(a) and then adds {c}f'(a): ({fp})({gp}) + {c}({fp}).", fp * gp + c * fp),
+          Opt(fmt(fp * g + f * gp + c * f), False, f"Applies the product rule correctly but differentiates {c}f(x) as {c}f(a) = {c*f} instead of {c}f'(a).", fp * g + f * gp + c * f),
+          Opt(fmt(fp * g + f * gp), False, f"Applies the product rule but drops the {c}f'(a) term from the constant multiple.", fp * g + f * gp),
+          Opt(fmt(fp * g + c * fp), False, f"Uses f'(a)g(a) + {c}f'(a) and omits the f(a)g'(a) term of the product rule.", fp * g + c * fp)]
     return pack("product_table", "2.8", "1.E", "not_allowed", stem, key, ds, rng,
                 stimulus=table_stimulus("Values at x=%d" % a, "quantity", rows, "value"), est=75, facts=[f"h'={key_v}"])
 
@@ -138,8 +138,8 @@ def quotient_rule_eval(rng):
     stem = f"The table gives values of differentiable functions $f$ and $g$ and their derivatives at $x={a}$. If $q(x)=\\dfrac{{f(x)}}{{g(x)}}$, what is $q'({a})$?"
     rows = [["f(%d)" % a, str(f)], ["f'(%d)" % a, str(fp)], ["g(%d)" % a, str(g)], ["g'(%d)" % a, str(gp)]]
     key = Opt(fmt(key_v), True, "Quotient rule.", key_v)
-    cand = [(S(f * gp - fp * g) / (g * g), "Reverses the order of the numerator terms."), (S(fp * g - f * gp) / g, "Divides by g instead of g squared."),
-            (S(fp) / gp if gp != 0 else None, "Divides the derivatives f'/g'."), (S(fp * gp - f * g) / (g * g), "Uses a product-like numerator.")]
+    cand = [(S(f * gp - fp * g) / (g * g), f"Reverses the numerator: f(a)g'(a) - f'(a)g(a) = ({f})({gp}) - ({fp})({g}), over g(a)^2."), (S(fp * g - f * gp) / g, f"Uses the correct numerator f'(a)g(a) - f(a)g'(a) but divides by g(a) = {g} instead of g(a)^2."),
+            (S(fp) / gp if gp != 0 else None, f"Divides the derivatives: f'(a)/g'(a) = {fp}/{gp}."), (S(fp * gp - f * g) / (g * g), f"Uses f'(a)g'(a) - f(a)g(a) in the numerator, over g(a)^2.")]
     ds = [Opt(fmt(v), False, w, v) for v, w in cand if v is not None]
     return pack("quotient_rule_eval", "2.9", "1.E", "not_allowed", stem, key, ds, rng,
                 stimulus=table_stimulus("Values at x=%d" % a, "quantity", rows, "value"), est=80, facts=[f"q'={key_v}"])
@@ -155,10 +155,10 @@ def chain_table(rng):
     stem = f"The table gives values of differentiable functions. If $h(x)=f(g(x))$, what is $h'({a})$?"
     rows = [["g(%d)" % a, str(ga)], ["g'(%d)" % a, str(gpa)], ["f(%d)" % ga, str(fv[ga])], ["f'(%d)" % ga, str(fp_at_g)], ["f'(%d)" % a, str(fp_at_a)]]
     key = Opt(fmt(key_v), True, "Chain rule: f'(g(a))*g'(a).", key_v)
-    ds = [Opt(fmt(fp_at_a * gpa), False, "Evaluates f' at x=a instead of at g(a).", fp_at_a * gpa),
-          Opt(fmt(fp_at_g), False, "Forgets the inner derivative g'(a).", fp_at_g),
-          Opt(fmt(fp_at_a * ga), False, "Multiplies f'(a) by g(a).", fp_at_a * ga),
-          Opt(fmt(fv[ga] * gpa), False, "Uses f(g(a)) instead of f'(g(a)).", fv[ga] * gpa)]
+    ds = [Opt(fmt(fp_at_a * gpa), False, f"Evaluates f' at x = {a} instead of at g({a}) = {ga}: f'({a})g'({a}) = ({fp_at_a})({gpa}).", fp_at_a * gpa),
+          Opt(fmt(fp_at_g), False, f"Forgets the inner derivative g'({a}) and reports f'(g({a})) = f'({ga}) = {fp_at_g}.", fp_at_g),
+          Opt(fmt(fp_at_a * ga), False, f"Multiplies f'({a}) = {fp_at_a} by g({a}) = {ga} instead of by g'({a}).", fp_at_a * ga),
+          Opt(fmt(fv[ga] * gpa), False, f"Uses f(g({a})) = f({ga}) = {fv[ga]} in place of f'(g({a})), then multiplies by g'({a}).", fv[ga] * gpa)]
     return pack("chain_table", "3.1", "1.E", "not_allowed", stem, key, ds, rng,
                 stimulus=table_stimulus("Values of f, g and derivatives", "quantity", rows, "value"), est=70, facts=[f"h'={key_v}"])
 
@@ -176,8 +176,8 @@ def implicit_slope(rng):
     # 독립 경로: 암시적 미분(sympy idiff)
     X, Y = sp.symbols("X Y"); F = X * X + p * X * Y + q * Y * Y - C
     assert sp.idiff(F, Y, X).subs({X: x0, Y: y0}) == s
-    stem = f"A curve is defined by $x^2+{p}xy+{q}y^2={C}$. What is $\\dfrac{{dy}}{{dx}}$ at the point $({x0},{y0})$?"
+    stem = f"A curve is defined by ${sp.latex(x**2 + p * x * y + q * y**2)}={C}$. What is $\\dfrac{{dy}}{{dx}}$ at the point $({x0},{y0})$?"
     key = Opt(fmt(s), True, "Implicit differentiation with the product rule on xy and the chain rule on y^2.", s)
-    ds = [Opt(fmt(w1), False, "Differentiates xy as y, missing the x*dy/dx term.", w1), Opt(fmt(w2), False, "Differentiates y^2 as 2y without the dy/dx factor.", w2),
+    ds = [Opt(fmt(w1), False, f"Differentiates {p}xy as {p}y (no {p}x dy/dx term): {2*x0 + p*y0} + {2*q*y0}(dy/dx) = 0.", w1), Opt(fmt(w2), False, f"Differentiates {q}y^2 as {2*q}y without the dy/dx factor: {2*x0} + {p}y + {p}x(dy/dx) + {2*q}y = 0.", w2),
           Opt(fmt(w3), False, "Makes a sign error when solving for dy/dx.", w3)]
     return pack("implicit_slope", "3.2", "1.E", "not_allowed", stem, key, ds + [Opt(fmt(S(Fx) / Fy * 2), False, "Doubles the slope after solving for dy/dx.", S(Fx) / Fy * 2)], rng, est=100, facts=[f"slope={s}"])

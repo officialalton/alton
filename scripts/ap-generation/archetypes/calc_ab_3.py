@@ -42,7 +42,7 @@ def ftc_eval_calc(rng):
     assert abs(numeric_integral(f, 0, b) - val) < 1e-6
     stem = f"What is the value of $\\displaystyle\\int_0^{{{b}}} e^{{-x^2}}\\,dx$?"
     key = Opt("$%.3f$" % val, True, "Numerical integration with a graphing calculator.", val)
-    alt = [(b * f(b), "Rectangle of width b and height f(b)."), (f(b), "Reports the integrand value at the upper limit."), ((1 - math.exp(-b * b)) / (2 * b), "Treats the integral as a substitution that is not valid here."), (1 - math.exp(-b), "Integrates e^(-x) instead of e^(-x^2).")]
+    alt = [(b * f(b), "Rectangle of width b and height f(b)."), (f(b), "Reports the integrand value at the upper limit."), ((1 - math.exp(-b * b)) / (2 * b), "Treats e^(-x^2) as a u-substitution integrand and divides by 2b, which would need an extra factor x in the integrand."), (1 - math.exp(-b), "Integrates e^(-x) instead of e^(-x^2).")]
     return pack("ftc_eval_calc", "6.7", "1.E", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=60, facts=[f"value={val}"])
 
 def usub_integral(rng):
@@ -52,9 +52,9 @@ def usub_integral(rng):
     assert sp.integrate(expr, (x, a, b)) == key_v
     stem = f"What is $\\displaystyle\\int_{{{a}}}^{{{b}}} {k}x\\,(x^2+{c})^{{{n}}}\\,dx$?"
     key = Opt(fmt(key_v), True, "u = x^2 + c with du = 2x dx, and the limits converted to u.", key_v)
-    ds = [Opt(fmt(2 * key_v), False, "Forgets the factor 1/2 from du = 2x dx.", 2 * key_v), Opt(fmt(key_v * (n + 1)), False, "Forgets to divide by n+1.", key_v * (n + 1)),
-          Opt(fmt(S(k) / 2 * (b ** (2 * n + 2) - a ** (2 * n + 2)) / (n + 1) * 1), False, "Uses the original limits of x as limits for u.", S(k) / 2 * (b ** (n + 1) - a ** (n + 1)) / (n + 1)),
-          Opt(fmt(S(k) * ((b * b + c) ** n - (a * a + c) ** n)), False, "Differentiates the power instead of integrating.", S(k) * ((b * b + c) ** n - (a * a + c) ** n))]
+    ds = [Opt(fmt(2 * key_v), False, f"Forgets the factor 1/2 from du = 2x dx (the integrand has {k}x, not 2x).", 2 * key_v), Opt(fmt(key_v * (n + 1)), False, f"Integrates u^{n} as u^{n} divided by 1 instead of dividing by {n+1}.", key_v * (n + 1)),
+          Opt(fmt(S(k) / 2 * (b ** (n + 1) - a ** (n + 1)) / (n + 1)), False, f"Substitutes u = x^2 + {c} but keeps the x-limits {a} and {b} as the u-limits.", S(k) / 2 * (b ** (n + 1) - a ** (n + 1)) / (n + 1)),
+          Opt(fmt(S(k) * ((b * b + c) ** n - (a * a + c) ** n)), False, f"Differentiates the power (u^{n} to {n}u^{n-1}) instead of integrating.", S(k) * ((b * b + c) ** n - (a * a + c) ** n))]
     return pack("usub_integral", "6.9", "1.E", "not_allowed", stem, key, ds, rng, est=100, facts=[f"value={key_v}"])
 
 # ---------------- Unit 7 ----------------

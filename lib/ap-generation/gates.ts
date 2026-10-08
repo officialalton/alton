@@ -19,7 +19,7 @@ export const NOT_ASSESSED_MC: Record<string, string[]> = {
 export const OPTION_COUNT: Record<string, number> = { ap_calculus_ab: 4, ap_biology: 4, ap_microeconomics: 5 };
 
 const NARRATED = /\b(because|incorrectly|mistake|forgets|forgot|ignores|assumes|wrongly|error)\b/i;
-const LETTER_REF = /\b(option|choice|answer)s?\s*\(?[A-E]\)?\b|\([A-E]\)/i;
+const LETTER_REF = /\b(?:[Oo]ption|[Cc]hoice|[Aa]nswer)s?\s+\(?[A-E]\)?(?![a-z])|(?:^|\s)\([A-E]\)(?=\s|$|[.,;])/;
 const numbers = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []).map((x) => x.replace(/^-/, ""));
 const norm = (s: string) => s.replace(/\s+/g, " ").trim().toLowerCase();
 const plain = (s: string) => s.replace(/\$/g, "").replace(/\\[a-zA-Z]+/g, "").replace(/[{}^_]/g, "");

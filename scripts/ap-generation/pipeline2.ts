@@ -8,7 +8,8 @@ import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-ex
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { loadEnvLocal } from "../keywords/db";
 import { gateGuideFrq, gateGuideMc } from "../../lib/ap-generation/guide-gates";
-import { calcAbGuide, guideReviewRules, guideWordingRules } from "../../lib/ap-generation/subjects/calc-ab";
+import { guideReviewRules as _grr, guideWordingRules as _gwr } from "../../lib/ap-generation/subjects/calc-ab";
+import { GUIDES } from "../../lib/ap-generation/subjects/calc-bc";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
 loadEnvLocal();
@@ -34,6 +35,10 @@ const readJson = <T>(f: string): T => JSON.parse(readFileSync(f, "utf-8")) as T;
 const readJsonl = (f: string) => (existsSync(f) ? readFileSync(f, "utf-8").split("\n").filter(Boolean).map((l) => JSON.parse(l) as Json) : []);
 const resultMap = (name: string) => { const m = new Map<string, Json>(); for (const r of readJsonl(path.join(DIR, `${name}.results.jsonl`))) if (r.ok) m.set(r.custom_id as string, r); return m; };
 
+const GUIDE = GUIDES[SUBJECT as keyof typeof GUIDES];
+const guideWordingRules = () => _gwr().replace(/ap_calculus_ab|AP Calculus AB/g, GUIDE.subject).replace(/for AB/g, SUBJECT === "ap_calculus_bc" ? "for BC" : "for AB");
+const guideReviewRules = (u: string) => { const un = GUIDE.units.find((x) => x.unit === u); return un ? `UNIT ${un.unit} SCOPE for ${SUBJECT === "ap_calculus_bc" ? "BC" : "AB"} — in scope: ${un.inScope.join("; ")}. OUT of scope: ${un.outOfScope.join("; ")}. Difficulty levers allowed: ${GUIDE.difficultyAllowed.join("; ")}. Banned difficulty sources: ${GUIDE.difficultyBanned.join("; ")}.` : _grr(u); };
+const calcAbGuide = GUIDE;
 const curriculum = readJson<ApCurriculumFile>(path.resolve(process.cwd(), `data/ap/curriculum-2027/${SUBJECT}.json`));
 const skillSet = new Set(curriculum.skills.map((s) => s.code));
 const skillLabel = new Map(curriculum.skills.map((s) => [s.code, `${s.category}: ${s.label}`]));
@@ -52,13 +57,13 @@ type Cand = { key: string; cellId: string; archetype: string; kind: "mc" | "frq_
 const SEEDS_PER_CELL = Number(process.env.AP_MC_CANDS ?? 4);
 const FRQ_CANDS = Number(process.env.AP_FRQ_CANDS ?? 4);
 function planStage() {
-  const lst = py(["list"]) as { mc: string[]; frq: string[] };
+  const lst = py(["list", SUBJECT === "ap_calculus_bc" ? "bc" : "ab"]) as { mc: string[]; frq: string[] };
   const cells: Cell[] = [];
   lst.mc.forEach((a, i) => {
     const p = (py(["batch", a, "1", "0"]) as Json[])[0];
     cells.push({ cellId: `${SUBJECT}-m${String(i + 1).padStart(2, "0")}`, archetype: a, kind: "mc", unitCode: unitOf.get(p.topic as string) ?? "", topic: p.topic as string, skill: p.skill as string, calculator: p.calculator as string, candidates: SEEDS_PER_CELL, extraTopics: [] });
   });
-  const frqs = ["frq_table_rate", "frq_fprime_graph", "frq_diffeq", "frq_area_volume"];
+  const frqs = lst.frq;
   frqs.forEach((a, i) => {
     const p = (py(["batch", a, "1", "0"]) as Json[])[0];
     cells.push({ cellId: `${SUBJECT}-f${String(i + 1).padStart(2, "0")}`, archetype: a, kind: "frq_bundle", unitCode: unitOf.get(p.topic as string) ?? "", topic: p.topic as string, skill: p.skill as string, calculator: p.calculator as string, candidates: FRQ_CANDS, extraTopics: p.extra_topics as string[], template: p.template as string });

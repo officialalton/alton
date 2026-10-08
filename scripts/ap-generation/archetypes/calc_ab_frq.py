@@ -150,7 +150,7 @@ def frq_area_volume(rng):
         part("c", "Write, but do not evaluate, an integral expression for the volume of the solid generated when $R$ is rotated about the horizontal line $y=-2$.", 3, "calculate", ["1.D", "3.D"],
              f"V = {Vw_expr} (≈ {f3(Vw)})", [row("c1", 1, "Form: pi times integral of (outer radius)^2 - (inner radius)^2", ["π∫(R²−r²)dx"]), row("c2", 1, "Outer radius f(x)+2 and inner radius g(x)+2", ["f(x)+2", "g(x)+2"], requires="c1"),
                                           row("c3", 1, "Limits 0 and the intersection, constant pi", [f"0 to {f3(a)}", "π"], requires="c2", nums=True)]),
-        part("d", "Find the value of $x$, for $0<x<%s$, at which the line tangent to the graph of $f$ is parallel to the line tangent to the graph of $g$." % f3(a), 2, "calculate", ["1.C", "1.E"],
-             f"f'(x) = g'(x): cos x = 2x/{q}, x = {f3(d_)}", [row("d1", 1, "Sets f'(x) = g'(x)", [f"cos x = 2x/{q}"]), row("d2", 1, "Answer", [f3(d_)], requires="d1", nums=True, tol="±0.001")])]
+        part("d", "Find the average value of $f(x)-g(x)$ over the interval $0\\le x\\le %s$." % f3(a), 2, "calculate", ["1.D", "1.E"],
+             f"(1/{f3(a)}) ∫₀^{f3(a)} (f−g) dx = {f3(A / a)}", [row("d1", 1, "Integral of f - g divided by the interval length", [f"(1/{f3(a)})∫_0^{f3(a)} (f(x)-g(x)) dx"]), row("d2", 1, "Answer", [f3(A / a)], requires="d1", nums=True, tol="±0.001")])]
     return {"archetype": "frq_area_volume", "template": "area_volume_setup_calc", "topic": "8.4", "extra_topics": ["8.7", "8.8"], "skill": "1.D", "calculator": "required", "title": "Area, volume with squares, volume of revolution setup",
-            "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"a={a}", f"A={A}", f"V={V}", f"Vw={Vw}", f"d={d_}"]}
+            "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"a={a}", f"A={A}", f"V={V}", f"Vw={Vw}", f"avg={A/a}"]}

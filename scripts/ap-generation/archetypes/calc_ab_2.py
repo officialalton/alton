@@ -41,9 +41,9 @@ def linearization(rng):
     wrong1 = s + S(d) / s; wrong2 = s + d
     # f 는 위로 오목이 아닌 아래로 오목(f''<0) → 접선 근사는 과대 추정
     texts = [(f"{ftxt(key_v)}; an overestimate", True, "Tangent value; f is concave down so the tangent line lies above the graph."),
-             (f"{ftxt(key_v)}; an underestimate", False, "Correct value but misreads the concavity of the square root."),
-             (f"{ftxt(wrong1)}; an overestimate", False, "Forgets the 1/2 in f'(x)=1/(2 sqrt x), although the direction is right."),
-             (f"{ftxt(wrong2)}; an underestimate", False, "Uses slope 1 and misjudges the direction of the error.")]
+             (f"{ftxt(key_v)}; an underestimate", False, "Gives the tangent-line value but says underestimate: f(x)=sqrt(x) is concave down, so the tangent line lies above the graph."),
+             (f"{ftxt(wrong1)}; an overestimate", False, "Uses the slope 1/sqrt(a) instead of 1/(2 sqrt(a)) for the tangent line, then states overestimate."),
+             (f"{ftxt(wrong2)}; an underestimate", False, "Uses slope 1 instead of f'(a) for the tangent line, then states underestimate.")]
     opts = [Opt("$" + t_ + "$" if False else t_.replace(t_.split(";")[0], "$" + t_.split(";")[0] + "$"), k, w, None) for t_, k, w in texts]
     return pack_fixed("linearization", "4.6", "1.F", "not_allowed", stem, opts, rng, est=85, facts=[f"approx={key_v}", "overestimate"])
 
@@ -61,7 +61,7 @@ def lhopital(rng):
     key = Opt(fmt(L), True, "Both numerator and denominator approach 0; differentiate each (L'Hospital) or use the standard limit.", L)
     ds = [Opt(fmt(S(q) / p), False, "Inverts the ratio of the derivatives.", S(q) / p), Opt(fmt(0), False, "Substitutes x=0 into the numerator only.", 0),
           Opt("The limit does not exist", False, "Treats 0/0 as undefined.", None), Opt(fmt(p), False, "Forgets to divide by the denominator derivative.", p)]
-    return pack("lhopital", "4.7", "3.D", "not_allowed", stem, key, ds, rng, est=70, facts=[f"limit={L}"])
+    return pack("lhopital", "4.7", "1.E", "not_allowed", stem, key, ds, rng, est=70, facts=[f"limit={L}"])
 
 # ---------------- Unit 5 ----------------
 def mvt_calc(rng):
@@ -133,6 +133,6 @@ def optimization(rng):
     best = max(2 * xx * (c - xx * xx) for xx in [i / 1000 * (c ** 0.5) for i in range(0, 1001)])
     assert abs(best - key_v) < 0.05 * key_v
     key = Opt(fmt(key_v), True, "Area 2x(c - x^2) is maximized at x = k.", key_v)
-    ds = [Opt(fmt(2 * k ** 3), False, "Uses base x instead of 2x.", 2 * k ** 3), Opt(fmt(k), False, "Reports the maximizing x instead of the area.", k),
-          Opt(fmt(3 * k ** 3), False, "Uses height c instead of c - x^2 at the optimum.", 3 * k ** 3), Opt(fmt(2 * k * c), False, "Evaluates the area at the wrong point.", 2 * k * c)]
+    ds = [Opt(fmt(2 * k ** 3), False, f"Uses base x instead of 2x, so the area x({c} - x^2) is maximized at x = {k} with value {2*k**3}.", 2 * k ** 3), Opt(fmt(k), False, f"Reports the maximizing value x = {k} instead of the maximum area.", k),
+          Opt(fmt(3 * k ** 3), False, f"Uses height {c} (the y-intercept) instead of {c} - {k}^2 = {c-k*k} at the optimum.", 3 * k ** 3), Opt(fmt(2 * k * c), False, f"Evaluates 2x({c}) at x = {k} using the full height {c}.", 2 * k * c)]
     return pack("optimization", "5.11", "1.E", "not_allowed", stem, key, ds, rng, est=100, facts=[f"max area={key_v}"])
