@@ -19,15 +19,17 @@ function arm(name: string, main: string, rep: string) {
   const costOf = (dir: string) => { const m = new Map<string, { cost: number; calls: number }>(); for (const f of ["gen", "solve", "review", "review2", "difficulty"]) for (const r of jl(path.join(root, dir, `${f}.results.jsonl`))) { const id = String(r.custom_id).replace(/^[srdx]-/, ""); const e = m.get(id) ?? { cost: 0, calls: 0 }; e.cost += Number(r.cost ?? 0); e.calls += 1; m.set(id, e); } return m; };
   const c0 = costOf(main), c1 = costOf(rep);
   const strict = (v: V) => v.passed && !(v.soft ?? []).length;
+  // soft(= 해설 게이트 v2 적용 후와 동일) 기준에서 수선이 필요했던 후보만 수선 대상으로 센다(엄격 기준은 51건 전체)
+  const relevant = (variant: "strict" | "soft", v: V) => variant === "strict" || !v0.find((x) => x.key === map[v.key])!.passed === true;
   const mk = (variant: "strict" | "soft"): ReportedRecord[] => {
     const ok = (v: V) => (variant === "strict" ? strict(v) : v.passed);
     const rows: ReportedRecord[] = [];
     v0.forEach((v, n) => { const c = cellOf.get(v.cellId)!; const e = c0.get(v.key) ?? { cost: 0, calls: 0 }; rows.push({ templateId: c.archetype, cellId: v.cellId, attempt: 0, seed: n, passed: ok(v), reasons: v.reasons, costUsd: e.cost, calls: e.calls, skill: c.skill, structure: c.kind }); });
-    v1.forEach((v) => { const orig = map[v.key]; const o0 = v0.findIndex((x) => x.key === orig); const c = cellOf.get(v0[o0].cellId)!; const e = c1.get(v.key) ?? { cost: 0, calls: 0 }; rows.push({ templateId: c.archetype, cellId: v0[o0].cellId, attempt: 1, seed: o0, passed: ok(v), reasons: v.reasons, costUsd: e.cost, calls: e.calls, skill: c.skill, structure: c.kind }); });
+    v1.filter((v) => relevant(variant, v)).forEach((v) => { const orig = map[v.key]; const o0 = v0.findIndex((x) => x.key === orig); const c = cellOf.get(v0[o0].cellId)!; const e = c1.get(v.key) ?? { cost: 0, calls: 0 }; rows.push({ templateId: c.archetype, cellId: v0[o0].cellId, attempt: 1, seed: o0, passed: ok(v), reasons: v.reasons, costUsd: e.cost, calls: e.calls, skill: c.skill, structure: c.kind }); });
     return rows;
   };
   const sum = (m: Map<string, { cost: number; calls: number }>) => [...m.values()].reduce((a, x) => ({ cost: a.cost + x.cost, calls: a.calls + x.calls }), { cost: 0, calls: 0 });
-  const t0 = sum(c0), t1 = sum(c1);
+  const t0 = sum(c0); const t1s = { strict: sum(c1), soft: sum(new Map([...c1].filter(([k]) => relevant("soft", { key: k } as V)))) };
   // 사용 가능 고유: 통과한 후보(수선 후 포함)에서 완전 중복 제거, 근사 중복은 문항군 수로만 센다
   const passedPacks = (variant: "strict" | "soft") => { const ok = (v: V) => (variant === "strict" ? strict(v) : v.passed); const out: { key: string; pack: McPack | FrqPack }[] = [];
     for (const [dir, vs] of [[main, v0], [rep, v1]] as const) { const packs = rj<Record<string, (McPack | FrqPack)[]>>(path.join(root, dir, "packs.json")); const polished = new Map(jl(path.join(root, dir, "gen.results.jsonl")).map((r) => [String(r.custom_id), r]));
@@ -37,7 +39,7 @@ function arm(name: string, main: string, rep: string) {
   const out: Record<string, unknown> = { arm: name };
   for (const variant of ["strict", "soft"] as const) {
     const rows = mk(variant); const [all] = armReport(rows, "all"); const d = dedupe(passedPacks(variant));
-    const total = t0.cost + t1.cost; const unreachedPass = d.unique;
+    const t1 = t1s[variant]; const total = t0.cost + t1.cost; const unreachedPass = d.unique;
     out[variant] = { firstCandidates: all.firstCandidates, firstPass: all.firstPass, repairAttempts: v1.length, repairPass: all.postRepairPass - all.firstPass, postRepairPass: all.postRepairPass, uniqueUsable: d.unique, exactDuplicates: d.exact, familiesApprox: d.families, firstPassCostUsd: Number(t0.cost.toFixed(3)), repairCostUsd: Number(t1.cost.toFixed(3)), totalCostUsd: Number(total.toFixed(3)), calls: { first: t0.calls, repair: t1.calls }, costPerUsableUnique: unreachedPass ? Number((total / unreachedPass).toFixed(4)) : null, bySkill: armReport(rows, "skill"), byStructure: armReport(rows, "structure") };
   }
   return out;

@@ -5,14 +5,19 @@
 // 새 행은 load_batch_id 로 현재 배치에 연결하고 is_current=true 로 적재한다. 이전 적재 행의 표식은 mark-batches.ts / ap_mark_load_batches() 로 별도 수행(삭제 없음).
 // 상태는 stock.ts 가 계산한 값 그대로: review_state(rejected|needs_revalidation|auto_passed|exact_duplicate), expert_status, used_in_sample, legacy_reserve, 문항군.
 // problems/problem_versions 는 건드리지 않는다(학생 비노출). 완전 중복·반려 행도 이력 보존을 위해 적재한다.
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { connect } from "../keywords/db";
 import type { StockItem } from "../../lib/ap-generation/stock";
 
 const execute = process.argv.includes("--execute");
+const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
+// 보조 적재(S1a): npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/s1a-items.json --batch s1a-ab-2026-10-09 --supplement [--execute]
+//   --supplement: 배치 행은 is_current=false(기본 현재 배치 유지)로 두고, 이 배치의 후보 행은 is_current=true 로 적재해 현재 재고 뷰에 포함한다. 게시·확정 재고 승격이 아니다(관리자 후보 표 한정).
+const SUPPLEMENT = process.argv.includes("--supplement");
+const scan = existsSync("data/ap/stock/defect-scan.json") ? new Map((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string; flags: { code: string }[] }[]).map((r) => [r.key, [...new Set(r.flags.map((f) => f.code))]])) : new Map<string, string[]>();
 async function main() {
-  const items = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as StockItem[];
+  const items = JSON.parse(readFileSync(path.resolve(process.cwd(), arg("--items", "data/ap/stock/items.json")), "utf-8")) as StockItem[];
   const by = items.reduce<Record<string, number>>((m, c) => ((m[c.validation] = (m[c.validation] ?? 0) + 1), m), {});
   console.log(`재고 행 ${items.length}건`, by);
   const conn = await connect();
@@ -28,14 +33,14 @@ async function main() {
   const missing = [...new Set(items.map((c) => c.apSubjectCode))].filter((c) => !sid.has(c));
   if (missing.length) throw new Error(`AP 과목 행이 없습니다(커리큘럼 시드 먼저): ${missing.join(", ")}`);
   if (execute) {
-    const { error: be } = await db.from("ap_load_batches").upsert({ label: BATCH, note: "current stock load (stock.ts)" }, { onConflict: "label" }); if (be) throw new Error(be.message);
+    const { error: be } = await db.from("ap_load_batches").upsert(SUPPLEMENT ? { label: BATCH, is_current: false, note: "supplement batch (S1a code-first AB candidates; loading is not publication)" } : { label: BATCH, note: "current stock load (stock.ts)" }, { onConflict: "label" }); if (be) throw new Error(be.message);
     const { data: b } = await db.from("ap_load_batches").select("id").eq("label", BATCH).single(); batchId = b?.id ?? null;
   }
   const rows = items.map((c) => ({
     candidate_key: c.stockKey, run_id: c.run, subject_id: sid.get(c.apSubjectCode), ap_subject_code: c.apSubjectCode, kind: c.kind, keyword_code: c.keywordCode, skill_primary: c.skillPrimary, structure: c.structure,
     response_mode: c.kind === "mc" ? "select" : "explain", scoring_mode: c.kind === "mc" ? "exact" : "partial", difficulty_provisional: c.difficultyProvisional,
     payload: { ...c.payload, cellId: c.cellId, unitCode: c.unitCode, archetype: c.archetype ?? null, legacyReserveFlag: c.legacyReserve }, verification: {}, review: {},
-    review_state: c.validation, rejection_reason: c.validation === "rejected" ? c.rejectionReason : null, gate_version: c.gateVersion, expert_status: c.expertStatus, release_tier: c.releaseTier, render_verified: c.renderVerified, screen_verified: c.screenVerified, load_batch_id: batchId, is_current: true,
+    review_state: c.validation, rejection_reason: c.validation === "rejected" ? c.rejectionReason : null, gate_version: c.gateVersion, expert_status: c.expertStatus, release_tier: c.releaseTier, render_verified: c.renderVerified, screen_verified: c.screenVerified, load_batch_id: batchId, is_current: true, defect_flags: scan.get(c.stockKey) ?? [], defect_scanned_at: new Date().toISOString(),
     used_in_sample: c.selectedForSample, legacy_reserve: c.legacyReserve, item_family_id: c.itemFamilyId || null, duplicate_of: c.duplicateOf, duplicate_reason: c.duplicateReason,
     content_key: c.contentKey, shared_with: c.sharedWith, calculator: c.calculator === "required" || c.calculator === "not_allowed" ? c.calculator : "na", stock_cell: c.stockCell,
   }));

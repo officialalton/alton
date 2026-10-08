@@ -25,6 +25,24 @@ const numbers = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []).map((x) => x.
 const norm = (s: string) => s.replace(/\s+/g, " ").trim().toLowerCase();
 const plain = (s: string) => s.replace(/\$/g, "").replace(/\\[a-zA-Z]+/g, "").replace(/[{}^_]/g, "");
 
+
+const REJECT = /\b(wrong|incorrect|not|no|never|cannot|fails?|failing|ignores?|ignoring|confus\w*|misappl\w*|mis\w+|mistak\w*|false|instead|neither|nor|rather|however|but|only|treats?|assumes?|uses|using|keeps?|drops?|dropping|forgets?|forgetting|omits?|misses|missing|reverses?|swaps?|doubl\w*|halv\w*|comes? from|contradicts?|(?:option|choice|answer|value|claim|statement|integral|expression|result)s?)\b/i;
+const STOP = new Set(["the", "and", "that", "this", "with", "from", "because", "which", "when", "than", "then", "does", "have", "limit", "value", "answer", "choice", "option", "claim", "function", "correct", "exist"]);
+const tokens = (t: string) => (plain(t).toLowerCase().match(/[a-z]{4,}|\d+(?:\.\d+)?/g) ?? []).filter((x) => !STOP.has(x));
+/** 오답 중 해설에서 배척 진술이 없는 개수. 배척 진술 = 부정·대비 표지를 가진 문장이 (a) 오답 문구/구별 토큰을 언급하거나 (b) 오답 수만큼 별도 문장으로 존재. 의미 정확성은 판단하지 않는다. */
+export function distractorsMissing(p: McPack, e: string): number {
+  const sents = e.split(/(?<=[.!?])\s+|\n+/).map((x) => x.trim()).filter(Boolean);
+  const keyToks = new Set(tokens(p.options[p.key_index].text));
+  const dis = p.options.map((o, i) => ({ o, i })).filter((x) => x.i !== p.key_index);
+  const rejecting = sents.slice(1).filter((x) => REJECT.test(x));
+  const anchored = dis.filter(({ o }) => {
+    const txt = plain(o.text).trim(); const dt = tokens(o.text).filter((t) => !keyToks.has(t));
+    return rejecting.some((x) => (txt.length > 1 && plain(x).includes(txt)) || dt.some((t) => plain(x).toLowerCase().includes(t))) || (o.value !== null && numbers(e).includes(String(Number(o.value)).replace(/^-/, "")));
+  }).length;
+  const bySentence = Math.min(dis.length, rejecting.length);
+  return dis.length - Math.max(anchored, bySentence);
+}
+
 export function gateMc(subject: string, p: McPack): string[] {
   const r: string[] = [];
   const want = OPTION_COUNT[subject] ?? 4;
@@ -59,9 +77,8 @@ export function gateMc(subject: string, p: McPack): string[] {
     const m = e.match(/^The correct answer is (.+?)\.(?:\s|$)/);
     if (m && plain(m[1]).replace(/\s+/g, "") !== plain(p.options[p.key_index].text).replace(/\s+/g, "")) r.push("explanation_key_mismatch");
     if (e.trim().length < 80) r.push("explanation_too_short");
-    // 정답과 각 오답의 값/식이 해설에 언급되는지(오답 이유 설명)
-    const missing = p.options.filter((o, i) => i !== p.key_index && !e.includes(o.text.replace(/\$/g, "")) && !(o.value !== null && numbers(e).includes(String(Number(o.value)).replace(/^-/, "")))).length;
-    if (missing > 1) r.push("explanation_does_not_cover_distractors");
+    // 오답 해설 포함 여부(v2, 2026-10-09): 문구 일치가 아니라 "오답마다 그것을 배척하는 진술이 있는가"를 본다. 진술의 정확성은 동결 검토기의 해설 기준이 판단한다.
+    if (distractorsMissing(p, e) > 1) r.push("explanation_does_not_cover_distractors");
   }
   return [...new Set(r)];
 }

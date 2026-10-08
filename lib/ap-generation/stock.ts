@@ -8,7 +8,7 @@ export type Validation = "rejected" | "needs_revalidation" | "auto_passed" | "ex
 export type ExpertStatus = "unreviewed" | "in_review" | "approved" | "issues_reported";
 export type ReleaseTier = "candidate" | "review_env" | "launch";
 export const LATEST_GATE = "v2-code-first-final-2026-10-08";
-export const GATE_OF_RUN: Record<string, string> = { run1: "v1-llm-generated-2026-10-07", run2: LATEST_GATE, run2bc: LATEST_GATE };
+export const GATE_OF_RUN: Record<string, string> = { run1: "v1-llm-generated-2026-10-07", run2: LATEST_GATE, run2bc: LATEST_GATE, "s1a-final": LATEST_GATE };
 export const VARIANT_CAP = 2; // 한 문항군이 칸 채움에 기여하는 최대 문항 수(원본 + 변형 1)
 export type RawCand = {
   candidateKey: string; cellId: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; keywordCode: string; unitCode: string; skillPrimary: string; structure: string; calculator: string;

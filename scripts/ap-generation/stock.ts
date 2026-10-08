@@ -11,14 +11,20 @@ const arg = (n: string, d: string) => { const i = process.argv.indexOf(n); retur
 const MC_TARGET = Number(arg("--mc-target", "50")); const FRQ_TARGET = Number(arg("--frq-target", "5"));
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027"); const OUT = path.resolve(process.cwd(), "data/ap/stock"); mkdirSync(OUT, { recursive: true });
 const load = (run: string) => (existsSync(path.join(ROOT, run, "candidates.json")) ? (JSON.parse(readFileSync(path.join(ROOT, run, "candidates.json"), "utf-8")) as RawCand[]) : []);
-const runs = { run1: load("run1"), run2: load("run2"), run2bc: load("run2bc") };
+const WITH_S1A = process.argv.includes("--with-s1a"); // S1a 후보를 별도 보조 배치로 내보낼 때(items.json 의 783행 기준선은 바꾸지 않는다)
+const runs: Record<string, RawCand[]> = { run1: load("run1"), run2: load("run2"), run2bc: load("run2bc"), ...(WITH_S1A ? { "s1a-final": load("s1a-final") } : {}) };
 // 이력: 중간 런에서 같은 원형·시드(pack_id)로 평가된 결과를 최종 항목의 history 에 붙인다.
 const history: Record<string, HistoryEntry[]> = {};
 const hk = (c: RawCand) => `${c.apSubjectCode}|${(c.payload as { pack_id?: string }).pack_id ?? c.candidateKey}`;
 for (const [run, interim] of [["run2", ["run2a", "run2b"]], ["run2bc", ["run2bc_a", "run2bc_b"]]] as const) for (const ir of interim) for (const c of load(ir)) { (history[hk(c)] ??= []).push({ run: ir, gateVersion: `v2-interim-${ir}`, outcome: c.rejectionReason ? "rejected" : "passed", reasons: c.rejectionReason }); void run; }
+if (WITH_S1A) for (const c of load("s1a-final") as (RawCand & { history?: { run: string; outcome: "passed" | "rejected"; reasons: string | null }[] })[]) (history[hk(c)] ??= []).push(...(c.history ?? []).slice(0, -0 || undefined).map((h) => ({ run: h.run, gateVersion: LATEST_GATE, outcome: h.outcome, reasons: h.reasons })).filter((_, i, a) => i < a.length - 1)); // 시도 이력(최초·수선); 마지막 시도는 buildStock 이 현재 행으로 기록
+// 파서 오류로 반려됐다가 정규화 파서에서 전 게이트 통과가 확인된 후보만(후보 ID·오류 파서·사후 결과 모두 확인된 건) 상태를 올린다. "+24 추정" 전체가 아니다.
+const reparse = existsSync(path.join(OUT, "reparse-candidates.json")) ? (JSON.parse(readFileSync(path.join(OUT, "reparse-candidates.json"), "utf-8")) as { run: string; key: string; old_reason: string; confirmed: boolean }[]).filter((r) => r.confirmed) : [];
+for (const r of reparse) { const list = runs[r.run]; const i = list?.findIndex((c) => c.candidateKey === r.key) ?? -1; if (i < 0) continue; const c = list[i]; (history[hk(c)] ??= []).push({ run: "reparse-2026-10-09", gateVersion: LATEST_GATE, outcome: "rejected", reasons: `malformed review output (old parser): ${r.old_reason}` }); list[i] = { ...c, rejectionReason: null, reviewState: "auto_passed" } as RawCand; }
 const items = buildStock(runs, { history, historyKey: hk });
 const subjects = ["ap_calculus_ab", "ap_calculus_bc", "ap_biology", "ap_microeconomics"];
 const summary = summarize(items); const cells = cellCounts(items);
+if (WITH_S1A) { writeFileSync(path.join(OUT, "s1a-items.json"), JSON.stringify(items.filter((i) => i.run === "s1a-final").map((i) => ({ ...i })), null, 0)); console.log(`s1a-items.json: ${items.filter((i) => i.run === "s1a-final").length}행(전체 ${items.length}행 기준으로 중복·문항군 계산)`); process.exit(0); }
 writeFileSync(path.join(OUT, "items.json"), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
 writeFileSync(path.join(OUT, "summary.json"), JSON.stringify({ latestGate: LATEST_GATE, variantCap: VARIANT_CAP, summary, cells }, null, 1));
 

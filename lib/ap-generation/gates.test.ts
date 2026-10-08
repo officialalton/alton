@@ -162,3 +162,19 @@ d("Biology FRQ: per-part skill/topic/rubric, representative skill vs part skills
     }
   });
 });
+
+describe("해설의 오답 처리 게이트(v2: 문구 일치 아님)", () => {
+  const base = { archetype: "x", topic: "2.3", skill: "1.E", calculator: "not_allowed" as const, stem: "What is $q'(1)$?", stimulus: { kind: "none", description: "", data: {} }, options: [{ text: "$4$", why: "key", value: null }, { text: "$3$", why: "forgets the denominator squared in the quotient rule", value: null }, { text: "$-4$", why: "sign", value: null }, { text: "$0$", why: "treats numerator as zero", value: null }], key_index: 0, est_seconds: 75, facts: [] };
+  it("오답마다 배척 문장이 있으면(문구 인용 없이도) 통과한다", () => {
+    const e = "Using the quotient rule, the derivative at 1 equals 4 after evaluating each term from the table. The second choice drops the squared denominator. The third reverses the sign of the numerator. The last treats the numerator as zero and ignores the other term.";
+    expect(gateMc("ap_calculus_ab", { ...base, explanation_en: e })).not.toContain("explanation_does_not_cover_distractors");
+  });
+  it("정답만 설명하고 오답을 다루지 않으면 걸린다", () => {
+    const e = "Using the quotient rule with the table values the derivative at 1 equals 4. Evaluate the numerator first and then divide by the square of the denominator value shown.";
+    expect(gateMc("ap_calculus_ab", { ...base, explanation_en: e })).toContain("explanation_does_not_cover_distractors");
+  });
+  it("해설의 정답이 키와 다르면 별도 사유로 걸린다(오답 키 결함)", () => {
+    const e = "The correct answer is $3$. The second choice drops it. The third is wrong. The last ignores it entirely, giving a wrong result.";
+    expect(gateMc("ap_calculus_ab", { ...base, explanation_en: e })).toContain("explanation_key_mismatch");
+  });
+});

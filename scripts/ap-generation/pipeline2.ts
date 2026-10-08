@@ -181,16 +181,21 @@ function checkStage() {
 const checks = () => (existsSync(path.join(DIR, "check.json")) ? readJson<Record<string, { reasons: string[]; wording: string }>>(path.join(DIR, "check.json")) : {});
 const alive = () => buildCands().filter((c) => c.item && (checks()[c.key]?.reasons.length ?? 1) === 0);
 
+// 렌더 이미지 모드(S1c 그림·표 결함 평가): 학생이 보는 렌더 PNG 를 입력으로 주고 데이터 명세는 숨긴다. 이 모드는 검토기의 입력 변경(= 수정된 검토기)이므로 결과를 별도로 보고한다.
+const IMG_DIR = process.env.AP_IMAGE_DIR; const imgOf = (c: Cand): unknown[] | null => { if (!IMG_DIR) return null; const f = path.join(IMG_DIR, `${c.key}.png`); return existsSync(f) ? [{ type: "image", source: { type: "base64", media_type: "image/png", data: readFileSync(f).toString("base64") } }] : null; };
+const hideSpec = (m: McPack): McPack => (IMG_DIR && imgOf({ key: "" } as Cand) === null && false ? m : m);
+const withImg = (c: Cand, text: string): string | unknown[] => { const im = imgOf(c); return im ? [...im, { type: "text", text: `The figure/table for this item is shown in the attached image (rendered exactly as a student sees it).\n\n${text}` }] : text; };
+const stimFor = (c: Cand, st: McPack["stimulus"]) => (imgOf(c) ? { kind: st.kind, description: "(shown in the attached image)" } : st);
 const blind = (c: Cand): Json => {
-  if (c.kind === "mc") { const m = c.item as McPack; return { stimulus: m.stimulus, stem: m.stem, options: m.options.map((o) => o.text) }; }
+  if (c.kind === "mc") { const m = c.item as McPack; return { stimulus: stimFor(c, m.stimulus), stem: m.stem, options: m.options.map((o) => o.text) }; }
   const f = c.item as FrqPack; return { title: f.title, stimulus: f.stimulus, calculator_part: f.calculator, parts: f.parts.map((p) => ({ label: p.label, prompt: p.prompt, points: p.points })) };
 };
 const solveTool = { name: "submit_solution", description: "Submit your independent solution.", input_schema: { type: "object", properties: { answers: { type: "array", items: { type: "object", properties: { item: { type: "string" }, choice_index: { type: ["integer", "null"] }, final_answer: { type: "string" }, brief_reasoning: { type: "string" }, ambiguous_or_flawed: { type: "boolean" }, flaw_note: { type: "string" } }, required: ["item", "brief_reasoning", "ambiguous_or_flawed"] } } }, required: ["answers"] } };
 const SOLVE_SYS = "You are an AP course expert solving a practice item as a student would. Solve independently from the stated data only. For multiple choice give choice_index (0-based). For free response give the final answer per part (numbers with units where asked). If the item is ambiguous, has two defensible answers, lacks a needed condition or contradicts its stimulus, set ambiguous_or_flawed true and say why.";
 const ctx = (c: Cand) => { const cell = cells().find((x) => x.cellId === c.cellId)!; return `Subject ${SUBJECT}. Unit ${cell.unitCode}; topic ${cell.topic} "${topicTitle.get(cell.topic)}"; target skill ${cell.skill} (${skillLabel.get(cell.skill)}); calculator ${cell.calculator}. ${guideReviewRules(cell.unitCode)}${cell.extraTopics.length ? ` The bundle legitimately spans related topics ${[cell.topic, ...cell.extraTopics].join(", ")}.` : ""}`; };
-const mk = (id: string, model: string, sys: string, tool: Json, user: string, max: number): BatchReq => ({ custom_id: id, params: { model, ...think(model), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });
+const mk = (id: string, model: string, sys: string, tool: Json, user: string | unknown[], max: number): BatchReq => ({ custom_id: id, params: { model, ...think(model), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });
 async function solveStage() {
-  const cs = alive(); const reqs = cs.map((c) => mk(`s-${c.key}`, MODELS.solve, SOLVE_SYS, solveTool, `${JSON.stringify(blind(c))}\n\nSolve every item/part and submit via submit_solution (answers[].item = "1" for MC or the part label).`, c.kind === "mc" ? 3000 : 5000));
+  const cs = alive(); const reqs = cs.map((c) => mk(`s-${c.key}`, MODELS.solve, SOLVE_SYS, solveTool, withImg(c, `${JSON.stringify(blind(c))}\n\nSolve every item/part and submit via submit_solution (answers[].item = "1" for MC or the part label).`), c.kind === "mc" ? 3000 : 5000));
   const est = estimate(MODELS.solve, reqs.length, 1500, 2200);
   console.log(`solve: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
@@ -236,17 +241,17 @@ const reviewTool = { name: "submit_review", description: "Submit the review.", i
   matches_reference_pattern: { type: "boolean" }, resembles_known_exam_item: { type: "boolean", description: "true ONLY if the item reproduces a specific recognizable released AP item (same numbers, context and wording). Generic textbook forms (product rule from a table, Riemann sums) are NOT a resemblance." }, summary: { type: "string" } }, required: ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability", "instant_reject", "matches_reference_pattern", "resembles_known_exam_item", "summary"] } };
 const diffTool = { name: "submit_difficulty", description: "Submit provisional difficulty.", input_schema: { type: "object", properties: { label: { type: "string", enum: ["basic_learning", "exam_prep", "advanced_supplement"] }, rationale: { type: "string" }, reading_load: { type: "string", enum: ["low", "medium", "high"] }, computation_load: { type: "string", enum: ["low", "medium", "high"] }, reasoning_steps: { type: "integer" }, representation_changes: { type: "integer" }, difficulty_from_unfair_sources: { type: "boolean" }, est_seconds: { type: "integer" } }, required: ["label", "rationale", "reading_load", "computation_load", "reasoning_steps", "representation_changes", "difficulty_from_unfair_sources", "est_seconds"] } };
 const DIFF_SYS = "You tag provisional internal difficulty for AP practice items: basic_learning, exam_prep (target for full mocks) or advanced_supplement. Judge only from concept depth, reasoning steps, representation changes, reading and computation load. Do NOT infer difficulty from any claim of AP score level or from model agreement. Flag difficulty_from_unfair_sources if the item is hard only because of long arithmetic, vagueness, heavy reading or out-of-scope knowledge.";
-const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });
+const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), stimulus: stimFor(c, (c.item as McPack).stimulus), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });
 async function reviewStage() {
   const cs = alive().filter((c) => solved(c));
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), 3000));
   const est = estimate(MODELS.review, reqs.length, 2800, 1100);
   console.log(`review: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 async function reviewRetryStage() { // 불완전·깨진 검토 출력만 한 번 다시 요청한다(같은 프롬프트·같은 후보; 최초 후보 수에는 영향 없음)
   const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(rev.has(`r-${c.key}`) ? (toolInput(rev.get(`r-${c.key}`) as never) as Json | null) : null).malformed.length > 0);
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), 3000));
   console.log(`review-retry: ${reqs.length}건`); if (!reqs.length) return;
   await runBatch({ dir: DIR, name: "review2", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }
