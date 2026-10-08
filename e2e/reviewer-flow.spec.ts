@@ -87,12 +87,13 @@ test.describe("외부 검수자 여정 (공개 가입 → 응시 → 신고 → 
     const admin = createClient(API_URL, SECRET, { auth: { autoRefreshToken: false, persistSession: false } });
     const { data: link, error } = await admin.auth.admin.generateLink({ type: "magiclink", email: EMAIL });
     expect(error).toBeNull();
-    userId = link!.user.id;
+    expect(link?.user).toBeTruthy();
+    userId = link!.user!.id;
     // 검수자 표시(운영에서는 mark-reviewers.ts 가 같은 방식으로 app_metadata 를 쓴다).
     await admin.auth.admin.updateUserById(userId, { app_metadata: { external_reviewer: true, reviewer_cohort: "e2e" } });
 
     await page.context().clearCookies();
-    await page.goto(`/signup/student/confirm?token_hash=${link!.properties.hashed_token}&type=email`);
+    await page.goto(`/signup/student/confirm?token_hash=${link!.properties!.hashed_token}&type=email`);
     await page.getByRole("button", { name: "Confirm email and get started" }).click();
     await page.waitForURL((u) => u.pathname === "/student");
     expect(psql(`select member_type from students where id = '${userId}';`)).toBe("free");
