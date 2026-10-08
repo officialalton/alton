@@ -47,3 +47,5 @@
 - 외부 검수자 계정·검수 결과(문제 신고·난이도 검토·의견)는 정식 오픈 시 운영 Supabase로 이전한다(계정에 외부 검수자 표시, 문항·세트 ID 유지 복사, 응시 기록·로그·테스트 계정은 제외 기본). 검수 기간 중에는 기존 프로젝트를 공유 사용, 오픈 전 운영 프로젝트 분리 — 10-07 오너 결정 — guard: 리뷰
 - 무료 회원 하루 모의고사 응시 시작 상한(2회) 폐기: 횟수 제한 없음(무료 공개 세트만, 세트 계열당 1회·멱등은 유지) — 10-08 오너 결정 — guard: lib/free-member-access.integration.test.ts
 - 지급은 당분간 수동: ALTON에서 정산 승인 후 지급 입력표(CSV)를 받아 Mercury 화면에서 직접 송금(미국 USD·한국 KRW 모두), Mercury API는 읽기 전용 토큰으로 상태·대사만(Read and Write 토큰은 만들지 않음). 자동 요청(RequestSendMoney Custom 토큰→승인 대기열)은 B 단계로 보류, KRW API 지원 확인 후 재검토, 완전 자동·고정 IP는 필요할 때 — 10-08 오너 결정 — guard: 리뷰(스위치 닫힘 테스트)
+- 학생 포털 "Mistake Notebook"은 "My Notebook"으로 개명: 서브탭 All / My Notebook(직접 저장한 비오답) / Mistake Notebook(오답·부분 정답), Grade 필터 폐지, Section→Main category→Sub-category 필터, 개인 폴더(삭제해도 문제는 Unfiled로 복귀) — 10-08 오너 결정 — guard: app/student/ProblemHistoryTab.test.tsx, app/student/notebook.integration.test.ts
+- Practice Tests 목록은 번호 오름차순(자연 정렬)·5개씩 페이지·To do/Completed 서브탭, 홈 'Next Practice Test'는 끝내지 않은 가장 낮은 번호 — 10-08 오너 결정 — guard: lib/mock-exam/open-list.test.ts, app/student/StudentMockExamTab.test.tsx

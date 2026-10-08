@@ -10,6 +10,8 @@ import {
   loadParents,
   loadStudents,
   loadTeachers,
+  loadUsersPage,
+  type UsersPageResult,
   loadStudentCreditHistoryBatch,
   loadTeacherQcWarningsBatch,
   type ParentListItem,
@@ -46,13 +48,50 @@ export async function listParentsForUsersTabAction(): Promise<ListParentsResult>
   }
 }
 
-// 2026-09-10(P1 — 관리자 "사용자" 탭 최초 진입 15~20초 개선) — 이전에는
-// admin/page.tsx가 "사용자" 탭에 진입할 때(기본 서브탭은 "학부모"인데도)
-// 학부모·학생·선생님 목록을 전부 SSR에서 함께 읽었다. 이제 최초 SSR은
-// 학부모(가벼움)만 읽고, 학생/선생님은 그 서브탭을 실제로 열 때만 이
-// 두 액션으로 클라이언트에서 조회한다 — 인증도 액션 하나당 한 번뿐이고
-// (기존에도 그랬음), 수업권 이력/QC 경고도 같은 액션에 묶어 별도 왕복을
-// 만들지 않는다.
+// 2026-10-08 — 사용자 탭 서버 페이지네이션(10명/페이지). 탭·필터·검색·페이지에 맞는
+// 한 페이지와 전체 건수만 조회한다. 수업권 이력/QC 경고도 그 페이지 id에 대해서만 읽는다.
+export type UsersPageParams = { search?: string; memberType?: "all" | "tutoring" | "free"; page?: number };
+export type ListUsersPageResult<T> = { ok: true; data: UsersPageResult<T> } | { ok: false; errorCode: string };
+
+export async function listParentsPageAction(params: UsersPageParams = {}): Promise<ListUsersPageResult<ParentListItem>> {
+  const startedAt = Date.now();
+  try {
+    const { supabase } = await requireAdmin();
+    const data = (await loadUsersPage(supabase, "parent", params)) as UsersPageResult<ParentListItem>;
+    console.log(JSON.stringify({ event: "server_timing", stage: "users_tab.parents.page_total", ms: Date.now() - startedAt, count: data.items.length, total: data.total }));
+    return { ok: true, data };
+  } catch (e) {
+    return { ok: false, errorCode: e instanceof Error ? e.message : "unknown_error" };
+  }
+}
+
+export async function listStudentsPageAction(params: UsersPageParams = {}): Promise<
+  ListUsersPageResult<StudentListItem> & { creditHistoryByStudent?: Record<string, CreditTransaction[]> }
+> {
+  try {
+    const { supabase } = await requireAdmin();
+    const data = (await loadUsersPage(supabase, "student", params)) as UsersPageResult<StudentListItem>;
+    const creditHistoryByStudent = await loadStudentCreditHistoryBatch(supabase, data.items.map((s) => s.id));
+    return { ok: true, data, creditHistoryByStudent };
+  } catch (e) {
+    return { ok: false, errorCode: e instanceof Error ? e.message : "unknown_error" };
+  }
+}
+
+export async function listTeachersPageAction(params: UsersPageParams = {}): Promise<
+  ListUsersPageResult<TeacherListItem> & { qcWarningsByTeacher?: Record<string, QcWarning[]> }
+> {
+  try {
+    const { supabase } = await requireAdmin();
+    const data = (await loadUsersPage(supabase, "teacher", params)) as UsersPageResult<TeacherListItem>;
+    const qcWarningsByTeacher = await loadTeacherQcWarningsBatch(supabase, data.items.map((t) => t.id));
+    return { ok: true, data, qcWarningsByTeacher };
+  } catch (e) {
+    return { ok: false, errorCode: e instanceof Error ? e.message : "unknown_error" };
+  }
+}
+
+// 전체 목록 조회(페이지네이션 없음) — Messenger 탭의 선생님 선택 등 전체가 필요한 곳 전용.
 export async function listStudentsForUsersTabAction(): Promise<{
   students: StudentListItem[];
   creditHistoryByStudent: Record<string, CreditTransaction[]>;

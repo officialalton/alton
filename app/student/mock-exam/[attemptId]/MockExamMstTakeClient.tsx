@@ -34,7 +34,42 @@ const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 
 // 이전·다음 화살표: 똑같은 중립 윤곽 버튼. 마우스 클릭 뒤에는 포커스 링을 남기지 않는다(focus-visible 만).
 const NAV_BTN =
-  "flex h-10 w-12 items-center justify-center rounded-lg border-[1.5px] border-grey-300 bg-white text-[20px] font-semibold text-ink hover:bg-grey-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 disabled:opacity-40 disabled:hover:bg-white";
+  "flex h-11 w-14 items-center md:h-10 md:w-12 justify-center rounded-lg border-[1.5px] border-grey-300 bg-white text-[20px] font-semibold text-ink hover:bg-grey-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 disabled:opacity-40 disabled:hover:bg-white";
+
+// 좁은 화면: 지문+선택지가 한 세로 흐름으로 스크롤된다. iOS 는 스크롤바가 사라지므로 아래에 더 있으면 페이드+화살표를 보여 준다.
+function ScrollPanes({ resetKey, children }: { resetKey: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [more, setMore] = useState(false);
+  const update = useCallback(() => {
+    const el = ref.current;
+    if (el) setMore(el.scrollHeight - el.scrollTop - el.clientHeight > 8);
+  }, []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.scrollTop = 0;
+    update();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(update) : null;
+    ro?.observe(el);
+    Array.from(el.children).forEach((c) => ro?.observe(c));
+    return () => ro?.disconnect();
+  }, [resetKey, update]);
+  return (
+    <div className="relative flex min-h-0 flex-1 flex-col">
+      <div ref={ref} onScroll={update} className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden" data-testid="mst-panes">
+        {children}
+      </div>
+      {more && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-14 items-end justify-center bg-gradient-to-t from-white via-white/80 to-transparent pb-1 md:hidden" data-testid="mst-scroll-cue" aria-hidden="true">
+          <span className="flex items-center gap-1 text-[11px] font-semibold text-grey-500">
+            Scroll for more
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function ToolIconButton({
   label,
@@ -59,7 +94,7 @@ function ToolIconButton({
       aria-label={label}
       title={title}
       data-testid={testId}
-      className={`inline-flex h-7 w-7 items-center justify-center rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+      className={`inline-flex h-11 w-11 items-center justify-center rounded md:h-7 md:w-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
         pressed ? "bg-ink text-white" : "text-ink hover:bg-black/10"
       }`}
     >
@@ -359,8 +394,8 @@ export default function MockExamMstTakeClient({
   const mathTools = mstMathToolsAllowed(state.currentModule);
 
   return (
-    <div className="flex h-screen flex-col bg-white">
-      <header className="flex items-center justify-between border-b border-grey-200 px-6 py-3">
+    <div className="flex h-dvh flex-col bg-white">
+      <header className="flex items-center justify-between gap-2 border-b border-grey-200 px-3 py-2 md:px-6 md:py-3">
         <div className="text-[13.5px] font-bold text-ink" data-testid="mst-module-label">
           {MST_MODULE_LABELS[state.currentModule]}
         </div>
@@ -385,7 +420,7 @@ export default function MockExamMstTakeClient({
             type="button"
             onClick={() => setConfirmOpen(true)}
             disabled={busy}
-            className="rounded-md bg-ink px-3.5 py-1.5 text-[12.5px] font-bold text-white disabled:opacity-50"
+            className="min-h-[44px] rounded-md bg-ink px-3 py-1.5 text-[12.5px] font-bold text-white disabled:opacity-50 md:min-h-0 md:px-3.5"
             data-testid="mst-submit-module"
           >
             Submit Module
@@ -393,9 +428,9 @@ export default function MockExamMstTakeClient({
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1">
-        <nav aria-label="Question navigator" className="w-[96px] shrink-0 overflow-y-auto border-r border-grey-200 p-3">
-          <div className="grid grid-cols-3 gap-1.5">
+      <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+        <nav aria-label="Question navigator" className="shrink-0 overflow-x-auto border-b border-grey-200 px-3 py-2 md:w-[96px] md:overflow-y-auto md:overflow-x-visible md:border-b-0 md:border-r md:p-3">
+          <div className="flex gap-1.5 md:grid md:grid-cols-3">
             {state.items.map((it, i) => {
               const answered = (responses[it.setItemId] ?? "") !== "";
               const flagged = flags[it.setItemId] ?? false;
@@ -407,7 +442,7 @@ export default function MockExamMstTakeClient({
                   onClick={() => goTo(i)}
                   aria-current={i === cursor ? "true" : undefined}
                   aria-label={`Question ${it.moduleSeq}${answered ? ", answered" : ""}${flagged ? ", marked for review" : ""}${guessed ? ", guessed" : ""}`}
-                  className={`relative h-7 rounded border text-[11.5px] font-bold ${
+                  className={`relative h-11 w-11 shrink-0 rounded border text-[13px] font-bold md:h-7 md:w-auto md:text-[11.5px] ${
                     i === cursor
                       ? "border-ink bg-ink text-white"
                       : flagged
@@ -423,7 +458,7 @@ export default function MockExamMstTakeClient({
               );
             })}
           </div>
-          <div className="mt-3 text-[10.5px] text-grey-500">
+          <div className="hidden text-[10.5px] text-grey-500 md:mt-3 md:block">
             {answeredCount}/{state.items.length} answered
           </div>
         </nav>
@@ -439,7 +474,7 @@ export default function MockExamMstTakeClient({
                 >
                   {item.moduleSeq}
                 </div>
-                <div className="flex flex-1 items-center gap-1 px-2" data-testid="mst-tools">
+                <div className="flex flex-1 items-center gap-0.5 px-1 md:gap-1 md:px-2" data-testid="mst-tools">
                   {highlightSupported && (
                     <ToolIconButton
                       label="Highlight"
@@ -487,8 +522,8 @@ export default function MockExamMstTakeClient({
                     onClick={() => void toggleSaved(item.setItemId)}
                     aria-pressed={savedMap[item.setItemId] ?? false}
                     aria-label={savedMap[item.setItemId] ? "Remove from saved questions" : "Save question"}
-                    title={savedMap[item.setItemId] ? "Saved to Practice" : "Save to Practice"}
-                    className="inline-flex h-7 w-7 items-center justify-center rounded text-ink hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
+                    title={savedMap[item.setItemId] ? "Saved to My Notebook" : "Save to My Notebook"}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded text-ink hover:bg-black/10 md:h-7 md:w-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill={savedMap[item.setItemId] ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true">
                       <path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z" />
@@ -498,21 +533,21 @@ export default function MockExamMstTakeClient({
               </div>
 
               {/* 두 칸: 왼쪽 지문·문제·그림 / 오른쪽 선택지(또는 답 입력). 각 칸이 따로 스크롤, 좁은 화면에서는 위아래로 쌓인다. */}
-              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden" data-testid="mst-panes">
-                <section aria-label="Passage and question" className="min-w-0 overflow-x-auto px-8 py-6 md:w-1/2 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
+              <ScrollPanes resetKey={item.setItemId}>
+                <section aria-label="Passage and question" className="min-w-0 shrink-0 overflow-x-auto overflow-y-hidden px-4 py-4 md:shrink md:w-1/2 md:px-8 md:py-6 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
                   <AnnotationLayer
                     key={item.setItemId}
                     highlightMode={highlightMode}
                     highlights={annotations[item.setItemId]?.highlights ?? []}
                     onChange={(h) => void updateAnnotations(item.setItemId, { highlights: h, eliminated: annotations[item.setItemId]?.eliminated ?? [] })}
                   >
-                    {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
+                    {dedupeStem(item.passage, item.question) && <RwStimulusView question={item.question} passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
                     {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
                   </AnnotationLayer>
                   {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-4" /> : null}
                 </section>
 
-                <section aria-label="Answer" className="px-8 py-6 md:w-1/2 md:overflow-y-auto" data-testid="mst-pane-right">
+                <section aria-label="Answer" className="shrink-0 px-4 py-4 md:shrink md:px-8 md:py-6 md:w-1/2 md:overflow-y-auto" data-testid="mst-pane-right">
                   {item.format === "mc" && item.options ? (
                     <div role="radiogroup" aria-label="Answer choices" className="flex flex-col gap-2">
                       {item.options.map((opt, idx) => {
@@ -536,7 +571,7 @@ export default function MockExamMstTakeClient({
                                 void saveAnswer(item.setItemId, String(idx));
                               }
                             }}
-                            className={`flex min-w-0 items-start gap-2.5 rounded-lg border-2 px-3 py-2 text-left text-[13.5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+                            className={`flex min-w-0 items-start gap-2.5 min-h-[48px] rounded-lg border-2 px-3 py-2.5 text-left text-[15px] md:min-h-0 md:py-2 md:text-[13.5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
                               chosen ? "border-ink bg-ink/5 font-bold" : "border-grey-200"
                             } ${struck ? "opacity-50" : ""}`}
                           >
@@ -565,7 +600,7 @@ export default function MockExamMstTakeClient({
                         inputMode="decimal"
                         value={responses[item.setItemId] ?? ""}
                         onChange={(e) => saveSprDebounced(item.setItemId, e.target.value)}
-                        className="w-48 rounded-lg border-[1.5px] border-grey-200 px-3 py-2 text-[14px] text-ink"
+                        className="w-48 rounded-lg border-[1.5px] border-grey-200 px-3 py-2.5 text-[16px] text-ink"
                         data-testid="mst-spr-input"
                       />
                       <details className="mt-4 max-w-xl rounded-lg border border-grey-200 p-3" data-testid="mst-spr-help">
@@ -576,10 +611,10 @@ export default function MockExamMstTakeClient({
                   )}
                   {error && <p className="mt-4 text-[12.5px] text-red">{error}</p>}
                 </section>
-              </div>
+              </ScrollPanes>
 
               {/* 하단 액션 막대 — 문항 크기와 무관하게 같은 자리에 고정. */}
-              <div className="flex shrink-0 items-center justify-between border-t border-grey-200 bg-white px-8 py-3" data-testid="mst-footer">
+              <div className="flex shrink-0 items-center justify-between border-t border-grey-200 bg-white px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:px-8 md:py-3" data-testid="mst-footer">
                 <button type="button" onClick={() => goTo(Math.max(0, cursor - 1))} disabled={cursor === 0} aria-label="Previous question" className={NAV_BTN}>
                   ←
                 </button>
@@ -591,7 +626,7 @@ export default function MockExamMstTakeClient({
                     aria-label={flags[item.setItemId] ? "Unmark for Review" : "Mark for Review"}
                     title={flags[item.setItemId] ? "Unmark Solve Later" : "Mark Solve Later"}
                     data-testid="mock-exam-solve-later-toggle"
-                    className={`flex h-10 items-center justify-center rounded-lg border-[1.5px] px-3 text-[13px] font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
+                    className={`flex h-11 items-center justify-center rounded-lg border-[1.5px] px-3 text-[13px] font-semibold md:h-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 ${
                       flags[item.setItemId] ? "border-ink bg-ink text-white" : "border-grey-200 text-grey-600 hover:border-ink hover:text-ink"
                     }`}
                   >
@@ -603,7 +638,7 @@ export default function MockExamMstTakeClient({
                       type="button"
                       onClick={() => setConfirmOpen(true)}
                       disabled={busy}
-                      className="rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white disabled:opacity-50"
+                      className="min-h-[44px] rounded-lg bg-ink px-4 py-2 text-[13px] font-bold text-white disabled:opacity-50"
                       data-testid="mst-submit-last"
                     >
                       Submit Module
@@ -636,7 +671,7 @@ export default function MockExamMstTakeClient({
 
       {confirmOpen && (
         <div role="dialog" aria-modal="true" aria-labelledby="mst-submit-title" className="fixed inset-0 z-40 flex items-center justify-center bg-black/40">
-          <div className="w-[420px] rounded-xl bg-white p-6 shadow-lg">
+          <div className="mx-4 w-full max-w-[420px] rounded-xl bg-white p-6 shadow-lg">
             <h2 id="mst-submit-title" className="text-[16px] font-extrabold text-ink">Submit this module?</h2>
             <p className="mt-2 text-[13px] text-grey-500">
               {answeredCount} of {state.items.length} questions answered. Once you submit, you cannot return to this module.

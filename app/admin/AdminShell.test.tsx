@@ -53,6 +53,9 @@ vi.mock("./users-actions", () => ({
   listParentsForUsersTabAction: vi.fn().mockResolvedValue({ ok: true, data: [] }),
   listStudentsForUsersTabAction: vi.fn().mockResolvedValue({ students: [], creditHistoryByStudent: {} }),
   listTeachersForUsersTabAction: vi.fn().mockResolvedValue({ teachers: [], qcWarningsByTeacher: {} }),
+  listParentsPageAction: vi.fn().mockResolvedValue({ ok: true, data: { items: [], total: 0, page: 1, pageSize: 10, pageCount: 1 } }),
+  listStudentsPageAction: vi.fn().mockResolvedValue({ ok: true, data: { items: [], total: 0, page: 1, pageSize: 10, pageCount: 1 } }),
+  listTeachersPageAction: vi.fn().mockResolvedValue({ ok: true, data: { items: [], total: 0, page: 1, pageSize: 10, pageCount: 1 } }),
 }));
 
 vi.mock("./teacher-subjects-actions", () => ({

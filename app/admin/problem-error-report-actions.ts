@@ -6,6 +6,7 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin-auth";
 import type { ReportType, Verdict } from "@/lib/problem-error-reports/labels";
+import type { ConfirmedExportRow } from "@/lib/problem-error-reports/confirmed-export";
 
 export type ReportedProblemGroup = {
   problemId: string;
@@ -23,11 +24,22 @@ export type ReportedProblemGroup = {
   lastAt: string;
   archived: boolean;
   latestDecision: Verdict | null;
+  versionNo?: number;
+  currentVersionNo?: number | null;
+  state?: ReportState;
+  confirmedAt?: string | null;
 };
+
+/** review=검토 필요(미확인·미해결) · confirmed=확인(수정 대기) · fixed=신고 버전보다 새 공개 버전이 있음(계산). */
+export type ReportState = "review" | "confirmed" | "fixed";
+export type ReportCounts = { review: number; confirmed: number; fixed: number; all: number };
+export type ReportView = "open" | "confirmed" | "fixed" | "all";
 
 export type ReportedProblemDetail = {
   problem: { id: string; format: string; satDomain: string | null; skillCode: string | null; usageScope: string; archived: boolean; archivedReason: string | null; reviewNeeded: boolean };
-  version: { id: string; versionNo: number; status: string; passage: string | null; question: string | null; options: string[] | null; correctIndex: number | null; answers: string[] | null; explanation: string | null; difficulty: string | null };
+  version: { id: string; versionNo: number; status: string; passage: string | null; question: string | null; options: string[] | null; correctIndex: number | null; answers: string[] | null; explanation: string | null; explanationEn?: string | null; figure?: unknown; difficulty: string | null };
+  currentVersionNo?: number | null;
+  confirmation?: { confirmedAt: string; confirmedByName: string | null; note: string | null } | null;
   reports: { id: string; source: string; sessionSource: string | null; reporterRole: string; reporterName: string | null; reportType: ReportType; memo: string | null; createdAt: string; resolved: boolean }[];
   reportTotal: number;
   affected: { mockAttemptsGraded: number; mockAttemptsOpen: number; sessionWorks: number; mockAdjusted: number; sessionAdjusted: number; sessionPending: number; homework?: { items: number; adjusted: number; pending: number } };
@@ -65,7 +77,7 @@ export type ReplacementNeedSummary = {
 
 export type ReportFilter = { skill?: string | null; difficulty?: string | null; domain?: string | null; days?: number | null };
 
-export async function listReportedProblemsAction(input: { status?: "open" | "all"; offset?: number; limit?: number } & ReportFilter = {}): Promise<{ total: number; rows: ReportedProblemGroup[] }> {
+export async function listReportedProblemsAction(input: { status?: ReportView; offset?: number; limit?: number } & ReportFilter = {}): Promise<{ total: number; counts: ReportCounts; rows: ReportedProblemGroup[] }> {
   const { supabase } = await requireAdmin();
   const { data, error } = await supabase.rpc("problem_error_report_groups", {
     p_status: input.status ?? "open",
@@ -77,8 +89,8 @@ export async function listReportedProblemsAction(input: { status?: "open" | "all
     p_days: input.days ?? null,
   });
   if (error) throw new Error(error.message);
-  const d = data as { total: number; rows: ReportedProblemGroup[] };
-  return { total: Number(d.total ?? 0), rows: d.rows ?? [] };
+  const d = data as { total: number; counts?: ReportCounts; rows: ReportedProblemGroup[] };
+  return { total: Number(d.total ?? 0), counts: d.counts ?? { review: 0, confirmed: 0, fixed: 0, all: 0 }, rows: d.rows ?? [] };
 }
 
 export async function getReportedProblemDetailAction(problemId: string, versionId: string): Promise<ReportedProblemDetail> {
@@ -136,4 +148,28 @@ export async function getReportStatsAction(days: number | null = null): Promise<
   const { data, error } = await supabase.rpc("problem_error_report_stats", { p_days: days });
   if (error) throw new Error(error.message);
   return data as ReportStats;
+}
+
+/** '확인' 표시 — 판정(verdict)과 별개. 보관·정답 처리·교체 같은 운영 동작은 없다. */
+export async function confirmReportedProblemAction(problemId: string, versionId: string, note?: string | null): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("problem_error_report_confirm", { p_problem_id: problemId, p_version_id: versionId, p_note: note ?? null });
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
+export async function unconfirmReportedProblemAction(problemId: string, versionId: string): Promise<{ ok: true } | { ok: false; error: string }> {
+  const { supabase } = await requireAdmin();
+  const { error } = await supabase.rpc("problem_error_report_unconfirm", { p_problem_id: problemId, p_version_id: versionId });
+  if (error) return { ok: false, error: error.message };
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
+export async function getConfirmedReportExportAction(): Promise<ConfirmedExportRow[]> {
+  const { supabase } = await requireAdmin();
+  const { data, error } = await supabase.rpc("problem_error_report_confirmed_export");
+  if (error) throw new Error(error.message);
+  return (data ?? []) as ConfirmedExportRow[];
 }

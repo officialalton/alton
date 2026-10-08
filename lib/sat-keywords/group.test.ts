@@ -27,3 +27,30 @@ describe("groupKeywordsByDomain", () => {
     expect(hasDomainGroups(g)).toBe(false);
   });
 });
+
+describe("groupKeywordsByDomain — 폴더 모드(2026-10-08)", () => {
+  const f = (id: string, label: string, folderId: string | null, extra: Record<string, unknown> = {}) => ({
+    id, label, folderId, folderName: folderId ? `폴더 ${folderId}` : null, folderPosition: folderId === "b" ? 0 : 1, sortOrder: 0, ...extra,
+  });
+  it("folderId가 정의돼 있으면 도메인 대신 폴더(position 순)로 묶고 폴더 없는 키워드는 마지막 기타", () => {
+    const groups = groupKeywordsByDomain(
+      [f("1", "Z", "a", { domainCode: "algebra" }), f("2", "Y", "b"), f("3", "X", null, { domainCode: "algebra" })],
+      "기타",
+    );
+    expect(groups.map((g) => g.label)).toEqual(["폴더 b", "폴더 a", "기타"]);
+    expect(groups[2].items.map((k) => k.id)).toEqual(["3"]);
+  });
+  it("폴더 안은 sortOrder → 이름 순", () => {
+    const groups = groupKeywordsByDomain([f("1", "B", "a", { sortOrder: 2 }), f("2", "C", "a", { sortOrder: 1 }), f("3", "A", "a", { sortOrder: 2 })]);
+    expect(groups[0].items.map((k) => k.id)).toEqual(["2", "3", "1"]);
+  });
+  it("모든 폴더를 지워 전부 기타여도 도메인 그룹이 되살아나지 않는다", () => {
+    const groups = groupKeywordsByDomain([f("1", "A", null, { domainCode: "algebra" })]);
+    expect(groups).toHaveLength(1);
+    expect(hasDomainGroups(groups)).toBe(false);
+  });
+  it("folderId가 undefined인 구 데이터는 기존 도메인 그룹핑", () => {
+    const groups = groupKeywordsByDomain([{ id: "1", label: "A", domainCode: "algebra" }]);
+    expect(groups[0].key).toBe("algebra");
+  });
+});

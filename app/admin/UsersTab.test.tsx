@@ -2,11 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import UsersTab from "./UsersTab";
 import type { ParentListItem, StudentListItem, TeacherListItem } from "./users-data";
-import {
-  listParentsForUsersTabAction,
-  listStudentsForUsersTabAction,
-  listTeachersForUsersTabAction,
-} from "./users-actions";
+import { listParentsPageAction, listStudentsPageAction, listTeachersPageAction } from "./users-actions";
 
 vi.mock("./users-actions", () => ({
   inviteStudent: vi.fn(),
@@ -16,10 +12,18 @@ vi.mock("./users-actions", () => ({
   adjustStudentCredit: vi.fn(),
   setTeacherHourlyRate: vi.fn(),
   verifyStudentDateOfBirth: vi.fn(),
-  listParentsForUsersTabAction: vi.fn(),
-  listStudentsForUsersTabAction: vi.fn(),
-  listTeachersForUsersTabAction: vi.fn(),
+  listParentsPageAction: vi.fn(),
+  listStudentsPageAction: vi.fn(),
+  listTeachersPageAction: vi.fn(),
 }));
+
+const pageOf = <T,>(items: T[], total = items.length, page = 1) => ({
+  items,
+  total,
+  page,
+  pageSize: 10,
+  pageCount: Math.max(1, Math.ceil(total / 10)),
+});
 
 vi.mock("./teacher-subjects-actions", () => ({
   assignTeacherSubject: vi.fn(),
@@ -84,13 +88,11 @@ const baseProps = {
 describe("UsersTab", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vi.mocked(listParentsForUsersTabAction).mockResolvedValue({ ok: true, data: parents });
-    vi.mocked(listStudentsForUsersTabAction).mockResolvedValue({
-      students,
-      creditHistoryByStudent: {},
-    });
-    vi.mocked(listTeachersForUsersTabAction).mockResolvedValue({
-      teachers,
+    vi.mocked(listParentsPageAction).mockResolvedValue({ ok: true, data: pageOf(parents) });
+    vi.mocked(listStudentsPageAction).mockResolvedValue({ ok: true, data: pageOf(students), creditHistoryByStudent: {} });
+    vi.mocked(listTeachersPageAction).mockResolvedValue({
+      ok: true,
+      data: pageOf(teachers),
       qcWarningsByTeacher: { t1: [{}, {}] as never },
     });
   });
@@ -104,7 +106,7 @@ describe("UsersTab", () => {
   });
 
   it("학부모 조회가 실패하면 목록 영역에만 오류·다시 시도를 보여주고, 페이지 전체는 깨지지 않는다", async () => {
-    vi.mocked(listParentsForUsersTabAction).mockResolvedValue({ ok: false, errorCode: "email_rpc_failed:권한 없음" });
+    vi.mocked(listParentsPageAction).mockResolvedValue({ ok: false, errorCode: "email_rpc_failed:권한 없음" });
     render(<UsersTab {...baseProps} />);
 
     await waitFor(() => expect(screen.getByTestId("parents-error")).toBeInTheDocument());
@@ -117,15 +119,15 @@ describe("UsersTab", () => {
   });
 
   it("다시 시도를 누르면 학부모 조회를 다시 호출하고 성공하면 목록을 보여준다", async () => {
-    vi.mocked(listParentsForUsersTabAction).mockResolvedValueOnce({ ok: false, errorCode: "parents_query_failed:unknown" });
+    vi.mocked(listParentsPageAction).mockResolvedValueOnce({ ok: false, errorCode: "parents_query_failed:unknown" });
     render(<UsersTab {...baseProps} />);
     await waitFor(() => expect(screen.getByTestId("parents-error")).toBeInTheDocument());
 
-    vi.mocked(listParentsForUsersTabAction).mockResolvedValueOnce({ ok: true, data: parents });
+    vi.mocked(listParentsPageAction).mockResolvedValueOnce({ ok: true, data: pageOf(parents) });
     fireEvent.click(screen.getByText("다시 시도"));
 
     await waitFor(() => expect(screen.getByText("김민지")).toBeInTheDocument());
-    expect(listParentsForUsersTabAction).toHaveBeenCalledTimes(2);
+    expect(listParentsPageAction).toHaveBeenCalledTimes(2);
   });
 
   it("학생 서브탭에서 학생을 클릭하면 상세로 이동한다", async () => {
@@ -141,6 +143,43 @@ describe("UsersTab", () => {
     render(<UsersTab {...baseProps} />);
     fireEvent.click(screen.getByText("선생님"));
     await waitFor(() => expect(screen.getByText(/QC 경고 2회/)).toBeInTheDocument());
+  });
+
+  it("서버 페이지네이션: 총 건수·범위를 보여주고 다음 페이지를 요청한다", async () => {
+    vi.mocked(listParentsPageAction).mockImplementation(async (params) => ({
+      ok: true,
+      data: pageOf(parents, 25, params?.page ?? 1),
+    }));
+    render(<UsersTab {...baseProps} />);
+    await waitFor(() => expect(screen.getByText("김민지")).toBeInTheDocument());
+    expect(screen.getByTestId("users-range")).toHaveTextContent("1–10 / 총 25명");
+    fireEvent.click(screen.getByLabelText("다음 페이지"));
+    await waitFor(() => expect(listParentsPageAction).toHaveBeenLastCalledWith(expect.objectContaining({ page: 2 })));
+    fireEvent.click(screen.getByLabelText("3페이지"));
+    await waitFor(() => expect(listParentsPageAction).toHaveBeenLastCalledWith(expect.objectContaining({ page: 3 })));
+  });
+
+  it("검색어·회원 유형·탭이 바뀌면 1페이지로 돌아가고 서버에 검색 조건을 보낸다", async () => {
+    vi.mocked(listStudentsPageAction).mockImplementation(async (params) => ({
+      ok: true,
+      data: pageOf(students, 25, params?.page ?? 1),
+      creditHistoryByStudent: {},
+    }));
+    render(<UsersTab {...baseProps} />);
+    fireEvent.click(screen.getByText("학생"));
+    await waitFor(() => expect(screen.getByText("지훈")).toBeInTheDocument());
+    fireEvent.click(screen.getByLabelText("다음 페이지"));
+    await waitFor(() => expect(listStudentsPageAction).toHaveBeenLastCalledWith(expect.objectContaining({ page: 2 })));
+
+    fireEvent.change(screen.getByLabelText("회원 유형"), { target: { value: "free" } });
+    await waitFor(() =>
+      expect(listStudentsPageAction).toHaveBeenLastCalledWith(expect.objectContaining({ page: 1, memberType: "free" }))
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/보호자 이름 검색/), { target: { value: "김민지" } });
+    await waitFor(() =>
+      expect(listStudentsPageAction).toHaveBeenLastCalledWith(expect.objectContaining({ page: 1, search: "김민지" }))
+    );
   });
 
   // (2026-09-07) 레거시 "학부모 초대" 폼은 제거됐다(DirectAccountCreationForm의

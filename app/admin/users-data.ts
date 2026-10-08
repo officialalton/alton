@@ -3,6 +3,7 @@ import { createAdminClient } from "@/lib/supabase-admin";
 import { agreementCoversFourItems, agreementKindForForm } from "@/lib/legal/recording-scope";
 import { deriveAgreementStatus, MAIN_TEACHER_FORMS, type TeacherAgreementStatus } from "@/lib/teacher-agreements/status";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { USERS_PAGE_SIZE } from "./users-page-size";
 
 export type ParentListItem = {
   id: string;
@@ -118,14 +119,16 @@ function logUsersTabStage(stage: string, startedAt: number, extra: Record<string
   console.log(JSON.stringify({ event: "server_timing", stage, ms: Date.now() - startedAt, ...extra }));
 }
 
-export async function loadParents(supabase: SupabaseClient): Promise<ParentListItem[]> {
+export async function loadParents(supabase: SupabaseClient, opts: { ids?: string[] } = {}): Promise<ParentListItem[]> {
   const totalStart = Date.now();
 
   let t = Date.now();
-  const { data: parents, error: parentsError } = await supabase
-    .from("parents")
-    .select("id, joined_at, status, profile:profiles(name)")
-    .order("joined_at", { ascending: false });
+  let parentsQuery = supabase.from("parents").select("id, joined_at, status, profile:profiles(name)");
+  if (opts.ids) {
+    if (opts.ids.length === 0) return [];
+    parentsQuery = parentsQuery.in("id", opts.ids);
+  }
+  const { data: parents, error: parentsError } = await parentsQuery.order("joined_at", { ascending: false });
   logUsersTabStage("users_tab.parents.query", t, { count: parents?.length ?? 0, errorCode: parentsError?.code ?? null });
   if (parentsError) throw new Error(`parents_query_failed:${parentsError.code ?? "unknown"}`);
   if (!parents || parents.length === 0) return [];
@@ -213,13 +216,15 @@ export async function loadParents(supabase: SupabaseClient): Promise<ParentListI
   });
 }
 
-export async function loadStudents(supabase: SupabaseClient): Promise<StudentListItem[]> {
-  const { data: students } = await supabase
+export async function loadStudents(supabase: SupabaseClient, opts: { ids?: string[] } = {}): Promise<StudentListItem[]> {
+  if (opts.ids && opts.ids.length === 0) return [];
+  let studentsQuery = supabase
     .from("students")
     .select(
       "id, grade, status, credit_balance, school_name, sat_score, gpa, gpa_scale, target_colleges, intended_majors, profile_completed_at, member_type, profile:profiles(name, date_of_birth, date_of_birth_verified_at)"
-    )
-    .order("joined_at", { ascending: false });
+    );
+  if (opts.ids) studentsQuery = studentsQuery.in("id", opts.ids);
+  const { data: students } = await studentsQuery.order("joined_at", { ascending: false });
   if (!students || students.length === 0) return [];
 
   const studentIds = students.map((s) => s.id);
@@ -323,11 +328,11 @@ export async function loadStudents(supabase: SupabaseClient): Promise<StudentLis
   });
 }
 
-export async function loadTeachers(supabase: SupabaseClient): Promise<TeacherListItem[]> {
-  const { data: teachers } = await supabase
-    .from("teachers")
-    .select("id, school, status, hourly_rate_krw, profile:profiles(name)")
-    .order("joined_at", { ascending: false });
+export async function loadTeachers(supabase: SupabaseClient, opts: { ids?: string[] } = {}): Promise<TeacherListItem[]> {
+  if (opts.ids && opts.ids.length === 0) return [];
+  let teachersQuery = supabase.from("teachers").select("id, school, status, hourly_rate_krw, profile:profiles(name)");
+  if (opts.ids) teachersQuery = teachersQuery.in("id", opts.ids);
+  const { data: teachers } = await teachersQuery.order("joined_at", { ascending: false });
   if (!teachers || teachers.length === 0) return [];
 
   const teacherIds = teachers.map((t) => t.id);
@@ -443,4 +448,62 @@ export async function loadTeacherQcWarningsBatch(
     });
   }
   return result;
+}
+
+// 2026-10-08 — 서버 페이지네이션. admin_users_page() RPC(service_role 전용)가 현재
+// 탭·필터·검색에 맞는 한 페이지의 id와 전체 건수만 돌려주고, 상세(이메일·가구·과목 등)는
+// 그 id들(최대 pageSize개)에 대해서만 조회한다. 같은 페이지의 목록과 건수가 한 번의
+// 쿼리에서 나오므로 건수가 목록과 어긋나지 않는다.
+export type UsersPageRole = "parent" | "student" | "teacher";
+export type UsersPageResult<T> = { items: T[]; total: number; page: number; pageSize: number; pageCount: number };
+
+async function fetchPageIds(
+  role: UsersPageRole,
+  params: { search?: string; memberType?: string; page: number; pageSize: number }
+): Promise<{ ids: string[]; total: number }> {
+  const admin = createAdminClient();
+  const call = (page: number) =>
+    admin.rpc("admin_users_page", {
+      p_role: role,
+      p_search: params.search?.trim() || null,
+      p_member_type: params.memberType ?? null,
+      p_limit: params.pageSize,
+      p_offset: (page - 1) * params.pageSize,
+    });
+  let { data, error } = await call(params.page);
+  if (error) throw new Error(`users_page_failed:${error.code ?? "unknown"}`);
+  let rows = (data ?? []) as { id: string; total_count: number | string }[];
+  // 범위를 벗어난 페이지(삭제·필터 변경 직후)는 마지막 페이지로 한 번 더 보정한다.
+  if (rows.length === 0 && params.page > 1) {
+    const first = await call(1);
+    if (first.error) throw new Error(`users_page_failed:${first.error.code ?? "unknown"}`);
+    const total = Number(((first.data ?? []) as { total_count: number | string }[])[0]?.total_count ?? 0);
+    const lastPage = Math.max(1, Math.ceil(total / params.pageSize));
+    ({ data, error } = await call(lastPage));
+    if (error) throw new Error(`users_page_failed:${error.code ?? "unknown"}`);
+    rows = (data ?? []) as { id: string; total_count: number | string }[];
+    return { ids: rows.map((r) => r.id), total: Number(rows[0]?.total_count ?? total) };
+  }
+  return { ids: rows.map((r) => r.id), total: Number(rows[0]?.total_count ?? 0) };
+}
+
+function orderByIds<T extends { id: string }>(items: T[], ids: string[]): T[] {
+  const index = new Map(ids.map((id, i) => [id, i]));
+  return [...items].sort((a, b) => (index.get(a.id) ?? 0) - (index.get(b.id) ?? 0));
+}
+
+export { USERS_PAGE_SIZE };
+
+export async function loadUsersPage(
+  supabase: SupabaseClient,
+  role: UsersPageRole,
+  params: { search?: string; memberType?: string; page?: number; pageSize?: number } = {}
+): Promise<UsersPageResult<ParentListItem | StudentListItem | TeacherListItem>> {
+  const pageSize = params.pageSize ?? USERS_PAGE_SIZE;
+  const requested = Math.max(1, Math.floor(params.page ?? 1));
+  const { ids, total } = await fetchPageIds(role, { search: params.search, memberType: params.memberType, page: requested, pageSize });
+  const items =
+    role === "parent" ? await loadParents(supabase, { ids }) : role === "student" ? await loadStudents(supabase, { ids }) : await loadTeachers(supabase, { ids });
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  return { items: orderByIds(items as { id: string }[], ids) as (ParentListItem | StudentListItem | TeacherListItem)[], total, page: Math.min(requested, pageCount), pageSize, pageCount };
 }

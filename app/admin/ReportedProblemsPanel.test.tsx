@@ -5,10 +5,15 @@ import ReportedProblemsPanel from "./ReportedProblemsPanel";
 const list = vi.fn();
 const detail = vi.fn();
 const apply = vi.fn();
+const confirm = vi.fn();
+const unconfirm = vi.fn();
 vi.mock("./problem-error-report-actions", () => ({
   listReportedProblemsAction: (...a: unknown[]) => list(...a),
   getReportedProblemDetailAction: (...a: unknown[]) => detail(...a),
   applyProblemErrorVerdictAction: (...a: unknown[]) => apply(...a),
+  confirmReportedProblemAction: (...a: unknown[]) => confirm(...a),
+  unconfirmReportedProblemAction: (...a: unknown[]) => unconfirm(...a),
+  getConfirmedReportExportAction: vi.fn(),
 }));
 
 const group = {
@@ -30,6 +35,8 @@ beforeEach(() => {
   list.mockReset();
   detail.mockReset();
   apply.mockReset();
+  confirm.mockReset();
+  unconfirm.mockReset();
 });
 
 describe("ReportedProblemsPanel", () => {
@@ -107,5 +114,39 @@ describe("ReportedProblemsPanel", () => {
     fireEvent.click(screen.getByLabelText(/정상 → 복귀/));
     fireEvent.click(screen.getByRole("button", { name: "판정 적용" }));
     await waitFor(() => expect(screen.getByRole("alert")).toHaveTextContent("관리자만 판정할 수 있습니다."));
+  });
+
+  it("확인 버튼은 상세 우측 상단에서 확인됨 칩·확인 취소로 바뀌고 목록으로 이동하지 않는다, 다음 신고로 이동 가능", async () => {
+    const g2 = { ...group, problemId: "p2", versionId: "v2" };
+    list.mockResolvedValue({ total: 2, counts: { review: 2, confirmed: 0, fixed: 0, all: 2 }, rows: [group, g2] });
+    detail.mockResolvedValueOnce(det).mockResolvedValue({ ...det, confirmation: { confirmedAt: "2026-10-08T00:00:00Z", confirmedByName: "관리자", note: null } });
+    confirm.mockResolvedValue({ ok: true });
+    render(<ReportedProblemsPanel />);
+    await waitFor(() => expect(screen.getByRole("tab", { name: "검토 필요 2" })).toBeInTheDocument());
+    fireEvent.click(screen.getAllByTestId("reported-problem-row")[0]);
+    await waitFor(() => expect(screen.getByTestId("confirm-toggle")).toHaveTextContent("확인"));
+    fireEvent.click(screen.getByTestId("confirm-toggle"));
+    await waitFor(() => expect(screen.getByTestId("confirmed-chip")).toBeInTheDocument());
+    expect(confirm).toHaveBeenCalledWith("p1", "v1");
+    expect(screen.getByTestId("confirm-toggle")).toHaveTextContent("확인 취소");
+    expect(screen.getByTestId("confirm-toast")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("다음 신고 →"));
+    await waitFor(() => expect(detail).toHaveBeenCalledWith("p2", "v2"));
+  });
+
+  it("신고된 버전보다 새 버전이 있으면 v1 → v2 표시, 판정 전 확인 대화상자, 영어·한글 해설 표시", async () => {
+    list.mockResolvedValue({ total: 1, counts: { review: 0, confirmed: 0, fixed: 1, all: 1 }, rows: [{ ...group, state: "fixed", currentVersionNo: 2, versionNo: 1 }] });
+    detail.mockResolvedValue({ ...det, currentVersionNo: 2, version: { ...det.version, explanationEn: "English explanation" } });
+    apply.mockResolvedValue({ ok: true, value: { alreadyApplied: false, verdictId: "x", decision: "not_error", resolvedReports: 1 } });
+    render(<ReportedProblemsPanel />);
+    await waitFor(() => expect(screen.getByTestId("reported-problem-row")).toHaveTextContent("수정됨(v2)"));
+    fireEvent.click(screen.getByTestId("reported-problem-row"));
+    await waitFor(() => expect(screen.getByTestId("superseded-note")).toHaveTextContent("v1 → 현재 v2"));
+    expect(screen.getByTestId("explanation-en")).toHaveTextContent("English explanation");
+    expect(screen.getByText("한글 해설")).toBeTruthy();
+    fireEvent.click(screen.getByLabelText(/정상/));
+    fireEvent.click(screen.getByText("판정 적용"));
+    expect(screen.getByTestId("stale-verdict-dialog")).toHaveTextContent("이미 v2로 수정됨");
+    expect(apply).not.toHaveBeenCalled();
   });
 });

@@ -30,6 +30,24 @@ describe("AnnotationLayer", () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
+  it("터치: mouseup 없이 selectionchange 만 와도(선택 핸들 조작) 잠잠해진 뒤 한 번 칠한다", () => {
+    vi.useFakeTimers();
+    try {
+      const onChange = vi.fn();
+      render(<AnnotationLayer highlights={[]} onChange={onChange} highlightMode><p>Hello brave world</p></AnnotationLayer>);
+      selectText(screen.getByText("Hello brave world").firstChild!, 6, 11);
+      document.dispatchEvent(new Event("selectionchange"));
+      selectText(screen.getByText("Hello brave world").firstChild!, 6, 11);
+      document.dispatchEvent(new Event("selectionchange"));
+      expect(onChange).not.toHaveBeenCalled();
+      vi.advanceTimersByTime(600);
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange.mock.calls[0][0][0]).toMatchObject({ start: 6, end: 11, text: "brave" });
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("기존 하이라이트를 클릭하면 메모 팝업이 열리고 메모 추가·삭제·하이라이트 제거를 할 수 있다", () => {
     const h: TextHighlight = { id: "h1", start: 6, end: 11, text: "brave" };
     const onChange = vi.fn();

@@ -413,7 +413,7 @@ function CollegeDetail({
 
           <SummaryCard cycle={cyclePick?.items[0] ?? null} metrics={metricsPick?.items ?? []} onFlag={flagField} onJumpToProfile={() => setActiveSection("admissions")} />
 
-          <div className="mb-4 flex gap-4 overflow-x-auto border-b border-grey-200 -mx-1 px-1" role="tablist" aria-label="College detail sections">
+          <div className="mb-4 flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200 -mx-1 px-1" role="tablist" aria-label="College detail sections">
             {SECTIONS.map((s) => (
               <button
                 key={s.id}

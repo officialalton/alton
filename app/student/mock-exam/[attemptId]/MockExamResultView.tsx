@@ -119,7 +119,7 @@ function ItemProblem({ item, attemptId }: { item: MockExamAttemptItem; attemptId
         </p>
       )}
       <AnnotationLayer key={item.setItemId} readOnly highlights={annotations?.highlights ?? []}>
-        {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
+        {dedupeStem(item.passage, item.question) && <RwStimulusView question={item.question} passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
         {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
       </AnnotationLayer>
       {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-3" /> : null}
@@ -201,7 +201,7 @@ function ItemHeader({ item, attemptId, viewerIsOwner }: { item: MockExamAttemptI
           className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-bold ${
             saved ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
           }`}
-          title="Save to the Practice tab"
+          title="Save to My Notebook"
         >
           {saved ? "Saved" : "+ Save question"}
         </button>
@@ -409,7 +409,7 @@ export default function MockExamResultView({
 
   return (
     <div>
-      <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto border-b border-grey-200">
+      <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200">
         {TABS.map((t) => (
           <button
             key={t.key}

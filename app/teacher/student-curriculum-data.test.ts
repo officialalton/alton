@@ -96,6 +96,6 @@ describe("loadEligibleLibrary", () => {
       subject_keywords: [{ id: "kw1", label: "이차방정식" }],
     });
     const result = await loadEligibleLibrary(mock as never, "sub1");
-    expect(result.keywords).toEqual([{ id: "kw1", label: "이차방정식", domainCode: null, skillCode: null }]);
+    expect(result.keywords).toEqual([{ id: "kw1", label: "이차방정식", domainCode: null, skillCode: null, folderId: null, folderName: null, folderPosition: null, sortOrder: 0 }]);
   });
 });

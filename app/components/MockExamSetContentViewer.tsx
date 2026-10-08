@@ -45,7 +45,7 @@ export default function MockExamSetContentViewer({ items }: { items: MockExamSet
             {SECTION_LABEL[current.section] ?? current.section} {current.position} · {current.satDomain}
             {current.skillCode ? ` · ${current.skillCode}` : ""} · {current.difficulty}
           </p>
-          {dedupeStem(current.passage, current.question) && <RwStimulusView passage={dedupeStem(current.passage, current.question)} className="mb-3 text-[13px]" />}
+          {dedupeStem(current.passage, current.question) && <RwStimulusView question={current.question} passage={dedupeStem(current.passage, current.question)} className="mb-3 text-[13px]" />}
           {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[13.5px]" />}
           {current.figure ? <ProblemFigure spec={current.figure} text={problemText(current.passage, current.question, current.options)} className="mb-3" /> : null}
 

@@ -92,7 +92,7 @@ export default function AnnotationLayer({
     const wrap = wrapRef.current?.getBoundingClientRect();
     const rect = range && typeof range.getBoundingClientRect === "function" ? range.getBoundingClientRect() : null;
     if (!wrap || !rect || (rect.width === 0 && rect.height === 0)) return fallback;
-    return { x: Math.max(0, rect.left - wrap.left), y: rect.bottom - wrap.top + 6 };
+    return { x: Math.min(Math.max(0, rect.left - wrap.left), Math.max(0, wrap.width - 268)), y: rect.bottom - wrap.top + 6 };
   }
 
   function handleMouseUp() {
@@ -118,6 +118,36 @@ export default function AnnotationLayer({
     setPop({ id: h.id, ...anchorPos(sel.getRangeAt(0), { x: 0, y: 0 }) });
   }
 
+  // 터치: 길게 눌러 핸들로 선택 범위를 잡으면 mouseup 이 오지 않는다. selectionchange 가 잠잠해지면(핸들을 놓으면) 칠한다.
+  const highlightsRef = useRef(highlights);
+  highlightsRef.current = highlights;
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
+  useEffect(() => {
+    if (readOnly || !highlightMode || typeof document === "undefined") return;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const settle = () => {
+      const root = rootRef.current;
+      const sel = window.getSelection();
+      if (!root || !sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+      const range = sel.getRangeAt(0);
+      if (!root.contains(range.startContainer) || !root.contains(range.endContainer)) return;
+      const off = rangeToOffsets(root, range);
+      if (!off) return;
+      onChangeRef.current?.(addHighlight(highlightsRef.current, root.textContent ?? "", off.start, off.end));
+      sel.removeAllRanges();
+    };
+    const onSel = () => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(settle, 450);
+    };
+    document.addEventListener("selectionchange", onSel);
+    return () => {
+      document.removeEventListener("selectionchange", onSel);
+      if (timer) clearTimeout(timer);
+    };
+  }, [highlightMode, readOnly]);
+
   function commit(next: TextHighlight[]) {
     onChange?.(next);
     setPop(null);
@@ -129,7 +159,16 @@ export default function AnnotationLayer({
 
   return (
     <div ref={wrapRef} className={`relative ${className ?? ""}`}>
-      <div ref={rootRef} onMouseUp={handleMouseUp} data-testid="annotation-root">
+      <div
+        ref={rootRef}
+        onMouseUp={handleMouseUp}
+        onPointerUp={(e) => {
+          // 터치/펜 탭으로 기존 하이라이트를 눌렀을 때도 메모·삭제 팝업을 연다(mouseup 이 늦거나 오지 않는 브라우저 대비).
+          if (e.pointerType !== "mouse") setTimeout(handleMouseUp, 0);
+        }}
+        style={highlightMode ? { WebkitTouchCallout: "none" } : undefined}
+        data-testid="annotation-root"
+      >
         {children}
       </div>
 
@@ -158,7 +197,7 @@ export default function AnnotationLayer({
           role="dialog"
           aria-label="Highlight note"
           style={{ left: pop.x, top: pop.y }}
-          className="absolute z-30 w-[260px] rounded-lg border border-grey-300 bg-white p-2 shadow-lg"
+          className="absolute z-30 w-[260px] max-w-[calc(100vw-32px)] rounded-lg border border-grey-300 bg-white p-2 shadow-lg"
           onMouseDown={(e) => {
             if ((e.target as HTMLElement).tagName !== "INPUT") e.preventDefault();
           }}
@@ -177,18 +216,18 @@ export default function AnnotationLayer({
                 }}
                 placeholder="Add a short note"
                 aria-label="Note"
-                className="w-full rounded border border-grey-300 px-2 py-1 text-[12px]"
+                className="w-full rounded border border-grey-300 px-2 py-2 text-[16px] md:py-1 md:text-[12px]"
               />
               <div className="flex items-center justify-between gap-1 text-[11.5px] font-semibold">
-                <button type="button" onClick={() => commit(setNote(highlights, popTarget.id, draft))} className="rounded bg-ink px-2 py-1 text-white">
+                <button type="button" onClick={() => commit(setNote(highlights, popTarget.id, draft))} className="min-h-[44px] rounded bg-ink px-3 py-1 text-white md:min-h-0 md:px-2">
                   {popTarget.note ? "Save note" : "Add note"}
                 </button>
                 {popTarget.note && (
-                  <button type="button" onClick={() => commit(setNote(highlights, popTarget.id, ""))} className="text-grey-500 underline">
+                  <button type="button" onClick={() => commit(setNote(highlights, popTarget.id, ""))} className="min-h-[44px] px-1 text-grey-500 underline md:min-h-0">
                     Delete note
                   </button>
                 )}
-                <button type="button" onClick={() => commit(removeHighlight(highlights, popTarget.id))} className="text-grey-500 underline">
+                <button type="button" onClick={() => commit(removeHighlight(highlights, popTarget.id))} className="min-h-[44px] px-1 text-grey-500 underline md:min-h-0">
                   Remove highlight
                 </button>
               </div>

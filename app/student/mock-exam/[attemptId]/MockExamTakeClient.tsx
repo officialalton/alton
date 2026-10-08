@@ -372,7 +372,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                     savedToPractice[current.setItemId] ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
                   }`}
                   data-testid="toggle-saved-to-practice"
-                  title="Save to Practice (Problem History)"
+                  title="Save to My Notebook"
                 >
                   {savedToPractice[current.setItemId] ? "Saved" : "+ Save problem"}
                 </button>
@@ -423,7 +423,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
               </div>
             </div>
             <div ref={passageRef} onMouseUp={handlePassageMouseUp}>
-              {dedupeStem(current.passage, current.question) && <RwStimulusView passage={dedupeStem(current.passage, current.question)} className="mb-4 text-[13.5px]" />}
+              {dedupeStem(current.passage, current.question) && <RwStimulusView question={current.question} passage={dedupeStem(current.passage, current.question)} className="mb-4 text-[13.5px]" />}
               {current.question && <LearningText text={current.question} className="mb-3 font-semibold text-[14px]" />}
             </div>
             {highlightMode && highlightSupported && (

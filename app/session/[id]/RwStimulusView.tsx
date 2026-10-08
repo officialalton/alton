@@ -9,16 +9,18 @@ import { parseRwStimulus, quotedTargetWord } from "@/lib/rw-stimulus";
  *   빈칸(______)·밑줄(__문장__) → LearningText 가 칸·밑줄로 그린다.
  * 구조가 하나도 없으면(옛 문제·한 단락 수학 문항) LearningText 와 똑같이 그린다 — 레거시 지문은 그대로 읽힌다.
  */
-export default function RwStimulusView({ passage, className }: { passage: string; className?: string }) {
+export default function RwStimulusView({ passage, className, question }: { passage: string; className?: string; question?: string | null }) {
   const s = parseRwStimulus(passage);
   // Words in Context 인용 단어형 — 실제 시험처럼 지문의 대상 단어(첫 번째 등장)를 밑줄로 표시한다. 데이터는 바꾸지 않고 그릴 때만.
-  const target = quotedTargetWord(s.question);
+  // question 은 문제은행이 질문을 지문과 따로 저장하는 경우(학생 응시·결과·관리자 미리보기)에 넘긴다 — 없으면 지문 끝의 질문 문장을 쓴다.
+  // (2026-10-08 수정: 예전에는 s.question 만 봐서 질문이 따로 저장된 문항은 밑줄이 전혀 그려지지 않았다.)
+  const target = quotedTargetWord(question ?? s.question);
   const underlineTarget = (text: string) => {
     if (!target || text.includes("__")) return text;
     const re = new RegExp(`\\b(${target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})\\b`, "i");
     return text.replace(re, "__$1__");
   };
-  if (!s.structured) return <LearningText text={passage} className={className} />;
+  if (!s.structured) return <LearningText text={underlineTarget(passage)} className={className} />;
   return (
     <div className={className} data-testid="rw-stimulus">
       {s.blocks.map((b, i) => {

@@ -208,3 +208,12 @@ body {
 .pdf-text-layer ::selection {
   background: rgba(37, 99, 235, 0.25);
 }
+
+/* 2026-10-08 — 스크롤은 되지만 스크롤바는 숨기는 가로 탭 줄용 공용 유틸리티. */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

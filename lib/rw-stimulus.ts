@@ -275,7 +275,22 @@ export function checkRwStructure(input: { skillCode: string | null | undefined; 
     issues.push({ code: "rw_table", message: "마크다운 표가 있습니다 — 표·그래프 자료는 figure(type:'data') 로 넣고, 이 유형이 정량 근거 문항이면 세부 기술을 Command of Evidence (Quantitative) 로 두세요." });
   }
 
+  // 2026-10-08 — 질문·지문이 표·그래프·그림이나 밑줄 친 부분을 가리키면 그 자료·표시가 실제로 있어야 한다(없으면 학생에게 "내용이 빠진 문제"가 된다).
+  const refText = `${s.question ?? ""}\n${s.blocks.filter((b) => b.kind !== "question").map((b) => (b.kind === "paragraph" ? b.text : b.kind === "text" ? b.body : b.kind === "notes" ? b.items.join("\n") : "")).join("\n")}`;
+  if (code !== "command_of_evidence_quant" && rwDataReference(refText) && !s.hasTable && !(input.figure && typeof input.figure === "object")) {
+    issues.push({ code: "rw_data_missing", message: `질문·지문이 표·그래프·그림을 가리키는데("${rwDataReference(refText)}") 자료(figure)가 없습니다 — 자료를 붙이거나 표현을 고치세요.` });
+  }
+  if (code !== "text_structure_purpose" && /\bunderlined\b/i.test(refText) && s.underlines === 0) {
+    issues.push({ code: "rw_target", message: "질문이 밑줄 친 부분(underlined)을 가리키는데 지문에 밑줄(__…__)이 없습니다 — 대상 부분을 __로 감싸세요." });
+  }
+
   return issues;
+}
+
+/** 표·그래프·그림을 가리키는 명시적 표현(오탐 방지 — "figure out", 일반 명사 table 은 제외). 처음 걸린 표현을 돌려준다. */
+export function rwDataReference(text: string): string | null {
+  const re = /\b(?:(?:table|graph|chart|figure|diagram|infographic)\s+(?:below|above)|(?:shown|presented|displayed|summarized|illustrated)\s+(?:in|by)\s+the\s+(?:table|graph|chart|figure|diagram)|(?:data|information)\s+(?:from|in)\s+the\s+(?:table|graph|chart|figure)|(?:the|this)\s+(?:table|graph|chart|bar graph|line graph|scatterplot|histogram)\s+(?:shows?|summari[sz]es|presents?|displays?|illustrates?))\b/i;
+  return text.match(re)?.[0] ?? null;
 }
 
 function skillQuestionHint(code: string): string {
