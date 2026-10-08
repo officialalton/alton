@@ -20,6 +20,7 @@ import { lintVennTreeAgainstText, renderVennTree } from "./templates/venn-tree";
 import { lintFigureChoice, lintFigureSet, renderFigureChoice, renderFigureSet } from "./templates/figure-choice";
 import { isDSpec, lintD, renderD } from "./templates/d-registry";
 import { lintFigureBundle, renderFigureBundle } from "./templates/figure-bundle";
+import { isApSpec, lintAp, renderAp } from "./templates/ap-figures";
 import { renderFigureSvg } from "./render";
 import { figureAlt } from "./alt";
 
@@ -168,6 +169,11 @@ export function checkFigure(figure: unknown, passage: string, options?: string[]
   if (isDSpec(spec)) {
     const r = renderD(spec);
     issues.push(...r.issues, ...lintD(spec, passage));
+    return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
+  }
+  if (isApSpec(spec)) {
+    const r = renderAp(spec);
+    issues.push(...r.issues, ...lintAp(spec, passage));
     return { ok: issues.length === 0, renderer: RENDERER_VERSION, checkedAt, issues, alt: r.alt };
   }
   if (spec.type === "data") {

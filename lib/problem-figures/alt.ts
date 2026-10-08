@@ -9,6 +9,7 @@ import { renderPolygon } from "./templates/polygon";
 import { renderSolid } from "./templates/solid";
 import { renderComposite } from "./templates/composite";
 import { renderD } from "./templates/d-registry";
+import { isApSpec, renderAp } from "./templates/ap-figures";
 import { renderFigureBundle } from "./templates/figure-bundle";
 import { renderUnitCircle } from "./templates/unit-circle";
 import { renderTrigCurve } from "./templates/trig-curve";
@@ -38,6 +39,7 @@ export function figureAlt(spec: FigureSpec): string | undefined {
     case "figure_bundle": return renderFigureBundle(spec, () => "", (c) => figureAlt(c as FigureSpec)).alt;
     case "image": return spec.alt;
     case "number_line": case "stem_leaf": case "pie": case "freq_chart": case "stacked_bar": return renderD(spec).alt;
+    case "ap_graph": case "ap_table": case "ap_diagram": return isApSpec(spec) ? renderAp(spec).alt : undefined;
     default: return undefined;
   }
 }
