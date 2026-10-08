@@ -519,17 +519,17 @@
   "calculator": "not_allowed",
   "archetype": "lim_alg",
   "wording": "template",
-  "reviewState": "rejected",
+  "reviewState": "pending_expert_review",
   "reserve": false,
-  "rejectionReason": "criterion_failed_distractor_explanation",
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Direct substitution gives 0/0, so the student factors both quadratics, cancels (x-5), and evaluates (x+5)/(x+9) at x=5 to get 5/7. This is a single standard procedure with small numbers and a short stem. The distractors reflect common errors (partial evaluation, treating 0/0 as DNE) but add no extra reasoning depth.",
+  "difficultyRationale": "Single-procedure 0/0 limit: factor numerator (difference of squares) and denominator (simple trinomial), cancel (x-5), substitute to get 10/14 = 5/7. Small numbers, no representation changes, no theorem checks. Distractors reflect common errors (dropped factor, DNE misconception for 0/0), but the depth is routine for Topic 1.7.",
   "payload": {
    "archetype": "lim_alg",
    "topic": "1.7",
    "skill": "1.C",
    "calculator": "not_allowed",
-   "stem": "What is $\\displaystyle\\lim_{x\\to 5}\\dfrac{x^2-25}{x^2+4x-45}$?",
+   "stem": "What is $\\displaystyle\\lim_{x\\to 5}\\dfrac{x^{2} - 25}{x^{2} + 4 x - 45}$?",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -543,7 +543,7 @@
     },
     {
      "text": "$\\frac{5}{14}$",
-     "why": "Cancels (x - 5) correctly but then substitutes into x + 5 and into the numerator factor x + 5 only half of the way, giving 5/14.",
+     "why": "Cancels (x - 5) but replaces the numerator factor x + 5 with 5, giving 5/14 instead of 10/14.",
      "value": "0.35714286"
     },
     {
@@ -564,7 +564,7 @@
    ],
    "seed": 0,
    "pack_id": "lim_alg-s0",
-   "explanation_en": "The correct answer is \\frac{5}{7}. Factors and cancels the common (x-a) factor before substituting.\n\\frac{5}{14} is incorrect: Cancels (x - 5) correctly but then substitutes into x + 5 and into the numerator factor x + 5 only half of the way, giving 5/14.\n\\frac{10}{9} is incorrect: Cancels (x - 5) but writes the remaining denominator factor as x + 4 instead of x + 9, giving 10/9.\nThe limit does not exist is incorrect: Substitutes x = 5, gets 0/0, and concludes the limit does not exist instead of factoring."
+   "explanation_en": "The correct answer is \\frac{5}{7}. Factors and cancels the common (x-a) factor before substituting.\n\\frac{5}{14} is incorrect: Cancels (x - 5) but replaces the numerator factor x + 5 with 5, giving 5/14 instead of 10/14.\n\\frac{10}{9} is incorrect: Cancels (x - 5) but writes the remaining denominator factor as x + 4 instead of x + 9, giving 10/9.\nThe limit does not exist is incorrect: Substitutes x = 5, gets 0/0, and concludes the limit does not exist instead of factoring."
   },
   "verification": {
    "generatedByCode": true,
@@ -577,38 +577,38 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Factoring limit, choosing a procedure for a 0/0 form; fits 1.7/1.C."
+    "notes": "Factoring/cancel for 0/0 limit; fits 1.7 and 1.C, in scope for Unit 1."
    },
    "key_scoring": {
     "pass": true,
-    "notes": "The numerator factors to (x-5)(x+5) and the denominator to (x-5)(x+9), so the limit is 10/14 = 5/7. The key is unique."
+    "notes": "(x+5)/(x+9) at 5 = 10/14 = 5/7; unique correct answer."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "No stimulus is needed. The stem is clear and the options are exact."
+    "notes": "No stimulus needed; the stem is clear and complete."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "The rationale for 5/14 is incoherent ('substitutes into x+5 and into the numerator factor x+5 only half of the way') and does not describe a distinct, realistic error. The explanation as a whole is therefore unreliable. The 10/9 and DNE rationales are fine."
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions; the explanation addresses each wrong option."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "About 75 seconds, non-calculator, exact-form options."
+    "notes": "About 75 seconds, no calculator, exact-form options, typical AP style."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The item is mathematically sound and its key is correct. It fails only because the explanation for the 5/14 distractor is incoherent and does not name a real misconception. Fix that rationale (for example, 'cancels only the x factors incorrectly' or another concrete error that yields 5/14) and the item would pass."
+   "summary": "The item is a correct, clean factoring-limit question with a unique key and well-motivated distractors, and it passes all five criteria."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Direct substitution gives 0/0, so the student factors both quadratics, cancels (x-5), and evaluates (x+5)/(x+9) at x=5 to get 5/7. This is a single standard procedure with small numbers and a short stem. The distractors reflect common errors (partial evaluation, treating 0/0 as DNE) but add no extra reasoning depth.",
+   "rationale": "Single-procedure 0/0 limit: factor numerator (difference of squares) and denominator (simple trinomial), cancel (x-5), substitute to get 10/14 = 5/7. Small numbers, no representation changes, no theorem checks. Distractors reflect common errors (dropped factor, DNE misconception for 0/0), but the depth is routine for Topic 1.7.",
    "reading_load": "low",
    "computation_load": "low",
-   "reasoning_steps": 3,
+   "reasoning_steps": 4,
    "representation_changes": 0,
    "difficulty_from_unfair_sources": false,
-   "est_seconds": 60
+   "est_seconds": 75
   }
  },
  {
@@ -623,17 +623,17 @@
   "calculator": "not_allowed",
   "archetype": "lim_alg",
   "wording": "template",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_distractor_explanation",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Single-procedure limit: recognize 0/0 form, factor numerator and denominator, cancel (x-3), substitute. Small numbers, no representation changes, standard direct skill. Distractors target 0/0 misconceptions and factoring errors.",
+  "difficultyRationale": "Standard 0/0 limit resolved by factoring both quadratics and canceling (x-3), then substituting to get 6/11. Single procedure, small numbers, no stimulus. Distractors target common misconceptions (DNE for 0/0) but the item is routine for topic 1.7.",
   "payload": {
    "archetype": "lim_alg",
    "topic": "1.7",
    "skill": "1.C",
    "calculator": "not_allowed",
-   "stem": "What is $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2-9}{x^2+5x-24}$?",
+   "stem": "What is $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^{2} - 9}{x^{2} + 5 x - 24}$?",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -652,7 +652,7 @@
     },
     {
      "text": "$\\frac{3}{11}$",
-     "why": "Cancels (x - 3) correctly but then substitutes into x + 3 and into the numerator factor x + 3 only half of the way, giving 3/11.",
+     "why": "Cancels (x - 3) but replaces the numerator factor x + 3 with 3, giving 3/11 instead of 6/11.",
      "value": "0.27272727"
     },
     {
@@ -668,7 +668,7 @@
    ],
    "seed": 1,
    "pack_id": "lim_alg-s1",
-   "explanation_en": "The correct answer is \\frac{6}{11}. Factors and cancels the common (x-a) factor before substituting.\n\\frac{3}{4} is incorrect: Cancels (x - 3) but writes the remaining denominator factor as x + 5 instead of x + 8, giving 6/8.\n\\frac{3}{11} is incorrect: Cancels (x - 3) correctly but then substitutes into x + 3 and into the numerator factor x + 3 only half of the way, giving 3/11.\nThe limit does not exist is incorrect: Substitutes x = 3, gets 0/0, and concludes the limit does not exist instead of factoring."
+   "explanation_en": "The correct answer is \\frac{6}{11}. Factors and cancels the common (x-a) factor before substituting.\n\\frac{3}{4} is incorrect: Cancels (x - 3) but writes the remaining denominator factor as x + 5 instead of x + 8, giving 6/8.\n\\frac{3}{11} is incorrect: Cancels (x - 3) but replaces the numerator factor x + 3 with 3, giving 3/11 instead of 6/11.\nThe limit does not exist is incorrect: Substitutes x = 3, gets 0/0, and concludes the limit does not exist instead of factoring."
   },
   "verification": {
    "generatedByCode": true,
@@ -681,38 +681,38 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Factor-and-cancel limit; appropriate for 1.7/1.C."
+    "notes": "Choosing factoring/cancellation for a 0/0 rational limit; fits 1.7/1.C."
    },
    "key_scoring": {
     "pass": true,
-    "notes": "6/11 is unique and correct; the factorization (x+8)(x-3) checks out."
+    "notes": "Denominator factors as (x+8)(x-3); limit is 6/11, unique."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "The stem is clear and complete; no stimulus is needed."
+    "notes": "No stimulus needed; the stem is clear and complete."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "The 3/11 explanation is incoherent ('substitutes into x+3 and into the numerator factor x+3 only half of the way'), so it does not describe a clear misconception. The 3/4 explanation is a mere arithmetic slip, but it is understandable. The DNE distractor is good. The explanation text for 3/11 needs rewriting."
+    "pass": true,
+    "notes": "Three distinct plausible errors, each explained. The 3/11 distractor is slightly contrived but acceptable."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "Time, reading and calculator load are typical of the AP exam; the options are exact."
+    "notes": "About 75 seconds, no calculator needed, exact-form options."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The key is correct and the item is suitable, but the 3/11 distractor rationale is garbled and does not encode a distinct, realistic misconception. Failing on distractor quality, so this needs a revision of that option and its explanation."
+   "summary": "The item is correct and clean: a standard factor-and-cancel limit with a unique key of 6/11 and well-motivated distractors. It passes all five criteria."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Single-procedure limit: recognize 0/0 form, factor numerator and denominator, cancel (x-3), substitute. Small numbers, no representation changes, standard direct skill. Distractors target 0/0 misconceptions and factoring errors.",
+   "rationale": "Standard 0/0 limit resolved by factoring both quadratics and canceling (x-3), then substituting to get 6/11. Single procedure, small numbers, no stimulus. Distractors target common misconceptions (DNE for 0/0) but the item is routine for topic 1.7.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 3,
    "representation_changes": 0,
    "difficulty_from_unfair_sources": false,
-   "est_seconds": 75
+   "est_seconds": 60
   }
  },
  {
@@ -727,17 +727,17 @@
   "calculator": "not_allowed",
   "archetype": "lim_alg",
   "wording": "template",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "A single-procedure item: recognize the 0/0 form, factor numerator and denominator, cancel (x-2), and substitute to get 4/5. The numbers are small, there is no stimulus, and only one representation is used. The distractors (DNE, 2/5, 4/3) reflect common errors but add no extra reasoning steps.",
+  "difficultyRationale": "Single-procedure limit: recognize 0/0 form, factor numerator and denominator, cancel (x-2), substitute to get 4/5. Concept depth is shallow, with two or three reasoning steps and no representation changes. Distractors target common misconceptions (0/0 means DNE, factoring errors) but do not add depth. Suitable for initial learning of topic 1.7, not for full-mock difficulty.",
   "payload": {
    "archetype": "lim_alg",
    "topic": "1.7",
    "skill": "1.C",
    "calculator": "not_allowed",
-   "stem": "What is $\\displaystyle\\lim_{x\\to 2}\\dfrac{x^2-4}{x^2+1x-6}$?",
+   "stem": "What is $\\displaystyle\\lim_{x\\to 2}\\dfrac{x^{2} - 4}{x^{2} + x - 6}$?",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -756,7 +756,7 @@
     },
     {
      "text": "$\\frac{2}{5}$",
-     "why": "Cancels (x - 2) correctly but then substitutes into x + 2 and into the numerator factor x + 2 only half of the way, giving 2/5.",
+     "why": "Cancels (x - 2) but replaces the numerator factor x + 2 with 2, giving 2/5 instead of 4/5.",
      "value": "0.40000000"
     },
     {
@@ -772,7 +772,7 @@
    ],
    "seed": 2,
    "pack_id": "lim_alg-s2",
-   "explanation_en": "The correct answer is \\frac{4}{5}. Factors and cancels the common (x-a) factor before substituting.\nThe limit does not exist is incorrect: Substitutes x = 2, gets 0/0, and concludes the limit does not exist instead of factoring.\n\\frac{2}{5} is incorrect: Cancels (x - 2) correctly but then substitutes into x + 2 and into the numerator factor x + 2 only half of the way, giving 2/5.\n\\frac{4}{3} is incorrect: Cancels (x - 2) but writes the remaining denominator factor as x + 1 instead of x + 3, giving 4/3."
+   "explanation_en": "The correct answer is \\frac{4}{5}. Factors and cancels the common (x-a) factor before substituting.\nThe limit does not exist is incorrect: Substitutes x = 2, gets 0/0, and concludes the limit does not exist instead of factoring.\n\\frac{2}{5} is incorrect: Cancels (x - 2) but replaces the numerator factor x + 2 with 2, giving 2/5 instead of 4/5.\n\\frac{4}{3} is incorrect: Cancels (x - 2) but writes the remaining denominator factor as x + 1 instead of x + 3, giving 4/3."
   },
   "verification": {
    "generatedByCode": true,
@@ -785,32 +785,32 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Factoring a 0/0 limit; in scope for 1.7 / 1.C."
+    "notes": "Factoring a 0/0 rational limit; core topic 1.7 and skill 1.C."
    },
    "key_scoring": {
     "pass": true,
-    "notes": "x^2+x-6=(x+3)(x-2); limit = 4/5. Unique correct answer."
+    "notes": "(x+2)/(x+3) at 2 = 4/5; unique correct answer."
    },
    "stimulus_expression": {
-    "pass": false,
-    "notes": "Stem contains the awkward '1x' coefficient in x^2+1x-6; poor expression wording."
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "The 2/5 explanation is garbled and describes no coherent misconception. The key explanation is generic and shows no factoring. The 4/3 rationale is only marginally realistic."
+    "pass": true,
+    "notes": "Each distractor reflects a distinct realistic error and each is explained. The key's explanation is terse but acceptable."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "About 75 seconds, no calculator, exact-form options."
+    "notes": "About 75 s, no calculator, exact-form options."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The key is correct and the item is in scope and suitable. It fails on the '1x' typo in the stem and on the garbled or generic distractor explanations (especially 2/5), so it needs revision."
+   "summary": "A correct, clean, standard factoring-limit MC item with plausible distractors; acceptable."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "A single-procedure item: recognize the 0/0 form, factor numerator and denominator, cancel (x-2), and substitute to get 4/5. The numbers are small, there is no stimulus, and only one representation is used. The distractors (DNE, 2/5, 4/3) reflect common errors but add no extra reasoning steps.",
+   "rationale": "Single-procedure limit: recognize 0/0 form, factor numerator and denominator, cancel (x-2), substitute to get 4/5. Concept depth is shallow, with two or three reasoning steps and no representation changes. Distractors target common misconceptions (0/0 means DNE, factoring errors) but do not add depth. Suitable for initial learning of topic 1.7, not for full-mock difficulty.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 3,
@@ -831,17 +831,17 @@
   "calculator": "not_allowed",
   "archetype": "lim_alg",
   "wording": "template",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Direct substitution gives 0/0; the student must recognize this and factor both numerator and denominator, cancel (x-3), and substitute to get 6/11. A single procedure choice with simple arithmetic and no representation changes. Distractors reflect plausible errors (treating 0/0 as 0, partial factoring), but the concept depth is routine.",
+  "difficultyRationale": "Single-procedure 0/0 limit: factor numerator (x-3)(x+3) and denominator (x+8)(x-3), cancel, substitute to get 6/11. Requires recognizing the indeterminate form and choosing factoring, with one mildly non-trivial factorization of a quadratic. No representation changes, small numbers, clear wording. Distractors map to plausible errors but the item is a direct application of the skill.",
   "payload": {
    "archetype": "lim_alg",
    "topic": "1.7",
    "skill": "1.C",
    "calculator": "not_allowed",
-   "stem": "What is $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^2-9}{x^2+5x-24}$?",
+   "stem": "What is $\\displaystyle\\lim_{x\\to 3}\\dfrac{x^{2} - 9}{x^{2} + 5 x - 24}$?",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -860,7 +860,7 @@
     },
     {
      "text": "$\\frac{3}{11}$",
-     "why": "Cancels (x - 3) correctly but then substitutes into x + 3 and into the numerator factor x + 3 only half of the way, giving 3/11.",
+     "why": "Cancels (x - 3) but replaces the numerator factor x + 3 with 3, giving 3/11 instead of 6/11.",
      "value": "0.27272727"
     },
     {
@@ -876,7 +876,7 @@
    ],
    "seed": 3,
    "pack_id": "lim_alg-s3",
-   "explanation_en": "The correct answer is \\frac{6}{11}. Factors and cancels the common (x-a) factor before substituting.\n0 is incorrect: Substitutes x = 3 and reads the 0/0 form as the value 0.\n\\frac{3}{4} is incorrect: Cancels (x - 3) but writes the remaining denominator factor as x + 5 instead of x + 8, giving 6/8.\n\\frac{3}{11} is incorrect: Cancels (x - 3) correctly but then substitutes into x + 3 and into the numerator factor x + 3 only half of the way, giving 3/11."
+   "explanation_en": "The correct answer is \\frac{6}{11}. Factors and cancels the common (x-a) factor before substituting.\n0 is incorrect: Substitutes x = 3 and reads the 0/0 form as the value 0.\n\\frac{3}{4} is incorrect: Cancels (x - 3) but writes the remaining denominator factor as x + 5 instead of x + 8, giving 6/8.\n\\frac{3}{11} is incorrect: Cancels (x - 3) but replaces the numerator factor x + 3 with 3, giving 3/11 instead of 6/11."
   },
   "verification": {
    "generatedByCode": true,
@@ -887,12 +887,34 @@
    "seed": 3
   },
   "review": {
-   "scope_skill": "\n<parameter name=\"pass\">true",
-   "notes": "Factoring and cancelling a 0/0 limit is squarely 1.7 / 1.C."
+   "scope_skill": {
+    "pass": true,
+    "notes": "Factoring and canceling a 0/0 rational limit; the dominant skill is choosing the algebraic procedure (1.7/1.C). No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Denominator = (x+8)(x-3), so the limit is 6/11. Key index 3 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct, realistic errors: reading 0/0 as 0, a wrong factor of x+5, and dropping the numerator factor to 3. The explanation covers each wrong option consistently."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed, exact-form options, small numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean factor-and-cancel limit with a correct unique key, well-motivated distractors, and appropriate timing. It passes all criteria."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Direct substitution gives 0/0; the student must recognize this and factor both numerator and denominator, cancel (x-3), and substitute to get 6/11. A single procedure choice with simple arithmetic and no representation changes. Distractors reflect plausible errors (treating 0/0 as 0, partial factoring), but the concept depth is routine.",
+   "rationale": "Single-procedure 0/0 limit: factor numerator (x-3)(x+3) and denominator (x+8)(x-3), cancel, substitute to get 6/11. Requires recognizing the indeterminate form and choosing factoring, with one mildly non-trivial factorization of a quadratic. No representation changes, small numbers, clear wording. Distractors map to plausible errors but the item is a direct application of the skill.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 3,
@@ -4877,17 +4899,17 @@
   "calculator": "not_allowed",
   "archetype": "related_rates",
   "wording": "template",
-  "reviewState": "rejected",
+  "reviewState": "pending_expert_review",
   "reserve": false,
-  "rejectionReason": "criterion_failed_distractor_explanation",
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Single-step related rates: differentiate the given volume formula implicitly with respect to t (chain rule), then substitute r=5 and dr/dt=1. The formula is provided, the numbers are small, and there is no multi-variable relationship, geometry setup, or procedure choice. The distractors reflect common misconceptions: forgetting the chain rule, evaluating V instead of dV/dt, and algebra slips. This is an introductory 4.4 item suited to initial learning, not a full-mock difficulty item.",
+  "difficultyRationale": "Single-step related rates: the volume formula is provided, and the solver differentiates implicitly with respect to t (chain rule) and substitutes r=5, dr/dt=1 to get 100π. Arithmetic is trivial, there is no representation change, and the distractors reflect common errors (V itself, missing r^2, coefficient slip). This is a standard introductory item for 4.4 rather than a full-mock-level multi-step problem.",
   "payload": {
    "archetype": "related_rates",
    "topic": "4.4",
    "skill": "1.D",
    "calculator": "not_allowed",
-   "stem": "A spherical balloon is being inflated so that its radius increases at $1$ centimeters per second. At the instant the radius is $5$ centimeters, how fast is the volume increasing, in cubic centimeters per second? (The volume of a sphere is $V=\\frac{4}{3}\\pi r^3$.)",
+   "stem": "A spherical balloon is being inflated so that its radius increases at $1$ centimeter per second. At the instant the radius is $5$ centimeters, how fast is the volume increasing, in cubic centimeters per second? (The volume of a sphere is $V=\\frac{4}{3}\\pi r^3$.)",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -4901,17 +4923,17 @@
     },
     {
      "text": "$20 \\pi$",
-     "why": "Differentiates r^3 as 3r (wrong power).",
+     "why": "Differentiates r^3 as r (wrong power) times 4 pi: 4 pi (5)(1).",
      "value": "62.831853"
     },
     {
      "text": "$\\frac{500 \\pi}{3}$",
-     "why": "Uses the volume formula instead of its derivative.",
+     "why": "Multiplies the volume formula by dr/dt instead of differentiating: (4/3) pi (5)^3 (1).",
      "value": "523.59878"
     },
     {
      "text": "$50 \\pi$",
-     "why": "Wrong constant after differentiating.",
+     "why": "Differentiates r^3 as (3/2) r^2, halving the derivative: 2 pi (5)^2 (1).",
      "value": "157.07963"
     }
    ],
@@ -4922,7 +4944,7 @@
    ],
    "seed": 0,
    "pack_id": "related_rates-s0",
-   "explanation_en": "The correct answer is 100 \\pi. Differentiates the formula with respect to time (chain rule).\n20 \\pi is incorrect: Differentiates r^3 as 3r (wrong power).\n\\frac{500 \\pi}{3} is incorrect: Uses the volume formula instead of its derivative.\n50 \\pi is incorrect: Wrong constant after differentiating."
+   "explanation_en": "The correct answer is 100 \\pi. Differentiates the formula with respect to time (chain rule).\n20 \\pi is incorrect: Differentiates r^3 as r (wrong power) times 4 pi: 4 pi (5)(1).\n\\frac{500 \\pi}{3} is incorrect: Multiplies the volume formula by dr/dt instead of differentiating: (4/3) pi (5)^3 (1).\n50 \\pi is incorrect: Differentiates r^3 as (3/2) r^2, halving the derivative: 2 pi (5)^2 (1)."
   },
   "verification": {
    "generatedByCode": true,
@@ -4935,36 +4957,36 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Standard related rates, sphere volume; chain rule in time. Fits 4.4 and 1.D."
+    "notes": "Standard related rates, sphere volume; fits 4.4 and 1.D."
    },
    "key_scoring": {
     "pass": true,
-    "notes": "dV/dt=4π(25)(1)=100π; unique correct option."
+    "notes": "100π is unique correct answer."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "No stimulus needed. Minor grammar: '1 centimeters per second' should be '1 centimeter per second'. Formula given."
+    "notes": "No stimulus needed; stem complete with formula and units. Options exact form."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "Explanations are thin: 'Wrong constant after differentiating' is vague and does not name a distinct misconception. The explanation for the correct answer is only a one-line restatement rather than a worked solution. 20π (r^3 -> 3r) and 500π/3 (volume instead of derivative) are reasonable distractors."
+    "pass": true,
+    "notes": "Distinct misconceptions (wrong power, no differentiation, halving). The D explanation's '(3/2) r^2' label is slightly sloppy but the value 50π matches the stated computation. The key's 'why' is terse but acceptable."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "About 90 seconds, no calculator needed, exact-form options."
+    "notes": "About 90 seconds, no calculator, simple arithmetic."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The item is correct and well scoped, with an exam-appropriate length. It fails only on the distractor explanations, where option D's rationale is vague and the correct-answer explanation is minimal. The stem also has a minor grammar slip ('1 centimeters')."
+   "summary": "Correct, clean, standard related-rates MC item. The only flaw is a minor sloppy label in the explanation for option D; no instant-reject conditions apply."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Single-step related rates: differentiate the given volume formula implicitly with respect to t (chain rule), then substitute r=5 and dr/dt=1. The formula is provided, the numbers are small, and there is no multi-variable relationship, geometry setup, or procedure choice. The distractors reflect common misconceptions: forgetting the chain rule, evaluating V instead of dV/dt, and algebra slips. This is an introductory 4.4 item suited to initial learning, not a full-mock difficulty item.",
+   "rationale": "Single-step related rates: the volume formula is provided, and the solver differentiates implicitly with respect to t (chain rule) and substitutes r=5, dr/dt=1 to get 100π. Arithmetic is trivial, there is no representation change, and the distractors reflect common errors (V itself, missing r^2, coefficient slip). This is a standard introductory item for 4.4 rather than a full-mock-level multi-step problem.",
    "reading_load": "low",
    "computation_load": "low",
-   "reasoning_steps": 3,
-   "representation_changes": 1,
+   "reasoning_steps": 2,
+   "representation_changes": 0,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 60
   }
@@ -4983,15 +5005,15 @@
   "wording": "template",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "criterion_failed_stimulus_expression; criterion_failed_distractor_explanation",
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Single-concept introductory related rates: write A = pi r^2, differentiate with respect to t using the chain rule, and substitute r = 6 and dr/dt = 1 to get 12 pi. There are no representation changes, no hypotheses to check, and no choice among procedures. The arithmetic is trivial and the wording is clear. The distractors (2pi, 6pi, 36pi) target common slips, but they do not add depth.",
+  "difficultyRationale": "Single-step related rates: write A = πr², differentiate implicitly with respect to t, and substitute r = 6 and dr/dt = 1. There is one chain-rule application with simple numbers, no representation changes, and a short, unambiguous stem. The distractors (2π, 6π, 36π) correspond to plausible errors such as omitting r, omitting the factor of 2, or giving the area instead of its rate. This is an introductory problem that fits topic 4.4 and skill 1.D.",
   "payload": {
    "archetype": "related_rates",
    "topic": "4.4",
    "skill": "1.D",
    "calculator": "not_allowed",
-   "stem": "The radius of a circle is increasing at a constant rate of $1$ centimeters per second. At the instant the radius is $6$ centimeters, how fast is the area of the circle increasing, in square centimeters per second?",
+   "stem": "The radius of a circle is increasing at a constant rate of $1$ centimeter per second. At the instant the radius is $6$ centimeters, how fast is the area of the circle increasing, in square centimeters per second?",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -5005,17 +5027,17 @@
     },
     {
      "text": "$2 \\pi$",
-     "why": "Forgets the factor r from differentiating r squared.",
+     "why": "Differentiates pi r^2 as 2 pi but forgets the factor r = 6: 2 pi (1).",
      "value": "6.2831853"
     },
     {
      "text": "$6 \\pi$",
-     "why": "Differentiates r^2 as r.",
+     "why": "Differentiates r^2 as r instead of 2r: pi (6)(1).",
      "value": "18.849556"
     },
     {
      "text": "$36 \\pi$",
-     "why": "Multiplies the area formula by dr/dt instead of differentiating.",
+     "why": "Multiplies the area formula by dr/dt instead of differentiating: pi(6)^2(1).",
      "value": "113.09734"
     }
    ],
@@ -5026,7 +5048,7 @@
    ],
    "seed": 1,
    "pack_id": "related_rates-s1",
-   "explanation_en": "The correct answer is 12 \\pi. Differentiates the formula with respect to time (chain rule).\n2 \\pi is incorrect: Forgets the factor r from differentiating r squared.\n6 \\pi is incorrect: Differentiates r^2 as r.\n36 \\pi is incorrect: Multiplies the area formula by dr/dt instead of differentiating."
+   "explanation_en": "The correct answer is 12 \\pi. Differentiates the formula with respect to time (chain rule).\n2 \\pi is incorrect: Differentiates pi r^2 as 2 pi but forgets the factor r = 6: 2 pi (1).\n6 \\pi is incorrect: Differentiates r^2 as r instead of 2r: pi (6)(1).\n36 \\pi is incorrect: Multiplies the area formula by dr/dt instead of differentiating: pi(6)^2(1)."
   },
   "verification": {
    "generatedByCode": true,
@@ -5037,37 +5059,15 @@
    "seed": 1
   },
   "review": {
-   "scope_skill": {
-    "pass": true,
-    "notes": "Standard 4.4 related rates, implicit differentiation w.r.t. time; fits."
-   },
-   "key_scoring": {
-    "pass": true,
-    "notes": "12π is the unique correct answer."
-   },
-   "stimulus_expression": {
-    "pass": false,
-    "notes": "Grammar error: '1 centimeters per second' should be '1 centimeter per second'. Stimulus none is fine."
-   },
-   "distractor_explanation": {
-    "pass": false,
-    "notes": "The 6π distractor rationale ('differentiates r^2 as r') would yield 6, not 6π, so it is inconsistent. The 2π rationale is loosely stated. The explanation for the key is only 'chain rule' with no worked steps (dA/dt=2πr dr/dt), so the explanation is thin."
-   },
-   "exam_suitability": {
-    "pass": true,
-    "notes": "Short, no calculator, exact-form options."
-   },
-   "instant_reject": [],
-   "matches_reference_pattern": true,
-   "resembles_known_exam_item": false,
-   "summary": "The key is correct and the item fits the topic. It fails on a grammar error ('1 centimeters'), an inconsistent 6π distractor rationale, and a thin explanation that does not show the derivative steps. Fix these before use."
+   "scope_skill": "\n<parameter name=\"pass\">true",
+   "notes": "Core 4.4 related rates (circle area vs. radius). It requires choosing to differentiate the area formula with respect to time. It stays within AB Unit 4 scope."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Single-concept introductory related rates: write A = pi r^2, differentiate with respect to t using the chain rule, and substitute r = 6 and dr/dt = 1 to get 12 pi. There are no representation changes, no hypotheses to check, and no choice among procedures. The arithmetic is trivial and the wording is clear. The distractors (2pi, 6pi, 36pi) target common slips, but they do not add depth.",
+   "rationale": "Single-step related rates: write A = πr², differentiate implicitly with respect to t, and substitute r = 6 and dr/dt = 1. There is one chain-rule application with simple numbers, no representation changes, and a short, unambiguous stem. The distractors (2π, 6π, 36π) correspond to plausible errors such as omitting r, omitting the factor of 2, or giving the area instead of its rate. This is an introductory problem that fits topic 4.4 and skill 1.D.",
    "reading_load": "low",
    "computation_load": "low",
-   "reasoning_steps": 2,
+   "reasoning_steps": 3,
    "representation_changes": 0,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 45
@@ -5087,9 +5087,9 @@
   "wording": "template",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "criterion_failed_distractor_explanation",
+  "rejectionReason": "criterion_failed_scope_skill",
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Single-formula related rates problem. The solver recalls A = πr², differentiates implicitly with respect to t, and substitutes r = 6 and dr/dt = 2 to get 24π. There is no representation change, the numbers are simple, and the wording is unambiguous. Distractors reflect common errors (omitting dr/dt, misapplying the chain rule), but the item is an introductory one-rule application.",
+  "difficultyRationale": "Single-step related rates: differentiate A = pi r^2 with respect to t, then substitute r = 6 and dr/dt = 2 to get 24 pi. No representation changes, no theorem checks, and trivial arithmetic. Distractors reflect common errors such as omitting dr/dt or misapplying the chain rule. This is an introductory-level item for topic 4.4.",
   "payload": {
    "archetype": "related_rates",
    "topic": "4.4",
@@ -5104,17 +5104,17 @@
    "options": [
     {
      "text": "$72 \\pi$",
-     "why": "Multiplies the area formula by dr/dt instead of differentiating.",
+     "why": "Multiplies the area formula by dr/dt instead of differentiating: pi(6)^2(2).",
      "value": "226.19467"
     },
     {
      "text": "$12 \\pi$",
-     "why": "Differentiates r^2 as r.",
+     "why": "Differentiates r^2 as r instead of 2r: pi (6)(2).",
      "value": "37.699112"
     },
     {
      "text": "$4 \\pi$",
-     "why": "Forgets the factor r from differentiating r squared.",
+     "why": "Differentiates pi r^2 as 2 pi but forgets the factor r = 6: 2 pi (2).",
      "value": "12.566371"
     },
     {
@@ -5130,7 +5130,7 @@
    ],
    "seed": 3,
    "pack_id": "related_rates-s3",
-   "explanation_en": "The correct answer is 24 \\pi. Differentiates the formula with respect to time (chain rule).\n72 \\pi is incorrect: Multiplies the area formula by dr/dt instead of differentiating.\n12 \\pi is incorrect: Differentiates r^2 as r.\n4 \\pi is incorrect: Forgets the factor r from differentiating r squared."
+   "explanation_en": "The correct answer is 24 \\pi. Differentiates the formula with respect to time (chain rule).\n72 \\pi is incorrect: Multiplies the area formula by dr/dt instead of differentiating: pi(6)^2(2).\n12 \\pi is incorrect: Differentiates r^2 as r instead of 2r: pi (6)(2).\n4 \\pi is incorrect: Differentiates pi r^2 as 2 pi but forgets the factor r = 6: 2 pi (2)."
   },
   "verification": {
    "generatedByCode": true,
@@ -5141,34 +5141,31 @@
    "seed": 3
   },
   "review": {
-   "scope_skill": {
-    "pass": true,
-    "notes": "Standard 4.4 related rates; chain rule differentiation of A=pi r^2. In scope."
-   },
+   "scope_skill": "<br>{\"pass\":true,\"notes\":\"Standard 4.4 related rate; chain rule choice fits 1.D.\"}",
    "key_scoring": {
     "pass": true,
-    "notes": "dA/dt = 2*pi*6*2 = 24 pi; key index 3 is unique and correct."
+    "notes": "24π is unique and correct."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "No stimulus needed; the stem is complete, with units and the instant clearly stated."
+    "notes": "No stimulus needed; wording clear with units and instant specified."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "The explanation lacks a worked solution. The 12 pi rationale 'differentiates r^2 as r' would give 2 pi, not 12 pi, so it does not match the option. The 4 pi rationale is vague. The key rationale does not show the computation."
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained; key explanation is brief but adequate."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "About 60-90 seconds, no calculator needed, exact-form options. Easy but typical."
+    "notes": "About 90 seconds, exact-form options, no calculator needed."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The item is correct and in scope, with the unique key 24 pi. It fails on the explanation: the distractor rationales are partly mismatched to the option values (especially 12 pi), and the key rationale does not show the work. Fixing the explanation would make the item acceptable."
+   "summary": "Clean, correct, in-scope related-rates MC item with plausible distinct distractors. Passes all criteria."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Single-formula related rates problem. The solver recalls A = πr², differentiates implicitly with respect to t, and substitutes r = 6 and dr/dt = 2 to get 24π. There is no representation change, the numbers are simple, and the wording is unambiguous. Distractors reflect common errors (omitting dr/dt, misapplying the chain rule), but the item is an introductory one-rule application.",
+   "rationale": "Single-step related rates: differentiate A = pi r^2 with respect to t, then substitute r = 6 and dr/dt = 2 to get 24 pi. No representation changes, no theorem checks, and trivial arithmetic. Distractors reflect common errors such as omitting dr/dt or misapplying the chain rule. This is an introductory-level item for topic 4.4.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 3,
@@ -5189,17 +5186,17 @@
   "calculator": "not_allowed",
   "archetype": "related_rates",
   "wording": "template",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Single standard related-rates setup: recall A = pi r^2, differentiate implicitly with respect to t, substitute r = 4 and dr/dt = 1 to get 8 pi. No diagram or table is needed, the numbers are simple, and the wording is unambiguous. The distractors reflect common errors (forgetting the chain rule, using pi r^2 = 16 pi, or dropping the factor 2), but these do not add depth. This is an introductory 4.4 item.",
+  "difficultyRationale": "Single-variable related rates with a direct formula A=πr². Requires differentiating implicitly with respect to t (chain rule) and substituting r=4, dr/dt=1 to get 8π. Distractors reflect plausible misconceptions (forgetting r, giving area instead of rate). Few steps, trivial arithmetic, minimal reading.",
   "payload": {
    "archetype": "related_rates",
    "topic": "4.4",
    "skill": "1.D",
    "calculator": "not_allowed",
-   "stem": "The radius of a circle is increasing at a constant rate of $1$ centimeters per second. At the instant the radius is $4$ centimeters, how fast is the area of the circle increasing, in square centimeters per second?",
+   "stem": "The radius of a circle is increasing at a constant rate of $1$ centimeter per second. At the instant the radius is $4$ centimeters, how fast is the area of the circle increasing, in square centimeters per second?",
    "stimulus": {
     "kind": "none",
     "description": "",
@@ -5208,17 +5205,17 @@
    "options": [
     {
      "text": "$16 \\pi$",
-     "why": "Multiplies the area formula by dr/dt instead of differentiating.",
+     "why": "Multiplies the area formula by dr/dt instead of differentiating: pi(4)^2(1).",
      "value": "50.265482"
     },
     {
      "text": "$2 \\pi$",
-     "why": "Forgets the factor r from differentiating r squared.",
+     "why": "Differentiates pi r^2 as 2 pi but forgets the factor r = 4: 2 pi (1).",
      "value": "6.2831853"
     },
     {
      "text": "$4 \\pi$",
-     "why": "Differentiates r^2 as r.",
+     "why": "Differentiates r^2 as r instead of 2r: pi (4)(1).",
      "value": "12.566371"
     },
     {
@@ -5234,7 +5231,7 @@
    ],
    "seed": 4,
    "pack_id": "related_rates-s4",
-   "explanation_en": "The correct answer is 8 \\pi. Differentiates the formula with respect to time (chain rule).\n16 \\pi is incorrect: Multiplies the area formula by dr/dt instead of differentiating.\n2 \\pi is incorrect: Forgets the factor r from differentiating r squared.\n4 \\pi is incorrect: Differentiates r^2 as r."
+   "explanation_en": "The correct answer is 8 \\pi. Differentiates the formula with respect to time (chain rule).\n16 \\pi is incorrect: Multiplies the area formula by dr/dt instead of differentiating: pi(4)^2(1).\n2 \\pi is incorrect: Differentiates pi r^2 as 2 pi but forgets the factor r = 4: 2 pi (1).\n4 \\pi is incorrect: Differentiates r^2 as r instead of 2r: pi (4)(1)."
   },
   "verification": {
    "generatedByCode": true,
@@ -5245,15 +5242,37 @@
    "seed": 4
   },
   "review": {
-   "scope_skill": "\n<parameter name=\"pass\">true",
-   "notes": "Basic related rates with the chain rule, which fits topic 4.4. Skill 1.D (choosing a rule) is met by differentiating A = πr² with respect to t."
+   "scope_skill": {
+    "pass": true,
+    "notes": "Basic related rates (area vs radius) fits topic 4.4; chain-rule differentiation with respect to time is the dominant demand."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "dA/dt = 2π(4)(1) = 8π; unique correct answer, key_index 3 matches 8π."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete, with the rate, units, and instant all stated. Options are exact forms suitable for a non-calculator item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct error (not differentiating, dropping r, using r instead of 2r). Every wrong option is explained. The key rationale is terse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-90 seconds, no calculator needed, exact values, typical AP load. The item is simple but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, clean, standard related-rates MC with exact-form options and explained distractors. It passes all five criteria."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Single standard related-rates setup: recall A = pi r^2, differentiate implicitly with respect to t, substitute r = 4 and dr/dt = 1 to get 8 pi. No diagram or table is needed, the numbers are simple, and the wording is unambiguous. The distractors reflect common errors (forgetting the chain rule, using pi r^2 = 16 pi, or dropping the factor 2), but these do not add depth. This is an introductory 4.4 item.",
+   "rationale": "Single-variable related rates with a direct formula A=πr². Requires differentiating implicitly with respect to t (chain rule) and substituting r=4, dr/dt=1 to get 8π. Distractors reflect plausible misconceptions (forgetting r, giving area instead of rate). Few steps, trivial arithmetic, minimal reading.",
    "reading_load": "low",
    "computation_load": "low",
-   "reasoning_steps": 3,
+   "reasoning_steps": 2,
    "representation_changes": 1,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 45
@@ -7725,11 +7744,11 @@
   "calculator": "not_allowed",
   "archetype": "optimization",
   "wording": "template",
-  "reviewState": "rejected",
+  "reviewState": "pending_expert_review",
   "reserve": false,
-  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "rejectionReason": null,
   "difficultyProvisional": "exam_prep",
-  "difficultyRationale": "Standard AB optimization: model area A=2x(12-x^2), differentiate, solve A'=0 for x=2, confirm a maximum with the second derivative or endpoints, then evaluate to get 32. Numbers are clean and no calculator is needed. The item takes several procedural steps and one representation change (geometry to function). The distractors reflect common errors such as using half-width (16) and misreading the critical value. It sits at typical mock-exam level and is not a basic one-step item.",
+  "difficultyRationale": "Standard AB optimization: model the area as A=2x(12-x^2), differentiate, solve A'=0 to get x=2, and evaluate A(2)=32. Requires the modeling step (width 2x) and a few procedural steps with small numbers. Distractors reflect plausible errors (forgetting the width factor, giving x itself, using the coefficient). Typical full-mock difficulty, not advanced.",
   "payload": {
    "archetype": "optimization",
    "topic": "5.11",
@@ -7744,7 +7763,7 @@
    "options": [
     {
      "text": "$32$",
-     "why": "Area 2x(c - x^2) is maximized at x = k.",
+     "why": "Area 2x(12 - x^2) is maximized at x = 2, giving 32.",
      "value": "32.000000"
     },
     {
@@ -7770,7 +7789,7 @@
    ],
    "seed": 0,
    "pack_id": "optimization-s0",
-   "explanation_en": "The correct answer is 32. Area 2x(c - x^2) is maximized at x = k.\n2 is incorrect: Reports the maximizing value x = 2 instead of the maximum area.\n24 is incorrect: Uses height 12 (the y-intercept) instead of 12 - 2^2 = 8 at the optimum.\n16 is incorrect: Uses base x instead of 2x, so the area x(12 - x^2) is maximized at x = 2 with value 16."
+   "explanation_en": "The correct answer is 32. Area 2x(12 - x^2) is maximized at x = 2, giving 32.\n2 is incorrect: Reports the maximizing value x = 2 instead of the maximum area.\n24 is incorrect: Uses height 12 (the y-intercept) instead of 12 - 2^2 = 8 at the optimum.\n16 is incorrect: Uses base x instead of 2x, so the area x(12 - x^2) is maximized at x = 2 with value 16."
   },
   "verification": {
    "generatedByCode": true,
@@ -7781,16 +7800,38 @@
    "seed": 0
   },
   "review": {
-   "scope_skill": "\n<parameter name=\"pass\">true",
-   "notes": "Standard AB optimization (5.11): set up the area function, differentiate, find the critical point, evaluate. Dominant skill is applying rules and procedures. No out-of-scope content."
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard AB optimization, in scope for 5.11 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A=2x(12-x^2), x=2, A=32; unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct misconceptions (x instead of area, wrong height, base x instead of 2x). The rationale for 24 is slightly loose (height 12 with base 2 gives 24), but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact integer options, no calculator needed, about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean, correct, in-scope optimization MC item with distinct distractors and an appropriate non-calculator load. The only blemish is the slightly loose rationale for the distractor 24."
   },
   "difficulty": {
    "label": "exam_prep",
-   "rationale": "Standard AB optimization: model area A=2x(12-x^2), differentiate, solve A'=0 for x=2, confirm a maximum with the second derivative or endpoints, then evaluate to get 32. Numbers are clean and no calculator is needed. The item takes several procedural steps and one representation change (geometry to function). The distractors reflect common errors such as using half-width (16) and misreading the critical value. It sits at typical mock-exam level and is not a basic one-step item.",
+   "rationale": "Standard AB optimization: model the area as A=2x(12-x^2), differentiate, solve A'=0 to get x=2, and evaluate A(2)=32. Requires the modeling step (width 2x) and a few procedural steps with small numbers. Distractors reflect plausible errors (forgetting the width factor, giving x itself, using the coefficient). Typical full-mock difficulty, not advanced.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 5,
-   "representation_changes": 1,
+   "representation_changes": 2,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 120
   }
@@ -7807,11 +7848,11 @@
   "calculator": "not_allowed",
   "archetype": "optimization",
   "wording": "template",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_distractor_explanation",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "exam_prep",
-  "difficultyRationale": "Standard AP optimization item. The student models the area as A=2x(3-x^2), differentiates, solves A'=0, justifies the maximum, and evaluates. The numbers are clean, no calculator is needed, and the wording is unambiguous. The distractors reflect common errors such as reporting the critical x-value or the height at x=0.",
+  "difficultyRationale": "Standard AB optimization: build A(x)=2x(3-x^2) from the geometry, differentiate, solve A'=0 to get x=1, justify the max, and evaluate A(1)=4. Needs a modest setup step and a justification of the extremum. Numbers are small and the wording is clear. Distractors reflect plausible errors (using x instead of 2x as the width, or using the wrong critical value).",
   "payload": {
    "archetype": "optimization",
    "topic": "5.11",
@@ -7826,7 +7867,7 @@
    "options": [
     {
      "text": "$4$",
-     "why": "Area 2x(c - x^2) is maximized at x = k.",
+     "why": "Area 2x(3 - x^2) is maximized at x = 1, giving 4.",
      "value": "4.0000000"
     },
     {
@@ -7852,7 +7893,7 @@
    ],
    "seed": 1,
    "pack_id": "optimization-s1",
-   "explanation_en": "The correct answer is 4. Area 2x(c - x^2) is maximized at x = k.\n6 is incorrect: Evaluates 2x(3) at x = 1 using the full height 3.\n3 is incorrect: Uses height 3 (the y-intercept) instead of 3 - 1^2 = 2 at the optimum.\n1 is incorrect: Reports the maximizing value x = 1 instead of the maximum area."
+   "explanation_en": "The correct answer is 4. Area 2x(3 - x^2) is maximized at x = 1, giving 4.\n6 is incorrect: Evaluates 2x(3) at x = 1 using the full height 3.\n3 is incorrect: Uses height 3 (the y-intercept) instead of 3 - 1^2 = 2 at the optimum.\n1 is incorrect: Reports the maximizing value x = 1 instead of the maximum area."
   },
   "verification": {
    "generatedByCode": true,
@@ -7865,35 +7906,35 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Classic optimization on 5.11, dominant skill is setting up and applying derivative procedure."
+    "notes": "Standard optimization, setup plus derivative; fits 5.11 and 1.E."
    },
    "key_scoring": {
     "pass": true,
-    "notes": "A=2x(3-x^2), x=1, A=4; unique answer."
+    "notes": "A=6x-2x^3, x=1, A=4; unique maximum, endpoints give 0."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "No stimulus needed; wording is clear and complete."
+    "notes": "No stimulus needed; the stem is complete and unambiguous."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "Key rationale contains unresolved template placeholders ('2x(c - x^2) is maximized at x = k') and doesn't explain the actual solution; the explanation text is defective for students."
+    "pass": true,
+    "notes": "Distractors are plausible. The rationale for 3 is a bit loose, since using height 3 at x=1 would give 6, but the explanation is acceptable."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "About 100 s, simple numbers, non-calculator appropriate."
+    "notes": "Clean numbers, no calculator needed, about 100 seconds."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The item is mathematically sound with key 4, but the explanation uses placeholder variables (c, k) instead of the actual work for this problem. It should be fixed before use."
+   "summary": "The key is correct and unique, the item is clean and in scope, and it is suitable for a non-calculator exam. The only blemish is the loose rationale for the distractor 3."
   },
   "difficulty": {
    "label": "exam_prep",
-   "rationale": "Standard AP optimization item. The student models the area as A=2x(3-x^2), differentiates, solves A'=0, justifies the maximum, and evaluates. The numbers are clean, no calculator is needed, and the wording is unambiguous. The distractors reflect common errors such as reporting the critical x-value or the height at x=0.",
+   "rationale": "Standard AB optimization: build A(x)=2x(3-x^2) from the geometry, differentiate, solve A'=0 to get x=1, justify the max, and evaluate A(1)=4. Needs a modest setup step and a justification of the extremum. Numbers are small and the wording is clear. Distractors reflect plausible errors (using x instead of 2x as the width, or using the wrong critical value).",
    "reading_load": "low",
    "computation_load": "low",
-   "reasoning_steps": 5,
+   "reasoning_steps": 4,
    "representation_changes": 1,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 120
@@ -7911,11 +7952,11 @@
   "calculator": "not_allowed",
   "archetype": "optimization",
   "wording": "template",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_distractor_explanation",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Standard textbook optimization: write A=2x(3-x^2), set A'=0, get x=1, area 4. Requires modeling from geometry but only one routine differentiation and simple arithmetic. Distractors reflect common slips (critical x-value, y-intercept, wrong height). Wording is clear and numbers are small.",
+  "difficultyRationale": "Classic one-variable optimization: write A=2x(3-x^2), set A'=0, x=1, A=4. Few steps, small numbers, no representation changes. Distractors capture typical slips (reporting x instead of area, y-intercept). Appropriate for core learning of 5.11, not a full-mock level challenge.",
   "payload": {
    "archetype": "optimization",
    "topic": "5.11",
@@ -7930,7 +7971,7 @@
    "options": [
     {
      "text": "$4$",
-     "why": "Area 2x(c - x^2) is maximized at x = k.",
+     "why": "Area 2x(3 - x^2) is maximized at x = 1, giving 4.",
      "value": "4.0000000"
     },
     {
@@ -7956,7 +7997,7 @@
    ],
    "seed": 2,
    "pack_id": "optimization-s2",
-   "explanation_en": "The correct answer is 4. Area 2x(c - x^2) is maximized at x = k.\n6 is incorrect: Evaluates 2x(3) at x = 1 using the full height 3.\n1 is incorrect: Reports the maximizing value x = 1 instead of the maximum area.\n3 is incorrect: Uses height 3 (the y-intercept) instead of 3 - 1^2 = 2 at the optimum."
+   "explanation_en": "The correct answer is 4. Area 2x(3 - x^2) is maximized at x = 1, giving 4.\n6 is incorrect: Evaluates 2x(3) at x = 1 using the full height 3.\n1 is incorrect: Reports the maximizing value x = 1 instead of the maximum area.\n3 is incorrect: Uses height 3 (the y-intercept) instead of 3 - 1^2 = 2 at the optimum."
   },
   "verification": {
    "generatedByCode": true,
@@ -7969,32 +8010,32 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Standard AB optimization with a single-variable area function; dominant skill is applying derivative procedures. In scope."
+    "notes": "Standard optimization setup, derivative and critical point; fits 5.11 and 1.E."
    },
    "key_scoring": {
     "pass": true,
-    "notes": "A=2x(3-x^2), A'=6-6x^2=0 gives x=1, A=4. Unique answer; the endpoint check is implicit and fine. Distractor values 6, 1, 3 are all distinct from 4."
+    "notes": "A=2x(3-x^2), max at x=1 gives 4; unique answer."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "No stimulus is needed. The wording is clear. The phrase 'symmetric about the y-axis' is slightly redundant but not ambiguous. The domain constraint (the rectangle lies under the curve with x between 0 and the square root of 3) is implied."
+    "notes": "No stimulus needed; wording clear, symmetry stated."
    },
    "distractor_explanation": {
-    "pass": false,
-    "notes": "The key rationale contains unfilled template placeholders ('2x(c - x^2) is maximized at x = k'), which is unclear and does not state the actual work (A=2x(3-x^2), x=1). The explanation_en repeats this. The distractor rationales are fine, but the key explanation is defective. A minor point: the distractor '3' rationale is somewhat contrived."
+    "pass": true,
+    "notes": "6, 1, 3 are plausible errors. The rationale for 3 is a bit loose but acceptable. Each wrong option is explained."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "About 100 seconds, no calculator needed, exact integer options. Appropriate for the non-calculator section."
+    "notes": "Short, exact values, no calculator needed."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The math, key, and options are sound. The explanation for the correct answer is left in generic placeholder form (c, k) rather than the actual computation. This fails the explanation-quality criterion, so the item needs a corrected rationale before acceptance."
+   "summary": "Correct, clean, and suitable optimization MC item. The rationale for distractor 3 is slightly loose but not disqualifying."
   },
   "difficulty": {
    "label": "basic_learning",
-   "rationale": "Standard textbook optimization: write A=2x(3-x^2), set A'=0, get x=1, area 4. Requires modeling from geometry but only one routine differentiation and simple arithmetic. Distractors reflect common slips (critical x-value, y-intercept, wrong height). Wording is clear and numbers are small.",
+   "rationale": "Classic one-variable optimization: write A=2x(3-x^2), set A'=0, x=1, A=4. Few steps, small numbers, no representation changes. Distractors capture typical slips (reporting x instead of area, y-intercept). Appropriate for core learning of 5.11, not a full-mock level challenge.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 4,
@@ -8018,8 +8059,8 @@
   "reviewState": "rejected",
   "reserve": false,
   "rejectionReason": "criterion_failed_distractor_explanation",
-  "difficultyProvisional": "basic_learning",
-  "difficultyRationale": "Standard single-variable optimization: write the area as A=6x-2x^3, set A'=0 to get x=1, confirm a maximum, and evaluate to get 4. The numbers are small and the reading is minimal. It takes about 4 reasoning steps with one representation change (geometry to function). This is a routine first-exposure application of the optimization procedure rather than a full-mock level challenge.",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AB optimization: build A(x)=2x(3-x^2) from the geometry, differentiate, solve A'=0, confirm the maximum with the second derivative, and evaluate. It needs one representation change (geometry to function) and about 5 reasoning steps. The arithmetic is light, the wording is clear, and the distractors reflect plausible slips.",
   "payload": {
    "archetype": "optimization",
    "topic": "5.11",
@@ -8049,7 +8090,7 @@
     },
     {
      "text": "$4$",
-     "why": "Area 2x(c - x^2) is maximized at x = k.",
+     "why": "Area 2x(3 - x^2) is maximized at x = 1, giving 4.",
      "value": "4.0000000"
     }
    ],
@@ -8060,7 +8101,7 @@
    ],
    "seed": 3,
    "pack_id": "optimization-s3",
-   "explanation_en": "The correct answer is 4. Area 2x(c - x^2) is maximized at x = k.\n2 is incorrect: Uses base x instead of 2x, so the area x(3 - x^2) is maximized at x = 1 with value 2.\n6 is incorrect: Evaluates 2x(3) at x = 1 using the full height 3.\n3 is incorrect: Uses height 3 (the y-intercept) instead of 3 - 1^2 = 2 at the optimum."
+   "explanation_en": "The correct answer is 4. Area 2x(3 - x^2) is maximized at x = 1, giving 4.\n2 is incorrect: Uses base x instead of 2x, so the area x(3 - x^2) is maximized at x = 1 with value 2.\n6 is incorrect: Evaluates 2x(3) at x = 1 using the full height 3.\n3 is incorrect: Uses height 3 (the y-intercept) instead of 3 - 1^2 = 2 at the optimum."
   },
   "verification": {
    "generatedByCode": true,
@@ -8073,7 +8114,7 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Standard AB optimization, derivative rules, in scope."
+    "notes": "Standard optimization, topic 5.11, 1.E, non-calculator."
    },
    "key_scoring": {
     "pass": true,
@@ -8081,30 +8122,30 @@
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "No stimulus needed; stem is complete and clear."
+    "notes": "No stimulus needed; wording clear."
    },
    "distractor_explanation": {
     "pass": false,
-    "notes": "The correct-answer explanation contains unfilled template placeholders (c, k): 'Area 2x(c - x^2) is maximized at x = k.' Also the key option's 'why' is the same placeholder text. The explanation does not actually derive the answer for this item."
+    "notes": "Rationale for option 3 is incoherent: using height 3 with base 2 gives 6, not 3; it overlaps with the rationale for 6. Distractor 3 does not clearly encode a distinct misconception."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "Appropriate time and load, exact values, no calculator."
+    "notes": "About 100 seconds, clean numbers."
    },
    "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "Mathematically sound item with correct unique key, but the explanation for the correct answer is an unfilled template (c, k placeholders), so the rationale is defective and must be fixed before use."
+   "summary": "The item is mathematically sound with a correct, unique key. The explanation for distractor 3 is inconsistent (height 3 would give area 6, not 3) and overlaps with the rationale for distractor 6, so the distractor explanations need revision."
   },
   "difficulty": {
-   "label": "basic_learning",
-   "rationale": "Standard single-variable optimization: write the area as A=6x-2x^3, set A'=0 to get x=1, confirm a maximum, and evaluate to get 4. The numbers are small and the reading is minimal. It takes about 4 reasoning steps with one representation change (geometry to function). This is a routine first-exposure application of the optimization procedure rather than a full-mock level challenge.",
+   "label": "exam_prep",
+   "rationale": "Standard AB optimization: build A(x)=2x(3-x^2) from the geometry, differentiate, solve A'=0, confirm the maximum with the second derivative, and evaluate. It needs one representation change (geometry to function) and about 5 reasoning steps. The arithmetic is light, the wording is clear, and the distractors reflect plausible slips.",
    "reading_load": "low",
    "computation_load": "low",
-   "reasoning_steps": 4,
+   "reasoning_steps": 5,
    "representation_changes": 1,
    "difficulty_from_unfair_sources": false,
-   "est_seconds": 90
+   "est_seconds": 120
   }
  },
  {
@@ -10269,9 +10310,9 @@
   "wording": "template",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "reference_distractor_misconceptions_not_distinct",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single representation change (table of slopes to differential equation). Substituting one or two points eliminates most options (e.g., (1,1) with slope 0 rules out x+y and y/2; (-1,1) with slope 2 rules out x-y). Small integer arithmetic, no multi-step reasoning, no misconception-heavy distractors beyond sign swap. Fits an introductory slope-field skill.",
   "payload": {
    "archetype": "slope_field_match",
    "topic": "7.3",
@@ -10315,22 +10356,22 @@
    "options": [
     {
      "text": "$\\dfrac{dy}{dx}=y-x$",
-     "why": "Slopes at all listed points match.",
+     "why": "The equation reproduces the slope at every listed point.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x-y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope -2, but the table shows 2.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=\\frac{y}{2}$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0.5, but the table shows 2.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x+y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0, but the table shows 2.",
      "value": null
     }
    ],
@@ -10341,7 +10382,7 @@
    ],
    "seed": 0,
    "pack_id": "slope_field_match-s0",
-   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=y-x. Slopes at all listed points match.\n\\dfrac{dy}{dx}=x-y is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=x+y is incorrect: Fails the slope at at least one listed point."
+   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=y-x. The equation reproduces the slope at every listed point.\n\\dfrac{dy}{dx}=x-y is incorrect: At the point (-1, 1) this equation gives slope -2, but the table shows 2.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: At the point (-1, 1) this equation gives slope 0.5, but the table shows 2.\n\\dfrac{dy}{dx}=x+y is incorrect: At the point (-1, 1) this equation gives slope 0, but the table shows 2."
   },
   "verification": {
    "generatedByCode": true,
@@ -10351,8 +10392,28 @@
    ],
    "seed": 0
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "scope_skill": "\n<parameter name=\"pass\">true",
+   "notes": "About 90 seconds, no calculator, simple arithmetic, four short parallel options.",
+   "key_scoring": "\n<parameter name=\"pass\">true",
+   "stimulus_expression": "\n<parameter name=\"pass\">true",
+   "distractor_explanation": "\n<parameter name=\"pass\">true",
+   "exam_suitability": "\n<parameter name=\"pass\">true",
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is unique and verified, the stimulus is complete, the distractors are distinct, and the timing and scope fit the reference pattern."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single representation change (table of slopes to differential equation). Substituting one or two points eliminates most options (e.g., (1,1) with slope 0 rules out x+y and y/2; (-1,1) with slope 2 rules out x-y). Small integer arithmetic, no multi-step reasoning, no misconception-heavy distractors beyond sign swap. Fits an introductory slope-field skill.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-m25-k1",
@@ -10366,11 +10427,11 @@
   "calculator": "not_allowed",
   "archetype": "slope_field_match",
   "wording": "template",
-  "reviewState": "rejected",
+  "reviewState": "pending_expert_review",
   "reserve": false,
-  "rejectionReason": "reference_distractor_misconceptions_not_distinct",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": null,
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Single representation change (table of slopes to differential equation). Solved by substituting table points into the four options and eliminating; each distractor fails at the first or second point checked. Arithmetic is trivial and the concept (slope = dy/dx at a point) is foundational. Little reasoning depth beyond systematic elimination, so it suits basic learning rather than a full mock.",
   "payload": {
    "archetype": "slope_field_match",
    "topic": "7.3",
@@ -10414,22 +10475,22 @@
    "options": [
     {
      "text": "$\\dfrac{dy}{dx}=\\frac{y}{2}$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0.5, but the table shows 0.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x-y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope -2, but the table shows 0.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x^2-y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (1, 1) this equation gives slope 0, but the table shows 2.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x+y$",
-     "why": "Slopes at all listed points match.",
+     "why": "The equation reproduces the slope at every listed point.",
      "value": null
     }
    ],
@@ -10440,7 +10501,7 @@
    ],
    "seed": 1,
    "pack_id": "slope_field_match-s1",
-   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=x+y. Slopes at all listed points match.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=x-y is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=x^2-y is incorrect: Fails the slope at at least one listed point."
+   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=x+y. The equation reproduces the slope at every listed point.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: At the point (-1, 1) this equation gives slope 0.5, but the table shows 0.\n\\dfrac{dy}{dx}=x-y is incorrect: At the point (-1, 1) this equation gives slope -2, but the table shows 0.\n\\dfrac{dy}{dx}=x^2-y is incorrect: At the point (1, 1) this equation gives slope 0, but the table shows 2."
   },
   "verification": {
    "generatedByCode": true,
@@ -10450,8 +10511,42 @@
    ],
    "seed": 1
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table to differential equation matching is on topic 7.3 and skill 2.C, with no out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "x+y matches all six table points, and each distractor fails at least one point. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear. The combined point label '(x, y)' is acceptable."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor has a specific explanation citing a failing point. The distractors are plausible, though not strongly misconception-driven."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, minimal arithmetic."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key x+y is unique and fits all table points, and the stimulus is complete. The distractors are somewhat generic but acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single representation change (table of slopes to differential equation). Solved by substituting table points into the four options and eliminating; each distractor fails at the first or second point checked. Arithmetic is trivial and the concept (slope = dy/dx at a point) is foundational. Little reasoning depth beyond systematic elimination, so it suits basic learning rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-m25-k2",
@@ -10513,22 +10608,22 @@
    "options": [
     {
      "text": "$\\dfrac{dy}{dx}=x-y$",
-     "why": "Slopes at all listed points match.",
+     "why": "The equation reproduces the slope at every listed point.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x+y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0, but the table shows -2.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x^2-y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0, but the table shows -2.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=\\frac{y}{2}$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0.5, but the table shows -2.",
      "value": null
     }
    ],
@@ -10539,7 +10634,7 @@
    ],
    "seed": 2,
    "pack_id": "slope_field_match-s2",
-   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=x-y. Slopes at all listed points match.\n\\dfrac{dy}{dx}=x+y is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=x^2-y is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: Fails the slope at at least one listed point."
+   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=x-y. The equation reproduces the slope at every listed point.\n\\dfrac{dy}{dx}=x+y is incorrect: At the point (-1, 1) this equation gives slope 0, but the table shows -2.\n\\dfrac{dy}{dx}=x^2-y is incorrect: At the point (-1, 1) this equation gives slope 0, but the table shows -2.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: At the point (-1, 1) this equation gives slope 0.5, but the table shows -2."
   },
   "verification": {
    "generatedByCode": true,
@@ -10566,9 +10661,9 @@
   "wording": "template",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "reference_distractor_misconceptions_not_distinct",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": "duplicate_gate_near_duplicate",
+  "difficultyProvisional": "basic_learning",
+  "difficultyRationale": "Student re-expresses a table of slopes as a differential equation by substituting points into each option. Correct answer dy/dx = x+y fits all six points. Distractors are eliminated with one or two evaluations (e.g., (1,1) rules out x^2-y, y/2 fails at (-1,1), y-x fails at (-1,1)). Small integers, minimal reading, a single representation change (table to expression), and few reasoning steps.",
   "payload": {
    "archetype": "slope_field_match",
    "topic": "7.3",
@@ -10612,22 +10707,22 @@
    "options": [
     {
      "text": "$\\dfrac{dy}{dx}=x^2-y$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (1, 1) this equation gives slope 0, but the table shows 2.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=x+y$",
-     "why": "Slopes at all listed points match.",
+     "why": "The equation reproduces the slope at every listed point.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=\\frac{y}{2}$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 0.5, but the table shows 0.",
      "value": null
     },
     {
      "text": "$\\dfrac{dy}{dx}=y-x$",
-     "why": "Fails the slope at at least one listed point.",
+     "why": "At the point (-1, 1) this equation gives slope 2, but the table shows 0.",
      "value": null
     }
    ],
@@ -10638,7 +10733,7 @@
    ],
    "seed": 3,
    "pack_id": "slope_field_match-s3",
-   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=x+y. Slopes at all listed points match.\n\\dfrac{dy}{dx}=x^2-y is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: Fails the slope at at least one listed point.\n\\dfrac{dy}{dx}=y-x is incorrect: Fails the slope at at least one listed point."
+   "explanation_en": "The correct answer is \\dfrac{dy}{dx}=x+y. The equation reproduces the slope at every listed point.\n\\dfrac{dy}{dx}=x^2-y is incorrect: At the point (1, 1) this equation gives slope 0, but the table shows 2.\n\\dfrac{dy}{dx}=\\frac{y}{2} is incorrect: At the point (-1, 1) this equation gives slope 0.5, but the table shows 0.\n\\dfrac{dy}{dx}=y-x is incorrect: At the point (-1, 1) this equation gives slope 2, but the table shows 0."
   },
   "verification": {
    "generatedByCode": true,
@@ -10648,8 +10743,42 @@
    ],
    "seed": 3
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is eliminated with a specific failing point; plausible misconceptions (sign flip, y-only dependence)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Simple values, no calculator, ~90s."
+   },
+   "instant_reject": [],
+   "key_scoring": {
+    "pass": true,
+    "notes": "x+y matches all six table points; the other three options each fail at a listed point."
+   },
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matching a slope field's slope data to a differential equation fits 7.3 and the 2.C representation change from table to equation."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clearly labeled."
+   },
+   "summary": "The item passes all five criteria. The key x+y is unique and verified against all six points, and the distractors and explanations are sound. The only minor point is that the item uses a table rather than a drawn field, which is acceptable for 2.C."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student re-expresses a table of slopes as a differential equation by substituting points into each option. Correct answer dy/dx = x+y fits all six points. Distractors are eliminated with one or two evaluations (e.g., (1,1) rules out x^2-y, y/2 fails at (-1,1), y-x fails at (-1,1)). Small integers, minimal reading, a single representation change (table to expression), and few reasoning steps.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-m26-k0",
@@ -13975,9 +14104,9 @@
   "wording": "template",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "part_b_justification_without_reason_row",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": "criterion_failed_key_scoring; instant_reject_wrong_key",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style multi-part item. Parts a and b need sign analysis of f' and its slope. Part c needs a candidates test, with the net change in f computed as areas of triangles under the f' graph at the critical point and endpoints. Part d is a net-change calculation. The numbers are small and the geometry is simple, so the difficulty comes from the concepts and the number of reasoning steps rather than arithmetic or reading.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -14257,8 +14386,44 @@
    ],
    "seed": 0
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.9 with 3.E justification; in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part (a) key gives (0,2) and (2,4); f' is increasing on all of (0,4) (slopes 2 then 1, no change at x=2). The natural correct answer (0,4) would not earn row a1 since alt_solutions only permits endpoint variants. The rubric needs to accept (0,4) as the answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete: vertices, axes, domain."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, not applicable; common_errors are sparse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP FRQ with a 2/2/3/2 split, and the time is suitable."
+   },
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Parts (b)-(d) are correct. The part (a) key splits the concave-up interval into (0,2) and (2,4), but f' is increasing on (0,4) and the standard correct answer is (0,4). The rubric would penalize that correct answer, so the key is flawed and the item fails."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part item. Parts a and b need sign analysis of f' and its slope. Part c needs a candidates test, with the net change in f computed as areas of triangles under the f' graph at the critical point and endpoints. Part d is a net-change calculation. The numbers are small and the geometry is simple, so the difficulty comes from the concepts and the number of reasoning steps rather than arithmetic or reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-f02-k1",
@@ -14274,9 +14439,9 @@
   "wording": "llm",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "part_b_justification_without_reason_row",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": "criterion_failed_key_scoring; instant_reject_multiple_correct",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style multi-part item. Parts a and b require reading the sign and slope of f' with justification. Part c requires the candidates test, with the FTC computing f at critical points and endpoints from triangle areas, then comparing. Part d is net signed area. Numbers are small and the wording is unambiguous. All content is in scope for AB Unit 5 and the FTC connection.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -14556,8 +14721,44 @@
    ],
    "seed": 1
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Fits 5.9/5.6/5.4 and justification skill; all content is in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part (a) key is (0,2) and (2,4), but f' is increasing on all of (0,4), so (0,4) is the natural, correct answer (the independent solver gave it). The rubric requires the split intervals and would penalize a correct (0,4). The split is also unjustified since nothing changes concavity at x=2 (f'' simply does not exist there). Rubric a1/a2 required_elements are inconsistent with the valid alternative. Parts b, c, d are fine."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data are complete: vertices, axes, domain. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so not applicable; common_errors are sparse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A 2/2/3/2 point split, non-calculator, simple arithmetic; typical of the AP exam."
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on key/scoring in part (a). The key (0,2) and (2,4) is an unnatural split of what is really (0,4), where f' is increasing. The rubric would penalize the equally correct answer (0,4), so the answer is not unique as written. Parts b through d are sound. Fix by making the key (0,4) and allowing the split form as an alternative."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style multi-part item. Parts a and b require reading the sign and slope of f' with justification. Part c requires the candidates test, with the FTC computing f at critical points and endpoints from triangle areas, then comparing. Part d is net signed area. Numbers are small and the wording is unambiguous. All content is in scope for AB Unit 5 and the FTC connection.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-f02-k2",
@@ -14573,9 +14774,9 @@
   "wording": "llm",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "part_b_justification_without_reason_row",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": "criterion_failed_key_scoring; instant_reject_multiple_correct",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP FRQ: read concavity and sign changes from the graph of f', then use the Fundamental Theorem (areas as net change) with a candidates test including endpoints for the absolute minimum. Numbers are small integers and the wording is clear. Several justification steps and graph-to-values representation changes make it appropriate for a full mock, not basic learning.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -14855,8 +15056,44 @@
    ],
    "seed": 2
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 5.9/5.6/5.4 with justification; in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part (a): f' is increasing on all of (4,8) since the slope is +2 on both segments, so concave up on (4,8). The model answer and required element '(4,6) and (6,8)' penalize the correct answer (4,8) with no alternative listed. Also the model answer's split at x=6 is misleading. Part (c) rows are vague (c1 requires listing x=2 though it is irrelevant to the minimum; c2 'compares candidate values' does not require the values)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph data is complete: vertices, axes, domain."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; not applicable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP FRQ length, no calculator needed, 9 points with 2/2/3/2."
+   },
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mostly sound, but the part (a) key and rubric are flawed. The correct answer (4,8) is not accepted, because the rubric requires the split '(4,6) and (6,8)' and lists no alternative. The part (c) rubric rows are also loose. Fail until the rubric accepts (4,8) and part (c) is tightened."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ: read concavity and sign changes from the graph of f', then use the Fundamental Theorem (areas as net change) with a candidates test including endpoints for the absolute minimum. Numbers are small integers and the wording is clear. Several justification steps and graph-to-values representation changes make it appropriate for a full mock, not basic learning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-f02-k3",
@@ -14872,9 +15109,9 @@
   "wording": "llm",
   "reviewState": "rejected",
   "reserve": false,
-  "rejectionReason": "part_b_justification_without_reason_row",
-  "difficultyProvisional": null,
-  "difficultyRationale": null,
+  "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Multi-part FRQ using a graph of f'. Part (a) reads concavity from the slope of f'. Part (b) reads sign changes of f'. Part (c) requires a candidates test: the net-area computation gives f(2)=3, f(6)=-5, f(8)=-1 and f(0)=1, so the absolute minimum is at x=6. Part (d) uses the FTC with triangle areas, giving f(8)=-1. The arithmetic is light and the reading load is low. The difficulty comes from the concept-linking and justification steps typical of AP free-response items.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -15154,8 +15391,21 @@
    ],
    "seed": 4
   },
-  "review": null,
-  "difficulty": null
+  "review": {
+   "scope_skill": "\n<parameter name=\"pass\">true",
+   "notes": "Part a's key is (4,6) and (6,8), but f' has constant slope 2 across x=6, so the natural correct answer is (4,8). The rubric does not clearly accept (4,8), so a correct student answer could be penalized. Row c1 requires x=2 as a candidate for the minimum, which contradicts its own criterion (relative-minimum locations plus endpoints). The c2 required element is vague. Part a2 lists \"f' is increasing\" and \"f'' is positive\" without saying either one suffices.",
+   "key_scoring": "\n<parameter name=\"pass\">false"
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ using a graph of f'. Part (a) reads concavity from the slope of f'. Part (b) reads sign changes of f'. Part (c) requires a candidates test: the net-area computation gives f(2)=3, f(6)=-5, f(8)=-1 and f(0)=1, so the absolute minimum is at x=6. Part (d) uses the FTC with triangle areas, giving f(8)=-1. The arithmetic is light and the reading load is low. The difficulty comes from the concept-linking and justification steps typical of AP free-response items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
  },
  {
   "candidateKey": "ap_calculus_ab-f03-k0",

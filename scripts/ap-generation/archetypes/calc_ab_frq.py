@@ -64,7 +64,14 @@ def frq_fprime_graph(rng):
     Fv = [sp.Rational(f0)]
     for i in range(4): Fv.append(Fv[-1] + seg(i))
     # (a) f' 증가 구간
-    inc = [(xs[i], xs[i + 1]) for i in range(4) if v[i + 1] > v[i]]; dec = [(xs[i], xs[i + 1]) for i in range(4) if v[i + 1] < v[i]]
+    def merged(pred):
+        out = []
+        for i in range(4):
+            if pred(i):
+                if out and out[-1][1] == xs[i]: out[-1] = (out[-1][0], xs[i + 1])
+                else: out.append((xs[i], xs[i + 1]))
+        return out
+    inc = merged(lambda i: v[i + 1] > v[i]); dec = merged(lambda i: v[i + 1] < v[i])
     # (b) 극값: 내부 꼭짓점 영점
     rel = {xs[i]: ("minimum" if v[i - 1] < 0 < v[i + 1] else "maximum") for i in chg}
     cand = [0, 8] + list(rel.keys()); vals = {c: Fv[xs.index(c)] for c in cand}
@@ -78,7 +85,7 @@ def frq_fprime_graph(rng):
     fmt_iv = lambda L: " and ".join(f"({a},{b})" for a, b in L) if L else "no interval"
     parts = [
         part("a", "On what open intervals in $(0,8)$ is the graph of $f$ concave up? Give a reason for your answer.", 2, "explain", ["2.E", "3.E"], f"Concave up on {fmt_iv(inc)} because f' is increasing there.", [
-            row("a1", 1, "Intervals where f' is increasing", [fmt_iv(inc)], alt=["endpoints may be included"]), row("a2", 1, "Reason: f' is increasing (so f'' > 0) on those intervals", ["f' is increasing", "f'' is positive"], err=["only restates 'concave up'"])]),
+            row("a1", 1, "Maximal open intervals where f' is increasing (adjacent intervals merged)", [fmt_iv(inc)], alt=["endpoints may be included"]), row("a2", 1, "Reason: f' is increasing (so f'' > 0) on those intervals", ["f' is increasing", "f'' is positive"], err=["only restates 'concave up'"])]),
         part("b", "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$, and classify each as a relative minimum or relative maximum. Justify your answer.", 2, "explain", ["3.B", "3.E"],
              "; ".join(f"x = {k}: relative {w}" for k, w in rel.items()) + " because f' changes sign there.", [
             row("b1", 1, "Identifies the x-values where f' = 0 and changes sign", [f"x = {k}" for k in rel], nums=True), row("b2", 1, "Classifies each using the sign change of f' (negative to positive: minimum; positive to negative: maximum)", [f"{w} at x = {k}" for k, w in rel.items()], both=True)]),
