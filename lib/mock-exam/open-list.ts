@@ -15,6 +15,10 @@ export type MockExamListRow = {
   attempt: MockExamAttemptSummary | null;
   /** 재응시(2026-10-08) — 이 시험의 모든 회차, 최신 회차가 앞(내림차순). 응시가 없으면 빈 배열. `attempt` 는 항상 최신 회차(= 기본 표시). */
   attempts: MockExamAttemptSummary[];
+  /** AP 세트 표시용(없으면 SAT). */
+  examProgram: "sat" | "ap";
+  apSubject: string | null;
+  apLabel: "full_practice" | "mc_practice" | "frq_practice" | null;
   /** 세트가 지금은 공개 목록에 없고 응시 기록만 남은 경우(보관된 세트의 지난 응시). */
   archived: boolean;
 };
@@ -39,7 +43,7 @@ export const practiceTestTabOf = (state: MockExamListState): PracticeTestTab => 
 
 /** 홈 'Next Practice Test' — 아직 끝내지 않은(미응시·진행 중) 공개 세트 중 번호가 가장 낮은 것. 최신순이 아니다. */
 export function pickNextPracticeTest(rows: MockExamListRow[]): MockExamListRow | null {
-  return rows.find((r) => !r.archived && practiceTestTabOf(r.state) === "todo") ?? null;
+  return rows.find((r) => !r.archived && r.examProgram !== "ap" && practiceTestTabOf(r.state) === "todo") ?? null;
 }
 
 /** "Attempt 2" — 회차 번호 라벨. 번호가 없는 옛 응답은 빈 문자열. */
@@ -71,6 +75,9 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       attempt,
       attempts: all,
       archived: false,
+      examProgram: c.examProgram === "ap" ? "ap" : "sat",
+      apSubject: c.apSubject ?? null,
+      apLabel: c.apLabel ?? null,
     };
   });
   for (const a of [...attempts].sort(byAttemptNoDesc)) {
@@ -90,6 +97,9 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       attempt: latest,
       attempts: group,
       archived: true,
+      examProgram: latest.examProgram === "ap" ? "ap" : "sat",
+      apSubject: latest.apSubject ?? null,
+      apLabel: latest.apLabel ?? null,
     });
   }
   // 2026-10-08 — 번호순(오름차순) 자연 정렬. 공개 세트가 먼저, 지난(보관) 시험은 뒤에.
@@ -97,3 +107,6 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
   const archived = rows.filter((r) => r.archived).sort((a, b) => compareExamNames(a.name, b.name));
   return [...live, ...archived];
 }
+
+/** SAT / AP 목록 분리(AP 는 별도 층 — 홈의 SAT 다음 시험과 섞지 않는다). */
+export const isApRow = (r: MockExamListRow) => r.examProgram === "ap";

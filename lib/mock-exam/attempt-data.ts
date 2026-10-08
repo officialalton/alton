@@ -42,6 +42,10 @@ export type MockExamAttemptSummary = {
   attemptTotal?: number;
   /** 시험(세트 계열) id — 같은 시험의 회차를 묶는 키. */
   setGroupId?: string;
+  /** AP 모의고사(마이그레이션 401). 없으면 SAT. */
+  examProgram?: "sat" | "ap";
+  apSubject?: string | null;
+  apLabel?: "full_practice" | "mc_practice" | "frq_practice" | null;
 };
 
 export type MockExamAttemptItem = {
@@ -73,6 +77,10 @@ export type MockExamAttemptItem = {
   guessed?: boolean;
   savedToPractice: boolean;
   timeSpentSeconds: number | null;
+  /** AP 문항(마이그레이션 401): 선택지 수(4·5)·FRQ 파트 [{label, points, prompt, mode}]. 실제 section 값은 AP 에서 "ap_*" 문자열이다. */
+  optionCount?: number | null;
+  parts?: { label: string; points: number; prompt: string; mode: string }[] | null;
+  apItemIndex?: number | null;
 };
 
 export type MockExamAttemptDetail = {
@@ -104,6 +112,11 @@ export type MockExamAttemptDetail = {
   format: "fixed" | "mst";
   currentModule: "rw_m1" | "rw_m2" | "break" | "math_m1" | "math_m2" | null;
   items: MockExamAttemptItem[];
+  /** AP: 공식 섹션 구조(키·시간·계산기·문항 수). examProgram 이 'ap' 일 때만. */
+  examProgram?: "sat" | "ap";
+  apSubject?: string | null;
+  apLabel?: "full_practice" | "mc_practice" | "frq_practice" | null;
+  sectionLayout?: { key: string; kind: "mc" | "frq"; label: string; minutes: number; count: number; calculator: "allowed" | "not_allowed" | "required" | "na"; options?: number }[];
   /** 문항 오류 판정으로 점수가 조정된 응시(학생·학부모 안내용). 원채점은 DB 에 보존된다. */
   scoreAdjusted?: boolean;
   /** 직원(관리자·담당 교사·컨설턴트) 응답에만 있다. 학생·보호자 응답에는 이 키 자체가 없다(경로 비노출). */
@@ -208,6 +221,10 @@ export type MockExamCatalogRow = {
   /** 최신 회차 번호와 전체 회차 수(재응시). attemptId/attemptStatus 는 최신 회차 기준 — 진행 중 응시가 있으면 그것. */
   attemptNo?: number | null;
   attemptTotal?: number;
+  /** AP 세트(마이그레이션 401). 없으면 SAT. */
+  examProgram?: "sat" | "ap";
+  apSubject?: string | null;
+  apLabel?: "full_practice" | "mc_practice" | "frq_practice" | null;
 };
 
 /** 공개된 모의고사 세트 전체 + 그 학생의 응시 상태 — RPC 한 번(N+1 없음). 학생 본인·학부모·교사·컨설턴트·관리자 열람용. */

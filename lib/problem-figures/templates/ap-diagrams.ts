@@ -55,7 +55,7 @@ export function renderApDiagram(spec: ApDiagramSpec): { svg: string; alt: string
   const issues: FigureIssue[] = [];
   const o: string[] = [];
   let H = 200; let alt = "";
-  const head = (h: number) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${h}" width="${W}" height="${h}" role="img" font-family="${FONT}">`;
+  const head = (h: number) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${h}" width="${W}" height="${h}" style="max-width:100%;height:auto" role="img" font-family="${FONT}">`;
   if (spec.variant === "strand_pair") {
     H = 210;
     const n = spec.top.bases.length, x0 = 90, x1 = W - 90, step = (x1 - x0) / (n - 1 || 1);

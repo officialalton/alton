@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail, MockExamOverview } from "@/lib/mock-exam/attempt-data";
-import { buildMockExamListRows, practiceTestTabOf, type MockExamListRow, type PracticeTestTab } from "@/lib/mock-exam/open-list";
+import { buildMockExamListRows, isApRow, practiceTestTabOf, type MockExamListRow, type PracticeTestTab } from "@/lib/mock-exam/open-list";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import Pager from "@/app/components/Pager";
 import { trackEvent } from "@/lib/analytics/track";
@@ -11,6 +11,7 @@ import { startMockExamAction } from "@/lib/mock-exam/attempt-actions";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
 import { loadMyMockExamOverviewAction, loadMockExamAttemptDetailAction } from "./mock-exam-tab-actions";
 import MockExamResultView from "./mock-exam/[attemptId]/MockExamResultView";
+import ApExamResultView from "./mock-exam/[attemptId]/ApExamResultView";
 
 // 2026-09-21(UAT 지적) — 모의고사 목록·결과는 독립 라우트가 아니라 StudentShell 의 탭 안에서 왼쪽
 // 네비게이션을 유지한 채 본다. 실제로 시험을 보는 화면(타이머 있는 화면)만 /student/mock-exam/[attemptId].
@@ -28,6 +29,8 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
   const [detail, setDetail] = useState<MockExamAttemptDetail | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [listTab, setListTab] = useState<PracticeTestTab>("todo");
+  // SAT / AP 는 서로 다른 시험 층 — 한 목록에 섞지 않는다. AP 세트가 하나도 없으면 전환 UI 를 보이지 않는다.
+  const [program, setProgram] = useState<"sat" | "ap">("sat");
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -46,7 +49,9 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const rows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
+  const allRows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
+  const hasAp = allRows.some(isApRow);
+  const rows = useMemo(() => allRows.filter((r) => (program === "ap" ? isApRow(r) : !isApRow(r))), [allRows, program]);
 
   const tabRows = useMemo(() => rows.filter((r) => practiceTestTabOf(r.state) === listTab), [rows, listTab]);
   const pageCount = Math.max(1, Math.ceil(tabRows.length / PRACTICE_TESTS_PAGE_SIZE));
@@ -97,12 +102,16 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         ) : !detail ? (
           <p className="text-[13px] text-grey-500">Loading…</p>
         ) : (
-          <MockExamResultView
-            attempt={detail}
-            readOnly={false}
-            attempts={overview.attempts.filter((a) => a.setGroupId && a.setGroupId === detail.setGroupId)}
-            onSelectAttempt={openResult}
-          />
+          detail.examProgram === "ap" ? (
+            <ApExamResultView attempt={detail} />
+          ) : (
+            <MockExamResultView
+              attempt={detail}
+              readOnly={false}
+              attempts={overview.attempts.filter((a) => a.setGroupId && a.setGroupId === detail.setGroupId)}
+              onSelectAttempt={openResult}
+            />
+          )
         )}
       </div>
     );
@@ -114,6 +123,14 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         <p role="alert" className="mb-2 text-[13px] text-red">
           {startError}
         </p>
+      )}
+      {hasAp && (
+        <div className="mb-3 flex gap-2" role="tablist" aria-label="Exam program">
+          {(["sat", "ap"] as const).map((p) => (
+            <button key={p} type="button" role="tab" aria-selected={program === p} data-testid={`program-${p}`} onClick={() => { setProgram(p); setPage(0); }}
+              className={`rounded-full px-4 py-1.5 text-[12.5px] font-bold ${program === p ? "bg-ink text-white" : "bg-grey-100 text-grey-600"}`}>{p === "sat" ? "SAT" : "AP"}</button>
+          ))}
+        </div>
       )}
       <UnderlineSubTabs
         items={TAB_ITEMS}
@@ -129,7 +146,7 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         onOpenResult={openResult}
         emptyText={
           rows.length === 0
-            ? "No practice tests are available yet."
+            ? program === "ap" ? "No AP practice tests are available yet." : "No practice tests are available yet."
             : listTab === "todo"
               ? "You're all caught up — no practice tests left to do."
               : "No completed practice tests yet."

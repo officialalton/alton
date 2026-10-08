@@ -136,7 +136,7 @@ export function renderApGraph(spec: ApGraphSpec): { svg: string; alt: string; is
   const id = "apc" + hash(JSON.stringify(spec));
   const xt = niceTicks(ax.min, ax.max, ax.step), yt = niceTicks(ay.min, ay.max, ay.step);
   const o: string[] = [];
-  o.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" font-family="${FONT}" font-size="12">`);
+  o.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="max-width:100%;height:auto" role="img" font-family="${FONT}" font-size="12">`);
   o.push(`<defs><clipPath id="${id}"><rect x="${PL}" y="${PT}" width="${W - PL - PR}" height="${H - PB - PT}"/></clipPath></defs>`);
   if (spec.title) o.push(`<text x="${W / 2}" y="16" text-anchor="middle" font-size="13" font-weight="bold" fill="#111">${esc(spec.title)}</text>`);
   for (const t of xt) o.push(`<line x1="${f(sx(t))}" y1="${PT}" x2="${f(sx(t))}" y2="${H - PB}" stroke="#d1d5db" stroke-width="0.8"/>`);
