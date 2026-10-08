@@ -5,6 +5,11 @@ import {
   applyProblemErrorVerdictAction,
   getReportedProblemDetailAction,
   listReportedProblemsAction,
+  confirmReportedProblemAction,
+  unconfirmReportedProblemAction,
+  getConfirmedReportExportAction,
+  type ReportCounts,
+  type ReportView,
   type ApplyVerdictResult,
   type ReportedProblemDetail,
   type ReportedProblemGroup,
@@ -12,6 +17,9 @@ import {
 } from "./problem-error-report-actions";
 import { REPORT_TYPE_LABEL, SOURCE_LABEL, VERDICT_EFFECT, VERDICT_LABEL, type ReportType, type Verdict } from "@/lib/problem-error-reports/labels";
 import LearningText from "@/app/session/[id]/LearningText";
+import ProblemFigure from "@/app/session/[id]/ProblemFigure";
+import { problemText } from "@/lib/problem-figures/label-rule";
+import { confirmedToCsv, confirmedToMarkdown } from "@/lib/problem-error-reports/confirmed-export";
 import { fmtDateTime } from "@/lib/format-datetime";
 
 const PAGE = 50;
@@ -20,6 +28,8 @@ const BRANCH_EFFECT = {
   error: "문항 보관 · 이미 나간 응시·과제 전원 정답 처리(해설 오류는 채점 변경 없음) · 여분 문항 자동 교체 시도",
   normal: "문항 복귀(오류 확정으로 보관됐다면) · 대체 문항 필요 기록 닫기 · 이전 조정 원복 · 검토 필요 표시 해제",
 } as const;
+const VIEW_LABEL: Record<ReportView, string> = { open: "검토 필요", confirmed: "확인", fixed: "수정됨", all: "전체" };
+const VIEW_COUNT: Record<ReportView, keyof ReportCounts> = { open: "review", confirmed: "confirmed", fixed: "fixed", all: "all" };
 const DAYS_LABEL: Record<string, string> = { "30": "최근 30일", "7": "최근 7일" };
 const DIFF_LABEL: Record<string, string> = { easy: "쉬움", medium: "보통", hard: "어려움", unknown: "미지정" };
 const MODULE_LABEL: Record<string, string> = { rw_m1: "R&W M1", rw_m2: "R&W M2", math_m1: "Math M1", math_m2: "Math M2" };
@@ -52,9 +62,10 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
   const fDiff = filter?.difficulty ?? null;
   const fDomain = filter?.domain ?? null;
   const fDays = filter?.days ?? null;
-  const [status, setStatus] = useState<"open" | "all">("open");
+  const [status, setStatus] = useState<ReportView>("open");
+  const [exportMsg, setExportMsg] = useState<string | null>(null);
   const [offset, setOffset] = useState(0);
-  const [data, setData] = useState<{ total: number; rows: ReportedProblemGroup[] } | null>(null);
+  const [data, setData] = useState<{ total: number; counts: ReportCounts; rows: ReportedProblemGroup[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [selected, setSelected] = useState<{ problemId: string; versionId: string } | null>(null);
 
@@ -76,12 +87,42 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
     };
   }, [status, offset, reloadKey, fSkill, fDiff, fDomain, fDays]);
 
+  async function copyConfirmed() {
+    try {
+      const rows = await getConfirmedReportExportAction();
+      await navigator.clipboard.writeText(confirmedToMarkdown(rows));
+      setExportMsg(`${rows.length}건 복사했습니다.`);
+    } catch (e) {
+      setExportMsg(e instanceof Error ? e.message : "복사하지 못했습니다.");
+    }
+  }
+  async function downloadConfirmedCsv() {
+    try {
+      const rows = await getConfirmedReportExportAction();
+      const url = URL.createObjectURL(new Blob([confirmedToCsv(rows)], { type: "text/csv;charset=utf-8" }));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "error-reports-confirmed.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+      setExportMsg(`${rows.length}건 내려받았습니다.`);
+    } catch (e) {
+      setExportMsg(e instanceof Error ? e.message : "내려받지 못했습니다.");
+    }
+  }
+
   if (selected) {
     return (
       <ReportDetail
         key={`${selected.problemId}:${selected.versionId}`}
         problemId={selected.problemId}
         versionId={selected.versionId}
+        onNext={() => {
+          const rows = data?.rows ?? [];
+          const i = rows.findIndex((g) => g.problemId === selected.problemId && g.versionId === selected.versionId);
+          const n = rows[i + 1];
+          return n ? (setSelected({ problemId: n.problemId, versionId: n.versionId }), true) : false;
+        }}
         onBack={() => {
           setSelected(null);
           setData(null);
@@ -95,7 +136,7 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
     <div data-testid="reported-problems-panel">
       <div className="mb-3 flex items-center justify-between gap-2">
         <div role="tablist" aria-label="신고 상태" className="flex gap-1">
-          {(["open", "all"] as const).map((k) => (
+          {(["open", "confirmed", "fixed", "all"] as const).map((k) => (
             <button
               key={k}
               type="button"
@@ -108,12 +149,19 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
               }}
               className={`rounded-full border px-3 py-1 text-[12px] font-bold ${status === k ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600"}`}
             >
-              {k === "open" ? "검토 필요" : "전체"}
+              {VIEW_LABEL[k]}{data?.counts ? ` ${data.counts[VIEW_COUNT[k]]}` : ""}
             </button>
           ))}
         </div>
         {data && <span className="text-[12px] text-grey-500">문항 {data.total}개</span>}
       </div>
+      {status === "confirmed" && (
+        <div className="mb-3 flex flex-wrap items-center gap-2" data-testid="confirmed-export">
+          <button type="button" onClick={() => void copyConfirmed()} className="rounded-lg border border-grey-300 px-3 py-1 text-[12px] font-bold text-grey-700 hover:bg-grey-50">확인 목록 복사</button>
+          <button type="button" onClick={() => void downloadConfirmedCsv()} className="rounded-lg border border-grey-300 px-3 py-1 text-[12px] font-bold text-grey-700 hover:bg-grey-50">CSV 내려받기</button>
+          {exportMsg && <span role="status" className="text-[12px] font-semibold text-green">{exportMsg}</span>}
+        </div>
+      )}
 
       {(fSkill || fDiff || fDomain || fDays) && (
         <p data-testid="report-filter-chip" className="mb-3 flex flex-wrap items-center gap-1.5 text-[12px]">
@@ -137,7 +185,7 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
         <p className="text-[13px] text-grey-500">불러오는 중…</p>
       ) : data.rows.length === 0 ? (
         <p className="rounded-lg border border-dashed border-grey-300 p-6 text-center text-[13px] text-grey-500">
-          {status === "open" ? "검토할 신고가 없습니다." : "신고된 문항이 없습니다."}
+          {status === "open" ? "검토할 신고가 없습니다." : status === "confirmed" ? "확인한 문항이 없습니다." : status === "fixed" ? "수정 반영된 신고가 없습니다." : "신고된 문항이 없습니다."}
         </p>
       ) : (
         <>
@@ -160,6 +208,8 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
                     {g.sourceCounts.mock_exam > 0 && <span className="rounded-full border border-grey-200 px-2 py-0.5 text-grey-600">모의고사 {g.sourceCounts.mock_exam}</span>}
                     {g.sourceCounts.session_assignment > 0 && <span className="rounded-full border border-grey-200 px-2 py-0.5 text-grey-600">수업·과제 {g.sourceCounts.session_assignment}</span>}
                     {(g.sourceCounts.homework_batch ?? 0) > 0 && <span className="rounded-full border border-grey-200 px-2 py-0.5 text-grey-600">과제 묶음 {g.sourceCounts.homework_batch}</span>}
+                    {g.state === "confirmed" && <span className="rounded-full bg-ink px-2 py-0.5 text-white">확인됨</span>}
+                    {g.state === "fixed" && <span className="rounded-full bg-green/10 px-2 py-0.5 text-green">수정됨(v{g.currentVersionNo})</span>}
                     {g.archived && <span className="rounded-full bg-grey-100 px-2 py-0.5 text-grey-500">보관됨</span>}
                     {g.latestDecision && <span className="rounded-full bg-grey-100 px-2 py-0.5 text-grey-600">{VERDICT_LABEL[g.latestDecision]}</span>}
                   </div>
@@ -191,7 +241,7 @@ export default function ReportedProblemsPanel({ filter, onClearFilter }: { filte
   );
 }
 
-function ReportDetail({ problemId, versionId, onBack }: { problemId: string; versionId: string; onBack: () => void }) {
+function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: string; versionId: string; onBack: () => void; onNext?: () => boolean }) {
   const [d, setD] = useState<ReportedProblemDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [branch, setBranch] = useState<"error" | "normal" | null>(null);
@@ -201,6 +251,8 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [staleAsk, setStaleAsk] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   const load = useCallback(() => {
     getReportedProblemDetailAction(problemId, versionId)
@@ -208,6 +260,20 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
       .catch((e) => setError(e instanceof Error ? e.message : "상세를 불러오지 못했습니다."));
   }, [problemId, versionId]);
   useEffect(load, [load]);
+
+  async function toggleConfirm() {
+    if (!d) return;
+    setBusy(true);
+    setError(null);
+    const r = d.confirmation ? await unconfirmReportedProblemAction(problemId, versionId) : await confirmReportedProblemAction(problemId, versionId);
+    setBusy(false);
+    if (!r.ok) {
+      setError(r.error);
+      return;
+    }
+    setToast(d.confirmation ? "확인을 취소했습니다." : "확인했습니다.");
+    load();
+  }
 
   async function apply() {
     if (!decision) return;
@@ -231,12 +297,28 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
   if (!d) return <p className="text-[13px] text-grey-500">불러오는 중…</p>;
   const v = d.version;
   const openReports = d.reports.filter((r) => !r.resolved).length;
+  const superseded = d.currentVersionNo != null && d.currentVersionNo > v.versionNo;
 
   return (
     <div data-testid="reported-problem-detail" className="flex flex-col gap-4">
-      <button type="button" onClick={onBack} className="self-start rounded-lg border-[1.5px] border-grey-200 px-3 py-1.5 text-[13px] font-semibold text-grey-600 hover:bg-grey-100">
-        ← 신고 목록
-      </button>
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <button type="button" onClick={onBack} className="rounded-lg border-[1.5px] border-grey-200 px-3 py-1.5 text-[13px] font-semibold text-grey-600 hover:bg-grey-100">
+          ← 신고 목록
+        </button>
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-1.5" data-testid="confirm-controls">
+          {d.confirmation && <span data-testid="confirmed-chip" className="rounded-full bg-ink px-2.5 py-1 text-[11.5px] font-bold text-white">확인됨</span>}
+          {onNext && <button type="button" onClick={() => { if (!onNext()) setToast("다음 신고가 없습니다."); }} className="rounded-lg border-[1.5px] border-grey-200 px-3 py-1.5 text-[12.5px] font-bold text-grey-600 hover:bg-grey-100">다음 신고 →</button>}
+          <button type="button" disabled={busy} onClick={() => void toggleConfirm()} data-testid="confirm-toggle" className={`rounded-lg px-3 py-1.5 text-[12.5px] font-bold disabled:opacity-40 ${d.confirmation ? "border-[1.5px] border-grey-300 text-grey-700" : "bg-ink text-white"}`}>
+            {d.confirmation ? "확인 취소" : "확인"}
+          </button>
+        </div>
+      </div>
+      {toast && <p role="status" data-testid="confirm-toast" className="rounded-lg bg-green/10 px-3 py-2 text-[12.5px] font-semibold text-green">{toast}</p>}
+      {superseded && (
+        <p data-testid="superseded-note" className="rounded-lg bg-grey-50 px-3 py-2 text-[12.5px] font-semibold text-grey-700">
+          신고 대상 v{v.versionNo} → 현재 v{d.currentVersionNo} (수정됨). 이 신고는 이전 버전에 대한 것입니다.
+        </p>
+      )}
 
       <section className="rounded-lg border border-grey-200 bg-white p-4">
         <div className="mb-2 flex flex-wrap items-center gap-1.5 text-[11px] font-bold text-grey-500">
@@ -248,6 +330,7 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
         </div>
         {v.passage && <LearningText text={v.passage} className="mb-2 text-[13px]" />}
         {v.question && <LearningText text={v.question} className="mb-2 text-[13.5px] font-semibold" />}
+        {v.figure ? <div className="mb-2"><ProblemFigure spec={v.figure} text={problemText(v.passage, v.question, v.options)} /></div> : null}
         {v.options && v.options.length > 0 && (
           <ol className="mb-2 flex flex-col gap-1 text-[13px]">
             {v.options.map((o, i) => (
@@ -259,9 +342,13 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
           </ol>
         )}
         {v.answers && v.answers.length > 0 && <p className="text-[13px]"><span className="font-bold text-grey-500">현재 정답: </span>{v.answers.join(" 또는 ")}</p>}
+        <div className="mt-2 rounded-lg bg-grey-50 p-3 text-[12.5px]" data-testid="explanation-en">
+          <p className="mb-1 text-[11px] font-extrabold text-grey-400">영어 해설(학생 화면 기본)</p>
+          {v.explanationEn ? <LearningText text={v.explanationEn} /> : <p className="text-red">영어 해설 없음</p>}
+        </div>
         {v.explanation && (
           <div className="mt-2 rounded-lg bg-grey-50 p-3 text-[12.5px]">
-            <p className="mb-1 text-[11px] font-extrabold text-grey-400">해설</p>
+            <p className="mb-1 text-[11px] font-extrabold text-grey-400">한글 해설</p>
             <LearningText text={v.explanation} />
           </div>
         )}
@@ -340,6 +427,15 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
         </fieldset>
         <label htmlFor="verdict-note" className="mt-2 block text-[12px] font-bold text-grey-500">메모(선택, 내부 기록)</label>
         <textarea id="verdict-note" value={note} onChange={(e) => setNote(e.target.value.slice(0, 2000))} rows={2} disabled={busy} className="mt-1 w-full rounded-lg border border-grey-200 p-2 text-[13px]" />
+        {staleAsk && (
+          <div role="alertdialog" aria-label="수정된 문항" data-testid="stale-verdict-dialog" className="mt-2 rounded-lg border border-red bg-red-bg p-3 text-[12.5px]">
+            <p className="mb-2 font-semibold text-red">이 문항은 이미 v{d.currentVersionNo}로 수정됨. 정말 v{v.versionNo} 기준으로 처리할까요?</p>
+            <div className="flex justify-end gap-2">
+              <button type="button" onClick={() => setStaleAsk(false)} className="rounded-lg px-3 py-1.5 text-[12px] font-bold text-grey-500 hover:bg-grey-100">취소</button>
+              <button type="button" onClick={() => { setStaleAsk(false); if (decision === "not_error") void apply(); else setConfirming(true); }} className="rounded-lg bg-ink px-3 py-1.5 text-[12px] font-bold text-white">v{v.versionNo} 기준으로 진행</button>
+            </div>
+          </div>
+        )}
         <div className="mt-2 flex items-center justify-end gap-2">
           {confirming ? (
             <>
@@ -351,7 +447,7 @@ function ReportDetail({ problemId, versionId, onBack }: { problemId: string; ver
             <button
               type="button"
               disabled={!decision || busy}
-              onClick={() => (decision === "not_error" ? void apply() : setConfirming(true))}
+              onClick={() => (superseded ? setStaleAsk(true) : decision === "not_error" ? void apply() : setConfirming(true))}
               className="rounded-lg bg-ink px-3 py-1.5 text-[12px] font-bold text-white disabled:opacity-40"
             >
               판정 적용
