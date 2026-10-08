@@ -86,7 +86,7 @@ export async function checkMercuryReadConnection(config: Pick<MercuryConfig, "to
 }
 
 export type MercuryTxShapeCheck =
-  | { ok: true; accountConfigured: true; count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[] }
+  | { ok: true; accountConfigured: true; count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[]; topLevelKeys: string[] }
   | { ok: false; reason: "no_token" | "no_account" | "unauthorized" | "forbidden" | "http_error" | "network"; status?: number };
 
 /** 읽기 전용: 최근 거래 몇 건의 응답 '형태'만 확인한다(필드 이름·상태·종류). 금액·상대방·메모 등 값은 반환하지 않는다. */
@@ -105,8 +105,9 @@ export async function checkMercuryTransactionShape(config: Pick<MercuryConfig, "
     if (res.status === 401) return { ok: false, reason: "unauthorized", status: 401 };
     if (res.status === 403) return { ok: false, reason: "forbidden", status: 403 };
     if (!res.ok) return { ok: false, reason: "http_error", status: res.status };
-    const json = (await res.json().catch(() => null)) as { transactions?: unknown[] } | null;
-    const list = Array.isArray(json?.transactions) ? json!.transactions! : [];
+    const json = (await res.json().catch(() => null)) as Record<string, unknown> | null;
+    const topLevelKeys = json && typeof json === "object" ? Object.keys(json).sort() : [];
+    const list = Array.isArray(json?.transactions) ? (json!.transactions as unknown[]) : [];
     const names = new Set<string>(); const exNames = new Set<string>();
     const sample = list.slice(0, limit).map((raw) => {
       const t = (raw ?? {}) as Record<string, unknown>;
@@ -117,7 +118,7 @@ export async function checkMercuryTransactionShape(config: Pick<MercuryConfig, "
       const created = typeof t.createdAt === "string" ? t.createdAt.slice(0, 10) : typeof t.postedAt === "string" ? t.postedAt.slice(0, 10) : null;
       return { idTail: id.slice(-6), status: String(t.status ?? ""), kind: String(t.kind ?? ""), createdDate: created, hasRequestId: Boolean(t.requestId) };
     });
-    return { ok: true, accountConfigured: true, count: list.length, sample, fieldNames: [...names].sort(), exchangeInfoFieldNames: [...exNames].sort() };
+    return { ok: true, accountConfigured: true, count: list.length, sample, fieldNames: [...names].sort(), exchangeInfoFieldNames: [...exNames].sort(), topLevelKeys };
   } catch {
     return { ok: false, reason: "network" };
   } finally {

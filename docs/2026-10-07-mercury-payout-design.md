@@ -84,3 +84,11 @@ Payouts → "Mercury payouts" 패널: US(USD)/KR(KRW) 필터, 기간·기한·�
 
 ## 8. Books 연계 요약
 `docs/2026-10-07-mercury-books-reconciliation.md` 참조. ALTON은 KRW 정산 원본과 정산 ID·Mercury 거래 ID를 보유, Books는 USD 실거래를 보유. 두 시스템은 정산 ID + 거래 ID로만 연결하고, 합계는 통화를 섞어 비교하지 않는다.
+
+
+## 실계정 확인 기록 (2026-10-08, 읽기 전용 토큰)
+- `GET /accounts`: 정상. 계좌 2개(Checking ••8501, Savings ••7083)가 보인다. 토큰 값·계좌번호는 기록하지 않는다.
+- `GET /account/{id}/transactions?limit=5`: 정상(경로 확정). 응답 최상위 키 `transactions`.
+- 거래 객체 필드(입금 1건 기준): accountId, amount, attachments, bankDescription, cardId, categoryData, checkNumber, compliantWithReceiptPolicy, counterpartyId, counterpartyName, counterpartyNickname, createdAt, creditAccountPeriodId, currencyExchangeInfo, dashboardLink, details, estimatedDeliveryDate, externalMemo, failedAt, feeId, generalLedgerCodeName, glAllocations, hasGeneratedReceipt, id, kind, merchant, mercuryCategory, note, postedAt, reasonForFailure, relatedTransactions, requestId, status, trackingNumber.
+- 코드가 읽는 필드(id, status, requestId, amount, trackingNumber, reasonForFailure, currencyExchangeInfo)는 모두 실제 이름과 일치한다. `currencyExchangeInfo` 안쪽 필드명(환율·수수료)은 FX 거래가 없어 아직 미확인 — 첫 국제송금에서 확인.
+- 추가로 쓸 만한 필드: `dashboardLink`(Mercury 화면 링크), `estimatedDeliveryDate`, `failedAt`, `relatedTransactions`(반환 연결 후보).

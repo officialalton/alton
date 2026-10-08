@@ -302,7 +302,7 @@ export async function checkMercuryConnectionAction(): Promise<ActionResult<{ acc
 }
 
 /** Mercury 거래 조회 형태 확인(읽기 전용): 최근 거래의 필드 이름·상태·종류만. 금액·상대방 값은 반환하지 않는다. */
-export async function checkMercuryTransactionShapeAction(): Promise<ActionResult<{ count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[] }>> {
+export async function checkMercuryTransactionShapeAction(): Promise<ActionResult<{ count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[]; topLevelKeys: string[] }>> {
   return run("accounting_reconcile", async () => {
     const res = await checkMercuryTransactionShape(mercuryConfigFromEnv());
     if (!res.ok) {
@@ -316,6 +316,6 @@ export async function checkMercuryTransactionShapeAction(): Promise<ActionResult
       };
       throw new Error(text[res.reason]);
     }
-    return { data: { count: res.count, sample: res.sample, fieldNames: res.fieldNames, exchangeInfoFieldNames: res.exchangeInfoFieldNames } };
+    return { data: { count: res.count, sample: res.sample, fieldNames: res.fieldNames, exchangeInfoFieldNames: res.exchangeInfoFieldNames, topLevelKeys: res.topLevelKeys } };
   });
 }
