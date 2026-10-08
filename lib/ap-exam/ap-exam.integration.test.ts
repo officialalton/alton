@@ -113,6 +113,20 @@ afterAll(() => {
     commit;`);
 });
 
+describe("검증 무효화(마이그레이션 402): 후보 내용이 바뀌면 렌더·화면 검증이 풀린다", () => {
+  it("선지·정답·자료 변경은 검증을 초기화하고, 내용이 같은 payload 재적재·무관 필드 변경은 유지한다", () => {
+    addCandidate("inval", { render: true, screen: true });
+    const flags = () => psql(`select render_verified || ',' || screen_verified || ',' || (render_evidence is null) from ap_candidate_items where candidate_key = ${q(K("inval"))};`);
+    expect(flags()).toBe("true,true,true");
+    psql(`update ap_candidate_items set payload = payload || '{"design_note":"x"}'::jsonb where candidate_key = ${q(K("inval"))};`);
+    expect(flags()).toBe("true,true,true");
+    psql(`update ap_candidate_items set payload = payload where candidate_key = ${q(K("inval"))};`);
+    expect(flags()).toBe("true,true,true");
+    psql(`update ap_candidate_items set payload = jsonb_set(payload, '{key_index}', '3'::jsonb) where candidate_key = ${q(K("inval"))};`);
+    expect(flags()).toBe("false,false,true");
+  });
+});
+
 describe("변환 게이트: 검증 안 된 후보는 문제은행에 들어갈 수 없다", () => {
   it("렌더·화면 검증이 없거나 재검증 필요·이전 배치 후보는 변환 불가", () => {
     for (const n of ["unverified", "noscreen", "stale", "old"]) {

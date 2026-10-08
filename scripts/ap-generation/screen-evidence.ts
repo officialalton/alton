@@ -46,7 +46,7 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     const vis = (el: Element) => { const b = el.getBoundingClientRect(); return b.width > 0 && b.height > 0; };
     const opts = [...root.querySelectorAll('[data-testid^="ap-option-"]')];
     const inputs = [...root.querySelectorAll('[data-testid^="frq-input-"]')];
-    const figs = [...root.querySelectorAll("svg, table, img")].filter((e) => !e.closest("nav") && !e.closest("button") && (e.getBoundingClientRect().width >= 120 && e.getBoundingClientRect().height >= 60));
+    const figs = [...root.querySelectorAll("svg, table, img")].filter((e) => !e.closest("nav") && !e.closest("button") && (e.tagName === "TABLE" ? e.getBoundingClientRect().width >= 60 && e.getBoundingClientRect().height >= 40 : e.getBoundingClientRect().width >= 120 && e.getBoundingClientRect().height >= 60));
     const clip = [...opts, ...inputs, ...figs].filter((e) => !inside(e) && !scrollable(e)).length;
     const text = (document.body.innerText || "").toLowerCase();
     return { optCount: opts.length, optVisible: opts.filter(vis).length, optTextEmpty: opts.filter((o) => !(o.textContent ?? "").trim()).length, inputCount: inputs.length, inputVisible: inputs.filter(vis).length, figCount: figs.length, figVisible: figs.filter(vis).length, hScroll: document.documentElement.scrollWidth > vw + 1, clip, leaked: /\b(correct answer|explanation|rationale)\b/.test(text), expectFig, text };
@@ -87,6 +87,7 @@ async function main() {
     if (!attempt) { failures.push(`${setId}: 응시 시작 실패`); continue; }
     for (const vp of VIEWPORTS) {
       const ctx = await browser.newContext({ viewport: { width: vp.w, height: vp.h }, hasTouch: vp.mobile, isMobile: vp.mobile });
+      await ctx.addInitScript("window.__name = (f) => f;"); // tsx(esbuild) 가 넣는 헬퍼가 page.evaluate 안에서 없어 실패하는 것 방지
       const page = await ctx.newPage();
       await login(page, email);
       await page.goto(`${BASE}/student/mock-exam/${attempt}`);
@@ -103,7 +104,7 @@ async function main() {
           const key0 = keysByHash.get(hash)?.[0] ?? r.candidate_key;
           const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}-${vp.w}x${vp.h}.png`;
           let checks: Record<ScreenCheckName, ScreenCheck>;
-          try { checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
+          try { checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
           const bad = SCREEN_CHECKS.filter((c) => checks[c].result === "fail");
           if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${checks[c].note})`).join("; ")}`);
           for (const k of keysByHash.get(hash) ?? []) entries.push({ candidate_key: k, content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `playwright/${ver} local student exam screen`, checks });
