@@ -1,0 +1,840 @@
+[
+ {
+  "key": "s2-ab-01-k0",
+  "cellId": "s2-ab-01",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "f(x) = -1/(x^2+1)",
+     "brief_reasoning": "Separate the variables: -1/y = x^2 + C. Using f(0) = -1 gives C = 1, so y = -1/(x^2+1).",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separation of variables with an initial condition; the dominant skill is procedural."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: y=-1/(x^2+1) satisfies the DE and f(0)=-1. Other options fail the DE or the initial condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct plausible errors (wrong DE form, sign error, constant error). The explanation addresses each of them."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct with a unique key, in scope, and its distractors are reasonable. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard single-pass separation of variables: separate, integrate (power rule for y^-2 and x), apply the initial condition, solve for y. There are no representation changes and the arithmetic is trivial. The distractors cover typical errors (exponential-form misconception, sign errors), but the item stays a direct application of the procedure and is not at the level of a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s2-ab-02-k0",
+  "cellId": "s2-ab-02",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "lim h->0 [C(300+h)-C(300)]/h = 0.22 dollars per kWh",
+     "brief_reasoning": "C'(x)=0.1+0.0004x, C'(300)=0.22",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.2 limit definition vs average rate; choosing the correct concept/procedure fits 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: C(300)=68, avg cost 0.227, avg rate 0.16, C'(300)=0.22, C'(0)=0.10. Unique key."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Function, units, domain given; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions; each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, light arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, unique key; the arithmetic checks out; distractors are well designed; appropriate scope and load."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Tests recognizing the limit definition of the derivative at a point versus average rate of change, average cost, and the derivative at a different point. Needs one concept choice, with light optional computation (C'(300) = 0.22) to verify. The distractors are misconception-based, and the numbers are clean. The context is short and relevant, with no out-of-scope content.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-ab-03-k0",
+  "cellId": "s2-ab-03",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "Relative max at t≈1.59, relative min at t≈4.41",
+     "brief_reasoning": "C' has the same sign as t^2-6t+7 because e^(-0.3t)>0. Its zeros are t=3±√2 (about 1.59 and 4.41). C' goes from + to - at 1.59, so that is a max, and from - to + at 4.41, so that is a min.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct (swap, missing extremum, endpoint). The 'why' text for option A is slightly muddled but the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for an AP MC item. The calculator is barely needed because the zeros are 3±√2, so the calculator designation is weak but acceptable."
+   },
+   "instant_reject": [],
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified: zeros at 3±√2, sign pattern +,-,+, so max at 1.59 and min at 4.41. Option C is the unique correct answer."
+   },
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "First derivative test applied to a given C'(t); this fits topic 5.4 and skill 1.E."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data are complete: C'(t), the domain, and units. The wording is clear."
+   },
+   "summary": "The item is correct and suitable. The key is verified and unique, the stimulus is complete, and the distractors are distinct. The only weakness is that the calculator is barely necessary."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard first derivative test: set C'=0 (exponential never zero), solve quadratic to get t=3±√2, test the sign of C' on three intervals, and classify. Distractors target swapped max/min and treating the endpoint t=10 as an extremum. Moderate steps, clean numbers, minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "s2-ab-04-k0",
+  "cellId": "s2-ab-04",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "f' changes + to - at x=2 (local max); f' has a min at x=4 (slope changes sign) so inflection at x=4.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Connects f' graph to extrema and inflection of f; fits 5.9 / 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Slopes of f' are -1,-1,+1,+1.5, so f'' changes sign only at x=4. f' changes + to - at 2 and - to + at 6. Only B is true; key B is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Points, axes and the piecewise-linear specification are complete and consistent with the stem."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception (reversed sign test, f'=0 as inflection, f' min as f min), and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical 60-100 second graph-reading item. The calculator-required label is unnecessary, since no calculator is needed, but this is a minor flag."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item. The key B is unique and the distractors are realistic. The only flaw is the calculator-required label on an item that needs no calculator."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the f' graph and link sign changes of f' to extrema of f, and the sign of the slope of f' (f'' sign change at x=4) to inflection. Options are two-part with misconceptions (max/min swap, inflection at a zero of f', extremum at a min of f'). Typical mock-exam multiple-choice difficulty with no unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 100
+  }
+ },
+ {
+  "key": "s2-ab-05-k0",
+  "cellId": "s2-ab-05",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "v=(t-1)(t-3); |∫| pieces 4/3+4/3+4/3=4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Total distance via sign analysis of v; fits 8.2 and 1.D (choose |v| vs v)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Verified F(1)=4/3, F(3)=0, F(4)=4/3; total distance 4. Unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Complete and clear; the text stimulus duplicates the stem but is harmless."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are displacement, final position, and distance plus initial position; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Exact values, manageable arithmetic, appropriate for non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean total-distance item with well-motivated distractors; acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Total distance requires finding the sign changes of v (t=1, 3), splitting the integral into three pieces, and summing absolute values. The key conceptual choice is distance vs. displacement, since the net displacement of 4/3 is a distractor. The initial position of 2 is an irrelevant piece of information. Arithmetic is clean and reading load is minimal, so the difficulty comes from the concept and multiple steps rather than unfair sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 150
+  }
+ },
+ {
+  "key": "s2-ab-06-k0",
+  "cellId": "s2-ab-06",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separating variables gives C-4 = Ae^{-0.5t}. Since C(0)=10, A=6, so C(t) = 4+6e^{-0.5t}.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "C(t)=4+6e^{-0.5t}"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Verifying/solving an IVP by substitution; in scope for 7.2."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key D (4+6e^{-0.5t}) verified; others fail DE or IC uniquely."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "DE, IC and variables fully specified; clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception and each is explained accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Clean numbers, no calculator, appropriate time."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clean and in scope. Its distractors are well designed and the stimulus is complete, so it is acceptable."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must find or verify the particular solution of a shifted exponential DE (equilibrium at 4). Requires recognizing the form C = 4 + Ae^{kt}, using C(0)=10 to get A=6, and checking the sign of the exponent against the DE. Distractors target common misconceptions (wrong exponent sign, forgetting to subtract the equilibrium when applying the initial condition, ignoring the shift). Numbers are clean and reading is minimal, so difficulty comes from legitimate conceptual and procedural steps, not unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s2-ab-07-k0",
+  "cellId": "s2-ab-07",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Implicit differentiation: y' = -(2x+y)/(x+3y^2) = -4/13 at (1,2).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-4/13"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Implicit differentiation, first derivative, product and chain rule; fits 3.2 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Point is on the curve (1+2+8=11). y' = -4/13 is the unique correct value; verified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Relation, point and units are complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "-16 (chain-rule omission) and -1/3 (product-rule omission) were both verified by computation; 4/13 is a sign error. All are distinct and explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, small numbers, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and clean, and its distractors map to realistic errors. It is acceptable."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single routine implicit differentiation: product rule on xy, chain rule on y^3, solve for y', substitute (1,2). Small numbers, minimal reading, no representation changes. Distractors reflect common errors (sign, missing term), but the item stays at the core procedure level, suited to basic learning rather than a full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s2-ab-08-k0",
+  "cellId": "s2-ab-08",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "f'(3)=3/e≈1.104, so a change of 0.1 in x changes f by about 0.1104.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Interpreting f'(3) as a local rate and using it for a small-change estimate fits 4.1. Product and chain rules are the prerequisite computation."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "f'(3)=3/e≈1.1036. D (0.1104≈0.110) is correct. A: actual change ≈0.907, and 'exactly' makes it false. B: f(3.1)≈3.42, not 1.104. C: the relative change is about 1.0%, not 1.104%. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The function, domain and point are fully specified and the wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception: derivative as exact change, derivative as function value, and derivative as a percent. The explanation addresses every wrong option with correct numbers."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical, about 90-120 seconds. The calculator is marginally needed, but its designation is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and has a unique key. The distractors are distinct and well explained. The scope is acceptable for 4.1, with only a minor concern about how much the calculator is actually needed."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must differentiate with the product and chain rules, evaluate f'(3) = 3/e ≈ 1.104 with a calculator, and then distinguish between interpretations: exact vs. approximate change, derivative vs. function value, and percent vs. absolute change. The last option requires applying linear approximation (0.1 × 1.104 ≈ 0.110). The misconception-rich distractors are a legitimate difficulty lever. Numbers are clean, the reading load is low, and everything is in AB scope.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 120
+  }
+ },
+ {
+  "key": "s2-ab-09-k0",
+  "cellId": "s2-ab-09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "dC/dt at C=0: 1; C=2: 0; C=6: -2; C=10: -4. Along C=2 the slope segments are horizontal (an equilibrium solution). For C>2 the slopes are negative and get steeper as C increases, and they are the same along any horizontal line.",
+     "final_answer": "1, 0, -2, -4. Horizontal segments along C=2; negative slopes for C>2 that get steeper as C grows",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "If C=10e^{-t/2}, then C' = -5e^{-t/2}. The equation requires -(1/2)(10e^{-t/2} - 2) = -5e^{-t/2} + 1. These differ by 1 for every t (for example, at t=0, C'=-5 but the equation requires -4), so the claim is false.",
+     "final_answer": "C' = -5e^{-t/2}, but the equation requires -5e^{-t/2}+1, so they are never equal",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Separate: dC/(C-2) = -(1/2)dt. Integrate: ln|C-2| = -t/2 + K. Since C(0)=10, C-2 = 8e^{-t/2}, so C = 2 + 8e^{-t/2}. Setting C=6 gives 8e^{-t/2} = 4, so e^{-t/2} = 1/2 and t = 2 ln 2.",
+     "final_answer": "C(t) = 2 + 8e^{-t/2}; C = 6 when t = 2 ln 2 ≈ 1.386 days",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Part c is core 7.6 separation of variables; a and b are in-scope Unit 7 prerequisites (slope field, verifying solutions). Each part judged on its own skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All answers verified: slopes 1,0,-2,-4; claim false (differs by 1); C=2+8e^{-t/2}; t=2 ln2. Rubric rows consistent, 2/2/5 sums to 9."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "DE, initial condition and variables are given. The table lists only C values with no dC/dt row, making it redundant, but nothing needed is missing."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; no distractors. Rubric rows and alternatives are clear."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, exact-form answers, small numbers, typical 9-point load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope. The key was verified (slopes 1, 0, -2, -4; C = 2 + 8e^{-t/2}; t = 2 ln 2) and the point split of 2/2/5 fits the 9-point grain. The only flaw is a redundant, sparse stimulus table, which does not affect the answers."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ-style item on separation of variables with a shifted equilibrium. Part a evaluates dC/dt from a table and describes slope-field behavior (equilibrium at C=2, negative slopes above). Part b checks a plausible but incorrect candidate (the misconception of ignoring the shift) by substituting into the DE. Part c requires separating variables, integrating with ln|C-2|, applying the initial condition, handling the absolute value and constant, and solving for t. Concepts are all in the Unit 7 AB scope. The numbers are clean (C-2=8e^{-t/2}, t=2 ln 2) and the reading load is minimal. The difficulty comes from the number of steps and the switch between table, slope-field and symbolic forms, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "s2-ab-10-k0",
+  "cellId": "s2-ab-10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "S' changes from negative to positive at t=2, so S has a local minimum there. S' changes from positive to negative at t=8, so S has a local maximum there.",
+     "final_answer": "Local min at t=2; local max at t=8",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "S' is increasing on (0,5) and decreasing on (5,10). So S'' > 0 on (0,5) and S'' < 0 on (5,10). Concavity changes at t=5, so that is an inflection point.",
+     "final_answer": "Concave up on (0,5), concave down on (5,10); inflection point at t=5",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Candidates: S(0)=0, S(2)=-200, S(8)=-200+900=700, S(10)=700-200=500. The largest is S(8).",
+     "final_answer": "Absolute max at t=8, S(8)=700 dollars",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "S'(5)=300 is a rate of change. At t=8, S' goes from positive to negative.",
+     "final_answer": "At t=5 years, cumulative net savings are increasing at 300 dollars per year. At t=8, S' changes from positive to negative: savings stop growing and start falling, so savings are at their maximum then and decrease afterward.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a-c are standard justification tasks on connecting S, S' and S''. Part d is mostly interpretation but still requires reasons in context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "S(2)=-200, S(8)=700, S(10)=500 verified. The max is at t=8 with value 700. The rubric rows are consistent with the model answers, and the points sum to 9."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph data are complete: axes, points and the initial condition S(0)=0. The sign summary is consistent with the points."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so distractors do not apply. The rubric rows are clear, and the alternate solution for the inflection point is valid."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load is typical of an AP FRQ: clean numbers, area computation from a graph, and about 15 minutes for 9 points."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed, and the key was verified by hand: S(8)=700 is the absolute max. The 2/2/3/2 point split fits the official grain. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Multi-part FRQ on connecting S, S', S'' from a piecewise-linear graph of S'. Part a: sign change of S' gives a local min at t=2 and a local max at t=8, with justification. Part b: S'' is the slope of S', so S is concave up on (0,5) and concave down on (5,10); S' changes from increasing to decreasing at t=5, so S has an inflection point there. Part c: a candidates-test comparing S(8) with the endpoints S(0) and S(10). S(8) is the area under S' from 0 to 8, which is a net signed area (-200 + 900 = 700) and needs geometric areas of triangles, not antiderivatives. S(10) = 700 - 200 = 500 < 700. Part d: contextual interpretation with units. The numbers are friendly and the reading load is modest. Difficulty comes from several representation changes (graph to sign of S' to behavior of S, and area to values) and the need to check endpoints, which is typical of a full-mock FRQ rather than an advanced extension.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 9,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "s2-ab-11-k0",
+  "cellId": "s2-ab-11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Slopes: at (1,1) the slope is 1; at (-2,1) it is -2; at (1,0) it is 0; at (0,3) it is 0. In quadrant II, x<0 and y^2>0, so the slope is negative.",
+     "final_answer": "Slopes are 1, -2, 0 and 0. In quadrant II (y≠0) every slope is negative, because x<0 and y^2>0.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Separate: dy/y^2 = x dx. Integrate: -1/y = x^2/2 + C. Solve for y.",
+     "final_answer": "y = -2/(x^2 + K), where K is a constant (equivalently y = -1/(x^2/2 + C))",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Use f(0)=2: -2/K = 2, so K = -1 and y = 2/(1-x^2). The function blows up at x = ±1, so the solution through x=0 is valid only between those points.",
+     "final_answer": "f(x) = 2/(1-x^2), valid on the open interval (-1, 1)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "The formula gives -2/3 at x=2, but x=2 is outside the interval (-1,1). The solution has a vertical asymptote at x=1, so it cannot be continued past that point to x=2.",
+     "final_answer": "Not justified. The solution exists only on (-1,1) and has a vertical asymptote at x=1, so f(2) is not defined for this solution.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Dominant demand is separation of variables. Parts (c) and (d) lean toward particular solutions and domain (7.7), a mild drift but acceptable for AB."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All slopes, the general solution, f(x)=2/(1-x^2), the interval (-1,1), and f(2) not justified are correct. Rubric rows are consistent and alternative forms are listed."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The data object fully specifies the differential equation, points and initial condition. The wording is clear. Part (a) asks for the quadrant II sign from points of which only one is in QII, a minor awkwardness."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ. The rubric lists common errors (omitting +C, ln(y^2), claiming positive slope, stating all real numbers)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points split 2/3/2/2, non-calculator, exact answers, about 15 minutes, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically correct, in scope, and well scored. Part (a) is slightly padded and parts (c) and (d) drift mildly into topic 7.7, but neither is a material flaw. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part FRQ-style item. Part a is slope evaluation and a sign argument. Part b is routine separation of variables and integration. Part c applies the initial condition and finds the interval of validity, avoiding the asymptotes at x = ±1. Part d asks why the formula's value at x = 2 is not justified because it lies outside the solution's interval. The numbers are clean, the reading is short, and the content is in AB scope. The interval-of-validity reasoning raises it above basic learning, but it is standard AP fare.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "s2-ab-12-k0",
+  "cellId": "s2-ab-12",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "At (0,1): (0+1)/(3·1) = 1/3. At (1,−1): (2+1)/(3·1) = 1. At (0,0) the numerator is 1 and the denominator is 0, so the slope is undefined. The slope field has no finite slope segment there; the tangent would be vertical.",
+     "final_answer": "The slope at (0,1) is 1/3 and at (1,−1) it is 1. At (0,0) the slope is undefined because it would mean dividing by zero, so no finite segment can be drawn there (the tangent is vertical).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Separate the variables: 3y² dy = (2x+1) dx. Integrating both sides gives y³ = x² + x + C.",
+     "final_answer": "y = ∛(x² + x + C)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Substitute x = 0, y = 2: 8 = 0 + 0 + C, so C = 8.",
+     "final_answer": "y = ∛(x² + x + 8)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "The equation needs y ≠ 0. The expression x² + x + 8 has discriminant 1 − 32 = −31 < 0, so it is always positive. That means y > 0 and the solution is differentiable for every x.",
+     "final_answer": "(−∞, ∞): x² + x + 8 is never 0, so y is never 0 and the derivative is defined for every real x.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The 9 points and the roughly 15-minute load fit the official FRQ grain. No calculator is needed and the numbers are clean.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and appropriate in load, so it passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style separable DE item: slope evaluation and undefined slope reasoning, separation and integration, cube root solving, particular solution, and a domain justification (y ≠ 0, discriminant of x^2+x+8 is negative). Clean numbers, low reading, in scope. The domain check adds a reasoning step beyond basic procedure, suitable for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "key": "s2-ab-13-k0",
+  "cellId": "s2-ab-13",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "8 PM is t=2 and midnight is t=6. Average rate = (8.0-3.2)/4 = 1.2 kWh/h. Cost rate = 1.2 × 0.15 = $0.18/h. A is wrong: midnight to 4 AM (t=6 to 10) averages 1.8 kWh/h. B confuses the total used with the rate. C claims an exact instantaneous rate, which the table can't give.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applied rate of change with units from a table; fits 4.3. Skill 2.A (identifying common structure) is only loosely engaged, but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is correct: (8.0-3.2)/4=1.2 kWh/hr, times 0.15 gives $0.18/hr. A, B and C are each false or unsupported, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete and consistent with the stem; the time conversion from clock time to t is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions: wrong interval, total used as a rate, and average rate treated as instantaneous. The metadata for option C says E'(6) where it should say E'(4), a minor slip; the explanation_en is correct."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple numbers, and parallel options. The calculator is barely needed, but this is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key (D) is verified and unique, the stimulus is complete, and the distractors are distinct. The only flaw is a small E'(6) vs E'(4) slip in an option's metadata. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Requires converting clock times to t values, computing an average rate of change from table data, applying the unit price to get a cost rate, and rejecting distractors (total vs rate, wrong interval, average vs instantaneous). Concept depth is moderate and the arithmetic is simple. This is a typical AP-style interpretation item suited to full mocks.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s2-ab-14-k0",
+  "cellId": "s2-ab-14",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ]
+ },
+ {
+  "key": "s2-ab-15-k0",
+  "cellId": "s2-ab-15",
+  "passed": false,
+  "reasons": [
+   "reference_time_out_of_range"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ]
+ },
+ {
+  "key": "s2-ab-16-k0",
+  "cellId": "s2-ab-16",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ]
+ },
+ {
+  "key": "s2-ab-17-k0",
+  "cellId": "s2-ab-17",
+  "passed": false,
+  "reasons": [
+   "reference_time_out_of_range"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ]
+ },
+ {
+  "key": "s2-ab-18-k0",
+  "cellId": "s2-ab-18",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ]
+ }
+]

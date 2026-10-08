@@ -1,0 +1,690 @@
+[
+ {
+  "key": "s2-bio-01-k0",
+  "cellId": "s2-bio-01",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Compound X blocks the G1/S CDKs. In the treated group, G1 rose from 50% to 85%, and S, G2 and M all fell. Cells are stuck at the G1/S checkpoint, so fewer of them divide and root growth slows.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicts effect of CDK inhibition on the cell cycle; fits 4.6 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique and defensible; table rows sum to 100; the other options are contradicted by the data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with a title, columns, rows, n and a note on the action of compound X."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception and is explained. The wording for C is slightly muddled but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculation, typical AP reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key D is supported by the data (G1 rises from 50% to 85%, and S, G2 and M fall), the other options are contradicted by the data or the note, and the load is appropriate for an AP item."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Single-concept item on G1/S checkpoint regulation. The student interprets a small phase-distribution table, links CDK inhibition to G1 accumulation and fewer cells entering S and M, and predicts the effect on root growth. Distractors are plausible but can be eliminated using the data. It is typical AP-level prediction with modest reasoning, no calculation and light reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-bio-02-k0",
+  "cellId": "s2-bio-02",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "Both fiber types have the same number of copies of each gene, so they share the same genome. Each type has a lot of mRNA from only one myosin gene, which means the difference comes from which genes are expressed.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Argumentation linking data to claim about differential gene expression; fits 6.6/6.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the unique defensible answer; B-D are contradicted by the table."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data is complete and consistent with the options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (equal expression of all genes, gene amplification, gene loss); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is correct, the stimulus supports it, and the distractors are plausible and refuted by the table."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Student compares equal gene copy numbers with differing mRNA levels in a single small table and picks the statement that links them to differential gene expression. The concept (same genome, differential expression) is core and the distractors contradict the table in obvious ways (extra copies, gene loss, universal equal transcription). There is little reasoning depth, no computation and no representation change.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 0,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-bio-03-k0",
+  "cellId": "s2-bio-03",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "With 8 drops, 48 of the 50 mmol of lactose has already been broken down, so only 2 mmol is left. The amount of substrate now limits how much product can form, so adding more enzyme can only raise glucose by 2 mmol, up to the 50 mmol maximum. Cold slows enzymes but does not denature them. Enzymes are not used up in the reaction, and they do not change the energy the reaction releases.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Enzyme activity and substrate limitation explained from data; fits 3.1 and skill 1.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "B is the unique correct answer: 48 of 50 mmol already converted at 8 drops, so substrate is limiting. Arithmetic verified."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with conditions; all numbers used appear in the stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (cold denatures, enzyme consumed, enzyme changes energy or yield). The key is somewhat longer than the other options, a minor giveaway. Each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator, light data reading, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: a single defensible key (substrate depletion), consistent data, and distractors that target distinct misconceptions. The only flaw is minor, as the key is slightly longer than the other options."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Bio enzyme item: students interpret a small table, link the glucose plateau at 50 mmol to the 50 mmol lactose limit via 1:1 stoichiometry, and reject plausible misconceptions (cold denaturation, enzyme consumption, enzymes altering the reaction's energy change). Moderate concept depth with a data-to-concept link, light reading, and trivial arithmetic. Appropriate for full mock exams.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-bio-04-k0",
+  "cellId": "s2-bio-04",
+  "passed": false,
+  "reasons": [
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "For a cube, SA/V = 6/s. That is an inverse relationship, so the graph falls steeply and then levels off. Larger cells have less membrane per unit of volume.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Fits topic 2.2 and skill 2.D. The student must choose the representation that matches the SA/V relationship."
+  }
+ },
+ {
+  "key": "s2-bio-05-k0",
+  "cellId": "s2-bio-05",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "94% identity sits between the mouse (88%, 15 nM) and the chimpanzee (99%, 12 nM). Higher identity points to a more recent common ancestor and a more conserved active site, so the IC50 should be about 12-15 nM.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting an effect from sequence identity and common ancestry fits 7.7 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "D is unique. A has the same numerical prediction but wrong reasoning (convergence)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and all numbers used appear in it; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions; each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 s, no calculation, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key D is correct and unique, the data are complete, and the distractors are distinct and explained."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item: higher sequence identity implies more recent common ancestry and similar structure, so similar inhibitor sensitivity. Requires reading a small table, spotting the trend, and picking the option with correct reasoning. Distractors are clearly flawed (convergence, equal inhibition, only-human). No computation, minimal reading.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-bio-06-k0",
+  "cellId": "s2-bio-06",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The ±2SE ranges for red (7.8–9.0) and blue (7.4–8.4) overlap, so they are not clearly different. Green (2.7–3.5) is clearly lower than both. B overstates the small difference between red and blue. C has the logic backwards: green light is reflected, so less of it is absorbed and used. D is wrong because gross photosynthesis under green = 3.1 − (−1.2) = 4.3 > 0.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Photosynthesis, action spectrum / pigment absorption, evidence-based claim selection (6.B). Fits."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is unique: red/blue overlap, both far above green. B ignores overlap, C reverses logic, D wrong since net is positive."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with units, n, 2SE, and notes on negative values. All numbers used appear in the data."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct realistic misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator needed, typical AP data-interpretation format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item. The key is correct and unique, the stimulus is complete, the distractors are distinct misconceptions, and the scope and skill fit."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "The item requires comparing means across treatments and using 2SE overlap to judge whether red and blue differ. It also requires rejecting plausible misconceptions (green is reflected so it is efficient; low net O2 means no photosynthesis, when the value is above the dark control). It is a standard AP-style claim-evidence selection with moderate reasoning and light reading and computation, so it suits a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 90
+  }
+ },
+ {
+  "key": "s2-bio-07-k0",
+  "cellId": "s2-bio-07",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "61/22 ≈ 2.8-fold increase; pH 6 is closer to optimum 7, so ionizable active-site residues are nearer optimal charge states. Substrate is saturating, so it's not a collision/substrate effect.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting the effect of a pH change on enzyme rate fits topic 3.2 and skill 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "61/22 = 2.77, so 'about 2.8-fold' is correct. D is the only option that is both consistent with the data and gives a valid cause."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and states its conditions. All numbers used in the item appear in it."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct misconception, and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short and answerable in about 75 seconds with no calculator. The correct option is slightly longer than the others, a minor flaw."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the stimulus is complete, the distractors are distinct, and the topic and skill fit."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Student must read the table, see that pH 6 is on the rising side of the curve toward the pH 7 optimum, estimate the roughly 2.8-fold increase (61/22), and select the correct mechanism (ionization state of active-site groups) while rejecting three plausible misconceptions (any pH rise denatures, pH adds substrate, saturation makes the enzyme pH-insensitive). Moderate concept depth with a prediction plus cause, typical of a full-mock AP item; the arithmetic is trivial and the reading is short.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 75
+  }
+ },
+ {
+  "key": "s2-bio-08-k0",
+  "cellId": "s2-bio-08",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "A",
+     "brief_reasoning": "The mice are genetically identical and everything else was kept the same, so the drop in heart rate (640 to 585 bpm, with SDs of about 12) comes from the environment changing how the same genotype is expressed. That is phenotypic plasticity.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly tests environment effect on phenotype with genotype held constant; applied context."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is uniquely correct; others contradict the stem or the data."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with n, mean, SD and controls noted; the numbers used appear in the table."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option is explained; C and D are somewhat weak and a bit self-contradictory but still reflect genotype-only misconceptions."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculation, a typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key is correct, the table is complete, and the distractors are explained, though options C and D are somewhat weak. It passes all five criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept (same genotype, different environment yields different phenotype). The table is simple, with controlled variables stated and a clear difference in means relative to the SDs. Distractors rest on obvious misconceptions (exercise-induced mutation, genotype determines phenotype absolutely, chance alone). Only about 2 reasoning steps, one table read, no computation; suits introductory learning rather than a full mock's discriminating items.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 45
+  }
+ },
+ {
+  "key": "s2-bio-09-k0",
+  "cellId": "s2-bio-09",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Blocking cyclin E-CDK2 stops cells at the G1/S checkpoint. Cells already in S, G2 and M finish the cycle, divide and then build up in G1. This gives a large G1 fraction and much smaller S and G2+M fractions.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "G1: 85%; S: 8%; G2 + M: 7%"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicts effect of blocking G1/S kinase on cell-cycle distribution; fits 4.6 and 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option B is the unique defensible answer; others contradict the mechanism."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and sums to 100%; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions and the explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item: blocking cyclin E-CDK2 shifts the culture toward G1. The key is unique, the distractors are distinct, and the stimulus is complete."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single core concept: blocking cyclin E-CDK2 arrests cells at the G1/S checkpoint, so cells accumulate in G1 and S and G2+M deplete as cells already past the checkpoint complete the cycle. The student needs only a short chain of reasoning and a simple table, with no calculation. The distractors map to clear misconceptions (G2/M arrest, no effect, S-phase arrest). It is appropriate for introductory learning of cell cycle regulation, below typical full-mock difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-bio-10-k0",
+  "cellId": "s2-bio-10",
+  "passed": true,
+  "reasons": [],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C",
+     "brief_reasoning": "Sweating is the effector in negative feedback opposing temperature rise; blocking it removes evaporative cooling so temperature rises faster than control.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Predicting the effect of a blocked effector in a negative feedback loop fits topic 4.4 and skill 6.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Option C is the unique defensible answer. The solver agrees."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete and consistent with the explanation's numbers. Minor issues: 'C' is used for the degree symbol, and the table stops at 30 minutes although the run lasted 40."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions, and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, no calculator, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. It has a correct unique key, a complete stimulus, distinct distractors, and a time and reading load typical of the AP exam."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Single-concept item on negative feedback: if the effector response (sweating) is blocked, the temperature rise is no longer opposed and climbs faster. The table is small and the stem tells the student that sweating slows the rise, so the prediction takes only a short chain of reasoning. Distractors are plausible but clearly wrong (same rate, no rise, overcooling). No calculation is needed and there is only one light representation change from the table to a conceptual prediction.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 60
+  }
+ },
+ {
+  "key": "s2-bio-11-k0",
+  "cellId": "s2-bio-11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Data points: 100 at 7.0, 86 at 6.5, 80 at 6.4, 55 at 6.0, 20 at 5.5, 5 at 5.0.",
+     "final_answer": "As pH falls from 7.0 to 5.0, activity drops steadily from 100% (the peak) to about 5% of maximum. The drop is gradual near 7.0 and much steeper below about pH 6.5.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "(100 - 80) / 100 x 100% = 20%.",
+     "final_answer": "Activity falls from 100% to 80% of maximum, a 20% decrease.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Extra H+ ions change the charges on amino acid R groups.",
+     "final_answer": "At pH 5.0 the high H+ concentration protonates ionizable R groups. This disrupts ionic bonds and hydrogen bonds that keep the enzyme's tertiary structure, so the enzyme partly denatures. The active site changes shape and charge, so the substrate binds poorly and fewer enzyme-substrate complexes form.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "pH 6.9 is not plotted, so I interpolated between 6.5 (86%) and 7.0 (100%): 86 + 0.8 x 14 ≈ 97%.",
+     "final_answer": "Activity would rise from about 80% to about 97% of maximum, close to the resting peak. This is because pH 6.9 is much nearer the optimum of 7.0. As a result, ATP production should be better maintained after sprints.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts a and d fit 3.2 and 2.B. Part c is mostly recall and part b is a simple percent calculation, but the dominant demand across the item is acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are defensible. Part a's 'steady decline' is inaccurate because the slope is not constant, but the rubric only requires a decrease. Part d's 98-100% is slightly high versus interpolation (about 97%), covered by the alt range 95-100%. The part b common-error note is confusing."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Axes, series points, and markers are fully specified. The JSON is nested inside the description string, which is awkward but complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Free response, so no distractors. Common-error lists are plausible."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Four 1-point parts matches the short FRQ grain. Load is light and no calculator is needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable short FRQ. The graph data support all keys. Minor issues: the 'steady decline' wording in a, the rote-recall part c, a slightly high key range in d, and the nested stimulus format."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four-part item on a core AP Bio concept (pH effects on enzyme structure and activity). Parts (a) and (b) are graph reading plus a simple percent-change calculation ((100-80)/100 = 20%). Part (c) needs the structural explanation (H+ disrupts ionic and hydrogen bonds, altering the tertiary structure and active site, which reduces substrate binding). Part (d) needs a prediction supported by graph data (activity at 6.9 is about 98%, up from 80%). The concepts are on-scope and the reading and computation loads are light, so the item is a standard mock-exam question and not a basic recall item. It is not advanced either, since there is no novel data interpretation or multi-variable reasoning.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "s2-bio-12-k0",
+  "cellId": "s2-bio-12",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:b:numeric"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "a",
+     "brief_reasoning": "Dependent variable: reporter expression (RU per cell after 3 h). Control/baseline: wild type with no inducer (2 RU). It has normal repressor and operator, so it shows the repressed level of a normally regulated gene. Comparing WT + inducer against it isolates the effect of the inducer.",
+     "final_answer": "DV = mean reporter expression (RU). Baseline = WT, no inducer (normal regulation, repressed state).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "b",
+     "brief_reasoning": "Clustered bar graph. x-axis: strain (WT, R-, O-c, R-s). y-axis: mean reporter expression (RU), starting at 0 and going to about 110. Two bars per strain, one for no inducer and one for inducer added, told apart by shading and labeled in a legend. Each bar gets an error bar of ±2SE. Optionally add an axis title and a figure title.",
+     "final_answer": "Clustered bar graph: strains on x-axis, mean RU on y-axis, paired bars for no inducer vs inducer (legend), ±2SE error bars on each bar.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "c",
+     "brief_reasoning": "Fold induction = 96 / 2 = 48.",
+     "final_answer": "48-fold",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "d",
+     "brief_reasoning": "O-c is high without inducer (88 RU), the same as with inducer (90) and similar to R- (91). The ±2SE ranges overlap, so expression is constitutive, as if there were no repressor. The repressor is still made but cannot bind the changed operator, so RNA polymerase transcribes freely. R-s is low with or without inducer (1.8 vs 2.4, overlapping error bars), like uninduced WT. The repressor still binds the operator but cannot bind the inducer, so the inducer cannot change its shape and release it. Repression stays on: the strain cannot be induced. Prediction: expression is high without inducer, about 90 RU. The operator acts in cis, so even a wild-type repressor cannot bind the O-c operator to block transcription.",
+     "final_answer": "O-c gives constitutive high expression (repressor can't bind operator); R-s gives uninducible low expression (repressor stays bound). WT repressor + O-c operator gives HIGH expression without inducer, because the operator acts in cis and the repressor can't bind it.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Operon regulation (6.5) with argumentation from data; part a is a modest fit for the skill but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "48-fold is correct; O-c and R-s interpretations and the high-expression prediction are correct; rubric rows are consistent with the model answers."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with means, ±2SE, n, units and setup; all numbers used appear in the stimulus."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ; common_errors are listed per row and are realistic."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Point grain 2/3/1/3 = 9 is valid. Calculator header says allowed while the spec says na, but only a trivial division is needed. Length is a bit long but not grounds for rejection."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The data, the arithmetic and the biology are correct, and the rubric is consistent. The only blemish is the minor calculator-designation inconsistency (allowed vs na), which does not affect the task."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "This is a standard AP Biology multi-part free-response item on lac operon-style regulation. It requires identifying the dependent variable and control, describing a graph with error bars, doing one simple division (96/2 = 48), and using the data to support a claim about two regulatory mutants. Part d needs the extra step of predicting expression in a strain with a wild-type repressor gene and an O-c operator. The concepts (repressor, operator, inducer, constitutive expression) are core to unit 6 and the reasoning chains are short, so this suits a full mock exam. The data table is clear and compact. One flag: the item says calculator na, but calculator_part says allowed, which is a metadata inconsistency. It does not affect difficulty because the only calculation is trivial.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "key": "s2-bio-13-k0",
+  "cellId": "s2-bio-13",
+  "passed": false,
+  "reasons": [
+   "reference_time_out_of_range"
+  ],
+  "soft": [
+   "explanation_does_not_cover_distractors"
+  ]
+ }
+]
