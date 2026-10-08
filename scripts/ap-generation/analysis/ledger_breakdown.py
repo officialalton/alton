@@ -58,3 +58,24 @@ co, ca = costs("run1"); c1 = cands("run1"); byk = collections.defaultdict(lambda
 for k, c in c1.items(): kind = c["kind"] if c["structure"] == "standalone" or c["kind"] != "mc" else "mc_set"; byk[kind]["cost"] += sum(co.get(k, {}).values()); byk[kind]["cand"] += 1; byk[kind]["pass"] += 0 if c["rejectionReason"] else 1; byk[kind]["calls"] += ca.get(k, 0)
 out["run1"] = {k: {a: round(b, 3) for a, b in v.items()} for k, v in byk.items()}; out["run1"]["_unique_passed"] = dict(exact_unique(c1)); out["run1"]["_file_cost_total"] = round(sum(sum(v.values()) for v in co.values()), 3)
 print(json.dumps(out, indent=1))
+
+
+# ---- 정산표(비용 단계별·종류별) 추가 출력
+def stage_costs(chain):
+    tot = collections.defaultdict(lambda: collections.defaultdict(float)); cnt = collections.defaultdict(lambda: collections.Counter())
+    for run in chain:
+        cs = cands(run)
+        for st in ["gen", "solve", "review", "difficulty", "spot"]:
+            for r in jl(f"{R}/{run}/{st}.results.jsonl"):
+                if not r.get("ok"): continue
+                k = re.sub(r"^[a-z]-", "", r["custom_id"]) if st != "gen" else r["custom_id"]
+                kind = cs.get(k, {}).get("kind", "unknown")
+                tot[kind][st] += r.get("cost", 0); cnt[kind][st] += 1
+    return {k: {a: round(b, 3) for a, b in v.items()} for k, v in tot.items()}, {k: dict(v) for k, v in cnt.items()}
+recon = {}
+for label, chain in [("AB", ["run2a", "run2b", "run2"]), ("BC", ["run2bc_a", "run2bc_b", "run2bc"])]:
+    st, ct = stage_costs(chain); recon[label] = {"cost_by_stage": st, "calls_by_stage": ct}
+    fc = cands(chain[-1]); recon[label]["final_rows"] = collections.Counter(("pass" if c["rejectionReason"] is None else "rej") + "_" + c["kind"] for c in fc.values())
+    recon[label]["final_rows"] = dict(recon[label]["final_rows"])
+    recon[label]["interim_rows"] = {run: dict(collections.Counter(c["kind"] for c in cands(run).values())) for run in chain}
+print("RECON", json.dumps(recon))

@@ -4,7 +4,9 @@
 //  - 완전 중복(exact)만 canonical 에 연결해 재고에서 제외한다. 숫자·표현 변형은 같은 문항군(item family)으로 묶되 반려하지 않는다.
 //  - 칸 부족분은 auto_passed + 문항군 다양성으로 계산한다(낡은 통과·숫자 변형만으로는 칸이 채워지지 않는다).
 export type Validation = "rejected" | "needs_revalidation" | "auto_passed" | "exact_duplicate";
-export type ExpertStatus = "none" | "pending" | "approved" | "rejected" | "waived";
+/** 게시 후 검수 상태(검수 환경 게시를 막지 않는다). 오류 신고는 기존 problem_error_reports 흐름을 쓴다. */
+export type ExpertStatus = "unreviewed" | "in_review" | "approved" | "issues_reported";
+export type ReleaseTier = "candidate" | "review_env" | "launch";
 export const LATEST_GATE = "v2-code-first-final-2026-10-08";
 export const GATE_OF_RUN: Record<string, string> = { run1: "v1-llm-generated-2026-10-07", run2: LATEST_GATE, run2bc: LATEST_GATE };
 export const VARIANT_CAP = 2; // 한 문항군이 칸 채움에 기여하는 최대 문항 수(원본 + 변형 1)
@@ -14,7 +16,7 @@ export type RawCand = {
 };
 export type HistoryEntry = { run: string; gateVersion: string; outcome: "passed" | "rejected"; reasons: string | null };
 export type StockItem = RawCand & {
-  run: string; stockKey: string; pipeline: "llm_v1" | "code_first_v2"; validation: Validation; gateVersion: string; expertStatus: ExpertStatus; publishable: boolean;
+  run: string; stockKey: string; pipeline: "llm_v1" | "code_first_v2"; validation: Validation; gateVersion: string; expertStatus: ExpertStatus; releaseTier: ReleaseTier; renderVerified: boolean; screenVerified: boolean; reviewEnvReady: boolean;
   selectedForSample: boolean; legacyReserve: boolean; family: string; itemFamilyId: string; canonicalKey: string | null; duplicateOf: string | null; duplicateReason: string | null;
   contentKey: string; sharedWith: string[]; stockCell: string; history: HistoryEntry[];
 };
@@ -44,15 +46,15 @@ export const contentKeyOf = (c: RawCand) => `${familyOf(c.apSubjectCode)}:${c.ke
 const rank = (c: StockItem) => [c.validation === "auto_passed" ? 0 : 1, c.pipeline === "code_first_v2" ? 0 : 1, c.difficultyProvisional === "exam_prep" ? 0 : 1, c.stockKey] as const;
 const cmp = (a: StockItem, b: StockItem) => { const x = rank(a), y = rank(b); for (let i = 0; i < 4; i++) if (x[i] !== y[i]) return x[i] < y[i] ? -1 : 1; return 0; };
 
-export type BuildOpts = { history?: Record<string, HistoryEntry[]>; expert?: Record<string, ExpertStatus>; firstSampleRuns?: string[]; historyKey?: (c: RawCand) => string };
+export type BuildOpts = { history?: Record<string, HistoryEntry[]>; expert?: Record<string, ExpertStatus>; rendered?: Set<string>; screened?: Set<string>; historyKey?: (c: RawCand) => string };
 /** 모든 런을 하나의 재고로 합친다. 같은 문항 내용은 canonical 하나만 남기고(exact), 변형은 문항군으로 묶는다. AB 재고는 BC 에 공유 태깅(같은 content_key). */
 export function buildStock(runs: Record<string, RawCand[]>, opts: BuildOpts = {}): StockItem[] {
   const items: StockItem[] = [];
   for (const [run, list] of Object.entries(runs)) for (const c of list) {
     const gate = GATE_OF_RUN[run] ?? run; const passedOwn = !c.rejectionReason;
     const validation: Validation = !passedOwn ? "rejected" : gate === LATEST_GATE ? "auto_passed" : "needs_revalidation";
-    const sampled = passedOwn && !c.reserve; const first = (opts.firstSampleRuns ?? ["run1", "run2", "run2bc"]).includes(run);
-    items.push({ ...c, run, stockKey: `${run}:${c.candidateKey}`, pipeline: pipelineOf(c), validation, gateVersion: gate, expertStatus: opts.expert?.[`${run}:${c.candidateKey}`] ?? (sampled && first && validation === "auto_passed" ? "pending" : "none"), publishable: false,
+    const sampled = passedOwn && !c.reserve;
+    items.push({ ...c, run, stockKey: `${run}:${c.candidateKey}`, pipeline: pipelineOf(c), validation, gateVersion: gate, expertStatus: opts.expert?.[`${run}:${c.candidateKey}`] ?? "unreviewed", releaseTier: "candidate", renderVerified: Boolean(opts.rendered?.has(`${run}:${c.candidateKey}`)), screenVerified: Boolean(opts.screened?.has(`${run}:${c.candidateKey}`)), reviewEnvReady: false,
       selectedForSample: sampled, legacyReserve: passedOwn && Boolean(c.reserve), family: familyOf(c.apSubjectCode), itemFamilyId: "", canonicalKey: null, duplicateOf: null, duplicateReason: null, contentKey: contentKeyOf(c), sharedWith: [], stockCell: stockCell(c),
       history: [...(opts.history?.[opts.historyKey ? opts.historyKey(c) : `${run}:${c.candidateKey}`] ?? []), { run, gateVersion: gate, outcome: passedOwn ? "passed" : "rejected", reasons: c.rejectionReason }] });
   }
@@ -77,7 +79,8 @@ export function buildStock(runs: Record<string, RawCand[]>, opts: BuildOpts = {}
   for (const it of items) if (it.validation === "exact_duplicate") it.itemFamilyId = items.find((c) => c.stockKey === it.duplicateOf)?.itemFamilyId ?? "";
   // AB 재고는 BC 에도 쓸 수 있다(공통 content_key). 한 번만 센다(canonical 소유 과목).
   for (const it of items) if ((it.validation === "auto_passed" || it.validation === "needs_revalidation") && it.apSubjectCode === "ap_calculus_ab" && !it.sharedWith.includes("ap_calculus_bc")) it.sharedWith.push("ap_calculus_bc");
-  for (const it of items) it.publishable = it.validation === "auto_passed" && (it.expertStatus === "approved" || it.expertStatus === "waived");
+  // 검수 환경 게시 가능 = 최신 게이트 통과 + 그래프 렌더링 + 학생 화면 검증. 전문가 승인은 게시 후 상태이며 게이트가 아니다.
+  for (const it of items) it.reviewEnvReady = it.validation === "auto_passed" && it.renderVerified && it.screenVerified;
   return items;
 }
 
@@ -93,15 +96,15 @@ export function cellCounts(items: StockItem[], includeShared = true): CellRow[] 
   }
   return [...m.values()].map(({ famCount, ...r }) => ({ ...r, families: famCount.size, effective: [...famCount.values()].reduce((a, n) => a + Math.min(n, VARIANT_CAP), 0) }));
 }
-export type Summary = { subject: string; kind: string; totalRows: number; rejected: number; exactDuplicates: number; itemFamilies: number; needsRevalidation: number; autoPassed: number; expertPending: number; expertApproved: number; publishable: number; selectedForSample: number; legacyReserve: number; sharedIn: number };
+export type Summary = { subject: string; kind: string; totalRows: number; rejected: number; exactDuplicates: number; itemFamilies: number; needsRevalidation: number; autoPassed: number; reviewEnvReady: number; inReviewEnv: number; expertApproved: number; issuesReported: number; selectedForSample: number; legacyReserve: number; sharedIn: number };
 /** 과목 × 종류별 집계. AB→BC 공유 문항은 소유 과목(AB)에서 한 번만 센다(sharedIn 은 BC 가 쓸 수 있는 AB 문항 수, 합산 제외). */
 export function summarize(items: StockItem[]): Summary[] {
-  const rows = new Map<string, Summary>(); const get = (s: string, k: string) => { const key = `${s}|${k}`; let r = rows.get(key); if (!r) { r = { subject: s, kind: k, totalRows: 0, rejected: 0, exactDuplicates: 0, itemFamilies: 0, needsRevalidation: 0, autoPassed: 0, expertPending: 0, expertApproved: 0, publishable: 0, selectedForSample: 0, legacyReserve: 0, sharedIn: 0 }; rows.set(key, r); } return r; };
+  const rows = new Map<string, Summary>(); const get = (s: string, k: string) => { const key = `${s}|${k}`; let r = rows.get(key); if (!r) { r = { subject: s, kind: k, totalRows: 0, rejected: 0, exactDuplicates: 0, itemFamilies: 0, needsRevalidation: 0, autoPassed: 0, reviewEnvReady: 0, inReviewEnv: 0, expertApproved: 0, issuesReported: 0, selectedForSample: 0, legacyReserve: 0, sharedIn: 0 }; rows.set(key, r); } return r; };
   const fams = new Map<string, Set<string>>();
   for (const it of items) {
     const r = get(it.apSubjectCode, it.kind); r.totalRows += 1;
     if (it.validation === "rejected") r.rejected += 1; else if (it.validation === "exact_duplicate") r.exactDuplicates += 1;
-    else { if (it.validation === "needs_revalidation") r.needsRevalidation += 1; else { r.autoPassed += 1; if (it.expertStatus === "pending") r.expertPending += 1; if (it.expertStatus === "approved") r.expertApproved += 1; if (it.publishable) r.publishable += 1; }
+    else { if (it.validation === "needs_revalidation") r.needsRevalidation += 1; else { r.autoPassed += 1; if (it.expertStatus === "approved") r.expertApproved += 1; if (it.expertStatus === "issues_reported") r.issuesReported += 1; if (it.reviewEnvReady) r.reviewEnvReady += 1; if (it.releaseTier !== "candidate") r.inReviewEnv += 1; }
       const k = `${it.apSubjectCode}|${it.kind}`; (fams.get(k) ?? fams.set(k, new Set()).get(k)!).add(it.itemFamilyId);
       if (it.selectedForSample) r.selectedForSample += 1; if (it.legacyReserve) r.legacyReserve += 1;
       for (const s of it.sharedWith) get(s, it.kind).sharedIn += 1; }

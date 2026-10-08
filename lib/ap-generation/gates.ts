@@ -8,8 +8,9 @@ export type McPack = {
   explanation_en?: string;
 };
 export type Row = { row_id: string; points: number; criterion: string; required_elements: string[]; requires_row_id?: string | null; requires_both?: boolean; requires_numbers?: boolean; units_row?: boolean };
-export type FrqPart = { label: string; prompt: string; points: number; response_mode: string; skill_codes: string[]; model_answer: string; rubric_rows: Row[] };
-export type FrqPack = { archetype: string; template: string; topic: string; skill: string; calculator: string; title: string; stimulus: { kind: string; description: string; data: unknown }; parts: FrqPart[]; total_points: number; est_minutes: number; facts: string[] };
+/** 파트마다 평가 스킬(skill_codes)·토픽(topic_codes)·루브릭 행을 가진다. 번들의 대표 스킬(representative_skill)은 라벨일 뿐 파트 스킬과 별개다. */
+export type FrqPart = { label: string; prompt: string; points: number; response_mode: string; skill_codes: string[]; topic_codes?: string[]; model_answer: string; rubric_rows: Row[] };
+export type FrqPack = { archetype: string; template: string; topic: string; skill: string; representative_skill?: string; extra_topics?: string[]; calculator: string; title: string; stimulus: { kind: string; description: string; data: unknown }; parts: FrqPart[]; total_points: number; est_minutes: number; facts: string[] };
 
 /** MC 에서 평가되지 않는 공식 스킬(과목별). */
 export const NOT_ASSESSED_MC: Record<string, string[]> = {
@@ -33,7 +34,7 @@ export function gateMc(subject: string, p: McPack): string[] {
   if (new Set(texts).size !== texts.length) r.push("duplicate_options");
   p.options.forEach((o, i) => {
     if (i !== p.key_index && (!o.why || o.why.trim().length < 15)) r.push("distractor_without_misconception");
-    if (NARRATED.test(o.text)) r.push("narrated_error_in_option");
+    if (/^ap_calculus/.test(subject) && NARRATED.test(o.text)) r.push("narrated_error_in_option"); // 수학 과목의 값·식 선택지 규칙(Micro 는 설명형 선택지가 공식 형식)
   });
   // 값 유일성(코드가 계산한 값): 오답 값이 정답 값과 같으면 복수 정답
   const kv = p.options[p.key_index].value;
@@ -48,8 +49,10 @@ export function gateMc(subject: string, p: McPack): string[] {
   if ((NOT_ASSESSED_MC[subject] ?? []).includes(p.skill)) r.push("skill_not_assessed_in_mc");
   if (!(p.est_seconds >= 30 && p.est_seconds <= 150)) r.push("est_seconds_out_of_range");
   if (p.stem.split(/\s+/).length > 120) r.push("stem_too_long");
-  if (p.stem.split("$").length % 2 === 0) r.push("unbalanced_math_delimiters");
-  if (p.options.some((o) => o.text.split("$").length % 2 === 0)) r.push("unbalanced_math_delimiters");
+  if (/^ap_calculus/.test(subject)) { // 달러 기호가 통화인 과목(Micro)에는 적용하지 않는다
+    if (p.stem.split("$").length % 2 === 0) r.push("unbalanced_math_delimiters");
+    if (p.options.some((o) => o.text.split("$").length % 2 === 0)) r.push("unbalanced_math_delimiters");
+  }
   if (p.explanation_en !== undefined) {
     const e = p.explanation_en;
     if (e.trim().length < 80) r.push("explanation_too_short");
@@ -76,7 +79,8 @@ export function wordingPreserves(baseStem: string, polished: string): string[] {
   return [...new Set(r)];
 }
 
-export function gateFrq(subject: string, p: FrqPack, skills: Set<string>): string[] {
+export type FrqGateOpts = { requirePartTopics?: boolean; topics?: Set<string> };
+export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: FrqGateOpts = {}): string[] {
   const r: string[] = [];
   if (!p.parts.length) return ["no_parts"];
   let total = 0;
@@ -89,6 +93,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>): strin
     if (sum !== pt.points) r.push(`part_${pt.label}_rows_sum_${sum}_vs_${pt.points}`);
     for (const s of pt.skill_codes) if (!skills.has(s)) r.push(`part_${pt.label}_unknown_skill_${s}`);
     if (!pt.skill_codes.length) r.push(`part_${pt.label}_no_skill`);
+    if (opts.requirePartTopics) { if (!pt.topic_codes?.length) r.push(`part_${pt.label}_no_topic`); else for (const t of pt.topic_codes) if (opts.topics && !opts.topics.has(t)) r.push(`part_${pt.label}_unknown_topic_${t}`); }
     if (!pt.model_answer.trim()) r.push(`part_${pt.label}_no_model_answer`);
     for (const x of pt.rubric_rows) {
       if (x.requires_row_id && !allRows.has(x.requires_row_id)) r.push(`part_${pt.label}_bad_requires_${x.requires_row_id}`);
@@ -98,10 +103,12 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>): strin
     // 수치 서술 파트에는 정답 행이 있어야 한다
     if (pt.response_mode === "calculate" && !/do not evaluate/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /answer|approximation|value|expression|equation|speed|vector|terms|slope|distance|derivative/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
     // 정당화 파트는 조건/이유 행이 있어야 한다
-    if (pt.response_mode === "explain" && pt.skill_codes.some((s) => s.startsWith("3.")) && !pt.rubric_rows.some((x) => /reason|justif|condition|continuous|compare|consider|baseline|differ|support|classif|sign change|changes sign/i.test(x.criterion))) r.push(`part_${pt.label}_justification_without_reason_row`);
+    if (pt.response_mode === "explain" && pt.skill_codes.some((s) => s.startsWith("3.")) && /justify|give a reason|explain why|reason for/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /reason|justif|condition|continuous|compare|consider|baseline|differ|support|classif|sign change|changes sign/i.test(x.criterion))) r.push(`part_${pt.label}_justification_without_reason_row`);
   }
   if (total !== p.total_points) r.push(`total_points_${total}_vs_${p.total_points}`);
-  if (p.est_minutes > 20) r.push("est_minutes_too_long");
+  // 번들 대표 스킬은 어떤 파트의 평가 스킬이어야 하지만, 모든 파트가 같을 필요는 없다(공식 FRQ 는 파트별 스킬이 다르다).
+  if (p.representative_skill && !p.parts.some((x) => x.skill_codes.includes(p.representative_skill!))) r.push("representative_skill_not_assessed_by_any_part");
+  if (p.est_minutes > (subject === "ap_biology" ? 28 : subject === "ap_microeconomics" ? 32 : 20)) r.push("est_minutes_too_long");
   if (!(p.stimulus.kind && p.stimulus.description)) r.push("missing_stimulus");
   return [...new Set(r)];
 }
@@ -123,7 +130,7 @@ export function gateDuplicate(p: McPack | FrqPack, accepted: (McPack | FrqPack)[
 /** 공식 샘플 분석에서 얻은 참조 패턴(reference-item-analysis.md): 부하·시간·구조 범위. */
 export const REFERENCE_PROFILE = {
   mc: { estSeconds: [45, 130], stemWords: [3, 100], options: 4, minDistinctMisconceptions: 3 },
-  frq9: { points: 9, parts: [3, 6], rowsPerPart: [1, 5], minutes: [12, 18] }, // 공식: 예) 2026 Q3 는 1/1/2/5점 4파트
+  frq9: { points: 9, parts: [3, 6], rowsPerPart: [1, 5], minutes: [12, 18] }, // Calculus: 섹션 90분/54점 = 문항당 약 15분(점당 1.67분). 공식 예) 2026 Calc Q3 는 1/1/2/5점 4파트
   frq4: { points: 4, parts: [4, 4], rowsPerPart: [1, 1], minutes: [6, 10] },
 };
 export function calibrateMc(subject: string, p: McPack): string[] {
@@ -137,9 +144,13 @@ export function calibrateMc(subject: string, p: McPack): string[] {
   if (whys.size < Math.min(P.minDistinctMisconceptions, p.options.length - 1)) r.push("reference_distractor_misconceptions_not_distinct");
   return r;
 }
-export function calibrateFrq(p: FrqPack): string[] {
+/** Biology: 섹션 II 90분 / 34점(긴 9×2 + 짧은 4×4) = 점당 약 2.65분 → 9점 약 24분, 4점 약 10.6분(점수 비례 추정; 공식은 총 시간만 공시). 짧은 문항은 정확히 4개의 1점 파트. */
+export const BIO_PROFILE = { long: { points: 9, parts: [3, 6] as [number, number], rowsPerPart: [1, 5] as [number, number], minutes: [18, 26] as [number, number] }, short: { points: 4, parts: [4, 4] as [number, number], rowsPerPart: [1, 1] as [number, number], minutes: [7, 13] as [number, number] } };
+/** Microeconomics: 섹션 60분(읽기 10분 포함) 중 쓰기 50분 / 20점(긴 10 + 짧은 5×2) = 점당 2.5분 → 10점 약 25분, 5점 약 12.5분. */
+export const MICRO_PROFILE = { long: { points: 10, parts: [4, 8] as [number, number], rowsPerPart: [1, 5] as [number, number], minutes: [20, 30] as [number, number] }, short: { points: 5, parts: [3, 6] as [number, number], rowsPerPart: [1, 3] as [number, number], minutes: [10, 16] as [number, number] } };
+export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const r: string[] = [];
-  const prof = p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
+  const prof = subject === "ap_microeconomics" ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
   if (p.total_points !== prof.points) r.push("reference_points_mismatch");
   if (p.parts.length < prof.parts[0] || p.parts.length > prof.parts[1]) r.push("reference_part_count_out_of_range");
   if (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1]) r.push("reference_time_out_of_range");

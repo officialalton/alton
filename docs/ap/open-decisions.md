@@ -52,3 +52,11 @@
 | 32 | 과목별 가이드 체계 | calc-core + AB + BC 델타 구조 확정, Micro·Bio는 같은 형식(`lib/ap-generation/subjects/<과목>.ts` + `docs/ap/generation-guides/<과목>.md`)으로 추가 | 문서·설정 |
 | 33 | 공유 토픽 문항의 AB·BC 동시 사용 | 한 과목 세트 안 중복 0, 과목 간 공유는 허용(태그) — 오너 확정 필요 | 재고 계산 |
 | 34 | 자동 보정으로 보장할 수 없는 것 | 실제 시험 난이도 보정(학생 데이터 필요), 그림 렌더링의 시각 정확성, LLM 검토기의 오탐·미탐, 공식 비공개 문항과의 유사성, FRQ AI 채점 정확도 | 출시 전 소규모 학생 파일럿 |
+
+
+## 35~38. 게시 후 전문가 검수 모델 (2026-10-08 오너 확정)
+- 35. 전문가 승인은 **게시 전 게이트가 아니다**. 게시된 문제를 모의고사 검수 방식·기존 오류 신고 흐름(마이그레이션 20261940000000/360)으로 사후 검수한다.
+- 36. 검수 환경 게시 조건 `review_env_ready` = 최신 자동 게이트 통과 AND 그래프 렌더링 검증 AND 학생 화면 검증. 렌더·화면 게이트는 학생이 보기 전 필수.
+- 37. `expert_status`: unreviewed / in_review / approved / issues_reported. 별도 `release_tier`: candidate / review_env / launch. launch는 검수 기간 후 미해결 신고 0건 또는 승인 서명(`ap_launch_ready_v`).
+- 38. 흐름: 후보 → 문제(검수 환경) → 신고 → 새 버전으로 수정 → launch. 상세 `publication-flow.md`. 구(767행) 적재는 삭제하지 않고 `is_current=false`로 표시(마이그레이션 394, 현재 로컬만 적용).
+- 39. Bio 파트별 스킬·토픽·루브릭 지원, 공식 점수·시간 근거 `bio-frq-rules.md`. 비교 실험은 단계별 예산 `experiment-plan.md`(Bio는 AB 결과 후).

@@ -9,12 +9,13 @@ describe("stock: separate validation / expert / selection, exact vs variants", (
     const s = buildStock({ run1: [mc("a", "ap_calculus_ab", "Old gate item alpha one", ["$1$", "$2$"]), mc("b", "ap_calculus_ab", "Old gate reserve bravo", ["$3$", "$4$"], { reserve: true })], run2: [mc("c", "ap_calculus_ab", "Latest gate item charlie unique words", ["$5$", "$6$"], { archetype: "x" })] });
     const by = Object.fromEntries(s.map((x) => [x.candidateKey, x]));
     expect(by.a.validation).toBe("needs_revalidation"); expect(by.b.validation).toBe("needs_revalidation"); expect(by.b.legacyReserve).toBe(true); expect(by.c.validation).toBe("auto_passed"); expect(by.c.gateVersion).toBe(LATEST_GATE);
-    expect(s.every((x) => !x.publishable)).toBe(true);                       // 전문가 승인 전에는 공개 가능 0
-    expect(by.c.expertStatus).toBe("pending"); expect(by.a.expertStatus).toBe("none"); expect(by.a.selectedForSample).toBe(true); expect(by.b.selectedForSample).toBe(false);
+    expect(s.every((x) => !x.reviewEnvReady)).toBe(true);                    // 렌더링·학생 화면 검증 전에는 검수 환경 게시 불가
+    expect(by.c.expertStatus).toBe("unreviewed"); expect(by.a.selectedForSample).toBe(true); expect(by.b.selectedForSample).toBe(false);
   });
-  it("publishable = latest-gate auto_passed AND expert approved/waived; history is preserved per item", () => {
-    const s = buildStock({ run2: [mc("c", "ap_calculus_ab", "Item charlie", ["$5$", "$6$"], { archetype: "x" })] }, { expert: { "run2:c": "approved" }, history: { "run2:c": [{ run: "run2a", gateVersion: "v2-interim", outcome: "rejected", reasons: "criterion_failed_x" }] } });
-    expect(s[0].publishable).toBe(true); expect(s[0].history.map((h) => h.run)).toEqual(["run2a", "run2"]); expect(s[0].history[0].outcome).toBe("rejected");
+  it("review-env ready = latest gate + render + screen verified (expert approval is NOT a gate); history is preserved per item", () => {
+    const s = buildStock({ run2: [mc("c", "ap_calculus_ab", "Item charlie", ["$5$", "$6$"], { archetype: "x" })] }, { rendered: new Set(["run2:c"]), screened: new Set(["run2:c"]), history: { "run2:c": [{ run: "run2a", gateVersion: "v2-interim", outcome: "rejected", reasons: "criterion_failed_x" }] } });
+    expect(s[0].reviewEnvReady).toBe(true); expect(s[0].expertStatus).toBe("unreviewed");
+    expect(buildStock({ run2: [mc("c", "ap_calculus_ab", "Item charlie", ["$5$", "$6$"], { archetype: "x" })] }, { rendered: new Set(["run2:c"]) })[0].reviewEnvReady).toBe(false); expect(s[0].history.map((h) => h.run)).toEqual(["run2a", "run2"]); expect(s[0].history[0].outcome).toBe("rejected");
   });
   it("exact duplicates link to a canonical and leave the count; number/wording variants stay and form one item family (not rejected)", () => {
     const base = "A particle moves along the x axis with velocity given by a quadratic function of time and we ask for the acceleration at the stated instant in seconds";
@@ -48,5 +49,16 @@ describe("stock: separate validation / expert / selection, exact vs variants", (
     const t = topicTargets([{ code: "1", topics: [{ code: "1.1", scope: "both" }, { code: "1.2", scope: "both" }] }, { code: "2", topics: [{ code: "2.1", scope: "both" }, { code: "2.2", scope: "bc_only" }] }], { "1": [10, 20], "2": [30, 50] }, 100, "ap_calculus_ab");
     expect(t["1.1"] + t["1.2"]).toBe(27); expect(t["2.1"]).toBe(73); expect(t["2.2"]).toBeUndefined();
     expect(contentSignature(mc("a", "x", "s", ["$1$", "$2$"]))).toBe(contentSignature(mc("b", "x", "s", ["$2$", "$1$"])));
+  });
+});
+
+import { compareSummaries } from "./stock-consistency";
+describe("file vs DB consistency check", () => {
+  it("reports mismatches per subject/kind and accepts identical aggregates", () => {
+    const s = buildStock({ run2: [mc("a", "ap_calculus_ab", "unique alpha words one two three", ["$1$"], { archetype: "x" }), mc("r", "ap_calculus_ab", "rejected bravo", ["$2$"], { reviewState: "rejected", rejectionReason: "x" })] });
+    const f = summarize(s); const db = f.map((r) => ({ subject: r.subject, kind: r.kind, total_rows: r.totalRows, rejected: r.rejected, exact_duplicates: r.exactDuplicates, needs_revalidation: r.needsRevalidation, auto_passed: r.autoPassed, unique_items: r.autoPassed + r.needsRevalidation, item_families: r.itemFamilies, selected_for_sample: r.selectedForSample, legacy_reserve: r.legacyReserve }));
+    expect(compareSummaries(f, db)).toEqual([]);
+    expect(compareSummaries(f, [{ ...db[0], auto_passed: db[0].auto_passed + 1 }]).join()).toMatch(/auto_passed/);
+    expect(compareSummaries(f, []).join()).toMatch(/DB 에/);
   });
 });
