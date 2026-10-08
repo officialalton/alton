@@ -17,7 +17,7 @@ def motion_calc(rng):
     key = Opt(fmt(key_v, 3), True, "Differentiates v(t) with the product rule and chain rule.", key_v)
     ds = [Opt(fmt(miss, 3), False, "Product rule with the second term missing.", miss), Opt(fmt(vval, 3), False, "Evaluates the velocity instead of the acceleration.", vval),
           Opt(fmt(wrong2, 3), False, "Keeps only the t * d/dt[ln] term.", wrong2), Opt(fmt(-key_v, 3), False, "Sign error.", -key_v)]
-    return pack("motion_calc", "4.1", "1.E", "required", stem, key, ds, rng, est=100, facts=[f"a={key_v}"])
+    return pack("motion_calc", "4.2", "1.E", "required", stem, key, ds, rng, est=100, facts=[f"a={key_v}"])
 
 def related_rates(rng):
     kind = rng.choice(["circle", "sphere"]); r0 = rnd(rng, 2, 6); k = rnd(rng, 1, 4)
@@ -37,10 +37,15 @@ def related_rates(rng):
 def linearization(rng):
     s = rng.choice([4, 5, 6, 7, 8, 10]); a = s * s; d = rng.choice([1, 2, 3, -1, -2, -3])
     key_v = s + S(d) / (2 * s)
-    stem = f"Let $f(x)=\\sqrt{{x}}$. Using the line tangent to the graph of $f$ at $x={a}$, what is the approximation of $f({a+d})$?"
-    ds = [(s + S(d) / s, "Forgets the 1/2 in f'(x)=1/(2 sqrt x)."), (s + d, "Uses slope 1."), (s + S(d) / (2 * s * s), "Divides by the square of sqrt x."), (s - S(d) / (2 * s), "Sign error on the change.")]
-    key = Opt(fmt(key_v), True, "f(a) + f'(a)*(x-a).", key_v)
-    return pack("linearization", "4.6", "1.F", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in ds], rng, est=75, facts=[f"approx={key_v}"])
+    stem = f"Let $f(x)=\\sqrt{{x}}$. The line tangent to the graph of $f$ at $x={a}$ is used to approximate $f({a+d})$. Which gives the approximation and correctly describes how it compares with the actual value of $f({a+d})$?"
+    wrong1 = s + S(d) / s; wrong2 = s + d
+    # f 는 위로 오목이 아닌 아래로 오목(f''<0) → 접선 근사는 과대 추정
+    texts = [(f"{ftxt(key_v)}; an overestimate", True, "Tangent value; f is concave down so the tangent line lies above the graph."),
+             (f"{ftxt(key_v)}; an underestimate", False, "Correct value but misreads the concavity of the square root."),
+             (f"{ftxt(wrong1)}; an overestimate", False, "Forgets the 1/2 in f'(x)=1/(2 sqrt x), although the direction is right."),
+             (f"{ftxt(wrong2)}; an underestimate", False, "Uses slope 1 and misjudges the direction of the error.")]
+    opts = [Opt("$" + t_ + "$" if False else t_.replace(t_.split(";")[0], "$" + t_.split(";")[0] + "$"), k, w, None) for t_, k, w in texts]
+    return pack_fixed("linearization", "4.6", "1.F", "not_allowed", stem, opts, rng, est=85, facts=[f"approx={key_v}", "overestimate"])
 
 def lhopital(rng):
     p = rnd(rng, 2, 7); q = rnd(rng, 2, 7)

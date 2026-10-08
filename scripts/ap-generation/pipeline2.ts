@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
-import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
+import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { loadEnvLocal } from "../keywords/db";
 import { gateGuideFrq, gateGuideMc } from "../../lib/ap-generation/guide-gates";
 import { calcAbGuide, guideReviewRules, guideWordingRules } from "../../lib/ap-generation/subjects/calc-ab";
@@ -41,7 +41,7 @@ const topicTitle = new Map(curriculum.units.flatMap((u) => u.topics.map((t) => [
 const unitOf = new Map(curriculum.units.flatMap((u) => u.topics.map((t) => [t.code, u.code] as const)));
 
 function py(args: string[]): unknown {
-  const r = spawnSync(PY, ["-I", "registry.py", ...args], { cwd: ARCH, encoding: "utf-8", maxBuffer: 64 * 1024 * 1024, timeout: 120000 });
+  const r = spawnSync(PY, ["-B", "registry.py", ...args], { cwd: ARCH, encoding: "utf-8", maxBuffer: 64 * 1024 * 1024, timeout: 120000 });
   if (r.status !== 0) throw new Error(`python failed: ${(r.stderr ?? "").slice(-300)}`);
   return JSON.parse(r.stdout);
 }
@@ -84,10 +84,9 @@ function genPacks() {
 // ---------- LLM 문장 다듬기 ----------
 const WORD_SYS = `You are a careful AP Calculus item writer. A CODE generator has already computed and verified every number, table value, option and misconception. Your job is only the WORDING:
 - polish the stem so it reads like a clean AP exam stem (US English). You MUST keep every number, symbol and every $...$ math block of the base stem exactly as given; you may rephrase the plain words and may add a short realistic context ONLY if no numbers/quantities change. Never mention a table that the base stem does not mention. Never reveal the answer.
-- write explanation_en: 3-6 sentences explaining why the correct answer is right and, for every wrong option, the specific misconception named in its rationale. Refer to options by their content (the math shown), never by letter or position.
-- never add new numbers other than those already present or trivially derived in the explanation of the key.
+- do NOT write an explanation (the code writes it); submit only the stem.
 For free-response bundles you rewrite part prompts in the same way (keep every number and $...$ block) and add a one-sentence design_note.`;
-const mcWordTool = { name: "submit_wording", description: "Submit polished stem and explanation.", input_schema: { type: "object", properties: { stem: { type: "string" }, explanation_en: { type: "string" } }, required: ["stem", "explanation_en"] } };
+const mcWordTool = { name: "submit_wording", description: "Submit polished stem and explanation.", input_schema: { type: "object", properties: { stem: { type: "string" }, explanation_en: { type: "string" } }, required: ["stem"] } };
 const frqWordTool = { name: "submit_frq_wording", description: "Submit polished prompts.", input_schema: { type: "object", properties: { prompts: { type: "object", additionalProperties: { type: "string" } }, design_note: { type: "string" } }, required: ["prompts", "design_note"] } };
 function wordReq(c: Cell, pack: Json, id: string): BatchReq {
   const body = c.kind === "mc"
@@ -105,7 +104,12 @@ async function genStage() {
 }
 
 // ---------- 후보 조립 ----------
-const fallbackExplanation = (p: Json) => { const o = p.options as { text: string; why: string }[]; const k = p.key_index as number; return `The correct choice is ${o[k].text.replace(/\$/g, "")}: ${o[k].why} ` + o.filter((_, i) => i !== k).map((x) => `${x.text.replace(/\$/g, "")} is wrong because it ${x.why.charAt(0).toLowerCase()}${x.why.slice(1)}`).join(" "); };
+const plainTxt = (t: string) => t.replace(/\$/g, "");
+/** 해설은 코드가 만든다(정답 근거 + 선택지별 오개념). LLM 은 stem 문장만 다듬는다 — 해설 속 파생 수치 환각을 막기 위해. */
+const structuredExplanation = (p: Json) => {
+  const o = p.options as { text: string; why: string }[]; const k = p.key_index as number;
+  return `The correct answer is ${plainTxt(o[k].text)}. ${o[k].why}\n` + o.filter((_, i) => i !== k).map((x) => `${plainTxt(x.text)} is incorrect: ${x.why}`).join("\n");
+};
 function buildCands(): Cand[] {
   const packs = genPacks(); const gen = resultMap("gen"); const out: Cand[] = [];
   for (const c of cells()) packs[c.cellId].forEach((pack, i) => {
@@ -113,8 +117,8 @@ function buildCands(): Cand[] {
     let item: McPack | FrqPack | null = null; let wording: "llm" | "template" = "template";
     if (c.kind === "mc") {
       const mp = { ...(pack as unknown as McPack) } as McPack;
-      let stem = mp.stem; let expl = fallbackExplanation(pack);
-      if (polished && typeof polished.stem === "string" && typeof polished.explanation_en === "string" && wordingPreserves(mp.stem, polished.stem).length === 0 && !/\b(option|choice|answer)s?\s*\(?[A-E]\)?\b|\([A-E]\)/i.test(polished.explanation_en) && polished.explanation_en.length > 120) { stem = polished.stem; expl = polished.explanation_en; wording = "llm"; }
+      let stem = mp.stem; const expl = structuredExplanation(pack);
+      if (polished && typeof polished.stem === "string" && typeof polished.explanation_en === "string" && wordingPreserves(mp.stem, polished.stem).length === 0) { stem = polished.stem; wording = "llm"; }
       item = { ...mp, stem, explanation_en: expl };
     } else {
       const fp = JSON.parse(JSON.stringify(pack)) as FrqPack;
@@ -136,7 +140,7 @@ function checkStage() {
   const out: Record<string, { reasons: string[]; wording: string }> = {};
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
-    const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet), ...calibrateFrq(c.item as FrqPack), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
+    const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet), ...calibrateFrq(c.item as FrqPack), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
     if (!c.polished) reasons.push("wording_missing");
     out[c.key] = { reasons, wording: c.wording };
     void cell;
@@ -185,14 +189,14 @@ function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: st
 
 const REVIEW_SYS = `You are a strict AP content reviewer. NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge the following five acceptance criteria and set instant_reject for the listed conditions:
 (1) scope/skill fit to the given official topic and skill (an item may use prerequisite skills but its dominant demand must be the target topic/skill; no content from later units); (2) key and scoring: the key is the unique defensible answer given the stem and stimulus; FRQ rubric rows are consistent, alternatives valid; (3) stimulus/expression completeness: the stimulus "data" object is the machine-readable specification a figure/table will be rendered from; judge completeness of the DATA and clarity of wording (US English); (4) distractors encode distinct, realistic misconceptions, no length/format giveaway, and the explanation explains each wrong option; (5) exam suitability: time, reading and calculator load typical of the AP exam, no needless arithmetic, calculator designation consistent.
-REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 seconds, four options, a stimulus only when it is needed, options that are values or short parallel expressions, one dominant skill; FRQ 9 points = 4 parts of 1-3 points, rows split into setup/answer/justification/units with explicit conditions for theorems, calculators only where numerical integration/solving is needed. Set matches_reference_pattern false if the item deviates materially.
+REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 seconds, four options, a stimulus only when it is needed, options that are values or short parallel expressions, one dominant skill; FRQ 9 points = 3-6 parts whose point values vary from 1 to 5 (for example 1/1/2/5 or 2/2/3/2), rows split into setup/answer/justification/units with explicit conditions for theorems, calculators only where numerical integration/solving is needed. Set matches_reference_pattern false only for material deviations (not for correct items with unusual but valid wording). Non-calculator items must have exact-form options. Do not fail an item for being generic or for a context that is a standard textbook scenario.
 Agreement of an independent solver is supporting evidence only. Fail when unsure.`;
 const reviewTool = { name: "submit_review", description: "Submit the review.", input_schema: { type: "object", properties: {
   scope_skill: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] }, key_scoring: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] },
   stimulus_expression: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] }, distractor_explanation: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] },
   exam_suitability: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] },
   instant_reject: { type: "array", items: { type: "string", enum: ["wrong_key", "multiple_correct", "missing_condition", "wrong_stimulus", "out_of_scope_knowledge"] } },
-  matches_reference_pattern: { type: "boolean" }, resembles_known_exam_item: { type: "boolean" }, summary: { type: "string" } }, required: ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability", "instant_reject", "matches_reference_pattern", "resembles_known_exam_item", "summary"] } };
+  matches_reference_pattern: { type: "boolean" }, resembles_known_exam_item: { type: "boolean", description: "true ONLY if the item reproduces a specific recognizable released AP item (same numbers, context and wording). Generic textbook forms (product rule from a table, Riemann sums) are NOT a resemblance." }, summary: { type: "string" } }, required: ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability", "instant_reject", "matches_reference_pattern", "resembles_known_exam_item", "summary"] } };
 const diffTool = { name: "submit_difficulty", description: "Submit provisional difficulty.", input_schema: { type: "object", properties: { label: { type: "string", enum: ["basic_learning", "exam_prep", "advanced_supplement"] }, rationale: { type: "string" }, reading_load: { type: "string", enum: ["low", "medium", "high"] }, computation_load: { type: "string", enum: ["low", "medium", "high"] }, reasoning_steps: { type: "integer" }, representation_changes: { type: "integer" }, difficulty_from_unfair_sources: { type: "boolean" }, est_seconds: { type: "integer" } }, required: ["label", "rationale", "reading_load", "computation_load", "reasoning_steps", "representation_changes", "difficulty_from_unfair_sources", "est_seconds"] } };
 const DIFF_SYS = "You tag provisional internal difficulty for AP practice items: basic_learning, exam_prep (target for full mocks) or advanced_supplement. Judge only from concept depth, reasoning steps, representation changes, reading and computation load. Do NOT infer difficulty from any claim of AP score level or from model agreement. Flag difficulty_from_unfair_sources if the item is hard only because of long arithmetic, vagueness, heavy reading or out-of-scope knowledge.";
 const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });

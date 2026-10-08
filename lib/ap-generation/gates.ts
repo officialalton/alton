@@ -61,6 +61,10 @@ export function gateMc(subject: string, p: McPack): string[] {
 }
 
 /** LLM 이 다듬은 문장이 코드가 정한 수치·기호를 바꾸지 않았는지. */
+const DECIMAL3 = /\$-?\d+\.\d{3,}\$/;
+/** 계산기 불가 문항의 선택지는 정확값이어야 한다(소수 근사 금지). */
+export function gateNoCalcExact(p: McPack): string[] { return p.calculator === "not_allowed" && p.options.some((o) => DECIMAL3.test(o.text)) ? ["decimal_options_in_no_calculator_item"] : []; }
+
 export function wordingPreserves(baseStem: string, polished: string): string[] {
   const r: string[] = [];
   const want = new Set(numbers(plain(baseStem)));
@@ -92,7 +96,7 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>): strin
       if (!x.criterion.trim()) r.push(`row_${x.row_id}_no_criterion`);
     }
     // 수치 서술 파트에는 정답 행이 있어야 한다
-    if (pt.response_mode === "calculate" && !pt.rubric_rows.some((x) => /answer|approximation|value|expression/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
+    if (pt.response_mode === "calculate" && !/do not evaluate/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /answer|approximation|value|expression/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
     // 정당화 파트는 조건/이유 행이 있어야 한다
     if (pt.response_mode === "explain" && pt.skill_codes.some((s) => s.startsWith("3.")) && !pt.rubric_rows.some((x) => /reason|justif|condition|continuous|compare|consider|baseline|differ|support/i.test(x.criterion))) r.push(`part_${pt.label}_justification_without_reason_row`);
   }
@@ -118,16 +122,17 @@ export function gateDuplicate(p: McPack | FrqPack, accepted: (McPack | FrqPack)[
 
 /** 공식 샘플 분석에서 얻은 참조 패턴(reference-item-analysis.md): 부하·시간·구조 범위. */
 export const REFERENCE_PROFILE = {
-  mc: { estSeconds: [45, 130], stemWords: [8, 100], options: 4, minDistinctMisconceptions: 3 },
-  frq9: { points: 9, parts: [3, 6], rowsPerPart: [1, 5], minutes: [12, 18] },
+  mc: { estSeconds: [45, 130], stemWords: [3, 100], options: 4, minDistinctMisconceptions: 3 },
+  frq9: { points: 9, parts: [3, 6], rowsPerPart: [1, 5], minutes: [12, 18] }, // 공식: 예) 2026 Q3 는 1/1/2/5점 4파트
   frq4: { points: 4, parts: [4, 4], rowsPerPart: [1, 1], minutes: [6, 10] },
 };
 export function calibrateMc(subject: string, p: McPack): string[] {
   const r: string[] = [];
   const P = REFERENCE_PROFILE.mc;
+  if (false) r.push("");
   if (p.est_seconds < P.estSeconds[0] || p.est_seconds > P.estSeconds[1]) r.push("reference_time_out_of_range");
-  const words = p.stem.split(/\s+/).length;
-  if (words < P.stemWords[0] || words > P.stemWords[1]) r.push("reference_stem_length_out_of_range");
+  const words = p.stem.replace(/\$[^$]*\$/g, " ").split(/\s+/).filter(Boolean).length;
+  if (words < 3 || words > P.stemWords[1]) r.push("reference_stem_length_out_of_range");
   const whys = new Set(p.options.filter((_, i) => i !== p.key_index).map((o) => norm(o.why ?? "")));
   if (whys.size < Math.min(P.minDistinctMisconceptions, p.options.length - 1)) r.push("reference_distractor_misconceptions_not_distinct");
   return r;

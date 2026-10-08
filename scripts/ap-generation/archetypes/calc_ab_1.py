@@ -14,10 +14,10 @@ def lim_table(rng):
     stem = f"Let $f$ be defined by $f(x)=\\dfrac{{\\sqrt{{x+{b}}}-{c}}}{{x-{a}}}$ for $x\\ne {a}$, and $f({a})={k}$. The table gives values of $f$ near $x={a}$. What is $\\lim_{{x\\to {a}}} f(x)$?" if b >= 0 else f"Let $f$ be defined by $f(x)=\\dfrac{{\\sqrt{{x-{-b}}}-{c}}}{{x-{a}}}$ for $x\\ne {a}$, and $f({a})={k}$. The table gives values of $f$ near $x={a}$. What is $\\lim_{{x\\to {a}}} f(x)$?"
     key = Opt(fmt(L), True, "Limit read from the values the function approaches (rationalizing gives 1/(2c)).", L)
     ds = [Opt(fmt(k), False, "Treats the function value f(a) as the limit.", k),
-          Opt("The limit does not exist", False, "Believes a mismatch between f(a) and the nearby values means the limit fails.", None),
+          Opt("The limit does not exist", False, "Believes a mismatch between f(a) and the nearby values means the limit fails to exist.", None),
           Opt(fmt(2 * L), False, "Drops the 1/2 from the derivative of the square root.", 2 * L),
-          Opt(fmt(0), False, "Reads the 0/0 form as 0.", 0)]
-    return pack("lim_table", "1.3", "2.B", "not_allowed", stem, key, ds, rng,
+          Opt(fmt(0), False, "Reads the 0/0 form as the value 0.", 0)]
+    return pack("lim_table", "1.4", "2.B", "not_allowed", stem, key, ds, rng,
                 stimulus=table_stimulus("Values of f near x=%d" % a, "x", rows, "f(x)"), est=75,
                 facts=[f"limit={L}", f"f(a)={k}"])
 
@@ -29,7 +29,7 @@ def cont_piece(rng):
     why = ["Adds instead of subtracts the constant when matching the two pieces.", "Forgets the +1 in the left piece.",
            "Matches the derivatives of the pieces instead of their values.", "Moves the +1 to the wrong side."]
     key = Opt(fmt(kk), True, "Sets the left-hand limit equal to the value from the right piece.", kk)
-    return pack("cont_piece", "1.11", "3.D", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in zip(alt, why)], rng, est=80, facts=[f"k={kk}"])
+    return pack("cont_piece", "1.11", "1.E", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in zip(alt, why)], rng, est=80, facts=[f"k={kk}"])
 
 def ivt(rng):
     a = rnd(rng, -4, 2); b = a + rnd(rng, 5, 9)
@@ -42,10 +42,10 @@ def ivt(rng):
     kk = sp.Rational(mid) if mid.q == 1 else mid
     beyond_hi = max(f0, f4) + rnd(rng, 1, 3); beyond_lo = min(f0, f4) - rnd(rng, 1, 3)
     key = Opt(fmt(kk), True, "Lies strictly between f(0) and f(4), so IVT applies on the open interval.", kk)
-    ds = [Opt(fmt(f0), False, "An endpoint value is not guaranteed at an interior point.", f0),
-          Opt(fmt(beyond_hi), False, "Outside the interval between f(0) and f(4).", beyond_hi),
-          Opt(fmt(beyond_lo), False, "Outside the interval between f(0) and f(4).", beyond_lo),
-          Opt(fmt(f4), False, "An endpoint value is not guaranteed at an interior point.", f4)]
+    ds = [Opt(fmt(f0), False, "Takes the left endpoint value f(0); an endpoint value is not guaranteed at an interior point.", f0),
+          Opt(fmt(beyond_hi), False, "Chooses a value above both endpoint values, outside the interval IVT covers.", beyond_hi),
+          Opt(fmt(beyond_lo), False, "Chooses a value below both endpoint values, outside the interval IVT covers.", beyond_lo),
+          Opt(fmt(f4), False, "Takes the right endpoint value f(4); an endpoint value is not guaranteed at an interior point.", f4)]
     return pack("ivt", "1.15", "3.D", "not_allowed", stem, key, ds, rng, est=60, facts=[f"between {f0} and {f4}"])
 
 def lim_alg(rng):
@@ -179,5 +179,5 @@ def implicit_slope(rng):
     stem = f"A curve is defined by $x^2+{p}xy+{q}y^2={C}$. What is $\\dfrac{{dy}}{{dx}}$ at the point $({x0},{y0})$?"
     key = Opt(fmt(s), True, "Implicit differentiation with the product rule on xy and the chain rule on y^2.", s)
     ds = [Opt(fmt(w1), False, "Differentiates xy as y, missing the x*dy/dx term.", w1), Opt(fmt(w2), False, "Differentiates y^2 as 2y without the dy/dx factor.", w2),
-          Opt(fmt(w3), False, "Sign error when solving for dy/dx.", w3)]
-    return pack("implicit_slope", "3.2", "1.E", "not_allowed", stem, key, ds + [Opt(fmt(S(Fx) / Fy * 2), False, "Doubles the slope after solving.", S(Fx) / Fy * 2)], rng, est=100, facts=[f"slope={s}"])
+          Opt(fmt(w3), False, "Makes a sign error when solving for dy/dx.", w3)]
+    return pack("implicit_slope", "3.2", "1.E", "not_allowed", stem, key, ds + [Opt(fmt(S(Fx) / Fy * 2), False, "Doubles the slope after solving for dy/dx.", S(Fx) / Fy * 2)], rng, est=100, facts=[f"slope={s}"])

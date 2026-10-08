@@ -124,4 +124,4 @@ def accum_context_calc(rng):
     stem = f"Water flows into a tank at the rate $R(t)=12+6\\sin\\left(\\dfrac{{t}}{{2}}\\right)$ gallons per minute for $0\\le t\\le {T}$ minutes. At $t=0$ the tank contains ${A}$ gallons. How many gallons are in the tank at $t={T}$?"
     key = Opt("$%.2f$" % (A + ch), True, "Initial amount plus the integral of the rate.", A + ch)
     alt = [(ch, "Forgets the initial amount."), (A + R(T), "Adds the rate at t=T instead of integrating."), (A + R(T) * T, "Multiplies the final rate by the time."), (A + 12 * T, "Ignores the sine term.")]
-    return pack("accum_context_calc", "8.3", "3.D", "required", stem, key, [Opt("$%.2f$" % v, False, w, v) for v, w in alt], rng, est=85, facts=[f"total={A+ch}"])
+    return pack("accum_context_calc", "8.3", "1.D", "required", stem, key, [Opt("$%.2f$" % v, False, w, v) for v, w in alt], rng, est=85, facts=[f"total={A+ch}"])
