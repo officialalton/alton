@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
+import { normalizeReview } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { loadEnvLocal } from "../keywords/db";
 import { createHash } from "node:crypto";
@@ -158,7 +159,7 @@ function checkStage() {
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
     const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology", topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
-    if (!c.polished) reasons.push("wording_missing");
+    if (!c.polished && !process.env.AP_FIXED_WORDING) reasons.push("wording_missing"); // 결함 주입 평가(S1c)는 이미 완성된 문항을 그대로 쓴다
     out[c.key] = { reasons, wording: c.wording };
     void cell;
   }
@@ -185,6 +186,7 @@ async function solveStage() {
   console.log(`solve: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
+const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review2")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
 const numsIn = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
 function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: string } {
@@ -224,8 +226,14 @@ async function reviewStage() {
   console.log(`review: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
+async function reviewRetryStage() { // 불완전·깨진 검토 출력만 한 번 다시 요청한다(같은 프롬프트·같은 후보; 최초 후보 수에는 영향 없음)
+  const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(rev.has(`r-${c.key}`) ? (toolInput(rev.get(`r-${c.key}`) as never) as Json | null) : null).malformed.length > 0);
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
+  console.log(`review-retry: ${reqs.length}건`); if (!reqs.length) return;
+  await runBatch({ dir: DIR, name: "review2", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
+}
 async function difficultyStage() {
-  const rev = resultMap("review"); const cs = alive().filter((c) => rev.has(`r-${c.key}`));
+  const rev = reviewMap(); const cs = alive().filter((c) => rev.has(`r-${c.key}`));
   const reqs = cs.map((c) => mk(`d-${c.key}`, MODELS.difficulty, DIFF_SYS, diffTool, `${ctx(c)}\n\n${JSON.stringify(blind(c))}`, 1500));
   const est = estimate(MODELS.difficulty, reqs.length, 1400, 600);
   console.log(`difficulty: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
@@ -234,15 +242,16 @@ async function difficultyStage() {
 
 type Verdict = { key: string; cellId: string; passed: boolean; reasons: string[]; solver?: Json | null; review?: Json | null; difficulty?: Json | null };
 function decide(): Verdict[] {
-  const ch = checks(); const rev = resultMap("review"); const dif = resultMap("difficulty");
+  const ch = checks(); const rev = reviewMap(); const dif = resultMap("difficulty");
   return buildCands().map((c) => {
     const reasons = [...(ch[c.key]?.reasons ?? ["not_checked"])]; const v: Verdict = { key: c.key, cellId: c.cellId, passed: false, reasons };
     if (reasons.length) return v;
     v.solver = solved(c); const ag = solverAgrees(c, v.solver ?? null);
     if (ag.ok === null) { reasons.push("solver_missing"); return v; }
     if (!ag.ok) reasons.push(`solver_disagrees:${ag.note}`);
-    const r = rev.get(`r-${c.key}`); v.review = r ? (toolInput(r as never) as Json | null) : null;
+    const r = rev.get(`r-${c.key}`); const nr = normalizeReview(r ? (toolInput(r as never) as Json | null) : null); v.review = nr.review;
     if (!v.review) { reasons.push("review_missing"); return v; }
+    if (nr.malformed.length) { reasons.push(`review_malformed:${nr.malformed.join(",")}`); return v; }
     for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) if (!(v.review[k] as Json | undefined)?.pass) reasons.push(`criterion_failed_${k}`);
     for (const x of (v.review.instant_reject as string[]) ?? []) reasons.push(`instant_reject_${x}`);
     if (v.review.matches_reference_pattern === false) reasons.push("reference_pattern_mismatch");
@@ -289,6 +298,6 @@ function reportStage() {
 }
 (async () => {
   if (stage === "plan") planStage(); else if (stage === "gen") await genStage(); else if (stage === "check") checkStage(); else if (stage === "solve") await solveStage();
-  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage();
+  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage(); else if (stage === "review-retry") await reviewRetryStage(); else if (stage === "verdicts") { writeFileSync(path.join(DIR, "verdicts.json"), JSON.stringify(decide(), null, 1)); console.log("verdicts.json 기록"); } else if (stage === "manifest") { baseline(); writeManifest(); console.log("manifest 기록: " + path.join(DIR, POLICY.manifestFile)); }
   else console.log("stage: plan | gen | check | solve | review | difficulty | spot | report");
 })().catch((e) => { console.error(e); process.exit(1); });

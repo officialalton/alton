@@ -46,3 +46,9 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - `legacy_reserve`/`used_in_sample` 은 완전 중복·반려 행에서 false 로 정정하고 불변식(체크 제약)을 추가했다. 요약 뷰는 두 값을 `auto_passed`/`needs_revalidation` 행에서만 센다(파일 집계와 같은 정의).
 - 재고·부족분(`ap_refresh_stock_cells`, `ap_stock_shortfall_v`)은 이 두 컬럼을 읽지 않으므로 영향이 없다. 로컬 전후 비교(783행 적재 → 395 적용): 요약 8행 중 변한 값은 AB MC `legacy_reserve` 93→89 한 곳뿐, ap_stock_cells 130칸 전후 동일(차집합 0/0). 로컬에는 부족분 목표(`ap_stock_targets`)가 없어 shortfall 뷰는 0행이므로 같은 비교를 비프로덕션에서 한 번 더 실행해야 한다(`stock-consistency` 후 shortfall 전후 diff).
 - 394 가 추가했던 `review_period_ends_at`, `signoff_by`, `signoff_at` 컬럼은 제거(로컬에서만 존재, 비어 있음). `ap_launch_blockers` 대장 신설. RLS 는 켜고 정책은 두지 않아 서비스 롤만 접근한다.
+
+### 검증 상태 구분(2026-10-08)
+| 항목 | 상태 |
+|---|---|
+| 행 집계 8/8 일치(파일 vs `ap_stock_summary_v`, 로컬 783행) | 완료 |
+| 부족분(shortfall) 검증 | **미완료** — `ap_stock_targets` 가 비어 있으면 `ap_stock_shortfall_v` 는 0행이라 검증이 성립하지 않는다. 목표(과목·토픽·스킬·구조별)는 오너가 합의한 값만 적재한다(임의 적재 금지). 적재 후 395 전후 shortfall diff 를 다시 실행한다. |
