@@ -65,7 +65,7 @@ function writeManifest(extra: Partial<RunManifest> = {}) {
   const commit = spawnSync("git", ["rev-parse", "--short", "HEAD"], { encoding: "utf-8" }).stdout.trim();
   const dirty = spawnSync("git", ["status", "--porcelain", "scripts/ap-generation", "lib/ap-generation"], { encoding: "utf-8" }).stdout.trim() ? "+dirty" : "";
   const m: RunManifest = { run: RUN, subject: SUBJECT, generatorCommit: commit + dirty, gateVersion: "v2-code-first-final-2026-10-08", reviewerPromptHash: sha(REVIEW_SYS + JSON.stringify(reviewTool)), difficultyPromptHash: sha(DIFF_SYS + JSON.stringify(diffTool)),
-    models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
+    arm: process.env.AP_ARM, repairDefinition: process.env.AP_REPAIR_DEF, parserHash: sha(readFileSync(path.resolve(process.cwd(), "lib/ap-generation/review-parse.ts"), "utf-8")), models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
   const issues = manifestIssues(m); if (issues.length) throw new Error(issues.join(", "));
   writeFileSync(path.join(DIR, POLICY.manifestFile), JSON.stringify(m, null, 1));
 }
@@ -106,10 +106,13 @@ const WORD_SYS = `You are a careful AP Calculus item writer. A CODE generator ha
 For free-response bundles you rewrite part prompts in the same way (keep every number and $...$ block) and add a one-sentence design_note.`;
 const mcWordTool = { name: "submit_wording", description: "Submit polished stem and explanation.", input_schema: { type: "object", properties: { stem: { type: "string" }, explanation_en: { type: "string" } }, required: ["stem"] } };
 const frqWordTool = { name: "submit_frq_wording", description: "Submit polished prompts.", input_schema: { type: "object", properties: { prompts: { type: "object", additionalProperties: { type: "string" } }, design_note: { type: "string" } }, required: ["prompts", "design_note"] } };
+const FEEDBACK: Record<string, string> = process.env.AP_FEEDBACK_FILE && existsSync(process.env.AP_FEEDBACK_FILE) ? JSON.parse(readFileSync(process.env.AP_FEEDBACK_FILE, "utf-8")) : {};
 function wordReq(c: Cell, pack: Json, id: string): BatchReq {
-  const body = c.kind === "mc"
+  const fbText = FEEDBACK[id] ? `\n\nREPAIR (single attempt): the previous wording of this item was rejected for the reasons below. Rewrite ONLY the failing wording; every number, symbol, $...$ block, option and key is fixed by code and must stay exactly as given.\nREVIEW FEEDBACK:\n${FEEDBACK[id]}` : "";
+  const body0 = c.kind === "mc"
     ? `BASE STEM:\n${pack.stem}\n\nSTIMULUS (already shown to the student): ${JSON.stringify(pack.stimulus)}\n\nOPTIONS WITH RATIONALE (do not change options):\n${(pack.options as Json[]).map((o, i) => `${i === pack.key_index ? "KEY" : "WRONG"}: ${o.text} — ${o.why}`).join("\n")}\n\nSubmit via submit_wording.`
     : `BUNDLE: ${pack.title}\nSTIMULUS: ${JSON.stringify(pack.stimulus)}\nPART PROMPTS (keep numbers and math blocks):\n${(pack.parts as Json[]).map((p) => `(${p.label}) ${p.prompt}`).join("\n")}\n\nSubmit via submit_frq_wording with prompts keyed by part label.`;
+  const body = body0 + fbText;
   return { custom_id: id, params: { model: MODELS.gen, ...think(MODELS.gen), max_tokens: c.kind === "mc" ? 2500 : 4000, system: [{ type: "text", text: WORD_SYS + "\n" + guideWordingRules(), cache_control: SYS_CACHE }], tools: [c.kind === "mc" ? mcWordTool : frqWordTool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: body }] } };
 }
 async function genStage() {
@@ -159,6 +162,7 @@ function checkStage() {
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
     const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology", topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
+    const extraF = path.join(DIR, "extra_reasons.json"); if (existsSync(extraF)) reasons.push(...((readJson<Record<string, string[]>>(extraF)[c.key]) ?? [])); // 구방식 arm 의 자체 검증 코드 결과
     if (!c.polished && !process.env.AP_FIXED_WORDING) reasons.push("wording_missing"); // 결함 주입 평가(S1c)는 이미 완성된 문항을 그대로 쓴다
     out[c.key] = { reasons, wording: c.wording };
     void cell;

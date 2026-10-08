@@ -32,7 +32,7 @@ export const canRepair = (rs: CandidateRecord[], cellId: string, seed: number) =
 /** 사용 가능한 고유 문항당 총비용 = (생성+검토+수선) / 사용 가능 고유 문항. */
 export const costPerUsableUnique = (totalCostUsd: number, usableUnique: number) => (usableUnique ? totalCostUsd / usableUnique : Infinity);
 
-export type RunManifest = { run: string; subject: string; generatorCommit: string; gateVersion: string; reviewerPromptHash: string; difficultyPromptHash: string; models: Record<string, string>; policy: typeof POLICY; seeds: { first: number[]; note: string }; frozenAt: string };
+export type RunManifest = { run: string; subject: string; generatorCommit: string; gateVersion: string; reviewerPromptHash: string; difficultyPromptHash: string; models: Record<string, string>; policy: typeof POLICY; seeds: { first: number[]; note: string }; frozenAt: string; arm?: string; parserHash?: string; repairDefinition?: string; frozenWith?: string };
 export const manifestIssues = (m: Partial<RunManifest>): string[] => ["run", "subject", "generatorCommit", "gateVersion", "reviewerPromptHash", "difficultyPromptHash", "models", "frozenAt"].filter((k) => !(m as Record<string, unknown>)[k]).map((k) => `manifest missing ${k}`);
 
 /** 비교 실험 보고용 집계. 최초 후보 수·최초 통과·수선 후 통과·사용 가능 고유 1건당 총비용을 분리해 보고한다(수선·재검토 호출은 최초 후보 수에 섞지 않는다).
