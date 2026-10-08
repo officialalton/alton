@@ -119,7 +119,7 @@ function ItemProblem({ item, attemptId }: { item: MockExamAttemptItem; attemptId
         </p>
       )}
       <AnnotationLayer key={item.setItemId} readOnly highlights={annotations?.highlights ?? []}>
-        {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
+        {dedupeStem(item.passage, item.question) && <RwStimulusView question={item.question} passage={dedupeStem(item.passage, item.question)} className="mb-3 text-[13px]" />}
         {item.question && <LearningText text={item.question} className="mb-3 font-semibold text-[13.5px]" />}
       </AnnotationLayer>
       {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-3" /> : null}

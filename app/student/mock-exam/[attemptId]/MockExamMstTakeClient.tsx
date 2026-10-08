@@ -506,7 +506,7 @@ export default function MockExamMstTakeClient({
                     highlights={annotations[item.setItemId]?.highlights ?? []}
                     onChange={(h) => void updateAnnotations(item.setItemId, { highlights: h, eliminated: annotations[item.setItemId]?.eliminated ?? [] })}
                   >
-                    {dedupeStem(item.passage, item.question) && <RwStimulusView passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
+                    {dedupeStem(item.passage, item.question) && <RwStimulusView question={item.question} passage={dedupeStem(item.passage, item.question)} className="mb-4 text-[13.5px]" />}
                     {item.question && <LearningText text={item.question} className="mb-3 text-[14px] font-semibold" />}
                   </AnnotationLayer>
                   {item.figure ? <ProblemFigure spec={item.figure} text={problemText(item.passage, item.question, item.options)} className="mb-4" /> : null}

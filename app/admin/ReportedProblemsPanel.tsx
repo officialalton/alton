@@ -17,6 +17,7 @@ import {
 } from "./problem-error-report-actions";
 import { REPORT_TYPE_LABEL, SOURCE_LABEL, VERDICT_EFFECT, VERDICT_LABEL, type ReportType, type Verdict } from "@/lib/problem-error-reports/labels";
 import LearningText from "@/app/session/[id]/LearningText";
+import RwStimulusView from "@/app/session/[id]/RwStimulusView";
 import ProblemFigure from "@/app/session/[id]/ProblemFigure";
 import { problemText } from "@/lib/problem-figures/label-rule";
 import { confirmedToCsv, confirmedToMarkdown } from "@/lib/problem-error-reports/confirmed-export";
@@ -328,7 +329,7 @@ function ReportDetail({ problemId, versionId, onBack, onNext }: { problemId: str
           {v.difficulty && <span>· {v.difficulty}</span>}
           {d.problem.archived && <span className="rounded-full bg-grey-100 px-2 py-0.5">보관됨</span>}
         </div>
-        {v.passage && <LearningText text={v.passage} className="mb-2 text-[13px]" />}
+        {v.passage && <RwStimulusView passage={v.passage} question={v.question} className="mb-2 text-[13px]" />}
         {v.question && <LearningText text={v.question} className="mb-2 text-[13.5px] font-semibold" />}
         {v.figure ? <div className="mb-2"><ProblemFigure spec={v.figure} text={problemText(v.passage, v.question, v.options)} /></div> : null}
         {v.options && v.options.length > 0 && (
