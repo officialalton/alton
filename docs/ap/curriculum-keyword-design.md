@@ -56,3 +56,21 @@ CED가 토픽 번호 없이 단원별 스킬 중심이라 `official_topic_codes=
 | D8 | Calculus AB·BC는 별개 과목 + content_key 공유 | 비중·범위가 다르고 문제 소속이 명확 |
 | D9 | English Language 코드는 U<단원>.<번호> | CED에 토픽 번호가 없음 |
 | D10 | 시드는 코드로만(UI 하드코딩 목록 폐기, `subjects.ap_subject_code`) | CLAUDE.md "하드코딩 목록 금지" |
+
+## 13. 시드 현황(2026-10-08, 로컬 검증)
+| 과목 | 단원 | 토픽 | 세부 키워드 |
+|---|---|---|---|
+| AP Calculus AB | 8 | 81 | 219 |
+| AP Calculus BC | 10 | 111(AB 공통 81 + BC 전용 30) | 296 |
+| AP Statistics(신 5단원 CED) | 5 | 55 | 200 |
+| AP Biology | 8 | 60 | 223 |
+| AP Chemistry | 9 | 91 | 229 |
+| AP Physics 1(8단원, 유체 포함) | 8 | 43 | 153 |
+| AP Computer Science A | 4 | 53 | 183 |
+| AP Microeconomics | 6 | 36 | 122 |
+| AP Macroeconomics | 6 | 42 | 139 |
+| AP English Language(토픽 코드 U<단원>.<번호>) | 9 | 35 | 93 |
+| **합계** | **73** | **607** | **1,857** |
+- 로컬 공유 DB에서 마이그레이션 380 적용 → `seed.ts --execute` 2회(2회차는 전 과목 "생성 0", 멱등) → 단원 73·폴더 73·단원-토픽 연결 607·스킬 184·공식 비중 117행 확인 → 시드 데이터 정리(로컬 DB에는 스키마만 남김).
+- 검증: `lib/ap-curriculum/*.test.ts` — 10과목 구조 완전성(토픽→단원, 코드 유일, 선수 순서, 비중 합 정합), BC ⊇ AB, Stats 5단원, Physics 1 유체 포함 등.
+- **출처 한계(데이터 품질 주의)**: 토픽 코드·제목·권장 스킬·차시·MC 비중은 CED 텍스트 추출 기반이며, 일부 과목(Chemistry 일부 토픽 스킬, Physics 1 일부 권장 스킬, CS A 일부 토픽 스킬, English Language 단원 제목)은 추출 한계로 근사값이다. **세부 키워드·선수 관계·수업 횟수는 ALTON 설계(비공식)**이며 전문가 검수가 필요하다. 각 파일의 `designNotes`와 에이전트 보고에 한계가 기록되어 있다.
