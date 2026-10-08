@@ -9,7 +9,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { loadEnvLocal } from "../keywords/db";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { checkRenderedMatchesDb, judgeScreenEntries, resolveVerifyTarget, type RenderReportRow, type ScreenEntry, type ScreenEvidence } from "../../lib/ap-generation/verify-guard";
+import { checkRenderedMatchesDb, AUTOMATED_LIMITATION, judgeScreenEntries, resolveVerifyTarget, type RenderReportRow, type ScreenEntry, type ScreenEvidence } from "../../lib/ap-generation/verify-guard";
 
 const has = (n: string) => process.argv.includes(`--${n}`);
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined; };
@@ -25,7 +25,7 @@ async function main() {
   const { createClient } = await import("@supabase/supabase-js");
   const db = createClient(url!, key, { auth: { autoRefreshToken: false, persistSession: false } });
   const { data: admin } = await db.from("profiles").select("id").eq("role", "admin").limit(1).maybeSingle();
-  const { data, error } = await db.from("ap_candidate_items").select("candidate_key, ap_subject_code, kind, payload, render_verified, screen_verified").eq("is_current", true).eq("review_state", "auto_passed").is("problem_id", null);
+  const { data, error } = await db.from("ap_candidate_items").select("candidate_key, ap_subject_code, kind, payload, render_verified, screen_verified, screen_evidence").eq("is_current", true).eq("review_state", "auto_passed").is("problem_id", null);
   if (error) throw new Error(error.message);
   const rows = data ?? [];
   if (has("render")) {
@@ -55,18 +55,23 @@ async function main() {
     const skipped: string[] = [];
     const known = new Set(rows.map((r) => r.candidate_key));
     for (const k of byCand.keys()) if (!known.has(k)) skipped.push(`${k}: 대상 후보 아님(DB 에 없거나 auto_passed 아님/이미 변환)`);
-    let n = 0;
+    let n = 0, relabeled = 0, already = 0;
     for (const r of rows) {
       const es = byCand.get(r.candidate_key);
-      if (!es || r.screen_verified) continue;
+      if (!es) continue;
       if (!r.render_verified) { skipped.push(`${r.candidate_key}: 렌더 검증이 먼저입니다.`); continue; }
       const v = judgeScreenEntries(es, r.payload, process.cwd()); // screenshot 은 저장소 루트 기준 상대경로
       if (!v.ok) { skipped.push(`${r.candidate_key}: ${v.reason}`); continue; }
-      n++;
-      if (execute) { const { error: x } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: null, p_screen: true, p_evidence: { contentHash: es[0].content_hash, entries: es.map((e) => ({ viewport: e.viewport, screenshot: e.screenshot, timestamp: e.timestamp, checker: e.checker, checks: e.checks })), generator: ev.generator ?? null, at: new Date().toISOString() }, p_actor: admin?.id }); if (x) throw new Error(x.message); }
+      const kind = es.every((e) => e.checker_kind === "automated") ? "automated" : es.every((e) => e.checker_kind === "human") ? "human" : "mixed";
+      const prev = r.screen_evidence as { checkerKind?: string; contentHash?: string } | null;
+      if (r.screen_verified && prev?.checkerKind === kind && prev?.contentHash === es[0].content_hash) { already++; continue; }
+      if (r.screen_verified) relabeled++; else n++; // 이미 검증된 후보는 해시를 바꾸지 않고 증거 라벨만 갱신한다(멱등)
+      const evidence = { checkerKind: kind, contentHash: es[0].content_hash, limitations: kind === "human" ? null : AUTOMATED_LIMITATION, entries: es.map((e) => ({ checker_kind: e.checker_kind, viewport: e.viewport, screenshot: e.screenshot, timestamp: e.timestamp, checker: e.checker, checks: e.checks })), generator: ev.generator ?? null, at: new Date().toISOString() };
+      if (execute) { const { error: x } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: null, p_screen: true, p_evidence: evidence, p_actor: admin?.id }); if (x) throw new Error(x.message); }
     }
+    console.log(`화면 검증(${execute ? "기록" : "대상"}) 신규 ${n}건, 라벨 갱신 ${relabeled}건, 이미 같은 증거 ${already}건`);
     for (const s of skipped) console.log(`- 건너뜀 ${s}`);
-    console.log(`화면 검증 ${execute ? "기록" : "대상"} ${n}건, 건너뜀 ${skipped.length}건`);
+    console.log(`건너뜀 ${skipped.length}건`);
   }
 }
 main().catch((e) => { console.error(e instanceof Error ? e.message : "실패"); process.exit(1); });

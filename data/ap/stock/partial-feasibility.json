@@ -1,0 +1,305 @@
+[
+ {
+  "subject": "ap_calculus_ab",
+  "partial": "noncalc_mc",
+  "name": "AP Calculus AB — Non-Calculator Practice",
+  "ok": true,
+  "labelAllowed": true,
+  "poolSize": 102,
+  "composition": {
+   "ap_mc_a": {
+    "count": 29,
+    "minutes": 62,
+    "units": {
+     "1": 4,
+     "2": 4,
+     "3": 4,
+     "4": 4,
+     "5": 4,
+     "6": 4,
+     "7": 4,
+     "8": 1
+    },
+    "skills": {
+     "2.B": 6,
+     "1.E": 6,
+     "1.D": 5,
+     "3.E": 4,
+     "2.C": 2,
+     "1.C": 2,
+     "1.F": 2,
+     "2.D": 2
+    },
+    "families": 15,
+    "archetypes": 15,
+    "overlapUsed": 0
+   }
+  },
+  "shortage": [],
+  "coverageGaps": [
+   "Unit 5: 4/5(공식 비중 15-20%)",
+   "Unit 6: 4/5(공식 비중 15-20%)",
+   "Unit 8: 1/3(공식 비중 10-15%)"
+  ]
+ },
+ {
+  "subject": "ap_calculus_ab",
+  "partial": "calc_mc",
+  "name": "AP Calculus AB — Calculator Practice",
+  "ok": false,
+  "labelAllowed": false,
+  "poolSize": 102,
+  "composition": {
+   "ap_mc_b": {
+    "count": 11,
+    "minutes": 38,
+    "units": {
+     "4": 2,
+     "5": 2,
+     "6": 1,
+     "8": 6
+    },
+    "skills": {
+     "1.E": 5,
+     "3.D": 2,
+     "1.D": 4
+    },
+    "families": 6,
+    "archetypes": 6,
+    "overlapUsed": 0
+   }
+  },
+  "shortage": [
+   {
+    "sectionKey": "ap_mc_b",
+    "need": 13,
+    "have": 11,
+    "reasons": [
+     "문항 부족: 후보 14건(계산기 구분·문항군/유형 상한 적용 전), 채운 11/13"
+    ]
+   }
+  ],
+  "coverageGaps": [
+   "Unit 1: 0/2(공식 비중 10-15%)",
+   "Unit 2: 0/2(공식 비중 10-15%)",
+   "Unit 3: 0/1(공식 비중 5-10%)",
+   "Unit 6: 1/2(공식 비중 15-20%)",
+   "Unit 7: 0/1(공식 비중 5-10%)"
+  ]
+ },
+ {
+  "subject": "ap_calculus_ab",
+  "partial": "frq",
+  "name": "AP Calculus AB — Free-Response Practice",
+  "ok": false,
+  "labelAllowed": false,
+  "poolSize": 102,
+  "composition": {
+   "ap_frq_a": {
+    "count": 2,
+    "minutes": 30,
+    "units": {
+     "6": 1,
+     "8": 1
+    },
+    "skills": {
+     "2.B": 1,
+     "1.D": 1
+    },
+    "families": 2,
+    "archetypes": 2,
+    "overlapUsed": 0
+   },
+   "ap_frq_b": {
+    "count": 2,
+    "minutes": 60,
+    "units": {
+     "5": 1,
+     "7": 1
+    },
+    "skills": {
+     "3.E": 1,
+     "1.E": 1
+    },
+    "families": 2,
+    "archetypes": 2,
+    "overlapUsed": 0
+   }
+  },
+  "shortage": [
+   {
+    "sectionKey": "ap_frq_b",
+    "need": 4,
+    "have": 2,
+    "reasons": [
+     "문항 부족: 후보 7건(계산기 구분·문항군/유형 상한 적용 전), 채운 2/4"
+    ]
+   },
+   {
+    "sectionKey": "ap_frq_a+ap_frq_b",
+    "need": 6,
+    "have": 4,
+    "reasons": [
+     "문항군 다양성 하한 미달(세트 전체): 4/6"
+    ]
+   }
+  ],
+  "coverageGaps": []
+ },
+ {
+  "subject": "ap_calculus_bc",
+  "partial": "noncalc_mc",
+  "name": "AP Calculus BC — Non-Calculator Practice",
+  "ok": false,
+  "labelAllowed": false,
+  "poolSize": 48,
+  "composition": {
+   "ap_mc_a": {
+    "count": 23,
+    "minutes": 62,
+    "units": {
+     "6": 6,
+     "7": 4,
+     "9": 4,
+     "10": 9
+    },
+    "skills": {
+     "3.D": 3,
+     "1.C": 4,
+     "1.E": 14,
+     "1.D": 2
+    },
+    "families": 12,
+    "archetypes": 12,
+    "overlapUsed": 0
+   }
+  },
+  "shortage": [
+   {
+    "sectionKey": "ap_mc_a",
+    "need": 29,
+    "have": 23,
+    "reasons": [
+     "문항 부족: 후보 34건(계산기 구분·문항군/유형 상한 적용 전), 채운 23/29"
+    ]
+   }
+  ],
+  "coverageGaps": [
+   "Unit 1: 0/2(공식 비중 5-10%)",
+   "Unit 2: 0/2(공식 비중 5-10%)",
+   "Unit 3: 0/2(공식 비중 5-10%)",
+   "Unit 4: 0/2(공식 비중 5-10%)",
+   "Unit 5: 0/3(공식 비중 10-15%)",
+   "Unit 8: 0/2(공식 비중 5-10%)"
+  ]
+ },
+ {
+  "subject": "ap_calculus_bc",
+  "partial": "calc_mc",
+  "name": "AP Calculus BC — Calculator Practice",
+  "ok": false,
+  "labelAllowed": false,
+  "poolSize": 48,
+  "composition": {
+   "ap_mc_b": {
+    "count": 8,
+    "minutes": 38,
+    "units": {
+     "8": 2,
+     "9": 6
+    },
+    "skills": {
+     "1.E": 4,
+     "1.D": 4
+    },
+    "families": 4,
+    "archetypes": 4,
+    "overlapUsed": 0
+   }
+  },
+  "shortage": [
+   {
+    "sectionKey": "ap_mc_b",
+    "need": 13,
+    "have": 8,
+    "reasons": [
+     "문항 부족: 후보 10건(계산기 구분·문항군/유형 상한 적용 전), 채운 8/13"
+    ]
+   }
+  ],
+  "coverageGaps": [
+   "Unit 1: 0/1(공식 비중 5-10%)",
+   "Unit 2: 0/1(공식 비중 5-10%)",
+   "Unit 3: 0/1(공식 비중 5-10%)",
+   "Unit 4: 0/1(공식 비중 5-10%)",
+   "Unit 5: 0/2(공식 비중 10-15%)",
+   "Unit 6: 0/2(공식 비중 15-20%)",
+   "Unit 7: 0/1(공식 비중 5-10%)",
+   "Unit 10: 0/2(공식 비중 15-20%)"
+  ]
+ },
+ {
+  "subject": "ap_calculus_bc",
+  "partial": "frq",
+  "name": "AP Calculus BC — Free-Response Practice",
+  "ok": false,
+  "labelAllowed": false,
+  "poolSize": 48,
+  "composition": {
+   "ap_frq_a": {
+    "count": 1,
+    "minutes": 30,
+    "units": {
+     "9": 1
+    },
+    "skills": {
+     "1.E": 1
+    },
+    "families": 1,
+    "archetypes": 1,
+    "overlapUsed": 0
+   },
+   "ap_frq_b": {
+    "count": 1,
+    "minutes": 60,
+    "units": {
+     "10": 1
+    },
+    "skills": {
+     "1.E": 1
+    },
+    "families": 1,
+    "archetypes": 1,
+    "overlapUsed": 0
+   }
+  },
+  "shortage": [
+   {
+    "sectionKey": "ap_frq_a",
+    "need": 2,
+    "have": 1,
+    "reasons": [
+     "문항 부족: 후보 2건(계산기 구분·문항군/유형 상한 적용 전), 채운 1/2"
+    ]
+   },
+   {
+    "sectionKey": "ap_frq_b",
+    "need": 4,
+    "have": 1,
+    "reasons": [
+     "문항 부족: 후보 2건(계산기 구분·문항군/유형 상한 적용 전), 채운 1/4"
+    ]
+   },
+   {
+    "sectionKey": "ap_frq_a+ap_frq_b",
+    "need": 6,
+    "have": 2,
+    "reasons": [
+     "문항군 다양성 하한 미달(세트 전체): 2/6",
+     "유형(archetype) 다양성 하한 미달(세트 전체): 2/4"
+    ]
+   }
+  ],
+  "coverageGaps": []
+ }
+]

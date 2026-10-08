@@ -78,3 +78,14 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 **검증 게이트**: `render_verified` 는 `lib/ap-figures/gate.ts`(결정적 검사, `scripts/ap-generation/render-check.ts`·`mark-verified.ts --render`), `screen_verified` 는 학생 화면 확인 증거가 있을 때만 `mark-verified.ts --screen --evidence`.
 
 **검증 기록 실행 범위(2026-10-08 오너 결정)**: `mark-verified.ts` 는 기본 dry-run, 대상은 로컬(기본) 또는 비프로덕션 `worpsqwqgnspddnrtnvq` 뿐이며 후자는 `--target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq` 가 모두 있어야 한다(그 외 호스트·프로덕션 거부, 키는 환경변수에서만 읽고 출력하지 않음). `--render` 는 렌더 보고서(`data/ap/render-check/report.json`)의 `contentHash`(자료+선지+정답)가 DB 후보 payload 해시와 같은 후보만 기록하고 불일치는 건너뛴다. `--screen` 증거 파일은 `entries[{candidate_key, viewport, screenshot(저장소 기준 경로, 실존 필수), timestamp, checker}]` 를 갖춰야 하며 없으면 기록하지 않는다. 증거 스크린샷: `docs/ap/screen-evidence/`.
+
+
+## 화면 검증은 자동 점검이다 (2026-10-09 오너 결정)
+- 증거 항목에는 `checker_kind`(`automated`|`human`)가 필수이고 자동 도구의 점검자 이름은 `automated-<도구>`(예: `automated-playwright/<버전>`)다. 자동 점검을 사람 검토로 기록할 수 없다. DB `screen_evidence` 에는 `checkerKind`·`limitations` 가 함께 남는다(이미 검증된 후보를 다시 `--screen --execute` 하면 해시는 그대로 두고 라벨만 갱신, 변환 전 후보에 한함).
+- **한계**: 자동 화면 점검은 표시·입력·정답/해설 노출·잘림만 확인한다. 그래프의 의미·그림의 정확성·문장의 자연스러움은 확인하지 않으며 사람 검토가 별도로 필요하다(스키마 설명·증거 파일 `limitations`·관리자 문항 화면에 같은 문구).
+
+## 부분 연습 세트(첫 제품 형태, AB·BC) (2026-10-09)
+- 세트 이름: `AP Calculus AB — Non-Calculator Practice`(Part A MC 29문항·62분) / `AP Calculus AB — Calculator Practice`(Part B MC 13문항·38분) / `AP Calculus AB — Free-Response Practice`(FRQ 6문항·90분: A 2·30분 + B 4·60분). BC 도 같은 구조.
+- 공식 파트의 문항 수와 시간을 모두 채운 세트만 이 이름을 쓴다(DB 공개 게이트가 섹션별 문항 수를 강제). 현재 재고를 완전한 모의고사로 부르지 않는다(`full_practice` 는 모든 섹션 충족 때만).
+- 조립 규칙: 모의고사 용도(`mock_exam`) 변환 문항만. 세트 안 중복 없음. 문항군당 MC 2개·FRQ 1개, FRQ 는 유형(archetype)당 2개까지·6문항이면 서로 다른 유형 4개 이상. 다른 세트와의 겹침은 풀 모의고사 0, 부분 연습은 기본 문항 수의 20% 이내(`--overlap-max`). 못 채우면 패딩 없이 부족 칸(문항 수·문항군·유형·단원 비중)을 보고한다.
+- 가능성 점검: `npx tsx scripts/ap-generation/partial-feasibility.ts`(결과 `data/ap/stock/partial-feasibility.json`). 비프로덕션 실행 명령은 `scripts/ap-generation/assemble-ap-set.ts`·`publish-to-bank.ts` 머리 주석(둘 다 `--target <ref> --i-know-nonprod <ref>` 허용 목록, 기본 dry-run).

@@ -9,6 +9,7 @@ describe.each(files)("증거 파일 %s", (f) => {
   const stock = new Map((JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as { stockKey: string; payload: Record<string, unknown> }[]).map((i) => [i.stockKey, i.payload]));
   it("모든 항목이 유효하고 재고 payload 해시와 같다(재고에 있는 후보 한정)", () => {
     expect(ev.schema).toBe("ap-screen-evidence/v1");
+    expect(ev.entries.every((e) => e.checker_kind === "automated" && e.checker.startsWith("automated-playwright"))).toBe(true);
     const by = new Map<string, ScreenEntry[]>();
     for (const e of ev.entries) { expect(validateScreenEntry(e, process.cwd())).toBeNull(); (by.get(e.candidate_key) ?? by.set(e.candidate_key, []).get(e.candidate_key)!).push(e); }
     for (const [k, es] of by) { const p = stock.get(k); if (p) expect(judgeScreenEntries(es, p, process.cwd())).toEqual({ ok: true }); }

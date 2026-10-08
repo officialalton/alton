@@ -1,3 +1,4 @@
+import { AUTOMATED_LIMITATION_KO } from "@/lib/ap-generation/verify-guard";
 import { requireAdmin } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { EXPERT_KO, PURPOSE_KO, TIER_KO, filterApItems, purposeSummary, type ApFilters, type ApItemRow } from "@/lib/ap-exam/admin-view";
@@ -35,10 +36,11 @@ export default async function AdminApItemsPage({ searchParams }: { searchParams:
           {sel("purpose", "용도", [["mock_exam", PURPOSE_KO.mock_exam], ["lesson", PURPOSE_KO.lesson], ["none", "미배정(변환 전)"]])}
           {sel("tier", "단계", Object.entries(TIER_KO))}
           {sel("expert", "검수 상태", Object.entries(EXPERT_KO))}
-          {sel("ready", "게시 준비", [["yes", "준비됨(자동 게이트+렌더+화면 검증)"], ["no", "준비 안 됨"]])}
+          {sel("ready", "게시 준비", [["yes", "준비됨(자동 게이트+렌더+화면 자동 검증)"], ["no", "준비 안 됨"]])}
           <button type="submit" className="rounded bg-ink px-3 py-1.5 text-[13px] font-semibold text-white">필터 적용</button>
         </form>
-        <p className="mt-3 text-[12px] text-grey-500">{rows.length}건 / 전체 {all.length}건</p>
+        <p className="mt-3 text-[12px] text-grey-500" data-testid="screen-check-limitation">{AUTOMATED_LIMITATION_KO}</p>
+        <p className="mt-1 text-[12px] text-grey-500">{rows.length}건 / 전체 {all.length}건</p>
         <table className="mt-2 w-full text-left text-[12.5px]">
           <thead><tr className="text-grey-500"><th>후보 키</th><th>과목</th><th>형식</th><th>게시 준비</th><th>용도</th><th>단계</th><th>검수</th></tr></thead>
           <tbody>{rows.slice(0, 500).map((r) => (

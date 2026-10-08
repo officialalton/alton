@@ -36,3 +36,59 @@ describe("planApSet", () => {
     expect(plan.items.filter((i) => i.sectionKey === "ap_mc_b").every((i) => i.c.calculator === "required")).toBe(true);
   });
 });
+
+import { planPartialSet } from "./assemble";
+import { AP_PARTIALS, partialLabelAllowed, partialSetName, sectionsForPartial } from "./layouts";
+
+describe("부분 연습 세트", () => {
+  const mc = (n: number, o: Partial<AssembleCandidate> = {}) => c(n, { keywordCode: `${1 + (n % 8)}.1`, itemFamilyId: `f${Math.floor(n / 2)}`, ...o });
+  it("이름·구성은 공식 파트를 따른다", () => {
+    expect(partialSetName("ap_calculus_ab", "noncalc_mc")).toBe("AP Calculus AB — Non-Calculator Practice");
+    expect(partialSetName("ap_calculus_ab", "calc_mc")).toBe("AP Calculus AB — Calculator Practice");
+    expect(partialSetName("ap_calculus_ab", "frq", 2)).toBe("AP Calculus AB — Free-Response Practice 2");
+    expect(sectionsForPartial("ap_calculus_ab", "noncalc_mc").map((s) => [s.key, s.count, s.minutes])).toEqual([["ap_mc_a", 29, 62]]);
+    expect(sectionsForPartial("ap_calculus_ab", "calc_mc").map((s) => [s.key, s.count, s.minutes])).toEqual([["ap_mc_b", 13, 38]]);
+    expect(sectionsForPartial("ap_calculus_ab", "frq").map((s) => [s.key, s.count, s.minutes])).toEqual([["ap_frq_a", 2, 30], ["ap_frq_b", 4, 60]]);
+    expect(AP_PARTIALS.frq.label).toBe("frq_practice");
+    expect(() => sectionsForPartial("ap_biology", "frq")).toThrow();
+    expect(partialLabelAllowed("ap_calculus_ab", "noncalc_mc", { ap_mc_a: 28 })).toBe(false);
+    expect(partialLabelAllowed("ap_calculus_ab", "noncalc_mc", { ap_mc_a: 29 })).toBe(true);
+  });
+  it("채울 수 있으면 공식 문항 수만큼, 한 세트 안 중복 없음, 계산기 구분 준수", () => {
+    const pool = Array.from({ length: 60 }, (_, i) => mc(i, { calculator: "not_allowed" }));
+    const plan = planPartialSet("ap_calculus_ab", "noncalc_mc", pool);
+    expect(plan.ok).toBe(true); expect(plan.labelAllowed).toBe(true);
+    expect(plan.items).toHaveLength(29);
+    expect(new Set(plan.items.map((i) => i.c.problemId)).size).toBe(29);
+    expect(planPartialSet("ap_calculus_ab", "calc_mc", pool).items).toHaveLength(0); // 계산기 필수 문항이 없다
+  });
+  it("모자라면 패딩 없이 부족을 보고하고 라벨을 허용하지 않는다", () => {
+    const pool = Array.from({ length: 20 }, (_, i) => mc(i, { calculator: "not_allowed" }));
+    const plan = planPartialSet("ap_calculus_ab", "noncalc_mc", pool);
+    expect(plan.ok).toBe(false); expect(plan.labelAllowed).toBe(false);
+    expect(plan.shortage[0]).toMatchObject({ sectionKey: "ap_mc_a", need: 29 });
+    expect(plan.items.length).toBeLessThan(29);
+  });
+  it("수업용·후보 단계 문항은 쓰지 않는다", () => {
+    const pool = Array.from({ length: 40 }, (_, i) => mc(i, { calculator: "not_allowed", purpose: i % 2 ? "lesson" : "mock_exam", releaseTier: i % 3 ? "review_env" : "candidate" }));
+    expect(planPartialSet("ap_calculus_ab", "noncalc_mc", pool).items.every((i) => i.c.purpose === "mock_exam" && i.c.releaseTier !== "candidate")).toBe(true);
+  });
+  it("겹침: 기본 0이면 다른 세트 문항 제외, 한도를 주면 그만큼만 재사용", () => {
+    const pool = Array.from({ length: 31 }, (_, i) => mc(i, { calculator: "not_allowed", itemFamilyId: `f${i}` }));
+    const used = new Set(["p0", "p1", "p2", "p3", "p4"]);
+    expect(planPartialSet("ap_calculus_ab", "noncalc_mc", pool, { used, overlapMax: 0 }).ok).toBe(false); // 새 문항 26개뿐
+    expect(planPartialSet("ap_calculus_ab", "noncalc_mc", pool, { used, overlapMax: 2 }).ok).toBe(false); // 28개
+    const three = planPartialSet("ap_calculus_ab", "noncalc_mc", pool, { used, overlapMax: 3 });
+    expect(three.ok).toBe(true); expect(three.composition.ap_mc_a.overlapUsed).toBe(3);
+    expect(new Set(three.items.map((i) => i.c.problemId)).size).toBe(29);
+  });
+  it("FRQ: 같은 문항군 6변형이면 다양성 하한 미달로 보고한다", () => {
+    const f = (n: number, calc: string, fam: string, arch: string) => c(n, { kind: "frq_bundle", calculator: calc, itemFamilyId: fam, archetype: arch, keywordCode: "5.1" });
+    const same = [...Array.from({ length: 3 }, (_, i) => f(i, "required", "famA", "area")), ...Array.from({ length: 5 }, (_, i) => f(10 + i, "not_allowed", "famA", "area"))];
+    const bad = planPartialSet("ap_calculus_ab", "frq", same);
+    expect(bad.ok).toBe(false); expect(bad.shortage.some((s) => s.reasons.some((r) => /문항 부족|다양성/.test(r)))).toBe(true);
+    const good = [f(1, "required", "a", "x1"), f(2, "required", "b", "x2"), f(3, "not_allowed", "c", "x3"), f(4, "not_allowed", "d", "x4"), f(5, "not_allowed", "e", "x5"), f(6, "not_allowed", "g", "x6")];
+    const ok = planPartialSet("ap_calculus_ab", "frq", good);
+    expect(ok.ok).toBe(true); expect(ok.items).toHaveLength(6);
+  });
+});

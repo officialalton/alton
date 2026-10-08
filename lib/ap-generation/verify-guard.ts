@@ -57,17 +57,25 @@ export function checkRenderedMatchesDb(row: RenderReportRow | undefined, dbPaylo
 export const SCREEN_CHECKS = ["options_visible", "figure_rendered", "no_clipping", "no_answer_before_submit", "frq_input_works"] as const;
 export type ScreenCheckName = (typeof SCREEN_CHECKS)[number];
 export type ScreenCheck = { result: "pass" | "fail" | "na"; note?: string };
+export const CHECKER_KINDS = ["automated", "human"] as const;
+export type CheckerKind = (typeof CHECKER_KINDS)[number];
+/** 자동 화면 점검의 범위 한계 — 증거 파일·DB 기록·관리자 화면·문서에 그대로 표시한다. */
+export const AUTOMATED_LIMITATION = "Automated screen check (Playwright): covers display, input, answer/explanation exposure and clipping only. It does NOT verify graph meaning, figure correctness, or naturalness of wording — that still needs human review.";
+export const AUTOMATED_LIMITATION_KO = "자동 화면 점검(Playwright): 표시·입력·정답/해설 노출·잘림만 확인한다. 그래프의 의미·그림의 정확성·문장의 자연스러움은 확인하지 않으며 사람의 검토가 별도로 필요하다.";
 export type ScreenEntry = {
-  candidate_key: string; content_hash: string; problem_version_id?: string; kind: "mc" | "frq_bundle";
+  candidate_key: string; checker_kind: CheckerKind; content_hash: string; problem_version_id?: string; kind: "mc" | "frq_bundle";
   viewport: string; screenshot: string; timestamp: string; checker: string; checks: Partial<Record<ScreenCheckName, ScreenCheck>>;
 };
-export type ScreenEvidence = { schema?: string; checker?: string; generator?: string; generatedAt?: string; entries: ScreenEntry[] };
+export type ScreenEvidence = { schema?: string; limitations?: string; checker?: string; generator?: string; generatedAt?: string; entries: ScreenEntry[] };
 
 export function viewportWidth(v: string): number { const m = /^(\d+)x(\d+)$/.exec(v); return m ? Number(m[1]) : 0; }
 
 /** 항목 검증: 필수 필드·해시 형식·스크린샷 실존·시각·필수 점검 결과(실패·미점검·사유 없는 na 는 거부). */
 export function validateScreenEntry(e: Partial<ScreenEntry>, baseDir: string, now = Date.now()): string | null {
   for (const f of ["candidate_key", "content_hash", "viewport", "screenshot", "timestamp", "checker"] as const) if (!e[f] || typeof e[f] !== "string" || !String(e[f]).trim()) return `증거 필드 누락: ${f}`;
+  if (!CHECKER_KINDS.includes(e.checker_kind as CheckerKind)) return "checker_kind 누락 또는 값 오류(automated|human)";
+  if (e.checker_kind === "automated" && !e.checker!.startsWith("automated-")) return "automated 점검자 이름은 automated-<도구> 형식(예: automated-playwright)";
+  if (e.checker_kind === "human" && e.checker!.startsWith("automated")) return "human 점검자 이름이 자동 도구 이름임(사람 검토로 기록할 수 없음)";
   if (!/^[0-9a-f]{64}$/.test(e.content_hash!)) return "content_hash 형식 오류(sha256 hex)";
   if (e.kind !== "mc" && e.kind !== "frq_bundle") return "kind 누락(mc|frq_bundle)";
   if (!viewportWidth(e.viewport!)) return "viewport 형식 오류(예: 390x844)";
