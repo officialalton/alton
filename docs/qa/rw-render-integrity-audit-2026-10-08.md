@@ -11,7 +11,7 @@
 ## 영향 문항: 렌더러 수정으로만 해결(재렌더링만)
 Words in Context 인용형, 지문에 밑줄 표시 없음(렌더러 자동 밑줄 대상): **104건**, 스킬별 {"words_in_context":104}. 인용 구절이 지문에 없는 문항(target_missing): 0건.
 
-세트 포함 현황(게시 세트 기준, 보관 세트 제외): SAT Practice Test 1 에 7건(응시 2건 시작됨: 1 assigned+graded 포함 기록), Test 2~9 에 각 7~10건, 모두 응시 0건. 응시가 시작된 세트는 Practice Test 1 뿐이며, 렌더러 수정은 데이터를 바꾸지 않으므로 응시 기록·채점에 영향이 없다.
+세트 포함 현황(게시 세트 기준, 보관 세트 제외): SAT Practice Test 1 에 7건(해당 세트에 응시 기록 2건), Test 2~9 에 각 7~10건, 모두 응시 0건. 응시가 시작된 세트는 Practice Test 1 뿐이며, 렌더러 수정은 데이터를 바꾸지 않으므로 응시 기록·채점에 영향이 없다.
 
 ## 느슨한 단어 단서(표·그래프 낱말) — 모두 오탐
 table/chart/diagram 낱말만 걸린 61건({"central_ideas_details":34,"text_structure_purpose":21,"boundaries":1,"words_in_context":5})은 전부 문학 지문의 일반 명사(kitchen table, cutting table, tide tables 등). 결함 아님. 엄격한 구조 표현만 게이트에 쓴다.
