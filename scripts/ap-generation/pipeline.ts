@@ -38,7 +38,8 @@ function cur(code: string) {
   }
   return curr.get(code)!;
 }
-const allCells = (): Cell[] => readJson<Cell[]>(path.join(ROOT, "cells.json")).filter((c) => !ONLY || c.subject === ONLY);
+const CELLS = arg("--cells")?.split(",");
+const allCells = (): Cell[] => readJson<Cell[]>(path.join(ROOT, "cells.json")).filter((c) => (!ONLY || c.subject === ONLY) && (!CELLS || CELLS.includes(c.cellId)));
 const readJsonl = (f: string) => (existsSync(f) ? readFileSync(f, "utf-8").split("\n").filter(Boolean).map((l) => JSON.parse(l) as Json) : []);
 const resultMap = (name: string) => { const m = new Map<string, Json>(); for (const r of readJsonl(path.join(DIR, `${name}.results.jsonl`))) if (r.ok) m.set(r.custom_id as string, r); return m; };
 const costOfRes = (r?: Json) => (r?.cost as number | undefined) ?? 0;

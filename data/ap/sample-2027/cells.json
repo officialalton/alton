@@ -201,11 +201,12 @@
   "unitCode": "5",
   "keywordCode": "5.4",
   "extraKeywordCodes": [],
-  "skill": "3.D",
+  "skill": "1.E",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "required"
+  "calculator": "required",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c017",
@@ -214,11 +215,12 @@
   "unitCode": "5",
   "keywordCode": "5.7",
   "extraKeywordCodes": [],
-  "skill": "3.D",
+  "skill": "1.E",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "required"
+  "calculator": "required",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c018",
@@ -240,11 +242,12 @@
   "unitCode": "5",
   "keywordCode": "5.11",
   "extraKeywordCodes": [],
-  "skill": "3.F",
+  "skill": "1.E",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "required"
+  "calculator": "required",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c020",
@@ -279,11 +282,12 @@
   "unitCode": "6",
   "keywordCode": "6.6",
   "extraKeywordCodes": [],
-  "skill": "3.D",
+  "skill": "1.E",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "not_allowed"
+  "calculator": "not_allowed",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c023",
@@ -292,11 +296,12 @@
   "unitCode": "6",
   "keywordCode": "6.7",
   "extraKeywordCodes": [],
-  "skill": "3.D",
+  "skill": "1.E",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "not_allowed"
+  "calculator": "not_allowed",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c024",
@@ -318,11 +323,12 @@
   "unitCode": "7",
   "keywordCode": "7.2",
   "extraKeywordCodes": [],
-  "skill": "3.G",
+  "skill": "1.E",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "not_allowed"
+  "calculator": "not_allowed",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c026",
@@ -357,11 +363,12 @@
   "unitCode": "8",
   "keywordCode": "8.5",
   "extraKeywordCodes": [],
-  "skill": "1.E",
+  "skill": "2.B",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "not_allowed"
+  "calculator": "not_allowed",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c029",
@@ -370,11 +377,12 @@
   "unitCode": "8",
   "keywordCode": "8.8",
   "extraKeywordCodes": [],
-  "skill": "3.D",
+  "skill": "2.B",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "not_allowed"
+  "calculator": "not_allowed",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-c030",
@@ -383,20 +391,24 @@
   "unitCode": "8",
   "keywordCode": "8.11",
   "extraKeywordCodes": [],
-  "skill": "4.E",
+  "skill": "2.B",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "not_allowed"
+  "calculator": "not_allowed",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_calculus_ab-f01",
   "subject": "ap_calculus_ab",
   "kind": "frq_bundle",
-  "unitCode": "2",
-  "keywordCode": "2.6",
-  "extraKeywordCodes": [],
-  "skill": "1.E",
+  "unitCode": "6",
+  "keywordCode": "6.2",
+  "extraKeywordCodes": [
+   "2.3",
+   "8.1"
+  ],
+  "skill": "2.B",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -407,10 +419,13 @@
   "cellId": "ap_calculus_ab-f02",
   "subject": "ap_calculus_ab",
   "kind": "frq_bundle",
-  "unitCode": "4",
-  "keywordCode": "4.4",
-  "extraKeywordCodes": [],
-  "skill": "1.E",
+  "unitCode": "5",
+  "keywordCode": "5.9",
+  "extraKeywordCodes": [
+   "5.6",
+   "5.4"
+  ],
+  "skill": "3.E",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -421,10 +436,13 @@
   "cellId": "ap_calculus_ab-f03",
   "subject": "ap_calculus_ab",
   "kind": "frq_bundle",
-  "unitCode": "6",
-  "keywordCode": "6.6",
-  "extraKeywordCodes": [],
-  "skill": "3.D",
+  "unitCode": "7",
+  "keywordCode": "7.6",
+  "extraKeywordCodes": [
+   "7.3",
+   "7.4"
+  ],
+  "skill": "1.E",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -436,9 +454,12 @@
   "subject": "ap_calculus_ab",
   "kind": "frq_bundle",
   "unitCode": "8",
-  "keywordCode": "8.7",
-  "extraKeywordCodes": [],
-  "skill": "3.D",
+  "keywordCode": "8.4",
+  "extraKeywordCodes": [
+   "8.7",
+   "8.8"
+  ],
+  "skill": "1.D",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -771,10 +792,12 @@
   "cellId": "ap_biology-f01",
   "subject": "ap_biology",
   "kind": "frq_bundle",
-  "unitCode": "2",
-  "keywordCode": "2.6",
-  "extraKeywordCodes": [],
-  "skill": "6.E",
+  "unitCode": "4",
+  "keywordCode": "4.5",
+  "extraKeywordCodes": [
+   "4.3"
+  ],
+  "skill": "4.A",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -785,10 +808,12 @@
   "cellId": "ap_biology-f02",
   "subject": "ap_biology",
   "kind": "frq_bundle",
-  "unitCode": "4",
-  "keywordCode": "4.4",
-  "extraKeywordCodes": [],
-  "skill": "6.E",
+  "unitCode": "6",
+  "keywordCode": "6.5",
+  "extraKeywordCodes": [
+   "6.7"
+  ],
+  "skill": "6.B",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -799,10 +824,10 @@
   "cellId": "ap_biology-f03",
   "subject": "ap_biology",
   "kind": "frq_bundle",
-  "unitCode": "6",
-  "keywordCode": "6.5",
+  "unitCode": "8",
+  "keywordCode": "8.1",
   "extraKeywordCodes": [],
-  "skill": "6.A",
+  "skill": "3.C",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -813,10 +838,10 @@
   "cellId": "ap_biology-f04",
   "subject": "ap_biology",
   "kind": "frq_bundle",
-  "unitCode": "8",
-  "keywordCode": "8.4",
+  "unitCode": "3",
+  "keywordCode": "3.2",
   "extraKeywordCodes": [],
-  "skill": "5.A",
+  "skill": "2.B",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -843,11 +868,12 @@
   "unitCode": "1",
   "keywordCode": "1.3",
   "extraKeywordCodes": [],
-  "skill": "4.A",
+  "skill": "2.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c003",
@@ -898,11 +924,12 @@
   "unitCode": "2",
   "keywordCode": "2.1",
   "extraKeywordCodes": [],
-  "skill": "4.A",
+  "skill": "2.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c007",
@@ -950,11 +977,12 @@
   "unitCode": "2",
   "keywordCode": "2.9",
   "extraKeywordCodes": [],
-  "skill": "4.C",
+  "skill": "2.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c011",
@@ -965,12 +993,12 @@
   "extraKeywordCodes": [
    "3.6"
   ],
-  "skill": "4.A",
+  "skill": "1.A",
   "structure": "shared_stimulus_set",
   "itemsPerCandidate": 2,
   "candidates": 4,
   "calculator": "na",
-  "note": "set of 2 items sharing one stimulus; stimulus-based skills vary by item"
+  "note": "set of 2 items sharing one stimulus; stimulus-based skills vary by item skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c012",
@@ -1031,11 +1059,12 @@
   "unitCode": "3",
   "keywordCode": "3.7",
   "extraKeywordCodes": [],
-  "skill": "4.A",
+  "skill": "2.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c017",
@@ -1046,12 +1075,12 @@
   "extraKeywordCodes": [
    "4.4"
   ],
-  "skill": "4.B",
+  "skill": "2.A",
   "structure": "shared_stimulus_set",
   "itemsPerCandidate": 2,
   "candidates": 4,
   "calculator": "na",
-  "note": "set of 2 items sharing one stimulus; stimulus-based skills vary by item"
+  "note": "set of 2 items sharing one stimulus; stimulus-based skills vary by item skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c018",
@@ -1073,11 +1102,12 @@
   "unitCode": "4",
   "keywordCode": "4.2",
   "extraKeywordCodes": [],
-  "skill": "4.B",
+  "skill": "2.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c020",
@@ -1086,11 +1116,12 @@
   "unitCode": "4",
   "keywordCode": "4.4",
   "extraKeywordCodes": [],
-  "skill": "4.B",
+  "skill": "2.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c021",
@@ -1151,11 +1182,12 @@
   "unitCode": "6",
   "keywordCode": "6.1",
   "extraKeywordCodes": [],
-  "skill": "2.A",
+  "skill": "1.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-c026",
@@ -1177,20 +1209,24 @@
   "unitCode": "6",
   "keywordCode": "6.5",
   "extraKeywordCodes": [],
-  "skill": "1.A",
+  "skill": "3.A",
   "structure": "standalone",
   "itemsPerCandidate": 1,
   "candidates": 4,
-  "calculator": "na"
+  "calculator": "na",
+  "note": "skill reassigned to meet official MC skill-category weights"
  },
  {
   "cellId": "ap_microeconomics-f01",
   "subject": "ap_microeconomics",
   "kind": "frq_bundle",
-  "unitCode": "2",
-  "keywordCode": "2.5",
-  "extraKeywordCodes": [],
-  "skill": "3.C",
+  "unitCode": "4",
+  "keywordCode": "4.2",
+  "extraKeywordCodes": [
+   "3.5",
+   "2.6"
+  ],
+  "skill": "4.A",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -1202,9 +1238,9 @@
   "subject": "ap_microeconomics",
   "kind": "frq_bundle",
   "unitCode": "4",
-  "keywordCode": "4.3",
+  "keywordCode": "4.5",
   "extraKeywordCodes": [],
-  "skill": "4.C",
+  "skill": "2.C",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
@@ -1215,10 +1251,12 @@
   "cellId": "ap_microeconomics-f03",
   "subject": "ap_microeconomics",
   "kind": "frq_bundle",
-  "unitCode": "6",
-  "keywordCode": "6.3",
-  "extraKeywordCodes": [],
-  "skill": "1.B",
+  "unitCode": "2",
+  "keywordCode": "2.6",
+  "extraKeywordCodes": [
+   "2.3"
+  ],
+  "skill": "3.C",
   "structure": "frq_multipart",
   "itemsPerCandidate": 1,
   "candidates": 4,
