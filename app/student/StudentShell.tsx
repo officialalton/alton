@@ -78,7 +78,7 @@ const NAV_ITEMS = [
   // 2026-09-22(사용자 지시) — Assignments보다 위로.
   { id: "mock-exam", label: "Practice Tests", icon: "mockExam" },
   { id: "homework", label: "Assignments", icon: "assignments" },
-  { id: "problemlog", label: "Mistake Notebook", icon: "practice" },
+  { id: "problemlog", label: "My Notebook", icon: "practice" },
   { id: "vocab", label: "Vocabulary Builder", icon: "vocabulary" },
   { id: "materials", label: "Study Materials", icon: "materials" },
   // 2026-09-22(사용자 지시) — Credits는 계정 팝업으로, Performance는 Home에 이미

@@ -7,6 +7,10 @@ import type { RoadmapData } from "@/lib/roadmap/types";
 const pushMock = vi.fn();
 const touchActivityAction = vi.hoisted(() => vi.fn());
 vi.mock("./activity-tracking", () => ({ touchActivityAction, logLearningEventAction: vi.fn() }));
+vi.mock("./notebook-actions", () => ({
+  loadNotebookStateAction: vi.fn(async () => ({ folders: [], assignments: {} })),
+  createNotebookFolderAction: vi.fn(), renameNotebookFolderAction: vi.fn(), deleteNotebookFolderAction: vi.fn(), moveNotebookProblemAction: vi.fn(),
+}));
 vi.mock("./mock-exam-tab-actions", () => ({
   loadMyMockExamOverviewAction: vi.fn(async () => ({ catalog: [], attempts: [] })),
 }));
@@ -195,7 +199,7 @@ describe("StudentShell", () => {
     // 이미 보임). Practice Tests가 Assignments 위로 옮겨졌다. Planner는 별도 nav 없이
     // Home 탭 서브탭(Overview/TODO/Done)으로 흡수됐다. 캘린더·예정 수업은 Classes의
     // "수업 일정" 서브탭으로 옮겨졌다.
-    ["Home", "Courses", "Classes", "My Teacher", "Practice Tests", "Assignments", "Mistake Notebook", "Vocabulary Builder", "Study Materials"].forEach(
+    ["Home", "Courses", "Classes", "My Teacher", "Practice Tests", "Assignments", "My Notebook", "Vocabulary Builder", "Study Materials"].forEach(
       (label) => expect(screen.getAllByText(label).length).toBeGreaterThan(0)
     );
     expect(screen.queryByText("Performance")).toBeNull();
@@ -276,8 +280,8 @@ describe("StudentShell", () => {
         {...lessonsProps}
       />
     );
-    fireEvent.click(screen.getAllByText("Mistake Notebook")[0]);
-    expect(screen.getByText("No problems match these filters.")).toBeInTheDocument();
+    fireEvent.click(screen.getAllByText("My Notebook")[0]);
+    expect(screen.getByTestId("notebook-empty")).toBeInTheDocument();
   });
 
   it("수업 탭을 누르면 ClassesTab이 렌더링되고, 딱 두 개의 서브탭('예정 수업'/'지난 수업')만 보인다(레거시 '레슨'/'예약' 탭 제거)", () => {

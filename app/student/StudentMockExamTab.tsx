@@ -3,7 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { MockExamAttemptDetail, MockExamOverview } from "@/lib/mock-exam/attempt-data";
-import { buildMockExamListRows, type MockExamListRow } from "@/lib/mock-exam/open-list";
+import { buildMockExamListRows, practiceTestTabOf, type MockExamListRow, type PracticeTestTab } from "@/lib/mock-exam/open-list";
+import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
+import Pager from "@/app/components/Pager";
 import { trackEvent } from "@/lib/analytics/track";
 import { startMockExamAction } from "@/lib/mock-exam/attempt-actions";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
@@ -12,6 +14,9 @@ import MockExamResultView from "./mock-exam/[attemptId]/MockExamResultView";
 
 // 2026-09-21(UAT 지적) — 모의고사 목록·결과는 독립 라우트가 아니라 StudentShell 의 탭 안에서 왼쪽
 // 네비게이션을 유지한 채 본다. 실제로 시험을 보는 화면(타이머 있는 화면)만 /student/mock-exam/[attemptId].
+export const PRACTICE_TESTS_PAGE_SIZE = 5;
+const TAB_ITEMS = [{ id: "todo", label: "To do" }, { id: "completed", label: "Completed" }] as const;
+
 // 2026-10-01 — 배정 폐지: 공개된 세트는 모든 활성 학생에게 보이고, '시작'을 눌러야 응시가 생긴다.
 export default function StudentMockExamTab({ initialOverview }: { initialOverview?: MockExamOverview }) {
   const router = useRouter();
@@ -22,6 +27,8 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
   const [openId, setOpenId] = useState<string | null>(null);
   const [detail, setDetail] = useState<MockExamAttemptDetail | null>(null);
   const [detailError, setDetailError] = useState<string | null>(null);
+  const [listTab, setListTab] = useState<PracticeTestTab>("todo");
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     if (initialOverview) return;
@@ -40,6 +47,11 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
   }, []);
 
   const rows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
+
+  const tabRows = useMemo(() => rows.filter((r) => practiceTestTabOf(r.state) === listTab), [rows, listTab]);
+  const pageCount = Math.max(1, Math.ceil(tabRows.length / PRACTICE_TESTS_PAGE_SIZE));
+  const pageSafe = Math.min(page, pageCount - 1);
+  const pageRows = tabRows.slice(pageSafe * PRACTICE_TESTS_PAGE_SIZE, (pageSafe + 1) * PRACTICE_TESTS_PAGE_SIZE);
 
   async function start(row: MockExamListRow) {
     setBusyKey(row.key);
@@ -64,7 +76,15 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
   }
 
   if (error) return <p className="text-[13px] text-red">{error}</p>;
-  if (overview === null) return <p className="text-[13px] text-grey-500">Loading…</p>;
+  if (overview === null) {
+    return (
+      <div role="status" aria-label="Loading practice tests" className="flex flex-col gap-2 animate-pulse">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="rounded-lg border border-grey-200 bg-white p-4"><div className="h-4 w-44 rounded bg-grey-100" /><div className="mt-2 h-3 w-28 rounded bg-grey-100" /></div>
+        ))}
+      </div>
+    );
+  }
 
   if (openId) {
     return (
@@ -90,7 +110,27 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
           {startError}
         </p>
       )}
-      <MockExamOpenList rows={rows} readOnly={false} busyKey={busyKey} onStart={start} onOpenResult={openResult} />
+      <UnderlineSubTabs
+        items={TAB_ITEMS}
+        activeId={listTab}
+        onSelect={(id) => { setListTab(id); setPage(0); }}
+        className="mb-3"
+      />
+      <MockExamOpenList
+        rows={pageRows}
+        readOnly={false}
+        busyKey={busyKey}
+        onStart={start}
+        onOpenResult={openResult}
+        emptyText={
+          rows.length === 0
+            ? "No practice tests are available yet."
+            : listTab === "todo"
+              ? "You're all caught up — no practice tests left to do."
+              : "No completed practice tests yet."
+        }
+      />
+      <Pager page={pageSafe} pageCount={pageCount} onPage={setPage} />
     </div>
   );
 }

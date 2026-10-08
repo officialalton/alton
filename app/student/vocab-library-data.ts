@@ -50,15 +50,15 @@ export async function loadMyVocabWords(supabase: SupabaseClient, studentId: stri
 }
 
 export async function loadLibraryBooks(supabase: SupabaseClient): Promise<LibraryBook[]> {
-  const { data: books } = await supabase.from("vocab_library_books").select("id, volume_no, title").order("volume_no", { ascending: true });
+  // 2026-10-08 — 권 목록과 권별 단어 수를 병렬 RPC/조회 1단계로 받는다(예전: 권 조회 → 권마다 head count N회).
+  // 단어 수는 서버에서 group by 로 센다 — PostgREST 1,000행 상한에도 걸리지 않는다.
+  const [{ data: books }, { data: counts }] = await Promise.all([
+    supabase.from("vocab_library_books").select("id, volume_no, title").order("volume_no", { ascending: true }),
+    supabase.rpc("vocab_library_book_word_counts"),
+  ]);
   if (!books?.length) return [];
-  // 권당 정확한 개수를 head:true count로 따로 받는다 — 전체 단어를 한 번에 select하면
-  // PostgREST 기본 응답 상한(1,000행)에 걸려 늦게 추가된 권(7·8권 등)의 개수가 0으로
-  // 잘못 표시된다(실제 단어 목록은 별도 페이지네이션 쿼리라 영향 없음).
-  const counts = await Promise.all(
-    books.map((b) => supabase.from("vocab_library_words").select("id", { count: "exact", head: true }).eq("book_id", b.id as string))
-  );
-  return books.map((b, i) => ({ id: b.id as string, volumeNo: b.volume_no as number, title: b.title as string, wordCount: counts[i].count ?? 0 }));
+  const countByBook = new Map(((counts ?? []) as { book_id: string; word_count: number | string }[]).map((c) => [c.book_id, Number(c.word_count)]));
+  return books.map((b) => ({ id: b.id as string, volumeNo: b.volume_no as number, title: b.title as string, wordCount: countByBook.get(b.id as string) ?? 0 }));
 }
 
 export async function loadLibraryBookWords(supabase: SupabaseClient, bookId: string): Promise<LibraryWord[]> {

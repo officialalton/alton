@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageFrame from "@/app/components/PageFrame";
 import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
 import type { BreakdownRow } from "@/lib/mock-exam/report";
+import { buildMockExamListRows, pickNextPracticeTest } from "@/lib/mock-exam/open-list";
 import { ctaLabelFor, type InterestStatus } from "./tutoring-state";
 
 // 2026-10-05 무료 회원 S2 — 무료 학습 회원 홈(브리프 §3.6): 다음 모의고사, 최근 결과 점수, 약점 상위 3,
@@ -26,8 +27,10 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
   const cta = ctaLabelFor(interestStatus ? { kind: "interest", status: interestStatus, invites: [] } : { kind: "none", invites: [] });
   const catalog = overview?.catalog ?? [];
   const attempts = overview?.attempts ?? [];
-  const inProgress = catalog.find((c) => c.attemptStatus === "assigned" || c.attemptStatus === "in_progress");
-  const nextExam = inProgress ?? catalog.find((c) => c.attemptId === null) ?? null;
+  // 2026-10-08 — 다음 모의고사는 끝내지 않은 세트 중 번호가 가장 낮은 것(최신 세트가 아니다). 진행 중이어도 번호순.
+  const nextRow = pickNextPracticeTest(buildMockExamListRows(catalog, attempts));
+  const nextExam = nextRow ? { name: nextRow.name, format: catalog.find((c) => c.examSetId === nextRow.examSetId)?.format ?? "fixed" } : null;
+  const inProgress = nextRow?.state === "in_progress";
   const latestGraded = attempts.find((a) => a.status === "graded" && a.correctCount !== null) ?? null;
 
   return (
@@ -36,7 +39,7 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
         <p className="text-[12px] font-bold text-brand-red mb-1">Free member</p>
         <h2 className="text-[20px] font-extrabold text-navy mb-2">Welcome, {studentName}</h2>
         <p className="text-[13.5px] text-grey-500 leading-[1.7]">
-          Take a free practice test and review your results and explanations. Save missed questions to your Mistake Notebook and unfamiliar words to your Vocabulary Builder for review.
+          Take a free practice test and review your results and explanations. Save missed questions to My Notebook and unfamiliar words to your Vocabulary Builder for review.
         </p>
       </div>
 
@@ -103,8 +106,8 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
 
       <div className="grid gap-4 md:grid-cols-2 mb-4">
         <button type="button" onClick={() => onSelectTab("problemlog")} className="rounded-xl bg-white border border-brand-border p-5 text-left">
-          <p className="text-[13px] font-bold text-navy">Mistake Notebook</p>
-          <p className="text-[12px] text-grey-500 mt-0.5">Retry questions saved from your practice tests.</p>
+          <p className="text-[13px] font-bold text-navy">My Notebook</p>
+          <p className="text-[12px] text-grey-500 mt-0.5">Retry questions you missed or saved from your practice tests.</p>
         </button>
         <button type="button" onClick={() => onSelectTab("vocab")} className="rounded-xl bg-white border border-brand-border p-5 text-left">
           <p className="text-[13px] font-bold text-navy">Vocabulary Builder</p>
