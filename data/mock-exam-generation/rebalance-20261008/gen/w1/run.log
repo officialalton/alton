@@ -1,0 +1,79 @@
+[D-cross] 후보 282 · 생성 claude-opus-5-5 · 검수 fable+opus · 추정(동기) $41.95 · 구간 누적 $0.00 / 상한 $60
+[sync gen] 282건 동기 실행(단가 2배, 예상 $9.59)
+[sync gen] 완료 성공 282, 이번 비용 $8.4772, 누적 $8.48
+[sync review-fable] 526건 동기 실행(단가 2배, 예상 $27.61)
+[sync review-fable] 완료 성공 526, 이번 비용 $23.4270, 누적 $31.90
+[sync review-opus] 526건 동기 실행(단가 2배, 예상 $7.89)
+[sync review-opus] 완료 성공 526, 이번 비용 $7.6179, 누적 $39.52
+{
+ "sat_rw": {
+  "cand": 282,
+  "genFail": 0,
+  "formatFail": 2,
+  "detPass": 263,
+  "crossScored": 263,
+  "correct": {
+   "agree": 250,
+   "of": 263,
+   "fablePass": 254,
+   "opusPass": 245
+  },
+  "compliance": {
+   "agree": 262,
+   "of": 263,
+   "fablePass": 262,
+   "opusPass": 261
+  },
+  "hardFit": {
+   "agree": 206,
+   "of": 263,
+   "fablePass": 185,
+   "opusPass": 152
+  },
+  "adoptedBoth": 130,
+  "adoptedOneOnly": 60,
+  "yieldBoth": 0.461,
+  "costUsd": 39.522,
+  "costPerAdoptedBoth": 0.304,
+  "fableOnlyPass": 48,
+  "opusOnlyPass": 12
+ },
+ "sat_math": {
+  "cand": 0,
+  "genFail": 0,
+  "formatFail": 0,
+  "detPass": 0,
+  "crossScored": 0,
+  "correct": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "compliance": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "hardFit": {
+   "agree": 0,
+   "of": 0,
+   "fablePass": 0,
+   "opusPass": 0
+  },
+  "adoptedBoth": 0,
+  "adoptedOneOnly": 0,
+  "yieldBoth": 0,
+  "costUsd": 0,
+  "costPerAdoptedBoth": null,
+  "fableOnlyPass": 0,
+  "opusOnlyPass": 0
+ },
+ "adoptedHardFableRule": {
+  "total": 171,
+  "rw": 171,
+  "math": 0,
+  "correctBothRequired": true
+ }
+}

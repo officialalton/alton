@@ -22,7 +22,7 @@ function loadKeyFromEnvLocal() { // ANTHROPIC_API_KEY 만 .env.local 에서 가�
   for (const line of readFileSync(p, "utf-8").split("\n")) { const m = line.match(/^\s*ANTHROPIC_API_KEY\s*=\s*(.*)\s*$/); if (m) process.env.ANTHROPIC_API_KEY = m[1].replace(/^["']|["']$/g, ""); }
 }
 
-const SYSTEM = `You classify SAT Reading & Writing passages by TOPIC for a diversity audit. For each numbered passage return one JSON object.
+export const SYSTEM = `You classify SAT Reading & Writing passages by TOPIC for a diversity audit. For each numbered passage return one JSON object.
 subject (exactly one of): ${SUBJECTS.join(", ")}.
   literature_fiction = fiction/poetry/drama excerpts; humanities = art, music, architecture, philosophy, language, literary criticism; social_science = psychology, sociology, anthropology, education, linguistics, political science studies; history_civics = historical events/people, law, government; economics_business = markets, firms, labor, trade; science_life = biology/ecology/medicine/animals/plants; science_earth_space = geology, climate, oceans (as physical system), astronomy; science_physical = physics, chemistry, materials, math; technology = engineering, computing, inventions.
 cluster: the SPECIFIC subject matter as a short lowercase kebab-case noun phrase (1-3 words) naming the organism/phenomenon/place/person/art form/event the passage is about, e.g. "cephalopods", "bees", "coral-reefs", "deep-sea-vents", "mars-exploration", "jazz", "hohokam-canals". Use the most general common name that still identifies the subject (octopus, squid, cuttlefish, nautilus -> "cephalopods"). For fiction use "fiction-" plus the central situation, e.g. "fiction-immigrant-family", "fiction-grief-and-memory".
@@ -185,4 +185,4 @@ function writeReport(file: string, c: Ctx) {
   mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, L.join("\n") + "\n");
   console.error(`report -> ${file}`);
 }
-main().catch((e) => { console.error(e.message ?? e); process.exit(1); });
+if (process.argv[1]?.endsWith("rw-topics.ts")) main().catch((e) => { console.error(e.message ?? e); process.exit(1); });
