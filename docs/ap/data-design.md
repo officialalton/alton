@@ -39,3 +39,43 @@
 
 ## 7. 보안·RLS 요지
 공개 전 세트·미검수 문항 학생 접근 차단(세트 공개 게이트가 `adopted+human_reviewed` 요구), 정답 노출 RPC 마스킹 유지, 응시 데이터 교차 사용자 격리, 관리자·외부 검수자는 역할별 읽기.
+
+---
+# Phase 1b 갱신 (2026-10-08): 필드 분리 · 번들 · FRQ 파트 · 생성 계획 · 지표
+
+## 8. 문항 메타데이터 필드 분리
+| 그룹 | 컬럼 | 설명 |
+|---|---|---|
+| content | `ap_subject`, `ap_unit_id`, `ap_topic_id`, `learning_objective` | 공식 코드(`LIM-1.E`, `LO 8.3.A`) |
+| skill | `primary_skill`, `secondary_skills[]`, `internal_tag`(선택) | 공식 코드 우선, 내부 분류는 공식에 매핑해 보조로만 |
+| structure | `structure` enum(standalone / shared_stimulus_set / frq_multipart), `bundle_id`, `bundle_position` | |
+| response | `response_mode` enum(select, calculate, explain, graph, code, essay), `option_count`(Micro 5, 그 외 4 등) | |
+| scoring | `scoring_mode` enum(exact, partial, argument), `points` | |
+| difficulty | `difficulty_provisional`(basic_learning/exam_prep/advanced_supplement), `difficulty_rationale`, `difficulty_evidence jsonb` | 근거 종류별 분리; 모델 일치는 근거 불가 |
+| exam_context | `calculator_part`(allowed/not_allowed/required), `est_seconds` | |
+| provenance | `generation_run_id`, `reference_notes_ref` | 공식 문항 텍스트 저장 금지 |
+
+## 9. 번들·FRQ 파트 스키마
+- `ap_bundles`(id, kind[mc_set|frq], subject, stimulus jsonb, stimulus_checked bool, status, total_points, calculator_part).
+- `ap_bundle_items`(bundle_id, position, problem_version_id) — MC 자료 세트 구성원, 전 구성원 공개 전제.
+- `ap_frq_parts`(id, bundle_id, label, points, task_type[assertion/explain/calculate/graph/code/essay], skill_codes[], response_mode, scoring_mode).
+- `ap_frq_rubric_rows`(id, part_id, row_no, points, criterion, skill_code, accepted_answers jsonb, alt_solutions jsonb, common_errors jsonb, requires_units bool) — **파트당 ≥1행, 행 점수 합 = 파트 점수**(DB 제약).
+- 학생 응답/피드백은 §5와 동일하되 `part_id` 단위로 저장, `ap_frq_feedback.kind='ai_reference'`는 전문가 비교 보고 승인 플래그(`ap_features.ai_frq_feedback_enabled`)가 켜진 뒤에만 노출.
+
+## 10. 생성 계획 표현: 단원 × 스킬 × 구조 부족분
+- 목표 재고(`ap_stock_targets`): 과목당 MC 50 + FRQ 번들 5(불변). 
+- 분해: `ap_stock_cells(subject, unit, primary_skill, structure, target, adopted, pending, shortfall)`. 생성 지시는 **shortfall>0 셀**만 대상으로 만든다(비공식 임의 배분 금지, 공식 비중에 비례한 목표 배분은 `weight_source`로 표기).
+- 뷰 `ap_stock_gap_v`: 단원×스킬×구조 히트맵(관리자).
+
+## 11. 샘플 계획 반영 규칙
+- 샘플 풀은 **과목별 주요 구조를 모두 포함**: 독립 MC, 자료 세트 MC(그림/그래프/표), 계산기 파트(해당 과목), 수치 문항, FRQ 유형들.
+- 20 MC + 2 FRQ 번들로 부족하면 부족 수량을 계산해 보고(아래 표, schedule-and-cost.md 비용 반영).
+| 과목 | 필요 구조 | 20 MC + FRQ 2로 가능? | 필요 추가분(권장) |
+|---|---|---|---|
+| Calc AB | 단원 8 × (P1/P2/P3), 파트 A/B(≈14/6), 그래프·표·식, FRQ 6유형(표/맥락, 그래프, 미방, 면적·부피, 입자, 함수) | MC 20 불가(스킬×단원 셀 24 중 일부만) → 핵심 단원×스킬 20셀만 커버 | MC **+10 (30)**, FRQ **+2 (4)** |
+| Biology | 단원 8, 자료 세트(4문항), 시각·표, FRQ 긴 2+짧은 4유형 | MC 20 = 단독 12 + 세트 8(2세트); 8단원 커버 가능하나 SP5 계산·SP3 방법 얇음 | MC **+10 (30)**, FRQ **+2 (4)** |
+| Micro | 단원 6, 5지선다, 그래프 세트, 수치 20–30%, FRQ 긴1·짧은2 | MC 20 가능(≈), FRQ 2는 긴/짧은 1개씩이라 짧은 유형(게임이론 등) 1개 부족 | MC **+10 (30)**, FRQ **+1 (3)** |
+- 오너 선택지: **A안**(20 MC + 2 FRQ, 구조 일부 미검증) vs **B안(권장)**(30 MC + 4/4/3 FRQ, 주요 구조 전체).
+
+## 12. 보고 지표(관리자 대시보드·수율 보고)
+후보 수·채택 수·**수율**, 반려 사유 분포, **채택 1건당 비용·호출 수**, 전문가 검수 소요 시간, 오류 건수(정답 오류·자료 오류 분리), 재고(단원/스킬/구조별), 난이도 근거 분포(잠정/교사/학생 데이터), **중복 비율**(문항·번들·유사 변형). 수율 25%는 효율 점검(품질 기준과 독립): 기준을 낮춰 맞추지 않는다. 난이도는 학생 데이터가 충분해질 때까지 `provisional` 유지, 보정은 `difficulty_evidence`에 근거를 쌓는 방식.
