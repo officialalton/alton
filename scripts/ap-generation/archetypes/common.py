@@ -11,7 +11,7 @@ def fmt(v, nd=4):
     """숫자 표기(수식 모드 LaTeX 없이 $...$ 로 감싸 반환)."""
     v = sp.sympify(v)
     if v.is_Rational or v.free_symbols or (not v.is_Float and v.has(sp.pi, sp.E, sp.exp, sp.log, sp.sqrt)):
-        s = sp.latex(v)
+        s = sp.latex(v).replace("\\log", "\\ln")
     else:
         f = float(v)
         s = ("%.*f" % (nd, f)).rstrip("0").rstrip(".") if abs(f) < 1e6 else sp.latex(v)

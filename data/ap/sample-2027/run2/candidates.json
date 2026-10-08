@@ -14102,11 +14102,11 @@
   "calculator": "not_allowed",
   "archetype": "frq_fprime_graph",
   "wording": "template",
-  "reviewState": "rejected",
+  "reviewState": "pending_expert_review",
   "reserve": false,
-  "rejectionReason": "criterion_failed_key_scoring; instant_reject_wrong_key",
+  "rejectionReason": null,
   "difficultyProvisional": "exam_prep",
-  "difficultyRationale": "Standard FRQ-style multi-part item. Parts a and b need sign analysis of f' and its slope. Part c needs a candidates test, with the net change in f computed as areas of triangles under the f' graph at the critical point and endpoints. Part d is a net-change calculation. The numbers are small and the geometry is simple, so the difficulty comes from the concepts and the number of reasoning steps rather than arithmetic or reading.",
+  "difficultyRationale": "Typical AP FRQ. Part (a) reads concavity from the slope of f', and (b) applies the first derivative test from sign changes of f'. Part (c) requires a candidates test: compute f at the critical points and endpoints using signed areas under f' (geometric areas, small integers), then compare. Part (d) reuses the (c) computation. The item has multiple representation changes (graph, area, function values) and justification steps, but the arithmetic is light and the wording is unambiguous.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -14162,14 +14162,14 @@
       "2.E",
       "3.E"
      ],
-     "model_answer": "Concave up on (0,2) and (2,4) because f' is increasing there.",
+     "model_answer": "Concave up on (0,4) because f' is increasing there.",
      "rubric_rows": [
       {
        "row_id": "a1",
        "points": 1,
-       "criterion": "Intervals where f' is increasing",
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
        "required_elements": [
-        "(0,2) and (2,4)"
+        "(0,4)"
        ],
        "optional_phrases": [],
        "alt_solutions": [
@@ -14363,7 +14363,7 @@
    "total_points": 9,
    "est_minutes": 15,
    "facts": [
-    "inc=[(0, 2), (2, 4)]",
+    "inc=[(0, 4)]",
     "rel={2: 'minimum', 6: 'maximum'}",
     "amin=2",
     "f8=2",
@@ -14378,7 +14378,7 @@
    "generatedByCode": true,
    "archetype": "frq_fprime_graph",
    "facts": [
-    "inc=[(0, 2), (2, 4)]",
+    "inc=[(0, 4)]",
     "rel={2: 'minimum', 6: 'maximum'}",
     "amin=2",
     "f8=2",
@@ -14389,34 +14389,32 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Topic 5.9 with 3.E justification; in scope."
+    "notes": "Topic 5.9 with 3.E justification; parts use f' graph, concavity, extrema, absolute extremum via net area."
    },
    "key_scoring": {
-    "pass": false,
-    "notes": "Part (a) key gives (0,2) and (2,4); f' is increasing on all of (0,4) (slopes 2 then 1, no change at x=2). The natural correct answer (0,4) would not earn row a1 since alt_solutions only permits endpoint variants. The rubric needs to accept (0,4) as the answer."
+    "pass": true,
+    "notes": "All keys verified: concave up (0,4); min at 2, max at 6; f(2)=0 is the absolute min; f(8)=2. Rubric rows consistent."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "The graph data are complete: vertices, axes, domain."
+    "notes": "Vertices and domain fully specify the graph; wording clear."
    },
    "distractor_explanation": {
     "pass": true,
-    "notes": "FRQ, not applicable; common_errors are sparse but acceptable."
+    "notes": "FRQ; no distractors. Rubric has few common_errors listed but acceptable."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "Typical AP FRQ with a 2/2/3/2 split, and the time is suitable."
+    "notes": "Non-calculator, simple geometry areas, 9 points split 2/2/3/2, typical AP style."
    },
-   "instant_reject": [
-    "wrong_key"
-   ],
+   "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "Parts (b)-(d) are correct. The part (a) key splits the concave-up interval into (0,2) and (2,4), but f' is increasing on (0,4) and the standard correct answer is (0,4). The rubric would penalize that correct answer, so the key is flawed and the item fails."
+   "summary": "Sound FRQ on a piecewise-linear f' graph; keys correct, rubric consistent, appropriate for the non-calculator AB exam."
   },
   "difficulty": {
    "label": "exam_prep",
-   "rationale": "Standard FRQ-style multi-part item. Parts a and b need sign analysis of f' and its slope. Part c needs a candidates test, with the net change in f computed as areas of triangles under the f' graph at the critical point and endpoints. Part d is a net-change calculation. The numbers are small and the geometry is simple, so the difficulty comes from the concepts and the number of reasoning steps rather than arithmetic or reading.",
+   "rationale": "Typical AP FRQ. Part (a) reads concavity from the slope of f', and (b) applies the first derivative test from sign changes of f'. Part (c) requires a candidates test: compute f at the critical points and endpoints using signed areas under f' (geometric areas, small integers), then compare. Part (d) reuses the (c) computation. The item has multiple representation changes (graph, area, function values) and justification steps, but the arithmetic is light and the wording is unambiguous.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 6,
@@ -14437,11 +14435,11 @@
   "calculator": "not_allowed",
   "archetype": "frq_fprime_graph",
   "wording": "llm",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_key_scoring; instant_reject_multiple_correct",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "exam_prep",
-  "difficultyRationale": "Standard FRQ-style multi-part item. Parts a and b require reading the sign and slope of f' with justification. Part c requires the candidates test, with the FTC computing f at critical points and endpoints from triangle areas, then comparing. Part d is net signed area. Numbers are small and the wording is unambiguous. All content is in scope for AB Unit 5 and the FTC connection.",
+  "difficultyRationale": "Standard AP FRQ-style multi-part item. Parts a and b need sign analysis of f' with justification. Part c needs the candidates test with net areas under the graph of f' (graph to area to function values). Part d is an FTC accumulation using small geometric areas. Numbers are small and the stimulus is clean, so the difficulty comes from legitimate multi-step reasoning and justification, not from computation or reading load.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -14497,14 +14495,14 @@
       "2.E",
       "3.E"
      ],
-     "model_answer": "Concave up on (0,2) and (2,4) because f' is increasing there.",
+     "model_answer": "Concave up on (0,4) because f' is increasing there.",
      "rubric_rows": [
       {
        "row_id": "a1",
        "points": 1,
-       "criterion": "Intervals where f' is increasing",
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
        "required_elements": [
-        "(0,2) and (2,4)"
+        "(0,4)"
        ],
        "optional_phrases": [],
        "alt_solutions": [
@@ -14587,7 +14585,7 @@
     },
     {
      "label": "c",
-     "prompt": "Given that $f(0)=4$, find the value of $x$ at which $f$ attains its absolute minimum on the closed interval $[0,8]$. Justify your answer.",
+     "prompt": "Given that $f(0)=4$, find the value of $x$ at which $f$ attains its absolute minimum on $[0,8]$. Justify your answer.",
      "points": 3,
      "response_mode": "explain",
      "skill_codes": [
@@ -14651,7 +14649,7 @@
     },
     {
      "label": "d",
-     "prompt": "Find $f(8)$.",
+     "prompt": "Find the value of $f(8)$.",
      "points": 2,
      "response_mode": "calculate",
      "skill_codes": [
@@ -14698,7 +14696,7 @@
    "total_points": 9,
    "est_minutes": 15,
    "facts": [
-    "inc=[(0, 2), (2, 4)]",
+    "inc=[(0, 4)]",
     "rel={2: 'minimum', 6: 'maximum'}",
     "amin=2",
     "f8=10",
@@ -14713,7 +14711,7 @@
    "generatedByCode": true,
    "archetype": "frq_fprime_graph",
    "facts": [
-    "inc=[(0, 2), (2, 4)]",
+    "inc=[(0, 4)]",
     "rel={2: 'minimum', 6: 'maximum'}",
     "amin=2",
     "f8=10",
@@ -14724,38 +14722,36 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Fits 5.9/5.6/5.4 and justification skill; all content is in scope."
+    "notes": "Parts a-c are 5.9/5.6/5.4 justification from the graph of f'. Part d uses the FTC with areas, a fair prerequisite at AB."
    },
    "key_scoring": {
-    "pass": false,
-    "notes": "Part (a) key is (0,2) and (2,4), but f' is increasing on all of (0,4), so (0,4) is the natural, correct answer (the independent solver gave it). The rubric requires the split intervals and would penalize a correct (0,4). The split is also unjustified since nothing changes concavity at x=2 (f'' simply does not exist there). Rubric a1/a2 required_elements are inconsistent with the valid alternative. Parts b, c, d are fine."
+    "pass": true,
+    "notes": "All answers verified: f(2)=0, f(6)=12, f(8)=10, concave up on (0,4), min at x=2. Rubric rows are consistent. Part a2 lists two required elements that are alternatives, a minor point. Part c2's wording mentions net area, but the required element is only 'compares candidate values'."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "Graph data are complete: vertices, axes, domain. Wording is clear."
+    "notes": "The vertices and domain fully specify the graph. The description says 'labeled points', which is a trivial wording issue."
    },
    "distractor_explanation": {
     "pass": true,
-    "notes": "FRQ, so not applicable; common_errors are sparse but acceptable."
+    "notes": "This is an FRQ, so no distractors apply. The common_errors fields are sparse but acceptable."
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "A 2/2/3/2 point split, non-calculator, simple arithmetic; typical of the AP exam."
+    "notes": "9 points across 4 parts (2/2/3/2), no calculator needed, simple triangle areas, about 15 minutes. This is typical of AP FRQs."
    },
-   "instant_reject": [
-    "multiple_correct"
-   ],
+   "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The item fails on key/scoring in part (a). The key (0,2) and (2,4) is an unnatural split of what is really (0,4), where f' is increasing. The rubric would penalize the equally correct answer (0,4), so the answer is not unique as written. Parts b through d are sound. Fix by making the key (0,4) and allowing the split form as an alternative."
+   "summary": "The item is sound and correctly keyed, with simple arithmetic and valid justification rubrics. Only minor wording nitpicks (the 'labeled points' description and the a2 required elements). Pass."
   },
   "difficulty": {
    "label": "exam_prep",
-   "rationale": "Standard FRQ-style multi-part item. Parts a and b require reading the sign and slope of f' with justification. Part c requires the candidates test, with the FTC computing f at critical points and endpoints from triangle areas, then comparing. Part d is net signed area. Numbers are small and the wording is unambiguous. All content is in scope for AB Unit 5 and the FTC connection.",
+   "rationale": "Standard AP FRQ-style multi-part item. Parts a and b need sign analysis of f' with justification. Part c needs the candidates test with net areas under the graph of f' (graph to area to function values). Part d is an FTC accumulation using small geometric areas. Numbers are small and the stimulus is clean, so the difficulty comes from legitimate multi-step reasoning and justification, not from computation or reading load.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 6,
-   "representation_changes": 2,
+   "representation_changes": 3,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 540
   }
@@ -14772,11 +14768,11 @@
   "calculator": "not_allowed",
   "archetype": "frq_fprime_graph",
   "wording": "llm",
-  "reviewState": "rejected",
-  "reserve": false,
-  "rejectionReason": "criterion_failed_key_scoring; instant_reject_multiple_correct",
+  "reviewState": "pending_expert_review",
+  "reserve": true,
+  "rejectionReason": null,
   "difficultyProvisional": "exam_prep",
-  "difficultyRationale": "Standard AP FRQ: read concavity and sign changes from the graph of f', then use the Fundamental Theorem (areas as net change) with a candidates test including endpoints for the absolute minimum. Numbers are small integers and the wording is clear. Several justification steps and graph-to-values representation changes make it appropriate for a full mock, not basic learning.",
+  "difficultyRationale": "A standard AP-style multi-part item on connecting f, f', f'' from the graph of f'. Part a is a slope-of-f' read, part b is a sign-change argument, and part c requires a candidates test with areas computed by simple geometry. Part d uses net change. The numbers are small and clean, the context is minimal, and everything is in scope. The difficulty comes from the reasoning chain and the graph-to-area-to-value representation changes, not from unfair sources.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -14832,14 +14828,14 @@
       "2.E",
       "3.E"
      ],
-     "model_answer": "Concave up on (4,6) and (6,8) because f' is increasing there.",
+     "model_answer": "Concave up on (4,8) because f' is increasing there.",
      "rubric_rows": [
       {
        "row_id": "a1",
        "points": 1,
-       "criterion": "Intervals where f' is increasing",
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
        "required_elements": [
-        "(4,6) and (6,8)"
+        "(4,8)"
        ],
        "optional_phrases": [],
        "alt_solutions": [
@@ -14922,7 +14918,7 @@
     },
     {
      "label": "c",
-     "prompt": "Given that $f(0)=3$, find the value of $x$ at which $f$ attains its absolute minimum on $[0,8]$. Justify your answer.",
+     "prompt": "Given that $f(0)=3$, find the value of $x$ at which $f$ attains its absolute minimum on the closed interval $[0,8]$. Justify your answer.",
      "points": 3,
      "response_mode": "explain",
      "skill_codes": [
@@ -14986,7 +14982,7 @@
     },
     {
      "label": "d",
-     "prompt": "Find $f(8)$.",
+     "prompt": "Using $f(0)=3$, find $f(8)$.",
      "points": 2,
      "response_mode": "calculate",
      "skill_codes": [
@@ -15033,7 +15029,7 @@
    "total_points": 9,
    "est_minutes": 15,
    "facts": [
-    "inc=[(4, 6), (6, 8)]",
+    "inc=[(4, 8)]",
     "rel={2: 'maximum', 6: 'minimum'}",
     "amin=6",
     "f8=1",
@@ -15048,7 +15044,7 @@
    "generatedByCode": true,
    "archetype": "frq_fprime_graph",
    "facts": [
-    "inc=[(4, 6), (6, 8)]",
+    "inc=[(4, 8)]",
     "rel={2: 'maximum', 6: 'minimum'}",
     "amin=6",
     "f8=1",
@@ -15059,15 +15055,15 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": "Topic 5.9/5.6/5.4 with justification; in scope."
+    "notes": "Topic 5.9/5.6/5.4 with justification dominant; part d is a minor prerequisite skill."
    },
    "key_scoring": {
-    "pass": false,
-    "notes": "Part (a): f' is increasing on all of (4,8) since the slope is +2 on both segments, so concave up on (4,8). The model answer and required element '(4,6) and (6,8)' penalize the correct answer (4,8) with no alternative listed. Also the model answer's split at x=6 is misleading. Part (c) rows are vague (c1 requires listing x=2 though it is irrelevant to the minimum; c2 'compares candidate values' does not require the values)."
+    "pass": true,
+    "notes": "All answers verified: (4,8); max at 2, min at 6; absolute min at 6 (f=-3); f(8)=1. Rubric consistent; c lacks an explicit row for computing f-values via net area but c2 covers comparing values."
    },
    "stimulus_expression": {
     "pass": true,
-    "notes": "Graph data is complete: vertices, axes, domain."
+    "notes": "Vertices, axes and domain are complete; the graph can be rendered from the data. Wording is clear."
    },
    "distractor_explanation": {
     "pass": true,
@@ -15075,24 +15071,22 @@
    },
    "exam_suitability": {
     "pass": true,
-    "notes": "Typical AP FRQ length, no calculator needed, 9 points with 2/2/3/2."
+    "notes": "9 points, 2/2/3/2 structure, no calculator, clean numbers."
    },
-   "instant_reject": [
-    "multiple_correct"
-   ],
+   "instant_reject": [],
    "matches_reference_pattern": true,
    "resembles_known_exam_item": false,
-   "summary": "The item is mostly sound, but the part (a) key and rubric are flawed. The correct answer (4,8) is not accepted, because the rubric requires the split '(4,6) and (6,8)' and lists no alternative. The part (c) rubric rows are also loose. Fail until the rubric accepts (4,8) and part (c) is tightened."
+   "summary": "The item passes. Keys are correct and the stimulus is complete. The 9-point structure is reasonable and the scope is appropriate."
   },
   "difficulty": {
    "label": "exam_prep",
-   "rationale": "Standard AP FRQ: read concavity and sign changes from the graph of f', then use the Fundamental Theorem (areas as net change) with a candidates test including endpoints for the absolute minimum. Numbers are small integers and the wording is clear. Several justification steps and graph-to-values representation changes make it appropriate for a full mock, not basic learning.",
+   "rationale": "A standard AP-style multi-part item on connecting f, f', f'' from the graph of f'. Part a is a slope-of-f' read, part b is a sign-change argument, and part c requires a candidates test with areas computed by simple geometry. Part d uses net change. The numbers are small and clean, the context is minimal, and everything is in scope. The difficulty comes from the reasoning chain and the graph-to-area-to-value representation changes, not from unfair sources.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 6,
    "representation_changes": 3,
    "difficulty_from_unfair_sources": false,
-   "est_seconds": 600
+   "est_seconds": 540
   }
  },
  {
@@ -15111,7 +15105,7 @@
   "reserve": false,
   "rejectionReason": "criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability",
   "difficultyProvisional": "exam_prep",
-  "difficultyRationale": "Multi-part FRQ using a graph of f'. Part (a) reads concavity from the slope of f'. Part (b) reads sign changes of f'. Part (c) requires a candidates test: the net-area computation gives f(2)=3, f(6)=-5, f(8)=-1 and f(0)=1, so the absolute minimum is at x=6. Part (d) uses the FTC with triangle areas, giving f(8)=-1. The arithmetic is light and the reading load is low. The difficulty comes from the concept-linking and justification steps typical of AP free-response items.",
+  "difficultyRationale": "A standard multipart FRQ on analyzing f from the graph of f'. It needs concavity from the slope of f', sign-change classification of extrema, and a candidates test for the absolute minimum using areas (FTC) to get f(2), f(6) and f(8). Justification is required throughout. The numbers are small, the geometric areas are simple, the scope is Unit 5 and the FTC link is standard, so the difficulty comes from legitimate reasoning and representation changes.",
   "payload": {
    "archetype": "frq_fprime_graph",
    "template": "fprime_graph_justify",
@@ -15167,14 +15161,14 @@
       "2.E",
       "3.E"
      ],
-     "model_answer": "Concave up on (4,6) and (6,8) because f' is increasing there.",
+     "model_answer": "Concave up on (4,8) because f' is increasing there.",
      "rubric_rows": [
       {
        "row_id": "a1",
        "points": 1,
-       "criterion": "Intervals where f' is increasing",
+       "criterion": "Maximal open intervals where f' is increasing (adjacent intervals merged)",
        "required_elements": [
-        "(4,6) and (6,8)"
+        "(4,8)"
        ],
        "optional_phrases": [],
        "alt_solutions": [
@@ -15210,7 +15204,7 @@
     },
     {
      "label": "b",
-     "prompt": "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$. Classify each as a relative minimum or a relative maximum, and justify your answer.",
+     "prompt": "Find the $x$-coordinate of each point at which $f$ has a relative extremum on $(0,8)$, and classify each as a relative minimum or a relative maximum. Justify your answer.",
      "points": 2,
      "response_mode": "explain",
      "skill_codes": [
@@ -15368,7 +15362,7 @@
    "total_points": 9,
    "est_minutes": 15,
    "facts": [
-    "inc=[(4, 6), (6, 8)]",
+    "inc=[(4, 8)]",
     "rel={2: 'maximum', 6: 'minimum'}",
     "amin=6",
     "f8=-1",
@@ -15383,7 +15377,7 @@
    "generatedByCode": true,
    "archetype": "frq_fprime_graph",
    "facts": [
-    "inc=[(4, 6), (6, 8)]",
+    "inc=[(4, 8)]",
     "rel={2: 'maximum', 6: 'minimum'}",
     "amin=6",
     "f8=-1",
@@ -15392,17 +15386,24 @@
    "seed": 4
   },
   "review": {
-   "scope_skill": "\n<parameter name=\"pass\">true",
-   "notes": "Part a's key is (4,6) and (6,8), but f' has constant slope 2 across x=6, so the natural correct answer is (4,8). The rubric does not clearly accept (4,8), so a correct student answer could be penalized. Row c1 requires x=2 as a candidate for the minimum, which contradicts its own criterion (relative-minimum locations plus endpoints). The c2 required element is vague. Part a2 lists \"f' is increasing\" and \"f'' is positive\" without saying either one suffices.",
-   "key_scoring": "\n<parameter name=\"pass\">false"
+   "scope_skill": "<parameter name=\"pass\">true",
+   "notes": "The areas are small integers, the load is typical of an AP FRQ, and the 2/2/3/2 point split is realistic.",
+   "key_scoring": "<parameter name=\"pass\">true",
+   "stimulus_expression": "<parameter name=\"pass\">true",
+   "distractor_explanation": "<parameter name=\"pass\">true",
+   "exam_suitability": "<parameter name=\"pass\">true",
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a sound f'-graph analysis with correct keys, a complete stimulus and an appropriate non-calculator load. Accept."
   },
   "difficulty": {
    "label": "exam_prep",
-   "rationale": "Multi-part FRQ using a graph of f'. Part (a) reads concavity from the slope of f'. Part (b) reads sign changes of f'. Part (c) requires a candidates test: the net-area computation gives f(2)=3, f(6)=-5, f(8)=-1 and f(0)=1, so the absolute minimum is at x=6. Part (d) uses the FTC with triangle areas, giving f(8)=-1. The arithmetic is light and the reading load is low. The difficulty comes from the concept-linking and justification steps typical of AP free-response items.",
+   "rationale": "A standard multipart FRQ on analyzing f from the graph of f'. It needs concavity from the slope of f', sign-change classification of extrema, and a candidates test for the absolute minimum using areas (FTC) to get f(2), f(6) and f(8). Justification is required throughout. The numbers are small, the geometric areas are simple, the scope is Unit 5 and the FTC link is standard, so the difficulty comes from legitimate reasoning and representation changes.",
    "reading_load": "low",
    "computation_load": "low",
    "reasoning_steps": 6,
-   "representation_changes": 3,
+   "representation_changes": 2,
    "difficulty_from_unfair_sources": false,
    "est_seconds": 540
   }

@@ -8,34 +8,31 @@ import numpy as np
 def int_by_parts(rng):
     k = rng.choice([1, 2, 3]); form = rng.choice(["xe", "xln", "xsin"])
     if form == "xe":
-        f = x * sp.exp(k * x); b = 1; val = sp.integrate(f, (x, 0, b)); txt = f"\\int_0^1 x e^{{{k}x}}\\,dx"
-        ds = [sp.integrate(x * sp.exp(k * x), (x, 0, 1)) * 0 + (sp.exp(k) / k + 1 / S(k * k)), sp.exp(k) / k, (sp.exp(k) / k - (sp.exp(k) - 1) / (k * k)) * k, (sp.exp(k) / k + (sp.exp(k) - 1) / (k * k))]
-        why = ["Mishandles the sign of the remaining integral.", "Stops after the uv term (forgets the integral of v du).", "Multiplies by k after parts.", "Adds the remaining integral instead of subtracting."]
+        f = x * sp.exp(k * x); a0, b0 = 0, 1; txt = f"\\int_0^1 x e^{{{k}x}}\\,dx"; val = sp.integrate(f, (x, a0, b0))
+        E = sp.exp(k)
+        ds = [(E / k + (E - 1) / S(k * k), f"Adds the remaining integral instead of subtracting it: e^{k}/{k} + (e^{k} - 1)/{k*k}."), (E / k, f"Stops after the uv term e^{k}/{k} and omits the remaining integral."),
+              (E / k - (E - 1) / S(k), f"Evaluates the remaining integral of e^({k}x)/{k} as (e^{k} - 1)/{k} (misses the second factor of {k})."), (-E / k + (E - 1) / S(k * k), f"Takes the uv term with the wrong sign: -e^{k}/{k} + (e^{k} - 1)/{k*k}.")]
     elif form == "xln":
-        f = x * sp.log(x); val = sp.integrate(f, (x, 1, k + 1)); txt = f"\\int_1^{k+1} x\\ln x\\,dx"
-        a = k + 1
-        ds = [(a ** 2 / 2) * sp.log(a), (a ** 2 / 2) * sp.log(a) + (a ** 2 - 1) / 4, (a ** 2 / 2) * sp.log(a) - (a ** 2 - 1) / 2, (a ** 2 - 1) / 4]
-        why = ["Keeps only the uv term.", "Adds the remaining integral instead of subtracting.", "Uses 1/2 x instead of 1/4 x^2 in the remaining integral.", "Reports only the remaining integral."]
+        a = k + 1; f = x * sp.log(x); a0, b0 = 1, a; txt = f"\\int_1^{a} x\\ln x\\,dx"; val = sp.integrate(f, (x, a0, b0)); A2 = S(a * a)
+        ds = [(A2 / 2 * sp.log(a), f"Keeps only the uv term ({a*a}/2) ln {a} and drops the remaining integral."), (A2 / 2 * sp.log(a) + (A2 - 1) / 4, "Adds the remaining integral instead of subtracting it."),
+              (A2 / 2 * sp.log(a) - (A2 - 1) / 2, "Evaluates the remaining integral of x/2 as x^2/2, forgetting the factor 1/2."), ((A2 - 1) / 4, "Reports only the remaining integral.")]
     else:
-        f = x * sp.sin(x); val = sp.integrate(f, (x, 0, sp.pi)); txt = "\\int_0^{\\pi} x\\sin x\\,dx"
-        ds = [-sp.pi, sp.pi * 2, sp.Integer(0) + 1, -2 * sp.pi]
-        why = ["Sign error: uses u dv with the wrong sign of v.", "Doubles the result.", "Forgets the uv boundary term.", "Sign and factor errors combined."]
-    assert abs(float(sp.N(val)) - _I.quad(lambda v: float(sp.N(f.subs(x, v))), 0 if form != "xln" else 1, {"xe": 1, "xln": k + 1, "xsin": math.pi}[form])[0]) < 1e-6
+        f = x * sp.sin(x); a0, b0 = 0, sp.pi; txt = "\\int_0^{\\pi} x\\sin x\\,dx"; val = sp.integrate(f, (x, a0, b0))
+        ds = [(-sp.pi, "Takes u dv with the sign of v reversed, giving -pi."), (2 * sp.pi, "Doubles the uv boundary term to 2 pi."), (sp.Integer(1), "Forgets the uv boundary term and keeps only the remaining integral."), (-2 * sp.pi, "Reverses the sign of v and doubles the boundary term.")]
+    assert abs(float(sp.N(val)) - _I.quad(lambda v: float(sp.N(f.subs(x, v))), float(sp.N(a0)), float(sp.N(b0)))[0]) < 1e-6
     key = Opt(fmt(val), True, "Integration by parts with u = x and dv the remaining factor.", sp.N(val, 10))
-    return pack("int_by_parts", "6.11", "1.C", "not_allowed", f"What is ${txt}$?", key, [Opt(fmt(v), False, w, sp.N(v, 10)) for v, w in zip(ds, why)], rng, est=100, facts=[f"value={val}"])
+    return pack("int_by_parts", "6.11", "1.C", "not_allowed", f"What is ${txt}$?", key, [Opt(fmt(v), False, w, sp.N(v, 10)) for v, w in ds], rng, est=100, facts=[f"value={val}"])
 
 def partial_fractions(rng):
     a = rng.choice([1, 2]); b = a + rng.choice([2, 3]); lo, hi = b + 1, b + 3
-    expr = 1 / ((x - a) * (x - b)); val = sp.integrate(expr, (x, lo, hi))
-    val = sp.simplify(val)
+    expr = 1 / ((x - a) * (x - b)); val = sp.simplify(sp.integrate(expr, (x, lo, hi)))
     assert abs(float(sp.N(val)) - _I.quad(lambda v: 1 / ((v - a) * (v - b)), lo, hi)[0]) < 1e-6
-    A = S(1) / (a - b); B = S(1) / (b - a)
-    ds = [sp.log((hi - b) * (lo - a) / ((hi - a) * (lo - b))) * A * -1 + 0, sp.log(hi * 1 / (lo)) * 0 + sp.log(S((hi - a) * (hi - b)) / ((lo - a) * (lo - b))), A * sp.log(S(hi - a) / (lo - a)) + A * sp.log(S(hi - b) / (lo - b)), sp.log(S(hi - b) / (lo - b)) - sp.log(S(hi - a) / (lo - a))]
-    ds = [d for d in ds if abs(float(sp.N(d)) - float(sp.N(val))) > 1e-9]
-    why = ["Reverses the order of the two logarithms.", "Integrates the product as a single logarithm of the whole denominator.", "Uses the same coefficient for both terms.", "Drops the coefficient 1/(a-b)."]
+    R = lambda xx: sp.log(S(xx - a) / (xx - b)); core = R(hi) - R(lo)
+    ds = [(core, f"Omits the coefficient 1/(a - b) = 1/{a-b}: reports ln((x-{a})/(x-{b})) evaluated from {lo} to {hi}."), (-val, "Reverses the two logarithm terms, giving the negative of the correct value."),
+          (sp.log(S((hi - a) * (hi - b)) / ((lo - a) * (lo - b))), f"Integrates 1/((x-{a})(x-{b})) as ln|(x-{a})(x-{b})|."), (core / (a + b), f"Uses 1/(a + b) = 1/{a+b} instead of 1/(a - b) = 1/{a-b} as the coefficient.")]
     key = Opt(fmt(val), True, "Partial fractions A/(x-a)+B/(x-b), then logarithms.", sp.N(val, 10))
     stem = f"What is $\\displaystyle\\int_{{{lo}}}^{{{hi}}} \\dfrac{{dx}}{{(x-{a})(x-{b})}}$?"
-    return pack("partial_fractions", "6.12", "1.C", "not_allowed", stem, key, [Opt(fmt(d), False, w, sp.N(d, 10)) for d, w in zip(ds, why)], rng, est=100, facts=[f"value={val}"])
+    return pack("partial_fractions", "6.12", "1.C", "not_allowed", stem, key, [Opt(fmt(sp.simplify(sp.logcombine(sp.expand_log(d, force=True), force=True))), False, w, sp.N(d, 10)) for d, w in ds], rng, est=100, facts=[f"value={val}"])
 
 def improper_integral(rng):
     p = rng.choice([S(1) / 2, S(2) / 3, S(3) / 2, 2, 3, S(5) / 2]); conv = p > 1
@@ -60,7 +57,8 @@ def euler_method(rng):
     wrong_old = y0 + h * g(x0, y0) + h * g(x0 + h, y0)       # 갱신된 y 대신 y0 사용
     stem = f"Let $y=f(x)$ satisfy $\\dfrac{{dy}}{{dx}}={form.replace('xy','xy')}$ with $f(0)={y0}$. What is the approximation of $f(1)$ obtained by Euler's method with two steps of equal size?"
     key = Opt(fmt(y2), True, "Two Euler steps of size 1/2, updating x and y each step.", y2)
-    ds = [Opt(fmt(one), False, "Stops after one step.", one), Opt(fmt(wrong_x), False, "Does not advance x in the second step.", wrong_x), Opt(fmt(wrong_h), False, "Forgets to multiply by the step size.", wrong_h), Opt(fmt(wrong_old), False, "Reuses the starting y value in the second step.", wrong_old)]
+    ds = [Opt(fmt(one), False, f"Stops after one step: y1 = {y0} + (1/2)({g(x0, y0)}) = {y1}.", one), Opt(fmt(wrong_x), False, f"Does not advance x in the second step (uses x = 0 again): y2 = {y1} + (1/2)({g(x0, y1)}).", wrong_x),
+          Opt(fmt(wrong_h), False, f"Forgets to multiply by the step size h = 1/2 in both steps: y1 = {y0} + {g(x0, y0)}, y2 = y1 + g(1/2, y1).", wrong_h), Opt(fmt(wrong_old), False, f"Reuses the starting value y = {y0} in the second slope: y2 = {y1} + (1/2)({g(x0 + h, y0)}).", wrong_old)]
     return pack("euler_method", "7.5", "1.E", "not_allowed", stem, key, ds, rng, est=90, facts=[f"y2={y2}"])
 
 def logistic(rng):
@@ -77,7 +75,7 @@ def logistic(rng):
     if kind == "maxrate":
         g = lambda v: float(kk) * v * (1 - v / K); best = max(range(1, K), key=g); assert abs(best - K / 2) <= 1
     key = Opt(fmt(key_v), True, "Equilibrium K for the limit; K/2 maximizes P(1-P/K).", key_v)
-    return pack("logistic", "7.9", "3.D", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in ds], rng, est=75, facts=[f"{kind}={key_v}"])
+    return pack("logistic", "7.9", "1.D", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in ds], rng, est=75, facts=[f"{kind}={key_v}"])
 
 def arc_length_calc(rng):
     c = rng.choice([1, 2, 3]); n = rng.choice([S(3) / 2, 2, 3]); b = rng.choice([2, 3])
@@ -120,23 +118,27 @@ def polar_area_calc(rng):
     return pack("polar_area_calc", "9.8", "1.D", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=90, facts=[f"A={A}"])
 
 def series_test(rng):
-    fam = rng.choice(["geo", "pseries", "alt_p", "ratio", "nthterm"])
+    fam = rng.choice(["geo", "lct_div", "lct_conv", "alt_cond", "alt_abs", "ratio", "nthterm"])
+    c = rng.choice([2, 3, 5])
     if fam == "geo":
         r = rng.choice([S(2) / 3, S(3) / 2, -S(1) / 2, -S(4) / 3, S(5) / 4]); a0 = rnd(rng, 1, 4)
         expr = f"\\sum_{{n=0}}^{{\\infty}} {a0}\\left({sp.latex(r)}\\right)^n"; truth = "abs" if abs(r) < 1 else "div"
-        # 독립: 부분합
         ps = sum(float(a0 * r ** n) for n in range(60)); assert (abs(ps) < 1e3) == (truth == "abs")
-    elif fam == "pseries":
-        p = rng.choice([S(1) / 2, S(2) / 3, 1, S(3) / 2, 2]); expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{1}}{{n^{{{sp.latex(p)}}}}}"; truth = "abs" if p > 1 else "div"
-    elif fam == "alt_p":
-        p = rng.choice([S(1) / 2, 1, S(3) / 2, 2]); expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{(-1)^n}}{{n^{{{sp.latex(p)}}}}}"; truth = "abs" if p > 1 else "cond"
+    elif fam == "lct_div":
+        expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{n}}{{n^2+{c}}}"; truth = "div"
+    elif fam == "lct_conv":
+        expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{n+1}}{{n^3+{c}}}"; truth = "abs"
+    elif fam == "alt_cond":
+        expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{(-1)^n n}}{{n^2+{c}}}"; truth = "cond"
+    elif fam == "alt_abs":
+        expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{(-1)^n}}{{n^2+{c}}}"; truth = "abs"
     elif fam == "ratio":
-        k = rng.choice([2, 3, 5]); expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{n^2}}{{{k}^n}}"; truth = "abs"
+        expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{n^2}}{{{c}^n}}"; truth = "abs"
     else:
-        c = rng.choice([2, 3]); expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{{c}n}}{{{c}n+1}}"; truth = "div"
+        expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{{c}n}}{{{c}n+1}}"; truth = "div"
     texts = {"abs": "The series converges absolutely", "cond": "The series converges conditionally", "div": "The series diverges", "nth": "The series converges by the nth-term test"}
-    why = {"abs": "Absolute convergence holds.", "cond": "Converges, but the series of absolute values diverges.", "div": "Terms or partial sums do not settle.", "nth": "The nth-term test can only show divergence, never convergence."}
-    wr = {"abs": "Claims absolute convergence although the absolute series diverges.", "cond": "Treats a series that also converges absolutely as only conditionally convergent.", "div": "Claims divergence for a convergent series.", "nth": why["nth"]}
+    why = {"abs": "The series of absolute values converges (comparison, ratio or geometric test), so it converges absolutely.", "cond": "The series converges by the alternating series test, but the series of absolute values behaves like the harmonic series and diverges.", "div": "The terms do not tend to 0, or the series is comparable to a divergent harmonic series, so it diverges.", "nth": "The nth-term test can only show divergence, never convergence."}
+    wr = {"abs": "Claims absolute convergence although the series of absolute values diverges.", "cond": "Calls a series conditionally convergent although its absolute series converges (or it does not converge at all).", "div": "Claims divergence for a convergent series.", "nth": why["nth"]}
     opts = [Opt(texts[k], k == truth, why[k] if k == truth else wr[k], None) for k in ["abs", "cond", "div", "nth"]]
     return pack_fixed("series_test", "10.9", "3.D", "not_allowed", f"Which statement about $\\displaystyle {expr}$ is true?", opts, rng, est=85, facts=[f"{fam}:{truth}"])
 
@@ -151,7 +153,7 @@ def taylor_coeff(rng):
     why = ["Reports the nth derivative at 0 without dividing by n!.", "Forgets the k^n from the chain rule.", "Multiplies by n! instead of dividing.", "Makes a sign error when simplifying the quotient."]
     stem = f"What is the coefficient of $x^{n}$ in the Maclaurin series for $f(x)={sp.latex(f)}$?"
     key = Opt(fmt(c), True, "f^(n)(0)/n! (or substitute k x into the standard series).", c)
-    return pack("taylor_coeff", "10.14", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None and d != 0 or (d == 0 and False)], rng, est=85, facts=[f"coef={c}"])
+    return pack("taylor_coeff", "10.14", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None and d != c], rng, est=85, facts=[f"coef={c}"])
 
 def radius_interval(rng):
     b = rng.choice([2, 3, 4]); a = rng.choice([0, 1, -1]); alt = rng.choice([True, False])
@@ -182,9 +184,9 @@ def geometric_sum(rng):
 def lagrange_error(rng):
     n = rng.choice([2, 3]); M = rng.choice([4, 6, 12]); a = rng.choice([1, 2])
     key_v = S(M) * a ** (n + 1) / sp.factorial(n + 1)
-    stem = f"The function $f$ has derivatives of all orders and $|f^{{({n+1})}}(x)|\\le {M}$ for $0\\le x\\le {a}$. Let $P_{{{n}}}(x)$ be the Maclaurin polynomial of degree ${n}$. Which is the smallest bound from the Lagrange error bound for $|f({a})-P_{{{n}}}({a})|$?"
+    stem = f"The function $f$ has derivatives of all orders and $|f^{{({n+1})}}(x)|\\le {M}$ for $0\\le x\\le {a}$. Let $P_{{{n}}}(x)$ be the Maclaurin polynomial of degree ${n}$. Which of the following is the Lagrange error bound for $|f({a})-P_{{{n}}}({a})|$ obtained from this information?"
     ds = [S(M) * a ** n / sp.factorial(n), S(M) * a ** (n + 1) / sp.factorial(n), S(M) * a ** (n + 2) / sp.factorial(n + 2), S(M) * a ** (n + 1) / (n + 1)]
-    why = ["Uses the wrong power and factorial (degree n instead of n+1).", "Uses n! with the right power.", "Uses a higher order.", "Uses (n+1) instead of (n+1)!."]
+    why = [f"Uses the degree n instead of n+1: {M}({a})^{n}/{n}!.", f"Uses the right power {n+1} of x but divides by {n}! instead of {n+1}!.", f"Uses one derivative too many: {M}({a})^{n+2}/{n+2}!.", f"Divides by {n+1} instead of {n+1}! (forgets the factorial)."]
     key = Opt(fmt(key_v), True, "M|x|^(n+1)/(n+1)!.", key_v)
     return pack("lagrange_error", "10.12", "3.D", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why)], rng, est=85, facts=[f"bound={key_v}"])
 
@@ -193,28 +195,25 @@ def frq_series(rng):
     c = rng.choice([1, 2, 3]); f = sp.log(1 + c * x ** 2)
     ser = sp.series(f, x, 0, 9).removeO()
     terms = [ser.coeff(x, k) * x ** k for k in (2, 4, 6, 8)]
-    R = sp.Integer(1) / sp.sqrt(c)
-    # 구간 끝점: x=±1/sqrt(c) → 교대 조화형(수렴) → [-R, R]
-    a4 = abs(ser.coeff(x, 8)); x0 = S(1) / (2 * sp.sqrt(c)) if False else S(1) / 2
-    # (c) 교대급수 오차 한계: f(x0) 근사에 처음 두 항을 쓰면 오차 ≤ 세 번째 항 크기(항 감소 확인)
-    t1 = abs(ser.coeff(x, 2)) * x0 ** 2; t2 = abs(ser.coeff(x, 4)) * x0 ** 4; t3 = abs(ser.coeff(x, 6)) * x0 ** 6
-    assert float(t1) > float(t2) > float(t3) > 0 if float(c * x0 ** 2) < 1 else True
-    approx = ser.coeff(x, 2) * x0 ** 2 + ser.coeff(x, 4) * x0 ** 4
-    bound = t3
-    # (d) 급수로 ∫0^{1/2} f dx 의 첫 두 항
-    integ2 = sp.integrate(sum(terms[:2]), (x, 0, x0))
+    x0 = S(1) / 2
+    t1, t2, t3 = (abs(ser.coeff(x, k)) * x0 ** k for k in (2, 4, 6)); assert t1 > t2 > t3 > 0
+    approx = ser.coeff(x, 2) * x0 ** 2 + ser.coeff(x, 4) * x0 ** 4; bound = t3
+    integ2 = sp.integrate(ser.coeff(x, 2) * x ** 2 + ser.coeff(x, 4) * x ** 4, (x, 0, x0))
     assert abs(float(sp.N(sp.integrate(f, (x, 0, x0)))) - float(sp.N(integ2))) < 0.05
-    stim = {"kind": "text", "description": "Function and Maclaurin series setting", "data": {"f": f"f(x) = ln(1 + {c}x^2)", "center": 0}}
+    Rtxt = "1" if c == 1 else f"1/\\sqrt{{{c}}}"
+    gen = f"(-1)^(n+1) {'' if c == 1 else str(c) + '^n '}x^(2n) / n"
+    stim = {"kind": "text", "description": "Function and Maclaurin series setting", "data": {"f": f"f(x) = ln(1 + {'' if c == 1 else str(c)}x^2)", "center": 0}}
+    fname = f"\\ln\\left(1+{'' if c == 1 else str(c)}x^2\\right)"
     parts = [
-        part("a", f"Write the first four nonzero terms of the Maclaurin series for $f(x)=\\ln(1+{c}x^2)$, and write the general term.", 3, "calculate", ["1.E", "1.C"], f"Terms: {sp.latex(sum(terms))}; general term (-1)^(n+1) {c}^n x^(2n)/n", [
-            row("a1", 1, "First two terms correct", [sp.latex(terms[0]), sp.latex(terms[1])], nums=True), row("a2", 1, "Next two terms correct", [sp.latex(terms[2]), sp.latex(terms[3])], requires="a1", nums=True),
-            row("a3", 1, "General term", [f"(-1)^(n+1) {c}^n x^(2n) / n"])]),
-        part("b", "Find the radius of convergence and the interval of convergence of the Maclaurin series for $f$. Show the work that leads to your answer.", 3, "explain", ["3.C", "3.D"], f"Ratio test: radius 1/√{c}; endpoints give an alternating harmonic series (converges).", [
-            row("b1", 1, "Sets up the ratio test and finds the radius of convergence", [f"R = 1/sqrt({c})"], nums=True), row("b2", 1, "Tests an endpoint (alternating series test conditions: terms decrease to 0)", ["alternating series test", "terms decrease to 0"], requires="b1", both=True),
-            row("b3", 1, "States the interval including both endpoints", [f"[-1/sqrt({c}), 1/sqrt({c})]"], requires="b2")]),
-        part("c", f"Use the first two nonzero terms of the series to approximate $f\\left(\\tfrac{{1}}{{2}}\\right)$. Use the alternating series error bound to find a bound on the absolute error of this approximation.", 2, "calculate", ["3.D", "3.G"],
-             f"Approximation {float(approx):.4f}; error ≤ |third term| = {float(bound):.5f}", [row("c1", 1, "Approximation using two terms", [f"{float(approx):.4f}"], nums=True, tol="±0.001"), row("c2", 1, "Error bound is the magnitude of the next term, with the decreasing-terms condition", [f"{float(bound):.5f}", "terms decrease in magnitude"], requires="c1", both=True)]),
-        part("d", "Use the first two nonzero terms of the Maclaurin series for $f$ to approximate $\\int_0^{1/2} f(x)\\,dx$.", 1, "calculate", ["1.E"], f"{float(sp.N(integ2)):.4f}", [row("d1", 1, "Answer using term-by-term integration", [f"{float(sp.N(integ2)):.4f}"], nums=True, tol="±0.001")])]
+        part("a", f"Write the first four nonzero terms of the Maclaurin series for $f(x)={fname}$, and write the general term.", 3, "calculate", ["1.E", "1.C"], f"Terms: {sp.latex(sum(terms))}; general term {gen}", [
+            row("a1", 1, "First two nonzero terms (answer)", [sp.latex(terms[0]), sp.latex(terms[1])], nums=True), row("a2", 1, "Next two nonzero terms (answer)", [sp.latex(terms[2]), sp.latex(terms[3])], requires="a1", nums=True),
+            row("a3", 1, "General term (expression)", [gen])]),
+        part("b", "Find the radius of convergence and the interval of convergence of the Maclaurin series for $f$. Show the work that leads to your answer.", 3, "explain", ["3.C", "3.D"], f"Ratio test: radius {Rtxt}; at each endpoint the series is alternating with terms decreasing to 0 (alternating harmonic type), so it converges.", [
+            row("b1", 1, "Sets up the ratio test and finds the radius of convergence", [f"R = {Rtxt}"], nums=True), row("b2", 1, "Tests both endpoints: alternating series with terms decreasing to 0 (condition checked)", ["alternating series test", "terms decrease to 0", "both endpoints"], requires="b1", both=True),
+            row("b3", 1, "States the interval of convergence including both endpoints", [f"[-{Rtxt}, {Rtxt}]"], requires="b2")]),
+        part("c", "Use the first two nonzero terms of the series to approximate $f\\left(\\tfrac{1}{2}\\right)$. Use the alternating series error bound to find a bound on the absolute error of this approximation.", 2, "calculate", ["3.D", "3.G"],
+             f"Approximation {sp.latex(approx)}; error is at most the magnitude of the next term {sp.latex(bound)}", [row("c1", 1, "Approximation using two terms (value)", [sp.latex(approx)], nums=True), row("c2", 1, "Error bound is the magnitude of the next term, with the condition that terms decrease in magnitude (value)", [sp.latex(bound), "terms decrease in magnitude"], requires="c1", both=True)]),
+        part("d", "Use the first two nonzero terms of the Maclaurin series for $f$ to approximate $\\int_0^{1/2} f(x)\\,dx$.", 1, "calculate", ["1.E"], f"{sp.latex(integ2)}", [row("d1", 1, "Answer using term-by-term integration (value)", [sp.latex(integ2)], nums=True)])]
     return {"archetype": "frq_series", "template": "series_taylor_convergence", "topic": "10.14", "extra_topics": ["10.13", "10.10"], "skill": "1.E", "calculator": "not_allowed", "title": "Maclaurin series, convergence, error bound", "stimulus": stim, "parts": parts, "total_points": 9, "est_minutes": 15, "facts": [f"approx={approx}", f"bound={bound}", f"integ={integ2}"]}
 
 def frq_parametric(rng):
