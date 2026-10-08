@@ -3,9 +3,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics/track";
 import { dedupeStem } from "@/lib/problem-text-guards";
-import type { MockExamAttemptDetail, MockExamAttemptItem } from "@/lib/mock-exam/attempt-data";
+import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
 import { computeMockExamReport, weakSkills, type BreakdownRow } from "@/lib/mock-exam/report";
-import { SCORE_DISCLAIMER_EN } from "@/lib/mock-exam/score-estimate";
+import { SCORE_DISCLAIMER_EN, type ScoreRange } from "@/lib/mock-exam/score-estimate";
+import { buildKeyInsights } from "@/lib/mock-exam/insights";
+import { attemptLabel } from "@/lib/mock-exam/open-list";
 import { satDomainDisplayName, satSkillDisplayName } from "@/lib/sat-keywords/taxonomy";
 import { satDomainDescription, satSkillDescription } from "@/lib/sat-keywords/skill-descriptions";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -348,6 +350,80 @@ function BreakdownList({ rows, kind, onInfo }: { rows: BreakdownRow[]; kind: "do
   );
 }
 
+/** 도넛 — 정답(초록)·오답/미응답(회색) 비율. 숫자는 옆에 따로 있으므로 장식(aria-hidden). */
+function AccuracyDonut({ correct, total }: { correct: number; total: number }) {
+  const r = 52;
+  const c = 2 * Math.PI * r;
+  const frac = total > 0 ? Math.min(1, correct / total) : 0;
+  return (
+    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden data-testid="mock-exam-donut" className="shrink-0">
+      <circle cx="66" cy="66" r={r} fill="none" strokeWidth="16" className="stroke-grey-200" />
+      <circle
+        cx="66" cy="66" r={r} fill="none" strokeWidth="16" strokeLinecap="butt" className="stroke-green"
+        strokeDasharray={`${frac * c} ${c}`} transform="rotate(-90 66 66)"
+      />
+      <text x="66" y="72" textAnchor="middle" className="fill-ink text-[22px] font-extrabold">{pct(correct, total)}</text>
+    </svg>
+  );
+}
+
+/** 예상 점수 범위 막대 — 트랙 위에 low~high 구간만 칠한다. */
+function ScoreRangeBar({ label, range, min, max, strong = false }: { label: string; range: ScoreRange; min: number; max: number; strong?: boolean }) {
+  const span = max - min;
+  const left = Math.max(0, ((range.low - min) / span) * 100);
+  const width = Math.max(2, ((range.high - range.low) / span) * 100);
+  return (
+    <div data-testid={`mock-exam-score-${label === "R&W" ? "rw" : label.toLowerCase()}`}>
+      <div className="mb-1 flex items-baseline justify-between text-[12.5px]">
+        <span className={`font-bold ${strong ? "text-ink" : "text-grey-600"}`}>{label}</span>
+        <span className={`font-extrabold ${strong ? "text-[16px]" : "text-[14px]"}`}>{range.low}-{range.high}</span>
+      </div>
+      <div className="relative h-2.5 rounded-full bg-grey-100" aria-hidden>
+        <div className="absolute h-full rounded-full bg-ink" style={{ left: `${left}%`, width: `${Math.min(width, 100 - left)}%` }} />
+      </div>
+      <div className="mt-0.5 flex justify-between text-[10px] text-grey-400" aria-hidden>
+        <span>{min}</span>
+        <span>{max}</span>
+      </div>
+    </div>
+  );
+}
+
+/** 재응시 회차 표시·전환. 회차가 하나뿐이면 아무것도 그리지 않는다. 최신 회차가 기본(호출부가 최신 id 를 연다). */
+function AttemptSwitcher({
+  attempt,
+  attempts,
+  attemptHref,
+  onSelect,
+}: {
+  attempt: MockExamAttemptDetail;
+  attempts?: MockExamAttemptSummary[];
+  attemptHref?: (id: string) => string;
+  onSelect?: (id: string) => void;
+}) {
+  const graded = (attempts ?? []).filter((a) => a.status === "graded").sort((a, b) => (a.attemptNo ?? 0) - (b.attemptNo ?? 0));
+  if ((attempt.attemptTotal ?? 1) <= 1 && graded.length <= 1) return null;
+  if (graded.length <= 1) {
+    return <p className="mb-3 text-[12px] font-bold text-grey-500" data-testid="attempt-label">{attemptLabel(attempt.attemptNo)}</p>;
+  }
+  const latestNo = Math.max(...graded.map((a) => a.attemptNo ?? 0));
+  return (
+    <div role="group" aria-label="Attempts" className="mb-3 flex flex-wrap items-center gap-1.5" data-testid="attempt-switcher">
+      {graded.map((a) => {
+        const current = a.id === attempt.id;
+        const cls = `rounded-full border px-3 py-1 text-[12px] font-bold ${current ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600 hover:bg-grey-100"}`;
+        const text = `${attemptLabel(a.attemptNo)}${a.attemptNo === latestNo ? " (latest)" : ""}`;
+        if (current) return <span key={a.id} aria-current="true" className={cls}>{text}</span>;
+        return attemptHref ? (
+          <a key={a.id} href={attemptHref(a.id)} className={cls}>{text}</a>
+        ) : (
+          <button key={a.id} type="button" onClick={() => onSelect?.(a.id)} className={cls}>{text}</button>
+        );
+      })}
+    </div>
+  );
+}
+
 type TabKey = "summary" | "domain" | "review";
 const TABS: { key: TabKey; label: string }[] = [
   { key: "summary", label: "Summary" },
@@ -364,9 +440,17 @@ export default function MockExamResultView({
   attempt,
   readOnly,
   reportRole: reportRoleProp,
+  attempts,
+  attemptHref,
+  onSelectAttempt,
 }: {
   attempt: MockExamAttemptDetail;
   readOnly: boolean;
+  /** 재응시: 같은 시험의 모든 회차(요약). 둘 이상이면 상단에 Attempt 1 | Attempt 2 전환을 보인다. */
+  attempts?: MockExamAttemptSummary[];
+  /** 회차 전환을 링크로(독립 결과 페이지)·콜백으로(탭 안) 처리 — 둘 중 하나. */
+  attemptHref?: (attemptId: string) => string;
+  onSelectAttempt?: (attemptId: string) => void;
   /** 문제 오류 신고 버튼 역할. 생략하면 본인 결과(readOnly=false)는 학생, 읽기 전용(학부모 등)은 없음. */
   reportRole?: ReporterRole | null;
 }) {
@@ -406,9 +490,30 @@ export default function MockExamResultView({
   }, [attempt.items]);
   const selected = filtered.find((i) => i.setItemId === selectedId) ?? filtered[0] ?? null;
   const totalTime = formatMinutes(report.totalTimeSpentSeconds);
+  // 직전 회차(있으면) 대비 정답 수 — 재응시 회차 비교용. 요약 목록에서 이미 받은 값만 쓴다.
+  const previous = useMemo(() => {
+    if (!attempts || !attempt.attemptNo) return null;
+    const prev = attempts
+      .filter((a) => a.status === "graded" && a.correctCount !== null && (a.attemptNo ?? 0) < (attempt.attemptNo ?? 0))
+      .sort((a, b) => (b.attemptNo ?? 0) - (a.attemptNo ?? 0))[0];
+    return prev ? { attemptNo: prev.attemptNo ?? 0, correctCount: prev.correctCount ?? 0, totalCount: prev.totalCount } : null;
+  }, [attempts, attempt.attemptNo]);
+  const insights = useMemo(
+    () => buildKeyInsights(report, attempt.items, { previous, correctCount: report.correctCount }),
+    [report, attempt.items, previous],
+  );
+  // Performance by Domain (Preview) — 정답률이 낮은 영역 4개(같으면 R&W 먼저).
+  const domainPreview = useMemo(
+    () =>
+      [...report.byDomain]
+        .sort((a, b) => a.correct / a.total - b.correct / b.total || (a.section === b.section ? a.key.localeCompare(b.key) : a.section === "rw" ? -1 : 1))
+        .slice(0, 4),
+    [report.byDomain],
+  );
 
   return (
     <div>
+      <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHref={attemptHref} onSelect={onSelectAttempt} />
       <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200">
         {TABS.map((t) => (
           <button
@@ -430,16 +535,23 @@ export default function MockExamResultView({
 
       {tab === "summary" && (
         <div role="tabpanel" id="mock-exam-panel-summary" aria-labelledby="mock-exam-tab-summary" className="flex flex-col gap-4">
-          <div className="rounded-lg border border-grey-200 bg-white p-5 text-center">
-            <p className="text-[12px] font-bold uppercase tracking-wide text-grey-500">Overall Accuracy</p>
-            <p className="mt-1 text-[32px] font-extrabold">
-              {report.correctCount ?? 0}/{report.totalCount}
-            </p>
-            <p className="text-[13px] text-grey-500" data-testid="mock-exam-overall-meta">
-              {pct(report.correctCount ?? 0, report.totalCount)}
-              {totalTime && <> · Total time {totalTime}</>}
-            </p>
-            <p className="mt-2 text-[11.5px] text-grey-400">
+          {/* Overall Performance — 도넛 + 정답 수 + 총 소요 시간 + 면책 문구 */}
+          <div className="rounded-lg border border-grey-200 bg-white p-5" data-testid="mock-exam-overall">
+            <h3 className="mb-3 text-[13px] font-bold">Overall Performance</h3>
+            <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-8">
+              <AccuracyDonut correct={report.correctCount ?? 0} total={report.totalCount} />
+              <div className="text-center sm:text-left">
+                <p className="text-[12px] font-bold uppercase tracking-wide text-grey-500">Correct answers</p>
+                <p className="mt-1 text-[32px] font-extrabold leading-none">
+                  {report.correctCount ?? 0}/{report.totalCount}
+                </p>
+                <p className="mt-1 text-[13px] text-grey-500" data-testid="mock-exam-overall-meta">
+                  {pct(report.correctCount ?? 0, report.totalCount)}
+                  {totalTime && <> · Total time {totalTime}</>}
+                </p>
+              </div>
+            </div>
+            <p className="mt-3 text-[11.5px] text-grey-400">
               These results are a learning diagnostic and are not equivalent to an official SAT / College Board score.
             </p>
           </div>
@@ -453,29 +565,19 @@ export default function MockExamResultView({
 
           {scoreEstimate && (
             <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-score-estimate">
-              <h3 className="mb-2 text-[13px] font-bold">Estimated Score Range (internal estimate)</h3>
-              <div className="grid grid-cols-3 gap-3 text-center">
-                {(
-                  [
-                    ["R&W", scoreEstimate.rw],
-                    ["Math", scoreEstimate.math],
-                    ["Total", scoreEstimate.total],
-                  ] as const
-                ).map(([label, r]) => (
-                  <div key={label} className="rounded-lg bg-grey-50 p-3">
-                    <p className="text-[12px] font-bold text-grey-500">{label}</p>
-                    <p className="text-[16px] font-extrabold">
-                      {r.low}-{r.high}
-                    </p>
-                  </div>
-                ))}
+              <h3 className="mb-1 text-[13px] font-bold">Estimated Score Range</h3>
+              <p className="mb-3 text-[11.5px] font-semibold text-grey-500">Internal estimate — not an official College Board score</p>
+              <div className="flex flex-col gap-3">
+                <ScoreRangeBar label="R&W" range={scoreEstimate.rw} min={200} max={800} />
+                <ScoreRangeBar label="Math" range={scoreEstimate.math} min={200} max={800} />
+                <ScoreRangeBar label="Total" range={scoreEstimate.total} min={400} max={1600} strong />
               </div>
-              <p className="mt-2 text-[11.5px] text-grey-400">{SCORE_DISCLAIMER_EN}</p>
+              <p className="mt-3 text-[11.5px] text-grey-400">{SCORE_DISCLAIMER_EN}</p>
             </div>
           )}
 
           <div className="rounded-lg border border-grey-200 bg-white p-4">
-            <h3 className="mb-2 text-[13px] font-bold">Results by Section</h3>
+            <h3 className="mb-2 text-[13px] font-bold">Section Breakdown</h3>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {report.bySection.map((s) => {
                 const t = formatMinutes(s.timeSpentSeconds);
@@ -484,13 +586,65 @@ export default function MockExamResultView({
                     <p className="text-[12px] font-bold text-grey-500">{SECTION_LABEL[s.section]}</p>
                     <p className="text-[18px] font-extrabold">
                       {s.correct ?? 0}/{s.total}
+                      <span className="ml-2 text-[12px] font-semibold text-grey-500">{pct(s.correct ?? 0, s.total)}</span>
                     </p>
-                    {t && <p className="text-[11.5px] text-grey-500">Time {t}</p>}
+                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-grey-200" aria-hidden>
+                      <div className="h-full rounded-full bg-ink" style={{ width: `${s.total ? Math.round(((s.correct ?? 0) / s.total) * 100) : 0}%` }} />
+                    </div>
+                    {t && <p className="mt-1 text-[11.5px] text-grey-500">Time {t}</p>}
                   </div>
                 );
               })}
             </div>
           </div>
+
+          {domainPreview.length > 0 && (
+            <div className="rounded-lg border border-grey-200 bg-white p-4" data-testid="mock-exam-domain-preview">
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <h3 className="text-[13px] font-bold">
+                  Performance by Domain <span className="font-semibold text-grey-400">(Preview)</span>
+                </h3>
+                <button type="button" onClick={() => setTab("domain")} className="text-[12px] font-bold text-ink underline">
+                  View all
+                </button>
+              </div>
+              <ul className="flex flex-col gap-2">
+                {domainPreview.map((d) => (
+                  <li key={d.key} className="text-[12.5px]">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-grey-700">
+                        {d.label} <span className="text-grey-400">· {SECTION_SHORT[d.section]}</span>
+                      </span>
+                      <span className="shrink-0 font-bold">
+                        {d.correct}/{d.total} ({pct(d.correct, d.total)})
+                      </span>
+                    </div>
+                    <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-grey-100" aria-hidden>
+                      <div className="h-full rounded-full bg-ink" style={{ width: `${Math.round((d.correct / d.total) * 100)}%` }} />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {insights.length > 0 && (
+            <div data-testid="mock-exam-insights">
+              <h3 className="mb-2 text-[13px] font-bold">Key Insights</h3>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {insights.map((c) => (
+                  <div
+                    key={c.key}
+                    data-testid={`mock-exam-insight-${c.key}`}
+                    className={`rounded-lg border bg-white p-3 ${c.tone === "good" ? "border-green" : c.tone === "warn" ? "border-red/40" : "border-grey-200"}`}
+                  >
+                    <p className={`text-[11.5px] font-extrabold uppercase tracking-wide ${c.tone === "good" ? "text-green" : c.tone === "warn" ? "text-red" : "text-grey-500"}`}>{c.title}</p>
+                    <p className="mt-1 text-[12.5px] text-grey-700">{c.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

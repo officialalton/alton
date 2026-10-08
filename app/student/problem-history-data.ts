@@ -32,6 +32,8 @@ export type ProblemHistoryEntry = {
   /** 분류(2026-09-14) — 성취 기록의 기준. */
   satDomain: string | null;
   skillCode: string | null;
+  /** 모의고사 재응시 회차(1부터) — 같은 시험을 여러 번 본 오답이 노트에서 구분되게 한다. 모의고사 항목만. */
+  attemptNo?: number | null;
 };
 
 const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<string, unknown> | null | undefined;
@@ -44,7 +46,7 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
   const { data: rawAnswers } = await admin
     .from("mock_exam_answers")
     .select(
-      "attempt_id, set_item_id, response, correct, saved_to_practice, updated_at, attempt:mock_exam_attempts!inner(id, student_id, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
+      "attempt_id, set_item_id, response, correct, saved_to_practice, updated_at, attempt:mock_exam_attempts!inner(id, student_id, attempt_no, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
     )
     .or("saved_to_practice.eq.true,correct.eq.false")
     .eq("attempt.student_id", studentId);
@@ -97,6 +99,7 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
       explanation: graded ? ((v?.explanation as string | null) ?? null) : null,
       satDomain: (item?.sat_domain as string | null) ?? null,
       skillCode: (item?.skill_code as string | null) ?? null,
+      attemptNo: (attempt?.attempt_no as number | null | undefined) ?? null,
     };
   });
 }

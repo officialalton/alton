@@ -871,7 +871,7 @@ function HistoryTab() {
           {rows.map((r) => (
             <tr key={r.attemptId} className="border-t border-grey-100">
               <td className="py-2">{r.studentName ?? r.studentId}</td>
-              <td>{r.examSetName}</td>
+              <td>{r.examSetName}{r.attemptNo > 1 ? ` · ${r.attemptNo}회차` : ""}</td>
               <td>{STATUS_LABEL[r.status] ?? r.status}</td>
               <td>{r.startedAt ? fmtDate(r.startedAt, undefined, tz) : "-"}</td>
               <td>{r.submittedAt ? fmtDate(r.submittedAt, undefined, tz) : "-"}</td>

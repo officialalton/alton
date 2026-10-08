@@ -77,7 +77,8 @@ export function mockExamToBoardCard(attempt: MockExamAttemptSummary): BoardCard 
     sourceType: "mock_exam",
     sourceId: attempt.id,
     title: attempt.examSetName,
-    subtitle: null,
+    // 재응시: 같은 시험을 여러 번 본 경우에만 회차를 덧붙여 카드가 구분되게 한다.
+    subtitle: attempt.attemptNo && (attempt.attemptTotal ?? 1) > 1 ? `Attempt ${attempt.attemptNo}` : null,
     status: mockExamStatus(attempt.status),
     dueAt: attempt.dueAt,
     dueStartAt: null,

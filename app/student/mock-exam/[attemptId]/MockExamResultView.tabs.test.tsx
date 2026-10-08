@@ -44,7 +44,7 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
   it("Summary: 영어 문구, 코드 문자열 없음, 시간 기록이 없으면 0분 대신 숨긴다", () => {
     render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
     expect(screen.getByRole("tab", { name: "Summary" })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("Overall Accuracy")).toBeInTheDocument();
+    expect(screen.getByText("Overall Performance")).toBeInTheDocument();
     expect(screen.getByText(/not equivalent to an official SAT \/ College Board score/)).toBeInTheDocument();
     expect(screen.getByTestId("mock-exam-overall-meta")).not.toHaveTextContent("Total time");
     expect(screen.getByTestId("mock-exam-section-rw")).not.toHaveTextContent("Time");
@@ -118,5 +118,45 @@ describe("MockExamResultView — 서브탭·영어 UI", () => {
     const snap = within(panel).getByTestId("problem-note-snapshot");
     const expl = within(panel).getByTestId("mock-exam-explanation");
     expect(snap.compareDocumentPosition(expl) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  it("Summary(재설계): 도넛·Section Breakdown·Performance by Domain (Preview)·Key Insights, View all 은 Results by Domain 으로 이동", () => {
+    render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
+    expect(screen.getByTestId("mock-exam-donut")).toBeInTheDocument();
+    expect(screen.getByText("Section Breakdown")).toBeInTheDocument();
+    const preview = screen.getByTestId("mock-exam-domain-preview");
+    expect(preview).toHaveTextContent("Performance by Domain (Preview)");
+    expect(screen.getByTestId("mock-exam-insights")).toBeInTheDocument();
+    fireEvent.click(within(preview).getByRole("button", { name: "View all" }));
+    expect(screen.getByRole("tab", { name: "Results by Domain" })).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("예상 점수: 내부 추정·비공식 문구, R&W/Math/Total 막대", () => {
+    const scoreEstimate = { rw: { low: 500, high: 560 }, math: { low: 600, high: 660 }, total: { low: 1100, high: 1220 }, modelVersion: "v1-adaptive" };
+    render(<MockExamResultView attempt={attempt(items, { scoreEstimate })} readOnly={false} />);
+    const box = screen.getByTestId("mock-exam-score-estimate");
+    expect(box).toHaveTextContent("Internal estimate — not an official College Board score");
+    expect(within(box).getByTestId("mock-exam-score-total")).toHaveTextContent("1100-1220");
+    expect(within(box).getByTestId("mock-exam-score-rw")).toHaveTextContent("500-560");
+  });
+
+  it("재응시: 회차가 둘 이상이면 Attempt 1 | Attempt 2 전환을 보이고 최신 표시, 다른 회차를 누르면 콜백", () => {
+    const sum = (id: string, no: number, correct: number) => ({
+      id, examSetId: "s1", examSetName: "Mock", difficultyTier: "standard", studentId: "stu", studentName: null, status: "graded" as const, assignedByName: null,
+      dueAt: null, startBy: null, startedAt: null, submittedAt: null, gradedAt: null, totalCount: 3, correctCount: correct, entryCount: 1, attemptNo: no, attemptTotal: 2, setGroupId: "g1",
+    });
+    const onSelect = vi.fn();
+    render(<MockExamResultView attempt={attempt(items, { id: "a2", attemptNo: 2, attemptTotal: 2 })} readOnly={false} attempts={[sum("a1", 1, 1), sum("a2", 2, 2)]} onSelectAttempt={onSelect} />);
+    const sw = screen.getByTestId("attempt-switcher");
+    expect(within(sw).getByText("Attempt 2 (latest)")).toHaveAttribute("aria-current", "true");
+    fireEvent.click(within(sw).getByRole("button", { name: "Attempt 1" }));
+    expect(onSelect).toHaveBeenCalledWith("a1");
+    expect(screen.getByTestId("mock-exam-insight-progress")).toHaveTextContent("Compared with Attempt 1");
+  });
+
+  it("회차가 하나뿐이면 전환·라벨을 그리지 않는다", () => {
+    render(<MockExamResultView attempt={attempt(items)} readOnly={false} />);
+    expect(screen.queryByTestId("attempt-switcher")).toBeNull();
+    expect(screen.queryByTestId("attempt-label")).toBeNull();
   });
 });
