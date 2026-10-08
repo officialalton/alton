@@ -53,7 +53,7 @@ describe("answer-leak-detector", () => {
   });
   it("subjectMatches / discriminatingOverlap 는 정답만 질문 대상을 반복하면 정답에서만 양수", () => {
     expect(subjectMatches(leaky.question, leaky.options)).toEqual([0, 0, 0, 1]);
-    expect(discriminatingOverlap("Why does Stephen wait?", ["He waits for Stephen", "He is late", "She fears rain", "It is cold"])[0]).toBe(1);
+    expect(discriminatingOverlap("Why does Stephen wait?", ["He waits for Stephen", "He is late", "She fears rain", "It is cold"])).toEqual([2, 0, 0, 0]);
   });
   it("frameSim: 같은 틀은 높고 다른 틀은 낮다", () => {
     expect(frameSim("Painter A has 65 paintings", "Painter B has 48 paintings")).toBeGreaterThan(frameSim("Painter A has 65 paintings", "Fewer than any other painter, 12")); 
