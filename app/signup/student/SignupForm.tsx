@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import LegalLink from "@/app/components/legal/LegalLink";
 import { createSignupClient } from "@/utils/supabase/client";
 import { MIN_PASSWORD_LENGTH, STUDENT_TERMS_VERSION, validateStudentSignup } from "@/lib/free-member-signup";
 
@@ -122,7 +123,7 @@ export default function SignupForm({ initialError }: { initialError?: string }) 
       <label className="flex items-start gap-2 text-[13px] text-ink mb-5 leading-[1.6]">
         <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} disabled={submitting} className="mt-1" />
         <span>
-          I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a> (version {STUDENT_TERMS_VERSION}). <span className="text-red">*</span>
+          I agree to the <LegalLink doc="terms" className="underline">Terms of Service</LegalLink> and <LegalLink doc="privacy" className="underline">Privacy Policy</LegalLink> (version {STUDENT_TERMS_VERSION}). <span className="text-red">*</span>
         </span>
       </label>
 

@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { submitHomepageConsultRequest } from "./consult-actions";
 import { trackEvent } from "@/lib/analytics/track";
+import LegalLink from "@/app/components/legal/LegalLink";
 import { FIRST_CONSULTATION_CONSENT_REQUIRED_MESSAGE, FIRST_CONSULTATION_CONSENT_TEXT } from "@/lib/consultation/first-consultation-consent";
 
 // M1 — 홈페이지 상담 신청 폼.
@@ -139,6 +140,9 @@ export default function ConsultForm() {
         />
         {FIRST_CONSULTATION_CONSENT_TEXT}
       </label>
+      <p className="mt-2 text-[12px] text-grey-500">
+        See our <LegalLink doc="privacy" className="underline">Privacy Policy</LegalLink> and <LegalLink doc="terms" className="underline">Terms of Use</LegalLink>.
+      </p>
 
       {error && <p className="text-[13px] text-red mt-3">{error}</p>}
 

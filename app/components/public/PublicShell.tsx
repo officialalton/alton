@@ -2,6 +2,7 @@ import Link from "next/link";
 import LandingCtaLink from "@/app/LandingCtaLink";
 import { FOOTER_LINKS, NAV_ITEMS } from "@/lib/landing/copy";
 import type { LandingDestinations } from "@/lib/landing/cta";
+import LegalLink from "@/app/components/legal/LegalLink";
 import { publicFontClass } from "./fonts";
 
 export function Logo({ dark = false, size = 30 }: { dark?: boolean; size?: number }) {
@@ -78,11 +79,17 @@ export function PublicFooter() {
             </p>
           </div>
           <nav aria-label="Footer" className="p-mono grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-3 text-[12.5px] text-[var(--p-slate)]">
-            {FOOTER_LINKS.map((l) => (
+            {FOOTER_LINKS.map((l) =>
+              l.href === "/privacy" || l.href === "/terms" ? (
+                <LegalLink key={l.href} doc={l.href === "/privacy" ? "privacy" : "terms"} className="hover:text-[var(--p-red)]">
+                  {l.label}
+                </LegalLink>
+              ) : (
               <Link key={l.href} href={l.href} className="hover:text-[var(--p-red)]">
                 {l.label}
               </Link>
-            ))}
+              ),
+            )}
           </nav>
         </div>
         <div className="p-mono pt-6 border-t border-[var(--p-line)] text-[12px] text-[var(--p-mute)]">© 2026 Alton Education LLC</div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import LegalLink from "@/app/components/legal/LegalLink";
 import { createClient } from "@/utils/supabase/client";
 import { confirmOwnEmailAfterPasswordSet } from "./actions";
 
@@ -174,8 +175,8 @@ export default function SetPasswordPage() {
             <input name="consent" type="checkbox" className="mt-0.5" />
             <span>
               I agree to the{" "}
-              <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a> and{" "}
-              <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a> (required)
+              <LegalLink doc="terms" className="underline">Terms of Service</LegalLink> and{" "}
+              <LegalLink doc="privacy" className="underline">Privacy Policy</LegalLink> (required)
             </span>
           </label>
 
