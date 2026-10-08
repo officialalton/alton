@@ -72,7 +72,7 @@ function writeManifest(extra: Partial<RunManifest> = {}) {
   writeFileSync(path.join(DIR, POLICY.manifestFile), JSON.stringify(m, null, 1));
 }
 function planStage() {
-  const lst = py(["list", SUBJECT === "ap_calculus_bc" ? "bc" : "ab"]) as { mc: string[]; frq: string[] };
+  const lst = py(["list", process.env.AP_LIST ?? (SUBJECT === "ap_calculus_bc" ? "bc" : "ab")]) as { mc: string[]; frq: string[] };
   const cells: Cell[] = [];
   lst.mc.forEach((a, i) => {
     const p = (py(["batch", a, "1", "0"]) as Json[])[0];
@@ -102,7 +102,8 @@ function genPacks() {
 }
 
 // ---------- LLM 문장 다듬기 ----------
-const WORD_SYS = `You are a careful AP Calculus item writer. A CODE generator has already computed and verified every number, table value, option and misconception. Your job is only the WORDING:
+const SUBJ_LABEL: Record<string, string> = { ap_calculus_ab: "AP Calculus", ap_calculus_bc: "AP Calculus", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics" };
+const WORD_SYS = `You are a careful ${SUBJ_LABEL[SUBJECT] ?? "AP"} item writer. A CODE generator has already computed and verified every number, table value, option and misconception. Your job is only the WORDING:
 - polish the stem so it reads like a clean AP exam stem (US English). You MUST keep every number, symbol and every $...$ math block of the base stem exactly as given; you may rephrase the plain words and may add a short realistic context ONLY if no numbers/quantities change. Never mention a table that the base stem does not mention. Never reveal the answer.
 - do NOT write an explanation (the code writes it); submit only the stem.
 For free-response bundles you rewrite part prompts in the same way (keep every number and $...$ block) and add a one-sentence design_note.`;
@@ -216,7 +217,7 @@ async function solveStage() {
 }
 const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review3")) m.set(k, v); for (const [k, v] of resultMap("review2")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`) ?? resultMap("solve2").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
-const numsIn = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
+const numsIn = (s: string) => (s.replace(/(\d),(?=\d{3}(?!\d))/g, "$1").match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number); // "$3,025" 의 쉼표를 자릿수 구분자로 처리(이전에는 3 과 025 로 쪼개 오탐)
 function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: string } {
   if (!sol) return { ok: null, note: "no_solution" };
   const ans = (sol.answers as Json[]) ?? [];
@@ -241,10 +242,10 @@ Agreement of an independent solver is supporting evidence only. Fail when unsure
 // 재검증(S2): 코드가 키를 검증하지 않은 기존(LLM 직접 생성) 문항용. 코드 우선 전제 문장을 바꾸고 과목별 공식 기준 메모를 덧붙인다. S1a/S1b(칼큘러스 동결 검토기)에는 영향 없음.
 const SUBJECT_NOTES: Record<string, string> = {
   ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes.",
-  ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. Free response: long FRQ = 10 points, short FRQ = 5 points; judge each part against its own rubric rows.",
+  ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. Free response: long FRQ = 10 points, short FRQ = 5 points with parts of 1-2 points mixing calculation and explanation (setup and answer rows are normal); judge each part against its own rubric rows, and do not reject for low per-part demand when the grain matches the official short-FRQ format.",
   ap_calculus_ab: "",
 };
-const REVIEW_SYS = process.env.AP_LEGACY_ITEMS
+const REVIEW_SYS = !process.env.AP_LEGACY_ITEMS && process.env.AP_SUBJECT_NOTES ? REVIEW_SYS_BASE + "\n" + (SUBJECT_NOTES[SUBJECT] ?? "") : process.env.AP_LEGACY_ITEMS
   ? REVIEW_SYS_BASE.replace("NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge", "NOTE: this item was written by an LLM and its key was NOT verified by code. An independent solver output is provided; check the key, the arithmetic and the stimulus data yourself. Judge") + "\n" + (SUBJECT_NOTES[SUBJECT] ?? "")
   : REVIEW_SYS_BASE;
 const reviewTool = { name: "submit_review", description: "Submit the review.", input_schema: { type: "object", properties: {
@@ -258,7 +259,7 @@ const DIFF_SYS = "You tag provisional internal difficulty for AP practice items:
 const full = (c: Cand) => JSON.stringify(c.kind === "mc" ? { ...(c.item as McPack), stimulus: stimFor(c, (c.item as McPack).stimulus), facts: undefined } : { ...(c.item as FrqPack), facts: undefined });
 async function reviewStage() {
   const cs = alive().filter((c) => solved(c));
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), 3000));
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000));
   const est = estimate(MODELS.review, reqs.length, 2800, 1100);
   console.log(`review: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
@@ -271,13 +272,13 @@ async function solveMoreStage() { // 이미 끝난 solve 에 없는 후보만 �
 }
 async function reviewMoreStage() { // review 도 같은 방식으로 새 후보만(review2 와 별개 이름 review3)
   const have = reviewMap(); const cs = alive().filter((c) => solved(c) && !have.has(`r-${c.key}`));
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), 3000));
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000));
   console.log(`review-more: ${reqs.length}건`); if (!reqs.length) return;
   await runBatch({ dir: DIR, name: "review3", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }
 async function reviewRetryStage() { // 불완전·깨진 검토 출력만 한 번 다시 요청한다(같은 프롬프트·같은 후보; 최초 후보 수에는 영향 없음)
   const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(rev.has(`r-${c.key}`) ? (toolInput(rev.get(`r-${c.key}`) as never) as Json | null) : null).malformed.length > 0);
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), 3000));
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000));
   console.log(`review-retry: ${reqs.length}건`); if (!reqs.length) return;
   await runBatch({ dir: DIR, name: "review2", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }

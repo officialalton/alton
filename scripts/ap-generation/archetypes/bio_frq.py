@@ -10,6 +10,13 @@ SCEN = [
     {"org": "zebrafish larvae", "iv": "water temperature", "levels": ["18 °C", "26 °C", "34 °C"], "ctrl": 1, "dv": "mean swimming speed during a 1-minute observation", "unit": "mm per second", "m0": 11.0, "eff": [-5.0, 0.0, 4.5], "sd": 2.4, "behavior": "response to temperature"},
 ]
 
+def _alts(pk, mapping):
+    """루브릭 행에 허용 표현(alt_solutions)과 흔한 오류(common_errors)를 채운다(문구 일치만으로 채점하지 않게)."""
+    for pt in pk["parts"]:
+        for r in pt["rubric_rows"]:
+            a = mapping.get(r["row_id"])
+            if a: r["alt_solutions"] = a.get("alt", r["alt_solutions"]); r["common_errors"] = a.get("err", r["common_errors"])
+
 def frq_bio_investigation(rng):
     s = rng.choice(SCEN); n = rng.choice([8, 10, 12])
     means = [round(s["m0"] + e + rng.uniform(-0.4, 0.4), 1) for e in s["eff"]]
@@ -40,6 +47,10 @@ def frq_bio_investigation(rng):
     pk = {"archetype": "frq_bio_investigation", "template": "short_scientific_investigation", "topic": "8.1", "extra_topics": [], "skill": "3.C", "representative_skill": "3.C", "calculator": "allowed", "title": f"Investigation of {s['org']}",
             "stimulus": stim, "parts": parts, "total_points": 4, "est_minutes": 8,
             "facts": [f"means={means}", f"se={se}", f"ctrl={ctrl}", f"tgt={tgt}", f"overlap_pairs={[(i,j) for i in range(3) for j in range(i+1,3) if overlap(i,j)]}"], "context": f"{s['org']} / {s['behavior']}"}
+    _alts(pk, {"A1": {"alt": ["the factor the experimenter deliberately changed", "the manipulated variable"], "err": ["names the measured response (dependent variable)"]},
+               "B1": {"alt": ["the group that does not receive the treatment of interest", "the reference group used for comparison"], "err": ["names a treated group as the control", "says a control makes the results larger"]},
+               "C1": {"alt": ["the independent variable does not affect the dependent variable", "any differences are due to chance"], "err": ["states a prediction of a difference instead of no effect"]},
+               "D1": {"alt": ["the means differ by more than the variability", "the +/-2SE intervals are separated"], "err": ["cites the means but ignores the error bars", "claims causation without comparing to the control"]}})
     pk["blueprint"] = frq_blueprint("frq_bio_investigation", "ap_biology", pk, "Experimental design: variables, control, null hypothesis, and data-supported claim",
         ["Identify the manipulated (independent) variable and the measured (dependent) variable", "Recognize which group is the control and why a baseline is needed", "State a null hypothesis and support a claim by comparing means with +/-2SE intervals"],
         [("One variable differs among groups; control group present; n replicates per group", "the table lists the groups, the control, and the number of replicates")], {"type": "experiment_table", "must_include": ["group names", "mean +/- 2SE", "replicates per group"]},
@@ -50,10 +61,10 @@ def frq_bio_investigation(rng):
 
 
 # ---- 코드 우선 원형 2: 짧은 데이터 분석(공식 Q6형): 4×1점, 추세 서술 / 퍼센트 변화 계산 / 통계적으로 같은 쌍 판정 / 주장 뒷받침
-DATA_SCEN = [
-    {"sys": "an enzyme-catalyzed reaction", "x": "pH", "levels": ["pH 4", "pH 7", "pH 10"], "dv": "initial reaction rate", "unit": "micromoles per minute", "base": [6.0, 18.0, 9.0], "topic": "3.2", "topic_title": "environmental impacts on enzyme function"},
-    {"sys": "yeast populations", "x": "sugar concentration", "levels": ["0.5%", "2%", "8%"], "dv": "carbon dioxide produced in 20 minutes", "unit": "milliliters", "base": [4.0, 11.0, 19.0], "topic": "3.5", "topic_title": "cellular respiration"},
-    {"sys": "tomato plants", "x": "daily light exposure", "levels": ["4 hours", "10 hours", "16 hours"], "dv": "dry biomass per plant", "unit": "grams", "base": [3.1, 7.4, 12.2], "topic": "3.7", "topic_title": "photosynthesis"},
+DATA_SCEN = [  # 한 원형 = 한 토픽(3.2 효소 기능에 대한 환경 영향): 셀의 토픽과 후보의 토픽이 어긋나지 않게 한다
+    {"sys": "an amylase-catalyzed reaction", "x": "pH", "levels": ["pH 4", "pH 7", "pH 10"], "dv": "initial reaction rate", "unit": "micromoles per minute", "base": [6.0, 18.0, 9.0], "topic": "3.2", "topic_title": "environmental impacts on enzyme function"},
+    {"sys": "a catalase-catalyzed reaction", "x": "temperature", "levels": ["10 °C", "37 °C", "70 °C"], "dv": "oxygen released in 2 minutes", "unit": "milliliters", "base": [5.0, 16.0, 2.5], "topic": "3.2", "topic_title": "environmental impacts on enzyme function"},
+    {"sys": "a lactase-catalyzed reaction", "x": "substrate concentration", "levels": ["0.1 mM", "1 mM", "10 mM"], "dv": "product formed in 5 minutes", "unit": "micromoles", "base": [3.0, 12.0, 20.0], "topic": "3.2", "topic_title": "environmental impacts on enzyme function"},
 ]
 def frq_bio_data_short(rng):
     sc = rng.choice(DATA_SCEN); n = rng.choice([8, 10, 12])
@@ -77,6 +88,10 @@ def frq_bio_data_short(rng):
     for pt in parts: pt["topic_codes"] = [sc["topic"]]
     pk = {"archetype": "frq_bio_data_short", "template": "short_data_analysis", "topic": sc["topic"], "extra_topics": [], "skill": "4.B", "representative_skill": "4.B", "calculator": "allowed", "title": f"Data analysis: {sc['sys']}",
             "stimulus": stim, "parts": parts, "total_points": 4, "est_minutes": 10, "facts": [f"means={means}", f"se={se}", f"d01={d01}", f"overlapping_pairs={same}", f"top={top}"], "context": sc["sys"]}
+    _alts(pk, {"A1": {"alt": ["the rate rises then falls", "describes the direction of change between levels using the values"], "err": ["describes only one pair of levels"]},
+               "B1": {"alt": ["percent change = (new - old) / old x 100"], "err": ["divides by the new value", "forgets to multiply by 100"]},
+               "C1": {"alt": ["the pair whose error bars overlap", "none of the pairs differ"], "err": ["compares only the means"]},
+               "D1": {"alt": ["the error bars do not overlap so the difference is real", "higher mean with separated intervals"], "err": ["cites the highest mean but does not discuss variability"]}})
     pk["blueprint"] = frq_blueprint("frq_bio_data_short", "ap_biology", pk, "Data analysis: trend, percent change, statistical overlap, and a supported claim",
         ["Describe the trend across the three levels from the table values", "Compute a percent change between two means", "Use +/-2SE overlap to judge whether differences are supported and support a claim with the data"],
         [("Means with +/-2SE reported for the same number of replicates per level", "the table gives mean +/- 2SE and n")], {"type": "experiment_table", "must_include": ["levels of the variable", "mean +/- 2SE", "n"]},

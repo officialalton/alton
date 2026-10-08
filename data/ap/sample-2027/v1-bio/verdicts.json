@@ -1,0 +1,572 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The variable the student changes is the light treatment.",
+     "final_answer": "The wavelength (color) of light shone on one side of the shoot: no light, red, or blue.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The dark group gets no light, so it acts as the baseline.",
+     "final_answer": "The no light (dark) group is the control. It shows how much the stems curve without any light. Comparing the other groups to it shows whether any change comes from the light wavelength and not from other factors.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A null hypothesis states there is no effect.",
+     "final_answer": "The wavelength of light has no effect on the mean angle of stem curvature toward the light source. The mean angles for dark, red light, and blue light will be the same.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the mean ± 2SE ranges for the two groups.",
+     "final_answer": "Blue light: mean 41.7°, range 38.3–45.1°. Dark: mean 4.2°, range 1.0–7.4°. The ±2SE ranges (about 95% confidence intervals) do not overlap, so blue light gives a significantly larger curvature toward the light than darkness.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "Part A, B fit 3.C. Part C is labeled 3.B and Part D 6.B/4.B. These mixed skills are acceptable per part. However, the experimental design is conceptually flawed. A \"no light (dark)\" group cannot curve \"toward the light source\" because there is no light source, so the dependent variable is undefined for the control. It also conflicts with the stated independent variable 'wavelength shone on one side', since dark has no wavelength."
+  }
+ },
+ {
+  "key": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The variable the student changes on purpose.",
+     "final_answer": "The independent variable is the relative humidity of the test half of the chamber (30%, 60% or 90%).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The table labels 60% as the control.",
+     "final_answer": "The control is the 60% relative humidity group. A control gives a baseline to compare against, so any change in pill bug distribution can be linked to the humidity change and not to other factors.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A null hypothesis says there is no effect.",
+     "final_answer": "Relative humidity has no effect on the number of pill bugs found in the test half of the chamber.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the ±2SE intervals: 90% is 12.9–15.7 and 60% is 6.1–9.3. They do not overlap.",
+     "final_answer": "The mean at 90% (14.3) is higher than at 60% (7.7). The ±2SE intervals (12.9–15.7 and 6.1–9.3) do not overlap, so the increase is statistically significant.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "A short FRQ with four 1-point parts matches the official short-FRQ grain; the load is light and the calculator designation is consistent.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is acceptable: four 1-point parts, correct keys, valid error-bar reasoning. The only weakness is a minor vagueness in how the stimulus describes the chamber setup."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts testing foundational experimental design: identify the independent variable, identify the control and justify it, state a null hypothesis, and cite table data (with non-overlapping 2SE intervals) to support a claim. Each part needs one short step with minimal computation and a simple table. Concept depth is introductory, so it suits basic learning more than a full mock exam.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f01-k2",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Variable manipulated by the student",
+     "final_answer": "Water temperature (18, 26, 34 °C)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Labeled control",
+     "final_answer": "The 26 °C group. It gives a baseline (normal rearing temperature) to compare against, so differences in swimming speed can be attributed to the temperature change.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "No effect",
+     "final_answer": "Water temperature has no effect on the mean swimming speed of zebrafish larvae (mean speeds will not differ among 18, 26 and 34 °C).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Mean ± 2SE intervals don't overlap",
+     "final_answer": "Mean speed at 18 °C (5.9 mm/s) is lower than at 26 °C (10.8 mm/s). The ±2SE intervals (4.5–7.3 vs 9.4–12.2 mm/s) don't overlap, so the decrease is likely statistically significant.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Parts A and B target 3.C directly, C targets 3.B and D targets 6.B/4.B, all within topic 8.1 (response to the environment). Each part is judged against its own skill. The parts are simple but acceptable."
+  }
+ },
+ {
+  "key": "ap_biology-f01-k3",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "The student changes the light's wavelength (color) on purpose.",
+     "final_answer": "The independent variable is the wavelength (color) of the light shone on one side of the shoot: none (dark), red or blue.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The dark group gets no light treatment, so it serves as the baseline.",
+     "final_answer": "The no-light (dark) group is the control. A control is needed as a baseline: comparing against it shows whether any curvature is caused by the light wavelength rather than by other factors, such as normal growth or handling.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "A null hypothesis states that the treatment has no effect.",
+     "final_answer": "The wavelength of light has no effect on the mean angle of stem curvature toward the light source. The mean angle is the same for the dark, red and blue groups.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the ±2SE ranges: blue is 38.8–45.2° and dark is 0.5–7.3°. The ranges do not overlap, so the difference is statistically significant.",
+     "final_answer": "The blue-light mean (42.0°) is much higher than the dark mean (3.9°). The ±2SE ranges (38.8–45.2° for blue and 0.5–7.3° for dark) do not overlap, so the difference is statistically significant. This supports the claim that blue light increases curvature toward the light.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "Parts A and B fit 3.C. Part C is a null hypothesis (3.B), which is acceptable under per-part judging. Part D is a data-claim support part labeled 6.B/4.B. The topic 8.1 content is only a phototropism context, and the tasks are generic experimental-design questions with little tie to responses to the environment. Weak but not out of scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Part B rubric requires both 'no light (dark)' and 'baseline for comparison'. The prompt also asks 'explain why a control is needed', so valid explanations (e.g., to show the change is due to light rather than other factors) would be marked wrong because the exact phrase is required; the key is too narrow. Part C requires both 'no difference' and 'no effect' (the elements list reads as an AND), which penalizes valid answers that state only one. Part D requires 'error bars do not overlap', which fits, but it is a 1-point part combining citing data and inference. Several parts also have trivially low discrimination. Three of four parts are 1-point rote identification."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete: groups, mean ± 2SE, and n. The wording is clear. The stem has no experimental description (the setup is only implied by Part A's prompt), and the 'one side of the shoot' source is described only in the prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ. The rubric rows have no common_errors listed, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The grain is four 1-point parts (the short-FRQ format), but the parts are mostly simple identification and the set is very low demand for AP. Part D is a bare claim-support task. The calculator is designated 'allowed' but no computation is required. The red-light data is never used. The set is not very exam-like."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stimulus data is complete and the answers are correct, but the rubric is too narrow for open-ended explain parts (B needs the exact phrase 'baseline for comparison'; C requires both 'no difference' and 'no effect'). The task is low demand and weakly tied to topic 8.1 responses to the environment, the red-light data goes unused, and the calculator is allowed with no computation. Fails on key/scoring, scope, and suitability.\"}"
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "All four parts are direct, single-concept tasks: identify the independent variable, identify the control and its purpose, state a null hypothesis, and support a claim with table values and non-overlapping 2SE intervals. The table is small and clear, and no calculation is needed. This is foundational experimental-design skill (3.C) at an introductory level, and the item is not hard for unfair reasons.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f01-k4",
+  "cellId": "ap_biology-f01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Factor the student changes on purpose.",
+     "final_answer": "The wavelength (color) of the light shone on one side of the shoot: none/dark, red, or blue.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "The control gets no treatment.",
+     "final_answer": "The no-light (dark) group is the control. It shows how much the stems curve with no light at all, so any extra curvature in the red- or blue-light groups can be credited to the light's wavelength and not to other factors.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The null hypothesis says the treatment has no effect.",
+     "final_answer": "The wavelength of light has no effect on the mean angle of stem curvature toward the light source, so there is no difference in mean angle among the dark, red-light and blue-light groups.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "Compare the ±2SE intervals: dark is 0.2–8.6°, blue is 37.6–46.8°. The intervals do not overlap.",
+     "final_answer": "The blue-light mean (42.2 ± 4.6°, range 37.6–46.8°) is much higher than the dark mean (4.4 ± 4.2°, range 0.2–8.6°). The ±2SE intervals do not overlap, so the difference is statistically significant. This means blue light increases curvature toward the light.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Four 1-point parts matches the short FRQ grain. The task load is light and no calculation is needed, so the calculator designation is harmless.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Acceptable short FRQ on experimental design in a phototropism context. Minor wording issues: the dark control in a toward-the-light measure, and the rubric's \"error bars\" against the table's ±2SE numbers."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "All four parts are routine skills: naming the independent variable (light wavelength), identifying the control (dark group) and saying why it is needed, stating a null hypothesis, and supporting a claim by comparing means with error bars. The concept depth is shallow and each part is a single short step. The data table is small and easy to read, and no calculation is needed; the 2SE intervals for dark and blue clearly do not overlap. The prompts are clear and stay within AP Biology scope, so the item sits at the basic learning level rather than the full-mock level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 2,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
+  }
+ },
+ {
+  "key": "ap_biology-f02-k0",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Means go up from 4.2 to 10.8 to 17.7 mL as sugar concentration goes up.",
+     "final_answer": "Positive relationship: CO2 produced increases as sugar concentration increases (4.2 → 10.8 → 17.7 mL). The increase is not proportional, because the gains get smaller relative to the 4-fold concentration steps.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(10.8-4.2)/4.2 ×100",
+     "final_answer": "(10.8 − 4.2)/4.2 × 100 ≈ 157% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Intervals 3.9–4.5, 9.3–12.3, 16.02–19.38 do not overlap.",
+     "final_answer": "None. No pair of error bars overlaps, so every pair of means is likely statistically different.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "8% has the highest mean, and its interval does not overlap the 2% interval.",
+     "final_answer": "The 8% mean (17.7 mL) is the highest of the three. Its ±2SE range (16.02–19.38 mL) does not overlap the 2% range (9.3–12.3 mL) or the 0.5% range (3.9–4.5 mL). This suggests the difference is statistically significant, which supports the claim among the levels tested.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item has no real tie to cellular respiration concepts such as fermentation or ATP. Part C answers \"none\" and Part D then repeats the same non-overlap reasoning, so the two parts are redundant. The error-bar interpretation relies on a heuristic (non-overlap of ±2SE implies a difference) that is somewhat acceptable for AP Biology. Part A is a trivial description. Overall the item is thin as a task.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The data and keys are consistent, but the item is weak. Rubric matching is rigid and literal, Parts C and D overlap, the biology content on respiration is minimal, and the rubric lacks acceptable-paraphrase guidance. I recommend revision."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts match the AP Bio Practice 4 free-response format. The parts cover describing a trend, computing a percent change, interpreting ±2SE error bars by checking interval overlap, and supporting a claim with data. The concept depth is moderate, mainly the error-bar overlap logic in C and D. The calculation is a single step and the reading load is light. The difficulty comes from the intended skills, not from unfair sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f02-k1",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Rate goes up from pH 4 (6.3) to pH 7 (16.8), then drops at pH 10 (9.6). The rate at pH 10 is still above the rate at pH 4.",
+     "final_answer": "The relationship is not linear: the rate rises from pH 4 to a peak at pH 7, then falls at pH 10 (but stays above the pH 4 rate).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(16.8-6.3)/6.3 x 100 = 10.5/6.3 x 100 ≈ 166.7%",
+     "final_answer": "About a 167% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE intervals are pH4 5.52–7.08, pH7 15.24–18.36 and pH10 8.74–10.46. No two intervals overlap.",
+     "final_answer": "No such pair. None of the intervals overlap, so all three means are statistically different from each other.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "pH 7 has the highest mean, 16.8. Its interval (15.24–18.36) does not overlap with pH 4 (up to 7.08) or pH 10 (up to 10.46).",
+     "final_answer": "The data support the claim: pH 7 has the highest mean rate (16.8 vs 6.3 and 9.6 µmol/min). Its ±2SE bars do not overlap the other two, so the difference is likely statistically significant and the claim is supported. Note that only three pH values were tested, so the true optimum could be somewhere near pH 7 rather than exactly at 7.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The four 1-point parts fit the short-FRQ grain. The calculation in part B is trivial and does not need a calculator. The load is reasonable overall, though thin compared with the reference pattern.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails. The item is an enzyme pH data analysis rather than the assigned topic 3.5 Cellular Respiration. The rubric rows rely on brittle literal strings, and part C awards no point for the justification the prompt asks for. The key values themselves are correct, and the table data is complete apart from the \"Ph\" header typo."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Four 1-point parts on a small 3-row table. Part A describes a trend (rate peaks at pH 7, lower at pH 4 and 10). Part B is a single percent-change calculation: (16.8-6.3)/6.3 ≈ 166.7%. Part C compares the ±2SE intervals (pH 4: 5.52-7.08; pH 7: 15.24-18.36; pH 10: 8.74-10.46); none overlap, so all pairs differ, which needs only a quick interval check. Part D uses the non-overlapping intervals to support the claim that pH 7 gives the highest rate. Concept depth is shallow (optimal pH, error-bar overlap), the calculation is light, and the reading is minimal. Note that the topic tag 3.5 Cellular Respiration does not match the enzyme/pH content, which is a metadata issue and does not add difficulty.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
+  }
+ },
+ {
+  "key": "ap_biology-f02-k2",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "part_A_unknown_topic_3.7",
+   "part_B_unknown_topic_3.7",
+   "part_C_unknown_topic_3.7",
+   "part_D_unknown_topic_3.7",
+   "blueprint:unknown_topic",
+   "blueprint:part_A_topic",
+   "blueprint:part_B_topic",
+   "blueprint:part_C_topic",
+   "blueprint:part_D_topic",
+   "blueprint:bio_topic_unknown",
+   "wording_missing"
+  ],
+  "soft": []
+ },
+ {
+  "key": "ap_biology-f02-k3",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:B:numeric",
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Means rise from 3.9 to 11.4 to 18.8 mL as sugar goes up.",
+     "final_answer": "As sugar concentration goes up, mean CO2 produced in 20 min goes up: 3.9 mL at 0.5%, 11.4 mL at 2%, 18.8 mL at 8%. The rise is not proportional, because each 4-fold increase in sugar gives a smaller relative gain.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(11.4-3.9)/3.9 x 100",
+     "final_answer": "(11.4 - 3.9)/3.9 x 100 ≈ 192% increase",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Intervals 3.52-4.28, 10.70-12.10, 17.16-20.44 do not overlap.",
+     "final_answer": "None. No pair of error bars overlaps, so all three means differ significantly.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "8% has the highest mean, and its interval does not overlap the 2% interval.",
+     "final_answer": "The highest mean is at 8% (18.8 mL), compared with 11.4 mL and 3.9 mL. The 8% interval (17.16–20.44) does not overlap the 2% interval (10.70–12.10), so the difference is statistically significant and supports the claim. The 8% error bar is the widest, so that mean is the least precise.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The item is labeled topic 3.5 (Cellular Respiration), but nothing in it requires respiration knowledge. The stem never states what is being measured (fermentation or respiration) or that CO2 reflects metabolic rate. The tasks are generic table description, percent change, and error-bar overlap, so the topic fit is nominal. Parts B (5.A) and C (5.B) are also assessed under other skills, which is acceptable for a mixed-skill FRQ. However, there is no actual 3.5 demand, such as linking CO2 output to fermentation or respiration."
+  }
+ },
+ {
+  "key": "ap_biology-f02-k4",
+  "cellId": "ap_biology-f02",
+  "passed": false,
+  "reasons": [
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Means rise from 4.3 to 11.2 to 19.6 mL as sugar concentration goes up.",
+     "final_answer": "Positive relationship: as sugar concentration goes up, mean CO2 produced also goes up (4.3 → 11.2 → 19.6 mL). The increase is not proportional: sugar goes up 4-fold at each step, but CO2 goes up by less each time (about 2.6× and then 1.75×).",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(11.2-4.3)/4.3 ×100",
+     "final_answer": "(11.2 − 4.3)/4.3 × 100 ≈ 160% increase (160.5%)",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Intervals: 3.86–4.74, 10.36–12.04, 17.12–22.08. None of them overlap.",
+     "final_answer": "None. The ±2SE ranges are 3.86–4.74 mL, 10.36–12.04 mL and 17.12–22.08 mL. No two ranges overlap, so every pair of means is statistically different.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The 8% mean is highest, and its range does not overlap the others.",
+     "final_answer": "The 8% group has the highest mean (19.6 mL, compared with 11.2 and 4.3 mL). Its ±2SE range (17.12–22.08 mL) does not overlap the 2% range (10.36–12.04 mL), so the difference is statistically significant and supports the claim. The 8% error bar is the widest, so that data varies the most, but even its lowest value is still above the highest value for 2%.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "Bundle label 4.B, but parts B (5.A), C (5.B), and D (6.B) are assessed under other skills. This is acceptable for official mixing. However, topic 3.5 (Cellular Respiration) is only a thin context here: yeast CO2 with sugar concentration requires no respiration knowledge. The item is essentially generic data/statistics analysis. Short FRQ grain is four 1-point parts, which is OK. The weak topic linkage is a concern."
+  }
+ }
+]

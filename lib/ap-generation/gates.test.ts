@@ -87,7 +87,7 @@ d("code-generated archetypes pass the gates (Calculus AB and BC)", () => {
   }, 60000);
   it("every FRQ pack passes the FRQ gates", () => {
     const skills = new Set(calcBcGuide.skills.map((s) => s.code)); const failures: string[] = [];
-    for (const [name, packs] of Object.entries(all)) { if (!name.startsWith("frq_") || name.startsWith("frq_bio")) continue; for (const p of packs) { const r = [...gateFrq("ap_calculus_ab", p as unknown as FrqPack, skills), ...gateGuideFrq(calcBcGuide, p as unknown as FrqPack)]; if (r.length) failures.push(`${name}: ${r.join(",")}`); } }
+    for (const [name, packs] of Object.entries(all)) { if (!name.startsWith("frq_") || name.startsWith("frq_bio") || name.startsWith("frq_micro")) continue; for (const p of packs) { const r = [...gateFrq("ap_calculus_ab", p as unknown as FrqPack, skills), ...gateGuideFrq(calcBcGuide, p as unknown as FrqPack)]; if (r.length) failures.push(`${name}: ${r.join(",")}`); } }
     expect(failures).toEqual([]);
   }, 60000);
 });
