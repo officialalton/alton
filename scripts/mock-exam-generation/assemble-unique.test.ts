@@ -46,3 +46,44 @@ describe("그룹 한도 (오너 규칙 3·4)", () => {
     expect(() => assertUnique(r.sets, new Set())).not.toThrow();
   });
 });
+
+import { capViolations, TopicLedger, saturationList, rwPaths, type TopicMap } from "./rw-topics-lib";
+describe("소재 상한 (2026-10-08)", () => {
+  const W: Weights = { dom: [{ section: "rw", sat_domain: "d1", weight_pct: 100 }, { section: "math", sat_domain: "m1", weight_pct: 100 }], diff: ["easy", "medium", "hard"].flatMap((d, i) => ["rw", "math"].map((s) => ({ section: s, problem_difficulty: d, weight_pct: [25, 50, 25][i] }))) };
+  // 같은 cluster 문항이 id 순서로 붙어 있어 상한이 없으면 한 모듈이 같은 소재로 채워진다.
+  const mk = (dom: string, d: string): EligibleProblem[] => Array.from({ length: 300 }, (_, i) => ({ problemId: `${dom}-${d}-${String(i).padStart(3, "0")}`, problemVersionId: `v${dom}-${d}-${i}`, satDomain: dom, skillCode: `${dom}_s${i % 3}`, difficulty: d as never, format: "mc" as const, similarityGroup: null, exposureCount: 0 }));
+  const pool = ["d1", "m1"].flatMap((dm) => ["easy", "medium", "hard"].flatMap((d) => mk(dm, d)));
+  const subjects = ["literature_fiction", "humanities", "science_life", "history_civics", "social_science"];
+  const topics: TopicMap = new Map(pool.filter((c) => c.satDomain === "d1").map((c, i) => [c.problemId, { subject: subjects[Math.floor(i / 7) % 5], cluster: `c${Math.floor(Number(c.problemId.slice(-3)) / 12)}-${c.difficulty}`, family: `f${Math.floor(Number(c.problemId.slice(-3)) / 12) % 8}` }]));
+  it("상한 없이는 위반이 생기고(대조군), 상한을 주면 위반 0 + 중복 0", () => {
+    const base = planUnique(pool, W, 2, new Map(), true, {});
+    expect(capViolations(base.sets[0].filter((i) => i.section === "rw"), topics).length).toBeGreaterThan(0);
+    const r = planUnique(pool, W, 2, new Map(), true, { topics });
+    expect(r.topicViolations).toEqual([]); expect(r.topicRelaxed).toEqual([]);
+    expect(() => assertUnique(r.sets, new Set())).not.toThrow();
+    expect(r.sets.map((s) => s.length)).toEqual([147, 147]);
+  });
+  it("cluster 수가 모자라 상한을 지킬 수 없으면 풀어서 채우고 topicRelaxed 에 기록한다", () => {
+    const tiny: TopicMap = new Map([...topics].map(([id, t]) => [id, { ...t, cluster: "same", family: "same" }]));
+    const r = planUnique(pool, W, 1, new Map(), true, { topics: tiny });
+    expect(r.sets[0].length).toBe(147); expect(r.topicRelaxed.length).toBeGreaterThan(0);
+  });
+  it("TopicLedger: 모듈당 1, 경로당 2, family 4 (문학은 family 제외)", () => {
+    const t: TopicMap = new Map([["a", { subject: "science_life", cluster: "x", family: "f" }], ["b", { subject: "science_life", cluster: "x", family: "f" }], ["c", { subject: "science_life", cluster: "x", family: "f" }], ["d", { subject: "science_life", cluster: "y", family: "f" }]]);
+    const L = new TopicLedger(t); L.add(0, "rw_m1", null, "a");
+    expect(L.ok(0, "rw_m1", null, "b")).toBe(false); // 같은 모듈
+    expect(L.ok(0, "rw_m2", "lower", "b")).toBe(true); L.add(0, "rw_m2", "lower", "b");
+    expect(L.ok(0, "rw_m2", "higher", "c")).toBe(true); // 경로 higher 는 M1 에서 1회뿐
+    expect(L.ok(0, "rw_m2", "lower", "c")).toBe(false); // 경로 lower 가 이미 2회
+    expect(L.ok(1, "rw_m1", null, "a")).toBe(true); // 다른 세트
+    expect(L.ok(0, "rw_m2", "higher", "d")).toBe(true);
+  });
+  it("capViolations / saturationList / rwPaths", () => {
+    const items = ["a", "b"].map((problemId, i) => ({ problemId, moduleKey: "rw_m2", route: i ? "higher" : "lower" }));
+    expect(rwPaths([{ moduleKey: "rw_m1", route: null }, ...items]).map((p) => p.length)).toEqual([2, 2]);
+    const t: TopicMap = new Map([["a", { subject: "x", cluster: "c", family: "f" }], ["b", { subject: "x", cluster: "c", family: "f" }]]);
+    expect(capViolations([...items, { problemId: "a", moduleKey: "rw_m1", route: null }, { problemId: "b", moduleKey: "rw_m1", route: null }], t).some((v) => v.kind === "module" && v.key === "c")).toBe(true);
+    const s = saturationList([{ cluster: "o", family: "m" }, { cluster: "o", family: "m" }, { cluster: "z", family: "k" }], { clusterCap: 1, familyCap: 1 });
+    expect(s.clusters).toEqual([{ cluster: "o", count: 2 }]); expect(s.families).toEqual([{ family: "m", count: 2 }]);
+  });
+});
