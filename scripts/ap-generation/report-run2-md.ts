@@ -10,7 +10,7 @@ function stats(run: string, subject: string) {
   const c = rd(`${run}/candidates.json`) as J[]; const rep = rd(`${run}/report.json`);
   const xs = c.filter((x) => x.apSubjectCode === subject); const fam_: Record<string, number> = {};
   xs.filter((x) => x.rejectionReason).forEach((x) => { const seen = new Set<string>(); String(x.rejectionReason).split("; ").forEach((r) => seen.add(fam(r))); seen.forEach((f) => (fam_[f] = (fam_[f] ?? 0) + 1)); });
-  const ad = xs.filter((x) => x.reviewState === "pending_expert_review" && !x.reserve);
+  const ad = xs.filter((x) => (x.reviewState === "pending_expert_review" || x.reviewState === "auto_passed") && !x.reserve);
   const mcAd = ad.filter((x) => x.kind === "mc").length; const frqAd = ad.length - mcAd;
   const bs = rep.bySubject?.[subject];
   return { candidates: xs.length, passed: xs.filter((x) => !x.rejectionReason).length, adopted: ad.length, mcAd, frqAd, rejected: xs.filter((x) => x.rejectionReason).length, fam: fam_, cost: bs ? bs.costUsd : rep.totalCostUsd, callsPerAdopted: bs ? bs.callsPerAdopted : rep.callsPerAdopted, fileRep: rep };
@@ -42,7 +42,7 @@ lines.push("", "## 원인 분석으로 고친 것(규칙 완화 없이 생성기
 "- 그림 렌더링 전: 그래프 자료는 데이터 명세만 있다.");
 if (has("run2bc/report.json")) {
   const b = rd("run2bc/report.json"); const sh = has("run2bc/shared_from_ab.json") ? rd("run2bc/shared_from_ab.json") : { mcShared: [], frqShared: [] };
-  const bcc = (rd("run2bc/candidates.json") as J[]).filter((x) => x.reviewState === "pending_expert_review" && !x.reserve);
+  const bcc = (rd("run2bc/candidates.json") as J[]).filter((x) => (x.reviewState === "pending_expert_review" || x.reviewState === "auto_passed") && !x.reserve);
   const byUnit: Record<string, number> = {}; bcc.filter((x) => x.kind === "mc").forEach((x) => (byUnit[x.unitCode] = (byUnit[x.unitCode] ?? 0) + 1));
   lines.push("", "## Calculus BC 샘플(같은 파이프라인, BC 전용 칸만 새로 생성 + AB 공유분 재태깅)", "",
     `- BC 전용 칸: MC ${b.mcAdopted}/16 채택, FRQ ${b.frqAdopted}/2 채택(급수·매개). 후보 ${b.candidates}, 전체 통과 ${b.passedAll}, 수율 ${(b.yield * 100).toFixed(1)}%, 신규 지출(누적, 반복 포함) $${b.newSpendSinceBaseline}, 호출/채택 ${b.callsPerAdopted}. 미충전 칸: ${b.unfilledCells.join(", ") || "없음"}.`,
