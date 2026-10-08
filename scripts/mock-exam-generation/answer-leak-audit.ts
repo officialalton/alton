@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { analyzeLeak, buildIdf } from "./answer-leak-detector";
+import { blindGuess } from "./answer-leak-blind";
 
 export const RW_SKILLS = new Set("central_ideas_details words_in_context text_structure_purpose cross_text_connections rhetorical_synthesis transitions boundaries form_structure_sense inferences command_of_evidence_text command_of_evidence_quant".split(" "));
 const arg = (n: string, d?: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
@@ -23,7 +24,7 @@ export function loadRows(dumpPath: string): Row[] {
     const skill = pv.get(v.problem_id).skill_code as string;
     const sets = (bySets.get(v.id) ?? []).map((i) => ({ name: setName.get(i.exam_set_id)?.name ?? "?", status: setName.get(i.exam_set_id)?.status, module: i.module_key, position: i.position }));
     const question = v.question ?? "";
-    return { problemId: v.problem_id, versionId: v.id, versionNo: v.version_no, skill, difficulty: v.difficulty ?? "?", question, passage: v.passage ?? "", options: v.options, correctIndex: v.correct_index, hasFigure: !!v.figure, inPublishedSet: sets.some((s) => s.status === "published"), sets: sets.map(({ name, module, position }) => ({ name, module, position })), analysis: analyzeLeak({ question, options: v.options, correctIndex: v.correct_index, skill }, idfBySkill.get(skill)!) };
+    return { problemId: v.problem_id, versionId: v.id, versionNo: v.version_no, skill, difficulty: v.difficulty ?? "?", question, passage: v.passage ?? "", options: v.options, correctIndex: v.correct_index, hasFigure: !!v.figure, inPublishedSet: sets.some((s) => s.status === "published"), sets: sets.filter((x) => x.status === "published").map(({ name, module, position }) => ({ name, module, position })), analysis: analyzeLeak({ question, options: v.options, correctIndex: v.correct_index, skill }, idfBySkill.get(skill)!) };
   });
 }
 
@@ -51,29 +52,14 @@ if (process.argv[1]?.endsWith("answer-leak-audit.ts") && process.argv[2] === "bl
     const targets = rows.filter((r) => !only || only.split(",").includes(r.skill));
     const done: Record<string, any> = existsSync(outPath) ? JSON.parse(readFileSync(outPath, "utf-8")) : {};
     let inTok = 0, outTok = 0;
-    const L = ["A", "B", "C", "D"];
-    const ask = async (r: Row, order: number[]) => {
-      const lines = order.map((oi, k) => `${L[k]}. ${r.options[oi]}`).join("\n");
-      const prompt = `You are taking a digital SAT Reading & Writing question, but the passage / table / graph has been REMOVED. You see only the question stem and the four options. Pick the option you believe is correct using only what you can see (wording, structure, internal logic) and general knowledge.\n\nQuestion: ${r.question}\n\n${lines}\n\nReply with JSON only: {"pick":"A|B|C|D","confidence":"high|medium|low","reason":"<12 words"}. Use "high" only if the answer is determinable without the missing passage/data.`;
-      for (let a = 0; a < 3; a++) {
-        try {
-          const m = await client.messages.create({ model: MODEL, max_tokens: 120, messages: [{ role: "user", content: prompt }] });
-          inTok += m.usage.input_tokens; outTok += m.usage.output_tokens;
-          const t = m.content.map((c) => (c.type === "text" ? c.text : "")).join("");
-          const j = JSON.parse(t.match(/\{[\s\S]*\}/)![0]);
-          const k = L.indexOf(String(j.pick).trim().toUpperCase());
-          return { picked: k >= 0 ? order[k] : null, confidence: String(j.confidence), reason: String(j.reason ?? "") };
-        } catch { await new Promise((r) => setTimeout(r, 2000 * (a + 1))); }
-      }
-      return { picked: null, confidence: "error", reason: "" };
-    };
     let idx = 0, n = 0;
     const worker = async () => {
       while (idx < targets.length) {
         const r = targets[idx++];
         if (done[r.versionId]) continue;
-        const [s1, s2] = await Promise.all([ask(r, [0, 1, 2, 3]), ask(r, [3, 2, 1, 0])]);
-        done[r.versionId] = { samples: [s1, s2], hit: [s1, s2].map((s) => s.picked === r.correctIndex), high: [s1, s2].map((s) => s.confidence === "high") };
+        const res = await blindGuess(client as never, MODEL, r);
+        inTok += res.usage.inTok; outTok += res.usage.outTok;
+        done[r.versionId] = { samples: res.samples, hit: res.hit, high: res.high };
         if (++n % 100 === 0) { writeFileSync(outPath, JSON.stringify(done)); console.error(`blind ${n}/${targets.length} cost $${((inTok * PRICE.in + outTok * PRICE.out) / 1e6).toFixed(3)}`); }
       }
     };
