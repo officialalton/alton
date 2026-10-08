@@ -122,7 +122,7 @@ function structure(c: Cand): string[] {
       if (!rows.length) rs.push(`part_${part.label}_no_rubric_rows`);
       if (sum !== Number(part.points)) rs.push(`part_${part.label}_rubric_sum_${sum}_vs_${part.points}`);
       for (const s of (part.skill_codes as string[]) ?? []) if (!skills.has(s)) rs.push(`part_${part.label}_unknown_skill_${s}`);
-      for (const r of rows) { const dep = r.requires_row_id as string | null | undefined; if (dep && !rows.some((x) => x.row_id === dep)) rs.push(`part_${part.label}_bad_requires_${dep}`); }
+      for (const r of rows) { const dep = r.requires_row_id as string | null | undefined; if (dep && !parts.some((pp) => ((pp.rubric_rows as Json[]) ?? []).some((x) => x.row_id === dep))) rs.push(`part_${part.label}_bad_requires_${dep}`); }
     }
     if (total !== Number(p.total_points)) rs.push(`total_points_${total}_vs_${p.total_points}`);
   }

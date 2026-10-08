@@ -1,158 +1,588 @@
 {
- "ap_calculus_ab-c001-k0": {
+ "ap_calculus_ab-f03-k0": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "[10, 28, 14, 4]"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[0, -6, -4]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "6-t^2 fails ODE"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "S=6e^{-t^2}, S(2)=6*exp(-4) ~ 0.1099"
+     }
+    ],
+    "conceptual_parts": []
+   }
   }
  },
- "ap_calculus_ab-c001-k1": {
+ "ap_calculus_ab-f03-k1": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "unique match [0]"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "-100 and 0"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "matches dsolve"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "35.8351893845611"
+     }
+    ],
+    "conceptual_parts": []
+   }
   }
  },
- "ap_calculus_ab-c001-k2": {
+ "ap_calculus_ab-f03-k2": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "sums: [5, None, 3, 3]"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "slope 6"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "y satisfies DE and IC"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "denominator never zero"
+     }
+    ],
+    "conceptual_parts": []
+   }
   }
  },
- "ap_calculus_ab-c001-k3": {
+ "ap_calculus_ab-f03-k3": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "options=[15, 11, 13, 12]"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[3/2, 1/2, 0]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general form check via particular solution"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "8"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "log(16)"
+     }
+    ],
+    "conceptual_parts": []
+   }
   }
  },
- "ap_calculus_ab-c002-k0": {
+ "ap_biology-c022-k0": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
-   "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "limit=6"
-   },
-   "conceptualOnly": false
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: differential reproduction of pre-existing heritable variants; 2%->96% supports selection."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Fitness is environment dependent; control decline 2.0->0.5 consistent with cost of plasmid."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Replicates converge due to shared standing variation and same selection."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Environment change reverses selection; control shows decline from cost; 4% nonresistant remains."
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    true,
+    true,
+    true
+   ]
   }
  },
- "ap_calculus_ab-c002-k1": {
+ "ap_biology-c022-k1": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
-   "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "limit=3"
-   },
-   "conceptualOnly": false
+   "python": [
+    {
+     "computed_key_index": 2,
+     "conceptual_only": true,
+     "details": "Conceptual: selection on pre-existing heritable variation; no numeric recomputation."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "het=0.48, RR=0.36"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: cost of resistance (20% fewer offspring, R 0.10->0.09 in C) supports refuge reasoning."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Cross test shows equal viability/fertility, so no reproductive isolation."
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    false,
+    true,
+    true
+   ]
   }
  },
- "ap_calculus_ab-c002-k2": {
+ "ap_biology-c022-k2": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
-   "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "1/48"
-   },
-   "conceptualOnly": false
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.3478260869565218"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "decrements shrink; het share of a at q=0.05 is 0.95"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.2670157068062827"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.37839999999999996"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    false,
+    false
+   ]
   }
  },
- "ap_calculus_ab-c002-k3": {
+ "ap_biology-c022-k3": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
-   "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "limit=1/6 table=[0.16713221964740566, 0.16671298870098994, 0.16662039607266976, 0.16620625799671274]"
-   },
-   "conceptualOnly": false
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: selection on pre-existing variation; 61% <100% rules out option 3."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: selection depends on environment; derm resistance 9->11% with use ~5."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Different mutations on separate branches => independent origins."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: conserved universal features indicate common ancestry."
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    true,
+    true,
+    true
+   ]
   }
  },
- "ap_calculus_ab-c003-k0": {
+ "ap_biology-f02-k0": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "L=6,R=6,f(3)=5,continuous=False"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "fold=205.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "error bars overlap for mutants 1 and 2 across conditions; baseline far above WT"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "e"
+    ]
+   }
   }
  },
- "ap_calculus_ab-c003-k1": {
+ "ap_biology-f02-k1": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "L=30,R=30,C(5)=26"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "46.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "c5=0.00435 c6=0.00050 ratio=8.70"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c",
+     "e"
+    ]
+   }
   }
  },
- "ap_calculus_ab-c003-k2": {
+ "ap_biology-f02-k2": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "L=6, m=8/3, matches=[0]"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "fold=25.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "A and C constitutive"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "B fold induction 1.2"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d",
+     "e"
+    ]
+   }
   }
  },
- "ap_calculus_ab-c003-k3": {
+ "ap_biology-f02-k3": {
   "ok": true,
   "reasons": [],
   "verification": {
    "structure": true,
    "python": {
-    "computed_key_index": 0,
-    "conceptual_only": false,
-    "details": "left=150, right=150, H(3)=140, continuous=False"
-   },
-   "conceptualOnly": false
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "negative control lowest"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "fold=13.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "R deletion and O deletion high; T no effect without R"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual prediction"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_microeconomics-c005-k0": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c005-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "e=1.0, rev 240->240"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "delta CS=105.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "e=2.0"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "q0=25.0 q1=22.0 dwl=18.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.6923076923076924"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "560,540,0.875"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-f01-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=20,Pm=60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "500"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "400"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "Q=40, profit -300"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "MR=20"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Q=20,P=60,MR zero at 25"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "80000.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "40000.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "40000.0"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "ceiling 20 -> Q=40, profit 0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=20 Pm=60 MRint=25"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "800"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "400"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "dCS=1200"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=20, Pm=60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "profit 800, CS 400"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "DWL 400"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "ceiling Q=40, profit 0"
+     }
+    ],
+    "conceptual_parts": []
+   }
   }
  }
 }

@@ -87,3 +87,10 @@
 - `skill_code_source` enum(`official_ced`, `analyst_mapped`): 공개 SG에 스킬 코드가 없으므로 FRQ 행은 기본 `analyst_mapped`, 전문가 검수에서 확인.
 - `reference_pattern_id`: 구조 템플릿(Calc 6유형, Micro 8~10유형, Bio 짧은 4유형) 참조(공식 문항 텍스트 아님).
 - 번들 `stimulus_shared_across_parts bool` + 파트 간 의존(`part_inputs_from`): Micro 그래프 재사용·Calc 앞 파트 값 이월.
+
+---
+# 갱신(2026-10-08, 커리큘럼 키워드 반영): 재고 칸 = 키워드 코드 × 스킬 × 구조
+- 키워드는 **내용 축**(공식 단원 > 공식 토픽 코드 > 세부 키워드)이며 `subject_keywords.content_code`(예: "5.3", 세부 "5.3#2")로 안정 식별한다. 설계·결정 목록: `curriculum-keyword-design.md`, 시드 데이터: `data/ap/curriculum-2027/*.json`(10과목), 마이그레이션 `20262100000380`(스키마) · `…381`(후보·재고 칸·호출 장부).
+- `ap_stock_cells(subject_id, edition, keyword_code, skill_code, structure, target, adopted, pending)` — `keyword_code`는 위 토픽 공식 코드, `skill_code`는 `ap_skills.code`(공식), `structure`는 standalone | shared_stimulus_set | frq_multipart. 키워드는 문제 유형이 아니므로 유형(예: FRQ 템플릿)은 구조·메모로만 둔다. 부족분 = target − adopted. 목표 재고(과목당 MC 50 + FRQ 5)는 이 칸들의 합으로 표현한다.
+- 샘플(3과목) 칸은 `scripts/ap-generation/cells.ts`가 공식 단원 MC 비중(`ap_exam_weights`)과 스킬 범주 비중에 맞춰 계산하고 `data/ap/sample-2027/cells.json`에 저장한다. MC 스킬은 MC에서 평가되는 공식 스킬만 쓴다(Calc: 1.A/1.B/3.A/4.x 제외, Micro: 4.x 제외).
+- 후보는 `ap_candidate_items`(학생 비노출; review_state: candidate → rejected | pending_expert_review → expert_approved)에 두고, 공개 경로(`problems`)로의 변환은 전문가 승인 이후 별도 단계.

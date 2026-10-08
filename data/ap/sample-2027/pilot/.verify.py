@@ -1,7 +1,11 @@
 import json
-L=5*3**2+105
-R=30*3+60
-v=140
-cont=(L==R==v)
-key=0 if (L==R and L!=v) else None
-print(json.dumps({"computed_key_index":key,"conceptual_only":False,"details":f"left={L}, right={R}, H(3)={v}, continuous={cont}"}))
+a,b=100,2
+mc=20
+q=(a-mc)/(2*b)
+p=a-b*q
+profit=(p-mc)*q
+cs=0.5*q*(a-p)
+qe=(a-mc)/b
+dwl=0.5*(p-mc)*(qe-q)
+checks=[{"part":"a","pass":q==20 and p==60,"detail":"Qm=20, Pm=60"},{"part":"b","pass":profit==800 and cs==400,"detail":"profit 800, CS 400"},{"part":"c","pass":dwl==400,"detail":"DWL 400"},{"part":"d","pass":qe==40,"detail":"ceiling Q=40, profit 0"}]
+print(json.dumps({"checks":checks,"conceptual_parts":[]}))
