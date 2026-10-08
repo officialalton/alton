@@ -15,8 +15,8 @@ const COMMON = `You write ORIGINAL AP-style practice content for a premium 1:1 t
 ACCEPTANCE CRITERIA (all five must pass; an item that violates any "instant reject" rule is thrown away):
 1. Scope/skill fit: tests exactly the given official unit topic and the given official skill; needs no knowledge outside the AP course framework.
 2. Key and scoring correctness: exactly ONE defensible key; every number/unit/code is verified by your verification_code (compute the key independently from the stimulus numbers, never hard-code it); FRQ rubric rows are consistent (points add up, alternative valid solutions listed).
-3. Stimulus completeness: every axis, legend, unit, label and reference used by the question appears in the stimulus data; wording is unambiguous US English.
-4. Distractor/explanation quality: each wrong option encodes a specific named student misconception (write it in option_rationale); options are parallel in length, form and specificity (the key must not be longest, most hedged or most detailed); no "all/none of the above"; explanation says why the key is right AND why each distractor is wrong.
+3. Stimulus completeness: stimulus.data is the machine-readable specification from which the figure/table will be RENDERED later (description is only its alt text): it must fully specify axes with ranges and units, every curve/point/label/legend entry and every number the question uses, so nothing else is needed to draw or read it; wording is unambiguous US English. The stem must never say 'as described'.
+4. Distractor/explanation quality: each wrong option encodes a specific named student misconception (write it in option_rationale); options are parallel in length, form and specificity (the key must not be longest, most hedged or most detailed); no "all/none of the above"; explanation says why the key is right AND why each distractor is wrong, referring to options by their content, NEVER by letter or position (options will be reshuffled).
 5. Exam suitability: time, reading load and calculator/reference-sheet assumptions fit the real exam section; no needless long arithmetic.
 INSTANT REJECT: wrong key; more than one correct option; missing condition needed to decide the answer; stimulus that contradicts the stem; required out-of-scope knowledge.
 DIFFICULTY RULE: never make an item harder by long arithmetic, vagueness, extra reading load or out-of-scope knowledge; difficulty comes only from concept depth, number of representation changes, reasoning steps and condition-checking. Target "exam-prep" level.
@@ -81,7 +81,7 @@ export function userPrompt(cell: Cell, topicTitle: string, skillLabel: string, o
   const lines = [
     `Candidate ${idx + 1} of ${cell.candidates} for cell ${cell.cellId}. Create ONE new item. Use ${CONTEXTS[idx % CONTEXTS.length]} (candidates for the same cell must differ in context, numbers and stimulus type).`,
     `Official unit ${cell.unitCode}; official topic ${cell.keywordCode} "${topicTitle}"${cell.extraKeywordCodes.length ? `; also draws on topics ${cell.extraKeywordCodes.join(", ")}` : ""}.`,
-    `Primary official skill: ${cell.skill} — ${skillLabel}. Put this code in skill_primary (secondary skills only if truly exercised).`,
+    `Set keyword_codes to exactly [${[cell.keywordCode, ...cell.extraKeywordCodes].map((c) => `"${c}"`).join(", ")}] (do not invent other codes). Primary official skill: ${cell.skill} — ${skillLabel}. Put this code in skill_primary (secondary skills only if truly exercised).`,
     cell.kind === "mc" ? `Use exactly ${optionCount} options.` : `Template: ${cell.frqTemplate}. Choose point values that match the subject's real exam (see subject notes).`,
     cell.calculator !== "na" ? `Calculator status: ${cell.calculator}.` : "",
     siblingNote,

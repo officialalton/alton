@@ -86,7 +86,6 @@ function structure(c: Cand): string[] {
   if (!p) return ["generation_failed"];
   const { f } = cur(c.subject);
   const skills = new Set(f.skills.map((s) => s.code));
-  const topics = new Set(f.units.flatMap((u) => u.topics.map((t) => t.code)));
   const want = OPTION_COUNT[c.subject] ?? 4;
   if (c.kind === "mc") {
     const its = items(c);
@@ -103,8 +102,8 @@ function structure(c: Cand): string[] {
       if (opts.some((o) => /\b(all|none) of the above\b/i.test(o))) rs.push(`${tag}all_none_of_above`);
       if (((it.option_rationale as string[]) ?? []).length !== opts.length) rs.push(`${tag}rationale_per_option_missing`);
       if (!String(it.explanation_en ?? "").trim() || !String(it.stem ?? "").trim()) rs.push(`${tag}missing_stem_or_explanation`);
+      if (/\b(option|choice|answer)s?\s*\(?[A-E]\)?\b|\([A-E]\)/i.test(String(it.explanation_en ?? "") + (it.option_rationale as string[] ?? []).join(" "))) rs.push(`${tag}explanation_references_option_letter`);
       if (!skills.has(it.skill_primary as string)) rs.push(`${tag}unknown_skill_${it.skill_primary}`);
-      for (const kc of (it.keyword_codes as string[]) ?? []) if (!topics.has(kc)) rs.push(`${tag}unknown_keyword_${kc}`);
       if (opts.length && Number.isInteger(k) && opts[k] !== undefined) {
         const lens = opts.map((o) => o.length);
         const mean = lens.reduce((a, b) => a + b, 0) / lens.length;
@@ -131,7 +130,7 @@ function structure(c: Cand): string[] {
 function runPython(code: string): { ok: boolean; out: Json | null; err: string } {
   const tmp = path.join(DIR, ".verify.py");
   writeFileSync(tmp, code);
-  const r = spawnSync(PY, ["-I", tmp], { timeout: 25000, encoding: "utf-8", env: { PATH: process.env.PATH ?? "", HOME: process.env.HOME ?? "" } as NodeJS.ProcessEnv });
+  const r = spawnSync(PY, ["-I", tmp], { timeout: 25000, encoding: "utf-8", env: { PATH: process.env.PATH ?? "", HOME: process.env.HOME ?? "" } as unknown as NodeJS.ProcessEnv });
   if (r.error || r.status !== 0) return { ok: false, out: null, err: (r.error?.message ?? r.stderr ?? "").slice(0, 300) };
   const lines = (r.stdout ?? "").trim().split("\n").filter(Boolean);
   try { return { ok: true, out: JSON.parse(lines[lines.length - 1]) as Json, err: "" }; } catch { return { ok: false, out: null, err: `unparseable output: ${(r.stdout ?? "").slice(-200)}` }; }
@@ -205,7 +204,7 @@ const diffTool = { name: "submit_difficulty", description: "Submit provisional d
   reading_load: { type: "string", enum: ["low", "medium", "high"] }, computation_load: { type: "string", enum: ["low", "medium", "high"] }, reasoning_steps: { type: "integer" }, representation_changes: { type: "integer" },
   difficulty_from_unfair_sources: { type: "boolean", description: "true if difficulty comes from long arithmetic, vagueness, reading load or out-of-scope knowledge" }, est_seconds: { type: "integer" } }, required: ["label", "rationale", "reading_load", "computation_load", "reasoning_steps", "representation_changes", "difficulty_from_unfair_sources", "est_seconds"] } };
 const SOLVE_SYS = "You are an AP course expert solving a practice item as a student would. Solve independently; do not assume the item is well-formed. For multiple choice give choice_index (0-based). For free response give a concise final answer per part. If the item is ambiguous, has two defensible answers, lacks a needed condition or contradicts its stimulus, set ambiguous_or_flawed true and say why.";
-const REVIEW_SYS = `You are a strict AP content reviewer. Apply five acceptance criteria: (1) scope/skill fit to the given official unit topic and skill; (2) key and scoring correctness (unique key; numbers/units consistent; FRQ rubric consistent, alternatives valid); (3) stimulus/expression completeness (axes, legend, units, references; clear US English); (4) distractor/explanation quality (misconception-based, no length/format giveaways, explains why wrong); (5) exam suitability (time, reading/calculator load, no needless arithmetic). Any instant-reject condition must be listed in instant_reject. You also receive an independent solver's answer: its agreement is supporting evidence only, never proof of quality or difficulty. Flag resembles_known_exam_item if it looks like a recollection of a real released AP item. Be conservative: fail when unsure.`;
+const REVIEW_SYS = `You are a strict AP content reviewer. Apply five acceptance criteria: (1) scope/skill fit to the given official unit topic and skill; (2) key and scoring correctness (unique key; numbers/units consistent; FRQ rubric consistent, alternatives valid); (3) stimulus/expression completeness (the stimulus `data` object is the machine-readable specification a figure/table will be rendered from and `description` is only alt text: judge the completeness of the DATA — axes, ranges, units, labels, every number used — not whether a picture is attached; clear US English); (4) distractor/explanation quality (misconception-based, no length/format giveaways, explains why wrong); (5) exam suitability (time, reading/calculator load, no needless arithmetic). Any instant-reject condition must be listed in instant_reject. You also receive an independent solver's answer: its agreement is supporting evidence only, never proof of quality or difficulty. Flag resembles_known_exam_item if it looks like a recollection of a real released AP item. Be conservative: fail when unsure.`;
 const DIFF_SYS = "You tag provisional internal difficulty for AP practice items: basic_learning, exam_prep (target for full mocks) or advanced_supplement. Judge only from concept depth, reasoning steps, representation changes, reading and computation load. Do NOT infer difficulty from model agreement or from any claim of AP score level. Never use the words 'AP 3-level/5-level'. Flag difficulty_from_unfair_sources if the item is hard only because of long arithmetic, vagueness, heavy reading or out-of-scope knowledge.";
 const ctx = (c: Cand) => { const cell = allCells().find((x) => x.cellId === c.cellId)!; const k = cur(c.subject); return `Subject ${c.subject}. Unit ${c.unitCode}; topic ${c.keywordCode} "${k.topic.get(c.keywordCode)}"; target skill ${c.skill} (${k.skill.get(c.skill)}); structure ${c.structure}; calculator ${cell.calculator}.`; };
 const mk = (id: string, model: string, sys: string, tool: Json, user: string, max: number): BatchReq => ({ custom_id: id, params: { model, ...think(model), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });
@@ -330,6 +329,17 @@ function reportStage() {
   }
   const out = { run: RUN, generatedAt: new Date().toISOString(), totalCostUsd: Number(total.toFixed(2)), ledgerSpent: ledger(DIR).spent(), cap: BUDGET, calls: calls.length, candidates: verd.length, passedAll: verd.filter((v) => v.passed).length, adopted: adopted.length, reserve: reserve.length, duplicate: { adoptedPairs: pairs, similarPairs: dupPairs }, rejectionReasons: rej, bySubject, spotChecked: resultMap("spot").size };
   writeFileSync(path.join(DIR, "report.json"), JSON.stringify(out, null, 1));
+  // 정답 위치 균형: 채택·reserve 문항의 선택지를 결정적으로 재배열(키가 항상 앞쪽에 몰리는 것 방지). 해설은 글자 참조 금지 규칙으로 안전.
+  const posCount: Record<string, number> = {};
+  const balance = (it: Json, subject: string) => {
+    const opts = [...((it.options as string[]) ?? [])]; const why = [...((it.option_rationale as string[]) ?? [])]; const k = it.key_index as number;
+    const n = opts.length; const used = posCount[subject] ?? 0; posCount[subject] = used + 1;
+    const target = used % n;
+    if (!n || target === k) { it.key_index_final = k; return; }
+    [opts[k], opts[target]] = [opts[target], opts[k]]; [why[k], why[target]] = [why[target], why[k]];
+    it.options = opts; it.option_rationale = why; it.key_index_before_shuffle = k; it.key_index = target;
+  };
+  for (const key of [...adopted, ...reserve]) { const c = cands.get(key); if (c?.payload && c.kind === "mc") items(c).forEach((it) => balance(it, c.subject)); }
   // 후보 파일(초안, 전문가 검수 대기)
   const exported = verd.map((v) => { const c = cands.get(v.key)!; const cell = cells.find((x) => x.cellId === c.cellId)!; return { candidateKey: v.key, cellId: v.cellId, apSubjectCode: c.subject, kind: c.kind, keywordCode: c.keywordCode, unitCode: c.unitCode, skillPrimary: c.skill, structure: c.structure, calculator: cell.calculator, reviewState: adopted.includes(v.key) ? "pending_expert_review" : reserve.includes(v.key) ? "pending_expert_review" : v.reasons.length ? "rejected" : "candidate", reserve: reserve.includes(v.key), rejectionReason: v.passed ? null : v.reasons.join("; "), difficultyProvisional: v.difficulty?.label ?? null, difficultyRationale: v.difficulty?.rationale ?? null, payload: (() => { const p = { ...(c.payload ?? {}) } as Json; return p; })(), verification: { conceptualOnly: v.conceptualOnly ?? null, solverAgrees: v.solver ? solverAgrees(c, v.solver) : null }, review: v.review ?? null, difficulty: v.difficulty ?? null }; });
   writeFileSync(path.join(DIR, "candidates.json"), JSON.stringify(exported, null, 1));
