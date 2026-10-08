@@ -140,7 +140,8 @@ function buildCands(): Cand[] {
       const mp = { ...(pack as unknown as McPack) } as McPack;
       let stem = mp.stem; const expl = structuredExplanation(pack);
       if (polished && typeof polished.stem === "string" && typeof polished.explanation_en === "string" && wordingPreserves(mp.stem, polished.stem).length === 0) { stem = polished.stem; wording = "llm"; }
-      let explF = expl; if (process.env.AP_REPAIR && polished && typeof polished.explanation_en === "string" && polished.explanation_en.length > 60 && wordingPreserves(expl, polished.explanation_en).length === 0) explF = polished.explanation_en as string; // 수선 모드: 해설 문장 재작성 허용(수치 보존 확인)
+      let explF = process.env.AP_KEEP_EXPLANATION && typeof (pack as Json).explanation_en === "string" ? ((pack as Json).explanation_en as string) : expl; // 구방식 arm: LLM 이 쓴 해설을 그대로 평가
+      if (false) explF = expl; if (process.env.AP_REPAIR && polished && typeof polished.explanation_en === "string" && polished.explanation_en.length > 60 && wordingPreserves(expl, polished.explanation_en).length === 0) explF = polished.explanation_en as string; // 수선 모드: 해설 문장 재작성 허용(수치 보존 확인)
       item = { ...mp, stem, explanation_en: explF };
     } else {
       const fp = JSON.parse(JSON.stringify(pack)) as FrqPack;
