@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { KEYWORD_FOLDER_SELECT, keywordFolderFields, type KeywordFolderFields, type KeywordFolderRow } from "@/lib/sat-keywords/folder-fields";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
 export type SubjectKeyword = {
@@ -7,7 +8,10 @@ export type SubjectKeyword = {
   status: string;
   domainCode?: string | null;
   skillCode?: string | null;
-};
+} & KeywordFolderFields;
+
+export type KeywordFolder = { id: string; name: string; position: number };
+export type KeywordDictionary = { folders: KeywordFolder[]; keywords: SubjectKeyword[] };
 
 export type SubjectUnit = {
   id: string;
@@ -23,6 +27,8 @@ export type AdminSubject = {
   units: SubjectUnit[];
   // R9(Task 2): 이 과목의 공용 키워드 사전 전체(단원/교재조각/문제 태깅 picker용).
   keywords?: SubjectKeyword[];
+  // 2026-10-08: 이 과목의 키워드 폴더(관리자 관리). 폴더가 없는 키워드는 "기타".
+  folders?: KeywordFolder[];
   // 2026-09-09: 실사용 참조가 있어 하드 삭제 대신 보관 처리된 과목. null이면 활성.
   archivedAt?: string | null;
   archivedReason?: string | null;
@@ -48,7 +54,7 @@ export async function loadSubjectCatalog(
   const subjectIds = subjects.map((s) => s.id);
 
   // N+1 방지: 단원/키워드/단원-키워드 관계를 과목 목록 전체에 대해 각각 한 번씩만 조회한다.
-  const [{ data: units }, { data: keywords }] = await Promise.all([
+  const [{ data: units }, { data: keywords }, { data: folderRows }] = await Promise.all([
     selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_template_units")
       .select("id, subject_id, position, unit_title, note")
@@ -56,10 +62,22 @@ export async function loadSubjectCatalog(
       .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
     selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_keywords")
-      .select("id, subject_id, label, status, domain_code, skill_code")
+      .select(`id, subject_id, label, status, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
       .in("subject_id", chunk)
       .order("label", { ascending: true }), { sort: orderComparator(["label", true]) }),
+    selectInChunks(subjectIds, (chunk) => supabase
+      .from("subject_keyword_folders")
+      .select("id, subject_id, name, position")
+      .in("subject_id", chunk)
+      .order("position", { ascending: true }), { sort: orderComparator(["position", true]) }),
   ]);
+
+  const foldersBySubject = new Map<string, KeywordFolder[]>();
+  for (const f of folderRows ?? []) {
+    const list = foldersBySubject.get(f.subject_id) ?? [];
+    list.push({ id: f.id, name: f.name, position: f.position });
+    foldersBySubject.set(f.subject_id, list);
+  }
 
   const unitIds = (units ?? []).map((u) => u.id);
   const { data: unitKeywordRows } = unitIds.length
@@ -79,7 +97,7 @@ export async function loadSubjectCatalog(
   const keywordsBySubject = new Map<string, SubjectKeyword[]>();
   for (const k of keywords ?? []) {
     const list = keywordsBySubject.get(k.subject_id) ?? [];
-    list.push({ id: k.id, label: k.label, status: k.status, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null });
+    list.push({ id: k.id, label: k.label, status: k.status, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null, ...keywordFolderFields(k) });
     keywordsBySubject.set(k.subject_id, list);
   }
 
@@ -101,7 +119,33 @@ export async function loadSubjectCatalog(
     subjectName: s.name,
     units: unitsBySubject.get(s.id) ?? [],
     keywords: keywordsBySubject.get(s.id) ?? [],
+    folders: foldersBySubject.get(s.id) ?? [],
     archivedAt: s.archived_at,
     archivedReason: s.archived_reason,
   }));
+}
+
+/** 한 과목의 키워드 사전(폴더 + 키워드) — 관리자 키워드 관리 액션이 변경 뒤 최신 상태를 돌려줄 때 쓴다. */
+export async function loadKeywordDictionary(supabase: SupabaseClient, subjectId: string): Promise<KeywordDictionary> {
+  const [{ data: folders, error: fe }, { data: keywords, error: ke }] = await Promise.all([
+    supabase.from("subject_keyword_folders").select("id, name, position").eq("subject_id", subjectId).order("position", { ascending: true }).order("name", { ascending: true }),
+    supabase
+      .from("subject_keywords")
+      .select(`id, label, status, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
+      .eq("subject_id", subjectId)
+      .order("label", { ascending: true }),
+  ]);
+  if (fe) throw new Error(fe.message);
+  if (ke) throw new Error(ke.message);
+  return {
+    folders: (folders ?? []).map((f) => ({ id: f.id as string, name: f.name as string, position: f.position as number })),
+    keywords: (keywords ?? []).map((k) => ({
+      id: k.id as string,
+      label: k.label as string,
+      status: k.status as string,
+      domainCode: (k.domain_code as string | null) ?? null,
+      skillCode: (k.skill_code as string | null) ?? null,
+      ...keywordFolderFields(k as KeywordFolderRow),
+    })),
+  };
 }
