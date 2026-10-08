@@ -1,3 +1,4 @@
+import { KEYWORD_FOLDER_SELECT, keywordFolderFields, type KeywordFolderFields, type KeywordFolderRow } from "@/lib/sat-keywords/folder-fields";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { composeProblemText } from "./problem-question";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
@@ -141,7 +142,7 @@ export const LAYERS: Record<PrepLayer, LayerSpec> = {
   },
 };
 
-export type UnitKeyword = { id: string; label: string; domainCode?: string | null; skillCode?: string | null };
+export type UnitKeyword = { id: string; label: string; domainCode?: string | null; skillCode?: string | null } & KeywordFolderFields;
 
 export type UnitMaterial = {
   curriculumDocId: string;
@@ -355,7 +356,7 @@ export async function loadComposition(
         scope.subjectId
           ? await supabase
               .from("subject_keywords")
-              .select("id, label, domain_code, skill_code")
+              .select(`id, label, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
               .eq("subject_id", scope.subjectId)
               .eq("status", "active")
               .order("label", { ascending: true })
@@ -406,6 +407,7 @@ export async function loadComposition(
       label: k.label as string,
       domainCode: ((k as { domain_code?: string | null }).domain_code ?? null),
       skillCode: ((k as { skill_code?: string | null }).skill_code ?? null),
+      ...keywordFolderFields(k as KeywordFolderRow),
     })),
     hasInheritableDefaults: Boolean(scope.sourceUnitId),
     goal: scope.goal,

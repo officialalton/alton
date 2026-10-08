@@ -1,3 +1,4 @@
+import { KEYWORD_FOLDER_SELECT, keywordFolderFields } from "@/lib/sat-keywords/folder-fields";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 // R9(Task 3) — 담당 학생의 운영 커리큘럼(오버레이) + 조합 가능한 라이브러리 콘텐츠를
@@ -33,6 +34,10 @@ export type LibraryKeyword = {
   id: string;
   label: string;
   domainCode?: string | null;
+  folderId?: string | null;
+  folderName?: string | null;
+  folderPosition?: number | null;
+  sortOrder?: number | null;
   skillCode?: string | null;
 };
 
@@ -69,7 +74,7 @@ export async function loadEligibleLibrary(
       .order("title", { ascending: true }),
     supabase
       .from("subject_keywords")
-      .select("id, label, domain_code, skill_code")
+      .select(`id, label, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
       .eq("subject_id", subjectId)
       .eq("status", "active")
       .order("label", { ascending: true }),
@@ -78,6 +83,6 @@ export async function loadEligibleLibrary(
   return {
     units: (units ?? []).map((u) => ({ id: u.id, position: u.position, unitTitle: u.unit_title })),
     publishedDocs: (docs ?? []).map((d) => ({ id: d.id, title: d.title })),
-    keywords: (keywords ?? []).map((k) => ({ id: k.id, label: k.label, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null })),
+    keywords: (keywords ?? []).map((k) => ({ id: k.id, label: k.label, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null, ...keywordFolderFields(k) })),
   };
 }

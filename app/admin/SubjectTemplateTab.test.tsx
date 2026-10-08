@@ -3,6 +3,7 @@ import { useState } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import SubjectTemplateTab from "./SubjectTemplateTab";
 import * as actions from "./subject-actions";
+import * as folderActions from "./keyword-folder-actions";
 import type { AdminSubject } from "./subject-data";
 
 // SubjectTemplateTab은 이제 subjects를 부모(CatalogTab)에서 controlled로 받는다 —
@@ -25,6 +26,17 @@ vi.mock("./subject-actions", () => ({
   renameSubjectKeyword: vi.fn(),
   assignUnitKeyword: vi.fn(),
   removeUnitKeyword: vi.fn(),
+}));
+
+vi.mock("./keyword-folder-actions", () => ({
+  createKeywordFolder: vi.fn(),
+  createKeywordInFolder: vi.fn(),
+  deleteKeywordFolder: vi.fn(),
+  deleteSubjectKeyword: vi.fn(),
+  moveKeywordToFolder: vi.fn(),
+  renameKeywordFolder: vi.fn(),
+  reorderKeywordFolders: vi.fn(),
+  reorderKeywordsInFolder: vi.fn(),
 }));
 
 const satMath: AdminSubject = {
@@ -143,9 +155,9 @@ describe("SubjectTemplateTab", () => {
   });
 
   it("2026-09-09(UAT 지적, 제품 오너 승인): 과목 키워드를 추가하면 사전에 반영되고, 회차에 태그·해제할 수 있다", async () => {
-    vi.mocked(actions.createSubjectKeyword).mockResolvedValue({
+    vi.mocked(folderActions.createKeywordInFolder).mockResolvedValue({
       ok: true,
-      value: { id: "kw1", label: "이차방정식", status: "active" },
+      value: { folders: [], keywords: [{ id: "kw1", label: "이차방정식", status: "active", folderId: null }] },
     });
     vi.mocked(actions.assignUnitKeyword).mockResolvedValue({ ok: true });
     vi.mocked(actions.removeUnitKeyword).mockResolvedValue({ ok: true });
@@ -156,7 +168,7 @@ describe("SubjectTemplateTab", () => {
       target: { value: "이차방정식" },
     });
     fireEvent.click(screen.getByText("추가"));
-    await waitFor(() => expect(actions.createSubjectKeyword).toHaveBeenCalledWith("sub1", "이차방정식"));
+    await waitFor(() => expect(folderActions.createKeywordInFolder).toHaveBeenCalledWith("sub1", "이차방정식", null));
 
     // 사전에 등록된 뒤에는 회차별 태그 버튼으로도 나타난다(두 곳 모두 표시).
     await waitFor(() => expect(screen.getAllByText("이차방정식").length).toBeGreaterThanOrEqual(2));
@@ -169,7 +181,7 @@ describe("SubjectTemplateTab", () => {
   });
 
   it("2026-09-10(P0-2) — 키워드 추가 실패는 { ok:false, error } 문구만 안내하고 던지지 않는다(Minified React error #441 마스킹 버그 재발 방지)", async () => {
-    vi.mocked(actions.createSubjectKeyword).mockResolvedValue({
+    vi.mocked(folderActions.createKeywordInFolder).mockResolvedValue({
       ok: false,
       error: "이미 존재하는 키워드입니다.",
     });
@@ -202,8 +214,8 @@ describe("과목 키워드 이름 수정", () => {
   function openKeywordEditor() {
     render(<Wrapper initialSubjects={[withKeyword]} />);
     fireEvent.click(screen.getByText("편집"));
-    fireEvent.click(screen.getByTitle("이름 고치기"));
-    return screen.getByLabelText("포물선 이름 고치기");
+    fireEvent.click(screen.getByRole("button", { name: "포물선" }));
+    return screen.getByLabelText("키워드 이름");
   }
 
   it("이름을 고치면 목록에 새 이름이 보인다", async () => {
@@ -216,7 +228,7 @@ describe("과목 키워드 이름 수정", () => {
     fireEvent.keyDown(input, { key: "Enter" });
 
     await waitFor(() => expect(actions.renameSubjectKeyword).toHaveBeenCalledWith("kw1", "포물선의 축"));
-    await waitFor(() => expect(screen.getByTitle("이름 고치기")).toHaveTextContent("포물선의 축"));
+    await waitFor(() => expect(screen.getByRole("button", { name: "포물선의 축" })).toBeInTheDocument());
   });
 
   it("이름이 겹치면 사유를 보여주고 편집 상태를 유지한다", async () => {
@@ -232,14 +244,14 @@ describe("과목 키워드 이름 수정", () => {
       expect(screen.getByText("같은 과목에 이미 있는 키워드 이름입니다.")).toBeInTheDocument()
     );
     // 고치던 값을 잃지 않아야 한다 — 다시 입력하게 만들면 안 된다.
-    expect(screen.getByLabelText("포물선 이름 고치기")).toHaveValue("삼각함수");
+    expect(screen.getByLabelText("키워드 이름")).toHaveValue("삼각함수");
   });
 
   it("바꾸지 않고 빠져나오면 아무것도 부르지 않는다", async () => {
     const input = openKeywordEditor();
     fireEvent.keyDown(input, { key: "Escape" });
     expect(actions.renameSubjectKeyword).not.toHaveBeenCalled();
-    expect(screen.getByTitle("이름 고치기")).toHaveTextContent("포물선");
+    expect(screen.queryByLabelText("키워드 이름")).not.toBeInTheDocument();
   });
 });
 
@@ -256,7 +268,7 @@ describe("회차 키워드 태그 — 도메인 그룹(관리자는 한국어 '�
     render(<Wrapper initialSubjects={[subject]} />);
     fireEvent.click(screen.getByText("편집"));
     expect(screen.getByText("Algebra")).toBeInTheDocument();
-    expect(screen.getByText("기타")).toBeInTheDocument();
+    expect(screen.getAllByText("기타").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByLabelText("함수의 기초 회차에 Linear equations 해제")).toHaveAttribute("aria-pressed", "true");
   });
 });

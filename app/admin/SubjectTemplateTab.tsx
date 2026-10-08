@@ -9,12 +9,11 @@ import {
   updateSubjectUnit,
   removeSubjectUnit,
   moveSubjectUnit,
-  createSubjectKeyword,
-  renameSubjectKeyword,
   assignUnitKeyword,
   removeUnitKeyword,
 } from "./subject-actions";
-import type { AdminSubject, SubjectKeyword, SubjectUnit } from "./subject-data";
+import type { AdminSubject, KeywordFolder, SubjectKeyword, SubjectUnit } from "./subject-data";
+import KeywordDictionaryManager from "./KeywordDictionaryManager";
 import { GroupedKeywordList } from "@/app/components/GroupedKeywords";
 
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
@@ -74,7 +73,7 @@ export default function SubjectTemplateTab({
           setOpenSubjectId(null);
         }}
         onUnitsChange={(units) => patchSubject(open.subjectId, { units })}
-        onKeywordsChange={(keywords) => patchSubject(open.subjectId, { keywords })}
+        onKeywordsChange={(keywords, folders) => patchSubject(open.subjectId, folders ? { keywords, folders } : { keywords })}
         onArchived={(reason) =>
           patchSubject(open.subjectId, { archivedAt: new Date().toISOString(), archivedReason: reason })
         }
@@ -215,39 +214,13 @@ function SubjectDetailEditor({
   onRenamed: (name: string) => void;
   onDeleted: () => void;
   onUnitsChange: (units: SubjectUnit[]) => void;
-  onKeywordsChange: (keywords: SubjectKeyword[]) => void;
+  onKeywordsChange: (keywords: SubjectKeyword[], folders?: KeywordFolder[]) => void;
   onArchived: (reason: string | null) => void;
 }) {
   const [units, setUnits] = useState(subject.units);
   const [removingUnitId, setRemovingUnitId] = useState<string | null>(null);
   const [keywords, setKeywords] = useState(subject.keywords ?? []);
-  const [newKeyword, setNewKeyword] = useState("");
   const [keywordError, setKeywordError] = useState<string | null>(null);
-  // 이름을 고치는 중인 키워드. 키워드는 교재·문제·회차가 전부 id로 참조하므로
-  // 이름만 바뀌고 이미 붙은 연결은 그대로다.
-  const [editingKeywordId, setEditingKeywordId] = useState<string | null>(null);
-  const [editingLabel, setEditingLabel] = useState("");
-
-  async function handleRenameKeyword(keywordId: string) {
-    const label = editingLabel.trim();
-    const current = keywords.find((k) => k.id === keywordId);
-    if (!label || label === current?.label) {
-      setEditingKeywordId(null);
-      return;
-    }
-    setKeywordError(null);
-    const result = await renameSubjectKeyword(keywordId, label);
-    if (!result.ok) {
-      setKeywordError(result.error);
-      return;
-    }
-    const next = keywords
-      .map((k) => (k.id === keywordId ? result.value : k))
-      .sort((a, b) => a.label.localeCompare(b.label));
-    setKeywords(next);
-    onKeywordsChange(next);
-    setEditingKeywordId(null);
-  }
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [archivedNotice, setArchivedNotice] = useState<string | null>(
@@ -257,24 +230,6 @@ function SubjectDetailEditor({
   function commit(next: SubjectUnit[]) {
     setUnits(next);
     onUnitsChange(next);
-  }
-
-  async function handleCreateKeyword() {
-    const label = newKeyword.trim();
-    if (!label) return;
-    setKeywordError(null);
-    // 2026-09-10(P0-2) — createSubjectKeyword()가 이제 던지지 않고 { ok, error }를
-    // 반환한다(Minified React error #441 마스킹 버그 수정 — production에서 서버
-    // 액션이 throw하면 이 화면에 그 마스킹된 문구가 그대로 노출됐다).
-    const result = await createSubjectKeyword(subject.subjectId, label);
-    if (!result.ok) {
-      setKeywordError(result.error);
-      return;
-    }
-    const next = [...keywords, result.value].sort((a, b) => a.label.localeCompare(b.label));
-    setKeywords(next);
-    onKeywordsChange(next);
-    setNewKeyword("");
   }
 
   async function handleToggleUnitKeyword(unitId: string, keywordId: string, currentlyTagged: boolean) {
@@ -373,65 +328,22 @@ function SubjectDetailEditor({
         className="text-[20px] font-extrabold text-ink mb-5 w-full px-2 py-1 border-[1.5px] border-transparent hover:border-grey-200 focus:border-grey-200 rounded-lg -ml-2"
       />
 
-      {/* 2026-09-09(UAT 지적, 제품 오너 승인) — 과목 공용 키워드 사전. 여기서
-          만든 키워드가 아래 회차별 태깅, 교사 운영 커리큘럼 오버레이, 교재/문제
-          태깅에서 그대로 재사용되는 원본이다. */}
-      <div className="mb-5">
-        <div className="text-[11px] font-bold text-grey-300 uppercase tracking-wide mb-2">
-          과목 키워드 사전
-        </div>
-        <div className="flex flex-wrap gap-1.5 mb-2">
-          {keywords.length === 0 && (
-            <span className="text-[12px] text-grey-500">아직 등록된 키워드가 없습니다.</span>
-          )}
-          {keywords.map((k) =>
-            editingKeywordId === k.id ? (
-              <input
-                key={k.id}
-                autoFocus
-                aria-label={`${k.label} 이름 고치기`}
-                value={editingLabel}
-                onChange={(e) => setEditingLabel(e.target.value)}
-                onBlur={() => void handleRenameKeyword(k.id)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") void handleRenameKeyword(k.id);
-                  if (e.key === "Escape") setEditingKeywordId(null);
-                }}
-                className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full border-[1.5px] border-grey-200 max-w-[180px]"
-              />
-            ) : (
-              <button
-                key={k.id}
-                title="이름 고치기"
-                onClick={() => {
-                  setEditingKeywordId(k.id);
-                  setEditingLabel(k.label);
-                  setKeywordError(null);
-                }}
-                className="text-[11.5px] font-semibold px-2.5 py-1 rounded-full bg-grey-100 text-ink"
-              >
-                {k.label}
-              </button>
-            )
-          )}
-        </div>
-        <div className="flex gap-2">
-          <input
-            value={newKeyword}
-            onChange={(e) => setNewKeyword(e.target.value)}
-            placeholder="새 키워드 (예: 이차방정식)"
-            className="flex-1 px-3 py-1.5 border-[1.5px] border-grey-200 rounded-lg text-[12.5px]"
-          />
-          <button
-            onClick={handleCreateKeyword}
-            disabled={!newKeyword.trim()}
-            className="text-[12px] font-bold px-3.5 py-1.5 rounded-lg bg-ink text-white disabled:opacity-50"
-          >
-            추가
-          </button>
-        </div>
-        {keywordError && <p className="text-[12px] text-red mt-1.5">{keywordError}</p>}
-      </div>
+      {/* 과목 공용 키워드 사전(2026-09-09) — 2026-10-08부터 폴더 기반 관리 화면.
+          여기서 만든 키워드가 아래 회차별 태깅, 교사 운영 커리큘럼 오버레이, 교재/문제
+          태깅에서 그대로 재사용되는 원본이다(키워드 id는 이름·폴더를 바꿔도 그대로). */}
+      <KeywordDictionaryManager
+        subjectId={subject.subjectId}
+        initial={{ folders: subject.folders ?? [], keywords }}
+        onChange={(d) => {
+          setKeywords(d.keywords);
+          onKeywordsChange(d.keywords, d.folders);
+        }}
+      />
+      {keywordError && (
+        <p role="alert" className="text-[12px] text-red mb-2">
+          {keywordError}
+        </p>
+      )}
 
       {units.map((u, idx) => (
         <div

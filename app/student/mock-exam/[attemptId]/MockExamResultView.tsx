@@ -409,7 +409,7 @@ export default function MockExamResultView({
 
   return (
     <div>
-      <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto border-b border-grey-200">
+      <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200">
         {TABS.map((t) => (
           <button
             key={t.key}

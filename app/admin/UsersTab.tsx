@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import UsersPagination from "./UsersPagination";
+import { USERS_PAGE_SIZE } from "./users-page-size";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
-import {
-  listParentsForUsersTabAction,
-  listStudentsForUsersTabAction,
-  listTeachersForUsersTabAction,
-} from "./users-actions";
+import { listParentsPageAction, listStudentsPageAction, listTeachersPageAction } from "./users-actions";
 import { updateUserBasicInfo } from "./user-edit-actions";
 import ArchivedHouseholdsList from "./ArchivedHouseholdsList";
 import HouseholdArchiveControls from "./HouseholdArchiveControls";
@@ -92,7 +90,7 @@ export default function UsersTab({
   // {ok,data,errorCode} 계약이라 예외를 던지지 않음).
   const [parents, setParents] = useState<ParentListItem[] | null>(null);
   const [parentsErrorCode, setParentsErrorCode] = useState<string | null>(null);
-  const [loadingParents, setLoadingParents] = useState(false);
+  const [loadingPage, setLoadingPage] = useState(false);
   // 2026-09-10(P1) — null이면 "아직 이 서브탭을 연 적 없음"(스켈레톤 표시),
   // 빈 배열이면 "조회했는데 0명"을 구분한다.
   const [students, setStudents] = useState<StudentListItem[] | null>(null);
@@ -105,75 +103,94 @@ export default function UsersTab({
   const [openConsultantId, setOpenConsultantId] = useState<string | null>(null);
   const [openParentId, setOpenParentId] = useState<string | null>(null);
 
+  // 2026-10-08 — 서버 페이지네이션(10명/페이지). 탭·회원 유형·검색어가 바뀌면 1페이지로
+  // 돌아가고, 검색어는 입력이 멈춘 뒤(300ms) 서버에 한 번만 조회한다.
+  const [page, setPage] = useState(1);
+  const [pageInfo, setPageInfo] = useState<{ total: number; pageCount: number }>({ total: 0, pageCount: 1 });
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [reloadTick, setReloadTick] = useState(0);
+  const requestSeq = useRef(0);
+
   function loadParentsNow() {
-    setLoadingParents(true);
-    setParentsErrorCode(null);
-    listParentsForUsersTabAction().then((result) => {
-      setLoadingParents(false);
-      if (result.ok) {
-        setParents(result.data);
-      } else {
-        setParentsErrorCode(result.errorCode);
-      }
-    });
+    setReloadTick((n) => n + 1);
   }
 
   useEffect(() => {
-    // 기본 서브탭이 학부모이므로 최초 마운트 시 바로 조회한다(학생/선생님은
-    // 해당 서브탭을 열 때만).
-    if (subtab === "parents" && parents === null && !loadingParents && !parentsErrorCode) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      loadParentsNow();
+    const id = setTimeout(() => setDebouncedQuery(searchQuery.trim()), 300);
+    return () => clearTimeout(id);
+  }, [searchQuery]);
+
+  function changeSubtab(next: SubtabId) {
+    setSubtab(next);
+    setPage(1);
+  }
+  function changeSearch(value: string) {
+    setSearchQuery(value);
+    setPage(1);
+  }
+  function changeMemberFilter(value: "all" | "tutoring" | "free") {
+    setMemberFilter(value);
+    setPage(1);
+  }
+
+  useEffect(() => {
+    if (subtab === "consultants") {
+      if (consultants === null) listConsultantsAction().then(setConsultants);
+      return;
     }
-    if (subtab === "students" && students === null) {
-      listStudentsForUsersTabAction().then((r) => {
-        setStudents(r.students);
-        setHistory(r.creditHistoryByStudent);
+    if (subtab !== "parents" && subtab !== "students" && subtab !== "teachers") return;
+    const seq = ++requestSeq.current;
+    const params = { search: debouncedQuery, page, memberType: subtab === "students" ? memberFilter : undefined };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLoadingPage(true);
+    const done = (info: { total: number; pageCount: number; page: number }) => {
+      setPageInfo({ total: info.total, pageCount: info.pageCount });
+      if (info.page !== page) setPage(info.page);
+    };
+    if (subtab === "parents") {
+      setParentsErrorCode(null);
+      listParentsPageAction(params).then((r) => {
+        if (seq !== requestSeq.current) return;
+        setLoadingPage(false);
+        if (r.ok) {
+          setParents(r.data.items);
+          done(r.data);
+        } else setParentsErrorCode(r.errorCode);
       });
-    }
-    if (subtab === "teachers" && teachers === null) {
-      listTeachersForUsersTabAction().then((r) => {
-        setTeachers(r.teachers);
-        setQcWarningsByTeacher(r.qcWarningsByTeacher);
+    } else if (subtab === "students") {
+      listStudentsPageAction(params).then((r) => {
+        if (seq !== requestSeq.current) return;
+        setLoadingPage(false);
+        if (r.ok) {
+          setStudents(r.data.items);
+          setHistory((prev) => ({ ...prev, ...(r.creditHistoryByStudent ?? {}) }));
+          done(r.data);
+        } else setStudents([]);
       });
-    }
-    if (subtab === "consultants" && consultants === null) {
-      listConsultantsAction().then(setConsultants);
+    } else {
+      listTeachersPageAction(params).then((r) => {
+        if (seq !== requestSeq.current) return;
+        setLoadingPage(false);
+        if (r.ok) {
+          setTeachers(r.data.items);
+          setQcWarningsByTeacher((prev) => ({ ...prev, ...(r.qcWarningsByTeacher ?? {}) }));
+          done(r.data);
+        } else setTeachers([]);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subtab]);
+  }, [subtab, page, debouncedQuery, memberFilter, reloadTick]);
 
   const openStudent = students?.find((s) => s.id === openStudentId);
   const openTeacher = teachers?.find((t) => t.id === openTeacherId);
   const openConsultant = consultants?.find((c) => c.id === openConsultantId);
   const openParent = parents?.find((p) => p.id === openParentId);
 
-  const normalizedQuery = searchQuery.trim().toLowerCase();
-  const filteredParents = !normalizedQuery
-    ? parents
-    : (parents ?? []).filter(
-        (p) =>
-          p.name.toLowerCase().includes(normalizedQuery) ||
-          p.email.toLowerCase().includes(normalizedQuery)
-      );
-  const filteredStudents =
-    students === null
-      ? null
-      : students.filter(
-          (s) =>
-            (memberFilter === "all" || s.memberType === memberFilter) &&
-            (!normalizedQuery ||
-              s.name.toLowerCase().includes(normalizedQuery) ||
-              s.email.toLowerCase().includes(normalizedQuery) ||
-              s.parentNames.some((n) => n.toLowerCase().includes(normalizedQuery)))
-        );
-  const filteredTeachers = !normalizedQuery
-    ? teachers
-    : (teachers ?? []).filter(
-        (t) =>
-          t.name.toLowerCase().includes(normalizedQuery) ||
-          t.email.toLowerCase().includes(normalizedQuery)
-      );
+  const normalizedQuery = debouncedQuery;
+  const filteredParents = parents;
+  const filteredStudents = students;
+  const filteredTeachers = teachers;
+  const listBusy = loadingPage;
 
   function patchStudent(id: string, patch: Partial<StudentListItem>, newTx?: CreditTransaction) {
     setStudents((prev) => prev?.map((s) => (s.id === id ? { ...s, ...patch } : s)) ?? prev);
@@ -258,14 +275,14 @@ export default function UsersTab({
 
   return (
     <div className="max-w-[640px]">
-      <div className="flex items-center justify-between mb-5 border-b border-grey-200">
-        <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={setSubtab} className="border-b-0" />
+      <div className="flex flex-wrap items-center justify-between gap-x-2 mb-5 border-b border-grey-200">
+        <UnderlineSubTabs items={SUBTABS} activeId={subtab} onSelect={changeSubtab} className="border-b-0 min-w-0 max-w-full basis-full sm:basis-auto" />
         {subtab === "students" && (
           <select
             aria-label="회원 유형"
             value={memberFilter}
-            onChange={(e) => setMemberFilter(e.target.value as "all" | "tutoring" | "free")}
-            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 mb-2.5 mr-2"
+            onChange={(e) => changeMemberFilter(e.target.value as "all" | "tutoring" | "free")}
+            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-2 py-1.5 mb-2.5 mt-2 sm:mt-0 mr-2"
           >
             <option value="all">전체 회원</option>
             <option value="tutoring">과외 회원</option>
@@ -275,9 +292,9 @@ export default function UsersTab({
         {(subtab === "parents" || subtab === "students" || subtab === "teachers") && (
           <input
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => changeSearch(e.target.value)}
             placeholder={subtab === "students" ? "이름·이메일·보호자 이름 검색" : "이름·이메일 검색"}
-            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mb-2.5 w-[220px]"
+            className="text-[12.5px] border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 mb-2.5 mt-2 sm:mt-0 w-full sm:w-[220px]"
           />
         )}
       </div>
@@ -307,18 +324,18 @@ export default function UsersTab({
           <span className="text-[13px] text-red font-semibold">불러오지 못했습니다</span>
           <button
             onClick={loadParentsNow}
-            disabled={loadingParents}
+            disabled={loadingPage}
             className="text-[12px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] border-red/30 text-red disabled:opacity-50"
           >
-            {loadingParents ? "다시 시도 중..." : "다시 시도"}
+            {loadingPage ? "다시 시도 중..." : "다시 시도"}
           </button>
         </div>
       )}
 
       {subtab === "parents" && parents !== null && (
         <>
-          {(filteredParents ?? []).length === 0 && normalizedQuery && (
-            <p className="text-[12.5px] text-grey-500 mb-3">검색 결과가 없습니다.</p>
+          {(filteredParents ?? []).length === 0 && (
+            <p className="text-[12.5px] text-grey-500 mb-3">{normalizedQuery ? "검색 결과가 없습니다." : "등록된 학부모가 없습니다."}</p>
           )}
           {(filteredParents ?? []).map((p) => (
             <div
@@ -359,6 +376,7 @@ export default function UsersTab({
               )}
             </div>
           ))}
+          <UsersPagination page={page} pageCount={pageInfo.pageCount} pageSize={USERS_PAGE_SIZE} total={pageInfo.total} disabled={listBusy} onChange={setPage} />
         </>
       )}
 
@@ -384,8 +402,8 @@ export default function UsersTab({
 
       {subtab === "students" && students !== null && (
         <>
-          {(filteredStudents ?? []).length === 0 && normalizedQuery && (
-            <p className="text-[12.5px] text-grey-500 mb-3">검색 결과가 없습니다.</p>
+          {(filteredStudents ?? []).length === 0 && (
+            <p className="text-[12.5px] text-grey-500 mb-3">{normalizedQuery || memberFilter !== "all" ? "검색 결과가 없습니다." : "등록된 학생이 없습니다."}</p>
           )}
           {(filteredStudents ?? []).map((s) => (
             <div key={s.id} className="border-[1.5px] border-grey-200 rounded-xl px-5 py-4 mb-2.5">
@@ -422,6 +440,7 @@ export default function UsersTab({
               </div>
             </div>
           ))}
+          <UsersPagination page={page} pageCount={pageInfo.pageCount} pageSize={USERS_PAGE_SIZE} total={pageInfo.total} disabled={listBusy} onChange={setPage} />
         </>
       )}
 
@@ -444,8 +463,8 @@ export default function UsersTab({
 
       {subtab === "teachers" && teachers !== null && (
         <>
-          {(filteredTeachers ?? []).length === 0 && normalizedQuery && (
-            <p className="text-[12.5px] text-grey-500 mb-3">검색 결과가 없습니다.</p>
+          {(filteredTeachers ?? []).length === 0 && (
+            <p className="text-[12.5px] text-grey-500 mb-3">{normalizedQuery ? "검색 결과가 없습니다." : "등록된 선생님이 없습니다."}</p>
           )}
           {(filteredTeachers ?? []).map((t) => (
             <button
@@ -470,6 +489,7 @@ export default function UsersTab({
               </div>
             </button>
           ))}
+          <UsersPagination page={page} pageCount={pageInfo.pageCount} pageSize={USERS_PAGE_SIZE} total={pageInfo.total} disabled={listBusy} onChange={setPage} />
           {/* (2026-08-30 R2 Task 4) 개인 이메일 기반 선생님 초대는 비활성화됐다 —
               선생님 계정은 Google Workspace 프로비저닝(Task 7) 절차로만 생성된다.
               서버 액션(inviteTeacher)도 호출 시 오류를 던지지만, 폼 자체를

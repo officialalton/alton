@@ -1,7 +1,8 @@
+import { KEYWORD_FOLDER_SELECT, keywordFolderFields, type KeywordFolderFields } from "@/lib/sat-keywords/folder-fields";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
-export type SubjectKeyword = { id: string; label: string; domainCode?: string | null; skillCode?: string | null };
+export type SubjectKeyword = { id: string; label: string; domainCode?: string | null; skillCode?: string | null } & KeywordFolderFields;
 
 export type TemplateUnit = {
   id: string;
@@ -120,7 +121,7 @@ export async function loadMySubjects(
       : Promise.resolve({ data: [] as never[] }),
     selectInChunks(subjectIds, (chunk) => supabase
       .from("subject_keywords")
-      .select("id, subject_id, label, domain_code, skill_code")
+      .select(`id, subject_id, label, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
       .in("subject_id", chunk)
       .eq("status", "active")
       .order("label", { ascending: true }), { sort: orderComparator(["label", true]) }),
@@ -144,7 +145,7 @@ export async function loadMySubjects(
   const keywordsBySubject = new Map<string, SubjectKeyword[]>();
   for (const k of keywords ?? []) {
     const list = keywordsBySubject.get(k.subject_id) ?? [];
-    list.push({ id: k.id, label: k.label, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null });
+    list.push({ id: k.id, label: k.label, domainCode: k.domain_code ?? null, skillCode: k.skill_code ?? null, ...keywordFolderFields(k) });
     keywordsBySubject.set(k.subject_id, list);
   }
 

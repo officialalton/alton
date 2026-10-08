@@ -1,3 +1,4 @@
+import { KEYWORD_FOLDER_SELECT, keywordFolderFields, type KeywordFolderFields } from "@/lib/sat-keywords/folder-fields";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 
@@ -5,7 +6,7 @@ import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 // lib/homework-batch-actions.ts(issueHomeworkBatchAction)가 한다. 이 파일은 교사 포털
 // "과제 생성" 화면에 필요한 키워드 목록만 담당한다.
 
-export type HomeworkKeywordOption = { id: string; label: string; domainCode?: string | null; skillCode?: string | null };
+export type HomeworkKeywordOption = { id: string; label: string; domainCode?: string | null; skillCode?: string | null } & KeywordFolderFields;
 
 /** 이 학생이 수강 중인 과목들의 활성 키워드 — 회차와 무관하게 전부 보여준다. */
 export async function loadStudentSubjectKeywords(supabase: SupabaseClient, studentId: string): Promise<HomeworkKeywordOption[]> {
@@ -17,9 +18,9 @@ export async function loadStudentSubjectKeywords(supabase: SupabaseClient, stude
   if (subjectIds.length === 0) return [];
   const { data: keywords } = await selectInChunks(subjectIds, (chunk) => supabase
     .from("subject_keywords")
-    .select("id, label, domain_code, skill_code")
+    .select(`id, label, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
     .in("subject_id", chunk)
     .eq("status", "active")
     .order("label", { ascending: true }), { sort: orderComparator(["label", true]) });
-  return (keywords ?? []).map((k) => ({ id: k.id as string, label: k.label as string, domainCode: (k.domain_code as string | null) ?? null, skillCode: (k.skill_code as string | null) ?? null }));
+  return (keywords ?? []).map((k) => ({ id: k.id as string, label: k.label as string, domainCode: (k.domain_code as string | null) ?? null, skillCode: (k.skill_code as string | null) ?? null, ...keywordFolderFields(k) }));
 }

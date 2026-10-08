@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { KEYWORD_FOLDER_SELECT, keywordFolderFields, type KeywordFolderRow } from "@/lib/sat-keywords/folder-fields";
 import type { SubjectKeyword } from "./subject-data";
 import { selectInChunks, orderComparator } from "@/lib/select-in-chunks";
 import { loadLegacyProblemAnswers } from "@/lib/legacy-problem-answers";
@@ -135,7 +136,7 @@ export async function loadCurriculumDocsByIds(
       subjectIds.length
         ? selectInChunks(subjectIds, (chunk) => supabase
             .from("subject_keywords")
-            .select("id, subject_id, label, status, domain_code, skill_code")
+            .select(`id, subject_id, label, status, domain_code, skill_code, ${KEYWORD_FOLDER_SELECT}`)
             .in("subject_id", chunk)
             .order("label", { ascending: true }), { sort: orderComparator(["label", true]) })
         : Promise.resolve({ data: [] as never[] }),
@@ -191,7 +192,7 @@ export async function loadCurriculumDocsByIds(
   for (const k of subjectKeywordRows ?? []) {
     const row = k as { id: string; subject_id: string; label: string; status: string; domain_code?: string | null; skill_code?: string | null };
     const list = keywordsBySubject.get(row.subject_id) ?? [];
-    list.push({ id: row.id, label: row.label, status: row.status, domainCode: row.domain_code ?? null, skillCode: row.skill_code ?? null });
+    list.push({ id: row.id, label: row.label, status: row.status, domainCode: row.domain_code ?? null, skillCode: row.skill_code ?? null, ...keywordFolderFields(k as KeywordFolderRow) });
     keywordsBySubject.set(row.subject_id, list);
   }
 
