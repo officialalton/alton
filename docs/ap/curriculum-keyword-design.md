@@ -26,8 +26,8 @@
 ## 6. 공식 스킬 매핑 (D5)
 `ap_skills(subject, edition, code, category, label)` + 키워드의 `skill_codes[]`(CED가 토픽에 제시하는 권장 스킬, 세부 키워드는 수업에서 다루는 스킬). 키워드↔스킬은 "권장 연결"이지 일대일이 아니다. 문항의 `primary_skill`은 문항이 정한다(키워드와 독립).
 
-## 7. 수업 연결 (D6)
-단원 = 템플릿 단원(공식 단원 번호 `official_code`, 제안 수업 수 `suggested_lessons`, 공식 차시 `official_class_periods`). 단원-토픽 연결은 기존 `subject_template_unit_keywords`. 회차(오버레이)는 지금처럼 키워드 id 로 붙고, 세부 키워드는 `requires_codes`(선수 순서)·`est_lessons`(1회=50분 개인 수업 기준 제안값)로 수업 순서를 제안한다. 선생님 템플릿·학생 회차는 기존 상속 규칙(자동 반영 없음) 그대로.
+## 7. 수업 연결 (D6) — 14절로 정정됨(템플릿 행은 단원이 아니라 회차)
+(정정 전 기술) 단원 = 템플릿 단원(공식 단원 번호 `official_code`, 제안 수업 수 `suggested_lessons`, 공식 차시 `official_class_periods`). 단원-토픽 연결은 기존 `subject_template_unit_keywords`. 회차(오버레이)는 지금처럼 키워드 id 로 붙고, 세부 키워드는 `requires_codes`(선수 순서)·`est_lessons`(1회=50분 개인 수업 기준 제안값)로 수업 순서를 제안한다. 선생님 템플릿·학생 회차는 기존 상속 규칙(자동 반영 없음) 그대로.
 
 ## 8. 관리자가 더 세밀한 키워드를 추가하는 방법 (D7)
 관리자가 폴더(단원) 안에 키워드를 추가하는 기존 UI가 그대로 동작한다. 새 키워드는 level 0(독립)이거나 토픽 아래 세부(level 2). 공식(ced) 행은 이름 변경만 가능, 삭제·코드 변경은 DB가 막는다.
@@ -74,3 +74,43 @@ CED가 토픽 번호 없이 단원별 스킬 중심이라 `official_topic_codes=
 - 로컬 공유 DB에서 마이그레이션 380 적용 → `seed.ts --execute` 2회(2회차는 전 과목 "생성 0", 멱등) → 단원 73·폴더 73·단원-토픽 연결 607·스킬 184·공식 비중 117행 확인 → 시드 데이터 정리(로컬 DB에는 스키마만 남김).
 - 검증: `lib/ap-curriculum/*.test.ts` — 10과목 구조 완전성(토픽→단원, 코드 유일, 선수 순서, 비중 합 정합), BC ⊇ AB, Stats 5단원, Physics 1 유체 포함 등.
 - **출처 한계(데이터 품질 주의)**: 토픽 코드·제목·권장 스킬·차시·MC 비중은 CED 텍스트 추출 기반이며, 일부 과목(Chemistry 일부 토픽 스킬, Physics 1 일부 권장 스킬, CS A 일부 토픽 스킬, English Language 단원 제목)은 추출 한계로 근사값이다. **세부 키워드·선수 관계·수업 횟수는 ALTON 설계(비공식)**이며 전문가 검수가 필요하다. 각 파일의 `designNotes`와 에이전트 보고에 한계가 기록되어 있다.
+
+## 14. 회차(lesson-level) 템플릿 (2026-10-08, 오너 지적으로 정정, 마이그레이션 20262100000390)
+
+### 14.1 8회차만 보인 원인(코드 근거)
+- 관리자 Curriculum 템플릿의 "N회차" 한 줄은 `subject_template_units` 한 행이다(`app/admin/SubjectTemplateTab.tsx` 의 `{u.position}회차`, `loadSubjectCatalog`(`app/admin/subject-data.ts`)가 이 테이블을 `position` 순으로 읽어 `units` 로 노출; 연결 키워드는 `subject_template_unit_keywords`). 선생님 템플릿·학생 회차도 이 행을 복사해 상속하므로(`teacher_curriculum_template_units.source_unit_id`) **템플릿 행 = 회차**다.
+- 380 시드(`scripts/ap-curriculum/seed.ts`의 구 "단원: 템플릿 단원 + 폴더" 블록)가 **CED 단원 8개를 이 행에 그대로 넣었고**(`subject_template_units`, `suggested_lessons`만 합계로 기록), 연결도 `plan.keywords.filter(k => k.level === 1)` 즉 **토픽 81개만** 걸었다. 세부 키워드 219개는 연결이 하나도 없었다(폴더 목록에는 있으나 회차 어디에도 없음). 설계 문서 7절의 "단원 = 템플릿 단원" 가정이 틀렸다.
+- 결과: 8회차 × (토픽 평균 10개), 세부 키워드 0개 연결, 회차당 est_lessons 합이 4~12(50분 수업 4~12회분)로 한 회차에 수업 몇 회분이 몰림.
+
+### 14.2 구조
+- **템플릿 행(`subject_template_units`) = 50분 수업 1회.** 컬럼 추가: `lesson_kind`(content|unit_review|exam_prep), `ced_unit_code`, `est_minutes`, `track`(core|full). CED 단원은 키워드 폴더(공식 단원 코드)로만 남고 회차 제목에 "Unit n · Lesson k"로 표시한다.
+- 회차-키워드 연결에 `role`: primary(처음 가르치는 회차) / continued(토픽이 다음 회차로 이어짐) / review(복습). **모든 토픽·세부 키워드는 정확히 한 회차에서 primary**(DB 트리거 `subject_unit_keywords_single_primary` + 테스트). 복습·시험 회차는 review 만 가진다.
+- 상속 규칙 불변: 관리자 기준본 → 선생님 템플릿 → 학생 회차, 자동 전파 없음. 기존 복사 함수가 회차·연결을 그대로 복사한다(role 은 관리자 층에서만 쓰는 정보).
+
+### 14.3 생성 규칙(`lib/ap-curriculum/lessons.ts`, 순수 함수·테스트 포함)
+1. 단원 안에서 파일 순서(토픽 순서 + 세부 키워드 순서, 선수 `requires` 를 지킴)로 **세부 키워드(원자)** 를 채운다. 원자 부하 = 세부 키워드 `estLessons` 의 합(토픽 값은 설계자 추정이라 일부 과목에서 합과 불일치 → 세부 합 사용).
+2. 회차 목표 부하 1.0(50분), 상한 1.25, 세부 키워드 최대 6개. 단원 경계는 넘지 않고 순서는 바꾸지 않는다. 마지막 꼬리 회차가 0.5 미만이면 상한 안에서 앞 회차에 합친다.
+3. 단원마다 **복습·혼합 MCQ+FRQ 회차** 1회(내용 회차가 8회 초과이면 2회: 중간·끝). 첫 복습은 core, 두 번째는 full 전용.
+4. 과정 끝에 **누적 시험 준비 6회**: 누적 복습 A/B(전반·후반 단원), 모의고사 1 해설, FRQ 클리닉, 모의고사 2 해설, 최종 약점 보강.
+5. 검사(`checkLessonPlan`): 100% 커버·primary 중복 0·선수 순서(선수 키워드의 마지막 primary 회차 ≤ 후행의 첫 primary 회차)·회차 부하·세부 키워드 수·복습 회차는 primary 금지.
+6. BC: BC 파일 자체로 생성. 공유 토픽은 같은 `content_key`(calculus:5.3)로 AB와 대응하고 BC 전용 30토픽(scope='bc_only')은 BC 회차에 들어간다.
+
+### 14.4 회차 수와 페이스 결정
+| 과목 | 내용 | 단원복습 | 시험준비 | 전체 과정 | 최소(core) |
+|---|---|---|---|---|---|
+| Calculus AB | 63 | 12 | 6 | **81** | 77 |
+| Calculus BC | 85 | 15 | 6 | **106** | 101 |
+| Statistics | 56 | 9 | 6 | 71 | 67 |
+| Biology | 68 | 11 | 6 | 85 | 82 |
+| Chemistry | 80 | 15 | 6 | 101 | 95 |
+| Physics 1 | 94 | 15 | 6 | 115 | 108 |
+| CS A | 64 | 8 | 6 | 78 | 74 |
+| Microeconomics | 39 | 7 | 6 | 52 | 51 |
+| Macroeconomics | 38 | 6 | 6 | 50 | 50 |
+| English Language | 58 | 9 | 6 | 73 | 73 |
+- **결정**: 템플릿 하나를 "전체 과정"(AB 81회)으로 둔다. 근거: 내용 61~63회가 이미 1:1 압축 추정이고(공식 CED는 학급 수업 ~140차시), 복습·누적 단계가 없으면 FRQ 훈련이 빠진다. 시험 직전 속성반(AP 준비 빠른 과정)은 **별도 템플릿을 만들지 않고** 학생 회차에서 진단 결과로 건너뛰기(기존 학생 층 편집)로 처리한다; `track='core'`는 속성반에서도 반드시 남길 회차(내용 전부 + 단원당 복습 1 + 시험 준비 6)의 최소 표시다. 권장 페이스: 주 1회 = 학년도 전체(약 36주 → 후반 압축 필요), 주 2회 = 약 40주 중 AB 완주, 속성반은 진단 후 약 40~50회.
+- Physics 1·Chemistry 는 세부 키워드 부하(0.5 단위)가 토픽 추정보다 커서 회차 수가 많게 나온다 — 전문가 검수 항목(출처 한계와 동일).
+
+### 14.5 적용·롤백
+- 마이그레이션 `20262100000390`(additive, 재실행 안전; 로컬 공유 DB에서 트랜잭션+롤백으로 380+390 2회 실행 및 단일-primary 트리거 거부 확인). **비프로덕션 적용은 총괄이**: 390 적용 → `npx tsx scripts/ap-curriculum/seed.ts`(기본 dry-run) 확인 → `--execute`. 시드는 380이 만든 CED 단원 단위 템플릿 행(source='ced', lesson_kind null)을 정리하고 회차 행·연결을 만든다. 관리자가 바꾼 회차 제목·키워드 이름은 재실행해도 덮어쓰지 않는다. 회차 출력만 보려면 `npx tsx scripts/ap-curriculum/lessons.ts [--list]`.
+- 남은 일: 관리자 템플릿 화면에 회차 종류·단원 구분 배지·"전체 과정/최소" 필터(UI 폴리싱 라운드), 전문가 검수로 부하·순서 보정.
