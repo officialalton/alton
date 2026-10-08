@@ -79,10 +79,10 @@ const cells = (): Cell[] => readJson<Cell[]>(path.join(DIR, "cells.json"));
 // ---------- 후보 팩(코드 계산) ----------
 function packsFile() { return path.join(DIR, "packs.json"); }
 function genPacks() {
-  if (existsSync(packsFile())) return readJson<Record<string, Json[]>>(packsFile());
-  const out: Record<string, Json[]> = {};
-  for (const c of cells()) out[c.cellId] = py(["batch", c.archetype, String(c.candidates), "0"]) as Json[];
-  writeFileSync(packsFile(), JSON.stringify(out));
+  const out: Record<string, Json[]> = existsSync(packsFile()) ? readJson<Record<string, Json[]>>(packsFile()) : {};
+  let changed = false;
+  for (const c of cells()) if (!out[c.cellId]) { out[c.cellId] = py(["batch", c.archetype, String(c.candidates), "0"]) as Json[]; changed = true; }
+  if (changed) writeFileSync(packsFile(), JSON.stringify(out));
   return out;
 }
 
