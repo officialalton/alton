@@ -67,7 +67,7 @@ async function genStage() {
   });
   const est = estimate(MODELS.gen, reqs.length, GEN_TOK.in, GEN_TOK.out);
   console.log(`gen: ${reqs.length} 요청, 추정 $${est.toFixed(2)} (배치${SYNC ? "→동기 2배" : ""}), 상한 $${BUDGET}, 누적 $${ledger(DIR).spent().toFixed(2)}`);
-  await runBatch({ dir: DIR, name: "gen", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC });
+  await runBatch({ dir: DIR, name: "gen", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 
 function loadCands(): Cand[] {
@@ -215,7 +215,7 @@ async function solveStage() {
   const reqs = cs.map((c) => mk(`s-${c.key}`, MODELS.solve, SOLVE_SYS, solveTool, `${ctx(c).replace(/target skill.*?;/, "")}\n\n${JSON.stringify(blind(c))}\n\nSolve every item/part and submit via submit_solution (answers[].item = "1","2"… or part label).`, 3500));
   const est = estimate(MODELS.solve, reqs.length, 1800, 2500);
   console.log(`solve: ${reqs.length} 요청 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
-  await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC });
+  await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
 async function reviewStage() {
@@ -223,7 +223,7 @@ async function reviewStage() {
   const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nCANDIDATE (with key, rationale, rubric):\n${JSON.stringify(c.payload).replace(/"verification_code":"[^"]*"/g, '"verification_code":"(omitted)"')}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
   const est = estimate(MODELS.review, reqs.length, 2800, 1200);
   console.log(`review: ${reqs.length} 요청 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
-  await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC });
+  await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 async function difficultyStage() {
   const rev = resultMap("review");
@@ -231,7 +231,7 @@ async function difficultyStage() {
   const reqs = cs.map((c) => mk(`d-${c.key}`, MODELS.difficulty, DIFF_SYS, diffTool, `${ctx(c)}\n\n${JSON.stringify(blind(c))}`, 1500));
   const est = estimate(MODELS.difficulty, reqs.length, 1500, 700);
   console.log(`difficulty: ${reqs.length} 요청 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
-  await runBatch({ dir: DIR, name: "difficulty", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC });
+  await runBatch({ dir: DIR, name: "difficulty", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 
 // ---------- 판정 ----------
@@ -280,7 +280,7 @@ async function spotStage() {
   const reqs = pick.map((v) => { const c = byKey.get(v.key)!; return mk(`x-${c.key}`, MODELS.spot, SOLVE_SYS, solveTool, `${ctx(c).replace(/target skill.*?;/, "")}\n\n${JSON.stringify(blind(c))}\n\nSolve independently and flag any flaw.`, 3500); });
   const est = estimate(MODELS.spot, reqs.length, 1800, 2500);
   console.log(`spot: ${reqs.length}/${verd.length} 요청(상위 난이도 10%) 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
-  await runBatch({ dir: DIR, name: "spot", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC });
+  await runBatch({ dir: DIR, name: "spot", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 function finalDecide(): Verdict[] {
   const spot = resultMap("spot");
