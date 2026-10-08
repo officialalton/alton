@@ -3,6 +3,7 @@
 import { planAnswerPositions, positionDirective, enforceAnswerPosition, type Letter, type PositionCounts, type PositionKey } from "./answer-position";
 import { judgeWordCount, effectiveRange, type WordRange } from "./passage-words";
 import { distractorGate, restatementGate } from "./distractor-gate";
+import { answerLeakGate, isLeakCheckedSkill } from "../../lib/rw-answer-leak";
 import { composeSeeds, AVOID_FIRST_WORDS, type LiterarySeed } from "./seed-compose";
 import { UsageLedger, extractUsage, type Violation } from "./usage-caps";
 import { NAME_POOL, BANNED_NAMES } from "./name-pool";
@@ -55,7 +56,7 @@ export type Generated = { passage: string; question: string; options: string[]; 
 export type Verdict =
   | { action: "review"; g: Generated; notes: string[] }
   | { action: "retry_words"; instruction: string; count: number }
-  | { action: "reject"; stage: "format" | "words" | "position" | "distractor" | "restatement" | "diversity"; reasons: string[] };
+  | { action: "reject"; stage: "format" | "words" | "position" | "distractor" | "answer_leak" | "restatement" | "diversity"; reasons: string[] };
 
 /**
  * 생성 직후(AI 검수 전) 코드 게이트. 순서: 형식 -> 단어 수(1회 재요청) -> 정답 위치 보정/탈락 -> 오답 품질 -> 마지막 문장 재진술 -> 소재 상한.
@@ -75,6 +76,11 @@ export function evaluateGenerated(
   const notes = pos.status === "permuted" ? [`정답 위치 보정 ${g.correct_letter}->${spec.targetLetter}`] : [];
   const dg = distractorGate({ options: fixed.options, correct_letter: fixed.correct_letter });
   if (!dg.ok) return { action: "reject", stage: "distractor", reasons: dg.reasons };
+  // 2026-10-08 정답 누설: 질문이 말한 대상·수치·문구를 정답만 반복하고 오답은 다른 틀이면 지문·자료 없이 정답이 드러난다 — 오답을 정답의 틀대로 다시 쓰게 한다.
+  if (isLeakCheckedSkill(spec.skill)) {
+    const lk = answerLeakGate({ question: fixed.question, options: fixed.options, correctIndex: "ABCD".indexOf(fixed.correct_letter), skill: spec.skill }, new Map());
+    if (!lk.ok) return { action: "reject", stage: "answer_leak", reasons: lk.reasons };
+  }
   const rg = restatementGate(fixed.passage, fixed.options, fixed.correct_letter);
   if (!rg.ok) return { action: "reject", stage: "restatement", reasons: [rg.reason!] };
   if (ctx.excerpt) return { action: "review", g: fixed, notes };
