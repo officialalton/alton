@@ -1,0 +1,1218 @@
+[
+ {
+  "problemId": "1d6de7ce-e2e7-456b-aa9c-a6ba4d7ecff4",
+  "oldVersionId": "12867e43-ac37-47fa-8a89-a5d14dea614c",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "easy",
+  "attempt": 1,
+  "correctIndex": 0,
+  "options": [
+   "Export value rose from 15 million in the 1850s to 38 million in the 1860s, an increase of 23 million.",
+   "Export value rose from 38 million in the 1860s to 44 million in the 1870s, a gain smaller than the one between the 1840s and the 1850s.",
+   "Export value was 12 million in the 1840s and 44 million in the 1870s, which means the largest single jump came in the final decade.",
+   "Export value rose from 15 million in the 1850s to 38 million in the 1860s, a gain of 13 million that was the same as the gain from the 1840s."
+  ],
+  "explanation": "1850년대(15)에서 1860년대(38)로의 증가는 23백만으로, 10년 단위 증가폭(3, 23, 6) 중 가장 커서 주장을 뒷받침하므로 A가 정답입니다. B는 1860~70년대 증가(6)가 1840~50년대 증가(3)보다 크므로 틀렸습니다. C는 마지막 10년의 증가가 6백만에 불과해 가장 큰 도약이 아니므로 틀렸습니다. D는 1850~60년대 증가를 13백만으로 잘못 제시했으며 실제로는 23백만이고, 1840년대의 증가는 3백만뿐입니다.",
+  "explanation_en": "The 1850s-to-1860s change is 38 - 15 = 23 million, the largest of the three decade-to-decade changes (3, 23, 6), so A supports the claim. B is false: the 1860s-to-1870s gain (6) is larger than the 1840s-to-1850s gain (3). C is false: the final decade's gain of 6 million is the smallest-but-one, not the largest jump. D misstates the 1850s-1860s gain as 13 million; it is actually 23 million, and the 1840s gain was only 3 million.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 0,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     false,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "35a1d518-f01b-4d98-819f-a8fffe2e5c8e",
+  "oldVersionId": "18b6a6f8-81b1-4b37-bb77-b3f839a88f71",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 1,
+  "correctIndex": 3,
+  "options": [
+   "Several Haarlem auctioneers began reporting that Semper Augustus bulbs had arrived in poor condition, even though contract prices for the variety had held steady until February.",
+   "Several regional growers began planting far larger quantities of Semper Augustus bulbs, which flooded the market and pushed contract prices down in the weeks before the failed auction.",
+   "Several regional guilds began circulating letters urging members to buy additional tulip contracts at the lower prices, even though the bulbs themselves were scarcer than in earlier seasons.",
+   "Several regional guilds began circulating letters urging members to refuse to honor existing tulip contracts entirely, even though the bulbs themselves were unaffected in condition or quantity."
+  ],
+  "explanation": "길드가 구근 상태나 수량에 변화가 없는데도 계약 이행을 거부하도록 촉구했다는 것은 가격 폭락이 구매자 신뢰 붕괴 때문이라는 주장을 가장 직접적으로 뒷받침합니다. 나머지 선택지는 구근의 품질 저하, 공급 증가, 희소성 변화를 가정하는데, 이는 주장과 반대되거나 지문에서 공급과 재배 조건에 변화가 없었다고 한 내용과 모순됩니다.",
+  "explanation_en": "Only the guild letters urging refusal of contracts while the bulbs were unchanged show that the crash came from collapsing confidence rather than from supply or quality. The other options point to bulb condition, increased supply, or scarcity, which are changes in the bulbs' scarcity or value and so would undercut the claim or are contradicted by the passage's statement that no supply or condition change was recorded.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 3
+   },
+   "blind": {
+    "hit": [
+     false,
+     true
+    ],
+    "high": [
+     false,
+     true
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "f7249169-66be-455f-9b8e-3baad7409b1b",
+  "oldVersionId": "2b0ce416-6652-450f-a750-b14fe1f863bb",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 2,
+  "options": [
+   "\"ridership on the affected routes rose substantially after the bus lanes opened, which they attributed to the improved reliability of bus schedules\"",
+   "\"the corridor in question already had lower bus ridership than the cities studied, and that a new general-purpose lane might relieve car congestion\"",
+   "\"average bus travel times fell by at least 15 percent within a year, even as car traffic in adjacent lanes increased slightly\"",
+   "\"adding a dedicated bus lane on a congested corridor would reduce average commute times more effectively than adding a general-purpose traffic lane\""
+  ],
+  "explanation": "정답은 버스 전용차로를 도입한 도시들에서 버스 통행 시간이 최소 15% 줄었고 인접 차로의 자동차 교통량은 약간만 늘었다는 구체적 근거를 제시해 주장을 뒷받침합니다. A는 승객 수 증가와 그 원인(배차 신뢰성)을 말할 뿐 통행 시간을 자동차 차로 확대와 비교하지 않습니다. B는 비판자들의 반론이므로 주장을 예시하지 않고 오히려 약화시킵니다. D는 계획가들의 주장을 그대로 되풀이한 문장일 뿐 근거를 제공하지 못합니다.",
+  "explanation_en": "The correct choice gives concrete evidence from cities with bus lanes: bus travel times fell by at least 15 percent while car traffic in adjacent lanes rose only slightly, which supports the claim that bus lanes improve commute times. Choice A describes rising ridership and its cause (schedule reliability), not commute times compared with car lanes. Choice B reports the critics' objections, so it undermines the claim rather than illustrating it. Choice D merely restates the planners' claim as an assertion and provides no evidence for it.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 2,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 2
+   },
+   "blind": {
+    "hit": [
+     false,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "a69f456b-e0c1-4d2e-bedd-a0705c3ce53f",
+  "oldVersionId": "4e102d03-842d-4abd-9060-7f9c9f858b9a",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 1,
+  "correctIndex": 1,
+  "options": [
+   "Towns with the fewest economic ties to outside regions retained over 80 percent of distinctive dialect features throughout the twenty-year study period.",
+   "Towns with active community radio stations retained over 80 percent of distinctive dialect features even when they had extensive trade with outside regions.",
+   "Towns with strong storytelling traditions reported that older residents were more likely than younger residents to describe their speech as distinctive.",
+   "Towns with extensive trade with outside regions lost a larger share of their distinctive dialect features than towns with active radio stations did in the first decade."
+  ],
+  "explanation": "주장은 경제적 고립이 아니라 지역 기관이 방언 존속을 좌우한다는 것이므로, 외부와 교역이 활발해도 기관이 있는 마을이 방언을 유지했다는 B가 가장 적절한 근거입니다. A는 오히려 경쟁 관점인 고립설을 뒷받침합니다. C는 고립된 마을에서만 기관의 효과가 없었다는 내용으로 기관이 원인임을 보여 주지 못합니다. D는 방언 유지율이 아니라 연령별 자기 인식에 관한 것이라 논점에서 벗어나며, E는 경제적 접촉을 통제하지 않아 기관의 효과를 입증하지 못합니다.",
+  "explanation_en": "The claim is that institutions, not isolation, determine dialect survival, so the best evidence shows institution-supported towns keeping their dialect despite heavy outside contact (B). A supports the competing isolation view. C shows only that institutions made no difference among isolated towns and says nothing about connected towns, so it does not isolate institutions as the cause. D concerns residents' self-description by age rather than dialect retention rates, so it is off-point. E compares trade-heavy towns to radio towns in a way that does not show institutions overriding connectedness, since it does not hold economic contact constant.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 1
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "cc982d94-1094-4244-ad62-b0fedf885951",
+  "oldVersionId": "6a235d4e-2b1d-48b9-b10a-b4e8e15b861b",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 3,
+  "options": [
+   "The labeled nitrogen isotope from digested insects remained concentrated in the pitchers themselves for several weeks.",
+   "The fluid stored in the pitcher-shaped leaves persisted at high volume through the driest weeks of the season.",
+   "The rare nitrogen isotope from the labeled insects appeared at similar levels in nearby non-carnivorous swamp plants within ten days.",
+   "The labeled nitrogen isotope from digested insects appeared at elevated levels in leaves far from the pitchers within ten days."
+  ],
+  "explanation": "정답은 소화된 곤충의 질소가 식물의 먼 잎까지 이동해 새 조직에 쓰였음을 보여 주므로 질소 포획 가설을 직접 뒷받침합니다. 첫 번째 오답은 동위원소가 포충낭에만 머물렀다고 하여 오히려 질소가 식물 전체로 이용된다는 주장과 어긋납니다. 두 번째 오답은 건기에 물이 유지된다는 내용으로 빗물 저장 가설에 해당합니다. 세 번째 오답은 다른 식물에 관한 내용이라 포충낭 잎의 진화 이유와 무관합니다.",
+  "explanation_en": "Only the correct option shows that nitrogen from digested insects was transported and used by the plant's other tissues, which directly supports the nitrogen-capture claim. The first distractor says the isotope stayed in the pitchers, which would undermine the claim of incorporation into growth. The second describes water retention during drought, which supports the rainwater hypothesis instead. The third concerns other plants, which says nothing about why pitcher-shaped leaves evolved in pitcher plants.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 3
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     false,
+     true
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "a3d1c15b-750e-46e6-b883-061efe1f7a19",
+  "oldVersionId": "7bc316bb-7fee-4208-88bf-e9e41b1ab251",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "Contracts from the period show that painters frequently proposed specific perspective techniques to patrons and described similar geometric methods in detail.",
+   "Contracts from the period show that patrons frequently referenced specific well-known paintings and asked for similar 'modern' spatial effects.",
+   "Correspondence from the period shows that patrons frequently praised the emotional impact of well-known paintings and rarely mentioned their spatial effects.",
+   "Contracts from the period show that patrons frequently specified costly pigments and asked for similar gilded surfaces in their commissions."
+  ],
+  "explanation": "이 주장은 원근법의 확산이 화가의 독자적 이해가 아니라 후원자의 수요 때문이었다는 것입니다. 후원자들이 유명 작품을 언급하며 비슷한 '현대적' 공간 효과를 요구했다는 B만이 이를 직접 뒷받침합니다. A는 화가가 먼저 기법을 제안했다는 내용이라 오히려 화가 주도설을 지지합니다. C는 후원자가 작품의 감정적 효과만 언급하고 공간 효과는 거의 언급하지 않았다는 내용이라 원근법 수요의 증거가 되지 못합니다. D는 안료와 금박 같은 재료 요구에 관한 것이라 원근법과 무관합니다.",
+  "explanation_en": "The claim is that patron demand, not artists' independent understanding, drove the spread of perspective. Only B shows patrons explicitly requesting perspective-like effects by pointing to celebrated works. A shows painters, not patrons, introducing the techniques, which supports the artist-driven account. C shows patrons discussing paintings but not spatial effects, so it gives no evidence of demand for perspective. D shows patrons requesting materials rather than perspective techniques, which is off-point.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 1
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "92bdadff-e8f7-4f0c-acae-c15ca738fbfb",
+  "oldVersionId": "168fa2db-f302-4486-b129-fbb911b069f5",
+  "skill": "rhetorical_synthesis",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 0,
+  "options": [
+   "Critics see SESC Pompéia as a model for reusing industrial sites because Bo Bardi preserved the old factory's brick sheds and opened them for exhibitions, a library, and workshops rather than tearing them down.",
+   "Critics see SESC Pompéia as a model for adding new construction to industrial sites because Bo Bardi built three concrete towers with sports courts and a pool, joined by walkways crossing the site at upper levels.",
+   "Critics see SESC Pompéia as a landmark of Brazilian architecture because Bo Bardi, an Italian-born architect, began converting the former oil-drum factory in São Paulo in 1977 into a public leisure and cultural center.",
+   "Critics see SESC Pompéia as a model for combining recreation with culture because Bo Bardi placed sports courts and a swimming pool in the towers while housing exhibitions, a library, and workshops in the old sheds."
+  ],
+  "explanation": "목표는 비평가들이 이 프로젝트를 산업 건물 재사용의 모범으로 보는 이유를 설명하는 것입니다. 정답만이 벽돌 건물을 철거하지 않고 보존해 활용했다는 점을 비평가의 평가와 연결합니다. B는 새로 지은 콘크리트 탑을 강조해 재사용과 거리가 멉니다. C는 착공 연도, 위치, 건축가 출신 같은 배경 정보일 뿐 비평의 이유를 설명하지 않습니다. D는 시설 구성을 나열할 뿐, 노트에서 비평가들이 칭찬하는 근거로 제시한 내용이 아니며 재사용이라는 핵심 이유를 담지 않습니다.",
+  "explanation_en": "The goal is to explain why critics see the project as a model for reusing industrial buildings. Only the key links the critics' view to preservation of the brick sheds instead of demolition. B emphasizes the new towers, which are additions rather than reuse. C gives background facts (date, location, architect's origin) that do not explain the critics' view. D describes the program of uses, which the notes never cite as the basis for critics' praise, and it omits the reuse rationale.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 0,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     false,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "6d506f25-30d9-4cb9-a576-062b2a0318ef",
+  "oldVersionId": "1121bab6-d642-4c29-bc04-85fa1c4b5807",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 0,
+  "options": [
+   "In Rivergate, the number of bicycle commuters per 1,000 residents rose from 18 before completion to 42 after completion, an increase of 24, while in Cedar Hollow it rose from 30 to only 33, an increase of just 3.",
+   "In Millbrook, the number of bicycle commuters per 1,000 residents rose from 25 before completion to 31 after completion, an increase of 6, and this gain was larger than the increase of 17 that Fenwick recorded across the same period.",
+   "In Fenwick, the number of bicycle commuters per 1,000 residents rose from 12 before completion to 29 after completion, an increase of 17, which matches the increase recorded in Millbrook, where the figure climbed from 25 to 42.",
+   "In Cedar Hollow, the number of bicycle commuters per 1,000 residents rose from 30 before completion to 33 after completion, so the city with the highest starting figure also posted the largest increase among the four cities studied."
+  ],
+  "explanation": "정답은 리버게이트의 증가폭(24)과 시더할로의 증가폭(3)을 대비해 도시별 증가가 균일하지 않음을 보여 줍니다. B는 밀브룩의 증가폭 6이 펜윅의 17보다 작으므로 틀립니다. C는 밀브룩이 25에서 31로 늘었을 뿐 42가 아니며 증가폭도 6이므로 틀립니다. D는 시더할로의 증가폭이 가장 작았으므로 가장 크다는 진술이 틀립니다.",
+  "explanation_en": "The key contrasts a large increase in Rivergate (24) with a very small one in Cedar Hollow (3), which shows non-uniform gains. Choice B is wrong because Millbrook's gain of 6 is smaller than Fenwick's 17. Choice C is wrong because Millbrook rose from 25 to 31, not 42, so its increase was 6, not 17. Choice D is wrong because Cedar Hollow had the smallest increase, not the largest.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 0,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     false,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "ea00034d-78e3-4765-80c2-99937809f69c",
+  "oldVersionId": "de8909b5-c36b-4770-bdf0-0a70ac5b46ad",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "medium",
+  "attempt": 1,
+  "correctIndex": 3,
+  "options": [
+   "Radial Velocity, with a Year 1-5 count of 620 confirmed exoplanets",
+   "Transit Photometry, having produced 1,450 detections during the first five years",
+   "Microlensing, with a Year 6-10 count of 140 confirmed exoplanets",
+   "Transit Photometry, with a ten-year total of 3,550 confirmed exoplanets"
+  ],
+  "explanation": "두 기간을 합산하면 Transit Photometry가 1,450 + 2,100 = 3,550으로 가장 큽니다. Radial Velocity의 620과 Microlensing의 140은 특정 기간 값일 뿐 총합이 아니며 총합도 더 작습니다. Transit Photometry의 1,450은 처음 5년 값일 뿐 10년 총합이 아닙니다.",
+  "explanation_en": "Adding both periods gives Transit Photometry 1,450 + 2,100 = 3,550, the largest total. Radial Velocity's 620 and Microlensing's 140 are single-period values for methods with smaller totals, and 1,450 is only Transit Photometry's first-period count, not its ten-year total.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 3
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     false,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "d70c7540-c2b8-4eca-ad1b-de61606b9794",
+  "oldVersionId": "4bd5ef31-2776-4c62-9d17-36bb66e21d62",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 3,
+  "correctIndex": 0,
+  "options": [
+   "Average bus commute times fell by 22 percent, while average drive times on the three parallel side streets rose by less than 3 percent.",
+   "Bus riders saved an average of nine minutes per trip once the lane opened, though side-street motorists lost roughly eleven percent more time during evening peak hours.",
+   "Surveyed riders described their commutes as somewhat more pleasant after the conversion, and a majority said they would recommend the new service to coworkers and neighbors.",
+   "Average drive times for motorists on the corridor itself dropped by about a tenth after conversion, a shift the agency linked to fewer vehicles entering downtown overall."
+  ],
+  "explanation": "정답 A는 버스 통근 시간이 22% 줄고 병행 이면도로 운전 시간은 3% 미만으로만 늘었다는 수치를 함께 제시하여 '운전자 여건을 크게 악화시키지 않으면서 전체 통근 시간을 개선한다'는 주장의 두 부분을 모두 뒷받침합니다. B는 이면도로 운전자의 시간이 약 11% 더 늘었다고 하여 주장과 모순됩니다. C는 인식 조사일 뿐 운전자나 통근 시간에 대한 자료가 아닙니다. D는 간선도로 운전자만 다루고 버스 이용자와 이면도로 증거가 없어 주장 전체를 입증하지 못합니다.",
+  "explanation_en": "A is the only quotation that shows a large commute-time gain for bus riders and only a negligible (under 3 percent) increase for side-street drivers, supporting both parts of the claim. B reports an 11 percent rise in side-street driving time, which contradicts 'without significantly worsening conditions'. C offers only perceived satisfaction, not commute-time data about drivers. D covers corridor drivers only and gives no bus or side-street evidence, so it cannot support the full claim.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 0,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     false
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "e02951c8-3dcc-492b-82a3-e147fd30c1b0",
+  "oldVersionId": "05f9863b-7c74-4a55-852d-3e61be564dcc",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "the star's magnitude was 3.9 on both Day 1 and Day 12, the opening and closing readings, showing that the cycle ended exactly where it began.",
+   "the star's magnitude was 3.2 on Day 3, its brightest recorded point, compared with a magnitude of 5.1 on Day 9, its dimmest recorded point.",
+   "the star's magnitude fell from 4.5 on Day 5 to 4.0 on Day 6, a difference of only 0.5 between two consecutive observation days.",
+   "the star was dimmer on Day 3 than on Day 9, with readings of 5.1 and 3.2 respectively, indicating a pronounced shift across the cycle."
+  ],
+  "explanation": "정답은 가장 밝은 값(3일차 3.2)과 가장 어두운 값(9일차 5.1)을 비교해 1.9등급의 큰 변화를 보여 줍니다. A는 1일차와 12일차가 모두 3.9로 변화가 없음을 보여 주므로 부적절합니다. C는 연속한 이틀(4.5와 4.0)의 작은 차이만 제시하여 '상당한 변화'를 뒷받침하지 못합니다. D는 값을 뒤바꿨으며, 등급이 낮을수록 밝으므로 3일차(3.2)가 9일차(5.1)보다 밝아 사실과 다릅니다.",
+  "explanation_en": "The key cites the brightest (3.2 on Day 3) and dimmest (5.1 on Day 9) readings, showing a 1.9-magnitude range. Choice A compares Day 1 and Day 12, which are both 3.9 and show no change. Choice C compares consecutive days (4.5 and 4.0), a small difference that does not show substantial change. Choice D reverses the values: a lower magnitude means brighter, so Day 3 (3.2) was brighter than Day 9 (5.1), not dimmer.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     false
+    ],
+    "high": [
+     false,
+     false
+    ]
+   }
+  },
+  "failures": [
+   "독립 풀이 2(haiku)가 다른 답(A)을 고름"
+  ]
+ },
+ {
+  "problemId": "d0d1f13b-3c71-402c-8c24-d38331a0a400",
+  "oldVersionId": "5e91bbe7-616f-4fbf-bf68-bb1dd55cdf80",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 0,
+  "options": [
+   "Site C, with a temperature anomaly of $1.8^\\circ$C, had a bleaching percentage of 62 percent, while Site F, with a temperature anomaly of $0.6^\\circ$C, had a bleaching percentage of only 18 percent.",
+   "Site C, which registered the largest anomaly of the six locations, showed bleaching 17 points above Site D, whose reading was $1.5^\\circ$C, though that gap says nothing about the cooler locations in the study.",
+   "Site B, warmed by only $0.9^\\circ$C, experienced 25 percent bleaching, whereas Site A, warmed by a smaller $0.8^\\circ$C, experienced 35 percent bleaching, which is a reversal of the expected pattern between those neighbors.",
+   "Site E, at $1.2^\\circ$C, recorded 40 percent bleaching, and Site D, at $1.5^\\circ$C, recorded 45 percent bleaching, so these two middle sites differed by just five points in bleaching severity."
+  ],
+  "explanation": "정답은 이상 고온이 가장 큰 C(1.8°C, 62%)와 가장 작은 F(0.6°C, 18%)를 대비해 수온 이상이 클수록 백화가 심하다는 경향을 보여 줍니다. 한 오답은 C와 D만 비교해 범위 전체를 보여 주지 못합니다. 다른 오답은 A와 B를 제시하는데, 이는 경향에 어긋나는 예외입니다. 나머지 오답은 중간 지점인 E와 D만 비교해 양 극단의 대비를 드러내지 못합니다.",
+  "explanation_en": "The key contrasts the highest-anomaly site (C: 1.8°C, 62%) with the lowest-anomaly site (F: 0.6°C, 18%), showing that more warming goes with more bleaching. One distractor compares C only with D, a narrow gap that does not span the range. Another cites A and B, a true pair that is an exception to the trend. The last compares the two middle sites E and D, which does not illustrate the extremes.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": true,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 0,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     false
+    ]
+   }
+  },
+  "failures": []
+ },
+ {
+  "problemId": "d5b2f6f8-ab0a-44e5-b19e-cf9ed6786364",
+  "oldVersionId": "6210da8a-73da-47b9-a547-5ae8dafd9000",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "easy",
+  "attempt": 2,
+  "correctIndex": 2,
+  "options": [
+   "Planet Y completes one orbit in 92 Earth days, which is less than half the 210 Earth days that Planet Z needs to finish its circuit",
+   "Planet W completes one orbit in 18 Earth days, which is quicker than the 45 Earth days Planet X requires, so the star hosts fast planets",
+   "Planet W completes one orbit in 18 Earth days, while Planet Y takes 92 Earth days to complete one orbit",
+   "Planet Z completes one orbit in 210 Earth days, which is far longer than the 45 Earth days Planet X needs to go around"
+  ],
+  "explanation": "주장은 행성 Y가 행성 W보다 공전 시간이 길다는 것이므로, W의 18일과 Y의 92일을 함께 제시한 선택지가 정답입니다. 나머지 선택지는 표의 실제 수치를 쓰지만 Y와 Z, W와 X, Z와 X처럼 다른 쌍을 비교하고 있어 주장을 뒷받침하지 못합니다. 따라서 W와 Y를 직접 비교한 선택지만 알맞습니다.",
+  "explanation_en": "The claim compares Planet Y with Planet W, so the correct choice must cite the periods of exactly those two planets: 18 days for W and 92 days for Y. The other options cite real values but compare different pairs (Y with Z, W with X, Z with X), so none of them shows that Y takes longer than W.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 2,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [
+     "오답 A), B), D)이 지문·자료와 무관합니다"
+    ],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 2
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "오답 A), B), D)이 지문·자료와 무관합니다",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "05436224-0db3-4638-a706-62f214e86c80",
+  "oldVersionId": "750a54c3-3df8-48e5-8780-a8fe2d007fa4",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "easy",
+  "attempt": 2,
+  "correctIndex": 3,
+  "options": [
+   "Painter C has 12 surviving attributed paintings, while Painter A holds 65, the largest total in the table",
+   "Painter D has 34 surviving attributed paintings, roughly half of Painter A's 65, making D the least represented painter",
+   "Painter B has 48 surviving attributed paintings, a figure that is 14 higher than the count for Painter D",
+   "Painter C has only 12 surviving attributed paintings, fewer than any of the other three painters"
+  ],
+  "explanation": "주장은 화가 C의 현존 작품 수(12점)가 네 명 중 가장 적다는 것입니다. D는 C의 12점이 나머지 세 화가보다 적다는 점을 직접 보여 줍니다. 다른 선택지는 표의 실제 수치(65, 34, 48)를 쓰지만 가장 많은 총계를 강조하거나, D를 가장 적은 화가로 잘못 말하거나, B와 D만 비교하므로 C가 가장 적다는 주장을 뒷받침하지 못합니다.",
+  "explanation_en": "The claim is that Painter C has the fewest paintings, so the evidence must show C's total of 12 is lower than every other painter's. Choice D does this. The other options cite real values (65, 34, 48) but either highlight the largest total, wrongly call Painter D the least represented, or compare B and D, none of which supports the claim about C.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 3
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "914d89ba-1dd4-400f-911f-a7f5eb7fd027",
+  "oldVersionId": "f7cabc2f-13fb-4fd4-bfd4-2fdf77ba4479",
+  "skill": "command_of_evidence_quant",
+  "difficulty": "hard",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "At a soil moisture level of 10%, germination rate was 22%, and it climbed to 41% at 20% and then to 63% at 30%, showing steady gains across the lower moisture range.",
+   "At a soil moisture level of 40%, germination rate reached its highest value, 74%, but at 50% it fell to 58% and at 60% it fell further to 39%.",
+   "At a soil moisture level of 50%, germination rate was 58%, which is lower than the 74% at 40%, though still well above the 22% measured at 10% soil moisture.",
+   "At a soil moisture level of 30%, germination rate was 63%, and at 40% it rose to 74%, so the wettest soils at 60% were not needed to reach high germination."
+  ],
+  "explanation": "가설은 '어느 지점까지 상승한 뒤 하락'을 보여 주어야 합니다. 정답만 40%에서 최고점 74%를 찍고 50%(58%), 60%(39%)로 계속 떨어지는 전체 패턴을 보여 줍니다. 한 오답은 22%에서 63%까지 상승만 다루고, 다른 오답은 50%에서의 한 번의 하락만 언급하며 10%의 22%와 비교해 지속적 하락을 보이지 못합니다. 마지막 오답은 74%까지의 상승만 보여 주고 60%의 값을 제시하지 않은 채 근거 없는 결론을 내립니다.",
+  "explanation_en": "The hypothesis requires evidence of both a rise and a later decline. Only the correct choice shows the peak at 40% (74%) followed by drops to 58% and 39%. One distractor shows only increases from 22% to 63%. Another shows a single drop to 58% but compares it with the lowest reading, which does not show a sustained decline. The last shows a rise to 74% and draws an unsupported conclusion about 60% without citing its value.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 1
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "9b3cf629-1b44-4181-a1d1-896e0c67b2c8",
+  "oldVersionId": "26ba2893-0095-429d-b513-951d56e38149",
+  "skill": "command_of_evidence_text",
+  "difficulty": "easy",
+  "attempt": 2,
+  "correctIndex": 3,
+  "options": [
+   "Female octopuses whose optic glands were removed continued guarding their eggs and refusing food, then died on a schedule matching that of the untouched females.",
+   "Female octopuses whose optic glands were removed laid noticeably smaller clutches of eggs than the control females had produced earlier in the breeding season.",
+   "Female octopuses whose optic glands were removed displayed skin color changes and tended to retreat into dens, though their feeding patterns were never recorded.",
+   "Female octopuses whose optic glands were removed abandoned their eggs, resumed foraging for food, and lived several months longer than the control group."
+  ],
+  "explanation": "주장은 시신경샘이 생식 후 자기파괴적 행동과 죽음을 유발한다는 것이므로, 샘을 제거했을 때 그 행동이 사라지고 수명이 늘어났다는 결과가 가장 직접적인 증거입니다. 정답만이 알 보호 중단, 먹이 활동 재개, 수명 연장을 모두 보여 줍니다. 한 오답은 제거해도 변화가 없었다고 하여 주장과 모순됩니다. 다른 오답은 수술 전에 이미 정해진 알 개수에 관한 것이라 죽음과 무관합니다. 나머지 오답은 피부색과 은신 행동만 다루어 섭식이나 수명에 대한 증거가 없습니다.",
+  "explanation_en": "The claim is that the optic gland triggers the self-destructive behaviors and death. Support therefore requires that removing the gland reverses those behaviors and extends life. Only the key shows this: the operated females stopped guarding, resumed eating, and lived longer. One distractor says removal changed nothing, which contradicts the claim. Another concerns clutch size, which was set before the surgery and says nothing about death. The third describes skin color and denning without addressing feeding or lifespan.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 3
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "63092332-9f6c-4ee4-8eec-5e8a64073230",
+  "oldVersionId": "362f87bf-0f23-4868-939d-4aa02c6c72b2",
+  "skill": "command_of_evidence_text",
+  "difficulty": "hard",
+  "attempt": 2,
+  "correctIndex": 3,
+  "options": [
+   "Tax records show that one resource-poor region with an unusually dense workshop network had higher average household incomes than a neighboring coal-rich region, though both began building factories during roughly the same decade.",
+   "Guild records show that one coal-rich region with only a few workshops industrialized within two decades after importing machinery and managers, while a resource-poor region with dense workshops lagged somewhat behind it.",
+   "Guild records show that two resource-poor regions with similarly dense workshop networks each employed thousands of artisans, and both maintained their traditional crafts well into the late nineteenth century without building factories.",
+   "Guild records show that one resource-poor region with an unusually dense workshop network industrialized within two decades, while a coal-rich region with few workshops took over fifty years to build a comparable factory base."
+  ],
+  "explanation": "정답은 작업장 밀도가 높고 자원이 빈약한 지역이 빠르게, 석탄이 풍부하지만 작업장이 적은 지역이 훨씬 느리게 산업화했다는 직접적 대비를 보여 줍니다. 첫째 오답은 소득만 다루고 산업화 시기의 차이를 보여 주지 않습니다. 둘째 오답은 석탄이 풍부한 지역이 더 빨랐다고 하여 주장과 모순됩니다. 셋째 오답은 작업장이 밀집했어도 산업화하지 않았다고 하여 주장을 뒷받침하지 못합니다.",
+  "explanation_en": "The correct option gives a direct contrast: a workshop-dense, resource-poor region industrialized quickly while a coal-rich, workshop-poor region was slow. The distractors fail: one concerns income rather than speed and shows no gap in industrialization timing, one shows the coal-rich region industrializing faster (contradicting the claim), and one shows dense workshops without industrialization.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "독립 풀이 2(haiku)가 다른 답(A)을 고름",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "605ae0bd-51a5-4bbe-a0e4-7b10e3f823b4",
+  "oldVersionId": "46a81194-9d45-4112-89d1-186879908223",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "Octopuses at the cold seep site stayed beside their clutches without feeding for the entire brooding period, even though abundant prey drifted past the nesting crevices.",
+   "Octopuses moved to warmer tanks in captivity completed embryonic development in a fraction of the time observed at the cold seep site.",
+   "Octopuses at a warm-water site off a distant coast brooded their eggs for roughly as many years as the cold seep population did.",
+   "Octopuses at the cold seep site laid eggs that were considerably larger than those of shallow relatives, and the hatchlings emerged with unusually thick protective skin."
+  ],
+  "explanation": "정답은 따뜻한 수조로 옮기면 배아 발달 시간이 크게 단축된다는 결과로, 저온이 원인이라는 주장을 직접 뒷받침합니다. 먹이를 먹지 않고 계속 알을 지킨다는 내용은 오히려 행동 설명에 가깝습니다. 따뜻한 해역에서도 포란 기간이 비슷하게 길다면 온도 가설이 약해집니다. 알의 크기나 새끼의 피부 두께는 온도와 발달 속도의 관계와 무관합니다.",
+  "explanation_en": "The claim is that low temperature, not behavior, causes the long brooding. Only the warm-tank result shows that removing the cold shortens development, which directly supports the claim. Constant guarding without feeding supports a behavioral explanation instead. Equally long brooding in warm water would undercut the temperature claim. Egg size and skin thickness say nothing about how temperature affects development time.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "독립 풀이 2(haiku)가 다른 답(A)을 고름",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "94c916b3-ade5-457c-ab91-f23d936dfb24",
+  "oldVersionId": "46c654a1-20e1-4660-a3e0-74870a41b9b8",
+  "skill": "command_of_evidence_text",
+  "difficulty": "hard",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "A reef site with high genetic diversity but heavy ongoing pollution regrew within three years, while a cooler site with low diversity and little pollution needed more than seven years to approach its earlier coral cover.",
+   "Two reef sites with nearly identical peak bleaching temperatures and similar pollution levels showed a three-year recovery at the site with higher coral genetic diversity, but no recovery after seven years at the site with lower genetic diversity.",
+   "Two reef sites with nearly identical peak bleaching temperatures and similar pollution levels showed comparable regrowth times, even though surviving colonies at one site carried far more distinct genotypes than those at the other site.",
+   "Coral colonies at warmer reef sites bleached more severely and lost more live cover than colonies at cooler sites, a pattern that held regardless of how many distinct genotypes survived or how polluted the water was."
+  ],
+  "explanation": "정답 B는 수온과 오염도를 비슷하게 통제하고 유전적 다양성만 달리해 회복 속도 차이를 보여 주므로, 다양성과 낮은 지역 스트레스가 회복을 좌우한다는 주장을 가장 직접 뒷받침합니다. A는 오염이 심한 고다양성 지점이 빨리 회복되고 깨끗한 저다양성 지점이 느리게 회복된다는 내용이라 지문과 모순됩니다. C는 다양성 차이가 있어도 회복 시간이 비슷하다고 하여 주장을 약화시킵니다. D는 백화 심각도에 관한 것이어서 회복과 다양성의 관계를 검증하지 못합니다.",
+  "explanation_en": "The key holds temperature and pollution constant while varying only genetic diversity, so the recovery gap isolates diversity plus low stress. Option A reverses the passage's pattern: heavy pollution with high diversity recovering fast, and low diversity with clean water recovering slowly, contradicts the claim. Option C shows no recovery difference tied to diversity, which undercuts the claim. Option D concerns bleaching severity, not recovery, and does not test diversity.",
+  "static": {
+   "ok": false,
+   "failures": [
+    "오답 게이트: 정답이 가장 긴 선택지(38단어, 다음 36)"
+   ],
+   "notes": []
+  },
+  "ok": false
+ },
+ {
+  "problemId": "fe440ce7-9ba1-4459-8391-e6c70de73637",
+  "oldVersionId": "64c28c9d-726b-4657-9fa4-e225c69ef0cd",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "\"Researchers tracking bloom intensity across the Mojave Desert over fifteen years found that years with the heaviest total rainfall did not always produce the most abundant blooms in the surveyed bloom sites\"",
+   "\"years with several moderate rain events spread across November through February produced denser blooms than years with a single heavy storm followed by long dry spells, even when total seasonal rainfall was similar\"",
+   "\"Seed bank samples taken from bloom sites showed that spaced rainfall allowed more dormant seeds to germinate successfully, while seeds exposed to a single soaking followed by drought often failed to establish roots before drying out\"",
+   "\"Botanists studying desert wildflower blooms have investigated why some years produce spectacular 'superblooms' while others yield only sparse flowering, and one long-standing hypothesis holds that total winter rainfall is the primary trigger\""
+  ],
+  "explanation": "정답 B는 총강수량이 비슷해도 11~2월에 나뉜 여러 번의 적당한 비가 한 번의 폭우보다 더 빽빽한 개화를 낳았다고 직접 비교하여 '분포'가 원인임을 보여 줍니다. A는 총강수량이 개화를 완전히 예측하지 못한다는 것만 말할 뿐 분포에 대한 언급이 없습니다. C는 발아와 뿌리 내림이라는 메커니즘을 설명할 뿐 개화 강도의 직접 비교가 아닙니다. D는 연구자들이 검증하려던 기존 가설로, 결론을 뒷받침하지 않습니다.",
+  "explanation_en": "B directly compares years with spaced moderate rain to years with one heavy storm at similar total rainfall, which isolates distribution as the cause of denser blooms. A only shows that total rainfall is an imperfect predictor and says nothing about distribution. C describes germination and rooting, which is a mechanism rather than the bloom-intensity comparison. D states the hypothesis the researchers were testing, so it does not support their conclusion.",
+  "static": {
+   "ok": false,
+   "failures": [
+    "오답 게이트: 오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨"
+   ],
+   "notes": []
+  },
+  "ok": false
+ },
+ {
+  "problemId": "1595e9a1-2f19-4ab6-a786-2d214e8ce9d4",
+  "oldVersionId": "98f1a1e9-e9aa-4b63-a7ea-b46dfbd210f0",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "Residential construction in outlying trolley districts rose steadily throughout the 1890s, a pattern that matched the steady growth in average household income recorded across Cleveland during those same years.",
+   "Residential construction in outlying trolley districts rose sharply only in the years immediately following trolley line openings, even in neighborhoods where average household income had not yet increased.",
+   "Residential construction in outlying districts exceeded construction in the urban core by the end of the period, a gap that Cleveland directories attribute largely to cheaper land and lower building costs.",
+   "Residential construction in outlying trolley districts was undertaken mostly by wealthier families, who had moved there once rising salaries made longer commutes by electric trolley financially manageable for them."
+  ],
+  "explanation": "정답 B는 소득이 아직 오르지 않은 지역에서도 전차 개통 직후 건설이 급증했다는 내용으로, 전차와 소득의 영향을 분리해 전차 가설을 직접 뒷받침합니다. A는 건설 증가가 소득 증가와 함께 나타났다고 해서 오히려 소득 설명을 지지합니다. C는 지가와 건축비라는 지문에 없는 근거를 들며 전차와 소득을 구분하지 못합니다. D는 임금 상승 때문에 이주했다고 하여 소득 가설을 뒷받침합니다.",
+  "explanation_en": "The key shows construction surging right after trolley openings even where income had not risen, which isolates trolleys from income. A ties construction growth to income growth, which supports the rival explanation. C is a land-cost comparison unsupported by the passage and does not separate trolleys from income. D attributes the shift to rising salaries, which also supports the income explanation.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "독립 풀이 2(haiku)가 다른 답(A)을 고름",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "549aa1a3-d7a2-4dd7-8e68-29953aa6f10c",
+  "oldVersionId": "9935c099-9bd1-42f0-a08c-6d630281e39b",
+  "skill": "command_of_evidence_text",
+  "difficulty": "hard",
+  "attempt": 2,
+  "correctIndex": 3,
+  "options": [
+   "Payments for religious scenes commissioned by institutional clients after 1550 were entered in the ledgers at roughly the same rates the workshop had charged those clients during the previous twenty years.",
+   "Payments for mythological scenes completed after 1550 were often entered beside notes that the engraver had proposed the subjects himself, sometimes before any merchant buyer had been located for them.",
+   "Payments for mythological scenes commissioned by merchant patrons after 1550 were recorded as arriving more promptly than payments from religious institutions, though the sums in both cases were nearly identical.",
+   "Payments for mythological scenes commissioned by merchant patrons after 1550 averaged nearly twice what religious institutions had paid for comparable prints in the preceding decade."
+  ],
+  "explanation": "정답은 상인 후원자가 종교 기관보다 거의 두 배를 지불했다는 내용으로, 시장 압력이 종교 판화 감소를 설명한다는 주장을 직접 뒷받침합니다. 오답들은 가격이 변하지 않았다거나, 판화가가 스스로 주제를 정했다거나(개인적 관심 쪽 설명), 지불액이 거의 같았다고 하여 더 높은 보수라는 시장 유인을 보여주지 못합니다.",
+  "explanation_en": "The key shows merchants paid about twice what religious institutions paid, directly supporting the market-pressure claim. The distractors either show unchanged rates, point to the engraver's own initiative (supporting the rival view of personal interest), or show equal sums, so none shows a pay advantage that would explain the shift.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 3,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "독립 풀이 2(haiku)가 다른 답(A)을 고름",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "0fb15d18-04f9-4ccb-9a14-0b767224c1ac",
+  "oldVersionId": "9adfec8c-9374-4c37-8585-7be03c2724f0",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 2,
+  "options": [
+   "\"sites near river mouths, which received more nutrient runoff, had lower bacterial diversity overall, though this pattern was not the focus of their central hypothesis\"",
+   "\"the team sampled water and coral tissue from twenty reef sites that had experienced similar thermal stress during the previous year's bleaching\"",
+   "\"reefs with higher bacterial diversity in surrounding waters showed significantly faster regrowth of coral tissue over the following twelve months\"",
+   "\"marine ecologists have long debated why some coral reefs with diverse surrounding microbes recover quickly after bleaching events while others do not\""
+  ],
+  "explanation": "정답은 세균 다양성이 높은 산호초에서 산호 조직 재생이 더 빨랐다는 결과를 직접 제시하여 미생물 다양성이 회복에 영향을 준다는 주장을 뒷받침합니다. 강 하구 문장은 영양염 유입과 낮은 다양성에 관한 것이며 중심 가설과 무관하다고 명시되어 있습니다. 표본 채취 문장은 연구 방법만 설명할 뿐 다양성과 회복의 관계를 보여주지 않습니다. 논쟁 문장은 배경 질문일 뿐 증거가 아닙니다.",
+  "explanation_en": "The key quotation gives the observed result linking higher bacterial diversity to faster coral regrowth, which directly supports the claim. The river-mouth sentence concerns nutrient runoff and is explicitly said not to be the focus of the hypothesis. The sampling sentence describes method and shows no link between diversity and recovery. The debate sentence only states the background question and offers no evidence.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 2,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 2
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "d20c7b33-a3e4-45a7-be83-75556c6f8a96",
+  "oldVersionId": "9f61df2b-3d0d-4a2b-a1bc-7a165ca4e642",
+  "skill": "command_of_evidence_text",
+  "difficulty": "medium",
+  "attempt": 2,
+  "correctIndex": 2,
+  "options": [
+   "Average bus travel times along the converted corridor were roughly unchanged from earlier levels, since signal delays offset the gains, while the ridership surveys showed that most passengers remained satisfied.",
+   "Average bus travel times along the converted corridor were reported by the neighboring city's agency for the first year only, with no baseline figures and no comparison to any road that added lanes.",
+   "Average bus travel times along the converted corridor fell by 22 percent within six months, even though overall vehicle volume on the corridor did not decrease.",
+   "Average car travel times along the neighboring city's widened arterial dropped by 9 percent after two general lanes were added, which drivers credited to smoother merging near the downtown interchanges."
+  ],
+  "explanation": "정답은 전용 차로 전환 구간에서 교통량이 줄지 않았는데도 버스 통행 시간이 22% 감소했다는 실측 근거로, 전용 차로가 일반 차로 증설보다 시간을 더 줄인다는 주장을 직접 뒷받침합니다. 첫째 오답은 버스 시간이 변하지 않았다고 해 주장과 배치됩니다. 둘째 오답은 기준값과 비교 대상이 없어 근거가 되지 못합니다. 셋째 오답은 전환 완료 전에 나온 보도자료라 연구 결과로 부적절합니다. 넷째 오답은 일반 차로 증설이 승용차 시간을 줄였다는 내용이라 오히려 반대 측 주장에 가깝습니다.",
+  "explanation_en": "The key gives measured evidence that bus travel times fell on the converted corridor while vehicle volume held steady, directly supporting the claim that dedicated lanes cut travel times more than added general lanes. The first distractor says bus times did not change, which undercuts the claim. The second gives no baseline or comparison, so it cannot support it. The third cites a press release issued before the conversion was complete, which is not valid study evidence. The fourth shows added general lanes speeding up car travel, which supports the critics rather than the planners.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 2,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 2
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "f74978a4-0460-43af-aea4-d908855189c5",
+  "oldVersionId": "c5152ebe-3a06-4034-be24-ef464d4623af",
+  "skill": "command_of_evidence_text",
+  "difficulty": "easy",
+  "attempt": 2,
+  "correctIndex": 1,
+  "options": [
+   "Average bus ridership rose by nine percent over the six months, and drivers in the remaining lanes reported that their trips stayed about as long while parking grew harder downtown.",
+   "Average bus commute times fell by twelve minutes, and even drivers in the remaining lanes saw a modest three-minute reduction as fewer cars competed for road space.",
+   "Average fuel spending among commuters declined slightly during the pilot, and several residents along the arterial said they preferred the road layout that existed before the program began.",
+   "Average wait times at bus stops stayed unchanged throughout the trial, and officials noted that the number of buses serving the route did not differ from the prior year."
+  ],
+  "explanation": "정답은 버스 이용자와 나머지 차선 운전자 모두의 통근 시간이 줄었다고 보고해 '버스 전용 차선이 전체 통근 시간을 줄인다'는 주장을 직접 보여 줍니다. 나머지 선택지는 이용객 수와 주차, 연료비와 주민 선호, 대기 시간과 운행 대수 등을 다루어 통근 시간 감소를 뒷받침하지 못합니다.",
+  "explanation_en": "The correct option is the only one that reports reduced commute times for both bus riders and drivers, directly illustrating the claim. The others cite ridership and parking, fuel costs and resident preference, or unchanged wait times and bus counts, none of which show commute times falling.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 1,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [
+     "오답 C), D)이 지문·자료와 무관합니다"
+    ],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 1
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "오답 C), D)이 지문·자료와 무관합니다",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ },
+ {
+  "problemId": "745b388d-1fb9-479b-9e93-330f2284930a",
+  "oldVersionId": "de6ac170-0ad6-4142-a803-9d10dd8f607d",
+  "skill": "command_of_evidence_text",
+  "difficulty": "hard",
+  "attempt": 2,
+  "correctIndex": 2,
+  "options": [
+   "Among several octopus species living at the same depth and temperature, the species with the longest brooding periods tended to be those whose mothers were smallest in body size.",
+   "Among several octopus species living at different depths, the species inhabiting the coldest water consistently had the longest brooding periods, whatever the size of their hatchlings at emergence.",
+   "Among several octopus species living at the same depth and temperature, the species producing the largest, most independent hatchlings consistently had the longest brooding periods.",
+   "Among several octopus species living at similar depths and temperatures, the species laying the greatest number of eggs consistently had the shortest brooding periods, though hatchling size varied little."
+  ],
+  "explanation": "적응 가설은 온도가 같을 때 더 크고 발달한 새끼를 낳는 종일수록 부화 기간이 더 길다고 예측합니다. 이 패턴을 보여 주는 것은 정답뿐입니다. 하나는 어미 몸집과의 관계를 말해 새끼의 발달과 무관하고, 하나는 가장 차가운 물에서 새끼 크기와 상관없이 기간이 길다는 것이라 오히려 온도 가설을 지지합니다. 마지막은 알의 수를 다루어 논점에서 벗어납니다.",
+  "explanation_en": "The adaptation hypothesis predicts that, with temperature held constant, species producing larger, more developed hatchlings brood longer. Only the key shows this pattern. One distractor ties brooding to maternal body size, which is irrelevant to hatchling development. Another ties brooding to coldest water regardless of hatchling size, which supports the temperature hypothesis. The last ties brooding to clutch size, which is off-point.",
+  "static": {
+   "ok": true,
+   "failures": [],
+   "notes": []
+  },
+  "ok": false,
+  "validation": {
+   "solver1": {
+    "model": "claude-sonnet-5",
+    "picked": 2,
+    "agrees": true,
+    "confidence": "high",
+    "issues": [
+     "어려움 문제인데 오답 A), B)이 너무 명백합니다"
+    ],
+    "flags": []
+   },
+   "solver2": {
+    "model": "claude-haiku-4-5",
+    "picked": 0
+   },
+   "blind": {
+    "hit": [
+     true,
+     true
+    ],
+    "high": [
+     true,
+     true
+    ]
+   }
+  },
+  "failures": [
+   "어려움 문제인데 오답 A), B)이 너무 명백합니다",
+   "독립 풀이 2(haiku)가 다른 답(A)을 고름",
+   "블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘"
+  ]
+ }
+]

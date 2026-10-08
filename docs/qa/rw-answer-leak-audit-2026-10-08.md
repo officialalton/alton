@@ -110,3 +110,38 @@
 
 형식 분포: {"complete-the-text":7,"claim-in-passage":6,"claim-in-question":7}
 
+
+## 4. 2단계: 확정 문항 오답 재작성 결과
+
+확정 26건 중 검증 통과 11건(데이터 `data/rw-answer-leak/rewrites.json`), 미통과 15건. 검증 = 정답 문구 불변·영어 전용·감지기 강한 신호 없음·오답 게이트·독립 풀이 2종(sonnet-5, haiku-4-5) 정답 일치·블라인드 재검사에서 2회 high 정답이 아님. 재작성 모델 sonnet-5-5, 총 모델 비용 $3.81(장부 `data/rw-answer-leak/ledger.json`).
+
+| 판정 | problem id | 유형 | 난이도 | 미통과 사유 |
+|---|---|---|---|---|
+| 통과 | 1d6de7ce-e2e7-456b-aa9c-a6ba4d7ecff4 | command_of_evidence_quant | easy |  |
+| 통과 | 35a1d518-f01b-4d98-819f-a8fffe2e5c8e | command_of_evidence_text | medium |  |
+| 통과 | f7249169-66be-455f-9b8e-3baad7409b1b | command_of_evidence_text | medium |  |
+| 통과 | a69f456b-e0c1-4d2e-bedd-a0705c3ce53f | command_of_evidence_text | medium |  |
+| 통과 | cc982d94-1094-4244-ad62-b0fedf885951 | command_of_evidence_text | medium |  |
+| 통과 | a3d1c15b-750e-46e6-b883-061efe1f7a19 | command_of_evidence_text | medium |  |
+| 통과 | 92bdadff-e8f7-4f0c-acae-c15ca738fbfb | rhetorical_synthesis | medium |  |
+| 통과 | 6d506f25-30d9-4cb9-a576-062b2a0318ef | command_of_evidence_quant | medium |  |
+| 통과 | ea00034d-78e3-4765-80c2-99937809f69c | command_of_evidence_quant | medium |  |
+| 통과 | d70c7540-c2b8-4eca-ad1b-de61606b9794 | command_of_evidence_text | medium |  |
+| 미통과 | e02951c8-3dcc-492b-82a3-e147fd30c1b0 | command_of_evidence_quant | medium | 독립 풀이 2(haiku)가 다른 답(A)을 고름 |
+| 통과 | d0d1f13b-3c71-402c-8c24-d38331a0a400 | command_of_evidence_quant | medium |  |
+| 미통과 | d5b2f6f8-ab0a-44e5-b19e-cf9ed6786364 | command_of_evidence_quant | easy | 오답 A), B), D)이 지문·자료와 무관합니다; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 05436224-0db3-4638-a706-62f214e86c80 | command_of_evidence_quant | easy | 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 914d89ba-1dd4-400f-911f-a7f5eb7fd027 | command_of_evidence_quant | hard | 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 9b3cf629-1b44-4181-a1d1-896e0c67b2c8 | command_of_evidence_text | easy | 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 63092332-9f6c-4ee4-8eec-5e8a64073230 | command_of_evidence_text | hard | 독립 풀이 2(haiku)가 다른 답(A)을 고름; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 605ae0bd-51a5-4bbe-a0e4-7b10e3f823b4 | command_of_evidence_text | medium | 독립 풀이 2(haiku)가 다른 답(A)을 고름; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 94c916b3-ade5-457c-ab91-f23d936dfb24 | command_of_evidence_text | hard | 오답 게이트: 정답이 가장 긴 선택지(38단어, 다음 36) |
+| 미통과 | fe440ce7-9ba1-4459-8391-e6c70de73637 | command_of_evidence_text | medium | 오답 게이트: 오답 2개가 절대어(always/never/only 등)로 쉽게 소거됨 |
+| 미통과 | 1595e9a1-2f19-4ab6-a786-2d214e8ce9d4 | command_of_evidence_text | medium | 독립 풀이 2(haiku)가 다른 답(A)을 고름; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 549aa1a3-d7a2-4dd7-8e68-29953aa6f10c | command_of_evidence_text | hard | 독립 풀이 2(haiku)가 다른 답(A)을 고름; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 0fb15d18-04f9-4ccb-9a14-0b767224c1ac | command_of_evidence_text | medium | 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | d20c7b33-a3e4-45a7-be83-75556c6f8a96 | command_of_evidence_text | medium | 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | f74978a4-0460-43af-aea4-d908855189c5 | command_of_evidence_text | easy | 오답 C), D)이 지문·자료와 무관합니다; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+| 미통과 | 745b388d-1fb9-479b-9e93-330f2284930a | command_of_evidence_text | hard | 어려움 문제인데 오답 A), B)이 너무 명백합니다; 독립 풀이 2(haiku)가 다른 답(A)을 고름; 블라인드 재검사에서 여전히 2회 high 로 정답을 맞힘 |
+
+미통과 다수는 정량·텍스트 근거 문항에서 정답이 자연스레 가장 구체적이라 블라인드 high 가 남거나, 약한 풀이 모델(haiku)이 다른 답을 고르는 경우다 — 사람 검수 대상. 반영은 `scripts/mock-exam-generation/answer-leak-apply.ts`(기본 드라이런, --execute 시 새 초안 버전 저장 + `--map` 으로 옛→새 버전 JSON 기록, 공개는 하지 않음).
