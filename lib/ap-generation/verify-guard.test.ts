@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { mkdtempSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { NONPROD_REF, checkRenderedMatchesDb, itemContentHash, resolveVerifyTarget, validateScreenEntry } from "./verify-guard";
+import { NONPROD_REF, checkRenderedMatchesDb, itemContentHash, judgeScreenEntries, resolveVerifyTarget, validateScreenEntry, type ScreenEntry } from "./verify-guard";
 
 const L = "http://127.0.0.1:54422";
 const NP = `https://${NONPROD_REF}.supabase.co`;
@@ -42,15 +42,32 @@ describe("content hash", () => {
     expect(checkRenderedMatchesDb(undefined, p).ok).toBe(false);
   });
 });
-describe("validateScreenEntry", () => {
+describe("screen evidence", () => {
   const dir = mkdtempSync(path.join(os.tmpdir(), "apv-"));
   writeFileSync(path.join(dir, "s.png"), "x");
-  const ok = { candidate_key: "k", viewport: "390x844", screenshot: "s.png", timestamp: "2026-10-08T10:00:00Z", checker: "jiman" };
-  it("완전한 증거만 통과", () => {
-    expect(validateScreenEntry(ok, dir)).toBeNull();
-    for (const f of Object.keys(ok)) expect(validateScreenEntry({ ...ok, [f]: "" }, dir)).toMatch(/누락/);
-    expect(validateScreenEntry({ ...ok, screenshot: "none.png" }, dir)).toMatch(/없음/);
-    expect(validateScreenEntry({ ...ok, timestamp: "garbage" }, dir)).toMatch(/형식/);
-    expect(validateScreenEntry({ ...ok, timestamp: "2999-01-01T00:00:00Z" }, dir)).toMatch(/미래/);
+  const payload = { stimulus: "s", stem: "q", options: ["A", "B"], key_index: 0 };
+  const pass = { result: "pass" as const };
+  const checks = { options_visible: pass, figure_rendered: pass, no_clipping: pass, no_answer_before_submit: pass, frq_input_works: { result: "na" as const } };
+  const mk = (vp: string, o: Partial<ScreenEntry> = {}): ScreenEntry => ({ candidate_key: "k", content_hash: itemContentHash(payload), kind: "mc", viewport: vp, screenshot: "s.png", timestamp: "2026-10-08T10:00:00Z", checker: "playwright", checks, ...o });
+  it("완전한 항목만 통과(스크린샷 존재만으로는 불가)", () => {
+    expect(validateScreenEntry(mk("390x844"), dir)).toBeNull();
+    expect(validateScreenEntry(mk("390x844", { checks: undefined }), dir)).toMatch(/checks 누락/);
+    expect(validateScreenEntry(mk("390x844", { checks: { ...checks, no_clipping: undefined } }), dir)).toMatch(/미실시/);
+    expect(validateScreenEntry(mk("390x844", { checks: { ...checks, options_visible: { result: "fail", note: "cut" } } }), dir)).toMatch(/실패/);
+    expect(validateScreenEntry(mk("390x844", { checks: { ...checks, options_visible: { result: "na" } } }), dir)).toMatch(/na 불가/);
+    expect(validateScreenEntry(mk("390x844", { checks: { ...checks, figure_rendered: { result: "na" } } }), dir)).toMatch(/사유/);
+    expect(validateScreenEntry(mk("390x844", { kind: "frq_bundle" }), dir)).toMatch(/FRQ/);
+    expect(validateScreenEntry(mk("390x844", { screenshot: "none.png" }), dir)).toMatch(/없음/);
+    expect(validateScreenEntry(mk("390x844", { content_hash: "abc" }), dir)).toMatch(/content_hash/);
+    expect(validateScreenEntry(mk("bad"), dir)).toMatch(/viewport/);
+    expect(validateScreenEntry(mk("390x844", { timestamp: "2999-01-01T00:00:00Z" }), dir)).toMatch(/미래/);
+  });
+  it("후보 판정: 해시 일치 + 모바일·데스크톱 모두 필요, 내용 변경 시 재사용 불가", () => {
+    expect(judgeScreenEntries([mk("390x844"), mk("1280x800")], payload, dir)).toEqual({ ok: true });
+    expect(judgeScreenEntries([mk("390x844")], payload, dir).ok).toBe(false);
+    expect(judgeScreenEntries([mk("1280x800")], payload, dir).ok).toBe(false);
+    const r = judgeScreenEntries([mk("390x844"), mk("1280x800")], { ...payload, options: ["A", "C"] }, dir);
+    expect(r.ok).toBe(false); expect(!r.ok && r.reason).toMatch(/content_hash/);
+    expect(judgeScreenEntries([mk("390x844"), mk("1280x800", { checks: { ...checks, no_clipping: { result: "fail" } } })], payload, dir).ok).toBe(false);
   });
 });

@@ -4,12 +4,12 @@
 //   npx tsx scripts/ap-generation/mark-verified.ts --render [--report data/ap/render-check/report.json] [--execute]
 //     렌더 게이트(lib/ap-figures/gate) 통과·해당 없음 + 렌더 보고서의 contentHash(자료+선지+정답)가 DB 후보 payload 해시와 같은 후보만 render_verified 로. 불일치는 건너뛰고 목록 출력.
 //   npx tsx scripts/ap-generation/mark-verified.ts --screen --evidence <evidence.json> [--execute]
-//     증거 파일의 항목({candidate_key, viewport, screenshot, timestamp, checker})이 모두 있고 스크린샷 파일이 실존하는 후보만 screen_verified 로. 증거 없이는 기록하지 않는다.
+//     증거 항목(content_hash·뷰포트·스크린샷·시각·점검자·필수 점검 결과)이 현재 DB 후보 내용 해시와 일치하고 모바일·데스크톱 모두 전 항목 통과한 후보만 screen_verified 로. 스키마: docs/ap/screen-evidence.schema.json. 증거 생성: scripts/ap-generation/screen-evidence.ts
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { loadEnvLocal } from "../keywords/db";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { checkRenderedMatchesDb, resolveVerifyTarget, validateScreenEntry, type RenderReportRow, type ScreenEntry, type ScreenEvidence } from "../../lib/ap-generation/verify-guard";
+import { checkRenderedMatchesDb, judgeScreenEntries, resolveVerifyTarget, type RenderReportRow, type ScreenEntry, type ScreenEvidence } from "../../lib/ap-generation/verify-guard";
 
 const has = (n: string) => process.argv.includes(`--${n}`);
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined; };
@@ -50,20 +50,20 @@ async function main() {
     const evPath = path.resolve(process.cwd(), file);
     const ev = JSON.parse(readFileSync(evPath, "utf-8")) as ScreenEvidence;
     if (!Array.isArray(ev.entries) || !ev.entries.length) throw new Error("증거 파일에 entries 가 없습니다.");
-    const entries = new Map<string, ScreenEntry>();
+    const byCand = new Map<string, ScreenEntry[]>();
+    for (const e of ev.entries) (byCand.get(e.candidate_key) ?? byCand.set(e.candidate_key, []).get(e.candidate_key)!).push(e);
     const skipped: string[] = [];
-    for (const e of ev.entries) {
-      const err = validateScreenEntry(e, process.cwd()); // screenshot 은 저장소 루트 기준 상대경로
-      if (err) { skipped.push(`${e.candidate_key ?? "(키 없음)"}: ${err}`); continue; }
-      entries.set(e.candidate_key, e);
-    }
+    const known = new Set(rows.map((r) => r.candidate_key));
+    for (const k of byCand.keys()) if (!known.has(k)) skipped.push(`${k}: 대상 후보 아님(DB 에 없거나 auto_passed 아님/이미 변환)`);
     let n = 0;
     for (const r of rows) {
-      const e = entries.get(r.candidate_key);
-      if (!e || r.screen_verified) continue;
+      const es = byCand.get(r.candidate_key);
+      if (!es || r.screen_verified) continue;
       if (!r.render_verified) { skipped.push(`${r.candidate_key}: 렌더 검증이 먼저입니다.`); continue; }
+      const v = judgeScreenEntries(es, r.payload, process.cwd()); // screenshot 은 저장소 루트 기준 상대경로
+      if (!v.ok) { skipped.push(`${r.candidate_key}: ${v.reason}`); continue; }
       n++;
-      if (execute) { const { error: x } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: null, p_screen: true, p_evidence: { viewport: e.viewport, screenshot: e.screenshot, timestamp: e.timestamp, checker: e.checker, checks: ev.checks ?? [], at: new Date().toISOString() }, p_actor: admin?.id }); if (x) throw new Error(x.message); }
+      if (execute) { const { error: x } = await db.rpc("ap_set_verification", { p_candidate_key: r.candidate_key, p_render: null, p_screen: true, p_evidence: { contentHash: es[0].content_hash, entries: es.map((e) => ({ viewport: e.viewport, screenshot: e.screenshot, timestamp: e.timestamp, checker: e.checker, checks: e.checks })), generator: ev.generator ?? null, at: new Date().toISOString() }, p_actor: admin?.id }); if (x) throw new Error(x.message); }
     }
     for (const s of skipped) console.log(`- 건너뜀 ${s}`);
     console.log(`화면 검증 ${execute ? "기록" : "대상"} ${n}건, 건너뜀 ${skipped.length}건`);

@@ -50,16 +50,56 @@ export function checkRenderedMatchesDb(row: RenderReportRow | undefined, dbPaylo
   return itemContentHash(dbPayload) === row.contentHash ? { ok: true } : { ok: false, reason: "렌더한 버전과 DB 후보 내용이 다름(해시 불일치)" };
 }
 
-export type ScreenEntry = { candidate_key: string; viewport: string; screenshot: string; timestamp: string; checker: string };
-export type ScreenEvidence = { checker?: string; checks?: string[]; entries: ScreenEntry[] };
+// ── 화면 검증 증거 ─────────────────────────────────────────────────────────
+// 증거 JSON 스키마(docs/ap/screen-evidence.schema.json): { schema: "ap-screen-evidence/v1", checker, generator, generatedAt, entries: ScreenEntry[] }
+// 항목은 (후보, 뷰포트) 한 건. 후보마다 모바일(폭 <= 430) 과 데스크톱(폭 >= 1024) 항목이 모두 통과해야 한다.
+// 스크린샷 파일의 존재는 증거가 아니다 — 필수 점검 항목의 실제 결과(pass/fail/na + 메모)가 있어야 한다.
+export const SCREEN_CHECKS = ["options_visible", "figure_rendered", "no_clipping", "no_answer_before_submit", "frq_input_works"] as const;
+export type ScreenCheckName = (typeof SCREEN_CHECKS)[number];
+export type ScreenCheck = { result: "pass" | "fail" | "na"; note?: string };
+export type ScreenEntry = {
+  candidate_key: string; content_hash: string; problem_version_id?: string; kind: "mc" | "frq_bundle";
+  viewport: string; screenshot: string; timestamp: string; checker: string; checks: Partial<Record<ScreenCheckName, ScreenCheck>>;
+};
+export type ScreenEvidence = { schema?: string; checker?: string; generator?: string; generatedAt?: string; entries: ScreenEntry[] };
 
-/** 증거 항목 검증: 필수 필드·스크린샷 파일 실존·시각 형식(미래 아님). baseDir 기준 상대경로. */
+export function viewportWidth(v: string): number { const m = /^(\d+)x(\d+)$/.exec(v); return m ? Number(m[1]) : 0; }
+
+/** 항목 검증: 필수 필드·해시 형식·스크린샷 실존·시각·필수 점검 결과(실패·미점검·사유 없는 na 는 거부). */
 export function validateScreenEntry(e: Partial<ScreenEntry>, baseDir: string, now = Date.now()): string | null {
-  for (const f of ["candidate_key", "viewport", "screenshot", "timestamp", "checker"] as const) if (!e[f] || typeof e[f] !== "string" || !String(e[f]).trim()) return `증거 필드 누락: ${f}`;
+  for (const f of ["candidate_key", "content_hash", "viewport", "screenshot", "timestamp", "checker"] as const) if (!e[f] || typeof e[f] !== "string" || !String(e[f]).trim()) return `증거 필드 누락: ${f}`;
+  if (!/^[0-9a-f]{64}$/.test(e.content_hash!)) return "content_hash 형식 오류(sha256 hex)";
+  if (e.kind !== "mc" && e.kind !== "frq_bundle") return "kind 누락(mc|frq_bundle)";
+  if (!viewportWidth(e.viewport!)) return "viewport 형식 오류(예: 390x844)";
   const t = Date.parse(e.timestamp!);
   if (Number.isNaN(t)) return "timestamp 형식 오류";
   if (t > now + 5 * 60_000) return "timestamp 가 미래";
-  const shot = path.resolve(baseDir, e.screenshot!);
-  if (!existsSync(shot)) return `스크린샷 파일 없음: ${e.screenshot}`;
+  if (!existsSync(path.resolve(baseDir, e.screenshot!))) return `스크린샷 파일 없음: ${e.screenshot}`;
+  const c = e.checks;
+  if (!c || typeof c !== "object") return "checks 누락(실제 점검 결과 필요)";
+  for (const name of SCREEN_CHECKS) {
+    const r = c[name];
+    if (!r || !["pass", "fail", "na"].includes(r.result)) return `점검 미실시: ${name}`;
+    if (r.result === "fail") return `점검 실패: ${name}${r.note ? ` (${r.note})` : ""}`;
+    if (r.result === "na") {
+      if (name === "options_visible" || name === "no_clipping" || name === "no_answer_before_submit") return `${name} 은 na 불가`;
+      if (name === "frq_input_works" && e.kind !== "frq_bundle") continue; // 객관식은 na
+      if (name === "frq_input_works") return "FRQ 는 frq_input_works 가 필요";
+      if (!r.note?.trim()) return `${name} na 에는 사유(note) 필요`;
+    }
+  }
+  if (e.kind === "frq_bundle" && c.frq_input_works?.result !== "pass") return "FRQ 입력 점검 미통과";
   return null;
+}
+
+export type ScreenCandidateVerdict = { ok: true } | { ok: false; reason: string };
+/** 후보 하나의 항목들(여러 뷰포트)과 DB 후보 payload 대조: 해시 일치 + 모바일·데스크톱 모두 통과. */
+export function judgeScreenEntries(entries: ScreenEntry[], dbPayload: Record<string, unknown>, baseDir: string): ScreenCandidateVerdict {
+  const hash = itemContentHash(dbPayload);
+  const stale = entries.find((e) => e.content_hash !== hash);
+  if (stale) return { ok: false, reason: "증거의 content_hash 가 현재 DB 후보 내용과 다름(검증 후 문항 변경 — 재검증 필요)" };
+  for (const e of entries) { const bad = validateScreenEntry(e, baseDir); if (bad) return { ok: false, reason: bad }; }
+  if (!entries.some((e) => viewportWidth(e.viewport) <= 430)) return { ok: false, reason: "모바일(<=430px) 점검 항목 없음" };
+  if (!entries.some((e) => viewportWidth(e.viewport) >= 1024)) return { ok: false, reason: "데스크톱(>=1024px) 점검 항목 없음" };
+  return { ok: true };
 }
