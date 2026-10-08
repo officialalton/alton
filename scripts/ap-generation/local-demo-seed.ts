@@ -14,7 +14,8 @@ const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "postgresql://postgres:postgr
 const psql = (sql: string) => execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
 const q = (t: string) => `'${t.replace(/'/g, "''")}'`;
 
-const SUBJECTS: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics" };
+const SUBJECTS: Record<string, string> = { ap_calculus_ab: "AP Calculus AB", ap_calculus_bc: "AP Calculus BC", ap_biology: "AP Biology", ap_microeconomics: "AP Microeconomics" };
+const ALL = process.argv.includes("--all-eligible"); // 화면 검증용: 검증 기록 대상(auto_passed·결함 없음·게이트 통과) 전부 + 5지선다 UI 점검용 미세경제 몇 문항
 
 async function seed() {
   const conn = await connect(); if (!conn || conn.target !== "local") throw new Error("로컬 DB 에서만 실행합니다.");
@@ -32,7 +33,13 @@ async function seed() {
     ...pick("ap_biology", "mc", hasFig(/ap_table/), 2), ...pick("ap_biology", "frq_bundle", () => true, 1),
     ...pick("ap_microeconomics", "mc", hasFig(/ap_graph/), 2), ...pick("ap_microeconomics", "mc", hasFig(/ap_table/), 1),
   ];
-  const lessonOne = pick("ap_calculus_ab", "mc", (c) => gateCandidate(c).need === "text_only", 3).slice(1, 2);
+  if (ALL) {
+    const scan = new Map((JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/defect-scan.json"), "utf-8")) as { key: string; flags: unknown[] }[]).map((r) => [r.key, r.flags.length]));
+    chosen.length = 0;
+    chosen.push(...items.filter((c) => c.validation === "auto_passed" && !scan.get(c.stockKey) && gateCandidate(c).status !== "fail"));
+    chosen.push(...pick("ap_microeconomics", "mc", hasFig(/ap_graph/), 2), ...pick("ap_microeconomics", "mc", hasFig(/^ap_table/), 1));
+  }
+  const lessonOne = ALL ? [] : pick("ap_calculus_ab", "mc", (c) => gateCandidate(c).need === "text_only", 3).slice(1, 2);
   const byKey = new Map<string, string>(); // stockKey -> problem ids
   for (const [c, purpose] of [...chosen.map((x) => [x, "mock_exam"] as const), ...lessonOne.map((x) => [x, "lesson"] as const)]) {
     const key = `${RUN}-${c.stockKey.replace(/[^A-Za-z0-9_.-]/g, "_")}`;
@@ -45,10 +52,10 @@ async function seed() {
     byKey.set(key, c.apSubjectCode);
   }
   // 세트: 과목별(데모용 소형 구조 — 공식 문항 수 아님)
-  const mk = async (code: string, label: "mc_practice" | "full_practice", name: string, tier: "free" | "tutoring") => {
+  const mk = async (code: string, label: "mc_practice" | "full_practice", name: string, tier: "free" | "tutoring", slice?: { mc: [number, number]; frq: [number, number] }) => {
     const rows = psql(`select i.candidate_key || '|' || cp.problem_id || '|' || cp.problem_version_id || '|' || i.kind || '|' || i.keyword_code from ap_candidate_items i join ap_candidate_problems cp on cp.candidate_key = i.candidate_key where i.run_id = ${q(RUN)} and i.ap_subject_code = ${q(code)} and i.purpose = 'mock_exam' order by i.candidate_key;`).split("\n").filter(Boolean).map((l) => l.split("|"));
-    const mc = rows.filter((r) => r[3] === "mc"), frq = rows.filter((r) => r[3] === "frq_bundle");
-    const sections = [{ key: "ap_mc", kind: "mc", label: "Section I: Multiple Choice", minutes: 25, count: mc.length, calculator: code === "ap_calculus_ab" ? "not_allowed" : "allowed", options: code === "ap_microeconomics" ? 5 : 4 }, ...(label === "full_practice" && frq.length ? [{ key: "ap_frq", kind: "frq", label: "Section II: Free Response", minutes: 20, count: frq.length, calculator: "allowed" }] : [])];
+    const mc = rows.filter((r) => r[3] === "mc").slice(...(slice?.mc ?? [0, 1e9])), frq = rows.filter((r) => r[3] === "frq_bundle").slice(...(slice?.frq ?? [0, 1e9]));
+    const sections = [...(mc.length ? [{ key: "ap_mc", kind: "mc", label: "Section I: Multiple Choice", minutes: 25, count: mc.length, calculator: code === "ap_calculus_ab" ? "not_allowed" : "allowed", options: code === "ap_microeconomics" ? 5 : 4 }] : []), ...(label === "full_practice" && frq.length ? [{ key: "ap_frq", kind: "frq", label: "Section II: Free Response", minutes: 20, count: frq.length, calculator: "allowed" }] : [])];
     const id = psql(`insert into mock_exam_sets (name, difficulty_tier, status, format, readiness_status, exam_program, ap_subject, ap_label, section_layout) values (${q(`${RUN}-${name}`)}, 'standard', 'draft', 'ap_fixed', 'not_applicable', 'ap', ${q(code)}, ${q(label)}, ${q(JSON.stringify({ sections }))}::jsonb) returning id;`);
     let pos = 0;
     for (const r of mc) psql(`insert into mock_exam_set_items (exam_set_id, section, position, problem_id, problem_version_id, sat_domain, difficulty) values ('${id}', 'ap_mc', ${++pos}, '${r[1]}', '${r[2]}', ${q(`ap:${r[4]}`)}, 'medium');`);
@@ -58,9 +65,19 @@ async function seed() {
     state.sets.push(id);
     console.log("세트", name, id);
   };
-  await mk("ap_calculus_ab", "mc_practice", "AP Calculus AB MC Practice (demo)", "free");
-  await mk("ap_biology", "full_practice", "AP Biology Full Practice (demo)", "free");
-  await mk("ap_microeconomics", "mc_practice", "AP Microeconomics MC Practice (demo)", "tutoring");
+  if (!ALL) {
+    await mk("ap_calculus_ab", "mc_practice", "AP Calculus AB MC Practice (demo)", "free");
+    await mk("ap_biology", "full_practice", "AP Biology Full Practice (demo)", "free");
+    await mk("ap_microeconomics", "mc_practice", "AP Microeconomics MC Practice (demo)", "tutoring");
+  } else {
+    // 과목별로 객관식 20문항씩, FRQ 는 6개씩 끊어 세트를 만든다(전부 free 등급: 한 학생 계정으로 모두 응시).
+    for (const code of Object.keys(SUBJECTS)) {
+      const cnt = (k: string) => Number(psql(`select count(*) from ap_candidate_items where run_id = ${q(RUN)} and ap_subject_code = ${q(code)} and purpose = 'mock_exam' and kind = ${q(k)};`));
+      const nMc = cnt("mc"), nFrq = cnt("frq_bundle");
+      for (let i = 0; i < nMc; i += 20) await mk(code, "mc_practice", `${code} MC ${i / 20 + 1} (demo)`, "free", { mc: [i, i + 20], frq: [0, 0] });
+      for (let i = 0; i < nFrq; i += 6) await mk(code, "full_practice", `${code} FRQ ${i / 6 + 1} (demo)`, "free", { mc: [0, 0], frq: [i, i + 6] });
+    }
+  }
   // 학생(로컬 테스트 전용). 비밀번호는 환경변수에서만 읽고 출력하지 않는다.
   const pw = process.env.SEED_TEST_PASSWORD;
   if (pw) for (const [label, type] of [["free", "free"], ["tutoring", "tutoring"]] as const) {

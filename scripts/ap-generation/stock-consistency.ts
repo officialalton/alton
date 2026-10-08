@@ -2,13 +2,16 @@
 //   npx tsx scripts/ap-generation/stock.ts && npx tsx scripts/ap-generation/stock-consistency.ts          # DB 조회(읽기 전용)
 //   npx tsx scripts/ap-generation/stock-consistency.ts --emit-sql > /tmp/stock.sql                         # 로컬 검증용 SQL(트랜잭션+롤백)
 // 현재 배치(is_current=true)만 비교한다. 불일치가 있으면 종료 코드 1.
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { summarize, type StockItem } from "../../lib/ap-generation/stock";
 import { compareSummaries, type DbSummaryRow } from "../../lib/ap-generation/stock-consistency";
 import { connect } from "../keywords/db";
 
-const items = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as StockItem[];
+// DB 현재 집계에는 보조 배치(S1a, import-candidates --supplement)의 후보 행도 is_current=true 로 들어 있으므로 파일 쪽도 s1a-items.json 을 합쳐 비교한다(--no-supplement 로 끌 수 있음).
+const read = (f: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8")) as StockItem[];
+const SUPP = "data/ap/stock/s1a-items.json";
+const items = [...read("data/ap/stock/items.json"), ...(!process.argv.includes("--no-supplement") && existsSync(SUPP) ? read(SUPP) : [])];
 const file = summarize(items);
 const q = (v: string | null | undefined) => (v == null ? "null" : `'${String(v).replace(/'/g, "''")}'`);
 async function main() {
@@ -21,7 +24,7 @@ async function main() {
   const conn = await connect(); if (!conn) throw new Error("SUPABASE_URL·SUPABASE_SERVICE_ROLE_KEY 필요");
   const { data, error } = await conn.db.from("ap_stock_summary_v").select("*"); if (error) throw new Error(error.message);
   const diffs = compareSummaries(file, data as DbSummaryRow[]);
-  console.log(`대상 ${conn.target}: 파일 ${file.length}개 집계 vs DB ${(data ?? []).length}개`);
+  console.log(`대상 ${conn.target}: 파일 ${items.length}행(보조 포함 여부는 위 주석) → ${file.length}개 집계 vs DB ${(data ?? []).length}개`);
   if (diffs.length) { diffs.forEach((d) => console.error("  ✗ " + d)); process.exit(1); }
   console.log("일치(파일 = DB 현재 배치 집계)");
 }

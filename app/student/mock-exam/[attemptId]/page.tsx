@@ -38,8 +38,9 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
 
   // AP 모의고사: 같은 엔진, AP 전용 응시·결과 화면(영어 UI).
   if (attempt.examProgram === "ap") {
+    // w-full: body 가 flex-col 이라 mx-auto 만 있으면 main 이 내용 최소폭(문항 번호 줄 796px)까지 늘어나 모바일에서 가로 스크롤·번호 버튼 클릭 불가가 됐다(2026-10-09 화면 점검에서 발견). *
     return (
-      <main className={`mx-auto px-4 py-6 ${isGraded ? "max-w-4xl" : "max-w-5xl"}`}>
+      <main className={`mx-auto w-full px-4 py-6 ${isGraded ? "max-w-4xl" : "max-w-5xl"}`}>
         {isGraded && (
           <Link href="/student?tab=mock-exam" className="mb-4 inline-block text-[13px] text-grey-600 font-semibold border-[1.5px] border-grey-200 rounded-lg px-3 py-1.5 hover:bg-grey-100">← Back</Link>
         )}

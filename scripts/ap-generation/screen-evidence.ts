@@ -65,7 +65,7 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     for (let i = 0; i < await areas.count(); i++) { const a = areas.nth(i); await a.fill("screen check"); if ((await a.inputValue()) !== "screen check") ok = false; await a.fill(""); }
     out.frq_input_works = ok ? { result: "pass", note: `typed into ${m.inputCount} part input(s), value retained` } : { result: "fail", note: "input did not retain text" };
   }
-  await root.screenshot({ path: shot });
+  await root.screenshot({ path: shot, type: "jpeg", quality: 55 });
   return out;
 }
 
@@ -74,7 +74,7 @@ async function main() {
   const stock = JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as { stockKey: string; payload: Record<string, unknown> }[];
   const keysByHash = new Map<string, string[]>();
   for (const s of stock) { const h = itemContentHash(s.payload); (keysByHash.get(h) ?? keysByHash.set(h, []).get(h)!).push(s.stockKey); }
-  const shotDir = `tmp/ap-screen-evidence/${state.run}`; mkdirSync(shotDir, { recursive: true });
+  const shotDir = arg("shots-dir", `tmp/ap-screen-evidence/${state.run}`); mkdirSync(shotDir, { recursive: true });
   const browser = await chromium.launch();
   const entries: ScreenEntry[] = []; const failures: string[] = [];
   const ver = browser.version();
@@ -99,12 +99,13 @@ async function main() {
         const nav = page.locator('nav[aria-label="Go to question"] button');
         for (let i = 0; i < secRows.length; i++) {
           const r = secRows[i];
-          await nav.nth(i).click(); await page.waitForTimeout(300);
+          let navErr = "";
+          try { await nav.nth(i).click({ timeout: 8000 }); await page.waitForTimeout(300); } catch (e) { navErr = (e as Error).message.replace(/\s+/g, " ").slice(0, 100); } // 학생이 문항 번호를 누를 수 없으면 그 자체가 실패
           const hash = itemContentHash(r.payload);
           const key0 = keysByHash.get(hash)?.[0] ?? r.candidate_key;
-          const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}-${vp.w}x${vp.h}.png`;
+          const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}-${vp.w}x${vp.h}.jpg`;
           let checks: Record<ScreenCheckName, ScreenCheck>;
-          try { checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
+          try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
           const bad = SCREEN_CHECKS.filter((c) => checks[c].result === "fail");
           if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${checks[c].note})`).join("; ")}`);
           for (const k of keysByHash.get(hash) ?? []) entries.push({ candidate_key: k, content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `playwright/${ver} local student exam screen`, checks });
