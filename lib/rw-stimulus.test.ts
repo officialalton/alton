@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkRwStructure, countBlanks, describeRwStructure, parseRwStimulus, rwSkillCode } from "./rw-stimulus";
+import { rwDataReference, checkRwStructure, countBlanks, describeRwStructure, parseRwStimulus, rwSkillCode } from "./rw-stimulus";
 import { splitLearningContent } from "./render-learning-content";
 import { checkContent } from "./problem-content-check";
 
@@ -168,3 +168,22 @@ describe("boundaries/form_structure_sense 구조적 구분(2026-09-17)", () => {
     expect(checkRwStructure({ skillCode: "form_structure_sense", passage: BOUND, options: ["a", "b", "c", "d"], structuredTag: "COMMA_SPLICE" }).map((i) => i.code)).toContain("rw_grammar_rule");
   });
 });
+
+describe("표·그래프·밑줄을 가리키는 문항은 자료·표시가 있어야 한다(2026-10-08)", () => {
+  const TXT = "A researcher recorded the results shown in the table below.\n\nWhich choice most effectively uses data from the table to support the claim?";
+  const opts = ["a", "b", "c", "d"];
+  const fig = { type: "data", kind: "table", title: "t", columns: ["a", "b"], rows: [["x", 1]] };
+  it("그림 없이 표를 가리키면 rw_data_missing, 자료가 있으면 통과", () => {
+    expect(checkRwStructure({ skillCode: "command_of_evidence_text", passage: TXT, options: opts }).map((i) => i.code)).toContain("rw_data_missing");
+    expect(checkRwStructure({ skillCode: "command_of_evidence_text", passage: TXT, options: opts, figure: fig }).map((i) => i.code)).not.toContain("rw_data_missing");
+  });
+  it("'figure out'·일반 명사 table 은 오탐하지 않는다", () => {
+    expect(rwDataReference("She tried to figure out why the table was empty.")).toBeNull();
+    expect(rwDataReference("the data in the table")).toBe("data in the table");
+  });
+  it("질문이 underlined 를 가리키는데 밑줄 표시가 없으면 거부(TSP 외 유형 포함)", () => {
+    const q = "Researchers observed the colony for years.\n\nWhich choice best describes the function of the underlined portion?";
+    expect(checkRwStructure({ skillCode: "command_of_evidence_text", passage: q, options: opts }).map((i) => i.code)).toContain("rw_target");
+  });
+});
+
