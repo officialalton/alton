@@ -5600,5 +5600,3131 @@
     "conceptual_parts": []
    }
   }
+ },
+ "ap_calculus_ab-c012-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "t*=4.7601, V values=[50.0, 54.674191553317456, 55.99055152399929, 48.61457448345445]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "avg 2-6=1.2 cost=0.18 avg 6-10=1.7999999999999998"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "dydt=7.349999999999999"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "C(3)=75.647"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=3.0, r(2.01)=2.970199372022084"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=40, table avgs=[45.92302410336825, 40.638175095586305, 40.06842088073395]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "0/0 form, LH gives -3.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[1.6499510061588258, 1.6649994511628512, 1.6664999944512944]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-f01-k4": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_d_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "([np.float64(2.0), np.float64(8.59), np.float64(12.75), np.float64(15.82), np.float64(17.39)], np.float64(128.23))"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "R increasing"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "R'(5)=1"
+     },
+     {
+      "part": "d",
+      "pass": false,
+      "detail": "(152.0660498819997, np.float64(23.836049881999713))"
+     }
+    ],
+    "conceptual_parts": [
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "35.230000000000004"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "34.660000000000004"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "-0.2776801836348979"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "4.852400000000001"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "22.5"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "26.799999999999997"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "avg and area"
+     }
+    ],
+    "conceptual_parts": [
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "715"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "597.5,9.958333333333334,35850.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "decreasing => left over"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "-0.25"
+     }
+    ],
+    "conceptual_parts": [
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "51.800000000000004"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "51.2"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "4.266666666666667"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "-0.1499999999999999"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "11.5"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "1.7249999999999999"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "(1.9166666666666667, 11.4)"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "0.6000000000000001"
+     }
+    ],
+    "conceptual_parts": [
+     "d-justification"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "57"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "54"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "83.5"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "5.55"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "259.5"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "8.566666666666666"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "0.21428571428571427"
+     }
+    ],
+    "conceptual_parts": [],
+    "skill_primary": "2.B"
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "general solution satisfies ODE"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "A=6,k=ln2/3,C(6)=6.5"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "limit 8"
+     }
+    ],
+    "conceptual_parts": [
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[12.0, 10.0, 6.0, 0.0, -2.0]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general form verified via particular solution"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "41.60602794142788"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "limit 60"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "derivative matches"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "ODE and IC satisfied"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "endpoints +-sqrt(e-1)"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "slope 2; C''=-(1/25)(40-C)"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general solution consistent with dsolve"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "8.958797346140274"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[1, 0, -2, -4]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "residual nonzero"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "t=[log(4)]"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "d2T/dt2 at T=40 = 5"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general form satisfies ODE, IC gives A=50"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "t=log(4) ~ 1.3863"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[1, -2, 0, 0]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general solution satisfies DE"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "2/(1-x^2)"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "formula gives -2/3 at 2"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "slopes 3, -1, 0"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "family verified"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "C=8-6e^{-t/2}"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "limit 8, C(2)=8-6/e"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k4": {
+  "ok": false,
+  "reasons": [
+   "verification_no_checks"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {}
+  }
+ },
+ "ap_calculus_ab-f04-k5": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "c=5.086479"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "i1=89.752836 i2=3.328343 total=93.081179"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "net=86.424492"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "V=2092.493511"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "x1=-2.159 x2=1.649 A=10.309"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "V=232.665"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "S=33.467"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "A=19.3991"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "V=41.7913"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "W=413.3694"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k8": {
+  "ok": false,
+  "reasons": [
+   "part_b_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "c=5.163977794943222,A=55.08242981272771"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "V=352.5275508014573"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "W=1638.1740714332525"
+     }
+    ],
+    "conceptual_parts": [
+     "c-justification"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k9": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_c_numeric_check_failed",
+   "part_d_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "c=8.860009363293377,A=28.898390293370788"
+     },
+     {
+      "part": "c",
+      "pass": false,
+      "detail": "V=120.95824914160673"
+     },
+     {
+      "part": "d",
+      "pass": false,
+      "detail": "A2=4.4183902933707895,tot=33.31678058674158"
+     }
+    ],
+    "conceptual_parts": [
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k10": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "k=2.3336 A=4.2401"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "V=8.7482"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "W=70.7952"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k11": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "c=5.345"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "A=10.965"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "setup"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "V=295.566"
+     }
+    ],
+    "conceptual_parts": [
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-c010-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "only option 0 has correct axes, both groups, line type, and ranges covering data (max 0.49, 40 min)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only one option has IV on x, DV on y, and error bars"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "slopes 25C=2.45, 15C=1.21 uL/min; both series must be plotted vs time on x to show rates"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "equal 10-degree steps continuous x; max rate+2SE=4.9<=5 so y-axis 0-5 fits; peak at 40 C"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c022-k4": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c022-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 1,
+     "conceptual_only": true,
+     "details": "Conceptual: pre-existing r at 0.20 per table notes; selection by differential survival."
+    },
+    {
+     "computed_key_index": 3,
+     "conceptual_only": false,
+     "details": "q=0.8 ratio=4.0"
+    },
+    {
+     "computed_key_index": 2,
+     "conceptual_only": false,
+     "details": "q=0.27 exp=[106.57999999999998, 78.84, 14.580000000000002] obs=[100,92,8]"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: shared single-origin allele and homologous gene imply common ancestry."
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "ap_biology-c022-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "p rises monotonically; aa less fit"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "(0.25, 0.5, 0.25)"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "XY smallest"
+    },
+    {
+     "computed_key_index": null,
+     "conceptual_only": true,
+     "details": "conceptual: differential replication"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "ap_biology-c022-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "freq rises with use; selection"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "130/400=0.325"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "gene identity exceeds core identity -> transfer"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "f5=0.325"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "ap_biology-c022-k8": {
+  "ok": false,
+  "reasons": [
+   "item_count_5_expected_4",
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c022-k9": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c022-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "p after=0.556"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "(0.36, 0.48, 0.16000000000000003)"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "2 < 8"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "fitness ordering reversed between environments"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "ap_biology-c022-k11": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c024-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "A varies humidity only; light constant"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "D split near 10/10 indicates no side bias; control for apparatus"
+    },
+    {
+     "computed_key_index": null,
+     "conceptual_only": true,
+     "details": "Design reasoning: counterbalancing positions removes confounding of side with treatment; no numeric recomputation possible"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "C changes both humidity and light"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    true,
+    false
+   ]
+  }
+ },
+ "ap_biology-c024-k5": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c024-k6": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c024-k7": {
+  "ok": false,
+  "reasons": [
+   "item_count_5_expected_4"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c024-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Design-purpose reasoning: E differs from B only by crab absence; survival values 19.3-19.5 show no killing, ruling out positive-control option."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "only C vs D hold crab presence constant and vary diet"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "cover higher and grazing lower with crab cues; crabs caged"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Only the first option manipulates flow rate factorially with cue and matched controls."
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "ap_biology-c024-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "AB isolates light with 0 beetles; CD also isolates light but with beetles; question specifies no beetles. iso flags: [True, False, False, True]"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Randomization is the design feature addressing unmeasured variation; conceptual."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Mechanism test requires aphid counts; conceptual."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "A 19.2-22.8, C 22.9-26.7, no overlap=True"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    true,
+    true,
+    false
+   ]
+  }
+ },
+ "ap_biology-c024-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "[1, 2, 3, 2]"
+    },
+    {
+     "computed_key_index": null,
+     "conceptual_only": true,
+     "details": "Blinding is the control for observer bias; conceptual."
+    },
+    {
+     "computed_key_index": 2,
+     "conceptual_only": false,
+     "details": "Group1 vs Group3 isolates species B"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "signal effect at 50: 4.0, at 25: 3.5"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    true,
+    false,
+    false
+   ]
+  }
+ },
+ "ap_biology-c024-k11": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-f01-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "77.5"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "values fit y-range 0-10"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "20uM+GF 1.0 <= no-GF 1.2"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "five points with error bars"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "percent increase=450.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "40 upper 24.0 vs 80 lower 20.3 overlap; cost doubles"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "e"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "data consistent, y max 18<=20"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "MI=15.0, decrease=80.0"
+     }
+    ],
+    "conceptual_parts": [
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "data points match model answer"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "275.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "intervals overlap"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "e"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "percent decrease=68.75"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "{0: 12.0, 1: 18.0, 2: 24.0, 4: 13.5}"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "4.8"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "2 g/L highest"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "percent decrease=75.0"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "5 points"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "percent increase 291.67"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "50: 43-51; 100: 45-53 overlap"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "six points with six error values"
+     },
+     {
+      "part": "total",
+      "pass": true,
+      "detail": "points sum 9"
+     }
+    ],
+    "conceptual_parts": [
+     "a"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "ratio 216"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "fold 80.0 pct 3.33"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "values consistent"
+     }
+    ],
+    "conceptual_parts": [
+     "a"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k5": {
+  "ok": false,
+  "reasons": [
+   "verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": "verification_code missing"
+  }
+ },
+ "ap_biology-f02-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "fold=40.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "error bars overlap and mutant similar to null"
+     },
+     {
+      "part": "total",
+      "pass": true,
+      "detail": "points sum 9"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "e"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k7": {
+  "ok": false,
+  "reasons": [
+   "part_e_no_rubric_rows"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-f02-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "fold=90.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "chi=2.613"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "fold=24.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "C glucose vs galactose within combined error"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d",
+     "e"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "fold induction 50; deletion constitutive"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "strain4 3 AU vs 96; strain6 95; strain3 94"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "strain5 2 vs 3 within 2SE (1+1); wt 100"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "logic prediction"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "fold=4.87"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "means {'ctrl': 1.0, 'eps': 4.866666666666667, 'epski': 1.3, 'ki': 1.0}"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "chi=2.4"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "G1 and G4 ranges overlap"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "G1/G3 overlap, G1/G2 do not"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "T1 lower bound 27.8 > T4 upper bound 6.1"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "controls 2 and 3 intervals include 0"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "32.0,20.0,20.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "dA=0.4,dB=0.1,diff=0.3,tempdrops 0.6,0.1"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "group 5 baseline 0.5 deg"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "CI of group 2 does not overlap groups 3 or 1; groups 1 and 3 overlap"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual design"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "red vs control overlap=True; blue vs control overlap=False; blue vs white overlap=True"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "B=90.0, D=2.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "B=90.0 C=97.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "C mean 97, D mean 2, same 8 h light"
+     }
+    ],
+    "conceptual_parts": [
+     "a"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k11": {
+  "ok": false,
+  "reasons": [
+   "part_d_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "d",
+      "pass": false,
+      "detail": "changes A=-2,B=34,C=10; C vs A nonoverlap=False"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "5,8"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "pH5=18, pH8=100"
+     }
+    ],
+    "conceptual_parts": [
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "peak at 50, declines after"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "peak 50 diff 35"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "70C=5%, 40C=95%"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "pH9 > pH6 at every temperature"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "table consistent: True"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "ratio 4.50"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "45C amplitude 40"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "pH10 1.1"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "peak 42"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "decrease 50"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "90 to 46"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "opt=5, pH7=20"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "interp at 4.5=90.0"
+     }
+    ],
+    "conceptual_parts": [
+     "b",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k9": {
+  "ok": false,
+  "reasons": [
+   "part_undefined_no_rubric_rows",
+   "part_undefined_rubric_sum_0_vs_undefined",
+   "total_points_1_vs_4"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-f04-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "table matches model"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "25.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "27.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "ceiling 30 < 40"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "optimum pH 7"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "25% at pH 5"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "40C higher everywhere, same optimum"
+     }
+    ],
+    "conceptual_parts": [
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_microeconomics-c005-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "E=1.400"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "TR 270->240, E=1.40"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k5": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c005-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "change=-1000.0"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "rev=225.0 share=112.5"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.7391304347826086"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "37.5"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "e=1.0 r1=240 r2=240"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "drop=100.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "(2.3333333333333335, 640, 960)"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "400.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "1.0"
+    },
+    {
+     "computed_key_index": 2,
+     "conceptual_only": false,
+     "details": "600.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "e=1.400, rev 1600->1800"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "Pb=33, increase=3"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 2,
+     "conceptual_only": false,
+     "details": "[10, 16, 14, 10, 6]"
+    },
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "[6.0, 3.75, 4.285714285714286, 6.0, 10.0]"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k5": {
+  "ok": false,
+  "reasons": [
+   "item1_key_out_of_range"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c011-k6": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c011-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "[30, 24, 20, 22, 29, 39][70.0, 47.0, 38.0, 34.0, 33.0, 34.0]"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "Q=5 profit=-15 avc=25.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k8": {
+  "ok": false,
+  "reasons": [
+   "item1_missing_stem_or_explanation"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c011-k9": {
+  "ok": false,
+  "reasons": [
+   "item2_key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "([10, 14, 12, 8, 4], [4.0, 2.857142857142857, 3.3333333333333335, 5.0, 10.0])"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "[-60, -50, -20, 0, 0, -20]"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k10": {
+  "ok": false,
+  "reasons": [
+   "item1_key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 3,
+     "conceptual_only": false,
+     "details": "([None, 100.0, 65.0, 50.0, 45.0, 44.0, 45.0, 47.142857142857146], [None, 40, 30, 20, 30, 40, 50, 60], 6)"
+    },
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "([-60, -55, -40, -15, 0, 5, 0, -15], 5)"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 2,
+     "conceptual_only": false,
+     "details": "[10, 20, 30, 20, 15, 10]"
+    },
+    {
+     "computed_key_index": 3,
+     "conceptual_only": false,
+     "details": "profit-max Q=95"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c017-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "q=20,p=60,profit=800"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "dwl=400.0,profit=800"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c017-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "Q=20,P=60"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "qe=40.0,dwl=400.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c017-k6": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k7": {
+  "ok": false,
+  "reasons": [
+   "item1_key_out_of_range"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k8": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k9": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus",
+   "item1_key_out_of_range"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k10": {
+  "ok": false,
+  "reasons": [
+   "item1_key_out_of_range"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k11": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2",
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c026-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Pure public good = nonrival and nonexcludable -> siren; free-rider problem."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 3,
+    "conceptual_only": false,
+    "details": "only lights is non-excludable and non-rival"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 3,
+    "conceptual_only": false,
+    "details": "only Y is nonexcludable and nonrival"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 4,
+    "conceptual_only": false,
+    "details": "public = non-excludable and non-rival; unique row index [4]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-f01-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "MR x-intercept 25, demand x-intercept 50"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "Q=20.0,P=60.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "profit=800.0 thousand"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "Qe=40.0, DWL=400.0 thousand"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "ceiling at 20 gives Q=40, DWL=0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm20 Pm60 MR zero at 25"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "800.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "400.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "400.0,1600.0"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "ceiling at 20 gives Q=40 profit 0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Q=25,P=70"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "profit 1250, CS 625"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "DWL 625"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "Q=50 at P=20, profit 0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k7": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=36,Pm=128"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "2840.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "864.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "profit 1400.0 atc 56.666666666666664"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm,Pm,MR intercept"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "profit,CS"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "DWL"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "ceiling"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k9": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=20.0 Pm=60.0 MR zero at 25.0"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "800.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "400.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "Qc=40.0 dwl=400.0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=25,Pm=70"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "profit 1250, CS 625"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "DWL 625"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "Q2 22.5, P2 75, rise 5"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k11": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Q=20,P=60,MR intercept 25"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "800.0,400.0,400.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "40.0,1600.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "ceiling Q=40 profit 0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k4": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "P=8,Q=60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "CS=360,PS=180"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "elasticity 2/3 inelastic"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k5": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": ""
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": ""
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": ""
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": ""
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": ""
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k6": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "eq/CS/PS"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "elasticity"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "subsidy"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k7": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_b_numeric_check_failed",
+   "part_c_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "eq/surplus"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "subsidy"
+     },
+     {
+      "part": "c",
+      "pass": false,
+      "detail": "DWL=54.0000000000000"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k8": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "P=6,Q=60,CS=180,PS=90"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "Q=20,CS=140,PS=10"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "DWL=120"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k9": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_b_numeric_check_failed",
+   "part_c_numeric_check_failed",
+   "part_d_numeric_check_failed",
+   "part_e_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "recomputed"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "recomputed"
+     },
+     {
+      "part": "c",
+      "pass": false,
+      "detail": "recomputed"
+     },
+     {
+      "part": "d",
+      "pass": false,
+      "detail": "recomputed"
+     },
+     {
+      "part": "e",
+      "pass": false,
+      "detail": "recomputed"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k10": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "10,60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "100,200"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "12,56,44"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "3"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k11": {
+  "ok": false,
+  "reasons": [
+   "part_b_numeric_check_failed",
+   "part_c_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Q=40,P=220"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "CS=1600,PS=3200"
+     },
+     {
+      "part": "c",
+      "pass": false,
+      "detail": "Q=44,P=212,dCS=336"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
  }
 }
