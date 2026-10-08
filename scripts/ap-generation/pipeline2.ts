@@ -108,7 +108,7 @@ const mcWordTool = { name: "submit_wording", description: "Submit polished stem 
 const frqWordTool = { name: "submit_frq_wording", description: "Submit polished prompts.", input_schema: { type: "object", properties: { prompts: { type: "object", additionalProperties: { type: "string" } }, design_note: { type: "string" } }, required: ["prompts", "design_note"] } };
 const FEEDBACK: Record<string, string> = process.env.AP_FEEDBACK_FILE && existsSync(process.env.AP_FEEDBACK_FILE) ? JSON.parse(readFileSync(process.env.AP_FEEDBACK_FILE, "utf-8")) : {};
 function wordReq(c: Cell, pack: Json, id: string): BatchReq {
-  const fbText = FEEDBACK[id] ? `\n\nREPAIR (single attempt): the previous wording of this item was rejected for the reasons below. Rewrite ONLY the failing wording; every number, symbol, $...$ block, option and key is fixed by code and must stay exactly as given.\nREVIEW FEEDBACK:\n${FEEDBACK[id]}` : "";
+  const fbText = FEEDBACK[id] ? `\n\nREPAIR (single attempt): the previous wording of this item was rejected for the reasons below. Rewrite ONLY the failing wording (the stem and/or, if the feedback concerns the explanation, a rewritten explanation_en that shows the worked computation for the key and why each distractor is wrong); every number, symbol, $...$ block, option and key is fixed by code and must stay exactly as given. Submit stem and explanation_en.\nREVIEW FEEDBACK:\n${FEEDBACK[id]}` : "";
   const body0 = c.kind === "mc"
     ? `BASE STEM:\n${pack.stem}\n\nSTIMULUS (already shown to the student): ${JSON.stringify(pack.stimulus)}\n\nOPTIONS WITH RATIONALE (do not change options):\n${(pack.options as Json[]).map((o, i) => `${i === pack.key_index ? "KEY" : "WRONG"}: ${o.text} — ${o.why}`).join("\n")}\n\nSubmit via submit_wording.`
     : `BUNDLE: ${pack.title}\nSTIMULUS: ${JSON.stringify(pack.stimulus)}\nPART PROMPTS (keep numbers and math blocks):\n${(pack.parts as Json[]).map((p) => `(${p.label}) ${p.prompt}`).join("\n")}\n\nSubmit via submit_frq_wording with prompts keyed by part label.`;
@@ -140,7 +140,8 @@ function buildCands(): Cand[] {
       const mp = { ...(pack as unknown as McPack) } as McPack;
       let stem = mp.stem; const expl = structuredExplanation(pack);
       if (polished && typeof polished.stem === "string" && typeof polished.explanation_en === "string" && wordingPreserves(mp.stem, polished.stem).length === 0) { stem = polished.stem; wording = "llm"; }
-      item = { ...mp, stem, explanation_en: expl };
+      let explF = expl; if (process.env.AP_REPAIR && polished && typeof polished.explanation_en === "string" && polished.explanation_en.length > 60 && wordingPreserves(expl, polished.explanation_en).length === 0) explF = polished.explanation_en as string; // 수선 모드: 해설 문장 재작성 허용(수치 보존 확인)
+      item = { ...mp, stem, explanation_en: explF };
     } else {
       const fp = JSON.parse(JSON.stringify(pack)) as FrqPack;
       if (polished && polished.prompts && typeof polished.prompts === "object") {
