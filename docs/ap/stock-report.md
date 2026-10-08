@@ -5,7 +5,7 @@
 ## 정의
 
 - **검증 상태**(validation): `rejected` / `needs_revalidation`(최신 게이트 이전 통과) / `auto_passed`(최신 게이트 통과) / `exact_duplicate`(완전 중복, canonical 에 연결·재고 제외).
-- **전문가 상태**(expert): `none` / `pending`(첫 샘플 대상: 최신 게이트 통과 + 샘플 선택분) / `approved` / `rejected` / `waived`. **공개 가능(publishable) = auto_passed AND (approved 또는 waived)** — 현재 승인 0이므로 공개 가능 0.
+- **게시 후 검수 상태**(expert_status): `unreviewed` / `in_review` / `approved` / `issues_reported` — 검수 환경에 게시된 뒤 기존 오류 신고 흐름과 표본 승인으로 추적하며 **게시를 막지 않는다**. **검수 환경 게시 가능 = auto_passed + 그래프 렌더링 + 학생 화면 검증**(현재 둘 다 미완료이므로 0). 프로덕션(launch)은 별도 게이트: 승인 서명 또는 검수 기간 종료 + 미해결 신고 0.
 - **선택**(selectedForSample)은 별개 속성이며 재고 여부와 무관하다. `legacy reserve`는 샘플에서 선택되지 않은 통과분(과거 표기)이다.
 - **문항군(item family)**: 같은 원형·토픽의 숫자/표현 변형 또는 문장 3-gram 유사(>0.8). **반려하지 않으며** 재고에 모두 남기되 군으로 묶는다. **완전 중복(exact)만** 제외한다.
 - **칸**(cell) = 토픽 × 주 스킬 × 구조 × 계산기. 칸 채움 = 최신 게이트 통과 문항군별 min(문항 수, 2). 낡은 통과·숫자 변형만으로는 칸이 채워지지 않는다.
@@ -13,7 +13,7 @@
 
 ## 1. 과목 × 종류별 집계
 
-| 과목 | 종류 | 전체 행 | 반려 | 완전 중복 제거 | 문항군 수 | 재검증 필요 | **최신 게이트 자동 통과** | 전문가 승인 | **공개 가능** | 샘플 선택 | legacy reserve | AB 공유 사용 가능 |
+| 과목 | 종류 | 전체 행 | 반려 | 완전 중복 제거 | 문항군 수 | 재검증 필요 | **최신 게이트 자동 통과** | 게시 후 승인 | **검수 환경 게시 가능** | 샘플 선택 | legacy reserve | AB 공유 사용 가능 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | ap_biology | FRQ | 76 | 73 | 0 | 3 | 3 | **0** | 0 | **0** | 3 | 0 |  |
 | ap_biology | MC | 124 | 70 | 0 | 54 | 54 | **0** | 0 | **0** | 24 | 30 |  |
@@ -120,4 +120,15 @@
 - ap_calculus_ab: 관측된 칸 59개(토픽×스킬×구조×계산기) — 채움 1: 6, 2: 28, 3 이상: 0. 한 문항군이 3개 이상 문항을 가진 칸: 19(변형이 많아도 채움은 문항군당 2개까지만 인정).
 - ap_calculus_bc: 관측된 칸 77개(토픽×스킬×구조×계산기) — 채움 1: 8, 2: 44, 3 이상: 0. 한 문항군이 3개 이상 문항을 가진 칸: 25(변형이 많아도 채움은 문항군당 2개까지만 인정).
 - 위 '부족' 표의 토픽만 다음 생성 대상(칸 단위 1개 후보 → 실패한 칸에만 추가). 구조(FRQ 유형·세트)는 템플릿이 없는 유형이 먼저 부족(입자 운동·음함수 관련 변화율 FRQ, Bio·Micro 전부).
+
+
+## 5. 현재(783행) vs 이전 적재(767행) 대조와 DB 일치
+
+- **현재 배치 = 새 형식 행 783**(런1 576 + 런2 136 + 런2bc 71; 위 표의 전체 행 합). **이전 적재 = 구 형식 행 767**(삭제하지 않고 `is_current=false` 로 표시). 이전 적재의 내역은 파일이 아니라 DB 에만 있으므로 아래 SQL 로 조회한다:
+```sql
+select batch, is_current, subject, kind, rows, unique_items, item_families, auto_passed, needs_revalidation, rejected, exact_duplicates from ap_stock_by_batch_v order by is_current desc, subject, kind;
+```
+- 현재 집계의 단일 출처는 DB 뷰 `ap_stock_summary_v`(현재 배치만). 파일 집계와의 일치는 `scripts/ap-generation/stock-consistency.ts`(읽기 전용)로 점검한다.
+- **로컬 검증(트랜잭션 후 롤백)**: 783행을 로컬 DB 에 적재한 뒤 `ap_stock_summary_v` 를 조회해 위 표 8행(과목×종류)의 전체 행·반려·완전 중복·재검증 필요·자동 통과·고유 문항·문항군이 **파일 집계와 전부 일치**함을 확인했다(총 783행).
+- 표식 방법: `select * from ap_mark_load_batches('<cutoff>', 767, 783, false);`(dry-run) → 건수 일치 시 `true`. 상세: `docs/ap/publication-flow.md` §표식.
 

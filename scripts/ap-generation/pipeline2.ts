@@ -7,6 +7,8 @@ import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { loadEnvLocal } from "../keywords/db";
+import { createHash } from "node:crypto";
+import { POLICY, manifestIssues, type RunManifest } from "../../lib/ap-generation/pipeline-policy";
 import { gateGuideFrq, gateGuideMc } from "../../lib/ap-generation/guide-gates";
 import { guideReviewRules as _grr, guideWordingRules as _gwr } from "../../lib/ap-generation/subjects/calc-ab";
 import { GUIDES } from "../../lib/ap-generation/subjects/calc-bc";
@@ -18,6 +20,7 @@ const stage = process.argv[2];
 const RUN = arg("--run") ?? "run2";
 const SUBJECT = arg("--subject") ?? "ap_calculus_ab";
 const SYNC = process.argv.includes("--sync");
+const SEED0 = Number(arg("--seed0") ?? process.env.AP_SEED0 ?? 0); // 새 시드 구간(이전 튜닝 후보와 겹치지 않게; 비교 실험은 1000 이상)
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027");
 const DIR = path.join(ROOT, RUN);
 mkdirSync(DIR, { recursive: true });
@@ -56,6 +59,15 @@ type Cand = { key: string; cellId: string; archetype: string; kind: "mc" | "frq_
 
 const SEEDS_PER_CELL = Number(process.env.AP_MC_CANDS ?? 4);
 const FRQ_CANDS = Number(process.env.AP_FRQ_CANDS ?? 4);
+function writeManifest(extra: Partial<RunManifest> = {}) {
+  const sha = (t: string) => createHash("sha1").update(t).digest("hex").slice(0, 12);
+  const commit = spawnSync("git", ["rev-parse", "--short", "HEAD"], { encoding: "utf-8" }).stdout.trim();
+  const dirty = spawnSync("git", ["status", "--porcelain", "scripts/ap-generation", "lib/ap-generation"], { encoding: "utf-8" }).stdout.trim() ? "+dirty" : "";
+  const m: RunManifest = { run: RUN, subject: SUBJECT, generatorCommit: commit + dirty, gateVersion: "v2-code-first-final-2026-10-08", reviewerPromptHash: sha(REVIEW_SYS + JSON.stringify(reviewTool)), difficultyPromptHash: sha(DIFF_SYS + JSON.stringify(diffTool)),
+    models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
+  const issues = manifestIssues(m); if (issues.length) throw new Error(issues.join(", "));
+  writeFileSync(path.join(DIR, POLICY.manifestFile), JSON.stringify(m, null, 1));
+}
 function planStage() {
   const lst = py(["list", SUBJECT === "ap_calculus_bc" ? "bc" : "ab"]) as { mc: string[]; frq: string[] };
   const cells: Cell[] = [];
@@ -69,7 +81,7 @@ function planStage() {
     cells.push({ cellId: `${SUBJECT}-f${String(i + 1).padStart(2, "0")}`, archetype: a, kind: "frq_bundle", unitCode: unitOf.get(p.topic as string) ?? "", topic: p.topic as string, skill: p.skill as string, calculator: p.calculator as string, candidates: FRQ_CANDS, extraTopics: p.extra_topics as string[], template: p.template as string });
   });
   writeFileSync(path.join(DIR, "cells.json"), JSON.stringify(cells, null, 1));
-  baseline();
+  baseline(); writeManifest();
   const byUnit = cells.filter((c) => c.kind === "mc").reduce<Record<string, number>>((m, c) => ((m[c.unitCode] = (m[c.unitCode] ?? 0) + 1), m), {});
   const calc = cells.filter((c) => c.kind === "mc" && c.calculator === "required").length;
   console.log(`plan: MC 칸 ${cells.filter((c) => c.kind === "mc").length}(단원별 ${JSON.stringify(byUnit)}, 계산기 필요 ${calc}), FRQ 칸 ${cells.filter((c) => c.kind !== "mc").length}, 기준 지출 $${baseline().toFixed(2)}, 신규 상한 $${CAP_NEW}`);
@@ -81,7 +93,7 @@ function packsFile() { return path.join(DIR, "packs.json"); }
 function genPacks() {
   const out: Record<string, Json[]> = existsSync(packsFile()) ? readJson<Record<string, Json[]>>(packsFile()) : {};
   let changed = false;
-  for (const c of cells()) if (!out[c.cellId]) { out[c.cellId] = py(["batch", c.archetype, String(c.candidates), "0"]) as Json[]; changed = true; }
+  for (const c of cells()) if (!out[c.cellId]) { out[c.cellId] = py(["batch", c.archetype, String(c.candidates), String(SEED0)]) as Json[]; changed = true; }
   if (changed) writeFileSync(packsFile(), JSON.stringify(out));
   return out;
 }
@@ -145,7 +157,7 @@ function checkStage() {
   const out: Record<string, { reasons: string[]; wording: string }> = {};
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
-    const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet), ...calibrateFrq(c.item as FrqPack), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
+    const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology", topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
     if (!c.polished) reasons.push("wording_missing");
     out[c.key] = { reasons, wording: c.wording };
     void cell;
@@ -194,7 +206,7 @@ function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: st
 
 const REVIEW_SYS = `You are a strict AP content reviewer. NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge the following five acceptance criteria and set instant_reject for the listed conditions:
 (1) scope/skill fit to the given official topic and skill (an item may use prerequisite skills but its dominant demand must be the target topic/skill; no content from later units); (2) key and scoring: the key is the unique defensible answer given the stem and stimulus; FRQ rubric rows are consistent, alternatives valid; (3) stimulus/expression completeness: the stimulus "data" object is the machine-readable specification a figure/table will be rendered from; judge completeness of the DATA and clarity of wording (US English); (4) distractors encode distinct, realistic misconceptions, no length/format giveaway, and the explanation explains each wrong option; (5) exam suitability: time, reading and calculator load typical of the AP exam, no needless arithmetic, calculator designation consistent.
-REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 seconds, four options, a stimulus only when it is needed, options that are values or short parallel expressions, one dominant skill; FRQ 9 points = 3-6 parts whose point values vary from 1 to 5 (for example 1/1/2/5 or 2/2/3/2), rows split into setup/answer/justification/units with explicit conditions for theorems, calculators only where numerical integration/solving is needed. Set matches_reference_pattern false only for material deviations (not for correct items with unusual but valid wording). Non-calculator items must have exact-form options. Do not fail an item for being generic or for a context that is a standard textbook scenario.
+REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 seconds, four options, a stimulus only when it is needed, options that are values or short parallel expressions, one dominant skill; FRQ 9 points = 3-6 parts whose point values vary from 1 to 5 (for example 1/1/2/5 or 2/2/3/2), rows split into setup/answer/justification/units with explicit conditions for theorems, calculators only where numerical integration/solving is needed. For free-response bundles: each PART has its own assessed skill and topic; judge each part against ITS OWN skill and rubric rows, never against one bundle-level skill (official FRQs mix skills across parts; the bundle's representative skill is only a label). Official point/time grain to respect: Calculus FRQ = 9 points (parts of 1-5 points) in about 15 minutes; Biology long FRQ = 9 points (parts of 1-4 points, a 1-point calculation or reading part is normal) in about 24 minutes; Biology short FRQ = exactly four 1-point parts in about 10 minutes. Do not fail an item for these official grains. Set matches_reference_pattern false only for material deviations (not for correct items with unusual but valid wording). Non-calculator items must have exact-form options. Do not fail an item for being generic or for a context that is a standard textbook scenario.
 Agreement of an independent solver is supporting evidence only. Fail when unsure.`;
 const reviewTool = { name: "submit_review", description: "Submit the review.", input_schema: { type: "object", properties: {
   scope_skill: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] }, key_scoring: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] },

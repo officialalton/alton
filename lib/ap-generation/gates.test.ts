@@ -87,7 +87,7 @@ d("code-generated archetypes pass the gates (Calculus AB and BC)", () => {
   }, 60000);
   it("every FRQ pack passes the FRQ gates", () => {
     const skills = new Set(calcBcGuide.skills.map((s) => s.code)); const failures: string[] = [];
-    for (const [name, packs] of Object.entries(all)) { if (!name.startsWith("frq_") || name === "frq_bio_investigation") continue; for (const p of packs) { const r = [...gateFrq("ap_calculus_ab", p as unknown as FrqPack, skills), ...gateGuideFrq(calcBcGuide, p as unknown as FrqPack)]; if (r.length) failures.push(`${name}: ${r.join(",")}`); } }
+    for (const [name, packs] of Object.entries(all)) { if (!name.startsWith("frq_") || name.startsWith("frq_bio")) continue; for (const p of packs) { const r = [...gateFrq("ap_calculus_ab", p as unknown as FrqPack, skills), ...gateGuideFrq(calcBcGuide, p as unknown as FrqPack)]; if (r.length) failures.push(`${name}: ${r.join(",")}`); } }
     expect(failures).toEqual([]);
   }, 60000);
 });
@@ -126,5 +126,39 @@ describe("generation guides stay consistent with code and docs", () => {
     const abIds = new Set(calcAbGuide.archetypes.map((a) => a.id));
     for (const a of calcBcGuide.archetypes.filter((x) => !abIds.has(x.id))) expect(doc("calc-bc.md"), a.id).toContain(a.id);
     for (const a of calcAbGuide.archetypes) expect(calcAbGuide.skills.find((s) => s.code === a.skill)?.mc, a.id).toBe(true);
+  });
+});
+
+import { calibrateFrq } from "./gates";
+d("Biology FRQ: per-part skill/topic/rubric, representative skill vs part skills, official grain", () => {
+  const out = run("registry.py", undefined, ["batch", "frq_bio_investigation", "6", "0"]); const out2 = run("registry.py", undefined, ["batch", "frq_bio_data_short", "6", "0"]);
+  const packs = [...(JSON.parse(out.stdout) as FrqPack[]), ...(JSON.parse(out2.stdout) as FrqPack[])];
+  const bioSkills = new Set(["1.A", "3.B", "3.C", "4.A", "4.B", "5.A", "5.B", "6.B"]); const topics = new Set(["8.1", "3.2", "3.5", "3.7"]);
+  it("code-first short FRQs have four 1-point parts with own skill, topic and rubric row, and pass the gates", () => {
+    expect(packs.length).toBe(12);
+    for (const p of packs) { expect(p.parts).toHaveLength(4); expect(p.parts.every((x) => x.points === 1 && x.skill_codes.length && x.topic_codes?.length && x.rubric_rows.length === 1)).toBe(true);
+      expect(gateFrq("ap_biology", p, bioSkills, { requirePartTopics: true, topics })).toEqual([]); expect(calibrateFrq(p, "ap_biology")).toEqual([]); }
+  });
+  it("part skills differ from the bundle representative skill (allowed) but the representative skill must be assessed somewhere", () => {
+    const p = packs[0]; expect(new Set(p.parts.flatMap((x) => x.skill_codes)).size).toBeGreaterThan(1);
+    expect(gateFrq("ap_biology", { ...p, representative_skill: "2.A" }, new Set([...bioSkills, "2.A"]), { requirePartTopics: true, topics }).join()).toMatch(/representative_skill_not_assessed/);
+  });
+  it("rejects parts without topic when per-part topics are required, or with an unknown topic", () => {
+    const p = JSON.parse(JSON.stringify(packs[0])) as FrqPack; delete p.parts[0].topic_codes; p.parts[1].topic_codes = ["99.9"];
+    const r = gateFrq("ap_biology", p, bioSkills, { requirePartTopics: true, topics }).join(); expect(r).toMatch(/part_A_no_topic/); expect(r).toMatch(/unknown_topic_99.9/);
+  });
+  it("official point/time grain: short = four 1-point parts ~10 min is VALID; long 9 points ~22-24 min is VALID; a 3-part short is not", () => {
+    expect(calibrateFrq(packs[0], "ap_biology")).toEqual([]); const long = { ...packs[0], total_points: 9, est_minutes: 22, parts: [2, 3, 2, 2].map((n, i) => ({ ...packs[0].parts[0], label: "ABCD"[i], points: n, rubric_rows: Array.from({ length: n }, (_, k) => ({ ...packs[0].parts[0].rubric_rows[0], row_id: `r${i}${k}`, points: 1 })) })) };
+    expect(calibrateFrq(long as FrqPack, "ap_biology")).toEqual([]); expect(calibrateFrq({ ...packs[0], parts: packs[0].parts.slice(0, 3) }, "ap_biology").join()).toMatch(/part_count/);
+  });
+  it("code checks agree with independent Bio checker: percent change and ±2SE overlap computed by the generator", () => {
+    const bio = (o: unknown) => JSON.parse(run("bio_checks.py", JSON.stringify(o)).stdout) as { ok: boolean };
+    for (const p of packs.filter((x) => x.archetype === "frq_bio_data_short")) {
+      const rows = (p.stimulus.data as { rows: string[][] }).rows; const means = rows.map((r) => Number(r[1].split(" ± ")[0])); const se2 = rows.map((r) => Number(r[1].split(" ± ")[1]));
+      const pct = Number(p.parts[1].model_answer.match(/= (-?[\d.]+)%/)![1]);
+      expect(bio({ kind: "percent_change", params: { old: means[0], new: means[1] }, claim: { pct }, tol: 0.06 }).ok).toBe(true);
+      const ov = bio({ kind: "overlap_claim", params: { m1: means[0], se1: se2[0] / 2, m2: means[1], se2: se2[1] / 2 }, claim: {} });
+      expect(ov).toBeTruthy();
+    }
   });
 });

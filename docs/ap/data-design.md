@@ -101,3 +101,9 @@
 - 검증(`review_state`) / 전문가(`expert_status`) / 선택(`used_in_sample`)을 분리한다. 최신 게이트(`gate_version`) 이전 통과는 `needs_revalidation`, 이력은 `ap_candidate_review_history`.
 - 완전 중복(exact)만 `exact_duplicate`로 canonical 에 연결(재고 제외). 숫자·표현 변형은 같은 `item_family_id`(문항군)로 묶되 반려하지 않는다.
 - `ap_stock_cells` = 토픽 × 주 스킬 × 구조 × 계산기. `adopted` = 최신 게이트 통과 고유 문항 수, `effective` = 문항군별 min(문항 수, 2) 합, 부족 = `ap_stock_targets.target` − effective(`ap_stock_shortfall_v`). 갱신 함수 `ap_refresh_stock_cells()`.
+
+
+## 갱신(2026-10-08)
+- 게시 가능 정의 변경: 전문가 승인은 사후 검수. `review_env_ready` = 최신 자동 게이트 통과 + 렌더 검증 + 학생 화면 검증 (`publication-flow.md`, 마이그레이션 394).
+- 생산 구조 원칙(후보 1개 우선, 결정적 검사→LLM 검토, 독립 계산, 수선 1회, 반복 실패 시 템플릿 중단, 분모=첫 후보, `run_manifest.json`) 승인·`lib/ap-generation/pipeline-policy.ts` 반영.
+- $30 단일 실험안은 폐기하고 `experiment-plan.md`의 단계별 계획으로 대체. 비용 정산 `cost-reconciliation.md`.
