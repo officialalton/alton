@@ -25,8 +25,10 @@
 ## 2. Calculus BC (V)
 AB 스킬 동일. 추가 단원 U9(매개변수·극좌표·벡터), U10(무한급수, 15–20%). BC 전용 스킬 초점: 3.C(수렴 검정 조건 확인), 3.D(검정 적용), 1.F(오차 한계). MC는 AB 공통 핵심(U1–8, 비중 낮아짐) + BC 개념. 구조·응답·채점은 AB와 같으며 급수는 `3.C/3.D` 중심 shared-stimulus 또는 standalone. FRQ 유형: AB와 공통 3개 + BC 3개(매개변수/극/벡터, 급수). 난이도: AB 문항을 숫자만 복잡하게 바꾼 것은 반려.
 
-## 3. Statistics (N — 2027 신 CED 확인 필요)
-2027부터 5단원(수집·요약, 설계·확률, 비율 추론, 평균 추론, 회귀), 공식 용어가 "skills"에서 "practices"로 바뀜(출처: AP Central future-revisions). 코드 체계는 신 CED 공개 후 전사. 구조: MC 42문항 4지선다 + **확률·회귀 3문항 세트 2개**(shared-stimulus 필수 지원), FRQ 4개(각 10점; 실습 조합: 1–2, 3–4, 추론, 2–4 복합). 응답: select/explain/calculate(공식·결론 서술). 채점: MC exact, FRQ partial(방법 선택·조건 확인·계산·맥락 결론 행). 삭제 주제 생성 금지 목록: 기하분포, 카이제곱 적합도, 기울기 추론(구 Unit 9), 확률변수 결합, 비선형성 분석.
+## 3. Statistics (V — 2027 신 CED 확인, 현재 게시본 © 2026)
+- 5단원: U1 Exploring One-Variable Data and Collecting Data(MC 20–30%), U2 Probability, Random Variables, and Probability Distributions(15–25), U3 Inference for Categorical Data: Proportions(15–25), U4 Inference for Quantitative Data: Means(10–20), U5 Regression Analysis(10–20).
+- 스킬(Statistical Practices 1~4): P1 Formulate Questions(1.A 유효한 탐구 질문) / P2 Collect Data(2.A 정보 식별, 2.B 수집 방법 정당화, 2.C 추론 방법 식별, 2.D 오류 유형·관계 식별, 2.E 귀무·대립가설 식별) / P3 Analyze Data(3.A 표·그래프 작성, 3.B 요약 통계·상대 위치·예측값, 3.C 기대 개수·확률·구간, 3.D 확률분포의 평균·표준편차, 3.E 추론 결과 계산) / P4 Interpret Results(4.A 표현·요약 비교 서술, 4.B 계산 기반 주장 정당화, 4.C 분포·상대 위치 서술, 4.D 계산·결과 해석, 4.E 조건 확인으로 방법 정당화, 4.F 추론 결과 해석, 4.G 추론 결과 기반 주장 정당화). MC 비중: P1 5–10%, P2 20–30%, P3 25–35%, P4 25–35%.
+- 구조: MC 42(4지선다, 확률·회귀 3문항 세트 2개), FRQ 4(각 10점; CED 샘플 FRQ1: P1·P2 중심, FRQ2: 1~2 단원 분석, FRQ3: 추론+조건 확인, FRQ4: 복합 추론). 응답: select/calculate/explain. 채점: MC exact, FRQ partial(행: 방법 선택·조건 확인·계산·맥락 결론). 삭제 주제 생성 금지: 기하분포, 카이제곱 적합도, 기울기 추론, 확률변수 결합, 비선형성 분석. CED 샘플 MC 24개 정답표에 스킬·LO·EK가 있어 참조 분석 대상.
 
 ## 4. Biology (V)
 스킬(Science Practices): SP1 Concept Explanation(1.A 서술, 1.B 설명, 1.C 응용 맥락 설명) / SP2 Visual Representations(2.A 특성 서술, 2.B 관계 설명, 2.C 큰 원리 연결, 2.D 관계 표현) / SP3 Questions and Methods(3.A 검증 가능한 질문, 3.B 귀무가설·예측, 3.C 절차(변수·대조), 3.D 새 조사 제안) / SP4 Representing and Describing Data(4.A 그래프 작성, 4.B 표·그래프 서술) / SP5 Statistical Tests and Data Analysis(5.A 계산, 5.B 신뢰구간·오차막대, 5.C 카이제곱, 5.D 가설 평가) / SP6 Argumentation(6.A 주장, 6.B 근거, 6.C 추론, 6.D 결과-개념 연결, 6.E 예측). 단원 비중: U1 8–11, U2 10–13, U3 12–16, U4 10–15, U5 8–11, U6 12–16, U7 13–20, U8 10–15.
@@ -42,7 +44,7 @@ AB 스킬 동일. 추가 단원 U9(매개변수·극좌표·벡터), U10(무한�
 ## 5. Chemistry (N)
 스킬 6범주(공식명): Models and Representations, Question and Method, Representing Data and Phenomena, Model Analysis, Mathematical Routines, Argumentation. 9단원. MC 60(단독+세트, 입자 그림·표·그래프), FRQ 7(긴 3×10점, 짧은 4×4점). 응답: select/calculate/explain/graph(그리기 포함). 채점: partial(단위·유효숫자 행 포함). 난이도: 단위·조건 오류, 산술만 있는 문항 반려.
 
-## 6. Physics 1 (N, 구조는 V)
+## 6. Physics 1 (N, 구조는 V; 개정 CED © 2026 게시, MC 샘플 15개에 스킬 표 있음 → 코드 전사 후 V로 승격)
 스킬: 공식 Science Practices(표현 생성, 수학 루틴, 과학적 질문, 데이터 분석, 논증)이며 코드 전사 필요. 8단원(운동학, 힘, 일·에너지, 운동량, 토크, 회전 에너지·운동량, 진동, 유체). MC 42(단독 + 자료 세트), FRQ 4(수학 루틴 / 표현 변환 / 실험 설계·분석 / 정성·정량 변환). 응답: select/calculate/explain/graph(그래프·자유물체도). 채점: partial(식·대입·단위·추론 행).
 
 ## 7. Computer Science A (N)

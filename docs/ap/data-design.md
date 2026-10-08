@@ -79,3 +79,11 @@
 
 ## 12. 보고 지표(관리자 대시보드·수율 보고)
 후보 수·채택 수·**수율**, 반려 사유 분포, **채택 1건당 비용·호출 수**, 전문가 검수 소요 시간, 오류 건수(정답 오류·자료 오류 분리), 재고(단원/스킬/구조별), 난이도 근거 분포(잠정/교사/학생 데이터), **중복 비율**(문항·번들·유사 변형). 수율 25%는 효율 점검(품질 기준과 독립): 기준을 낮춰 맞추지 않는다. 난이도는 학생 데이터가 충분해질 때까지 `provisional` 유지, 보정은 `difficulty_evidence`에 근거를 쌓는 방식.
+
+---
+# Phase 1c 갱신: FRQ 루브릭 행 스키마 (공개 채점 가이드 분석 반영)
+`ap_frq_rubric_rows`(기존 §9)에 추가:
+- `requires_row_id`(선행 행; 의존 사슬), `follow_through`(앞 파트 오답 이월 허용 규칙), `requires_both`(claim+explanation 동시 충족), `requires_numbers`(수치 인용 필수), `numeric_tolerance`(허용 범위 jsonb), `rounding_rule`(예: 문항당 최대 1점 감점), `required_elements[]` + `optional_phrases[]`(필수·선택 어구 분리), `graph_elements[]`(그래프 문항 요소별 행), `units_row bool`.
+- `skill_code_source` enum(`official_ced`, `analyst_mapped`): 공개 SG에 스킬 코드가 없으므로 FRQ 행은 기본 `analyst_mapped`, 전문가 검수에서 확인.
+- `reference_pattern_id`: 구조 템플릿(Calc 6유형, Micro 8~10유형, Bio 짧은 4유형) 참조(공식 문항 텍스트 아님).
+- 번들 `stimulus_shared_across_parts bool` + 파트 간 의존(`part_inputs_from`): Micro 그래프 재사용·Calc 앞 파트 값 이월.
