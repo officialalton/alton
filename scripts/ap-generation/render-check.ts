@@ -5,6 +5,7 @@
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { gateCandidate, type GateResult } from "../../lib/ap-figures/gate";
+import { itemContentHash } from "../../lib/ap-generation/verify-guard";
 
 const OUT = path.resolve(process.cwd(), "data/ap/render-check");
 const items = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as Parameters<typeof gateCandidate>[0][];
@@ -13,6 +14,8 @@ const safe = (s: string) => s.replace(/[^A-Za-z0-9_.-]+/g, "_");
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 const results: GateResult[] = items.map((c) => gateCandidate(c));
+// 렌더한 문항 버전의 내용 해시(자료+선지+정답). mark-verified.ts 가 DB 후보와 대조한다.
+const hashByKey = new Map(items.map((c) => { const k = (c as { stockKey?: string; candidateKey: string }).stockKey ?? (c as { candidateKey: string }).candidateKey; return [k, itemContentHash((c as { payload: Record<string, unknown> }).payload)] as const; }));
 
 const shell = (title: string, body: string) => `<!doctype html><meta charset="utf-8"><title>${title}</title><body style="font-family:Georgia,serif;margin:16px;background:#fff;color:#111">${body}</body>`;
 for (const r of results) {
@@ -53,7 +56,7 @@ const report = {
   figureNeed: needCounts,
   errorCodes: failCodes,
   warnCodes,
-  results: results.map((r) => ({ key: r.key, subject: r.subject, kind: r.kind, validation: r.validation, stimKind: r.stimKind, renderType: r.renderType, need: r.need, needReason: r.needReason, status: r.status, issues: r.issues.filter((i) => i.level !== "info"), alt: r.alt })),
+  results: results.map((r) => ({ key: r.key, contentHash: hashByKey.get(r.key), subject: r.subject, kind: r.kind, validation: r.validation, stimKind: r.stimKind, renderType: r.renderType, need: r.need, needReason: r.needReason, status: r.status, issues: r.issues.filter((i) => i.level !== "info"), alt: r.alt })),
 };
 writeFileSync(path.join(OUT, "report.json"), JSON.stringify(report, null, 1));
 

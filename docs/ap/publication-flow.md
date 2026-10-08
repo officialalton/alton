@@ -74,3 +74,7 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
     3. 마이그레이션 403 적용 후: `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/s1a-items.json --batch s1a-ab-2026-10-09 --supplement` (dry-run) → 같은 명령에 `--execute`.
   - 배치 의미: `--supplement` 배치 행은 `is_current=false`(기본 현재 배치는 `current-stock-2026-10-08` 하나로 유지), 이 배치의 후보 행은 `is_current=true` 로 적재되어 현재 재고 뷰·부족분 계산에 포함된다. 기본 현재 배치 표식(`ap_mark_load_batches`)에는 영향이 없다.
   - 기준선 783행도 변경 사항(파서 재판정 18건 확정, 결함 플래그)이 있으므로 `stock.ts` 후 `import-candidates.ts`(기본 배치)를 다시 실행하면 같은 키로 upsert 된다.
+
+**검증 게이트**: `render_verified` 는 `lib/ap-figures/gate.ts`(결정적 검사, `scripts/ap-generation/render-check.ts`·`mark-verified.ts --render`), `screen_verified` 는 학생 화면 확인 증거가 있을 때만 `mark-verified.ts --screen --evidence`.
+
+**검증 기록 실행 범위(2026-10-08 오너 결정)**: `mark-verified.ts` 는 기본 dry-run, 대상은 로컬(기본) 또는 비프로덕션 `worpsqwqgnspddnrtnvq` 뿐이며 후자는 `--target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq` 가 모두 있어야 한다(그 외 호스트·프로덕션 거부, 키는 환경변수에서만 읽고 출력하지 않음). `--render` 는 렌더 보고서(`data/ap/render-check/report.json`)의 `contentHash`(자료+선지+정답)가 DB 후보 payload 해시와 같은 후보만 기록하고 불일치는 건너뛴다. `--screen` 증거 파일은 `entries[{candidate_key, viewport, screenshot(저장소 기준 경로, 실존 필수), timestamp, checker}]` 를 갖춰야 하며 없으면 기록하지 않는다. 증거 스크린샷: `docs/ap/screen-evidence/`.

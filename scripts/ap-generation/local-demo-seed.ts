@@ -23,9 +23,9 @@ async function seed() {
   const state: { run: string; students: Record<string, string>; sets: string[] } = { run: RUN, students: {}, sets: [] };
   const admin = psql(`select id from profiles where role = 'admin' limit 1;`);
   const subj: Record<string, string> = {};
-  for (const [code, name] of Object.entries(SUBJECTS)) subj[code] = psql(`insert into subjects (name, ap_subject_code) values (${q(`${RUN} ${name}`)}, ${q(code)}) returning id;`);
+  for (const [code, name] of Object.entries(SUBJECTS)) subj[code] = psql(`select id from subjects where ap_subject_code = ${q(code)};`) || psql(`insert into subjects (name, ap_subject_code) values (${q(`${RUN} ${name}`)}, ${q(code)}) returning id;`); // 커리큘럼 시드가 이미 만든 과목은 재사용(정리 때 지우지 않음)
   const pick = (code: string, kind: string, pred: (c: typeof items[number]) => boolean, n: number) =>
-    items.filter((c) => (c.validation === "auto_passed" || c.validation === "needs_revalidation") && c.apSubjectCode === code && c.kind === kind && pred(c) && gateCandidate(c).status !== "fail").slice(0, n);
+    items.filter((c) => (c.validation === "auto_passed" || c.validation === "needs_revalidation") && c.apSubjectCode === code && c.kind === kind && pred(c) && gateCandidate(c).status !== "fail").sort((a, b) => Number(b.validation === "auto_passed") - Number(a.validation === "auto_passed")).slice(0, n); // 검증 기록 대상(auto_passed)을 먼저 뽑는다
   const hasFig = (renderType: RegExp) => (c: typeof items[number]) => renderType.test(gateCandidate(c).renderType);
   const chosen = [
     ...pick("ap_calculus_ab", "mc", hasFig(/ap_graph/), 2), ...pick("ap_calculus_ab", "mc", hasFig(/^ap_table/), 1), ...pick("ap_calculus_ab", "mc", (c) => gateCandidate(c).need === "text_only", 1),

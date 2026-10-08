@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ap-screen-evidence/v1",
+  "description": "AP 학생 화면 검증 증거. 항목은 (후보, 뷰포트) 한 건. 후보마다 모바일(<=430px)과 데스크톱(>=1024px) 항목이 모두 있어야 하고, 필수 점검이 전부 pass(허용된 na 는 사유 필요)여야 mark-verified --screen 이 기록한다. 스크린샷 존재만으로는 증거가 아니다.",
+  "type": "object",
+  "required": ["schema", "entries"],
+  "properties": {
+    "schema": { "const": "ap-screen-evidence/v1" },
+    "generator": { "type": "string", "description": "playwright(scripts/ap-generation/screen-evidence.ts) 또는 manual" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "entries": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["candidate_key", "content_hash", "kind", "viewport", "screenshot", "timestamp", "checker", "checks"],
+        "properties": {
+          "candidate_key": { "type": "string" },
+          "content_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "render-check 보고서·DB payload 와 같은 sha256(자료+본문+선지+정답+FRQ 파트). 현재 DB 후보 해시와 다르면 거부." },
+          "problem_version_id": { "type": "string", "description": "화면에서 확인한 문제 버전(있으면 기록)" },
+          "kind": { "enum": ["mc", "frq_bundle"] },
+          "viewport": { "type": "string", "pattern": "^\\d+x\\d+$" },
+          "screenshot": { "type": "string", "description": "저장소 루트 기준 경로, 파일 실존 필수" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "checker": { "type": "string" },
+          "checks": {
+            "type": "object",
+            "required": ["options_visible", "figure_rendered", "no_clipping", "no_answer_before_submit", "frq_input_works"],
+            "additionalProperties": { "type": "object", "required": ["result"], "properties": { "result": { "enum": ["pass", "fail", "na"] }, "note": { "type": "string" } } },
+            "description": "options_visible·no_clipping·no_answer_before_submit 은 na 불가. figure_rendered na 는 note 필수(그림 없는 문항). frq_input_works 는 mc 에서만 na, frq_bundle 은 pass 필수."
+          }
+        }
+      }
+    }
+  }
+}
