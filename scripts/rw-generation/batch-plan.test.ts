@@ -83,6 +83,16 @@ describe("배치 전개·생성 후 검사", () => {
     const r = evaluateGenerated(s, good(s, 260), { ledger: new UsageLedger(), wordAttempt: 1 });
     expect(r).toMatchObject({ action: "reject", stage: "words" });
   });
+  it("정답 누설(질문 대상을 정답만 반복)이면 answer_leak 단계 탈락 — 누설 검사 대상 유형만", () => {
+    const s = spec();
+    const g = good(s);
+    g.question = "Which choice most effectively explains why Mara sets down the keys beside the register?";
+    g.options = ["Mara sets the keys beside the register to signal that she is leaving", "A delivery driver arrived late again and delayed the morning stock check", "The shop plans a sale next month on rugs and some imported lamps", "Customers had asked for longer opening hours throughout this past winter"];
+    g.correct_letter = "A";
+    const v = evaluateGenerated({ ...s, skill: "inferences" }, g, { ledger: new UsageLedger() });
+    expect(v).toMatchObject({ action: "reject", stage: "answer_leak" });
+    expect(evaluateGenerated({ ...s, skill: "words_in_context" }, g, { ledger: new UsageLedger() }).action).not.toBe("reject");
+  });
   it("정답이 가장 긴 선택지면 distractor 단계 탈락, 금지 이름은 diversity 탈락", () => {
     const s = spec();
     const g = good(s);

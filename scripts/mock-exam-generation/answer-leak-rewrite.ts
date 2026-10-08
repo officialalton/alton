@@ -29,7 +29,7 @@ Rewrite ONLY the three distractors. Keep the passage, question, figure, difficul
 Rules for the new distractors (real SAT style):
 1. PARALLEL FRAME, DIFFERENT CONTENT: each distractor opens like the correct option (same kind of subject + verb, same clause order, similar length within ~15%, same kind of content${dataKind ? ": a statement that cites specific values from the table/graph" : ": a claim that echoes the key terms of the question"}).
 2. SAME SUBJECT POOL: at least one distractor must also be about the entity/topic the question names (so the question's subject does not point to the key). Do not let only the key reuse the question's phrases.
-3. WRONG OR IRRELEVANT ON VERIFICATION: ${dataKind ? "each distractor must be checkable against the data and fail: it may cite real values from OTHER rows/columns that do not support the claim, compare the wrong pair, state a true-but-irrelevant fact, or misstate a value (the value must contradict the data). Use only numbers consistent with the table when stating true facts." : "each distractor echoes key words of the claim but is unsupported, contradicted, or off-point against the passage when checked; no distractor may be defensible as correct."}
+3. WRONG OR IRRELEVANT ON VERIFICATION: ${dataKind ? "each distractor must be checkable against the data and fail: cite REAL values (copied exactly from the table/graph, at least one per distractor) from OTHER rows/columns that do not support the claim, compare the wrong pair, or state a true-but-irrelevant fact. Do not invent numbers that are absent from the data." : "each distractor echoes key words of the claim but is unsupported, contradicted, or off-point against the passage when checked; no distractor may be defensible as correct."}
 3b. NOT NEAR-COPIES: the closing/comparison clause must differ among options and from the key (no two options may share more than ~50% of their content words; never copy the key's comparison clause into a distractor). Vary what is compared (different pair, different measure, different direction, different range), do not just swap the entity or a number.
 4. Exactly one correct option. Do not hedge words (always/never/only) as the sole giveaway, no 'both A and B', no repeated options.
 3c. LENGTH LIMITS (hard gate): the correct option has ${kw} words. Every distractor must have between ${Math.max(3, kw - 6)} and ${kw + 4} words, and at least ONE distractor must have ${Math.max(kw - 1, 3)} or more words (the key must not be the longest option by 2+ words). Longest/shortest option ratio <= 1.8.
@@ -48,9 +48,21 @@ ${i.options.map((o, k) => `${LETTER[k]}. ${o}`).join("\n")}
 Return the full 4-option array in the SAME order with the correct option text unchanged at position ${LETTER[i.correctIndex]} (${JSON.stringify(key)}).`;
 }
 
+/** figure 안의 숫자 셀(문자열 아님)과 숫자 문자열 값을 모은다. */
+export function figureNumbersOf(figure: unknown): Set<string> {
+  const out = new Set<string>();
+  const walk = (x: unknown) => {
+    if (typeof x === "number") out.add(String(x));
+    else if (typeof x === "string" && /^-?\d+(?:\.\d+)?$/.test(x.replace(/,/g, "").trim())) out.add(String(Number(x.replace(/,/g, ""))));
+    else if (Array.isArray(x)) x.forEach(walk);
+    else if (x && typeof x === "object") Object.values(x as Record<string, unknown>).forEach(walk);
+  };
+  walk(figure);
+  return out;
+}
 export type CheckReport = { ok: boolean; failures: string[]; notes: string[] };
 /** 코드로 판정 가능한 정적 검사(모델 호출 없음). 단위 테스트 대상. */
-export function staticChecks(i: { skill: string; question: string; original: string[]; options: string[]; correctIndex: number; explanationEn: string; idf: Idf }): CheckReport {
+export function staticChecks(i: { skill: string; question: string; original: string[]; options: string[]; correctIndex: number; explanationEn: string; idf: Idf; /** 정량 근거 유형: 자료(figure)의 숫자 셀 값 문자열 집합 */ figureNumbers?: Set<string> }): CheckReport {
   const failures: string[] = [], notes: string[] = [];
   if (i.options.length !== 4) return { ok: false, failures: ["선택지가 4개가 아님"], notes };
   if (i.options[i.correctIndex] !== i.original[i.correctIndex]) failures.push("정답 선택지 문구가 바뀜");
@@ -58,6 +70,14 @@ export function staticChecks(i: { skill: string; question: string; original: str
   const hanErr = draftBankGateError({ examSystem: "sat_rw", usageScope: "mock_exam", question: i.question, options: i.options, explanationEn: i.explanationEn }); if (hanErr) failures.push(hanErr);
   const lk = analyzeLeak({ question: i.question, options: i.options, correctIndex: i.correctIndex, skill: i.skill }, i.idf);
   if (lk.strong) failures.push(`감지기 강한 신호: ${lk.reasons.join("; ")}`); else if (lk.flagged) notes.push(`감지기 약한 신호: ${lk.reasons.join("; ")}`);
+  if (i.figureNumbers && i.skill === "command_of_evidence_quant") {
+    // quant-evidence-check 와 같은 원칙: 오답의 수치는 임의의 숫자가 아니라 자료의 다른 행·열 값을 인용해야 그럴듯하다.
+    i.options.forEach((o, k) => {
+      if (k === i.correctIndex) return;
+      const nums = (o.replace(/,/g, "").match(/-?\d+(?:\.\d+)?/g) ?? []).map((n) => String(Number(n)));
+      if (!nums.some((n) => i.figureNumbers!.has(n))) failures.push(`오답 ${LETTER[k]} 의 수치가 자료(표·그래프)의 값이 아님`);
+    });
+  }
   const g = distractorGate({ options: i.options, correct_letter: LETTER[i.correctIndex], question: i.question });
   if (!g.ok) failures.push(`오답 게이트: ${g.reasons.join("; ")}`);
   return { ok: failures.length === 0, failures, notes };
@@ -98,7 +118,7 @@ async function main() {
       const tu = msg.content.find((c: any) => c.type === "tool_use") as any;
       const o = tu.input as { options: string[]; explanation_en: string; explanation: string };
       const options = o.options.map((x) => x.trim()); options[ci] = original[ci];
-      const sc = staticChecks({ skill, question: v.question ?? "", original, options, correctIndex: ci, explanationEn: o.explanation_en, idf: idfOf(skill) });
+      const sc = staticChecks({ skill, question: v.question ?? "", original, options, correctIndex: ci, explanationEn: o.explanation_en, idf: idfOf(skill), figureNumbers: figureNumbersOf(v.figure) });
       const rec: any = { problemId: v.problem_id, oldVersionId: v.id, skill, difficulty: v.difficulty, attempt, correctIndex: ci, options, explanation: o.explanation, explanation_en: o.explanation_en, static: sc, ok: false };
       if (!sc.ok) { feedback.length = 0; feedback.push(...sc.failures, `Your last options were: ${JSON.stringify(options)}`); final = rec; continue; }
       // 독립 풀이 2종 + 블라인드 재검사

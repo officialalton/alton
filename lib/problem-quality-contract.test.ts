@@ -213,4 +213,17 @@ describe("오답 부분 수정 대상 분류(2026-09-15)", () => {
     const issues = classifyReviewIssues({ ...base, agrees: false, distractors: [{ ...base.distractors[0], kind: "irrelevant" }, base.distractors[1], base.distractors[2]] }, "hard", "mc");
     expect(issues.hasStructuralIssue).toBe(true);
   });
+
+  it("정답 누설(2026-10-08): 질문이 지목한 대상을 정답만 주어로 삼으면 contract_answer_leak, 오답도 같은 대상을 다루면 통과", () => {
+    const base = {
+      ...wic, skillCode: "command_of_evidence_quant",
+      stimulus: "An art historian compiled data on surviving paintings by four painters.",
+      question: "Which choice most effectively uses data from the table to support the claim that Painter C has the fewest surviving attributed paintings among the four painters studied?",
+      figure: { type: "data", kind: "table", title: "Surviving Paintings", columns: ["Painter", "Paintings"], rows: [["Painter A", 65], ["Painter B", 48], ["Painter C", 12], ["Painter D", 34]] },
+    };
+    const leaky = { ...base, correctIndex: 3, options: ["Painter A has 65 surviving attributed paintings, the most of the four painters studied", "Painter B has 48 surviving attributed paintings, more than both Painter D and Painter C", "Painter D has 34 surviving attributed paintings, fewer than both Painter A and Painter B", "Painter C has only 12 surviving attributed paintings, fewer than any of the other three painters"] };
+    expect(checkQualityContract(leaky).issues.map((i) => i.code)).toContain("contract_answer_leak");
+    const fixed = { ...leaky, options: ["Painter C has 12 surviving attributed paintings, more than the 9 recorded for Painter D", "Painter A has 65 surviving attributed paintings, nearly double the 34 attributed to Painter D", "Painter B has 48 paintings, ranking second among the four, which is 14 more than Painter D's 34", leaky.options[3]] };
+    expect(checkQualityContract(fixed).issues.map((i) => i.code)).not.toContain("contract_answer_leak");
+  });
 });
