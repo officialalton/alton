@@ -1,0 +1,2787 @@
+{
+  "schemaVersion": 1,
+  "subject": {
+    "apCode": "ap_physics_1",
+    "name": "AP Physics 1",
+    "family": "physics_1",
+    "edition": "ced-2027",
+    "cedVersion": "AP Physics 1: Algebra-Based CED (revised 8-unit course, (c)2026; 2027 exam: 42 MC/85 min, 4 FRQ/95 min)",
+    "examYear": 2027,
+    "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-physics-1-course-and-exam-description.pdf",
+    "officialTopicCodes": true,
+    "designNotes": "Unit/topic codes, titles, class periods, MC unit weights and practice weights are from the posted CED (revised eight-unit course including Fluids). Per-topic skills are the CED's 'Suggested Skills' (up to five listed per topic; the list is transcribed from extracted text and could omit an entry). Practice-level FR weights (20-35 / 30-40 / 35-45) are read from the weighting table by row alignment and apply to whole practices. Sub-keywords, ordering, prerequisites and estLessons are ALTON editorial designs, not CED content. MC: 42 questions, 85 min; FR: 4 questions (Mathematical Routines, Translation Between Representations, Experimental Design and Analysis, Qualitative/Quantitative Translation), 95 min."
+  },
+  "skills": [
+    {
+      "code": "1.A",
+      "category": "Creating Representations",
+      "label": "Create diagrams, tables, charts, or schematics to represent physical situations."
+    },
+    {
+      "code": "1.B",
+      "category": "Creating Representations",
+      "label": "Create quantitative graphs with appropriate scales and units, including plotting data."
+    },
+    {
+      "code": "1.C",
+      "category": "Creating Representations",
+      "label": "Create qualitative sketches of graphs that represent features of a model or the behavior of a physical system."
+    },
+    {
+      "code": "2.A",
+      "category": "Mathematical Routines",
+      "label": "Derive a symbolic expression from known quantities by selecting and following a logical mathematical pathway."
+    },
+    {
+      "code": "2.B",
+      "category": "Mathematical Routines",
+      "label": "Calculate or estimate an unknown quantity with units from known quantities, by selecting and following a logical computational pathway."
+    },
+    {
+      "code": "2.C",
+      "category": "Mathematical Routines",
+      "label": "Compare physical quantities between two or more scenarios or at different times and locations in a single scenario."
+    },
+    {
+      "code": "2.D",
+      "category": "Mathematical Routines",
+      "label": "Predict new values or factors of change of physical quantities using functional dependence between variables."
+    },
+    {
+      "code": "3.A",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Create experimental procedures that are appropriate for a given scientific question."
+    },
+    {
+      "code": "3.B",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Apply an appropriate law, definition, theoretical relationship, or model to make a claim."
+    },
+    {
+      "code": "3.C",
+      "category": "Scientific Questioning and Argumentation",
+      "label": "Justify or support a claim using evidence from experimental data, physical representations, or physical principles or laws."
+    }
+  ],
+  "weights": [
+    {
+      "axis": "unit",
+      "code": "1",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "2",
+      "section": "mc",
+      "min": 18,
+      "max": 23,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "3",
+      "section": "mc",
+      "min": 18,
+      "max": 23,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "4",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "5",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "6",
+      "section": "mc",
+      "min": 5,
+      "max": 8,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "7",
+      "section": "mc",
+      "min": 5,
+      "max": 8,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "unit",
+      "code": "8",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 1 CED, Exam Information: Exam Weighting for the Multiple-Choice Section"
+    },
+    {
+      "axis": "skill",
+      "code": "2.A",
+      "section": "mc",
+      "min": 15,
+      "max": 20,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate MCQ weighting)"
+    },
+    {
+      "axis": "skill",
+      "code": "2.B",
+      "section": "mc",
+      "min": 20,
+      "max": 25,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate MCQ weighting)"
+    },
+    {
+      "axis": "skill",
+      "code": "2.C",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate MCQ weighting)"
+    },
+    {
+      "axis": "skill",
+      "code": "2.D",
+      "section": "mc",
+      "min": 10,
+      "max": 15,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate MCQ weighting)"
+    },
+    {
+      "axis": "skill",
+      "code": "3.B",
+      "section": "mc",
+      "min": 20,
+      "max": 25,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate MCQ weighting)"
+    },
+    {
+      "axis": "skill",
+      "code": "3.C",
+      "section": "mc",
+      "min": 5,
+      "max": 10,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate MCQ weighting)"
+    },
+    {
+      "axis": "skill",
+      "code": "Creating Representations",
+      "section": "frq",
+      "min": 20,
+      "max": 35,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate FR weighting, per practice)"
+    },
+    {
+      "axis": "skill",
+      "code": "Mathematical Routines",
+      "section": "frq",
+      "min": 30,
+      "max": 40,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate FR weighting, per practice)"
+    },
+    {
+      "axis": "skill",
+      "code": "Scientific Questioning and Argumentation",
+      "section": "frq",
+      "min": 35,
+      "max": 45,
+      "source": "AP Physics 1 CED, Exam Weighting by Science Practice (approximate FR weighting, per practice)"
+    }
+  ],
+  "units": [
+    {
+      "code": "1",
+      "title": "Kinematics",
+      "officialClassPeriods": "~12–17",
+      "topics": [
+        {
+          "code": "1.1",
+          "title": "Scalars and Vectors in One Dimension",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.C",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.1#1",
+              "label": "Scalar versus vector quantities",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#2",
+              "label": "Reading signs as direction in 1D",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.1#3",
+              "label": "Distance and speed mistaken for displacement and velocity",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "title": "Displacement, Velocity, and Acceleration",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.B",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "1.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "1.2#1",
+              "label": "Average versus instantaneous velocity",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#2",
+              "label": "Acceleration as rate of change of velocity",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#3",
+              "label": "Zero velocity does not imply zero acceleration",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "1.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.2#4",
+              "label": "Speeding up versus slowing down from signs",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "1.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.3",
+          "title": "Representing Motion",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A",
+            "2.C",
+            "3.B"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "1.3#1",
+              "label": "Position-time graph slope and shape",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#2",
+              "label": "Velocity-time graph slope and area",
+              "kind": "representation",
+              "skills": [
+                "1.C",
+                "2.A"
+              ],
+              "requires": [
+                "1.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.3#3",
+              "label": "Constant-acceleration equations and when they apply",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "1.3#2"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "1.3#4",
+              "label": "Free fall as constant acceleration",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "1.3#3"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.4",
+          "title": "Reference Frames and Relative Motion",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A",
+            "2.B",
+            "3.C"
+          ],
+          "requires": [
+            "1.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "1.4#1",
+              "label": "Choosing a frame and origin",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "1.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#2",
+              "label": "Relative velocity by vector addition",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "1.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.4#3",
+              "label": "Velocity depends on frame, acceleration (low speed) does not",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "1.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "1.5",
+          "title": "Vectors and Motion in Two Dimensions",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.D",
+            "3.A"
+          ],
+          "requires": [
+            "1.3",
+            "1.4"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "1.5#1",
+              "label": "Vector components and resultants",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "1.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#2",
+              "label": "Independence of horizontal and vertical motion",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "1.5#1",
+                "1.3#3"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#3",
+              "label": "Projectile motion setup and solving",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "2.D"
+              ],
+              "requires": [
+                "1.5#2"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "1.5#4",
+              "label": "Horizontal velocity does not need a horizontal force",
+              "kind": "misconception",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "1.5#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "1.5#5",
+              "label": "Designing a projectile range experiment",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "1.5#3"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "title": "Force and Translational Dynamics",
+      "officialClassPeriods": "~22–27",
+      "topics": [
+        {
+          "code": "2.1",
+          "title": "Systems and Center of Mass",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.B",
+            "2.C",
+            "3.B"
+          ],
+          "requires": [
+            "1.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.1#1",
+              "label": "Defining a system and external versus internal forces",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#2",
+              "label": "Locating the center of mass of simple systems",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "2.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.1#3",
+              "label": "Center of mass motion under net external force",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "2.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "title": "Forces and Free-Body Diagrams",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.B",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "2.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "2.2#1",
+              "label": "Force as an interaction and common force types",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#2",
+              "label": "Drawing a clean free-body diagram",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "2.2#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "2.2#3",
+              "label": "Net force from components",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "2.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.2#4",
+              "label": "Inventing a force of motion in the diagram",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "2.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.3",
+          "title": "Newton's Third Law",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.D",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.3#1",
+              "label": "Action-reaction pairs act on different objects",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#2",
+              "label": "Identifying third-law pairs in contact and field forces",
+              "kind": "skill",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.3#3",
+              "label": "Bigger object exerts a bigger force in collisions",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "2.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.4",
+          "title": "Newton's First Law",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "2.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.4#1",
+              "label": "Equilibrium means zero net force",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#2",
+              "label": "Constant velocity needs no net force",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.4#3",
+              "label": "Static equilibrium problems with components",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "2.4#1"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "2.5",
+          "title": "Newton's Second Law",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.D",
+            "3.B"
+          ],
+          "requires": [
+            "2.4"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "2.5#1",
+              "label": "Net force, mass, and acceleration relationship",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.5#2",
+              "label": "Setting up axes and writing sum-of-forces equations",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "1.A"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "2.5#3",
+              "label": "Connected objects and pulleys",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "2.5#2"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "2.5#4",
+              "label": "Scaling predictions when mass or force changes",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.5#5",
+              "label": "Weight versus mass and apparent weight",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "2.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.6",
+          "title": "Gravitational Force",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.D",
+            "3.C"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.6#1",
+              "label": "Universal gravitation and the inverse-square dependence",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.6#2",
+              "label": "Gravitational field strength near a surface",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "2.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.6#3",
+              "label": "Gravitational and inertial mass roles",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "2.6#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.7",
+          "title": "Kinetic and Static Friction",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.B",
+            "2.C",
+            "3.B"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "2.7#1",
+              "label": "Static friction adjusts up to a maximum",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#2",
+              "label": "Kinetic friction model and coefficient",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#3",
+              "label": "Friction always opposes motion, not relative sliding tendency",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.7#4",
+              "label": "Friction on inclines",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "2.7#2"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "2.8",
+          "title": "Spring Forces",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.C",
+            "3.A",
+            "3.B"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "2.8#1",
+              "label": "Hooke's law and the spring constant",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.8#2",
+              "label": "Force-extension graph slope",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "2.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.8#3",
+              "label": "Measuring a spring constant experimentally",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "2.8#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "2.9",
+          "title": "Circular Motion",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.D",
+            "3.A",
+            "3.C"
+          ],
+          "requires": [
+            "2.5",
+            "1.5"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "2.9#1",
+              "label": "Centripetal acceleration points inward",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.9#2",
+              "label": "Net inward force, not a separate centripetal force",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "2.9#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "2.9#3",
+              "label": "Banked and vertical circle force analysis",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "2.D"
+              ],
+              "requires": [
+                "2.9#2"
+              ],
+              "estLessons": 1.0
+            },
+            {
+              "code": "2.9#4",
+              "label": "Predicting changes in speed and radius",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "2.9#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "title": "Work, Energy, and Power",
+      "officialClassPeriods": "~22–27",
+      "topics": [
+        {
+          "code": "3.1",
+          "title": "Translational Kinetic Energy",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.B",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "3.1#1",
+              "label": "Kinetic energy depends on mass and speed squared",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#2",
+              "label": "Energy is a scalar and cannot be negative",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.1#3",
+              "label": "Comparing kinetic energy across scenarios",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.2",
+          "title": "Work",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.B",
+            "2.D",
+            "3.B"
+          ],
+          "requires": [
+            "3.1"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "3.2#1",
+              "label": "Work as force along displacement",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#2",
+              "label": "Sign of work and angle between force and motion",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#3",
+              "label": "Work-energy theorem",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "3.2#1",
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#4",
+              "label": "Work from a force-displacement graph",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.2#5",
+              "label": "Force without displacement does no work",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "3.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.3",
+          "title": "Potential Energy",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.D"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "3.3#1",
+              "label": "Gravitational potential energy and choice of reference",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#2",
+              "label": "Elastic potential energy of a spring",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "3.3#1",
+                "2.8#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#3",
+              "label": "Energy bar charts for a system",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.3#4",
+              "label": "Conservative forces and path independence",
+              "kind": "concept",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "3.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.4",
+          "title": "Conservation of Energy",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "3.3",
+            "3.2"
+          ],
+          "estLessons": 3,
+          "subKeywords": [
+            {
+              "code": "3.4#1",
+              "label": "Closed-system energy conservation statement",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#2",
+              "label": "Energy bookkeeping with non-conservative work",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "3.4#3",
+              "label": "Energy transfer problems with ramps, loops, and springs",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "2.C"
+              ],
+              "requires": [
+                "3.4#2"
+              ],
+              "estLessons": 1.0
+            },
+            {
+              "code": "3.4#4",
+              "label": "Energy is used up rather than transformed",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "3.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.4#5",
+              "label": "Choosing energy versus forces as the method",
+              "kind": "skill",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "3.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "3.5",
+          "title": "Power",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "3.A",
+            "3.C"
+          ],
+          "requires": [
+            "3.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "3.5#1",
+              "label": "Power as rate of energy transfer",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#2",
+              "label": "Power from force and velocity",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "3.5#3",
+              "label": "Estimating power in everyday tasks",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "3.5#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "title": "Linear Momentum",
+      "officialClassPeriods": "~10–15",
+      "topics": [
+        {
+          "code": "4.1",
+          "title": "Linear Momentum",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.B",
+            "3.B"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "4.1#1",
+              "label": "Momentum as mass times velocity vector",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.1#2",
+              "label": "Comparing momentum and kinetic energy",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "4.1#1",
+                "3.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.1#3",
+              "label": "Momentum direction and signs",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "4.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "title": "Change in Momentum and Impulse",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.D",
+            "3.A",
+            "3.C"
+          ],
+          "requires": [
+            "4.1"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "4.2#1",
+              "label": "Impulse as force over time",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#2",
+              "label": "Impulse from a force-time graph area",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "4.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#3",
+              "label": "Impulse-momentum theorem and cushioning",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "4.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.2#4",
+              "label": "Designing a collision-force measurement",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "4.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "title": "Conservation of Linear Momentum",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.D",
+            "3.C"
+          ],
+          "requires": [
+            "4.2",
+            "2.3"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "4.3#1",
+              "label": "Isolated-system momentum conservation",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#2",
+              "label": "Before-and-after momentum tables",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "4.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#3",
+              "label": "Explosions and recoil problems",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "4.3#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.3#4",
+              "label": "Momentum conservation fails if the system is drawn badly",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "4.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "4.4",
+          "title": "Elastic and Inelastic Collisions",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.C",
+            "3.A",
+            "3.B"
+          ],
+          "requires": [
+            "4.3",
+            "3.4"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "4.4#1",
+              "label": "Classifying collisions by kinetic energy change",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.4#2",
+              "label": "Perfectly inelastic collisions",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "4.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "4.4#3",
+              "label": "Elastic collisions with two conservation laws",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "2.C"
+              ],
+              "requires": [
+                "4.4#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "4.4#4",
+              "label": "Momentum lost in inelastic collisions",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "4.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "title": "Torque and Rotational Dynamics",
+      "officialClassPeriods": "~15–20",
+      "topics": [
+        {
+          "code": "5.1",
+          "title": "Rotational Kinematics",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.D",
+            "3.A",
+            "3.C"
+          ],
+          "requires": [
+            "1.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "5.1#1",
+              "label": "Angular position, velocity, and acceleration",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.1#2",
+              "label": "Rotational constant-acceleration equations",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "5.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.1#3",
+              "label": "Angular graphs and analogies to linear motion",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "5.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "title": "Connecting Linear and Rotational Motion",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A"
+          ],
+          "requires": [
+            "5.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.2#1",
+              "label": "Arc length, tangential speed, and angular speed",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.2#2",
+              "label": "Tangential versus centripetal acceleration",
+              "kind": "misconception",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "5.2#1",
+                "2.9#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.2#3",
+              "label": "Rolling without slipping link",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "5.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.3",
+          "title": "Torque",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.D",
+            "3.B"
+          ],
+          "requires": [
+            "5.2",
+            "2.2"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "5.3#1",
+              "label": "Torque as lever arm times force",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.3#2",
+              "label": "Torque direction and sign convention",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.3#3",
+              "label": "Torque diagrams with angled forces",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "5.3#4",
+              "label": "A larger force always gives a larger torque",
+              "kind": "misconception",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "5.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.4",
+          "title": "Rotational Inertia",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.B",
+            "3.A"
+          ],
+          "requires": [
+            "5.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "5.4#1",
+              "label": "Rotational inertia depends on mass distribution",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.4#2",
+              "label": "Inertia of point masses and common shapes",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "5.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.4#3",
+              "label": "Measuring rotational inertia experimentally",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "5.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "5.5",
+          "title": "Rotational Equilibrium and Newton's First Law",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A",
+            "2.B"
+          ],
+          "requires": [
+            "5.3",
+            "2.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "5.5#1",
+              "label": "Zero net torque and zero net force together",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.5#2",
+              "label": "Choosing a pivot point wisely",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "5.5#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.5#3",
+              "label": "Ladders, beams, and balances problems",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "5.5#2"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "5.6",
+          "title": "Newton's Second Law in Rotational Form",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "5.4",
+            "5.5",
+            "2.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "5.6#1",
+              "label": "Net torque equals inertia times angular acceleration",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "5.6#2",
+              "label": "Pulley and hanging mass with a rotating disk",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "1.A"
+              ],
+              "requires": [
+                "5.6#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "5.6#3",
+              "label": "Comparing linear and rotational dynamics side by side",
+              "kind": "representation",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "5.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "title": "Energy and Momentum of Rotating Systems",
+      "officialClassPeriods": "~8–14",
+      "topics": [
+        {
+          "code": "6.1",
+          "title": "Rotational Kinetic Energy",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.B",
+            "2.C",
+            "3.B"
+          ],
+          "requires": [
+            "5.4",
+            "3.1"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.1#1",
+              "label": "Rotational kinetic energy formula",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.1#2",
+              "label": "Energy split between rotation and translation",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "6.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.1#3",
+              "label": "Rotational energy bar charts",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "6.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.2",
+          "title": "Torque and Work",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.C",
+            "2.D",
+            "3.A"
+          ],
+          "requires": [
+            "6.1",
+            "3.2"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "6.2#1",
+              "label": "Work done by a torque",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.2#2",
+              "label": "Torque-angle graph area",
+              "kind": "representation",
+              "skills": [
+                "1.B"
+              ],
+              "requires": [
+                "6.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.2#3",
+              "label": "Rotational work-energy theorem",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "6.2#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.3",
+          "title": "Angular Momentum and Angular Impulse",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.D",
+            "3.B"
+          ],
+          "requires": [
+            "5.6",
+            "4.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "6.3#1",
+              "label": "Angular momentum of rotating bodies and moving particles",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.3#2",
+              "label": "Angular impulse from net torque over time",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "6.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.3#3",
+              "label": "Angular momentum is not only for spinning objects",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "6.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "6.4",
+          "title": "Conservation of Angular Momentum",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.D",
+            "3.A",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "6.3",
+            "4.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "6.4#1",
+              "label": "Zero external torque implies constant angular momentum",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.4#2",
+              "label": "Changing inertia changes angular speed",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "6.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.4#3",
+              "label": "Rotational collisions and kinetic energy change",
+              "kind": "skill",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "6.4#1"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "6.5",
+          "title": "Rolling",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "6.1",
+            "5.2"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "6.5#1",
+              "label": "Rolling as rotation plus translation",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.5#2",
+              "label": "Static friction in rolling without slipping",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "6.5#1",
+                "2.7#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.5#3",
+              "label": "Rolling down an incline by energy",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "6.5#1"
+              ],
+              "estLessons": 0.75
+            }
+          ]
+        },
+        {
+          "code": "6.6",
+          "title": "Motion of Orbiting Satellites",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "6.4",
+            "2.6",
+            "2.9"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "6.6#1",
+              "label": "Circular orbits from gravity as centripetal force",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.75
+            },
+            {
+              "code": "6.6#2",
+              "label": "Orbital energy and angular momentum conservation",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "6.6#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "6.6#3",
+              "label": "Astronauts float because gravity is absent",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "6.6#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "title": "Oscillations",
+      "officialClassPeriods": "~5–10",
+      "topics": [
+        {
+          "code": "7.1",
+          "title": "Defining Simple Harmonic Motion",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.B",
+            "3.B",
+            "3.C"
+          ],
+          "requires": [
+            "2.8"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.1#1",
+              "label": "Restoring force proportional to displacement",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.1#2",
+              "label": "Equilibrium position and amplitude",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "7.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.1#3",
+              "label": "Acceleration and velocity at turning points",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "7.1#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.2",
+          "title": "Frequency and Period of SHM",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.D",
+            "3.A",
+            "3.C"
+          ],
+          "requires": [
+            "7.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "7.2#1",
+              "label": "Period and frequency definitions",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#2",
+              "label": "Period of a mass-spring system",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "2.D"
+              ],
+              "requires": [
+                "7.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#3",
+              "label": "Period of a simple pendulum",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "2.D"
+              ],
+              "requires": [
+                "7.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#4",
+              "label": "Amplitude changes period",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "7.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.2#5",
+              "label": "Designing a period-measurement lab",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "7.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.3",
+          "title": "Representing and Analyzing SHM",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.A",
+            "2.D",
+            "3.C"
+          ],
+          "requires": [
+            "7.2",
+            "1.3"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "7.3#1",
+              "label": "Position, velocity, acceleration graphs over time",
+              "kind": "representation",
+              "skills": [
+                "1.C"
+              ],
+              "requires": [],
+              "estLessons": 0.75
+            },
+            {
+              "code": "7.3#2",
+              "label": "Phase relationships among the three graphs",
+              "kind": "concept",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "7.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.3#3",
+              "label": "Reading amplitude and period from a graph",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "7.3#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "7.4",
+          "title": "Energy of Simple Harmonic Oscillators",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.B",
+            "2.C",
+            "3.B"
+          ],
+          "requires": [
+            "7.3",
+            "3.4"
+          ],
+          "estLessons": 1,
+          "subKeywords": [
+            {
+              "code": "7.4#1",
+              "label": "Kinetic and potential energy exchange in SHM",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.4#2",
+              "label": "Energy versus position graphs",
+              "kind": "representation",
+              "skills": [
+                "1.A"
+              ],
+              "requires": [
+                "7.4#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "7.4#3",
+              "label": "Speed at a given position by energy",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "7.4#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "8",
+      "title": "Fluids",
+      "officialClassPeriods": "~12–17",
+      "topics": [
+        {
+          "code": "8.1",
+          "title": "Internal Structure and Density",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.B",
+            "2.C",
+            "3.A",
+            "3.C"
+          ],
+          "requires": [
+            "2.5"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.1#1",
+              "label": "Density and ideal-fluid assumptions",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.1#2",
+              "label": "Measuring density by mass and volume",
+              "kind": "skill",
+              "skills": [
+                "3.A"
+              ],
+              "requires": [
+                "8.1#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.1#3",
+              "label": "Dense means heavy regardless of volume",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "8.1#1"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.2",
+          "title": "Pressure",
+          "scope": "both",
+          "skills": [
+            "1.C",
+            "2.B",
+            "2.C",
+            "3.C"
+          ],
+          "requires": [
+            "8.1"
+          ],
+          "estLessons": 1.5,
+          "subKeywords": [
+            {
+              "code": "8.2#1",
+              "label": "Pressure as force per area",
+              "kind": "concept",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#2",
+              "label": "Pressure versus depth in a static fluid",
+              "kind": "skill",
+              "skills": [
+                "2.B"
+              ],
+              "requires": [
+                "8.2#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#3",
+              "label": "Gauge versus absolute pressure",
+              "kind": "concept",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "8.2#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.2#4",
+              "label": "Pressure depends on container shape",
+              "kind": "misconception",
+              "skills": [
+                "3.C"
+              ],
+              "requires": [
+                "8.2#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.3",
+          "title": "Fluids and Newton's Laws",
+          "scope": "both",
+          "skills": [
+            "1.A",
+            "2.A",
+            "2.D",
+            "3.B"
+          ],
+          "requires": [
+            "8.2",
+            "2.5"
+          ],
+          "estLessons": 2,
+          "subKeywords": [
+            {
+              "code": "8.3#1",
+              "label": "Buoyant force and Archimedes' principle",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.3#2",
+              "label": "Floating and sinking force analysis",
+              "kind": "skill",
+              "skills": [
+                "2.A",
+                "1.A"
+              ],
+              "requires": [
+                "8.3#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "8.3#3",
+              "label": "Buoyancy depends on object weight, not displaced volume",
+              "kind": "misconception",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "8.3#1"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.3#4",
+              "label": "Apparent weight of submerged objects",
+              "kind": "skill",
+              "skills": [
+                "2.D"
+              ],
+              "requires": [
+                "8.3#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        },
+        {
+          "code": "8.4",
+          "title": "Fluids and Conservation Laws",
+          "scope": "both",
+          "skills": [
+            "1.B",
+            "2.A",
+            "2.C",
+            "3.A",
+            "3.B"
+          ],
+          "requires": [
+            "8.3",
+            "3.4"
+          ],
+          "estLessons": 2.5,
+          "subKeywords": [
+            {
+              "code": "8.4#1",
+              "label": "Continuity equation for incompressible flow",
+              "kind": "concept",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#2",
+              "label": "Bernoulli equation as energy conservation",
+              "kind": "concept",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "8.4#1",
+                "3.4#1"
+              ],
+              "estLessons": 0.75
+            },
+            {
+              "code": "8.4#3",
+              "label": "Speed and pressure tradeoff in a pipe",
+              "kind": "skill",
+              "skills": [
+                "2.C"
+              ],
+              "requires": [
+                "8.4#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#4",
+              "label": "Faster flow means higher pressure",
+              "kind": "misconception",
+              "skills": [
+                "3.B"
+              ],
+              "requires": [
+                "8.4#2"
+              ],
+              "estLessons": 0.5
+            },
+            {
+              "code": "8.4#5",
+              "label": "Torricelli speed from a tank hole",
+              "kind": "skill",
+              "skills": [
+                "2.A"
+              ],
+              "requires": [
+                "8.4#2"
+              ],
+              "estLessons": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

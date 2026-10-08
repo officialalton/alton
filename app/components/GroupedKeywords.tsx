@@ -1,12 +1,12 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { groupKeywordsByDomain, hasDomainGroups, type KeywordLike } from "@/lib/sat-keywords/group";
+import { groupKeywordsByDomain, hasDomainGroups, keywordDisplayLabel, type KeywordLike } from "@/lib/sat-keywords/group";
 
 /** <select> 안의 옵션을 도메인별 <optgroup> 으로 묶는다. SAT 도메인이 없으면 평면 <option> 그대로. */
 export function GroupedKeywordOptions<T extends KeywordLike>({ items, otherLabel = "Other", optionLabel }: { items: T[]; otherLabel?: string; optionLabel?: (k: T) => string }) {
   const groups = groupKeywordsByDomain(items, otherLabel);
-  const text = optionLabel ?? ((k: T) => k.label);
+  const text = optionLabel ?? ((k: T) => keywordDisplayLabel(k));
   if (!hasDomainGroups(groups)) return <>{items.map((k) => <option key={k.id} value={k.id}>{text(k)}</option>)}</>;
   return (
     <>

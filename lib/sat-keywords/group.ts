@@ -12,7 +12,17 @@ export type KeywordLike = {
   folderName?: string | null;
   folderPosition?: number | null;
   sortOrder?: number | null;
+  /** AP 커리큘럼: 공식 코드·레벨(1 토픽, 2 세부). */
+  officialCode?: string | null;
+  level?: number | null;
 };
+
+/** 선택 UI 표시 이름: 토픽은 공식 코드 접두(5.3 …), 세부 키워드는 들여쓴 점 표시. 이름(label)만 바뀌어도 코드는 그대로. */
+export function keywordDisplayLabel(k: { label: string; officialCode?: string | null; level?: number | null }): string {
+  if (k.level === 1 && k.officialCode) return `${k.officialCode} ${k.label}`;
+  if (k.level === 2) return `· ${k.label}`;
+  return k.label;
+}
 export type KeywordGroup<T extends KeywordLike> = { key: string; label: string; items: T[] };
 
 export const OTHER_GROUP_KEY = "__other";

@@ -153,6 +153,6 @@ export async function deleteSubjectKeyword(keywordId: string): Promise<KeywordDi
   const { count: docs } = await supabase.from("curriculum_docs").select("id", { count: "exact", head: true }).eq("primary_keyword_id", keywordId);
   if ((docs ?? 0) > 0) return fail("교재의 대표 키워드로 사용 중인 키워드는 삭제할 수 없습니다.");
   const { error } = await supabase.from("subject_keywords").delete().eq("id", keywordId);
-  if (error) return fail(error.message);
+  if (error) return fail(error.message.includes("ap_official_keyword_protected") ? "공식 CED 키워드는 삭제할 수 없습니다. 이름만 바꿀 수 있습니다." : error.message);
   return done(supabase, subjectId);
 }

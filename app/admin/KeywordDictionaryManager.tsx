@@ -14,6 +14,7 @@ import {
 } from "./keyword-folder-actions";
 import { renameSubjectKeyword } from "./subject-actions";
 import { buildKeywordSections, moveItem, OTHER_FOLDER_NAME } from "./keyword-dictionary";
+import { keywordDisplayLabel } from "@/lib/sat-keywords/group";
 import type { KeywordDictionary } from "./subject-data";
 
 // 2026-10-08 — "과목 키워드 사전" 폴더 관리. 키워드는 id로 회차·교재·문제에 연결되어 있으므로
@@ -46,8 +47,11 @@ export default function KeywordDictionaryManager({
   const [selectedKeywordId, setSelectedKeywordId] = useState<string | null>(null);
   const [labelDraft, setLabelDraft] = useState("");
   const [confirmDeleteKeyword, setConfirmDeleteKeyword] = useState(false);
+  const [showSub, setShowSub] = useState(false); // AP 세부 키워드(level 2) 표시 — 기본 접힘
 
-  const sections = useMemo(() => buildKeywordSections(dict.folders, dict.keywords, query), [dict, query]);
+  const visibleKeywords = useMemo(() => (showSub ? dict.keywords : dict.keywords.filter((k) => k.level !== 2)), [dict, showSub]);
+  const hasSub = dict.keywords.some((k) => k.level === 2);
+  const sections = useMemo(() => buildKeywordSections(dict.folders, visibleKeywords, query), [dict, visibleKeywords, query]);
   const allSections = useMemo(() => buildKeywordSections(dict.folders, dict.keywords), [dict]);
   const selected = dict.keywords.find((k) => k.id === selectedKeywordId) ?? null;
 
@@ -191,6 +195,12 @@ export default function KeywordDictionaryManager({
           placeholder="키워드 검색"
           className={FIELD + " flex-1 min-w-[140px]"}
         />
+        {hasSub && (
+          <label className="flex items-center gap-1.5 text-[12px] text-ink">
+            <input type="checkbox" checked={showSub} onChange={(e) => setShowSub(e.target.checked)} />
+            세부 키워드 보기
+          </label>
+        )}
       </div>
 
       <div className="flex flex-wrap gap-2 mb-3">
@@ -313,7 +323,7 @@ export default function KeywordDictionaryManager({
                               (selectedKeywordId === k.id ? "bg-ink text-white" : "bg-grey-100 text-ink")
                             }
                           >
-                            {k.label}
+                            {keywordDisplayLabel(k)}
                           </button>
                         </li>
                       ))}

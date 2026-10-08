@@ -1,0 +1,3871 @@
+{
+ "schemaVersion": 1,
+ "subject": {
+  "apCode": "ap_calculus_ab",
+  "name": "AP Calculus AB",
+  "family": "calculus",
+  "edition": "ced-2027",
+  "cedVersion": "AP Calculus AB and BC CED (V.1 with Fall 2026 clarifications; 2027 exam: 42 MC/100 min)",
+  "examYear": 2027,
+  "sourceUrl": "https://apcentral.collegeboard.org/media/pdf/ap-calculus-ab-and-bc-course-and-exam-description.pdf",
+  "officialTopicCodes": true,
+  "designNotes": "AB topics only (BC-only topics omitted). Topic order is a recommended 1:1 teaching order; sub-keywords and prerequisites are original. Practice weights are per CED MC table; FRQ weights not published numerically."
+ },
+ "skills": [
+  {
+   "code": "1.A",
+   "category": "Implementing Mathematical Processes",
+   "label": "Identify the question (not assessed)"
+  },
+  {
+   "code": "1.B",
+   "category": "Implementing Mathematical Processes",
+   "label": "Identify key information (not assessed)"
+  },
+  {
+   "code": "1.C",
+   "category": "Implementing Mathematical Processes",
+   "label": "Choose a rule based on expression type"
+  },
+  {
+   "code": "1.D",
+   "category": "Implementing Mathematical Processes",
+   "label": "Choose a rule based on concept relationships"
+  },
+  {
+   "code": "1.E",
+   "category": "Implementing Mathematical Processes",
+   "label": "Apply rules and procedures"
+  },
+  {
+   "code": "1.F",
+   "category": "Implementing Mathematical Processes",
+   "label": "Relate an approximation to the actual value"
+  },
+  {
+   "code": "2.A",
+   "category": "Connecting Representations",
+   "label": "Identify common structures across contexts"
+  },
+  {
+   "code": "2.B",
+   "category": "Connecting Representations",
+   "label": "Extract information from representations"
+  },
+  {
+   "code": "2.C",
+   "category": "Connecting Representations",
+   "label": "Re-express information in another form"
+  },
+  {
+   "code": "2.D",
+   "category": "Connecting Representations",
+   "label": "Relate function properties across representations"
+  },
+  {
+   "code": "2.E",
+   "category": "Connecting Representations",
+   "label": "Relate representations of functions and derivatives"
+  },
+  {
+   "code": "3.A",
+   "category": "Justification",
+   "label": "Use technology to develop claims (not assessed)"
+  },
+  {
+   "code": "3.B",
+   "category": "Justification",
+   "label": "Identify a definition, theorem or test"
+  },
+  {
+   "code": "3.C",
+   "category": "Justification",
+   "label": "Confirm hypotheses are satisfied"
+  },
+  {
+   "code": "3.D",
+   "category": "Justification",
+   "label": "Apply a definition, theorem or test"
+  },
+  {
+   "code": "3.E",
+   "category": "Justification",
+   "label": "Give reasons for conclusions"
+  },
+  {
+   "code": "3.F",
+   "category": "Justification",
+   "label": "Explain meaning in context"
+  },
+  {
+   "code": "3.G",
+   "category": "Justification",
+   "label": "Confirm solutions are accurate and appropriate"
+  },
+  {
+   "code": "4.A",
+   "category": "Communication and Notation",
+   "label": "Use precise mathematical language"
+  },
+  {
+   "code": "4.B",
+   "category": "Communication and Notation",
+   "label": "Use appropriate units"
+  },
+  {
+   "code": "4.C",
+   "category": "Communication and Notation",
+   "label": "Use appropriate symbols and notation"
+  },
+  {
+   "code": "4.D",
+   "category": "Communication and Notation",
+   "label": "Use appropriate graphing techniques"
+  },
+  {
+   "code": "4.E",
+   "category": "Communication and Notation",
+   "label": "Apply appropriate rounding"
+  }
+ ],
+ "weights": [
+  {
+   "axis": "unit",
+   "code": "1",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "2",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "3",
+   "section": "mc",
+   "min": 5,
+   "max": 10,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "4",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "5",
+   "section": "mc",
+   "min": 15,
+   "max": 20,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "6",
+   "section": "mc",
+   "min": 15,
+   "max": 20,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "7",
+   "section": "mc",
+   "min": 5,
+   "max": 10,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "unit",
+   "code": "8",
+   "section": "mc",
+   "min": 10,
+   "max": 15,
+   "source": "CED Exam Information, multiple-choice weighting table (AB column)"
+  },
+  {
+   "axis": "skill",
+   "code": "Implementing Mathematical Processes",
+   "section": "mc",
+   "min": 50,
+   "max": 70,
+   "source": "CED Exam Information, MC practice weighting table (Practice 4 not assessed in MC)"
+  },
+  {
+   "axis": "skill",
+   "code": "Connecting Representations",
+   "section": "mc",
+   "min": 15,
+   "max": 30,
+   "source": "CED Exam Information, MC practice weighting table (Practice 4 not assessed in MC)"
+  },
+  {
+   "axis": "skill",
+   "code": "Justification",
+   "section": "mc",
+   "min": 10,
+   "max": 20,
+   "source": "CED Exam Information, MC practice weighting table (Practice 4 not assessed in MC)"
+  }
+ ],
+ "units": [
+  {
+   "code": "1",
+   "title": "Limits and Continuity",
+   "officialClassPeriods": "~22–23 AB",
+   "topics": [
+    {
+     "code": "1.1",
+     "title": "Introducing Calculus: Can Change Occur at an Instant?",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.1#1",
+       "label": "Average vs instantaneous speed idea",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.1#2",
+       "label": "Secant slopes closing in on a tangent",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.2",
+     "title": "Defining Limits and Using Limit Notation",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "1.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.2#1",
+       "label": "Reading and writing limit notation",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#2",
+       "label": "Limit as the value a function approaches",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.2#3",
+       "label": "Limit equals function value is not required",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.3",
+     "title": "Estimating Limit Values from Graphs",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.3#1",
+       "label": "One-sided limits from a graph",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#2",
+       "label": "Holes, jumps and open circles",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.3#3",
+       "label": "When the two-sided limit fails to exist",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.4",
+     "title": "Estimating Limit Values from Tables",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.4#1",
+       "label": "Reading trends in a table of values",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#2",
+       "label": "Choosing inputs approaching from both sides",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.4#3",
+       "label": "Table trends can mislead on oscillation",
+       "kind": "misconception",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "1.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.5",
+     "title": "Determining Limits Using Algebraic Properties of Limits",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "1.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.5#1",
+       "label": "Sum, product and quotient limit laws",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#2",
+       "label": "Direct substitution for continuous pieces",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "1.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.5#3",
+       "label": "Zero in denominator is not automatically undefined limit",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "1.5#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.6",
+     "title": "Determining Limits Using Algebraic Manipulation",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "1.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.6#1",
+       "label": "Factor and cancel for 0/0 forms",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.6#2",
+       "label": "Rationalize with a conjugate",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.6#3",
+       "label": "Rewrite complex fractions before substituting",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "1.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.7",
+     "title": "Selecting Procedures for Determining Limits",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "1.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.7#1",
+       "label": "Decision path: substitute, factor, conjugate, other",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.7#2",
+       "label": "Recognizing special trig limit shapes",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.8",
+     "title": "Determining Limits Using the Squeeze Theorem",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "1.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.8#1",
+       "label": "Bounding a function between two others",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.8#2",
+       "label": "Checking the squeeze hypotheses",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.8#3",
+       "label": "Applying squeeze to sin(x)/x style limits",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.9",
+     "title": "Connecting Multiple Representations of Limits",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "1.3",
+      "1.4",
+      "1.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.9#1",
+       "label": "Matching graph, table and formula for one limit",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.9#2",
+       "label": "Translating a limit statement to verbal form",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.10",
+     "title": "Exploring Types of Discontinuities",
+     "scope": "both",
+     "skills": [
+      "3.B"
+     ],
+     "requires": [
+      "1.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "1.10#1",
+       "label": "Removable, jump and infinite types",
+       "kind": "concept",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.10#2",
+       "label": "Classifying a discontinuity from limit behavior",
+       "kind": "skill",
+       "skills": [
+        "3.B"
+       ],
+       "requires": [
+        "1.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.11",
+     "title": "Defining Continuity at a Point",
+     "scope": "both",
+     "skills": [
+      "3.C"
+     ],
+     "requires": [
+      "1.10"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.11#1",
+       "label": "Three-part continuity condition",
+       "kind": "concept",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.11#2",
+       "label": "Checking each condition with limits",
+       "kind": "skill",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.11#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.11#3",
+       "label": "Defined at a point does not mean continuous there",
+       "kind": "misconception",
+       "skills": [
+        "3.C"
+       ],
+       "requires": [
+        "1.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.12",
+     "title": "Confirming Continuity over an Interval",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "1.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.12#1",
+       "label": "Continuity of standard function families",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.12#2",
+       "label": "Domain-based continuity on an interval",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "1.12#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.12#3",
+       "label": "Piecewise continuity at the junction",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "1.12#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.13",
+     "title": "Removing Discontinuities",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "1.12"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.13#1",
+       "label": "Redefining a point to remove a hole",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.13#2",
+       "label": "Solving for a parameter that forces continuity",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "1.13#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "1.14",
+     "title": "Connecting Infinite Limits and Vertical Asymptotes",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "1.10",
+      "1.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "1.14#1",
+       "label": "Unbounded limits and their notation",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.14#2",
+       "label": "Locating vertical asymptotes from a rational form",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "1.14#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.14#3",
+       "label": "Zero denominator may be a hole, not an asymptote",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "1.14#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.15",
+     "title": "Connecting Limits at Infinity and Horizontal Asymptotes",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "1.14"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.15#1",
+       "label": "End behavior of a function",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.15#2",
+       "label": "Comparing growth degrees in rational functions",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "1.15#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.15#3",
+       "label": "A graph can cross its horizontal asymptote",
+       "kind": "misconception",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "1.15#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "1.16",
+     "title": "Working with the Intermediate Value Theorem (IVT)",
+     "scope": "both",
+     "skills": [
+      "3.E"
+     ],
+     "requires": [
+      "1.12"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "1.16#1",
+       "label": "Statement and hypotheses of IVT",
+       "kind": "concept",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "1.16#2",
+       "label": "Arguing a value is attained with justification",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "1.16#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "1.16#3",
+       "label": "IVT needs continuity on a closed interval",
+       "kind": "misconception",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "1.16#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "2",
+   "title": "Differentiation: Definition and Fundamental Properties",
+   "officialClassPeriods": "~13–14 AB",
+   "topics": [
+    {
+     "code": "2.1",
+     "title": "Defining Average and Instantaneous Rates of Change at a Point",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "1.2",
+      "1.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.1#1",
+       "label": "Average rate as slope of a secant line",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#2",
+       "label": "Instantaneous rate as a limit of secant slopes",
+       "kind": "concept",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.1#3",
+       "label": "Units and interpretation of a rate",
+       "kind": "representation",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "2.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.2",
+     "title": "Defining the Derivative of a Function and Using Derivative Notation",
+     "scope": "both",
+     "skills": [
+      "1.D",
+      "4.C"
+     ],
+     "requires": [
+      "2.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "2.2#1",
+       "label": "Limit definition of the derivative",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "2.2#2",
+       "label": "Evaluating f prime at a point from the definition",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#3",
+       "label": "Leibniz, prime and operator notation",
+       "kind": "representation",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.2#4",
+       "label": "Tangent line equation at a point",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.3",
+     "title": "Estimating Derivatives of a Function at a Point",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "2.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.3#1",
+       "label": "Symmetric and one-sided difference from a table",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.3#2",
+       "label": "Estimating slope from a graph",
+       "kind": "representation",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.4",
+     "title": "Connecting Differentiability and Continuity: When Derivatives Do and D",
+     "scope": "both",
+     "skills": [
+      "3.E"
+     ],
+     "requires": [
+      "2.2",
+      "1.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.4#1",
+       "label": "Corners, cusps and vertical tangents",
+       "kind": "representation",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#2",
+       "label": "Differentiable implies continuous",
+       "kind": "concept",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.4#3",
+       "label": "Continuous does not imply differentiable",
+       "kind": "misconception",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "2.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.5",
+     "title": "Applying the Power Rule",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "2.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.5#1",
+       "label": "Power rule for integer and rational exponents",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#2",
+       "label": "Rewriting roots and reciprocals as powers",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.5#3",
+       "label": "Differentiating a constant and a constant to a power",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.6",
+     "title": "Derivative Rules: Constant, Sum, Difference, and Constant Multiple",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "2.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.6#1",
+       "label": "Linearity of differentiation",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#2",
+       "label": "Differentiating polynomials term by term",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.6#3",
+       "label": "Horizontal tangent locations",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.6#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.7",
+     "title": "Derivatives of cos x, sin x, e^x, and ln x",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "2.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.7#1",
+       "label": "Basic trig derivatives and sign pattern",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#2",
+       "label": "e^x and ln x derivatives",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.7#3",
+       "label": "Derivative of a^x differs from e^x",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.7#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.8",
+     "title": "The Product Rule",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "2.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.8#1",
+       "label": "Product rule formula and structure",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#2",
+       "label": "Product rule with mixed function types",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.8#3",
+       "label": "Derivative of a product is not product of derivatives",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.9",
+     "title": "The Quotient Rule",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "2.8"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "2.9#1",
+       "label": "Quotient rule formula and ordering",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#2",
+       "label": "Simplify before choosing to use quotient rule",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.9#3",
+       "label": "Sign error from reversing numerator terms",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "2.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "2.10",
+     "title": "Finding the Derivatives of Tangent, Cotangent, Secant, and/or Cosecant",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "2.9",
+      "2.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "2.10#1",
+       "label": "Derive tan and cot derivatives with quotient rule",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "2.10#2",
+       "label": "Memorize sec and csc derivatives with pattern",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "2.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "3",
+   "title": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "officialClassPeriods": "~10–11 AB",
+   "topics": [
+    {
+     "code": "3.1",
+     "title": "The Chain Rule",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "2.8",
+      "2.10"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "3.1#1",
+       "label": "Composite structure outside-inside",
+       "kind": "concept",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#2",
+       "label": "Chain rule with trig, exponential and log",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.1#3",
+       "label": "Forgetting the inner derivative",
+       "kind": "misconception",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.1#4",
+       "label": "Chain rule from a table of values",
+       "kind": "representation",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [
+        "3.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.2",
+     "title": "Implicit Differentiation",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "3.1"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "3.2#1",
+       "label": "Treat y as a function of x",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#2",
+       "label": "Solve for dy/dx after differentiating",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "3.2#3",
+       "label": "Tangent line to an implicit curve",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "3.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.2#4",
+       "label": "Missing dy/dx factor on y terms",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "3.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.3",
+     "title": "Differentiating Inverse Functions",
+     "scope": "both",
+     "skills": [
+      "3.G"
+     ],
+     "requires": [
+      "3.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "3.3#1",
+       "label": "Inverse derivative as reciprocal slope",
+       "kind": "concept",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#2",
+       "label": "Compute derivative of an inverse at a point",
+       "kind": "skill",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [
+        "3.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.3#3",
+       "label": "Inverse derivative is evaluated at the swapped point",
+       "kind": "misconception",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [
+        "3.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.4",
+     "title": "Differentiating Inverse Trigonometric Functions",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "3.3",
+      "3.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.4#1",
+       "label": "Memorize arcsin, arccos and arctan derivatives",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.4#2",
+       "label": "Inverse trig with chain rule",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "3.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.5",
+     "title": "Selecting Procedures for Calculating Derivatives",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "3.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.5#1",
+       "label": "Classify the expression then choose the rule",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.5#2",
+       "label": "Logarithmic differentiation for variable exponents",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "3.6",
+     "title": "Calculating Higher-Order Derivatives",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "3.5"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "3.6#1",
+       "label": "Second and third derivative notation",
+       "kind": "representation",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "3.6#2",
+       "label": "Repeated differentiation including implicit second derivative",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "3.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "4",
+   "title": "Contextual Applications of Differentiation",
+   "officialClassPeriods": "~10–11 AB",
+   "topics": [
+    {
+     "code": "4.1",
+     "title": "Interpreting the Meaning of the Derivative in Context",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "2.2",
+      "3.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.1#1",
+       "label": "Derivative as rate with units",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#2",
+       "label": "Writing a sentence interpreting f prime",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.1#3",
+       "label": "Interpreting the sign of a rate of change",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "4.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.2",
+     "title": "Straight-Line Motion: Connecting Position, Velocity, and Acceleration",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.2#1",
+       "label": "Position, velocity and acceleration relationships",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#2",
+       "label": "Speed versus velocity",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "4.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#3",
+       "label": "Speeding up and slowing down by sign comparison",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "4.2#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.2#4",
+       "label": "Speeding up means velocity is positive",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "4.2#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.3",
+     "title": "Rates of Change in Applied Contexts Other Than Motion",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "4.1"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "4.3#1",
+       "label": "Rates in science, economics and population",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.3#2",
+       "label": "Modeling marginal quantities",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "4.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.4",
+     "title": "Introduction to Related Rates",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "3.2",
+      "4.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.4#1",
+       "label": "Identify variables changing with time",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.4#2",
+       "label": "Differentiate a geometric relation with respect to t",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "4.4#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "4.5",
+     "title": "Solving Related Rates Problems",
+     "scope": "both",
+     "skills": [
+      "3.F"
+     ],
+     "requires": [
+      "4.4"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.5#1",
+       "label": "Setup workflow with diagrams",
+       "kind": "skill",
+       "skills": [
+        "3.F"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "4.5#2",
+       "label": "Substituting values only after differentiating",
+       "kind": "misconception",
+       "skills": [
+        "3.F"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.5#3",
+       "label": "Stating the answer with units and direction",
+       "kind": "skill",
+       "skills": [
+        "3.F"
+       ],
+       "requires": [
+        "4.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.6",
+     "title": "Approximating Values of a Function Using Local Linearity and Lineariza",
+     "scope": "both",
+     "skills": [
+      "1.F"
+     ],
+     "requires": [
+      "2.2",
+      "3.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "4.6#1",
+       "label": "Tangent line as a local approximation",
+       "kind": "concept",
+       "skills": [
+        "1.F"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#2",
+       "label": "Build and use a linearization",
+       "kind": "skill",
+       "skills": [
+        "1.F"
+       ],
+       "requires": [
+        "4.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.6#3",
+       "label": "Over or under estimate from concavity",
+       "kind": "concept",
+       "skills": [
+        "1.F"
+       ],
+       "requires": [
+        "4.6#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "4.7",
+     "title": "Using L'Hospital's Rule for Determining Limits of Indeterminate Forms",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "3.5",
+      "1.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "4.7#1",
+       "label": "Conditions for applying the rule",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#2",
+       "label": "Applying the rule to 0/0 and infinity over infinity",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#3",
+       "label": "Differentiating the quotient instead of numerator and denominator",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.7#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "4.7#4",
+       "label": "Rewriting other indeterminate forms",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "4.7#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "5",
+   "title": "Analytical Applications of Differentiation",
+   "officialClassPeriods": "~15–16 AB",
+   "topics": [
+    {
+     "code": "5.1",
+     "title": "Using the Mean Value Theorem",
+     "scope": "both",
+     "skills": [
+      "3.E"
+     ],
+     "requires": [
+      "1.16",
+      "2.4"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.1#1",
+       "label": "Statement and hypotheses of MVT",
+       "kind": "concept",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#2",
+       "label": "Verify MVT and find the guaranteed point",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.1#3",
+       "label": "Use MVT to justify rates in context",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "5.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.2",
+     "title": "Extreme Value Theorem, Global Versus Local Extrema, and Critical Point",
+     "scope": "both",
+     "skills": [
+      "3.E"
+     ],
+     "requires": [
+      "5.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.2#1",
+       "label": "Local and global extrema vocabulary",
+       "kind": "concept",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#2",
+       "label": "Locate critical points",
+       "kind": "skill",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "5.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.2#3",
+       "label": "Critical point does not guarantee an extremum",
+       "kind": "misconception",
+       "skills": [
+        "3.E"
+       ],
+       "requires": [
+        "5.2#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.3",
+     "title": "Determining Intervals on Which a Function Is Increasing or Decreasing",
+     "scope": "both",
+     "skills": [
+      "2.E"
+     ],
+     "requires": [
+      "5.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.3#1",
+       "label": "Sign of f prime and monotonicity",
+       "kind": "concept",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.3#2",
+       "label": "Sign chart on test intervals",
+       "kind": "skill",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.3#3",
+       "label": "Read increasing intervals from a graph of f prime",
+       "kind": "representation",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "5.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.4",
+     "title": "Using the First Derivative Test to Determine Relative (Local) Extrema",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "5.3"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.4#1",
+       "label": "Sign change of f prime classifies extrema",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.4#2",
+       "label": "Write a justified conclusion",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "5.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.5",
+     "title": "Using the Candidates Test to Determine Absolute (Global) Extrema",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "5.4",
+      "5.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.5#1",
+       "label": "Candidates test on closed intervals",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#2",
+       "label": "Endpoints and interior critical values",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.5#3",
+       "label": "Justifying absolute extrema on open intervals",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "5.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.6",
+     "title": "Determining Concavity of Functions over Their Domains",
+     "scope": "both",
+     "skills": [
+      "2.E"
+     ],
+     "requires": [
+      "5.3",
+      "3.6"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.6#1",
+       "label": "Concavity and sign of f double prime",
+       "kind": "concept",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.6#2",
+       "label": "Inflection points need a sign change",
+       "kind": "misconception",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "5.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.6#3",
+       "label": "Concavity from graphs of f prime",
+       "kind": "representation",
+       "skills": [
+        "2.E"
+       ],
+       "requires": [
+        "5.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.7",
+     "title": "Using the Second Derivative Test to Determine Extrema",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "5.6",
+      "5.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.7#1",
+       "label": "Second derivative test procedure",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.7#2",
+       "label": "When the test is inconclusive",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "5.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.8",
+     "title": "Sketching Graphs of Functions and Their Derivatives",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "5.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.8#1",
+       "label": "Sketch f from information about f prime and f double prime",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.8#2",
+       "label": "Sketch f prime from a graph of f",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.9",
+     "title": "Connecting a Function, Its First Derivative, and Its Second Derivative",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "5.8"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "5.9#1",
+       "label": "Match f, f prime and f double prime graphs",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.9#2",
+       "label": "Interpret features across the three graphs",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "5.9#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.10",
+     "title": "Introduction to Optimization Problems",
+     "scope": "both",
+     "skills": [
+      "2.A"
+     ],
+     "requires": [
+      "5.5",
+      "4.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.10#1",
+       "label": "Express quantity to optimize in one variable",
+       "kind": "skill",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.10#2",
+       "label": "Determine feasible domain",
+       "kind": "concept",
+       "skills": [
+        "2.A"
+       ],
+       "requires": [
+        "5.10#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.11",
+     "title": "Solving Optimization Problems",
+     "scope": "both",
+     "skills": [
+      "3.F"
+     ],
+     "requires": [
+      "5.10"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "5.11#1",
+       "label": "Full workflow from model to justified max or min",
+       "kind": "skill",
+       "skills": [
+        "3.F"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "5.11#2",
+       "label": "Confirm extremum type and interpret",
+       "kind": "skill",
+       "skills": [
+        "3.F"
+       ],
+       "requires": [
+        "5.11#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.11#3",
+       "label": "Forgetting to check endpoints and boundaries",
+       "kind": "misconception",
+       "skills": [
+        "3.F"
+       ],
+       "requires": [
+        "5.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "5.12",
+     "title": "Exploring Behaviors of Implicit Relations",
+     "scope": "both",
+     "skills": [
+      "1.E",
+      "3.E"
+     ],
+     "requires": [
+      "3.2",
+      "5.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "5.12#1",
+       "label": "Critical points of an implicit curve",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.12#2",
+       "label": "Horizontal and vertical tangents of implicit curves",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "5.12#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "5.12#3",
+       "label": "Second derivative of an implicit relation",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "5.12#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "6",
+   "title": "Integration and Accumulation of Change",
+   "officialClassPeriods": "~18–20 AB",
+   "topics": [
+    {
+     "code": "6.1",
+     "title": "Exploring Accumulations of Change",
+     "scope": "both",
+     "skills": [
+      "4.B"
+     ],
+     "requires": [
+      "4.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.1#1",
+       "label": "Rate times time as accumulated amount",
+       "kind": "concept",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.1#2",
+       "label": "Area under a rate graph and units",
+       "kind": "representation",
+       "skills": [
+        "4.B"
+       ],
+       "requires": [
+        "6.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.2",
+     "title": "Approximating Areas with Riemann Sums",
+     "scope": "both",
+     "skills": [
+      "1.F"
+     ],
+     "requires": [
+      "6.1"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.2#1",
+       "label": "Left, right and midpoint sums",
+       "kind": "skill",
+       "skills": [
+        "1.F"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.2#2",
+       "label": "Trapezoidal sums from tables",
+       "kind": "skill",
+       "skills": [
+        "1.F"
+       ],
+       "requires": [
+        "6.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.2#3",
+       "label": "Over and underestimates by monotonicity",
+       "kind": "concept",
+       "skills": [
+        "1.F"
+       ],
+       "requires": [
+        "6.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.3",
+     "title": "Riemann Sums, Summation Notation, and Definite Integral Notation",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "6.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.3#1",
+       "label": "Sigma notation for sums",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#2",
+       "label": "Limit of Riemann sums as definite integral",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "6.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.3#3",
+       "label": "Convert a sum into an integral expression",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "6.3#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.4",
+     "title": "The Fundamental Theorem of Calculus and Accumulation Functions",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "6.3",
+      "2.7"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.4#1",
+       "label": "Accumulation function as integral with variable bound",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#2",
+       "label": "FTC part one derivative of an integral",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "6.4#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#3",
+       "label": "Chain rule with variable upper limit",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "6.4#2"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.4#4",
+       "label": "Treating the bound as a constant",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "6.4#2"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.5",
+     "title": "Interpreting the Behavior of Accumulation Functions Involving Area",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "6.4",
+      "5.9"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.5#1",
+       "label": "Increasing, decreasing and concavity of accumulation functions",
+       "kind": "concept",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.5#2",
+       "label": "Signed area from a graph of the integrand",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.5#3",
+       "label": "Extrema of accumulation functions",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "6.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.6",
+     "title": "Applying Properties of Definite Integrals",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "6.3"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.6#1",
+       "label": "Additivity and reversing limits",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.6#2",
+       "label": "Symmetry and constant multiples",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "6.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.6#3",
+       "label": "Integral value versus geometric area",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "6.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.8",
+     "title": "Finding Antiderivatives and Indefinite Integrals: Basic Rules and Nota",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "6.3",
+      "2.7"
+     ],
+     "estLessons": 1.25,
+     "subKeywords": [
+      {
+       "code": "6.8#1",
+       "label": "Antiderivative as an inverse of derivative",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.8#2",
+       "label": "Reverse power rule and basic functions",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "6.8#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.8#3",
+       "label": "Constant of integration",
+       "kind": "misconception",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "6.8#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.8#4",
+       "label": "Integral notation integrand and differential",
+       "kind": "representation",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.7",
+     "title": "The Fundamental Theorem of Calculus and Definite Integrals",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "6.4",
+      "6.8"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "6.7#1",
+       "label": "Evaluation part of FTC",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.7#2",
+       "label": "Evaluate definite integrals analytically",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "6.7#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.7#3",
+       "label": "Net change from a derivative",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "6.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.9",
+     "title": "Integrating Using Substitution",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "6.8",
+      "3.1"
+     ],
+     "estLessons": 1.5,
+     "subKeywords": [
+      {
+       "code": "6.9#1",
+       "label": "Recognizing an inner function and its derivative",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.9#2",
+       "label": "Indefinite substitution",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "6.9#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.9#3",
+       "label": "Definite substitution with new limits",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "6.9#2"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.9#4",
+       "label": "Changing variable but keeping old limits",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "6.9#3"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.10",
+     "title": "Integrating Functions Using Long Division and Completing the Square",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "6.9"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "6.10#1",
+       "label": "Polynomial long division before integrating",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "6.10#2",
+       "label": "Complete the square for arctan forms",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "6.14",
+     "title": "Selecting Techniques for Antidifferentiation",
+     "scope": "both",
+     "skills": [
+      "1.C"
+     ],
+     "requires": [
+      "6.9",
+      "6.10"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "6.14#1",
+       "label": "Classify an integral then choose a method",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "6.14#2",
+       "label": "Verify an antiderivative by differentiating",
+       "kind": "skill",
+       "skills": [
+        "1.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "7",
+   "title": "Differential Equations",
+   "officialClassPeriods": "~8–9 AB",
+   "topics": [
+    {
+     "code": "7.1",
+     "title": "Modeling Situations with Differential Equations",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "4.3",
+      "6.14"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.1#1",
+       "label": "Translate a rate statement into dy/dx form",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.1#2",
+       "label": "Proportionality relationships",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.2",
+     "title": "Verifying Solutions for Differential Equations",
+     "scope": "both",
+     "skills": [
+      "3.G"
+     ],
+     "requires": [
+      "7.1",
+      "3.2"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.2#1",
+       "label": "Check a candidate solution by substitution",
+       "kind": "skill",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.2#2",
+       "label": "General versus particular solution",
+       "kind": "concept",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.3",
+     "title": "Sketching Slope Fields",
+     "scope": "both",
+     "skills": [
+      "2.C"
+     ],
+     "requires": [
+      "7.1"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.3#1",
+       "label": "Slope fields as tangent direction samples",
+       "kind": "concept",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.3#2",
+       "label": "Plot slope marks from a given dy/dx",
+       "kind": "skill",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "7.3#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.3#3",
+       "label": "Slope depends on x only, y only or both",
+       "kind": "representation",
+       "skills": [
+        "2.C"
+       ],
+       "requires": [
+        "7.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.4",
+     "title": "Reasoning Using Slope Fields",
+     "scope": "both",
+     "skills": [
+      "4.D"
+     ],
+     "requires": [
+      "7.3",
+      "7.2"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.4#1",
+       "label": "Sketch a solution curve through a point",
+       "kind": "skill",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.4#2",
+       "label": "Match slope fields to differential equations",
+       "kind": "representation",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.4#3",
+       "label": "Deduce behavior and concavity from a slope field",
+       "kind": "concept",
+       "skills": [
+        "4.D"
+       ],
+       "requires": [
+        "7.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.6",
+     "title": "Finding General Solutions Using Separation of Variables",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "7.4",
+      "6.9"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "7.6#1",
+       "label": "Separating variables",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.6#2",
+       "label": "Integrate both sides and include the constant",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "7.6#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.6#3",
+       "label": "Solve explicitly for y",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "7.6#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.7",
+     "title": "Finding Particular Solutions Using Initial Conditions and Separation o",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "7.6"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.7#1",
+       "label": "Use an initial condition to find the constant",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.7#2",
+       "label": "State the domain of the particular solution",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "7.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "7.8",
+     "title": "Exponential Models with Differential Equations",
+     "scope": "both",
+     "skills": [
+      "3.G"
+     ],
+     "requires": [
+      "7.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "7.8#1",
+       "label": "dy/dt equals k y and its solution",
+       "kind": "concept",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "7.8#2",
+       "label": "Growth, decay and half-life problems",
+       "kind": "skill",
+       "skills": [
+        "3.G"
+       ],
+       "requires": [
+        "7.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "code": "8",
+   "title": "Applications of Integration",
+   "officialClassPeriods": "~19–20 AB",
+   "topics": [
+    {
+     "code": "8.1",
+     "title": "Finding the Average Value of a Function on an Interval",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "6.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.1#1",
+       "label": "Average value formula",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.1#2",
+       "label": "Average value versus average rate of change",
+       "kind": "misconception",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "8.1#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.1#3",
+       "label": "Mean value theorem for integrals idea",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "8.1#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.2",
+     "title": "Connecting Position, Velocity, and Acceleration of Functions Using Int",
+     "scope": "both",
+     "skills": [
+      "1.D"
+     ],
+     "requires": [
+      "6.7",
+      "4.2"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.2#1",
+       "label": "Displacement versus total distance",
+       "kind": "concept",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.2#2",
+       "label": "Find position from velocity with initial value",
+       "kind": "skill",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "8.2#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.2#3",
+       "label": "Using absolute value of velocity for distance",
+       "kind": "misconception",
+       "skills": [
+        "1.D"
+       ],
+       "requires": [
+        "8.2#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.3",
+     "title": "Using Accumulation Functions and Definite Integrals in Applied Context",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "6.7",
+      "6.5"
+     ],
+     "estLessons": 1,
+     "subKeywords": [
+      {
+       "code": "8.3#1",
+       "label": "Rate in, rate out and net amount",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.3#2",
+       "label": "Amount at a later time as initial plus net change",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "8.3#1"
+       ],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.3#3",
+       "label": "Interpreting an integral with units",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "8.3#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.4",
+     "title": "Finding the Area Between Curves Expressed as Functions of x",
+     "scope": "both",
+     "skills": [
+      "4.C"
+     ],
+     "requires": [
+      "6.7"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.4#1",
+       "label": "Top minus bottom integrand",
+       "kind": "concept",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.4#2",
+       "label": "Set up and evaluate for one region",
+       "kind": "skill",
+       "skills": [
+        "4.C"
+       ],
+       "requires": [
+        "8.4#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.5",
+     "title": "Finding the Area Between Curves Expressed as Functions of y",
+     "scope": "both",
+     "skills": [
+      "1.E"
+     ],
+     "requires": [
+      "8.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.5#1",
+       "label": "Right minus left integrand",
+       "kind": "concept",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.5#2",
+       "label": "Choose x or y integration by region shape",
+       "kind": "skill",
+       "skills": [
+        "1.E"
+       ],
+       "requires": [
+        "8.5#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.6",
+     "title": "Finding the Area Between Curves That Intersect at More Than Two Points",
+     "scope": "both",
+     "skills": [
+      "2.B"
+     ],
+     "requires": [
+      "8.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.6#1",
+       "label": "Find intersections with a calculator",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.6#2",
+       "label": "Split the region where curves cross",
+       "kind": "skill",
+       "skills": [
+        "2.B"
+       ],
+       "requires": [
+        "8.6#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "8.7",
+     "title": "Volumes with Cross Sections: Squares and Rectangles",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "8.4"
+     ],
+     "estLessons": 0.5,
+     "subKeywords": [
+      {
+       "code": "8.7#1",
+       "label": "Volume as integral of cross-sectional area",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.7#2",
+       "label": "Square and rectangle area expressions",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "8.7#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.8",
+     "title": "Volumes with Cross Sections: Triangles and Semicircles",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "8.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.8#1",
+       "label": "Triangle and semicircle area in terms of base",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.8#2",
+       "label": "Cross section on a diameter versus on a side",
+       "kind": "misconception",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "8.8#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.9",
+     "title": "Volume with Disc Method: Revolving Around the x- or y-Axis",
+     "scope": "both",
+     "skills": [
+      "3.D"
+     ],
+     "requires": [
+      "8.7"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.9#1",
+       "label": "Disc as circular cross section",
+       "kind": "concept",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.9#2",
+       "label": "Set up disc integral about either axis",
+       "kind": "skill",
+       "skills": [
+        "3.D"
+       ],
+       "requires": [
+        "8.9#1"
+       ],
+       "estLessons": 0.5
+      }
+     ]
+    },
+    {
+     "code": "8.10",
+     "title": "Volume with Disc Method: Revolving Around Other Axes",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "8.9"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.10#1",
+       "label": "Shift radius for a horizontal or vertical line axis",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.10#2",
+       "label": "Sketch to identify the radius",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.11",
+     "title": "Volume with Washer Method: Revolving Around the x- or y-Axis",
+     "scope": "both",
+     "skills": [
+      "4.E"
+     ],
+     "requires": [
+      "8.9",
+      "8.5"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.11#1",
+       "label": "Outer radius minus inner radius",
+       "kind": "concept",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.11#2",
+       "label": "Squaring each radius separately",
+       "kind": "misconception",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "8.11#1"
+       ],
+       "estLessons": 0.25
+      },
+      {
+       "code": "8.11#3",
+       "label": "Evaluate with calculator and round correctly",
+       "kind": "skill",
+       "skills": [
+        "4.E"
+       ],
+       "requires": [
+        "8.11#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    },
+    {
+     "code": "8.12",
+     "title": "Volume with Washer Method: Revolving Around Other Axes",
+     "scope": "both",
+     "skills": [
+      "2.D"
+     ],
+     "requires": [
+      "8.10",
+      "8.11"
+     ],
+     "estLessons": 0.75,
+     "subKeywords": [
+      {
+       "code": "8.12#1",
+       "label": "Washers about shifted axes",
+       "kind": "skill",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [],
+       "estLessons": 0.5
+      },
+      {
+       "code": "8.12#2",
+       "label": "Verify with a quick sketch of radii",
+       "kind": "representation",
+       "skills": [
+        "2.D"
+       ],
+       "requires": [
+        "8.12#1"
+       ],
+       "estLessons": 0.25
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
