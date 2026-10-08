@@ -1,0 +1,31 @@
+# 파서 오류 재판정(+24 추정) 중 확정분 (2026-10-09)
+
+검토 도구 출력이 깨져(`<parameter name="pass">true` 문자열) 구 파서가 5개 기준을 전부 불통과로 처리해 반려된 후보. **+24는 추정이었고 재고에 적용하지 않았다.** 아래는 후보 ID·오류 파서·사후 결과가 모두 확인된 건만 상태를 올렸다(`data/ap/stock/reparse-candidates.json` 의 `confirmed`, `stock.ts` 가 읽음). 확정 조건: (1) 원 검토 결과의 해당 기준 필드가 실제로 문자열(깨진 출력), (2) 반려 사유가 전부 그 필드의 `criterion_failed_*`, (3) 정규화 파서(`review-parse.ts`, 해시 66ad0da7e962)로 다시 판정한 전체 게이트(결정적·독립 풀이·검토·난이도) 통과.
+
+- 오류 파서: 정규화 도입 전(생성 당시) 파서(커밋 0e0d49ec 이전)
+- 사후 파서: `lib/ap-generation/review-parse.ts`(해시 66ad0da7e962)
+- 확정 18건(AB 12, BC 6). 재고 상태: rejected → auto_passed(이력 `reparse-2026-10-09` 기록), 단 1건은 같은 내용 canonical 이 바뀌어 exact_duplicate 로 이동. auto_passed 133 → 150, exact_duplicate 4 → 5.
+
+| 런 | 후보 | 이전 반려 사유 | 깨진 필드 |
+|---|---|---|---|
+| run2 | ap_calculus_ab-m05-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m08-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m08-k3 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m12-k2 | criterion_failed_scope_skill | scope_skill |
+| run2 | ap_calculus_ab-m14-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m15-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m20-k2 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m21-k1 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m21-k2 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m22-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-m25-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2 | ap_calculus_ab-f02-k3 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2bc | ap_calculus_bc-m03-k0 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2bc | ap_calculus_bc-m05-k2 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2bc | ap_calculus_bc-m12-k2 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2bc | ap_calculus_bc-m13-k1 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2bc | ap_calculus_bc-m13-k2 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+| run2bc | ap_calculus_bc-m15-k2 | criterion_failed_scope_skill; criterion_failed_key_scoring; criterion_failed_stimulus_expression; criterion_failed_distractor_explanation; criterion_failed_exam_suitability | scope_skill, key_scoring, stimulus_expression, distractor_explanation, exam_suitability |
+
+## 확정되지 않은 6건(파서 오류 아님)
+근사 중복 게이트(`duplicate_gate_near_duplicate`)로 반려된 후보다: ap_calculus_ab-m06-k3, ap_calculus_ab-m15-k3, ap_calculus_ab-m25-k3, ap_calculus_ab-f03-k1, ap_calculus_bc-m02-k3, ap_calculus_bc-m16-k3. 재고 정책상 근사 중복은 반려가 아니라 같은 문항군의 변형(완전 중복만 제외)이므로 별도 정책 결정 대상이며 이번에 바꾸지 않았다.

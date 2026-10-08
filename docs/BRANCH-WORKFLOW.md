@@ -121,3 +121,12 @@ done
   해당 세션에 알린다.
 - 이 세 단계를 통과하기 전에는 `vercel deploy`도, 다음 브랜치의 merge도 진행하지
   않는다.
+
+## 격리 Supabase 스택 정리 안전 절차 (2026-10-08)
+
+사고: 격리 스택 검증 후 `supabase/config.toml`을 원복한 상태에서 인자 없는 `supabase stop`을 실행해 **공유 스택(ALTON)** 이 내려갔다(데이터는 보존, 즉시 재기동). 재발 방지 규칙:
+
+- 격리 스택은 `scripts/dev/isolated-stack.sh`로만 시작·정리한다. `start ALTON_<이름>` 은 config.toml 의 project_id·포트(+100)를 임시 변경하고 `tmp/isolated-stack.lock` 에 id 를 기록한 뒤 `supabase start`(마이그레이션 전부 처음부터 적용). `stop` 은 락의 id 를 `lib/dev/isolated-stack-guard.ts` 로 검사해 통과할 때만 `supabase stop --project-id <id> --no-backup` 을 실행하고 config 를 원복한다.
+- 차단 조건: id 없음, 락 없음/불일치, id 가 `ALTON`(또는 `ALTON_<영숫자>` 형식이 아님), 대상 컨테이너에 `supabase_*_ALTON` 포함, 컨테이너가 대상 id 접미사가 아님, 포트가 54320~54329·54420~54429·54325 계열.
+- **금지**: 인자 없는 `npx supabase stop`, `supabase stop --project-id ALTON`, 이름만으로 `docker rm`/`docker volume rm`. 컨테이너·볼륨을 직접 지울 때도 `docker ps -a` 로 이름 접미사(`_ALTON_<이름>`)를 확인한 것만 지운다.
+- 공유 DB의 마이그레이션 적용 상태(예: 556 vs 566)는 이 절차에서 맞추지 않는다. 적용은 조정 세션 몫이다.

@@ -163,6 +163,7 @@ describe("SubjectTemplateTab", () => {
     vi.mocked(actions.removeUnitKeyword).mockResolvedValue({ ok: true });
     render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
 
     fireEvent.change(screen.getByPlaceholderText("새 키워드 (예: 이차방정식)"), {
       target: { value: "이차방정식" },
@@ -170,8 +171,9 @@ describe("SubjectTemplateTab", () => {
     fireEvent.click(screen.getByText("추가"));
     await waitFor(() => expect(folderActions.createKeywordInFolder).toHaveBeenCalledWith("sub1", "이차방정식", null));
 
-    // 사전에 등록된 뒤에는 회차별 태그 버튼으로도 나타난다(두 곳 모두 표시).
-    await waitFor(() => expect(screen.getAllByText("이차방정식").length).toBeGreaterThanOrEqual(2));
+    // 사전에 등록된 뒤에는 회차 구성 탭의 회차별 키워드 선택기(기본 접힘)에도 나타난다.
+    fireEvent.click(screen.getByRole("button", { name: "회차 구성" }));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 모두 펼치기" }));
 
     fireEvent.click(screen.getByLabelText("함수의 기초 회차에 이차방정식 태그"));
     await waitFor(() => expect(actions.assignUnitKeyword).toHaveBeenCalledWith("u1", "kw1"));
@@ -187,6 +189,7 @@ describe("SubjectTemplateTab", () => {
     });
     render(<Wrapper initialSubjects={[satMath]} />);
     fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
 
     fireEvent.change(screen.getByPlaceholderText("새 키워드 (예: 이차방정식)"), {
       target: { value: "중복키워드" },
@@ -214,6 +217,8 @@ describe("과목 키워드 이름 수정", () => {
   function openKeywordEditor() {
     render(<Wrapper initialSubjects={[withKeyword]} />);
     fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
+    fireEvent.click(screen.getByRole("button", { name: "모두 펼치기" }));
     fireEvent.click(screen.getByRole("button", { name: "포물선" }));
     return screen.getByLabelText("키워드 이름");
   }
@@ -267,8 +272,56 @@ describe("회차 키워드 태그 — 도메인 그룹(관리자는 한국어 '�
     };
     render(<Wrapper initialSubjects={[subject]} />);
     fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 모두 펼치기" }));
     expect(screen.getByText("Algebra")).toBeInTheDocument();
     expect(screen.getAllByText("기타").length).toBeGreaterThanOrEqual(1);
     expect(screen.getByLabelText("함수의 기초 회차에 Linear equations 해제")).toHaveAttribute("aria-pressed", "true");
+  });
+});
+
+describe("AP 회차 구성 / 키워드 사전 서브탭", () => {
+  const ap: AdminSubject = {
+    subjectId: "ap1",
+    subjectName: "AP Calculus AB",
+    units: [
+      { id: "L1", position: 1, unitTitle: "Unit 1 · Lesson 1: Limits", note: null, keywordIds: ["k1", "k2"], lessonKind: "content", trackSet: "compact", estMinutes: 110, cedUnitCode: "1" },
+      { id: "X1", position: 2, unitTitle: "Exam Prep 1", note: null, keywordIds: [], lessonKind: "exam_prep", trackSet: "compact", estMinutes: 110, cedUnitCode: null },
+    ],
+    keywords: [
+      { id: "k1", label: "Limit notation", status: "active", folderId: "f1", folderName: "Unit 1", folderPosition: 1 },
+      { id: "k2", label: "One-sided limits", status: "active", folderId: "f1", folderName: "Unit 1", folderPosition: 1 },
+    ],
+    folders: [{ id: "f1", name: "Unit 1", position: 1 }],
+  };
+
+  it("회차 구성이 기본 탭이고 배지(종류·단원·과정·분)가 보이며 키워드는 접혀 있다", () => {
+    render(<Wrapper initialSubjects={[ap]} />);
+    fireEvent.click(screen.getByText("편집"));
+    expect(screen.getByRole("button", { name: "회차 구성" })).toHaveAttribute("aria-current", "page");
+    const badges = screen.getAllByTestId("lesson-badges");
+    expect(badges).toHaveLength(2);
+    expect(badges[0]).toHaveTextContent("내용");
+    expect(badges[0]).toHaveTextContent("Unit 1");
+    expect(badges[0]).toHaveTextContent("컴팩트");
+    expect(badges[0]).toHaveTextContent("110분");
+    expect(badges[1]).toHaveTextContent("시험 준비");
+    const toggle = screen.getByRole("button", { name: /Lesson 1: Limits 회차 키워드 펼치기/ });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveTextContent("키워드 2개");
+    expect(screen.queryByLabelText(/회차에 Limit notation/)).not.toBeInTheDocument();
+    fireEvent.click(toggle);
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("키워드 사전 탭은 폴더가 접힌 채로 열리고 모두 펼치기·검색이 된다", () => {
+    render(<Wrapper initialSubjects={[ap]} />);
+    fireEvent.click(screen.getByText("편집"));
+    fireEvent.click(screen.getByRole("button", { name: "키워드 사전" }));
+    expect(screen.queryByText("Limit notation")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "모두 펼치기" }));
+    expect(screen.getByText("Limit notation")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "모두 접기" }));
+    fireEvent.change(screen.getByLabelText("키워드 검색"), { target: { value: "one-sided" } });
+    expect(screen.getByText("One-sided limits")).toBeInTheDocument();
   });
 });

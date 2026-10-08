@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
-import { buildMockExamListRows } from "@/lib/mock-exam/open-list";
+import { buildMockExamListRows, isApRow } from "@/lib/mock-exam/open-list";
 import MockExamOpenList from "@/app/components/MockExamOpenList";
 import { loadChildMockExamOverviewAction } from "./mock-exam-tab-actions";
 
@@ -29,7 +29,8 @@ export default function ParentMockExamTab({ studentId }: { studentId: string | n
     };
   }, [studentId]);
 
-  const rows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts) : []), [overview]);
+  // AP 모의고사 학부모 결과 화면은 이번 범위 밖(SAT 결과 화면이 AP 상세를 읽지 못한다) — 학부모 목록은 SAT 만.
+  const rows = useMemo(() => (overview ? buildMockExamListRows(overview.catalog, overview.attempts).filter((r) => !isApRow(r)) : []), [overview]);
 
   if (!studentId) return <p className="p-8 text-[14px] text-grey-500">Please select a child first.</p>;
   if (error) return <p className="p-8 text-[14px] text-red">{error}</p>;

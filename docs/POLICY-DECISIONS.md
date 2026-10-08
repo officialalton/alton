@@ -49,3 +49,4 @@
 - 지급은 당분간 수동: ALTON에서 정산 승인 후 지급 입력표(CSV)를 받아 Mercury 화면에서 직접 송금(미국 USD·한국 KRW 모두), Mercury API는 읽기 전용 토큰으로 상태·대사만(Read and Write 토큰은 만들지 않음). 자동 요청(RequestSendMoney Custom 토큰→승인 대기열)은 B 단계로 보류, KRW API 지원 확인 후 재검토, 완전 자동·고정 IP는 필요할 때 — 10-08 오너 결정 — guard: 리뷰(스위치 닫힘 테스트)
 - 학생 포털 "Mistake Notebook"은 "My Notebook"으로 개명: 서브탭 All / My Notebook(직접 저장한 비오답) / Mistake Notebook(오답·부분 정답), Grade 필터 폐지, Section→Main category→Sub-category 필터, 개인 폴더(삭제해도 문제는 Unfiled로 복귀) — 10-08 오너 결정 — guard: app/student/ProblemHistoryTab.test.tsx, app/student/notebook.integration.test.ts
 - Practice Tests 목록은 번호 오름차순(자연 정렬)·5개씩 페이지·To do/Completed 서브탭, 홈 'Next Practice Test'는 끝내지 않은 가장 낮은 번호 — 10-08 오너 결정 — guard: lib/mock-exam/open-list.test.ts, app/student/StudentMockExamTab.test.tsx
+- AP 문항 용도는 변환 때 mock_exam(모의고사) 또는 lesson(수업·과제) 하나로 고정되며 변경·공유·예외 없음(세트 조립은 모의 용도만, 선생님 선택기는 수업 용도만, 무료 회원은 수업 용도 비노출, 용도별 재고 별도 집계) — 10-09 오너 결정 — guard: lib/ap-exam/ap-exam.integration.test.ts

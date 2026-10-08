@@ -8,6 +8,7 @@
 //   4. 정답 근거      — 정답이 자료·질문과 실제로 맞고, 자료에서 노출되지 않는가
 //   5. 답안 형식      — 객관식 / SPR / 로마숫자 조합의 입력·정규화·채점 규칙
 // 하나라도 끊기면 초안으로 저장하지 않고 사유를 생성기에 돌려 자동 보완·재생성한다(lib/problem-generation/pipeline).
+import { answerLeakGate, isLeakCheckedSkill } from "./rw-answer-leak";
 import type { FigureIssue } from "./problem-figures/templates/_layout";
 import { checkFigure } from "./problem-figures/check";
 import { checkContent } from "./problem-content-check";
@@ -146,6 +147,13 @@ export function checkQualityContract(input: ContractInput): ContractResult {
   issues.push(...fc.issues.map((i) => ({ ...i, code: `contract_${i.code}` })));
   // 내용(수식·선택지·진술·SPR 형식)은 RW 검사를 중복하지 않게 skillCode 없이.
   issues.push(...checkContent({ format: input.format, passage: text, options: input.options, correctIndex: input.correctIndex, explanation: input.explanation, answers: input.answers, statements: input.statements, skillCode: null, figure: input.figure ?? null }).map((i) => ({ ...i, code: `contract_${i.code}` })));
+
+  // 2026-10-08 정답 누설 게이트 — 질문이 말한 대상·수치·문구를 정답만 반복하면(오답은 다른 틀) 자료·지문을 읽지 않고도 정답이 드러난다.
+  // 코드로 확정 가능한 강한 신호만 저장 거부 사유로 삼는다(약한 신호·확정은 scripts/mock-exam-generation/answer-leak-audit.ts 보고서).
+  if (isMc && opts.length === 4 && input.correctIndex !== null && input.correctIndex >= 0 && input.correctIndex < 4 && input.skillCode && isLeakCheckedSkill(input.skillCode)) {
+    const leak = answerLeakGate({ question: input.question ?? "", options: opts, correctIndex: input.correctIndex, skill: input.skillCode }, new Map());
+    if (!leak.ok) issues.push({ code: "contract_answer_leak", message: `정답이 질문만으로 드러납니다 — ${leak.reasons.join("; ")}. 오답도 정답의 문장 틀·주체를 따르되 자료·지문과 맞지 않게 다시 쓰세요.` });
+  }
 
   // 유형별 추가 연결.
   const code = input.skillCode ? rwSkillCode(input.skillCode) ?? input.skillCode : null;

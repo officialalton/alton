@@ -1,0 +1,1465 @@
+[
+ {
+  "key": "s1c-fig-01-k0",
+  "cellId": "s1c-fig-01",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Chain rule: f'(g(2))g'(2)=f'(4)(-4)=2(-4)=-8",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct chain rule application using table values; matches 3.1 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(2)=f'(4)*g'(2)=2*(-4)=-8; unique correct answer, key index 1 matches."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with all needed values; stem is clear and states differentiability."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic misconceptions (omit inner derivative, use f instead of f', evaluate f' at wrong point); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculator needed, simple integer arithmetic, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean chain rule table problem. The key of -8 is correct and unique, the distractors are distinct and each is explained, and the load is typical of the AP exam. It passes all five criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-02-k0",
+  "cellId": "s1c-fig-02",
+  "passed": false,
+  "reasons": [
+   "reference_time_out_of_range"
+  ],
+  "soft": []
+ },
+ {
+  "key": "s1c-fig-03-k0",
+  "cellId": "s1c-fig-03",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: (9*5-60*2)/25 = -75/25 = -3",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct quotient rule at a point from a table; fits 2.9 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(45-120)/25=-3; unique correct option at index 3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with units; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (no square, quotient of derivatives, order reversal); all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct quotient-rule item with a complete table and plausible distractors. It is suitable for the exam."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-04-k0",
+  "cellId": "s1c-fig-04",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": []
+ },
+ {
+  "key": "s1c-fig-05-k0",
+  "cellId": "s1c-fig-05",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: (f'g - fg')/g^2 = (-12+2)/9 = -10/9",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-10/9"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct quotient rule evaluation from table; fits 2.9 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q'(1)=(-12+2)/9=-10/9; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table complete with f, f', g, g' at x=1; stem clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct realistic errors (reversed numerator, ratio of derivatives, wrong numerator). Key explanation is terse ('Quotient rule.') but all wrong options are explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, simple arithmetic, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean quotient-rule table item. The key explanation could show the computation, but it is acceptable."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-06-k0",
+  "cellId": "s1c-fig-06",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫10→0 f = -(6-2) = -4; ∫4→10(3f+2) = 3(-2)+2(6) = 6; sum = 2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Applies Topic 6.6 integral properties (additivity, reversal, linearity, constant integral); no later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Total = -4 + 6 = 2; unique correct answer, key index matches."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table gives both needed integral values; f continuous stated; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct realistic property error; the explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 90 seconds, simple arithmetic, exact options, suitable for non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound Topic 6.6 item. The key is correct and unique, the table is complete, the distractors are distinct and explained, and the load is appropriate for a non-calculator MC."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-07-k0",
+  "cellId": "s1c-fig-07",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The table's slope of 4 at (1,1) matches no option. x+y gives 2 there, so it is probably a typo. As written, no option fits the whole table.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "dy/dx = x + y",
+     "brief_reasoning": "x+y gives the table's slope at 5 of the 6 points. It fails only at (1,1), where it gives 2 but the table says 4. Each of the other three options fails at at least one point.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The table's slope of 4 at (1,1) matches no option. x+y gives 2 there, so it is probably a typo. As written, no option fits the whole table."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Matching a table of slopes to a differential equation fits topic 7.3 and skill 2.C."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key x+y gives slope 2 at (1,1), but the table shows 4. No option reproduces the whole table. The rationale's claim that the key matches every point is false."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table entry (1,1)→4 is inconsistent with every option. The explanation for x^2-y states the table shows 2 at (1,1), which contradicts the rendered 4."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for x^2-y cites a table value (2 at (1,1)) that does not match the table. The key's explanation is false as written."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A table with an inconsistent value would mislead students and is not suitable for an exam."
+   },
+   "instant_reject": [
+    "wrong_key",
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The table entry (1,1)→4 matches no option. x+y gives 2 there, so the key is not fully consistent with the stimulus. The x^2-y explanation also misquotes the table (it says 2 at (1,1)). The item is rejected for a wrong key and a faulty stimulus."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-08-k0",
+  "cellId": "s1c-fig-08",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Correct value is 84; no option matches. Even reading the third row as ∫6^10 = 7 gives 42, also not an option.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫0^10 g = 30 + (−5) = 25. ∫10^6 g = 7, so ∫6^10 g = −7. ∫0^6 g = 25 − (−7) = 32. Integral = 3(32) − 2(6) = 84, not among options.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Correct value is 84; no option matches. Even reading the third row as ∫6^10 = 7 gives 42, also not an option.",
+     "final_answer": "84",
+     "choice_index": null
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is unusable because the keyed answer does not follow from the displayed data.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The table shows ∫0^4 g = 30, but the key uses 18. The correct value from the table is 84, which is not among the options, so the item has no correct answer."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-09-k0",
+  "cellId": "s1c-fig-09",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "lim x->1- =3, lim x->1+ =1, lim x->3 =4; sum 8",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit 1 topic 1.3: one-sided and two-sided limits read from a graph, including a jump and a removable discontinuity. Fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Left limit at 1 is 3, right limit at 1 is 1, limit at 3 is 4. The sum is 8, which is option D and is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph is clear and the stem explains the open-circle and filled-dot conventions. Nothing is missing."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The three distractors each encode a distinct misconception (one-sided equals two-sided, limit equals function value at 3, function value at 1 used for the right limit). The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator, short numeric options in parallel form."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well formed: the key is 8 and it is unique. The graph is complete, the distractors reflect distinct misconceptions, and the explanation covers each wrong option. It is a suitable AP-style item."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-10-k0",
+  "cellId": "s1c-fig-10",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Chain rule: f'(g(1))g'(1)=f'(5)(-3)=2(-3)=-6",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "-6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct chain rule application from a table; matches topic 3.1 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(1)=f'(5)*g'(1)=2*(-3)=-6; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and legible and contains all needed values; stem is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct realistic error (f'(1)*g(1), f(5)*g'(1), omitting inner derivative); explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-70 seconds, no calculator needed, short parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean chain-rule table item with distinct distractors and appropriate load; passes all criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-11-k0",
+  "cellId": "s1c-fig-11",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Left Riemann sum with width 2: 2(7+7+1+5)=40",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "40"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Left Riemann sum from a table, topic 6.2; extracting values from the table fits skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Left sum = 2(7+7+1+5)=40; unique answer. Right=44, trapezoid=42, unmultiplied=20."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete and clear; the stem specifies the left sum and the four subintervals."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor encodes a distinct realistic error and the explanation addresses each one."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct left Riemann sum from a table with a unique key of 40 and plausible distractors. It passes all five criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-12-k0",
+  "cellId": "s1c-fig-12",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": []
+ },
+ {
+  "key": "s1c-fig-13-k0",
+  "cellId": "s1c-fig-13",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "∫0^6 f=5+(-4)=1; ∫0^6(2f-g)=2-10=-8; reversing limits gives 8.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "8"
+    }
+   ]
+  },
+  "review": {
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationales are built on the incorrect f value of -3 and do not match the table; the 8 option is actually the correct answer."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Task load is suitable for the AP exam, but the item is invalid because of the key error."
+   },
+   "instant_reject": [
+    "wrong_key",
+    "wrong_stimulus"
+   ],
+   "key_scoring": {
+    "pass": false,
+    "notes": "The table gives ∫f over [2,6] = -4, so ∫0^6 f = 1, ∫0^6(2f-g) = -8, and the reversed limits give 8. The keyed answer 6 is wrong; the correct answer is option 3 (8)."
+   },
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "Properties of definite integrals (additivity, linearity, reversing limits) fit topic 6.6 and skill 1.E."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The explanation and key use -3 for the integral of f over [2,6], but the table shows -4. The stimulus and the solution are inconsistent."
+   },
+   "summary": "The item is rejected. The key (6) uses ∫f over [2,6] = -3, but the table shows -4. The correct value is 8 (option index 3), and the independent solver agrees. The distractor rationales are also wrong because they rely on -3."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-14-k0",
+  "cellId": "s1c-fig-14",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "(f(7)-f(3))/(7-3) = (94-30)/4 = 16",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "16"
+    }
+   ]
+  },
+  "review": {
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Explanations for 18 and 14 are false. The one-sided slope on [5,7] is (94-94)/2 = 0, and on [3,5] it is (94-30)/2 = 32. Neither equals the listed value. These two distractors do not encode the misconceptions claimed."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, simple arithmetic, appropriate for a non-calculator item."
+   },
+   "instant_reject": [],
+   "key_scoring": {
+    "pass": true,
+    "notes": "16 = (94-30)/4 is correct and unique."
+   },
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "scope_skill": {
+    "pass": true,
+    "notes": "Estimating a derivative from a table; fits topic 2.3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear."
+   },
+   "summary": "The key (16) is correct, but the explanations for distractors 18 and 14 claim one-sided slopes that actually evaluate to 0 and 32. The distractor rationales are therefore wrong and the distractors are not realistic, so the item fails the distractor criterion."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-15-k0",
+  "cellId": "s1c-fig-15",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "(f(7)-f(3))/(7-3) = (43/2-11/2)/4 = 16/4 = 4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 2.3 estimating derivative from table; reading the table and computing the symmetric difference quotient fits 2.B reasonably."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "(43/2-11/2)/4=4; unique correct answer. Distractor values verified consistent with their descriptions."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is complete with x and f(x) values; stem is clear. Options are exact values."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions (wrong divisor, one-sided intervals); explanation covers each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, about 70 seconds, no calculator needed, fractions are manageable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, in-scope table-based derivative estimation item with well-motivated distractors. It is slightly procedural because the stem names the method, but it is acceptable."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-16-k0",
+  "cellId": "s1c-fig-16",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": []
+ },
+ {
+  "key": "s1c-fig-17-k0",
+  "cellId": "s1c-fig-17",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The graph contradicts the stem. It shows f' going from (0,4) to (4,~0.1) to (6,~2.1) to (7.3,4), so f' is always positive, f has no extrema, and every option would be false.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B",
+     "brief_reasoning": "Per the stem's points, f' goes from + to − at x=2, so f has a local max there. f' has its minimum at x=4, so f has an inflection point there. f' goes from − to + at x=6, so f has a local min there.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The graph contradicts the stem. It shows f' going from (0,4) to (4,~0.1) to (6,~2.1) to (7.3,4), so f' is always positive, f has no extrema, and every option would be false."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic and skill fit 5.9 / 2.D."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "With the rendered graph, f' is always positive, so f has no local extrema and the keyed option B is false. No option is true."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The graph contradicts the stem. It shows (0,4), (4,~0.1), (6,~2.1), (~7.3,4) instead of the stated points (0,2), (2,0), (4,-2), (6,0), (8,3). The axis range also does not match the stated data."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanations rely on sign changes of f' that do not appear in the rendered graph."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A student cannot reconcile the stem with the figure, so the item is not usable."
+   },
+   "instant_reject": [
+    "wrong_stimulus",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The rendered graph of f' does not match the points given in the stem. As rendered, f' is always positive, so f has no extrema and the keyed answer is false. Reject for wrong stimulus and wrong key."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-18-k0",
+  "cellId": "s1c-fig-18",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "L=56, L<A; T=66, T<A",
+     "brief_reasoning": "Values 2,6,9,11,12. L=2(28)=56. T=66. Because r is increasing, the left sum underestimates. Because r is concave down, the trapezoids underestimate.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "Minor: the graph is drawn as straight segments, which is not differentiable at the corners and would make T=A. The stem's 'concave down' condition settles which answer is intended."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.2, relating Riemann/trapezoidal approximations to actual value via monotonicity and concavity (skill 1.F). In scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "L=56, L<A (increasing), T=66, T<A (concave down). Unique correct option; others each have a wrong inequality or value."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph readable at grid points (2,6,9,11,12). The drawn polyline looks piecewise linear, slightly at odds with 'differentiable and concave down', but the stem's stated conditions govern and the intended reading is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode distinct misconceptions (right-endpoint use, reversed concavity rule, left/right confusion); explanation addresses each."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light arithmetic, no calculator needed, about 90-120 seconds, typical of AP MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a unique key and good distractors. The only blemish is that the graph is drawn with straight segments while the stem states the function is differentiable and concave down, which is a minor inconsistency that does not affect the answer."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-19-k0",
+  "cellId": "s1c-fig-19",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Correct value 14/3 not among options; options seem to stem from wrong formulas (e.g., f'/g' = -2/3).",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: q'(1)=(f'g-fg')/g^2 = ((-4)(-3)-(-5)(6))/9 = 42/9 = 14/3. No option matches.",
+     "ambiguous_or_flawed": true,
+     "choice_index": null,
+     "final_answer": "14/3",
+     "flaw_note": "Correct value 14/3 not among options; options seem to stem from wrong formulas (e.g., f'/g' = -2/3)."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Quotient rule evaluation from a table fits topic 2.9 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Correct q'(1) = ((-4)(-3) - (-5)(6))/9 = 42/9 = 14/3. The keyed answer 4 is wrong, and no option equals 14/3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales do not match the table values. For example, -12 is described as the correct numerator over g, which would give -14. The key's explanation is only 'Quotient rule'."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item cannot be used because it has no correct option."
+   },
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The correct value is q'(1) = 14/3, which is not among the options. The keyed answer 4 is wrong, and the distractor rationales are inconsistent with the table values."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-20-k0",
+  "cellId": "s1c-fig-20",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "1/4",
+     "brief_reasoning": "Rationalize: 1/(sqrt(x+2)+2) → 1/4 as x approaches 2; the table values approach 0.25; f(2)=2 does not affect the limit.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Unit 1 limit from table; in scope. Giving the formula allows algebraic bypass, but the table is the stated source."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Limit is 1/4 (rationalizing gives 1/(sqrt(x+2)+2)); table values are consistent; f(2)=2 is a deliberate distractor. Key unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has x values on both sides of 2 with f(x) values, complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions (0/0 as 0, f(a) as limit, DNE due to mismatch). Explanation's '1/(2c)' phrase is sloppy template wording but not a substantive error."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean table-based limit item with a deliberate f(2) distractor; minor weakness that the formula allows algebraic solution and the explanation has a vague '1/(2c)' remark."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-21-k0",
+  "cellId": "s1c-fig-21",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h'(x)=2x f(x^2); h'(2)=4 f(4)=4(-2)=-8",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC Part 1 with chain rule; fits 6.4 and skill 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(2)=f(4)*4=-8; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table gives f(2) and f(4); both needed/used. Continuity stated. Clear wording."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception (no chain rule, missing 2x, f(x) instead of f(x^2)); all explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Quick, no calculator, exact values, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean FTC-with-chain-rule MC item with distinct distractors and complete table; acceptable."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-22-k0",
+  "cellId": "s1c-fig-22",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Diameter = sqrt(x), so the semicircle's area is (1/2)π(sqrt(x)/2)^2 = πx/8. Integrate from 0 to 4: π/8 · 8 = π.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "π",
+     "flaw_note": "The graph draws y = sqrt(x) as straight segments through (0,0), (1,1) and (4,2), which is only a coarse sketch of the curve. The stem's equation decides the answer."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.8 semicircle cross sections fits. The skill is mostly procedural, with light representation extraction."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "π is the unique correct answer from the stem's equation y=sqrt(x)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The graph draws the boundary as straight segments through (0,0), (1,1) and (4,2), not the sqrt(x) curve, so the figure contradicts the stem. Reading the polyline as the boundary gives a different volume. The graph is also unnecessary for solving the item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (full circle, diameter used as radius, radius not squared), and each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Load is typical for a non-calculator item, with exact-form options."
+   },
+   "instant_reject": [
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The math and key are correct, but the stimulus graph shows a piecewise-linear boundary rather than y=sqrt(x), which misrepresents the region and conflicts with the stem. The item should be rejected until the figure is rendered correctly or removed."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-23-k0",
+  "cellId": "s1c-fig-23",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The graph contradicts the dashed-line end behavior. g crosses y=4 and keeps rising steeply past 6, so it does not approach 4. On the left it sits near 1.75 with no sign of approaching -1.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "Only y=2",
+     "brief_reasoning": "Intended: g→4 as x→∞ gives h→10/5=2; g→-1 as x→-∞ gives h unbounded (-5/0), no asymptote.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The graph contradicts the dashed-line end behavior. g crosses y=4 and keeps rising steeply past 6, so it does not approach 4. On the left it sits near 1.75 with no sign of approaching -1."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.15 with a representation change; in scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key depends on g→4 as x→∞ and g→-1 (from above) as x→-∞. The plotted curve crosses y=4 and rises past 6, and on the left it sits near 1.75 and is nearly flat, never approaching -1. The graph supports neither limit, so the key is not defensible from the stimulus."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The curve contradicts the dashed-line end-behavior description. Approach from above to -1 is not shown or stated. The data do not specify the end behavior."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor is explained and reflects a plausible misconception."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "A misleading graph makes the item ambiguous and unsuitable for the exam."
+   },
+   "instant_reject": [
+    "wrong_stimulus",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The graph contradicts the stated end behavior: g rises past 6 instead of approaching 4, and on the left it is near 1.75 rather than approaching -1. The side from which g approaches -1 is also not established. The key relies on limits the stimulus does not show, so the item is rejected."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-24-k0",
+  "cellId": "s1c-fig-24",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Chain rule: h'(1)=f'(g(1))g'(1)=f'(2)(-3)=9",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "9"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short, non-calculator, typical AP time load.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well scoped, but the explanation for distractor -9 cites f(2)=3 while the table shows f(2)=6. The distractor rationale is inconsistent with the stimulus, so the item fails the distractor/explanation criterion and needs fixing before use."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-25-k0",
+  "cellId": "s1c-fig-25",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: ((-4)(1)-(5)(-4))/1^2 = 16",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "16"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct quotient rule evaluation from a table; fits topic 2.9 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q'(4) = [(-4)(1) - (5)(-4)]/1 = 16; key index 2 is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table gives f(4), f'(4), g(4), g'(4); complete and clear. Stem states differentiable functions."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors 11, -16, 1 each map to a distinct realistic error and the explanations are consistent. The correct-answer rationale is terse, and g(4)=1 hides denominator errors, but this is minor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, no calculator needed, simple numbers, four short parallel options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean quotient-rule table item with plausible distractors; the only weakness is g(4)=1, which does not test denominator errors."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-26-k0",
+  "cellId": "s1c-fig-26",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Rationalizing gives 1/(sqrt(x+20)+5), which approaches 1/10 as x approaches 5. The table values near 0.1000 confirm this, and the value f(5)=5 does not affect the limit.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "1/10"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 1.4 table-based limit with removable discontinuity; in scope for Unit 1. The explicit formula lets students solve it algebraically, which slightly dilutes the table-reading demand, but the table still confirms the value."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key 1/10 is unique and correct. Rationalizing gives 1/(sqrt(x+20)+5), which approaches 1/10. The table values are consistent with this."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stimulus data contains only the description '(shown in the attached image)' with no machine-readable x and f(x) values. The data object cannot be used to render the table, so it is incomplete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors (DNE, f(5)=5, 0 from 0/0) are distinct and realistic. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no arithmetic burden, consistent with a non-calculator item at about 75 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The content is sound: the key is correct and unique, the distractors are good, and the item is well scoped. It fails only because the stimulus data object lacks the actual table values, which the rendering specification requires."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-27-k0",
+  "cellId": "s1c-fig-27",
+  "passed": false,
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "soft": []
+ },
+ {
+  "key": "s1c-fig-28-k0",
+  "cellId": "s1c-fig-28",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Chain rule: h'(1)=f'(g(1))·g'(1)=f'(2)·(-3)=5·(-3)=-15",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-15"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Short task of about 60 to 70 seconds, with no calculator needed and exact-form options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean chain-rule-from-table MC item with good distractors; accept."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-29-k0",
+  "cellId": "s1c-fig-29",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h'=f'g+fg'+4f' = 12-24-16 = -28",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "-28"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product rule plus constant multiple from a table; Unit 2, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "12-24-16=-28; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table has all needed values; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct realistic errors, each explained correctly."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, simple arithmetic, suitable for non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean product-rule table item with good distractors; passes all criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-30-k0",
+  "cellId": "s1c-fig-30",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Table lists h(0)=1.003202, contradicting stated h(0)=0 and continuity (h(0.01)=0.02). Taken literally, limit would be 0.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "3/2",
+     "brief_reasoning": "0/0 form; g'(0)≈3, h'(0)≈2 from table, ratio 3/2 (also g(.01)/h(.01)=1.5).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Table lists h(0)=1.003202, contradicting stated h(0)=0 and continuity (h(0.01)=0.02). Taken literally, limit would be 0."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The corrupted table cell makes the item ambiguous and unsuitable for an exam. The calculator designation does not match the task.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_stimulus",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The table's h(0)=1.003202 contradicts the stated h(0)=0. The formulas needed for the exact limit 3/2 are not given to the student. The item should be rejected for a corrupted stimulus and missing conditions."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-31-k0",
+  "cellId": "s1c-fig-31",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Minimize S' on [1,10]: critical points t=2,6; S'(1)=16.5, S'(2)=20, S'(6)=4, S'(10)=84. Min at t=6.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "t=6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Connects the graph of S' to its minimum on a closed interval, using the sign change of S'' and an endpoint comparison. This fits 5.9 and skill 2.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "S'(6)=4 is the unique minimum of S' on [1,10]; S'(1)=16.5 and S'(10)=84 are larger. The key is correct and unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The graph is complete, with labeled axes and units. The stem is clear and states the interval. The formula is redundant with the graph but consistent."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are two endpoints and the local maximum, each targeting a distinct misconception. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-90 seconds. The calculator designation is slightly inconsistent because the graph answers it without a calculator, which is a minor issue."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound item with a correct, unique key and distinct distractors. The only flaw is the calculator-required label, which the task does not need. Pass."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-32-k0",
+  "cellId": "s1c-fig-32",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h'(x)=2x f(x^2); h'(3)=6 f(9)=6*7=42",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "42"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC Part 1 with chain rule on an accumulation function; fits 6.4 and the rule-choice skill."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(3)=2*3*f(9)=42; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table gives f(3) and f(9); continuity stated; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor maps to a distinct misconception (f(3)*6, missing 2x, x^2 factor); explanations given."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, typical AP style."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean FTC plus chain rule item with plausible distractors and a complete table; it passes all criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-33-k0",
+  "cellId": "s1c-fig-33",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The correct left Riemann sum is 58, but no answer choice gives 58.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Left sum = 2(7+11+4+7) = 58, which is not one of the options. Right sum (56) and trapezoidal sum (57) don't match either.",
+     "ambiguous_or_flawed": true,
+     "choice_index": null,
+     "final_answer": "58 (not among options)",
+     "flaw_note": "The correct left Riemann sum is 58, but no answer choice gives 58."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Left Riemann sum from a table is on topic 6.2."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Left sum = 2(7+11+4+7)=58; the keyed 54 is wrong and 58 is not among the options."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor rationales do not match the table values (27, 66 do not correspond to the described errors; the explanation for the key is wrong)."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Item has no correct option, so it is unusable."
+   },
+   "instant_reject": [
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The correct left Riemann sum is 2(7+11+4+7)=58, but the key is 54 and no option equals 58. The key is wrong and the distractor explanations are inconsistent with the table."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-fig-34-k0",
+  "cellId": "s1c-fig-34",
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Net area = 6+2-2-8 = -2, so s(6)=10-2=8",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "8"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.2 position from velocity with initial condition; choosing net-change rule fits skill 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Net signed area -2, s(6)=8; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph is clear with vertices at gridpoints, zero crossing at t=3; wording unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct misconception and is explained; verified 28 = 10+18 and 4 = 10-6."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Light hand arithmetic, no calculator needed, typical AP load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean item with a graph, geometric-area integration, and well-motivated distractors; it is suitable for the AP exam."
+  },
+  "difficulty": null
+ }
+]

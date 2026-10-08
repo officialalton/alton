@@ -1,0 +1,2469 @@
+[
+ {
+  "key": "s1c-01-k0",
+  "cellId": "s1c-01",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Factor: (x-5)(x+5)/((x-5)(x+9)) -> 10/14 = 5/7",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "5/7"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 75 seconds, no calculator needed, exact-form options.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean, standard factoring-limit item with good distractors. Passes."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-02-k0",
+  "cellId": "s1c-02",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'' changes sign at x=±5 only; the squared factor at x=1 does not change sign. So there are 2 inflection points.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Inflection points from sign changes of f'' fits 5.6; relates f'' to graph behavior."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Zeros at -5, 1 (double), 5; sign changes only at ±5; answer 2 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect real misconceptions (counting all zeros, counting multiplicity); the explanation covers each option. Option 1's rationale is generic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-70 seconds, no calculator, no arithmetic load, short numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and unambiguous. It tests the double-root no-sign-change idea within 5.6 and is exam-suitable."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-03-k0",
+  "cellId": "s1c-03",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The curves meet at x=4+2√3. V=∫(√x+1−x/2)^2 dx. Substituting x=u² and integrating from u=0 to 1+√3 gives ≈8.424.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "8.424"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Square cross sections, setup with area between curves; fits 8.7 and 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Unique answer 8.424; region well-defined with y-axis, top curve sqrt(x)+1, bottom x/2, intersection at 4+2sqrt3."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors reflect distinct misconceptions (no square, half, separate squaring, pi factor); explanation addresses each, though somewhat terse."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator required for the irrational intersection and integral; typical time and load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean calculator-required square-cross-section volume problem with a unique key and reasonable distractors. It passes all five criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-04-k0",
+  "cellId": "s1c-04",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h'=f'g+fg'+3f' = 5+3-15 = -7",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-7"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product rule plus constant multiple, Unit 2, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(4)=5+3-15=-7; unique correct answer at index 1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete; all four needed values given; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct misconception and its stated computation; explanation covers all wrong options."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, small integers, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, clean product-rule table item with distinct, realistic distractors; acceptable."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-05-k0",
+  "cellId": "s1c-05",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Only ∫0^2 f is given, but ∫0^6 f is needed. ∫2^6 f is unknown. -13 assumes the bound was meant to be 6 (∫0^6 f = 1).",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Total = ∫0^6 f + 2(-4) - 6. If ∫0^6 f = 1, the total is 1 - 8 - 6 = -13.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "-13",
+     "flaw_note": "Only ∫0^2 f is given, but ∫0^6 f is needed. ∫2^6 f is unknown. -13 assumes the bound was meant to be 6 (∫0^6 f = 1)."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is unanswerable as written.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The given information is insufficient: ∫0^6 f is not determined from ∫0^2 f. The keyed -19 is not obtainable under any consistent reading (the likely intended answer is -13), and the distractor rationales are inconsistent with their values."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-06-k0",
+  "cellId": "s1c-06",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem leaves out the interval needed to find an average value. [1,5] was inferred from the answer choices.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "No interval given. Choice D (10.047) equals the integral of f from 1 to 5, so the intended interval is probably [1,5]. Dividing by 4 gives 2.512.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "2.512",
+     "flaw_note": "The stem leaves out the interval needed to find an average value. [1,5] was inferred from the answer choices."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.1 average value with a calculator is in scope, but the item cannot be answered as written."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "With no interval, the average value is undefined. The key of 2.512 holds only if the interval is [1,5], which is never stated. The key is therefore not uniquely defensible from the stem."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem omits the interval [a,b]. The stimulus data object is empty, so nothing supplies it. The solver had to infer the interval from the distractors."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors and explanations assume the endpoints and midpoint of an unstated interval, so they cannot be checked against the stem. The explanation is generic and never states the interval or the setup."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "An official item would never leave out the interval, so this one is not exam-ready."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem asks for the average value of f(x)=ln x+0.5x but gives no interval, and the stimulus is empty. The key of 2.512 is only recoverable by assuming [1,5] from the answer choices. Reject for a missing condition."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-07-k0",
+  "cellId": "s1c-07",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "L(17)=4+1/8=33/8; f''<0 so tangent lies above graph: overestimate.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "33/8; an overestimate"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 85 seconds, simple exact arithmetic, suitable for non-calculator. Options have a parallel format.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope linearization item with a unique key and good distractors. It is suitable for the exam."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-08-k0",
+  "cellId": "s1c-08",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "IVT guarantees c in (0,4) with f(c)=k only when k is strictly between f(0)=2 and f(4)=7. 9/2 is strictly between them. 2 and 7 are endpoint values, which could be reached only at x=0 or x=4.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "9/2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 60 seconds, no calculator, and short parallel options. The item is easy but typical of an AP multiple-choice item.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unambiguous IVT conceptual item with a unique key and distinct distractors. It passes all criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-09-k0",
+  "cellId": "s1c-09",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "155.84",
+     "brief_reasoning": "Amount = 40 + ∫₀⁸ (12 + 6 sin(t/2)) dt = 40 + 96 + 12(1 − cos 4) ≈ 155.84",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Initial value plus integral of a rate in context is the core of 8.3; the calculator is needed for the integral. 1.D fit is loose but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "40+96+12(1-cos4)=155.84 is the unique correct answer, with no overflow or capacity ambiguity."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are distinct, realistic misconceptions: ignoring the sine term, final rate times time, and initial amount plus the final rate. The explanation covers each one, though it uses 't=T' wording instead of t=8."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, a single calculator integral, parallel numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, clear and suitable. The only flaw is a minor 't=T' wording slip in one distractor explanation. Pass."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-10-k0",
+  "cellId": "s1c-10",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f'' changes sign at x=-2 and x=4 only; double root at x=3 gives no sign change.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Inflection points via sign changes of f'' is core 5.6; the item is lightly representational for 2.E but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Zeros at -2, 3 (double), 4; sign changes at -2 and 4 only; answer 2 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is clear and complete. f'' is a polynomial, so f is defined on all reals."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Option 3 reflects a real misconception. Option 4 is weaker, and option 1 ('misses one sign change') is generic. The explanation covers every wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, non-calculator, exact-form numeric options; about 70 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key is correct and unique. The item is a clean, standard 5.6 inflection-count question with a double-root trap, and the distractors are acceptable, though one is generic."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-11-k0",
+  "cellId": "s1c-11",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem asks for h'(2) but never defines h in terms of f and g. -12 assumes h = f·g. Other readings, such as a quotient (20) or a sum (-8), give answers not among the options.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h is never defined. If h = f·g, the product rule gives h'(2) = f'(2)g(2) + f(2)g'(2) = (-4)(-1) + 4(-4) = -12. That is the only common combination whose result appears among the options.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "-12 (assuming h = f·g)",
+     "flaw_note": "The stem asks for h'(2) but never defines h in terms of f and g. -12 assumes h = f·g. Other readings, such as a quotient (20) or a sum (-8), give answers not among the options."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is unanswerable as written, so it is not usable on an exam.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem asks for h'(2) without defining h. The rationales imply h = fg + 3f, but the stem never says so. Under the natural reading h = fg, the answer is -12, which is a distractor, so the key is not uniquely defensible. Rejected for a missing condition and a wrong key."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-12-k0",
+  "cellId": "s1c-12",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem never says f is continuous. The IVT needs continuity, so as written it guarantees nothing. The intended answer, 3/2, only works if we assume f is continuous on [0,4].",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "3/2",
+     "brief_reasoning": "If f is continuous on [0,4], the IVT says f takes every value strictly between -3 and 6 at some c in (0,4). Only 3/2 is strictly between them. -3 is f(0), an endpoint value, so it is not guaranteed inside (0,4). -6 and 8 are outside [-3, 6].",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem never says f is continuous. The IVT needs continuity, so as written it guarantees nothing. The intended answer, 3/2, only works if we assume f is continuous on [0,4]."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The timing is fine, but the missing hypothesis makes the item unsuitable for an exam, and it is also very easy.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem never states that f is continuous on [0,4], which the IVT requires. As written the theorem guarantees no value of k, so the key 3/2 is not defensible. Reject for the missing condition."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-13-k0",
+  "cellId": "s1c-13",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem never says at which point to evaluate dy/dx, so the question cannot be answered with a single number as written. I assumed (1,2), the obvious integer point on the curve; (-1,-2) also gives -3/7.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "-3/7 (assuming the point (1,2))",
+     "brief_reasoning": "Differentiating implicitly gives 2x + 2y + 2xy' + 6yy' = 0, so dy/dx = -(x+y)/(x+3y). The point (1,2) lies on the curve (1+4+12=17), and there dy/dx = -3/7.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem never says at which point to evaluate dy/dx, so the question cannot be answered with a single number as written. I assumed (1,2), the obvious integer point on the curve; (-1,-2) also gives -3/7."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item cannot be used as written because the question is unanswerable without a point. Fixing it would require adding a point such as (1,2).",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem asks for dy/dx on the curve without giving a point, but all options are constants. The general derivative is -(x+y)/(x+3y), so the key -3/7 is only valid at an unstated point such as (1,2). The item is missing a condition, and the distractor rationales are weak."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-14-k0",
+  "cellId": "s1c-14",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem doesn't give the starting amount of water. With no starting amount the answer would be 95.88, which isn't an option. Choice A only works if the tank starts with 50 gallons.",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The water added is ∫0^6 R dt = 72 + 12(1 − cos 3) ≈ 95.88 gal. Choice A is 95.88 + 50, so a 50-gallon starting amount seems to have been left out of the stem.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "145.88 (only if the tank starts with 50 gal)",
+     "flaw_note": "The stem doesn't give the starting amount of water. With no starting amount the answer would be 95.88, which isn't an option. Choice A only works if the tank starts with 50 gallons."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "notes": "The time and calculator load are fine, but the item is unusable because of the missing condition.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem gives no initial amount of water, so the key 145.88 (95.88 + 50) is not derivable. The correct integral value 95.88 is not an option. Reject for a missing condition and an indefensible key."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-15-k0",
+  "cellId": "s1c-15",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem leaves out the instantaneous radius (or volume), so the rate can't be determined. The answer choices suggest r = 5 was intended.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "dV/dt = 4πr²·dr/dt. This depends on r, and the stem never gives r. If r = 5 cm, the rate is 100π.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "100π (assuming r = 5 cm)",
+     "flaw_note": "The stem leaves out the instantaneous radius (or volume), so the rate can't be determined. The answer choices suggest r = 5 was intended."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "dV/dt = 4πr²·dr/dt depends on r, which the stem never gives. The key 100π requires r = 5 cm, which is stated nowhere. No option is defensible from the stem alone."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem omits the radius at the instant in question. The stimulus is none, so there is nowhere else the value could come from."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor rationales rely on r = 5, which the student never sees. The explanation for the 50π option is also incoherent: it says 'halving' via (3/2)r^2, which is not a realistic misconception. The 20π option's justification is muddled as well."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is unsolvable as written because of the missing condition, so it is not suitable for the exam."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected: the stem never states the radius at the instant of interest (r = 5 cm is implied only by the options), so dV/dt = 4πr²(dr/dt) cannot be evaluated. The key is not determinable from the given information. Distractor rationales are partly incoherent as well."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-16-k0",
+  "cellId": "s1c-16",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Stem only says f is 'defined'; FTC requires f continuous (at least at t=9) to conclude h'(3)=6f(9). Missing continuity condition.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h'(x)=2x f(x^2), h'(3)=6 f(9)=6(7)=42.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "42",
+     "flaw_note": "Stem only says f is 'defined'; FTC requires f continuous (at least at t=9) to conclude h'(3)=6f(9). Missing continuity condition."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC Part 2 with chain rule fits topic 6.4 and skill 1.D (choose the rule). Within AB scope."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key 42 = 6*f(9) is correct only if f is continuous at t=9 (FTC hypothesis). The stem says only that f is 'defined', so the hypothesis is not given and h'(3) is not guaranteed to exist. Also, the table lists only two values, which is fine, but the stem should state f is continuous."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Missing condition: continuity of f is not stated. The wording 'The function f is defined' is also awkward. The table is rendered with rows lacking a header row, but the labels t and f(t) are present."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are plausible, but the explanation for -30 is mismatched: f(3)=-5 times 2x=6 gives -30, which means evaluating f at x and keeping 2x, and the 'why' says only 'evaluates f at x' without the 2x factor. The 63 option (7*9) is explained as 'multiplies by x squared' and is fine. Overall the explanations are terse, and the distractor set is acceptable but the -30 explanation is imprecise."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, non-calculator, about 75 s, with clean arithmetic. The format is typical of AP."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Good concept and format, but the stem omits the continuity hypothesis of f needed for the FTC. The key 42 is therefore not strictly guaranteed, so the item is rejected for a missing condition. Fix: state that f is continuous, and refine the -30 distractor explanation."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-17-k0",
+  "cellId": "s1c-17",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h'=f'g+fg'+3f' = -9+16+9 = 16",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "16"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product rule plus constant multiple from a table; fits 2.8 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "h'(2)=-9+16+9=16; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table gives all needed values; the stem states that f and g are differentiable. The layout is a list of quantities rather than an x-based table, but it is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor reflects a distinct realistic error and the explanation addresses every wrong option accurately."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, simple arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean product-rule-from-table MC item with a unique key and well-motivated distractors. It is suitable for the exam."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-18-k0",
+  "cellId": "s1c-18",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Quotient rule: q'(1) = (f'g − fg')/g² = (12 + 24)/9 = 4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Direct quotient rule evaluation from a table; Unit 2, skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "q'(1)=(12+24)/9=4; unique correct option."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete; the generic axis labels are a minor weakness but the content is clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for the correct answer is just 'Quotient rule.' with no worked computation. The distractor rationales are accurate but the key's rationale is inadequate."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, simple numbers, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and well scoped, with a unique key of 4 and distractors that reflect realistic errors. The explanation for the key is a bare 'Quotient rule.' and should show the computation (12 + 24)/9 = 4, so the explanation criterion fails."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-19-k0",
+  "cellId": "s1c-19",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "1/4",
+     "brief_reasoning": "Rationalize: (x-2)/((x-2)(sqrt(x+2)+2)) = 1/(sqrt(x+2)+2) -> 1/4. f(2)=2 doesn't affect the limit. The table values check out.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Table-based limit estimation with f(a) mismatch; fits topic 1.4 and skill 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "1/4 is unique; table values verified consistent with the function (0.2516, 0.2502, 0.2498, 0.2485)."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Table data complete with labels and values on both sides of 2; wording clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct and realistic. The key's rationale uses an incorrect generic formula 1/(2c); it is minor, but should be cleaned up."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-75 s, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound: the key 1/4 is correct and unique, the table matches the function, and the distractors are distinct. Only the key's rationale contains a sloppy generic formula (1/(2c)), which is a minor editorial fix."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-20-k0",
+  "cellId": "s1c-20",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem leaves out the instant (radius) at which the rate is asked for, so the answer can't be determined.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "dA/dt = 2πr·dr/dt = 2πr. The answer depends on r, but no radius or other instant is given. Each option matches some radius (r=8,1,2,4).",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem leaves out the instant (radius) at which the rate is asked for, so the answer can't be determined.",
+     "choice_index": null,
+     "final_answer": "Cannot be determined; dA/dt = 2πr cm²/s"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is unanswerable as written, so it is not suitable for the exam even though the time and calculator load are fine.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem never states the radius (r = 4 cm) at which dA/dt is asked for. The key 8π is therefore not uniquely defensible, since dA/dt = 2πr depends on r. The item is rejected for a missing condition."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-21-k0",
+  "cellId": "s1c-21",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem never says f is continuous on [0,4], and the IVT needs continuity. As written, the theorem guarantees nothing for any of the choices. The intended answer is 6.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "6",
+     "brief_reasoning": "If f is continuous on [0,4], the IVT guarantees that f takes every value strictly between 2 and 10 somewhere in (0,4). Only 6 is in that range. The value 10 is f(0), which is an endpoint, so the theorem does not guarantee a c inside (0,4). The values 0 and 11 are outside the range from 2 to 10.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem never says f is continuous on [0,4], and the IVT needs continuity. As written, the theorem guarantees nothing for any of the choices. The intended answer is 6."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "IVT topic fits, but the theorem hypothesis (continuity) is not stated, which is the point of 3.D."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Without stated continuity on [0,4], IVT guarantees nothing for any option, so the key 6 is not defensible as written."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Stem omits 'continuous on [0,4]'; this is a missing condition."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are distinct (outside range low/high, endpoint value). Wording for 0 and 11 is slightly imprecise but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator; time is fine, though demand is low."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject: the stem never states that f is continuous on [0,4], so the IVT cannot be applied and the key is not defensible as written. Adding the continuity hypothesis would fix it."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-22-k0",
+  "cellId": "s1c-22",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "40 + ∫0^4 (12+6sin(t/2))dt = 40+48+12(1-cos2) ≈ 104.99",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "104.99"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Net change/accumulation in context, calculator needed; fits 8.3. Skill 1.D demand is modest but acceptable."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "40 + integral = 104.99 is unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Stem is complete, with units and interval; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 109.82 rationale ('multiplies the final rate by the time') omits that the initial 40 is added (4*R(4)+40). The explanation only restates short labels and does not show the computation behind each distractor."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, calculator required and consistent, no ugly numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The key and scope are sound. The distractor rationale for 109.82 is inaccurate (it omits adding the initial 40) and the explanation is thin, so the distractor/explanation criterion fails."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-23-k0",
+  "cellId": "s1c-23",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Both one-sided limits equal 5 = f(1), so f is continuous. The one-sided derivatives are 2 and -1, which differ, so f is not differentiable.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "Continuous but not differentiable"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Piecewise continuity/differentiability check at a point; squarely topic 2.4, justification-oriented conclusion."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Limits both 5 = f(1); one-sided derivatives 2 and -1. Key C unique and correct."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Piecewise function fully specified in stem; no stimulus needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions covered and each wrong option explained. Key explanation is terse and lacks the computed values, and the 'differentiable not continuous' option is weak, but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 70 seconds, no calculator, parallel short options, typical of AP MC."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, clean piecewise continuity vs. differentiability MC item; minor thinness in the key explanation only."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-24-k0",
+  "cellId": "s1c-24",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "4",
+     "brief_reasoning": "f' changes from + to - at x=4; x=-4 is a min; x=-3 has no sign change.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First derivative test with a sign chart and a double-root check; fits 5.4. The justification skill is embedded in the distractors."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sign analysis confirms f' goes + to - at x=4 only. -4 is a minimum and -3 is not an extremum. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is complete and clear. No stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors target distinct misconceptions: min versus max, double root, and no extremum. The 'Misreads the sign chart' explanation is generic but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 85 seconds, no calculator needed, exact values."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A sound first derivative test item with a unique correct key (x=4). The distractors are realistic and the load is appropriate for a non-calculator MC item."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-25-k0",
+  "cellId": "s1c-25",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem never says where the tangent line touches the graph. It is presumably x=49, as the answer choices suggest, but that should be stated.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "97/14; an overestimate",
+     "brief_reasoning": "Use the tangent line at x=49: L(x)=7+(x-49)/14, so L(48)=97/14. Since f''<0, the graph is concave down, so the tangent line lies above the curve and the estimate is too high.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem never says where the tangent line touches the graph. It is presumably x=49, as the answer choices suggest, but that should be stated."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linearization plus concavity comparison fits 4.6 / 1.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The point of tangency is never stated. The key 97/14 holds only if a=49, which must be inferred from the options. Without that condition the answer is not uniquely defensible."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem omits the essential condition, the x-value where the tangent line is drawn (for example, at x=49)."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct misconceptions (wrong slope, wrong concavity conclusion) and the explanation covers each one."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Time and load are fine, but the ambiguity in the stem makes the item unsuitable as written."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected: the stem does not state the point of tangency (a=49), so the tangent line and the key are not uniquely determined from the stem alone. Adding \"at x=49\" would fix it."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-26-k0",
+  "cellId": "s1c-26",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The function is not defined at x=4: neither piece covers x=4, since one uses x<4 and the other x>4. That means f cannot be continuous at 4 for any k; k=3 only makes the limit exist, which is a removable discontinuity. One of the pieces should use ≤ or ≥.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "3",
+     "brief_reasoning": "Setting the one-sided limits equal gives 4k+1 = 16-3 = 13, so k = 3.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The function is not defined at x=4: neither piece covers x=4, since one uses x<4 and the other x>4. That means f cannot be continuous at 4 for any k; k=3 only makes the limit exist, which is a removable discontinuity. One of the pieces should use ≤ or ≥."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Piecewise continuity matches topic 1.11."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "f(4) is undefined because neither piece includes x=4 (x<4 and x>4). f is not continuous at 4 for any k, so key k=3 is not defensible; it only makes the limit exist (removable discontinuity)."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Piecewise definition omits x=4; a condition needed for continuity is missing. One piece needs <= or >=."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The 13 rationale 'forgets the +1' does not produce 13 (it would give k=4). Rationales are loosely worded."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The flawed definition would not appear on an AP exam; the item has no valid answer."
+   },
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The piecewise function is undefined at x=4 (x<4 and x>4 only), so f cannot be continuous there for any k and the key k=3 is not valid. The item is missing the condition that defines f(4). The rationale for option 13 is also inaccurate."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-27-k0",
+  "cellId": "s1c-27",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a=2.4ln(0.5t+0.4)+1.2t/(0.5t+0.4); at 2.5: 1.2019+1.8182=3.020",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "3.02"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "About 100 seconds with a calculator, which is typical of the exam. Numbers are not ugly.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound. The key is correct and unique, the distractors reflect distinct misconceptions, and the calculator use is appropriate."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-28-k0",
+  "cellId": "s1c-28",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "a=1.7ln(0.5t+0.4)+0.85t/(0.5t+0.4); at t=2: 0.572+1.214=1.786",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1.786"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Acceleration as v'(t) via product and chain rule at a point; fits 4.2 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Key 1.786 is unique; options are well separated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear, and the domain keeps ln defined."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to realistic errors (partial product rule, velocity instead of acceleration); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "A calculator is appropriate and the load is typical for a single-step evaluation of about 100 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean calculator-active MC item on acceleration from velocity. The key is unique, the distractors are plausible and explained, and the scope is correct."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-29-k0",
+  "cellId": "s1c-29",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "22.577",
+     "brief_reasoning": "The curves intersect at x≈14.374. V=∫0^14.374 (√x+1−x/3)^2 dx ≈ 22.577.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Squares cross-section volume, topic 8.7; choosing the squared-difference integral fits 1.D."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Region well-defined; intersection near 14.374; V is about 22.577; key unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors map to distinct misconceptions (unsquared side, disks, squaring each function); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Calculator-required, typical load; the intersection and integral need a calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, well-posed calculator MC on square cross-section volume with a unique key and sensible distractors."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-30-k0",
+  "cellId": "s1c-30",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate variables: y=4e^{2x^2}, so f(1)=4e^2.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "4e^2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Exact-form options, no calculator needed, typical AP load and timing.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Correct, in-scope, clean separable-DE item with plausible distractors; passes all criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-31-k0",
+  "cellId": "s1c-31",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:No information is given about ∫_2^6 f(x)dx. Any of the options could be correct depending on that value (e.g., ∫_2^6 f = −1 gives −6). The stem probably left out a given.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The integral equals ∫0^6 f dx + 2(−1) − 6 = ∫0^6 f dx − 8. Only ∫0^2 f dx is given, so ∫0^6 f dx can't be found.",
+     "ambiguous_or_flawed": true,
+     "choice_index": null,
+     "final_answer": "Cannot be determined",
+     "flaw_note": "No information is given about ∫_2^6 f(x)dx. Any of the options could be correct depending on that value (e.g., ∫_2^6 f = −1 gives −6). The stem probably left out a given."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is not answerable as written, so it is unsuitable for an exam.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The stem gives ∫_0^2 f but asks over [0,6], so ∫_0^6 f is undetermined. The keyed -11 cannot be derived, and the stem and options are inconsistent. Reject."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-32-k0",
+  "cellId": "s1c-32",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "L(23)=5+(1/10)(-2)=24/5; sqrt is concave down so tangent overestimates",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "24/5; an overestimate"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Linearization plus concavity-based over/under judgment; fits 4.6 and 1.F."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "L(23)=24/5 and f is concave down, so overestimate. The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, with exact-form options."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors encode slope errors and a wrong-direction error. The explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, simple arithmetic, about 85 seconds."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, with a unique key (24/5; overestimate). It is in scope, uses clean numbers, and has distinct misconception-based distractors, so it passes all five criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-33-k0",
+  "cellId": "s1c-33",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:f is not defined at x=3 (the cases are x<3 and x>3). So f cannot be continuous at x=3 for any k. 4/3 only makes the limit exist (a removable discontinuity). One case should use ≤ or ≥.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Matching the one-sided limits gives 3k+1 = 9-4 = 5, so k = 4/3. But the piecewise definition leaves out x=3, so f(3) is undefined.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 0,
+     "final_answer": "4/3",
+     "flaw_note": "f is not defined at x=3 (the cases are x<3 and x>3). So f cannot be continuous at x=3 for any k. 4/3 only makes the limit exist (a removable discontinuity). One case should use ≤ or ≥."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic and skill fit: continuity of piecewise function at a point."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "f(3) is undefined since cases are x<3 and x>3, so f is not continuous at 3 for any k. The key 4/3 is not defensible as stated."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Piecewise definition omits x=3; one case needs ≤ or ≥."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Distractor rationales are weak: the derivative rationale for 6 is artificial, and the rationale for 5 (forgetting +1 gives 3k=5, k=5/3, not 5) is inconsistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The time and load are appropriate, and the options are exact values."
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key"
+   ],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The function is undefined at x=3 because both cases use strict inequalities, so continuity at 3 is impossible for any k. The item has a missing condition (an equality in one case) and an indefensible key. The distractor rationales are also flawed."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-34-k0",
+  "cellId": "s1c-34",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate variables: dy/y = 2x dx gives ln|y| = x^2 + C, so y = 3e^{x^2}. Then f(1) = 3e.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 3,
+     "final_answer": "3e"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Separable equation dy/dx=2xy with an initial condition is a core 7.7 task, and the dominant skill is applying the separation procedure (1.E). It stays within AB scope."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Separating gives y=3e^{x^2}, so f(1)=3e. This is the unique correct option. The stem is complete, and y>0 follows from the initial condition."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed and none is given. The stem is clear and uses exact-form options suitable for a non-calculator item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each wrong option has a distinct misconception and the explanation covers all three. The option 'e' is described as dropping the initial-condition constant, which is plausible. The option '4' is described as y0 plus the integral of kx, which is only loosely accurate, since 3+1=4 would come from integrating 2x to x^2 and adding 3. This is minor. The options are not unusually uneven in length."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item takes about 60-100 seconds, uses simple numbers, needs no calculator, and has options that are short and parallel."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard separable-equation item on 7.7. The key is correct and unique, the distractors are reasonable, and the item is suitable for a non-calculator exam."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-35-k0",
+  "cellId": "s1c-35",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Integral of f from 0 to 6 = 4 + (-4) = 0; integral of 2g = 8; integral of 1 over [0,6] = 6; total 0 + 8 - 6 = 2",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "2"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Properties of definite integrals: additivity, linearity, constant integral. Matches 6.6 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "0+8-6=2; unique correct answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; all conditions stated clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Each distractor matches a distinct realistic error; the explanation addresses each wrong option."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, integer arithmetic, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct property-of-integrals item with distinct misconception-based distractors; suitable for the non-calculator section."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-36-k0",
+  "cellId": "s1c-36",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Likely the item meant one piece to include x=1 (≤ or ≥). Then f would be continuous but not differentiable, making C the intended answer. As written, f(1) is undefined, so A is strictly correct.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_multiple_correct",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "Neither continuous nor differentiable",
+     "brief_reasoning": "f(1) is not defined (domain excludes x=1), so f is not continuous and hence not differentiable. The limits from both sides equal 3, but the one-sided slopes are 2 and 4.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Likely the item meant one piece to include x=1 (≤ or ≥). Then f would be continuous but not differentiable, making C the intended answer. As written, f(1) is undefined, so A is strictly correct."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Timing and load are fine, but the ambiguity makes it unsuitable for an exam.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "multiple_correct",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The piecewise function leaves f(1) undefined, since both pieces use strict inequalities. The function is therefore not continuous at x=1, and option A is defensible, so the key C is not unique. The fix is to define f(1) by using ≤ or ≥ in one piece."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-37-k0",
+  "cellId": "s1c-37",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "f' changes sign from + to - at x=-3; at x=-2 the factor is squared, so there is no sign change; at x=0 it goes - to + (a minimum).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "-3"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First derivative test sign analysis for a relative max, which is the core of topic 5.4. The reasoning is about sign changes of f'."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Sign analysis gives + to - at -3 (max), no sign change at -2, - to + at 0 (min). The key -3 is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is complete and clear and the domain is all reals."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are the double-root trap, the minimum at 0, and a 'none' option. The explanation addresses each one. The rationale for the 'none' option is thin but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-85 seconds, no calculator, clean factored form."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and clean. The key -3 is unique, and the distractors capture realistic misconceptions (the double root and confusing max with min). It passes all criteria."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-38-k0",
+  "cellId": "s1c-38",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Implicit differentiation gives y' = -(2x+y)/(x+2y). At (1,2) this is -4/5.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-4/5"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First-derivative implicit differentiation with product and chain rules; matches 3.2 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The point lies on the curve, and y' = -(2x+y)/(x+2y) = -4/5 at (1,2). The key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are plausible: the missing product-rule term gives -1, a sign error gives 4/5, and 8/5 is a weaker 'doubling' error. The explanation covers each option, though the wording of the -1 rationale is slightly awkward."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 100 seconds, exact-form options, no calculator needed."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct and in scope, with a unique key of -4/5 and plausible distractors. It is suitable for a non-calculator AP Calculus AB exam."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-39-k0",
+  "cellId": "s1c-39",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:No initial condition is given, so f(2) = Ce^4 cannot be determined. Both e^4 (if f(0)=1) and 2e^4 (if f(0)=2) are possible.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separating variables gives y = Ce^(x^2), so f(2) = Ce^4. No initial condition is given. If f(0) = 2 was intended, the answer is 2e^4.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 3,
+     "final_answer": "2e^4 (assuming f(0)=2)",
+     "flaw_note": "No initial condition is given, so f(2) = Ce^4 cannot be determined. Both e^4 (if f(0)=1) and 2e^4 (if f(0)=2) are possible."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The item is not answerable as written. The options are in exact form, but the missing condition makes it unsuitable for the exam.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "missing_condition",
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Rejected. The stem omits the initial condition (for example f(0)=2), so f(2)=Ce^4 is undetermined and the keyed answer 2e^4 is not uniquely defensible. The distractor rationales also reference undefined quantities."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-40-k0",
+  "cellId": "s1c-40",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Separate: dy/y=2x dx, ln y = x^2 + C, y=e^{x^2}; f(2)=e^4",
+     "ambiguous_or_flawed": false,
+     "choice_index": 0,
+     "final_answer": "e^4"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Standard separable particular solution, in scope for AB 7.7 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "y=e^{x^2}, f(2)=e^4; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationales for e^2 and e^8 are generic and mismatched. With k=2 the integral of 2x is x^2, so e^2 and e^8 do not arise from the described errors (e^2 would come from x^2/2 at x=2, e^8 from 2x^2). The explanation is a template that restates the 'why' text and does not explain accurately why each wrong option is wrong."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Short, no calculator needed, exact-form options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is mathematically correct, in scope, and suitable for the exam. It fails only on the distractor explanations: the rationales for e^2 and e^8 are templated and do not match the actual errors that would produce those values (k=2 makes the correct integral x^2). Fix the distractor rationales before use."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-41-k0",
+  "cellId": "s1c-41",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "2.098",
+     "brief_reasoning": "(1/3)∫_1^4 (ln x+0.5x)dx = (1/3)(4ln4-3+3.75)=6.2952/3≈2.098",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.1 average value of a function with a calculator-evaluated definite integral; skill 1.E fits. No out-of-scope content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key (2.098) is the unique correct answer. The interval and function are fully specified. The distractors are distinct values, none defensible as the average value."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus is needed. The stem is clear and complete, with the function and interval given. Options are decimals rounded to three places, which suits a calculator item."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors are realistic errors: the integral without dividing by (b-a), the net change f(4)-f(1), and f at the midpoint. The explanation addresses each wrong option. The 'why' for the key is terse but acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, one calculator integral. Typical AP load, calculator designation is consistent, and the options are not given away by length or format."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "This is a clean, standard average-value item with a unique key and plausible distractors. Its load fits a calculator-active AP MC item, so it passes."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-42-k0",
+  "cellId": "s1c-42",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "The left-hand limit 2k+1 must equal f(2)=1, so k=0.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 2,
+     "final_answer": "0"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Piecewise continuity at a point by matching one-sided limits; fits 1.11 and 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2k+1=1 gives k=0; the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The stem is self-contained and clear; no stimulus is needed."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "The distractors encode distinct errors (sign error, slopes instead of values, wrong constant), and each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 80 seconds, no calculator, clean numbers."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, standard piecewise-continuity item with a unique key (k=0), plausible distractors, and appropriate load."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-43-k0",
+  "cellId": "s1c-43",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "3/2",
+     "brief_reasoning": "The IVT guarantees every value strictly between -3 and 6 is reached in (0,4). Only 3/2 is in that range. -3 is reached at c = 0, which is outside the open interval.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Directly applies IVT conditions and conclusion (3.D, topic 1.16)."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Only 3/2 lies strictly between -3 and 6; unique answer."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; stem states continuity and the open interval clearly."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions (endpoint value, below range, above range); each wrong option is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60 seconds, no arithmetic, parallel numeric options, non-calculator."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, correct IVT item with a unique key and sound distractors. It is suitable for the AP exam."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-44-k0",
+  "cellId": "s1c-44",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem only says f is 'defined' and never says f is continuous. The FTC step h'(x)=f(x^2)·2x needs continuity (at least at t=4), so a needed condition is missing; the sentence looks cut off. If f is continuous, the answer is 12.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "12",
+     "brief_reasoning": "By the FTC and the chain rule, h'(x)=f(x^2)·2x, so h'(2)=f(4)·4=3·4=12.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem only says f is 'defined' and never says f is continuous. The FTC step h'(x)=f(x^2)·2x needs continuity (at least at t=4), so a needed condition is missing; the sentence looks cut off. If f is continuous, the answer is 12."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "FTC with chain rule on an accumulation function fits topic 6.4 and skill 1.D."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The key 12 holds only if f is continuous at t=4. The stem says only that f is 'defined', so the FTC hypothesis is not given. The table has just two points, so continuity cannot be inferred."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem is incomplete: 'The function f is defined' reads as a truncated sentence, and continuity is never stated. The table is otherwise adequately specified."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation for the -12 option is wrong. It says f is evaluated at x instead of x squared, but f(2)·2x = -3·4 = -12, so the error is using f(x) with the chain-rule factor. The explanation for the -3 option is fine. The key's explanation just repeats the formula without showing the substitution."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The load is appropriate, but the missing hypothesis makes the item unsuitable as written."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails because the stem never states that f is continuous, which the FTC step needs, and the stem reads as truncated. The explanation for the -12 distractor is also mislabeled."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-45-k0",
+  "cellId": "s1c-45",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem never defines h. The product rule gives −12, which matches an option. Other definitions would give 2 (sum) or 4 (quotient), and a composition would need f'(−3), which the table doesn't give.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "instant_reject_wrong_key",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "h is not defined. Assuming h = f·g: h'(1) = f'(1)g(1) + f(1)g'(1) = 12 − 24 = −12.",
+     "ambiguous_or_flawed": true,
+     "choice_index": 1,
+     "final_answer": "-12",
+     "flaw_note": "The stem never defines h. The product rule gives −12, which matches an option. Other definitions would give 2 (sum) or 4 (quotient), and a composition would need f'(−3), which the table doesn't give."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Product rule with table values is in scope for 2.8 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "h is never defined in the stem. The key -28 depends on a hidden h = fg + 4f. Under h = fg the answer is -12, which is also an option. No unique defensible answer."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem omits the definition of h, a critical missing condition. The table is labeled generically as quantity/value, and the explanation text uses 'a' instead of 1."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractor rationales refer to a 4f'(a) term that the student cannot see. The -12 option is both a 'wrong' distractor and the natural answer for h = fg."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The stem is unanswerable as written because the function h is undefined, so the item is not usable on an exam."
+   },
+   "instant_reject": [
+    "missing_condition",
+    "wrong_key",
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The stem asks for h'(1) without defining h. The key -28 only follows from a hidden definition (h = fg + 4f), and the natural reading h = fg gives -12, which is another option. The key is not uniquely defensible and the distractor rationales rely on information the student never sees."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-46-k0",
+  "cellId": "s1c-46",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:Neither piece includes x=2, so f(2) is undefined. The intended answer is probably C (continuous but not differentiable), but taken literally the answer is D.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D",
+     "brief_reasoning": "Both one-sided limits equal 7, but f(2) is undefined because neither piece includes x=2. So f is not continuous, and therefore not differentiable. If x=2 were included, the answer would be C, since the slopes are 4 and -1.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "Neither piece includes x=2, so f(2) is undefined. The intended answer is probably C (continuous but not differentiable), but taken literally the answer is D."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The length and format are fine, but the flawed definition makes the item unsuitable for the exam.",
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   },
+   "instant_reject": [
+    "wrong_key",
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The piecewise function leaves f(2) undefined, so it is literally discontinuous at 2 and the correct answer is D rather than the keyed C. The item is missing the condition that defines f(2) and must be rejected."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-47-k0",
+  "cellId": "s1c-47",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "2.098",
+     "brief_reasoning": "(1/3)[x ln x - x + 0.25x^2] from 1 to 4 = (2.545+3.75)/3 = 2.098",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Average value via definite integral with calculator; fits 8.1 / 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2.098 is the unique correct value; verified by hand."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distractors are the change in f, f at the midpoint, and the endpoint average, all distinct realistic misconceptions; each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, calculator required and appropriate, numeric options."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a clean, correct average-value question. The key was confirmed and each distractor maps to a distinct misconception."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-48-k0",
+  "cellId": "s1c-48",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:The stem names only one graph (y = 3x), and one line can't enclose a region. The second curve (probably y = x²) is missing and had to be guessed from the options.",
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "∫_0^3 (3x − x²) dx",
+     "brief_reasoning": "If the second curve is y = x², the curves meet where x² = 3x, so at x = 0 and x = 3. Between them 3x ≥ x², so the area is the integral of (3x − x²) from 0 to 3.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The stem names only one graph (y = 3x), and one line can't enclose a region. The second curve (probably y = x²) is missing and had to be guessed from the options."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": false,
+    "notes": "The topic and skill would fit if the item were complete, but the region cannot be identified from the stem, so the setup skill cannot be assessed as written."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "The stem gives only y=3x. The second curve y=x^2 must be inferred from the options, so the key is not uniquely defensible from the stem."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The stem is garbled: 'graphs of y=3x' names one graph, and a single line encloses no region. The stimulus is empty and no second function is given. The distractor notes also refer to an undefined 'x=a'."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors are reasonable (adding, wrong limit, wrong order). However, the explanation refers to 'x=a', a leftover template variable, and rests on a curve the stem never states."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is not exam-ready because the problem statement is incomplete."
+   },
+   "instant_reject": [
+    "missing_condition"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Reject. The stem omits the second boundary curve (y=x^2), so the region is undefined and the key can only be found by reverse-engineering the options. The explanation also contains a stray 'x=a' template artifact."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-49-k0",
+  "cellId": "s1c-49",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Left limit 2k+1 must equal f(2)=3, so k=1.",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "1"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Continuity of a piecewise function at a point, a direct procedural fit for 1.11/1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "2k+1=3 gives k=1; unique correct answer, key_index 1 is the option 1."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "No stimulus needed; the stem is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "Rationales for 3 and 2 are inaccurate. Forgetting the +1 gives k=1.5, not 3. The '2k = 4 - 1 + 1' reasoning uses 4 as the right value, but f(2)=3. The 'Sets left-hand limit equal to value from right piece' text is only a restatement of the correct method. The explanations need correction."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 60-80 seconds, no calculator, typical of AP."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is sound and the key is correct, but the distractor rationales for options 3 and 2 are mathematically inconsistent with the misconceptions they claim. Fail on the distractor/explanation criterion until these are fixed."
+  },
+  "difficulty": null
+ },
+ {
+  "key": "s1c-50-k0",
+  "cellId": "s1c-50",
+  "passed": true,
+  "reasons": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "brief_reasoning": "Implicit differentiation: dy/dx = -(x+2y)/(2x+2y) = -5/6 at (1,2).",
+     "ambiguous_or_flawed": false,
+     "choice_index": 1,
+     "final_answer": "-5/6"
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "The arithmetic is light, the options are exact, and the item is about 90 seconds. It is consistent with non-calculator designation.",
+   "key_scoring": {
+    "pass": true,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": ""
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean implicit-differentiation slope item with a unique key and distinct misconception-based distractors. It is suitable for a non-calculator AP exam."
+  },
+  "difficulty": null
+ }
+]

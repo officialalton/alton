@@ -1,0 +1,73 @@
+{
+ "run": "pilot",
+ "generatedAt": "2026-10-08T09:15:24.686Z",
+ "totalCostUsd": 1.79,
+ "ledgerSpent": 1.789,
+ "cap": 80,
+ "calls": 78,
+ "candidates": 20,
+ "passedAll": 5,
+ "adopted": 4,
+ "reserve": 1,
+ "duplicate": {
+  "adoptedPairs": 6,
+  "similarPairs": 0
+ },
+ "rejectionReasons": {
+  "solver_disagrees_or_flags_flaw": 4,
+  "criterion_failed_scope_skill": 13,
+  "criterion_failed_key_scoring": 8,
+  "criterion_failed_stimulus_expression": 10,
+  "criterion_failed_exam_suitability": 11,
+  "instant_reject_wrong_stimulus": 2,
+  "criterion_failed_distractor_explanation": 8,
+  "instant_reject_missing_condition": 4,
+  "instant_reject_out_of_scope_knowledge": 3,
+  "resembles_known_exam_item": 1,
+  "missing_set_stimulus": 1
+ },
+ "bySubject": {
+  "ap_calculus_ab": {
+   "candidates": 4,
+   "passedAll": 2,
+   "adoptedCandidates": 1,
+   "mcItemsAdopted": 0,
+   "frqBundlesAdopted": 1,
+   "cellsTotal": 1,
+   "cellsFilled": 1,
+   "yieldAdoptedOverCandidates": 0.25,
+   "costUsd": 0.4,
+   "callsPerAdopted": 17,
+   "unfilledCells": []
+  },
+  "ap_biology": {
+   "candidates": 8,
+   "passedAll": 1,
+   "adoptedCandidates": 1,
+   "mcItemsAdopted": 0,
+   "frqBundlesAdopted": 1,
+   "cellsTotal": 2,
+   "cellsFilled": 1,
+   "yieldAdoptedOverCandidates": 0.125,
+   "costUsd": 0.81,
+   "callsPerAdopted": 32,
+   "unfilledCells": [
+    "ap_biology-c022"
+   ]
+  },
+  "ap_microeconomics": {
+   "candidates": 8,
+   "passedAll": 2,
+   "adoptedCandidates": 2,
+   "mcItemsAdopted": 2,
+   "frqBundlesAdopted": 1,
+   "cellsTotal": 2,
+   "cellsFilled": 2,
+   "yieldAdoptedOverCandidates": 0.25,
+   "costUsd": 0.58,
+   "callsPerAdopted": 14.5,
+   "unfilledCells": []
+  }
+ },
+ "spotChecked": 1
+}
