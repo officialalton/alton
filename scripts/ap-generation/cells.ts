@@ -30,7 +30,7 @@ export const SAMPLE_PLAN = {
   ap_biology: { mc: 30, frq: [
     { tpl: "long_experiment_graph", kw: "4.5", extra: ["4.3"], skill: "4.A" },
     { tpl: "long_experiment_interpret", kw: "6.5", extra: ["6.7"], skill: "6.B" },
-    { tpl: "short_scientific_investigation", kw: "8.1", extra: [], skill: "3.C" },
+    { tpl: "short_scientific_investigation", kw: "8.5", extra: [], skill: "3.C" },
     { tpl: "short_model_visual", kw: "3.2", extra: [], skill: "2.B" },
   ], sets: [{ unit: "7", items: 4 }, { unit: "8", items: 4 }], calcShare: 0 },
   ap_microeconomics: { mc: 30, frq: [
