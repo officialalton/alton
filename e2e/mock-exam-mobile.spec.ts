@@ -19,8 +19,8 @@ function psql(sql: string): string {
   return execFileSync("psql", [DB_URL, "-v", "ON_ERROR_STOP=1", "-q", "-t", "-A", "-c", sql], { encoding: "utf-8" }).trim();
 }
 
-const PASSAGE =
-  "Marine biologists studying coral reefs have long observed that the symbiotic algae living inside coral tissue provide most of the energy the coral needs. When ocean temperatures rise, the coral expels these algae, a process known as bleaching, and the reef becomes pale and vulnerable. Recent surveys suggest that some reefs recover faster than expected when nearby populations of herbivorous fish keep competing seaweed in check.";
+const PASSAGE = (
+  "Marine biologists studying coral reefs have long observed that the symbiotic algae living inside coral tissue provide most of the energy the coral needs. When ocean temperatures rise, the coral expels these algae, a process known as bleaching, and the reef becomes pale and vulnerable. Recent surveys suggest that some reefs recover faster than expected when nearby populations of herbivorous fish keep competing seaweed in check. ").repeat(3);
 
 const profiles = { "iPhone 14": devices["iPhone 14"], "Pixel 7": devices["Pixel 7"] } as const;
 
@@ -83,6 +83,15 @@ for (const [name, profile] of Object.entries(profiles)) {
         ex(box, sel).not.toBeNull();
         ex(Math.min(box!.width, box!.height), sel).toBeGreaterThanOrEqual(43.5);
       }
+
+      // 한 세로 흐름: 지문이 길면 스크롤 단서가 보이고, 스크롤하면 선택지가 나와 바로 탭된다.
+      await ex(page.getByTestId("mst-scroll-cue")).toBeVisible();
+      await ex(page.getByTestId("mst-pane-left")).toHaveCSS("overflow-y", "hidden");
+      await page.getByRole("radio").nth(1).scrollIntoViewIfNeeded();
+      await shot("01b-scrolled-to-choices");
+      await page.getByRole("radio").nth(1).tap();
+      await ex(page.getByRole("radio").nth(1)).toHaveAttribute("aria-checked", "true");
+      await page.getByTestId("mst-panes").evaluate((e) => (e.scrollTop = 0));
 
       // 선택지·소거
       await page.getByTestId("mst-eliminate-toggle").tap();
