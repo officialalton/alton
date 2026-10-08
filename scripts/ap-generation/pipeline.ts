@@ -80,7 +80,8 @@ function loadCands(): Cand[] {
 
 // ---------- check (구조 + 결정적 검증) ----------
 type Check = { ok: boolean; reasons: string[]; verification: Json };
-const items = (c: Cand): Json[] => (c.kind === "mc" ? (c.structure === "shared_stimulus_set" ? ((c.payload?.items as Json[]) ?? []) : c.payload ? [c.payload] : []) : []);
+const asArr = (x: unknown): Json[] => { if (Array.isArray(x)) return x as Json[]; if (typeof x === "string") { try { const v = JSON.parse(x); return Array.isArray(v) ? (v as Json[]) : []; } catch { return []; } } return []; };
+const items = (c: Cand): Json[] => (c.kind === "mc" ? (c.structure === "shared_stimulus_set" ? asArr(c.payload?.items) : c.payload ? [c.payload] : []) : []);
 function structure(c: Cand): string[] {
   const rs: string[] = [];
   const p = c.payload;
@@ -112,17 +113,17 @@ function structure(c: Cand): string[] {
       }
     });
   } else {
-    const parts = (p.parts as Json[]) ?? [];
+    const parts = asArr(p.parts);
     if (!parts.length) rs.push("no_parts");
     let total = 0;
     for (const part of parts) {
-      const rows = (part.rubric_rows as Json[]) ?? [];
+      const rows = asArr(part.rubric_rows);
       const sum = rows.reduce((s, r) => s + Number(r.points ?? 0), 0);
       total += Number(part.points ?? 0);
       if (!rows.length) rs.push(`part_${part.label}_no_rubric_rows`);
       if (sum !== Number(part.points)) rs.push(`part_${part.label}_rubric_sum_${sum}_vs_${part.points}`);
       for (const s of (part.skill_codes as string[]) ?? []) if (!skills.has(s)) rs.push(`part_${part.label}_unknown_skill_${s}`);
-      for (const r of rows) { const dep = r.requires_row_id as string | null | undefined; if (dep && !parts.some((pp) => ((pp.rubric_rows as Json[]) ?? []).some((x) => x.row_id === dep))) rs.push(`part_${part.label}_bad_requires_${dep}`); }
+      for (const r of rows) { const dep = r.requires_row_id as string | null | undefined; if (dep && !parts.some((pp) => asArr(pp.rubric_rows).some((x) => x.row_id === dep))) rs.push(`part_${part.label}_bad_requires_${dep}`); }
     }
     if (total !== Number(p.total_points)) rs.push(`total_points_${total}_vs_${p.total_points}`);
   }
@@ -138,9 +139,14 @@ function runPython(code: string): { ok: boolean; out: Json | null; err: string }
   try { return { ok: true, out: JSON.parse(lines[lines.length - 1]) as Json, err: "" }; } catch { return { ok: false, out: null, err: `unparseable output: ${(r.stdout ?? "").slice(-200)}` }; }
 }
 function checkCand(c: Cand): Check {
-  const reasons = structure(c);
+  let reasons: string[];
+  try { reasons = structure(c); } catch (e) { return { ok: false, reasons: [`malformed_payload`], verification: { error: String(e).slice(0, 120) } }; }
   const verification: Json = { structure: reasons.length === 0 };
   if (reasons.length || !c.payload) return { ok: false, reasons, verification };
+  try { return checkCand2(c, reasons, verification); } catch (e) { return { ok: false, reasons: [...reasons, "malformed_payload"], verification: { error: String(e).slice(0, 120) } }; }
+}
+function checkCand2(c: Cand, reasons: string[], verification: Json): Check {
+  if (!c.payload) return { ok: false, reasons, verification };
   const code = c.kind === "mc" && c.structure !== "shared_stimulus_set" ? (c.payload.verification_code as string) : c.kind === "frq_bundle" ? (c.payload.verification_code as string) : "";
   const setCodes = c.structure === "shared_stimulus_set" ? items(c).map((i) => i.verification_code as string) : [];
   if (c.kind === "mc") {
@@ -164,7 +170,7 @@ function checkCand(c: Cand): Check {
     verification.python = o.out ?? o.err;
     if (!o.ok) reasons.push("verification_error");
     else {
-      const checks = (o.out?.checks as { part: string; pass: boolean }[]) ?? [];
+      const checks = asArr(o.out?.checks) as unknown as { part: string; pass: boolean }[];
       if (!checks.length && !((o.out?.conceptual_parts as unknown[]) ?? []).length) reasons.push("verification_no_checks");
       for (const k of checks) if (!k.pass) reasons.push(`part_${k.part}_numeric_check_failed`);
     }
