@@ -40,5 +40,15 @@ lines.push("", "## 원인 분석으로 고친 것(규칙 완화 없이 생성기
 "- 계산기 필요 MC는 6/30(20%)로 공식 파트 B 비율(약 31%)에 못 미친다(원형 부족).",
 "- 공식 FRQ 6유형 중 4유형만 구현(입자 운동·음함수/관련 변화율 FRQ 미구현).",
 "- 그림 렌더링 전: 그래프 자료는 데이터 명세만 있다.");
+if (has("run2bc/report.json")) {
+  const b = rd("run2bc/report.json"); const sh = has("run2bc/shared_from_ab.json") ? rd("run2bc/shared_from_ab.json") : { mcShared: [], frqShared: [] };
+  const bcc = (rd("run2bc/candidates.json") as J[]).filter((x) => x.reviewState === "pending_expert_review" && !x.reserve);
+  const byUnit: Record<string, number> = {}; bcc.filter((x) => x.kind === "mc").forEach((x) => (byUnit[x.unitCode] = (byUnit[x.unitCode] ?? 0) + 1));
+  lines.push("", "## Calculus BC 샘플(같은 파이프라인, BC 전용 칸만 새로 생성 + AB 공유분 재태깅)", "",
+    `- BC 전용 칸: MC ${b.mcAdopted}/16 채택, FRQ ${b.frqAdopted}/2 채택(급수·매개). 후보 ${b.candidates}, 전체 통과 ${b.passedAll}, 수율 ${(b.yield * 100).toFixed(1)}%, 신규 지출(누적, 반복 포함) $${b.newSpendSinceBaseline}, 호출/채택 ${b.callsPerAdopted}. 미충전 칸: ${b.unfilledCells.join(", ") || "없음"}.`,
+    `- BC 전용 MC 채택 단원 분포: ${JSON.stringify(byUnit)}`,
+    `- AB 채택 문항 재사용(content_key 공유 태깅): MC ${sh.mcShared.length}개 + FRQ ${sh.frqShared.length}개 (\`data/ap/sample-2027/run2bc/shared_from_ab.json\`). BC 샘플 총계: MC ${b.mcAdopted + sh.mcShared.length}/30, FRQ ${b.frqAdopted + sh.frqShared.length}/4.`,
+    "- 반려 원인 상위: " + Object.entries(b.rejectionReasons as Record<string, number>).sort((x, y) => y[1] - x[1]).slice(0, 5).map(([k, v]) => `${k} ${v}`).join(", "));
+}
 writeFileSync(path.resolve(process.cwd(), "docs/ap/sample-report-run2.md"), lines.join("\n") + "\n");
 console.log(lines.slice(0, 22).join("\n"));

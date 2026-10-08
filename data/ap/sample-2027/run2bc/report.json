@@ -1,40 +1,36 @@
 {
  "run": "run2bc",
  "subject": "ap_calculus_bc",
- "generatedAt": "2026-10-08T16:21:36.679Z",
- "totalCostUsd": 2.58,
- "newSpendSinceBaseline": 19.23,
+ "generatedAt": "2026-10-08T16:25:52.246Z",
+ "totalCostUsd": 2.52,
+ "newSpendSinceBaseline": 21.75,
  "cap": 50,
  "calls": 289,
  "candidates": 71,
  "mcCandidates": 64,
  "frqCandidates": 7,
- "passedAll": 41,
- "adopted": 16,
- "mcAdopted": 14,
+ "passedAll": 43,
+ "adopted": 18,
+ "mcAdopted": 16,
  "frqAdopted": 2,
  "reserve": 25,
- "yield": 0.225,
- "costPerAdopted": 0.161,
- "callsPerAdopted": 18.1,
- "duplicateRejected": 1,
+ "yield": 0.254,
+ "costPerAdopted": 0.14,
+ "callsPerAdopted": 16.1,
+ "duplicateRejected": 2,
  "spotChecked": 5,
  "wording": {
-  "llm": 7,
-  "template": 64
+  "llm": 8,
+  "template": 63
  },
  "rejectionReasons": {
-  "criterion_failed_distractor_explanation": 25,
-  "criterion_failed_stimulus_expression": 14,
-  "duplicate_gate_near_duplicate": 1,
-  "criterion_failed_scope_skill": 14,
-  "criterion_failed_key_scoring": 12,
-  "criterion_failed_exam_suitability": 13,
-  "reference_pattern_mismatch": 1,
-  "fable_spot_check_disagrees": 1
+  "criterion_failed_scope_skill": 16,
+  "criterion_failed_key_scoring": 13,
+  "criterion_failed_stimulus_expression": 15,
+  "criterion_failed_distractor_explanation": 24,
+  "criterion_failed_exam_suitability": 16,
+  "duplicate_gate_near_duplicate": 2,
+  "reference_pattern_mismatch": 2
  },
- "unfilledCells": [
-  "ap_calculus_bc-m01",
-  "ap_calculus_bc-m12"
- ]
+ "unfilledCells": []
 }
