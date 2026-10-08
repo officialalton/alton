@@ -107,7 +107,7 @@ export default function HomeworkBatchPanel({
           <div className="text-[13px] text-grey-500 bg-grey-100 rounded-lg px-4 py-6 text-center">No upcoming assignments.</div>
         ) : (
           <div>
-            <div className="flex gap-2 mb-4 overflow-x-auto border-b border-grey-200" role="tablist" aria-label="Assignment batches">
+            <div className="flex gap-2 mb-4 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200" role="tablist" aria-label="Assignment batches">
               {upcoming.map((b) => {
                 const total = b.items.length;
                 const answered = b.items.filter((i) => i.submittedAt).length;
