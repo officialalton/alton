@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LandingView from "./LandingView";
 import { resolveLandingDestinations } from "@/lib/landing/cta";
 import { loadLandingViewer } from "@/lib/landing/viewer";
+import { getPublishedPracticeTestCount } from "@/lib/landing/practice-test-count";
 
 const TITLE = "ALTON — Free SAT Practice Tests, Learning Tools & Premium Tutoring";
 const DESCRIPTION =
@@ -16,5 +17,6 @@ export const metadata: Metadata = {
 
 export default async function LandingPage() {
   const dest = resolveLandingDestinations(await loadLandingViewer());
-  return <LandingView dest={dest} />;
+  const practiceTestCount = await getPublishedPracticeTestCount();
+  return <LandingView dest={dest} practiceTestCount={practiceTestCount} />;
 }
