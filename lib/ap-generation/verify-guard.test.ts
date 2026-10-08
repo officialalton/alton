@@ -48,7 +48,7 @@ describe("screen evidence", () => {
   const payload = { stimulus: "s", stem: "q", options: ["A", "B"], key_index: 0 };
   const pass = { result: "pass" as const };
   const checks = { options_visible: pass, figure_rendered: pass, no_clipping: pass, no_answer_before_submit: pass, frq_input_works: { result: "na" as const } };
-  const mk = (vp: string, o: Partial<ScreenEntry> = {}): ScreenEntry => ({ candidate_key: "k", content_hash: itemContentHash(payload), kind: "mc", viewport: vp, screenshot: "s.png", timestamp: "2026-10-08T10:00:00Z", checker: "playwright", checks, ...o });
+  const mk = (vp: string, o: Partial<ScreenEntry> = {}): ScreenEntry => ({ candidate_key: "k", checker_kind: "automated", content_hash: itemContentHash(payload), kind: "mc", viewport: vp, screenshot: "s.png", timestamp: "2026-10-08T10:00:00Z", checker: "automated-playwright", checks, ...o });
   it("완전한 항목만 통과(스크린샷 존재만으로는 불가)", () => {
     expect(validateScreenEntry(mk("390x844"), dir)).toBeNull();
     expect(validateScreenEntry(mk("390x844", { checks: undefined }), dir)).toMatch(/checks 누락/);
@@ -60,6 +60,11 @@ describe("screen evidence", () => {
     expect(validateScreenEntry(mk("390x844", { screenshot: "none.png" }), dir)).toMatch(/없음/);
     expect(validateScreenEntry(mk("390x844", { content_hash: "abc" }), dir)).toMatch(/content_hash/);
     expect(validateScreenEntry(mk("bad"), dir)).toMatch(/viewport/);
+    expect(validateScreenEntry(mk("390x844", { checker_kind: undefined }), dir)).toMatch(/checker_kind/);
+    expect(validateScreenEntry(mk("390x844", { checker_kind: "robot" as never }), dir)).toMatch(/checker_kind/);
+    expect(validateScreenEntry(mk("390x844", { checker: "playwright" }), dir)).toMatch(/automated-/);
+    expect(validateScreenEntry(mk("390x844", { checker_kind: "human", checker: "automated-playwright" }), dir)).toMatch(/사람 검토/);
+    expect(validateScreenEntry(mk("390x844", { checker_kind: "human", checker: "Jiman" }), dir)).toBeNull();
     expect(validateScreenEntry(mk("390x844", { timestamp: "2999-01-01T00:00:00Z" }), dir)).toMatch(/미래/);
   });
   it("후보 판정: 해시 일치 + 모바일·데스크톱 모두 필요, 내용 변경 시 재사용 불가", () => {

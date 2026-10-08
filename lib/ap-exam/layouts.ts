@@ -58,3 +58,26 @@ export const CALCULATOR_TEXT: Record<ApCalculator, string> = {
 export function totalMinutes(subject: string, label: ApSetLabel): number {
   return sectionsForLabel(subject, label).reduce((a, x) => a + x.minutes, 0);
 }
+
+// ── 부분 연습 세트(첫 제품 형태) ────────────────────────────────────────────
+// 공식 파트의 문항 수와 시간을 전부 채운 경우에만 "파트 A/B 모의 연습"으로 이름 붙일 수 있다. 현재 재고를 완전한 모의고사로 부르지 않는다(full_practice 는 모든 섹션 충족 때만).
+// DB 라벨은 기존 3종(mc_practice|frq_practice)을 그대로 쓴다: 세트의 section_layout 에 해당 파트 섹션만 담고 공개 게이트가 그 섹션의 공식 문항 수를 강제한다.
+export type ApPartialId = "noncalc_mc" | "calc_mc" | "frq";
+export const AP_PARTIALS: Record<ApPartialId, { label: ApSetLabel; nameSuffix: string; sectionKeys: string[] }> = {
+  noncalc_mc: { label: "mc_practice", nameSuffix: "Non-Calculator Practice", sectionKeys: ["ap_mc_a"] },
+  calc_mc: { label: "mc_practice", nameSuffix: "Calculator Practice", sectionKeys: ["ap_mc_b"] },
+  frq: { label: "frq_practice", nameSuffix: "Free-Response Practice", sectionKeys: ["ap_frq_a", "ap_frq_b"] },
+};
+/** 부분 세트가 정의되는 과목: 계산기 파트가 나뉜 AB·BC. */
+export const AP_PARTIAL_SUBJECTS = ["ap_calculus_ab", "ap_calculus_bc"];
+export function partialSetName(subject: string, id: ApPartialId, seq?: number): string {
+  return `${AP_SUBJECT_NAME[subject] ?? subject} — ${AP_PARTIALS[id].nameSuffix}${seq && seq > 1 ? ` ${seq}` : ""}`;
+}
+export function sectionsForPartial(subject: string, id: ApPartialId): ApSection[] {
+  if (!AP_PARTIAL_SUBJECTS.includes(subject)) throw new Error(`No partial practice sets for ${subject}`);
+  return apSectionLayout(subject).filter((x) => AP_PARTIALS[id].sectionKeys.includes(x.key));
+}
+/** 파트 라벨 허용 조건: 채운 문항 수가 포함 섹션의 공식 문항 수와 정확히 같을 때만(시간은 공식 값을 복사하므로 항상 일치). */
+export function partialLabelAllowed(subject: string, id: ApPartialId, filled: Record<string, number>): boolean {
+  return sectionsForPartial(subject, id).every((sec) => filled[sec.key] === sec.count);
+}

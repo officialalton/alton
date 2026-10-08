@@ -10,7 +10,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { itemContentHash, SCREEN_CHECKS, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
+import { AUTOMATED_LIMITATION, itemContentHash, SCREEN_CHECKS, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
 const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
@@ -108,7 +108,7 @@ async function main() {
           try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
           const bad = SCREEN_CHECKS.filter((c) => checks[c].result === "fail");
           if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${checks[c].note})`).join("; ")}`);
-          for (const k of keysByHash.get(hash) ?? []) entries.push({ candidate_key: k, content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `playwright/${ver} local student exam screen`, checks });
+          for (const k of keysByHash.get(hash) ?? []) entries.push({ candidate_key: k, checker_kind: "automated", content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `automated-playwright/${ver} local student exam screen`, checks });
         }
       }
       await ctx.close();
@@ -116,7 +116,7 @@ async function main() {
   }
   await browser.close();
   const out = arg("out", "tmp/ap-screen-evidence.json");
-  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v1", generator: "playwright", generatedAt: new Date().toISOString(), entries }, null, 1));
+  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v1", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
   console.log(`증거 항목 ${entries.length}건(후보 ${new Set(entries.map((e) => e.candidate_key)).size}개) → ${out}`);
   if (failures.length) { console.log(`점검 실패 ${failures.length}건(해당 후보는 mark-verified 가 거부):`); for (const f of failures) console.log(`- ${f}`); }
 }
