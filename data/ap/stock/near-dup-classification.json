@@ -3,8 +3,8 @@
   "run": "run2",
   "key": "ap_calculus_ab-m06-k3",
   "twin": "ap_calculus_ab-m06-k1",
-  "reason": "같은 함수·같은 문항·같은 키, 보기 순서/구성만 다름(숫자·풀이 구조 동일)",
-  "classification": "same_family_variant",
+  "reason": "같은 함수·같은 문항·같은 키이며 보기 순서만 다름 → 완전 중복(재고 정책상 제외, 정본 m06-k1)",
+  "classification": "exact_duplicate",
   "skillAndSolutionStructureSame": true
  },
  {
@@ -35,16 +35,16 @@
   "run": "run2bc",
   "key": "ap_calculus_bc-m02-k3",
   "twin": "ap_calculus_bc-m02-k1",
-  "reason": "같은 적분·같은 값, 오답 구성만 다름",
-  "classification": "same_family_variant",
+  "reason": "같은 적분·같은 보기 집합(순서만 다름) → 완전 중복(정본 m02-k1)",
+  "classification": "exact_duplicate",
   "skillAndSolutionStructureSame": true
  },
  {
   "run": "run2bc",
   "key": "ap_calculus_bc-m16-k3",
   "twin": "ap_calculus_bc-m16-k1",
-  "reason": "같은 라그랑주 오차 문항·같은 값, 보기 구성만 다름",
-  "classification": "same_family_variant",
+  "reason": "같은 라그랑주 오차 문항·같은 보기 집합 → 완전 중복(정본 m16-k1)",
+  "classification": "exact_duplicate",
   "skillAndSolutionStructureSame": true
  }
 ]

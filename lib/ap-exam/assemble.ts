@@ -49,9 +49,12 @@ export function planApSet(subject: string, label: ApSetLabel, pool: AssembleCand
     const picked: AssembleCandidate[] = [];
     const units = [...byUnit.keys()].sort();
     let progress = true;
+    const mid = (u: string) => { const b = opts.unitBounds?.[u]; return b ? (b.min + b.max) / 2 : 0; };
+    const weighted = kind === "mc" && !!opts.unitBounds; // 공식 비중이 있으면 목표(중간값)에 가장 못 미친 단원부터 뽑는다(단순 순환은 비중을 무시)
     while (picked.length < sec.count && progress) {
       progress = false;
-      for (const u of units) {
+      const order = weighted ? [...units].sort((a, b) => (mid(b) - (unitCount.get(b) ?? 0)) - (mid(a) - (unitCount.get(a) ?? 0)) || a.localeCompare(b)) : units;
+      for (const u of order) {
         if (picked.length >= sec.count) break;
         const list = byUnit.get(u)!;
         while (list.length) {
@@ -63,6 +66,7 @@ export function planApSet(subject: string, label: ApSetLabel, pool: AssembleCand
           if (isReuse) reused += 1; unitCount.set(u, (unitCount.get(u) ?? 0) + (kind === "mc" ? 1 : 0));
           famCount.set(fam, (famCount.get(fam) ?? 0) + 1); picked.push(c); taken.add(c.problemId); progress = true; break;
         }
+        if (progress && weighted) break; // 한 개 뽑을 때마다 부족 단원을 다시 계산
       }
     }
     picked.forEach((c, i) => items.push({ sectionKey: sec.key, position: i + 1, c }));
