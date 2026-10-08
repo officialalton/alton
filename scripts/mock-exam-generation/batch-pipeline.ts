@@ -10,7 +10,9 @@ import path from "node:path";
 import vm from "node:vm";
 import { runBatch, estimate, ledger, toolInput, type BatchReq } from "./batch-lib";
 import { deterministicIssues, type Raw } from "./review";
-import { buildLevelCands, explanationEnIssues, levelVerdict, LEVEL_RULE, HANGUL } from "./rw-level";
+import { buildLevelCands, explanationEnIssues, levelVerdict, levelInstruction, TARGET_LETTERS, LEVEL_RULE, HANGUL } from "./rw-level";
+import { analyzeLeak, buildIdf } from "./answer-leak-detector";
+import { RW_SATURATED_TOPICS } from "../../lib/problem-generation/rw-topic-saturation";
 
 const envPath = path.resolve(process.cwd(), ".env.local");
 if (existsSync(envPath)) for (const line of readFileSync(envPath, "utf-8").split("\n")) { const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/); if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, ""); }
@@ -319,6 +321,18 @@ function compare() {
 
 const REVIEWERS = [{ key: "fable", model: "claude-fable-5-1" }, { key: "opus", model: "claude-opus-5-5" }] as const;
 const formatFail = (issues: string[]) => issues.some((i) => /math_|unbalanced_dollar|raw_latex/.test(i));
+/** 2026-10-08 재조정 생성: 칸(skill x 난이도 x 과목)별 후보 파일. 각 후보는 구체 소재 씨앗을 가진다. */
+type FileCand = { skill: string; difficulty: "easy" | "medium" | "hard"; seed: string };
+function buildFileCands(rows: FileCand[], prefix: string): Cand[] {
+  const cnt = new Map<string, number>();
+  return rows.map((r, n) => {
+    const k = `${r.skill}|${r.difficulty}`; const i = cnt.get(k) ?? 0; cnt.set(k, i + 1);
+    const rc = r.difficulty === "hard" ? recipesFor(r.skill)[i % recipesFor(r.skill).length] : null;
+    return { cid: `${prefix}-${r.skill}-${r.difficulty[0]}-${String(n).padStart(3, "0")}`.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 64), skill: r.skill, system: "sat_rw" as const, method: r.difficulty === "hard" ? "recipe" : r.difficulty, recipeId: rc?.id ?? null, instruction: rc ? rc.instruction : levelInstruction(r.skill, r.difficulty as "easy" | "medium"), idx: n, difficulty: r.difficulty, seed: r.seed, targetLetter: TARGET_LETTERS[n % 4] };
+  });
+}
+let AVOID_MSG = "";
+
 /** 교차 채점 시험: 생성 Opus 5.5 고정(동기), 같은 후보를 검수 모델 2개(Fable 5.1·Opus 5.5)가 채점. 새 예산 구간 batch2/ledger.json. 실행: cross [--per 6] [--budget 6] [--dry] */
 async function cross() {
   const per = Number(arg("--per") ?? 6), budget = Number(arg("--budget") ?? 6);
@@ -330,9 +344,11 @@ async function cross() {
   const spec = specArg ? Object.fromEntries(specArg.split(",").map((x) => { const [k, n] = x.split(":"); return [k, Number(n)]; })) : undefined;
   const level = (arg("--difficulty") ?? "hard") as "easy" | "medium" | "hard";
   if (!["easy", "medium", "hard"].includes(level)) throw new Error("--difficulty 는 easy|medium|hard");
-  if (level !== "hard" && !spec) throw new Error("--difficulty easy|medium 은 --skills skill:n,... 필요(RW 전용)");
-  if (level !== "hard" && Object.keys(spec!).some((k) => isMath(k))) throw new Error("--difficulty easy|medium 은 RW skill 만 지원");
-  const cands: Cand[] = level === "hard" ? buildCands("recipe", per, Number(arg("--per-math") ?? per), spec, Number(arg("--idx-offset") ?? 0)) : buildLevelCands(level, spec!, SEEDS, Number(arg("--idx-offset") ?? 0));
+  if (level !== "hard" && !spec && !arg("--cands-file")) throw new Error("--difficulty easy|medium 은 --skills skill:n,... 필요(RW 전용)");
+  if (level !== "hard" && spec && Object.keys(spec).some((k) => isMath(k))) throw new Error("--difficulty easy|medium 은 RW skill 만 지원");
+  const candsFile = arg("--cands-file");
+  if (candsFile) { const av = arg("--avoid-file") ? (JSON.parse(readFileSync(arg("--avoid-file")!, "utf-8")) as string[]) : []; const avoid = [...new Set([...RW_SATURATED_TOPICS, ...av])]; AVOID_MSG = ` 질문에는 정답 선택지의 문구·핵심어를 그대로 쓰지 말고(정답이 질문과 닮아 보이지 않게), 오답도 정답과 같은 문장 틀로 쓴다. 다음 소재는 이미 은행에 넘치므로 쓰지 않는다: ${avoid.join("; ")}.`; }
+  const cands: Cand[] = candsFile ? buildFileCands(JSON.parse(readFileSync(candsFile, "utf-8")) as FileCand[], arg("--prefix") ?? "rb") : level === "hard" ? buildCands("recipe", per, Number(arg("--per-math") ?? per), spec, Number(arg("--idx-offset") ?? 0)) : buildLevelCands(level, spec!, SEEDS, Number(arg("--idx-offset") ?? 0));
   writeFileSync(path.join(dir, "candidates.json"), JSON.stringify(cands));
   const led = ledger(dir);
   // 추정(동기 단가): 앞선 실측 — Opus 생성 약 $0.034/후보, Fable 검수 약 $0.105/후보, Opus 검수 약 $0.03/후보(결정론 통과 약 85%)
@@ -340,13 +356,18 @@ async function cross() {
   console.log(`[D-cross] 후보 ${cands.length} · 생성 ${genModel} · 검수 fable+opus · 추정(동기) $${est.toFixed(2)} · 구간 누적 $${led.spent().toFixed(2)} / 상한 $${budget}`);
   if (led.spent() + est > budget * 1.15) throw new Error("추정이 상한을 크게 넘음 — 실행하지 않음");
   if (flag("--dry")) return;
-  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: genModel, ...think(genModel), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라.${c.seed ? ` 소재 영역: ${c.seed}.` : ""}${c.targetLetter ? ` 정답(correct_letter)은 반드시 ${c.targetLetter} 위치에 놓아라(선택지 순서를 그에 맞게 구성).` : ""} 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
+  const genReqs: BatchReq[] = cands.map((c) => ({ custom_id: c.cid, params: { model: genModel, ...think(genModel), max_tokens: c.system === "sat_math" ? 5000 : 4500, system: [{ type: "text", text: genSystem(c), cache_control: SYS_CACHE }], tools: [genTool(c)], tool_choice: { type: "auto" }, messages: [{ role: "user", content: `후보 ${c.idx + 1}번. 같은 지시로 만든 다른 후보와 소재·수치가 겹치지 않게 새로 창작하라.${AVOID_MSG}${c.seed ? ` 소재(반드시 이 소재로 지문을 쓴다): ${c.seed}.` : ""}${c.targetLetter ? ` 정답(correct_letter)은 반드시 ${c.targetLetter} 위치에 놓아라(선택지 순서를 그에 맞게 구성).` : ""} 문항 1개를 반드시 problem 도구 호출로 제출하라(텍스트 답변 금지).` }] } }));
   const genRes = await runBatch({ dir, name: "gen", requests: genReqs, budgetUsd: budget, estimateUsd: cands.length * 0.017, sync: true });
   const gens = new Map<string, { c: Cand; g: Gen; det: { issues: string[]; mathVerify: string | null } }>();
   for (const c of cands) {
     const r = genRes.get(c.cid); const g = r ? (toolInput(r) as unknown as Gen | null) : null;
     if (!g || !Array.isArray(g.options) || g.options.length !== 4 || !g.question) continue;
     gens.set(c.cid, { c, g, det: await deterministic(c, g) });
+  }
+  if (candsFile) { // 정답 누설 게이트(강한 신호만): 스킬별 IDF 는 이번 배치의 질문·선택지로 만든다.
+    const idfBySkill = new Map<string, ReturnType<typeof buildIdf>>();
+    for (const sk of new Set([...gens.values()].map((x) => x.c.skill))) idfBySkill.set(sk, buildIdf([...gens.values()].filter((x) => x.c.skill === sk).map((x) => `${x.g.question}\n${x.g.options.join("\n")}`)));
+    for (const x of gens.values()) { const a = analyzeLeak({ question: x.g.question, options: x.g.options, correctIndex: "ABCD".indexOf(x.g.correct_letter), skill: x.c.skill, passage: x.g.passage }, idfBySkill.get(x.c.skill)!); if (a.strong) x.det.issues.push("answer_leak:" + a.reasons.join("|")); }
   }
   writeFileSync(path.join(dir, "gens.json"), JSON.stringify([...gens.values()]));
   const passDet = [...gens.values()].filter((x) => x.det.issues.length === 0);
