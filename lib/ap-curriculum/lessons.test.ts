@@ -36,7 +36,7 @@ describe("AP lesson-level template generator", () => {
     const ab = lessonTotals(buildLessonPlan(get("ap_calculus_ab"), { track: "compact" }));
     const bc = lessonTotals(buildLessonPlan(get("ap_calculus_bc"), { track: "compact" }));
     expect(Math.abs(ab.total - 30) / 30).toBeLessThanOrEqual(0.1);
-    expect(Math.abs(bc.total - 40) / 40).toBeLessThanOrEqual(0.1 + 0.001 * 3);
+    expect(Math.abs(bc.total - 40) / 40).toBeLessThanOrEqual(0.1);
     expect(ab.minutes).toBe(100);
     expect(lessonTotals(buildLessonPlan(get("ap_calculus_ab"), { track: "full" })).total).toBe(81);
   });
