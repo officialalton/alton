@@ -46,11 +46,14 @@ const costOfRes = (r?: Json) => (r?.cost as number | undefined) ?? 0;
 
 // ---------- gen ----------
 const GEN_TOK = { in: 3200, out: 3500 };
+const EXTRA_F = path.join(DIR, "extra.json"); // 셀별 추가(top-up) 후보 수: {cellId: n}. 수율 25% 미달로 채우지 못한 칸에만 쓴다(기준은 그대로).
+const extraMap = (): Record<string, number> => (existsSync(EXTRA_F) ? readJson<Record<string, number>>(EXTRA_F) : {});
 function candIds(): { cell: Cell; i: number; id: string }[] {
   const out: { cell: Cell; i: number; id: string }[] = [];
   let cells = allCells();
   if (LIMIT) cells = cells.slice(0, LIMIT);
-  for (const cell of cells) for (let i = 0; i < cell.candidates; i++) out.push({ cell, i, id: `${cell.cellId}-k${i}` });
+  const ex = extraMap();
+  for (const cell of cells) for (let i = 0; i < cell.candidates + (ex[cell.cellId] ?? 0); i++) out.push({ cell, i, id: `${cell.cellId}-k${i}` });
   return out;
 }
 async function genStage() {
@@ -179,8 +182,8 @@ function checkCand2(c: Cand, reasons: string[], verification: Json): Check {
 }
 function checkStage() {
   const cands = loadCands();
-  const out: Record<string, Check> = {};
-  for (const c of cands) out[c.key] = checkCand(c);
+  const out: Record<string, Check> = checks();
+  for (const c of cands) if (!out[c.key] || !out[c.key].ok || c.payload) out[c.key] = checkCand(c);
   writeFileSync(path.join(DIR, "check.json"), JSON.stringify(out, null, 1));
   const ok = Object.values(out).filter((x) => x.ok).length;
   console.log(`check: ${cands.length} 후보 중 통과 ${ok} (${((ok / cands.length) * 100).toFixed(0)}%)`);
@@ -214,7 +217,7 @@ const diffTool = { name: "submit_difficulty", description: "Submit provisional d
 const SOLVE_SYS = "You are an AP course expert solving a practice item as a student would. Solve independently; do not assume the item is well-formed. For multiple choice give choice_index (0-based). For free response give a concise final answer per part. If the item is ambiguous, has two defensible answers, lacks a needed condition or contradicts its stimulus, set ambiguous_or_flawed true and say why.";
 const REVIEW_SYS = `You are a strict AP content reviewer. Apply five acceptance criteria: (1) scope/skill fit to the given official unit topic and skill; (2) key and scoring correctness (unique key; numbers/units consistent; FRQ rubric consistent, alternatives valid); (3) stimulus/expression completeness (the stimulus "data" object is the machine-readable specification a figure/table will be rendered from and "description" is only alt text: judge the completeness of the DATA — axes, ranges, units, labels, every number used — not whether a picture is attached; clear US English); (4) distractor/explanation quality (misconception-based, no length/format giveaways, explains why wrong); (5) exam suitability (time, reading/calculator load, no needless arithmetic). Any instant-reject condition must be listed in instant_reject. You also receive an independent solver's answer: its agreement is supporting evidence only, never proof of quality or difficulty. Flag resembles_known_exam_item if it looks like a recollection of a real released AP item. Be conservative: fail when unsure.`;
 const DIFF_SYS = "You tag provisional internal difficulty for AP practice items: basic_learning, exam_prep (target for full mocks) or advanced_supplement. Judge only from concept depth, reasoning steps, representation changes, reading and computation load. Do NOT infer difficulty from model agreement or from any claim of AP score level. Never use the words 'AP 3-level/5-level'. Flag difficulty_from_unfair_sources if the item is hard only because of long arithmetic, vagueness, heavy reading or out-of-scope knowledge.";
-const ctx = (c: Cand) => { const cell = allCells().find((x) => x.cellId === c.cellId)!; const k = cur(c.subject); return `Subject ${c.subject}. Unit ${c.unitCode}; topic ${c.keywordCode} "${k.topic.get(c.keywordCode)}"; target skill ${c.skill} (${k.skill.get(c.skill)}); structure ${c.structure}; calculator ${cell.calculator}.`; };
+const ctx = (c: Cand) => { const cell = allCells().find((x) => x.cellId === c.cellId)!; const k = cur(c.subject); return `Subject ${c.subject}. Unit ${c.unitCode}; topic ${c.keywordCode} "${k.topic.get(c.keywordCode)}"; target skill ${c.skill} (${k.skill.get(c.skill)}); structure ${c.structure}; calculator ${cell.calculator}.${cell.extraKeywordCodes.length ? ` This ${cell.kind === "frq_bundle" ? "bundle" : "set"} legitimately spans the related topics ${[cell.keywordCode, ...cell.extraKeywordCodes].map((x) => `${x} \"${k.topic.get(x)}\"`).join("; ")} (like real exam free-response questions, which combine topics); judge scope/skill fit at the bundle level, with the primary skill as the dominant demand, not part by part.` : ""}`; };
 const mk = (id: string, model: string, sys: string, tool: Json, user: string, max: number): BatchReq => ({ custom_id: id, params: { model, ...think(model), max_tokens: max, system: [{ type: "text", text: sys, cache_control: SYS_CACHE }], tools: [tool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: user }] } });
 
 async function solveStage() {
@@ -224,17 +227,19 @@ async function solveStage() {
   console.log(`solve: ${reqs.length} 요청 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
+const isBundle = (c: Cand) => c.kind === "frq_bundle" || c.structure === "shared_stimulus_set";
+const rid = (c: Cand) => (isBundle(c) ? `r2-${c.key}` : `r-${c.key}`); // 번들은 검토 맥락(다중 토픽 허용) 수정 후 재검토
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
 async function reviewStage() {
   const cs = alive().filter((c) => solved(c));
-  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nCANDIDATE (with key, rationale, rubric):\n${JSON.stringify(c.payload).replace(/"verification_code":"[^"]*"/g, '"verification_code":"(omitted)"')}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
+  const reqs = cs.map((c) => mk(rid(c), MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nCANDIDATE (with key, rationale, rubric):\n${JSON.stringify(c.payload).replace(/"verification_code":"[^"]*"/g, '"verification_code":"(omitted)"')}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
   const est = estimate(MODELS.review, reqs.length, 2800, 1200);
   console.log(`review: ${reqs.length} 요청 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET, estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 async function difficultyStage() {
   const rev = resultMap("review");
-  const cs = alive().filter((c) => rev.has(`r-${c.key}`));
+  const cs = alive().filter((c) => rev.has(rid(c)));
   const reqs = cs.map((c) => mk(`d-${c.key}`, MODELS.difficulty, DIFF_SYS, diffTool, `${ctx(c)}\n\n${JSON.stringify(blind(c))}`, 1500));
   const est = estimate(MODELS.difficulty, reqs.length, 1500, 700);
   console.log(`difficulty: ${reqs.length} 요청 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
@@ -263,7 +268,7 @@ function decide(): Verdict[] {
     v.solver = solved(c);
     if (!v.solver) { reasons.push("solver_missing"); return v; }
     if (solverAgrees(c, v.solver) === false) reasons.push("solver_disagrees_or_flags_flaw");
-    const r = rev.get(`r-${c.key}`);
+    const r = rev.get(rid(c));
     v.review = r ? (toolInput(r as never) as Json | null) : null;
     if (!v.review) { reasons.push("review_missing"); return v; }
     for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) if (!(v.review[k] as Json | undefined)?.pass) reasons.push(`criterion_failed_${k}`);
