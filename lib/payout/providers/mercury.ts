@@ -85,6 +85,46 @@ export async function checkMercuryReadConnection(config: Pick<MercuryConfig, "to
   }
 }
 
+export type MercuryTxShapeCheck =
+  | { ok: true; accountConfigured: true; count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[] }
+  | { ok: false; reason: "no_token" | "no_account" | "unauthorized" | "forbidden" | "http_error" | "network"; status?: number };
+
+/** 읽기 전용: 최근 거래 몇 건의 응답 '형태'만 확인한다(필드 이름·상태·종류). 금액·상대방·메모 등 값은 반환하지 않는다. */
+export async function checkMercuryTransactionShape(config: Pick<MercuryConfig, "token" | "accountId" | "baseUrl" | "fetchImpl" | "timeoutMs">, limit = 5): Promise<MercuryTxShapeCheck> {
+  if (!config.token) return { ok: false, reason: "no_token" };
+  if (!config.accountId) return { ok: false, reason: "no_account" };
+  const base = (config.baseUrl ?? MERCURY_DEFAULT_BASE_URL).replace(/\/$/, "");
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), config.timeoutMs ?? 20_000);
+  try {
+    const res = await (config.fetchImpl ?? fetch)(`${base}/account/${encodeURIComponent(config.accountId)}/transactions?limit=${limit}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${config.token}`, Accept: "application/json" },
+      signal: controller.signal,
+    });
+    if (res.status === 401) return { ok: false, reason: "unauthorized", status: 401 };
+    if (res.status === 403) return { ok: false, reason: "forbidden", status: 403 };
+    if (!res.ok) return { ok: false, reason: "http_error", status: res.status };
+    const json = (await res.json().catch(() => null)) as { transactions?: unknown[] } | null;
+    const list = Array.isArray(json?.transactions) ? json!.transactions! : [];
+    const names = new Set<string>(); const exNames = new Set<string>();
+    const sample = list.slice(0, limit).map((raw) => {
+      const t = (raw ?? {}) as Record<string, unknown>;
+      Object.keys(t).forEach((k) => names.add(k));
+      const ex = t.currencyExchangeInfo;
+      if (ex && typeof ex === "object") Object.keys(ex as object).forEach((k) => exNames.add(k));
+      const id = String(t.id ?? "");
+      const created = typeof t.createdAt === "string" ? t.createdAt.slice(0, 10) : typeof t.postedAt === "string" ? t.postedAt.slice(0, 10) : null;
+      return { idTail: id.slice(-6), status: String(t.status ?? ""), kind: String(t.kind ?? ""), createdDate: created, hasRequestId: Boolean(t.requestId) };
+    });
+    return { ok: true, accountConfigured: true, count: list.length, sample, fieldNames: [...names].sort(), exchangeInfoFieldNames: [...exNames].sort() };
+  } catch {
+    return { ok: false, reason: "network" };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export function createMercuryProvider(config: MercuryConfig): PayoutProvider {
   const base = (config.baseUrl ?? MERCURY_DEFAULT_BASE_URL).replace(/\/$/, "");
 

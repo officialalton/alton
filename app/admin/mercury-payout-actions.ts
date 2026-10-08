@@ -6,7 +6,7 @@
 import { requirePayoutCapability, type PayoutCapability } from "@/lib/admin-auth";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { requestAttemptPayout, type RequestOutcome } from "@/lib/payout/attempts";
-import { checkMercuryReadConnection, createMercuryProvider, mercuryConfigFromEnv, type MercuryAccountSummary } from "@/lib/payout/providers/mercury";
+import { checkMercuryReadConnection, checkMercuryTransactionShape, createMercuryProvider, mercuryConfigFromEnv, type MercuryAccountSummary } from "@/lib/payout/providers/mercury";
 import { createSupabaseAttemptStore } from "@/lib/payout/supabase-attempt-store";
 import type { AttemptStatus } from "@/lib/payout/attempt-state";
 
@@ -298,5 +298,24 @@ export async function checkMercuryConnectionAction(): Promise<ActionResult<{ acc
       throw new Error(text[res.reason]);
     }
     return { data: { accounts: res.accounts, payoutAccountConfigured: Boolean(config.accountId) } };
+  });
+}
+
+/** Mercury 거래 조회 형태 확인(읽기 전용): 최근 거래의 필드 이름·상태·종류만. 금액·상대방 값은 반환하지 않는다. */
+export async function checkMercuryTransactionShapeAction(): Promise<ActionResult<{ count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[] }>> {
+  return run("accounting_reconcile", async () => {
+    const res = await checkMercuryTransactionShape(mercuryConfigFromEnv());
+    if (!res.ok) {
+      const text: Record<string, string> = {
+        no_token: "MERCURY_API_TOKEN is not set in this environment.",
+        no_account: "MERCURY_PAYOUT_ACCOUNT_ID is not set in this environment.",
+        unauthorized: "Mercury rejected the token (401).",
+        forbidden: "Mercury refused this request (403). The token may be missing the Fetch Transactions scope.",
+        http_error: `Mercury returned an error (${res.status ?? "?"}).`,
+        network: "Could not reach Mercury (network or timeout).",
+      };
+      throw new Error(text[res.reason]);
+    }
+    return { data: { count: res.count, sample: res.sample, fieldNames: res.fieldNames, exchangeInfoFieldNames: res.exchangeInfoFieldNames } };
   });
 }

@@ -11,6 +11,7 @@ import {
   failOrCancelAttemptAction,
   linkTransactionAction,
   checkMercuryConnectionAction,
+  checkMercuryTransactionShapeAction,
   listMercuryPayoutsAction,
   markManualAttemptSentAction,
   recordActualsAction,
@@ -59,6 +60,7 @@ export default function MercuryPayoutsPanel() {
   const [mercuryEnabled, setMercuryEnabled] = useState(false);
   const [msg, setMsg] = useState<Msg>(null);
   const [busy, setBusy] = useState<string | null>(null);
+  const [txShape, setTxShape] = useState<{ count: number; sample: { idTail: string; status: string; kind: string; createdDate: string | null; hasRequestId: boolean }[]; fieldNames: string[]; exchangeInfoFieldNames: string[] } | null>(null);
   const [conn, setConn] = useState<{ accounts: { id: string; name: string; kind: string; status: string; last4: string | null }[]; payoutAccountConfigured: boolean } | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [form, setForm] = useState<Record<string, string>>({});
@@ -106,6 +108,20 @@ export default function MercuryPayoutsPanel() {
           else setMsg({ tone: "error", text: res.ok ? "No data returned." : res.error });
           setBusy(null);
         }}>Check Mercury read connection</button>
+        <button disabled={busy === "tx"} className="ml-2 font-bold px-2.5 py-1.5 rounded-lg border-[1.5px] border-ink" onClick={async () => {
+          setBusy("tx"); setMsg(null); setTxShape(null);
+          const res = await checkMercuryTransactionShapeAction();
+          if (res.ok && res.data) { setTxShape(res.data); setMsg({ tone: "ok", text: `Read ${res.data.count} recent transaction(s) — field names only, no amounts or counterparties are shown.` }); }
+          else setMsg({ tone: "error", text: res.ok ? "No data returned." : res.error });
+          setBusy(null);
+        }}>Check recent transaction shape</button>
+        {txShape && (
+          <div className="mt-2 text-grey-700" data-testid="mercury-tx-shape">
+            <div>Statuses: {txShape.sample.map((t) => `${t.kind || "?"}/${t.status || "?"}${t.hasRequestId ? " (request)" : ""}`).join(", ") || "none"}</div>
+            <div>Fields: <code className="bg-grey-100 px-1 rounded">{txShape.fieldNames.join(", ") || "none"}</code></div>
+            <div>Exchange info fields: <code className="bg-grey-100 px-1 rounded">{txShape.exchangeInfoFieldNames.join(", ") || "none (no FX transactions in the sample)"}</code></div>
+          </div>
+        )}
         {conn && (
           <ul className="mt-2 space-y-1">
             {conn.accounts.map((a) => (
