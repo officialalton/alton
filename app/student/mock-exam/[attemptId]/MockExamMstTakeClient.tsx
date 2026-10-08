@@ -487,7 +487,7 @@ export default function MockExamMstTakeClient({
                     onClick={() => void toggleSaved(item.setItemId)}
                     aria-pressed={savedMap[item.setItemId] ?? false}
                     aria-label={savedMap[item.setItemId] ? "Remove from saved questions" : "Save question"}
-                    title={savedMap[item.setItemId] ? "Saved to Practice" : "Save to Practice"}
+                    title={savedMap[item.setItemId] ? "Saved to My Notebook" : "Save to My Notebook"}
                     className="inline-flex h-7 w-7 items-center justify-center rounded text-ink hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill={savedMap[item.setItemId] ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true">

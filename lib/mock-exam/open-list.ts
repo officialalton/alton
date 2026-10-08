@@ -24,6 +24,22 @@ export function listStateOf(status: MockExamAttemptSummary["status"] | null): Mo
   return "not_started"; // 응시 없음 또는 시작 화면만 연 'assigned'
 }
 
+const NAME_COLLATOR = new Intl.Collator("en", { numeric: true, sensitivity: "base" });
+
+/** 세트 이름의 자연 정렬 — "SAT Practice Test 2" 가 "… 10" 보다 앞. 숫자 구간은 숫자로 비교한다. */
+export function compareExamNames(a: string, b: string): number {
+  return NAME_COLLATOR.compare(a, b) || (a < b ? -1 : a > b ? 1 : 0);
+}
+
+/** To do(미응시·진행 중) / Completed(제출·채점 완료) 서브탭 분류. */
+export type PracticeTestTab = "todo" | "completed";
+export const practiceTestTabOf = (state: MockExamListState): PracticeTestTab => (state === "not_started" || state === "in_progress" ? "todo" : "completed");
+
+/** 홈 'Next Practice Test' — 아직 끝내지 않은(미응시·진행 중) 공개 세트 중 번호가 가장 낮은 것. 최신순이 아니다. */
+export function pickNextPracticeTest(rows: MockExamListRow[]): MockExamListRow | null {
+  return rows.find((r) => !r.archived && practiceTestTabOf(r.state) === "todo") ?? null;
+}
+
 export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: MockExamAttemptSummary[]): MockExamListRow[] {
   const byId = new Map(attempts.map((a) => [a.id, a]));
   const used = new Set<string>();
@@ -54,5 +70,8 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       archived: true,
     });
   }
-  return rows;
+  // 2026-10-08 — 번호순(오름차순) 자연 정렬. 공개 세트가 먼저, 지난(보관) 시험은 뒤에.
+  const live = rows.filter((r) => !r.archived).sort((a, b) => compareExamNames(a.name, b.name));
+  const archived = rows.filter((r) => r.archived).sort((a, b) => compareExamNames(a.name, b.name));
+  return [...live, ...archived];
 }

@@ -41,14 +41,17 @@ const one = (rel: unknown) => (Array.isArray(rel) ? rel[0] : rel) as Record<stri
 // (단어장의 "내 단어장"과 같은 구조). 정답·해설은 그 응시가 채점 확정(graded)된 뒤에만.
 async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHistoryEntry[]> {
   const admin = createAdminClient();
-  const { data: answers } = await admin
+  const { data: rawAnswers } = await admin
     .from("mock_exam_answers")
     .select(
-      "attempt_id, set_item_id, response, correct, updated_at, attempt:mock_exam_attempts!inner(id, student_id, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
+      "attempt_id, set_item_id, response, correct, saved_to_practice, updated_at, attempt:mock_exam_attempts!inner(id, student_id, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
     )
-    .eq("saved_to_practice", true)
+    .or("saved_to_practice.eq.true,correct.eq.false")
     .eq("attempt.student_id", studentId);
-  if (!answers?.length) return [];
+  // 2026-10-08 My Notebook — 직접 저장한 문항에 더해, 채점 확정된 응시에서 틀린 문항도 Mistake Notebook 에 보인다.
+  const rows = (rawAnswers ?? []).filter((a) => a.saved_to_practice === true || (a.correct === false && one(a.attempt)?.status === "graded"));
+  if (!rows.length) return [];
+  const answers = rows;
 
   const versionIds = Array.from(new Set(answers.map((a) => one(a.item)?.problem_version_id as string).filter(Boolean)));
   const problemIds = Array.from(new Set(answers.map((a) => one(a.item)?.problem_id as string).filter(Boolean)));
@@ -133,8 +136,9 @@ async function loadSavedHomeworkPractice(studentId: string): Promise<ProblemHist
     const items = Array.isArray(b.items) ? (b.items as unknown as SavedHomeworkItem[]) : [];
     const subjectName = (one(b.subject)?.name as string | undefined) ?? "";
     for (const it of items) {
-      if (!it.savedToPractice) continue;
       const graded = Boolean(it.gradedAt);
+      // 2026-10-08 — 직접 저장했거나, 채점 결과가 오답인 과제 문항(Mistake Notebook).
+      if (!it.savedToPractice && !(graded && it.grade === "incorrect")) continue;
       entries.push({
         workId: `hw:${b.id}:${it.problemId}`,
         sessionId: b.id as string,
@@ -176,7 +180,7 @@ export async function loadProblemHistory(studentId: string, opts: { mockExamOnly
     .eq("student_id", studentId)
     // 2026-09-22(사용자 지시) — 모의고사와 같은 정책으로 바뀌었다: 풀었다고 전부
     // 자동으로 뜨지 않고, 학생이 "문제 저장"을 누른 것만 Practice에 나타난다.
-    .eq("saved_to_practice", true)
+    .or("saved_to_practice.eq.true,grade.in.(incorrect,partial)")
     .or("submitted_at.not.is.null,graded_at.not.is.null")
     .order("submitted_at", { ascending: false, nullsFirst: false });
   const [savedMockExam, savedHomework] = await Promise.all([loadSavedMockExamPractice(studentId), loadSavedHomeworkPractice(studentId)]);

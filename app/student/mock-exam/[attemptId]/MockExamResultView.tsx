@@ -201,7 +201,7 @@ function ItemHeader({ item, attemptId, viewerIsOwner }: { item: MockExamAttemptI
           className={`shrink-0 rounded-full border px-2 py-0.5 text-[11px] font-bold ${
             saved ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
           }`}
-          title="Save to the Practice tab"
+          title="Save to My Notebook"
         >
           {saved ? "Saved" : "+ Save question"}
         </button>

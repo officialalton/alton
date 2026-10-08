@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { logLearningEventAction } from "./activity-tracking";
 import UnderlineSubTabs from "@/app/components/UnderlineSubTabs";
 import type { MyVocabWord, LibraryBook, LibraryWord, VocabQuiz, VocabQuizItem, VocabFolder } from "./vocab-library-data";
@@ -70,6 +70,19 @@ type DisplayWord = {
   folderId: string | null;
 };
 
+function WordListSkeleton() {
+  return (
+    <div role="status" aria-label="Loading words" data-testid="vocab-skeleton" className="flex flex-col gap-2 animate-pulse">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="rounded-lg border border-grey-100 bg-white px-4 py-3">
+          <div className="h-3.5 w-28 rounded bg-grey-100" />
+          <div className="mt-2 h-3 w-3/4 rounded bg-grey-100" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function englishGloss(synonymWords: string[] | null): string {
   return synonymWords && synonymWords.length ? synonymWords.join(", ") : "(No English definition)";
 }
@@ -95,6 +108,7 @@ function WordsPanel({
   const [revealedKeys, setRevealedKeys] = useState<Set<string>>(new Set());
   const [libWords, setLibWords] = useState<Record<string, LibraryWord[]>>({});
   const [loadingBook, setLoadingBook] = useState(false);
+  const [bookError, setBookError] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
   const [addingFolder, setAddingFolder] = useState(false);
   const [alphaRange, setAlphaRange] = useState<[string, string] | null>(null);
@@ -103,14 +117,26 @@ function WordsPanel({
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState<(typeof PAGE_SIZES)[number]>(10);
 
+  // 2026-10-08 — 권 단어는 한 번만 받는다: 마우스를 올리거나 포커스만 해도 미리 받기 시작하고(prefetch),
+  // 진행 중인 요청은 클릭이 재사용한다. 받은 권은 libWords 에 캐시된다.
+  const inflight = useRef<Map<string, Promise<LibraryWord[]>>>(new Map());
+  function fetchBook(bookId: string): Promise<LibraryWord[]> {
+    const hit = inflight.current.get(bookId);
+    if (hit) return hit;
+    const p = import("./vocab-library-client-data")
+      .then(({ loadLibraryBookWordsAction }) => loadLibraryBookWordsAction(bookId))
+      .then((words) => { setLibWords((prev) => ({ ...prev, [bookId]: words })); return words; })
+      .catch((e) => { inflight.current.delete(bookId); throw e; });
+    inflight.current.set(bookId, p);
+    return p;
+  }
+  function prefetchBook(bookId: string) { if (!libWords[bookId]) void fetchBook(bookId).catch(() => {}); }
   async function openBook(bookId: string) {
     setSelected(bookId);
     setPage(0);
     if (libWords[bookId]) return;
     setLoadingBook(true);
-    const { loadLibraryBookWordsAction } = await import("./vocab-library-client-data");
-    const words = await loadLibraryBookWordsAction(bookId);
-    setLibWords((prev) => ({ ...prev, [bookId]: words }));
+    try { await fetchBook(bookId); } catch { /* 빈 목록 대신 아래 오류 문구 */ setBookError(bookId); }
     setLoadingBook(false);
   }
 
@@ -193,7 +219,9 @@ function WordsPanel({
         {books.map((b) => (
           <button
             key={b.id}
-            onClick={() => void openBook(b.id)}
+            onClick={() => { setBookError(null); void openBook(b.id); }}
+            onMouseEnter={() => prefetchBook(b.id)}
+            onFocus={() => prefetchBook(b.id)}
             className={"text-[12.5px] font-bold px-3 py-1.5 rounded-lg border-[1.5px] " + (selected === b.id ? "border-ink bg-ink text-white" : "border-grey-200 text-ink")}
           >
             {b.title} ({b.wordCount})
@@ -286,7 +314,9 @@ function WordsPanel({
       {selected === "custom" && myWords.length === 0 ? (
         <Empty text="No words added yet. Tap '+ Add word' to get started." />
       ) : selected !== "custom" && loadingBook && !libWords[selected] ? (
-        <p className="text-[13px] text-grey-500">Loading…</p>
+        <WordListSkeleton />
+      ) : selected !== "custom" && bookError === selected && !libWords[selected] ? (
+        <p role="alert" className="text-[13px] text-red">Couldn&apos;t load this book. Please try again.</p>
       ) : selected !== "custom" && !libWords[selected]?.length ? (
         <Empty text="This book has no words yet." />
       ) : ordered.length === 0 ? (

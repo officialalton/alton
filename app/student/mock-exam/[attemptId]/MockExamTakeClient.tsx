@@ -372,7 +372,7 @@ export default function MockExamTakeClient({ attempt: initial }: { attempt: Mock
                     savedToPractice[current.setItemId] ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-500"
                   }`}
                   data-testid="toggle-saved-to-practice"
-                  title="Save to Practice (Problem History)"
+                  title="Save to My Notebook"
                 >
                   {savedToPractice[current.setItemId] ? "Saved" : "+ Save problem"}
                 </button>
