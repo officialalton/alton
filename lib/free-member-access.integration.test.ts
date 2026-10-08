@@ -102,7 +102,7 @@ describe("기능 키(student_feature_access)", () => {
   });
 });
 
-describe("모의고사 공개 티어·일일 상한", () => {
+describe("모의고사 공개 티어(일일 상한 없음)", () => {
   it("무료 회원 카탈로그는 access_tier=free 세트만, 과외 회원은 전부", () => {
     const free = catalogIds(freeA);
     expect(free).toContain(freeSet1);
@@ -115,13 +115,12 @@ describe("모의고사 공개 티어·일일 상한", () => {
     expect(fails(() => asUser(freeA, `select mock_exam_open_start('${tutoringSet}');`))).toContain("tutoring members only");
     expect(asUser(tutoring, `select mock_exam_open_start('${tutoringSet}');`)).toMatch(/^[0-9a-f-]{36}$/);
   });
-  it("무료 회원은 하루 2회까지 시작, 3번째는 거절, 이미 시작한 세트 재호출(멱등)은 통과", () => {
+  it("무료 회원도 하루 응시 시작 횟수에 상한이 없다(2026-10-08 폐기), 이미 시작한 세트 재호출(멱등)은 같은 응시를 돌려준다", () => {
     const a1 = asUser(freeA, `select mock_exam_open_start('${freeSet1}');`);
     asUser(freeA, `select mock_exam_open_start('${freeSet2}');`);
-    expect(fails(() => asUser(freeA, `select mock_exam_open_start('${freeSet3}');`))).toContain("Free members can start up to 2 mock exams per day. Please try again tomorrow.");
+    expect(asUser(freeA, `select mock_exam_open_start('${freeSet3}');`)).toMatch(/^[0-9a-f-]{36}$/);
     expect(asUser(freeA, `select mock_exam_open_start('${freeSet1}');`)).toBe(a1);
-    expect(psql(`select count(*) from mock_exam_attempts where student_id = '${freeA}';`)).toBe("2");
-    // 과외 회원에게는 상한이 없다.
+    expect(psql(`select count(*) from mock_exam_attempts where student_id = '${freeA}';`)).toBe("3");
     asUser(tutoring, `select mock_exam_open_start('${freeSet1}'); select mock_exam_open_start('${freeSet2}'); select mock_exam_open_start('${freeSet3}');`);
     expect(psql(`select count(*) from mock_exam_attempts where student_id = '${tutoring}';`)).toBe("4");
   });
