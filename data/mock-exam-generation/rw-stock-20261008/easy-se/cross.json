@@ -1,0 +1,651 @@
+{
+ "summary": {
+  "sat_rw": {
+   "cand": 20,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 16,
+   "crossScored": 16,
+   "correct": {
+    "agree": 14,
+    "of": 16,
+    "fablePass": 15,
+    "opusPass": 13
+   },
+   "compliance": {
+    "agree": 16,
+    "of": 16,
+    "fablePass": 16,
+    "opusPass": 16
+   },
+   "hardFit": {
+    "agree": 16,
+    "of": 16,
+    "fablePass": 16,
+    "opusPass": 16
+   },
+   "adoptedBoth": 13,
+   "adoptedOneOnly": 2,
+   "yieldBoth": 0.65,
+   "costUsd": 2.055,
+   "costPerAdoptedBoth": 0.158,
+   "fableOnlyPass": 2,
+   "opusOnlyPass": 0
+  },
+  "sat_math": {
+   "cand": 0,
+   "genFail": 0,
+   "formatFail": 0,
+   "detPass": 0,
+   "crossScored": 0,
+   "correct": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "compliance": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "hardFit": {
+    "agree": 0,
+    "of": 0,
+    "fablePass": 0,
+    "opusPass": 0
+   },
+   "adoptedBoth": 0,
+   "adoptedOneOnly": 0,
+   "yieldBoth": 0,
+   "costUsd": 0,
+   "costPerAdoptedBoth": null,
+   "fableOnlyPass": 0,
+   "opusOnlyPass": 0
+  },
+  "adoptedHardFableRule": {
+   "total": 13,
+   "rw": 13,
+   "math": 0,
+   "correctBothRequired": true
+  }
+ },
+ "items": [
+  {
+   "cid": "easy-boundaries-200",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "explanation_en_too_short"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.019152
+  },
+  {
+   "cid": "easy-boundaries-201",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "두 독립절('he climbed ... in his hand' / 'soon a thin line of light swept ...')을 쉼표+등위접속사 'and'로 연결한 B만 적법. A·D는 쉼표 스플라이스, C는 fused sentence. 한·영 해설 모두 정답과 선택지 참조가 일치하며 모순 없음. 단일 규칙(독립절 연결)으로 풀리고 오답이 전형적 오개념이므로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 잇는 규칙(쉼표+등위접속사) 하나로 풀 수 있다. 오답은 쉼표 스플라이스(A, D)와 run-on(C)으로, 전형적인 오개념에 해당한다. D의 'soon,'은 다소 어색하지만 오답으로서 문제가 되지는 않는다.",
+    "issue": ""
+   },
+   "cost": 0.115562
+  },
+  {
+   "cid": "easy-boundaries-202",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤 모두 완전한 독립절이므로 세미콜론(C)이 유일한 정답. A는 쉼표 스플라이스, B는 run-on, D는 'and' 뒤 불필요한 쉼표로 배제됨. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하며 자연스러움. 아타카마 사막 관련 사실(일부 관측소 강우 기록 없음, 화성 유사 환경 연구)도 널리 알려진 내용으로 오류 없음. 독립절 연결 규칙 하나로 풀리는 전형적 easy 문항.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 잇는 세미콜론 규칙 하나만 알면 풀 수 있다. 오답은 쉼표 스플라이스, run-on, 'and' 뒤의 불필요한 쉼표로, 모두 전형적인 오개념이다. 다만 두 절 사이의 논리 관계(그래서/그런 이유로)가 약간 느슨하다. 그래도 문법 판정에는 영향이 없다.",
+    "issue": ""
+   },
+   "cost": 0.123478
+  },
+  {
+   "cid": "easy-boundaries-203",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 모두 완전한 독립절(\"each town kept its own local time...\" / \"a clock in Bristol... ran about ten minutes behind...\")이므로 접속사 없이 연결하려면 세미콜론(D)이 필요하다. A는 쉼표 스플라이스, B는 런온, C는 \"which\" 뒤 절에 이미 주어가 있어 비문. 한국어·영어 해설 모두 정답과 글자 참조가 일치하고 정확하다. 역사적 사실(1840년대 영국 철도 표준시, 브리스틀-런던 약 10분 차)도 타당. 단일 규칙(독립절 결합)으로 풀리고 오답이 전형적 오개념이므로 easy에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "두 독립절을 세미콜론으로 잇는 규칙 하나만 알면 풀리는 문항임. 오답(쉼표 스플라이스, 런온, which)은 모두 학생들이 흔히 고르는 전형적 오답이라 easy 난이도에 맞음. 브리스틀이 런던보다 약 10분 늦었다는 내용도 사실과 맞음.",
+    "issue": "D가 정답이라는 결론이 맞고, 각 오답이 왜 틀렸는지도 정확하게 설명함."
+   },
+   "cost": 0.131576
+  },
+  {
+   "cid": "easy-boundaries-204",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 각각 독립절(\"Each pool sat ... below it\" / \"salmon could rest ... next\")임을 직접 확인. A(쉼표+등위접속사 so)만 적법하게 연결하며, B는 쉼표 스플라이스, C는 접속사 뒤에 쉼표가 놓인 오류, D는 무종지문. 한국어·영어 해설 모두 동일 결론과 선택지 참조로 일치하고 영어 해설에 한글 없음. 오답 3개는 전형적 오개념(쉼표 스플라이스, 쉼표 위치 오류, 융합문)으로 그럴듯함. 단일 규칙(독립절 연결)으로 풀리며 어휘 평이 → easy 적합. 지문은 독창적 가상 소재로 저작권 우려 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 규칙 하나로 풀 수 있다. 오답 B(쉼표 스플라이스), C(쉼표 위치 오류), D(무종지문)는 모두 전형적인 오개념이다.",
+    "issue": "한국어 해설의 '쉼표와 등위접속사로 이어야 하므로'는 세미콜론 같은 다른 방법을 빼놓아 다소 단정적이다. 다만 정답 판단에는 영향이 없다."
+   },
+   "cost": 0.142256
+  },
+  {
+   "cid": "easy-boundaries-205",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 각각 독립절(\"The long brown seaweed acts like an anchor for the animals\" / \"it keeps ... night\")이므로 세미콜론(B)이 규범에 맞음. A는 쉼표 스플라이스, C는 무종지문, D는 and 뒤 불필요한 쉼표로 배제됨. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 모순 없음. 해양 수달의 켈프 감싸기 습성은 사실에 부합. 독립절 연결 규칙 하나로 풀리는 전형적 easy 문항이며 오답은 흔한 오개념(쉼표 스플라이스, 무종지문, 접속사 뒤 쉼표)을 반영함.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 잇는 규칙 하나만 알면 풀리는 전형적인 easy 문항이다. 오답 중 쉼표 스플라이스(A)와 무종지문(C)은 학생들이 흔히 빠지는 오개념이라 매력적이다. D의 'and,'는 다소 어색하지만 불가능한 선택지는 아니다. 해달이 켈프를 몸에 감고 자는 습성은 사실이다.",
+    "issue": ""
+   },
+   "cost": 0.126668
+  },
+  {
+   "cid": "easy-boundaries-206",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"The rooms are colder than she remembers\" / \"the old clock in the hall has stopped at a quarter past four\" 두 독립절을 쉼표+등위접속사(and)로 연결하는 C만 표준 관례에 부합. A 쉼표 스플라이스, B 융합문(무종지문), D 접속사 뒤 쉼표로 비표준. 한국어·영어 해설 모두 정답 C와 선택지 글자 참조가 일치하고 모순 없음. 영어 해설 자연스럽고 한글 없음. 단일 규칙(독립절 연결)으로 풀리며 오답이 전형적 오개념이라 easy에 적합. 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 단일 규칙을 묻는 문항이다. 오답은 쉼표 스플라이스, 무종지문, 쉼표 위치 오류로 전형적인 오개념이다. easy 난이도에 적합하다.",
+    "issue": ""
+   },
+   "cost": 0.11930960000000002
+  },
+  {
+   "cid": "easy-boundaries-207",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word",
+    "contract:contract_blank_duplicate_word"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.018325599999999997
+  },
+  {
+   "cid": "easy-boundaries-208",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤가 모두 독립절(\"this pattern began to change\" / \"young workers left their villages...\")임을 직접 확인함. A(쉼표+등위접속사)가 유일하게 관례에 맞고, B는 쉼표 스플라이스, C는 융합문, D는 접속사 뒤 쉼표로 오류. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 일치하며 모순 없음. 단일 규칙(독립절 연결)만으로 풀리고 오답이 전형적 오개념(쉼표 스플라이스 등)이라 easy 난이도에 적합. 역사적 배경(1800년대 초 맨체스터 방직공장)도 사실에 부합하며 저작권 의심 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 기본 규칙 하나로 풀 수 있다. 오답은 쉼표 스플라이스, 융합문, 쉼표 위치 오류로, 전형적인 오개념이다. 역사적 내용(산업혁명기 가내 방직에서 공장 노동으로의 이동)도 무리가 없다.",
+    "issue": ""
+   },
+   "cost": 0.1181596
+  },
+  {
+   "cid": "easy-boundaries-209",
+   "skill": "boundaries",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이며 B(쉼표+and)만 올바르게 연결함. A는 쉼표 스플라이스, C는 무종지문, D는 쉼표 위치 오류로 전형적 오개념 선택지. 한국어·영어 해설 모두 정답 및 선택지 참조 일치, 영어 자연스럽고 한글 없음. 역사적 사실(1937년 완공, Irving Morrow, 프라이머 색상 유래) 정확. 단일 규칙(독립절 연결)으로 풀리는 easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 한 가지 규칙만 쓰는 전형적인 easy 문항이다. 오답은 쉼표 스플라이스, 무종지문, 쉼표 위치 오류로 모두 전형적인 오개념이다. 사실관계(1937년 완공, 모로가 프라이머 색을 선호하고 안개 속 가시성을 근거로 든 점)도 정확하다.",
+    "issue": ""
+   },
+   "cost": 0.11299159999999998
+  },
+  {
+   "cid": "easy-form_structure_sense-200",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 C 'has' 검산 완료: 주어 'each otter'는 단수이며, 'found that' 뒤라도 'may carry'와 병렬되는 현재 습성 서술이므로 현재 단수형이 적절. A는 근접 명사 'otters'에 이끌린 전형적 오개념, B·D는 수 불일치 및 시제/상 오류로 규칙을 알면 즉시 배제 가능. 해양수달의 앞다리 아래 피부 주머니·돌 사용 묘사는 사실과 부합. 해설의 'the group' 복수 언급만 경미한 부정확 사항.",
+    "issue": "한국어 해설이 'the group'을 \"복수 명사\"로 묶어 언급했으나 'the group'은 단수 집합명사이므로 A 'have'를 유도하는 오개념 설명으로는 부정확함(결론·글자 참조에는 영향 없음). 'otters'만 언급하는 것이 정확함.Same minor inaccuracy as the Korean: it suggests a student might choose \"have\" by matching \"the group,\" but \"the group\" is a singular collective noun in American English, so it would not lead to \"have.\" Conclusion and letter references are otherwise correct and the English is natural."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "'each + 단수' 주어-동사 일치 문항으로 easy 난이도에 적합함. 해설의 A 선택지 근거만 고치면 됨.",
+    "issue": "A 오답 설명에서 'the group'을 복수 명사처럼 취급함. 'the group'은 단수라서 'have'로 오도할 수 없음. 또 'otters'는 주어 '바로 앞'이 아니라 앞 구절(studying otters)에 있음. 결론은 맞지만 오답 논리가 부정확함.한국어 해설과 같은 오류가 있음: 'have'가 'the group'에 맞춘 것처럼 보인다고 했지만 'the group'은 단수 명사임."
+   },
+   "cost": 0.155422
+  },
+  {
+   "cid": "easy-form_structure_sense-201",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"letters\"(복수) + 짧은 전치사구 \"in the heroine's attic\" 뒤 동사 수 일치 문제. 정답 D \"reveal\" 검산 결과 옳음. 오답 3개(reveals/has revealed/is revealing)는 모두 단수형으로 인접 명사 \"attic\"에 이끌리는 전형적 오개념 선택지. 한국어·영어 해설 모두 결론·글자 참조 일치, 한글 혼입 없음. 단일 규칙·한 단계 추론으로 easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 단일 규칙 문제다. 전치사구(in the heroine's attic)가 짧아 easy 수준에 맞는다. 오답 3개는 모두 단수형이라 attic에 끌려 고르기 쉬운 전형적 오개념이다. 소설가 Clara Whitmore는 가상 인물로 보이며 문제가 되지 않는다.",
+    "issue": ""
+   },
+   "cost": 0.10799560000000001
+  },
+  {
+   "cid": "easy-form_structure_sense-202",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the flat'(단수) + 현재 시제('covers'와 병렬) → 'reflects'가 유일한 단수 현재형. B/C/D는 모두 복수 주어용 형태로 해설 설명과 일치. 한·영 해설 결론·글자 참조 동일, 영어 자연스러움. 단일 규칙(주어-동사 수 일치)으로 해결되므로 easy 적합. 다만 빈칸 앞에 복수 유인 명사가 없어 오답 매력도가 다소 낮은 편이나 easy 수준에서는 허용 범위. Salar de Uyuni 관련 사실(볼리비아 남부, 세계 최대 소금사막) 정확.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the flat'(단수)와 동사의 수 일치를 묻는 단일 규칙 문항입니다. 주어가 빈칸 바로 앞에 있어 easy 수준에 맞습니다. 오답은 모두 복수형이라 전형적인 오개념에 해당합니다. 소금사막 우유니에 관한 사실도 정확합니다.",
+    "issue": ""
+   },
+   "cost": 0.11281160000000001
+  },
+  {
+   "cid": "easy-form_structure_sense-203",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"The reading room\"(단수) + 과거 서술 맥락 → \"was kept\"만 단수 과거형으로 유일하게 적합. A는 복수 과거, C·D는 복수·현재 시제로 모두 배제됨. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 일치하고 근거도 정확함. 다만 주어와 빈칸 사이의 수식어 \"in one Lancashire town\"이 단수이고 혼동을 유발할 복수 명사가 인접해 있지 않아 오답의 유인력이 다소 약한 편이나, easy 기준(한 가지 규칙, 단서 직접 노출)에는 부합함. 역사적 배경(랭커셔 방직공장, 노동자 독서실)도 사실과 모순 없음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어와 동사의 수 일치를 묻는 문항이다. 주어 뒤의 수식어는 짧은 전치사구 하나뿐이다. 단수형 선택지가 B 하나라서 이 규칙 하나만 알면 풀린다. 오답은 모두 그럴듯하다. A는 바로 앞 \"workers/mills\"에 끌린 복수형이고, C와 D는 수와 시제를 함께 혼동한 형태다. easy에 적합하다.",
+    "issue": "사소한 점: C \"have been kept\"는 현재완료인데 해설은 그냥 \"현재 시제\"라고 불렀다. 결론에는 영향이 없다.한국어 해설과 같은 문제가 있다. \"have been kept\"(현재완료)를 그냥 \"present tense\"로 표현했다. 그 밖에는 정확하고 자연스러운 영어다."
+   },
+   "cost": 0.13078559999999997
+  },
+  {
+   "cid": "easy-form_structure_sense-204",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'a team'(단수) + 'of painters' 수식어 구조로 단수 동사 'maintains'만 적합. 오답 3개 모두 복수형으로 'painters'에 끌린 전형적 오개념 선택지. 'Today ... year-round'와 현재 단순시제도 자연스러움. 사실(1937 완공, International Orange)도 정확. 해설 한·영 모두 정답 및 글자 참조 일치.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'a team of painters' 주어-동사 수일치 문항이다. 수식어구를 사이에 둔 전형적인 easy 문항이다. 사실 관계도 맞다(1937년 완공, International Orange). 'team'은 영국식 영어에서 복수 취급될 수 있으나, SAT 표준 영어에서는 단수 취급하므로 문제없다.",
+    "issue": ""
+   },
+   "cost": 0.09592959999999999
+  },
+  {
+   "cid": "easy-form_structure_sense-205",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"the kelp forests\"(복수)와 동사 수일치 문제. 수식절 \"that shelter many fish\"가 끼어들어 \"fish\"를 주어로 오인하게 하는 전형적 오답 구조. A/B/C 모두 단수형이라 규칙을 알면 즉시 배제 가능. 해설 한·영 일치, 선택지 글자 참조 정확, 사실 오류 없음, 저작권 의심 없음. easy 난이도에 적합.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "이 문항은 주어-동사 수 일치를 묻는다. 복수 주어 'forests'에는 'begin'이 맞고, 단수 동사 형태인 나머지 세 선택지는 규칙만 알면 바로 걸러진다. 'kelp'처럼 바로 앞에 놓인 단수 명사가 주어처럼 보이게 하는 함정도 easy 수준에 알맞다. 'fish'는 단수로도 복수로도 쓰여 함정으로서의 힘은 약하지만, 해설 내용에는 문제가 없다.",
+    "issue": ""
+   },
+   "cost": 0.10953760000000001
+  },
+  {
+   "cid": "easy-form_structure_sense-206",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "explanation_en_too_short"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0149596
+  },
+  {
+   "cid": "easy-form_structure_sense-207",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'floodwaters'(복수) + 수식어구 'from the Angolan highlands' → 복수 동사 'fill'이 맞음(B). 오답 A/C/D는 모두 단수형으로 규칙만 알면 즉시 배제되며, 'Each year'나 floodwater를 불가산으로 보는 오개념상 그럴듯함. 지문 사실(오카방고 삼각주, 칼라하리, 앙골라 고지대 홍수) 정확. 단, 한국어 해설의 미완성 문장과 'highlands' 단수 오기는 수정 필요.",
+    "issue": "한국어 해설에 \"바로 앞의 단수 명사 'highlands'가 아닌… 실제로는\" 이라는 미완성·끊긴 문장이 포함되어 있고, 'highlands'를 '단수 명사'라고 잘못 지칭함(highlands는 복수형). 결론(B 정답, floodwaters 복수 주어)은 옳으나 문장이 깨져 있고 오류 진술이 섞여 있음.영어 해설 자체는 정확하고 자연스러우며 한글 없음. 다만 한국어 해설의 깨진 문장('highlands' 언급)이 영어에는 없어 두 해설이 완전히 대응하지는 않음(영어 쪽이 올바름)."
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'floodwaters'가 복수이므로 정답은 B(fill)이며, 수 일치 한 가지 규칙만 알면 풀 수 있다. 'Each year'와 단수 동사 오답 3개는 규칙을 모르는 학생이 끌릴 만한 전형적인 함정이다. 지문의 사실관계(오카방고 내륙 삼각주, 앙골라 고원에서 오는 홍수)도 맞다. 다만 한국어 해설에 고쳐 쓰다 만 문장과 'highlands'를 단수로 쓴 오류가 있어 수정이 필요하다.",
+    "issue": "한국어 해설 중간 문장이 끊긴 채 고쳐 쓰다 만 형태로 남아 있다(\"바로 앞의 단수 명사 'highlands'가 아닌… 실제로는\"). 또 'highlands'는 복수 명사인데 단수 명사라고 잘못 적었다. 결론(B)은 맞지만 이 문장은 사실과 다르고 문장으로도 성립하지 않는다."
+   },
+   "cost": 0.14979759999999998
+  },
+  {
+   "cid": "easy-form_structure_sense-208",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [
+    "explanation_en_too_short"
+   ],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": null,
+   "opus": null,
+   "cost": 0.0168836
+  },
+  {
+   "cid": "easy-form_structure_sense-209",
+   "skill": "form_structure_sense",
+   "system": "sat_rw",
+   "recipeId": null,
+   "detIssues": [],
+   "formatFail": false,
+   "mathVerify": null,
+   "fable": {
+    "correct": true,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 주어 'The printer's arms'(복수), 'guided by computer software'는 분사 수식어. 'In 2019', 'was complete'로 과거 서술 → 'deposited'(D)만 적합. A/B/C는 모두 단수 현재(완료/진행)형으로 수·시제 모두 불일치. 한국어·영어 해설 모두 D를 일관되게 뒷받침하며 선택지 글자 참조 정확, 영어 해설에 한글 없음. 난이도: 수일치+시제라는 명시적 규칙 하나(삽입 수식어 건너뛰기)로 풀리고 오답은 'printer/software'를 주어로 오인한 전형적 오개념이라 easy에 적합. 참고: 실제 MX3D 강철 다리(암스테르담)는 2018년 인쇄 완료, 2021년 개통된 보행자 다리로 '2019년 개통·자전거 다리'는 실제와 다소 다르나 지문이 특정 다리를 명시하지 않아 치명적 오류로 보지 않음.",
+    "issue": ""
+   },
+   "opus": {
+    "correct": false,
+    "comp": true,
+    "fit": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "문법상 정답 D 유일. 오답 A·B·C는 모두 단수형이라 복수 주어 arms와 일치하지 않음. 사실 오류 의심: MX3D 3D프린팅 스테인리스 다리(암스테르담)는 2021년 7월 개통(인쇄 완료는 2018년). 실제 다리는 보행자용이며 'small bicycle bridge'라는 묘사도 부정확함. 지문의 '2019년 개통'은 사실과 다름.",
+    "issue": ""
+   },
+   "cost": 0.1329296
+  }
+ ]
+}

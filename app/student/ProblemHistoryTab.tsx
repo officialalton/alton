@@ -239,7 +239,7 @@ export default function ProblemHistoryTab({ entries, isFreeMember = false }: { e
                   <span className="text-[13px] text-ink flex-1 min-w-[200px] truncate">{snippet || "(No text)"}</span>
                   <span className="text-[11.5px] text-grey-500 shrink-0">
                     {isFreeMember
-                      ? ["Practice Test", e.unitTitle, e.startsAt ? fmtDate(e.startsAt, { month: "short", day: "numeric", year: "numeric" }, tz) : null].filter(Boolean).join(" · ")
+                      ? ["Practice Test", e.unitTitle, e.attemptNo ? `Attempt ${e.attemptNo}` : null, e.startsAt ? fmtDate(e.startsAt, { month: "short", day: "numeric", year: "numeric" }, tz) : null].filter(Boolean).join(" · ")
                       : [e.subjectName, e.unitTitle, e.startsAt ? fmtDate(e.startsAt, undefined, tz) : null].filter(Boolean).join(" · ")}
                   </span>
                 </button>

@@ -1,0 +1,2090 @@
+[
+ {
+  "gid": "medium-transitions-302",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Glaciologists studying the Tasman Glacier in New Zealand long assumed that most of its retreat was driven by rising air temperatures melting the ice surface from above. Recent sonar surveys of the proglacial lake at the glacier's terminus, however, revealed that the lake has deepened by more than 50 meters in some places, allowing relatively warm lake water to undercut the ice front and cause large slabs to break away. ______ the researchers now argue that models projecting the glacier's future should account for lake-driven calving rather than relying primarily on surface melt estimates.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Glaciologists studying the Tasman Glacier in New Zealand long assumed that most of its retreat was driven by rising air temperatures melting the ice surface from above. Recent sonar surveys of the proglacial lake at the glacier's terminus, however, revealed that the lake has deepened by more than 50 meters in some places, allowing relatively warm lake water to undercut the ice front and cause large slabs to break away. ______ the researchers now argue that models projecting the glacier's future should account for lake-driven calving rather than relying primarily on surface melt estimates.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For example,",
+    "Accordingly,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 호수가 깊어져 따뜻한 물이 빙하 앞면을 깎아 붕괴를 일으킨다는 새 증거를 제시하고, 빈칸 뒤 문장은 그 증거에 근거해 모델이 호수 주도 붕괴를 반영해야 한다는 결론을 내린다. 따라서 결과·귀결을 나타내는 C가 정답이다. A는 지문 앞부분의 '기존 가정 vs 새 발견' 대비에 끌리게 하지만, 빈칸 앞뒤 문장은 대립이 아니라 증거와 그에 따른 주장이므로 맞지 않는다. B는 뒤 문장이 앞 내용의 구체적 사례가 아니라 그로부터 도출된 제안이므로 틀리다. D는 뒤 문장이 앞 내용과 유사한 별개의 사실을 덧붙이는 것이 아니므로 적절하지 않다.",
+   "explanationEn": "The sentence before the blank gives new evidence: the lake has deepened, so warm water is undercutting the ice front and causing it to break apart. The sentence after the blank draws a conclusion from that evidence, saying models should include lake-driven calving. Because the second sentence is a consequence of the first, C is correct. A may be tempting because the passage does contrast the old assumption with the new finding, but the two sentences around the blank don't contrast with each other: one gives evidence, and the next gives a recommendation based on it. B is wrong because the second sentence is a recommendation drawn from the first, not a specific example of it. D is wrong because the second sentence doesn't add a separate, similar fact.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 문장(새 증거) → 뒤 문장(그에 따른 주장)은 명확한 인과·귀결 관계이므로 C 'Accordingly'가 정답임을 직접 확인. A는 지문 첫 부분의 '기존 가정 vs 새 발견' 대비에 끌리는 유인 오답으로 훑어 읽으면 선택하기 쉬워 2단계 판단(지문 전체 대비 vs 빈칸 전후 관계)을 요구함. B·D는 상대적으로 약한 오답이나 말은 되므로 medium 기준에 대체로 부합. 한국어·영어 해설 모두 동일 결론과 글자 참조를 가지며, 영어 해설에 한글 없음. Tasman Glacier의 호수 주도 붕괴 설명은 실제 연구 경향과 상충하지 않음. 지문은 자체 창작으로 보이며 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "증거에서 결론으로 이어지는 관계라 Accordingly가 명확하다. 지문에 기존 가정과 새 발견의 대비가 있어서 Nevertheless(A)가 그럴듯한 오답으로 작동한다. B와 D는 비교적 쉽게 배제된다. '50미터 이상 깊어짐' 수치는 확인하지 못했지만 가상 지문으로서 무리가 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-309",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers at a Dutch shipyard began testing hull coatings that release tiny air bubbles along a vessel's underside, they expected the bubble layer to cut drag by reducing contact between the hull and the water. In calm harbor trials, the coating performed as predicted, lowering fuel use by nearly eight percent. ______ in open-sea trials, where waves repeatedly broke up the bubble layer before it could spread along the hull, fuel savings shrank to less than two percent.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When engineers at a Dutch shipyard began testing hull coatings that release tiny air bubbles along a vessel's underside, they expected the bubble layer to cut drag by reducing contact between the hull and the water. In calm harbor trials, the coating performed as predicted, lowering fuel use by nearly eight percent. ______ in open-sea trials, where waves repeatedly broke up the bubble layer before it could spread along the hull, fuel savings shrank to less than two percent.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Consequently,",
+    "However,",
+    "Similarly,",
+    "For example,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 잔잔한 항구 시험에서 코팅이 예상대로 연료를 약 8% 줄였다고 말하고, 뒤 문장은 파도가 거친 외해에서는 절감 효과가 2% 미만으로 줄었다고 말한다. 두 결과가 서로 대비되므로 대조를 나타내는 B가 정답이다. A는 외해의 결과가 항구 시험 성공에서 비롯된 것처럼 만들지만, 실제 원인은 파도가 기포층을 흩어 놓은 것이다. C는 두 결과가 비슷하다는 뜻이 되는데, 둘 다 연료 절감 수치이긴 해도 그 크기는 크게 다르다. D는 외해 시험을 항구 시험 결과의 예시로 제시하게 되지만, 오히려 그 결과와 어긋나는 사례이다.",
+   "explanationEn": "The sentence before the blank says the coating cut fuel use by nearly eight percent in calm harbor trials. The sentence after it says the savings fell below two percent in rough open-sea trials. Because these results contrast, B is the best choice. A would mean the open-sea result was caused by the harbor success, but the text says the real cause was waves breaking up the bubble layer. C would mean the two results were alike, but even though both are fuel savings, their sizes are very different. D would make the open-sea trial an example of the harbor result, when it actually goes against that result.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(항구 시험 약 8% 절감, 예측대로)과 뒤 문장(외해 시험 2% 미만)이 명확히 대비되므로 B \"However,\"가 정답임을 직접 확인. 문장 결합(\"However, in open-sea trials, where ...\")도 문법적으로 자연스러움. 한국어·영어 해설 모두 같은 결론과 글자 참조(A/C/D 배제 근거)를 가지며 모순 없음, 영어 해설에 한글 없음. 오답 A는 뒤 문장의 인과 서술(파도가 기포층을 흩음) 때문에, C는 두 문장 모두 연료 절감 수치를 제시한다는 점에서 부분적 근거가 있어 비교가 필요하고, D도 '시험 사례'라는 틀에서 말이 됨. 정답이 정독 시 명확하고 두 결과의 연결·대비 판단을 요구하므로 medium에 적합. 저작권 의심 없음(독창적 가상 시나리오), 사실 오류 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:3"
+    ],
+    "note": "대조가 8% 대 2% 미만으로 너무 뚜렷하다. 'calm harbor'와 'open-sea, waves'의 대비까지 겹쳐 훑어 읽어도 However가 바로 보인다. 오답 중 Similarly와 For example은 쉽게 배제되고, 부분 근거를 가진 오답은 Consequently(파도라는 원인 연결) 정도뿐이라 medium 기준(부분 근거 오답 2개 이상)에 미치지 못한다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-310",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ecologists long assumed that the bright orange coloration of the Pacific newt's belly served mainly to warn predators of the toxin in its skin. When biologist Lena Ortiz tested this idea, she found that garter snakes from populations that had evolved resistance to the toxin attacked brightly colored and dull-painted model newts at nearly identical rates. ______ the coloration may not deter the very predators most likely to encounter newts, prompting Ortiz to propose that the orange belly may instead play a role in mate recognition.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Ecologists long assumed that the bright orange coloration of the Pacific newt's belly served mainly to warn predators of the toxin in its skin. When biologist Lena Ortiz tested this idea, she found that garter snakes from populations that had evolved resistance to the toxin attacked brightly colored and dull-painted model newts at nearly identical rates. ______ the coloration may not deter the very predators most likely to encounter newts, prompting Ortiz to propose that the orange belly may instead play a role in mate recognition.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For example,",
+    "Thus,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장은 실험 결과(내성 있는 뱀이 밝은 모형과 칙칙한 모형을 거의 같은 비율로 공격함)를 제시하고, 빈칸 뒤 문장은 그 결과에서 끌어낸 결론(색이 주요 포식자를 막지 못할 수 있음)을 말하므로 결과를 나타내는 C가 정답이다. A는 지문 전체가 기존 가정과 대조되기 때문에 그럴듯해 보이지만, 빈칸 앞뒤 문장은 서로 반대되지 않고 같은 방향으로 이어진다. B는 뒤 문장이 구체적 사례처럼 보일 수 있으나, 실제로는 실험 결과에서 나온 일반적 결론이므로 맞지 않는다. D는 두 문장이 평행한 별개의 사실이 아니라 근거와 결론의 관계이므로 부적절하다.",
+   "explanationEn": "The sentence before the blank gives an experimental result: toxin-resistant snakes attacked bright and dull model newts at nearly the same rate. The sentence after the blank draws a conclusion from that result, namely that the coloration may not deter key predators, so C, a transition showing consequence, is correct. A may seem tempting because the passage as a whole challenges an older assumption, but the two sentences around the blank point in the same direction rather than contradicting each other. B fails because the second sentence is not a specific example of the first; it is a broader conclusion drawn from it. D is wrong because the sentences are not two parallel, similar facts; one is evidence and the other is the inference based on it.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞 실험 결과(밝은/칙칙한 모형 공격률 동일) → 빈칸 뒤 결론(색이 포식자 억제 안 함)의 인과 관계이므로 C 'Thus'가 정답임을 직접 확인. A는 지문 전체의 대조 구조 때문에 그럴듯한 오답으로 기능하여 medium 난이도에 적합. 해설 한/영 모두 정답과 선택지 글자 일치, 영어 자연스럽고 한글 없음. 가상의 연구자/연구로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "결과에서 결론으로 이어지는 관계가 분명하므로 'Thus'가 정답이다. A는 지문 전체가 기존 가정과 대조된다는 점 때문에 그럴듯한 오답이 된다. B와 D는 다소 약하지만 말은 되므로 medium 난이도로 볼 수 있다. 연구자 Lena Ortiz는 가상 인물로 보인다. 다만 내성이 있는 뱀이 독이 있다는 경고를 무시한다는 사실은 결론과 자연스럽게 연결된다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-312",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Along the coast of Bangladesh, many villages sit behind earthen embankments built in the 1960s to keep tidal water off farmland. The barriers succeeded in protecting crops from salt water, but they also blocked the sediment that tides once spread across the land. Over the following decades, the enclosed fields slowly sank while riverbeds outside the walls rose. ______ some communities have begun experimenting with \"tidal river management,\" deliberately opening embankments for a few years so that sediment-laden water can rebuild the land's surface.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Along the coast of Bangladesh, many villages sit behind earthen embankments built in the 1960s to keep tidal water off farmland. The barriers succeeded in protecting crops from salt water, but they also blocked the sediment that tides once spread across the land. Over the following decades, the enclosed fields slowly sank while riverbeds outside the walls rose. ______ some communities have begun experimenting with \"tidal river management,\" deliberately opening embankments for a few years so that sediment-laden water can rebuild the land's surface.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "In response,",
+    "Nevertheless,",
+    "For instance,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장들은 제방 때문에 퇴적물이 차단되어 땅이 가라앉았다는 문제를 설명하고, 빈칸 뒤 문장은 퇴적물로 땅을 다시 쌓으려고 제방을 일부러 여는 실험을 소개합니다. 이는 문제에 대한 대응이므로 A가 정답입니다. B는 지문에 'but'이 있어 대조처럼 보이지만, 땅이 가라앉았는데도 불구하고 제방을 연다는 뜻이 되어 논리가 맞지 않습니다. 이 실험은 오히려 땅이 가라앉았기 때문에 시작된 것입니다. C는 빈칸 뒤 내용이 앞에 나온 일반적 주장의 사례가 아니라 새로운 조치이므로 맞지 않습니다. D는 제방을 여는 것이 제방을 쌓은 것과 비슷한 일이 아니라 그 결과를 바로잡는 일이므로 맞지 않습니다.",
+   "explanationEn": "The earlier sentences describe a problem: the embankments blocked sediment, so the fields sank. The sentence after the blank describes communities opening the embankments on purpose so sediment can rebuild the land. That is a reaction to the problem, so A is correct. B may look right because the passage contains \"but,\" but it would mean the communities acted despite the sinking, when they actually acted because of it. C doesn't work because the new practice is not an example of a general claim made earlier; it is a new step taken in response. D doesn't work because opening the embankments is not similar to building them; it is a way to fix what building them caused.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "문제(제방→퇴적물 차단→침하) 뒤 대응 조치(제방 개방)로 이어지므로 'In response'가 정확. B는 지문의 'but'에 끌려 고를 수 있는 매력적 오답, C·D도 그럴듯하나 비교로 배제됨. 해설 한·영 모두 결론·글자 참조 일치, 한글 없음. 방글라데시 tidal river management는 실제 사례로 사실 오류 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "문제→대응 관계가 분명하고 A가 유일한 정답이다. B(Nevertheless)는 앞 문장의 'but'과 '제방을 연다/쌓았다'는 반전 때문에 대조로 읽힐 여지가 있어 매력적인 오답이다. D(Similarly)도 '제방 관련 조치'라는 겉모습이 비슷해 약간 끌리는 면이 있다. C(For instance)는 비교적 쉽게 걸러진다. medium 하단에 해당하지만 기준 범위 안이라고 판단한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-313",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When the city of Manchester opened its first public lending libraries in the 1850s, reformers predicted that factory workers would use them mainly for self-improvement, borrowing technical manuals and works of moral instruction. Borrowing records from the libraries' first decade tell a different story: novels and travel narratives made up the large majority of loans to working-class patrons. ______ historians who study the period now argue that the libraries mattered less as tools of vocational training than as some of the first spaces where laborers could pursue reading purely for pleasure.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When the city of Manchester opened its first public lending libraries in the 1850s, reformers predicted that factory workers would use them mainly for self-improvement, borrowing technical manuals and works of moral instruction. Borrowing records from the libraries' first decade tell a different story: novels and travel narratives made up the large majority of loans to working-class patrons. ______ historians who study the period now argue that the libraries mattered less as tools of vocational training than as some of the first spaces where laborers could pursue reading purely for pleasure.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "Accordingly,",
+    "For example,",
+    "Similarly,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 노동자들이 주로 소설과 여행기를 빌렸다는 대출 기록을 제시하고, 빈칸 뒤 문장은 이 기록을 근거로 도서관이 즐거움을 위한 독서 공간이었다는 역사가들의 결론을 내린다. 따라서 결과·결론을 나타내는 B가 정답이다. A는 개혁가들의 예측과 실제 기록이 대조된다는 점 때문에 그럴듯해 보이지만, 그 대조는 이미 앞 문장 안에서 표현되었다. 빈칸 문장은 바로 앞의 기록과 반대되는 내용이 아니라 그 기록과 맞아떨어진다. C는 빈칸 문장이 앞 문장의 구체적 사례가 아니라 앞 내용을 일반화한 해석이므로 틀리다. D는 앞 문장과 비슷한 별개의 사실을 덧붙이는 것이 아니라 앞 내용에서 결론을 끌어내는 문장이므로 맞지 않는다.",
+   "explanationEn": "The previous sentence gives borrowing records showing that working-class patrons mostly borrowed novels and travel narratives. The blank sentence then states historians' conclusion, based on that evidence, that the libraries were spaces for reading for pleasure. That is a result or conclusion, so B is correct. A is tempting because the reformers' prediction does contrast with the records, but that contrast is already expressed inside the previous sentence. The blank sentence doesn't go against the records just before it; it agrees with them. C is wrong because the final sentence is not a specific example of the records but a broader interpretation drawn from them. D is wrong because the sentence doesn't add a separate, similar fact; it draws a conclusion from what came before.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 뒤 문장은 앞의 대출 기록을 근거로 한 역사가들의 결론이므로 '그에 따라'를 뜻하는 Accordingly(B)가 정답임을 직접 확인함. 개혁가 예측 vs 실제 기록의 대조가 앞 문장 내부에서 이미 완결되므로 A(Nevertheless)는 매력적이지만 틀린 오답으로 잘 설계됨. C·D도 각각 예시/병렬 관계가 아니어서 배제 가능. 한·영 해설 모두 동일 결론·글자 참조로 일관되며 영어 자연스러움. 맨체스터 공공도서관 1852년 개관 및 소설 대출 우세는 역사적 사실과 부합. 두 단계 판단(대조 위치 파악 + 인과 관계 확인)이 필요한 표준 medium 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Nevertheless는 대조 구조(개혁가 예측 vs 실제 기록)를 훑어 읽으면 매력적인 오답이 되고, 이를 배제하려면 빈칸이 바로 앞 문장과 맺는 관계를 확인하는 두 단계 판단이 필요하다. 사실관계도 대체로 타당하다(맨체스터 무료도서관 1852년 개관).",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-315",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Ecologists long assumed that the bright orange coloration of the cinnabar moth caterpillar served mainly to warn birds that the insect is toxic, since the caterpillars store bitter alkaloids from the ragwort plants they eat. When biologist Tamsin Hale offered the caterpillars to captive starlings, many birds did reject them after a single taste. ______ a substantial number of starlings that had never encountered the caterpillars avoided them on sight, even when the caterpillars had been rinsed of most of their alkaloids, suggesting that the color itself, rather than learned distaste alone, can deter some predators.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Ecologists long assumed that the bright orange coloration of the cinnabar moth caterpillar served mainly to warn birds that the insect is toxic, since the caterpillars store bitter alkaloids from the ragwort plants they eat. When biologist Tamsin Hale offered the caterpillars to captive starlings, many birds did reject them after a single taste. ______ a substantial number of starlings that had never encountered the caterpillars avoided them on sight, even when the caterpillars had been rinsed of most of their alkaloids, suggesting that the color itself, rather than learned distaste alone, can deter some predators.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "As a result,",
+    "Instead,",
+    "In other words,",
+    "Even so,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "앞 문장은 많은 새가 맛을 본 뒤 애벌레를 거부했다는, 기존 가정(학습된 경고 기능)을 뒷받침하는 결과를 인정한다. 뒤 문장은 그럼에도 경험 없는 새가 맛을 보지 않고도 색만 보고 피했다는, 그 설명만으로는 부족함을 보여 주는 결과를 제시하므로 양보 후 반전의 D(Even so)가 적절하다. A는 맛을 보고 거부한 것이 처음 보는 새들의 회피를 일으켰다는 인과 관계를 만들지만, 두 집단은 서로 다르므로 성립하지 않는다. B는 앞 내용을 부정하고 대체하는 의미이지만, 맛을 보고 거부한 결과는 여전히 사실로 유지된다. C는 같은 내용을 다시 말할 때 쓰지만, 뒤 문장은 새로운, 대비되는 발견을 담고 있다.",
+   "explanationEn": "The previous sentence grants a finding that supports the old assumption: many birds rejected the caterpillars after tasting them, which fits the idea of learned distaste. The next sentence adds a finding that this explanation can't fully account for: birds with no experience avoided the caterpillars on sight alone. That pattern of conceding a point and then turning against it calls for D, \"Even so.\" A is wrong because it suggests the tasting results caused the naive birds to avoid the caterpillars, but these were two different groups of birds. B is wrong because \"Instead\" implies the first finding is being replaced, yet the tasting results still stand. C is wrong because \"In other words\" introduces a restatement, while the second sentence presents a new, contrasting result.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장의 \"many birds did reject\"(양보 신호)와 뒤 문장의 \"rather than learned distaste alone\"(기존 설명의 한계)을 연결해야 D(Even so)가 확정됨. A는 훑어 읽으면 인과로 오인 가능, B는 대비 방향은 맞으나 앞 사실을 대체하는 의미라 배제, C는 재진술이 아니므로 배제. 두 해설 모두 정답과 선택지 글자 참조가 일치하며 영어 해설에 한글 없음. 배경 지식(진홍나방 애벌레의 금방망이 알칼로이드 저장)도 사실과 부합하며, 연구자·실험은 가상으로 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장은 기존 가정을 뒷받침하는 결과를 인정하고, 뒤 문장은 그 가정만으로는 설명되지 않는 결과를 제시하므로 양보 후 반전의 Even so가 성립한다. Instead는 대조 신호어라 훑어 읽으면 고를 수 있지만, 앞의 결과가 여전히 유효하므로 대체 관계는 성립하지 않는다. As a result도 앞뒤 결과를 섣불리 연결하면 그럴듯해 보인다. medium 수준에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-318",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When the first public lending libraries opened in English mill towns in the 1850s, reformers predicted that factory workers would use them mainly to borrow technical manuals and improve their trade skills. Circulation records from the Manchester Free Library, however, tell a different story: novels, travel narratives, and serialized adventure stories made up the large majority of loans to working-class patrons. ______ historians now argue that these libraries did less to reshape workers' labor than to give them access to leisure reading that had previously been affordable only to the middle classes.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When the first public lending libraries opened in English mill towns in the 1850s, reformers predicted that factory workers would use them mainly to borrow technical manuals and improve their trade skills. Circulation records from the Manchester Free Library, however, tell a different story: novels, travel narratives, and serialized adventure stories made up the large majority of loans to working-class patrons. ______ historians now argue that these libraries did less to reshape workers' labor than to give them access to leisure reading that had previously been affordable only to the middle classes.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "For example,",
+    "Accordingly,",
+    "In contrast,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 문장은 대출 기록이 주로 소설·여행기 등 여가 독서였다는 증거를 제시하고, 빈칸 뒤 문장은 그 증거에 근거해 역사가들이 도서관의 역할을 여가 독서 확대로 해석한다는 결론을 내린다. 따라서 근거에서 결론으로 이어지는 C가 정답이다. A는 개혁가들의 예측과 실제 기록 사이의 대조에 이끌린 오답인데, 그 반전은 이미 'however'로 처리되었고 뒤 문장은 기록과 일치하므로 양보 관계가 아니다. B는 뒤 문장이 앞 문장의 구체적 사례가 아니라 해석·결론이므로 틀리다. D 역시 앞뒤 문장이 서로 대조되지 않고 같은 방향을 가리키므로 틀리다.",
+   "explanationEn": "The sentence before the blank gives evidence: loan records show working-class patrons mostly borrowed novels and other leisure reading. The sentence after it draws a conclusion from that evidence: historians see the libraries mainly as a way to open up leisure reading. Because the text moves from evidence to conclusion, C is correct. A plays on the gap between the reformers' prediction and the actual records, but \"however\" already marks that reversal, and the final sentence agrees with the records instead of conceding a point. B is wrong because the last sentence interprets the evidence rather than giving an example of it. D is wrong because the two sentences point in the same direction and don't contrast.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "지문 흐름(예측 → however 기록 → 빈칸 → 역사가 결론)에서 증거→결론 관계이므로 'Accordingly'가 유일하게 성립. A/D는 앞 문장의 'however'와 '예측 vs 기록' 대조에 끌리는 그럴듯한 오답이고 B도 표면적으로 가능해 보여 비교가 필요함. 두 문장 간 관계를 정확히 읽어야 하므로 medium 적합. 해설 한·영 모두 정답과 선택지 글자 참조가 일치하고 모순 없음. 영어 해설에 한글 없음. 역사적 사실(1850 공공도서관법, 맨체스터 무료도서관 1852 개관)과 배경 설정이 모순되지 않음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "근거에서 결론으로 이어지므로 Accordingly가 정답이다. 개혁가 예측과 실제 기록의 대조 때문에 Nevertheless와 In contrast가 그럴듯한 함정이 되어 medium 난이도에 맞는다. Manchester Free Library는 1852년에 개관했고 대출에서 소설 비중이 높았다는 서술은 대체로 사실과 부합한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-322",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Hydroelectric dams along the upper Mekong River trap much of the sediment that once flowed downstream to the river's delta in southern Vietnam. Without that steady supply of silt, the delta can no longer rebuild the land that waves and tides wear away along its edges. ______ stretches of the delta's coastline have been retreating inland by several meters each year.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "Hydroelectric dams along the upper Mekong River trap much of the sediment that once flowed downstream to the river's delta in southern Vietnam. Without that steady supply of silt, the delta can no longer rebuild the land that waves and tides wear away along its edges. ______ stretches of the delta's coastline have been retreating inland by several meters each year.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "For example,",
+    "Nevertheless,",
+    "Consequently,",
+    "Similarly,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "앞 문장들은 원인을 제시한다. 댐이 퇴적물을 가두고, 그 결과 삼각주가 침식된 땅을 다시 만들지 못한다. 마지막 문장의 해안선 후퇴는 이 원인에서 나온 결과이므로 인과를 나타내는 C가 정답이다. A는 해안선 후퇴가 일반적 진술의 사례처럼 보여 그럴듯하지만, 앞 문장은 사례를 들 만한 일반화가 아니라 결과를 낳는 원인이다. B는 대조를 나타내는데 후퇴는 예상과 어긋나지 않고 오히려 예상과 맞아떨어진다. D는 비슷한 다른 현상을 덧붙일 때 쓰지만, 후퇴는 별개의 유사 현상이 아니라 같은 과정의 결과이다.",
+   "explanationEn": "The first two sentences set up a cause: the dams trap sediment, so the delta can't rebuild land that erosion removes. The final sentence describes what happens because of this, which is the coastline retreating. That makes C, a cause-and-effect transition, the correct choice. A may seem plausible because the retreat sounds like an illustration, but the earlier sentences describe a cause that leads to a result, not a general claim that needs an example. B signals contrast, yet the retreat is exactly what you would expect, not something surprising. D adds a parallel, separate phenomenon, but the retreat is the outcome of the same process, not a similar one.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: 댐→퇴적물 차단→삼각주 재건 불능→해안선 후퇴는 명확한 인과 사슬이므로 C(Consequently)가 정답. A는 '재건 불능'의 구체적 사례처럼 읽힐 수 있어 비교가 필요한 오답, D는 별개 유사 현상이 아니므로 배제, B는 대조가 아니므로 명백한 오답. 한국어·영어 해설 모두 결론과 선택지 글자 참조가 일치하고 모순 없음. 메콩 상류 댐의 퇴적물 차단과 삼각주 해안 침식(연 수 m 후퇴)은 사실에 부합. 원문 독창 텍스트로 저작권 의심 없음. 난이도는 표준 medium 수준 transitions 문항에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "인과 관계가 명확하다. 'For example'은 해안선 후퇴를 땅이 깎여 나가는 현상의 사례로 읽을 여지가 있어 부분적으로 그럴듯한 오답이다. 다소 쉬운 편이지만 medium 범위 안에 든다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-323",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When railroads in the United States and Canada adopted standard time zones in 1883, many observers treated the change as a narrow technical fix for confusing train timetables, and railway officials stressed exactly that purpose in their public announcements. ______ the new zones soon reshaped daily routines far beyond the stations: in many towns, factories, schools, and churches reset their clocks to \"railroad time,\" sometimes over the objections of residents who preferred to keep noon set by the sun.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When railroads in the United States and Canada adopted standard time zones in 1883, many observers treated the change as a narrow technical fix for confusing train timetables, and railway officials stressed exactly that purpose in their public announcements. ______ the new zones soon reshaped daily routines far beyond the stations: in many towns, factories, schools, and churches reset their clocks to \"railroad time,\" sometimes over the objections of residents who preferred to keep noon set by the sun.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "For example,",
+    "As a result,",
+    "Similarly,",
+    "Even so,"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "첫 문장은 표준시 도입이 열차 시간표만을 위한 좁은 기술적 조치로 여겨졌고 철도 관계자들도 그 목적을 강조했다는 점을 인정한다. 다음 문장은 실제로는 역 바깥의 일상생활까지 바꾸었다고 하므로, 앞의 인식과 반대되는 사실을 제시하는 양보 후 반전 관계이며 D가 정답이다. A는 뒤 문장에 공장·학교 같은 구체적 사례가 나오지만, 이 문장은 '좁은 기술적 조치'라는 앞의 주장을 예시하는 게 아니라 반박한다. B는 공식 발표가 기술적 목적을 강조한 것이 일상생활 변화의 원인은 아니므로 인과 방향이 맞지 않는다. C는 두 문장이 비슷한 내용을 덧붙이는 게 아니라 대조를 이루므로 틀리다.",
+   "explanationEn": "The first sentence grants that people saw standard time as a narrow technical fix for train timetables, and that officials stressed exactly that purpose. The second sentence says the zones actually changed daily life far beyond the railroads. That contradicts the narrow view, so this is a concession followed by a reversal, and D is correct. A is tempting because the second sentence lists specific examples (factories, schools), but those examples argue against the first sentence's claim instead of illustrating it. B doesn't work because officials stressing a technical purpose didn't cause towns to reset their clocks, so the cause-and-effect link is wrong. C is wrong because the second sentence contrasts with the first; it doesn't add a similar point.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "첫 문장(좁은 기술적 조치로 인식·공식 강조)과 둘째 문장(실제로는 일상 전반을 재편)의 양보-반전 관계가 명확하여 'Even so'가 유일하게 성립. B는 '도입→변화'로 훑어 읽으면 인과로 오인할 수 있고, A는 뒤 문장의 구체 사례 때문에 매력적이어서 비교 판단이 필요함. 1883년 북미 철도 표준시 도입과 '철도 시간' 채택을 둘러싼 지역 반발은 역사적 사실과 부합. 한·영 해설 결론과 선택지 참조 일치, 영어 자연스러움."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "1883년 미국·캐나다 철도의 표준시 도입과 지역 사회의 '철도 시간' 채택은 사실이다. 양보 후 반전 구조이므로 정답 D(Even so)가 맞다. A는 뒤 문장에 공장·학교 같은 구체적 사례가 나와서 고르기 쉽고, B는 철도 관계자의 발표 때문에 일상이 바뀌었다고 잘못 연결하게 만드는 함정이라 둘 다 오답으로서 그럴듯하다. 훑어 읽으면 틀리기 쉬운 문항이어서 medium 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-324",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers in the Netherlands began testing self-healing concrete in the 2010s, they embedded dormant bacterial spores and calcium lactate in the mix. When water seeps into a crack, the spores activate and produce limestone that seals the gap. Early trials showed that cracks up to 0.8 millimeters wide could close within three weeks. ______ the material has seen only limited use in large infrastructure projects: it costs roughly twice as much as conventional concrete, and few long-term studies confirm that the bacteria survive for decades inside a structure.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When engineers in the Netherlands began testing self-healing concrete in the 2010s, they embedded dormant bacterial spores and calcium lactate in the mix. When water seeps into a crack, the spores activate and produce limestone that seals the gap. Early trials showed that cracks up to 0.8 millimeters wide could close within three weeks. ______ the material has seen only limited use in large infrastructure projects: it costs roughly twice as much as conventional concrete, and few long-term studies confirm that the bacteria survive for decades inside a structure.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Even so,",
+    "As a result,",
+    "For example,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "앞 문장은 초기 실험에서 균열이 3주 안에 메워졌다는 긍정적 결과를 말하고, 뒤 문장은 그럼에도 대형 사업에서 제한적으로만 쓰였다는 반대 방향의 사실과 이유(비용, 장기 연구 부족)를 제시하므로 양보 후 반전인 A가 정답이다. B는 성공적인 실험이 제한적 사용의 원인인 것처럼 만드는데, 실제 원인은 콜론 뒤의 비용과 불확실성이다. C는 뒤 문장이 앞 내용의 구체적 사례여야 하지만 새로운 한계를 제시한다. D는 유사한 내용을 덧붙일 때 쓰지만 두 문장은 대조된다.",
+   "explanationEn": "The previous sentence reports a promising result: cracks closed within three weeks in early trials. The next sentence turns the other way, saying the material is still rarely used in big projects and explaining why (high cost, few long-term studies). That is a concession followed by a contrast, so A is correct. B treats the successful trials as the cause of the limited use, but the real causes come after the colon. C would need the sentence to give an instance of the trial results, but it brings up new drawbacks instead. D signals a similar point, but the two sentences contrast.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(긍정적 실험 결과)과 뒤 문장(제한적 사용 + 이유)의 대조 관계를 파악해야 하며 'Even so'가 유일하게 성립. B는 콜론 뒤 원인 설명 때문에 표면적으로 그럴듯해 비교가 필요하고, C·D도 문맥상 배제 가능. 한·영 해설 모두 정답 및 오답 근거가 일치하고 정확함. 자가치유 콘크리트(네덜란드, 박테리아 포자·젖산칼슘, 0.8mm 균열) 사실관계도 알려진 내용과 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답 A(Even so)는 옳음: 긍정적인 실험 결과 뒤에 제한적 사용이라는 반대 방향의 사실이 이어짐. 다만 대조 신호가 너무 뚜렷함(promising results → 'only limited use'). C(For example)와 D(Similarly)는 대조 관계와 바로 충돌해 비교하지 않아도 배제됨. B(As a result)도 콜론 뒤 이유가 명시돼 있어 쉽게 걸러짐. 오답 중 최소 2개가 부분적 근거를 가져야 한다는 medium 기준을 충족하지 못함. 비슷한 대조형 오답(However/Nevertheless 대비 Instead, In contrast 등)이 없어 두 단계 판단이 필요 없음.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-328",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the early nineteenth century, many British towns relied on local \"time\" set by the position of the sun, so clocks in Bristol ran about ten minutes behind those in London. Railway companies, which needed coordinated timetables, began adopting London time for their schedules in the 1840s. Some town councils initially resisted, insisting that local noon was the only natural standard. ______ by the mid-1850s most public clocks in Britain displayed railway time, often with a second minute hand added so that residents could still consult the old local time if they wished.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "In the early nineteenth century, many British towns relied on local \"time\" set by the position of the sun, so clocks in Bristol ran about ten minutes behind those in London. Railway companies, which needed coordinated timetables, began adopting London time for their schedules in the 1840s. Some town councils initially resisted, insisting that local noon was the only natural standard. ______ by the mid-1850s most public clocks in Britain displayed railway time, often with a second minute hand added so that residents could still consult the old local time if they wished.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Nevertheless,",
+    "Consequently,",
+    "For example,",
+    "Similarly,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 문장은 일부 시의회가 철도 시간에 저항했다고 말하고, 뒤 문장은 그런데도 1850년대 중반에는 대부분의 공공 시계가 철도 시간을 표시했다고 말한다. 저항이 있었는데도 결국 채택되었으므로 양보 후 반전을 나타내는 A가 정답이다. B는 철도 회사의 채택이 확산을 불러온 원인처럼 보여 그럴듯하지만, 바로 앞 문장은 '저항'이라서 확산의 원인이 될 수 없다. C는 뒤 문장을 앞 문장(저항)의 사례로 만드는데, 뒤 문장은 오히려 저항과 반대되는 결과다. D는 비슷한 내용을 덧붙일 때 쓰지만, 두 문장은 비슷하지 않고 서로 대조된다.",
+   "explanationEn": "The sentence before the blank says some town councils resisted railway time, and the sentence after says that by the mid-1850s most public clocks showed railway time anyway. Railway time was adopted even though there was resistance, so the transition has to show a concession followed by a contrast, and that makes A correct. B is tempting because the railways' choice did help spread railway time, but the sentence right before the blank is about resistance, and resistance can't be the cause of the spread. C would make the second sentence an example of the resistance, but that sentence describes the opposite outcome. D signals that a similar idea is being added, but these two sentences contrast with each other instead.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(시의회의 저항)과 뒤 문장(그럼에도 대부분 철도 시간 채택)이 명확히 대조되어 A 'Nevertheless'가 정답. B 'Consequently'는 두 문장 앞의 철도 회사 채택을 원인으로 오독하면 끌리는 강한 오답이며, D는 앞선 철도 회사 채택 내용과의 유사성으로 약간의 근거가 있음. C는 가장 약하나 말이 됨. 역사적 사실(브리스틀 약 10분 차, 1840년대 철도 시간 도입, 1850년대 중반 대부분 공공 시계 GMT 표시, 이중 분침)은 정확. 한국어·영어 해설 모두 같은 결론과 글자 참조를 가지며 영어에 한글 없음. 난이도는 표준 SAT medium에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A(Nevertheless)가 맞다. 빈칸 앞 문장은 시의회의 저항이고, 뒤 문장은 그럼에도 철도 시간이 퍼졌다는 내용이라 양보 후 반전 관계다. B(Consequently)는 앞의 앞 문장(철도 회사의 채택)과 연결하면 그럴듯해서, 바로 앞 문장까지 정독해야 배제된다. 따라서 medium 난이도에 맞다. 역사적 사실도 대체로 정확하다. 브리스틀은 약 10분 차이였고, 1840년대에 철도가 런던 시간을 채택했으며, 1855년 무렵 대부분의 공공 시계가 철도 시간을 표시했다. 다만 분침이 두 개인 시계는 브리스틀 콘 익스체인지 시계 같은 사례가 있지만, 'often'은 다소 과장일 수 있다(경미한 사항).",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-transitions-329",
+  "runId": "rw-supplement-medium",
+  "skill": "transitions",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "When engineers in the Netherlands began testing roads paved with recycled plastic modules in 2018, critics predicted the hollow sections would crack under the weight of delivery trucks. Early load trials seemed to support this worry: several prototype panels deformed after only a few weeks of heavy traffic. ______ redesigned panels reinforced with internal ribbing have since carried bus traffic for over two years without measurable warping, and they drain rainwater faster than conventional asphalt does.\n\nWhich choice completes the text with the most logical transition?",
+   "stimulus": "When engineers in the Netherlands began testing roads paved with recycled plastic modules in 2018, critics predicted the hollow sections would crack under the weight of delivery trucks. Early load trials seemed to support this worry: several prototype panels deformed after only a few weeks of heavy traffic. ______ redesigned panels reinforced with internal ribbing have since carried bus traffic for over two years without measurable warping, and they drain rainwater faster than conventional asphalt does.",
+   "question": "Which choice completes the text with the most logical transition?",
+   "options": [
+    "Consequently,",
+    "Even so,",
+    "Similarly,",
+    "For example,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "앞 문장은 초기 시험이 비판자들의 우려를 뒷받침하는 듯했다고 말하고, 뒤 문장은 재설계된 패널이 오랫동안 변형 없이 버텼다는 반대 방향의 결과를 제시한다. 따라서 앞 내용을 인정한 뒤 반전하는 B가 가장 논리적이다. A는 개선된 패널이 초기 실패의 결과처럼 보일 수 있지만, 뒤 문장은 실패가 낳은 결과가 아니라 우려와 대조되는 성과를 강조하므로 맞지 않는다. C는 뒤 문장을 앞 문장과 비슷한 사례로 다루지만 두 문장의 내용은 서로 반대다. D는 뒤 문장을 패널 변형의 구체적 사례로 보지만, 뒤 문장은 변형이 일어나지 않은 경우를 다룬다.",
+   "explanationEn": "The previous sentence says early trials seemed to support the critics' worry, while the next sentence reports the opposite outcome: redesigned panels lasted for years without warping. So you need a transition that accepts the earlier point and then reverses it, which is what B does. A might seem to work because the redesign came after the failures, but the sentence is not presented as a result of those failures; it stresses success in contrast to the worry. C treats the two sentences as similar, but they actually point in opposite directions. D would introduce an example of panels deforming, but the sentence describes panels that did not deform.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "앞 문장(초기 시험이 우려를 뒷받침하는 듯함)과 뒤 문장(재설계 패널의 장기 성공)이 대조 관계이므로 양보·반전 전환어 B가 정답. A는 시간적 선후 때문에 부분적으로 그럴듯한 오답이며, C·D는 논리 방향이 맞지 않음. 해설(한·영) 일치하고 글자 참조 정확. 네덜란드 플라스틱 도로(PlasticRoad) 소재는 실제 사례와 유사하나 구체 수치는 허구적 서술로 저작권 문제 없음. 난이도는 'seemed to support'라는 단서와 두 문장 비교가 필요해 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "우려를 뒷받침하는 초기 실패 다음에 재설계 패널의 성공이 이어지므로 양보·대조 관계이고, 정답 'Even so'가 옳다. 'Consequently'는 재설계가 실패 뒤에 나왔다는 점 때문에 그럴듯한 오답이다. C와 D는 비교적 약한 오답이지만 중간 난이도에 대체로 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-300",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The bluehead wrasse (Thalassoma bifasciatum) is a small reef fish found in the western Atlantic Ocean.\n- Most bluehead wrasses begin life as females.\n- When the dominant male of a group disappears, the largest female in the group can change sex and become a male.\n- This change begins within hours: the fish starts showing male courtship behavior almost immediately.\n- Full transformation of the ovaries into functioning testes takes about 8 to 10 days.\n\nThe student wants to emphasize how quickly a bluehead wrasse's behavior changes compared with its physical transformation. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The bluehead wrasse (Thalassoma bifasciatum) is a small reef fish found in the western Atlantic Ocean.\n- Most bluehead wrasses begin life as females.\n- When the dominant male of a group disappears, the largest female in the group can change sex and become a male.\n- This change begins within hours: the fish starts showing male courtship behavior almost immediately.\n- Full transformation of the ovaries into functioning testes takes about 8 to 10 days.",
+   "question": "The student wants to emphasize how quickly a bluehead wrasse's behavior changes compared with its physical transformation. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "When a group of bluehead wrasses loses its dominant male, the largest female can change sex, a process that ends with her ovaries becoming functioning testes.",
+    "Bluehead wrasses, small reef fish of the western Atlantic, mostly begin life as females, but the largest female in a group can become a male within 8 to 10 days.",
+    "Although a bluehead wrasse's ovaries need about 8 to 10 days to become functioning testes, the fish begins displaying male courtship behavior within hours of its sex change starting.",
+    "Within hours of a dominant male's disappearance, the largest female bluehead wrasse in the group begins to change sex and show male courtship behavior."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 행동 변화의 속도와 신체 변화의 속도를 대조하는 것이므로, '몇 시간 내' 구애 행동과 '8~10일' 생식선 변화를 함께 제시해야 한다. C는 두 시간 정보를 Although로 대조하여 목표를 정확히 달성한다. A는 신체 변화만 언급하고 시간 정보가 없다. B는 8~10일만 제시하고 행동 변화의 빠름을 빠뜨린다. D는 몇 시간 내 행동 변화는 말하지만 신체 변화의 느린 속도와 비교하지 않는다.",
+   "explanationEn": "Your goal is to contrast how fast the behavior changes with how fast the body changes, so the sentence needs both the \"within hours\" behavior detail and the \"8 to 10 days\" detail about the ovaries. C puts these two timeframes side by side with \"Although,\" so it meets the goal exactly. A describes only the physical change and gives no timing. B gives only the 8-to-10-day figure and leaves out how quickly the behavior changes. D points out the fast behavioral change but never compares it with the slower physical transformation.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C만이 '몇 시간 내' 행동 변화와 '8~10일' 신체 변화를 Although로 대조하여 목표(속도 비교)를 달성함. B(8~10일만)·D(몇 시간만)는 각각 한쪽 시간 정보만 담아 부분적으로 맞는 오답이며, A는 시간 정보 없음. 두 노트 항목을 결합해야 하는 medium 수준에 적합. 한국어·영어 해설 모두 정답 및 선택지 참조가 일치하고 자연스러움. 사실관계(행동 변화 수 시간, 생식선 변화 약 8~10일)도 통상 알려진 내용과 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C만 두 시간 정보(몇 시간 내 행동 변화, 8~10일 신체 변화)를 대조해 제시한다. B와 D는 각각 정보 하나만 담고 있어 그럴듯한 오답으로 기능하고, A는 시간 정보가 없다. 사실관계도 대체로 정확하다(블루헤드 놀래기의 행동 변화는 몇 분~몇 시간 내에 시작되고, 생식선 전환에는 약 8~10일이 걸린다). B의 '8~10일 만에 수컷이 된다'는 표현은 대략적이지만 수용 가능한 수준이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-301",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Novelist Harriet Vane-Osgood published Ashcombe Hall in 2019 and The Lamplighter's Daughter in 2023.\n- Both novels are written in the style of nineteenth-century English fiction, with long chapters and an intrusive narrator who comments on the characters.\n- Ashcombe Hall is set entirely on a declining country estate in Yorkshire.\n- The Lamplighter's Daughter follows its heroine through the crowded streets of Victorian London.\n- Ashcombe Hall is told by a narrator who claims to have known the family personally.\n- The Lamplighter's Daughter is narrated by an anonymous voice that never appears in the story.\n\nThe student wants to emphasize a difference in how the two novels are narrated. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Novelist Harriet Vane-Osgood published Ashcombe Hall in 2019 and The Lamplighter's Daughter in 2023.\n- Both novels are written in the style of nineteenth-century English fiction, with long chapters and an intrusive narrator who comments on the characters.\n- Ashcombe Hall is set entirely on a declining country estate in Yorkshire.\n- The Lamplighter's Daughter follows its heroine through the crowded streets of Victorian London.\n- Ashcombe Hall is told by a narrator who claims to have known the family personally.\n- The Lamplighter's Daughter is narrated by an anonymous voice that never appears in the story.",
+   "question": "The student wants to emphasize a difference in how the two novels are narrated. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Ashcombe Hall takes place on a Yorkshire country estate, whereas The Lamplighter's Daughter moves through the crowded streets of Victorian London.",
+    "Both of Harriet Vane-Osgood's novels, Ashcombe Hall and The Lamplighter's Daughter, feature an intrusive narrator who comments on the characters.",
+    "Harriet Vane-Osgood's 2023 novel The Lamplighter's Daughter is narrated by an anonymous voice and follows its heroine through Victorian London.",
+    "Although both of Harriet Vane-Osgood's novels use an intrusive narrator, Ashcombe Hall's narrator claims a personal acquaintance with the family, while The Lamplighter's Daughter's narrator remains an anonymous voice outside the story."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 두 소설의 '서술 방식'의 차이를 강조하는 것이다. D는 한 화자는 가족을 직접 안다고 주장하고, 다른 화자는 이야기 밖의 익명 목소리라는 점을 대조하여 목표를 달성한다. A는 차이를 제시하지만 서술이 아니라 배경의 차이이다. B는 서술을 다루지만 공통점만 말한다. C는 서술 정보를 담고 있으나 한 소설만 언급해 차이를 보여 주지 못한다.",
+   "explanationEn": "Your goal is to emphasize a difference in how the two novels are narrated. D does this by contrasting a narrator who claims to know the family personally with an anonymous voice outside the story. A does present a contrast, but it is about setting, not narration. B is about narration, but it describes only something the novels share. C mentions how one novel is narrated, but because it discusses only one book, it can't show a difference.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D만이 두 소설의 서술 방식(화자가 가족과 안면 있음 vs. 이야기 밖 익명 목소리)의 차이를 명시적으로 대조한다. A는 배경의 차이(서술 아님), B는 서술의 공통점, C는 한 소설만 다룸. 세 오답이 각각 '차이', '서술', '서술 정보'라는 부분적 근거를 지녀 비교 배제가 필요하므로 medium에 적합. 노트와 선택지·해설이 모순 없이 일치하며, 가상의 작가/작품으로 저작권 문제 없음. 한국어·영어 해설 결론과 글자 참조가 일치하고 영어는 자연스러움."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "가상 작가·작품. 오답 A(차이지만 배경), B(서술이지만 공통점), C(서술이지만 한 작품)가 각각 부분적으로 맞아 비교가 필요하므로 medium에 적합하다. D가 다른 선택지보다 눈에 띄게 길어 정답 단서가 될 수 있다는 점은 사소한 문제다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-303",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- In the nineteenth century, many European cities began building public washhouses where working-class residents could do laundry and bathe.\n- Liverpool opened Britain's first public washhouse in 1842, largely through the efforts of Kitty Wilkinson, an Irish-born resident.\n- During an 1832 cholera outbreak, Wilkinson had let neighbors use her own boiler to wash contaminated bedding.\n- The Liverpool washhouse charged users one penny per hour.\n- Paris's first large municipal washhouse, opened in the 1850s, was financed directly by the national government under Napoleon III.\n- Unlike the Liverpool washhouse, the Paris facility was planned by officials rather than inspired by a local resident's example.\n\nThe student wants to contrast how the Liverpool and Paris washhouses originated. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- In the nineteenth century, many European cities began building public washhouses where working-class residents could do laundry and bathe.\n- Liverpool opened Britain's first public washhouse in 1842, largely through the efforts of Kitty Wilkinson, an Irish-born resident.\n- During an 1832 cholera outbreak, Wilkinson had let neighbors use her own boiler to wash contaminated bedding.\n- The Liverpool washhouse charged users one penny per hour.\n- Paris's first large municipal washhouse, opened in the 1850s, was financed directly by the national government under Napoleon III.\n- Unlike the Liverpool washhouse, the Paris facility was planned by officials rather than inspired by a local resident's example.",
+   "question": "The student wants to contrast how the Liverpool and Paris washhouses originated. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Liverpool opened Britain's first public washhouse in 1842, charging users one penny per hour, while Paris opened its first large municipal washhouse in the 1850s.",
+    "Liverpool's 1842 washhouse grew out of resident Kitty Wilkinson's grassroots efforts, whereas Paris's washhouse of the 1850s was planned by officials and funded by Napoleon III's government.",
+    "During an 1832 cholera outbreak, Kitty Wilkinson let neighbors use her boiler, an act that later inspired Liverpool's 1842 public washhouse.",
+    "In the nineteenth century, cities such as Liverpool and Paris built public washhouses so that working-class residents could do laundry and bathe."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 두 세탁장의 '기원(생겨난 방식)'을 대조하는 것이다. B는 리버풀은 주민 위킨슨의 노력에서, 파리는 관료의 계획과 정부 재정에서 시작되었다는 차이를 대조 접속어 whereas로 분명히 보여 준다. A는 두 도시를 모두 언급하지만 개장 연도와 이용료만 나열할 뿐 기원의 차이를 다루지 않는다. C는 리버풀의 기원을 정확히 설명하지만 파리를 빠뜨려 대조가 되지 않는다. D는 두 도시의 공통 목적만 말해서 대조가 아니라 유사점을 드러낸다.",
+   "explanationEn": "Your goal is to contrast how the two washhouses originated. B does this directly: Liverpool's came from resident Kitty Wilkinson's grassroots efforts, while Paris's was planned by officials and paid for by the government, and \"whereas\" marks the contrast. A names both cities, but it only lists opening dates and a fee, so it never says how either washhouse came about. C explains Liverpool's origin accurately but leaves out Paris, so nothing is being contrasted. D points to what the two cities had in common, not how they differed.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산 완료: 노트의 '위킨슨의 노력'과 '관료 계획·나폴레옹 3세 정부 재정'을 정확히 반영하여 기원을 대조한다. A는 두 도시를 대조 구조(while)로 제시하지만 연도·요금만 다루어 기원 누락, C는 리버풀 기원만 다루어 파리 누락, D는 공통점 서술로 모두 타당하게 배제된다. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 글자 참조 일치, 영어 해설에 한글 없음. A·C가 부분적 근거를 가진 오답으로 설계되어 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답이 명확하다. A(두 도시 언급, 기원 없음)와 C(기원 언급, 한 도시만)는 부분적으로 맞는 근거가 있는 오답이고, D는 유사점만 말하므로 배제가 쉽다. medium 기준(오답 중 최소 2개가 부분적으로 그럴듯함)을 충족한다. 'grassroots'는 메모 내용(주민의 본보기와 노력)에서 무리 없이 추론할 수 있는 표현이다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-304",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Engineers in the Netherlands built the Maeslantkering, a storm-surge barrier, to protect the port of Rotterdam.\n- The barrier consists of two curved steel gates, each about as long as the Eiffel Tower is tall.\n- The gates normally rest in dry docks on the riverbanks, leaving the shipping channel fully open.\n- When a surge of at least 3 meters is forecast, the gates swing into the channel, fill with water, and sink to close it.\n- The Thames Barrier in London, by contrast, uses rotating gates mounted on piers that stand permanently in the river.\n\nThe student wants to explain how the Maeslantkering's design differs from that of the Thames Barrier. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Engineers in the Netherlands built the Maeslantkering, a storm-surge barrier, to protect the port of Rotterdam.\n- The barrier consists of two curved steel gates, each about as long as the Eiffel Tower is tall.\n- The gates normally rest in dry docks on the riverbanks, leaving the shipping channel fully open.\n- When a surge of at least 3 meters is forecast, the gates swing into the channel, fill with water, and sink to close it.\n- The Thames Barrier in London, by contrast, uses rotating gates mounted on piers that stand permanently in the river.",
+   "question": "The student wants to explain how the Maeslantkering's design differs from that of the Thames Barrier. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "The Maeslantkering, which protects the port of Rotterdam, has two curved steel gates, each about as long as the Eiffel Tower is tall.",
+    "When a surge of at least 3 meters is forecast, the Maeslantkering's gates swing into the channel, fill with water, and sink to close it.",
+    "Unlike the Thames Barrier, whose rotating gates are mounted on piers standing permanently in the river, the Maeslantkering keeps its gates in dry docks on the riverbanks until a surge threatens.",
+    "Both the Maeslantkering in the Netherlands and the Thames Barrier in London are storm-surge barriers that use movable gates to protect cities from flooding."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 두 방벽의 설계 '차이'를 설명하는 것이므로, 마스란트케링의 게이트 보관 방식(강둑의 건식 도크)과 템스 방벽의 게이트 위치(강 속에 상시 서 있는 교각)를 대조해야 한다. C는 이 두 정보를 'Unlike'로 연결해 차이를 분명히 보여 준다. A와 B는 마스란트케링의 크기나 작동 방식을 정확히 설명하지만 템스 방벽을 언급하지 않아 비교가 이루어지지 않는다. D는 두 방벽을 모두 언급하지만 공통점을 강조할 뿐 차이를 설명하지 않는다.",
+   "explanationEn": "Your goal is to explain a difference in design, so the sentence has to contrast the two barriers. C does that: the Thames Barrier's gates sit on piers that stay in the river all the time, while the Maeslantkering's gates are kept in dry docks on the banks. A and B accurately describe the Maeslantkering's size and how it operates, but neither one mentions the Thames Barrier, so there's no comparison. D names both barriers, but it points out what they have in common instead of how they differ.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C가 노트 3·5를 'Unlike'로 결합해 설계 차이를 정확히 대조함. A·B는 정확하지만 비교 부재, D는 두 방벽을 언급하나 공통점만 서술 — 오답 설계 적절. 사실관계(게이트 길이 비유, 3m 기준, 템스 방벽 교각식 회전 게이트) 문제 없음. 한·영 해설 결론 및 선택지 참조 일치."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "사실 확인: 마스란트케링 게이트 길이는 약 210~240m로 에펠탑 높이(약 300m, 안테나 포함 330m)와 '거의 같다'는 흔한 비유이며, 3m 기준 폐쇄와 템스 방벽의 교각식 회전 게이트도 정확함. D는 두 방벽을 다 언급해 그럴듯한 오답이고, A·B는 정확한 정보만 담고 있어 노트 기반 오답으로 적절함. 다만 'Unlike'라는 단서가 너무 분명해 보통 난이도에서는 쉬운 편에 가까움.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-305",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The bombardier beetle (Brachinus) defends itself by spraying a hot chemical mixture from its abdomen.\n- The beetle stores hydroquinones and hydrogen peroxide in one internal chamber.\n- When threatened, it pushes these chemicals into a second chamber containing enzymes.\n- The enzymes trigger a rapid reaction that heats the mixture to about 100°C.\n- The spray comes out in rapid pulses (about 500 per second) rather than as a continuous stream.\n- Researchers think the pulses let the beetle's tissues cool briefly between bursts, protecting the beetle from its own heat.\n\nThe student wants to explain how the bombardier beetle avoids harming itself with its defensive spray. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The bombardier beetle (Brachinus) defends itself by spraying a hot chemical mixture from its abdomen.\n- The beetle stores hydroquinones and hydrogen peroxide in one internal chamber.\n- When threatened, it pushes these chemicals into a second chamber containing enzymes.\n- The enzymes trigger a rapid reaction that heats the mixture to about 100°C.\n- The spray comes out in rapid pulses (about 500 per second) rather than as a continuous stream.\n- Researchers think the pulses let the beetle's tissues cool briefly between bursts, protecting the beetle from its own heat.",
+   "question": "The student wants to explain how the bombardier beetle avoids harming itself with its defensive spray. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "The bombardier beetle keeps hydroquinones and hydrogen peroxide in one chamber, separate from the enzymes in a second chamber, until it is threatened.",
+    "When the bombardier beetle is threatened, enzymes trigger a rapid reaction that heats its defensive chemicals to about 100°C before they are sprayed.",
+    "The bombardier beetle releases its spray in about 500 pulses per second, a pattern that makes the hot chemical mixture especially effective against predators.",
+    "Although its spray reaches about 100°C, the bombardier beetle releases it in rapid pulses, which researchers think give the beetle's tissues brief moments to cool between bursts."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 딱정벌레가 자기 분사물에 스스로 해를 입지 않는 방법을 설명하는 것이다. D는 분사물이 약 100°C라는 위험 요소와, 맥박식 분사가 분출 사이에 조직을 식혀 준다는 보호 방식을 결합해 목표를 정확히 달성한다. A는 화학물질을 따로 저장한다는 정확한 메모를 쓰지만, 열로부터 자신을 보호하는 방식이 아니라 반응이 일어나기 전의 저장 방식만 설명한다. B는 분사물이 뜨거워지는 과정만 다루고 자기 보호는 언급하지 않는다. C는 맥박식 분사라는 메모를 쓰지만, 그 목적을 포식자에 대한 효과로 잘못 제시하여 메모의 냉각 설명과 어긋난다.",
+   "explanationEn": "The goal is to explain how the beetle keeps from harming itself with its own spray. D does this by pairing the danger (a spray of about 100°C) with the protection (rapid pulses that researchers think let the beetle's tissues cool between bursts). A uses an accurate note about separate storage, but it only describes how the chemicals are kept before the reaction, not how the beetle protects itself from the heat. B explains how the spray gets hot but never mentions self-protection. C mentions the pulses, but it claims their purpose is to work better against predators, which doesn't match the notes' cooling explanation.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 위험(100°C)과 보호 기제(맥박식 분사→조직 냉각)를 메모 그대로 결합해 목표를 유일하게 충족한다. A는 '분리 저장'을 자기 보호로 오해할 수 있어 매력적인 오답이고, C는 맥박식 분사라는 핵심 메모를 쓰되 목적을 메모와 다르게 서술하여 비교가 필요하며, B도 메모에 충실해 말이 된다. 한·영 해설 모두 결론과 선택지 참조가 일치하고 영어 자연스럽다. 사실 관계(약 100°C, 초당 약 500회 펄스)도 실제 연구와 부합. 저작권 우려 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 화학물질을 따로 저장하는 것도 자기 보호로 읽힐 여지가 있어 그럴듯한 오답이고, C는 맥박식 분사라는 같은 메모를 써서 비교해야 배제된다. 중간 난이도에 적합하다. 다만 \"Brachinus\"의 맥박식 분사는 실제 연구에서 주로 Stenaptinus/Brachinus 근거이며, 문항 메모 범위 안에서는 문제가 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-306",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Elspeth Varrow is a contemporary British novelist who writes in a style modeled on nineteenth-century fiction.\n- Her 2019 novel The Lamplighter's Ledger is narrated by an intrusive narrator who directly addresses \"dear reader,\" a device common in Victorian novels.\n- The novel was first released in twelve monthly installments through a literary app, echoing the serial publication of works by Charles Dickens.\n- Unlike most Victorian novels, The Lamplighter's Ledger includes text messages exchanged between characters.\n- Critics praised the novel's long, ornate sentences and its large cast of minor characters.\n\nThe student wants to emphasize how Varrow's novel adapts a nineteenth-century publishing practice to modern technology. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Elspeth Varrow is a contemporary British novelist who writes in a style modeled on nineteenth-century fiction.\n- Her 2019 novel The Lamplighter's Ledger is narrated by an intrusive narrator who directly addresses \"dear reader,\" a device common in Victorian novels.\n- The novel was first released in twelve monthly installments through a literary app, echoing the serial publication of works by Charles Dickens.\n- Unlike most Victorian novels, The Lamplighter's Ledger includes text messages exchanged between characters.\n- Critics praised the novel's long, ornate sentences and its large cast of minor characters.",
+   "question": "The student wants to emphasize how Varrow's novel adapts a nineteenth-century publishing practice to modern technology. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Like Dickens's novels, Varrow's The Lamplighter's Ledger appeared in serial form, though its twelve monthly installments were delivered through a literary app.",
+    "Varrow's The Lamplighter's Ledger blends old and new, pairing a Victorian-style narrator who addresses \"dear reader\" with text messages exchanged between characters.",
+    "The Lamplighter's Ledger (2019) was praised by critics for features typical of nineteenth-century fiction, such as long, ornate sentences and a large cast of minor characters.",
+    "Contemporary novelist Elspeth Varrow models her style on nineteenth-century fiction, as seen in the intrusive narrator of The Lamplighter's Ledger."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 19세기의 '출판 관행'을 현대 기술에 맞게 바꾼 점을 강조하는 것이다. A는 디킨스식 연재 출판(관행)과 문학 앱(현대 기술)을 연결하여 두 요소를 모두 충족한다. B는 옛것과 새것의 결합을 보여 주지만 출판 관행이 아니라 서술 기법과 문자 메시지라는 내용 요소에 관한 것이다. C는 문체와 등장인물에 대한 비평만 다루어 출판이나 기술이 없다. D는 19세기풍 서술자만 언급하여 현대 기술로의 적응을 보여 주지 못한다.",
+   "explanationEn": "Your goal is to highlight how a nineteenth-century publishing practice was adapted to modern technology. A does this by linking Dickens-style serial publication (the practice) with delivery through a literary app (the modern technology). B also mixes old and new, but it's about narrative devices and text messages inside the story, not about how the book was published. C covers only the critics' praise for style and characters, so it says nothing about publishing or technology. D mentions only the Victorian-style narrator and shows no adaptation to modern technology.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 '출판 관행(연재)'과 '현대 기술(문학 앱)' 두 조건을 모두 충족하는 유일한 선택지. B는 옛것+새것 결합이라는 부분적 근거를 가진 강력한 오답이며, C·D는 19세기 요소만 다루어 말은 되지만 기술 적응이 없음. 가상의 작가·작품으로 저작권 문제 없음. 한·영 해설 결론과 글자 참조 일치, 영어 자연스러움. 목표 '출판 관행'이라는 키워드를 정독해야 B를 배제할 수 있어 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 옛것과 새것을 섞는 강한 오답이라 '출판 관행'인지 '내용 요소'인지 구분해야 배제됨. C와 D는 19세기 요소만 있어 비교적 쉽게 배제되지만 그럴듯함. 중간 난이도에 적합. 작가·작품은 가상으로 보임.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-308",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Mechanics' institutes were founded in Britain beginning in the 1820s to offer evening instruction to working people.\n- The London Mechanics' Institute opened in 1823; by 1850, roughly 700 such institutes existed across Britain.\n- Mechanics' institutes concentrated mainly on science and technical subjects useful in trades.\n- The first working men's college opened in London in 1854.\n- Working men's colleges offered history, literature, and drawing alongside practical subjects.\n\nThe student wants to contrast the subjects taught at the two types of institutions. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Mechanics' institutes were founded in Britain beginning in the 1820s to offer evening instruction to working people.\n- The London Mechanics' Institute opened in 1823; by 1850, roughly 700 such institutes existed across Britain.\n- Mechanics' institutes concentrated mainly on science and technical subjects useful in trades.\n- The first working men's college opened in London in 1854.\n- Working men's colleges offered history, literature, and drawing alongside practical subjects.",
+   "question": "The student wants to contrast the subjects taught at the two types of institutions. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Mechanics' institutes, which began in the 1820s, were followed in 1854 by the first working men's college, which opened in London.",
+    "By 1850, roughly 700 mechanics' institutes, focused mainly on science and technical trade subjects, were operating across Britain.",
+    "Whereas mechanics' institutes concentrated mainly on science and technical trade subjects, working men's colleges also taught history, literature, and drawing.",
+    "Both mechanics' institutes and working men's colleges offered instruction to working people in Britain, with London hosting early examples of each."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 두 기관의 교과 내용을 대조하는 것이다. C는 기계공 강습소의 과학·기술 중심 교육과 노동자 대학의 역사·문학·미술 교육을 'Whereas'로 직접 대조하므로 정답이다. A는 두 기관을 언급하지만 교과가 아니라 설립 시기만 비교한다. B는 교과를 언급하지만 한 기관에 대해서만 말하므로 대조가 없다. D는 차이가 아니라 공통점을 강조한다.",
+   "explanationEn": "The goal is to contrast what was taught at the two types of institutions. C is correct because it uses \"Whereas\" to set the institutes' focus on science and technical subjects directly against the colleges' broader offerings of history, literature, and drawing. A mentions both institutions, but it compares when they were founded, not what they taught. B does mention subjects, but it covers only the mechanics' institutes, so there is no contrast. D points out what the two institutions had in common rather than how they differed.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 C는 'Whereas'로 두 기관의 교과를 직접 대조하며 노트 내용(과학·기술 vs 역사·문학·드로잉)과 일치. A는 두 기관 모두 언급하나 시기 비교, B는 교과 언급하나 한 기관만, D는 공통점 강조로 각각 부분적 근거가 있어 비교 배제가 필요함. 역사 사실(1823 런던 기계공 강습소, 1854 노동자 대학, ~700개)도 통설과 부합. 해설 한·영 모두 정답과 선택지 참조 일치, 영어 자연스러움. 'also taught'가 'alongside practical subjects' 의미를 담아 노트 정보 충실."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "정답 C는 노트 3·5를 정확히 대조함('also'는 노트 5의 alongside practical subjects와 일치). 오답 A(두 기관이지만 시기), B(교과지만 한 기관), D(두 기관이지만 공통점)가 각각 부분 근거를 지녀 medium에 적합. 다만 'Whereas' 신호어로 정답이 다소 쉽게 드러날 수 있음.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-309",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Engineers often protect buildings in earthquake zones with base isolation, which places flexible bearings between a building and its foundation.\n- In 2019, engineers in Chile retrofitted a 1920s hospital in Valparaíso by installing 84 rubber-and-lead bearings beneath it.\n- The bearings allow the ground to shift while the building above moves far less.\n- Another approach, tuned mass damping, uses a heavy weight near the top of a tall building that sways opposite to the structure's motion.\n- Taipei 101 in Taiwan uses a 660-metric-ton steel sphere suspended between its 87th and 92nd floors as a tuned mass damper.\n\nThe student wants to emphasize a difference in where the two earthquake-protection approaches place their key components. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Engineers often protect buildings in earthquake zones with base isolation, which places flexible bearings between a building and its foundation.\n- In 2019, engineers in Chile retrofitted a 1920s hospital in Valparaíso by installing 84 rubber-and-lead bearings beneath it.\n- The bearings allow the ground to shift while the building above moves far less.\n- Another approach, tuned mass damping, uses a heavy weight near the top of a tall building that sways opposite to the structure's motion.\n- Taipei 101 in Taiwan uses a 660-metric-ton steel sphere suspended between its 87th and 92nd floors as a tuned mass damper.",
+   "question": "The student wants to emphasize a difference in where the two earthquake-protection approaches place their key components. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Both base isolation and tuned mass damping are used to protect buildings, as shown by a hospital in Valparaíso, Chile, and by Taipei 101 in Taiwan.",
+    "Taipei 101's tuned mass damper, a 660-metric-ton steel sphere, sways opposite to the building's motion, while the Valparaíso hospital's bearings let the ground shift beneath it.",
+    "In 2019, engineers retrofitted a 1920s hospital in Valparaíso, Chile, with 84 rubber-and-lead bearings, an example of base isolation.",
+    "Whereas base isolation places flexible bearings between a building and its foundation, tuned mass damping relies on a heavy weight positioned near the top of a tall building."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 두 방식이 핵심 부품을 '어디에' 두는지의 차이를 강조하는 것이다. D는 base isolation은 건물과 기초 사이, tuned mass damping은 건물 상부라는 위치를 대조하므로 정답이다. A는 두 방식의 공통점(건물 보호)만 말할 뿐 위치 차이를 제시하지 않는다. B는 두 방식을 대조하지만 차이를 위치가 아닌 작동 방식(반대로 흔들림, 지면 이동)으로 설명한다. C는 한 가지 방식만 다루어 비교가 이루어지지 않는다.",
+   "explanationEn": "Your goal is to highlight a difference in where each approach puts its key components. D does this: it says base isolation puts bearings between a building and its foundation, while tuned mass damping puts a weight near the top of the building. A points out only what the two approaches have in common, which is that both protect buildings, and says nothing about location. B does contrast the approaches, but it compares how they work (swaying in the opposite direction vs. letting the ground shift), not where their parts are placed. C describes only one approach, so there is no comparison at all.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 두 방식의 핵심 부품 위치(건물-기초 사이 vs. 건물 상부)를 명시적으로 대조하므로 정답이 맞다. B는 두 방식을 대조하고 'beneath it'으로 위치를 부분적으로 암시하여 그럴듯한 오답이며, A는 공통점만, C는 한 방식만 제시해 배제된다. 해설(한·영) 모두 정답과 선택지 참조가 일치하고 영어 해설에 한글 없음. Taipei 101 댐퍼 수치(660톤, 87~92층)는 사실과 부합. 정답 문장이 노트 문구를 거의 그대로 결합해 다소 직접적이지만, 목표(위치 차이)와 B의 작동 방식 대조를 구별해야 하므로 medium에 부합한다."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "Taipei 101 정보(660톤, 87~92층)는 사실과 맞음. Valparaíso 병원 개보수 사례는 검증하기 어렵지만 학생 노트 형식이므로 허용 가능. B는 대조 구조이고 'beneath'라는 단어가 있어 그럴듯한 오답으로 작동함. D만 두 방식의 위치를 직접 대조함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-310",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The bombardier beetle (Brachinus crepitans) defends itself by spraying a hot chemical mixture at predators.\n- The beetle stores two chemicals, hydroquinones and hydrogen peroxide, in a reservoir inside its abdomen.\n- When threatened, it pushes these chemicals into a separate reaction chamber lined with enzymes.\n- The enzymes trigger a rapid reaction that heats the mixture to about 100°C (212°F).\n- The beetle releases the spray in rapid pulses of roughly 500 per second rather than as a continuous stream.\n- Researchers believe the pulsing allows fresh liquid to cool the chamber between bursts, protecting the beetle's own tissues from heat damage.\n\nThe student wants to explain how the bombardier beetle avoids being harmed by its own defensive spray. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The bombardier beetle (Brachinus crepitans) defends itself by spraying a hot chemical mixture at predators.\n- The beetle stores two chemicals, hydroquinones and hydrogen peroxide, in a reservoir inside its abdomen.\n- When threatened, it pushes these chemicals into a separate reaction chamber lined with enzymes.\n- The enzymes trigger a rapid reaction that heats the mixture to about 100°C (212°F).\n- The beetle releases the spray in rapid pulses of roughly 500 per second rather than as a continuous stream.\n- Researchers believe the pulsing allows fresh liquid to cool the chamber between bursts, protecting the beetle's own tissues from heat damage.",
+   "question": "The student wants to explain how the bombardier beetle avoids being harmed by its own defensive spray. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Although its spray reaches about 100°C, the bombardier beetle releases it in rapid pulses, which likely let fresh liquid cool the reaction chamber and keep the beetle's tissues from being damaged.",
+    "The bombardier beetle keeps hydroquinones and hydrogen peroxide in an abdominal reservoir and pushes them into a separate enzyme-lined chamber only when it is threatened.",
+    "When threatened by a predator, the bombardier beetle produces a chemical spray that enzymes heat to about 100°C, making it an effective defense.",
+    "The bombardier beetle releases its hot defensive spray in rapid pulses of roughly 500 per second rather than as a continuous stream."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 딱정벌레가 자신의 분사액에 어떻게 해를 입지 않는지 설명하는 것이므로, 고온이라는 위험과 박동식 분사가 반응실을 식혀 조직을 보호한다는 메커니즘을 연결해야 한다. A는 이 두 정보를 결합해 목표를 달성한다. B는 화학물질을 분리 저장한다는 사실만 전할 뿐, 그것이 자기 보호와 어떻게 이어지는지는 설명하지 않는다. C는 분사액이 포식자에게 효과적인 방어 수단이라는 점에 초점을 맞추어 자기 보호라는 목표에서 벗어난다. D는 박동식 분사를 언급하지만 그것이 냉각과 조직 보호로 이어진다는 핵심 연결이 빠져 있다.",
+   "explanationEn": "Your goal is to explain how the beetle keeps from being harmed by its own spray, so the answer needs to connect the danger (a spray at about 100°C) with the protective mechanism (pulses that let fresh liquid cool the chamber). Choice A makes that connection and accomplishes the goal. Choice B describes how the chemicals are stored separately but never explains how that protects the beetle. Choice C focuses on how well the spray works against predators, which is not the same as self-protection. Choice D mentions the pulses but leaves out the key link to cooling and tissue protection.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 100°C 고온(위험)과 500회/초 박동식 분사→냉각→조직 보호(메커니즘)를 결합해 목표를 정확히 달성하며, 'likely'는 노트의 'Researchers believe'와 부합. D는 박동식 분사만 언급(핵심 연결 누락), B는 분리 저장(자기 보호로 오해 가능하나 노트에 근거 없음)으로 비교가 필요한 부분 정답형 오답이고, C는 방어 효과에 초점으로 목표 이탈. 한·영 해설 결론·글자 참조 일치, 영어 자연스럽고 한글 없음. 폭탄먼지벌레 관련 사실 정확."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 박동을 언급하지만 냉각과의 연결이 빠진 그럴듯한 오답이고, B는 분리 저장이 보호와 관련 있는 것처럼 보이는 함정이라 medium 난이도에 적합하다. A만 유일하게 목표를 충족한다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-311",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Novelist Margarethe Ilsley published The Lantern House in 2016.\n- The novel imitates the style of nineteenth-century Gothic fiction, with long sentences, a decaying manor, and letters exchanged between characters.\n- Ilsley's earlier novel, Salt Roads (2009), was set in a contemporary city and written in short, plain sentences.\n- The Lantern House is narrated by a housekeeper who never reveals her name.\n- Salt Roads is narrated by a taxi driver who addresses readers directly by name in every chapter.\n\nThe student wants to contrast the narrators of the two novels. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Novelist Margarethe Ilsley published The Lantern House in 2016.\n- The novel imitates the style of nineteenth-century Gothic fiction, with long sentences, a decaying manor, and letters exchanged between characters.\n- Ilsley's earlier novel, Salt Roads (2009), was set in a contemporary city and written in short, plain sentences.\n- The Lantern House is narrated by a housekeeper who never reveals her name.\n- Salt Roads is narrated by a taxi driver who addresses readers directly by name in every chapter.",
+   "question": "The student wants to contrast the narrators of the two novels. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Unlike Salt Roads (2009), which uses short, plain sentences, Ilsley's The Lantern House (2016) imitates nineteenth-century Gothic fiction with long sentences and a decaying manor.",
+    "The Lantern House is narrated by a housekeeper who never reveals her name, whereas the taxi driver who narrates Salt Roads addresses readers directly by name in every chapter.",
+    "Both of Ilsley's novels use a single narrator: a housekeeper in The Lantern House and a taxi driver in Salt Roads.",
+    "Narrated by a nameless housekeeper, The Lantern House (2016) features letters exchanged between characters in the manner of nineteenth-century Gothic fiction."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 두 소설의 '화자'를 대조하는 것이다. B는 이름을 밝히지 않는 가정부 화자와 매 장 독자를 이름으로 직접 부르는 택시 기사 화자를 whereas로 대조하므로 정답이다. A는 두 소설을 대조하지만 화자가 아니라 문체·배경을 대조한다. C는 두 화자를 언급하지만 '공통점'을 강조하며 대조가 되지 않는다. D는 한 소설만 다루므로 대조가 성립하지 않는다.",
+   "explanationEn": "Your goal is to contrast the two novels' narrators. B does this: it sets the housekeeper who never reveals her name against the taxi driver who addresses readers by name, linked by \"whereas.\" A does contrast the two novels, but it compares style and setting, not narrators. C names both narrators but stresses what they share, so it isn't a contrast. D covers only The Lantern House, so there's nothing to contrast it with.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B만이 두 소설의 화자(이름을 밝히지 않는 가정부 vs 독자를 이름으로 부르는 택시 기사)를 'whereas'로 직접 대조하며 노트 내용과 일치. A는 대조 구조이나 문체·배경 대조(화자 아님), C는 두 화자를 언급하나 공통점 강조, D는 단일 소설만 다룸 — 오답 중 A·C가 부분적 근거를 가져 비교 판단이 필요하므로 medium 적합. 한국어·영어 해설 결론과 글자 참조 일치, 영어 해설에 한글 없음, 가상의 작가·작품으로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B의 대조축이 약간 비대칭이다(화자 자신의 이름을 숨김 vs 독자의 이름을 부름). 그래도 두 화자를 대조하므로 정답으로 인정된다. C의 'single narrator'는 메모에 명시되지 않은 내용이지만 오답이므로 문제없다. 오답 A·C·D가 각각 부분 근거(대조 구조, 두 화자 언급, 화자 언급)를 갖고 있어 medium 난이도에 맞는다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-313",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- In the nineteenth century, many European cities began installing public street lighting.\n- London adopted gas streetlamps on a large scale beginning in the 1810s; the lamps had to be lit by hand each evening by workers called lamplighters.\n- Paris, by contrast, introduced electric arc lamps along the Avenue de l'Opéra in 1878.\n- Electric arc lamps needed no nightly hand lighting and gave off a far brighter light than gas lamps.\n- Historians note that brighter, more reliable street lighting encouraged shops, cafés, and theaters to stay open later.\n\nThe student wants to emphasize a difference between the two lighting technologies. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- In the nineteenth century, many European cities began installing public street lighting.\n- London adopted gas streetlamps on a large scale beginning in the 1810s; the lamps had to be lit by hand each evening by workers called lamplighters.\n- Paris, by contrast, introduced electric arc lamps along the Avenue de l'Opéra in 1878.\n- Electric arc lamps needed no nightly hand lighting and gave off a far brighter light than gas lamps.\n- Historians note that brighter, more reliable street lighting encouraged shops, cafés, and theaters to stay open later.",
+   "question": "The student wants to emphasize a difference between the two lighting technologies. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "London adopted gas streetlamps beginning in the 1810s, while Paris introduced electric arc lamps along the Avenue de l'Opéra in 1878.",
+    "Both London's gas lamps and Paris's electric arc lamps were part of a nineteenth-century movement to install public street lighting in European cities.",
+    "Brighter, more reliable street lighting, such as the electric arc lamps introduced in Paris in 1878, encouraged shops, cafés, and theaters to stay open later.",
+    "Whereas gas streetlamps had to be lit by hand each evening by lamplighters, electric arc lamps required no nightly hand lighting and shone far more brightly."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 두 조명 기술 자체의 차이를 강조하는 것이다. D는 가스등은 매일 저녁 손으로 켜야 했지만 전기 아크등은 그럴 필요가 없고 훨씬 밝았다는 점을 대조해 기술 간 차이를 직접 보여준다. A는 대조 형식을 갖추었지만 기술의 차이가 아니라 도입 도시와 시기의 차이만 말한다. B는 차이가 아니라 두 기술의 공통점을 강조한다. C는 밝은 조명이 상업에 미친 영향을 설명할 뿐 두 기술을 비교하지 않는다.",
+   "explanationEn": "Your goal is to emphasize a difference between the two lighting technologies themselves. D does this directly: it contrasts gas lamps, which had to be lit by hand every evening, with electric arc lamps, which needed no hand lighting and were much brighter. A is set up as a contrast, but it contrasts the cities and dates of adoption, not how the technologies work. B points out what the two have in common rather than how they differ. C describes how bright lighting affected businesses, but it never compares the two technologies.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검산 완료: 노트 2·4의 내용을 결합해 두 기술의 작동상 차이(수동 점등 vs 불필요, 밝기)를 직접 대조함. A는 대조 구조를 갖추었으나 도시·시기 차이만 제시해 유력한 오답 역할을 하고, C는 노트 정보를 정확히 쓰되 비교가 없으며, B는 공통점 서술로 말이 되는 오답. 두 단계 판단(과제 식별 + '기술의 차이'와 '도시의 차이' 구분)을 요구하므로 medium 적합. 사실 관계(런던 1810년대 가스등, 파리 1878년 오페라 거리 아크등) 역사적으로 타당. 한국어·영어 해설 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 대조 구조를 갖추고 있어 매력적인 오답이다. C는 아크등을 언급하지만 비교하지 않는다. 표준 medium 수준이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-314",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The Falkirk Wheel, opened in Scotland in 2002, is a rotating boat lift that connects two canals.\n- It lifts boats 24 meters, replacing a flight of 11 locks that once took most of a day to pass through.\n- The wheel's two water-filled gondolas always balance each other, because a boat entering a gondola displaces its own weight in water.\n- Because of this balance, turning the wheel requires only about 1.5 kilowatt-hours of electricity per half rotation.\n- A half rotation takes about four minutes.\n\nThe student wants to explain why the Falkirk Wheel uses so little energy. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The Falkirk Wheel, opened in Scotland in 2002, is a rotating boat lift that connects two canals.\n- It lifts boats 24 meters, replacing a flight of 11 locks that once took most of a day to pass through.\n- The wheel's two water-filled gondolas always balance each other, because a boat entering a gondola displaces its own weight in water.\n- Because of this balance, turning the wheel requires only about 1.5 kilowatt-hours of electricity per half rotation.\n- A half rotation takes about four minutes.",
+   "question": "The student wants to explain why the Falkirk Wheel uses so little energy. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Since a boat displaces its own weight in water, the Falkirk Wheel's two gondolas stay balanced, so a half rotation needs only about 1.5 kilowatt-hours of electricity.",
+    "The Falkirk Wheel needs only about 1.5 kilowatt-hours of electricity per half rotation, which takes about four minutes.",
+    "Opened in 2002, the Falkirk Wheel lifts boats 24 meters, replacing a flight of 11 locks that once took most of a day to pass through.",
+    "The Falkirk Wheel's two gondolas balance each other, allowing it to lift boats 24 meters in about four minutes rather than most of a day."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 휠이 에너지를 적게 쓰는 '이유'를 설명하는 것이다. A는 배가 자기 무게만큼 물을 밀어내 곤돌라가 균형을 이룬다는 원인과 1.5kWh라는 결과를 연결하므로 정답이다. B는 적은 에너지 사용량은 제시하지만 그 이유를 설명하지 않는다. C는 개통 연도와 수문 대체 사실만 다루어 에너지와 무관하다. D는 균형을 언급하지만 이를 에너지가 아닌 속도와 연결해 목표에서 벗어난다.",
+   "explanationEn": "Your goal is to explain why the wheel uses so little energy, so you need both a cause and the low-energy result. A links the cause (a boat displaces its own weight in water, keeping the gondolas balanced) to the result (only about 1.5 kilowatt-hours per half rotation), so A is correct. B states the low energy figure but never explains the reason for it. C covers the opening date and the replaced locks, which have nothing to do with energy. D mentions the balance but ties it to speed rather than energy use, so it misses the goal.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "A는 원인(배가 자기 무게만큼 물을 밀어냄→곤돌라 균형)과 결과(반회전당 약 1.5kWh)를 명시적으로 연결해 '이유 설명' 목표를 충족한다. B는 에너지 수치만, D는 균형을 속도와 연결, C는 무관하여 각각 부분적 근거를 지니면서 배제된다. 팔커크 휠 관련 사실(2002년 개통, 24m, 11개 수문 대체, 반회전당 약 1.5kWh, 약 4분)은 공개된 정보와 부합한다. 한·영 해설 모두 정답 및 선택지 참조가 일치하며 영어 해설에 한글 없음. 중간 난이도 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "B(결과만 있음)와 D(균형을 속도와 연결)는 부분적으로 맞는 근거가 있는 매력적인 오답이고, C는 약하지만 말은 된다. 사실관계(24m, 11개 수문, 2002년, 1.5kWh)는 공개 자료와 일치한다. D는 노트에 없는 인과(균형→속도)를 만들어 내지만 오답이므로 문제없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-315",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The bombardier beetle (Brachinus) defends itself by spraying a hot chemical mixture at attackers.\n- The beetle stores two harmless chemicals, hydroquinone and hydrogen peroxide, in a reservoir in its abdomen.\n- When threatened, it pushes these chemicals into a separate reaction chamber lined with enzymes.\n- The enzymes trigger a rapid reaction that heats the mixture to about 100°C (212°F).\n- The spray comes out in up to 500 pulses per second, and the beetle can aim it in nearly any direction.\n\nThe student wants to explain how the bombardier beetle produces its spray without harming itself. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The bombardier beetle (Brachinus) defends itself by spraying a hot chemical mixture at attackers.\n- The beetle stores two harmless chemicals, hydroquinone and hydrogen peroxide, in a reservoir in its abdomen.\n- When threatened, it pushes these chemicals into a separate reaction chamber lined with enzymes.\n- The enzymes trigger a rapid reaction that heats the mixture to about 100°C (212°F).\n- The spray comes out in up to 500 pulses per second, and the beetle can aim it in nearly any direction.",
+   "question": "The student wants to explain how the bombardier beetle produces its spray without harming itself. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "The bombardier beetle sprays a chemical mixture that reaches about 100°C, firing it in up to 500 pulses per second at attackers.",
+    "The bombardier beetle keeps two harmless chemicals in an abdominal reservoir and mixes them with enzymes only in a separate chamber when threatened, where they react and heat up to about 100°C.",
+    "When threatened, the bombardier beetle can aim its hot chemical spray in nearly any direction, making it an effective defense against attackers.",
+    "The bombardier beetle stores hydroquinone and hydrogen peroxide in its abdomen, and its spray is released in rapid pulses of up to 500 per second."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 딱정벌레가 스스로 다치지 않고 분사액을 만드는 방식을 설명하는 것이다. B는 무해한 화학물질을 저장소에 따로 두었다가 위협받을 때만 별도의 반응실에서 효소와 섞는다는 점을 연결해, 뜨거운 반응이 저장소와 떨어진 곳에서 일어난다는 것을 보여 준다. A는 온도와 분사 속도를 정확히 전하지만 자기 보호 방식은 설명하지 않는다. C는 조준 능력과 방어 효과만 강조한다. D는 저장되는 화학물질을 언급하지만 별도의 반응실과 효소 반응을 빠뜨려 왜 해가 없는지 설명하지 못한다.",
+   "explanationEn": "Your goal is to explain how the beetle makes its spray without hurting itself. B connects two notes: the beetle stores harmless chemicals in a reservoir, and it mixes them with enzymes only in a separate chamber when threatened. That shows the hot reaction happens away from where the chemicals are stored. A gives the temperature and pulse rate correctly, but it says nothing about how the beetle protects itself. C focuses only on aiming and how well the defense works. D names the stored chemicals but leaves out the separate chamber and the enzyme reaction, so it doesn't explain why the beetle stays safe.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검증 완료: 목표(자신을 해치지 않고 분사액 생성)에 맞게 '무해한 화학물질을 저장소에 보관' + '별도 반응실에서 효소와 반응' 두 노트를 연결한 유일한 선택지. A(온도·펄스), D(저장 물질·펄스)는 노트 사실을 정확히 담아 부분적 근거를 가지나 분리 저장·별도 반응실 메커니즘이 빠져 배제되고, C는 조준·방어 효과만 다루어 말이 되지만 목표와 어긋남. 과학적 사실(하이드로퀴논+과산화수소, ~100°C, 최대 500펄스/초, Brachinus) 정확. 한국어·영어 해설 모두 B를 일관되게 뒷받침하며 선택지 참조 일치, 영어 자연스럽고 한글 없음. 형식 적합, 저작권 의심 없음. 두 노트 연결 + 목표 대조 필요로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답 B만 '무해한 화학물질 저장 + 별도 반응실'을 포함하고 자기 보호 메커니즘을 드러냄. 오답 A·C는 자기 보호와 무관함이 즉시 보이고, D만 부분적 근거(저장)를 가짐. 오답 3개 중 최소 2개는 부분적으로 맞는 근거를 가져야 한다는 기준에 못 미쳐 훑어 읽어도 정답 도출 가능함. 또한 B만 유독 길어 길이 단서가 있음. 사실관계(하이드로퀴논·과산화수소, 약 100°C, 초당 약 500회 펄스)는 문헌과 부합함.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-317",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Lake Balkhash, in eastern Kazakhstan, stretches about 600 kilometers from west to east.\n- A narrow strait divides the lake into a western half and an eastern half.\n- The western half is fed mainly by the Ili River, which carries fresh water from mountains in China.\n- The western half's water is nearly fresh and is used for drinking by nearby communities.\n- The eastern half receives little river inflow, and its water is salty.\n- Scientists attribute the salinity difference to how little water flows through the narrow strait between the two halves.\n\nThe student wants to contrast the water in the two halves of Lake Balkhash. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Lake Balkhash, in eastern Kazakhstan, stretches about 600 kilometers from west to east.\n- A narrow strait divides the lake into a western half and an eastern half.\n- The western half is fed mainly by the Ili River, which carries fresh water from mountains in China.\n- The western half's water is nearly fresh and is used for drinking by nearby communities.\n- The eastern half receives little river inflow, and its water is salty.\n- Scientists attribute the salinity difference to how little water flows through the narrow strait between the two halves.",
+   "question": "The student wants to contrast the water in the two halves of Lake Balkhash. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Lake Balkhash, which stretches about 600 kilometers across eastern Kazakhstan, is divided by a narrow strait into a western half and an eastern half.",
+    "The western half of Lake Balkhash is fed mainly by the Ili River, which carries fresh water from mountains in China, and nearby communities use it for drinking.",
+    "Scientists attribute differences within Lake Balkhash to how little water flows through the narrow strait that divides the lake into two halves.",
+    "Although the western half of Lake Balkhash is nearly fresh, the eastern half, which receives little river inflow, holds salty water."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 호수 두 부분의 물을 대조하는 것이므로 서쪽(거의 담수)과 동쪽(염수)을 함께 제시해야 한다. D는 'Although'로 두 부분의 물 성질을 직접 대조하므로 정답이다. A는 호수가 두 부분으로 나뉜다는 사실만 말하고 물의 차이는 언급하지 않는다. B는 서쪽 절반의 물만 설명해 대조가 없다. C는 차이의 원인을 말하지만 각 절반의 물이 어떻게 다른지는 밝히지 않는다.",
+   "explanationEn": "Your goal is to contrast the water in the two halves, so the sentence needs to describe both halves and show how they differ. D does this: it uses \"Although\" to set the nearly fresh western half against the salty eastern half. A only says the lake is divided into two halves and never mentions how their water differs. B describes only the western half, so nothing is being contrasted. C explains why there is a difference but never says what the difference is (fresh water versus salty water).",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 'Although'로 서쪽(거의 담수)과 동쪽(염수)의 물을 직접 대조하여 목표를 충족. A는 지리적 구분만, B는 서쪽만, C는 원인만 제시해 대조 불성립. 한국어·영어 해설 모두 정답과 선택지 참조 일치, 모순 없음. 발하슈호 사실관계(길이 약 600km, 일리강 유입, 서쪽 담수/동쪽 염수, 좁은 해협) 정확. C가 '차이·해협'을 언급해 그럴듯하고 B도 '담수'를 포함해 부분적 근거가 있어 medium에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D는 'western half is nearly fresh'로 호수 절반 자체를 fresh라고 표현해 다소 어색하지만(물이 담수) 수용 가능. 오답 A·C는 두 절반/차이를 언급해 부분적 매력이 있고 B는 한쪽만 다뤄 표준 medium에 부합.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-319",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Lift bridges allow ships to pass beneath them by raising a movable section of roadway.\n- In a vertical-lift bridge, the movable span stays level and rises straight up between two towers.\n- The Aerial Lift Bridge in Duluth, Minnesota, completed in its current form in 1929, is a vertical-lift bridge whose span rises about 135 feet.\n- In a bascule bridge, the movable span pivots upward at one end, tilting like a seesaw.\n- Chicago's DuSable Bridge, opened in 1920, is a bascule bridge whose two leaves tilt up from the riverbanks.\n\nThe student wants to emphasize a difference in how the movable spans of the two bridges operate. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Lift bridges allow ships to pass beneath them by raising a movable section of roadway.\n- In a vertical-lift bridge, the movable span stays level and rises straight up between two towers.\n- The Aerial Lift Bridge in Duluth, Minnesota, completed in its current form in 1929, is a vertical-lift bridge whose span rises about 135 feet.\n- In a bascule bridge, the movable span pivots upward at one end, tilting like a seesaw.\n- Chicago's DuSable Bridge, opened in 1920, is a bascule bridge whose two leaves tilt up from the riverbanks.",
+   "question": "The student wants to emphasize a difference in how the movable spans of the two bridges operate. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "The Aerial Lift Bridge in Duluth was completed in its current form in 1929, nine years after Chicago's DuSable Bridge opened in 1920.",
+    "Whereas the span of Duluth's Aerial Lift Bridge stays level as it rises straight up between two towers, the leaves of Chicago's DuSable Bridge tilt upward from the riverbanks.",
+    "Both Duluth's Aerial Lift Bridge and Chicago's DuSable Bridge allow ships to pass beneath them by raising a movable section of roadway.",
+    "Chicago's DuSable Bridge is a bascule bridge, a type in which the movable span pivots upward at one end, tilting like a seesaw."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 두 다리의 가동 구간이 작동하는 방식의 '차이'를 강조하는 것이다. B는 Duluth 다리의 구간은 수평을 유지한 채 곧게 올라가고 DuSable 다리는 기울어 올라간다는 점을 대조하므로 정답이다. A는 두 다리를 대조하지만 작동 방식이 아니라 완공 연도의 차이를 다룬다. C는 차이가 아닌 공통점을 강조한다. D는 작동 방식을 정확히 설명하지만 한 다리만 다루어 차이를 보여 주지 못한다.",
+   "explanationEn": "The goal is to emphasize a difference in how the two bridges' movable spans operate. B contrasts the Duluth span, which stays level and rises straight up, with the DuSable leaves, which tilt upward, so it is correct. A does compare the two bridges, but the difference it points out is their completion dates, not how they operate. C emphasizes something the bridges have in common rather than a difference. D accurately describes how a span works, but it covers only one bridge, so it doesn't show a contrast.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B만이 두 다리의 가동 구간 작동 방식(수평 상승 vs. 기울어짐)을 대조함. A는 두 다리 대조이나 연도 차이, D는 작동 방식이나 한 다리만, C는 공통점 — 각 오답이 목표의 일부 요소를 충족해 비교가 필요한 medium 구조. 노트 사실(Aerial Lift Bridge 1929 수직 승강 개조·약 135ft, DuSable 1920 이중 leaf 바스큘)도 정확. 한·영 해설 모두 정답 및 선택지 참조 일치."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "표준 SAT 형식이다. A는 대조(차이)라는 근거, C는 작동 방식이라는 근거, D는 작동 방식의 정확성이라는 근거를 부분적으로 갖추고 있어 medium 난이도에 맞다. 팩트도 확인했다: Aerial Lift Bridge는 1929년 개축, 약 135ft 상승이고 DuSable Bridge는 1920년 개통이다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-320",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The Pacific tree frog (Pseudacris regilla) and the California red-legged frog (Rana draytonii) both breed in ponds in coastal California.\n- Pacific tree frog tadpoles complete metamorphosis in about 2 to 3 months.\n- California red-legged frog tadpoles typically need 4 to 7 months to complete metamorphosis.\n- Many coastal ponds dry out by late summer.\n- Because of its shorter development time, the Pacific tree frog can successfully breed in ponds that hold water only briefly, whereas the red-legged frog generally requires ponds that stay wet longer.\n\nThe student wants to explain why the two frog species differ in the kinds of ponds where they can successfully breed. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The Pacific tree frog (Pseudacris regilla) and the California red-legged frog (Rana draytonii) both breed in ponds in coastal California.\n- Pacific tree frog tadpoles complete metamorphosis in about 2 to 3 months.\n- California red-legged frog tadpoles typically need 4 to 7 months to complete metamorphosis.\n- Many coastal ponds dry out by late summer.\n- Because of its shorter development time, the Pacific tree frog can successfully breed in ponds that hold water only briefly, whereas the red-legged frog generally requires ponds that stay wet longer.",
+   "question": "The student wants to explain why the two frog species differ in the kinds of ponds where they can successfully breed. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Both the Pacific tree frog and the California red-legged frog breed in coastal California ponds, many of which dry out by late summer.",
+    "California red-legged frog tadpoles typically need 4 to 7 months to complete metamorphosis, whereas Pacific tree frog tadpoles need only about 2 to 3 months.",
+    "Because Pacific tree frog tadpoles metamorphose in just 2 to 3 months, the species can breed in briefly filled ponds, while the red-legged frog, whose tadpoles need 4 to 7 months, generally requires ponds that stay wet longer.",
+    "Many coastal ponds dry out by late summer, which can prevent California red-legged frog tadpoles from completing metamorphosis."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 두 종이 번식할 수 있는 연못 유형이 '왜' 다른지 설명하는 것이므로, 발생 기간 차이(원인)와 연못 유형 차이(결과)를 함께 연결해야 한다. C는 두 종의 변태 기간을 대비하고 그것을 각각 필요한 연못 유형과 연결하므로 정답이다. A는 두 종의 공통점과 연못 건조만 말할 뿐 종 간 차이를 설명하지 않는다. B는 발생 기간 차이를 정확히 대비하지만 연못 유형과의 연결이 없어 '왜 번식지가 다른지'를 설명하지 못한다. D는 한 종에만 초점을 맞춰 두 종의 차이를 설명하지 못한다.",
+   "explanationEn": "The goal is to explain why the two species differ in where they can breed, so you need to link the cause (development time) to the result (pond type) for both species. C does this by contrasting the metamorphosis times and connecting each to the kind of pond the species requires, so it is correct. A only states what the species share and that ponds dry out, without explaining any difference. B accurately contrasts development times but never connects them to pond types, so it doesn't explain the breeding difference. D focuses on just one species, so it doesn't explain how the two differ.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "정답 C는 원인(변태 기간 차이)과 결과(연못 유형 차이)를 두 종 모두에 대해 연결하여 목표를 충족. B(원인만), D(한 종만)는 부분적으로 타당한 오답이며 A도 노트 기반으로 말이 됨. 한국어·영어 해설 결론 및 글자 참조 일치, 사실 오류 없음. 표준 SAT 수사적 종합 형식에 부합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B와 D가 부분적 근거를 가진 매력적 오답이라 medium 수준에 맞음. 정답 C가 가장 길고 마지막 노트를 거의 그대로 옮긴 형태라 다소 쉬울 수 있지만 허용 범위임. 변태 기간 수치도 대체로 사실에 부합함.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-321",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Contemporary novelist Ilse Marwood writes fiction set in the present day but styled after nineteenth-century novels.\n- Her 2019 novel The Lamplighter's Ledger follows a bookkeeper in modern Leeds and uses long chapters, an intrusive omniscient narrator, and chapter titles such as \"In Which Our Heroine Balances an Account.\"\n- Her 2023 novel Salt and Sufferance follows a ferry captain in modern Cornwall and uses the same omniscient narrator and descriptive chapter titles.\n- The Lamplighter's Ledger was first released in weekly online installments, imitating the serial publication of Victorian novels.\n- Salt and Sufferance was released as a single complete volume.\n\nThe student wants to emphasize a difference between the two novels. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Contemporary novelist Ilse Marwood writes fiction set in the present day but styled after nineteenth-century novels.\n- Her 2019 novel The Lamplighter's Ledger follows a bookkeeper in modern Leeds and uses long chapters, an intrusive omniscient narrator, and chapter titles such as \"In Which Our Heroine Balances an Account.\"\n- Her 2023 novel Salt and Sufferance follows a ferry captain in modern Cornwall and uses the same omniscient narrator and descriptive chapter titles.\n- The Lamplighter's Ledger was first released in weekly online installments, imitating the serial publication of Victorian novels.\n- Salt and Sufferance was released as a single complete volume.",
+   "question": "The student wants to emphasize a difference between the two novels. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Both The Lamplighter's Ledger and Salt and Sufferance, novels by Ilse Marwood, rely on an intrusive omniscient narrator and descriptive chapter titles.",
+    "Ilse Marwood's The Lamplighter's Ledger, released in weekly online installments, imitates the serial publication of Victorian novels.",
+    "Although Ilse Marwood's novels are set in the present day, works such as Salt and Sufferance, about a ferry captain in Cornwall, are styled after nineteenth-century fiction.",
+    "Whereas Ilse Marwood's The Lamplighter's Ledger first appeared in weekly online installments, her Salt and Sufferance was released as a single complete volume."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 두 소설의 '차이'를 강조하는 것이다. D는 The Lamplighter's Ledger의 주간 연재 방식과 Salt and Sufferance의 단행본 출간을 'Whereas'로 대조하므로 목표를 달성한다. A는 두 작품의 공통점을 말할 뿐 차이를 보여 주지 않는다. B는 한 작품의 출판 방식만 언급해 비교 대상이 빠져 있다. C는 현대 배경과 19세기 문체라는 작가의 전반적 특징을 대조할 뿐, 두 소설 사이의 차이는 아니다.",
+   "explanationEn": "Your goal is to emphasize a difference between the two novels. D does this by contrasting the weekly online installments of The Lamplighter's Ledger with the single-volume release of Salt and Sufferance, linked by \"Whereas.\" A describes features the novels share, so it shows a similarity instead of a difference. B mentions the publication method of only one novel, so there is nothing to compare it with. C contrasts the present-day settings with the nineteenth-century style, but that describes Marwood's work in general, not a difference between the two novels.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 D 검산 완료: 노트의 두 출판 방식을 'Whereas'로 대조해 두 소설 간 차이를 정확히 강조. A는 공통점(합리적 오답), B는 한 작품만 언급(부분적 근거), C는 작가 전반의 대조로 두 소설 간 차이가 아님(부분적 근거). 해설 한/영 모두 일치하고 영어 자연스러움. 가상 작가·작품으로 저작권 문제 없음. 표준 SAT medium 수준에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B는 차이의 한쪽 정보만 담고 있고 C는 'Although'로 대조하지만 작가 전체에 대한 대조라서 둘 다 그럴듯한 오답이다. 정답 D만 두 소설을 직접 대조한다. 표준 SAT 중간 난이도에 맞다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-322",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Lake Chad is a freshwater lake located where Chad, Cameroon, Niger, and Nigeria meet.\n- In the 1960s, the lake covered roughly 25,000 square kilometers.\n- By the late 1980s, its surface area had shrunk to about 1,350 square kilometers.\n- Researchers attribute the decline to prolonged drought and increased irrigation withdrawals.\n- Lake Baikal, in Siberia, holds about 20 percent of Earth's unfrozen surface fresh water.\n- Unlike Lake Chad, Lake Baikal has remained relatively stable in volume over the same period.\n\nThe student wants to emphasize the scale of Lake Chad's change over time. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Lake Chad is a freshwater lake located where Chad, Cameroon, Niger, and Nigeria meet.\n- In the 1960s, the lake covered roughly 25,000 square kilometers.\n- By the late 1980s, its surface area had shrunk to about 1,350 square kilometers.\n- Researchers attribute the decline to prolonged drought and increased irrigation withdrawals.\n- Lake Baikal, in Siberia, holds about 20 percent of Earth's unfrozen surface fresh water.\n- Unlike Lake Chad, Lake Baikal has remained relatively stable in volume over the same period.",
+   "question": "The student wants to emphasize the scale of Lake Chad's change over time. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Lake Chad, which covered roughly 25,000 square kilometers in the 1960s, had shrunk to about 1,350 square kilometers by the late 1980s.",
+    "Lake Chad has declined in size due to prolonged drought and increased irrigation withdrawals, according to researchers.",
+    "While Lake Chad's surface area changed dramatically after the 1960s, Lake Baikal remained relatively stable in volume.",
+    "Located where Chad, Cameroon, Niger, and Nigeria meet, Lake Chad covered roughly 25,000 square kilometers in the 1960s."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 차드호 변화의 '규모'를 강조하는 것이므로 두 시점의 면적(약 25,000㎢→약 1,350㎢)을 함께 제시해야 한다. A는 두 수치를 결합해 급격한 감소 폭을 분명히 보여준다. B는 감소의 원인을 설명할 뿐 얼마나 줄었는지 규모를 제시하지 않는다. C는 바이칼호와의 대조에 초점을 두며 '극적으로'라고만 할 뿐 구체적 규모가 없다. D는 1960년대 면적 하나만 있어 변화 자체가 드러나지 않는다.",
+   "explanationEn": "Your goal is to emphasize the scale of Lake Chad's change, so you need both the earlier and later surface areas (about 25,000 km² and about 1,350 km²). A combines these two figures, making the size of the drop clear. B explains why the lake shrank but never shows how much it shrank. C focuses on a contrast with Lake Baikal and only calls the change \"dramatic\" without giving its scale. D gives just the 1960s area, so no change over time is shown at all.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A는 두 시점 수치를 결합해 변화 규모를 직접 보여주며 유일하게 목표를 충족. B(원인), C(바이칼호 대조, '극적으로'라는 표현으로 부분적 근거 보유), D(단일 시점 수치)는 각각 노트 정보를 사용하지만 규모를 보여주지 못함. 해설 한·영 일치, 선택지 참조 정확. 노트의 사실(차드호 1960년대 약 25,000㎢→1980년대 약 1,350㎢, 바이칼호 약 20% 담수)은 통상 인용되는 수치와 부합. 표준 SAT 수사적 종합 문항 중간 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "too_easy",
+     "eliminated:2"
+    ],
+    "note": "정답만 두 수치를 모두 담고 있고, 오답은 원인(B), 다른 호수와의 대조(C), 수치 하나만 제시(D)여서 훑어 읽어도 쉽게 배제된다. C 정도만 그럴듯한 오답이다. 쉬운 수준(easy)에 가깝다. 사실 관계: 1960년대 약 25,000㎢, 1980년대 후반 약 1,350㎢는 흔히 인용되는 수치와 대체로 맞는다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-324",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Engineers in the Netherlands built the Maeslantkering, a storm-surge barrier near Rotterdam, between 1991 and 1997.\n- The barrier consists of two hinged gates, each about 210 meters long, that normally rest in dry docks along the banks of the waterway.\n- When a dangerous storm surge is forecast, the dry docks are flooded and the gates float out and swing shut across the channel.\n- Because the gates stay out of the water most of the time, large cargo ships can pass freely to and from the Port of Rotterdam.\n- By contrast, the Thames Barrier in London, completed in 1982, uses rotating steel gates that lie on the riverbed when open.\n\nThe student wants to explain how the Maeslantkering's design allows it to protect against floods without blocking shipping traffic. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Engineers in the Netherlands built the Maeslantkering, a storm-surge barrier near Rotterdam, between 1991 and 1997.\n- The barrier consists of two hinged gates, each about 210 meters long, that normally rest in dry docks along the banks of the waterway.\n- When a dangerous storm surge is forecast, the dry docks are flooded and the gates float out and swing shut across the channel.\n- Because the gates stay out of the water most of the time, large cargo ships can pass freely to and from the Port of Rotterdam.\n- By contrast, the Thames Barrier in London, completed in 1982, uses rotating steel gates that lie on the riverbed when open.",
+   "question": "The student wants to explain how the Maeslantkering's design allows it to protect against floods without blocking shipping traffic. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Built between 1991 and 1997 near Rotterdam, the Maeslantkering consists of two hinged gates, each about 210 meters long.",
+    "Unlike the Thames Barrier, whose rotating steel gates lie on the riverbed when open, the Maeslantkering has two hinged gates that rest in dry docks.",
+    "The Maeslantkering's two gates rest in dry docks beside the waterway, leaving the channel open for cargo ships, but they float out and swing shut when a dangerous storm surge is forecast.",
+    "When a dangerous storm surge is forecast, the dry docks of the Maeslantkering are flooded so that its two 210-meter gates can float out across the channel."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 설계가 홍수 방어와 선박 통행을 동시에 가능하게 하는 방식을 설명하는 것이므로, 평소 도크에 있어 수로가 열려 있다는 점과 폭풍 해일 때 닫힌다는 점을 모두 담아야 한다. C가 이 두 측면을 연결하므로 정답이다. A는 건설 시기와 수문 크기만 제시할 뿐 작동 방식이나 선박 통행을 다루지 않는다. B는 템스 배리어와 비교하는 데 초점을 두어 선박 통행과 홍수 방어의 관계를 설명하지 못한다. D는 홍수 방어 작동 과정은 설명하지만 선박 통행을 막지 않는다는 점이 빠져 있다.",
+   "explanationEn": "Your goal is to explain how the design both protects against floods and keeps shipping open, so the sentence needs both halves: the gates rest out of the channel normally, and they close during surges. C connects these two ideas, so it is correct. A gives only construction dates and gate size and says nothing about how the barrier works or about shipping. B focuses on a comparison with the Thames Barrier and doesn't explain the link between flood protection and ship traffic. D describes the closing process but leaves out the point that ships can pass freely the rest of the time.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C는 '평소 도크에 있어 수로 개방'과 '해일 시 폐쇄'를 모두 연결해 목표를 충족. D는 작동 과정만, B는 비교만, A는 건설 정보만 다루어 배제됨. 노트 사실(1991–1997, 210m, 템스 배리어 1982, 회전식 수문) 정확. 한·영 해설 결론·글자 참조 일치, 영어 자연스러움. D·B가 부분적 근거를 가져 비교가 필요하므로 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B와 D가 각각 부분적 근거(도크 보관, 해일 시 작동)를 가져 비교가 필요함. 사실관계(1991–1997, 약 210m, 템스 배리어 1982)도 맞음. 형식 적합.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-325",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- The Pacific tree frog (Pseudacris regilla) and the American bullfrog (Lithobates catesbeianus) both breed in ponds in western North America.\n- Pacific tree frog tadpoles complete metamorphosis in about two to three months.\n- Bullfrog tadpoles often remain in the water for one to three years before metamorphosing.\n- Because of this, Pacific tree frogs can breed successfully in temporary ponds that dry up by late summer.\n- Bullfrogs generally require permanent ponds that hold water year-round.\n\nThe student wants to explain why the two frog species differ in the kinds of ponds they can use for breeding. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- The Pacific tree frog (Pseudacris regilla) and the American bullfrog (Lithobates catesbeianus) both breed in ponds in western North America.\n- Pacific tree frog tadpoles complete metamorphosis in about two to three months.\n- Bullfrog tadpoles often remain in the water for one to three years before metamorphosing.\n- Because of this, Pacific tree frogs can breed successfully in temporary ponds that dry up by late summer.\n- Bullfrogs generally require permanent ponds that hold water year-round.",
+   "question": "The student wants to explain why the two frog species differ in the kinds of ponds they can use for breeding. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Both the Pacific tree frog and the American bullfrog breed in ponds in western North America, though bullfrogs generally require permanent ponds.",
+    "Pacific tree frog tadpoles metamorphose in about two to three months, while bullfrog tadpoles often remain in the water for one to three years.",
+    "Pacific tree frogs can breed successfully in temporary ponds that dry up by late summer, whereas bullfrogs generally require permanent ponds that hold water year-round.",
+    "Because Pacific tree frog tadpoles metamorphose within a few months, the species can breed in ponds that dry up by late summer, whereas bullfrogs, whose tadpoles may stay aquatic for years, need ponds that hold water year-round."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 두 종이 이용하는 연못 종류가 '왜' 다른지 설명하는 것이므로, 원인(올챙이 발달 기간)과 결과(연못 종류)를 연결해야 한다. D는 짧은 변태 기간→일시적 연못 가능, 긴 수중 기간→영구 연못 필요라는 인과를 두 종 모두에 대해 제시한다. A는 공통 서식지와 한 종의 요구 조건만 말할 뿐 이유가 없다. B는 원인(발달 기간)만 대조하고 연못 종류와 연결하지 않는다. C는 결과(연못 종류 차이)만 대조하고 그 이유를 빠뜨린다.",
+   "explanationEn": "Your goal is to explain why the species differ in pond use, so the sentence must link a cause (tadpole development time) to an effect (pond type). D does exactly this for both species: quick metamorphosis allows use of ponds that dry up, while years-long tadpole stages require year-round water. A mentions the shared region and one species' requirement but gives no reason. B contrasts development times (the cause) without connecting them to pond type. C contrasts pond types (the effect) but leaves out the reason behind the difference.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "D is the only choice that connects cause (tadpole development duration) to effect (pond type) for both species, directly fulfilling the 'explain why' goal. B (cause only) and C (effect only) are strong partial distractors requiring comparison; A is plausible but weakest. Content matches the notes; biological facts are accurate. Korean and English explanations are consistent and correctly reference choice letters. Standard SAT format, no copyright concerns. Medium difficulty is appropriate."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "B(원인만)와 C(결과만)가 각각 부분적으로 맞는 근거를 갖는 전형적인 medium 구성. D만 인과를 연결한다. 정답이 유일하게 가장 길어서 길이로 찍을 수 있다는 점은 사소한 약점이다. 생물학적 사실(변태 기간)은 대체로 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-326",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Novelist Maren Holloway published The Lantern at Greywick in 2016.\n- The novel is set in a fictional English mill town in 1847 and is narrated in long, formal sentences modeled on Victorian prose.\n- Holloway's earlier novel, Static Season (2011), is set in present-day Chicago and told in brief, fragmented text messages.\n- Both novels center on a young woman who secretly keeps a record of her neighbors' lives.\n- Reviewers praised The Lantern at Greywick for its convincing imitation of nineteenth-century style.\n\nThe student wants to emphasize a difference in narrative style between Holloway's two novels. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Novelist Maren Holloway published The Lantern at Greywick in 2016.\n- The novel is set in a fictional English mill town in 1847 and is narrated in long, formal sentences modeled on Victorian prose.\n- Holloway's earlier novel, Static Season (2011), is set in present-day Chicago and told in brief, fragmented text messages.\n- Both novels center on a young woman who secretly keeps a record of her neighbors' lives.\n- Reviewers praised The Lantern at Greywick for its convincing imitation of nineteenth-century style.",
+   "question": "The student wants to emphasize a difference in narrative style between Holloway's two novels. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Whereas Holloway's Static Season unfolds through brief, fragmented text messages, The Lantern at Greywick is narrated in long, formal sentences modeled on Victorian prose.",
+    "Holloway's Static Season is set in present-day Chicago, while The Lantern at Greywick takes place in a fictional English mill town in 1847.",
+    "Although they were published five years apart, Holloway's Static Season and The Lantern at Greywick both center on a young woman who secretly records her neighbors' lives.",
+    "The Lantern at Greywick, which is narrated in long, formal sentences modeled on Victorian prose, was praised by reviewers for its convincing imitation of nineteenth-century style."
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "목표는 두 소설의 '서술 방식' 차이를 강조하는 것이므로, 두 작품의 문체 정보를 대조해야 한다. A는 Static Season의 짧고 파편적인 문자 메시지 형식과 The Lantern at Greywick의 길고 격식 있는 빅토리아풍 문장을 대조하므로 정답이다. B는 두 작품을 대조하지만 서술 방식이 아니라 배경의 차이를 다룬다. C는 차이가 아니라 공통점(주인공)을 강조한다. D는 서술 방식을 언급하지만 한 작품만 다루어 차이를 보여 주지 못한다.",
+   "explanationEn": "Your goal is to emphasize a difference in narrative style between the two novels, so you need to contrast how each one is told. A does exactly that: it sets the brief, fragmented text messages of Static Season against the long, formal Victorian-style sentences of The Lantern at Greywick. B does contrast the novels, but it compares their settings, not their narrative styles. C points to a similarity, the shared protagonist, instead of a difference. D mentions narrative style but talks about only one novel, so it can't show a difference between the two.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "A",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 A가 유일하게 두 작품의 서술 방식을 대조함. B(배경 대조), D(한 작품의 문체만)는 부분적으로 맞는 근거를 가져 비교가 필요하며, C(공통점)도 노트 기반으로 말이 됨. 해설 한·영 모두 일치하고 정확함. 가상의 작가·작품으로 저작권 문제 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "B(대조하지만 배경)와 D(문체 언급하지만 한 작품)가 부분적으로 맞는 근거를 가진 오답이라 비교가 필요하다. C도 말이 된다. 표준 medium 수준이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-327",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Lake Chad, in north-central Africa, is a shallow endorheic lake, meaning it has no outlet to the sea.\n- In the 1960s, the lake covered roughly 25,000 square kilometers.\n- By the late 1990s, its open-water area had shrunk to about 1,500 square kilometers.\n- The Aral Sea, in Central Asia, is also an endorheic lake.\n- The Aral Sea shrank mainly because rivers feeding it were diverted for cotton irrigation.\n- Lake Chad's decline has been attributed largely to prolonged drought combined with increased water use.\n\nThe student wants to emphasize a difference between the causes of the two lakes' decline. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Lake Chad, in north-central Africa, is a shallow endorheic lake, meaning it has no outlet to the sea.\n- In the 1960s, the lake covered roughly 25,000 square kilometers.\n- By the late 1990s, its open-water area had shrunk to about 1,500 square kilometers.\n- The Aral Sea, in Central Asia, is also an endorheic lake.\n- The Aral Sea shrank mainly because rivers feeding it were diverted for cotton irrigation.\n- Lake Chad's decline has been attributed largely to prolonged drought combined with increased water use.",
+   "question": "The student wants to emphasize a difference between the causes of the two lakes' decline. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Lake Chad and the Aral Sea are both endorheic lakes, and both have lost a large share of their surface area in recent decades.",
+    "Whereas the Aral Sea shrank mainly because its feeder rivers were diverted for cotton irrigation, Lake Chad's decline has been linked largely to prolonged drought combined with increased water use.",
+    "Lake Chad's open-water area fell from roughly 25,000 square kilometers in the 1960s to about 1,500 square kilometers by the late 1990s, a decline attributed to drought and water use.",
+    "Like Lake Chad, which has no outlet to the sea, the Aral Sea is an endorheic lake whose shrinkage was driven by the diversion of rivers for irrigation."
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "목표는 두 호수가 줄어든 '원인'의 차이를 강조하는 것이므로, 두 호수의 원인을 모두 제시하고 대조해야 한다. B는 'Whereas'로 아랄해의 관개용 하천 전환과 차드호의 장기 가뭄·물 사용 증가를 대비시켜 목표를 달성한다. A는 두 호수의 공통점(내륙호, 면적 감소)만 말하고 원인은 다루지 않는다. C는 차드호의 원인을 언급하지만 아랄해가 빠져 비교가 성립하지 않는다. D는 차이가 아닌 유사점('Like')을 강조하고 아랄해의 원인만 제시한다.",
+   "explanationEn": "Your goal is to highlight a difference in what caused each lake to shrink, so the sentence has to give both causes and set them against each other. B does exactly that: \"Whereas\" contrasts the Aral Sea's river diversion for cotton irrigation with Lake Chad's prolonged drought and increased water use. A only describes what the lakes have in common (both are endorheic and both shrank) and never mentions causes. C gives Lake Chad's cause but leaves out the Aral Sea, so there's no comparison at all. D stresses a similarity with \"Like\" and gives only the Aral Sea's cause.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "B",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "정답 B 검산: 'Whereas'로 아랄해(관개용 하천 전환)와 차드호(가뭄+물 사용 증가)의 원인을 대조하여 목표(원인의 차이 강조)를 정확히 달성. A는 공통점만, C는 차드호만, D는 'Like'로 유사점 프레이밍+아랄해 원인만 제시하므로 모두 배제됨. 한국어·영어 해설 결론과 글자 참조 일치, 영어 자연스럽고 한글 없음. 수치(1960년대 약 25,000km², 1990년대 말 약 1,500km²)와 아랄해 면화 관개 원인은 통용되는 사실. 난이도: 오답 A·D가 두 호수를 모두 언급하고 D는 원인도 포함해 부분적 근거를 가지며, 정답은 '차이'+'원인' 두 조건을 동시에 확인해야 하므로 medium에 부합(다소 쉬운 편이나 허용 범위)."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "B만 두 호수의 원인을 모두 제시하고 대조한다. C(한 호수의 원인만 제시)와 D(원인은 있으나 유사점 강조)는 부분적으로 맞는 근거가 있어 비교해야 배제된다. A도 말은 되지만 원인이 없다. 노트에 아랄해의 면적 수치는 없지만 'shrank'라는 기록이 있으므로 A의 서술도 노트 범위 안이다. 전형적인 medium 수준이다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-328",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- In the 1840s, most letters in Britain were paid for by the recipient, and the cost depended on distance and number of sheets.\n- Sending a single-sheet letter from London to Edinburgh could cost more than a laborer's daily wage.\n- In 1840, reformer Rowland Hill's proposal led to the Uniform Penny Post, which charged a flat one-penny rate paid in advance by the sender.\n- The Penny Black, the world's first adhesive postage stamp, was introduced to show that postage had been prepaid.\n- The number of letters delivered in Britain rose from about 76 million in 1839 to about 169 million in 1840.\n\nThe student wants to emphasize the effect of the Uniform Penny Post on how much the British public used the mail. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- In the 1840s, most letters in Britain were paid for by the recipient, and the cost depended on distance and number of sheets.\n- Sending a single-sheet letter from London to Edinburgh could cost more than a laborer's daily wage.\n- In 1840, reformer Rowland Hill's proposal led to the Uniform Penny Post, which charged a flat one-penny rate paid in advance by the sender.\n- The Penny Black, the world's first adhesive postage stamp, was introduced to show that postage had been prepaid.\n- The number of letters delivered in Britain rose from about 76 million in 1839 to about 169 million in 1840.",
+   "question": "The student wants to emphasize the effect of the Uniform Penny Post on how much the British public used the mail. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Before 1840, a single-sheet letter sent from London to Edinburgh could cost more than a laborer's daily wage, and the recipient usually paid the charge.",
+    "The Uniform Penny Post, proposed by Rowland Hill, introduced the Penny Black, the world's first adhesive postage stamp, to show that a sender had prepaid.",
+    "After the Uniform Penny Post replaced distance-based charges with a flat one-penny rate in 1840, the number of letters delivered in Britain more than doubled, from about 76 million to about 169 million.",
+    "In 1840, Rowland Hill's reform replaced a system in which costs depended on distance and number of sheets with one in which senders paid in advance."
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "목표는 우편 개혁이 대중의 우편 이용량에 미친 '효과'를 강조하는 것이므로, 개혁 내용과 이용량 변화(편지 수 증가)를 연결해야 한다. C는 균일 1페니 요금 도입과 편지 배달 수가 약 7,600만에서 1억 6,900만으로 두 배 이상 늘어난 사실을 결합해 효과를 보여 준다. A는 개혁 이전의 높은 비용만 설명할 뿐 개혁 결과를 말하지 않는다. B는 우표 도입이라는 개혁의 특징을 제시하지만 이용량 변화가 없다. D는 제도 변화를 정확히 요약하지만 그 결과인 이용 증가를 언급하지 않는다.",
+   "explanationEn": "Your goal is to emphasize the reform's effect on how much people used the mail, so the answer must link the reform to the change in letter volume. C does this by pairing the flat one-penny rate with the rise in letters delivered from about 76 million to about 169 million, which is more than double. A only describes the high costs before the reform and never shows what the reform did. B presents a feature of the reform, the first adhesive stamp, but says nothing about mail volume. D accurately summarizes how the system changed, but it leaves out the result: increased mail use.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "C",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "C는 개혁(균일 1페니 요금)과 이용량 변화(7,600만→1억 6,900만, 두 배 이상)를 연결해 목표를 충족. 수치 검산 일치. A는 개혁 이전 비용, B는 우표 도입, D는 제도 변화만 서술하여 효과 누락. 역사적 사실(1840년 Uniform Penny Post, Penny Black, Rowland Hill, 편지 수치)에 오류 없음. 해설 한·영 일치, 글자 참조 정확. 난이도 medium 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": false,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "검산 결과 169/76 ≈ 2.22이므로 'more than doubled'는 맞다. 역사적 수치(1839년 약 7,600만 통 → 1840년 약 1억 6,900만 통)와 Penny Black 관련 사실도 정확하다. D와 B는 개혁 내용을 정확히 담고 있어 부분적으로 그럴듯하다. 다만 이용량 수치가 C에만 있어 다소 쉬운 편이며, 난이도는 medium 범위 안에 든다.",
+    "passed": false
+   }
+  }
+ },
+ {
+  "gid": "medium-rhetorical_synthesis-329",
+  "runId": "rw-supplement-medium",
+  "skill": "rhetorical_synthesis",
+  "domain": "rw_expression_ideas",
+  "examSystem": "sat_rw",
+  "difficulty": "medium",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "While researching a topic, a student has taken the following notes:\n- Engineers in the Netherlands built the Maeslantkering, a storm-surge barrier near Rotterdam, completed in 1997.\n- The barrier consists of two huge hinged gates, each about 210 meters long, that normally rest in dry docks on the riverbanks.\n- When a severe storm surge is forecast, the dry docks are flooded, and the gates float out and swing shut across the waterway.\n- Once closed, the gates are partially filled with water so that they sink and block the surge.\n- Because the gates stay out of the channel most of the time, large cargo ships can pass freely to and from the Port of Rotterdam.\n- The barrier was first closed in an actual storm in 2007.\n\nThe student wants to explain how the Maeslantkering's design allows it to protect against flooding without obstructing shipping. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "stimulus": "While researching a topic, a student has taken the following notes:\n- Engineers in the Netherlands built the Maeslantkering, a storm-surge barrier near Rotterdam, completed in 1997.\n- The barrier consists of two huge hinged gates, each about 210 meters long, that normally rest in dry docks on the riverbanks.\n- When a severe storm surge is forecast, the dry docks are flooded, and the gates float out and swing shut across the waterway.\n- Once closed, the gates are partially filled with water so that they sink and block the surge.\n- Because the gates stay out of the channel most of the time, large cargo ships can pass freely to and from the Port of Rotterdam.\n- The barrier was first closed in an actual storm in 2007.",
+   "question": "The student wants to explain how the Maeslantkering's design allows it to protect against flooding without obstructing shipping. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+   "options": [
+    "Completed in 1997 near Rotterdam, the Maeslantkering was first closed during an actual storm in 2007, ten years after it was built.",
+    "The Maeslantkering's two hinged gates, each about 210 meters long, float out and swing shut when the dry docks holding them are flooded.",
+    "Large cargo ships can pass freely to and from the Port of Rotterdam, near where Dutch engineers built the Maeslantkering storm-surge barrier.",
+    "The Maeslantkering's gates rest in riverbank dry docks, leaving the channel open for cargo ships, until a surge is forecast; then they float out, swing shut, and sink to block the water."
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "목표는 설계가 어떻게 (1) 홍수를 막으면서 (2) 선박 통행을 막지 않는지를 함께 설명하는 것이다. D는 평소 수문이 강둑 건선거에 있어 항로가 열려 있다는 점과 해일 예보 시 떠올라 닫히고 가라앉아 물을 막는다는 점을 연결해 두 조건을 모두 충족한다. A는 완공 연도와 첫 가동이라는 연혁만 제시해 설계를 설명하지 않는다. B는 수문이 닫히는 방식만 설명하고 선박 통행과의 관계는 빠져 있다. C는 선박 통행은 언급하지만 그것이 설계 때문이라는 점과 홍수 방어 방식을 설명하지 않는다.",
+   "explanationEn": "The goal has two parts: you need to show how the design (1) protects against flooding and (2) keeps shipping unobstructed. D links both ideas: the gates sit in dry docks on the riverbanks, which keeps the channel open, and when a surge is forecast they float out, swing shut, and sink to block the water. A gives only the barrier's history (when it was finished and when it was first used), so it doesn't explain the design at all. B explains how the gates close but never connects the design to shipping. C mentions that ships can pass, but it doesn't say the design is the reason, and it doesn't explain how the barrier stops floods.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "medium",
+   "targetLetter": "D",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "D만이 목표의 두 요소(홍수 방어 메커니즘 + 항로 개방)를 모두 노트 정보로 연결함. B(닫힘 메커니즘만), C(선박 통행만)는 부분적 근거가 있어 비교 필요, A는 연혁만으로 말이 되는 오답. 해설 한·영 일치, 사실관계(1997 완공, 210m, 2007 첫 폭풍 가동) 정확."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "B와 C는 목표의 절반씩만 충족하는 오답이고 A는 연혁만 다룬다. 전형적인 중간 난이도 구성이다. 다만 정답 D만 눈에 띄게 길고 포괄적이어서 길이만 보고도 고를 수 있다는 약점이 있다.",
+    "passed": true
+   }
+  }
+ }
+]

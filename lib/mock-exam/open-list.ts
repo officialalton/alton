@@ -13,6 +13,8 @@ export type MockExamListRow = {
   description: string | null;
   state: MockExamListState;
   attempt: MockExamAttemptSummary | null;
+  /** 재응시(2026-10-08) — 이 시험의 모든 회차, 최신 회차가 앞(내림차순). 응시가 없으면 빈 배열. `attempt` 는 항상 최신 회차(= 기본 표시). */
+  attempts: MockExamAttemptSummary[];
   /** 세트가 지금은 공개 목록에 없고 응시 기록만 남은 경우(보관된 세트의 지난 응시). */
   archived: boolean;
 };
@@ -40,11 +42,24 @@ export function pickNextPracticeTest(rows: MockExamListRow[]): MockExamListRow |
   return rows.find((r) => !r.archived && practiceTestTabOf(r.state) === "todo") ?? null;
 }
 
+/** "Attempt 2" — 회차 번호 라벨. 번호가 없는 옛 응답은 빈 문자열. */
+export const attemptLabel = (no: number | undefined | null): string => (no ? `Attempt ${no}` : "");
+
+const byAttemptNoDesc = (a: MockExamAttemptSummary, b: MockExamAttemptSummary) => (b.attemptNo ?? 0) - (a.attemptNo ?? 0);
+
 export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: MockExamAttemptSummary[]): MockExamListRow[] {
   const byId = new Map(attempts.map((a) => [a.id, a]));
   const used = new Set<string>();
+  const byGroup = new Map<string, MockExamAttemptSummary[]>();
+  for (const a of attempts) {
+    if (!a.setGroupId) continue;
+    byGroup.set(a.setGroupId, [...(byGroup.get(a.setGroupId) ?? []), a]);
+  }
+  for (const list of byGroup.values()) list.sort(byAttemptNoDesc);
   const rows: MockExamListRow[] = catalog.map((c) => {
     const attempt = c.attemptId ? (byId.get(c.attemptId) ?? null) : null;
+    const all = byGroup.get(c.setGroupId) ?? (attempt ? [attempt] : []);
+    for (const a of all) used.add(a.id);
     if (attempt) used.add(attempt.id);
     return {
       key: c.examSetId,
@@ -54,19 +69,26 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       description: c.description,
       state: listStateOf(attempt?.status ?? null),
       attempt,
+      attempts: all,
       archived: false,
     };
   });
-  for (const a of attempts) {
-    if (used.has(a.id) || a.status === "assigned") continue;
+  for (const a of [...attempts].sort(byAttemptNoDesc)) {
+    if (used.has(a.id)) continue;
+    // 보관된 세트: 회차를 시험 단위 한 줄로 묶고, 최신 회차가 대표. 시작 전(assigned) 응시만 있으면 숨긴다.
+    const group = a.setGroupId ? (byGroup.get(a.setGroupId) ?? [a]) : [a];
+    for (const g of group) used.add(g.id);
+    if (group.every((g) => g.status === "assigned")) continue;
+    const latest = group[0];
     rows.push({
-      key: a.id,
-      examSetId: a.examSetId,
-      name: a.examSetName,
-      difficultyTier: a.difficultyTier,
+      key: latest.id,
+      examSetId: latest.examSetId,
+      name: latest.examSetName,
+      difficultyTier: latest.difficultyTier,
       description: null,
-      state: listStateOf(a.status),
-      attempt: a,
+      state: listStateOf(latest.status),
+      attempt: latest,
+      attempts: group,
       archived: true,
     });
   }

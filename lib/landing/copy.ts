@@ -1,4 +1,3 @@
-import { PLANNED_PRACTICE_TEST_COUNT } from "./claims";
 
 // 2026-10-05 랜딩 v2 — 공개 영문 카피. 숫자 주장은 claims.ts 값만 쓴다(copy.test.ts가 검증).
 // 제품 용어(앱 전체 통일): Practice Tests / Mistake Notebook / Vocabulary Builder / Study Materials.
@@ -101,7 +100,7 @@ export const FOOTER_LINKS = [
 ] as const;
 
 export const PRACTICE_TESTS_PAGE = {
-  intro: `ALTON offers ${PLANNED_PRACTICE_TEST_COUNT} free SAT and AP practice tests. SAT tests follow the digital SAT structure: Reading & Writing and Math, with two modules per section, and your first-module performance shapes the second. AP tests are subject-specific.`,
+  intro: `ALTON offers free SAT and AP practice tests, and the library keeps growing. SAT tests follow the digital SAT structure: Reading & Writing and Math, with two modules per section, and your first-module performance shapes the second. AP tests are subject-specific.`,
 } as const;
 
 /** 공개 카피 전체(숫자 주장 검증용). */

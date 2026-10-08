@@ -3,6 +3,7 @@
 //   생성(core) → 자료 필요하면 자료 생성 → 유형별 품질 계약(다섯 연결) → 독립 품질 검사(정답·오답 품질·추정 난이도)
 //   → 통과한 것만 accepted. 걸리면 사유를 피드백으로 1회 재생성 → 재검사. 부족분은 1회 재생성.
 // 저장은 호출자가 한다(서버 액션은 DB 에, 스크립트는 보고서에).
+import { RW_SATURATED_TOPICS } from "./rw-topic-saturation";
 import { generateSectionProblemsCore, regenerateProblemCore, generateFigureForProblemCore, repairOneDistractorCore, repairFieldsCore, resolveAnswerFromExplanationCore, type FigurePolicy, type ProblemDifficulty, type ProblemFormat } from "./core";
 import { reviewProblemIndependently, classifyReviewIssues, type IndependentReview, type QualityRecord, type DistractorRationale, type DistractorKind } from "./review";
 import { checkQualityContract } from "@/lib/problem-quality-contract";
@@ -234,7 +235,8 @@ export async function runGenerationPipeline(params: PipelineParams): Promise<Pip
     const chunkSizes: number[] = [];
     let remaining = count;
     while (remaining > 0) { const n = Math.min(CHUNK, remaining); remaining -= n; chunkSizes.push(n); }
-    const avoidTopics = recentTopics.slice(-30);
+    // 은행이 이미 포화한 R&W 소재(문어류·산호초 등, rw-topics.ts 가 갱신)는 배치 이력과 무관하게 항상 피하게 한다(2026-10-08, 지문 소재 다양성).
+    const avoidTopics = [...(isMathSystem ? [] : RW_SATURATED_TOPICS), ...recentTopics.slice(-30)];
     // 청크끼리는 서로 독립적인 생성 호출이다 — 순서대로 기다리지 않고 동시에 보낸다(벽시계 시간 단축).
     // 2026-09-18(제품 오너 지시) — "AI 응답에 문제가 없습니다"/"AI 응답을 처리할 수 없습니다" 같은
     // 빈/파싱불가 응답만, 딱 1회 그대로 다시 호출한다. 품질 검증 실패(오답 품질·중복·형식 등)의 기존

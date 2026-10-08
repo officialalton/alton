@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildMockExamListRows, compareExamNames, listStateOf, pickNextPracticeTest, practiceTestTabOf } from "./open-list";
+import { attemptLabel, buildMockExamListRows, compareExamNames, listStateOf, pickNextPracticeTest, practiceTestTabOf } from "./open-list";
 import type { MockExamAttemptSummary, MockExamCatalogRow } from "./attempt-data";
 
 const cat = (o: Partial<MockExamCatalogRow>): MockExamCatalogRow => ({
@@ -67,5 +67,31 @@ describe("번호순 정렬·다음 모의고사(2026-10-08)", () => {
 
   it("서브탭 분류: 제출·채점 완료는 Completed", () => {
     expect(["not_started", "in_progress", "submitted", "graded"].map((s) => practiceTestTabOf(s as never))).toEqual(["todo", "todo", "completed", "completed"]);
+  });
+});
+
+describe("재응시 — 회차별 행(2026-10-08)", () => {
+  const g = (o: Partial<MockExamAttemptSummary>) => att({ setGroupId: "g1", ...o });
+  it("시험당 한 행, 최신 회차가 대표이고 모든 회차가 최신순으로 attempts 에 담긴다", () => {
+    const rows = buildMockExamListRows(
+      [cat({ attemptId: "a2", attemptStatus: "in_progress" })],
+      [g({ id: "a1", attemptNo: 1, status: "graded", correctCount: 50 }), g({ id: "a2", attemptNo: 2, status: "in_progress" })],
+    );
+    expect(rows).toHaveLength(1);
+    expect(rows[0].state).toBe("in_progress");
+    expect(rows[0].attempt?.id).toBe("a2");
+    expect(rows[0].attempts.map((a) => a.attemptNo)).toEqual([2, 1]);
+  });
+
+  it("보관된 시험의 여러 회차도 한 줄로 묶고 최신 회차가 대표", () => {
+    const rows = buildMockExamListRows([], [g({ id: "a1", attemptNo: 1, status: "graded" }), g({ id: "a2", attemptNo: 2, status: "graded" })]);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ archived: true, attempt: { id: "a2" } });
+    expect(rows[0].attempts).toHaveLength(2);
+  });
+
+  it("회차 번호 라벨", () => {
+    expect(attemptLabel(2)).toBe("Attempt 2");
+    expect(attemptLabel(undefined)).toBe("");
   });
 });

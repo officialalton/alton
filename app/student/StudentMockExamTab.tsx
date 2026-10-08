@@ -97,7 +97,12 @@ export default function StudentMockExamTab({ initialOverview }: { initialOvervie
         ) : !detail ? (
           <p className="text-[13px] text-grey-500">Loading…</p>
         ) : (
-          <MockExamResultView attempt={detail} readOnly={false} />
+          <MockExamResultView
+            attempt={detail}
+            readOnly={false}
+            attempts={overview.attempts.filter((a) => a.setGroupId && a.setGroupId === detail.setGroupId)}
+            onSelectAttempt={openResult}
+          />
         )}
       </div>
     );

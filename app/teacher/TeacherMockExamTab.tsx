@@ -127,7 +127,7 @@ function StatusSubTab({ data }: { data: TeacherMockExamTabData }) {
               {attempts.map((a) => (
                 <li key={a.id} className="flex items-center justify-between text-[13px]">
                   <span>
-                    {a.examSetName} — {STATUS_LABEL[a.status] ?? a.status}
+                    {a.examSetName}{a.attemptNo ? ` · Attempt ${a.attemptNo}` : ""} — {STATUS_LABEL[a.status] ?? a.status}
                     {a.status === "graded" && a.correctCount !== null && ` (${a.correctCount}/${a.totalCount})`}
                     {/* 2026-09-22(사용자 지시) — 응시 중 재입장 횟수를 시간 어뷰징
                         의심 신호로 노출한다(2회 이상만 눈에 띄게). */}
@@ -218,7 +218,7 @@ function HistorySubTab() {
         {rows.map((r) => (
           <tr key={r.attemptId} className="border-t border-grey-100">
             <td className="py-1.5">{r.studentName ?? r.studentId}</td>
-            <td>{r.examSetName}</td>
+            <td>{r.examSetName}{r.attemptNo > 1 ? ` · Attempt ${r.attemptNo}` : ""}</td>
             <td>{STATUS_LABEL[r.status] ?? r.status}</td>
             <td>{r.startedAt ? fmtDate(r.startedAt, undefined, tz) : "-"}</td>
             <td>{r.correctCount !== null ? `${r.correctCount}/${r.totalCount}` : "-"}</td>

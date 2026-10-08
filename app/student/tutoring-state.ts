@@ -49,9 +49,9 @@ export function ctaLabelFor(state: TutoringInterestState): { title: string; body
   }
   if (state.kind === "none" || state.status === "registered") {
     return {
-      title: "Talk with a tutor",
-      body: "Want help turning your practice results into a plan? Invite your parent so we can set up a free consultation.",
-      button: state.kind === "none" ? "I'm interested" : "Invite my parent",
+      title: "Ready to take the next step?",
+      body: "Invite a parent to arrange a complimentary consultation and explore a tutoring plan tailored to your needs.",
+      button: state.kind === "none" ? "Request a Free Consultation" : "Invite my parent",
     };
   }
   switch (state.status) {

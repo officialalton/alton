@@ -1,0 +1,756 @@
+[
+ {
+  "gid": "easy-boundaries-201",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The old lighthouse keeper rarely spoke to visitors from the village. Each evening he climbed the narrow stairs with a brass lantern in his ______ a thin line of light swept across the dark water.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The old lighthouse keeper rarely spoke to visitors from the village. Each evening he climbed the narrow stairs with a brass lantern in his ______ a thin line of light swept across the dark water.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "hand, soon",
+    "hand, and soon",
+    "hand soon",
+    "hand, soon,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 'Each evening he climbed ... in his hand'와 뒤 'soon a thin line of light swept across the dark water'는 각각 독립절이다. 두 독립절은 쉼표만으로 연결할 수 없고, 쉼표와 등위접속사 'and'를 함께 써야 하므로 B가 정답이다. A와 D는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 아무 문장부호나 접속사 없이 두 독립절을 붙여 run-on 문장이 된다.",
+   "explanationEn": "The text before the blank (\"Each evening he climbed ... in his hand\") and the text after it (\"soon a thin line of light swept across the dark water\") are both independent clauses. You can't join two independent clauses with a comma alone. You need a comma plus a coordinating conjunction such as \"and,\" so B is correct. A and D link the clauses with only a comma, which creates a comma splice. C uses no punctuation or conjunction at all, which creates a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:1"
+    ],
+    "note": "두 독립절('he climbed ... in his hand' / 'soon a thin line of light swept ...')을 쉼표+등위접속사 'and'로 연결한 B만 적법. A·D는 쉼표 스플라이스, C는 fused sentence. 한·영 해설 모두 정답과 선택지 참조가 일치하며 모순 없음. 단일 규칙(독립절 연결)으로 풀리고 오답이 전형적 오개념이므로 easy에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 잇는 규칙(쉼표+등위접속사) 하나로 풀 수 있다. 오답은 쉼표 스플라이스(A, D)와 run-on(C)으로, 전형적인 오개념에 해당한다. D의 'soon,'은 다소 어색하지만 오답으로서 문제가 되지는 않는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-202",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "The Atacama Desert in northern Chile is one of the driest places on Earth. Some weather stations there have never recorded a single drop of ______ scientists study its soil to understand what conditions might be like on Mars.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "The Atacama Desert in northern Chile is one of the driest places on Earth. Some weather stations there have never recorded a single drop of ______ scientists study its soil to understand what conditions might be like on Mars.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "rain,",
+    "rain",
+    "rain;",
+    "rain, and,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 'Some weather stations ... a single drop of rain'과 뒤 'scientists study its soil ...'는 각각 완전한 독립절이다. 독립절 두 개는 세미콜론으로 연결할 수 있으므로 C가 정답이다. A는 접속사 없이 쉼표만 써서 쉼표 스플라이스가 된다. B는 문장부호 없이 두 절을 붙여 run-on 문장이 된다. D는 'and' 뒤에 쉼표가 불필요하게 들어가 표준 문장부호 규칙에 어긋난다.",
+   "explanationEn": "The part before the blank, \"Some weather stations ... a single drop of rain,\" and the part after it, \"scientists study its soil ...,\" are both independent clauses. You can join two independent clauses with a semicolon, so C is correct. A uses only a comma with no conjunction, which makes a comma splice. B puts no punctuation at all between the two clauses, which makes a run-on sentence. D adds an unnecessary comma after \"and,\" which breaks standard punctuation rules.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤 모두 완전한 독립절이므로 세미콜론(C)이 유일한 정답. A는 쉼표 스플라이스, B는 run-on, D는 'and' 뒤 불필요한 쉼표로 배제됨. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하며 자연스러움. 아타카마 사막 관련 사실(일부 관측소 강우 기록 없음, 화성 유사 환경 연구)도 널리 알려진 내용으로 오류 없음. 독립절 연결 규칙 하나로 풀리는 전형적 easy 문항."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 잇는 세미콜론 규칙 하나만 알면 풀 수 있다. 오답은 쉼표 스플라이스, run-on, 'and' 뒤의 불필요한 쉼표로, 모두 전형적인 오개념이다. 다만 두 절 사이의 논리 관계(그래서/그런 이유로)가 약간 느슨하다. 그래도 문법 판정에는 영향이 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-203",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the 1840s, railway companies in Britain began using a single standard time across their networks. Before then, each town kept its own local time based on the position of the sun______ a clock in Bristol, for example, ran about ten minutes behind a clock in London.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the 1840s, railway companies in Britain began using a single standard time across their networks. Before then, each town kept its own local time based on the position of the sun______ a clock in Bristol, for example, ran about ten minutes behind a clock in London.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    ",",
+    "(no punctuation)",
+    ", which",
+    ";"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 앞 \"each town kept its own local time based on the position of the sun\"과 빈칸 뒤 \"a clock in Bristol... ran about ten minutes behind a clock in London\"은 각각 완전한 독립절이다. 접속사 없이 두 독립절을 연결하려면 세미콜론이 필요하므로 D가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. B는 구두점 없이 두 절을 붙인 런온 문장이다. C의 which는 뒤 절에 이미 주어(a clock)가 있어 관계절로 성립하지 않는다.",
+   "explanationEn": "The text before the blank (\"each town kept its own local time based on the position of the sun\") and the text after it (\"a clock in Bristol... ran about ten minutes behind a clock in London\") are both complete independent clauses. When you join two independent clauses without a conjunction, you need a semicolon, so D is correct. A uses only a comma, which creates a comma splice. B joins the clauses with no punctuation at all, which creates a run-on sentence. C doesn't work because the clause after \"which\" already has its own subject (\"a clock\"), so it can't be a relative clause.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 모두 완전한 독립절(\"each town kept its own local time...\" / \"a clock in Bristol... ran about ten minutes behind...\")이므로 접속사 없이 연결하려면 세미콜론(D)이 필요하다. A는 쉼표 스플라이스, B는 런온, C는 \"which\" 뒤 절에 이미 주어가 있어 비문. 한국어·영어 해설 모두 정답과 글자 참조가 일치하고 정확하다. 역사적 사실(1840년대 영국 철도 표준시, 브리스틀-런던 약 10분 차)도 타당. 단일 규칙(독립절 결합)으로 풀리고 오답이 전형적 오개념이므로 easy에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "두 독립절을 세미콜론으로 잇는 규칙 하나만 알면 풀리는 문항임. 오답(쉼표 스플라이스, 런온, which)은 모두 학생들이 흔히 고르는 전형적 오답이라 easy 난이도에 맞음. 브리스틀이 런던보다 약 10분 늦었다는 내용도 사실과 맞음.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-204",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1959, engineers at the Gorge Hill Dam in a small mountain town installed a new kind of fish ladder made of shallow concrete pools. Each pool sat slightly higher than the one below ______ salmon could rest in one pool before leaping to the next.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1959, engineers at the Gorge Hill Dam in a small mountain town installed a new kind of fish ladder made of shallow concrete pools. Each pool sat slightly higher than the one below ______ salmon could rest in one pool before leaping to the next.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "it, so",
+    "it, ",
+    "it so,",
+    "it"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 'Each pool sat slightly higher than the one below it'와 빈칸 뒤 'salmon could rest ... next'는 각각 독립절이다. 독립절 두 개는 쉼표와 등위접속사로 이어야 하므로 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 쉼표가 접속사 앞이 아니라 뒤에 와서 잘못되었다. D는 아무 문장부호나 접속사 없이 두 절을 붙여 무종지문(run-on)이 된다.",
+   "explanationEn": "Both \"Each pool sat slightly higher than the one below it\" and \"salmon could rest in one pool before leaping to the next\" are independent clauses. To join two independent clauses, you can use a comma followed by a coordinating conjunction, so A is correct. B links the clauses with only a comma, which makes a comma splice. C puts the comma after \"so\" instead of before it, so it's punctuated incorrectly. D joins the clauses with no punctuation or conjunction at all, which makes a run-on sentence.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 각각 독립절(\"Each pool sat ... below it\" / \"salmon could rest ... next\")임을 직접 확인. A(쉼표+등위접속사 so)만 적법하게 연결하며, B는 쉼표 스플라이스, C는 접속사 뒤에 쉼표가 놓인 오류, D는 무종지문. 한국어·영어 해설 모두 동일 결론과 선택지 참조로 일치하고 영어 해설에 한글 없음. 오답 3개는 전형적 오개념(쉼표 스플라이스, 쉼표 위치 오류, 융합문)으로 그럴듯함. 단일 규칙(독립절 연결)으로 풀리며 어휘 평이 → easy 적합. 지문은 독창적 가상 소재로 저작권 우려 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 규칙 하나로 풀 수 있다. 오답 B(쉼표 스플라이스), C(쉼표 위치 오류), D(무종지문)는 모두 전형적인 오개념이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-205",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Sea otters often wrap themselves in strands of kelp before they fall asleep on the ocean surface. The long brown seaweed acts like an anchor ______ it keeps the resting otters from drifting away from their feeding grounds during the night.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Sea otters often wrap themselves in strands of kelp before they fall asleep on the ocean surface. The long brown seaweed acts like an anchor ______ it keeps the resting otters from drifting away from their feeding grounds during the night.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "for the animals,",
+    "for the animals;",
+    "for the animals",
+    "for the animals, and,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 \"The long brown seaweed acts like an anchor for the animals\"와 뒤 \"it keeps ... night\"는 각각 주어와 동사를 갖춘 독립절이다. 두 독립절은 세미콜론으로 연결할 수 있으므로 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 아무 문장부호 없이 두 절을 붙여 무종지문(run-on)이 된다. D는 접속사 and 뒤에 불필요한 쉼표를 넣어 절 연결이 어색해지고 규범에 맞지 않는다.",
+   "explanationEn": "The words before the blank, \"The long brown seaweed acts like an anchor for the animals,\" and the words after it, \"it keeps ... night,\" each have their own subject and verb, so both are independent clauses. A semicolon can join two independent clauses, which is why B is correct. A uses only a comma, so it creates a comma splice. C puts no punctuation at all between the clauses, so it creates a run-on sentence. D adds an unnecessary comma after the conjunction \"and,\" which breaks the standard comma-plus-conjunction pattern.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "빈칸 앞뒤가 각각 독립절(\"The long brown seaweed acts like an anchor for the animals\" / \"it keeps ... night\")이므로 세미콜론(B)이 규범에 맞음. A는 쉼표 스플라이스, C는 무종지문, D는 and 뒤 불필요한 쉼표로 배제됨. 한국어·영어 해설 모두 정답과 선택지 참조가 일치하고 모순 없음. 해양 수달의 켈프 감싸기 습성은 사실에 부합. 독립절 연결 규칙 하나로 풀리는 전형적 easy 문항이며 오답은 흔한 오개념(쉼표 스플라이스, 무종지문, 접속사 뒤 쉼표)을 반영함."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개를 세미콜론으로 잇는 규칙 하나만 알면 풀리는 전형적인 easy 문항이다. 오답 중 쉼표 스플라이스(A)와 무종지문(C)은 학생들이 흔히 빠지는 오개념이라 매력적이다. D의 'and,'는 다소 어색하지만 불가능한 선택지는 아니다. 해달이 켈프를 몸에 감고 자는 습성은 사실이다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-206",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the novel, the narrator returns to her grandmother's house on the moors after ten years away. The rooms are colder than she ______ the old clock in the hall has stopped at a quarter past four.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the novel, the narrator returns to her grandmother's house on the moors after ten years away. The rooms are colder than she ______ the old clock in the hall has stopped at a quarter past four.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "remembers,",
+    "remembers",
+    "remembers, and",
+    "remembers and,"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "빈칸 앞 \"The rooms are colder than she remembers\"와 뒤 \"the old clock ... has stopped at a quarter past four\"는 각각 독립절이다. 두 독립절은 쉼표와 등위접속사로 연결할 수 있으므로 C가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. B는 문장부호 없이 두 독립절을 붙인 무종지문(run-on sentence)이다. D는 쉼표가 접속사 앞이 아니라 뒤에 와서 표준 영어의 관례에 맞지 않는다.",
+   "explanationEn": "The words before the blank, \"The rooms are colder than she remembers,\" and the words after it, \"the old clock ... has stopped at a quarter past four,\" are both independent clauses. You can join two independent clauses with a comma followed by a coordinating conjunction, so C is correct. A joins the clauses with only a comma, which makes a comma splice. B puts the clauses together with no punctuation at all, which makes a run-on sentence. D puts the comma after \"and\" instead of before it, which doesn't follow standard conventions.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "검산: \"The rooms are colder than she remembers\" / \"the old clock in the hall has stopped at a quarter past four\" 두 독립절을 쉼표+등위접속사(and)로 연결하는 C만 표준 관례에 부합. A 쉼표 스플라이스, B 융합문(무종지문), D 접속사 뒤 쉼표로 비표준. 한국어·영어 해설 모두 정답 C와 선택지 글자 참조가 일치하고 모순 없음. 영어 해설 자연스럽고 한글 없음. 단일 규칙(독립절 연결)으로 풀리며 오답이 전형적 오개념이라 easy에 적합. 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 단일 규칙을 묻는 문항이다. 오답은 쉼표 스플라이스, 무종지문, 쉼표 위치 오류로 전형적인 오개념이다. easy 난이도에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-208",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the early 1800s, many families in rural England spun wool and wove cloth at home. When large textile mills opened in towns such as Manchester, this pattern began to ______ young workers left their villages to take jobs operating the new machines.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the early 1800s, many families in rural England spun wool and wove cloth at home. When large textile mills opened in towns such as Manchester, this pattern began to ______ young workers left their villages to take jobs operating the new machines.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "change, and",
+    "change,",
+    "change",
+    "change and,"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸 앞 'this pattern began to change'와 뒤 'young workers left their villages...'는 각각 주어와 동사를 갖춘 독립절이다. 두 독립절은 쉼표와 등위접속사로 연결할 수 있으므로 A가 정답이다. B는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 아무 문장부호나 접속사 없이 두 절을 붙여 융합문이 된다. D는 쉼표를 접속사 'and' 뒤에 잘못 두어 관례에 맞지 않는다.",
+   "explanationEn": "The text before the blank (\"this pattern began to change\") and the text after it (\"young workers left their villages...\") are both independent clauses, since each has its own subject and verb. You can join two independent clauses with a comma followed by a coordinating conjunction, so A is correct. B uses only a comma, which creates a comma splice. C joins the clauses with no punctuation or conjunction, which creates a run-on sentence. D puts the comma after \"and\" instead of before it, and that doesn't follow standard conventions.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤가 모두 독립절(\"this pattern began to change\" / \"young workers left their villages...\")임을 직접 확인함. A(쉼표+등위접속사)가 유일하게 관례에 맞고, B는 쉼표 스플라이스, C는 융합문, D는 접속사 뒤 쉼표로 오류. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 일치하며 모순 없음. 단일 규칙(독립절 연결)만으로 풀리고 오답이 전형적 오개념(쉼표 스플라이스 등)이라 easy 난이도에 적합. 역사적 배경(1800년대 초 맨체스터 방직공장)도 사실에 부합하며 저작권 의심 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 기본 규칙 하나로 풀 수 있다. 오답은 쉼표 스플라이스, 융합문, 쉼표 위치 오류로, 전형적인 오개념이다. 역사적 내용(산업혁명기 가내 방직에서 공장 노동으로의 이동)도 무리가 없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-boundaries-209",
+  "runId": "rw-supplement-easy",
+  "skill": "boundaries",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1937, engineers finished building the Golden Gate Bridge in San Francisco, California. The bridge's famous reddish color, called \"International Orange,\" was not part of the original plan. Consulting architect Irving Morrow liked the color of the primer coating on the steel ______ he argued that it would stand out clearly in the region's frequent fog.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1937, engineers finished building the Golden Gate Bridge in San Francisco, California. The bridge's famous reddish color, called \"International Orange,\" was not part of the original plan. Consulting architect Irving Morrow liked the color of the primer coating on the steel ______ he argued that it would stand out clearly in the region's frequent fog.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "beams,",
+    "beams, and",
+    "beams",
+    "beams and,"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 앞 \"Consulting architect Irving Morrow liked the color of the primer coating on the steel beams\"와 뒤 \"he argued that it would stand out clearly in the region's frequent fog\"는 각각 완전한 독립절이다. 두 독립절은 쉼표와 등위접속사로 연결할 수 있으므로 쉼표 뒤에 and가 오는 B가 정답이다. A는 쉼표만으로 두 독립절을 이어 쉼표 스플라이스가 된다. C는 문장부호나 접속사 없이 두 독립절을 붙여 무종지문이 된다. D는 쉼표를 접속사 뒤에 잘못 두어 and 앞에 있어야 할 쉼표가 빠졌다.",
+   "explanationEn": "The words before the blank, \"Consulting architect Irving Morrow liked the color of the primer coating on the steel beams,\" and the words after it, \"he argued that it would stand out clearly in the region's frequent fog,\" are both independent clauses. You can join two independent clauses with a comma followed by a coordinating conjunction, so B is correct. A uses only a comma, which creates a comma splice. C has no punctuation or conjunction at all, so it creates a run-on sentence. D puts the comma after \"and\" when it should come before it, so the clauses aren't joined correctly.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "빈칸 앞뒤 모두 독립절이며 B(쉼표+and)만 올바르게 연결함. A는 쉼표 스플라이스, C는 무종지문, D는 쉼표 위치 오류로 전형적 오개념 선택지. 한국어·영어 해설 모두 정답 및 선택지 참조 일치, 영어 자연스럽고 한글 없음. 역사적 사실(1937년 완공, Irving Morrow, 프라이머 색상 유래) 정확. 단일 규칙(독립절 연결)으로 풀리는 easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "독립절 두 개를 쉼표+등위접속사로 잇는 한 가지 규칙만 쓰는 전형적인 easy 문항이다. 오답은 쉼표 스플라이스, 무종지문, 쉼표 위치 오류로 모두 전형적인 오개념이다. 사실관계(1937년 완공, 모로가 프라이머 색을 선호하고 안개 속 가시성을 근거로 든 점)도 정확하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-201",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Set in a fog-covered English village, Clara Whitmore's new novel borrows the slow, candlelit mood of nineteenth-century fiction. Early in the story, the faded letters in the heroine's attic ______ a secret that her grandmother kept hidden for nearly fifty years.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Set in a fog-covered English village, Clara Whitmore's new novel borrows the slow, candlelit mood of nineteenth-century fiction. Early in the story, the faded letters in the heroine's attic ______ a secret that her grandmother kept hidden for nearly fifty years.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "reveals",
+    "has revealed",
+    "is revealing",
+    "reveal"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 동사의 주어는 복수 명사 \"letters\"이고, \"in the heroine's attic\"은 주어를 꾸미는 짧은 전치사구일 뿐이다. 따라서 복수 동사 \"reveal\"이 필요하므로 D가 정답이다. A의 \"reveals\", B의 \"has revealed\", C의 \"is revealing\"은 모두 단수 동사 형태로, 바로 앞의 단수 명사 \"attic\"에 잘못 맞춘 것이다. 이 세 선택지는 복수 주어 \"letters\"와 수가 일치하지 않는다.",
+   "explanationEn": "The subject of the blank verb is the plural noun \"letters.\" The phrase \"in the heroine's attic\" is just a short prepositional phrase that describes the letters. Because the subject is plural, it needs the plural verb \"reveal,\" so D is correct. Choices A (\"reveals\"), B (\"has revealed\"), and C (\"is revealing\") are all singular verb forms that wrongly match the nearby singular noun \"attic.\" None of them agrees in number with the plural subject \"letters.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "문학(19세기 소설 분위기의 현대 서술)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"letters\"(복수) + 짧은 전치사구 \"in the heroine's attic\" 뒤 동사 수 일치 문제. 정답 D \"reveal\" 검산 결과 옳음. 오답 3개(reveals/has revealed/is revealing)는 모두 단수형으로 인접 명사 \"attic\"에 이끌리는 전형적 오개념 선택지. 한국어·영어 해설 모두 결론·글자 참조 일치, 한글 혼입 없음. 단일 규칙·한 단계 추론으로 easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어-동사 수일치 단일 규칙 문제다. 전치사구(in the heroine's attic)가 짧아 easy 수준에 맞는다. 오답 3개는 모두 단수형이라 attic에 끌려 고르기 쉬운 전형적 오개념이다. 소설가 Clara Whitmore는 가상 인물로 보이며 문제가 되지 않는다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-202",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Located in southern Bolivia, the Salar de Uyuni is the largest salt flat in the world. During the rainy season, a thin layer of water covers its surface, and the flat ______ the sky so clearly that visitors often feel as if they are walking among the clouds.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Located in southern Bolivia, the Salar de Uyuni is the largest salt flat in the world. During the rainy season, a thin layer of water covers its surface, and the flat ______ the sky so clearly that visitors often feel as if they are walking among the clouds.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "reflects",
+    "reflect",
+    "have reflected",
+    "are reflecting"
+   ],
+   "correctIndex": 0,
+   "answers": null,
+   "explanation": "빈칸의 주어는 단수 명사 'the flat'이므로 동사도 단수형이어야 합니다. 또한 이 문장은 'covers'처럼 현재 시제로 일반적인 사실을 서술하고 있습니다. 따라서 단수 현재형인 A가 정답입니다. B, C, D는 모두 'the flat'처럼 단수 주어가 아니라 복수 주어에 쓰는 동사형이라 수 일치가 맞지 않습니다.",
+   "explanationEn": "The subject of the blank is \"the flat,\" which is a singular noun, so the verb has to be singular too. The sentence also describes a general fact in the present tense, just like \"covers.\" That makes A, the singular present-tense form, correct. B, C, and D are all verb forms used with plural subjects, so none of them agrees with the singular subject \"the flat.\"",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "A",
+   "seed": "환경·지리",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the flat'(단수) + 현재 시제('covers'와 병렬) → 'reflects'가 유일한 단수 현재형. B/C/D는 모두 복수 주어용 형태로 해설 설명과 일치. 한·영 해설 결론·글자 참조 동일, 영어 자연스러움. 단일 규칙(주어-동사 수 일치)으로 해결되므로 easy 적합. 다만 빈칸 앞에 복수 유인 명사가 없어 오답 매력도가 다소 낮은 편이나 easy 수준에서는 허용 범위. Salar de Uyuni 관련 사실(볼리비아 남부, 세계 최대 소금사막) 정확."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'the flat'(단수)와 동사의 수 일치를 묻는 단일 규칙 문항입니다. 주어가 빈칸 바로 앞에 있어 easy 수준에 맞습니다. 오답은 모두 복수형이라 전형적인 오개념에 해당합니다. 소금사막 우유니에 관한 사실도 정확합니다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-203",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In the early nineteenth century, many towns in northern England grew rapidly as textile mills drew workers from the countryside. To serve these new residents, local reformers opened public reading rooms where factory employees could borrow newspapers and books after their shifts. The reading room in one Lancashire town ______ open until nine o'clock each evening so that workers could visit it once the mills had closed.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In the early nineteenth century, many towns in northern England grew rapidly as textile mills drew workers from the countryside. To serve these new residents, local reformers opened public reading rooms where factory employees could borrow newspapers and books after their shifts. The reading room in one Lancashire town ______ open until nine o'clock each evening so that workers could visit it once the mills had closed.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "were kept",
+    "was kept",
+    "have been kept",
+    "are kept"
+   ],
+   "correctIndex": 1,
+   "answers": null,
+   "explanation": "빈칸 문장의 주어는 단수 명사 \"The reading room\"이고, \"in one Lancashire town\"은 주어를 꾸미는 짧은 수식어일 뿐이다. 또 지문은 19세기 초의 일을 과거 시제(\"grew\", \"opened\", \"had closed\")로 서술하므로 단수 과거형인 B \"was kept\"가 정답이다. A \"were kept\"는 과거형이지만 복수형이라 단수 주어와 맞지 않는다. C \"have been kept\"와 D \"are kept\"는 복수형인 데다 현재 시제라서 과거 이야기와도 어울리지 않는다.",
+   "explanationEn": "The subject of the sentence with the blank is the singular noun \"The reading room.\" The phrase \"in one Lancashire town\" is just a short modifier describing that subject. The passage also tells about the early nineteenth century in the past tense (\"grew,\" \"opened,\" \"had closed\"), so B, the singular past form \"was kept,\" is correct. A, \"were kept,\" is in the past tense, but it's plural, so it doesn't agree with the singular subject. C, \"have been kept,\" and D, \"are kept,\" are both plural and in the present tense, so they don't fit the subject or the past-tense story.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "B",
+   "seed": "역사(근대 사회 변화)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"The reading room\"(단수) + 과거 서술 맥락 → \"was kept\"만 단수 과거형으로 유일하게 적합. A는 복수 과거, C·D는 복수·현재 시제로 모두 배제됨. 한국어·영어 해설 모두 정답과 선택지 글자 참조가 일치하고 근거도 정확함. 다만 주어와 빈칸 사이의 수식어 \"in one Lancashire town\"이 단수이고 혼동을 유발할 복수 명사가 인접해 있지 않아 오답의 유인력이 다소 약한 편이나, easy 기준(한 가지 규칙, 단서 직접 노출)에는 부합함. 역사적 배경(랭커셔 방직공장, 노동자 독서실)도 사실과 모순 없음."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어와 동사의 수 일치를 묻는 문항이다. 주어 뒤의 수식어는 짧은 전치사구 하나뿐이다. 단수형 선택지가 B 하나라서 이 규칙 하나만 알면 풀린다. 오답은 모두 그럴듯하다. A는 바로 앞 \"workers/mills\"에 끌린 복수형이고, C와 D는 수와 시제를 함께 혼동한 형태다. easy에 적합하다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-204",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "In 1937, engineers completed the Golden Gate Bridge in San Francisco, California. To protect the bridge from salty fog and wind, crews painted its steel a bright reddish-orange color called \"International Orange.\" Today, a team of painters ______ the bridge year-round, touching up spots where the coating has worn away.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "In 1937, engineers completed the Golden Gate Bridge in San Francisco, California. To protect the bridge from salty fog and wind, crews painted its steel a bright reddish-orange color called \"International Orange.\" Today, a team of painters ______ the bridge year-round, touching up spots where the coating has worn away.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "maintain",
+    "have maintained",
+    "maintains",
+    "are maintaining"
+   ],
+   "correctIndex": 2,
+   "answers": null,
+   "explanation": "이 문장의 주어는 단수 명사 'a team'이고, 'of painters'는 주어를 꾸미는 짧은 수식어일 뿐이다. 따라서 단수 동사가 필요하므로 C의 'maintains'가 정답이다. A의 'maintain', B의 'have maintained', D의 'are maintaining'은 모두 복수 동사 형태로, 바로 앞 단어 'painters'에 맞춘 것이라 단수 주어 'team'과 수가 일치하지 않는다.",
+   "explanationEn": "The subject of this sentence is the singular noun \"a team.\" The phrase \"of painters\" is just a short modifier describing the team. Because the subject is singular, you need a singular verb, so C, \"maintains,\" is correct. A (\"maintain\"), B (\"have maintained\"), and D (\"are maintaining\") are all plural verb forms. They match the nearby word \"painters\" instead of the singular subject \"team,\" so they don't agree with it.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "C",
+   "seed": "기술·공학 사례",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 'a team'(단수) + 'of painters' 수식어 구조로 단수 동사 'maintains'만 적합. 오답 3개 모두 복수형으로 'painters'에 끌린 전형적 오개념 선택지. 'Today ... year-round'와 현재 단순시제도 자연스러움. 사실(1937 완공, International Orange)도 정확. 해설 한·영 모두 정답 및 글자 참조 일치."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:2"
+    ],
+    "note": "'a team of painters' 주어-동사 수일치 문항이다. 수식어구를 사이에 둔 전형적인 easy 문항이다. 사실 관계도 맞다(1937년 완공, International Orange). 'team'은 영국식 영어에서 복수 취급될 수 있으나, SAT 표준 영어에서는 단수 취급하므로 문제없다.",
+    "passed": true
+   }
+  }
+ },
+ {
+  "gid": "easy-form_structure_sense-205",
+  "runId": "rw-supplement-easy",
+  "skill": "form_structure_sense",
+  "domain": "rw_standard_english",
+  "examSystem": "sat_rw",
+  "difficulty": "easy",
+  "format": "mc",
+  "recipeId": null,
+  "problem": {
+   "passage": "Sea otters play an important role in kelp forest ecosystems along the Pacific coast. The otters eat large numbers of sea urchins, which feed on kelp. When otter populations decline, urchin numbers rise quickly, and the kelp forests that shelter many fish ______ to shrink.\n\nWhich choice completes the text so that it conforms to the conventions of Standard English?",
+   "stimulus": "Sea otters play an important role in kelp forest ecosystems along the Pacific coast. The otters eat large numbers of sea urchins, which feed on kelp. When otter populations decline, urchin numbers rise quickly, and the kelp forests that shelter many fish ______ to shrink.",
+   "question": "Which choice completes the text so that it conforms to the conventions of Standard English?",
+   "options": [
+    "begins",
+    "has begun",
+    "is beginning",
+    "begin"
+   ],
+   "correctIndex": 3,
+   "answers": null,
+   "explanation": "빈칸 동사의 주어는 복수 명사 \"the kelp forests\"이고, \"that shelter many fish\"는 주어를 꾸미는 수식절일 뿐이다. 따라서 복수 동사가 필요하며, 앞의 \"decline\", \"rise\"와 맞춰 현재 시제를 쓴 D \"begin\"이 정답이다. A \"begins\", B \"has begun\", C \"is beginning\"은 모두 단수 동사라서 복수 주어 \"forests\"와 수가 일치하지 않는다. 수식절의 \"fish\"나 \"kelp\"를 단수 주어로 착각하면 이런 오답을 고르기 쉽다.",
+   "explanationEn": "The subject of the blank is the plural noun \"the kelp forests.\" The phrase \"that shelter many fish\" only describes the subject. So you need a plural verb, and the present tense matches \"decline\" and \"rise\" earlier in the sentence. That makes D, \"begin,\" correct. A (\"begins\"), B (\"has begun\"), and C (\"is beginning\") are all singular verbs, so they don't agree with the plural subject \"forests.\" These choices can seem right if you mistake \"kelp\" or \"fish\" for a singular subject.",
+   "figure": null,
+   "statements": null
+  },
+  "quality": {
+   "generatedBy": "claude-opus-5-5",
+   "levelTarget": "easy",
+   "targetLetter": "D",
+   "seed": "자연과학(생물·생태)",
+   "hardJudge": {
+    "model": "claude-fable-5-1",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "주어 \"the kelp forests\"(복수)와 동사 수일치 문제. 수식절 \"that shelter many fish\"가 끼어들어 \"fish\"를 주어로 오인하게 하는 전형적 오답 구조. A/B/C 모두 단수형이라 규칙을 알면 즉시 배제 가능. 해설 한·영 일치, 선택지 글자 참조 정확, 사실 오류 없음, 저작권 의심 없음. easy 난이도에 적합."
+   },
+   "advisory": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "fit": true,
+    "correctOk": true,
+    "complianceOk": true,
+    "which": [
+     "fits",
+     "eliminated:3"
+    ],
+    "note": "이 문항은 주어-동사 수 일치를 묻는다. 복수 주어 'forests'에는 'begin'이 맞고, 단수 동사 형태인 나머지 세 선택지는 규칙만 알면 바로 걸러진다. 'kelp'처럼 바로 앞에 놓인 단수 명사가 주어처럼 보이게 하는 함정도 easy 수준에 알맞다. 'fish'는 단수로도 복수로도 쓰여 함정으로서의 힘은 약하지만, 해설 내용에는 문제가 없다.",
+    "passed": true
+   }
+  }
+ }
+]

@@ -13,12 +13,16 @@ export default async function StudentTutoringPage({ searchParams }: { searchPara
     <div className="min-h-screen bg-cream">
       <PageFrame title="1:1 Tutoring">
         <div className="rounded-xl bg-white border border-brand-border p-6 mb-4">
-          <p className="text-[12px] font-bold text-brand-red mb-1">ALTON 1:1 Tutoring</p>
-          <h2 className="text-[20px] font-extrabold text-navy mb-3">Talk with a tutor</h2>
-          <ul className="text-[13.5px] text-grey-500 leading-[1.8] list-disc pl-5 mb-2">
-            <li>1:1 online SAT/AP lessons with tutors from Korea&apos;s top graduate programs</li>
-            <li>A personalized plan and homework built from your practice-test results and weak areas</li>
-            <li>How it works: free consultation with a consultant → trial lesson → regular lessons</li>
+          <p className="text-[12px] font-bold text-brand-red mb-1">ALTON PRIVATE INSTRUCTION</p>
+          <h2 className="text-[20px] font-extrabold text-navy mb-2">Premium 1:1 Online Tutoring</h2>
+          <p className="text-[15px] font-bold text-ink mb-2">Practice reveals the gaps. Expert instruction closes them.</p>
+          <p className="text-[13.5px] text-grey-500 leading-[1.7] mb-4">
+            ALTON pairs your practice-test data with expert tutors from Korea&apos;s top graduate programs to build a plan around your goals.
+          </p>
+          <ul className="text-[13.5px] text-grey-500 leading-[1.7] space-y-3">
+            <li><strong className="text-ink">Precision Diagnostics.</strong> Your practice-test results reveal exactly where points are being lost.</li>
+            <li><strong className="text-ink">Expert 1:1 Instruction.</strong> Live online lessons with a tutor matched to your target score and schedule.</li>
+            <li><strong className="text-ink">Targeted Practice &amp; Progression.</strong> Homework and review built from your weak areas, adjusted as you improve.</li>
           </ul>
         </div>
         {state.kind === "tutoring_member" ? (

@@ -48,8 +48,8 @@ function ProductPreview() {
   );
 }
 
-export default function LandingView({ dest }: { dest: LandingDestinations }) {
-  const headline = heroHeadline();
+export default function LandingView({ dest, practiceTestCount = 0 }: { dest: LandingDestinations; practiceTestCount?: number }) {
+  const headline = heroHeadline(practiceTestCount);
   return (
     <div id="top" className={publicFontClass}>
       <PublicHeader dest={dest} />
@@ -65,6 +65,7 @@ export default function LandingView({ dest }: { dest: LandingDestinations }) {
                 <br />
                 <em>{headline.line2}</em>
               </h1>
+              {headline.growing && <p className="m-0 mt-2 text-[13.5px] text-[var(--p-mute)]">{headline.growing}</p>}
               <p className="p-lede max-w-[560px]">{HERO.supporting}</p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <CtaButton href={dest.freeLearning} ctaName="free_learning" section="hero">{HERO.primaryCta}</CtaButton>

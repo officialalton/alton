@@ -47,12 +47,15 @@ function formatDate(value: string | null, tz: string): string {
   return fmtDate(d, { year: "numeric", month: "long", day: "numeric" }, tz);
 }
 
+const PAGE_SIZE = 10;
+
 export default function ContractArchivePanel() {
   const tz = useViewerTimezone();
   const [rows, setRows] = useState<ContractArchiveRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
+  const [page, setPage] = useState(0);
   const [openId, setOpenId] = useState<string | null>(null);
   // 다운로드 결과를 계약별로 따로 보여준다 — "파일 없음"과 "실패"는 다른 일이다.
   const [downloadState, setDownloadState] = useState<Record<string, string>>({});
@@ -76,6 +79,7 @@ export default function ContractArchivePanel() {
     let cancelled = false;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- 데이터 로드 시작 시 상태 초기화(관용적 패턴)
     setError(null);
+    setPage(0);
     listContractArchiveAction({ search: search.trim() || undefined, status: status || undefined })
       .then((next) => {
         if (!cancelled) setRows(next);
@@ -150,7 +154,7 @@ export default function ContractArchivePanel() {
         <p className="text-[13px] text-grey-500">조건에 맞는 계약이 없습니다.</p>
       )}
 
-      {rows?.map((row) => {
+      {rows?.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE).map((row) => {
         const isOpen = openId === row.contractId;
         return (
           <div
@@ -237,6 +241,13 @@ export default function ContractArchivePanel() {
           </div>
         );
       })}
+      {rows && rows.length > PAGE_SIZE && (
+        <div className="flex items-center justify-center gap-3 pt-2 text-[13px]">
+          <button type="button" disabled={page === 0} onClick={() => setPage(page - 1)} className="px-3 py-1.5 rounded-lg border border-brand-border font-bold disabled:opacity-40">이전</button>
+          <span className="text-grey-500">{page + 1} / {Math.ceil(rows.length / PAGE_SIZE)}</span>
+          <button type="button" disabled={(page + 1) * PAGE_SIZE >= rows.length} onClick={() => setPage(page + 1)} className="px-3 py-1.5 rounded-lg border border-brand-border font-bold disabled:opacity-40">다음</button>
+        </div>
+      )}
     </div>
   );
 }

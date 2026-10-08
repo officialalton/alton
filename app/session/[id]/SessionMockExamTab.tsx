@@ -80,6 +80,8 @@ export default function SessionMockExamTab({
           <MockExamResultView
             attempt={detail}
             readOnly={isTeacher}
+            attempts={(attempts ?? []).filter((a) => a.setGroupId && a.setGroupId === detail.setGroupId)}
+            onSelectAttempt={open}
             reportRole={(viewerRole ?? (isTeacher ? "teacher" : "student")) === "teacher" ? "teacher" : (viewerRole ?? "student") === "student" ? "student" : null}
           />
         ) : isTeacher ? (
@@ -99,7 +101,10 @@ export default function SessionMockExamTab({
       <ul className="flex flex-col gap-2">
         {attempts.map((a) => (
           <li key={a.id} className="rounded-lg border border-grey-200 bg-white p-4">
-            <p className="text-[14px] font-bold">{a.examSetName}</p>
+            <p className="text-[14px] font-bold">
+              {a.examSetName}
+              {a.attemptNo ? <span className="ml-2 text-[12px] font-semibold text-grey-500">Attempt {a.attemptNo}</span> : null}
+            </p>
             <p className="mt-1 text-[12.5px] text-grey-500">
               {STATUS_LABEL[a.status] ?? a.status}
               {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} correct`}

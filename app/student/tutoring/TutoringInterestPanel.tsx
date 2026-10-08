@@ -70,7 +70,7 @@ export default function TutoringInterestPanel({ initialState, entryPoint }: { in
           }
           className="px-4 py-2.5 rounded-lg bg-brand-red text-white text-[13px] font-bold disabled:opacity-60"
         >
-          {pending ? "Saving…" : "I'm interested"}
+          {pending ? "Saving…" : cta.button}
         </button>
       )}
 
