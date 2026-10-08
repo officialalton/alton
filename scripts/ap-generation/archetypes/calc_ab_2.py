@@ -21,16 +21,17 @@ def motion_calc(rng):
 
 def related_rates(rng):
     kind = rng.choice(["circle", "sphere"]); r0 = rnd(rng, 2, 6); k = rnd(rng, 1, 4)
+    unit = "centimeter" if k == 1 else "centimeters"
     if kind == "circle":
-        stem = f"The radius of a circle is increasing at a constant rate of ${k}$ centimeters per second. At the instant the radius is ${r0}$ centimeters, how fast is the area of the circle increasing, in square centimeters per second?"
+        stem = f"The radius of a circle is increasing at a constant rate of ${k}$ {unit} per second. At the instant the radius is ${r0}$ centimeters, how fast is the area of the circle increasing, in square centimeters per second?"
         key_v = 2 * sp.pi * r0 * k
-        ds = [(sp.pi * r0 * r0 * k, "Multiplies the area formula by dr/dt instead of differentiating."), (2 * sp.pi * k, "Forgets the factor r from differentiating r squared."),
-              (2 * sp.pi * r0, "Forgets to multiply by dr/dt."), (sp.pi * r0 * k, "Differentiates r^2 as r.")]
+        ds = [(sp.pi * r0 * r0 * k, f"Multiplies the area formula by dr/dt instead of differentiating: pi({r0})^2({k})."), (2 * sp.pi * k, f"Differentiates pi r^2 as 2 pi but forgets the factor r = {r0}: 2 pi ({k})."),
+              (2 * sp.pi * r0, f"Computes dA/dr = 2 pi ({r0}) and forgets to multiply by dr/dt = {k}."), (sp.pi * r0 * k, f"Differentiates r^2 as r instead of 2r: pi ({r0})({k}).")]
     else:
-        stem = f"A spherical balloon is being inflated so that its radius increases at ${k}$ centimeters per second. At the instant the radius is ${r0}$ centimeters, how fast is the volume increasing, in cubic centimeters per second? (The volume of a sphere is $V=\\frac{{4}}{{3}}\\pi r^3$.)"
+        stem = f"A spherical balloon is being inflated so that its radius increases at ${k}$ {unit} per second. At the instant the radius is ${r0}$ centimeters, how fast is the volume increasing, in cubic centimeters per second? (The volume of a sphere is $V=\\frac{{4}}{{3}}\\pi r^3$.)"
         key_v = 4 * sp.pi * r0 ** 2 * k
-        ds = [(sp.Rational(4, 3) * sp.pi * r0 ** 3 * k, "Uses the volume formula instead of its derivative."), (4 * sp.pi * r0 * k, "Differentiates r^3 as 3r (wrong power)."),
-              (4 * sp.pi * r0 ** 2, "Forgets dr/dt."), (sp.Rational(4, 3) * sp.pi * 3 * r0 ** 2 * k / 2, "Wrong constant after differentiating.")]
+        ds = [(sp.Rational(4, 3) * sp.pi * r0 ** 3 * k, f"Multiplies the volume formula by dr/dt instead of differentiating: (4/3) pi ({r0})^3 ({k})."), (4 * sp.pi * r0 * k, f"Differentiates r^3 as r (wrong power) times 4 pi: 4 pi ({r0})({k})."),
+              (4 * sp.pi * r0 ** 2, f"Computes dV/dr = 4 pi ({r0})^2 and forgets to multiply by dr/dt = {k}."), (2 * sp.pi * r0 ** 2 * k, f"Differentiates r^3 as (3/2) r^2, halving the derivative: 2 pi ({r0})^2 ({k}).")]
     key = Opt(fmt(key_v), True, "Differentiates the formula with respect to time (chain rule).", key_v)
     return pack("related_rates", "4.4", "1.D", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in ds], rng, est=90, facts=[f"rate={key_v}"])
 
@@ -132,7 +133,7 @@ def optimization(rng):
     # 독립 수치 경로
     best = max(2 * xx * (c - xx * xx) for xx in [i / 1000 * (c ** 0.5) for i in range(0, 1001)])
     assert abs(best - key_v) < 0.05 * key_v
-    key = Opt(fmt(key_v), True, "Area 2x(c - x^2) is maximized at x = k.", key_v)
+    key = Opt(fmt(key_v), True, f"Area 2x({c} - x^2) is maximized at x = {k}, giving {key_v}.", key_v)
     ds = [Opt(fmt(2 * k ** 3), False, f"Uses base x instead of 2x, so the area x({c} - x^2) is maximized at x = {k} with value {2*k**3}.", 2 * k ** 3), Opt(fmt(k), False, f"Reports the maximizing value x = {k} instead of the maximum area.", k),
           Opt(fmt(3 * k ** 3), False, f"Uses height {c} (the y-intercept) instead of {c} - {k}^2 = {c-k*k} at the optimum.", 3 * k ** 3), Opt(fmt(2 * k * c), False, f"Evaluates 2x({c}) at x = {k} using the full height {c}.", 2 * k * c)]
     return pack("optimization", "5.11", "1.E", "not_allowed", stem, key, ds, rng, est=100, facts=[f"max area={key_v}"])

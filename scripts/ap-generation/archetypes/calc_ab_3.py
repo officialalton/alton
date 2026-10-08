@@ -70,7 +70,12 @@ def slope_field_match(rng):
     rows = [["(%d, %d)" % p, ("%g" % s)] for p, s in zip(pts, sl)]
     lab = lambda n: "$\\dfrac{dy}{dx}=%s$" % {"x-y": "x-y", "x+y": "x+y", "xy": "xy", "y-x": "y-x", "x^2-y": "x^2-y", "y/2": "\\frac{y}{2}"}[n]
     stem = "The table gives the slopes of a slope field at selected points $(x,y)$. Which differential equation could the slope field represent?"
-    opts = [Opt(lab(n), n == keyn, "Slopes at all listed points match." if n == keyn else "Fails the slope at at least one listed point.", None) for n in sel]
+    def why(n):
+        if n == keyn: return "The equation reproduces the slope at every listed point."
+        for (a, b), sv in zip(pts, sl):
+            v = _DE[n](a, b)
+            if abs(v - sv) > 1e-9: return f"At the point ({a}, {b}) this equation gives slope {v:g}, but the table shows {sv:g}."
+    opts = [Opt(lab(n), n == keyn, why(n), None) for n in sel]
     return pack_fixed("slope_field_match", "7.3", "2.C", "not_allowed", stem, opts, rng, stimulus=table_stimulus("Slopes of the field", "point (x, y)", rows, "slope"), est=90, facts=[f"key={keyn}"])
 
 def separable_particular(rng):

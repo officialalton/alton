@@ -55,10 +55,10 @@ def lim_alg(rng):
     den = (x - a) * (x + a + p)
     L = sp.limit(num / den, x, a)
     assert L == S(2 * a) / (2 * a + p)
-    stem = f"What is $\\displaystyle\\lim_{{x\\to {a}}}\\dfrac{{x^2-{a*a}}}{{x^2+{p}x-{a*a+p*a}}}$?"
+    stem = f"What is $\\displaystyle\\lim_{{x\\to {a}}}\\dfrac{{{sp.latex(x**2 - a*a)}}}{{{sp.latex(x**2 + p*x - (a*a + p*a))}}}$?"
     key = Opt(fmt(L), True, "Factors and cancels the common (x-a) factor before substituting.", L)
     ds = [Opt(fmt(0), False, "Substitutes x = %d and reads the 0/0 form as the value 0." % a, 0), Opt("The limit does not exist", False, "Substitutes x = %d, gets 0/0, and concludes the limit does not exist instead of factoring." % a, None),
-          Opt(fmt(S(a) / (2 * a + p)), False, "Cancels (x - %d) correctly but then substitutes into x + %d and into the numerator factor x + %d only half of the way, giving %d/%d." % (a, a, a, a, 2 * a + p), S(a) / (2 * a + p)),
+          Opt(fmt(S(a) / (2 * a + p)), False, "Cancels (x - %d) but replaces the numerator factor x + %d with %d, giving %d/%d instead of %d/%d." % (a, a, a, a, 2 * a + p, 2 * a, 2 * a + p), S(a) / (2 * a + p)),
           Opt(fmt(S(2 * a) / (a + p)), False, "Cancels (x - %d) but writes the remaining denominator factor as x + %d instead of x + %d, giving %d/%d." % (a, p, a + p, 2 * a, a + p), S(2 * a) / (a + p))]
     return pack("lim_alg", "1.7", "1.C", "not_allowed", stem, key, ds, rng, est=75, facts=[f"limit={L}"])
 
