@@ -96,9 +96,9 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>): strin
       if (!x.criterion.trim()) r.push(`row_${x.row_id}_no_criterion`);
     }
     // 수치 서술 파트에는 정답 행이 있어야 한다
-    if (pt.response_mode === "calculate" && !/do not evaluate/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /answer|approximation|value|expression/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
+    if (pt.response_mode === "calculate" && !/do not evaluate/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /answer|approximation|value|expression|equation|speed|vector|terms|slope|distance|derivative/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
     // 정당화 파트는 조건/이유 행이 있어야 한다
-    if (pt.response_mode === "explain" && pt.skill_codes.some((s) => s.startsWith("3.")) && !pt.rubric_rows.some((x) => /reason|justif|condition|continuous|compare|consider|baseline|differ|support/i.test(x.criterion))) r.push(`part_${pt.label}_justification_without_reason_row`);
+    if (pt.response_mode === "explain" && pt.skill_codes.some((s) => s.startsWith("3.")) && !pt.rubric_rows.some((x) => /reason|justif|condition|continuous|compare|consider|baseline|differ|support|classif|sign change|changes sign/i.test(x.criterion))) r.push(`part_${pt.label}_justification_without_reason_row`);
   }
   if (total !== p.total_points) r.push(`total_points_${total}_vs_${p.total_points}`);
   if (p.est_minutes > 20) r.push("est_minutes_too_long");

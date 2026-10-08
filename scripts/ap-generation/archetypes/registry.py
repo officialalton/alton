@@ -38,4 +38,5 @@ if __name__ == "__main__":
         which = sys.argv[2] if len(sys.argv) > 2 else "ab"
         if which == "bc": print(json.dumps({"mc": list(BCMC), "frq": ["frq_series", "frq_parametric"]}))
         else: print(json.dumps({"mc": [k for k in MC if k not in BCMC], "frq": [k for k in FRQ if k in ("frq_table_rate","frq_fprime_graph","frq_diffeq","frq_area_volume")]}))
+    elif cmd == "all": print(json.dumps({n: batch(n, int(sys.argv[2]), 0) for n in list(MC) + list(FRQ)}))
     elif cmd == "batch": print(json.dumps(batch(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 0)))

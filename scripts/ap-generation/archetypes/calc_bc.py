@@ -41,12 +41,13 @@ def improper_integral(rng):
     p = rng.choice([S(1) / 2, S(2) / 3, S(3) / 2, 2, 3, S(5) / 2]); conv = p > 1
     val = 1 / (p - 1) if conv else None
     stem = f"What is the value of $\\displaystyle\\int_1^{{\\infty}} \\dfrac{{dx}}{{x^{{{sp.latex(p)}}}}}$?"
+    cv = lambda v: "The integral converges to " + fmt(v)
     if conv:
-        key = Opt(fmt(val), True, "p-integral converges for p>1 to 1/(p-1).", val)
-        ds = [Opt("The integral diverges", False, "Believes every improper integral to infinity diverges.", None), Opt(fmt(p), False, "Reports the exponent.", p), Opt(fmt(1 / p), False, "Uses 1/p instead of 1/(p-1).", 1 / p), Opt(fmt(p - 1), False, "Inverts 1/(p-1).", p - 1)]
+        key = Opt(cv(val), True, "A p-integral converges for p > 1 to 1/(p - 1).", val)
+        ds = [Opt("The integral diverges", False, "Believes every improper integral with an infinite limit diverges.", None), Opt(cv(p), False, "Reports the exponent p as the value of the integral.", p), Opt(cv(1 / p), False, "Uses 1/p instead of 1/(p - 1) for the value.", 1 / p), Opt(cv(p - 1), False, "Inverts 1/(p - 1) and reports p - 1.", p - 1)]
     else:
-        key = Opt("The integral diverges", True, "p-integral diverges for p<=1.", None)
-        ds = [Opt(fmt(1 / (1 - p)), False, "Applies 1/(p-1) formula with the wrong sign.", 1 / (1 - p)), Opt(fmt(p), False, "Reports the exponent.", p), Opt(fmt(0), False, "Thinks the tail vanishes.", 0), Opt(fmt(1 / p), False, "Uses 1/p.", 1 / p)]
+        key = Opt("The integral diverges", True, "A p-integral with p <= 1 diverges.", None)
+        ds = [Opt(cv(1 / (1 - p)), False, "Applies the 1/(p - 1) formula with the opposite sign.", 1 / (1 - p)), Opt(cv(p), False, "Reports the exponent p as the value of the integral.", p), Opt(cv(0), False, "Thinks the tail beyond 1 contributes nothing.", 0), Opt(cv(1 / p), False, "Uses 1/p as the value of a divergent integral.", 1 / p)]
     return pack("improper_integral", "6.13", "3.D", "not_allowed", stem, key, ds, rng, est=75, facts=[f"converges={conv}"])
 
 def euler_method(rng):
@@ -95,7 +96,7 @@ def param_dydx(rng):
     xp, yp = sp.diff(X, t), sp.diff(Y, t); s = S(yp.subs(t, t0)) / xp.subs(t, t0)
     assert xp.subs(t, t0) != 0
     ds = [S(xp.subs(t, t0)) / yp.subs(t, t0) if yp.subs(t, t0) != 0 else None, yp.subs(t, t0), S(yp.subs(t, t0)) * xp.subs(t, t0), -s]
-    why = ["Inverts: computes dx/dy.", "Reports dy/dt only.", "Multiplies the two derivatives.", "Sign error."]
+    why = ["Inverts: computes dx/dy.", "Reports dy/dt only.", "Multiplies the two derivatives.", "Makes a sign error when simplifying the quotient."]
     stem = f"A curve is defined by $x(t)={sp.latex(X)}$ and $y(t)={sp.latex(Y)}$. What is $\\dfrac{{dy}}{{dx}}$ at $t={t0}$?"
     key = Opt(fmt(s), True, "dy/dx = (dy/dt)/(dx/dt).", s)
     return pack("param_dydx", "9.1", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None], rng, est=80, facts=[f"slope={s}"])
@@ -105,7 +106,7 @@ def param_speed_calc(rng):
     X = a * t ** 2; Y = b * sp.sin(t) + t
     xp, yp = sp.diff(X, t), sp.diff(Y, t); sp_ = math.sqrt(float(xp.subs(t, t0)) ** 2 + float(yp.subs(t, t0)) ** 2)
     stem = f"A particle moves in the plane with position $(x(t),y(t))=\\left({sp.latex(X)},\\,{sp.latex(Y)}\\right)$ for $t\\ge 0$. What is the speed of the particle at time $t={t0}$?"
-    alt = [(abs(float(xp.subs(t, t0))) + abs(float(yp.subs(t, t0))), "Adds the components instead of using the Pythagorean combination."), (float(yp.subs(t, t0)) / float(xp.subs(t, t0)), "Reports dy/dx."), (math.sqrt(float(X.subs(t, t0)) ** 2 + float(Y.subs(t, t0)) ** 2), "Uses the position magnitude."), (float(xp.subs(t, t0)) ** 2 + float(yp.subs(t, t0)) ** 2, "Forgets the square root.")]
+    alt = [(abs(float(xp.subs(t, t0))) + abs(float(yp.subs(t, t0))), "Adds the components instead of using the Pythagorean combination."), (float(yp.subs(t, t0)) / float(xp.subs(t, t0)), "Reports the slope dy/dx instead of the speed."), (math.sqrt(float(X.subs(t, t0)) ** 2 + float(Y.subs(t, t0)) ** 2), "Uses the magnitude of the position vector instead of the velocity."), (float(xp.subs(t, t0)) ** 2 + float(yp.subs(t, t0)) ** 2, "Forgets the square root.")]
     key = Opt("$%.3f$" % sp_, True, "Speed = sqrt((x')^2+(y')^2).", sp_)
     return pack("param_speed_calc", "9.6", "1.E", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=85, facts=[f"speed={sp_}"])
 
@@ -114,7 +115,7 @@ def polar_area_calc(rng):
     r = lambda th: a + b * math.sin(th)
     A = 0.5 * _I.quad(lambda th: r(th) ** 2, lo, hi)[0]
     stem = f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta={lo:g}$ and $\\theta={hi:.4g}$?" if hi != math.pi / 2 and hi != math.pi else f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta=0$ and $\\theta={'\\pi' if hi==math.pi else '\\frac{\\pi}{2}'}$?"
-    alt = [(_I.quad(r, lo, hi)[0] * 0.5, "Integrates r instead of r squared."), (_I.quad(lambda th: r(th) ** 2, lo, hi)[0], "Omits the factor 1/2."), (0.5 * _I.quad(lambda th: r(th), lo, hi)[0] ** 2, "Squares the integral instead of integrating the square."), (0.5 * _I.quad(lambda th: (a - b * math.sin(th)) ** 2, lo, hi)[0], "Sign error inside r.")]
+    alt = [(_I.quad(r, lo, hi)[0] * 0.5, "Integrates r instead of r squared."), (_I.quad(lambda th: r(th) ** 2, lo, hi)[0], "Omits the factor 1/2."), (0.5 * _I.quad(lambda th: r(th), lo, hi)[0] ** 2, "Squares the integral instead of integrating the square."), (0.5 * _I.quad(lambda th: (a - b * math.sin(th)) ** 2, lo, hi)[0], "Uses a - b sin(theta) for r (sign error inside r).")]
     key = Opt("$%.3f$" % A, True, "Area = (1/2) integral of r^2 d theta.", A)
     return pack("polar_area_calc", "9.8", "1.D", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=90, facts=[f"A={A}"])
 
@@ -147,7 +148,7 @@ def taylor_coeff(rng):
     wrong_nofact = c * sp.factorial(n) / k ** n * 1        # k^n 누락 형태
     wrong_k = c / k ** n if c != 0 else None
     ds = [wrong_fact, wrong_k, c * sp.factorial(n), -c]
-    why = ["Reports the nth derivative at 0 without dividing by n!.", "Forgets the k^n from the chain rule.", "Multiplies by n! instead of dividing.", "Sign error."]
+    why = ["Reports the nth derivative at 0 without dividing by n!.", "Forgets the k^n from the chain rule.", "Multiplies by n! instead of dividing.", "Makes a sign error when simplifying the quotient."]
     stem = f"What is the coefficient of $x^{n}$ in the Maclaurin series for $f(x)={sp.latex(f)}$?"
     key = Opt(fmt(c), True, "f^(n)(0)/n! (or substitute k x into the standard series).", c)
     return pack("taylor_coeff", "10.14", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None and d != 0 or (d == 0 and False)], rng, est=85, facts=[f"coef={c}"])

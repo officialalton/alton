@@ -16,7 +16,7 @@ def motion_calc(rng):
     stem = f"A particle moves along a straight line with velocity $v(t)={A}t\\ln({B}t+{C})$ for $t\\ge 0$. What is the acceleration of the particle at time $t={t0}$?"
     key = Opt(fmt(key_v, 3), True, "Differentiates v(t) with the product rule and chain rule.", key_v)
     ds = [Opt(fmt(miss, 3), False, "Product rule with the second term missing.", miss), Opt(fmt(vval, 3), False, "Evaluates the velocity instead of the acceleration.", vval),
-          Opt(fmt(wrong2, 3), False, "Keeps only the t * d/dt[ln] term.", wrong2), Opt(fmt(-key_v, 3), False, "Sign error.", -key_v)]
+          Opt(fmt(wrong2, 3), False, "Keeps only the t * d/dt[ln] term.", wrong2), Opt(fmt(-key_v, 3), False, "Reports the acceleration with the wrong sign.", -key_v)]
     return pack("motion_calc", "4.2", "1.E", "required", stem, key, ds, rng, est=100, facts=[f"a={key_v}"])
 
 def related_rates(rng):
