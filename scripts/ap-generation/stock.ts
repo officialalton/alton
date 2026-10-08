@@ -4,14 +4,14 @@
 // 출력: data/ap/stock/items.json, data/ap/stock/summary.json, docs/ap/stock-report.md
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { buildStock, cellCounts, LATEST_GATE, shortfall, summarize, topicTargets, VARIANT_CAP, type HistoryEntry, type RawCand } from "../../lib/ap-generation/stock";
+import { REVALIDATED_GATE, buildStock, cellCounts, LATEST_GATE, shortfall, summarize, topicTargets, VARIANT_CAP, type HistoryEntry, type RawCand } from "../../lib/ap-generation/stock";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
 const MC_TARGET = Number(arg("--mc-target", "50")); const FRQ_TARGET = Number(arg("--frq-target", "5"));
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027"); const OUT = path.resolve(process.cwd(), "data/ap/stock"); mkdirSync(OUT, { recursive: true });
 const load = (run: string) => (existsSync(path.join(ROOT, run, "candidates.json")) ? (JSON.parse(readFileSync(path.join(ROOT, run, "candidates.json"), "utf-8")) as RawCand[]) : []);
-const WITH_S1A = process.argv.includes("--with-s1a"); // S1a 후보를 별도 보조 배치로 내보낼 때(items.json 의 783행 기준선은 바꾸지 않는다)
+const WITH_S1A = existsSync(path.join(ROOT, "s1a-final", "candidates.json")); // S1a 는 항상 같은 계산에 포함(중복·문항군을 한 번에 계산해 단일 재고 표를 유지) // S1a 후보를 별도 보조 배치로 내보낼 때(items.json 의 783행 기준선은 바꾸지 않는다)
 const runs: Record<string, RawCand[]> = { run1: load("run1"), run2: load("run2"), run2bc: load("run2bc"), ...(WITH_S1A ? { "s1a-final": load("s1a-final") } : {}) };
 // 이력: 중간 런에서 같은 원형·시드(pack_id)로 평가된 결과를 최종 항목의 history 에 붙인다.
 const history: Record<string, HistoryEntry[]> = {};
@@ -21,11 +21,18 @@ if (WITH_S1A) for (const c of load("s1a-final") as (RawCand & { history?: { run:
 // 파서 오류로 반려됐다가 정규화 파서에서 전 게이트 통과가 확인된 후보만(후보 ID·오류 파서·사후 결과 모두 확인된 건) 상태를 올린다. "+24 추정" 전체가 아니다.
 const reparse = existsSync(path.join(OUT, "reparse-candidates.json")) ? (JSON.parse(readFileSync(path.join(OUT, "reparse-candidates.json"), "utf-8")) as { run: string; key: string; old_reason: string; confirmed: boolean }[]).filter((r) => r.confirmed) : [];
 for (const r of reparse) { const list = runs[r.run]; const i = list?.findIndex((c) => c.candidateKey === r.key) ?? -1; if (i < 0) continue; const c = list[i]; (history[hk(c)] ??= []).push({ run: "reparse-2026-10-09", gateVersion: LATEST_GATE, outcome: "rejected", reasons: `malformed review output (old parser): ${r.old_reason}` }); list[i] = { ...c, rejectionReason: null, reviewState: "auto_passed" } as RawCand; }
+// 근사 중복 6건: 개별 분류(숫자·문구 변형 = 같은 문항군 변형으로 보존, 풀이 구조·스킬이 다르면 독립). 일괄 반려/일괄 독립 처리 아님. 완전 중복 여부는 buildStock 이 판정.
+const nearDup = existsSync(path.join(OUT, "near-dup-classification.json")) ? (JSON.parse(readFileSync(path.join(OUT, "near-dup-classification.json"), "utf-8")) as { run: string; key: string; reason: string }[]) : [];
+for (const r of nearDup) { const list = runs[r.run]; const i = list?.findIndex((c) => c.candidateKey === r.key) ?? -1; if (i < 0) continue; const c = list[i]; if (c.rejectionReason !== "duplicate_gate_near_duplicate") continue; (history[hk(c)] ??= []).push({ run: "near-dup-classified-2026-10-09", gateVersion: LATEST_GATE, outcome: "passed", reasons: `near-duplicate gate: classified as same item-family variant (${r.reason})` }); list[i] = { ...c, rejectionReason: null, reviewState: "auto_passed" } as RawCand; }
+// 재검증 통과 승격(apply-revalidation.ts 가 만든 결정만; 결정적 검사 전부 통과한 것)
+const applyF = path.join(OUT, "revalidation-apply.json");
+if (existsSync(applyF)) for (const r of JSON.parse(readFileSync(applyF, "utf-8")) as { stockKey: string; apply: boolean; source: string }[]) { if (!r.apply) continue; const [run, key] = [r.stockKey.split(":")[0], r.stockKey.slice(r.stockKey.indexOf(":") + 1)]; const list = runs[run]; const i = list?.findIndex((c) => c.candidateKey === key) ?? -1; if (i < 0) continue; const c = list[i]; (history[hk(c)] ??= []).push({ run: `revalidated-${r.source}`, gateVersion: REVALIDATED_GATE, outcome: "passed", reasons: "legacy re-validation: Opus independent solve + Sonnet 5-criteria review (subject variant, parser 66ad0da7e962) + deterministic checks (gates v2, free structure/computation, generator-defects, table-text consistency)" }); list[i] = { ...c, gateOverride: REVALIDATED_GATE } as RawCand; }
 const items = buildStock(runs, { history, historyKey: hk });
 const subjects = ["ap_calculus_ab", "ap_calculus_bc", "ap_biology", "ap_microeconomics"];
 const summary = summarize(items); const cells = cellCounts(items);
-if (WITH_S1A) { writeFileSync(path.join(OUT, "s1a-items.json"), JSON.stringify(items.filter((i) => i.run === "s1a-final").map((i) => ({ ...i })), null, 0)); console.log(`s1a-items.json: ${items.filter((i) => i.run === "s1a-final").length}행(전체 ${items.length}행 기준으로 중복·문항군 계산)`); process.exit(0); }
-writeFileSync(path.join(OUT, "items.json"), JSON.stringify(items.map((i) => ({ ...i })), null, 0));
+// 한 번의 계산으로 두 파일을 쓴다: items.json = 기본 배치(783행), s1a-items.json = 보조 배치(S1a). 합친 표가 단일 재고(요약·보고·DB 비교 기준).
+if (WITH_S1A) writeFileSync(path.join(OUT, "s1a-items.json"), JSON.stringify(items.filter((i) => i.run === "s1a-final").map((i) => ({ ...i })), null, 0));
+writeFileSync(path.join(OUT, "items.json"), JSON.stringify(items.filter((i) => i.run !== "s1a-final").map((i) => ({ ...i })), null, 0));
 writeFileSync(path.join(OUT, "summary.json"), JSON.stringify({ latestGate: LATEST_GATE, variantCap: VARIANT_CAP, summary, cells }, null, 1));
 
 const cur = (s: string) => JSON.parse(readFileSync(path.resolve(process.cwd(), `data/ap/curriculum-2027/${s}.json`), "utf-8")) as ApCurriculumFile;

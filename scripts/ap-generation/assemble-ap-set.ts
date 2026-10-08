@@ -1,7 +1,10 @@
 // AP 모의고사 세트 조립(총괄·관리자용). 기본 dry-run, --execute 는 로컬 DB 에서만. 모의고사 용도(mock_exam)로 변환된 문항만 쓴다.
+//   겹침: --max-overlap N (이전 세트에서 재사용할 문항 수; 기본 전체 모의고사 0 = OVERLAP_DEFAULTS). 단원 비중·문항군 다양성은 공식 구조에서 자동 적용(--no-composition 로 끔).
 //   npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_ab --label mc_practice --name "AP Calculus AB MC Practice 1" [--tier free|tutoring] [--execute]
 import { connect } from "../keywords/db";
-import { planApSet, type AssembleCandidate } from "../../lib/ap-exam/assemble";
+import { readFileSync } from "node:fs";
+import { OVERLAP_DEFAULTS, planApSet, type AssembleCandidate, type AssembleOptions } from "../../lib/ap-exam/assemble";
+import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 import { apSectionLayout, type ApSetLabel } from "../../lib/ap-exam/layouts";
 
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined; };
@@ -22,7 +25,12 @@ async function main() {
     candidateKey: r.candidate_key, problemId: p.problem_id, versionId: p.problem_version_id, kind: r.kind as "mc" | "frq_bundle", purpose: r.purpose as "mock_exam", releaseTier: r.release_tier,
     calculator: r.calculator, keywordCode: r.keyword_code, itemFamilyId: r.item_family_id, difficulty: DIFF[r.difficulty_provisional ?? ""] ?? "medium", itemIndex: p.item_index,
   })));
-  const plan = planApSet(subject, label, pool, used);
+  const mcTotal = apSectionLayout(subject).filter((x) => x.kind === "mc").reduce((a, x) => a + x.count, 0);
+  const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${subject}.json`, "utf-8")) as ApCurriculumFile;
+  const unitBounds = Object.fromEntries(cur.weights.filter((w) => w.axis === "unit" && w.section === "mc").map((w) => [w.code, { min: Math.ceil(((w.min ?? 0) / 100) * mcTotal), max: Math.floor(((w.max ?? 100) / 100) * mcTotal) }]));
+  const opts: AssembleOptions = { maxOverlap: arg("max-overlap") !== undefined ? Number(arg("max-overlap")) : OVERLAP_DEFAULTS[label], ...(process.argv.includes("--no-composition") ? {} : { unitBounds }) };
+  const plan = planApSet(subject, label, pool, used, opts);
+  if (plan.compositionIssues.length || plan.diversityIssues.length) console.log(`구성/다양성 미충족: ${[...plan.compositionIssues, ...plan.diversityIssues].join(", ")}`);
   console.log(`풀 ${pool.length}건 → 선택 ${plan.items.length}건, 부족: ${plan.shortfall.map((s) => `${s.sectionKey} ${s.have}/${s.need}`).join(", ") || "없음"}`);
   if (!plan.ok) { console.log("공식 구조를 채우지 못해 세트를 만들지 않습니다(라벨 규칙)."); return; }
   if (!execute) { console.log("dry-run 종료."); return; }

@@ -7,6 +7,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { gateCandidate } from "../../lib/ap-figures/gate";
 import { renderFigureSvg } from "../../lib/problem-figures/render";
+import { tableTextContradictions } from "../../lib/ap-generation/table-consistency";
 import { validateAp } from "../../lib/problem-figures/templates/ap-figures";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
@@ -20,7 +21,7 @@ const gated = all.map((i) => ({ i, g: gateCandidate({ stockKey: i.stockKey, cand
 const tables = shuffle(gated.filter((x) => x.g.spec!.type === "ap_table")); const graphs = shuffle(gated.filter((x) => x.g.spec!.type === "ap_graph"));
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x));
 const nums = (s: string): string[] => (s.match(/-?\d+(?:\.\d+)?/g) ?? []) as string[];
-const relevant = { v: true }; let bodyMissingBlocked = 0;
+const relevant = { v: true }; const mutInfo: { v: Json | null } = { v: null }; let bodyMissingBlocked = 0;
 function mutate(spec: Json, kind: string, expl: string): Json | null {
   const s = clone(spec);
   if (kind === "table_body_missing") { if (!Array.isArray(s.rows) || !s.rows.length) return null; s.rows = []; return s; }
@@ -29,7 +30,8 @@ function mutate(spec: Json, kind: string, expl: string): Json | null {
     s.rows.forEach((r: unknown[], ri: number) => r.forEach((c, ci) => { if (ci > 0 && /^-?\d+(\.\d+)?$/.test(String(c)) && nums(expl).includes(String(c))) cand.push([ri, ci]); }));
     if (!cand.length) { s.rows.forEach((r: unknown[], ri: number) => r.forEach((c, ci) => { if (ci > 0 && /^-?\d+(\.\d+)?$/.test(String(c))) cand.push([ri, ci]); })); relevant.v = false; } else relevant.v = true;
     if (!cand.length) return null; const [ri, ci] = cand[Math.floor(rnd() * cand.length)]; const v = Number(s.rows[ri][ci]); const dec = (String(s.rows[ri][ci]).split(".")[1] ?? "").length;
-    s.rows[ri][ci] = (v === 0 ? 3 : v * 1.6 + 1).toFixed(dec); return s;
+    let nv = (Math.abs(v) < 5 ? v + 3 : v * 1.4).toFixed(dec); if (nv === String(s.rows[ri][ci])) nv = (v + 7).toFixed(dec); // 값이 실제로 바뀌어야 결함이다(이전 판은 음의 정수에서 반올림되어 무변경이었음)
+    if (nv === String(s.rows[ri][ci])) return null; mutInfo.v = { row: ri, col: ci, from: String(s.rows[ri][ci]), to: nv }; s.rows[ri][ci] = nv; return s;
   }
   if (kind === "graph_series_shifted") { if (!s.series?.length || !s.y) return null; const d = (s.y.max - s.y.min) * 0.3; s.series[0].points = s.series[0].points.map(([x, y]: [number, number]) => [x, y + d]); return s; }
   if (kind === "graph_labels_swapped") { if ((s.series?.length ?? 0) < 2) return null; const a = s.series[0].label; s.series[0].label = s.series[1].label; s.series[1].label = a; return s; }
@@ -46,7 +48,7 @@ const used = new Set<string>();
 for (const [type, pool, defects, nDef] of plan) {
   let made = 0; for (const it of pool) { if (made >= nDef) break; const g = gOf.get(it.stockKey)!; const d = defects[made % defects.length]; const m = mutate(g.spec as Json, d, String(it.payload.explanation_en ?? "")); if (!m) continue;
     const v = validateAp(m as Record<string, unknown>); if (!v.ok) continue;
-    (m as Json).__relevant = relevant.v; used.add(it.stockKey); rows.push({ it, spec: m, defect: d, render: renderFigureSvg(v.spec as never), table: type === "table" }); made++; }
+    (m as Json).__relevant = relevant.v; (m as Json).__mut = mutInfo.v; used.add(it.stockKey); rows.push({ it, spec: m, defect: d, render: renderFigureSvg(v.spec as never), table: type === "table" }); made++; }
 }
 const nCtrl = { table: 12, graph: 6 }; const ctrl: typeof rows = [];
 for (const [type, pool] of [["table", tables.map((x) => x.i)], ["graph", graphs.map((x) => x.i)]] as [string, Json[]][]) { let n = 0; for (const it of pool) { if (n >= nCtrl[type as "table" | "graph"]) break; if (used.has(it.stockKey)) continue; ctrl.push({ it, spec: gOf.get(it.stockKey)!.spec as Json, defect: "none", render: gOf.get(it.stockKey)!.output!, table: type === "table" }); n++; } }
@@ -60,7 +62,8 @@ const cells: unknown[] = []; const packs: Record<string, unknown[]> = {}; const 
     await pg.setContent(wrapHtml(r.render, r.table)); await (await pg.$("#fig"))!.screenshot({ path: path.join(dir, "img", `${key}.png`) });
     const p = clone(r.it.payload); if (Array.isArray(p.options) && typeof p.options[0] === "string") p.options = p.options.map((t: string, i: number) => ({ text: t, why: (p.option_rationale ?? [])[i] ?? null, value: null })); // 구형식 보기(문자열) → 객체
     cells.push({ cellId, archetype: r.it.payload.archetype ?? "legacy", kind: "mc", unitCode: r.it.unitCode, topic: r.it.keywordCode, skill: r.it.skillPrimary, calculator: r.it.calculator, candidates: 1, extraTopics: [] }); packs[cellId] = [p];
-    truth[key] = { answerRelevantCell: (r.spec as Json).__relevant ?? null, defect: r.defect, source: r.it.stockKey, figure: r.table ? "table" : "graph", validation: r.it.validation };
+    const det = r.defect === "table_wrong_value" ? tableTextContradictions({ ...p, stimulus: { kind: "table", description: "", data: { columns: (r.spec as Json).columns, rows: (r.spec as Json).rows } } }).length > 0 : null;
+    truth[key] = { mutatedCell: (r.spec as Json).__mut ?? null, deterministicConsistencyDetected: det, answerRelevantCell: (r.spec as Json).__relevant ?? null, defect: r.defect, source: r.it.stockKey, figure: r.table ? "table" : "graph", validation: r.it.validation };
   }
   await br.close();
   writeFileSync(path.join(dir, "cells.json"), JSON.stringify(cells, null, 1)); writeFileSync(path.join(dir, "packs.json"), JSON.stringify(packs)); writeFileSync(path.join(dir, "truth.json"), JSON.stringify(truth, null, 1));

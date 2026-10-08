@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
+import { validateBlueprint, type Blueprint } from "../../lib/ap-generation/blueprint";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
 import { normalizeReview } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
@@ -116,10 +117,19 @@ function wordReq(c: Cell, pack: Json, id: string): BatchReq {
   const body = body0 + fbText;
   return { custom_id: id, params: { model: MODELS.gen, ...think(MODELS.gen), max_tokens: c.kind === "mc" ? 2500 : 4000, system: [{ type: "text", text: WORD_SYS + "\n" + guideWordingRules(), cache_control: SYS_CACHE }], tools: [c.kind === "mc" ? mcWordTool : frqWordTool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: body }] } };
 }
+const bpFile = () => path.join(DIR, "blueprint-check.json");
+const bpCheck = (): Record<string, string[]> => (existsSync(bpFile()) ? readJson<Record<string, string[]>>(bpFile()) : {});
+/** 설계도 검증(생성 전, LLM 호출 없음). AP_REQUIRE_BLUEPRINT=1 이면 설계도 없는 팩도 실패. 실패한 팩은 문장 생성·검토에 가지 않는다(비용 0). */
+function blueprintStage() {
+  const packs = genPacks(); const ctx = { skills: skillSet, topicUnit: unitOf as Map<string, string> }; const out: Record<string, string[]> = {};
+  for (const c of cells()) packs[c.cellId].forEach((p, i) => { const bp = (p as Json).blueprint as Partial<Blueprint> | undefined; const iss = bp ? validateBlueprint(bp, ctx).map((x) => x.code) : (process.env.AP_REQUIRE_BLUEPRINT ? ["missing_blueprint"] : []); out[`${c.cellId}-k${i}`] = iss; });
+  writeFileSync(bpFile(), JSON.stringify(out, null, 1)); const bad = Object.entries(out).filter(([, v]) => v.length);
+  console.log(`blueprint: ${Object.keys(out).length}건 중 실패 ${bad.length}건(호출 비용 0)`, bad.slice(0, 6));
+}
 async function genStage() {
-  const packs = genPacks();
+  const packs = genPacks(); const bp = bpCheck();
   const reqs: BatchReq[] = [];
-  for (const c of cells()) packs[c.cellId].forEach((p, i) => reqs.push(wordReq(c, p, `${c.cellId}-k${i}`)));
+  for (const c of cells()) packs[c.cellId].forEach((p, i) => { if ((bp[`${c.cellId}-k${i}`] ?? []).length) return; reqs.push(wordReq(c, p, `${c.cellId}-k${i}`)); });
   const est = estimate(MODELS.gen, reqs.length, 1800, 1100);
   console.log(`gen(문장): ${reqs.length}건 추정 $${est.toFixed(2)} (동기 2배), 누적 $${ledger(DIR).spent().toFixed(2)}, 신규 상한 $${BUDGET().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "gen", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
@@ -165,7 +175,9 @@ function checkStage() {
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
     let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...(calcAbGuide ? gateGuideMc(calcAbGuide, c.item as McPack) : []), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS, topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...(calcAbGuide ? gateGuideFrq(calcAbGuide, c.item as FrqPack) : [])];
+    for (const code of bpCheck()[c.key] ?? []) reasons.push(`blueprint:${code}`); // 설계도 실패는 LLM 단계 전에 차단
     if (c.item) reasons.push(...generatorDefects(c.item as unknown as Record<string, unknown>).map((d) => `generator_defect:${d.code}`)); // 생성기 결함(중괄호 미닫힘·표 본문 누락 등)은 LLM 단계 전에 차단
+    if (process.env.AP_EVAL_BYPASS) reasons = reasons.filter((r) => r.startsWith("generator_defect")); // 결함 주입 평가: 주입과 무관한 구형식 품질 게이트로 평가에서 빠지지 않게 한다
     if (process.env.AP_SKIP_GUIDE_MEMBERSHIP) reasons = reasons.filter((r) => !["archetype_not_in_guide", "frq_template_not_in_guide"].includes(r)); // 구방식 arm 은 코드 원형 목록 밖이 당연하다(구조 규칙만 면제)
     const soft: string[] = process.env.AP_SOFT_COVERAGE ? reasons.filter((r) => r === "explanation_does_not_cover_distractors") : []; // 민감도 분석: 해설 문구 일치 규칙을 비차단으로 두고 LLM 단계까지 진행
     if (soft.length) reasons = reasons.filter((r) => !soft.includes(r));
@@ -202,8 +214,8 @@ async function solveStage() {
   console.log(`solve: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
-const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review2")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
-const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
+const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review3")) m.set(k, v); for (const [k, v] of resultMap("review2")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
+const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`) ?? resultMap("solve2").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
 const numsIn = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
 function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: string } {
   if (!sol) return { ok: null, note: "no_solution" };
@@ -250,6 +262,18 @@ async function reviewStage() {
   const est = estimate(MODELS.review, reqs.length, 2800, 1100);
   console.log(`review: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
+}
+async function solveMoreStage() { // 이미 끝난 solve 에 없는 후보만 추가 요청(원 결과 보존): 평가 대상이 늘었을 때
+  const have = resultMap("solve"); const cs = alive().filter((c) => !have.has(`s-${c.key}`));
+  const reqs = cs.map((c) => mk(`s-${c.key}`, MODELS.solve, SOLVE_SYS, solveTool, withImg(c, `${JSON.stringify(blind(c))}\n\nSolve every item/part and submit via submit_solution (answers[].item = "1" for MC or the part label).`), c.kind === "mc" ? 3000 : 5000));
+  console.log(`solve-more: ${reqs.length}건`); if (!reqs.length) return;
+  await runBatch({ dir: DIR, name: "solve2", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.solve, reqs.length, 1500, 2200), sync: SYNC, syncConcurrency: 10 });
+}
+async function reviewMoreStage() { // review 도 같은 방식으로 새 후보만(review2 와 별개 이름 review3)
+  const have = reviewMap(); const cs = alive().filter((c) => solved(c) && !have.has(`r-${c.key}`));
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), 3000));
+  console.log(`review-more: ${reqs.length}건`); if (!reqs.length) return;
+  await runBatch({ dir: DIR, name: "review3", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }
 async function reviewRetryStage() { // 불완전·깨진 검토 출력만 한 번 다시 요청한다(같은 프롬프트·같은 후보; 최초 후보 수에는 영향 없음)
   const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(rev.has(`r-${c.key}`) ? (toolInput(rev.get(`r-${c.key}`) as never) as Json | null) : null).malformed.length > 0);
@@ -322,7 +346,7 @@ function reportStage() {
   console.log(JSON.stringify(report, null, 1));
 }
 (async () => {
-  if (stage === "plan") planStage(); else if (stage === "gen") await genStage(); else if (stage === "check") checkStage(); else if (stage === "solve") await solveStage();
-  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage(); else if (stage === "review-retry") await reviewRetryStage(); else if (stage === "verdicts") { writeFileSync(path.join(DIR, "verdicts.json"), JSON.stringify(decide(), null, 1)); console.log("verdicts.json 기록"); } else if (stage === "manifest") { baseline(); writeManifest(); console.log("manifest 기록: " + path.join(DIR, POLICY.manifestFile)); }
+  if (stage === "plan") planStage(); else if (stage === "blueprint") blueprintStage(); else if (stage === "gen") await genStage(); else if (stage === "check") checkStage(); else if (stage === "solve") await solveStage();
+  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage(); else if (stage === "solve-more") await solveMoreStage(); else if (stage === "review-more") await reviewMoreStage(); else if (stage === "review-retry") await reviewRetryStage(); else if (stage === "verdicts") { writeFileSync(path.join(DIR, "verdicts.json"), JSON.stringify(decide(), null, 1)); console.log("verdicts.json 기록"); } else if (stage === "manifest") { baseline(); writeManifest(); console.log("manifest 기록: " + path.join(DIR, POLICY.manifestFile)); }
   else console.log("stage: plan | gen | check | solve | review | difficulty | spot | report");
 })().catch((e) => { console.error(e); process.exit(1); });

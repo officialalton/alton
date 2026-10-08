@@ -13,11 +13,13 @@
   "key": "s1c-fig-02-k0",
   "defect": "graph_labels_swapped",
   "figure": "graph",
-  "pre_blocked": true,
-  "flagged": false,
-  "paths": [],
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
   "reasons": [
-   "reference_time_out_of_range"
+   "criterion_failed_stimulus_expression"
   ],
   "relevant": true
  },
@@ -35,11 +37,22 @@
   "key": "s1c-fig-04-k0",
   "defect": "graph_series_shifted",
   "figure": "graph",
-  "pre_blocked": true,
-  "flagged": false,
-  "paths": [],
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
   "reasons": [
-   "narrated_error_in_option"
+   "solver_disagrees:The graph shows f(5) ≈ 2.7 with the zero crossing near t ≈ 5.9, so no option is strictly true. Also, the curve runs off the top of the window between about t = 0.3 and t = 3.2.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
   ],
   "relevant": true
  },
@@ -143,12 +156,10 @@
   "key": "s1c-fig-12-k0",
   "defect": "none",
   "figure": "graph",
-  "pre_blocked": true,
+  "pre_blocked": false,
   "flagged": false,
   "paths": [],
-  "reasons": [
-   "narrated_error_in_option"
-  ],
+  "reasons": [],
   "relevant": null
  },
  {
@@ -201,11 +212,14 @@
   "key": "s1c-fig-16-k0",
   "defect": "table_wrong_value",
   "figure": "table",
-  "pre_blocked": true,
-  "flagged": false,
-  "paths": [],
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver"
+  ],
   "reasons": [
-   "narrated_error_in_option"
+   "solver_disagrees:The table entry at t=1000 is 7.403, but the formula gives about 4.002. This contradicts the formula and the trend toward 4, so the table does not fully support any option.",
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
   ],
   "relevant": true
  },
@@ -364,11 +378,22 @@
   "key": "s1c-fig-27-k0",
   "defect": "table_wrong_value",
   "figure": "table",
-  "pre_blocked": true,
-  "flagged": false,
-  "paths": [],
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
   "reasons": [
-   "narrated_error_in_option"
+   "solver_disagrees:The table gives v(6)=257 and v(8)=170, so v is not increasing, which contradicts the stem. With the printed values the right sum is 1394 m, which is not an option. The options only work if v(6)=160.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
   ],
   "relevant": true
  },

@@ -1,5 +1,6 @@
 from common import *
 from calc_ab_frq import row, part
+from bp import frq_blueprint
 
 SCEN = [
     {"org": "pill bugs (isopods)", "iv": "relative humidity of the chamber half", "levels": ["30%", "60%", "90%"], "ctrl": 1, "dv": "number of pill bugs found in the test half of the chamber after 10 minutes (out of 20)", "unit": "pill bugs", "m0": 8.0, "eff": [-4.0, 0.0, 6.0], "sd": 2.2,
@@ -36,9 +37,16 @@ def frq_bio_investigation(rng):
              f"{s['levels'][tgt]}: {means[tgt]:.1f} ± {2*se[tgt]:.1f} versus control {means[ctrl]:.1f} ± {2*se[ctrl]:.1f}; the ±2SE intervals do not overlap, so the difference is statistically supported.", [
             row("D1", 1, "Cites the group means and notes the error bars (±2SE) do not overlap (the difference is real)", [f"{means[tgt]:.1f}", f"{means[ctrl]:.1f}", "error bars do not overlap"], nums=True, both=True)])]
     for pt in parts: pt["topic_codes"] = ["8.1"]
-    return {"archetype": "frq_bio_investigation", "template": "short_scientific_investigation", "topic": "8.1", "extra_topics": [], "skill": "3.C", "representative_skill": "3.C", "calculator": "allowed", "title": f"Investigation of {s['org']}",
+    pk = {"archetype": "frq_bio_investigation", "template": "short_scientific_investigation", "topic": "8.1", "extra_topics": [], "skill": "3.C", "representative_skill": "3.C", "calculator": "allowed", "title": f"Investigation of {s['org']}",
             "stimulus": stim, "parts": parts, "total_points": 4, "est_minutes": 8,
             "facts": [f"means={means}", f"se={se}", f"ctrl={ctrl}", f"tgt={tgt}", f"overlap_pairs={[(i,j) for i in range(3) for j in range(i+1,3) if overlap(i,j)]}"], "context": f"{s['org']} / {s['behavior']}"}
+    pk["blueprint"] = frq_blueprint("frq_bio_investigation", "ap_biology", pk, "Experimental design: variables, control, null hypothesis, and data-supported claim",
+        ["Identify the manipulated (independent) variable and the measured (dependent) variable", "Recognize which group is the control and why a baseline is needed", "State a null hypothesis and support a claim by comparing means with +/-2SE intervals"],
+        [("One variable differs among groups; control group present; n replicates per group", "the table lists the groups, the control, and the number of replicates")], {"type": "experiment_table", "must_include": ["group names", "mean +/- 2SE", "replicates per group"]},
+        "means and standard errors are generated from the scenario parameters; overlap of +/-2SE intervals is re-derived by the separate bio_checks module",
+        extra={"experiment": {"fictional": True, "design": "experimental", "independent_variables": [s["iv"]], "dependent_variable": s["dv"], "controls": [s["levels"][ctrl] + " group"], "replicates_per_group": n, "measurement": {"variable": s["dv"], "unit": s["unit"]},
+                              "claims": [{"text": claim, "scope": "causation"}], "ced_topics_used": ["8.1"]}})
+    return pk
 
 
 # ---- 코드 우선 원형 2: 짧은 데이터 분석(공식 Q6형): 4×1점, 추세 서술 / 퍼센트 변화 계산 / 통계적으로 같은 쌍 판정 / 주장 뒷받침
@@ -67,5 +75,12 @@ def frq_bio_data_short(rng):
         part("C", f"Using the error bars (±2SE), identify the pair of levels, if any, for which the mean {sc['dv']} is not statistically different.", 1, "explain", ["5.B"], f"Answer: {same_txt}.", [row("C1", 1, "Identifies the pair whose ±2SE intervals overlap (or states none) (answer)", [same_txt], nums=True)]),
         part("D", f"A student claims that {claim}. Use the data to support the claim and describe what the error bars indicate about it.", 1, "explain", ["6.B", "4.B"], f"{means[top]:.1f} ± {2*se[top]:.2f} at {sc['levels'][top]} is higher than the other levels; the ±2SE intervals {'do not overlap' if nonover else 'overlap for at least one other level, so the claim is only partly supported'}.", [row("D1", 1, "Cites the highest mean and states what the non-overlap/overlap of error bars shows (support)", [f"{means[top]:.1f}", "do not overlap" if nonover else "overlap"], both=True, nums=True)])]
     for pt in parts: pt["topic_codes"] = [sc["topic"]]
-    return {"archetype": "frq_bio_data_short", "template": "short_data_analysis", "topic": sc["topic"], "extra_topics": [], "skill": "4.B", "representative_skill": "4.B", "calculator": "allowed", "title": f"Data analysis: {sc['sys']}",
+    pk = {"archetype": "frq_bio_data_short", "template": "short_data_analysis", "topic": sc["topic"], "extra_topics": [], "skill": "4.B", "representative_skill": "4.B", "calculator": "allowed", "title": f"Data analysis: {sc['sys']}",
             "stimulus": stim, "parts": parts, "total_points": 4, "est_minutes": 10, "facts": [f"means={means}", f"se={se}", f"d01={d01}", f"overlapping_pairs={same}", f"top={top}"], "context": sc["sys"]}
+    pk["blueprint"] = frq_blueprint("frq_bio_data_short", "ap_biology", pk, "Data analysis: trend, percent change, statistical overlap, and a supported claim",
+        ["Describe the trend across the three levels from the table values", "Compute a percent change between two means", "Use +/-2SE overlap to judge whether differences are supported and support a claim with the data"],
+        [("Means with +/-2SE reported for the same number of replicates per level", "the table gives mean +/- 2SE and n")], {"type": "experiment_table", "must_include": ["levels of the variable", "mean +/- 2SE", "n"]},
+        "percent change and interval overlap re-computed by the separate bio_checks module from the table strings",
+        extra={"experiment": {"fictional": True, "design": "experimental", "independent_variables": [sc["x"]], "dependent_variable": sc["dv"], "controls": [sc["levels"][0] + " level (lowest-level baseline)"], "replicates_per_group": n, "measurement": {"variable": sc["dv"], "unit": sc["unit"]},
+                              "claims": [{"text": claim, "scope": "causation"}], "ced_topics_used": [sc["topic"]]}})
+    return pk

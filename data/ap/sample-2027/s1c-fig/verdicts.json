@@ -49,9 +49,48 @@
   "cellId": "s1c-fig-02",
   "passed": false,
   "reasons": [
-   "reference_time_out_of_range"
+   "criterion_failed_stimulus_expression"
   ],
-  "soft": []
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "64π/15",
+     "brief_reasoning": "Cross-section area A = (π/8)(4−x²)². Integrating from −2 to 2 gives (π/8)(512/15) = 64π/15.",
+     "ambiguous_or_flawed": false,
+     "flaw_note": "The graph labels are swapped: the red segment is labeled y=4−x^2 but it is actually y=0. The stem is clear, so the answer is not affected."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 8.8 semicircle cross sections; in scope; reading diameter from the region is the 2.B element."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "64π/15 verified; the other options are wrong, so the key is unique."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "Graph legend is mislabeled: the red segment on the x-axis is labeled y=4−x^2 and the black label y=0 sits on the axis. The curve and line labels are swapped or confusing. The stem is clear, but a student-facing figure should not carry incorrect labels."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Distinct misconceptions (diameter as radius, full circle, not squaring); each is explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Non-calculator, exact values, reasonable load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The math and distractors are sound, but the figure's legend labels the x-axis segment as y=4−x^2 and the parabola is effectively unlabeled or mislabeled. That defect fails the stimulus criterion and should be fixed before use."
+  },
+  "difficulty": null
  },
  {
   "key": "s1c-fig-03-k0",
@@ -103,9 +142,58 @@
   "cellId": "s1c-fig-04",
   "passed": false,
   "reasons": [
-   "narrated_error_in_option"
+   "solver_disagrees:The graph shows f(5) ≈ 2.7 with the zero crossing near t ≈ 5.9, so no option is strictly true. Also, the curve runs off the top of the window between about t = 0.3 and t = 3.2.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
   ],
-  "soft": []
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 3,
+     "final_answer": "D (the answer the item seems to intend; it does not match the graph)",
+     "brief_reasoning": "G'(x) = f(x), so G has its absolute maximum where f changes from positive to negative. On the graph, f(5) ≈ 2.7. The graph crosses zero at about t ≈ 5.9 and stays negative after that, so G's maximum is near x ≈ 5.9. That makes A false (f(5) ≠ 0), B false (the greatest value of f does not locate G's maximum), and C false (the negative area after 5.9 makes G(8) smaller than the maximum). D uses the right reasoning but puts the sign change at x = 5, which contradicts the graph. D is likely the intended key.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The graph shows f(5) ≈ 2.7 with the zero crossing near t ≈ 5.9, so no option is strictly true. Also, the curve runs off the top of the window between about t = 0.3 and t = 3.2."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Topic 6.4 FTC with sign analysis of G' fits the skill."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "Key D claims f changes sign at x=5, but the graph shows f(5)≈2.7 and the zero crossing near t≈5.9. No option is strictly true."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The graph does not match the intended function (0,2),(2,4),(5,0),(6,-3),(8,-3). The curve is clipped above y=5 and f is not readable on much of [0,3.2]. f(2) is not 4."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The explanation uses values inconsistent with the graph (f(5)=0, f(2)=4, G(5)=12, G(8)=4.5)."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The graph is unreadable in parts and inconsistent with the item."
+   },
+   "instant_reject": [
+    "wrong_key",
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The rendered graph contradicts the intended data. f(5)≈2.7 and the sign change is near t≈5.9, so the keyed option (maximum at x=5 because of a sign change there) is false. The graph is also clipped above y=5. Reject for wrong key and wrong stimulus."
+  },
+  "difficulty": null
  },
  {
   "key": "s1c-fig-05-k0",
@@ -452,11 +540,47 @@
  {
   "key": "s1c-fig-12-k0",
   "cellId": "s1c-fig-12",
-  "passed": false,
-  "reasons": [
-   "narrated_error_in_option"
-  ],
-  "soft": []
+  "passed": true,
+  "reasons": [],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 0,
+     "final_answer": "lim t→5 v(t)=6 even though v(5)=9",
+     "brief_reasoning": "Both sides approach the open circle at 6 while the filled dot gives v(5)=9. At t=2 the left limit is 12 and the right limit is 8, so that limit does not exist.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Reading one-sided limits from a graph; matches 1.3 and 2.B."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "A is the only true statement: limit at 5 is 6, and the limit at 2 does not exist."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "Graph is complete with open and filled points and labeled axes; wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Three distinct misconceptions, each explained."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "About 75 seconds, no calculator, light reading load."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Clean, unique-key graph-reading limits item with good distractors; passes all criteria."
+  },
+  "difficulty": null
  },
  {
   "key": "s1c-fig-13-k0",
@@ -611,9 +735,29 @@
   "cellId": "s1c-fig-16",
   "passed": false,
   "reasons": [
-   "narrated_error_in_option"
+   "solver_disagrees:The table entry at t=1000 is 7.403, but the formula gives about 4.002. This contradicts the formula and the trend toward 4, so the table does not fully support any option.",
+   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
   ],
-  "soft": []
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 1,
+     "final_answer": "B: limit is 4, so y=4 is a horizontal asymptote",
+     "brief_reasoning": "The numerator and denominator have equal degree, so the limit is the ratio of leading coefficients, 12/3 = 4. The table values at t = 1, 10 and 100 match the formula and approach 4.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The table entry at t=1000 is 7.403, but the formula gives about 4.002. This contradicts the formula and the trend toward 4, so the table does not fully support any option."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": ""
+   },
+   "notes": "Topic 1.15 and skill 2.D fit well."
+  }
  },
  {
   "key": "s1c-fig-17-k0",
@@ -1118,9 +1262,58 @@
   "cellId": "s1c-fig-27",
   "passed": false,
   "reasons": [
-   "narrated_error_in_option"
+   "solver_disagrees:The table gives v(6)=257 and v(8)=170, so v is not increasing, which contradicts the stem. With the printed values the right sum is 1394 m, which is not an option. The options only work if v(6)=160.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
   ],
-  "soft": []
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "1",
+     "choice_index": 2,
+     "final_answer": "C: 1200 m, overestimate",
+     "brief_reasoning": "Taking v(6)=160 as intended, the right sum is 2(120+150+160+170)=1200 m. A right sum overestimates when v is increasing.",
+     "ambiguous_or_flawed": true,
+     "flaw_note": "The table gives v(6)=257 and v(8)=170, so v is not increasing, which contradicts the stem. With the printed values the right sum is 1394 m, which is not an option. The options only work if v(6)=160."
+    }
+   ]
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Right Riemann sum and over/underestimate for an increasing function fits topic 6.2 and skill 1.F."
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": "With the displayed table (v(6)=257), the right sum is 1394, which is not an option. The key of 1200 only holds if v(6)=160. No option is correct as printed."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table shows v(6)=257 but v(8)=170, contradicting 'increasing' and the stem. The stimulus does not match the solution data (160)."
+   },
+   "distractor_explanation": {
+    "pass": false,
+    "notes": "The distractors' 1060 and 1200 rely on v(6)=160, so the explanations are inconsistent with the displayed table. The explanation of the left sum is also muddled."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item cannot be used because its stimulus is internally contradictory."
+   },
+   "instant_reject": [
+    "wrong_key",
+    "wrong_stimulus"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The table displays v(6)=257, which contradicts the claim that v is increasing (v(8)=170) and the solution, which assumes 160. The right sum from the printed table is 1394, which is not an option. The stimulus and key are inconsistent, so the item is rejected."
+  },
+  "difficulty": null
  },
  {
   "key": "s1c-fig-28-k0",
