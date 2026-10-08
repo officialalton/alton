@@ -3,7 +3,7 @@
 // 학생 화면은 영어다. 해설은 explanation_en 필수(explanation 에도 같은 영어를 둔다 — 한국어 해설은 후속).
 
 import { checkFigure } from "../problem-figures/check";
-import { gateCandidate, type ApCandidateLike, type GateResult } from "../ap-figures/gate";
+import { gateCandidate, optionText, type ApCandidateLike, type GateResult } from "../ap-figures/gate";
 
 type Json = Record<string, unknown>;
 export type ApPurpose = "mock_exam" | "lesson";
@@ -69,12 +69,12 @@ export function planConversion(c: ApCandidateLike): ConversionPlan {
       const out: ConvertedItem[] = [];
       for (const [i, it] of items.entries()) {
         if (typeof it.stem !== "string" || !Array.isArray(it.options) || typeof it.key_index !== "number") return { ok: false, reason: `set item ${i} is incomplete`, gate };
-        out.push(mk(i, it.stem, (it.options as unknown[]).map(String), it.key_index as number, String(it.explanation_en ?? p.explanation_en ?? "")));
+        out.push(mk(i, it.stem, (it.options as unknown[]).map(optionText), it.key_index as number, String(it.explanation_en ?? p.explanation_en ?? "")));
       }
       return finish(out, gate);
     }
     if (typeof p.stem !== "string" || !Array.isArray(p.options) || typeof p.key_index !== "number") return { ok: false, reason: "mc payload incomplete", gate };
-    return finish([mk(0, p.stem, (p.options as unknown[]).map(String), p.key_index as number, String(p.explanation_en ?? ""))], gate);
+    return finish([mk(0, p.stem, (p.options as unknown[]).map(optionText), p.key_index as number, String(p.explanation_en ?? ""))], gate);
   }
   // FRQ 번들: 한 문제 = 한 번들, 파트는 statements 에.
   const parts = Array.isArray(p.parts) ? (p.parts as Json[]) : [];
@@ -87,7 +87,22 @@ export function planConversion(c: ApCandidateLike): ConversionPlan {
   return finish([{ index: 0, format: "essay", passage, question, options: null, correctIndex: null, explanation: ref, explanationEn: ref, figure, renderCheck: rc, statements, difficulty, skillCode: null, topic }], gate);
 }
 
+/** 문제은행 공개 게이트(confirm_and_publish_problem_version)가 거부할 내용을 변환 전에 미리 걸러 낸다. */
+export function bankGateIssues(it: ConvertedItem): string[] {
+  const out: string[] = [];
+  if (!it.explanationEn.trim()) out.push("no English explanation");
+  if (it.format === "mc") {
+    const o = it.options ?? [];
+    if (o.length < 2) out.push("fewer than 2 options");
+    if (new Set(o.map((x) => x.trim())).size !== o.length) out.push("duplicate option text");
+    if (it.correctIndex === null || it.correctIndex < 0 || it.correctIndex >= o.length) out.push("answer key out of range");
+  }
+  if (/[ㄱ-ㆎ가-힣]/.test([it.passage, it.question, ...(it.options ?? [])].join(" "))) out.push("Hangul in student-facing text");
+  if (it.figure && !(it.renderCheck as { ok?: boolean } | null)?.ok) out.push("render check not ok");
+  return out;
+}
+
 function finish(items: ConvertedItem[], gate: GateResult): ConversionPlan {
-  for (const it of items) if (!it.explanationEn.trim()) return { ok: false, reason: `item ${it.index} has no English explanation`, gate };
+  for (const it of items) { const bad = bankGateIssues(it); if (bad.length) return { ok: false, reason: `item ${it.index}: ${bad.join("; ")}`, gate }; }
   return { ok: true, items, gate };
 }

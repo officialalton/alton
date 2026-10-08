@@ -8,9 +8,9 @@ import type { ApCandidateLike } from "../ap-figures/gate";
 const items = JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as (ApCandidateLike & { validation: string })[];
 
 describe("planConversion on current stock", () => {
-  it("every auto_passed candidate converts (gate passes, English explanation, valid key)", () => {
+  it("every live (auto_passed + needs_revalidation) candidate converts (gate passes, English explanation, valid key)", () => {
     const bad: string[] = [];
-    for (const c of items.filter((i) => i.validation === "auto_passed")) {
+    for (const c of items.filter((i) => i.validation === "auto_passed" || i.validation === "needs_revalidation")) {
       const p = planConversion(c);
       if (!p.ok) { bad.push(`${c.candidateKey}: ${p.reason}`); continue; }
       for (const it of p.items) {
@@ -20,6 +20,12 @@ describe("planConversion on current stock", () => {
       }
     }
     expect(bad).toEqual([]);
+  });
+  it("아키타입 생성 문항의 {text, why, value} 선택지는 text 로 변환된다(객체가 \"[object Object]\" 로 새지 않는다)", () => {
+    const c = items.find((i) => Array.isArray(i.payload.options) && typeof (i.payload.options as unknown[])[0] === "object" && i.validation === "auto_passed")!;
+    const p = planConversion(c);
+    expect(p.ok).toBe(true);
+    if (p.ok) expect(p.items[0].options!.every((o) => typeof o === "string" && !o.includes("[object"))).toBe(true);
   });
   it("FRQ conversion keeps parts and labels the reference as unofficial", () => {
     const f = items.find((i) => i.kind === "frq_bundle" && i.validation === "auto_passed")!;

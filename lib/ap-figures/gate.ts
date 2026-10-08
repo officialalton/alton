@@ -34,11 +34,16 @@ export type GateResult = {
 };
 
 /** 학생이 보는 문제 텍스트(질문·선택지·FRQ 파트 프롬프트). 표식·라벨이 본문에서 가리켜지는지 판단하는 기준. */
+/** 선택지는 문자열이거나 아키타입 생성 항목의 {text, why, value} 객체다 — 학생에게 보이는 글은 text 만. */
+export function optionText(o: unknown): string {
+  return typeof o === "string" ? o : isObj(o) && typeof o.text === "string" ? o.text : String(o);
+}
+
 export function visibleTextOf(payload: Json): { stem: string; options: string; all: string } {
   const stems: string[] = [], opts: string[] = [];
   if (typeof payload.stem === "string") stems.push(payload.stem);
-  if (Array.isArray(payload.options)) opts.push(...(payload.options as unknown[]).map(String));
-  if (Array.isArray(payload.items)) for (const it of payload.items as Json[]) { if (typeof it.stem === "string") stems.push(it.stem); if (Array.isArray(it.options)) opts.push(...(it.options as unknown[]).map(String)); }
+  if (Array.isArray(payload.options)) opts.push(...(payload.options as unknown[]).map(optionText));
+  if (Array.isArray(payload.items)) for (const it of payload.items as Json[]) { if (typeof it.stem === "string") stems.push(it.stem); if (Array.isArray(it.options)) opts.push(...(it.options as unknown[]).map(optionText)); }
   if (Array.isArray(payload.parts)) for (const p of payload.parts as Json[]) if (typeof p.prompt === "string") stems.push(p.prompt);
   if (typeof payload.title === "string") stems.push(payload.title);
   const stimDesc = isObj(payload.stimulus) && typeof payload.stimulus.description === "string" ? "" : "";
@@ -195,7 +200,7 @@ export function gateCandidate(c: ApCandidateLike): GateResult {
   // 표준 파이프라인(스펙 검증 → 렌더 → 라벨 충돌/단위 검사)
   const v = validateFigureSpec(norm.spec);
   if (!v.ok) { issues.push({ level: "error", code: "schema", message: v.error }); return { ...base, stimKind: norm.stimKind, renderType, need, needReason: reason, status: "fail", issues, spec: norm.spec, output: null, alt: null }; }
-  const chk = checkFigure(norm.spec, text.all, Array.isArray(c.payload.options) ? (c.payload.options as unknown[]).map(String) : null);
+  const chk = checkFigure(norm.spec, text.all, Array.isArray(c.payload.options) ? (c.payload.options as unknown[]).map(optionText) : null);
   for (const i of chk.issues) issues.push({ level: "error", code: i.code, message: i.message });
   const output = renderFigureSvg(norm.spec);
   const spec = norm.spec;

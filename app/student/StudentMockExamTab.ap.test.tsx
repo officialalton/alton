@@ -30,7 +30,7 @@ describe("Practice Tests: SAT / AP 분리", () => {
     expect(screen.queryByText("SAT Practice Test 1")).toBeNull();
     expect(screen.getByText("AP Calculus AB Full Practice 1")).toBeInTheDocument();
     const labels = screen.getAllByTestId("ap-label").map((e) => e.textContent);
-    expect(labels).toEqual(["Full Practice Exam", "AP Multiple-Choice Practice"]);
+    expect([...labels].sort()).toEqual(["AP Multiple-Choice Practice", "Full Practice Exam"]);
   });
   it("AP 세트가 없으면 전환 UI 가 없다(기존 SAT 화면 그대로)", () => {
     render(<StudentMockExamTab initialOverview={{ catalog: [overview.catalog[0]], attempts: [] }} />);

@@ -762,3 +762,9 @@
 
 - 2026-09-29 관리자 Consultants 탭 서브탭화: 배정(자동배정·미배정·일정 대기)/계정/선생님 배정 요청/상담 자료, 대기 건수 배지. `정산`은 Payouts의 `컨설턴트 정산` 서브탭(`ConsultantSettlementPanel.tsx`)으로 이동(동작 변경 없음). 스크린샷: `docs/assets/2026-09-29-admin-consultants-subtabs/`.
 - 2026-09-29 관리자 Messenger 통합: Inquiries 메인 탭 제거(`?tab=inquiry`는 Messenger 가족 서브탭으로 매핑). 문의함(household 스레드)은 Messenger > `가족` 채널(안읽음 배지, SSR `initialInquiryThreads` 유지), 면담 운영은 Consultants > `면담` 서브탭(지연 로딩, 조치 필요 건수 배지). 죽은 `면담 가능시간` UI·서버 액션 삭제(테이블 유지, 마이그레이션 없음). 스크린샷: `docs/assets/2026-09-29-admin-messenger-consolidation/`.
+
+
+## AP 렌더링·변환·응시 (2026-10-09, feat/ap-render 로컬 커밋 — 원격 적용 전)
+- 마이그레이션 `20262100000400_ap_item_conversion.sql`, `20262100000401_ap_exam_sets.sql`(로컬 DB 적용·재적용 멱등 확인, 원격 미적용 — 총괄이 비프로덕션에 순서대로 적용).
+- 그림: `lib/problem-figures/templates/ap-*.ts`(ap_graph/ap_table/ap_table_set/ap_diagram) + `lib/ap-figures/`(정규화·게이트). 보고서·스냅샷 `data/ap/render-check/`.
+- 변환·세트: `lib/ap-exam/`, `scripts/ap-generation/{publish-to-bank,assemble-ap-set,mark-verified,render-check,local-demo-seed}.ts`. 상세 `docs/ap/publication-flow.md` §5.

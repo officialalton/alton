@@ -40,3 +40,13 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 
 ## 4. 점검(파일 vs DB)
 `npx tsx scripts/ap-generation/stock.ts && npx tsx scripts/ap-generation/stock-consistency.ts` (비프로덕션, 읽기 전용): `ap_stock_summary_v` 와 파일 집계를 과목×종류별로 비교, 불일치 시 종료 코드 1. 로컬 검증용 SQL 은 `--emit-sql`(트랜잭션+롤백).
+
+## 5. 용도(purpose) 분리와 변환·응시 구현 (2026-10-09, 마이그레이션 400·401 — 로컬 적용·검증, 원격 미적용)
+**용도 결정(오너)**: AP 문항은 정확히 하나의 용도를 가진다 — `mock_exam`(모의고사 층: SAT 모의고사와 같은 수준의 독립 시험, 무료·과외 회원 공통, `access_tier` free/tutoring) 또는 `lesson`(수업·과제: 선생님이 과외 학생에게 쓰는 경로). 용도는 **변환 시점에 정해지고 바뀌지 않으며 공유되지 않는다**(두 용도를 겸하는 값·예외 없음).
+- 저장: `ap_candidate_items.purpose` + `problems.usage_scope`(mock_exam→`mock_exam`, lesson→기존 수업·과제 값 `general`). 후보·문제 모두 변경 트리거로 잠긴다. AP 문제는 `problems_ap_purpose_check` 로 두 값만 허용.
+- 격리: 세트 조립은 모의고사 용도만(`mock_exam_set_items` 가드 + `lib/ap-exam/assemble.ts`), 선생님 문제 선택(`problem_auto_composition_candidates`·회차 구성·과제 트리거)은 수업 용도만. 무료 회원은 문제·버전·세트 항목 원본을 직접 읽을 수 없고(RLS) 시험 RPC 로만 모의고사 문항을 받는다 → 수업 문항은 어떤 경로로도 보이지 않는다.
+- 재고: 용도별 목표 `ap_stock_purpose_targets`, 뷰 `ap_stock_by_purpose_v`(용도별 변환·검수 환경·출시·부족), `ap_stock_pool_v`(미배정 풀 대비 순부족), 관리자 화면(한국어) `/admin/ap-items`(용도·단계·검수·준비 필터).
+
+**변환 경로(병렬 게시 경로 없음)**: 후보(`review_env_ready`) → `ap_create_bank_problem`(후보 검사, `create_bank_problem` 우회 차단 트리거) → `save_problem_draft_version` → `set_problem_render_check` → `confirm_and_publish_problem_version`(기존 게이트: 영어 해설·render_check·정답 키·공개 버전 불변) → `ap_finalize_conversion`(`release_tier=review_env`, 검수 기간 설정, 키워드 연결). 공개 단계에서도 후보가 여전히 `review_env_ready` 여야 한다(`problem_versions_ap_publish_guard`). 오류 신고 후 수정은 새 버전 공개 뒤 `ap_attach_new_version`. 실행기: `lib/ap-exam/convert-run.ts`, `scripts/ap-generation/publish-to-bank.ts`(기본 dry-run, 로컬만 --execute).
+**세트·응시**: `mock_exam_sets.exam_program='ap'`, `format='ap_fixed'`, `ap_label`(full_practice | mc_practice | frq_practice, 공식 구조를 다 채울 때만 Full Practice Exam — 공개 게이트), `section_layout`(공식 섹션 시간·계산기·문항 수 복사본, `lib/ap-exam/layouts.ts`). 기존 `mock_exam_open_start`·재응시(attempt_no)·`save_answer`·`submit`(MC 자동 채점) 재사용, 카탈로그·요약·상세 RPC 는 얇은 래퍼로 AP 필드만 추가(SAT 응답은 `examProgram:'sat'` 외 변화 없음). FRQ 는 문제 하나 = 번들 하나, 파트별 타이핑 응답을 JSON 한 칸에 자동 저장하고 제출 뒤 **참고 답안·채점 노트(공식 채점 아님)** 만 공개한다. AP 1~5·FRQ 점수는 만들지 않는다.
+**검증 게이트**: `render_verified` 는 `lib/ap-figures/gate.ts`(결정적 검사, `scripts/ap-generation/render-check.ts`·`mark-verified.ts --render`), `screen_verified` 는 학생 화면 확인 증거가 있을 때만 `mark-verified.ts --screen --evidence`. 증거 스크린샷: `docs/ap/screen-evidence/`.

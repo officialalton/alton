@@ -90,7 +90,7 @@ export default function ApExamResultView({ attempt }: { attempt: MockExamAttempt
                 <div className="flex flex-col gap-2">
                   {(it.parts ?? []).map((p) => (
                     <div key={p.label}>
-                      <p className="text-[12.5px] font-semibold">({p.label}) [{p.points} pt] <LearningText text={p.prompt} className="inline" /></p>
+                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={p.prompt} className="inline" /></div>
                       <p className="mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px]" data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
                     </div>
                   ))}

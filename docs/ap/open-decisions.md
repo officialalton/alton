@@ -60,3 +60,10 @@
 - 37. `expert_status`: unreviewed / in_review / approved / issues_reported. 별도 `release_tier`: candidate / review_env / launch. launch는 검수 기간 후 미해결 신고 0건 또는 승인 서명(`ap_launch_ready_v`).
 - 38. 흐름: 후보 → 문제(검수 환경) → 신고 → 새 버전으로 수정 → launch. 상세 `publication-flow.md`. 구(767행) 적재는 삭제하지 않고 `is_current=false`로 표시(마이그레이션 394, 현재 로컬만 적용).
 - 39. Bio 파트별 스킬·토픽·루브릭 지원, 공식 점수·시간 근거 `bio-frq-rules.md`. 비교 실험은 단계별 예산 `experiment-plan.md`(Bio는 AB 결과 후).
+
+## 40~44. 용도 분리·변환·응시 (2026-10-09 오너 확정/구현)
+- 40. **AP 문항 용도는 `mock_exam` 또는 `lesson` 하나뿐**: 변환 때 고정, 변경·공유·예외 없음. 세트 조립은 모의고사 용도만, 선생님 선택기는 수업 용도만, 무료 회원은 수업 용도를 볼 수 없다. 용도별 재고·부족분은 별도 집계(`ap_stock_by_purpose_v`). 구현·테스트 `publication-flow.md` §5.
+- 41. 모의고사 층 = SAT 모의고사와 같은 수준의 독립 시험(무료·과외 공통, `access_tier` free/tutoring). 기존 엔진·재응시 모델 재사용, SAT 적응형/4모듈 불변.
+- 42. FRQ: 타이핑 입력 + 자동 저장, 제출 뒤 참고 답안(공식 채점 아님). AI 피드백·점수 환산은 범위 밖(미구현). 학부모 AP 결과 화면은 후속(목록에서 AP 제외).
+- 43. 그림은 stimulus.data(자유 형식)를 정규화해 표준 파이프라인(`ap_graph`·`ap_table`·`ap_table_set`·`ap_diagram`)으로 그린다. **생성기 결함 3건 발견**: (a) 문자열 stimulus 93건이 닫는 `}` 누락(보충해 읽음), (b) 아키타입 MC 선택지 184건이 `{text, why, value}` 객체, (c) 데이터 모순(교점 y 부호, 표 본문 없음)은 게이트가 잡는다 — 새 생성분은 엄격 스키마로 내야 한다.
+- 44. 로컬 데모 세트는 공식 문항 수보다 작은 구조(라벨 검증은 복사된 레이아웃 기준)이므로 출시용이 아니다. 실제 세트는 `assemble-ap-set.ts` 가 공식 구조를 다 채울 때만 만든다.

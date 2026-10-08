@@ -162,10 +162,10 @@ describe("용도 분리: 수업용(lesson) 풀과 모의고사 풀", () => {
     expect(psql(`select count(*) from problem_auto_composition_candidates where problem_id = '${lesson1}';`)).toBe("1");
     expect(psql(`select count(*) from problem_auto_composition_candidates where problem_id in ('${mock1}','${mock2}','${frq1}');`)).toBe("0");
   });
-  it("수업용 문항은 과제·회차 구성 트리거가 받고, 모의용은 거부한다", () => {
+  it("용도 값 매핑: 수업용 = 수업·과제 용도, 모의용 = 모의고사 용도", () => {
     // 기존 게이트(check_unit_problem_usable): 모의고사용 문제는 회차 구성에 담을 수 없다.
-    expect(psql(`select usage_scope in ('general','both') from problems where id = '${lesson1}';`)).toBe("t");
-    expect(psql(`select usage_scope in ('general','both') from problems where id = '${mock1}';`)).toBe("f");
+    expect(psql(`select usage_scope from problems where id = '${lesson1}';`)).toBe("general");
+    expect(psql(`select usage_scope from problems where id = '${mock1}';`)).toBe("mock_exam");
   });
   it("용도별 재고·부족분 뷰", () => {
     psql(`insert into ap_stock_purpose_targets (subject_id, kind, purpose, target) values ('${subjectId}', 'mc', 'mock_exam', 5), ('${subjectId}', 'mc', 'lesson', 3);`);
