@@ -129,6 +129,7 @@ function structure(c: Cand): string[] {
   return rs;
 }
 function runPython(code: string): { ok: boolean; out: Json | null; err: string } {
+  if (typeof code !== "string" || !code.trim()) return { ok: false, out: null, err: "verification_code missing" };
   const tmp = path.join(DIR, ".verify.py");
   writeFileSync(tmp, code);
   const r = spawnSync(PY, ["-I", tmp], { timeout: 25000, encoding: "utf-8", env: { PATH: process.env.PATH ?? "", HOME: process.env.HOME ?? "" } as unknown as NodeJS.ProcessEnv });
