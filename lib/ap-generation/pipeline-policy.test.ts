@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canRepair, costPerUsableUnique, firstPassRate, manifestIssues, POLICY, postRepairPassRate, shouldStopTemplate, type CandidateRecord } from "./pipeline-policy";
+import { armReport, canRepair, costPerUsableUnique, firstPassRate, manifestIssues, POLICY, postRepairPassRate, shouldStopTemplate, type CandidateRecord } from "./pipeline-policy";
 const r = (cell: string, attempt: 0 | 1, seed: number, passed: boolean, reasons: string[] = [], tpl = "t1"): CandidateRecord => ({ templateId: tpl, cellId: cell, attempt, seed, passed, reasons, costUsd: 0.1, calls: 4 });
 describe("approved production principles", () => {
   it("encodes the approved settings", () => { expect(POLICY.firstCandidatesPerCell).toBe(1); expect(POLICY.repairLimit).toBe(1); expect(POLICY.codeChecksBeforeLlm).toBe(true); expect(POLICY.independentVerification).toBe(true); expect(POLICY.denominator).toBe("first_candidates"); });
@@ -17,5 +17,15 @@ describe("approved production principles", () => {
   it("cost per usable unique item and manifest completeness", () => {
     expect(costPerUsableUnique(6, 12)).toBe(0.5); expect(costPerUsableUnique(6, 0)).toBe(Infinity);
     expect(manifestIssues({ run: "r" })).toContain("manifest missing generatorCommit"); expect(manifestIssues({ run: "r", subject: "s", generatorCommit: "abc", gateVersion: "g", reviewerPromptHash: "h", difficultyPromptHash: "h2", models: { gen: "m" }, frozenAt: "t" })).toEqual([]);
+  });
+});
+
+describe("armReport", () => {
+  const mk = (cellId: string, attempt: 0 | 1, passed: boolean, skill = "2.B", structure = "mc", cost = 0.03): any => ({ templateId: "t", cellId, attempt, seed: 1000, passed, reasons: [], costUsd: cost, calls: 4, skill, structure });
+  it("수선 행은 최초 후보 수에 섞이지 않고 비용에는 포함된다", () => {
+    const rs = [mk("c1", 0, true), mk("c2", 0, false), mk("c2", 1, true, "2.B", "mc", 0.02), mk("c3", 0, false, "3.C", "frq")];
+    const [all] = armReport(rs, "all");
+    expect(all.firstCandidates).toBe(3); expect(all.firstPass).toBe(1); expect(all.postRepairPass).toBe(2); expect(all.totalCostUsd).toBeCloseTo(0.11, 5);
+    expect(armReport(rs, "skill").map((g) => g.group)).toEqual(["2.B", "3.C"]);
   });
 });
