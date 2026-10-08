@@ -54,6 +54,8 @@ export type TeacherStudentMockExamRow = {
   studentId: string;
   studentName: string | null;
   examSetName: string;
+  /** 재응시 회차(1부터). */
+  attemptNo: number;
   status: string;
   startedAt: string | null;
   totalCount: number;
@@ -78,6 +80,7 @@ export async function listMyStudentMockExamAttemptsAction(): Promise<TeacherStud
         studentId: s.studentId,
         studentName: s.studentName,
         examSetName: a.examSetName,
+        attemptNo: a.attemptNo ?? 1,
         status: a.status,
         startedAt: a.startedAt,
         totalCount: a.totalCount,

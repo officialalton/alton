@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { MockExamListRow, MockExamListState } from "@/lib/mock-exam/open-list";
+import { attemptLabel, listStateOf as listStateOfStatus } from "@/lib/mock-exam/open-list";
 
 // 공개 모의고사 목록(학생·학부모 공용). 학생은 시작·이어서·결과 보기, 학부모는 읽기 전용(시작 불가).
 // 2026-10-01 — 배정 없음: 공개된 세트는 모든 활성 학생에게 보이고 학생이 직접 시작한다.
@@ -47,10 +48,33 @@ export default function MockExamOpenList({
           </div>
           {r.description && <p className="mt-1 text-[12px] text-grey-500">{r.description}</p>}
           <p className="mt-1 text-[12.5px] text-grey-500">
+            {r.attempts.length > 1 && r.attempt?.attemptNo ? `${attemptLabel(r.attempt.attemptNo)} · ` : ""}
             {STATE_LABEL[r.state]}
             {r.state === "graded" && r.attempt && r.attempt.correctCount !== null && ` · ${r.attempt.correctCount}/${r.attempt.totalCount} correct`}
           </p>
           <Action row={r} readOnly={readOnly} busy={busyKey === r.key} onStart={onStart} onOpenResult={onOpenResult} resultHref={resultHref} />
+          {r.attempts.length > 1 && (
+            <details className="mt-2 text-[12px] text-grey-600">
+              <summary className="cursor-pointer font-semibold text-grey-500">All attempts ({r.attempts.length})</summary>
+              <ul className="mt-1 flex flex-col gap-1">
+                {r.attempts.map((a) => (
+                  <li key={a.id} className="flex flex-wrap items-center gap-2" data-testid="attempt-row">
+                    <span className="font-semibold">{attemptLabel(a.attemptNo) || "Attempt"}</span>
+                    <span>
+                      {STATE_LABEL[listStateOfStatus(a.status)]}
+                      {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} correct`}
+                    </span>
+                    {a.status === "graded" && (resultHref ? (
+                      <Link href={resultHref(a.id)} className="font-bold text-ink underline">View results</Link>
+                    ) : onOpenResult ? (
+                      <button type="button" className="font-bold text-ink underline" onClick={() => onOpenResult(a.id)}>View results</button>
+                    ) : null)}
+                    {a.status === "in_progress" && !readOnly && <Link href={`/student/mock-exam/${a.id}`} className="font-bold text-ink underline">Continue</Link>}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
         </li>
       ))}
     </ul>
@@ -77,10 +101,21 @@ function Action({
   if (row.state === "graded" || row.state === "submitted") {
     if (!a) return null;
     if (resultHref) return row.state === "graded" ? <Link href={resultHref(a.id)} className={cls}>View detailed results</Link> : null;
-    return onOpenResult ? <button type="button" className={cls} onClick={() => onOpenResult(a.id)}>View results</button> : null;
+    if (!onOpenResult) return null;
+    return (
+      <div className="flex flex-wrap items-center gap-x-4">
+        <button type="button" className={cls} onClick={() => onOpenResult(a.id)}>View results</button>
+        {/* 재응시 — 채점이 끝난 시험은 모든 학생이 다시 볼 수 있다(새 회차로 별도 기록). */}
+        {row.state === "graded" && !readOnly && !row.archived && onStart && (
+          <button type="button" className={cls} disabled={busy} onClick={() => onStart(row)}>
+            {busy ? "Starting…" : "Retake"}
+          </button>
+        )}
+      </div>
+    );
   }
   if (readOnly) return null;
-  if (row.state === "in_progress" && a) return <Link href={`/student/mock-exam/${a.id}`} className={cls}>Continue</Link>;
+  if (row.state === "in_progress" && a) return <Link href={`/student/mock-exam/${a.id}`} className={cls}>Continue{a.attemptNo && a.attemptNo > 1 ? ` ${attemptLabel(a.attemptNo)}` : ""}</Link>;
   return (
     <button type="button" className={cls} disabled={busy} onClick={() => onStart?.(row)}>
       {busy ? "Starting…" : "Start"}

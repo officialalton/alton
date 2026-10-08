@@ -610,6 +610,8 @@ export type MockExamAttemptHistoryRow = {
   studentId: string;
   studentName: string | null;
   examSetName: string;
+  /** 재응시 회차(1부터). */
+  attemptNo: number;
   status: string;
   startedAt: string | null;
   submittedAt: string | null;
@@ -630,7 +632,7 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
 
   const { data: attempts, error } = await db
     .from("mock_exam_attempts")
-    .select("id, student_id, exam_set_id, status, started_at, submitted_at, graded_at, rw_m2_route, math_m2_route, rw_m2_route_policy_version, math_m2_route_policy_version")
+    .select("id, student_id, exam_set_id, attempt_no, status, started_at, submitted_at, graded_at, rw_m2_route, math_m2_route, rw_m2_route_policy_version, math_m2_route_policy_version")
     .neq("status", "assigned")
     .order("started_at", { ascending: false, nullsFirst: false })
     .limit(200);
@@ -662,6 +664,7 @@ export async function listAllMockExamAttemptsAction(): Promise<MockExamAttemptHi
     studentId: a.student_id,
     studentName: nameByStudent.get(a.student_id) ?? null,
     examSetName: nameBySet.get(a.exam_set_id) ?? "Mock exam",
+    attemptNo: a.attempt_no ?? 1,
     status: a.status,
     startedAt: a.started_at,
     submittedAt: a.submitted_at,

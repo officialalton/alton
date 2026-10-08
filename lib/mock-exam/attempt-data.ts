@@ -36,6 +36,12 @@ export type MockExamAttemptSummary = {
   /** 2026-09-22(사용자 지시) — 응시 화면을 나갔다가 다시 들어온 횟수. 시간
    * 어뷰징 의심 신호로 교사 화면에 노출한다(정교한 타이머 재설계는 아님). */
   entryCount: number;
+  /** 재응시(2026-10-08): 같은 학생·시험의 몇 번째 응시인지(1부터). 마이그레이션 370 적용 전 응답에는 없다. */
+  attemptNo?: number;
+  /** 같은 학생·시험의 전체 응시 횟수. */
+  attemptTotal?: number;
+  /** 시험(세트 계열) id — 같은 시험의 회차를 묶는 키. */
+  setGroupId?: string;
 };
 
 export type MockExamAttemptItem = {
@@ -90,6 +96,10 @@ export type MockExamAttemptDetail = {
   mathReferenceSheetAllowed: boolean;
   timeRemainingSeconds: { rw?: number; math?: number } | null;
   entryCount: number;
+  /** 재응시 회차(1부터)와 이 학생·시험의 전체 응시 횟수. */
+  attemptNo?: number;
+  attemptTotal?: number;
+  setGroupId?: string;
   /** 'fixed'(V1 고정형) | 'mst'(4모듈). MST 진행 중엔 학생·보호자에게 현재 모듈 문항만 내려온다. */
   format: "fixed" | "mst";
   currentModule: "rw_m1" | "rw_m2" | "break" | "math_m1" | "math_m2" | null;
@@ -119,6 +129,8 @@ async function loadSummaries(supabase: SupabaseClient, studentId: string): Promi
     totalCount: Number(r.totalCount ?? 0),
     correctCount: r.correctCount === null || r.correctCount === undefined ? null : Number(r.correctCount),
     entryCount: Number(r.entryCount ?? 0),
+    attemptNo: r.attemptNo === undefined || r.attemptNo === null ? undefined : Number(r.attemptNo),
+    attemptTotal: r.attemptTotal === undefined || r.attemptTotal === null ? undefined : Number(r.attemptTotal),
   }));
 }
 
@@ -193,6 +205,9 @@ export type MockExamCatalogRow = {
   /** 이 학생의 응시(없으면 미응시). 'assigned' 는 시작은 눌렀지만 첫 문항 전. */
   attemptId: string | null;
   attemptStatus: AttemptStatus | null;
+  /** 최신 회차 번호와 전체 회차 수(재응시). attemptId/attemptStatus 는 최신 회차 기준 — 진행 중 응시가 있으면 그것. */
+  attemptNo?: number | null;
+  attemptTotal?: number;
 };
 
 /** 공개된 모의고사 세트 전체 + 그 학생의 응시 상태 — RPC 한 번(N+1 없음). 학생 본인·학부모·교사·컨설턴트·관리자 열람용. */

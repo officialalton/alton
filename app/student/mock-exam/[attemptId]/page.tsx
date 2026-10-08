@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
-import { loadMockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
+import { loadMockExamAttemptDetail, loadStudentMockExamAttempts } from "@/lib/mock-exam/attempt-data";
 import { loadMstAttemptStateAction } from "@/lib/mock-exam/mst-actions";
 import { hasFeature, loadStudentFeatureAccess } from "@/lib/feature-access";
 import MockExamTakeClient from "./MockExamTakeClient";
@@ -29,6 +29,11 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
   // 2026-10-05 무료 회원 S4 — 채점된 결과 상단에만 "Talk with a tutor" 링크(무료 회원 한정, +1 RPC). UI 본문은 건드리지 않는다.
   const showTutoringCta = isGraded && !hasFeature(await loadStudentFeatureAccess(supabase, user.id).catch(() => []), "class");
 
+  // 재응시: 회차가 둘 이상일 때만 요약 목록을 한 번 더 읽어 Attempt 1 | Attempt 2 전환을 만든다.
+  const attempts = isGraded && (attempt.attemptTotal ?? 1) > 1
+    ? (await loadStudentMockExamAttempts(supabase, user.id).catch(() => [])).filter((a) => a.setGroupId === attempt.setGroupId)
+    : undefined;
+
   if (!isGraded && attempt.format === "mst") {
     const state = await loadMstAttemptStateAction(attemptId);
     if (!state.ok) throw new Error(state.error);
@@ -53,14 +58,17 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
         </Link>
       )}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-[18px] font-extrabold">{attempt.examSetName}</h1>
+        <h1 className="text-[18px] font-extrabold">
+          {attempt.examSetName}
+          {attempt.attemptNo && (attempt.attemptTotal ?? 1) > 1 ? <span className="ml-2 text-[13px] font-semibold text-grey-500">Attempt {attempt.attemptNo}</span> : null}
+        </h1>
         {showTutoringCta && (
           <Link href="/student/tutoring?from=result" data-testid="result-tutoring-cta" className="text-[13px] font-bold text-white bg-brand-red rounded-lg px-3 py-1.5">
             Learn 1:1 with ALTON <span aria-hidden>↗</span>
           </Link>
         )}
       </div>
-      {isGraded ? <MockExamResultView attempt={attempt} readOnly={false} /> : <MockExamTakeClient attempt={attempt} />}
+      {isGraded ? <MockExamResultView attempt={attempt} readOnly={false} attempts={attempts} attemptHref={(id) => `/student/mock-exam/${id}`} /> : <MockExamTakeClient attempt={attempt} />}
     </main>
   );
 }
