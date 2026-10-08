@@ -10077,5 +10077,659 @@
   "verification": {
    "structure": false
   }
+ },
+ "ap_calculus_ab-f04-k20": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": 15.278874536821952
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": 48
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": 342.79644737231007
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k21": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "(3.550510257216822, 8.449489742783179)"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "total area=222.384"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "volume=376.242"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "avg=-12.000000"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k22": {
+  "ok": false,
+  "reasons": [
+   "part_b_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "7.542472332656507"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "189.56300536142362"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "24.135911464500822"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k23": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_b_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "14.5833333333333"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "53.1250000000000"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "washer volume = 340.33920"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k24": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "26.17998499320089"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "V=116.0782"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "W=572.9246"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k25": {
+  "ok": false,
+  "reasons": [
+   "verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": "Traceback (most recent call last):\n  File \"/Users/jangjiman/Developer/ALTON-worktrees/ap-design/data/ap/sample-2027/run1/.verify.py\", line 11, in <module>\n    print(json.dumps({\"checks\":[{\"part\":\"a\",\"pass\":5<c<6.5 and R(0)>C(0),\"detail\":\"c=%.3f\"%c},{\"part\":\"b\",\"pass\":net>0,\"detail\":\"net=%.3f\"%net},{"
+  }
+ },
+ "ap_calculus_ab-f04-k26": {
+  "ok": false,
+  "reasons": [
+   "part_b_numeric_check_failed",
+   "part_c_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "7.542472332656507"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "24.135911464500822"
+     },
+     {
+      "part": "c",
+      "pass": false,
+      "detail": "189.56300536142362"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k27": {
+  "ok": false,
+  "reasons": [
+   "verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": "Traceback (most recent call last):\n  File \"/Users/jangjiman/Developer/ALTON-worktrees/ap-design/data/ap/sample-2027/run1/.verify.py\", line 7, in <module>\n    c=brentq(lambda x:f(x)-g(x),3,6)\n  File \"/private/tmp/claude-501/-Users-jangjiman-Developer-ALTON/d05b2ffe-5d6e-4058-a909-5e3b8827cbe2/scratch"
+  }
+ },
+ "ap_calculus_ab-f04-k28": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "area=32.0780"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "V=134.7277"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "V=1733.3490"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k29": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "16/3"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "36/5"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "87.9645943005142"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k30": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "7.542472332656507"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "V1=24.135911464500822 (use this value in model answer)"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "V2=189.56300536142362 (use this value in model answer)"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k31": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_b_numeric_check_failed",
+   "part_c_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "k=5.639410298049853,A=19.90739548305352"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "V=87.50919606018365"
+     },
+     {
+      "part": "c",
+      "pass": false,
+      "detail": "W=651.4729773898046"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_biology-f03-k20": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "C similar to A"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "richness change -50%"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k21": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "A and B within error: cage has no effect"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "pct=68.78 lowB=177 highC=78"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k22": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "[199.99999999999997, 199.99999999999997, 149.99999999999997, 99.99999999999997, 49.999999999999964] alpha2=0.9454554490433994"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k23": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "68.75"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "Group 4 close to Group 1"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k24": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "cage control mussel 24 vs uncaged 22, similar within 2SE (5+5)"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "mussel diff 56, barnacle diff -25, vs cage control 54, -23"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k25": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "A and B differ only in ladybugs (0 vs 5), no ants in both"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "D lower bound 603 > A upper bound 450"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k26": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Runs 3 and 5 differ only in a,b"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "controls listed"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "a=1.5,b=0.5 gives X=5.9 Y=396.3"
+     }
+    ],
+    "conceptual_parts": [
+     "b",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k27": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "diff=3.5 overlap=False"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k28": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "A (3.3, 4.8999999999999995), C (8.1, 9.9), B (7.699999999999999, 9.7), diff 4.9"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k29": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "table values match model answer"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k30": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "a=0.0: (100, 100) expected 100"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "a=0.5: (67, 67) expected 67"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "a=0.9: (53, 53) expected 53"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "a=1.0: (50, 50) expected 50"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "a=1.5 symmetric=True; asymmetric start -> X=100.0, Y=0.0"
+     }
+    ],
+    "conceptual_parts": [
+     "a"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k31": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "diff=2.1; fold=125.89254117941675"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
  }
 }

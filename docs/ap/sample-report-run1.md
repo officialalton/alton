@@ -1,40 +1,40 @@
 # AP 샘플 생성 보고 (run1)
 
-생성: 2026-10-08T10:10:05.971Z · 총 비용 $34.79 (상한 $80) · 호출 2065건 · 후보 552 → 전체 통과 220 → 셀당 1개 채택 90 (+ reserve 130)
+생성: 2026-10-08T10:13:37.286Z · 총 비용 $36.41 (상한 $80) · 호출 2140건 · 후보 576 → 전체 통과 220 → 셀당 1개 채택 90 (+ reserve 130)
 
 ## 과목별 수율·비용
 
 | 과목 | 후보 | 통과 | 채택(칸 채움) | MC 문항 채택 | FRQ 번들 채택 | 수율(채택/후보) | 비용 | 호출/채택 | 미충전 칸 |
 |---|---|---|---|---|---|---|---|---|---|
-| ap_calculus_ab | 192 | 80 | 33/34 | 30 | 3 | 17% | $11.17 | 21.2 | 1 |
-| ap_biology | 188 | 57 | 27/28 | 30 | 3 | 14% | $10.89 | 23.3 | 1 |
+| ap_calculus_ab | 204 | 80 | 33/34 | 30 | 3 | 16% | $11.71 | 21.9 | 1 |
+| ap_biology | 200 | 57 | 27/28 | 30 | 3 | 14% | $11.64 | 24.6 | 1 |
 | ap_microeconomics | 172 | 83 | 30/30 | 30 | 3 | 17% | $9.37 | 19.2 | 0 |
 
 ## 반려 사유
 
 | 사유 | 건수 |
 |---|---|
-| criterion_failed_exam_suitability | 184 |
-| criterion_failed_scope_skill | 165 |
-| criterion_failed_distractor_explanation | 156 |
-| criterion_failed_key_scoring | 138 |
-| criterion_failed_stimulus_expression | 113 |
-| solver_disagrees_or_flags_flaw | 35 |
-| instant_reject_out_of_scope_knowledge | 24 |
-| instant_reject_missing_condition | 19 |
+| criterion_failed_exam_suitability | 200 |
+| criterion_failed_scope_skill | 179 |
+| criterion_failed_distractor_explanation | 166 |
+| criterion_failed_key_scoring | 153 |
+| criterion_failed_stimulus_expression | 123 |
+| solver_disagrees_or_flags_flaw | 43 |
+| instant_reject_out_of_scope_knowledge | 30 |
+| instant_reject_missing_condition | 22 |
+| instant_reject_wrong_key | 20 |
 | missing_set_stimulus | 18 |
-| instant_reject_wrong_key | 15 |
+| part_a_numeric_check_failed | 13 |
+| part_b_numeric_check_failed | 11 |
 | item_count_N_expected_N | 11 |
-| part_a_numeric_check_failed | 10 |
-| instant_reject_multiple_correct | 9 |
-| instant_reject_wrong_stimulus | 8 |
-| part_b_numeric_check_failed | 7 |
-| verification_error | 6 |
+| instant_reject_multiple_correct | 10 |
+| instant_reject_wrong_stimulus | 9 |
+| verification_error | 8 |
+| part_c_numeric_check_failed | 7 |
 | key_mismatch_deterministic | 5 |
 | part_d_numeric_check_failed | 5 |
-| part_c_numeric_check_failed | 5 |
+| resembles_known_exam_item | 5 |
 | itemN_key_out_of_range | 5 |
-| resembles_known_exam_item | 4 |
 | itemN_key_mismatch_deterministic | 4 |
 | difficulty_from_unfair_sources | 3 |
 | itemN_missing_stem_or_explanation | 3 |
