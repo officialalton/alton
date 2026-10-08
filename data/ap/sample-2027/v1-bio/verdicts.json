@@ -4,7 +4,10 @@
   "cellId": "ap_biology-f01",
   "passed": false,
   "reasons": [
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
   ],
   "soft": [],
   "solver": {
@@ -36,11 +39,40 @@
    ]
   },
   "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fail. The dark group is called the control for \"wavelength of light shone on one side\", yet it has no light source, so measuring curvature \"toward the light source\" is incoherent for it. The 4.2 degree value is unexplained. Part A is given away by the stem, which already states that wavelength is what is being investigated. The Part C rubric (either \"no difference\" or \"no effect\") is loosely specified. The calculator is designated \"allowed\" with no calculation needed. The item is otherwise on-topic for 8.1.",
    "scope_skill": {
-    "pass": false,
-    "notes": ""
+    "pass": true,
+    "notes": "Topic 8.1 fits. Parts mix 3.C, 3.B and 6.B/4.B, which is acceptable for a bundle."
    },
-   "notes": "Part A, B fit 3.C. Part C is labeled 3.B and Part D 6.B/4.B. These mixed skills are acceptable per part. However, the experimental design is conceptually flawed. A \"no light (dark)\" group cannot curve \"toward the light source\" because there is no light source, so the dependent variable is undefined for the control. It also conflicts with the stated independent variable 'wavelength shone on one side', since dark has no wavelength."
+   "key_scoring": {
+    "pass": false,
+    "notes": "Control group framing is muddled (no light has no wavelength). The Part C rubric is ambiguous because requires_both is false for two listed elements."
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": "The table is complete, but the description of curvature \"toward the light source\" for the dark group is logically flawed, and the nonzero 4.2 degrees is unexplained."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to FRQ."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "Part A is leaked by its own stem. The calculator is designated \"allowed\" but no calculation is required."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Bio experimental-design FRQ set: identify the independent variable, control and its purpose, null hypothesis, and support a claim with table data (means with non-overlapping 2SE intervals). Concepts are core and each part is a single point with minimal reading and no real computation. It sits at a typical mock-exam level, with the SE-overlap reasoning in part D adding slight depth beyond pure recall.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 300
   }
  },
  {
@@ -120,7 +152,12 @@
   "cellId": "ap_biology-f01",
   "passed": false,
   "reasons": [
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+   "criterion_failed_scope_skill",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_multiple_correct",
+   "reference_pattern_mismatch"
   ],
   "soft": [],
   "solver": {
@@ -152,11 +189,42 @@
    ]
   },
   "review": {
+   "instant_reject": [
+    "multiple_correct"
+   ],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The bundle is a four-part, 4-point short FRQ. A short FRQ must be exactly four 1-point parts, which fits, but several parts have scope and scoring problems. Part C is assessed as 3.B (not the target 3.C), and the unit-8 topic 8.1 is tested only superficially. Part D's skills 6.B/4.B are fine as labels, but the claim rests on a statistical-overlap argument. The 2SE interval reasoning is an acceptable AP convention, yet the rubric wording \"the difference is real\" and \"statistically supported\" over-claims. Rubric rows are fragile. C1 lists required_elements [\"no difference\",\"no effect\"] with requires_both false, so it is ambiguous whether one or both are needed. B1 and D1 are requires_both true, so B demands the literal phrase \"baseline for comparison\", which rejects valid wording such as \"to compare against\" or \"to show the effect of temperature\". D1 demands the literal phrase \"error bars do not overlap\", although the table shows ±2SE values rather than error bars. The stimulus description reads \"Mean mean swimming speed\", a typo. The title and dependent variable are only partly defined: the 'swimming response' is never tied to a specific stimulus, so the topic 8.1 'response to the environment' framing is thin. The prompt in part A never asks for the dependent variable, so the 'student_thinking' goals are only half addressed. Part A is a trivial one-word identification. Part B's scoring could also accept a different justification. Overall the item is too weakly specified and too lenient or literal in scoring to be exam-ready.",
    "scope_skill": {
+    "pass": false,
+    "notes": ""
+   },
+   "key_scoring": {
+    "pass": false,
+    "notes": ""
+   },
+   "stimulus_expression": {
+    "pass": false,
+    "notes": ""
+   },
+   "distractor_explanation": {
     "pass": true,
     "notes": ""
    },
-   "notes": "Parts A and B target 3.C directly, C targets 3.B and D targets 6.B/4.B, all within topic 8.1 (response to the environment). Each part is judged against its own skill. The parts are simple but acceptable."
+   "exam_suitability": {
+    "pass": false,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Parts A-C are recall of core experimental design terms (independent variable, control labeled in the table, null hypothesis). Part D requires a simple comparison of mean ± 2SE intervals (4.5-7.3 vs 9.4-12.2, no overlap) to support the claim. Single table, low reading, minimal computation, few reasoning steps; fits foundational practice rather than a full mock.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
   }
  },
  {
@@ -486,7 +554,9 @@
   "passed": false,
   "reasons": [
    "solver_disagrees:B:numeric",
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
   ],
   "soft": [],
   "solver": {
@@ -518,11 +588,40 @@
    ]
   },
   "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The item fails on scope/skill fit and exam suitability.\n\nScope and skill fit: The topic is 3.5 Cellular Respiration, but the item never addresses respiration. It only reads a table of CO2 output against sugar concentration, with no connection to fermentation or respiration concepts. The topic label is nominal, and the content is generic data handling (trend, percent change, error-bar overlap).\n\nRubric weaknesses:\n- Part A's required elements (increases, 3.9, 11.4, 18.8) force the student to quote all three numbers verbatim, which is a rote scoring check. Rubric A1 also marks all four elements as required.\n- Part C asks the student to \"identify the pair of levels, if any\" and the answer is \"none\". This is a trick framing with a mechanical answer.\n- Part D mostly repeats Part C and requires the exact phrase \"do not overlap\". Its rubric also lists the elements 18.8 and \"do not overlap\", which makes it a phrase-matching check.\n\nReference pattern: Part D's required element \"do not overlap\" is a loose phrase match, and the overlap logic in Parts C and D is redundant. The four 1-point parts do match the short-FRQ grain. Parts B and C are labeled skills 5.A and 5.B, which is acceptable, but the dominant demand is not the target topic.\n\nKey and scoring: The keys are correct. The independent solver agreed, and the intervals are non-overlapping.\n\nCalculator: The calculator is designated as allowed, but the only calculation is a simple percent change.",
    "scope_skill": {
     "pass": false,
-    "notes": ""
+    "notes": "Topic 3.5 is nominal. Nothing in the item tests respiration or fermentation understanding. The dominant demand is generic table reading and statistics, and Parts B and C belong to other skills."
    },
-   "notes": "The item is labeled topic 3.5 (Cellular Respiration), but nothing in it requires respiration knowledge. The stem never states what is being measured (fermentation or respiration) or that CO2 reflects metabolic rate. The tasks are generic table description, percent change, and error-bar overlap, so the topic fit is nominal. Parts B (5.A) and C (5.B) are also assessed under other skills, which is acceptable for a mixed-skill FRQ. However, there is no actual 3.5 demand, such as linking CO2 output to fermentation or respiration."
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct, and the arithmetic and intervals check out."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with means, 2SE and n."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The rubrics are phrase-matching (for example, requiring the literal \"do not overlap\" and \"none of the pairs\"). Part D is redundant with Part C. The item lacks the biological reasoning an AP short FRQ would require."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts on one table: describe a trend, compute a simple percent change, and interpret 2SE error-bar overlap (including the 'if any' wording, where no intervals overlap) to judge significance and support a claim. Concepts are in scope for AP Bio, and the calculation is light. This matches typical full-mock data-analysis items rather than introductory or extension work.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
   }
  },
  {
@@ -530,7 +629,9 @@
   "cellId": "ap_biology-f02",
   "passed": false,
   "reasons": [
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
   ],
   "soft": [],
   "solver": {
@@ -562,11 +663,40 @@
    ]
   },
   "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The keys and the table are correct. The item is weak on topic 3.5 content, since it never asks about respiration or fermentation. Parts C and D overlap and are rubric-thin: Part C's justification is not scored. It deviates from the AP short-FRQ pattern, which expects a biological explanation or prediction linked to the topic.",
    "scope_skill": {
     "pass": false,
-    "notes": ""
+    "notes": "Topic 3.5 (cellular respiration) is only a thin context here. Yeast CO2 production is never connected to respiration, fermentation, or sugar as a substrate. The task is generic table/statistics work (trend, percent change, error bar overlap). Part A fits skill 4.B. Parts B (5.A), C (5.B), and D (6.B) are different skills, which is acceptable for a bundle. Overall, though, the content demand for topic 3.5 is minimal."
    },
-   "notes": "Bundle label 4.B, but parts B (5.A), C (5.B), and D (6.B) are assessed under other skills. This is acceptable for official mixing. However, topic 3.5 (Cellular Respiration) is only a thin context here: yeast CO2 with sugar concentration requires no respiration knowledge. The item is essentially generic data/statistics analysis. Short FRQ grain is four 1-point parts, which is OK. The weak topic linkage is a concern."
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and unique. Part B has a tolerance band of 159.9 to 161.1 around 160.5. Part C accepts 'none of the pairs' and is consistent with the data: the ±2SE ranges 3.86–4.74, 10.36–12.04, and 17.12–22.08 do not overlap. Rubric rows for A and D require specific phrases or numbers, which is rigid. Part C is a 1-point answer plus a justification, but the rubric requires only 'none of the pairs', so the justification is not scored. Part D asks the student to 'describe what the error bars indicate' but the rubric only checks '19.6' and 'do not overlap'."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: columns, rows, mean ± 2SE, and n. The wording is clear. The description line states ±2SE. Units (mL) appear in the column header."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The model answers are terse and give no explanation of common errors. The common_errors lists are empty."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The bundle has four 1-point parts, which matches the short FRQ grain. Part C is trivial given the data, and the 'justify' request carries no scoring. Part D largely repeats C. The calculator is allowed, and the only calculation is a simple percent change. The task mostly tests statistics skills with no biological reasoning (no explanation of why CO2 rises with sugar), so it is weaker than an AP Biology short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP Biology data-analysis FRQ set on one small table. It covers describing a trend, a single percent-change calculation, interpreting ±2SE intervals for overlap (a standard AP skill), and supporting a claim with data plus error-bar reasoning. Each part is short and the concepts are in scope. The main demand is correctly interpreting error bars, not heavy reading or arithmetic.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
   }
  }
 ]

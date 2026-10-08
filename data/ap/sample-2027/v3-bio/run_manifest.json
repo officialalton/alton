@@ -1,0 +1,36 @@
+{
+ "run": "v3-bio",
+ "subject": "ap_biology",
+ "generatorCommit": "e0089735+dirty",
+ "gateVersion": "v2-code-first-final-2026-10-08",
+ "reviewerPromptHash": "4b95b036b331",
+ "difficultyPromptHash": "9bda2250d42c",
+ "arm": "validation v3 bio (after design fixes 2)",
+ "parserHash": "acbad38fb4bd",
+ "models": {
+  "gen": "claude-sonnet-5-5",
+  "solve": "claude-opus-5-5",
+  "review": "claude-sonnet-5-5",
+  "difficulty": "claude-sonnet-5-5",
+  "spot": "claude-fable-5-1"
+ },
+ "policy": {
+  "firstCandidatesPerCell": 1,
+  "repairLimit": 1,
+  "codeChecksBeforeLlm": true,
+  "independentVerification": true,
+  "templateStop": {
+   "window": 4,
+   "maxSameReason": 2
+  },
+  "denominator": "first_candidates",
+  "manifestFile": "run_manifest.json"
+ },
+ "seeds": {
+  "first": [
+   1200
+  ],
+  "note": "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED"
+ },
+ "frozenAt": "2026-10-08T20:55:54.231Z"
+}

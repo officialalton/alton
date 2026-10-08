@@ -7,7 +7,7 @@ import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
 import { validateBlueprint, type Blueprint } from "../../lib/ap-generation/blueprint";
 import { generatorDefects } from "../../lib/ap-generation/generator-defects";
-import { normalizeReview } from "../../lib/ap-generation/review-parse";
+import { normalizeReview, recoverFromBlocks } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { loadEnvLocal } from "../keywords/db";
 import { createHash } from "node:crypto";
@@ -215,7 +215,9 @@ async function solveStage() {
   console.log(`solve: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
-const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review3")) m.set(k, v); for (const [k, v] of resultMap("review2")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
+/** 검토 결과 한 건의 입력 객체: 단일 도구 블록이 정상이면 그것, 필드별로 쪼개진 블록이면 복원(recoverFromBlocks). */
+const reviewInput = (r: Json | undefined): Json | null => { if (!r) return null; const first = toolInput(r as never) as Json | null; if (first && first.scope_skill_pass !== undefined) { const o: Json = { instant_reject: first.instant_reject ?? [], matches_reference_pattern: first.matches_reference_pattern, resembles_known_exam_item: first.resembles_known_exam_item, summary: first.summary }; for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) o[k] = { pass: first[`${k}_pass`], notes: first[`${k}_notes`] ?? "" }; return o; } if (first && first.key_scoring !== undefined) return first; const content = ((r.message as Json | undefined)?.content as Json[] | undefined) ?? []; const blocks = content.filter((c) => c.type === "tool_use").map((c) => c.input); return (recoverFromBlocks(blocks) as Json | null) ?? first; };
+const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review3")) m.set(k, v); for (const [k, v] of resultMap("review2")) m.set(k, v); for (const [k, v] of resultMap("review4")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`) ?? resultMap("solve2").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
 const numsIn = (s: string) => (s.replace(/(\d),(?=\d{3}(?!\d))/g, "$1").match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number); // "$3,025" 의 쉼표를 자릿수 구분자로 처리(이전에는 3 과 025 로 쪼개 오탐)
 function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: string } {
@@ -241,7 +243,7 @@ REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 secon
 Agreement of an independent solver is supporting evidence only. Fail when unsure.`;
 // 재검증(S2): 코드가 키를 검증하지 않은 기존(LLM 직접 생성) 문항용. 코드 우선 전제 문장을 바꾸고 과목별 공식 기준 메모를 덧붙인다. S1a/S1b(칼큘러스 동결 검토기)에는 영향 없음.
 const SUBJECT_NOTES: Record<string, string> = {
-  ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes.",
+  ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes. The bundle's representative skill is only a label: NEVER fail scope_skill because the parts assess different official skills. Alternative accepted phrasings listed in a rubric row (alt_solutions) count as accepted answers; do not call a rubric rigid when equivalent wordings are listed.",
   ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. Free response: long FRQ = 10 points, short FRQ = 5 points with parts of 1-2 points mixing calculation and explanation (setup and answer rows are normal); judge each part against its own rubric rows, and do not reject for low per-part demand when the grain matches the official short-FRQ format.",
   ap_calculus_ab: "",
 };
@@ -277,10 +279,17 @@ async function reviewMoreStage() { // review 도 같은 방식으로 새 후보�
   await runBatch({ dir: DIR, name: "review3", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }
 async function reviewRetryStage() { // 불완전·깨진 검토 출력만 한 번 다시 요청한다(같은 프롬프트·같은 후보; 최초 후보 수에는 영향 없음)
-  const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(rev.has(`r-${c.key}`) ? (toolInput(rev.get(`r-${c.key}`) as never) as Json | null) : null).malformed.length > 0);
+  const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(reviewInput(rev.get(`r-${c.key}`))).malformed.length > 0);
   const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000));
   console.log(`review-retry: ${reqs.length}건`); if (!reqs.length) return;
   await runBatch({ dir: DIR, name: "review2", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
+}
+const flatReviewTool = { name: "submit_review", description: "Submit the review as ONE flat call (all fields in this single call).", input_schema: { type: "object", properties: Object.fromEntries([...["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"].flatMap((k) => [[`${k}_pass`, { type: "boolean" }], [`${k}_notes`, { type: "string" }]]), ["instant_reject", { type: "array", items: { type: "string", enum: ["wrong_key", "multiple_correct", "missing_condition", "wrong_stimulus", "out_of_scope_knowledge"] } }], ["matches_reference_pattern", { type: "boolean" }], ["resembles_known_exam_item", { type: "boolean" }], ["summary", { type: "string" }]]), required: ["scope_skill_pass", "key_scoring_pass", "stimulus_expression_pass", "distractor_explanation_pass", "exam_suitability_pass", "instant_reject", "matches_reference_pattern", "resembles_known_exam_item", "summary"] } };
+async function reviewRetry2Stage() { // 2차 재요청: 여전히 읽을 수 없는 검토만, 도구 호출을 강제(tool_choice=tool, 사고 없음)해 한 블록으로 받는다. 같은 프롬프트·같은 후보.
+  const rev = reviewMap(); const cs = alive().filter((c) => solved(c) && normalizeReview(reviewInput(rev.get(`r-${c.key}`))).malformed.length > 0);
+  const reqs = cs.map((c) => { const q = mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, withImg(c, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`), c.kind === "mc" ? 3000 : 6000); (q.params as Json).tools = [flatReviewTool]; return q; });
+  console.log(`review-retry2: ${reqs.length}건`); if (!reqs.length) return;
+  await runBatch({ dir: DIR, name: "review4", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
 }
 async function difficultyStage() {
   const rev = reviewMap(); const cs = alive().filter((c) => rev.has(`r-${c.key}`));
@@ -299,7 +308,7 @@ function decide(): Verdict[] {
     v.solver = solved(c); const ag = solverAgrees(c, v.solver ?? null);
     if (ag.ok === null) { reasons.push("solver_missing"); return v; }
     if (!ag.ok) reasons.push(`solver_disagrees:${ag.note}`);
-    const r = rev.get(`r-${c.key}`); const nr = normalizeReview(r ? (toolInput(r as never) as Json | null) : null); v.review = nr.review;
+    const r = rev.get(`r-${c.key}`); const nr = normalizeReview(reviewInput(r)); v.review = nr.review;
     if (!v.review) { reasons.push("review_missing"); return v; }
     if (nr.malformed.length) { reasons.push(`review_malformed:${nr.malformed.join(",")}`); return v; }
     for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) if (!(v.review[k] as Json | undefined)?.pass) reasons.push(`criterion_failed_${k}`);
@@ -348,6 +357,6 @@ function reportStage() {
 }
 (async () => {
   if (stage === "plan") planStage(); else if (stage === "blueprint") blueprintStage(); else if (stage === "gen") await genStage(); else if (stage === "check") checkStage(); else if (stage === "solve") await solveStage();
-  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage(); else if (stage === "solve-more") await solveMoreStage(); else if (stage === "review-more") await reviewMoreStage(); else if (stage === "review-retry") await reviewRetryStage(); else if (stage === "verdicts") { writeFileSync(path.join(DIR, "verdicts.json"), JSON.stringify(decide(), null, 1)); console.log("verdicts.json 기록"); } else if (stage === "manifest") { baseline(); writeManifest(); console.log("manifest 기록: " + path.join(DIR, POLICY.manifestFile)); }
+  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage(); else if (stage === "solve-more") await solveMoreStage(); else if (stage === "review-more") await reviewMoreStage(); else if (stage === "review-retry2") await reviewRetry2Stage(); else if (stage === "review-retry") await reviewRetryStage(); else if (stage === "verdicts") { writeFileSync(path.join(DIR, "verdicts.json"), JSON.stringify(decide(), null, 1)); console.log("verdicts.json 기록"); } else if (stage === "manifest") { baseline(); writeManifest(); console.log("manifest 기록: " + path.join(DIR, POLICY.manifestFile)); }
   else console.log("stage: plan | gen | check | solve | review | difficulty | spot | report");
 })().catch((e) => { console.error(e); process.exit(1); });

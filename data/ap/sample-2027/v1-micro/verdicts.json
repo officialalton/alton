@@ -4,7 +4,6 @@
   "cellId": "ap_microeconomics-f01",
   "passed": false,
   "reasons": [
-   "solver_disagrees:C:numeric,D:numeric",
    "criterion_failed_key_scoring",
    "criterion_failed_exam_suitability",
    "reference_pattern_mismatch"
@@ -161,10 +160,8 @@
  {
   "key": "ap_microeconomics-f01-k2",
   "cellId": "ap_microeconomics-f01",
-  "passed": false,
-  "reasons": [
-   "solver_disagrees:C:numeric,D:numeric"
-  ],
+  "passed": true,
+  "reasons": [],
   "soft": [],
   "solver": {
    "answers": [
@@ -242,8 +239,8 @@
   "cellId": "ap_microeconomics-f01",
   "passed": false,
   "reasons": [
-   "solver_disagrees:C:numeric,D:numeric",
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
   ],
   "soft": [],
   "solver": {
@@ -281,11 +278,40 @@
    ]
   },
   "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The arithmetic and keys are correct: Q=45, P=75, profit=2025, DWL=1012.5, and Q falls to 40 when MC rises to 40. The item fails on exam suitability and format fit.",
    "scope_skill": {
     "pass": true,
-    "notes": ""
+    "notes": "All parts sit in topic 4.2 and the numeric parts test 3.A. Parts D and E are tagged 3.C and 3.B, which is acceptable because each part is judged against its own skill."
    },
-   "notes": "All parts are Topic 4.2 monopoly content. Parts A-C fit skill 3.A. Part D is labeled 3.C and part E 3.B. Each part is judged against its own skill, which is acceptable. D is a calculation that fits 3.A better than its 3.C label, but this is minor."
+   "key_scoring": {
+    "pass": true,
+    "notes": "Each key is unique and defensible. In part E, the post-shock quantity of 40 is correct. Part E's rubric requires only \"decreases\" and a link to MR = MC. This is consistent with the stem."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and the notes state MC = ATC = 30 and the linear demand equation P = 120 - Q. The wording is clear. Part D says to compute DWL relative to the efficient quantity."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists are empty, but the rubric rows are otherwise adequate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is a 5-point short FRQ, which matches the official short-FRQ grain. However, it is five 1-point parts that mostly chain simple calculations, with nothing on graph drawing or shading areas. The demand schedule lists 6 rows and does not show MR. The profit-maximizing quantity of 45 does not appear in the schedule, so students must use the equation in the notes. This makes the table partly redundant. The 12-minute estimate is high for the work involved. These points are a material departure from official short-FRQ style, which mixes calculation with graph-based explanation across 1-2 point parts."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP monopoly computation: derive MR from linear demand, set MR=MC (Q=45), find price from demand (P=75), compute profit (2025) and DWL triangle (1012.5), then do a comparative static with MC up to 40 (Q falls to 40). Requires multi-step reasoning across concepts, but the numbers are clean, the reading is light, and the content is fully in scope. It is a typical FRQ-style item suited to full mocks.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
   }
  },
  {
@@ -617,10 +643,8 @@
  {
   "key": "ap_microeconomics-f02-k3",
   "cellId": "ap_microeconomics-f02",
-  "passed": false,
-  "reasons": [
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
-  ],
+  "passed": true,
+  "reasons": [],
   "soft": [],
   "solver": {
    "answers": [
@@ -657,20 +681,47 @@
    ]
   },
   "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is a correct, standard prisoner's dilemma short FRQ with five 1-point parts. The keys are unique and verified. Minor issues: the one-shot simultaneous condition is not stated in the stimulus even though the blueprint says it is, and the part E keyword rubric is brittle. Neither justifies rejection.",
    "scope_skill": {
     "pass": true,
     "notes": ""
    },
-   "notes": "All parts sit on topic 4.5 (dominant strategy, Nash equilibrium, payoff comparison). Part E is labeled 2.B and is a plausible explanation skill. No later-unit content."
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. Part E's required keywords \"incentive\" and \"deviate\" are brittle, so synonyms such as \"cheat\" or \"switch\" should be accepted."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The payoff matrix data is complete. The one-shot simultaneous play is not explicitly stated, so it would be better to add that sentence to the description."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": ""
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": ""
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Textbook prisoner's dilemma with a 2x2 matrix. Low is a dominant strategy for both firms, giving a Nash equilibrium at (low, low) with payoff 57. The Pareto-superior outcome (high, high) at (77,77) is not reached because each firm has an incentive to defect. The parts are scaffolded one step at a time, with simple integer comparisons, short reading, and no real calculation. It is a routine application of core concepts, not a multi-step or novel-context item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
   }
  },
  {
   "key": "ap_microeconomics-f02-k4",
   "cellId": "ap_microeconomics-f02",
-  "passed": false,
-  "reasons": [
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
-  ],
+  "passed": true,
+  "reasons": [],
   "soft": [],
   "solver": {
    "answers": [
@@ -709,9 +760,38 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": ""
+    "notes": "Topic 4.5 dominant strategy, Nash equilibrium and the cooperative outcome are all in scope. Parts A-D are interpretation of the matrix (2.C). Part E is labeled 2.B, which is acceptable since each part is judged against its own skill."
    },
-   "notes": "Topic 4.5 dominant strategy, Nash equilibrium and the cooperative outcome are all in scope. Parts A-D are interpretation of the matrix (2.C). Part E is labeled 2.B, which is acceptable since each part is judged against its own skill."
+   "key_scoring": {
+    "pass": true,
+    "notes": "The payoffs give low fare as the dominant strategy for both firms, so the Nash equilibrium is (low, low) at 39 each. The key for A-D is unique and defensible. The (high, high) outcome at 63/63 is the only mutually better cell. The rubric rows are consistent. Rows are scored on element presence only, which is lenient but workable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The matrix data is complete, with both players, strategies, all four payoff cells, units and format. The one-shot simultaneous assumption is stated in the Part A prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The rubric elements are reasonable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item has 5 points as a short FRQ with five 1-point parts, which fits the official grain. The load is light and no calculator is needed, though the designation is \"allowed\", which is harmless. Parts C and D are somewhat trivial reads of the matrix."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean 5-point game theory short FRQ with a unique key and a complete matrix. It passes all criteria."
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard 2x2 prisoner's dilemma payoff matrix. Each part is a direct read-off or one-step comparison: low fare dominates for X (84>63, 39>21), Nash equilibrium is (low, low) with X earning 39, (high, high) at 63 each is better for both, and the incentive to defect (84>63) explains why it is unstable without enforcement. No real calculation is needed (the calculator is irrelevant), reading load is light, and the single representation (the matrix) is used throughout. The concepts are core to topic 4.5 and are tested at an introductory level.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 3,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 240
   }
  }
 ]

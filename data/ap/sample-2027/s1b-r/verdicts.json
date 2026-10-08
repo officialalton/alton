@@ -2083,10 +2083,8 @@
  {
   "key": "ap_calculus_ab-f01-r0-k0",
   "cellId": "ap_calculus_ab-f01-r0",
-  "passed": false,
-  "reasons": [
-   "review_malformed:key_scoring,stimulus_expression,distractor_explanation,exam_suitability"
-  ],
+  "passed": true,
+  "reasons": [],
   "soft": [],
   "solver": {
    "answers": [
@@ -2119,9 +2117,38 @@
   "review": {
    "scope_skill": {
     "pass": true,
-    "notes": ""
+    "notes": "Trapezoidal/left sums from an unequally spaced table, interpretation in context, and monotonicity-based over/under-estimate. This fits 6.2 and 8.1 (average value/accumulation) and skill 2.B. No out-of-scope content."
    },
-   "notes": "Trapezoidal/left sums from an unequally spaced table, interpretation in context, and monotonicity-based over/under-estimate. This fits 6.2 and 8.1 (average value/accumulation) and skill 2.B. No out-of-scope content."
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys 84.5, 86.5, 4.225 and the qualitative answers are consistent with the solver. Part (b) restricts the claim to [0,8], so it is unambiguous. Part (d) is defensible: monotonicity on only part of the interval does not determine the overall error direction. Rubric rows are consistent, with requires_row_id dependencies. One minor point: the part (d) answer's 'S increasing on [0,8] but decreasing on [8,20]' relies on the given function_info, which is stated."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data is complete, with title, columns, rows, units, and function_info on monotonicity. The subintervals are listed explicitly. The wording is clear. Calculator designation is plausible, though the arithmetic is light."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so there are no distractors. Common errors are noted in the rubric (uniform width 5, applying the conclusion to the whole interval)."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in four parts (3/3/2/1), which matches official grain. The arithmetic is manageable, with no ugly numbers. The task load is typical of an AP table-based FRQ. The calculator is barely needed, but a 'required' designation is acceptable for a sum-based item."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A clean table-based Riemann sum FRQ with correct keys, a complete stimulus, appropriate scope, and sound rubric rows. No instant-reject conditions apply."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP-style FRQ on unequal-width trapezoidal and left sums with small clean numbers (trapezoid sum 84.5, left sum 86.5, average 4.225). The conceptual demands are moderate: interpret the sum in context with units, use monotonicity to decide over/underestimate, relate the sum to average value, and evaluate a flawed claim in (d) because S decreases on [8,20]. The reading load is modest and there are no out-of-scope concepts or ambiguous wording. This fits the exam_prep level for full mocks.",
+   "reading_load": "medium",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 3,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
   }
  },
  {
