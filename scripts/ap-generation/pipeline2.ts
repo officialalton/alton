@@ -5,6 +5,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { runBatch, toolInput, estimate, ledger, type BatchReq } from "../mock-exam-generation/batch-lib";
+import { normalizeReview } from "../../lib/ap-generation/review-parse";
 import { calibrateFrq, calibrateMc, gateDuplicate, gateFrq, gateMc, gateNoCalcExact, wordingPreserves, type FrqPack, type McPack } from "../../lib/ap-generation/gates";
 import { loadEnvLocal } from "../keywords/db";
 import { createHash } from "node:crypto";
@@ -38,9 +39,9 @@ const readJson = <T>(f: string): T => JSON.parse(readFileSync(f, "utf-8")) as T;
 const readJsonl = (f: string) => (existsSync(f) ? readFileSync(f, "utf-8").split("\n").filter(Boolean).map((l) => JSON.parse(l) as Json) : []);
 const resultMap = (name: string) => { const m = new Map<string, Json>(); for (const r of readJsonl(path.join(DIR, `${name}.results.jsonl`))) if (r.ok) m.set(r.custom_id as string, r); return m; };
 
-const GUIDE = GUIDES[SUBJECT as keyof typeof GUIDES];
-const guideWordingRules = () => _gwr().replace(/ap_calculus_ab|AP Calculus AB/g, GUIDE.subject).replace(/for AB/g, SUBJECT === "ap_calculus_bc" ? "for BC" : "for AB");
-const guideReviewRules = (u: string) => { const un = GUIDE.units.find((x) => x.unit === u); return un ? `UNIT ${un.unit} SCOPE for ${SUBJECT === "ap_calculus_bc" ? "BC" : "AB"} — in scope: ${un.inScope.join("; ")}. OUT of scope: ${un.outOfScope.join("; ")}. Difficulty levers allowed: ${GUIDE.difficultyAllowed.join("; ")}. Banned difficulty sources: ${GUIDE.difficultyBanned.join("; ")}.` : _grr(u); };
+const GUIDE = GUIDES[SUBJECT as keyof typeof GUIDES]; // Bio/Micro 는 과목 가이드가 아직 없다(S2 재검증은 가이드 없이 공식 과목 기준으로 평가)
+const guideWordingRules = () => !GUIDE ? "" : _gwr().replace(/ap_calculus_ab|AP Calculus AB/g, GUIDE.subject).replace(/for AB/g, SUBJECT === "ap_calculus_bc" ? "for BC" : "for AB");
+const guideReviewRules = (u: string) => { if (!GUIDE) return ""; const un = GUIDE.units.find((x) => x.unit === u); return un ? `UNIT ${un.unit} SCOPE for ${SUBJECT === "ap_calculus_bc" ? "BC" : "AB"} — in scope: ${un.inScope.join("; ")}. OUT of scope: ${un.outOfScope.join("; ")}. Difficulty levers allowed: ${GUIDE.difficultyAllowed.join("; ")}. Banned difficulty sources: ${GUIDE.difficultyBanned.join("; ")}.` : _grr(u); };
 const calcAbGuide = GUIDE;
 const curriculum = readJson<ApCurriculumFile>(path.resolve(process.cwd(), `data/ap/curriculum-2027/${SUBJECT}.json`));
 const skillSet = new Set(curriculum.skills.map((s) => s.code));
@@ -64,7 +65,7 @@ function writeManifest(extra: Partial<RunManifest> = {}) {
   const commit = spawnSync("git", ["rev-parse", "--short", "HEAD"], { encoding: "utf-8" }).stdout.trim();
   const dirty = spawnSync("git", ["status", "--porcelain", "scripts/ap-generation", "lib/ap-generation"], { encoding: "utf-8" }).stdout.trim() ? "+dirty" : "";
   const m: RunManifest = { run: RUN, subject: SUBJECT, generatorCommit: commit + dirty, gateVersion: "v2-code-first-final-2026-10-08", reviewerPromptHash: sha(REVIEW_SYS + JSON.stringify(reviewTool)), difficultyPromptHash: sha(DIFF_SYS + JSON.stringify(diffTool)),
-    models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
+    arm: process.env.AP_ARM, repairDefinition: process.env.AP_REPAIR_DEF, parserHash: sha(readFileSync(path.resolve(process.cwd(), "lib/ap-generation/review-parse.ts"), "utf-8")), models: { ...MODELS }, policy: POLICY, seeds: { first: [SEED0], note: "seed0 = first seed tried per archetype; packs.json records pack_id = archetype-sSEED" }, frozenAt: new Date().toISOString(), ...extra };
   const issues = manifestIssues(m); if (issues.length) throw new Error(issues.join(", "));
   writeFileSync(path.join(DIR, POLICY.manifestFile), JSON.stringify(m, null, 1));
 }
@@ -105,10 +106,13 @@ const WORD_SYS = `You are a careful AP Calculus item writer. A CODE generator ha
 For free-response bundles you rewrite part prompts in the same way (keep every number and $...$ block) and add a one-sentence design_note.`;
 const mcWordTool = { name: "submit_wording", description: "Submit polished stem and explanation.", input_schema: { type: "object", properties: { stem: { type: "string" }, explanation_en: { type: "string" } }, required: ["stem"] } };
 const frqWordTool = { name: "submit_frq_wording", description: "Submit polished prompts.", input_schema: { type: "object", properties: { prompts: { type: "object", additionalProperties: { type: "string" } }, design_note: { type: "string" } }, required: ["prompts", "design_note"] } };
+const FEEDBACK: Record<string, string> = process.env.AP_FEEDBACK_FILE && existsSync(process.env.AP_FEEDBACK_FILE) ? JSON.parse(readFileSync(process.env.AP_FEEDBACK_FILE, "utf-8")) : {};
 function wordReq(c: Cell, pack: Json, id: string): BatchReq {
-  const body = c.kind === "mc"
+  const fbText = FEEDBACK[id] ? `\n\nREPAIR (single attempt): the previous wording of this item was rejected for the reasons below. Rewrite ONLY the failing wording (the stem and/or, if the feedback concerns the explanation, a rewritten explanation_en that shows the worked computation for the key and why each distractor is wrong); every number, symbol, $...$ block, option and key is fixed by code and must stay exactly as given. Submit stem and explanation_en.\nREVIEW FEEDBACK:\n${FEEDBACK[id]}` : "";
+  const body0 = c.kind === "mc"
     ? `BASE STEM:\n${pack.stem}\n\nSTIMULUS (already shown to the student): ${JSON.stringify(pack.stimulus)}\n\nOPTIONS WITH RATIONALE (do not change options):\n${(pack.options as Json[]).map((o, i) => `${i === pack.key_index ? "KEY" : "WRONG"}: ${o.text} — ${o.why}`).join("\n")}\n\nSubmit via submit_wording.`
     : `BUNDLE: ${pack.title}\nSTIMULUS: ${JSON.stringify(pack.stimulus)}\nPART PROMPTS (keep numbers and math blocks):\n${(pack.parts as Json[]).map((p) => `(${p.label}) ${p.prompt}`).join("\n")}\n\nSubmit via submit_frq_wording with prompts keyed by part label.`;
+  const body = body0 + fbText;
   return { custom_id: id, params: { model: MODELS.gen, ...think(MODELS.gen), max_tokens: c.kind === "mc" ? 2500 : 4000, system: [{ type: "text", text: WORD_SYS + "\n" + guideWordingRules(), cache_control: SYS_CACHE }], tools: [c.kind === "mc" ? mcWordTool : frqWordTool], tool_choice: { type: "auto" }, messages: [{ role: "user", content: body }] } };
 }
 async function genStage() {
@@ -136,7 +140,9 @@ function buildCands(): Cand[] {
       const mp = { ...(pack as unknown as McPack) } as McPack;
       let stem = mp.stem; const expl = structuredExplanation(pack);
       if (polished && typeof polished.stem === "string" && typeof polished.explanation_en === "string" && wordingPreserves(mp.stem, polished.stem).length === 0) { stem = polished.stem; wording = "llm"; }
-      item = { ...mp, stem, explanation_en: expl };
+      let explF = process.env.AP_KEEP_EXPLANATION && typeof (pack as Json).explanation_en === "string" ? ((pack as Json).explanation_en as string) : expl; // 구방식 arm: LLM 이 쓴 해설을 그대로 평가
+      if (false) explF = expl; if (process.env.AP_REPAIR && polished && typeof polished.explanation_en === "string" && polished.explanation_en.length > 60 && wordingPreserves(expl, polished.explanation_en).length === 0) explF = polished.explanation_en as string; // 수선 모드: 해설 문장 재작성 허용(수치 보존 확인)
+      item = { ...mp, stem, explanation_en: explF };
     } else {
       const fp = JSON.parse(JSON.stringify(pack)) as FrqPack;
       if (polished && polished.prompts && typeof polished.prompts === "object") {
@@ -157,9 +163,13 @@ function checkStage() {
   const out: Record<string, { reasons: string[]; wording: string }> = {};
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
-    const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology", topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
-    if (!c.polished) reasons.push("wording_missing");
-    out[c.key] = { reasons, wording: c.wording };
+    let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...(calcAbGuide ? gateGuideMc(calcAbGuide, c.item as McPack) : []), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology" && !process.env.AP_LEGACY_ITEMS, topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...(calcAbGuide ? gateGuideFrq(calcAbGuide, c.item as FrqPack) : [])];
+    if (process.env.AP_SKIP_GUIDE_MEMBERSHIP) reasons = reasons.filter((r) => !["archetype_not_in_guide", "frq_template_not_in_guide"].includes(r)); // 구방식 arm 은 코드 원형 목록 밖이 당연하다(구조 규칙만 면제)
+    const soft: string[] = process.env.AP_SOFT_COVERAGE ? reasons.filter((r) => r === "explanation_does_not_cover_distractors") : []; // 민감도 분석: 해설 문구 일치 규칙을 비차단으로 두고 LLM 단계까지 진행
+    if (soft.length) reasons = reasons.filter((r) => !soft.includes(r));
+    const extraF = path.join(DIR, "extra_reasons.json"); if (existsSync(extraF)) reasons.push(...((readJson<Record<string, string[]>>(extraF)[c.key]) ?? [])); // 구방식 arm 의 자체 검증 코드 결과
+    if (!c.polished && !process.env.AP_FIXED_WORDING) reasons.push("wording_missing"); // 결함 주입 평가(S1c)는 이미 완성된 문항을 그대로 쓴다
+    out[c.key] = { reasons, wording: c.wording, soft } as { reasons: string[]; wording: string };
     void cell;
   }
   writeFileSync(path.join(DIR, "check.json"), JSON.stringify(out, null, 1));
@@ -185,6 +195,7 @@ async function solveStage() {
   console.log(`solve: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "solve", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
+const reviewMap = () => { const m = resultMap("review"); for (const [k, v] of resultMap("review2")) m.set(k, v); return m; }; // review2 = 불완전 출력 재요청분(원 결과 보존)
 const solved = (c: Cand) => { const r = resultMap("solve").get(`s-${c.key}`); return r ? (toolInput(r as never) as Json | null) : null; };
 const numsIn = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number);
 function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: string } {
@@ -204,10 +215,19 @@ function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: st
   return { ok: bad.length === 0, note: bad.join(",") };
 }
 
-const REVIEW_SYS = `You are a strict AP content reviewer. NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge the following five acceptance criteria and set instant_reject for the listed conditions:
+const REVIEW_SYS_BASE = `You are a strict AP content reviewer. NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge the following five acceptance criteria and set instant_reject for the listed conditions:
 (1) scope/skill fit to the given official topic and skill (an item may use prerequisite skills but its dominant demand must be the target topic/skill; no content from later units); (2) key and scoring: the key is the unique defensible answer given the stem and stimulus; FRQ rubric rows are consistent, alternatives valid; (3) stimulus/expression completeness: the stimulus "data" object is the machine-readable specification a figure/table will be rendered from; judge completeness of the DATA and clarity of wording (US English); (4) distractors encode distinct, realistic misconceptions, no length/format giveaway, and the explanation explains each wrong option; (5) exam suitability: time, reading and calculator load typical of the AP exam, no needless arithmetic, calculator designation consistent.
 REFERENCE PATTERN (derived from the official CED sample items): MC ~60-100 seconds, four options, a stimulus only when it is needed, options that are values or short parallel expressions, one dominant skill; FRQ 9 points = 3-6 parts whose point values vary from 1 to 5 (for example 1/1/2/5 or 2/2/3/2), rows split into setup/answer/justification/units with explicit conditions for theorems, calculators only where numerical integration/solving is needed. Time estimates (per-point minutes) are an internal reference only, never an official per-item time: do NOT reject or penalize an item merely because its estimated minutes differ; judge the actual task load (steps, data reading, writing required) and review the solution. For free-response bundles: each PART has its own assessed skill and topic; judge each part against ITS OWN skill and rubric rows, never against one bundle-level skill (official FRQs mix skills across parts; the bundle's representative skill is only a label). Official point/time grain to respect: Calculus FRQ = 9 points (parts of 1-5 points) in about 15 minutes; Biology long FRQ = 9 points (parts of 1-4 points, a 1-point calculation or reading part is normal) in about 24 minutes; Biology short FRQ = exactly four 1-point parts in about 10 minutes. Do not fail an item for these official grains. Set matches_reference_pattern false only for material deviations (not for correct items with unusual but valid wording). Non-calculator items must have exact-form options. Do not fail an item for being generic or for a context that is a standard textbook scenario.
 Agreement of an independent solver is supporting evidence only. Fail when unsure.`;
+// 재검증(S2): 코드가 키를 검증하지 않은 기존(LLM 직접 생성) 문항용. 코드 우선 전제 문장을 바꾸고 과목별 공식 기준 메모를 덧붙인다. S1a/S1b(칼큘러스 동결 검토기)에는 영향 없음.
+const SUBJECT_NOTES: Record<string, string> = {
+  ap_biology: "SUBJECT NOTES (AP Biology): four options; items must test data/experiment interpretation, prediction or argumentation, not rote recall, and reject conclusions the data do not support. Every number the item uses must appear in the stimulus data. Free response: judge each PART against its own skill and its own rubric rows (the bundle skill is only a label); long FRQ = 9 points, short FRQ = four 1-point parts. Per-point time estimates are an internal reference only: never reject for estimated minutes.",
+  ap_microeconomics: "SUBJECT NOTES (AP Microeconomics): FIVE options (A-E), options may be short sentences; graphs must be fully specified as data (curves or labeled points with prices and quantities); calculations (elasticity, surplus, profit, MR=MC, payoff matrices) must be unambiguous. Free response: long FRQ = 10 points, short FRQ = 5 points; judge each part against its own rubric rows.",
+  ap_calculus_ab: "",
+};
+const REVIEW_SYS = process.env.AP_LEGACY_ITEMS
+  ? REVIEW_SYS_BASE.replace("NOTE: numeric keys, table values and rubric structure were computed and independently verified by code, so do not re-derive arithmetic; judge", "NOTE: this item was written by an LLM and its key was NOT verified by code. An independent solver output is provided; check the key, the arithmetic and the stimulus data yourself. Judge") + "\n" + (SUBJECT_NOTES[SUBJECT] ?? "")
+  : REVIEW_SYS_BASE;
 const reviewTool = { name: "submit_review", description: "Submit the review.", input_schema: { type: "object", properties: {
   scope_skill: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] }, key_scoring: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] },
   stimulus_expression: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] }, distractor_explanation: { type: "object", properties: { pass: { type: "boolean" }, notes: { type: "string" } }, required: ["pass", "notes"] },
@@ -224,25 +244,32 @@ async function reviewStage() {
   console.log(`review: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "review", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
+async function reviewRetryStage() { // 불완전·깨진 검토 출력만 한 번 다시 요청한다(같은 프롬프트·같은 후보; 최초 후보 수에는 영향 없음)
+  const rev = resultMap("review"); const cs = alive().filter((c) => solved(c) && normalizeReview(rev.has(`r-${c.key}`) ? (toolInput(rev.get(`r-${c.key}`) as never) as Json | null) : null).malformed.length > 0);
+  const reqs = cs.map((c) => mk(`r-${c.key}`, MODELS.review, REVIEW_SYS, reviewTool, `${ctx(c)}\n\nITEM (with key, rationale/rubric):\n${full(c)}\n\nINDEPENDENT SOLVER OUTPUT:\n${JSON.stringify(solved(c))}`, 3000));
+  console.log(`review-retry: ${reqs.length}건`); if (!reqs.length) return;
+  await runBatch({ dir: DIR, name: "review2", requests: reqs, budgetUsd: BUDGET(), estimateUsd: estimate(MODELS.review, reqs.length, 2800, 1100), sync: SYNC, syncConcurrency: 10 });
+}
 async function difficultyStage() {
-  const rev = resultMap("review"); const cs = alive().filter((c) => rev.has(`r-${c.key}`));
+  const rev = reviewMap(); const cs = alive().filter((c) => rev.has(`r-${c.key}`));
   const reqs = cs.map((c) => mk(`d-${c.key}`, MODELS.difficulty, DIFF_SYS, diffTool, `${ctx(c)}\n\n${JSON.stringify(blind(c))}`, 1500));
   const est = estimate(MODELS.difficulty, reqs.length, 1400, 600);
   console.log(`difficulty: ${reqs.length}건 추정 $${est.toFixed(2)} 누적 $${ledger(DIR).spent().toFixed(2)}`);
   await runBatch({ dir: DIR, name: "difficulty", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 
-type Verdict = { key: string; cellId: string; passed: boolean; reasons: string[]; solver?: Json | null; review?: Json | null; difficulty?: Json | null };
+type Verdict = { soft?: string[]; key: string; cellId: string; passed: boolean; reasons: string[]; solver?: Json | null; review?: Json | null; difficulty?: Json | null };
 function decide(): Verdict[] {
-  const ch = checks(); const rev = resultMap("review"); const dif = resultMap("difficulty");
+  const ch = checks(); const rev = reviewMap(); const dif = resultMap("difficulty");
   return buildCands().map((c) => {
-    const reasons = [...(ch[c.key]?.reasons ?? ["not_checked"])]; const v: Verdict = { key: c.key, cellId: c.cellId, passed: false, reasons };
+    const reasons = [...(ch[c.key]?.reasons ?? ["not_checked"])]; const v: Verdict = { key: c.key, cellId: c.cellId, passed: false, reasons, soft: (ch[c.key] as { soft?: string[] } | undefined)?.soft ?? [] };
     if (reasons.length) return v;
     v.solver = solved(c); const ag = solverAgrees(c, v.solver ?? null);
     if (ag.ok === null) { reasons.push("solver_missing"); return v; }
     if (!ag.ok) reasons.push(`solver_disagrees:${ag.note}`);
-    const r = rev.get(`r-${c.key}`); v.review = r ? (toolInput(r as never) as Json | null) : null;
+    const r = rev.get(`r-${c.key}`); const nr = normalizeReview(r ? (toolInput(r as never) as Json | null) : null); v.review = nr.review;
     if (!v.review) { reasons.push("review_missing"); return v; }
+    if (nr.malformed.length) { reasons.push(`review_malformed:${nr.malformed.join(",")}`); return v; }
     for (const k of ["scope_skill", "key_scoring", "stimulus_expression", "distractor_explanation", "exam_suitability"]) if (!(v.review[k] as Json | undefined)?.pass) reasons.push(`criterion_failed_${k}`);
     for (const x of (v.review.instant_reject as string[]) ?? []) reasons.push(`instant_reject_${x}`);
     if (v.review.matches_reference_pattern === false) reasons.push("reference_pattern_mismatch");
@@ -289,6 +316,6 @@ function reportStage() {
 }
 (async () => {
   if (stage === "plan") planStage(); else if (stage === "gen") await genStage(); else if (stage === "check") checkStage(); else if (stage === "solve") await solveStage();
-  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage();
+  else if (stage === "review") await reviewStage(); else if (stage === "difficulty") await difficultyStage(); else if (stage === "spot") await spotStage(); else if (stage === "report") reportStage(); else if (stage === "review-retry") await reviewRetryStage(); else if (stage === "verdicts") { writeFileSync(path.join(DIR, "verdicts.json"), JSON.stringify(decide(), null, 1)); console.log("verdicts.json 기록"); } else if (stage === "manifest") { baseline(); writeManifest(); console.log("manifest 기록: " + path.join(DIR, POLICY.manifestFile)); }
   else console.log("stage: plan | gen | check | solve | review | difficulty | spot | report");
 })().catch((e) => { console.error(e); process.exit(1); });
