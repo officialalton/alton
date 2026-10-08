@@ -163,10 +163,13 @@ function checkStage() {
   const out: Record<string, { reasons: string[]; wording: string }> = {};
   for (const c of cs) {
     const cell = cm.get(c.cellId)!;
-    const reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology", topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
+    let reasons = c.kind === "mc" ? [...gateMc(SUBJECT, c.item as McPack), ...calibrateMc(SUBJECT, c.item as McPack), ...gateGuideMc(calcAbGuide, c.item as McPack), ...gateNoCalcExact(c.item as McPack)] : [...gateFrq(SUBJECT, c.item as FrqPack, skillSet, { requirePartTopics: SUBJECT === "ap_biology", topics: new Set(topicTitle.keys()) }), ...calibrateFrq(c.item as FrqPack, SUBJECT), ...gateGuideFrq(calcAbGuide, c.item as FrqPack)];
+    if (process.env.AP_SKIP_GUIDE_MEMBERSHIP) reasons = reasons.filter((r) => !["archetype_not_in_guide", "frq_template_not_in_guide"].includes(r)); // 구방식 arm 은 코드 원형 목록 밖이 당연하다(구조 규칙만 면제)
+    const soft: string[] = process.env.AP_SOFT_COVERAGE ? reasons.filter((r) => r === "explanation_does_not_cover_distractors") : []; // 민감도 분석: 해설 문구 일치 규칙을 비차단으로 두고 LLM 단계까지 진행
+    if (soft.length) reasons = reasons.filter((r) => !soft.includes(r));
     const extraF = path.join(DIR, "extra_reasons.json"); if (existsSync(extraF)) reasons.push(...((readJson<Record<string, string[]>>(extraF)[c.key]) ?? [])); // 구방식 arm 의 자체 검증 코드 결과
     if (!c.polished && !process.env.AP_FIXED_WORDING) reasons.push("wording_missing"); // 결함 주입 평가(S1c)는 이미 완성된 문항을 그대로 쓴다
-    out[c.key] = { reasons, wording: c.wording };
+    out[c.key] = { reasons, wording: c.wording, soft } as { reasons: string[]; wording: string };
     void cell;
   }
   writeFileSync(path.join(DIR, "check.json"), JSON.stringify(out, null, 1));
@@ -246,11 +249,11 @@ async function difficultyStage() {
   await runBatch({ dir: DIR, name: "difficulty", requests: reqs, budgetUsd: BUDGET(), estimateUsd: est, sync: SYNC, syncConcurrency: Number(process.env.AP_SYNC_CONC ?? 10) });
 }
 
-type Verdict = { key: string; cellId: string; passed: boolean; reasons: string[]; solver?: Json | null; review?: Json | null; difficulty?: Json | null };
+type Verdict = { soft?: string[]; key: string; cellId: string; passed: boolean; reasons: string[]; solver?: Json | null; review?: Json | null; difficulty?: Json | null };
 function decide(): Verdict[] {
   const ch = checks(); const rev = reviewMap(); const dif = resultMap("difficulty");
   return buildCands().map((c) => {
-    const reasons = [...(ch[c.key]?.reasons ?? ["not_checked"])]; const v: Verdict = { key: c.key, cellId: c.cellId, passed: false, reasons };
+    const reasons = [...(ch[c.key]?.reasons ?? ["not_checked"])]; const v: Verdict = { key: c.key, cellId: c.cellId, passed: false, reasons, soft: (ch[c.key] as { soft?: string[] } | undefined)?.soft ?? [] };
     if (reasons.length) return v;
     v.solver = solved(c); const ag = solverAgrees(c, v.solver ?? null);
     if (ag.ok === null) { reasons.push("solver_missing"); return v; }
