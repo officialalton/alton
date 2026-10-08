@@ -28,7 +28,7 @@ describe("resendRemainingMs / isInviteExpired", () => {
 
 describe("ctaLabelFor — 상태 머신 문구(영어)", () => {
   it("상태별로 제목·버튼이 달라진다", () => {
-    expect(ctaLabelFor({ kind: "none", invites: [] }).button).toBe("I'm interested");
+    expect(ctaLabelFor({ kind: "none", invites: [] }).button).toBe("Request a Free Consultation");
     expect(ctaLabelFor({ kind: "interest", status: "registered", invites: [] }).button).toBe("Invite my parent");
     expect(ctaLabelFor({ kind: "interest", status: "invite_sent", invites: [] }).title).toBe("Invitation sent");
     expect(ctaLabelFor({ kind: "interest", status: "parent_linked", invites: [] }).title).toBe("Parent connected");

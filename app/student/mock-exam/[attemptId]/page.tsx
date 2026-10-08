@@ -56,7 +56,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
         <h1 className="text-[18px] font-extrabold">{attempt.examSetName}</h1>
         {showTutoringCta && (
           <Link href="/student/tutoring?from=result" data-testid="result-tutoring-cta" className="text-[13px] font-bold text-white bg-brand-red rounded-lg px-3 py-1.5">
-            Talk with a tutor
+            Learn 1:1 with ALTON <span aria-hidden>↗</span>
           </Link>
         )}
       </div>

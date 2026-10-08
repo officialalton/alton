@@ -28,11 +28,11 @@ beforeEach(() => {
 });
 
 describe("TutoringInterestPanel", () => {
-  it("관심 없음 → 'I'm interested' → 등록 액션 + 이벤트, 이후 상태 재조회", async () => {
+  it("관심 없음 → 'Request a Free Consultation' → 등록 액션 + 이벤트, 이후 상태 재조회", async () => {
     m.register.mockResolvedValue({ ok: true });
     m.load.mockResolvedValue({ kind: "interest", status: "registered", invites: [] } satisfies TutoringInterestState);
     render(<TutoringInterestPanel initialState={{ kind: "none", invites: [] }} entryPoint="result_page" />);
-    fireEvent.click(screen.getByRole("button", { name: "I'm interested" }));
+    fireEvent.click(screen.getByRole("button", { name: "Request a Free Consultation" }));
     await waitFor(() => expect(m.register).toHaveBeenCalledWith("result_page"));
     expect(m.track).toHaveBeenCalledWith("consult_interest_registered", { entry_point: "result_page" });
     expect(await screen.findByLabelText("Parent or guardian email")).toBeInTheDocument();
