@@ -32,5 +32,19 @@ export const canRepair = (rs: CandidateRecord[], cellId: string, seed: number) =
 /** 사용 가능한 고유 문항당 총비용 = (생성+검토+수선) / 사용 가능 고유 문항. */
 export const costPerUsableUnique = (totalCostUsd: number, usableUnique: number) => (usableUnique ? totalCostUsd / usableUnique : Infinity);
 
-export type RunManifest = { run: string; subject: string; generatorCommit: string; gateVersion: string; reviewerPromptHash: string; difficultyPromptHash: string; models: Record<string, string>; policy: typeof POLICY; seeds: { first: number[]; note: string }; frozenAt: string };
+export type RunManifest = { run: string; subject: string; generatorCommit: string; gateVersion: string; reviewerPromptHash: string; difficultyPromptHash: string; models: Record<string, string>; policy: typeof POLICY; seeds: { first: number[]; note: string }; frozenAt: string; arm?: string; parserHash?: string; repairDefinition?: string; frozenWith?: string };
 export const manifestIssues = (m: Partial<RunManifest>): string[] => ["run", "subject", "generatorCommit", "gateVersion", "reviewerPromptHash", "difficultyPromptHash", "models", "frozenAt"].filter((k) => !(m as Record<string, unknown>)[k]).map((k) => `manifest missing ${k}`);
+
+/** 비교 실험 보고용 집계. 최초 후보 수·최초 통과·수선 후 통과·사용 가능 고유 1건당 총비용을 분리해 보고한다(수선·재검토 호출은 최초 후보 수에 섞지 않는다).
+ *  비용은 attempt 0/1 행의 costUsd 합(수선·재검토 호출 비용 포함), 분모는 최초 후보. 소표본에서는 통과율 하나로 판정하지 않고 이 표 전체를 본다. */
+export type ArmGroupReport = { group: string; firstCandidates: number; firstPass: number; postRepairPass: number; calls: number; totalCostUsd: number; costPerUsableUnique: number };
+export type ReportedRecord = CandidateRecord & { skill: string; structure: string };
+export function armReport(rs: ReportedRecord[], by: "skill" | "structure" | "all"): ArmGroupReport[] {
+  const groups = new Map<string, ReportedRecord[]>();
+  for (const r of rs) { const g = by === "all" ? "all" : r[by]; (groups.get(g) ?? groups.set(g, []).get(g)!).push(r); }
+  return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([group, rows]) => {
+    const f = firstCandidates(rows); const first = f.filter((r) => r.passed).length; const post = Math.round(postRepairPassRate(rows) * f.length);
+    const cost = rows.reduce((a, r) => a + r.costUsd, 0);
+    return { group, firstCandidates: f.length, firstPass: first, postRepairPass: post, calls: rows.reduce((a, r) => a + r.calls, 0), totalCostUsd: Math.round(cost * 1e4) / 1e4, costPerUsableUnique: costPerUsableUnique(cost, post) };
+  });
+}

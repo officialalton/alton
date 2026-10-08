@@ -1,7 +1,7 @@
 // AP 문항 변환 현황(관리자·한국어) — 순수 가공 함수. 용도(purpose)·단계(release_tier)·검수 상태 필터와 용도별 재고 집계.
 export type ApItemRow = {
   candidate_key: string; subject: string; kind: string; review_state: string; render_verified: boolean; screen_verified: boolean;
-  review_env_ready: boolean; purpose: string | null; release_tier: string; expert_status: string; converted_at: string | null; review_period_ends_at: string | null;
+  review_env_ready: boolean; purpose: string | null; release_tier: string; expert_status: string; converted_at: string | null;
 };
 export const PURPOSE_KO: Record<string, string> = { mock_exam: "모의고사", lesson: "수업·과제" };
 export const TIER_KO: Record<string, string> = { candidate: "후보(비공개)", review_env: "검수 환경", launch: "출시" };

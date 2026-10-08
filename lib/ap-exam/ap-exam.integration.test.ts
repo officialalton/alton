@@ -43,7 +43,7 @@ function convert(name: string, purpose: "mock_exam" | "lesson", opts: { frq?: bo
       p_question => ${q(`Stem ${name}`)}, p_explanation_en => 'Because B2 is correct. Detailed English explanation.');`);
   psql(`select set_problem_render_check('${vid}', ${json({ ok: true, renderer: "std-1", issues: [] })});`);
   psql(`select confirm_and_publish_problem_version('${vid}', '${ADMIN_ID}');`);
-  psql(`select ap_finalize_conversion(${q(K(name))}, '${ADMIN_ID}', 14);`);
+  psql(`select ap_finalize_conversion(${q(K(name))}, '${ADMIN_ID}');`);
   return pid;
 }
 function createStudent(label: string, memberType: "free" | "tutoring"): string {
@@ -124,12 +124,12 @@ describe("변환 게이트: 검증 안 된 후보는 문제은행에 들어갈 �
     expect(fails(() => psql(`insert into problems (format, subject_id, status, exam_system, ap_subject, usage_scope, ap_candidate_key) values ('mc', '${subjectId}', 'draft', 'ap', ${q(AP_CODE)}, 'mock_exam', ${q(K("unverified"))});`))).toMatch(/not review-env ready/);
   });
   it("변환 뒤 상태: review_env, 용도 고정, 검수 기간, 기존 공개 게이트 통과", () => {
-    expect(psql(`select release_tier || '|' || purpose || '|' || (review_period_ends_at is not null) from ap_candidate_items where candidate_key = ${q(K("mock1"))};`)).toBe("review_env|mock_exam|true");
+    expect(psql(`select release_tier || '|' || purpose from ap_candidate_items where candidate_key = ${q(K("mock1"))};`)).toBe("review_env|mock_exam");
     expect(psql(`select usage_scope || '|' || exam_system || '|' || status from problems where id = '${mock1}';`)).toBe("mock_exam|ap|confirmed");
     expect(psql(`select usage_scope from problems where id = '${lesson1}';`)).toBe("general");
   });
   it("finalize 는 멱등이고 용도는 바뀌지 않는다(공유·변경 불가)", () => {
-    psql(`select ap_finalize_conversion(${q(K("mock1"))}, '${ADMIN_ID}', 14);`);
+    psql(`select ap_finalize_conversion(${q(K("mock1"))}, '${ADMIN_ID}');`);
     expect(psql(`select count(*) from ap_candidate_problems where candidate_key = ${q(K("mock1"))};`)).toBe("1");
     expect(fails(() => psql(`update ap_candidate_items set purpose = 'lesson' where candidate_key = ${q(K("mock1"))};`))).toMatch(/fixed at conversion/);
     expect(fails(() => psql(`update problems set usage_scope = 'general' where id = '${mock1}';`))).toMatch(/fixed at conversion/);

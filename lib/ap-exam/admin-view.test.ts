@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { filterApItems, purposeSummary, type ApItemRow } from "./admin-view";
 
-const r = (k: string, o: Partial<ApItemRow> = {}): ApItemRow => ({ candidate_key: k, subject: "ap_biology", kind: "mc", review_state: "auto_passed", render_verified: true, screen_verified: true, review_env_ready: true, purpose: null, release_tier: "candidate", expert_status: "unreviewed", converted_at: null, review_period_ends_at: null, ...o });
+const r = (k: string, o: Partial<ApItemRow> = {}): ApItemRow => ({ candidate_key: k, subject: "ap_biology", kind: "mc", review_state: "auto_passed", render_verified: true, screen_verified: true, review_env_ready: true, purpose: null, release_tier: "candidate", expert_status: "unreviewed", converted_at: null, ...o });
 const rows = [r("a", { purpose: "mock_exam", release_tier: "review_env" }), r("b", { purpose: "lesson", release_tier: "review_env" }), r("c"), r("d", { purpose: "mock_exam", release_tier: "launch", subject: "ap_calculus_ab" }), r("e", { review_env_ready: false })];
 describe("AP 관리자 목록 필터", () => {
   it("용도·단계·준비 상태 필터", () => {

@@ -40,13 +40,12 @@ export default async function AdminApItemsPage({ searchParams }: { searchParams:
         </form>
         <p className="mt-3 text-[12px] text-grey-500">{rows.length}건 / 전체 {all.length}건</p>
         <table className="mt-2 w-full text-left text-[12.5px]">
-          <thead><tr className="text-grey-500"><th>후보 키</th><th>과목</th><th>형식</th><th>게시 준비</th><th>용도</th><th>단계</th><th>검수</th><th>검수 기간 종료</th></tr></thead>
+          <thead><tr className="text-grey-500"><th>후보 키</th><th>과목</th><th>형식</th><th>게시 준비</th><th>용도</th><th>단계</th><th>검수</th></tr></thead>
           <tbody>{rows.slice(0, 500).map((r) => (
             <tr key={r.candidate_key} className="border-t border-grey-200">
               <td className="font-mono">{r.candidate_key}</td><td>{r.subject}</td><td>{r.kind === "mc" ? "객관식" : "FRQ"}</td>
               <td>{r.review_env_ready ? "준비됨" : `대기(${r.review_state}${r.render_verified ? "" : ", 렌더 미검증"}${r.screen_verified ? "" : ", 화면 미검증"})`}</td>
               <td>{r.purpose ? PURPOSE_KO[r.purpose] : "—"}</td><td>{TIER_KO[r.release_tier] ?? r.release_tier}</td><td>{EXPERT_KO[r.expert_status] ?? r.expert_status}</td>
-              <td>{r.review_period_ends_at ? r.review_period_ends_at.slice(0, 10) : "—"}</td>
             </tr>))}</tbody>
         </table>
       </div>

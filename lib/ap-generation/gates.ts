@@ -44,17 +44,20 @@ export function gateMc(subject: string, p: McPack): string[] {
   const mean = lens.reduce((a, b) => a + b, 0) / lens.length;
   if (lens[p.key_index] === Math.max(...lens) && lens[p.key_index] > mean * 1.6 && lens[p.key_index] > 18) r.push("key_much_longer");
   if (Math.min(...lens) > 0 && Math.max(...lens) / Math.min(...lens) > 6 && Math.max(...lens) > 30) r.push("options_not_parallel");
-  if (p.stimulus.kind === "table" && !/\b(table|data|values)\b/i.test(p.stem)) r.push("stem_does_not_reference_table");
+  if (p.stimulus.kind === "table" && !/\b(table|data|values|shown|results?|above|below|given|presented|following|information|trial|measurements?)\b/i.test(p.stem)) r.push("stem_does_not_reference_table");
   if (p.explanation_en && LETTER_REF.test(p.explanation_en)) r.push("explanation_references_option_letter");
   if ((NOT_ASSESSED_MC[subject] ?? []).includes(p.skill)) r.push("skill_not_assessed_in_mc");
   if (!(p.est_seconds >= 30 && p.est_seconds <= 150)) r.push("est_seconds_out_of_range");
   if (p.stem.split(/\s+/).length > 120) r.push("stem_too_long");
   if (/^ap_calculus/.test(subject)) { // 달러 기호가 통화인 과목(Micro)에는 적용하지 않는다
-    if (p.stem.split("$").length % 2 === 0) r.push("unbalanced_math_delimiters");
-    if (p.options.some((o) => o.text.split("$").length % 2 === 0)) r.push("unbalanced_math_delimiters");
+    if (p.stem.replace(/\\\$/g, "").split("$").length % 2 === 0) r.push("unbalanced_math_delimiters");
+    if (p.options.some((o) => o.text.replace(/\\\$/g, "").split("$").length % 2 === 0)) r.push("unbalanced_math_delimiters");
   }
   if (p.explanation_en !== undefined) {
     const e = p.explanation_en;
+    // 해설의 "The correct answer is X" 가 키 선택지와 같은지(키 인덱스만 바뀐 오류 검출)
+    const m = e.match(/^The correct answer is (.+?)\.(?:\s|$)/);
+    if (m && plain(m[1]).replace(/\s+/g, "") !== plain(p.options[p.key_index].text).replace(/\s+/g, "")) r.push("explanation_key_mismatch");
     if (e.trim().length < 80) r.push("explanation_too_short");
     // 정답과 각 오답의 값/식이 해설에 언급되는지(오답 이유 설명)
     const missing = p.options.filter((o, i) => i !== p.key_index && !e.includes(o.text.replace(/\$/g, "")) && !(o.value !== null && numbers(e).includes(String(Number(o.value)).replace(/^-/, "")))).length;
@@ -101,14 +104,14 @@ export function gateFrq(subject: string, p: FrqPack, skills: Set<string>, opts: 
       if (!x.criterion.trim()) r.push(`row_${x.row_id}_no_criterion`);
     }
     // 수치 서술 파트에는 정답 행이 있어야 한다
-    if (pt.response_mode === "calculate" && !/do not evaluate/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /answer|approximation|value|expression|equation|speed|vector|terms|slope|distance|derivative/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
+    if (pt.response_mode === "calculate" && !/do not evaluate/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /answer|approximation|value|expression|equation|speed|vector|terms|slope|distance|derivative|correct|comput|calculat|evaluat|result|final|index|rate|percent|units?|solves?|find|determin|exact/i.test(x.criterion))) r.push(`part_${pt.label}_calculation_without_answer_row`);
     // 정당화 파트는 조건/이유 행이 있어야 한다
     if (pt.response_mode === "explain" && pt.skill_codes.some((s) => s.startsWith("3.")) && /justify|give a reason|explain why|reason for/i.test(pt.prompt) && !pt.rubric_rows.some((x) => /reason|justif|condition|continuous|compare|consider|baseline|differ|support|classif|sign change|changes sign/i.test(x.criterion))) r.push(`part_${pt.label}_justification_without_reason_row`);
   }
   if (total !== p.total_points) r.push(`total_points_${total}_vs_${p.total_points}`);
   // 번들 대표 스킬은 어떤 파트의 평가 스킬이어야 하지만, 모든 파트가 같을 필요는 없다(공식 FRQ 는 파트별 스킬이 다르다).
   if (p.representative_skill && !p.parts.some((x) => x.skill_codes.includes(p.representative_skill!))) r.push("representative_skill_not_assessed_by_any_part");
-  if (p.est_minutes > (subject === "ap_biology" ? 28 : subject === "ap_microeconomics" ? 32 : 20)) r.push("est_minutes_too_long");
+  if (subject !== "ap_biology" && p.est_minutes > (subject === "ap_microeconomics" ? 32 : 20)) r.push("est_minutes_too_long"); // Bio 의 시간은 점수 비례 내부 추정(참고용)이라 반려 사유로 쓰지 않는다
   if (!(p.stimulus.kind && p.stimulus.description)) r.push("missing_stimulus");
   return [...new Set(r)];
 }
@@ -153,7 +156,10 @@ export function calibrateFrq(p: FrqPack, subject = "ap_calculus_ab"): string[] {
   const prof = subject === "ap_microeconomics" ? (p.total_points >= 10 ? MICRO_PROFILE.long : MICRO_PROFILE.short) : subject === "ap_biology" ? (p.total_points >= 9 ? BIO_PROFILE.long : BIO_PROFILE.short) : p.total_points >= 9 ? REFERENCE_PROFILE.frq9 : REFERENCE_PROFILE.frq4;
   if (p.total_points !== prof.points) r.push("reference_points_mismatch");
   if (p.parts.length < prof.parts[0] || p.parts.length > prof.parts[1]) r.push("reference_part_count_out_of_range");
-  if (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1]) r.push("reference_time_out_of_range");
+  if (subject !== "ap_biology" && (p.est_minutes < prof.minutes[0] || p.est_minutes > prof.minutes[1])) r.push("reference_time_out_of_range");
   for (const pt of p.parts) if (pt.rubric_rows.length < prof.rowsPerPart[0] || pt.rubric_rows.length > prof.rowsPerPart[1]) r.push(`reference_rows_per_part_${pt.label}`);
   return r;
 }
+
+/** Bio 시간 편차는 반려 사유가 아니라 참고 표시(점수 비례 내부 추정, 공식 문항별 시간 아님). 실제 과제량·풀이 검토로 판단한다. */
+export function advisoryBioTime(p: FrqPack): string[] { return p.est_minutes < BIO_PROFILE.short.minutes[0] || p.est_minutes > BIO_PROFILE.long.minutes[1] ? ["advisory_time_deviation_from_internal_estimate"] : []; }

@@ -7,7 +7,7 @@
 |---|---|---|
 | `candidate` | 후보 재고(`ap_candidate_items`, 학생 비노출) | 생성 + 자동 게이트 |
 | `review_env` | 검수 환경에 **게시**(`problems` 공개, exam_system='ap') | `review_state = auto_passed` AND `render_verified` AND `screen_verified` (= `review_env_ready`) |
-| `launch` | 프로덕션 공개 | `review_env` 에서 (승인 서명 `expert_status=approved`) 또는 (검수 기간 종료 AND 미해결 신고 0 AND `issues_reported` 아님) — 뷰 `ap_launch_ready_v` |
+| `launch` | 프로덕션 공개 | `review_env` 에서 **최신 자동 게이트 통과(`auto_passed`) + 필수 그래프/자료 렌더링 + 학생 화면 검증(`review_env_ready`) + 미해결 launch 차단 결함 0**(오답 키·복수 정답·조건 누락·그림/표 오류 대장 `ap_launch_blockers`, 그리고 현재 버전의 미해결 `wrong_key`/`flawed_problem` 신고) — 뷰 `ap_launch_ready_v`(마이그레이션 395). 전문가 승인·검수 기간 만료는 조건이 아니다 |
 - 검증 상태(review_state): candidate / rejected / needs_revalidation / auto_passed / exact_duplicate. 선택(`used_in_sample`)·`legacy_reserve`는 별개.
 - 게시 후 검수 상태(expert_status): `unreviewed` / `in_review` / `approved` / `issues_reported`. 신고에서 자동 파생되는 값은 `ap_item_review_status_v.open_reports` 로 확인(수동 값과 함께 사용).
 - 자동 게이트 통과(auto_passed)는 **게시 승인이 아니다**: 렌더링·학생 화면 검증을 끝내야 `review_env_ready`가 true 가 된다. 현재 두 검증 모두 미완료 → 검수 환경 게시 가능 0건.
@@ -15,10 +15,10 @@
 ## 2. 흐름: 후보 → 게시(검수 환경) → 신고 → 수정(새 버전) → 출시
 1. 후보 생성·자동 검수(코드 게이트 → 독립 풀이 → 검토) → `auto_passed`.
 2. 그래프/표 렌더링(`stimulus.data` → 그림) + 학생 화면(영어 UI, 계산기·타이머·접근성) 검증 → `render_verified`, `screen_verified` = true.
-3. `problems`/`problem_versions`로 **게시**(exam_system='ap', ap_subject, 키워드·스킬, 해설 영어 포함). `ap_candidate_items.problem_id/problem_version_id` 연결, `release_tier='review_env'`, `review_period_ends_at` 설정. 기존 문제은행 게이트(영어 해설·render_check·정답 키 필수, 공개 버전 불변)가 그대로 적용된다.
+3. `problems`/`problem_versions`로 **게시**(exam_system='ap', ap_subject, 키워드·스킬, 해설 영어 포함). `ap_candidate_items.problem_id/problem_version_id` 연결, `release_tier='review_env'`. 기존 문제은행 게이트(영어 해설·render_check·정답 키 필수, 공개 버전 불변)가 그대로 적용된다.
 4. 검수자(교사·외부 검수자)는 검수 환경에서 풀고, **기존 오류 신고 흐름**(마이그레이션 `20261940000000` 신고, `…360` 확인/수정됨 분류, 판정 verdict)으로 신고한다. 병렬 신고 시스템은 만들지 않는다.
 5. 관리자가 신고를 확인(`problem_error_report_confirm`) → 문항 수정은 **새 `problem_versions`**(공개 버전 불변 규칙) → 신고는 '수정됨'으로 자동 분류. 해당 후보의 `problem_version_id`를 새 버전으로 갱신, `expert_status`는 `issues_reported` → 수정 후 `in_review`.
-6. 표본 승인(서명) 또는 검수 기간 종료 + 미해결 신고 0 → `ap_launch_ready_v` 에 나타남 → 관리자가 `release_tier='launch'` 로 올림(프로덕션 배포는 별도 오너 승인).
+6. 최신 게이트 + 렌더·학생 화면 검증 + 미해결 차단 결함 0 → `ap_launch_ready_v` 에 나타남 → 관리자가 `release_tier='launch'` 로 올림(프로덕션 배포는 별도 오너 승인). **신고가 없다는 사실을 검수 완료의 증거로 쓰지 않는다**(검수 기한·알림 기능도 두지 않는다). 사후 전문가 검수와 오류 신고는 launch 이후에도 계속되며, 결함이 신고되면 `ap_launch_blockers` 로 분류해 새 버전으로 고친다.
 7. 세트 구성: 세트 조립 시 N개를 고른다(칸 목표·공식 비중). 한 세트의 **look-alike 상한은 세트 단위**로 두고(은행 단위 아님), 같은 문항군에서 세트당 최대 2개.
 
 ## 3. 표식(이전 적재, 삭제 없음) — 오너 실행용
@@ -41,12 +41,24 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 ## 4. 점검(파일 vs DB)
 `npx tsx scripts/ap-generation/stock.ts && npx tsx scripts/ap-generation/stock-consistency.ts` (비프로덕션, 읽기 전용): `ap_stock_summary_v` 와 파일 집계를 과목×종류별로 비교, 불일치 시 종료 코드 1. 로컬 검증용 SQL 은 `--emit-sql`(트랜잭션+롤백).
 
+
+## 5. 갱신(마이그레이션 395, 2026-10-08)
+- `legacy_reserve`/`used_in_sample` 은 완전 중복·반려 행에서 false 로 정정하고 불변식(체크 제약)을 추가했다. 요약 뷰는 두 값을 `auto_passed`/`needs_revalidation` 행에서만 센다(파일 집계와 같은 정의).
+- 재고·부족분(`ap_refresh_stock_cells`, `ap_stock_shortfall_v`)은 이 두 컬럼을 읽지 않으므로 영향이 없다. 로컬 전후 비교(783행 적재 → 395 적용): 요약 8행 중 변한 값은 AB MC `legacy_reserve` 93→89 한 곳뿐, ap_stock_cells 130칸 전후 동일(차집합 0/0). 로컬에는 부족분 목표(`ap_stock_targets`)가 없어 shortfall 뷰는 0행이므로 같은 비교를 비프로덕션에서 한 번 더 실행해야 한다(`stock-consistency` 후 shortfall 전후 diff).
+- 394 가 추가했던 `review_period_ends_at`, `signoff_by`, `signoff_at` 컬럼은 제거(로컬에서만 존재, 비어 있음). `ap_launch_blockers` 대장 신설. RLS 는 켜고 정책은 두지 않아 서비스 롤만 접근한다.
+
+### 검증 상태 구분(2026-10-08)
+| 항목 | 상태 |
+|---|---|
+| 행 집계 8/8 일치(파일 vs `ap_stock_summary_v`, 로컬 783행) | 완료 |
+| 부족분(shortfall) 검증 | **미완료** — `ap_stock_targets` 가 비어 있으면 `ap_stock_shortfall_v` 는 0행이라 검증이 성립하지 않는다. 목표(과목·토픽·스킬·구조별)는 오너가 합의한 값만 적재한다(임의 적재 금지). 적재 후 395 전후 shortfall diff 를 다시 실행한다. |
+
 ## 5. 용도(purpose) 분리와 변환·응시 구현 (2026-10-09, 마이그레이션 400·401 — 로컬 적용·검증, 원격 미적용)
 **용도 결정(오너)**: AP 문항은 정확히 하나의 용도를 가진다 — `mock_exam`(모의고사 층: SAT 모의고사와 같은 수준의 독립 시험, 무료·과외 회원 공통, `access_tier` free/tutoring) 또는 `lesson`(수업·과제: 선생님이 과외 학생에게 쓰는 경로). 용도는 **변환 시점에 정해지고 바뀌지 않으며 공유되지 않는다**(두 용도를 겸하는 값·예외 없음).
 - 저장: `ap_candidate_items.purpose` + `problems.usage_scope`(mock_exam→`mock_exam`, lesson→기존 수업·과제 값 `general`). 후보·문제 모두 변경 트리거로 잠긴다. AP 문제는 `problems_ap_purpose_check` 로 두 값만 허용.
 - 격리: 세트 조립은 모의고사 용도만(`mock_exam_set_items` 가드 + `lib/ap-exam/assemble.ts`), 선생님 문제 선택(`problem_auto_composition_candidates`·회차 구성·과제 트리거)은 수업 용도만. 무료 회원은 문제·버전·세트 항목 원본을 직접 읽을 수 없고(RLS) 시험 RPC 로만 모의고사 문항을 받는다 → 수업 문항은 어떤 경로로도 보이지 않는다.
 - 재고: 용도별 목표 `ap_stock_purpose_targets`, 뷰 `ap_stock_by_purpose_v`(용도별 변환·검수 환경·출시·부족), `ap_stock_pool_v`(미배정 풀 대비 순부족), 관리자 화면(한국어) `/admin/ap-items`(용도·단계·검수·준비 필터).
 
-**변환 경로(병렬 게시 경로 없음)**: 후보(`review_env_ready`) → `ap_create_bank_problem`(후보 검사, `create_bank_problem` 우회 차단 트리거) → `save_problem_draft_version` → `set_problem_render_check` → `confirm_and_publish_problem_version`(기존 게이트: 영어 해설·render_check·정답 키·공개 버전 불변) → `ap_finalize_conversion`(`release_tier=review_env`, 검수 기간 설정, 키워드 연결). 공개 단계에서도 후보가 여전히 `review_env_ready` 여야 한다(`problem_versions_ap_publish_guard`). 오류 신고 후 수정은 새 버전 공개 뒤 `ap_attach_new_version`. 실행기: `lib/ap-exam/convert-run.ts`, `scripts/ap-generation/publish-to-bank.ts`(기본 dry-run, 로컬만 --execute).
+**변환 경로(병렬 게시 경로 없음)**: 후보(`review_env_ready`) → `ap_create_bank_problem`(후보 검사, `create_bank_problem` 우회 차단 트리거) → `save_problem_draft_version` → `set_problem_render_check` → `confirm_and_publish_problem_version`(기존 게이트: 영어 해설·render_check·정답 키·공개 버전 불변) → `ap_finalize_conversion`(`release_tier=review_env`, 키워드 연결; 검수 기간 개념 없음). 공개 단계에서도 후보가 여전히 `review_env_ready` 여야 한다(`problem_versions_ap_publish_guard`). 오류 신고 후 수정은 새 버전 공개 뒤 `ap_attach_new_version`. 실행기: `lib/ap-exam/convert-run.ts`, `scripts/ap-generation/publish-to-bank.ts`(기본 dry-run, 로컬만 --execute).
 **세트·응시**: `mock_exam_sets.exam_program='ap'`, `format='ap_fixed'`, `ap_label`(full_practice | mc_practice | frq_practice, 공식 구조를 다 채울 때만 Full Practice Exam — 공개 게이트), `section_layout`(공식 섹션 시간·계산기·문항 수 복사본, `lib/ap-exam/layouts.ts`). 기존 `mock_exam_open_start`·재응시(attempt_no)·`save_answer`·`submit`(MC 자동 채점) 재사용, 카탈로그·요약·상세 RPC 는 얇은 래퍼로 AP 필드만 추가(SAT 응답은 `examProgram:'sat'` 외 변화 없음). FRQ 는 문제 하나 = 번들 하나, 파트별 타이핑 응답을 JSON 한 칸에 자동 저장하고 제출 뒤 **참고 답안·채점 노트(공식 채점 아님)** 만 공개한다. AP 1~5·FRQ 점수는 만들지 않는다.
 **검증 게이트**: `render_verified` 는 `lib/ap-figures/gate.ts`(결정적 검사, `scripts/ap-generation/render-check.ts`·`mark-verified.ts --render`), `screen_verified` 는 학생 화면 확인 증거가 있을 때만 `mark-verified.ts --screen --evidence`. 증거 스크린샷: `docs/ap/screen-evidence/`.

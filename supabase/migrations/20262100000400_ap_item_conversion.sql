@@ -169,7 +169,8 @@ begin
   return v_id;
 end $$;
 
-create or replace function public.ap_finalize_conversion(p_candidate_key text, p_actor_id uuid, p_review_days int default 14)
+drop function if exists public.ap_finalize_conversion(text, uuid, int);
+create or replace function public.ap_finalize_conversion(p_candidate_key text, p_actor_id uuid)
 returns jsonb language plpgsql security definer set search_path = public as $$
 declare c ap_candidate_items%rowtype; n_expected int; n_found int; r record; v_first uuid; v_first_v uuid; v_kw uuid;
 begin
@@ -191,7 +192,6 @@ begin
   update ap_candidate_items
      set release_tier = case when release_tier = 'candidate' then 'review_env' else release_tier end,
          problem_id = v_first, problem_version_id = v_first_v,
-         review_period_ends_at = coalesce(review_period_ends_at, now() + make_interval(days => greatest(p_review_days, 1))),
          converted_at = coalesce(converted_at, now()), converted_by = coalesce(converted_by, p_actor_id)
    where id = c.id;
   return jsonb_build_object('candidateKey', c.candidate_key, 'purpose', c.purpose, 'items', n_found, 'releaseTier', 'review_env');
@@ -218,7 +218,7 @@ do $$ declare f text; begin
   foreach f in array array[
     'ap_set_verification(text, boolean, boolean, jsonb, uuid)',
     'ap_create_bank_problem(text, int, text, text, uuid, text, text, text)',
-    'ap_finalize_conversion(text, uuid, int)',
+    'ap_finalize_conversion(text, uuid)',
     'ap_attach_new_version(text, int, uuid, uuid)'] loop
     execute format('revoke all on function public.%s from public, anon, authenticated', f);
     execute format('grant execute on function public.%s to service_role', f);
@@ -267,7 +267,8 @@ select subject, kind, sum(shortfall)::int as purpose_shortfall_total, max(unallo
   from ap_stock_by_purpose_v group by subject, kind;
 
 -- 관리자 목록용: 후보별 변환 상태
-create or replace view public.ap_item_conversion_v with (security_invoker = true) as
+drop view if exists public.ap_item_conversion_v;
+create view public.ap_item_conversion_v with (security_invoker = true) as
 select i.candidate_key, i.ap_subject_code as subject, i.kind, i.review_state, i.render_verified, i.screen_verified, i.review_env_ready,
-       i.purpose, i.release_tier, i.expert_status, i.problem_id, i.converted_at, i.review_period_ends_at, i.is_current
+       i.purpose, i.release_tier, i.expert_status, i.problem_id, i.converted_at, i.is_current
   from ap_candidate_items i;

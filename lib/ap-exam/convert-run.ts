@@ -13,7 +13,7 @@ async function call(db: RpcClient, fn: string, args: Record<string, unknown>) {
 }
 
 /** 후보 하나를 변환해 검수 환경에 게시한다. 이미 변환된 후보는 건너뛴다(멱등). */
-export async function convertCandidate(db: RpcClient, cand: CandidateRow, purpose: ApPurpose, actorId: string, opts: { reviewDays?: number } = {}) {
+export async function convertCandidate(db: RpcClient, cand: CandidateRow, purpose: ApPurpose, actorId: string) {
   const plan = planConversion(cand);
   if (!plan.ok) return { status: "skipped" as const, reason: plan.reason };
   for (const it of plan.items) {
@@ -28,6 +28,6 @@ export async function convertCandidate(db: RpcClient, cand: CandidateRow, purpos
     await call(db, "set_problem_render_check", { p_version_id: versionId, p_check: it.renderCheck });
     await call(db, "confirm_and_publish_problem_version", { p_version_id: versionId, p_actor_id: actorId });
   }
-  const out = await call(db, "ap_finalize_conversion", { p_candidate_key: cand.candidateKey, p_actor_id: actorId, p_review_days: opts.reviewDays ?? 14 });
+  const out = await call(db, "ap_finalize_conversion", { p_candidate_key: cand.candidateKey, p_actor_id: actorId });
   return { status: "converted" as const, result: out };
 }
