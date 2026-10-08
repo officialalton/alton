@@ -24,7 +24,7 @@ export const calcBcGuide: SubjectGuide = {
     { id: "partial_fractions", topic: "6.12", skill: "1.C", calculator: "not_allowed", stimulus: "none", verifiedBy: ["sympy integrate", "numeric quad"], misconceptions: ["log order reversed", "single logarithm", "same coefficient"] },
     { id: "improper_integral", topic: "6.13", skill: "3.D", calculator: "not_allowed", stimulus: "none", verifiedBy: ["p-integral criterion"], misconceptions: ["always diverges", "reports exponent"] },
     { id: "euler_method", topic: "7.5", skill: "1.E", calculator: "not_allowed", stimulus: "none", verifiedBy: ["two-step recompute"], misconceptions: ["one step", "x not advanced", "step size forgotten"] },
-    { id: "logistic", topic: "7.9", skill: "3.D", calculator: "not_allowed", stimulus: "none", verifiedBy: ["limit and numeric maximization of growth rate"], misconceptions: ["K/2 vs K"] },
+    { id: "logistic", topic: "7.9", skill: "1.D", calculator: "not_allowed", stimulus: "none", verifiedBy: ["limit and numeric maximization of growth rate"], misconceptions: ["K/2 vs K"] },
     { id: "arc_length_calc", topic: "8.13", skill: "1.E", calculator: "required", stimulus: "none", verifiedBy: ["scipy quad"], misconceptions: ["y instead of y'", "no square root", "area"] },
     { id: "param_dydx", topic: "9.1", skill: "1.E", calculator: "not_allowed", stimulus: "none", verifiedBy: ["sympy"], misconceptions: ["dx/dy", "dy/dt only"] },
     { id: "param_second", topic: "9.2", skill: "1.E", calculator: "not_allowed", stimulus: "none", verifiedBy: ["sympy"], misconceptions: ["no division by x'", "y''/x''"] },
