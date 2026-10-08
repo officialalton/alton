@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { csvCell, formatMinor, mercuryKrwInputListCsv, reconciliationCsv, type PayoutListRow } from "./reconciliation-csv";
-import { applyMercuryTransaction, attemptStatusForMercury, verifyMercuryWebhookSignature, type EventStore } from "./mercury-events";
+import { applyMercuryTransaction, attemptStatusForMercury, type EventStore } from "./mercury-events";
 
 const base: PayoutListRow = {
   settlement_id: "s1", attempt_id: "a1", recipient_kind: "teacher", recipient_profile_id: "p1", period_start: "2026-10-01", period_end: "2026-10-15",
@@ -71,8 +71,5 @@ describe("Mercury 이벤트 반영", () => {
     expect(log).toContain("return:ret-1:50000");
     expect(attemptStatusForMercury("blocked")).toBe("failed");
     expect(attemptStatusForMercury("pending")).toBe("processing");
-  });
-  it("웹훅 서명 방식이 미확정이라 검증은 항상 거부(fail closed)", () => {
-    expect(() => verifyMercuryWebhookSignature()).toThrow();
   });
 });

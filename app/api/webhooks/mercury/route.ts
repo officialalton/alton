@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
-import { mercuryConfigFromEnv } from "@/lib/payout/providers/mercury";
-import { verifyMercuryWebhookSignature } from "@/lib/payout/mercury-events";
+import { createAdminClient } from "@/lib/supabase-admin";
+import { createSupabaseAttemptStore } from "@/lib/payout/supabase-attempt-store";
+import { verifyMercuryWebhookSignature } from "@/lib/payout/mercury-webhook";
+import { handleMercuryWebhook } from "@/lib/payout/mercury-webhook-handler";
 
-// Mercury 웹훅 수신 골격(2026-10-07). 스위치가 닫혀 있으면 503. 열려 있어도 서명 검증 방식이 공식 문서에서 확정되지 않아
-// (docs/2026-10-07-mercury-capabilities.md) 검증기가 구현될 때까지 모든 요청을 거부한다(fail closed) — 서명 없는 본문은 절대 처리하지 않는다.
+// Mercury 웹훅 수신(상태·반환 인지 전용, 돈을 움직이지 않는다). MERCURY_WEBHOOK_SECRET이 없으면 503으로 아무것도 처리하지 않는다.
 export async function POST(request: Request) {
-  if (!mercuryConfigFromEnv().enabled) {
-    return NextResponse.json({ ok: false, error: "disabled: MERCURY_PAYOUTS_ENABLED is not true" }, { status: 503 });
-  }
+  const secret = process.env.MERCURY_WEBHOOK_SECRET;
+  if (!secret) return NextResponse.json({ ok: false, error: "webhook secret is not configured" }, { status: 503 });
+  const rawBody = await request.text();
+  const v = verifyMercuryWebhookSignature({ secret, header: request.headers.get("mercury-signature"), rawBody });
+  if (!v.ok) return NextResponse.json({ ok: false, error: "invalid signature" }, { status: 401 });
   try {
-    await request.text(); // 본문은 서명 검증 뒤에만 해석한다
-    verifyMercuryWebhookSignature();
+    const outcome = await handleMercuryWebhook(createSupabaseAttemptStore(createAdminClient()), rawBody);
+    return NextResponse.json({ ok: true, outcome });
   } catch {
-    return NextResponse.json({ ok: false, error: "signature verification is not configured" }, { status: 501 });
+    return NextResponse.json({ ok: false, error: "processing failed" }, { status: 500 }); // 5xx → Mercury가 재배달
   }
-  return NextResponse.json({ ok: true });
 }

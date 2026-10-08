@@ -9,6 +9,7 @@ export type EventStore = {
   applyTransition(attemptId: string, to: AttemptStatus, reason?: string): Promise<void>;
   recordActuals(attemptId: string, usdPrincipalMinor: number, usdFeeMinor: number, finalRate: number | null): Promise<void>;
   recordReturn(attemptId: string, returnTxId: string, returnedUsdMinor: number | null, reason: string): Promise<void>;
+  recordDetails?(attemptId: string, d: { dashboardUrl: string | null; estimatedDeliveryDate: string | null; failedAt: string | null }): Promise<void>;
 };
 
 export type EventOutcome = "ignored_unknown" | "applied" | "noop";
@@ -31,6 +32,9 @@ export async function applyMercuryTransaction(store: EventStore, tx: ProviderTra
   const attempt = (await store.findByTransactionId(tx.transactionId)) ?? (tx.requestId ? await store.findByRequestId(tx.requestId) : null);
   if (!attempt) return "ignored_unknown";
   await store.linkTransaction(attempt.id, tx.transactionId);
+  if (store.recordDetails && (tx.dashboardUrl || tx.estimatedDeliveryDate || tx.failedAt)) {
+    await store.recordDetails(attempt.id, { dashboardUrl: tx.dashboardUrl ?? null, estimatedDeliveryDate: tx.estimatedDeliveryDate ?? null, failedAt: tx.failedAt ?? null });
+  }
   const target = attemptStatusForMercury(tx.status);
 
   if (target === "returned") {
@@ -45,9 +49,4 @@ export async function applyMercuryTransaction(store: EventStore, tx: ProviderTra
   if (target === "sent" && attempt.status === "awaiting_mercury_approval") await store.applyTransition(attempt.id, "processing");
   await store.applyTransition(attempt.id, target, tx.failureReason ?? undefined);
   return "applied";
-}
-
-/** 웹훅 서명 검증: Mercury 공식 문서에서 서명 방식을 확정하지 못했다(미해결). 방식이 구현되기 전에는 모든 요청을 거부한다(fail closed). */
-export function verifyMercuryWebhookSignature(): never {
-  throw new Error("Mercury webhook signature scheme is not confirmed; webhook processing stays disabled");
 }

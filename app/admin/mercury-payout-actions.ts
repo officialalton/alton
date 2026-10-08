@@ -37,6 +37,7 @@ async function run<T>(capability: PayoutCapability, fn: (ctx: { actor: string; a
     return { ok: false, error: toEnglish(e instanceof Error ? e.message : String(e)) };
   }
 }
+import { safeMercuryDashboardUrl } from "@/lib/payout/mercury-links";
 async function rpc(admin: ReturnType<typeof createAdminClient>, name: string, args: Record<string, unknown>) {
   const { data, error } = await admin.rpc(name, args);
   if (error) throw new Error(error.message);
@@ -76,6 +77,9 @@ export type MercuryPayoutRow = {
   providerTransactionId: string | null;
   trackingUrl: string | null;
   receiptUrl: string | null;
+  mercuryDashboardUrl: string | null;
+  estimatedDeliveryDate: string | null;
+  mercuryFailedAt: string | null;
   reasons: string[];
   reconciliationFlag: string;
   failureReason: string | null;
@@ -95,7 +99,7 @@ export async function listMercuryPayoutsAction(filter: MercuryPayoutFilter = {})
     const ids = reconRows.map((r) => r.attempt_id as string);
     const people = [...new Set(reconRows.map((r) => r.recipient_profile_id as string))];
     const [{ data: attempts }, { data: profiles }, { data: tAcc }, { data: cAcc }, { data: links }] = await Promise.all([
-      ids.length ? admin.from("payout_attempts").select("id, manual_execution, approved_at, approval_invalidated_at, tracking_url, receipt_url, failure_reason, return_reason, recipient_link_id").in("id", ids) : { data: [] },
+      ids.length ? admin.from("payout_attempts").select("id, manual_execution, approved_at, approval_invalidated_at, tracking_url, receipt_url, mercury_dashboard_url, mercury_estimated_delivery_date, mercury_failed_at, failure_reason, return_reason, recipient_link_id").in("id", ids) : { data: [] },
       people.length ? admin.from("profiles").select("id, name").in("id", people) : { data: [] },
       people.length ? admin.from("teacher_payout_accounts").select("teacher_id, bank_name, account_number_last4").in("teacher_id", people) : { data: [] },
       people.length ? admin.from("consultant_payout_accounts").select("consultant_id, bank_name, account_number_last4").in("consultant_id", people) : { data: [] },
@@ -144,6 +148,9 @@ export async function listMercuryPayoutsAction(filter: MercuryPayoutFilter = {})
         providerTransactionId: (r.provider_transaction_id as string | null) ?? null,
         trackingUrl: (a?.tracking_url as string | null) ?? null,
         receiptUrl: (a?.receipt_url as string | null) ?? null,
+        mercuryDashboardUrl: safeMercuryDashboardUrl(a?.mercury_dashboard_url),
+        estimatedDeliveryDate: (a?.mercury_estimated_delivery_date as string | null) ?? null,
+        mercuryFailedAt: (a?.mercury_failed_at as string | null) ?? null,
         reasons: (r.needs_review_reasons as string[]) ?? [],
         reconciliationFlag: r.reconciliation_flag as string,
         failureReason: (a?.failure_reason as string | null) ?? null,

@@ -10,7 +10,7 @@ const row = (over: Partial<MercuryPayoutRow>): MercuryPayoutRow => ({
   requestedAmountMinor: 50000, requestedCurrency: "USD", contractualAmountMinor: 50000, contractualCurrency: "USD",
   bankName: "Test Bank", accountLast4: "1234", recipientLinkStatus: "verified", approvedAt: "2026-10-10T00:00:00Z", approvalInvalidated: false,
   sentAt: null, receivedConfirmedAt: null, actualUsdPrincipalMinor: null, actualUsdFeeMinor: null, actualUsdTotalDebitMinor: null,
-  providerTransactionId: null, trackingUrl: null, receiptUrl: null, reasons: [], reconciliationFlag: "pending", failureReason: null, returnReason: null, ...over,
+  providerTransactionId: null, trackingUrl: null, receiptUrl: null, mercuryDashboardUrl: null, estimatedDeliveryDate: null, mercuryFailedAt: null, reasons: [], reconciliationFlag: "pending", failureReason: null, returnReason: null, ...over,
 });
 
 const list = vi.fn();
@@ -55,6 +55,15 @@ describe("MercuryPayoutsPanel", () => {
     expect(text).toContain("KRW 1,500,000");
     expect(text).toContain("USD debit: USD 11,000.00 + fees USD 110.00 = USD 11,110.00");
     expect(screen.queryByRole("button", { name: "Request via Mercury" })).toBeNull();
+  });
+  it("Mercury 대시보드 링크(새 탭, noopener)와 예상 도착일을 보여 준다", async () => {
+    list.mockResolvedValue({ ok: true, data: { rows: [row({ status: "processing", providerTransactionId: "tx1", mercuryDashboardUrl: "https://app.mercury.com/transactions/tx1", estimatedDeliveryDate: "2026-10-12" })], gateOpen: false, mercuryEnabled: false } });
+    render(<MercuryPayoutsPanel />);
+    const a = (await screen.findByTestId("mercury-dashboard-link")) as HTMLAnchorElement;
+    expect(a.href).toBe("https://app.mercury.com/transactions/tx1");
+    expect(a.target).toBe("_blank");
+    expect(a.rel).toContain("noopener");
+    expect(screen.getByTestId("mercury-row").textContent).toContain("Estimated delivery:");
   });
   it("승인 무효화·플래그를 배지로 보여 준다", async () => {
     list.mockResolvedValue({ ok: true, data: { rows: [row({ status: "needs_review", approvalInvalidated: true, reasons: ["recipient_changed"] })], gateOpen: false, mercuryEnabled: false } });

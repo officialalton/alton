@@ -37,6 +37,7 @@ const FLAG_LABEL_EN: Record<string, string> = {
 };
 const REASON_LABEL_EN: Record<string, string> = {
   late: "Sent after deadline",
+  mercury_webhook_status_mismatch: "Mercury webhook status does not match this attempt",
   recipient_changed: "Bank details changed",
   amount_changed: "Amount changed",
   amount_changed_after_execution: "Amount changed after sending",
@@ -196,6 +197,9 @@ export default function MercuryPayoutsPanel() {
                 <span>USD debit: {r.actualUsdTotalDebitMinor === null ? "not recorded" : `${money(r.actualUsdPrincipalMinor, "USD")} + fees ${money(r.actualUsdFeeMinor, "USD")} = ${money(r.actualUsdTotalDebitMinor, "USD")}`}</span>
                 <span>Mercury tx: {r.providerTransactionId ?? "—"}</span>
                 {r.trackingUrl && <a className="underline" href={r.trackingUrl} target="_blank" rel="noreferrer">Tracking</a>}
+                {r.mercuryDashboardUrl && <a className="underline" href={r.mercuryDashboardUrl} target="_blank" rel="noopener noreferrer" data-testid="mercury-dashboard-link">View in Mercury</a>}
+                {r.estimatedDeliveryDate && <span>Estimated delivery: {formatDateOnlyEn(r.estimatedDeliveryDate, true)}</span>}
+                {r.mercuryFailedAt && <span>Failed at: {new Date(r.mercuryFailedAt).toLocaleString("en-US")}</span>}
                 {r.receiptUrl && <a className="underline" href={r.receiptUrl} target="_blank" rel="noreferrer">Receipt</a>}
                 <span>Reconciliation: {FLAG_LABEL_EN[r.reconciliationFlag] ?? r.reconciliationFlag}</span>
               </div>

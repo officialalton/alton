@@ -15,6 +15,7 @@ import {
   type PayoutRequestResult,
   type ProviderTransaction,
 } from "./types";
+import { safeMercuryDashboardUrl } from "../mercury-links";
 
 export const MERCURY_DEFAULT_BASE_URL = "https://api.mercury.com/api/v1";
 
@@ -226,6 +227,9 @@ type MercuryTx = {
   amount?: number;
   trackingNumber?: string | null;
   reasonForFailure?: string | null;
+  dashboardLink?: string | null;
+  estimatedDeliveryDate?: string | null;
+  failedAt?: string | null;
   currencyExchangeInfo?: { exchangeRate?: number | string; feeAmount?: number | string; convertedFromAmount?: number | string } | null;
 };
 /** Mercury 거래 객체 → 내부 형태. currencyExchangeInfo의 세부 필드명은 실계정에서 확인 전이라 있으면 읽고 없으면 null. */
@@ -246,5 +250,8 @@ export function mapMercuryTransaction(raw: unknown): ProviderTransaction | null 
     fxRate: toNum(fx?.exchangeRate),
     trackingUrl: null,
     failureReason: t.reasonForFailure ?? null,
+    dashboardUrl: safeMercuryDashboardUrl(t.dashboardLink),
+    estimatedDeliveryDate: typeof t.estimatedDeliveryDate === "string" && /^\d{4}-\d{2}-\d{2}/.test(t.estimatedDeliveryDate) ? t.estimatedDeliveryDate.slice(0, 10) : null,
+    failedAt: typeof t.failedAt === "string" && !Number.isNaN(Date.parse(t.failedAt)) ? t.failedAt : null,
   };
 }

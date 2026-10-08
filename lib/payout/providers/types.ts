@@ -20,6 +20,10 @@ export type ProviderTransaction = {
   fxRate?: number | null;
   trackingUrl?: string | null;
   failureReason?: string | null;
+  /** Mercury 대시보드 거래 링크(https://*.mercury.com만), 예상 도착일(YYYY-MM-DD), 실패 시각(ISO). */
+  dashboardUrl?: string | null;
+  estimatedDeliveryDate?: string | null;
+  failedAt?: string | null;
 };
 
 export interface PayoutProvider {

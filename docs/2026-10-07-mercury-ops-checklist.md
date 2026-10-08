@@ -9,7 +9,7 @@
 | `real_disbursement_enabled()` | DB `payout_disbursement_gate` | false | 법인·Mercury 계정 확인 + 오너 승인(프로덕션은 별도 승인) |
 | `PAYOUT_CRON_ENABLED` | Vercel env | 미설정 | 크론이 시도 모델과 연동된 뒤. 지금은 **열지 않는다**(크론은 표식만 남기는 레거시) |
 | `payout_auto_dispatch_settings.enabled` | DB | 환경별(로컬 true) | 위와 동일 |
-| 웹훅 수신 | `/api/webhooks/mercury` | 서명 방식 미확정 → 열려도 501 거부 | Mercury에서 서명 검증 방식 확인 후 구현 |
+| 웹훅 수신 | `/api/webhooks/mercury` | `MERCURY_WEBHOOK_SECRET` 없으면 503(처리 안 함), 서명(`Mercury-Signature: t=,v1=` HMAC-SHA256, 5분 허용)·이벤트 id 중복 제거. 상태·반환 인지 전용, 돈을 움직이지 않음 | 아래 웹훅 등록 절차 |
 
 ## 2. Mercury (오너)
 1. 계정: 회사 계정 개설 확인(10-05). 지급용 계좌 지정(운영 계좌와 분리 권장) → `MERCURY_PAYOUT_ACCOUNT_ID`.
@@ -46,3 +46,9 @@
 - 지급 시도 자동 생성 여부(현재 없음 — 사람이 승인된 정산에서 생성).
 - 계약 문구 제안(`docs/2026-10-07-contract-wording-changes.md`) 법무 검토.
 - 비US 교사 계약서 Schedule A 지급 방식 빈칸.
+
+## 웹훅 등록 (오너 작업, Mercury 샌드박스에서는 웹훅 불가)
+
+1. Mercury에서 Custom 토큰을 만들고 Fetch/Create/Update Webhooks 범위를 준다(지급 쓰기 범위는 주지 않는다).
+2. 웹훅을 `https://<사이트>/api/webhooks/mercury`로 등록하고, 응답의 `secretKey`를 Vercel 환경변수 `MERCURY_WEBHOOK_SECRET`에 저장한다(코드·채팅에 남기지 않는다).
+3. 이벤트는 transaction.created/updated만 처리하고 balance 이벤트는 저장 후 무시한다. 일치하는 지급 시도가 없는 거래는 저장만 한다.

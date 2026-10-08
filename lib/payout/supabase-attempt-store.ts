@@ -2,9 +2,10 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { AttemptRow, AttemptStore } from "./attempts";
 import type { EventStore } from "./mercury-events";
+import type { WebhookStore } from "./mercury-webhook-handler";
 import type { AttemptStatus } from "./attempt-state";
 
-export function createSupabaseAttemptStore(admin: SupabaseClient): AttemptStore & EventStore {
+export function createSupabaseAttemptStore(admin: SupabaseClient): AttemptStore & WebhookStore {
   async function rpc(name: string, args: Record<string, unknown>) {
     const { data, error } = await admin.rpc(name, args);
     if (error) throw new Error(error.message);
@@ -66,6 +67,24 @@ export function createSupabaseAttemptStore(admin: SupabaseClient): AttemptStore 
     },
     async recordActuals(attemptId, principal, fee, finalRate) {
       await rpc("record_payout_attempt_actuals", { p_attempt: attemptId, p_usd_principal: principal, p_usd_fee: fee, p_final_rate: finalRate, p_actor: null });
+    },
+    async insertEvent(e) {
+      const { error } = await admin.from("payout_webhook_events").insert({ event_id: e.eventId, resource_type: e.resourceType, operation_type: e.operationType, resource_id: e.resourceId, payload_sha256: e.payloadSha256 });
+      if (error) { if (error.code === "23505") return false; throw new Error(error.message); }
+      return true;
+    },
+    async finishEvent(eventId, outcome, attemptId) {
+      const { error } = await admin.from("payout_webhook_events").update({ outcome, attempt_id: attemptId, processed_at: new Date().toISOString() }).eq("event_id", eventId);
+      if (error) throw new Error(error.message);
+    },
+    async discardEvent(eventId) {
+      await admin.from("payout_webhook_events").delete().eq("event_id", eventId);
+    },
+    async addFlag(attemptId, flag) {
+      await rpc("payout_attempt_add_flag", { p_attempt: attemptId, p_flag: flag });
+    },
+    async recordDetails(attemptId, d) {
+      await rpc("record_payout_attempt_mercury_details", { p_attempt: attemptId, p_dashboard_url: d.dashboardUrl, p_estimated_delivery: d.estimatedDeliveryDate, p_failed_at: d.failedAt });
     },
     async recordReturn(attemptId, returnTxId, returnedUsd, reason) {
       await rpc("record_payout_attempt_return", { p_attempt: attemptId, p_actor: null, p_return_transaction_id: returnTxId, p_returned_usd_minor: returnedUsd, p_reason: reason });
