@@ -93,4 +93,11 @@
 - 키워드는 **내용 축**(공식 단원 > 공식 토픽 코드 > 세부 키워드)이며 `subject_keywords.content_code`(예: "5.3", 세부 "5.3#2")로 안정 식별한다. 설계·결정 목록: `curriculum-keyword-design.md`, 시드 데이터: `data/ap/curriculum-2027/*.json`(10과목), 마이그레이션 `20262100000380`(스키마) · `…381`(후보·재고 칸·호출 장부).
 - `ap_stock_cells(subject_id, edition, keyword_code, skill_code, structure, target, adopted, pending)` — `keyword_code`는 위 토픽 공식 코드, `skill_code`는 `ap_skills.code`(공식), `structure`는 standalone | shared_stimulus_set | frq_multipart. 키워드는 문제 유형이 아니므로 유형(예: FRQ 템플릿)은 구조·메모로만 둔다. 부족분 = target − adopted. 목표 재고(과목당 MC 50 + FRQ 5)는 이 칸들의 합으로 표현한다.
 - 샘플(3과목) 칸은 `scripts/ap-generation/cells.ts`가 공식 단원 MC 비중(`ap_exam_weights`)과 스킬 범주 비중에 맞춰 계산하고 `data/ap/sample-2027/cells.json`에 저장한다. MC 스킬은 MC에서 평가되는 공식 스킬만 쓴다(Calc: 1.A/1.B/3.A/4.x 제외, Micro: 4.x 제외).
-- 후보는 `ap_candidate_items`(학생 비노출; review_state: candidate → rejected | pending_expert_review → expert_approved)에 두고, 공개 경로(`problems`)로의 변환은 전문가 승인 이후 별도 단계.
+- 후보는 `ap_candidate_items`(학생 비노출; **review_state**: candidate → rejected | needs_revalidation | auto_passed | exact_duplicate, **expert_status**·**used_in_sample** 은 별개 속성, publishable = auto_passed AND 전문가 승인; 마이그레이션 `20262100000393`, 보고 `stock-report.md`)에 두고, 공개 경로(`problems`)로의 변환은 전문가 승인 이후 별도 단계.
+
+
+---
+# 갱신(2026-10-08 밤, 재고 정책): 상태 분리·문항군·칸 채움
+- 검증(`review_state`) / 전문가(`expert_status`) / 선택(`used_in_sample`)을 분리한다. 최신 게이트(`gate_version`) 이전 통과는 `needs_revalidation`, 이력은 `ap_candidate_review_history`.
+- 완전 중복(exact)만 `exact_duplicate`로 canonical 에 연결(재고 제외). 숫자·표현 변형은 같은 `item_family_id`(문항군)로 묶되 반려하지 않는다.
+- `ap_stock_cells` = 토픽 × 주 스킬 × 구조 × 계산기. `adopted` = 최신 게이트 통과 고유 문항 수, `effective` = 문항군별 min(문항 수, 2) 합, 부족 = `ap_stock_targets.target` − effective(`ap_stock_shortfall_v`). 갱신 함수 `ap_refresh_stock_cells()`.

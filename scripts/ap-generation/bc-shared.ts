@@ -7,7 +7,7 @@ const ab = arg("--ab", "run2"), bc = arg("--bc", "run2bc");
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027");
 type C = { candidateKey: string; kind: string; unitCode: string; keywordCode: string; archetype: string; reviewState: string; reserve: boolean; difficultyProvisional: string | null; calculator: string };
 const cands = JSON.parse(readFileSync(path.join(ROOT, ab, "candidates.json"), "utf-8")) as C[];
-const adopted = cands.filter((c) => c.reviewState === "pending_expert_review" && !c.reserve);
+const adopted = cands.filter((c) => (c.reviewState === "pending_expert_review" || c.reviewState === "auto_passed") && !c.reserve);
 const quota: Record<string, number> = { "1": 2, "2": 2, "3": 2, "4": 2, "5": 3, "6": 2, "8": 1 }; // BC MC 비중에 맞춘 공유분(BC 전용 칸은 별도 생성)
 const mc = adopted.filter((c) => c.kind === "mc"); const picked: string[] = [];
 for (const [u, n] of Object.entries(quota)) mc.filter((c) => c.unitCode === u).sort((a, b) => Number(b.difficultyProvisional === "exam_prep") - Number(a.difficultyProvisional === "exam_prep")).slice(0, n).forEach((c) => picked.push(c.candidateKey));
