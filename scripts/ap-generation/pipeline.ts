@@ -131,7 +131,7 @@ function structure(c: Cand): string[] {
 function runPython(code: string): { ok: boolean; out: Json | null; err: string } {
   const tmp = path.join(DIR, ".verify.py");
   writeFileSync(tmp, code);
-  const r = spawnSync(PY, ["-I", tmp], { timeout: 25000, encoding: "utf-8", env: { PATH: process.env.PATH ?? "", HOME: process.env.HOME ?? "" } });
+  const r = spawnSync(PY, ["-I", tmp], { timeout: 25000, encoding: "utf-8", env: { PATH: process.env.PATH ?? "", HOME: process.env.HOME ?? "" } as NodeJS.ProcessEnv });
   if (r.error || r.status !== 0) return { ok: false, out: null, err: (r.error?.message ?? r.stderr ?? "").slice(0, 300) };
   const lines = (r.stdout ?? "").trim().split("\n").filter(Boolean);
   try { return { ok: true, out: JSON.parse(lines[lines.length - 1]) as Json, err: "" }; } catch { return { ok: false, out: null, err: `unparseable output: ${(r.stdout ?? "").slice(-200)}` }; }
