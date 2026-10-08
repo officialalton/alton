@@ -1,0 +1,469 @@
+[
+ {
+  "key": "s1c-fig-01-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-02-k0",
+  "defect": "graph_labels_swapped",
+  "figure": "graph",
+  "pre_blocked": true,
+  "flagged": false,
+  "paths": [],
+  "reasons": [
+   "reference_time_out_of_range"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-03-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-04-k0",
+  "defect": "graph_series_shifted",
+  "figure": "graph",
+  "pre_blocked": true,
+  "flagged": false,
+  "paths": [],
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-05-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-06-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-07-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The table's slope of 4 at (1,1) matches no option. x+y gives 2 there, so it is probably a typo. As written, no option fits the whole table.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-08-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Correct value is 84; no option matches. Even reading the third row as ∫6^10 = 7 gives 42, also not an option.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-09-k0",
+  "defect": "none",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-10-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-11-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-12-k0",
+  "defect": "none",
+  "figure": "graph",
+  "pre_blocked": true,
+  "flagged": false,
+  "paths": [],
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-13-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "instant_reject_wrong_key",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-14-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "relevant": false
+ },
+ {
+  "key": "s1c-fig-15-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-16-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": true,
+  "flagged": false,
+  "paths": [],
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-17-k0",
+  "defect": "graph_series_shifted",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The graph contradicts the stem. It shows f' going from (0,4) to (4,~0.1) to (6,~2.1) to (7.3,4), so f' is always positive, f has no extrema, and every option would be false.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-18-k0",
+  "defect": "none",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-19-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Correct value 14/3 not among options; options seem to stem from wrong formulas (e.g., f'/g' = -2/3).",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-20-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-21-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-22-k0",
+  "defect": "graph_labels_swapped",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_stimulus_expression",
+   "instant_reject_wrong_stimulus",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-23-k0",
+  "defect": "graph_series_shifted",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The graph contradicts the dashed-line end behavior. g crosses y=4 and keeps rising steeply past 6, so it does not approach 4. On the left it sits near 1.75 with no sign of approaching -1.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-24-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_distractor_explanation"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-25-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-26-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "criterion"
+  ],
+  "reasons": [
+   "criterion_failed_stimulus_expression"
+  ],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-27-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": true,
+  "flagged": false,
+  "paths": [],
+  "reasons": [
+   "narrated_error_in_option"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-28-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-29-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-30-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:Table lists h(0)=1.003202, contradicting stated h(0)=0 and continuity (h(0.01)=0.02). Taken literally, limit would be 0.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_stimulus_expression",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_stimulus",
+   "instant_reject_missing_condition",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-31-k0",
+  "defect": "none",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-32-k0",
+  "defect": "none",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ },
+ {
+  "key": "s1c-fig-33-k0",
+  "defect": "table_wrong_value",
+  "figure": "table",
+  "pre_blocked": false,
+  "flagged": true,
+  "paths": [
+   "solver",
+   "instant_reject",
+   "criterion"
+  ],
+  "reasons": [
+   "solver_disagrees:The correct left Riemann sum is 58, but no answer choice gives 58.",
+   "criterion_failed_key_scoring",
+   "criterion_failed_distractor_explanation",
+   "criterion_failed_exam_suitability",
+   "instant_reject_wrong_key",
+   "reference_pattern_mismatch"
+  ],
+  "relevant": true
+ },
+ {
+  "key": "s1c-fig-34-k0",
+  "defect": "none",
+  "figure": "graph",
+  "pre_blocked": false,
+  "flagged": false,
+  "paths": [],
+  "reasons": [],
+  "relevant": null
+ }
+]

@@ -7,7 +7,7 @@ type C = Record<string, any>; // eslint-disable-line @typescript-eslint/no-expli
 const main = JSON.parse(readFileSync(path.join(root, "s1a/candidates.json"), "utf-8")) as C[]; const rep = JSON.parse(readFileSync(path.join(root, "s1a-r/candidates.json"), "utf-8")) as C[];
 const map = JSON.parse(readFileSync(path.join(root, "s1a-r/repair_map.json"), "utf-8")) as Record<string, string>; const repBy = new Map(rep.map((r) => [map[r.candidateKey], r]));
 // 근사 중복(duplicate_gate_near_duplicate)은 재고 정책상 반려가 아니라 같은 문항군의 변형이다(완전 중복만 재고에서 제외) → 통과로 둔다.
-const out = main.map((raw) => {
+const out: C[] = main.map((raw): C => {
   const c = raw.rejectionReason === "duplicate_gate_near_duplicate" ? { ...raw, reviewState: "auto_passed", rejectionReason: null, nearDuplicateNote: "near-duplicate of an earlier candidate (item-family variant, kept)" } : raw;
   const hist: C[] = [{ run: "s1a", attempt: "first", outcome: c.reviewState === "auto_passed" ? "passed" : "rejected", reasons: c.rejectionReason ?? null }];
   if (c.reviewState === "auto_passed") return { ...c, history: hist, repaired: false };

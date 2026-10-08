@@ -11,7 +11,8 @@ type It = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; 
 const scan = new Map((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => [r.key, true]));
 const all = [...(JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as It[]), ...(JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8")) as It[])].filter((i) => i.apSubjectCode === SUBJECT);
 const status = (i: It) => gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }).status;
-const view = (validations: string[]) => all.filter((i) => validations.includes(i.validation) && !scan.has(i.stockKey) && status(i) !== "fail");
+const reval = new Set((JSON.parse(readFileSync("data/ap/stock/revalidation-results.json", "utf-8")) as { stockKey: string; passed: boolean; generatorDefect: boolean }[]).filter((r) => r.passed && !r.generatorDefect).map((r) => r.stockKey));
+const view = (validations: string[], onlyReval = false) => all.filter((i) => validations.includes(i.validation) && (!onlyReval || i.validation !== "needs_revalidation" || reval.has(i.stockKey)) && !scan.has(i.stockKey) && status(i) !== "fail");
 const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${SUBJECT}.json`, "utf-8")) as ApCurriculumFile;
 const w = cur.weights.filter((x) => x.axis === "unit" && x.section === "mc"); const unitOf = (k: string) => k.split(".")[0];
 const DIFF: Record<string, "easy" | "medium" | "hard"> = { basic_learning: "easy", exam_prep: "medium", advanced_supplement: "hard" };
@@ -26,6 +27,6 @@ function analyze(label: string, pool: It[]) {
   const used = new Set<string>(); let sets = 0; let firstShort: unknown = null; for (let n = 0; n < 12; n++) { const pl = planApSet(SUBJECT, "full_practice", pool.map(toC), used); if (!pl.ok) { firstShort = pl.shortfall; break; } pl.items.forEach((x) => used.add(x.c.problemId)); sets++; }
   return { label, disjointFullSets: sets, firstShortAfter: firstShort, items: pool.length, mc: { n: mc.length, byCalc: byCalc(mc), families: fam(mc), effective: eff(mc) }, frq: { n: frq.length, byCalc: byCalc(frq), families: fam(frq) }, unitRows, plan: { ok: plan.ok, shortfall: plan.shortfall } };
 }
-const res = [analyze("usable_now(auto_passed)", view(["auto_passed"])), analyze("potential_if_revalidated(auto_passed+needs_revalidation)", view(["auto_passed", "needs_revalidation"]))];
+const res = [analyze("usable_now(auto_passed)", view(["auto_passed"])), analyze("after_revalidation_pass(auto_passed+re-validated needs_revalidation)", view(["auto_passed", "needs_revalidation"], true)), analyze("potential_if_revalidated(auto_passed+needs_revalidation)", view(["auto_passed", "needs_revalidation"]))];
 writeFileSync(`data/ap/stock/${SUBJECT}-set-feasibility.json`, JSON.stringify(res, null, 1));
 for (const r of res) { console.log(`\n[${r.label}] 항목 ${r.items} / MC ${r.mc.n}(계산기 ${JSON.stringify(r.mc.byCalc)}, 문항군 ${r.mc.families}, 군당 2개 상한 유효 ${r.mc.effective}) / FRQ ${r.frq.n}(${JSON.stringify(r.frq.byCalc)}, 문항군 ${r.frq.families})`); console.log(`  서로 겹치지 않는 풀 세트 최대 ${r.disjointFullSets}개(다음 세트 부족: ${JSON.stringify(r.firstShortAfter)})`); console.log(`  풀 모의고사 조립: ${r.plan.ok ? "가능" : "불가"} 부족 ${JSON.stringify(r.plan.shortfall)}`); console.log("  단원별(MC):", r.unitRows.map((u) => `${u.unit}:${u.effective}/${u.needMin}${u.shortfallVsMin ? "(-" + u.shortfallVsMin + ")" : ""}`).join(" ")); }

@@ -115,6 +115,127 @@
   }
  },
  {
+  "label": "after_revalidation_pass(auto_passed+re-validated needs_revalidation)",
+  "disjointFullSets": 2,
+  "firstShortAfter": [
+   {
+    "sectionKey": "ap_mc_b",
+    "need": 13,
+    "have": 3
+   },
+   {
+    "sectionKey": "ap_frq_b",
+    "need": 4,
+    "have": 3
+   }
+  ],
+  "items": 204,
+  "mc": {
+   "n": 177,
+   "byCalc": {
+    "not_allowed": 148,
+    "required": 29
+   },
+   "families": 74,
+   "effective": 108
+  },
+  "frq": {
+   "n": 27,
+   "byCalc": {
+    "required": 10,
+    "na": 6,
+    "not_allowed": 11
+   },
+   "families": 11
+  },
+  "unitRows": [
+   {
+    "unit": "1",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 25,
+    "families": 7,
+    "effective": 11,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "2",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 26,
+    "families": 11,
+    "effective": 17,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "3",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 15,
+    "families": 6,
+    "effective": 8,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "4",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 22,
+    "families": 8,
+    "effective": 13,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "5",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 29,
+    "families": 12,
+    "effective": 18,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "6",
+    "weight": "15-20%",
+    "needMin": 7,
+    "needMax": 8,
+    "have": 29,
+    "families": 15,
+    "effective": 19,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "7",
+    "weight": "5-10%",
+    "needMin": 3,
+    "needMax": 4,
+    "have": 13,
+    "families": 7,
+    "effective": 10,
+    "shortfallVsMin": 0
+   },
+   {
+    "unit": "8",
+    "weight": "10-15%",
+    "needMin": 5,
+    "needMax": 6,
+    "have": 18,
+    "families": 8,
+    "effective": 12,
+    "shortfallVsMin": 0
+   }
+  ],
+  "plan": {
+   "ok": true,
+   "shortfall": []
+  }
+ },
+ {
   "label": "potential_if_revalidated(auto_passed+needs_revalidation)",
   "disjointFullSets": 2,
   "firstShortAfter": [

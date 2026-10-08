@@ -10,7 +10,7 @@ import { renderFigureSvg } from "../../lib/problem-figures/render";
 import { validateAp } from "../../lib/problem-figures/templates/ap-figures";
 
 const arg = (n: string, d = "") => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
-const RUN = arg("--run", "s1c-fig"); let seed = Number(arg("--seed", "5")); const exclude = new Set(arg("--exclude").split(",").filter(Boolean));
+const RUN = arg("--run", "s1c-fig"); let seed = Number(arg("--seed", "5")); const exclude = new Set<string>(arg("--exclude").split(",").filter(Boolean));
 const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
 const shuffle = <T,>(a: T[]) => { const x = [...a]; for (let i = x.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [x[i], x[j]] = [x[j], x[i]]; } return x; };
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -19,7 +19,7 @@ const all = ([...JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")), 
 const gated = all.map((i) => ({ i, g: gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }) })).filter((x) => x.g.status === "pass" && x.g.spec && (x.g.spec.type === "ap_table" || x.g.spec.type === "ap_graph"));
 const tables = shuffle(gated.filter((x) => x.g.spec!.type === "ap_table")); const graphs = shuffle(gated.filter((x) => x.g.spec!.type === "ap_graph"));
 const clone = <T,>(x: T): T => JSON.parse(JSON.stringify(x));
-const nums = (s: string) => (s.match(/-?\d+(?:\.\d+)?/g) ?? []);
+const nums = (s: string): string[] => (s.match(/-?\d+(?:\.\d+)?/g) ?? []) as string[];
 const relevant = { v: true }; let bodyMissingBlocked = 0;
 function mutate(spec: Json, kind: string, expl: string): Json | null {
   const s = clone(spec);
@@ -58,7 +58,7 @@ const cells: unknown[] = []; const packs: Record<string, unknown[]> = {}; const 
   for (const [n, r] of mix.entries()) {
     const cellId = `${RUN}-${String(n + 1).padStart(2, "0")}`; const key = `${cellId}-k0`;
     await pg.setContent(wrapHtml(r.render, r.table)); await (await pg.$("#fig"))!.screenshot({ path: path.join(dir, "img", `${key}.png`) });
-    const p = clone(r.it.payload);
+    const p = clone(r.it.payload); if (Array.isArray(p.options) && typeof p.options[0] === "string") p.options = p.options.map((t: string, i: number) => ({ text: t, why: (p.option_rationale ?? [])[i] ?? null, value: null })); // 구형식 보기(문자열) → 객체
     cells.push({ cellId, archetype: r.it.payload.archetype ?? "legacy", kind: "mc", unitCode: r.it.unitCode, topic: r.it.keywordCode, skill: r.it.skillPrimary, calculator: r.it.calculator, candidates: 1, extraTopics: [] }); packs[cellId] = [p];
     truth[key] = { answerRelevantCell: (r.spec as Json).__relevant ?? null, defect: r.defect, source: r.it.stockKey, figure: r.table ? "table" : "graph", validation: r.it.validation };
   }
