@@ -24,9 +24,9 @@ MC 42문항·100분(파트 A 29/B 13), FRQ 6문항 9점(AB 공통 3 + BC 3: 급�
 |---|---|---|---|---|
 | 6 | `int_by_parts` | 6.11 / 1.C / 불가 | sympy integrate + 수치 quad | 부호 실수, uv 항만, 남은 적분 더하기, k 곱 |
 | 6 | `partial_fractions` | 6.12 / 1.C / 불가 | sympy integrate + quad | 로그 순서 반대, 단일 로그, 계수 동일 |
-| 6 | `improper_integral` | 6.13 / 3.D / 불가 | p-적분 판정 공식(수렴 p>1) | 항상 발산, 지수 보고, 1/p |
+| 6 | `improper_integral` | 6.13 / 1.E / 불가 | p-적분 판정 공식(수렴 p>1) | 항상 발산, 지수 보고, 1/p |
 | 7 | `euler_method` | 7.5 / 1.E / 불가 | 2단계 직접 계산 | 한 단계, x 미갱신, h 누락, 옛 y |
-| 7 | `logistic` | 7.9 / 3.D / 불가 | 극한 K·최대 성장 K/2 수치 확인 | K/2 vs K, k 곱 |
+| 7 | `logistic` | 7.9 / 1.D / 불가 | 극한 K·최대 성장 K/2 수치 확인 | K/2 vs K, k 곱 |
 | 8 | `arc_length_calc` | 8.13 / 1.E / 필수 | scipy quad | y 대입, 제곱근 누락, 넓이, 직선 거리 |
 | 9 | `param_dydx` | 9.1 / 1.E / 불가 | sympy | dx/dy, dy/dt만, 곱, 부호 |
 | 9 | `param_second` | 9.2 / 1.E / 불가 | sympy | d/dt(dy/dx)만, y''/x'', y''/x' |

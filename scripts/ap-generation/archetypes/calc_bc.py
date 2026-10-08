@@ -8,7 +8,7 @@ import numpy as np
 def int_by_parts(rng):
     k = rng.choice([1, 2, 3]); form = rng.choice(["xe", "xln", "xsin"])
     if form == "xe":
-        f = x * sp.exp(k * x); a0, b0 = 0, 1; txt = f"\\int_0^1 x e^{{{k}x}}\\,dx"; val = sp.integrate(f, (x, a0, b0))
+        f = x * sp.exp(k * x); a0, b0 = 0, 1; txt = (f"\\int_0^1 x e^{{{k}x}}\\,dx" if k > 1 else "\\int_0^1 x e^{x}\\,dx"); val = sp.integrate(f, (x, a0, b0))
         E = sp.exp(k)
         ds = [(E / k + (E - 1) / S(k * k), f"Adds the remaining integral instead of subtracting it: e^{k}/{k} + (e^{k} - 1)/{k*k}."), (E / k, f"Stops after the uv term e^{k}/{k} and omits the remaining integral."),
               (E / k - (E - 1) / S(k), f"Evaluates the remaining integral of e^({k}x)/{k} as (e^{k} - 1)/{k} (misses the second factor of {k})."), (-E / k + (E - 1) / S(k * k), f"Takes the uv term with the wrong sign: -e^{k}/{k} + (e^{k} - 1)/{k*k}.")]
@@ -20,7 +20,8 @@ def int_by_parts(rng):
         f = x * sp.sin(x); a0, b0 = 0, sp.pi; txt = "\\int_0^{\\pi} x\\sin x\\,dx"; val = sp.integrate(f, (x, a0, b0))
         ds = [(-sp.pi, "Takes u dv with the sign of v reversed, giving -pi."), (2 * sp.pi, "Doubles the uv boundary term to 2 pi."), (sp.Integer(1), "Forgets the uv boundary term and keeps only the remaining integral."), (-2 * sp.pi, "Reverses the sign of v and doubles the boundary term.")]
     assert abs(float(sp.N(val)) - _I.quad(lambda v: float(sp.N(f.subs(x, v))), float(sp.N(a0)), float(sp.N(b0)))[0]) < 1e-6
-    key = Opt(fmt(val), True, "Integration by parts with u = x and dv the remaining factor.", sp.N(val, 10))
+    uwhy = "u = ln x and dv = x dx" if form == "xln" else "u = x and dv the exponential factor" if form == "xe" else "u = x and dv = sin x dx"
+    key = Opt(fmt(val), True, f"Integration by parts with {uwhy}, then evaluating uv minus the integral of v du.", sp.N(val, 10))
     return pack("int_by_parts", "6.11", "1.C", "not_allowed", f"What is ${txt}$?", key, [Opt(fmt(v), False, w, sp.N(v, 10)) for v, w in ds], rng, est=100, facts=[f"value={val}"])
 
 def partial_fractions(rng):
@@ -45,7 +46,7 @@ def improper_integral(rng):
     else:
         key = Opt("The integral diverges", True, "A p-integral with p <= 1 diverges.", None)
         ds = [Opt(cv(1 / (1 - p)), False, "Applies the 1/(p - 1) formula with the opposite sign.", 1 / (1 - p)), Opt(cv(p), False, "Reports the exponent p as the value of the integral.", p), Opt(cv(0), False, "Thinks the tail beyond 1 contributes nothing.", 0), Opt(cv(1 / p), False, "Uses 1/p as the value of a divergent integral.", 1 / p)]
-    return pack("improper_integral", "6.13", "3.D", "not_allowed", stem, key, ds, rng, est=75, facts=[f"converges={conv}"])
+    return pack("improper_integral", "6.13", "1.E", "not_allowed", stem, key, ds, rng, est=75, facts=[f"converges={conv}"])
 
 def euler_method(rng):
     h = rng.choice([S(1) / 2, S(1) / 4 * 2, 1]); h = S(1) / 2 if h == 1 else h
@@ -67,10 +68,10 @@ def logistic(rng):
     stem = f"A population $P(t)$ satisfies the logistic differential equation $\\dfrac{{dP}}{{dt}}={sp.latex(kk)}P\\left(1-\\dfrac{{P}}{{{K}}}\\right)$ with $P(0)=10$. "
     if kind == "limit":
         stem += "What is $\\displaystyle\\lim_{t\\to\\infty}P(t)$?"; key_v = K
-        ds = [(K / 2, "That is the population at the maximum growth rate, not the limit."), (K * kk, "Multiplies the capacity by k."), (10, "Uses the initial value."), (sp.Rational(K) / kk, "Divides the capacity by k.")]
+        ds = [(S(K) / 2, f"{K//2} is the population at the maximum growth rate, not the limit."), (K * kk, f"Multiplies the carrying capacity {K} by k = {kk}."), (10, "Reports the initial population P(0) = 10."), (sp.Rational(K) / kk, f"Divides the carrying capacity {K} by k = {kk}.")]
     else:
         stem += "For what value of $P$ is the population growing fastest?"; key_v = S(K) / 2
-        ds = [(K, "That is the carrying capacity (growth rate zero)."), (10, "Uses the initial value."), (S(K) / 4, "Halves again."), (K * kk, "Multiplies by k.")]
+        ds = [(K, f"{K} is the carrying capacity, where the growth rate is zero."), (10, "Reports the initial population P(0) = 10."), (S(K) / 4, f"Takes half of K/2 ({K//4}), where growth is slower."), (K * kk, f"Multiplies the carrying capacity {K} by k = {kk}.")]
     # 독립 검증: dP/dt 최대화
     if kind == "maxrate":
         g = lambda v: float(kk) * v * (1 - v / K); best = max(range(1, K), key=g); assert abs(best - K / 2) <= 1
@@ -112,13 +113,14 @@ def polar_area_calc(rng):
     a = rng.choice([1, 2, 3]); b = rng.choice([1, 2]); lo, hi = 0, rng.choice([1.0, math.pi / 2, math.pi])
     r = lambda th: a + b * math.sin(th)
     A = 0.5 * _I.quad(lambda th: r(th) ** 2, lo, hi)[0]
-    stem = f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta={lo:g}$ and $\\theta={hi:.4g}$?" if hi != math.pi / 2 and hi != math.pi else f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta=0$ and $\\theta={'\\pi' if hi==math.pi else '\\frac{\\pi}{2}'}$?"
-    alt = [(_I.quad(r, lo, hi)[0] * 0.5, "Integrates r instead of r squared."), (_I.quad(lambda th: r(th) ** 2, lo, hi)[0], "Omits the factor 1/2."), (0.5 * _I.quad(lambda th: r(th), lo, hi)[0] ** 2, "Squares the integral instead of integrating the square."), (0.5 * _I.quad(lambda th: (a - b * math.sin(th)) ** 2, lo, hi)[0], "Uses a - b sin(theta) for r (sign error inside r).")]
+    rr = f"{a}+\\sin\\theta" if b == 1 else f"{a}+{b}\\sin\\theta"
+    stem = f"What is the area of the region enclosed by the polar curve $r={rr}$ and the rays $\\theta={lo:g}$ and $\\theta={hi:.4g}$?" if hi != math.pi / 2 and hi != math.pi else f"What is the area of the region enclosed by the polar curve $r={a}+{b}\\sin\\theta$ and the rays $\\theta=0$ and $\\theta={'\\pi' if hi==math.pi else '\\frac{\\pi}{2}'}$?"
+    alt = [(_I.quad(r, lo, hi)[0] * 0.5, "Computes (1/2) times the integral of r (not r squared)."), (_I.quad(lambda th: r(th) ** 2, lo, hi)[0], "Omits the factor 1/2 in the area formula."), (0.5 * _I.quad(lambda th: r(th), lo, hi)[0] ** 2, "Squares the integral of r instead of integrating r squared."), (0.5 * _I.quad(lambda th: (a - b * math.sin(th)) ** 2, lo, hi)[0], f"Uses r = {a} - {b} sin(theta) (sign error inside r) in the area formula.")]
     key = Opt("$%.3f$" % A, True, "Area = (1/2) integral of r^2 d theta.", A)
     return pack("polar_area_calc", "9.8", "1.D", "required", stem, key, [Opt("$%.3f$" % v, False, w, v) for v, w in alt], rng, est=90, facts=[f"A={A}"])
 
 def series_test(rng):
-    fam = rng.choice(["geo", "lct_div", "lct_conv", "alt_cond", "alt_abs", "ratio", "nthterm"])
+    fam = rng.choice(["geo", "lct_div", "lct_conv", "alt_cond", "alt_abs", "ratio"])
     c = rng.choice([2, 3, 5])
     if fam == "geo":
         r = rng.choice([S(2) / 3, S(3) / 2, -S(1) / 2, -S(4) / 3, S(5) / 4]); a0 = rnd(rng, 1, 4)
@@ -137,8 +139,8 @@ def series_test(rng):
     else:
         expr = f"\\sum_{{n=1}}^{{\\infty}} \\dfrac{{{c}n}}{{{c}n+1}}"; truth = "div"
     texts = {"abs": "The series converges absolutely", "cond": "The series converges conditionally", "div": "The series diverges", "nth": "The series converges by the nth-term test"}
-    why = {"abs": "The series of absolute values converges (comparison, ratio or geometric test), so it converges absolutely.", "cond": "The series converges by the alternating series test, but the series of absolute values behaves like the harmonic series and diverges.", "div": "The terms do not tend to 0, or the series is comparable to a divergent harmonic series, so it diverges.", "nth": "The nth-term test can only show divergence, never convergence."}
-    wr = {"abs": "Claims absolute convergence although the series of absolute values diverges.", "cond": "Calls a series conditionally convergent although its absolute series converges (or it does not converge at all).", "div": "Claims divergence for a convergent series.", "nth": why["nth"]}
+    why = {"abs": "The series of absolute values converges (comparison, ratio or geometric test), so it converges absolutely.", "cond": "The series converges by the alternating series test, but the series of absolute values behaves like the harmonic series and diverges.", "div": "The terms behave like those of the divergent harmonic series (or the ratio is at least 1), so the series diverges.", "nth": "The nth-term test can only show divergence, never convergence."}
+    wr = {"abs": "Claims absolute convergence although the series of absolute values diverges.", "cond": "Calls the series conditionally convergent although the series of absolute values also converges.", "div": "Claims divergence for a convergent series.", "nth": why["nth"]}
     opts = [Opt(texts[k], k == truth, why[k] if k == truth else wr[k], None) for k in ["abs", "cond", "div", "nth"]]
     return pack_fixed("series_test", "10.9", "3.D", "not_allowed", f"Which statement about $\\displaystyle {expr}$ is true?", opts, rng, est=85, facts=[f"{fam}:{truth}"])
 
@@ -146,14 +148,14 @@ def taylor_coeff(rng):
     k = rng.choice([2, 3]); n = rng.choice([3, 4]); form = rng.choice(["exp", "sin", "ln"])
     f = {"exp": sp.exp(k * x), "sin": sp.sin(k * x), "ln": sp.log(1 + k * x)}[form]
     ser = sp.series(f, x, 0, n + 2).removeO(); c = ser.coeff(x, n)
-    wrong_fact = sp.diff(f, x, n).subs(x, 0)               # f^(n)(0) 를 계수로
-    wrong_nofact = c * sp.factorial(n) / k ** n * 1        # k^n 누락 형태
-    wrong_k = c / k ** n if c != 0 else None
-    ds = [wrong_fact, wrong_k, c * sp.factorial(n), -c]
-    why = ["Reports the nth derivative at 0 without dividing by n!.", "Forgets the k^n from the chain rule.", "Multiplies by n! instead of dividing.", "Makes a sign error when simplifying the quotient."]
+    if c == 0: raise ValueError("zero coefficient")
+    nth = sp.diff(f, x, n).subs(x, 0); no_k = c / S(k) ** n; prev = ser.coeff(x, n - 1)
+    ds = [(nth, f"Reports the nth derivative f^({n})(0) = {nth} as the coefficient, without dividing by {n}! = {sp.factorial(n)}."), (no_k, f"Leaves out the factor {k}^{n} = {k**n} that comes from replacing x by {k}x in the standard series."),
+          (prev, f"Reports the coefficient of x^{n-1} instead of x^{n}."), (-c, "Uses the opposite sign for the coefficient (alternating-sign error).")]
+    ds = [(v, w) for v, w in ds if v != 0 and v != c]
     stem = f"What is the coefficient of $x^{n}$ in the Maclaurin series for $f(x)={sp.latex(f)}$?"
-    key = Opt(fmt(c), True, "f^(n)(0)/n! (or substitute k x into the standard series).", c)
-    return pack("taylor_coeff", "10.14", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why) if d is not None and d != c], rng, est=85, facts=[f"coef={c}"])
+    key = Opt(fmt(c), True, f"f^({n})(0)/{n}! = {c}, equivalently substitute {k}x into the standard series.", c)
+    return pack("taylor_coeff", "10.14", "1.E", "not_allowed", stem, key, [Opt(fmt(v), False, w, v) for v, w in ds], rng, est=85, facts=[f"coef={c}"])
 
 def radius_interval(rng):
     b = rng.choice([2, 3, 4]); a = rng.choice([0, 1, -1]); alt = rng.choice([True, False])
@@ -174,12 +176,13 @@ def geometric_sum(rng):
     a0 = rnd(rng, 2, 8); r = rng.choice([S(1) / 2, S(1) / 3, S(2) / 3, S(1) / 4]); start = rng.choice([0, 1])
     val = a0 * r ** start / (1 - r)
     assert abs(float(val) - sum(float(a0 * r ** n) for n in range(start, 200))) < 1e-9
+    first = a0 * r ** start
     wrong_start = (a0 / (1 - r)) if start == 1 else (a0 * r / (1 - r))
-    ds = [wrong_start, a0 / (1 + r) * (r ** start), a0 * r ** start, a0 * r ** start / (1 - r) - a0 * r ** start]
-    why = ["Uses the other starting term (first term mismatch).", "Uses 1+r in the denominator.", "Reports only the first term.", "Subtracts the first term from the sum."]
+    ds = [(wrong_start, f"Uses the first term {a0 if start == 1 else a0 * r} of the {'n=0' if start == 1 else 'n=1'} series, but this series starts at n = {start}, so the first term is {first}."), (first / (1 + r), f"Uses 1 + r instead of 1 - r in the denominator: {first}/(1 + {r})."),
+          (first, f"Reports only the first term {first}."), (val - first, f"Subtracts the first term {first} from the correct sum {val}.")]
     stem = f"What is the sum of the series $\\displaystyle\\sum_{{n={start}}}^{{\\infty}} {a0}\\left({sp.latex(r)}\\right)^n$?"
-    key = Opt(fmt(val), True, "First term over one minus the ratio, using the actual first term.", val)
-    return pack("geometric_sum", "10.2", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in zip(ds, why)], rng, est=75, facts=[f"sum={val}"])
+    key = Opt(fmt(val), True, f"First term {first} divided by 1 - r = {1 - r}.", val)
+    return pack("geometric_sum", "10.2", "1.E", "not_allowed", stem, key, [Opt(fmt(d), False, w, d) for d, w in ds], rng, est=75, facts=[f"sum={val}"])
 
 def lagrange_error(rng):
     n = rng.choice([2, 3]); M = rng.choice([4, 6, 12]); a = rng.choice([1, 2])
