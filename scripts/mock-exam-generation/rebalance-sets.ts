@@ -6,14 +6,14 @@
 //   (d) 수리와 새 세트는 하나의 `taken` 집합을 공유하므로 수리에 쓴 교체 문항은 새 세트에 다시 쓰이지 않는다
 // 사본의 모든 문항은 계획 시점의 **현재 게시 버전** id 를 쓴다(나중에 다른 에이전트가 만든 수정 버전은 같은 명령을 새 덤프로 재실행하면 반영된다).
 // 실행: npx tsx scripts/mock-exam-generation/rebalance-sets.ts --dump d/dump.json --weights d/weights.json --topics .../topics.json --out DIR [--total 13] [--first-index 10] [--report docs/qa/rebalance-13-sets-2026-10-08.md]
-//        [--max-per-module 1 --max-per-exam 2 --max-family-per-exam 4] [--max-shared-groups 15] [--group-cap N] [--strict-skill] [--mix-tol 0.02]
+//        [--max-per-module 1 --max-per-exam 2 --max-family-per-exam 4] [--max-shared-groups 15] [--group-cap N] [--strict-skill] [--mix-tol 0.02] [--exclude-problems ids.json]
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { assertGroupLimits, assertUnique, buildCandidates, buildSlots, demandVsSupply, feasibleN, planUnique, RW_DOMAINS, type PlanItem, type Weights } from "./assemble-unique";
 import { DEFAULT_TOPIC_CAPS, SUBJECTS, TARGET_MIX, capViolations, countBy, rwPaths, subjectExcess, type CapViolation, type TopicCaps, type TopicMap } from "./rw-topics-lib";
 import type { EligibleProblem } from "../../lib/mock-exam/assemble";
 
-export type RebalanceOpts = { caps: TopicCaps; maxShared: number; groupCap: number; total: number; firstIndex?: number; allowSkillFallback: boolean; mix: Record<string, number>; mixTol: number; relaxFormat: boolean };
+export type RebalanceOpts = { caps: TopicCaps; maxShared: number; groupCap: number; total: number; firstIndex?: number; allowSkillFallback: boolean; mix: Record<string, number>; mixTol: number; relaxFormat: boolean; excludeProblems?: ReadonlySet<string> };
 export const DEFAULT_OPTS: RebalanceOpts = { caps: DEFAULT_TOPIC_CAPS, maxShared: 15, groupCap: Infinity, total: 13, allowSkillFallback: true, mix: TARGET_MIX, mixTol: 0.02, relaxFormat: false };
 
 export type SetItem = PlanItem & { itemId: string | null; section: string; m1Eligible?: boolean; m2LowerEligible?: boolean; m2HigherEligible?: boolean };
@@ -28,7 +28,9 @@ const LIVE_NAME = /^SAT Practice Test \d+$/;
 
 type Work = { id: string; name: string; items: SetItem[]; rw0: SetItem[] };
 
-export function rebalance(dump: any, W: Weights, topics: TopicMap, o: RebalanceOpts = DEFAULT_OPTS) {
+export function rebalance(dump0: any, W: Weights, topics: TopicMap, o: RebalanceOpts = DEFAULT_OPTS) {
+  // 제외 문항(정답 누설 미수정 등)은 보관 문항과 같이 취급: 재고에서 빠지고 세트 안에 있으면 교체 대상(archived_problem).
+  const dump = o.excludeProblems?.size ? { ...dump0, problems: dump0.problems.map((p: any) => (o.excludeProblems!.has(p.id) ? { ...p, archived_at: p.archived_at ?? "excluded" } : p)) } : dump0;
   const P = new Map<string, any>(dump.problems.map((p: any) => [p.id, p]));
   const V = new Map<string, any>(dump.versions.map((v: any) => [v.problem_id, v])); // 현재 게시 버전
   const pubSets = dump.sets.filter((s: any) => s.status === "published" && !s.archived_at && LIVE_NAME.test(s.name)).sort((a: any, b: any) => setNum(a.name) - setNum(b.name));
@@ -257,7 +259,7 @@ async function main() {
   const dump = JSON.parse(readFileSync(arg("--dump")!, "utf-8")); const W: Weights = JSON.parse(readFileSync(arg("--weights")!, "utf-8"));
   _topics = arg("--topics") ? asTopicMap(JSON.parse(readFileSync(arg("--topics")!, "utf-8"))) : new Map();
   const o: RebalanceOpts = { ...DEFAULT_OPTS, caps: { perModule: Number(arg("--max-per-module") ?? DEFAULT_TOPIC_CAPS.perModule), perExam: Number(arg("--max-per-exam") ?? DEFAULT_TOPIC_CAPS.perExam), familyPerExam: Number(arg("--max-family-per-exam") ?? DEFAULT_TOPIC_CAPS.familyPerExam) },
-    maxShared: Number(arg("--max-shared-groups") ?? 15), groupCap: arg("--group-cap") ? Number(arg("--group-cap")) : Infinity, total: Number(arg("--total") ?? 13), firstIndex: arg("--first-index") ? Number(arg("--first-index")) : undefined, allowSkillFallback: !process.argv.includes("--strict-skill"), mixTol: Number(arg("--mix-tol") ?? 0.02), relaxFormat: process.argv.includes("--relax-format") };
+    maxShared: Number(arg("--max-shared-groups") ?? 15), groupCap: arg("--group-cap") ? Number(arg("--group-cap")) : Infinity, total: Number(arg("--total") ?? 13), firstIndex: arg("--first-index") ? Number(arg("--first-index")) : undefined, allowSkillFallback: !process.argv.includes("--strict-skill"), mixTol: Number(arg("--mix-tol") ?? 0.02), relaxFormat: process.argv.includes("--relax-format"), excludeProblems: arg("--exclude-problems") ? new Set<string>(JSON.parse(readFileSync(arg("--exclude-problems")!, "utf-8"))) : undefined };
   const r = rebalance(dump, W, _topics, o); const out = arg("--out") ?? "data/mock-exam-generation/rebalance-20261008"; writeOutputs(r, out);
   const rep = arg("--report"); if (rep) { mkdirSync(path.dirname(rep), { recursive: true }); writeFileSync(rep, reportMd(r, { dumpAt: arg("--dump-label") ?? arg("--dump")!, ledger: arg("--ledger-note") })); }
   console.log(JSON.stringify({ swaps: r.swaps.length, byReason: Object.fromEntries(countBy(r.swaps, (s) => s.reason)), skillFallbacks: r.swaps.filter((s) => s.status === "skill_fallback").length, noReplacement: r.swaps.filter((s) => s.status === "NO_REPLACEMENT").length, newPlanned: r.plannedNew, newRequested: r.newCount, dupAcross: r.dupAcross.length, groupErrors: r.groupErrors.length, missingCells: r.missingCells.length, remainingViolationSets: r.remainingViolations.length, genItemsCellLevel: r.generation.totalItemsCellLevel, out }, null, 1));

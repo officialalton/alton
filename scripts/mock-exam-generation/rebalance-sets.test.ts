@@ -89,4 +89,14 @@ describe("generationNeed", () => {
     const g2 = generationNeed(plan, [], topics, { mix, mixTol: 0 });
     expect(g2.bySubjectCellLevel).toEqual({ social_science: 1 }); expect(g2.perCell[0].cell).toBe("s1|easy");
   });
+  it("--exclude-problems: 제외 문항은 재고로도 쓰이지 않고 세트 안에 있으면 archived_problem 으로 교체된다", () => {
+    const { dump, topics } = synth();
+    const inSet = dump.items.find((i: any) => i.section === "rw")!.problem_id as string;
+    const base = rebalance(dump, W, topics, opts);
+    const stockUsed = allItems(base).find((x) => !dump.items.some((i: any) => i.problem_id === x.problemId))!.problemId;
+    const r = rebalance(dump, W, topics, { ...opts, excludeProblems: new Set([inSet, stockUsed]) });
+    const ids = new Set(allItems(r).map((x) => x.problemId));
+    expect(ids.has(inSet)).toBe(false); expect(ids.has(stockUsed)).toBe(false);
+    expect(r.swaps.some((s) => s.oldProblemId === inSet && s.reason === "archived_problem")).toBe(true);
+  });
 });
