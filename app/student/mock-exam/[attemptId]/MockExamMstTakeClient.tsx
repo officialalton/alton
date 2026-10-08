@@ -36,6 +36,41 @@ const OPTION_LETTERS = ["A", "B", "C", "D", "E"];
 const NAV_BTN =
   "flex h-11 w-14 items-center md:h-10 md:w-12 justify-center rounded-lg border-[1.5px] border-grey-300 bg-white text-[20px] font-semibold text-ink hover:bg-grey-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 disabled:opacity-40 disabled:hover:bg-white";
 
+// 좁은 화면: 지문+선택지가 한 세로 흐름으로 스크롤된다. iOS 는 스크롤바가 사라지므로 아래에 더 있으면 페이드+화살표를 보여 준다.
+function ScrollPanes({ resetKey, children }: { resetKey: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [more, setMore] = useState(false);
+  const update = useCallback(() => {
+    const el = ref.current;
+    if (el) setMore(el.scrollHeight - el.scrollTop - el.clientHeight > 8);
+  }, []);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.scrollTop = 0;
+    update();
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(update) : null;
+    ro?.observe(el);
+    Array.from(el.children).forEach((c) => ro?.observe(c));
+    return () => ro?.disconnect();
+  }, [resetKey, update]);
+  return (
+    <div className="relative flex min-h-0 flex-1 flex-col">
+      <div ref={ref} onScroll={update} className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden" data-testid="mst-panes">
+        {children}
+      </div>
+      {more && (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex h-14 items-end justify-center bg-gradient-to-t from-white via-white/80 to-transparent pb-1 md:hidden" data-testid="mst-scroll-cue" aria-hidden="true">
+          <span className="flex items-center gap-1 text-[11px] font-semibold text-grey-500">
+            Scroll for more
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ToolIconButton({
   label,
   title,
@@ -498,8 +533,8 @@ export default function MockExamMstTakeClient({
               </div>
 
               {/* 두 칸: 왼쪽 지문·문제·그림 / 오른쪽 선택지(또는 답 입력). 각 칸이 따로 스크롤, 좁은 화면에서는 위아래로 쌓인다. */}
-              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-hidden" data-testid="mst-panes">
-                <section aria-label="Passage and question" className="min-w-0 shrink-0 overflow-x-auto px-4 py-4 md:shrink md:w-1/2 md:px-8 md:py-6 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
+              <ScrollPanes resetKey={item.setItemId}>
+                <section aria-label="Passage and question" className="min-w-0 shrink-0 overflow-x-auto overflow-y-hidden px-4 py-4 md:shrink md:w-1/2 md:px-8 md:py-6 md:overflow-y-auto md:border-r md:border-grey-200" data-testid="mst-pane-left">
                   <AnnotationLayer
                     key={item.setItemId}
                     highlightMode={highlightMode}
@@ -576,7 +611,7 @@ export default function MockExamMstTakeClient({
                   )}
                   {error && <p className="mt-4 text-[12.5px] text-red">{error}</p>}
                 </section>
-              </div>
+              </ScrollPanes>
 
               {/* 하단 액션 막대 — 문항 크기와 무관하게 같은 자리에 고정. */}
               <div className="flex shrink-0 items-center justify-between border-t border-grey-200 bg-white px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] md:px-8 md:py-3" data-testid="mst-footer">
