@@ -1,0 +1,5604 @@
+{
+ "ap_calculus_ab-c001-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=6.0,R=8.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c001-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "lim2=10, lim4 DNE; unique match [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c001-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "sum=8.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c001-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L2=12.0,R2=8,L5=6.0,R5=6"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c002-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=1/4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c002-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c002-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "1/48"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c002-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c003-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "left=4, right=4, k=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c003-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=32,R=32,f(3)=30"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c003-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=4,R=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c003-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=4,R=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c004-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=3, above=True, unique=True"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c004-k1": {
+  "ok": false,
+  "reasons": [
+   "key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": null,
+    "conceptual_only": false,
+    "details": "limit=4 vals=[8.33, 4.31, 4.1]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c004-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "right=2, left=-oo"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c004-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=4, vals=[4.25, 4.152823920265781, 4.016532782240592, 4.001665332778223]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c005-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=8, T(3)=15, avg=5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c005-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0.22000000000000003, 0.16, 0.22666666666666666, 0.1]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c005-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=3*f'(3)=12"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c005-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=-14, C'(3)=-14, C(3)=67, avg=-11.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c006-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "left=5, right=6, slopes 4,4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c006-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "left=23, right=23.0, derivs 2 vs 0.5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c006-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "left=5, right=5, left deriv=4, right deriv=3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c006-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=15,R=15,E3=15,dl=8,dr=5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c007-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "matches [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c007-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "5/3 + pi"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c007-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c007-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "P'(0)=2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c008-k0": {
+  "ok": false,
+  "reasons": [
+   "key_is_much_longer_giveaway"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_calculus_ab-c008-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "M'(4)=-3.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c008-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "h'(2)=-10.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c008-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "8/3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c009-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "-1/2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c009-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "-4/5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c009-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "slope=-4/13"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c009-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "-4/13"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c010-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "matches [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c010-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "P'(10)*e=48/5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c010-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "exp(2)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c010-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "key=-10.0, distractors=[10.0, -7.0, 5.0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c011-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "C'(2)=0.2729, avg=0.5459, change 2nd hr=0.3908, C(2)=3.4918"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c011-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "C'(70)=-0.19999999999999973 avg=-0.3 C(70)=38.000000000000014"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c011-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "f'(3)=1.1036 f(3.1)=3.419 f(4)-f(3)=0.907"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c011-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "C'(30)=1.205, C(30)=69.88, avg=2.33"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "centered difference quotient on [5,9]=4.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "R'(4)=-54.978, C'(4)=-7.854, R(4)=1021.9"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "key=3.0551, avg=2.1331"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c012-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "74.5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c013-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "dh/dt=-0.4244, dr/dt=-0.2122"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c013-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "dR/dt=29.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c013-k2": {
+  "ok": false,
+  "reasons": [
+   "explanation_references_option_letter"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_calculus_ab-c013-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[5.2, 6.5, 8.125, 3.9]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "2/9"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "5/3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=9/2, after one application num,den limits=(0, 0)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c014-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "limit=9/2, first-step=(0, 0), table=[4.081822068171792, 4.455335485081813, 4.545339535169113, 4.985880757600313]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c015-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{0.0: 20, 6.0: 2, 5.0: np.float64(-5.0), 1.0: np.float64(27.0)}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c015-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{0: 10, 2: 30, 4: 26, 5: 30}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c015-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{-1: np.float64(-6.0), 0: np.float64(-0.0), 2: np.float64(-4.762203155904599), 6: np.float64(3.3019272488946267)}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c015-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{0.0: 100.0, 20.0: 140.0, 10.0: np.float64(149.99999999999997)}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c016-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "['max', 'min'][np.float64(1.585786437626905), np.float64(4.414213562373095)]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c016-k1": {
+  "ok": false,
+  "reasons": [
+   "key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": null,
+    "conceptual_only": false,
+    "details": "([2.950357649489136], [2.950357649489136])"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c016-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{-2: 'max', 1: 'none', 4: 'min'}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c016-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "['max', 'none', 'min']"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c017-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{1: (-12, 47), 5: (12, 15)}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c017-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "crit=[2, 6], P''(6)=-6, P(6)=40, P(2)=24, P''(2)=6"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c017-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{0: 36, 3: 0}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c017-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{1: ('max', 27), 5: ('min', -5)}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c018-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "f'(5)=-0.75, f''(5)~0.500000000069889"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c018-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "argmin t=6.0000"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c018-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[True, False, False, False]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c018-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "C'(4)=3/2, C''(4)=-7/10"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c019-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "cost=619.6773, no-factor-2=438.18"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c019-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[(np.float64(42.07825127659933), np.float64(24.246264893658577)), (np.float64(7.92174872340067), np.float64(-374.24626489365886)), (5, -365.0), (50, -50.0)]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c019-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "min at 3.6452, root 3.6452, chain-rule-error root 2.9263"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c019-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "v=12.247,T=14.400; E-min v=9.306, T there=16.63; endpoints 44.4,77.5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c020-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=56,R=76,T=66.0; L<A (increasing), T<A (concave down)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c020-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "right sum=14.0, decreasing=True so underestimate"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c020-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[True, False, False, False]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c020-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "R=1200,L=1060"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c021-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "[200, 204.0, 204.5, 199.0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c021-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "G'(2)=c(4)*4=28; options [28, 7, 6, 12]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c021-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "g'(1)=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c021-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0, 6.0, 12.0, 10.5, 4.5]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c022-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "total=2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c022-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "I03=27, I58=12, total=72"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c022-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "value=6"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c022-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "int_0^6 g=20, result=48"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c023-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "net=36, C(3)=41, rate-distractor=47"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c023-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "integral=24"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c023-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "-9"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c023-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "key=2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c024-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "4*log(4) + 12"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c024-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "6*log(3) + 8"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c024-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c024-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "3*log(5) + 8"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c025-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c025-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[True, False, False, False]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c025-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[True, False, False, False]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c025-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c026-k0": {
+  "ok": false,
+  "reasons": [
+   "explanation_references_option_letter"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_calculus_ab-c026-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "t=ln3/0.04=25ln3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c026-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "matching options: [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c026-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{C: 20, k: 1}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c027-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "net=14.0 x6=17.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c027-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "max at t=3.5, B=12.25000000000262"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c027-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "dist=4, disp=4/3, final pos=10/3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c027-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "net=-2.0 s6=8.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c028-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "area=32"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c028-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "area=64/3, unique match [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c028-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "intersections [0, 3], area 9/2, matches [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c028-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[9/2, 9, 8/3, 27/2]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c029-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "4*pi"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c029-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "64*pi/15"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c029-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "pi"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c029-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "64*pi/15"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c030-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "key=56*pi/3, matches=[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c030-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "V=8*pi/3, squared-diff=8*pi/15"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c030-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "all options match computed values: True"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-c030-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[20*pi/3, 8*pi/3, 26*pi/3, 40*pi/3]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_calculus_ab-f01-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "63.3"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "66.6"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "64.95"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "-0.17499999999999982"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "19.6"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "(17.4, 2.61)"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "0.09999999999999998"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "P not monotonic"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k2": {
+  "ok": false,
+  "reasons": [
+   "part_a_numeric_check_failed",
+   "part_b_numeric_check_failed",
+   "part_d_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": false,
+      "detail": "32.115"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "30.2095"
+     },
+     {
+      "part": "d",
+      "pass": false,
+      "detail": "30.614574483454447"
+     }
+    ],
+    "conceptual_parts": [
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f01-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "306"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "10.2"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "0.5"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "300.0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f02-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "zeros at 2,8"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "slopes 1,1.5,-1,-2"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "{0: 6, 2: 4.0, 8: 13.0, 10: 9.0}"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f02-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[(2, 'max'), (6, 'min')]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "[-1.0, -1.0, 1.0, 2.0]"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "{0: 10, 2: 12.0, 4: 10.0, 6: 8.0, 8: 12.0}"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f02-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "sign changes at 2 (+to-) and 6 (-to+)"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "f'' sign change only at 4"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "[1, 3.0, -5.0, -1.0]"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "y=1+2x"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f02-k3": {
+  "ok": false,
+  "reasons": [
+   "verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": "Traceback (most recent call last):\n  File \"/Users/jangjiman/Developer/ALTON-worktrees/ap-design/data/ap/sample-2027/run1/.verify.py\", line 11, in <module>\n    b7=B(7)\n  File \"/Users/jangjiman/Developer/ALTON-worktrees/ap-design/data/ap/sample-2027/run1/.verify.py\", line 7, in B\n    return 40+np.trap"
+  }
+ },
+ "ap_calculus_ab-f03-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general solution conceptual"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "A=70,k=ln2/5"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "t=14.0368"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b"
+    ]
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "300"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "solution satisfies ODE and IC"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "P=1500"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "slopes"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "d/dx y^3 check"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "C=8"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "discriminant negative"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f03-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "slopes 1.2, -0.4"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "general form verified via particular solution"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "t=5ln2, limit 8"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "3.3541019662496847"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "20.12461179749811"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "241.4953415699773"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "(6.708203932499369, 0.1341640786499874)"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k1": {
+  "ok": false,
+  "reasons": [
+   "part_b_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "7.082762530298219"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "186.70814241402275"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "vol=5785.761015 net=126.666667"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k2": {
+  "ok": false,
+  "reasons": [
+   "part_b_numeric_check_failed"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "7.542472332656507"
+     },
+     {
+      "part": "b",
+      "pass": false,
+      "detail": "computed 142.17225402106772; model answer text/rubric says 142.24 but correct is this value"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "24.135911464500822"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_calculus_ab-f04-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "831.9718634205489"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "f>g on grid"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "V1=24459.155903"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "V2=310504.410640"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_biology-c001-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "only option 0 true"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c001-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Nucleotides need N and P beyond C,H,O; only W has both."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c001-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c001-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[True, False, False, False]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c002-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Starch/glycogen positive after amylase, cellulose negative; all glucose polymers so monomer difference excluded; linkage-based explanation is only consistent option."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c002-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only Y has beta-1,4 linkages uncleavable by amylase; option 1 gives correct reason (linkage, not monomer)."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c002-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "total bonds 119, a14 114, ends Y 6, ends X 1"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c002-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only option 0 is consistent with table data; option 3 false since alpha 1-4 also hydrolyzed."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c003-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "X: A=T,G=C,no U -> dsDNA; Y: U present, A!=U, G!=C -> single-stranded RNA"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c003-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only sample with T and unequal A/T and G/C is sample 2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c003-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "only sample 1 satisfies A=T, G=C, no U"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c003-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "bottom 3'->5' = UACGGCAU; 5'->3' = UACGGCAU"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c004-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[6.0, 3.0, 1.5, 0.75]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c004-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "ratios [6.0, 3.0, 1.5, 0.75], drops [3.0, 1.5, 0.75]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c004-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "ratios [6.0, 3.0, 1.5, 0.75] drops [3.0, 1.5, 0.75]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c004-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "SA/V=[6.0, 3.0, 1.5, 0.75], ratios=[2.0, 2.0, 2.0], diffs=[3.0, 1.5, 0.75]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c005-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "pred_B=196, saturated=True"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c005-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "increase 40->80 mM = 0.013"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c005-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "after=54.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c005-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "plateau 40 -> 80 with doubled transporters; ATP inhibitor no effect => passive"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c006-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Gradient 0.9 pH units in control; leak collapses it; ATP falls; O2 use continues."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c006-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "conc ratio 20.0, rate fraction M 1.000 vs C 0.990; C lower so yield falls via dilution"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c006-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "area20=251.3, area40=502.7, ratio=2.0, vol fraction=0.040"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c006-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 1,
+    "conceptual_only": false,
+    "details": "activity at pH 7.2 is 4% of maximum, small but nonzero"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c007-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "ratio with/without inhibitor rises from 0.38 to 0.95, converging to the same max -> competitive"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c007-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "remaining at 8 drops=2, gain=2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c007-k2": {
+  "ok": false,
+  "reasons": [
+   "key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": null,
+    "conceptual_only": false,
+    "details": "table matches Vmax=100,Km=10 vs apparent Km=30; gap shrinks [19.0, 25.0, 25.0, 14.0, 5.9, 1.9]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c007-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[0.3, 0.9]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c008-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "pH12 pre-exposure recovery 4 vs max 100 => irreversible; pH10 recovered 98"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c008-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Activity at 60C (20) < at 40C (100) so decrease predicted; denaturation mechanism is option 0."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c008-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "ratio=2.773"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c008-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "ratio pH4/pH6 = 0.48"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c009-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{'A': 0.48, 'B': 0.02, 'C': 0.01, 'D': 0.0}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c009-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "red/blue overlap=True, gross green=4.3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c009-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "gross400=18.0, gross800=18.5, pct=2.78, ratio100to200=2.5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c009-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{'red': 9.299999999999999, 'blue': 8.2, 'green': 3.5, 'far': 1.4000000000000001}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "control rate 0.92 vs inhibitor 0.04 umol/min; line graph time on x with two series is the only option showing both"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only option 0 satisfies axis assignment, two series, and error bars"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "max mean+2SE=9.6 fits 0-10; x-axis must be independent variable; error bars must be 2SE"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c010-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "scores=[4, 0, 0, 2], r=0.9992"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c011-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "antibody blocks cAMP and enzyme response; muscle no response"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c011-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only method 1 shows one-to-many amplification (1000 lamps per message), matching a transduction cascade; option 0 states this."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c011-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "5*20=100; 100*50=5000; multiplicative amplification, receptors stay 5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c011-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Response only with extracellular epinephrine and functional receptor; cytoplasmic injection and receptor block give baseline."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c012-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "B-P in A-KO near baseline; A-P intact in B-KO -> A upstream of B"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c012-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "X lowers expression to 8, rescue to 92 implies upstream of kinase B; Y no effect"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c012-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "wt ratios [10.0, 10.0, 10.0], mutant ratios [10.0, 1.0, 10.0], differing steps [1]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c012-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "analog rescues X (95) not Y (13)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c013-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "control TSH,T4=(1.0, 60.0), blocked=(2.0, 120.0)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c013-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Actual switching temperature = 14 C, below 20 C, so oscillation around a lower mean"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c013-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "base t2=60.8, k=0.8 t2=51.2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c013-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "rises per interval [0.6000000000000014, 0.29999999999999716, 0.10000000000000142] slow as sweating increases; removing effector means less opposition, faster rise"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c014-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "only option with G1 up, S and G2+M down: [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c014-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "G1 rises, S/G2/M fall: G1/S arrest, fewer divisions"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c014-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "wt=6.0hr, mutant=6.0hr"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c014-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "G1 shift in A=36 points; Rb absent in B so no change predicted"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c015-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "R: 4 chromosomes x 2 chromatids = 2C; matches option 0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c015-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "2^7=128 distinct chromosome combinations from independent assortment alone vs 1 for mitosis; crossing over in meiosis I adds more. Other options misstate stage, replication count, or mutation role."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c015-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "2^4=16; distractors 8 (2n), 4^4=256, 4 (cells per meiosis)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c015-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "maternal alleles ['M1', 'M2']"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c016-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "chi=0.998, df=3, chi_equal_ratio=327.3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c016-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "chi2=0.998, df=3, crit=7.81, reject=False"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c016-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "chi2=17.778, df=3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c016-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "N=320, exp=[180.0, 60.0, 60.0, 20.0], chi=3.333, df=3, crit=7.81, wrong-denominator=3.02"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c017-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "pH effect 7.75 vs max temp effect 0.20"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c017-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Aluminum uptake differs and decreases monotonically with pH while genotype is constant (clones), supporting environmental effect on phenotype."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c017-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{'G1': 10, 'G2': 10, 'G3': 10}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c017-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "difference=55 bpm, about 4.6 SD; identical genotype so environment explains it"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c018-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "inter=25.0 light=75.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c018-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "1200/200=6 fragments; labels=RNA primers; continuous strip=leading; old+new per copy=semiconservative"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c018-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "lag=4, total=5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c018-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Bottom template (5'->3' toward Fork R) forces strand X to grow away from fork: discontinuous."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c019-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "anticodon 3'-GGU-5' for CCA; chain transferred to A-site tRNA"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c019-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "peptide Met-Ala-Tyr-Arg, anticodon 3'-UAC-5'"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c019-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "['AUG', 'CUU', 'ACG', 'GAU']['Met', 'Leu', 'Thr', 'Asp']"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c019-k3": {
+  "ok": false,
+  "reasons": [
+   "verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": "Traceback (most recent call last):\n  File \"/Users/jangjiman/Developer/ALTON-worktrees/ap-design/data/ap/sample-2027/run1/.verify.py\", line 14, in <module>\n    assert m==[\"Met\"]\n           ^^^^^^^^^^\nAssertionError\n",
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c020-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "equal copy number, cell-specific mRNA peaks"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c020-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "copies equal in both cell types; albumin and insulin mRNA differ >100-fold"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c020-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only option 0 is consistent with the table; others contradict DNA/mRNA columns."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c020-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "copies equal in both fibers; mRNA differs for myosin genes; ACTB equal only for housekeeping"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c021-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Clone A has extra 1300 bp fragment vs empty vector control; clone B identical to control; sum A=5500=4200+1300"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c021-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{'A': 'homres', 'B': 'het', 'C': 'homsus'}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c021-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "X=3155,Y=998,sum=4152; linear 4100,1850 sum 5950"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c021-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{1: 'AA', 2: 'AB', 3: 'BB'}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c022-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Allele present at gen 0 (0.01) and rises only with antibiotic; selection on existing variation."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "Both control frequencies decline from 0.01."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.36"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: homology and descent with modification."
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "ap_biology-c022-k1": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c022-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "A'A' fitness 0.6<1.0 so A increases"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.4872"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "opposite fitness ranking"
+    },
+    {
+     "computed_key_index": null,
+     "conceptual_only": true,
+     "details": "Biological species concept: reproductive isolation; no numeric recomputation possible."
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "ap_biology-c022-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Conceptual: heterozygote advantage; no numeric recomputation possible."
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "0.19"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "exp SS 36.1, AS 307.8"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "fraction of S alleles in carriers 0.89"
+    }
+   ],
+   "conceptualOnly": [
+    true,
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "ap_biology-c023-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "[True, False, False, False]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c023-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "All eukaryote genes (>=52% identity) rescue; bacterium (24%) does not; predict eukaryote mouse rescues."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c023-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "closest to V is Y"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c023-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "interpolated IC50=13.4 nM between 99% and 88% identity organisms"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_biology-c024-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "A matches B except signal"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Design logic: interaction compares A-B vs C-D; computed 56 vs 37"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Design reasoning on confounders; no numeric recomputation possible"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": true,
+     "details": "Design reasoning: filter-control isolates volatile compounds"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    true,
+    true,
+    true
+   ]
+  }
+ },
+ "ap_biology-c024-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "B vs C: same energy/duration, flowering 12 vs 30"
+    },
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "control matching D in light without ladybugs: B"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "B vs D intervals overlap: True so option on B>D unsupported"
+    },
+    {
+     "computed_key_index": null,
+     "conceptual_only": true,
+     "details": "Design reasoning about factorial crossing; no numeric recomputation possible."
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "ap_biology-c024-k2": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-c024-k3": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-f01-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "14/250=5.6"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "monotonic decrease and 0 vs 20 uM bars do not overlap"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "plot values match table"
+     }
+    ],
+    "conceptual_parts": [
+     "a"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "[9.0, 18.0, 25.0, 16.0]"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "177.8% 6.0 h"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "20 uM below 10 uM, no overlap of 2SE bars"
+     }
+    ],
+    "conceptual_parts": [
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f01-k2": {
+  "ok": false,
+  "reasons": [
+   "part_c_unknown_skill_4.C",
+   "part_d_unknown_skill_4.D",
+   "part_d_unknown_skill_4.E"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-f01-k3": {
+  "ok": false,
+  "reasons": [
+   "verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": "verification_code missing"
+  }
+ },
+ "ap_biology-f02-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "fold=90.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "M1 no-lactose 165 >> 2.0; error bars overlap"
+     },
+     {
+      "part": "total",
+      "pass": true,
+      "detail": "points sum 9"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "e"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k1": {
+  "ok": false,
+  "reasons": [
+   "part_d_no_rubric_rows"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_biology-f02-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "fold=20.0, pct=5.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "M1 +/- inducer ranges overlap"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d",
+     "e"
+    ]
+   }
+  }
+ },
+ "ap_biology-f02-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "data heights 1.0,6.0,0.9,1.2; error 0.2,0.8,0.2,0.3"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "6.0, 1.333"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "normal HRE error bars non-overlapping (5.2>1.2); mutated overlap (0.9<1.1)"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "conceptual"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "darkness baseline differs from treatment 1"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "38+-4 vs 2+-2 and 3+-3 do not overlap; covered tip like dark"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "conceptual"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "intervals overlap"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "c",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "Treatment 1 has largest mean"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "Treatments 2,3,4 intervals do not overlap treatment 1"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f03-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "HR increases monotonically; 173-142=31"
+     }
+    ],
+    "conceptual_parts": [
+     "a",
+     "b",
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "optP=3, optQ=7"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "pH5 P=35 Q=60"
+     }
+    ],
+    "conceptual_parts": [
+     "b",
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "optimum 40"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "diff 48"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "activity at 70 = 2"
+     }
+    ],
+    "conceptual_parts": [
+     "d"
+    ]
+   }
+  }
+ },
+ "ap_biology-f04-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "40"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "60.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "4.975124378109453"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "1.9047619047619049"
+     },
+     {
+      "part": "table",
+      "pass": true,
+      "detail": "table rates match model"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_biology-f04-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "activity monotonic increase from 5.0 to 7.0"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "decrease 20.0%"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "interpolated activity at 6.9 = 97.2"
+     }
+    ],
+    "conceptual_parts": [
+     "c"
+    ]
+   }
+  }
+ },
+ "ap_microeconomics-c001-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "total=155, available=120, each project feasible alone=True"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c001-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "total cost 170 vs 120; total time 16 vs 10"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c001-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Trade-off verified: more x forces less y; having 12 of both is infeasible."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c001-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Requests total 180 > 120 available, so wants exceed limited resources; choice with opportunity cost is required (first option)."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c002-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "DE=1.2,AB=0.3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c002-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "opportunity costs per ton corn: [0.4, 0.6, 1.0, 2.0] rising=True; key is specialized-resources explanation"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c002-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "AB=0.3333333333333333,BC=1.0; cost rises"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c002-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "opportunity costs per 10 assessments: [4.0, 8.0, 12.0, 20.0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c003-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "OC soy A=3.0, B=9.0; OC wheat A=0.333, B=0.111"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c003-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "OC bread D=2.0,E=1.0; OC jam D=0.5,E=1.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c003-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "OC_Y Alpha=2.0, Beta=4.0, good=[2]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c003-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "OC scan Alpha 2.0, Beta 3.0; adv Alpha; range 2.0-3.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c004-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "best bundle 4,4, utility 156; MU/P last X 4.0, last Y 4.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c004-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "loss 30, gain 21, best bundle (246, 4, 3)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c004-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "spend=24, MUx/Px=5.0, MUy/Py=7.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c004-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "(222, 3, 4)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c005-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "e=0.714,r1=320,r2=360"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "drop=140.0"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k1": {
+  "ok": false,
+  "reasons": [
+   "item1_key_mismatch_deterministic",
+   "item2_key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "items": [
+      {
+       "computed_key_index": 0,
+       "conceptual_only": false,
+       "details": "E=1.400 TR 180->160"
+      }
+     ]
+    },
+    {
+     "items": [
+      {
+       "computed_key_index": 2,
+       "conceptual_only": false,
+       "details": "delta CS=80.0"
+      }
+     ]
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "1.0"
+    },
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "1/3"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c005-k3": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c006-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Quantity rises by {15} at every price => demand increased (rightward shift), substitute price rise."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c006-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Quantity rises by constant 30 at every unchanged own price: rightward demand shift from a substitute's price increase."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c006-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "q0=50.0,q1=60.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c006-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 1,
+    "conceptual_only": false,
+    "details": "Quantity falls by 15 at every price: leftward demand shift; substitute price decrease matches."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c007-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "e=1.167, TR 480.0->504.0, matches=[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c007-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "e=1.273, TR 780->720"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c007-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "E=0.667, TR 800->896"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c007-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "E=0.8, rev 100000->90000"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c008-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "e=0.5556 class=sub matches=[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c008-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "key=2220.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c008-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Q=120.0, e=0.1667, pct=1.667"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c008-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "total=18.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c009-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "qd=350.0,qs=150.0,shortage=200.0,Pe=7.0,Qe=250.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c009-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "shortage 25, sold 65, matches [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c009-k2": {
+  "ok": false,
+  "reasons": [
+   "key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": null,
+    "conceptual_only": false,
+    "details": "Qd=30.0,Qs=10.0,shortage=20.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c009-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "pe=32.0, qd=8000, qs=5000, shortage=3000"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c010-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "m0=20.0,m1=10.0,rev=100.0,autarky price=60"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c010-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "imports 20.0->10.0, CS loss 275.0, PS gain 125.0, rev 100.0, DWL 50.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c010-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "dwl=40.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c010-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "imports 45.0->15.0, CS loss 1400.0, PS gain 800.0, rev 300.0, DWL 300.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c011-k0": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c011-k1": {
+  "ok": false,
+  "reasons": [
+   "item2_verification_error"
+  ],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "ATC2=38.0 ATC3=30.0 MC3=14"
+    },
+    "Traceback (most recent call last):\n  File \"/Users/jangjiman/Developer/ALTON-worktrees/ap-design/data/ap/sample-2027/run1/.verify.py\", line 7, in <module>\n    print(json.dumps({'computed_key_index':opts.index(best),'conceptual_only':False,'details':'profits=%s best=%d'%(prof,best)}))\n                "
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "min ATC at q=20.00"
+    },
+    {
+     "computed_key_index": 1,
+     "conceptual_only": false,
+     "details": "q=15 profit=-87.50 avc=17.50"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c011-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": [
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "MC5=60 ATC4=52.5 ATC5=54.0 minATC at Q=4"
+    },
+    {
+     "computed_key_index": 0,
+     "conceptual_only": false,
+     "details": "profits=[-60, -50, -30, -15, -10, -20, -45] best Q=4"
+    }
+   ],
+   "conceptualOnly": [
+    false,
+    false
+   ]
+  }
+ },
+ "ap_microeconomics-c012-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MP=[30, 40, 30, 20, 10, 0], AP=[30.0, 35.0, 33.333333333333336, 30.0, 26.0, 21.666666666666668]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c012-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MP=[30, 40, 30, 20, 10, 0], first decline at worker 3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c012-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MP=[12, 18, 14, 10, 6, 2] peak at worker 2, onset 3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c012-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MP=[8, 10, 8, 6, 4, 2] peak at worker 2, TP rising=True"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c013-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "LRATC=min per row: {100: 6, 200: 6.5, 400: 6, 800: 6}; avg at 400=7.50"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c013-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{100: 12, 200: 9, 300: 8, 400: 9.5, 500: 9, 600: 11}"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c013-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "segments ['econ', 'econ', 'const', 'dis']; incremental cost 40->50 = 12.0 > LRATC, so option 3 wrong"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c013-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "{100: 50, 200: 40, 300: 36, 400: 34, 500: 38} avg300=41.67"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c014-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "econ profit=9000.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c014-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "acc=58000, eco=-16000"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c014-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "acc=180, eco=-30, matches=[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c014-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "acc=170000,imp=150000.0,eco=20000.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c015-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "profit=[-20, -18, -14, -12, -10, -15, -21], best=4, mc=[10, 8, 10, 10, 17, 18]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c015-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "profits [-10.0, -8.5, -6.0, -4.5, -4.0, -4.5, -6.0] best q=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c015-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MC(30)=34, opt Q=36, profit30=530.0, profit opt=548.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c015-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Profit-max quantity where MC<=P last: 4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c016-k0": {
+  "ok": false,
+  "reasons": [
+   "key_mismatch_deterministic"
+  ],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": null,
+    "conceptual_only": false,
+    "details": "q=300, profit=-300, avc=4.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c016-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "q=4,profit=-14,shutdown=-30,avc=10.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c016-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "q*=8.0, profit=-36.0, AVC=12.0, shutdown loss=-100"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c016-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "profits [-30, -28, -22, -14, -8, -6, -10] best Q=5"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c017-k0": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k1": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k2": {
+  "ok": false,
+  "reasons": [
+   "item_count_0_expected_2"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c017-k3": {
+  "ok": false,
+  "reasons": [
+   "missing_set_stimulus"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c018-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "site C matches neither perfect competition nor monopoly assumptions"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c018-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only option 0 correctly states a mismatch between PC assumptions and the single-seller bakery per the table."
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c018-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "monopoly P=60.0,Q=20.0; competition P=20.0,Q=40.0; matches=[0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c018-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Only option 0 consistent with table classification; true count=1"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c019-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Q*=20.0,P=60.0,MR21=18,rev max Q=25.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c019-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MR(6)=16>MC=8; Q*=8.0, P*=24.0; elasticity at 6=2.33"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c019-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Q=20.0,P=60.0,MR(21)=16,P(21)=58"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c019-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "P=80,MR=40,MC=20,Q*=25.0,Qeff=50.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c020-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MR=MC at Q=12, profit=36.0>0 so entry shifts demand left to P=ATC"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c020-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Q=6 P=7 ATC=8 profit=-6"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c020-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "SR Q=12.5,P=35.0,profit=212.5; LR a=10 + 20*sqrt(2),Q=5*sqrt(2),P=10 + 10*sqrt(2)>MC=10, demand shifted left, P=ATC"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c020-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Q=30.0,P=35.0,ATC=35.0,slope=-0.5,Qmin=51.96,ATCmin=30.98"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c021-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Unique NE (High,High) payoffs 30,30; Low,Low gives 50,50"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c021-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "NE=(L,L); combined profit gap=200"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c021-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "NE=(B,B) payoff 4 each; 2 below (A,A)"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c021-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "NE=(Cut,Cut) 25 each; per-firm loss 15; combined loss 30"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c022-k0": {
+  "ok": false,
+  "reasons": [
+   "option_count_4_expected_5"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c022-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MRP=[27, 21, 15, 12, 6] hires 3"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c022-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MRP at P=3 [30, 24, 18, 12, 6], at P=4 [40, 32, 24, 16, 8]; higher everywhere -> rightward shift; MRP decreasing"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c022-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": true,
+    "details": "Conceptual definition of derived demand; MP=[10, 8, 6, 5], MRP=[500, 400, 300, 250] decreasing, consistent with MRP-based demand."
+   },
+   "conceptualOnly": true
+  }
+ },
+ "ap_microeconomics-c023-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 2,
+    "conceptual_only": false,
+    "details": "hire while MRP>=wage; n=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c023-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "MRP=[60, 80, 60, 40, 28, 20] best L=4"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c023-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 1,
+    "conceptual_only": false,
+    "details": "hire 2"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c023-k3": {
+  "ok": false,
+  "reasons": [
+   "option_count_4_expected_5"
+  ],
+  "verification": {
+   "structure": false
+  }
+ },
+ "ap_microeconomics-c024-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=24, wage=20, MRP=MFC=32, competitive L=36"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c024-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "monopsony L=16, W=16; competitive L=24, W=20; MFC at L=24"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c024-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "monopsony L=12.0,W=8.0; competitive L=18.0,W=11.0; MRP at 12=14.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c024-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "L=10,w=30,MRP=50,Lc=14,wc=38"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c025-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "Qm=20.0,Qs=25.0,MSB=80.0,MC=60.0,MPB=60.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c025-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "market Q=10, efficient Q=8, MSB=30, MSC=38"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c025-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "qe=20, MB25=50, MC25=70, DWL=50"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c025-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "market Q=20, efficient Q=25, MSB at market=80, MC=60"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "nonrival and nonexcludable -> public good"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "only patrol is non-excludable and non-rival"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 4,
+    "conceptual_only": false,
+    "details": "only Z is non-rival and non-excludable"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c026-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 1,
+    "conceptual_only": false,
+    "details": "nonrival and nonexcludable -> public"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c027-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "before 0.392 after 0.300"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c027-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "bottom60 before 27, after 35; cumulative after >= before at all points: True"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c027-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "bottom40 15.0->25.0, closer=True, top 50.0->40.0"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-c027-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "computed_key_index": 0,
+    "conceptual_only": false,
+    "details": "old 14.000000000000002, new 19.0, closer True, matches [0]"
+   },
+   "conceptualOnly": false
+  }
+ },
+ "ap_microeconomics-f01-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=20,Pm=60,MR x-int 25"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "800.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "1.5"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "(40.0, 400.0)"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "(17.5, 65.0)"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=6,Pm=28,ATC=26.67"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "profit=8.0 dwl=18.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "ATC9=24.111 loss=19.000"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=20,Pm=60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "800.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "400.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "600.0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f01-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Qm=30,Pm=120"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "1800.0"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "900.0"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "900.0"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "45.0,1350.0,225.0"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f02-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "R dominant for A"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "[('R', 'R')]"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "[('R', 'R'), ('N', 'N')]"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f02-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Promote dominant for row"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "[('P', 'P')]"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "gain 10"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "80 vs 120"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f02-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "B dominant"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "[('B', 'D')]"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "totals"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "[('B', 'D')]"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "8>6 once, 3<6 after"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f02-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Low dominant for both; NE (45,45)"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "90,120,30"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "gain 20 loss 15 periods 2"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k0": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "(10.0, 80.0)"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "(12.0, 72.0)"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "(800.0, 648.0)"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "(400.0, 324.0)"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "(0.5, 800.0, 864.0)"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k1": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Q=16 P=6"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "3/4"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "12 8 5"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "-28"
+     },
+     {
+      "part": "e",
+      "pass": true,
+      "detail": "dwl=6"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k2": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "Q0=20,P0=60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "CS 400->256"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "lost=32"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ },
+ "ap_microeconomics-f03-k3": {
+  "ok": true,
+  "reasons": [],
+  "verification": {
+   "structure": true,
+   "python": {
+    "checks": [
+     {
+      "part": "a",
+      "pass": true,
+      "detail": "P=30,Q=60"
+     },
+     {
+      "part": "b",
+      "pass": true,
+      "detail": "CS 900 PS 450"
+     },
+     {
+      "part": "c",
+      "pass": true,
+      "detail": "Ed=-1"
+     },
+     {
+      "part": "d",
+      "pass": true,
+      "detail": "P26 Q68 CS1156"
+     }
+    ],
+    "conceptual_parts": []
+   }
+  }
+ }
+}

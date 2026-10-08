@@ -1,0 +1,111 @@
+{
+ "run": "run1",
+ "generatedAt": "2026-10-08T09:51:55.695Z",
+ "totalCostUsd": 20.05,
+ "ledgerSpent": 21.8355,
+ "cap": 80,
+ "calls": 1404,
+ "candidates": 368,
+ "passedAll": 188,
+ "adopted": 74,
+ "reserve": 114,
+ "duplicate": {
+  "adoptedPairs": 2701,
+  "similarPairs": 0
+ },
+ "rejectionReasons": {
+  "criterion_failed_scope_skill": 98,
+  "criterion_failed_key_scoring": 65,
+  "criterion_failed_stimulus_expression": 71,
+  "criterion_failed_distractor_explanation": 94,
+  "criterion_failed_exam_suitability": 101,
+  "solver_disagrees_or_flags_flaw": 13,
+  "instant_reject_wrong_stimulus": 7,
+  "key_mismatch_deterministic": 5,
+  "instant_reject_out_of_scope_knowledge": 12,
+  "key_is_much_longer_giveaway": 1,
+  "instant_reject_multiple_correct": 6,
+  "explanation_references_option_letter": 2,
+  "instant_reject_wrong_key": 7,
+  "difficulty_from_unfair_sources": 3,
+  "part_a_numeric_check_failed": 1,
+  "part_b_numeric_check_failed": 3,
+  "part_d_numeric_check_failed": 1,
+  "fable_spot_check_disagrees": 2,
+  "verification_error": 3,
+  "instant_reject_missing_condition": 7,
+  "resembles_known_exam_item": 1,
+  "missing_set_stimulus": 6,
+  "part_c_unknown_skill_N.C": 1,
+  "part_d_unknown_skill_N.D": 1,
+  "part_d_unknown_skill_N.E": 1,
+  "part_d_no_rubric_rows": 1,
+  "itemN_key_mismatch_deterministic": 2,
+  "item_count_N_expected_N": 3,
+  "itemN_verification_error": 1,
+  "option_count_N_expected_N": 2
+ },
+ "bySubject": {
+  "ap_calculus_ab": {
+   "candidates": 136,
+   "passedAll": 69,
+   "adoptedCandidates": 29,
+   "mcItemsAdopted": 28,
+   "frqBundlesAdopted": 1,
+   "cellsTotal": 34,
+   "cellsFilled": 29,
+   "yieldAdoptedOverCandidates": 0.213,
+   "costUsd": 7.39,
+   "callsPerAdopted": 18.4,
+   "unfilledCells": [
+    "ap_calculus_ab-c012",
+    "ap_calculus_ab-c014",
+    "ap_calculus_ab-f01",
+    "ap_calculus_ab-f03",
+    "ap_calculus_ab-f04"
+   ]
+  },
+  "ap_biology": {
+   "candidates": 112,
+   "passedAll": 51,
+   "adoptedCandidates": 21,
+   "mcItemsAdopted": 21,
+   "frqBundlesAdopted": 0,
+   "cellsTotal": 28,
+   "cellsFilled": 21,
+   "yieldAdoptedOverCandidates": 0.188,
+   "costUsd": 6.21,
+   "callsPerAdopted": 20.3,
+   "unfilledCells": [
+    "ap_biology-c010",
+    "ap_biology-c022",
+    "ap_biology-c024",
+    "ap_biology-f01",
+    "ap_biology-f02",
+    "ap_biology-f03",
+    "ap_biology-f04"
+   ]
+  },
+  "ap_microeconomics": {
+   "candidates": 120,
+   "passedAll": 68,
+   "adoptedCandidates": 24,
+   "mcItemsAdopted": 23,
+   "frqBundlesAdopted": 1,
+   "cellsTotal": 30,
+   "cellsFilled": 24,
+   "yieldAdoptedOverCandidates": 0.2,
+   "costUsd": 6.45,
+   "callsPerAdopted": 18.5,
+   "unfilledCells": [
+    "ap_microeconomics-c005",
+    "ap_microeconomics-c011",
+    "ap_microeconomics-c017",
+    "ap_microeconomics-c026",
+    "ap_microeconomics-f01",
+    "ap_microeconomics-f03"
+   ]
+  }
+ },
+ "spotChecked": 19
+}
