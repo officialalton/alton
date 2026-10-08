@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState, useTransition } from "react";
+import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { submitProblemErrorReportAction } from "@/lib/problem-error-reports/actions";
 import {
   MEMO_MAX,
@@ -58,6 +58,22 @@ export default function ProblemErrorReportButton({
   const formId = useId();
   const triggerRef = useRef<HTMLButtonElement | null>(null);
 
+  // 모바일: 키보드가 올라오면 시트를 키보드 위로 올린다(visualViewport).
+  const [vvBox, setVvBox] = useState<{ top: number; height: number } | null>(null);
+  useEffect(() => {
+    if (!open || typeof window === "undefined" || !window.visualViewport) return;
+    const vv = window.visualViewport;
+    const upd = () => setVvBox({ top: Math.round(vv.offsetTop), height: Math.round(vv.height) });
+    upd();
+    vv.addEventListener("resize", upd);
+    vv.addEventListener("scroll", upd);
+    return () => {
+      vv.removeEventListener("resize", upd);
+      vv.removeEventListener("scroll", upd);
+      setVvBox(null);
+    };
+  }, [open]);
+
   const types = reportTypesFor(role);
   const memoRequired = type === "other";
   const canSubmit = Boolean(type) && (!memoRequired || memo.trim().length > 0) && !pending;
@@ -98,8 +114,8 @@ export default function ProblemErrorReportButton({
         title={reported ? statusText[status!] : T.trigger}
         className={
           isIcon
-            ? `inline-flex h-7 w-7 items-center justify-center rounded text-ink leading-none transition-opacity hover:bg-black/10 ${reported ? "opacity-100" : "opacity-70 hover:opacity-100"}`
-            : `inline-flex min-h-[32px] items-center rounded-full border px-3 py-1 text-[11.5px] font-bold transition-colors ${
+            ? `inline-flex h-11 w-11 items-center md:h-7 md:w-7 justify-center rounded text-ink leading-none transition-opacity hover:bg-black/10 ${reported ? "opacity-100" : "opacity-70 hover:opacity-100"}`
+            : `inline-flex min-h-[44px] items-center rounded-full md:min-h-[32px] border px-3 py-1 text-[11.5px] font-bold transition-colors ${
                 reported ? "border-grey-200 bg-grey-50 text-grey-500" : "border-grey-300 text-grey-600 hover:bg-grey-100"
               }`
         }
@@ -112,6 +128,16 @@ export default function ProblemErrorReportButton({
       </button>
 
       {open && (
+        <div
+          className={isIcon ? "fixed inset-x-0 z-50 flex items-center justify-center bg-black/40 p-4 md:contents" : "contents"}
+          style={isIcon ? { top: vvBox?.top ?? 0, height: vvBox?.height ?? "100dvh" } : undefined}
+          onMouseDown={(e) => {
+            if (isIcon && e.target === e.currentTarget) close();
+          }}
+          onTouchStart={(e) => {
+            if (isIcon && e.target === e.currentTarget) close();
+          }}
+        >
         <form
           id={formId}
           onSubmit={(e) => {
@@ -124,7 +150,7 @@ export default function ProblemErrorReportButton({
               close();
             }
           }}
-          className={`rounded-lg border border-grey-200 bg-white p-3 text-[13px] ${isIcon ? "absolute left-0 top-full z-30 mt-1 w-[340px] shadow-lg" : "mt-2"}`}
+          className={`rounded-lg border border-grey-200 bg-white p-3 text-[13px] ${isIcon ? "max-h-full w-full max-w-[420px] overflow-y-auto shadow-2xl md:absolute md:right-0 md:top-full md:z-30 md:mt-1 md:max-h-none md:w-[340px] md:max-w-none md:overflow-visible md:shadow-lg" : "mt-2"}`}
           aria-label={T.trigger}
         >
           {done ? (
@@ -139,7 +165,7 @@ export default function ProblemErrorReportButton({
                   {types.map((t) => (
                     <label
                       key={t}
-                      className={`flex cursor-pointer items-start gap-2 rounded-lg border px-3 py-2 ${type === t ? "border-ink bg-grey-50" : "border-grey-200"}`}
+                      className={`flex min-h-[44px] cursor-pointer items-start gap-2 rounded-lg border px-3 py-2 ${type === t ? "border-ink bg-grey-50" : "border-grey-200"}`}
                     >
                       <input type="radio" name={`${formId}-type`} value={t} checked={type === t} onChange={() => setType(t)} className="mt-0.5" />
                       <span>
@@ -161,7 +187,7 @@ export default function ProblemErrorReportButton({
                 maxLength={MEMO_MAX}
                 disabled={pending}
                 placeholder={T.placeholder}
-                className="mt-1 w-full rounded-lg border border-grey-200 p-2 text-[13px] focus:border-ink focus:outline-none"
+                className="mt-1 w-full rounded-lg border border-grey-200 p-2 text-[16px] md:text-[13px] focus:border-ink focus:outline-none"
               />
               <p className="mt-0.5 text-right text-[11px] text-grey-400">
                 {memo.length}/{MEMO_MAX}
@@ -174,20 +200,21 @@ export default function ProblemErrorReportButton({
             </>
           )}
           <div className="mt-2 flex items-center justify-end gap-2">
-            <button type="button" onClick={close} className="min-h-[32px] rounded-lg px-3 py-1 text-[12px] font-bold text-grey-500 hover:bg-grey-100">
+            <button type="button" onClick={close} className="min-h-[44px] rounded-lg px-4 py-1 text-[13px] font-bold text-grey-500 md:min-h-[32px] md:px-3 md:text-[12px] hover:bg-grey-100">
               {done ? T.close : T.cancel}
             </button>
             {!done && (
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="min-h-[32px] rounded-lg bg-ink px-3 py-1 text-[12px] font-bold text-white disabled:opacity-40"
+                className="min-h-[44px] rounded-lg bg-ink px-4 py-1 text-[13px] md:min-h-[32px] md:px-3 md:text-[12px] font-bold text-white disabled:opacity-40"
               >
                 {pending ? T.sending : T.submit}
               </button>
             )}
           </div>
         </form>
+        </div>
       )}
     </div>
   );
