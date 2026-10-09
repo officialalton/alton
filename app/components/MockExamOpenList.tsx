@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { MockExamListRow, MockExamListState } from "@/lib/mock-exam/open-list";
-import { attemptLabel, listStateOf as listStateOfStatus } from "@/lib/mock-exam/open-list";
+import { attemptLabel, completedScoreText, listStateOf as listStateOfStatus } from "@/lib/mock-exam/open-list";
 import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines } from "@/lib/ap-exam/layouts";
 
 // 공개 모의고사 목록(학생·학부모 공용). 학생은 시작·이어서·결과 보기, 학부모는 읽기 전용(시작 불가).
@@ -64,7 +64,7 @@ export default function MockExamOpenList({
           <p className="mt-1 text-[12.5px] text-grey-500">
             {r.attempts.length > 1 && r.attempt?.attemptNo ? `${attemptLabel(r.attempt.attemptNo)} · ` : ""}
             {STATE_LABEL[r.state]}
-            {r.state === "graded" && r.attempt && r.attempt.correctCount !== null && ` · ${r.attempt.correctCount}/${r.attempt.totalCount} correct`}
+            {r.state === "graded" && r.attempt && completedScoreText(r.attempt)}
           </p>
           <Action row={r} readOnly={readOnly} busy={busyKey === r.key} onStart={onStart} onOpenResult={onOpenResult} resultHref={resultHref} />
           {r.attempts.length > 1 && (
@@ -76,7 +76,7 @@ export default function MockExamOpenList({
                     <span className="font-semibold">{attemptLabel(a.attemptNo) || "Attempt"}</span>
                     <span>
                       {STATE_LABEL[listStateOfStatus(a.status)]}
-                      {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} correct`}
+                      {completedScoreText(a)}
                     </span>
                     {a.status === "graded" && (resultHref ? (
                       <Link href={resultHref(a.id)} className="font-bold text-ink underline">View results</Link>

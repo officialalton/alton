@@ -1,3 +1,4 @@
+import { AP_LAYOUTS } from "@/lib/ap-exam/layouts";
 import type { MockExamAttemptSummary, MockExamCatalogRow } from "./attempt-data";
 
 // 모의고사 '배정' 폐지(2026-10-01) — 공개 세트 목록(카탈로그)과 학생의 응시를 한 줄 목록으로 합친다.
@@ -115,3 +116,18 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
 
 /** SAT / AP 목록 분리(AP 는 별도 층 — 홈의 SAT 다음 시험과 섞지 않는다). */
 export const isApRow = (r: MockExamListRow) => r.examProgram === "ap";
+
+/** 완료 카드의 점수 문구(앞의 " · " 포함) — 없으면 빈 문자열.
+ * AP 는 FRQ 가 자동 채점되지 않으므로 객관식 문항만 센다(결과 화면 "n / m multiple-choice correct"와 같은 기준).
+ * FRQ 만의 세트는 점수 대신 "Free-response practice". SAT 는 기존대로 "n/total correct". */
+export function completedScoreText(a: Pick<MockExamAttemptSummary, "status" | "correctCount" | "totalCount" | "examProgram" | "apSubject" | "apLabel">): string {
+  if (a.status !== "graded") return "";
+  if (a.examProgram === "ap") {
+    if (a.apLabel === "frq_practice") return " · Free-response practice";
+    if (a.correctCount === null) return "";
+    const frq = a.apLabel === "full_practice" && a.apSubject ? (AP_LAYOUTS[a.apSubject] ?? []).filter((s) => s.kind === "frq").reduce((n, s) => n + s.count, 0) : 0;
+    const mcTotal = Math.max(0, a.totalCount - frq);
+    return mcTotal > 0 ? ` · ${a.correctCount}/${mcTotal} multiple-choice correct` : "";
+  }
+  return a.correctCount !== null ? ` · ${a.correctCount}/${a.totalCount} correct` : "";
+}
