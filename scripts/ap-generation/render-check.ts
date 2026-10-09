@@ -9,7 +9,7 @@ import { itemContentHash } from "../../lib/ap-generation/verify-guard";
 
 const OUT = path.resolve(process.cwd(), "data/ap/render-check");
 // 재고(items.json) + 보조 배치(s1a-items.json, 있으면). 보조 후보도 렌더 보고서(contentHash 포함)에 들어가야 화면 검증·기록 대상이 된다.
-const SUPP_FILES = ["s1a-items", "v1ab-items", "v45ab-items"].map((f) => `data/ap/stock/${f}.json`).filter((f) => existsSync(path.resolve(process.cwd(), f))); // 보조·후속 배치(없으면 건너뜀)
+const SUPP_FILES = ["s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items"].map((f) => `data/ap/stock/${f}.json`).filter((f) => existsSync(path.resolve(process.cwd(), f))); // 보조·후속 배치(없으면 건너뜀)
 const SUPP = SUPP_FILES[0] ?? "";
 const items = [...(JSON.parse(readFileSync(path.resolve(process.cwd(), "data/ap/stock/items.json"), "utf-8")) as Parameters<typeof gateCandidate>[0][]), ...SUPP_FILES.flatMap((f) => JSON.parse(readFileSync(path.resolve(process.cwd(), f), "utf-8")) as Parameters<typeof gateCandidate>[0][])];
 const safe = (s: string) => s.replace(/[^A-Za-z0-9_.-]+/g, "_");
