@@ -12,6 +12,8 @@ vi.mock("@/lib/mock-exam/attempt-actions", () => ({
   toggleMockExamFlagAction: vi.fn(async () => ({ ok: true, value: undefined })),
   toggleMockExamSavedToPracticeAction: vi.fn(async () => ({ ok: true, value: undefined })),
   recordMockExamEntryAction: vi.fn(async () => ({ ok: true, value: undefined })),
+  enterApSectionAction: vi.fn(async () => ({ ok: true, value: { remaining: {} } })),
+  settleApAttemptAction: vi.fn(async () => ({ ok: true, value: { status: "in_progress", attempt: null } })),
 }));
 vi.mock("@/app/session/[id]/MockExamMathTools", () => ({ default: () => null, MockExamToolButtons: () => <span data-testid="calc-buttons" /> }));
 vi.mock("@/app/components/ProblemErrorReportButton", () => ({ default: () => <button type="button">Report a problem</button> }));
@@ -100,7 +102,7 @@ describe("ApExamResultView", () => {
     expect(screen.getByText(/AP scores \(1–5\) are not estimated/)).toBeInTheDocument();
     expect(screen.getByText("Topic 2.3")).toBeInTheDocument();
     expect(screen.getByTestId("frq-answer-a")).toHaveTextContent("My explanation");
-    expect(screen.getByText("Reference answer (not official scoring)")).toBeInTheDocument();
+    expect(screen.getByText("Reference answer and scoring guide (reference feedback, not official scoring)")).toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Report a problem" }).length).toBeGreaterThan(0);
     // 이 테스트의 레이아웃은 공식 구성이 아니므로 label 이 full_practice 여도 "Full Practice Exam" 을 보이지 않는다.
     expect(screen.getByTestId("ap-badge")).toHaveTextContent("Practice Set");
@@ -144,6 +146,8 @@ describe("부분 연습 세트: 제목·배지·시작 안내가 같은 뜻", ()
     render(<ApExamResultView attempt={part(["ap_mc_a"], "AP Calculus AB — Non-Calculator Practice", "mc_practice", [item("a1", "ap_mc_a", { response: "1", correct: true, correctIndex: 1 })])} />);
     expect(screen.getByTestId("ap-badge")).toHaveTextContent("Non-Calculator Practice");
     expect(screen.getByTestId("ap-set-guidance")).toHaveTextContent("29 multiple-choice questions in 62 minutes");
+    expect(screen.getAllByTestId("ap-coverage")[0]).toHaveTextContent("Covers Unit 1.");
+    expect(screen.getAllByTestId("ap-coverage")[1]).toHaveTextContent("Your result reflects only this unit");
   });
 });
 

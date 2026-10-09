@@ -1,5 +1,7 @@
 # Bio FRQ 완성 풀이 예시와 채점 가이드 (검토용 초안, 2026-10-09)
 
+> 갱신: 데이터형은 v2 로 재설계되었다 → `bio-frq-data-type-example-v2.md`. 아래 데이터형 예시는 참고용(구버전 설계). 무료 검사 통과는 구조적 안정성 증거일 뿐이다.
+
 코드가 생성한 번들 2개(시드 1300)를 그대로 옮겼다. **이 문서가 승인되기 전에는 Bio FRQ 를 추가 생성하거나 수선하지 않는다.** 모든 항목은 가상 실험이며 실제 연구가 아니다. 무료 결정적 검사(`lib/ap-generation/bio-frq-checks.ts`)와 설계도 검증(`blueprint.ts`)은 통과한 상태이며, 결과는 각 예시 끝에 적었다.
 
 ## 무료 결정적 검사 목록(LLM 호출 없음)
@@ -90,71 +92,71 @@
 
 ## 예시 2: 짧은 데이터 분석 FRQ (4점, 토픽 3.2, 대표 스킬 4.B)
 
-**Data analysis: a catalase-catalyzed reaction** — Mean oxygen released in 2 minutes (milliliters) ± 2SE for a catalase-catalyzed reaction at three levels of temperature
+**Data analysis: a catalase-catalyzed reaction** — Mean oxygen released in 2 minutes (milliliters) ± 2SE for a catalase-catalyzed reaction at three levels of temperature. n = 10 replicates per level.
 
 | Temperature | Mean (milliliters) ± 2SE | n |
 |---|---|---|
-| 10 °C | 4.9 ± 0.44 | 10 |
-| 37 °C | 16.4 ± 1.12 | 10 |
-| 70 °C | 2.3 ± 0.24 | 10 |
+| 30 °C | 13.9 ± 1.56 | 10 |
+| 37 °C | 16.1 ± 1.98 | 10 |
+| 70 °C | 2.6 ± 0.28 | 10 |
 
 설계도 요약: 개념 = Data analysis: trend, percent change, statistical overlap, and a supported claim. 학생이 거치는 사고 = Describe the trend across the three levels from the table values → Compute a percent change between two means → Use +/-2SE overlap to judge whether differences are supported and support a claim with the data. 독립 검증 = percent change and interval overlap re-computed by the separate bio_checks module from the table strings.
 
 ### 파트 A (1점, 스킬 4.B, 토픽 3.2)
 
-**문제**: Based on the data, describe the relationship between temperature and the oxygen released in 2 minutes across the three levels.
+**문제**: Describe how the oxygen released in 2 minutes changes across the three levels of temperature, and identify the level with the greatest oxygen released in 2 minutes. Use values from the table to support your description.
 
-**모범 답**: The oxygen released in 2 minutes peaks across the levels (4.9, 16.4, 2.3).
+**모범 답**: The oxygen released in 2 minutes peaks across the levels (13.9, 16.1, 2.6); it is greatest at 37 °C (16.1).
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
-- 행 A1 (1점): Describes the trend of the mean across the three levels (direction of change; citing values is optional)
-  - 인정해야 하는 의미: Describes the direction of change of the mean across the three levels (increase, decrease, peak, or dip) consistent with the data
+- 행 A1 (1점): Describes the direction of change across all three levels, identifies the level with the greatest value, and cites table values
+  - 인정해야 하는 의미: Describes the direction of change of the mean across the three levels consistent with the data / Identifies the level with the greatest mean and cites at least one table value
   - 허용 표현 예(전부가 아님): rises then falls; highest at the middle level
-  - 흔한 오류(점수 없음): describes only one pair of levels; describes a trend the data do not show
-  - 채점 메모: Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.
+  - 흔한 오류(점수 없음): describes only one pair of levels; describes a trend the data do not show; names a level that is not the greatest
+  - 채점 메모: Table interpretation (skill 4.B): no biology concept is required for this point.
 
 ### 파트 B (1점, 스킬 5.A, 토픽 3.2)
 
-**문제**: Calculate the percent change in the mean oxygen released in 2 minutes from 10 °C to 37 °C. Show your work.
+**문제**: Calculate the percent change in the oxygen released in 2 minutes from 70 °C to 37 °C. Show your work.
 
-**모범 답**: ((16.4 - 4.9) / 4.9) x 100 = 234.7%
+**모범 답**: ((16.1 - 2.6) / 2.6) x 100 = 519.2%.
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
 - 행 B1 (1점): Percent change with work shown (answer)
-  - 인정해야 하는 의미: 234.7%
+  - 인정해야 하는 의미: Computes the percent change correctly with a valid method (new minus old, divided by old, times 100)
   - 허용 표현 예(전부가 아님): percent change = (new - old) / old x 100
   - 흔한 오류(점수 없음): divides by the new value; forgets to multiply by 100
-  - 채점 메모: Award for the correct value with a valid method; equivalent forms and rounding within the tolerance are accepted.
+  - 채점 메모: Quantitative analysis (skill 5.A): award for the correct value with a valid method; equivalent forms and rounding within the tolerance are accepted. No biology concept is required.
 
 ### 파트 C (1점, 스킬 5.B, 토픽 3.2)
 
-**문제**: Using the error bars (±2SE), identify the pair of levels, if any, for which the mean oxygen released in 2 minutes is not statistically different.
+**문제**: Using the ±2SE values, determine whether the difference between the mean oxygen released in 2 minutes at 37 °C and at 30 °C is statistically supported. Justify your answer with the ±2SE ranges.
 
-**모범 답**: Answer: none of the pairs.
+**모범 답**: 37 °C: 14.12 to 18.08; 30 °C: 12.34 to 15.46. The ranges overlap, so the difference is not supported.
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
-- 행 C1 (1점): Identifies the pair whose ±2SE intervals overlap (or states none) (answer)
-  - 인정해야 하는 의미: Identifies the pair of levels (or none) whose ±2SE intervals overlap, consistent with the data
-  - 허용 표현 예(전부가 아님): the pair whose error bars overlap; none of the pairs differ
-  - 흔한 오류(점수 없음): compares only the means
-  - 채점 메모: Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.
+- 행 C1 (1점): States whether the difference is supported and justifies it by comparing the ±2SE ranges of the two levels
+  - 인정해야 하는 의미: Correctly states whether the difference between the two levels is statistically supported / Justifies by comparing the ±2SE ranges of the two levels (overlap or separation)
+  - 허용 표현 예(전부가 아님): the ranges overlap so the difference is not supported; compares the mean ± 2SE intervals of the two levels
+  - 흔한 오류(점수 없음): compares only the means; states the wrong conclusion for the ranges
+  - 채점 메모: Statistical reasoning (skill 5.B): no biology concept is required for this point.
 
 ### 파트 D (1점, 스킬 6.B/4.B, 토픽 3.2)
 
-**문제**: A student claims that oxygen released in 2 minutes is greatest at 37 °C. Use the data in the table, including the error bars (±2SE), to support the claim.
+**문제**: A student claims that oxygen released in 2 minutes is greatest at 37 °C. Use the data to support the claim, and explain a biological reason why the oxygen released in 2 minutes is lower at 70 °C than at 37 °C.
 
-**모범 답**: 16.4 ± 1.12 at 37 °C is higher than the other levels; the ±2SE intervals do not overlap.
+**모범 답**: The mean at 37 °C (16.1 ± 1.98) is the highest; at 70 °C the mean is 2.6. temperature far from the enzyme's optimum reduces activity (too cold: fewer effective collisions; too hot: denaturation changes the active site).
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
-- 행 D1 (1점): Cites the highest mean and states what the non-overlap/overlap of error bars shows (support)
-  - 인정해야 하는 의미: Cites the highest mean and compares it with the other levels / Uses the error bars (overlap or separation) to evaluate how strongly the data support the claim
-  - 허용 표현 예(전부가 아님): the error bars do not overlap so the difference is real; higher mean with separated intervals
-  - 흔한 오류(점수 없음): cites the highest mean but does not discuss variability
-  - 채점 메모: Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.
+- 행 D1 (1점): Supports the claim with data and explains the lower value by the effect of the condition on enzyme structure and function
+  - 인정해야 하는 의미: Supports the claim with data from the table (the highest mean compared with the others) / Explains that a condition away from the optimum alters the enzyme's shape (active site), lowering activity
+  - 허용 표현 예(전부가 아님): the condition changes the enzyme's shape so substrate binds less well; denaturation of the enzyme reduces the rate away from the optimum
+  - 흔한 오류(점수 없음): cites the highest mean but gives no structural explanation; attributes the change to the substrate running out
+  - 채점 메모: Biological explanation (skill 6.B and the topic 3.2 concept): this is the point that requires the enzyme concept. Award both elements for the point.
 
 무료 검사 결과: 결함 0
 

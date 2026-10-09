@@ -4,7 +4,7 @@
 // 결과: 콘솔 + data/ap/stock/partial-feasibility.json. 세트를 만들 수 없으면 무엇이 모자란지(문항 수·문항군·유형·단원)를 그대로 보고한다.
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { planPartialSet, type AssembleCandidate } from "../../lib/ap-exam/assemble";
+import { planFrqShortSet, planPartialSet, type AssembleCandidate } from "../../lib/ap-exam/assemble";
 import { AP_PARTIALS, AP_PARTIAL_SUBJECTS, sectionsForPartial, type ApPartialId } from "../../lib/ap-exam/layouts";
 import { itemContentHash, judgeScreenEntries, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
@@ -41,5 +41,13 @@ for (const subject of AP_PARTIAL_SUBJECTS) {
     if (plan.coverageGaps.length) console.log(`    단원 비중 미달(보고): ${plan.coverageGaps.join(", ")}`);
     out.push({ subject, partial: id, name: plan.name, ok: plan.ok, labelAllowed: plan.labelAllowed, poolSize: pool.length, composition: plan.composition, shortage: plan.shortage, coverageGaps: plan.coverageGaps });
   }
+}
+// 짧은 Free-Response 연습(2~4 묶음, 서로 다른 문항군): 공식 6문항을 못 채워도 만들 수 있는지.
+for (const subject of AP_PARTIAL_SUBJECTS) {
+  const pool = verified.filter((i) => i.apSubjectCode === subject);
+  const sp = planFrqShortSet(subject, pool.map(toC), { overlapMax: overlapArg ? Number(overlapArg) : 0 });
+  const c = sp.composition;
+  console.log(`- ${subject} 짧은 Free-Response 연습: ${sp.ok ? "조립 가능" : "불가"} · 묶음 ${c.bundles}개(문항군 ${c.families}, 유형 ${c.archetypes}) · 계산기 허용 ${c.calculatorAllowed}/불가 ${c.calculatorNotAllowed} · ${sp.totalMinutes}분 ${sp.shortage.join("; ")}`);
+  out.push({ subject, partial: "frq_short", name: sp.name, ok: sp.ok, poolFrq: pool.filter((i) => i.kind === "frq_bundle").length, composition: c, totalMinutes: sp.totalMinutes, shortage: sp.shortage });
 }
 writeFileSync("data/ap/stock/partial-feasibility.json", JSON.stringify(out, null, 1));

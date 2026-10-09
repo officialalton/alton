@@ -47,7 +47,7 @@ import { AP_LAYOUTS } from "@/lib/ap-exam/layouts";
 describe("MockExamOpenList — AB 부분 연습 세트 제목·배지·안내", () => {
   const ap = (id: string, name: string, label: "mc_practice" | "frq_practice", keys: string[]): MockExamCatalogRow => ({
     examSetId: id, setGroupId: `g-${id}`, name, description: null, difficultyTier: "standard", format: "ap_fixed" as never, publishedAt: null, attemptId: null, attemptStatus: null,
-    examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: label, apSections: AP_LAYOUTS.ap_calculus_ab.filter((x) => keys.includes(x.key)),
+    examProgram: "ap", apSubject: "ap_calculus_ab", apLabel: label, apSections: AP_LAYOUTS.ap_calculus_ab.filter((x) => keys.includes(x.key)), apUnits: ["4", "5", "6", "8"],
   });
   const rows = buildMockExamListRows([
     ap("n", "AP Calculus AB — Non-Calculator Practice", "mc_practice", ["ap_mc_a"]),
@@ -64,6 +64,8 @@ describe("MockExamOpenList — AB 부분 연습 세트 제목·배지·안내", 
     expect(g).toContain("Part A (2 questions, 30 min): calculator allowed. Part B (4 questions, 60 min): no calculator.");
     expect(screen.queryByText("Full Practice Exam")).toBeNull();
     expect(screen.queryByText("AP Multiple-Choice Practice")).toBeNull();
+    expect(screen.getAllByTestId("ap-coverage")[0]).toHaveTextContent("Covers Units 4, 5, 6, 8.");
+    expect(screen.getAllByTestId("ap-coverage").map((e) => e.textContent).join(" ")).toMatch(/not be read as achievement across the whole AP Calculus AB course/);
   });
 });
 

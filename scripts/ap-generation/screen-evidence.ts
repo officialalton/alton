@@ -10,8 +10,10 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { chromium, type Page } from "@playwright/test";
 import { gateCandidate } from "../../lib/ap-figures/gate";
-import { RAW_TEX_TOKENS } from "../../lib/ap-exam/explanation-math";
-import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
+import { scanRawMath, type RawMathHit } from "../../lib/ap-exam/raw-math-scan";
+// 토큰 단위 점검(lib/ap-exam/raw-math-scan.ts): KaTeX 수식·코드·이스케이프 달러는 제외하고 텍스트 노드의 원문 수식만 센다.
+const SCAN = `(${scanRawMath.toString()})`;
+import { AUTOMATED_LIMITATION, itemContentHash, RESULT_CHECK, SCREEN_CHECKS, STIMULUS_CHECK, type ScreenCheck, type ScreenCheckName, type ScreenEntry } from "../../lib/ap-generation/verify-guard";
 
 const arg = (n: string, d: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d; };
 const DB_URL = process.env.SUPABASE_TEST_DB_URL ?? "";
@@ -67,6 +69,9 @@ async function checkItem(page: Page, r: Row, shot: string): Promise<Record<Scree
     for (let i = 0; i < await areas.count(); i++) { const a = areas.nth(i); await a.fill("screen check"); if ((await a.inputValue()) !== "screen check") ok = false; await a.fill(""); }
     out.frq_input_works = ok ? { result: "pass", note: `typed into ${m.inputCount} part input(s), value retained` } : { result: "fail", note: "input did not retain text" };
   }
+  // 문제 영역(자료 텍스트·본문·선지)의 렌더되지 않은 원문 수식 점검(제출 전).
+  const qhits = (await page.evaluate(`(() => { const c = document.querySelector('[data-testid="ap-question-card"]'); return c ? ${SCAN}(c) : null; })()`)) as RawMathHit[] | null;
+  (out as Record<string, ScreenCheck>)[STIMULUS_CHECK] = qhits === null ? { result: "fail", note: "question card not found" } : qhits.length ? { result: "fail", note: `raw math visible before submit: ${qhits.slice(0, 2).map((h) => `${h.kind} "${h.token}" …${h.context}`).join(" | ")}` } : { result: "pass", note: "no unrendered math tokens in stimulus, stem or options (KaTeX/code/escaped-dollar excluded)" };
   await root.screenshot({ path: shot, type: "jpeg", quality: 55 });
   return out;
 }
@@ -79,18 +84,14 @@ async function resultPass(page: Page, rows: Row[]): Promise<Map<string, ScreenCh
   // 서버 렌더 스모크: 채점 완료 응시 URL 을 새로 열어도(서버 컴포넌트가 결과 화면을 렌더) 결과가 보여야 한다. 서버→클라이언트 함수 prop 같은 경계 오류는 여기서 500 으로 드러난다.
   await page.goto(page.url().includes("/student/mock-exam/") ? page.url() : page.url());
   await page.locator('[data-testid="ap-exam-result"]').waitFor({ state: "visible", timeout: 30_000 });
-  const found = await page.evaluate(() => [...document.querySelectorAll('[data-testid="ap-review-item"]')].map((li) => {
-    const ex = li.querySelector('[data-testid="ap-explanation"]');
-    let text = ""; if (ex) { const c = ex.cloneNode(true) as Element; c.querySelectorAll(".katex-mathml, annotation").forEach((n) => n.remove()); text = c.textContent ?? ""; }
-    return { id: li.getAttribute("data-set-item-id") ?? "", hasExplanation: !!ex, text };
-  }));
+  const found = (await page.evaluate(`[...document.querySelectorAll('[data-testid="ap-review-item"]')].map((li) => { const ex = li.querySelector('[data-testid="ap-explanation"]'); return { id: li.getAttribute("data-set-item-id") || "", hasExplanation: !!ex, hits: ex ? ${SCAN}(ex) : [] }; })`)) as { id: string; hasExplanation: boolean; hits: RawMathHit[] }[];
   const byId = new Map(found.map((f) => [f.id, f]));
   const out = new Map<string, ScreenCheck>();
   for (const r of rows) {
     const f = byId.get(r.set_item_id);
     if (!f) { out.set(r.set_item_id, { result: "fail", note: "result item not found" }); continue; }
-    const hit = RAW_TEX_TOKENS.exec(f.text);
-    out.set(r.set_item_id, hit ? { result: "fail", note: `raw TeX visible in explanation: ${hit[0]}` } : { result: "pass", note: f.hasExplanation ? "explanation math rendered (no raw TeX tokens)" : "no explanation text on result screen" });
+    const hit = f.hits[0];
+    out.set(r.set_item_id, hit ? { result: "fail", note: `raw math visible in explanation: ${hit.kind} "${hit.token}" …${hit.context}` } : { result: "pass", note: f.hasExplanation ? "explanation math rendered (no raw TeX tokens)" : "no explanation text on result screen" });
   }
   return out;
 }
@@ -135,9 +136,9 @@ async function main() {
           const key0 = keysByHash.get(hash)?.[0] ?? r.candidate_key;
           const shot = `${shotDir}/${key0.replace(/[^A-Za-z0-9_.-]/g, "_")}-${vp.w}x${vp.h}.jpg`;
           let checks: Record<ScreenCheckName, ScreenCheck>;
-          try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries(SCREEN_CHECKS.map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
-          const bad = SCREEN_CHECKS.filter((c) => checks[c].result === "fail");
-          if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${checks[c].note})`).join("; ")}`);
+          try { if (navErr) throw new Error(`cannot open question ${i + 1}: ${navErr}`); checks = await checkItem(page, r, shot); } catch (e) { checks = Object.fromEntries([...SCREEN_CHECKS, STIMULUS_CHECK].map((c) => [c, { result: "fail", note: `screen run error: ${(e as Error).message.replace(/\s+/g, " ").slice(0, 120)}` }])) as Record<ScreenCheckName, ScreenCheck>; }
+          const bad = ([...SCREEN_CHECKS, STIMULUS_CHECK] as const).filter((c) => (checks as Record<string, ScreenCheck>)[c]?.result === "fail");
+          if (bad.length) failures.push(`${key0} @${vp.w}: ${bad.map((c) => `${c}(${(checks as Record<string, ScreenCheck>)[c].note})`).join("; ")}`);
           for (const k of keysByHash.get(hash) ?? []) pending.push({ setItemId: r.set_item_id, entry: { candidate_key: k, checker_kind: "automated", content_hash: hash, problem_version_id: r.problem_version_id, kind: r.kind, viewport: `${vp.w}x${vp.h}`, screenshot: shot, timestamp: new Date().toISOString(), checker: `automated-playwright/${ver} local student exam screen`, checks } });
         }
       }
@@ -155,7 +156,7 @@ async function main() {
   }
   await browser.close();
   const out = arg("out", "tmp/ap-screen-evidence.json");
-  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v2", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
+  writeFileSync(out, JSON.stringify({ schema: "ap-screen-evidence/v3", generator: "playwright", limitations: AUTOMATED_LIMITATION, generatedAt: new Date().toISOString(), entries }, null, 1));
   console.log(`증거 항목 ${entries.length}건(후보 ${new Set(entries.map((e) => e.candidate_key)).size}개) → ${out}`);
   if (failures.length) { console.log(`점검 실패 ${failures.length}건(해당 후보는 mark-verified 가 거부):`); for (const f of failures) console.log(`- ${f}`); }
 }

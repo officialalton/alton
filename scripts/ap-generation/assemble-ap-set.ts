@@ -3,12 +3,14 @@
 //   부분 연습(첫 제품 형태, AB·BC):
 //     npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_ab --partial noncalc_mc|calc_mc|frq [--seq 2] [--overlap-max N] [--tier free|tutoring] [--execute]
 //       세트 이름은 고정: "AP Calculus AB — Non-Calculator Practice" / "— Calculator Practice" / "— Free-Response Practice"(--seq 2 이상이면 뒤에 번호)
+//   짧은 Free-Response 연습(서로 다른 문항군의 검증된 FRQ 묶음 2~4개, 문항당 15분. 공식 6문항 시험이 아님을 화면이 말한다):
+//     npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_ab --partial frq --short [--max-bundles 4] [--overlap-max N] [--tier free] [--execute]
 //   기존 방식(MC/FRQ/풀 라벨):
 //     npx tsx scripts/ap-generation/assemble-ap-set.ts --subject ap_calculus_ab --label mc_practice --name "..." [--tier ...] [--execute]
 //   비프로덕션: 위 명령에 --target worpsqwqgnspddnrtnvq --i-know-nonprod worpsqwqgnspddnrtnvq 를 붙인다(프로덕션·그 외 거부).
 import { readFileSync } from "node:fs";
 import { connectAllowlisted } from "./target";
-import { OVERLAP_DEFAULT, planApSet, planPartialSet, type AssembleCandidate, type AssembleOptions, type UnitWeight } from "../../lib/ap-exam/assemble";
+import { OVERLAP_DEFAULT, planApSet, planFrqShortSet, planPartialSet, type AssembleCandidate, type AssembleOptions, type UnitWeight } from "../../lib/ap-exam/assemble";
 import { AP_PARTIALS, apSectionLayout, partialSetName, sectionsForPartial, type ApPartialId, type ApSetLabel } from "../../lib/ap-exam/layouts";
 
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined; };
@@ -33,8 +35,15 @@ async function main() {
     calculator: r.calculator, keywordCode: r.keyword_code, itemFamilyId: r.item_family_id, difficulty: DIFF[r.difficulty_provisional ?? ""] ?? "medium", itemIndex: p.item_index,
     archetype: ((r.payload as { archetype?: string; template?: string } | null)?.archetype ?? (r.payload as { template?: string } | null)?.template) ?? null, skill: r.skill_primary,
   })));
-  let items: { sectionKey: string; position: number; c: AssembleCandidate }[]; let sectionKeys: string[];
-  if (partial) {
+  let items: { sectionKey: string; position: number; c: AssembleCandidate }[]; let sectionKeys: string[]; let customLayout: { sections: unknown[] } | null = null;
+  if (partial === "frq" && process.argv.includes("--short")) {
+    const plan = planFrqShortSet(subject, pool, { used, overlapMax: arg("overlap-max") ? Number(arg("overlap-max")) : undefined, maxBundles: arg("max-bundles") ? Number(arg("max-bundles")) : undefined });
+    const c = plan.composition;
+    console.log(`풀 ${pool.length}건 → FRQ 묶음 ${c.bundles}개(문항군 ${c.families}, 유형 ${c.archetypes}, 계산기 허용 ${c.calculatorAllowed} · 불가 ${c.calculatorNotAllowed}, 겹침 ${c.overlapUsed}), 연습 시간 ${plan.totalMinutes}분, 단원 ${JSON.stringify(c.units)}`);
+    for (const x of plan.layoutSections) console.log(`  ${x.key}: ${x.count}문항 · ${x.minutes}분 · ${x.calculator === "not_allowed" ? "계산기 불가" : "계산기 허용"}`);
+    if (!plan.ok) { for (const m of plan.shortage) console.log(`  모자람: ${m}`); console.log("짧은 FRQ 세트를 만들지 않습니다."); return; }
+    items = plan.items; sectionKeys = plan.layoutSections.map((x) => x.key); customLayout = { sections: plan.layoutSections };
+  } else if (partial) {
     let unitWeights: UnitWeight[] | undefined;
     try { const cur = JSON.parse(readFileSync(`data/ap/curriculum-2027/${subject}.json`, "utf-8")) as { weights: { axis: string; section: string; code: string; min?: number; max?: number }[] }; unitWeights = cur.weights.filter((x) => x.axis === "unit" && x.section === "mc").map((x) => ({ code: x.code, min: x.min ?? 0, max: x.max ?? 100 })); } catch { /* 가중치 파일 없음 */ }
     const plan = planPartialSet(subject, partial, pool, { used, overlapMax: arg("overlap-max") ? Number(arg("overlap-max")) : undefined, unitWeights });
@@ -58,7 +67,7 @@ async function main() {
   if (!execute) { console.log("dry-run 종료."); return; }
   const { data: dup } = await db.from("mock_exam_sets").select("id").eq("name", name).eq("exam_program", "ap").neq("status", "archived").limit(1);
   if (dup?.length) throw new Error(`같은 이름의 세트가 이미 있습니다(${name}). 새 번호는 --seq 로.`);
-  const layout = { sections: apSectionLayout(subject).filter((s) => sectionKeys.includes(s.key)) };
+  const layout = customLayout ?? { sections: apSectionLayout(subject).filter((s) => sectionKeys.includes(s.key)) };
   const { data: set, error: se } = await db.from("mock_exam_sets").insert({ name, difficulty_tier: "standard", status: "draft", format: "ap_fixed", readiness_status: "not_applicable", exam_program: "ap", ap_subject: subject, ap_label: label, section_layout: layout }).select("id").single();
   if (se || !set) throw new Error(se?.message);
   for (const it of items) {

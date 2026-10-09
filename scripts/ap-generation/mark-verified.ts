@@ -61,7 +61,7 @@ async function main() {
       const es = byCand.get(r.candidate_key);
       if (!es) continue;
       if (!r.render_verified) { skipped.push(`${r.candidate_key}: 렌더 검증이 먼저입니다.`); continue; }
-      const v = judgeScreenEntries(es, r.payload, process.cwd(), { requireResult: ev.schema === "ap-screen-evidence/v2" }); // screenshot 은 저장소 루트 기준 상대경로
+      const v = judgeScreenEntries(es, r.payload, process.cwd(), { requireResult: ev.schema === "ap-screen-evidence/v2" || ev.schema === "ap-screen-evidence/v3", requireStimulus: ev.schema === "ap-screen-evidence/v3" }); // screenshot 은 저장소 루트 기준 상대경로
       if (!v.ok) { skipped.push(`${r.candidate_key}: ${v.reason}`); continue; }
       const kind = es.every((e) => e.checker_kind === "automated") ? "automated" : es.every((e) => e.checker_kind === "human") ? "human" : "mixed";
       const prev = r.screen_evidence as { checkerKind?: string; contentHash?: string; evidenceSchema?: string } | null;

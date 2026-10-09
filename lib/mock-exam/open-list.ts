@@ -21,6 +21,7 @@ export type MockExamListRow = {
   apLabel: "full_practice" | "mc_practice" | "frq_practice" | null;
   /** 카탈로그가 주는 섹션 구성(보관된 지난 응시 행에는 없다). */
   apSections?: MockExamCatalogRow["apSections"];
+  apUnits?: string[] | null;
   /** 세트가 지금은 공개 목록에 없고 응시 기록만 남은 경우(보관된 세트의 지난 응시). */
   archived: boolean;
 };
@@ -81,6 +82,7 @@ export function buildMockExamListRows(catalog: MockExamCatalogRow[], attempts: M
       apSubject: c.apSubject ?? null,
       apLabel: c.apLabel ?? null,
       apSections: c.apSections ?? null,
+      apUnits: c.apUnits ?? null,
     };
   });
   for (const a of [...attempts].sort(byAttemptNoDesc)) {

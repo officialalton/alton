@@ -1,5 +1,7 @@
 import { createAdminClient } from "@/lib/supabase-admin";
 import { selectInChunks } from "@/lib/select-in-chunks";
+import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
+import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 
 // 2026-09-14 UAT: "문제 기록은 레거시로 남아있는 거 같은데" — 학생 포털 문제 기록을 v3 답안(session_problem_work)으로
 // 다시 만든다. 수업 문제·과제 문제 모두, 답을 저장(제출)했거나 채점된 것만. 정답·해설·자동 채점은 **교사 채점 뒤에만**
@@ -46,7 +48,7 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
   const { data: rawAnswers } = await admin
     .from("mock_exam_answers")
     .select(
-      "attempt_id, set_item_id, response, correct, saved_to_practice, updated_at, attempt:mock_exam_attempts!inner(id, student_id, attempt_no, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
+      "attempt_id, set_item_id, response, correct, saved_to_practice, updated_at, attempt:mock_exam_attempts!inner(id, student_id, attempt_no, status, exam_set_id, submitted_at, graded_at, exam_set:mock_exam_sets(name, exam_program)), item:mock_exam_set_items!inner(id, sat_domain, skill_code, problem_id, problem_version_id)"
     )
     .or("saved_to_practice.eq.true,correct.eq.false")
     .eq("attempt.student_id", studentId);
@@ -70,6 +72,7 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
     const attempt = one(a.attempt);
     const item = one(a.item);
     const examSet = one(attempt?.exam_set);
+    const isAp = (examSet?.exam_program as string | undefined) === "ap";
     const v = versionById.get((item?.problem_version_id as string) ?? "");
     const options = Array.isArray(v?.options) ? (v!.options as unknown[]).map(String) : [];
     const answersArr = Array.isArray(v?.answers) ? (v!.answers as unknown[]).map(String) : null;
@@ -85,7 +88,8 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
       startsAt: (attempt?.submitted_at as string | null) ?? (attempt?.graded_at as string | null) ?? null,
       unitTitle: (examSet?.name as string | undefined) ?? null,
       format,
-      passage: [((v?.passage as string | null) ?? "").trim(), ((v?.question as string | null) ?? "").trim()].filter(Boolean).join("\n\n"),
+      // AP: 자료 텍스트가 본문과 겹치면 숨기고 수식을 입힌다(My Notebook 목록·상세에서 원문 TeX 가 보이지 않게). SAT 는 그대로.
+      passage: [isAp ? (apPassageForDisplay((v?.passage as string | null) ?? "", (v?.question as string | null) ?? "") ?? "") : ((v?.passage as string | null) ?? "").trim(), ((v?.question as string | null) ?? "").trim()].filter(Boolean).join("\n\n"),
       options,
       figure: (v?.figure as unknown) ?? null,
       myChoice: format === "mc" && a.response != null ? Number(a.response) : null,
@@ -96,7 +100,7 @@ async function loadSavedMockExamPractice(studentId: string): Promise<ProblemHist
       gradeComment: null,
       correctIndex: graded ? ((v?.correct_index as number | null) ?? null) : null,
       acceptedAnswers: graded ? answersArr : null,
-      explanation: graded ? ((v?.explanation as string | null) ?? null) : null,
+      explanation: graded ? (isAp && v?.explanation ? autoMathExplanation(v.explanation as string) : ((v?.explanation as string | null) ?? null)) : null,
       satDomain: (item?.sat_domain as string | null) ?? null,
       skillCode: (item?.skill_code as string | null) ?? null,
       attemptNo: (attempt?.attempt_no as number | null | undefined) ?? null,

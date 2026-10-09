@@ -1,3 +1,4 @@
+// [규칙 분류] (a) 공식 근거 / (b) 이 원형만의 내부 설계 조건 / (c) 모든 문항 공통 수용 기준 — 이 파일은 (a)(c)만 담는다. (b) 는 lib/ap-generation/archetype-checks/ 에 둔다(docs/ap/bio-frq-rules.md §6 표).
 // Bio FRQ 무료 결정적 검사: 설계 오류를 LLM 호출 없이 잡는다(오너 2026-10-09). 존재하지 않는 토픽·모호한 대조군·자료와 허용 답의 모순·표시 문구 중복·열 이름 오류·문구 일치 루브릭.
 // 한계: 생물학적 사실의 정확성(예: 효소 최적 조건의 현실성)은 증명하지 못한다 — 게시 후 오류 신고 흐름이 처리한다.
 type Json = Record<string, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -32,7 +33,7 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
       if (trend === "increases" && DOWN.test(t) && !UP.test(t) && part.label === "A") add("accepted_answer_contradicts_data", `허용 답 "${t}" 는 증가 추세와 모순`);
       if (trend === "decreases" && UP.test(t) && !DOWN.test(t) && part.label === "A") add("accepted_answer_contradicts_data", `허용 답 "${t}" 는 감소 추세와 모순`);
     }
-    const tableNums = new Set([...tm.means.map(String), ...tm.means.map((v) => v.toFixed(1)), ...tm.se2.map(String), ...tm.se2.map((v) => v.toFixed(1)), ...tm.se2.map((v) => v.toFixed(2))]);
+    const tableNums = new Set([...tm.means.map(String), ...tm.means.map((v) => v.toFixed(1)), ...tm.se2.map(String), ...tm.se2.map((v) => v.toFixed(1)), ...tm.se2.map((v) => v.toFixed(2)), ...tm.means.flatMap((m, i) => [(m - tm.se2[i]).toFixed(2), (m + tm.se2[i]).toFixed(2), (m - tm.se2[i]).toFixed(1), (m + tm.se2[i]).toFixed(1)])]); // ±2SE 범위 경계도 표에서 파생된 수
     for (const part of p.parts ?? []) for (const n of (String(part.model_answer ?? "").match(/\d+\.\d+/g) ?? [])) { if (!tableNums.has(n) && !(p.facts ?? []).some((f: string) => String(f).includes(n)) && !/%|\$|=/.test(String(part.model_answer))) add("model_answer_number_not_in_data", `모범 답의 수 ${n} 가 표·사실에 없다`); }
   }
   // 4) 표시 문구 중복: (control) (control), 같은 단어 연속
@@ -41,6 +42,19 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
   // 5) 열 이름: 빈 이름·중복·pH 오기(Ph)·단위 누락
   const cols: string[] = p.stimulus?.data?.columns ?? []; if (cols.some((c) => !String(c).trim())) add("empty_column_name", "빈 열 이름"); if (new Set(cols.map((c) => String(c).toLowerCase())).size !== cols.length) add("duplicate_column_name", "열 이름 중복");
   for (const t of [...cols, ...texts]) if (/\bPh\b/.test(t)) add("ph_miscased", `"Ph" 는 "pH" 여야 한다: ${t}`);
+  // 7) 프롬프트가 자료 형식과 어긋나는 표현: 표 자료인데 "graph"/"error bars"(그래프의 오차 막대)를 말하지 않는다
+  if (p.stimulus?.kind === "table") for (const part of p.parts ?? []) if (/\b(graph|error bars?)\b/i.test(part.prompt ?? "")) add("prompt_mentions_graph_for_table", `파트 ${part.label}: 표 자료인데 그래프/오차 막대를 언급`);
+  // 9) ±2SE 표기와 실제 표 자료 일치(머리글·값·단위): 문구가 ±2SE 를 말하면 표 머리글에 2SE 와 ±, 모든 칸에 ±, 단위가 설계도 측정 단위와 같고 표시값이 사실(means, se×2)과 일치해야 한다
+  const text = [p.title, p.stimulus?.description, ...(p.parts ?? []).map((x: Json) => x.prompt)].join(" ");
+  if (/2SE/.test(text)) {
+    const cols: string[] = p.stimulus?.data?.columns ?? []; const rows: string[][] = p.stimulus?.data?.rows ?? []; const unit = p.blueprint?.experiment?.measurement?.unit;
+    const mi = cols.findIndex((c) => /2SE/.test(c)); if (mi < 0 || !/±/.test(cols[mi] ?? "")) add("se_header_missing", "문구는 ±2SE 를 말하는데 표 머리글에 ± 2SE 가 없다");
+    else {
+      if (unit && !cols[mi].includes(unit)) add("se_header_unit_mismatch", `머리글 단위가 설계도 측정 단위(${unit})와 다르다: ${cols[mi]}`);
+      const get = (k: string) => { const m = (p.facts ?? []).map(String).find((f: string) => f.startsWith(k + "=")); return m ? (JSON.parse(m.slice(k.length + 1)) as number[]) : null; }; const fm = get("means"), fs = get("se");
+      rows.forEach((r, i) => { const m = String(r[mi]).match(/(-?\d+(?:\.\d+)?)\s*±\s*(\d+(?:\.\d+)?)/); if (!m) { add("se_cell_format", `행 ${i + 1}: "평균 ± 2SE" 형식이 아니다`); return; } if (fm && Math.abs(Number(m[1]) - fm[i]) > 0.051) add("se_value_mismatch", `행 ${i + 1}: 표 평균 ${m[1]} ≠ 사실 ${fm[i]}`); if (fs && Math.abs(Number(m[2]) - 2 * fs[i]) > 0.011) add("se_value_mismatch", `행 ${i + 1}: 표 ±값 ${m[2]} ≠ 2×SE ${(2 * fs[i]).toFixed(2)}`); });
+    }
+  }
   out.push(...meaningRubricIssues(p));
   return out;
 }

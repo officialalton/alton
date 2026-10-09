@@ -870,7 +870,7 @@ function HistoryTab() {
         <tbody>
           {rows.map((r) => (
             <tr key={r.attemptId} className="border-t border-grey-100">
-              <td className="py-2">{r.studentName ?? r.studentId}</td>
+              <td className="py-2">{r.studentName ?? r.studentId}{r.isTestAccount && <span className="ml-1.5 rounded bg-grey-100 px-1.5 py-0.5 text-[10.5px] font-bold text-grey-600" data-testid="history-test-badge" title="테스트 계정 — 노출·난이도·전환 통계에서 제외됩니다">테스트</span>}</td>
               <td>{r.examSetName}{r.attemptNo > 1 ? ` · ${r.attemptNo}회차` : ""}</td>
               <td>{STATUS_LABEL[r.status] ?? r.status}</td>
               <td>{r.startedAt ? fmtDate(r.startedAt, undefined, tz) : "-"}</td>

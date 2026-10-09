@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import type { MockExamAttemptDetail, MockExamAttemptItem, MockExamAttemptSummary } from "@/lib/mock-exam/attempt-data";
-import { AP_SUBJECT_NAME, apBadgeText, apGuidanceLines } from "@/lib/ap-exam/layouts";
+import { AP_SUBJECT_NAME, apBadgeText, apCoverageLines, apGuidanceLines, apUnitsFromDomains } from "@/lib/ap-exam/layouts";
 import AttemptSwitcher from "./AttemptSwitcher";
+import { apPassageForDisplay } from "@/lib/ap-exam/stimulus-display";
 import { autoMathExplanation } from "@/lib/ap-exam/explanation-math";
 import { parseFrqAnswer } from "@/lib/ap-exam/frq-answer";
 import LearningText from "@/app/session/[id]/LearningText";
@@ -43,15 +44,16 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
     <div className="flex flex-col gap-4" data-testid="ap-exam-result">
       <section className="rounded-lg border border-grey-200 bg-white p-4">
         <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase="/student/mock-exam/" />
-        <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout })}</span></p>
-        {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
+        <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout, name: attempt.examSetName })}</span></p>
+        {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout, name: attempt.examSetName }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
+          {apCoverageLines({ subject: attempt.apSubject, units: apUnitsFromDomains(attempt.items.map((i) => i.satDomain)), layout: attempt.sectionLayout, name: attempt.examSetName, label: attempt.apLabel, result: true }).map((l, i) => <p key={l} className={`${i === 0 ? "font-semibold " : ""}mt-1 text-[11.5px] text-grey-600`} data-testid="ap-coverage">{l}</p>)}
         {mc.length > 0 && (
           <p className="mt-1 text-[20px] font-extrabold" data-testid="ap-mc-score">{correct} / {mc.length} <span className="text-[13px] font-semibold text-grey-500">multiple-choice correct ({Math.round((100 * correct) / mc.length)}%)</span></p>
         )}
         {bySection.length > 1 && (
           <ul className="mt-2 text-[12.5px] text-grey-600">{bySection.map((s) => <li key={s.key}>{s.label}: {s.correct}/{s.total}</li>)}</ul>
         )}
-        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown with a reference answer for self-review. They are not scored.</p>}
+        {frq.length > 0 && <p className="mt-2 text-[12.5px] text-grey-600">Free-response answers are shown next to a reference answer and scoring guide for self-review. This is reference feedback, not official scoring, and no score is given.</p>}
         <p className="mt-2 text-[11.5px] text-grey-500">AP scores (1–5) are not estimated for practice tests.</p>
       </section>
 
@@ -74,16 +76,16 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
           return (
             <li key={it.setItemId} className="rounded-lg border border-grey-200 bg-white p-4" data-testid="ap-review-item" data-set-item-id={it.setItemId}>
               <p className="mb-2 text-[12px] font-bold text-grey-500">Question {n}{it.format === "mc" ? (it.correct === true ? " · Correct" : it.response ? " · Incorrect" : " · Not answered") : " · Free response"}</p>
-              {it.passage && <LearningText text={it.passage} className="mb-2 text-[13.5px]" />}
+              {apPassageForDisplay(it.passage, it.question) && <LearningText text={apPassageForDisplay(it.passage, it.question) as string} className="mb-2 text-[13.5px]" />}
               {it.figure ? <ProblemFigure spec={it.figure} text={problemText(it.passage, it.question, it.options)} className="mb-3" /> : null}
-              {it.question && <LearningText text={it.question} className="mb-2 font-semibold text-[14px]" />}
+              {it.question && <LearningText text={autoMathExplanation(it.question)} className="mb-2 font-semibold text-[14px]" />}
               {it.format === "mc" && it.options ? (
                 <ul className="flex flex-col gap-1.5">
                   {it.options.map((o, i) => {
                     const isKey = it.correctIndex === i, mine = it.response === String(i);
                     return (
                       <li key={i} className={`flex gap-2 rounded-lg border px-3 py-1.5 text-[13px] ${isKey ? "border-green bg-green/10" : mine ? "border-red bg-red/5" : "border-grey-200"}`}>
-                        <span className="font-bold">{LETTERS[i]}</span><span className="min-w-0 break-words"><LearningText text={o} /></span>
+                        <span className="font-bold">{LETTERS[i]}</span><span className="min-w-0 break-words"><LearningText text={autoMathExplanation(o)} /></span>
                         {isKey && <span className="ml-auto text-[11px] font-bold text-green">Correct answer</span>}
                         {mine && !isKey && <span className="ml-auto text-[11px] font-bold text-red">Your answer</span>}
                       </li>
@@ -94,7 +96,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
                 <div className="flex flex-col gap-2">
                   {(it.parts ?? []).map((p) => (
                     <div key={p.label}>
-                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={p.prompt} className="inline" /></div>
+                      <div className="text-[12.5px] font-semibold"><span>({p.label}) [{p.points} pt]</span> <LearningText text={autoMathExplanation(p.prompt)} className="inline" /></div>
                       <p className="mt-1 whitespace-pre-wrap rounded border border-grey-200 bg-grey-50 px-3 py-2 text-[13px]" data-testid={`frq-answer-${p.label}`}>{parseFrqAnswer(it.response ?? "")[p.label] || "(no answer)"}</p>
                     </div>
                   ))}
@@ -102,7 +104,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
               )}
               {(it.explanationEn ?? it.explanation) && (
                 <div className="mt-3 rounded-lg bg-grey-50 p-3" data-testid="ap-explanation">
-                  <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer (not official scoring)" : "Explanation"}</p>
+                  <p className="mb-1 text-[11.5px] font-bold text-grey-500">{it.format === "essay" ? "Reference answer and scoring guide (reference feedback, not official scoring)" : "Explanation"}</p>
                   <LearningText text={autoMathExplanation((it.explanationEn ?? it.explanation) as string)} className="whitespace-pre-wrap text-[13px]" />
                 </div>
               )}
