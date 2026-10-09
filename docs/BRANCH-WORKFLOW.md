@@ -137,3 +137,8 @@ done
 - **의도된 수정만 예외**: 실제 repo config 를 일부러 고칠 때는 `ALLOW_CONFIG_TOML=1 CONFIG_TOML_NOTE="<작업 메모 8자 이상>" git commit …`. 표식만 있고 메모가 없으면 차단.
 - **테스트**: `lib/dev/config-toml-guard.test.ts` 가 순수 함수(양성·음성)와 HEAD 의 `supabase/config.toml` 을 검사한다(격리 값이 커밋되면 vitest 가 실패).
 - **스테이징 규칙(재확인)**: 스택이 떠 있는 동안에는 `git add -A`/`git commit -a` 금지 — 경로를 지정해 스테이징한다.
+
+## 통합 테스트 대상 DB 가드 (2026-10-09)
+사고: `vitest run lib/ap-exam` 이 `SUPABASE_TEST_DB_URL` 없이 실행돼 코드의 기본값(공유 54422)에 실제로 연결해 쓰기를 했다(실행 ID `apxmv0l3bejc2rc` 등, 로컬 시각 10-08 23:28). 테스트가 자기 행을 지워 잔여 행은 없었지만, 공유 스택에 쓰기·시퀀스 소모가 있었고 다른 세션과 충돌할 수 있었다.
+- `*.integration.test.ts` 는 이제 vitest `integration` 프로젝트의 globalSetup(`vitest.integration-guard.ts`)이 **테스트 시작 전에** `SUPABASE_TEST_DB_URL`·`SUPABASE_TEST_API_URL` 을 검사해, 미지정이거나 공유 포트(54420~54429·54320~54329 계열)면 중단한다. 격리 스택(`scripts/dev/isolated-stack.sh`)을 띄우고 두 변수를 그 포트로 지정한다.
+- 조정 세션이 공유 스택에서 의도적으로 돌릴 때만 `ALLOW_SHARED_TEST_DB=1 SHARED_TEST_DB_NOTE="<사유 8자 이상>"`. 단위 테스트(`--project unit`)는 영향 없음. 테스트: `lib/dev/integration-db-guard.test.ts`.
