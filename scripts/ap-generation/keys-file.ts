@@ -13,4 +13,4 @@ export function readKeysFile(file: string): { keys: string[]; sectionOf: Map<str
   }
   return { keys: raw.split("\n").map((l) => l.trim()).filter(Boolean), sectionOf };
 }
-export const STOCK_FILES = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items"];
+export const STOCK_FILES = ["items", "s1a-items", "v1ab-items", "v45ab-items", "bc-topup-items", "graph-s1-items", "graph-s2a-items", "graph-s2b-items", "graph-s3a-items", "graph-s3b-items", "graph-s3c-items", "graph-s3d-items", "graph-s3e-items", "graph-s3f-items", "graph-s3g-items"];
