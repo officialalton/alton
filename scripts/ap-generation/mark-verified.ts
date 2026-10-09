@@ -27,7 +27,11 @@ async function main() {
   const { data: admin } = await db.from("profiles").select("id").eq("role", "admin").limit(1).maybeSingle();
   const { data, error } = await db.from("ap_candidate_items").select("candidate_key, ap_subject_code, kind, payload, render_verified, screen_verified, screen_evidence, defect_flags").eq("is_current", true).eq("review_state", "auto_passed").is("problem_id", null);
   if (error) throw new Error(error.message);
-  const rows = data ?? [];
+  // --keys-file <JSON 배열 또는 줄 단위 후보 키>: 선택된 후보만 대상으로 한다(예: AB 풀 세트 선택 48건).
+  const keysFile = arg("keys-file");
+  const only = keysFile ? new Set((() => { const t = readFileSync(path.resolve(process.cwd(), keysFile), "utf-8").trim(); return t.startsWith("[") ? (JSON.parse(t) as string[]) : t.split("\n").map((l) => l.trim()).filter(Boolean); })()) : null;
+  const rows = (data ?? []).filter((r) => !only || only.has(r.candidate_key));
+  if (only) console.log(`선택 목록 ${only.size}건 중 DB 대상 ${rows.length}건`);
   if (has("render")) {
     const reportPath = path.resolve(process.cwd(), arg("report") ?? "data/ap/render-check/report.json");
     const report = JSON.parse(readFileSync(reportPath, "utf-8")) as { results: RenderReportRow[] };
