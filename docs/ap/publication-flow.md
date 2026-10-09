@@ -120,3 +120,11 @@ select * from ap_stock_by_batch_v;           -- 현재 vs 이전 적재 대조
 - My Notebook 목록 미리보기도 수식을 그린다. Topics to review 는 코드와 토픽 이름(`Topic 1.4 · …`). MC 전용 세트에는 Free response 탭이 없다. 재응시 뒤 결과 화면에 `Attempt 1 | Attempt 2` 전환이 있다.
 - 시간 소진: 마지막(단일) 섹션이 끝나면 자동 제출, 중간 섹션은 "Go to next section" 버튼(SAT 고정형은 해당 섹션만 잠그고 모든 섹션이 잠기거나 직접 제출할 때 마감 — 단일 섹션인 AP 부분 세트는 자동 제출로 맞춘다).
 - 목록 상태: 카탈로그의 진행 상태를 신뢰해 `In progress — Continue` 로 보인다. AP 는 화면을 여는 순간 타이머가 돌므로 섹션 시간 저장이 'assigned' 응시를 'in_progress' 로 올린다(마이그레이션 `20262100000405`, AP 섹션만, SAT 불변).
+
+## 9. 보조 배치와 칸 목표 명령(2026-10-09 3차)
+**18개(AB 계산기 필수 MC 3원형) 보조 배치**: 라벨 `ab-calc-mc-2026-10-09`. 18행 = auto_passed 16 + exact_duplicate 2(diffeq_value_calc 의 작은 매개변수 공간에서 동일 문항 발생), 문항군 3(원형당 1; 군당 유효 2개 상한 → 유효 6). 렌더·학생 화면 검증 전에는 사용하지 않는다.
+1. `npx tsx scripts/ap-generation/stock.ts`(한 번의 계산으로 items.json·s1a-items.json·v1ab-items.json·v45ab-items.json 동시 갱신) → `npx tsx scripts/ap-generation/defect-scan.ts --extra data/ap/stock/s1a-items.json --extra data/ap/stock/v1ab-items.json --extra data/ap/stock/v45ab-items.json`
+2. 안전 병합 importer(기존 검증·변환 필드 보존): `npx tsx scripts/ap-generation/import-candidates.ts --items data/ap/stock/v1ab-items.json --batch ab-calc-mc-2026-10-09 --supplement --report`(dry-run) → 같은 명령에 `--execute`.
+3. (선택, AB 보강 15개) `--items data/ap/stock/v45ab-items.json --batch ab-reinforce-2026-10-09 --supplement`.
+4. 점검: `npx tsx scripts/ap-generation/stock-consistency.ts`(보조 파일 3개를 합쳐 DB 현재 배치와 비교).
+**재고 목표(마이그레이션 404 적용 후)**: `npx tsx scripts/ap-generation/stock-targets.ts`(파일 생성·합계/칸별 부족 출력) → `--load`(dry-run) → `--load --execute` → 적재 후 `--verify`(파일 칸별 부족 = DB `ap_stock_cell_shortfall_v`). 합계는 `ap_stock_total_v`. 로컬 롤백 트랜잭션(402~404 + 851행 재현)에서 파일과 뷰의 28개 칸 목표가 전부 일치함을 확인했다.

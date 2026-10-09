@@ -23,7 +23,6 @@ export function topicOf(i: MockExamAttemptItem): string {
 
 export default function ApExamResultView({ attempt, attempts, topicNames }: { attempt: MockExamAttemptDetail; attempts?: MockExamAttemptSummary[]; topicNames?: Record<string, string> }) {
   const [filter, setFilter] = useState<Filter>("all");
-  const attemptHref = (id: string) => `/student/mock-exam/${id}`; // 서버 페이지에서 함수를 넘기지 않는다(클라이언트 컴포넌트 경계)
   const layout = attempt.sectionLayout ?? [];
   const mc = attempt.items.filter((i) => i.format === "mc");
   const frq = attempt.items.filter((i) => i.format === "essay");
@@ -43,7 +42,7 @@ export default function ApExamResultView({ attempt, attempts, topicNames }: { at
   return (
     <div className="flex flex-col gap-4" data-testid="ap-exam-result">
       <section className="rounded-lg border border-grey-200 bg-white p-4">
-        <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHref={attemptHref} />
+        <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase="/student/mock-exam/" />
         <p className="text-[12px] font-bold text-grey-500">{subject} · <span data-testid="ap-badge">{apBadgeText({ subject: attempt.apSubject, label: attempt.apLabel, layout: attempt.sectionLayout })}</span></p>
         {apGuidanceLines({ subject: attempt.apSubject, layout: attempt.sectionLayout }).map((l) => <p key={l} className="mt-1 text-[11.5px] text-grey-500" data-testid="ap-set-guidance">{l}</p>)}
         {mc.length > 0 && (

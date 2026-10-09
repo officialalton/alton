@@ -98,7 +98,7 @@ export default async function StudentMockExamAttemptPage({ params }: { params: P
           </Link>
         )}
       </div>
-      {isGraded ? <MockExamResultView attempt={attempt} readOnly={false} attempts={attempts} attemptHref={(id) => `/student/mock-exam/${id}`} /> : <MockExamTakeClient attempt={attempt} />}
+      {isGraded ? <MockExamResultView attempt={attempt} readOnly={false} attempts={attempts} attemptHrefBase="/student/mock-exam/" /> : <MockExamTakeClient attempt={attempt} />}
     </main>
   );
 }

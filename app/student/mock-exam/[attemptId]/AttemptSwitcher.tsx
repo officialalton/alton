@@ -5,12 +5,12 @@ import { attemptLabel } from "@/lib/mock-exam/open-list";
 export default function AttemptSwitcher({
   attempt,
   attempts,
-  attemptHref,
+  attemptHrefBase,
   onSelect,
 }: {
   attempt: MockExamAttemptDetail;
   attempts?: MockExamAttemptSummary[];
-  attemptHref?: (id: string) => string;
+  attemptHrefBase?: string;
   onSelect?: (id: string) => void;
 }) {
   const graded = (attempts ?? []).filter((a) => a.status === "graded").sort((a, b) => (a.attemptNo ?? 0) - (b.attemptNo ?? 0));
@@ -26,8 +26,8 @@ export default function AttemptSwitcher({
         const cls = `rounded-full border px-3 py-1 text-[12px] font-bold ${current ? "border-ink bg-ink text-white" : "border-grey-300 text-grey-600 hover:bg-grey-100"}`;
         const text = `${attemptLabel(a.attemptNo)}${a.attemptNo === latestNo ? " (latest)" : ""}`;
         if (current) return <span key={a.id} aria-current="true" className={cls}>{text}</span>;
-        return attemptHref ? (
-          <a key={a.id} href={attemptHref(a.id)} className={cls}>{text}</a>
+        return attemptHrefBase ? (
+          <a key={a.id} href={`${attemptHrefBase}${a.id}`} className={cls}>{text}</a>
         ) : (
           <button key={a.id} type="button" onClick={() => onSelect?.(a.id)} className={cls}>{text}</button>
         );

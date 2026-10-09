@@ -7,7 +7,7 @@ export type KeyCondition = { condition: string; evidence: string };
 export type Misconception = { id: string; description: string };
 export type BlueprintPart = { label: string; skills: string[]; topics: string[]; points: number; accepted_answers: string[]; rubric_rows: { row_id: string; points: number; criterion: string; elements: string[] }[] };
 export type BioExperiment = {
-  fictional: boolean; design: "experimental" | "observational"; independent_variables: string[]; dependent_variable: string; controls: string[]; replicates_per_group: number;
+  fictional: boolean; control_rationale?: string; control_not_applicable?: string; design: "experimental" | "observational"; independent_variables: string[]; dependent_variable: string; controls: string[]; replicates_per_group: number;
   measurement: { variable: string; unit: string }; claims: { text: string; scope: "association" | "causation" }[]; ced_topics_used: string[];
 };
 export type MicroModel = { initial_state: string; changed_conditions: string[]; held_constant: string[]; checks: string[]; key_assumptions_id: string; explanation_assumptions_id: string };
@@ -66,7 +66,7 @@ function bioExperimentRules(bp: Partial<Blueprint>, ctx: BlueprintContext, add: 
   const e = bp.experiment; if (!e) return add("bio_experiment_missing", "Bio 설계도에는 experiment(자료 먼저) 필요");
   if (e.fictional !== true) add("bio_must_be_fictional", "가상 실험을 실제 연구처럼 제시하면 안 된다(fictional=true)");
   if (e.design !== "experimental" && e.design !== "observational") add("bio_design_type", "design 은 experimental/observational");
-  if (e.design === "experimental") { if ((e.independent_variables ?? []).length !== 1) add("bio_one_variable", "실험 설계는 독립변수가 정확히 1개여야 한다"); if (!(e.controls ?? []).length) add("bio_controls_missing", "대조군/대조 조건 필요"); }
+  if (e.design === "experimental") { if ((e.independent_variables ?? []).length !== 1) add("bio_one_variable", "실험 설계는 독립변수가 정확히 1개여야 한다"); if (!(e.controls ?? []).length && !str(e.control_not_applicable, 20)) add("bio_controls_missing", "대조군/대조 조건 필요(없으면 control_not_applicable 사유 20자 이상)"); if ((e.controls ?? []).length && !str(e.control_rationale, 15)) add("bio_control_rationale_missing", "대조군이 왜 기준 조건인지 설명(control_rationale) 필요 — 모호한 대조군 방지"); }
   if (!str(e.dependent_variable)) add("bio_dependent_variable", "종속변수 필요");
   if (!(e.replicates_per_group >= 3)) add("bio_replicates", "집단당 반복 3 이상 필요");
   if (!e.measurement || !str(e.measurement.variable) || !str(e.measurement.unit)) add("bio_measurement", "측정 변수와 단위 정의 필요");

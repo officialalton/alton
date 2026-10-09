@@ -3,19 +3,14 @@ from calc_ab_frq import row, part
 from bp import frq_blueprint
 
 SCEN = [
-    {"org": "pill bugs (isopods)", "iv": "relative humidity of the chamber half", "levels": ["30%", "60%", "90%"], "ctrl": 1, "dv": "number of pill bugs found in the test half of the chamber after 10 minutes (out of 20)", "unit": "pill bugs", "m0": 8.0, "eff": [-4.0, 0.0, 6.0], "sd": 2.2,
+    {"org": "pill bugs (isopods)", "iv": "relative humidity of the chamber half", "levels": ["30%", "60%", "90%"], "ctrl": 1, "ctrl_why": "the standard laboratory humidity used as the reference condition", "dv": "number of pill bugs found in the test half of the chamber after 10 minutes (out of 20)", "unit": "pill bugs", "m0": 8.0, "eff": [-4.0, 0.0, 6.0], "sd": 2.2,
      "behavior": "kinesis or taxis"},
-    {"org": "bean seedlings", "iv": "wavelength of light shone on one side of the shoot", "levels": ["white light (control)", "red light", "blue light"], "ctrl": 0, "dv": "angle of stem curvature toward the light source after 24 hours", "unit": "degrees", "m0": 4.0, "eff": [0.0, 6.0, 38.0], "sd": 6.0,
+    {"org": "bean seedlings", "iv": "wavelength of light shone on one side of the shoot", "levels": ["white light (control)", "red light", "blue light"], "ctrl": 0, "ctrl_why": "unfiltered white light is the reference condition containing all wavelengths", "dv": "angle of stem curvature toward the light source after 24 hours", "unit": "degrees", "m0": 4.0, "eff": [0.0, 6.0, 38.0], "sd": 6.0,
      "behavior": "phototropism"},
-    {"org": "zebrafish larvae", "iv": "water temperature", "levels": ["18 °C", "26 °C", "34 °C"], "ctrl": 1, "dv": "mean swimming speed during a 1-minute observation", "unit": "mm per second", "m0": 11.0, "eff": [-5.0, 0.0, 4.5], "sd": 2.4, "behavior": "response to temperature"},
+    {"org": "zebrafish larvae", "iv": "water temperature", "levels": ["18 °C", "26 °C", "34 °C"], "ctrl": 1, "ctrl_why": "26 °C is the standard rearing temperature used as the reference condition", "dv": "mean swimming speed during a 1-minute observation", "unit": "mm per second", "m0": 11.0, "eff": [-5.0, 0.0, 4.5], "sd": 2.4, "behavior": "response to temperature"},
 ]
 
-def _alts(pk, mapping):
-    """루브릭 행에 허용 표현(alt_solutions)과 흔한 오류(common_errors)를 채운다(문구 일치만으로 채점하지 않게)."""
-    for pt in pk["parts"]:
-        for r in pt["rubric_rows"]:
-            a = mapping.get(r["row_id"])
-            if a: r["alt_solutions"] = a.get("alt", r["alt_solutions"]); r["common_errors"] = a.get("err", r["common_errors"])
+from bp import meaning as _meaning
 
 def frq_bio_investigation(rng):
     s = rng.choice(SCEN); n = rng.choice([8, 10, 12])
@@ -36,8 +31,8 @@ def frq_bio_investigation(rng):
     parts = [
         part("A", f"A student investigates how the {iv_short} affects the {s['org']}' response. Identify the independent variable in the investigation.", 1, "explain", ["3.C"], f"The independent variable is the {iv_short}.", [
             row("A1", 1, "Identifies the independent variable", [iv_short], opt=["the levels tested: " + ", ".join(s["levels"])])]),
-        part("B", f"Identify the group that served as the control in the investigation, and explain why a control group is needed.", 1, "explain", ["3.C"], f"The control group was the {s['levels'][ctrl]} group, which provides a baseline for comparison.", [
-            row("B1", 1, "Names the control group and states it provides a baseline/comparison for the effect of the variable", [f"{s['levels'][ctrl]}", "baseline for comparison"], both=True)]),
+        part("B", f"Identify the group that served as the control in the investigation, and explain why a control group is needed.", 1, "explain", ["3.C"], f"The control group was the {s['levels'][ctrl].replace(' (control)', '')} group, which provides a baseline for comparison.", [
+            row("B1", 1, "Names the control group and states it provides a baseline/comparison for the effect of the variable", [f"{s['levels'][ctrl].replace(' (control)', '')}", "baseline for comparison"], both=True)]),
         part("C", "State a null hypothesis for the investigation.", 1, "explain", ["3.B"], f"There is no difference in the {s['dv'].split(' after')[0].split(' during')[0]} among the groups; the {iv_short} has no effect.", [
             row("C1", 1, "States no effect or no difference in the dependent variable among the groups", ["no difference", "no effect"], opt=["among the groups", "regardless of the " + iv_short.split(' of ')[0]])]),
         part("D", f"A student claims that {claim}. Using the data in the table, support the student's claim.", 1, "explain", ["6.B", "4.B"],
@@ -47,15 +42,15 @@ def frq_bio_investigation(rng):
     pk = {"archetype": "frq_bio_investigation", "template": "short_scientific_investigation", "topic": "8.1", "extra_topics": [], "skill": "3.C", "representative_skill": "3.C", "calculator": "allowed", "title": f"Investigation of {s['org']}",
             "stimulus": stim, "parts": parts, "total_points": 4, "est_minutes": 8,
             "facts": [f"means={means}", f"se={se}", f"ctrl={ctrl}", f"tgt={tgt}", f"overlap_pairs={[(i,j) for i in range(3) for j in range(i+1,3) if overlap(i,j)]}"], "context": f"{s['org']} / {s['behavior']}"}
-    _alts(pk, {"A1": {"alt": ["the factor the experimenter deliberately changed", "the manipulated variable"], "err": ["names the measured response (dependent variable)"]},
-               "B1": {"alt": ["the group that does not receive the treatment of interest", "the reference group used for comparison"], "err": ["names a treated group as the control", "says a control makes the results larger"]},
-               "C1": {"alt": ["the independent variable does not affect the dependent variable", "any differences are due to chance"], "err": ["states a prediction of a difference instead of no effect"]},
-               "D1": {"alt": ["the means differ by more than the variability", "the +/-2SE intervals are separated"], "err": ["cites the means but ignores the error bars", "claims causation without comparing to the control"]}})
+    _meaning(pk, {"A1": {"elements": ["Names the factor the investigator deliberately varied (the independent variable), not the measured response"], "alt": ["the factor the experimenter deliberately changed", "the manipulated variable", iv_short], "err": ["names the measured response (dependent variable)", "names the organism"]},
+               "B1": {"elements": ["Identifies the reference (baseline) group as the control", "Explains that it allows the effect of the independent variable to be isolated by comparison"], "alt": ["the group kept at the standard condition", "serves as a point of comparison so any change can be attributed to the variable"], "err": ["names a treated group as the control", "says a control makes the results larger or more reliable without a comparison"]},
+               "C1": {"elements": ["States that the independent variable has no effect on (or no difference in) the measured response among the groups"], "alt": ["any differences among groups are due to chance", "the variable does not affect the response"], "err": ["states a predicted difference instead of no effect"]},
+               "D1": {"elements": ["Uses the group means to show the difference from the control", "Uses the ±2SE intervals to argue the difference is unlikely to be due to chance"], "alt": ["the means differ by more than the variability", "the error bars are separated"], "err": ["cites the means but ignores the error bars", "claims the variable proves causation without comparing to the control"]}})
     pk["blueprint"] = frq_blueprint("frq_bio_investigation", "ap_biology", pk, "Experimental design: variables, control, null hypothesis, and data-supported claim",
         ["Identify the manipulated (independent) variable and the measured (dependent) variable", "Recognize which group is the control and why a baseline is needed", "State a null hypothesis and support a claim by comparing means with +/-2SE intervals"],
         [("One variable differs among groups; control group present; n replicates per group", "the table lists the groups, the control, and the number of replicates")], {"type": "experiment_table", "must_include": ["group names", "mean +/- 2SE", "replicates per group"]},
         "means and standard errors are generated from the scenario parameters; overlap of +/-2SE intervals is re-derived by the separate bio_checks module",
-        extra={"experiment": {"fictional": True, "design": "experimental", "independent_variables": [s["iv"]], "dependent_variable": s["dv"], "controls": [s["levels"][ctrl] + " group"], "replicates_per_group": n, "measurement": {"variable": s["dv"], "unit": s["unit"]},
+        extra={"experiment": {"fictional": True, "design": "experimental", "independent_variables": [s["iv"]], "dependent_variable": s["dv"], "controls": [s["levels"][ctrl] + " group"], "control_rationale": s["ctrl_why"], "replicates_per_group": n, "measurement": {"variable": s["dv"], "unit": s["unit"]},
                               "claims": [{"text": claim, "scope": "causation"}], "ced_topics_used": ["8.1"]}})
     return pk
 
@@ -88,15 +83,15 @@ def frq_bio_data_short(rng):
     for pt in parts: pt["topic_codes"] = [sc["topic"]]
     pk = {"archetype": "frq_bio_data_short", "template": "short_data_analysis", "topic": sc["topic"], "extra_topics": [], "skill": "4.B", "representative_skill": "4.B", "calculator": "allowed", "title": f"Data analysis: {sc['sys']}",
             "stimulus": stim, "parts": parts, "total_points": 4, "est_minutes": 10, "facts": [f"means={means}", f"se={se}", f"d01={d01}", f"overlapping_pairs={same}", f"top={top}"], "context": sc["sys"]}
-    syn = {"increases": ["goes up", "rises", "greater at each higher level"], "decreases": ["goes down", "falls", "lower at each higher level"], "peaks": ["increases then decreases", "rises then falls", "highest at the middle level"], "dips": ["decreases then increases", "falls then rises", "lowest at the middle level"]}
-    _alts(pk, {"A1": {"alt": syn.get(trend, []) + ["describes the direction of change between consecutive levels using the values"], "err": ["describes only one pair of levels"]},
-               "B1": {"alt": ["percent change = (new - old) / old x 100"], "err": ["divides by the new value", "forgets to multiply by 100"]},
-               "C1": {"alt": ["the pair whose error bars overlap", "none of the pairs differ"], "err": ["compares only the means"]},
-               "D1": {"alt": ["the error bars do not overlap so the difference is real", "higher mean with separated intervals"], "err": ["cites the highest mean but does not discuss variability"]}})
+    syn = {"increases": ["goes up as the level increases", "rises across the levels"], "decreases": ["goes down as the level increases", "falls across the levels"], "peaks": ["rises then falls", "highest at the middle level"], "dips": ["falls then rises", "lowest at the middle level"]}
+    _meaning(pk, {"A1": {"elements": ["Describes the direction of change of the mean across the three levels (increase, decrease, peak, or dip) consistent with the data"], "alt": syn.get(trend, ["describes the direction of change between consecutive levels using the values"]), "err": ["describes only one pair of levels", "describes a trend the data do not show"]},
+               "B1": {"alt": ["percent change = (new - old) / old x 100"], "err": ["divides by the new value", "forgets to multiply by 100"], "note": "Award for the correct value with a valid method; equivalent forms and rounding within the tolerance are accepted."},
+               "C1": {"elements": ["Identifies the pair of levels (or none) whose ±2SE intervals overlap, consistent with the data"], "alt": ["the pair whose error bars overlap", "none of the pairs differ"], "err": ["compares only the means"]},
+               "D1": {"elements": ["Cites the highest mean and compares it with the other levels", "Uses the error bars (overlap or separation) to evaluate how strongly the data support the claim"], "alt": ["the error bars do not overlap so the difference is real", "higher mean with separated intervals"], "err": ["cites the highest mean but does not discuss variability"]}})
     pk["blueprint"] = frq_blueprint("frq_bio_data_short", "ap_biology", pk, "Data analysis: trend, percent change, statistical overlap, and a supported claim",
         ["Describe the trend across the three levels from the table values", "Compute a percent change between two means", "Use +/-2SE overlap to judge whether differences are supported and support a claim with the data"],
         [("Means with +/-2SE reported for the same number of replicates per level", "the table gives mean +/- 2SE and n")], {"type": "experiment_table", "must_include": ["levels of the variable", "mean +/- 2SE", "n"]},
         "percent change and interval overlap re-computed by the separate bio_checks module from the table strings",
-        extra={"experiment": {"fictional": True, "design": "experimental", "independent_variables": [sc["x"]], "dependent_variable": sc["dv"], "controls": [sc["levels"][0] + " level (lowest-level baseline)"], "replicates_per_group": n, "measurement": {"variable": sc["dv"], "unit": sc["unit"]},
+        extra={"experiment": {"fictional": True, "design": "experimental", "independent_variables": [sc["x"]], "dependent_variable": sc["dv"], "controls": [], "control_not_applicable": "enzyme-rate comparison across levels of one condition; each level is measured under identical other conditions, no untreated reference group is claimed", "replicates_per_group": n, "measurement": {"variable": sc["dv"], "unit": sc["unit"]},
                               "claims": [{"text": claim, "scope": "causation"}], "ced_topics_used": [sc["topic"]]}})
     return pk

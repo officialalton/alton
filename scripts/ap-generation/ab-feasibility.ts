@@ -9,7 +9,7 @@ import type { ApCurriculumFile } from "../../lib/ap-curriculum/types";
 const SUBJECT = process.argv.includes("--subject") ? process.argv[process.argv.indexOf("--subject") + 1] : "ap_calculus_ab";
 type It = { stockKey: string; apSubjectCode: string; kind: "mc" | "frq_bundle"; validation: string; keywordCode: string; calculator: string; itemFamilyId: string; difficultyProvisional: string | null; payload: Record<string, unknown>; skillPrimary: string };
 const scan = new Map((JSON.parse(readFileSync("data/ap/stock/defect-scan.json", "utf-8")) as { key: string }[]).map((r) => [r.key, true]));
-const all = [...(JSON.parse(readFileSync("data/ap/stock/items.json", "utf-8")) as It[]), ...(JSON.parse(readFileSync("data/ap/stock/s1a-items.json", "utf-8")) as It[])].filter((i) => i.apSubjectCode === SUBJECT);
+const all = ["items", "s1a-items", "v1ab-items", "v45ab-items"].flatMap((f) => { try { return JSON.parse(readFileSync(`data/ap/stock/${f}.json`, "utf-8")) as It[]; } catch { return [] as It[]; } }).filter((i) => i.apSubjectCode === SUBJECT);
 const status = (i: It) => gateCandidate({ stockKey: i.stockKey, candidateKey: i.stockKey, apSubjectCode: i.apSubjectCode, kind: i.kind, payload: i.payload }).status;
 const reval = new Set((JSON.parse(readFileSync("data/ap/stock/revalidation-results.json", "utf-8")) as { stockKey: string; passed: boolean; generatorDefect: boolean }[]).filter((r) => r.passed && !r.generatorDefect).map((r) => r.stockKey));
 const evKeys = (() => { try { return new Set((JSON.parse(readFileSync("data/ap/screen-evidence/evidence-2026-10-09.json", "utf-8")) as { entries: { candidate_key: string }[] }).entries.map((e) => e.candidate_key)); } catch { return new Set<string>(); } })();

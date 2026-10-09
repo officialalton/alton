@@ -76,6 +76,9 @@ async function resultPass(page: Page, rows: Row[]): Promise<Map<string, ScreenCh
   await page.locator('[data-testid="ap-review-submit"]').click();
   await page.locator('[data-testid="ap-exam-submit"]').click();
   await page.locator('[data-testid="ap-exam-result"]').waitFor({ state: "visible", timeout: 30_000 });
+  // 서버 렌더 스모크: 채점 완료 응시 URL 을 새로 열어도(서버 컴포넌트가 결과 화면을 렌더) 결과가 보여야 한다. 서버→클라이언트 함수 prop 같은 경계 오류는 여기서 500 으로 드러난다.
+  await page.goto(page.url().includes("/student/mock-exam/") ? page.url() : page.url());
+  await page.locator('[data-testid="ap-exam-result"]').waitFor({ state: "visible", timeout: 30_000 });
   const found = await page.evaluate(() => [...document.querySelectorAll('[data-testid="ap-review-item"]')].map((li) => {
     const ex = li.querySelector('[data-testid="ap-explanation"]');
     let text = ""; if (ex) { const c = ex.cloneNode(true) as Element; c.querySelectorAll(".katex-mathml, annotation").forEach((n) => n.remove()); text = c.textContent ?? ""; }

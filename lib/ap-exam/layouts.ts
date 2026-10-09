@@ -73,6 +73,21 @@ export const AP_PARTIAL_SUBJECTS = ["ap_calculus_ab", "ap_calculus_bc"];
 export function partialSetName(subject: string, id: ApPartialId, seq?: number): string {
   return `${AP_SUBJECT_NAME[subject] ?? subject} — ${AP_PARTIALS[id].nameSuffix}${seq && seq > 1 ? ` ${seq}` : ""}`;
 }
+/** 부분 세트 표시 정책(오너 2026-10-09): 제목·배지·시작 안내가 같은 의미를 전달한다. FRQ 세트도 계산기 사용을 함께 표시한다. UI 는 이 상수를 그대로 쓴다. */
+export const AP_PARTIAL_CALCULATOR_NOTE: Record<ApPartialId, string> = {
+  noncalc_mc: "No calculator allowed",
+  calc_mc: "Graphing calculator required",
+  frq: "Part A: calculator allowed · Part B: no calculator",
+};
+/** 제목(partialSetName) 옆 배지 문구: 예) "No calculator allowed". */
+export const partialBadge = (id: ApPartialId) => AP_PARTIAL_CALCULATOR_NOTE[id];
+/** 시작 안내 문장(영어): 제목·배지와 같은 의미를 반복한다. */
+export function partialStartGuidance(subject: string, id: ApPartialId): string {
+  const secs = sectionsForPartial(subject, id); const q = secs.reduce((a, x) => a + x.count, 0); const min = secs.reduce((a, x) => a + x.minutes, 0);
+  return `${partialSetName(subject, id)}: ${q} ${id === "frq" ? "free-response questions" : "multiple-choice questions"}, ${min} minutes. ${AP_PARTIAL_CALCULATOR_NOTE[id]}. This is a practice section, not a full practice exam.`;
+}
+/** "Full Practice Exam" 라벨은 공식 구성(문항 수·시간·계산기 파트·단원 비중·다양성)을 만족한 세트에만 붙인다. 만족하지 않으면 항상 false. */
+export const fullPracticeLabelAllowed = (officialCompositionSatisfied: boolean) => officialCompositionSatisfied === true;
 export function sectionsForPartial(subject: string, id: ApPartialId): ApSection[] {
   if (!AP_PARTIAL_SUBJECTS.includes(subject)) throw new Error(`No partial practice sets for ${subject}`);
   return apSectionLayout(subject).filter((x) => AP_PARTIALS[id].sectionKeys.includes(x.key));

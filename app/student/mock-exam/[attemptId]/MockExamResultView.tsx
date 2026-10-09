@@ -407,15 +407,15 @@ export default function MockExamResultView({
   readOnly,
   reportRole: reportRoleProp,
   attempts,
-  attemptHref,
+  attemptHrefBase,
   onSelectAttempt,
 }: {
   attempt: MockExamAttemptDetail;
   readOnly: boolean;
   /** 재응시: 같은 시험의 모든 회차(요약). 둘 이상이면 상단에 Attempt 1 | Attempt 2 전환을 보인다. */
   attempts?: MockExamAttemptSummary[];
-  /** 회차 전환을 링크로(독립 결과 페이지)·콜백으로(탭 안) 처리 — 둘 중 하나. */
-  attemptHref?: (attemptId: string) => string;
+  /** 회차 전환을 링크로(독립 결과 페이지: 회차 id 앞에 붙는 경로 문자열 — 서버 컴포넌트에서 함수를 넘길 수 없다)·콜백으로(탭 안) 처리 — 둘 중 하나. */
+  attemptHrefBase?: string;
   onSelectAttempt?: (attemptId: string) => void;
   /** 문제 오류 신고 버튼 역할. 생략하면 본인 결과(readOnly=false)는 학생, 읽기 전용(학부모 등)은 없음. */
   reportRole?: ReporterRole | null;
@@ -479,7 +479,7 @@ export default function MockExamResultView({
 
   return (
     <div>
-      <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHref={attemptHref} onSelect={onSelectAttempt} />
+      <AttemptSwitcher attempt={attempt} attempts={attempts} attemptHrefBase={attemptHrefBase} onSelect={onSelectAttempt} />
       <div role="tablist" aria-label="Result sections" className="mb-4 flex gap-1 overflow-x-auto overflow-y-hidden scrollbar-hide border-b border-grey-200">
         {TABS.map((t) => (
           <button

@@ -22,7 +22,7 @@ export default async function ParentMockExamResultPage({ params }: { params: Pro
     <main className="mx-auto max-w-2xl px-4 py-6">
       <h1 className="mb-1 text-[18px] font-extrabold">{attempt.examSetName}</h1>
       <p className="mb-4 text-[12.5px] text-grey-500">{attempt.studentName}&apos;s results</p>
-      <MockExamResultView attempt={attempt} readOnly attempts={attempts} attemptHref={(id) => `/parent/mock-exam/${studentId}/${id}`} />
+      <MockExamResultView attempt={attempt} readOnly attempts={attempts} attemptHrefBase={`/parent/mock-exam/${studentId}/`} />
     </main>
   );
 }

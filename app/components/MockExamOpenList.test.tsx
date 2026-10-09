@@ -66,3 +66,11 @@ describe("MockExamOpenList — AB 부분 연습 세트 제목·배지·안내", 
     expect(screen.queryByText("AP Multiple-Choice Practice")).toBeNull();
   });
 });
+
+describe("MockExamOpenList — resultHrefBase(서버 페이지용 문자열)", () => {
+  it("채점 완료 행의 결과 링크를 base + 응시 id 로 만든다", () => {
+    const rows = buildMockExamListRows([cat], [att("a1", 1, "graded", 50), att("a2", 2, "graded", 70)]);
+    render(<MockExamOpenList rows={rows} readOnly resultHrefBase="/parent/mock-exam/st1/" />);
+    expect(screen.getByRole("link", { name: "View detailed results" })).toHaveAttribute("href", "/parent/mock-exam/st1/a2");
+  });
+});

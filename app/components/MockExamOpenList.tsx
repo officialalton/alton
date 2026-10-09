@@ -23,7 +23,8 @@ export default function MockExamOpenList({
   busyKey,
   onStart,
   onOpenResult,
-  resultHref,
+  resultHref: resultHrefProp,
+  resultHrefBase,
   emptyText = "No practice tests are available yet.",
 }: {
   rows: MockExamListRow[];
@@ -35,8 +36,11 @@ export default function MockExamOpenList({
   onOpenResult?: (attemptId: string) => void;
   /** 학부모: 완료 결과 상세 링크 */
   resultHref?: (attemptId: string) => string;
+  /** 서버 페이지에서 쓰는 직렬화 가능한 형태: 링크 = `${resultHrefBase}${attemptId}` (함수 prop 은 서버→클라이언트 경계를 못 넘는다). */
+  resultHrefBase?: string;
   emptyText?: string;
 }) {
+  const resultHref = resultHrefProp ?? (resultHrefBase ? (id: string) => `${resultHrefBase}${id}` : undefined);
   if (rows.length === 0) return <p className="text-[13px] text-grey-500">{emptyText}</p>;
   return (
     <ul className="flex flex-col gap-2">

@@ -1,0 +1,1908 @@
+[
+ {
+  "candidateKey": "ap_calculus_ab-f01-k0",
+  "cellId": "ap_calculus_ab-f01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_particle_motion",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Classic AP-style particle motion FRQ. Part a is a routine calculator derivative evaluation with units. Part b requires computing v(1) and a(1) and justifying with their signs, which targets the justification skill. Part c requires locating the zeros of v on [0,5] with the calculator and integrating |v|, a multi-step procedure. Part d uses the initial position plus a definite integral of v (the net change theorem). The context is concise, the numbers are reasonable, and the calculator handles the computation. All content is in AB scope, with no unfair difficulty sources.",
+  "payload": {
+   "archetype": "frq_particle_motion",
+   "template": "particle_motion_calc",
+   "topic": "4.2",
+   "extra_topics": [
+    "8.2"
+   ],
+   "skill": "3.E",
+   "representative_skill": "3.E",
+   "calculator": "required",
+   "title": "Particle motion along a line",
+   "stimulus": {
+    "kind": "text",
+    "description": "A particle moves along the x-axis. Its velocity is v(t) = 3 sin((3/2)t) + 0.5 t - 1 for 0 ≤ t ≤ 5, where t is in seconds and v is in meters per second. The particle is at position x = 3 at time t = 0.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Find the acceleration of the particle at time $t=1$. Include units of measure.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "4.B"
+     ],
+     "model_answer": "a(1) = v'(1) = 0.818 meters per second squared.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Answer with units (differentiates v and evaluates; value correct)",
+       "required_elements": [
+        "0.818"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Is the speed of the particle increasing or decreasing at time $t=1$? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "v(1) = 2.492 is positive and a(1) = 0.818 is positive; the signs are the same, so the speed is increasing.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Determines the signs of velocity and acceleration at the given time",
+       "required_elements": [
+        "2.492",
+        "0.818"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Concludes using the rule: same signs means speed increasing, opposite signs means decreasing (reason)",
+       "required_elements": [
+        "increasing",
+        "signs"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the total distance traveled by the particle from time $t=0$ to $t=5$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "Total distance = ∫₀^5 |v(t)| dt = 8.609 meters.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets up the integral of the absolute value of velocity (|v|)",
+       "required_elements": [
+        "integral of |v(t)| from 0 to 5"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Evaluates with a calculator (value within tolerance)",
+       "required_elements": [
+        "8.609"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer with units",
+       "required_elements": [
+        "8.609"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the position of the particle at time $t=5$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "x(5) = 3 + ∫₀^5 v(t) dt = 5.557.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses the initial position plus the integral of velocity (net change)",
+       "required_elements": [
+        "x(0) + integral of v(t)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Evaluates the integral with a calculator (net displacement)",
+       "required_elements": [
+        "2.557"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "d3",
+       "points": 1,
+       "criterion": "Answer: the position",
+       "required_elements": [
+        "5.557"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "a(1)=0.8183",
+    "v(1)=2.4925",
+    "dist=8.6093",
+    "disp=2.5567",
+    "xT=5.5567"
+   ],
+   "blueprint": {
+    "id": "frq_particle_motion",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Straight-line motion: acceleration, speed change, total distance, and position from a velocity function",
+    "topic": "4.2",
+    "skill": "3.E",
+    "student_thinking": [
+     "Differentiate velocity to get acceleration",
+     "Compare the signs of v and a to decide whether speed increases",
+     "Integrate |v| for distance and v for net change"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "v is continuous so |v| and v are integrable on the interval",
+      "evidence": "v(t) is a sum of sine and linear terms"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "velocity function",
+      "initial position",
+      "time interval"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "derivative and integrals by sympy/scipy cross-checked by a separate Simpson integration of |v| on a fine grid",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.E",
+       "4.B"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "a(1) = v'(1) = 0.818 meters per second squared."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Answer with units (differentiates v and evaluates; value correct)",
+        "elements": [
+         "0.818"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "3.E"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "v(1) = 2.492 is positive and a(1) = 0.818 is positive; the signs are the same, so the speed is increasing."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Determines the signs of velocity and acceleration at the given time",
+        "elements": [
+         "2.492",
+         "0.818"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Concludes using the rule: same signs means speed increasing, opposite signs means decreasing (reason)",
+        "elements": [
+         "increasing",
+         "signs"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Total distance = ∫₀^5 |v(t)| dt = 8.609 meters."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets up the integral of the absolute value of velocity (|v|)",
+        "elements": [
+         "integral of |v(t)| from 0 to 5"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Evaluates with a calculator (value within tolerance)",
+        "elements": [
+         "8.609"
+        ]
+       },
+       {
+        "row_id": "c3",
+        "points": 1,
+        "criterion": "Answer with units",
+        "elements": [
+         "8.609"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "x(5) = 3 + ∫₀^5 v(t) dt = 5.557."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Uses the initial position plus the integral of velocity (net change)",
+        "elements": [
+         "x(0) + integral of v(t)"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Evaluates the integral with a calculator (net displacement)",
+        "elements": [
+         "2.557"
+        ]
+       },
+       {
+        "row_id": "d3",
+        "points": 1,
+        "criterion": "Answer: the position",
+        "elements": [
+         "5.557"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 1500,
+   "pack_id": "frq_particle_motion-s1500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_particle_motion",
+   "facts": [
+    "a(1)=0.8183",
+    "v(1)=2.4925",
+    "dist=8.6093",
+    "disp=2.5567",
+    "xT=5.5567"
+   ],
+   "seed": 1500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Parts match their own skills/topics (4.2 acceleration and speed reasoning; 8.2 distance/position). Part b carries the 3.E justification. Unit 4 and 8.2 scope declared legitimate."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Keys unique. Solver got 8.610 for part c vs key 8.609; the difference is within the stated 0.001 tolerance, but worth re-checking the rounding. Rubric rows are consistent; b2 required words 'increasing','signs' are somewhat brittle but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus gives the velocity function, initial position, interval and units; the data object is empty but nothing is needed for rendering. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "FRQ, so no distractors; common_errors lists are empty, which is acceptable."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "Typical AP particle-motion FRQ, 9 points with a 1/2/3/3 split, calculator used for derivative and integrals, about 15 minutes. Part c's separate units point is slightly padded but fine."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "Sound, standard particle-motion FRQ. The only concern is a minor 8.609 vs 8.610 rounding difference in part c, within the stated tolerance. Passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Classic AP-style particle motion FRQ. Part a is a routine calculator derivative evaluation with units. Part b requires computing v(1) and a(1) and justifying with their signs, which targets the justification skill. Part c requires locating the zeros of v on [0,5] with the calculator and integrating |v|, a multi-step procedure. Part d uses the initial position plus a definite integral of v (the net change theorem). The context is concise, the numbers are reasonable, and the calculator handles the computation. All content is in AB scope, with no unfair difficulty sources.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 600
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f01-k1",
+  "cellId": "ap_calculus_ab-f01",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "4.2",
+  "unitCode": "4",
+  "skillPrimary": "3.E",
+  "structure": "frq_multipart",
+  "calculator": "required",
+  "archetype": "frq_particle_motion",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Typical AP FRQ-style particle motion item. Part a is a direct derivative with units. Part b requires comparing the signs of v and a and justifying the conclusion (skill 3.E). Part c requires finding the sign changes of v on [0,4] with the calculator and integrating |v|, or splitting the interval. Part d requires the initial condition plus a definite integral. Concepts are in scope for AB, the wording is unambiguous, and the numbers are calculator-friendly. Difficulty comes from multi-step reasoning and choosing procedures, not from heavy reading or arithmetic.",
+  "payload": {
+   "archetype": "frq_particle_motion",
+   "template": "particle_motion_calc",
+   "topic": "4.2",
+   "extra_topics": [
+    "8.2"
+   ],
+   "skill": "3.E",
+   "representative_skill": "3.E",
+   "calculator": "required",
+   "title": "Particle motion along a line",
+   "stimulus": {
+    "kind": "text",
+    "description": "A particle moves along the x-axis. Its velocity is v(t) = 3 sin(t) + 0.5 t - 1.5 for 0 ≤ t ≤ 4, where t is in seconds and v is in meters per second. The particle is at position x = 1 at time t = 0.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Find the acceleration of the particle at time $t=2$. Include units of measure.",
+     "points": 1,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "4.B"
+     ],
+     "model_answer": "a(2) = v'(2) = -0.748 meters per second squared.",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Answer with units (differentiates v and evaluates; value correct)",
+       "required_elements": [
+        "-0.748"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Is the speed of the particle increasing or decreasing at time $t=2$? Give a reason for your answer.",
+     "points": 2,
+     "response_mode": "explain",
+     "skill_codes": [
+      "3.E"
+     ],
+     "model_answer": "v(2) = 2.228 is positive and a(2) = -0.748 is negative; the signs are opposite, so the speed is decreasing.",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Determines the signs of velocity and acceleration at the given time",
+       "required_elements": [
+        "2.228",
+        "-0.748"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Concludes using the rule: same signs means speed increasing, opposite signs means decreasing (reason)",
+       "required_elements": [
+        "decreasing",
+        "signs"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "4.2"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the total distance traveled by the particle from time $t=0$ to time $t=4$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "Total distance = ∫₀^4 |v(t)| dt = 5.203 meters.",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets up the integral of the absolute value of velocity (|v|)",
+       "required_elements": [
+        "integral of |v(t)| from 0 to 4"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Evaluates with a calculator (value within tolerance)",
+       "required_elements": [
+        "5.203"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "c3",
+       "points": 1,
+       "criterion": "Answer with units",
+       "required_elements": [
+        "5.203"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": true
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Find the position of the particle at time $t=4$.",
+     "points": 3,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "x(4) = 1 + ∫₀^4 v(t) dt = 3.961.",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Uses the initial position plus the integral of velocity (net change)",
+       "required_elements": [
+        "x(0) + integral of v(t)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Evaluates the integral with a calculator (net displacement)",
+       "required_elements": [
+        "2.961"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": false
+      },
+      {
+       "row_id": "d3",
+       "points": 1,
+       "criterion": "Answer: the position",
+       "required_elements": [
+        "3.961"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d2",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": "0.001",
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "8.2"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "a(2)=-0.7484",
+    "v(2)=2.2279",
+    "dist=5.2028",
+    "disp=2.9609",
+    "xT=3.9609"
+   ],
+   "blueprint": {
+    "id": "frq_particle_motion",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Straight-line motion: acceleration, speed change, total distance, and position from a velocity function",
+    "topic": "4.2",
+    "skill": "3.E",
+    "student_thinking": [
+     "Differentiate velocity to get acceleration",
+     "Compare the signs of v and a to decide whether speed increases",
+     "Integrate |v| for distance and v for net change"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "required",
+    "key_conditions": [
+     {
+      "condition": "v is continuous so |v| and v are integrable on the interval",
+      "evidence": "v(t) is a sum of sine and linear terms"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "velocity function",
+      "initial position",
+      "time interval"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "derivative and integrals by sympy/scipy cross-checked by a separate Simpson integration of |v| on a fine grid",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.E",
+       "4.B"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 1,
+      "accepted_answers": [
+       "a(2) = v'(2) = -0.748 meters per second squared."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Answer with units (differentiates v and evaluates; value correct)",
+        "elements": [
+         "-0.748"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "3.E"
+      ],
+      "topics": [
+       "4.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "v(2) = 2.228 is positive and a(2) = -0.748 is negative; the signs are opposite, so the speed is decreasing."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Determines the signs of velocity and acceleration at the given time",
+        "elements": [
+         "2.228",
+         "-0.748"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Concludes using the rule: same signs means speed increasing, opposite signs means decreasing (reason)",
+        "elements": [
+         "decreasing",
+         "signs"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Total distance = ∫₀^4 |v(t)| dt = 5.203 meters."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets up the integral of the absolute value of velocity (|v|)",
+        "elements": [
+         "integral of |v(t)| from 0 to 4"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Evaluates with a calculator (value within tolerance)",
+        "elements": [
+         "5.203"
+        ]
+       },
+       {
+        "row_id": "c3",
+        "points": 1,
+        "criterion": "Answer with units",
+        "elements": [
+         "5.203"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "8.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "x(4) = 1 + ∫₀^4 v(t) dt = 3.961."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Uses the initial position plus the integral of velocity (net change)",
+        "elements": [
+         "x(0) + integral of v(t)"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Evaluates the integral with a calculator (net displacement)",
+        "elements": [
+         "2.961"
+        ]
+       },
+       {
+        "row_id": "d3",
+        "points": 1,
+        "criterion": "Answer: the position",
+        "elements": [
+         "3.961"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 1501,
+   "pack_id": "frq_particle_motion-s1501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_particle_motion",
+   "facts": [
+    "a(2)=-0.7484",
+    "v(2)=2.2279",
+    "dist=5.2028",
+    "disp=2.9609",
+    "xT=3.9609"
+   ],
+   "seed": 1501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "All parts fall within Topic 4.2 and related Topic 8.2 (total distance and position from velocity). Part b assesses 3.E (justification) with a sign-comparison argument. The other parts assess calculation skills, which official FRQs mix in the same way."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "Values match the independent solver: a(2) = -0.748, v(2) = 2.228, distance 5.203, x(4) = 3.961. Part b's key is unique. Rubric rows are consistent, and the dependent rows are acceptable. Part c has three 1-point rows (setup, value, units) and part d has three rows (setup, value, answer). These rows are somewhat redundant but valid. Part c's third row repeats the same value for the units mark."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The velocity function, time interval, initial position and units are all stated in the text. The empty data object is fine for a text-only stimulus. Wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric's common_errors lists are empty, which is a minor weakness."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The 9 points and about 15 minutes match the official grain. The task is a standard calculator particle-motion FRQ. The calculator is needed for the integrals of |v| and v. The numbers are moderate."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is accurate and in scope, with a standard structure and a valid rubric. The 1/2/3/3 point split is acceptable. The rubric is slightly padded with units and answer rows, but this is not disqualifying. It passes."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Typical AP FRQ-style particle motion item. Part a is a direct derivative with units. Part b requires comparing the signs of v and a and justifying the conclusion (skill 3.E). Part c requires finding the sign changes of v on [0,4] with the calculator and integrating |v|, or splitting the interval. Part d requires the initial condition plus a definite integral. Concepts are in scope for AB, the wording is unambiguous, and the numbers are calculator-friendly. Difficulty comes from multi-step reasoning and choosing procedures, not from heavy reading or arithmetic.",
+   "reading_load": "low",
+   "computation_load": "medium",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k0",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_implicit_diff",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": true,
+  "reserve": false,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard AP FRQ-style implicit differentiation: derive dy/dx using product and chain rules, evaluate slope for tangent and normal lines, and find horizontal tangents by setting the numerator to zero, substituting into the curve, and checking that the denominator is nonzero. Multiple procedures are chained, but the numbers are clean and the scope is limited to first derivatives. Difficulty comes from legitimate conceptual sources.",
+  "payload": {
+   "archetype": "frq_implicit_diff",
+   "template": "implicit_differentiation",
+   "topic": "3.2",
+   "extra_topics": [],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "not_allowed",
+   "title": "Implicit differentiation on a curve",
+   "stimulus": {
+    "kind": "text",
+    "description": "Consider the curve given by the equation x^2 + 1xy + 1y^2 = 3.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Show that $\\dfrac{dy}{dx}=-\\dfrac{2x+1y}{1x+2y}$.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.D",
+      "3.B"
+     ],
+     "model_answer": "Differentiating implicitly: 2x + 1(y + x dy/dx) + 2y dy/dx = 0, so dy/dx = -(2x + 1y)/(1x + 2y).",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Differentiates x^2 and the product xy correctly (product rule)",
+       "required_elements": [
+        "2x",
+        "1(y + x dy/dx)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Differentiates the y^2 term with the chain rule",
+       "required_elements": [
+        "2y dy/dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Isolates dy/dx to reach the stated expression",
+       "required_elements": [
+        "dy/dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write an equation for the line tangent to the curve at the point $(1,1)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "4.C"
+     ],
+     "model_answer": "Slope -1; y - 1 = -1(x - 1).",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Slope at the point (answer)",
+       "required_elements": [
+        "-1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Tangent line equation in point-slope form",
+       "required_elements": [
+        "y - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the coordinates of every point on the curve at which the tangent line is horizontal.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "Horizontal tangent when 2x + 1y = 0, i.e. y = -2x/1; the points are (-1, 2), (1, -2).",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets the numerator of dy/dx equal to zero (2x + 1y = 0)",
+       "required_elements": [
+        "2x + 1y = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Substitutes into the curve equation and finds the points (answer)",
+       "required_elements": [
+        "(-1, 2), (1, -2)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Write an equation for the line normal to the curve at the point $(1,1)$. (The normal line is the line perpendicular to the tangent line at that point.)",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "4.C"
+     ],
+     "model_answer": "Normal slope = 1; y - 1 = 1(x - 1).",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Normal slope is the negative reciprocal of the tangent slope (answer)",
+       "required_elements": [
+        "1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Equation of the normal line in point-slope form",
+       "required_elements": [
+        "y - 1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "curve=1,1,3",
+    "point=1,1",
+    "slope=-1",
+    "horizontal=(-1, 2), (1, -2)"
+   ],
+   "blueprint": {
+    "id": "frq_implicit_diff",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Implicit differentiation: derivative formula, tangent line, horizontal tangents, and normal line",
+    "topic": "3.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate both sides implicitly with the product and chain rules",
+     "Evaluate the derivative at a point for a tangent line and find where the numerator is zero",
+     "Use the negative reciprocal slope for the normal line"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "The curve is differentiable where the denominator A x + 2B y is nonzero",
+      "evidence": "the chosen point satisfies this"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "curve equation",
+      "a point on the curve"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "slope computed by sympy implicit differentiation cross-checked by a Newton-solved curve point and central finite difference (independent of the formula)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "3.B"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Differentiating implicitly: 2x + 1(y + x dy/dx) + 2y dy/dx = 0, so dy/dx = -(2x + 1y)/(1x + 2y)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Differentiates x^2 and the product xy correctly (product rule)",
+        "elements": [
+         "2x",
+         "1(y + x dy/dx)"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Differentiates the y^2 term with the chain rule",
+        "elements": [
+         "2y dy/dx"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Isolates dy/dx to reach the stated expression",
+        "elements": [
+         "dy/dx"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "4.C"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Slope -1; y - 1 = -1(x - 1)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Slope at the point (answer)",
+        "elements": [
+         "-1"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Tangent line equation in point-slope form",
+        "elements": [
+         "y - 1"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Horizontal tangent when 2x + 1y = 0, i.e. y = -2x/1; the points are (-1, 2), (1, -2)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets the numerator of dy/dx equal to zero (2x + 1y = 0)",
+        "elements": [
+         "2x + 1y = 0"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Substitutes into the curve equation and finds the points (answer)",
+        "elements": [
+         "(-1, 2), (1, -2)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "4.C"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Normal slope = 1; y - 1 = 1(x - 1)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Normal slope is the negative reciprocal of the tangent slope (answer)",
+        "elements": [
+         "1"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Equation of the normal line in point-slope form",
+        "elements": [
+         "y - 1"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 1500,
+   "pack_id": "frq_implicit_diff-s1500"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_implicit_diff",
+   "facts": [
+    "curve=1,1,3",
+    "point=1,1",
+    "slope=-1",
+    "horizontal=(-1, 2), (1, -2)"
+   ],
+   "seed": 1500
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "First-derivative implicit differentiation, tangent, horizontal tangent, normal line; all in scope for Unit 3 and skill 1.E."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct and unique. The denominator is nonzero at the horizontal-tangent points (-3 and 3), so the answer to (c) is valid. The rubric does not require checking this condition, which is a minor weakness."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text-only stimulus is complete. Template residue such as '1xy', '1y^2', '1(y + x dy/dx)', and 'y=-2x/1' is awkward wording, but the math is unambiguous."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric rows are consistent."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "9 points in 4 parts, no calculator, light arithmetic. Parts (b) and (d) are somewhat repetitive but acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "The item is correct, in scope, and suitable. The only issues are cosmetic: the coefficient-of-1 template residue in the wording, and no rubric row requiring a check that the denominator is nonzero in (c)."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP FRQ-style implicit differentiation: derive dy/dx using product and chain rules, evaluate slope for tangent and normal lines, and find horizontal tangents by setting the numerator to zero, substituting into the curve, and checking that the denominator is nonzero. Multiple procedures are chained, but the numbers are clean and the scope is limited to first derivatives. Difficulty comes from legitimate conceptual sources.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 8,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 540
+  }
+ },
+ {
+  "candidateKey": "ap_calculus_ab-f02-k1",
+  "cellId": "ap_calculus_ab-f02",
+  "apSubjectCode": "ap_calculus_ab",
+  "kind": "frq_bundle",
+  "keywordCode": "3.2",
+  "unitCode": "3",
+  "skillPrimary": "1.E",
+  "structure": "frq_multipart",
+  "calculator": "not_allowed",
+  "archetype": "frq_implicit_diff",
+  "wording": "llm",
+  "reviewState": "auto_passed",
+  "gateVersion": "v2-code-first-final-2026-10-08",
+  "selectedForSample": false,
+  "reserve": true,
+  "rejectionReason": null,
+  "difficultyProvisional": "exam_prep",
+  "difficultyRationale": "Standard FRQ-style implicit differentiation. Part a is routine (product rule and chain rule on a conic). Part b evaluates the derivative and writes a tangent line. Part c needs a horizontal-tangent condition, substitution back into the curve, and a check that the denominator is nonzero. Part d needs the perpendicular slope. The numbers are small and the reading is light. The first derivative only, so it is in scope. Moderate depth with a few multi-step pieces, appropriate for full mocks.",
+  "payload": {
+   "archetype": "frq_implicit_diff",
+   "template": "implicit_differentiation",
+   "topic": "3.2",
+   "extra_topics": [],
+   "skill": "1.E",
+   "representative_skill": "1.E",
+   "calculator": "not_allowed",
+   "title": "Implicit differentiation on a curve",
+   "stimulus": {
+    "kind": "text",
+    "description": "Consider the curve given by the equation x^2 + 2xy + 2y^2 = 4.",
+    "data": {}
+   },
+   "parts": [
+    {
+     "label": "a",
+     "prompt": "Use implicit differentiation to show that $\\dfrac{dy}{dx}=-\\dfrac{2x+2y}{2x+4y}$.",
+     "points": 3,
+     "response_mode": "explain",
+     "skill_codes": [
+      "1.D",
+      "3.B"
+     ],
+     "model_answer": "Differentiating implicitly: 2x + 2(y + x dy/dx) + 4y dy/dx = 0, so dy/dx = -(2x + 2y)/(2x + 4y).",
+     "rubric_rows": [
+      {
+       "row_id": "a1",
+       "points": 1,
+       "criterion": "Differentiates x^2 and the product xy correctly (product rule)",
+       "required_elements": [
+        "2x",
+        "2(y + x dy/dx)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": true,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a2",
+       "points": 1,
+       "criterion": "Differentiates the y^2 term with the chain rule",
+       "required_elements": [
+        "4y dy/dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "a3",
+       "points": 1,
+       "criterion": "Isolates dy/dx to reach the stated expression",
+       "required_elements": [
+        "dy/dx"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "a2",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "b",
+     "prompt": "Write an equation for the line tangent to the curve at the point $(-2,0)$.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "4.C"
+     ],
+     "model_answer": "Slope -1; y - 0 = -1(x - -2).",
+     "rubric_rows": [
+      {
+       "row_id": "b1",
+       "points": 1,
+       "criterion": "Slope at the point (answer)",
+       "required_elements": [
+        "-1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "b2",
+       "points": 1,
+       "criterion": "Tangent line equation in point-slope form",
+       "required_elements": [
+        "y - 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "b1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "c",
+     "prompt": "Find the coordinates of every point on the curve at which the tangent line is horizontal.",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E"
+     ],
+     "model_answer": "Horizontal tangent when 2x + 2y = 0, i.e. y = -2x/2; the points are (-2, 2), (2, -2).",
+     "rubric_rows": [
+      {
+       "row_id": "c1",
+       "points": 1,
+       "criterion": "Sets the numerator of dy/dx equal to zero (2x + 2y = 0)",
+       "required_elements": [
+        "2x + 2y = 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "c2",
+       "points": 1,
+       "criterion": "Substitutes into the curve equation and finds the points (answer)",
+       "required_elements": [
+        "(-2, 2), (2, -2)"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "c1",
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "d",
+     "prompt": "Write an equation for the line normal to the curve at the point $(-2,0)$. (The normal line is the line perpendicular to the tangent line at that point.)",
+     "points": 2,
+     "response_mode": "calculate",
+     "skill_codes": [
+      "1.E",
+      "4.C"
+     ],
+     "model_answer": "Normal slope = 1; y - 0 = 1(x - -2).",
+     "rubric_rows": [
+      {
+       "row_id": "d1",
+       "points": 1,
+       "criterion": "Normal slope is the negative reciprocal of the tangent slope (answer)",
+       "required_elements": [
+        "1"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": null,
+       "requires_both": false,
+       "requires_numbers": true,
+       "numeric_tolerance": null,
+       "units_row": false
+      },
+      {
+       "row_id": "d2",
+       "points": 1,
+       "criterion": "Equation of the normal line in point-slope form",
+       "required_elements": [
+        "y - 0"
+       ],
+       "optional_phrases": [],
+       "alt_solutions": [],
+       "common_errors": [],
+       "requires_row_id": "d1",
+       "requires_both": false,
+       "requires_numbers": false,
+       "numeric_tolerance": null,
+       "units_row": false
+      }
+     ],
+     "topic_codes": [
+      "3.2"
+     ]
+    }
+   ],
+   "total_points": 9,
+   "est_minutes": 15,
+   "facts": [
+    "curve=2,2,4",
+    "point=-2,0",
+    "slope=-1",
+    "horizontal=(-2, 2), (2, -2)"
+   ],
+   "blueprint": {
+    "id": "frq_implicit_diff",
+    "subject": "ap_calculus_ab",
+    "kind": "frq_bundle",
+    "concept": "Implicit differentiation: derivative formula, tangent line, horizontal tangents, and normal line",
+    "topic": "3.2",
+    "skill": "1.E",
+    "student_thinking": [
+     "Differentiate both sides implicitly with the product and chain rules",
+     "Evaluate the derivative at a point for a tangent line and find where the numerator is zero",
+     "Use the negative reciprocal slope for the normal line"
+    ],
+    "structure": "frq_multipart",
+    "response_mode": "explain",
+    "calculator": "not_allowed",
+    "key_conditions": [
+     {
+      "condition": "The curve is differentiable where the denominator A x + 2B y is nonzero",
+      "evidence": "the chosen point satisfies this"
+     }
+    ],
+    "material": {
+     "type": "text",
+     "must_include": [
+      "curve equation",
+      "a point on the curve"
+     ]
+    },
+    "misconceptions": [],
+    "verification": {
+     "independent_path": "slope computed by sympy implicit differentiation cross-checked by a Newton-solved curve point and central finite difference (independent of the formula)",
+     "method": "sympy+independent-module"
+    },
+    "parts": [
+     {
+      "label": "a",
+      "skills": [
+       "1.D",
+       "3.B"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 3,
+      "accepted_answers": [
+       "Differentiating implicitly: 2x + 2(y + x dy/dx) + 4y dy/dx = 0, so dy/dx = -(2x + 2y)/(2x + 4y)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "a1",
+        "points": 1,
+        "criterion": "Differentiates x^2 and the product xy correctly (product rule)",
+        "elements": [
+         "2x",
+         "2(y + x dy/dx)"
+        ]
+       },
+       {
+        "row_id": "a2",
+        "points": 1,
+        "criterion": "Differentiates the y^2 term with the chain rule",
+        "elements": [
+         "4y dy/dx"
+        ]
+       },
+       {
+        "row_id": "a3",
+        "points": 1,
+        "criterion": "Isolates dy/dx to reach the stated expression",
+        "elements": [
+         "dy/dx"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "b",
+      "skills": [
+       "1.E",
+       "4.C"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Slope -1; y - 0 = -1(x - -2)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "b1",
+        "points": 1,
+        "criterion": "Slope at the point (answer)",
+        "elements": [
+         "-1"
+        ]
+       },
+       {
+        "row_id": "b2",
+        "points": 1,
+        "criterion": "Tangent line equation in point-slope form",
+        "elements": [
+         "y - 0"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "c",
+      "skills": [
+       "1.E"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Horizontal tangent when 2x + 2y = 0, i.e. y = -2x/2; the points are (-2, 2), (2, -2)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "c1",
+        "points": 1,
+        "criterion": "Sets the numerator of dy/dx equal to zero (2x + 2y = 0)",
+        "elements": [
+         "2x + 2y = 0"
+        ]
+       },
+       {
+        "row_id": "c2",
+        "points": 1,
+        "criterion": "Substitutes into the curve equation and finds the points (answer)",
+        "elements": [
+         "(-2, 2), (2, -2)"
+        ]
+       }
+      ]
+     },
+     {
+      "label": "d",
+      "skills": [
+       "1.E",
+       "4.C"
+      ],
+      "topics": [
+       "3.2"
+      ],
+      "points": 2,
+      "accepted_answers": [
+       "Normal slope = 1; y - 0 = 1(x - -2)."
+      ],
+      "rubric_rows": [
+       {
+        "row_id": "d1",
+        "points": 1,
+        "criterion": "Normal slope is the negative reciprocal of the tangent slope (answer)",
+        "elements": [
+         "1"
+        ]
+       },
+       {
+        "row_id": "d2",
+        "points": 1,
+        "criterion": "Equation of the normal line in point-slope form",
+        "elements": [
+         "y - 0"
+        ]
+       }
+      ]
+     }
+    ],
+    "total_points": 9
+   },
+   "seed": 1501,
+   "pack_id": "frq_implicit_diff-s1501"
+  },
+  "verification": {
+   "generatedByCode": true,
+   "archetype": "frq_implicit_diff",
+   "facts": [
+    "curve=2,2,4",
+    "point=-2,0",
+    "slope=-1",
+    "horizontal=(-2, 2), (2, -2)"
+   ],
+   "seed": 1501
+  },
+  "review": {
+   "scope_skill": {
+    "pass": true,
+    "notes": "Implicit differentiation, tangent line, and horizontal tangents are all in Unit 3 scope. The normal line is a mild extension but is not later-unit content."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "All keys are correct: dy/dx matches, the slope is -1, the horizontal tangents are at (±2, ∓2) with a nonzero denominator, and the normal line is y = x + 2. The rubric rows are consistent. Rows b2 and d2 check only \"y - 0\", which is weak but acceptable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The text stimulus is complete and the wording is clear. The normal line is defined in the prompt."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The item is 9 points in about 15 minutes, with clean non-calculator arithmetic. Parts b and d are somewhat redundant, but the item is acceptable."
+   },
+   "instant_reject": [],
+   "matches_reference_pattern": true,
+   "resembles_known_exam_item": false,
+   "summary": "A correct, clean, in-scope implicit differentiation FRQ worth 9 points (3/2/2/2). The normal-line part is a minor extension, and the rubric rows are somewhat thin but consistent. Pass."
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard FRQ-style implicit differentiation. Part a is routine (product rule and chain rule on a conic). Part b evaluates the derivative and writes a tangent line. Part c needs a horizontal-tangent condition, substitution back into the curve, and a check that the denominator is nonzero. Part d needs the perpendicular slope. The numbers are small and the reading is light. The first derivative only, so it is in scope. Moderate depth with a few multi-step pieces, appropriate for full mocks.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]
