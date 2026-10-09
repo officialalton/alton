@@ -1,5 +1,6 @@
 "use client";
 
+import { completedScoreText } from "@/lib/mock-exam/open-list";
 import { useEffect, useState } from "react";
 import type { MockExamAttemptSummary, MockExamAttemptDetail } from "@/lib/mock-exam/attempt-data";
 import { loadSessionMockExamAttemptsAction, loadSessionMockExamAttemptDetailAction } from "./session-mock-exam-actions";
@@ -107,7 +108,7 @@ export default function SessionMockExamTab({
             </p>
             <p className="mt-1 text-[12.5px] text-grey-500">
               {STATUS_LABEL[a.status] ?? a.status}
-              {a.status === "graded" && a.correctCount !== null && ` · ${a.correctCount}/${a.totalCount} correct`}
+              {completedScoreText(a)}
             </p>
             <button type="button" onClick={() => open(a.id)} className="mt-2 text-[12.5px] font-bold text-ink underline">
               {a.status === "graded" ? "View results" : isTeacher ? "View work" : a.status === "assigned" ? "Start exam" : "Continue"}

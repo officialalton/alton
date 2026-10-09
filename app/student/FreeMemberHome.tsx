@@ -4,7 +4,7 @@ import Link from "next/link";
 import PageFrame from "@/app/components/PageFrame";
 import type { MockExamOverview } from "@/lib/mock-exam/attempt-data";
 import type { BreakdownRow } from "@/lib/mock-exam/report";
-import { buildMockExamListRows, pickNextPracticeTest } from "@/lib/mock-exam/open-list";
+import { buildMockExamListRows, completedScoreText, pickNextPracticeTest } from "@/lib/mock-exam/open-list";
 import { ctaLabelFor, type InterestStatus } from "./tutoring-state";
 
 // 2026-10-05 무료 회원 S2 — 무료 학습 회원 홈(브리프 §3.6): 다음 모의고사, 최근 결과 점수, 약점 상위 3,
@@ -68,7 +68,7 @@ export default function FreeMemberHome({ studentName, overview, weaknesses, grad
           {latestGraded ? (
             <>
               <p className="text-[15px] font-extrabold text-ink">
-                {latestGraded.correctCount} / {latestGraded.totalCount} correct
+                {completedScoreText(latestGraded).replace(/^ · /, "")}
               </p>
               <p className="text-[12px] text-grey-500 mt-0.5">{latestGraded.examSetName}</p>
               <Link href={`/student/mock-exam/${latestGraded.id}`} className="inline-block mt-3 px-4 py-2.5 rounded-lg border border-brand-border text-navy text-[13px] font-bold">
