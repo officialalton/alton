@@ -100,15 +100,6 @@ export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }:
               <h2 className="p-h2"><SplitTitle text={EXPERT.title} /></h2>
               <p className="p-lede">{EXPERT.body}</p>
               <p className="p-body">{EXPERT.experience}</p>
-              <a href={`#${DIRECTOR.anchor}`} className="p-advisor">
-                <DirectorPortrait />
-                <span className="flex flex-col gap-1">
-                  <span className="p-label">{DIRECTOR.advisorLabel}</span>
-                  <strong className="text-[16px]">{DIRECTOR.name}</strong>
-                  <span className="text-[14px] leading-[1.5] text-[var(--p-slate)]">{DIRECTOR.advisorLine}</span>
-                  <span className="p-link text-[14px]">{DIRECTOR.advisorLink} <span aria-hidden="true">→</span></span>
-                </span>
-              </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {EXPERT.cards.map((c, i) => (
@@ -128,8 +119,8 @@ export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }:
 
         {/* Meet Chrisy Kim (paper) */}
         <section id={DIRECTOR.anchor} className="p-section scroll-mt-20">
-          <div className="p-wrap grid grid-cols-1 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
-            <div className="flex flex-col gap-6 max-w-[380px]">
+          <div className="p-wrap grid grid-cols-1 lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
+            <div className="flex flex-col gap-6 max-w-[480px]">
               <DirectorPortrait />
               <div className="flex flex-col gap-2">
                 <strong className="p-h3">{DIRECTOR.name}</strong>
@@ -143,11 +134,14 @@ export default function LandingView({ dest, availability = EMPTY_AVAILABILITY }:
                 <h2 className="p-h2">Meet <em>Chrisy Kim</em></h2>
               </div>
               <div className="p-qa">
-                {DIRECTOR_INTERVIEW.map((x) => (
-                  <div key={x.q}>
-                    <h3>{x.q}</h3>
+                {DIRECTOR_INTERVIEW.map((x, i) => (
+                  <details key={x.q} name="director-interview" open={i === 0}>
+                    <summary>
+                      <h3>{x.q}</h3>
+                      <span aria-hidden="true">+</span>
+                    </summary>
                     <p className="p-body">{x.a}</p>
-                  </div>
+                  </details>
                 ))}
               </div>
             </div>

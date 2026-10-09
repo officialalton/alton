@@ -3,7 +3,9 @@
 export type Cand = { key: string; kind: "mc" | "frq"; unit: number; skillCat: number; calc: "required" | "not_allowed" | "na"; family: string; type: string; graphRequired: boolean; screenVerified: boolean; renderOk: boolean; fullMockUses: number; practiceUses: number };
 export type Constraint = { id: string; label: "official" | "internal"; text: string; ok: boolean; detail: string };
 export const OFFICIAL = { mcA: 29, mcB: 13, frqA: 2, frqB: 4, unitBounds: { 1: [5, 6], 2: [5, 6], 3: [3, 4], 4: [5, 6], 5: [7, 8], 6: [7, 8], 7: [3, 4], 8: [5, 6] } as Record<number, [number, number]>, skillBounds: { 1: [21, 29], 2: [7, 12], 3: [5, 8] } as Record<number, [number, number]> };
-export const INTERNAL = { familyCap: 2, minFamilies: 21, graphRequiredMin: 10 };
+/** 풀 모의고사 문항군 상한(2026-10-09 오너 B안: 같은 문항군 최대 1). 부분 세트는 assemble.ts 의 기존 규칙(MC 2)을 그대로 쓴다. */
+export const FULL_EXAM_FAMILY_CAP = 1;
+export const INTERNAL = { familyCap: FULL_EXAM_FAMILY_CAP, minFamilies: 21, graphRequiredMin: 10 };
 export type Sel = { mcA: Cand[]; mcB: Cand[]; frqA: Cand[]; frqB: Cand[] };
 const count = <T,>(xs: T[], f: (x: T) => string | number) => xs.reduce<Map<string | number, number>>((m, x) => (m.set(f(x), (m.get(f(x)) ?? 0) + 1), m), new Map());
 
@@ -24,7 +26,7 @@ export function verify(s: Sel, o = { ...INTERNAL }): Constraint[] {
   const fm = [...mc, ...frq].filter((c) => c.fullMockUses > 0).length; add("full_mock_overlap", "internal", "다른 풀 모의고사와 겹침 0(기본 정책)", fm === 0, `${fm}`);
   return out;
 }
-const cost = (s: Sel, o = INTERNAL) => verify(s, o).filter((c) => !c.ok).length * 1000 + (() => { const mc = [...s.mcA, ...s.mcB]; const u = count(mc, (c) => c.unit); let v = 0; for (const [kk, [a, b]] of Object.entries(OFFICIAL.unitBounds)) v += Math.max(0, a - (u.get(Number(kk)) ?? 0)) + Math.max(0, (u.get(Number(kk)) ?? 0) - b); const kc = count(mc, (c) => c.skillCat); for (const [kk, [a, b]] of Object.entries(OFFICIAL.skillBounds)) v += Math.max(0, a - (kc.get(Number(kk)) ?? 0)) + Math.max(0, (kc.get(Number(kk)) ?? 0) - b); const f = count(mc, (c) => c.family); v += [...f.values()].reduce((a, n) => a + Math.max(0, n - o.familyCap), 0) + Math.max(0, o.minFamilies - f.size) + Math.max(0, o.graphRequiredMin - mc.filter((c) => c.graphRequired).length); return v * 20; })();
+const cost = (s: Sel, o: typeof INTERNAL = INTERNAL) => verify(s, o).filter((c) => !c.ok).length * 1000 + (() => { const mc = [...s.mcA, ...s.mcB]; const u = count(mc, (c) => c.unit); let v = 0; for (const [kk, [a, b]] of Object.entries(OFFICIAL.unitBounds)) v += Math.max(0, a - (u.get(Number(kk)) ?? 0)) + Math.max(0, (u.get(Number(kk)) ?? 0) - b); const kc = count(mc, (c) => c.skillCat); for (const [kk, [a, b]] of Object.entries(OFFICIAL.skillBounds)) v += Math.max(0, a - (kc.get(Number(kk)) ?? 0)) + Math.max(0, (kc.get(Number(kk)) ?? 0) - b); const f = count(mc, (c) => c.family); v += [...f.values()].reduce((a, n) => a + Math.max(0, n - o.familyCap), 0) + Math.max(0, o.minFamilies - f.size) + Math.max(0, o.graphRequiredMin - mc.filter((c) => c.graphRequired).length); return v * 20; })();
 const soft = (s: Sel) => [...s.mcA, ...s.mcB, ...s.frqA, ...s.frqB].reduce((a, c) => a + (c.screenVerified ? 0 : 2) + (c.renderOk ? 0 : 3) + c.practiceUses, 0);
 /** 키 기준 안정 정렬 사본(원본 불변). */
 export const stableByKey = (xs: Cand[]): Cand[] => [...xs].sort((x, y) => (x.key < y.key ? -1 : x.key > y.key ? 1 : 0));
@@ -40,11 +42,12 @@ export function selectFrq(poolIn: Cand[], exclude = new Set<string>()): { a: Can
   const bb = best as { a: Cand[]; b: Cand[] } | null; return bb ? { a: bb.a, b: bb.b } : null;
 }
 /** MC: 고정 시드 탐색. exclude 는 후보에서 뺄 키, lock 은 가능하면 유지할 이전 선택(교체 슬롯만 움직임). */
-export function selectMc(poolIn: Cand[], opts: { exclude?: Set<string>; prev?: { mcA: Cand[]; mcB: Cand[] }; seed?: number; iters?: number } = {}): { mcA: Cand[]; mcB: Cand[] } | null {
+export function selectMc(poolIn: Cand[], opts: { exclude?: Set<string>; prev?: { mcA: Cand[]; mcB: Cand[] }; seed?: number; iters?: number; fullExamFamilyCap?: number; graphRequiredMin?: number } = {}): { mcA: Cand[]; mcB: Cand[] } | null {
   const pool = stableByKey(poolIn); // 입력 순서와 무관하게 동일 결과(결정성)
   const ex = opts.exclude ?? new Set<string>(); const A = pool.filter((c) => c.kind === "mc" && c.calc === "not_allowed" && !ex.has(c.key) && c.fullMockUses === 0), B = pool.filter((c) => c.kind === "mc" && c.calc === "required" && !ex.has(c.key) && c.fullMockUses === 0);
   const empty = { mcA: [] as Cand[], mcB: [] as Cand[] }; const dummy = { frqA: [] as Cand[], frqB: [] as Cand[] };
-  const cst = (a: Cand[], b: Cand[]) => cost({ mcA: a, mcB: b, ...dummy }) - 2000 /* FRQ 제약 2개 항상 실패 */ + soft({ mcA: a, mcB: b, ...dummy }) * 0.01;
+  const io = { ...INTERNAL, familyCap: opts.fullExamFamilyCap ?? FULL_EXAM_FAMILY_CAP, graphRequiredMin: opts.graphRequiredMin ?? INTERNAL.graphRequiredMin };
+  const cst = (a: Cand[], b: Cand[]) => cost({ mcA: a, mcB: b, ...dummy }, io) - 2000 /* FRQ 제약 2개 항상 실패 */ + soft({ mcA: a, mcB: b, ...dummy }) * 0.01;
   for (const attempt of [0, 1, 2, 3]) {
     const r = rng((opts.seed ?? 7) + attempt * 101); const pickN = (p: Cand[], n: number, base: Cand[] = []) => { const out = base.filter((c) => p.includes(c)); const pool2 = p.filter((c) => !out.includes(c)); while (out.length < n && pool2.length) out.push(pool2.splice(Math.floor(r() * pool2.length), 1)[0]); return out; };
     const prev = attempt === 0 ? opts.prev : undefined; const locked = new Set<Cand>(prev ? [...prev.mcA, ...prev.mcB].filter((c) => !ex.has(c.key)) : []);
@@ -56,8 +59,9 @@ export function selectMc(poolIn: Cand[], opts: { exclude?: Set<string>; prev?: {
       if (feasibleAt >= 0 && c >= 20) { part[p] = old; continue; }
       if (c <= cur || r() < Math.exp((cur - c) / Math.max(T, 0.05))) cur = c; else part[p] = old; T *= 0.99995;
     }
-    if (verify({ mcA: a, mcB: b, frqA: [], frqB: [] }).filter((c) => c.id !== "frq_counts" && c.id !== "frq_types").every((c) => c.ok)) return { mcA: a, mcB: b };
+    if (verify({ mcA: a, mcB: b, frqA: [], frqB: [] }, io).filter((c) => c.id !== "frq_counts" && c.id !== "frq_types").every((c) => c.ok)) return { mcA: a, mcB: b };
   }
   void empty; return null;
 }
 export const failedKeys = (s: Sel) => [...s.mcA, ...s.mcB, ...s.frqA, ...s.frqB];
+

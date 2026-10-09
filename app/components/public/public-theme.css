@@ -106,8 +106,13 @@
 .public-theme .p-advisor .p-portrait { width: 56px; flex: none; }
 .public-theme .p-advisor .p-portrait-fallback span { font-size: 20px; }
 .public-theme .p-qa { display: flex; flex-direction: column; }
-.public-theme .p-qa > div { border-top: 1px solid var(--p-line); padding: 26px 0; display: grid; gap: 10px; }
-.public-theme .p-qa > div:last-child { border-bottom: 1px solid var(--p-line); }
+.public-theme .p-qa details { border-top: 1px solid var(--p-line); }
+.public-theme .p-qa details:last-child { border-bottom: 1px solid var(--p-line); }
+.public-theme .p-qa summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 22px 0; }
+.public-theme .p-qa summary::-webkit-details-marker { display: none; }
+.public-theme .p-qa summary span { color: var(--p-red); font-family: var(--font-p-mono), monospace; font-size: 22px; line-height: 1; transition: transform .15s; }
+.public-theme .p-qa details[open] summary span { transform: rotate(45deg); }
+.public-theme .p-qa details > p { margin: 0 0 24px; max-width: 640px; }
 .public-theme .p-qa h3 { margin: 0; font-family: var(--font-p-serif), Georgia, serif; font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--p-ink); }
 
 /* 2026-10-09 가용성 카드(히어로) */
