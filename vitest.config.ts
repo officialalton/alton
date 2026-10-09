@@ -35,6 +35,8 @@ export default defineConfig({
           // `npm run test:integration:universities`)으로만 돈다.
           exclude: [...SHARED_EXCLUDE, "lib/universities/**/*.integration.test.ts"],
           fileParallelism: false,
+          // 2026-10-09 — 대상 DB 미지정/공유 스택이면 테스트 시작 전에 중단(lib/dev/integration-db-guard.ts).
+          globalSetup: ["./vitest.integration-guard.ts"],
           // 2026-10-06 — 공개 버전 불변 트리거(20262100000240)는 세션 설정 alton.version_content_edit='on' 일 때만 내용 수정을 허용한다.
           // 통합 테스트 픽스처는 공개본을 직접 고쳐 상황을 만든다 — psql 연결에 이 설정을 켠다(bank-gate-hardening 테스트만 끈다).
           env: { PGOPTIONS: "-c alton.version_content_edit=on -c alton.skip_set_item_gate=on -c alton.allow_fixed_sat_without_time_limit=on" },
