@@ -1,0 +1,303 @@
+[
+ {
+  "key": "ap_biology-f01-k0",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:numeric",
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Activity goes up from 10 °C (5.0 mL) to 37 °C (16.4 mL), then drops sharply at 70 °C (2.3 mL). It is highest at 37 °C.",
+     "final_answer": "Activity rises from 10 °C to 37 °C, then falls at 70 °C to below the 10 °C level. The enzyme is most active at 37 °C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(16.4-5.0)/5.0 x 100 = 228%",
+     "final_answer": "About a 228% increase, so enzyme activity increased.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "Mean ± 2SE intervals: 4.54–5.46, 14.26–18.54 and 2.08–2.52 mL. None of them overlap.",
+     "final_answer": "None. No two temperatures have overlapping ±2SE intervals, so every pair is statistically different. Activity really does differ at each temperature.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The 37 °C interval (14.26–18.54 mL) sits entirely above the other two intervals and does not overlap them. High heat denatures the enzyme. Cold slows molecular motion.",
+     "final_answer": "The claim is supported. The 37 °C interval (14.26–18.54 mL) does not overlap the 10 °C interval (4.54–5.46) or the 70 °C interval (2.08–2.52), so 37 °C gives significantly the most oxygen. At 70 °C, heat breaks the hydrogen bonds and other weak bonds that hold the enzyme's shape. The protein denatures, the active site changes shape, and less substrate can bind. At 10 °C, molecules move more slowly, so enzyme and substrate collide less often and activity is lower.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The keys and rubrics are correct and the table is complete, but most parts test table reading, arithmetic or statistical overlap rather than how temperature affects enzyme structure and function (topic 3.2). Part D bundles two tasks into one point. Fails scope/skill and exam suitability.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Topic 3.2 requires explaining how temperature changes enzyme structure and activity. Parts A, B and C can be answered by reading the table or doing arithmetic and interval comparison, with no use of the enzyme-structure concept. Only part D asks for the denaturation or active-site explanation. That is a minority of the parts, so the item fails the topic-fit check. Part D also bundles two tasks into one point: citing the data with ±2SE, and explaining the mechanism."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct. The ±2SE intervals do not overlap for any pair of temperatures, and the percent change is 228%. Part C accepts \"none\" as an answer, and the rubric is meaning-based with alternatives listed. Part D's one point requires both a data citation and a structural explanation, so the single row is demanding, but the item is not ambiguous."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete: it gives the temperatures, the mean ± 2SE, and n. The wording is clear. The model answer for A, \"Enzyme activity peaks across the levels\", is awkward."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is a free-response item, so there are no distractors. The common_errors lists are reasonable."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The short-FRQ format, which calls for four 1-point parts, is respected. However, part C asks which pair is \"not statistically different\" when the answer is none, and that framing is somewhat misleading. Parts B and C assess skills 5.A and 5.B, and the item is labeled with 4.B as the target. Part D combines two tasks in one point. The calculator is allowed but barely needed."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Standard AP Bio data-analysis question aligned to topic 3.2 and skill 4.B. It requires reading a table, one simple percent-change calculation, interpreting non-overlapping 2SE intervals (the 'no pair is statistically similar' answer is a mild trap), and a claim-evidence-reasoning explanation linking temperature to enzyme shape, denaturation, or reduced kinetic energy. Concept depth is moderate, reading is short, and computation is minimal. This matches the typical difficulty of a full-mock free-response item rather than a purely introductory or extension task.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 6,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f01-k1",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "solver_disagrees:D:numeric",
+   "criterion_failed_scope_skill",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "5.0 at 10°C rises to 16.2 at 37°C, then falls to 2.4 at 70°C.",
+     "final_answer": "Activity goes up from 10 °C to 37 °C, then drops sharply at 70 °C, where it is lowest (below the 10 °C value). The enzyme is most active at 37 °C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(16.2−5.0)/5.0×100",
+     "final_answer": "(16.2 − 5.0)/5.0 × 100 = 224%. Activity increased.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE intervals are 4.68–5.32, 14.04–18.36 and 2.22–2.58 mL. No two intervals overlap.",
+     "final_answer": "No pair. None of the ±2SE intervals overlap, so every pair of means is statistically different. This means the enzyme's activity really differs at each temperature.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The lowest value in the 37 °C interval is above the highest values at the other temperatures. High heat denatures the enzyme; low temperature slows molecular collisions.",
+     "final_answer": "The claim is supported. The 37 °C interval (14.04–18.36 mL) does not overlap the 10 °C interval (4.68–5.32 mL) or the 70 °C interval (2.22–2.58 mL), so 37 °C gives significantly more oxygen. At 70 °C, heat breaks the hydrogen bonds and other weak bonds that hold the enzyme's 3-D shape. The enzyme denatures, its active site changes shape, and substrate can no longer bind well, so activity drops. At 10 °C, molecules move more slowly, so the enzyme and substrate collide less often and activity is lower.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "Fails scope: parts A, B and C can be answered from the table alone (trend, percent change, SE overlap), and only part D requires how temperature changes enzyme structure, so the topic 3.2 concept is not the dominant demand. Part C's wording presupposes an overlapping pair although the answer is none, and part D bundles claim support with a mechanism in a single point. The keys and the stimulus are otherwise correct and complete.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Only 1 of 4 parts requires the topic concept (how temperature alters enzyme shape and activity); the rest are table reading, arithmetic and interval overlap."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct. Part C presupposes a pair that is not different when none exists. Part D combines two tasks in one point."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete and clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to a free-response item."
+   },
+   "exam_suitability": {
+    "pass": true,
+    "notes": "The load fits a short FRQ of four 1-point parts."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "All four parts rely on direct table reading, a single percent-change calculation, a simple check for non-overlapping 2SE intervals (10 °C 4.68-5.32, 37 °C 14.04-18.36, 70 °C 2.22-2.58, so no pair overlaps), and a recall-level explanation that temperature changes protein shape and active site. Each part is short, the representation stays within one table, and the concept depth is introductory for topic 3.2 and skill 4.B.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 4,
+   "representation_changes": 1,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 360
+  }
+ },
+ {
+  "key": "ap_biology-f01-k2",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Mean O2 goes up from 4.8 mL at 10 °C to 17.1 mL at 37 °C, then falls to 2.3 mL at 70 °C. The highest value is at 37 °C.",
+     "final_answer": "Activity rises from 10 °C to 37 °C, then drops sharply at 70 °C, ending below the 10 °C level. The enzyme is most active at 37 °C.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "(17.1 − 4.8)/4.8 × 100 = 12.3/4.8 × 100 ≈ 256%.",
+     "final_answer": "About a 256% increase: activity increased.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE intervals are 4.38–5.22 mL at 10 °C, 14.98–19.22 mL at 37 °C and 1.98–2.62 mL at 70 °C. None of them overlap.",
+     "final_answer": "No pair. None of the ±2SE intervals overlap, so every pair of means is statistically different. Activity really does differ at each of the three temperatures.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The 37 °C interval (14.98–19.22 mL) lies entirely above the other two intervals, so the claim is supported. At 10 °C, molecules move more slowly, so the enzyme and substrate collide less often. At 70 °C, heat breaks the hydrogen bonds and other interactions that hold the protein's shape, so it denatures and the active site changes shape. Fewer enzyme–substrate complexes form.",
+     "final_answer": "The claim is supported. The 37 °C ±2SE interval (14.98–19.22 mL) does not overlap and sits above the 10 °C interval (4.38–5.22 mL) and the 70 °C interval (1.98–2.62 mL). At 10 °C, slower molecular motion means fewer collisions. At 70 °C, the enzyme denatures: its 3-D structure and active site change shape, so less substrate binds and less O2 is released.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The key and the stimulus are sound. The item fails topic fit because parts A, B and C are answerable from the table alone, and only part D requires how temperature alters enzyme structure. Part C's 'if any' phrasing is also awkward, since no pair overlaps.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Parts A, B and C can be answered from the table alone. A is trend reading, B is a percent-change calculation, and C is an SE-overlap check. Only part D requires the topic concept (how temperature changes enzyme structure and activity). The topic-fit rule fails an item when most parts can be answered from the table alone. Part D also asks for two things, supporting a claim with data and explaining the mechanism, so a 1-point row is too coarse."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The key is correct and consistent with the table. No ±2SE intervals overlap, so the answer to C is 'none'. In B1 the 256.3% element conflicts with the stated tolerance of 2.56, which is a minor inconsistency. D1 bundles two required elements into 1 point, but the rubric lists alternative phrasings."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table data are complete, with temperature levels, mean ± 2SE and n. The wording is clear."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "Not applicable to an FRQ. Common errors are listed in the rubric rows."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The structure matches the short-FRQ pattern of four 1-point parts. However, part C asks 'identify the pair, if any' even though no pair overlaps, which makes the question awkward and leaves the interpretation half trivial. The calculation in B is a simple percent change, which is acceptable."
+   }
+  },
+  "difficulty": {
+   "label": "basic_learning",
+   "rationale": "Standard AP Bio data-description item on temperature and enzyme activity. Part A is a simple table read. Part B is a single percent-change calculation: (17.1-4.8)/4.8 = 256%. Part C is the only part needing real interpretation, comparing 2SE error bars: 4.8±0.42 (4.38-5.22) and 2.3±0.32 (1.98-2.62) do not overlap, and no pair overlaps, so the correct answer is that none of the pairs is statistically the same. Part D needs a short claim-evidence statement plus the denaturation explanation. Concepts are core and sit within scope, the reading load is modest, and the arithmetic is minimal. It is well suited to early learning or a quiz and is easier than a typical full-mock free-response item.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 5,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 420
+  }
+ },
+ {
+  "key": "ap_biology-f01-k3",
+  "cellId": "ap_biology-f01",
+  "passed": false,
+  "reasons": [
+   "criterion_failed_scope_skill",
+   "criterion_failed_exam_suitability",
+   "reference_pattern_mismatch"
+  ],
+  "soft": [],
+  "solver": {
+   "answers": [
+    {
+     "item": "A",
+     "brief_reasoning": "Means are 14.8 at pH 2, 4.2 at pH 7 and 1.4 at pH 12, so activity falls as pH rises.",
+     "final_answer": "Enzyme activity goes down as pH goes up (14.8 → 4.2 → 1.4 mg). The enzyme is most active at pH 2.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "B",
+     "brief_reasoning": "Percent change = (4.2 − 14.8)/14.8 × 100 = −71.6%.",
+     "final_answer": "About −71.6%. Enzyme activity decreased.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "C",
+     "brief_reasoning": "The ±2SE ranges are 13.9–15.7, 3.86–4.54 and 1.22–1.58 mg. None of them overlap.",
+     "final_answer": "No pair. None of the ±2SE intervals overlap, so every pair of pH levels is statistically different. This means activity really differs at each pH level.",
+     "ambiguous_or_flawed": false
+    },
+    {
+     "item": "D",
+     "brief_reasoning": "The pH 2 interval (13.9–15.7) is far above and does not overlap the others. Changing pH alters H+ concentration, which disrupts ionic and hydrogen bonds and denatures the enzyme.",
+     "final_answer": "At pH 2 the mean is 14.8 ± 0.90 mg (13.9–15.7). This interval does not overlap pH 7 (3.86–4.54) or pH 12 (1.22–1.58), so digestion is significantly highest at pH 2. Away from the optimum, the change in H+ concentration changes the charges on amino acid R-groups. This breaks hydrogen and ionic bonds, which changes the enzyme's tertiary structure and the shape of its active site. The substrate then binds less well, so fewer enzyme-substrate complexes form and less protein is digested.",
+     "ambiguous_or_flawed": false
+    }
+   ]
+  },
+  "review": {
+   "instant_reject": [],
+   "matches_reference_pattern": false,
+   "resembles_known_exam_item": false,
+   "summary": "The keys are correct and the table is complete, but the item fails topic fit and does not match the official short-FRQ pattern.",
+   "scope_skill": {
+    "pass": false,
+    "notes": "Three of four parts can be answered from the table alone. Part A reads the trend. Part B calculates a percent change. Part C checks error-bar overlap. Only part D requires the topic concept, namely how pH alters enzyme structure and activity, and even there the concept is a generic denaturation sentence. The subject notes say to fail scope_skill when most parts can be answered from the table alone. Part D is also keyed to skills 6.B and 4.B, while the pH-and-structure explanation it requires is not data description."
+   },
+   "key_scoring": {
+    "pass": true,
+    "notes": "The keys are correct and verified: the percent change is -71.6%, and no ±2SE intervals overlap. Part C's rubric is consistent with the data. Part D awards one point for two required elements (data citation and the structural explanation), which is slightly loose but tolerable."
+   },
+   "stimulus_expression": {
+    "pass": true,
+    "notes": "The table is complete, with the pH levels, mean ± 2SE and n, and the wording is clear. The description that enzyme activity depends on shape is fine."
+   },
+   "distractor_explanation": {
+    "pass": true,
+    "notes": "This is an FRQ, so distractors do not apply. The rubric lists common errors, which is adequate."
+   },
+   "exam_suitability": {
+    "pass": false,
+    "notes": "The item is four 1-point parts, which is the right grain for a short FRQ. However, part B's percent-change calculation is a simple one-step computation and part C is easy. The calculator designation is acceptable. The item is a loose collage of skills rather than a cohesive short FRQ."
+   }
+  },
+  "difficulty": {
+   "label": "exam_prep",
+   "rationale": "Four short parts covering table description, one percent-change calculation, ±2SE interval comparison (no overlap, so all pairs differ), and a claim-evidence-reasoning link between pH, protein shape, and active site. The concept depth and multi-part structure fit a full mock exam. The reading and computation loads are light, and the item is clear, in scope, and fair.",
+   "reading_load": "low",
+   "computation_load": "low",
+   "reasoning_steps": 7,
+   "representation_changes": 2,
+   "difficulty_from_unfair_sources": false,
+   "est_seconds": 480
+  }
+ }
+]

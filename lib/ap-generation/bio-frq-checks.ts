@@ -57,11 +57,11 @@ export function gateBioFrq(p: Json, ctx: { topics: Set<string> }): BioIssue[] {
       rows.forEach((r, i) => { const m = String(r[mi]).match(/(-?\d+(?:\.\d+)?)\s*±\s*(\d+(?:\.\d+)?)/); if (!m) { add("se_cell_format", `행 ${i + 1}: "평균 ± 2SE" 형식이 아니다`); return; } if (fm && Math.abs(Number(m[1]) - fm[i]) > 0.051) add("se_value_mismatch", `행 ${i + 1}: 표 평균 ${m[1]} ≠ 사실 ${fm[i]}`); if (fs && Math.abs(Number(m[2]) - 2 * fs[i]) > 0.011) add("se_value_mismatch", `행 ${i + 1}: 표 ±값 ${m[2]} ≠ 2×SE ${(2 * fs[i]).toFixed(2)}`); });
     }
   }
-  // 10) 개념 필수(토픽 3.2): 키워드 존재만으로 보지 않는다 — 과반(4파트 중 3) 파트가 개념을 써야 풀리도록 프롬프트가 개념을 묻고 루브릭 행이 개념 요소를 갖는다
+  // 10) 개념 필수(토픽 3.2): 키워드("enzyme")가 아니라 **작용 기제**(구조·모양·활성 부위·변성·최적 조건)를 채점하는 파트가 과반(4파트 중 3)이어야 한다. 표 읽기·산술·구간 겹침만 묻는 파트는 개념 파트로 세지 않는다.
   if (p.topic === "3.2") {
-    const CONCEPT = /enzyme|active site|shape|structure|denatur|optimum|substrate/i; const need = Math.ceil(((p.parts ?? []).length * 3) / 4);
-    const ok = (p.parts ?? []).filter((x: Json) => CONCEPT.test(x.prompt ?? "") && (x.rubric_rows ?? []).some((r: Json) => r.uses_concept && (r.required_elements ?? []).some((e: string) => CONCEPT.test(String(e))))).length;
-    if (ok < need) add("concept_not_required", `토픽 3.2 개념(효소 구조·활성)을 써야 풀리는 파트가 ${ok}/${(p.parts ?? []).length} (최소 ${need})`);
+    const MECH = /(shape|structure|active site|denatur|optimum)/i; const need = Math.ceil(((p.parts ?? []).length * 3) / 4);
+    const ok = (p.parts ?? []).filter((x: Json) => MECH.test(x.prompt ?? "") && (x.rubric_rows ?? []).some((r: Json) => r.uses_concept && (r.required_elements ?? []).some((e: string) => MECH.test(String(e))))).length;
+    if (ok < need) add("concept_not_required", `토픽 3.2 의 작용 기제(구조·활성 부위·최적 조건)를 써야 풀리는 파트가 ${ok}/${(p.parts ?? []).length} (최소 ${need})`);
     const lastPart = (p.parts ?? [])[(p.parts ?? []).length - 1]; if (lastPart && !(lastPart.rubric_rows ?? []).some((r: Json) => r.uses_concept && (r.required_elements ?? []).some((e: string) => /structure|shape|active site|denatur/i.test(String(e))))) add("concept_explanation_part_missing", "마지막 파트가 구조·활성 개념의 설명을 채점하지 않는다");
   }
   out.push(...meaningRubricIssues(p));

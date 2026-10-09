@@ -231,7 +231,7 @@ function solverAgrees(c: Cand, sol: Json | null): { ok: boolean | null; note: st
   for (const pt of f.parts) {
     const a = ans.find((x) => String(x.item).toLowerCase() === pt.label.toLowerCase()); if (!a) { bad.push(`${pt.label}:missing`); continue; }
     if (a.ambiguous_or_flawed) { bad.push(`${pt.label}:flagged`); continue; }
-    const exp = pt.rubric_rows.filter((r) => r.requires_numbers && r.points >= 1).flatMap((r) => r.required_elements.flatMap((e) => numsIn(e))).filter((n) => Math.abs(n) > 0);
+    const exp = pt.rubric_rows.filter((r) => r.requires_numbers && r.points >= 1).flatMap((r) => r.required_elements.filter((e) => /^\s*[-−]?\d[\d.,]*\s*%?\s*$/.test(e)).flatMap((e) => numsIn(e))).filter((n) => Math.abs(n) > 0); // 순수 수치 요소만(개념 문장 속 "±2SE" 의 2 를 기대값으로 읽지 않는다)
     if (!exp.length) continue;
     const got = numsIn(String(a.final_answer ?? "") + " " + String(a.brief_reasoning ?? ""));
     const hit = exp.filter((e) => got.some((g) => Math.abs(g - e) <= Math.max(0.0015, Math.abs(e) * 0.0015))).length;

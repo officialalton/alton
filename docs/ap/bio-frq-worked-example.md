@@ -90,7 +90,7 @@
 
 ## 예시 2: 짧은 데이터 분석 FRQ (4점, 토픽 3.2, 대표 스킬 4.B)
 
-**Data analysis: a catalase-catalyzed reaction** — Mean oxygen released in 2 minutes (milliliters) ± 2SE for a catalase-catalyzed reaction at three levels of temperature
+**Data analysis: a catalase-catalyzed reaction** — Enzyme activity depends on the three-dimensional shape of the protein, which environmental conditions can change. Mean oxygen released in 2 minutes (milliliters) ± 2SE for a catalase-catalyzed reaction at three levels of temperature
 
 | Temperature | Mean (milliliters) ± 2SE | n |
 |---|---|---|
@@ -102,58 +102,58 @@
 
 ### 파트 A (1점, 스킬 4.B, 토픽 3.2)
 
-**문제**: Based on the data, describe the relationship between temperature and the oxygen released in 2 minutes across the three levels.
+**문제**: Based on the data, describe how the enzyme activity (measured as the oxygen released in 2 minutes) changes across the three levels of temperature, identify the level closest to the enzyme's optimum, and explain how the other levels of temperature would affect the shape of the enzyme.
 
-**모범 답**: The oxygen released in 2 minutes peaks across the levels (4.9, 16.4, 2.3).
+**모범 답**: Enzyme activity peaks across the levels (4.9, 16.4, 2.3); it is greatest at 37 °C.
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
-- 행 A1 (1점): Describes the trend of the mean across the three levels (direction of change; citing values is optional)
-  - 인정해야 하는 의미: Describes the direction of change of the mean across the three levels (increase, decrease, peak, or dip) consistent with the data
+- 행 A1 (1점): Describes the direction of change of enzyme activity across the levels and names the level of greatest activity
+  - 인정해야 하는 의미: Describes the direction of change of enzyme activity across the three levels consistent with the data and names the level closest to the optimum / Explains that levels away from the optimum change the enzyme's shape (active site), reducing activity
   - 허용 표현 예(전부가 아님): rises then falls; highest at the middle level
-  - 흔한 오류(점수 없음): describes only one pair of levels; describes a trend the data do not show
+  - 흔한 오류(점수 없음): describes only one pair of levels; describes a trend the data do not show; names a level that does not have the greatest activity
   - 채점 메모: Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.
 
 ### 파트 B (1점, 스킬 5.A, 토픽 3.2)
 
-**문제**: Calculate the percent change in the mean oxygen released in 2 minutes from 10 °C to 37 °C. Show your work.
+**문제**: Calculate the percent change in the oxygen released in 2 minutes from 10 °C to 37 °C. Show your work.
 
-**모범 답**: ((16.4 - 4.9) / 4.9) x 100 = 234.7%
+**모범 답**: ((16.4 - 4.9) / 4.9) x 100 = 234.7%.
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
 - 행 B1 (1점): Percent change with work shown (answer)
-  - 인정해야 하는 의미: 234.7%
+  - 인정해야 하는 의미: Computes the percent change correctly with a valid method (new minus old, divided by old, times 100) / 234.7%
   - 허용 표현 예(전부가 아님): percent change = (new - old) / old x 100
   - 흔한 오류(점수 없음): divides by the new value; forgets to multiply by 100
-  - 채점 메모: Award for the correct value with a valid method; equivalent forms and rounding within the tolerance are accepted.
+  - 채점 메모: Award for the correct value with a valid method; equivalent forms and rounding within the tolerance are accepted. This part assesses the quantitative skill (5.A) and does not require the topic concept.
 
 ### 파트 C (1점, 스킬 5.B, 토픽 3.2)
 
-**문제**: Using the error bars (±2SE), identify the pair of levels, if any, for which the mean oxygen released in 2 minutes is not statistically different.
+**문제**: Using the ±2SE values in the table, identify the pair of levels, if any, for which the mean oxygen released in 2 minutes is not statistically different, and explain, in terms of how close each level is to the enzyme's optimum, why the enzyme's activity could be similar at those two levels.
 
-**모범 답**: Answer: none of the pairs.
+**모범 답**: Answer: none of the pairs; each level is a different distance from the enzyme's optimum, so the enzyme's activity differs.
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
-- 행 C1 (1점): Identifies the pair whose ±2SE intervals overlap (or states none) (answer)
-  - 인정해야 하는 의미: Identifies the pair of levels (or none) whose ±2SE intervals overlap, consistent with the data
-  - 허용 표현 예(전부가 아님): the pair whose error bars overlap; none of the pairs differ
-  - 흔한 오류(점수 없음): compares only the means
+- 행 C1 (1점): Identifies the pair whose ±2SE intervals overlap (or none) and explains the similar activity by the levels' distance from the enzyme's optimum
+  - 인정해야 하는 의미: Identifies the pair of levels (or none) whose ±2SE intervals overlap, consistent with the data / Explains the similar activity by how far each level is from the enzyme's optimum (effect on the active site)
+  - 허용 표현 예(전부가 아님): the pair whose error ranges overlap, so the activity is about the same; none of the pairs overlap so every level differs
+  - 흔한 오류(점수 없음): compares only the means; claims the overlapping levels differ significantly
   - 채점 메모: Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.
 
 ### 파트 D (1점, 스킬 6.B/4.B, 토픽 3.2)
 
-**문제**: A student claims that oxygen released in 2 minutes is greatest at 37 °C. Use the data in the table, including the error bars (±2SE), to support the claim.
+**문제**: A student claims that oxygen released in 2 minutes is greatest at 37 °C. Use the data in the table, including the ±2SE values, to support the claim, and explain how the change in temperature could account for the lower enzyme activity at a level away from the optimum.
 
-**모범 답**: 16.4 ± 1.12 at 37 °C is higher than the other levels; the ±2SE intervals do not overlap.
+**모범 답**: 16.4 ± 1.12 at 37 °C is higher than the other levels; temperature far from the enzyme's optimum reduces activity (too cold: fewer effective collisions; too hot: denaturation changes the active site).
 
 **채점 가이드(의미·과학적 추론으로 채점, 특정 문구를 요구하지 않음)**
 
-- 행 D1 (1점): Cites the highest mean and states what the non-overlap/overlap of error bars shows (support)
-  - 인정해야 하는 의미: Cites the highest mean and compares it with the other levels / Uses the error bars (overlap or separation) to evaluate how strongly the data support the claim
-  - 허용 표현 예(전부가 아님): the error bars do not overlap so the difference is real; higher mean with separated intervals
-  - 흔한 오류(점수 없음): cites the highest mean but does not discuss variability
+- 행 D1 (1점): Cites the highest mean with the ±2SE values and explains the effect on enzyme structure and function
+  - 인정해야 하는 의미: Cites the highest mean with its ±2SE values and compares it with the other levels / Explains that a condition away from the optimum alters enzyme structure (shape of the active site), lowering activity
+  - 허용 표현 예(전부가 아님): the condition changes the enzyme's shape so substrate binds less well; denaturation of the enzyme reduces the rate away from the optimum
+  - 흔한 오류(점수 없음): cites the highest mean but gives no structural explanation; attributes the change to the substrate running out
   - 채점 메모: Award the point when the response conveys the required meaning, whatever the wording; do not require any specific phrase.
 
 무료 검사 결과: 결함 0
