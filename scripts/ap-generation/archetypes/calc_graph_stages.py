@@ -14,6 +14,7 @@ STAGES = {
     ],
     "graph_s3b_ab": ["g_usub_graph", "g_squeeze_graph", "g_position_graph_speed", "g_volume_axis_shift_calc", "g_arcsin_deriv_mixed_calc", "g_exp_deriv_mixed_calc"],
     "graph_s3c_ab": ["g_area_y_graph", "g_volume_triangle_graph", "c_accum_interval_calc", "c_linear_approx_overunder_calc", "c_motion_turn_calc", "c_area_between_calc", "c_disc_volume_calc"],
+    "graph_s3d_bc": ["frq_polar_region"],
     "graph_s3c_bc": ["c_bc_euler_calc", "c_bc_improper_calc", "c_bc_alt_terms_calc", "frq_polar_region"],
     "graph_s3b_bc": ["g_geometric_series_graph", "g_logistic_fastest_graph", "g_param_rest_graph"],
     "graph_s3a_bc": ["g_alt_series_graph", "g_param_arclength_graphs_calc", "g_lagrange_p2_calc"],
