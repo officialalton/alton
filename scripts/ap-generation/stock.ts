@@ -12,7 +12,7 @@ const MC_TARGET = Number(arg("--mc-target", "50")); const FRQ_TARGET = Number(ar
 const ROOT = path.resolve(process.cwd(), "data/ap/sample-2027"); const OUT = path.resolve(process.cwd(), "data/ap/stock"); mkdirSync(OUT, { recursive: true });
 const load = (run: string) => (existsSync(path.join(ROOT, run, "candidates.json")) ? (JSON.parse(readFileSync(path.join(ROOT, run, "candidates.json"), "utf-8")) as RawCand[]) : []);
 const WITH_S1A = existsSync(path.join(ROOT, "s1a-final", "candidates.json")); // S1a 는 항상 같은 계산에 포함(중복·문항군을 한 번에 계산해 단일 재고 표를 유지) // S1a 후보를 별도 보조 배치로 내보낼 때(items.json 의 783행 기준선은 바꾸지 않는다)
-const SUPP: { run: string; file: string }[] = [{ run: "s1a-final", file: "s1a-items.json" }, { run: "v1ab-final", file: "v1ab-items.json" }, { run: "v45ab-final", file: "v45ab-items.json" }, { run: "bc-topup-final", file: "bc-topup-items.json" }]; // 보조 적재 배치(파일=배치). 기준 배치는 items.json
+const SUPP: { run: string; file: string }[] = [{ run: "s1a-final", file: "s1a-items.json" }, { run: "v1ab-final", file: "v1ab-items.json" }, { run: "v45ab-final", file: "v45ab-items.json" }, { run: "bc-topup-final", file: "bc-topup-items.json" }, { run: "s1-graph-ab-final", file: "graph-s1-items.json" }]; // 보조 적재 배치(파일=배치). 기준 배치는 items.json
 const runs: Record<string, RawCand[]> = { run1: load("run1"), run2: load("run2"), run2bc: load("run2bc"), ...Object.fromEntries(SUPP.filter((x) => existsSync(path.join(ROOT, x.run, "candidates.json"))).map((x) => [x.run, load(x.run)])) };
 // 이력: 중간 런에서 같은 원형·시드(pack_id)로 평가된 결과를 최종 항목의 history 에 붙인다.
 const history: Record<string, HistoryEntry[]> = {};
