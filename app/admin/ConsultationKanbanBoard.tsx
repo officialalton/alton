@@ -769,7 +769,6 @@ function OutcomeForm({ consultationId, onDone }: { consultationId: string; onDon
         <option value="trial_recommended">체험 진행 권장</option>
         <option value="regular_recommended">정규 진행 권장</option>
         <option value="on_hold">보류</option>
-        <option value="closed">종료</option>
       </select>
       <textarea
         value={summary}
